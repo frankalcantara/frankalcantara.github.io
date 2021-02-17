@@ -2,7 +2,7 @@
 layout: post
 title: "Construção de Interpretadores"
 author: Frank
-categories: [disciplinas]
+categories: [disciplina]
 tags: [interpretadores, linguagem natural, inteligência artificial, parsers]
 image: assets/images/interpretador.jpg
 featured: true
