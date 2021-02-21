@@ -908,5 +908,5 @@ iframe {
 }
 
 p {
-  text-align: justify;
+  text-align: justify !important;
 }
