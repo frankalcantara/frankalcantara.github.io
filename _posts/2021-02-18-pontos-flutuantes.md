@@ -107,10 +107,12 @@ Tomemos, por exemplo o número decimal $$0,1_{10}$$. Usando o [Decimal to Floati
 
 $$0,1_{10} = (0.0001100110011001100110011001100110011001100110011001101)_2$$
 
-Ou seja, $$0,1_{10}$$ será guardado em memória como $$(0.0001100110011001100110011001100110011001100110011001101)_2$$. Um belo de um número binário que, em algum momento será convertido para decimal resultado em:
+Ou seja, $$0,1_{10}$$ será guardado em memória como:
 
-$$(0.0001100110011001100110011001100110011001100110011001101)_2$$
-$$=$$
+$$(0.0001100110011001100110011001100110011001100110011001101)_2$$.
+
+Um belo de um número binário que, em algum momento será convertido para decimal resultado em:
+
 $$(0.1000000000000000055511151231257827021181583404541015625)_{10}$$
 
 Eita! Virou outra coisa. Uma coisa bem diferente. Eis por que em Python, acabamos encontrando coisas como:
