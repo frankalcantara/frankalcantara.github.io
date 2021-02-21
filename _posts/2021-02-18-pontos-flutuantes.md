@@ -6,7 +6,6 @@ categories: [artigo]
 tags: [interpretadores, estrutura de dados, modelagem]
 image: assets/images/pontosflutu.jpg
 featured: false
-hidden: false
 rating: 3.5
 ---
 
