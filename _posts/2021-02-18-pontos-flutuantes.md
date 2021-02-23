@@ -117,7 +117,7 @@ Um belo de um número binário que, será armazenado segundo as regras da norma 
 
 $$(0.1000000000000000055511151231257827021181583404541015625)_{10}$$
 
-Eita! Virou outra coisa. Uma coisa bem diferente. Eis por que em Python, acabamos encontrando coisas como:
+Eita! Virou outra coisa. Uma coisa bem diferente. Eis porquê em Python, acabamos encontrando coisas como:
 
 ```python
 >0.1 * 3
@@ -418,7 +418,7 @@ Antes de chamar os aldeões e começar as fogueiras a amável leitora precisa le
 
 O $$-0$$ e o $$+0$$ representam exatamente o mesmo valor mas são diferentes $$-0 \neq +0$$ o que implica que em alguns casos, nos quais, mesmo que $$x=y$$ eventualmente podemos ter que $$\frac{1}{x} \neq \frac{1}{y}$$ para isso basta que algum momento durante o processo de computação $$x=-0$$ e $$y=+0$$ o que já é suficiente para criar uma grande quantidade de problemas. Antes de achar que isso é muito difícil lembre-se, por favor, que existe um numero próximo do infinito, só para ficar no dialeto que estamos usando, de funções que cruzam os eixos de um plano cartesiano. Um ponto antes estas funções estarão em $$-0$$ e um ponto depois em $$+0$$. Se tratarmos a existência do $$\pm 0$$ como interrupção ou alerta, podemos gerir estas ocorrências eficientemente e manter a integridade da matemática em nossos programas. Se formos observar cuidadosamente os cálculo e utilizar estes dois valores de zero de forma diferente então, teremos que prestar muita atenção nas equações que usaremos.
 
-O infinito é outro problema. Pobres de nós! Estes conceitos foram inseridos na norma para permitir a concordância com a ideia que o infinito é uma quantidade, maior que qualquer quantidade possivelmente representada e atende a Teoria Axiomática de [Zermelo–Fraenkel](https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory). Isto é importante por que hoje, esta é a teoria axiomática da teoria dos conjuntos que suporta toda a matemática. Vamos deixar Zermelo–Fraenkel para um outro artigo já que este conhecimento não faz parte do cabedal de conhecimentos do programador mediano. Basta lembrar que as operações aritméticas são coerentes e que, na maior parte das linguagens é possível trabalhar isso como um alerta.
+O infinito é outro problema. Pobres de nós! Estes conceitos foram inseridos na norma para permitir a concordância com a ideia que o infinito é uma quantidade, maior que qualquer quantidade possivelmente representada e atende a Teoria Axiomática de [Zermelo–Fraenkel](https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory). Isto é importante porque hoje, esta é a teoria axiomática da teoria dos conjuntos que suporta toda a matemática. Vamos deixar Zermelo–Fraenkel para um outro artigo já que este conhecimento não faz parte do cabedal de conhecimentos do programador mediano. Basta lembrar que as operações aritméticas são coerentes e que, na maior parte das linguagens é possível trabalhar isso como um alerta.
 
 Por fim, temos o $$NaN$$ este valor indica uma operação inválida, como $$0 \div 0$$ ou $$\sqrt(-1)$$. Este valor será propagado ao longo da computação, assim que surgir como resultado, permitindo que a maioria das operações que resultem em $$NaN$$, ou usem este valor como operador, disparem algum tipo de interrupção, ou alerta, que indique que estamos trabalhando fora dos limites da matemática e, muitas vezes, da lógica. Novamente, os problemas ocorrem graças as decisões que tomamos quando criamos uma linguagem de programação. Hoje não é raro encontrar programas onde o valor $$NaN$$ seja utilizado como um valor qualquer inclusive em operações de comparação. Pobres de nós!
 
@@ -434,9 +434,9 @@ A leitora deve fazer um esforço para me compreender nesta última citação. [N
 > false;
 ```
 
-As duas operações estão perfeitamente corretas segundo a norma, mas não fazem nenhum sentido, pelo menos não para quem ignora a norma. Sim, realmente $$NaN$$ é um número e sim, $$NaN = NaN$$ é falso. Em [Javascript: the weird parts](https://charlieharvey.org.uk/page/javascript_the_weird_parts) Charlie Harvey explora muitas das incongruências encontradas no javascript apenas por que os interpretadores seguem rigidamente as normas sem atentar para as razões da existência destas normas.
+As duas operações estão perfeitamente corretas segundo a norma, mas não fazem nenhum sentido, pelo menos não para quem ignora a norma. Sim, realmente $$NaN$$ é um número e sim, $$NaN = NaN$$ é falso. Em [Javascript: the weird parts](https://charlieharvey.org.uk/page/javascript_the_weird_parts) Charlie Harvey explora muitas das incongruências encontradas no javascript apenas porque os interpretadores seguem rigidamente as normas sem atentar para as razões da existência destas normas.
 
-Aqui eu usei exemplos do Python e do Javascript apenas por que são mais fáceis de testar. Nenhuma linguagem de programação imperativa está livre destes problemas. Se quiser dar uma olhada em C++, no Windows, John D. Cook em [IEEE floating-point exceptions in C++](https://www.johndcook.com/blog/IEEE_exceptions_in_cpp/) mostra como fazer isso.
+Aqui eu usei exemplos do Python e do Javascript porque são mais fáceis de testar. Nenhuma linguagem de programação imperativa está livre destes problemas. Se quiser dar uma olhada em C++, no Windows, John D. Cook em [IEEE floating-point exceptions in C++](https://www.johndcook.com/blog/IEEE_exceptions_in_cpp/) mostra como fazer isso.
 
 > Uma coisa deve ficar para sempre: não use pontos flutuantes para dinheiro e nunca use _float_ se o _double_ estiver disponível. Só use float se estiver escrevendo programas em ambientes muito, muito, muito limitados em memória.
 
