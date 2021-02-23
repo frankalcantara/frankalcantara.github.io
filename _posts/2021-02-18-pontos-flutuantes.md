@@ -255,7 +255,7 @@ Resta normalizar este número. A leitora deve lembrar que a representação norm
 
 $$0,0001 1001 1001 1001 1001 1001 100_2 = 1.1001 1001 1001 1001 1001 100_2 \times 2^{-4}$$
 
-Precisamos agora normalizar nosso expoente. Como estamos trabalhando com precisão simples usaremos 127 como _bias_. Como temos $$-4$$ teremos $$(-4+127)_{10} = 123_{10}$$ que precisa ser convertido para binário. Logo nosso expoente será $$01111011_2$$.
+Precisamos agora normalizar nosso expoente. Como estamos trabalhando com precisão simples usaremos $$127_{10}$$ como _bias_. Como temos $$-4$$ teremos $$(-4+127)_{10} = 123_{10}$$ que precisa ser convertido para binário. Logo nosso expoente será $$01111011_2$$.
 
 Até agora temos o sinal do número, $$0$$ e o expoente $$01111011$$ resta-nos terminar de trabalhar a mantissa. Podemos remover a parte inteira já que em binário esta será sempre $$1$$ devido ao $$0$$ não ser permitido. Feito isso, precisamos ajustar seu comprimento para $$23$$ bits e, temos nossa mantissa: $$10011001100110011001100$$. Linda! E resumo temos:
 
