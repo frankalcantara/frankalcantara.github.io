@@ -111,7 +111,7 @@ $$0,1_{10} = (0.0001100110011001100110011001100110011001100110011001101)_2$$
 
 Ou seja, nosso $$0,1_{10}$$ será guardado em memória a partir de:
 
-$$(0.0001100110011001100110011001100110011001100110011001101)_2$$.
+$$(0.0001100110011001100110011001100110011001100110011001101)_2$$
 
 Um belo de um número binário que, será armazenado segundo as regras da norma IEEE 754 e em algum momento será convertido para decimal resultando em:
 
