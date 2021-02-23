@@ -253,7 +253,7 @@ $$0,1_{10} = 0,000110011001100110011001100_2$$
 
 Resta normalizar este número. A leitora deve lembrar que a representação normal, não permite o $$0$$ como algarismo inteiro (antes da vírgula). O primeiro $$1$$ encontra-se na quarta posição logo:
 
-$$0,0001 1001 1001 1001 1001 1001 100_2 = 1.1001 1001 1001 1001 1001 100_2 \times 2^-4$$
+$$0,0001 1001 1001 1001 1001 1001 100_2 = 1.1001 1001 1001 1001 1001 100_2 \times 2^{-4}$$
 
 Precisamos agora normalizar nosso expoente. Como estamos trabalhando com precisão simples usaremos 127 como _bias_. Como temos $$-4$$ teremos $$(-4+127)_{10} = 123_{10}$$ que precisa ser convertido para binário. Logo nosso expoente será $$01111011_2$$.
 
