@@ -15,7 +15,7 @@ Introdução à compilação. Introdução a teoria das linguagens. Linguagens r
 <h4>Material de Aula</h4>
  
  <ol>
- <li><a href="https://github.com/frankalcantara/Aulas/blob/master/Liguagens/out/Aula1.html" target="_blanck">Aula 1 - Apresentação da disciplina, história e conceitos básicos.</a></li>
+ <li><a href="https://frankalcantara.com/Aulas/Liguagens/out/Aula1.html#/1" target="_blanck">Aula 1 - Apresentação da disciplina, história e conceitos básicos.</a></li>
   
  
 </ol>
