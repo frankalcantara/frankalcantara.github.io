@@ -4,7 +4,7 @@ title: "Linguagem de programação e Compiladores"
 author: Frank
 categories: [disciplina]
 tags: [interpretadores, linguagem natural, inteligência artificial, parsers]
-image: assets/images/interpretador.jpg
+image: assets/images/gato1.jpg
 featured: true
 hidden: true
 rating: 3.5
@@ -25,4 +25,4 @@ Introdução à compilação. Introdução a teoria das linguagens. Linguagens r
         
 </ol>
 
-<span>Foto de <a href="https://unsplash.com/@officestock?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Sebastian Herrmann</a> on <a href="https://unsplash.com/s/photos/computer?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+<span>Foto de <a href="https://unsplash.com/@digitalsennin?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">diGital Sennin</a> on <a href="https://unsplash.com/s/photos/computers?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
