@@ -17,13 +17,12 @@ Introdução à compilação. Introdução a teoria das linguagens. Linguagens r
  <ol>
  <li><a href="https://frankalcantara.com/Aulas/Liguagens/out/Aula1.html" target="_blanck">Aula 1 - Apresentação da disciplina, história e conceitos básicos.</a></li>
  <li><a href="https://frankalcantara.com/Aulas/Liguagens/out/Aula2.html" target="_blanck">Aula 2 - Compiladores, conceitos básicos.</a></li>
-  
- 
-</ol>
+ </ol>
 
 <h4>O que estou lendo hoje</h4>
 <ol>
        <li>2021-01-02 - <a href="https://wolchok.org/posts/how-to-read-assembly-language/" target="_blanck">How to Read Assembly Language.</a></li> 
+        <li>2021-01-03 - <a href="https://hisham.hm/2021/02/25/compiler-versus-transpiler-what-is-a-compiler-anyway/" target="_blanck">Compiler versus Transpiler: what is a compiler, anyway?.</a></li> 
 </ol>
 
 <span>Foto de <a href="https://unsplash.com/@digitalsennin?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">diGital Sennin</a> on <a href="https://unsplash.com/s/photos/computers?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
