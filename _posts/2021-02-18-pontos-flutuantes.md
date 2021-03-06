@@ -124,7 +124,7 @@ Eita! Virou outra coisa. Uma coisa bem diferente. Eis porquê em Python, acabamo
 >0.30000000000000004
 ```
 
-Se não acreditar em mim, tente você mesmo, direto na linha de comando do Python ou em alguma célula do [Google Colab](https://colab.research.google.com/). Vai encontrar o mesmo erro. Talvez esta seja uma boa hora para se levantar, tomar um copo d'água e pensar sobre jornalismo, contabilidade, educação física, ou qualquer outra opção de carreira que não envolva computação tão diretamente. Vai lá! Eu espero. Tem pressa não!
+Isto ocorre por que a conta que você realmente fez foi $$0.1000000000000000055511151231257827021181583404541015625 \times 3$$. Se não acreditar em mim, tente você mesmo, direto na linha de comando do Python ou em alguma célula do [Google Colab](https://colab.research.google.com/). Vai encontrar o mesmo erro. Talvez esta seja uma boa hora para se levantar, tomar um copo d'água e pensar sobre jornalismo, contabilidade, educação física, ou qualquer outra opção de carreira que não envolva computação tão diretamente. Vai lá! Eu espero. Tem pressa não!
 
 Muitas linguagens de programação, o Python, inclusive, conhecem um conjunto de valores onde erros deste tipo ocorrem e arredondam, ou truncam, o resultado para que você veja o resultado correto. Ou ainda, simplesmente limitam o que é exposto para outras operações, como se estivessem limitando a precisão do cálculo ou dos valores armazenados. Não é raro encontrar linguagens de programação que, por padrão, mostram apenas 3 casas depois da vírgula. Esta foi uma opção pouco criativa adotada por muitos compiladores e interpretadores que acaba criando mais problemas que soluções. Para ver um exemplo, use a fração $$frac{1}{10}$$, ainda em Python e reproduza as seguintes operações:
 
@@ -150,8 +150,13 @@ _Isto não é uma exclusividade do Python_, a grande maioria das linguagens de p
 
 Volte um pouquinho e reveja o que aconteceu, no Python, quando operamos $$0.1 * 3$$. A leitora deve observar que, neste caso, os dois operandos estão limitados e são exatos. O erro ocorre por que a conversão de $$0.1_{10}$$ para binário não é exata e somos forçados a parar em algum ponto e, ou truncamos ou arredondamos o valor. Digamos que paramos em: $$0.0001100110011001101_2$$. Se fizermos isso e convertemos novamente para o decimal o $$0.1$$ será convertido em $$0.1000003814697265625$$. E lá temos um baita de um erro. Se a conversão for feita usando os padrões impostos pela IEEE 754 os valores ficam um pouco diferentes, o valor $$0.1$$ será armazenado em um sistema usando a IEEE 754 como:
 
-1. em precisão simples: $$00111101 11001100 11001100 11001101_2$$;
-2. em precisão dupla: $$00111111 10111001 10011001 10011001 10011001 10011001 10011001 10011010_2$$.
+1. em precisão simples:
+
+   $$00111101 11001100 11001100 11001101_2$$
+
+2. em precisão dupla:
+
+   $$00111111 10111001 10011001 10011001 10011001 10011001 10011001 10011010_2$$
 
 Que quando convertidos novamente para binário, precisão simples, representará o número $$0.100000001490116119385$$ isso implica em um erro 256 vezes menor que o erro que obtemos com a conversão manual e os poucos bits que usamos. Em precisão dupla este valor vai para $$0.100000000000000005551_2$$ com um erro ainda menor. Nada mal! Vamos ver se entendemos como esta conversão pode ser realizada usando o $$0,1$$. Mas antes divirta-se um pouco vendo o resultado que obtemos graças a IEEE 754 para: $$0,2$$; $$0,4$$ e $$0,8$$ usando o excelente [Float Point Exposed](https://float.exposed). Como disse antes: tem pressa não!
 
@@ -341,7 +346,13 @@ Observe que a definição de zero na norma IEEE 754 usa apenas o expoente e a ma
 
 ### Infinito
 
-Outro caso especial do campo de exponentes é representado pelo valor $$11111111_2$$. Se o expoente for composto de $$8$$ algarismos $$1_2$$ e a mantissa for totalmente preenchida como $$0_2$$, então o valor representado será o infinito. Acompanhando o zero, o infinito pode ser negativo, ou positivo. Neste caso, faz sentido matematicamente. Ou quase faz sentido. Não, não faz sentido nenhum! Não espere, faz sim! Droga infinito é complicado. A verdade é que ninguém entende exatamente os conceitos de infinito e mesmo os matemáticos não tem consenso sobre isso, mas a norma IEEE 754 com o $$\pm Infinito$$ atende ao entendimento médio do que representa o infinito. Estes mesmos conceitos serão utilizados, ainda neste texto para explicar a aritmética destes valores especiais.
+Outro caso especial do campo de exponentes é representado pelo valor $$11111111_2$$. Se o expoente for composto de $$8$$ algarismos $$1_2$$ e a mantissa for totalmente preenchida como $$0_2$$, então o valor representado será o infinito. Acompanhando o zero, o infinito pode ser negativo, ou positivo.
+
+Neste caso, faz sentido matematicamente. Ou quase faz sentido. Não, não faz sentido nenhum! Não espere, faz sim! Droga infinito é complicado. A verdade é que ainda existem muitas controvérsias sobre os conceitos de infinito, mesmo os matemáticos não tem consenso sobre isso, a norma IEEE 754 com o $$\pm Infinito$$ atende ao entendimento médio do que representa o infinito.
+
+Considerando que a linguagem de programação que você usa está de acordo com a norma IEEE 754, se você calcular o inverso de $$-0$$ deverá obter $$-Infinito$$, se calcular o inverso de $$+0$$ deve obter $$+Infinito$$. Por exemplo, em C++ teremos:
+
+<iframe height="800px" width="100%" src="https://repl.it/@frankalcantara/infinityTeste?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
 
 ### NaN (Not a Number)
 
@@ -459,6 +470,8 @@ Certa vez [Joel Spolsky](https://www.joelonsoftware.com/) criou o termo _leaky a
 [Javascript: the weird parts](https://charlieharvey.org.uk/page/javascript_the_weird_parts)
 
 [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754#Rounding_rules)
+
+[Taming Floating Point Error](https://www.johnbcoughlin.com/posts/floating-point-axiom/)
 
 [Why do we need a floating-point arithmetic standard?](https://people.eecs.berkeley.edu/~wkahan/ieee754status/why-ieee.pdf)
 
