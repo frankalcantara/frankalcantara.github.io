@@ -24,6 +24,7 @@ Introdução à compilação. Introdução a teoria das linguagens. Linguagens r
 <ol>
        <li>2021-01-02 - <a href="https://wolchok.org/posts/how-to-read-assembly-language/" target="_blanck">How to Read Assembly Language.</a></li> 
         <li>2021-01-03 - <a href="https://hisham.hm/2021/02/25/compiler-versus-transpiler-what-is-a-compiler-anyway/" target="_blanck">Compiler versus Transpiler: what is a compiler, anyway?.</a></li> 
+        <li>2021-01-03 - <a href="<li>2021-01-03 - <a href="http://infoseclina.blogspot.com/2017/06/reverse-engineering-guide-on-x86.html" target="_blanck">Reverse Engineering Guide on x86 Assembly: Part 1 Intro To Registers.</a></li> 
 </ol>
 
 <span>Foto de <a href="https://unsplash.com/@digitalsennin?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">diGital Sennin</a> on <a href="https://unsplash.com/s/photos/computers?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
