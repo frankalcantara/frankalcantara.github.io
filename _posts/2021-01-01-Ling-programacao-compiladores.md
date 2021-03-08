@@ -15,8 +15,9 @@ Introdução à compilação. Introdução a teoria das linguagens. Linguagens r
 <h4>Material de Aula</h4>
  
  <ol>
- <li><a href="https://frankalcantara.com/Aulas/Liguagens/out/Aula1.html" target="_blanck">Aula 1 - Apresentação da disciplina, história e conceitos básicos.</a></li>
- <li><a href="https://frankalcantara.com/Aulas/Liguagens/out/Aula2.html" target="_blanck">Aula 2 - Compiladores, conceitos básicos.</a></li>
+        <li><a href="https://frankalcantara.com/Aulas/Liguagens/out/Aula1.html" target="_blanck">Aula 1 - Apresentação da disciplina, história e conceitos básicos.</a></li>
+        <li><a href="https://frankalcantara.com/Aulas/Liguagens/out/Aula2.html" target="_blanck">Aula 2 - Compiladores, conceitos básicos.</a></li>
+        <li><a href="https://frankalcantara.com/Aulas/Liguagens/out/Aula3.html" target="_blanck">Aula 3 - Máquinas de Estado Finito e Expressões Regulares.</a></li>
  </ol>
 
 <h4>O que estou lendo hoje</h4>
