@@ -42,6 +42,11 @@ A lógica matemática como ferramenta de resolução de problemas. Abordamos um 
 
 </ol>
 
+<h2>Trabalho dos Alunos</h2>
+
+<p>Aplicativo online para a geração de tabelas verdade a partir de expressões de lógica proposicional em Latex: <a href="https://truthtable.tech/index.html" target="_blank" rel="noopener noreferrer">Truth Table Generator</a>, Trabalho de: Daniel Stuart, Fábio Kishino, Leonardo Deldotto e Luis Troscianczuk para a disciplina de Resolução
+de Problemas com Lógica Matemática da PUC-PR em 2020.</p>
+
 <h2>Material de apoio ao aprendizado</h2>
 
 <p>O texto de apoio: <a href="https://github.com/frankalcantara/Aulas/blob/master/Logica/out/logicaProposicional.pdf" target="_blank" rel="noopener noreferrer">Lógica Proposicional</a>, ainda está em desenvolvimento.</p>
