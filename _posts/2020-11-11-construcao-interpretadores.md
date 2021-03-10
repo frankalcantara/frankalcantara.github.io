@@ -60,7 +60,16 @@ Conceitos da teoria de linguagens formais e técnicas de Processamento de Lingua
 <li><a href="https://colab.research.google.com/drive/1PyfwCcXXqwOIcnIwWssZDPydkrMmY1Cs" target="_blank">Word2Vec - Python.</a></li>
 
 <li><a href="https://colab.research.google.com/drive/1BN-EqfuBzv8dTWyO6uIGyO6lTzTwru4I" target="_blank"> Chatbot.</a></li>
-        
+</ol>
+
+<h4>O que estou lendo hoje</h4>
+<ol> 
+       <li>2021-01-02 - <a href="https://wolchok.org/posts/how-to-read-assembly-language/" target="_blanck">How to Read Assembly Language.</a></li> 
+        <li>2021-01-03 - <a href="https://hisham.hm/2021/02/25/compiler-versus-transpiler-what-is-a-compiler-anyway/" target="_blanck">Compiler versus Transpiler: what is a compiler, anyway?.</a></li> 
+        <li>2021-01-09 - <a href="https://infoseclina.blogspot.com/2017/06/reverse-engineering-guide-on-x86.html" target="_blanck">Reverse Engineering Guide on x86 Assembly: Part 1 Intro To Registers.</a></li> 
+        <li>2021-01-09 - <a href="https://technicshistory.com/2017/05/10/lost-generation-the-relay-computers/" target="_blanck">Lost Generation: The Relay Computers.</a></li> 
+        <li>2021-01-10 - <a href="https://blog.adafruit.com/2017/05/08/bjarne-stroustrup-on-why-i-created-c/" target="_blanck">Bjarne Stroustrup on ‘Why I Created C++’.</a></li>
+
 </ol>
 
 <span>Foto de <a href="https://unsplash.com/@officestock?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Sebastian Herrmann</a> on <a href="https://unsplash.com/s/photos/computer?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
