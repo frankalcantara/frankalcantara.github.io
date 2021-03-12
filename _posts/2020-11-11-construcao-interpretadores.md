@@ -17,22 +17,9 @@ Conceitos da teoria de linguagens formais e técnicas de Processamento de Lingua
  <ol>
  <li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula1.html#/" target="_blanck">Aula 1 - Apresentação da disciplina, história e conceitos básicos.</a></li>
   
- <li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula2.html#/" target="_blanck">Aula 2 - Linguagens Compiladores, interpretadores e linguagens formais</a>.</li>
+ <li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula2.html#/" target="_blanck">Aula 2 - Compiladores, interpretadores e linguagens formais</a>.</li>
  
- <li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula3.html#/" target="_blanck">Aula 3 - Analisadores Léxicos</a>.</li>
- 
- <li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula4.html#/" target="_blanck">Aula 4 - Analisadores Sintáticos</a>.</li>
- 
- <li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula5.html#/" target="_blanck">Aula 5 - Parsers - Overview</a>.</li>
- 
- <li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula6.html#/" target="_blanck">Aula 6 - Parsers - LL & LR</a>.</li>
- 
- <li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula7.html#/" target="_blanck">Aula 7 - Analisadores Semânticos</a>.</li>
- 
- <li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula8.html#/" target="_blanck">Aula 8 - Geração de Código Intermediário</a>.</li>
- 
- <li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula9.html#/" target="_blanck">Aula 9 - Otimização de Código</a>.</li>
-</ol>
+ </ol>
 
 <h4>Processamento de Linguagem Natural</h4>
 
