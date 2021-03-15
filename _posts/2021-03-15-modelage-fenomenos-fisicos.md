@@ -5,7 +5,7 @@ author: Frank
 featured: true
 categories: [disciplina]
 tags: [lógica, resolução de problemas, proposicional, predicativa]
-image: assets/images/logic.jpg
+image: assets/images/fenomeno1.jpg
 rating: 3.5
 ---
 
@@ -24,4 +24,5 @@ Essa disciplina é ofertada aos estudantes ingressantes no curso de Bacharelado 
 </ol>
 
 
-<span>Foto de <a href="https://unsplash.com/@olav_ahrens?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Olav Ahrens Røtne</a> on <a href="https://unsplash.com/s/photos/problems?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+<span>Foto de <a href="https://unsplash.com/@stockphotos_com?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Amos from Stockphotos.com</a> on <a href="/s/photos/thunder?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  </span>
