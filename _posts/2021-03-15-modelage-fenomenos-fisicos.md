@@ -20,7 +20,7 @@ Essa disciplina é ofertada aos estudantes ingressantes no curso de Bacharelado 
 <h2>Links Interessantes</h2>
 
 <ol>
-    <li><a href="https://frankalcantara.com/Aulas/Fenomenos/out/Aula1.html#/" target="_blank">Aula 1 - Apresentação da disciplina, ambiente de estudo e ferramentas.</a></li>
+    <li><a href="https://www.physicscentral.com/buzz/blog/index.cfm?postid=5248358123737529836" target="_blank">Does 5-sigma = discovery?</a></li>
 </ol>
 
 
