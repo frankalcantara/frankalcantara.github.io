@@ -19,6 +19,7 @@ Introdução à compilação. Introdução a teoria das linguagens. Linguagens r
         <li><a href="https://frankalcantara.com/Aulas/Liguagens/out/Aula2.html" target="_blanck">Aula 2 - Compiladores, conceitos básicos.</a></li>
         <li><a href="https://frankalcantara.com/Aulas/Liguagens/out/Aula3.html" target="_blanck">Aulas 3 e 4 - Máquinas de Estado Finito e Expressões Regulares.</a></li>
         <li><a href="https://frankalcantara.com/Aulas/Liguagens/out/Aula4.html" target="_blanck">Aula 5 - Prática de Código - MEF.</a></li>
+        <li><a href="https://frankalcantara.com/Aulas/Liguagens/out/Aula5.html" target="_blanck">Aula 6 - Regex Álgebra e Prática.</a></li>
  </ol>
 
 <h4>O que estou lendo hoje</h4>
