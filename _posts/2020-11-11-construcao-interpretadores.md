@@ -53,7 +53,9 @@ Conceitos da teoria de linguagens formais e técnicas de Processamento de Lingua
 
 <h4>O que estou lendo hoje</h4>
 <ol>
-        <li>2021-03-10 - <a href="https://www.freecodecamp.org/news/regex-was-taking-5-days-flashtext-does-it-in-15-minutes-55f04411025f/?source=rss----336d898217ee---4
+        <li>2021-03-17 - <a href="https://emailregex.com/" target="_blanck">Email Address Regular Expression That 99.99% Works. Disagree?</a></li>
+        
+        <li>2021-03-17 - <a href="https://www.freecodecamp.org/news/regex-was-taking-5-days-flashtext-does-it-in-15-minutes-55f04411025f/?source=rss----336d898217ee---4
         " target="_blanck">Regex was taking 5 days to run. So I built a tool that did it in 15 minutes</a></li>
 
         <li>2021-03-10 - <a href="https://blog.adafruit.com/2017/05/08/bjarne-stroustrup-on-why-i-created-c/" target="_blanck">Bjarne Stroustrup on ‘Why I Created C++’.</a></li>
