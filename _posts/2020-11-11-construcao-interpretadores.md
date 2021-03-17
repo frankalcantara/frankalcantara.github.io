@@ -52,12 +52,19 @@ Conceitos da teoria de linguagens formais e técnicas de Processamento de Lingua
 </ol>
 
 <h4>O que estou lendo hoje</h4>
-<ol> 
-       <li>2021-01-02 - <a href="https://wolchok.org/posts/how-to-read-assembly-language/" target="_blanck">How to Read Assembly Language.</a></li> 
-        <li>2021-01-03 - <a href="https://hisham.hm/2021/02/25/compiler-versus-transpiler-what-is-a-compiler-anyway/" target="_blanck">Compiler versus Transpiler: what is a compiler, anyway?.</a></li> 
-        <li>2021-01-09 - <a href="https://infoseclina.blogspot.com/2017/06/reverse-engineering-guide-on-x86.html" target="_blanck">Reverse Engineering Guide on x86 Assembly: Part 1 Intro To Registers.</a></li> 
-        <li>2021-01-09 - <a href="https://technicshistory.com/2017/05/10/lost-generation-the-relay-computers/" target="_blanck">Lost Generation: The Relay Computers.</a></li> 
-        <li>2021-01-10 - <a href="https://blog.adafruit.com/2017/05/08/bjarne-stroustrup-on-why-i-created-c/" target="_blanck">Bjarne Stroustrup on ‘Why I Created C++’.</a></li>
+<ol>
+        <li>2021-03-10 - <a href="https://www.freecodecamp.org/news/regex-was-taking-5-days-flashtext-does-it-in-15-minutes-55f04411025f/?source=rss----336d898217ee---4
+        " target="_blanck">Regex was taking 5 days to run. So I built a tool that did it in 15 minutes</a></li>
+
+        <li>2021-03-10 - <a href="https://blog.adafruit.com/2017/05/08/bjarne-stroustrup-on-why-i-created-c/" target="_blanck">Bjarne Stroustrup on ‘Why I Created C++’.</a></li>
+
+        <li>2021-03-02 - <a href="https://wolchok.org/posts/how-to-read-assembly-language/" target="_blanck">How to Read Assembly Language.</a></li>
+
+        <li>2021-03-03 - <a href="https://hisham.hm/2021/02/25/compiler-versus-transpiler-what-is-a-compiler-anyway/" target="_blanck">Compiler versus Transpiler: what is a compiler, anyway?.</a></li>
+
+        <li>2021-03-09 - <a href="https://infoseclina.blogspot.com/2017/06/reverse-engineering-guide-on-x86.html" target="_blanck">Reverse Engineering Guide on x86 Assembly: Part 1 Intro To Registers.</a></li>
+
+        <li>2021-03-09 - <a href="https://technicshistory.com/2017/05/10/lost-generation-the-relay-computers/" target="_blanck">Lost Generation: The Relay Computers.</a></li>
 
 </ol>
 
