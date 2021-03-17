@@ -19,7 +19,9 @@ Conceitos da teoria de linguagens formais e técnicas de Processamento de Lingua
   
  <li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula2.html#/" target="_blanck">Aula 2 - Compiladores, interpretadores e linguagens formais</a>.</li>
 
-<li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula3.html#/" target="_blanck">Aula 3 - Linguagens e Análise Léxica</a>.</li> 
+<li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula3.html#/" target="_blanck">Aula 3 - Linguagens e Análise Léxica</a>.</li>
+
+<li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula4.html#/" target="_blanck">Aula 4 - Análise Sintática</a>.</li> 
  
  </ol>
 
