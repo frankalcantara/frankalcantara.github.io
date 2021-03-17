@@ -15,6 +15,7 @@ Essa disciplina é ofertada aos estudantes ingressantes no curso de Bacharelado 
 
 <ol>
     <li><a href="https://frankalcantara.com/Aulas/Fenomenos/out/Aula1.html#/" target="_blank">Aula 1 - Apresentação da disciplina, ambiente de estudo e ferramentas.</a></li>
+    <li><a href="https://frankalcantara.com/Aulas/Fenomenos/out/Aula2.html#/" target="_blank">Aula 2 - Ambientes de desenvolvimento.</a></li>
 </ol>
 
 <h2>Links Interessantes</h2>
@@ -23,6 +24,5 @@ Essa disciplina é ofertada aos estudantes ingressantes no curso de Bacharelado 
     <li><a href="https://www.physicscentral.com/buzz/blog/index.cfm?postid=5248358123737529836" target="_blank">Does 5-sigma = discovery?</a></li>
 </ol>
 
-
 <span>Foto de <a href="https://unsplash.com/@stockphotos_com?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Amos from Stockphotos.com</a> on <a href="/s/photos/thunder?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-  </span>
+</span>
