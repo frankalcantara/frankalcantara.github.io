@@ -25,6 +25,9 @@ Introdução à compilação. Introdução a teoria das linguagens. Linguagens r
         <li><a href="https://frankalcantara.com/Aulas/Liguagens/out/Aula8.html" target="_blanck">Aula 9 - Parsers - Top-Down.</a></li>
         <li><a href="https://frankalcantara.com/Aulas/Liguagens/out/Aula9.html" target="_blanck">Aula 10 - Parsers - Gramáticas LL(1).</a></li>
         <li><a href="https://frankalcantara.com/Aulas/Liguagens/out/Aula10.html" target="_blanck">Aula 11 - Parsers - Gramáticas LR(1).</a></li>
+        <li>Aula 12 - Exercícios e Práticas.</li>
+        <li>Aula 13 - Simulação de Avaliação.</li>
+        <li><a href="https://frankalcantara.com/Aulas/Liguagens/out/Aula11.html" target="_blanck">Aula 14 - Analisador Semântico - Conceitos.</a></li>
  </ol>
 
 <h4>O que estou lendo hoje</h4>
