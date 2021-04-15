@@ -24,6 +24,7 @@ Conceitos da teoria de linguagens formais e técnicas de Processamento de Lingua
 <li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula4.html#/" target="_blanck">Aula 4 - Análise Sintática</a>.</li> 
 <li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula5.html#/" target="_blanck">Aula 5 - Parsers</a>.</li> 
 <li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula7.html#/" target="_blanck">Aula 6 - Análise Semântica</a>.</li> 
+<li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula8.html#/" target="_blanck">Aula 7 - Geração de Código Intermediário</a>.</li> 
  
  </ol>
 
