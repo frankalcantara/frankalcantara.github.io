@@ -33,6 +33,7 @@ Introdução à compilação. Introdução a teoria das linguagens. Linguagens r
 
 <h4>O que estou lendo hoje</h4>
 <ol> 
+        <li>2021-04-20 - <a href="http://janvitek.org/pubs/toplas19.pdf" target="_blanck">On the Impact of Programming Languages on Code Quality</a></li>
         <li>2021-03-17 - <a href="https://emailregex.com/" target="_blanck">Email Address Regular Expression That 99.99% Works. Disagree?</a></li>
         <li>2021-03-16 - <a href="http://jimbly.github.io/regex-crossword/" target="_blanck">Regex  Crossword.</a></li>
         <li>2021-03-02 - <a href="https://wolchok.org/posts/how-to-read-assembly-language/" target="_blanck">How to Read Assembly Language.</a></li> 
