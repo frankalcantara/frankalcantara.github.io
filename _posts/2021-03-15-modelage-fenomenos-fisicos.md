@@ -20,6 +20,8 @@ Essa disciplina é ofertada aos estudantes ingressantes no curso de Bacharelado 
     <li><a href="https://frankalcantara.com/Aulas/Fenomenos/out/Aula4.html#/" target="_blank">Aula 4 - Funções Logarítmicas e Aplicações.</a></li>
      <li><a href="https://frankalcantara.com/Aulas/Fenomenos/out/Aula5.html#/" target="_blank">Aula 5 - Refinando os Modelos.</a></li>
      <li><a href="https://frankalcantara.com/Aulas/Fenomenos/out/Aula6.html#/" target="_blank">Aula 6 - Limites.</a></li>
+     <li><a href="" target="_blank">Aula 7 - Avaliação.</a></li>
+     <li><a href="https://frankalcantara.com/Aulas/Fenomenos/out/Aula8.html#/" target="_blank">Aula 8 - Derivadas.</a></li>
 </ol>
 
 <h2>Links Interessantes</h2>
