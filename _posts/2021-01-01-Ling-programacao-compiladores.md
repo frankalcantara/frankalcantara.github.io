@@ -28,8 +28,9 @@ Introdução à compilação. Introdução a teoria das linguagens. Linguagens r
         <li>Aula 12 - Exercícios e Práticas.</li>
         <li>Aula 13 - Simulação de Avaliação.</li>
         <li><a href="https://frankalcantara.com/Aulas/Liguagens/out/Aula11.html" target="_blanck">Aula 14 - Analisador Semântico - Conceitos.</a></li>
-         <li><a href="https://frankalcantara.com/Aulas/Liguagens/out/Aula12.html" target="_blanck">Aula 14 - Analisador Semântico - Tipos.</a></li>
-          <li><a href="https://frankalcantara.com/Aulas/Liguagens/out/Aula13.html" target="_blanck">Aula 15 - Gestão de Memória.</a></li>
+         <li><a href="https://frankalcantara.com/Aulas/Liguagens/out/Aula12.html" target="_blanck">Aula 15 - Analisador Semântico - Tipos.</a></li>
+          <li><a href="https://frankalcantara.com/Aulas/Liguagens/out/Aula13.html" target="_blanck">Aula 16 - Gestão de Memória.</a></li>
+          <li><a href="https://frankalcantara.com/Aulas/Liguagens/out/Aula14.html" target="_blanck">Aula 17 - Otimização de Código.</a></li>
  </ol>
 
 <h4>O que estou lendo hoje</h4>
