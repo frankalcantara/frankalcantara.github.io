@@ -9,7 +9,7 @@ image: assets/images/fenomeno1.jpg
 rating: 3.5
 ---
 
-Essa disciplina é ofertada aos estudantes ingressantes no curso de Bacharelado em Ciência da Computação. Ao final da disciplina, o estudante será capaz de combinar os temas de Cálculo, Geometria Analítica e Física para modelar e resolver problemas de situações reais, tais como movimento e equilíbrio de partículas e transformações de energia. Para a modelagem, ou seja, a representação simplificada de situações reais, executará métodos de solução e simulação de fenômenos físicos utilizando ferramentas computacionais. Vamos, com toda garra, dominar a arte de modelar problemas físicos em matemáticos em computadores e resolver estes problemas.
+Essa disciplina é ofertada aos estudantes ingressantes no curso de Bacharelado em Ciência da Computação. Ao final da disciplina, o estudante será capaz de combinar os temas de Cálculo, Geometria Analítica e Física para modelar e resolver problemas de situações reais, tais como movimento e equilíbrio de partículas e transformações de energia. Para a modelagem, ou seja, a representação simplificada de situações reais, executará métodos de solução e simulação de fenômenos físicos utilizando ferramentas computacionais. Vamos, com toda garra, dominar a arte de modelar problemas físicos e matemáticos em computadores e resolver estes problemas.
 
 <h2>Material de apoio às aulas</h2>
 
