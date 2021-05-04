@@ -22,7 +22,8 @@ Essa disciplina é ofertada aos estudantes ingressantes no curso de Bacharelado 
      <li><a href="https://frankalcantara.com/Aulas/Fenomenos/out/Aula6.html#/" target="_blank">Aula 6 - Limites.</a></li>
      <li><a href="" target="_blank">Aula 7 - Avaliação.</a></li>
      <li><a href="https://frankalcantara.com/Aulas/Fenomenos/out/Aula8.html#/" target="_blank">Aula 8 - Derivadas.</a></li>
-     <li><a href="" target="_blank">Aula 9 - Derivadas: conceito e aplicação.</a></li>
+     <li><a href="https://colab.research.google.com/drive/1BMlrn4iiwfCmBVCwb5y9UtZnd6NiWWGO?usp=sharing" target="_blank">Aula 9 - Derivadas: conceito e aplicação.</a></li>
+     <li><a href="https://colab.research.google.com/drive/1muJZzC0m2X2m25v9l7IBp0NOXN8JgTz3?usp=sharing" target="_blank">Aula 9 - Derivadas: máximos e mínimos.</a></li>
 </ol>
 
 <h2>Links Interessantes</h2>
