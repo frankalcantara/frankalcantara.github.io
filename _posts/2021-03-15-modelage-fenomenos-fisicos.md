@@ -27,6 +27,9 @@ Essa disciplina é ofertada aos estudantes ingressantes no curso de Bacharelado 
      <li><a href="https://colab.research.google.com/drive/1LGINMdU0DhlcA1i4xgSaDFzgHI0Mea_9?usp=sharing" target="_blank">Aula 11 - Derivadas Parciais.</a></li>
      <li><a href="https://colab.research.google.com/drive/1r6OW56MPYOcjiU3D_q0Q213HpMobfv1d?usp=sharing" target="_blank">Aula 12 - Problemas de Pontos Críticos.</a></li>
      <li><a href="https://colab.research.google.com/drive/1OdO8_SjIQHpGB5tbbAdTRUi5dSgDcbDS?usp=sharing" target="_blank">Aula 13 - Aplicações de Derivadas.</a></li>
+     <li><a href="https://colab.research.google.com/drive/1MvYG2KuaITwTJ42dUesxOqHW238GWsgF?usp=sharing" target="_blank">Aula 14 - Regras: produto e Quociente.</a></li>
+     <li><a href="https://colab.research.google.com/drive/1c3ROtjAM0sd1n5NQUg2EEiojVwjvDkjy?usp=sharing" target="_blank">Aula 15 - Integração: conceitos e aplicação.</a></li>
+     <li><a href="" target="_blank">Aula 16 - Avaliação.</a></li>
 </ol>
 
 <h2>Links Interessantes</h2>
