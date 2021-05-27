@@ -30,6 +30,7 @@ Essa disciplina é ofertada aos estudantes ingressantes no curso de Bacharelado 
      <li><a href="https://colab.research.google.com/drive/1MvYG2KuaITwTJ42dUesxOqHW238GWsgF?usp=sharing" target="_blank">Aula 14 - Regras: produto e Quociente.</a></li>
      <li><a href="https://colab.research.google.com/drive/1c3ROtjAM0sd1n5NQUg2EEiojVwjvDkjy?usp=sharing" target="_blank">Aula 15 - Integração: conceitos e aplicação.</a></li>
      <li><a href="" target="_blank">Aula 16 - Avaliação.</a></li>
+     <li><a href="https://colab.research.google.com/drive/1QXfrYDOoCsnoVJPbJqqzLVFTI1KhqOhj?usp=sharing" target="_blank">Aula 17 - Regras de Integração.</a></li>
 </ol>
 
 <h2>Links Interessantes</h2>
