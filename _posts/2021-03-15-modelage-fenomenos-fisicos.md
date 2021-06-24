@@ -32,6 +32,7 @@ Essa disciplina é ofertada aos estudantes ingressantes no curso de Bacharelado 
      <li><a href="" target="_blank">Aula 16 - Avaliação.</a></li>
      <li><a href="https://colab.research.google.com/drive/1QXfrYDOoCsnoVJPbJqqzLVFTI1KhqOhj?usp=sharing" target="_blank">Aula 17 - Regras de Integração.</a></li>
      <li><a href="https://colab.research.google.com/drive/16gtCjgWU4gR_H5oNihapYLOSdoMRfCRv?usp=sharing" target="_blank">Aula 18 - Integrais Definidas.</a></li>
+     <li><a href="https://colab.research.google.com/drive/19iGbr-KFGGS6dH-gFkQlR8Ig1SjBwfI2?usp=sharing" target="_blank">Aula 19 - Integrais Duplas e Triplas.</a></li>
 </ol>
 
 <h2>Links Interessantes</h2>
