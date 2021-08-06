@@ -23,6 +23,7 @@ Desenvolver soluções computacionais segundo o Paradigma da Programação Funci
 <h4>Material Complementar - Sugestões</h4>
 <ol>
         <li>2021-04-20 - <a href="http://janvitek.org/pubs/toplas19.pdf" target="_blanck">On the Impact of Programming Languages on Code Quality</a></li>
+        <li>2021-08-06 - <a href="https://academic.oup.com/plms/article-abstract/s2-42/1/230/1491926?redirectedFrom=fulltext" target="_blanck">On Computable Numbers, with an Application to the Entscheidungsproblem</a></li>
 
 </ol>
 
