@@ -4,7 +4,7 @@ title: "Programação Funcional"
 author: Frank de Alcantara
 categories: [disciplina]
 tags: [programação, funcional, paradigmas de programação]
-image: assets/images/interpretador.jpg
+image: assets/images/funcional.jpg
 featured: true
 hidden: true
 rating: 3.5
@@ -24,7 +24,7 @@ Desenvolver soluções computacionais segundo o Paradigma da Programação Funci
 <ol>
         <li>2021-04-20 - <a href="http://janvitek.org/pubs/toplas19.pdf" target="_blanck">On the Impact of Programming Languages on Code Quality</a></li>
 
-
 </ol>
 
-<span>Foto de <a href="https://unsplash.com/@officestock?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Sebastian Herrmann</a> on <a href="https://unsplash.com/s/photos/computer?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+<span>Foto de <a href="https://unsplash.com/@hiteshchoudhary?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Hitesh Choudhary</a> on <a href="https://unsplash.com/s/photos/programming?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+</span>
