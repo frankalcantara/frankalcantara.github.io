@@ -15,7 +15,7 @@ Desenvolver soluções computacionais segundo o Paradigma da Programação Funci
 <h4>Programação Funcional</h4>
  
  <ol>
- <li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula1.html#/" target="_blanck">Aula 1 - Apresentação da disciplina, história e conceitos básicos.</a></li>
+ <li><a href="https://frankalcantara.com/Aulas/Funcional/out/Aula1.html#/" target="_blanck">Aula 1 - Apresentação da disciplina, história e conceitos básicos.</a></li>
   
  
  </ol>
