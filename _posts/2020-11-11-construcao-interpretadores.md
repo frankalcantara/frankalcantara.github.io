@@ -15,30 +15,30 @@ Conceitos da teoria de linguagens formais e técnicas de Processamento de Lingua
 <h4>Construção de Interpretadores</h4>
  
  <ol>
- <li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula1.html#/" target="_blanck">Aula 1 - Apresentação da disciplina, história e conceitos básicos.</a></li>
+ <li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula1.html#/" target="_blanck">Apresentação da disciplina, história e conceitos básicos.</a></li>
   
- <li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula2.html#/" target="_blanck">Aula 2 - Linguagens Formais e Análise Léxica</a>.</li>
+ <li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula2.html#/" target="_blanck">Linguagens Formais e Análise Léxica</a>.</li>
 
-<li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula4.html#/" target="_blanck">Aula 3 - Análise Sintática</a>.</li> 
-<li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula5.html#/" target="_blanck">Aula 4 - Parsers</a>.</li> 
-<li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula7.html#/" target="_blanck">Aula 5 - Análise Semântica</a>.</li> 
-<li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula8.html#/" target="_blanck">Aula 6 - Geração de Código Intermediário</a>.</li>
-<li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula9.html#/" target="_blanck">Aula 7 - Otimização de Código</a>.</li> 
+<li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula4.html#/" target="_blanck">Análise Sintática</a>.</li> 
+<li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula5.html#/" target="_blanck">Parsers</a>.</li> 
+<li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula7.html#/" target="_blanck">Análise Semântica</a>.</li> 
+<li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula8.html#/" target="_blanck">Geração de Código Intermediário</a>.</li>
+<li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula9.html#/" target="_blanck">Otimização de Código</a>.</li> 
  
  </ol>
 
 <h4>Processamento de Linguagem Natural</h4>
 
 <ol>
-<li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula1.html#/" target="_blank">Aula 1 - Conceitos Básicos, Bibliotecas.</a></li>
+<li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula1.html#/" target="_blank">Conceitos Básicos, Bibliotecas.</a></li>
 
-<li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula2.html#/" target="_blank">Aula 2 - Stopwords - Na Prática.</a></li>
+<li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula2.html#/" target="_blank">Stopwords - Na Prática.</a></li>
 
-<li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula3.html#/" target="_blank">Aula 3 - Vetorização.</a></li>
+<li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula3.html#/" target="_blank">Vetorização.</a></li>
 
-<li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula4.html#/" target="_blank">Aula 4 - Word2Vec.</a></li>
+<li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula4.html#/" target="_blank">Word2Vec.</a></li>
 
-<li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula5.html#/" target="_blank">Aula 5 - Chatbot.</a></li>
+<li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula5.html#/" target="_blank">Chatbot.</a></li>
         
 </ol>
 
