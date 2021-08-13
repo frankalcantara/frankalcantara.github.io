@@ -15,9 +15,8 @@ Desenvolver soluções computacionais segundo o Paradigma da Programação Funci
 <h4>Programação Funcional</h4>
  
  <ol>
- <li><a href="https://frankalcantara.com/Aulas/Funcional/out/Aula1.html#/" target="_blanck">Aula 1 - Apresentação da disciplina, história e conceitos básicos.</a></li>
-  
- 
+       <li><a href="https://frankalcantara.com/Aulas/Funcional/out/Aula1.html#/" target="_blanck">Apresentação da disciplina, história e conceitos básicos.</a></li>
+       <li><a href="https://frankalcantara.com/Aulas/Funcional/out/Aula2.html#/" target="_blanck">Introdução ao Cálculo Lambda.</a></li>
  </ol>
 
 <h4>Material Complementar - Sugestões</h4>
