@@ -21,8 +21,6 @@ Desenvolver soluções computacionais segundo o Paradigma da Programação Funci
 
 <h4>Material Complementar - Sugestões</h4>
 <ol>
-       <li>2021-08-09 - <a href="       https://notes.eatonphil.com/parser-generators-vs-handwritten-parsers-survey-2021.html" target="_blanck">Parser generators vs. handwritten parsers: surveying major language implementations in 2021</a></li>
-
        <li>2021-08-09 - <a href="https://people.csail.mit.edu/brooks/idocs/church_ent.pdf" target="_blanck">A Note on the Entscheidungsproblem</a></li>
 
        <li>2021-08-09 - <a href="https://www.ics.uci.edu/~lopes/teaching/inf212W12/readings/church.pdf" target="_blanck">An Unsolvable Problem of Elementary Number Theory</a></li>
