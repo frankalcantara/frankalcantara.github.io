@@ -17,7 +17,7 @@ Desenvolver soluções computacionais segundo o Paradigma da Programação Funci
  <ol>
        <li><a href="https://frankalcantara.com/Aulas/Funcional/out/Aula1.html#/" target="_blanck">Apresentação da disciplina, história e conceitos básicos.</a></li>
        <li><a href="https://frankalcantara.com/Aulas/Funcional/out/Aula2.html#/" target="_blanck">Introdução ao Cálculo Lambda.</a></li>
-       <li>Aula Prática.</a></li>
+       <li>Aula Prática.</li>
        <li><a href="https://frankalcantara.com/Aulas/Funcional/out/Aula4.html#/" target="_blanck">Introdução ao Haskell, valores, tipos, funções e branches.</a></li>
        <li><a href="https://frankalcantara.com/Aulas/Funcional/out/Aula5.html#/" target="_blanck">Recursividade.</a></li>
 
