@@ -19,11 +19,15 @@ Desenvolver soluções computacionais segundo o Paradigma da Programação Funci
        <li><a href="https://frankalcantara.com/Aulas/Funcional/out/Aula2.html#/" target="_blanck">Introdução ao Cálculo Lambda.</a></li>
        <li>Aula Prática.</a></li>
        <li><a href="https://frankalcantara.com/Aulas/Funcional/out/Aula4.html#/" target="_blanck">Introdução ao Haskell, valores, tipos, funções e branches.</a></li>
+       <li><a href="https://frankalcantara.com/Aulas/Funcional/out/Aula5.html#/" target="_blanck">Recursividade.</a></li>
 
  </ol>
 
 <h4>Material Complementar - Sugestões</h4>
 <ol>
+       <li>2021-08-09 - <a href="http://book.realworldhaskell.org/" target="_blanck">Real World Haskell</a></li>
+       <li>2021-08-09 - <a href="http://learnyouahaskell.com/chapters" target="_blanck">Learn You a Haskell for Great Good!</a></li>
+     
        <li>2021-08-09 - <a href="https://people.csail.mit.edu/brooks/idocs/church_ent.pdf" target="_blanck">A Note on the Entscheidungsproblem</a></li>
 
        <li>2021-08-09 - <a href="https://www.ics.uci.edu/~lopes/teaching/inf212W12/readings/church.pdf" target="_blanck">An Unsolvable Problem of Elementary Number Theory</a></li>
