@@ -22,8 +22,7 @@ Conceitos da teoria de linguagens formais e técnicas de Processamento de Lingua
 <li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula4.html#/" target="_blanck">Análise Sintática</a>.</li> 
 <li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula5.html#/" target="_blanck">Parsers</a>.</li> 
 <li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula7.html#/" target="_blanck">Análise Semântica</a>.</li> 
-<li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula8.html#/" target="_blanck">Geração de Código Intermediário</a>.</li>
-<li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula9.html#/" target="_blanck">Otimização de Código</a>.</li> 
+<li><a href="https://frankalcantara.com/Aulas/Interpretadores/out/Aula89.html#/" target="_blanck">Código Intermediário - Geração e Otimização</a>.</li>
  
  </ol>
 
@@ -57,7 +56,9 @@ Conceitos da teoria de linguagens formais e técnicas de Processamento de Lingua
 
 <h4>O que estou lendo hoje</h4>
 <ol>
-        <li>2021-08-09 - <a href="       https://notes.eatonphil.com/parser-generators-vs-handwritten-parsers-survey-2021.html" target="_blanck">Parser generators vs. handwritten parsers: surveying major language implementations in 2021</a></li>
+        <li>2021-09-14 - <a href="http://pages.cs.wisc.edu/~fischer/cs701.f06/graph-coloring.pdf" target="_blanck">Register allocation via coloring</a></li>
+        <li>2021-08-09 - <a href="https://notes.eatonphil.com/parser-generators-vs-handwritten-parsers-survey-2021.html" target="_blanck">Parser generators vs. handwritten parsers: surveying major language implementations in 2021</a></li>
+        http://pages.cs.wisc.edu/~fischer/cs701.f06/graph-coloring.pdf
         <li>2021-04-20 - <a href="http://janvitek.org/pubs/toplas19.pdf" target="_blanck">On the Impact of Programming Languages on Code Quality</a></li>
         
         <li>2021-03-17 - <a href="https://emailregex.com/" target="_blanck">Email Address Regular Expression That 99.99% Works. Disagree?</a></li>
