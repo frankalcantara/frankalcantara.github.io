@@ -23,6 +23,7 @@ Desenvolver soluções computacionais segundo o Paradigma da Programação Funci
        <li><a href="https://frankalcantara.com/Aulas/Funcional/out/Aula6.html#/" target="_blanck">Listas: foldr, foldl, map e Filter.</a></li>
        <li><a href="https://frankalcantara.com/Aulas/Funcional/out/Aula7.html#/" target="_blanck">Exercícios Práticos - 1.</a></li>
        <li><a href="https://frankalcantara.com/Aulas/Funcional/out/Aula8.html#/" target="_blanck">Lazy, tipos e classes.</a></li>
+       <li>Avaliação Individual.</li>
  </ol>
 
 <h4>Material Complementar - Sugestões</h4>
