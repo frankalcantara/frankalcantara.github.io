@@ -57,6 +57,7 @@ Conceitos da teoria de linguagens formais e técnicas de Processamento de Lingua
 
 <h4>O que estou lendo hoje</h4>
 <ol>
+        <li>2021-10-04 - <a href="https://blog.metaobject.com/2015/10/jitterdammerung.html" target="_blanck">Jitterdämmerung</a></li>
         <li>2021-09-14 - <a href="http://pages.cs.wisc.edu/~fischer/cs701.f06/graph-coloring.pdf" target="_blanck">Register allocation via coloring</a></li>
         <li>2021-08-09 - <a href="https://notes.eatonphil.com/parser-generators-vs-handwritten-parsers-survey-2021.html" target="_blanck">Parser generators vs. handwritten parsers: surveying major language implementations in 2021</a></li>
         http://pages.cs.wisc.edu/~fischer/cs701.f06/graph-coloring.pdf
