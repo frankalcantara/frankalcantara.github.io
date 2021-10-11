@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "O inferno, o Covid e as boas intensões"
+title: "O inferno, o Covid e as boas intenções"
 author: Frank
 categories: [opinião]
 tags: [opinião, covid]
