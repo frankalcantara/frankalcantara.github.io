@@ -32,9 +32,9 @@ Conceitos da teoria de linguagens formais e técnicas de Processamento de Lingua
 <ol>
 <li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula1.html#/" target="_blank">Conceitos Básicos, Bibliotecas.</a></li>
 
-<li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula2.html#/" target="_blank">Stopwords - Na Prática.</a></li>
-
 <li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula3.html#/" target="_blank">Vetorização.</a></li>
+
+<li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula2.html#/" target="_blank">Stopwords - Na Prática.</a></li>
 
 <li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula4.html#/" target="_blank">Word2Vec.</a></li>
 
