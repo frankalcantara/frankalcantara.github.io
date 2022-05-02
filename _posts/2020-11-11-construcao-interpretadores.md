@@ -48,7 +48,7 @@ Conceitos da teoria de linguagens formais e técnicas de Processamento de Lingua
 
 <li><a href="https://github.com/frankalcantara/Aulas/blob/master/Interpretadores/code/operadoresAho.cpp" target="_blank">MEF - em C - Resolução de Exercício do Aho.</a></li>
 
-<li><a href="https://colab.research.google.com/drive/1v5gBCUEnXY-qOVp8a48PBVr1tHveuQOY" target="_blank">TF-IDF - Python.</a></li>
+<li><a href="https://drive.google.com/file/d/1v5gBCUEnXY-qOVp8a48PBVr1tHveuQOY/view?usp=sharing" target="_blank">TF-IDF - Python.</a></li>
 
 <li><a href="https://colab.research.google.com/drive/1PyfwCcXXqwOIcnIwWssZDPydkrMmY1Cs" target="_blank">Word2Vec - Python.</a></li>
 
