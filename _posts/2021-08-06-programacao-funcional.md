@@ -22,6 +22,7 @@ Desenvolver soluções computacionais segundo o Paradigma da Programação Funci
        <li><a href="https://frankalcantara.com/Aulas/Funcional/out/Aula5.html#/" target="_blanck">Recursividade.</a></li>
        <li><a href="https://frankalcantara.com/Aulas/Funcional/out/Aula6.html#/" target="_blanck">Listas, e funções de ordem superior.</a></li>
        <li><a href="https://frankalcantara.com/Aulas/Funcional/out/Aula8.html#/" target="_blanck">Lazy, tipos e classes.</a></li>
+       <li><a href="https://frankalcantara.com/Aulas/Funcional/out/Aula9.html#/" target="_blanck">Classes de Tipos e Categorias.</a></li>
        
  </ol>
 
