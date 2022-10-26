@@ -37,7 +37,7 @@ comments: true
         Católica do Paraná. Antes no Centro Universitário Uninter e na Universidade Positivo. Sempre lecionando matérias técnicas como Eletromagnetismo, Sinais e Sistemas, Processamento de Sinais, Estruturas de Dados Avançadas, Linguagens de Programação, Compiladores, Interpretadores, Gestão de projetos ágeis e análise de sistemas.
     </p>
     <h4>Hoje e Amanhã</h4>
-    <p>Direção Técnica (desenvolvimento e infraestrutura) na <a href="https://tefway.com.br)" target="_blanck"> Tefway Tecnologia Ltda. </sa> Empresa de transferência de fundos focada na realização de vendas usando PIX e Cartões.</p>
+    <p>Direção Técnica (desenvolvimento e infraestrutura) na <a href="https://tefway.com.br)" target="_blanck"> Tefway Tecnologia Ltda. </a> Empresa de transferência de fundos focada na realização de vendas usando PIX e Cartões.</p>
     <p>Consultoria e treinamento em desenvolvimento de sistemas de alto desempenho com C, C++ e Rust. Incluindo <i>refactoring</i>, programação 
     orientada a objetos em C++, STL e Templates.</p>
 </div>
