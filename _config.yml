@@ -10,7 +10,8 @@ disqus: ""
 mailchimp-list: ""
 include: ["_pages"]
 permalink: /:title/
-
+accu: "assets/images/button-logo-120x32.png"
+acculink: http:\\https://accu.org/
 # Authors
 authors:
   Frank:
