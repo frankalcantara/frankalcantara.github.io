@@ -34,18 +34,12 @@ comments: true
     </p>
     <p>
         O mestrado também me permitiu seguir a carreira de professor universitário. Hoje na Pontifícia Universidade
-        Católica do Paraná e na Unicesumar. Antes no Centro Universitário Uninter e na Universidade Positivo. Sempre lecionando matérias técnicas como Eletromagnetismo, Sinais e Sistemas, Processamento de Sinais, Estruturas de Dados Avançadas, Linguagens de Programação, Compiladores, Interpretadores, Gestão de projetos ágeis e análise de sistemas.
+        Católica do Paraná. Antes no Centro Universitário Uninter e na Universidade Positivo. Sempre lecionando matérias técnicas como Eletromagnetismo, Sinais e Sistemas, Processamento de Sinais, Estruturas de Dados Avançadas, Linguagens de Programação, Compiladores, Interpretadores, Gestão de projetos ágeis e análise de sistemas.
     </p>
     <h4>Hoje e Amanhã</h4>
-    <p>Trabalho com a equipe da <a href="https://materialize.pro/br/" target="_blank">Materialize</a> no
-        desenvolvimento de sistemas com técnicas ágeis, buscando agregar tecnologia em processos de desenvolvimento
-        de software. Desenvolvendo soluções móveis com inteligência artifical, ou não, baseadas em processos como o
-        <strong>scrum</strong>, <strong>eXtreming Programming</strong> e <strong>Desing Sprint</strong>. adequados a realidade de cada cliente. 
-        Analisando seus negócios, propondo atualizações tecnológicas e levando a termo ferramentas completamente novas em seis semanas.
-    </p>
-    <p>Desenvolvo pesquisas na aplicação das técnicas de <strong>inteligência artificial</strong>,                 <strong>aprendizado de máquina</strong> e <strong>realidade mista</strong>. 
-        Para uso em retenção de clientes, descoberta de padrões, e automatização de processos em indústria, comércio, educação e saúde.</p>
-    <p>Trabalho pela engenharia do Paraná e do Brasil como Conselheiro do Instituto de Engenharia do Paraná e do CREA-PR.</p>
+    <p>Direção Técnica (desenvolvimento e infraestrutura) na <a href="https://tefway.com.br)" target="_blanck"> Tefway Tecnologia Ltda. <\a> Empresa de transferência de fundos focada na realização de vendas usando PIX e Cartões.</p>
+    <p>Consultoria e treinamento em desenvolvimento de sistemas de alto desempenho com C, C++ e Rust. Incluindo <i>refactoring</i>, programação 
+    orientada a objetos em C++, STL e Templates.</p>
 </div>
 <div class="col-md-4">
     <div class="sticky-top sticky-top-80">
