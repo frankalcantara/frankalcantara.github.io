@@ -18,13 +18,20 @@ description: "Entenda como a matemática fundamenta o eletromagnetismo e suas ap
 
 <p>Vetores são abstrações matemáticas que permitem o entendimento de grandezas que, por sua vez, precisam das informações de grandeza, direção e sentido para seu próprio entendimento. Estas grandezas são as grandezas vetoriais. O eletromagnetismo só revela seus segredos na forma de vetores e campos vetoriais. Geometricamente, um vetor será representado por uma seta, com origem, destino e comprimento. Vamos ignorar a geometria sempre que possível e nos concentrar na álgebra.</p>
 
-<p>Grandezas escalares formam Campos Escalares no espaço que podem ser definidos apenas como uma função \(f(x,y,z)\) onde \(x,y,z \in \Bbb{R}^4\)</p>
-
 <h5>Vetor Unitário</h5>
-<p>Um vetor \(\V\) qualquer tem magnitude, direção e sentido. A magnitude, também chamada de intensidade, ou módulo será representada por \(|V|\). Sendo assim, definiremos um vetor unitário \(a_V\) como:
+<p>Um vetor \(V\) qualquer tem magnitude, direção e sentido. A magnitude, também chamada de intensidade, ou módulo será representada por \(|V|\). Sendo assim, definiremos um vetor unitário \(a_V\) como:
 $$a_V=\frac{V}{|V|}$$
-Um vetor unitário \(a_V\) é um vetor que tem a mesma direção e sentido de \(V\) com magnitude \(1\).
+Um vetor unitário \(a_V\) é um vetor que tem a mesma direção e sentido de \(V\) com magnitude \(1\) logo \(|V|=1\).
 </p>
+<p>Grandezas escalares formam Campos Escalares no espaço que podem ser definidos apenas como uma função \(f(x,y,z)\) onde \(x,y,z \in \Bbb{R}^3\). Grandezas vetoriais formam Campos Vetoriais que serão definidos por funções vetoriais \(V(x,y,z)\). Ou na forma da soma dos componentes unitários relativos ao sistema de coordenadas escolhido. Usando o Sistema de Coordenadas Cartesianas a representação de um vetor \(V\) segundo seus componentes unitários e ortogonais será dada por:
+$$V=V_xa_x+V_ya_y+V_za_z$$
+Onde, \(V_x,V_y,V_z\) representam os fatores que devem multiplicar os vetores unitários \(a_x, a_y, a_z\) de forma que a soma destes vetores represente o vetor \(V\) no espaço \(\Bbb{R}^3\). Ao longo deste artigo vamos chamar \(V_x,V_y,V_z\) de componentes vetoriais nas direções \(x,y,z\). As direções \(x,y,z\) foram escolhidas porque estamos usando o Sistema de Coordenadas Cartesianas e indicam que cada vetor unitário corresponderá a uma das direções do Sistema de Coordenadas Cartesianas. Se utilizarmos sistemas de coordenadas diferentes os componentes vetoriais deverão ser adequados as estes sistemas. Assim teremos: 
+ $$V=V_xa_x+V_ya_y+V_za_z$$
+ $$V=V_ra_r+V_\phi a_\phi+V_za_z$$
+ $$V=V_ra_r+V_\phi a_\phi+V_\theta a_\theta$$
+ Respectivamente para os sistemas de coordenadas cartesianas, cilíndricas e esféricas.
+</p>
+
 
 <p></p>
 
