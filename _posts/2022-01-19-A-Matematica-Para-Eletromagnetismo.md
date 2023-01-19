@@ -1,17 +1,16 @@
 ---
 layout: post
-title: "Alguma Matemática Para Entender Eletromagnetismo"
+title: "A Matemática Para Entender Eletromagnetismo"
 author: Frank
 categories: [opinião]
 tags: [opinião, covid]
-image: assets/images/11.jpg
+image: assets/images/eletro1.jpg
 description: "Conceitos e técnicas matemáticas para entendimento do Eletromagnetismo."
 ---
 
 <p> Tudo que nos cerca é devido a existência do Eletromagnetismo. Tudo! Desde sua existência até o dispositivo que você está usando está intimamente relacionado aos efeitos do campo elétrico e do campo magnético. No final do Século XIX, James Clerk Maxwell sintetizou a relação entre estas forças da natureza em um conjunto de equações matemáticas. O trabalho de Maxwell extraordinário de qualquer ponto de vista, ainda hoje, surpreende a todos pela precisão matemática. Neste artigo, vou passar alguns dos conceitos matemáticos que você precisa entender antes de se aprofundar no eletromagnetismo. Tenha coragem e calma. Tudo que posso dizer é que vai doer!</p>
 
-<p>Estão cheios de boas intenções e citando diretamente a matéria temos:</p>
-<blockquote> "Through close cooperation and collaboration with developers, governments, and public health providers, we hope to harness the power of technology to help countries around the world slow the spread of COVID-19 and accelerate the return of everyday life."</blockquote>
+<blockquote> Este é um trabalho em andamento!</blockquote>
 
 <p> Nunca pensei que chegaríamos a esse ponto. Talvez a melhor forma de colocar o que penso sobre isso seja citar um dos Pais Fundadores dos Estados Unidos da América, Benjamin Franklin:</p>
    <blockquote> "Those who would give up essential Liberty, to purchase a little temporary Safety,
@@ -41,4 +40,4 @@ description: "Conceitos e técnicas matemáticas para entendimento do Eletromagn
 
 <p>Por enquanto, neste momento em que escrevo, lembre que tudo que estamos fazendo contra este vírus é só palpite. E palpites podem ser bem, ou mal, intencionados. O caminho do inferno está pavimentado de boas intenções.</p>
 
-<span>Foto de: <a href="https://unsplash.com/@ashkfor121?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Ashkan Forouzani</a> on <a href="https://unsplash.com/s/photos/covid?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+<span>Foto de: <a href="https://unsplash.com/pt-br/fotografias/_kdTyfnUFAc">Alessandro Bianchi</a> on <a href="https://unsplash.com/s/photos/covid?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
