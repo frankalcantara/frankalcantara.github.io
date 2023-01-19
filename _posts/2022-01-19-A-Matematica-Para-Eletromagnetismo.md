@@ -19,9 +19,9 @@ description: "Entenda como a matemática fundamenta o eletromagnetismo e suas ap
 <p>Vetores são abstrações matemáticas que permitem o entendimento de grandezas que, por sua vez, precisam das informações de grandeza, direção e sentido para seu próprio entendimento. Estas grandezas são as grandezas vetoriais. O eletromagnetismo só revela seus segredos na forma de vetores e campos vetoriais. Geometricamente, um vetor é uma seta, com origem, destino e comprimento. Nesta seta estão codificados as informações de gradeza, direção e sentido. Vamos ignorar a geometria sempre que possível e nos concentrar na álgebra.</p>
 
 <h5>Vetor Unitário.</h5>
-<p>Um vetor $V$ qualquer tem magnitude, direção e sentido. A magnitude, também chamada de intensidade, ou módulo será representada por $|V|$. Sendo assim definiremos um vetor unitário $a_V$ como:
-$$a = \frac{V}{|V|}$$
-Um vetor unitário $a_V$ é um vetor que tem a mesma direção e sentido de $V$ com magnitude $1$.
+<p>Um vetor $$V$$ qualquer tem magnitude, direção e sentido. A magnitude, também chamada de intensidade, ou módulo será representada por $$|V|$$. Sendo assim definiremos um vetor unitário $$a_V$$ como:
+$$a_V=\frac{V}{|V|}$$
+Um vetor unitário $$a_V$$ é um vetor que tem a mesma direção e sentido de $$V$$ com magnitude $$1$$.
 </p>
 
 <span>Foto de: <a href="https://unsplash.com/pt-br/fotografias/_kdTyfnUFAc">Alessandro Bianchi</a> on <a href="https://unsplash.com/s/photos/covid?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
