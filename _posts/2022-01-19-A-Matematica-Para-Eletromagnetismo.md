@@ -1,22 +1,18 @@
 ---
 layout: post
-title: "A Matemática Para Entender Eletromagnetismo"
+title: "A Fórmula da Atração: a matemática por trás do Eletromagnetismo"
 author: Frank
 categories: [opinião]
 tags: [opinião, covid]
 image: assets/images/eletro1.jpg
-description: "Conceitos e técnicas matemáticas para entendimento do Eletromagnetismo."
+description: "Entenda como a matemática fundamenta o eletromagnetismo e suas aplicações práticas em um artigo acadêmico destinado a estudantes de ciência e engenharia."
 ---
 
 <p> Tudo que nos cerca é devido a existência do Eletromagnetismo. Tudo! Desde sua existência até o dispositivo que você está usando está intimamente relacionado aos efeitos do campo elétrico e do campo magnético. No final do Século XIX, James Clerk Maxwell sintetizou a relação entre estas forças da natureza em um conjunto de equações matemáticas. O trabalho de Maxwell extraordinário de qualquer ponto de vista, ainda hoje, surpreende a todos pela precisão matemática. Neste artigo, vou passar alguns dos conceitos matemáticos que você precisa entender antes de se aprofundar no eletromagnetismo. Tenha coragem e calma. Tudo que posso dizer é que vai doer!</p>
 
 <blockquote> Este é um trabalho em andamento!</blockquote>
 
-<p> Nunca pensei que chegaríamos a esse ponto. Talvez a melhor forma de colocar o que penso sobre isso seja citar um dos Pais Fundadores dos Estados Unidos da América, Benjamin Franklin:</p>
-   <blockquote> "Those who would give up essential Liberty, to purchase a little temporary Safety,
-            deserve neither Liberty nor Safety."</blockquote>
-
-<p> Ou, em bom português: aqueles que renunciam às liberdades essenciais para comprar um pouco de segurança temporária não merecem nem a liberdade nem a segurança.</p>
+<p>Este artigo explora como a matemática suporta o eletromagnetismo, um campo da física fundamental para a compreensão de fenômenos como a eletricidade e o magnetismo. Aqui você vai encontrar uma visão geral dos princípios matemáticos fundamentais que são usados para descrever os fenômenos eletromagnéticos. Destina-se a estudantes de ciência e engenharia, mas pode ser interessante para qualquer pessoa interessada em aprender sobre como a matemática está presente no mundo à nossa volta.</p>
 
 <p>Veja, por exemplo o que está acontecendo na nossa própria casa. Quase todos os dias vemos governadores, e prefeitos, tomando atitudes totalmente abusivas e ditatoriais usando a pandemia como desculpa. A imagem que passam é de que são pessoas cheias de boas intenções que estão sendo forçadas a agir desta forma já que as pessoas insistem e continuar indo às praias, parques e praças das suas cidades.</p>
 
