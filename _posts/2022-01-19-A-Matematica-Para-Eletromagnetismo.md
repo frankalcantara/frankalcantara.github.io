@@ -29,10 +29,31 @@ Onde, \(V_x,V_y,V_z\) representam os fatores que devem multiplicar os vetores un
  $$V=V_xa_x+V_ya_y+V_za_z$$
  $$V=V_ra_r+V_\phi a_\phi+V_za_z$$
  $$V=V_ra_r+V_\phi a_\phi+V_\theta a_\theta$$
- Respectivamente para os sistemas de coordenadas cartesianas, cilíndricas e esféricas.
+ Respectivamente para os sistemas de coordenadas cartesianas, cilíndricas e esféricas. Quando representamos um vetor por seus componentes ortogonais, podemos calcular sua magnitude utilizando os fatores multiplicadores de cada componente assim, dado o vetor \(V=V_xa_x+V_ya_y+V_za_z\) sua magnitude será dada por \(|V|=\sqrt(V_x^2+V_y^2+V_z^2)\). Desta forma poderemos encontrar o vetor unitário de \(V\) por: 
+ $$a_V=\frac{V_xa_x+V_ya_y+V_za_z}{\sqrt(V_x^2+V_y^2+V_z^2)}$$
 </p>
+<h5>Multiplicação por Escalar</h5>
+<p>Um escalar é uma grandeza que não precisa de direção e sentido. Logo um escalar é um número real. Sendo assim, teremos:
+$$B=3.3 \times V=3.3 \times V_xa_x+3.3 \times V_ya_y+3.3 \times V_za_z$$
+Ou ainda: 
+$$C=\frac{V}{2}=\frac{1}{2}\times V_xa_x+\frac{1}{2}\times V_ya_y+\frac{1}{2}\times V_za_z$$
+A Multiplicação por Escalar é Comutativa e Associativa. Assim se tivermos os escalares \(m\) e \(n\) e o vetor \(V\) teremos:
+$$mV=Vm$$
+$$m(nV) = (mn)V$$</p>
+<p>Chamamos de Vetor Oposto a \(V\) ao vetor que tem a mesma intensidade, a mesma direção e sentido oposto ao sentido de \(V\). Um Vetor Oposto é o resultado da multiplicação de um vetor pelo escalar \(-1\). Logo:
+</p>
+<h5>Soma e Subtração de Vetores</h5>
+<p>Vetores podem ser somados, ou subtraídos, geometricamente por meio da regra do paralelogramo. Algebricamente a soma, ou subtração de vetores é feita componente a componente. Assim, se considerarmos os vetores \(A\) e \(B\) poderemos encontrar um vetor \(C\) que seja a soma \(A+B\) por: 
+$$C=A+B=(A_x a_x+A_y a_y+A_z a_z)+(B_x a_x+B_y a_y+B_z a_z)=(A_x+B_x)a_x+(A_y+B_y)a_y+(A_y+B_y)a_z$$
+Por exemplo, se : \(A=5a_x-3a_y+a_z\) e \(B=1a_x+4a_y-7a_z\) então:
+$$C=A+B=(5a_x-3a_y+a_z)+(1a_x+4a_y-7a_z)=(5+1)a_x+(-3+4)a_y+(1-7)a_z \therefore C= 6a_x+a_y-6a_z$$
+</p>
+<p>A Subtração será uma soma em que o segundo operando será o vetor oposto do operando original. Assim:
+$$C=A-B=A+(-B)=A+(-1\times B)$$
+ se : \(A=5a_x-3a_y+a_z\) e \(B=1a_x+4a_y-7a_z\) então:
+$$C=A-B=(5a_x-3a_y+a_z)+(-1\times (1a_x+4a_y-7a_z))$$
+$$C=A-B=(5a_x-3a_y+a_z)+(-1a_x-4a_y+7a_z)=4a_x-7a_y+8a_z$$
+<\p>
 
-
-<p></p>
 
 <span>Foto de: <a href="https://unsplash.com/pt-br/fotografias/_kdTyfnUFAc">Alessandro Bianchi</a> on <a href="https://unsplash.com/s/photos/covid?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
