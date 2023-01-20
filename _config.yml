@@ -10,7 +10,7 @@ disqus: ""
 mailchimp-list: ""
 include: ["_pages"]
 permalink: /:title/
-accu: "assets/images/button-logo-120x32.png"
+accu: "assets/images/botao-ACCU.png"
 acculink: https://accu.org/
 # Authors
 authors:
