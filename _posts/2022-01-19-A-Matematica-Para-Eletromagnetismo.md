@@ -7,40 +7,63 @@ tags: [Matemática, Física, Eletromagnetismo]
 image: assets/images/eletro1.jpg
 description: "Entenda como a matemática fundamenta o eletromagnetismo e suas aplicações práticas em um artigo acadêmico destinado a estudantes de ciência e engenharia."
 ---
+
 <blockquote>"Este é um trabalho em andamento. Escrevo quando posso e posto em seguida. Falta Muito!</blockquote>
 
-<p> Tudo que nos cerca é devido a existência do Eletromagnetismo. Tudo! Desde sua existência até o dispositivo que você está usando está intimamente relacionado aos efeitos do campo elétrico e do campo magnético. No final do Século XIX, James Clerk Maxwell sintetizou a relação entre estas forças da natureza em um conjunto de equações matemáticas. O trabalho de Maxwell extraordinário de qualquer ponto de vista, ainda hoje, surpreende a todos pela precisão matemática. Neste artigo, vou passar alguns dos conceitos matemáticos que você precisa entender antes de se aprofundar no eletromagnetismo. Tenha coragem e calma. Tudo que posso dizer é que vai doer!</p>
+<p>
+Tudo que nos cerca é devido ao Eletromagnetismo. Tudo! Trata-se do estudo das forças fundamentais que definem nosso Universo. Desde a sua própria existência até o dispositivo que você está usando, tudo está intimamente relacionado aos efeitos do campo elétrico, do campo magnético e das interações entre eles.
+</p>
+<p>
+No final do Século XIX, James Clerk Maxwell sintetizou a relação entre estas forças em um conjunto de equações matemáticas que explicam matematicamente como o eletromagnetismo afeta o espaço e a matéria. O trabalho de Maxwell, extraordinário de qualquer ponto de vista, surpreende pela simplicidade e beleza. Entretanto, requer um profundo conhecimento tando de física quanto de matemática para seu entendimento. Neste artigo, exploraremos a base matemática necessária ao conhecimento do eletromagnetismo, sem nos preocuparmos com a física onde esta matemática será aplicada.
+</p>
+<p>Considere este texto como o primeiro passo da sua jornada. Tenha coragem,calma e perseverança. Tudo que posso dizer é que vai doer e não será rápido.</p>
 
 <blockquote>"Nesta longa vida eu aprendi que toda a nossa ciência se comparada com a realidade é primitiva e infantil. Ainda assim, <b>é a coisa mais preciosa que temos</b>." Albert Einstein</blockquote>
 
 <span>Foto de: <a href="https://unsplash.com/pt-br/fotografias/_kdTyfnUFAc">Alessandro Bianchi</a> on <a href="https://unsplash.com/s/photos/covid?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
 
-<p>Este artigo explora como a matemática suporta o eletromagnetismo, um campo da física fundamental para a compreensão de fenômenos como a eletricidade e o magnetismo. Aqui você vai encontrar uma visão geral dos princípios matemáticos fundamentais que são usados para descrever os fenômenos eletromagnéticos. Destina-se a estudantes de ciência e engenharia, mas pode ser interessante para qualquer pessoa interessada em aprender sobre como a matemática está presente no mundo à nossa volta.</p>
+<p>
+Este artigo destina-se a estudantes de ciência e engenharia, mas pode ser relevante para qualquer pessoa interessada em aprender sobre a matemática como ferramenta para entender o Universo.
+</p>
 
-<h4>Vetores, tudo depende dos vetores</h4>
+<h4>Álgebra Linear - Vetores, tudo depende dos vetores</h4>
 
-<p>Vetores são abstrações matemáticas que permitem o entendimento de grandezas que, por sua vez, precisam das informações de grandeza, direção e sentido para seu próprio entendimento. Estas grandezas são as grandezas vetoriais. O eletromagnetismo só revela seus segredos na forma de vetores e campos vetoriais. Geometricamente, um vetor será representado por uma seta, com origem, destino e comprimento. Vamos ignorar a geometria sempre que possível e nos concentrar na álgebra.</p>
-
+<p>
+Vetores são abstrações matemáticas usadas para o entendimento de grandezas que precisam das informações de magnitude, direção e sentido para sua definição e uso. Estas grandezas, as grandezas vetoriais, são a base do estudo do eletromagnetismo. Geometricamente, um vetor será representado por uma seta, com origem, destino e comprimento. A álgebra linear e a trigonometria são os campos da matemática mais adequados ao estudo de vetores. Aqui Vamos ignorar a trigonometria sempre que possível, focando preferencialmente na álgebra linear. Começando por definir vetor unitário.
+</p>
 <h5>Vetor Unitário</h5>
-<p>Um vetor \(V\) qualquer tem magnitude, direção e sentido. A magnitude, também chamada de intensidade, ou módulo será representada por \(|V|\). Sendo assim, definiremos um vetor unitário \(a_V\) como:
+<p>Um vetor \(V\) qualquer tem magnitude, direção e sentido. A magnitude, também chamada de intensidade, ou módulo, será representada por \(|V|\). Definiremos um vetor unitário \(a_V\) como:
 $$a_V=\frac{V}{|V|}$$
 Um vetor unitário \(a_V\) é um vetor que tem a mesma direção e sentido de \(V\) com magnitude \(1\) logo \(|V|=1\).
 </p>
-<p>Grandezas escalares formam Campos Escalares no espaço que podem ser definidos apenas como uma função \(f(x,y,z)\) onde \(x,y,z \in \Bbb{R}^3\). Grandezas vetoriais formam Campos Vetoriais que serão definidos por funções vetoriais \(V(x,y,z)\). Ou na forma da soma dos componentes unitários relativos ao sistema de coordenadas escolhido. Usando o Sistema de Coordenadas Cartesianas a representação de um vetor \(V\) segundo seus componentes unitários e ortogonais será dada por:
+<p>
+ Podemos expressar qualquer vetor na forma da soma dos seus componentes unitários ortogonais. Estes components são relativos ao sistema de coordenadas que escolhemos para resolver um problema específico. Usando o Sistema de Coordenadas Cartesianas a representação de um vetor \(V\) segundo seus componentes unitários e ortogonais será dada por:
 $$V=V_xa_x+V_ya_y+V_za_z$$
-Onde, \(V_x,V_y,V_z\) representam os fatores que devem multiplicar os vetores unitários \(a_x, a_y, a_z\) de forma que a soma destes vetores represente o vetor \(V\) no espaço \(\Bbb{R}^3\). Ao longo deste artigo vamos chamar \(V_x,V_y,V_z\) de componentes vetoriais nas direções \(x,y,z\). As direções \(x,y,z\) foram escolhidas porque estamos usando o Sistema de Coordenadas Cartesianas e indicam que cada vetor unitário corresponderá a uma das direções do Sistema de Coordenadas Cartesianas. Se utilizarmos sistemas de coordenadas diferentes os componentes vetoriais deverão ser adequados as estes sistemas. Assim teremos: 
+Onde, \(V_x,V_y,V_z\) representam os fatores que devem multiplicar os vetores unitários \(a_x, a_y, a_z\) de forma que a soma destes vetores represente o vetor \(V\) no espaço \(\Bbb{R}^3\). Ao longo deste artigo vamos chamar \(V_x,V_y,V_z\) de componentes vetoriais nas direções \(x,y,z\). As direções \(x,y,z\) foram escolhidas quando usamos o Sistema de Coordenadas Cartesianas. Estas direções, ou eixos, Sistema de Coordenadas Cartesianas implicam na existência dos vetores unitários \(a_x, a_y, a_z\). Se utilizarmos sistemas de coordenadas diferentes os vetores unitários deverão ser adequados aos eixos deste sistema. Assim teremos: 
  $$V=V_xa_x+V_ya_y+V_za_z$$
  $$V=V_ra_r+V_\phi a_\phi+V_za_z$$
  $$V=V_ra_r+V_\phi a_\phi+V_\theta a_\theta$$
- Respectivamente para os sistemas de coordenadas cartesianas, cilíndricas e esféricas. Não é raro que, uma vez que o sistema de coordenadas tenha sido definido os vetores sejam representados apenas por seus componentes. Desta forma, \(V=3a_x+a_y-a_z\) pode ser representado apenas por \(V=(3,1,-1\).<\p>
- <p> Quando representamos um vetor por seus componentes ortogonais, podemos calcular sua magnitude utilizando os fatores multiplicadores de cada componente assim, dado o vetor \(V=V_xa_x+V_ya_y+V_za_z\) sua magnitude será dada por \(|V|=\sqrt(V_x^2+V_y^2+V_z^2)\). Desta forma poderemos encontrar o vetor unitário de \(V\) por: 
+ Respectivamente para os sistemas de coordenadas cartesianas, cilíndricas e esféricas. Não é raro que, uma vez que o sistema de coordenadas tenha sido definido os vetores sejam representados apenas por seus componentes. Desta forma, \(V=3a_x+a_y-a_z\) pode ser representado apenas por \(V=(3,1,-1)\).
+ </p>
+ <p>
+ Quando representamos um vetor por seus componentes ortogonais, podemos calcular sua magnitude utilizando os fatores multiplicadores de cada componente. Assim, dado o vetor \(V=V_xa_x+V_ya_y+V_za_z\) sua magnitude será dada por \(|V|=\sqrt(V_x^2+V_y^2+V_z^2)\). Desta forma poderemos encontrar o vetor unitário de \(V\) por: 
  $$a_V=\frac{V_xa_x+V_ya_y+V_za_z}{\sqrt(V_x^2+V_y^2+V_z^2)}$$
 </p>
+<p class="exp">
+Exemplo: calcule o vetor unitário \(a_A\) do vetor \(A=a_x-3a_y+2a_z\).
+$$a_A=\frac{A_xa_x+A_ya_y+A_za_z}{\sqrt(A_x^2+A_y^2+A_z^2)}$$
+$$a_A=\frac{a_x-3a_y+2a_z}{\sqrt(1^2+(-3)^2+2^2)}=\frac{a_x-3a_y+2a_z}{3,7416}$$
+$$a_A=0,2672a_x-0,8018a_y+0,5345a_z$$
+</p>
 <h5>Multiplicação por Escalar</h5>
-<p>Um escalar é uma grandeza que não precisa de direção e sentido. Logo um escalar é um número real. Sendo assim, teremos:
-$$B=3.3 \times V=3.3 \times V_xa_x+3.3 \times V_ya_y+3.3 \times V_za_z$$
-Ou ainda: 
-$$C=\frac{V}{2}=\frac{1}{2}\times V_xa_x+\frac{1}{2}\times V_ya_y+\frac{1}{2}\times V_za_z$$
+<p>
+Um escalar é uma grandeza que não precisa de direção e sentido. A multiplicação de um vetor por um escalar implica na multiplicação de cada um dos componentes desse vetor por este escalar. 
+</p>
+<p class="exp">
+Exemplo: considere o vetor \(V=2a_x+4a_y-a_z\) e calcule \(3,3V\) e \(V/2\)
+$$3.3V=(3,3)(2)a_x+(3,3)(4)a_y+(3,3)(-1)a_z=6,6a_x+13,2a_y-3,3a_z$$
+$$\frac{V}{2}=(\frac{1}{2})(2)a_x+(\frac{1}{2})(4)a_y+(\frac{1}{2})(-1)a_z = a_x+2a_y-\frac{1}{2}a_z$$
+</p>
 A Multiplicação por Escalar é Comutativa, Associativa e Distributiva. Assim se tivermos os escalares \(m\) e \(n\) e o vetor \(V\) teremos:
 $$mV=Vm$$
 $$m(nV) = (mn)V$$
@@ -51,13 +74,17 @@ $$m(nV) = (mn)V$$
 <p>Vetores podem ser somados, ou subtraídos, geometricamente por meio da regra do paralelogramo. Algebricamente a soma, ou subtração de vetores é feita componente a componente. Assim, se considerarmos os vetores \(A\) e \(B\) poderemos encontrar um vetor \(C\) que seja a soma \(A+B\) por: 
 $$C=A+B=(A_x a_x+A_y a_y+A_z a_z)+(B_x a_x+B_y a_y+B_z a_z)$$
 $$C=A+B=(A_x+B_x)a_x+(A_y+B_y)a_y+(A_y+B_y)a_z$$
-por exemplo, se : \(A=5a_x-3a_y+a_z\) e \(B=1a_x+4a_y-7a_z\) então:
+</p>
+<p class="exp">
+Exemplo: se \(A=5a_x-3a_y+a_z\) e \(B=1a_x+4a_y-7a_z\) calcule \(C=A+B\).
 $$C=A+B=(5a_x-3a_y+a_z)+(1a_x+4a_y-7a_z)=(5+1)a_x+(-3+4)a_y+(1-7)a_z $$
 $$C= 6a_x+a_y-6a_z$$
 </p>
 <p>A Subtração será uma soma em que o segundo operando será o vetor oposto do operando original. Assim:
 $$C=A-B=A+(-B)=A+(-1\times B)$$
- se : \(A=5a_x-3a_y+a_z\) e \(B=1a_x+4a_y-7a_z\) então:
+</p>
+<p class="exp">
+Exemplo: considere \(A=5a_x-3a_y+a_z\) e \(B=1a_x+4a_y-7a_z\) e calcule \(C=A-B\).
 $$C=A-B=(5a_x-3a_y+a_z)+(-1\times (1a_x+4a_y-7a_z))$$
 $$C=A-B=(5a_x-3a_y+a_z)+(-1a_x-4a_y+7a_z)=4a_x-7a_y+8a_z$$
 </p>
@@ -150,3 +177,4 @@ Na matrix que usamos para calcular o produto escalar triplo não estão colocado
 $$A\times (B\times C) = B(A\cdot C)- C$$
 
 </p>
+<p>Grandezas escalares formam Campos Escalares no espaço que podem ser definidos apenas como uma função \(f(x,y,z)\) onde \(x,y,z \in \Bbb{R}^3\). Grandezas vetoriais formam Campos Vetoriais que serão definidos por funções vetoriais \(V(x,y,z)\).</p>

@@ -488,6 +488,13 @@ blockquote {
   position: relative;
 }
 
+.exp{
+  background-color: #fafafa;
+    padding: 2px 12px 6px !important;
+    position: relative;
+    font-weight: bolder;
+}
+
 .listrelated .card {
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.05);
   border: 0;
