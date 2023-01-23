@@ -177,4 +177,5 @@ Na matrix que usamos para calcular o produto escalar triplo não estão colocado
 $$A\times (B\times C) = B(A\cdot C)- C$$
 
 </p>
-<p>Grandezas escalares formam Campos Escalares no espaço que podem ser definidos apenas como uma função \(f(x,y,z)\) onde \(x,y,z \in \Bbb{R}^3\). Grandezas vetoriais formam Campos Vetoriais que serão definidos por funções vetoriais \(V(x,y,z)\).</p>
+<p>Grandezas escalares formam Campos Escalares no espaço que podem ser definidos apenas como uma função \(f(x,y,z)\) onde \(x,y,z \in \Bbb{R}^3\). Grandezas vetoriais formam Campos Vetoriais que serão definidos por funções vetoriais \(V(x,y,z)\).
+</p>
