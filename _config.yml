@@ -22,7 +22,6 @@ authors:
     web: https://frankalcantara.com
     twitter: https://twitter.com/depijama
     description: "Pai, marido, professor e engenheiro."
-
 # Plugins
 plugins:
   - jekyll-paginate
@@ -30,6 +29,7 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-archives
+  - jekyll-gzip
 
 # Archives
 jekyll-archives:
