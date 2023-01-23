@@ -4,7 +4,7 @@ title: "A Fórmula da Atração: a matemática por trás do Eletromagnetismo"
 author: Frank
 categories: [Matemática, Eletromagnetismo]
 tags: [Matemática, Física, Eletromagnetismo]
-image: assets/images/eletromag1.webp
+image: assets/images/eletromag1.jpeg
 description: "Entenda como a matemática fundamenta o eletromagnetismo e suas aplicações práticas em um artigo acadêmico destinado a estudantes de ciência e engenharia."
 ---
 
