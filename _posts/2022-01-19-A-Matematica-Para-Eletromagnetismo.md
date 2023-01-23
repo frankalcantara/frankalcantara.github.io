@@ -4,7 +4,7 @@ title: "A Fórmula da Atração: a matemática por trás do Eletromagnetismo"
 author: Frank
 categories: [Matemática, Eletromagnetismo]
 tags: [Matemática, Física, Eletromagnetismo]
-image: assets/images/eletro1.webp
+image: assets/images/eletromag1.webp
 description: "Entenda como a matemática fundamenta o eletromagnetismo e suas aplicações práticas em um artigo acadêmico destinado a estudantes de ciência e engenharia."
 ---
 
@@ -20,7 +20,7 @@ No final do Século XIX, James Clerk Maxwell sintetizou a relação entre estas 
 
 <blockquote>"Nesta longa vida eu aprendi que toda a nossa ciência se comparada com a realidade é primitiva e infantil. Ainda assim, <b>é a coisa mais preciosa que temos</b>." Albert Einstein</blockquote>
 
-<span>Foto de: <a href="https://unsplash.com/pt-br/fotografias/_kdTyfnUFAc">Alessandro Bianchi</a> on <a href="https://unsplash.com/s/photos/covid?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+Imagem de <a href="https://pixabay.com/users/asimina-1229333/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2773167">Asimina Nteliou</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2773167">Pixabay</a>
 
 <p>
 Este artigo destina-se a estudantes de ciência e engenharia, mas pode ser relevante para qualquer pessoa interessada em aprender sobre a matemática como ferramenta para entender o Universo.
