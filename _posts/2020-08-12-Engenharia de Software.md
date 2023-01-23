@@ -5,7 +5,7 @@ author: Frank
 categories: [disciplina]
 tags: [eng. software, orientação a objetos, uml]
 image: assets/images/16.jpg
-featured: true
+featured: false
 rating: 3.5
 ---
 

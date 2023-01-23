@@ -2,7 +2,7 @@
 layout: post
 title: "Estrutura de Dados II"
 author: Frank
-featured: true
+featured: false
 categories: [disciplina]
 tags: [algoritmos, C++]
 image: assets/images/5.jpg

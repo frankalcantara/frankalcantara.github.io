@@ -5,7 +5,7 @@ author: Frank de Alcantara
 categories: [disciplina]
 tags: [programação, funcional, paradigmas de programação]
 image: assets/images/funcional.jpg
-featured: true
+featured: false
 hidden: true
 rating: 3.5
 ---
