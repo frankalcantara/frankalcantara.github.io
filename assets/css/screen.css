@@ -489,10 +489,10 @@ blockquote {
 }
 
 .exp{
-  background-color: #fafafa;
-    padding: 2px 12px 6px !important;
-    position: relative;
-    font-weight: bolder;
+  background-color: #fbfbfb;
+  padding: 10px !important;
+  position: relative;
+  font-weight: bolder;
 }
 
 .listrelated .card {
