@@ -18,7 +18,9 @@ Tudo que nos cerca é devido ao Eletromagnetismo. Tudo! Trata-se do estudo das f
 <p>
 No final do Século XIX, James Clerk Maxwell sintetizou a relação entre estas forças em um conjunto de equações matemáticas que explicam matematicamente como o eletromagnetismo afeta o espaço e a matéria. O trabalho de Maxwell, extraordinário de qualquer ponto de vista, surpreende pela simplicidade e beleza. Entretanto, requer um profundo conhecimento tando de física quanto de matemática para seu entendimento. Neste artigo, exploraremos a base matemática necessária ao conhecimento do eletromagnetismo, sem nos preocuparmos com a física onde esta matemática será aplicada.
 </p>
-<p>Considere este texto como o primeiro passo da sua jornada. Tenha coragem,calma e perseverança. Tudo que posso dizer é que vai doer e não será rápido.</p>
+<p>
+Considere este texto como o primeiro passo da sua jornada. Tenha coragem,calma e perseverança. Tudo que posso dizer é que vai doer e não será rápido.
+</p>
 
 <blockquote>"Nesta longa vida eu aprendi que toda a nossa ciência se comparada com a realidade é primitiva e infantil. Ainda assim, <b>é a coisa mais preciosa que temos</b>." Albert Einstein</blockquote>
 
@@ -26,7 +28,8 @@ No final do Século XIX, James Clerk Maxwell sintetizou a relação entre estas 
 Este artigo destina-se a estudantes de ciência e engenharia, mas pode ser relevante para qualquer pessoa interessada em aprender sobre a matemática como ferramenta para entender o Universo.
 </p>
 
-<h4>Álgebra Linear - Vetores, tudo depende dos vetores</h4>
+<h3>Álgebra Linear</h3>
+<h4>Vetores, tudo depende dos vetores</h4>
 
 <p>
 Vetores são abstrações matemáticas usadas para o entendimento de grandezas que precisam das informações de magnitude, direção e sentido para sua definição e uso. Estas grandezas, as grandezas vetoriais, são a base do estudo do eletromagnetismo. Geometricamente, um vetor será representado por uma seta, com origem, destino e comprimento. A álgebra linear e a trigonometria são os campos da matemática mais adequados ao estudo de vetores. Aqui Vamos ignorar a trigonometria sempre que possível, focando preferencialmente na álgebra linear. Começando por definir vetor unitário.
