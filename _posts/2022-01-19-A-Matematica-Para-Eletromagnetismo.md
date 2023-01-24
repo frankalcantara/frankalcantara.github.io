@@ -8,6 +8,8 @@ image: assets/images/eletromag1.jpg
 description: "Entenda como a matemática fundamenta o eletromagnetismo e suas aplicações práticas em um artigo acadêmico destinado a estudantes de ciência e engenharia."
 ---
 
+Imagem de <a href="https://pixabay.com/users/asimina-1229333/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2773167">Asimina Nteliou</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2773167">Pixabay</a>
+
 <blockquote>"Este é um trabalho em andamento. Escrevo quando posso e posto em seguida. Falta Muito!</blockquote>
 
 <p>
@@ -19,8 +21,6 @@ No final do Século XIX, James Clerk Maxwell sintetizou a relação entre estas 
 <p>Considere este texto como o primeiro passo da sua jornada. Tenha coragem,calma e perseverança. Tudo que posso dizer é que vai doer e não será rápido.</p>
 
 <blockquote>"Nesta longa vida eu aprendi que toda a nossa ciência se comparada com a realidade é primitiva e infantil. Ainda assim, <b>é a coisa mais preciosa que temos</b>." Albert Einstein</blockquote>
-
-Imagem de <a href="https://pixabay.com/users/asimina-1229333/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2773167">Asimina Nteliou</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2773167">Pixabay</a>
 
 <p>
 Este artigo destina-se a estudantes de ciência e engenharia, mas pode ser relevante para qualquer pessoa interessada em aprender sobre a matemática como ferramenta para entender o Universo.
