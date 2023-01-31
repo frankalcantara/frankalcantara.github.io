@@ -128,7 +128,7 @@ $$D_{pq} = 2a_x+5a_y-4a_z$$
 O Produto Escalar é uma operação entre dois vetores que resulta em um valor escalar. Um valor escalar é um número do conjuntos dos números reais \(\Bbb{R}\) representa uma quantidade invariante em todas as transformações rotacionais possíveis. Números escalares representam, na física, grandezas que não precisam das informações de direção e sentido para seu entendimento. Observe que o componentes ortogonais e individuais da representação algébrica de um vetor não são escalares. Estes componentes são sensíveis as operações de transformação vetorial, como veremos. 
 </p>
 <p>
-Dados os vetores \(A\) e \(B\), o produto escalar entre eles resulta em uma quantidade escalar e será representado por \(A\cdot B\). Geometricamente o produto escalar entre \(A\) e \(B\) será dado por: 
+Dados os vetores \(A\) e \(B\), <b>o produto escalar entre \(A\) e \(B\) resulta em uma quantidade escalar<b> e será representado por \(A\cdot B\). Geometricamente o produto escalar entre \(A\) e \(B\) será dado por: 
 $$A\cdot B = |A||B|cos\theta_{AB}$$
 O que corresponde a projeção do vetor \(A\) em \(B\). O produto escalar entre dois vetores \(A\) e \(B\) é o produto entre o produto das magnitudes destes vetores e o cosseno do menor ângulo entre eles. Algebricamente, se \(A=A_x a_x+A_y a_y+A_z a_z\) e \(B=B_x a_x+B_y a_y+B_z a_z\) então teremos:
 $$A\cdot B = A_x B_x+A_y B_y+A_z B_z$$
@@ -137,11 +137,14 @@ $$A\cdot B = A_x B_x+A_y B_y+A_z B_z$$
 Exemplo: se \(A=3a_x-4a_y+a_z\) e \(B=3a_x+2a_y-3a_z\) então:
 $$A\cdot B = (3)(3)+(-4)(2)+(1)(-3)= 9-8-3=-2$$
 </p>
+<p> Generalizando o produto escalar entre dois vetores \(A\) e \(B\) com \(N\) dimensões teremos:
+$$A\cdot B = \sum\limits_{i=1}\limits^{N} a_ib_i$$
+</p>
 <p>
 O Produto Escalar é comutativo e distributivo. Sendo assim, teremos: 
 $$A\cdot B = B\cdot A$$
 $$A\cdot (B+C) = A\cdot B +A\cdot C$$
-Além disso, teremos \(A\cdot A = |A|^2\) já que o ângulo entre um vetor e ele mesmo é zero e \(cos0^0 = 1\). Por padrão, consideramos que \(A^2 = |A|^2).
+Além disso, teremos \(A\cdot A = |A|^2\) já que o ângulo entre um vetor e ele mesmo é zero e \(cos(0) = 1\). Por padrão, consideramos que \(A^2 = |A|^2\).
 </p>
 <p>Os vetores unitários são ortogonais entre si, em todos os sistemas de coordenadas que usaremos neste artigo. Esta ortogonalidade garante duas propriedades interessantes do Produto Escalar, a saber:
 $$a_x\cdot a_y=a_x\cdot a_z=a_y\cdot a_z=0$$
