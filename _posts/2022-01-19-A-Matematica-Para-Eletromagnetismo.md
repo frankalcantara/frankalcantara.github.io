@@ -123,20 +123,47 @@ $$D_{pq} = (P_x-Q_x)a_x+(P_y-Q_y)a_y+(P_z-Q_z)a_z $$
 $$D_{pq} = (3-1)a_x+(3-(-2))a_y+((-1)-3)a_z$$
 $$D_{pq} = 2a_x+5a_y-4a_z$$
 </p>
+<p class="exp">
+Exemplo: Dados os pontos \(P_1(4,4,3)\), \(P_2(-2,0,5)\) e \(P_3(7,-2,1)\). Especifique o vetor \(A\) que se estende da origem até o ponto \(P_1\). Determine um vetor unitário que parte da origem e atinge o ponto médio do segmento de reta formado pelos pontos \(P_1\) e \(P_2\). Calcule o perímetro do triângulo formado pelos pontos \(P_1\), \(P_2\) e \(P_3\).
+<br><br>
+O vetor \(A\) será o vetor posição do ponto \(P_1(4,3,2)\). 
+$$A = 4a_x+4a_y+3a_z$$
+Para determine um vetor unitário que parte da origem e atinge o ponto médio do segmento de reta formado pelos pontos \(P_1\) e \(P_2\) precisaremos encontrar este ponto médio \(P_M\). 
+$$P_M=\frac{P_1+P_2}{2} =\frac{(4,4,3)+(-2,0,5)}{2}$$
+$$P_M=\frac{(2,4,8)}{2} = (1, 2, 4)$$
+$$P_M=1a_x+2a_y+4a_z)$$
+Para calcular o vetor unitário na direção do vetor \(P_M\) teremos:
+$$a_{P_M}=\frac{(1, 2, 4)}{|(1, 2, 4)|} = \frac{(1, 3, 4)}{\sqrt{1^2+2^2+4^2}} =0.22a_x+0.45a_y+0.87a_z$$
+Finalmente, para calcular o perímetro do triângulo formado por \(P_1(4,4,3)\), \(P_2(-2,0,5)\) e \(P_3(7,-2,1)\) precisaremos somar os módulos dos vetores distância ente \(P_1(4,3,2)\) e \(P_2(-2,0,5)\), \(P_2(-2,0,5)\) e \(P_3(7,-2,1)\) e \(P_3(7,-2,1)\) e \(P_1(4,3,2)\).
+$$|P_1P_2| =|(4,4,3)-(-2,0,5)|=|(6,4,-2)|=\sqrt{6^2+4^2+2^2}=7,48$$
+$$|P_2P_3| =|(-2,0,5)-(7,-2,1)|=|(-9,2,-4)|=\sqrt{9^2+2^2+4^2}=10,05$$
+$$|P_3P_1| =|(7,-2,1)-(4,4,3)|=|(3,-6,-2)|=\sqrt{3^2+6^2+6^2}=7$$
+Sendo assim o perímetro será: 
+$$|P_1P_2|+|P_2P_3|+|P_3P_1| =7,48+10,05+7=24.53$$
+</p>
 <h5>Produto Escalar</h5>
 <p>
 O Produto Escalar é uma operação entre dois vetores que resulta em um valor escalar. Um valor escalar é um número do conjuntos dos números reais \(\Bbb{R}\) representa uma quantidade invariante em todas as transformações rotacionais possíveis. Números escalares representam, na física, grandezas que não precisam das informações de direção e sentido para seu entendimento. Observe que o componentes ortogonais e individuais da representação algébrica de um vetor não são escalares. Estes componentes são sensíveis as operações de transformação vetorial, como veremos. 
 </p>
 <p>
-Dados os vetores \(A\) e \(B\), <b>o produto escalar entre \(A\) e \(B\) resulta em uma quantidade escalar<b> e será representado por \(A\cdot B\). Geometricamente o produto escalar entre \(A\) e \(B\) será dado por: 
-$$A\cdot B = |A||B|cos\theta_{AB}$$
+Dados os vetores \(A\) e \(B\), <b>o produto escalar entre \(A\) e \(B\) resulta em uma quantidade escalar</b> e será representado por \(A\cdot B\). Trigonometricamente o produto escalar entre \(A\) e \(B\) será dado por: 
+$$A\cdot B = |A||B|cos(\theta_{AB})$$
 O que corresponde a projeção do vetor \(A\) em \(B\). O produto escalar entre dois vetores \(A\) e \(B\) é o produto entre o produto das magnitudes destes vetores e o cosseno do menor ângulo entre eles. Algebricamente, se \(A=A_x a_x+A_y a_y+A_z a_z\) e \(B=B_x a_x+B_y a_y+B_z a_z\) então teremos:
 $$A\cdot B = A_x B_x+A_y B_y+A_z B_z$$
 </p>
 <p class="exp">
-Exemplo: se \(A=3a_x-4a_y+a_z\) e \(B=3a_x+2a_y-3a_z\) então:
-$$A\cdot B = (3)(3)+(-4)(2)+(1)(-3)= 9-8-3=-2$$
+Exemplo: dados os vetores \(A=3a_x+4a_y+a_z\) e \(B=a_x+2a_y-5a_z\) encontre o ângulo \(\theta \) entre \(A\) e \(B\).
+<br><br>
+Para calcular o ângulo vamos usar a forma trigonométrica do Produto Escalar: \(A\cdot B =|A||B|cos(\theta)\). Logo vamos precisar dos módulos dos vetores e do Produto Escalar entre eles. Sendo assim: 
+$$A\cdot B = (3,4,1)\cdot(1,2,-5) = (3)(1)+(4)(2)+(1)(-5)=6$$
+$$|A| = |(3,4,1)|=\sqrt{3^2+4^2+1^2}=5,1$$
+$$|B| = |(1,2,-5)|=\sqrt{1^2+2^2+5^2}=5,48$$
+Com o Produto Escalar e os módulos dos vetores podemos aplicar \(A\cdot B =|A||B|cos(\theta)\) logo
+$$6 =(5,1)(5,48)cos(\theta) \therefore cos(\theta) = \frac{6}{27,95}=0,2147$$
+$$\theta = arccos(0,2147)=77,6^0$$
+
 </p>
+
 <p> Generalizando o produto escalar entre dois vetores \(A\) e \(B\) com \(N\) dimensões teremos:
 $$A\cdot B = \sum\limits_{i=1}\limits^{N} a_ib_i$$
 </p>
@@ -166,6 +193,7 @@ Usando o <i>Delta de Kronecker</i> podemos escrever as propriedades dos componen
 $$a_\mu \cdot a_\upsilon = \delta_{\mu \upsilon}$$
 Que será útil na representação computacional destes vetores e no entendimento de transformações vetoriais em espaços com mais de \(3\) dimensões.
 </p>
+
 <h5>Produto Vetorial</h5>
 <p>O Produto Vetorial entre dois vetores \(A\) e \(B\), representado por \(A\times B\) é um vetor cuja magnitude representa a área do paralelogramo formado por \(A\) e \(B\) e cuja direção é perpendicular ao plano deste paralelogramo, \(a_n\). Geometricamente o Produto Vetorial será dado por: 
 $$A\times B = |A||B|sen\theta_{AB}\space a_n$$
