@@ -494,6 +494,7 @@ blockquote {
   position: relative;
   font-weight: bolder;
   text-align: left;
+  line-height: 152%;
 }
 
 .listrelated .card {
