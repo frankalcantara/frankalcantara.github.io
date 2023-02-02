@@ -487,16 +487,14 @@ blockquote {
   padding: 40px 0 46px;
   position: relative;
 }
-
 .exp{
   background-color: #fbfbfb;
   padding: 10px !important;
   position: relative;
-  font-weight: bolder;
+  font-weight: bold;
   text-align: left;
   line-height: 152%;
 }
-
 .listrelated .card {
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.05);
   border: 0;
