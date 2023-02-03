@@ -26,7 +26,7 @@ Considere este texto como o primeiro passo da sua jornada. Tenha coragem,calma e
 <h4>Vetores, tudo depende dos vetores</h4>
 
 <p>
-Vetores são abstrações matemáticas usadas para o entendimento de grandezas que precisam das informações de magnitude, direção e sentido para sua definição e uso. Estas grandezas, as grandezas vetoriais, são a base do estudo do eletromagnetismo. Geometricamente, um vetor será representado por uma seta, com origem, destino e comprimento. Na física moderna os vetores usamos os vetores como definido por <a href="https://en.wikipedia.org/wiki/Paul_Dirac" target="_blanck">Dirac (1902-1984) (1839–1903)</a>, que chamamos de Vetores Ket, ou simplesmente ket. Neste artigo utilizaremos a forma diádica de representação vetorial como definida por <a href="https://en.wikipedia.org/wiki/Josiah_Willard_Gibbs" target="_blanck">Willard Gibbs (1839–1903)</a> no final do Século XIX. Representaremos os vetores \(A, B, C, ...\) como elementos de um espaço vetorial \(V\) em três dimensões desde que este espaço satisfaça as seguintes condições: 
+Vetores são abstrações matemáticas usadas para o entendimento de grandezas que precisam das informações de magnitude, direção e sentido para sua definição. Estas grandezas, que chamamos de grandezas vetoriais, são a base do estudo do eletromagnetismo. Geometricamente, um vetor será representado por uma seta, com origem, destino e comprimento. Na física moderna usamos os vetores como definido por <a href="https://en.wikipedia.org/wiki/Paul_Dirac" target="_blanck">Dirac (1902-1984) (1839–1903)</a>, que chamamos de Vetores Ket, ou simplesmente ket. Neste artigo utilizaremos a forma diádica de representação vetorial como definida por <a href="https://en.wikipedia.org/wiki/Josiah_Willard_Gibbs" target="_blanck">Willard Gibbs (1839–1903)</a> no final do Século XIX, que é mais adequada ao estudo do Eletromagnetismo Clássico. Neste artigo representaremos os vetores \(A, B, C, ...\) como elementos de um espaço vetorial \(V\) em três dimensões desde que este espaço satisfaça as seguintes condições: 
 <ol>
     <li>o espaço vetorial \(V\) seja fechado em relação a adição: para cada par de vetores \(A\) e \(B\) pertencentes a \(V\) existe um, e somente um, vetor \(C\) que representa a soma de \(A\) e \(B\). Tal que: \(\exists A \in V\space\space\space \wedge\space\space\space \exists B \in V \space\space|\space\space \exists A+B=C \in V\).</li>
     <li>A adição seja associativa: \((A+B)+C = A+(B+C)\)</li>
@@ -37,7 +37,7 @@ Vetores são abstrações matemáticas usadas para o entendimento de grandezas q
 </ol> 
 </p>
 <p>
-O conjunto dos números reais \(\Bbb{R}\) será considerado um subconjunto do conjunto dos números imaginários \(\Bbb{C}\), e representará todos os números imaginários de parte imaginária \(i=0\). A representação algébrica dos vetores definida por <a href="https://en.wikipedia.org/wiki/Josiah_Willard_Gibbs" target="_blanck">Willard Gibbs (1839–1903)</a> requer a existência de componentes vetoriais para cada um dos eixos do sistema de coordenadas escolhido. No caso do Sistema de Coordenadas Cartesianas, espaço formado pelas coordenadas \((x,y.z)\), teremos três vetores que formarão esta base de representação. Estes vetores serão vetores unitários.
+O conjunto dos números reais \(\Bbb{R}\) é um subconjunto do conjunto dos números imaginários \(\Bbb{C}=\{a+bi\space\space a.b \in \Bbb{R}\}\), e representará todos os números imaginários de parte imaginária é igual a zero, \(\Bbb{R}=\{a+bi \space\space|\space\space a.b \in \Bbb{R}\wedge b=0\}\). A representação algébrica dos vetores definida por <a href="https://en.wikipedia.org/wiki/Josiah_Willard_Gibbs" target="_blanck">Willard Gibbs (1839–1903)</a> requer a existência de componentes vetoriais para cada um dos eixos do sistema de coordenadas escolhido. No caso do Sistema de Coordenadas Cartesianas, espaço formado pelas coordenadas \((x,y.z)\), teremos três vetores que formarão esta base de representação. Estes vetores serão os vetores unitários \((a_x,a_y,a_z)\), que estarão orientados segundo os eixos cartesianos com comprimento unitário.
 </p>
 <h5>Vetor Unitário</h5>
 <p>Um vetor \(B\) qualquer tem magnitude, direção e sentido. A magnitude, também chamada de intensidade, ou módulo, será representada por \(|B|\). Definiremos um vetor unitário \(a_B\) como:
@@ -191,7 +191,7 @@ $$
 <p>
 Usando o <i>Delta de Kronecker</i> podemos escrever as propriedades dos componentes ortogonais unitários em relação ao produto escalar como: 
 $$a_\mu \cdot a_\upsilon = \delta_{\mu \upsilon}$$
-Que será útil na representação computacional destes vetores e no entendimento de transformações vetoriais em espaços com mais de \(3\) dimensões.
+Que será útil na representação computacional de vetores e no entendimento de transformações vetoriais em espaços com mais de \(3\) dimensões.
 </p>
 
 <h5>Produto Vetorial</h5>
