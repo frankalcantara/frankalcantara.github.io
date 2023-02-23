@@ -491,9 +491,8 @@ blockquote {
   background-color: #fbfbfb;
   padding: 10px !important;
   position: relative;
-  font-weight: bold;
   text-align: left;
-  line-height: 152%;
+  line-height: 130%;
 }
 .listrelated .card {
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.05);
