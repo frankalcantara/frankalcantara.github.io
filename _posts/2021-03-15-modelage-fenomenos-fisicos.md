@@ -14,6 +14,7 @@ Essa disciplina é ofertada aos estudantes ingressantes no curso de Bacharelado 
 <h2>Material de apoio às aulas</h2>
 
 <ol>
+    <li><a href="https://frankalcantara.com/Aulas/Fenomenos/out/Aula1.html#/" target="_blank">Aula 1 - Apresentação da disciplina, ambiente de estudo e ferramentas.</a></li>
     <li><a href="https://frankalcantara.com/Aulas/Fenomenos/out/Aula2.html#/" target="_blank">Aula 2 - Ambientes de desenvolvimento.</a></li>
     <li><a href="https://frankalcantara.com/Aulas/Fenomenos/out/Aula3.html#/" target="_blank">Aula 3 - Funções Exponenciais.</a></li>
     <li><a href="https://frankalcantara.com/Aulas/Fenomenos/out/Aula4.html#/" target="_blank">Aula 4 - Funções Logarítmicas e Aplicações.</a></li>
