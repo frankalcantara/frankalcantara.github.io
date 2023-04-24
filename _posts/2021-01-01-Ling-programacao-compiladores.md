@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Linguagem de programação e Compiladores"
+title: "Linguagens Formais e Compiladores"
 author: Frank
 categories: [disciplina]
 tags: [interpretadores, linguagem natural, inteligência artificial, parsers]
