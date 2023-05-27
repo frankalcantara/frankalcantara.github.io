@@ -161,7 +161,6 @@ $$|B| = |(1,2,-5)|=\sqrt{1^2+2^2+5^2}=5,48$$
 Com o Produto Escalar e os módulos dos vetores podemos aplicar \(A\cdot B =|A||B|cos(\theta)\) logo
 $$6 =(5,1)(5,48)cos(\theta) \therefore cos(\theta) = \frac{6}{27,95}=0,2147$$
 $$\theta = arccos(0,2147)=77,6^0$$
-
 </p>
 
 <p> Generalizando o produto escalar entre dois vetores \(A\) e \(B\) com \(N\) dimensões teremos:
@@ -243,12 +242,54 @@ C_x & C_y & C_z
 \end{vmatrix}$$
 Na matrix que usamos para calcular o produto escalar triplo não estão colocados os vetores unitários do sistema de coordenadas o resultado desta operação será um escalar. 
 </p>
-<p>O resultado do Produto Escalar Triplo é o volume de um paralelepípedo formado pelos três vetores envolvidos na operação. Observe que este volume pode ser negativo, ou não, dependendo apenas da ordem dos vetores neste produto. Assim, seria mais correto dizer que o resultado do Produto Escalar Triplo é um <i>pseudoescalar</i>. Em álgebra linear, um pseudoescalar é um valor que pode mudar o sinal devido a alguma mudança de sinal de uma das coordenadas espaciais. No nosso caso, o volume pode mudar de sinal de acordo com a ordem dos vetores na operação de Produto Escalar Triplo. Ainda assim, esta mudança de sinal não inclui qualquer informação de direção ou sentido para o resultado do Produto Escalar Triplo.</p>
+<p>O resultado do Produto Escalar Triplo é o volume de um paralelepípedo formado pelos três vetores envolvidos na operação. Observe que este volume pode ser negativo, ou não, dependendo apenas da ordem dos vetores neste produto. Assim, podemos  dizer que o resultado do Produto Escalar Triplo é um <i>pseudoescalar</i>. Em álgebra linear, um pseudoescalar é um valor que pode mudar o sinal devido a alguma mudança de sinal de uma das suas coordenadas espaciais. No nosso caso, o volume pode mudar de sinal de acordo com a ordem dos vetores na operação de Produto Escalar Triplo. Ainda assim, esta mudança de sinal não inclui qualquer informação de direção ou sentido para o resultado do Produto Escalar Triplo.</p>
 
 <h5>Produto Vetorial Triplo</h5>
 <p>Considerando os vetores \(A\), \(B\) e \(B\) definiremos o produto vetorial triplo como:
 $$A\times (B\times C) = B(A\cdot C)- C$$
+</p>
+<p class="exp">
+Considere os vetores \(A = ( 1, 2, 3 )\), \(B = ( 2, 3, 1 )\) e \(C = ( 3, 1, 2 )\). Vamos calcular o produto vetorial triplo \( A \times (B \times C) \).
+
+Calculando o produto vetorial de \(B\) e \(C\)
+
+$$B \times C = \begin{vmatrix} a_x & a_y & a_z \\ 2 & 3 & 1 \\ 3 & 1 & 2 \end{vmatrix} = (3a_x - 7a_y + 7a_z)$$
+
+Multiplicando o vetor \(A\) pelo resultado do passo 1
+
+$$A \times (B \times C) = \begin{vmatrix} a_x & a_y & a_z \\ 1 & 2 & 3 \\ 3a_x & -7a_y & 7a_z \end{vmatrix} = a_x\begin{vmatrix} 2 & 3 \\ -7 & 7 \end{vmatrix} - a_y\begin{vmatrix} 1 & 3 \\ -7 & 7 \end{vmatrix} + a_z\begin{vmatrix} 1 & 2 \\ -7 & -7 \end{vmatrix}$$
+
+Resolvendo as determinantes
+
+$$\begin{aligned} \begin{vmatrix} 2 & 3 \\ -7 & 7 \end{vmatrix} &= (2 \times 7) - (3 \times (-7)) = 35 + 21 = 56 \\ \begin{vmatrix} 1 & 3 \\ -7 & 7 \end{vmatrix} &= (1 \times 7) - (3 \times (-7)) = 7 + 21 = 28 \\ \begin{vmatrix} 1 & 2 \\ -7 & -7 \end{vmatrix} &= (1 \times (-7)) - (2 \times (-7)) = -7 + 14 = 7 \end{aligned}$$
+
+Simplificando
+
+$$A \times (B \times C) = a_x(56) - a_y(28) + a_z(7) = 56a_x - 28a_y + 7a_z$$
+
+Portanto, o produto vetorial triplo \(A \times (B \times C)\) é igual a \(56a_x - 28a_y + 7a_z\).
 
 </p>
-<p>Grandezas escalares formam Campos Escalares no espaço que podem ser definidos apenas como uma função \(f(x,y,z)\) onde \(x,y,z \in \Bbb{R}^3\). Grandezas vetoriais formam Campos Vetoriais que serão definidos por funções vetoriais \(V(x,y,z)\).
+
+<h4>Campos Vetoriais</h4>
+<p>Grandezas escalares formam Campos Escalares no espaço que podem ser definidos apenas como uma função \(f(x,y,z)\) onde \(x,y,z \in \Bbb{R}^3\). Grandezas vetoriais formam Campos Vetoriais que serão definidos por funções vetoriais \(V(x,y,z)\). Ou, em outras palavras representamos Campos Vetoriais no espaço como uma função de três variáveis. 
+</p>
+<p>
+Campos vetoriais são uma abstração matemática e visual de funções vetoriais que descrevem como vetores variam no espaço. Este espaço pode ser definido em qualquer número de dimensões maior que \(2\). Em outras palavras, um Campo Vetorial é uma função que associa um vetor a cada ponto de um espaço especifico, representando uma grandeza com direção e magnitude. 
+Campos vetoriais são comumente usados para representar fenômenos físicos, como forças em mecânica, campos elétricos e magnéticos em eletromagnetismo, e fluxos de fluidos em dinâmica dos fluidos. Uma função vetorial será representada como:
+
+$$
+\mathbf{F}(x, y, z) = (P(x, y, z), Q(x, y, z), R(x, y, z))
+$$
+
+onde \(\mathbf{F}\) é o Campo Vetorial, \((x, y, z)\) são as coordenadas de um ponto no espaço e \(P\), \(Q\) e \(R\) são funções escalares que dependem das coordenadas \((x, y, z)\). O vetor resultante em cada ponto terá componentes nas direções \(x\), \(y\) e \(z\) representadas pelos vetores unitários \((a_x, a_y, a_z)\).
+
+Em um espaço bidimensional, a função vetorial terá apenas componentes \(x\) e \(y\):
+
+$$
+\mathbf{F}(x, y) = (P(x, y), Q(x, y))
+$$
+
+Um Campo Vetorial pode ser visualizado através de gráficos de vetores, onde cada vetor é representado por uma reta orientada, geralmente com uma seta, com direção e magnitude. Estes gráficos são complexos e, geralmente, demandam um tempo grande para a interpretação do Campo Vetorial. Uma forma mais simples é definir um ponto de testes no espaço e traçar poucas linhas entre a origem do Campo Vetorial e este ponto.
+
 </p>
