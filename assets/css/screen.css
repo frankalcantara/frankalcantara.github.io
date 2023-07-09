@@ -335,15 +335,13 @@ span.post-read-more a:hover {
 
 .article-post {
   font-family: Merriweather;
-  font-size: 1.1rem;   
+  font-size: 1.1rem;
   line-height: 1.84;
   color: rgba(0, 0, 0, 0.8);
 }
 
 blockquote {
-  border-left-color: #2b92f1;
-  border-left-width: 4px;
-  border-left-style: solid;
+  border-left: 4px solid color #2b92f1;
   padding: 0 20px;
   font-style: italic;
   color: rgba(0, 0, 0, 0.5);
