@@ -1,19 +1,24 @@
 ---
 layout: post
-title: "Programação Funcional"
+title: Programação Funcional
 author: Frank de Alcantara
-categories: [disciplina]
-tags: [programação, funcional, paradigmas de programação]
+categories:
+  - disciplina
+tags:
+  - programação
+  - funcional
+  - paradigmas de programação
 image: assets/images/funcional.jpg
 featured: false
 hidden: true
 rating: 3.5
+slug: programação-funcional
 ---
 
 Desenvolver soluções computacionais segundo o Paradigma da Programação Funcional, utilizando também técnicas iterativas do Paradigma de Programação Imperativa. Decidir em que situações deve adotar técnicas funcionais ou imperativas para a resolução de problemas. Implementar conceitos computacionais por meio de linguagens funcionais e imperativas, cálculo lambda, funções de ordem superior, polimorfismo e programação recursiva e iterativa.
 
-<h4>Programação Funcional</h4>
- 
+# Programação Funcional
+
  <ol>
        <li><a href="https://frankalcantara.com/Aulas/Funcional/out/Aula1.html#/" target="_blanck">Apresentação da disciplina, história e conceitos básicos.</a></li>
        <li><a href="https://frankalcantara.com/Aulas/Funcional/out/Aula2.html#/" target="_blanck">Introdução ao Cálculo Lambda.</a></li>
