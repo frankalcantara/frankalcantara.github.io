@@ -341,7 +341,9 @@ span.post-read-more a:hover {
 }
 
 blockquote {
-  border-left: 4px solid color #2b92f1;
+  border-left-width: 4px;
+  border-left-color: #2b92f4;
+  border-left-style: solid;
   padding: 0 20px;
   font-style: italic;
   color: rgba(0, 0, 0, 0.5);
