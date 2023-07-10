@@ -66,7 +66,7 @@ A seta, uma extensão de seu ser, representa sua sua orientação. Aponta o cami
 
 As grandezas vetoriais são como o vento, cuja direção e força você sente, mas cuja essência não se pode segurar. Elas são como o rio, cujo fluxo e direção moldam a paisagem. São essenciais para entender o mundo em movimento, o mundo de forças, velocidades e acelerações. Elas dançam nas equações do eletromagnetismo, desenham os padrões da física e guiam os marinheiros na imensidão do desconhecido. No mar da compreensão, grandezas vetoriais são a bússola e o vento, dando não apenas escala, mas também orientação e sentido à nossa busca pelo conhecimento. Como é belo o idioma de Machado de Assis, mas, de tempos em tempos, temos que recorrer as imagens.
 
-![Três vetores no plano cartesiano](/assets/images/VetorPlano1.jpeg){:class="lazyimg"}
+![Três vetores no plano cartesiano](/assets/images/vetorPlano1.jpeg){:class="lazyimg"}
 
 Toda esta poesia pode ser resumida na geometria de uma seta com origem e destino em um espaço multidimensional contendo informações de direção, sentido e intensidade. Três setas, três vetores, $$A$$, $$B$$ e $$C$$, em um plano. Nesta jornada, não seremos limitados pela frieza da geometria. Buscamos a grandeza da álgebra. Na álgebra vetores são representados por operações entre outros vetores.
 
