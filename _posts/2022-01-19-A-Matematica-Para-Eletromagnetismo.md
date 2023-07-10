@@ -64,9 +64,11 @@ As grandezas vetoriais, por outro lado são complexas, diversas e intrigantes. V
 
 A seta, uma extensão de seu ser, representa sua sua orientação. Aponta o caminho para a verdade, mostrando não apenas o quanto, mas também o onde. Seu indica sua magnitude, o quanto, sua essência. Assim vetores escondem intensidade, direção e sentido em uma única entidade, fugaz e intrigante.
 
-As grandezas vetoriais são como o vento, cuja direção e força você sente, mas cuja essência não se pode segurar. Elas são como o rio, cujo fluxo e direção moldam a paisagem. São essenciais para entender o mundo em movimento, o mundo de forças, velocidades e acelerações. Elas dançam nas equações do eletromagnetismo, desenham os padrões da física e guiam os marinheiros na imensidão do desconhecido. No mar da compreensão, grandezas vetoriais são a bússola e o vento, dando não apenas escala, mas também orientação e sentido à nossa busca pelo conhecimento.
+As grandezas vetoriais são como o vento, cuja direção e força você sente, mas cuja essência não se pode segurar. Elas são como o rio, cujo fluxo e direção moldam a paisagem. São essenciais para entender o mundo em movimento, o mundo de forças, velocidades e acelerações. Elas dançam nas equações do eletromagnetismo, desenham os padrões da física e guiam os marinheiros na imensidão do desconhecido. No mar da compreensão, grandezas vetoriais são a bússola e o vento, dando não apenas escala, mas também orientação e sentido à nossa busca pelo conhecimento. Como é belo o idioma de Machado de Assis, mas, de tempos em tempos, temos que recorrer as imagens.
 
-Toda esta poesia pode ser resumida na geometria de uma seta com origem e destino em um espaço multidimensional contendo informações de direção, sentido e intensidade. Não seremos limitados pela frieza da geometria. Buscamos a grandeza da álgebra. Na álgebra vetores são representados por operações entre outros vetores.
+![Três vetores no plano cartesiano](/assets/images/VetorPlano1.jpeg){:class="lazyimg"}
+
+Toda esta poesia pode ser resumida na geometria de uma seta com origem e destino em um espaço multidimensional contendo informações de direção, sentido e intensidade. Três setas, três vetores, $$A$$, $$B$$ e $$C$$, em um plano. Nesta jornada, não seremos limitados pela frieza da geometria. Buscamos a grandeza da álgebra. Na álgebra vetores são representados por operações entre outros vetores.
 
 Na física moderna usamos os vetores como definido por [Dirac](https://en.wikipedia.org/wiki/Paul_Dirac) (1902-1984), que chamamos de Vetores Ket, ou simplesmente ket. Não aqui, pelo menos não por enquanto. Aqui utilizaremos a representação vetorial como definida por [Willard Gibbs](https://en.wikipedia.org/wiki/Josiah_Willard_Gibbs) (1839–1903) no final do Século XIX. Adequada ao estudo clássico do Eletromagnetismo. O estudo das forças que tecem campos vetoriais que abraçam a própria estrutura do Universo. Invisíveis porém implacáveis.
 
@@ -217,7 +219,11 @@ $$-1A = -A$$
 
 Olhe para os pássaros no céu. Os vetores são como o rastro de um pássaro no céu, mostrando não apenas quão longe voou, mas também a direção que escolheu. Representam forças, esses ventos invisíveis que movem o mundo, que também são assim. Eles têm tamanho e direção, forças são vetores no universo da Álgebra Linear.
 
-E assim como os pássaros no céu, os vetores também podem se juntar, ou se afastar. A soma, a subtração, fazem parte do seu voo. Alguns podem achar útil imaginar isso, recorrendo a geometria, como um paralelogramo, uma forma com lados paralelos que mostra como um vetor soma ao outro. Eu não vou te levar para um passeio no mundo das formas e linhas, não aqui. Mas lembre-se que a geometria, embora silenciosa e imóvel, sempre está lá, embaixo de tudo, o esqueleto invisível que dá forma ao nosso mundo.
+E assim como os pássaros no céu, os vetores também podem se juntar, ou se afastar. A soma, a subtração, fazem parte do seu voo. Alguns podem achar útil imaginar isso, recorrendo a geometria, como um paralelogramo, uma forma com lados paralelos que mostra como um vetor soma ao outro.
+
+![Soma de Vetores com a Regra do Paralelogramo](/assets/images/SomaVetores.jpeg){:class="lazyimg"}
+
+Eu não vou lhe guiar em um passeio pelo mundo das formas e linhas, não aqui, não agora. Mas lembre-se que a geometria, embora silenciosa e imóvel, sempre está lá, embaixo de tudo, o esqueleto invisível que dá forma ao nosso mundo.
 
 A matemática irascível, nos força a dizer que o espaço vetorial $$\textbf V$$ é fechado em relação a soma de vetores. A soma de vetores é feita componente a componente, paulatinamente. Assim, se considerarmos os vetores $$A$$ e $$B$$ poderemos encontrar um vetor $$C$$ que seja a soma de $$A$$ e $$B$$ representada por $$C=A+B$$ por:
 
@@ -676,12 +682,24 @@ Então, mesmo que a identidade de Jacobi possa parecer um conjunto abstrato de s
 
 Quando olhamos as grandezas escalares, traçamos Campos Escalares. Como uma planície aberta, eles se estendem no espaço, sem direção, mas com magnitude, definidos por uma função \(f(x,y,z)\), onde \(x\), \(y\), \(z\) pertencem a um universo de triplas de números reais. Agora, para as grandezas vetoriais, moldamos Campos Vetoriais, definidos por funções vetoriais \(V(x,y,z)\), onde \(x\), \(y\), \(z\) são componentes vetoriais. Em outras palavras, representamos Campos Vetoriais no espaço como um sistema onde cada ponto do espaço puxa um vetor.
 
-Campos vetoriais, essas criaturas de matemática e visualização, narram a mudança dos vetores no espaço, como o faroeste muda ao longo da trilha. Este espaço é um palco aberto para qualquer número de dimensões maior que \(2\). Um Campo Vetorial é como um guia, levando a cada ponto do espaço um vetor que conta sua própria história de direção e magnitude. Um guia que surge da aplicação matemática da função que define o Campo Vetorial.
+Imagine-se em um rio, a correnteza o arrastando, conduzindo seu corpo. A correnteza aplica uma força sobre seu corpo. O rio tem uma velocidade, uma direção. Em cada ponto, ele te empurra de uma forma diferente. Isso é um campo vetorial. Ele é como um mapa, com forças distribuídas, representadas por setas desenhadas para te orientar. Mas essas setas não são meras orientações. Elas têm um comprimento, uma magnitude, e uma direção e um sentido. Elas são vetores. E o mapa completo, deste rio com todas as suas setas, descreverá um campo vetorial.
+
+Em cada ponto no espaço, o campo vetorial tem um vetor. Os vetores podem variar de ponto para ponto. Pense de novo no rio. Em alguns lugares, a correnteza é forte e rápida. Em outros, é lenta e suave. Cada vetor representará essa correnteza em um ponto específico. E o campo vetorial representará o rio todo.
 
 Frequentemente, Campos Vetoriais são chamados para representar cenas do mundo físico: a ação das forças na mecânica, o desempenho dos campos elétricos e magnéticos no Eletromagnetismo, o fluxo de fluidos na dinâmica dos fluidos. Em cada ponto, as coordenadas \((x, y, z)\) desempenham o papel de protagonistas, ao lado das funções escalares \(P\), \(Q\) e \(R\). O vetor resultante no palco tem componentes nas direções \(x\), \(y\) e \(z\), representadas pelos atores coadjuvantes, os vetores unitários \((a_x, a_y, a_z)\).
 
-Se nosso palco, o espaço que estamos estudando, for bidimensional, teremos apenas os componentes \(x\) e \(y\) e o campo vetorial será definido por:
+Imaginar um campo vetorial no palco do espaço tridimensional é tarefa árdua que requer visão espacial, coisa para poucos. Para aqueles que já trilharam os caminhos árduos da geometria e do desenho tridimensional Se nosso palco for bidimensional, poderemos colocar os vetores em um plano, selecionar alguns pontos e traçar estes vetores. Neste caso voltaremos nossa atenção e esforço para trabalhar com apenas os componentes \(x\) e \(y\) e o campo vetorial será definido por uma função dada por:
 
 $$\mathbf{F}(x, y) = (P(x, y), Q(x, y))$$
 
+Uma função, uma definição direta, e simples, ainda assim, sem nenhum apelo visual. Mas somos insistentes e estamos estudando matemática, a rota que nos levará ao horizonte do Eletromagnetismo. Que nasce na carga elétrica, fenômeno simples, estrutural e belo que cria forças que se espalham por todo universo. Vamos pegar duas cargas de mesma intensidade e colocar no nosso palco.
+
+![Campo Vetorial devido a duas cargas elétricas](/assets/images/CampoVetorial1.jpeg){:class="lazyimg"}
+
+Agora assim, agora podemos ver o Campo Vetorial. Ainda que simples, com poucos pontos selecionados. Duas cargas, pontos representados por círculos, um vermelho, quente, para indicar a carga positiva outro azul, frio, para indicar a carga negativa. Treine a vista. Seja cuidadoso, detalhista.
+
+O Campo Elétrico, o Campo Vetorial que a figura apresenta, surge, na força da própria definição, na carga elétrica positiva por isso os vetores apontam para fora, para longe desta carga, divergem. E são drenados pela carga elétrica negativa, as setas apontam diretamente para ela, convergem. Em todos os pontos que escolhi para plotar em todo o espaço do plano desenhado, você pode ver o efeito das forças criadas por esta carga. Em alguns pontos um vetor está exatamente sobre o outro, eles se anulam, em todos os outros pontos do espaço se somam.
+
 Visualizar um Campo Vetorial é como assistir a uma peça, com cada vetor como um ator em um gráfico. Cada vetor é um personagem desenhado com uma linha direcionada, geralmente com uma seta, atuando com direção e magnitude. Mas essa peça é complexa e exige tempo e paciência para ser compreendida. Uma abordagem mais simples seria tomar um ponto de teste no espaço e desenhar algumas linhas entre a origem do Campo Vetorial e esse ponto, traçando assim os principais pontos da trama.
+
+O Campo Vetorial requer cuidado, carinho e atenção, ele está em todos os pontos do espaço. Contínuo e muitas vezes, infinito. Trabalhar com a continuidade e com o infinito requer mãos calejadas e fortes. Teremos que recorrer a Newton e [Leibniz](https://en.wikipedia.org/wiki/Gottfried_Wilhelm_Leibniz) e ao Cálculo Integral e Diferencial. Não tema! Ainda que muitos se acovardem frente a continuidade este não será nosso destino. Vamos conquistar integrais e diferenciais como [Odisseu](https://en.wikipedia.org/wiki/Odysseus) conquistou [Troia](https://en.wikipedia.org/wiki/Trojan_War), antes de entrar em batalha vamos afiar espadas, lustrar escudos e lanças, na forma de gradiente, divergência e rotacional.
