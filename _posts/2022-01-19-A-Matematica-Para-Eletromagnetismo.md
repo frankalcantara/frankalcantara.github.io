@@ -845,7 +845,7 @@ Em qualquer ponto \(P\) o gradiente é um vetor que aponta na direção da maior
 
 Nesta imagem é possível ver a variação do campo $$\mathbf{F}(x,y)$$ eu escolhi uma função em $$\mathbf{F}(x,y)$$ no domínio dos $$\mathbb{R}^2$$ por ser mais simples, toda a variação fica no domínio de $$z$$. Podemos plotar o gradiente na superfície criada pelo Campo Vetorial $$\mathbf{F}(x,y)$$.
 
-![Gráfico do Campo Vetorial ](/assets/images/Func1Grad2.jpeg){:class="lazyimg"}
+![Gráfico do Campo Vetorial ](/assets/images/func1Grad2.jpeg){:class="lazyimg"}
 
 Nesta imagem, a cada ponto, a cor da superfície foi definida de acordo com a intensidade do gradiente. Quanto menor esta intensidade, mais próximo do vermelho. Quanto maior, mais próximo do Azul.
 
