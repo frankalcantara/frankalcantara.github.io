@@ -22,13 +22,13 @@ keywords:
 
 Imagem de <a href="https://pixabay.com/users/asimina-1229333/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2773167">Asimina Nteliou</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2773167">Pixabay</a>
 
+O Eletromagnetismo é a lei, o ordenamento. Como uma divindade antiga que rege a existência e os movimentos do nosso universo. Duas forças, elétrica e magnética, em uma dança interminável, moldam tudo, de um grão de poeira a um oceano de estrelas, até o mesmo dispositivo que você usa para decifrar essas palavras deve sua existência e funcionamento ao Eletromagnetismo.
+
 > Este é um trabalho em andamento. Escrevo quando posso e posto quando quero. Falta Muito!
 
 > "Nesta longa vida eu aprendi que toda a nossa ciência se comparada com a realidade é primitiva e infantil. Ainda assim, <b>é a coisa mais preciosa que temos</b>." Albert Einstein
 
-O Eletromagnetismo é a lei, o ordenamento. Como uma divindade antiga que rege a existência e os movimentos do nosso universo. Duas forças, elétrica e magnética, em uma dança interminável, moldam tudo, de um grão de poeira a um oceano de estrelas, até o mesmo dispositivo que você usa para decifrar essas palavras deve sua existência e funcionamento ao Eletromagnetismo.
-
-Tratamos de linhas invisíveis de força que se entrelaçam, tangenciam e interferem umas nas outras, formando o tecido dos Cosmos e o fluxo da vida, tão real quanto a terra sob os pés ou o ar que respiramos, e como este último, invisíveis.
+Trataremos de linhas de força invisíveis que se entrelaçam, tangenciam e interferem umas nas outras, formando o tecido do Cosmos e o fluxo da vida, tão real quanto a terra sob os pés ou o ar que respiramos, e como este último, completamente invisíveis.
 
 O estudo do Eletromagnetismo será uma batalha própria, individual, dura. É a esperança lançar luz sobre o desconhecido, descobrir as regras que governam a vida e o universo, e então aproveitar essas regras para criar, para progredir, para sobreviver. Não é para os fracos de coração, nem para aqueles que buscam respostas fáceis. É para aqueles que não temem o desconhecido, para os que se levantam diante do abismo do desconhecido e dizem: "eu irei entender". É um desafio, uma luta, um chamado. E, como em qualquer luta, há perdas, há dor, mas também há vitórias, triunfos e, no final de tudo, compreensão. Esta é uma guerra que começou a milhares de anos, ainda que estejamos interessados apenas nas últimas batalhas, as mais recentes.
 
@@ -559,6 +559,8 @@ Cuide o negativo no segundo termo como cuidaria do leme do seu barco, sua vida d
 
 $$A\times B=(A_y B_z- A_z B_y)a_x-(A_x B_z-A_z B_x)a_y+(A_x B_y-A_y B_x)a_z$$
 
+Cuidado com os determinantes, o Chapeleiro não ficou louco por causa do chumbo, muito usado na fabricação de chapéus. Ficou louco [resolvendo determinantes](https://www.johndcook.com/blog/2023/07/10/lewis-carroll-determinants/). Talvez um exemplo afaste a insanidade tempo suficiente para você continuar lendo.
+
 <p class="exp">
 <b>Exemplo 8:</b> dados os vetores \(A=a_x+2a_y+3a_z\) e \(B=4a_x+5a_y-6a_z\). (a) Calcule o Produto Vetorial entre \(A\) e \(B\). (b) Encontre o ângulo \(\theta \) entre \(A\) e \(B\).
 <br><br>
@@ -680,7 +682,7 @@ Então, mesmo que a identidade de Jacobi possa parecer um conjunto abstrato de s
 
 # Campos Vetoriais
 
-Quando olhamos as grandezas escalares, traçamos Campos Escalares. Como uma planície aberta, eles se estendem no espaço, sem direção, mas com magnitude, definidos por uma função \(f(x,y,z)\), onde \(x\), \(y\), \(z\) pertencem a um universo de triplas de números reais. Agora, para as grandezas vetoriais, moldamos Campos Vetoriais, definidos por funções vetoriais \(V(x,y,z)\), onde \(x\), \(y\), \(z\) são componentes vetoriais. Em outras palavras, representamos Campos Vetoriais no espaço como um sistema onde cada ponto do espaço puxa um vetor.
+Quando olhamos as grandezas escalares, traçamos Campos Escalares. Como uma planície aberta, eles se estendem no espaço, sem direção, mas com magnitude, definidos por uma função $$\mathbf{f}(x,y,z)$$, onde $$x$$, $$y$$, $$z$$ pertencem a um universo de triplas de números reais. Agora, para as grandezas vetoriais, moldamos Campos Vetoriais, definidos por funções vetoriais $$(V(x,y,z)$$, onde $$x$, $y$$, $$z$$ são componentes vetoriais. Em outras palavras, representamos Campos Vetoriais no espaço como um sistema onde cada ponto do espaço puxa um vetor.
 
 Imagine-se em um rio, a correnteza o arrastando, conduzindo seu corpo. A correnteza aplica uma força sobre seu corpo. O rio tem uma velocidade, uma direção. Em cada ponto, ele te empurra de uma forma diferente. Isso é um campo vetorial. Ele é como um mapa, com forças distribuídas, representadas por setas desenhadas para te orientar. Mas essas setas não são meras orientações. Elas têm um comprimento, uma magnitude, e uma direção e um sentido. Elas são vetores. E o mapa completo, deste rio com todas as suas setas, descreverá um campo vetorial.
 
@@ -703,3 +705,150 @@ O Campo Elétrico, o Campo Vetorial que a figura apresenta, surge, na força da 
 Visualizar um Campo Vetorial é como assistir a uma peça, com cada vetor como um ator em um gráfico. Cada vetor é um personagem desenhado com uma linha direcionada, geralmente com uma seta, atuando com direção e magnitude. Mas essa peça é complexa e exige tempo e paciência para ser compreendida. Uma abordagem mais simples seria tomar um ponto de teste no espaço e desenhar algumas linhas entre a origem do Campo Vetorial e esse ponto, traçando assim os principais pontos da trama.
 
 O Campo Vetorial requer cuidado, carinho e atenção, ele está em todos os pontos do espaço. Contínuo e muitas vezes, infinito. Trabalhar com a continuidade e com o infinito requer mãos calejadas e fortes. Teremos que recorrer a Newton e [Leibniz](https://en.wikipedia.org/wiki/Gottfried_Wilhelm_Leibniz) e ao Cálculo Integral e Diferencial. Não tema! Ainda que muitos se acovardem frente a continuidade este não será nosso destino. Vamos conquistar integrais e diferenciais como [Odisseu](https://en.wikipedia.org/wiki/Odysseus) conquistou [Troia](https://en.wikipedia.org/wiki/Trojan_War), antes de entrar em batalha vamos afiar espadas, lustrar escudos e lanças, na forma de gradiente, divergência e rotacional.
+
+# Cálculo Vetorial
+
+Cálculo vetorial. Soa como algo saído de uma história de ficção científica. Mas é mais terra-a-terra do que podemos imaginar de longe. Trata-se uma técnica para lidar com quantidades que têm tanto magnitude quanto direção. Velocidade. Força. Fluxo de um rio, Campos Elétricos, Campos Magnéticos. Coisas que não apenas têm um tamanho, mas também uma direção. Não sei se já falei sobre isso grandezas vetoriais, representadas por vetores.
+
+A beleza do cálculo vetorial reside em sua capacidade de descrever o mundo físico de uma maneira profunda e significativa. Considere um campo de trigo balançando ao vento. O vento não está apenas soprando com uma certa força, mas também em uma certa direção. O cálculo vetorial nos permite entender coisas assim e transformá-las em ferramentas de inovação e sucesso.
+
+O cálculo vetorial é construído sobre três operações fundamentais: o gradiente, a divergência e o rotacional. O gradiente nos diz a direção e a taxa na qual uma quantidade está mudando. A divergência nos diz o quanto um campo está se espalhando de um ponto. E o rotacional nos dá uma medida da 'rotação' ou 'vorticidade' de um campo.
+
+Se tivermos uma função escalar $$\mathbf{F}$$, o gradiente de $$\mathbf{F}$$ será dado por:
+
+$$
+\nabla \mathbf{F} = \left( \frac{\partial \mathbf{F}}{\partial x}, \frac{\partial \mathbf{F}}{\partial y}, \frac{\partial \mathbf{F}}{\partial z} \right)
+$$
+
+E se tivermos um campo vetorial $$ \mathbf{F} = F_x a_x + F_y a_y + F_z a_x $$, a divergência de $$\mathbf{F}$$ é dada por:
+
+$$
+\nabla \cdot \mathbf{F} = \frac{\partial F_x}{\partial x} + \frac{\partial F_y}{\partial y} + \frac{\partial F_z}{\partial z}
+$$
+
+E o rotacional de $$ \mathbf{F}$$ é:
+
+$$
+\nabla \times \mathbf{F} = \left( \frac{\partial F_z}{\partial y} - \frac{\partial F_y}{\partial z} \right) a_x - \left( \frac{\partial F_z}{\partial x} - \frac{\partial F_x}{\partial z} \right) a_i + \left( \frac{\partial F_y}{\partial x} - \frac{\partial F_x}{\partial y} \right) a_z
+$$
+
+A única coisa que pode encher seus olhos de lágrimas é o sal trazido pela maresia, não o medo do Cálculo Vetorial. Então, não se intimide pelo cálculo vetorial. Ele é apenas conjunto de ferramentas, como um canivete suíço, que nos ajuda a explorar e entender o mundo ao nosso redor. Nós vamos abrir cada ferramenta deste canivete e aprender a usá-las.
+
+## Gradiente
+
+Imagine-se no topo de uma montanha, cercado por terreno acidentado. Seu objetivo é descer a montanha, mas o caminho não é claramente marcado. Você olha ao redor, tentando decidir para qual direção deve seguir.
+
+O gradiente é como uma bússola que indica a direção de maior inclinação. Se você seguir o gradiente, estará se movendo na direção de maior descida.
+
+Agora, vamos trazer um pouco de matemática para esta metáfora. Em um espaço de múltiplas dimensões (imagine uma montanha com muitos picos e vales, e você pode se mover em qualquer direção), o gradiente de uma função em um determinado ponto é um vetor que aponta na direção de maior aumento da função. Em outras palavras, **o gradiente é o vetor de derivadas parciais da função**.
+
+Se tivermos uma função $$\mathbf{F}(x, y)$$, o gradiente de $$\mathbf{F}$$ é dado por:
+
+$$
+\nabla \mathbf{F} = \left( \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y} \right)
+$$
+
+Assim como a bússola na montanha, o gradiente nos mostra a direção a seguir para maximizar (ou minimizar) a função. É uma ferramenta crucial em muitas áreas da matemática e da física, especialmente em otimização e aprendizado de máquina.
+
+$$
+\nabla \mathbf{F} = \left( \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z} \right)
+$$
+
+onde $$ \frac{\partial f}{\partial x} $$, $$ \frac{\partial f}{\partial y} $$, e $$ \frac{\partial f}{\partial z} $$ são as derivadas parciais de $$ \mathbf{F} $$ com respeito a $$ x $$, $$y$$, e $$z$$ respectivamente.
+
+**Derivadas parciais**. Só a frase pode fazer o coração bater mais rápido. Mas não há necessidade de temer. Elas são como velhos amigos que você ainda não conheceu.
+
+Imagine-se em uma grande pradaria. O vento está soprando, carregando consigo o cheiro da grama e da terra. Você está livre para caminhar em qualquer direção. Para o norte, onde o sol se põe, ou para o sul, onde a floresta começa. Cada passo que você dá muda a paisagem ao seu redor, mas de maneiras diferentes dependendo da direção em que você escolheu caminhar.
+
+A derivada parcial é apenas essa ideia, vestida com a roupa do cálculo. Ela apenas quer saber: "Se eu der um pequeno passo para o norte (ou seja, mudar um pouco $$x$$), como a paisagem (ou seja, nossa função) vai mudar?" Ou o mesmo para o sul, ou em qualquer outra direção que escolhermos.
+
+Então, em vez de temer as derivadas parciais, podemos vê-las como uma ferramenta útil. Uma bússola que nos ajuda a entender a terra sob nossos pés, a função que estamos explorando. Com elas, podemos entender melhor o terreno, saber para onde estamos indo e como chegar lá. E essa é uma coisa boa, não é?
+
+Uma derivada parcial de uma função de várias variáveis é a taxa na qual a função muda quando pequenas alterações são feitas em apenas uma das variáveis de entrada, mantendo todas as outras constantes. Isso é semelhante ao conceito de derivada em cálculo de uma variável, mas agora estamos considerando funções com mais de uma variável de entrada.
+
+Por exemplo, se temos uma função $$\mathbf{F}(x, y)$$, a derivada parcial de $$\mathbf{F}$$ em relação a $$x$$ (denotada por $$\frac{\partial \mathbf{F}}{\partial x}$$ mede a taxa de variação de $$\mathbf{F}$$ em relação a pequenas mudanças em $$x$$, mantendo $$y$$ constante. Da mesma forma, $$\frac{\partial \mathbf{F}}{\partial y}$$ mede a taxa de variação de $$\mathbf{F}$$ em relação a pequenas mudanças em $$y$$, mantendo $$x$$ constante. Em três dimensões, a derivada parcial em relação uma das dimensões é a derivada de $$\mathbf{F}$$ enquanto mantemos as outras constantes. Nada mais que a repetição, dimensão a dimensão da derivada em relação a uma dimensão enquanto as outras são constantes.
+
+**O gradiente mede a taxa em que o Campo Vetorial varia em uma determinada direção.** Para clarear, jogar luz, esclarecer, tirar dúvidas, nada melhor que um exemplo.
+
+<p class="exp">
+<b>Exemplo 9:</b> considerando o Campo Vetorial dado por \(\mathbf{F}(x,y) = 10sin(\frac{x^2}{5})a_x+4ya_y\), (a) calcule a intensidade do vetor no ponto \(P(2,3)\), (b) o gradiente deste campo no ponto \(P\).  
+<br><br>
+<b>Solução:</b><br>
+
+(a) O vetor em um ponto é óbvio, trata-se apenas da aplicação das coordenadas do ponto desejado na função. Sendo assim:
+
+$$\mathbf{F}(x,y) = 10sin(\frac{x^2}{5})+4y$$
+
+$$\mathbf{F}(2,3) = 10sin(\frac{2^2}{5})a_x+4(3)a_y$$
+
+$$\mathbf{F}(2,3) = 7.17356a_x+12a_y$$
+
+(b) agora precisamos calcular o gradiente. O gradiente de uma função \(\mathbf{F}(x, y)\) é um vetor que consiste nas derivadas parciais da função com respeito a cada uma de suas variáveis. Neste caso, a função é \(\mathbf{F}(x, y) = 10\sin\left(\frac{x^2}{5}\right) + 4y\).
+
+Vamos calcular as derivadas parciais de \(\mathbf{F}\) com respeito a \(x\) e \(y\), passo a passo:
+
+Primeiro, a derivada parcial de \(F\) com respeito a \(x\) é dada por:
+
+\[
+\frac{\partial \mathbf{F}}{\partial x} = \frac{\partial}{\partial x} \left[10\sin\left(\frac{x^2}{5}\right) + 4y\right]
+\]
+
+Nós podemos dividir a expressão em duas partes e calcular a derivada de cada uma delas separadamente. A derivada de uma constante é zero, então a derivada de \(4y\) com respeito a \(x\) é zero. Agora, vamos calcular a derivada do primeiro termo:
+
+\[
+\frac{\partial}{\partial x} \left[10\sin\left(\frac{x^2}{5}\right)\right] = 10\cos\left(\frac{x^2}{5}\right) \cdot \frac{\partial}{\partial x} \left[\frac{x^2}{5}\right]
+\]
+
+Usando a regra da cadeia, obtemos:
+
+\[
+10\cos\left(\frac{x^2}{5}\right) \cdot \frac{2x}{5} = \frac{20x}{5}\cos\left(\frac{x^2}{5}\right) = 4x\cos\left(\frac{x^2}{5}\right)
+\]
+
+Portanto, a derivada parcial de \(\mathbf{F}\) com respeito a \(x\) é:
+
+\[
+\frac{\partial \mathbf{F}}{\partial x} = 4x\cos\left(\frac{x^2}{5}\right)
+\]
+
+Agora, vamos calcular a derivada parcial de \(\mathbf{F}\) com respeito a \(y\):
+
+\[
+\frac{\partial \mathbf{F}}{\partial y} = \frac{\partial}{\partial y} \left[10\sin\left(\frac{x^2}{5}\right) + 4y\right]
+\]
+
+Novamente, dividindo a expressão em duas partes, a derivada do primeiro termo com respeito a \(y\) é zero (pois não há \(y\) no termo), e a derivada do segundo termo é \(4\). Portanto, a derivada parcial de \(\mathbf{F}\) com respeito a \(y\) é:
+
+\[
+\frac{\partial \mathbf{F}}{\partial y} = 4
+\]
+
+Assim, o gradiente de \(\mathbf{F}\) é dado por:
+
+\[
+\nabla \mathbf{F} = \left[\frac{\partial \mathbf{F}}{\partial x}, \frac{\partial \mathbf{F}}{\partial y}\right] = \left[4x\cos\left(\frac{x^2}{5}\right), 4\right]
+\]
+E esta é a equação que define o gradiente. Para saber o valor do gradiente no ponto \(P\) tudo que precisamos é aplicar o ponto na equação então:
+\[
+\nabla \mathbf{F}(2,3) = \left[4(2)\cos\left(\frac{2^2}{5}\right), 4\right] = \left[ 5.57365, 4 \right]
+\]
+
+</p>
+
+Assim como um navegador considera a variação da profundidade do oceano em diferentes direções para traçar a rota mais segura, a derivada parcial nos ajuda a entender como uma função se comporta quando mudamos suas variáveis de entrada de maneiras específicas. O gradiente é a forma de fazermos isso em todas as dimensões, derivando uma de cada vez.
+
+### Significado do Gradiente
+
+Em qualquer ponto \(P\) o gradiente é um vetor que aponta na direção da maior variação do Campo Vetorial neste ponto. Nós podemos voltar ao exemplo 8 e tentar apresentar isso de uma forma mais didática. Primeiro o gráfico do Campo Vetorial dado por: $$\mathbf{F}(x,y) = 10sin(\frac{x^2}{5})a_x+4ya_y$$.
+
+![Gráfico do Campo Vetorial ](/assets/images/Func1Grad.jpeg){:class="lazyimg"}
+
+Nesta imagem é possível ver a variação do campo $$\mathbf{F}(x,y)$$ eu escolhi uma função em $$\mathbf{F}(x,y)$$ no domínio dos $$\mathbb{R}^2$$ por ser mais simples, toda a variação fica no domínio de $$z$$. Podemos plotar o gradiente na superfície criada pelo Campo Vetorial $$\mathbf{F}(x,y)$$.
+
+![Gráfico do Campo Vetorial ](/assets/images/Func1Grad2.jpeg){:class="lazyimg"}
+
+Nesta imagem, a cada ponto, a cor da superfície foi definida de acordo com a intensidade do gradiente. Quanto menor esta intensidade, mais próximo do vermelho. Quanto maior, mais próximo do Azul.
+
+## Divergência
+
+Agora, vamos pensar em um caminhante em uma montanha. Ele não tem um mapa, mas pode sentir a inclinação do terreno sob seus pés e a direção em que a inclinação é mais acentuada. Esta é a essência do **gradiente**. O gradiente de uma função escalar em um ponto é um vetor que aponta na direção em que a função aumenta mais rapidamente e cuja magnitude é o valor dessa taxa de aumento.
