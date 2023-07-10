@@ -847,7 +847,7 @@ Nesta imagem é possível ver a variação do campo $$\mathbf{F}(x,y)$$ eu escol
 
 ![Gráfico do Campo Vetorial ](/assets/images/func1Grad2.jpeg){:class="lazyimg"}
 
-Nesta imagem, a cada ponto, a cor da superfície foi definida de acordo com a intensidade do gradiente. Quanto menor esta intensidade, mais próximo do vermelho. Quanto maior, mais próximo do Azul.
+Nesta imagem, a cada ponto, a cor da superfície foi definida de acordo com a intensidade do gradiente. Quanto menor esta intensidade, mais próximo do vermelho. Quanto maior, mais próximo do Azul. Veja que a variação é maior nas bordas de descida ou subida e menor nos picos e vales. Coisas características da derivação. E é só isso. Eu disse que as lágrimas seriam evitadas. Sorria, é mais fácil que parece.
 
 ## Divergência
 
