@@ -409,7 +409,7 @@ $$ \vert B \vert = \vert (1,2,-5) \vert =\sqrt{1^2+2^2+5^2}=5,48$$
 
 Com o Produto Escalar e os módulos dos vetores podemos aplicar nossa equação analítica:
 
-$$A\cdot B =|A||B|cos(\theta)$$ logo
+$$A\cdot B =|A||B|cos(\theta)$$ logo:
 
 $$6 =(5,1)(5,48)cos(\theta) \therefore cos(\theta) = \frac{6}{27,95}=0,2147$$
 
