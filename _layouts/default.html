@@ -12,8 +12,31 @@
 			integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 			crossorigin="anonymous"
 		/>
-		<script src="{{ site.baseurl }}/assets/js/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
-
+		<script type="text/x-mathjax-config">
+			var font = "Neo-Euler";
+			MathJax.Hub.Config({
+				tex2jax: {
+					inlineMath: [['$','$']],
+					displayMath: [['\\[','\\]']],
+					processEscapes: true,
+				},
+				"SVG":{
+					font:font
+				},
+				"HTML-CSS": {
+					webFont: font,
+					imageFont: font,
+					preferredFont: font,
+					availableFonts: [],
+					scale: 90,
+					mtextFontInherit: true
+				}
+			});
+		</script>
+		<script
+			type="text/javascript"
+			src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+		></script>
 		<link href="{{ site.baseurl }}/assets/css/screen.css" rel="stylesheet" />
 		<link href="{{ site.baseurl }}/assets/css/main.css" rel="stylesheet" />
 		<script src="{{ site.baseurl }}/assets/js/jquery.min.js"></script>
