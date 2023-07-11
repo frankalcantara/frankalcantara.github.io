@@ -357,7 +357,7 @@ $$ \vert P_1P_2 \vert + \vert P_2P_3 \vert + \vert P_3P_1 \vert =7,48+10,05+7=24
 
 ## Produto Escalar
 
-Há um jeito de juntar dois vetores - setas no espaço - e obter algo diferente: um número, algo simples, sem direção. Isso é o Produto Escalar.
+Há um jeito de juntar dois vetores - setas no espaço - e obter algo diferente: um número, algo simples, sem direção. Isso é o Produto Escalar. **O resultado do produto escalar entre dois vetores é um valor escalar**.
 
 O Produto Escalar opera dois vetores e resulta em um número. No nosso espaço vetorial $$\textbf V$$ um número real. Esse número tem algo especial: ele não se mexe. Não importa como você vire ou gire o espaço, o número permanece o mesmo. Ele é invariante.
 
@@ -482,7 +482,7 @@ Que será útil na representação computacional de vetores e no entendimento de
 
 Imagine dois vetores, $$A$$ e $$B$$, como setas lançadas no espaço. Agora, imagine desenhar um paralelogramo com as magnitudes de $$A$$ e $$B$$ como lados. O Produto Vetorial de $$A$$ e $$B$$, representado por $$A \times B$$, é como uma seta disparada diretamente para fora desse paralelogramo, tão perfeitamente perpendicular quanto um mastro em um navio.
 
-**A magnitude, o comprimento dessa seta, é a área do paralelogramo formado por $$A$$ e $$B$$**. É um número simples, mas importante. Descreve o quão longe essa flecha se estende no espaço. O comprimento do vetor resultado do Produto Vetorial.
+**A magnitude, o comprimento dessa seta, é a área do paralelogramo formado por $$A$$ e $$B$$**. É um número simples, mas importante. Descreve o quão longe essa flecha se estende no espaço. O comprimento do vetor resultado do Produto Vetorial. **O resultado do Produto Vetorial entre dois vetores é um vetor.**
 
 Agora, essa Seta, esse Produto Vetorial, pode ser definido por uma equação analítica, geométrica, trigonométrica:
 
@@ -714,10 +714,10 @@ A beleza do cálculo vetorial reside em sua capacidade de descrever o mundo fís
 
 O cálculo vetorial é construído sobre três operações fundamentais: o gradiente, a divergência e o rotacional. O gradiente nos diz a direção e a taxa na qual uma quantidade está mudando. A divergência nos diz o quanto um campo está se espalhando de um ponto. E o rotacional nos dá uma medida da 'rotação' ou 'vorticidade' de um campo.
 
-Se tivermos uma função escalar $$\mathbf{F}$$, o gradiente de $$\mathbf{F}$$ será dado por:
+Se tivermos uma função escalar $$\mathbf{f}$$, o gradiente de $$\mathbf{f}$$ será dado por:
 
 $$
-\nabla \mathbf{F} = \left( \frac{\partial \mathbf{F}}{\partial x}, \frac{\partial \mathbf{F}}{\partial y}, \frac{\partial \mathbf{F}}{\partial z} \right)
+\nabla \mathbf{f} = \left( \frac{\partial \mathbf{f}}{\partial x}, \frac{\partial \mathbf{f}}{\partial y}, \frac{\partial \mathbf{f}}{\partial z} \right)
 $$
 
 E se tivermos um campo vetorial $$ \mathbf{F} = F_x a_x + F_y a_y + F_z a_x $$, a divergência de $$\mathbf{F}$$ é dada por:
@@ -732,123 +732,265 @@ $$
 \nabla \times \mathbf{F} = \left( \frac{\partial F_z}{\partial y} - \frac{\partial F_y}{\partial z} \right) a_x - \left( \frac{\partial F_z}{\partial x} - \frac{\partial F_x}{\partial z} \right) a_i + \left( \frac{\partial F_y}{\partial x} - \frac{\partial F_x}{\partial y} \right) a_z
 $$
 
-A única coisa que pode encher seus olhos de lágrimas é o sal trazido pela maresia, não o medo do Cálculo Vetorial. Então, não se intimide pelo cálculo vetorial. Ele é apenas conjunto de ferramentas, como um canivete suíço, que nos ajuda a explorar e entender o mundo ao nosso redor. Nós vamos abrir cada ferramenta deste canivete e aprender a usá-las.
+A única coisa que pode encher seus olhos de lágrimas é o sal trazido pela maresia, não o medo do Cálculo Vetorial. Então, não se intimide por estas equações herméticas, quase esotéricas. O Cálculo Vetorial é apenas conjunto de ferramentas, como um canivete suíço, que nos ajuda a explorar e entender o mundo ao nosso redor. Nós vamos abrir cada ferramenta deste canivete e aprender a usá-las.
 
 ## Gradiente
 
-Imagine-se no topo de uma montanha, cercado por terreno acidentado. Seu objetivo é descer a montanha, mas o caminho não é claramente marcado. Você olha ao redor, tentando decidir para qual direção deve seguir.
+Imagine-se no topo de uma montanha, cercado por terreno acidentado. Seu objetivo é descer a montanha, mas o caminho não é claramente marcado. Você olha ao redor, tentando decidir para qual direção deve seguir. O gradiente é como uma bússola que indica a direção de maior inclinação. Se você seguir o gradiente, estará se movendo na direção de maior declividade. Se a velocidade for importante é nesta direção que descerá mais rápido.
 
-O gradiente é como uma bússola que indica a direção de maior inclinação. Se você seguir o gradiente, estará se movendo na direção de maior descida.
+Agora, vamos trazer um pouco de matemática para esta metáfora. Em um espaço de múltiplas dimensões (imagine uma montanha com muitos picos e vales, e você pode se mover em qualquer direção), o gradiente de uma função em um determinado ponto é um vetor que aponta na direção de maior variação desta função. Se a função tem múltiplas dimensões, **o gradiente é o vetor que resulta da aplicação das derivadas parciais da função**.
 
-Agora, vamos trazer um pouco de matemática para esta metáfora. Em um espaço de múltiplas dimensões (imagine uma montanha com muitos picos e vales, e você pode se mover em qualquer direção), o gradiente de uma função em um determinado ponto é um vetor que aponta na direção de maior aumento da função. Em outras palavras, **o gradiente é o vetor de derivadas parciais da função**.
-
-Se tivermos uma função $$\mathbf{F}(x, y)$$, o gradiente de $$\mathbf{F}$$ é dado por:
+Se tivermos uma função $$\mathbf{f}(x, y)$$, uma função escalar, o gradiente de $$\mathbf{f}$$ será dado por:
 
 $$
-\nabla \mathbf{F} = \left( \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y} \right)
+\nabla \mathbf{f} = \left( \frac{\partial \mathbf{f}}{\partial x}, \frac{\partial \mathbf{f}}{\partial y} \right)
 $$
 
-Assim como a bússola na montanha, o gradiente nos mostra a direção a seguir para maximizar (ou minimizar) a função. É uma ferramenta crucial em muitas áreas da matemática e da física, especialmente em otimização e aprendizado de máquina.
+Assim como a bússola na montanha, o gradiente nos mostra a direção à seguir para maximizar (ou minimizar) a função. É uma ferramenta importante na matemática e na física, especialmente em otimização e aprendizado de máquina. Mas não tire seus olhos do ponto mais importante: **o gradiente é uma operação que aplicada a uma função escalar devolve um vetor**. Em três dimensões, usando o Sistema de Coordenadas Cartesianas teremos:
 
 $$
-\nabla \mathbf{F} = \left( \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z} \right)
+\nabla \mathbf{f} = \left( \frac{\partial \mathbf{f}}{\partial x}, \frac{\partial \mathbf{f}}{\partial y}, \frac{\partial \mathbf{f}}{\partial z} \right)
 $$
 
-onde $$ \frac{\partial f}{\partial x} $$, $$ \frac{\partial f}{\partial y} $$, e $$ \frac{\partial f}{\partial z} $$ são as derivadas parciais de $$ \mathbf{F} $$ com respeito a $$ x $$, $$y$$, e $$z$$ respectivamente.
+onde $$ \frac{\partial \mathbf{f} }{\partial x} $$, $$ \frac{\partial \mathbf{f} }{\partial y} $$, e $$ \frac{\partial \mathbf{f} }{\partial z} $$ são as derivadas parciais de $$ \mathbf{f} $$ com respeito a $$ x $$, $$y$$, e $$z$$ respectivamente.
 
-**Derivadas parciais**. Só a frase pode fazer o coração bater mais rápido. Mas não há necessidade de temer. Elas são como velhos amigos que você ainda não conheceu.
+Só a expressão **Derivadas parciais** pode fazer o coração bater mais rápido. O medo não o guiará aqui. As derivadas parciais são como velhos amigos que você ainda não conheceu.
 
 Imagine-se em uma grande pradaria. O vento está soprando, carregando consigo o cheiro da grama e da terra. Você está livre para caminhar em qualquer direção. Para o norte, onde o sol se põe, ou para o sul, onde a floresta começa. Cada passo que você dá muda a paisagem ao seu redor, mas de maneiras diferentes dependendo da direção em que você escolheu caminhar.
 
-A derivada parcial é apenas essa ideia, vestida com a roupa do cálculo. Ela apenas quer saber: "Se eu der um pequeno passo para o norte (ou seja, mudar um pouco $$x$$), como a paisagem (ou seja, nossa função) vai mudar?" Ou o mesmo para o sul, ou em qualquer outra direção que escolhermos.
+A derivada parcial é apenas essa ideia, vestida com a roupa do cálculo. Ela apenas quer saber: "Se eu der um pequeno passo para o norte, ou seja, mudar um pouco $$x$$, como a paisagem, , nossa função, vai mudar?" Ou o mesmo para o sul, ou em qualquer outra direção que escolhermos.
 
-Então, em vez de temer as derivadas parciais, podemos vê-las como uma ferramenta útil. Uma bússola que nos ajuda a entender a terra sob nossos pés, a função que estamos explorando. Com elas, podemos entender melhor o terreno, saber para onde estamos indo e como chegar lá. E essa é uma coisa boa, não é?
+Então, em vez de temer as derivadas parciais, podemos vê-las como uma ferramenta útil que nos ajuda a entender a terra sob nossos pés, entender a função que estamos explorando. Com as derivadas parciais, podemos entender melhor o terreno, saber para onde estamos indo e como chegar lá. E isso é bom. Não é?
 
-Uma derivada parcial de uma função de várias variáveis é a taxa na qual a função muda quando pequenas alterações são feitas em apenas uma das variáveis de entrada, mantendo todas as outras constantes. Isso é semelhante ao conceito de derivada em cálculo de uma variável, mas agora estamos considerando funções com mais de uma variável de entrada.
+Uma derivada parcial de uma função de várias variáveis revela a taxa na qual a função muda quando pequenas alterações são feitas em apenas uma das incógnitas da função, mantendo todas as outras constantes. O conceito é semelhante ao conceito de derivada em cálculo de uma variável, entretanto agora estamos considerando funções com mais de uma incógnita.
 
-Por exemplo, se temos uma função $$\mathbf{F}(x, y)$$, a derivada parcial de $$\mathbf{F}$$ em relação a $$x$$ (denotada por $$\frac{\partial \mathbf{F}}{\partial x}$$ mede a taxa de variação de $$\mathbf{F}$$ em relação a pequenas mudanças em $$x$$, mantendo $$y$$ constante. Da mesma forma, $$\frac{\partial \mathbf{F}}{\partial y}$$ mede a taxa de variação de $$\mathbf{F}$$ em relação a pequenas mudanças em $$y$$, mantendo $$x$$ constante. Em três dimensões, a derivada parcial em relação uma das dimensões é a derivada de $$\mathbf{F}$$ enquanto mantemos as outras constantes. Nada mais que a repetição, dimensão a dimensão da derivada em relação a uma dimensão enquanto as outras são constantes.
+Por exemplo, se temos uma função $$\mathbf{f}(x, y)$$, a derivada parcial de $$\mathbf{f}$$ em relação a $$x$$ (denotada por $$\frac{\partial \mathbf{f}}{\partial x}$$ mede a taxa de variação de $$\mathbf{f}$$ em relação a pequenas mudanças em $$x$$, mantendo $$y$$ constante. Da mesma forma, $$\frac{\partial \mathbf{f}{\partial y}$$ mede a taxa de variação de $$\mathbf{f}$$ em relação a pequenas mudanças em $$y$$, mantendo $$x$$ constante. Em três dimensões, a derivada parcial em relação uma das dimensões é a derivada de $$\mathbf{f}$$ enquanto mantemos as outras constantes. Nada mais que a repetição, dimensão a dimensão da derivada em relação a uma dimensão enquanto as outras são constantes.
 
-**O gradiente mede a taxa em que o Campo Vetorial varia em uma determinada direção.** Para clarear, jogar luz, esclarecer, tirar dúvidas, nada melhor que um exemplo.
+**O gradiente mede a taxa em que o Campo Escalar varia em uma determinada direção.** Para clarear e afastar a sombra das dúvidas, nada melhor que um exemplo.
 
 <p class="exp">
-<b>Exemplo 9:</b> considerando o Campo Vetorial dado por \(\mathbf{F}(x,y) = 10sin(\frac{x^2}{5})a_x+4ya_y\), (a) calcule a intensidade do vetor no ponto \(P(2,3)\), (b) o gradiente deste campo no ponto \(P\).  
+<b>Exemplo 9:</b> considerando o Campo Escalar dado por \(\mathbf{f}(x,y) = 10sin(\frac{x^2}{5})+4y\), (a) calcule a intensidade do campo no ponto \(P(2,3)\), (b) o gradiente deste campo no ponto \(P\).  
 <br><br>
 <b>Solução:</b><br>
 
-(a) O vetor em um ponto é óbvio, trata-se apenas da aplicação das coordenadas do ponto desejado na função. Sendo assim:
+(a) A intensidade em um ponto é trivial, trata-se apenas da aplicação das coordenadas do ponto desejado na função do campo. Sendo assim:
 
-$$\mathbf{F}(x,y) = 10sin(\frac{x^2}{5})+4y$$
+$$\mathbf{f}(x,y) = 10sin(\frac{x^2}{5})+4y$$
 
-$$\mathbf{F}(2,3) = 10sin(\frac{2^2}{5})a_x+4(3)a_y$$
+$$\mathbf{f}(2,3) = 10sin(\frac{2^2}{5})a_x+4(3)a_y$$
 
-$$\mathbf{F}(2,3) = 7.17356a_x+12a_y$$
+$$\mathbf{f}(2,3) = 7.17356a_x+12a_y$$
 
-(b) agora precisamos calcular o gradiente. O gradiente de uma função \(\mathbf{F}(x, y)\) é um vetor que consiste nas derivadas parciais da função com respeito a cada uma de suas variáveis. Neste caso, a função é \(\mathbf{F}(x, y) = 10\sin\left(\frac{x^2}{5}\right) + 4y\).
+(b) agora precisamos calcular o gradiente. O gradiente de uma função \(\mathbf{f}(x, y)\) é um vetor que consiste nas derivadas parciais da função com respeito a cada uma de suas variáveis que representam suas coordenadas.
 
-Vamos calcular as derivadas parciais de \(\mathbf{F}\) com respeito a \(x\) e \(y\), passo a passo:
+Vamos calcular as derivadas parciais de \(\mathbf{f\) com respeito a \(x\) e \(y\), passo a passo:
 
-Primeiro, a derivada parcial de \(F\) com respeito a \(x\) é dada por:
+Primeiro, a derivada parcial de \(f\) com respeito a \(x\) é dada por:
 
-\[
-\frac{\partial \mathbf{F}}{\partial x} = \frac{\partial}{\partial x} \left[10\sin\left(\frac{x^2}{5}\right) + 4y\right]
-\]
+$$
+\frac{\partial \mathbf{f}}{\partial x} = \frac{\partial}{\partial x} \left[10\sin\left(\frac{x^2}{5}\right) + 4y\right]
+$$
 
 Nós podemos dividir a expressão em duas partes e calcular a derivada de cada uma delas separadamente. A derivada de uma constante é zero, então a derivada de \(4y\) com respeito a \(x\) é zero. Agora, vamos calcular a derivada do primeiro termo:
 
-\[
+$$
 \frac{\partial}{\partial x} \left[10\sin\left(\frac{x^2}{5}\right)\right] = 10\cos\left(\frac{x^2}{5}\right) \cdot \frac{\partial}{\partial x} \left[\frac{x^2}{5}\right]
-\]
+$$
 
 Usando a regra da cadeia, obtemos:
 
-\[
+$$
 10\cos\left(\frac{x^2}{5}\right) \cdot \frac{2x}{5} = \frac{20x}{5}\cos\left(\frac{x^2}{5}\right) = 4x\cos\left(\frac{x^2}{5}\right)
-\]
+$$
 
-Portanto, a derivada parcial de \(\mathbf{F}\) com respeito a \(x\) é:
+Portanto, a derivada parcial de \(\mathbf{f}\) com respeito a \(x\) é:
 
-\[
-\frac{\partial \mathbf{F}}{\partial x} = 4x\cos\left(\frac{x^2}{5}\right)
-\]
+$$
+\frac{\partial \mathbf{f}}{\partial x} = 4x\cos\left(\frac{x^2}{5}\right)
+$$
 
-Agora, vamos calcular a derivada parcial de \(\mathbf{F}\) com respeito a \(y\):
+Agora, vamos calcular a derivada parcial de \(\mathbf{f}\) com respeito a \(y\):
 
-\[
+$$
 \frac{\partial \mathbf{F}}{\partial y} = \frac{\partial}{\partial y} \left[10\sin\left(\frac{x^2}{5}\right) + 4y\right]
-\]
+$$
 
-Novamente, dividindo a expressão em duas partes, a derivada do primeiro termo com respeito a \(y\) é zero (pois não há \(y\) no termo), e a derivada do segundo termo é \(4\). Portanto, a derivada parcial de \(\mathbf{F}\) com respeito a \(y\) é:
+Novamente, dividindo a expressão em duas partes, a derivada do primeiro termo com respeito a \(y\) é zero (pois não há \(y\) no termo), e a derivada do segundo termo é \(4\). Portanto, a derivada parcial de \(\mathbf{f}\) com respeito a \(y\) é:
 
-\[
+$$
 \frac{\partial \mathbf{F}}{\partial y} = 4
-\]
+$$
 
-Assim, o gradiente de \(\mathbf{F}\) é dado por:
+Assim, o gradiente de \(\mathbf{f}\) é dado por:
 
-\[
-\nabla \mathbf{F} = \left[\frac{\partial \mathbf{F}}{\partial x}, \frac{\partial \mathbf{F}}{\partial y}\right] = \left[4x\cos\left(\frac{x^2}{5}\right), 4\right]
-\]
+$$
+\nabla \mathbf{F} = \left[\frac{\partial \mathbf{F}}{\partial x}, \frac{\partial \mathbf{F}}{\partial y}\right] = \left(4x\cos\left(\frac{x^2}{5}\right), 4\right)
+$$
+
 E esta é a equação que define o gradiente. Para saber o valor do gradiente no ponto \(P\) tudo que precisamos é aplicar o ponto na equação então:
-\[
-\nabla \mathbf{F}(2,3) = \left[4(2)\cos\left(\frac{2^2}{5}\right), 4\right] = \left[ 5.57365, 4 \right]
-\]
+
+$$
+\nabla \mathbf{F}(2,3) = \left( 4(2)\cos\left(\frac{2^2}{5}\right), 4\right) = \left(  5.57365, 4 \right)
+$$
+
+Ao derivarmos parcialmente o Campo Vetorial \(\mathbf{f}\) escolhemos nosso Sistema de Coordenadas. Sendo assim:
+
+$$
+\nabla \mathbf{f}(2,3) = 5.57365 a_x+ 4a_y
+$$
 
 </p>
 
-Assim como um navegador considera a variação da profundidade do oceano em diferentes direções para traçar a rota mais segura, a derivada parcial nos ajuda a entender como uma função se comporta quando mudamos suas variáveis de entrada de maneiras específicas. O gradiente é a forma de fazermos isso em todas as dimensões, derivando uma de cada vez.
+Assim como um navegador considera a variação da profundidade do oceano em diferentes direções para traçar a rota mais segura, a derivada parcial nos ajuda a entender como uma função se comporta quando mudamos suas variáveis de entrada. O gradiente é a forma de fazermos isso em todas as dimensões, derivando em uma incógnita de cada vez.
 
 ### Significado do Gradiente
 
-Em qualquer ponto \(P\) o gradiente é um vetor que aponta na direção da maior variação do Campo Vetorial neste ponto. Nós podemos voltar ao exemplo 8 e tentar apresentar isso de uma forma mais didática. Primeiro o gráfico do Campo Vetorial dado por: $$\mathbf{F}(x,y) = 10sin(\frac{x^2}{5})a_x+4ya_y$$.
+Em qualquer ponto \(P\) o gradiente é um vetor que aponta na direção da maior variação de um Campo Escalar neste ponto. Nós podemos voltar ao exemplo 8 e tentar apresentar isso de uma forma mais didática. Primeiro o gráfico do Campo Escalar dado por: $$\mathbf{F}(x,y) = 10sin(\frac{x^2}{5})+4y$$.
 
-![Gráfico do Campo Vetorial ](/assets/images/Func1Grad.jpeg){:class="lazyimg"}
+![Gráfico do Campo Escalar](/assets/images/Func1Grad.jpeg){:class="lazyimg"}
 
-Nesta imagem é possível ver a variação do campo $$\mathbf{F}(x,y)$$ eu escolhi uma função em $$\mathbf{F}(x,y)$$ no domínio dos $$\mathbb{R}^2$$ por ser mais simples, toda a variação fica no domínio de $$z$$. Podemos plotar o gradiente na superfície criada pelo Campo Vetorial $$\mathbf{F}(x,y)$$.
+Nesta imagem é possível ver a variação do campo $$\mathbf{f}(x,y)$$ eu escolhi uma função em $$\mathbf{f}(x,y)$$ no domínio dos $$\mathbb{R}^2$$ por ser mais fácil de desenhar e visualizar, toda a variação fica no domínio de $$z$$. Podemos plotar o gradiente na superfície criada pelo campo $$\mathbf{f}(x,y)$$.
 
-![Gráfico do Campo Vetorial ](/assets/images/func1Grad2.jpeg){:class="lazyimg"}
+![Gráfico do Campo Escalar mostrando a intensidade do gradiente ](/assets/images/func1Grad2.jpeg){:class="lazyimg"}
 
-Nesta imagem, a cada ponto, a cor da superfície foi definida de acordo com a intensidade do gradiente. Quanto menor esta intensidade, mais próximo do vermelho. Quanto maior, mais próximo do Azul. Veja que a variação é maior nas bordas de descida ou subida e menor nos picos e vales. Coisas características da derivação. E é só isso. Eu disse que as lágrimas seriam evitadas. Sorria, é mais fácil que parece.
+Nesta imagem, em cada ponto, a cor da superfície foi definida de acordo com a intensidade do gradiente. Quanto menor esta intensidade, mais próximo do vermelho. Quanto maior, mais próximo do Azul. Veja que a variação é maior nas bordas de descida ou subida e menor nos picos e vales. Coisas características da derivação.
+
+E é só isso. Se você entendeu até aqui, entendeu o gradiente e já sabe aplicá-lo. Eu disse que lágrimas seriam evitadas.
+
+### Propriedades do Gradiente
+
+O reino do gradiente é o reino dos Campos Escalares, o gradiente tem características matemáticas distintas que o guiam em sua exploração:
+
+1. **Linearidade**: O gradiente é uma operação linear. Isso significa que para quaisquer campos escalares $$f$$ e $$g$$, e quaisquer constantes $$a$$ e $$b$$, temos:
+
+$$
+  \nabla (af + bg) = a \nabla f + b \nabla g
+$$
+
+O gradiente de uma soma de funções é a soma dos gradientes das funções, cada um ponderado por sua respectiva constante.
+
+2. **Produto por Escalar**: O gradiente de uma função escalar multiplicada por uma constante é a constante vezes o gradiente da função. Para uma função escalar $$f$$ e uma constante $$a$$, teremos:
+
+$$
+\nabla (af) = a \nabla f
+$$
+
+3. **Regra do Produto**: Para o produto de duas funções escalares $$f$$ e $$g$$, a regra do produto para o gradiente é dada por:
+
+$$
+\nabla (fg) = f \nabla g + g \nabla f
+$$
+
+Esta é a versão para gradientes da regra do produto para derivadas no cálculo unidimensional.
+
+4. **Regra da Cadeia**: Para a função composta $$f(g(x))$$, a regra da cadeia para o gradiente será dada por:
+
+$$
+\nabla f(g(x)) = (\nabla g(x)) f'(g(x))
+$$
+
+Esta é a extensão da regra da cadeia familiar do cálculo unidimensional.
+
+Estas propriedades, como as leis imutáveis da física, regem a conduta do gradiente em sua jornada através dos campos escalares. No palco do eletromagnetismo, o gradiente desempenha um papel crucial na descrição de como os Campos Elétrico e Magnético variam no espaço.
+
+1. **Campo Elétrico e Potencial Elétrico**: o campo elétrico é o gradiente negativo do potencial elétrico. Isso significa que o Campo Elétrico aponta na direção de maior variação do potencial elétrico, formalmente expresso como:
+
+$$
+ \mathbf{E} = -\nabla V
+$$
+
+Aqui, $$\mathbf{E}$$ é o Campo Elétrico e $$V$$ é o potencial elétrico. O gradiente, portanto, indica a encosta, o aclive, mais íngreme que uma partícula carregada experimentaria ao mover-se no Campo Elétrico.
+
+2. **Campo Magnético**: o Campo Magnético não é o gradiente de nenhum potencial escalar, **O Campo Magnético é um campo vetorial cuja divergência é zero**. No entanto, em situações estáticas ou de baixas frequências, pode-se definir um potencial vetorial $$\mathbf{A}$$ tal que:
+
+$$ \mathbf{B} = \nabla \times \mathbf{A} $$
+
+Essas propriedades do gradiente são como setas, apontando o caminho através das complexidades do eletromagnetismo. O gradiente é a ferramenta mais simples do nosso canivete suíço do cálculo vetorial.
 
 ## Divergência
 
-Agora, vamos pensar em um caminhante em uma montanha. Ele não tem um mapa, mas pode sentir a inclinação do terreno sob seus pés e a direção em que a inclinação é mais acentuada. Esta é a essência do **gradiente**. O gradiente de uma função escalar em um ponto é um vetor que aponta na direção em que a função aumenta mais rapidamente e cuja magnitude é o valor dessa taxa de aumento.
+Seu barco sempre será pequeno perto do oceano e da força do vento. Você sente o vento em seu rosto, cada sopro, uma força direcional, um vetor com magnitude e direção. Todo o oceano e a atmosfera acima dele compõem um campo vetorial, com o vento soprando em várias direções, forças aplicadas sobre o seu barco.
+
+No oceano, o tempo é um caprichoso mestre de marionetes, manipulando o clima com uma rapidez alucinante. Agora, em uma tempestade, existem lugares onde o vento parece convergir, como se estivesse sendo sugado para dentro. Em outros lugares, parece que o vento está explodindo para fora. Esses são os pontos de divergência e convergência do campo vetorial do vento.
+
+Um lugar onde o vento está sendo sugado para dentro tem uma divergência negativa - o vento está "fluido" para dentro mais do que está saindo. Um lugar onde o vento está explodindo para fora tem uma divergência positiva - o vento está saindo mais do que está entrando. Este é o conceito que aplicamos as cargas elétricas, o campo elétrico diverge das cargas positivas e converge para as negativas. Isto porque assim convencionamos há séculos, quando começamos e estudar o Eletromagnetismo.
+
+Matematicamente, **a divergência é uma maneira de medir esses comportamentos de "expansão" ou "contração" de um campo vetorial**. Para um campo vetorial em três dimensões, $$\mathbf{F} = f_x a_x + f_y a_y + f_z a_z$$, a divergência é calculada como:
+
+$$
+\nabla \cdot \mathbf{F} = \frac{\partial F_x}{\partial x} + \frac{\partial F_y}{\partial y} + \frac{\partial F_z}{\partial z}
+$$
+
+A divergência, então, é como a "taxa de expansão" do vento em um determinado ponto - mostra se há mais vento saindo ou entrando em uma região específica do espaço, um lugar. assim como a sensação que temos no meio de uma tempestade. **A divergência é o resultado do produto escalar entre o operador $$\nabla$$ e o Campo Vetorial. O resultado da divergência é uma função escalar que dá a taxa na qual o fluxo do campo vetorial está se expandindo ou contraindo em um determinado ponto**.
+
+Sendo um pouco mais frio podemos dizer que a divergência é um operador diferencial que atua sobre um Campo Vetorial para produzir um Campo Escalar. Em termos físicos, a divergência em um ponto específico de um Campo Vetorial representa a fonte ou dreno no ponto: uma divergência positiva indica que neste ponto existe uma fonte, ou fluxo de vetores para fora, divergindo. Enquanto uma divergência negativa indica um dreno ou fluxo para dentro, convergindo.
+
+### Fluxo e a Lei de Gauss
+
+O fluxo, nas margens do cálculo vetorial, é **uma medida da quantidade de campo que passa através de uma superfície**. Imagine um rio, com a água fluindo com velocidades e direções variadas. Cada molécula de água tem uma velocidade - um vetor - e toda a massa de água compõe um Campo Vetorial.
+
+Se você colocar uma rede no rio, o fluxo do campo de água através da rede seria uma medida de quanta água está passando por ela. Para um campo vetorial $$\mathbf{F}$$ e uma superfície $$S$$ com vetor normal dado por $$\mathbf{n}$$, o fluxo será definido, com a formalidade da matemática, como:
+
+$$
+\iint_S (\mathbf{F} \cdot \mathbf{n}) \, dS
+$$
+
+Uma integral dupla, integral de superfície onde $$dS$$ é o elemento diferencial de área da superfície, e o produto escalar $$ \mathbf{F} \cdot \mathbf{n} $$ mede o quanto do campo está fluindo perpendicularmente à superfície.
+
+Agora, a divergência entra em cena como a versão local do fluxo. Se encolhermos a rede até que ela seja infinitesimalmente pequena, o fluxo através da rede se tornará infinitesimal e será dado pela divergência do campo de água no ponto onde a rede está. Matematicamente, isso é expresso na Lei de [Gauss](https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss):
+
+$$
+\nabla \cdot \mathbf{F} = \frac{d (\text{Fluxo})}{dV}
+$$
+
+Onde, $$V$$ é o volume da região, e **a Lei de Gauss afirma que a divergência de um campo vetorial em um ponto é igual à taxa de variação do fluxo do campo através de uma superfície que envolve o ponto**.
+
+### Teorema da Divergência
+
+Imagine-se como um explorador atravessando o vasto terreno do cálculo vetorial. Você se depara com duas paisagens: a superfície e o volume. Cada uma tem suas próprias características e dificuldades, mas há uma ponte que as conecta, uma rota que permite viajar entre elas. Esta é a Lei de Gauss.
+
+A Lei de Gauss, ou o Teorema da Divergência, é a ponte que interliga dois mundos diferentes. Ela afirma que, para um dado campo vetorial $$\mathbf{F}$$, a integral de volume da divergência do campo vetorial sobre um volume $$V$$ é igual à integral de superfície do campo vetorial através da superfície $$S$ que delimita o volume $V$:
+
+$$
+\iiint_V (\nabla \cdot \mathbf{F}) \, dV = \iint_S (\mathbf{F} \cdot \mathbf{n}) \, dS
+$$
+
+Uma integral tripla igual a uma integral dupla. Aqui, $$dV $$ é um pedaço infinitesimalmente pequeno de volume dentro de $$V$$, e $$dS$$ é um pedaço infinitesimalmente pequeno da superfície $$S$$, respectivamente elemento infinitesimal de volume e área. O vetor $$\mathbf{n}$$ é um vetor normal apontando para fora da superfície.
+
+Com a Lei de Gauss, podemos ir e voltar entre a superfície e o volume, entre o plano e o volume. Esta é a beleza e o poder da matemática: a linguagem e as ferramentas para navegar pelos mais complexos terrenos.
+
+### Propriedades da Divergência
+
+No universo dos campos vetoriais, a divergência tem propriedades matemáticas distintas que servem como marcos na paisagem:
+
+1. **Linearidade**: A divergência é uma operação linear. Isso significa que para quaisquer campos vetoriais $$\mathbf{F}$$ e $$mathbf{G}$$, e quaisquer escalares $$a$$ e $$b$$, temos:
+
+$$
+    \nabla \cdot (a\mathbf{F} + b\mathbf{G}) = a (\nabla \cdot \mathbf{F}) + b (\nabla \cdot \mathbf{G})
+$$
+
+A divergência de uma soma é a soma das divergências, com cada divergência ponderada por seu respectivo escalar.
+
+2. **Produto por Escalar**: A divergência de um campo vetorial multiplicado por um escalar é o escalar vezes a divergência do campo vetorial. Para um campo vetorial $$\mathbf{F}$ e um escalar $$a$$, temos:
+
+$$
+    \nabla \cdot (a\mathbf{F}) = a (\nabla \cdot \mathbf{F})
+$$
+
+3. **Divergência de um Produto**: A divergência de um produto de um campo escalar $\phi$$ e um campo vetorial $$\mathbf{F}$$ é dado por:
+
+$$
+\nabla \cdot (\phi \mathbf{F}) = \phi (\nabla \cdot \mathbf{F}) + \mathbf{F} \cdot (\nabla \phi)
+$$
+
+Este é o análogo vetorial do produto de regra para derivadas no cálculo unidimensional.
+
+4. **Divergência do Rotação**: A divergência do rotacional de qualquer campo vetorial é sempre zero:
+
+$$
+   \nabla \cdot (\nabla \times \mathbf{F}) = 0
+$$
+
+Esta propriedade é um reflexo do fato de que as linhas de campo do rotacional de um campo vetorial são sempre fechadas, sem início ou fim.
+
+Essas propriedades são como as leis inabaláveis que governam o comportamento da divergência em sua jornada através dos campos vetoriais.

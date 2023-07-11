@@ -2,7 +2,7 @@
 layout: post
 title: "Resolução de Problemas com Lógica Matemática"
 author: Frank
-featured: true
+featured: false
 categories: [disciplina]
 tags: [lógica, resolução de problemas, proposicional, predicativa]
 image: assets/images/logic.jpg
