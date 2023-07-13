@@ -22,7 +22,7 @@ Na vastidão do tempo, aproximadamente quatro milênios atrás, encontra-se o pr
 
 Imagem do [Museu Britânico](https://www.britishmuseum.or), licenciada em [Creative Commons Attribution-NonCommercial-ShareAlike 4.0](http://creativecommons.org/licenses/by-nc-sa/4.0/) International (CC BY-NC-SA 4.0) license.
 
-O [artefato 131226 do Museu Britânico](http://www.britishmuseum.org/research/collection_online/collection_object_details.aspx?objectId=277770&partId=1&searchText=WCT53297&page=1) reluz em uma gaveta do Museu Britânico com um farol incontestável do inconformismo de Nanni, o consumidor enganado, traído em sua confiança.
+O [artefato 131226 do Museu Britânico](http://www.britishmuseum.org/research/collection_online/collection_object_details.aspx?objectId=277770&partId=1&searchText=WCT53297&page=1) reluz em uma gaveta do Museu Britânico como um farol incontestável do inconformismo de Nanni, o consumidor enganado, traído em sua confiança.
 
 Se buscar atentamente encontrará uma inundação de informações, uma cascata de páginas web, centenas, se não milhares, se desdobrarão diante de seus olhos. Todos clamando com a mesma voz, uma melodia repetida, todos cantando louvores ao tablet como a primeira inscrição de descontentamento comercial conhecida na nossa história.
 
