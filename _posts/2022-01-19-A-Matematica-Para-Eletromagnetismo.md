@@ -856,7 +856,7 @@ Assim como um navegador considera a variação da profundidade do oceano em dife
 
 Em qualquer ponto $P$ o gradiente é um vetor que aponta na direção da maior variação de um Campo Escalar neste ponto. Nós podemos voltar ao exemplo 8 e tentar apresentar isso de uma forma mais didática. Primeiro o gráfico do Campo Escalar dado por: $\mathbf{F}(x,y) = 10sin(\frac{x^2}{5})+4y$.
 
-![Gráfico do Campo Escalar](/assets/images/Func1Grad.jpeg){:class="lazyimg"}
+![Gráfico do Campo Escalar](/assets/images/Func1Grad.jpeg){:# class="lazyimg"}
 
 Nesta imagem é possível ver a variação do campo $\mathbf{f}(x,y)$$ eu escolhi uma função em $$\mathbf{f}(x,y)$ no domínio dos $\mathbb{R}^2$ por ser mais fácil de desenhar e visualizar, toda a variação fica no domínio de $z$. Podemos plotar o gradiente na superfície criada pelo campo $\mathbf{f}(x,y)$.
 
