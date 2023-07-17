@@ -46,7 +46,7 @@ A escrita, tal como a conhecemos agora, não surgiu da noite para o dia. Foi o r
 
 Mais tarde, o alfabeto fenício foi forjado, nascido do mar e do comércio dos povos que viviam no Levante. Hoje, Líbano, Síria e norte de Israel por volta do século 12 a.C. Era um sistema simples e eficaz, Eram 22 letras, todas consoantes, usadas para dar voz ao silêncio e validar acordos entre homens. Usavam-se para marcar o nome e a idade de um vinho em uma ânfora de barro. Assim, quando um homem se debruçava sobre o vinho, sabia de onde vinha e quantos verões haviam passado desde que a uva tinha sido colhida.
 
-Os homens vêm marcando o nome e o ano do vinho desde que começaram a bebê-lo. Os mais velhos desses registros remontam ao tempo de Nanni. Gosto de pensar que, depois de registrar sua queixa, Nanni talvez tenha ido até a taberna mais próxima. Talvez tenha pego uma ânfora, olhado para o nome e o ano gravados nela, e despejado o vinho em um copo. Talvez tenha bebido e encontrado algum conforto na bebida, esquecendo por um momento o descontentamento que o levou a registrar sua queixa. Era uma época diferente, mas os homens não mudaram tanto assim. 
+Os homens vêm marcando o nome e o ano do vinho desde que começaram a bebê-lo. Os mais velhos desses registros remontam ao tempo de Nanni. Gosto de pensar que, depois de registrar sua queixa, Nanni talvez tenha ido até a taberna mais próxima. Talvez tenha pego uma ânfora, olhado para o nome e o ano gravados nela, e despejado o vinho em um copo. Talvez tenha bebido e encontrado algum conforto na bebida, esquecendo por um momento o descontentamento que o levou a registrar sua queixa. Era uma época diferente, mas os homens não mudaram tanto assim.
 
 No século 9 a.C., os gregos, os marinheiros do Mediterrâneo, encontraram o alfabeto fenício. Adaptaram-no, acrescentaram vogais a ele, e moldaram o primeiro alfabeto verdadeiro onde cada som, vocal e consonantal, poderia ser registrado.
 
@@ -60,7 +60,7 @@ Voltemos ao oitavo século antes de Cristo. As datas precisas de quando Homero c
 
 As histórias contidas nesses épicos, porém, são mais antigas do que os pergaminhos que as guardam. Falam de heróis e eventos da Idade Heroica grega, remontando ao tempo micênico - há cerca de três a quatro milênios. Estas obras foram sussurradas de boca em boca antes que a tinta usasse o alfabeto para aprisioná-la em páginas.
 
-É digno de nota que a Ilíada e a Odisseia estão entre as mais antigas histórias escritas do ocidente. Por sua importância, nunca deixaram de ser estudadas e lidas. Durante séculos, homens nascidos no ocidente aprendiam a ler e a escrever sob a luz dessas obras. Os homens de letras e histórias pensam que Homero ditou seus poemas. Se isso é verdade, o nome do escriba que teve o privilégio de transcrevê-los se perdeu com o tempo.
+É digno de nota que a Ilíada e a Odisseia estão entre as mais antigas histórias escritas do ocidente. Por sua importância, nunca deixaram de ser estudadas e lidas. Durante séculos, homens nascidos no ocidente aprendiam a ler e a escrever sob a luz dessas obras. Os homens de letras e histórias pensam que Homero ditou seus poemas. Se isso é verdade, o nome do escriba que teve o privilégio de transcrevê-los se perdeu com o tempo. Para ser honesto, há pouco que sabemos sobre os textos originais, sequer temos certeza que foram ditados originalmente por Homero. Os textos completos mais antigos que dispomos datam do [século X](https://chs.harvard.edu/chapter/graeme-d-bird-multitextuality-in-the-homeric-iliad-the-witness-of-the-ptolemaic-papyri-chapter-3-the-ptolemaic-papyri-of-the-iliad-evidence-of-eccentricity-or-multitextuality/#:~:text=The%20earliest%20complete%20text%20of,bear%20direct%20witness%20to%20the) alguma coisa como 1300 anos depois da data mais aceita como a data de criação. Isso não tira nenhum brilho dos poemas, da história destes poemas, ou da sua importância para a nossa civilização. De fato, esta incerteza torna estes poemas ainda mais interessantes.
 
 Cerca de quatrocentos anos separam a odisseia de Odisseu e o julgamento de Sócrates. Quatrocentos anos, o tempo que nossa civilização levou entre aprender a escrever e começar a filosofar.
 
@@ -69,7 +69,6 @@ Sócrates, uma presença que atravessa a história, um pilar da filosofia, seu v
 Sócrates, por padrões gregos, não era um espécime notável. Baixo, robusto, com um nariz achatado e olhos que se destacavam mais do que o usual. As palavras de [Platão no "Banquete"](https://pt.wikipedia.org/wiki/O_Banquete) e [Xenofonte nas "Memoráveis"](https://revistas.ufrj.br/index.php/caliope/article/view/48091/29721) confirmam tal descrição. Hoje podemos usar as ferramentas de inteligência artificial para criar uma imagem de Sócrates.
 
 ![Sócrates segundo uma inteligência artificial](\assets\images\socrates.jpeg)
-
 
 Todavia, sobre Sócrates o conhecimento que possuímos veio de Platão e Xenofonte, que o retrataram como um homem velho que caminhava descalço, raramente se lavava e parecia imune à bebida e à lascívia. Um homem tão perdido em seus pensamentos filosóficos que frequentemente parava e se perdia em reflexões profundas.
 
@@ -81,7 +80,7 @@ Em defesa da acusação de corromper a juventude, Sócrates declarou em Apologia
 
 Xenofonte, por sua vez, retratou a aceitação serena de Sócrates de sua morte: "De todas as maneiras, Sócrates nunca parou de se preparar para morrer. Seu princípio era cuidar da alma, não do corpo; acreditava que a virtude não vem das riquezas, mas as riquezas e todas as outras coisas boas dos homens, tanto privadas como públicas, vêm da virtude". ([Xenofonte, Apologia de Sócrates, 14](https://repositorio.ucp.pt/bitstream/10400.14/8999/1/8999.pdf))
 
-Nas obras "Apologia" e "Críton", Platão conta descreve um Sócrates, de pé firme e de cabeça erguida. Sócrates, um homem que não se desviou, nem pediu desculpas. Defendia o que acreditava ser certo, a sua vida. Talvez tenha sido fruto da admiração do aluno pelo mestre, talvez tenha sido assim. Ainda não temos como sabê-lo. 
+Nas obras "Apologia" e "Críton", Platão conta descreve um Sócrates, de pé firme e de cabeça erguida. Sócrates, um homem que não se desviou, nem pediu desculpas. Defendia o que acreditava ser certo, a sua vida. Talvez tenha sido fruto da admiração do aluno pelo mestre, talvez tenha sido assim. Ainda não temos como sabê-lo.
 
 Defendendo-se, Sócrates dizia que seu dever era questionar Atenas, questionar as pessoas. Dizia que a vida, se não examinada, era inútil. Ele via o seu papel de questionador como um dever de vida e morte.
 
@@ -90,6 +89,3 @@ Condenado à morte, Sócrates manteve-se calmo, aceitando o que vinha. Argumenta
 Platão e Xenofonte, em suas palavras sobre o julgamento de Sócrates, mostram um homem que se mantém fiel à verdade, à razão, à virtude, mesmo quando encara a morte. Durante o julgamento, Sócrates reforçou o seu legado, um dos grandes pensadores que a história já conheceu.
 
 No vasto território do ocidente, é Sócrates quem planta a primeira semente na busca incansável da verdade. É aqui, nesta encruzilhada de conhecimento e mistério, que nos afastaremos da nossa jornada. Em breve, deste ponto, retomaremos a caminhada.
-
-
-

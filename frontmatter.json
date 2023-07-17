@@ -45,6 +45,36 @@
           "title": "rating",
           "name": "rating",
           "type": "number"
+        },
+        {
+          "title": "description",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "title": "date",
+          "name": "date",
+          "type": "datetime"
+        },
+        {
+          "title": "preview",
+          "name": "preview",
+          "type": "string"
+        },
+        {
+          "title": "keywords",
+          "name": "keywords",
+          "type": "choice",
+          "choices": [
+            "lógica",
+            "Programação",
+            "programação lógica"
+          ]
+        },
+        {
+          "title": "draft",
+          "name": "draft",
+          "type": "datetime"
         }
       ]
     }
