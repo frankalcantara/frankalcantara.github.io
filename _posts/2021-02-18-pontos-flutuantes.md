@@ -38,7 +38,8 @@ Os números na base dois podem ser representados por uma parte inteira e uma par
 
 $$0,001 = \frac{0}{2}+\frac{0}{4}+\frac{1}{8} = \frac{0}{2^1}+\frac{0}{2^2}+\frac{1}{2^3}$$
 
-Os números fracionários na base $2$ apresentam o mesmo problema que vimos na base $10$. A maioria dos números binários facionários, não pode ser representada de forma exata por uma operação de frações. um bom exemplo pode ser visto com a fração $(\frac{1}{3})_{10}$ que seria representada, em conversão direta para o binário, por $(\frac{1}{10})_{2}$. Esta representação, em binário, terá que ser arredondada, ou truncada. Definir este ponto, e a forma de armazenamento destes algarismos é, ainda hoje, uma necessidade com a qual temos que lidar.
+Os números fracionários na base $2$ apresentam o mesmo problema que vimos na base $10$. A maioria dos números binários facionários, não pode ser representada de forma exata por uma operação de frações. um bom exemplo pode ser visto com a fração
+$\frac{1}{3}$ que seria representada, em conversão direta para o binário, por $(\frac{1}{10})_{2}$. Esta representação, em binário, terá que ser arredondada, ou truncada. Definir este ponto, e a forma de armazenamento destes algarismos é, ainda hoje, uma necessidade com a qual temos que lidar.
 
 Só para lembrar: nosso problema é encontrar uma forma de representar todo o universo de números reais, em base $10$, em um espaço limitado em base $2$. Se pensarmos em uma correspondência de um para um, todo e qualquer número real deve ser armazenado no espaço de dados definido por um e apenas um endereço de memória. A leitora precisa me permitir adiantar um pouco as coisas: isso é impossível.
 
@@ -48,7 +49,7 @@ Só para lembrar: nosso problema é encontrar uma forma de representar todo o un
 
 Rm 1985 o _Institute of Electrical and Electronics Engineers_ (IEEE) publicou uma norma, a norma [IEEE 754](http://en.wikipedia.org/wiki/IEEE_754-2008) cujo objetivo era padronizar uma única representação para números de ponto flutuante. Na época, os dois mais importantes fabricantes de hardware, Intel e Motorola, apoiaram e adotaram esta norma nas suas cpus o que contribuiu para a adoção que temos hoje. A norma [IEEE 754](http://en.wikipedia.org/wiki/IEEE_754-2008) descreve como representar números em binário com precisão simples, $32$ bits, dupla, $64$ bits, quádrupla $128$ bits e óctupla $256$ principalmente mas não exclusivamente.
 
-Antes de nos aprofundarmos nos meandros da representação binária de ponto flutuante, talvez seja uma boa ideia lembar o ensino médio. Foi lá que eu aprendi a notação científica. Pensando bem, hoje eu seria mais feliz se lá no Colégio Visconde de Mauá, alguém tivesse chamado a notação científica de representação de ponto flutuante. Em fim, segue a vida. Algumas coisas só entendemos muitos anos depois.
+Antes de explorarmos a representação binária de ponto flutuante, é útil relembrar a notação científica, um conceito que aprendi no ensino médio. Na verdade, teria sido mais esclarecedor se, durante meus dias no Colégio Visconde de Mauá, a notação científica fosse apresentada como representação de ponto flutuante. Em fim, segue a vida. É com o tempo que aprendemos.
 
 A verdade é que na base $10$ somos treinados a usar pontos flutuantes no que chamamos de **notação científica**, ou de notação de engenharia. Há uma pequena diferença entre a notação científica e a notação de engenharia que eu vou ignorar neste texto e me concentrar apenas na notação científica. Na notação científica temos a parte significativa do número, chamada de mantissa, e um expoente aplicado a uma base decima, $10^e$. Usando a base $10$ poderíamos ter:
 
@@ -187,7 +188,7 @@ A mantissa é simples e não há muito para explicar ou detalhar. A leitora, se 
 
 Esta foi a parte fácil, a leitora deve ser preparar para os expoentes. Só para lembrar, temos $8$ bits em precisão simples e $11$ bit em precisão dupla.
 
-**Considerando a precisão simples**, entre os $8$ bits reservados para a representação do expoente não existe um bit que seja específico para indicar expoentes negativos. Em vez disso, os valores são representados neste espaço de $8$ bits em uma notação chamada de **excess-127 ou bias**. Nesta notação, utilizamos um número inteiro de $8$ bits cujo valor sem sinal é representado por $M-127$ como expoente. Desta forma, O valor $01111111_2$ equivalente ao valor $127_{10}$ representa o expoente $0_{10}$, o valor $01000000_2$ equivalente a $128_{10}$, representa o expoente $1_{10}$, enquanto o valor $01111110_2$ equivalente a $126_{10}$ representa o expoente $-1_{10}$ e por ai vamos. Em outras palavras, para representar o expoente $0$ armazenamos o valor binário $M=01111111_2$ equivalente ao $127_{10}$ e o expoente será dado por $$M$$ subtraído do valor $127_{10}$, ou seja $0$. Usando esta técnica **excess-127 ou bias** teremos uma faixa de expoentes que variam $2^{-126}$ e $2^{128}$ para a precisão simples. Parece complicado e é mesmo.
+**Considerando a precisão simples**, entre os $8$ bits reservados para a representação do expoente não existe um bit que seja específico para indicar expoentes negativos. Em vez disso, os valores são representados neste espaço de $8$ bits em uma notação chamada de **excess-127 ou bias**. Nesta notação, utilizamos um número inteiro de $8$ bits cujo valor sem sinal é representado por $M-127$ como expoente. Desta forma, O valor $01111111$ equivalente ao valor $127$ representa o expoente $0$ em decimal, o valor $01000000$ equivalente a $128$, representa o expoente $1$, enquanto o valor $01111110$ equivalente a $126$ representa o expoente $-1$ e por ai vamos. Em outras palavras, para representar o expoente $0$ armazenamos o valor binário $M=01111111$ equivalente ao $127$ e o expoente será dado por $$M$$ subtraído do valor $127$, ou seja $0$. Usando esta técnica **excess-127 ou bias** teremos uma faixa de expoentes que variam $2^{-126}$ e $2^{128}$ para a precisão simples. Parece complicado e é mesmo.
 
 **No caso da precisão dupla** o raciocínio é exatamente o mesmo exceto que o espaço é de $11$ bits e o _bias_ é de $1023 (excess-1023)$. Com $11$ bits conseguimos representar valores entre $0$ e $2047$. Neste caso, o $M=1023$ irá representar o valor $0$. Com a precisão dupla poderemos representar expoentes entre $-1022$ e $1023$. Em resumo:
 
@@ -269,9 +270,9 @@ $$0,1_{10} = 0,000110011001100110011001100_2$$
 
 Resta normalizar este número. A leitora deve lembrar que a representação normal, não permite o $0$ como algarismo inteiro (antes da vírgula). O primeiro $1$ encontra-se na quarta posição logo:
 
-$$0,0001 1001 1001 1001 1001 1001 100_2 = 1.1001 1001 1001 1001 1001 100_2 \times 2^{-4}$$
+$$0,0001 1001 1001 1001 1001 1001 100_2 \\ = 1.1001 1001 1001 1001 1001 100_2 \times 2^{-4}$$
 
-Precisamos agora normalizar nosso expoente. Como estamos trabalhando com precisão simples usaremos $127_{10}$ como _bias_. Como temos $-4$ teremos $(-4+127)_{10} = 123_{10}$ que precisa ser convertido para binário. Logo nosso expoente será $01111011_2$.
+Precisamos agora normalizar nosso expoente. Como estamos trabalhando com precisão simples usaremos $127$ como _bias_. Como temos $-4$ teremos $(-4+127) = 123$ que precisa ser convertido para binário. Logo nosso expoente será $01111011$.
 
 Até agora temos o sinal do número, $0$ e o expoente $01111011$ resta-nos terminar de trabalhar a mantissa. Podemos remover a parte inteira já que em binário esta será sempre $1$ devido ao $0$ não ser permitido. Feito isso, precisamos ajustar seu comprimento para $23$ bits e, temos nossa mantissa: $10011001100110011001100$. Linda! E resumo temos:
 
@@ -347,27 +348,29 @@ Resta-nos entender o que estes valores representam e seu impacto na computação
 
 ### Números subnormais
 
-Para a IEEE 754 normal é tudo que vimos anteriormente, todos os valores que podem ser representados usando as regras de sinal, expoente e mantissa de forma normalizada que a amável leitora teve a paciência de estudar junto comigo. Subnormal, ou não normalizado, é o termo que empregamos para indicar valores nos quais o campo expoente é preenchido com zeros. Se seguirmos a regra, para representar o algarismo $0$ o expoente deveria ser o $-127$. Contudo, para este caso, onde todo o campo expoente é preenchido com $00000000_2$ o expoente será $-126$. Neste caso especial, a mantissa não terá que seguir a obrigatoriedade de ter sempre o número $1$ como parte inteira. Não estamos falando de valores normalizados então o primeiro bit pode ser $0_2$ ou $1_2$. Estes números foram especialmente criados para aumentar a precisão na representação de números que estão no intervalo entre $0_{10}$ e $1_{10}$ melhorando a representação do conjunto dos números reais nesta faixa.
+Para a IEEE 754 normal é tudo que vimos anteriormente, todos os valores que podem ser representados usando as regras de sinal, expoente e mantissa de forma normalizada que a amável leitora teve a paciência de estudar junto comigo. Subnormal, ou não normalizado, é o termo que empregamos para indicar valores nos quais o campo expoente é preenchido com zeros. Se seguirmos a regra, para representar o algarismo $0$ o expoente deveria ser o $-127$. Contudo, para este caso, onde todo o campo expoente é preenchido com $00000000$ o expoente será $-126$. Neste caso especial, a mantissa não terá que seguir a obrigatoriedade de ter sempre o número $1$ como parte inteira. Não estamos falando de valores normalizados então o primeiro bit pode ser $0$ ou $1$. Estes números foram especialmente criados para aumentar a precisão na representação de números que estão no intervalo entre $0$ e $1$ melhorando a representação do conjunto dos números reais nesta faixa.
 
 A leitora há de me perdoar novamente, a expressão subnormal é típica da norma IEEE 854 e não da IEEE 754, mas tomei a liberdade de usar esta expressão aqui por causa da melhor tradução.
 
 ### Zero
 
-Observe que a definição de zero na norma IEEE 754 usa apenas o expoente e a mantissa e não altera nada no bit que é utilizado para indicar o sinal de um número. A consequência disto é que temos dois números binários diferentes um para $+0$ e outro para $-0$. A leitora deve pensar no zero como sendo apenas outro número subnormal que, neste caso acontece quando o expoente é $0_2$ e a mantissa é $0_2$. Sinalizar o zero não faz sentido matematicamente e tanto o $+0$ quanto o $-0$ representam o mesmo valor. Por outro lado, faz muita diferença do ponto de vista computacional e é preciso atenção para entender estas diferenças.
+Observe que a definição de zero na norma IEEE 754 usa apenas o expoente e a mantissa e não altera nada no bit que é utilizado para indicar o sinal de um número. A consequência disto é que temos dois números binários diferentes um para $+0$ e outro para $-0$. A leitora deve pensar no zero como sendo apenas outro número subnormal que, neste caso acontece quando o expoente é $0$ e a mantissa é $0$. Sinalizar o zero não faz sentido matematicamente e tanto o $+0$ quanto o $-0$ representam o mesmo valor. Por outro lado, faz muita diferença do ponto de vista computacional e é preciso atenção para entender estas diferenças.
 
 ### Infinito
 
-Outro caso especial do campo de exponentes é representado pelo valor $11111111_2$. Se o expoente for composto de $8$ algarismos $1_2$ e a mantissa for totalmente preenchida como $0_2$, então o valor representado será o infinito. Acompanhando o zero, o infinito pode ser negativo, ou positivo.
+Outro caso especial do campo de exponentes é representado pelo valor $11111111$. Se o expoente for composto de $8$ algarismos $1$ e a mantissa for totalmente preenchida como $0$, então o valor representado será o infinito. Acompanhando o zero, o infinito pode ser negativo, ou positivo.
 
 Neste caso, faz sentido matematicamente. Ou quase faz sentido. Não, não faz sentido nenhum! Não espere, faz sim! Droga infinito é complicado. A verdade é que ainda existem muitas controvérsias sobre os conceitos de infinito, mesmo os matemáticos não tem consenso sobre isso, a norma IEEE 754 com o $\pm Infinito$ atende ao entendimento médio do que representa o infinito.
 
-Considerando que a linguagem de programação que você usa está de acordo com a norma IEEE 754, se você calcular o inverso de $-0$ deverá obter $-Infinito$, se calcular o inverso de $+0$ deve obter $+Infinito$. Por exemplo, em C++ teremos:
+Se você está usando uma linguagem de programação que segue a norma IEEE 754, você notará algo interessante ao calcular o inverso de zero. Se fizer o cálculo com $-0$, o resultado será $-\infty$. Se fizer o cálculo com $+0$, o resultado será $+\infty$.
 
-<iframe height="800px" width="100%" src="https://repl.it/@frankalcantara/infinityTeste?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+Do ponto de vista estritamente matemático, isso não é exatamente correto. Matematicamente, a divisão de qualquer número por zero não é definida - diz-se que ela tende ao infinito, mas não é igual ao infinito.
+
+O que a norma IEEE 754 está fazendo aqui é uma espécie de compromisso prático. Ela nos dá uma indicação da direção em que o resultado está indo (para o infinito positivo ou negativo), mesmo que isso não seja uma representação exata do que acontece na matemática pura. Assim, em termos de programação, obtemos uma resposta útil, mesmo que essa resposta não seja rigorosamente precisa do ponto de vista matemático.
 
 ### NaN (Not a Number)
 
-O conceito de **NaN** foi criado para representar valores, principalmente resultados, que não correspondem a um dos números reais que podem ser representados em binário segundo a norma IEEE 754. Neste caso o expoente será completamente preenchido como $1_2$ e a mantissa será preenchida com qualquer valor desde que este valor não seja composto de todos os algarismos com o valor $0_2$. O bit relativo ao sinal não causa efeito no NaN. No entanto, existem duas categorias de NaN: QNaN _(Quiet NaN)_ e SNaN _(Signalling NaN)_.
+O conceito de **NaN** foi criado para representar valores, principalmente resultados, que não correspondem a um dos números reais que podem ser representados em binário segundo a norma IEEE 754. Neste caso o expoente será completamente preenchido como $1$ e a mantissa será preenchida com qualquer valor desde que este valor não seja composto de todos os algarismos com o valor $0$. O bit relativo ao sinal não causa efeito no NaN. No entanto, existem duas categorias de NaN: QNaN _(Quiet NaN)_ e SNaN _(Signalling NaN)_.
 
 O primeiro caso QNaN, _(Quiet NaN)_, ocorre quando o bit mais significativo da mantissa é $1_2$. O QNaN se propaga na maior parte das operações aritméticas e é utilizado para indicar que o resultado de uma determinada operação não é matematicamente definido. já o SNaN, _(Signalling NaN)_, que ocorre quando o bit mais significativo da mantissa é $0_2$ é utilizado para sinalizar alguma exceção como o uso de variáveis não inicializadas. Podemos sintetizar estes conceitos memorizando que QNaN indica operações indeterminadas enquanto SNaN indica operações inválidas.
 
@@ -377,59 +380,59 @@ O primeiro caso QNaN, _(Quiet NaN)_, ocorre quando o bit mais significativo da m
           <th>Resultado</th>
         </tr>
     <tbody>
-        <tr>
-          <td>$(Número) \div (\pm Infinito)$ </td>
+        <tr style="text-align: center;">
+          <td>$(Número) \div (\pm \infty)$ </td>
           <td> $0$ </td>
         </tr>
-        <tr>
-            <td>$(\pm Infinito) \times (\pm Infinito)$</td>
-            <td>$\pm Infinito$</td>
+        <tr style="text-align: center;">
+            <td>$(\pm \infty) \times (\pm \infty)$</td>
+            <td>$\pm \infty$</td>
         </tr>
-        <tr>
+        <tr style="text-align: center;">
           <td>$(\pm \neq 0) \div (\pm 0)$</td>
-          <td>$\pm Infinito$</td>
+          <td>$\pm \infty$</td>
         </tr>
-        <tr>
-            <td>$(\pm Número) \times (\pm Infinito)$</td>
-            <td>$\pm Infinito$</td>
+        <tr style="text-align: center;">
+            <td>$(\pm Número) \times (\pm \infty)$</td>
+            <td>$\pm \infty$</td>
         </tr>
-        <tr>
-          <td>$(Infinito) + (Infinito)$</td>
-          <td>$+Infinito$</td>
+        <tr style="text-align: center;">
+          <td>$(\infty) + (\infty)$</td>
+          <td>$+\infty$</td>
         </tr>
-        <tr>
-          <td>$(Infinito) - (-Infinito)$</td>
-          <td>$+Infinito$</td>
+        <tr style="text-align: center;">
+          <td>$(\infty) - (-\infty)$</td>
+          <td>$+\infty$</td>
         </tr>
-        <tr>
-          <td>$(-Infinito) + (-Infinito)$</td>
-          <td>$-Infinito$</td>
+        <tr style="text-align: center;">
+          <td>$(-\infty) + (-\infty)$</td>
+          <td>$-\infty$</td>
         </tr>
-        <tr>
-          <td>$(-Infinito) - (Infinito)$</td>
-          <td>$-Infinito$</td>
+        <tr style="text-align: center;">
+          <td>$(-\infty) - (\infty)$</td>
+          <td>$-\infty$</td>
         </tr>
-        <tr>
-          <td>$(Infinito) - (Infinito)$</td>
+        <tr style="text-align: center;">
+          <td>$(\infty) - (\infty)$</td>
           <td>$NaN$</td>
         </tr>
-        <tr>
-          <td>$(-Infinito) + (Infinito)$</td>
+        <tr style="text-align: center;">
+          <td>$(-\infty) + (\infty)$</td>
           <td>$NaN$</td>
         </tr>
-        <tr>
+        <tr style="text-align: center;">
           <td>$(\pm 0) \div (\pm 0)$</td>
           <td>$NaN$</td>
         </tr>
-        <tr>
-           <td>$(\pm Infinito) \div (\pm Infinito)$</td>
+        <tr style="text-align: center;">
+           <td>$(\pm \infty) \div (\pm \infty)$</td>
            <td>$NaN$</td>
         </tr>
-        <tr>
-          <td>$(\pm Infinito) \times (0)$</td>
+        <tr style="text-align: center;">
+          <td>$(\pm \infty) \times (0)$</td>
           <td>$NaN$</td>
         </tr>
-        <tr>
+        <tr style="text-align: center;">
             <td>$(NaN) == (NaN)$</td>
             <td>$false$</td>
         </tr>
@@ -470,24 +473,24 @@ Certa vez [Joel Spolsky](https://www.joelonsoftware.com/) criou o termo _leaky a
 
 # Referências
 
-[Binary System](https://binary-system.base-conversion.ro/real-number-converted-from-decimal-system-to-32bit-single-precision-IEEE754-binary-floating-point.php?decimal_number_base_ten=0.2)
+1. [Binary System](https://binary-system.base-conversion.ro/real-number-converted-from-decimal-system-to-32bit-single-precision-IEEE754-binary-floating-point.php?decimal_number_base_ten=0.2). Acessado em 17 de julho de 2023.
 
-[Floating Point Numbers](https://floating-point-gui.de/formats/fp/)
+2. [Floating Point](https://users.cs.duke.edu/~raw/cps104/TWFNotes/floating.html). Acessado em 17 de julho de 2023.
 
-[Floating Point](https://users.cs.duke.edu/~raw/cps104/TWFNotes/floating.html)
+3. [Floating Point Arithmetic: Issues and Limitations](https://docs.python.org/3/tutorial/floatingpoint.html). Acessado em 17 de julho de 2023.
 
-[What Every Computer Scientist Should Know About Floating-Point Arithmetic](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html)
+4. [Floating Point Numbers](https://floating-point-gui.de/formats/fp/). Acessado em 17 de julho de 2023.
 
-[Floating Point Arithmetic: Issues and Limitations](https://docs.python.org/3/tutorial/floatingpoint.html)
+5. [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754#Rounding_rules). Acessado em 17 de julho de 2023.
 
-[IEEE floating-point exceptions in C++](https://www.johndcook.com/blog/IEEE_exceptions_in_cpp/)
+6. [IEEE floating-point exceptions in C++](https://www.johndcook.com/blog/IEEE_exceptions_in_cpp/). Acessado em 17 de julho de 2023.
 
-[Javascript: the weird parts](https://charlieharvey.org.uk/page/javascript_the_weird_parts)
+7. [Javascript: the weird parts](https://charlieharvey.org.uk/page/javascript_the_weird_parts). Acessado em 17 de julho de 2023.
 
-[IEEE 754](https://en.wikipedia.org/wiki/IEEE_754#Rounding_rules)
+8. [Taming Floating Point Error](https://www.johnbcoughlin.com/posts/floating-point-axiom/). Acessado em 17 de julho de 2023.
 
-[Taming Floating Point Error](https://www.johnbcoughlin.com/posts/floating-point-axiom/)
+9. [What Every Computer Scientist Should Know About Floating-Point Arithmetic](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html). Acessado em 17 de julho de 2023.
 
-[Why do we need a floating-point arithmetic standard?](https://people.eecs.berkeley.edu/~wkahan/ieee754status/why-ieee.pdf)
+10. [Why do we need a floating-point arithmetic standard?](https://people.eecs.berkeley.edu/~wkahan/ieee754status/why-ieee.pdf). Acessado em 17 de julho de 2023.
 
-[Zermelo–Fraenkel](https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory)
+11. [Zermelo–Fraenkel](https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory). Acessado em 17 de julho de 2023.
