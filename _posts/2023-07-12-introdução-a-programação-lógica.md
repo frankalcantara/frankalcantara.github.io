@@ -34,22 +34,19 @@ Imagine, por um momento, que estamos explorando o universo dos computadores, mas
 
 Em vez de sermos forçados a ordenar cada detalhe do processo de solução de um problema, a Programação Lógica permite que declaremos o que queremos, e então deixar o computador fazer o trabalho de encontrar os detalhes e processos necessários para resolver cada problema.
 
-Na Programação Imperativa partimos de uma determinada expressão e seguimos um conjunto de instruções até encontrar o resultado desejado. Na Programação Lógica, usamos a dedução. Partimos de uma conjectura e, de acordo com um conjunto específico de regras, tentamos construir uma prova para esta conjectura. Esta prova, não é simples, o [Grande Teorema de Fermat tomou 357 anos para ser provado](https://en.wikipedia.org/wiki/Wiles%27s_proof_of_Fermat%27s_Last_Theorem).
+Na **Programação Imperativa** partimos de uma determinada expressão e seguimos um conjunto de instruções até encontrar o resultado desejado. O programador fornece um conjunto de instruções que definem o fluxo de controle e modificam o estado da máquina. O foco está em **como** o problema deve ser resolvido passo a passo. Exemplos de linguagens imperativas incluem C++, Java e Python.
 
-Na **Programação Imperativa**, o programador fornece um conjunto de instruções que definem o fluxo de controle e modificam o estado da máquina. O foco está em **como** o problema deve ser resolvido passo a passo. Exemplos de linguagens imperativas incluem C++, Java e Python.
+Na Programação Lógica, um dos paradigmas da **Programação Descritiva** usamos a dedução. Na Programação Descritiva, o programador fornece uma descrição lógica, ou funcional, de **o que** deve ser feito, sem especificar o fluxo de controle. O foco está no problema, não na solução. Exemplos incluem SQL, Prolog e Haskell. Na Programação Lógica, partimos de uma conjectura e, de acordo com um conjunto específico de regras, tentamos construir uma prova para esta conjectura.
 
-Já na **Programação Descritiva**, o programador fornece uma descrição lógica de **o que** deve ser feito, sem especificar o fluxo de controle. O foco está no problema, não na solução. Exemplos incluem SQL, Prolog e Haskell.
+Uma conjectura é uma suposição, ou proposição que é acreditada ser verdadeira mas ainda não foi provada. Na linguagem natural, conjecturas são frequentemente expressas como declarações que precisam de confirmação adicional. Na Lógica de Primeira Ordem, as conjecturas são tratadas como sentenças que são propostas para serem verdadeiras. Essas sentenças podem ser analisadas e testadas usando as regras e estruturas da Lógica de Primeira Ordem.
 
-Enquanto linguagens imperativas são procedurais, as descritivas são declarativas. O programador imperativo tem que pensar como um computador, já o descritivo precisa descrever a lógica do problema.
+![Diagrama de Significado de Conjeturas](/assets/images/conjecturas.jpeg)
 
-Em resumo:
+Em resumo: **Imperativa:** focada no processo, no "como" chegar à solução; **Descritiva:** focada no problema em si, no "o que" precisa ser feito.
 
-- **Imperativa:** focada no processo, no "como" chegar à solução.
-- **Descritiva:** focada no problema em si, no "o que" precisa ser feito.
+A escolha entre estes paradigmas dependerá da aplicação e do estilo do programador. Mas o futuro parece cada vez mais orientado para linguagens declarativas e descritivas, que permitem ao programador concentrar-se no problema, não nos detalhes da solução. Efeito que parece ser evidente se considerarmos os avanços recentes no campo da inteligência artificial.
 
-A escolha dependerá da aplicação e do estilo do programador. Mas o futuro parece cada vez mais orientado para linguagens declarativas e descritivas, que permitem ao programador concentrar-se no problema, não nos detalhes da solução. Efeito que parece ser evidente se consideramos os avanços recentes no campo da inteligência artificial.
-
-Na nossa jornada o caminho começará na Lógica de Primeira Ordem, que aqui dividiremos em partes menores e interdependentes. Ainda que a maior parte da academia não perceba as nuances que separam a Lógica de Primeira Ordem da Lógica Predicativa. Aqui, separaremos a Lógica de Primeira Ordem em seus compoentes aninhados olhando cada parte como se individual fosse. E, na manhã da nossa jornada, usaremos a Lógica Proposicional para construir o raciocínio.
+Em nossa exploração, vamos começar com a Lógica de Primeira Ordem, a qual iremos subdividir em elementos menores e interligados. É importante notar que muitos no campo acadêmico podem não distinguir as sutilezas que diferenciam a Lógica de Primeira Ordem da Lógica Predicativa. Neste contexto, iremos decompor a Lógica de Primeira Ordem em suas partes componentes, examinando cada uma como uma entidade distinta. E, para iniciar nossa jornada, utilizaremos a Lógica Proposicional como alicerce para estabelecer o raciocínio.
 
 A Lógica Proposicional é um tipo de linguagem matemática suficientemente rica para expressar muitos dos problemas que precisamos resolver e suficientemente gerenciável para que os computadores possam lidar com ela. Uma ferramenta útil tanto ao homem quanto a máquina. Quando esta ferramenta estiver conhecida mergulharemos no espírito da Lógica de Primeira Ordem, a Lógica Predicativa, ou Lógica de Predicados, e então poderemos fazer sentido do mundo.
 
@@ -61,17 +58,15 @@ No final do dia, tudo que queremos, desde os tempos de [Gödel](https://en.wikip
 
 A Programação Lógica aparece em meados dos anos 1970 como uma evolução dos esforços das pesquisas sobre a prova computacional de teoremas matemáticos e inteligência artificial. Deste esforço surgiu a esperança de que poderíamos usar a lógica como um linguagem de programação, em inglês, "programming logic" ou Prolog. Este artigo faz parte de uma série sobre a Programação Lógica, partiremos da base matemática e chegaremos ao Prolog.
 
-# 1. Lógica de Primeira Ordem
+# Lógica de Primeira Ordem
 
-A lógica de primeira ordem é um dos fundamentos essenciais da ciência da computação e, consequentemente, da programação. Essa matemática permite quantificar sobre objetos, fazer declarações que se aplicam a todos os membros de um conjunto ou a um membro particular desse conjunto. Por outro lado, nos impede de quantificar diretamente sobre predicados ou funções.
-
-Usar a lógica de primeira ordem é como olhar para as estrelas em uma noite clara. Nós podemos ver e quantificar as estrelas individuais (objetos), mas não podemos quantificar diretamente sobre as constelações (predicados ou funções).
+A Lógica de Primeira Ordem é um dos fundamentos essenciais da ciência da computação e, consequentemente, da programação. Essa matemática permite quantificar sobre objetos, fazer declarações que se aplicam a todos os membros de um conjunto ou a um membro particular desse conjunto. Por outro lado, nos impede de quantificar diretamente sobre predicados ou funções.
 
 Essa restrição não é um defeito, mas sim um equilíbrio cuidadoso entre poder expressivo e simplicidade computacional. Dá-nos uma maneira de formular uma grande variedade de problemas, sem tornar o processo de resolução desses problemas excessivamente complexo.
 
-A lógica de primeira ordem é o nosso ponto de partida, nossa base, nossa pedra fundamental. Uma forma poderosa e útil de olhar para o universo, não tão complicada que seja hermética a olhos leigos, mas suficientemente complexa para permitir a descoberta de alguns dos mistérios da matemática e, no processo, resolver alguns problemas práticos.
+A Lógica de Primeira Ordem é o nosso ponto de partida, nossa base, nossa pedra fundamental. Uma forma poderosa e útil de olhar para o universo, não tão complicada que seja hermética a olhos leigos, mas suficientemente complexa para permitir a descoberta de alguns dos mistérios da matemática e, no processo, resolver alguns problemas práticos.
 
-A Lógica de primeira ordem consiste de uma linguagem, consequentemente criada sobre um alfabeto $\Sigma$, de um conjunto de axiomas e de um conjunto de regras de inferência. Esta linguagem consiste de todas as fórmulas bem formadas da teoria da Lógica Proposicional e predicativa. O conjunto de axiomas é um subconjunto do conjunto de fórmulas bem formadas acrescido e, finalmente, um conjunto de regras de inferência.
+A Lógica de Primeira Ordem consiste de uma linguagem, consequentemente criada sobre um alfabeto $\Sigma$, de um conjunto de axiomas e de um conjunto de regras de inferência. Esta linguagem consiste de todas as fórmulas bem formadas da teoria da Lógica Proposicional e predicativa. O conjunto de axiomas é um subconjunto do conjunto de fórmulas bem formadas acrescido e, finalmente, um conjunto de regras de inferência.
 
 O alfabeto $\Sigma$ pode ser dividido em conjuntos de símbolos agrupados por classes:
 
@@ -87,25 +82,25 @@ Vamos usar os símbolos $u$, $v$, $w$, $x$, $y$ e $z$ para indicar variáveis e 
 
 **Quantificadores**: nos manteremos no limite da tradição matemática e usar $\exists$ (quantificador existencial) e $\forall$ (quantificador universal).
 
-**Fórmulas Bem Formatadas**: usaremos letras do alfabeto latino, maiúsculas para representar as Fórmulas Bem Formatadas: $F$, $G$, $I$, $J$, $K$.
+**Fórmulas Bem Formadas**: usaremos letras do alfabeto latino, maiúsculas para representar as Fórmulas Bem Formadas: $F$, $G$, $I$, $J$, $K$.
 
-Em qualquer linguagem matemática, a precedência das operações é como uma receita. Que deve ser seguida à letra para garantir o sucesso. Vamos definir uma ordem de precedência para garantir a legibilidade das nossas Fórmulas Bem Formatadas:
+Na lógica matemática, uma Fórmula Bem Formada, também conhecida como expressão bem formada, é uma sequência **finita** de símbolos que é formada de acordo com as regras gramaticais de uma linguagem lógica específica.
+
+Em lógica de primeira ordem, uma Fórmula Bem Formada é uma expressão que **só pode ser** verdadeira ou falsa. As Fórmulas Bem Formadas são compostas de quantificadores, variáveis, constantes, predicados, e conectivos lógicos, e devem obedecer a regras específicas de sintaxe.
+
+Em qualquer linguagem matemática regra sintática mais importante é a precedência das operações, uma espécie de receita. Que deve ser seguida à letra. Vamos nos restringir a seguinte ordem de precedência:
 
 $$\neg, \forall, \exists, \wedge, \vee, \rightarrow, \leftrightarrow$$
 
-Com a maior ordem de precedência dada a $\neg$ e a menor $\leftrightarrow$.
+Dando maior precedência a $\neg$ e a menor a $\leftrightarrow$.
 
-O uso dos parenteses e da ordem de precedência com parcimônia, permite que possamos escrever $(\forall x(\exists y (\mathbf{p}(x,y)\rightarrow \mathbf{q}(x))))$ ou $\forall x \exists y (\mathbf{p}(x,y)\rightarrow \mathbf{q}(x))$ que são a mesma fórmula bem formatada. Escolha a opção que seja mais fácil de ler e entender.
+O uso dos parenteses e da ordem de precedência, com parcimônia, muita parcimônia, permite que possamos escrever $(\forall x(\exists y (\mathbf{p}(x,y)\rightarrow \mathbf{q}(x))))$ ou $\forall x \exists y (\mathbf{p}(x,y)\rightarrow \mathbf{q}(x))$ que são a mesma fórmula bem Formada. Escolha a opção que seja mais fácil de ler e entender.
 
-**Fórmulas Bem Formatadas** são conjuntos de termos e operações seguindo a ordem de precedência definida anteriormente e as regras de cada operação.
+Nesta linguagem cada sentença, ou preposição, deve ser verdadeira ou falsa, nunca verdadeira e falsa ao mesmo tempo e nada diferente de verdadeiro ou falso.
 
-As Fórmulas Bem Formatadas são como as frases de um idioma novo, com sua própria gramática e vocabulário. Assim como aprendemos nossa língua nativa desde a infância, também precisamos aprender as regras desse novo idioma para nos comunicarmos nele.
+Para que uma sentença, ou preposição, seja verdadeira ela precisa ser logicamente verdadeira. Uma sentença que deve ser falsa é uma sentença contraditória.
 
-Esse idioma não é falado por pessoas, e sim por computadores. É a linguagem da lógica matemática. E como toda linguagem, tem seus próprios símbolos - as letras que formam seu alfabeto - suas regras de gramática e suas expressões bem construídas.
-
-As Fórmulas Bem Formatadas são as frases "gramaticalmente corretas" nessa linguagem lógico-matemática. Frases que respeitam as regras sintáticas, que têm significado claro e preciso dentro desse sistema formal. Frases que podem ser "entendidas" por um computador.
-
-Assim como aprendemos nossa língua materna reconhecendo padrões e regularidades, também reconhecemos Fórmulas Bem Formatadas por seus padrões característicos. Os símbolos estão dispostos de maneira organizada, em uma construção step-by-step que lembra a recursão das formigas ao construir seus formigueiros.
+Assim como aprendemos nossa língua materna reconhecendo padrões, repetições e regularidades, também reconhecemos Fórmulas Bem Formadas por seus padrões característicos. Os símbolos estarão dispostos de forma organizada e padronizada em termos sobre os quais serão aplicadas operações, funções e quantizadores.
 
 Termos são variáveis, constantes ou mesmo funções aplicadas a termos e seguem um pequeno conjunto de regras:
 
@@ -113,16 +108,16 @@ Termos são variáveis, constantes ou mesmo funções aplicadas a termos e segue
 2. uma constante $a$ é um termo em si;
 3. se $\mathbf{f}$ é uma função de termos $(t_1, ... t_2)$ então $\mathbf{f}(t_1, ... t_2)$ é um termo.
 
-Cada proposição na Lógica Proposicional é como uma ilha isolada de verdade, um fato fundamental que não pode ser dividido em partes menores. 'A chuva cai', 'O sol brilha' - cada uma dessas proposições é verdadeira ou falsa como uma unidade. Um átomo, elemento básico e fundamental de todas as expressões. Também, mas tarde, chamaremos de átomos a todo predicado aplicado aos termos de uma fórmula. Assim, também precisamos definir os predicados.
+Cada proposição, ou sentença, na Lógica Proposicional é como uma ilha isolada de verdade, um fato fundamental que não pode ser dividido em partes menores. 'A chuva cai', 'O sol brilha' - cada uma dessas proposições é verdadeira ou falsa como uma unidade. Um átomo, elemento básico e fundamental de todas as expressões. Também, mas tarde, chamaremos de átomos a todo predicado aplicado aos termos de uma fórmula. Assim, também precisamos definir os predicados.
 
-1. se $\mathbf{p}$ é um predicado de termos $(t_1, ... t_2)$ então $\mathbf{p}(t_1, ... t_2)$ é um fórmula bem formatada, um átomo.
-2. se $F$ e $G$ são Fórmulas Bem Formatadas então: $\neg F$, $F\wedge G$, $F \vee G$, $F \rightarrow G$ e $F \leftrightarrow G$ são Fórmulas Bem Formatadas.
-3. se $F$ é uma fórmula bem formatada e $x$ uma variável então $\exists x F$ e $\forall x F$ são Fórmulas Bem Formatadas.
+1. se $\mathbf{p}$ é um predicado de termos $(t_1, ... t_2)$ então $\mathbf{p}(t_1, ... t_2)$ é um fórmula bem Formada, um átomo.
+2. se $F$ e $G$ são Fórmulas Bem Formadas então: $\neg F$, $F\wedge G$, $F \vee G$, $F \rightarrow G$ e $F \leftrightarrow G$ são Fórmulas Bem Formadas.
+3. se $F$ é uma fórmula bem Formada e $x$ uma variável então $\exists x F$ e $\forall x F$ são Fórmulas Bem Formadas.
 
-Por fim, podemos dizer que as Fórmulas Bem Formatadas: respeitam regras de precedência entre conectivos, parênteses e quantificadores;
+Por fim, podemos dizer que as Fórmulas Bem Formadas: respeitam regras de precedência entre conectivos, parênteses e quantificadores;
 não apresentam problemas como variáveis livres não quantificadas e, principalmente, são unívocas, sem ambiguidade na interpretação.
 
-Finalmente podemos dizer que a linguagem da Lógica de Primeira Ordem é o conjunto de todas as Fórmulas Bem Formatadas incluindo os campos de estudo da Lógica Proposicional e da Lógica de Predicados. Termos e átomos costurados em uma teia onde cada termo, ou átomo, é como uma ilha isolada de verdade, um fato fundamental que não pode ser dividido em partes menores. 'A chuva cai', 'O sol brilha' - cada uma dessas proposições é verdadeira ou falsa como uma unidade. As operações lógicas são as pontes que conectam essas ilhas, permitindo-nos construir estruturas mais complexas de razão.
+Finalmente podemos dizer que a linguagem da Lógica de Primeira Ordem é o conjunto de todas as Fórmulas Bem Formadas incluindo os campos de estudo da Lógica Proposicional e da Lógica de Predicados. Termos e átomos costurados em uma teia onde cada termo, ou átomo, é como uma ilha isolada de verdade, um fato fundamental que não pode ser dividido em partes menores. 'A chuva cai', 'O sol brilha' - cada uma dessas proposições é verdadeira ou falsa como uma unidade. As operações lógicas são as pontes que conectam essas ilhas, permitindo-nos construir estruturas mais complexas de razão.
 
 ## Lógica Proposicional
 
@@ -192,7 +187,7 @@ O condicional $\rightarrow$ não representa a implicação em nenhum sentido cau
 
 O bicondicional $\leftrightarrow$ equivale a ambos os componentes terem o mesmo valor-verdade. Todos os operadores, ou conectivos, conectam duas declarações, exceto $\neg$ que se aplica a apenas um termo.
 
-Ainda observando a Tabela Verdade acima, é fácil perceber que se tivermos $4$ termos, em vez de $2$, teremos $2^4 = 16$. Se para uma determinada Fórmula Bem Formatada todas os resultados forem verdadeiros, $T$, teremos uma _tautologia_, se todos forem falsos, $F$ uma _contradição_.
+Ainda observando a Tabela Verdade acima, é fácil perceber que se tivermos $4$ termos, em vez de $2$, teremos $2^4 = 16$. Se para uma determinada Fórmula Bem Formada todas os resultados forem verdadeiros, $T$, teremos uma _tautologia_, se todos forem falsos, $F$ uma _contradição_.
 
 Uma _tautologia_ é uma fórmula que é sempre verdadeira, não importa a interpretação ou atribuição de valores às variáveis. Em programação lógica, tautologias representam verdades universais sobre o domínio do problema. Já uma _contradição_ é sempre falsa. Na Programação Lógica, contradições indicam inconsistências ou impossibilidades lógicas no domínio modelado.
 
@@ -311,7 +306,7 @@ Linguagens de programação que usamo a Programação Lógica usam _unificação
   text-align: center;
   margin-bottom: 20px;">Tabela 2 - Equivalências em Lógica Proposicional.</legend>
 
-Estas equivalências permitem validar Fórmulas Bem Formatadas sem o uso de uma Tabela Verdade. São muitas as equivalências que existem, estas são as mais comuns. Talvez, alguns exemplos de validação de Fórmulas Bem Formatadas, clareiem o caminho que precisamos seguir:
+Estas equivalências permitem validar Fórmulas Bem Formadas sem o uso de uma Tabela Verdade. São muitas as equivalências que existem, estas são as mais comuns. Talvez, alguns exemplos de validação de Fórmulas Bem Formadas, clareiem o caminho que precisamos seguir:
 
 **Exemplo 1**: $A \wedge (B \vee (A \wedge C))$
 
@@ -468,7 +463,7 @@ Aqui, no universo da lógica, os predicados são ferramentas poderosas que permi
 
 Na matemática, um predicado pode ser entendido como uma função que recebe um objeto (ou um conjunto de objetos) e retorna um valor de verdade, ou seja, verdadeiro ou falso. Esta função descreve uma propriedade que o objeto pode possuir.
 
-Um predicado $P$ é uma função que retorna um valor booleano, isto é, $P$ é uma função $P \vert U \rightarrow \\{\text{Verdadeiro, Falso}\\}$ para um conjunto $U$. Esse conjunto $U$ é chamado de universo ou domínio do discurso, e dizemos que $P$ é um predicado sobre $U$.
+Um predicado $P$ é uma função que retorna um valor booleano, isto é, $P$ é uma função $P : U \rightarrow \\{\text{Verdadeiro, Falso}\\}$ para um conjunto $U$. Esse conjunto $U$ é chamado de universo ou domínio do discurso, e dizemos que $P$ é um predicado sobre $U$.
 
 Podemos imaginar que o universo $U$ é o conjunto de todos os possíveis argumentos para o qual o predicado $P$ pode ser aplicado. Cada elemento desse universo é testado pelo predicado, que retorna Verdadeiro ou Falso dependendo se o elemento cumpre ou não a propriedade descrita pelo predicado. Dessa forma, podemos entender o predicado como uma espécie de filtro, ou critério, que é aplicado ao universo $U$, separando os elementos que cumprem uma determinada condição daqueles que não a cumprem. Esta é uma maneira de formalizar e estruturar nossas observações e declarações sobre o mundo ao nosso redor, tornando-as mais precisas e permitindo que as manipulemos de maneira lógica e consistente.
 
@@ -489,37 +484,37 @@ Assim, vemos que o predicado $P(u)$ dado por _u é par_ é uma propriedade que a
 1. **Exemplo 1**:
 
    - Universo do discurso: $U = \text{conjunto de todas as pessoas}$.
-   - Predicado: $P(x) = \\{ x \vert x \text{ é um matemático} \\}$;
+   - Predicado: $P(x) = \\{ x : x \text{ é um matemático} \\}$;
    - Itens para os quais $P(x)$ é verdadeiro: "Carl Gauss", "Leonhard Euler", "John Von Neumann".
 
 2. **Exemplo 2**:
 
-   - Universo do discurso: $U = \{x \in \mathbb{Z} \vert x \text{ é par}\}$
+   - Universo do discurso: $U = \{x \in \mathbb{Z} : x \text{ é par}\}$
    - Predicado: $P(x) = (x > 5)$;
    - Itens para os quais $P(x)$ é verdadeiro: $6$, $8$, $10 ...$.
 
 3. **Exemplo 3**:
 
-   - Universo do discurso: $U = \{x \in \mathbb{R} \vert x > 0 \text{ e } x < 10\}$
+   - Universo do discurso: $U = \{x \in \mathbb{R} : x > 0 \text{ e } x < 10\}$
    - Predicado: $P(x) = (x^2 - 4 = 0)$;
    - Itens para os quais $P(x)$ é verdadeiro: $2$, $-2$.
 
 4. **Exemplo 4**:
 
-   - Universo do discurso: $U = \\{x \in \mathbb{N} \vert x \text{ é um múltiplo de } 3\\}$
+   - Universo do discurso: $U = \\{x \in \mathbb{N} : x \text{ é um múltiplo de } 3\\}$
    - Predicado: $P(x) = (\text{mod}(x, 2) = 0)$;
    - Itens para os quais $P(x)$ é verdadeiro: $6$, $12$, $18 ...$.
 
 5. **Exemplo 5**:
 
-   - Universo do discurso: $U = \{(x, y) \in \mathbb{R}^2 \vert x \neq y\}$
+   - Universo do discurso: $U = \{(x, y) \in \mathbb{R}^2 : x \neq y\}$
    - Predicado: $P(x, y) = (x < y)$;
    - Itens para os quais $P(x, y)$ é verdadeiro: $(1, 2)$, $(3, 4)$, $(5, 6)$.
 
 O número de argumentos em um predicado será devido apenas ao sentido que queremos dar. A metáfora lógica que estamos construindo. Por exemplo, pense em um predicado ternário $R$ dado por _x está entre y e z_. Quando substituímos $x$, $y$ e $z$ por números específicos podemos validar a verdade, ou não do predicado $R$. Vamos considerar algumas amostras adicionais de predicados baseados na aritmética com uma forma um pouco menos formal, e muito mais prática, de defini-los:
 
 1. $Primo(n)$: o número inteiro positivo $n$ é um número primo.
-2. $PotênciaDe(n, k)$: o número inteiro $n$ é uma potência exata de $k \vert n = ki$ para algum $i \in \mathbb{Z} ≥ 0$.
+2. $PotênciaDe(n, k)$: o número inteiro $n$ é uma potência exata de $k : n = ki$ para algum $i \in \mathbb{Z} ≥ 0$.
 3. $somaDeDoisPrimos(n)$: o número inteiro positivo $n$ é igual à soma de dois números primos.
 
 Em 1, 2 e 3 os predicados estão definidos com mnemônicos. Assim, aumentamos a legibilidade e tornamos mais fácil o seu entendimento. Parece simples, apenas um mnemônico como identificador. Mas, pense cuidadosamente e será capaz de vislumbrar a flexibilidade que os predicados adicionam a abstração lógica. Ainda assim, falta alguma coisa.
@@ -538,11 +533,11 @@ Os quantificadores nos permitem fazer declarações gerais ou específicas sobre
 
 ### Quantificador Universal
 
-O quantificador universal $\forall$, lê-se _para todo_, indica que uma afirmação deve ser verdadeira para todos os valores de uma variável dentro de um universo de valores permitidos. Por exemplo, a preposição clássica _todos os humanos são mortais_ poderia ser escrita, em notação matemática, $\forall x \vert Humano(x) \rightarrow Mortal(x)$. Ou com predicado um pouco mais matemático, teríamos se $x$ é positivo então $x + 1$ é positivo, pode ser escrito $\forall x \vert x > 0 \rightarrow x + 1 > 0$. E pronto! Aqui temos quantificadores, Lógica Predicativa, Lógica Proposicional e Teoria dos Conjuntos.
+O quantificador universal $\forall$, lê-se _para todo_, indica que uma afirmação deve ser verdadeira para todos os valores de uma variável dentro de um universo de valores permitidos. Por exemplo, a preposição clássica _todos os humanos são mortais_ poderia ser escrita, em notação matemática, $\forall x : Humano(x) \rightarrow Mortal(x)$. Ou com predicado um pouco mais matemático, teríamos se $x$ é positivo então $x + 1$ é positivo, pode ser escrito $\forall x : x > 0 \rightarrow x + 1 > 0$. E pronto! Aqui temos quantificadores, Lógica Predicativa, Lógica Proposicional e Teoria dos Conjuntos.
 
 Recorremos a teoria dos conjuntos para tornar o universo do discurso mais explícito, a notação de pertencimento é útil nesta definição. Um exemplo bom exemplo desta prática seria:
 
-$$\forall x \in \mathbb{Z} \vert x > 0 \rightarrow x + 1 > 0$$
+$$\forall x \in \mathbb{Z} : x > 0 \rightarrow x + 1 > 0$$
 
 Isso é logicamente equivalente a escrever:
 
@@ -556,7 +551,7 @@ Espero que concordemos que a forma curta deixa mais claro que a intenção de $x
 
 A afirmação $\forall x P(x)$ é, de certa forma a operação $\wedge$, _and_, em todo o universo do discurso. Se pensarmos assim, o predicado:
 
-$$\forall x \in \mathbb{N} \vert P(x)$$
+$$\forall x \in \mathbb{N} : P(x)$$
 
 Pode ser escrito como:
 
@@ -590,25 +585,57 @@ Para validar $\forall x P(x)$ escolheremos o pior caso possível para $x$ - todo
 
    $$\forall x\,((\exists a\in\Bbb N\,(x = 4a) \land \exists b\in\Bbb N\,(x = 6b)) \rightarrow \exists c\in\Bbb N\,(x = 12c))$$
 
-O quantificador universal nos permite definir uma Fórmula Bem Formatada representando todos os elementos de um conjunto, universo do discurso, dada uma qualidade específica, predicado. Nem sempre isso é suficiente.
+O quantificador universal nos permite definir uma Fórmula Bem Formada representando todos os elementos de um conjunto, universo do discurso, dada uma qualidade específica, predicado. Nem sempre isso é suficiente.
 
 ### Quantificador Existencial
 
-O quantificador existencial $\exists$ (lê-se "existe") diz que uma afirmação deve ser verdadeira para pelo menos um valor da variável. Então "algum humano é mortal" se torna $\exists x : Humano(x) \land Mortal(x)$. Observe que usamos E ao invés de implicação aqui; a afirmação $\exists x : Humano(x) \rightarrow Mortal(x)$ faz a afirmação muito mais fraca de que "existe alguma coisa $x$, tal que se $x$ é humano, então $x$ é mortal", o que é verdadeiro em qualquer universo que contém um pinguim roxo imortal - já que não é humano, $Humano(pinguim) \rightarrow Mortal(pinguim)$ é verdadeiro.
+O quantificador existencial, $\exists$ nos permite fazer afirmações sobre a existência de objetos com certas propriedades, sem precisarmos especificar exatamente quais objetos são esses. Vamos tentar remover os véus da dúvida com um exemplo simples.
 
-Assim como com $\forall$, $\exists$ pode ser limitado a um universo explícito com a notação de pertencimento a conjunto, por exemplo, $\exists x \in \mathbb{Z} : x = x^2$. Isso é equivalente a escrever $\exists x : x \in \mathbb{Z} \land x = x^2$.
+Consideremos a sentença: "existem humanos mortais". Com um pouco mais de detalhe e matemática, podemos escrever isso como: existe pelo menos um $x$ tal que $x$ é humano e mortal. Para escrever a mesma sentença com precisão matemática teremos:
 
-A fórmula $\exists x : P(x)$ é equivalente a um OU muito grande, de forma que $\exists x \in \mathbb{N} : P(x)$ poderia ser reescrito como $P(0) \lor P(1) \lor P(2) \lor P(3) \lor \ldots$ Novamente, você normalmente não pode escrever uma expressão como esta se há termos infinitos, mas transmite a ideia.
+$$\exists x : \text{Humano}(x) \land \text{Mortal}(x)$$
 
-2.3.2.3 Negação e quantificadores
+Lendo por partes: existe um $x$, tal que $x$ é humano _E_ $x$ é mortal. Em outras palavras, existe pelo menos um humano que é mortal.
 
-As seguintes equivalências valem:
+Note duas coisas importantes:
 
-$\lnot \forall x : P(x) \leftrightarrow \exists x : \lnot P(x).$
+1. Nós não precisamos dizer exatamente quem é esse humano mortal. Só afirmamos que existe um. O operador $\exists$ captura essa ideia.
 
-$\lnot \exists x : P(x) \leftrightarrow \forall x : \lnot P(x).$
+2. Usamos _E_ ($\land$), não implicação ($\rightarrow$). Se usássemos $\rightarrow$, a afirmação ficaria muito mais fraca. Veja:
 
-Essas são essencialmente as versões quantificadoras das leis de De Morgan: a primeira diz que se você quer mostrar que nem todos os humanos são mortais, isso é equivalente a encontrar algum humano que não é mortal. A segunda diz que para mostrar que nenhum humano é mortal, você tem que mostrar que todos os humanos não são mortais.
+$$\exists x: \text{Humano}(x) \rightarrow \text{Mortal}(x)$$
+
+Que pode ser lido como: "existe um $x$ tal que, _SE_ $x$ é humano, _ENTÃO_ $x$ é mortal". Essa afirmação é verdadeira em qualquer universo que contenha um unicórnio de bolinhas roxas imortal. Porque o unicórnio não é humano, então $\text{Humano}(\text{unicórnio})$ é falsa, e a implicação $\text{Humano}(x) \rightarrow \text{Mortal}(x)$ é verdadeira independente do consequente. Não entendeu? Volte dois parágrafos e leia novamente. Repita!
+
+Portanto, é crucial usar o operador $\land$, e não $\rightarrow$ quando trabalhamos com quantificadores existenciais. O $\land$ garante que a propriedade se aplica ao objeto existente definido pelo $\exists$.
+
+Assim como o quantificador universal, $\forall$, o quantificador existencial, $\exists$, também pode ser restrito a um universo específico, usando a notação de pertencimento:
+
+$$\exists x \in \mathbb{Z}: x = x^2$$
+
+Que afirma a existência de pelo menos um inteiro $x$ tal que $x$ é igual ao seu quadrado. Novamente, não precisamos dizer qual é esse inteiro, apenas que ele existe dentro do conjunto dos inteiros. Existe?
+
+De forma geral, o quantificador existencial serve para fazer afirmações elegantes sobre a existência de objetos com certas propriedades, sem necessariamente conhecermos ou elencarmos todos esses objetos. Isso agrega mais qualidade a representação do mundo real que podemos fazer com a Lógica de Primeira Ordem.
+
+Estudando o quantificador universal encontramos duas equivalências interessantes:
+
+$$\lnot \forall x : P(x) \leftrightarrow \exists x : \lnot P(x)$$
+
+$$\lnot \exists x : P(x) \leftrightarrow \forall x : \lnot P(x)$$
+
+Essas equivalências são essencialmente as versões quantificadas das Leis de De Morgan: a primeira diz que se você quer a que nem todos os humanos são mortais, isso é equivalente a encontrar algum humano que não é mortal. A segunda diz que para mostrar que nenhum humano é mortal, você tem que mostrar que todos os humanos não são mortais.
+
+Podemos representar uma declaração $\exists x P(x)$ como uma expressão _OU_. Por exemplo, $\exists x \in \mathbb{N} : P(x)$ poderia ser reescrito como:
+
+$$P(0) \lor P(1) \lor P(2) \lor P(3) \lor \ldots$$
+
+E lembramos o problema que encontramos quando fizemos isso com o quantificador $\forall$: não podemos representar fórmulas sem fim em Lógica de Primeira Ordem. Mas, aqui também esta notação nos permite entender melhor o quantificador existencial.
+
+A expansão de $\exists$ usando $\lor$ afirma que a proposição $P(x)$ é verdadeira se pelo menos um valor de $x$ dentro do universo definido atender ao predicado $P$. O que esta expansão está dizendo é que existe pelo menos um número natural $x$ tal que $P(x)$ é verdadeiro. Não precisamos saber exatamente qual é esse $x$. Apenas que ele existe dentro de $\mathbb{N}$.
+
+O quantificador existencial não especifica o objeto, apenas afirma que existe um objeto com aquela propriedade, dentro do universo determinado. Isso permite fazer afirmações elegantes sobre a existência de objetos com certas características, certas qualidades, ou ainda, certos predicados, sem necessariamente conhecermos exatamente quais são esses objetos.
+
+Portanto, mesmo que não possamos de fato escrever uma disjunção infinita na Lógica de Primeira Ordem, essa expansão informal transmite de forma simples e intuitiva o significado do quantificador existencial.
 
 ## Formas Normais
 
@@ -624,15 +651,15 @@ Existem várias formas normais na Lógica Proposicional, cada uma com suas próp
 
 3. **Forma Normal Disjuntiva (FND)**: Uma proposição está na Forma Normal Disjuntiva se for uma disjunção de uma ou mais cláusulas, onde cada cláusula é uma conjunção de literais. Ou seja, é uma série de cláusulas conectadas por _ORs_, onde cada cláusula é composta de variáveis conectadas por _ANDs_.
 
-4. **Forma Normal Prenex (FNP)**: Uma proposição está na Forma Normal Prenex se todos os quantificadores, para a lógica de primeira ordem, estiverem à esquerda, precedendo uma matriz quantificadora livre. Esta forma é útil na lógica de primeira ordem e na teoria da prova.
+4. **Forma Normal Prenex (FNP)**: Uma proposição está na Forma Normal Prenex se todos os quantificadores, para a Lógica de Primeira Ordem, estiverem à esquerda, precedendo uma matriz quantificadora livre. Esta forma é útil na Lógica de Primeira Ordem e na teoria da prova.
 
-5. **Forma Normal Skolem (FNS)**: Na lógica de primeira ordem, uma fórmula está na Forma Normal de Skolem se estiver na Forma Normal Prenex e se todos os quantificadores existenciais forem eliminados. Isto é realizado através de um processo conhecido como Skolemização.
+5. **Forma Normal Skolem (FNS)**: Na Lógica de Primeira Ordem, uma fórmula está na Forma Normal de Skolem se estiver na Forma Normal Prenex e se todos os quantificadores existenciais forem eliminados. Isto é realizado através de um processo conhecido como Skolemização.
 
 Nosso objetivo é rever a matemática que suporta a Programação Lógica, entre as principais formas normais, para este objetivo, precisamos destacar duas formas normais:
 
 1. **Forma Normal Conjuntiva (FNC)**: A Forma Normal Conjuntiva é importante na Programação Lógica porque muitos sistemas de inferência, como a resolução, funcionam em fórmulas que estão na FNC. Além disso, os programas em Prolog, A linguagem de Programação Lógica que escolhemos, são essencialmente cláusulas na FNC.
 
-2. **Forma Normal de Skolem (FNS)**: A Forma Normal de Skolem é útil na Programação Lógica porque a Skolemização, o processo de remover quantificadores existenciais transformando-os em funções de quantificadores universais, permite uma forma mais eficiente de representação e processamento de fórmulas lógicas. Essa forma normal é frequentemente usada em lógica de primeira ordem e teoria da prova, ambas fundamentais para a Programação Lógica.
+2. **Forma Normal de Skolem (FNS)**: A Forma Normal de Skolem é útil na Programação Lógica porque a Skolemização, o processo de remover quantificadores existenciais transformando-os em funções de quantificadores universais, permite uma forma mais eficiente de representação e processamento de fórmulas lógicas. Essa forma normal é frequentemente usada em Lógica de Primeira Ordem e teoria da prova, ambas fundamentais para a Programação Lógica.
 
 Embora outras formas normais possam ter aplicações em áreas específicas da Programação Lógica, a FNC e a FNS são provavelmente as mais amplamente aplicáveis e úteis nesse contexto. Começando com a Forma Normal Conjuntiva.
 
