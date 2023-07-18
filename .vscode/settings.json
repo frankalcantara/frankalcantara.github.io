@@ -4,12 +4,5 @@
 	"C_Cpp.autocompleteAddParentheses": true,
 	"html.autoClosingTags": false,
 	"[markdown]": {},
-	"cSpell.words": [
-		"booleana",
-		"lazyimg",
-		"mathbf",
-		"Sarrus",
-		"satisfatibilidade",
-		"textbf"
-	]
+	"cSpell.words": ["antecendente", "booleana", "lazyimg", "mathbf", "Sarrus", "satisfatibilidade", "textbf"]
 }
