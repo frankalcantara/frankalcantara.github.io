@@ -1419,7 +1419,7 @@ O quantificador existencial não especifica o objeto, apenas afirma que existe u
 
 Portanto, mesmo que não possamos de fato escrever uma disjunção infinita na Lógica de Primeira Ordem, essa expansão informal transmite de forma simples e intuitiva o significado do quantificador existencial.
 
-# Da Matemática para a Linguagem Natural
+## Da Matemática para a Linguagem Natural
 
 Ao ler Fórmula Bem Formada contendo quantificadores, **lemos da esquerda para a direita**.
 
