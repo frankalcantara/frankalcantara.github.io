@@ -1007,11 +1007,11 @@ $$
 
 $$
 \begin{aligned}
-&2 + 2 = 4\\
-&4 \times 4 = 16\\
+&(2 + 2 = 4)\\
+&(4 \times 4 = 16)\\
 \hline
-&2 + 2 = 4 \\land 4 \\times 4 = 16
-\\end{aligned}
+&(2 + 2 = 4) \land (4 \times 4 = 16)
+\end{aligned}
 $$
 
 ### Simplificação
