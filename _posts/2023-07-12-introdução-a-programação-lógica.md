@@ -28,6 +28,7 @@ A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive 
 
 > "Logic programming is the future of artificial intelligence." - [Marvin Minsky](https://en.wikipedia.org/wiki/Marvin_Minsky)
 
+
 # Introdução
 
 Imagine, por um momento, que estamos explorando o universo dos computadores, mas em vez de sermos os comandantes, capazes de ditar todos os passos do caminho, nós fornecemos as diretrizes gerais e deixamos que o computador deduza o caminho. Pode parecer estranho, a princípio, para quem está envolvido com as linguagens do Paradigma Imperativo. Acredite, ou não, isso é exatamente o que a Programação Lógica faz.
@@ -1211,8 +1212,6 @@ F \leftrightarrow G
 $$
 
 $$
-&F \leftrightarrow G
-$$
 \begin{aligned}
 &F\\
 \hline
@@ -1223,6 +1222,7 @@ $$
 $$
 F \leftrightarrow G
 $$
+
 $$
 \begin{aligned}
 &G\\
@@ -1234,6 +1234,7 @@ $$
 $$
 F \leftrightarrow G
 $$
+
 $$
 \begin{aligned}
 &\neg F\\
@@ -1245,6 +1246,7 @@ $$
 $$
 F \leftrightarrow G
 $$
+
 $$
 \begin{aligned}
 &\neg G\\
@@ -1268,8 +1270,11 @@ Algumas aplicações da Equivalência:
   - Conclusão: logo, _156 é par_.
 
 $$
+P \leftrightarrow D2
+$$
+
+$$
 \begin{aligned}
-&P \leftrightarrow D2\\
 &D2(156)\\
 \hline
 &P(156)
@@ -1284,6 +1289,7 @@ $$
 $$
   N \leftrightarrow (x < 0)
 $$
+
 $$
 \begin{aligned}
 &\neg N\\
@@ -1343,15 +1349,15 @@ O quantificador universal $\forall$, lê-se _para todo_, indica que uma afirmaç
 
 Recorremos a teoria dos conjuntos para tornar o universo do discurso mais explícito, a notação de pertencimento é útil nesta definição. Um exemplo bom exemplo desta prática seria:
 
-$$\forall x \in \mathbb{Z} : x > 0 \rightarrow x + 1 > 0$$
+$$\forall x \in \{\mathbb{Z} : x > 0\} \rightarrow x + 1 > 0$$
 
 Isso é logicamente equivalente a escrever:
 
-$$\forall x \\{x \in \mathbb{Z} \rightarrow (x > 0 \rightarrow x + 1 > 0)\\}$$
+$$\forall x \{x \in \mathbb{Z}\} \rightarrow (x > 0 \rightarrow x + 1 > 0)$$
 
 Ou a escrever:
 
-$$\forall x (x \in \mathbb{Z} \land x > 0) \rightarrow x + 1 > 0$$
+$$\forall x \{x \in \mathbb{Z} \land x > 0\} \rightarrow x + 1 > 0$$
 
 Espero que concordemos que a forma curta deixa mais claro que a intenção de $x \in \mathbb{Z}$ é restringir o intervalo de $x$.
 
@@ -1689,7 +1695,7 @@ $$
 \end{aligned}
 $$
 
-### Instanciação Existencial**
+### Instanciação Existencial
 
 A regra de Instanciação Existencial permite introduzir um novo termo como instância de uma variável existencialmente quantificada. Esta regra nos permite derivar exemplos de afirmações existenciais.
 
