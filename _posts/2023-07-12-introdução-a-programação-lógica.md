@@ -451,11 +451,11 @@ Um predicado é como uma luneta que nos permite observar as propriedades de uma 
 
 Contudo, é importante lembrar que um predicado não é uma afirmação absoluta de verdade ou falsidade. Ao contrário das proposições, os predicados não são declarações completas. Eles são mais parecidos com frases com espaços em branco, aguardando para serem preenchidos. Por exemplo:
 
-1. O \***\*\_\*\*** está saboroso;
+1. O \_\_\_\_\_\_\_ está saboroso;
 
-2. O \***\*\_\*\*** é vermelho;
+2. O \_\_\_\_\_\_\_ é vermelho;
 
-3. \***\*\_\*\*** é alto.
+3. \_\_\_\_\_\_\_ é alto.
 
 Preencha as lacunas, como quiser e faça sentido, e perceba que, em cada caso, estamos atribuindo uma propriedade a um objeto. Esses são exemplos de predicados do nosso cotidiano, que ilustram de maneira simples e objetiva o conceito que queremos abordar.
 
@@ -739,7 +739,7 @@ $$
 \begin{aligned}
 &\neg \neg F\\
 \hline
-F\\
+&F\\
 \end{aligned}
 $$
 
@@ -971,16 +971,16 @@ $$
 
 - Criar declarações conjuntivas complexas. Por exemplo:
 
-  - Proposição: _1 é número natural, $N_1$_.
-  - Proposição: _2 é número natural $N_2$_.
+  - Proposição: _1 é número natural, $N1$_.
+  - Proposição: _2 é número natural $N2$_.
   - Conclusão: logo, _1 é número natural **e** 2 é número natural_.
 
 $$
 \begin{aligned}
-&N_1\\
-&N_2\\
+&N1\\
+&N2\\
 \hline
-&N_1 \land N_2
+&N1 \land N2
 \end{aligned}
 $$
 
@@ -1111,8 +1111,10 @@ G \rightarrow F
 $$
 
 $$
+&F \rightarrow G
+$$
+$$
 \begin{aligned}
-&F \rightarrow G\\
 &G \rightarrow F\\
 \hline
 &F \leftrightarrow G\\
@@ -1136,8 +1138,9 @@ Em linguagem natural:
   - Conclusão: logo, _chove se e somente se a rua fica molhada_.
 
 $$
+C \rightarrow M
+$$
 \begin{aligned}
-&C \rightarrow M\\
 &M \rightarrow C\\
 \hline
 &C \leftrightarrow M
@@ -1151,9 +1154,11 @@ $$
   - Conclusão: logo, _um número é par se e somente se é múltiplo de 2_.
 
 $$
+P \rightarrow M2\\
+$$
+$$
 \begin{aligned}
 &M2 \rightarrow P\\
-&P \rightarrow M2\\
 \hline
 &P \leftrightarrow M2
 \end{aligned}
@@ -1166,12 +1171,15 @@ $$
   - Conclusão: logo, _$x^2 = 25$ se e somente se $x = 5$_.
 
 $$
+(x^2 = 25) \rightarrow (x = 5)
+$$
+
+$$
 \begin{aligned}
-&(x^2 = 25) \\rightarrow (x = 5)\\
 &(x = 5) \rightarrow (x^2 = 25)\\
-\\hline
-&(x^2 = 25) \\leftrightarrow (x = 5)
-\\end{aligned}
+\hline
+&(x^2 = 25) \leftrightarrow (x = 5)
+\end{aligned}
 $$
 
 - Provar relações de definição mútua. Por exemplo:
@@ -1181,8 +1189,10 @@ $$
   - Conclusão: logo, _figura é quadrado se e somente se tem 4 lados iguais_.
 
 $$
+Q \rightarrow 4L
+$$
+$$
 \begin{aligned}
-&Q \rightarrow 4L\\
 &4L \rightarrow Q\\
 \hline
 &Q \leftrightarrow 4L
@@ -1199,7 +1209,7 @@ $$
 
 $$
 \begin{aligned}
-&F \leftrightarrow G\\\\
+&F \leftrightarrow G\\
 &F\\
 \hline
 &G\\
@@ -1208,7 +1218,7 @@ $$
 
 $$
 \begin{aligned}
-&F \leftrightarrow G\\\\
+&F \leftrightarrow G\\
 &G\\
 \hline
 &F\\
@@ -1253,7 +1263,7 @@ Algumas aplicações da Equivalência:
 
 $$
 \begin{aligned}
-&P \leftrightarrow D2\\\\
+&P \leftrightarrow D2\\
 &D2(156)\\
 \hline
 &P(156)
@@ -1266,7 +1276,7 @@ $$
   - Proposição: _$x$ não é negativo_.
   - Conclusão: logo, _$x$ não é menor que $0$_.
 $$
-  N \leftrightarrow (x < 0)\\\\
+  N \leftrightarrow (x < 0)
 $$
 $$
 \begin{aligned}
@@ -1278,13 +1288,14 @@ $$
 
 - Fazer deduções baseadas em definições. Por exemplo:
 
-  - Proposição: _número ímpar é definido como não divisível por $2$_.
+  - Proposição: _número ímpar é definido como não divisível,$ND2$, por $2$_.
   - Proposição: _$9$ não é divisível por $2$_.
   - Conclusão: logo, _$9$ é ímpar_.
 
 $$
-&I \leftrightarrow \neg D_2
+I \leftrightarrow \neg ND2
 $$
+
 $$
 \begin{aligned}
 &\neg D_2(9)\\
@@ -1295,13 +1306,19 @@ $$
 
 ## Quantificadores
 
+Embora a lógica proposicional seja um bom ponto de partida, a maioria das afirmações interessantes em matemática contêm variáveis definidas em domínios maiores do que apenas $\\{\text{Verdadeiro}, \text{Falso}\\}$. Por exemplo, a afirmação _$x$ é uma potência de $2$_ não é uma proposição. Só é possível definir a verdade desta afirmação se soubermos o valor de $x$.
+
+Formalmente, um predicado é uma função cujo contradomínio é $\\{\text{Verdadeiro}, \text{Falso}\\}$, e cujo domínio pode ser qualquer conjunto. Usamos letras maiúsculas iniciando com $P$ para representar predicados. Por exemplo, se $P(x)$ é definido como a afirmação _x é uma potência de $2$_, então $P(8)$ é verdadeiro e $P(7)$ é falso. Assim, um predicado é como uma proposição, exceto pelo fato de conter uma, ou mais variáveis. Assim que substituímos o valor da variável, obtemos uma proposição. 
+
+Da mesma forma que as funções algébricas, predicados podem depender de múltiplas variáveis. Por exemplo, se definirmos o predicado $P(x,y)$ para significar _$x^2 = y$_, então $P(5,25)$ é verdadeiro pois $5^2 = 25$, mas $P(5,24)$ é falso pois $5^2 \neq 24$.
+
 Para termos uma linguagem lógica suficientemente flexível precisaremos ser capazes de dizer quando o predicado $P$ ou $Q$ é verdadeiro para muitos valores diferentes de seus argumentos. Neste sentido, vincularemos as variáveis aos predicados usando quantificadores, que indicam que a afirmação que estamos fazendo se aplica a todos os valores da variável (quantificação universal), ou se aplica a poucos, ou um, (quantificação existencial). Na lógica de predicados, usaremos esses quantificadores para fazer declarações sobre todo um universo de discurso, ou para afirmar que existe pelo menos um membro que satisfaz uma determinada propriedade neste universo.
 
 Vamos desmistificar trazendo estes conceitos para as nossas experiências humanas e sociais. Imagine que você está em uma festa e o anfitrião lhe pede para verificar se todos os convidados têm algo para beber. Você começa a percorrer a sala, verificando cada pessoa. Se você encontrar pelo menos uma pessoa sem bebida, você pode imediatamente dizer _nem todos têm bebidas_. Mas, se você verificar cada convidado e todos eles tiverem algo para beber, você pode dizer com confiança _todos têm bebidas_. Este é o conceito do quantificador universal, matematicamente representado por $\forall$, que lemos como _para todo_.
 
 A festa continua e o anfitrião quer saber se alguém na festa está bebendo champanhe. Desta vez, assim que você encontrar uma pessoa com champanhe, você pode responder imediatamente _sim, alguém está bebendo champanhe_. Você não precisa verificar todo mundo para ter a resposta correta. Este é o conceito do quantificador existencial, denotado por $\exists$, que lemos _existe algum_.
 
-Voltando a matemática, considere o universo de todos os números inteiros $\mathbb{Z}$. Podemos usar o quantificador universal, $\forall$, para fazer a declaração _para todo número inteiro $x$, $x$ é maior ou igual a zero ou $x$ é menor que zero_. Usando o quantificador existencial, $\exists$, podemos dizer _existe algum número inteiro x, tal que x é igual a zero_.
+Voltando a matemática, considere o conjunto de todos os números inteiros, $\mathbb{Z}$. Podemos usar o quantificador universal, $\forall$, para fazer a declaração _para todo número inteiro $x$, $x$ é maior ou igual a zero ou $x$ é menor que zero_. Usando o quantificador existencial, $\exists$, podemos dizer _existe algum número inteiro x, tal que x é igual a zero_.
 
 Os quantificadores nos permitem fazer declarações gerais ou específicas sobre os membros de um universo de discurso, de uma forma que seria difícil ou impossível sem eles.
 
@@ -1309,9 +1326,10 @@ Os quantificadores nos permitem fazer declarações gerais ou específicas sobre
 
 O universo do discurso, $U$, também chamado de **universo**, é o conjunto de objetos de interesse em um determinado cenário lógico. O universo do discurso é importante porque as proposições na Lógica de Predicados são declarações sobre objetos de um universo.
 
-O universo,$U$, é o domínio das variáveis das nossas Fórmulas Bem Formadas. O universo do discurso pode ser o conjunto dos números reais, $\mathbb{R}$ o conjunto dos inteiros,$\mathbb{z}$, o conjunto de todos os alunos em uma sala de aula que usam camisa amarela, ou qualquer outro conjunto que você defina. Na prática, o universo costuma ser deixado implícito e deveria ser óbvio a partir do contexto. Se não for o caso, precisa ser explicitado.  
+O universo, $U$, é o domínio das variáveis das nossas Fórmulas Bem Formadas. O universo do discurso pode ser o conjunto dos números reais, $\mathbb{R}$ o conjunto dos inteiros,$\mathbb{z}$, o conjunto de todos os alunos em uma sala de aula que usam camisa amarela, ou qualquer outro conjunto que você defina. Na prática, o universo costuma ser deixado implícito e deveria ser óbvio a partir do contexto. Se não for o caso, precisa ser explicitado.  
 
 Por exemplo, se estamos interessados em proposições sobre números naturais, $\mathbb{N}$, o universo do discurso é o conjunto $\mathbb{N} = \{0, 1, 2, 3,...\}$. Já se estamos interessados em proposições sobre alunos de uma sala de aula, o universo do discurso poderia ser o conjunto $U = \{\text{Paulo}, \text{Ana}, ...\}$.
+
 
 ### Quantificador Universal
 
@@ -1399,6 +1417,38 @@ Que afirma a existência de pelo menos um inteiro $x$ tal que $x$ é igual ao se
 
 De forma geral, o quantificador existencial serve para fazer afirmações elegantes sobre a existência de objetos com certas propriedades, sem necessariamente conhecermos ou elencarmos todos esses objetos. Isso agrega mais qualidade a representação do mundo real que podemos fazer com a Lógica de Primeira Ordem.
 
+Talvez, alguns exemplos possam ajudar no entendimento: 
+
+**Exemplo 1**: "Existe um mamífero que não respira ar."
+
+$$
+\exists x \ (Mamífero(x) \land \neg RespiraAr(x))  
+$$
+
+**Exemplo 2**: "Existe uma equação do segundo grau com três raízes reais."
+
+$$
+\exists x \ (Eq2Grau(x) \land |\text{RaízesReais}(x)| = 3)
+$$
+
+**Exemplo 3**: "Existe um número primo que é par."
+
+$$
+\exists x \ (Primo(x) \land Par(x))
+$$
+
+**Exemplo 4**: "Existe um quadrado perfeito que pode ser escrito como o quadrado de um número racional."
+
+$$
+\exists x \ (QuadPerfeito(x) \land \exists a \in \mathbb{Q} \ (x = a^2))
+$$
+
+**Exemplo 5**: "Existe um polígono convexo em que a soma dos ângulos internos não é igual a $(n-2)\cdot180^{\circ}$."
+
+$$
+\exists x \ (\text{PolígonoConvexo}(x) \land \sum_{i=1}^{n} \text{ÂnguloInterno}_i(x) \neq (n-2)\cdot 180^{\circ})
+$$
+
 Estudando o quantificador universal encontramos duas equivalências interessantes:
 
 $$\lnot \forall x : P(x) \leftrightarrow \exists x : \lnot P(x)$$
@@ -1419,7 +1469,7 @@ O quantificador existencial não especifica o objeto, apenas afirma que existe u
 
 Portanto, mesmo que não possamos de fato escrever uma disjunção infinita na Lógica de Primeira Ordem, essa expansão informal transmite de forma simples e intuitiva o significado do quantificador existencial.
 
-## Da Matemática para a Linguagem Natural
+## Dos Predicados para a Linguagem Natural
 
 Ao ler Fórmula Bem Formada contendo quantificadores, **lemos da esquerda para a direita**.
 
