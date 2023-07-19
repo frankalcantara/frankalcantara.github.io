@@ -1267,7 +1267,6 @@ $$
 \end{aligned}
 $$
 
-
 # Lógica Predicativa
 
 A Lógica Predicativa, coração e espírito da Lógica de Primeira Ordem, nos leva um passo além da Lógica Proposicional. Em vez de se concentrar apenas em proposições completas que são verdadeiras ou falsas, a lógica predicativa nos permite expressar proposições sobre objetos e as relações entre eles. Ela nos permite falar de maneira mais rica e sofisticada sobre o mundo.
@@ -1354,23 +1353,23 @@ Em 1, 2 e 3 os predicados estão definidos com mnemônicos aumentando a legibili
 
 ## Quantificadores
 
-Embora a Lógica Proposicional seja um bom ponto de partida, a maioria das afirmações interessantes em matemática contêm variáveis definidas em domínios maiores do que apenas $\\{\text{Verdadeiro}, \text{Falso}\\}$. Por exemplo, a afirmação _$x \text{é uma potência de } 2$_ não é uma proposição. Não temos como definir a verdade dessa afirmação até conhecermos o valor de $x$. Se $P(x)$ é definido como a afirmação _$x \text{é uma potência de } 2$_, então $P(8)$ é verdadeiro e $P(7)$ é falso. 
+Embora a Lógica Proposicional seja um bom ponto de partida, a maioria das afirmações interessantes em matemática contêm variáveis definidas em domínios maiores do que apenas $\\{\text{Verdadeiro}, \text{Falso}\\}$. Por exemplo, a afirmação _$x \text{é uma potência de } 2$_ não é uma proposição. Não temos como definir a verdade dessa afirmação até conhecermos o valor de $x$. Se $P(x)$ é definido como a afirmação _$x \text{é uma potência de } 2$_, então $P(8)$ é verdadeiro e $P(7)$ é falso.
 
-Para termos uma linguagem para lógica que seja suficientemente flexível para representar os problemas que encontramos no Universo, precisaremos ser capazes de dizer quando o predicado $P$ ou $Q$ é verdadeiro para valores diferentes de seus argumentos. Para tanto, vincularemos as variáveis aos predicados usando operadores para indicar quantidade, chamados de quantificadores. 
+Para termos uma linguagem lógica que seja suficientemente flexível para representar os problemas que encontramos no Universo, precisaremos ser capazes de dizer quando o predicado $P$ ou $Q$ é verdadeiro para valores diferentes em seus argumentos. Para tanto, vincularemos as variáveis aos predicados usando operadores para indicar quantidade, chamados de quantificadores.
 
-Os quantificadores indicam se sentença que estamos criando se aplica a todos os valores possíveis do argumento, _quantificação universal_, ou se aplica a um valor específico, _quantificação existencial_. Usaremos esses quantificadores para fazer declarações sobre todos os elementos de um universo de discurso específico, ou para afirmar que existe pelo menos um elemento do universo do discurso que satisfaz uma determinada qualidade.
+Os quantificadores indicam se a sentença que estamos criando se aplica a todos os valores possíveis do argumento, _quantificação universal_, ou se esta sentença se  aplica a um valor específico, _quantificação existencial_. Usaremos esses quantificadores para fazer declarações sobre **todos os elementos** de um universo de discurso específico, ou para afirmar que existe **pelo menos um elemento** do universo do discurso que satisfaz uma determinada qualidade.
 
-Vamos remover o véu da dúvida usando uma experiência humana, social, comum e popular: imagine que você está em uma festa e o anfitrião lhe pede para verificar se todos os convidados têm algo para beber. Você, prestativo e simpático, começa a percorrer a sala, verificando cada pessoa. Se você encontrar pelo menos uma pessoa sem bebida, você pode imediatamente dizer _nem todos têm bebidas_. Mas, se você verificar cada convidado e todos eles tiverem algo para beber, você pode dizer com confiança _todos têm bebidas_. Este é o conceito do quantificador universal, matematicamente representado por $\forall$, que lemos como _para todo_.
+Vamos remover o véu da dúvida usando como recurso metafórico uma experiência humana, social, comum e popular: imagine que você está em uma festa e o anfitrião lhe pede para verificar se todos os convidados têm algo para beber. Você, prestativo e simpático, começa a percorrer a sala, verificando cada pessoa. Se você encontrar pelo menos uma pessoa sem bebida, você pode imediatamente dizer _nem todos têm bebidas_. Mas, se você verificar cada convidado e todos eles tiverem algo para beber, você pode dizer com confiança _todos têm bebidas_. Este é o conceito do quantificador universal, matematicamente representado por $\forall$, que lemos como _para todo_.
 
 A festa continua e o anfitrião quer saber se alguém na festa está bebendo champanhe. Desta vez, assim que você encontrar uma pessoa com champanhe, você pode responder imediatamente _sim, alguém está bebendo champanhe_. Você não precisa verificar todo mundo para ter a resposta correta. Este é o conceito do quantificador existencial, denotado por $\exists$, que lemos _existe algum_.
 
-Os quantificadores nos permitem fazer declarações gerais ou específicas sobre os membros de um universo de discurso, de uma forma que seria difícil ou impossível sem eles.
+Os quantificadores nos permitem fazer declarações gerais, ou específicas, sobre os membros de um universo de discurso, de uma forma que seria difícil, ou impossível, sem estes operadores especiais.
 
 ## Quantificador Universal
 
-O quantificador universal $\forall$, lê-se _para todo_, indica que uma afirmação deve ser verdadeira para todos os valores de uma variável dentro de um universo de discurso definido para a criação de um predicado qualquer. Por exemplo, a preposição clássica _todos os humanos são mortais_ pode ser escrita como $\forall x Humano(x) \rightarrow Mortal(x)$. Ou recorrendo a um exemplo com mais de rigor matemático, teríamos o predicado se _$x$ é positivo então $x + 1$ é positivo_, que pode ser escrito $\forall x (x > 0 \rightarrow x + 1 > 0)$.  Neste último exemplo temos os quantificadores, Lógica Predicativa, Lógica Proposicional e Teoria dos Conjuntos em uma sentença. Na matemática claridade e exatidão são indispensáveis.
+O quantificador universal $\forall$, lê-se _para todo_, indica que uma afirmação deve ser verdadeira para todos os valores de uma variável dentro de um universo de discurso definido para a criação de uma sentença contendo um predicado qualquer. Por exemplo, a preposição clássica _todos os humanos são mortais_ pode ser escrita como $\forall x Humano(x) \rightarrow Mortal(x)$. Ou recorrendo a um exemplo com mais de rigor matemático, teríamos o predicado se _$x$ é positivo então $x + 1$ é positivo_, que pode ser escrito $\forall x (x > 0 \rightarrow x + 1 > 0)$.  Neste último exemplo temos Quantificadores, Lógica Predicativa, Lógica Proposicional e Teoria dos Conjuntos em uma sentença.
 
-O quantificador universal pode ser representado usando apenas a Lógica Proposicional, com uma pequena trapaça. A afirmação $\forall x P(x)$ é, de certa forma a operação $\wedge$, _AND_, aplicada a todos os elementos do universo do discurso. Se pensarmos assim, o predicado:
+O quantificador universal pode ser representado usando apenas a Lógica Proposicional, com uma pequena trapaça. A afirmação $\forall x P(x)$ é, de certa forma, a operação $\wedge$, _AND_ aplicada a todos os elementos do universo do discurso. Se pensarmos assim, o predicado:
 
 $$\forall x \{x:\in \mathbb{N}\} : P(x)$$
 
@@ -1378,7 +1377,7 @@ Pode ser escrito como:
 
 $$P(0) \land P(1) \land P(2) \land P(3) \land \ldots$$
 
-Onde $P(0), P(1), P(2), P(3) ...$ representam a aplicação do predicado $P$ a todos os elementos $x$ do conjunto $\mathbb{Z}$. A trapaça fica por conta de que, em Lógica Proposicional, não podemos escrever expressões com um número infinito de termos. Portanto, a expansão em conjunções de um predicado $P$ em um Universo de Discurso, $U$, não é uma Fórmula Bem Formada. No entanto, podemos usar esta interpretação informal para entender o significado de $\forall x P(x)$.
+Onde $P(0), P(1), P(2), P(3) ...$ representam a aplicação do predicado $P$ a todos os elementos $x$ do conjunto $\mathbb{N}$. A trapaça fica por conta de que, em Lógica Proposicional, não podemos escrever expressões com um número infinito de termos. Portanto, a expansão em conjunções de um predicado $P$ em um Universo de Discurso, $U$, não é uma Fórmula Bem Formada. De qualquer forma, podemos usar esta interpretação informal para entender o significado de $\forall x P(x)$.
 
 Vamos voltar um pouco. O quantificador universal $\forall x P(x)$ afirma que a proposição $P(x)$ é verdadeira para todo, e qualquer, valor possível de $x$ como elemento de um conjunto $U$. Uma forma de interpretar isso é pensar em $x$ como uma variável que pode ter qualquer valor dentro do universo do discurso.
 
@@ -1424,7 +1423,7 @@ Note duas coisas importantes:
 
 $$\exists x \text{Humano}(x) \rightarrow \text{Mortal}(x)$$
 
-Que pode ser lido como: _existe um $x$ tal que, SE $x$ é humano, ENTÃO $x$ é mortal_. Essa afirmação é verdadeira em qualquer universo que contenha um unicórnio de bolinhas roxas imortal. Porque o unicórnio não é humano, então $\text{Humano}(\text{unicórnio})$ é falsa, e a implicação $\text{Humano}(x) \rightarrow \text{Mortal}(x)$ é verdadeira independente do consequente. Não entendeu? Volte dois parágrafos e leia novamente. Repita!
+Que pode ser lido como: _existe um $x$ tal que, SE $x$ é humano, ENTÃO $x$ é mortal_. Essa afirmação é verdadeira em qualquer universo que contenha um unicórnio de bolinhas roxas imortal. Porque o unicórnio não é humano, então $\text{Humano}(\text{unicórnio})$ é falsa, e a implicação $\text{Humano}(x) \rightarrow \text{Mortal}(x)$ é verdadeira. Não entendeu? Volte dois parágrafos e leia novamente. Repita!
 
 Portanto, é crucial usar o operador $\land$, e não $\rightarrow$ quando trabalhamos com quantificadores existenciais. O $\land$ garante que a propriedade se aplica ao objeto existente definido pelo $\exists$.
 
@@ -1432,40 +1431,40 @@ Assim como o quantificador universal, $\forall$, o quantificador existencial, $\
 
 $$\exists x \in \mathbb{Z} : x = x^2$$
 
-Que afirma a existência de pelo menos um inteiro $x$ tal que $x$ é igual ao seu quadrado. Novamente, não precisamos dizer qual é esse inteiro, apenas que ele existe dentro do conjunto dos inteiros. Existe?
+Esta sentença afirma a existência de pelo menos um inteiro $x$ tal que $x$ é igual ao seu quadrado. Novamente, não precisamos dizer qual é esse inteiro, apenas que ele existe dentro do conjunto dos inteiros. Existe?
 
-De forma geral, o quantificador existencial serve para fazer afirmações elegantes sobre a existência de objetos com certas propriedades, sem necessariamente conhecermos ou elencarmos todos esses objetos. Isso agrega mais qualidade a representação do mundo real que podemos fazer com a Lógica de Primeira Ordem.
+De forma geral, o quantificador existencial serve para fazer afirmações elegantes sobre a existência de objetos com certas qualidades, sem necessariamente conhecermos ou elencarmos todos esses objetos. Isso agrega mais qualidade a representação do mundo real que podemos fazer com a Lógica de Primeira Ordem.
 
-Talvez, alguns exemplos possam ajudar no entendimento: 
+Talvez, alguns exemplos possam ajudar no seu entendimento: 
 
 **Exemplo 1**: existe um mamífero que não respira ar.
 
 $$
-\exists x \ (Mamífero(x) \land \neg RespiraAr(x))  
+\exists x (Mamífero(x) \land \neg RespiraAr(x))  
 $$
 
 **Exemplo 2**: existe uma equação do segundo grau com três raízes reais.
 
 $$
-\exists x \ (Eq2Grau(x) \land |\text{RaízesReais}(x)| = 3)
+\exists x (Eq2Grau(x) \land |\text{RaízesReais}(x)| = 3)
 $$
 
 **Exemplo 3**: existe um número primo que é par.
 
 $$
-\exists x \ (Primo(x) \land Par(x))
+\exists x (Primo(x) \land Par(x))
 $$
 
 **Exemplo 4**: existe um quadrado perfeito que pode ser escrito como o quadrado de um número racional.
 
 $$
-\exists x \ (QuadPerfeito(x) \land \exists a \in \mathbb{Q} \ (x = a^2))
+\exists x (QuadPerfeito(x) \land \exists a \in \mathbb{Q} \ (x = a^2))
 $$
 
 **Exemplo 5**: existe um polígono convexo em que a soma dos ângulos internos não é igual a $(n-2)\cdot180^{\circ}$.
 
 $$
-\exists x \ (\text{PolígonoConvexo}(x) \land \sum_{i=1}^{n} \text{ÂnguloInterno}_i(x) \neq (n-2)\cdot 180^{\circ})
+\exists x (\text{PolígonoConvexo}(x) \land \sum_{i=1}^{n} \text{ÂnguloInterno}_i(x) \neq (n-2)\cdot 180^{\circ})
 $$
 
 Estudando o quantificador universal encontramos duas equivalências interessantes:
@@ -1474,35 +1473,35 @@ $$\lnot \forall x P(x) \leftrightarrow \exists x \lnot P(x)$$
 
 $$\lnot \exists x P(x) \leftrightarrow \forall x \lnot P(x)$$
 
-Essas equivalências são essencialmente as versões quantificadas das Leis de De Morgan: a primeira diz que se você quer a que nem todos os humanos são mortais, isso é equivalente a encontrar algum humano que não é mortal. A segunda diz que para mostrar que nenhum humano é mortal, você tem que mostrar que todos os humanos não são mortais.
+Essas equivalências são essencialmente as versões quantificadas das **Leis de De Morgan**. A primeira diz que se você quer a que nem todos os humanos são mortais, isso é equivalente a encontrar algum humano que não é mortal. A segunda diz que para mostrar que nenhum humano é mortal, você tem que mostrar que todos os humanos não são mortais.
 
 Podemos representar uma declaração $\exists x P(x)$ como uma expressão _OU_. Por exemplo, $\exists x \in \mathbb{N} : P(x)$ poderia ser reescrito como:
 
 $$P(0) \lor P(1) \lor P(2) \lor P(3) \lor \ldots$$
 
-Lembramos o problema que encontramos quando fizemos isso com o quantificador $\forall$: não podemos representar fórmulas sem fim em Lógica de Primeira Ordem. Mas, aqui também esta notação nos permite entender melhor o quantificador existencial.
+Lembrado do problema que encontramos quando fizemos isso com o quantificador $\forall$: não podemos representar fórmulas sem fim em Lógica de Primeira Ordem. Mas, novamente esta notação, ainda que inválida, nos permite entender melhor o quantificador existencial.
 
-A expansão de $\exists$ usando $\lor$ afirma que a proposição $P(x)$ é verdadeira se pelo menos um valor de $x$ dentro do universo definido atender ao predicado $P$. O que esta expansão está dizendo é que existe pelo menos um número natural $x$ tal que $P(x)$ é verdadeiro. Não precisamos saber exatamente qual é esse $x$. Apenas que ele existe dentro de $\mathbb{N}$.
+A expansão de $\exists$ usando $\lor$ destaca que a proposição $P(x)$ é verdadeira se pelo menos um valor de $x$ dentro do universo do discurso atender ao predicado $P$. O que a expansão de exemplo está dizendo é que existe pelo menos um número natural $x$ tal que $P(x)$ é verdadeiro. Não precisamos saber exatamente qual é esse $x$. Apenas que existe um elemento dentro de $\mathbb{N}$ que atende o predicado.
 
-O quantificador existencial não especifica o objeto, apenas afirma que existe um objeto com aquela propriedade, dentro do universo determinado. Isso permite fazer afirmações elegantes sobre a existência de objetos com certas características, certas qualidades, ou ainda, certos predicados, sem necessariamente conhecermos exatamente quais são esses objetos.
+O quantificador existencial não especifica o objeto dentro do universo determinado. Esse operador permite fazer afirmações elegantes sobre a existência de objetos com certas características, certas qualidades, ou ainda, certos predicados, sem necessariamente conhecermos exatamente quais são esses objetos.
 
-Portanto, mesmo que não possamos de fato escrever uma disjunção infinita na Lógica de Primeira Ordem, essa expansão informal transmite de forma simples e intuitiva o significado do quantificador existencial.
+Mesmo que não possamos, de fato, escrever uma disjunção infinita na Lógica de Primeira Ordem, essa expansão informal transmite de forma simples e intuitiva o significado do quantificador existencial.
 
 ## Dos Predicados à Linguagem Natural
 
 Ao ler Fórmula Bem Formada contendo quantificadores, **lemos da esquerda para a direita**. Por exemplo, $\forall x$ pode ser lido como _para todo objeto $x$ no universo do discurso onde este objeto está implícito, o seguinte se mantém_. Por outro lado, o quantificador $\exists x$ pode ser lido como _existe um objeto $x$ no universo que satisfaz o seguinte_ ou ainda _para algum objeto $x$ no universo, o seguinte se mantém_. A forma como lê-mos determina como entenderemos as Fórmulas Bem Formadas que incluam quantificadores.
 
-A conversão de uma Fórmula Bem Formada em sentença, não necessariamente resulta em boas expressões em linguagem natural. Apesar disso, sempre devemos começar lendo estas Fórmulas Bem Formadas. Primeiro tente fazer a leitura correta e depois aprimores as sentenças sem alterar os valores lógicos.
+A conversão de uma Fórmula Bem Formada em sentença, não necessariamente resulta em boas expressões em linguagem natural. Apesar disso, para entender a sentença o melhor caminho passa sempre pela leitura, em linguagem natural da Fórmula Bem Formada. Por exemplo: seja $U$, universo do discurso, o conjunto de todos os aviões já fabricados e seja $F(x,y)$ o predicado denotando _$x$ voa mais rápido que $y$_, poderemos ter:
 
-Por exemplo: seja $U$ o universo o conjunto de aviões e seja $F(x,y)$ o predicado  denotando _$x$ voa mais rápido que $y$_, poderemos ter: 
+- $\forall x \forall y F(x,y)$ pode ser lido como _Para todo avião $x$ : $x$ é mais rápido que todo (no sentido de qualquer) avião $y$_.
 
-- $\forall x\forall y F(x,y)$ pode ser lido como _Para todo avião $x$ se mantém: $x$ é mais rápido que todo ( no sentido de qualquer) avião $y$_.
+- $\exists x \forall y F(x,y)$ pode ser lido inicialmente como _Para algum avião $x$ que para todo avião $y$, $x$ é mais rápido que $y$_.
 
-- $\exists x\forall y F(x,y)$ pode ser lido inicialmente como _Para algum avião $x$ se mantém: para todo avião $y$, $x$ é mais rápido que $y$_.
+- $\forall x \exists y F(x,y)$ representa _Existe um avião $x$ ou tal que para todo avião $y$, $x$ é mais rápido que $y$_.
 
-- $\forall x\exists y F(x,y)$ representa _Existe um avião $x$ que satisfaz o seguinte: (ou tal que) para todo avião $y$, $x$ é mais rápido que $y$_. 
+- $\exists x \exists y F(x,y)$ se lê _Para algum avião $x$ existe um avião $y$ tal que $x$ é mais rápido que $y$_.
 
-- $\exists x\exists y F(x,y)$ se lê _Para algum avião $x$ existe um avião $y$ tal que $x$ é mais rápido que $y$_.
+As quatro sentenças expressam o mesmo contexto, mesmo estando redigidas de forma diferente. Quando você estiver escrevendo, você escolhe a forma mais clara para você. Se estiver lendo, não terá opção, terá que entender e, neste caso, comece escrevendo a sentença em linguagem natural. É um processo, com o tempo, fica fácil.
 
 ## Ordem de Aplicação dos Quantificadores
 

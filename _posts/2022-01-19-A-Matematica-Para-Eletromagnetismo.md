@@ -25,9 +25,27 @@ O Eletromagnetismo é a lei, o ordenamento. Como uma divindade antiga que rege a
 
 Imagem de [Asimina Nteliou](https://pixabay.com/users/asimina-1229333/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2773167) de [Pixabay](https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2773167)
 
-> Este é um trabalho em andamento. Escrevo quando posso e posto quando quero. Falta Muito!
+> "Nesta longa vida eu aprendi que toda a nossa ciência se comparada com a realidade é primitiva e infantil. Ainda assim, **é a coisa mais preciosa que temos**." Albert Einstein
 
-> "Nesta longa vida eu aprendi que toda a nossa ciência se comparada com a realidade é primitiva e infantil. Ainda assim, <b>é a coisa mais preciosa que temos</b>." Albert Einstein
+- [Álgebra Linear](#álgebra-linear)
+  - [Vetores, os compassos de tudo que há e haverá](#vetores-os-compassos-de-tudo-que-há-e-haverá)
+    - [Vetores Unitários](#vetores-unitários)
+  - [Multiplicação por Escalar](#multiplicação-por-escalar)
+  - [Vetor Oposto](#vetor-oposto)
+  - [Adição e Subtração de Vetores](#adição-e-subtração-de-vetores)
+  - [Vetores Posição e Distância](#vetores-posição-e-distância)
+  - [Produto Escalar](#produto-escalar)
+  - [Produto Vetorial](#produto-vetorial)
+    - [A Identidade de Jacobi](#a-identidade-de-jacobi)
+  - [Campos Vetoriais](#campos-vetoriais)
+- [Cálculo Vetorial](#cálculo-vetorial)
+  - [Gradiente](#gradiente)
+    - [Significado do Gradiente](#significado-do-gradiente)
+    - [Propriedades do Gradiente](#propriedades-do-gradiente)
+  - [Divergência](#divergência)
+    - [Fluxo e a Lei de Gauss](#fluxo-e-a-lei-de-gauss)
+    - [Teorema da Divergência](#teorema-da-divergência)
+    - [Propriedades da Divergência](#propriedades-da-divergência)
 
 Trataremos de linhas de força invisíveis que se entrelaçam, tangenciam e interferem umas nas outras, formando o tecido do Cosmos e o fluxo da vida, tão real quanto a terra sob os pés ou o ar que respiramos, e como este último, completamente invisíveis.
 
@@ -43,7 +61,7 @@ Considere este texto como a liberação da toa, o início da sua jornada em um m
 
 Lágrimas de decepção não o encontrarão em cada porto. Mesmo que não chegue ao destino desejado. Cada porto de entendimento lhe trará a luz do conhecimento ao final você será uma pessoa diferente. São mares revoltos, não será fácil. Nada que vale a pena é! E, como diria [Fernando Pessoa](https://en.wikipedia.org/wiki/Fernando_Pessoa):
 
-> "...Tudo vale a pena Se a alma não é pequena..."
+> "...Tudo vale a pena Se a alma não é pequena...". Fernando Pessoa.
 
 # Álgebra Linear
 
@@ -68,6 +86,10 @@ A seta, uma extensão de seu ser, representa sua sua orientação. Aponta o cami
 As grandezas vetoriais são como o vento, cuja direção e força você sente, mas cuja essência não se pode segurar. Elas são como o rio, cujo fluxo e direção moldam a paisagem. São essenciais para entender o mundo em movimento, o mundo de forças, velocidades e acelerações. Elas dançam nas equações do eletromagnetismo, desenham os padrões da física e guiam os marinheiros na imensidão do desconhecido. No mar da compreensão, grandezas vetoriais são a bússola e o vento, dando não apenas escala, mas também orientação e sentido à nossa busca pelo conhecimento. Como é belo o idioma de Machado de Assis, mas, de tempos em tempos, temos que recorrer as imagens.
 
 ![Três vetores no plano cartesiano](/assets/images/vetorPlano1.jpeg){:class="lazyimg"}
+<legend style="font-size: 1em;
+  text-align: center;
+  margin-bottom: 20px;">Figura 1 - Três vetores aleatórios no plano $(x,y$).</legend>
+
 
 Toda esta poesia pode ser resumida na geometria de uma seta com origem e destino em um espaço multidimensional contendo informações de direção, sentido e intensidade. Três setas, três vetores, $A$, $B$ e $C$, em um plano. Nesta jornada, não seremos limitados pela frieza da geometria. Buscamos a grandeza da álgebra. Na álgebra vetores são representados por operações entre outros vetores.
 
@@ -225,6 +247,10 @@ Olhe para os pássaros no céu. Os vetores são como o rastro de um pássaro no 
 E assim como os pássaros no céu, os vetores também podem se juntar, ou se afastar. A soma, a subtração, fazem parte do seu voo. Alguns podem achar útil imaginar isso, recorrendo a geometria, como um paralelogramo, uma forma com lados paralelos que mostra como um vetor soma ao outro.
 
 ![Soma de Vetores com a Regra do Paralelogramo](/assets/images/SomaVetores.jpeg){:class="lazyimg"}
+<legend style="font-size: 1em;
+  text-align: center;
+  margin-bottom: 20px;">Figura 2 - Regra do Paralelogramo - Soma geométrica de Vetores.</legend>
+
 
 Eu não vou lhe guiar em um passeio pelo mundo das formas e linhas, não aqui, não agora. Mas lembre-se que a geometria, embora silenciosa e imóvel, sempre está lá, embaixo de tudo, o esqueleto invisível que dá forma ao nosso mundo.
 
@@ -687,7 +713,7 @@ Na geometria diferencial, a Identidade de Jacobi é vital para a criação dos [
 
 Então, mesmo que a identidade de Jacobi possa parecer um conjunto abstrato de símbolos matemáticos, ela é, na verdade, uma ferramenta que guia inúmeras investigações em ciência e matemática, como um farol confiável que nos leva adiante na procura constante pelo conhecimento.
 
-# Campos Vetoriais
+## Campos Vetoriais
 
 Quando olhamos as grandezas escalares, traçamos Campos Escalares. Como uma planície aberta, eles se estendem no espaço, sem direção, mas com magnitude, definidos por uma função $\mathbf{f}(x,y,z)$, onde $x$, $y$, $z$ pertencem a um universo de triplas de números reais. Agora, para as grandezas vetoriais, moldamos Campos Vetoriais, definidos por funções vetoriais $\mathbf{F}(x,y,z)$, onde $x$, $y$, $z$ são componentes vetoriais. Em outras palavras, representamos Campos Vetoriais no espaço como um sistema onde cada ponto do espaço puxa um vetor.
 
@@ -704,6 +730,11 @@ $$\mathbf{F}(x, y) = (P(x, y), Q(x, y))$$
 Uma função, uma definição direta, e simples, ainda assim, sem nenhum apelo visual. Mas somos insistentes e estamos estudando matemática, a rota que nos levará ao horizonte do Eletromagnetismo. Que nasce na carga elétrica, fenômeno simples, estrutural e belo que cria forças que se espalham por todo universo. Vamos pegar duas cargas de mesma intensidade e colocar no nosso palco.
 
 ![Campo Vetorial devido a duas cargas elétricas](/assets/images/CampoVetorial1.jpeg){:class="lazyimg"}
+
+<legend style="font-size: 1em;
+  text-align: center;
+  margin-bottom: 20px;">Figura 3 - Diagrama de um campo vetorial em duas dimensões.</legend>
+
 
 Agora podemos ver o Campo Vetorial, simples, com poucos pontos escolhidos no espaço e duas cargas pontuais representadas por círculos. Um vermelho, quente, para indicar a carga positiva outro azul, frio, para indicar a carga negativa. Treine a vista. Seja cuidadoso, detalhista. E verá a interação das forças em todos os pontos do espaço.
 
@@ -847,7 +878,6 @@ Ao derivarmos parcialmente o Campo Vetorial $\mathbf{f}$ escolhemos nosso Sistem
 \[
 \nabla \mathbf{f}(2,3) = 5.57365 a_x+ 4a_y
 \]
-
 </p>
 
 Assim como um navegador considera a variação da profundidade do oceano em diferentes direções para traçar a rota mais segura, a derivada parcial nos ajuda a entender como uma função se comporta quando mudamos suas variáveis de entrada. O gradiente é a forma de fazermos isso em todas as dimensões, derivando em uma incógnita de cada vez.
@@ -857,10 +887,17 @@ Assim como um navegador considera a variação da profundidade do oceano em dife
 Em qualquer ponto $P$ o gradiente é um vetor que aponta na direção da maior variação de um Campo Escalar neste ponto. Nós podemos voltar ao exemplo 8 e tentar apresentar isso de uma forma mais didática. Primeiro o gráfico do Campo Escalar dado por: $\mathbf{F}(x,y) = 10sin(\frac{x^2}{5})+4y$.
 
 ![Gráfico do Campo Escalar](/assets/images/Func1Grad.jpeg){:# class="lazyimg"}
+<legend style="font-size: 1em;
+  text-align: center;
+  margin-bottom: 20px;">Figura 4 - Gráfico de um Campo Escalar $f(x,y)$.</legend>
+
 
 Nesta imagem é possível ver a variação do campo $\mathbf{f}(x,y)$$ eu escolhi uma função em $$\mathbf{f}(x,y)$ no domínio dos $\mathbb{R}^2$ por ser mais fácil de desenhar e visualizar, toda a variação fica no domínio de $z$. Podemos plotar o gradiente na superfície criada pelo campo $\mathbf{f}(x,y)$.
 
 ![Gráfico do Campo Escalar mostrando a intensidade do gradiente ](/assets/images/func1Grad2.jpeg){:class="lazyimg"}
+<legend style="font-size: 1em;
+  text-align: center;
+  margin-bottom: 20px;">Figura 5 - Gráfico de um Campo Escalar $f(x,y) representando o Gradiente$.</legend>
 
 Nesta imagem, em cada ponto, a cor da superfície foi definida de acordo com a intensidade do gradiente. Quanto menor esta intensidade, mais próximo do vermelho. Quanto maior, mais próximo do Azul. Veja que a variação é maior nas bordas de descida ou subida e menor nos picos e vales. Coisas características da derivação.
 
