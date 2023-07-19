@@ -100,7 +100,7 @@ Nesta linguagem cada sentença, ou preposição, deve ser verdadeira ou falsa, n
 
 Para que uma sentença, ou preposição, seja verdadeira ela precisa ser logicamente verdadeira. Uma sentença que deve ser falsa é uma sentença contraditória.
 
-Assim como aprendemos nossa língua materna reconhecendo padrões, repetições e regularidades, também reconhecemos Fórmulas Bem Formadas por seus padrões característicos. Os símbolos estarão dispostos de forma organizada e padronizada em termos sobre os quais serão aplicadas operações, funções e quantizadores.
+Assim como aprendemos nossa língua materna reconhecendo padrões, repetições e regularidades, também reconhecemos Fórmulas Bem Formadas por seus padrões característicos. Os símbolos estarão dispostos de forma organizada e padronizada em termos sobre os quais serão aplicadas operações, funções e quantificadores.
 
 Termos são variáveis, constantes ou mesmo funções aplicadas a termos e seguem um pequeno conjunto de regras:
 
@@ -1211,8 +1211,9 @@ F \leftrightarrow G
 $$
 
 $$
+&F \leftrightarrow G
+$$
 \begin{aligned}
-&F \leftrightarrow G\\
 &F\\
 \hline
 &G\\
@@ -1220,8 +1221,10 @@ $$
 $$
 
 $$
+F \leftrightarrow G
+$$
+$$
 \begin{aligned}
-&F \leftrightarrow G\\
 &G\\
 \hline
 &F\\
@@ -1360,7 +1363,7 @@ Pode ser escrito como:
 
 $$P(0) \land P(1) \land P(2) \land P(3) \land \ldots$$
 
-Onde $P(0), P(1), P(2), P(3) ...$ representam a aplicação do predicado $P$ a todos os elementos $x$ do conjunto \mathbb{Z}.
+Onde $P(0), P(1), P(2), P(3) ...$ representam a aplicação do predicado $P$ a todos os elementos $x$ do conjunto $\mathbb{Z}$.
 
 Em Lógica Proposicional, não podemos escrever expressões com um número infinito de termos, como a expansão em conjunções que fizemos. No entanto, podemos usar esta interpretação informal para entender o significado por trás de $\forall x P(x)$.
 
@@ -1472,11 +1475,9 @@ O quantificador existencial não especifica o objeto, apenas afirma que existe u
 
 Portanto, mesmo que não possamos de fato escrever uma disjunção infinita na Lógica de Primeira Ordem, essa expansão informal transmite de forma simples e intuitiva o significado do quantificador existencial.
 
-## Dos Predicados para a Linguagem Natural
+## Dos Predicados à Linguagem Natural
 
-Ao ler Fórmula Bem Formada contendo quantificadores, **lemos da esquerda para a direita**.
-
-$\forall x$ pode ser lido como _para todo objeto $x$ no universo do discurso onde este objeto está implícito, o seguinte se mantém_ e $\exists x$ pode ser lido como _existe um objeto $x$ no universo que satisfaz o seguinte_ ou ainda _para algum objeto $x$ no universo, o seguinte se mantém_. A forma como lê-mos determina nosso entendimento da Fórmula Bem Formada.
+Ao ler Fórmula Bem Formada contendo quantificadores, **lemos da esquerda para a direita**. Por exemplo, $\forall x$ pode ser lido como _para todo objeto $x$ no universo do discurso onde este objeto está implícito, o seguinte se mantém_. Por outro lado, o quantificador $\exists x$ pode ser lido como _existe um objeto $x$ no universo que satisfaz o seguinte_ ou ainda _para algum objeto $x$ no universo, o seguinte se mantém_. A forma como lê-mos determina como entenderemos as Fórmulas Bem Formadas que incluam quantificadores.
 
 A conversão de uma Fórmula Bem Formada em sentença, não necessariamente resulta em boas expressões em linguagem natural. Apesar disso, sempre devemos começar lendo estas Fórmulas Bem Formadas. Primeiro tente fazer a leitura correta e depois aprimores as sentenças sem alterar os valores lógicos.
 
@@ -1619,8 +1620,8 @@ $$
   - Conclusão: logo, _$5$ é maior que $4$_.
 
 $$
-\\begin{aligned}
-&\forall n(\mathbb{Z}(n) \rightarrow (n > n-1))\\
+\begin{aligned}
+&\forall n (\mathbb{Z}(n) \rightarrow (n > n-1))\\
 \hline
 &5 > 4
 \end{aligned}
