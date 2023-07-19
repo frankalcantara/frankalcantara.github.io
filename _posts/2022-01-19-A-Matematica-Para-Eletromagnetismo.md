@@ -891,7 +891,6 @@ Em qualquer ponto $P$ o gradiente é um vetor que aponta na direção da maior v
   text-align: center;
   margin-bottom: 20px;">Figura 4 - Gráfico de um Campo Escalar $f(x,y)$.</legend>
 
-
 Nesta imagem é possível ver a variação do campo $\mathbf{f}(x,y)$$ eu escolhi uma função em $$\mathbf{f}(x,y)$ no domínio dos $\mathbb{R}^2$ por ser mais fácil de desenhar e visualizar, toda a variação fica no domínio de $z$. Podemos plotar o gradiente na superfície criada pelo campo $\mathbf{f}(x,y)$.
 
 ![Gráfico do Campo Escalar mostrando a intensidade do gradiente ](/assets/images/func1Grad2.jpeg){:class="lazyimg"}
