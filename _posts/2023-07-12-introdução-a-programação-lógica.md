@@ -24,7 +24,7 @@ keywords:
 draft: true
 ---
 
-A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o "o que" e deixando o "como" a cargo da máquina. É a base de alguns modelos computacionais que estão mudando o mundo.
+A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. É a base de alguns modelos computacionais que estão mudando o mundo.
 
 > "Logic programming is the future of artificial intelligence." - [Marvin Minsky](https://en.wikipedia.org/wiki/Marvin_Minsky)
 
@@ -42,7 +42,7 @@ Uma conjectura é uma suposição, ou proposição que é acreditada ser verdade
 
 ![Diagrama de Significado de Conjeturas](/assets/images/conjecturas.jpeg)
 
-Em resumo: **Imperativa:** focada no processo, no "como" chegar à solução; **Descritiva:** focada no problema em si, no "o que" precisa ser feito.
+Em resumo: **Imperativa:** focada no processo, no _como_ chegar à solução; **Descritiva:** focada no problema em si, no _o que_ precisa ser feito.
 
 A escolha entre estes paradigmas dependerá da aplicação e do estilo do programador. Mas o futuro parece cada vez mais orientado para linguagens declarativas e descritivas, que permitem ao programador concentrar-se no problema, não nos detalhes da solução. Efeito que parece ser evidente se considerarmos os avanços recentes no campo da inteligência artificial.
 
@@ -56,7 +56,7 @@ Vamos falar da Cláusula de Horn, um conceito um pouco mais estranho. Uma regra 
 
 No final do dia, tudo que queremos, desde os tempos de [Gödel](https://en.wikipedia.org/wiki/Kurt_Gödel), [Turing](https://en.wikipedia.org/wiki/Alan_Turing) e [Church](https://en.wikipedia.org/wiki/Alonzo_Church) é que nossas máquinas sejam capazes de resolver problemas complexos com o mínimo de interferência nossa. Queremos que eles pensem, ou pelo menos, que simulem o pensamento. E a Programação Lógica é uma maneira deveras interessante de perseguir este objetivo.
 
-A Programação Lógica aparece em meados dos anos 1970 como uma evolução dos esforços das pesquisas sobre a prova computacional de teoremas matemáticos e inteligência artificial. Deste esforço surgiu a esperança de que poderíamos usar a lógica como um linguagem de programação, em inglês, "programming logic" ou Prolog. Este artigo faz parte de uma série sobre a Programação Lógica, partiremos da base matemática e chegaremos ao Prolog.
+A Programação Lógica aparece em meados dos anos 1970 como uma evolução dos esforços das pesquisas sobre a prova computacional de teoremas matemáticos e inteligência artificial. Deste esforço surgiu a esperança de que poderíamos usar a lógica como um linguagem de programação, em inglês, _programming logic_ ou Prolog. Este artigo faz parte de uma série sobre a Programação Lógica, partiremos da base matemática e chegaremos ao Prolog.
 
 # Lógica de Primeira Ordem
 
@@ -439,7 +439,7 @@ Nossa jornada pela Lógica Proposicional nos levou a uma compreensão mais profu
 
 ## Lógica Predicativa
 
-A Lógica Predicativa, coração e espírito da Lógica de Primeira Ordem, nos leva um passo além da Lógica Proposicional. Em vez de se concentrar apenas em proposições completas que são verdadeiras ou falsas, a lógica predicativa nos permite expressar proposições sobre "objetos" e as relações entre eles. Ela nos permite falar de maneira mais rica e sofisticada sobre o mundo.
+A Lógica Predicativa, coração e espírito da Lógica de Primeira Ordem, nos leva um passo além da Lógica Proposicional. Em vez de se concentrar apenas em proposições completas que são verdadeiras ou falsas, a lógica predicativa nos permite expressar proposições sobre objetos e as relações entre eles. Ela nos permite falar de maneira mais rica e sofisticada sobre o mundo.
 
 Se você se lembra, na Lógica Proposicional, cada proposição é um átomo indivisível. Por exemplo, 'A chuva cai' ou 'O sol brilha'. Cada uma dessas proposições é verdadeira ou falsa como uma unidade. Na lógica predicativa, no entanto, podemos olhar para dentro dessas proposições. Podemos falar sobre o sujeito - a chuva, o sol - e o predicado - cai, brilha. E podemos quantificar sobre eles: para todos os dias, existe um momento em que o sol brilha.
 
@@ -485,7 +485,7 @@ Assim, vemos que o predicado $P(u)$ dado por _u é par_ é uma propriedade que a
 
    - Universo do discurso: $U = \text{conjunto de todas as pessoas}$.
    - Predicado: $P(x) = \\{ x : x \text{ é um matemático} \\}$;
-   - Itens para os quais $P(x)$ é verdadeiro: "Carl Gauss", "Leonhard Euler", "John Von Neumann".
+   - Itens para os quais $P(x)$ é verdadeiro: Carl Gauss, Leonhard Euler, John Von Neumann.
 
 2. **Exemplo 2**:
 
@@ -694,7 +694,7 @@ Algumas aplicações do Modus Tollens:
 - Fazer deduções lógicas baseadas na negação da conclusão. Por exemplo:
 
   - Proposição: _se hoje, $H$, é sexta-feira, $Se$, amanhã é sábado $Sa$_.
-  - Proposição: _Amanhã não é sábado_.
+  - Proposição: _amanhã não é sábado_.
   - Conclusão: logo, _hoje não é sexta-feira_.
 
   $$
@@ -871,8 +871,10 @@ Algumas aplicações do Modus Tollendo Ponens:
   - Conclusão: logo, _João vai à praia_.
 
 $$
+P \vee C\\
+$$
+$$
 \begin{aligned}
-&P \vee C\\
 &\neg C\\
 \hline
 &P
@@ -1098,7 +1100,7 @@ $$
 \end{aligned}
 $$
 
-### Bicondicionalidade\*\*
+### Bicondicionalidade
 
 A regra da Bicondicionalidade permite inferir uma bicondicional a partir de duas condicionais. Esta regra nos permite combinar duas implicações para obter uma afirmação de equivalência lógica.
 
@@ -1110,9 +1112,6 @@ $$
 G \rightarrow F
 $$
 
-$$
-&F \rightarrow G
-$$
 $$
 \begin{aligned}
 &G \rightarrow F\\
@@ -1140,6 +1139,8 @@ Em linguagem natural:
 $$
 C \rightarrow M
 $$
+
+$$
 \begin{aligned}
 &M \rightarrow C\\
 \hline
@@ -1154,8 +1155,9 @@ $$
   - Conclusão: logo, _um número é par se e somente se é múltiplo de 2_.
 
 $$
-P \rightarrow M2\\
+P \rightarrow M2
 $$
+
 $$
 \begin{aligned}
 &M2 \rightarrow P\\
@@ -1191,6 +1193,7 @@ $$
 $$
 Q \rightarrow 4L
 $$
+
 $$
 \begin{aligned}
 &4L \rightarrow Q\\
@@ -1333,7 +1336,7 @@ Por exemplo, se estamos interessados em proposições sobre números naturais, $
 
 ### Quantificador Universal
 
-O quantificador universal $\forall$, lê-se _para todo_, indica que uma afirmação deve ser verdadeira para todos os valores de uma variável dentro de um universo de valores permitidos. Por exemplo, a preposição clássica _todos os humanos são mortais_ poderia ser escrita, em notação matemática, $\forall x : Humano(x) \rightarrow Mortal(x)$. Ou com predicado um pouco mais matemático, teríamos se $x$ é positivo então $x + 1$ é positivo, pode ser escrito $\forall x : x > 0 \rightarrow x + 1 > 0$. E pronto! Aqui temos quantificadores, Lógica Predicativa, Lógica Proposicional e Teoria dos Conjuntos.
+O quantificador universal $\forall$, lê-se _para todo_, indica que uma afirmação deve ser verdadeira para todos os valores de uma variável dentro de um universo de valores permitidos. Por exemplo, a preposição clássica _todos os humanos são mortais_ poderia ser escrita, em notação matemática, $\forall x Humano(x) \rightarrow Mortal(x)$. Ou com predicado um pouco mais matemático, teríamos se $x$ é positivo então $x + 1$ é positivo, pode ser escrito $\forall x  (x > 0 \rightarrow x + 1 > 0)$. E pronto! Aqui temos quantificadores, Lógica Predicativa, Lógica Proposicional e Teoria dos Conjuntos.
 
 Recorremos a teoria dos conjuntos para tornar o universo do discurso mais explícito, a notação de pertencimento é útil nesta definição. Um exemplo bom exemplo desta prática seria:
 
@@ -1343,7 +1346,7 @@ Isso é logicamente equivalente a escrever:
 
 $$\forall x \\{x \in \mathbb{Z} \rightarrow (x > 0 \rightarrow x + 1 > 0)\\}$$
 
-ou a escrever:
+Ou a escrever:
 
 $$\forall x (x \in \mathbb{Z} \land x > 0) \rightarrow x + 1 > 0$$
 
@@ -1359,29 +1362,29 @@ $$P(0) \land P(1) \land P(2) \land P(3) \land \ldots$$
 
 Onde $P(0), P(1), P(2), P(3) ...$ representam a aplicação do predicado $P$ a todos os elementos $x$ do conjunto \mathbb{Z}.
 
-Em Lógica Proposicional, não podemos escrever expressões com um número infinito de termos, como a expansão em conjunções que fizemos. No entanto, podemos usar esta interpretação informal para entender o significado por trás de $\forall x: P(x)$.
+Em Lógica Proposicional, não podemos escrever expressões com um número infinito de termos, como a expansão em conjunções que fizemos. No entanto, podemos usar esta interpretação informal para entender o significado por trás de $\forall x P(x)$.
 
 O quantificador universal $\forall x P(x)$ afirma que a proposição $P(x)$ é verdadeira para todo valor possível que $x$ pode assumir. Uma forma de interpretar isso é pensar em $x$ como uma variável que pode ter qualquer valor, fornecido por um adversário qualquer. Seu trabalho é mostrar que não importa qual valor esse adversário escolher para $x$, a proposição $P(x)$ será sempre verdadeira.
 
 Para validar $\forall x P(x)$ escolheremos o pior caso possível para $x$ - todo valor que suspeitamos poderia fazer $P(x)$ falso. Se você consegue provar que $P(x)$ é verdadeira neste caso específico, então $\forall x P(x)$ deve ser verdadeira. Novamente, vamos recorrer a exemplos na esperança de explicitar este conhecimento.
 
-1. **Exemplo 1**: "Todos os números reais são maiores que 0." (Universo do discurso: $x \in \mathbb{R}$)
+1. **Exemplo 1**: todos os números reais são maiores que 0. (Universo do discurso: $x \in \mathbb{R}$)
 
    $$\forall x\,(Número(x) \rightarrow x > 0)$$
 
-2. **Exemplo 2**: "Todos os triângulos em um plano euclidiano têm a soma dos ângulos internos igual a 180 graus." (Universo do discurso: $x$ é um triângulo em um plano euclidiano)
+2. **Exemplo 2**: todos os triângulos em um plano euclidiano têm a soma dos ângulos internos igual a 180 graus. (Universo do discurso: $x$ é um triângulo em um plano euclidiano)
 
    $$\forall x\,(Triângulo(x) \rightarrow \Sigma_{i=1}^3 ÂnguloInterno_i(x) = 180^\circ)$$
 
-3. **Exemplo 3**: "Todas as pessoas com mais de 18 anos podem tirar carteira de motorista." (Universo do discurso: $x$ é uma pessoa)
+3. **Exemplo 3**: todas as pessoas com mais de 18 anos podem tirar carteira de motorista." (Universo do discurso: $x$ é uma pessoa)
 
    $$\forall x\,(Pessoa(x) \land Idade(x) > 18 \rightarrow PodeTirarCarteira(x))$$
 
-4. **Exemplo 4**: "Todo número par maior que 2 pode ser escrito como a soma de dois números primos." (Universo do discurso: $x \in \mathbb{Z}$
+4. **Exemplo 4**: todo número par maior que 2 pode ser escrito como a soma de dois números primos. (Universo do discurso: $x \in \mathbb{Z}$
 
    $$\forall x\,(Par(x) \land x > 2 \rightarrow \exists a\exists b\, (Primo(a) \land Primo(b) \land x = a + b))$$
 
-5. **Exemplo 5**: "Para todo número natural, se ele é múltiplo de 4 e múltiplo de 6, então ele também é múltiplo de 12." (Universo do discurso: $x \in \mathbb{N}$)
+5. **Exemplo 5**: para todo número natural, se ele é múltiplo de 4 e múltiplo de 6, então ele também é múltiplo de 12. (Universo do discurso: $x \in \mathbb{N}$)
 
    $$\forall x\,((\exists a\in\Bbb N\,(x = 4a) \land \exists b\in\Bbb N\,(x = 6b)) \rightarrow \exists c\in\Bbb N\,(x = 12c))$$
 
@@ -1391,27 +1394,27 @@ O quantificador universal nos permite definir uma Fórmula Bem Formada represent
 
 O quantificador existencial, $\exists$ nos permite fazer afirmações sobre a existência de objetos com certas propriedades, sem precisarmos especificar exatamente quais objetos são esses. Vamos tentar remover os véus da dúvida com um exemplo simples.
 
-Consideremos a sentença: "existem humanos mortais". Com um pouco mais de detalhe e matemática, podemos escrever isso como: existe pelo menos um $x$ tal que $x$ é humano e mortal. Para escrever a mesma sentença com precisão matemática teremos:
+Consideremos a sentença: _existem humanos mortais_. Com um pouco mais de detalhe e matemática, podemos escrever isso como: existe pelo menos um $x$ tal que $x$ é humano e mortal. Para escrever a mesma sentença com precisão matemática teremos:
 
-$$\exists x : \text{Humano}(x) \land \text{Mortal}(x)$$
+$$\exists x \text{Humano}(x) \land \text{Mortal}(x)$$
 
-Lendo por partes: existe um $x$, tal que $x$ é humano _E_ $x$ é mortal. Em outras palavras, existe pelo menos um humano que é mortal.
+Lendo por partes: _existe um $x$, tal que $x$ é humano E $x$ é mortal_. Em outras palavras, existe pelo menos um humano que é mortal.
 
 Note duas coisas importantes:
 
 1. Nós não precisamos dizer exatamente quem é esse humano mortal. Só afirmamos que existe um. O operador $\exists$ captura essa ideia.
 
-2. Usamos _E_ ($\land$), não implicação ($\rightarrow$). Se usássemos $\rightarrow$, a afirmação ficaria muito mais fraca. Veja:
+2. Usamos E ($\land$), não implicação ($\rightarrow$). Se usássemos $\rightarrow$, a afirmação ficaria muito mais fraca. Veja:
 
-$$\exists x: \text{Humano}(x) \rightarrow \text{Mortal}(x)$$
+$$\exists x \text{Humano}(x) \rightarrow \text{Mortal}(x)$$
 
-Que pode ser lido como: "existe um $x$ tal que, _SE_ $x$ é humano, _ENTÃO_ $x$ é mortal". Essa afirmação é verdadeira em qualquer universo que contenha um unicórnio de bolinhas roxas imortal. Porque o unicórnio não é humano, então $\text{Humano}(\text{unicórnio})$ é falsa, e a implicação $\text{Humano}(x) \rightarrow \text{Mortal}(x)$ é verdadeira independente do consequente. Não entendeu? Volte dois parágrafos e leia novamente. Repita!
+Que pode ser lido como: _existe um $x$ tal que, SE $x$ é humano, ENTÃO $x$ é mortal_. Essa afirmação é verdadeira em qualquer universo que contenha um unicórnio de bolinhas roxas imortal. Porque o unicórnio não é humano, então $\text{Humano}(\text{unicórnio})$ é falsa, e a implicação $\text{Humano}(x) \rightarrow \text{Mortal}(x)$ é verdadeira independente do consequente. Não entendeu? Volte dois parágrafos e leia novamente. Repita!
 
 Portanto, é crucial usar o operador $\land$, e não $\rightarrow$ quando trabalhamos com quantificadores existenciais. O $\land$ garante que a propriedade se aplica ao objeto existente definido pelo $\exists$.
 
 Assim como o quantificador universal, $\forall$, o quantificador existencial, $\exists$, também pode ser restrito a um universo específico, usando a notação de pertencimento:
 
-$$\exists x \in \mathbb{Z}: x = x^2$$
+$$\exists x \in \mathbb{Z} : x = x^2$$
 
 Que afirma a existência de pelo menos um inteiro $x$ tal que $x$ é igual ao seu quadrado. Novamente, não precisamos dizer qual é esse inteiro, apenas que ele existe dentro do conjunto dos inteiros. Existe?
 
@@ -1419,31 +1422,31 @@ De forma geral, o quantificador existencial serve para fazer afirmações elegan
 
 Talvez, alguns exemplos possam ajudar no entendimento: 
 
-**Exemplo 1**: "Existe um mamífero que não respira ar."
+**Exemplo 1**: existe um mamífero que não respira ar.
 
 $$
 \exists x \ (Mamífero(x) \land \neg RespiraAr(x))  
 $$
 
-**Exemplo 2**: "Existe uma equação do segundo grau com três raízes reais."
+**Exemplo 2**: existe uma equação do segundo grau com três raízes reais.
 
 $$
 \exists x \ (Eq2Grau(x) \land |\text{RaízesReais}(x)| = 3)
 $$
 
-**Exemplo 3**: "Existe um número primo que é par."
+**Exemplo 3**: existe um número primo que é par.
 
 $$
 \exists x \ (Primo(x) \land Par(x))
 $$
 
-**Exemplo 4**: "Existe um quadrado perfeito que pode ser escrito como o quadrado de um número racional."
+**Exemplo 4**: existe um quadrado perfeito que pode ser escrito como o quadrado de um número racional.
 
 $$
 \exists x \ (QuadPerfeito(x) \land \exists a \in \mathbb{Q} \ (x = a^2))
 $$
 
-**Exemplo 5**: "Existe um polígono convexo em que a soma dos ângulos internos não é igual a $(n-2)\cdot180^{\circ}$."
+**Exemplo 5**: existe um polígono convexo em que a soma dos ângulos internos não é igual a $(n-2)\cdot180^{\circ}$.
 
 $$
 \exists x \ (\text{PolígonoConvexo}(x) \land \sum_{i=1}^{n} \text{ÂnguloInterno}_i(x) \neq (n-2)\cdot 180^{\circ})
@@ -1451,9 +1454,9 @@ $$
 
 Estudando o quantificador universal encontramos duas equivalências interessantes:
 
-$$\lnot \forall x : P(x) \leftrightarrow \exists x : \lnot P(x)$$
+$$\lnot \forall x P(x) \leftrightarrow \exists x \lnot P(x)$$
 
-$$\lnot \exists x : P(x) \leftrightarrow \forall x : \lnot P(x)$$
+$$\lnot \exists x P(x) \leftrightarrow \forall x \lnot P(x)$$
 
 Essas equivalências são essencialmente as versões quantificadas das Leis de De Morgan: a primeira diz que se você quer a que nem todos os humanos são mortais, isso é equivalente a encontrar algum humano que não é mortal. A segunda diz que para mostrar que nenhum humano é mortal, você tem que mostrar que todos os humanos não são mortais.
 
@@ -1489,13 +1492,13 @@ Por exemplo: seja $U$ o universo o conjunto de aviões e seja $F(x,y)$ o predica
 
 ### Ordem de Aplicação dos Quantificadores
 
-Quando mais de uma variável é quantificada em uma fbf como $\forall y\forall x P(x,y)$, elas são aplicadas de dentro para fora, ou seja, a mais próxima da fórmula atômica é aplicada primeiro. Assim, $\forall y\forall x P(x,y)$ se lê "existe um $y$ tal que para todo $x$, $P(x,y)$ se mantém" ou "para algum $y$, $P(x,y)$ se mantém para todo $x$".
+Quando mais de uma variável é quantificada em uma fbf como $\forall y\forall x P(x,y)$, elas são aplicadas de dentro para fora, ou seja, a mais próxima da fórmula atômica é aplicada primeiro. Assim, $\forall y\forall x P(x,y)$ se lê _existe um $y$ tal que para todo $x$, $P(x,y)$ se mantém_ ou _para algum $y$, $P(x,y)$ se mantém para todo $x$_.
 
 As posições dos mesmos tipos de quantificadores podem ser trocadas sem afetar o valor lógico, desde que não haja quantificadores do outro tipo entre os que serão trocados.
 
 Por exemplo, $\forall x\forall y\forall z P(x,y,z)$ é equivalente a $\forall y\forall x\forall z P(x,y,z)$, $\forall z\forall y\forall x P(x,y,z)$, etc. O mesmo vale para o quantificador existencial.
 
-No entanto, as posições de quantificadores de tipos diferentes **não** podem ser trocadas. Por exemplo, $\forall x\exists y P(x,y)$ **não** é equivalente a $\exists y\forall x P(x,y)$. Por exemplo, seja $P(x,y)$ representando $x < y$ para o conjunto dos números como universo. Então, $\forall x\exists y P(x,y)$ se lê "para todo número $x$, existe um número $y$ que é maior que $x$", o que é verdadeiro, enquanto $\exists y\forall x P(x,y)$ se lê "existe um número que é maior que todo (qualquer) número", o que não é verdadeiro.
+No entanto, as posições de quantificadores de tipos diferentes **não** podem ser trocadas. Por exemplo, $\forall x\exists y P(x,y)$ **não** é equivalente a $\exists y\forall x P(x,y)$. Por exemplo, seja $P(x,y)$ representando $x < y$ para o conjunto dos números como universo. Então, $\forall x\exists y P(x,y)$ se lê _para todo número $x$, existe um número $y$ que é maior que $x$_, o que é verdadeiro, enquanto $\exists y\forall x P(x,y)$ se lê _existe um número que é maior que todo (qualquer) número_, o que não é verdadeiro.
 
 ## Regras de Inferência usando Quantificadores
 
@@ -1566,12 +1569,12 @@ $$
 A regra de Instanciação Universal permite substituir a variável em uma afirmação universalmente quantificada por um termo concreto. Esta regra nos permite derivar casos particulares a partir de afirmações gerais.
 
 $$
-\forall x \: P(x)
+\forall x P(x)
 $$
 
 $$
 \begin{aligned}
-&\forall x \: P(x)\\
+&\forall x P(x)\\
 \hline
 &P(a)\\
 \end{aligned}
@@ -1606,7 +1609,7 @@ $$
 \begin{aligned}
 &\forall t(T(t) \rightarrow 180^\circ(t))\\
 \hline
-&180^\circ(\triangle ABC)
+&180^\circ(\text{Triângulo} ABC)
 \end{aligned}
 $$
 
@@ -1618,12 +1621,12 @@ $$
 $$
 \\begin{aligned}
 &\forall n(\mathbb{Z}(n) \rightarrow (n > n-1))\\
-\\hline
+\hline
 &5 > 4
-\\end{aligned}
+\end{aligned}
 $$
 
-### Generalização Existencial**
+### Generalização Existencial
 
 A regra de Generalização Existencial permite inferir que algo existe a partir de uma afirmação concreta. Esta regra nos permite generalizar de exemplos específicos para a existência geral.
 
@@ -1635,7 +1638,7 @@ $$
 \begin{aligned}
 P(a)\\
 \hline
-\exists x \: P(x)\\
+\exists x P(x)\\
 \end{aligned}
 $$
 
@@ -1644,7 +1647,7 @@ Em linguagem natural:
 - Proposição: _Rex é um cachorro_.
 - Conclusão: logo, _existe pelo menos um cachorro_.
 
-Algumas aplicações da Generalização Existencial (regra 12):
+Algumas aplicações da Generalização Existencial:
 
 - Inferir existência a partir de exemplos concretos. Por exemplo:
 
@@ -1706,7 +1709,7 @@ Em linguagem natural:
 - Proposição: _existe um cachorro com rabo curto_.
 - Conclusão: logo, _Rex tem rabo curto_.
 
-Algumas aplicações da Instanciação Existencial (regra 13):
+Algumas aplicações da Instanciação Existencial:
 
 - Derivar exemplos de existência previamente estabelecida. Por exemplo:
 
@@ -1759,17 +1762,17 @@ Existem várias formas normais na Lógica Proposicional, cada uma com suas próp
 
 2. **Forma Normal Conjuntiva (FNC)**: Uma proposição está na Forma Normal Conjuntiva se for uma conjunção, operação _E_, $\wedge$, de uma ou mais cláusulas, onde cada cláusula é uma disjunção, operação _OU_, $\vee$, de literais. Em outras palavras, é uma série de cláusulas conectadas por _Es_, onde cada cláusula é composta de variáveis conectadas por _OUs_.
 
-3. **Forma Normal Disjuntiva (FND)**: Uma proposição está na Forma Normal Disjuntiva se for uma disjunção de uma ou mais cláusulas, onde cada cláusula é uma conjunção de literais. Ou seja, é uma série de cláusulas conectadas por _ORs_, onde cada cláusula é composta de variáveis conectadas por _ANDs_.
+3. **Forma Normal Disjuntiva (FND)**: uma proposição está na Forma Normal Disjuntiva se for uma disjunção de uma ou mais cláusulas, onde cada cláusula é uma conjunção de literais. Ou seja, é uma série de cláusulas conectadas por _ORs_, onde cada cláusula é composta de variáveis conectadas por _ANDs_.
 
-4. **Forma Normal Prenex (FNP)**: Uma proposição está na Forma Normal Prenex se todos os quantificadores, para a Lógica de Primeira Ordem, estiverem à esquerda, precedendo uma matriz quantificadora livre. Esta forma é útil na Lógica de Primeira Ordem e na teoria da prova.
+4. **Forma Normal Prenex (FNP)**: uma proposição está na Forma Normal Prenex se todos os quantificadores, para a Lógica de Primeira Ordem, estiverem à esquerda, precedendo uma matriz quantificadora livre. Esta forma é útil na Lógica de Primeira Ordem e na teoria da prova.
 
-5. **Forma Normal Skolem (FNS)**: Na Lógica de Primeira Ordem, uma fórmula está na Forma Normal de Skolem se estiver na Forma Normal Prenex e se todos os quantificadores existenciais forem eliminados. Isto é realizado através de um processo conhecido como Skolemização.
+5. **Forma Normal Skolem (FNS)**: na Lógica de Primeira Ordem, uma fórmula está na Forma Normal de Skolem se estiver na Forma Normal Prenex e se todos os quantificadores existenciais forem eliminados. Isto é realizado através de um processo conhecido como Skolemização.
 
 Nosso objetivo é rever a matemática que suporta a Programação Lógica, entre as principais formas normais, para este objetivo, precisamos destacar duas formas normais:
 
-1. **Forma Normal Conjuntiva (FNC)**: A Forma Normal Conjuntiva é importante na Programação Lógica porque muitos sistemas de inferência, como a resolução, funcionam em fórmulas que estão na FNC. Além disso, os programas em Prolog, A linguagem de Programação Lógica que escolhemos, são essencialmente cláusulas na FNC.
+1. **Forma Normal Conjuntiva (FNC)**: a Forma Normal Conjuntiva é importante na Programação Lógica porque muitos sistemas de inferência, como a resolução, funcionam em fórmulas que estão na FNC. Além disso, os programas em Prolog, A linguagem de Programação Lógica que escolhemos, são essencialmente cláusulas na FNC.
 
-2. **Forma Normal de Skolem (FNS)**: A Forma Normal de Skolem é útil na Programação Lógica porque a Skolemização, o processo de remover quantificadores existenciais transformando-os em funções de quantificadores universais, permite uma forma mais eficiente de representação e processamento de fórmulas lógicas. Essa forma normal é frequentemente usada em Lógica de Primeira Ordem e teoria da prova, ambas fundamentais para a Programação Lógica.
+2. **Forma Normal de Skolem (FNS)**: a Forma Normal de Skolem é útil na Programação Lógica porque a Skolemização, o processo de remover quantificadores existenciais transformando-os em funções de quantificadores universais, permite uma forma mais eficiente de representação e processamento de fórmulas lógicas. Essa forma normal é frequentemente usada em Lógica de Primeira Ordem e teoria da prova, ambas fundamentais para a Programação Lógica.
 
 Embora outras formas normais possam ter aplicações em áreas específicas da Programação Lógica, a FNC e a FNS são provavelmente as mais amplamente aplicáveis e úteis nesse Proposição. Começando com a Forma Normal Conjuntiva.
 
