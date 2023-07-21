@@ -139,7 +139,7 @@ Assim como aprendemos nossa língua materna reconhecendo padrões, repetições 
 Termos são variáveis, constantes ou mesmo funções aplicadas a termos e seguem um pequeno conjunto de regras:
 
 1. uma variável $x$ é um termo em sí;
-2. uma constante $a$ é um termo em si;
+2. uma constante $a$ é um termo em si que será verdadeira $(T)$ ou falsa $(F)$;
 3. se $\mathbf{f}$ é uma função de termos $(t_1, ... t_2)$ então $\mathbf{f}(t_1, ... t_2)$ é um termo.
 
 Cada proposição, ou sentença, na Lógica Proposicional é como uma ilha isolada de verdade, um fato fundamental que não pode ser dividido em partes menores. _A chuva cai_, _O sol brilha_ - cada uma dessas proposições é verdadeira ou falsa como uma unidade. Um átomo, elemento básico e fundamental de todas as expressões. Também, mas tarde, chamaremos de átomos a todo predicado aplicado aos termos de uma fórmula. Assim, também precisamos definir os predicados.
@@ -1275,10 +1275,9 @@ $$
 
 Podemos classificar fórmulas proposicionais de acordo com suas propriedades semânticas, analisando suas tabelas-verdade. Seja $A$ uma fórmula proposicional:
 
-  $A$ é **satisfatível** se sua tabela-verdade contém pelo menos uma linha verdadeira. Considere: $P \wedge Q$.
+- $A$ é **satisfatível** se sua Tabela Verdade contém pelo menos uma linha verdadeira. Considere: $P \wedge Q$.
  
- $$
-    \begin{array}{|c|c|c|}
+ $$\begin{array}{|c|c|c|}
     \hline
     P & Q & P \land Q \\ 
     \hline
@@ -1290,15 +1289,14 @@ Podemos classificar fórmulas proposicionais de acordo com suas propriedades sem
     \hline
     T & T & T \\ 
     \hline
-    \end{array}
-$$
+    \end{array}$$
 
 
-$A$ é **insatisfatível** se sua tabela-verdade contém apenas linhas falsas. Exemplo: $p \wedge \neg p$.
+- $A$ é **insatisfatível** se sua Tabela Verdade contém apenas linhas falsas. Exemplo: $p \wedge \neg p$.
 
-- $A$ é **falsificável** se sua tabela-verdade contém pelo menos uma linha falsa. Exemplo: $p \wedge q$.
+- $A$ é **falsificável** se sua Tabela Verdade contém pelo menos uma linha falsa. Exemplo: $p \wedge q$.
 
-- $A$ é **válida** se sua tabela-verdade contém apenas linhas verdadeiras. Exemplo: $p \vee \neg p$.
+- $A$ é **válida** se sua Tabela Verdade contém apenas linhas verdadeiras. Exemplo: $p \vee \neg p$.
 
 Note que:
 
@@ -1306,7 +1304,15 @@ Note que:
 
 - Se $A$ é insatisfatível, então $A$ é falsificável.
 
-Fórmulas válidas são importantes na lógica proposicional, representando argumentos sempre verdadeiros independentemente da valoração de suas variáveis proposicionais atômicas.
+Fórmulas válidas são importantes na lógica proposicional, representando argumentos sempre verdadeiros independentemente da valoração de suas variáveis proposicionais atômicas. Na verdade, esta classificação será importante para: 
+
+1. Análise de Argumentos: Se uma argumentação lógica pode ser representada por uma fórmula que é insatisfatível, então sabemos que o argumento é inválido ou inconsistente. Isso é frequentemente usado em lógica e filosofia para analisar a validade dos argumentos.
+
+2. Prova de Teoremas: Na prova de teoremas, essas classificações são úteis. Se você está tentando provar que uma fórmula é uma tautologia, você pode usar essas classificações para simplificar a tarefa. Se você pode mostrar que a negação da fórmula é insatisfatível, então você mostrou que a fórmula original é uma tautologia.
+
+3. Simplificação de Fórmulas: Na simplificação de fórmulas, essas classificações também são úteis. Se você tem uma fórmula complexa e pode mostrar que uma parte dela é uma tautologia, você pode simplificar a fórmula removendo essa parte. Similarmente, se uma parte da fórmula é uma contradição (ou seja, é insatisfatível), então você sabe que a fórmula inteira é insatisfatível.
+
+4. Construção de Argumentos: Na construção de argumentos, estas classificações são úteis para garantir que os argumentos são válidos. Se você está construindo um argumento e pode mostrar que ele é representado por uma fórmula que é satisfatível (mas não uma tautologia), então você sabe que existem algumas circunstâncias em que o argumento é válido e outras em que não é.
 
 # Um Sistema de Prova
 A matemática respira prova. Nenhuma sentença matemática tem qualquer valor se não for provada. As verdades da aritmética devem ser estabelecidas com rigor lógico; as conjecturas da geometria, confirmadas por construtos infalíveis. Cada novo teorema se ergue sobre os ombros de gigantes – um edifício de razão cuidadosamente erigido.
@@ -1351,7 +1357,7 @@ Considere as proposições $A$ e $B$. Estas proposições serão ditas logicamen
   **Exemplo 2:** Vamos mostrar que $P \land Q$ não é logicamente equivalente a $P \lor Q$.
 
   **Solução** 
-  Verificando a tabela-verdade:
+  Verificando a Tabela Verdade:
 
   $$ \begin{array}{|c|c|c|c|c|}
   \hline
@@ -1367,7 +1373,7 @@ Considere as proposições $A$ e $B$. Estas proposições serão ditas logicamen
   **Exemplo 3:** Vamos mostrar que $P \rightarrow Q$ é logicamente equivalente a $\neg P \lor Q$.
 
   **Solução**
-  Verificando a tabela-verdade:
+  Verificando a Tabela Verdade:
 
   $$\begin{array}{|c|c|c|c|c|c|}
   \hline
