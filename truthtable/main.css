@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+/* Track */
+::-webkit-scrollbar-track {
+background: #25282A;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+background: #555;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #25282A;
+
+    background-image: url("logo.svg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: right;
+    background-size: 170%;
+}
+
+
+.container {
+
+    position: absolute;
+    bottom: 0px;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    height: 100%;
+    width: 100%;
+
+    font-size: 20px;
+    color: #dde5ed;
+    
+    padding: 4% 10% 4% 10%;
+}
+
+h1#title {
+    margin-bottom: 50px;
+    font-size: 50px;
+}
+
+p {
+    font-size: 20px;
+    text-align:center;
+}
+
+input#function_input {
+    position: relative;
+    margin: auto;
+
+    height: 70px;
+    width: 100%;
+
+    font-size: 24px;
+    background-color: #25282A;
+    border: 3px solid #dde5ed;
+    color: #dde5ed;
+    border-radius: 30px;
+    text-align: center;
+    outline: 0;
+    padding: 15px;
+    margin: 60px 0 0 0;
+}
+
+input::placeholder{
+    color: #dde5ed;
+    font-size: 100%;
+}
+
+
+table, th, td {
+    border: 2px solid #dde5ed;
+    border-collapse: collapse;
+    padding: 10px 10px;
+}
+
+#truthTable {
+    margin: 50px;
+    text-align: center;
+}
+
+.clipboard_copy {
+    align-items: center;
+    justify-content: center;
+}
+
+#copy_button {
+    display: none; 
+}
+
+#copy_button, #table_button_overlay {
+    border-radius: 30px;
+    min-height: 80px;
+    border: 3px solid #dde5ed;
+    margin: 25px 0 50px 0;
+    min-width: 40%;
+    color: #dde5ed;
+    background-color: #25282A;
+    outline: 0;
+    font-size: 18px;
+    padding: 5px;
+    transition: 0s;
+}
+
+#copy_button:hover, #table_button_overlay:hover {
+    background-color: #9D2235;
+}
+
+#copy_button:active, #table_button_overlay:active {
+    background-color: #25282A;
+}
+
+#table_content::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    box-shadow: inset 0 0 0 3000px rgba(0,0,0,0.95);
+    filter: blur(10px);
+    -webkit-filter: blur(10px);
+}
+
+#table_content {
+    position: fixed; /* Sit on top of the page content */
+    display: none;  /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+    justify-content: center;
+    text-align: center;
+    
+}
+
+.table {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    max-width: 80%;
+}
+
+@media (max-width: 700px) {
+    input::placeholder{
+        font-size: 80%;
+    }
+
+}
+
+footer {
+    position: fixed;
+    background-color: #dde5ed;
+    margin-top: 15px;
+    padding: 5px;
+    height: 50; 
+    width: 100%;
+    text-align: left;
+    font-size: 0.8em;
+    bottom: 0;
+  }

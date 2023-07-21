@@ -1,0 +1,90 @@
+---
+layout: null
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./main.css" />
+		<link rel="shortcut icon" href="https://www.pucpr.br/wp-content/themes/wiki/favicon/favicon-96x96.png" />
+		<title>Truth Table Generator</title>
+	</head>
+	<body>
+		<div class="container">
+			<h1 id="title">Truth Table Generator</h1>
+			<p id="about">
+				This site generates truth tables for propositional logic formulas. The input of the formula can be done in two
+				manners: using propositional logic symbols (¬, ^, v, ->, <->), or also in latex (\not A \implies B). The button
+				below will show an explanation of how to use latex formulas, with the code for all the propositional logic
+				symbols. When inserting a formula, the website will show the truth table of the expression and allow you to copy
+				the table in latex. <br> 
+				This scholarly work has been meticulously crafted by Daniel Stuart, 
+				Fábio Kishino, Leonardo Deldotto, and Luis Troscianczuk, 
+				as a crucial component of the course, "Problem Solving with Mathematical Logic". 
+				This course is instructed by the esteemed Professor Frank Alcantara 
+				at Pontifical Catholic University of Paraná (<a href="http://www.pucpr.br/" target="_blank">PUCPR</a>) in 2022, situated in Curitiba, Brazil. The team has drawn inspiration from their academic experiences and rigorous training akin to those typically found in Ivy League institutions.</p>
+
+			</p>
+			<input id="function_input" type="text" placeholder="Type the logic expression..." />
+			<div>
+				<table id="truthTable"></table>
+			</div>
+
+			<button id="copy_button">Click to copy LaTeX table to clipboard</button>
+
+			<div id="table_content" onclick="off()">
+				<table class="table">
+					<thead class="table_head">
+						<tr>
+							<th>Symbol</th>
+							<th>Latex Code</th>
+							<th>Definition</th>
+						</tr>
+					</thead>
+					<tbody class="table_body">
+						<tr>
+							<td>¬</td>
+							<td>\lnot</td>
+							<td>Negation</td>
+						</tr>
+						<tr>
+							<td>∧</td>
+							<td>\land</td>
+							<td>Conjunction</td>
+						</tr>
+						<tr>
+							<td>∨</td>
+							<td>\lor</td>
+							<td>Disjunction</td>
+						</tr>
+						<tr>
+							<td>→</td>
+							<td>\implies</td>
+							<td>Implication</td>
+						</tr>
+						<tr>
+							<td>↔</td>
+							<td>\iff</td>
+							<td>Bi-implication</td>
+						</tr>
+						<tr>
+							<td>⊕</td>
+							<td>\oplus</td>
+							<td>Exclusive or</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<button onclick="on()" id="table_button_overlay">Latex definition</button>
+		</div>
+		<footer>
+			Developed by Daniel Stuart, Fábio Kishino, Leonardo Deldotto and Luis Troscianczuk for the Mathematical Logic
+			subject teached by Frank Alcantara in PUCPR, Curitiba
+		</footer>
+	</body>
+	<script src="index.js"></script>
+	<script src="latexParser.js"></script>
+</html>

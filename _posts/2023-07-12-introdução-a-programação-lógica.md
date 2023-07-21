@@ -41,9 +41,17 @@ A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive 
     - [Simplificação](#simplificação)
     - [Bicondicionalidade](#bicondicionalidade)
     - [Equivalência](#equivalência)
+    - [Classificando Fórmulas Proposicionais](#classificando-fórmulas-proposicionais)
+- [Um Sistema de Prova](#um-sistema-de-prova)
+  - [Contrapositivas e Recíprocas](#contrapositivas-e-recíprocas)
+    - [Equivalência](#equivalência-1)
+    - [Contrapositiva](#contrapositiva)
+    - [Recíproca](#recíproca)
+  - [Análise de Argumentos](#análise-de-argumentos)
 - [Lógica Predicativa](#lógica-predicativa)
   - [Introdução aos Predicados](#introdução-aos-predicados)
   - [Universo do Discurso](#universo-do-discurso)
+    - [Entendendo Predicados](#entendendo-predicados)
   - [Quantificadores](#quantificadores)
   - [Quantificador Universal](#quantificador-universal)
   - [Quantificador Existencial](#quantificador-existencial)
@@ -66,7 +74,7 @@ Na **Programação Imperativa** partimos de uma determinada expressão e seguimo
 
 Na Programação Lógica, um dos paradigmas da **Programação Descritiva** usamos a dedução. Na Programação Descritiva, o programador fornece uma descrição lógica, ou funcional, de **o que** deve ser feito, sem especificar o fluxo de controle. O foco está no problema, não na solução. Exemplos incluem SQL, Prolog e Haskell. Na Programação Lógica, partimos de uma conjectura e, de acordo com um conjunto específico de regras, tentamos construir uma prova para esta conjectura.
 
-Uma conjectura é uma suposição, ou proposição que é acreditada ser verdadeira mas ainda não foi provada. Na linguagem natural, conjecturas são frequentemente expressas como declarações que precisam de confirmação adicional. Na Lógica de Primeira Ordem, as conjecturas são tratadas como sentenças que são propostas para serem verdadeiras. Essas sentenças podem ser analisadas e testadas usando as regras e estruturas da Lógica de Primeira Ordem.
+Uma conjectura é uma suposição, ou proposição que é acreditada ser verdadeira mas ainda não foi provada. Uma sentença que declarativa que precisa ser verificada. Na linguagem natural, conjecturas são frequentemente expressas como declarações que precisam de confirmação adicional. Na Lógica de Primeira Ordem, as proposições são tratadas como sentenças que são criadas para serem verificadas em busca da sua verdade, ou não. Essas sentenças podem ser analisadas e testadas usando as regras e estruturas da Lógica de Primeira Ordem.
 
 ![Diagrama de Significado de Conjeturas](/assets/images/conjecturas.jpeg)
 
@@ -74,7 +82,7 @@ Em resumo: **Imperativa:** focada no processo, no _como_ chegar à solução; **
 
 A escolha entre estes paradigmas dependerá da aplicação e do estilo do programador. Mas o futuro parece cada vez mais orientado para linguagens declarativas e descritivas, que permitem ao programador concentrar-se no problema, não nos detalhes da solução. Efeito que parece ser evidente se considerarmos os avanços recentes no campo da inteligência artificial.
 
-Em nossa exploração, vamos começar com a Lógica de Primeira Ordem, a qual iremos subdividir em elementos menores e interligados. É importante notar que muitos no campo acadêmico podem não distinguir as sutilezas que diferenciam a Lógica de Primeira Ordem da Lógica Predicativa. Neste Proposição, iremos decompor a Lógica de Primeira Ordem em suas partes componentes, examinando cada uma como uma entidade distinta. Para iniciar nossa jornada utilizaremos a Lógica Proposicional como alicerce para estabelecer o raciocínio.
+Em nossa exploração, vamos começar com a Lógica de Primeira Ordem, a qual iremos subdividir em elementos menores, interligados e interdependentes. É importante notar que muitos no campo acadêmico podem não distinguir as sutilezas que diferenciam a Lógica de Primeira Ordem da Lógica Predicativa. Nesta jornada, iremos decompor a Lógica de Primeira Ordem em suas partes componentes, examinando cada uma como uma entidade distinta. Para iniciar nossa jornada utilizaremos a Lógica Proposicional como alicerce para estabelecer o raciocínio.
 
 A Lógica Proposicional é um tipo de linguagem matemática suficientemente rica para expressar muitos dos problemas que precisamos resolver e suficientemente gerenciável para que os computadores possam lidar com ela. Uma ferramenta útil tanto ao homem quanto a máquina. Quando esta ferramenta estiver conhecida mergulharemos no espírito da Lógica de Primeira Ordem, a Lógica Predicativa, ou Lógica de Predicados, e então poderemos fazer sentido do mundo.
 
@@ -473,9 +481,9 @@ $$
 \frac{P_1, P_2, ..., P_n}{C}\\
 $$
 
-Onde o conjunto formado $P_1, P_2, ..., P_n$, chamado de Proposição, ou antecedente, $\Gamma$, e $C$, chamado de conclusão, ou consequente, são Formulas Bem Formadas. A regra significa que se o Proposição é verdadeiro então a conclusão $C$ também é verdadeira.
+Onde o conjunto formado $P_1, P_2, ..., P_n$, chamado de contexto, ou antecedente, $\Gamma$, e $C$, chamado de conclusão, ou consequente, são Formulas Bem Formadas. A regra significa que se o Proposição é verdadeiro então a conclusão $C$ também é verdadeira.
 
-Eu vou tentar usar Proposição / conclusão. Entretanto já vou me desculpando se escapar um antecendente / consequente. Será por mera força do hábito.
+Eu vou tentar usar contexto / conclusão. Entretanto já vou me desculpando se escapar um antecendente / consequente ao longo do texto. Será por mera força do hábito. Quando estudamos lógica chamamos de _argumento_ a uma lista de proposições, neste caso chamadas de premissas, seguidas de uma palavra, ou expressão (portanto, consequentemente, desta forma), e de outra proposição, neste caso, chamada de conclusão.  
 
 A representação que usamos é conhecida como sequência de dedução, é uma forma de indicar que se o Proposição, colocado acima da linha horizontal for verdadeiro, estamos dizendo que todas as preposições $P_1, P_2, ..., P_n$ são verdadeiras e todas as proposições colocas abaixo da linha, conclusão, também serão verdadeiras.
 
@@ -901,7 +909,6 @@ $$
 
 Em linguagem natural:
 
-- Contexto
 - proposição 1: _o céu está azul_.
 - proposição 2: _os pássaros estão cantando_.
 - Conclusão: logo, _o céu está azul e os pássaros estão cantando_.
@@ -994,7 +1001,6 @@ $$
 
 Em linguagem natural:
 
-- Contexto
   - proposição: _o céu está azul e os pássaros estão cantando_
   - Conclusão: logo, _o céu está azul. E os pássaros estão cantando_.
 
@@ -1073,8 +1079,6 @@ $$
 $$
 
 Em linguagem natural:
-
-- Contexto
 
   - proposição _1: se está chovendo, então a rua está molhada_.
   - proposição _2: se a rua está molhada, então está chovendo_.
@@ -1267,6 +1271,176 @@ $$
 \end{aligned}
 $$
 
+### Classificando Fórmulas Proposicionais
+
+Podemos classificar fórmulas proposicionais de acordo com suas propriedades semânticas, analisando suas tabelas-verdade. Seja $A$ uma fórmula proposicional:
+
+  $A$ é **satisfatível** se sua tabela-verdade contém pelo menos uma linha verdadeira. Considere: $P \wedge Q$.
+ 
+ $$
+    \begin{array}{|c|c|c|}
+    \hline
+    P & Q & P \land Q \\ 
+    \hline
+    F & F & F \\ 
+    \hline
+    F & T & F \\ 
+    \hline
+    T & F & F \\ 
+    \hline
+    T & T & T \\ 
+    \hline
+    \end{array}
+$$
+
+
+$A$ é **insatisfatível** se sua tabela-verdade contém apenas linhas falsas. Exemplo: $p \wedge \neg p$.
+
+- $A$ é **falsificável** se sua tabela-verdade contém pelo menos uma linha falsa. Exemplo: $p \wedge q$.
+
+- $A$ é **válida** se sua tabela-verdade contém apenas linhas verdadeiras. Exemplo: $p \vee \neg p$.
+
+Note que:
+
+- Se $A$ é válida, então $A$ é satisfatível.
+
+- Se $A$ é insatisfatível, então $A$ é falsificável.
+
+Fórmulas válidas são importantes na lógica proposicional, representando argumentos sempre verdadeiros independentemente da valoração de suas variáveis proposicionais atômicas.
+
+# Um Sistema de Prova
+A matemática respira prova. Nenhuma sentença matemática tem qualquer valor se não for provada. As verdades da aritmética devem ser estabelecidas com rigor lógico; as conjecturas da geometria, confirmadas por construtos infalíveis. Cada novo teorema se ergue sobre os ombros de gigantes – um edifício de razão cuidadosamente erigido.
+
+A beleza da lógica proposicional é revelar, nas entranhas da matemática, um método para destilar a verdade. Seus símbolos e regras exaltam nosso raciocínio e nos elevam da desordem da intuição. Com poucos elementos simples – variáveis, conectivos, axiomas – podemos capturar verdades absolutas no âmbito do pensamento simbólico.
+
+Considere um sistema proposicional, com suas Fórmulas Bem Formadas, suas transformações válidas. Ainda que simples, vemos nesse sistema o que há de profundo na natureza da prova. Seus teoremas irradiam correção; suas demonstrações, poder dedutivo. Dentro deste sistema austero reside a beleza em uma estética hermética, mas que desvelada faz brilhar a luz da razão e do entendimento.
+
+## Contrapositivas e Recíprocas
+
+As implicações são um problema, do ponto de vista da matemática. Sentenças do tipo _se...então_ induzem uma conclusão. Provar estas sentenças é uma preocupação constante da matemática. Dada uma implicação, existem duas fórmulas relacionadas que ocorrem com tanta frequência que possuem nomes especiais: contrapositivas e recíprocas. Antes de mergulharmos em contrapositivas, precisamos visitar alguns portos.
+
+### Equivalência
+
+Vamos imaginar um mundo de fórmulas que consistem apenas em duas proposições: $P$ e $Q$. Usando os operadores da Lógica Proposicional podemos escrever um número muito grande de fórmulas diferentes. Mas a coisa interessante é que cada uma dessas fórmulas tem uma Tabela Verdade com exatamente quatro linhas. E, mesmo que pareça surpreendente, só temos dezesseis possíveis configurações para a última coluna dessas tabelas. Como resultado, muitas fórmulas compartilham a mesma configuração final em suas Tabelas Verdade. Todas as fórmulas que tenham  Terei ouvido um viva?
+
+Agora, vamos estender esse conceito para um cenário mais geral, onde as fórmulas podem não conter exatamente as mesmas letras proposicionais:
+
+Considere as proposições $A$ e $B$. Estas proposições serão ditas logicamente equivalentes se, e somente se, a proposição $A \Leftrightarrow B$ for uma tautologia. 
+
+  **Exemplo: 1** Vamos mostrar que $P \rightarrow Q$ é logicamente equivalente a $\neg Q \rightarrow \neg P$.
+
+  **Solução:** Para isso, verificaremos se a coluna do conectivo principal na Tabela Verdade para a proposição bicondicional formada por essas duas fórmulas contém apenas valores verdadeiros:
+
+  
+  $$\begin{array}{|c|c|c|c|c|}
+  \hline
+  P & Q & P \implies Q & \lnot Q \implies \lnot P & P \implies Q \iff \lnot Q \implies  \lnot P \\
+  \hline
+  F & F & T & T & T \\
+  \hline
+  F & T & T & F & T \\
+  \hline
+  T & F & F & T & T \\
+  \hline
+  T & T & T & T & T \\
+  \hline
+  \end{array}$$
+
+  Como a coluna da operação principal de $P \implies Q \iff \lnot Q \implies \lnot P$ contém apenas valores verdadeiros, a proposição bicondicional é uma tautologia, consequentemente e as fórmulas $P \implies Q$ e $\lnot Q \implies  \lnot P$ são logicamente equivalentes.
+
+  **Exemplo 2:** Vamos mostrar que $P \land Q$ não é logicamente equivalente a $P \lor Q$.
+
+  **Solução** 
+  Verificando a tabela-verdade:
+
+  $$ \begin{array}{|c|c|c|c|c|}
+  \hline
+  P & Q & P \land Q & P \lor Q & P \land Q \iff P \lor Q \\ \hline
+  V & V & V & V & F \\ \hline
+  V & F & F & V & F \\ \hline  
+  F & V & F & V & F \\ \hline
+  F & F & F & F & F \\ \hline
+  \end{array} $$
+
+  Consequentemente, as fórmulas $P \land Q$ não são logicamente equivalentes $P \lor Q$.
+
+  **Exemplo 3:** Vamos mostrar que $P \rightarrow Q$ é logicamente equivalente a $\neg P \lor Q$.
+
+  **Solução**
+  Verificando a tabela-verdade:
+
+  $$\begin{array}{|c|c|c|c|c|c|}
+  \hline
+  P & Q & \neg P & \neg P \lor Q & P \rightarrow Q \iff \neg P \lor Q\\
+  \hline
+  V & V & F & V & V\\
+  \hline
+  V & F & F & F & V\\
+  \hline
+  F & V & V & V & V\\  
+  \hline
+  F & F & V & V & V\\ \hline
+  \end{array}$$
+
+  Neste caso $P \rightarrow Q$ e $\neg P \lor Q$ são logicamente equivalentes.
+
+Agora que já sabemos o que significa _logicamente equivalentes_ podemos entender o que é uma proposição contrapositiva. 
+### Contrapositiva
+
+A contrapositiva de uma implicação é obtida invertendo-se o antecedente e o consequente da implicação original e negando-os. Por exemplo, considere a seguinte implicação: 
+_se chove, então a rua fica molhada_ sua contrapositiva poderia ser: _se a rua não está molhada, então não choveu_. Sejam $P$ e $Q$ fórmulas proposicionais derivadas de uma sentença do tipo _se ... então_. A implicação $P \rightarrow Q$ representa a sentença Se $P$, então $Q$. Neste caso, A contrapositiva de $P \rightarrow Q$ será dada por:
+
+$$
+\begin{aligned}
+\lnot Q \rightarrow \lnot P
+\end{aligned}
+$$
+
+A contrapositiva pode ser lida como _se não $Q$, então não $P$_. Em outras palavras estamos dizendo: _Se $Q$ é falso, então $P$ é falso_. A contrapositiva de uma fórmula é importante porque, frequentemente, é mais fácil provar a contrapositiva de uma fórmula que a própria fórmula. E, como a contrapositiva é logicamente equivalente a sua formula, provar a contrapositiva é provar a fórmula. Como a contrapositiva de uma implicação e a própria implicação são logicamente equivalentes, se provamos uma, a outra está provada. Além disso, a contrapositva preserva a validade das implicações proposicionais. Finalmente, observe que a contrapositiva troca o antecedente pelo negação do consequente e vice-versa.
+
+  **Exemplo 1:**
+  A contrapositiva de $a \rightarrow (b \lor c)$ é $\lnot(b \lor c) \rightarrow \lnot a$.
+  
+  **Exemplo 2:**
+  Dizemos que uma função é injetora se $x \neq y$ implica $f(x) \neq f(y)$. A contrapositiva desta implicação é: se $f(x) = f(y)$ então $x = y$.
+  
+O Exemplo 2 é uma prova de conceito. Normalmente é mais fácil assumir $f(x) = f(y)$ e deduzir $x = y$ do que assumir $x \neq y$ e deduzir $f(x) \neq f(y)$. Isto pouco tem a ver com funções e muito com o fato de que $x \neq y$ geralmente não é uma informação útil. 
+O que torna a contrapositiva importante é que toda Fórmula Bem Formada é logicamente equivalente à sua contrapositiva. Consequentemente, se queremos provar que uma função é injetora, é suficiente provar que se $f(x) = f(y)$ então $x = y$. 
+
+A contrapositiva funciona para qualquer declaração condicional, e matemáticos gastam muito tempo provando declarações condicionais.
+
+O que não podemos esquecer de jeito nenhum é que toda fórmula condicional terá a forma $P \rightarrow Q$. Mostramos que isso é logicamente equivalente a $\lnot Q \rightarrow \lnot P$ verificando a Tabela Verdade para a declaração bicondicional construída a partir dessas fórmulas. E que para obter a contrapositiva basta inverter antecedente e consequente e negar ambos. Mantendo a relação lógica entre os termos da implicação.
+### Recíproca
+
+A recíproca, também conhecida como _conversa_ por alguns acadêmicos brasileiros, é obtida apenas invertendo antecedente e consequente. Então, considerando a recíproca da condicional $P \rightarrow Q$ será $Q \rightarrow P$. Destoando da contrapositiva a recíproca não é necessariamente equivalente à implicação original. Além disso, a contrapositiva preserva a equivalência lógica, a recíproca não.
+
+  **Exemplo 1:**
+  A conversa de $a \rightarrow (b \lor c)$ será $(b \lor c) \rightarrow a$.
+
+  **Exemplo 2:**
+  Dizemos que uma função é bem definida se cada entrada tem uma saída única. Assim, uma função é bem definida se $x = y$ implica $f(x) = f(y)$. Observe estas fórmulas:
+
+  1. $f(x)$ é bem definida significa que $x = y \rightarrow f(x) = f(y)$.
+
+  2. $f(x)$ é injetora significa que $f(x) = f(y) \rightarrow x = y$.
+
+  Podemos ver que _$f(x)$ é bem definida_ é a recíproca de _$f(x)$ é injetora_.
+
+Para provar uma bicondicional como _o número é primo se e somente se o número é ímpar_, um matemático frequentemente prova _se o número é primo, então o número é ímpar_ e depois prova a recíproca, _se o número é ímpar, então o número é primo_. Nenhuma dessas etapas pode ser pulada, pois uma implicação e sua recíproca podem não ser logicamente equivalentes. Por exemplo, pode-se facilmente mostrar que _se o número é par, então o número é divisível por 2_ não é logicamente equivalente à sua recíproca _se o número é divisível por 2, então o número é par_. Algumas fórmulas como _se 5 é ímpar, então 5 é ímpar_ são equivalentes às suas recíprocas por coincidência. Para resumir, uma implicação é sempre equivalente à sua contrapositiva, mas pode não ser equivalente à sua recíproca.
+
+## Análise de Argumentos
+
+Quando vimos regras de inferência, sem muitos floreios, definimos argumentos. Mas, sem usar a palavra argumento em nenhum lugar. Vamos voltar um pouco. Definiremos um argumento proposicionalmente como sendo uma regra de inferência, então um argumento será definido por um conjunto de proposições. Quando estamos analisando argumentos chamamos as proposições de premissas logo:
+
+$$
+\frac{P_1, P_2, ..., P_n}{C}\\
+$$
+
+Onde o conjunto formado $P_1, P_2, ..., P_n$, chamado de antecedente, e $C$, chamado de conclusão. Dizemos que o argumento será válido, só e somente se, a implicação definida por $P_1, P_2, ..., P_n \rightarrow C$ for uma tautologia. Neste caso, é muito importante percebermos que a conclusão de um argumento logicamente válido não é necessariamente verdadeira. A única coisa que a validade lógica garante é que se todas as premissas forem verdadeiras, a conclusão será verdadeira.
+
+
+
+
 # Lógica Predicativa
 
 A Lógica Predicativa, coração e espírito da Lógica de Primeira Ordem, nos leva um passo além da Lógica Proposicional. Em vez de se concentrar apenas em proposições completas que são verdadeiras ou falsas, a lógica predicativa nos permite expressar proposições sobre objetos e as relações entre eles. Ela nos permite falar de maneira mais rica e sofisticada sobre o mundo.
@@ -1343,13 +1517,15 @@ Assim, vemos que o predicado $P(u)$ dado por _u é par_ é uma propriedade que a
    - Predicado: $P(x, y) = (x < y)$;
    - Itens para os quais $P(x, y)$ é verdadeiro: $(1, 2)$, $(3, 4)$, $(5, 6)$.
 
+### Entendendo Predicados
+
 A aridade do predicado, número de argumentos, é limitado pela análise lógica que estamos fazendo. Considere um predicado ternário, $R$, dado por _x está entre y e z_. Quando substituímos $x$, $y$ e $z$ por números específicos podemos validar a verdade do predicado $R$. Vamos considerar alguns exemplos adicionais de predicados baseados na aritmética e defini-los com menos formalidade e mais legibilidade:
 
 1. $Primo(n)$: o número inteiro positivo $n$ é um número primo.
 2. $potênciaDe(n, k)$: o número inteiro $n$ é uma potência exata de $k : n = ki$ para algum $i \in \mathbb{Z} ≥ 0$.
 3. $somaDeDoisPrimos(n)$: o número inteiro positivo $n$ é igual à soma de dois números primos.
 
-Em 1, 2 e 3 os predicados estão definidos com mnemônicos aumentando a legibilidade e melhorando nossa capacidade de manter o universo implícito. Ainda assim, falta alguma coisa. Algo que permita aplicar os predicados a um conjunto de elementos dentro do universo do discurso.
+Em 1, 2 e 3 os predicados estão definidos com mnemônicos aumentando a legibilidade e melhorando nossa capacidade de manter o universo implícito. O uso de predicados, e da Lógica Proposicional, permite a escrita de sentenças menos ambíguas para a definição de conceitos lógicos em formato matemático. Por exemplo: se $x$ é um ancestral de $y$ e $y$ é um ancestral de $z$ então $x$ é um ancestral de $z$; que, se consideramos o predicado $ancestralDe$ pode ser escrito como $ancestralDe(x,y) \wedge ancestralDe(y,z) \rightarrow ancestralDe(x,z)$. Ainda assim, falta alguma coisa. Algo que permita aplicar os predicados a um conjunto de elementos dentro do universo do discurso.
 
 ## Quantificadores
 
@@ -1501,7 +1677,7 @@ A conversão de uma Fórmula Bem Formada em sentença, não necessariamente resu
 
 - $\exists x \exists y F(x,y)$ se lê _Para algum avião $x$ existe um avião $y$ tal que $x$ é mais rápido que $y$_.
 
-As quatro sentenças expressam o mesmo contexto, mesmo estando redigidas de forma diferente. Quando você estiver escrevendo, você escolhe a forma mais clara para você. Se estiver lendo, não terá opção, terá que entender e, neste caso, comece escrevendo a sentença em linguagem natural. É um processo, com o tempo, fica fácil.
+As quatro sentenças expressam o mesmo contexto, ou argumento, mesmo estando redigidas de forma diferente. Quando você estiver escrevendo, você escolhe a forma mais clara para você. Se estiver lendo, não terá opção, terá que entender e, neste caso, comece escrevendo a sentença em linguagem natural. É um processo, com o tempo, fica fácil.
 
 ## Ordem de Aplicação dos Quantificadores
 
