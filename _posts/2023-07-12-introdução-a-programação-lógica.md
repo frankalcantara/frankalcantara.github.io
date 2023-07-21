@@ -24,7 +24,7 @@ keywords:
 draft: true
 ---
 
-A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. É a base de alguns modelos computacionais que estão mudando o mundo.
+A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. É a base de alguns modelos computacionais que estão mudando o mundo. Inclusive o modelo que gerou a imagem acima.
 
 > "Logic programming is the future of artificial intelligence." - [Marvin Minsky](https://en.wikipedia.org/wiki/Marvin_Minsky)
 
@@ -48,6 +48,7 @@ A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive 
     - [Contrapositiva](#contrapositiva)
     - [Recíproca](#recíproca)
   - [Análise de Argumentos](#análise-de-argumentos)
+  - [Sistema de Provas](#sistema-de-provas)
 - [Lógica Predicativa](#lógica-predicativa)
   - [Introdução aos Predicados](#introdução-aos-predicados)
   - [Universo do Discurso](#universo-do-discurso)
@@ -86,7 +87,7 @@ Em nossa exploração, vamos começar com a Lógica de Primeira Ordem, a qual ir
 
 A Lógica Proposicional é um tipo de linguagem matemática suficientemente rica para expressar muitos dos problemas que precisamos resolver e suficientemente gerenciável para que os computadores possam lidar com ela. Uma ferramenta útil tanto ao homem quanto a máquina. Quando esta ferramenta estiver conhecida mergulharemos no espírito da Lógica de Primeira Ordem, a Lógica Predicativa, ou Lógica de Predicados, e então poderemos fazer sentido do mundo.
 
-Vamos enfrentar a inferência e a dedução, duas ferramentas para extração de conhecimento de declarações lógicas. Voltando a metáfora do Detetive, podemos dizer que a inferência é quase como um detetive que tira conclusões a partir de pistas: você tem algumas verdades e precisa descobrir outras verdades que são consequências diretas das primeiras verdades.
+Vamos enfrentar a inferência e a dedução, duas ferramentas para extração de conhecimento de declarações lógicas. Voltando a metáfora do Detetive, podemos dizer que a inferência é quase como um detetive que tira conclusões a partir de pistas: temos algumas verdades e precisamos descobrir outras verdades que são consequências diretas das primeiras verdades.
 
 Vamos falar da Cláusula de Horn, um conceito um pouco mais estranho. Uma regra que torna todos os problemas expressos em lógica mais fácies de resolver. É como uma receita de bolo que, se corretamente seguida, torna o processo de cozinhar muito mais simples.
 
@@ -159,7 +160,9 @@ Esse sistema, por vezes chamado de álgebra booleana, fundamental para o desenvo
 
 Vamos representar essas declarações atômicas por literais $F$, $G$, $X_1$, $X_2$ etc., e suas negações por $\neg F$, $\neg G$, $\neg X_1$, $\neg X_2$ etc. Todos os símbolos individuais e suas negações são conhecidas como literais.
 
-As declarações atômicas e compostas são costuradas por conectivos para produzir declarações compostas, cujo valor de verdade depende dos valores de verdade das declarações componentes. Os conectivos que consideramos inicialmente, cuja Tabela Verdade será dada por:
+Na Lógica Proposicional, as fórmulas, chamadas de Fórmulas Bem Formadas, podem ser atômicas, ou compostas. Existe um operador, ou conectivo lógico, principal, que conecta várias Fórmulas Bem Formadas de forma recursiva. 
+
+As declarações atômicas e compostas são costuradas por conectivos para produzir declarações compostas, cujo valor de verdade depende dos valores de verdade das declarações componentes. Os conectivos que consideramos inicialmente, e suas Tabelas Verdade serão:
 
 <table style="margin-left: auto;
   margin-right: auto; text-align:center;">
@@ -340,7 +343,11 @@ Linguagens de programação que usam a Programação Lógica usam _unificação_
   text-align: center;
   margin-bottom: 20px;">Tabela 2 - Equivalências em Lógica Proposicional.</legend>
 
-Imagino que você tenha pulado a Tabela 2 e esteja lendo este parágrafo. Como essas equivalências permitem validar Fórmulas Bem Formadas sem o uso de uma Tabela Verdade você deveria tentar provar cada uma delas. Estas pipocaram quase espontaneamente enquanto estava escrevendo este texto, por hábito e necessidade.  São muitas as equivalências que existem, estas são as mais comuns. Talvez, alguns exemplos de validação de Fórmulas Bem Formadas usando apenas as equivalências de Tabela 2, sirvam para clarear o caminho que precisamos seguir:
+Como essas equivalências permitem validar Fórmulas Bem Formadas sem o uso de uma Tabela Verdade. Uma coisa interessante seria tentar provar cada uma delas.
+
+As equivalências que listei pipocaram quase espontaneamente enquanto estava escrevendo este texto, por hábito e necessidade.  
+
+São muitas as equivalências que existem, estas são as mais comuns. Talvez, alguns exemplos de validação de Fórmulas Bem Formadas usando apenas as equivalências de Tabela 2, sirvam para clarear o caminho que precisamos seguir:
 
 **Exemplo 1**: $F \wedge (G \vee (F \wedge H))$
 
@@ -1306,13 +1313,13 @@ Note que:
 
 Fórmulas válidas são importantes na lógica proposicional, representando argumentos sempre verdadeiros independentemente da valoração de suas variáveis proposicionais atômicas. Na verdade, esta classificação será importante para: 
 
-1. Análise de Argumentos: Se uma argumentação lógica pode ser representada por uma fórmula que é insatisfatível, então sabemos que o argumento é inválido ou inconsistente. Isso é frequentemente usado em lógica e filosofia para analisar a validade dos argumentos.
+1. **Análise de Argumentos**: Se uma argumentação lógica pode ser representada por uma fórmula que é insatisfatível, então sabemos que o argumento é inválido ou inconsistente. Isso é frequentemente usado em lógica e filosofia para analisar a validade dos argumentos.
 
-2. Prova de Teoremas: Na prova de teoremas, essas classificações são úteis. Se você está tentando provar que uma fórmula é uma tautologia, você pode usar essas classificações para simplificar a tarefa. Se você pode mostrar que a negação da fórmula é insatisfatível, então você mostrou que a fórmula original é uma tautologia.
+2. **Prova de Teoremas**: Na prova de teoremas, essas classificações são úteis. Quando estamos tentando provar que uma fórmula é uma tautologia, podemos usar essas classificações para simplificar a tarefa. Podemos mostrar que a negação da fórmula é insatisfatível, mostrando que a fórmula original é uma tautologia.
 
-3. Simplificação de Fórmulas: Na simplificação de fórmulas, essas classificações também são úteis. Se você tem uma fórmula complexa e pode mostrar que uma parte dela é uma tautologia, você pode simplificar a fórmula removendo essa parte. Similarmente, se uma parte da fórmula é uma contradição (ou seja, é insatisfatível), então você sabe que a fórmula inteira é insatisfatível.
+3. **Simplificação de Fórmulas**: Na simplificação de fórmulas, essas classificações também são úteis. Se temos uma fórmula complexa e podemos mostrar que uma parte dela é uma tautologia, podemos simplificar a fórmula removendo essa parte. Similarmente, se uma parte da fórmula é uma contradição (ou seja, é insatisfatível), sabemos que a fórmula inteira é insatisfatível.
 
-4. Construção de Argumentos: Na construção de argumentos, estas classificações são úteis para garantir que os argumentos são válidos. Se você está construindo um argumento e pode mostrar que ele é representado por uma fórmula que é satisfatível (mas não uma tautologia), então você sabe que existem algumas circunstâncias em que o argumento é válido e outras em que não é.
+4. **Construção de Argumentos**: Na construção de argumentos, estas classificações são úteis para garantir que os argumentos são válidos. Se estamos construindo um argumento e podemos mostrar que ele é representado por uma fórmula que é satisfatível (mas não uma tautologia), sabemos que existem algumas circunstâncias em que o argumento é válido e outras em que não é.
 
 # Um Sistema de Prova
 A matemática respira prova. Nenhuma sentença matemática tem qualquer valor se não for provada. As verdades da aritmética devem ser estabelecidas com rigor lógico; as conjecturas da geometria, confirmadas por construtos infalíveis. Cada novo teorema se ergue sobre os ombros de gigantes – um edifício de razão cuidadosamente erigido.
@@ -1444,6 +1451,138 @@ $$
 
 Onde o conjunto formado $P_1, P_2, ..., P_n$, chamado de antecedente, e $C$, chamado de conclusão. Dizemos que o argumento será válido, só e somente se, a implicação definida por $P_1, P_2, ..., P_n \rightarrow C$ for uma tautologia. Neste caso, é muito importante percebermos que a conclusão de um argumento logicamente válido não é necessariamente verdadeira. A única coisa que a validade lógica garante é que se todas as premissas forem verdadeiras, a conclusão será verdadeira.
 
+Podemos recuperar as regras de inferência e observá-las pelo ponto de vista da análise de argumentos. Se fizermos isso, vamos encontrar alguns formatos comuns: 
+
+**Modus Ponens**: _se é verdade que se eu estudar para o exame $P$, então eu passarei no exame, $Q$, e também é verdade que eu estudei para o exame $P$, então podemos concluir que eu passarei no exame $Q$_. 
+
+Matematicamente, sejam $P$ e $Q$ proposições. A forma do Modus Ponens é a seguinte:
+
+$$
+\begin{align*}
+& \quad P \rightarrow Q  \quad \text{(Se P, então Q)} \\
+& \quad P  \quad \text{(P é verdadeiro)} \\
+\hline
+& \quad Q \quad \text{(Portanto, Q é verdadeiro)}
+\end{align*}
+$$
+
+Cuja Tabela Verdade será:
+
+$$
+\begin{array}{|c|c|c|}
+\hline
+P & Q & P \rightarrow Q \\
+\hline
+T & T & T \\
+T & F & F \\
+F & T & T \\
+F & F & T \\
+\hline
+\end{array}
+$$
+
+Se olharmos para a primeira linha, se $P$ é verdadeiro e $P → Q$ é verdadeiro, então $Q$ é necessariamente verdadeiro, o que é exatamente a forma de Modus Ponens.
+
+**Modus Tollens** : _se é verdade que se uma pessoa é um pássaro $P$, então essa pessoa pode voar $Q$, e também é verdade que essa pessoa não pode voar $\neg Q$, então podemos concluir que essa pessoa não é um pássaro $\neg P$. Ou:
+
+Sejam $P$ e $Q$ proposições. A forma do Modus Tollens é a seguinte:
+
+$$
+\begin{align*}
+& \quad P \rightarrow Q  \quad \text{(Se P, então Q)} \\
+& \quad \neg Q  \quad \text{(Q é falso)} \\
+\hline
+& \quad \neg P \quad \text{(Portanto, P é falso)}
+\end{align*}
+$$
+
+Cuja Tabela Verdade será dada por:
+
+$$
+\begin{array}{|c|c|c|c|c|}
+\hline
+P & Q & \neg Q & P \rightarrow Q & \neg P \\
+\hline
+T & T & F & T & F \\
+T & F & T & F & F \\
+F & T & F & T & T \\
+F & F & T & T & T \\
+\hline
+\end{array}
+$$
+
+Se olharmos para a segunda linha, se $Q$ é falso e $P \rightarrow Q$ é verdadeiro, então $P$ é necessariamente falso, o que é exatamente a forma de Modus Tollens.
+
+**Silogismo Hipotético** : _se é verdade que se eu acordar cedo $P$, então eu irei correr $Q$, e também é verdade que se eu correr $Q$, então eu irei tomar um café da manhã saudável $R$, podemos concluir que se eu acordar cedo $P$, então eu irei tomar um café da manhã saudável $R$_. Matematicamente:
+
+Sejam $P$, $Q$ e $R$ proposições. A forma do Silogismo Hipotético é a seguinte:
+
+$$
+\begin{align*}
+& \quad P \rightarrow Q  \quad \text{(Se P, então Q)} \\
+& \quad Q \rightarrow R  \quad \text{(Se Q, então R)} \\
+\hline
+& \quad P \rightarrow R \quad \text{(Portanto, se P, então R)}
+\end{align*}
+$$
+
+Cuja Tabela Verdade será:
+
+$$
+\begin{array}{|c|c|c|c|c|}
+\hline
+P & Q & R & P \rightarrow Q & Q \rightarrow R & P \rightarrow R \\
+\hline
+T & T & T & T & T & T \\
+T & T & F & T & F & F \\
+T & F & T & F & T & T \\
+T & F & F & F & T & T \\
+F & T & T & T & T & T \\
+F & T & F & T & F & T \\
+F & F & T & T & T & T \\
+F & F & F & T & T & T \\
+\hline
+\end{array}
+$$
+
+Se olharmos para a primeira linha, se $P$ é verdadeiro, $P \rightarrow Q$ é verdadeiro e $Q \rightarrow R$ é verdadeiro, então $P \rightarrow R$ é necessariamente verdadeiro, o que é exatamente a forma de Silogismo Hipotético.
+
+**Silogismo Disjuntivo**: _se é verdade que ou eu vou ao cinema $P$ ou eu vou ao teatro $Q$, e também é verdade que eu não vou ao cinema $\neg P$, então podemos concluir que eu vou ao teatro $Q$. Ou, com um pouco mais de formalidade:
+
+Sejam $P$ e $Q$ proposições. A forma do Silogismo Disjuntivo é a seguinte:
+
+$$
+\begin{align*}
+& \quad P \lor Q  \quad \text{(P ou Q)} \\
+& \quad \neg P  \quad \text{(não P)} \\
+\hline
+&\quad Q \quad \text{(Portanto, Q)}
+\end{align*}
+$$
+
+A Tabela Verdade será:
+
+$$
+\begin{array}{|c|c|c|c|}
+\hline
+P & Q & \neg P & P \lor Q \\
+\hline
+T & T & F & T \\
+T & F & F & T \\
+F & T & T & T \\
+F & F & T & F \\
+\hline
+\end{array}
+$$
+
+Se olharmos para a terceira linha, se $P$ é falso e $P \vee Q$ é verdadeiro, então $Q$ é necessariamente verdadeiro, o que é exatamente a forma de Silogismo Disjuntivo.
+
+Agora podemos definir o nosso sistema de provas.
+
+## Sistema de Provas
+
+
+
 
 
 
@@ -1451,7 +1590,7 @@ Onde o conjunto formado $P_1, P_2, ..., P_n$, chamado de antecedente, e $C$, cha
 
 A Lógica Predicativa, coração e espírito da Lógica de Primeira Ordem, nos leva um passo além da Lógica Proposicional. Em vez de se concentrar apenas em proposições completas que são verdadeiras ou falsas, a lógica predicativa nos permite expressar proposições sobre objetos e as relações entre eles. Ela nos permite falar de maneira mais rica e sofisticada sobre o mundo.
 
-Se você se lembra, na Lógica Proposicional, cada proposição é um átomo indivisível. Por exemplo, 'A chuva cai' ou 'O sol brilha'. Cada uma dessas proposições é verdadeira ou falsa como uma unidade. Na lógica predicativa, no entanto, podemos olhar para dentro dessas proposições. Podemos falar sobre o sujeito - a chuva, o sol - e o predicado - cai, brilha. Podemos quantificar sobre eles: para todos os dias, existe um momento em que o sol brilha.
+Vamos lembrar que na Lógica Proposicional, cada proposição é um átomo indivisível. Por exemplo, 'A chuva cai' ou 'O sol brilha'. Cada uma dessas proposições é verdadeira ou falsa como uma unidade. Na lógica predicativa, no entanto, podemos olhar para dentro dessas proposições. Podemos falar sobre o sujeito - a chuva, o sol - e o predicado - cai, brilha. Podemos quantificar sobre eles: para todos os dias, existe um momento em que o sol brilha.
 
 Enquanto a Lógica Proposicional pode ser vista como a aritmética do verdadeiro e do falso, a lógica predicativa é a álgebra do raciocínio. Ela nos permite manipular proposições de maneira muito mais rica e expressiva. Com ela, podemos começar a codificar partes substanciais da matemática e da ciência, levando-nos mais perto de nossa busca para decifrar o cosmos, um símbolo de lógica de cada vez.
 
@@ -1475,7 +1614,7 @@ Um predicado pode ser entendido como uma função que recebe um objeto (ou um co
 
 O universo do discurso, $U$, também chamado de **universo**, ou domínio, é o conjunto de objetos de interesse em um determinado cenário lógico para uma análise específica. O universo do discurso é importante porque as proposições na Lógica de Predicados serão declarações sobre objetos de um universo.
 
-O universo, $U$, é o domínio das variáveis das nossas Fórmulas Bem Formadas. O universo do discurso pode ser o conjunto dos números reais, $\mathbb{R}$ o conjunto dos inteiros, $\mathbb{z}$, o conjunto de todos os alunos em uma sala de aula que usam camisa amarela, ou qualquer outro conjunto que você defina. Na prática, o universo costuma ser deixado implícito e deveria ser óbvio a partir do contexto. Se não for o caso, precisa ser explicitado.  
+O universo, $U$, é o domínio das variáveis das nossas Fórmulas Bem Formadas. O universo do discurso pode ser o conjunto dos números reais, $\mathbb{R}$ o conjunto dos inteiros, $\mathbb{z}$, o conjunto de todos os alunos em uma sala de aula que usam camisa amarela, ou qualquer outro conjunto que definamos. Na prática, o universo costuma ser deixado implícito e deveria ser óbvio a partir do contexto. Se não for o caso, precisa ser explicitado.  
 
 Se estamos interessados em proposições sobre números naturais, $\mathbb{N}$, o universo do discurso é o conjunto $\mathbb{N} = \{0, 1, 2, 3,...\}$, um conjunto infinito. Já se estamos interessados em proposições sobre alunos de uma sala de aula, o universo do discurso poderia ser o conjunto $U = \{\text{Paulo}, \text{Ana}, ...\}$, um conjunto finito. 
 
@@ -1541,7 +1680,7 @@ Para termos uma linguagem lógica que seja suficientemente flexível para repres
 
 Os quantificadores indicam se a sentença que estamos criando se aplica a todos os valores possíveis do argumento, _quantificação universal_, ou se esta sentença se  aplica a um valor específico, _quantificação existencial_. Usaremos esses quantificadores para fazer declarações sobre **todos os elementos** de um universo de discurso específico, ou para afirmar que existe **pelo menos um elemento** do universo do discurso que satisfaz uma determinada qualidade.
 
-Vamos remover o véu da dúvida usando como recurso metafórico uma experiência humana, social, comum e popular: imagine que você está em uma festa e o anfitrião lhe pede para verificar se todos os convidados têm algo para beber. Você, prestativo e simpático, começa a percorrer a sala, verificando cada pessoa. Se você encontrar pelo menos uma pessoa sem bebida, você pode imediatamente dizer _nem todos têm bebidas_. Mas, se você verificar cada convidado e todos eles tiverem algo para beber, você pode dizer com confiança _todos têm bebidas_. Este é o conceito do quantificador universal, matematicamente representado por $\forall$, que lemos como _para todo_.
+Vamos remover o véu da dúvida usando como recurso metafórico uma experiência humana, social, comum e popular: imaginemos estar em uma festa e o anfitrião lhe pede para verificar se todos os convidados têm algo para beber. Você, prestativo e simpático, começa a percorrer a sala, verificando cada pessoa. Se você encontrar pelo menos uma pessoa sem bebida, você pode imediatamente dizer _nem todos têm bebidas_. Mas, se você verificar cada convidado e todos eles tiverem algo para beber, você pode dizer com confiança _todos têm bebidas_. Este é o conceito do quantificador universal, matematicamente representado por $\forall$, que lemos como _para todo_.
 
 A festa continua e o anfitrião quer saber se alguém na festa está bebendo champanhe. Desta vez, assim que você encontrar uma pessoa com champanhe, você pode responder imediatamente _sim, alguém está bebendo champanhe_. Você não precisa verificar todo mundo para ter a resposta correta. Este é o conceito do quantificador existencial, denotado por $\exists$, que lemos _existe algum_.
 
@@ -1563,9 +1702,9 @@ Onde $P(0), P(1), P(2), P(3) ...$ representam a aplicação do predicado $P$ a t
 
 Vamos voltar um pouco. O quantificador universal $\forall x P(x)$ afirma que a proposição $P(x)$ é verdadeira para todo, e qualquer, valor possível de $x$ como elemento de um conjunto $U$. Uma forma de interpretar isso é pensar em $x$ como uma variável que pode ter qualquer valor dentro do universo do discurso.
 
-Para validar $\forall x P(x)$ escolhemos o pior caso possível para $x$ - todo valor que suspeitamos possa fazer $P(x)$ falso. Se você conseguir provar que $P(x)$ é verdadeira neste caso específico, então $\forall x P(x)$ deve ser verdadeira. Novamente, vamos recorrer a exemplos na esperança de explicitar este conceito.
+Para validar $\forall x P(x)$ escolhemos o pior caso possível para $x$ - todo valor que suspeitamos possa fazer $P(x)$ falso. Se conseguirmos provar que $P(x)$ é verdadeira neste caso específico, então $\forall x P(x)$ deve ser verdadeira. Novamente, vamos recorrer a exemplos na esperança de explicitar este conceito.
 
-1. **Exemplo 1**: todos os números reais são maiores que 0. (Universo do discurso: $\{x \in \mathbb{R}$\})
+1. **Exemplo 1**: todos os números reais são maiores que 0. (Universo do discurso: $\{x \in \mathbb{R}\}$)
 
    $$\forall x (Número(x) \rightarrow x > 0)$$
 
@@ -1655,7 +1794,7 @@ $$\lnot \forall x P(x) \leftrightarrow \exists x \lnot P(x)$$
 
 $$\lnot \exists x P(x) \leftrightarrow \forall x \lnot P(x)$$
 
-Essas equivalências são essencialmente as versões quantificadas das **Leis de De Morgan**. A primeira diz que se você quer a que nem todos os humanos são mortais, isso é equivalente a encontrar algum humano que não é mortal. A segunda diz que para mostrar que nenhum humano é mortal, você tem que mostrar que todos os humanos não são mortais.
+Essas equivalências são essencialmente as versões quantificadas das **Leis de De Morgan**. A primeira diz que nem todos os humanos são mortais, isso é equivalente a encontrar algum humano que não é mortal. A segunda diz que para mostrar que nenhum humano é mortal, temos que mostrar que todos os humanos não são mortais.
 
 Podemos representar uma declaração $\exists x P(x)$ como uma expressão _OU_. Por exemplo, $\exists x \in \mathbb{N} : P(x)$ poderia ser reescrito como:
 
@@ -1683,7 +1822,7 @@ A conversão de uma Fórmula Bem Formada em sentença, não necessariamente resu
 
 - $\exists x \exists y F(x,y)$ se lê _Para algum avião $x$ existe um avião $y$ tal que $x$ é mais rápido que $y$_.
 
-As quatro sentenças expressam o mesmo contexto, ou argumento, mesmo estando redigidas de forma diferente. Quando você estiver escrevendo, você escolhe a forma mais clara para você. Se estiver lendo, não terá opção, terá que entender e, neste caso, comece escrevendo a sentença em linguagem natural. É um processo, com o tempo, fica fácil.
+As quatro sentenças expressam o mesmo contexto, ou argumento, embora sejam redigidas de maneiras distintas. Ao escrevermos, optamos pela forma mais transparente segundo nossa própria opinião. Quando a situação é de leitura, a escolha não existe, é necessário entender, e nesse cenário, a recomendação seria começar pela escrita da sentença em linguagem natural. Trata-se de um processo, e com o passar do tempo, torna-se mais simples.
 
 ## Ordem de Aplicação dos Quantificadores
 
