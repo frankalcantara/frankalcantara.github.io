@@ -1588,7 +1588,7 @@ Ainda estamos no domínio da Lógica Proposicional e vamos definir um sistema de
 - **uma hipótese**, na forma de fórmula;
 - **ou um lema**, uma proposição auxiliar demonstrável utilizada como passo intermediário na prova. Por exemplo: a derivação de fórmulas menores.
 
-**Axiomas** são assumidos como verdades, são absolutos. **Lemas** são passos intermediários no processo de prova e, finalmente temos o **teorema**: representado por $\varphi$. Um teorema é uma fórmula demonstrável a partir de axiomas e das regras de inferência do sistema. 
+**Axiomas** são preposições consideradas como verdades, são absolutos. **Lemas** são passos intermediários no processo de prova, pequenos teoremas já provados e, finalmente temos o **teorema**: representado por $\varphi$. Um teorema é uma fórmula demonstrável a partir de axiomas, lemas e das regras de inferência do sistema. Vamos começar dos axiomas.
 
 Existem três axiomas no sistema $\mathfrak{L}$. Estes axiomas formam a base do sistema dedutivo $\mathfrak{L}$ em lógica proposicional. Eles capturam propriedades fundamentais das implicações que permitem derivar teoremas válidos.
 
@@ -1598,7 +1598,9 @@ Existem três axiomas no sistema $\mathfrak{L}$. Estes axiomas formam a base do 
 
 **Axioma 3**: $(\lnot B \rightarrow \lnot A) \rightarrow ((\lnot B \rightarrow A) \rightarrow B)$, este axioma garante que se de $\lnot B$ podemos inferir tanto $\lnot A$ quanto $A$, então $B$ deve ser verdadeiro. Isso porque $B$ e $\lnot B$ não podem ser verdadeiros simultaneamente.
 
-Além dos axiomas, usaremos apenas uma regra de inferência, o Modus Pones. Nos resta apenas destacar a última linha de uma prova. No sistema $\mathfrk{L}$ a última fórmula será chamada de teorema. Representaremos como $\vdash A$ se $A$ for um teorema. Escrevemos $B_1, B_2, ..., B_n \vdash_L A$ só, e somente só, $A$ puder ser provado em $\mathfrak{L}$ a partir das fórmulas dadas $B_1, B_2, ..., B_n$. Onde:
+Além dos axiomas, usaremos apenas uma regra de inferência, o _Modus Ponens_. O _Modus Ponens_ está intimamente relacionado à proposição $(P \wedge (P \rightarrow Q)) \rightarrow Q$. Tanto a preposição quando a regra de inferência, de certa forma, dizem: "se $P$ e $P \rightarrow Q$ são verdadeiros, então $Q$ é verdadeiro". Esta proposição é um exemplo de uma tautologia, porque é verdadeira para cada configuração de $P$ e $Q$. A diferença é que esta tautologia é uma única proposição, enquanto o _Modus Ponens_ é uma regra de inferência que nos permite deduzir novas proposições a partir proposições já provadas.
+
+Nos resta apenas destacar a última linha de uma prova. No sistema $\mathfrk{L}$ a última fórmula será chamada de teorema. Representaremos como $\vdash A$ se $A$ for um teorema. Escrevemos $B_1, B_2, ..., B_n \vdash_L A$ só, e somente só, $A$ puder ser provado em $\mathfrak{L}$ a partir das fórmulas dadas $B_1, B_2, ..., B_n$. Onde:
 
 - $A$: Fórmula que é um teorema;
 
@@ -1693,9 +1695,9 @@ F & F & F & F & T \\
 \end{array}
 $$
 
-Como podemos ver, a coluna final (que representa o teorema $(A \land B) \rightarrow C$) não é sempre verdadeira. Isso significa que a proposição $(A \land B) \rightarrow C$ não é uma tautologia, existe uma situação (quando $A$ e $B$ são verdadeiros, mas $C$ é falso) em que a proposição inteira é falsa. Basta isso para que o teorema seja falso.
+Como podemos ver, a coluna final, que representa o teorema $(A \land B) \rightarrow C$, não é sempre verdadeira. Isso significa que a proposição $(A \land B) \rightarrow C$ não é uma tautologia, existe uma situação, quando $A$ e $B$ são verdadeiros, mas $C$ é falso, em que a proposição inteira é falsa. Basta isso para que o teorema seja falso.
 
-A nossa terceira prova mostra os limites do sistema $\mathfrak{L}$, o que pode dar uma falsa impressão sobre o a capacidade deste sistema de prova. Vamos tentar melhorar isso. 
+A nossa terceira prova mostra os limites do sistema $\mathfrak{L}$, o que pode dar uma falsa impressão sobre o a capacidade deste sistema de prova. Vamos tentar melhorar isso.
 
 ### Lema
 
@@ -1712,12 +1714,14 @@ Considere o seguinte Teorema: $\vdash_L (\lnot B \rightarrow B) \rightarrow B$, 
 3. $((\lnot B \rightarrow B) \rightarrow B)$ - Através do _Modus Ponens_
 Justificativa: Linhas 1 e 2
 
-A adoção de lemas é, na verdade, um mecanismo útil para economizar tempo e esforço. Ao invés de replicar o Teorema 1 na primeira linha dessa prova, nós poderíamos, alternativamente, copiar as 5 linhas da prova original do Teorema 1, substituindo todos os casos de $A$ por $\lnot B$. As justificativas seriam mantidas iguais às da prova original do Teorema 1. A prova resultante, então, consistiria exclusivamente de axiomas e aplicações do _Modus Ponens_. No entanto, uma vez que a prova do Teorema 1 já foi formalmente documentada, parece redundante replicá-la aqui. E eis o motivo da existência e uso dos lemas. 
-
+A adoção de lemas é, na verdade, um mecanismo útil para economizar tempo e esforço. Ao invés de replicar o Teorema 1 na primeira linha dessa prova, nós poderíamos, alternativamente, copiar as 5 linhas da prova original do Teorema 1, substituindo todos os casos de $A$ por $\lnot B$. As justificativas seriam mantidas iguais às da prova original do Teorema 1. A prova resultante, então, consistiria exclusivamente de axiomas e aplicações do _Modus Ponens_. No entanto, uma vez que a prova do Teorema 1 já foi formalmente documentada, parece redundante replicá-la aqui. E eis o motivo da existência e uso dos lemas.
 
 
 
 # Lógica Predicativa
+
+>A lógica é a técnica que usamos para adicionar convicção a verdade.<br> Jean de la Bruyere
+
 
 A Lógica Predicativa, coração e espírito da Lógica de Primeira Ordem, nos leva um passo além da Lógica Proposicional. Em vez de se concentrar apenas em proposições completas que são verdadeiras ou falsas, a lógica predicativa nos permite expressar proposições sobre objetos e as relações entre eles. Ela nos permite falar de maneira mais rica e sofisticada sobre o mundo.
 
