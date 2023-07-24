@@ -32,7 +32,7 @@ A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive 
 - [Lógica de Primeira Ordem](#lógica-de-primeira-ordem)
   - [Lógica Proposicional](#lógica-proposicional)
   - [Regras de Inferência](#regras-de-inferência)
-    - [Modus Ponens](#modus-ponens)
+    - [_Modus Ponens_](#modus-ponens)
     - [Modus Tollens](#modus-tollens)
     - [Dupla Negação](#dupla-negação)
     - [Adição](#adição)
@@ -41,14 +41,15 @@ A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive 
     - [Simplificação](#simplificação)
     - [Bicondicionalidade](#bicondicionalidade)
     - [Equivalência](#equivalência)
-    - [Classificando Fórmulas Proposicionais](#classificando-fórmulas-proposicionais)
+  - [Classificando Fórmulas Proposicionais](#classificando-fórmulas-proposicionais)
 - [Um Sistema de Prova](#um-sistema-de-prova)
   - [Contrapositivas e Recíprocas](#contrapositivas-e-recíprocas)
     - [Equivalência](#equivalência-1)
     - [Contrapositiva](#contrapositiva)
     - [Recíproca](#recíproca)
   - [Análise de Argumentos](#análise-de-argumentos)
-  - [Sistema de Provas](#sistema-de-provas)
+  - [Finalmente, um Sistema de Prova](#finalmente-um-sistema-de-prova)
+    - [Lema](#lema)
 - [Lógica Predicativa](#lógica-predicativa)
   - [Introdução aos Predicados](#introdução-aos-predicados)
   - [Universo do Discurso](#universo-do-discurso)
@@ -496,9 +497,9 @@ A representação que usamos é conhecida como sequência de dedução, é uma f
 
 As regras de inferência são o alicerce da lógica dedutiva e do estudo das demonstrações matemáticas. Elas permitem que raciocínios complexos sejam quebrados em passos mais simples, cada um dos quais pode ser justificado pela aplicação de uma regra de inferência. Algumas das regras de inferência mais utilizadas estão listadas a seguir:
 
-### Modus Ponens
+### _Modus Ponens_
 
-A regra do Modus Ponens permite inferir uma conclusão a partir de uma implicação e de sua premissa antecedente. Se temos uma implicação $F \rightarrow G$, e sabemos que $F$ é verdadeiro, então podemos concluir que $G$ também é verdadeiro.
+A regra do _Modus Ponens_ permite inferir uma conclusão a partir de uma implicação e de sua premissa antecedente. Se temos uma implicação $F \rightarrow G$, e sabemos que $F$ é verdadeiro, então podemos concluir que $G$ também é verdadeiro.
 
 $$
 F \rightarrow G
@@ -518,7 +519,7 @@ Em linguagem natural:
 - Proposição 2: _está chovendo, $(F)$ é verdadeira_.
 - Conclusão: logo, _a rua ficará molhada, $(G)$_.
 
-Algumas aplicações do Modus Ponens:
+Algumas aplicações do _Modus Ponens_:
 
 - Derivar ações de regras e leis condicionais. Por exemplo:
 
@@ -1277,8 +1278,7 @@ $$
 &I(9)
 \end{aligned}
 $$
-
-### Classificando Fórmulas Proposicionais
+## Classificando Fórmulas Proposicionais
 
 Podemos classificar fórmulas proposicionais de acordo com suas propriedades semânticas, analisando suas tabelas-verdade. Seja $A$ uma fórmula proposicional:
 
@@ -1453,9 +1453,9 @@ Onde o conjunto formado $P_1, P_2, ..., P_n$, chamado de antecedente, e $C$, cha
 
 Podemos recuperar as regras de inferência e observá-las pelo ponto de vista da análise de argumentos. Se fizermos isso, vamos encontrar alguns formatos comuns: 
 
-**Modus Ponens**: _se é verdade que se eu estudar para o exame $P$, então eu passarei no exame, $Q$, e também é verdade que eu estudei para o exame $P$, então podemos concluir que eu passarei no exame $Q$_. 
+**_Modus Ponens_**: _se é verdade que se eu estudar para o exame $P$, então eu passarei no exame, $Q$, e também é verdade que eu estudei para o exame $P$, então podemos concluir que eu passarei no exame $Q$_. 
 
-Matematicamente, sejam $P$ e $Q$ proposições. A forma do Modus Ponens é a seguinte:
+Matematicamente, sejam $P$ e $Q$ proposições. A forma do _Modus Ponens_ é a seguinte:
 
 $$
 \begin{align*}
@@ -1481,7 +1481,7 @@ F & F & T \\
 \end{array}
 $$
 
-Se olharmos para a primeira linha, se $P$ é verdadeiro e $P → Q$ é verdadeiro, então $Q$ é necessariamente verdadeiro, o que é exatamente a forma de Modus Ponens.
+Se olharmos para a primeira linha, se $P$ é verdadeiro e $P → Q$ é verdadeiro, então $Q$ é necessariamente verdadeiro, o que é exatamente a forma de _Modus Ponens_.
 
 **Modus Tollens** : _se é verdade que se uma pessoa é um pássaro $P$, então essa pessoa pode voar $Q$, e também é verdade que essa pessoa não pode voar $\neg Q$, então podemos concluir que essa pessoa não é um pássaro $\neg P$. Ou:
 
@@ -1577,11 +1577,142 @@ $$
 
 Se olharmos para a terceira linha, se $P$ é falso e $P \vee Q$ é verdadeiro, então $Q$ é necessariamente verdadeiro, o que é exatamente a forma de Silogismo Disjuntivo.
 
-Agora podemos definir o nosso sistema de provas.
+Não podemos esquecer: um argumento só é válido se, e somente se, a proposição condicional que o expresse seja uma tautologia. Agora podemos definir um sistema de prova.
 
-## Sistema de Provas
+## Finalmente, um Sistema de Prova
 
+Ainda estamos no domínio da Lógica Proposicional e vamos definir um sistema de prova simples e direto chamado de $\mathfrak{L}$ desenvolvido por [John Lemmon](https://en.wikipedia.org/wiki/John_Lemmon) na primeira parte do século XX. Vamos construir a prova e, sintaticamente, em cada linha da nossa prova teremos:
 
+- **um axioma** de $\mathfrak{L}$. Um axioma é uma fórmula ou proposição que é aceita como verdadeira primitivamente, sem necessidade de demonstração. Por exemplo: $(p \rightarrow q) \rightarrow ((q \rightarrow r) \rightarrow (p \rightarrow r))$;
+- **o resultado da aplicação do _Modus Ponens_**;
+- **uma hipótese**, na forma de fórmula;
+- **ou um lema**, uma proposição auxiliar demonstrável utilizada como passo intermediário na prova. Por exemplo: a derivação de fórmulas menores.
+
+**Axiomas** são assumidos como verdades, são absolutos. **Lemas** são passos intermediários no processo de prova e, finalmente temos o **teorema**: representado por $\varphi$. Um teorema é uma fórmula demonstrável a partir de axiomas e das regras de inferência do sistema. 
+
+Existem três axiomas no sistema $\mathfrak{L}$. Estes axiomas formam a base do sistema dedutivo $\mathfrak{L}$ em lógica proposicional. Eles capturam propriedades fundamentais das implicações que permitem derivar teoremas válidos.
+
+**Axioma 1**: $A \rightarrow (B \rightarrow A)$, este axioma estabelece que se $A$ é verdadeiro, então a implicação $B \rightarrow A$ também é verdadeira, independentemente de $B$. Isso porque a implicação $B \rightarrow A$ só será falsa se $B$ for verdadeiro e $A$ falso, o que não pode ocorrer se $A$ é inicialmente verdadeiro.
+
+**Axioma 2**: $(A \rightarrow (B \rightarrow C)) \rightarrow ((A \rightarrow B) \rightarrow (A \rightarrow C))$, este axioma captura a transitividade das implicações, estabelecendo que se a implicação $A \rightarrow B$ e $B \rightarrow C$ são verdadeiras, então $A \rightarrow C$ também é verdadeira.
+
+**Axioma 3**: $(\lnot B \rightarrow \lnot A) \rightarrow ((\lnot B \rightarrow A) \rightarrow B)$, este axioma garante que se de $\lnot B$ podemos inferir tanto $\lnot A$ quanto $A$, então $B$ deve ser verdadeiro. Isso porque $B$ e $\lnot B$ não podem ser verdadeiros simultaneamente.
+
+Além dos axiomas, usaremos apenas uma regra de inferência, o Modus Pones. Nos resta apenas destacar a última linha de uma prova. No sistema $\mathfrk{L}$ a última fórmula será chamada de teorema. Representaremos como $\vdash A$ se $A$ for um teorema. Escrevemos $B_1, B_2, ..., B_n \vdash_L A$ só, e somente só, $A$ puder ser provado em $\mathfrak{L}$ a partir das fórmulas dadas $B_1, B_2, ..., B_n$. Onde:
+
+- $A$: Fórmula que é um teorema;
+
+- $G_1, ..., G_n$: Fórmulas que servem como premissas;
+
+- $\vdash_L$: Símbolo para indicar _demonstrável em $\mathfrak{L}$_;
+
+- escrevemos $\mathfrak{L} A$ para indicar que $A$ é demonstrável no sistema $\mathfrak{L}$.
+
+Talvez tudo isso fique mais claro se fizermos algumas provas.
+
+**Prova 1**: nosso teorema é  $A \rightarrow A$
+
+1. $A \rightarrow ((A \rightarrow A) \rightarrow A)$ (Axioma 1 com $A := A$ e $B := (A \rightarrow A)$)
+
+    Aqui usamos o primeiro axioma de L, que tem a forma $(A \rightarrow (B \rightarrow A))$. Para tanto vamos $A := A$ e $B := (A \rightarrow A)$ para fazer a correspondência com o axioma, assim obtendo a fórmula na linha. Observe que usamos o símbolo $:=$, um símbolo que não faz parte do nosso alfabeto e aqui está sendo usado com o sentido _substituído por_.
+
+2. $(A \rightarrow ((A \rightarrow A) \rightarrow A)) \rightarrow ((A \rightarrow (A \rightarrow A)) \rightarrow (A \rightarrow A))$ (Axioma 2 com $A := A$, $B := (A \rightarrow A)$ e $C := A$)
+
+    A segunda linha usa o segundo axioma de $\mathfrk{L}$, que é $(A \rightarrow (B \rightarrow C)) \rightarrow ((A \rightarrow B) \rightarrow (A \rightarrow C))$. O autor substituiu $A := A$, $B := (A \rightarrow A)$ e $C := A$ para obter a fórmula na linha.
+
+3. $((A \rightarrow (A \rightarrow A)) \rightarrow (A \rightarrow A))$ (_Modus Ponens_ aplicado às linhas 1 e 2)
+
+    Finalmente aplicamos a regra de _Modus Ponens_, que diz que se temos $A$ e também temos $A \rightarrow B$, então podemos deduzir $B$. As linhas 1 e 2 correspondem a $A$ e $A \rightarrow B$, respectivamente, e ao aplicar _Modus Ponens_, obtemos $B$, que é a fórmula na linha 3.
+
+4. $(A \rightarrow (A \rightarrow A))$ (Axioma 1 com $A := A$ e $B := A$)
+
+    De maneira similar à primeira linha, a quarta linha usa o primeiro axioma com $A := A$ e $B := A$.
+
+5. $(A \rightarrow A)$ (_Modus Ponens_ aplicado às linhas 3 e 4)
+
+    Finalmente, aplicamos o _Modus Ponens_ às linhas 3 e 4 para obter a fórmula na última linha, que é o teorema que tentamos provar.
+
+Então, o primeiro teorema está correto e podemos escrever $\vdash_{\mathfrk{L}} A}$.
+
+**Prova 2**: vamos tentar provar $\vdash (\lnot B \rightarrow B) \rightarrow B$
+
+1. $\lnot B \rightarrow \lnot B$ (Aplicação do Teorema 1 com $A := \lnot B$)
+
+    Aqui aplicamos o Teorema 1 (que é $A \rightarrow A$) substituindo $A$ por $\lnot B$.
+
+2. $((\lnot B \rightarrow \lnot B) \rightarrow ((\lnot B \rightarrow B) \rightarrow \lnot B))$ (Aplicação do Axioma 2 com $A := \lnot B$, $B := \lnot B$, e $C := B$)
+
+    Agora aplicamos o segundo axioma, que é $(A \rightarrow (B \rightarrow C)) \rightarrow ((A \rightarrow B) \rightarrow (A \rightarrow C))$, substituindo $A$ por $\lnot B$, $B$ por $\lnot B$ e $C$ por $B$.
+
+3. $(\lnot B \rightarrow B) \rightarrow \lnot B$ (Aplicação do _Modus Ponens_ às linhas 1 e 2)
+
+    A regra de _Modus Ponens_ nos diz que se temos $A$ e também temos $A \rightarrow B$, então podemos deduzir $B$. As linhas 1 e 2 correspondem a $A$ e $A \rightarrow B$, respectivamente. Ao aplicar _Modus Ponens_, obtemos $B$, que é a fórmula nesta linha.
+
+4. $(\lnot B \rightarrow B) \rightarrow B$ (Aplicação do Axioma 1 com $A := \lnot B$ e $B := B$)
+
+    Finalmente, aplicamos o primeiro axioma, que é $A \rightarrow (B \rightarrow A)$, substituindo $A$ por $\lnot B$ e $B$ por $B$ para obter o teorema que estamos tentando provar.
+
+**Prova 3**: vamos tentar novamente, desta vez com $\vdash ((A \land B) \rightarrow C)$
+
+1. $(A \rightarrow (B \rightarrow C)) \rightarrow ((A \land B) \rightarrow C)$ (Suposto axioma com $A := A$, $B := B$ e $C := C$)
+
+    Aqui estamos assumindo que a fórmula $(A \rightarrow (B \rightarrow C)) \rightarrow ((A \land B) \rightarrow C)$ é um axioma. No entanto, esta fórmula **não** é um axioma do sistema L. Portanto, esta tentativa de provar o teorema é inválida desde o início.
+
+2. $A \rightarrow (B \rightarrow C)$ (Hipótese)
+
+    Aqui estamos introduzindo uma hipótese, que é permissível. No entanto, uma hipótese deve ser descartada antes do final da prova e, nesta tentativa de prova, não é.
+
+3. $(A \land B) \rightarrow C$ (_Modus Ponens_ aplicado às linhas 1 e 2)
+
+    Finalmente, tentamos aplicar a regra de inferência _Modus Ponens_ às linhas 1 e 2 para obter $(A \land B) \rightarrow C$. No entanto, como a linha 1 é inválida, esta aplicação de _Modus Ponens_ também é inválida.
+
+Portanto, esta tentativa de provar o teorema $(A \land B) \rightarrow C$ **falha** porque faz suposições inválidas e usa regras de inferência de maneira inválida.
+
+Esta última prova é interessante. Para o teorema $(A \land B) \rightarrow C$, não é possível provar diretamente no sistema $\mathfrak{L}$ sem a presença de axiomas adicionais ou a introdução de hipóteses adicionais. Que não fazem parte do sistema $\mathfrak{L}$.
+
+O sistema $\mathfrak{L}$ é baseado em axiomas específicos e em uma única regra de inferência (_Modus Ponens_), como vimos. O teorema $((A \land B) \rightarrow C)$ não pode ser derivado apenas a partir dos axiomas do sistema $\mathfrak{L}$, pois a conjunção (ou seja, o operador _OR_ ou $\land$) não está presente em nenhum dos axiomas do sistema $\mathfrak{L}$.
+
+Se tivéssemos acesso a axiomas ou regras de inferência adicionais que lidam com a conjunção, ou se você tem permissão para introduzir hipóteses adicionais (por exemplo, você pode introduzir $A \land B \rightarrow C$ como uma hipótese), então a prova pode ser possível. Por exemplo, em alguns sistemas de lógica, a conjunção pode ser definida em termos de negação e disjunção, e neste caso, o teorema pode ser provável.
+
+Com as ferramentas que vimos até agora, podemos tentar provar o teorema $((A \land B) \rightarrow C)$ usando uma Tabela Verdade: 
+
+$$
+\begin{array}{|c|c|c|c|c|}
+\hline
+A & B & C & A \land B & (A \land B) \rightarrow C \\
+\hline
+T & T & T & T & T \\
+T & T & F & T & F \\
+T & F & T & F & T \\
+T & F & F & F & T \\
+F & T & T & F & T \\
+F & T & F & F & T \\
+F & F & T & F & T \\
+F & F & F & F & T \\
+\hline
+\end{array}
+$$
+
+Como podemos ver, a coluna final (que representa o teorema $(A \land B) \rightarrow C$) não é sempre verdadeira. Isso significa que a proposição $(A \land B) \rightarrow C$ não é uma tautologia, existe uma situação (quando $A$ e $B$ são verdadeiros, mas $C$ é falso) em que a proposição inteira é falsa. Basta isso para que o teorema seja falso.
+
+A nossa terceira prova mostra os limites do sistema $\mathfrak{L}$, o que pode dar uma falsa impressão sobre o a capacidade deste sistema de prova. Vamos tentar melhorar isso. 
+
+### Lema
+
+Considere nossa primeira prova, provamos $A \rightarrow A$ e, a partir deste momento, $A \rightarrow A$ se tornou um Lema. Um lema é uma afirmação que é provada não como um fim em si mesma, mas como um passo útil para a prova de outros teoremas.
+
+Em outras palavras, um lema é um resultado menor que serve de base para um resultado maior. Uma vez que um lema é provado, ele pode ser usado em provas subsequentes de teoremas mais complexos. Em geral, um lema é menos geral e menos notável do que um teorema.
+
+Considere o seguinte Teorema: $\vdash_L (\lnot B \rightarrow B) \rightarrow B$, podemos prová-lo da seguinte forma:
+
+1. $\lnot B \rightarrow \lnot B$ - Lembrando que $A := \lnot B$ do Teorema 1
+
+2. $(\lnot B \rightarrow \lnot B) \rightarrow ((\lnot B \rightarrow B) \rightarrow B)$ - Decorrente do Axioma 3, onde $A := \lnot B$ e $B := B$
+
+3. $((\lnot B \rightarrow B) \rightarrow B)$ - Através do _Modus Ponens_
+Justificativa: Linhas 1 e 2
+
+A adoção de lemas é, na verdade, um mecanismo útil para economizar tempo e esforço. Ao invés de replicar o Teorema 1 na primeira linha dessa prova, nós poderíamos, alternativamente, copiar as 5 linhas da prova original do Teorema 1, substituindo todos os casos de $A$ por $\lnot B$. As justificativas seriam mantidas iguais às da prova original do Teorema 1. A prova resultante, então, consistiria exclusivamente de axiomas e aplicações do _Modus Ponens_. No entanto, uma vez que a prova do Teorema 1 já foi formalmente documentada, parece redundante replicá-la aqui. E eis o motivo da existência e uso dos lemas. 
 
 
 
