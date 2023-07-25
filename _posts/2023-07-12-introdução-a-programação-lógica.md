@@ -1,5 +1,5 @@
 ---
-title: Introdução a Programação Lógica
+title: "Decifrando Mistérios: A Jornada da Programação Lógica"
 layout: post
 author: Frank
 description: Uma aventura pelo universo matemático que fundamenta a Programação Lógica.
