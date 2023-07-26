@@ -1620,7 +1620,7 @@ Talvez tudo isso fique mais claro se fizermos algumas provas.
 
 2. $(A \rightarrow ((A \rightarrow A) \rightarrow A)) \rightarrow ((A \rightarrow (A \rightarrow A)) \rightarrow (A \rightarrow A))$ (Axioma 2 com $A := A$, $B := (A \rightarrow A)$ e $C := A$)
 
-    A segunda linha usa o segundo axioma de $\mathfrk{L}$, que é $(A \rightarrow (B \rightarrow C)) \rightarrow ((A \rightarrow B) \rightarrow (A \rightarrow C))$. O autor substituiu $A := A$, $B := (A \rightarrow A)$ e $C := A$ para obter a fórmula na linha.
+    A segunda linha usa o segundo axioma de $\mathfark{L}$, que é $(A \rightarrow (B \rightarrow C)) \rightarrow ((A \rightarrow B) \rightarrow (A \rightarrow C))$. O autor substituiu $A := A$, $B := (A \rightarrow A)$ e $C := A$ para obter a fórmula na linha.
 
 3. $((A \rightarrow (A \rightarrow A)) \rightarrow (A \rightarrow A))$ (_Modus Ponens_ aplicado às linhas 1 e 2)
 
@@ -1634,7 +1634,7 @@ Talvez tudo isso fique mais claro se fizermos algumas provas.
 
     Finalmente, aplicamos o _Modus Ponens_ às linhas 3 e 4 para obter a fórmula na última linha, que é o teorema que tentamos provar.
 
-Então, o primeiro teorema está correto e podemos escrever $\vdash_{\mathfrk{L}} A}$.
+Então, o primeiro teorema está correto e podemos escrever $\vdash_{\mathfark{L}} A}$.
 
 **Prova 2**: vamos tentar provar $\vdash (\lnot B \rightarrow B) \rightarrow B$
 
