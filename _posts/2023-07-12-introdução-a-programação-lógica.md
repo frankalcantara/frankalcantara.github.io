@@ -44,12 +44,13 @@ A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive 
   - [Classificando Fórmulas Proposicionais](#classificando-fórmulas-proposicionais)
 - [Um Sistema de Prova](#um-sistema-de-prova)
   - [Contrapositivas e Recíprocas](#contrapositivas-e-recíprocas)
-    - [Equivalência](#equivalência-1)
+    - [Logicamente Equivalente](#logicamente-equivalente)
     - [Contrapositiva](#contrapositiva)
     - [Recíproca](#recíproca)
   - [Análise de Argumentos](#análise-de-argumentos)
   - [Finalmente, um Sistema de Prova](#finalmente-um-sistema-de-prova)
     - [Lema](#lema)
+    - [Hipóteses](#hipóteses)
 - [Lógica Predicativa](#lógica-predicativa)
   - [Introdução aos Predicados](#introdução-aos-predicados)
   - [Universo do Discurso](#universo-do-discurso)
@@ -1332,19 +1333,18 @@ Considere um sistema proposicional, com suas Fórmulas Bem Formadas, suas transf
 
 As implicações são um problema, do ponto de vista da matemática. Sentenças do tipo _se...então_ induzem uma conclusão. Provar estas sentenças é uma preocupação constante da matemática. Dada uma implicação, existem duas fórmulas relacionadas que ocorrem com tanta frequência que possuem nomes especiais: contrapositivas e recíprocas. Antes de mergulharmos em contrapositivas, precisamos visitar alguns portos.
 
-### Equivalência
+### Logicamente Equivalente
 
-Vamos imaginar um mundo de fórmulas que consistem apenas em duas proposições: $P$ e $Q$. Usando os operadores da Lógica Proposicional podemos escrever um número muito grande de fórmulas diferentes. Mas a coisa interessante é que cada uma dessas fórmulas tem uma Tabela Verdade com exatamente quatro linhas. E, mesmo que pareça surpreendente, só temos dezesseis possíveis configurações para a última coluna dessas tabelas. Como resultado, muitas fórmulas compartilham a mesma configuração final em suas Tabelas Verdade. Todas as fórmulas que tenham  Terei ouvido um viva?
+Vamos imaginar um mundo de fórmulas que consistem apenas em duas proposições: $P$ e $Q$. Usando os operadores da Lógica Proposicional podemos escrever um número muito grande de fórmulas diferentes combinando estas duas proposições. 
 
-Agora, vamos estender esse conceito para um cenário mais geral, onde as fórmulas podem não conter exatamente as mesmas letras proposicionais:
+A coisa interessante sobre as fórmulas que conseguimos criar com apenas duas proposições é que cada uma dessas fórmulas tem uma Tabela Verdade com exatamente quatro linhas, $2^2=4$. Mesmo que isso pareça surpreendente, só existem dezesseis configurações possíveis para a última coluna de todas as Tabelas Verdades de todas as tabelas que podemos criar, $2^4=16$. Como resultado, muitas fórmulas compartilham a mesma configuração final em suas Tabelas Verdade. Todas as fórmulas que possuem a mesma configuração na última coluna são equivalentes.Terei ouvido um viva?
 
-Considere as proposições $A$ e $B$. Estas proposições serão ditas logicamente equivalentes se, e somente se, a proposição $A \Leftrightarrow B$ for uma tautologia. 
+Com um pouco mais de formalidade podemos dizer que: considere as proposições $A$ e $B$. Estas proposições serão ditas logicamente equivalentes se, e somente se, a proposição $A \Leftrightarrow B$ for uma tautologia.
 
   **Exemplo: 1** Vamos mostrar que $P \rightarrow Q$ é logicamente equivalente a $\neg Q \rightarrow \neg P$.
 
   **Solução:** Para isso, verificaremos se a coluna do conectivo principal na Tabela Verdade para a proposição bicondicional formada por essas duas fórmulas contém apenas valores verdadeiros:
 
-  
   $$\begin{array}{|c|c|c|c|c|}
   \hline
   P & Q & P \implies Q & \lnot Q \implies \lnot P & P \implies Q \iff \lnot Q \implies  \lnot P \\
@@ -1397,7 +1397,7 @@ Considere as proposições $A$ e $B$. Estas proposições serão ditas logicamen
 
   Neste caso $P \rightarrow Q$ e $\neg P \lor Q$ são logicamente equivalentes.
 
-Agora que já sabemos o que significa _logicamente equivalentes_ podemos entender o que é uma proposição contrapositiva. 
+Em resumo, duas fórmulas $P$ e $Q$, atômicas, ou não, são equivalentes se quando $P$ for verdadeiro, $Q$ também será e vice-versa. Agora que já sabemos o que significa _logicamente equivalentes_ podemos entender o que é uma proposição contrapositiva. 
 ### Contrapositiva
 
 A contrapositiva de uma implicação é obtida invertendo-se o antecedente e o consequente da implicação original e negando-os. Por exemplo, considere a seguinte implicação: 
@@ -1600,7 +1600,7 @@ Existem três axiomas no sistema $\mathfrak{L}$. Estes axiomas formam a base do 
 
 Além dos axiomas, usaremos apenas uma regra de inferência, o _Modus Ponens_. O _Modus Ponens_ está intimamente relacionado à proposição $(P \wedge (P \rightarrow Q)) \rightarrow Q$. Tanto a preposição quando a regra de inferência, de certa forma, dizem: "se $P$ e $P \rightarrow Q$ são verdadeiros, então $Q$ é verdadeiro". Esta proposição é um exemplo de uma tautologia, porque é verdadeira para cada configuração de $P$ e $Q$. A diferença é que esta tautologia é uma única proposição, enquanto o _Modus Ponens_ é uma regra de inferência que nos permite deduzir novas proposições a partir proposições já provadas.
 
-Nos resta apenas destacar a última linha de uma prova. No sistema $\mathfrk{L}$ a última fórmula será chamada de teorema. Representaremos como $\vdash A$ se $A$ for um teorema. Escrevemos $B_1, B_2, ..., B_n \vdash_L A$ só, e somente só, $A$ puder ser provado em $\mathfrak{L}$ a partir das fórmulas dadas $B_1, B_2, ..., B_n$. Onde:
+Nos resta apenas destacar a última linha de uma prova. No sistema $\mathfrak{L}$ a última fórmula será chamada de teorema. Representaremos como $\vdash A$ se $A$ for um teorema. Escrevemos $B_1, B_2, ..., B_n \vdash_L A$ só, e somente só, $A$ puder ser provado em $\mathfrak{L}$ a partir das fórmulas dadas $B_1, B_2, ..., B_n$. Onde:
 
 - $A$: Fórmula que é um teorema;
 
@@ -1716,7 +1716,41 @@ Justificativa: Linhas 1 e 2
 
 A adoção de lemas é, na verdade, um mecanismo útil para economizar tempo e esforço. Ao invés de replicar o Teorema 1 na primeira linha dessa prova, nós poderíamos, alternativamente, copiar as 5 linhas da prova original do Teorema 1, substituindo todos os casos de $A$ por $\lnot B$. As justificativas seriam mantidas iguais às da prova original do Teorema 1. A prova resultante, então, consistiria exclusivamente de axiomas e aplicações do _Modus Ponens_. No entanto, uma vez que a prova do Teorema 1 já foi formalmente documentada, parece redundante replicá-la aqui. E eis o motivo da existência e uso dos lemas.
 
+### Hipóteses
 
+Hipóteses são suposições ou proposições feitas como base para o raciocínio, sem a suposição de sua veracidade. Elas são usadas como pontos de partida para investigações ou pesquisas científicas. Essencialmente uma hipótese é uma teoria ou ideia que você pode testar de alguma forma. Isso significa que, através de experimentação e observação, uma hipótese pode ser provada verdadeira ou falsa.
+
+Por exemplo, se você observar que uma planta está morrendo, pode formar a hipótese de que ela não está recebendo água suficiente. Para testar essa hipótese, você pode dar mais água à planta e observar se ela melhora. Se melhorar, isso suporta sua hipótese. Se não houver mudança, isso sugere que sua hipótese pode estar errada, e você pode então formular uma nova hipótese para testar.
+
+Na lógica proposicional, uma hipótese é uma proposição (ou afirmação) que é assumida como verdadeira para o propósito de argumentação ou investigação. Obviamente, pode ser uma fórmula atômica, ou complexa, desde que seja uma Fórmula Bem Formada.
+
+Em um sistema formal de provas, como o sistema $\mathfrak{L}$ uma hipótese é um ponto de partida para um processo de dedução. O objetivo é usar as regras do sistema para deduzir novas proposições a partir das hipóteses. Se uma proposição puder ser deduzida a partir das hipóteses usando as regras do sistema, dizemos que essa proposição é uma consequência lógica das hipóteses. 
+Se temos as hipóteses $P$ e $P \rightarrow Q$, podemos deduzir $Q$ usando o _Modus Ponens_. Nesse caso, $Q$ seria uma consequência lógica das hipóteses.
+
+No contexto do sistema de provas $\mathfrak{L}$ e considerando apenas a lógica proposicional, **uma hipótese é uma proposição ou conjunto de proposições assumidas como verdadeiras, a partir das quais outras proposições podem ser logicamente deduzidas**.
+
+**Exemplo 1:** considere o seguinte argumento:
+$$ \begin{align*}
+A \rightarrow (B \rightarrow C) \\
+A \rightarrow B \\
+\hline
+A \rightarrow C
+\end{align*} $$
+
+Aplicando o processo de dedução do Sistema $\mathfrak{L}$, teremos:
+$$
+\begin{align*}
+& A \rightarrow (B \rightarrow C) &\text{Hipótese} \\
+& A \rightarrow B &\text{Hipótese}\\  
+& (A \rightarrow (B \rightarrow C)) \rightarrow ((A \rightarrow B) \rightarrow (A \rightarrow C)) &\text{Axioma 2}\\
+& (A \rightarrow B) \rightarrow (A \rightarrow C) & \text{Modus Ponens, linhas 1 e 3} \\
+& A \rightarrow C & \text{Modus Ponens, linhas 2 e 4}\\
+\end{align*}
+$$
+
+Neste exemplo, vamos o uso das Hipóteses. No processo de dedução, as hipóteses devem ser usadas na forma como são declaradas. O que as torna diferentes dos lemas.
+
+Neste ponto, podemos voltar um pouco e destacar um constructor importante na programação imperativa: _se...então_ representando por $P\rightarrow Q$, uma implicação. Que pode ser lido como hipótese $P$ e conclusão $Q$.
 
 # Lógica Predicativa
 
