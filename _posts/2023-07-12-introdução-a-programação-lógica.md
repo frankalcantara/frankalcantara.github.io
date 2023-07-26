@@ -99,7 +99,7 @@ A Programação Lógica aparece em meados dos anos 1970 como uma evolução dos 
 
 # Lógica de Primeira Ordem
 
-A Lógica de Primeira Ordem é um dos fundamentos essenciais da ciência da computação e, consequentemente, da programação. Essa matemática permite quantificar sobre objetos, fazer declarações que se aplicam a todos os membros de um conjunto ou a um membro particular desse conjunto. Por outro lado, nos impede de quantificar diretamente sobre predicados ou funções.
+A Lógica de Primeira Ordem é uma estrutura básica da ciência da computação e da programação. Ela nos permite discursar e raciocinar com precisão sobre os elementos - podemos fazer afirmações sobre todo um grupo, ou sobre um único elemento em particular. No entanto, tem suas limitações - não podemos usá-la para fazer afirmações diretas sobre predicados ou funções.
 
 Essa restrição não é um defeito, mas sim um equilíbrio cuidadoso entre poder expressivo e simplicidade computacional. Dá-nos uma maneira de formular uma grande variedade de problemas, sem tornar o processo de resolução desses problemas excessivamente complexo.
 
@@ -357,8 +357,8 @@ Simplificação:
 
 $$
  \begin{align*}
- F \wedge (G \vee (F \wedge H)) &\equiv (F \wedge G) \vee (F \wedge (F \wedge H)) && \text{(Distributividade da Conjunção sobre a Disjunção, 3)} \\
- &\equiv (F \wedge G) \vee (F \wedge H) && \text{(Lei da Idempotência para a Conjunção, 18)}
+ F \wedge (G \vee (F \wedge H)) &\equiv (F \wedge G) \vee (F \wedge (F \wedge H)) && \text{(3)} \\
+ &\equiv (F \wedge G) \vee (F \wedge H) && \text{(18)}
  \end{align*}
 $$
 
@@ -368,11 +368,11 @@ Simplificação:
 
 $$
  \begin{align*}
- F \rightarrow (G \wedge (H \vee F)) &\equiv \neg F \vee (G \wedge (H \vee F)) && \text{(Definição de Implicação, 7)} \\
- &\equiv (\neg F \vee G) \wedge (\neg F \vee (H \vee F)) && \text{(Distributividade da Disjunção sobre a Conjunção, 4)} \\
- &\equiv (\neg F \vee G) \wedge (H \vee \neg F \vee F) && \text{(Comutatividade da Disjunção, 2)} \\
- &\equiv (\neg F \vee G) \wedge T && \text{(Lei da Exclusão, 11)} \\
- &\equiv \neg F \vee G && \text{(Lei da Identidade para a Conjunção, 14)}
+ F \rightarrow (G \wedge (H \vee F)) &\equiv \neg F \vee (G \wedge (H \vee F)) && \text{(7)} \\
+ &\equiv (\neg F \vee G) \wedge (\neg F \vee (H \vee F)) && \text{(4)} \\
+ &\equiv (\neg F \vee G) \wedge (H \vee \neg F \vee F) && \text{(2)} \\
+ &\equiv (\neg F \vee G) \wedge T && \text{(11)} \\
+ &\equiv \neg F \vee G && \text{(14)}
  \end{align*}
 $$
 
@@ -382,9 +382,9 @@ Simplificação:
 
 $$
  \begin{align*}
- \neg (F \wedge (G \rightarrow H)) &\equiv \neg (F \wedge (\neg G \vee H)) && \text{(Definição de Implicação, 7)} \\
- &\equiv \neg F \vee \neg (\neg G \vee H) && \text{(Lei de De Morgan, 5)} \\
- &\equiv \neg F \vee (G \wedge \neg H) && \text{(Lei de De Morgan, 6)}
+ \neg (F \wedge (G \rightarrow H)) &\equiv \neg (F \wedge (\neg G \vee H)) && \text{(7)} \\
+ &\equiv \neg F \vee \neg (\neg G \vee H) && \text{(5)} \\
+ &\equiv \neg F \vee (G \wedge \neg H) && \text{(6)}
  \end{align*}
 $$
 
@@ -394,9 +394,9 @@ Simplificação:
 
 $$
  \begin{align*}
- \neg ((F \rightarrow G) \wedge (H \rightarrow I)) &\equiv \neg ((\neg F \vee G) \wedge (\neg H \vee I)) && \text{(Definição de Implicação, 7)} \\
- &\equiv \neg (\neg F \vee G) \vee \neg (\neg H \vee I) && \text{(Lei de De Morgan, 5)} \\
- &\equiv (F \wedge \neg G) \vee (H \wedge \neg I) && \text{(Lei de De Morgan, 6)}
+ \neg ((F \rightarrow G) \wedge (H \rightarrow I)) &\equiv \neg ((\neg F \vee G) \wedge (\neg H \vee I)) && \text{(7)} \\
+ &\equiv \neg (\neg F \vee G) \vee \neg (\neg H \vee I) && \text{(5)} \\
+ &\equiv (F \wedge \neg G) \vee (H \wedge \neg I) && \text{(6)}
  \end{align*}
 $$
 
@@ -406,8 +406,8 @@ Simplificação:
 
 $$
  \begin{align*}
- (F \rightarrow G) \vee (H \rightarrow I) \vee (E \rightarrow F) &\equiv (\neg F \vee G) \vee (\neg H \vee I) \vee (\neg E \vee F) && \text{(Definição de Implicação, 7)} \\
- &\equiv \neg F \vee G \vee \neg H \vee I \vee \neg E \vee F && \text{(Comutatividade da Disjunção, 2)}
+ (F \rightarrow G) \vee (H \rightarrow I) \vee (E \rightarrow F) &\equiv (\neg F \vee G) \vee (\neg H \vee I) \vee (\neg E \vee F) && \text{(7)} \\
+ &\equiv \neg F \vee G \vee \neg H \vee I \vee \neg E \vee F && \text{(2)}
  \end{align*}
 $$
 
@@ -418,9 +418,9 @@ Simplificação:
 
 $$
 \begin{align*}
-F \wedge (G \vee (H \rightarrow I)) \vee (\neg E \leftrightarrow F) &\equiv F \wedge (G \vee (\neg H \vee I)) \vee ((\neg E \rightarrow F) \wedge (F \rightarrow \neg E)) && \text{(Definição de Implicação, 7)}\\
-&\equiv (F \wedge G) \vee (F \wedge (\neg H \vee I)) \vee ((\neg E \vee F) \wedge (\neg F \vee \neg E)) && \text{(Distributividade da Conjunção sobre a Disjunção, 3)}\\
-&\equiv (F \wedge G) \vee (F \wedge (\neg H \vee I)) \vee (F \vee \neg E) && \text{(Lei da Contrapositiva, 9)}
+F \wedge (G \vee (H \rightarrow I)) \vee (\neg E \leftrightarrow F) &\equiv F \wedge (G \vee (\neg H \vee I)) \vee ((\neg E \rightarrow F) \wedge (F \rightarrow \neg E)) && \text{(7)}\\
+&\equiv (F \wedge G) \vee (F \wedge (\neg H \vee I)) \vee ((\neg E \vee F) \wedge (\neg F \vee \neg E)) && \text{(3)}\\
+&\equiv (F \wedge G) \vee (F \wedge (\neg H \vee I)) \vee (F \vee \neg E) && \text{(9)}
 \end{align*}
 $$
 
@@ -431,8 +431,8 @@ Simplificação:
 
 $$
 \begin{align*}
-\neg(F \vee (G \wedge \neg H)) \leftrightarrow ((I \vee E) \rightarrow (F \wedge G)) &\equiv (\neg F \wedge \neg(G \wedge \neg H)) \leftrightarrow ((\neg I \wedge \neg E) \vee (F \wedge G)) && \text{(Definição de Implicação, 7)} \\
-&\equiv (\neg F \wedge (G \vee H)) \leftrightarrow (\neg I \vee \neg E \vee (F \wedge G)) && \text{(Lei de De Morgan, 6)}
+\neg(F \vee (G \wedge \neg H)) \leftrightarrow ((I \vee E) \rightarrow (F \wedge G)) &\equiv (\neg F \wedge \neg(G \wedge \neg H)) \leftrightarrow ((\neg I \wedge \neg E) \vee (F \wedge G)) && \text{(7)} \\
+&\equiv (\neg F \wedge (G \vee H)) \leftrightarrow (\neg I \vee \neg E \vee (F \wedge G)) && \text{(L6)}
 \end{align*}
 $$
 
@@ -443,9 +443,9 @@ Simplificação:
 
 $$
 \begin{align*}
-\neg(F \leftrightarrow G) \vee ((H \rightarrow I) \wedge (\neg E \vee \neg F)) &\equiv \neg((F \rightarrow G) \wedge (G \rightarrow F)) \vee ((\neg H \vee I) \wedge (\neg E \vee \neg F)) && \text{(Definição de Equivalência, 8)}\\
-&\equiv (\neg(F \rightarrow G) \vee \neg(G \rightarrow F)) \vee ((\neg H \vee I) \wedge (\neg E \vee \neg F)) && \text{(Lei de De Morgan, 5)}\\
-&\equiv ((F \wedge \neg G) \vee (G \wedge \neg F)) \vee ((\neg H \vee I) \wedge (\neg E \vee \neg F)) && \text{(Lei de De Morgan, 6)}
+\neg(F \leftrightarrow G) \vee ((H \rightarrow I) \wedge (\neg E \vee \neg F)) &\equiv \neg((F \rightarrow G) \wedge (G \rightarrow F)) \vee ((\neg H \vee I) \wedge (\neg E \vee \neg F)) && \text{(8)}\\
+&\equiv (\neg(F \rightarrow G) \vee \neg(G \rightarrow F)) \vee ((\neg H \vee I) \wedge (\neg E \vee \neg F)) && \text{(5)}\\
+&\equiv ((F \wedge \neg G) \vee (G \wedge \neg F)) \vee ((\neg H \vee I) \wedge (\neg E \vee \neg F)) && \text{(6)}
 \end{align*}
 $$
 
@@ -456,9 +456,9 @@ Simplificação:
 
 $$
 \begin{align*}
-(F \wedge G) \vee ((\neg H \leftrightarrow I) \rightarrow (\neg E \wedge F)) &\equiv (F \wedge G) \vee ((\neg(\neg H \leftrightarrow I)) \vee (\neg E \wedge F)) && \text{(Definição de Implicação, 7)}\\
-&\equiv (F \wedge G) \vee ((H \leftrightarrow I) \vee (\neg E \wedge F)) && \text{(Lei da Dupla Negação, 12)}\\
-&\equiv (F \wedge G) \vee (((H \rightarrow I) \wedge (I \rightarrow H)) \vee (\neg E \wedge F)) && \text{(Definição de Equivalência, 8)}
+(F \wedge G) \vee ((\neg H \leftrightarrow I) \rightarrow (\neg E \wedge F)) &\equiv (F \wedge G) \vee ((\neg(\neg H \leftrightarrow I)) \vee (\neg E \wedge F)) && \text{(7)}\\
+&\equiv (F \wedge G) \vee ((H \leftrightarrow I) \vee (\neg E \wedge F)) && \text{(12)}\\
+&\equiv (F \wedge G) \vee (((H \rightarrow I) \wedge (I \rightarrow H)) \vee (\neg E \wedge F)) && \text{(8)}
 \end{align*}
 $$
 
@@ -469,8 +469,8 @@ Simplificação:
 
 $$
 \begin{align*}
-\neg(F \wedge (G \vee H)) \leftrightarrow (\neg(I \rightarrow E) \vee \neg(F \rightarrow G)) &\equiv (\neg F \vee \neg(G \vee H)) \leftrightarrow ((I \wedge \neg E) \vee (F \wedge \neg G)) && \text{(Definição de Implicação, 7)}\\
-&\equiv (\neg F \vee (\neg G \wedge \neg H)) \leftrightarrow ((I \wedge \neg E) \vee (F \wedge \neg G)) && \text{(Lei de De Morgan, 6)}
+\neg(F \wedge (G \vee H)) \leftrightarrow (\neg(I \rightarrow E) \vee \neg(F \rightarrow G)) &\equiv (\neg F \vee \neg(G \vee H)) \leftrightarrow ((I \wedge \neg E) \vee (F \wedge \neg G)) && \text{(7)}\\
+&\equiv (\neg F \vee (\neg G \wedge \neg H)) \leftrightarrow ((I \wedge \neg E) \vee (F \wedge \neg G)) && \text{(6)}
 \end{align*}
 $$
 
@@ -1738,6 +1738,7 @@ A \rightarrow C
 \end{align*} $$
 
 Aplicando o processo de dedução do Sistema $\mathfrak{L}$, teremos:
+
 $$
 \begin{align*}
 & A \rightarrow (B \rightarrow C) &\text{Hipótese} \\
@@ -1839,7 +1840,7 @@ A aridade do predicado, número de argumentos, é limitado pela análise lógica
 2. $potênciaDe(n, k)$: o número inteiro $n$ é uma potência exata de $k : n = ki$ para algum $i \in \mathbb{Z} ≥ 0$.
 3. $somaDeDoisPrimos(n)$: o número inteiro positivo $n$ é igual à soma de dois números primos.
 
-Em 1, 2 e 3 os predicados estão definidos com mnemônicos aumentando a legibilidade e melhorando nossa capacidade de manter o universo implícito. O uso de predicados, e da Lógica Proposicional, permite a escrita de sentenças menos ambíguas para a definição de conceitos lógicos em formato matemático. Por exemplo: se $x$ é um ancestral de $y$ e $y$ é um ancestral de $z$ então $x$ é um ancestral de $z$; que, se consideramos o predicado $ancestralDe$ pode ser escrito como $ancestralDe(x,y) \wedge ancestralDe(y,z) \rightarrow ancestralDe(x,z)$. Ainda assim, falta alguma coisa. Algo que permita aplicar os predicados a um conjunto de elementos dentro do universo do discurso.
+Em 1, 2 e 3 os predicados estão definidos com mnemônicos aumentando a legibilidade e melhorando nossa capacidade de manter o universo implícito. O uso de predicados, e da Lógica Proposicional, permite a escrita de sentenças menos ambíguas para a definição de conceitos lógicos em formato matemático. Por exemplo: se $x$ é um ancestral de $y$ e $y$ é um ancestral de $z$ então $x$ é um ancestral de $z$; que, se consideramos o predicado $ancestralDe$ pode ser escrito como $ancestralDe(x,y) \wedge ancestralDe(y,z) \rightarrow ancestralDe(x,z)$. Ainda assim, falta alguma coisa. Algo que permita aplicar os predicados a um conjunto de elementos dentro do universo do discurso. É aqui que entram os quantificadores.
 
 ## Quantificadores
 
