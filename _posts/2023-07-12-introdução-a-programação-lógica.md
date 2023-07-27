@@ -170,12 +170,12 @@ As declarações atômicas e compostas são costuradas por conectivos para produ
 <table style="margin-left: auto;
   margin-right: auto; text-align:center;">
   <tr style="border-top: 2px solid gray; border-bottom: 1px solid gray;">
-    <th style="width:8%; border-right: 1px solid gray;">$F$</th>
-    <th style="width:8%; border-right: double gray;">$G$</th> 
-    <th style="width:16.8%; border-right: 1px solid gray;">$F \vee G$</th>
-    <th style="width:16.8%; border-right: 1px solid gray;">$F \wedge G$</th>
-    <th style="width:16.8%; border-right: 1px solid gray;">$\neg F$</th>
-    <th style="width:16.8%; border-right: 1px solid gray;">$F \rightarrow G$</th>
+    <th style="width:8%; border-right: 1px solid gray;">$P$</th>
+    <th style="width:8%; border-right: double gray;">$Q$</th> 
+    <th style="width:16.8%; border-right: 1px solid gray;">$P \vee Q$</th>
+    <th style="width:16.8%; border-right: 1px solid gray;">$P \wedge Q$</th>
+    <th style="width:16.8%; border-right: 1px solid gray;">$\neg P$</th>
+    <th style="width:16.8%; border-right: 1px solid gray;">$P \rightarrow Q$</th>
     <th style="width:16.8%;">$F \leftrightarrow G$</th>
   </tr>
   <tr style="background-color: #eeeeee;">
