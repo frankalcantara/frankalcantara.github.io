@@ -2260,17 +2260,16 @@ $$
 Certamente, aqui estão cinco quebra-cabeças clássicos juntamente com suas soluções usando lógica de primeira ordem:
 
 1. **Quebra-cabeça: O Mentiroso e o Verdadeiro**  
-   Você encontra dois habitantes: A e B. Você sabe que um sempre diz a verdade e o outro sempre mente, mas você não sabe quem é quem. Você pergunta a A, "Você é o verdadeiro?" A responde, mas você não consegue ouvir a resposta dele. B então te diz, "A disse que ele é o mentiroso."  
+   Você encontra dois habitantes: $A$ e $B$. Você sabe que um sempre diz a verdade e o outro sempre mente, mas você não sabe quem é quem. Você pergunta a $A$, _Você é o verdadeiro?_ A responde, mas você não consegue ouvir a resposta dele. $B$ então te diz, _A disse que ele é o mentiroso_.  
    
-   **Solução**: B deve ser o verdadeiro e A deve ser o mentiroso. Se A fosse o verdadeiro, ele nunca diria que é o mentiroso. Portanto, A deve ser o mentiroso e B deve ser o verdadeiro, independentemente do que A disse.
+   **Solução**: $B$ deve ser o verdadeiro e $A$ deve ser o mentiroso. Se $A$ fosse o verdadeiro, ele nunca diria que é o mentiroso. Portanto, $A$ deve ser o mentiroso e $B$ deve ser o verdadeiro, independentemente do que $A$ disse.
 
-   Usando lógica de primeira ordem:  
-   Vamos denotar a resposta de A como $a$. Então o predicado $TruthTeller(A, a)$ será falso porque um verdadeiro nunca pode dizer que é um mentiroso. Portanto, $\neg TruthTeller(A, a)$ e daí, $TruthTeller(B, \neg a)$.
+   Usando lógica de primeira ordem:  Vamos denotar a resposta de $A$ como $a$. Então o predicado $TruthTeller(A, a)$ será falso porque um verdadeiro nunca pode dizer que é um mentiroso. Portanto, $\neg TruthTeller(A, a)$ e daí, $TruthTeller(B, \neg a)$.
 
 2. **Quebra-cabeça: As Três Lâmpadas**  
-   Existem três lâmpadas em uma sala, e existem três interruptores fora da sala. Você pode manipular os interruptores o quanto quiser, mas só pode entrar na sala uma vez. Como você pode determinar qual interruptor opera qual lâmpada?
+   Existem três lâmpadas incandescentes em uma sala, e existem três interruptores fora da sala. Você pode manipular os interruptores o quanto quiser, mas só pode entrar na sala uma vez. Como você pode determinar qual interruptor opera qual lâmpada?
 
-   **Solução**: Ligue um interruptor e espere um pouco. Então desligue esse interruptor e ligue um segundo interruptor. Entre na sala. A lâmpada que está acesa corresponde ao segundo interruptor. A lâmpada que está desligada e quente corresponde ao primeiro interruptor. A lâmpada que está desligada e fria corresponde ao terceiro interruptor.
+   **Solução**: ligue um interruptor e espere um pouco. Então desligue esse interruptor e ligue um segundo interruptor. Entre na sala. A lâmpada que está acesa corresponde ao segundo interruptor. A lâmpada que está desligada e quente corresponde ao primeiro interruptor. A lâmpada que está desligada e fria corresponde ao terceiro interruptor.
 
    Usando lógica de primeira ordem:
    Vamos denotar os interruptores como $s1, s2, s3$ e as lâmpadas como $b1, b2, b3$. Podemos definir predicados $On(b, s)$ e $Hot(b)$.  
@@ -2280,7 +2279,7 @@ Certamente, aqui estão cinco quebra-cabeças clássicos juntamente com suas sol
 3. **Quebra-cabeça: O Agricultor, a Raposa, o Ganso e o Grão**  
    Um agricultor quer atravessar um rio e levar consigo uma raposa, um ganso e um saco de grãos. O barco do agricultor só lhe permite levar um item além dele mesmo. Se a raposa e o ganso estiverem sozinhos, a raposa comerá o ganso. Se o ganso e o grão estiverem sozinhos, o ganso comerá o grão. Como o agricultor pode levar todas as suas posses para o outro lado do rio?
 
-   **Solução**: O agricultor leva o ganso através do rio primeiro, deixando a raposa e o grão no lado original. Ele deixa o ganso no outro lado e volta para pegar a raposa. Ele deixa a raposa no outro lado, mas leva o ganso de volta ao lado original para pegar o grão. Ele deixa o grão com a raposa no outro lado. Finalmente, ele retorna ao lado original mais uma vez para pegar o ganso.
+   **Solução**: o agricultor leva o ganso através do rio primeiro, deixando a raposa e o grão no lado original. Ele deixa o ganso no outro lado e volta para pegar a raposa. Ele deixa a raposa no outro lado, mas leva o ganso de volta ao lado original para pegar o grão. Ele deixa o grão com a raposa no outro lado. Finalmente, ele retorna ao lado original mais uma vez para pegar o ganso.
 
    Usando lógica de primeira ordem:
    Podemos definir predicados $SameSide(x, y)$ e $Eats(x, y)$.
@@ -2293,24 +2292,26 @@ Certamente, aqui estão cinco quebra-cabeças clássicos juntamente com suas sol
 4. **Quebra-cabeça: O Problema da Ponte e da Tocha**  
    Quatro pessoas chegam a um rio à noite. Há uma ponte estreita, mas ela só pode conter duas pessoas de cada vez. Eles têm uma tocha e, por ser noite, a tocha tem que ser usada ao atravessar a ponte. A pessoa A pode atravessar a ponte em um minuto, B em dois minutos, C em cinco minutos e D em oito minutos. Quando duas pessoas atravessam a ponte juntas, elas devem se mover no ritmo da pessoa mais lenta. Qual é a maneira mais rápida para todos eles atravessarem a ponte?
 
-   **Solução**: Primeiro, A e B atravessam a ponte, o que leva 2 minutos. A então pega a tocha e volta para o lado original, levando 1 minuto. A fica no lado original enquanto C e D atravessam a ponte, levando 8 minutos. B então pega a tocha e volta para o lado original, levando 2 minutos. Finalmente, A e B atravessam a ponte novamente, levando 2 minutos. No total, isso leva 2+1+8+2+2=15 minutos.
+   **Solução**: primeiro, A e B atravessam a ponte, o que leva 2 minutos. A então pega a tocha e volta para o lado original, levando 1 minuto. A fica no lado original enquanto C e D atravessam a ponte, levando 8 minutos. B então pega a tocha e volta para o lado original, levando 2 minutos. Finalmente, A e B atravessam a ponte novamente, levando 2 minutos. No total, isso leva 2+1+8+2+2=15 minutos.
 
    Usando lógica de primeira ordem:
    Vamos denotar o tempo que cada pessoa leva para atravessar a ponte como $T_A, T_B, T_C, T_D$ e o tempo total como $T$. O problema pode ser representado da seguinte forma:
+   
    $$ (T_A + T_B + T_A + T_C + T_D + T_B + T_A) \leq T $$
+   
    Substituindo os valores dos tempos resulta em $15 \leq T$.
 
 5. **Quebra-cabeça: O Problema de Monty Hall**  
    Em um programa de game show, os concorrentes tentam adivinhar qual das três portas contém um prêmio valioso. Depois que um concorrente escolhe uma porta, o apresentador, que sabe o que está por trás de cada porta, abre uma das portas não escolhidas para revelar uma cabra (representando nenhum prêmio). O apresentador então pergunta ao concorrente se ele quer mudar sua escolha para a outra porta não aberta ou ficar com sua escolha inicial. O que o concorrente deve fazer para maximizar suas chances de ganhar o prêmio?
 
-   **Solução**: O concorrente deve sempre mudar sua escolha. Inicialmente, a chance do prêmio estar atrás da porta escolhida é 1/3 e a chance de estar atrás de uma das outras portas é 2/3. Depois que o apresentador abre uma porta para revelar uma cabra, a chance do prêmio estar atrás da porta não escolhida e não aberta ainda é 2/3.
+   **Solução**: o concorrente deve sempre mudar sua escolha. Inicialmente, a chance do prêmio estar atrás da porta escolhida é 1/3 e a chance de estar atrás de uma das outras portas é 2/3. Depois que o apresentador abre uma porta para revelar uma cabra, a chance do prêmio estar atrás da porta não escolhida e não aberta ainda é 2/3.
 
    Usando lógica de primeira ordem:
    Vamos denotar as portas como $d1, d2, d3$ e o prêmio como $P$. Podemos definir um predicado $ContainsPrize(d)$.
    A solução é representada pela seguinte condição:
    
    $$ (ContainsPrize(d1) \land \neg ContainsPrize(d2) \land \neg ContainsPrize(d3)) \lor (ContainsPrize(d2) \land \neg ContainsPrize(d1) \land \neg ContainsPrize(d3)) \lor (ContainsPrize(d3) \land \neg ContainsPrize(d1) \land \neg ContainsPrize(d2)) $$
-   
+
    Esta condição afirma que o prêmio está exatamente atrás de uma das portas, e o concorrente deve mudar sua escolha depois que uma das portas é aberta para revelar nenhum prêmio.
 
 ## Formas Normais
