@@ -33,10 +33,10 @@ A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive 
   - [Lógica Proposicional](#lógica-proposicional)
   - [Regras de Inferência](#regras-de-inferência)
     - [_Modus Ponens_](#modus-ponens)
-    - [Modus Tollens](#modus-tollens)
+    - [_Modus Tollens_](#modus-tollens)
     - [Dupla Negação](#dupla-negação)
     - [Adição](#adição)
-    - [Modus Tollendo Ponens](#modus-tollendo-ponens)
+    - [_Modus Tollendo Ponens_](#modus-tollendo-ponens)
     - [Adjunção](#adjunção)
     - [Simplificação](#simplificação)
     - [Bicondicionalidade](#bicondicionalidade)
@@ -80,7 +80,7 @@ Na Programação Lógica, um dos paradigmas da **Programação Descritiva** usam
 
 Uma conjectura é uma suposição, ou proposição que é acreditada ser verdadeira mas ainda não foi provada. Uma sentença que declarativa que precisa ser verificada. Na linguagem natural, conjecturas são frequentemente expressas como declarações que precisam de confirmação adicional. Na Lógica de Primeira Ordem, as proposições são tratadas como sentenças que são criadas para serem verificadas em busca da sua verdade, ou não. Essas sentenças podem ser analisadas e testadas usando as regras e estruturas da Lógica de Primeira Ordem.
 
-![Diagrama de Significado de Conjeturas](/assets/images/conjecturas.jpeg)
+![Diagrama de Significado de Conjeturas](/assets/images/conjecturas.jpeQ)
 
 Em resumo: **Imperativa:** focada no processo, no _como_ chegar à solução; **Descritiva:** focada no problema em si, no _o que_ precisa ser feito.
 
@@ -94,7 +94,7 @@ Vamos enfrentar a inferência e a dedução, duas ferramentas para extração de
 
 Vamos falar da Cláusula de Horn, um conceito um pouco mais estranho. Uma regra que torna todos os problemas expressos em lógica mais fácies de resolver. É como uma receita de bolo que, se corretamente seguida, torna o processo de cozinhar muito mais simples.
 
-No final do dia, tudo que queremos, desde os tempos de [Gödel](https://en.wikipedia.org/wiki/Kurt_Gödel), [Turing](https://en.wikipedia.org/wiki/Alan_Turing) e [Church](https://en.wikipedia.org/wiki/Alonzo_Church) é que nossas máquinas sejam capazes de resolver problemas complexos com o mínimo de interferência nossa. Queremos que eles pensem, ou pelo menos, que simulem o pensamento. A Programação Lógica é uma maneira deveras interessante de perseguir este objetivo.
+No final do dia, tudo que queremos, desde os tempos de [Gödel](https://en.wikipedia.org/wiki/Kurt_Gödel), [Turing](https://en.wikipedia.org/wiki/Alan_TurinQ) e [Church](https://en.wikipedia.org/wiki/Alonzo_ChurcR) é que nossas máquinas sejam capazes de resolver problemas complexos com o mínimo de interferência nossa. Queremos que eles pensem, ou pelo menos, que simulem o pensamento. A Programação Lógica é uma maneira deveras interessante de perseguir este objetivo.
 
 A Programação Lógica aparece em meados dos anos 1970 como uma evolução dos esforços das pesquisas sobre a prova computacional de teoremas matemáticos e inteligência artificial. Deste esforço surgiu a esperança de que poderíamos usar a lógica como um linguagem de programação, em inglês, _programming logic_ ou Prolog. Este artigo faz parte de uma série sobre a Programação Lógica, partiremos da base matemática e chegaremos ao Prolog.
 
@@ -120,7 +120,7 @@ O alfabeto $\Sigma$ pode ser dividido em conjuntos de símbolos agrupados por cl
 
 5. **Quantificadores**: nos manteremos no limite da tradição matemática e usar $\exists$ (quantificador existencial) e $\forall$ (quantificador universal).
 
-6. **Fórmulas Bem Formadas**: usaremos letras do alfabeto latino, maiúsculas para representar as Fórmulas Bem Formadas: $F$, $G$, $I$, $J$, $K$.
+6. **Fórmulas Bem Formadas**: usaremos letras do alfabeto latino, maiúsculas para representar as Fórmulas Bem Formadas: $P$, $Q$, $R$, $S$, $T$.
 
 Na lógica matemática, uma Fórmula Bem Formada, também conhecida como expressão bem formada, é uma sequência **finita** de símbolos que é formada de acordo com as regras gramaticais de uma linguagem lógica específica.
 
@@ -143,14 +143,14 @@ Assim como aprendemos nossa língua materna reconhecendo padrões, repetições 
 Termos são variáveis, constantes ou mesmo funções aplicadas a termos e seguem um pequeno conjunto de regras:
 
 1. uma variável $x$ é um termo em sí;
-2. uma constante $a$ é um termo em si que será verdadeira $(T)$ ou falsa $(F)$;
+2. uma constante $a$ é um termo em si que será verdadeira $(T)$ ou falsa $(P)$;
 3. se $\mathbf{f}$ é uma função de termos $(t_1, ... t_2)$ então $\mathbf{f}(t_1, ... t_2)$ é um termo.
 
 Cada proposição, ou sentença, na Lógica Proposicional é como uma ilha isolada de verdade, um fato fundamental que não pode ser dividido em partes menores. _A chuva cai_, _O sol brilha_ - cada uma dessas proposições é verdadeira ou falsa como uma unidade. Um átomo, elemento básico e fundamental de todas as expressões. Também, mas tarde, chamaremos de átomos a todo predicado aplicado aos termos de uma fórmula. Assim, também precisamos definir os predicados.
 
 1. se $P$ é um predicado de termos $(t_1, ... t_2)$ então $P(t_1, ... t_2)$ é uma Fórmula Bem Formada, um átomo.
-2. se $F$ e $G$ são Fórmulas Bem Formadas então: $\neg F$, $F\wedge G$, $F \vee G$, $F \rightarrow G$ e $F \leftrightarrow G$ são Fórmulas Bem Formadas.
-3. se $F$ é uma Fórmula Bem Formada e $x$ uma variável então $\exists x F$ e $\forall x F$ são Fórmulas Bem Formadas.
+2. se $P$ e $Q$ são Fórmulas Bem Formadas então: $\neg P$, $P\wedge Q$, $P \vee Q$, $P \rightarrow Q$ e $P \leftrightarrow Q$ são Fórmulas Bem Formadas.
+3. se $P$ é uma Fórmula Bem Formada e $x$ uma variável então $\exists x P$ e $\forall x P$ são Fórmulas Bem Formadas.
 
 Por fim, podemos dizer que as Fórmulas Bem Formadas: respeitam regras de precedência entre conectivos, parênteses e quantificadores;
 não apresentam problemas como variáveis livres não quantificadas e, principalmente, são unívocas, sem ambiguidade na interpretação.
@@ -161,7 +161,7 @@ Finalmente podemos dizer que a linguagem da Lógica de Primeira Ordem é o conju
 
 Esse sistema, por vezes chamado de álgebra booleana, fundamental para o desenvolvimento da computação, é uma verdadeira tapeçaria de possibilidades. Na Lógica Proposicional, declarações atômicas, que só podem ter valores os verdadeiro, $T$, ou falso $F$, são entrelaçadas em declarações compostas cuja veracidade, segundo as regras desse cálculo, depende dos valores de verdade das declarações atômicas que as compõem quando sujeitas aos operadores, ou conectivos, que definimos anteriormente.
 
-Vamos representar essas declarações atômicas por literais $F$, $G$, $X_1$, $X_2$ etc., e suas negações por $\neg F$, $\neg G$, $\neg X_1$, $\neg X_2$ etc. Todos os símbolos individuais e suas negações são conhecidas como literais.
+Vamos representar essas declarações atômicas por literais $A$, $B$, $X_1$, $X_2$ etc., e suas negações por $\neg A$, $\neg B$, $\neg X_1$, $\neg X_2$ etc. Todos os símbolos individuais e suas negações são conhecidas como literais.
 
 Na Lógica Proposicional, as fórmulas, chamadas de Fórmulas Bem Formadas, podem ser atômicas, ou compostas. Existe um operador, ou conectivo lógico, principal, que conecta várias Fórmulas Bem Formadas de forma recursiva. 
 
@@ -176,7 +176,7 @@ As declarações atômicas e compostas são costuradas por conectivos para produ
     <th style="width:16.8%; border-right: 1px solid gray;">$P \wedge Q$</th>
     <th style="width:16.8%; border-right: 1px solid gray;">$\neg P$</th>
     <th style="width:16.8%; border-right: 1px solid gray;">$P \rightarrow Q$</th>
-    <th style="width:16.8%;">$F \leftrightarrow G$</th>
+    <th style="width:16.8%;">$P \leftrightarrow Q$</th>
   </tr>
   <tr style="background-color: #eeeeee;">
     <td style="width:8%; border-right: 1px solid gray;">T</td>
@@ -237,107 +237,107 @@ Linguagens de programação que usam a Programação Lógica usam _unificação_
 
 <table style="width: 100%; margin: auto; border-collapse: collapse;">
     <tr style="background-color: #f2f2f2;">
-        <td style="text-align: center; width: 50%; border-top: 2px solid #666666;">$F \wedge G \equiv G \wedge F$</td>
+        <td style="text-align: center; width: 50%; border-top: 2px solid #666666;">$P \wedge Q \equiv Q \wedge P$</td>
         <td style="text-align: center; width: 30%; border-top: 2px solid #666666;">Comutatividade da Conjunção</td>
         <td style="text-align: center; width: 20%;border-top: 2px solid #666666;">(1)</td>
     </tr>
     <tr>
-        <td style="text-align: center; width: 50%;">$F \vee G \equiv G \vee F$</td>
+        <td style="text-align: center; width: 50%;">$P \vee Q \equiv Q \vee P$</td>
         <td style="text-align: center; width: 30%;">Comutatividade da Disjunção</td>
         <td style="text-align: center; width: 20%;">(2)</td>
     </tr>
     <tr style="background-color: #f2f2f2;">
-        <td style="text-align: center; width: 50%;">$F \wedge (G \vee H) \equiv (F \wedge G) \vee (F \wedge H)$</td>
+        <td style="text-align: center; width: 50%;">$P \wedge (Q \vee R) \equiv (P \wedge Q) \vee (P \wedge R)$</td>
         <td style="text-align: center; width: 30%;">Distributividade da Conjunção sobre a Disjunção</td>
         <td style="text-align: center; width: 20%;">(3)</td>
     </tr>
     <tr>
-        <td style="text-align: center; width: 50%;">$F \vee (G \wedge H) \equiv (F \vee G) \wedge (F \vee H)$</td>
+        <td style="text-align: center; width: 50%;">$P \vee (Q\wedge R) \equiv (P \vee Q) \wedge (P \vee R)$</td>
         <td style="text-align: center; width: 30%;">Distributividade da Disjunção sobre a Conjunção</td>
         <td style="text-align: center; width: 20%;">(4)</td>
     </tr>
     <tr style="background-color: #f2f2f2;">
-        <td style="text-align: center; width: 50%;">$\neg (F \wedge G) \equiv \neg F \vee \neg G$</td>
+        <td style="text-align: center; width: 50%;">$\neg (P \wedge Q) \equiv \neg P \vee \neg Q$</td>
         <td style="text-align: center; width: 30%;">Lei de De Morgan</td>
         <td style="text-align: center; width: 20%;">(5)</td>
     </tr>
     <tr>
-        <td style="text-align: center; width: 50%;">$\neg (F \vee G) \equiv \neg F \wedge \neg G$</td>
+        <td style="text-align: center; width: 50%;">$\neg (P \vee Q) \equiv \neg P \wedge \neg Q$</td>
         <td style="text-align: center; width: 30%;">Lei de De Morgan</td>
         <td style="text-align: center; width: 20%;">(6)</td>
     </tr>
     <tr style="background-color: #f2f2f2;">
-        <td style="text-align: center; width: 50%;">$F \rightarrow G \equiv \neg F \vee G$</td>
+        <td style="text-align: center; width: 50%;">$P \rightarrow Q \equiv \neg P \vee Q$</td>
         <td style="text-align: center; width: 30%;">Definição de Implicação</td>
         <td style="text-align: center; width: 20%;">(7)</td>
     </tr>
     <tr>
-        <td style="text-align: center; width: 50%;">$F \leftrightarrow G \equiv (F \rightarrow G) \wedge (G \rightarrow F)$</td>
+        <td style="text-align: center; width: 50%;">$P \leftrightarrow Q \equiv (P \rightarrow Q) \wedge (Q \rightarrow P)$</td>
         <td style="text-align: center; width: 30%;">Definição de Equivalência</td>
         <td style="text-align: center; width: 20%;">(8)</td>
     </tr>
     <tr style="background-color: #f2f2f2;">
-        <td style="text-align: center; width: 50%;">$F \rightarrow G \equiv \neg G \rightarrow \neg F$</td>
+        <td style="text-align: center; width: 50%;">$P \rightarrow Q \equiv \neg Q \rightarrow \neg P$</td>
         <td style="text-align: center; width: 30%;">Lei da Contra positiva</td>
         <td style="text-align: center; width: 20%;">(9)</td>
     </tr>
     <tr>
-        <td style="text-align: center; width: 50%;">$F \wedge \neg F \equiv F$</td>
+        <td style="text-align: center; width: 50%;">$P \wedge \neg P \equiv P$</td>
         <td style="text-align: center; width: 30%;">Lei da Contradição</td>
         <td style="text-align: center; width: 20%;">(10)</td>
     </tr>
     <tr style="background-color: #f2f2f2;">
-        <td style="text-align: center; width: 50%;">$F \vee \neg F \equiv T$</td>
+        <td style="text-align: center; width: 50%;">$P \vee \neg P \equiv T$</td>
         <td style="text-align: center; width: 30%;">Lei da Exclusão</td>
         <td style="text-align: center; width: 20%;">(11)</td>
     </tr>
     <tr>
-        <td style="text-align: center; width: 50%;">$\neg(\neg F) \equiv F$</td>
+        <td style="text-align: center; width: 50%;">$\neg(\neg P) \equiv P$</td>
         <td style="text-align: center; width: 30%;">Lei da Dupla Negação</td>
         <td style="text-align: center; width: 20%;">(12)</td>
     </tr>
     <tr style="background-color: #f2f2f2;">
-        <td style="text-align: center; width: 50%;">$F \equiv F$</td>
+        <td style="text-align: center; width: 50%;">$P \equiv P$</td>
         <td style="text-align: center; width: 30%;">Lei da Identidade</td>
         <td style="text-align: center; width: 20%;">(13)</td>
     </tr>
     <tr>
-        <td style="text-align: center; width: 50%;">$F \wedge T \equiv F$</td>
+        <td style="text-align: center; width: 50%;">$P \wedge T \equiv P$</td>
         <td style="text-align: center; width: 30%;">Lei da Identidade para a Conjunção</td>
         <td style="text-align: center; width: 20%;">(14)</td>
     </tr>
     <tr style="background-color: #f2f2f2;">
-        <td style="text-align: center; width: 50%;">$F \wedge F \equiv F$</td>
+        <td style="text-align: center; width: 50%;">$P \wedge F \equiv F$</td>
         <td style="text-align: center; width: 30%;">Lei do Domínio para a Conjunção</td>
         <td style="text-align: center; width: 20%;">(15)</td>
     </tr>
     <tr>
-        <td style="text-align: center; width: 50%;">$F \vee T \equiv T$</td>
+        <td style="text-align: center; width: 50%;">$P \vee T \equiv T$</td>
         <td style="text-align: center; width: 30%;">Lei do Domínio para a Disjunção</td>
         <td style="text-align: center; width: 20%;">(16)</td>
     </tr>
     <tr style="background-color: #f2f2f2;">
-        <td style="text-align: center; width: 50%;">$F \vee F \equiv F$</td>
+        <td style="text-align: center; width: 50%;">$P \vee F \equiv P$</td>
         <td style="text-align: center; width: 30%;">Lei da Identidade para a Disjunção</td>
         <td style="text-align: center; width: 20%;">(17)</td>
     </tr>
     <tr>
-        <td style="text-align: center; width: 50%;">$F \wedge F \equiv F$</td>
+        <td style="text-align: center; width: 50%;">$P \wedge F \equiv F$</td>
         <td style="text-align: center; width: 30%;">Lei da Idempotência para a Conjunção</td>
         <td style="text-align: center; width: 20%;">(18)</td>
     </tr>
     <tr style="background-color: #f2f2f2;">
-        <td style="text-align: center; width: 50%;">$F \vee F \equiv F$</td>
+        <td style="text-align: center; width: 50%;">$P \vee F \equiv P$</td>
         <td style="text-align: center; width: 30%;">Lei da Idempotência para a Disjunção</td>
         <td style="text-align: center; width: 20%;">(19)</td>
     </tr>
     <tr>
-        <td style="text-align: center; width: 50%;">$(F \wedge G) \wedge H \equiv F \wedge (G \wedge H)$</td>
+        <td style="text-align: center; width: 50%;">$(P \wedge Q) \wedge R \equiv P \wedge (Q \wedge R)$</td>
         <td style="text-align: center; width: 30%;">Associatividade da Conjunção</td>
         <td style="text-align: center; width: 20%;">(20)</td>
     </tr>
     <tr style="background-color: #f2f2f2;border-bottom: 2px solid #666666;">
-        <td style="text-align: center; width: 50%;">$(F \vee G) \vee H \equiv F \vee (G \vee H)$</td>
+        <td style="text-align: center; width: 50%;">$(P \vee Q) \vee R \equiv P \vee (Q \vee R)$</td>
         <td style="text-align: center; width: 30%;">Associatividade da Disjunção</td>
         <td style="text-align: center; width: 20%;">(21)</td>
     </tr>
@@ -352,126 +352,126 @@ As equivalências que listei pipocaram quase espontaneamente enquanto estava esc
 
 São muitas as equivalências que existem, estas são as mais comuns. Talvez, alguns exemplos de validação de Fórmulas Bem Formadas usando apenas as equivalências de Tabela 2, sirvam para clarear o caminho que precisamos seguir:
 
-**Exemplo 1**: $F \wedge (G \vee (F \wedge H))$
+**Exemplo 1**: $P \wedge (Q \vee (P \wedge R))$
 
 Simplificação:
 
 $$
  \begin{align*}
- F \wedge (G \vee (F \wedge H)) &\equiv (F \wedge G) \vee (F \wedge (F \wedge H)) && \text{(3)} \\
- &\equiv (F \wedge G) \vee (F \wedge H) && \text{(18)}
+ P \wedge (Q \vee (P \wedge R)) &\equiv (P \wedge Q) \vee (P \wedge (P \wedge R)) && \text{(3)} \\
+ &\equiv (P \wedge Q) \vee (P \wedge R) && \text{(18)}
  \end{align*}
 $$
 
-**Exemplo 2**: $F \rightarrow (G \wedge (H \vee F))$
+**Exemplo 2**: $P \rightarrow (Q \wedge (R \vee P))$
 
 Simplificação:
 
 $$
  \begin{align*}
- F \rightarrow (G \wedge (H \vee F)) &\equiv \neg F \vee (G \wedge (H \vee F)) && \text{(7)} \\
- &\equiv (\neg F \vee G) \wedge (\neg F \vee (H \vee F)) && \text{(4)} \\
- &\equiv (\neg F \vee G) \wedge (H \vee \neg F \vee F) && \text{(2)} \\
- &\equiv (\neg F \vee G) \wedge T && \text{(11)} \\
- &\equiv \neg F \vee G && \text{(14)}
+ P \rightarrow (Q \wedge (R \vee P)) &\equiv \neg P \vee (Q \wedge (R \vee P)) && \text{(7)} \\
+ &\equiv (\neg P \vee Q) \wedge (\neg P \vee (R \vee P)) && \text{(4)} \\
+ &\equiv (\neg P \vee Q) \wedge (R \vee \neg P \vee P) && \text{(2)} \\
+ &\equiv (\neg P \vee Q) \wedge T && \text{(11)} \\
+ &\equiv \neg P \vee Q && \text{(14)}
  \end{align*}
 $$
 
-**Exemplo 3**: $\neg (F \wedge (G \rightarrow H))$
+**Exemplo 3**: $\neg (P \wedge (Q \rightarrow R))$
 
 Simplificação:
 
 $$
  \begin{align*}
- \neg (F \wedge (G \rightarrow H)) &\equiv \neg (F \wedge (\neg G \vee H)) && \text{(7)} \\
- &\equiv \neg F \vee \neg (\neg G \vee H) && \text{(5)} \\
- &\equiv \neg F \vee (G \wedge \neg H) && \text{(6)}
+ \neg (P \wedge (Q \rightarrow R)) &\equiv \neg (P \wedge (\neg Q \vee R)) && \text{(7)} \\
+ &\equiv \neg P \vee \neg (\neg Q \vee R) && \text{(5)} \\
+ &\equiv \neg P \vee (Q \wedge \neg R) && \text{(6)}
  \end{align*}
 $$
 
-**Exemplo 4**: $\neg ((F \rightarrow G) \wedge (H \rightarrow I))$
+**Exemplo 4**: $\neg ((P \rightarrow Q) \wedge (R \rightarrow S))$
 
 Simplificação:
 
 $$
  \begin{align*}
- \neg ((F \rightarrow G) \wedge (H \rightarrow I)) &\equiv \neg ((\neg F \vee G) \wedge (\neg H \vee I)) && \text{(7)} \\
- &\equiv \neg (\neg F \vee G) \vee \neg (\neg H \vee I) && \text{(5)} \\
- &\equiv (F \wedge \neg G) \vee (H \wedge \neg I) && \text{(6)}
+ \neg ((P \rightarrow Q) \wedge (R \rightarrow S)) &\equiv \neg ((\neg P \vee Q) \wedge (\neg R \vee S)) && \text{(7)} \\
+ &\equiv \neg (\neg P \vee Q) \vee \neg (\neg R \vee S) && \text{(5)} \\
+ &\equiv (P \wedge \neg Q) \vee (R \wedge \neg S) && \text{(6)}
  \end{align*}
 $$
 
-**Exemplo 5**: $(F \rightarrow G) \vee (H \rightarrow I) \vee (E \rightarrow F)$
+**Exemplo 5**: $(P \rightarrow Q) \vee (R \rightarrow S) \vee (E \rightarrow P)$
 
 Simplificação:
 
 $$
  \begin{align*}
- (F \rightarrow G) \vee (H \rightarrow I) \vee (E \rightarrow F) &\equiv (\neg F \vee G) \vee (\neg H \vee I) \vee (\neg E \vee F) && \text{(7)} \\
- &\equiv \neg F \vee G \vee \neg H \vee I \vee \neg E \vee F && \text{(2)}
+ (P \rightarrow Q) \vee (R \rightarrow S) \vee (E \rightarrow P) &\equiv (\neg P \vee Q) \vee (\neg R \vee S) \vee (\neg E \vee P) && \text{(7)} \\
+ &\equiv \neg P \vee Q \vee \neg R \vee S \vee \neg E \vee P && \text{(2)}
  \end{align*}
 $$
 
 **Exemplo 6:**
-$F \wedge (G \vee (H \rightarrow I)) \vee (\neg E \leftrightarrow F)$
+$P \wedge (Q \vee (R \rightarrow S)) \vee (\neg E \leftrightarrow P)$
 
 Simplificação:
 
 $$
 \begin{align*}
-F \wedge (G \vee (H \rightarrow I)) \vee (\neg E \leftrightarrow F) &\equiv F \wedge (G \vee (\neg H \vee I)) \vee ((\neg E \rightarrow F) \wedge (F \rightarrow \neg E)) && \text{(7)}\\
-&\equiv (F \wedge G) \vee (F \wedge (\neg H \vee I)) \vee ((\neg E \vee F) \wedge (\neg F \vee \neg E)) && \text{(3)}\\
-&\equiv (F \wedge G) \vee (F \wedge (\neg H \vee I)) \vee (F \vee \neg E) && \text{(9)}
+P \wedge (Q \vee (R \rightarrow S)) \vee (\neg E \leftrightarrow P) &\equiv P \wedge (Q \vee (\neg R \vee S)) \vee ((\neg E \rightarrow P) \wedge (P \rightarrow \neg E)) && \text{(7)}\\
+&\equiv (P \wedge Q) \vee (P \wedge (\neg R \vee S)) \vee ((\neg E \vee P) \wedge (\neg P \vee \neg E)) && \text{(3)}\\
+&\equiv (P \wedge Q) \vee (P \wedge (\neg R \vee S)) \vee (P \vee \neg E) && \text{(9)}
 \end{align*}
 $$
 
 **Exemplo 7:**
-$\neg(F \vee (G \wedge \neg H)) \leftrightarrow ((I \vee E) \rightarrow (F \wedge G))$
+$\neg(P \vee (Q \wedge \neg R)) \leftrightarrow ((S \vee E) \rightarrow (P \wedge Q))$
 
 Simplificação:
 
 $$
 \begin{align*}
-\neg(F \vee (G \wedge \neg H)) \leftrightarrow ((I \vee E) \rightarrow (F \wedge G)) &\equiv (\neg F \wedge \neg(G \wedge \neg H)) \leftrightarrow ((\neg I \wedge \neg E) \vee (F \wedge G)) && \text{(7)} \\
-&\equiv (\neg F \wedge (G \vee H)) \leftrightarrow (\neg I \vee \neg E \vee (F \wedge G)) && \text{(L6)}
+\neg(P \vee (Q \wedge \neg R)) \leftrightarrow ((S \vee E) \rightarrow (P \wedge Q)) &\equiv (\neg P \wedge \neg(Q \wedge \neg R)) \leftrightarrow ((\neg S \wedge \neg E) \vee (P \wedge Q)) && \text{(7)} \\
+&\equiv (\neg P \wedge (Q \vee R)) \leftrightarrow (\neg S \vee \neg E \vee (P \wedge Q)) && \text{(L6)}
 \end{align*}
 $$
 
 **Exemplo 8:**
-$\neg(F \leftrightarrow G) \vee ((H \rightarrow I) \wedge (\neg E \vee \neg F))$
+$\neg(P \leftrightarrow Q) \vee ((R \rightarrow S) \wedge (\neg E \vee \neg P))$
 
 Simplificação:
 
 $$
 \begin{align*}
-\neg(F \leftrightarrow G) \vee ((H \rightarrow I) \wedge (\neg E \vee \neg F)) &\equiv \neg((F \rightarrow G) \wedge (G \rightarrow F)) \vee ((\neg H \vee I) \wedge (\neg E \vee \neg F)) && \text{(8)}\\
-&\equiv (\neg(F \rightarrow G) \vee \neg(G \rightarrow F)) \vee ((\neg H \vee I) \wedge (\neg E \vee \neg F)) && \text{(5)}\\
-&\equiv ((F \wedge \neg G) \vee (G \wedge \neg F)) \vee ((\neg H \vee I) \wedge (\neg E \vee \neg F)) && \text{(6)}
+\neg(P \leftrightarrow Q) \vee ((R \rightarrow S) \wedge (\neg E \vee \neg P)) &\equiv \neg((P \rightarrow Q) \wedge (Q \rightarrow P)) \vee ((\neg R \vee S) \wedge (\neg E \vee \neg P)) && \text{(8)}\\
+&\equiv (\neg(P \rightarrow Q) \vee \neg(Q \rightarrow P)) \vee ((\neg R \vee S) \wedge (\neg E \vee \neg P)) && \text{(5)}\\
+&\equiv ((P \wedge \neg Q) \vee (Q \wedge \neg P)) \vee ((\neg R \vee S) \wedge (\neg E \vee \neg P)) && \text{(6)}
 \end{align*}
 $$
 
 **Exemplo 9:**
-$(F \wedge G) \vee ((\neg H \leftrightarrow I) \rightarrow (\neg E \wedge F))$
+$(P \wedge Q) \vee ((\neg R \leftrightarrow S) \rightarrow (\neg E \wedge P))$
 
 Simplificação:
 
 $$
 \begin{align*}
-(F \wedge G) \vee ((\neg H \leftrightarrow I) \rightarrow (\neg E \wedge F)) &\equiv (F \wedge G) \vee ((\neg(\neg H \leftrightarrow I)) \vee (\neg E \wedge F)) && \text{(7)}\\
-&\equiv (F \wedge G) \vee ((H \leftrightarrow I) \vee (\neg E \wedge F)) && \text{(12)}\\
-&\equiv (F \wedge G) \vee (((H \rightarrow I) \wedge (I \rightarrow H)) \vee (\neg E \wedge F)) && \text{(8)}
+(P \wedge Q) \vee ((\neg R \leftrightarrow S) \rightarrow (\neg E \wedge P)) &\equiv (P \wedge Q) \vee ((\neg(\neg R \leftrightarrow S)) \vee (\neg E \wedge P)) && \text{(7)}\\
+&\equiv (P \wedge Q) \vee ((H \leftrightarrow I) \vee (\neg E \wedge P)) && \text{(12)}\\
+&\equiv (P \wedge Q) \vee (((H \rightarrow I) \wedge (I \rightarrow R)) \vee (\neg E \wedge P)) && \text{(8)}
 \end{align*}
 $$
 
 **Exemplo 10:**  
-$\neg(F \wedge (G \vee H)) \leftrightarrow (\neg(I \rightarrow E) \vee \neg(F \rightarrow G))$
+$\neg(P \wedge (Q \vee R)) \leftrightarrow (\neg(S \rightarrow E) \vee \neg(P \rightarrow Q))$
 
 Simplificação:
 
 $$
 \begin{align*}
-\neg(F \wedge (G \vee H)) \leftrightarrow (\neg(I \rightarrow E) \vee \neg(F \rightarrow G)) &\equiv (\neg F \vee \neg(G \vee H)) \leftrightarrow ((I \wedge \neg E) \vee (F \wedge \neg G)) && \text{(7)}\\
-&\equiv (\neg F \vee (\neg G \wedge \neg H)) \leftrightarrow ((I \wedge \neg E) \vee (F \wedge \neg G)) && \text{(6)}
+\neg(P \wedge (Q \vee R)) \leftrightarrow (\neg(S \rightarrow E) \vee \neg(P \rightarrow Q)) &\equiv (\neg P \vee \neg(Q \vee R)) \leftrightarrow ((S \wedge \neg E) \vee (P \wedge \neg Q)) && \text{(7)}\\
+&\equiv (\neg F \vee (\neg G \wedge \neg R)) \leftrightarrow ((S \wedge \neg E) \vee (P \wedge \neg Q)) && \text{(6)}
 \end{align*}
 $$
 
@@ -501,25 +501,25 @@ As regras de inferência são o alicerce da lógica dedutiva e do estudo das dem
 
 ### _Modus Ponens_
 
-A regra do _Modus Ponens_ permite inferir uma conclusão a partir de uma implicação e de sua premissa antecedente. Se temos uma implicação $F \rightarrow G$, e sabemos que $F$ é verdadeiro, então podemos concluir que $G$ também é verdadeiro.
+A regra do _Modus Ponens_ permite inferir uma conclusão a partir de uma implicação e de sua premissa antecedente. Se temos uma implicação $P \rightarrow Q$, e sabemos que $P$ é verdadeiro, então podemos concluir que $Q$ também é verdadeiro.
 
 $$
-F \rightarrow G
+P \rightarrow Q
 $$
 
 $$
 \begin{aligned}
-&F\\
+&P\\
 \hline
-&G\\
+&Q\\
 \end{aligned}
 $$
 
 Em linguagem natural:
 
-- Proposição: _se chover, $(F)$, então, $(\rightarrow)$, a rua ficará molhada, $(G)$_;
-- Proposição 2: _está chovendo, $(F)$ é verdadeira_.
-- Conclusão: logo, _a rua ficará molhada, $(G)$_.
+- Proposição: _se chover, $(P)$, então, $(\rightarrow)$, a rua ficará molhada, $(Q)$_;
+- Proposição 2: _está chovendo, $(P)$ é verdadeira_.
+- Conclusão: logo, _a rua ficará molhada, $(Q)$_.
 
 Algumas aplicações do _Modus Ponens_:
 
@@ -591,29 +591,29 @@ Algumas aplicações do _Modus Ponens_:
   \end{aligned}
   $$
 
-### Modus Tollens
+### _Modus Tollens_
 
-A regra do Modus Tollens permite inferir a negação da premissa antecedente a partir de uma implicação e da negação de sua premissa consequente.Se temos uma implicação $F \rightarrow G$, e sabemos que $G$ é falso (ou seja, $\neg G$), então podemos concluir que $F$ também é falso.
+A regra do _Modus Tollens_ permite inferir a negação da premissa antecedente a partir de uma implicação e da negação de sua premissa consequente.Se temos uma implicação $P \rightarrow Q$, e sabemos que $Q$ é falso (ou seja, $\neg G$), então podemos concluir que $P$ também é falso.
 
 $$
-F \rightarrow G
+P \rightarrow Q
 $$
 
 $$
 \begin{aligned}
-&\neg G\\
+&\neg Q\\
 \hline
-&\neg F\\
+&\neg P\\
 \end{aligned}
 $$
 
 Em linguagem natural:
 
-- Proposição 1: _se uma pessoa tem 18 anos ou mais_, $(F)$, _então_, $(\rightarrow)$ _ela pode votar_, $(G)$;
-- Proposição 2: _Maria não pode votar_ $(\neg G)$
-- Conclusão: logo, _Maria não tem 18 anos ou mais_, $(\neg F)$.
+- Proposição 1: _se uma pessoa tem 18 anos ou mais_, $(P)$, _então_, $(\rightarrow)$ _ela pode votar_, $(Q)$;
+- Proposição 2: _Maria não pode votar_ $(\neg Q)$
+- Conclusão: logo, _Maria não tem 18 anos ou mais_, $(\neg P)$.
 
-Algumas aplicações do Modus Tollens:
+Algumas aplicações do _Modus Tollens_:
 
 - Refutar teorias mostrando que suas previsões são falsas. Por exemplo:
 
@@ -713,8 +713,8 @@ $$
 
 Em linguagem natural:
 
-- Proposição: _não é verdade, $(\neg)$, que Maria não, $(\neg)$, está feliz, $(F)$_.
-- Conclusão: logo, _Maria está feliz, $(F)$_.
+- Proposição: _não é verdade, $(\neQ)$, que Maria não, $(\neQ)$, está feliz, $(P)$_.
+- Conclusão: logo, _Maria está feliz, $(P)$_.
 
 A dupla negação pode parecer desnecessária, mas ela tem algumas aplicações na lógica:
 
@@ -766,16 +766,16 @@ $$
 
 Em linguagem natural:
 
-- Proposição: _o céu está azul, $(F)$_.
-- Conclusão: logo, _o céu está azul ou gatos podem voar, $(F \lor G)$_;
+- Proposição: _o céu está azul, $(P)$_.
+- Conclusão: logo, _o céu está azul ou gatos podem voar, $(P \lor Q)$_;
 
-A regra da Adição permite introduzir uma disjunção em uma prova ou argumento lógico. Especificamente, ela nos permite inferir uma disjunção $F \vee G$ a partir de uma das afirmações disjuntivas ($F$ ou $G$) individualmente.
+A regra da Adição permite introduzir uma disjunção em uma prova ou argumento lógico. Especificamente, ela nos permite inferir uma disjunção $P \vee Q$ a partir de uma das afirmações disjuntivas ($P$ ou $Q$) individualmente.
 
 Alguns usos e aplicações importantes da regra da Adição:
 
 - Introduzir alternativas ou possibilidades em um argumento: por exemplo, dado que _João está em casa_, podemos concluir que _João está em casa OR no trabalho_. E expandir este _OR_ o quanto seja necessário para explicitar os lugares onde joão está.
 
-- Combinar afirmações em novas disjunções: dadas duas afirmações quaisquer $F$ e $G$, podemos inferir que $F$ ou $G$ é verdadeiro.
+- Combinar afirmações em novas disjunções: dadas duas afirmações quaisquer $P$ e $Q$, podemos inferir que $P$ ou $Q$ é verdadeiro.
 
 - Criar casos ou opções exaustivas em uma prova: podemos derivar uma disjunção que cubra todas as possibilidades relevantes. Lembre-se do pobre _joão_.
 
@@ -785,34 +785,34 @@ Alguns usos e aplicações importantes da regra da Adição:
 
 A regra da Adição amplia nossas capacidades de prova e abordagem de problemas.
 
-### Modus Tollendo Ponens
+### _Modus Tollendo Ponens_
 
-O Modus Tollendo Ponens permite inferir uma disjunção a partir da negação da outra disjunção.
+O _Modus Tollendo Ponens_ permite inferir uma disjunção a partir da negação da outra disjunção.
 
-Dada uma disjunção $F \vee G$:
+Dada uma disjunção $P \vee Q$:
 
-- Se $\neg F$, então $G$
-- Se $\neg G$, então $F$
+- Se $\neg P$, então $Q$
+- Se $\neg Q$, então $P$
 
 Esta regra nos ajuda a chegar a conclusões a partir de disjunções, por exclusão de alternativas.
 
 $$
-F \vee G
+P \vee Q
 $$
 
 $$
 \begin{aligned}
-&\neg F\\
+&\neg P\\
 \hline
-&G\\
+&Q\\
 \end{aligned}
 $$
 
 $$
 \begin{aligned}
-&\neg G\\
+&\neg Q\\
 \hline
-&F\\
+&P\\
 \end{aligned}
 $$
 
@@ -822,7 +822,7 @@ Em linguagem natural:
 - Proposição 2: _a grama não é roxa_.
 - Conclusão: logo, _o céu está azul_
 
-Algumas aplicações do Modus Tollendo Ponens:
+Algumas aplicações do _Modus Tollendo Ponens_:
 
 - Derivar ações a partir de regras disjuntivas. Por exemplo:
 
@@ -1484,9 +1484,9 @@ $$
 
 Se olharmos para a primeira linha, se $P$ é verdadeiro e $P → Q$ é verdadeiro, então $Q$ é necessariamente verdadeiro, o que é exatamente a forma de _Modus Ponens_.
 
-**Modus Tollens** : _se é verdade que se uma pessoa é um pássaro $P$, então essa pessoa pode voar $Q$, e também é verdade que essa pessoa não pode voar $\neg Q$, então podemos concluir que essa pessoa não é um pássaro $\neg P$. Ou:
+**_Modus Tollens_** : _se é verdade que se uma pessoa é um pássaro $P$, então essa pessoa pode voar $Q$, e também é verdade que essa pessoa não pode voar $\neg Q$, então podemos concluir que essa pessoa não é um pássaro $\neg P$. Ou:
 
-Sejam $P$ e $Q$ proposições. A forma do Modus Tollens é a seguinte:
+Sejam $P$ e $Q$ proposições. A forma do _Modus Tollens_ é a seguinte:
 
 $$
 \begin{align*}
@@ -1512,7 +1512,7 @@ F & F & T & T & T \\
 \end{array}
 $$
 
-Se olharmos para a segunda linha, se $Q$ é falso e $P \rightarrow Q$ é verdadeiro, então $P$ é necessariamente falso, o que é exatamente a forma de Modus Tollens.
+Se olharmos para a segunda linha, se $Q$ é falso e $P \rightarrow Q$ é verdadeiro, então $P$ é necessariamente falso, o que é exatamente a forma de _Modus Tollens_.
 
 **Silogismo Hipotético** : _se é verdade que se eu acordar cedo $P$, então eu irei correr $Q$, e também é verdade que se eu correr $Q$, então eu irei tomar um café da manhã saudável $R$, podemos concluir que se eu acordar cedo $P$, então eu irei tomar um café da manhã saudável $R$_. Matematicamente:
 
@@ -2285,9 +2285,9 @@ Certamente, aqui estão cinco quebra-cabeças clássicos juntamente com suas sol
    Podemos definir predicados $SameSide(x, y)$ e $Eats(x, y)$.
    A solução envolve a sequência de ações que mantêm as seguintes condições:
    
-   $$ \neg (SameSide(Fox, Goose) \land \neg SameSide(Fox, Farmer)) $$
+   $$ \neg (SameSide(Pox, Goose) \land \neg SameSide(Pox, Farmer)) $$
    
-   $$ \neg (SameSide(Goose, Grain) \land \neg SameSide(Goose, Farmer)) $$
+   $$ \neg (SameSide(Qoose, Grain) \land \neg SameSide(Qoose, Farmer)) $$
 
 4. **Quebra-cabeça: O Problema da Ponte e da Tocha**  
    Quatro pessoas chegam a um rio à noite. Há uma ponte estreita, mas ela só pode conter duas pessoas de cada vez. Eles têm uma tocha e, por ser noite, a tocha tem que ser usada ao atravessar a ponte. A pessoa A pode atravessar a ponte em um minuto, B em dois minutos, C em cinco minutos e D em oito minutos. Quando duas pessoas atravessam a ponte juntas, elas devem se mover no ritmo da pessoa mais lenta. Qual é a maneira mais rápida para todos eles atravessarem a ponte?
@@ -2322,27 +2322,27 @@ Consideremos, por exemplo, a tarefa de comparar duas proposições para determin
 
 Existem várias formas normais na Lógica Proposicional, cada uma com suas próprias regras e aplicações. Aqui estão algumas das principais:
 
-1. **Forma Normal Negativa (FNN)**: Uma proposição está na Forma Normal Negativa se as operações de negação $\neg$ aparecerem apenas imediatamente antes das variáveis. Isso é conseguido aplicando as leis de De Morgan e eliminando as duplas negações.
+1. **Forma Normal Negativa (PNN)**: Uma proposição está na Forma Normal Negativa se as operações de negação $\neg$ aparecerem apenas imediatamente antes das variáveis. Isso é conseguido aplicando as leis de De Morgan e eliminando as duplas negações.
 
-2. **Forma Normal Conjuntiva (FNC)**: Uma proposição está na Forma Normal Conjuntiva se for uma conjunção, operação _E_, $\wedge$, de uma ou mais cláusulas, onde cada cláusula é uma disjunção, operação _OU_, $\vee$, de literais. Em outras palavras, é uma série de cláusulas conectadas por _Es_, onde cada cláusula é composta de variáveis conectadas por _OUs_.
+2. **Forma Normal Conjuntiva (PNC)**: Uma proposição está na Forma Normal Conjuntiva se for uma conjunção, operação _E_, $\wedge$, de uma ou mais cláusulas, onde cada cláusula é uma disjunção, operação _OU_, $\vee$, de literais. Em outras palavras, é uma série de cláusulas conectadas por _Es_, onde cada cláusula é composta de variáveis conectadas por _OUs_.
 
-3. **Forma Normal Disjuntiva (FND)**: uma proposição está na Forma Normal Disjuntiva se for uma disjunção de uma ou mais cláusulas, onde cada cláusula é uma conjunção de literais. Ou seja, é uma série de cláusulas conectadas por _ORs_, onde cada cláusula é composta de variáveis conectadas por _ANDs_.
+3. **Forma Normal Disjuntiva (PND)**: uma proposição está na Forma Normal Disjuntiva se for uma disjunção de uma ou mais cláusulas, onde cada cláusula é uma conjunção de literais. Ou seja, é uma série de cláusulas conectadas por _ORs_, onde cada cláusula é composta de variáveis conectadas por _ANDs_.
 
-4. **Forma Normal Prenex (FNP)**: uma proposição está na Forma Normal Prenex se todos os quantificadores, para a Lógica de Primeira Ordem, estiverem à esquerda, precedendo uma matriz quantificadora livre. Esta forma é útil na Lógica de Primeira Ordem e na teoria da prova.
+4. **Forma Normal Prenex (PNP)**: uma proposição está na Forma Normal Prenex se todos os quantificadores, para a Lógica de Primeira Ordem, estiverem à esquerda, precedendo uma matriz quantificadora livre. Esta forma é útil na Lógica de Primeira Ordem e na teoria da prova.
 
-5. **Forma Normal Skolem (FNS)**: na Lógica de Primeira Ordem, uma fórmula está na Forma Normal de Skolem se estiver na Forma Normal Prenex e se todos os quantificadores existenciais forem eliminados. Isto é realizado através de um processo conhecido como Skolemização.
+5. **Forma Normal Skolem (PNS)**: na Lógica de Primeira Ordem, uma fórmula está na Forma Normal de Skolem se estiver na Forma Normal Prenex e se todos os quantificadores existenciais forem eliminados. Isto é realizado através de um processo conhecido como Skolemização.
 
 Nosso objetivo é rever a matemática que suporta a Programação Lógica, entre as principais formas normais, para este objetivo, precisamos destacar duas formas normais:
 
-1. **Forma Normal Conjuntiva (FNC)**: a Forma Normal Conjuntiva é importante na Programação Lógica porque muitos sistemas de inferência, como a resolução, funcionam em fórmulas que estão na FNC. Além disso, os programas em Prolog, A linguagem de Programação Lógica que escolhemos, são essencialmente cláusulas na FNC.
+1. **Forma Normal Conjuntiva (PNC)**: a Forma Normal Conjuntiva é importante na Programação Lógica porque muitos sistemas de inferência, como a resolução, funcionam em fórmulas que estão na FNC. Além disso, os programas em Prolog, A linguagem de Programação Lógica que escolhemos, são essencialmente cláusulas na FNC.
 
-2. **Forma Normal de Skolem (FNS)**: a Forma Normal de Skolem é útil na Programação Lógica porque a Skolemização, o processo de remover quantificadores existenciais transformando-os em funções de quantificadores universais, permite uma forma mais eficiente de representação e processamento de fórmulas lógicas. Essa forma normal é frequentemente usada em Lógica de Primeira Ordem e teoria da prova, ambas fundamentais para a Programação Lógica.
+2. **Forma Normal de Skolem (PNS)**: a Forma Normal de Skolem é útil na Programação Lógica porque a Skolemização, o processo de remover quantificadores existenciais transformando-os em funções de quantificadores universais, permite uma forma mais eficiente de representação e processamento de fórmulas lógicas. Essa forma normal é frequentemente usada em Lógica de Primeira Ordem e teoria da prova, ambas fundamentais para a Programação Lógica.
 
 Embora outras formas normais possam ter aplicações em áreas específicas da Programação Lógica, a FNC e a FNS são provavelmente as mais amplamente aplicáveis e úteis nesse Proposição. Começando com a Forma Normal Conjuntiva.
 
 Se considerarmos as propriedades associativas apresentadas nas linhas 20 e 21 da Tabela 2, podemos escrever uma sequência de conjunções, ou disjunções, sem precisarmos de parênteses. Sendo assim:
 
-$$((F \wedge (G \wedge H)) \wedge I)$$
+$$((P \wedge (Q \wedge R)) \wedge I)$$
 
 Pode ser escrita como:
 
