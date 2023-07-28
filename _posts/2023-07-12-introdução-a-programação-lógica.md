@@ -713,7 +713,7 @@ $$
 
 Em linguagem natural:
 
-- Proposição: _não é verdade, $(\neQ)$, que Maria não, $(\neQ)$, está feliz, $(P)$_.
+- Proposição: _não é verdade, $(\neg Q)$, que Maria não, $(\neg Q)$, está feliz, $(P)$_.
 - Conclusão: logo, _Maria está feliz, $(P)$_.
 
 A dupla negação pode parecer desnecessária, mas ela tem algumas aplicações na lógica:
