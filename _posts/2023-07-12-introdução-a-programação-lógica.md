@@ -132,7 +132,7 @@ $$\neg, \forall, \exists, \wedge, \vee, \rightarrow, \leftrightarrow$$
 
 Dando maior precedência a $\neg$ e a menor a $\leftrightarrow$.
 
-O uso dos parenteses e da ordem de precedência, com parcimônia, muita parcimônia, permite que possamos escrever $(\forall x(\exists y (\mathbf{p}(x,y)\rightarrow \mathbf{q}(x))))$ ou $\forall x \exists y (\mathbf{p}(x,y)\rightarrow \mathbf{q}(x))$ que são a mesma Fórmula Bem Formada. Escolha a opção que seja mais fácil de ler e entender.
+O uso os parenteses e da ordem de precedência requer parcimônia, muita parcimônia. Os parênteses permitem que possamos escrever $(\forall x(\exists y (\mathbf{p}(x,y)\rightarrow \mathbf{q}(x))))$ ou $\forall x \exists y (\mathbf{p}(x,y)\rightarrow \mathbf{q}(x))$ que são a mesma Fórmula Bem Formada. Escolha a opção que seja mais fácil de ler e entender.
 
 Nesta linguagem cada sentença, ou preposição, deve ser verdadeira ou falsa, nunca verdadeira e falsa ao mesmo tempo e nada diferente de verdadeiro ou falso.
 
@@ -142,18 +142,17 @@ Assim como aprendemos nossa língua materna reconhecendo padrões, repetições 
 
 Termos são variáveis, constantes ou mesmo funções aplicadas a termos e seguem um pequeno conjunto de regras:
 
-1. uma variável $x$ é um termo em sí;
+1. uma variável $x$ é um termo em si;
 2. uma constante $a$ é um termo em si que será verdadeira $(T)$ ou falsa $(P)$;
-3. se $\mathbf{f}$ é uma função de termos $(t_1, ... t_2)$ então $\mathbf{f}(t_1, ... t_2)$ é um termo.
+3. se $\mathbf{f}$ é uma função de termos $(t_1, ... t_n)$ então $\mathbf{f}(t_1, ... t_n)$ é um termo.
 
 Cada proposição, ou sentença, na Lógica Proposicional é como uma ilha isolada de verdade, um fato fundamental que não pode ser dividido em partes menores. _A chuva cai_, _O sol brilha_ - cada uma dessas proposições é verdadeira ou falsa como uma unidade. Um átomo, elemento básico e fundamental de todas as expressões. Também, mas tarde, chamaremos de átomos a todo predicado aplicado aos termos de uma fórmula. Assim, também precisamos definir os predicados.
 
-1. se $P$ é um predicado de termos $(t_1, ... t_2)$ então $P(t_1, ... t_2)$ é uma Fórmula Bem Formada, um átomo.
+1. se $P$ é um predicado de termos $(t_1, ... t_n)$ então $P(t_1, ... t_n)$ é uma Fórmula Bem Formada, um átomo.
 2. se $P$ e $Q$ são Fórmulas Bem Formadas então: $\neg P$, $P\wedge Q$, $P \vee Q$, $P \rightarrow Q$ e $P \leftrightarrow Q$ são Fórmulas Bem Formadas.
 3. se $P$ é uma Fórmula Bem Formada e $x$ uma variável então $\exists x P$ e $\forall x P$ são Fórmulas Bem Formadas.
 
-Por fim, podemos dizer que as Fórmulas Bem Formadas: respeitam regras de precedência entre conectivos, parênteses e quantificadores;
-não apresentam problemas como variáveis livres não quantificadas e, principalmente, são unívocas, sem ambiguidade na interpretação.
+Por fim, podemos dizer que as Fórmulas Bem Formadas: respeitam regras de precedência entre conectivos, parênteses e quantificadores; não apresentam problemas como variáveis livres não quantificadas e, principalmente, são unívocas, sem ambiguidade na interpretação.
 
 Finalmente podemos dizer que a linguagem da Lógica de Primeira Ordem é o conjunto de todas as Fórmulas Bem Formadas incluindo os campos de estudo da Lógica Proposicional e da Lógica de Predicados. Termos e átomos costurados em uma teia onde cada termo, ou átomo, é como uma ilha isolada de verdade, um fato fundamental que não pode ser dividido em partes menores. _A chuva cai_, _O sol brilha_ - cada uma dessas proposições é verdadeira ou falsa, em si, uma unidade. As operações lógicas são as pontes que conectam essas ilhas, permitindo-nos construir as estruturas mais complexas da razão.
 
@@ -2347,3 +2346,5 @@ $$((P \wedge (Q \wedge R)) \wedge I)$$
 Pode ser escrita como:
 
 $$F \wedge G \wedge H \wedge I$$
+
+
