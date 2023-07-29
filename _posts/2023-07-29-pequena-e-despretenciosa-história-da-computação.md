@@ -23,111 +23,111 @@ No princípio, havia o ábaco, simples e estritamente funcional, riscado na made
 
 
 
-1622: A régua de cálculo. O matemático inglês William Oughtred inventou a régua de cálculo, um dispositivo manual que usava o sistema de logaritmos para realizar cálculos rápidos (ROONEY, 2012).
+**1622**: A régua de cálculo. O matemático inglês William Oughtred inventou a régua de cálculo, um dispositivo manual que usava o sistema de logaritmos para realizar cálculos rápidos (ROONEY, 2012).
 
-1801: Tear de Jacquard. Inventado por Joseph Marie Jacquard, este tear usava cartões perfurados para controlar o padrão de tecelagem. Essa foi uma das primeiras instâncias de um processo mecânico sendo controlado por uma forma de "programação" (COPELAND, 2021).  
+**1801**: Tear de Jacquard. Inventado por Joseph Marie Jacquard, este tear usava cartões perfurados para controlar o padrão de tecelagem. Essa foi uma das primeiras instâncias de um processo mecânico sendo controlado por uma forma de "programação" (COPELAND, 2021).  
 
-1822: Máquina Diferencial de Charles Babbage. Babbage concebeu a Máquina Diferencial, um dispositivo mecânico para calcular valores de funções matemáticas. Embora Babbage nunca tenha construído completamente uma Máquina Diferencial, a ideia de uma máquina para automatizar cálculos estava clara (SWADE, 2001).
+**1822**: Máquina Diferencial de Charles Babbage. Babbage concebeu a Máquina Diferencial, um dispositivo mecânico para calcular valores de funções matemáticas. Embora Babbage nunca tenha construído completamente uma Máquina Diferencial, a ideia de uma máquina para automatizar cálculos estava clara (SWADE, 2001).
 
-1837: Máquina Analítica de Charles Babbage. Babbage expandiu sua ideia para a Máquina Analítica, que poderia ser programada para realizar qualquer cálculo. Novamente, essa máquina nunca foi totalmente construída, mas a ideia de um dispositivo programável estava presente (SWADE, 2001).
+**1837**: Máquina Analítica de Charles Babbage. Babbage expandiu sua ideia para a Máquina Analítica, que poderia ser programada para realizar qualquer cálculo. Novamente, essa máquina nunca foi totalmente construída, mas a ideia de um dispositivo programável estava presente (SWADE, 2001).
 
-1843: Máquina Analítica e Ada Lovelace. Babbage desenvolve o conceito de uma "máquina analítica", que seria capaz de executar qualquer tipo de cálculo dado um conjunto de instruções ou um programa. Ada Lovelace, que trabalhou com Babbage, é frequentemente creditada como a primeira programadora, pois ela escreveu o que é considerado o primeiro algoritmo destinado a ser processado por uma máquina (FUCHS, 2022).
+**1843**: Máquina Analítica e Ada Lovelace. Babbage desenvolve o conceito de uma "máquina analítica", que seria capaz de executar qualquer tipo de cálculo dado um conjunto de instruções ou um programa. Ada Lovelace, que trabalhou com Babbage, é frequentemente creditada como a primeira programadora, pois ela escreveu o que é considerado o primeiro algoritmo destinado a ser processado por uma máquina (FUCHS, 2022).
 
-1936: Máquina de Turing. Alan Turing apresentou sua ideia de uma "máquina universal" que poderia resolver qualquer problema computável, dado tempo e recursos suficientes. A Máquina de Turing era um dispositivo teórico, mas a ideia provou ser fundamental para o desenvolvimento da ciência da computação (HODGES, 2014).
+**1936**: Máquina de Turing. Alan Turing apresentou sua ideia de uma "máquina universal" que poderia resolver qualquer problema computável, dado tempo e recursos suficientes. A Máquina de Turing era um dispositivo teórico, mas a ideia provou ser fundamental para o desenvolvimento da ciência da computação (HODGES, 2014).
 
-1936: Alonzo Church apresenta o Cálculo Lambda. Alonzo Church, um dos orientadores de doutorado de Turing, introduz o cálculo lambda. O cálculo lambda é um sistema formal para expressar cálculos baseados em funções. Turing mostraria mais tarde que a máquina de Turing e o cálculo lambda são equivalentes em termos de suas habilidades de computação (CHURCH, 1936).
+**1936**: Alonzo Church apresenta o Cálculo Lambda. Alonzo Church, um dos orientadores de doutorado de Turing, introduz o cálculo lambda. O cálculo lambda é um sistema formal para expressar cálculos baseados em funções. Turing mostraria mais tarde que a máquina de Turing e o cálculo lambda são equivalentes em termos de suas habilidades de computação (CHURCH, 1936).
 
-1937: Claude Shannon aplica álgebra booleana a circuitos eletrônicos. Shannon publica sua tese de mestrado, "A Symbolic Analysis of Relay and Switching Circuits". Nesta tese, ele aplicou a álgebra booleana para analisar e otimizar circuitos de relé, que são uma tecnologia chave usada em computadores iniciais (SHANNON, 1938).
+**1937**: Claude Shannon aplica álgebra booleana a circuitos eletrônicos. Shannon publica sua tese de mestrado, "A Symbolic Analysis of Relay and Switching Circuits". Nesta tese, ele aplicou a álgebra booleana para analisar e otimizar circuitos de relé, que são uma tecnologia chave usada em computadores iniciais (SHANNON, 1938).
 
-1937: George Stibitz e o Complex Number Calculator. Em 1937, George Stibitz, enquanto trabalhava nos Bell Labs, construiu um dispositivo em sua casa que ele chamou de "Model K". Era um dispositivo de relés eletromecânicos que podia resolver equações com números complexos. Mais tarde, isso evoluiu para o Complex Number Calculator, que foi um dos primeiros exemplos de um computador que poderia ser controlado remotamente via linhas telefônicas (AKERA, 2017).
+**1937**: George Stibitz e o Complex Number Calculator. Em 1937, George Stibitz, enquanto trabalhava nos Bell Labs, construiu um dispositivo em sua casa que ele chamou de "Model K". Era um dispositivo de relés eletromecânicos que podia resolver equações com números complexos. Mais tarde, isso evoluiu para o Complex Number Calculator, que foi um dos primeiros exemplos de um computador que poderia ser controlado remotamente via linhas telefônicas (AKERA, 2017).
 
-1938: Konrad Zuse e o Z1. Konrad Zuse, um engenheiro alemão, completou o Z1 em 1938. O Z1 foi um dos primeiros computadores programáveis, embora fosse mecânico em vez de eletrônico (ROONEY, 2012).
+**1938**: Konrad Zuse e o Z1. Konrad Zuse, um engenheiro alemão, completou o Z1 em 1938. O Z1 foi um dos primeiros computadores programáveis, embora fosse mecânico em vez de eletrônico (ROONEY, 2012).
 
-1941: Zuse Z3. Zuse continuou a trabalhar em seus designs de computador durante a guerra, apesar de muitos desafios. Em 1941, ele concluiu o Z3, que é muitas vezes considerado o primeiro computador totalmente automático e programável (ROONEY, 2012).  
+**1941**: Zuse Z3. Zuse continuou a trabalhar em seus designs de computador durante a guerra, apesar de muitos desafios. Em 1941, ele concluiu o Z3, que é muitas vezes considerado o primeiro computador totalmente automático e programável (ROONEY, 2012).  
 
-1943-1944: Colossus. Na Inglaterra, durante a Segunda Guerra Mundial, o computador Colossus foi desenvolvido para decifrar mensagens codificadas pelo sistema de criptografia Lorenz usado pelos alemães. O primeiro Colossus tornou-se operacional em 1944 (COPELAND, 2006).
+**1943-1944**: Colossus. Na Inglaterra, durante a Segunda Guerra Mundial, o computador Colossus foi desenvolvido para decifrar mensagens codificadas pelo sistema de criptografia Lorenz usado pelos alemães. O primeiro Colossus tornou-se operacional em 1944 (COPELAND, 2006).
 
-1944: Harvard Mark I. Aiken, juntamente com a IBM, concluiu a construção do Harvard Mark I, um dos primeiros grandes computadores eletromecânicos (BASHE et al., 1986).
+**1944**: Harvard Mark I. Aiken, juntamente com a IBM, concluiu a construção do Harvard Mark I, um dos primeiros grandes computadores eletromecânicos (BASHE et al., 1986).
 
-1945: O Relatório de John von Neumann. Embora a construção do ENIAC, um dos primeiros computadores eletrônicos digitais, tenha sido concluída em 1945, o seu projeto já estava em andamento durante a Segunda Guerra Mundial. Além disso, em 1945, John von Neumann produziu o "Relatório sobre o EDVAC" que detalhava a arquitetura de computador que veio a ser conhecida como a Arquitetura de von Neumann (VON NEUMANN, 1945).
+**1945**: O Relatório de John von Neumann. Embora a construção do ENIAC, um dos primeiros computadores eletrônicos digitais, tenha sido concluída em 1945, o seu projeto já estava em andamento durante a Segunda Guerra Mundial. Além disso, em 1945, John von Neumann produziu o "Relatório sobre o EDVAC" que detalhava a arquitetura de computador que veio a ser conhecida como a Arquitetura de von Neumann (VON NEUMANN, 1945).
 
-1946: ENIAC. O ENIAC, um dos primeiros computadores eletrônicos totalmente digitais, é construído na Universidade da Pensilvânia (STERN, 1981).
+**1946**: ENIAC. O ENIAC, um dos primeiros computadores eletrônicos totalmente digitais, é construído na Universidade da Pensilvânia (STERN, 1981).
 
-1947: Os transistores são inventados nos Bell Labs por John Bardeen, Walter Brattain e William Shockley (RIORDAN; HODDESON, 1998).
+**1947**: Os transistores são inventados nos Bell Labs por John Bardeen, Walter Brattain e William Shockley (RIORDAN; HODDESON, 1998).
 
-1949: O EDSAC, um dos primeiros computadores com programa armazenado, é construído na Inglaterra (WILKES, 1985).
+**1949**: O EDSAC, um dos primeiros computadores com programa armazenado, é construído na Inglaterra (WILKES, 1985).
 
-1951: O UNIVAC I, o primeiro computador comercial produzido nos EUA, é lançado pela Remington Rand (BASHE et al., 1986).
+**1951**: O UNIVAC I, o primeiro computador comercial produzido nos EUA, é lançado pela Remington Rand (BASHE et al., 1986).
 
-1952: O EDVAC, baseado no projeto de von Neumann, é concluído (ENIAC MUSEUM, 2022).
+**1952**: O EDVAC, baseado no projeto de von Neumann, é concluído (ENIAC MUSEUM, 2022).
 
-1953: O IBM 701, o primeiro computador produzido em massa por uma grande empresa, é lançado (Pugh et al., 1991).
+**1953**: O IBM 701, o primeiro computador produzido em massa por uma grande empresa, é lançado (Pugh et al., 1991).
 
-1954: O FORTRAN, uma das primeiras linguagens de programação de alto nível, é desenvolvido (BACKUS, 1981).
+**1954**: O FORTRAN, uma das primeiras linguagens de programação de alto nível, é desenvolvido (BACKUS, 1981).
 
-1957: A linguagem de programação LISP é criada por John McCarthy no MIT (MCCARTHY, 1981).
+**1957**: A linguagem de programação LISP é criada por John McCarthy no MIT (MCCARTHY, 1981).
 
-1958: O chip integrado é inventado por Jack Kilby da Texas Instruments (KILBY, 2000).
+**1958**: O chip integrado é inventado por Jack Kilby da Texas Instruments (KILBY, 2000).
 
-1958: O projeto "Lourinha". Entre 1950 e 1960, alunos da Escola Técnica do Exército, atual Instituto Militar de Engenharia (IME), trabalharam no projeto carinhosamente apelidado de “Lourinha”, considerado o primeiro computador desenvolvido em território nacional. Em seu projeto de fim de curso, os primeiros-tenentes Herbert Baptista Fiuza, José Augusto Mariz de Mendonça, Jorge Muniz Barreto, Mário de Moura Alencastro, Walter Mario Lace e Edison Dytz desenvolveram o “Lourinha” que foi o primeiro dispositivo analógico-digital capaz de automatizar operações simples (IME, 2022).
+**1958: O projeto "Lourinha". Entre 1950 e 1960, alunos da Escola Técnica do Exército, atual Instituto Militar de Engenharia (IME), trabalharam no projeto carinhosamente apelidado de “Lourinha”, considerado o primeiro computador desenvolvido em território nacional. Em seu projeto de fim de curso, os primeiros-tenentes Herbert Baptista Fiuza, José Augusto Mariz de Mendonça, Jorge Muniz Barreto, Mário de Moura Alencastro, Walter Mario Lace e Edison Dytz desenvolveram o “Lourinha” que foi o primeiro dispositivo analógico-digital capaz de automatizar operações simples (IME, 2022).**
 
-1959: O COBOL, uma linguagem de programação voltada para negócios, é lançado (SAMMET, 1981).
+**1959**: O COBOL, uma linguagem de programação voltada para negócios, é lançado (SAMMET, 1981).
 
-1964: O BASIC é criado por John Kemeny e Thomas Kurtz no Dartmouth College (KEMENY; KURTZ, 1985).
+**1964**: O BASIC é criado por John Kemeny e Thomas Kurtz no Dartmouth College (KEMENY; KURTZ, 1985).
 
-1964: O IBM System/360, uma família de computadores principais compatíveis, é anunciado (Pugh et al., 1991).
+**1964**: O IBM System/360, uma família de computadores principais compatíveis, é anunciado (Pugh et al., 1991).
 
-1969: O Unix é desenvolvido pelos Bell Labs (RITCHIE; THOMPSON, 1978).
+**1969**: O Unix é desenvolvido pelos Bell Labs (RITCHIE; THOMPSON, 1978).
 
-1970: A linguagem de programação Pascal é criada por Niklaus Wirth (WIRTH, 1981).
+**1970**: A linguagem de programação Pascal é criada por Niklaus Wirth (WIRTH, 1981).
 
-1971: O microprocessador Intel 4004 é lançado (INTEL, 2021).
+**1971**: O microprocessador Intel 4004 é lançado (INTEL, 2021).
 
-1972: A linguagem C é criada por Dennis Ritchie (RITCHIE, 1993).
+**1972**: A linguagem C é criada por Dennis Ritchie (RITCHIE, 1993).
 
-1975: A Microsoft é fundada por Bill Gates e Paul Allen (WALLACE; ERICKSON, 1992).
+**1975**: A Microsoft é fundada por Bill Gates e Paul Allen (WALLACE; ERICKSON, 1992).
 
-1983: O TCP/IP se torna o protocolo padrão de networking (LEINER et al., 1985).
+**1983**: O TCP/IP se torna o protocolo padrão de networking (LEINER et al., 1985).
 
-1991: A World Wide Web e as primeiras páginas da web são desenvolvidas por Tim Berners-Lee no CERN (BERNERS-LEE, 2000).
+**1991**: A World Wide Web e as primeiras páginas da web são desenvolvidas por Tim Berners-Lee no CERN (BERNERS-LEE, 2000).
 
-1995: O Java é lançado pela Sun Microsystems (GOSLING; MCGILTON, 1996).
+**1995**: O Java é lançado pela Sun Microsystems (GOSLING; MCGILTON, 1996).
 
-1995: O Windows 95 é lançado pela Microsoft (CARROLL, 2020).
+**1995**: O Windows 95 é lançado pela Microsoft (CARROLL, 2020).
 
-2004: O Facebook é lançado (KIRKPATRICK, 2011).
+**2004**: O Facebook é lançado (KIRKPATRICK, 2011).
 
-2008: O Bitcoin é descrito em um white paper por Satoshi Nakamoto (NAKAMOTO, 2008).
+**2008**: O Bitcoin é descrito em um white paper por Satoshi Nakamoto (NAKAMOTO, 2008).
 
-2010: O iPad da Apple é lançado (APPLE, 2010).
+**2010**: O iPad da Apple é lançado (APPLE, 2010).
 
-2010: O Instagram é lançado por Kevin Systrom e Mike Krieger (HACHMAN, 2010).
+**2010**: O Instagram é lançado por Kevin Systrom e Mike Krieger (HACHMAN, 2010).
 
-2011: O Watson da IBM vence o Jeopardy! demonstrando avanços na inteligência artificial (MARKOFF, 2011).
+**2011**: O Watson da IBM vence o Jeopardy! demonstrando avanços na inteligência artificial (MARKOFF, 2011).
 
-2012: O Raspberry Pi, um microcomputador de baixo custo, é lançado no Reino Unido (Upton, 2012).
+**2012**: O Raspberry Pi, um microcomputador de baixo custo, é lançado no Reino Unido (Upton, 2012).
 
-2013: O Google Glass é anunciado e se torna disponível sob um programa limitado de testes (Google, 2013).
+**2013**: O Google Glass é anunciado e se torna disponível sob um programa limitado de testes (Google, 2013).
 
-2014: A Microsoft lança o Visual Studio Code, um editor de código-fonte popular (Bright, 2022).
+**2014**: A Microsoft lança o Visual Studio Code, um editor de código-fonte popular (Bright, 2022).
 
-2015: Amazon, Google e Microsoft começam a oferecer serviços de machine learning na nuvem (Metz, 2016).
+**2015**: Amazon, Google e Microsoft começam a oferecer serviços de machine learning na nuvem (Metz, 2016).
 
-2016: O aplicativo Pokémon Go se torna um fenômeno global (Wingfield et al., 2016).
+**2016**: O aplicativo Pokémon Go se torna um fenômeno global (Wingfield et al., 2016).
 
-2017: O Bitcoin atinge US$ 10.000 pela primeira vez, evidenciando o crescimento das criptomoedas (Rousseau, 2017).
+**2017**: O Bitcoin atinge US$ 10.000 pela primeira vez, evidenciando o crescimento das criptomoedas (Rousseau, 2017).
 
-2018: O Facebook enfrenta o escândalo Cambridge Analytica sobre dados de usuários (Isaak; Hanna, 2018).
+**2018**: O Facebook enfrenta o escândalo Cambridge Analytica sobre dados de usuários (Isaak; Hanna, 2018).
 
-2019: O ChatGPT é lançado pela Anthropic, demonstrando grandes avanços no processamento de linguagem natural (Anthropic, 2022).
+**2019**: O ChatGPT é lançado pela Anthropic, demonstrando grandes avanços no processamento de linguagem natural (Anthropic, 2022).
 
-2020: Devido à pandemia de COVID-19, trabalho e educação remotas se tornam mainstream (UNESCO, 2021).
+**2020**: Devido à pandemia de COVID-19, trabalho e educação remotas se tornam mainstream (UNESCO, 2021).
 
-2021: O Metaverso se torna uma nova fronteira, com investimentos de empresas como Meta, Microsoft e Nvidia (Llamas et al., 2022).
+**2021**: O Metaverso se torna uma nova fronteira, com investimentos de empresas como Meta, Microsoft e Nvidia (Llamas et al., 2022).
 
-2022: A Inteliigência Artificial avança rapidamente com lançamentos como DALL-E 2, AlphaFold 2 e ChatGPT (Sejnowski, 2022).
+**2022**: A Inteliigência Artificial avança rapidamente com lançamentos como DALL-E 2, AlphaFold 2 e ChatGPT (Sejnowski, 2022).
 
-2023: As ferramentas de Inteligência Artificial se tornam populares e permitem escrever este artigo sem nenhuma interferência humana. Exceto por este parágrafo. Para ser confiável, falta verificar todas as referências. Talvez modifique meus robôs para fazer isso também.
+**2023**: As ferramentas de Inteligência Artificial se tornam populares e permitem escrever este artigo sem nenhuma interferência humana. Exceto por este parágrafo. Para ser confiável, falta verificar todas as referências. Talvez modifique meus robôs para fazer isso também.
 
 
 ## Referências bibliográficas
