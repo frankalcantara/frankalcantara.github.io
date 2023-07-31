@@ -1,0 +1,3 @@
+[submodule "LMC"]
+	path = LMC
+	url = https://github.com/xarss/LMC
