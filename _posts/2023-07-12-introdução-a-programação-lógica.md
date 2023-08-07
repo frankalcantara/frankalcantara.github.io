@@ -116,7 +116,7 @@ O alfabeto $\Sigma$ pode ser dividido em conjuntos de símbolos agrupados por cl
 
 3. **Predicados**: usaremos os símbolos $P$, $Q$, $\mathbf{r}$ e $S$ para indicar predicados.
 
-4. **Operadores**: usaremos os símbolos tradicionais da Lógica Proposicional: $\neg$ (negação), $\wedge$ (disjunção, _and_), $\vee$ (conjunção, _or_), $\rightarrow$ (implicação) e $\leftrightarrow$ (equivalência).
+4. **Operadores**: usaremos os símbolos tradicionais da Lógica Proposicional: $\neg$ (negação), $\wedge$ (conjunção, _and_), $\vee$ (disjunção, _or_), $\rightarrow$ (implicação) e $\leftrightarrow$ (equivalência).
 
 5. **Quantificadores**: nos manteremos no limite da tradição matemática e usar $\exists$ (quantificador existencial) e $\forall$ (quantificador universal).
 
