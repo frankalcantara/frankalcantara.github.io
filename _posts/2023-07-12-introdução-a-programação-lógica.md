@@ -418,9 +418,9 @@ Simplificação:
 
 $$
 \begin{align*}
-P \wedge (Q \vee (R \rightarrow S)) \vee (\neg E \leftrightarrow P) &\equiv P \wedge (Q \vee (\neg R \vee S)) \vee ((\neg E \rightarrow P) \wedge (P \rightarrow \neg E)) && \text{(7)}\\
-&\equiv (P \wedge Q) \vee (P \wedge (\neg R \vee S)) \vee ((\neg E \vee P) \wedge (\neg P \vee \neg E)) && \text{(3)}\\
-&\equiv (P \wedge Q) \vee (P \wedge (\neg R \vee S)) \vee (P \vee \neg E) && \text{(9)}
+P \wedge (Q \vee (R \rightarrow S)) \vee (\neg E \leftrightarrow P) &\equiv P \wedge (Q \vee (\neg R \vee S)) \vee ((\neg E \wedge P) \vee (E \wedge \neg P)) && \text{(1)}\\
+&\equiv (P \wedge Q) \vee (P \wedge (\neg R \vee S)) \vee ((\neg E \wedge P) \vee (E \wedge \neg P)) && \text{(2)}\\
+&\equiv (P \wedge Q) \vee (P \wedge \neg R) \vee (P \wedge S) \vee (\neg E \wedge P) \vee (E \wedge \neg P) && \text{(3)}
 \end{align*}
 $$
 
