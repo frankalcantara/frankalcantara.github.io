@@ -68,6 +68,8 @@ A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive 
     - [Instanciação Existencial](#instanciação-existencial)
   - [Problemas Interessantes](#problemas-interessantes)
   - [Formas Normais](#formas-normais)
+    - [Skolemização](#skolemização)
+    - [Regras para a Conversão em Forma Normal Conjuntiva](#regras-para-a-conversão-em-forma-normal-conjuntiva)
 
 # Introdução
 
@@ -2387,3 +2389,97 @@ Pode ser escrita como:
 $$F \wedge G \wedge H \wedge I$$
 
 
+### Skolemização 
+
+A skolemização é uma técnica usada na conversão de fórmulas da lógica de primeira ordem para a Forma Normal Conjuntiva (FNC). Ela consiste em eliminar os quantificadores existenciais, substituindo as variáveis existenciais por constantes ou Funções Skolem. Considere a fórmula com um quantificador universal e um existencial:
+
+$$\exists y P(x,y)$$
+
+Aplicando a skolemização, a variável existencial $y$ é substituída por uma variável de skolem $a$:
+
+$$P(x,a)$$
+
+Onde $a$ é uma função aplicada a variável, ou variáveis que ligadas aos quantificadores universais que estejam a esquerda do quantificador universal que será eliminado.
+
+Para uma fórmula com dois quantificadores universais e dois existenciais:
+
+$$\forall x \forall z \exists y \exists w R(x,y,z,w)$$
+
+A skolemização resultará em:
+
+$$\forall x \forall z R(x,f(x),z,g(x,z))$$
+
+Onde $f(x)$ e $g(x,z)$ são Funções Skolem introduzidas para substituir as variáveis existenciais $y$ e $w$ respectivamente.
+
+A escolha entre usar uma Constante Skolem ou uma Função Skolem durante a skolemização depende do escopo dos quantificadores na fórmula original.
+
+As regras são:
+
+- Se a variável existencial não depende de nenhuma variável universal (nenhuma variável universal a domina), usa-se uma constante skolem.
+
+Por exemplo:
+
+$\exists x \ P(x)$ skolemiza para $P(a)$, onde $a$ é uma constante.
+
+- Se a variável existencial depende de alguma variável universal, usa-se uma função skolem que recebe como parâmetros essas variáveis universais.
+
+Por exemplo:
+
+$\forall y \exists x \ P(x,y)$ skolemiza para $\forall y \ P(f(y), y)$, onde $f(y)$ é uma função skolem.
+
+E em:
+
+$\forall x \forall z \exists y \ Q(x,y,z)$ skolemiza para $\forall x \forall z \ Q(x, g(x,z), z)$
+
+Em resumo:
+
+- Constante skolem se a variável existencial não depende de universais
+- Função skolem dos universais que a dominam, caso contrário.
+
+A skolemização permite eliminar quantificadores existenciais, substituindo-os por constantes ou funções. Isso é um passo fundamental na conversão para FNC, resultando em fórmulas equivalentes mas apenas com quantificadores universais e sem o uso de variáveis existenciais.
+
+### Regras para a Conversão em Forma Normal Conjuntiva
+
+Aqui está a tradução utilizando apenas Markdown para o texto e LaTeX para a lógica:
+
+**Conversão para FNC:**
+
+1. **Eliminar bicondicionais e implicações:**
+
+- Eliminar $\Leftrightarrow$, substituindo $\alpha \Leftrightarrow \beta$ por $(\alpha \Rightarrow \beta) \land (\beta \Rightarrow \alpha)$.
+
+- Eliminar $\Rightarrow$, substituindo $\alpha \Rightarrow \beta$ por $\lnot\alpha \lor \beta$.
+
+2. **Mover $\lnot$ para dentro:**
+
+- $\lnot(\forall x \; p) \Leftrightarrow \exists x \; \lnot p$
+
+- $\lnot(\exists x \; p) \Leftrightarrow \forall x \; \lnot p$
+
+- $\lnot(\alpha \lor \beta) \Leftrightarrow \lnot\alpha \land \lnot\beta$
+
+- $\lnot(\alpha \land \beta) \Leftrightarrow \lnot\alpha \lor \lnot\beta$
+
+- $\lnot\lnot\alpha \Leftrightarrow \alpha$
+
+3. **Padronizar variáveis renomeando-as**: cada quantificador deve usar uma variável diferente.
+
+4. **Skolemizar**: cada variável existencial é substituída por uma constante ou função de Skolem das variáveis universalmente quantificadas externas.
+
+- Por exemplo, $\exists x \;Rico(x)$ se torna $Rico(G_1)$ onde $G_1$ é uma nova constante de Skolem.
+
+- "Todos têm um coração" $\forall x \; Pessoa(x) \Rightarrow \exists y \; Coração(y) \land Tem(x, y)$
+
+se torna
+
+$\forall x \; Pessoa(x) \Rightarrow Coração(H(x)) \land Tem(x, H(x))$,
+
+onde $H$ é um novo símbolo (função de Skolem).
+
+5. **Eliminar quantificadores universais**
+
+- Por exemplo, $\forall x \; Pessoa(x)$ se torna $Pessoa(x)$.
+
+6. **Distribuir $\land$ sobre $\lor$:**
+
+- $(\alpha \land \beta) \lor \gamma \Leftrightarrow (\alpha \lor \gamma) \land (\beta \lor \gamma)$
