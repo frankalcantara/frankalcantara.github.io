@@ -66,7 +66,7 @@ A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive 
     - [Instanciação Universal](#instanciação-universal)
     - [Generalização Existencial](#generalização-existencial)
     - [Instanciação Existencial](#instanciação-existencial)
-  - [Problemas Interessantes](#problemas-interessantes)
+  - [Problemas Interessantes Resolvidos com Lógica Proposicional e Predicativa](#problemas-interessantes-resolvidos-com-lógica-proposicional-e-predicativa)
   - [Formas Normais](#formas-normais)
     - [Forma Normal Negativa (FNN)](#forma-normal-negativa-fnn)
       - [Estrutura da Forma Normal Negativa](#estrutura-da-forma-normal-negativa)
@@ -87,10 +87,12 @@ A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive 
       - [Gerando a Forma Normal Disjuntiva (FND)](#gerando-a-forma-normal-disjuntiva-fnd)
       - [Gerando a Forma Normal Conjuntiva (FNC)](#gerando-a-forma-normal-conjuntiva-fnc)
     - [Skolemização](#skolemização)
-    - [Forma Normal Prenexa](#forma-normal-prenexa)
-      - [Estrutura da Forma Normal Prenexa](#estrutura-da-forma-normal-prenexa)
-      - [Conversão para Forma Normal Prenexa](#conversão-para-forma-normal-prenexa)
+    - [Forma Normal Prenex](#forma-normal-prenex)
+      - [Estrutura da Forma Normal Prenex](#estrutura-da-forma-normal-prenex)
+      - [Conversão para Forma Normal Prenex](#conversão-para-forma-normal-prenex)
+      - [Regras de Equivalência Prenex](#regras-de-equivalência-prenex)
     - [Conversão para Formas Normais Conjuntiva (FNC) e Disjuntiva (FND)](#conversão-para-formas-normais-conjuntiva-fnc-e-disjuntiva-fnd)
+      - [Exemplos Interessantes da Forma Prenex](#exemplos-interessantes-da-forma-prenex)
       - [Observações Importantes](#observações-importantes)
       - [Exemplos de conversão em formas normais, conjuntiva e disjuntiva:](#exemplos-de-conversão-em-formas-normais-conjuntiva-e-disjuntiva)
   - [Cláusula de Horn](#cláusula-de-horn)
@@ -98,14 +100,18 @@ A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive 
       - [Forma Geral](#forma-geral)
       - [Tipos de Cláusulas de Horn](#tipos-de-cláusulas-de-horn)
       - [Exemplo 1: Sistema de Recomendação de Roupas](#exemplo-1-sistema-de-recomendação-de-roupas)
-      - [Exemplo2: Sistema de Diagnóstico Médico](#exemplo2-sistema-de-diagnóstico-médico)
+      - [Exemplo 2: Sistema de Diagnóstico Médico](#exemplo-2-sistema-de-diagnóstico-médico)
     - [Quantificadores em Cláusulas de Horn](#quantificadores-em-cláusulas-de-horn)
       - [Usando o Quantificador Universal em Clásulas de Horn](#usando-o-quantificador-universal-em-clásulas-de-horn)
       - [Usando o Quantificador Existencial em Cláusulas de Horn](#usando-o-quantificador-existencial-em-cláusulas-de-horn)
-    - [Transformação de Forma Normal Conjuntiva (FNC) para Cláusulas de Horn](#transformação-de-forma-normal-conjuntiva-fnc-para-cláusulas-de-horn)
+    - [Conversão de Fórmulas](#conversão-de-fórmulas)
+      - [Exemplo: dada a fórmula:](#exemplo-dada-a-fórmula)
+      - [Transformação de Forma Normal Conjuntiva (FNC) para Cláusulas de Horn](#transformação-de-forma-normal-conjuntiva-fnc-para-cláusulas-de-horn)
       - [Etapas de Transformação](#etapas-de-transformação)
+      - [Problemas interessantes resolvidos com a Cláusula de Horn](#problemas-interessantes-resolvidos-com-a-cláusula-de-horn)
       - [Cláusulas de Horn e o Prolog](#cláusulas-de-horn-e-o-prolog)
-      - [Exemplo: Sistema de Recomendação de Roupas em Prolog](#exemplo-sistema-de-recomendação-de-roupas-em-prolog)
+      - [Exemplo 1: O mais simples possível.](#exemplo-1-o-mais-simples-possível)
+      - [Exemplo 2: Sistema de Recomendação de Roupas em Prolog](#exemplo-2-sistema-de-recomendação-de-roupas-em-prolog)
 
 # Introdução
 
@@ -1924,23 +1930,23 @@ Para validar $ \forall x P(x) $ escolhemos o pior caso possível para $ x $ - to
 
 1. **Exemplo 1**: todos os números reais são maiores que 0. (Universo do discurso: $ \{x \in \mathbb{R}\} $ )
 
- $$\forall x (Número(x) \rightarrow x > 0)$$
+$$\forall x (Número(x) \rightarrow x > 0)$$
 
 2. **Exemplo 2**: todos os triângulos em um plano euclidiano têm a soma dos ângulos internos igual a 180 graus. (Universo do discurso: $ x $ é um triângulo em um plano euclidiano)
 
- $$\forall x (Triângulo(x) \rightarrow \Sigma_{i=1}^3 ÂnguloInterno_i(x) = 180^\circ)$$
+$$\forall x (Triângulo(x) \rightarrow \Sigma_{i=1}^3 ÂnguloInterno_i(x) = 180^\circ)$$
 
 3. **Exemplo 3**: todas as pessoas com mais de 18 anos podem tirar carteira de motorista." (Universo do discurso: $ x $ é uma pessoa no Brasil)
 
- $$\forall x (Pessoa(x) \land Idade(x) > 18 \rightarrow PodeTirarCarteira(x))$$
+$$\forall x (Pessoa(x) \land Idade(x) > 18 \rightarrow PodeTirarCarteira(x))$$
 
 4. **Exemplo 4**: todo número par maior que 2 pode ser escrito como a soma de dois números primos. (Universo do discurso: $ \{x \in \mathbb{Z}\} $ 
 
- $$\forall x\,(Par(x) \land x > 2 \rightarrow \exists a\exists b\, (Primo(a) \land Primo(b) \land x = a + b))$$
+$$\forall x\,(Par(x) \land x > 2 \rightarrow \exists a\exists b\, (Primo(a) \land Primo(b) \land x = a + b))$$
 
 5. **Exemplo 5**: para todo número natural, se ele é múltiplo de 4 e múltiplo de 6, então ele também é múltiplo de 12. (Universo do discurso: $ \{x \in \mathbb{N}\} $ )
 
- $$\forall x\,((\exists a\in\Bbb N\,(x = 4a) \land \exists b\in\Bbb N\,(x = 6b)) \rightarrow \exists c\in\Bbb N\,(x = 12c))$$
+$$\forall x\,((\exists a\in\Bbb N\,(x = 4a) \land \exists b\in\Bbb N\,(x = 6b)) \rightarrow \exists c\in\Bbb N\,(x = 12c))$$
 
 O quantificador universal nos permite definir uma Fórmula Bem Formada representando todos os elementos de um conjunto, um universo do discurso, em relação a uma qualidade específica, um predicado. Esta é um artefato lógico interessante, mas não suficiente.
 
@@ -2062,11 +2068,11 @@ No entanto, as posições de quantificadores de tipos diferentes **não** podem 
 Existe uma equivalência entre as negações dos quantificadores. De tal forma que: 
 
 1. **Negação do Quantificador Universal ( $ \forall $ ):** A negação de uma afirmação universal significa que existe pelo menos um caso no Universo do Discurso, onde a afirmação não é verdadeira. Isso pode ser expresso pela seguinte equivalência:
- $$\neg \forall x \, P(x) \equiv \exists x \, \neg P(x)$$
+$$\neg \forall x \, P(x) \equiv \exists x \, \neg P(x)$$
  Em linguagem natural podemos entender como: negar que _para todos os $ x $ , $ P(x) $ é verdadeiro_ é equivalente a afirmar que _existe algum $ x $ tal que $ P(x) $ não é verdadeiro_.
 
 2. **Negação do Quantificador Existencial ( $ \exists $ ):** A negação de uma afirmação existencial significa que a afirmação não é verdadeira para nenhum caso no Universo do Discurso. Isso pode ser expresso pela seguinte equivalência:
- $$\neg \exists x \, P(x) \equiv \forall x \, \neg P(x)$$
+$$\neg \exists x \, P(x) \equiv \forall x \, \neg P(x)$$
  Ou seja, negar que _existe algum $ x $ tal que $ P(x) $ é verdadeiro_ é equivalente a afirmar que _para todos os $ x $ , $ P(x) $ não é verdadeiro_.
 
 Vamos tentar entender estas negações. Considere as expressões $ \neg (\forall x P(x)) $ e $ \exists x (\neg P(x)) $ . Essas fórmulas se aplicam a qualquer predicado $ P $ , e possuem o mesmo valor de verdade para qualquer $ P $ .
@@ -2342,7 +2348,8 @@ $$
 \end{aligned}
 $$
 
-## Problemas Interessantes
+## Problemas Interessantes Resolvidos com Lógica Proposicional e Predicativa
+
 Aqui estão cinco quebra-cabeças clássicos juntamente com suas soluções usando lógica de primeira ordem
 
 1. **Quebra-cabeça: O Mentiroso e o Verdadeiro** 
@@ -2360,7 +2367,7 @@ Aqui estão cinco quebra-cabeças clássicos juntamente com suas soluções usan
  Usando lógica de primeira ordem:
  Vamos denotar os interruptores como $ s1, s2, s3 $ e as lâmpadas como $ b1, b2, b3 $ . Podemos definir predicados $ On(b, s) $ e $ Hot(b) $ . 
 
- $$On(b1, s2) \land Hot(b2) \land \neg (On(b3) \lor Hot(b3))$$
+$$On(b1, s2) \land Hot(b2) \land \neg (On(b3) \lor Hot(b3))$$
 
 3. **Quebra-cabeça: O Agricultor, a Raposa, o Ganso e o Grão** 
  Um agricultor quer atravessar um rio e levar consigo uma raposa, um ganso e um saco de grãos. O barco do agricultor só lhe permite levar um item além dele mesmo. Se a raposa e o ganso estiverem sozinhos, a raposa comerá o ganso. Se o ganso e o grão estiverem sozinhos, o ganso comerá o grão. Como o agricultor pode levar todas as suas posses para o outro lado do rio?
@@ -2371,9 +2378,9 @@ Aqui estão cinco quebra-cabeças clássicos juntamente com suas soluções usan
  Podemos definir predicados $ SameSide(x, y) $ e $ Eats(x, y) $ .
  A solução envolve a sequência de ações que mantêm as seguintes condições:
  
- $$\neg (SameSide(Pox, Goose) \land \neg SameSide(Pox, Farmer))$$
+$$\neg (SameSide(Pox, Goose) \land \neg SameSide(Pox, Farmer))$$
  
- $$\neg (SameSide(Qoose, Grain) \land \neg SameSide(Qoose, Farmer))$$
+$$\neg (SameSide(Qoose, Grain) \land \neg SameSide(Qoose, Farmer))$$
 
 4. **Quebra-cabeça: O Problema da Ponte e da Tocha** 
  Quatro pessoas chegam a um rio à noite. Há uma ponte estreita, mas ela só pode conter duas pessoas de cada vez. Eles têm uma tocha e, por ser noite, a tocha tem que ser usada ao atravessar a ponte. A pessoa A pode atravessar a ponte em um minuto, B em dois minutos, C em cinco minutos e D em oito minutos. Quando duas pessoas atravessam a ponte juntas, elas devem se mover no ritmo da pessoa mais lenta. Qual é a maneira mais rápida para todos eles atravessarem a ponte?
@@ -2383,7 +2390,7 @@ Aqui estão cinco quebra-cabeças clássicos juntamente com suas soluções usan
  Usando lógica de primeira ordem:
  Vamos denotar o tempo que cada pessoa leva para atravessar a ponte como $ T_A, T_B, T_C, T_D $ e o tempo total como $ T $ . O problema pode ser representado da seguinte forma:
  
- $$(T_A + T_B + T_A + T_C + T_D + T_B + T_A) \leq T$$
+$$(T_A + T_B + T_A + T_C + T_D + T_B + T_A) \leq T$$
  
  Substituindo os valores dos tempos resulta em $ 15 \leq T $ .
 
@@ -2396,7 +2403,7 @@ Aqui estão cinco quebra-cabeças clássicos juntamente com suas soluções usan
  Vamos denotar as portas como $ d1, d2, d3 $ e o prêmio como $ P $ . Podemos definir um predicado $ ContainsPrize(d) $ .
  A solução é representada pela seguinte condição:
  
- $$(ContainsPrize(d1) \land \neg ContainsPrize(d2) \land \neg ContainsPrize(d3)) \lor (ContainsPrize(d2) \land \neg ContainsPrize(d1) \land \neg ContainsPrize(d3)) \lor (ContainsPrize(d3) \land \neg ContainsPrize(d1) \land \neg ContainsPrize(d2))$$
+$$(ContainsPrize(d1) \land \neg ContainsPrize(d2) \land \neg ContainsPrize(d3)) \lor (ContainsPrize(d2) \land \neg ContainsPrize(d1) \land \neg ContainsPrize(d3)) \lor (ContainsPrize(d3) \land \neg ContainsPrize(d1) \land \neg ContainsPrize(d2))$$
 
  Esta condição afirma que o prêmio está exatamente atrás de uma das portas, e o concorrente deve mudar sua escolha depois que uma das portas é aberta para revelar nenhum prêmio.
 
@@ -2410,13 +2417,33 @@ Existem várias formas normais na Lógica Proposicional, cada uma com suas próp
 
 1. **Forma Normal Negativa (PNN)**: Uma proposição está na Forma Normal Negativa se as operações de negação $ \neg $ aparecerem apenas imediatamente antes das variáveis. Isso é conseguido aplicando as leis de De Morgan e eliminando as duplas negações.
 
+$$
+\neg (A \wedge B) \equiv (\neg A \vee \neg B)
+$$
+
 2. **Forma Normal Conjuntiva (PNC)**: Uma proposição está na Forma Normal Conjuntiva se for uma conjunção, operação _E_, $ \wedge $ , de uma ou mais cláusulas, onde cada cláusula é uma disjunção, operação _OU_, $ \vee $ , de literais. Em outras palavras, é uma série de cláusulas conectadas por _Es_, onde cada cláusula é composta de variáveis conectadas por _OUs_.
+
+$$
+(A \vee B) \wedge (C \vee D) \equiv (A \wedge C) \vee (A \wedge D) \vee (B \wedge C) \vee (B \wedge D)
+$$
 
 3. **Forma Normal Disjuntiva (PND)**: uma proposição está na Forma Normal Disjuntiva se for uma disjunção de uma ou mais cláusulas, onde cada cláusula é uma conjunção de literais. Ou seja, é uma série de cláusulas conectadas por _ORs_, onde cada cláusula é composta de variáveis conectadas por _ANDs_.
 
+$$
+(A \wedge B) \vee (C \wedge D) \equiv (A \vee C) \wedge (A \vee D) \wedge (B \vee C) \wedge (B \vee D)
+$$
+
 4. **Forma Normal Prenex (PNP)**: uma proposição está na Forma Normal Prenex se todos os quantificadores, para a Lógica de Primeira Ordem, estiverem à esquerda, precedendo uma matriz quantificadora livre. Esta forma é útil na Lógica de Primeira Ordem e na teoria da prova.
 
+$$
+\exists x \forall y (P(x,y) \wedge Q(y)) \equiv \forall y \exists x (P(x,y) \wedge Q(y))
+$$
+
 5. **Forma Normal Skolem (PNS)**: na Lógica de Primeira Ordem, uma fórmula está na Forma Normal de Skolem se estiver na Forma Normal Prenex e se todos os quantificadores existenciais forem eliminados. Isto é realizado através de um processo conhecido como Skolemização.
+
+$$
+\forall x (P(x,y)) \equiv P(x, f(x))
+$$
 
 Nosso objetivo é rever a matemática que suporta a Programação Lógica, entre as principais formas normais, para este objetivo, precisamos destacar duas formas normais:
 
@@ -2444,7 +2471,6 @@ Uma fórmula está na Forma Normal Negativa se:
 
 - Todos os operadores de negação $ \neg $ são aplicados diretamente aos átomos (variáveis ou constantes).
 - Os únicos operadores lógicos usados são a negação $ \neg $ , a conjunção $ \land $ , e a disjunção $ \lor $ .
-
  
 #### Conversão para Forma Normal Negativa
 
@@ -2453,8 +2479,8 @@ Converter uma fórmula para a FNN envolve os seguintes passos:
  1. **Eliminar os Bicondicionais:** substitua todas as ocorrências de $ A\leftrightarrow B $ por $ A\rightarrow B \wedge B\rightarrow A $ . 
  2. **Eliminar Implicações**: substitua todas as ocorrências de implicação $ A \rightarrow B $ por $ \neg A \lor B $ .
  3. **Aplicar as Leis de De Morgan**: Use as leis de De Morgan para mover as negações para dentro, aplicando:
- - $ \neg (A \land B) \rightarrow \neg A \lor \neg B $ 
- - $ \neg (A \lor B) \rightarrow \neg A \land \neg B $ 
+    - $ \neg (A \land B) \rightarrow \neg A \lor \neg B $ 
+    - $ \neg (A \lor B) \rightarrow \neg A \land \neg B $ 
  4. **Eliminar Dupla Negação**: Substitua qualquer dupla negação $ \neg \neg A $ por $ A $ .
  
 #### Exemplo 1: Converta a fórmula $ \neg (A \land (B \rightarrow C)) $ para FNN:
@@ -2570,8 +2596,8 @@ Converter uma fórmula para a FNC geralmente envolve os seguintes passos:
  2. **Eliminar Implicações**: substitua todas as ocorrências de implicação $ A \rightarrow B $ por $ \neg A \lor B $ .
  3. **Aplicar as Leis de De Morgan**: Use as leis de De Morgan para mover as negações para dentro, aplicando:
 
-  - $ \neg (A \land B) \rightarrow \neg A \lor \neg B $ 
-  - $ \neg (A \lor B) \rightarrow \neg A \land \neg B $ 
+     - $ \neg (A \land B) \rightarrow \neg A \lor \neg B $ 
+     - $ \neg (A \lor B) \rightarrow \neg A \land \neg B $ 
 
  4. **Eliminar Dupla Negação**: Substitua qualquer dupla negação $ \neg \neg A $ por $ A $ .
  5. **Aplicar a Lei Distributiva**: Use a lei distributiva para expandir a fórmula, transformando-a em uma conjunção de disjunções.
@@ -2579,31 +2605,31 @@ Converter uma fórmula para a FNC geralmente envolve os seguintes passos:
 #### Exemplo 1: Convertendo $ (A \land B) \rightarrow (C \lor D) $ para FNC
 
 1. **Eliminar Implicações**:
- $$
+$$
  \neg (A \land B) \lor (C \lor D) \rightarrow (\neg A \lor \neg B) \lor (C \lor D)
- $$
+$$
 
 2. **Distribuir a Disjunção**:
- $$
+$$
  (\neg A \lor \neg B \lor C \lor D)
- $$
+$$
 
 #### Exemplo 2: Convertendo $ (A \land \neg B) \lor (\neg C \land D) \rightarrow (E \lor F) $ para FNC
 
 1. **Eliminar Implicações**:
- $$
+$$
  \neg ((A \land \neg B) \lor (\neg C \land D)) \lor (E \lor F) \rightarrow \neg (A \land \neg B) \land \neg (\neg C \land D) \lor (E \lor F)
- $$
+$$
 
 2. **Aplicar De Morgan**:
- $$
+$$
  (\neg A \lor B) \land (C \lor \neg D) \lor (E \lor F)
- $$
+$$
 
 3. **Distribuir a Disjunção**:
- $$
+$$
  (\neg A \lor B \lor E \lor F) \land (C \lor \neg D \lor E \lor F)
- $$
+$$
 
 ### Usando a Tabela-Verdade para Gerar Formas Normais
 
@@ -2693,17 +2719,31 @@ Em resumo:
 
 A skolemização permite eliminar quantificadores existenciais, substituindo-os por constantes ou funções. Isso é um passo fundamental na conversão para FNC, resultando em fórmulas equivalentes mas apenas com quantificadores universais e sem o uso de variáveis existenciais.
 
-### Forma Normal Prenexa
+### Forma Normal Prenex
 
-A Forma Normal Prenexa é uma forma padrão de representação para fórmulas da lógica de primeiro grau. Ela é caracterizada por ter todos os quantificadores movidos para a frente da fórmula, deixando a matriz da fórmula (a parte sem quantificadores) em uma forma livre de quantificadores. A Forma Normal Prenexa é útil por:
+A Forma Normal Prenex  é uma forma padrão de representação para fórmulas da lógica de primeiro grau. Ela é caracterizada por ter todos os quantificadores movidos para a frente da fórmula, deixando a matriz da fórmula (a parte sem quantificadores) em uma forma livre de quantificadores. A Forma Normal Prenex é útil por:
 
-1.**Facilita a Manipulação Lógica**: ao separar os quantificadores da matriz, a forma normal prenexa simplifica a análise e manipulação da estrutura lógica da fórmula.
+1.**Facilita a Manipulação Lógica**: ao separar os quantificadores da matriz, a forma normal Prenex  simplifica a análise e manipulação da estrutura lógica da fórmula.
 2.**Preparação para Outras Formas Normais**: é um passo intermediário útil na conversão para outras formas normais, como as formas normais conjuntiva e disjuntiva.
 3.**Utilização em Provas Automáticas**: É comumente usada em métodos de prova automática, facilitando o raciocínio sobre quantificadores.
 
-#### Estrutura da Forma Normal Prenexa
+Considere o seguinte exemplo: 
 
-Uma fórmula na forma normal prenexa tem a seguinte estrutura:
+Dada a Fórmula original:
+
+$$
+\exists x \forall y (P(x,y) \wedge Q(y))
+$$
+
+Em forma prenex:  
+
+$$
+\forall y \exists x (P(x,y) \wedge Q(y))
+$$
+
+#### Estrutura da Forma Normal Prenex
+
+Uma fórmula na forma normal Prenex  tem a seguinte estrutura:
 
 $$
 Q_1 x_1 \, Q_2 x_2 \, \ldots \, Q_n x_n \, M(x_1, x_2, \ldots, x_n)
@@ -2715,9 +2755,9 @@ onde:
 - $ x_i $ são as variáveis ligadas pelos quantificadores.
 - $ M(x_1, x_2, \ldots, x_n) $ é a matriz da fórmula, que é uma expressão lógica sem quantificadores.
 
-#### Conversão para Forma Normal Prenexa
+#### Conversão para Forma Normal Prenex
 
-Converter uma fórmula para a Forma Normal Prenexa envolve os seguintes passos:
+Converter uma fórmula para a Forma Normal Prenex  envolve os seguintes passos:
 
 1. **Eliminar Implicações**: Substitua todas as ocorrências de implicação por disjunções e negações.
 
@@ -2729,7 +2769,35 @@ Converter uma fórmula para a Forma Normal Prenexa envolve os seguintes passos:
 
 5. **Mover Quantificadores para Fora**: Mova todos os quantificadores para a esquerda da expressão, mantendo a ordem relativa dos quantificadores universais e existenciais.
 
-A forma normal prenexa é uma representação canônica de fórmulas da lógica de primeiro grau que separa claramente os quantificadores da matriz da fórmula. Ela é uma ferramenta valiosa na lógica e na teoria da prova, e sua compreensão é fundamental para trabalhar com lógica de primeiro grau.
+A forma normal Prenex  é uma representação canônica de fórmulas da lógica de primeiro grau que separa claramente os quantificadores da matriz da fórmula. Ela é uma ferramenta valiosa na lógica e na teoria da prova, e sua compreensão é fundamental para trabalhar com lógica de primeiro grau.
+
+#### Regras de Equivalência Prenex
+
+A Forma Prenex de uma fórmula lógica com quantificadores permite mover todos os quantificadores para o início da fórmula. Existem algumas regras de equivalência que preservam a forma prenex quando aplicadas a uma fórmula:
+
+**1. Comutatividade de quantificadores do mesmo tipo**: a ordem dos quantificadores do mesmo tipo pode ser trocada em uma fórmula na forma prenex. Por exemplo:
+
+$$
+\forall x \forall y \ P(x,y) \Leftrightarrow \forall y \forall x \ P(x,y)
+$$
+
+Isso ocorre porque a ordem dos quantificadores universais $\forall x$ e $\forall y$ não altera o significado lógico da fórmula. Essa propriedade é conhecida como comutatividade dos quantificadores.
+
+**2. Associatividade de quantificadores do mesmo tipo**: quantificadores do mesmo tipo podem ser agrupados de forma associativa em uma fórmula prenex. Por exemplo:
+
+$$
+\forall x \forall y \forall z \ P(x,y,z) \Leftrightarrow \forall x (\forall y \forall z \ P(x,y,z))
+$$
+
+Novamente, o agrupamento dos quantificadores universais não muda o significado da fórmula. Essa é a propriedade associativa.
+
+**3. Distributividade de quantificadores sobre operadores lógicos**: os quantificadores podem ser distribuídos sobre operadores lógicos como $\wedge, \vee, \rightarrow$:
+
+$$
+\forall x (P(x) \vee Q(x)) \Leftrightarrow (\forall x \ P(x)) \vee (\forall x \ Q(x))
+$$
+
+Isso permite _mover_ o quantificador para dentro do escopo do operador lógico. A equivalência se mantém pois a ordem de quantificação e operação não se altera.
 
 ### Conversão para Formas Normais Conjuntiva (FNC) e Disjuntiva (FND)
 
@@ -2750,9 +2818,9 @@ A forma normal prenexa é uma representação canônica de fórmulas da lógica 
  2. **Se o quantificador existencial tem quantificadores universais à sua esquerda:**
  Substitua $ \exists x P(x) $ por $ P(f(y_1, y_2, \ldots, y_n)) $ , onde $ f $ é uma nova função Skolem, e $ y_1, y_2, \ldots, y_n $ são as variáveis universais à esquerda do quantificador existencial.
 
-**5. Mover os Quantificadores Universais para Fora**: mova todos os quantificadores universais para fora, para a esquerda da expressão. Isso cria uma Forma Prenexa da fórmula.
+**5. Mover os Quantificadores Universais para Fora**: mova todos os quantificadores universais para fora, para a esquerda da expressão. Isso cria uma Forma Prenex  da fórmula.
 
-**6. Eliminar os Quantificadores Universais**: remova os quantificadores universais, deixando apenas a matriz da fórmula. Isso resulta em uma fórmula livre de quantificadores. Após a eliminação dos quantificadores existenciais e a movimentação de todos os quantificadores universais para fora (forma Prenexa), a eliminação dos quantificadores universais é simples:
+**6. Eliminar os Quantificadores Universais**: remova os quantificadores universais, deixando apenas a matriz da fórmula. Isso resulta em uma fórmula livre de quantificadores. Após a eliminação dos quantificadores existenciais e a movimentação de todos os quantificadores universais para fora (forma Prenex ), a eliminação dos quantificadores universais é simples:
 
  1. **Remova os quantificadores universais da fórmula:**
  Se você tem uma fórmula da forma $ \forall x P(x) $ , simplesmente remova o quantificador $ \forall x $ , deixando apenas a matriz da fórmula $ P(x) $ .
@@ -2770,6 +2838,34 @@ A forma normal prenexa é uma representação canônica de fórmulas da lógica 
  1. Use as leis distributivas para mover as disjunções para dentro e as conjunções para fora.
  2. Certifique-se de que a fórmula esteja na forma de uma disjunção de conjunções.
 
+#### Exemplos Interessantes da Forma Prenex 
+
+**Exemplo 1**: duas fórmulas logicamente equivalentes, uma na forma prenex e outra não considere a fórmula original:
+
+$$
+\forall x \exists y (P(x) \rightarrow Q(y))  
+$$
+
+Se convertida para a Forma Prenex teremos:
+
+$$
+\exists y \forall x (P(x) \rightarrow Q(y))
+$$
+
+Cuja a equivalência pode ser provada por meio do seguinte raciocínio: seja $I$ uma interpretação booleana das variáveis $P$ e $Q$. 
+
+Suponha $I$ satisfaz $\forall x \exists y (P(x) \rightarrow Q(y))$. Logo, para todo $x$ no domínio, existe um $y$ tal que: se $P(x)$ é verdadeiro, então $Q(y)$ também é verdadeiro. Isso é equivalente a dizer: existe um $y$, tal que para todo $x$, se $P(x)$ é verdadeiro, $Q(y)$ também é verdadeiro. Ou seja, $I$ também satisfaz: $\exists y \forall x (P(x) \rightarrow Q(y))$
+
+Por um raciocínio simétrico, o oposto também é verdadeiro. Portanto, as fórmulas são logicamente equivalentes.
+
+**Exemplo 2**: Fórmula sem forma prenex:
+
+$$
+\forall x (P(x) \rightarrow \exists y Q(x,y))
+$$
+
+Não pode ser convertida à forma prenex pois o quantificador $\exists y$ está dentro do escopo de $\rightarrow $.
+
 #### Observações Importantes
 
 A conversão para FNC é útil para métodos de prova. A conversão para FND é menos comum, mas pode ser útil em alguns contextos de análise lógica. **CUIDADO: a eliminação dos quantificadores pode alterar a interpretação da fórmula em alguns modelos, mas é útil porque preserva a satisfatibilidade**.
@@ -2778,11 +2874,11 @@ A conversão para FNC é útil para métodos de prova. A conversão para FND é 
 
 a) Todos os alunos estudam ou alguns professores ensinam matemática
 
- **Lógica de Primeiro Grau**
+**Lógica de Primeiro Grau**
 
 $$\forall x(\text{Aluno}(x) \rightarrow \text{Estuda}(x)) \lor \exists y(\text{Professor}(y) \land \text{EnsinaMatemática}(y))$$
 
- **Forma Normal Conjuntiva (FNC)**
+**Forma Normal Conjuntiva (FNC)**
 
  1.Convertendo a implicação:
 
@@ -2792,7 +2888,7 @@ $$\neg \text{Aluno}(x) \lor \text{Estuda}(x)$$
  
 $$(\neg \text{Aluno}(x) \lor \text{Estuda}(x)) \land (\text{Professor}(y) \land \text{EnsinaMatemática}(y))$$
 
- **Forma Normal Disjuntiva (FND)**
+**Forma Normal Disjuntiva (FND)**
 
  1.Negando o consequente do implicador:
  
@@ -2804,11 +2900,11 @@ $$(\text{Aluno}(x) \land \neg \text{Estuda}(x)) \lor (\neg \text{Professor}(y) \
 
 b) Algum aluno estuda e todo professor ensina
 
- **Lógica de Primeiro Grau**
+**Lógica de Primeiro Grau**
 
 $$\exists x(\text{Aluno}(x) \land \text{Estuda}(x)) \land \forall y(\text{Professor}(y) \rightarrow \text{Ensina}(y))$$
 
- **Forma Normal Conjuntiva (FNC)**
+**Forma Normal Conjuntiva (FNC)**
 
  1. Convertendo a implicação:
  
@@ -2818,7 +2914,7 @@ $$\neg \text{Professor}(y) \lor \text{Ensina}(y)$$
  
 $$(\text{Aluno}(x) \land \text{Estuda}(x)) \land (\neg \text{Professor}(y) \lor \text{Ensina}(y))$$
 
- **Forma Normal Disjuntiva (FND)**
+**Forma Normal Disjuntiva (FND)**
 
  1. Negando a conjunção existencial:
  
@@ -2830,11 +2926,11 @@ $$(\neg \text{Aluno}(x) \lor \neg \text{Estuda}(x)) \lor (\text{Professor}(y) \l
 
 c) Todo estudante é inteligente ou algum professor é sábio
 
- **Lógica de Primeiro Grau**
+**Lógica de Primeiro Grau**
 
 $$\forall x(\text{Estudante}(x) \rightarrow \text{Inteligente}(x)) \lor \exists y(\text{Professor}(y) \land \text{Sábio}(y))$$
 
- **Forma Normal Conjuntiva (FNC)**
+**Forma Normal Conjuntiva (FNC)**
 
  1. Convertendo a implicação:
  
@@ -2844,7 +2940,7 @@ $$\neg \text{Estudante}(x) \lor \text{Inteligente}(x)$$
  
 $$(\neg \text{Estudante}(x) \lor \text{Inteligente}(x)) \land (\text{Professor}(y) \land \text{Sábio}(y))$$
 
- **Forma Normal Disjuntiva (FND)**
+**Forma Normal Disjuntiva (FND)**
 
  1. Negando o consequente do implicador:
  
@@ -2856,29 +2952,29 @@ $$(\text{Estudante}(x) \land \neg \text{Inteligente}(x)) \lor (\neg \text{Profes
 
 d) Todo animal corre ou algum pássaro voa
 
- **Lógica de Primeiro Grau**
+**Lógica de Primeiro Grau**
 
 $$\forall x(\text{Animal}(x) \rightarrow \text{Corre}(x)) \lor \exists y(\text{Pássaro}(y) \land \text{Voa}(y))$$
 
- **Forma Normal Conjuntiva (FNC)**
+**Forma Normal Conjuntiva (FNC)**
 
  1. Convertendo a implicação:
  
- $$\neg \text{Animal}(x) \lor \text{Corre}(x)$$
+$$\neg \text{Animal}(x) \lor \text{Corre}(x)$$
 
  2. Adicionando a disjunção existencial:
  
- $$(\neg \text{Animal}(x) \lor \text{Corre}(x)) \land (\text{Pássaro}(y) \land \text{Voa}(y))$$
+$$(\neg \text{Animal}(x) \lor \text{Corre}(x)) \land (\text{Pássaro}(y) \land \text{Voa}(y))$$
 
- **Forma Normal Disjuntiva (FND)**
+**Forma Normal Disjuntiva (FND)**
 
  1. Negando o consequente do implicador:
  
- $$\text{Animal}(x) \land \neg \text{Corre}(x)$$
+$$\text{Animal}(x) \land \neg \text{Corre}(x)$$
 
  2. Adicionando a conjunção existencial negada:
  
- $$(\text{Animal}(x) \land \neg \text{Corre}(x)) \lor (\neg \text{Pássaro}(y) \lor \neg \text{Voa}(y))$$
+$$(\text{Animal}(x) \land \neg \text{Corre}(x)) \lor (\neg \text{Pássaro}(y) \lor \neg \text{Voa}(y))$$
 
 ## Cláusula de Horn
 
@@ -2887,6 +2983,8 @@ A **Cláusula de Horn** foi assim nomeada em homenagem ao matemático e lógico 
 Não demorou muito para os matemáticos perceberem que a Lógica de Primeira Ordem é poderosa, mas pode ser ineficientes para resolver os problemas relacionados ao Problema da Decidibilidade. A busca por formas mais eficientes de resolução levou ao estudo de subconjuntos restritos da lógica de primeira ordem, onde a decidibilidade poderia ser alcançada de maneira mais eficiente. Aqui, eficiência significa o menor custo computacional, no menor tempo. 
 
 Alfred Horn identificou um desses subconjuntos em seu artigo de 1951, introduzindo o que agora é conhecido como **Cláusula de Horn**. Ele mostrou que esse subconjunto particular tem propriedades interessantes que permitem a resolução em tempo polinomial, tornando-o atraente para aplicações práticas.
+
+Se prepare vamos ver porque $P \lor \neg Q \lor \neg R$ é uma Cláusula de Horn e $P \lor Q \lor \neg R$ não é.
 
 ### Definição da Cláusula de Horn
 
@@ -2963,7 +3061,7 @@ As consultas representam todas as perguntas que podem ser feitas neste cenário.
 
 Neste exemplo, as Cláusulas de Horn nos permitiram representar o conhecimento sobre o clima e as regras para escolher roupas. Os fatos forneceram a base de conhecimento, as regras permitiram inferências lógicas, e a consulta nos permitiu explorar o sistema para obter recomendações práticas.
 
-#### Exemplo2: Sistema de Diagnóstico Médico
+#### Exemplo 2: Sistema de Diagnóstico Médico
 
 Imagine que estamos construindo um sistema lógico para diagnosticar doenças com base em sintomas, histórico médico e outros fatores relevantes. Vamos usar Cláusulas de Horn para representar o conhecimento e a lógica do sistema.
 
@@ -3010,11 +3108,38 @@ O quantificador existencial (representado por $ \exists $ ) afirma que existe pe
 
 - **Fato**: Existe um pássaro que não pode voar. ( $ \exists x, \text{Pássaro}(x) \land \neg \text{Voar}(x) $ )
 
-### Transformação de Forma Normal Conjuntiva (FNC) para Cláusulas de Horn
+
+### Conversão de Fórmulas
+
+Seja uma fórmula bem formada arbitrária da Lógica Proposicional. Alguns passos podem ser aplicados para obter uma cláusula de Horn equivalente:
+
+1. Converter a fórmula para Forma Normal Conjuntiva (FNC), obtendo uma conjunção de disjunções
+2. Aplicar as seguintes técnicas em cada disjunção:
+   
+  - Inverter a polaridade de literais positivos extras;
+  - Adicionar literais negativos que preservem a satisfatibilidade;
+  - Dividir em cláusulas menores se necessário.
+
+3. Simplificar a fórmula final obtida.
+
+#### Exemplo: dada a fórmula:
+
+$$(P \land Q) \lor (P \land R)$$
+
+Passos:
+
+1. Converter para FNC: $(P \lor Q) \land (P \lor R)$  
+2. Inverter P em uma das disjunções: $(P \lor Q) \land (\neg P \lor R)$
+3. Adicionar literal negativo: $(P \lor Q \lor \neg S) \land (\neg P \lor R \lor \neg T)$
+4. Simplificar: $\neg S \lor P \land \neg T \lor R$
+
+Assim se obtém uma conjunção de cláusulas de Horn equivalente à fórmula original.
+
+#### Transformação de Forma Normal Conjuntiva (FNC) para Cláusulas de Horn
 
 A Forma Normal Conjuntiva é uma conjunção de disjunções de literais. Uma Cláusula de Horn é um tipo especial de cláusula que contém no máximo um literal positivo. Considere que o objetivo das Cláusulas de Horn é criar um conjunto de Fórmulas Bem Formadas, divididas em Fatos, Regras e Consultas para permitir a resolução de problemas então, a transformação de uma FNC para Cláusulas de Horn pode incorrer em alguns problemas:
 
-- **Perda de Informação**: Nem todas as cláusulas em FNC podem ser transformadas em Cláusulas de Horn.
+- **Perda de Informação**: Nem todas as cláusulas em FNC podem ser transformadas em Cláusulas de Horn. Para minimizar este risco atente para as regras de equivalência que vimos anteriormente.
 - **Complexidade**: A transformação pode ser complexa e requer uma análise cuidadosa da lógica e do contexto.
 
 #### Etapas de Transformação
@@ -3037,6 +3162,101 @@ $$(A \rightarrow B) \land (B \lor C)$$
 3. **Resultado**:
  - A fórmula em Cláusulas de Horn é: $ (\neg A \lor B) \land (B \lor C) $ 
 
+#### Problemas interessantes resolvidos com a Cláusula de Horn
+
+**Problema 1 - O Mentiroso e o Verdadeiro:**: Você encontra dois habitantes: $ A $ e $ B $ . Você sabe que um sempre diz a verdade e o outro sempre mente, mas você não sabe quem é quem. Você pergunta a $ A $ , _Você é o verdadeiro?_ A responde, mas você não consegue ouvir a resposta dele. $ B $ então te diz, _A disse que ele é o mentiroso_.
+
+**Fatos**:
+
+$Mentiroso(A)$
+$Verdadeiro(B)$
+
+**Regra**:
+
+$$\forall x \forall y (Mentiroso(x) \wedge Pergunta(y, \text{Você é o verdadeiro?}) → Responde(x, \text{Sou o mentiroso}))$$
+
+**Pergunta**:
+
+$$Responde(A, \text{Sou o mentiroso})?$$
+
+**Problema 2 - As Três Lâmpadas:** existem três lâmpadas incandescentes em uma sala, e existem três interruptores fora da sala. Você pode manipular os interruptores o quanto quiser, mas só pode entrar na sala uma vez. Como você pode determinar qual interruptor opera qual lâmpada?
+
+**Fatos**:
+
+$Interruptor(s_1)$
+$Interruptor(s_2)$
+$Interruptor(s_3)$
+
+$Lâmpada(b_1)$
+$Lâmpada(b_2)$
+$Lâmpada(b_3)$
+
+**Regras**:
+
+$$\forall x \forall y (Interruptor(x) \wedge Ligado(x) \wedge Lâmpada(y) \rightarrow Acende(y))$$
+
+$$\forall x (Lâmpada(x) \wedge FoiLigada(x) \wedge AgoraDesligada(x) \rightarrow EstáQuente(x))$$
+
+**Pergunta**:
+
+$$Acende(b_2, s_2)?$$
+$$EstáQuente(b_1)?$$
+
+**Problema 3 - O Agricultor, a Raposa, o Ganso e o Grão:** um agricultor quer atravessar um rio e levar consigo uma raposa, um ganso e um saco de grãos. O barco do agricultor só lhe permite levar um item além dele mesmo. Se a raposa e o ganso estiverem sozinhos, a raposa comerá o ganso. Se o ganso e o grão estiverem sozinhos, o ganso comerá o grão. Como o agricultor pode levar todas as suas posses para o outro lado do rio?
+
+**Fatos**:
+
+$Raposa(r)$
+$Ganso(g)$
+$Grão(gr)$
+
+**Regras**:
+
+$$\forall x \forall y (Raposa(x) \wedge Ganso(y) \wedge Sozinhos(x, y) \rightarrow Come(x, y))$$
+
+$$\forall x \forall y (Ganso(x) \wedge Grão(y) \wedge Sozinhos(x, y) \rightarrow Come(x, y))$$
+
+**Pergunta**:
+
+$$¬Come(r, g)?$$
+$$¬Come(g, gr)?$$
+
+**Problema 4 - A Ponte e a Tocha:** quatro pessoas chegam a um rio à noite. Há uma ponte estreita, mas ela só pode conter duas pessoas de cada vez. Eles têm uma tocha e, por ser noite, a tocha tem que ser usada ao atravessar a ponte. A pessoa A pode atravessar a ponte em um minuto, B em dois minutos, C em cinco minutos e D em oito minutos. Quando duas pessoas atravessam a ponte juntas, elas devem se mover no ritmo da pessoa mais lenta. Qual é a maneira mais rápida para todos eles atravessarem a ponte?
+
+**Fatos (tempos)**:
+
+$Tempo(a, 1)$
+$Tempo(b, 2)$  
+$Tempo(c, 5)$
+$Tempo(d, 8)$
+
+**Regra**:
+
+$$\forall x \forall y (AtravessaCom(x, y) \rightarrow TempoTotal(Máximo(Tempo(x), Tempo(y))))$$
+
+**Pergunta**:
+
+$$TempoTotal(15)?$$
+
+**Problema 5 - O Problema de Monty Hall:** em um programa de game show, os concorrentes tentam adivinhar qual das três portas contém um prêmio valioso. Depois que um concorrente escolhe uma porta, o apresentador, que sabe o que está por trás de cada porta, abre uma das portas não escolhidas para revelar uma cabra (representando nenhum prêmio). O apresentador então pergunta ao concorrente se ele quer mudar sua escolha para a outra porta não aberta ou ficar com sua escolha inicial. O que o concorrente deve fazer para maximizar suas chances de ganhar o prêmio?
+
+**Fatos**:
+
+$Porta(d_1)$
+$Porta(d_2)$
+$Porta(d_3)$
+
+**Regras**:
+
+$$\forall x Prêmio(x) \rightarrow Porta(x)$$
+
+$$\forall x \forall y (Porta(x) \wedge Porta(y) \wedge x \neq y \rightarrow \neg Prêmio(x) \vee \neg Prêmio(y))$$
+
+**Pergunta**:
+
+$$\exists x (Porta(x) \wedge \neg Revelada(x) \wedge x \neq PortaEscolhida \rightarrow Prêmio(x))?$$
+
+
 #### Cláusulas de Horn e o Prolog
 
 O Prolog é uma linguagem de programação lógica que utiliza Cláusulas de Horn para representar e manipular conhecimento. A sintaxe e a semântica do Prolog são diretamente mapeadas para Cláusulas de Horn:
@@ -3045,10 +3265,39 @@ O Prolog é uma linguagem de programação lógica que utiliza Cláusulas de Hor
 - **Regras**: As regras em Prolog são representadas como implicações, onde os antecedentes são literais negativos e o consequente é o literal positivo. Por exemplo, a regra _Se X é humano, então X é mortal_ pode ser representada como _mortal(X) :- humano(X)_.
 - **Consultas**: As consultas em Prolog são feitas ao sistema para inferir informações com base nos fatos e regras definidos. Por exemplo, a consulta "Quem é mortal?" pode ser representada como _?- mortal(X)_.
 
-
 O Prolog utiliza um mecanismo de resolução baseado em Cláusulas de Horn para responder a consultas. Ele aplica uma técnica de busca em profundidade para encontrar uma substituição de variáveis que satisfaça a consulta. 
 
-#### Exemplo: Sistema de Recomendação de Roupas em Prolog
+#### Exemplo 1: O mais simples possível. 
+
+**Fatos:**
+<pre>
+ <code class="prolog">
+homem(joao).
+mulher(maria).
+ </code>
+</pre>
+
+Os fatos indicam que "João é homem" e "Maria é mulher".
+
+**Regra:**
+<pre>
+ <code class="prolog">
+mortal(X) :- homem(X).
+ </code>
+</pre>
+
+A regra estabelece que "Se X é homem, então X é mortal". O símbolo :- representa implicação.
+
+**Consulta:**  
+<pre>
+ <code class="prolog">
+mortal(joao).
+ </code>
+</pre>
+
+A consulta verifica se "João é mortal", aplicando a regra definida anteriormente. O Prolog responderá _True_ (verdadeiro) pois a regra se aplica dado o fato de que Joao é homem.
+
+#### Exemplo 2: Sistema de Recomendação de Roupas em Prolog
 
 Imagine que estamos construindo um sistema lógico simples em Prolog para recomendar o tipo de roupa que uma pessoa deve vestir com base no clima. Vamos usar Cláusulas de Horn para representar o conhecimento e a lógica do sistema.
 
