@@ -425,8 +425,7 @@ Linguagens de programação que usam a Programação Lógica usam _unificação_
   <td style="text-align: center; width: 20%;">(21)</td>
  </tr>
 </table>
-<legend style="font-size: 1em;
- text-align: center;
+<legend style="font-size: 1em; text-align: center;
  margin-bottom: 20px;">Tabela 3 - Equivalências em Lógica Proposicional.</legend>
 
 Como essas equivalências permitem validar Fórmulas Bem Formadas sem o uso de uma Tabela Verdade. Uma coisa interessante seria tentar provar cada uma delas.
