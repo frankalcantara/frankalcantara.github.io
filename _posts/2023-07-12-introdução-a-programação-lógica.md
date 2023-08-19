@@ -207,15 +207,15 @@ Esse sistema, por vezes chamado de álgebra booleana, fundamental para o desenvo
 
 Vamos representar essas declarações atômicas por literais $ A $ , $ B $ , $ X_1 $ , $ X_2 $ etc., e suas negações por $ \neg A $ , $ \neg B $ , $ \neg X_1 $ , $ \neg X_2 $ etc. Todos os símbolos individuais e suas negações são conhecidas como literais.
 
-Na Lógica Proposicional, as fórmulas, chamadas de Fórmulas Bem Formadas, podem ser atômicas, ou compostas. Existe um operador, ou conectivo lógico, principal, que conecta várias Fórmulas Bem Formadas de forma recursiva. 
+Na Lógica Proposicional, as fórmulas, chamadas de Fórmulas Bem Formadas, podem ser atômicas, ou compostas. Existe um operador, ou conectivo lógico, principal, que conecta várias Fórmulas Bem Formadas de forma recursiva.
 
 As declarações atômicas e compostas são costuradas por conectivos para produzir declarações compostas, cujo valor de verdade depende dos valores de verdade das declarações componentes. Os conectivos que consideramos inicialmente, e suas Tabelas Verdade serão:
 
 <table style="margin-left: auto;
  margin-right: auto; text-align:center;">
  <tr style="border-top: 2px solid gray; border-bottom: 1px solid gray;">
- <th style="width:8%; border-right: 1px solid gray;"> $ P $ </th>
- <th style="width:8%; border-right: double gray;"> $ Q $ </th> 
+ <th style="border-right: 1px solid gray;"> $ P $ </th>
+ <th style="border-right: double gray;"> $ Q $ </th> 
  <th style="width:16.8%; border-right: 1px solid gray;"> $ P \vee Q $ </th>
  <th style="width:16.8%; border-right: 1px solid gray;"> $ P \wedge Q $ </th>
  <th style="width:16.8%; border-right: 1px solid gray;"> $ \neg P $ </th>
@@ -223,8 +223,8 @@ As declarações atômicas e compostas são costuradas por conectivos para produ
  <th style="width:16.8%;"> $ P \leftrightarrow Q $ </th>
  </tr>
  <tr style="background-color: #eeeeee;">
- <td style="width:8%; border-right: 1px solid gray;">T</td>
- <td style="width:8%; border-right: double gray;">T</td> 
+ <td style="border-right: 1px solid gray;">T</td>
+ <td style="border-right: double gray;">T</td> 
  <td style="width:16.8%; border-right: 1px solid gray;">T</td>
  <td style="width:16.8%; border-right: 1px solid gray;">T</td>
  <td style="width:16.8%; border-right: 1px solid gray;">F</td>
@@ -232,8 +232,8 @@ As declarações atômicas e compostas são costuradas por conectivos para produ
  <td style="width:16.8%;">T</td>
  </tr>
  <tr>
- <td style="width:8%; border-right: 1px solid gray;">T</td>
- <td style="width:8%; border-right: double gray;">F</td>
+ <td style="border-right: 1px solid gray;">T</td>
+ <td style="border-right: double gray;">F</td>
  <td style="width:16.8%; border-right: 1px solid gray;">T</td>
  <td style="width:16.8%; border-right: 1px solid gray;">F</td>
  <td style="width:16.8%; border-right: 1px solid gray;">F</td>
@@ -241,8 +241,8 @@ As declarações atômicas e compostas são costuradas por conectivos para produ
  <td style="width:16.8%;">F</td>
  </tr>
  <tr style="background-color: #eeeeee;">
- <td style="width:8%; border-right: 1px solid gray;">F</td>
- <td style="width:8%; border-right: double gray;">T</td>
+ <td style="border-right: 1px solid gray;">F</td>
+ <td style="border-right: double gray;">T</td>
  <td style="width:16.8%; border-right: 1px solid gray;">T</td>
  <td style="width:16.8%; border-right: 1px solid gray;">F</td>
  <td style="width:16.8%; border-right: 1px solid gray;">T</td>
@@ -250,8 +250,8 @@ As declarações atômicas e compostas são costuradas por conectivos para produ
  <td style="width:16.8%;">F</td> 
  </tr>
  <tr style="border-bottom: 2px solid gray;">
- <td style="width:8%; border-right: 1px solid gray;">F</td>
- <td style="width:8%; border-right: double gray;">F</td>
+ <td style="border-right: 1px solid gray;">F</td>
+ <td style="border-right: double gray;">F</td>
  <td style="width:16.8%; border-right: 1px solid gray;">F</td>
  <td style="width:16.8%; border-right: 1px solid gray;">F</td>
  <td style="width:16.8%; border-right: 1px solid gray;">T</td>
@@ -271,7 +271,46 @@ O condicional $ \rightarrow $ não representa a implicação em nenhum sentido c
 
 O bicondicional $ \leftrightarrow $ equivale a ambos os componentes terem o mesmo valor-verdade. Todos os operadores, ou conectivos, conectam duas declarações, exceto $ \neg $ que se aplica a apenas um termo.
 
-Ainda observando a Tabela Verdade acima, é fácil perceber que se tivermos $ 4 $ termos diferentes, em vez de $ 2 $ , teremos $ 2^4 = 16 $ linhas. Independente do número de termos, se para uma determinada Fórmula Bem Formada todas os resultados forem verdadeiros, $ T $ , teremos uma _tautologia_, se todos forem falsos, $ F $ uma _contradição_.
+Cada operador com sua própria Aridade: 
+
+<table style="margin-left: auto;
+ margin-right: auto; text-align:center;">
+
+<tr  style="border-top: 2px solid gray; border-bottom: 1px solid gray;">
+<th style="border-right: 1px solid gray;">No Argumentos</th>  
+<th style="border-right: 1px solid gray;">Aridade</th>
+<th style="border-right: 1px solid gray; white-space: nowrap;">Exemplos</th>
+</tr>
+
+<tr style="background-color: #eeeeee;">
+<td style="border-right: 1px solid gray;">0</td>
+<td style="border-right: 1px solid gray;">Nullary</td>
+<td style="border-right: 1px solid gray; white-space: nowrap;">$5$, $False$, Constantes</td>
+</tr>
+
+<tr style="background-color: #ffffff;">  
+<td style="border-right: 1px solid gray;">1</td>
+<td style="border-right: 1px solid gray;">Unary</td>
+<td style="border-right: 1px solid gray; white-space: nowrap;">$P(x)$, $7x$</td>
+</tr>
+
+<tr style="background-color: #eeeeee;">
+<td style="border-right: 1px solid gray;">2</td>
+<td style="border-right: 1px solid gray;">Binary</td>
+<td style="border-right: 1px solid gray; white-space: nowrap;">$x \vee y$, $c \wedge y$</td>
+</tr>
+
+<tr style="border-bottom: 2px solid gray; background-color: #ffffff;">
+<td style="width:45%; border-right: 1px solid gray;">3</td>  
+<td style="width:45%; border-right: 1px solid gray;">Ternary</td>
+<td style="width:45%; border-right: 1px solid gray; white-space: nowrap;">if $P$ then $Q$ else $R$, $(P \rightarrow Q) \wedge (\neg P \rightarrow R)$</td>
+</tr>
+</table>
+<legend style="font-size: 1em;
+ text-align: center;
+ margin-bottom: 20px;">Tabela 2 - Aridade dos Operadores da Lógica Proposicional.</legend>
+
+Ainda observando a Tabela 1, que contem a Tabela Verdade dos operadores da Lógica Proposicional, é fácil perceber que se tivermos $ 4 $ termos diferentes, em vez de $ 2 $ , teremos $ 2^4 = 16 $ linhas. Independente do número de termos, se para uma determinada Fórmula Bem Formada todas os resultados forem verdadeiros, $ T $ , teremos uma _tautologia_, se todos forem falsos, $ F $ uma _contradição_.
 
 Uma _tautologia_ é uma fórmula que é sempre verdadeira, não importando atribuição de valores às variáveis. Em Programação Lógica, tautologias representam verdades universais sobre o domínio do problema. Já uma _contradição_ é sempre falsa. Na Programação Lógica, contradições indicam inconsistências ou impossibilidades lógicas no domínio do problema.
 
@@ -388,13 +427,13 @@ Linguagens de programação que usam a Programação Lógica usam _unificação_
 </table>
 <legend style="font-size: 1em;
  text-align: center;
- margin-bottom: 20px;">Tabela 2 - Equivalências em Lógica Proposicional.</legend>
+ margin-bottom: 20px;">Tabela 3 - Equivalências em Lógica Proposicional.</legend>
 
 Como essas equivalências permitem validar Fórmulas Bem Formadas sem o uso de uma Tabela Verdade. Uma coisa interessante seria tentar provar cada uma delas.
 
-As equivalências que listei pipocaram quase espontaneamente enquanto estava escrevendo este texto, por hábito e necessidade. 
+As equivalências que listei pipocaram quase espontaneamente enquanto estava escrevendo este texto, por hábito e necessidade.
 
-São muitas as equivalências que existem, estas são as mais comuns. Talvez, alguns exemplos de validação de Fórmulas Bem Formadas usando apenas as equivalências de Tabela 2, sirvam para clarear o caminho que precisamos seguir:
+São muitas as equivalências que existem, estas são as mais comuns. Talvez, alguns exemplos de validação de Fórmulas Bem Formadas usando apenas as equivalências apresentadas na Tabela 3, sirvam para clarear o caminho que precisamos seguir:
 
 **Exemplo 1**: $ P \wedge (Q \vee (P \wedge R)) $ 
 
@@ -3050,7 +3089,7 @@ Você pode criar todas as regras que achar importante para definir o comportamen
 
 - **Consulta 1**: Está ensolarado e a temperatura está acima de 20°C. O que devo vestir? ( $ \neg S \land \neg T $ )
 
-As consultas representam todas as perguntas que podem ser feitas neste cenário. Crie quantas consultas achar necessário.
+As consultas representam todas as consultas que podem ser feitas neste cenário. Crie quantas consultas achar necessário.
 
 **4. Resolução**: usando os fatos e regras, podemos resolver a consulta:
 
@@ -3154,7 +3193,7 @@ $$(A \rightarrow B) \land (B \lor C)$$
 
 1. **Converter para FNC**:
  - Elimine a implicação: $ (\neg A \lor B) \land (B \lor C) $ 
- - A fórmula já está em FNC.
+ - A fórmula já está em Forma Normal Conjuntiva.
 
 2. **Identificar Cláusulas de Horn**:
  - Ambas as cláusulas são Cláusulas de Horn, pois cada uma contém apenas um literal positivo.
@@ -3164,7 +3203,7 @@ $$(A \rightarrow B) \land (B \lor C)$$
 
 #### Problemas interessantes resolvidos com a Cláusula de Horn
 
-**Problema 1 - O Mentiroso e o Verdadeiro:**: Você encontra dois habitantes: $ A $ e $ B $ . Você sabe que um sempre diz a verdade e o outro sempre mente, mas você não sabe quem é quem. Você pergunta a $ A $ , _Você é o verdadeiro?_ A responde, mas você não consegue ouvir a resposta dele. $ B $ então te diz, _A disse que ele é o mentiroso_.
+**Problema 1 - O Mentiroso e o Verdadeiro:**: Você encontra dois habitantes: $ A $ e $ B $ . Você sabe que um sempre diz a verdade e o outro sempre mente, mas você não sabe quem é quem. Você consulta a $ A $ , _Você é o verdadeiro?_ A responde, mas você não consegue ouvir a resposta dele. $ B $ então te diz, _A disse que ele é o mentiroso_.
 
 **Fatos**:
 
@@ -3173,9 +3212,9 @@ $Verdadeiro(B)$
 
 **Regra**:
 
-$$\forall x \forall y (Mentiroso(x) \wedge Pergunta(y, \text{Você é o verdadeiro?}) → Responde(x, \text{Sou o mentiroso}))$$
+$$\forall x \forall y (Mentiroso(x) \wedge consulta(y, \text{Você é o verdadeiro?}) → Responde(x, \text{Sou o mentiroso}))$$
 
-**Pergunta**:
+**Consulta**:
 
 $$Responde(A, \text{Sou o mentiroso})?$$
 
@@ -3197,7 +3236,7 @@ $$\forall x \forall y (Interruptor(x) \wedge Ligado(x) \wedge Lâmpada(y) \right
 
 $$\forall x (Lâmpada(x) \wedge FoiLigada(x) \wedge AgoraDesligada(x) \rightarrow EstáQuente(x))$$
 
-**Pergunta**:
+**Consulta**:
 
 $$Acende(b_2, s_2)?$$
 $$EstáQuente(b_1)?$$
@@ -3216,7 +3255,7 @@ $$\forall x \forall y (Raposa(x) \wedge Ganso(y) \wedge Sozinhos(x, y) \rightarr
 
 $$\forall x \forall y (Ganso(x) \wedge Grão(y) \wedge Sozinhos(x, y) \rightarrow Come(x, y))$$
 
-**Pergunta**:
+**Consulta**:
 
 $$¬Come(r, g)?$$
 $$¬Come(g, gr)?$$
@@ -3234,7 +3273,7 @@ $Tempo(d, 8)$
 
 $$\forall x \forall y (AtravessaCom(x, y) \rightarrow TempoTotal(Máximo(Tempo(x), Tempo(y))))$$
 
-**Pergunta**:
+**Consulta**:
 
 $$TempoTotal(15)?$$
 
@@ -3255,7 +3294,6 @@ $$\forall x \forall y (Porta(x) \wedge Porta(y) \wedge x \neq y \rightarrow \neg
 **Pergunta**:
 
 $$\exists x (Porta(x) \wedge \neg Revelada(x) \wedge x \neq PortaEscolhida \rightarrow Prêmio(x))?$$
-
 
 #### Cláusulas de Horn e o Prolog
 
