@@ -445,7 +445,7 @@ $$
  \end{align*}
 $$
 
-**Exemplo 2**: $ P \rightarrow (Q \wedge (R \vee P)) $ 
+**Exemplo 2**: $ P \rightarrow (Q \wedge (R \vee P)) $
 
 Simplificação:
 
@@ -3046,15 +3046,16 @@ onde:
 
 A Cláusula de Horn pode ser classificada em três tipos principais:
 
-1. **Fatos**: Não há literais negativos, apenas um literal positivo. Exemplo: $ P $ .
-2. **Regras**: Um ou mais literais negativos e exatamente um literal positivo. Exemplo: $ \neg P \land \neg Q \rightarrow R $ .
-3. **Metas ou Consultas**: Um ou mais literais negativos e nenhum literal positivo. Exemplo: $ \neg P \land \neg Q $ .
+1. **Nula**: uma cláusula vazia;
+2. **Fatos**: não há literais negativos, apenas um literal positivo. Exemplo: $ P $. 
+3. **Regras**: um ou mais literais negativos e exatamente um literal positivo. Eventualmente chamos as Regras de Cláusulas Definidas;Exemplo: $ \neg P \land \neg Q \rightarrow R $ .
+4. **Metas ou Consultas**: um ou mais literais negativos e nenhum literal positivo. As clásulas de meta contém apenas literais negativos. Exemplo: $ \neg P \land \neg Q $ .
 
 Para entender melhor, imagine que estamos construindo um cenário mental fundamentado na lógica para construir o entendimento de um problema, uma espécie de paisagem mental onde as coisas fazem sentido. Nesse cenário, as Cláusulas de Horn serão os tijolos fundamentais que usaremos para construir estruturas lógicas.
 
 **1. Fatos**: os fatos são como pedras fundamentais desse cenário. Eles são afirmações simples e diretas que dizem como as coisas são. Considere, por exemplo: _O céu é azul_, $ P $ e _A grama é verde_$ Q $ . Essas são verdades que não precisam de justificativa. Elas simplesmente são. os Fatos são axiomas. 
 
-**2. Regras**: as regras são um pouco mais intrigantes. Elas são como as regras de um jogo que definem como as coisas se relacionam umas com as outras. _Se chover, a grama ficará molhada._ Essa é uma regra. Ela nos diz o que esperar se certas condições forem atendidas. As regras são como os conectores em nosso mundo lógico, ligando fatos e permitindo que façamos inferências. Elas são o motor que nos permite raciocinar e descobrir novas verdades a partir das que já conhecemos. Por exemplo: 
+**2. Regras**: as regras são um pouco mais intrigantes. Elas são como as regras de um jogo que definem como as coisas se relacionam umas com as outras. _Se não chover, a grama não ficará molhada._ Essa é uma regra. Ela nos diz o que esperar se certas condições forem atendidas. As regras são como os conectores em nosso mundo lógico, ligando fatos e permitindo que façamos inferências. Elas são o motor que nos permite raciocinar e descobrir novas verdades a partir das que já conhecemos. Por exemplo: 
 
 - $ \neg P \land \neg Q \rightarrow R $ : _Se não chover, $ P $ e não ventar, $ Q $ , então faremos um piquenique, $ R $_.
 - $ \neg A \land \neg B \land \neg C \rightarrow D $ : _Se $ A $ , $ B $ e $ C $ forem falsos, então $ D $ é verdadeiro_.
