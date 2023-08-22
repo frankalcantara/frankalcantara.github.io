@@ -72,8 +72,8 @@
           ]
         },
         {
-          "title": "draft",
-          "name": "draft",
+          "title": "published",
+          "name": "published",
           "type": "datetime"
         }
       ]
