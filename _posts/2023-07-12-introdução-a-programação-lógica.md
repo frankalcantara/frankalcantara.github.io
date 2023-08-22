@@ -1814,12 +1814,15 @@ Se temos as hipóteses $ P $ e $ P \rightarrow Q $ , podemos deduzir $ Q $ usand
 No contexto do sistema de provas $ \mathfrak{L} $ e considerando apenas a lógica proposicional, **uma hipótese é uma proposição ou conjunto de proposições assumidas como verdadeiras, a partir das quais outras proposições podem ser logicamente deduzidas**.
 
 **Exemplo 1:** considere o seguinte argumento:
-$$\begin{align*}
+
+$$
+\begin{align*}
 A \rightarrow (B \rightarrow C) \\
 A \rightarrow B \\
 \hline
 A \rightarrow C
-\end{align*}$$
+\end{align*}
+$$
 
 Aplicando o processo de dedução do Sistema $ \mathfrak{L} $ , teremos:
 
@@ -2106,12 +2109,16 @@ No entanto, as posições de quantificadores de tipos diferentes **não** podem 
 Existe uma equivalência entre as negações dos quantificadores. De tal forma que: 
 
 1. **Negação do Quantificador Universal ( $ \forall $ ):** A negação de uma afirmação universal significa que existe pelo menos um caso no Universo do Discurso, onde a afirmação não é verdadeira. Isso pode ser expresso pela seguinte equivalência:
+   
 $$\neg \forall x \, P(x) \equiv \exists x \, \neg P(x)$$
- Em linguagem natural podemos entender como: negar que _para todos os $ x $ , $ P(x) $ é verdadeiro_ é equivalente a afirmar que _existe algum $ x $ tal que $ P(x) $ não é verdadeiro_.
+
+Em linguagem natural podemos entender como: negar que _para todos os $ x $ , $ P(x) $ é verdadeiro_ é equivalente a afirmar que _existe algum $ x $ tal que $ P(x) $ não é verdadeiro_.
 
 2. **Negação do Quantificador Existencial ( $ \exists $ ):** A negação de uma afirmação existencial significa que a afirmação não é verdadeira para nenhum caso no Universo do Discurso. Isso pode ser expresso pela seguinte equivalência:
+
 $$\neg \exists x \, P(x) \equiv \forall x \, \neg P(x)$$
- Ou seja, negar que _existe algum $ x $ tal que $ P(x) $ é verdadeiro_ é equivalente a afirmar que _para todos os $ x $ , $ P(x) $ não é verdadeiro_.
+
+Ou seja, negar que _existe algum $ x $ tal que $ P(x) $ é verdadeiro_ é equivalente a afirmar que _para todos os $ x $ , $ P(x) $ não é verdadeiro_.
 
 Vamos tentar entender estas negações. Considere as expressões $ \neg (\forall x P(x)) $ e $ \exists x (\neg P(x)) $ . Essas fórmulas se aplicam a qualquer predicado $ P $ , e possuem o mesmo valor de verdade para qualquer $ P $ .
 

@@ -75,6 +75,16 @@
           "title": "published",
           "name": "published",
           "type": "datetime"
+        },
+        {
+          "title": "draft",
+          "name": "draft",
+          "type": "datetime"
+        },
+        {
+          "title": "slug",
+          "name": "slug",
+          "type": "datetime"
         }
       ]
     }

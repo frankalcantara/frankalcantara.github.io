@@ -11,8 +11,9 @@ description: ""
 date: 2023-07-29T14:08:13.729Z
 preview: ""
 keywords: ""
-draft: 2023-08-04T01:43:47.000Z
+draft: 2023-08-22T00:20:44.061Z
 slug: origem-da-verdade-parte-2
+published: false
 ---
 
 
