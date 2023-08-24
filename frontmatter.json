@@ -101,37 +101,5 @@
       "title": "_posts",
       "path": "[[workspace]]/_posts"
     }
-  ],
-  "frontMatter.taxonomy.tags": [
-    "C++",
-    "Eletromagnetismo",
-    "Física",
-    "Matemática",
-    "algoritmos",
-    "covid",
-    "eng. software",
-    "estrutura de dados",
-    "funcional",
-    "inteligência artificial",
-    "interpretadores",
-    "linguagem natural",
-    "lógica",
-    "modelagem",
-    "opinião",
-    "orientação a objetos",
-    "paradigmas de programação",
-    "parsers",
-    "predicativa",
-    "programação",
-    "proposicional",
-    "resolução de problemas",
-    "uml"
-  ],
-  "frontMatter.taxonomy.categories": [
-    "Eletromagnetismo",
-    "Matemática",
-    "artigo",
-    "disciplina",
-    "opinião"
   ]
 }

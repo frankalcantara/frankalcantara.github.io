@@ -217,7 +217,7 @@ As declarações atômicas e compostas são costuradas por conectivos para produ
  <th style="border-right: 1px solid gray;">$ p$</th>
  <th style="border-right: double gray;"> $ q$</th> 
  <th style="width:16.8%; border-right: 1px solid gray;">$ p \vee Q$</th>
- <th style="width:16.8%; border-right: 1px solid gray;">$ p \wedge Q </th>
+ <th style="width:16.8%; border-right: 1px solid gray;">$ p \wedge Q$ </th>
  <th style="width:16.8%; border-right: 1px solid gray;"> $\neg P$</th>
  <th style="width:16.8%; border-right: 1px solid gray;">$ p \rightarrow Q$</th>
  <th style="width:16.8%;">$ p \leftrightarrow Q$</th>
@@ -2143,9 +2143,85 @@ A expressão $\exists x (\neg P(x))$ significa que _existe alguém que não est�
 
 Assim, a afirmação de que _não é verdade que todos estão felizes_ implica que deve haver alguém que não está feliz. Se a primeira afirmação é falsa (ou seja, todos estão felizes), então a segunda afirmação também deve ser falsa.
 
-Portanto, as duas fórmulas têm o mesmo valor verdade. Elas são logicamente equivalentes e podem ser representadas como $\neg (\forall x P(x)) \equiv \exists x (\neg P(x))$.
+Portanto, as duas fórmulas têm o mesmo valor verdade. Elas são logicamente equivalentes e podem ser representadas como $\neg (\forall x P(x)) \equiv \exists x (\neg P(x))$. Esta equivalência reflete uma relação profunda e intuitiva em nosso entendimento de declarações sobre entidades em nosso mundo.
 
-Esta equivalência reflete uma relação profunda e intuitiva em nosso entendimento de declarações sobre entidades em nosso mundo.
+<table style="margin-left: auto;
+ margin-right: auto; text-align:center;">
+ <tr style="border-top: 2px solid gray; border-bottom: 1px solid gray;">
+ <th style="border-right: 1px solid gray;">$ p$</th>
+ <th style="border-right: double gray;"> $ q$</th>
+ <th style="width:16.8%; border-right: 1px solid gray;">$ p \vee Q$</th>
+ <th style="width:16.8%; border-right: 1px solid gray;">$ p \wedge Q$ </th>
+ <th style="width:16.8%; border-right: 1px solid gray;"> $\neg P$</th>
+ <th style="width:16.8%; border-right: 1px solid gray;">$ p \rightarrow Q$</th>
+ <th style="width:16.8%;">$ p \leftrightarrow Q$</th>
+ </tr>
+ <tr style="background-color: #eeeeee;">
+  <td style="border-right: 1px solid gray;">T</td>
+  <td style="border-right: double gray;">T</td>
+  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
+  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
+  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
+  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
+  <td style="width:16.8%;">T</td>
+ </tr>
+ <tr>
+  <td style="border-right: 1px solid gray;">T</td>
+  <td style="border-right: double gray;">F</td>
+  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
+  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
+  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
+  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
+  <td style="width:16.8%;">F</td>
+ </tr>
+  <tr style="background-color: #eeeeee;">
+  <td style="border-right: 1px solid gray;">F</td>
+  <td style="border-right: double gray;">T</td>
+  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
+  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
+  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
+  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
+  <td style="width:16.8%;">F</td>
+ </tr>
+  <tr style="border-bottom: 2px solid gray;">
+  <td style="border-right: 1px solid gray;">F</td>
+  <td style="border-right: double gray;">F</td>
+  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
+  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
+  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
+  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
+  <td style="width:16.8%;">T</td>
+ </tr>
+</table>
+
+
+<table style="width: 100%; margin: auto; border-collapse: collapse;">
+  <tr>
+    <th style="text-align: center; background-color: #eeeeee;">Expressão</th>
+    <th style="text-align: center; background-color: #eeeeee;">Equivalência</th>
+  </tr>
+  <tr>
+    <td style="text-align: center; width: 50%;">
+    $\forall x P(x)$</td>
+    <td style="text-align: center; width: 50%;">
+    $\neg \exists x \neg P(x)$</td>
+  </tr>
+  <tr style="background-color: #eeeeee;">
+    <td style="text-align: center; width: 50%;">$\exists x \, P(x)$</td>
+    <td>$\neg \forall x \, \neg P(x)$</td>
+  </tr>
+  <tr>
+    <td style="text-align: center; width: 50%;" >$\neg \forall x \, P(x)$</td>
+    <td>$\exists x \, \neg P(x)$</td>
+  </tr>
+  <tr style="border-bottom: 2px solid gray;">
+    <td style="text-align: center; width: 50%;">$\neg \exists x \, P(x)$</td>
+    <td>$\forall x \, \neg P(x)$</td>
+  </tr>
+</table>
+<legend style="font-size: 1em; text-align: center;
+ margin-bottom: 20px;">Tabela 4 - Equivalências entre Quantificadores.</legend>
+
 
 ## Regras de Inferência usando Quantificadores
 

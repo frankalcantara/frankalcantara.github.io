@@ -30,9 +30,9 @@ $$
 \text{Pow}(X) = \{A \mid A \subseteq X\}
 $$
 
-Por exemplo, se $X = \{1, 2\}$, então $\text{Pow}(X) = \{\emptyset, \{1\}, \{2\}, \{1, 2\}\}$. 
+Por exemplo, se $X = \{1, 2\}$, então $\text{Pow}(X) = \{\emptyset, \{1\}, \{2\}, \{1, 2\}\}$.
 
-No teorema que Russell estava estudando, $\text{Pow}(X)$ é usado para expressar a ideia de que nenhum mapeamento $F: X \rightarrow \text{Pow}(X)$ pode ser sobrejetivo. Isso é uma parte fundamental da prova que demonstra o paradoxo de Russell e está relacionado à ideia de que há mais subconjuntos de $X$ do que elementos de $X$. 
+No teorema que Russell estava estudando, $\text{Pow}(X)$ é usado para expressar a ideia de que nenhum mapeamento $F: X \rightarrow \text{Pow}(X)$ pode ser sobrejetivo. Isso é uma parte fundamental da prova que demonstra o paradoxo de Russell e está relacionado à ideia de que há mais subconjuntos de $X$ do que elementos de $X$.
 
 Talvez você consiga fechar o conceito se lembrar que os termos _função sobrejetiva_ e _função sobrejetora_ referem-se à mesma coisa. Uma função é chamada de sobrejetiva, ou sobrejetora, quando cada elemento da imagem, ou codomínio, é a imagem de pelo menos um elemento do domínio. Em outras palavras, a função atinge todos os elementos do codomínio. Isso significa que para uma função $f: A \rightarrow B$, se para todo $b \in B$ existe algum $a \in A$ tal que $f(a) = b$, então a função é sobrejetiva ou sobrejetora.
 
@@ -78,7 +78,7 @@ Voltando ao Teorema de Cantor, podemos tentar prová-lo considere o seguinte sub
 $$A = \{x \in X \mid x \notin F(x)\}$$
 
 Esse subconjunto não pode estar no alcance de $F$. Pois, se $A = F(a)$, para algum $a$, então
-$a \in F(a) \iff a \in A \iff a \notin F(a)$ e, novamente, encontramos a contradição. 
+$a \in F(a) \iff a \in A \iff a \notin F(a)$ e, novamente, encontramos a contradição.
 
 [Bertrand Russell](https://en.wikipedia.org/wiki/Bertrand_Russell) discutiu este paradoxo no Appendix B: The Doctrine of Types do seu livro [The Principles of Mathmatics](https://people.umass.edu/klement/pom/) de 1903. Para resolve-lo, Russell sugeriu a criação de um processo de separação de elementos por níveis específicos o que hoje chamamos de Teoria dos Tipos.
 
