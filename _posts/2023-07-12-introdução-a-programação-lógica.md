@@ -193,13 +193,13 @@ Termos são variáveis, constantes ou mesmo funções aplicadas a termos e segue
 
 Cada proposição, ou sentença, na Lógica Proposicional é como uma ilha isolada de verdade, um fato fundamental que não pode ser dividido em partes menores. _A chuva cai_, _O sol brilha_ - cada uma dessas proposições é verdadeira ou falsa como uma unidade. Um átomo, elemento básico e fundamental de todas as expressões. Também, mas tarde, chamaremos de átomos a todo predicado aplicado aos termos de uma fórmula. Assim, também precisamos definir os predicados.
 
-1. se $ p$ é um predicado de termos $(t_1, ... t_n)$ então $ p(t_1, ... t_n)$ é uma Fórmula Bem Formada, um átomo.
-2. se $ p$ e $ q$ são Fórmulas Bem Formadas então: $\neg P$, $ p\wedge Q$, $ p \vee Q$, $ p \rightarrow Q$ e $ p \leftrightarrow Q$ são Fórmulas Bem Formadas.
-3. se $ p$ é uma Fórmula Bem Formada e $x$ uma variável então $\exists x P$ e $\forall x P$ são Fórmulas Bem Formadas.
+1. se $P$ é um predicado de termos $(t_1, ... t_n)$ então $P(t_1, ... t_n)$ é uma Fórmula Bem Formada, um átomo.
+2. se $P$ e $Q$ são Fórmulas Bem Formadas então: $\neg P$, $ P\wedge Q$, $P \vee Q$, $P \rightarrow Q$ e $P \leftrightarrow Q$ são Fórmulas Bem Formadas.
+3. se $P$ é uma Fórmula Bem Formada e $x$ uma variável então $\exists x P(x)$ e $\forall x P(x)$ são Fórmulas Bem Formadas.
 
-Por fim, podemos dizer que as Fórmulas Bem Formadas: respeitam regras de precedência entre conectivos, parênteses e quantificadores; não apresentam problemas como variáveis livres não quantificadas e, principalmente, são unívocas, sem ambiguidade na interpretação.
+Podemos dizer que as Fórmulas Bem Formadas: respeitam regras de precedência entre conectivos, parênteses e quantificadores; não apresentam problemas como variáveis livres não quantificadas e, principalmente, são unívocas, sem ambiguidade na interpretação.
 
-Finalmente podemos dizer que a linguagem da Lógica de Primeira Ordem é o conjunto de todas as Fórmulas Bem Formadas incluindo os campos de estudo da Lógica Proposicional e da Lógica de Predicados. Termos e átomos costurados em uma teia onde cada termo, ou átomo, é como uma ilha isolada de verdade, um fato fundamental que não pode ser dividido em partes menores. _A chuva cai_, _O sol brilha_ - cada uma dessas proposições é verdadeira ou falsa, em si, uma unidade. As operações lógicas são as pontes que conectam essas ilhas, permitindo-nos construir as estruturas mais complexas da razão.
+Finalmente podemos definir a linguagem da Lógica de Primeira Ordem como o conjunto de todas as Fórmulas Bem Formadas criadas incluindo os campos de estudo da Lógica Proposicional e da Lógica de Predicados. Termos e átomos costurados em uma teia onde cada termo, ou átomo, é como uma ilha isolada de verdade, um fato fundamental que não pode ser dividido em partes menores. _A chuva cai_, _O sol brilha_. Cada uma dessas proposições é verdadeira ou falsa, em si, uma unidade, como uma ilha. As operações lógicas são as pontes que conectam essas ilhas, permitindo-nos construir as estruturas mais complexas da razão.
 
 ## Lógica Proposicional
 
@@ -216,11 +216,11 @@ As declarações atômicas e compostas são costuradas por conectivos para produ
  <tr style="border-top: 2px solid gray; border-bottom: 1px solid gray;">
  <th style="border-right: 1px solid gray;">$ p$</th>
  <th style="border-right: double gray;"> $ q$</th> 
- <th style="width:16.8%; border-right: 1px solid gray;">$ p \vee Q$</th>
- <th style="width:16.8%; border-right: 1px solid gray;">$ p \wedge Q$ </th>
+ <th style="width:16.8%; border-right: 1px solid gray;">$P\vee Q$</th>
+ <th style="width:16.8%; border-right: 1px solid gray;">$P\wedge Q$ </th>
  <th style="width:16.8%; border-right: 1px solid gray;"> $\neg P$</th>
- <th style="width:16.8%; border-right: 1px solid gray;">$ p \rightarrow Q$</th>
- <th style="width:16.8%;">$ p \leftrightarrow Q$</th>
+ <th style="width:16.8%; border-right: 1px solid gray;">$P\rightarrow Q$</th>
+ <th style="width:16.8%;">$P\leftrightarrow Q$</th>
  </tr>
  <tr style="background-color: #eeeeee;">
  <td style="border-right: 1px solid gray;">T</td>
@@ -320,22 +320,22 @@ Linguagens de programação que usam a Programação Lógica usam _unificação_
 
 <table style="width: 100%; margin: auto; border-collapse: collapse;">
  <tr style="background-color: #f2f2f2;">
-  <td style="text-align: center; width: 50%; border-top: 2px solid #666666;">$ p \wedge Q \equiv Q \wedge P$</td>
+  <td style="text-align: center; width: 50%; border-top: 2px solid #666666;">$P\wedge Q \equiv Q \wedge P$</td>
   <td style="text-align: center; width: 30%; border-top: 2px solid #666666;">Comutatividade da Conjunção</td>
   <td style="text-align: center; width: 20%;border-top: 2px solid #666666;">(1)</td>
  </tr>
  <tr>
-  <td style="text-align: center; width: 50%;">$ p \vee Q \equiv Q \vee P$</td>
+  <td style="text-align: center; width: 50%;">$P\vee Q \equiv Q \vee P$</td>
   <td style="text-align: center; width: 30%;">Comutatividade da Disjunção</td>
   <td style="text-align: center; width: 20%;">(2)</td>
  </tr>
  <tr style="background-color: #f2f2f2;">
-  <td style="text-align: center; width: 50%;">$ p \wedge (Q \vee R) \equiv (P \wedge Q) \vee (P \wedge R)$</td>
+  <td style="text-align: center; width: 50%;">$P\wedge (Q \vee R) \equiv (P \wedge Q) \vee (P \wedge R)$</td>
   <td style="text-align: center; width: 30%;">Distributividade da Conjunção sobre a Disjunção</td>
   <td style="text-align: center; width: 20%;">(3)</td>
  </tr>
  <tr>
-  <td style="text-align: center; width: 50%;">$ p \vee (Q\wedge R) \equiv (P \vee Q) \wedge (P \vee R)$</td>
+  <td style="text-align: center; width: 50%;">$P\vee (Q\wedge R) \equiv (P \vee Q) \wedge (P \vee R)$</td>
   <td style="text-align: center; width: 30%;">Distributividade da Disjunção sobre a Conjunção</td>
   <td style="text-align: center; width: 20%;">(4)</td>
  </tr>
@@ -350,27 +350,27 @@ Linguagens de programação que usam a Programação Lógica usam _unificação_
   <td style="text-align: center; width: 20%;">(6)</td>
  </tr>
  <tr style="background-color: #f2f2f2;">
-  <td style="text-align: center; width: 50%;">$ p \rightarrow Q \equiv \neg P \vee Q$</td>
+  <td style="text-align: center; width: 50%;">$P\rightarrow Q \equiv \neg P \vee Q$</td>
   <td style="text-align: center; width: 30%;">Definição de Implicação</td>
   <td style="text-align: center; width: 20%;">(7)</td>
  </tr>
  <tr>
-  <td style="text-align: center; width: 50%;">$ p \leftrightarrow Q \equiv (P \rightarrow Q) \wedge (Q \rightarrow P)$</td>
+  <td style="text-align: center; width: 50%;">$P\leftrightarrow Q \equiv (P \rightarrow Q) \wedge (Q \rightarrow P)$</td>
   <td style="text-align: center; width: 30%;">Definição de Equivalência</td>
   <td style="text-align: center; width: 20%;">(8)</td>
  </tr>
  <tr style="background-color: #f2f2f2;">
-  <td style="text-align: center; width: 50%;">$ p \rightarrow Q \equiv \neg Q \rightarrow \neg P$</td>
+  <td style="text-align: center; width: 50%;">$P\rightarrow Q \equiv \neg Q \rightarrow \neg P$</td>
   <td style="text-align: center; width: 30%;">Lei da Contra positiva</td>
   <td style="text-align: center; width: 20%;">(9)</td>
  </tr>
  <tr>
-  <td style="text-align: center; width: 50%;">$ p \wedge \neg P \equiv P$</td>
+  <td style="text-align: center; width: 50%;">$P\wedge \neg P \equiv P$</td>
   <td style="text-align: center; width: 30%;">Lei da Contradição</td>
   <td style="text-align: center; width: 20%;">(10)</td>
  </tr>
  <tr style="background-color: #f2f2f2;">
-  <td style="text-align: center; width: 50%;">$ p \vee \neg P \equiv T$</td>
+  <td style="text-align: center; width: 50%;">$P\vee \neg P \equiv T$</td>
   <td style="text-align: center; width: 30%;">Lei da Exclusão</td>
   <td style="text-align: center; width: 20%;">(11)</td>
  </tr>
@@ -380,37 +380,37 @@ Linguagens de programação que usam a Programação Lógica usam _unificação_
   <td style="text-align: center; width: 20%;">(12)</td>
  </tr>
  <tr style="background-color: #f2f2f2;">
-  <td style="text-align: center; width: 50%;">$ p \equiv P$</td>
+  <td style="text-align: center; width: 50%;">$P\equiv P$</td>
   <td style="text-align: center; width: 30%;">Lei da Identidade</td>
   <td style="text-align: center; width: 20%;">(13)</td>
  </tr>
  <tr>
-  <td style="text-align: center; width: 50%;">$ p \wedge T \equiv P$</td>
+  <td style="text-align: center; width: 50%;">$P\wedge T \equiv P$</td>
   <td style="text-align: center; width: 30%;">Lei da Identidade para a Conjunção</td>
   <td style="text-align: center; width: 20%;">(14)</td>
  </tr>
  <tr style="background-color: #f2f2f2;">
-  <td style="text-align: center; width: 50%;">$ p \wedge F \equiv F$</td>
+  <td style="text-align: center; width: 50%;">$P\wedge F \equiv F$</td>
   <td style="text-align: center; width: 30%;">Lei do Domínio para a Conjunção</td>
   <td style="text-align: center; width: 20%;">(15)</td>
  </tr>
  <tr>
-  <td style="text-align: center; width: 50%;">$ p \vee T \equiv T$</td>
+  <td style="text-align: center; width: 50%;">$P\vee T \equiv T$</td>
   <td style="text-align: center; width: 30%;">Lei do Domínio para a Disjunção</td>
   <td style="text-align: center; width: 20%;">(16)</td>
  </tr>
  <tr style="background-color: #f2f2f2;">
-  <td style="text-align: center; width: 50%;">$ p \vee F \equiv P$</td>
+  <td style="text-align: center; width: 50%;">$P\vee F \equiv P$</td>
   <td style="text-align: center; width: 30%;">Lei da Identidade para a Disjunção</td>
   <td style="text-align: center; width: 20%;">(17)</td>
  </tr>
  <tr>
-  <td style="text-align: center; width: 50%;">$ p \wedge F \equiv F$</td>
+  <td style="text-align: center; width: 50%;">$P\wedge F \equiv F$</td>
   <td style="text-align: center; width: 30%;">Lei da Idempotência para a Conjunção</td>
   <td style="text-align: center; width: 20%;">(18)</td>
  </tr>
  <tr style="background-color: #f2f2f2;">
-  <td style="text-align: center; width: 50%;">$ p \vee F \equiv P$</td>
+  <td style="text-align: center; width: 50%;">$P\vee F \equiv P$</td>
   <td style="text-align: center; width: 30%;">Lei da Idempotência para a Disjunção</td>
   <td style="text-align: center; width: 20%;">(19)</td>
  </tr>
@@ -434,7 +434,7 @@ As equivalências que listei pipocaram quase espontaneamente enquanto estava esc
 
 São muitas as equivalências que existem, estas são as mais comuns. Talvez, alguns exemplos de validação de Fórmulas Bem Formadas usando apenas as equivalências apresentadas na Tabela 3, sirvam para clarear o caminho que precisamos seguir:
 
-**Exemplo 1**:$ p \wedge (Q \vee (P \wedge R))$
+**Exemplo 1**:$P \wedge (Q \vee (P \wedge R))$
 
 Simplificação:
 
@@ -445,7 +445,7 @@ $$
  \end{align*}
 $$
 
-**Exemplo 2**:$ p \rightarrow (Q \wedge (R \vee P))$
+**Exemplo 2**:$P\rightarrow (Q \wedge (R \vee P))$
 
 Simplificação:
 
@@ -498,7 +498,7 @@ $$
 $$
 
 **Exemplo 6:**
-$ p \wedge (Q \vee (R \rightarrow S)) \vee (\neg E \leftrightarrow P)$
+$P\wedge (Q \vee (R \rightarrow S)) \vee (\neg E \leftrightarrow P)$
 
 Simplificação:
 
@@ -586,7 +586,7 @@ As regras de inferência são o alicerce da lógica dedutiva e do estudo das dem
 
 ### _Modus Ponens_
 
-A regra do _Modus Ponens_ permite inferir uma conclusão a partir de uma implicação e de sua premissa antecedente. Se temos uma implicação $ p \rightarrow Q $, e sabemos que $ p$ é verdadeiro, então podemos concluir que $Q$ também é verdadeiro.
+A regra do _Modus Ponens_ permite inferir uma conclusão a partir de uma implicação e de sua premissa antecedente. Se temos uma implicação $P\rightarrow Q $, e sabemos que $ p$ é verdadeiro, então podemos concluir que $Q$ também é verdadeiro.
 
 $$
 P \rightarrow Q
@@ -678,7 +678,7 @@ $$
 
 ### _Modus Tollens_
 
-A regra do _Modus Tollens_ permite inferir a negação da premissa antecedente a partir de uma implicação e da negação de sua premissa consequente.Se temos uma implicação $ p \rightarrow Q$, e sabemos que $ q$ é falso (ou seja, $\neg G$), então podemos concluir que $ p$ também é falso.
+A regra do _Modus Tollens_ permite inferir a negação da premissa antecedente a partir de uma implicação e da negação de sua premissa consequente.Se temos uma implicação $P\rightarrow Q$, e sabemos que $ q$ é falso (ou seja, $\neg G$), então podemos concluir que $ p$ também é falso.
 
 $$
 P \rightarrow Q
@@ -854,7 +854,7 @@ Em linguagem natural:
 - Proposição: _o céu está azul, $(P)$_.
 - Conclusão: logo, _o céu está azul ou gatos podem voar, $(P \lor Q)$_;
 
-A regra da Adição permite introduzir uma disjunção em uma prova ou argumento lógico. Especificamente, ela nos permite inferir uma disjunção $ p \vee Q$ a partir de uma das afirmações disjuntivas ($ p$ ou $ q$) individualmente.
+A regra da Adição permite introduzir uma disjunção em uma prova ou argumento lógico. Especificamente, ela nos permite inferir uma disjunção $P\vee Q$ a partir de uma das afirmações disjuntivas ($ p$ ou $ q$) individualmente.
 
 Alguns usos e aplicações importantes da regra da Adição:
 
@@ -874,7 +874,7 @@ A regra da Adição amplia nossas capacidades de prova e abordagem de problemas.
 
 O _Modus Tollendo Ponens_ permite inferir uma disjunção a partir da negação da outra disjunção.
 
-Dada uma disjunção $ p \vee Q$:
+Dada uma disjunção $P\vee Q$:
 
 - Se $\neg P$, então $ q$
 - Se $\neg Q$, então $ p$
@@ -1371,7 +1371,7 @@ $$
 
 Podemos classificar fórmulas proposicionais de acordo com suas propriedades semânticas, analisando suas tabelas-verdade. Seja $A$ uma fórmula proposicional:
 
-- $A$ é **satisfatível** se sua Tabela Verdade contém pelo menos uma linha verdadeira. Considere:$ p \wedge Q$.
+- $A$ é **satisfatível** se sua Tabela Verdade contém pelo menos uma linha verdadeira. Considere:$P\wedge Q$.
  
 $$\begin{array}{|c|c|c|}
  \hline
@@ -1387,9 +1387,9 @@ $$\begin{array}{|c|c|c|}
  \hline
  \end{array}$$
 
-- $A$ é **insatisfatível** se sua Tabela Verdade contém apenas linhas falsas. Exemplo:$ p \wedge \neg p$.
-- $A$ é **falsificável** se sua Tabela Verdade contém pelo menos uma linha falsa. Exemplo:$ p \wedge q$.
-- $A$ é **válida** se sua Tabela Verdade contém apenas linhas verdadeiras. Exemplo:$ p \vee \neg p$.
+- $A$ é **insatisfatível** se sua Tabela Verdade contém apenas linhas falsas. Exemplo:$P\wedge \neg p$.
+- $A$ é **falsificável** se sua Tabela Verdade contém pelo menos uma linha falsa. Exemplo:$P\wedge q$.
+- $A$ é **válida** se sua Tabela Verdade contém apenas linhas verdadeiras. Exemplo:$P\vee \neg p$.
 
 Note que:
 
@@ -1425,7 +1425,7 @@ A coisa interessante sobre as fórmulas que conseguimos criar com apenas duas pr
 
 Com um pouco mais de formalidade podemos dizer que: considere as proposições $A$ e $B$. Estas proposições serão ditas logicamente equivalentes se, e somente se, a proposição $ a \Leftrightarrow B$ for uma tautologia.
 
- **Exemplo: 1** Vamos mostrar que $ p \rightarrow Q$ é logicamente equivalente a $\neg Q \rightarrow \neg P$.
+ **Exemplo: 1** Vamos mostrar que $P\rightarrow Q$ é logicamente equivalente a $\neg Q \rightarrow \neg P$.
 
  **Solução:** Para isso, verificaremos se a coluna do conectivo principal na Tabela Verdade para a proposição bicondicional formada por essas duas fórmulas contém apenas valores verdadeiros:
 
@@ -1445,9 +1445,9 @@ $$
  \end{array}
  $$
 
- Como a coluna da operação principal de $ p \implies Q \iff \lnot Q \implies \lnot P$ contém apenas valores verdadeiros, a proposição bicondicional é uma tautologia, consequentemente e as fórmulas$ p \implies Q$ e $\lnot Q \implies \lnot P$ são logicamente equivalentes.
+ Como a coluna da operação principal de $P\implies Q \iff \lnot Q \implies \lnot P$ contém apenas valores verdadeiros, a proposição bicondicional é uma tautologia, consequentemente e as fórmulas$P\implies Q$ e $\lnot Q \implies \lnot P$ são logicamente equivalentes.
 
- **Exemplo 2:** Vamos mostrar que $ p \land Q$ não é logicamente equivalente a $ p \lor Q$.
+ **Exemplo 2:** Vamos mostrar que $P\land Q$ não é logicamente equivalente a $P\lor Q$.
 
  **Solução** 
  Verificando a Tabela Verdade:
@@ -1463,9 +1463,9 @@ $$
  \end{array}
  $$
 
- Consequentemente, as fórmulas$ p \land Q$ não são logicamente equivalentes$ p \lor Q$.
+ Consequentemente, as fórmulas$P\land Q$ não são logicamente equivalentes$P\lor Q$.
 
- **Exemplo 3:** Vamos mostrar que $ p \rightarrow Q$ é logicamente equivalente a $\neg P \lor Q$.
+ **Exemplo 3:** Vamos mostrar que $P\rightarrow Q$ é logicamente equivalente a $\neg P \lor Q$.
 
  **Solução**
  Verificando a Tabela Verdade:
@@ -1485,12 +1485,12 @@ $$
  \end{array}
  $$
 
- Neste caso $ p \rightarrow Q$ e $\neg P \lor Q$ são logicamente equivalentes.
+ Neste caso $P\rightarrow Q$ e $\neg P \lor Q$ são logicamente equivalentes.
 
 Em resumo, duas fórmulas$ p$ e $ q$, atômicas, ou não, são equivalentes se quando $ p$ for verdadeiro, $ q$ também será e vice-versa. Agora que já sabemos o que significa _logicamente equivalentes_ podemos entender o que é uma proposição contrapositiva.
 ### Contrapositiva
 
-A contrapositiva de uma implicação é obtida invertendo-se o antecedente e o consequente da implicação original e negando-os. Por exemplo, considere a seguinte implicação: _se chove, então a rua fica molhada_ sua contrapositiva poderia ser: _se a rua não está molhada, então não choveu_. Sejam$ p$ e $ q$ fórmulas proposicionais derivadas de uma sentença do tipo _se ... então_. A implicação $ p \rightarrow Q$ representa a sentença Se $ p$, então $ q$. Neste caso, A contrapositiva de $ p \rightarrow Q$ será dada por:
+A contrapositiva de uma implicação é obtida invertendo-se o antecedente e o consequente da implicação original e negando-os. Por exemplo, considere a seguinte implicação: _se chove, então a rua fica molhada_ sua contrapositiva poderia ser: _se a rua não está molhada, então não choveu_. Sejam$ p$ e $ q$ fórmulas proposicionais derivadas de uma sentença do tipo _se ... então_. A implicação $P\rightarrow Q$ representa a sentença Se $ p$, então $ q$. Neste caso, A contrapositiva de $P\rightarrow Q$ será dada por:
 
 $$
 \begin{aligned}
@@ -1501,7 +1501,7 @@ $$
 A contrapositiva pode ser lida como _se não $ q$, então não $ p$_. Em outras palavras estamos dizendo: _Se $ q$ é falso, então $ p$ é falso_. A contrapositiva de uma fórmula é importante porque, frequentemente, é mais fácil provar a contrapositiva de uma fórmula que a própria fórmula. E, como a contrapositiva é logicamente equivalente a sua formula, provar a contrapositiva é provar a fórmula. Como a contrapositiva de uma implicação e a própria implicação são logicamente equivalentes, se provamos uma, a outra está provada. Além disso, a contrapositva preserva a validade das implicações proposicionais. Finalmente, observe que a contrapositiva troca o antecedente pelo negação do consequente e vice-versa.
 
  **Exemplo 1:**
- A contrapositiva de $ p \rightarrow (Q \lor R)$ é $\lnot(Q \lor R) \rightarrow \lnot P$.
+ A contrapositiva de $P\rightarrow (Q \lor R)$ é $\lnot(Q \lor R) \rightarrow \lnot P$.
  
  **Exemplo 2:**
  Dizemos que uma função é injetora se $x \neq y $implica $f(x) \neq f(y)$. A contrapositiva desta implicação é: se $f(x) = f(y)$ então $x = y$.
@@ -1512,13 +1512,13 @@ O que torna a contrapositiva importante é que toda Fórmula Bem Formada é logi
 
 A contrapositiva funciona para qualquer declaração condicional, e matemáticos gastam muito tempo provando declarações condicionais.
 
-O que não podemos esquecer de jeito nenhum é que toda fórmula condicional terá a forma $ p \rightarrow Q$. Mostramos que isso é logicamente equivalente a $\lnot Q \rightarrow \lnot P$ verificando a Tabela Verdade para a declaração bicondicional construída a partir dessas fórmulas. E que para obter a contrapositiva basta inverter antecedente e consequente e negar ambos. Mantendo a relação lógica entre os termos da implicação.
+O que não podemos esquecer de jeito nenhum é que toda fórmula condicional terá a forma $P\rightarrow Q$. Mostramos que isso é logicamente equivalente a $\lnot Q \rightarrow \lnot P$ verificando a Tabela Verdade para a declaração bicondicional construída a partir dessas fórmulas. E que para obter a contrapositiva basta inverter antecedente e consequente e negar ambos. Mantendo a relação lógica entre os termos da implicação.
 ### Recíproca
 
-A recíproca, também conhecida como _conversa_ por alguns acadêmicos brasileiros, é obtida apenas invertendo antecedente e consequente. Então, considerando a recíproca da condicional$ p \rightarrow Q$ será $ q \rightarrow P$. Destoando da contrapositiva a recíproca não é necessariamente equivalente à implicação original. Além disso, a contrapositiva preserva a equivalência lógica, a recíproca não.
+A recíproca, também conhecida como _conversa_ por alguns acadêmicos brasileiros, é obtida apenas invertendo antecedente e consequente. Então, considerando a recíproca da condicional$P\rightarrow Q$ será $ q \rightarrow P$. Destoando da contrapositiva a recíproca não é necessariamente equivalente à implicação original. Além disso, a contrapositiva preserva a equivalência lógica, a recíproca não.
 
  **Exemplo 1:**
- A conversa de $ p \rightarrow (Q \lor R)$ será $(Q \lor R) \rightarrow P$.
+ A conversa de $P\rightarrow (Q \lor R)$ será $(Q \lor R) \rightarrow P$.
 
  **Exemplo 2:**
  Dizemos que uma função é bem definida se cada entrada tem uma saída única. Assim, uma função é bem definida se $x = y$ implica $f(x) = f(y)$. Observe estas fórmulas:
@@ -1571,7 +1571,7 @@ F & F & T \\
 \end{array}
 $$
 
-Se olharmos para a primeira linha, se $ p$ é verdadeiro e $ p → Q$ é verdadeiro, então $ q$ é necessariamente verdadeiro, o que é exatamente a forma de _Modus Ponens_.
+Se olharmos para a primeira linha, se $ p$ é verdadeiro e $P→ Q$ é verdadeiro, então $ q$ é necessariamente verdadeiro, o que é exatamente a forma de _Modus Ponens_.
 
 **_Modus Tollens_** : _se é verdade que se uma pessoa é um pássaro $ p$, então essa pessoa pode voar $ q$, e também é verdade que essa pessoa não pode voar $\neg Q$, então podemos concluir que essa pessoa não é um pássaro $\neg P$. Ou:
 
@@ -1601,7 +1601,7 @@ F & F & T & T & T \\
 \end{array}
 $$
 
-Se olharmos para a segunda linha, se $ q$ é falso e $ p \rightarrow Q$ é verdadeiro, então $ p$ é necessariamente falso, o que é exatamente a forma de _Modus Tollens_.
+Se olharmos para a segunda linha, se $ q$ é falso e $P\rightarrow Q$ é verdadeiro, então $ p$ é necessariamente falso, o que é exatamente a forma de _Modus Tollens_.
 
 **Silogismo Hipotético** : _se é verdade que se eu acordar cedo $ p$, então eu irei correr $ q$, e também é verdade que se eu correr $ q$, então eu irei tomar um café da manhã saudável $ r $, podemos concluir que se eu acordar cedo $ p$, então eu irei tomar um café da manhã saudável $ r $_. Matematicamente:
 
@@ -1635,7 +1635,7 @@ F & F & F & T & T & T \\
 \end{array}
 $$
 
-Se olharmos para a primeira linha, se $ p$ é verdadeiro, $ p \rightarrow Q$ é verdadeiro e $ q \rightarrow r $ é verdadeiro, então $ p \rightarrow r $ é necessariamente verdadeiro, o que é exatamente a forma de Silogismo Hipotético.
+Se olharmos para a primeira linha, se $ p$ é verdadeiro, $P\rightarrow Q$ é verdadeiro e $ q \rightarrow r $ é verdadeiro, então $P\rightarrow r $ é necessariamente verdadeiro, o que é exatamente a forma de Silogismo Hipotético.
 
 **Silogismo Disjuntivo**: _se é verdade que ou eu vou ao cinema $ p$ ou eu vou ao teatro $ q$, e também é verdade que eu não vou ao cinema $\neg P$, então podemos concluir que eu vou ao teatro $ q$_. Ou, com um pouco mais de formalidade:
 
@@ -1665,7 +1665,7 @@ F & F & T & F \\
 \end{array}
 $$
 
-Se olharmos para a terceira linha, se $ p$ é falso e $ p \vee Q$ é verdadeiro, então $ q$ é necessariamente verdadeiro, o que é exatamente a forma de Silogismo Disjuntivo.
+Se olharmos para a terceira linha, se $ p$ é falso e $P\vee Q$ é verdadeiro, então $ q$ é necessariamente verdadeiro, o que é exatamente a forma de Silogismo Disjuntivo.
 
 Não podemos esquecer: um argumento só é válido se, e somente se, a proposição condicional que o expresse seja uma tautologia. Agora podemos definir um sistema de prova.
 
@@ -1688,7 +1688,7 @@ Existem três axiomas no sistema $\mathfrak{L}$. Estes axiomas formam a base do 
 
 **Axioma 3**: $(\lnot B \rightarrow \lnot A) \rightarrow ((\lnot B \rightarrow A) \rightarrow B)$, este axioma garante que se de $\lnot B$ podemos inferir tanto $\lnot a $ quanto $A$, então $B$ deve ser verdadeiro. Isso porque $B$ e $\lnot B$ não podem ser verdadeiros simultaneamente.
 
-Além dos axiomas, usaremos apenas uma regra de inferência, o _Modus Ponens_. O _Modus Ponens_ está intimamente relacionado à proposição $(P \wedge (P \rightarrow Q)) \rightarrow Q$. Tanto a preposição quando a regra de inferência, de certa forma, dizem: "se $ p$ e $ p \rightarrow Q$ são verdadeiros, então $ q$ é verdadeiro". Esta proposição é um exemplo de uma tautologia, porque é verdadeira para cada configuração de $ p$ e $ q$. A diferença é que esta tautologia é uma única proposição, enquanto o _Modus Ponens_ é uma regra de inferência que nos permite deduzir novas proposições a partir proposições já provadas.
+Além dos axiomas, usaremos apenas uma regra de inferência, o _Modus Ponens_. O _Modus Ponens_ está intimamente relacionado à proposição $(P \wedge (P \rightarrow Q)) \rightarrow Q$. Tanto a preposição quando a regra de inferência, de certa forma, dizem: "se $ p$ e $P\rightarrow Q$ são verdadeiros, então $ q$ é verdadeiro". Esta proposição é um exemplo de uma tautologia, porque é verdadeira para cada configuração de $ p$ e $ q$. A diferença é que esta tautologia é uma única proposição, enquanto o _Modus Ponens_ é uma regra de inferência que nos permite deduzir novas proposições a partir proposições já provadas.
 
 Nos resta apenas destacar a última linha de uma prova. No sistema $\mathfrak{L}$ a última fórmula será chamada de teorema. Representaremos como $\vdash a $ se $A$ for um teorema. Escrevemos $B_1, B_2, ..., B_n \vdash_L a $ só, e somente só, $A$ puder ser provado em $\mathfrak{L}$ a partir das fórmulas dadas $B_1, B_2, ..., B_n$. Onde:
 
@@ -1815,7 +1815,7 @@ Por exemplo, se você observar que uma planta está morrendo, pode formar a hip�
 Na lógica proposicional, uma hipótese é uma proposição (ou afirmação) que é assumida como verdadeira para o propósito de argumentação ou investigação. Obviamente, pode ser uma fórmula atômica, ou complexa, desde que seja uma Fórmula Bem Formada.
 
 Em um sistema formal de provas, como o sistema $\mathfrak{L}$uma hipótese é um ponto de partida para um processo de dedução. O objetivo é usar as regras do sistema para deduzir novas proposições a partir das hipóteses. Se uma proposição puder ser deduzida a partir das hipóteses usando as regras do sistema, dizemos que essa proposição é uma consequência lógica das hipóteses.
-Se temos as hipóteses$ p$ e $ p \rightarrow Q$, podemos deduzir $ q$ usando o _Modus Ponens_. Nesse caso, $ q$ seria uma consequência lógica das hipóteses.
+Se temos as hipóteses$ p$ e $P\rightarrow Q$, podemos deduzir $ q$ usando o _Modus Ponens_. Nesse caso, $ q$ seria uma consequência lógica das hipóteses.
 
 No contexto do sistema de provas $\mathfrak{L}$ e considerando apenas a lógica proposicional, **uma hipótese é uma proposição ou conjunto de proposições assumidas como verdadeiras, a partir das quais outras proposições podem ser logicamente deduzidas**.
 
@@ -1870,7 +1870,7 @@ Um predicado não é uma afirmação absoluta de verdade ou falsidade. Divergind
 
 Preencha as lacunas, como quiser desde que faça sentido, e perceba que, em cada caso, ao preencher estamos atribuindo uma qualidade a um objeto. Esses são exemplos de predicados do nosso cotidiano, que sinteticamente o conceito que queremos abordar. Na lógica, os predicados são artefatos que possibilitam examinar o mundo ao nosso redor de forma organizada e exata.
 
-Um predicado pode ser entendido como uma função que recebe um objeto (ou um conjunto de objetos) e retorna um valor de verdade, $\{\text{verdadeiro ou falso}\}$. Esta função descreve uma propriedade que o objeto pode possuir. Isto é, se $ p$ é uma função $ p : U \rightarrow \\{\text{Verdadeiro, Falso}\\}$ para um determinado conjunto $U$ qualquer. Esse conjunto $U$ é chamado de _universo ou domínio do discurso_, e dizemos que $ p$ é um predicado sobre $U$.
+Um predicado pode ser entendido como uma função que recebe um objeto (ou um conjunto de objetos) e retorna um valor de verdade, $\{\text{verdadeiro ou falso}\}$. Esta função descreve uma propriedade que o objeto pode possuir. Isto é, se $ p$ é uma função $P: U \rightarrow \\{\text{Verdadeiro, Falso}\\}$ para um determinado conjunto $U$ qualquer. Esse conjunto $U$ é chamado de _universo ou domínio do discurso_, e dizemos que $ p$ é um predicado sobre $U$.
 
 ## Universo do Discurso
 
@@ -2150,11 +2150,11 @@ Portanto, as duas fórmulas têm o mesmo valor verdade. Elas são logicamente eq
  <tr style="border-top: 2px solid gray; border-bottom: 1px solid gray;">
  <th style="border-right: 1px solid gray;">$ p$</th>
  <th style="border-right: double gray;"> $ q$</th>
- <th style="width:16.8%; border-right: 1px solid gray;">$ p \vee Q$</th>
- <th style="width:16.8%; border-right: 1px solid gray;">$ p \wedge Q$ </th>
+ <th style="width:16.8%; border-right: 1px solid gray;">$P\vee Q$</th>
+ <th style="width:16.8%; border-right: 1px solid gray;">$P\wedge Q$ </th>
  <th style="width:16.8%; border-right: 1px solid gray;"> $\neg P$</th>
- <th style="width:16.8%; border-right: 1px solid gray;">$ p \rightarrow Q$</th>
- <th style="width:16.8%;">$ p \leftrightarrow Q$</th>
+ <th style="width:16.8%; border-right: 1px solid gray;">$P\rightarrow Q$</th>
+ <th style="width:16.8%;">$P\leftrightarrow Q$</th>
  </tr>
  <tr style="background-color: #eeeeee;">
   <td style="border-right: 1px solid gray;">T</td>
@@ -2588,7 +2588,7 @@ $$((P \wedge (Q \wedge R)) \wedge S)$$
 
 Pode ser escrita como:
 
-$$ p \wedge Q \wedge R \wedge S$$
+$$P\wedge Q \wedge R \wedge S$$
 
 ### Forma Normal Negativa (FNN)
 
