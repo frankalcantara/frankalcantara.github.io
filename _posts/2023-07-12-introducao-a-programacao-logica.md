@@ -79,7 +79,7 @@ A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive 
       - [Estrutura da Forma Normal Disjuntiva](#estrutura-da-forma-normal-disjuntiva)
       - [Conversão para Forma Normal Disjuntiva](#conversão-para-forma-normal-disjuntiva)
       - [Exemplo 1: Convertendo $(A \\rightarrow B) \\land (C \\lor \\neg (D \\land E))$ Para FND](#exemplo-1-convertendo-a-rightarrow-b-land-c-lor-neg-d-land-e-para-fnd)
-      - [Exemplo 2: Convertendo $(\\neg A \\land (B \\rightarrow C)) \\lor (D \\land \\neg (E \\rightarrow F))$ Para FND](#exemplo-2-convertendo-neg-a-land-b-rightarrow-c-lor-d-land-neg-e-rightarrow-f-para-fnd)
+      - [Exemplo 2: Convertendo $(\\neg A \\land (B \\rightarrow C)) \\lor (D \\land \\neg (E \\rightarrow F))$ Para Forma Normal Disjuntiva](#exemplo-2-convertendo-neg-a-land-b-rightarrow-c-lor-d-land-neg-e-rightarrow-f-para-forma-normal-disjuntiva)
     - [Forma Normal Conjuntiva (FNC)](#forma-normal-conjuntiva-fnc)
       - [Estrutura da Forma Normal Conjuntiva](#estrutura-da-forma-normal-conjuntiva)
       - [Conversão para Forma Normal Conjuntiva](#conversão-para-forma-normal-conjuntiva)
@@ -127,7 +127,7 @@ Na Programação Lógica, um dos paradigmas da **Programação Descritiva** usam
 
 Uma conjectura é uma suposição, ou proposição que é acreditada ser verdadeira mas ainda não foi provada. Uma sentença que declarativa que precisa ser verificada. Na linguagem natural, conjecturas são frequentemente expressas como declarações que precisam de confirmação adicional. Na Lógica de Primeira Ordem, as proposições são tratadas como sentenças que são criadas para serem verificadas em busca da sua verdade, ou não. Essas sentenças podem ser analisadas e testadas usando as regras e estruturas da Lógica de Primeira Ordem.
 
-![Diagrama de Significado de Conjeturas](/assets/images/conjecturas.jpeQ)
+![Diagrama de Significado de Conjecturas](/assets/images/conjecturas.jpeg)
 
 Em resumo: **Imperativa:** focada no processo, no _como_ chegar à solução; **Descritiva:** focada no problema em si, no _o que_ precisa ser feito.
 
@@ -2828,7 +2828,7 @@ $$
 (\neg A \lor B) \land C \lor (\neg A \lor B) \land \neg D \lor (\neg A \lor B) \land \neg E
 $$
 
-#### Exemplo 2: Convertendo $(\neg A \land (B \rightarrow C)) \lor (D \land \neg (E \rightarrow F))$ Para FND
+#### Exemplo 2: Convertendo $(\neg A \land (B \rightarrow C)) \lor (D \land \neg (E \rightarrow F))$ Para Forma Normal Disjuntiva
 
 1. Eliminar Implicações
 
