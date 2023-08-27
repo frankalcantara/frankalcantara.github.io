@@ -59,6 +59,7 @@ A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive 
   - [Quantificador Universal](#quantificador-universal)
   - [Quantificador Existencial](#quantificador-existencial)
   - [Dos Predicados à Linguagem Natural](#dos-predicados-à-linguagem-natural)
+    - [Exercícios de Conversão de Expressões Predicativas em Linguagem Natural](#exercícios-de-conversão-de-expressões-predicativas-em-linguagem-natural)
   - [Ordem de Aplicação dos Quantificadores](#ordem-de-aplicação-dos-quantificadores)
     - [Negação dos Quantificadores](#negação-dos-quantificadores)
   - [Regras de Inferência usando Quantificadores](#regras-de-inferência-usando-quantificadores)
@@ -2096,6 +2097,86 @@ A conversão de uma Fórmula Bem Formada em sentença, não necessariamente resu
 - $\exists x \exists y F(x,y)$ se lê _Para algum avião $x$ existe um avião $y$ tal que $x$ é mais rápido que $y$_.
 
 As quatro sentenças expressam o mesmo contexto, embora sejam redigidas de maneiras distintas. Ao escrevermos, optamos pela forma mais transparente segundo nossa própria opinião. Quando a situação é de leitura, a escolha não existe, é necessário entender, e nesse cenário, a recomendação seria começar pela escrita da sentença em linguagem natural. Trata-se de um processo, e com o passar do tempo, torna-se mais simples.
+
+### Exercícios de Conversão de Expressões Predicativas em Linguagem Natural 
+
+**1. Fórmula Lógica**:
+$$
+\forall x (\text{Humano}(x) \rightarrow (\text{Mortal}(x) \wedge \text{Racional}(x)))  
+$$
+
+- Predicados:  
+
+  - $Humano(x)$: _$x$ é um humano_.
+  - $Mortal(x)$: _$x$ é mortal_.
+  - $Racional(x)$: _$x$ é racional_.
+
+- Sentença em Português: Todo humano é mortal e racional.
+
+**~2. Fórmula Lógica**:
+$$
+\exists y (\text{Livro}(y) \wedge (\text{Interessante}(y) \vee \text{Complicado}(y)))
+$$
+
+- Predicados:
+
+  - $Livro(y)$: _y é um livro_.
+  - $Interessante(y)$: _y é interessante_.
+  - $Complicado(y)$: _y é complicado_.
+
+- Sentença em Português: Existe pelo menos um livro que é interessante ou complicado.
+
+**3. Fórmula Lógica**:
+$$
+\forall x \forall y (\text{Amigos}(x, y) \rightarrow (\text{Confiável}(x) \wedge \text{Honra}(x)))  
+$$
+
+- Predicados:  
+  
+  - $Amigos(x, y)$: _x é amigo de y_.
+  - $Confiável(x)$: _x é confiável_.
+  - $Honra(x)$: _x honra y_.
+
+- Sentença em Português: Todo amigo de alguém é confiável e honra o amigo.
+
+**4. Fórmula Lógica**:
+$$
+\exists x \exists y (\text{Animal}(x) \wedge \text{Planta}(y) \wedge \text{Convive}(x, y))
+$$
+
+- Predicados:  
+
+  - $Animal(x)$: _x é um animal_.
+  - $Planta(y)$: _y é uma planta_.
+  - $Convive(x, y)$: _x e y convivem_.
+
+- Sentença em Português: Existe pelo menos um animal e uma planta que convivem no mesmo ambiente.
+
+**5. Fórmula Lógica**:  
+$$
+\forall x \exists y (\text{Professor}(x) \rightarrow (\text{Disciplina}(y) \wedge \text{Leciona}(x, y)))
+$$
+
+- Predicados:  
+
+  - $Professor(x)$: _x é um professor_.
+  - $Disciplina(y)$: _y é uma disciplina_.
+  - $Leciona(x, y)$: _x leciona y_.
+
+- Sentença em Português: Para todo professor, existe pelo menos uma disciplina que ele leciona.
+
+**6. Fórmula Lógica**:
+$$
+\exists x \forall y (\text{Músico}(x) \wedge (\text{Instrumento}(y) \rightarrow \text{Toca}(x, y)))
+$$
+
+- Predicados:  
+
+  - $Músico(x)$: _x é um músico_.
+  - $Instrumento(y)$: _y é um instrumento_.
+  - $Toca(x, y)$: _x toca y_.
+
+- Sentença em Português: Existe pelo menos um músico que, se algo é um instrumento, então ele toca esse instrumento.
 
 ## Ordem de Aplicação dos Quantificadores
 
