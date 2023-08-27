@@ -16,7 +16,7 @@ categories:
  - material de Aula
  - matemática
 rating: 5
-slug: introdução-programação-lógica
+slug: introducao-programacao-logica
 keywords:
  - lógica
  - Programação
