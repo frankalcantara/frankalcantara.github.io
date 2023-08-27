@@ -59,6 +59,7 @@ A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive 
   - [Quantificador Universal](#quantificador-universal)
   - [Quantificador Existencial](#quantificador-existencial)
   - [Dos Predicados à Linguagem Natural](#dos-predicados-à-linguagem-natural)
+    - [Exercícios de Conversão de Linguagem Natural em Expreessões Predicativas](#exercícios-de-conversão-de-linguagem-natural-em-expreessões-predicativas)
     - [Exercícios de Conversão de Expressões Predicativas em Linguagem Natural](#exercícios-de-conversão-de-expressões-predicativas-em-linguagem-natural)
   - [Ordem de Aplicação dos Quantificadores](#ordem-de-aplicação-dos-quantificadores)
     - [Negação dos Quantificadores](#negação-dos-quantificadores)
@@ -2097,6 +2098,80 @@ A conversão de uma Fórmula Bem Formada em sentença, não necessariamente resu
 - $\exists x \exists y F(x,y)$ se lê _Para algum avião $x$ existe um avião $y$ tal que $x$ é mais rápido que $y$_.
 
 As quatro sentenças expressam o mesmo contexto, embora sejam redigidas de maneiras distintas. Ao escrevermos, optamos pela forma mais transparente segundo nossa própria opinião. Quando a situação é de leitura, a escolha não existe, é necessário entender, e nesse cenário, a recomendação seria começar pela escrita da sentença em linguagem natural. Trata-se de um processo, e com o passar do tempo, torna-se mais simples.
+
+### Exercícios de Conversão de Linguagem Natural em Expreessões Predicativas
+
+**Sentença 1**: _Todo matemático que é professor tem alunos que são brilhantes e interessados._
+
+- Fórmula Lógica:
+$$
+\forall x ((\text{Matemático}(x) \wedge \text{Professor}(x)) \rightarrow \exists y (\text{Aluno}(y) \wedge \text{Brilhante}(y) \wedge \text{Interessado}(y) \wedge \text{Ensina}(x, y)))
+$$
+
+- Fórmula Alternativa:
+$$
+\forall x (\text{Matemático}(x) \rightarrow (\text{Professor}(x) \rightarrow \exists y (\text{Aluno}(y) \wedge \text{Brilhante}(y) \wedge \text{Interessado}(y) \wedge \text{Ensina}(x, y))))
+$$
+
+**Sentença 2**: _Alguns engenheiros não são nem ricos nem felizes._
+
+- Fórmula Lógica:
+$$
+\exists x (\text{Engenheiro}(x) \wedge \neg (\text{Rico}(x) \vee \text{Feliz}(x)))
+$$
+
+- Fórmula Alternativa:
+$$
+\exists x (\text{Engenheiro}(x) \wedge \neg\text{Rico}(x) \wedge \neg\text{Feliz}(x))
+$$
+
+**Sentença 3**: _Todos os planetas que têm água possuem vida ou têm potencial para vida._
+
+- Fórmula Lógica:
+$$
+\forall x (\text{Planeta}(x) \wedge \text{TemÁgua}(x) \rightarrow (\text{TemVida}(x) \vee \text{TemPotencialParaVida}(x)))
+$$
+
+- Fórmula Alternativa:
+$$
+\forall x (\text{Planeta}(x) \rightarrow (\text{TemÁgua}(x) \rightarrow (\text{TemVida}(x) \vee \text{TemPotencialParaVida}(x))))
+$$
+
+**Sentença 4**: _Nenhum cientista que é cético acredita em todos os mitos._
+
+- Fórmula Lógica:
+$$
+\forall x ((\text{Cientista}(x) \wedge \text{Cético}(x)) \rightarrow \exists y (\text{Mito}(y) \wedge \neg \text{Acredita}(x, y)))
+$$
+
+- Fórmula Alternativa:
+$$
+\forall x (\text{Cientista}(x) \rightarrow (\text{Cético}(x) \rightarrow \exists y (\text{Mito}(y) \wedge \neg \text{Acredita}(x, y))))
+$$
+
+**Sentença 5**: _Alguns filósofos que escrevem sobre ética também leem ou estudam psicologia._
+
+- Fórmula Lógica:
+$$
+\exists x (\text{Filósofo}(x) \wedge \text{EscreveSobreÉtica}(x) \wedge (\text{Lê}(x, \text{"Psicologia"}) \vee \text{Estuda}(x, \text{"Psicologia"})))
+$$
+
+- Fórmula Alternativa:
+$$
+\exists x (\text{Filósofo}(x) \wedge \text{EscreveSobreÉtica}(x) \rightarrow (\text{Lê}(x, \text{"Psicologia"}) \vee \text{Estuda}(x, \text{"Psicologia"})))
+$$
+
+**Sentença 6**: _Para todo escritor, existe pelo menos um livro que ele escreveu e que é tanto criticado quanto admirado._
+
+- Fórmula Lógica:
+$$
+\forall x (\text{Escritor}(x) \rightarrow \exists y (\text{Livro}(y) \wedge \text{Escreveu}(x, y) \wedge \text{Criticado}(y) \wedge \text{Admirado}(y)))
+$$
+
+- Fórmula Alternativa:
+$$
+\forall x (\text{Escritor}(x) \rightarrow (\exists y (\text{Livro}(y) \wedge \text{Escreveu}(x, y)) \wedge \exists z (\text{Criticado}(z) \wedge \text{Admirado}(z))))
+$$
 
 ### Exercícios de Conversão de Expressões Predicativas em Linguagem Natural 
 
