@@ -488,9 +488,9 @@ Simplificação:
 $$
  \begin{align*}
  (P \rightarrow Q) \vee (R \rightarrow S) \vee (E \rightarrow P) &\equiv (\neg P \vee Q) \vee (\neg R \vee S) \vee (\neg E \vee P) && \text{(7)} \\
- &\equiv \neg P \vee Q \vee \neg R \vee S \vee \neg E \vee P && \text{(2)}
- &\equiv TRUE \vee Q \vee \neg R \vee S \vee \neg E && \text{(11)}
- &\equiv TRUE \vee Q \vee \neg R \vee S \vee \neg E && \text{(11)}
+ &\equiv \neg P \vee Q \vee \neg R \vee S \vee \neg E \vee P && \text{(2)}\\
+ &\equiv TRUE \vee Q \vee \neg R \vee S \vee \neg E && \text{(11)}\\
+ &\equiv TRUE \vee Q \vee \neg R \vee S \vee \neg E && \text{(11)}\\
  &\equiv TRUE
  \end{align*}
 $$
