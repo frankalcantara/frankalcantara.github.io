@@ -1856,7 +1856,8 @@ Neste ponto, podemos voltar um pouco e destacar um constructor importante na pro
 
 # Lógica Predicativa
 
->A lógica é a técnica que usamos para adicionar convicção a verdade.<br> Jean de la Bruyere
+>A lógica é a técnica que usamos para adicionar convicção a verdade.
+>Jean de la Bruyere
 
 A Lógica Predicativa, coração e espírito da Lógica de Primeira Ordem, nos leva um passo além da Lógica Proposicional. Em vez de se concentrar apenas em proposições completas que são verdadeiras ou falsas, a lógica predicativa nos permite expressar proposições sobre objetos e as relações entre eles. Ela nos permite falar de maneira mais rica e sofisticada sobre o mundo.
 
