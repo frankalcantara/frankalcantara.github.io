@@ -185,7 +185,7 @@ O uso os parenteses e da ordem de precedência requer parcimônia, muita parcim�
 
 Nesta linguagem cada sentença, ou preposição, deve ser verdadeira ou falsa, nunca verdadeira e falsa ao mesmo tempo e nada diferente de verdadeiro ou falso. Para que uma sentença, ou preposição, seja verdadeira ela precisa ser logicamente verdadeira. Uma sentença que deve ser falsa é uma sentença contraditória.
 
-Assim como aprendemos nossa língua materna reconhecendo padrões, repetições e regularidades, também reconhecemos Fórmulas Bem Formadas por seus padrões característicos. Os símbolos estarão dispostos de forma organizada e padronizada em termos sobre os quais serão aplicadas operações, funções e quantificadores.
+Da mesma forma que  aprendemos nossa língua materna reconhecendo padrões, repetições e regularidades, também reconhecemos Fórmulas Bem Formadas por seus padrões característicos. Os símbolos estarão dispostos de forma organizada e padronizada em termos sobre os quais serão aplicadas operações, funções e quantificadores.
 
 Termos são variáveis, constantes ou mesmo funções aplicadas a termos e seguem um pequeno conjunto de regras:
 
@@ -193,7 +193,7 @@ Termos são variáveis, constantes ou mesmo funções aplicadas a termos e segue
 2. uma constante $A$ é um termo em si que será verdadeira $(T)$ ou falsA$(P)$;
 3. se $\mathbf{f}$ é uma função de termos $(t_1, ... t_n)$ então $\mathbf{f}(t_1, ... t_n)$ é um termo.
 
-Cada proposição, ou sentença, na Lógica Proposicional é como uma ilha isolada de verdade, um fato fundamental que não pode ser dividido em partes menores. _A chuva cai_, _O sol brilha_ - cada uma dessas proposições é verdadeira ou falsa como uma unidade. Um átomo, elemento básico e fundamental de todas as expressões. Também, mas tarde, chamaremos de átomos a todo predicado aplicado aos termos de uma fórmula. Assim, também precisamos definir os predicados.
+Cada proposição, ou sentença, na Lógica Proposicional é como uma ilha isolada de verdade, um fato fundamental que não pode ser dividido em partes menores. _A chuva cai_, _O sol brilha_ - cada uma dessas proposições é verdadeira ou falsa como uma unidade. Um átomo, elemento básico e fundamental de todas as expressões. Também, mas tarde, chamaremos de átomos a todo predicado aplicado aos termos de uma fórmula. Também precisamos definir os predicados.
 
 1. se $P$ é um predicado de termos $(t_1, ... t_n)$ então $P(t_1, ... t_n)$ é uma Fórmula Bem Formada, um átomo.
 2. se $P$ e $Q$ são Fórmulas Bem Formadas então: $\neg P$, $P\wedge Q$, $P \vee Q$, $P \rightarrow Q$ e $P \leftrightarrow Q$ são Fórmulas Bem Formadas.
@@ -562,7 +562,7 @@ $$
 \end{align*}
 $$
 
-A Lógica Proposicional é a estrutura mais simples e, ainda assim, fundamentalmente profunda que usamos para fazer sentido do universo. Imagine um universo de verdades e falsidades, onde cada proposição é um átomo indivisível que detém uma verdade única e inalterada. Neste cosmos de lógica, estas proposições são as estrelas, e as operações lógicas - conjunção, disjunção, negação, implicação, e bi-implicação - são as forças gravitacionais que as unem em constelações mais complexas de significado.
+A Lógica Proposicional é a estrutura mais simples e profunda que usamos para fazer sentido do universo. Imagine um universo de verdades e falsidades, onde cada proposição é um átomo indivisível que detém uma verdade única e inalterada. Neste cosmos de lógica, estas proposições são as estrelas, e as operações lógicas - conjunção, disjunção, negação, implicação, e bi-implicação - são as forças gravitacionais que as unem em constelações mais complexas de significado.
 
  Enquanto subcampo da lógica matemática, a Lógica Proposicional é essencial para a forma como entendemos e interagimos com o mundo ao nosso redor. Ela fornece a base para a construção de argumentos sólidos e para a avaliação da validade de proposições. Originadas na necessidade humana de descobrir a verdade e diminuir os conflitos a partir da lógica. No entanto, a beleza da Lógica Proposicional se estende além do campo da filosofia e do discurso. Ela é a fundação da Álgebra de Boole, a qual, por sua vez, é a base para o design de circuitos eletrônicos e a construção de computadores modernos. Graças a uma ideia de [Claude Shannon](https://en.wikipedia.org/wiki/Claude_Shannon). as operações básicas da Álgebra de Boole - AND, OR, NOT - são os componentes fundamentais dos sistemas digitais que formam o núcleo dos computadores, telefones celulares, e de fato, de toda a nossa era digital. A Lógica Proposicional é a base sobre a qual construímos todo o edifício do raciocínio lógico. É como a tabela periódica para os químicos ou as leis de Newton para os físicos. É simples, elegante e, acima de tudo, poderosa. A partir dessa fundação, podemos começar a explorar os reinos mais profundos da lógica e do pensamento.
 
@@ -1510,7 +1510,7 @@ A contrapositiva pode ser lida como _se não $Q$, então não $P$_. Em outras pa
  A contrapositiva de $P\rightarrow (Q \lor R)$ é $\lnot(Q \lor R) \rightarrow \lnot P$.
 
  **Exemplo 2:**
- Dizemos que uma função é injetora se $x \neq y $implicA$f(x) \neq f(y)$. A contrapositiva desta implicação é: se $f(x) = f(y)$ então $x = y$.
+ Dizemos que uma função é injetora se $x \neq y $implica $f(x) \neq f(y)$. A contrapositiva desta implicação é: se $f(x) = f(y)$ então $x = y$.
 
 O Exemplo 2 é uma prova de conceito. Normalmente é mais fácil assumir $f(x) = f(y)$ e deduzir $x = y$ do que assumir $x \neq y$ e deduzir $f(x) \neq f(y)$. Isto pouco tem a ver com funções e muito com o fato de que $x \neq y$ geralmente não é uma informação útil.
 
@@ -1528,7 +1528,7 @@ A recíproca, também conhecida como _conversa_ por alguns acadêmicos brasileir
  A conversa de $P\rightarrow (Q \lor R)$ será $(Q \lor R) \rightarrow P$.
 
  **Exemplo 2:**
- Dizemos que uma função é bem definida se cada entrada tem uma saída única. Assim, uma função é bem definida se $x = y$ implicA$f(x) = f(y)$. Observe estas fórmulas:
+ Dizemos que uma função é bem definida se cada entrada tem uma saída única. Assim, uma função é bem definida se $x = y$ implica $f(x) = f(y)$. Observe estas fórmulas:
 
  1. $f(x)$ é bem definida significa que $x = y \rightarrow f(x) = f(y)$.
 
@@ -1714,9 +1714,9 @@ Talvez tudo isso fique mais claro se fizermos algumas provas.
 
 1. $A \rightarrow ((A \rightarrow A) \rightarrow A)$ (Axioma 1 com $A := A$ e $B := (A \rightarrow A)$)
 
- Aqui usamos o primeiro axioma de $\mathfrak{L}$, que tem a forma $(A \rightarrow (B \rightarrow A))$. Para tanto vamos $A := A$ e $B := (A \rightarrow A)$ Para fazer a correspondência com o axioma, assim obtendo a fórmula na linha. Observe que usamos o símbolo $:=$, um símbolo que não faz parte do nosso alfabeto e aqui está sendo usado com o sentido _substituído por_.
+ Aqui usamos o primeiro axioma de $\mathfrak{L}$, que tem a forma $(A \rightarrow (B \rightarrow A))$. Para tanto usamos $A := A$ e $B := (A \rightarrow A)$ para fazer a correspondência com o axioma, obtendo a fórmula na linha. Observe que usamos o símbolo $:=$, um símbolo que não faz parte do nosso alfabeto e aqui está sendo usado com o sentido _substituído por_. Até na matemática usamos licenças poéticas.
 
-2. $(A \rightarrow ((A \rightarrow A) \rightarrow A)) \rightarrow ((A \rightarrow (A \rightarrow A)) \rightarrow (A \rightarrow A))$ (Axioma 2 com $A := A$, $B := (A \rightarrow A)$ e $ c := A$)
+1. $(A \rightarrow ((A \rightarrow A) \rightarrow A)) \rightarrow ((A \rightarrow (A \rightarrow A)) \rightarrow (A \rightarrow A))$ (Axioma 2 com $A := A$, $B := (A \rightarrow A)$ e $ c := A$)
 
  A segunda linha usa o segundo axioma de $\mathfrak{L}$, que é $(A \rightarrow (B \rightarrow C)) \rightarrow ((A \rightarrow B) \rightarrow (A \rightarrow C))$. O autor substituiu $A := A$, $B := (A \rightarrow A)$ e $ c := A$ Para obter a fórmula na linha.
 
@@ -2319,7 +2319,7 @@ Na lógica proposicional, poderíamos simplesmente verificar isso com uma tabela
 
 Vamos tentar entender isso com linguagem natural: afirmar que $\neg (\forall x P(x))$ é verdadeiro significa que não é verdade que $P(x)$ se aplica a todas as possíveis entidades $x$. Deve haver alguma entidade $A$ Para a qual$P(a)$ é falso. Como $P(a)$ é falso, $\neg P(a)$ é verdadeiro. Isso significa que $\exists x (\neg P(x))$ é verdadeiro. Portanto, a verdade de $\neg (\forall x P(x))$implica a verdade de $\exists x (\neg P(x))$.
 
-Se $\neg (\forall x P(x))$ é falso, então $\forall x P(x)$ é verdadeiro. Como $P(x)$ é verdadeiro para todos os $x$, $\neg P(x)$ é falso para todos os $x$. Assim, $\exists x (\neg P(x))$ é falso.
+Se $\neg (\forall x P(x))$ é falso, então $\forall x P(x)$ é verdadeiro. Como $P(x)$ é verdadeiro para todos os $x$, $\neg P(x)$ é falso para todos os $x$. Logo, $\exists x (\neg P(x))$ é falso.
 
 Os valores de verdade de $\neg (\forall x P(x))$ e $\exists x (\neg P(x))$ são os mesmos. Como isso é verdadeiro para qualquer predicado $P$, essas duas fórmulas são logicamente equivalentes, e podemos escrever $\neg (\forall x P(x)) \equiv \exists x (\neg P(x))$.
 
@@ -2330,7 +2330,7 @@ A expressão $\forall x P(x)$ significa que _todos são felizes_, enquanto $\neg
 
 A expressão $\exists x (\neg P(x))$ significa que _existe alguém que não está feliz_. Você pode ver que isso é apenas outra maneira de expressar a ideia contida em $\neg (\forall x P(x))$.
 
-Assim, a afirmação de que _não é verdade que todos estão felizes_ implica que deve haver alguém que não está feliz. Se a primeira afirmação é falsa (ou seja, todos estão felizes), então a segunda afirmação também deve ser falsa.
+A afirmação de que _não é verdade que todos estão felizes_ implica que deve haver alguém que não está feliz. Se a primeira afirmação é falsa (ou seja, todos estão felizes), então a segunda afirmação também deve ser falsa.
 
 Portanto, as duas fórmulas têm o mesmo valor verdade. Elas são logicamente equivalentes e podem ser representadas como $\neg (\forall x P(x)) \equiv \exists x (\neg P(x))$. Esta equivalência reflete uma relação profunda e intuitiva em nosso entendimento de declarações sobre entidades em nosso mundo.
 
@@ -2768,7 +2768,7 @@ Nosso objetivo é rever a matemática que suporta a Programação Lógica, entre
 
 Embora outras formas normais possam ter aplicações em áreas específicas da Programação Lógica, a FNC e a FNS são provavelmente as mais amplamente aplicáveis e úteis nesse Proposição. Começando com a Forma Normal Conjuntiva.
 
-Se considerarmos as propriedades associativas apresentadas nas linhas 20 e 21 da Tabela 2, podemos escrever uma sequência de conjunções, ou disjunções, sem precisarmos de parênteses. Sendo assim:
+Se considerarmos as propriedades associativas apresentadas nas linhas 20 e 21 da Tabela 2, podemos escrever uma sequência de conjunções, ou disjunções, sem precisarmos de parênteses. Sendo assim, teremos:
 
 $$((P \wedge (Q \wedge R)) \wedge S)$$
 
@@ -3320,7 +3320,7 @@ $$(\text{Animal}(x) \land \neg \text{Corre}(x)) \lor (\neg \text{Pássaro}(y) \l
 
 ## Cláusula de Horn
 
-A **Cláusula de Horn** foi assim nomeada em homenagem ao matemático e lógico americano [Alfred Horn](https://en.wikipedia.org/wiki/Alfred_Horn), que a introduziu em [um artigo publicado em 1951](https://www.cambridge.org/core/journals/journal-of-symbolic-logic/article/abs/on-sentences-which-are-true-of-direct-unions-of-algebras1/DF348CB269B06D6702DA3AE4DCF38C39). O contexto histórico e a motivação para a introdução da Cláusula de Horn são profundamente enraizados na solução do Problema da Decidibilidade. Na primeira metade do século XX, a lógica matemática estava focada na questão da decidibilidade: determinar se uma afirmação lógica é verdadeira ou falsa de maneira algorítmica.
+A **Cláusula de Horn** foi nomeada em homenagem ao matemático e lógico americano [Alfred Horn](https://en.wikipedia.org/wiki/Alfred_Horn), que a introduziu em [um artigo publicado em 1951](https://www.cambridge.org/core/journals/journal-of-symbolic-logic/article/abs/on-sentences-which-are-true-of-direct-unions-of-algebras1/DF348CB269B06D6702DA3AE4DCF38C39). O contexto histórico e a motivação para a introdução da Cláusula de Horn são profundamente enraizados na solução do Problema da Decidibilidade. Na primeira metade do século XX, a lógica matemática estava focada na questão da decidibilidade: determinar se uma afirmação lógica é verdadeira ou falsa de maneira algorítmica.
 
 Não demorou muito para os matemáticos perceberem que a Lógica de Primeira Ordem é poderosa, mas pode ser ineficientes para resolver os problemas relacionados ao Problema da Decidibilidade. A busca por formas mais eficientes de resolução levou ao estudo de subconjuntos restritos da lógica de primeira ordem, onde a decidibilidade poderia ser alcançada de maneira mais eficiente. Aqui, eficiência significa o menor custo computacional, no menor tempo.
 
@@ -3476,7 +3476,7 @@ Passos:
 3. Adicionar literal negativo: $(P \lor Q \lor \neg S) \land (\neg P \lor R \lor \neg T)$
 4. Simplificar: $\neg S \lor P \land \neg T \lor r $
 
-Assim se obtém uma conjunção de cláusulas de Horn equivalente à fórmula original.
+A sequência destes passos permite encontrar uma conjunção de cláusulas de Horn equivalente à fórmula original.
 
 #### Transformação de Forma Normal Conjuntiva (FNC) para Cláusulas de Horn
 
