@@ -83,8 +83,10 @@ A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive 
     - [Forma Normal Conjuntiva (FNC)](#forma-normal-conjuntiva-fnc)
       - [Estrutura da Forma Normal Conjuntiva](#estrutura-da-forma-normal-conjuntiva)
       - [Conversão para Forma Normal Conjuntiva](#conversão-para-forma-normal-conjuntiva)
-      - [Exemplo 1: Convertendo $(A \\land B) \\rightarrow (C \\lor D)$ Para FNC](#exemplo-1-convertendo-a-land-b-rightarrow-c-lor-d-para-fnc)
-      - [Exemplo 2: Convertendo $(A \\land \\neg B) \\lor (\\neg C \\land D) \\rightarrow (E \\lor F)$ Para FNC](#exemplo-2-convertendo-a-land-neg-b-lor-neg-c-land-d-rightarrow-e-lor-f-para-fnc)
+      - [Exemplo 1: Convertendo $(A \\land B) \\rightarrow (C \\lor D)$](#exemplo-1-convertendo-a-land-b-rightarrow-c-lor-d)
+      - [Exemplo 2: Convertendo $(A \\land \\neg B) \\lor (\\neg C \\land D) \\rightarrow (E \\lor F)$](#exemplo-2-convertendo-a-land-neg-b-lor-neg-c-land-d-rightarrow-e-lor-f)
+      - [Exemplo 3: Convertendo $(p \\wedge (q \\vee r)) \\vee (\\neg p \\wedge \\neg q)$](#exemplo-3-convertendo-p-wedge-q-vee-r-vee-neg-p-wedge-neg-q)
+      - [Exemplo 4  $ \\neg ((p \\wedge q) \\vee \\neg (r \\wedge s)) $](#exemplo-4---neg-p-wedge-q-vee-neg-r-wedge-s-)
     - [Usando a Tabela-Verdade para Gerar Formas Normais](#usando-a-tabela-verdade-para-gerar-formas-normais)
       - [Gerando a Forma Normal Disjuntiva (FND)](#gerando-a-forma-normal-disjuntiva-fnd)
       - [Gerando a Forma Normal Conjuntiva (FNC)](#gerando-a-forma-normal-conjuntiva-fnc)
@@ -1730,7 +1732,7 @@ Talvez tudo isso fique mais claro se fizermos algumas provas.
 
  Finalmente, aplicamos o _Modus Ponens_ às linhas 3 e 4 para obter a fórmula na última linha, que é o teorema que tentamos provar.
 
-Então, o primeiro teorema está correto e podemos escrever $\vdash_{\mathfrak{L}} A}$.
+Então, o primeiro teorema está correto e podemos escrever $\vdash \mathfrak{L} A$.
 
 **Prova 2**: vamos tentar provar $\vdash (\lnot B \rightarrow B) \rightarrow B$
 
@@ -2104,11 +2106,13 @@ As quatro sentenças expressam o mesmo contexto, embora sejam redigidas de manei
 **Sentença 1**: _Todo matemático que é professor tem alunos que são brilhantes e interessados._
 
 - Fórmula Lógica:
+  
 $$
 \forall x ((\text{Matemático}(x) \wedge \text{Professor}(x)) \rightarrow \exists y (\text{Aluno}(y) \wedge \text{Brilhante}(y) \wedge \text{Interessado}(y) \wedge \text{Ensina}(x, y)))
 $$
 
 - Fórmula Alternativa:
+  
 $$
 \forall x (\text{Matemático}(x) \rightarrow (\text{Professor}(x) \rightarrow \exists y (\text{Aluno}(y) \wedge \text{Brilhante}(y) \wedge \text{Interessado}(y) \wedge \text{Ensina}(x, y))))
 $$
@@ -2116,11 +2120,13 @@ $$
 **Sentença 2**: _Alguns engenheiros não são nem ricos nem felizes._
 
 - Fórmula Lógica:
+  
 $$
 \exists x (\text{Engenheiro}(x) \wedge \neg (\text{Rico}(x) \vee \text{Feliz}(x)))
 $$
 
 - Fórmula Alternativa:
+  
 $$
 \exists x (\text{Engenheiro}(x) \wedge \neg\text{Rico}(x) \wedge \neg\text{Feliz}(x))
 $$
@@ -2128,11 +2134,13 @@ $$
 **Sentença 3**: _Todos os planetas que têm água possuem vida ou têm potencial para vida._
 
 - Fórmula Lógica:
+  
 $$
 \forall x (\text{Planeta}(x) \wedge \text{TemÁgua}(x) \rightarrow (\text{TemVida}(x) \vee \text{TemPotencialParaVida}(x)))
 $$
 
 - Fórmula Alternativa:
+  
 $$
 \forall x (\text{Planeta}(x) \rightarrow (\text{TemÁgua}(x) \rightarrow (\text{TemVida}(x) \vee \text{TemPotencialParaVida}(x))))
 $$
@@ -2140,11 +2148,17 @@ $$
 **Sentença 4**: _Nenhum cientista que é cético acredita em todos os mitos._
 
 - Fórmula Lógica:
+  
+$$
+\neg \exists x (Cientista(x) \wedge Cético(x) \wedge \forall y (Mito(y) \rightarrow Acredita(x,y)))
+$$
+
+- Fórmula Alternativas:
+
 $$
 \forall x ((\text{Cientista}(x) \wedge \text{Cético}(x)) \rightarrow \exists y (\text{Mito}(y) \wedge \neg \text{Acredita}(x, y)))
 $$
 
-- Fórmula Alternativa:
 $$
 \forall x (\text{Cientista}(x) \rightarrow (\text{Cético}(x) \rightarrow \exists y (\text{Mito}(y) \wedge \neg \text{Acredita}(x, y))))
 $$
@@ -2152,30 +2166,45 @@ $$
 **Sentença 5**: _Alguns filósofos que escrevem sobre ética também leem ou estudam psicologia._
 
 - Fórmula Lógica:
+  
 $$
 \exists x (\text{Filósofo}(x) \wedge \text{EscreveSobreÉtica}(x) \wedge (\text{Lê}(x, \text{"Psicologia"}) \vee \text{Estuda}(x, \text{"Psicologia"})))
 $$
 
-- Fórmula Alternativa:
+- Fórmulas Alternativas:
+  
 $$
 \exists x (\text{Filósofo}(x) \wedge \text{EscreveSobreÉtica}(x) \rightarrow (\text{Lê}(x, \text{"Psicologia"}) \vee \text{Estuda}(x, \text{"Psicologia"})))
 $$
 
+$$
+\exists x (\text{Filósofo}(x) \land \text{EscreveSobreÉtica}(x) \land (\text{Lê}(x) \lor \text{"Psicologia"}(x)))
+$$
+
+
 **Sentença 6**: _Para todo escritor, existe pelo menos um livro que ele escreveu e que é tanto criticado quanto admirado._
 
 - Fórmula Lógica:
+  
 $$
 \forall x (\text{Escritor}(x) \rightarrow \exists y (\text{Livro}(y) \wedge \text{Escreveu}(x, y) \wedge \text{Criticado}(y) \wedge \text{Admirado}(y)))
 $$
 
-- Fórmula Alternativa:
+- Fórmula Alternativas:
+  
 $$
-\forall x (\text{Escritor}(x) \rightarrow (\exists y (\text{Livro}(y) \wedge \text{Escreveu}(x, y)) \wedge \exists z (\text{Criticado}(z) \wedge \text{Admirado}(z))))
+\exists x (\text{Escritor}(x) \wedge \exists y (\text{Livro}(y) \wedge \text{Escreveu}(x, y) \wedge (\text{Criticado}(y) \wedge \text{Admirado}(y))))
+$$
+
+$$
+\forall x \exists y (\text{Escritor}(x) \land \text{Escreveu}(x, y) \rightarrow (\text{criticado}(y) \land \text{Admirado}(y)))
+
 $$
 
 ### Exercícios de Conversão de Expressões Predicativas em Linguagem Natural 
 
 **1. Fórmula Lógica**:
+
 $$
 \forall x (\text{Humano}(x) \rightarrow (\text{Mortal}(x) \wedge \text{Racional}(x)))  
 $$
@@ -2189,6 +2218,7 @@ $$
 - Sentença em Português: Todo humano é mortal e racional.
 
 **~2. Fórmula Lógica**:
+
 $$
 \exists y (\text{Livro}(y) \wedge (\text{Interessante}(y) \vee \text{Complicado}(y)))
 $$
@@ -2202,6 +2232,7 @@ $$
 - Sentença em Português: Existe pelo menos um livro que é interessante ou complicado.
 
 **3. Fórmula Lógica**:
+
 $$
 \forall x \forall y (\text{Amigos}(x, y) \rightarrow (\text{Confiável}(x) \wedge \text{Honra}(x)))  
 $$
@@ -2215,6 +2246,7 @@ $$
 - Sentença em Português: Todo amigo de alguém é confiável e honra o amigo.
 
 **4. Fórmula Lógica**:
+
 $$
 \exists x \exists y (\text{Animal}(x) \wedge \text{Planta}(y) \wedge \text{Convive}(x, y))
 $$
@@ -2228,6 +2260,7 @@ $$
 - Sentença em Português: Existe pelo menos um animal e uma planta que convivem no mesmo ambiente.
 
 **5. Fórmula Lógica**:  
+
 $$
 \forall x \exists y (\text{Professor}(x) \rightarrow (\text{Disciplina}(y) \wedge \text{Leciona}(x, y)))
 $$
@@ -2241,6 +2274,7 @@ $$
 - Sentença em Português: Para todo professor, existe pelo menos uma disciplina que ele leciona.
 
 **6. Fórmula Lógica**:
+
 $$
 \exists x \forall y (\text{Músico}(x) \wedge (\text{Instrumento}(y) \rightarrow \text{Toca}(x, y)))
 $$
@@ -2882,39 +2916,69 @@ Converter uma fórmula para a FNC geralmente envolve os seguintes passos:
 4. **Eliminar Dupla Negação**: Substitua qualquer dupla negação $\neg \neg A$ Por $A$.
 5. **Aplicar a Lei Distributiva**: Use a lei distributiva para expandir a fórmula, transformando-a em uma conjunção de disjunções.
 
-#### Exemplo 1: Convertendo $(A \land B) \rightarrow (C \lor D)$ Para FNC
+#### Exemplo 1: Convertendo $(A \land B) \rightarrow (C \lor D)$ 
 
 1. **Eliminar Implicações**:
-
-$$
- \neg (A \land B) \lor (C \lor D) \rightarrow (\neg A \lor \neg B) \lor (C \lor D)
-$$
+  
+  $$
+  \neg (A \land B) \lor (C \lor D) \rightarrow (\neg A \lor \neg B) \lor (C \lor D)
+  $$
 
 2. **Distribuir a Disjunção**:
+  
+  $$
+  (\neg A \lor \neg B \lor C \lor D)
+  $$
 
-$$
- (\neg A \lor \neg B \lor C \lor D)
-$$
+#### Exemplo 2: Convertendo $(A \land \neg B) \lor (\neg C \land D) \rightarrow (E \lor F)$ 
 
-#### Exemplo 2: Convertendo $(A \land \neg B) \lor (\neg C \land D) \rightarrow (E \lor F)$ Para FNC
+1. **Eliminar Implicações**:
+  
+  $$
+  \neg ((A \land \neg B) \lor (\neg C \land D)) \lor (E \lor F) \rightarrow \neg (A \land \neg B) \land \neg (\neg C \land D) \lor (E \lor F)
+  $$
 
-3. **Eliminar Implicações**:
+2. **Aplicar De Morgan**:
+  
+  $$
+  (\neg A \lor B) \land (C \lor \neg D) \lor (E \lor F)
+  $$
 
-$$
- \neg ((A \land \neg B) \lor (\neg C \land D)) \lor (E \lor F) \rightarrow \neg (A \land \neg B) \land \neg (\neg C \land D) \lor (E \lor F)
-$$
+3. **Distribuir a Disjunção**:
+  
+  $$
+  (\neg A \lor B \lor E \lor F) \land (C \lor \neg D \lor E \lor F)
+  $$
 
-4. **Aplicar De Morgan**:
+#### Exemplo 3: Convertendo $(p \wedge (q \vee r)) \vee (\neg p \wedge \neg q)$
 
-$$
- (\neg A \lor B) \land (C \lor \neg D) \lor (E \lor F)
-$$
+1. Aplicar a lei distributiva para expandir a expressão:  
+   
+   $$(p \wedge q) \vee (p \wedge r) \vee (\neg p \wedge \neg q)$$
 
-5. **Distribuir a Disjunção**:
+2. Transformando a expressão em uma conjunção de disjunções. Podemos fazer isso aplicando novamente a lei distributiva:
+   
+   $$(p \wedge q) \vee \neg p) \wedge ( (p \wedge q) \vee \neg q) \wedge ( (p \wedge r) \vee \neg p) \wedge ( (p \wedge r) \vee \neg q)$$
 
-$$
- (\neg A \lor B \lor E \lor F) \land (C \lor \neg D \lor E \lor F)
-$$
+3. Finalmente a Forma Normal Conjuntiva
+
+  $$((p \wedge q) \vee \neg p) \wedge ((p \wedge q) \vee \neg q) \wedge ((p \wedge r) \vee \neg p) \wedge (p \wedge r) \vee \neg q)$$
+
+#### Exemplo 4  $ \neg ((p \wedge q) \vee \neg (r \wedge s)) $
+
+1. Aplicando a Lei de De Morgan na expressão inteira:
+
+  $$\begin{align*}
+  \neg ((p \wedge q) \vee \neg (r \wedge s)) &\equiv \neg (p \wedge q) \wedge (r \wedge s) \quad \text{(Lei de De Morgan)}
+  \end{align*}$$
+
+2. aplicando a Lei de De Morgan nos termos internos:
+
+  $$
+  \begin{align*}
+  \neg (p \wedge q) \wedge (r \wedge s) &\equiv (\neg p \vee \neg q) \wedge (r \wedge s) \quad \text{(Lei de De Morgan)}
+  \end{align*}  
+  $$
 
 ### Usando a Tabela-Verdade para Gerar Formas Normais
 

@@ -10,11 +10,18 @@
 		"contrapositiva",
 		"contrapositivas",
 		"contrapositva",
+		"Ernest",
+		"Fraenkel",
+		"Gottlob",
+		"groupid",
+		"Hemingway",
 		"lazyimg",
 		"Leonhard",
 		"Marvin",
 		"mathbf",
 		"mathfrak",
+		"monóide",
+		"monoids",
 		"Nullary",
 		"Prenex",
 		"Sarrus",
@@ -23,6 +30,12 @@
 		"skolemiza",
 		"skolemização",
 		"textbf",
-		"Tollendo"
+		"Tollendo",
+		"underbrace",
+		"Zermelo-Fraenkel"
+	],
+	"cSpell.ignoreWords": [
+		"pmatrix",
+		"μάγμα"
 	]
 }
