@@ -2780,69 +2780,50 @@ Converter uma fórmula para a FND geralmente envolve os seguintes passos:
 5. **Aplicar a Lei Distributiva**: Use a lei distributiva para expandir a fórmula, transformando-a em uma disjunção de conjunções.
 
 #### Exemplo 1: Convertendo $(A \rightarrow B) \land (C \lor \neg (D \land E))$
+
 1. Eliminar Implicações
 
-$$
-(A \rightarrow B) \land (C \lor \neg (D \land E)) \rightarrow (\neg A \lor B) \land (C \lor \neg (D \land E))
-$$
+    $$(A \rightarrow B) \land (C \lor \neg (D \land E)) \rightarrow (\neg A \lor B) \land (C \lor \neg (D \land E))$$
 
 2. Aplicar De Morgan
 
-$$
-(\neg A \lor B) \land (C \lor \neg D \lor \neg E)
-$$
+    $$(\neg A \lor B) \land (C \lor \neg D \lor \neg E)$$
 
 3. Distribuir a Disjunção
 
-$$
-(\neg A \lor B) \land C \lor (\neg A \lor B) \land \neg D \lor (\neg A \lor B) \land \neg E
-$$
+    $$(\neg A \lor B) \land C \lor (\neg A \lor B) \land \neg D \lor (\neg A \lor B) \land \neg E$$
 
 #### Exemplo 2: Convertendo $(\neg A \land (B \rightarrow C)) \lor (D \land \neg (E \rightarrow F))$
 
 1. Eliminar Implicações
 
-$$
-(\neg A \land (\neg B \lor C)) \lor (D \land \neg (\neg E \lor F)) \rightarrow (\neg A \land (\neg B \lor C)) \lor (D \land (E \land \neg F))
-$$
+    $$(\neg A \land (\neg B \lor C)) \lor (D \land \neg (\neg E \lor F)) \rightarrow (\neg A \land (\neg B \lor C)) \lor (D \land (E \land \neg F))$$
 
 2. Distribuir a Disjunção
 
-$$
-(\neg A \land \neg B \lor \neg A \land C) \lor (D \land E \land \neg F)
-$$
+    $$(\neg A \land \neg B \lor \neg A \land C) \lor (D \land E \land \neg F)$$
 
 3. Distribuir a Disjunção Novamente
 
-$$
-\neg A \land \neg B \lor \neg A \land C \lor D \land E \land \neg F
-$$
+    $$\neg A \land \neg B \lor \neg A \land C \lor D \land E \land \neg F$$
 
 #### $(p \rightarrow q) \rightarrow (r \vee s)$
 
 1. Remover as implicações ($\rightarrow$):
-   
-   $$
-   p \rightarrow q \equiv \neg p \vee q
-   $$
+
+    $$p \rightarrow q \equiv \neg p \vee q$$
 
 2. Substituir a expressão original com a equivalência encontrada no passo 1:
-   
-   $$
-   (\neg p \vee q) \rightarrow (r \vee s)
-   $$
+
+    $$(\neg p \vee q) \rightarrow (r \vee s)$$
 
 3. Aplicar novamente a equivalência para remover a implicação:
-   
-   $$
-   \neg (\neg p \vee q) \vee (r \vee s)
-   $$
+
+    $$\neg (\neg p \vee q) \vee (r \vee s)$$
 
 4. Aplicar a lei de De Morgan para expandir a negação:
-   
-   $$
-   (p \wedge \neg q) \vee (r \vee s)
-   $
+
+    $$(p \wedge \neg q) \vee (r \vee s)$$   
 
 #### $(p \rightarrow q) \rightarrow (\neg r \vee s)$ 
 
