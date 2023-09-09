@@ -37,8 +37,10 @@ Imagem de [Asimina Nteliou](https://pixabay.com/users/asimina-1229333/?utm_sourc
   - [Produto Escalar](#produto-escalar)
   - [Produto Vetorial](#produto-vetorial)
     - [A Identidade de Jacobi](#a-identidade-de-jacobi)
-  - [Campos Vetoriais](#campos-vetoriais)
+  - [Usando a Álgebra Vetorial no Eletromagnetismo](#usando-a-álgebra-vetorial-no-eletromagnetismo)
+    - [Lei de Coulomb](#lei-de-coulomb)
 - [Cálculo Vetorial](#cálculo-vetorial)
+  - [Campos Vetoriais](#campos-vetoriais)
   - [Gradiente](#gradiente)
     - [Significado do Gradiente](#significado-do-gradiente)
     - [Propriedades do Gradiente](#propriedades-do-gradiente)
@@ -55,21 +57,21 @@ Quando o século XIX caminhava para seu final, um homem, [James Clerk Maxwell](h
 
 Mas essa beleza, essa simplicidade, não é acessível a todos. Ela é um jardim murado, reservado àqueles que conquistaram o direito de entrar através de estudo e compreensão. Sem o conhecimento apropriado, seja da física que fundamenta o universo ou da matemática que o descreve, as equações de Maxwell são como flores de pedra: frias, inalteráveis, sem vida. Com esse entendimento, no entanto, elas florescem em cores e formas maravilhosas, vivas e palpitantes com significado.
 
-E é aqui que embarcamos na nossa jornada, uma exploração através desse jardim de pedra e sombra, para encontrar a beleza escondida nele. Neste artigo, nosso foco estará na matemática que compõe essas equações, o esqueleto que sustenta a carne e o sangue da física. Não estaremos preocupados com as aplicações práticas ou físicas dessas equações. Essas são preocupações para outro momento, outra jornada. Aqui, nosso interesse está no abstrato, no puro, na dança dos números e símbolos que compõem as equações do eletromagnetismo.
+É aqui que embarcamos na nossa jornada, uma exploração através desse jardim de pedra e sombra, para encontrar a beleza escondida nele. Neste artigo, nosso foco estará na matemática que compõe essas equações, o esqueleto que sustenta a carne e o sangue da física. Não estaremos preocupados com as aplicações práticas ou físicas dessas equações. Essas são preocupações para outro momento, outra jornada. Aqui, nosso interesse está no abstrato, no puro, na dança dos números e símbolos que compõem as equações do eletromagnetismo.
 
 Considere este texto como a liberação da toa, o início da sua jornada em um mar de conhecimento. Uma viagem em busca do conhecimento mais estruturante do Universo. Talvez você chegue lá, talvez não.
 
-Lágrimas de decepção não o encontrarão em cada porto. Mesmo que não chegue ao destino desejado. Cada porto de entendimento lhe trará a luz do conhecimento ao final você será uma pessoa diferente. São mares revoltos, não será fácil. Nada que vale a pena é! E, como diria [Fernando Pessoa](https://en.wikipedia.org/wiki/Fernando_Pessoa):
+Lágrimas de decepção não o encontrarão em cada porto. Mesmo que não chegue ao destino desejado. Cada porto de entendimento lhe trará a luz do conhecimento ao final você será uma pessoa diferente. São mares revoltos, não será fácil. Nada que vale a pena é! E, como diria [o poeta](https://en.wikipedia.org/wiki/Fernando_Pessoa):
 
 > "...Tudo vale a pena Se a alma não é pequena...". Fernando Pessoa.
 
 # Álgebra Linear
 
-Área da matemática envolvida com o espaço, vetores e seu baile atemporal, ritmado por regras intrínsecas. Vetores e Matrizes, soldados organizados em linhas e colunas, cada um contando histórias de variáveis e transformações. Divergências, gradientes e rotacionais, gestos majestosos na dança do cálculo vetorial. Tudo tão complexo quanto a vida, tão real quanto a morte, tão honesto quanto o mar, profundo e impiedoso.
+Área da matemática envolvida com o espaço, vetores e seu baile atemporal, ritmado por regras intrínsecas. Vetores e Matrizes, soldados organizados em linhas e colunas, cada um contando histórias de variáveis e transformações. Divergências, gradientes e rotacionais, gestos majestosos na dança do cálculo vetorial. Tudo tão complexo quanto a vida, tão real quanto a morte, tão honesto quanto o mar, profundo, impiedoso e direto. 
 
-Um espaço será definido por vetores, cheio de mistério e beleza. A Análise vetorial será a bússola do navegante, guiando-o através do vasto oceano do desconhecido.
+>O mar bravo só respeita rei. [Arnaud Rodrigues / Chico Anísio](https://www.letras.com/baiano-os-novos-caetanos/1272051/)
 
-A cada dia, a cada cálculo, desvendaremos um pouco mais desse infinito, mapearemos um pouco mais desse oceano de números, direções, sentidos e valores, entendemos um pouco mais de como o Universo dança ao som da álgebra linear e da análise vetorial.
+O espaço será definido por vetores, cheio de mistério e beleza. A Análise vetorial será a bússola do navegante, guiando-o através do vasto oceano do desconhecido. A cada dia, a cada cálculo, desvendaremos um pouco mais desse infinito, mapearemos um pouco mais desse oceano de números, direções, sentidos e valores, entendemos um pouco mais de como o Universo dança ao som da álgebra linear e da análise vetorial.
 
 ## Vetores, os compassos de tudo que há e haverá
 
@@ -90,16 +92,15 @@ As grandezas vetoriais são como o vento, cuja direção e força você sente, m
   text-align: center;
   margin-bottom: 20px;">Figura 1 - Três vetores aleatórios no plano $(x,y$).</legend>
 
-
 Toda esta poesia pode ser resumida na geometria de uma seta com origem e destino em um espaço multidimensional contendo informações de direção, sentido e intensidade. Três setas, três vetores, $A$, $B$ e $C$, em um plano. Nesta jornada, não seremos limitados pela frieza da geometria. Buscamos a grandeza da álgebra. Na álgebra vetores são representados por operações entre outros vetores.
 
 Na física moderna usamos os vetores como definido por [Dirac](https://en.wikipedia.org/wiki/Paul_Dirac) (1902-1984), que chamamos de Vetores Ket, ou simplesmente ket. Não aqui, pelo menos não por enquanto. Aqui utilizaremos a representação vetorial como definida por [Willard Gibbs](https://en.wikipedia.org/wiki/Josiah_Willard_Gibbs) (1839–1903) no final do Século XIX. Adequada ao estudo clássico do Eletromagnetismo. O estudo das forças que tecem campos vetoriais que abraçam a própria estrutura do Universo. Invisíveis porém implacáveis.
 
 Entender esses campos, então, é uma forma de começar a entender o universo. É ler a história que está sendo escrita nas linhas invisíveis de força. É mergulhar no mar profundo do desconhecido, e emergir com um conhecimento novo e precioso. É se tornar um tradutor da linguagem cósmica, um leitor das marcas deixadas pelas forças em seus campos. É, em resumo, a essência da ciência. E é essa ciência, esse estudo dos campos e das forças que neles atuam, que iremos explorar.
 
-Aqui, para lançar as pedras fundamentais do nosso conhecimento representaremos os vetores por meio de letras latinas maiúsculas $A, B, C, ...$ frias. Estes vetores são elementos de um espaço vetorial $\textbf{V}$, também representado por letras latinas, desta feita em negrito. Nossos espaços vetoriais serão sempre representados em três dimensões. O espaço que procuramos é o nosso, o espaço onde vivemos, a forma como percebemos o universo e assim ficaremos limitados a três dimensões.
+Para lançar as pedras fundamentais do nosso conhecimento representaremos os vetores por meio de letras latinas maiúsculas $A, B, C, ...$ frias. Estes vetores são elementos de um espaço vetorial $\textbf{V}$, também representado por letras latinas, desta feita em negrito. Nossos espaços vetoriais serão sempre representados em três dimensões. O espaço que procuramos é o nosso, o espaço onde vivemos, a forma como percebemos o universo e assim ficaremos limitados a três dimensões.
 
-Não é qualquer espaço, é um espaço específico, limitado a realidade e limitante das operações que podemos fazer para defini-lo assim, nosso estudo se fará a partir de um espaço vetorial que satisfaça às seguintes condições:
+Não é qualquer espaço, é um espaço específico, limitado à realidade e limitante das operações que podemos fazer para defini-lo assim, nosso estudo se fará a partir de um espaço vetorial que satisfaça às seguintes condições:
 
 1. o espaço vetorial $\textbf{V}$ seja fechado em relação a adição. Isso quer dizer que para cada par de vetores $A$ e $B$ pertencentes a $\textbf{V}$ existe um, e somente um, vetor $C$ que representa a soma de $A$ e $B$ e que também pertence ao espaço vetorial $\textbf{V}$, dizemos que: $\exists A \in \textbf{V} \wedge \exists B \in \textbf V \therefore \exists A+B=C \in \textbf V$;
 
@@ -121,9 +122,9 @@ Nosso espaço $\textbf{V}$ terá três dimensões então precisamos escolher um 
 
 Maxwell, seguindo os passos de [Newton](https://en.wikipedia.org/wiki/Isaac_Newton), também se apoiou nos ombros de gigantes. E eis que em nossa jornada nos defrontamos com um destes gigantes. Em meados do Século XVII, [René Descartes](https://plato.stanford.edu/entries/descartes/) criou um sistema de coordenadas para definir o espaço que conhecemos que prevaleceu contra o tempo e a evolução e até hoje leva seu nome latino: Sistema de Coordenadas Cartesianas.
 
-No caso do Sistema de Coordenadas Cartesianas, o espaço será limitado por três eixos, perpendiculares e ortogonais e pelos valores das coordenadas $(x,y.z)$ colocadas sobre estes eixos. Do ponto de vista da Álgebra Vetorial, para cada um destes eixos teremos um vetor de comprimento unitário. São estes vetores, que chamamos de vetores unitários e identificamos por $(a_x,a_y,a_z)$ respectivamente, Sendo vetores unitários eles têm magnitude $1$ e estão orientados segundo os eixos cartesianos $(x,y,z)$.
+No caso do Sistema de Coordenadas Cartesianas, o espaço será limitado por três eixos, perpendiculares e ortogonais e pelos valores das coordenadas $(x,y.z)$ colocadas sobre estes eixos. Do ponto de vista da Álgebra Vetorial, para cada um destes eixos teremos um vetor de comprimento unitário. São estes vetores, que chamamos de vetores unitários e identificamos por $(a_x, a_y, a_z)$ respectivamente, Sendo vetores unitários eles têm magnitude $1$ e estão orientados segundo os eixos cartesianos $(x,y,z)$.
 
-A mágica acontece quando dizemos que todos os vetores do espaço vetorial $\textbf{V}$ podem ser representados por somas dos vetores unitários $(a_x,a_y,a_z)$ quando multiplicados independentemente por fatores escalares. De fato, qualquer vetor no espaço será o produto de um vetor unitário por um escalar.
+A mágica acontece quando dizemos que todos os vetores do espaço vetorial $\textbf{V}$ podem ser representados por somas dos vetores unitários $(a_x, a_y, a_z)$ quando multiplicados independentemente por fatores escalares. De fato, qualquer vetor no espaço será o produto de um vetor unitário por um escalar.
 
 ### Vetores Unitários
 
@@ -139,13 +140,11 @@ Agora que conhecemos os vetores unitários podemos entender a ciência, quase m�
 
 Em um sistema de coordenadas tridimensionais e ortogonais podemos expressar qualquer vetor na forma da soma dos seus componentes unitários ortogonais. Qualquer vetor, independente da sua direção, sentido, ou magnitude pode ser representado pela soma dos os vetores unitários que representam as direções, eixos e coordenadas, do sistema de coordenadas escolhido. A cada fator desta soma damos o nome de componente vetorial, ou simplesmente componente. Existirá um componente para cada dimensão do sistema de coordenadas e estes componentes são relativos ao sistema de coordenadas que escolhermos para representar o espaço $\textbf{V}$.
 
-Como somos marinheiros de primeira viagem, navegamos de dia, em mares conhecidos mantendo a terra a vista. Neste caso, começaremos com o Sistema de Coordenadas Cartesianas. Um sistema de coordenadas conhecido, seguro e fácil de representar. Não será difícil visualizar um espaço vetorial definido neste sistema já que é o espaço em que vivemos. A sala de sua casa tem uma largura $x$, um comprimento $y$ e uma altura $z$.
-
-No Sistema de Coordenadas Cartesianas a representação de um vetor $B$ qualquer, segundo seus componentes unitários e ortogonais será dada por:
+Como somos marinheiros de primeira viagem, navegamos de dia, em mares conhecidos mantendo a terra a vista. Neste caso, começaremos com o Sistema de Coordenadas Cartesianas. Um sistema de coordenadas conhecido, seguro e fácil de representar. Não será difícil visualizar um espaço vetorial definido neste sistema já que é o espaço em que vivemos. A sala de sua casa tem uma largura $x$, um comprimento $y$ e uma altura $z$. No Sistema de Coordenadas Cartesianas a representação de um vetor $B$ qualquer, segundo seus componentes unitários e ortogonais será dada por:
 
 $$B=b_xa_x+b_ya_y+b_za_z$$
 
-Onde, $b_x$, $b_y$, $b_z$ representam os fatores escalares que devemos usar para multiplicar os vetores unitários $a_x$, $a_y$, $a_z$ de forma que a soma destes vetores represente o vetor $B$ no espaço $\Bbb{R}^3$.
+Nesta representação, $b_x$, $b_y$, $b_z$ representam os fatores escalares que devemos usar para multiplicar os vetores unitários $a_x$, $a_y$, $a_z$ de forma que a soma destes vetores represente o vetor $B$ no espaço $\Bbb{R}^3$.
 
 Ao longo deste artigo vamos chamar $b_x$, $b_y$, $b_z$ de componentes vetoriais nas direções $x$, $y$, $z$, ou de projeções de $B$ nos eixos $x$, $y$, $z$. A prova da equivalência entre os componentes e as projeções sobre os eixos pertence ao domínio da geometria que ficou no porto na hora em que começamos esta viagem.
 
@@ -159,7 +158,7 @@ $$B=b_ra_r+b_\phi a_\phi+b_\theta a_\theta$$
 
 Respectivamente para os Sistemas de Coordenadas Cartesianas, Cilíndricas e Esféricas. Sistemas de coordenadas diferentes para o mesmo espaço. Há que existir uma forma de garantir que o vetor $B$ tenha sempre a mesma magnitude, a mesma direção e o mesmo sentido não importando o sistema de coordenadas escolhido em um dado momento. Existe, não tenha dúvidas quanto a isso. Se for necessário, mergulharemos nestas técnicas de conversão entre sistemas.
 
-O mar, e a matemática, são imprevisíveis. Não é raro que, uma vez que o sistema de coordenadas tenha sido definido, para um determinado conjunto de problemas, os vetores sejam representados apenas por seus componentes vetoriais, se qualquer referência aos vetores unitários. Assim, no Sistema de Coordenadas Cartesianas o vetor $B=3a_x+a_y-a_z$ pode ser representado apenas por $B=(3,1,-1)$.
+O mar, e a matemática, são imprevisíveis. Não é raro que, uma vez que o sistema de coordenadas tenha sido definido, para um determinado conjunto de problemas, os vetores sejam representados apenas por seus componentes vetoriais, se qualquer referência aos vetores unitários. Assim, no Sistema de Coordenadas Cartesianas o vetor $B=3a_x+a_y-a_z$ pode ser representado apenas por $B=(3,1, -1)$.
 
 Quando representamos um vetor por seus componentes ortogonais, podemos calcular sua magnitude utilizando os fatores escalares multiplicadores de cada vetor unitário.
 
@@ -244,13 +243,12 @@ $$-1A = -A$$
 
 Olhe para os pássaros no céu. Os vetores são como o rastro de um pássaro no céu, mostrando não apenas quão longe voou, mas também a direção que escolheu. Representam forças, esses ventos invisíveis que movem o mundo, que também são assim. Eles têm tamanho e direção, forças são vetores no universo da Álgebra Linear.
 
-E assim como os pássaros no céu, os vetores também podem se juntar, ou se afastar. A soma, a subtração, fazem parte do seu voo. Alguns podem achar útil imaginar isso, recorrendo a geometria, como um paralelogramo, uma forma com lados paralelos que mostra como um vetor soma ao outro.
+Como os pássaros no céu, os vetores também podem se juntar, ou se afastar. A soma, a subtração, fazem parte do seu voo. Alguns podem achar útil imaginar isso, recorrendo a geometria, como um paralelogramo, uma forma com lados paralelos que mostra como um vetor soma ao outro.
 
 ![Soma de Vetores com a Regra do Paralelogramo](/assets/images/SomaVetores.jpeg){:class="lazyimg"}
 <legend style="font-size: 1em;
   text-align: center;
   margin-bottom: 20px;">Figura 2 - Regra do Paralelogramo - Soma geométrica de Vetores.</legend>
-
 
 Eu não vou lhe guiar em um passeio pelo mundo das formas e linhas, não aqui, não agora. Mas lembre-se que a geometria, embora silenciosa e imóvel, sempre está lá, embaixo de tudo, o esqueleto invisível que dá forma ao nosso mundo.
 
@@ -713,37 +711,34 @@ Na geometria diferencial, a Identidade de Jacobi é vital para a criação dos [
 
 Então, mesmo que a identidade de Jacobi possa parecer um conjunto abstrato de símbolos matemáticos, ela é, na verdade, uma ferramenta que guia inúmeras investigações em ciência e matemática, como um farol confiável que nos leva adiante na procura constante pelo conhecimento.
 
-## Campos Vetoriais
+## Usando a Álgebra Vetorial no Eletromagnetismo
 
-Quando olhamos as grandezas escalares, traçamos Campos Escalares. Como uma planície aberta, eles se estendem no espaço, sem direção, mas com magnitude, definidos por uma função $\mathbf{f}(x,y,z)$, onde $x$, $y$, $z$ pertencem a um universo de triplas de números reais. Agora, para as grandezas vetoriais, moldamos Campos Vetoriais, definidos por funções vetoriais $\mathbf{F}(x,y,z)$, onde $x$, $y$, $z$ são componentes vetoriais. Em outras palavras, representamos Campos Vetoriais no espaço como um sistema onde cada ponto do espaço puxa um vetor.
+Em um mundo onde a ciência se entrelaça com a arte, a álgebra vetorial se ergue como uma ponte sólida entre o visível e o invisível. Neste ponto da nossa jornada, navegaremos pelas correntes do eletromagnetismo, uma jornada onde cada vetor conta uma história, cada produto escalar revela uma conexão profunda, e cada produto vetorial desvenda um mistério. A matemática da Álgebra Vetorial é a ferramenta que nos guiará.
 
-Imagine-se em um rio, a correnteza o arrastando, conduzindo seu corpo. A correnteza aplica uma força sobre seu corpo. O rio tem uma velocidade, uma direção. Em cada ponto, ele te empurra de uma forma diferente. Isso é um campo vetorial. Ele é como um mapa, com forças distribuídas, representadas por setas desenhadas para te orientar. Mas essas setas não são meras orientações. Elas têm um comprimento, uma magnitude, e uma direção e um sentido. Elas são vetores. E o mapa completo, deste rio com todas as suas setas, descreverá um campo vetorial.
+Prepare-se para uma surpresa olhe com cuidado e verá como a matemática se torna poesia, desvendando os segredos do universo elétrico e magnético. Esta rota promete uma jornada de descoberta, compreensão e surpresa. Começaremos pelo mais básico de todos os básicos, a Lei de Coulomb.
 
-Em cada ponto no espaço, o campo vetorial tem um vetor. Os vetores podem variar de ponto para ponto. Pense de novo no rio. Em alguns lugares, a correnteza é forte e rápida. Em outros, é lenta e suave. Cada vetor representará essa correnteza em um ponto específico. E o campo vetorial representará o rio todo.
+### Lei de Coulomb
 
-Frequentemente, Campos Vetoriais são chamados para representar cenas do mundo físico: a ação das forças na mecânica, o desempenho dos campos elétricos e magnéticos no Eletromagnetismo, o fluxo de fluidos na dinâmica dos fluidos. Em cada ponto, as coordenadas $(x, y, z)$ são protagonistas, ao lado das funções escalares $P$, $Q$ e $R$. O vetor resultante no palco tem componentes nas direções $x$, $y$ e $z$, representadas pelos atores coadjuvantes, os vetores unitários $(a_x, a_y, a_z)$.
+No ano da glória de 1785, um pesquisador francês, [Charles-Augustin de Coulomb](https://en.wikipedia.org/wiki/Charles-Augustin_de_Coulomb)Formulou, empiricamente uma lei para definir a intensidade da força exercida por uma carga elétrica $Q$ sobre outra dada por: 
 
-Imaginar um campo vetorial no palco do espaço tridimensional é tarefa árdua que requer visão espacial, coisa para poucos. Para aqueles que já trilharam os caminhos árduos da geometria e do desenho tridimensional Se nosso palco for bidimensional, poderemos colocar os vetores em um plano, selecionar alguns pontos e traçar estes vetores. Neste caso voltaremos nossa atenção e esforço para trabalhar com apenas os componentes $x$ e $y$ e o campo vetorial será definido por uma função dada por:
+$$
+F_{21} = K_e \frac{Q_1Q_2}{R^2}
+$$
 
-$$\mathbf{F}(x, y) = (P(x, y), Q(x, y))$$
+Esta era uma lei empírica, baseada na observação dos efeitos de cargas diferentes em uma balança de torção. [Henry Cavendish](https://en.wikipedia.org/wiki/Charles-Augustin_de_Coulomb) chegou a mesma equação, de forma independente alguns anos depois.E até o trabalho de [Michael Faraday](https://en.wikipedia.org/wiki/Michael_Faraday) sobre as linhas de força, esta equação era suficiente. Quase 100 anos depois de Coulomb, matemáticos como Gauss, Hamilton, Gibbs e Maxwell deram a esta lei uma roupagem vetorial. 
 
-Uma função, uma definição direta, e simples, ainda assim, sem nenhum apelo visual. Mas somos insistentes e estamos estudando matemática, a rota que nos levará ao horizonte do Eletromagnetismo. Que nasce na carga elétrica, fenômeno simples, estrutural e belo que cria forças que se espalham por todo universo. Vamos pegar duas cargas de mesma intensidade e colocar no nosso palco.
+$$
+F_{21} = \frac{1}{4\pi \epsilon_0 \epsilon_r} \frac{Q_1Q_2}{R^2} a_{21} 
+$$
 
-![Campo Vetorial devido a duas cargas elétricas](/assets/images/CampoVetorial1.jpeg){:class="lazyimg"}
+Nesta equação: 
 
-<legend style="font-size: 1em;
-  text-align: center;
-  margin-bottom: 20px;">Figura 3 - Diagrama de um campo vetorial em duas dimensões.</legend>
-
-
-Agora podemos ver o Campo Vetorial, simples, com poucos pontos escolhidos no espaço e duas cargas pontuais representadas por círculos. Um vermelho, quente, para indicar a carga positiva outro azul, frio, para indicar a carga negativa. Treine a vista. Seja cuidadoso, detalhista. E verá a interação das forças em todos os pontos do espaço.
-
-O Campo Elétrico, o Campo Vetorial que a figura apresenta, surge, na força da própria definição, na carga elétrica positiva por isso os vetores apontam para fora, para longe desta carga, divergem. E são drenados pela carga elétrica negativa, as setas apontam diretamente para ela, convergem. Em todos os pontos que escolhi para plotar em todo o espaço do plano desenhado, você pode ver o efeito das forças criadas por esta carga. Em alguns pontos um vetor está exatamente sobre o outro, eles se anulam, em todos os outros pontos do espaço se somam.
-
-Visualizar um Campo Vetorial é como assistir a uma peça, com cada vetor como um ator em um gráfico. Cada vetor é um personagem desenhado com uma linha direcionada, geralmente com uma seta, atuando com direção e magnitude. Mas essa peça é complexa e exige tempo e paciência para ser compreendida. Uma abordagem mais simples seria tomar um ponto de teste no espaço e desenhar algumas linhas entre a origem do Campo Vetorial e esse ponto, traçando assim os principais pontos da trama.
-
-O Campo Vetorial requer cuidado, carinho e atenção, ele está em todos os pontos do espaço. Contínuo e muitas vezes, infinito. Trabalhar com a continuidade e com o infinito requer mãos calejadas e fortes. Teremos que recorrer a Newton e [Leibniz](https://en.wikipedia.org/wiki/Gottfried_Wilhelm_Leibniz) e ao Cálculo Integral e Diferencial. Não tema! Ainda que muitos se acovardem frente a continuidade este não será nosso destino. Vamos conquistar integrais e diferenciais como [Odisseu](https://en.wikipedia.org/wiki/Odysseus) conquistou [Troia](https://en.wikipedia.org/wiki/Trojan_War), antes de entrar em batalha vamos afiar espadas, lustrar escudos e lanças, na forma de gradiente, divergência e rotacional.
-
+- $F_{21}$ é a força que é aplicada sobre a carga 2, $Q_2$,  devido a existência da carga 1, $Q_1$.
+- $\epslion_0$ representa a permissividade do vácuo, medida em Farads por metro ($F/m$). 
+- $\epslion_r$ representa a permissividade do meio onde as cargas estão, um valor escalar e sem unidade.
+- $4\pi $ surge da existência da força em todos os pontos do espaço, uma esfera que se estende da carga até o infinito. 
+- $Q_1Q_2$ representa o produto entre as intensidades das cargas que no Sistema Internacional de Unidades são medidas em Coulombs ($C$). 
+- $a_{21}$ representa o vetor unitário com origem em $Q1$ e destino em $Q2$.
 # Cálculo Vetorial
 
 Cálculo vetorial, soa como algo saído de uma história de ficção científica. Mas é mais terra-a-terra do que podemos imaginar de longe. Trata-se uma técnica para lidar com quantidades que têm tanto magnitude quanto direção de forma contínua. Velocidade. Força. Fluxo de um rio, Campos Elétricos, Campos Magnéticos. Coisas que não apenas têm um tamanho, mas também uma direção, um sentido. Não sei se já falei sobre isso, são as grandezas que chamamos de vetoriais e representamos por vetores.
@@ -773,6 +768,36 @@ $$
 $$
 
 A única coisa que pode encher seus olhos de lágrimas é o sal trazido pela maresia, não o medo do Cálculo Vetorial. Então, não se intimide por estas equações herméticas, quase esotéricas. O Cálculo Vetorial é apenas conjunto de ferramentas, como um canivete suíço, que nos ajuda a explorar e entender o mundo ao nosso redor. Nós vamos abrir cada ferramenta deste canivete e aprender a usá-las.
+
+## Campos Vetoriais
+
+Quando olhamos as grandezas escalares, traçamos Campos Escalares. Como uma planície aberta, eles se estendem no espaço, sem direção, mas com magnitude, definidos por uma função $\mathbf{f}(x,y,z)$, onde $x$, $y$, $z$ pertencem a um universo de triplas de números reais. Agora, para as grandezas vetoriais, moldamos Campos Vetoriais, definidos por funções vetoriais $\mathbf{F}(x,y,z)$, onde $x$, $y$, $z$ são componentes vetoriais. Em outras palavras, representamos Campos Vetoriais no espaço como um sistema onde cada ponto do espaço puxa um vetor.
+
+Imagine-se em um rio, a correnteza o arrastando, conduzindo seu corpo. A correnteza aplica uma força sobre seu corpo. O rio tem uma velocidade, uma direção. Em cada ponto, ele te empurra de uma forma diferente. Isso é um campo vetorial. Ele é como um mapa, com forças distribuídas, representadas por setas desenhadas para te orientar. Mas essas setas não são meras orientações. Elas têm um comprimento, uma magnitude, e uma direção e um sentido. Elas são vetores. E o mapa completo, deste rio com todas as suas setas, descreverá um campo vetorial.
+
+Em cada ponto no espaço, o campo vetorial tem um vetor. Os vetores podem variar de ponto para ponto. Pense de novo no rio. Em alguns lugares, a correnteza é forte e rápida. Em outros, é lenta e suave. Cada vetor representará essa correnteza em um ponto específico. E o campo vetorial representará o rio todo.
+
+Frequentemente, Campos Vetoriais são chamados para representar cenas do mundo físico: a ação das forças na mecânica, o desempenho dos campos elétricos e magnéticos no Eletromagnetismo, o fluxo de fluidos na dinâmica dos fluidos. Em cada ponto, as coordenadas $(x, y, z)$ são protagonistas, ao lado das funções escalares $P$, $Q$ e $R$. O vetor resultante no palco tem componentes nas direções $x$, $y$ e $z$, representadas pelos atores coadjuvantes, os vetores unitários $(a_x, a_y, a_z)$.
+
+Imaginar um campo vetorial no palco do espaço tridimensional é tarefa árdua que requer visão espacial, coisa para poucos. Para aqueles que já trilharam os caminhos árduos da geometria e do desenho tridimensional Se nosso palco for bidimensional, poderemos colocar os vetores em um plano, selecionar alguns pontos e traçar estes vetores. Neste caso voltaremos nossa atenção e esforço para trabalhar com apenas os componentes $x$ e $y$ e o campo vetorial será definido por uma função dada por:
+
+$$\mathbf{F}(x, y) = (P(x, y), Q(x, y))$$
+
+Uma função, uma definição direta, e simples, ainda assim, sem nenhum apelo visual. Mas somos insistentes e estamos estudando matemática, a rota que nos levará ao horizonte do Eletromagnetismo. Que nasce na carga elétrica, fenômeno simples, estrutural e belo que cria forças que se espalham por todo universo. Vamos pegar duas cargas de mesma intensidade e colocar no nosso palco.
+
+![Campo Vetorial devido a duas cargas elétricas](/assets/images/CampoVetorial1.jpeg){:class="lazyimg"}
+
+<legend style="font-size: 1em;
+  text-align: center;
+  margin-bottom: 20px;">Figura 3 - Diagrama de um campo vetorial em duas dimensões.</legend>
+
+Agora podemos ver o Campo Vetorial, simples, com poucos pontos escolhidos no espaço e duas cargas pontuais representadas por círculos. Um vermelho, quente, para indicar a carga positiva outro azul, frio, para indicar a carga negativa. Treine a vista. Seja cuidadoso, detalhista. E verá a interação das forças em todos os pontos do espaço.
+
+O Campo Elétrico, o Campo Vetorial que a figura apresenta, surge, na força da própria definição, na carga elétrica positiva por isso os vetores apontam para fora, para longe desta carga, divergem. E são drenados pela carga elétrica negativa, as setas apontam diretamente para ela, convergem. Em todos os pontos que escolhi para plotar em todo o espaço do plano desenhado, você pode ver o efeito das forças criadas por esta carga. Em alguns pontos um vetor está exatamente sobre o outro, eles se anulam, em todos os outros pontos do espaço se somam.
+
+Visualizar um Campo Vetorial é como assistir a uma peça, com cada vetor como um ator em um gráfico. Cada vetor é um personagem desenhado com uma linha direcionada, geralmente com uma seta, atuando com direção e magnitude. Mas essa peça é complexa e exige tempo e paciência para ser compreendida. Uma abordagem mais simples seria tomar um ponto de teste no espaço e desenhar algumas linhas entre a origem do Campo Vetorial e esse ponto, traçando assim os principais pontos da trama.
+
+O Campo Vetorial requer cuidado, carinho e atenção, ele está em todos os pontos do espaço. Contínuo e muitas vezes, infinito. Trabalhar com a continuidade e com o infinito requer mãos calejadas e fortes. Teremos que recorrer a Newton e [Leibniz](https://en.wikipedia.org/wiki/Gottfried_Wilhelm_Leibniz) e ao Cálculo Integral e Diferencial. Não tema! Ainda que muitos se acovardem frente a continuidade este não será nosso destino. Vamos conquistar integrais e diferenciais como [Odisseu](https://en.wikipedia.org/wiki/Odysseus) conquistou [Troia](https://en.wikipedia.org/wiki/Trojan_War), antes de entrar em batalha vamos afiar espadas, lustrar escudos e lanças, na forma de gradiente, divergência e rotacional.
 
 ## Gradiente
 

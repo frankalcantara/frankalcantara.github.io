@@ -78,8 +78,11 @@ A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive 
     - [Forma Normal Disjuntiva (FND)](#forma-normal-disjuntiva-fnd)
       - [Estrutura da Forma Normal Disjuntiva](#estrutura-da-forma-normal-disjuntiva)
       - [Conversão para Forma Normal Disjuntiva](#conversão-para-forma-normal-disjuntiva)
-      - [Exemplo 1: Convertendo $(A \\rightarrow B) \\land (C \\lor \\neg (D \\land E))$ Para FND](#exemplo-1-convertendo-a-rightarrow-b-land-c-lor-neg-d-land-e-para-fnd)
-      - [Exemplo 2: Convertendo $(\\neg A \\land (B \\rightarrow C)) \\lor (D \\land \\neg (E \\rightarrow F))$ Para Forma Normal Disjuntiva](#exemplo-2-convertendo-neg-a-land-b-rightarrow-c-lor-d-land-neg-e-rightarrow-f-para-forma-normal-disjuntiva)
+      - [Exemplo 1: Convertendo $(A \\rightarrow B) \\land (C \\lor \\neg (D \\land E))$](#exemplo-1-convertendo-a-rightarrow-b-land-c-lor-neg-d-land-e)
+      - [Exemplo 2: Convertendo $(\\neg A \\land (B \\rightarrow C)) \\lor (D \\land \\neg (E \\rightarrow F))$](#exemplo-2-convertendo-neg-a-land-b-rightarrow-c-lor-d-land-neg-e-rightarrow-f)
+      - [$(p \\rightarrow q) \\rightarrow (r \\vee s)$](#p-rightarrow-q-rightarrow-r-vee-s)
+      - [$(p \\rightarrow q) \\rightarrow (\\neg r \\vee s)$](#p-rightarrow-q-rightarrow-neg-r-vee-s)
+      - [$\\neg(p \\land q) \\rightarrow (r \\leftrightarrow s)$](#negp-land-q-rightarrow-r-leftrightarrow-s)
     - [Forma Normal Conjuntiva (FNC)](#forma-normal-conjuntiva-fnc)
       - [Estrutura da Forma Normal Conjuntiva](#estrutura-da-forma-normal-conjuntiva)
       - [Conversão para Forma Normal Conjuntiva](#conversão-para-forma-normal-conjuntiva)
@@ -133,11 +136,11 @@ Uma conjectura é uma suposição, ou proposição que é acreditada ser verdade
 
 Em resumo: **Imperativa:** focada no processo, no _como_ chegar à solução; **Descritiva:** focada no problema em si, no _o que_ precisa ser feito.
 
-A escolha entre estes paradigmas dependerá da aplicação e do estilo do programador. mas o futuro parece cada vez mais orientado para linguagens declarativas e descritivas, que permitem ao programador concentrar-se no problema, não nos detalhes da solução. Efeito que parece ser evidente se considerarmos os avanços recentes no campo da inteligência artificial.
+A escolha entre estes paradigmas dependerá da aplicação e do estilo do programador. mas o futuro parece cada vez mais orientado para linguagens declarativas e descritivas, que permitem ao programador concentrar-se no problema, não nos detalhes da solução. Efeito que parece ser evidente se considerarmos os avanços recentes no campo da inteligência artificial. Aqui, para tudo que possa vir, escolhemos a **Programação Lógica**.
 
-Em nossa exploração, vamos começar com a Lógica de Primeira Ordem, a qual iremos subdividir em elementos menores, interligados e interdependentes. É importante notar que muitos no campo acadêmico podem não distinguir as sutilezas que diferenciam a Lógica de Primeira Ordem da Lógica Predicativa. Nesta jornada, iremos decompor a Lógica de Primeira Ordem em suas partes componentes, examinando cada uma como uma entidade distinta. Para iniciar nossa jornada utilizaremos a Lógica Proposicional como alicerce para estabelecer o raciocínio.
+Em nossa jornada, partiremos da Lógica de **Primeira Ordem** que iremos subdividir em elementos menores, interligados e interdependentes e, sem dúvida de mesma importância e valor: _lógica proposicional_ e _lógica predicativa_. É importante notar que muitos no campo acadêmico podem não entender as sutilezas desta divisão. A estes, deixo a justificativa, meio rota, meio esfarrapada da didática. Nesta jornada, iremos decompor a Lógica de Primeira Ordem em partes didaticamente interessantes, examinando cada uma como uma entidade distinta. Partiremos da _Lógica Proposicional_ com esperança de encontrar bons ventos.
 
-A Lógica Proposicional é um tipo de linguagem matemática suficientemente rica para expressar muitos dos problemas que precisamos resolver e suficientemente gerenciável para que os computadores possam lidar com ela. Uma ferramenta útil tanto ao homem quanto a máquina. Quando esta ferramenta estiver conhecida mergulharemos no espírito da Lógica de Primeira Ordem, a Lógica Predicativa, ou Lógica de Predicados, e então poderemos fazer sentido do mundo.
+A Lógica Proposicional, nosso porto de partida, é um tipo de linguagem matemática, suficientemente rica para expressar muitos dos problemas que precisamos resolver e suficientemente simples para que computadores possam lidar com ela. Ferramenta tão útil ao homem quanto a máquina. Quando esta ferramenta estiver conhecida mergulharemos no espírito da Lógica de Primeira Ordem, a Lógica Predicativa, ou Lógica de Predicados, e então poderemos fazer sentido do mundo.
 
 Vamos enfrentar a inferência e a dedução, duas ferramentas para extração de conhecimento de declarações lógicas. Voltando a metáfora do Detetive, podemos dizer que a inferência é quase como um detetive que tira conclusões a partir de pistas: temos algumas verdades e precisamos descobrir outras verdades que são consequências diretas das primeiras verdades.
 
@@ -432,13 +435,9 @@ Linguagens de programação que usam a Programação Lógica usam _unificação_
 
 Como essas equivalências permitem validar Fórmulas Bem Formadas sem o uso de uma Tabela Verdade. Uma coisa interessante seria tentar provar cada uma delas.
 
-As equivalências que listei pipocaram quase espontaneamente enquanto estava escrevendo este texto, por hábito e necessidade.
-
-São muitas as equivalências que existem, estas são as mais comuns. Talvez, alguns exemplos de validação de Fórmulas Bem Formadas usando apenas as equivalências apresentadas na Tabela 3, sirvam para clarear o caminho que precisamos seguir:
+As equivalências que listei pipocaram quase espontaneamente enquanto estava escrevendo este texto, mais por hábito e necessidade que por algum raciocínio organizado. São muitas as equivalências que existem, estas são as mais comuns no meu cotidiano. Talvez, alguns exemplos de validação de Fórmulas Bem Formadas usando apenas as equivalências apresentadas na Tabela 3, estufar as velas do conhecimento e nos levar pela rota que precisamos seguir:
 
 **Exemplo 1**:$P \wedge (Q \vee (P \wedge R))$
-
-Simplificação:
 
 $$
  \begin{align*}
@@ -448,8 +447,6 @@ $$
 $$
 
 **Exemplo 2**:$P\rightarrow (Q \wedge (R \vee P))$
-
-Simplificação:
 
 $$
  \begin{align*}
@@ -463,8 +460,6 @@ $$
 
 **Exemplo 3**: $\neg (P \wedge (Q \rightarrow R))$
 
-Simplificação:
-
 $$
  \begin{align*}
  \neg (P \wedge (Q \rightarrow R)) &\equiv \neg (P \wedge (\neg Q \vee R)) && \text{(7)} \\
@@ -475,8 +470,6 @@ $$
 
 **Exemplo 4**: $\neg ((P \rightarrow Q) \wedge (R \rightarrow S))$
 
-Simplificação:
-
 $$
  \begin{align*}
  \neg ((P \rightarrow Q) \wedge (R \rightarrow S)) &\equiv \neg ((\neg P \vee Q) \wedge (\neg R \vee S)) && \text{(7)} \\
@@ -486,8 +479,6 @@ $$
 $$
 
 **Exemplo 5**: $(P \rightarrow Q) \vee (R \rightarrow S) \vee (E \rightarrow P)$
-
-Simplificação:
 
 $$
  \begin{align*}
@@ -502,8 +493,6 @@ $$
 **Exemplo 6:**
 $P\wedge (Q \vee (R \rightarrow S)) \vee (\neg E \leftrightarrow P)$
 
-Simplificação:
-
 $$
 \begin{align*}
 P \wedge (Q \vee (R \rightarrow S)) \vee (\neg E \leftrightarrow P) &\equiv P \wedge (Q \vee (\neg R \vee S)) \vee ((\neg E \wedge P) \vee (E \wedge \neg P)) && \text{(1)}\\
@@ -515,8 +504,6 @@ $$
 **Exemplo 7:**
  $\neg(P \vee (Q \wedge \neg R)) \leftrightarrow ((S \vee E) \rightarrow (P \wedge Q))$
 
-Simplificação:
-
 $$
 \begin{align*}
 \neg(P \vee (Q \wedge \neg R)) \leftrightarrow ((S \vee E) \rightarrow (P \wedge Q)) &\equiv (\neg P \wedge \neg(Q \wedge \neg R)) \leftrightarrow ((\neg S \wedge \neg E) \vee (P \wedge Q)) && \text{(7)} \\
@@ -526,8 +513,6 @@ $$
 
 **Exemplo 8:**
  $\neg(P \leftrightarrow Q) \vee ((R \rightarrow S) \wedge (\neg E \vee \neg P))$
-
-Simplificação:
 
 $$
 \begin{align*}
@@ -540,8 +525,6 @@ $$
 **Exemplo 9:**
  $(P \wedge Q) \vee ((\neg R \leftrightarrow S) \rightarrow (\neg E \wedge P))$
 
-Simplificação:
-
 $$
 \begin{align*}
 (P \wedge Q) \vee ((\neg R \leftrightarrow S) \rightarrow (\neg E \wedge P)) &\equiv (P \wedge Q) \vee ((\neg(\neg R \leftrightarrow S)) \vee (\neg E \wedge P)) && \text{(7)}\\
@@ -553,8 +536,6 @@ $$
 **Exemplo 10:**
  $\neg(P \wedge (Q \vee R)) \leftrightarrow (\neg(S \rightarrow E) \vee \neg(P \rightarrow Q))$
 
-Simplificação:
-
 $$
 \begin{align*}
 \neg(P \wedge (Q \vee R)) \leftrightarrow (\neg(S \rightarrow E) \vee \neg(P \rightarrow Q)) &\equiv (\neg P \vee \neg(Q \vee R)) \leftrightarrow ((S \wedge \neg E) \vee (P \wedge \neg Q)) && \text{(7)}\\
@@ -564,9 +545,11 @@ $$
 
 A Lógica Proposicional é a estrutura mais simples e profunda que usamos para fazer sentido do universo. Imagine um universo de verdades e falsidades, onde cada proposição é um átomo indivisível que detém uma verdade única e inalterada. Neste cosmos de lógica, estas proposições são as estrelas, e as operações lógicas - conjunção, disjunção, negação, implicação, e bi-implicação - são as forças gravitacionais que as unem em constelações mais complexas de significado.
 
- Enquanto subcampo da lógica matemática, a Lógica Proposicional é essencial para a forma como entendemos e interagimos com o mundo ao nosso redor. Ela fornece a base para a construção de argumentos sólidos e para a avaliação da validade de proposições. Originadas na necessidade humana de descobrir a verdade e diminuir os conflitos a partir da lógica. No entanto, a beleza da Lógica Proposicional se estende além do campo da filosofia e do discurso. Ela é a fundação da Álgebra de Boole, a qual, por sua vez, é a base para o design de circuitos eletrônicos e a construção de computadores modernos. Graças a uma ideia de [Claude Shannon](https://en.wikipedia.org/wiki/Claude_Shannon). as operações básicas da Álgebra de Boole - AND, OR, NOT - são os componentes fundamentais dos sistemas digitais que formam o núcleo dos computadores, telefones celulares, e de fato, de toda a nossa era digital. A Lógica Proposicional é a base sobre a qual construímos todo o edifício do raciocínio lógico. É como a tabela periódica para os químicos ou as leis de Newton para os físicos. É simples, elegante e, acima de tudo, poderosa. A partir dessa fundação, podemos começar a explorar os reinos mais profundos da lógica e do pensamento.
+A Lógica Proposicional é essencial para a forma como entendemos e interagimos com o mundo ao nosso redor. Ela fornece a base para a construção de argumentos sólidos e para a avaliação da validade de proposições. Originadas na necessidade humana de descobrir a verdade e diminuir os conflitos a partir da lógica. No entanto, a beleza da Lógica Proposicional se estende além dos campos da filosofia, do discurso e da matemática. Ela é a fundação da Álgebra de [George Boole](https://en.wikipedia.org/wiki/George_Boole), a qual, por sua vez, é a base para o design de circuitos eletrônicos e a construção de computadores modernos.
 
-Nossa jornada pela Lógica Proposicional nos levou a uma compreensão mais profunda de como as proposições podem ser expressas e manipuladas. No entanto, a complexidade dessas proposições pode variar significativamente, e pode ser útil simplificar ou padronizar a forma como representamos essas proposições. Principalmente se estamos pensando em fazer circuitos digitais, onde a normalização de circuitos é um fator preponderante na determinação dos custos. É aqui que entram as formas normais.
+Em seu trabalho de conclusão de curso, [Claude Shannon](https://en.wikipedia.org/wiki/Claude_Shannon) aplicou a Álgebra de Boole à simplificação de circuitos de controle. Desde então, as operações básicas da Álgebra de Boole - AND, OR, NOT - são os componentes fundamentais dos sistemas digitais que formam o núcleo dos computadores, telefones celulares e, de fato, de toda a nossa civilização essencialmente digital. A Lógica Proposicional a base sobre a qual construímos todo o edifício do raciocínio lógico. É como a tabela periódica para os químicos ou as leis de Newton para os físicos. É simples, elegante e, acima de tudo, poderosa. 
+
+Tão importante quanto o impacto da _Lógica Proposicional_ na tecnologia digital é a sua importância no pensamento racional, tomada de decisão e prova de teoremas. Neste destino, nosso teodolito são as _Regras de Inferência_.
 
 ## Regras de Inferência
 
@@ -1901,7 +1884,7 @@ $$
 \end{align}
 $$
 
-Assim, vemos que o predicado $P(u)$ dado por _u é par_ é uma propriedade que alguns números do conjunto $ u$ Possuem, e outros não. Vale notar que na Lógica Predicativa, a função que define um predicado pode ter múltiplos argumentos. Por exemplo, podemos ter um predicado $Q(x, y)$ que afirma _x é maior que y_. Neste caso, o predicado $Q$ é uma função de dois argumentos que retorna um valor de verdade. Dizemos que $Q(x, y)$ é um predicado binário. Exemplos nos conduzem ao caminho do entendimento:
+Vemos que o predicado $P(u)$ dado por _u é par_ é uma propriedade que alguns números do conjunto $ u$ Possuem, e outros não. Vale notar que na Lógica Predicativa, a função que define um predicado pode ter múltiplos argumentos. Por exemplo, podemos ter um predicado $Q(x, y)$ que afirma _x é maior que y_. Neste caso, o predicado $Q$ é uma função de dois argumentos que retorna um valor de verdade. Dizemos que $Q(x, y)$ é um predicado binário. Exemplos nos conduzem ao caminho do entendimento:
 
 1. **Exemplo 1**:
 
@@ -1961,7 +1944,7 @@ Os quantificadores nos permitem fazer declarações gerais, ou específicas, sob
 
 O quantificador universal $\forall$, lê-se _para todo_, indica que uma afirmação deve ser verdadeira para todos os valores de uma variável dentro de um universo de discurso definido para a criação de uma sentença contendo um predicado qualquer. Por exemplo, a preposição clássica _todos os humanos são mortais_ pode ser escrita como $\forall x Humano(x) \rightarrow Mortal(x)$. Ou recorrendo a um exemplo com mais de rigor matemático, teríamos o predicado se _$x$ é positivo então $x + 1 $ é positivo_, que pode ser escrito $\forall x (x > 0 \rightarrow x + 1 > 0)$. Neste último exemplo temos Quantificadores, Lógica Predicativa, Lógica Proposicional e Teoria dos Conjuntos em uma sentença.
 
-O quantificador universal pode ser representado usando apenas a Lógica Proposicional, com uma pequena trapaça. A afirmação $\forall x P(x)$ é, de certa forma, a operação $\wedge $, _AND_ aplicada a todos os elementos do universo do discurso. Se pensarmos assim, o predicado:
+O quantificador universal pode ser representado usando apenas a Lógica Proposicional, com uma pequena trapaça. A afirmação $\forall x P(x)$ é, de certa forma, a operação $\wedge $, _AND_ aplicada a todos os elementos do universo do discurso. Ou seja, o predicado:
 
 $$\forall x \{x:\in \mathbb{N}\} : P(x)$$
 
@@ -2105,56 +2088,40 @@ As quatro sentenças expressam o mesmo contexto, embora sejam redigidas de manei
 ### Exercícios de Conversão de Linguagem Natural em Expreessões Predicativas
 
 **Sentença 1**: _Todo matemático que é professor tem alunos que são brilhantes e interessados._
-
-- Fórmula Lógica:
   
 $$
 \forall x ((\text{Matemático}(x) \wedge \text{Professor}(x)) \rightarrow \exists y (\text{Aluno}(y) \wedge \text{Brilhante}(y) \wedge \text{Interessado}(y) \wedge \text{Ensina}(x, y)))
 $$
 
-- Fórmula Alternativa:
-  
 $$
 \forall x (\text{Matemático}(x) \rightarrow (\text{Professor}(x) \rightarrow \exists y (\text{Aluno}(y) \wedge \text{Brilhante}(y) \wedge \text{Interessado}(y) \wedge \text{Ensina}(x, y))))
 $$
 
 **Sentença 2**: _Alguns engenheiros não são nem ricos nem felizes._
-
-- Fórmula Lógica:
   
 $$
 \exists x (\text{Engenheiro}(x) \wedge \neg (\text{Rico}(x) \vee \text{Feliz}(x)))
 $$
-
-- Fórmula Alternativa:
   
 $$
 \exists x (\text{Engenheiro}(x) \wedge \neg\text{Rico}(x) \wedge \neg\text{Feliz}(x))
 $$
 
 **Sentença 3**: _Todos os planetas que têm água possuem vida ou têm potencial para vida._
-
-- Fórmula Lógica:
   
 $$
 \forall x (\text{Planeta}(x) \wedge \text{TemÁgua}(x) \rightarrow (\text{TemVida}(x) \vee \text{TemPotencialParaVida}(x)))
 $$
 
-- Fórmula Alternativa:
-  
 $$
 \forall x (\text{Planeta}(x) \rightarrow (\text{TemÁgua}(x) \rightarrow (\text{TemVida}(x) \vee \text{TemPotencialParaVida}(x))))
 $$
 
 **Sentença 4**: _Nenhum cientista que é cético acredita em todos os mitos._
 
-- Fórmula Lógica:
-  
 $$
 \neg \exists x (Cientista(x) \wedge Cético(x) \wedge \forall y (Mito(y) \rightarrow Acredita(x,y)))
 $$
-
-- Fórmula Alternativas:
 
 $$
 \forall x ((\text{Cientista}(x) \wedge \text{Cético}(x)) \rightarrow \exists y (\text{Mito}(y) \wedge \neg \text{Acredita}(x, y)))
@@ -2165,15 +2132,11 @@ $$
 $$
 
 **Sentença 5**: _Alguns filósofos que escrevem sobre ética também leem ou estudam psicologia._
-
-- Fórmula Lógica:
   
 $$
 \exists x (\text{Filósofo}(x) \wedge \text{EscreveSobreÉtica}(x) \wedge (\text{Lê}(x, \text{"Psicologia"}) \vee \text{Estuda}(x, \text{"Psicologia"})))
 $$
-
-- Fórmulas Alternativas:
-  
+ 
 $$
 \exists x (\text{Filósofo}(x) \wedge \text{EscreveSobreÉtica}(x) \rightarrow (\text{Lê}(x, \text{"Psicologia"}) \vee \text{Estuda}(x, \text{"Psicologia"})))
 $$
@@ -2182,16 +2145,11 @@ $$
 \exists x (\text{Filósofo}(x) \land \text{EscreveSobreÉtica}(x) \land (\text{Lê}(x) \lor \text{"Psicologia"}(x)))
 $$
 
-
 **Sentença 6**: _Para todo escritor, existe pelo menos um livro que ele escreveu e que é tanto criticado quanto admirado._
 
-- Fórmula Lógica:
-  
 $$
 \forall x (\text{Escritor}(x) \rightarrow \exists y (\text{Livro}(y) \wedge \text{Escreveu}(x, y) \wedge \text{Criticado}(y) \wedge \text{Admirado}(y)))
 $$
-
-- Fórmula Alternativas:
   
 $$
 \exists x (\text{Escritor}(x) \wedge \exists y (\text{Livro}(y) \wedge \text{Escreveu}(x, y) \wedge (\text{Criticado}(y) \wedge \text{Admirado}(y))))
@@ -2199,16 +2157,12 @@ $$
 
 $$
 \forall x \exists y (\text{Escritor}(x) \land \text{Escreveu}(x, y) \rightarrow (\text{criticado}(y) \land \text{Admirado}(y)))
-
 $$
 
-### Exercícios de Conversão de Expressões Predicativas em Linguagem Natural 
+### Exercícios de Conversão de Expressões Predicativas em Linguagem Natural
 
-**1. Fórmula Lógica**:
-
-$$
-\forall x (\text{Humano}(x) \rightarrow (\text{Mortal}(x) \wedge \text{Racional}(x)))  
-$$
+**1. Fórmula Lógica**: $\forall x (\text{Humano}(x) \rightarrow (\text{Mortal}(x) \wedge \text{Racional}(x)))  
+$
 
 - Predicados:  
 
@@ -2216,13 +2170,10 @@ $$
   - $Mortal(x)$: _$x$ é mortal_.
   - $Racional(x)$: _$x$ é racional_.
 
-- Sentença em Português: Todo humano é mortal e racional.
+- **Sentença em Português**: Todo humano é mortal e racional.
 
-**~2. Fórmula Lógica**:
-
-$$
-\exists y (\text{Livro}(y) \wedge (\text{Interessante}(y) \vee \text{Complicado}(y)))
-$$
+**~2. Fórmula Lógica**:$\exists y (\text{Livro}(y) \wedge (\text{Interessante}(y) \vee \text{Complicado}(y)))
+$
 
 - Predicados:
 
@@ -2230,13 +2181,9 @@ $$
   - $Interessante(y)$: _y é interessante_.
   - $Complicado(y)$: _y é complicado_.
 
-- Sentença em Português: Existe pelo menos um livro que é interessante ou complicado.
+- **Sentença em Português**: Existe pelo menos um livro que é interessante ou complicado.
 
-**3. Fórmula Lógica**:
-
-$$
-\forall x \forall y (\text{Amigos}(x, y) \rightarrow (\text{Confiável}(x) \wedge \text{Honra}(x)))  
-$$
+**3. Fórmula Lógica**:$\forall x \forall y (\text{Amigos}(x, y) \rightarrow (\text{Confiável}(x) \wedge \text{Honra}(x)))$
 
 - Predicados:  
   
@@ -2244,13 +2191,10 @@ $$
   - $Confiável(x)$: _x é confiável_.
   - $Honra(x)$: _x honra y_.
 
-- Sentença em Português: Todo amigo de alguém é confiável e honra o amigo.
+- **Sentença em Português**: Todo amigo de alguém é confiável e honra o amigo.
 
-**4. Fórmula Lógica**:
-
-$$
-\exists x \exists y (\text{Animal}(x) \wedge \text{Planta}(y) \wedge \text{Convive}(x, y))
-$$
+**4. Fórmula Lógica**:$\exists x \exists y (\text{Animal}(x) \wedge \text{Planta}(y) \wedge \text{Convive}(x, y))
+$
 
 - Predicados:  
 
@@ -2258,13 +2202,9 @@ $$
   - $Planta(y)$: _y é uma planta_.
   - $Convive(x, y)$: _x e y convivem_.
 
-- Sentença em Português: Existe pelo menos um animal e uma planta que convivem no mesmo ambiente.
+- **Sentença em Português**: Existe pelo menos um animal e uma planta que convivem no mesmo ambiente.
 
-**5. Fórmula Lógica**:  
-
-$$
-\forall x \exists y (\text{Professor}(x) \rightarrow (\text{Disciplina}(y) \wedge \text{Leciona}(x, y)))
-$$
+**5. Fórmula Lógica**:$\forall x \exists y (\text{Professor}(x) \rightarrow (\text{Disciplina}(y) \wedge \text{Leciona}(x, y)))$
 
 - Predicados:  
 
@@ -2272,13 +2212,9 @@ $$
   - $Disciplina(y)$: _y é uma disciplina_.
   - $Leciona(x, y)$: _x leciona y_.
 
-- Sentença em Português: Para todo professor, existe pelo menos uma disciplina que ele leciona.
+- **Sentença em Português**: Para todo professor, existe pelo menos uma disciplina que ele leciona.
 
-**6. Fórmula Lógica**:
-
-$$
-\exists x \forall y (\text{Músico}(x) \wedge (\text{Instrumento}(y) \rightarrow \text{Toca}(x, y)))
-$$
+**6. Fórmula Lógica**:$\exists x \forall y (\text{Músico}(x) \wedge (\text{Instrumento}(y) \rightarrow \text{Toca}(x, y)))$
 
 - Predicados:  
 
@@ -2286,7 +2222,7 @@ $$
   - $Instrumento(y)$: _y é um instrumento_.
   - $Toca(x, y)$: _x toca y_.
 
-- Sentença em Português: Existe pelo menos um músico que, se algo é um instrumento, então ele toca esse instrumento.
+- **Sentença em Português**: Existe pelo menos um músico que, se algo é um instrumento, então ele toca esse instrumento.
 
 ## Ordem de Aplicação dos Quantificadores
 
@@ -2843,8 +2779,7 @@ Converter uma fórmula para a FND geralmente envolve os seguintes passos:
 4. **Eliminar Dupla Negação**: Substitua qualquer dupla negação $\neg \neg A$ Por $A$.
 5. **Aplicar a Lei Distributiva**: Use a lei distributiva para expandir a fórmula, transformando-a em uma disjunção de conjunções.
 
-#### Exemplo 1: Convertendo $(A \rightarrow B) \land (C \lor \neg (D \land E))$ Para FND
-
+#### Exemplo 1: Convertendo $(A \rightarrow B) \land (C \lor \neg (D \land E))$
 1. Eliminar Implicações
 
 $$
@@ -2863,7 +2798,7 @@ $$
 (\neg A \lor B) \land C \lor (\neg A \lor B) \land \neg D \lor (\neg A \lor B) \land \neg E
 $$
 
-#### Exemplo 2: Convertendo $(\neg A \land (B \rightarrow C)) \lor (D \land \neg (E \rightarrow F))$ Para Forma Normal Disjuntiva
+#### Exemplo 2: Convertendo $(\neg A \land (B \rightarrow C)) \lor (D \land \neg (E \rightarrow F))$
 
 1. Eliminar Implicações
 
@@ -2881,6 +2816,71 @@ $$
 
 $$
 \neg A \land \neg B \lor \neg A \land C \lor D \land E \land \neg F
+$$
+
+#### $(p \rightarrow q) \rightarrow (r \vee s)$
+
+1. Remover as implicações ($\rightarrow$):
+   
+   $$
+   p \rightarrow q \equiv \neg p \vee q
+   $$
+
+2. Substituir a expressão original com a equivalência encontrada no passo 1:
+   
+   $$
+   (\neg p \vee q) \rightarrow (r \vee s)
+   $$
+
+3. Aplicar novamente a equivalência para remover a implicação:
+   
+   $$
+   \neg (\neg p \vee q) \vee (r \vee s)
+   $$
+
+4. Aplicar a lei de De Morgan para expandir a negação:
+   
+   $$
+   (p \wedge \neg q) \vee (r \vee s)
+   $
+
+#### $(p \rightarrow q) \rightarrow (\neg r \vee s)$ 
+
+1. Primeiro, vamos eliminar as implicações, usando a equivalência \(p \rightarrow q \equiv \neg p \vee q\):
+
+   $$
+   (p \rightarrow q) \rightarrow (\neg r \vee s)
+   $$
+
+   Substituindo a implicação interna, temos:
+
+   $$
+   (\neg p \vee q) \rightarrow (\neg r \vee s)
+   $$
+
+2. Agora, vamos eliminar a implicação externa, usando a mesma equivalência:
+
+   $$
+   \neg (\neg p \vee q) \vee (\neg r \vee s)
+   $$
+
+3. Em seguida, aplicamos a lei de De Morgan para expandir a negação:
+
+   $$
+   (p \wedge \neg q) \vee (\neg r \vee s)
+   $$
+
+#### $\neg(p \land q) \rightarrow (r \leftrightarrow s)$
+
+$$
+\begin{align*}
+1. & \quad \neg(p \land q) \rightarrow (r \leftrightarrow s) \\
+2. & \quad \neg(p \land q) \rightarrow ((r \rightarrow s) \land (s \rightarrow r)) \, \text{ (Substituindo a equivalência por suas implicações)} \\
+3. & \quad \neg(p \land q) \rightarrow ((\neg r \lor s) \land (\neg s \lor r)) \, \text{ (Convertendo as implicações em disjunções)} \\
+4. & \quad (\neg \neg(p \land q)) \lor ((\neg r \lor s) \land (\neg s \lor r)) \, \text{ (Aplicando a equivalência } p \rightarrow q \equiv \neg p \lor q \text{)} \\
+5. & \quad (p \land q) \lor ((\neg r \lor s) \land (\neg s \lor r)) \, \text{ (Aplicando a dupla negação)} \\
+6. & \quad (p \land q) \lor (r \land s) \lor (\neg r \land \neg s) \, \text{ (Aplicando a distributividade para obter a FND)}
+\end{align*}
 $$
 
 A Forma Normal Disjuntiva é útil porque qualquer fórmula lógica pode ser representada desta forma, e a representação é única (à exceção da ordem dos literais e cláusulas).
