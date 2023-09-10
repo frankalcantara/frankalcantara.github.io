@@ -3654,30 +3654,26 @@ O Prolog utiliza um mecanismo de resolução baseado em Cláusulas de Horn para 
 
 **Fatos:**
 
-<pre>
- <code class="prolog">
+``` prolog
 homem(joão).
 mulher(maria).
- </code>
-</pre>
+```
 
 Os fatos indicam que "João é homem" e "maria é mulher".
 
 **Regra:**
-<pre>
- <code class="prolog">
+
+``` prolog
 mortal(X) :- homem(X).
- </code>
-</pre>
+```
 
 A regra estabelece que "Se X é homem, então X é mortal". O símbolo :- representa implicação.
 
 **Consulta:**  
-<pre>
- <code class="prolog">
+
+``` prolog
 mortal(joão).
- </code>
-</pre>
+ ```
 
 A consulta verifica se "João é mortal", aplicando a regra definida anteriormente. O Prolog responderá _True_ (verdadeiro ou $\top$) pois a regra se aplica dado o fato de que João é homem.
 
@@ -3689,55 +3685,43 @@ Imagine que estamos construindo um sistema lógico simples em Prolog para recome
 
 - **Fato 1**: está ensolarado.
 
-<pre>
- <code class="prolog">
+``` prolog
  ensolarado.
- </code>
-</pre>
+ ```
 
 - **Fato 2**: a temperatura está acima de 20°C.
 
-<pre>
- <code class="prolog">
+``` prolog
  temperatura_acima_de_20.
-</code>
-</pre>
+```
 
 **Regras**: em seguida, definimos as regras que descrevem como as coisas se relacionam. Essas regras nos dizem o tipo de roupa apropriada com base no clima.
 
 - **Regra 1**: se está ensolarado e a temperatura está acima de 20°C, use óculos de sol.
 
-<pre>
- <code class="prolog">
+``` prolog
  óculos_de_sol :- ensolarado, temperatura_acima_de_20.
-</code>
-</pre>
+```
 
 - **Regra 2**: se está ensolarado, use chapéu.
 
-<pre>
- <code class="prolog">
+``` prolog
  chapéu :- ensolarado.
-</code>
-</pre>
+```
 
 - **Regra 3**: se a temperatura está acima de 20°C, use camiseta.
 
-<pre>
- <code class="prolog">
+``` prolog
  camiseta :- temperatura_acima_de_20.
-</code>
-</pre>
+```
 
 **Consultas**: agora, podemos fazer consultas ao nosso sistema para obter recomendações de roupas.
 
 - **Consulta 1**: está ensolarado e a temperatura está acima de 20°C. O que devo vestir?
 
-<pre>
- <code class="prolog">
+``` prolog
  ?- óculos_de_sol, chapéu, camiseta.
-</code>
-</pre>
+```
 
 ### Um Problema Interessante
 
@@ -3747,8 +3731,7 @@ Imagine que estamos construindo um sistema lógico simples em Prolog para recome
 
 Usando este relato como base podemos criar uma base de conhecimento em Prolog, incluir algumas regras, e finalmente verificar se é verdade que o _narrador_ é o seu próprio avô. 
 
-<pre>
- <code class="prolog">
+``` prolog
  % predicados
 homem(narrador).
 homem(f).
@@ -3771,8 +3754,7 @@ padrasto(X,Y) :-  homem(X), parentesco_legal(X,Y).
 avo(X,Z) :- (pai(X,Y); padrasto(X,Y)), (pai(Y,Z) ; padrasto(Y,Z)).
 
 %pergunte se o narrador é avo dele mesmo avo(narrador,narrador)
-</code>
-</pre>
+```
 
 ---
 [^1]:WIRTH, Niklaus. Algorithms and Data Structures. [S.l.]: [s.n.], [s.d.]. Disponível em: <https://cdn.preterhuman.net/texts/math/Data_Structure_And_Algorithms/Algorithms%20and%20Data%20Structures%20-%20Niklaus%20Wirth.pdf>. Acesso em: [data de acesso].
