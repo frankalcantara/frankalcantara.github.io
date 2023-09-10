@@ -2886,60 +2886,69 @@ $$
 
 #### Conversão para Forma Normal Conjuntiva
 
-Converter uma fórmula para a FNC geralmente envolve os seguintes passos:
+Converter uma fórmula para a Forma Normal Conjuntiva, já incluindo os conceitos de Skolemização, envolve os seguintes passos:
 
 1. **Eliminar os Bicondicionais:** substitua todas as ocorrências de $A\leftrightarrow B$ Por $A\rightarrow B \wedge B\rightarrow A$.
 2. **Eliminar Implicações**: substitua todas as ocorrências de implicação $A \rightarrow B$ Por $\neg A \lor B$.
-3. **Aplicar as Leis de De Morgan**: Use as leis de De Morgan para mover as negações para dentro, aplicando:
+3. **Colocar a Negação no Interior dos Parenteses**: Use as leis de De Morgan para mover as negações para dentro, aplicando:
 
+     - $\neg (\forall x A) \equiv \exists x \neg A$
+     - $\neg (\exists x A) \equiv \forall x \neg A$
      - $\neg (A \land B) \rightarrow \neg A \lor \neg B$
      - $\neg (A \lor B) \rightarrow \neg A \land \neg B$
 
 4. **Eliminar Dupla Negação**: Substitua qualquer dupla negação $\neg \neg A$ Por $A$.
-5. **Aplicar a Lei Distributiva**: Use a lei distributiva para expandir a fórmula, transformando-a em uma conjunção de disjunções.
+5. **Skolemização**: todas as variáveis existenciais será substituída por uma Constante de Skolem, ou uma Função de Skolem das variáveis universais relacionadas.
+
+     - $\exists x Bonito(x)$ será transformado em $Bonito(g1)$ onde $g1$ é uma Constante de Skolem.
+     - $\forall x Pessoa(x) \rightarrow Coração(x) \wedge Feliz(x,y)$ se torna $\forall x Pessoa(x) \rightarrow Coração(H(x))\wedge Feliz(x,H(x))$, onde $H$ é uma função de Skolen.
+
+6. Remova todos os Quantificadores Universais. $\forall x Pessoa(x)$ se torna $Pessoa(x)$.
+
+7. **Aplicar a Lei Distributiva**: Use a lei distributiva para expandir a fórmula, transformando-a em uma conjunção de disjunções. Substituindo $\wedge$ por $\vee$.
 
 #### Exemplo 1: Convertendo $(A \land B) \rightarrow (C \lor D)$ 
 
 1. **Eliminar Implicações**:
   
-  $$
-  \neg (A \land B) \lor (C \lor D) \rightarrow (\neg A \lor \neg B) \lor (C \lor D)
-  $$
+    $$
+    \neg (A \land B) \lor (C \lor D) \rightarrow (\neg A \lor \neg B) \lor (C \lor D)
+    $$
 
 2. **Distribuir a Disjunção**:
   
-  $$
-  (\neg A \lor \neg B \lor C \lor D)
-  $$
+    $$
+      (\neg A \lor \neg B \lor C \lor D)
+    $$
 
 #### Exemplo 2: Convertendo $(A \land \neg B) \lor (\neg C \land D) \rightarrow (E \lor F)$ 
 
 1. **Eliminar Implicações**:
   
-  $$
-  \neg ((A \land \neg B) \lor (\neg C \land D)) \lor (E \lor F) \rightarrow \neg (A \land \neg B) \land \neg (\neg C \land D) \lor (E \lor F)
-  $$
+    $$
+    \neg ((A \land \neg B) \lor (\neg C \land D)) \lor (E \lor F) \rightarrow \neg (A \land \neg B) \land \neg (\neg C \land D) \lor (E \lor F)
+    $$
 
 2. **Aplicar De Morgan**:
   
-  $$
-  (\neg A \lor B) \land (C \lor \neg D) \lor (E \lor F)
-  $$
+    $$
+    (\neg A \lor B) \land (C \lor \neg D) \lor (E \lor F)
+    $$
 
 3. **Distribuir a Disjunção**:
   
-  $$
-  (\neg A \lor B \lor E \lor F) \land (C \lor \neg D \lor E \lor F)
-  $$
+    $$
+    (\neg A \lor B \lor E \lor F) \land (C \lor \neg D \lor E \lor F)
+    $$
 
 #### Exemplo 3: Convertendo $(p \wedge (q \vee r)) \vee (\neg p \wedge \neg q)$
 
 1. Aplicar a lei distributiva para expandir a expressão:  
-   
-   $$(p \wedge q) \vee (p \wedge r) \vee (\neg p \wedge \neg q)$$
+
+    $$(p \wedge q) \vee (p \wedge r) \vee (\neg p \wedge \neg q)$$
 
 2. Transformando a expressão em uma conjunção de disjunções. Podemos fazer isso aplicando novamente a lei distributiva:
-   
+
    $$(p \wedge q) \vee \neg p) \wedge ( (p \wedge q) \vee \neg q) \wedge ( (p \wedge r) \vee \neg p) \wedge ( (p \wedge r) \vee \neg q)$$
 
 3. Finalmente a Forma Normal Conjuntiva
@@ -2950,17 +2959,17 @@ Converter uma fórmula para a FNC geralmente envolve os seguintes passos:
 
 1. Aplicando a Lei de De Morgan na expressão inteira:
 
-  $$\begin{align*}
-  \neg ((p \wedge q) \vee \neg (r \wedge s)) &\equiv \neg (p \wedge q) \wedge (r \wedge s) \quad \text{(Lei de De Morgan)}
-  \end{align*}$$
+    $$\begin{align*}
+    \neg ((p \wedge q) \vee \neg (r \wedge s)) &\equiv \neg (p \wedge q) \wedge (r \wedge s) \quad \text{(Lei de De Morgan)}
+    \end{align*}$$
 
 2. aplicando a Lei de De Morgan nos termos internos:
 
-  $$
-  \begin{align*}
-  \neg (p \wedge q) \wedge (r \wedge s) &\equiv (\neg p \vee \neg q) \wedge (r \wedge s) \quad \text{(Lei de De Morgan)}
-  \end{align*}  
-  $$
+    $$
+    \begin{align*}
+    \neg (p \wedge q) \wedge (r \wedge s) &\equiv (\neg p \vee \neg q) \wedge (r \wedge s) \quad \text{(Lei de De Morgan)}
+    \end{align*}  
+    $$
 
 ### Usando a Tabela-Verdade para Gerar Formas Normais
 
@@ -2972,42 +2981,42 @@ $$(A \lor B) \rightarrow (C \land \neg A)$$
 
 1. Criar a Tabela-Verdade
 
-$$
-\begin{array}{cccc|c|c|c}
-A & B & C & \neg A & A \lor B & C \land \neg A & (A \lor B) \rightarrow (C \land \neg A) \\
-\hline
-T & T & T & F & T & F & F \\
-T & T & F & F & T & F & F \\
-T & F & T & F & T & F & F \\
-T & F & F & F & T & F & F \\
-F & T & T & T & T & T & T \\
-F & T & F & T & T & F & F \\
-F & F & T & T & F & T & T \\
-F & F & F & T & F & T & T \\
-\end{array}
-$$
+    $$
+    \begin{array}{cccc|c|c|c}
+    A & B & C & \neg A & A \lor B & C \land \neg A & (A \lor B) \rightarrow (C \land \neg A) \\
+    \hline
+    T & T & T & F & T & F & F \\
+    T & T & F & F & T & F & F \\
+    T & F & T & F & T & F & F \\
+    T & F & F & F & T & F & F \\
+    F & T & T & T & T & T & T \\
+    F & T & F & T & T & F & F \\
+    F & F & T & T & F & T & T \\
+    F & F & F & T & F & T & T \\
+    \end{array}
+    $$
 
 2. Identificar as Linhas com Resultado Verdadeiro
 
-As linhas 5, 7 e 8 têm resultado verdadeiro.
+    As linhas 5, 7 e 8 têm resultado verdadeiro.
 
 3. Construir a FND usando as linhas com resultados verdadeiros: para cada linha verdadeira, crie uma disjunção que representa a linha e combine-as com uma disjunção:
 
-$$
-(A \lor B) \rightarrow (C \land \neg A) = (\neg A \land B \land C) \lor (\neg A \land \neg B \land C) \lor (\neg A \land \neg B \land \neg C)
-$$
+    $$
+    (A \lor B) \rightarrow (C \land \neg A) = (\neg A \land B \land C) \lor (\neg A \land \neg B \land C) \lor (\neg A \land \neg B \land \neg C)
+    $$
 
 #### Gerando a Forma Normal Conjuntiva (FNC)
 
 1. Identificar as Linhas com Resultado Falso
 
-As linhas $1$, $2$, $3$, $4$ e $6$ têm resultado falso.
+    As linhas $1$, $2$, $3$, $4$ e $6$ têm resultado falso.
 
 2. Construir a FNC: para cada linha falsa, crie uma disjunção que representa a negação da linha e combine-as com uma conjunção:
 
-$$
-(A \lor B) \rightarrow (C \land \neg A) = (A \lor \neg B \lor \neg C) \land (A \lor \neg B \lor A) \land (A \lor B \lor \neg C) \land (A \lor B \lor A) \land (\neg A \lor \neg B \lor \neg C)
-$$
+    $$
+    (A \lor B) \rightarrow (C \land \neg A) = (A \lor \neg B \lor \neg C) \land (A \lor \neg B \lor A) \land (A \lor B \lor \neg C) \land (A \lor B \lor A) \land (\neg A \lor \neg B \lor \neg C)
+    $$
 
 Infelizmente, não temos como usar tabelas verdades em fórmulas da Lógica de Primeira Ordem que contenham predicados, ou quantificadores. Para isso, teremos que usar métodos específicos de simplificação que permitirão aplicar as regras de equivalência. Estes métodos são a Skolemização e a Forma Normal Prenex.
 
