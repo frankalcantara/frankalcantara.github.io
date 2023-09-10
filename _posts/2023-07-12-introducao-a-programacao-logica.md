@@ -118,9 +118,10 @@ A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive 
       - [Transformação de Forma Normal Conjuntiva (FNC) para Cláusulas de Horn](#transformação-de-forma-normal-conjuntiva-fnc-para-cláusulas-de-horn)
       - [Etapas de Transformação](#etapas-de-transformação)
       - [Problemas interessantes resolvidos com a Cláusula de Horn](#problemas-interessantes-resolvidos-com-a-cláusula-de-horn)
-      - [Cláusulas de Horn e o Prolog](#cláusulas-de-horn-e-o-prolog)
+    - [Cláusulas de Horn e o Prolog](#cláusulas-de-horn-e-o-prolog)
       - [Exemplo 1: O mais simples possível](#exemplo-1-o-mais-simples-possível)
       - [Exemplo 2: Sistema de Recomendação de Roupas em Prolog](#exemplo-2-sistema-de-recomendação-de-roupas-em-prolog)
+    - [Um Problema Interessante](#um-problema-interessante)
 
 # Introdução
 
@@ -553,7 +554,7 @@ A Lógica Proposicional é a estrutura mais simples e profunda que usamos para f
 
 A Lógica Proposicional é essencial para a forma como entendemos e interagimos com o mundo ao nosso redor. Ela fornece a base para a construção de argumentos sólidos e para a avaliação da validade de proposições. Originadas na necessidade humana de descobrir a verdade e diminuir os conflitos a partir da lógica. No entanto, a beleza da Lógica Proposicional se estende além dos campos da filosofia, do discurso e da matemática. Ela é a fundação da Álgebra de [George Boole](https://en.wikipedia.org/wiki/George_Boole), a qual, por sua vez, é a base para o design de circuitos eletrônicos e a construção de computadores modernos.
 
-Em seu trabalho de conclusão de curso, [Claude Shannon](https://en.wikipedia.org/wiki/Claude_Shannon) aplicou a Álgebra de Boole à simplificação de circuitos de controle. Desde então, as operações básicas da Álgebra de Boole - AND, OR, NOT - são os componentes fundamentais dos sistemas digitais que formam o núcleo dos computadores, telefones celulares e, de fato, de toda a nossa civilização essencialmente digital. A Lógica Proposicional a base sobre a qual construímos todo o edifício do raciocínio lógico. É como a tabela periódica para os químicos ou as leis de Newton para os físicos. É simples, elegante e, acima de tudo, poderosa. 
+Em seu trabalho de conclusão de curso, [Claude Shannon](https://en.wikipedia.org/wiki/Claude_Shannon) aplicou a Álgebra de Boole à simplificação de circuitos de controle. Desde então, as operações básicas da Álgebra de Boole - AND, OR, NOT - são os componentes fundamentais dos sistemas digitais que formam o núcleo dos computadores, telefones celulares e, de fato, de toda a nossa civilização essencialmente digital. A Lógica Proposicional a base sobre a qual construímos todo o edifício do raciocínio lógico. É como a tabela periódica para os químicos ou as leis de Newton para os físicos. É simples, elegante e, acima de tudo, poderosa.
 
 Tão importante quanto o impacto da _Lógica Proposicional_ na tecnologia digital é a sua importância no pensamento racional, tomada de decisão e prova de teoremas. Neste destino, nosso teodolito são as _Regras de Inferência_.
 
@@ -3639,7 +3640,7 @@ $$\forall x \forall y (Porta(x) \wedge Porta(y) \wedge x \neq y \rightarrow \neg
 
 $$\exists x (Porta(x) \wedge \neg Revelada(x) \wedge x \neq PortaEscolhida \rightarrow Prêmio(x))?$$
 
-#### Cláusulas de Horn e o Prolog
+### Cláusulas de Horn e o Prolog
 
 O Prolog é uma linguagem de programação lógica que utiliza Cláusulas de Horn para representar e manipular conhecimento. A sintaxe e a semântica do Prolog são diretamente mapeadas para Cláusulas de Horn:
 
@@ -3737,3 +3738,42 @@ Imagine que estamos construindo um sistema lógico simples em Prolog para recome
  ?- óculos_de_sol, chapéu, camiseta.
 </code>
 </pre>
+
+### Um Problema Interessante
+
+[Niklaus Wirth](https://en.wikipedia.org/wiki/Niklaus_Wirth) em seu livro _Algorithms + Data Structures = Programs_ [^1] cita um problema interessante que foi publicado em um jornal de _Zürich_ em 1922, que cito em tradução livre a seguir: 
+
+>Casei com uma viúva (vamos chamá-la de W) que tem uma filha adulta (chame-a de D). Meu pai (F), que nos visitava com bastante frequência, apaixonou-se pela minha enteada e casou-se com ela. Por isso, meu pai se tornou meu genro e minha enteada se tornou minha madrasta. Alguns meses depois, minha esposa deu à luz um filho (S1), que se tornou cunhado do meu pai, e meu tio. A esposa do meu pai, ou seja, minha enteada, também teve um filho (S2). Em outras palavras, para todos os efeitos, eu sou meu próprio avo.
+
+Usando este relato como base podemos criar uma base de conhecimento em Prolog, incluir algumas regras, e finalmente verificar se é verdade que o _narrador_ é o seu próprio avô. 
+
+<pre>
+ <code class="prolog">
+ % predicados
+homem(narrador).
+homem(f).
+homem(s1).
+homem(s2).  
+
+% Predicados para relações baseadas em casamentos
+parentesco_legal(narrador,w).
+parentesco_legal(narrador,f).
+
+% relações de parentesco, filhos, netos de sangue
+parentesco(w,d).
+parentesco(f,narrador).
+parentesco(narrador,s1).
+parentesco(f,s2).
+
+% Regras para difinir, pai, padrasto e avo
+pai(X,Y) :- homem(X), parentesco(X,Y).
+padrasto(X,Y) :-  homem(X), parentesco_legal(X,Y).
+avo(X,Z) :- (pai(X,Y); padrasto(X,Y)), (pai(Y,Z) ; padrasto(Y,Z)).
+
+%pergunte se o narrador é avo dele mesmo avo(narrador,narrador)
+</code>
+</pre>
+
+---
+[^1]:WIRTH, Niklaus. Algorithms and Data Structures. [S.l.]: [s.n.], [s.d.]. Disponível em: <https://cdn.preterhuman.net/texts/math/Data_Structure_And_Algorithms/Algorithms%20and%20Data%20Structures%20-%20Niklaus%20Wirth.pdf>. Acesso em: [data de acesso].
+
