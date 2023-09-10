@@ -78,17 +78,17 @@ A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive 
     - [Forma Normal Disjuntiva (FND)](#forma-normal-disjuntiva-fnd)
       - [Estrutura da Forma Normal Disjuntiva](#estrutura-da-forma-normal-disjuntiva)
       - [Conversão para Forma Normal Disjuntiva](#conversão-para-forma-normal-disjuntiva)
-      - [Exemplo 1: Convertendo $(A \\rightarrow B) \\land (C \\lor \\neg (D \\land E))$](#exemplo-1-convertendo-a-rightarrow-b-land-c-lor-neg-d-land-e)
-      - [Exemplo 2: Convertendo $(\\neg A \\land (B \\rightarrow C)) \\lor (D \\land \\neg (E \\rightarrow F))$](#exemplo-2-convertendo-neg-a-land-b-rightarrow-c-lor-d-land-neg-e-rightarrow-f)
+      - [Exemplo 1: $(A \\rightarrow B) \\land (C \\lor \\neg (D \\land E))$](#exemplo-1-a-rightarrow-b-land-c-lor-neg-d-land-e)
+      - [Exemplo 2: $(\\neg A \\land (B \\rightarrow C)) \\lor (D \\land \\neg (E \\rightarrow F))$](#exemplo-2-neg-a-land-b-rightarrow-c-lor-d-land-neg-e-rightarrow-f)
       - [Exemplo 3: $(p \\rightarrow q) \\rightarrow (r \\vee s)$](#exemplo-3-p-rightarrow-q-rightarrow-r-vee-s)
       - [Exemplo 4: $(p \\rightarrow q) \\rightarrow (\\neg r \\vee s)$](#exemplo-4-p-rightarrow-q-rightarrow-neg-r-vee-s)
       - [Exemplo 5:  $\\neg(p \\land q) \\rightarrow (r \\leftrightarrow s)$](#exemplo-5--negp-land-q-rightarrow-r-leftrightarrow-s)
     - [Forma Normal Conjuntiva (FNC)](#forma-normal-conjuntiva-fnc)
       - [Estrutura da Forma Normal Conjuntiva](#estrutura-da-forma-normal-conjuntiva)
       - [Conversão para Forma Normal Conjuntiva](#conversão-para-forma-normal-conjuntiva)
-      - [Exemplo 1: Convertendo $(A \\land B) \\rightarrow (C \\lor D)$](#exemplo-1-convertendo-a-land-b-rightarrow-c-lor-d)
-      - [Exemplo 2: Convertendo $(A \\land \\neg B) \\lor (\\neg C \\land D) \\rightarrow (E \\lor F)$](#exemplo-2-convertendo-a-land-neg-b-lor-neg-c-land-d-rightarrow-e-lor-f)
-      - [Exemplo 3: Convertendo $(p \\wedge (q \\vee r)) \\vee (\\neg p \\wedge \\neg q)$](#exemplo-3-convertendo-p-wedge-q-vee-r-vee-neg-p-wedge-neg-q)
+      - [Exemplo 1: $(A \\land B) \\rightarrow (C \\lor D)$](#exemplo-1-a-land-b-rightarrow-c-lor-d)
+      - [Exemplo 2: $(A \\land \\neg B) \\lor (\\neg C \\land D) \\rightarrow (E \\lor F)$](#exemplo-2-a-land-neg-b-lor-neg-c-land-d-rightarrow-e-lor-f)
+      - [Exemplo 3: $(p \\wedge (q \\vee r)) \\vee (\\neg p \\wedge \\neg q)$](#exemplo-3-p-wedge-q-vee-r-vee-neg-p-wedge-neg-q)
       - [Exemplo 4: $ \\neg ((p \\wedge q) \\vee \\neg (r \\wedge s)) $](#exemplo-4--neg-p-wedge-q-vee-neg-r-wedge-s-)
       - [Exemplo 5: $\\neg (((p \\rightarrow q) \\rightarrow p) \\rightarrow p)$](#exemplo-5-neg-p-rightarrow-q-rightarrow-p-rightarrow-p)
       - [Exemplo 6: $(p \\rightarrow q) \\leftrightarrow (p \\rightarrow r)$](#exemplo-6-p-rightarrow-q-leftrightarrow-p-rightarrow-r)
@@ -218,16 +218,16 @@ Na Lógica Proposicional, as fórmulas, chamadas de Fórmulas Bem Formadas, pode
 
 As declarações atômicas e compostas são costuradas por conectivos para produzir declarações compostas, cujo valor de verdade depende dos valores de verdade das declarações componentes. Os conectivos que consideramos inicialmente, e suas Tabelas Verdade serão:
 
-<table style="margin-left: auto;
- margin-right: auto; text-align:center;">
+<table style="margin-left: auto; margin-right: auto; text-align:center;">
  <tr style="border-top: 2px solid gray; border-bottom: 1px solid gray;">
  <th style="border-right: 1px solid gray;">$P$</th>
- <th style="border-right: double gray;"> $Q$</th>
+ <th style="border-right: double gray;">$Q$</th>
  <th style="width:16.8%; border-right: 1px solid gray;">$P\vee Q$</th>
  <th style="width:16.8%; border-right: 1px solid gray;">$P\wedge Q$ </th>
- <th style="width:16.8%; border-right: 1px solid gray;"> $\neg P$</th>
+ <th style="width:16.8%; border-right: 1px solid gray;">$\neg P$</th>
  <th style="width:16.8%; border-right: 1px solid gray;">$P\rightarrow Q$</th>
- <th style="width:16.8%;">$P\leftrightarrow Q$</th>
+ <th style="width:16.8%; border-right: 1px solid gray;">$P\leftrightarrow Q$</th>
+ <th style="width:16.8%;">$P\oplus Q$</th>
  </tr>
  <tr style="background-color: #eeeeee;">
  <td style="border-right: 1px solid gray;">T</td>
@@ -236,7 +236,8 @@ As declarações atômicas e compostas são costuradas por conectivos para produ
  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
- <td style="width:16.8%;">T</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">T</td>
+ <td style="width:16.8%;">F</td>
  </tr>
  <tr>
  <td style="border-right: 1px solid gray;">T</td>
@@ -245,7 +246,8 @@ As declarações atômicas e compostas são costuradas por conectivos para produ
  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
- <td style="width:16.8%;">F</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">F</td>
+ <td style="width:16.8%;">T</td>
  </tr>
  <tr style="background-color: #eeeeee;">
  <td style="border-right: 1px solid gray;">F</td>
@@ -254,7 +256,8 @@ As declarações atômicas e compostas são costuradas por conectivos para produ
  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
- <td style="width:16.8%;">F</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">F</td>
+ <td style="width:16.8%;">T</td>
  </tr>
  <tr style="border-bottom: 2px solid gray;">
  <td style="border-right: 1px solid gray;">F</td>
@@ -263,7 +266,8 @@ As declarações atômicas e compostas são costuradas por conectivos para produ
  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
- <td style="width:16.8%;">T</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">T</td>
+ <td style="width:16.8%;">F</td>
  </tr>
 </table>
 <legend style="font-size: 1em;
@@ -2757,15 +2761,11 @@ A Forma Normal Disjuntiva é uma representação canônica de fórmulas lógicas
 
 Uma fórmula está na Forma Normal Disjuntiva se puder ser escrita como:
 
-$$
-(C_1 \land C_2 \land \ldots) \lor (D_1 \land D_2 \land \ldots) \lor
-$$
+$$(C_1 \land C_2 \land \ldots) \lor (D_1 \land D_2 \land \ldots) \lor$$
 
 Onde cada $C_i$ e $D_i$ é um literal. Ou seja, é uma variável ou sua negação. Com um pouco mais de formalidade matemática podemos afirmar que uma Fórmula Bem Formada está na Forma Normal Disjuntiva quando está na forma:
 
-$$
-\bigvee_{i=1}^{m} \left( \bigwedge_{j=1}^{n} L_{ij} \right)
-$$
+$$\bigvee_{i=1}^{m} \left( \bigwedge_{j=1}^{n} L_{ij} \right)$$
 
 #### Conversão para Forma Normal Disjuntiva
 
@@ -2781,7 +2781,7 @@ Converter uma fórmula para a FND geralmente envolve os seguintes passos:
 4. **Eliminar Dupla Negação**: Substitua qualquer dupla negação $\neg \neg A$ Por $A$.
 5. **Aplicar a Lei Distributiva**: Use a lei distributiva para expandir a fórmula, transformando-a em uma disjunção de conjunções.
 
-#### Exemplo 1: Convertendo $(A \rightarrow B) \land (C \lor \neg (D \land E))$
+#### Exemplo 1: $(A \rightarrow B) \land (C \lor \neg (D \land E))$
 
 1. Eliminar Implicações
 
@@ -2795,7 +2795,7 @@ Converter uma fórmula para a FND geralmente envolve os seguintes passos:
 
     $$(\neg A \lor B) \land C \lor (\neg A \lor B) \land \neg D \lor (\neg A \lor B) \land \neg E$$
 
-#### Exemplo 2: Convertendo $(\neg A \land (B \rightarrow C)) \lor (D \land \neg (E \rightarrow F))$
+#### Exemplo 2: $(\neg A \land (B \rightarrow C)) \lor (D \land \neg (E \rightarrow F))$
 
 1. Eliminar Implicações
 
@@ -2909,7 +2909,7 @@ Converter uma fórmula para a Forma Normal Conjuntiva, já incluindo os conceito
 
 7. **Aplicar a Lei Distributiva**: Use a lei distributiva para expandir a fórmula, transformando-a em uma conjunção de disjunções. Substituindo $\wedge$ por $\vee$.
 
-#### Exemplo 1: Convertendo $(A \land B) \rightarrow (C \lor D)$ 
+#### Exemplo 1: $(A \land B) \rightarrow (C \lor D)$ 
 
 1. **Eliminar Implicações**:
   
@@ -2923,7 +2923,7 @@ Converter uma fórmula para a Forma Normal Conjuntiva, já incluindo os conceito
       (\neg A \lor \neg B \lor C \lor D)
     $$
 
-#### Exemplo 2: Convertendo $(A \land \neg B) \lor (\neg C \land D) \rightarrow (E \lor F)$ 
+#### Exemplo 2: $(A \land \neg B) \lor (\neg C \land D) \rightarrow (E \lor F)$ 
 
 1. **Eliminar Implicações**:
   
@@ -2943,7 +2943,7 @@ Converter uma fórmula para a Forma Normal Conjuntiva, já incluindo os conceito
     (\neg A \lor B \lor E \lor F) \land (C \lor \neg D \lor E \lor F)
     $$
 
-#### Exemplo 3: Convertendo $(p \wedge (q \vee r)) \vee (\neg p \wedge \neg q)$
+#### Exemplo 3: $(p \wedge (q \vee r)) \vee (\neg p \wedge \neg q)$
 
 1. Aplicar a lei distributiva para expandir a expressão:  
 
