@@ -80,16 +80,18 @@ A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive 
       - [Conversão para Forma Normal Disjuntiva](#conversão-para-forma-normal-disjuntiva)
       - [Exemplo 1: Convertendo $(A \\rightarrow B) \\land (C \\lor \\neg (D \\land E))$](#exemplo-1-convertendo-a-rightarrow-b-land-c-lor-neg-d-land-e)
       - [Exemplo 2: Convertendo $(\\neg A \\land (B \\rightarrow C)) \\lor (D \\land \\neg (E \\rightarrow F))$](#exemplo-2-convertendo-neg-a-land-b-rightarrow-c-lor-d-land-neg-e-rightarrow-f)
-      - [$(p \\rightarrow q) \\rightarrow (r \\vee s)$](#p-rightarrow-q-rightarrow-r-vee-s)
-      - [$(p \\rightarrow q) \\rightarrow (\\neg r \\vee s)$](#p-rightarrow-q-rightarrow-neg-r-vee-s)
-      - [$\\neg(p \\land q) \\rightarrow (r \\leftrightarrow s)$](#negp-land-q-rightarrow-r-leftrightarrow-s)
+      - [Exemplo 3: $(p \\rightarrow q) \\rightarrow (r \\vee s)$](#exemplo-3-p-rightarrow-q-rightarrow-r-vee-s)
+      - [Exemplo 4: $(p \\rightarrow q) \\rightarrow (\\neg r \\vee s)$](#exemplo-4-p-rightarrow-q-rightarrow-neg-r-vee-s)
+      - [Exemplo 5:  $\\neg(p \\land q) \\rightarrow (r \\leftrightarrow s)$](#exemplo-5--negp-land-q-rightarrow-r-leftrightarrow-s)
     - [Forma Normal Conjuntiva (FNC)](#forma-normal-conjuntiva-fnc)
       - [Estrutura da Forma Normal Conjuntiva](#estrutura-da-forma-normal-conjuntiva)
       - [Conversão para Forma Normal Conjuntiva](#conversão-para-forma-normal-conjuntiva)
       - [Exemplo 1: Convertendo $(A \\land B) \\rightarrow (C \\lor D)$](#exemplo-1-convertendo-a-land-b-rightarrow-c-lor-d)
       - [Exemplo 2: Convertendo $(A \\land \\neg B) \\lor (\\neg C \\land D) \\rightarrow (E \\lor F)$](#exemplo-2-convertendo-a-land-neg-b-lor-neg-c-land-d-rightarrow-e-lor-f)
       - [Exemplo 3: Convertendo $(p \\wedge (q \\vee r)) \\vee (\\neg p \\wedge \\neg q)$](#exemplo-3-convertendo-p-wedge-q-vee-r-vee-neg-p-wedge-neg-q)
-      - [Exemplo 4  $ \\neg ((p \\wedge q) \\vee \\neg (r \\wedge s)) $](#exemplo-4---neg-p-wedge-q-vee-neg-r-wedge-s-)
+      - [Exemplo 4: $ \\neg ((p \\wedge q) \\vee \\neg (r \\wedge s)) $](#exemplo-4--neg-p-wedge-q-vee-neg-r-wedge-s-)
+      - [Exemplo 5: $\\neg (((p \\rightarrow q) \\rightarrow p) \\rightarrow p)$](#exemplo-5-neg-p-rightarrow-q-rightarrow-p-rightarrow-p)
+      - [Exemplo 6: $(p \\rightarrow q) \\leftrightarrow (p \\rightarrow r)$](#exemplo-6-p-rightarrow-q-leftrightarrow-p-rightarrow-r)
     - [Usando a Tabela-Verdade para Gerar Formas Normais](#usando-a-tabela-verdade-para-gerar-formas-normais)
       - [Gerando a Forma Normal Disjuntiva (FND)](#gerando-a-forma-normal-disjuntiva-fnd)
       - [Gerando a Forma Normal Conjuntiva (FNC)](#gerando-a-forma-normal-conjuntiva-fnc)
@@ -2807,7 +2809,7 @@ Converter uma fórmula para a FND geralmente envolve os seguintes passos:
 
     $$\neg A \land \neg B \lor \neg A \land C \lor D \land E \land \neg F$$
 
-#### $(p \rightarrow q) \rightarrow (r \vee s)$
+#### Exemplo 3: $(p \rightarrow q) \rightarrow (r \vee s)$
 
 1. Remover as implicações ($\rightarrow$):
 
@@ -2825,7 +2827,7 @@ Converter uma fórmula para a FND geralmente envolve os seguintes passos:
 
     $$(p \wedge \neg q) \vee (r \vee s)$$   
 
-#### $(p \rightarrow q) \rightarrow (\neg r \vee s)$ 
+#### Exemplo 4: $(p \rightarrow q) \rightarrow (\neg r \vee s)$ 
 
 1. Primeiro, vamos eliminar as implicações, usando a equivalência \(p \rightarrow q \equiv \neg p \vee q\):
 
@@ -2851,7 +2853,7 @@ Converter uma fórmula para a FND geralmente envolve os seguintes passos:
    (p \wedge \neg q) \vee (\neg r \vee s)
    $$
 
-#### $\neg(p \land q) \rightarrow (r \leftrightarrow s)$
+#### Exemplo 5:  $\neg(p \land q) \rightarrow (r \leftrightarrow s)$
 
 $$
 \begin{align*}
@@ -2955,7 +2957,7 @@ Converter uma fórmula para a Forma Normal Conjuntiva, já incluindo os conceito
 
   $$((p \wedge q) \vee \neg p) \wedge ((p \wedge q) \vee \neg q) \wedge ((p \wedge r) \vee \neg p) \wedge (p \wedge r) \vee \neg q)$$
 
-#### Exemplo 4  $ \neg ((p \wedge q) \vee \neg (r \wedge s)) $
+#### Exemplo 4: $ \neg ((p \wedge q) \vee \neg (r \wedge s)) $
 
 1. Aplicando a Lei de De Morgan na expressão inteira:
 
@@ -2970,6 +2972,48 @@ Converter uma fórmula para a Forma Normal Conjuntiva, já incluindo os conceito
     \neg (p \wedge q) \wedge (r \wedge s) &\equiv (\neg p \vee \neg q) \wedge (r \wedge s) \quad \text{(Lei de De Morgan)}
     \end{align*}  
     $$
+
+#### Exemplo 5: $\neg (((p \rightarrow q) \rightarrow p) \rightarrow p)$
+
+$$
+\begin{align*}
+&\neg (((p \rightarrow q) \rightarrow p) \rightarrow p)\\
+&\equiv\neg(\neg(\neg(\neg p \lor q)\lor p)\lor p) \ \ \ \ \ \ \text{[Usando $p \rightarrow q \equiv \neg p \lor q$]}\\
+&\equiv((p \land\neg q)\lor p)\land\neg p \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \text{[Aplicando as leis de De Morgan]}\\
+&\equiv((p\lor p) \land(\neg q\lor p))\land\neg p \ \ \ \ \ \ \ \ \ \ \ \ \text{[Simplificando $p \land \neg q \lor p \equiv p \lor p \land \neg q$]}\\
+&\equiv(p \land(\neg q\lor p))\land\neg p \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \text{[Usando $p \lor p \equiv p$]}\\
+&\equiv((\neg q\lor p)\land p)\land\neg p \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \text{[Comutatividade]}\\
+&\equiv(\neg q\lor p)\land(p\land\neg p) \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \text{[Associatividade]}\\
+&\equiv(\neg q\lor p)\land\bot \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \text{[Usando $p \land \neg p \equiv \bot$]}\\
+&\equiv\bot (\text{False}) \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \text{[Usando a identidade $\bot \land p \equiv \bot $]}
+\end{align*}
+$$
+
+#### Exemplo 6: $(p \rightarrow q) \leftrightarrow (p \rightarrow r)$ 
+
+Começamos pela definição de equivalência e implicação:
+
+$$(p \rightarrow q) \leftrightarrow (p \rightarrow r)$$
+
+Aplicamos as definições de implicação:
+
+$$(\neg p \lor q) \leftrightarrow (\neg p \lor r)$$
+
+Agora, aplicamos a definição de equivalência, transformando-a em uma conjunção de duas implicações:
+
+$$((\neg p \lor q) \rightarrow (\neg p \lor r)) \land ((\neg p \lor r) \rightarrow (\neg p \lor q))$$
+
+Em seguida, aplicamos a definição de implicação novamente para cada uma das implicações internas:
+
+$$(\neg (\neg p \lor q) \lor (\neg p \lor r)) \land (\neg (\neg p \lor r) \lor (\neg p \lor q))$$
+
+Agora, vamos aplicar a lei de De Morgan e a lei da dupla negação para simplificar a expressão:
+
+$$((p \land \neg q) \lor (\neg p \lor r)) \land ((p \land \neg r) \lor (\neg p \lor q))$$
+
+A próxima etapa é aplicar a lei distributiva para desenvolver cada conjunção interna em disjunções:
+
+$$((p \lor (\neg p \lor r)) \land (\neg q \lor (\neg p \lor r))) \land ((p \lor (\neg p \lor q)) \land (\neg r \lor (\neg p \lor q)))$$
 
 ### Usando a Tabela-Verdade para Gerar Formas Normais
 
@@ -3634,7 +3678,7 @@ mortal(joão).
  </code>
 </pre>
 
-A consulta verifica se "João é mortal", aplicando a regra definida anteriormente. O Prolog responderá _True_ (verdadeiro) pois a regra se aplica dado o fato de que João é homem.
+A consulta verifica se "João é mortal", aplicando a regra definida anteriormente. O Prolog responderá _True_ (verdadeiro ou $\top$) pois a regra se aplica dado o fato de que João é homem.
 
 #### Exemplo 2: Sistema de Recomendação de Roupas em Prolog
 
