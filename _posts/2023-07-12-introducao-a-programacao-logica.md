@@ -142,7 +142,7 @@ Vamos enfrentar a inferência e a dedução, duas ferramentas para extração de
 
 Não nos furtaremos em falar da **Cláusula de Horn**, um conceito um pouco mais estranho. Uma regra que torna todos os problemas expressos em lógica mais fácies de resolver. É como um mapa que, se corretamente seguido, torna o processo de descobrir a verdade mais simples. Muito mais simples, eventualmente passível de ser automatizado.
 
-No final do dia, tudo que queremos, desde os tempos de [Gödel](https://en.wikipedia.org/wiki/Kurt_Gödel), [Turing](https://en.wikipedia.org/wiki/Alan_TurinQ) e [Church](https://en.wikipedia.org/wiki/Alonzo_ChurcR) é que nossas máquinas sejam capazes de resolver problemas complexos com o mínimo de interferência nossa. Queremos que eles pensem, ou pelo menos, que simulem o pensamento. Aqui, neste objetivo, entre pérolas do conhecimento humano, reluz a Programação Lógica.
+No final do dia, desde os tempos de [Gödel](https://en.wikipedia.org/wiki/Kurt_Gödel), [Turing](https://en.wikipedia.org/wiki/Alan_TurinQ) e [Church](https://en.wikipedia.org/wiki/Alonzo_ChurcR), tudo que queremos é que nossas máquinas sejam capazes de resolver problemas complexos com o mínimo de interferência nossa. Queremos que eles pensem, ou pelo menos, que simulem o pensamento. Aqui, neste objetivo, entre pérolas do conhecimento humano, reluz a Programação Lógica.
 
 Historicamente o termo Programação Lógica aparece em meados dos anos 1970 como uma evolução dos esforços das pesquisas sobre a prova computacional de teoremas matemáticos e inteligência artificial. O homem fazendo máquinas capazes de raciocinar como o homem. Deste esforço surgiu a esperança de que poderíamos usar a lógica como uma linguagem de programação, em inglês, _programming logic_ ou Prolog. Aqui está a base deste conhecimento.
 
@@ -1839,7 +1839,7 @@ Neste ponto, podemos voltar um pouco e destacar um constructor importante na pro
 
 # Lógica Predicativa
 
->A lógica é a técnica que usamos para adicionar convicção a verdade.
+>A lógica é a técnica que usamos para adicionar convicção à verdade.
 >Jean de la Bruyere
 
 A Lógica Predicativa, coração e espírito da Lógica de Primeira Ordem, nos leva um passo além da Lógica Proposicional. Em vez de se concentrar apenas em proposições completas que são verdadeiras ou falsas, a lógica predicativa nos permite expressar proposições sobre objetos e as relações entre eles. Ela nos permite falar de maneira mais rica e sofisticada sobre o mundo.
@@ -2271,55 +2271,6 @@ A afirmação de que _não é verdade que todos estão felizes_ implica que deve
 
 Portanto, as duas fórmulas têm o mesmo valor verdade. Elas são logicamente equivalentes e podem ser representadas como $\neg (\forall x P(x)) \equiv \exists x (\neg P(x))$. Esta equivalência reflete uma relação profunda e intuitiva em nosso entendimento de declarações sobre entidades em nosso mundo.
 
-<table style="margin-left: auto;
- margin-right: auto; text-align:center;">
- <tr style="border-top: 2px solid gray; border-bottom: 1px solid gray;">
- <th style="border-right: 1px solid gray;">$P$</th>
- <th style="border-right: double gray;"> $Q$</th>
- <th style="width:16.8%; border-right: 1px solid gray;">$P\vee Q$</th>
- <th style="width:16.8%; border-right: 1px solid gray;">$P\wedge Q$ </th>
- <th style="width:16.8%; border-right: 1px solid gray;"> $\neg P$</th>
- <th style="width:16.8%; border-right: 1px solid gray;">$P\rightarrow Q$</th>
- <th style="width:16.8%;">$P\leftrightarrow Q$</th>
- </tr>
- <tr style="background-color: #eeeeee;">
-  <td style="border-right: 1px solid gray;">T</td>
-  <td style="border-right: double gray;">T</td>
-  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
-  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
-  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
-  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
-  <td style="width:16.8%;">T</td>
- </tr>
- <tr>
-  <td style="border-right: 1px solid gray;">T</td>
-  <td style="border-right: double gray;">F</td>
-  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
-  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
-  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
-  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
-  <td style="width:16.8%;">F</td>
- </tr>
-  <tr style="background-color: #eeeeee;">
-  <td style="border-right: 1px solid gray;">F</td>
-  <td style="border-right: double gray;">T</td>
-  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
-  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
-  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
-  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
-  <td style="width:16.8%;">F</td>
- </tr>
-  <tr style="border-bottom: 2px solid gray;">
-  <td style="border-right: 1px solid gray;">F</td>
-  <td style="border-right: double gray;">F</td>
-  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
-  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
-  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
-  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
-  <td style="width:16.8%;">T</td>
- </tr>
-</table>
-
 <table style="width: 100%; margin: auto; border-collapse: collapse;">
   <tr>
     <th style="text-align: center; background-color: #eeeeee;">Expressão</th>
@@ -2333,15 +2284,15 @@ Portanto, as duas fórmulas têm o mesmo valor verdade. Elas são logicamente eq
   </tr>
   <tr style="background-color: #eeeeee;">
     <td style="text-align: center; width: 50%;">$\exists x \, P(x)$</td>
-    <td>$\neg \forall x \, \neg P(x)$</td>
+    <td style="text-align: center; width: 50%;" >$\neg \forall x \, \neg P(x)$</td>
   </tr>
   <tr>
     <td style="text-align: center; width: 50%;" >$\neg \forall x \, P(x)$</td>
-    <td>$\exists x \, \neg P(x)$</td>
+    <td style="text-align: center; width: 50%;" >$\exists x \, \neg P(x)$</td>
   </tr>
   <tr style="border-bottom: 2px solid gray;">
     <td style="text-align: center; width: 50%;">$\neg \exists x \, P(x)$</td>
-    <td>$\forall x \, \neg P(x)$</td>
+    <td style="text-align: center; width: 50%;" >$\forall x \, \neg P(x)$</td>
   </tr>
 </table>
 <legend style="font-size: 1em; text-align: center;
@@ -2655,7 +2606,7 @@ Substituindo os valores dos tempos resulta em $15 \leq T$.
  Usando Lógica de Primeira Ordem:
  Vamos denotar as portas como $d1, d2, d3$ e o prêmio como $P$. Podemos definir um predicado $contemPremio(d)$. A solução pode ser representada pela seguinte condição:
 
-$$(contemPremio(d1) \land \neg contemPremio(d2) \land \neg contemPremio(d3)) \lor (contemPremio(d2) \land \neg contemPremio(d1) \land \neg contemPremio(d3)) \lor (contemPremio(d3) \land \neg contemPremio(d1) \land \neg contemPremio(d2))$$
+$$(contemPremio(d1) \land \neg contemPremio(d2) \land \neg contemPremio(d3)) \\ \lor (contemPremio(d2)  \land \neg contemPremio(d1) \land \neg contemPremio(d3)) \\ \lor (contemPremio(d3) \land \neg contemPremio(d1) \land \neg contemPremio(d2))$$
 
 Esta condição afirma que o prêmio está exatamente atrás de uma das portas, e o concorrente deve mudar sua escolha depois que uma das portas é aberta para revelar nenhum prêmio.
 
@@ -2721,8 +2672,8 @@ A Forma Normal Negativa é uma representação canônica de fórmulas lógicas e
 
 Uma fórmula está na Forma Normal Negativa se:
 
-- Todos os operadores de negação $\neg $ são aplicados diretamente aos átomos, variáveis ou constantes.
-- Os únicos operadores lógicos usados são a negação $\neg $, a conjunção $\land $, e a disjunção $\lor $.
+- todos os operadores de negação $\neg $ são aplicados diretamente aos átomos, variáveis ou constantes.
+- usaremos apenas a negação $\neg $, a conjunção $\land $, e a disjunção $\lor $.
 
 #### Conversão para Forma Normal Negativa
 
@@ -2825,7 +2776,7 @@ Converter uma fórmula para a FND geralmente envolve os seguintes passos:
 
 **Exemplo 4**:: $(p \rightarrow q) \rightarrow (\neg r \vee s)$
 
-1. Primeiro, vamos eliminar as implicações, usando a equivalência \(p \rightarrow q \equiv \neg p \vee q\):
+1. Primeiro, vamos eliminar as implicações, usando a equivalência $p \rightarrow q \equiv \neg p \vee q$:
 
    $$(p \rightarrow q) \rightarrow (\neg r \vee s)$$
 
@@ -3077,7 +3028,7 @@ Partindo da mesma tabela verdade da expressão $(A \lor B) \rightarrow (C \land 
 
     Combinando-os com uma conjunção, temos a Forma Normal Conjuntiva:
 
-    $$(A \lor B) \rightarrow (C \land \neg A) = (\neg A \lor \neg B \lor \neg C \lor A) \land (\neg A \lor \neg B \lor C \lor A) \land (\neg A \lor B \lor \neg C \lor A) \land (\neg A \lor B \lor C \lor A) \land (A \lor \neg B \lor C \lor \neg A)$$
+    $$(A \lor B) \rightarrow (C \land \neg A) \equiv (\neg A \lor \neg B \lor \neg C \lor A) \\ \land (\neg A \lor \neg B \lor C \lor A) \land (\neg A \lor B \lor \neg C \lor A) \\ \land (\neg A \lor B \lor C \lor A) \land (A \lor \neg B \lor C \lor \neg A)$$
 
 Lamentavelmente, as tabelas verdade não têm utilidade na Lógica de Primeira Ordem quando usamos predicados e quantificadores. Skolemização e Forma Normal Prenex são as rotas que precisaremos dominar para desvendar esse enigma.
 
@@ -3572,13 +3523,13 @@ $$(A \rightarrow B) \land (B \lor C)$$
 
 **Fatos**:
 
-$Mentiroso(A)$
-$ verdadeiro(B)$
+$mentiroso(A)$
+$verdadeiro(B)$
 
 **Regra**:
 
 $$
-\forall x \forall y (Mentiroso(x) \wedge consulta(y, \text{Você é o verdadeiro?}) → Responde (x, \text{Sou o mentiroso}))
+\forall x \forall y (mentiroso(x) \wedge consulta(y, \text{Você é o verdadeiro?}) → Responde (x, \text{Sou o mentiroso}))
 $$
 
 **Consulta**:
@@ -3611,10 +3562,10 @@ $$ estáQuente (b_1)?$$
 **Problema 3 - O Agricultor, a Raposa, o Ganso e o Grão:** um agricultor quer atravessar um rio e levar consigo uma raposa, um ganso e um saco de grãos. O barco do agricultor só lhe permite levar um item além dele mesmo. Se a raposa e o ganso estiverem sozinhos, a raposa comerá o ganso. Se o ganso e o grão estiverem sozinhos, o ganso comerá o grão. Como o agricultor pode levar todas as suas posses para o outro lado do rio?
 
 **Fatos**:
-
-$raposa(r)$
-$ ganso(g)$
-$ grão(gr)$
+´´´ prolog
+raposa(r)
+ganso(g)
+grao(gr)
 
 **Regras**:
 
