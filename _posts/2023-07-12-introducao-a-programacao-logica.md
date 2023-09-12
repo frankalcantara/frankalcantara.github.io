@@ -120,29 +120,31 @@ Imagine, por um momento, que estamos explorando o universo dos computadores, mas
 
 Em vez de sermos forçados a ordenar cada detalhe do processo de solução de um problema, a Programação Lógica permite que declaremos o que queremos, e então deixar o computador fazer o trabalho de encontrar os detalhes e processos necessários para resolver cada problema.
 
-Na **Programação Imperativa** partimos de uma determinada expressão e seguimos um conjunto de instruções até encontrar o resultado desejado. O programador fornece um conjunto de instruções que definem o fluxo de controle e modificam o estado da máquina. O foco está em **como** o problema deve ser resolvido passo a passo. Exemplos de linguagens imperativas incluem C++, Java e Python.
+Na **Programação Imperativa** partimos de uma determinada expressão e seguimos um conjunto de instruções até encontrar o resultado desejado. O programador fornece um conjunto de instruções que definem o fluxo de controle e modificam o estado da máquina a cada passo. O foco está em **como** o problema deve ser resolvido. Exemplos de linguagens imperativas incluem C++, Java e Python.
 
-Na Programação Lógica, um dos paradigmas da **Programação Descritiva** usamos a dedução. Na Programação Descritiva, o programador fornece uma descrição lógica, ou funcional, de **o que** deve ser feito, sem especificar o fluxo de controle. O foco está no problema, não na solução. Exemplos incluem SQL, Prolog e Haskell. Na Programação Lógica, partimos de uma conjectura e, de acordo com um conjunto específico de regras, tentamos construir uma prova para esta conjectura.
+Na Programação Descritiva, o programador fornece uma descrição lógica, ou funcional, de **o que** deve ser feito, sem especificar o fluxo de controle. O foco está no problema, não na solução. Exemplos incluem SQL, Prolog e Haskell. Na Programação Lógica, partimos de uma conjectura e, de acordo com um conjunto específico de regras, tentamos construir uma prova para esta conjectura.
 
-Uma conjectura é uma suposição, ou proposição que é acreditada ser verdadeira mas ainda não foi provada. Uma sentença que declarativa que precisa ser verificada. Na linguagem natural, conjecturas são frequentemente expressas como declarações que precisam de confirmação adicional. Na Lógica de Primeira Ordem, as proposições são tratadas como sentenças que são criadas para serem verificadas em busca da sua verdade, ou não. Essas sentenças podem ser analisadas e testadas usando as regras e estruturas da Lógica de Primeira Ordem.
+Na Programação Lógica, um dos paradigmas da **Programação Descritiva** usamos a dedução. 
+
+Uma conjectura é uma suposição, ou proposição, que é acreditada ser verdadeira mas ainda não foi provada. Uma sentença declarativa que precisa ser verificada. Na linguagem natural, conjecturas são frequentemente expressas como declarações. Na Lógica de Primeira Ordem, as proposições são tratadas como sentenças que são criadas para serem verificadas na busca da sua verdade. Essas sentenças serão analisadas e testadas usando as regras e estruturas da Lógica de Primeira Ordem.
 
 ![Diagrama de Significado de Conjecturas](/assets/images/conjecturas.jpeg)
 
-Em resumo: **Imperativa:** focada no processo, no _como_ chegar à solução; **Descritiva:** focada no problema em si, no _o que_ precisa ser feito.
+Em resumo: **Imperativa:** focada no processo, no _como_ chegar à solução; **Descritiva:** focada no problema em si, no _o que_ precisa ser feito. Eu fico, sempre que posso escolho uma linguagem descritiva, apesar de estar praticamente sozinho nesta escolha.
 
-A escolha entre estes paradigmas dependerá da aplicação e do estilo do programador. mas o futuro parece cada vez mais orientado para linguagens declarativas e descritivas, que permitem ao programador concentrar-se no problema, não nos detalhes da solução. Efeito que parece ser evidente se considerarmos os avanços recentes no campo da inteligência artificial. Aqui, para tudo que possa vir, escolhemos a **Programação Lógica**.
+A escolha, pessoal e intransferível, entre estes paradigmas dependerá da aplicação que será construída, tanto quanto dependerá do estilo do programador. mas o futuro parece cada vez mais orientado para linguagens descritivas, que permitam ao programador concentrar-se no problema, não nos detalhes da solução. Efeito que parece ser evidente se considerarmos os avanços recentes no campo da inteligência artificial. Aqui, neste documento, para tudo que possa vir, escolhemos a **Programação Lógica**.
 
-Em nossa jornada, partiremos da Lógica de **Primeira Ordem** que iremos subdividir em elementos menores, interligados e interdependentes e, sem dúvida de mesma importância e valor: _lógica proposicional_ e _lógica predicativa_. É importante notar que muitos no campo acadêmico podem não entender as sutilezas desta divisão. A estes, deixo a justificativa, meio rota, meio esfarrapada da didática. Nesta jornada, iremos decompor a Lógica de Primeira Ordem em partes didaticamente interessantes, examinando cada uma como uma entidade distinta. Partiremos da _Lógica Proposicional_ com esperança de encontrar bons ventos.
+Em nossa jornada, percorreremos a **Lógica de Primeira Ordem**. Esta será a rota, iremos subdividir em elementos menores, interligados e interdependentes e, sem dúvida de mesma importância e valor: _lógica Proposicional_ e _lógica Predicativa_. Não deixe de notar que muitos no campo acadêmico podem não entender as sutilezas desta divisão. A estes, deixo a justificativa, meio rota e meio esfarrapada da necessidade do uso da didática. Partiremos da _Lógica Proposicional_ com esperança de encontrar bons ventos que nos levem ao conhecimento.
 
-A Lógica Proposicional, nosso porto de partida, é um tipo de linguagem matemática, suficientemente rica para expressar muitos dos problemas que precisamos resolver e suficientemente simples para que computadores possam lidar com ela. Ferramenta tão útil ao homem quanto a máquina. Quando esta ferramenta estiver conhecida mergulharemos no espírito da Lógica de Primeira Ordem, a Lógica Predicativa, ou Lógica de Predicados, e então poderemos fazer sentido do mundo.
+A Lógica Proposicional é um tipo de linguagem matemática, suficientemente rica para expressar muitos dos problemas que precisamos resolver e suficientemente simples para que computadores possam lidar com ela. Ferramenta tão útil ao homem quanto a máquina. Quando esta ferramenta estiver conhecida mergulharemos na alma da Lógica de Primeira Ordem, a Lógica Predicativa, ou Lógica de Predicados, e então poderemos fazer sentido do mundo.
 
 Vamos enfrentar a inferência e a dedução, duas ferramentas para extração de conhecimento de declarações lógicas. Voltando a metáfora do Detetive, podemos dizer que a inferência é quase como um detetive que tira conclusões a partir de pistas: temos algumas verdades e precisamos descobrir outras verdades que são consequências diretas das primeiras verdades.
 
-Vamos falar da Cláusula de Horn, um conceito um pouco mais estranho. Uma regra que torna todos os problemas expressos em lógica mais fácies de resolver. É como uma receita de bolo que, se corretamente seguida, torna o processo de cozinhar muito mais simples.
+Não nos furtaremos em falar da **Cláusula de Horn**, um conceito um pouco mais estranho. Uma regra que torna todos os problemas expressos em lógica mais fácies de resolver. É como um mapa que, se corretamente seguido, torna o processo de descobrir a verdade mais simples. Muito mais simples, eventualmente passível de ser automatizado.
 
-No final do dia, tudo que queremos, desde os tempos de [Gödel](https://en.wikipedia.org/wiki/Kurt_Gödel), [Turing](https://en.wikipedia.org/wiki/Alan_TurinQ) e [Church](https://en.wikipedia.org/wiki/Alonzo_ChurcR) é que nossas máquinas sejam capazes de resolver problemas complexos com o mínimo de interferência nossa. Queremos que eles pensem, ou pelo menos, que simulem o pensamento. A Programação Lógica é uma maneira deveras interessante de perseguir este objetivo.
+No final do dia, tudo que queremos, desde os tempos de [Gödel](https://en.wikipedia.org/wiki/Kurt_Gödel), [Turing](https://en.wikipedia.org/wiki/Alan_TurinQ) e [Church](https://en.wikipedia.org/wiki/Alonzo_ChurcR) é que nossas máquinas sejam capazes de resolver problemas complexos com o mínimo de interferência nossa. Queremos que eles pensem, ou pelo menos, que simulem o pensamento. Aqui, neste objetivo, entre pérolas do conhecimento humano, reluz a Programação Lógica.
 
-A Programação Lógica aparece em meados dos anos 1970 como uma evolução dos esforços das pesquisas sobre a prova computacional de teoremas matemáticos e inteligência artificial. Deste esforço surgiu a esperança de que poderíamos usar a lógica como um linguagem de programação, em inglês, _programming logic_ ou Prolog. Este artigo faz parte de uma série sobre a Programação Lógica, partiremos da base matemática e chegaremos ao Prolog.
+Historicamente o termo Programação Lógica aparece em meados dos anos 1970 como uma evolução dos esforços das pesquisas sobre a prova computacional de teoremas matemáticos e inteligência artificial. O homem fazendo máquinas capazes de raciocinar como o homem. Deste esforço surgiu a esperança de que poderíamos usar a lógica como uma linguagem de programação, em inglês, _programming logic_ ou Prolog. Aqui está a base deste conhecimento.
 
 # Lógica de Primeira Ordem
 
@@ -170,7 +172,7 @@ O alfabeto $\Sigma $ Pode ser dividido em conjuntos de símbolos agrupados por c
 
 Na lógica matemática, uma Fórmula Bem Formada, também conhecida como expressão bem formada, é uma sequência **finita** de símbolos que é formada de acordo com as regras gramaticais de uma linguagem lógica específica.
 
-Em lógica de primeira ordem, uma Fórmula Bem Formada é uma expressão que **só pode ser** verdadeira ou falsa. As Fórmulas Bem Formadas são compostas de quantificadores, variáveis, constantes, predicados, e conectivos lógicos, e devem obedecer a regras específicas de sintaxe.
+Em Lógica de Primeira Ordem, uma Fórmula Bem Formada é uma expressão que **só pode ser** verdadeira ou falsa. As Fórmulas Bem Formadas são compostas de quantificadores, variáveis, constantes, predicados, e conectivos lógicos, e devem obedecer a regras específicas de sintaxe.
 
 Em qualquer linguagem matemática regra sintática mais importante é a precedência das operações, uma espécie de receita. Que deve ser seguida à letra. Vamos nos restringir a seguinte ordem de precedência:
 
@@ -2601,21 +2603,21 @@ $$
 
 ## Problemas Interessantes Resolvidos com Lógica Proposicional e Predicativa
 
-Aqui estão cinco quebra-cabeças clássicos juntamente com suas soluções usando lógica de primeira ordem
+Aqui estão cinco quebra-cabeças clássicos juntamente com suas soluções usando Lógica de Primeira Ordem
 
 1. **Quebra-cabeça: O Mentiroso e o Verdadeiro**
  Você encontra dois habitantes: $A$ e $B$. Você sabe que um sempre diz a verdade e o outro sempre mente, mas você não sabe quem é quem. Você pergunta a $A$, _Você é o verdadeiro?_ A responde, mas você não consegue ouvir a resposta dele. $B$ então te diz, _A disse que ele é o mentiroso_.
 
  **Solução**: $B$ deve ser o verdadeiro e $A$ deve ser o mentiroso. Se $A$fosse o verdadeiro, ele nunca diria que é o mentiroso. Portanto, $A$ deve ser o mentiroso e $B$ deve ser o verdadeiro, independentemente do que $A$ disse.
 
- Usando lógica de primeira ordem: Vamos denotar a resposta de $A$ como $A$. Então o predicado $falaVerdade (A, a)$ será falso porque um verdadeiro nunca pode dizer que é um mentiroso. Portanto, $\neg falaVerdade (A, a)$ e daí, $falaVerdade (B, \neg a)$.
+ Usando Lógica de Primeira Ordem: Vamos denotar a resposta de $A$ como $A$. Então o predicado $falaVerdade (A, a)$ será falso porque um verdadeiro nunca pode dizer que é um mentiroso. Portanto, $\neg falaVerdade (A, a)$ e daí, $falaVerdade (B, \neg a)$.
 
 1. **Quebra-cabeça: As Três Lâmpadas**
  Existem três lâmpadas incandescentes em uma sala, e existem três interruptores fora da sala. Você pode manipular os interruptores o quanto quiser, mas só pode entrar na sala uma vez. Como você pode determinar qual interruptor opera qual lâmpada?
 
  **Solução**: ligue um interruptor e espere um pouco. Então desligue esse interruptor e ligue um segundo interruptor. Entre na sala. A lâmpada que está acesa corresponde ao segundo interruptor. A lâmpada que está desligada e quente corresponde ao primeiro interruptor. A lâmpada que está desligada e fria corresponde ao terceiro interruptor.
 
- Usando lógica de primeira ordem:
+ Usando Lógica de Primeira Ordem:
  Vamos denotar os interruptores como $s1, s2, s3$ e as lâmpadas como $b1, b2, b3$. Podemos definir predicados $On(b, s)$ e $Hot(b)$.
 
 $$On(b1, s2) \land Hot(b2) \land \neg (On(b3) \lor Hot(b3))$$
@@ -2625,7 +2627,7 @@ $$On(b1, s2) \land Hot(b2) \land \neg (On(b3) \lor Hot(b3))$$
 
  **Solução**: o agricultor leva o ganso através do rio primeiro, deixando a raposa e o grão no lado original. Ele deixa o ganso no outro lado e volta para pegar a raposa. Ele deixa a raposa no outro lado, mas leva o ganso de volta ao lado original para pegar o grão. Ele deixa o grão com a raposa no outro lado. Finalmente, ele retorna ao lado original mais uma vez para pegar o ganso.
 
- Usando lógica de primeira ordem:
+ Usando Lógica de Primeira Ordem:
  Podemos definir predicados $mesmoLado(x, y)$ e $come (x, y)$.
  A solução envolve a sequência de ações que mantêm as seguintes condições:
 
@@ -2638,7 +2640,7 @@ $$\neg (mesmoLado(Ganso, Grãos) \land \neg mesmoLado(Ganso, Fazendeiro))$$
 
  **Solução**: primeiro, $A$ e $B$Atravessam a ponte, o que leva 2 minutos. $A$ então pega a tocha e volta para o lado original, levando 1 minuto. $A$ fica no lado original enquanto $C$ e $D$Atravessam a ponte, levando 8 minutos. $B$ então pega a tocha e volta para o lado original, levando 2 minutos. Finalmente, $A$ e $B$Atravessam a ponte novamente, levando 2 minutos. No total, teremos $2+1+8+2+2=15$ minutos.
 
- Usando lógica de primeira ordem:
+ Usando Lógica de Primeira Ordem:
  Vamos denotar o tempo que cada pessoa leva para atravessar a ponte como $t_A, T_B, T_C, T_D$ e o tempo total como $t$. O problema pode ser representado da seguinte forma:
 
 $$(T_A + T_B + T_A + T_C + T_D + T_B + T_A) \leq T$$
@@ -2650,7 +2652,7 @@ Substituindo os valores dos tempos resulta em $15 \leq T$.
 
  **Solução**: o concorrente deve sempre mudar sua escolha. Inicialmente, a chance do prêmio estar atrás da porta escolhida é $1/3$ e a chance de estar atrás de uma das outras portas é $2/3$. Depois que o apresentador abre uma porta para revelar uma cabra, a chance do prêmio estar atrás da porta não escolhida e não aberta ainda é $2/3$.
 
- Usando lógica de primeira ordem:
+ Usando Lógica de Primeira Ordem:
  Vamos denotar as portas como $d1, d2, d3$ e o prêmio como $P$. Podemos definir um predicado $contemPremio(d)$. A solução pode ser representada pela seguinte condição:
 
 $$(contemPremio(d1) \land \neg contemPremio(d2) \land \neg contemPremio(d3)) \lor (contemPremio(d2) \land \neg contemPremio(d1) \land \neg contemPremio(d3)) \lor (contemPremio(d3) \land \neg contemPremio(d1) \land \neg contemPremio(d2))$$
@@ -3077,19 +3079,17 @@ Partindo da mesma tabela verdade da expressão $(A \lor B) \rightarrow (C \land 
 
     $$(A \lor B) \rightarrow (C \land \neg A) = (\neg A \lor \neg B \lor \neg C \lor A) \land (\neg A \lor \neg B \lor C \lor A) \land (\neg A \lor B \lor \neg C \lor A) \land (\neg A \lor B \lor C \lor A) \land (A \lor \neg B \lor C \lor \neg A)$$
 
-Infelizmente, não temos como usar tabelas verdades em fórmulas da Lógica de Primeira Ordem que contenham predicados, ou quantificadores. Para isso, teremos que usar métodos específicos de simplificação que permitirão aplicar as regras de equivalência. Estes métodos são a Skolemização e a Forma Normal Prenex.
+Lamentavelmente, as tabelas verdade não têm utilidade na Lógica de Primeira Ordem quando usamos predicados e quantificadores. Skolemização e Forma Normal Prenex são as rotas que precisaremos dominar para desvendar esse enigma.
 
 ### Skolemização
 
-A skolemização é uma técnica usada na conversão de fórmulas da lógica de primeira ordem para a Forma Normal Conjuntiva (FNC). Ela consiste em eliminar os quantificadores existenciais, substituindo as variáveis existenciais por constantes ou Funções Skolem. Considere a fórmula com um quantificador universal e um existencial:
+A Skolemização é uma técnica usada na Lógica de Primeira Ordem para eliminar quantificadores existenciais em fórmulas. Consiste em substituir as variáveis existenciais por Constantes ou Funções Skolem. Considere a fórmula a seguir com um quantificador universal e um existencial:
 
-$$\exists y P(x,y)$$
+$$\forall x \exists y P(x,y)$$
 
-Aplicando a skolemização, a variável existencial $y$ é substituída por uma Variável de Skolem $A$:
+Ao aplicar a skolemização, a variável existencial $y$ é substituída por uma Função de Skolem $f(x)$:
 
-$$P(x,a)$$
-
-Onde $A$ é uma função aplicada a variável, ou variáveis que ligadas aos quantificadores universais que estejam a esquerda do quantificador universal que será eliminado.
+$$P(x,f(x))$$
 
 Para uma fórmula com dois quantificadores universais e dois existenciais:
 
@@ -3099,39 +3099,47 @@ A skolemização resultará em:
 
 $$\forall x \forall z R(x,f(x),z,g(x,z))$$
 
-Onde $f(x)$ e $ g(x,z)$ são Funções Skolem introduzidas para substituir as variáveis existenciais $y$ e $w $ respectivamente. A escolha entre usar uma Constante Skolem ou uma Função Skolem durante a skolemização depende do escopo dos quantificadores na fórmula original.
+Onde $f(x)$ e $ g(x,z)$ são Funções Skolem introduzidas para substituir as variáveis existenciais $y$ e $w $ respectivamente. A escolha entre usar uma Constante Skolem ou uma Função Skolem durante a skolemização depende do escopo dos quantificadores na fórmula original. Aqui estão as regras e passos para realizar a skolemização de maneira mais explicativa:
 
-As regras são:
+**Passo 1: Identificar os Quantificadores Existenciais**: comece identificando os quantificadores existenciais na fórmula. 
 
-- Se a variável existencial não depende de nenhuma variável universal (nenhuma variável universal a domina), usa-se uma Constante de Skolem. Por exemplo: $\exists x P(x)$ skolemiza para $P(a)$, onde $A$ é uma constante.
+**Passo 2: Determinar se a Variável Existencial Depende de Variáveis Universais**: para cada variável ligada a um quantificador existencial, determinamos se ela depende ou não de alguma variável universal. Isso significa verificar se existem quantificadores universais que _dominam_ a variável existencial. Se a variável existencial não depende de variáveis universais, usamos uma Constante de Skolem. Caso contrário, usamos uma Função de Skolem que leva como parâmetros as variáveis universais que a dominam.
 
-- Se a variável existencial depende de alguma variável universal, usa-se uma Função de Skolem que recebe como parâmetros essas variáveis universais.
+**Passo 3: Substituir as Variáveis Existenciais**: agora, substituímos todas as variáveis existenciais na fórmula original de acordo com as decisões tomadas no Passo 2. Se usarmos Constantes de Skolem, substituímos as variáveis existenciais diretamente pelas constantes. Se usarmos Funções de Skolem, substituímos as variáveis existenciais pelas funções de Skolem aplicadas às variáveis universais apropriadas.
 
-Por exemplo: $\forall y \exists x \ P(x,y)$ skolemiza para $\forall y P(f(y), y)$, onde $f(y)$ é uma Função de Skolem.
+**Exemplo 1**: considere a Fórmula Bem Formada dada por: $\forall x \exists y \ P(x,y)$
 
-E em: $\forall x \forall z \exists y \ Q(x,y,z)$ skolemiza para $\forall x \forall z Q(x, g(x,z), z)$
+1. Identificamos o quantificador existencial que introduz a variável $y$.
 
-**Em resumo: use a Constante de Skolem se a variável existencial não depende de quantificadores universais e use a Função de Skolem dos universais que a dominam, caso a variável existencial dependa de quantificadores universais.**
+2. A variável $y$ não depende de nenhuma variável universal, então usamos uma Constante de Skolem, digamos $a$. A fórmula se torna:
 
-A skolemização permite eliminar quantificadores existenciais, substituindo-os por constantes ou funções. Isso é um passo fundamental na conversão de fórmulas quantizadas para a Forma Normal Conjuntiva, resultando em fórmulas equivalentes mas apenas com quantificadores universais e sem o uso de variáveis existenciais.
+    $$\forall x \ P(x,a)$$
+
+**Exemplo 2**: considere a fórmula original: $\forall x \forall z \exists y \ Q(x,y,z)$
+
+1. Identificamos o quantificador existencial que introduz a variável $y$.
+
+2. A variável $y$ depende de duas variáveis universais, $x$ e $z$. Portanto, usamos uma Função de Skolem, digamos $f(x,z)$. A fórmula se torna:
+
+    $$\forall x \forall z \ Q(x,f(x,z),z)$$
+
+Substituímos $y$ por $f(x,z)$, que é uma função que depende das variáveis universais $x$ e $z$.
+
+Em resumo, a skolemização simplifica fórmulas quantificadas, eliminando quantificadores existenciais e substituindo variáveis por Constantes ou Funções de Skolem, dependendo de sua relação com quantificadores universais. Isso auxilia na conversão de fórmulas quantificadas para a Forma Normal Conjuntiva e na simplificação da lógica.
 
 ### Forma Normal Prenex
 
-A Forma Normal Prenex  é uma forma padrão de representação para fórmulas da lógica de primeiro grau. Ela é caracterizada por ter todos os quantificadores movidos para a frente da fórmula, deixando a matriz da fórmula (a parte sem quantificadores) em uma forma livre de quantificadores. A Forma Normal Prenex é útil por:
+A Forma Normal Prenex é uma padronização para fórmulas da lógica de primeiro grau. Nela, todos os quantificadores são deslocados para a frente da fórmula, deixando a matriz da fórmula livre de quantificadores. A Forma Normal Prenex é vantajosa por três razões fundamentais:
 
-1.**Facilita a manipulação Lógica**: ao separar os quantificadores da matriz, a forma normal Prenex  simplifica a análise e manipulação da estrutura lógica da fórmula.
-2.**Preparação para Outras Formas Normais**: é um passo intermediário útil na conversão para outras formas normais, como as formas normais conjuntiva e disjuntiva.
-3.**Utilização em Provas Automáticas**: É comumente usada em métodos de prova automática, facilitando o raciocínio sobre quantificadores.
+1. **Facilitação da Manipulação Lógica**: ao separar os quantificadores da matriz, a Forma Normal Prenex simplifica a análise e manipulação da estrutura lógica da fórmula.
 
-Considere o seguinte exemplo:
+2. **Preparação para Outras Formas Normais**: Serve como uma etapa intermediária valiosa na conversão para outras formas normais, como as Forma Normal Conjuntiva e Forma Normal Disjuntiva.
 
-Dada a Fórmula original:
+3. **Uso em Provas Automáticas**: é amplamente empregada em métodos de prova automática, tornando o raciocínio sobre quantificadores mais acessível.
 
-$$
-\exists x \forall y (P(x,y) \wedge Q(y))
-$$
+Considere o seguinte exemplo, partindo da fórmula original: $\exists x \forall y (P(x,y) \wedge Q(y))$
 
-Ela será representada em Forma Prenex como:  
+Na Forma Prenex, esta fórmula será representada:
 
 $$
 \forall y \exists x (P(x,y) \wedge Q(y))
@@ -3139,33 +3147,33 @@ $$
 
 #### Estrutura da Forma Normal Prenex
 
-Uma fórmula na forma normal Prenex  tem a seguinte estrutura:
+Uma fórmula na Forma Normal Prenex segue uma estrutura específica definida por:
 
 $$
 Q_1 x_1 \, Q_2 x_2 \, \ldots \, Q_n x_n \, M(x_1, x_2, \ldots, x_n)
 $$
 
-onde:
+Nessa estrutura:
 
-- $Q_i$ são quantificadores, que podem ser universais $\forall$ ou existenciais $\exists $.
-- $x_i$ são as variáveis ligadas pelos quantificadores.
-- $M(x_1, x_2, \ldots, x_n)$ é a matriz da fórmula, que é uma expressão lógica sem quantificadores.
+- $Q_i$ são quantificadores, podendo ser universais $\forall$ ou existenciais $\exists$.
+- $x_i$ são as variáveis vinculadas pelos quantificadores.
+- $M(x_1, x_2, \ldots, x_n)$ representa a matriz da fórmula, uma expressão lógica sem quantificadores.
 
 #### Conversão para Forma Normal Prenex
 
 Converter uma fórmula para a Forma Normal Prenex  envolve os seguintes passos:
 
-1. **Eliminar Implicações**: Substitua todas as ocorrências de implicação por disjunções e negações.
+1. **Eliminar Implicações**: substitua todas as ocorrências de implicação por disjunções e negações.
 
-2. **Mover Negações para Dentro**: Use as leis de De Morgan para mover as negações para dentro dos quantificadores e proposições.
+2. **Mover Negações para Dentro**: use as leis de De Morgan para mover as negações para dentro dos quantificadores e proposições.
 
-3. **Padronizar Variáveis**: Certifique-se de que as variáveis ligadas a diferentes quantificadores sejam distintas.
+3. **Padronizar Variáveis**: certifique-se de que as variáveis ligadas a diferentes quantificadores sejam distintas.
 
-4. **Eliminar Quantificadores Existenciais**: Substitua os quantificadores existenciais por constantes ou funções Skolem, dependendo do contexto.
+4. **Eliminar Quantificadores Existenciais**: substitua os quantificadores existenciais por constantes ou funções Skolem, dependendo do contexto.
 
-5. **Mover Quantificadores para Fora**: Mova todos os quantificadores para a esquerda da expressão, mantendo a ordem relativa dos quantificadores universais e existenciais.
+5. **Mover Quantificadores para Fora**: mova todos os quantificadores para a esquerda da expressão, mantendo a ordem relativa dos quantificadores universais e existenciais.
 
-A forma normal Prenex  é uma representação canônica de fórmulas da lógica de primeiro grau que separa claramente os quantificadores da matriz da fórmula. Ela é uma ferramenta valiosa na lógica e na teoria da prova, e sua compreensão é fundamental para trabalhar com lógica de primeiro grau.
+A Forma Normal Prenex  é uma representação canônica de fórmulas da lógica de primeiro grau que separa claramente os quantificadores da matriz da fórmula. Ela é uma ferramenta valiosa na lógica e na teoria da prova, e sua compreensão é fundamental para trabalhar com lógica de primeiro grau.
 
 #### Regras de Equivalência Prenex
 
@@ -3372,7 +3380,7 @@ $$(\text{Animal}(x) \land \neg \text{Corre}(x)) \lor (\neg \text{Pássaro}(y) \l
 
 A **Cláusula de Horn** foi nomeada em homenagem ao matemático e lógico americano [Alfred Horn](https://en.wikipedia.org/wiki/Alfred_Horn), que a introduziu em [um artigo publicado em 1951](https://www.cambridge.org/core/journals/journal-of-symbolic-logic/article/abs/on-sentences-which-are-true-of-direct-unions-of-algebras1/DF348CB269B06D6702DA3AE4DCF38C39). O contexto histórico e a motivação para a introdução da Cláusula de Horn são profundamente enraizados na solução do Problema da Decidibilidade. Na primeira metade do século XX, a lógica matemática estava focada na questão da decidibilidade: determinar se uma afirmação lógica é verdadeira ou falsa de maneira algorítmica.
 
-Não demorou muito para os matemáticos perceberem que a Lógica de Primeira Ordem é poderosa, mas pode ser ineficientes para resolver os problemas relacionados ao Problema da Decidibilidade. A busca por formas mais eficientes de resolução levou ao estudo de subconjuntos restritos da lógica de primeira ordem, onde a decidibilidade poderia ser alcançada de maneira mais eficiente. Aqui, eficiência significa o menor custo computacional, no menor tempo.
+Não demorou muito para os matemáticos perceberem que a Lógica de Primeira Ordem é poderosa, mas pode ser ineficientes para resolver os problemas relacionados ao Problema da Decidibilidade. A busca por formas mais eficientes de resolução levou ao estudo de subconjuntos restritos da Lógica de Primeira Ordem, onde a decidibilidade poderia ser alcançada de maneira mais eficiente. Aqui, eficiência significa o menor custo computacional, no menor tempo.
 
 Alfred Horn identificou um desses subconjuntos em seu artigo de 1951, introduzindo o que agora é conhecido como **Cláusula de Horn**. Ele mostrou que esse subconjunto particular tem propriedades interessantes que permitem a resolução em tempo polinomial, tornando-o atraente para aplicações práticas.
 
@@ -3380,7 +3388,7 @@ Se prepare vamos ver porque $P \lor \neg Q \lor \neg R $ é uma Cláusula de Hor
 
 ### Definição da Cláusula de Horn
 
-A **Cláusula de Horn** é uma forma especial de cláusula na lógica de primeira ordem. Ela é caracterizada por **ter no máximo um literal positivo**.
+A **Cláusula de Horn** é uma forma especial de cláusula na Lógica de Primeira Ordem. Ela é caracterizada por **ter no máximo um literal positivo**.
 
 #### Forma Geral
 
@@ -3488,7 +3496,7 @@ Imagine que estamos construindo um sistema lógico para diagnosticar doenças co
 
 Os quantificadores podem ser incluídos nas Cláusulas de Horn. Contudo, é importante notar que a forma padrão de Cláusulas de Horn em programação lógica geralmente lida com quantificação de maneira implícita. A quantificação universal é comum e é geralmente assumida em regras, enquanto a quantificação existencial é muitas vezes tratada através de fatos específicos ou construção de termos.
 
-Precisamos tomar cuidado porque a inclusão explícita de quantificadores pode levar a uma lógica de primeira ordem mais rica, permitindo expressões mais complexas e poderosas. No entanto, isso também pode aumentar a complexidade do raciocínio e da resolução.
+Precisamos tomar cuidado porque a inclusão explícita de quantificadores pode levar a uma Lógica de Primeira Ordem mais rica, permitindo expressões mais complexas e poderosas. No entanto, isso também pode aumentar a complexidade do raciocínio e da resolução.
 
 #### Usando o Quantificador Universal em Cláusulas de Horn
 
