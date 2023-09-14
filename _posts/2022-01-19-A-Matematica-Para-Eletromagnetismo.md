@@ -48,6 +48,7 @@ Imagem de [Asimina Nteliou](https://pixabay.com/users/asimina-1229333/?utm_sourc
     - [Fluxo e a Lei de Gauss](#fluxo-e-a-lei-de-gauss)
     - [Teorema da Divergência](#teorema-da-divergência)
     - [Propriedades da Divergência](#propriedades-da-divergência)
+  - [Rotacional](#rotacional)
 
 Trataremos de linhas de força invisíveis que se entrelaçam, tangenciam e interferem umas nas outras, formando o tecido do Cosmos e o fluxo da vida, tão real quanto a terra sob os pés ou o ar que respiramos, e como este último, completamente invisíveis.
 
@@ -219,6 +220,7 @@ A multiplicação por escalar é comutativa, associativa, distributiva e fechada
 
 <p class="exp">
 <b>Em resumo:</b> <br><br>
+
 \[mA=Am\]
 
 \[m(nA) = (mn)A\]
@@ -300,6 +302,7 @@ Essas propriedades são fundamentais para a manipulação de vetores em muitos c
 
 <p class="exp">
 <b>Em Resumo:</b> <br><br>
+
 \[A+B=B+A\]
 
 \[A+(B+C)=(A+B)+C\]
@@ -332,15 +335,16 @@ $D$, a distância entre $P$ e $Q$, será geometricamente representado por uma se
 <p class="exp">
 <b>Exemplo: 5</b> considerando que $P$ esteja no ponto $(3,2,-1)$ e $Q$ esteja no ponto $(1,-2,3)$. Logo, o vetor distância $D_{PQ}$ será dado por: <br><br>
 <b>Solução:</b>
-\[D_{PQ} = R_P - R_Q \]
+
+\[D_{PQ} = R_P - R_Q\]
 
 Logo:
 
-\[D_{PQ} = (P_x-Q_x)a_x + (P_y-Q_y)a_y+(P_z-Q_z)a_z \]
+\[D_{PQ} = (P_x-Q_x)a_x + (P_y-Q_y)a_y+(P_z-Q_z)a_z\]
 
-\[D_{PQ} = (3-1)a_x+(3-(-2))a_y+((-1)-3)a_z \]
+\[D_{PQ} = (3-1)a_x+(3-(-2))a_y+((-1)-3)a_z\]
 
-\[D_{PQ} = 2a_x+5a_y-4a_z \]
+\[D_{PQ} = 2a_x+5a_y-4a_z\]
 
 </p>
 
@@ -350,7 +354,7 @@ Logo:
 <b>Solução:</b><br>
 <b>(a)</b> o vetor $A$ será o vetor posição do ponto $P_1(4,3,2)$ dado por:
 
-\[A = 4a_x+4a_y+3a_z\]
+$$A = 4a_x+4a_y+3a_z$$
 
 <b>(b)</b> para determinar um vetor unitário que parte da origem e atinge o ponto médio do segmento de reta formado pelos pontos $P_1$ e $P_2$ precisamos primeiro encontrar este ponto médio $P_M$. Então:
 
@@ -368,17 +372,17 @@ Para calcular o vetor unitário na direção do vetor $P_M$ teremos:
 
 <b>(c)</b> finalmente, para calcular o perímetro do triângulo formado por: $P_1(4,4,3)$, $P_2(-2,0,5)$ e $P_3(7,-2,1)$, precisaremos somar os módulos dos vetores distância ente $P_1(4,3,2)$ e $P_2(-2,0,5)$, $P_2(-2,0,5)$ e $P_3(7,-2,1)$ e $P_3(7,-2,1)$ e $P_1(4,3,2)$.
 
-\[ \vert P_1P_2 \vert = \vert (4,4,3)-(-2,0,5) \vert = \vert (6,4,-2) \vert \]
+\[ \vert P_1P_2 \vert = \vert (4,4,3)-(-2,0,5) \vert = \vert (6,4,-2) \vert\]
 
-\[ \vert P_1P_2 \vert = \sqrt{6^2+4^2+2^2}=7,48\]
+\[ \vert P_1P_2 \vert = \sqrt{6^2+4^2+2^2}=7,48$$
 
-\[ \vert P_2P_3 \vert = \vert (-2,0,5)-(7,-2,1) \vert = \vert (-9,2,-4) \vert \]
+\[ \vert P_2P_3 \vert = \vert (-2,0,5)-(7,-2,1) \vert = \vert (-9,2,-4) \vert\]
 
 \[ \vert P_2P_3 \vert = \sqrt{9^2+2^2+4^2}=10,05\]
 
-\[ \vert P_3P_1 \vert = \vert (7,-2,1)-(4,4,3) \vert = \vert (3,-6,-2) \vert \]
+\[ \vert P_3P_1 \vert = \vert (7,-2,1)-(4,4,3) \vert = \vert (3,-6,-2) \vert\]
 
-\[ \vert P_3P_1 \vert = \sqrt{3^2+6^2+6^2}=7 \]
+\[ \vert P_3P_1 \vert = \sqrt{3^2+6^2+6^2}=7\]
 
 Sendo assim o perímetro será:
 
@@ -440,7 +444,9 @@ Calculando os módulos de $A$ e $B$, teremos:
 
 Com o Produto Escalar e os módulos dos vetores podemos aplicar nossa equação analítica:
 
-\[ A\cdot B =|A||B|cos(\theta)\] logo:
+\[ A\cdot B =|A||B|cos(\theta)\] 
+
+logo:
 
 \[ 6 =(5,1)(5,48)cos(\theta) \therefore cos(\theta) = \frac{6}{27,95}=0,2147 \]
 
@@ -598,7 +604,7 @@ Cuidado com os determinantes, o Chapeleiro não ficou louco por causa do chumbo,
 <b>Solução:</b><br>
 (a) Vamos começar com o Produto Vetorial:
 
-\[
+$$
 A\times B=\begin{vmatrix}
 a_x & a_y & a_z\\
 A_x & A_y & A_z\\
@@ -608,11 +614,11 @@ a_x & a_y & a_z\\
 1 & 2 & 3\\
 4 & 5 & -6
 \end{vmatrix}
-\]
+$$
 
 Que será reduzida a:
 
-\[
+$$
 A \times B= \begin{vmatrix}
 2 & 3\\
 5 & -6
@@ -623,49 +629,49 @@ A \times B= \begin{vmatrix}
 1 & 2\\
 4 & 5
 \end{vmatrix}a_z
-\]
+$$
 
 Usando Sarrus em cada uma destas matrizes teremos:
 
-\[A\times B=(2(-6) - 3(5))a_x-(1(-6)-3(4))a_y+(1(5)-2(4))a_z\]
+$$A\times B=(2(-6) - 3(5))a_x-(1(-6)-3(4))a_y+(1(5)-2(4))a_z$$
 
-\[A\times B=-27a_x+18a_y-3a_z\]
+$$A\times B=-27a_x+18a_y-3a_z$$
 
 Esta foi a parte difícil, agora precisamos dos módulos, magnitudes, dos vetores $A$ e $B$.
 
-\[\vert A \vert = \sqrt{1^2+2^2+3^2} = \sqrt{14} \approx 3.74165\]
+$$\vert A \vert = \sqrt{1^2+2^2+3^2} = \sqrt{14} \approx 3.74165$$
 
-\[\vert B \vert = \sqrt{4^2+5^2+6^2} = \sqrt{77} \approx 8.77496\]
+$$\vert B \vert = \sqrt{4^2+5^2+6^2} = \sqrt{77} \approx 8.77496$$
 
 Para calcular o ângulo vamos usar a equação analítica, ou trigonométrica, do Produto Vetorial:
 
-\[A \times B = \vert A \vert  \vert B \vert sen(\theta_{AB}) a_n\]
+$$A \times B = \vert A \vert  \vert B \vert sen(\theta_{AB}) a_n$$
 
 A forma mais fácil de resolver este problema é aplicar o módulo aos dois lados da equação. Se fizermos isso, teremos:
 
-\[\vert A \times B \vert = \vert A \vert  \vert B \vert sen(\theta_{AB}) \vert a_n \vert \]
+$$\vert A \times B \vert = \vert A \vert  \vert B \vert sen(\theta_{AB}) \vert a_n \vert $$
 
 Como $a_n$ é um vetor unitário, por definição $\vert a_n \vert = 1$ logo:
 
-\[\vert A \times B \vert = \vert A \vert  \vert B \vert sen(\theta_{AB})\]
+$$\vert A \times B \vert = \vert A \vert  \vert B \vert sen(\theta_{AB})$$
 
 Ou, para ficar mais claro:
 
-\[sen(\theta_{AB}) = \frac{\vert A \times B \vert}{\vert A \vert \vert B \vert}\]
+$$sen(\theta_{AB}) = \frac{\vert A \times B \vert}{\vert A \vert \vert B \vert}$$
 
 Os módulos de $A$ e $B$ já tenos, precisamos apenas do módulo de $A\times B$.
 
-\[
+$$
 \vert A\times B \vert = \sqrt{27^2+16^2+3^2} = \sqrt{994} \approx 31.5298
-\]
+$$
 
 Assim o seno do ângulo $\theta_{AB}$ será dado por:
 
-\[sen(\theta_{AB}) = \frac{\sqrt{994}}{(\sqrt{14})(\sqrt{77})} \approx \frac{31.5298}{(3.74165)(8.77496)}\]
+$$sen(\theta_{AB}) = \frac{\sqrt{994}}{(\sqrt{14})(\sqrt{77})} \approx \frac{31.5298}{(3.74165)(8.77496)}$$
 
-\[sen(\theta_{AB}) = 0.960316\]
+$$sen(\theta_{AB}) = 0.960316$$
 
-\[ \theta_{AB} =73.8^0 \]
+$$ \theta_{AB} =73.8^0 $$
 
 </p>
 
@@ -840,11 +846,11 @@ Por exemplo, se temos uma função $\mathbf{f}(x, y)$, a derivada parcial de $\m
 
 (a) A intensidade em um ponto é trivial, trata-se apenas da aplicação das coordenadas do ponto desejado na função do campo. Sendo assim:
 
-\[\mathbf{f}(x,y) = 10sin(\frac{x^2}{5})+4y\]
+$$\mathbf{f}(x,y) = 10sin(\frac{x^2}{5})+4y$$
 
-\[\mathbf{f}(2,3) = 10sin(\frac{2^2}{5})a_x+4(3)a_y\]
+$$\mathbf{f}(2,3) = 10sin(\frac{2^2}{5})a_x+4(3)a_y$$
 
-\[\mathbf{f}(2,3) = 7.17356a_x+12a_y\]
+$$\mathbf{f}(2,3) = 7.17356a_x+12a_y$$
 
 (b) agora precisamos calcular o gradiente. O gradiente de uma função $\mathbf{f}(x, y)$ é um vetor que consiste nas derivadas parciais da função com respeito a cada uma de suas variáveis que representam suas coordenadas. <br><br>
 
@@ -852,57 +858,57 @@ Vamos calcular as derivadas parciais de $\mathbf{f}$ com respeito a $x$ e $y$, p
 
 Primeiro, a derivada parcial de $f$ com respeito a $x$ é dada por:
 
-\[
+$$
 \frac{\partial \mathbf{f}}{\partial x} = \frac{\partial}{\partial x} \left[10\sin\left(\frac{x^2}{5}\right) + 4y\right]
-\]
+$$
 
 Nós podemos dividir a expressão em duas partes e calcular a derivada de cada uma delas separadamente. A derivada de uma constante é zero, então a derivada de $4y$ com respeito a $x$ é zero. Agora, vamos calcular a derivada do primeiro termo:
 
-\[
+$$
 \frac{\partial}{\partial x} \left[10\sin\left(\frac{x^2}{5}\right)\right] = 10\cos\left(\frac{x^2}{5}\right) \cdot \frac{\partial}{\partial x} \left[\frac{x^2}{5}\right]
-\]
+$$
 
 Usando a regra da cadeia, obtemos:
 
-\[
+$$
 10\cos\left(\frac{x^2}{5}\right) \cdot \frac{2x}{5} = \frac{20x}{5}\cos\left(\frac{x^2}{5}\right) = 4x\cos\left(\frac{x^2}{5}\right)
-\]
+$$
 
 Portanto, a derivada parcial de $\mathbf{f}$ com respeito a $x$ é:
 
-\[
+$$
 \frac{\partial \mathbf{f}}{\partial x} = 4x\cos\left(\frac{x^2}{5}\right)
-\]
+$$
 
 Agora, vamos calcular a derivada parcial de $\mathbf{f}$ com respeito a $y$:
 
-\[
+$$
 \frac{\partial \mathbf{F}}{\partial y} = \frac{\partial}{\partial y} \left[10\sin\left(\frac{x^2}{5}\right) + 4y\right]
-\]
+$$
 
 Novamente, dividindo a expressão em duas partes, a derivada do primeiro termo com respeito a $y$ é zero (pois não há $y$ no termo), e a derivada do segundo termo é $4$. Portanto, a derivada parcial de $\mathbf{f}$ com respeito a $y$ é:
 
-\[
+$$
 \frac{\partial \mathbf{F}}{\partial y} = 4
-\]
+$$
 
 Assim, o gradiente de $\mathbf{f}$ é dado por:
 
-\[
+$$
 \nabla \mathbf{F} = \left[\frac{\partial \mathbf{F}}{\partial x}, \frac{\partial \mathbf{F}}{\partial y}\right] = \left(4x\cos\left(\frac{x^2}{5}\right), 4\right)
-\]
+$$
 
 E esta é a equação que define o gradiente. Para saber o valor do gradiente no ponto $P$ tudo que precisamos é aplicar o ponto na equação então:
 
-\[
+$$
 \nabla \mathbf{F}(2,3) = \left( 4(2)\cos\left(\frac{2^2}{5}\right), 4\right) = \left(  5.57365, 4 \right)
-\]
+$$
 
 Ao derivarmos parcialmente o Campo Vetorial $\mathbf{f}$ escolhemos nosso Sistema de Coordenadas. Sendo assim:
 
-\[
+$$
 \nabla \mathbf{f}(2,3) = 5.57365 a_x+ 4a_y
-\]
+$$
 </p>
 
 Assim como um navegador considera a variação da profundidade do oceano em diferentes direções para traçar a rota mais segura, a derivada parcial nos ajuda a entender como uma função se comporta quando mudamos suas variáveis de entrada. O gradiente é a forma de fazermos isso em todas as dimensões, derivando em uma incógnita de cada vez.
@@ -933,47 +939,47 @@ O reino do gradiente é o reino dos Campos Escalares, o gradiente tem caracterí
 
 1. **Linearidade**: O gradiente é uma operação linear. Isso significa que para quaisquer campos escalares $f$ e $g$, e quaisquer constantes $a$ e $b$, temos:
 
-$$
-  \nabla (af + bg) = a \nabla f + b \nabla g
-$$
+    $$
+      \nabla (af + bg) = a \nabla f + b \nabla g
+    $$
 
-O gradiente de uma soma de funções é a soma dos gradientes das funções, cada um ponderado por sua respectiva constante.
+    O gradiente de uma soma de funções é a soma dos gradientes das funções, cada um ponderado por sua respectiva constante.
 
 2. **Produto por Escalar**: O gradiente de uma função escalar multiplicada por uma constante é a constante vezes o gradiente da função. Para uma função escalar $f$ e uma constante $a$, teremos:
 
-$$
-\nabla (af) = a \nabla f
-$$
+    $$
+    \nabla (af) = a \nabla f
+    $$
 
 3. **Regra do Produto**: Para o produto de duas funções escalares $f$ e $g$, a regra do produto para o gradiente é dada por:
 
-$$
-\nabla (fg) = f \nabla g + g \nabla f
-$$
+    $$
+    \nabla (fg) = f \nabla g + g \nabla f
+    $$
 
-Esta é a versão para gradientes da regra do produto para derivadas no cálculo unidimensional.
+    Esta é a versão para gradientes da regra do produto para derivadas no cálculo unidimensional.
 
 4. **Regra da Cadeia**: Para a função composta $f(g(x))$, a regra da cadeia para o gradiente será dada por:
 
-$$
-\nabla f(g(x)) = (\nabla g(x)) f'(g(x))
-$$
+    $$
+    \nabla f(g(x)) = (\nabla g(x)) f'(g(x))
+    $$
 
-Esta é a extensão da regra da cadeia familiar do cálculo unidimensional.
+    Esta é a extensão da regra da cadeia familiar do cálculo unidimensional.
 
 Estas propriedades, como as leis imutáveis da física, regem a conduta do gradiente em sua jornada através dos campos escalares. No palco do eletromagnetismo, o gradiente desempenha um papel crucial na descrição de como os Campos Elétrico e Magnético variam no espaço.
 
 1. **Campo Elétrico e Potencial Elétrico**: o campo elétrico é o gradiente negativo do potencial elétrico. Isso significa que o Campo Elétrico aponta na direção de maior variação do potencial elétrico, formalmente expresso como:
 
-$$
- \mathbf{E} = -\nabla V
-$$
+    $$
+    \mathbf{E} = -\nabla V
+    $$
 
-Aqui, $\mathbf{E}$ é o Campo Elétrico e $V$ é o potencial elétrico. O gradiente, portanto, indica a encosta, o aclive, mais íngreme que uma partícula carregada experimentaria ao mover-se no Campo Elétrico.
+    Aqui, $\mathbf{E}$ é o Campo Elétrico e $V$ é o potencial elétrico. O gradiente, portanto, indica a encosta, o aclive, mais íngreme que uma partícula carregada experimentaria ao mover-se no Campo Elétrico.
 
 2. **Campo Magnético**: o Campo Magnético não é o gradiente de nenhum potencial escalar, **O Campo Magnético é um campo vetorial cuja divergência é zero**. No entanto, em situações estáticas ou de baixas frequências, pode-se definir um potencial vetorial $\mathbf{A}$ tal que:
 
-$$ \mathbf{B} = \nabla \times \mathbf{A} $$
+    $$ \mathbf{B} = \nabla \times \mathbf{A} $$
 
 Essas propriedades do gradiente são como setas, apontando o caminho através das complexidades do eletromagnetismo. O gradiente é a ferramenta mais simples do nosso canivete suíço do cálculo vetorial.
 
@@ -1035,32 +1041,60 @@ No universo dos campos vetoriais, a divergência tem propriedades matemáticas d
 
 1. **Linearidade**: A divergência é uma operação linear. Isso significa que para quaisquer campos vetoriais $\mathbf{F}$ e $mathbf{G}$, e quaisquer escalares $a$ e $b$, temos:
 
-$$
-    \nabla \cdot (a\mathbf{F} + b\mathbf{G}) = a (\nabla \cdot \mathbf{F}) + b (\nabla \cdot \mathbf{G})
-$$
+    $$
+        \nabla \cdot (a\mathbf{F} + b\mathbf{G}) = a (\nabla \cdot \mathbf{F}) + b (\nabla \cdot \mathbf{G})
+    $$
 
-A divergência de uma soma é a soma das divergências, com cada divergência ponderada por seu respectivo escalar.
+    A divergência de uma soma é a soma das divergências, com cada divergência ponderada por seu respectivo escalar.
 
 2. **Produto por Escalar**: A divergência de um campo vetorial multiplicado por um escalar é o escalar vezes a divergência do campo vetorial. Para um campo vetorial $\mathbf{F}$ e um escalar $a$, temos:
 
-$$
-    \nabla \cdot (a\mathbf{F}) = a (\nabla \cdot \mathbf{F})
-$$
+    $$
+        \nabla \cdot (a\mathbf{F}) = a (\nabla \cdot \mathbf{F})
+    $$
 
 3. **Divergência de um Produto**: A divergência de um produto de um campo escalar $\phi$ e um campo vetorial $\mathbf{F}$ é dado por:
 
-$$
-\nabla \cdot (\phi \mathbf{F}) = \phi (\nabla \cdot \mathbf{F}) + \mathbf{F} \cdot (\nabla \phi)
-$$
+    $$
+    \nabla \cdot (\phi \mathbf{F}) = \phi (\nabla \cdot \mathbf{F}) + \mathbf{F} \cdot (\nabla \phi)
+    $$
 
 Este é o análogo vetorial do produto de regra para derivadas no cálculo unidimensional.
 
 4. **Divergência do Rotação**: A divergência do rotacional de qualquer campo vetorial é sempre zero:
 
-$$
-   \nabla \cdot (\nabla \times \mathbf{F}) = 0
-$$
+    $$
+      \nabla \cdot (\nabla \times \mathbf{F}) = 0
+    $$
 
 Esta propriedade é um reflexo do fato de que as linhas de campo do rotacional de um campo vetorial são sempre fechadas, sem início ou fim. Não se preocupe, ainda, já, já, chegaremos ao rotacional.
 
 Essas propriedades são como as leis inabaláveis que governam o comportamento da divergência em sua jornada através dos campos vetoriais.
+
+## Rotacional
+
+Imagine estar no meio de um tornado, onde o vento gira em um padrão circular em torno de um ponto central. O movimento deste vento pode ser descrito como um campo vetorial, que tem tanto uma direção quanto uma magnitude em cada ponto no espaço. Agora, considere um pequeno ponto neste campo - o rotacional é uma operação matemática que lhe dirá quão rapidamente e em que direção o vento está girando em torno deste ponto.
+
+Para entender isso, vamos recorrer à matemática. **O rotacional é um operador diferencial que atua sobre um campo vetorial, produzindo outro campo vetorial que descreve a rotação local do campo original**. Se considerarmos um campo vetorial em três dimensões, representado por $\mathbf{F}(x, y, z)$, o rotacional desse campo será dado por:
+
+$$
+\nabla \times \mathbf{F} = \left(\frac{\partial F_z}{\partial y} - \frac{\partial F_y}{\partial z}\right)\mathbf{i} + \left(\frac{\partial F_x}{\partial z} - \frac{\partial F_z}{\partial x}\right)\mathbf{j} + \left(\frac{\partial F_y}{\partial x} - \frac{\partial F_x}{\partial y}\right)\mathbf{k}
+$$
+
+Esta operação fornece uma descrição da rotação em cada ponto no espaço, sendo um vetor perpendicular ao plano de rotação, cuja magnitude representa a velocidade de rotação. Em outras palavras, **o rotacional de um campo vetorial em um ponto particular indica quão _giratório_ é o campo naquele ponto**.
+
+Imagine agora que você está no meio de um rio, onde a água gira em torno de algumas pedras, criando redemoinhos. O rotacional, nesse caso, poderia descrever como a água gira em torno desses pontos, permitindo-nos entender a dinâmica do fluxo de água neste rio.
+
+É como uma dança, onde cada ponto no espaço executa uma rotação única, formando uma coreografia complexa e bela. Esta coreografia é o campo vetorial em questão. Entender o rotacional permite desvendar os segredos por trás dos padrões de fluxo em campos vetoriais, sejam eles campos de vento, campos magnéticos ou correntes de água.
+
+No contexto do eletromagnetismo, o rotacional tem uma aplicação crucial, especialmente ao considerarmos as Equações de Maxwell. Uma das equações de Maxwell, especificamente a Lei de Ampère-Maxwell, é expressa como
+
+$$
+\nabla \times \mathbf{B} = \mu_0 \mathbf{J} + \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}
+$$
+
+onde $\nabla \times \mathbf{B}$ é o rotacional do campo magnético $\mathbf{B}$, $\mu_0$ é a permeabilidade do vácuo, $\mathbf{J}$ é a densidade de corrente elétrica e $\frac{\partial \mathbf{E}}{\partial t}$ é a variação do campo elétrico com relação ao tempo. 
+
+A Lei de Ampére-Maxwell representa a relação entre a corrente elétrica variável no tempo e o campo magnético rotativo que é gerado, sendo uma descrição matemática do fenômeno da indução eletromagnética. Desta forma, a operação do rotacional serve como uma ponte para unir e descrever fenômenos eletromagnéticos interdependentes, facilitando a análise e compreensão das interações complexas entre campos elétricos e magnéticos, essencial para a física moderna e inovações tecnológicas.
+
+
