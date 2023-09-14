@@ -28,7 +28,7 @@ $$0,125 = \frac{1}{10}+\frac{2}{100}+\frac{5}{1000} = \frac{1}{10^1}+\frac{2}{10
 
 > "Deus criou os inteiros, todo o resto é trabalho dos homens." Leopold Kronecker
 
-Infelizmente, errar é humano e precisão na representação de números reais através de operações fracionárias é uma ocorrência rara. Isso terá um impacto imprevisto e abrangente em todos os sistemas computacionais desenvolvidos a partir das ideias de [Touring](https://en.wikipedia.org/wiki/Alan_Turing).
+Infelizmente, errar é humano e, além disso, a exatidão na representação de números reais através de operações fracionárias é uma ocorrência rara. Esta imprecisão na representação de números reais terá um impacto imprevisto e abrangente em todos os sistemas computacionais que temos até hoje, desenvolvidos com base nas ideias de [Touring](https://en.wikipedia.org/wiki/Alan_Turing).
 
 Tome, por exemplo, a razão $\frac{1}{6}$ e tente representá-la em números reais sem arredondar, ou truncar. A leitora verá, muito rapidamente, que seremos forçados a parar e arredondar, ou truncar. Obteremos, invariavelmente, algo como $0,166667$. O momento onde vamos parar determina a precisão que usaremos para representar este número e a precisão será, por sua vez, imposta, ou sugerida, apenas pelo uso que daremos a este número. Nesta sentença a palavra uso é importante. É Este que define o modelo que usaremos para resolver um problema. Todos os problemas são diferentes e todos os modelos serão diferentes.
 
