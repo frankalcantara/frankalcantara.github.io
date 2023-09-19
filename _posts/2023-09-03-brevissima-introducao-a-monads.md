@@ -30,15 +30,27 @@ Com uma estrutura bem planejada, este percurso não só serve como uma introduç
 
 ## Conjuntos
 
-Um conjunto é uma coleção de coisas, qualquer coisa. Como um rebanho de ovelhas. Todas diferentes. Um conjunto pode ser finito ou infinito. Um exemplo de conjunto finito é o rebanho de ovelhas, um exemplo de conjunto infinito é o conjunto dos números inteiros $\mathbb{N}$ que contém $0$, $1$, $2$, $3$ e assim por diante, sem fim. Para realmente entendermos os conjuntos recorremos a matemática.
+No século XVII, matemáticos como [John Wallis](https://en.wikipedia.org/wiki/John_Wallis) e [Isaac Newton](https://en.wikipedia.org/wiki/Isaac_Newton) já utilizavam conjuntos de maneira informal em suas obras. [Leonhard Euler](https://en.wikipedia.org/wiki/Leonhard_Euler), no século XVIII, introduziu noções primitivas de conjuntos e funções em seus trabalhos.
 
-Na matemática, um conjunto é uma coleção bem definida de objetos distintos. Os elementos de um conjunto podem ser qualquer coisa: números, pessoas, figuras geométricas. Qualquer coisa pode ser um elemento e, independente do conjunto, e dos seus elementos, na matemática todos os elementos serão representados por símbolos. Se $a$ é um elemento do conjunto $A$, nós escrevemos $a \in A$. Este $\in$ é o símbolo de pertencimento, dizemos que $a$ pertence a $A$. Mas, não para aí. A história dos conjuntos na matemática é longa.
+O ano de 1874 assistiu [Georg Cantor](https://en.wikipedia.org/wiki/Georg_Cantor) introduzir ao mundo à teoria dos conjuntos. Primeiramente delineada em _Über eine Eigenschaft des Inbegriffes aller reellen algebraischen Zahlen_ (Sobre uma propriedade do conjunto de todos os números algébricos reais), o trabalho pousou com força no [Journal de Crelle](https://www.degruyter.com/journal/key/crll/html). Em 1879, Cantor solidificou suas ideias espalhando-as através de seis artigos penetrantes no [Mathematische Annalen](https://www.springer.com/journal/208). Essas obras marcariam o terreno fértil para o desenvolvimento da matemática moderna.
 
-No século XVII, matemáticos como [John Wallis](https://en.wikipedia.org/wiki/John_Wallis) e [Isaac Newton](https://en.wikipedia.org/wiki/Isaac_Newton) já utilizavam conjuntos de maneira informal em suas obras. [Leonhard Euler](https://en.wikipedia.org/wiki/Leonhard_Euler), no século XVIII, introduziu noções primitivas de conjuntos e funções em seus trabalhos. Cabe a [Georg Cantor](https://en.wikipedia.org/wiki/Georg_Cantor) a definição formal de conjuntos só veio no final do século XIX. A Teoria de Conjuntos de Cantor damos o nome de Inocente, por permitir a definição de conjuntos de forma não axiomática. Por exemplo, para definir o conjunto de todos os Números inteiros pares podemos definir o conjunto $Par$ como:
+Cantor não hesitou. Ele revelou que os números reais ultrapassavam os naturais em quantidade, desvendou os números transfinitos e a aritmética cardinal e forjou conjuntos infinitos não enumeráveis, desafiadores.
+
+Foi uma caminhada solitária. O ceticismo sombreava cada passo, a comunidade matemática murmurava entre surpresa, medo e inveja. Mas a determinação de Cantor prevaleceu, plantando firmemente sua teoria como uma espinha dorsal não reconhecida, mas indispensável, da matemática moderna, ramificando-se silenciosamente mas poderosamente em análises, topologias, teoria dos grafos e medidas. À Teoria de Conjuntos de Cantor damos o nome de Inocente, por permitir a definição de conjuntos de forma não axiomática. Mas, afinal, o que é um conjunto?
+
+Um conjunto é uma coleção de coisas, qualquer coisa. Como um rebanho de ovelhas, um cardume de peixes, ou os livros na sua biblioteca. Conjuntos podem ser finitos ou infinitos. Aliás, esta distinção cabe a Cantor. Um exemplo de conjunto finito é o rebanho de ovelhas, um exemplo de conjunto infinito é o conjunto dos números naturais $\mathbb{N}$ que contém os valores representados por $0$, $1$, $2$, $3$ e assim por diante, sem fim. Só a matemática para permitir o entendimento destes conceitos.
+
+> Na matemática a arte de fazer perguntas tem mais valor que resolver problemas. Georg Cantor
+
+Um conjunto é uma coleção bem definida de objetos distintos. Os elementos de um conjunto podem ser qualquer coisa: números, pessoas, figuras geométricas. Qualquer coisa pode ser um elemento e, independente do conjunto, e dos seus elementos, na matemática todos os elementos serão representados por símbolos. Dizemos que, Se $a$ é um elemento do conjunto $A$, nós escrevemos $a \in A$. Este $\in$ é o símbolo de pertencimento, dizemos que $a$ pertence a $A$. Mas, não para aí. A história dos conjuntos na matemática é longa.
+
+Por exemplo, para definir o conjunto de todos os Números inteiros pares podemos definir o conjunto $Par$ como:
 
 $$Par = \{x: x é divisível por 2}$$
 
-No século XX, depois de muita discussão, inimizade surpresa, foi desenvolvida uma _Teoria Axiomática de Conjuntos_, baseada no trabalho de Cantor, e desenvolvida por [Ernst Zermelo](https://en.wikipedia.org/wiki/Ernst_Zermelo) e [Abraham Fraenkel](https://en.wikipedia.org/wiki/Abraham_Fraenkel) que ficou conhecida como **ZF**. Esta teoria consiste na definição de vários axiomas para suportar de forma consistente e elegante o conjunto de operações que podem ser realizadas com elementos de conjuntos, como: _axioma do par_, _axioma da união_, _axioma da potência_, _axioma da substituição_, entre muitos outros que fogem deste nosso humilde texto. O Sistema **ZF** acabou se provando como sendo suficientemente poderoso para a determinação da consistência de praticamente toda a matemática, sem abrir mão dos conceitos criados por Cantor.
+Que lemos $Par$ é o conjunto de todos os elementos $x$ tal que $x \text{é divisível por 2}$
+
+No século XX, depois de muita discussão, inimizades, surpresas e conflitos, foi desenvolvida uma _Teoria Axiomática de Conjuntos_, baseada no trabalho de Cantor, e aprimorada por [Ernst Zermelo](https://en.wikipedia.org/wiki/Ernst_Zermelo) e [Abraham Fraenkel](https://en.wikipedia.org/wiki/Abraham_Fraenkel) que ficou conhecida como **ZF**. Esta teoria consiste na definição de vários axiomas para suportar de forma consistente e elegante o conjunto de operações que podem ser realizadas com elementos de conjuntos, como: _axioma do par_, _axioma da união_, _axioma da potência_, _axioma da substituição_, entre muitos outros que fogem deste nosso humilde texto. O Sistema **ZF** acabou se provando como sendo suficientemente poderoso para a determinação da consistência de praticamente toda a matemática, sem abrir mão dos conceitos criados por Cantor.
 
 Voltando a matemática: para que uma coleção de item seja um conjunto deve obedecer as seguintes propriedades:
 
@@ -291,13 +303,13 @@ Podemos conceber as funções matemáticas como entidades singulares, destiladas
 
 As funções funcionam como sentenças concisas que nos permitem narrar histórias complexas com clareza e profundidade. Uma entidade que nos permite tecer conexões significativas entre elementos distintos em um conjunto, abrindo portas para explorações mais profundas no reino da matemática.
 
-Na matemática, uma **função** é uma relação especial entre dois conjuntos que associa cada elemento do primeiro conjunto (_domínio_) a exatamente um elemento do segundo conjunto (_contra-domínio_). Formalmente, uma função $f$ de um conjunto $A$ para um conjunto $B$, que denotaremos como $f: A \rightarrow B$ pode ser definida como:
+Na matemática, uma **função** é uma relação entre dois conjuntos que associa cada elemento do primeiro conjunto (_domínio_) a exatamente um elemento do segundo conjunto (_contra-domínio_). Formalmente, uma função $f$ de um conjunto $A$ para um conjunto $B$, que denotaremos como $f: A \rightarrow B$ pode ser definida como:
 
 **Definição de Função**: uma função $f: A \rightarrow B$ é um conjunto de pares ordenados $(a, b)$, onde $a \in A$ e $b \in B$, tal que para cada $a \in A$, existe exatamente um $b \in B$ tal que $(a, b) \in f$. Formalmente,
 
 $$f = \{ (a, b) | a \in A, b \in B \}$$
 
-Uma função precisa obedecer um conjunto de propriedades funcionais:
+Uma função precisa obedecer um conjunto de propriedades:
 
 - **Bem Definida**: Para cada $a \in A$, existe um único $b \in B$ tal que $(a, b) \in f$.
 
@@ -319,21 +331,27 @@ Na nossa jornada, se olharmos com atenção na direção das funções encontrar
 
    $$\forall a_1, a_2 \in A, \, (a_1 \neq a_2) \Rightarrow (f(a_1) \neq f(a_2))$$
 
+   Isso significa que elementos distintos do conjunto de domínio são mapeados para elementos distintos do conjunto contra-domínio. No gráfico de uma função _injetora_, não existem duas linhas horizontais que intersectam o gráfico em dois pontos diferentes.
+
    **Exemplo**: A função $f: \mathbb{R} \rightarrow \mathbb{R}$ dada por $f(x) = 2x + 1$ é uma injeção.
 
 2. **Função Sobrejetora (ou Sobrejeção)**:
 
-   Uma função $f: A \rightarrow B$ é chamada sobrejetora se a imagem da função é igual ao contra-domínio, isto é, cada elemento de $B$ é imagem de pelo menos um elemento de $A$. Formalmente,
+   Uma função $f: A \rightarrow B$ é chamada _sobrejetora_ se a imagem da função é igual ao contra-domínio, isto é, cada elemento de $B$ é imagem de pelo menos um elemento de $A$. Formalmente,
 
    $$\forall b \in B, \, \exists a \in A \, \text{ tal que } \, f(a) = b$$
+
+   O que significa que todo elemento do conjunto contra-domínio é imagem de pelo menos um elemento do conjunto de domínio. No gráfico de uma função _sobrejetora_, cada valor de $y$ no contra-domínio é atingido pelo gráfico da função.
 
    **Exemplo**: A função $f: \mathbb{R} \rightarrow \mathbb{R}$ dada por $f(x) = x^3$ é uma sobrejeção.
 
 3. **Função Bijetora (ou Bijecção)**:
 
-   Uma função é dita bijetora se é ao mesmo tempo injetora e sobrejetora. Formalmente,
+   Uma função é dita _bijetora_ se é ao mesmo tempo _injetora_ e _sobrejetora_. Formalmente,
 
    $$\forall b \in B, \, \exists! a \in A \, \text{ tal que } \, f(a) = b$$
+
+   Significando que cada elemento do conjunto de domínio é mapeado para um elemento único no conjunto contra-domínio e vice-versa. No gráfico de uma função _bijetora_, cada linha horizontal e vertical intersecta o gráfico em exatamente um ponto.
 
    **Exemplo**: A função $f: \mathbb{R} \rightarrow \mathbb{R}$ dada por $f(x) = x$ é uma bijeção.
 
