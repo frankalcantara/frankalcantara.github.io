@@ -39,23 +39,108 @@ Não concordo muito com [Kronecker](https://en.wikipedia.org/wiki/Leopold_Kronec
 
 Infelizmente, errar é humano e, além disso, a exatidão na representação de números reais através de operações fracionárias é uma ocorrência rara. Isto significa que a representação de números reais, não pode ser completamente realizada, usando números inteiros, mesmo que recorramos ao uso de frações para representar a parte fracionária, ou decimal. Esta incompletude na representação de números reais terá um impacto imprevisto e abrangente em todos os sistemas computacionais, desenvolvidos com base nas ideias de [Touring](https://en.wikipedia.org/wiki/Alan_Turing). Lembre-se, em uma célula da memória de um computador existe um número binário, um número do Conjunto dos Números Inteiros, $\mathbb{Z}$, escrito na base $2$.
 
-Vamos ficar um pouco mais na base decimal, para tentar explicar melhor este problema. Tome, por exemplo, a razão $\frac{1}{6}$ e tente representá-la em números reais sem arredondar, ou truncar. Pegue um lápis e uma folha de papel e tente. Tem pressa não!
+Vamos ficar um pouco mais na base decimal, para tentar explicar melhor este problema. Tome, por exemplo, a razão $\frac{1}{6}$ e tente representá-la em números reais sem arredondar, ou truncar. Esqueça a calculadora e o computador por um momento.Pegue um lápis e uma folha de papel e tente. Tem pressa não! Eu espero.
 
-Se a leitora tiver tentado, terá visto, muito rapidamente, que seremos forçados a parar a divisão e arredondar, ou truncar o resultado. Obtendo, invariavelmente, algo como $0,166667$. O ponto em que paramos determina a precisão que usaremos para representar este número e a precisão será, por sua vez, imposta, ou sugerida, apenas pelo uso que daremos a este número. Nesta sentença a palavra uso é importante. É Este que define o modelo que usaremos para resolver um problema. Todos os problemas são diferentes e todos os modelos serão diferentes.
+Se a leitora tiver tentado, terá visto, muito rapidamente, que seremos forçados a parar a divisão e arredondar, ou truncar o resultado. Obtendo, invariavelmente, algo como $0,166667$. O ponto em que paramos determina a precisão que usaremos para representar este número e a precisão será, por sua vez, imposta, ou sugerida, apenas pelo uso que daremos a este número. Nesta sentença a palavra _uso_ é a mais importante. É Este _uso_ que definirá o modelo que usaremos para resolver um problema específico. Todos os problemas são diferentes, todos os modelos serão diferentes.
 
-Voltando ao nosso exemplo: fizemos a divisão representada por $\frac{1}{6}$ e encontramos $0,166667$. A multiplicação é a operação inversa de divisão. Logo se multiplicarmos $0,166667 \times 6$ deveríamos encontrar $1$ contudo encontramos: $1.000002$. Um erro de $0.000002$. No seu caderno, prova, ou cabeça isso é $1$, mas só nestes casos. Triste a sina daquele que não percebe que $1.000002$ é muito diferente de $1$.
+Voltando ao nosso exemplo: fizemos a divisão representada por $\frac{1}{6}$ e encontramos $0,166667$. A multiplicação é a operação inversa de divisão. Logo se multiplicarmos $0,166667 \times 6$ deveríamos encontrar $1$ contudo encontramos: $1.000002$. Um erro de $0.000002$. No seu caderno, prova, ou cabeça, isso é $1$, mas só nestes lugares específicos e fora do alcance dos outros seres humanos. Triste será a sina daquele que não perceber que $1.000002$ é muito diferente de $1$.
 
 Em uma estrada, a diferença de um centímetro que existe entre $12,00 m$ e $12,01 m$ provavelmente não fará qualquer diferença no posicionamento de um veículo. Se estivermos construindo um motor à gasolina, por outro lado, um erro de $1 cm$ será a diferença entre o funcionamento e a explosão. Maximize este conceito imaginando-se no lugar de um um físico que precise utilizar a constante gravitacional. Neste caso, a leitora enfrentará a aventura de fazer contas com números como tão pequenos quanto $0.00000000006667_{10}$.
 
-Graças ao hardware que criamos nos últimos 100 anos, números reais não são adequados ao uso em computação.
+Graças ao hardware que criamos nos últimos 100 anos, números reais não são adequados ao uso em computação. Pronto falei!
 
-Nossos computadores são binários, trabalham só e somente só com números na inteiros na base $2$. Sem pensar muito dá para perceber que existe um número infinito de números reais, representados por um número também infinito de precisões diferentes e que, para que os computadores sejam uteis, todo este universo teve que ser colocado em um espaço restrito definido pela memória disponível e pelas regras da aritmética inteira binária.
+Nossos computadores são binários, trabalham só, e somente só, com números na inteiros na base $2$. Sem pensar muito dá para perceber que existe um número infinito de números reais, representados por um número também infinito de precisões diferentes e que, para que os computadores sejam uteis, todo este universo teve que ser colocado em um espaço restrito definido pela memória disponível e pelas regras da aritmética inteira binária. Não precisa ficar assustada, mas se estiver pensando em ficar assustada a hora é essa.
 
-Assim como os números na base dez, os números reais na base dois podem ser representados por uma parte inteira e uma parte fracionária. Vamos usar o número $0.001_{2}$ como exemplo. Este número pode ser representado por uma operação de frações na base adotada:
+Assim como os números na base dez, os números reais na base dois podem ser representados por uma parte inteira e uma parte fracionária. Vamos usar o número $0.001_{2}$ como exemplo. Este número pode ser representado por uma operação de frações. Para isso, basta considerar a base $2$:
 
 $$0,001 = \frac{0}{2}+\frac{0}{4}+\frac{1}{8} = \frac{0}{2^1}+\frac{0}{2^2}+\frac{1}{2^3}$$
 
-Novamente, sou portador de notícias ruins. Os números fracionários na base $2$ apresentam o mesmo problema que vimos na base $10$. A maioria dos números binários facionários, não pode ser representada de forma exata por uma operação de frações. um bom exemplo pode ser visto com a fração $\frac{1}{3}$ que seria representada, em conversão direta para o binário, por $(\frac{1}{11})_2 = 0.0101010101010101_2$ este valor terá que ser arredondado, ou truncado. Definir o ponto onde iremos parar a divisão, determinará a precisão com que conseguiremos representar o valor $(\frac{1}{11})_2$. Além disso, precisaremos encontrar uma forma de armazenar esta representação em memória.
+Novamente, sou portador de notícias ruins. Os números fracionários na base $2$ padecem da mesma dor que os números reais na base $10$. A maioria dos números binários facionários, não pode ser representada de forma exata por uma operação de frações. Não bastando isso, a conversão entre as bases $10$ e $2$, acaba criando números binários que não têm fim. Um bom exemplo pode ser visto com a fração $\frac{1}{3}$ que seria representada, em conversão direta para o binário, por $(\frac{1}{11})_2 = 0.0101010101010101_2$ este valor terá que ser arredondado, ou truncado. Esta conversão pode ser vista na Tabela 1:
+
+<table class="table table-striped">
+  <tr>
+    <th>Passo</th>
+    <th>Operação</th>
+    <th>Resultado Decimal</th>
+    <th>Parte Inteira</th>
+    <th>Parte Fracionária (Binário)</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>$1 \div 3$</td>
+    <td>0.3333...</td>
+    <td>0</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>$0.3333... \times 2$</td>
+    <td>0.6666...</td>
+    <td>0</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>$0.6666... \times 2$</td>
+    <td>1.3333...</td>
+    <td>1</td>
+    <td>01</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>$0.3333... \times 2$</td>
+    <td>0.6666...</td>
+    <td>0</td>
+    <td>010</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>$0.6666... \times 2$</td>
+    <td>1.3333...</td>
+    <td>1</td>
+    <td>0101</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>$0.3333... \times 2$</td>
+    <td>0.6666...</td>
+    <td>0</td>
+    <td>01010</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>$0.6666... \times 2$</td>
+    <td>1.3333...</td>
+    <td>1</td>
+    <td>010101</td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>$0.3333... \times 2$</td>
+    <td>0.6666...</td>
+    <td>0</td>
+    <td>0101010</td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td>$0.6666... \times 2$</td>
+    <td>1.3333...</td>
+    <td>1</td>
+    <td>01010101</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>$0.3333... \times 2$</td>
+    <td>0.6666...</td>
+    <td>0</td>
+    <td>010101010</td>
+  </tr>
+</table>
+<legend style="font-size: 1em;
+  text-align: center;
+  margin-bottom: 20px;">Tabela 1 - Conversão de $(\frac{1}{3})_{10}$ em binário.</legend>
+
+Definir o ponto onde iremos parar a divisão, determinará a precisão com que conseguiremos representar o valor $(\frac{1}{11})_2$. Além disso, precisaremos encontrar uma forma de armazenar esta representação em memória.
 
 No exemplo dos valores na base decimal que vimos ante, a leitora aprendeu que os valores que aparecem depois da vírgula e que se repetem até o infinito são chamados de dízima, ou dízima periódica. Se por "dízima" entendemos uma sequência _que não terminará_, então tais números decimais não existem em binário, para que eles existam teremos que parar a divisão e criar uma versão deste número com precisão limitada.
 
@@ -73,9 +158,11 @@ Na matemática e nas ciências, frequentemente nos deparamos com números muito 
 
 - A mantissa é a parte significativa do número, que contém os dígitos mais importantes do número que estamos representando.
 
-- O expoente, $e$, indica a potência a qual a base $10$ deve ser elevada para obter o número original. Assim, a representação geral de um número em notação científica é dada por $\text{mantissa} \times 10^e $. Por exemplo veja a Tabela 1.
+- O expoente, $e$, indica a potência a qual a base $10$ deve ser elevada para obter o número original. Assim, a representação geral de um número em notação científica é dada por $\text{mantissa} \times 10^e $. 
+  
+Para exemplos desta representação veja a Tabela 1.
 
-<table class="table table-striped">
+<table class="table table-striped" style="text-align: center;">
   <thead>
     <tr>
       <th>Mantissa</th>
@@ -113,36 +200,31 @@ Na matemática e nas ciências, frequentemente nos deparamos com números muito 
 </table>
 <legend style="font-size: 1em;
   text-align: center;
-  margin-bottom: 20px;">Tabela 1 - Exemplos de representação de valor em notação científica.</legend>
+  margin-bottom: 20px;">Tabela 2 - Exemplos de representação de valor em notação científica.</legend>
 
-Uma boa prática no uso da notação científica é deixar tantos algarismos significativos depois da vírgula quanto necessário para o cálculo específico que pretendemos realizar e apenas um algarismo antes da vírgula. Escolhemos a quantidade de números significativos de acordo com a aplicação. O $\pi$ é um bom exemplo de precisão relativa à aplicação.
+Uma boa prática no uso da notação científica é deixar apenas um algarismo antes da vírgula e tantos algarismos significativos quanto necessário para o cálculo específico que pretendemos realizar depois da vírgula. Escolhemos a quantidade de números significativos de acordo com a aplicação. Estes algoritmos depois da vírgula terão impacto na precisão do seu cálculo. O $\pi$, com sua infinitude de dígitos depois da vírgula, é um bom exemplo de precisão relativa à aplicação.
 
-Normalmente, um engenheiro civil, ou eletricista, usa o $\pi$ como $3.1416$. Assim mesmo! Arredondando na última casa. Quatro algarismos significativos depois da vírgula são suficientemente precisos para resolver a maior parte dos problemas que encontramos no mundo sólido, real e visível. 
+Normalmente, um engenheiro civil, ou eletricista, usa o $\pi$ como $3.1416$. Assim mesmo! Arredondando na última casa, pecado dos pecados. A verdade é que quatro algarismos significativos depois da vírgula são suficientemente precisos para resolver a maior parte dos problemas que encontramos no mundo sólido, real, visível e palpável.
 
 Em problemas relacionados com o eletromagnetismo normalmente usamos $\pi = 3.1415926$, igualmente arredondando a última casa mas com $7$ algarismos significativos depois da vírgula. Em problemas relacionados com o estudo da cosmologia usamos $\pi = 3.14159265359$, truncado, sem nenhum arredondamento, com onze algarismos significativos depois da vírgula. Em física de partículas, não é raro trabalhar com 30 dígitos de significativos para $\pi$. A leitora, amável e paciente, pode ler um pouco mais sobre a quantidade de dígitos significativos necessários [lendo um artigo do Jet Propulsion Lab](https://www.jpl.nasa.gov/edu/news/2016/3/16/how-many-decimals-of-pi-do-we-really-need/). 
 
-Agora que a leitora entendeu a relação entre o problema e o número de dígitos significativos, chegamos a duas regras muito importantes no trato de valores numéricos:
+O melhor uso da notação científica determina o uso de um, e somente um, algarismo antes da vírgula. Além disso, _a norma impõe que você não deve usar o zero como único algarismo antes da vírgula_. Adotando estas duas regras, $3.1416$ poderia ser representado por $3.1416 \times 10^0$, o que estaria perfeitamente normalizado, ou por $31,416\times 10^{-1}$, uma representação matematicamente válida, mas não normalizada. É importante não esquecer que **números que têm $0$ como sua parte inteira não estão normalizados**.
 
-1. Cada problema tem a sua precisão particular e específica;
-2. Não esqueça a primeira regra.
+Passou pela minha cabeça agora: está claro que a nomenclatura _ponto flutuante_ é importada do inglês? Se fosse em bom português, seria _vírgula flutuante_. Esta é uma daquelas besteiras que fazemos. Vamos falando, ou escrevendo, estas coisas, sem nos darmos conta que não faz sentido no idioma de [Mário Quintana](https://en.wikipedia.org/wiki/M%C3%A1rio_Quintana). Herança colonial. Quem sabe?
 
-O uso da notação científica determina o uso de $1$, e somente $1$, algarismo antes da vírgula e permite definir os algarismos depois da vírgula de acordo com a precisão necessária. Além disso, _a norma impõe que você não deve usar o zero como único algarismo antes da vírgula_. Adotando esta norma, $3.1416$ poderia ser representado por $3.1416 \times 10^0$, o que estaria perfeitamente normalizado, ou por $31,416\times 10^{-1}$, uma representação matematicamente válida, mas não normalizada. Além disso, **números que têm $0$ como sua parte inteira não estão normalizados**.
-
-Passou pela minha cabeça agora: está claro que a nomenclatura _ponto flutuante_ é importada do inglês? Se fosse em bom português, seria "vírgula flutuante". A gente vai falando, ou escrevendo, estas coisas, e nem se dá conta que não faz sentido no idioma de [Mário Quintana](https://en.wikipedia.org/wiki/M%C3%A1rio_Quintana).
-
-A base não faz nenhuma diferença na norma da notação científica. Números binários podem ser representados nesta notação tão bem quanto números na base $10$ ou em qualquer outra base. A leitora pode, por exemplo, usar o número $43.625_{10}$ que, convertido para binário, seria $101011,101_2$ e representá-lo em notação científica como $1,01011101 \times 2^5$. Guarde este número, vamos precisar dele em uma discussão posterior. Sério, guarde mesmo.
+A base numérica, decimal, hexadecimal, binária, não faz nenhuma diferença na norma da notação científica. Números binários podem ser representados nesta notação tão bem quanto números decimais ou números em qualquer outra base. A leitora pode, por exemplo, usar o número $43.625_{10}$ que, convertido para binário, seria $101011,101_2$ e representá-lo em notação científica como $1,01011101 \times 2^5$. Guarde este número, vamos precisar dele em uma discussão posterior. Sério, guarde mesmo.
 
 > "Idealmente, um computador deve ser capaz de resolver qualquer problema matemático com a precisão necessária para este problema específico, sem desperdiçar memória, ou recursos computacionais." Anônimo.
 
-Por acaso a amável leitora lembra que eu falei da relação de um para um entre um número real e a sua representação em memória? A norma [IEEE 754](http://en.wikipedia.org/wiki/IEEE_754-2008) padronizou a representação binária de números de ponto flutuante e resolveu todos os problemas de compatibilidade entre hardware, software e mesmo entre soluções diferentes que existiam justamente garantindo a existência desta relação biunívoca entre o número decimal e o número binário que será usado para armazená-lo em memória.
+Por acaso a amável leitora lembra que eu falei da relação de um para um entre um número real e a sua representação em memória? A norma [IEEE 754](http://en.wikipedia.org/wiki/IEEE_754-2008) padronizou a representação binária de números de ponto flutuante e resolveu todos os problemas de compatibilidade entre hardware, software e mesmo entre soluções diferentes que existiam garantindo explicitamente a existência desta relação biunívoca entre o número decimal e o número binário que será usado para armazená-lo em memória. Assim, todas as máquinas, e todos os softwares, entenderam o mesmo conjunto de bits, da mesma forma.
 
-A norma IEEE754 não é a única forma de armazenar números reais, talvez não seja nem a melhor forma, mas é de longe a mais utilizada. Com esta norma em mãos, saberemos como representar uma _faixa significativa_ de números reais podendo determinar exatamente a precisão máxima possível para cada número, mesmo em binário e, principalmente, conhecemos os problemas inerentes a esta representação.
+A norma [IEEE 754](http://en.wikipedia.org/wiki/IEEE_754-2008) não é a única forma de armazenar números reais, talvez não seja sequer a melhor forma, mas é de longe a mais utilizada. Com esta norma embaixo do braço, saberemos como representar uma _faixa significativa_ de números reais podendo determinar exatamente a precisão máxima possível para cada valor representado, mesmo em binário e, principalmente, conheceremos todos os problemas inerentes a esta representação. E existem problemas. Afinal, números decimais reais e infinitos serão mapeados em um universo binário, inteiro e finito. O que poderia dar errado?
 
-Quase esqueci! A expressão _faixa significativa_ que usei acima é para destacar que a norma [IEEE 754](http://en.wikipedia.org/wiki/IEEE_754-2008) não permite a representação de todo e qualquer número real. Temos um número infinito de valores na base $10$ representados em um número finito de valores na base $2$. E a norma foi propositalmente definida para limitar o número de valores que podem ser representados e armazenados em ambientes computacionais. Este é o momento em que a amável leitora deve se perguntar: o que poderia dar errado?
+Quase esqueci! A expressão _faixa significativa_ que usei acima é para destacar que a norma [IEEE 754](http://en.wikipedia.org/wiki/IEEE_754-2008) não permite a representação de todo e qualquer número real. Temos um número infinito de valores na base $10$ representados em um número finito de valores na base $2$.
 
 ## E os binários entram na dança
 
-Para trabalhar com qualquer valor em um computador, precisamos converter os números reais na base $10$ que usamos diariamente para base $2$ que os computadores usam, armazenar estes números, realizar cálculos com os binários e, finalmente converter estes valores para base $10$ de forma que seja possível ao pobre ser humano, entender a informação resultante do processo computacional. É neste vai e volta que os limites da norma [IEEE 754](http://en.wikipedia.org/wiki/IEEE_754-2008) são testados e, não raramente, causam alguns espantos e muitos problemas.
+Para trabalhar com qualquer valor em um computador, precisamos converter os números reais na base $10$ que usamos diariamente para base $2$ que os computadores usam. Armazenar estes números, realizar cálculos com os binários armazenados e, finalmente converter estes valores para base $10$ de forma que seja possível ao pobre ser humano entender a informação resultante do processo computacional. É neste vai e volta que os limites da norma [IEEE 754](http://en.wikipedia.org/wiki/IEEE_754-2008) são testados e, não raramente, causam alguns espantos e muitos problemas.
 
 Tomemos, por exemplo o número decimal $0,1_{10}$. Usando o [Decimal to Floating-Point Converter](https://www.exploringbinary.com/floating-point-converter/) para poupar tempo, e precisão dupla, já explico isso, podemos ver que:
 
@@ -163,7 +245,7 @@ Eita! Virou outra coisa. Uma coisa bem diferente. Eis porquê em Python, acabamo
 >0.30000000000000004
 ```
 
-Isto ocorre por que a conta que você realmente fez foi $0.1000000000000000055511151231257827021181583404541015625 \times 3$. Se não acreditar em mim, tente você mesmo, direto na linha de comando do Python ou em alguma célula do [Google Colab](https://colab.research.google.com/). Vai encontrar o mesmo erro. Talvez esta seja uma boa hora para se levantar, tomar um copo d'água e pensar sobre jornalismo, contabilidade, educação física, ou qualquer outra opção de carreira que não envolva computação tão diretamente. Vai lá! Eu espero. Tem pressa não!
+Isto ocorre por que a conta que você realmente fez foi $0.1000000000000000055511151231257827021181583404541015625 \times 3$. Se não acreditar em mim, tente você mesmo, direto na linha de comando do Python ou em alguma célula do [Google Colab](https://colab.research.google.com/). Vai encontrar o mesmo erro. Talvez esta seja uma boa hora para se levantar, tomar um copo d'água e pensar sobre mudança de carreira. Ouvi falar que jornalismo, contabilidade, educação física, podem ser boas opções.
 
 Muitas linguagens de programação, o Python, inclusive, conhecem um conjunto de valores onde erros deste tipo ocorrem e arredondam, ou truncam, o resultado para que você veja o resultado correto. Ou ainda, simplesmente limitam o que é exposto para outras operações, como se estivessem limitando a precisão do cálculo ou dos valores armazenados. Não é raro encontrar linguagens de programação que, por padrão, mostram apenas 3 casas depois da vírgula. Esta foi uma opção pouco criativa adotada por muitos compiladores e interpretadores que acaba criando mais problemas que soluções. Para ver um exemplo, use a fração $\frac{1}{10}$, ainda em Python e reproduza as seguintes operações:
 
@@ -183,11 +265,25 @@ print ("{0:.20f}".format(a))
 
 E não é que a coisa não é tão linda assim! A diferença entre estes dois exemplos está na saída. No último formatamos a visualização do resultado para forçar a exibição de mais casas decimais mostrando que o erro está lá. Você não está vendo este erro, o interpretador vai tentar não permitir que este erro se propague, mas ele está lá. E, vai dar problema. E como tudo que causa problemas vai acontecer no pior momento possível.
 
-> "Os interpretadores e compiladores são desenvolvidos por seres humanos, tão confiáveis quanto pescadores e caçadores. Não acredite em histórias de pescaria, de caçada ou em compiladores" Frank de Alcantara.
+> "Os interpretadores e compiladores são desenvolvidos por seres humanos, tão confiáveis quanto pescadores e caçadores. Não acredite em histórias de pescaria, de caçada ou de compilação" Frank de Alcantara.
 
-_Isto não é uma exclusividade do Python_, a grande maioria das linguagens de programação, sofre de problemas semelhantes em maior ou menor número. Mesmo que os compiladores e interpretadores se esforcem para não permitir a propagação deste erro se você fizer uma operação com o valor $0.1$, que a linguagem lhe mostra com algum outro valor que exija, digamos $20$ dígitos depois da vírgula o erro estará lá.
+_Isto não é uma exclusividade do Python_, a maioria das linguagens de programação, sofre de problemas semelhantes em maior ou menor número. Mesmo que os compiladores e interpretadores se esforcem para não permitir a propagação deste erro se você fizer uma operação com o valor $0.1$, que a linguagem lhe mostra com algum outro valor que exija, digamos $20$ dígitos depois da vírgula o erro estará lá.
 
-Volte um pouquinho e reveja o que aconteceu, no Python, quando operamos $0.1 * 3$. A leitora deve observar que, neste caso, os dois operandos estão limitados e são exatos. O erro ocorre por que a conversão de $0.1_{10}$ para binário não é exata e somos forçados a parar em algum ponto e, ou truncamos ou arredondamos o valor. Digamos que paramos em: $0.0001100110011001101_2$. Se fizermos isso e convertemos novamente para o decimal o $0.1$ será convertido em $0.1000003814697265625$. E lá temos um baita de um erro. Se a conversão for feita usando os padrões impostos pela IEEE 754 os valores ficam um pouco diferentes, o valor $0.1$ será armazenado em um sistema usando a IEEE 754 como:
+Vamos abandonar o computador por um momento. Pegue a sua calculadora e divida um por três e veja o último dígito da tela, se for um seis, sua calculadora trunca a resposta, se for um sete, sua calculadora arredonda. A diferença está na precisão do número representado: 
+
+1. **Truncar**: elimina todas as casas decimais após um certo ponto, sem considerar o valor das casas decimais que estão sendo removidas.
+   - Exemplo:
+     - Número original: 5.789
+     - Número truncado (até uma casa decimal): 5.7
+
+2. **Arredondar**: aumenta ou diminui o último dígito retido, dependendo do valor do próximo dígito que está sendo removido.
+   - Exemplo:
+     - Número original: 5.789
+     - Número arredondado (até uma casa decimal): 5.8
+
+Sistemas, mesmo que sejam simples calculadoras, que arredondam são mais precisos.
+
+Volte um pouquinho e reveja o que aconteceu, no Python, quando operamos $0.1 * 3$. A leitora deve observar que, neste caso, os dois operandos estão limitados e são exatos. O erro ocorre por que a conversão de $0.1_{10}$ para binário não é exata e somos forçados a parar em algum ponto e, ou truncamos ou arredondamos o valor. Digamos que paramos em: $0.0001100110011001101_2$. Se fizermos isso e convertemos novamente para o decimal o $0.1$ será convertido em $0.1000003814697265625$. E lá temos um baita de um erro. Se a conversão for feita usando os padrões impostos pela [IEEE 754](http://en.wikipedia.org/wiki/IEEE_754-2008) os valores ficam um pouco diferentes, o valor $0.1$ será armazenado em um sistema usando a [IEEE 754](http://en.wikipedia.org/wiki/IEEE_754-2008) como:
 
 1. em precisão simples:
 
@@ -197,11 +293,13 @@ Volte um pouquinho e reveja o que aconteceu, no Python, quando operamos $0.1 * 3
 
    $$00111111 10111001 10011001 10011001 10011001 10011001 10011001 10011010_2$$
 
-Que quando convertidos novamente para binário, precisão simples, representará o número $0.100000001490116119385$ isso implica em um erro $256$ vezes menor que o erro que obtemos com a conversão manual e os poucos bits que usamos. Em precisão dupla este valor vai para $0.100000000000000005551_2$ com um erro ainda menor. Nada mal! Vamos ver se entendemos como esta conversão pode ser realizada usando o $0,1$. Mas antes divirta-se um pouco vendo o resultado que obtemos graças a IEEE 754 para: $$0,2$$; $0,4$ e $0,8$ usando o excelente [Float Point Exposed](https://float.exposed). Como disse antes: tem pressa não!
+Que quando convertidos novamente para binário, precisão simples, representará o número $0.100000001490116119385$ isso implica em um erro $256$ vezes menor que o erro que obtemos com a conversão manual e os poucos bits que usamos. Em precisão dupla este valor vai para $0.100000000000000005551_2$ com um erro ainda menor. Nada mal! 
+
+Vamos ver se entendemos como esta conversão pode ser realizada usando o $0,1$. Mas antes divirta-se um pouco vendo o resultado que obtemos graças a [IEEE 754](http://en.wikipedia.org/wiki/IEEE_754-2008) para: $0,2$; $0,4$ e $0,8$ usando o excelente [Float Point Exposed](https://float.exposed). Como disse antes: tem pressa não!
 
 ## Entendendo a IEEE 754
 
-A norma IEEE 754 especifica 5 formatos binários: meia precisão - $16$ bits; precisão simples - $32$ bits; precisão dupla - $64$ bits; precisão quadrupla - $128$ bits e precisão óctupla - $256$ bits. Se olhar com cuidado, exitem algumas variações em torno deste tema. Além dos formatos de precisão simples e dupla apresentados aqui, a norma IEEE 754 também define formatos de menor precisão (meia precisão com $16$ bits) e maior precisão (quadrupla com $128$ bits e octupla com $256$ bits). Há também algumas variações em relação à representação do infinito e do NaN. Contudo, por uma questão didática, neste artigo nos ateremos às duas representações de bits mais comumente utilizadas que são as precisões simples e dupla.
+A norma [IEEE 754](http://en.wikipedia.org/wiki/IEEE_754-2008) especifica 5 formatos binários: meia precisão - $16$ bits; precisão simples - $32$ bits; precisão dupla - $64$ bits; precisão quadrupla - $128$ bits e precisão óctupla - $256$ bits. Se olhar com cuidado, exitem algumas variações em torno deste tema. Além dos formatos de precisão simples e dupla apresentados aqui, a norma IEEE 754 também define formatos de menor precisão (meia precisão com $16$ bits) e maior precisão (quadrupla com $128$ bits e octupla com $256$ bits). Há também algumas variações em relação à representação do infinito e do NaN. Contudo, por uma questão didática, neste artigo nos ateremos às duas representações de bits mais comumente utilizadas que são as precisões simples e dupla.
 
 <img class="img-fluid" src="{{ site.baseurl }}/assets/images/ieee754.png" alt="mostra as distribuição de bits o padrão ieee 754">
 
