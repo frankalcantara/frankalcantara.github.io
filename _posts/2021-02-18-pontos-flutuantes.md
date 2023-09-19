@@ -281,7 +281,7 @@ Vamos abandonar o computador por um momento. Pegue a sua calculadora e divida um
      - Número original: 5.789
      - Número arredondado (até uma casa decimal): 5.8
 
-Sistemas, mesmo que sejam simples calculadoras, que arredondam são mais precisos.
+Sistemas, mesmo que sejam simples calculadoras, que arredondam são mais precisos. Existem várias técnicas de arredondamento que não serão objeto deste artigo. Mesmo que eu tenha ficado tentado.
 
 Volte um pouquinho e reveja o que aconteceu, no Python, quando operamos $0.1 * 3$. A leitora deve observar que, neste caso, os dois operandos estão limitados e são exatos. O erro ocorre por que a conversão de $0.1_{10}$ para binário não é exata e somos forçados a parar em algum ponto e, ou truncamos ou arredondamos o valor. Digamos que paramos em: $0.0001100110011001101_2$. Se fizermos isso e convertemos novamente para o decimal o $0.1$ será convertido em $0.1000003814697265625$. E lá temos um baita de um erro. Se a conversão for feita usando os padrões impostos pela [IEEE 754](http://en.wikipedia.org/wiki/IEEE_754-2008) os valores ficam um pouco diferentes, o valor $0.1$ será armazenado em um sistema usando a [IEEE 754](http://en.wikipedia.org/wiki/IEEE_754-2008) como:
 
