@@ -24,7 +24,7 @@ keywords:
 draft: true
 ---
 
-A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. É a base de alguns modelos computacionais que estão mudando o mundo. Inclusive o modelo que gerou a imagem acima.
+A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 
 > "Logic programming is the future of artificial intelligence." - [Marvin Minsky](https://en.wikipedia.org/wiki/marvin_Minsky)
 
@@ -124,27 +124,29 @@ Na **Programação Imperativa** partimos de uma determinada expressão e seguimo
 
 Na Programação Descritiva, o programador fornece uma descrição lógica, ou funcional, de **o que** deve ser feito, sem especificar o fluxo de controle. O foco está no problema, não na solução. Exemplos incluem SQL, Prolog e Haskell. Na Programação Lógica, partimos de uma conjectura e, de acordo com um conjunto específico de regras, tentamos construir uma prova para esta conjectura.
 
-Na Programação Lógica, um dos paradigmas da **Programação Descritiva** usamos a dedução. 
+Na Programação Lógica, um dos paradigmas da **Programação Descritiva** usamos a dedução para resolver problemas.
 
-Uma conjectura é uma suposição, ou proposição, que é acreditada ser verdadeira mas ainda não foi provada. Uma sentença declarativa que precisa ser verificada. Na linguagem natural, conjecturas são frequentemente expressas como declarações. Na Lógica de Primeira Ordem, as proposições são tratadas como sentenças que são criadas para serem verificadas na busca da sua verdade. Essas sentenças serão analisadas e testadas usando as regras e estruturas da Lógica de Primeira Ordem.
+_Uma conjectura é uma suposição, expressa na forma de proposição, que é acreditada ser verdadeira, mas ainda não foi provada_. Uma sentença declarativa que precisa ser verificada em busca da sua validação. Na linguagem natural, conjecturas são frequentemente expressas como declarações. Na Lógica de Primeira Ordem, serão proposições e as proposições serão tratadas como sentenças que foram criadas para serem verificadas na busca da verdade. Para testar a verdade expressa nestas sentenças usaremos as ferramentas da própria Lógica de Primeira Ordem.
 
 ![Diagrama de Significado de Conjecturas](/assets/images/conjecturas.jpeg)
 
-Em resumo: **Imperativa:** focada no processo, no _como_ chegar à solução; **Descritiva:** focada no problema em si, no _o que_ precisa ser feito. Eu fico, sempre que posso escolho uma linguagem descritiva, apesar de estar praticamente sozinho nesta escolha.
+Em resumo: **programação imperativa** focada no processo, no _como_ chegar à solução; **programação descritiva** focada no problema em si, no _o que_ precisa ser feito. Eu, sempre que posso escolho uma linguagem descritiva. Não há glória, nem honra nesta escolha apenas as lamúrias da opinião pessoal.
 
-A escolha, pessoal e intransferível, entre estes paradigmas dependerá da aplicação que será construída, tanto quanto dependerá do estilo do programador. mas o futuro parece cada vez mais orientado para linguagens descritivas, que permitam ao programador concentrar-se no problema, não nos detalhes da solução. Efeito que parece ser evidente se considerarmos os avanços recentes no campo da inteligência artificial. Aqui, neste documento, para tudo que possa vir, escolhemos a **Programação Lógica**.
+Sua escolha, pessoal e intransferível, entre estes paradigmas dependerá da aplicação que será construída, tanto quanto dependerá do estilo do programador. Contudo, o futuro parece cada vez mais orientado para linguagens descritivas, que permitam ao programador concentrar-se no problema, não nos detalhes da solução. Efeito que parece ser evidente se considerarmos os avanços da segunda década no século XX no campo da Inteligência Artificial. Este documento contém a base matemática que suporta o entendimento da programação lógica e um pouco de Prolog, como linguagem de programação para solução de problemas. Será uma longa jornada.
 
-Em nossa jornada, percorreremos a **Lógica de Primeira Ordem**. Esta será a rota, iremos subdividir em elementos menores, interligados e interdependentes e, sem dúvida de mesma importância e valor: _lógica Proposicional_ e _lógica Predicativa_. Não deixe de notar que muitos no campo acadêmico podem não entender as sutilezas desta divisão. A estes, deixo a justificativa, meio rota e meio esfarrapada da necessidade do uso da didática. Partiremos da _Lógica Proposicional_ com esperança de encontrar bons ventos que nos levem ao conhecimento.
+Em nossa jornada, percorreremos a **Lógica de Primeira Ordem**. Esta será a nossa primeira rota, que iremos subdividir em elementos interligados e interdependentes e, sem dúvida, de mesma importância e valor: a _lógica Proposicional_ e a _lógica Predicativa_. Não deixe de notar que muitos dos nossos companheiros de viagem, aqueles restritos a academia, podem não entender as sutilezas desta divisão. A estes, deixo a justificativa, meio rota e meio esfarrapada da necessidade do uso da didática para a estruturação do aprendizado. Pobre do professor que ignora as mazelas enfrentadas por seus alunos. Condenado está a falar às paredes.
 
-A Lógica Proposicional é um tipo de linguagem matemática, suficientemente rica para expressar muitos dos problemas que precisamos resolver e suficientemente simples para que computadores possam lidar com ela. Ferramenta tão útil ao homem quanto a máquina. Quando esta ferramenta estiver conhecida mergulharemos na alma da Lógica de Primeira Ordem, a Lógica Predicativa, ou Lógica de Predicados, e então poderemos fazer sentido do mundo.
+Pretensioso este timoneiro tenta não ser. Partiremos da _Lógica Proposicional_ com esperança de encontrar bons ventos que nos levem até o Prolog.
 
-Vamos enfrentar a inferência e a dedução, duas ferramentas para extração de conhecimento de declarações lógicas. Voltando a metáfora do Detetive, podemos dizer que a inferência é quase como um detetive que tira conclusões a partir de pistas: temos algumas verdades e precisamos descobrir outras verdades que são consequências diretas das primeiras verdades.
+A _Lógica Proposicional_ é um tipo de linguagem matemática, suficientemente rica para expressar os problemas que precisamos resolver e suficientemente simples para que computadores possam lidar com ela. Ferramenta tão útil ao homem quanto a máquina. Quando esta ferramenta estiver conhecida mergulharemos na alma da _Lógica de Primeira Ordem_, a _Lógica Predicativa_, ou Lógica de Predicados, e então poderemos fazer sentido do mundo real de forma clara e bela.
 
-Não nos furtaremos em falar da **Cláusula de Horn**, um conceito um pouco mais estranho. Uma regra que torna todos os problemas expressos em lógica mais fácies de resolver. É como um mapa que, se corretamente seguido, torna o processo de descobrir a verdade mais simples. Muito mais simples, eventualmente passível de ser automatizado.
+Vamos enfrentar a inferência e a dedução, duas ferramentas para extração de conhecimento de declarações lógicas. Voltando a metáfora do Detetive, podemos dizer que a inferência é quase como um detetive que tira conclusões a partir de pistas: teremos algumas verdades, nossas pistas, e precisaremos descobrir outras verdades, consequências diretas das primeiras verdades, para encontrar o que procuramos de forma incontestável. A verdade da lógica não abarca opiniões ou contestações. É linda e incontestável.
 
-No final do dia, desde os tempos de [Gödel](https://en.wikipedia.org/wiki/Kurt_Gödel), [Turing](https://en.wikipedia.org/wiki/Alan_TurinQ) e [Church](https://en.wikipedia.org/wiki/Alonzo_ChurcR), tudo que queremos é que nossas máquinas sejam capazes de resolver problemas complexos com o mínimo de interferência nossa. Queremos que eles pensem, ou pelo menos, que simulem o pensamento. Aqui, neste objetivo, entre pérolas do conhecimento humano, reluz a Programação Lógica.
+Nossos mares não serão brandos, mas não nos furtaremos a enfrentar  as especifidades da **Cláusula de Horn**, um conceito um pouco mais estranho. Uma regra que torna todos os problemas expressos em lógica mais fácies de resolver. Como um mapa que, se corretamente seguido, torna o processo de descobrir a verdade mais simples. Muito mais simples, eventualmente passível de automatização.
 
-Historicamente o termo Programação Lógica aparece em meados dos anos 1970 como uma evolução dos esforços das pesquisas sobre a prova computacional de teoremas matemáticos e inteligência artificial. O homem fazendo máquinas capazes de raciocinar como o homem. Deste esforço surgiu a esperança de que poderíamos usar a lógica como uma linguagem de programação, em inglês, _programming logic_ ou Prolog. Aqui está a base deste conhecimento.
+No final do dia, cansados, porém felizes, vamos entender que, desde os tempos de [Gödel](https://en.wikipedia.org/wiki/Kurt_Gödel), [Turing](https://en.wikipedia.org/wiki/Alan_TurinQ) e [Church](https://en.wikipedia.org/wiki/Alonzo_ChurcR), tudo que queremos é que nossas máquinas sejam capazes de resolver problemas complexos com o mínimo de interferência nossa. Queremos que elas pensem, ou pelo menos, que simulem o pensamento. Aqui, neste objetivo, entre as pérolas mais reluzentes da evolução humana destaca-se a Programação Lógica.
+
+Como diria [Newton](https://en.wikipedia.org/wiki/Isaac_Newton) chegamos até aqui porque nos apoiamos nos ombros de gigantes. O termo Programação Lógica aparece em meados dos anos 1970 como uma evolução dos esforços nas pesquisas sobre a prova computacional de teoremas matemáticos e Inteligência Artificial. O homem querendo fazer máquinas capazes de raciocinar como o homem. Deste esforço surgiu a esperança de que poderíamos usar a lógica como uma linguagem de programação, em inglês, _programming logic_, ou Prolog. Aqui está a base deste conhecimento.
 
 # Lógica de Primeira Ordem
 
@@ -156,19 +158,19 @@ A Lógica de Primeira Ordem é o nosso ponto de partida, nossa base, nossa pedra
 
 A Lógica de Primeira Ordem consiste de uma linguagem, consequentemente criada sobre um alfabeto $\Sigma $, de um conjunto de axiomas e de um conjunto de regras de inferência. Esta linguagem consiste de todas as fórmulas bem formadas da teoria da Lógica Proposicional e predicativa. O conjunto de axiomas é um subconjunto do conjunto de fórmulas bem formadas acrescido e, finalmente, um conjunto de regras de inferência.
 
-O alfabeto $\Sigma $ Pode ser dividido em conjuntos de símbolos agrupados por classes:
+O alfabeto $\Sigma$ que estamos definindo poderá ser dividido em classes formadas por conjuntos de símbolos agrupados por similaridade. Assim:
 
 1. **variáveis, constantes e símbolos de pontuação**: vamos usar os símbolos do alfabeto latino em minúsculas e alguns símbolos de pontuação. Destaque-se os símbolos $($ e $)$, parenteses, que usaremos para definir a prioridade de operações. Vamos usar os símbolos $U$, $V$, $w$, $x$, $y$ e $z$ Para indicar variáveis e $a$, $b$, $c$, $d$ e $e$ Para indicar constantes.
 
-2. **Funções**: usaremos os símbolos $\mathbf{f}$, $\mathbf{g}$, $\mathbf{h}$ e $\mathbf{i}$ Para indicar funções.
+2. **funções**: usaremos os símbolos $\mathbf{f}$, $\mathbf{g}$, $\mathbf{h}$ e $\mathbf{i}$ Para indicar funções.
 
-3. **Predicados**: usaremos os símbolos $P$, $Q$, $R$ e $S$ Para indicar predicados.
+3. **predicados**: usaremos letras do alfabeto latino, maiúsculas  $P$, $Q$, $R$ e $S$, ou simplesmente _strigs_ como $\text{Azul}$ ou $\text{Sábio}$ para indicar predicados. Sempre começando com letras maiúsculas.
 
-4. **Operadores**: usaremos os símbolos tradicionais da Lógica Proposicional: $\neg$ (negação), $\wedge $ (conjunção, _and_), $\vee $ (disjunção, _or_), $\rightarrow$ (implicação) e $\leftrightarrow$ (equivalência).
+4. **operadores**: usaremos os símbolos tradicionais da Lógica Proposicional: $\neg$ (negação), $\wedge $ (conjunção, _and_), $\vee $ (disjunção, _or_), $\rightarrow$ (implicação) e $\leftrightarrow$ (equivalência).
 
-5. **Quantificadores**: nos manteremos no limite da tradição matemática e usar $\exists $ (quantificador existencial) e $\forall $ (quantificador universal).
+5. **quantificadores**: nos manteremos no limite da tradiçãoletras do alfabeto latino, maiúsculas  matemática usando $\exists $ (quantificador existencial) e $\forall $ (quantificador universal).
 
-6. **Fórmulas Bem Formadas**: usaremos letras do alfabeto latino, maiúsculas para representar as Fórmulas Bem Formadas:$P$, $Q$, $R$, $S$, $T$.
+6. **Fórmulas Bem Formadas**: usaremos para representar as Fórmulas Bem Formadas: $P$, $Q$, $R$, $S$, $T$.
 
 Na lógica matemática, uma Fórmula Bem Formada, também conhecida como expressão bem formada, é uma sequência **finita** de símbolos que é formada de acordo com as regras gramaticais de uma linguagem lógica específica.
 

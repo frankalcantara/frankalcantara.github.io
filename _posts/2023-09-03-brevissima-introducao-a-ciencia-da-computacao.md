@@ -1,6 +1,6 @@
 ---
 layout: posts
-title: Brevíssima Introdução a Monads
+title: Brevíssima Introdução a Ciência da Computação
 author: Frank
 categories:
   - artigo
@@ -15,26 +15,26 @@ featured: 2023-09-03T18:38:34.996Z
 rating: 5
 description: Uma brevíssima introdução ao conceito de monad e seu uso em linguagens de programação.
 date: 2023-09-03T18:38:34.996Z
-preview: ""
+preview: A Ciência da Computação é a arte de aplicar a matemática para utilizaar máquinas na resolução de problemas. Nesta jornada vamos ver o mínimo de matemática necessário para entender como fazer magia com computadores.
 keywords: ""
 slug: 2023-09-03T18:38:34.996Z
-published: false
+published: true
 ---
 
 
-Nesta jornada exploraremos as profundezas da álgebra abstrata, começando nos conceitos de conjuntos, nos levando a uma análise de relações e funções. Este é o ponto de partida, onde lançamos as bases para uma compreensão mais profunda das estruturas matemáticas que virão a seguir, desde as simples _magmas_ até os mais complexos anéis, e corpos.
+Nesta jornada exploraremos as profundezas da álgebra abstrata, começando nos conceitos de conjuntos, nos levando a uma análise de relações e funções. Este é o ponto de partida, onde lançamos as bases para uma compreensão mais profunda das estruturas matemáticas que virão a seguir, desde as simples _magmas_ até os mais complexos anéis, corpos, monads e tipos. À medida que avançarmos o terreno se tornará mais complexo e intrigante. Explorarmos categorias, morfismos e, tipos e tipos paramétricos.
 
-À medida que avançarmos, nos depararemos com conceitos cruciais como semigrupos e monoides, passos preparatórios essenciais antes de nos aprofundarmos em tópicos mais avançados. O terreno se tornará mais complexo e intrigante à medida que explorarmos categorias, morfismos e, eventualmente, transformações naturais, conceitos-chave na teoria das categorias.
+Com uma estrutura bem planejada, este percurso não só serve como uma introdução à Ciência da Computação, mas também como uma fundação sólida para os estudos mais avançados de linguagens de programação e algoritmos. Prepare-se para uma viagem que irá expandir o seu conhecimento, e a sua apreciação pela beleza e elegância que a matemática pode oferecer à resolução de problemas.
 
-Com uma estrutura bem planejada, este percurso não só serve como uma introdução à matéria, mas também como uma fundação sólida para os estudos mais avançados de linguagens de programação e algoritmos. Prepare-se para uma viagem que irá expandir não apenas o seu conhecimento, mas também a sua apreciação pela beleza e elegância que a matemática pode oferecer.
+Contrariando o senso comum, a Ciência da Computação não nasce dos esforços de [Pascal](https://en.wikipedia.org/wiki/Blaise_Pascal), [Leibniz](https://en.wikipedia.org/wiki/Gottfried_Wilhelm_Leibniz) ou [Babagge](https://en.wikipedia.org/wiki/Charles_Babbage). Ainda que seus trabalhos sejam importantes, e sirvam de base para a matemática desenvolvida no final do século XIX, a Ciência da Computação tem data de nascimento, 12 de novembro de 1937, dia em que [Alan Touring](https://en.wikipedia.org/wiki/Alan_Turing) publicou [_On Computable Numbers, with an Application to the Entscheidungsproblem_](https://londmathsoc.onlinelibrary.wiley.com/doi/abs/10.1112/plms/s2-42.1.230#:~:text=On%20Computable%20Numbers%2C%20with%20an,Mathematical%20Society%20%2D%20Wiley%20Online%20Library). Quando terminar de estudar este trabalho, a amável leitora há de concordar comigo. Para chegarmos lá, vamos andar para frente e para trás na história, como se este humilde timoneiro controlasse uma máquina do tempo. Faremos isso para criar um conjunto ordenado de porquês, antes de entendermos cada como relacionado a Ciência da Computação e por falar em conjuntos.
 
-## Conjuntos
+## Os Conjuntos são os Alicerces que Precisamos
 
-No século XVII, matemáticos como [John Wallis](https://en.wikipedia.org/wiki/John_Wallis) e [Isaac Newton](https://en.wikipedia.org/wiki/Isaac_Newton) já utilizavam conjuntos de maneira informal em suas obras. [Leonhard Euler](https://en.wikipedia.org/wiki/Leonhard_Euler), no século XVIII, introduziu noções primitivas de conjuntos e funções em seus trabalhos.
+No século XVII, matemáticos como [John Wallis](https://en.wikipedia.org/wiki/John_Wallis) e [Isaac Newton](https://en.wikipedia.org/wiki/Isaac_Newton) já utilizavam conjuntos de maneira informal em suas obras. [Leonhard Euler](https://en.wikipedia.org/wiki/Leonhard_Euler), no século XVIII, introduziu noções primitivas de conjuntos e funções em seus trabalhos. Esta é a base. Aqui começa o estudo dos conjuntos, uma base que, se a doce leitora quiser, pode ser trilhada até a aritmética grega, mas que iria muito além das nossas ambições. Esta base forneceu a estrutura sobre a qual [Georg Cantor](https://en.wikipedia.org/wiki/Georg_Cantor) se apoiou.
 
-O ano de 1874 assistiu [Georg Cantor](https://en.wikipedia.org/wiki/Georg_Cantor) introduzir ao mundo à teoria dos conjuntos. Primeiramente delineada em _Über eine Eigenschaft des Inbegriffes aller reellen algebraischen Zahlen_ (Sobre uma propriedade do conjunto de todos os números algébricos reais), o trabalho pousou com força no [Journal de Crelle](https://www.degruyter.com/journal/key/crll/html). Em 1879, Cantor solidificou suas ideias espalhando-as através de seis artigos penetrantes no [Mathematische Annalen](https://www.springer.com/journal/208). Essas obras marcariam o terreno fértil para o desenvolvimento da matemática moderna.
+O ano de 1874 assistiu [Georg Cantor](https://en.wikipedia.org/wiki/Georg_Cantor) introduzir ao mundo à teoria dos conjuntos. Primeiramente delineada em [_Über eine Eigenschaft des Inbegriffes aller reellen algebraischen Zahlen_](https://link.springer.com/chapter/10.1007/978-3-7091-9516-1_2) (Sobre uma propriedade do conjunto de todos os números algébricos reais), o trabalho impactou fortemente o mundo da matemática a partir do [Journal de Crelle](https://www.degruyter.com/journal/key/crll/html). Em 1879, Cantor solidificou suas ideias espalhando-as através de seis artigos reveladores, impactantes e controversos no [Mathematische Annalen](https://www.springer.com/journal/208). Essas obras marcariam o terreno fértil para o desenvolvimento da matemática moderna.
 
-Cantor não hesitou. Ele revelou que os números reais ultrapassavam os naturais em quantidade, desvendou os números transfinitos e a aritmética cardinal e forjou conjuntos infinitos não enumeráveis, desafiadores.
+Cantor não hesitou. Ele revelou que os números reais ultrapassavam os naturais em quantidade, desvendou os números transfinitos e a aritmética cardinal e forjou conjuntos infinitos não enumeráveis, inacreditavelmente desafiadores.
 
 Foi uma caminhada solitária. O ceticismo sombreava cada passo, a comunidade matemática murmurava entre surpresa, medo e inveja. Mas a determinação de Cantor prevaleceu, plantando firmemente sua teoria como uma espinha dorsal não reconhecida, mas indispensável, da matemática moderna, ramificando-se silenciosamente mas poderosamente em análises, topologias, teoria dos grafos e medidas. À Teoria de Conjuntos de Cantor damos o nome de Inocente, por permitir a definição de conjuntos de forma não axiomática. Mas, afinal, o que é um conjunto?
 
@@ -50,15 +50,72 @@ $$Par = \{x: x é divisível por 2}$$
 
 Que lemos $Par$ é o conjunto de todos os elementos $x$ tal que $x \text{é divisível por 2}$
 
-No século XX, depois de muita discussão, inimizades, surpresas e conflitos, foi desenvolvida uma _Teoria Axiomática de Conjuntos_, baseada no trabalho de Cantor, e aprimorada por [Ernst Zermelo](https://en.wikipedia.org/wiki/Ernst_Zermelo) e [Abraham Fraenkel](https://en.wikipedia.org/wiki/Abraham_Fraenkel) que ficou conhecida como **ZF**. Esta teoria consiste na definição de vários axiomas para suportar de forma consistente e elegante o conjunto de operações que podem ser realizadas com elementos de conjuntos, como: _axioma do par_, _axioma da união_, _axioma da potência_, _axioma da substituição_, entre muitos outros que fogem deste nosso humilde texto. O Sistema **ZF** acabou se provando como sendo suficientemente poderoso para a determinação da consistência de praticamente toda a matemática, sem abrir mão dos conceitos criados por Cantor.
+Na alvorada do século XX, a matemática navegava em águas turbulentas, enfrentando paradoxos e inconsistências. A necessidade de uma fundação sólida para a matemática era evidente, dando início à jornada da teoria dos conjuntos. E, neste ponto, daremos nosso primeiro salto no tempo. Desta vez, para o futuro, vamos deixar o final do século XIX, pular alguns anos importantes como 1900 e 1903, que visitaremos em breve e focar no ano de 1908. 
 
-Voltando a matemática: para que uma coleção de item seja um conjunto deve obedecer as seguintes propriedades:
+Em 1908, [Ernst Zermelo](https://en.wikipedia.org/wiki/Ernst_Zermelo) lançou a primeira pedra, criando uma teoria dos conjuntos para navegar através dos paradoxos que assolavam a matemática da época. Ele introduziu axiomas cruciais, incluindo o controverso axioma da escolha, na tentativa de fornecer um porto seguro para a matemática. Seu objetivo era resolver os paradoxos que haviam sido encontrados na Teoria Ingênua de Cantor. Precisamos entender estes trabalhos porque no tempo em que a leitora lê este trabalho, esta é a teoria que suporta a matemática. No entanto, nossa jornada esta longe de terminar.
 
-- Determinação: os elementos de um conjunto são bem definidos;
-- Não ordenação: a ordem dos elementos não importa;
-- Eliminação de repetidos: cada elemento aparece apenas uma vez;
+### Teoria de Zermelo-Fraenkel
 
-Um destes conceitos importantes devidos a Cantor é o conceito de cardinalidade, $#$. A cardinalidade $#_A = |A|$ de um conjunto $A$ é o número de elementos em $A$.
+Em 1922, [Abraham Fraenkel](https://en.wikipedia.org/wiki/Abraham_Fraenkel) e [Thoralf Skolem](https://en.wikipedia.org/wiki/Thoralf_Skolem) refinaram e expandiram a teoria de Zermelo, dando origem à teoria de **Zermelo-Fraenkel**, conhecida como **ZF**. Eles decidiram abandonar o axioma da escolha, uma decisão motivada por debates fervorosos sobre sua validade. Matemáticos são criaturas de personalidade forte.
+
+O axioma da escolha não seria esquecido. Ele ressurgiu, demonstrando ser uma ferramenta poderosa para construir conjuntos e provar teoremas que, de outra forma, permaneceriam inalcançáveis. Este axioma, que permite formar um novo conjunto selecionando um elemento de cada conjunto em uma coleção, encontrou seu lugar na teoria de Zermelo-Fraenkel com o axioma da escolha, conhecida como **ZFC**.
+
+A **ZFC**, com o axioma da escolha a bordo, navegou para águas mais profundas, permitindo a prova de teoremas significativos e facilitando a construção de conjuntos complexos. Enquanto isso, a teoria **ZF** continuou sua própria jornada, explorando territórios inexplorados sem o auxílio do axioma da escolha.
+
+A matemática, como um navio resistente, continua sua jornada através dos mares tumultuados, com as teorias ZF e **ZFC** servindo como bússolas confiáveis, guiando os matemáticos em sua busca incessante por compreensão e descoberta. Infelizmente, os matemáticos ainda não têm consistência, ou concordância sobre qual conjunto de axiomas define a Teoria Zermelo-Fraenkel, porém, com certeza ela será sustentada pela beleza dos seguintes axiomas:
+
+1. **Axioma da Extensão**: para todos os conjuntos $A$ e $B$, $A = B$ se e somente se para todo $x$, $x \in A$ se e somente se $x \in B$. O que pode ser expresso com mais formalidade por:
+     $$ \forall u(u \in X = u \in Y) \Rightarrow X = Y $$
+   - Este axioma ajuda a definir a igualdade de conjuntos de uma maneira clara e precisa. É fundamental para evitar ambiguidades e inconsistências ao trabalhar com conjuntos. 
+   - **Exemplo**: Se $A = \{1, 2\}$ e $B = \{1, 2\}$, então $A = B$.
+   - Sem o axioma da extensão, poderia haver ambiguidade na representação de conjuntos. Por exemplo, os conjuntos $A = \{1, 2, 3\}$ e $B = \{3, 2, 1\}$ poderiam ser considerados diferentes devido à ordem dos elementos. Além disso, sem uma definição clara de igualdade de conjuntos, poderia haver inconsistências ao definir subconjuntos. Se tivermos um conjunto $C = \{1, 2\}$ e um conjunto $D = \{2, 1\}$, algum inocente poderia argumentar que $C$ não é um subconjunto de $D$ devido à diferença na ordem dos elementos. Na ausência do axioma da extensão, operações de conjuntos como união e interseção poderiam resultar em inconsistências. A união de $A = \{1, 2\}$ e $B = \{2, 1\}$ poderia ser questionada e alguns duvidariam se a união resultaria em um conjunto com dois ou quatro elementos.
+
+2. **Axioma do Conjunto Vazio**: existe um conjunto $\emptyset$ tal que para todo $x$, $x \notin \emptyset$.
+   - Este axioma introduz o conceito de um conjunto sem elementos, que serve como um bloco de construção fundamental na teoria dos conjuntos. É necessário para definir operações como interseção e diferença de conjuntos.
+
+3. **Axioma do Par**: para todos os conjuntos $A$ e $B$, existe um conjunto $C$ tal que para todo $x$, $x \in C$ se e somente se $x = a$ ou $x = b$. Que podemos formalizar como:
+     $$ \forall a \forall b \exists c \forall x(x \in C = (x = a \vee x = b)) $$
+   - Este axioma permite a construção de conjuntos a partir de outros conjuntos existentes. Facilita a construção e manipulação de conjuntos em teoremas e definições. Este axioma estabelece que, para qualquer par de conjuntos $A$ e $B$, existe um conjunto $C$ que contém exatamente $A$ e $B$ como seus elementos. Pode ser que $A$ e $B$ sejam iguais, nesse caso, o conjunto $C$ terá um único elemento. Este axioma garante a existência de um conjunto que contém exatamente dois elementos específicos, que podem ser conjuntos eles mesmos. Não importa se os elementos são iguais ou diferentes, o conjunto resultante terá, no máximo, dois elementos distintos.
+   - **Exemplo 1**: se $A = \{1\}$ e $B = \{2\}$, então $C = \{{1}, {2}\}$.
+   - **Exemplo 2**: se $A = \{1, 2, 3\} \) e \( B = \{3, 4, 5\}$ então $C = \{ \{1, 2, 3\}, \{3, 4, 5\} \}.
+
+4. **Axioma da União**: para todo conjunto $X$, existe um conjunto $Y$ tal que para todo $x$, $x \in Y$ se e somente se existe um conjunto $Z$ tal que $Z \in X$ e $x \in Z$. Expresso por:
+     $$ \forall X \exists Y \forall u(u \in Y = \exists z(z \in X \wedge u \in z)) $$
+   - Este axioma facilita a união de conjuntos. É uma operação fundamental na teoria dos conjuntos, permitindo a combinação de conjuntos de uma maneira estruturada.
+   - **Exemplo**: Se $X = \{\{1\}, \{2\}\}$, então $Y = \{1, 2\}$.
+
+5. **Axioma do Conjunto Potência**: para todo conjunto $X$, existe um conjunto $Y$ tal que para todo $Z$, $Z \in Y$ se e somente se $Z \subseteq X$. Que pode ser escrito formalmente por:
+     $$ \forall X \exists Y \forall u(u \in Y = u \subseteq X) $$
+   - Este axioma permite a construção de conjuntos de conjuntos. É essencial para explorar as propriedades e estruturas dos conjuntos em um nível mais profundo. Define a existência dos subconjuntos já que garante que para qualquer conjunto $X$, existe um conjunto $Y$ que contém todos os subconjuntos de $X$. Ou seja, $X$ é um subconjunto de $Y$. 
+   - **Exemplo**: Se $X = \{1, 2\}$, então $Y = \{\emptyset, \{1\}, \{2\}, \{1, 2\}\}$ é o conjunto que contém todos os subconjuntos de $X$. Observe que $\emptyset$ é um subconjunto de $X$, ainda que ele não tenha sido explicitado.
+
+6. **Axioma da Separação** (ou Especificação): para todo conjunto $X$ e toda propriedade $P(x)$ expressa por uma fórmula, existe um conjunto $Y$ tal que para todo $x$, $x \in Y$ se e somente se $x \in X$ e $P(x)$ é verdadeira. Formalmente teremos:
+     $$ \forall X \forall p \exists Y \forall u(u \in Y = (u \in X \wedge \phi(u,p))) $$
+   - Este axioma permite a criação de subconjuntos a partir de conjuntos existentes usando uma propriedade específica, explicitada pela fórmula $P(x)$. Facilita a manipulação e análise de conjuntos através da especificação de propriedades desejadas.
+   - **Exemplo**: se $X = \{1, 2, 3\}$ e $P(x)$ representa $x > 1$, então $Y = \{2, 3\}$.
+  
+7. **Axioma da Fundação**: todo conjunto $X$ é bem fundado, o que significa que não existe uma sequência infinita descendente de elementos em $X$. Que pode ser escrito como:
+     $$ \forall S[S \neq \emptyset \Rightarrow (\exists x \in S)S \cap x = \emptyset] $$
+   Este axioma evita a formação de loops infinitos e estruturas recursivas sem fim dentro dos conjuntos. Este axioma afirma que todo conjunto $X$ é bem fundado, o que significa que não existe uma sequência infinita descendente de elementos em $X$. Para entender melhor, considere que estamos tentando formar uma sequência infinita descendente de conjuntos, onde cada conjunto contém o próximo na sequência, como $x_1 \in x_2 \in x_3 \in \ldots$. O Axioma da Fundação proíbe a existência de tal sequência, garantindo que não podemos ter uma cadeia infinita de conjuntos aninhados dessa maneira. Este axioma garante que os conjuntos têm uma _base_ ou _fundação_, prevenindo a formação de conjuntos que não têm um elemento _mínimo_, o que poderia levar a contradições, como o Paradoxo de Russell.
+   - **Exemplo**: Não é possível ter uma sequência como $x_1 \in x_2 \in x_3 \in \ldots$ em um conjunto.
+
+8. **Axioma da Infinitude**: existe um conjunto $X$ tal que $\emptyset \in X$ e para todo $x \in X$, $x \cup \{x\} \in X$. Formalmente teremos:
+     $$ \exists S[\emptyset \in S \wedge [\forall x \in S](x \cup \{x\} \in S)] $$
+   Este axioma introduz a noção de infinitude na teoria dos conjuntos. É a base para a construção de conjuntos infinitos, como os números naturais.
+   - **Exemplo**: O conjunto dos números naturais, $\mathbb{N}$, satisfaz este axioma.
+
+9. **Axioma da Escolha**: dada uma coleção de conjuntos não vazios, é possível formar um novo conjunto selecionando um elemento de cada conjunto na coleção. O que formalmente seria expresso por:
+        $$ \forall x \in a \exists A(x,y) \Rightarrow \exists y \forall x \in a A(x,y(x)) $$
+   Este axioma é fundamental para muitos teoremas e construções na matemática. Permite a seleção de elementos em uma coleção de conjuntos, facilitando a construção de novos conjuntos e provas.
+   - **Exemplo**: Dada uma coleção de conjuntos $\{A_1, A_2, \ldots, A_n\}$, é possível formar um conjunto $B = \{x_1, x_2, \ldots, x_n\}$ onde $x_i \in A_i$ para cada $i$.
+
+Neste texto nós usaremos a **ZFC** sempre que for conveniente e, se encontrarmos alguma inconsistência durante a construção deste raciocínio, destacaremos que bússola usaremos para justificar nossa decisão. Dito isso, já começando, para que uma coleção de itens seja um conjunto, ela deve obedecer as seguintes propriedades:
+
+- **Determinação**: os elementos de um conjunto são bem definidos;
+- **Não ordenação**: a ordem dos elementos não importa;
+- **Eliminação de repetidos**: cada elemento aparece apenas uma vez;
+
+Entre os conceitos mais importantes que estudaremos, devidos a Cantor, destaca-se o conceito de _cardinalidade_, $#$. A cardinalidade do conjunto $A$ que pode ser representada por $#_A$ ou $|A|$ representa o número de elementos em $A$.
 
 Exemplos:
 $|\varnothing| = 0$, a cardinalidade do conjunto vazio, $\varnothing$ é zero;
@@ -72,6 +129,8 @@ Podemos fazer operações entre conjuntos. Exemplos importantes de operações e
 **$\textbf{União}$**: a união de dois conjuntos $A$ e $B$, denotada por $A \cup B$, é o conjunto que contém todos os elementos que estão em $A$ ou em $B$.
 
 $$A \cup B = \{x : x \in A \text{ ou } x \in B\}$$
+
+Lembrando do **Axioma da Extensão**, sua existência elimina qualquer ambiguidade na união dos conjuntos $A = \{1, 2\}$ e $B = \{2, 1\}$. De acordo com este axioma, _dois conjuntos são iguais se e somente se eles têm os mesmos elementos_, independentemente da ordem em que os elementos são apresentados. Portanto, os conjuntos $A$ e $B$ são, na verdade, iguais, já que contêm os mesmos elementos, 1 e 2. Graças a isso, quando aplicamos uma operação de união entre $A$ e $B$, não existe dúvidas de que o resultado seria um conjunto com apenas dois elementos, $\{1, 2\}$.
 
 **$\textbf{Interseção}$**: a interseção de dois conjuntos $A$ e $B$, denotada por $A \cap B$, é o conjunto que contém os elementos que estão simultaneamente em $A$ e em $B$.
 
