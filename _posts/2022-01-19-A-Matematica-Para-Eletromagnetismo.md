@@ -415,9 +415,11 @@ Substituindo na equação, temos:
 $$
 \vec{D} = (8, -1, -5) - 15 \left(\frac{1}{3}, -1, \frac{2}{3}\right)
 $$
+
 $$
 \vec{D} = (8, -1, -5) - (5, 15, 10)
 $$
+
 $$
 \vec{D} = (3, -16, -15)
 $$
@@ -427,15 +429,16 @@ Agora, vamos usar o vetor $\vec{D}$ para encontrar as coordenadas do ponto $Q$. 
 $$
 \text{Coordenadas de } Q = \text{Coordenadas de } P - \vec{d}
 $$
+
 $$
 \text{Coordenadas de } Q = (8, -1, -5) - (3, -16, -15)
 $$
+
 $$
 \text{Coordenadas de } Q = (5, 15, 10)
 $$
 
 Portanto, as coordenadas do ponto $Q$ são $(5, 15, 10)$.
-
 
 ## Produto Escalar
 
