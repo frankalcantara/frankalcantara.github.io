@@ -1,6 +1,6 @@
 ---
-layout: posts
-title: Brevíssima Introdução a Ciência da Computação
+layout: post
+title: "Brevíssima Introdução a Ciência da Computação"
 author: Frank
 categories:
   - artigo
@@ -11,17 +11,15 @@ tags:
   - Matemática
   - eng. software
 image: ""
-featured: 2023-09-03T18:38:34.996Z
+featured: false
 rating: 5
 description: Uma brevíssima introdução ao conceito de monad e seu uso em linguagens de programação.
-date: 2023-09-03T18:38:34.996Z
-preview: A Ciência da Computação é a arte de aplicar a matemática para utilizaar máquinas na resolução de problemas. Nesta jornada vamos ver o mínimo de matemática necessário para entender como fazer magia com computadores.
+date: 2023-09-29T21:53:10.540Z
+preview: A Ciência da Computação é a arte de aplicar a matemática para utilizar máquinas na resolução de problemas. Nesta jornada vamos ver o mínimo de matemática necessário para entender como fazer magia com computadores.
 keywords: ""
-slug: 2023-09-03T18:38:34.996Z
-published: true
+slug: brevissima-introducao-a-ciencia-da-computacao
+draft: true
 ---
-
-
 Nesta jornada exploraremos as profundezas da álgebra abstrata, começando nos conceitos de conjuntos, nos levando a uma análise de relações e funções. Este é o ponto de partida, onde lançamos as bases para uma compreensão mais profunda das estruturas matemáticas que virão a seguir, desde as simples _magmas_ até os mais complexos anéis, corpos, monads e tipos. À medida que avançarmos o terreno se tornará mais complexo e intrigante. Explorarmos categorias, morfismos e, tipos e tipos paramétricos.
 
 Com uma estrutura bem planejada, este percurso não só serve como uma introdução à Ciência da Computação, mas também como uma fundação sólida para os estudos mais avançados de linguagens de programação e algoritmos. Prepare-se para uma viagem que irá expandir o seu conhecimento, e a sua apreciação pela beleza e elegância que a matemática pode oferecer à resolução de problemas.
@@ -76,7 +74,7 @@ A matemática, como um navio resistente, continua sua jornada através dos mares
 3. **Axioma do Par**: para todos os conjuntos $A$ e $B$, existe um conjunto $C$ tal que para todo $x$, $x \in C$ se e somente se $x = a$ ou $x = b$. Que podemos formalizar como:
      $$ \forall a \forall b \exists c \forall x(x \in C = (x = a \vee x = b)) $$
    - Este axioma permite a construção de conjuntos a partir de outros conjuntos existentes. Facilita a construção e manipulação de conjuntos em teoremas e definições. Este axioma estabelece que, para qualquer par de conjuntos $A$ e $B$, existe um conjunto $C$ que contém exatamente $A$ e $B$ como seus elementos. Pode ser que $A$ e $B$ sejam iguais, nesse caso, o conjunto $C$ terá um único elemento. Este axioma garante a existência de um conjunto que contém exatamente dois elementos específicos, que podem ser conjuntos eles mesmos. Não importa se os elementos são iguais ou diferentes, o conjunto resultante terá, no máximo, dois elementos distintos.
-   - **Exemplo 1**: se $A = \{1\}$ e $B = \{2\}$, então $C = \{{1}, {2}\}$.
+   - **Exemplo 1**: se $A = \{1\}$ e $B = \{2\}$, então $C = \{\{1\}, \{2\}\}$.
    - **Exemplo 2**: se $A = \{1, 2, 3\} \) e \( B = \{3, 4, 5\}$ então $C = \{ \{1, 2, 3\}, \{3, 4, 5\} \}.
 
 4. **Axioma da União**: para todo conjunto $X$, existe um conjunto $Y$ tal que para todo $x$, $x \in Y$ se e somente se existe um conjunto $Z$ tal que $Z \in X$ e $x \in Z$. Expresso por:
