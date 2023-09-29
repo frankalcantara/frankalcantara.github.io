@@ -36,7 +36,6 @@ Imagem de [Asimina Nteliou](https://pixabay.com/users/asimina-1229333/?utm_sourc
   - [Vetores Posição e Distância](#vetores-posição-e-distância)
   - [Primeiros Exercícios com Vetores](#primeiros-exercícios-com-vetores)
     - [Exercício 1](#exercício-1)
-  - [Solução](#solução)
   - [Produto Escalar](#produto-escalar)
   - [Produto Vetorial](#produto-vetorial)
     - [A Identidade de Jacobi](#a-identidade-de-jacobi)
@@ -403,9 +402,7 @@ Os vetores são como os ventos que cruzam o mar, invisíveis mas poderosos, guia
 
 Considere um sistema de referência onde as distâncias são dimensionadas apenas por unidades abstratas, sem especificação de unidades de medida. Nesse sistema, dois vetores são dados. O vetor $\vec{A}$ inicia na origem e termina no ponto $P$ com coordenadas $(8, -1, -5)$. Temos também um vetor unitário $\vec{c}$ que parte da origem em direção ao ponto $Q$, e é representado por $\frac{1}{3}(1, -3, 2)$. Se a distância entre os pontos $P$ e $Q$ é igual a 15 unidades, determine as coordenadas do ponto $Q$.
 
-## Solução
-
-Primeiramente, vamos encontrar o vetor distância $\vec{D}$ entre os pontos $P$ e $Q$.
+**Solução**: vamos encontrar o vetor distância $\vec{D}$ entre os pontos $P$ e $Q$.
 
 $$
 \vec{D} = \vec{a} - 15\vec{c}

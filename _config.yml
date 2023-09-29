@@ -10,8 +10,6 @@ disqus: ""
 mailchimp-list: ""
 include: ["_pages"]
 permalink: /:title/
-accu: "assets/images/botao-ACCU.png"
-acculink: https://accu.org/
 # Authors
 authors:
   Frank:
@@ -37,7 +35,7 @@ jekyll-archives:
     - categories
   layout: archive
   permalinks:
-    category: "/category/:name/"
+    category: /category/:name/
 
 # Pagination
 paginate: 6
