@@ -34,6 +34,9 @@ Imagem de [Asimina Nteliou](https://pixabay.com/users/asimina-1229333/?utm_sourc
   - [Vetor Oposto](#vetor-oposto)
   - [Adição e Subtração de Vetores](#adição-e-subtração-de-vetores)
   - [Vetores Posição e Distância](#vetores-posição-e-distância)
+  - [Primeiros Exercícios com Vetores](#primeiros-exercícios-com-vetores)
+    - [Exercício 1](#exercício-1)
+  - [Solução](#solução)
   - [Produto Escalar](#produto-escalar)
   - [Produto Vetorial](#produto-vetorial)
     - [A Identidade de Jacobi](#a-identidade-de-jacobi)
@@ -234,6 +237,7 @@ A multiplicação por escalar é comutativa, associativa, distributiva e fechada
 \[0A=0\]
 
 </p>
+
 ## Vetor Oposto
 
 A multiplicação de um vetor pelo escalar $-1$ é especial.
@@ -312,6 +316,7 @@ Essas propriedades são fundamentais para a manipulação de vetores em muitos c
 <b>Importante:</b> a subtração não é comutativa nem associativa.
 
 </p>
+
 ## Vetores Posição e Distância
 
 Um vetor posição, também conhecido como vetor ponto, é uma ferramenta útil para descrever a posição de um ponto no espaço em relação a um ponto de referência (geralmente a origem do sistema de coordenadas). Como uma flecha que começa na origem, o coração do sistema de coordenadas, onde $x$, $y$, e $z$ são todos zero, $(0,0,0)$, e termina em um ponto $P$ no espaço. Este ponto $P$ tem suas próprias coordenadas - digamos, $x$, $y$, e $z$.
@@ -389,6 +394,48 @@ Sendo assim o perímetro será:
 \[ \vert P_1P_2 \vert + \vert P_2P_3 \vert + \vert P_3P_1 \vert =7,48+10,05+7=24.53 \]
 
 </p>
+
+## Primeiros Exercícios com Vetores
+
+Os vetores são como os ventos que cruzam o mar, invisíveis mas poderosos, guiando navios e direcionando correntes. Na matemática, eles têm sua própria linguagem, um código entre o visível e o invisível, mapeando direções e magnitudes. Aqui, você encontrará exercícios que irão desafiar sua habilidade de navegar por esse oceano numérico. Não são apenas problemas, mas bússolas que apontam para o entendimento mais profundo. Então pegue lápis e papel como se fossem um leme e um mapa e prepare-se para traçar seu próprio curso.
+
+### Exercício 1
+
+Considere um sistema de referência onde as distâncias são dimensionadas apenas por unidades abstratas, sem especificação de unidades de medida. Nesse sistema, dois vetores são dados. O vetor $\vec{A}$ inicia na origem e termina no ponto $P$ com coordenadas $(8, -1, -5)$. Temos também um vetor unitário $\vec{c}$ que parte da origem em direção ao ponto $Q$, e é representado por $\frac{1}{3}(1, -3, 2)$. Se a distância entre os pontos $P$ e $Q$ é igual a 15 unidades, determine as coordenadas do ponto $Q$.
+
+## Solução
+
+Primeiramente, vamos encontrar o vetor distância $\vec{D}$ entre os pontos $P$ e $Q$.
+$$
+\vec{D} = \vec{a} - 15\vec{c}
+$$
+
+As coordenadas do vetor $\vec{A}$ são $(8, -1, -5)$ e as do vetor unitário $\vec{c}$ são $\frac{1}{3}(1, -3, 2) = (\frac{1}{3}, -1, \frac{2}{3})$.
+
+Substituindo na equação, temos:
+$$
+\vec{D} = (8, -1, -5) - 15 \left(\frac{1}{3}, -1, \frac{2}{3}\right)
+$$
+$$
+\vec{D} = (8, -1, -5) - (5, 15, 10)
+$$
+$$
+\vec{D} = (3, -16, -15)
+$$
+
+Agora, vamos usar o vetor $\vec{D}$ para encontrar as coordenadas do ponto $Q$. O vetor $\vec{D}$ tem origem no ponto $Q$ e aponta para o ponto $P$, então para encontrar $Q$ precisamos fazer:
+$$
+\text{Coordenadas de } Q = \text{Coordenadas de } P - \vec{d}
+$$
+$$
+\text{Coordenadas de } Q = (8, -1, -5) - (3, -16, -15)
+$$
+$$
+\text{Coordenadas de } Q = (5, 15, 10)
+$$
+
+Portanto, as coordenadas do ponto $Q$ são $(5, 15, 10)$.
+
 
 ## Produto Escalar
 
@@ -725,26 +772,31 @@ Prepare-se para uma surpresa olhe com cuidado e verá como a matemática se torn
 
 ### Lei de Coulomb
 
-No ano da glória de 1785, um pesquisador francês, [Charles-Augustin de Coulomb](https://en.wikipedia.org/wiki/Charles-Augustin_de_Coulomb)Formulou, empiricamente uma lei para definir a intensidade da força exercida por uma carga elétrica $Q$ sobre outra dada por: 
+No ano da glória de 1785, um pesquisador francês, [Charles-Augustin de Coulomb](https://en.wikipedia.org/wiki/Charles-Augustin_de_Coulomb)Formulou, empiricamente uma lei para definir a intensidade da força exercida por uma carga elétrica $Q$ sobre outra dada por:
 
 $$
 F_{21} = K_e \frac{Q_1Q_2}{R^2}
 $$
 
-Esta era uma lei empírica, baseada na observação dos efeitos de cargas diferentes em uma balança de torção. [Henry Cavendish](https://en.wikipedia.org/wiki/Charles-Augustin_de_Coulomb) chegou a mesma equação, de forma independente alguns anos depois.E até o trabalho de [Michael Faraday](https://en.wikipedia.org/wiki/Michael_Faraday) sobre as linhas de força, esta equação era suficiente. Quase 100 anos depois de Coulomb, matemáticos como Gauss, Hamilton, Gibbs e Maxwell deram a esta lei uma roupagem vetorial. 
+ [Charles-Augustin de Coulomb](https://en.wikipedia.org/wiki/Charles-Augustin_de_Coulomb) estabeleceu sua lei de forma empírica utilizando uma balança de torção para medir as forças de interação entre cargas elétricas estacionárias. Utilizando este método, ele foi capaz de quantificar a relação inversa entre a força e o quadrado da distância entre as cargas. De forma independente, [Henry Cavendish](https://en.wikipedia.org/wiki/Henry_Cavendish) chegou à mesma equação anos depois, também utilizando uma balança de torção, embora seus resultados não tenham sido amplamente publicados na época.
+ 
+ Até o surgimento do trabalho de [Michael Faraday](https://en.wikipedia.org/wiki/Michael_Faraday) sobre linhas de força elétrica, a equação desenvolvida por Coulomb era considerada suficiente para descrever interações eletrostáticas. Quase um século depois de Coulomb, matemáticos como [Gauss](https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss), [Hamilton](https://en.wikipedia.org/wiki/William_Rowan_Hamilton), [Maxwell](https://en.wikipedia.org/wiki/James_Clerk_Maxwell) reformularam esta lei, incorporando-a em um contexto vetorial. Eles utilizaram o cálculo vetorial para expressar as direções e magnitudes da força, permitindo que Lei de Coulomb possa ser aplicada de forma mais geral em campos eletrostáticos e magnetostáticos.
 
 $$
 F_{21} = \frac{1}{4\pi \epsilon_0 \epsilon_r} \frac{Q_1Q_2}{R^2} a_{21} 
 $$
 
-Nesta equação: 
+Nesta equação:
 
 - $F_{21}$ é a força que é aplicada sobre a carga 2, $Q_2$,  devido a existência da carga 1, $Q_1$.
 - $\epslion_0$ representa a permissividade do vácuo, medida em Farads por metro ($F/m$). 
 - $\epslion_r$ representa a permissividade do meio onde as cargas estão, um valor escalar e sem unidade.
 - $4\pi $ surge da existência da força em todos os pontos do espaço, uma esfera que se estende da carga até o infinito. 
 - $Q_1Q_2$ representa o produto entre as intensidades das cargas que no Sistema Internacional de Unidades são medidas em Coulombs ($C$). 
-- $a_{21}$ representa o vetor unitário com origem em $Q1$ e destino em $Q2$.
+- $a_{21}$ representa o vetor unitário com origem em $Q1$ e destino em $Q2$. 
+
+
+
 # Cálculo Vetorial
 
 Cálculo vetorial, soa como algo saído de uma história de ficção científica. Mas é mais terra-a-terra do que podemos imaginar de longe. Trata-se uma técnica para lidar com quantidades que têm tanto magnitude quanto direção de forma contínua. Velocidade. Força. Fluxo de um rio, Campos Elétricos, Campos Magnéticos. Coisas que não apenas têm um tamanho, mas também uma direção, um sentido. Não sei se já falei sobre isso, são as grandezas que chamamos de vetoriais e representamos por vetores.
