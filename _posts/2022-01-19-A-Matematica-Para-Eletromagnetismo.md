@@ -406,6 +406,7 @@ Considere um sistema de referência onde as distâncias são dimensionadas apena
 ## Solução
 
 Primeiramente, vamos encontrar o vetor distância $\vec{D}$ entre os pontos $P$ e $Q$.
+
 $$
 \vec{D} = \vec{a} - 15\vec{c}
 $$
@@ -413,6 +414,7 @@ $$
 As coordenadas do vetor $\vec{A}$ são $(8, -1, -5)$ e as do vetor unitário $\vec{c}$ são $\frac{1}{3}(1, -3, 2) = (\frac{1}{3}, -1, \frac{2}{3})$.
 
 Substituindo na equação, temos:
+
 $$
 \vec{D} = (8, -1, -5) - 15 \left(\frac{1}{3}, -1, \frac{2}{3}\right)
 $$
@@ -424,6 +426,7 @@ $$
 $$
 
 Agora, vamos usar o vetor $\vec{D}$ para encontrar as coordenadas do ponto $Q$. O vetor $\vec{D}$ tem origem no ponto $Q$ e aponta para o ponto $P$, então para encontrar $Q$ precisamos fazer:
+
 $$
 \text{Coordenadas de } Q = \text{Coordenadas de } P - \vec{d}
 $$
