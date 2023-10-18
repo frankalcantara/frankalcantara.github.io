@@ -21,7 +21,7 @@ keywords:
 rating: 5
 ---
 
-O Eletromagnetismo é a lei, o ordenamento. Como uma divindade antiga que rege a existência e os movimentos do nosso universo. Duas forças, elétrica e magnética, em uma dança interminável, moldam tudo, de um grão de poeira a um oceano de estrelas, até o mesmo dispositivo que você usa para decifrar essas palavras deve sua existência e funcionamento ao Eletromagnetismo.
+O Eletromagnetismo é a lei, o ordenamento que embala o universo. Como uma divindade antiga que rege a existência e os movimentos de tudo que existe. Duas forças, elétrica e magnética, em uma dança interminável, moldam de um grão de poeira a um oceano de estrelas, até o mesmo dispositivo que você usa para decifrar essas palavras deve sua existência e funcionamento ao Eletromagnetismo.
 
 Imagem de [Asimina Nteliou](https://pixabay.com/users/asimina-1229333/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2773167) de [Pixabay](https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2773167)
 
@@ -29,16 +29,20 @@ Imagem de [Asimina Nteliou](https://pixabay.com/users/asimina-1229333/?utm_sourc
 
 - [Álgebra Linear](#álgebra-linear)
   - [Vetores, os compassos de tudo que há e haverá](#vetores-os-compassos-de-tudo-que-há-e-haverá)
+    - [Exercício Resolvido 1](#exercício-resolvido-1)
     - [Vetores Unitários](#vetores-unitários)
+    - [Exercício Resolvido 2](#exercício-resolvido-2)
+    - [Exercício Resolvido 3](#exercício-resolvido-3)
   - [Multiplicação por Escalar](#multiplicação-por-escalar)
   - [Vetor Oposto](#vetor-oposto)
   - [Adição e Subtração de Vetores](#adição-e-subtração-de-vetores)
+    - [Exercício Resolvido 4](#exercício-resolvido-4)
+    - [Exercício Resolvido 5](#exercício-resolvido-5)
   - [Vetores Posição e Distância](#vetores-posição-e-distância)
-  - [Primeiros Exercícios com Vetores](#primeiros-exercícios-com-vetores)
-    - [Exercício 1](#exercício-1)
+    - [Exercício Resolvido 6](#exercício-resolvido-6)
   - [Produto Escalar](#produto-escalar)
+    - [Exercício Resolvido 7](#exercício-resolvido-7)
   - [Produto Vetorial](#produto-vetorial)
-    - [A Identidade de Jacobi](#a-identidade-de-jacobi)
   - [Usando a Álgebra Vetorial no Eletromagnetismo](#usando-a-álgebra-vetorial-no-eletromagnetismo)
     - [Lei de Coulomb](#lei-de-coulomb)
 - [Cálculo Vetorial](#cálculo-vetorial)
@@ -52,11 +56,11 @@ Imagem de [Asimina Nteliou](https://pixabay.com/users/asimina-1229333/?utm_sourc
     - [Propriedades da Divergência](#propriedades-da-divergência)
   - [Rotacional](#rotacional)
 
-Trataremos de linhas de força invisíveis que se entrelaçam, tangenciam e interferem umas nas outras, formando o tecido do Cosmos e o fluxo da vida, tão real quanto a terra sob os pés ou o ar que respiramos, e como este último, completamente invisíveis.
+Estudaremos linhas de força invisíveis que se entrelaçam, tangenciam e interferem umas nas outras, formando o tecido do Cosmos e o fluxo da vida, tão real quanto a terra sob os pés ou o ar que respiramos, e como este último, completamente invisíveis.
 
-O estudo do Eletromagnetismo será uma batalha própria, individual, dura. É a esperança lançar luz sobre o desconhecido, descobrir as regras que governam a vida e o universo, e então aproveitar essas regras para criar, para progredir, para sobreviver. Não é para os fracos de coração, nem para aqueles que buscam respostas fáceis. É para aqueles que não temem o desconhecido, para os que se levantam diante do abismo do desconhecido e dizem: "eu irei entender". É um desafio, uma luta, um chamado. E, como em qualquer luta, há perdas, há dor, mas também há vitórias, triunfos e, no final de tudo, compreensão. Esta é uma guerra que começou a milhares de anos, ainda que estejamos interessados apenas nas últimas batalhas, as mais recentes.
+O estudo do Eletromagnetismo será uma batalha própria, individual, dura. É a esperança lançar luz sobre o desconhecido, descobrir as regras que governam a vida e o universo, e então aproveitar essas regras para criar, para progredir, para sobreviver. Não é para os fracos de coração, nem para aqueles que buscam respostas fáceis. É para aqueles que não temem o desconhecido, para os que se levantam diante do abismo do desconhecido e dizem: _eu irei entender_. É um desafio, uma luta, um chamado. E, como em qualquer luta, haverão perdas, dores, mas também vitórias, triunfos e, no final de tudo, compreensão. Esta é uma jornada que começou a milhares de anos, e ainda deverá durar outro tanto. Prepare-se sua forma de ver o universo vai mudar.
 
-Quando o século XIX caminhava para seu final, um homem, [James Clerk Maxwell](https://en.wikipedia.org/wiki/James_Clerk_Maxwell), orquestrou as danças dos campos elétrico e do magnético em uma sinfonia de equações. Desenhando na tela do universo, Maxwell delineou a interação dessas forças com o espaço e a matéria. Sua obra, extraordinária em todos os aspectos, destaca-se pela simplicidade refinada e pela beleza lírica. Um balé de números, símbolos e equações que desliza pela folha, fluido e elegante como um rio.
+Quando o século XIX caminhava para seu final, [James Clerk Maxwell](https://en.wikipedia.org/wiki/James_Clerk_Maxwell), orquestrou as danças dos campos elétrico e do magnético em uma sinfonia de equações. Desenhando na tela do universo, Maxwell delineou a interação dessas forças com o espaço e a matéria. Sua obra, extraordinária em todos os aspectos, destaca-se pela simplicidade refinada e pela beleza lírica. Um balé de números, símbolos e equações que desliza pela folha, fluido e elegante como um rio.
 
 Mas essa beleza, essa simplicidade, não é acessível a todos. Ela é um jardim murado, reservado àqueles que conquistaram o direito de entrar através de estudo e compreensão. Sem o conhecimento apropriado, seja da física que fundamenta o universo ou da matemática que o descreve, as equações de Maxwell são como flores de pedra: frias, inalteráveis, sem vida. Com esse entendimento, no entanto, elas florescem em cores e formas maravilhosas, vivas e palpitantes com significado.
 
@@ -78,15 +82,15 @@ O espaço será definido por vetores, cheio de mistério e beleza. A Análise ve
 
 ## Vetores, os compassos de tudo que há e haverá
 
-Vetores, feixes silenciosos de informação, conduzem o entendimento além do simples tamanho. São como bússolas com uma medida, apontando com determinação e direção para desvendar os segredos das grandezas que precisam mais do que só a magnitude. Vetores, abstrações matemáticas que usamos para entender as gradezas que precisam de direção e sentido além da pura magnitude. Usamos os vetores para ir além das grandezas escalares.
+Vetores, feixes silenciosos de informação, conduzem o entendimento além do simples tamanho. São como bússolas com uma medida, apontando com determinação e direção para desvendar os segredos das grandezas que precisam mais do que só a magnitude. Vetores, abstrações matemáticas que usamos para entender as gradezas que precisam de direção e sentido além da pura magnitude. Parecem ser o resultado da mente brilhante de [Simon Stevin](https://en.wikipedia.org/wiki/Simon_Stevin) que, estudando mecânica teve a estudando hidrostática, propôs uma regra empírica para resolver o problema de duas forças, ou mais forças, aplicadas no mesmo ponto por meio de uma regra que hoje conhecemos como a Regra do Paralelogramo publicada em _De Beghinselen der Weeghconst_ (1586; em tradução livre: Estática e Hidrostática). Usamos vetores para superar as limitações das grandezas escalares, incluindo em uma mesma representação amplitude, direção e sentido.
 
-As grandezas escalares, aquelas que podem ser medidas como medimos a massa de um peixe, o tempo que demora para o sol se pôr ou a velocidade de um veleiro cortando a paisagem em linha quase reta. Cada uma é um número único, uma quantidade, um fato em si mesmo contendo todo o conhecimento necessário para seu entendimento.
+As grandezas escalares, aquelas que podem ser medidas como medimos a massa de um peixe, o tempo que demora para o sol se pôr ou a velocidade de um veleiro cortando a paisagem em linha, quisera eu, reta. Cada grandeza escalar é um número único, uma quantidade, um fato em si mesmo carregando todo o conhecimento necessário para seu entendimento.
 
-São as contadoras de histórias silenciosas do mundo, falando de tamanho, de quantidade, de intensidade. E, como um bom whisky, sua força reside na simplicidade. Ainda assim as grandezas escalares que oferecem uma medida da verdade.
+São as contadoras de histórias silenciosas do mundo, falando de tamanho, de quantidade, de intensidade. E, como um bom whisky, sua força reside na simplicidade. Ainda assim, as grandezas escalares oferecem uma medida da verdade.
 
-As grandezas vetoriais, por outro lado são complexas, diversas e intrigantes. Vetores são abstrações matemáticas usadas para entender estas grandezas vetoriais, guerreiras da direção e do sentido. Navegam o mar da matemática com uma clareza de propósito que vai além da mera magnitude. Elas possuem uma seta, uma bússola, que indica para onde se mover. Sobrepujam o valor em si com uma direção, um sentido, uma indicação, uma seta.
+As grandezas vetoriais, por outro lado são complexas, diversas e intrigantes. Vetores são as abstrações que para entender estas grandezas, guerreiras da direção e do sentido. Navegam o mar da matemática com uma clareza de propósito que vai além da mera magnitude. Elas possuem uma seta, uma bússola, que indica para onde se mover. Sobrepujam o valor em si com uma direção, um sentido, uma indicação, uma seta. E fazemos assim, usamos setas em respeito as ideias de [Gaspar Wessel](https://en.wikipedia.org/wiki/Caspar_Wessel) que em seu trabalho [_On the Analytical Representation of Direction_](https://web.archive.org/web/20210709185127/https://lru.praxis.dk/Lru/microsites/hvadermatematik/hem1download/Kap6_projekt6_2_Caspar_Wessels_afhandling_med_forskerbidrag.pdf) de 1778 sugeriu o uso de _linhas orientadas_ para indicar o ponto onde duas linhas se cruzam o mesmo conceito que usamos em somas de vetores. A seta, nossa amiga contemporânea, surge no trabalho de [Jean-Victor Poncelet](https://en.wikipedia.org/wiki/Jean-Victor_Poncelet) trabalhando em problemas de engenharia e usando as regras definidas por Stevin e o conceito de direção de Wessel, resolver usar uma seta para indicar uma força. E assim, as mãos e a mente de um engenheiro deram a luz aos vetores.
 
-A seta, uma extensão de seu ser, representa sua sua orientação. Aponta o caminho para a verdade, mostrando não apenas o quanto, mas também o onde. Seu indica sua magnitude, o quanto, sua essência. Assim vetores escondem intensidade, direção e sentido em uma única entidade, fugaz e intrigante.
+A seta, uma extensão de ser do próprio vetor, representa sua sua orientação. Aponta o caminho para a verdade, mostrando não apenas o quanto, mas também o onde. Seu indica sua magnitude, o quanto, sua essência. Assim vetores escondem intensidade, direção e sentido em uma única entidade, fugaz e intrigante.
 
 As grandezas vetoriais são como o vento, cuja direção e força você sente, mas cuja essência não se pode segurar. Elas são como o rio, cujo fluxo e direção moldam a paisagem. São essenciais para entender o mundo em movimento, o mundo de forças, velocidades e acelerações. Elas dançam nas equações do eletromagnetismo, desenham os padrões da física e guiam os marinheiros na imensidão do desconhecido. No mar da compreensão, grandezas vetoriais são a bússola e o vento, dando não apenas escala, mas também orientação e sentido à nossa busca pelo conhecimento. Como é belo o idioma de Machado de Assis, mas, de tempos em tempos, temos que recorrer as imagens.
 
@@ -101,152 +105,342 @@ Na física moderna usamos os vetores como definido por [Dirac](https://en.wikipe
 
 Entender esses campos, então, é uma forma de começar a entender o universo. É ler a história que está sendo escrita nas linhas invisíveis de força. É mergulhar no mar profundo do desconhecido, e emergir com um conhecimento novo e precioso. É se tornar um tradutor da linguagem cósmica, um leitor das marcas deixadas pelas forças em seus campos. É, em resumo, a essência da ciência. E é essa ciência, esse estudo dos campos e das forças que neles atuam, que iremos explorar.
 
-Para lançar as pedras fundamentais do nosso conhecimento representaremos os vetores por meio de letras latinas maiúsculas $A, B, C, ...$ frias. Estes vetores são elementos de um espaço vetorial $\textbf{V}$, também representado por letras latinas, desta feita em negrito. Nossos espaços vetoriais serão sempre representados em três dimensões. O espaço que procuramos é o nosso, o espaço onde vivemos, a forma como percebemos o universo e assim ficaremos limitados a três dimensões.
+Para lançar as pedras fundamentais do nosso conhecimento representaremos os vetores por meio de letras latinas maiúsculas $\vec{A}, \vec{B}, \vec{C}, ...$ marcadas com uma pequena seta. Estes vetores serão os elementos construtivos de um espaço vetorial $\textbf{V}$. Espaços vetoriais também serão representados por letras latinas maiúsculas, desta feita em negrito.
 
-Não é qualquer espaço, é um espaço específico, limitado à realidade e limitante das operações que podemos fazer para defini-lo assim, nosso estudo se fará a partir de um espaço vetorial que satisfaça às seguintes condições:
+Neste texto introdutório, mapa de nossa jornada, os espaços vetoriais serão sempre representados em três dimensões. O espaço que procuramos é o nosso, o espaço onde vivemos, a forma como percebemos mares, montanhas, planícies, o céu, nosso universo.
 
-1. o espaço vetorial $\textbf{V}$ seja fechado em relação a adição. Isso quer dizer que para cada par de vetores $A$ e $B$ pertencentes a $\textbf{V}$ existe um, e somente um, vetor $C$ que representa a soma de $A$ e $B$ e que também pertence ao espaço vetorial $\textbf{V}$, dizemos que: $\exists A \in \textbf{V} \wedge \exists B \in \textbf V \therefore \exists A+B=C \in \textbf V$;
+Não é qualquer espaço, é um espaço específico, limitado à realidade e limitante das operações que podemos fazer para defini-lo. Assim, nosso estudo se fará a partir de um espaço vetorial que satisfaça às seguintes condições:
 
-2. a adição seja associativa: $(A+B)+C = A+(B+C)$;
+1. o espaço vetorial $\textbf{V}$ seja fechado em relação a adição. Isso quer dizer que para cada par de vetores $\vec{A}$ e $\vec{B}$ pertencentes a $\textbf{V}$ existe um, e somente um, vetor $\vec{C}$ que representa a soma de $\vec{A}$ e $\vec{B}$ e que também pertence ao espaço vetorial $\textbf{V}$, dizemos que:
 
-3. existe um vetor zero: a adição deste vetor zero a qualquer vetor $A$ resulta no próprio vetor $A$, inalterado, imutável. De tal forma que: $\forall A \in \textbf V \space \space \exists \wedge 0 \in \space \textbf V \space \therefore \space  0+A=A$;
+    $$\exists \vec{A} \in \textbf{V} \wedge \exists \vec{B} \in \textbf{V} \therefore \exists (\vec{A}+\vec{B}=\vec{C}) \in \textbf{V}$$
 
-4. existe um vetor negativo $-A$ de forma que a soma de um vetor com seu vetor negativo resulta no vetor zero. Tal que: $\exists -A \in V \space \space \vert \space \space -A+A=0 $;
+2. a adição seja associativa:
 
-5. o espaço vetorial $V$ seja fechado em relação a multiplicação por um escalar, um valor sem direção ou sentido, de tal forma que para todo e qualquer elemento $c$ do conjunto dos números complexos $\mathbb{C}$ multiplicado por um vetor $A$ do espaço vetorial $\textbf{V}$ existe um, e somente um vetor $cA$ que também pertence ao espaço vetorial $\textbf{V}$. Tal que: $\exists  \space c \in \mathbb{C} \space \space \wedge \space \space \exists  \space A \in V \space \space \therefore \space \space \exists  \space cA \in \textbf{V}$;
+   $$(\vec{A}+\vec{B})+\vec{C} = \vec{A}+(\vec{B}+\vec{C})$$
 
-6. Existe um escalar neutro 1: tal que a multiplicação de qualquer vetor $A$ por $1$ resulta em $A$. Ou seja: $\exists \space 1 \in \mathbb{R} \space \space \wedge \space \space \exists  \space A \in \textbf{V} \space \space \vert \space \space 1A = A$;
+3. existe um vetor zero: a adição deste vetor zero a qualquer vetor $\vec{A}$ resulta no próprio vetor $\vec{A}$, inalterado, imutável. De tal forma que:
 
-É preciso manter a atenção voltada para a verdade da hierarquia que rege o mundo dos conjuntos. O conjunto dos números reais $\mathbb{R}$ é um subconjunto do conjunto dos números imaginários $\mathbb{C}=\{a+bi \space \space a.b \in \mathbb{R}\}$. Esta relação contenção determina que o conjunto $\mathbb{R}$, o conjunto dos números reais, se visto de forma mais abrangente, representa de forma concisa, todos os números imaginários cuja parte imaginária é igual a zero. Se usarmos a linguagem da matemática dizemos que $\mathbb{R}=\{a+bi \space \space \vert \space \space a.b \in \mathbb{R} \wedge b=0\}$.
+   $$\forall \vec{A} \in \textbf{V} \space \space \exists \wedge \vec{0} \in \space \textbf{V} \space \therefore \space \vec{0}+\vec{A}=\vec{A}$$
 
-A representação algébrica dos vetores definida por [Willard Gibbs](https://en.wikipedia.org/wiki/Josiah_Willard_Gibbs) (1839–1903) indica que um vetor em um espaço $\textbf{V}$ qualquer é, pura e simplesmente, o resultado de operações realizadas entre os vetores que definem os componentes deste espaço vetorial.
+4. existe um vetor negativo $-\vec{A}$ de forma que a soma de um vetor com seu vetor negativo resulta no vetor zero. Tal que:
 
-Nosso espaço $\textbf{V}$ terá três dimensões então precisamos escolher um conjunto de coordenadas, que definam os pontos deste espaço e usar estes pontos para definir os componentes vetoriais que usaremos para definir todos os vetores do espaço $\textbf{V}$.
+   $$\exists -\vec{A} \in \textbf{V} \space \space \vert \space \space -\vec{A}+\vec{A}=\vec{0}$$
 
-Maxwell, seguindo os passos de [Newton](https://en.wikipedia.org/wiki/Isaac_Newton), também se apoiou nos ombros de gigantes. E eis que em nossa jornada nos defrontamos com um destes gigantes. Em meados do Século XVII, [René Descartes](https://plato.stanford.edu/entries/descartes/) criou um sistema de coordenadas para definir o espaço que conhecemos que prevaleceu contra o tempo e a evolução e até hoje leva seu nome latino: Sistema de Coordenadas Cartesianas.
+5. o espaço vetorial $\textbf{V}$ seja fechado em relação a multiplicação por um escalar, um valor sem direção ou sentido, de tal forma que para todo e qualquer elemento $c$ do conjunto dos números complexos $\mathbb{C}$ multiplicado por um vetor $\vec{A}$ do espaço vetorial $\textbf{V}$ existe um, e somente um vetor $c\vec{A}$ que também pertence ao espaço vetorial $\textbf{V}$. Tal que:
 
-No caso do Sistema de Coordenadas Cartesianas, o espaço será limitado por três eixos, perpendiculares e ortogonais e pelos valores das coordenadas $(x,y.z)$ colocadas sobre estes eixos. Do ponto de vista da Álgebra Vetorial, para cada um destes eixos teremos um vetor de comprimento unitário. São estes vetores, que chamamos de vetores unitários e identificamos por $(a_x, a_y, a_z)$ respectivamente, Sendo vetores unitários eles têm magnitude $1$ e estão orientados segundo os eixos cartesianos $(x,y,z)$.
+   $$\exists \space c \in \mathbb{C} \space \space \wedge \space \space \exists \space \vec{A} \in \textbf{V} \space \space \therefore \space \space \exists \space c\vec{A} \in \textbf{V}$$
 
-A mágica acontece quando dizemos que todos os vetores do espaço vetorial $\textbf{V}$ podem ser representados por somas dos vetores unitários $(a_x, a_y, a_z)$ quando multiplicados independentemente por fatores escalares. De fato, qualquer vetor no espaço será o produto de um vetor unitário por um escalar.
+6. Existe um escalar neutro $1$: tal que a multiplicação de qualquer vetor $\vec{A}$ por $1$ resulta em $\vec{A}$. Ou seja:
+
+   $$\exists \space 1 \in \mathbb{R} \space \space \wedge \space \space \exists \space \vec{A} \in \textbf{V} \space \space \vert \space \space 1\vec{A} = \vec{A}$$
+
+É preciso manter a atenção voltada para a verdade da hierarquia que rege o mundo dos conjuntos. O conjunto dos números reais $\mathbb{R}$ é um subconjunto do conjunto dos números imaginários $\mathbb{C}=\{a+bi \space \space a.b \in \mathbb{R}\}$. Esta relação de contenção determina que o conjunto $\mathbb{R}$, o conjunto dos números reais, se visto de forma mais abrangente, representa de forma concisa, todos os números imaginários cuja parte imaginária é igual a zero. Se usarmos a linguagem da matemática dizemos que:
+
+$$\mathbb{R}=\{a+bi \space \space \vert \space \space a.b \in \mathbb{R} \wedge b=0\}$$
+
+A representação algébrica dos vetores definida por [Willard Gibbs](https://en.wikipedia.org/wiki/Josiah_Willard_Gibbs) (1839–1903), que usaremos neste documento, indica que um vetor em um espaço vetorial $\textbf{V}$ qualquer é, pura e simplesmente, o resultado de operações realizadas entre os vetores que definem os componentes deste espaço vetorial.
+
+Já sabemos que nosso espaço $\textbf{V}$ será formado em três dimensões então precisamos escolher um conjunto de coordenadas, que definam os pontos deste espaço e usar estes pontos para determinar os componentes vetoriais que usaremos para especificar todos os vetores do espaço $\textbf{V}$.
+
+[Maxwell](https://en.wikipedia.org/wiki/James_Clerk_Maxwell), seguindo os passos de [Newton](https://en.wikipedia.org/wiki/Isaac_Newton), também se apoiou nos ombros de gigantes. E eis que em nossa jornada nos defrontamos com um destes gigantes. Em meados do Século XVII, [René Descartes](https://plato.stanford.edu/entries/descartes/) criou um sistema de coordenadas definindo o espaço que conhecemos. Tão preciso, simples e eficiente que prevaleceu contra o tempo e até hoje leva o nome latino do seu criador: **Sistema de Coordenadas Cartesianas**.
+
+Vetores, são setas que representam forças, uma metáfora, uma abstração matemática que permite o entendimento do universo por meio da análise das forças que o compõem, definem e movimentam. Definimos um vetor simplesmente observando seu ponto de origem e destino, marcando estes pontos no espaço e traçando um seta ligando estes dois pontos. E isso deixaremos no domínio da geometria sempre que pudermos. Na álgebra do mundo real, este que estamos estudando, vetores serão definidos pela subtração. O vetor será definido pelas coordenadas do ponto de destino é o ponto de origem. Fica claro quando usamos o Sistema de Coordenadas Cartesianas.
+
+### Exercício Resolvido 1
+
+Em uma tarde quente em um bar à beira-mar, um velho pescador conversava com um jovem aprendiz sobre os vetores. "Eles são como o vento, têm direção, sentido e intensidade", disse o pescador. "Imagine dois pontos no mar, e queremos saber a direção e força do vento entre eles". Ele desenhou no chão com um pedaço de carvão os pontos: A(1,2,3) e B(-1,-2,3). "Agora", ele perguntou, "como determinamos o vetor entre esses dois pontos?"
+
+**Solução:** para determinar o vetor entre dois pontos, usamos a seguinte fórmula:
+
+Sejam os pontos $A(x_1,y_1,z_1)$ e $B(x_2,y_2,z_2)$ dois pontos no espaço. O vetor $\vec{V}$ entre eles será dado por:
+
+$$\vec{V} = (x_2 - x_1, y_2 - y_1, z_2 - z_1)$$
+
+Substituindo pelos pontos dados:
+
+$$v = (-1 - 1, -2 - 2, 3 - 3)$$
+$$v = (-2, -4, 0)$$
+
+Assim, o vetor entre os pontos $A(1,2,3)$ e $B(-1,-2,3)$ é $\vec{V} = (-2, -4, 0)$.
+
+No Sistema de Coordenadas Cartesianas, limitamos o espaço com três eixos, perpendiculares e ortogonais e pelos valores das coordenadas $(x,y.z)$ colocadas sobre estes eixos. Do ponto de vista da Álgebra Vetorial, para cada um destes eixos teremos um vetor de comprimento unitário. São estes vetores, que chamamos de vetores unitários e identificamos por $(\vec{a}_x, \vec{a}_y, \vec{a}_z)$ respectivamente, Chamamos estes vetores de unitários porque têm magnitude $1$ e estão orientados segundo os eixos cartesianos $(x,y,z)$.
+
+Lembrando: **a magnitude de um vetor é seu comprimento. Vetores unitários tem comprimento $1$**.
+
+O encanto da matemática se apresenta quando dizemos que todos os vetores do espaço vetorial $\textbf{V}$ podem ser representados por somas dos vetores unitários $(\vec{a}_x, \vec{a}_y, \vec{a}_z)$ desde que estes vetores sejam multiplicados independentemente por fatores escalares. Isto implica, ainda que não fique claro agora, que **qualquer vetor no espaço será o produto de um vetor unitário por um escalar**. Para que fique claro temos que entender os vetores unitários.
 
 ### Vetores Unitários
 
-Um vetor $B$ qualquer tem magnitude, direção e sentido. A magnitude, também chamada de intensidade, ou módulo, será representada por $\vert B \vert$. Definiremos um vetor unitário $a$ na direção $B$ por $a_B$ de tal forma que:
+Um vetor $\vec{B}$ qualquer tem magnitude, direção e sentido. A magnitude, também chamada de intensidade, módulo, ou comprimento, será representada por $\vert \vec{B} \vert$. Definiremos um vetor unitário $\vec{a}$ na direção $\vec{B}$ por $\vec{a}_B$ de tal forma que:
 
-$$ a_B=\frac{B}{|B|} $$
+$$ \vec{a}_B=\frac{\vec{B}}{|\vec{B}|} $$
 
-Um vetor unitário $a_B$ é um vetor que tem a mesma direção e sentido de $B$ com magnitude $1$ logo o módulo, ou magnitude, ou ainda comprimento de $a_b$ será representado por:
+Um vetor unitário $\vec{a}_B$ é um vetor que tem a mesma direção e sentido de $\vec{B}$ com magnitude $1$ logo o módulo, ou magnitude, ou ainda comprimento de $\vec{a}_b$ será representado por:
 
-$$\vert a_B \vert=1$$
+$$\vert \vec{a}_B \vert=1$$
 
-Agora que conhecemos os vetores unitários podemos entender a ciência, quase mágica, que sustenta a Álgebra Vetorial e faz com que todos os conceitos geométricos que suportam a existência de vetores possam ser representados algebricamente em um espaço, desde que este espaço seja algebricamente definido.
+Agora que conhecemos os vetores unitários podemos entender as regras que sustentam a Álgebra Vetorial e fazem com que todos os conceitos geométricos que fundamentaram a existência de vetores possam ser representados algebricamente, sem linhas nem ângulos, em um espaço, desde que este espaço esteja algebricamente definido em um sistema de coordenadas. Aqui, usaremos sistemas de coordenadas tridimensionais.
 
-Em um sistema de coordenadas tridimensionais e ortogonais podemos expressar qualquer vetor na forma da soma dos seus componentes unitários ortogonais. Qualquer vetor, independente da sua direção, sentido, ou magnitude pode ser representado pela soma dos os vetores unitários que representam as direções, eixos e coordenadas, do sistema de coordenadas escolhido. A cada fator desta soma damos o nome de componente vetorial, ou simplesmente componente. Existirá um componente para cada dimensão do sistema de coordenadas e estes componentes são relativos ao sistema de coordenadas que escolhermos para representar o espaço $\textbf{V}$.
+Em um sistema de coordenadas tridimensionais ortogonais podemos expressar qualquer vetor na forma da soma dos seus componentes unitários ortogonais. Qualquer vetor, independente da sua direção, sentido, ou magnitude pode ser representado pela soma dos os vetores unitários que representam as direções, eixos e coordenadas, do sistema de coordenadas escolhido. A cada fator desta soma daremos o nome de _componente vetorial_, ou simplesmente componente. Existirá um componente para cada dimensão do sistema de coordenadas e estes componentes são específicos do sistema de coordenadas que escolhermos para representar o espaço que chamaremos $\textbf{V}$.
 
-Como somos marinheiros de primeira viagem, navegamos de dia, em mares conhecidos mantendo a terra a vista. Neste caso, começaremos com o Sistema de Coordenadas Cartesianas. Um sistema de coordenadas conhecido, seguro e fácil de representar. Não será difícil visualizar um espaço vetorial definido neste sistema já que é o espaço em que vivemos. A sala de sua casa tem uma largura $x$, um comprimento $y$ e uma altura $z$. No Sistema de Coordenadas Cartesianas a representação de um vetor $B$ qualquer, segundo seus componentes unitários e ortogonais será dada por:
+Como somos marinheiros de primeira viagem, navegamos de dia, em mares conhecidos mantendo a terra a vista. Neste caso, começaremos com o Sistema de Coordenadas Cartesianas. Um sistema de coordenadas conhecido, seguro e fácil de representar. Não será difícil visualizar um espaço vetorial definido neste sistema já que é o espaço em que vivemos. A sala de sua casa tem uma largura $x$, um comprimento $y$ e uma altura $z$. No Sistema de Coordenadas Cartesianas a representação de um vetor $\vec{B}$ qualquer, segundo seus componentes unitários e ortogonais será dada por:
 
-$$B=b_xa_x+b_ya_y+b_za_z$$
+$$\vec{B}=b_x\vec{a}_x+b_y\vec{a}_y+b_z\vec{a}_z$$
 
-Nesta representação, $b_x$, $b_y$, $b_z$ representam os fatores escalares que devemos usar para multiplicar os vetores unitários $a_x$, $a_y$, $a_z$ de forma que a soma destes vetores represente o vetor $B$ no espaço $\Bbb{R}^3$.
+Nesta representação, $b_x$, $b_y$, $b_z$ representam os fatores escalares que devemos usar para multiplicar os vetores unitários $\vec{a}_x$, $\vec{a}_y$, $\vec{a}_z$ de forma que a soma destes vetores represente o vetor $B$ no espaço $\Bbb{R}^3$.
 
-Ao longo deste artigo vamos chamar $b_x$, $b_y$, $b_z$ de componentes vetoriais nas direções $x$, $y$, $z$, ou de projeções de $B$ nos eixos $x$, $y$, $z$. A prova da equivalência entre os componentes e as projeções sobre os eixos pertence ao domínio da geometria que ficou no porto na hora em que começamos esta viagem.
+Aqui chamaremos $b_x$, $b_y$, $b_z$ de componentes vetoriais nas direções $x$, $y$, $z$, ou de projeções de $\vec{B}$ nos eixos $x$, $y$, $z$. A prova da equivalência entre os componentes e as projeções sobre os eixos pertence ao domínio da geometria que ficou no porto na hora em que começamos esta viagem.
 
-A beleza e a simplicidade do Sistema de Coordenadas Cartesianas é também a sua maldição. Em muitos problemas o uso deste sistema torna a matemática desnecessariamente torturante. Neste caso podemos recorrer a qualquer outro sistema de coordenadas. Com a única condição de termos três dimensões ortogonais entre si. Por exemplo, poderíamos definir nosso vetor $B$ como:
+A simplicidade do Sistema de Coordenadas Cartesianas é também a sua maldição. Estudando Eletromagnetismo enfrentaremos muitos problemas nos quais o uso deste sistema tornará a matemática desnecessariamente torturante. Neste caso podemos recorrer a qualquer outro sistema de coordenadas. Com a única condição de termos três dimensões ortogonais entre si. Por exemplo, poderíamos definir nosso vetor $\vec{B}$ como:
 
-$$B=b_xa_x+b_ya_y+b_za_z$$
+$$\vec{B}=b_x\vec{a}_x+b_y\vec{a}_y+b_z\vec{a}_z$$
 
-$$B=b_ra_r+b_\phi a_\phi+b_za_z$$
+$$\vec{B}=b_r\vec{a}_r+b_\phi \vec{a}_\phi+b_z\vec{a}_z$$
 
-$$B=b_ra_r+b_\phi a_\phi+b_\theta a_\theta$$
+$$\vec{B}=b_r\vec{a}_r+b_\phi \vec{a}_\phi+b_\theta \vec{a}_\theta$$
 
-Respectivamente para os Sistemas de Coordenadas Cartesianas, Cilíndricas e Esféricas. Sistemas de coordenadas diferentes para o mesmo espaço. Há que existir uma forma de garantir que o vetor $B$ tenha sempre a mesma magnitude, a mesma direção e o mesmo sentido não importando o sistema de coordenadas escolhido em um dado momento. Existe, não tenha dúvidas quanto a isso. Se for necessário, mergulharemos nestas técnicas de conversão entre sistemas.
+Respectivamente para os _Sistemas de Coordenadas Cartesianas, Cilíndricas e Esféricas_.
 
-O mar, e a matemática, são imprevisíveis. Não é raro que, uma vez que o sistema de coordenadas tenha sido definido, para um determinado conjunto de problemas, os vetores sejam representados apenas por seus componentes vetoriais, se qualquer referência aos vetores unitários. Assim, no Sistema de Coordenadas Cartesianas o vetor $B=3a_x+a_y-a_z$ pode ser representado apenas por $B=(3,1, -1)$.
+Sistemas de coordenadas diferentes para o mesmo espaço são como diferentes mapas náuticos para o mesmo oceano. Em cada mapa, o norte ainda é o norte e uma constelação ainda a guiará ao porto. O vetor $\vec{B}$ mantém sua magnitude, direção e sentido, não importa qual carta náutica você desenrole sobre a mesa. E quando for necessário transitar entre esses sistemas, faremos isso com a precisão de um pescador experiente mergulhando nas profundezas azuis para recuperar um arpão precioso. Não tenha dúvidas, o essencial permanecerá constante; apenas o meio mudará. E, quando for necessário, estudaremos estes sistemas para entender como mapas diferentes mostram o mesmo oceano.
 
-Quando representamos um vetor por seus componentes ortogonais, podemos calcular sua magnitude utilizando os fatores escalares multiplicadores de cada vetor unitário.
+A matemática, tal qual o mar, guarda suas próprias surpresas. Às vezes, depois de definir o sistema de coordenadas como um velho marinheiro escolhe sua rota, os vetores se desnudam até suas essências mais simples, suas componentes vetoriais, deixando para trás os vetores unitários como um navio abandona seu lastro. No Sistema de Coordenadas Cartesianas, o vetor $\vec{B} = 3\vec{a}_x + \vec{a}_y - \vec{a}_z$ se transforma, e pode ser representado apenas por suas coordenadas $\vec{B} = (3, 1, -1)$, como um navio que içou suas velas, pronto para a jornada, livre do peso desnecessário. A substância permanece, enquanto a forma se adapta ao desafio do momento. Durante a árdua tarefa de resolver seus próprios problemas você terá que escolher como representará seus vetores. Eu, volúvel que sou, hora escreverei $\vec{B} = 3\vec{a}_x + \vec{a}_y - \vec{a}_z$ ora escreverei $\vec{B} = (3, 1, -1)$. Caberá a paciente leitora a tarefa da interpretação, extrato da atenção e do aprendizado.
 
-Dado o vetor $B=b_xa_x+b_ya_y+b_za_z$ sua magnitude será dada por $\vert B \vert=\sqrt{b_x^2+b_y^2+b_z^2}$. Desta forma poderemos encontrar o vetor unitário $a_B$ de $B$ por:
+Se tivermos um vetor $\vec{B} = b_x\vec{a}_x + b_y\vec{a}_y + b_z\vec{a}_z$ sua magnitude será dada por:
 
-$$a_B=\frac{B}{ \vert B \vert }= \frac{b_xa_x+b_ya_y+b_za_z}{ \sqrt{b_x^2+b_y^2+b_z^2}}$$
+$$ \vert \vec{B} \vert=\sqrt{ {b_x}^2 + {b_y}^2 + {b_z}^2}$$
 
-Talvez toda essa rigidez da matemática desvaneça diante dos seus olhos com um exemplo.
+A princípio fugirá a percepção da amável leitora, mas é fato que desta forma poderemos encontrar o vetor unitário ${\vec{a}_B}$, que leremos vetor unitário a na direção do vetor $\vec{B}$ por:
+
+$$\vec{a}_B=\frac{ \vec{B} }{ \vert \vec{B} \vert }= \frac{b_x\vec{a}_x+b_y\vec{a}_y+b_z\vec{a}_z}{ \sqrt{b_x^2+b_y^2+b_z^2} }$$
+
+Equação que deve ser lida como: **o vetor unitário de um dado vetor será o próprio vetor dividido pela sua magnitude**. Talvez toda essa rigidez da matemática desvaneça diante dos seus olhos, lindos e cansados, se recorrermos a um exemplo.
 
 <p class="exp">
-<b>Exemplo 1:</b> calcule o vetor unitário $a_A$ do vetor $A=a_x-3a_y+2a_z$. <br><br>
-<b>Solução:</b>
+<b>Exemplo 1:</b> calcule o vetor unitário $\vec{a}_A$ do vetor $\vec{A}=\vec{a}_x-3\vec{a}_y+2\vec{a}_z$. <br><br>
+<b>Solução:</b> partindo da definição de vetor unitário.
 
-\[a_A=\frac{a_xa_x+a_ya_y+a_za_z}{\sqrt{a_x^2+a_y^2+a_z^2}}\]
+\[\vec{a}_A=\frac{\vec{a}_x\vec{a}_x+\vec{a}_y\vec{a}_y+\vec{a}_z\vec{a}_z}{\sqrt{\vec{a}_x^2+\vec{a}_y^2+\vec{a}_z^2} }\]
 
-\[a_A=\frac{a_x-3a_y+2a_z}{\sqrt{1^2+(-3)^2+2^2}}=\frac{a_x-3a_y+2a_z}{3,7416}\]
+Substituindo os valores, dados no enunciado:
 
-\[a_A=0,2672a_x-0,8018a_y+0,5345a_z\]
+\[\vec{a}_A=\frac{\vec{a}_x-3\vec{a}_y+2\vec{a}_z}{\sqrt{1^2+(-3)^2+2^2} }=\frac{\vec{a}_x-3\vec{a}_y+2\vec{a}_z}{3,7416}\]
+
+\[\vec{a}_A=0,2672\vec{a}_x-0,8018\vec{a}_y+0,5345\vec{a}_z\]
 
 </p>
+Vista através de retinas atentas a matemática é simples e, muitas vezes, bela.
+
+### Exercício Resolvido 2
+
+Você é um capitão de um pequeno barco de pesca, perdido em alto mar. Sua bússola, impressa em um plano cartesiano, mostra a direção para o porto seguro como um vetor $\vec{A} = (4, 3, -1)$. Este vetor contém a direção e a força dos ventos e correntes que você deve enfrentar. Sua tarefa é simplificar essa informação em um vetor unitário que aponte a direção exata para o porto. Lembre-se, um vetor unitário tem magnitude $1$ e aponta na mesma direção e sentido do vetor original. Utilize suas habilidades em álgebra vetorial para encontrar esse vetor unitário e aponte seu barco para casa.
+
+**Solução:** para encontrar o vetor unitário correspondente ao vetor $\vec{A} = (4, 3, -1)$, primeiro precisamos calcular a magnitude do vetor $\vec{A}$.
+
+1. Cálculo da Magnitude de $\vec{A}$: a magnitude do vetor $\vec{A}$ é dada por:
+
+    $$
+    |\vec{A}| = \sqrt{4^2 + 3^2 + (-1)^2}
+    $$
+
+    $$
+    |\vec{A}| = \sqrt{16 + 9 + 1}
+    $$
+
+    $$
+    |\vec{A}| = \sqrt{26}
+    $$
+
+    $$
+    |\vec{A}| \approx 5.099
+    $$
+
+2. Cálculo do Vetor Unitário: para encontrar o vetor unitário $\vec{a}$, nós dividimos cada componente do vetor $\vec{A}$ pela sua magnitude:
+
+    $$
+    \vec{a} = \frac{\vec{A}}{|\vec{A}|}
+    $$
+
+    $$
+    \vec{a} = \frac{(4, 3, -1)}{5.099}
+    $$
+
+    $$
+    \vec{a} \approx (0.784, 0.588, -0.196)
+    $$
+
+O vetor unitário correspondente ao vetor $\vec{A}$ é aproximadamente $(0.784, 0.588, -0.196)$. Este é o vetor que você deve seguir para apontar seu barco na direção certa para o porto seguro, independente das condições dos ventos e correntes.
+
+Se a amável leitora conseguiu entender de que forma as forças devidas a ventos e correntes estão implícitas na definição do vetor $\vec{A}$? Se tiver conseguido, já entendeu o que é um vetor unitário e como ele pode ser usado para simplificar a informação contida em um vetor.
+
+### Exercício Resolvido 3
+
+Em um antigo mapa de um navegador solitário, as distâncias eram indicadas apenas por unidades, sem definição específica de sua medida, como se fossem passos ou palmos. Naqueles tempos, a precisão não era tão exigente, e os navegadores costumavam confiar em seus instintos e habilidades de observação. Nesse mapa peculiar, o navegador anotou:
+
+1. Um trajeto que começa em seu ponto de partida, marcado como a origem, e vai até um ponto de interesse $A = (-3, 4, 5)$.
+2. Um vetor unitário $b$ que, também a partir da origem, aponta na direção de um segundo ponto de interesse, $B$, e é representado por $\vec{b} = \frac{(-2, 1, 3)}{2}$.
+3. Ele também fez uma anotação de que a distância entre os dois pontos de interesse, $A$ e $B$, era de 12 unidades. Talvez essa fosse a distância que ele precisava viajar em um dia para chegar ao ponto $B$ antes do anoitecer. Talvez fosse apenas um sonho, um destino que nunca foi percorrido. Não sabemos, mas talvez seja possível determinar as coordenada exatas do ponto $B$ no mapa. Dado essas informações, qual seria a localização exata do ponto $B$ no mapa?
+
+**Solução:** primeiramente, encontramos o vetor unitário $\vec{A}$ referente ao vetor que sai da origem e chega no ponto $A$:
+
+$$\vec{A} = \frac{\vec{A} }{|\vec{A}|} = \frac{\vec{A} }{\sqrt{x^2 + y^2 + z^2} } = \frac{1}{\sqrt{x^2 + y^2 + z^2} } \vec{A} $$
+
+Para o ponto $B$, o vetor unitário é dado por:
+
+$$\vec{B} = \frac{1}{2}B(-2, 1, 3)$$
+
+Nesta equação o termo $B$ é um valor escalar que representa a magnitude de um dos vetores que está na direção do vetor unitário $\vec{b}$. Portanto, ao variar $B$, obtemos todos os possíveis vetores (de diferentes magnitudes) que estão na direção especificada pelo vetor unitário $\frac{1}{2}(-2, 1, 3)$. **como um vetor unitário só determina uma direção e um sentido exite um número infinito de vetores múltiplos de um dado vetor unitário**. Nossa tarefa é encontrar qual destes vetores satisfaz o enunciado. Õu, em outras palavras, $\vec{b}$ é o vetor unitário na direção de todos os vetores múltiplos dele mesmo. Expandindo:
+
+$$\vec{B} = \frac{-2B}{2} \vec{a}_x + \frac{B}{2} \vec{a}_y + \frac{3B}{2} \vec{a}_z$$
+
+A distância entre dois pontos no espaço cartesiano é dada pela fórmula da distância euclidiana. Vamos considerar dois pontos no espaço tridimensional:
+$ A(x_1, y_1, z_1) \) e \( B(x_2, y_2, z_2) $.
+
+A distância $D$ entre os pontos $A$ e $B$ é dada por:
+
+$$ D = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2} $$
+
+Esta fórmula é uma extensão direta do teorema de Pitágoras. Se estivéssemos considerando pontos em um plano bidimensional, a fórmula seria:
+
+$$ D = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} $$
+
+E, de forma geral, para um espaço $n$-dimensional, a distância é dada por:
+
+$$ D = \sqrt{\sum_{i=1}^{n} (x_{2i} - x_{1i})^2} $$
+
+Onde $x_{1i}$ e $x_{2i}$ são as coordenadas dos pontos nas diferentes dimensões.
+
+Podemos pensar de uma forma um pouco diferente. A distância entre dois pontos no espaço é o comprimento, magnitude, do vetor que liga estes dois pontos. Se a amável leitora considerar os dois pontos $A(x_1, y_1, z_1)$ e $B(x_2, y_2, z_2)$ no espaço, o vetor que liga esses dois pontos será dado por:
+
+$$ \vec{AB} = (x_2 - x_1, y_2 - y_1, z_2 - z_1) $$
+
+O módulo (ou magnitude) desse vetor será precisamente a distância entre os pontos $A$ e $B$, e será calculado por:
+
+$$ |\vec{AB}| = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2} $$
+
+Esta fórmula coincide com a fórmula da distância euclidiana usada anteriormente. Portanto, a distância entre dois pontos no espaço é equivalente à magnitude do vetor que conecta esses dois pontos. Se substituirmos os valores que temos:
+
+$$\sqrt{(-3 - \frac{2B}{2})^2 + (4 + \frac{B}{2})^2 + (5 + \frac{3B}{2})^2} = 12$$
+
+$$\sqrt{(-3 - B)^2 + (4 + \frac{B}{2})^2 + (5 + \frac{3B}{2})^2} = 12$$
+
+$$(-3 - B)^2 + (4 + \frac{B}{2})^2 + (5 + \frac{3B}{2})^2 = 144 $$
+
+Vamos tratar cada termo desta equação separada e cuidadosamente.
+
+1. Expanda $(-3 - B)^2$ em $ 9 + 6B + B^2 $;
+
+2. Expanda $(4 + \frac{B}{2})^2$:
+
+    Primeiro, $4 + \frac{B}{2}$ se torna $4 + 0.5B$.
+    Agora, $(4 + 0.5B)^2$ é: $16 + 4B + 0.25B^2$.
+
+3. Expanda $(5 + \frac{3B}{2})^2$:
+
+    Primeiro, $5 + \frac{3B}{2}$ se torna $5 + 1.5B$.
+    Agora, $(5 + 1.5B)^2$ será: $25 + 15B + 2.25B^2$
+
+Combinando todas essas expansões, teremos:
+
+$$B^2 + 6B + 9 + 0.25B^2 + 4B + 16 + 2.25B^2 + 15B + 25 = 144$$
+
+Somando os termos semelhantes:
+
+$3.5B^2 + 25B + 50 = 144$
+
+Esta é a equação após a combinação e expansão completa dos termos.
+
+$$3.5B^2 + 24B - 94 = 0$$
+
+Cujas raízes serão:
+
+$$B = -\frac{2}{7} \left( 12 + \sqrt{473} \right) \approx 2.7853$$
+
+$$B = \frac{2}{7} \left( \sqrt{473} - 12 \right)\approx -9.6424$$
+
+São duas soluções possíveis. Se escolhermos a raiz negativa, estaremos dizendo que o ponto $B$ está na direção oposta de $A$:
+
+$$\vec{B} = \frac{-2B}{2} \vec{a}_x + \frac{B}{2} \vec{a}_y + \frac{3B}{2} \vec{a}_z$$
+
+E substituir $B$ por $2.7853$ teremos?
+
+$$\vec{B} = \frac{-2(2.7853)}{2} \vec{a}_x + \frac{(2.7853)}{2} \vec{a}_y + \frac{3(2.7853)}{2} \vec{a}_z$$
+
+$$\vec{B} =-2.7853\vec{a}_x + 1.39265 \vec{a}_y + 4,1779 \vec{a}_z$$
+
+Em um cenário realista, as forças devidas aos ventos e correntes seriam vetores separados, possivelmente variáveis em função do tempo e do espaço. Estes vetores afetariam tanto a direção quanto a velocidade do barco e teriam que ser considerados para calcular uma rota otimizada para o porto. Contudo, para tornar o problema mais simples e atrativo, podemos considerar que todas as variações possíveis de ventos e correntes estão representadas nas forças que atuam em cada um dos eixos cartesianos, forçando o barco em uma determinada direção criando o vetor indicado por nossa bússola. O vetor unitário, estripa estas influências complexas mostrando apenas a direção e sentidos que devem ser seguidos. Fazendo a matemática mais bonita, aos olhos pouco experientes na sua apreciação.
+
 ## Multiplicação por Escalar
 
-Um escalar é um número, um valor, frio, simples e direto. A informação contida no escalar não precisa de direção e sentido. São escalares todos os números reais $(\mathbb{R})$, inteiros $(\mathbb{Z})$ e naturais $(\mathbb{N})$. Os números complexos $(\mathbb{C})$ precisam de um pouco mais de atenção.
+Um escalar é um número, um valor, frio, simples e direto. A informação contida no escalar não precisa de direção, sentido, ou qualquer outra informação. A massa do seu navio é um valor escalar, a velocidade com que ele singra os mares é um valor vetorial.
 
-Os números complexos, $\mathbb{C}$ contém informações que podem ser associadas a direção e sentido mas, não são vetores. São como peixes em um lago. A parte real é como a distância que o peixe nada para leste ou oeste. A parte imaginária é o quanto ele nada para norte ou sul. Eles podem mover-se em duas direções, mas não são como o vento ou um rio, que têm uma direção e um sentido claros. Os números complexos, eles são mais como os peixes - nadam por aí, sem preocupação com a direção. Eles são escalares, não vetores.
+São claramente escalares todos os números reais $(\mathbb{R})$, inteiros $(\mathbb{Z})$ ou naturais $(\mathbb{N})$. Os números complexos $(\mathbb{C})$ também são escalares. Contudo precisam de um pouco mais de atenção.
 
-Todavia, tal como um pescador marca a posição de um peixe pelo quão longe está da margem e em que ângulo, podemos fazer o mesmo com números complexos. Chamamos de magnitude a distância até a origem e ângulo é a direção que aponta para eles. Ainda assim, não confunda isso com a direção e o sentido de um vetor na física. É uma comparação, nada mais.
+Os **números complexos**, $\mathbb{C}$ contém informações que podem ser associadas a direção e sentido mas, não são vetores. São como peixes em um lago. A parte real é como a distância que o peixe nada para leste ou oeste. A parte imaginária é o quanto ele nada para norte ou sul. Eles podem mover-se em duas direções, mas não são como o vento ou um rio, que têm uma direção e um sentido claros. Os números complexos, eles são mais como os peixes - nadam por aí, sem preocupação com a direção. **São escalares, não vetores**.
 
-É importante entender que números complexos, $\mathbb{C}$, possuem um conceito relacionado a magnitude e fase, ângulo na representação polar, em que um número complexo $c$ pode ser representado como $r*e^{iθ}$, onde $r$ é a magnitude (ou o módulo) do número complexo, e $θ$ é a fase (ou o argumento), que pode ser pensada como a direção do número complexo no plano complexo. Mas, novamente, o conceito de direção usado aqui não é o mesmo conceito de direção quando nos referimos a vetores. É apenas uma analogia matemática. Sim! A matemática tem analogias. Voltaremos aos números complexos quando for conveniente. Vamos apenas guardar em nossa caixa de ferramentas a noção de que um número é um escalar. Uma informação de valor e apenas isso.
+Tal como um pescador marca a posição de um peixe pelo quão longe está da margem e em que ângulo, podemos fazer o mesmo com números complexos. Chamamos de magnitude a distância até a origem e ângulo é a direção que aponta para eles. Ainda assim, não confunda isso com a direção e o sentido de um vetor na física. É uma comparação, nada mais.
 
-A multiplicação de um vetor $B$ por um escalar implica na multiplicação de cada um dos componentes $b$ desse vetor por este escalar. Os escalares que usaremos, neste artigo, serão elementos do conjunto dos números reais $\Bbb{R}$. Sem esquecer que, como vimos antes, os elementos dos conjunto dos números reais $\Bbb{R}$ são definidos como elementos do conjunto dos números complexos $\Bbb{C}$ a mesma definição que utilizamos quando explicitamos as regras de formação do espaço vetorial $\textbf{ V}$ que definimos para nossos vetores.
+É importante entender que números complexos, $\mathbb{C}$, possuem um conceito relacionado a magnitude e fase, ângulo na representação polar, em que um número complexo $c$ pode ser representado como $r*e^{i\theta}$, onde $r$ é a magnitude (ou o módulo) do número complexo, e $\theta$ é a fase (ou o argumento), que pode ser pensada como a direção do número complexo no plano complexo. Mas, novamente, o conceito de direção usado aqui não é o mesmo conceito de direção quando nos referimos a vetores. É apenas uma analogia matemática.
 
-A multiplicação de cada componente por um escalar e simples e quase não requer um exemplo. Quase.
+Sim! A matemática tem analogias.
+
+Voltaremos aos números complexos quando for conveniente ao entendimento de fenômenos eletromagnéticos. Vamos apenas guardar em nossa caixa de ferramentas a noção de que um número, seja ele complexo, ou não, é um escalar. Uma informação de valor fundamental para o entendimento das operações com vetores.
+
+A multiplicação de um vetor $\vec{B}$ por um escalar implica na multiplicação de cada um dos componentes $b$ desse vetor por este escalar.
+
+Os escalares que usaremos nesta jornada serão elementos do conjunto dos números reais $\Bbb{R}$. Sem esquecer que, como vimos antes, os elementos dos conjunto dos números reais $\Bbb{R}$ são um subconjunto do conjunto dos números complexos $\Bbb{C}$ a mesma definição que utilizamos quando explicitamos as regras de formação do espaço vetorial $\textbf{V}$ ao definirmos o universo em que estamos navegando.
+
+A multiplicação de cada componente por um escalar é muito simples e quase não requer um exemplo. Quase.
 
 <p class="exp">
-<b>Exemplo 2:</b> considere o vetor $V=2a_x+4a_y-a_z$ e calcule $3,3V$ e $V/2$: <br><br>
+<b>Exemplo 2:</b> considere o vetor $\vec{A}=2\vec{a}_x+4\vec{a}_y-\vec{a}_z$ e calcule $3,3\vec{A}$ e $\vec{A}/2$: <br><br>
 <b>Solução:</b>
 
-\[3.3V=(3,3)(2)a_x+(3,3)(4)a_y+(3,3)(-1)a_z\]
+\[3,3\vec{A}=(3,3)(2)\vec{a}_x+(3,3)(4)\vec{a}_y+(3,3)(-1)\vec{a}_z\]
 
-\[3.3V=6,6a_x+13,2a_y-3,3a_z\]
+\[3.3\vec{A}=6,6\vec{a}_x+13,2\vec{a}_y-3,3\vec{a}_z\]
 
-\[\frac{V}{2}=(\frac{1}{2})(2)a_x+(\frac{1}{2})(4)a_y+(\frac{1}{2})(-1)a_z\]
+\[\frac{ \vec{A} }{2}=(\frac{1}{2})(2)\vec{a}_x+(\frac{1}{2})(4)\vec{a}_y+(\frac{1}{2})(-1)\vec{a}_z\]
 
-\[\frac{V}{2}=a_x+2a_y-\frac{1}{2}a_z\]
-
-</p>
-
-A multiplicação por escalar é comutativa, associativa, distributiva e fechada em relação ao zero e ao elemento neutro. Se tivermos os escalares $m$ e $n$ e os vetores $A$ e $B$, as propriedades da multiplicação por um escalar serão dadas por:
-
-1. **comutatividade:** a ordem dos fatores não afeta o produto. Portanto, se você multiplicar um vetor por um escalar, receberá o mesmo resultado, independentemente da ordem. Ou seja, $m(A) = (A)m$.
-
-2. **associatividade:** a forma como os fatores são agrupados não afeta o produto. Portanto, se você multiplicar um vetor por um produto de escalares, receberá o mesmo resultado, independentemente de como os fatores são agrupados. Ou seja, $(mn)A = m(nA)$.
-
-3. **distributividade:** a multiplicação por escalar é distributiva em relação à adição de vetores e de escalares. Portanto, se você multiplicar a soma de dois vetores por um escalar, o resultado será o mesmo que se você multiplicar cada vetor pelo escalar e somar os resultados. Ou seja, $m(A + B)=mA + mB$. Da mesma forma, se você multiplicar um vetor pela soma de dois escalares, o resultado será o mesmo que se você multiplicar o vetor por cada escalar e somar os resultados. Ou seja, $(m + n)A = mA + nA$.
-
-4. **Fechada em relação ao zero e ao elemento neutro:** Multiplicar qualquer vetor por zero resulta no vetor zero. Ou seja, $0A = 0$. E multiplicar qualquer vetor por $1$ (o elemento neutro da multiplicação escalar) resulta no mesmo vetor. Ou seja, $1A = A$.
-
-<p class="exp">
-<b>Em resumo:</b> <br><br>
-
-\[mA=Am\]
-
-\[m(nA) = (mn)A\]
-
-\[m(A+B) = mA+mB\]
-
-\[(A+B)n = nA+nB\]
-
-\[1A=A\]
-
-\[0A=0\]
+\[\frac{\vec{A} }{2}=\vec{a}_x+2\vec{a}_y-\frac{1}{2}\vec{a}_z\]
 
 </p>
+
+A multiplicação por escalar é comutativa, associativa, distributiva e fechada em relação ao zero e ao elemento neutro. Se tivermos os escalares $m$ e $n$ e os vetores $\vec{A}$ e $\vec{B}$, as propriedades da multiplicação por um escalar serão dadas por:
+
+1. **comutatividade:** a ordem dos fatores não afeta o produto. Portanto, se você multiplicar um vetor por um escalar, receberá o mesmo resultado, independentemente da ordem. Ou seja, $m(\vec{A}) = (\vec{A})m$.
+
+2. **associatividade:** a forma como os fatores são agrupados não afeta o produto. Portanto, se você multiplicar um vetor por um produto de escalares, receberá o mesmo resultado, independentemente de como os fatores são agrupados. Ou seja, $(mn)\vec{A} = m(n\vec{A})$.
+
+3. **distributividade:** a multiplicação por escalar é distributiva em relação à adição de vetores e de escalares. Portanto, se você multiplicar a soma de dois vetores por um escalar, o resultado será o mesmo que se você multiplicar cada vetor pelo escalar e somar os resultados. Ou seja, $m(\vec{A} + \vec{B})=m\vec{A} + m\vec{B}$. Da mesma forma, se você multiplicar um vetor pela soma de dois escalares, o resultado será o mesmo que se você multiplicar o vetor por cada escalar e somar os resultados. Ou seja, $(m + n)\vec{A} = m\vec{A} + n\vec{A}$.
+
+4. **Fechada em relação ao zero e ao elemento neutro:** Multiplicar qualquer vetor por zero resulta no vetor zero. Ou seja, $0\vec{A} = 0$. E multiplicar qualquer vetor por $1$ (o elemento neutro da multiplicação escalar) resulta no mesmo vetor. Ou seja, $1\vec{A} = \vec{A}$. Em resumo, teremos:
+
+    $$m\vec{A}=\vec{A}m$$
+
+    $$m(n\vec{A}) = (mn)\vec{A}$$
+
+    $$m(\vec{A}+\vec{B}) = m\vec{A}+m\vec{B}$$
+
+    $$(\vec{A}+\vec{B})n = n\vec{A}+n\vec{B}$$
+
+    $$1\vec{A}=\vec{A}$$
+
+    $$0\vec{A}=0$$
 
 ## Vetor Oposto
 
-A multiplicação de um vetor pelo escalar $-1$ é especial.
-Chamamos de Vetor Oposto ao vetor $A$ ao vetor que tem a mesma intensidade, a mesma direção e sentido oposto ao sentido de $A$. Um Vetor Oposto é o resultado da multiplicação de um vetor pelo escalar $-1$. Logo:
+A multiplicação de um vetor pelo escalar $-1$ é especial. Chamamos de **vetor oposto** ao vetor $\vec{A}$ ao vetor que tem a mesma intensidade, a mesma direção e sentido oposto ao sentido de $\vec{A}$. Um Vetor Oposto é o resultado da multiplicação de um vetor pelo escalar $-1$. Logo:
 
-$$-1A = -A$$
+$$-1\vec{A} = -\vec{A}$$
+
+Há que ser oposto. Ele se opõe a grandeza que o vetor representa. Vetores não podem ser negativos [^1]. Não existem vetores negativos assim como não existem forças negativas. Por isso devem ser opostos, devem se opor a uma direção em um sentido.
+
+Um vetor é uma coleção de informações, uma direção, um sentido e uma magnitude. Uma tupla com três informações, nenhuma delas pode ser negativa. Por outro lado, sabemos que forças podem ser puxões, ou empurrões. Se forem iguais em um determinado ponto, não há efeito. Como representar algo que tenha a mesma intensidade, mesma direção e sentido oposto? Usamos um sinal de negativo. Sem o vetor oposto, a aritmética entre vetores seria muito complexa, ou impossível.
 
 ## Adição e Subtração de Vetores
 
-Olhe para os pássaros no céu. Os vetores são como o rastro de um pássaro no céu, mostrando não apenas quão longe voou, mas também a direção que escolheu. Representam forças, esses ventos invisíveis que movem o mundo, que também são assim. Eles têm tamanho e direção, forças são vetores no universo da Álgebra Linear.
+Olhe para os pássaros no céu. Os vetores são como o rastro de um pássaro no céu, mostrando não apenas quão longe voou, mas também a direção que escolheu. Representam forças, esses ventos invisíveis que movem o mundo, que também são assim. Eles têm amplitude e direção, forças são vetores no universo da Álgebra Linear.
 
 Como os pássaros no céu, os vetores também podem se juntar, ou se afastar. A soma, a subtração, fazem parte do seu voo. Alguns podem achar útil imaginar isso, recorrendo a geometria, como um paralelogramo, uma forma com lados paralelos que mostra como um vetor soma ao outro.
 
@@ -255,110 +449,170 @@ Como os pássaros no céu, os vetores também podem se juntar, ou se afastar. A 
   text-align: center;
   margin-bottom: 20px;">Figura 2 - Regra do Paralelogramo - Soma geométrica de Vetores.</legend>
 
-Eu não vou lhe guiar em um passeio pelo mundo das formas e linhas, não aqui, não agora. Mas lembre-se que a geometria, embora silenciosa e imóvel, sempre está lá, embaixo de tudo, o esqueleto invisível que dá forma ao nosso mundo.
+Eu não vou lhe guiar em uma jornada pelo mundo das formas e linhas, não aqui, não agora. Mesmo assim, a amável leitora precisa lembrar que a geometria, silenciosa e imóvel, sempre estará lá, por baixo de tudo, o esqueleto do invisível que dá forma física do nosso universo.
 
-A matemática irascível, nos força a dizer que o espaço vetorial $\textbf{V}$ é fechado em relação a soma de vetores. A soma de vetores é feita componente a componente, paulatinamente. Assim, se considerarmos os vetores $A$ e $B$ poderemos encontrar um vetor $C$ que seja a soma de $A$ e $B$ representada por $C=A+B$ por:
+A matemática irascível, nos força a dizer que o espaço vetorial $\textbf{V}$ é fechado em relação a soma de vetores. Forma direta de dizer que a soma de dois vetores do espaço $\textbf{V}$ resulta em um vetor deste mesmo espaço. Fechamento é um conceito da álgebra, e determina quais operações binárias que aplicadas os elementos de um conjunto, resultam em elementos deste mesmo conjunto.
 
-$$C=A+B=(A_x a_x+A_y a_y+A_z a_z)+(B_x a_x+B_y a_y+B_z a_z)$$
+Limitados como estamos pela Álgebra Linear, veremos que a soma de vetores em um dado espaço vetorial será feita componente a componente. Se considerarmos os vetores $\vec{A}$ e $\vec{B}$ poderemos encontrar um vetor $\vec{C}$ que será a soma de $\vec{A}$ e $\vec{B}$ representada por $\vec{C}=\vec{A}+\vec{B}$ por:
 
-$$C=A+B=(A_x+B_x)a_x+(A_y+B_y)a_y+(A_y+B_y)a_z$$
+$$\vec{C}=\vec{A}+\vec{B}=(\vec{a}_x \vec{a}_x+\vec{a}_y \vec{a}_y+\vec{a}_z \vec{a}_z)+(B_x \vec{a}_x+B_y \vec{a}_y+B_z \vec{a}_z)$$
+
+$$\vec{C}=\vec{A}+\vec{B}=(\vec{a}_x+B_x)\vec{a}_x+(\vec{a}_y+B_y)\vec{a}_y+(\vec{a}_y+B_y)\vec{a}_z$$
 
 <p class="exp">
-<b>Exemplo 3:</b> se $A=5a_x-3a_y+a_z$ e $B=a_x+4a_y-7a_z$. Calcule $C=A+B$. <br><br>
+<b>Exemplo 3:</b> se $\vec{A}=5\vec{a}_x-3\vec{a}_y+\vec{a}_z$ e $\vec{B}=\vec{a}_x+4\vec{a}_y-7\vec{a}_z$. Calcule $\vec{C}=vec{A}+\vec{B}$.<br><br>
 <b>Solução</b>
 
-\[C=A+B=(5a_x-3a_y+a_z)+(1a_x+4a_y-7a_z)\]
+\[\vec{C}=\vec{A}+\vec{B}=(5\vec{a}_x-3\vec{a}_y+\vec{a}_z)+(1\vec{a}_x+4\vec{a}_y-7\vec{a}_z)\]
 
-\[C=A+B=(5+1)a_x+(-3+4)a_y+(1-7)a_z \]
+\[\vec{C}=\vec{A}+\vec{B}=(5+1)\vec{a}_x+(-3+4)\vec{a}_y+(1-7)\vec{a}_z \]
 
-\[C= 6a_x+a_y-6a_z\]
+\[\vec{C}= 6\vec{a}_x+\vec{a}_y-6\vec{a}_z\]
 
 </p>
 
-A Subtração será uma soma em que o segundo operando será o vetor oposto do operando original. Assim:
+Recorrendo ao auxílio da aritmética dos números escalares, podemos dizer que: a subtração entre dois vetores também será uma soma. Desta feita, uma soma entre um vetor e o vetor oposto de outro vetor Assim:
 
-$$C=A-B=A+(-B)=A+(-1B)$$
+$$\vec{C}=\vec{A}-\vec{B}=\vec{A}+(-\vec{B})=\vec{A}+(-1\vec{B})$$
 
-Talvez um exemplo torne a subtração óbvia.
+Talvez um exemplo ajude a amável leitora a perceber que, vetorialmente, até quando subtraímos estamos somando.
 
 <p class="exp">
-<b>Exemplo 4:</b> considere $A=5a_x-3a_y+a_z$ e $B=1a_x+4a_y-7a_z$ e calcule $C=A-B$. <br><br>
+<b>Exemplo 4:</b> considere $A=5\vec{a}_x-3\vec{a}_y+\vec{a}_z$ e $B=1\vec{a}_x+4\vec{a}_y-7\vec{a}_z$ e calcule $\vec{C}=\vec{A}-\vec{B}$. <br><br>
 <b>Solução:</b>
 
-\[C=A-B=(5a_x-3a_y+a_z)+(-1(1a_x+4a_y-7a_z))\]
+\[\vec{C}=\vec{A}-\vec{B}=(5\vec{a}_x-3\vec{a}_y+\vec{a}_z)+(-1(1\vec{a}_x+4\vec{a}_y-7\vec{a}_z))\]
 
-\[C=A-B=(5a_x-3a_y+a_z)+(-1a_x-4a_y+7a_z)\]
+\[\vec{C}=\vec{A}-\vec{B}=(5\vec{a}_x-3\vec{a}_y+\vec{a}_z)+(-1\vec{a}_x-4\vec{a}_y+7\vec{a}_z)\]
 
-\[C=A-B=4a_x-7a_y+8a_z\]
-
-</p>
-
-A adição e subtração de vetores obedecem a certas propriedades matemáticas. Se considerarmos os vetores $A$, $B$ e $C$, e o escalar $m$, temos:
-
-1. **comutatividade da adição de vetores:** a ordem dos vetores na adição não afeta o resultado final. Portanto, $A + B = B + A$. A subtração, entretanto, não é comutativa, ou seja, $A - B ≠ B - A$. A comutatividade é como uma dança onde a ordem dos parceiros não importa.
-
-2. **associatividade da adição de vetores:** a forma como os vetores são agrupados na adição não afeta o resultado final. Assim, $(A + B) + C = A + (B + C)$. A associatividade é como um grupo de amigos que se reúne. Não importa a ordem de chegada o resultado é uma festa. A subtração, entretanto, não é associativa, ou seja, $(A - B) - C ≠ A - (B - C)$.
-
-3. **Distributividade da multiplicação por escalar em relação à adição de vetores:** Se você multiplicar a soma de dois vetores por um escalar, o resultado será o mesmo que se você multiplicar cada vetor pelo escalar e somar os resultados. Isto é, $m*(A + B) = mA + mB$.
-
-Essas propriedades são fundamentais para a manipulação de vetores em muitos campos da física e da matemática.
-
-<p class="exp">
-<b>Em Resumo:</b> <br><br>
-
-\[A+B=B+A\]
-
-\[A+(B+C)=(A+B)+C\]
-
-\[m(A+B)=mA+mC\]
-
-<b>Importante:</b> a subtração não é comutativa nem associativa.
+\[\vec{C}=\vec{A}-\vec{B}=4\vec{a}_x-7\vec{a}_y+8\vec{a}_z\]
 
 </p>
+
+A consistência ressalta a beleza da matemática. As operações de adição e subtração de vetores obedecem a um conjunto de  propriedades matemáticas que garantem a consistência destas operações. Para tanto, considere os vetores $\vec{A}$, $\vec{B}$ e $\vec{B}$, e o escalar $m$:
+
+1. **comutatividade da adição de vetores:** a ordem dos vetores na adição não afeta o resultado final. Portanto, $\vec{A} + \vec{B} = \vec{B} + \vec{A}$. A subtração, entretanto, não é comutativa, ou seja, $\vec{A} - \vec{B} ≠ \vec{B} - \vec{A}$. A comutatividade é como uma dança onde a ordem dos parceiros não importa. Neste caso, subtrair não é como dançar e a ordem importa.
+
+2. **associatividade da adição de vetores:** a forma como os vetores são agrupados na adição não afeta o resultado final. Assim, $(\vec{A} + \vec{B}) + \vec{C} = \vec{A} + (\vec{B} + \vec{C})$. A associatividade é como um grupo de amigos que se reúne. Não importa a ordem de chegada o resultado é uma festa. A subtração, entretanto, não é associativa, ou seja, $(\vec{A} - \vec{B}) - \vec{C} ≠ \vec{A} - (\vec{B} - \vec{C})$.
+
+3. **Distributividade da multiplicação por escalar em relação à adição de vetores:** Se você multiplicar a soma de dois vetores por um escalar, o resultado será o mesmo que se você multiplicar cada vetor pelo escalar e somar os resultados. Isto é, $m*(\vec{A} + \vec{B}) = m\vec{A} + m\vec{B}$.
+
+Essas propriedades são fundamentais para a manipulação de vetores em muitos campos da física e da matemática e podem ser resumidas por:
+
+$$\vec{A}+\vec{B}=\vec{B}+\vec{A}$$
+
+$$\vec{A}+(\vec{B}+\vec{C})=(\vec{A}+\vec{B})+\vec{C}$$
+
+$$m(\vec{A}+\vec{B})=m\vec{A}+m\vec{C}$$
+
+**Importante**: a subtração não é comutativa nem associativa. Logo:
+
+$$\vec{A} - \vec{B} ≠ \vec{B} - \vec{A}$$
+
+$$(\vec{A} - \vec{B}) - \vec{C} ≠ \vec{A} - (\vec{B} - \vec{C})$$
+
+### Exercício Resolvido 4
+
+Alice é uma engenheira trabalhando no projeto de construção de uma ponte. As forças aplicadas sobre um pilar foram simplificadas até que serem reduzidas a dois vetores: $\vec{F}_1 = 4\vec{a}_x + 3\vec{a}_y$ e $\vec{F}_2 = -1\vec{a}_x + 2\vec{a}_y$ a força aplicada ao pilar será o resultado da subtração entre os vetores. Alice precisa saber qual será a força resultante após aplicar uma correção de segurança ao vetor  $\vec{F}_2$ multiplicando-o por 2. O trabalho de Alice é definir as características físicas deste pilar, o seu é ajudar Alice com estes cálculos.
+
+**Solução:** começando observando que os dois vetores tem componente $\vec{a}_z$ zerado, isto significa que as forças já foram simplificadas até um plano. Depois multiplicamos $\vec{F}_2$ por 2:
+
+$$
+2\vec{F}_2 = 2(-1\vec{a}_x + 2\vec{a}_y) = -2\vec{a}_x + 4\vec{a}_y
+$$
+
+Agora, subtraímos esse novo vetor para encontrar a força resultante $\vec{F}_{\text{resultante}}$:
+
+$$
+\vec{F}_{\text{resultante}} = \vec{F}_1 - 2\vec{F}_2 = (4\vec{a}_x + 3\vec{a}_y) - (-2\vec{a}_x + 4\vec{a}_y)
+$$
+
+$$
+\vec{F}_{\text{resultante}} = 6\vec{a}_x - \vec{a}_y
+$$
+
+Portanto, a força resultante após a correção de segurança será $6\vec{a}_x - \vec{a}_y$.
+
+
+### Exercício Resolvido 5
+
+Larissa é uma física estudando o movimento de uma partícula em um campo elétrico. Ela reduziu o problema a dois vetores representando as velocidades da partícula em um momento específico:
+$\vec{V}_1 = 6\vec{a}_x - 4\vec{a}_y + 2\vec{a}_z$ e $\vec{V}_2 = 12\vec{a}_x + 8\vec{a}_y - 4\vec{a}_z$. Larissa precisa qual será a velocidade média da partícula se ele considerar que $\vec{V}_2$ deve ser dividido por $2$ graças ao efeito de uma força estranha ao sistema agindo sobre uma das partículas. Para ajudar Larissa ajude-a a determinar a velocidade média, sabendo que esta será dada pela soma destes vetores após a correção dos efeitos da força estranha ao sistema.
+
+**Solução:** vamos começar fazendo a correção definida no enunciado dividindo $\vec{V}_2$ por $2$:
+
+$$
+\frac{\vec{V}_2}{2} = \frac{12\vec{a}_x + 8\vec{a}_y - 4\vec{a}_z}{2} = 6\vec{a}_x + 4\vec{a}_y - 2\vec{a}_z
+$$
+
+Agora, adicionamos esse novo vetor para encontrar a velocidade média $\vec{V}_{\text{média}}$:
+
+$$
+\vec{V}_{\text{média}} = \vec{V}_1 + \frac{\vec{V}_2}{2} = (6\vec{a}_x - 4\vec{a}_y + 2\vec{a}_z) + (6\vec{a}_x + 4\vec{a}_y - 2\vec{a}_z)
+$$
+
+$$
+\vec{V}_{\text{média}} = 12\vec{a}_x
+$$
+
+O problema descrito no enunciado acabou por provocar o cancelamento dos componentes de velocidade nos eixos $y$ e $z$, deixando a velocidade média da partícula apenas no componente $x$.
 
 ## Vetores Posição e Distância
 
 Um vetor posição, também conhecido como vetor ponto, é uma ferramenta útil para descrever a posição de um ponto no espaço em relação a um ponto de referência (geralmente a origem do sistema de coordenadas). Como uma flecha que começa na origem, o coração do sistema de coordenadas, onde $x$, $y$, e $z$ são todos zero, $(0,0,0)$, e termina em um ponto $P$ no espaço. Este ponto $P$ tem suas próprias coordenadas - digamos, $x$, $y$, e $z$.
 
-O vetor posição $R$ que vai da origem até este ponto $P$ será representado por $R_P$. Se as coordenadas de $P$ são $(x, y, z)$, então o vetor posição $R_P$ será:
+O vetor posição $\vec{R}$ que vai da origem até este ponto $P$ será representado por $\vec{R}_P$. Se as coordenadas de $P$ são $(x, y, z)$, então o vetor posição $\vec{R}_P$ será:
 
-$$R_p = xa_x + ya_y + za_z$$
+$$\vec{R}_p = x\vec{a}_x + y\vec{a}_y + z\vec{a}_z$$
 
-O que temos aprendido, na nossa jornada, até o momento, sobre vetores é simplesmente uma forma diferente de olhar para a mesma coisa. Soma de vetores unitários, $a_x$, $a_y$, $a_z$, que define um vetor em qualquer direção que escolhemos de uma maneira diferente, define o vetor posição, a seta que parte do zero - a origem - e se estende até qualquer ponto no espaço. Está tudo conectado, cada parte fazendo sentido à luz da outra. Assim, aprendemos a entender o espaço ao nosso redor, uma vetor de cada vez. Não podemos nos limitar a origem como ponto de partida de todos os vetores. Entre dois pontos quaisquer no espaço, $P$ e $Q$ é possível traçar um vetor. Um vetor que chamaremos de vetor distância $D$.
+O que temos aprendido, na nossa jornada, até o momento, sobre vetores é simplesmente uma forma diferente de olhar para a mesma coisa.
 
-Dois pontos no espaço, $P$ e $Q$, são como dois pontos num mapa. Cada um tem seu próprio vetor posição - seu próprio caminho da origem, o centro do mapa, até onde eles estão. Chamamos esses caminhos de $R_P$ e $R_Q$. Linhas retas que partem da origem, o centro do mapa e chegam a $P$ e $Q$. Usando para definir estes pontos os vetores posição a partir da origem.
+A soma de vetores unitários, $\vec{a}_x$, $\vec{a}_y$, $\vec{a}_z$, que define um vetor em qualquer direção que escolhemos, de uma forma diferente define o vetor posição. Isso só é possível porque consideramos o vetor como uma seta que parte do zero - a origem - e se estende até qualquer ponto no espaço.
 
-Agora, você quer encontrar a distância entre $P$ e $Q$, não o caminho do centro do mapa até $P$ ou $Q$, mas o caminho direto de $P$ até $Q$. Este caminho será o vetor distância $D$.
+Como a doce leitora pode ver, está tudo conectado, cada parte fazendo sentido à luz da outra. Assim, aprenderemos a entender o espaço ao nosso redor, uma vetor de cada vez.
 
-Como encontramos $D$? Subtraímos. $$D$$ será a diferença entre $R_Q$ e $R_P$. É como pegar o caminho de $Q$ ao centro do mapa e subtrair o caminho de $P$ ao centro do mapa. O que sobra é o caminho de $P$ até $Q$.
+No universo dos problemas reais, onde estaremos sujeitos a forças na forma de gravidade, eletromagnetismo, ventos e correntes. Não podemos nos limitar a origem como ponto de partida de todos os vetores. Se fizermos isso, corremos o risco de tornar complexo o que é simples.
 
-$$D = R_Q - R_P$$
+Na frieza da realidade, entre dois pontos quaisquer no espaço, $P$ e $Q$ será possível traçar um vetor. Um vetor que chamaremos de vetor distância e representaremos por $\vec{R}$.
 
-$D$, a distância entre $P$ e $Q$, será geometricamente representado por uma seta apontando de $P$ para $Q$. O comprimento dessa seta é a distância entre $P$ e $Q$. É um conceito simples, mas poderoso. Uma maneira de conectar dois pontos em um espaço, uma forma de enxergar todo espaço. Definindo qualquer vetor a partir dos vetores posição da sua própria origem e destino.
+Dois pontos no espaço, $P$ e $Q$, são como dois pontos num mapa. Cada um tem seu próprio vetor posição - seu próprio caminho da origem, o centro do mapa, até onde eles estão. Chamamos esses caminhos de $\vec{R}_P$ e $\vec{R}_Q$. Linhas retas que partem da origem, o centro do mapa e chegam a $P$ e $Q$. Usando para definir estes pontos os vetores posição a partir da origem.
+
+Agora, se você quiser encontrar a distância entre $P$ e $Q$, não o caminho do centro do mapa até $P$ ou $Q$, mas o caminho direto partindo de $P$ até $Q$. Este caminho será o vetor distância $\vec{R}_{PQ}$.
+
+Resta uma questão como encontramos $\vec{R}_{PQ}$?
+
+Usamos a subtração de vetores. O vetor distância $\vec{R}_{PQ}$ será a diferença entre $\vec{R}_Q$ e $\vec{R}_P$. É como pegar o caminho de $Q$ ao centro do mapa, a origem do Sistema de Coordenadas Cartesianas, e subtrair o caminho de $P$ a este mesmo ponto. O que sobra é o caminho de $P$ até $Q$.
+
+$$\vec{R} = \vec{R}_Q - \vec{R}_P$$
+
+$\vec{R}$, a distância entre $P$ e $Q$, será geometricamente representado por uma seta apontando de $P$ para $Q$. O comprimento dessa seta é a distância entre $P$ e $Q$. Ou, em outras palavras, se temos um vetor, com origem em um ponto $P$ e destino em um ponto $Q$ a distância entre estes dois pontos será a magnitude deste vetor. E agora a amável leitora sabe porque chamamos de **vetor posição** ao vetor resultante a subtração entre dois vetores com origem no mesmo ponto. 
+
+É um conceito simples, porém poderoso. Uma forma de conectar dois pontos em um espaço, uma forma de enxergar todo espaço a partir dos seus pontos e vetores. Definindo qualquer vetor a partir dos vetores posição. Bastando para tanto, definir um ponto comum para todo o espaço. Coisa que os sistemas de coordenadas fazem por nós graciosamente.
 
 <p class="exp">
-<b>Exemplo: 5</b> considerando que $P$ esteja no ponto $(3,2,-1)$ e $Q$ esteja no ponto $(1,-2,3)$. Logo, o vetor distância $D_{PQ}$ será dado por: <br><br>
+<b>Exemplo: 5</b> considerando que $P$ esteja nas coordenadas $(3,2,-1)$ e $Q$ esteja nas coordenadas $(1,-2,3)$. Logo, o vetor distância $\vec{R}_{PQ}$ será dado por: <br><br>
 <b>Solução:</b>
 
-\[D_{PQ} = R_P - R_Q\]
+\[\vec{R}_{PQ} = \vec{R}_P - \vec{R}_Q\]
 
 Logo:
 
-\[D_{PQ} = (P_x-Q_x)a_x + (P_y-Q_y)a_y+(P_z-Q_z)a_z\]
+\[\vec{R}_{PQ} = (P_x-Q_x)\vec{a}_x + (P_y-Q_y)\vec{a}_y+(P_z-Q_z)\vec{a}_z\]
 
-\[D_{PQ} = (3-1)a_x+(3-(-2))a_y+((-1)-3)a_z\]
+\[\vec{R}_{PQ} = (3-1)\vec{a}_x+(3-(-2))\vec{a}_y+((-1)-3)\vec{a}_z\]
 
-\[D_{PQ} = 2a_x+5a_y-4a_z\]
+\[\vec{R}_{PQ} = 2\vec{a}_x+5\vec{a}_y-4\vec{a}_z\]
 
 </p>
 
 <p class="exp">
-<b>Exemplo 6:</b> dados os pontos $P_1(4,4,3)$, $P_2(-2,0,5)$ e $P_3(7,-2,1)$. (a) Especifique o vetor $A$ que se estende da origem até o ponto $P_1$. (b) Determine um vetor unitário que parte da origem e atinge o ponto médio do segmento de reta formado pelos pontos $P_1$ e $P_2$. (c) Calcule o perímetro do triângulo formado pelos pontos $P_1$, $P_2$ e $P_3$.
+<b>Exemplo 6:</b> dados os pontos $P_1(4,4,3)$, $P_2(-2,0,5)$ e $P_3(7,-2,1)$. (a) Especifique o vetor $\vec{A}$ que se estende da origem até o ponto $P_1$. (b) Determine um vetor unitário que parte da origem e atinge o ponto médio do segmento de reta formado pelos pontos $P_1$ e $P_2$. (c) Calcule o perímetro do triângulo formado pelos pontos $P_1$, $P_2$ e $P_3$.
+
 <br><br>
 <b>Solução:</b><br>
-<b>(a)</b> o vetor $A$ será o vetor posição do ponto $P_1(4,3,2)$ dado por:
+<b>(a)</b> o vetor $\vec{A}$ será o vetor posição do ponto $P_1(4,3,2)$ dado por:
 
-$$A = 4a_x+4a_y+3a_z$$
+$$\vec{A} = 4\vec{a}_x+4\vec{a}_y+3\vec{a}_z$$
 
 <b>(b)</b> para determinar um vetor unitário que parte da origem e atinge o ponto médio do segmento de reta formado pelos pontos $P_1$ e $P_2$ precisamos primeiro encontrar este ponto médio $P_M$. Então:
 
@@ -366,189 +620,176 @@ $$A = 4a_x+4a_y+3a_z$$
 
 \[P_M=\frac{(2,4,8)}{2} = (1, 2, 4)\]
 
-\[P_M=a_x+2a_y+4a_z\]
+\[P_M=\vec{a}_x+2\vec{a}_y+4\vec{a}_z\]
 
 Para calcular o vetor unitário na direção do vetor $P_M$ teremos:
 
-\[a\_{P_M}=\frac{(1, 2, 4)}{|(1, 2, 4)|} = \frac{(1, 3, 4)}{\sqrt{1^2+2^2+4^2}}\]
+\[\vec{a}\_{P_M}=\frac{(1, 2, 4)}{|(1, 2, 4)|} = \frac{(1, 3, 4)}{\sqrt{1^2+2^2+4^2} }\]
 
-\[a\_{P_M}=0.22a_x+0.45a_y+0.87a_z\]
+\[\vec{a}\_{P_M}=0.22\vec{a}_x+0.45\vec{a}_y+0.87\vec{a}_z\]
 
 <b>(c)</b> finalmente, para calcular o perímetro do triângulo formado por: $P_1(4,4,3)$, $P_2(-2,0,5)$ e $P_3(7,-2,1)$, precisaremos somar os módulos dos vetores distância ente $P_1(4,3,2)$ e $P_2(-2,0,5)$, $P_2(-2,0,5)$ e $P_3(7,-2,1)$ e $P_3(7,-2,1)$ e $P_1(4,3,2)$.
 
-\[ \vert P_1P_2 \vert = \vert (4,4,3)-(-2,0,5) \vert = \vert (6,4,-2) \vert\]
+\[\vert P_1P_2 \vert = \vert (4,4,3)-(-2,0,5) \vert = \vert (6,4,-2) \vert\]
 
-\[ \vert P_1P_2 \vert = \sqrt{6^2+4^2+2^2}=7,48$$
+\[\vert P_1P_2 \vert = \sqrt{6^2+4^2+2^2}=7,48$$
 
-\[ \vert P_2P_3 \vert = \vert (-2,0,5)-(7,-2,1) \vert = \vert (-9,2,-4) \vert\]
+\[\vert P_2P_3 \vert = \vert (-2,0,5)-(7,-2,1) \vert = \vert (-9,2,-4) \vert\]
 
-\[ \vert P_2P_3 \vert = \sqrt{9^2+2^2+4^2}=10,05\]
+\[\vert P_2P_3 \vert = \sqrt{9^2+2^2+4^2}=10,05\]
 
-\[ \vert P_3P_1 \vert = \vert (7,-2,1)-(4,4,3) \vert = \vert (3,-6,-2) \vert\]
+\[\vert P_3P_1 \vert = \vert (7,-2,1)-(4,4,3) \vert = \vert (3,-6,-2) \vert\]
 
-\[ \vert P_3P_1 \vert = \sqrt{3^2+6^2+6^2}=7\]
+\[\vert P_3P_1 \vert = \sqrt{3^2+6^2+6^2}=7\]
 
 Sendo assim o perímetro será:
 
-\[ \vert P_1P_2 \vert + \vert P_2P_3 \vert + \vert P_3P_1 \vert =7,48+10,05+7=24.53 \]
-
+\[\vert P_1P_2 \vert + \vert P_2P_3 \vert + \vert P_3P_1 \vert =7,48+10,05+7=24.53 \]
 </p>
 
-## Primeiros Exercícios com Vetores
+Vetores são como os ventos que cruzam o mar, invisíveis mas poderosos, guiando navios e direcionando correntes. Na matemática, eles têm sua própria linguagem, um código entre o visível e o invisível, mapeando direções e magnitudes. Aqui, você encontrará exercícios que irão desafiar sua habilidade de navegar por esse oceano numérico. Não são apenas problemas, mas bússolas que apontam para o entendimento mais profundo. Então pegue lápis e papel como se fossem um leme e um mapa e prepare-se para traçar seu próprio curso.
 
-Os vetores são como os ventos que cruzam o mar, invisíveis mas poderosos, guiando navios e direcionando correntes. Na matemática, eles têm sua própria linguagem, um código entre o visível e o invisível, mapeando direções e magnitudes. Aqui, você encontrará exercícios que irão desafiar sua habilidade de navegar por esse oceano numérico. Não são apenas problemas, mas bússolas que apontam para o entendimento mais profundo. Então pegue lápis e papel como se fossem um leme e um mapa e prepare-se para traçar seu próprio curso.
-
-### Exercício 1
+### Exercício Resolvido 6
 
 Considere um sistema de referência onde as distâncias são dimensionadas apenas por unidades abstratas, sem especificação de unidades de medida. Nesse sistema, dois vetores são dados. O vetor $\vec{A}$ inicia na origem e termina no ponto $P$ com coordenadas $(8, -1, -5)$. Temos também um vetor unitário $\vec{c}$ que parte da origem em direção ao ponto $Q$, e é representado por $\frac{1}{3}(1, -3, 2)$. Se a distância entre os pontos $P$ e $Q$ é igual a 15 unidades, determine as coordenadas do ponto $Q$.
 
-**Solução**: vamos encontrar o vetor distância $\vec{D}$ entre os pontos $P$ e $Q$.
+**Solução**: vamos encontrar o vetor distância $\vec{R}$ entre os pontos $P$ e $Q$.
 
-$$
-\vec{D} = \vec{a} - 15\vec{c}
-$$
+$$\vec{R} = \vec{a} - 15\vec{c}$$
 
 As coordenadas do vetor $\vec{A}$ são $(8, -1, -5)$ e as do vetor unitário $\vec{c}$ são $\frac{1}{3}(1, -3, 2) = (\frac{1}{3}, -1, \frac{2}{3})$.
 
 Substituindo na equação, temos:
 
-$$
-\vec{D} = (8, -1, -5) - 15 \left(\frac{1}{3}, -1, \frac{2}{3}\right)
-$$
+$$\vec{R} = (8, -1, -5) - 15 \left(\frac{1}{3}, -1, \frac{2}{3}\right)$$
 
-$$
-\vec{D} = (8, -1, -5) - (5, 15, 10)
-$$
+$$\vec{R} = (8, -1, -5) - (5, 15, 10)$$
 
-$$
-\vec{D} = (3, -16, -15)
-$$
+$$\vec{R} = (3, -16, -15)$$
 
-Agora, vamos usar o vetor $\vec{D}$ para encontrar as coordenadas do ponto $Q$. O vetor $\vec{D}$ tem origem no ponto $Q$ e aponta para o ponto $P$, então para encontrar $Q$ precisamos fazer:
+Agora, vamos usar o vetor $\vec{R}$ para encontrar as coordenadas do ponto $Q$. O vetor $\vec{R}$ tem origem no ponto $Q$ e aponta para o ponto $P$, então para encontrar $Q$ precisamos fazer:
 
-$$
-\text{Coordenadas de } Q = \text{Coordenadas de } P - \vec{d}
-$$
+$$\text{Coordenadas de } Q = \text{Coordenadas de } P - \vec{R}$$
 
-$$
-\text{Coordenadas de } Q = (8, -1, -5) - (3, -16, -15)
-$$
+$$\text{Coordenadas de } Q = (8, -1, -5) - (3, -16, -15)$$
 
-$$
-\text{Coordenadas de } Q = (5, 15, 10)
-$$
+$$\text{Coordenadas de } Q = (5, 15, 10)$$
 
-Portanto, as coordenadas do ponto $Q$ são $(5, 15, 10)$.
+Isso só é possível porque tanto as coordenadas de $Q$ quanto as coordenadas de $P$ são, na verdade, os componentes dos Vetores Posição da origem até $P$ e $Q$, respectivamente. Desta forma, as coordenadas do ponto $Q$ são $(5, 15, 10)$.
 
 ## Produto Escalar
 
-Há um jeito de juntar dois vetores - setas no espaço - e obter algo diferente: um número, algo simples, sem direção. Isso é o Produto Escalar. **O resultado do produto escalar entre dois vetores é um valor escalar**.
+Há um jeito de juntar dois vetores - setas no espaço - e obter algo diferente: um número, algo mais simples, sem direção, sem sentido, direto e frio. Este é o Produto Escalar. **O resultado do Produto Escalar entre dois vetores é um valor escalar**.
 
-O Produto Escalar opera dois vetores e resulta em um número. No nosso espaço vetorial $\textbf {V}$ um número real. Esse número tem algo especial: ele não se mexe. Não importa como você vire ou gire o espaço, o número permanece o mesmo. Ele é invariante.
+A operação Produto Escalar recebe dois vetores e resulta em um número que, no espaço vetorial $\textbf {V}$, definido anteriormente, será um número real. Esse resultado tem algo especial: sua invariância. Não importa a orientação, rotação ou o giro que você imponha ao espaço vetorial, o resultado do Produto Escalar, continuará imutável, inalterado.
 
-Na física, chamamos esses números de escalares. São quantidades que não precisam saber para onde estão apontando. Elas apenas são. Um exemplo? A massa de um objeto. Não importa como você vire ou gire o objeto, sua massa permanece a mesma.
+A amável leitora há de me perdoar, mas é preciso lembrar que escalares são quantidades que não precisam saber para onde estão apontando. Elas apenas são. Um exemplo? A Temperatura. Não importa como você oriente, gire ou mova um sistema de coordenadas aplicado no espaço para entender um fenômeno termodinâmico, a temperatura deste sistema permanecerá a mesma. A temperatura é uma quantidade que não tem direção nem sentido.
 
-Aqui está o segredo: as partes de um vetor são escalares. Se você quebrar um vetor em seus componentes unitário - cada uma apontando ao longo de um eixo - essas partes mudam quando você gira o espaço. Elas são sensíveis, se moldam e se adaptam. Elas não são invariáveis. O Produto Escalar é simples e invariável, mas essencial para entender o espaço e como as coisas se movem dentro dele.
+Aqui está o pulo da onça: enquanto um vetor é uma entidade direcionada, seus componentes são meros escalares. Ao decompor um vetor em seus componentes unitários — cada qual seguindo a direção de um eixo coordenado — é preciso entender que esses elementos são fluidos e mutáveis dependem das características do sistema de coordenadas. Os componentes se ajustam, se transformam e se adaptam quando você roda ou reorienta o espaço. Em contraste, o Produto Escalar, apesar de sua simplicidade, permanece constante, imperturbável às mudanças espaciais. Ele é um pilar invariável, vital para compreender tanto a estrutura do espaço quanto as dinâmicas que nele ocorrem.
 
-Usando a linguagem da matemática, direta e linda, dizemos que dados os vetores $A$ e $B$, **o produto escalar entre $A$ e $B$ resultará em uma quantidade escalar** e será representado por $A\cdot B$. Trigonometricamente o produto escalar entre $A$ e $B$ será dado por:
+Usando a linguagem da matemática, direta e linda, podemos dizer que dados os vetores $\vec{A}$ e $\vec{B}$, **o Produto Escalar entre $\vec{A}$ e $\vec{B}$ resultará em uma quantidade escalar**.  Esta operação será representada, usando a linguagem da matemática, por $\vec{A}\cdot \vec{B}$.
 
-$$A\cdot B = |A||B|cos(\theta_{AB})$$
+Aqui abro mão da isenção e recorro a geometria. Mais que isso, faremos uso da trigonometria para reduzir o Produto Escalar ao máximo de simplicidade usando uma equação que inclua o ângulo entre os dois vetores. Sem nos perdermos nas intrincadas transformações trigonométricas diremos que o Produto Escalar entre $\vec{A}$ e $\vec{B}$ será:
 
-E esta será a equação analítica, trigonométrica, geométrica, do Produto Escalar. Observe que o Produto Escalar corresponde a projeção do vetor $A$ em $B$. Se não estiver vendo esta projeção deve voltar a geometria, e mergulhar na trigonometria básica, para iluminar este conhecimento. Assim, na prosa de [Camões](https://en.wikipedia.org/wiki/Lu%C3%ADs_de_Cam%C3%B5es) dizemos que o Produto Escalar entre dois vetores $A$ e $B$ é o produto entre o produto das magnitudes destes vetores e o cosseno do menor ângulo entre eles.
+$$\vec{A}\cdot \vec{B} = |\vec{A}||\vec{B}|cos(\theta_{AB})$$
+
+Onde $\theta_{AB}$ representa o ângulo entre os dois vetores. Esta é a equação analítica do Produto Escalar. A ferramenta mais simples que podemos usar. Não é uma equação qualquer, ela representa a projeção do vetor $\vec{A}$ sobre o vetor $\vec{B}$. Se não, a paciente leitora, não estiver vendo esta projeção deve voltar a geometria, não a acompanharei nesta viagem, tenho certeza do seu sucesso. Em bom português dizemos que **o Produto Escalar entre dois vetores $\vec{A}$ e $\vec{B}$ quaisquer é o produto entre o produto das magnitudes destes vetores e o cosseno do menor ângulo entre eles**.
 
 Vetores são como flechas atiradas no vazio do espaço. E como flechas, podem seguir diferentes caminhos.
 
-Alguns vetores correm paralelos, como flechas lançadas lado a lado, nunca se encontrando. Eles seguem a mesma direção, compartilham o mesmo curso, mas nunca se cruzam. Sua jornada é sempre paralela, sempre ao lado. O ângulo entre eles é $zero$ seu cosseno será então $1$.
+Alguns vetores correm paralelos, como flechas lançadas lado a lado, nunca se encontrando. Eles seguem a mesma direção, compartilham o mesmo curso, mas nunca se cruzam. Sua jornada é sempre paralela, sempre ao lado. O ângulo entre eles, $\theta$, é $\text{zero}$ neste caso o cosseno entre eles, $cos(\theta)$ será então $1$. E o Produto Escalar entre eles será o resultado do produto entre suas magnitudes.
 
-Outros vetores são transversais, como flechas que cortam o espaço em ângulos retos, ângulos de $90^0$. Eles não seguem a mesma direção, nem o mesmo caminho. Eles se interceptam, mas em ângulos precisos, limpos, cortando o espaço como uma grade. O cosseno entre estes vetores é $0$.
+Outros vetores são transversais, como flechas que cortam o espaço em ângulos retos, ângulos $\theta = 90^\circ$. Eles não seguem a mesma direção, nem o mesmo caminho. Eles se interceptam, mas em ângulos precisos, limpos, cortando o espaço como uma grade. O cosseno entre estes vetores é $0$. E o Produto Escalar será zero independente das suas magnitudes.
 
-E ainda há aqueles vetores que se cruzam em qualquer ângulo, como flechas lançadas de pontos distintos, cruzando o espaço de formas únicas. Eles podem se encontrar, cruzar caminhos em um único ponto, ou talvez nunca se encontrem. Eles desenham no espaço uma dança de possibilidades, um balé de encontros e desencontros. Aqui, o cosseno não pode ser determinado antes de conhecermos os vetores.
+Entre os vetores que correm em paralelo e aqueles que se cruzam transversalmente estão os limites superior e inferior do Produto Escalar, seu valor máximo e mínimo. Estes são os vetores que se cruzam em qualquer ângulo, como flechas lançadas de pontos distintos, cruzando o espaço de formas únicas. Eles podem se encontrar, cruzar caminhos em um único ponto, ou talvez nunca se cruzem. Estes vetores desenham no espaço uma dança de possibilidades, um balé de encontros e desencontros. Aqui, o cosseno não pode ser determinado antes de conhecermos os vetores em profundidade. Para estes rebeldes, usamos o **ângulo mínimo** entre eles. Um ângulo agudo. Quando dois vetores se cruzam, dois ângulos são criados. Para o Produto Escalar usaremos sempre o menor deles, o ângulo, mínimo, interno deste relacionamento.
 
-Assim, como flechas no espaço, vetores desenham caminhos - paralelos, transversais ou se cruzando em qualquer ângulo. Eles são a linguagem do espaço, a escrita das distâncias e direções. Eles são os contadores de histórias do espaço tridimensional.
+Como flechas no espaço, vetores desenham caminhos - paralelos, transversais ou se cruzando em qualquer ângulo. Vetores são a linguagem das forças no espaço, a escrita das distâncias e direções. Eles são os contadores de histórias do espaço tridimensional.
 
-A matemática destila estes conceitos simplesmente como: se temos um vetor $A$ e um vetor $B$ teremos o Produto Escalar entre eles dado por:
+A matemática da Álgebra Vetorial destila estes conceitos simplesmente como: se temos um vetor $\vec{A}$ e um vetor $\vec{B}$ teremos o Produto Escalar entre eles dado por:
 
-$$A\cdot B = A_x B_x+A_y B_y+A_z B_z$$
+$$\vec{A}\cdot \vec{B} = A_xB_x+ A_yB_y+ A_zB_z$$
 
-E saímos da equação analítica, geométrica, e voltamos aos mares tranquilos e conhecidos da Álgebra Linear. Talvez um exemplo ajude a acender a luz do entendimento.
+Seremos então capazes de abandonar a equação analítica, e voltarmos aos mares tranquilos de ventos suaves da Álgebra Linear. A matemática nos transmite paz e segurança. Exceto quando estamos aprendendo. Nestes momentos, nada como uma xícara de chá morno e um exemplo para acender a luz do entendimento.
 
 <p class="exp">
-<b>Exemplo 7:</b> dados os vetores $A=3a_x+4a_y+a_z$ e $B=a_x+2a_y-5a_z$ encontre o ângulo $\theta$ entre $A$ e $B$.
+<b>Exemplo 7:</b> dados os vetores $\vec{A}=3\vec{a}_x+4\vec{a}_y+\vec{a}_z$ e $\vec{B}=\vec{a}_x+2\vec{a}_y-5\vec{a}_z$ encontre o ângulo $\theta$ entre $\vec{A}$ e $\vec{B}$.
 <br><br>
 <b>Solução:</b><br>
-Para calcular o ângulo vamos usar a equação analítica, ou trigonométrica, do Produto Escalar:
+Para calcular o ângulo vamos usar a equação analítica do Produto Escalar:
 
-\[A\cdot B =|A||B|cos(\theta)\]
+\[\vec{A}\cdot \vec{B} =|\vec{A}||\vec{B}|cos(\theta)\]
 
-Logo vamos precisar dos módulos dos vetores e do Produto Escalar entre eles. Sendo assim:
+Precisaremos dos módulos dos vetores e do Produto Escalar entre eles. Calculando o Produto Escalar a partir dos componentes vetoriais de cada vetor teremos:
 
-\[A\cdot B = (3,4,1)\cdot(1,2,-5) \]
+\[\vec{A}\cdot \vec{B} = (3,4,1)\cdot(1,2,-5) \]
 
-\[A\cdot B = (3)(1)+(4)(2)+(1)(-5)=6\]
+\[\vec{A}\cdot \vec{B} = (3)(1)+(4)(2)+(1)(-5)=6\]
 
-Calculando os módulos de $A$ e $B$, teremos:
+Calculando os módulos de $\vec{A}$ e $\vec{B}$, teremos:
 
-\[ \vert A \vert = \vert (3,4,1) \vert =\sqrt{3^2+4^2+1^2}=5,1\]
+\[ \vert \vec{A} \vert = \vert (3,4,1) \vert =\sqrt{3^2+4^2+1^2}=5,1\]
 
-\[ \vert B \vert = \vert (1,2,-5) \vert =\sqrt{1^2+2^2+5^2}=5,48\]
+\[ \vert \vec{B} \vert = \vert (1,2,-5) \vert =\sqrt{1^2+2^2+5^2}=5,48\]
 
-Com o Produto Escalar e os módulos dos vetores podemos aplicar nossa equação analítica:
+Já que temos o Produto Escalar e os módulos dos vetores podemos aplicar nossa equação analítica:
 
-\[ A\cdot B =|A||B|cos(\theta)\] 
+\[ \vec{A}\cdot \vec{B} =|\vec{A}||\vec{B}|cos(\theta)\]
 
 logo:
 
 \[ 6 =(5,1)(5,48)cos(\theta) \therefore cos(\theta) = \frac{6}{27,95}=0,2147 \]
 
-\[ \theta = arccos(0,2147)=77,6^0 \]
+\[ \theta = arccos(0,2147)=77,6^\circ \]
 
 </p>
 
-Até agora, estivemos estudando um espaço de três dimensões, traçando vetores que se estendem em comprimento, largura e altura no Espaço Cartesiano. Isso serve para algumas coisas, como o estudo do eletromagnetismo, da dança de forças e campos que tecem o tecido do nosso mundo físico. Mas nem sempre é o bastante.
+Até agora, estivemos estudando um espaço de três dimensões, traçando vetores que se projetam em comprimentos, larguras e alturas do Espaço Cartesiano. Isso serve para algumas coisas. Para resolver alguns dos problemas que encontramos na dança de forças e campos que tecem o tecido do mundo físico. Mas nem sempre é o bastante.
 
 A verdade é que o universo é mais complexo do que as três dimensões que podemos tocar e ver. Há mundos além deste, mundos que não podemos ver, não podemos tocar, mas podemos imaginar. Para esses mundos, precisamos de mais. Muito mais.
 
-Álgebra vetorial é a ferramenta que usamos para desenhar estes mundos. Com ela, podemos expandir nosso pensamento para além das três dimensões, para espaços de muitas dimensões. Espaços que são mais estranhos, mais complicados, mas também mais ricos em possibilidades.
+Álgebra vetorial é a ferramenta que usamos para desenhar mundos. Com ela, podemos expandir nosso pensamento para além das três dimensões, para espaços de muitas dimensões. Espaços que são mais estranhos, mais complicados, mas também mais ricos em possibilidades. Talvez seja hora de reescrever nossa definição de Produto Vetorial, a hora de expandir horizontes. Não apenas para o espaço tridimensional, mas para todos os espaços que podem existir. Isso é o que a álgebra vetorial é: uma linguagem para desenhar mundos, de três dimensões ou mais.
 
-Então, talvez seja hora de reescrever nossa definição de Produto Vetorial, a hora de expandir horizontes. Não apenas para o espaço tridimensional, mas para todos os espaços que podem existir. Isso é o que a álgebra vetorial permite. Isso é o que a álgebra vetorial é: uma linguagem para desenhar mundos, de três dimensões ou mais.
+Generalizando o Produto Escalar entre dois vetores $\vec{A}$ e $\vec{B}$ com $N$ dimensões teremos:
 
-Generalizando o produto escalar entre dois vetores $A$ e $B$ com $N$ dimensões teremos:
+$$\vec{A}\cdot \vec{B} = \sum\limits_{i=1}\limits^{N} \vec{a}_i\vec{b}_i$$
 
-$$A\cdot B = \sum\limits_{i=1}\limits^{N} a_ib_i$$
+Onde $i$ é o número de dimensões. Assim, se $i =3$ e chamarmos estas dimensões $x$, $y$, $z$ respectivamente para $i=1$, $i=2$ e $i=3$ teremos:
 
-Onde $i$ é o número de dimensões. Assim, se $i =3$ e chamamos estas dimensões $x$, $y$, $z$ respectivamente para $i=1$, $i=2$ e $i=3$ teremos:
-
-$$A\cdot B = \sum\limits_{i=1}\limits^{3} a_ib_i = a_1b_1 +a_2b_2 + a_3b_3 $$
+$$\vec{A}\cdot \vec{B} = \sum\limits_{i=1}\limits^{3} \vec{a}_i\vec{b}_i = a_1b_1 +a_2b_2 + a_3b_3 $$
 
 Ou, substituindo os nomes das dimensões:
 
-$$A\cdot B = a_xb_x +a_yb_y + a_zb_z $$
+$$\vec{A}\cdot \vec{B} = \vec{a}_x\vec{b}_x +\vec{a}_y\vec{b}_y + \vec{a}_z\vec{b}_z $$
 
-1. **Comutatividade:** o Produto Escalar tem uma beleza simples quase rítmica. Como a batida de um tambor ou o toque de um sino, ele se mantém o mesmo não importa a ordem. Troque os vetores - a seta de $A$ para $B$ ou a flecha de $B$ para $A$ - e você obtém o mesmo número, o mesmo escalar. Isso é o que significa ser comutativo. Ou seja: $A\cdot B = B\cdot A$
+Não vamos usar dimensões maiores que $3$ neste estudo. Contudo, achei que a gentil leitora deveria perceber esta generalização. No futuro, em outras disciplinas, certamente irá me entender.
 
-2. **Distributividade:** o Produto Escalar também é como um rio dividindo-se em afluentes. Você pode distribuí-lo, espalhá-lo, dividir um vetor por muitos. Adicione dois vetores e multiplique-os por um terceiro - você pode fazer isso de uma vez ou pode fazer um por vez. O Produto Escalar não se importa. Ele dá o mesmo número, a mesma resposta. Isso é ser distributivo. Dessa forma teremos: $A\cdot (B+C) = A\cdot B +A\cdot C$
+Uma vez que tenhamos entendido a operação Produto Escalar, nos resta entender suas propriedades:
 
-Portanto, o Produto Escalar é constante e flexível. Ele se mantém o mesmo e se adapta, tudo de uma vez. Essas são suas regras, sua batida, seu fluxo. E isso é o que o torna uma ferramenta tão poderosa, tão versátil, em nosso esforço para entender o espaço e as coisas dentro dele.
+1. **Comutatividade:** o Produto Escalar tem uma beleza simples quase rítmica. Como a batida de um tambor ou o toque de um sino, ele se mantém o mesmo não importa a ordem. Troque os vetores - a seta de $\vec{A}$ para $\vec{B}$ ou a flecha de $\vec{B}$ para $\vec{A}$ - e você obtém o mesmo número, o mesmo escalar. Isso é o que significa ser comutativo. Ou seja: $\vec{A}\cdot \vec{B} = \vec{B}\cdot \vec{A}$
 
-Veja um vetor $A$. Uma seta solitária estendendo-se no espaço. Agora, imagine colocar outra seta exatamente igual, exatamente no mesmo lugar. Duas Setas juntas, $A$ e $A$, sem nenhum ângulo entre elas. Quando multiplicamos esses vetores, o Produto Escalar, obtemos a magnitude de $A$ ao quadrado, ou $\vert A \vert ^2$.
+2. **Distributividade em Relação a Adição:** o Produto Escalar também é como um rio dividindo-se em afluentes. Você pode distribuí-lo, espalhá-lo, dividir um vetor por muitos. Adicione dois vetores e multiplique-os por um terceiro - você pode fazer isso de uma vez ou pode fazer um por vez. O Produto Escalar não se importa. Ele dá o mesmo número, a mesma resposta. Isso é ser distributivo em relação a adição. Dessa forma teremos: $\vec{A}\cdot (\vec{B}+\vec{C}) = \vec{A}\cdot \vec{B} +\vec{A}\cdot \vec{C}$.
+
+3. **Associatividade com Escalares:** o Produto Escalar é como um maestro habilidoso que sabe equilibrar todos os instrumentos em uma orquestra. Imagine um escalar como a intensidade da música: aumente ou diminua, e a harmonia ainda será mantida. Multiplicar um vetor por um escalar e, em seguida, realizar o Produto Escalar com outro vetor é o mesmo que primeiro executar o Produto Escalar e depois ajustar a intensidade. O Produto Escalar, em sua elegância matemática, garante que o show continue de maneira harmoniosa, independentemente de quando a intensidade é ajustada. Essa é a essência da associatividade com escalares. Portanto, podemos dizer que: $k(\vec{A} \cdot \vec{B}) = (k\vec{A}) \cdot \vec{B} = \vec{A} \cdot (k\vec{B})$
+
+4. **Produto Escalar do Vetor Consigo Mesmo:** O Produto Escalar tem um momento introspectivo, como um dançarino girando em um reflexo de espelho. Quando um vetor é multiplicado por si mesmo, ele revela sua verdadeira força, sua magnitude ao quadrado. É uma dança solitária, onde o vetor se alinha perfeitamente consigo mesmo, na mais pura sintonia. Esta auto-referência nos mostra o quanto o vetor se projeta em sua própria direção, revelando a essência de sua magnitude. Assim, temos: $ \vec{A} \cdot \vec{A} = \vert \vec{A} \vert^2$. Veja um vetor $\vec{A}$. Uma seta solitária estendendo-se no espaço. Imagine colocar outra seta exatamente igual, exatamente no mesmo lugar. Duas Setas juntas, $\vec{A}$ e $\vec{A}$, sem nenhum ângulo entre elas.
 
 Por que? Porque o ângulo $\theta$ entre um vetor e ele mesmo é $zero$. E o cosseno de zero é $1$. Assim:
 
-$$A\cdot A = \vert A \vert^2$$
+$$\vec{A}\cdot \vec{A} = \vert \vec{A} \vert^2$$
 
-Para simplificar, vamos dizer que $A^2$ é o mesmo que $ \vert A \vert ^2$. Uma notação, uma abreviação para o comprimento, magnitude, de $A$ ao quadrado.
+Para simplificar, vamos dizer que $\vec{A}^2$ é o mesmo que $ \vert \vec{A} \vert ^2$. Uma notação, uma abreviação para o comprimento, magnitude, de $\vec{A}$ ao quadrado. Aqui está a lição: **um vetor e ele mesmo, lado a lado, são definidos pela magnitude do próprio vetor, ao quadrado**. É um pequeno pedaço de sabedoria, um truque, uma ferramenta. Mantenha esta ferramenta sempre à mão, você vai precisar.
 
-Então, aqui está a lição: um vetor e ele mesmo, lado a lado, são definidos pela magnitude do próprio vetor, ao quadrado. É um pequeno pedaço de sabedoria, um truque, uma ferramenta. Mantenha esta ferramenta na sua caixa de ferramentas preferidas.
+Assim como as ondas em uma praia, indo e voltando, de tempos em tempos precisamos rever as ferramentas que adquirimos e o conhecimento que construímos com elas. Em todos os sistemas de coordenadas que usamos para definir o espaço $\textbf{V}$ os vetores unitários são ortogonais. Setas no espaço que se cruzam em um ângulo reto. Este ângulo reto garante duas propriedades interessantes.
 
-Assim como as ondas em uma praia, indo e voltando, de tempos em tempos precisamos rever nossas ferramentas e o conhecimento que construímos com elas. Em todos os sistemas de coordenadas que usamos para definir o espaço $\textbf{V}$ os vetores unitários são ortogonais. Setas no espaço que se cruzam em um ângulo reto. Este ângulo reto, esta ortogonalidade, garante duas propriedades interessantes.
+$$\vec{a}_x\cdot \vec{a}_y=\vec{a}_x\cdot \vec{a}_z=\vec{a}_y\cdot \vec{a}_z=0$$
 
-$$a_x\cdot a_y=a_x\cdot a_z=a_y\cdot a_z=0$$
+$$\vec{a}_x\cdot \vec{a}_x=\vec{a}_y\cdot \vec{a}_y=\vec{a}_z\cdot \vec{a}_z=1$$
 
-$$a_x\cdot a_x=a_y\cdot a_y=a_z\cdot a_z=1$$
+A primeira garante que o Produto Escalar entre quaisquer dois componentes vetoriais ortogonais é $zero$, a segunda que o Produto Escalar entre os mesmos dois componentes vetoriais é $1$. Essas são duas verdades que podemos segurar firmes enquanto navegamos pelo oceano do espaço vetorial. Como um farol em uma noite tempestuosa, elas nos guiarão e nos ajudarão a entender o indescritível. Mais que isso, serão as ferramentas que usaremos para transformar o muito difícil em muito fácil.
 
-A primeira garante que o Produto Escalar entre quaisquer dois componentes vetoriais ortogonais é $zero$, a segunda que o Produto Escalar entre os mesmos dois componentes vetoriais é $1$. Essas são duas garantias, duas verdades que podemos segurar firmes enquanto navegamos pelo vasto oceano do espaço vetorial. Como um farol em uma noite tempestuosa, elas nos guiam e nos ajudam a entender o indescritível. Mais que isso, serão ferramentas para transformar o muito difícil em muito fácil.
+Desculpe-me! Esta ambição que me força a olhar além me guia aos limites do possível. Assim como expandimos o número de dimensões para perceber que o impacto do Produto Vetorial se estende além dos limites da nossa, precisamos, novamente, levar as dimensões do nosso universo ao ilimitável.
 
-Estas propriedades podem ser expressas usando o [Delta de Kronecker](https://en.wikipedia.org/wiki/Kronecker_delta) definido por [Leopold Kronecker](https://en.wikipedia.org/wiki/Leopold_Kronecker)(1823–1891). O Delta de Kronecker é uma forma de representar por índices as dimensões do espaço vetorial escolhido. Uma generalização, para levarmos a Álgebra Linear ao seu potencial máximo, sem abandonar os limites que definimos para o estudo do Eletromagnetismo. Sendo assim, teremos:
+As propriedades derivadas da ortogonalidade dos componentes dos sistemas de coordenadas podem ser expressas usando o [Delta de Kronecker](https://en.wikipedia.org/wiki/Kronecker_delta) definido por [Leopold Kronecker](https://en.wikipedia.org/wiki/Leopold_Kronecker)(1823–1891). O Delta de Kronecker é uma forma de representar por índices as dimensões do espaço vetorial, uma generalização, para levarmos a Álgebra Linear ao seu potencial máximo, sem abandonar os limites que definimos para o estudo do Eletromagnetismo. sem delongas, teremos:
 
 $$
 \begin{equation}
@@ -559,19 +800,128 @@ $$
 \end{equation}
 $$
 
-Usando o Delta de Kronecker podemos escrever as propriedades dos componentes ortogonais unitários em relação ao produto escalar como:
+Usando o Delta de Kronecker podemos escrever as propriedades dos componentes ortogonais unitários em relação ao Produto Escalar como:
 
-$$a_\mu \cdot a_\upsilon = \delta_{\mu \upsilon}$$
+$$\vec{a}_\mu \cdot \vec{a}_\upsilon = \delta_{\mu \upsilon}$$
 
-Que será útil na representação computacional de vetores e no entendimento de transformações vetoriais em espaços com mais de $3$ dimensões.
+Que será útil na representação computacional de vetores e no entendimento de transformações vetoriais em espaços com mais de $3$ dimensões. Que, infelizmente, estão além deste ponto na nossa jornada. Não se deixe abater, ficaremos limitados a $3$ dimensões. Contudo, não nos limitaremos ao Produto Escalar. Outras maravilhas virão.
+
+<p class="exp">
+<b>Exemplo 8:</b> dados os vetores $\vec{A} = (3, 2, 1)$ e $\vec{B} = (1, -4, 2)$, calcule o Produto Escalar $\vec{A} \cdot \vec{B}$ e também $\vec{B} \cdot \vec{A}$. Verifique a propriedade da comutatividade.
+<br><br>
+<b>Solução:</b><br>
+Tudo que precisamos para provar a comutatividade é fazer o Produto Escalar em duas ordens diferentes em busca de resultados iguais.
+   \[\vec{A} \cdot \vec{B} = 3 \times 1 + 2 \times (-4) + 1 \times 2 = 3 - 8 + 2 = -3\]  
+
+   \[\vec{B} \cdot \vec{A} = 1 \times 3 + (-4) \times 2 + 2 \times 1 = 3 - 8 + 2 = -3\]  
+</p>
+
+<p class="exp">
+<b>Exemplo 9:</b> dados os vetores $\vec{A} = (2, 3, 1)$, $\vec{B} = (1, 2, 0)$ e $\vec{C} = (3, 1, 3)$, calcule $\vec{A} \cdot (\vec{B} + \vec{C})$ e compare com $\vec{A} \cdot \vec{B} + \vec{A} \cdot \vec{C}$.
+<br><br>
+<b>Solução:</b><br>
+
+Primeiro, encontre $\vec{B} + \vec{C} = (1+3, 2+1, 0+3) = (4, 3, 3)$.  
+
+   \[\vec{A} \cdot (\vec{B} + \vec{C}) = 2 \times 4 + 3 \times 3 + 1 \times 3 = 8 + 9 + 3 = 20\]  
+   \[\vec{A} \cdot \vec{B} + \vec{A} \cdot \vec{C} = 2 \times 1 + 3 \times 2 + 1 \times 0 + 2 \times 3 + 3 \times 1 + 1 \times 3\]  
+   \[\vec{A} \cdot \vec{B} + \vec{A} \cdot \vec{C} = 2 + 6 + 0 + 6 + 3 + 3\]
+   \[\vec{A} \cdot \vec{B} + \vec{A} \cdot \vec{C} = 20\]
+</p>
+  
+### Exercício Resolvido 7
+
+Considere o vetor $\vec{F} = (x, y, z)$ perpendicular ao vetor $\vec{G} = (2, 3, 1)$. Sabendo que $\vec{F} \cdot \vec{F} = 9$. Determine os componentes que definem o vetor $\vec{F}$.
+
+**Solução:** primeiro vamos determinar a relação entre os vetores $\vec{F}$ e $\vec{G}$ usando o Produto Escalar. Sabemos que se dois vetores são perpendiculares (ortogonais) entre si, o Produto Escalar entre eles é zero. 
+
+$$\vec{F} \cdot \vec{G} = x \times 2 + y \times 3 + z \times 1 = 0$$
+
+Resultando em:
+
+$$2x + 3y + z = 0 \quad \text{...(i)}$$
+
+A segunda informação, $\vec{F} \cdot \vec{F} = 9$, indica que a magnitude ao quadrado de $\vec{F}$ é 9.
+
+$$\vec{F} \cdot \vec{F} = x^2 + y^2 + z^2 = 9 \quad \text{...(ii)}$$
+
+Utilizando a equação (i), podemos expressar $z$ em função de $x$ e $y$:
+
+$$z = -2x - 3y \quad \text{...(iii)}$$
+
+Substituindo a expressão para $z$ da equação (iii) na equação (ii):
+
+$$x^2 + y^2 + (-2x - 3y)^2 = 9$$
+
+Expandido, obtemos:
+
+$$x^2 + y^2 + 4x^2 + 9y^2 + 12xy = 9$$
+
+Combinando termos semelhantes, chegamos à seguinte expressão:
+
+$$5x^2 + 10y^2 + 12xy - 9 = 0$$
+
+A partir das equações fornecidas:
+
+1) $2x + 3y + z = 0 \quad \text{...(i)}$
+
+2) $x^2 + y^2 + z^2 = 9 \quad \text{...(ii)}$
+
+3) $z = -2x - 3y \quad \text{...(iii)}$
+
+Substituindo $z$ de (3) em (2):
+
+$$x^2 + y^2 + (-2x - 3y)^2 = 9$$
+
+Expandindo e agrupando os termos:
+
+$$5x^2 + 10y^2 + 12xy = 9$$
+
+$$5x^2 + 12xy + 10y^2 - 9 = 0$$
+
+Vamos expressar $y$ em termos de $x$ a partir de (1):
+
+$$y = \frac{-2x - z}{3}$$
+
+Usando (3) para $z$, obtemos:
+
+$$y = \frac{-2x + 2x + 3y}{3}$$
+
+$$y = \frac{y}{3}$$
+
+Isso implica que $y = 0$.
+
+Substituindo $y = 0$ em (3), obtemos $z = -2x$.
+
+Substituindo $y = 0$ e $z = -2x$ em (2):
+
+$$5x^2 = 9$$
+
+$$x^2 = \frac{9}{5}$$
+
+$$x = \sqrt{\frac{9}{5} } = \frac{3}{\sqrt{5} }$$
+
+Como $x$ pode ser positivo ou negativo:
+
+$$x = \pm \frac{3}{\sqrt{5} }$$
+
+$$z = \mp \frac{6}{\sqrt{5} }$$
+
+As soluções para $\vec{F}$ são:
+
+$$\vec{F_1} = \left(\frac{3}{\sqrt{5} }, 0, -\frac{6}{\sqrt{5} }\right)$$
+
+$$\vec{F_2} = \left(-\frac{3}{\sqrt{5} }, 0, \frac{6}{\sqrt{5} }\right)$$
 
 ## Produto Vetorial
 
-Imagine dois vetores, $A$ e $B$, como setas lançadas no espaço. Agora, imagine desenhar um paralelogramo com as magnitudes de $A$ e $B$ como lados. O Produto Vetorial de $A$ e $B$, representado por $A \times B$, é como uma seta disparada diretamente para fora desse paralelogramo, tão perfeitamente perpendicular quanto um mastro em um navio.
+Imagine dois vetores, $\vec{A}$ e $\vec{B}$, como setas lançadas no espaço. Agora, imagine desenhar um paralelogramo com as magnitudes de $A$ e $B$ como lados. O Produto Vetorial de $A$ e $B$, representado por $\vec{A} \times \vec{B}$, é como uma seta disparada diretamente para fora desse paralelogramo, tão perfeitamente perpendicular quanto um mastro em um navio.
 
-**A magnitude, o comprimento dessa seta, é a área do paralelogramo formado por $A$ e $B$**. É um número simples, mas importante. Descreve o quão longe essa flecha se estende no espaço. O comprimento do vetor resultado do Produto Vetorial. **O resultado do Produto Vetorial entre dois vetores é um vetor.**
+**A magnitude, o comprimento dessa seta, é a área do paralelogramo formado por $\vec{A}$ e $\vec{B}$**. É um número simples, mas importante. Descreve o quão longe a seta resultante da interação entre $\vec{A}$ e $\vec{B}$ se estende no espaço. O comprimento do vetor resultado do Produto Vetorial. **O resultado do Produto Vetorial entre dois vetores é um vetor.**
 
-Agora, essa Seta, esse Produto Vetorial, pode ser definido por uma equação analítica, geométrica, trigonométrica:
+imagine que temos dois vetores, firme e diretos, apontando em suas direções particulares no espaço. Chamamos eles de $\vec{A}$ e $\vec{B}$. Esses dois, em uma dança matemática, se entrelaçam em um Produto Vetorial, formando um terceiro vetor, o $\vec{C}$, perpendicular a ambos $\vec{A}$ e $\vec{B}$. Mais que isso, perpendicular ao paralelogramo formado por $\vec{A}$ e $\vec{B}$. Ainda mais, perpendicular ao plano formado por $\vec{A}$ e $\vec{B}$. Esta é a característica mais marcante do Produto Vetorial.
+
+Portanto, a dança do Produto Vetorial é peculiar e intrigante, os dançarinos não trocam de lugar como a dança tradicional e a sequência de seus passos importa, mesmo assim ela acolhe a velha regra da distributividade. Uma dança peculiar no palco da matemática. Que leva a criação de uma novo dançarino, um novo vetor, perpendicular ao plano onde dançam os vetores originais. Esse novo vetor, esse Produto Vetorial, pode ser definido por uma equação analítica, geométrica, trigonométrica:
 
 $$A \times B = \vert A \vert  \vert B \vert sen(\theta_{AB}) a_n$$
 
@@ -584,192 +934,179 @@ Assim, o Produto Vetorial determina uma forma de conectar dois vetores, $A$ e $B
 
 $$A \times B = \vert A \vert  \vert B \vert sen(\theta_{AB}) a_n$$
 
-É uma equação poderosa e simples, útil, muito útil, mas geométrica, trigonométrica e analítica. Algebricamente o Produto Vetorial pode ser encontrado usando uma matriz. As matrizes são os sargentos do exército da Álgebra Vetorial, úteis mas trabalhosas e cheias de regras. Considerando os vetores $A=A_x a_x+A_y a_y+A_z a_z$ e $B=B_x a_x+B_y a_y+B_z a_z$ o Produto Vetorial $A\times B$ será encontrado resolvendo a matriz:
+É uma equação poderosa e simples, útil, muito útil, mas geométrica, trigonométrica e analítica. Algebricamente o Produto Vetorial pode ser encontrado usando uma matriz. As matrizes são os sargentos do exército da Álgebra Vetorial, úteis mas trabalhosas e cheias de regras. Considerando os vetores $\vec{A}=\vec{a}_x \vec{a}_x+\vec{a}_y \vec{a}_y+\vec{a}_z \vec{a}_z$ e $\vec{B}=B_x \vec{a}_x+B_y \vec{a}_y+B_z \vec{a}_z$ o Produto Vetorial $\vec{A}\times \vec{B}$ será encontrado resolvendo a matriz:
 
 $$
-A\times B=\begin{vmatrix}
-a_x & a_y & a_z\\
-A_x & A_y & A_z\\
+\vec{A}\times \vec{B}=\begin{vmatrix}
+\vec{a}_x & \vec{a}_y & \vec{a}_z\\
+\vec{a}_x & \vec{a}_y & \vec{a}_z\\
 B_x & B_y & B_z
 \end{vmatrix}
 $$
 
-A matriz será sempre montada desta forma. A primeira linha om os vetores unitários, a segunda com o primeiro operando, neste caso os componentes de $A$ e na terceira com os componentes de $B$. A Solução deste produto será encontrada, mais facilmente com o Método dos Cofatores. Para isso vamos ignorar a primeira linha.
+A matriz será sempre montada desta forma. A primeira linha om os vetores unitários, a segunda com o primeiro operando, neste caso os componentes de $\vec{A}$ e na terceira com os componentes de $\vec{B}$. A Solução deste produto será encontrada, mais facilmente com o Método dos Cofatores. Para isso vamos ignorar a primeira linha.
 
-Ignorando também a primeira coluna, a coluna do vetor unitário $a_x$ resta uma matriz composta de:
+Ignorando também a primeira coluna, a coluna do vetor unitário $\vec{a}_x$ resta uma matriz composta de:
 
 $$
 \begin{vmatrix}
-A_y & A_z\\
+\vec{a}_y & \vec{a}_z\\
 B_y & B_z
 \end{vmatrix}
 $$
 
-O Esta matriz multiplicará o vetor unitário $a_x$. Depois vamos construir outras duas matrizes como esta. A segunda será encontrada quando ignorarmos a coluna referente ao unitário $a_y$, que multiplicará o oposto do vetor $a_y$.
+O Esta matriz multiplicará o vetor unitário $\vec{a}_x$. Depois vamos construir outras duas matrizes como esta. A segunda será encontrada quando ignorarmos a coluna referente ao unitário $\vec{a}_y$, que multiplicará o oposto do vetor $\vec{a}_y$.
 
 $$
 \begin{vmatrix}
-A_x & A_z\\
+\vec{a}_x & \vec{a}_z\\
 B_x & B_z
 \end{vmatrix}
 $$
 
-Finalmente ignoramos a coluna referente ao vetor unitário $a_z$ para obter:
+Finalmente ignoramos a coluna referente ao vetor unitário $\vec{a}_z$ para obter:
 
 $$
 \begin{vmatrix}
-A_x & A_y\\
+\vec{a}_x & \vec{a}_y\\
 B_x & B_y
 \end{vmatrix}
 $$
 
-Que será multiplicada por $a_z$. Colocando tudo junto, em uma equação matricial teremos:
+Que será multiplicada por $\vec{a}_z$. Colocando tudo junto, em uma equação matricial teremos:
 
 $$
-A\times B=\begin{vmatrix}
-a_x & a_y & a_z\\
-A_x & A_y & A_z\\
+\vec{A}\times \vec{B}=\begin{vmatrix}
+\vec{a}_x & \vec{a}_y & \vec{a}_z\\
+\vec{a}_x & \vec{a}_y & \vec{a}_z\\
 B_x & B_y & B_z
 \end{vmatrix}=\begin{vmatrix}
-A_y & A_z\\
+\vec{a}_y & \vec{a}_z\\
 B_y & B_z
-\end{vmatrix}a_x-\begin{vmatrix}
-A_x & A_z\\
+\end{vmatrix}\vec{a}_x-\begin{vmatrix}
+\vec{a}_x & \vec{a}_z\\
 B_x & B_z
-\end{vmatrix}a_y+\begin{vmatrix}
-A_x & A_y\\
+\end{vmatrix}\vec{a}_y+\begin{vmatrix}
+\vec{a}_x & \vec{a}_y\\
 B_x & B_y
-\end{vmatrix}a_z
+\end{vmatrix}\vec{a}_z
 $$
 
-Cuide o negativo no segundo termo como cuidaria do leme do seu barco, sua vida depende disso e o resultado do Produto Vetorial Também. Uma vez que a equação matricial está montada. Cada matriz pode ser resolvida usando a [Regra de Sarrus](https://en.wikipedia.org/wiki/Rule_of_Sarrus) (multiplicação cruzada). Assim, nosso Produto Vetorial será simplificado por:
+Cuide o negativo no segundo termo como cuidaria do leme do seu barco, sua jornada depende disso e o resultado do Produto Vetorial Também. Uma vez que a equação matricial está montada. Cada matriz pode ser resolvida usando a [Regra de Sarrus](https://en.wikipedia.org/wiki/Rule_of_Sarrus) que, para matrizes de $2\times 2$ se resume a uma multiplicação cruzada. Assim, nosso Produto Vetorial será simplificado por:
 
-$$A\times B=(A_y B_z- A_z B_y)a_x-(A_x B_z-A_z B_x)a_y+(A_x B_y-A_y B_x)a_z$$
+$$\vec{A}\times \vec{B}=(\vec{a}_y B_z- \vec{a}_z B_y)\vec{a}_x-(\vec{a}_x B_z-\vec{a}_z B_x)\vec{a}_y+(\vec{a}_x B_y-\vec{a}_y B_x)\vec{a}_z$$
 
-Cuidado com os determinantes, o Chapeleiro não ficou louco por causa do chumbo, muito usado na fabricação de chapéus. Ficou louco [resolvendo determinantes](https://www.johndcook.com/blog/2023/07/10/lewis-carroll-determinants/). Talvez um exemplo afaste a insanidade tempo suficiente para você continuar lendo.
+Cuidado com os determinantes, o Chapeleiro não era louco por causa do chumbo, muito usado na fabricação de chapéus quando [Lewis Carroll](https://en.wikipedia.org/wiki/Lewis_Carroll) escreveu as histórias de Alice. Ficou louco [resolvendo determinantes](https://www.johndcook.com/blog/2023/07/10/lewis-carroll-determinants/). Talvez um exemplo afaste a insanidade tempo suficiente para você continuar estudando eletromagnetismo.
 
 <p class="exp">
-<b>Exemplo 8:</b> dados os vetores $A=a_x+2a_y+3a_z$ e $B=4a_x+5a_y-6a_z$. (a) Calcule o Produto Vetorial entre $A$ e $B$. (b) Encontre o ângulo $\theta$ entre $A$ e $B$.
+<b>Exemplo 8:</b> dados os vetores $\vec{A}=\vec{a}_x+2\vec{a}_y+3\vec{a}_z$ e $\vec{B}=4\vec{a}_x+5\vec{a}_y-6\vec{a}_z$. (a) Calcule o Produto Vetorial entre $\vec{A}$ e $\vec{B}$. (b) Encontre o ângulo $\theta$ entre $\vec{A}$ e $\vec{B}$.
 <br><br>
 <b>Solução:</b><br>
 (a) Vamos começar com o Produto Vetorial:
 
-$$
-A\times B=\begin{vmatrix}
-a_x & a_y & a_z\\
-A_x & A_y & A_z\\
-B_x & B_y & B_z
-\end{vmatrix} = \begin{vmatrix}
-a_x & a_y & a_z\\
+\[
+\vec{A}\times \vec{B}=\begin{vmatrix}
+\vec{a}_x & \vec{a}_y & \vec{a}_z\\
+\vec{a}_x & \vec{a}_y & \vec{a}_z\\
+B_x & B_y & B_z \end{vmatrix} = \begin{vmatrix}
+\vec{a}_x & \vec{a}_y & \vec{a}_z\\
 1 & 2 & 3\\
 4 & 5 & -6
 \end{vmatrix}
-$$
+\]
 
 Que será reduzida a:
 
-$$
-A \times B= \begin{vmatrix}
+\[
+\vec{A}\times \vec{B} = \begin{vmatrix}
 2 & 3\\
 5 & -6
-\end{vmatrix}a_x-\begin{vmatrix}
+\end{vmatrix}\vec{a}_x - \begin{vmatrix}
 1 & 3\\
 4 & -6
-\end{vmatrix}a_y+\begin{vmatrix}
+\end{vmatrix}\vec{a}_y + \begin{vmatrix}
 1 & 2\\
 4 & 5
-\end{vmatrix}a_z
-$$
+\end{vmatrix}\vec{a}_z
+\]
 
 Usando Sarrus em cada uma destas matrizes teremos:
 
-$$A\times B=(2(-6) - 3(5))a_x-(1(-6)-3(4))a_y+(1(5)-2(4))a_z$$
+\[\vec{A} \times \vec{B} = (2(-6) - 3(5)) \vec{a}_x - (1(-6)-3(4)) \vec{a}_y + (1(5)-2(4)) \vec{a}_z\]
 
-$$A\times B=-27a_x+18a_y-3a_z$$
+\[\vec{A} \times \vec{B} = -27 \vec{a}_x + 18 \vec{a}_y - 3 \vec{a}_z\]
 
-Esta foi a parte difícil, agora precisamos dos módulos, magnitudes, dos vetores $A$ e $B$.
+Esta foi a parte difícil, agora precisamos dos módulos, magnitudes, dos vetores $\vec{A}$ e $\vec{B}$.
 
-$$\vert A \vert = \sqrt{1^2+2^2+3^2} = \sqrt{14} \approx 3.74165$$
+\[\vert \vec{A} \vert = \sqrt{1^2+2^2+3^2} = \sqrt{14} \approx 3.74165\]
 
-$$\vert B \vert = \sqrt{4^2+5^2+6^2} = \sqrt{77} \approx 8.77496$$
+\[\vert \vec{B} \vert = \sqrt{4^2+5^2+6^2} = \sqrt{77} \approx 8.77496\]
 
 Para calcular o ângulo vamos usar a equação analítica, ou trigonométrica, do Produto Vetorial:
 
-$$A \times B = \vert A \vert  \vert B \vert sen(\theta_{AB}) a_n$$
+\[\vec{A} \times \vec{B} = \vert \vec{A} \vert  \vert \vec{B} \vert sen(\theta_{AB}) a_n\]
 
 A forma mais fácil de resolver este problema é aplicar o módulo aos dois lados da equação. Se fizermos isso, teremos:
 
-$$\vert A \times B \vert = \vert A \vert  \vert B \vert sen(\theta_{AB}) \vert a_n \vert $$
+\[\vert \vec{A} \times \vec{B} \vert = \vert \vec{A} \vert  \vert \vec{B} \vert sen(\theta_{AB}) \vert a_n \vert \]
 
 Como $a_n$ é um vetor unitário, por definição $\vert a_n \vert = 1$ logo:
 
-$$\vert A \times B \vert = \vert A \vert  \vert B \vert sen(\theta_{AB})$$
+\[\vert \vec{A} \times \vec{B} \vert = \vert \vec{A} \vert  \vert \vec{B} \vert sen(\theta_{AB})\]
 
 Ou, para ficar mais claro:
 
-$$sen(\theta_{AB}) = \frac{\vert A \times B \vert}{\vert A \vert \vert B \vert}$$
+\[sen(\theta_{AB}) = \frac{\vert \vec{A} \times \vec{B} \vert}{\vert \vec{A} \vert \vert \vec{B} \vert}\]
 
-Os módulos de $A$ e $B$ já tenos, precisamos apenas do módulo de $A\times B$.
+Os módulos de $\vec{A}$ e $\vec{B}$ já tenos, precisamos apenas do módulo de $\vec{A}\times \vec{B}$.
 
-$$
-\vert A\times B \vert = \sqrt{27^2+16^2+3^2} = \sqrt{994} \approx 31.5298
-$$
+\[
+\vert \vec{A}\times \vec{B} \vert = \sqrt{27^2+16^2+3^2} = \sqrt{994} \approx 31.5298
+\]
 
 Assim o seno do ângulo $\theta_{AB}$ será dado por:
 
-$$sen(\theta_{AB}) = \frac{\sqrt{994}}{(\sqrt{14})(\sqrt{77})} \approx \frac{31.5298}{(3.74165)(8.77496)}$$
+\[sen(\theta_{AB}) = \frac{\sqrt{994}}{(\sqrt{14})(\sqrt{77})} \approx \frac{31.5298}{(3.74165)(8.77496)}\]
 
-$$sen(\theta_{AB}) = 0.960316$$
+\[sen(\theta_{AB}) = 0.960316\]
 
-$$ \theta_{AB} =73.8^0 $$
+\[ \theta_{AB} =73.8^\circ \]
 
 </p>
 
-O Produto Vetorial é como uma dança entre vetores. E como todas as danças tem características únicas e interessantes:
+O Produto Vetorial é como uma dança entre vetores. E como todas as danças tem características únicas e interessantes expressas na forma de propriedades matemáticas:
 
-1. **Comutatividade:** no universo dos vetores, há uma dança estranha acontecendo. $A \times B$ e $B \times A$ não são a mesma coisa, eles não trocam de lugar facilmente como dançarinos em um salão de baile. Em vez disso, eles são como dois boxeadores em um ringue, um o espelho do outro, mas em direções opostas. Assim, $A \times B$ é o oposto de $B \times A$. Assim: $ A \times B =-B \times A$
+1. **Comutatividade:** no universo dos vetores, há uma dança estranha acontecendo. $\vec{A} \times \vec{B}$ e $\vec{B} \times \vec{A}$ não são a mesma coisa, eles não trocam de lugar facilmente como dançarinos em um salão de baile. Em vez disso, eles são como dois boxeadores em um ringue, um o espelho do outro, mas em direções opostas. Assim, $\vec{A} \times \vec{B}$ é o oposto de $\vec{B} \times \vec{A}$. Assim, **O Produto Vetorial não é comutativo**: 
 
-2. **Associatividade:** imagine três dançarinos: $A$, $B$ e $C$. A sequência de seus passos importa. $A$ dançando com $B$, depois com $C$, não é o mesmo que $A$ dançando com o resultado de $B$ e $C$ juntos. Assim como a dança, a ordem dos parceiros importa. O Produto Vetorial não é associativo. Desta forma: $A \times (B \times C) \neq (A \times B) \times C$
+   $$ \vec{A} \times \vec{B} =-\vec{B} \times \vec{A}$$
 
-3. **Distributividade:** existe um aspecto familiar. Quando $A$ dança com a soma de $B$ e $C$, é a mesma coisa que $A$ dançando com $B$ e depois com $C$. Distributividade, uma velha amiga da aritmética, aparece aqui, guiando a dança. O que pode ser escrito como: $A \times (B+C) = A \times B + A \times C$
+2. **Associatividade:** imagine três dançarinos: $\vec{A}$, $\vec{B}$ e $\vec{C}$. A sequência de seus passos importa. $\vec{A}$ dançando com $\vec{B}$, depois com $\vec{C}$, não é o mesmo que $\vec{A}$ dançando com o resultado de $\vec{B}$ e $\vec{C}$ juntos. Assim como na dança, a ordem dos parceiros importa. **O Produto Vetorial não é associativo**. Desta forma:
 
-4. **Multiplicação por Escalar:** imagine que temos dois vetores, firme e diretos, apontando em suas direções particulares no espaço. Chamamos eles de $A$ e $B$. Esses dois, em uma dança matemática, se entrelaçam em um produto vetorial, formando um terceiro vetor, o $C$, perpendicular a ambos $A$ e $B$. Mais que isso, perpendicular ao paralelogramo formado por $$A$$ e $B$. Ainda mais, perpendicular ao plano formado por $A$ e $B$.
+   $$\vec{A} \times (\vec{B} \times \vec{C}) \neq (\vec{A} \times \vec{B}) \times \vec{C}$$
 
-Portanto, a dança do Produto Vetorial é peculiar e intrigante, não troca de lugar como a dança tradicional e a sequência de seus passos importa, mas ela acolhe a velha regra da distributividade. Uma dança peculiar no palco da matemática.
+3. **Distributividade:** existe um aspecto familiar. Quando $\vec{A}$ dança com a soma de $\vec{B}$ e $\vec{C}$, é a mesma coisa que $\vec{A}$ dançando com $\vec{B}$ e depois com $\vec{C}$. **O Produto Vetorial é distributivo**. A distributividade, uma velha amiga da aritmética, aparece aqui, guiando a dança. O que pode ser escrito como: 
 
-Agora entra em cena um escalar, $k$, um número simples, porém carregado de influência. Ele se aproxima do produto vetorial e o muda, mas não de maneira selvagem ou imprevisível, e sim com a precisão de um relojoeiro. A magnitude do produto vetorial é esticada ou contraída pelo escalar, dependendo de seu valor. Isto pode ser escrito matematicamente como:
+   $$\vec{A} \times (\vec{B}+\vec{C}) = \vec{A} \times \vec{B} + \vec{A} \times \vec{C}$$
 
-$$k(A \times B) = (kA) \times B = A \times (kB)$$
+4. **Multiplicação por Escalar:** agora entra em cena um escalar, $k$, um número simples, porém carregado de influência. Ele se aproxima do Produto Vetorial e o muda, mas não de maneira selvagem ou imprevisível, e sim com a precisão de um relojoeiro. A magnitude do Produto Vetorial é esticada ou contraída pelo escalar, dependendo de seu valor. Isto pode ser escrito matematicamente como:
 
-Porém, como o norte em uma bússola, a direção do produto vetorial não se altera. O resultado é um novo vetor, $D$, que é um múltiplo escalar do original $C$. O vetor $D$ carrega a influência do escalar $k$, mas mantém a orientação original de $C$.
+   $$k(A \times B) = (kA) \times B = A \times (kB)$$
 
-Por fim, precisamos tirar para dançar os vetores unitários. Estrutura de formação dos nossos sistemas de coordenadas. Como Produto Vetorial $A\times B$ produz um vetor ortogonal ao plano formado por $A$ e $B$ a aplicação deste conceito a dois dos vetores unitários de um sistema de coordenadas irá produzir o terceiro vetor deste sistema. Sendo assim, observando o Sistema de Coordenadas Cartesianas teremos:
+   Porém, como o norte em uma bússola, a direção do Produto Vetorial não se altera. O resultado é um novo vetor, $\vec{D}$, que é um múltiplo escalar do original $\vec{C}$. O vetor $\vec{D}$ carrega a influência do escalar $k$, mas mantém a orientação e sentido originais de $\vec{C}$ para todo $k >0$.
 
-$$a_x\times a_y = a_z$$
+5. **Componentes Unitários**: por fim, precisamos tirar para dançar os vetores unitários. Estrutura de formação dos nossos sistemas de coordenadas. Como Produto Vetorial $\vec{A}\times \vec{B}$ produz um vetor ortogonal ao plano formado por $\vec{A}$ e $\vec{B}$ a aplicação desta operação a dois dos vetores unitários de um sistema de coordenadas irá produzir o terceiro vetor deste sistema. Observando o Sistema de Coordenadas Cartesianas teremos:
 
-$$a_x\times a_z = a_y$$
+  $$\vec{a}_x\times \vec{a}_y = \vec{a}_z$$
 
-$$a_y\times a_z = a_x$$
+  $$\vec{a}_x\times \vec{a}_z = \vec{a}_y$$
 
-Mais uma ferramenta que precisamos manter à mão. Um conjunto de regras que irão simplificar equações e iluminar o desconhecido de forma mais simples, quase natural.
+  $$\vec{a}_y\times \vec{a}_z = \vec{a}_x$$
 
-### A Identidade de Jacobi
-
-Associatividade, a dança entre três vetores no espaço infinito chamou a atenção de [Carl Gustav Jacob Jacobi](https://en.wikipedia.org/wiki/Carl_Gustav_Jacob_Jacobi) que entrando nesta roda encontrou uma dança de ritmo constante.
-
-$$A \times (B  \times  C) + B  \times  (C  \times  A) + C  \times (A  \times B) = 0$$
-
-Em Álgebra Linear, a Identidade de Jacobi é a marca da existência de uma [Álgebra de Lie](https://en.wikipedia.org/wiki/Lie_algebra), um pilar para descrever simetrias contínuas, presentes em domínios da física como a teoria quântica de campos e a teoria geral da relatividade. Talvez, se o tempo estiver bom e eu me sentir forte, embarquemos algum dia em uma jornada pelos mares crespos da teoria quântica dos campos.
-
-Em física, a identidade de Jacobi serve como uma regra fundamental para análises que envolvem a conservação do momento angular. Ela é uma ferramenta no entendimento da rotação de corpos rígidos, descrita pela equação de [Euler](https://en.wikipedia.org/wiki/Leonhard_Euler), que descrevem o movimento de um corpo rígido no espaço e um protagonista em funções na mecânica quântica.
-
-Na geometria diferencial, a Identidade de Jacobi é vital para a criação dos [Campos de Jacobi](https://pt.wikipedia.org/wiki/Campo_de_Jacobi), uma expansão das [Superfícies de Riemann](https://en.wikipedia.org/wiki/Riemann_surface) que permite a inclusão de simetrias adicionais.
-
-Então, mesmo que a identidade de Jacobi possa parecer um conjunto abstrato de símbolos matemáticos, ela é, na verdade, uma ferramenta que guia inúmeras investigações em ciência e matemática, como um farol confiável que nos leva adiante na procura constante pelo conhecimento.
+  Esta propriedade do Produto Vetorial aplicado aos componentes de um vetor é mais uma ferramenta que precisamos manter à mão. Um conjunto de regras que irão simplificar equações e iluminar o desconhecido de forma quase natural.
 
 ## Usando a Álgebra Vetorial no Eletromagnetismo
 
-Em um mundo onde a ciência se entrelaça com a arte, a álgebra vetorial se ergue como uma ponte sólida entre o visível e o invisível. Neste ponto da nossa jornada, navegaremos pelas correntes do eletromagnetismo, uma jornada onde cada vetor conta uma história, cada produto escalar revela uma conexão profunda, e cada produto vetorial desvenda um mistério. A matemática da Álgebra Vetorial é a ferramenta que nos guiará.
+Em um mundo onde a ciência se entrelaça com a arte, a álgebra vetorial se ergue como uma ponte sólida entre o visível e o invisível. Neste ponto da nossa jornada, navegaremos pelas correntes do eletromagnetismo, uma jornada onde cada vetor conta uma história, cada Produto Escalar revela uma conexão profunda, e cada Produto Vetorial desvenda um mistério. A matemática da Álgebra Vetorial é a ferramenta que nos guiará.
 
 Prepare-se para uma surpresa olhe com cuidado e verá como a matemática se torna poesia, desvendando os segredos do universo elétrico e magnético. Esta rota promete uma jornada de descoberta, compreensão e surpresa. Começaremos pelo mais básico de todos os básicos, a Lei de Coulomb.
 
@@ -781,9 +1118,9 @@ $$
 F_{21} = K_e \frac{Q_1Q_2}{R^2}
 $$
 
- [Charles-Augustin de Coulomb](https://en.wikipedia.org/wiki/Charles-Augustin_de_Coulomb) estabeleceu sua lei de forma empírica utilizando uma balança de torção para medir as forças de interação entre cargas elétricas estacionárias. Utilizando este método, ele foi capaz de quantificar a relação inversa entre a força e o quadrado da distância entre as cargas. De forma independente, [Henry Cavendish](https://en.wikipedia.org/wiki/Henry_Cavendish) chegou à mesma equação anos depois, também utilizando uma balança de torção, embora seus resultados não tenham sido amplamente publicados na época.
- 
- Até o surgimento do trabalho de [Michael Faraday](https://en.wikipedia.org/wiki/Michael_Faraday) sobre linhas de força elétrica, a equação desenvolvida por Coulomb era considerada suficiente para descrever interações eletrostáticas. Quase um século depois de Coulomb, matemáticos como [Gauss](https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss), [Hamilton](https://en.wikipedia.org/wiki/William_Rowan_Hamilton), [Maxwell](https://en.wikipedia.org/wiki/James_Clerk_Maxwell) reformularam esta lei, incorporando-a em um contexto vetorial. Eles utilizaram o cálculo vetorial para expressar as direções e magnitudes da força, permitindo que Lei de Coulomb possa ser aplicada de forma mais geral em campos eletrostáticos e magnetostáticos.
+[Charles-Augustin de Coulomb](https://en.wikipedia.org/wiki/Charles-Augustin_de_Coulomb) estabeleceu sua lei de forma empírica utilizando uma balança de torção para medir as forças de interação entre cargas elétricas estacionárias. Utilizando este método, ele foi capaz de quantificar a relação inversa entre a força e o quadrado da distância entre as cargas. De forma independente, [Henry Cavendish](https://en.wikipedia.org/wiki/Henry_Cavendish) chegou à mesma equação anos depois, também utilizando uma balança de torção, embora seus resultados não tenham sido amplamente publicados na época.
+  
+Até o surgimento do trabalho de [Michael Faraday](https://en.wikipedia.org/wiki/Michael_Faraday) sobre linhas de força elétrica, a equação desenvolvida por Coulomb era considerada suficiente para descrever interações eletrostáticas. Quase um século depois de Coulomb, matemáticos como [Gauss](https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss), [Hamilton](https://en.wikipedia.org/wiki/William_Rowan_Hamilton), [Maxwell](https://en.wikipedia.org/wiki/James_Clerk_Maxwell) reformularam esta lei, incorporando-a em um contexto vetorial. Eles utilizaram o cálculo vetorial para expressar as direções e magnitudes da força, permitindo que Lei de Coulomb possa ser aplicada de forma mais geral em campos eletrostáticos e magnetostáticos.
 
 $$
 F_{21} = \frac{1}{4\pi \epsilon_0 \epsilon_r} \frac{Q_1Q_2}{R^2} a_{21} 
@@ -798,8 +1135,6 @@ Nesta equação:
 - $Q_1Q_2$ representa o produto entre as intensidades das cargas que no Sistema Internacional de Unidades são medidas em Coulombs ($C$). 
 - $a_{21}$ representa o vetor unitário com origem em $Q1$ e destino em $Q2$. 
 
-
-
 # Cálculo Vetorial
 
 Cálculo vetorial, soa como algo saído de uma história de ficção científica. Mas é mais terra-a-terra do que podemos imaginar de longe. Trata-se uma técnica para lidar com quantidades que têm tanto magnitude quanto direção de forma contínua. Velocidade. Força. Fluxo de um rio, Campos Elétricos, Campos Magnéticos. Coisas que não apenas têm um tamanho, mas também uma direção, um sentido. Não sei se já falei sobre isso, são as grandezas que chamamos de vetoriais e representamos por vetores.
@@ -810,35 +1145,35 @@ Considere um campo de trigo balançando ao vento. O vento não está apenas sopr
 
 O cálculo vetorial é construído sobre três operações fundamentais: o gradiente, a divergência e o rotacional. O gradiente nos diz a direção e a taxa na qual uma quantidade está mudando. A divergência nos diz o quanto um campo está se espalhando de um ponto. E o rotacional nos dá uma medida da rotação ou vorticidade de um campo.
 
-Se tivermos uma função escalar $\mathbf{f}$, o gradiente de $\mathbf{f}$ será dado por:
+Se tivermos uma função escalar $\mathbf{F}$, o gradiente de $\mathbf{F}$ será dado por:
 
 $$
-\nabla \mathbf{f} = \left( \frac{\partial \mathbf{f}}{\partial x}, \frac{\partial \mathbf{f}}{\partial y}, \frac{\partial \mathbf{f}}{\partial z} \right)
+\nabla \mathbf{F} = \left( \frac{\partial \mathbf{F}}{\partial x}, \frac{\partial \mathbf{F}}{\partial y}, \frac{\partial \mathbf{F}}{\partial z} \right)
 $$
 
-E se tivermos um campo vetorial $ \mathbf{F} = F_x a_x + F_y a_y + F_z a_x $, a divergência de $\mathbf{F}$ é dada por:
+Se tivermos um campo vetorial $ \mathbf{F} = F_x \vec{a}_x + F_y \vec{a}_y + F_z \vec{a}_x $, a divergência de $\mathbf{F}$ é dada por:
 
 $$
 \nabla \cdot \mathbf{F} = \frac{\partial F_x}{\partial x} + \frac{\partial F_y}{\partial y} + \frac{\partial F_z}{\partial z}
 $$
 
-E o rotacional de $\mathbf{F}$ é:
+O rotacional de $\mathbf{F}$ será dado por:
 
 $$
-\nabla \times \mathbf{F} = \left( \frac{\partial F_z}{\partial y} - \frac{\partial F_y}{\partial z} \right) a_x - \left( \frac{\partial F_z}{\partial x} - \frac{\partial F_x}{\partial z} \right) a_i + \left( \frac{\partial F_y}{\partial x} - \frac{\partial F_x}{\partial y} \right) a_z
+\nabla \times \mathbf{F} = \left( \frac{\partial F_z}{\partial y} - \frac{\partial F_y}{\partial z} \right) \vec{a}_x - \left( \frac{\partial F_z}{\partial x} - \frac{\partial F_x}{\partial z} \right) a_i + \left( \frac{\partial F_y}{\partial x} - \frac{\partial F_x}{\partial y} \right) \vec{a}_z
 $$
 
 A única coisa que pode encher seus olhos de lágrimas é o sal trazido pela maresia, não o medo do Cálculo Vetorial. Então, não se intimide por estas equações herméticas, quase esotéricas. O Cálculo Vetorial é apenas conjunto de ferramentas, como um canivete suíço, que nos ajuda a explorar e entender o mundo ao nosso redor. Nós vamos abrir cada ferramenta deste canivete e aprender a usá-las.
 
 ## Campos Vetoriais
 
-Quando olhamos as grandezas escalares, traçamos Campos Escalares. Como uma planície aberta, eles se estendem no espaço, sem direção, mas com magnitude, definidos por uma função $\mathbf{f}(x,y,z)$, onde $x$, $y$, $z$ pertencem a um universo de triplas de números reais. Agora, para as grandezas vetoriais, moldamos Campos Vetoriais, definidos por funções vetoriais $\mathbf{F}(x,y,z)$, onde $x$, $y$, $z$ são componentes vetoriais. Em outras palavras, representamos Campos Vetoriais no espaço como um sistema onde cada ponto do espaço puxa um vetor.
+Quando olhamos as grandezas escalares, traçamos Campos Escalares. Como uma planície aberta, eles se estendem no espaço, sem direção, mas com magnitude, definidos por uma função $\mathbf{F}(x,y,z)$, onde $x$, $y$, $z$ pertencem a um universo de triplas de números reais. Agora, para as grandezas vetoriais, moldamos Campos Vetoriais, definidos por funções vetoriais $\mathbf{F}(x,y,z)$, onde $x$, $y$, $z$ são componentes vetoriais. Em outras palavras, representamos Campos Vetoriais no espaço como um sistema onde cada ponto do espaço puxa um vetor.
 
 Imagine-se em um rio, a correnteza o arrastando, conduzindo seu corpo. A correnteza aplica uma força sobre seu corpo. O rio tem uma velocidade, uma direção. Em cada ponto, ele te empurra de uma forma diferente. Isso é um campo vetorial. Ele é como um mapa, com forças distribuídas, representadas por setas desenhadas para te orientar. Mas essas setas não são meras orientações. Elas têm um comprimento, uma magnitude, e uma direção e um sentido. Elas são vetores. E o mapa completo, deste rio com todas as suas setas, descreverá um campo vetorial.
 
 Em cada ponto no espaço, o campo vetorial tem um vetor. Os vetores podem variar de ponto para ponto. Pense de novo no rio. Em alguns lugares, a correnteza é forte e rápida. Em outros, é lenta e suave. Cada vetor representará essa correnteza em um ponto específico. E o campo vetorial representará o rio todo.
 
-Frequentemente, Campos Vetoriais são chamados para representar cenas do mundo físico: a ação das forças na mecânica, o desempenho dos campos elétricos e magnéticos no Eletromagnetismo, o fluxo de fluidos na dinâmica dos fluidos. Em cada ponto, as coordenadas $(x, y, z)$ são protagonistas, ao lado das funções escalares $P$, $Q$ e $R$. O vetor resultante no palco tem componentes nas direções $x$, $y$ e $z$, representadas pelos atores coadjuvantes, os vetores unitários $(a_x, a_y, a_z)$.
+Frequentemente, Campos Vetoriais são chamados para representar cenas do mundo físico: a ação das forças na mecânica, o desempenho dos campos elétricos e magnéticos no Eletromagnetismo, o fluxo de fluidos na dinâmica dos fluidos. Em cada ponto, as coordenadas $(x, y, z)$ são protagonistas, ao lado das funções escalares $P$, $Q$ e $R$. O vetor resultante no palco tem componentes nas direções $x$, $y$ e $z$, representadas pelos atores coadjuvantes, os vetores unitários $(\vec{a}_x, \vec{a}_y, \vec{a}_z)$.
 
 Imaginar um campo vetorial no palco do espaço tridimensional é tarefa árdua que requer visão espacial, coisa para poucos. Para aqueles que já trilharam os caminhos árduos da geometria e do desenho tridimensional Se nosso palco for bidimensional, poderemos colocar os vetores em um plano, selecionar alguns pontos e traçar estes vetores. Neste caso voltaremos nossa atenção e esforço para trabalhar com apenas os componentes $x$ e $y$ e o campo vetorial será definido por uma função dada por:
 
@@ -866,19 +1201,19 @@ Imagine-se no topo de uma montanha, cercado por terreno acidentado. Seu objetivo
 
 Agora, vamos trazer um pouco de matemática para esta metáfora. Em um espaço de múltiplas dimensões. Imagine uma montanha com muitos picos e vales, e você pode se mover em qualquer direção, o gradiente de uma função em um determinado ponto é um vetor que aponta na direção de maior variação desta função. Se a função tem múltiplas dimensões, **o gradiente é o vetor que resulta da aplicação das derivadas parciais da função**.
 
-Se tivermos uma função $\mathbf{f}(x, y)$, uma função escalar, o gradiente de $\mathbf{f}$ será dado por:
+Se tivermos uma função $\mathbf{F}(x, y)$, uma função escalar, o gradiente de $\mathbf{F}$ será dado por:
 
 $$
-\nabla \mathbf{f} = \left( \frac{\partial \mathbf{f}}{\partial x}, \frac{\partial \mathbf{f}}{\partial y} \right)
+\nabla \mathbf{F} = \left( \frac{\partial \mathbf{F}}{\partial x}, \frac{\partial \mathbf{F}}{\partial y} \right)
 $$
 
 Assim como a bússola na montanha, o gradiente nos mostra a direção à seguir para maximizar, ou minimizar, a função. É uma ferramenta importante na matemática e na física, especialmente em otimização e aprendizado de máquina. Mas não tire seus olhos do ponto mais importante: **o gradiente é uma operação que aplicada a uma função escalar devolve um vetor**. Em três dimensões, usando o Sistema de Coordenadas Cartesianas teremos:
 
 $$
-\nabla \mathbf{f} = \left( \frac{\partial \mathbf{f}}{\partial x}, \frac{\partial \mathbf{f}}{\partial y}, \frac{\partial \mathbf{f}}{\partial z} \right)
+\nabla \mathbf{F} = \left( \frac{\partial \mathbf{F}}{\partial x}, \frac{\partial \mathbf{F}}{\partial y}, \frac{\partial \mathbf{F}}{\partial z} \right)
 $$
 
-onde $\frac{\partial \mathbf{f} }{\partial x}$, $\frac{\partial \mathbf{f}}{\partial y}$, e $\frac{\partial \mathbf{f}}{\partial z}$ são as derivadas parciais de $\mathbf{f}$ com respeito a $x$, $y$, e $z$ respectivamente.
+onde $\frac{\partial \mathbf{F} }{\partial x}$, $\frac{\partial \mathbf{F}}{\partial y}$, e $\frac{\partial \mathbf{F}}{\partial z}$ são as derivadas parciais de $\mathbf{F}$ com respeito a $x$, $y$, e $z$ respectivamente.
 
 Só a expressão **Derivadas parciais** pode fazer o coração bater mais rápido. O medo não o guiará aqui. As derivadas parciais são como velhos amigos que você ainda não conheceu.
 
@@ -890,80 +1225,80 @@ Então, em vez de temer as derivadas parciais, podemos vê-las como uma ferramen
 
 Uma derivada parcial de uma função de várias variáveis revela a taxa na qual a função muda quando pequenas alterações são feitas em apenas uma das incógnitas da função, mantendo todas as outras constantes. O conceito é semelhante ao conceito de derivada em cálculo de uma variável, entretanto agora estamos considerando funções com mais de uma incógnita.
 
-Por exemplo, se temos uma função $\mathbf{f}(x, y)$, a derivada parcial de $\mathbf{f}$ em relação a $x$ (denotada por $\frac{\partial \mathbf{f}}{\partial x}$ mede a taxa de variação de $\mathbf{f}$ em relação a pequenas mudanças em $x$, mantendo $y$ constante. Da mesma forma, $\frac{\partial \mathbf{f}}{\partial y}$ mede a taxa de variação de $\mathbf{f}$ em relação a pequenas mudanças em $y$, mantendo $x$ constante. Em três dimensões, a derivada parcial em relação uma das dimensões é a derivada de $\mathbf{f}$ enquanto mantemos as outras constantes. Nada mais que a repetição, dimensão a dimensão da derivada em relação a uma dimensão enquanto as outras são constantes.
+Por exemplo, se temos uma função $\mathbf{F}(x, y)$, a derivada parcial de $\mathbf{F}$ em relação a $x$ (denotada por $\frac{\partial \mathbf{F}}{\partial x}$ mede a taxa de variação de $\mathbf{F}$ em relação a pequenas mudanças em $x$, mantendo $y$ constante. Da mesma forma, $\frac{\partial \mathbf{F}}{\partial y}$ mede a taxa de variação de $\mathbf{F}$ em relação a pequenas mudanças em $y$, mantendo $x$ constante. Em três dimensões, a derivada parcial em relação uma das dimensões é a derivada de $\mathbf{F}$ enquanto mantemos as outras constantes. Nada mais que a repetição, dimensão a dimensão da derivada em relação a uma dimensão enquanto as outras são constantes.
 
 **O gradiente mede a taxa em que o Campo Escalar varia em uma determinada direção.** Para clarear e afastar a sombra das dúvidas, nada melhor que um exemplo.
 
 <p class="exp">
-<b>Exemplo 9:</b> considerando o Campo Escalar dado por $\mathbf{f}(x,y) = 10sin(\frac{x^2}{5})+4y$, (a) calcule a intensidade do campo no ponto $P(2,3)$, (b) o gradiente deste campo no ponto $P$.  
+<b>Exemplo 10:</b> considerando o Campo Escalar dado por $\mathbf{F}(x,y) = 10sin(\frac{x^2}{5})+4y$, (a) calcule a intensidade do campo no ponto $P(2,3)$, (b) o gradiente deste campo no ponto $P$.  
 <br><br>
 <b>Solução:</b><br>
 
 (a) A intensidade em um ponto é trivial, trata-se apenas da aplicação das coordenadas do ponto desejado na função do campo. Sendo assim:
 
-$$\mathbf{f}(x,y) = 10sin(\frac{x^2}{5})+4y$$
+\[\mathbf{F}(x,y) = 10sin(\frac{x^2}{5})+4y\]
 
-$$\mathbf{f}(2,3) = 10sin(\frac{2^2}{5})a_x+4(3)a_y$$
+\[\mathbf{F}(2,3) = 10sin(\frac{2^2}{5})\vec{a}_x+4(3)\vec{a}_y\]
 
-$$\mathbf{f}(2,3) = 7.17356a_x+12a_y$$
+\[\mathbf{F}(2,3) = 7.17356\vec{a}_x+12\vec{a}_y\]
 
-(b) agora precisamos calcular o gradiente. O gradiente de uma função $\mathbf{f}(x, y)$ é um vetor que consiste nas derivadas parciais da função com respeito a cada uma de suas variáveis que representam suas coordenadas. <br><br>
+(b) agora precisamos calcular o gradiente. O gradiente de uma função $\mathbf{F}(x, y)$ é um vetor que consiste nas derivadas parciais da função com respeito a cada uma de suas variáveis que representam suas coordenadas. <br><br>
 
-Vamos calcular as derivadas parciais de $\mathbf{f}$ com respeito a $x$ e $y$, passo a passo:<br><br>
+Vamos calcular as derivadas parciais de $\mathbf{F}$ com respeito a $x$ e $y$, passo a passo:<br><br>
 
 Primeiro, a derivada parcial de $f$ com respeito a $x$ é dada por:
 
-$$
-\frac{\partial \mathbf{f}}{\partial x} = \frac{\partial}{\partial x} \left[10\sin\left(\frac{x^2}{5}\right) + 4y\right]
-$$
+\[
+\frac{\partial \mathbf{F}}{\partial x} = \frac{\partial}{\partial x} \left[10\sin\left(\frac{x^2}{5}\right) + 4y\right]
+\]
 
 Nós podemos dividir a expressão em duas partes e calcular a derivada de cada uma delas separadamente. A derivada de uma constante é zero, então a derivada de $4y$ com respeito a $x$ é zero. Agora, vamos calcular a derivada do primeiro termo:
 
-$$
+\[
 \frac{\partial}{\partial x} \left[10\sin\left(\frac{x^2}{5}\right)\right] = 10\cos\left(\frac{x^2}{5}\right) \cdot \frac{\partial}{\partial x} \left[\frac{x^2}{5}\right]
-$$
+\]
 
 Usando a regra da cadeia, obtemos:
 
-$$
+\[
 10\cos\left(\frac{x^2}{5}\right) \cdot \frac{2x}{5} = \frac{20x}{5}\cos\left(\frac{x^2}{5}\right) = 4x\cos\left(\frac{x^2}{5}\right)
-$$
+\]
 
-Portanto, a derivada parcial de $\mathbf{f}$ com respeito a $x$ é:
+Portanto, a derivada parcial de $\mathbf{F}$ com respeito a $x$ é:
 
-$$
-\frac{\partial \mathbf{f}}{\partial x} = 4x\cos\left(\frac{x^2}{5}\right)
-$$
+\[
+\frac{\partial \mathbf{F}}{\partial x} = 4x\cos\left(\frac{x^2}{5}\right)
+\]
 
-Agora, vamos calcular a derivada parcial de $\mathbf{f}$ com respeito a $y$:
+Agora, vamos calcular a derivada parcial de $\mathbf{F}$ com respeito a $y$:
 
-$$
+\[
 \frac{\partial \mathbf{F}}{\partial y} = \frac{\partial}{\partial y} \left[10\sin\left(\frac{x^2}{5}\right) + 4y\right]
-$$
+\]
 
-Novamente, dividindo a expressão em duas partes, a derivada do primeiro termo com respeito a $y$ é zero (pois não há $y$ no termo), e a derivada do segundo termo é $4$. Portanto, a derivada parcial de $\mathbf{f}$ com respeito a $y$ é:
+Novamente, dividindo a expressão em duas partes, a derivada do primeiro termo com respeito a $y$ é zero (pois não há $y$ no termo), e a derivada do segundo termo é $4$. Portanto, a derivada parcial de $\mathbf{F}$ com respeito a $y$ é:
 
-$$
+\[
 \frac{\partial \mathbf{F}}{\partial y} = 4
-$$
+\]
 
-Assim, o gradiente de $\mathbf{f}$ é dado por:
+Assim, o gradiente de $\mathbf{F}$ é dado por:
 
-$$
+\[
 \nabla \mathbf{F} = \left[\frac{\partial \mathbf{F}}{\partial x}, \frac{\partial \mathbf{F}}{\partial y}\right] = \left(4x\cos\left(\frac{x^2}{5}\right), 4\right)
-$$
+\]
 
 E esta é a equação que define o gradiente. Para saber o valor do gradiente no ponto $P$ tudo que precisamos é aplicar o ponto na equação então:
 
-$$
+\[
 \nabla \mathbf{F}(2,3) = \left( 4(2)\cos\left(\frac{2^2}{5}\right), 4\right) = \left(  5.57365, 4 \right)
-$$
+\]
 
-Ao derivarmos parcialmente o Campo Vetorial $\mathbf{f}$ escolhemos nosso Sistema de Coordenadas. Sendo assim:
+Ao derivarmos parcialmente o Campo Vetorial $\mathbf{F}$ escolhemos nosso Sistema de Coordenadas. Sendo assim:
 
-$$
-\nabla \mathbf{f}(2,3) = 5.57365 a_x+ 4a_y
-$$
+\[
+\nabla \mathbf{F}(2,3) = 5.57365 \vec{a}_x+ 4\vec{a}_y
+\]
 </p>
 
 Assim como um navegador considera a variação da profundidade do oceano em diferentes direções para traçar a rota mais segura, a derivada parcial nos ajuda a entender como uma função se comporta quando mudamos suas variáveis de entrada. O gradiente é a forma de fazermos isso em todas as dimensões, derivando em uma incógnita de cada vez.
@@ -977,16 +1312,16 @@ Em qualquer ponto $P$ o gradiente é um vetor que aponta na direção da maior v
   text-align: center;
   margin-bottom: 20px;">Figura 4 - Gráfico de um Campo Escalar $f(x,y)$.</legend>
 
-Nesta imagem é possível ver a variação do campo $\mathbf{f}(x,y)$$ eu escolhi uma função em $$\mathbf{f}(x,y)$ no domínio dos $\mathbb{R}^2$ por ser mais fácil de desenhar e visualizar, toda a variação fica no domínio de $z$. Podemos plotar o gradiente na superfície criada pelo campo $\mathbf{f}(x,y)$.
+Na Figura 4 é possível ver a variação do do campo $\mathbf{F}(x,y)$ eu escolhi uma função em $\mathbf{F}(x,y)$ no domínio dos $\mathbb{R}^2$ por ser mais fácil de desenhar e visualizar, toda a variação fica no domínio de $z$. Podemos plotar o gradiente na superfície criada pelo campo $\mathbf{F}(x,y)$.
 
 ![Gráfico do Campo Escalar mostrando a intensidade do gradiente ](/assets/images/func1Grad2.jpeg){:class="lazyimg"}
 <legend style="font-size: 1em;
   text-align: center;
   margin-bottom: 20px;">Figura 5 - Gráfico de um Campo Escalar $f(x,y) representando o Gradiente$.</legend>
 
-Nesta imagem, em cada ponto, a cor da superfície foi definida de acordo com a intensidade do gradiente. Quanto menor esta intensidade, mais próximo do vermelho. Quanto maior, mais próximo do Azul. Veja que a variação é maior nas bordas de descida ou subida e menor nos picos e vales. Coisas características da derivação.
+Em cada ponto da Figura 5 a cor da superfície foi definida de acordo com a intensidade do gradiente. Quanto menor esta intensidade, mais próximo do vermelho. Quanto maior, mais próximo do Azul. Veja que a variação é maior nas bordas de descida ou subida e menor nos picos e vales. Coisas características da derivação.
 
-E é só isso. Se você entendeu até aqui, entendeu o gradiente e já sabe aplicá-lo. Eu disse que lágrimas seriam evitadas.
+É só isso. Se a paciente leitora entendeu até aqui, entendeu o gradiente e já sabe aplicá-lo. Eu disse que a pouparia de lágrimas desnecessárias. E assim o fiz.
 
 ### Propriedades do Gradiente
 
@@ -1046,13 +1381,13 @@ No oceano, o tempo é um caprichoso mestre de marionetes, manipulando o clima co
 
 Um lugar onde o vento está sendo sugado para dentro tem uma divergência negativa - o vento está "fluido" para dentro mais do que está saindo. Um lugar onde o vento está explodindo para fora tem uma divergência positiva - o vento está saindo mais do que está entrando. Este é o conceito que aplicamos as cargas elétricas, o campo elétrico diverge das cargas positivas e converge para as negativas. Isto porque assim convencionamos há séculos, quando começamos e estudar o Eletromagnetismo.
 
-Matematicamente, **a divergência é uma maneira de medir esses comportamentos de "expansão" ou "contração" de um campo vetorial**. Para um campo vetorial em três dimensões, $\mathbf{F} = f_x a_x + f_y a_y + f_z a_z$, a divergência é calculada como:
+Matematicamente, **a divergência é uma maneira de medir esses comportamentos de "expansão" ou "contração" de um campo vetorial**. Para um campo vetorial em três dimensões, $\mathbf{F} = f_x \vec{a}_x + f_y \vec{a}_y + f_z \vec{a}_z$, a divergência é calculada como:
 
 $$
 \nabla \cdot \mathbf{F} = \frac{\partial F_x}{\partial x} + \frac{\partial F_y}{\partial y} + \frac{\partial F_z}{\partial z}
 $$
 
-A divergência, então, é como a "taxa de expansão" do vento em um determinado ponto - mostra se há mais vento saindo ou entrando em uma região específica do espaço, um lugar. assim como a sensação que temos no meio de uma tempestade. **A divergência é o resultado do produto escalar entre o operador $\nabla$ e o Campo Vetorial. O resultado da divergência é uma função escalar que dá a taxa na qual o fluxo do campo vetorial está se expandindo ou contraindo em um determinado ponto**.
+A divergência, então, é como a "taxa de expansão" do vento em um determinado ponto - mostra se há mais vento saindo ou entrando em uma região específica do espaço, um lugar. assim como a sensação que temos no meio de uma tempestade. **A divergência é o resultado do Produto Escalar entre o operador $\nabla$ e o Campo Vetorial. O resultado da divergência é uma função escalar que dá a taxa na qual o fluxo do campo vetorial está se expandindo ou contraindo em um determinado ponto**.
 
 Sendo um pouco mais frio podemos dizer que a divergência é um operador diferencial que atua sobre um Campo Vetorial para produzir um Campo Escalar. Em termos físicos, a divergência em um ponto específico de um Campo Vetorial representa a fonte ou dreno no ponto: uma divergência positiva indica que neste ponto existe uma fonte, ou fluxo de vetores para fora, divergindo. Enquanto uma divergência negativa indica um dreno ou fluxo para dentro, convergindo.
 
@@ -1066,7 +1401,7 @@ $$
 \iint_S (\mathbf{F} \cdot \mathbf{n}) \, dS
 $$
 
-Uma integral dupla, integral de superfície onde $dS$ é o elemento diferencial de área da superfície, e o produto escalar $\mathbf{F} \cdot \mathbf{n}$ mede o quanto do campo está fluindo perpendicularmente à superfície.
+Uma integral dupla, integral de superfície onde $dS$ é o elemento diferencial de área da superfície, e o Produto Escalar $\mathbf{F} \cdot \mathbf{n}$ mede o quanto do campo está fluindo perpendicularmente à superfície.
 
 Agora, a divergência entra em cena como a versão local do fluxo. Se encolhermos a rede até que ela seja infinitesimalmente pequena, o fluxo através da rede se tornará infinitesimal e será dado pela divergência do campo de água no ponto onde a rede está. Matematicamente, isso é expresso na Lei de [Gauss](https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss):
 
@@ -1148,8 +1483,9 @@ $$
 \nabla \times \mathbf{B} = \mu_0 \mathbf{J} + \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}
 $$
 
-onde $\nabla \times \mathbf{B}$ é o rotacional do campo magnético $\mathbf{B}$, $\mu_0$ é a permeabilidade do vácuo, $\mathbf{J}$ é a densidade de corrente elétrica e $\frac{\partial \mathbf{E}}{\partial t}$ é a variação do campo elétrico com relação ao tempo. 
+onde $\nabla \times \mathbf{B}$ é o rotacional do campo magnético $\mathbf{B}$, $\mu_0$ é a permeabilidade do vácuo, $\mathbf{J}$ é a densidade de corrente elétrica e $\frac{\partial \mathbf{E}}{\partial t}$ é a variação do campo elétrico com relação ao tempo.
 
 A Lei de Ampére-Maxwell representa a relação entre a corrente elétrica variável no tempo e o campo magnético rotativo que é gerado, sendo uma descrição matemática do fenômeno da indução eletromagnética. Desta forma, a operação do rotacional serve como uma ponte para unir e descrever fenômenos eletromagnéticos interdependentes, facilitando a análise e compreensão das interações complexas entre campos elétricos e magnéticos, essencial para a física moderna e inovações tecnológicas.
 
-
+___
+[^1]: VENTURE, Jair J.. Álgebra Vetorial e Geometria Analítica. 10. ed. Curitiba - PR. Livrarias Curitiba, 2015.
