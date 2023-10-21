@@ -690,7 +690,7 @@ Considerando que o passageiro se move na direção $y$ positivo com uma velocida
 
 $$ \vec{V}_{p} = 0 \, \vec{a}_x + 2 \, \vec{a}_y + 0 \vec{z} \text{km/h}$$
 
-Com estas velocidades podemos calcular a velocidade do passageiro em relação ao observador $\vec{V}_o$ somando a velocidade do trem em relação ao solo $\vec{V}_t$ a velocidade do passageiro em relação ao solo $\vec{V}_{p}$:
+Com estas velocidades podemos calcular a velocidade do passageiro em relação ao observador $\vec{V}_o$. Somando a velocidade do trem em relação ao solo $\vec{V}_t$ a velocidade do passageiro em relação ao solo $\vec{V}_{p}$:
 
 $$\vec{V}_o = \vec{V}_{p} + \vec{V}_t $$
 
