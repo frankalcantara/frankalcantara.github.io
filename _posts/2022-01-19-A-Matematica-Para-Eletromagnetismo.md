@@ -639,7 +639,7 @@ $$
 
 ### Exercício Resolvido 7
 
-Tudo é relativo! A amável leitora já deve ter ouvido esta frase. Uma mentira, das mais vis deste nossos tempos. Tudo é relativo, na física! Seria mais honesto. Não existe qualquer documento, artigo, livro, ou entrevista onde [Einstein](https://en.wikipedia.org/wiki/Albert_Einstein) tenha dito tal sandice. Ainda assim, isso é repetido a exaustão. Não por nós. Nós dois estamos em busca da verdade do conhecimento. E aqui, neste ponto, entra o conceito de Einstein: as leis da física são as mesmas independente do observador. Isso quer dizer que, para entender um fenômeno, precisamos criar uma relação entre o observador e o fenômeno. Dito isso, considere que você está observando um trem que corta da direita para esquerda seu campo de visão em velocidade constante $\vec{V}_t = 10 \text{km/h}$. Nesse trem, um passageiro atravessa o vagão perpendicularmente ao movimento do trem em uma velocidade dada por $\vec{V}_p} = 2 \text{km/h}$. Qual a velocidade deste passageiro para você, que está colocada de forma perfeitamente perpendicular ao movimento do trem?
+Tudo é relativo! A amável leitora já deve ter ouvido esta frase. Uma mentira, das mais vis deste nossos tempos. Tudo é relativo, na física! Seria mais honesto. Não existe qualquer documento, artigo, livro, ou entrevista onde [Einstein](https://en.wikipedia.org/wiki/Albert_Einstein) tenha dito tal sandice. Ainda assim, isso é repetido a exaustão. Não por nós. Nós dois estamos em busca da verdade do conhecimento. E aqui, neste ponto, entra o conceito de Einstein: as leis da física são as mesmas independente do observador. Isso quer dizer que, para entender um fenômeno, precisamos criar uma relação entre o observador e o fenômeno. Dito isso, considere que você está observando um trem que corta da direita para esquerda seu campo de visão em velocidade constante $\vec{V}_t = 10 \text{km/h}$. Nesse trem, um passageiro atravessa o vagão perpendicularmente ao movimento do trem em uma velocidade dada por $\vec{V}_p = 2 \text{km/h}$. Qual a velocidade deste passageiro para você, que está colocada de forma perfeitamente perpendicular ao movimento do trem?
 
 **Solução**
 Vamos observar os dados apresentados no enunciado:
@@ -659,7 +659,7 @@ $$ o_x = 10 \, \text{km/h} $$
 
 $$ o_y = 2 \, \text{km/h} $$
 
-$$ \vec{V}_o = 10 \vet{a}_x + 2 \, \vec{a}_y $$
+$$ \vec{V}_o = 10 \, \vet{a}_x + 2 \, \vec{a}_y $$
 
 A amável leitora deve perceber que no fenômeno descrito no enunciado, tanto o trem quanto o passageiros estão se movendo em direções perpendiculares entre si. Os vetores que representam as duas velocidades têm apenas uma componente. Contudo, visto do solo, o passageiro está se momento segundo um vetor com componentes tanto no eixo $x$ quanto no eixo $y$. Foi esta relatividade na observação do fenômeno que Einstein estudou.
 
