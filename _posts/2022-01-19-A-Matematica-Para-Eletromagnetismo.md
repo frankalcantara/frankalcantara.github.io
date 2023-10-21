@@ -42,7 +42,7 @@ Imagem de [Asimina Nteliou](https://pixabay.com/users/asimina-1229333/?utm_sourc
     - [Exercício Resolvido 7](#exercício-resolvido-7)
     - [Exercício Resolvido 8](#exercício-resolvido-8)
   - [Vetores Posição e Distância](#vetores-posição-e-distância)
-    - [Exercício Resolvido 6](#exercício-resolvido-6-1)
+    - [Exercício Resolvido 9](#exercício-resolvido-9)
   - [Produto Escalar](#produto-escalar)
     - [Exercício Resolvido 7](#exercício-resolvido-7-1)
   - [Produto Vetorial](#produto-vetorial)
@@ -790,7 +790,7 @@ Sendo assim o perímetro será:
 
 Vetores são como os ventos que cruzam o mar, invisíveis mas poderosos, guiando navios e direcionando correntes. Na matemática, eles têm sua própria linguagem, um código entre o visível e o invisível, mapeando direções e magnitudes. Aqui, você encontrará exercícios que irão desafiar sua habilidade de navegar por esse oceano numérico. Não são apenas problemas, mas bússolas que apontam para o entendimento mais profundo. Então pegue lápis e papel como se fossem um leme e um mapa e prepare-se para traçar seu próprio curso.
 
-### Exercício Resolvido 6
+### Exercício Resolvido 9
 
 Considere um sistema de referência onde as distâncias são dimensionadas apenas por unidades abstratas, sem especificação de unidades de medida. Nesse sistema, dois vetores são dados. O vetor $\, \vec{a}$ inicia na origem e termina no ponto $P$ com coordenadas $(8, -1, -5)$. Temos também um vetor unitário $\vec{c}$ que parte da origem em direção ao ponto $Q$, e é representado por $\frac{1}{3}(1, -3, 2)$. Se a distância entre os pontos $P$ e $Q$ é igual a 15 unidades, determine as coordenadas do ponto $Q$.
 
