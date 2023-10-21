@@ -108,7 +108,7 @@ Na física moderna usamos os vetores como definido por [Dirac](https://en.wikipe
 
 Entender esses campos, então, é uma forma de começar a entender o universo. É ler a história que está sendo escrita nas linhas invisíveis de força. É mergulhar no mar profundo do desconhecido, e emergir com um conhecimento novo e precioso. É se tornar um tradutor da linguagem cósmica, um leitor das marcas deixadas pelas forças em seus campos. É, em resumo, a essência da ciência. E é essa ciência, esse estudo dos campos e das forças que neles atuam, que iremos explorar.
 
-Para lançar as pedras fundamentais do nosso conhecimento representaremos os vetores por meio de letras latinas maiúsculas $\, \vec{a}, \vec{B}, \vec{C}, ...$ marcadas com uma pequena seta. Estes vetores serão os elementos construtivos de um espaço vetorial $\textbf{V}$. Espaços vetoriais também serão representados por letras latinas maiúsculas, desta feita em negrito.
+Para lançar as pedras fundamentais do nosso conhecimento representaremos os vetores por meio de letras latinas maiúsculas $\, \vec{A}, \vec{B}, \vec{C}, ...$ marcadas com uma pequena seta. Estes vetores serão os elementos construtivos de um espaço vetorial $\textbf{V}$. Espaços vetoriais também serão representados por letras latinas maiúsculas, desta feita em negrito.
 
 Neste texto introdutório, mapa de nossa jornada, os espaços vetoriais serão sempre representados em três dimensões. O espaço que procuramos é o nosso, o espaço onde vivemos, a forma como percebemos mares, montanhas, planícies, o céu, nosso universo.
 
@@ -659,7 +659,7 @@ $$ o_x = 10 \, \text{km/h} $$
 
 $$ o_y = 2 \, \text{km/h} $$
 
-$$ \vec{V}_o = 10 \vet{a}_x + 2 \vec{a}_y $$
+$$ \vec{V}_o = 10 \vec{a}_x + 2 \vec{a}_y $$
 
 A amável leitora deve perceber que no fenômeno descrito no enunciado, tanto o trem quanto o passageiros estão se movendo em direções perpendiculares entre si. Os vetores que representam as duas velocidades têm apenas uma componente. Contudo, visto do solo, o passageiro está se momento segundo um vetor com componentes tanto no eixo $x$ quanto no eixo $y$. Foi esta relatividade na observação do fenômeno que Einstein estudou.
 
@@ -690,7 +690,7 @@ Considerando que o passageiro se move na direção $y$ positivo com uma velocida
 
 $$ \vec{V}_{p} = 0 \, \vec{a}_x + 2 \, \vec{a}_y + 0 \vec{z} \text{km/h}$$
 
-Com estas velocidades podemos calcular a velocidade do passageiro em relação ao observador $\vec{V}_o$. Somando a velocidade do trem em relação ao solo $\vec{V}_t$ a velocidade do passageiro em relação ao solo $\vec{V}_{p}$:
+Com estas velocidades podemos calcular a velocidade do passageiro em relação ao observador somando a velocidade do trem em relação ao solo $\vec{V}_t$ a velocidade do passageiro em relação ao solo $\vec{V}_{p}$:
 
 $$\vec{V}_o = \vec{V}_{p} + \vec{V}_t $$
 
@@ -773,7 +773,7 @@ Para calcular o vetor unitário na direção do vetor $P_M$ teremos:
 
 \[\vert P_1P_2 \vert = \vert (4,4,3)-(-2,0,5) \vert = \vert (6,4,-2) \vert\]
 
-\[\vert P_1P_2 \vert = \sqrt{6^2+4^2+2^2}=7,48$$
+\[\vert P_1P_2 \vert = \sqrt{6^2+4^2+2^2}=7,48\]
 
 \[\vert P_2P_3 \vert = \vert (-2,0,5)-(7,-2,1) \vert = \vert (-9,2,-4) \vert\]
 
