@@ -659,7 +659,7 @@ $$ o_x = 10 \, \text{km/h} $$
 
 $$ o_y = 2 \, \text{km/h} $$
 
-$$ \vec{V}_o = 10 \, \vet{a}_x + 2 \, \vec{a}_y $$
+$$ \vec{V}_o = 10 \vet{a}_x + 2 \vec{a}_y $$
 
 A amável leitora deve perceber que no fenômeno descrito no enunciado, tanto o trem quanto o passageiros estão se movendo em direções perpendiculares entre si. Os vetores que representam as duas velocidades têm apenas uma componente. Contudo, visto do solo, o passageiro está se momento segundo um vetor com componentes tanto no eixo $x$ quanto no eixo $y$. Foi esta relatividade na observação do fenômeno que Einstein estudou.
 
