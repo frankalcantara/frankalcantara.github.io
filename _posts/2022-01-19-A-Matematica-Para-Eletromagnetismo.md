@@ -158,13 +158,13 @@ Em uma tarde quente em um bar à beira-mar, um velho pescador conversava com um 
 
 Sejam os pontos $A(x_1,y_1,z_1)$ e $B(x_2,y_2,z_2)$ dois pontos no espaço. O vetor $\vec{V}$ entre eles será dado por:
 
-\[\vec{V} = (x_2 - x_1, y_2 - y_1, z_2 - z_1)\]
+$$\vec{V} = (x_2 - x_1, y_2 - y_1, z_2 - z_1)$$
 
 Substituindo pelos pontos dados:
 
-\[v = (-1 - 1, -2 - 2, 3 - 3)\]
+$$v = (-1 - 1, -2 - 2, 3 - 3)$$
 
-\[v = (-2, -4, 0)\]
+$$v = (-2, -4, 0)$$
 
 Assim, o vetor entre os pontos $A(1,2,3)$ e $B(-1,-2,3)$ é $\vec{V} = (-2, -4, 0)$.
 
