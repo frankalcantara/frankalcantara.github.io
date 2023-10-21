@@ -77,7 +77,7 @@ Lágrimas de decepção não o encontrarão em cada porto. Mesmo que não chegue
 
 # Álgebra Linear
 
-Área da matemática envolvida com o espaço, vetores e seu baile atemporal, ritmado por regras intrínsecas. Vetores e Matrizes, soldados organizados em linhas e colunas, cada um contando histórias de variáveis e transformações. Divergências, gradientes e rotacionais, gestos majestosos na dança do cálculo vetorial. Tudo tão complexo quanto a vida, tão real quanto a morte, tão honesto quanto o mar, profundo, impiedoso e direto. 
+Área da matemática envolvida com o espaço, vetores e seu baile atemporal, ritmado por regras intrínsecas. Vetores e Matrizes, soldados organizados em linhas e colunas, cada um contando histórias de variáveis e transformações. Divergências, gradientes e rotacionais, gestos majestosos na dança do cálculo vetorial. Tudo tão complexo quanto a vida, tão real quanto a morte, tão honesto quanto o mar, profundo, impiedoso e direto.
 
 >O mar bravo só respeita rei. [Arnaud Rodrigues / Chico Anísio](https://www.letras.com/baiano-os-novos-caetanos/1272051/)
 
