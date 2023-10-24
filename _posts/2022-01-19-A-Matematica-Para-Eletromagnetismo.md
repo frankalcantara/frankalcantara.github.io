@@ -44,7 +44,7 @@ Imagem de [Asimina Nteliou](https://pixabay.com/users/asimina-1229333/?utm_sourc
   - [Vetores Posição e Distância](#vetores-posição-e-distância)
     - [Exercício Resolvido 9](#exercício-resolvido-9)
   - [Produto Escalar](#produto-escalar)
-    - [Exercício Resolvido 7](#exercício-resolvido-7-1)
+    - [Exercício Resolvido 10](#exercício-resolvido-10)
   - [Produto Vetorial](#produto-vetorial)
   - [Usando a Álgebra Vetorial no Eletromagnetismo](#usando-a-álgebra-vetorial-no-eletromagnetismo)
     - [Lei de Coulomb](#lei-de-coulomb)
@@ -221,7 +221,8 @@ $$\, \vec{a}_B=\frac{ \vec{B} }{ \vert \vec{B} \vert }= \frac{b_x\, \vec{a}_x+b_
 Equação que deve ser lida como: **o vetor unitário de um dado vetor será o próprio vetor dividido pela sua magnitude**. Talvez toda essa rigidez da matemática desvaneça diante dos seus olhos, lindos e cansados, se recorrermos a um exemplo.
 
 <p class="exp">
-<b>Exemplo 1:</b> calcule o vetor unitário $\, \vec{a}_A$ do vetor $\, \vec{a}=\, \vec{a}_x-3\, \vec{a}_y+2\, \vec{a}_z$. <br><br>
+<b>Exemplo 1:</b><br>
+Calcule o vetor unitário $\, \vec{a}_A$ do vetor $\, \vec{a}=\, \vec{a}_x-3\, \vec{a}_y+2\, \vec{a}_z$. <br><br>
 <b>Solução:</b> partindo da definição de vetor unitário.
 
 \[\, \vec{a}_A=\frac{\, \vec{a}_x\, \vec{a}_x+\, \vec{a}_y\, \vec{a}_y+\, \vec{a}_z\, \vec{a}_z}{\sqrt{\, \vec{a}_x^2+\, \vec{a}_y^2+\, \vec{a}_z^2} }\]
@@ -233,6 +234,38 @@ Substituindo os valores, dados no enunciado:
 \[\, \vec{a}_A=0,2672\, \vec{a}_x-0,8018\, \vec{a}_y+0,5345\, \vec{a}_z\]
 
 </p>
+
+<p class="exp">
+<b>Exemplo 2:</b><br>
+Dados os pontos $A(2, 1, 3)$ e $B(4, -2, 5)$, encontre o vetor $\vec{V}_{AB}$ e o vetor unitário $\vec{v}_{AB}$.
+<br><br>
+<b>Solução:</b>
+Para encontrar o vetor $\vec{V}_{AB}$, utilizamos a equação:
+
+\[
+\vec{V}_{AB} = B - A = (4 \, \vec{a}_x - 2 \, \vec{a}_y + 5 \, \vec{a}_z) - (2 \, \vec{a}_x + 1 \, \vec{a}_y + 3 \, \vec{a}_z)
+\]
+
+Simplificando, obtemos:
+\[
+\vec{V}_{AB} = 2 \, \vec{a}_x - 3 \, \vec{a}_y + 2 \, \vec{a}_z
+\]
+
+Para encontrar o vetor unitário $\vec{v}_{AB}$:
+\[
+\vec{v}_{AB} = \frac{\vec{V}_{AB} }{\vert \vec{V}_{AB} \vert } = \frac{2 \, \vec{a}_x - 3 \, \vec{a}_y + 2 \, \vec{a}_z}{\sqrt{2^2 + (-3)^2 + 2^2} }
+\]
+Após calcular o módulo:
+\[
+|\vec{V}_{AB}| = \sqrt{4 + 9 + 4} = \sqrt{17} \approx 4,1231
+\]
+Portanto, o vetor unitário $\vec{v}_{AB}$ será dado por:
+\[
+\vec{v}_{AB} = \frac{2 \, \vec{a}_x - 3 \, \vec{a}_y + 2 \, \vec{k}_z}{4,1231} \approx 0,4845 \, \vec{a}_x - 0,7267 \, \vec{a}_y + 0,4845\vec{a}_z
+\]
+
+</p>
+
 Vista através de retinas atentas a matemática é simples e, muitas vezes, bela.
 
 ### Exercício Resolvido 2
@@ -275,7 +308,7 @@ Você é um capitão de um pequeno barco de pesca, perdido em alto mar. Sua bús
 
 O vetor unitário correspondente ao vetor $\, \vec{a}$ é aproximadamente $(0.784, 0.588, -0.196)$. Este é o vetor que você deve seguir para apontar seu barco na direção certa para o porto seguro, independente das condições dos ventos e correntes.
 
-Se a amável leitora conseguiu entender de que forma as forças devidas a ventos e correntes estão implícitas na definição do vetor $\, \vec{a}$? Se tiver conseguido, já entendeu o que é um vetor unitário e como ele pode ser usado para simplificar a informação contida em um vetor.
+Se a amável leitora conseguiu entender de que forma as forças devidas a ventos e correntes estão implícitas na definição do vetor $\, \vec{a}$, já entendeu o que é um vetor unitário e como ele pode ser usado para simplificar as informação contidas em um sistema de forças.
 
 ### Exercício Resolvido 3
 
@@ -293,7 +326,7 @@ Para o ponto $B$, o vetor unitário é dado por:
 
 $$\vec{B} = \frac{1}{2}k(-2, 1, 3)$$
 
-Nesta equação o termo $k$ é um valor escalar que representa a magnitude de um dos vetores que está na direção do vetor unitário $\vec{b}$. Portanto, ao variar $k$, obtemos todos os possíveis vetores, de diferentes magnitudes, que estão na direção especificada pelo vetor unitário $\frac{1}{2}(-2, 1, 3)$. **como um vetor unitário só determina uma direção e um sentido exite um número infinito de vetores múltiplos de um dado vetor unitário**. Nossa tarefa é encontrar qual destes vetores satisfaz o enunciado. Ou, em outras palavras, $\vec{b}$ é o vetor unitário na direção de todos os vetores múltiplos dele mesmo. Expandindo:
+Nesta equação o termo $k$ é um valor escalar que representa a magnitude de um dos vetores que está na direção do vetor unitário $\vec{b}$. Portanto, ao variar $k$, obtemos todos os possíveis vetores, de diferentes magnitudes, que estão na direção especificada pelo vetor unitário $\frac{1}{2}(-2, 1, 3)$. **como um vetor unitário só determina uma direção e um sentido exite um número infinito de vetores múltiplos de um dado vetor unitário**. Nossa tarefa é encontrar qual destes vetores satisfaz o enunciado. Ou, em outras palavras, $\vec{b}$ é o vetor unitário na direção de todos os vetores múltiplos escalares dele mesmo. Expandindo:
 
 $$\vec{B} = \frac{-2k}{2} \, \vec{a}_x + \frac{k}{2} \, \vec{a}_y + \frac{3k}{2} \, \vec{a}_z$$
 
@@ -397,7 +430,8 @@ Os escalares que usaremos nesta jornada serão elementos do conjunto dos número
 A multiplicação de cada componente por um escalar é muito simples e quase não requer um exemplo. Quase.
 
 <p class="exp">
-<b>Exemplo 2:</b> considere o vetor $\, \vec{a}=2\, \vec{a}_x+4\, \vec{a}_y-\, \vec{a}_z$ e calcule $3,3\, \vec{a}$ e $\, \vec{a}/2$: <br><br>
+<b>Exemplo 3:</b> <br>
+Considere o vetor $\, \vec{a}=2\, \vec{a}_x+4\, \vec{a}_y-\, \vec{a}_z$ e calcule $3,3\, \vec{a}$ e $\, \vec{a}/2$: <br><br>
 <b>Solução:</b>
 
 \[3,3\, \vec{a}=(3,3)(2)\, \vec{a}_x+(3,3)(4)\, \vec{a}_y+(3,3)(-1)\, \vec{a}_z\]
@@ -464,7 +498,8 @@ $$\vec{C}=\, \vec{a}+\vec{B}=(\, \vec{a}_x \, \vec{a}_x+\, \vec{a}_y \, \vec{a}_
 $$\vec{C}=\, \vec{a}+\vec{B}=(\, \vec{a}_x+B_x)\, \vec{a}_x+(\, \vec{a}_y+B_y)\, \vec{a}_y+(\, \vec{a}_y+B_y)\, \vec{a}_z$$
 
 <p class="exp">
-<b>Exemplo 3:</b> se $\, \vec{a}=5\, \vec{a}_x-3\, \vec{a}_y+\, \vec{a}_z$ e $\vec{B}=\, \vec{a}_x+4\, \vec{a}_y-7\, \vec{a}_z$. Calcule $\vec{C}=vec{A}+\vec{B}$.<br><br>
+<b>Exemplo 4:</b><br>
+Se $\, \vec{a}=5\, \vec{a}_x-3\, \vec{a}_y+\, \vec{a}_z$ e $\vec{B}=\, \vec{a}_x+4\, \vec{a}_y-7\, \vec{a}_z$. Calcule $\vec{C}=vec{A}+\vec{B}$.<br><br>
 <b>Solução</b>
 
 \[\vec{C}=\, \vec{a}+\vec{B}=(5\, \vec{a}_x-3\, \vec{a}_y+\, \vec{a}_z)+(1\, \vec{a}_x+4\, \vec{a}_y-7\, \vec{a}_z)\]
@@ -475,6 +510,19 @@ $$\vec{C}=\, \vec{a}+\vec{B}=(\, \vec{a}_x+B_x)\, \vec{a}_x+(\, \vec{a}_y+B_y)\,
 
 </p>
 
+<p class="exp">
+<b>Exemplo 5:</b><br>
+Dado o vetor $\vec{A} = 4 \, \vec{a}_x + 6 \, \vec{a}_y + 3 \, \vec{a}_z$ e o vetor $\vec{B} = 3 \, \vec{a}_x - 2\vec{a}_y + 8 \, \vec{a_z}$, a projeção do vetor soma $\vec{C}=\vec{A}+\vec{B}$ sobre o eixo $y$ será:
+.<br><br>
+<b>Solução</b>
+
+Para descobrir essa projeção, precisamos efetuar a soma $\vec{C}=\vec{A}+\vec{B}$:
+\[
+\vec{C}=\vec{A}+\vec{B} = (4 + 3) \, \vec{a}_x + (6 - 2) \, \vec{a}_y + (3 + 8) \, \vec{a}_z = 7 \, \vec{a}_x + 4 \, \vec{a}_y + 11 \, \vec{a}_z
+\]
+Lembrando que <b>os componentes do vetor são, na verdade, a projeção do vetor em cada um dos eixos do sistema de coordenadas</b>, a projeção sobre o eixo $y$ será: $4$.
+</p>
+
 Recorrendo ao auxílio da aritmética dos números escalares, podemos dizer que: a subtração entre dois vetores também será uma soma. Desta feita, uma soma entre um vetor e o vetor oposto de outro vetor Assim:
 
 $$\vec{C}=\, \vec{a}-\vec{B}=\, \vec{a}+(-\vec{B})=\, \vec{a}+(-1\vec{B})$$
@@ -482,7 +530,8 @@ $$\vec{C}=\, \vec{a}-\vec{B}=\, \vec{a}+(-\vec{B})=\, \vec{a}+(-1\vec{B})$$
 Talvez um exemplo ajude a amável leitora a perceber que, vetorialmente, até quando subtraímos estamos somando.
 
 <p class="exp">
-<b>Exemplo 4:</b> considere $A=5\, \vec{a}_x-3\, \vec{a}_y+\, \vec{a}_z$ e $B=1\, \vec{a}_x+4\, \vec{a}_y-7\, \vec{a}_z$ e calcule $\vec{C}=\, \vec{a}-\vec{B}$. <br><br>
+<b>Exemplo 6:</b><br> 
+Considere $A=5\, \vec{a}_x-3\, \vec{a}_y+\, \vec{a}_z$ e $B=1\, \vec{a}_x+4\, \vec{a}_y-7\, \vec{a}_z$ e calcule $\vec{C}=\, \vec{a}-\vec{B}$. <br><br>
 <b>Solução:</b>
 
 \[\vec{C}=\, \vec{a}-\vec{B}=(5\, \vec{a}_x-3\, \vec{a}_y+\, \vec{a}_z)+(-1(1\, \vec{a}_x+4\, \vec{a}_y-7\, \vec{a}_z))\]
@@ -536,7 +585,6 @@ $$
 $$
 
 Portanto, a força resultante após a correção de segurança será $6\, \vec{a}_x - \, \vec{a}_y$.
-
 
 ### Exercício Resolvido 5
 
@@ -731,7 +779,8 @@ $\vec{R}$, a distância entre $P$ e $Q$, será geometricamente representado por 
 É um conceito simples, porém poderoso. Uma forma de conectar dois pontos em um espaço, uma forma de enxergar todo espaço a partir dos seus pontos e vetores. Definindo qualquer vetor a partir dos vetores posição. Bastando para tanto, definir um ponto comum para todo o espaço. Coisa que os sistemas de coordenadas fazem por nós graciosamente.
 
 <p class="exp">
-<b>Exemplo: 5</b> considerando que $P$ esteja nas coordenadas $(3,2,-1)$ e $Q$ esteja nas coordenadas $(1,-2,3)$. Logo, o vetor distância $\vec{R}_{PQ}$ será dado por: <br><br>
+<b>Exemplo: 7</b><br>
+Considerando que $P$ esteja nas coordenadas $(3,2,-1)$ e $Q$ esteja nas coordenadas $(1,-2,3)$. Logo, o vetor distância $\vec{R}_{PQ}$ será dado por: <br><br>
 <b>Solução:</b>
 
 \[\vec{R}_{PQ} = \vec{R}_P - \vec{R}_Q\]
@@ -747,7 +796,8 @@ Logo:
 </p>
 
 <p class="exp">
-<b>Exemplo 6:</b> dados os pontos $P_1(4,4,3)$, $P_2(-2,0,5)$ e $P_3(7,-2,1)$. (a) Especifique o vetor $\, \vec{a}$ que se estende da origem até o ponto $P_1$. (b) Determine um vetor unitário que parte da origem e atinge o ponto médio do segmento de reta formado pelos pontos $P_1$ e $P_2$. (c) Calcule o perímetro do triângulo formado pelos pontos $P_1$, $P_2$ e $P_3$.
+<b>Exemplo 8:</b><br>
+Dados os pontos $P_1(4,4,3)$, $P_2(-2,0,5)$ e $P_3(7,-2,1)$. (a) Especifique o vetor $\, \vec{a}$ que se estende da origem até o ponto $P_1$. (b) Determine um vetor unitário que parte da origem e atinge o ponto médio do segmento de reta formado pelos pontos $P_1$ e $P_2$. (c) Calcule o perímetro do triângulo formado pelos pontos $P_1$, $P_2$ e $P_3$.
 
 <br><br>
 <b>Solução:</b><br>
@@ -853,7 +903,8 @@ $$\, \vec{a}\cdot \vec{B} = A_xB_x+ A_yB_y+ A_zB_z$$
 Seremos então capazes de abandonar a equação analítica, e voltarmos aos mares tranquilos de ventos suaves da Álgebra Linear. A matemática nos transmite paz e segurança. Exceto quando estamos aprendendo. Nestes momentos, nada como uma xícara de chá morno e um exemplo para acender a luz do entendimento.
 
 <p class="exp">
-<b>Exemplo 7:</b> dados os vetores $\, \vec{a}=3\, \vec{a}_x+4\, \vec{a}_y+\, \vec{a}_z$ e $\vec{B}=\, \vec{a}_x+2\, \vec{a}_y-5\, \vec{a}_z$ encontre o ângulo $\theta$ entre $\, \vec{a}$ e $\vec{B}$.
+<b>Exemplo 9:</b><br>
+Dados os vetores $\, \vec{a}=3\, \vec{a}_x+4\, \vec{a}_y+\, \vec{a}_z$ e $\vec{B}=\, \vec{a}_x+2\, \vec{a}_y-5\, \vec{a}_z$ encontre o ângulo $\theta$ entre $\, \vec{a}$ e $\vec{B}$.
 <br><br>
 <b>Solução:</b><br>
 Para calcular o ângulo vamos usar a equação analítica do Produto Escalar:
@@ -948,7 +999,8 @@ $$\, \vec{a}_\mu \cdot \, \vec{a}_\upsilon = \delta_{\mu \upsilon}$$
 Que será útil na representação computacional de vetores e no entendimento de transformações vetoriais em espaços com mais de $3$ dimensões. Que, infelizmente, estão além deste ponto na nossa jornada. Não se deixe abater, ficaremos limitados a $3$ dimensões. Contudo, não nos limitaremos ao Produto Escalar. Outras maravilhas virão.
 
 <p class="exp">
-<b>Exemplo 8:</b> dados os vetores $\, \vec{a} = (3, 2, 1)$ e $\vec{B} = (1, -4, 2)$, calcule o Produto Escalar $\, \vec{a} \cdot \vec{B}$ e também $\vec{B} \cdot \, \vec{a}$. Verifique a propriedade da comutatividade.
+<b>Exemplo 10:</b><br>
+Dados os vetores $\, \vec{a} = (3, 2, 1)$ e $\vec{B} = (1, -4, 2)$, calcule o Produto Escalar $\, \vec{a} \cdot \vec{B}$ e também $\vec{B} \cdot \, \vec{a}$. Verifique a propriedade da comutatividade.
 <br><br>
 <b>Solução:</b><br>
 Tudo que precisamos para provar a comutatividade é fazer o Produto Escalar em duas ordens diferentes em busca de resultados iguais.
@@ -958,7 +1010,8 @@ Tudo que precisamos para provar a comutatividade é fazer o Produto Escalar em d
 </p>
 
 <p class="exp">
-<b>Exemplo 9:</b> dados os vetores $\, \vec{a} = (2, 3, 1)$, $\vec{B} = (1, 2, 0)$ e $\vec{C} = (3, 1, 3)$, calcule $\, \vec{a} \cdot (\vec{B} + \vec{C})$ e compare com $\, \vec{a} \cdot \vec{B} + \, \vec{a} \cdot \vec{C}$.
+<b>Exemplo 11:</b><br>
+Dados os vetores $\, \vec{a} = (2, 3, 1)$, $\vec{B} = (1, 2, 0)$ e $\vec{C} = (3, 1, 3)$, calcule $\, \vec{a} \cdot (\vec{B} + \vec{C})$ e compare com $\, \vec{a} \cdot \vec{B} + \, \vec{a} \cdot \vec{C}$.
 <br><br>
 <b>Solução:</b><br>
 
@@ -970,7 +1023,7 @@ Primeiro, encontre $\vec{B} + \vec{C} = (1+3, 2+1, 0+3) = (4, 3, 3)$.
    \[\, \vec{a} \cdot \vec{B} + \, \vec{a} \cdot \vec{C} = 20\]
 </p>
   
-### Exercício Resolvido 7
+### Exercício Resolvido 10
 
 Considere o vetor $\vec{F} = (x, y, z)$ perpendicular ao vetor $\vec{G} = (2, 3, 1)$. Sabendo que $\vec{F} \cdot \vec{F} = 9$. Determine os componentes que definem o vetor $\vec{F}$.
 
@@ -1140,7 +1193,8 @@ $$\, \vec{a}\times \vec{B}=(\, \vec{a}_y B_z- \, \vec{a}_z B_y)\, \vec{a}_x-(\, 
 Cuidado com os determinantes, o Chapeleiro não era louco por causa do chumbo, muito usado na fabricação de chapéus quando [Lewis Carroll](https://en.wikipedia.org/wiki/Lewis_Carroll) escreveu as histórias de Alice. Ficou louco [resolvendo determinantes](https://www.johndcook.com/blog/2023/07/10/lewis-carroll-determinants/). Talvez um exemplo afaste a insanidade tempo suficiente para você continuar estudando eletromagnetismo.
 
 <p class="exp">
-<b>Exemplo 8:</b> dados os vetores $\, \vec{a}=\, \vec{a}_x+2\, \vec{a}_y+3\, \vec{a}_z$ e $\vec{B}=4\, \vec{a}_x+5\, \vec{a}_y-6\, \vec{a}_z$. (a) Calcule o Produto Vetorial entre $\, \vec{a}$ e $\vec{B}$. (b) Encontre o ângulo $\theta$ entre $\, \vec{a}$ e $\vec{B}$.
+<b>Exemplo 12:</b><br>
+Dados os vetores $\, \vec{a}=\, \vec{a}_x+2\, \vec{a}_y+3\, \vec{a}_z$ e $\vec{B}=4\, \vec{a}_x+5\, \vec{a}_y-6\, \vec{a}_z$. (a) Calcule o Produto Vetorial entre $\, \vec{a}$ e $\vec{B}$. (b) Encontre o ângulo $\theta$ entre $\, \vec{a}$ e $\vec{B}$.
 <br><br>
 <b>Solução:</b><br>
 (a) Vamos começar com o Produto Vetorial:
@@ -1269,12 +1323,12 @@ $$
 
 Nesta equação:
 
-- $F_{21}$ é a força que é aplicada sobre a carga 2, $Q_2$,  devido a existência da carga 1, $Q_1$.
-- $\epslion_0$ representa a permissividade do vácuo, medida em Farads por metro ($F/m$). 
-- $\epslion_r$ representa a permissividade do meio onde as cargas estão, um valor escalar e sem unidade.
+- $F_{21}$ é a força que é aplicada sobre a carga 2, $Q_2$, devido a existência da carga 1, $Q_1$.
+- $\epsilon_0$ representa a permissividade do vácuo, medida em Farads por metro ($F/m$). 
+- $\epsilon_r$ representa a permissividade do meio onde as cargas estão, um valor escalar e sem unidade.
 - $4\pi $ surge da existência da força em todos os pontos do espaço, uma esfera que se estende da carga até o infinito. 
-- $Q_1Q_2$ representa o produto entre as intensidades das cargas que no Sistema Internacional de Unidades são medidas em Coulombs ($C$). 
-- $a_{21}$ representa o vetor unitário com origem em $Q1$ e destino em $Q2$. 
+- $Q_1Q_2$ representa o produto entre as intensidades das cargas que no Sistema Internacional de Unidades são medidas em Coulombs ($C$).
+- $a_{21}$ representa o vetor unitário com origem em $Q1$ e destino em $Q2$.
 
 # Cálculo Vetorial
 
@@ -1371,7 +1425,8 @@ Por exemplo, se temos uma função $\mathbf{F}(x, y)$, a derivada parcial de $\m
 **O gradiente mede a taxa em que o Campo Escalar varia em uma determinada direção.** Para clarear e afastar a sombra das dúvidas, nada melhor que um exemplo.
 
 <p class="exp">
-<b>Exemplo 10:</b> considerando o Campo Escalar dado por $\mathbf{F}(x,y) = 10sin(\frac{x^2}{5})+4y$, (a) calcule a intensidade do campo no ponto $P(2,3)$, (b) o gradiente deste campo no ponto $P$.  
+<b>Exemplo 13:</b><br>
+Considerando o Campo Escalar dado por $\mathbf{F}(x,y) = 10sin(\frac{x^2}{5})+4y$, (a) calcule a intensidade do campo no ponto $P(2,3)$, (b) o gradiente deste campo no ponto $P$.  
 <br><br>
 <b>Solução:</b><br>
 
