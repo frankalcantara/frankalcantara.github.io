@@ -46,6 +46,7 @@ Imagem de [Asimina Nteliou](https://pixabay.com/users/asimina-1229333/?utm_sourc
   - [Produto Escalar](#produto-escalar)
     - [Exercício 10](#exercício-10)
     - [Exercício 11](#exercício-11)
+    - [Exercício 12](#exercício-12)
   - [Produto Vetorial](#produto-vetorial)
   - [Usando a Álgebra Vetorial no Eletromagnetismo](#usando-a-álgebra-vetorial-no-eletromagnetismo)
     - [Lei de Coulomb](#lei-de-coulomb)
@@ -717,6 +718,10 @@ Primeiro, encontre $\vec{B} + \vec{C} = (1+3, 2+1, 0+3) = (4, 3, 3)$.
 ### Exercício 11
 
 Considere o vetor $\vec{F} = (x, y, z)$ perpendicular ao vetor $\vec{G} = (2, 3, 1)$. Sabendo que $\vec{F} \cdot \vec{F} = 9$. Determine os componentes que definem o vetor $\vec{F}$.
+
+### Exercício 12
+
+Calcule o Produto Escalar de $\vec{C} = \vec{A} - \vec{B}$ com ele mesmo.
 
 ## Produto Vetorial
 

@@ -523,3 +523,58 @@ As soluções para $\vec{F}$ são:
 $$\vec{F_1} = \left(\frac{3}{\sqrt{5} }, 0, -\frac{6}{\sqrt{5} }\right)$$
 
 $$\vec{F_2} = \left(-\frac{3}{\sqrt{5} }, 0, \frac{6}{\sqrt{5} }\right)$$
+
+
+### Exercício 12
+
+Calcule o Produto Escalar de $\vec{C} = \vec{A} - \vec{B}$ com ele mesmo.
+
+**Solução:** primeiro, expandimos $\vec{C} \cdot \vec{C}$ usando a definição de $\vec{C}$ dadas no enunciado e as propriedades do produto escalar.
+
+$$
+\vec{C}\cdot \vec{C} = (\vec{A} - \vec{B}) \cdot (\vec{A} - \vec{B})
+$$
+
+O produto escalar é distributivo, o que nos permite expandir para:
+
+$$
+\vec{C}\cdot \vec{C} = \vec{A} \cdot \vec{A} - \vec{A} \cdot \vec{B} - \vec{B} \cdot \vec{A} + \vec{B} \cdot \vec{B}
+$$
+
+Note que $\vec{A} \cdot \vec{B}$ e $\vec{B} \cdot \vec{A}$ são iguais devido à propriedade comutativa do produto escalar.
+
+Vamos converter os termos para magnitudes e ângulos usando a relação $\vec{A} \cdot \vec{A} = \vec{A}^2$ e $\vec{A} \cdot \vec{B} = \vert \vec{A} \vert \vert \vec{B} \vert \cos \theta$, onde $\theta$ é o ângulo entre $\vec{A}$ e $\vec{B}$.
+
+$$
+\vec{C}^2 = \vec{A}^2 + \vec{B}^2 - 2 \vert \vec{A} \vert \vert \vec{B} \vert \cos \theta
+$$
+
+Substituímos $\vec{A} \cdot \vec{B}$ e $\vec{B} \cdot \vec{A}$ por $\vert \vec{A} \vert \vert \vec{B} \vert \cos \theta$ e simplificamos a expressão para obter $\vec{C}^2$.
+
+Chegamos à expressão final para $\vec{C}^2$ em termos das magnitudes de $\vec{A}$ e $\vec{B}$ e do ângulo $\theta$ entre eles.
+
+$$ \vec{C}^2 = \vec{A}^2 + \vec{B}^2 - 2 \vert \vec{A} \vert \vert \vec{B} \vert cos \theta $$
+
+E esta é a forma vetorial da _Lei dos Cossenos_. 
+
+A Lei dos Cossenos é uma equação usada em trigonometria para relacionar os lados de um triângulo com um de seus ângulos. Ela é particularmente útil para encontrar um lado de um triângulo quando conhecemos os outros dois lados e o ângulo entre eles. A Lei dos Cossenos é geralmente expressa da seguinte forma para um triângulo com lados de comprimentos $a$, $b$, e $c$, e ângulo $\theta$ oposto ao lado $c$:
+
+$$
+c^2 = a^2 + b^2 - 2ab \cos(\gamma)
+$$
+
+Esta fórmula pode ser rearranjada para resolver qualquer um dos lados ou ângulos do triângulo, e também pode ser adaptada para as outras duas versões, correspondendo aos outros dois ângulos do triângulo:
+
+$$
+a^2 = b^2 + c^2 - 2bc \cos(\alpha)
+$$
+
+$$
+b^2 = a^2 + c^2 - 2ac \cos(\beta)
+$$
+
+A Lei dos Cossenos é uma extensão do [Teorema de Pitágoras](https://en.wikipedia.org/wiki/Pythagorean_theorem) para triângulos que não são retângulos. Quando o ângulo $\theta$ é de $90^\circ$, o $\cos(90^\circ) = 0$, e a equação se reduz ao Teorema de Pitágoras:
+
+$$
+c^2 = a^2 + b^2
+$$
