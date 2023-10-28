@@ -43,11 +43,15 @@ Imagem de [Asimina Nteliou](https://pixabay.com/users/asimina-1229333/?utm_sourc
     - [Exercício 8](#exercício-8)
   - [Vetores Posição e Distância](#vetores-posição-e-distância)
     - [Exercício 9](#exercício-9)
-  - [Produto Escalar](#produto-escalar)
     - [Exercício 10](#exercício-10)
+  - [Produto Escalar](#produto-escalar)
     - [Exercício 11](#exercício-11)
     - [Exercício 12](#exercício-12)
+    - [Exercício 13](#exercício-13)
   - [Produto Vetorial](#produto-vetorial)
+    - [Exercício 14](#exercício-14)
+    - [Produto Triplo Escalar](#produto-triplo-escalar)
+  - [PRECISA REESCREVER PARA INCLUIR O CONCEITO DA REGRA DA MÃO DIREITA](#precisa-reescrever-para-incluir-o-conceito-da-regra-da-mão-direita)
   - [Usando a Álgebra Vetorial no Eletromagnetismo](#usando-a-álgebra-vetorial-no-eletromagnetismo)
     - [Lei de Coulomb](#lei-de-coulomb)
 - [Cálculo Vetorial](#cálculo-vetorial)
@@ -64,7 +68,12 @@ Imagem de [Asimina Nteliou](https://pixabay.com/users/asimina-1229333/?utm_sourc
 Estudaremos linhas de força invisíveis que se entrelaçam, tangenciam e interferem umas nas outras, formando o tecido do Cosmos e o fluxo da vida, tão real quanto a terra sob os pés ou o ar que respiramos, e como este último, completamente invisíveis.
 
 O estudo do Eletromagnetismo será uma batalha própria, individual, dura. É a esperança lançar luz sobre o desconhecido, descobrir as regras que governam a vida e o universo, e então aproveitar essas regras para criar, para progredir, para sobreviver. Não é para os fracos de coração, nem para aqueles que buscam respostas fáceis. É para aqueles que não temem o desconhecido, para os que se levantam diante do abismo do desconhecido e dizem: _eu irei entender_. É um desafio, uma luta, um chamado. E, como em qualquer luta, haverão perdas, dores, mas também vitórias, triunfos e, no final de tudo, compreensão. Esta é uma jornada que começou a milhares de anos, e ainda deverá durar outro tanto. Prepare-se sua forma de ver o universo vai mudar.
+<div class="floatRight">
 
+<img class="lazyimg" src="/assets/images/jcMaxwell.jpg" alt="Fotografia de James Clerk Maxwell">
+
+<legend class="legenda">Figura 1 - James Clerk Maxwell. Fonte: <a href="https://en.wikipedia.org/wiki/James_Clerk_Maxwell/" target="_blank">James Clerk Maxwell</a></legend>
+</div>
 Quando o século XIX caminhava para seu final, [James Clerk Maxwell](https://en.wikipedia.org/wiki/James_Clerk_Maxwell), orquestrou as danças dos campos elétrico e do magnético em uma sinfonia de equações. Desenhando na tela do universo, Maxwell delineou a interação dessas forças com o espaço e a matéria. Sua obra, extraordinária em todos os aspectos, destaca-se pela simplicidade refinada e pela beleza lírica. Um balé de números, símbolos e equações que desliza pela folha, fluido e elegante como um rio.
 
 Mas essa beleza, essa simplicidade, não é acessível a todos. Ela é um jardim murado, reservado àqueles que conquistaram o direito de entrar através de estudo e compreensão. Sem o conhecimento apropriado, seja da física que fundamenta o universo ou da matemática que o descreve, as equações de Maxwell são como flores de pedra: frias, inalteráveis, sem vida. Com esse entendimento, no entanto, elas florescem em cores e formas maravilhosas, vivas e palpitantes com significado.
@@ -89,7 +98,7 @@ O espaço será definido por vetores, cheio de mistério e beleza. A Análise ve
 
 Vetores, feixes silenciosos de informação, conduzem o entendimento além do simples tamanho. São como bússolas com uma medida, apontando com determinação e direção para desvendar os segredos das grandezas que precisam mais do que só a magnitude. Vetores, abstrações matemáticas que usamos para entender as gradezas que precisam de direção e sentido além da pura magnitude. Parecem ser o resultado da mente brilhante de [Simon Stevin](https://en.wikipedia.org/wiki/Simon_Stevin) que, estudando mecânica teve a estudando hidrostática, propôs uma regra empírica para resolver o problema de duas forças, ou mais forças, aplicadas no mesmo ponto por meio de uma regra que hoje conhecemos como a Regra do Paralelogramo publicada em _De Beghinselen der Weeghconst_ (1586; em tradução livre: Estática e Hidrostática). Usamos vetores para superar as limitações das grandezas escalares, incluindo em uma mesma representação amplitude, direção e sentido.
 
-As grandezas escalares, aquelas que podem ser medidas como medimos a massa de um peixe, o tempo que demora para o sol se pôr ou a velocidade de um veleiro cortando a paisagem em linha, quisera eu, reta. Cada grandeza escalar é um número único, uma quantidade, um fato em si mesmo carregando todo o conhecimento necessário para seu entendimento.
+As grandezas escalares, aquelas que podem ser medidas como medimos a massa de um peixe, o tempo que demora para o sol se pôr ou a velocidade de um veleiro cortando a paisagem em linha, quisera eu, reta. Cada grandeza escalar é um número único, uma quantidade, uma magnitude. Um fato em si mesmo carregando todo o conhecimento necessário para seu entendimento [^1].
 
 São as contadoras de histórias silenciosas do mundo, falando de tamanho, de quantidade, de intensidade. E, como um bom whisky, sua força reside na simplicidade. Ainda assim, as grandezas escalares oferecem uma medida da verdade.
 
@@ -97,18 +106,24 @@ As grandezas vetoriais, por outro lado são complexas, diversas e intrigantes. V
 
 A seta, uma extensão de ser do próprio vetor, representa sua sua orientação. Aponta o caminho para a verdade, mostrando não apenas o quanto, mas também o onde. Seu indica sua magnitude, o quanto, sua essência. Assim vetores escondem intensidade, direção e sentido em uma única entidade, fugaz e intrigante.
 
-As grandezas vetoriais são como o vento, cuja direção e força você sente, mas cuja essência não se pode segurar. Elas são como o rio, cujo fluxo e direção moldam a paisagem. São essenciais para entender o mundo em movimento, o mundo de forças, velocidades e acelerações. Elas dançam nas equações do eletromagnetismo, desenham os padrões da física e guiam os marinheiros na imensidão do desconhecido. No mar da compreensão, grandezas vetoriais são a bússola e o vento, dando não apenas escala, mas também orientação e sentido à nossa busca pelo conhecimento. Como é belo o idioma de Machado de Assis, mas, de tempos em tempos, temos que recorrer as imagens.
+As grandezas vetoriais são como o vento, cuja direção e força você sente, mas cuja essência não se pode segurar. Elas são como o rio, cujo fluxo e direção moldam a paisagem. São essenciais para entender o mundo em movimento, o mundo de forças, velocidades e acelerações. Elas dançam nas equações do eletromagnetismo, desenham os padrões da física e guiam os marinheiros na imensidão do desconhecido. No mar da compreensão, grandezas vetoriais são a bússola e o vento, dando não apenas escala, mas também orientação e sentido à nossa busca pelo conhecimento. Como é belo o idioma de Machado de Assis, mas, de tempos em tempos, temos que recorrer as imagens. Toda esta poesia pode ser resumida na geometria de uma seta com origem e destino em um espaço multidimensional contendo informações de direção, sentido e intensidade.
 
-![Três vetores no plano cartesiano](/assets/images/vetorPlano1.jpeg){:class="lazyimg"}
-<legend style="font-size: 1em;
-  text-align: center;
-  margin-bottom: 20px;">Figura 1 - Três vetores aleatórios no plano $(x,y$).</legend>
+![A representação geométrica de um vetor](/assets/images/vetor1.jpg){:style="display: block;
+    border: 0 none;
+    opacity: 1; transition: opacity 0.25s;
+    background: #f2f2f2; outline: 0 none; float: left;
+    width: 55%;"}
+<legend style="font-size: 1em; float: left; width: 55%;
+  text-align: center; padding: 20px;
+  margin-bottom: 20px;">Figura 1 - Um vetor $\vec{PQ}$ entre os pontos $P$ e $Q$.</legend>
 
-Toda esta poesia pode ser resumida na geometria de uma seta com origem e destino em um espaço multidimensional contendo informações de direção, sentido e intensidade. Três setas, três vetores, $A$, $B$ e $C$, em um plano. Nesta jornada, não seremos limitados pela frieza da geometria. Buscamos a grandeza da álgebra. Na álgebra vetores são representados por operações entre outros vetores.
+Nesta jornada, não seremos limitados pela frieza da geometria. Buscamos a grandeza da álgebra. Na álgebra vetores são representados por operações de soma entre outros vetores.
 
-Na física moderna usamos os vetores como definido por [Dirac](https://en.wikipedia.org/wiki/Paul_Dirac) (1902-1984), que chamamos de Vetores Ket, ou simplesmente ket. Não aqui, pelo menos não por enquanto. Aqui utilizaremos a representação vetorial como definida por [Willard Gibbs](https://en.wikipedia.org/wiki/Josiah_Willard_Gibbs) (1839–1903) no final do Século XIX. Adequada ao estudo clássico do Eletromagnetismo. O estudo das forças que tecem campos vetoriais que abraçam a própria estrutura do Universo. Invisíveis porém implacáveis.
+Tentarei, juro que tentarei, limitar o uso da geometria ao mínimo necessário para o entendimento dos conceitos relacionados a aplicação das forças, e campos, que usaremos para entender o universo do eletromagnetismo.
 
-Entender esses campos, então, é uma forma de começar a entender o universo. É ler a história que está sendo escrita nas linhas invisíveis de força. É mergulhar no mar profundo do desconhecido, e emergir com um conhecimento novo e precioso. É se tornar um tradutor da linguagem cósmica, um leitor das marcas deixadas pelas forças em seus campos. É, em resumo, a essência da ciência. E é essa ciência, esse estudo dos campos e das forças que neles atuam, que iremos explorar.
+Na física moderna, quântica principalmente, usamos os vetores como definido por [Dirac](https://en.wikipedia.org/wiki/Paul_Dirac) (1902-1984), que chamamos de Vetores Ket, ou simplesmente ket. Não aqui, pelo menos não por enquanto. Aqui utilizaremos a representação vetorial como definida por [Willard Gibbs](https://en.wikipedia.org/wiki/Josiah_Willard_Gibbs) (1839–1903) no final do Século XIX. Adequada ao estudo clássico do Eletromagnetismo. O estudo das forças que tecem campos vetoriais que abraçam a própria estrutura do Universo. Invisíveis porém implacáveis.
+
+Entender esses campos é uma forma de começar a entender o universo. É ler a história que está sendo escrita nas linhas invisíveis de força. É mergulhar no mar profundo do desconhecido, e emergir com um conhecimento novo e precioso. É se tornar um tradutor da linguagem cósmica, um leitor das marcas deixadas pelas forças em seus campos. É, em resumo, a essência da ciência. E é essa ciência, esse estudo dos campos e das forças que neles atuam, que iremos explorar. Para nós, sedentos de curiosidade, campos serão funções capazes de especificar valores em qualquer ponto de uma dada região do espaço [^1].
 
 Para lançar as pedras fundamentais do nosso conhecimento representaremos os vetores por meio de letras latinas maiúsculas $\, \vec{A}, \vec{B}, \vec{C}, ...$ marcadas com uma pequena seta. Estes vetores serão os elementos construtivos de um espaço vetorial $\textbf{V}$. Espaços vetoriais também serão representados por letras latinas maiúsculas, desta feita em negrito.
 
@@ -333,7 +348,7 @@ A multiplicação de um vetor pelo escalar $-1$ é especial. Chamamos de **vetor
 
 $$-1\, \vec{a} = -\, \vec{a}$$
 
-Há que ser oposto. Ele se opõe a grandeza que o vetor representa. Vetores não podem ser negativos [^1]. Não existem vetores negativos assim como não existem forças negativas. Por isso devem ser opostos, devem se opor a uma direção em um sentido.
+Há que ser oposto. Ele se opõe a grandeza que o vetor representa. Vetores não podem ser negativos [^2]. Não existem vetores negativos assim como não existem forças negativas. Por isso devem ser opostos, devem se opor a uma direção em um sentido.
 
 Um vetor é uma coleção de informações, uma direção, um sentido e uma magnitude. Uma tupla com três informações, nenhuma delas pode ser negativa. Por outro lado, sabemos que forças podem ser puxões, ou empurrões. Se forem iguais em um determinado ponto, não há efeito. Como representar algo que tenha a mesma intensidade, mesma direção e sentido oposto? Usamos um sinal de negativo. Sem o vetor oposto, a aritmética entre vetores seria muito complexa, ou impossível.
 
@@ -411,7 +426,7 @@ A consistência ressalta a beleza da matemática. As operações de adição e s
 
 3. **Distributividade da multiplicação por escalar em relação à adição de vetores:** Se você multiplicar a soma de dois vetores por um escalar, o resultado será o mesmo que se você multiplicar cada vetor pelo escalar e somar os resultados. Isto é, $m*(\, \vec{a} + \vec{B}) = m\, \vec{a} + m\vec{B}$.
 
-Essas propriedades são fundamentais para a manipulação de vetores em muitos campos da física e da matemática e podem ser resumidas por:
+Essas propriedades são fundamentais para a manipulação de vetores em muitas áreas da física e da matemática e podem ser resumidas por:
 
 $$\, \vec{a}+\vec{B}=\vec{B}+\, \vec{a}$$
 
@@ -553,6 +568,9 @@ Vetores são como os ventos que cruzam o mar, invisíveis mas poderosos, guiando
 
 Considere um sistema de referência onde as distâncias são dimensionadas apenas por unidades abstratas, sem especificação de unidades de medida. Nesse sistema, dois vetores são dados. O vetor $\, \vec{a}$ inicia na origem e termina no ponto $P$ com coordenadas $(8, -1, -5)$. Temos também um vetor unitário $\vec{c}$ que parte da origem em direção ao ponto $Q$, e é representado por $\frac{1}{3}(1, -3, 2)$. Se a distância entre os pontos $P$ e $Q$ é igual a 15 unidades, determine as coordenadas do ponto $Q$.
 
+### Exercício 10
+
+Considere os pontos $P$ e $Q$ localizados em $(1, 3, 2)$ e $(4, 0, -1)$, respectivamente. Calcule: (a) O vetor posição $\vec{P}$; (b) O vetor distância de $P$ para $Q$, $\vec{PQ}$; (c) A distância entre $P$ e $Q$; (d) Um vetor paralelo a $\vec{PQ}$ com magnitude de 10.
 
 ## Produto Escalar
 
@@ -641,7 +659,7 @@ $$\, \vec{a}\cdot \vec{B} = \, \vec{a}_x\vec{b}_x +\, \vec{a}_y\vec{b}_y + \, \v
 
 Não vamos usar dimensões maiores que $3$ neste estudo. Contudo, achei que a gentil leitora deveria perceber esta generalização. No futuro, em outras disciplinas, certamente irá me entender.
 
-### Exercício 10
+### Exercício 11
 
 Em um novo projeto de engenharia civil para a construção de uma estrutura triangular inovadora, foram demarcados três pontos principais para as fundações. Esses pontos, determinados por estudos topográficos e geotécnicos, foram identificados como $\mathbf{A}(4, 0, 3)$, $\mathbf{B}(-2, 3, -4)$ e $\mathbf{C}(1, 3, 1)$ em um espaço tridimensional utilizando o Sistema de Coordenadas Cartesianas. A equipe de engenheiros precisa compreender a relação espacial entre esses pontos, pois isto impacta diretamente na distribuição das cargas e na estabilidade da estrutura.
 
@@ -715,11 +733,11 @@ Primeiro, encontre $\vec{B} + \vec{C} = (1+3, 2+1, 0+3) = (4, 3, 3)$.
    \[\, \vec{a} \cdot \vec{B} + \, \vec{a} \cdot \vec{C} = 20\]
 </p>
   
-### Exercício 11
+### Exercício 12
 
 Considere o vetor $\vec{F} = (x, y, z)$ perpendicular ao vetor $\vec{G} = (2, 3, 1)$. Sabendo que $\vec{F} \cdot \vec{F} = 9$. Determine os componentes que definem o vetor $\vec{F}$.
 
-### Exercício 12
+### Exercício 13
 
 Calcule o Produto Escalar de $\vec{C} = \vec{A} - \vec{B}$ com ele mesmo.
 
@@ -742,7 +760,7 @@ A direção dessa seta, $a_n$, é decidida pela regra da mão direita. Estenda a
 
 Assim, o Produto Vetorial determina uma forma de conectar dois vetores, $A$ e $B$, e criar algo novo: um terceiro vetor, lançado diretamente para fora do plano criado por $A$ e $B$. E esse vetor, esse Produto Vetorial, tem tanto uma magnitude - a área do paralelogramo - quanto uma direção - decidida pela regra da mão direita. É uma forma de entender o espaço tridimensional. E como todas as coisas na álgebra vetorial, é simples, mas poderoso.
 
-$$A \times B = \vert A \vert  \vert B \vert sen(\theta_{AB}) a_n$$
+$$\vec{A} \times \vec{A} = \vert \vec{A} \vert  \vert \vec{B} \vert sen(\theta_{AB}) a_n$$
 
 É uma equação poderosa e simples, útil, muito útil, mas geométrica, trigonométrica e analítica. Algebricamente o Produto Vetorial pode ser encontrado usando uma matriz. As matrizes são os sargentos do exército da Álgebra Vetorial, úteis mas trabalhosas e cheias de regras. Considerando os vetores $\, \vec{a}=\, \vec{a}_x \, \vec{a}_x+\, \vec{a}_y \, \vec{a}_y+\, \vec{a}_z \, \vec{a}_z$ e $\vec{B}=B_x \, \vec{a}_x+B_y \, \vec{a}_y+B_z \, \vec{a}_z$ o Produto Vetorial $\, \vec{a}\times \vec{B}$ será encontrado resolvendo a matriz:
 
@@ -914,6 +932,81 @@ O Produto Vetorial é como uma dança entre vetores. E como todas as danças tem
   $$\, \vec{a}_y\times \, \vec{a}_z = \, \vec{a}_x$$
 
   Esta propriedade do Produto Vetorial aplicado aos componentes de um vetor é mais uma ferramenta que precisamos manter à mão. Um conjunto de regras que irão simplificar equações e iluminar o desconhecido de forma quase natural.
+
+### Exercício 14
+
+Considerando a equação analítica do Produto escalar, $\vec{A}\cdot \vec{B} =|\, \vec{a}||\vec{B}|cos(\theta)$, e a equação analítica do Produto Vetorial, $\vec{A} \times \vec{A} = \vert \vec{A} \vert  \vert \vec{B} \vert sen(\theta_{AB})$ prove que estas duas operações são distributivas.
+
+### Produto Triplo Escalar
+
+O Produto Triplo Escalar é um conceito matemático definido para operação de três vetores $\vec{A}$, $\vec{B}$, e $\vec{C}$ em um espaço tridimensional e será determinado por:
+
+$$\vec{A} \cdot (\vec{B} \times \vec{C})$$
+
+A equação tem suas raízes nas obras de matemáticos como [Augustin-Louis Cauchy](https://en.wikipedia.org/wiki/Augustin-Louis_Cauchy) e [Josiah Willard Gibbs](https://en.wikipedia.org/wiki/Josiah_Willard_Gibbs), que contribuíram para o desenvolvimento da álgebra vetorial. A notação de Gibbs é particularmente útil para representar produtos escalares e vetoriais, bem como outras operações vetoriais. Segundo a notação de Gibbs, vetores são presentados por letras latinas em negrito $\mathbf{A}$ ou por letras com setas $\vec{A}$. Além disso, as notações que usamos para representar os produtos escalares e vetoriais, também foram desenvolvidas por Gibbs. Também devemos a Gibbs as representações das operações gradiente $\nabla$, o divergente, $\nabla \cdot \vec{F}$ e o rotacional, $\nabla \times \vec{F}$ do cálculo infinitesimal de campos vetoriais. Já Cauchy estudou a Álgebra Vetorial. Sua pesquisa com determinantes ajudou a definir o uso de determinantes para a solução de operações vetoriais.
+
+O Produto Triplo Escalar pode ser expresso em termos de determinantes de matrizes. Se você tem três vetores $\vec{A} = [a_x, a_y, a_z]$, $\vec{B} = [b_x, b_y, b_z]$, e $\vec{C} = [c_x, c_y, c_z] \), o Produto Triplo Escalar $\vec{A} \cdot (\vec{B} \times \vec{C})$ será igual ao determinante da matriz $3x3$ formada pelos componentes desses vetores e dada por:
+
+$$
+\vec{A} \cdot (\vec{B} \times \vec{C}) = \begin{vmatrix}
+a_x & a_y & a_z \\
+b_x & b_y & b_z \\
+c_x & c_y & c_z
+\end{vmatrix}
+$$
+
+Cuja solução pode ser encontrada com as mesmas técnicas que usamos para resolver o Produto Vetorial. O Produto Triplo Escalar é uma extensão natural do produto vetorial e do produto escalar, e é uma ferramenta útil em várias áreas da ciência e da engenharia, incluindo física, eletromagnetismo, engenharia mecânica, e ciência da computação. A Leitora é de concordar que é uma operação simples. E como tudo que é simples, merece atenção.
+
+O vetor $\vec{B} \times \vec{C}$ representa a área de um paralelogramo cujos lados serão dados por $\vec{B}$ e $\vec{C}$. Logo, $\vec{A} \cdot (\vec{B} \times \vec{C})$ representa essa área multiplicada pelo componente de $\vec{A}$ perpendicular a esta área o que resulta em um volume. Neste caso, o volume é o mesmo, não importa como você combine os vetores $\vec{A}$, $\vec{B}$, e $\vec{C $, no Produto Triplo Escalar com exceção de:
+
+$$
+\vec{A} \cdot (\vec{B} \times \vec{C}) = -\vec{A} \cdot (\vec{C} \times \vec{B})
+$$
+
+## PRECISA REESCREVER PARA INCLUIR O CONCEITO DA REGRA DA MÃO DIREITA
+
+Portanto, o valor do Produto Triplo Escalar $\vec{A} \cdot (\vec{B} \times \vecCA})$ é positivo se os vetores $\vec{A}$, $\vec{B}$, e $\vec{C}$ são organizados de tal forma que $\vec{A}$ está no mesmo lado do plano formado por $\vec{B}$ e $\vec{B}$ como indicado pela regra da mão direita ao rotacionar $\vec{B}$ para $\vec{C}$. O valor será negativo se $\vec{A}$ está no lado oposto deste plano. O produto triplo permanece inalterado se os operadores de produto escalar e vetorial forem trocados:
+
+$$
+\vec{A} \cdot (\vec{B} \times \vec{C}) = \vec{A} \times (\vec{B} \cdot \vec{C})
+$$
+
+O Produto Triplo Escalar também é invariante sob qualquer permutação cíclica de $\vec{A}$, $\vec{B}$, e $\vec{C}$,
+
+$$
+\vec{A} \cdot (\vec{B} \times \vec{C}) = \vec{B} \cdot (\vec{C} \times \vec{A}) = \vec{C} \cdot (\vec{A} \times \vec{B})
+$$
+
+Contudo qualquer permutação anti-cíclica faz com que o Produto Triplo Escalar mude de sinal,
+
+$$
+\vec{A} \cdot (\vec{B} \times \vec{C}) = -\vec{B} \cdot (\vec{A} \times \vec{C})
+$$
+
+O Produto Triplo Escalar é zero se quaisquer dois dos vetores $\vec{A}$, $\vec{B}$, e $\vec{C}$ são paralelos, ou se $\vec{A}$, $\vec{B}$, e $\vec{C}$ são coplanares. Se $\vec{A}$, $\vec{B}$, e $\vec{C}$ não são coplanares, então qualquer vetor $\vec{R}$ pode ser escrito em termos deles:
+
+$$
+\vec{R} = \alpha \vec{A} + \beta \vec{B} + \gamma \vec{C} 
+$$
+
+Formando o produto escalar desta equação com $\vec{B} \times \vec{C}$, obtemos então
+
+$$
+\vec{R} \cdot (\vec{B} \times \vec{C}) = \alpha \vec{A} \cdot (\vec{B} \times \vec{C})
+$$
+
+portanto,
+
+$$
+\alpha = \frac{\vec{R} \cdot (\vec{B} \times \vec{C})}{\vec{A} \cdot (\vec{B} \times \vec{C})} 
+$$
+
+Expressões análogas podem ser escritas para $\beta$ e $\gamma$. Os parâmetros $\alpha$, $\beta$, e $\gamma$ são unicamente determinados, desde que 
+
+$$ \vec{A} \cdot (\vec{B} \times \vec{C}) \neq 0 $$
+
+ou seja, desde que os três vetores base não sejam coplanares.
+
 
 ## Usando a Álgebra Vetorial no Eletromagnetismo
 
@@ -1300,4 +1393,5 @@ onde $\nabla \times \mathbf{B}$ é o rotacional do campo magnético $\mathbf{B}$
 A Lei de Ampére-Maxwell representa a relação entre a corrente elétrica variável no tempo e o campo magnético rotativo que é gerado, sendo uma descrição matemática do fenômeno da indução eletromagnética. Desta forma, a operação do rotacional serve como uma ponte para unir e descrever fenômenos eletromagnéticos interdependentes, facilitando a análise e compreensão das interações complexas entre campos elétricos e magnéticos, essencial para a física moderna e inovações tecnológicas.
 
 ___
-[^1]: VENTURE, Jair J.. Álgebra Vetorial e Geometria Analítica. 10. ed. Curitiba - PR. Livrarias Curitiba, 2015.
+[^1]: SADIKU, Matthew N.O., Elementos de Eletromagnetismo. Porto Alegre: Bookman, 5a Edição, 2012  
+[^2]: VENTURE, Jair J.. Álgebra Vetorial e Geometria Analítica. Curitiba - PR: Livrarias Curitiba, 10a Edição, 2015

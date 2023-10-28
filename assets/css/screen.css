@@ -3,6 +3,7 @@ Template Name: Mediumish
 Copyright: Sal, WowThemes.net, https://www.wowthemes.net 
 License: https://www.wowthemes.net/freebies-license/ 
 */
+
 @media screen and (min-width: 1500px) {
   html {
     font-size: 18px;
@@ -922,3 +923,35 @@ p {
   text-align: justify !important;
 }
 
+.floatRight{
+  display: block;
+  border: 0 none;
+  opacity: 1;
+  transition: opacity 0.25s;
+  background: #f2f2f2;
+  outline: 0 none;
+  float: right;
+  width: 38%;
+  margin-left: 5%;
+  background-color: #fff"
+}
+
+.floatLeft {
+  display: block;
+  border: 0 none;
+  opacity: 1;
+  transition: opacity 0.25s;
+  background: #f2f2f2;
+  outline: 0 none;
+  float: left;
+  width: 38%;
+  margin-left: 5%;
+  background-color: #fff"
+}
+
+.legenda{
+  font-size: 0.8em;
+  text-align: center;
+  padding: 5%;
+  margin-bottom: 2%;
+}

@@ -1,14 +1,14 @@
 ---
 layout: post
-title: "Exercícios Resolvidos"
+title: "Exercícios s"
 author: Frank
 categories:
-  - Matemática
-  - Eletromagnetismo
+ - Matemática
+ - Eletromagnetismo
 tags:
-  - Matemática
-  - Física
-  - Eletromagnetismo
+ - Matemática
+ - Física
+ - Eletromagnetismo
 image: ""
 featured: 2023-10-24T23:42:05.134Z
 rating: 0
@@ -16,11 +16,11 @@ description: ""
 date: 2023-10-24T23:42:05.134Z
 preview: ""
 keywords: ""
-published: false
-slug: 2023-10-24T23:42:05.134Z
+published: 2023-10-24T23:42:05.134Z
+slug: 
 ---
 
-### Exercício Resolvido 1
+### Exercício 1
 
 Em uma tarde quente em um bar à beira-mar, um velho pescador conversava com um jovem aprendiz sobre os vetores. "Eles são como o vento, têm direção, sentido e intensidade", disse o pescador. "Imagine dois pontos no mar, e queremos saber a direção e força do vento entre eles". Ele desenhou no chão com um pedaço de carvão os pontos: A(1,2,3) e B(-1,-2,3). "Agora", ele perguntou, "como determinamos o vetor entre esses dois pontos?"
 
@@ -38,7 +38,7 @@ $$v = (-2, -4, 0)$$
 
 Assim, o vetor entre os pontos $A(1,2,3)$ e $B(-1,-2,3)$ é $\vec{V} = (-2, -4, 0)$.
 
-### Exercício Resolvido 2
+### Exercício 2
 
 Você é um capitão de um pequeno barco de pesca, perdido em alto mar. Sua bússola, impressa em um plano cartesiano, mostra a direção para o porto seguro como um vetor $\, \vec{a} = (4, 3, -1)$. Este vetor contém a direção e a força dos ventos e correntes que você deve enfrentar. Sua tarefa é simplificar essa informação em um vetor unitário que aponte a direção exata para o porto. Lembre-se, um vetor unitário tem magnitude $1$ e aponta na mesma direção e sentido do vetor original. Utilize suas habilidades em álgebra vetorial para encontrar esse vetor unitário e aponte seu barco para casa.
 
@@ -46,41 +46,41 @@ Você é um capitão de um pequeno barco de pesca, perdido em alto mar. Sua bús
 
 1. Cálculo da Magnitude de $\, \vec{a}$: a magnitude do vetor $\, \vec{a}$ é dada por:
 
-    $$
-    |\, \vec{a}| = \sqrt{4^2 + 3^2 + (-1)^2}
-    $$
+ $$
+ |\, \vec{a}| = \sqrt{4^2 + 3^2 + (-1)^2}
+ $$
 
-    $$
-    |\, \vec{a}| = \sqrt{16 + 9 + 1}
-    $$
+ $$
+ |\, \vec{a}| = \sqrt{16 + 9 + 1}
+ $$
 
-    $$
-    |\, \vec{a}| = \sqrt{26}
-    $$
+ $$
+ |\, \vec{a}| = \sqrt{26}
+ $$
 
-    $$
-    |\, \vec{a}| \approx 5.099
-    $$
+ $$
+ |\, \vec{a}| \approx 5.099
+ $$
 
 2. Cálculo do Vetor Unitário: para encontrar o vetor unitário $\, \vec{a}$, nós dividimos cada componente do vetor $\, \vec{a}$ pela sua magnitude:
 
-    $$
-    \vec{a} = \frac{\, \vec{a}}{|\, \vec{a}|}
-    $$
+ $$
+ \vec{a} = \frac{\, \vec{a}}{|\, \vec{a}|}
+ $$
 
-    $$
-    \vec{a} = \frac{(4, 3, -1)}{5.099}
-    $$
+ $$
+ \vec{a} = \frac{(4, 3, -1)}{5.099}
+ $$
 
-    $$
-    \vec{a} \approx (0.784, 0.588, -0.196)
-    $$
+ $$
+ \vec{a} \approx (0.784, 0.588, -0.196)
+ $$
 
 O vetor unitário correspondente ao vetor $\, \vec{a}$ é aproximadamente $(0.784, 0.588, -0.196)$. Este é o vetor que você deve seguir para apontar seu barco na direção certa para o porto seguro, independente das condições dos ventos e correntes.
 
 Se a amável leitora conseguiu entender de que forma as forças devidas a ventos e correntes estão implícitas na definição do vetor $\, \vec{a}$, já entendeu o que é um vetor unitário e como ele pode ser usado para simplificar as informação contidas em um sistema de forças.
 
-### Exercício Resolvido 3
+### Exercício 3
 
 Em um antigo mapa de um navegador solitário, as distâncias eram indicadas apenas por unidades, sem definição específica de sua medida, como se fossem passos ou palmos. Naqueles tempos, a precisão não era tão exigente, e os navegadores costumavam confiar em seus instintos e habilidades de observação. Nesse mapa peculiar, o navegador anotou:
 
@@ -139,13 +139,13 @@ Vamos tratar cada termo desta equação separada e cuidadosamente.
 
 2. Expanda $(4 + \frac{k}{2})^2$:
 
-    Primeiro, $4 + \frac{k}{2}$ se torna $4 + 0.5B$.
-    Agora, $(4 + 0.5k)^2$ é: $16 + 4k + 0.25k^2$.
+ Primeiro, $4 + \frac{k}{2}$ se torna $4 + 0.5B$.
+ Agora, $(4 + 0.5k)^2$ é: $16 + 4k + 0.25k^2$.
 
 3. Expanda $(5 + \frac{3k}{2})^2$:
 
-    Primeiro, $5 + \frac{3k}{2}$ se torna $5 + 1.5k$.
-    Agora, $(5 + 1.5k)^2$ será: $25 + 15k + 2.25k^2$
+ Primeiro, $5 + \frac{3k}{2}$ se torna $5 + 1.5k$.
+ Agora, $(5 + 1.5k)^2$ será: $25 + 15k + 2.25k^2$
 
 Combinando todas essas expansões, teremos:
 
@@ -153,7 +153,7 @@ $$k^2 + 6k + 9 + 0.25k^2 + 4k + 16 + 2.25k^2 + 15k + 25 = 144$$
 
 Somando os termos semelhantes:
 
-$3.5k^2 + 25k + 50 = 144$
+$$3.5k^2 + 25k + 50 = 144$$
 
 Esta é a equação após a combinação e expansão completa dos termos.
 
@@ -177,9 +177,9 @@ $$\vec{B} =-2.7853\, \vec{a}_x + 1.39265 \, \vec{a}_y + 4,1779 \, \vec{a}_z$$
 
 Se estivéssemos no mundo real, em um cenário que incluísse todas as características do ambiente, as forças devidas aos ventos e correntes seriam vetores separados, possivelmente variáveis em função do tempo e da sua posição no espaço. Estes vetores afetariam tanto a direção quanto a velocidade do barco e teriam que ser considerados continuamente para garantir uma rota otimizada até o porto. Contudo, para tornar o problema mais simples e atrativo, podemos considerar que todas as variações imagináveis de ventos e correntes estão representadas nas forças que atuam em cada um dos eixos cartesianos, forçando o barco em uma determinada direção criando o vetor indicado por nossa bússola. O vetor unitário, usado dessa forma estripa estas influências complexas mostrando apenas a direção e sentidos que devem ser seguidos. Assim, permitimos que mesmo o mais inexperiente marinheiro, destes mares matemáticos, perceba a beleza da matemática.
 
-### Exercício Resolvido 4
+### Exercício 4
 
-Alice é uma engenheira trabalhando no projeto de construção de uma ponte. As forças aplicadas sobre um pilar foram simplificadas até que serem reduzidas a dois vetores: $\vec{F}_1 = 4\, \vec{a}_x + 3\, \vec{a}_y$ e $\vec{F}_2 = -1\, \vec{a}_x + 2\, \vec{a}_y$ a força aplicada ao pilar será o resultado da subtração entre os vetores. Alice precisa saber qual será a força resultante após aplicar uma correção de segurança ao vetor  $\vec{F}_2$ multiplicando-o por 2. O trabalho de Alice é definir as características físicas deste pilar, o seu é ajudar Alice com estes cálculos.
+Alice é uma engenheira trabalhando no projeto de construção de uma ponte. As forças aplicadas sobre um pilar foram simplificadas até que serem reduzidas a dois vetores: $\vec{F}_1 = 4\, \vec{a}_x + 3\, \vec{a}_y$ e $\vec{F}_2 = -1\, \vec{a}_x + 2\, \vec{a}_y$ a força aplicada ao pilar será o resultado da subtração entre os vetores. Alice precisa saber qual será a força resultante após aplicar uma correção de segurança ao vetor $\vec{F}_2$ multiplicando-o por 2. O trabalho de Alice é definir as características físicas deste pilar, o seu é ajudar Alice com estes cálculos.
 
 **Solução:** começando observando que os dois vetores tem componente $\, \vec{a}_z$ zerado, isto significa que as forças já foram simplificadas até um plano. Depois multiplicamos $\vec{F}_2$ por 2:
 
@@ -187,19 +187,19 @@ $$
 2\vec{F}_2 = 2(-1\, \vec{a}_x + 2\, \vec{a}_y) = -2\, \vec{a}_x + 4\, \vec{a}_y
 $$
 
-Agora, subtraímos esse novo vetor para encontrar a força resultante $\vec{F}_{\text{resultante}}$:
+Agora, subtraímos esse novo vetor para encontrar a força resultante $\vec{F}_{\text{res}}$:
 
 $$
-\vec{F}_{\text{resultante}} = \vec{F}_1 - 2\vec{F}_2 = (4\, \vec{a}_x + 3\, \vec{a}_y) - (-2\, \vec{a}_x + 4\, \vec{a}_y)
+\vec{F}_{\text{res}} = \vec{F}_1 - 2\vec{F}_2 = (4\, \vec{a}_x + 3\, \vec{a}_y) - (-2\, \vec{a}_x + 4\, \vec{a}_y)
 $$
 
 $$
-\vec{F}_{\text{resultante}} = 6\, \vec{a}_x - \, \vec{a}_y
+\vec{F}_{\text{res}} = 6\, \vec{a}_x - \, \vec{a}_y
 $$
 
-Portanto, a força resultante após a correção de segurança será $6\, \vec{a}_x - \, \vec{a}_y$.
+Portanto, a força resultante após a correção de segurança será $\vec{F}_{\text{res}} = 6\, \vec{a}_x - \, \vec{a}_y$.
 
-### Exercício Resolvido 5
+### Exercício 5
 
 Larissa é uma física estudando o movimento de uma partícula em um campo elétrico. Ela reduziu o problema a dois vetores representando as velocidades da partícula em um momento específico:
 $\vec{V}_1 = 6\, \vec{a}_x - 4\, \vec{a}_y + 2\, \vec{a}_z$ e $\vec{V}_2 = 12\, \vec{a}_x + 8\, \vec{a}_y - 4\, \vec{a}_z$. Larissa precisa qual será a velocidade média da partícula se ele considerar que $\vec{V}_2$ deve ser dividido por $2$ graças ao efeito de uma força estranha ao sistema agindo sobre uma das partículas. Para ajudar Larissa ajude-a a determinar a velocidade média, sabendo que esta será dada pela soma destes vetores após a correção dos efeitos da força estranha ao sistema.
@@ -222,7 +222,7 @@ $$
 
 O problema descrito no enunciado acabou por provocar o cancelamento dos componentes de velocidade nos eixos $y$ e $z$, deixando a velocidade média da partícula apenas no componente $x$.
 
-### Exercício Resolvido 6
+### Exercício 6
 
 Marcela é uma física experimental realizando um experimento em um laboratório de pesquisas em um projeto para estudar o movimento de partículas subatômicas. As velocidades das partículas $A$ e $B$ são representadas pelos vetores $\vec{v}_A$ e $\vec{v}_B$, definidos por:
 
@@ -296,7 +296,7 @@ $$
 \vec{v}_R = \frac{-62\, \vec{a}_x - 16\, \vec{a}_y - 32\, \vec{a}_z}{2\sqrt{1281} }
 $$
 
-### Exercício Resolvido 7
+### Exercício 7
 
 Tudo é relativo! A amável leitora já deve ter ouvido esta frase. Uma mentira, das mais vis deste nossos tempos. Tudo é relativo, na física! Seria mais honesto. Não existe qualquer documento, artigo, livro, ou entrevista onde [Einstein](https://en.wikipedia.org/wiki/Albert_Einstein) tenha dito tal sandice. Ainda assim, isso é repetido a exaustão. Não por nós. Nós dois estamos em busca da verdade do conhecimento. E aqui, neste ponto, entra o conceito de Einstein: as leis da física são as mesmas independente do observador. Isso quer dizer que, para entender um fenômeno, precisamos criar uma relação entre o observador e o fenômeno. Dito isso, considere que você está observando um trem que corta da direita para esquerda seu campo de visão em velocidade constante $\vec{V}_t = 10 \text{km/h}$. Nesse trem, um passageiro atravessa o vagão perpendicularmente ao movimento do trem em uma velocidade dada por $\vec{V}_p = 2 \text{km/h}$. Qual a velocidade deste passageiro para você, que está colocada de forma perfeitamente perpendicular ao movimento do trem?
 
@@ -321,7 +321,7 @@ $$ \vec{V}_o = 10 \vec{a}_x + 2 \vec{a}_y $$
 
 A amável leitora deve perceber que no fenômeno descrito no enunciado, tanto o trem quanto o passageiros estão se movendo em direções perpendiculares entre si. Os vetores que representam as duas velocidades têm apenas uma componente. Contudo, visto do solo, o passageiro está se momento segundo um vetor com componentes tanto no eixo $x$ quanto no eixo $y$. Foi esta relatividade na observação do fenômeno que Einstein estudou.
 
-### Exercício Resolvido 8
+### Exercício 8
 
 **Solução:** vamos tornar o exercício 7 mais interessante: considere que você está observando um trem que corta da direita para esquerda seu campo de visão em velocidade constante $\vec{V}_t = 10 \text{km/h}$ subindo uma ladeira com inclinação de $25^\circ$. Nesse trem, um passageiro atravessa o vagão perpendicularmente ao movimento do trem em uma velocidade dada por $\vec{V}_p = 2 \text{km/h}$. Qual a velocidade deste passageiro para você, que está colocada de forma perfeitamente perpendicular ao movimento do trem?
 
@@ -356,7 +356,7 @@ Substituindo os valores:
 
 $$ \vec{V}_o = (8.83 \, \vec{a}_x + 2 \, \vec{a}_y + 4.15 \, \vec{a}_z) \, \text{km/h} $$
 
-### Exercício Resolvido 9
+### Exercício 9
 
 Considere um sistema de referência onde as distâncias são dimensionadas apenas por unidades abstratas, sem especificação de unidades de medida. Nesse sistema, dois vetores são dados. O vetor $\, \vec{a}$ inicia na origem e termina no ponto $P$ com coordenadas $(8, -1, -5)$. Temos também um vetor unitário $\vec{c}$ que parte da origem em direção ao ponto $Q$, e é representado por $\frac{1}{3}(1, -3, 2)$. Se a distância entre os pontos $P$ e $Q$ é igual a 15 unidades, determine as coordenadas do ponto $Q$.
 
@@ -384,7 +384,55 @@ $$\text{Coordenadas de } Q = (5, 15, 10)$$
 
 Isso só é possível porque tanto as coordenadas de $Q$ quanto as coordenadas de $P$ são, na verdade, os componentes dos Vetores Posição da origem até $P$ e $Q$, respectivamente. Desta forma, as coordenadas do ponto $Q$ são $(5, 15, 10)$.
 
-### Exercício Resolvido 10
+### Exercício 10
+
+Considere os pontos $\mathbf{P}$ e $\mathbf{Q}$ localizados em $(1, 3, 2)$ e $(4, 0, -1)$, respectivamente. Calcule: (a) O vetor posição $\vec{P}$; (b) O vetor distância de $P$ para $Q$, $\vec{PQ}$; (c) A distância entre $P$ e $Q$; (d) Um vetor paralelo a $\vec{PQ}$ com magnitude de 10.
+
+**Solução:**
+
+(a) O vetor posição $\vec{P}$ é simplesmente o vetor que vai da origem, $\mathbf{O}$, até o ponto $\mathbf{P}$. Ele pode ser representado como:
+
+$$
+\vec{P} = P-O = ((1-0), (3-0), (2-0)) = (1,3,2)
+$$
+
+(b) O vetor distância de $\mathbf{P}$ para $\mathbf{Q}$, $\vec{PQ}$, é calculado como $\vec{Q} - \vec{P}$. Os vetores posição para $\mathbf{P}$ e $\mathbf{Q}$ são $(1, 3, 2)$ e $ (4, 0, -1)$ respectivamente. Logo:
+
+$$
+\vec{PQ} = (4, 0, -1) - (1, 3, 2) = (3, -3, -3)
+$$
+
+(c) A distância, $\vec{D}$, entre $\mathbf{P}$ e $\mathbf{Q}$ será o módulo do vetor $\vec{PQ}$, calculado como:
+
+$$
+\vec{D} = \vert \vec{PQ} \vert = \sqrt{3^2 + (-3)^2 + (-3)^2} = \sqrt{9 + 9 + 9} \approx 5.1962
+$$
+
+(d) Um vetor paralelo a $\vec{PQ}$ com magnitude de $10$ pode ser encontrado ao normalizar $\vec{PQ}$:
+
+$$
+\vec{pq} = \frac{\vec{PQ}}{\vert \vec{PQ} \vert } = \frac{(3, -3, -3)}{\sqrt{27}}
+$$
+
+$$
+\vec{pq} = (\frac{3}{\sqrt{27}}, -\frac{3}{\sqrt{27}}, -\frac{3}{\sqrt{27}})
+$$
+
+Agora multiplicamos pela magnitude desejada de $1$:
+
+$$
+\vec{v} = 10 \vec{pq}
+$$
+
+$$
+\vec{v} = (\frac{30}{\sqrt{27}}, -\frac{30}{\sqrt{27}}, -\frac{30}{\sqrt{27}})
+$$
+
+$$
+\vec{v} \approx (5.7735, -5.7735, -5.7735)
+$$
+
+### Exercício 11
 
 Em um novo projeto de engenharia civil para a construção de uma estrutura triangular inovadora, foram demarcados três pontos principais para as fundações. Esses pontos, determinados por estudos topográficos e geotécnicos, foram identificados como $\mathbf{A}(4, 0, 3)$, $\mathbf{B}(-2, 3, -4)$ e $\mathbf{C}(1, 3, 1)$ em um espaço tridimensional utilizando o Sistema de Coordenadas Cartesianas. A equipe de engenheiros precisa compreender a relação espacial entre esses pontos, pois isto impacta diretamente na distribuição das cargas e na estabilidade da estrutura.
 
@@ -440,7 +488,7 @@ $$
 \theta_{BAC} \approx 25.63^\circ
 $$
 
-### Exercício Resolvido 11
+### Exercício 12
 
 Considere o vetor $\vec{F} = (x, y, z)$ perpendicular ao vetor $\vec{G} = (2, 3, 1)$. Sabendo que $\vec{F} \cdot \vec{F} = 9$. Determine os componentes que definem o vetor $\vec{F}$.
 
@@ -524,8 +572,7 @@ $$\vec{F_1} = \left(\frac{3}{\sqrt{5} }, 0, -\frac{6}{\sqrt{5} }\right)$$
 
 $$\vec{F_2} = \left(-\frac{3}{\sqrt{5} }, 0, \frac{6}{\sqrt{5} }\right)$$
 
-
-### Exercício 12
+### Exercício 13
 
 Calcule o Produto Escalar de $\vec{C} = \vec{A} - \vec{B}$ com ele mesmo.
 
@@ -578,3 +625,76 @@ A Lei dos Cossenos é uma extensão do [Teorema de Pitágoras](https://en.wikipe
 $$
 c^2 = a^2 + b^2
 $$
+
+### Exercício 14
+
+Considerando a equação analítica do Produto escalar, $\vec{A}\cdot \vec{B} =\vert \, \vec{a}\vert \vert\vec{B} \vert cos(\theta)$, e a equação analítica do Produto Vetorial, $\vec{A} \times \vec{A} = \vert \vec{A} \vert \vert \vec{B} \vert sen(\theta_{AB})$ prove que tanto o Produto Escalar quanto o Produto Vetorial são operações distributivas.
+
+**Solução:** começando pela prova de Distributividade do Produto Escalar, vamos considerar três vetores arbitrários $\vec{A}$, $\vec{B}$, e $\vec{C}$. Queremos mostrar que:
+
+$$
+\vec{A} \cdot (\vec{B} + \vec{C}) = \vec{A} \cdot \vec{B} + \vec{A} \cdot \vec{C}
+$$
+
+Primeiro, vamos expandir $\vec{B} + \vec{C}$ em termos de suas componentes:
+
+$$
+\vec{B} + \vec{C} = (B_x + C_x) \, \vec{a}_x + (B_y + C_y) \, \vec{a}_u + (B_z + C_z) \, \vec{a}_z
+$$
+
+Agora, podemos calcular $\vec{A} \cdot (\vec{B} + \vec{C})$ usando as componentes dos vetores:
+
+$$
+\vec{A} \cdot (\vec{B} + \vec{C}) = A_x (B_x + C_x) + A_y (B_y + C_y) + A_z (B_z + C_z)
+$$
+
+$$
+\vec{A} \cdot (\vec{B} + \vec{C}) = A_x B_x + A_x C_x + A_y B_y + A_y C_y + A_z B_z + A_z C_z
+$$
+
+$$
+\vec{A} \cdot (\vec{B} + \vec{C}) = (A_x B_x + A_y B_y + A_z B_z) + (A_x C_x + A_y C_y + A_z C_z)
+$$
+
+$$
+\vec{A} \cdot (\vec{B} + \vec{C}) = \vec{A} \cdot \vec{B} + \vec{A} \cdot \vec{C}
+$$
+
+Mostramos que $\vec{A} \cdot (\vec{B} + \vec{C}) = \vec{A} \cdot \vec{B} + \vec{A} \cdot \vec{C}$, provando assim que o produto escalar é distributivo.
+
+Para provar que o produto vetorial é distributivo vamos, novamente, considerar três vetores arbitrários $\vec{A}$, $\vec{B}$, e $ \vec{C}$. Queremos mostrar que:
+
+$$
+\vec{A} \times (\vec{B} + \vec{C}) = \vec{A} \times \vec{B} + \vec{A} \times \vec{C}
+$$
+
+Começamos expandindo $\vec{B} + \vec{C}$ em termos de suas componentes:
+
+$$
+\vec{B} + \vec{C} = (B_x + C_x) \vec{a}_x + (B_y + C_y) \vec{a}_y + (B_z + C_z) \vec{a}_z
+$$
+
+Agora, vamos calcular $\vec{A} \times (\vec{B} + \vec{C})$ usando as componentes dos vetores. O produto vetorial em termos das componentes é dado por:
+
+$$
+\vec{A} \times (\vec{B} + \vec{C}) = (A_y (B_z + C_z) - A_z (B_y + C_y)) \,\vec{a}_x + (A_z (B_x + C_x) - A_x (B_z + C_z)) \, \vec{a}_y \\ + (A_x (B_y + C_y) - A_y (B_x + C_x)) \, \vec{a}_z
+$$
+
+Expandindo, obtemos:
+
+$$
+\vec{A} \times (\vec{B} + \vec{C}) = \vec{a}_x (A_y B_z + A_y C_z - A_z B_y - A_z C_y) + \vec{a}_y (A_z B_x + A_z C_x - A_x B_z - A_x C_z) \\ + \vec{a}_z (A_x B_y + A_x C_y - A_y B_x - A_y C_x)
+$$
+
+Agrupando os termos, temos:
+
+$$
+\vec{A} \times (\vec{B} + \vec{C}) = (A_y B_z - A_z B_y) \hat{a}_x + (A_z B_x - A_x B_z) \vec{a}_y + (A_x B_y - A_y B_x) \vec{a}_z + \\ (A_y C_z - A_z C_y) \vec{a}_x + (A_z C_x - A_x C_z) \vec{a}_y + (A_x C_y - A_y C_x) \vec{a}_z
+$$
+
+$$
+\vec{A} \times (\vec{B} + \vec{C}) = \vec{A} \times \vec{B} + \vec{A} \times \vec{C}
+$$
+
+Portanto, mostramos que $ \vec{A} \times (\vec{B} + \vec{C}) = \vec{A} \times \vec{B} + \vec{A} \times \vec{C} $, provando assim que o Produto Vetorial é distributivo.
+
