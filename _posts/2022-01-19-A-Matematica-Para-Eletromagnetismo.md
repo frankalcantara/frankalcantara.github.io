@@ -27,16 +27,16 @@ Imagem de [Asimina Nteliou](https://pixabay.com/users/asimina-1229333/?utm_sourc
 
 > "Nesta longa vida eu aprendi que toda a nossa ciência se comparada com a realidade é primitiva e infantil. Ainda assim, **é a coisa mais preciosa que temos**." Albert Einstein
 
-- [Álgebra Linear](#álgebra-linear)
+- [Álgebra Vetorial](#álgebra-vetorial)
   - [Vetores, os compassos de tudo que há e haverá](#vetores-os-compassos-de-tudo-que-há-e-haverá)
     - [Exercício 1](#exercício-1)
-    - [Vetores Unitários](#vetores-unitários)
+  - [Vetores Unitários](#vetores-unitários)
     - [Exercício 2](#exercício-2)
     - [Exercício 3](#exercício-3)
   - [Multiplicação por Escalar](#multiplicação-por-escalar)
   - [Vetor Oposto](#vetor-oposto)
   - [Adição e Subtração de Vetores](#adição-e-subtração-de-vetores)
-    - [Exercício 4](#exercício-4)
+  - [Exercício 4](#exercício-4)
     - [Exercício 5](#exercício-5)
     - [Exercício 6](#exercício-6)
     - [Exercício 7](#exercício-7)
@@ -50,10 +50,10 @@ Imagem de [Asimina Nteliou](https://pixabay.com/users/asimina-1229333/?utm_sourc
     - [Exercício 13](#exercício-13)
   - [Produto Vetorial](#produto-vetorial)
     - [Exercício 14](#exercício-14)
-    - [Produto Triplo Escalar](#produto-triplo-escalar)
-  - [PRECISA REESCREVER PARA INCLUIR O CONCEITO DA REGRA DA MÃO DIREITA](#precisa-reescrever-para-incluir-o-conceito-da-regra-da-mão-direita)
-  - [Usando a Álgebra Vetorial no Eletromagnetismo](#usando-a-álgebra-vetorial-no-eletromagnetismo)
-    - [Lei de Coulomb](#lei-de-coulomb)
+  - [Produto Triplo Escalar](#produto-triplo-escalar)
+- [PRECISA REESCREVER PARA INCLUIR O CONCEITO DA REGRA DA MÃO DIREITA](#precisa-reescrever-para-incluir-o-conceito-da-regra-da-mão-direita)
+- [Usando a Álgebra Vetorial no Eletromagnetismo](#usando-a-álgebra-vetorial-no-eletromagnetismo)
+  - [Lei de Coulomb](#lei-de-coulomb)
 - [Cálculo Vetorial](#cálculo-vetorial)
   - [Campos Vetoriais](#campos-vetoriais)
   - [Gradiente](#gradiente)
@@ -67,34 +67,40 @@ Imagem de [Asimina Nteliou](https://pixabay.com/users/asimina-1229333/?utm_sourc
 
 Estudaremos linhas de força invisíveis que se entrelaçam, tangenciam e interferem umas nas outras, formando o tecido do Cosmos e o fluxo da vida, tão real quanto a terra sob os pés ou o ar que respiramos, e como este último, completamente invisíveis.
 
-O estudo do Eletromagnetismo será uma batalha própria, individual, dura. É a esperança lançar luz sobre o desconhecido, descobrir as regras que governam a vida e o universo, e então aproveitar essas regras para criar, para progredir, para sobreviver. Não é para os fracos de coração, nem para aqueles que buscam respostas fáceis. É para aqueles que não temem o desconhecido, para os que se levantam diante do abismo do desconhecido e dizem: _eu irei entender_. É um desafio, uma luta, um chamado. E, como em qualquer luta, haverão perdas, dores, mas também vitórias, triunfos e, no final de tudo, compreensão. Esta é uma jornada que começou a milhares de anos, e ainda deverá durar outro tanto. Prepare-se sua forma de ver o universo vai mudar.
+O estudo do Eletromagnetismo será uma batalha própria, individual, dura. É a esperança lançar luz sobre o desconhecido, descobrir as regras que governam a vida e o universo, e então aproveitar essas regras para criar, para progredir, para sobreviver. Não é para os fracos de coração, nem para aqueles que buscam respostas fáceis. É para aqueles que não temem o desconhecido, para os que se levantam diante do abismo do desconhecido e dizem: _eu entenderei_. 
+
+O estudo do Eletromagnetismo é um desafio, uma luta, um chamado. E, como em qualquer luta, haverão perdas, dores, mas também alegrias, triunfos e, no final de tudo, um compreensão diferente de tudo que está ao seu redor. Esta é uma jornada que começou a milhares de anos, e deverá continuar por outro tanto. Prepare-se sua forma de ver o universo vai mudar.
+
+Quando o século XIX caminhava para seu final, [James Clerk Maxwell](https://en.wikipedia.org/wiki/James_Clerk_Maxwell), orquestrou as danças dos campos elétrico e do magnético em uma sinfonia de equações. Desenhando na tela do universo, Maxwell delineou a interação dessas forças com o espaço e a matéria. Sua obra, extraordinária em todos os aspectos, destaca-se pela simplicidade refinada e pela beleza lírica. Um balé de números, símbolos e equações que desliza pela folha, fluido e elegante como um rio.
+
 <div class="floatRight">
 
 <img class="lazyimg" src="/assets/images/jcMaxwell.jpg" alt="Fotografia de James Clerk Maxwell">
 
-<legend class="legenda">Figura 1 - James Clerk Maxwell. Fonte: <a href="https://en.wikipedia.org/wiki/James_Clerk_Maxwell/" target="_blank">James Clerk Maxwell</a></legend>
+<legend class="legenda">Figura 1 - James Clerk Maxwell. Fonte: <a href="https://en.wikipedia.org/wiki/James_Clerk_Maxwell/" target="_blank">Wikipedia</a></legend>
 </div>
-Quando o século XIX caminhava para seu final, [James Clerk Maxwell](https://en.wikipedia.org/wiki/James_Clerk_Maxwell), orquestrou as danças dos campos elétrico e do magnético em uma sinfonia de equações. Desenhando na tela do universo, Maxwell delineou a interação dessas forças com o espaço e a matéria. Sua obra, extraordinária em todos os aspectos, destaca-se pela simplicidade refinada e pela beleza lírica. Um balé de números, símbolos e equações que desliza pela folha, fluido e elegante como um rio.
 
 Mas essa beleza, essa simplicidade, não é acessível a todos. Ela é um jardim murado, reservado àqueles que conquistaram o direito de entrar através de estudo e compreensão. Sem o conhecimento apropriado, seja da física que fundamenta o universo ou da matemática que o descreve, as equações de Maxwell são como flores de pedra: frias, inalteráveis, sem vida. Com esse entendimento, no entanto, elas florescem em cores e formas maravilhosas, vivas e palpitantes com significado.
 
-É aqui que embarcamos na nossa jornada, uma exploração através desse jardim de pedra e sombra, para encontrar a beleza escondida nele. Neste artigo, nosso foco estará na matemática que compõe essas equações, o esqueleto que sustenta a carne e o sangue da física. Não estaremos preocupados com as aplicações práticas ou físicas dessas equações. Essas são preocupações para outro momento, outra jornada. Aqui, nosso interesse está no abstrato, no puro, na dança dos números e símbolos que compõem as equações do eletromagnetismo.
+Aqui embarcamos na nossa jornada! Uma exploração desse jardim de pedras e sombras, na busca da beleza oculta na rispidez fria do desconhecimento. Neste livro nosso foco estará no entendimento da matemática que define, e explica, as equações que estruturam o entendimento do universo. Nosso interesse começará no abstrato, no puro, na dança dos números e símbolos que compõem estas equações e terminará, paulatinamente na análise dos fenômenos que a matemática explica. Há uma vã esperança que esta estratégia crie as estruturas cognitivas que a amável leitora precisará para entender estes fenômenos e ir além desta modesta introdução.
 
-Considere este texto como a liberação da toa, o início da sua jornada em um mar de conhecimento. Uma viagem em busca do conhecimento mais estruturante do Universo. Talvez você chegue lá, talvez não.
+Considere este texto como se estivesse liberando a nau do seu conhecimento das toas do porto da ignorância. Este é o início da sua jornada em um mar de dúvidas. Dúvidas intrigantes, excitantes e provocativas. Quase um enigma. Gosta de enigmas? Precisa vencer estes desafios? Tem a satisfação de resolvê-los? Se sim, embarque nesta viagem em busca do conhecimento mais estruturante do Universo. Talvez você chegue lá, talvez não.
 
-Lágrimas de decepção não o encontrarão em cada porto. Mesmo que não chegue ao destino desejado. Cada porto de entendimento lhe trará a luz do conhecimento ao final você será uma pessoa diferente. São mares revoltos, não será fácil. Nada que vale a pena é! E, como diria [o poeta](https://en.wikipedia.org/wiki/Fernando_Pessoa):
+Lágrimas de decepção não a encontrarão em cada porto. Isso eu posso garantir. Da mesma forma que posso antever todo o cansaço, frustração e a dor resultantes do esforço do aprendizado. Aprender, nunca é fácil. Mesmo que nossa nau não chegue ao destino desejado. Cada porto de entendimento lhe trará o presente do conhecimento no final você será uma pessoa diferente. São mares revoltos, não será fácil. Mas estaremos juntos. Eu estarei no leme, o tempo todo, tentando encontrar bons ventos e evitar mares revoltos. Como diria [o poeta](https://en.wikipedia.org/wiki/Fernando_Pessoa):
 
 > "...Tudo vale a pena Se a alma não é pequena...". Fernando Pessoa.
 
-# Álgebra Linear
+## Álgebra Vetorial
 
-Área da matemática envolvida com o espaço, vetores e seu baile atemporal, ritmado por regras intrínsecas. Vetores e Matrizes, soldados organizados em linhas e colunas, cada um contando histórias de variáveis e transformações. Divergências, gradientes e rotacionais, gestos majestosos na dança do cálculo vetorial. Tudo tão complexo quanto a vida, tão real quanto a morte, tão honesto quanto o mar, profundo, impiedoso e direto.
+Área da matemática envolvida com o espaço, vetores e seu baile atemporal, ritmado por regras intrínsecas e características do espaço. Vetores e Matrizes, soldados organizados em linhas e colunas, cada um contando histórias de variáveis e transformações. Divergências, gradientes e rotacionais, gestos majestosos na dança do cálculo vetorial. Tudo tão complexo quanto a vida, tão real quanto a morte, tão honesto quanto o mar, profundo, impiedoso e direto.
 
 >O mar bravo só respeita rei. [Arnaud Rodrigues / Chico Anísio](https://www.letras.com/baiano-os-novos-caetanos/1272051/)
 
 O espaço será definido por vetores, cheio de mistério e beleza. A Análise vetorial será a bússola do navegante, guiando-o através do vasto oceano do desconhecido. A cada dia, a cada cálculo, desvendaremos um pouco mais desse infinito, mapearemos um pouco mais desse oceano de números, direções, sentidos e valores, entendemos um pouco mais de como o Universo dança ao som da álgebra linear e da análise vetorial.
 
-## Vetores, os compassos de tudo que há e haverá
+Existe uma pequena diferença entre a álgebra vetorial e a álgebra linear. Esta última tem uma estrutura rígida e formal que, sempre que possível, eu irei ignorar na esperança de tornar mais simples a compreensão. Por isso escolhi o campo da álgebra vetorial. O mesmo campo de estudo, com menos formalidade e mais aplicação. Este é um escambo, estou trocando a beleza da rigidez matemática pela simplicidade nas operações. O vetor é o elemento primitivo da álgebra vetorial, e por ele começaremos.
+
+### Vetores, os compassos de tudo que há e haverá
 
 Vetores, feixes silenciosos de informação, conduzem o entendimento além do simples tamanho. São como bússolas com uma medida, apontando com determinação e direção para desvendar os segredos das grandezas que precisam mais do que só a magnitude. Vetores, abstrações matemáticas que usamos para entender as gradezas que precisam de direção e sentido além da pura magnitude. Parecem ser o resultado da mente brilhante de [Simon Stevin](https://en.wikipedia.org/wiki/Simon_Stevin) que, estudando mecânica teve a estudando hidrostática, propôs uma regra empírica para resolver o problema de duas forças, ou mais forças, aplicadas no mesmo ponto por meio de uma regra que hoje conhecemos como a Regra do Paralelogramo publicada em _De Beghinselen der Weeghconst_ (1586; em tradução livre: Estática e Hidrostática). Usamos vetores para superar as limitações das grandezas escalares, incluindo em uma mesma representação amplitude, direção e sentido.
 
@@ -108,16 +114,14 @@ A seta, uma extensão de ser do próprio vetor, representa sua sua orientação.
 
 As grandezas vetoriais são como o vento, cuja direção e força você sente, mas cuja essência não se pode segurar. Elas são como o rio, cujo fluxo e direção moldam a paisagem. São essenciais para entender o mundo em movimento, o mundo de forças, velocidades e acelerações. Elas dançam nas equações do eletromagnetismo, desenham os padrões da física e guiam os marinheiros na imensidão do desconhecido. No mar da compreensão, grandezas vetoriais são a bússola e o vento, dando não apenas escala, mas também orientação e sentido à nossa busca pelo conhecimento. Como é belo o idioma de Machado de Assis, mas, de tempos em tempos, temos que recorrer as imagens. Toda esta poesia pode ser resumida na geometria de uma seta com origem e destino em um espaço multidimensional contendo informações de direção, sentido e intensidade.
 
-![A representação geométrica de um vetor](/assets/images/vetor1.jpg){:style="display: block;
-    border: 0 none;
-    opacity: 1; transition: opacity 0.25s;
-    background: #f2f2f2; outline: 0 none; float: left;
-    width: 55%;"}
-<legend style="font-size: 1em; float: left; width: 55%;
-  text-align: center; padding: 20px;
-  margin-bottom: 20px;">Figura 1 - Um vetor $\vec{PQ}$ entre os pontos $P$ e $Q$.</legend>
+<div class="floatLeft">
 
-Nesta jornada, não seremos limitados pela frieza da geometria. Buscamos a grandeza da álgebra. Na álgebra vetores são representados por operações de soma entre outros vetores.
+<img class="lazyimg" src="/assets/images/vetor1.jpg" alt="Representação geométrica de um vetor, uma seta, indo de um ponto ao outro.">
+
+<legend class="legenda">Figura 2 - Representação geométrica de um vetor.</legend>
+</div>
+
+Nesta jornada, não seremos limitados pela frieza da geometria. Buscamos a grandeza da álgebra. Na álgebra vetores são representados por operações de soma entre outros vetores. 
 
 Tentarei, juro que tentarei, limitar o uso da geometria ao mínimo necessário para o entendimento dos conceitos relacionados a aplicação das forças, e campos, que usaremos para entender o universo do eletromagnetismo.
 
@@ -167,7 +171,7 @@ Já sabemos que nosso espaço $\textbf{V}$ será formado em três dimensões ent
 
 Vetores, são setas que representam forças, uma metáfora, uma abstração matemática que permite o entendimento do universo por meio da análise das forças que o compõem, definem e movimentam. Definimos um vetor simplesmente observando seu ponto de origem e destino, marcando estes pontos no espaço e traçando um seta ligando estes dois pontos. E isso deixaremos no domínio da geometria sempre que pudermos. Na álgebra do mundo real, este que estamos estudando, vetores serão definidos pela subtração. O vetor será definido pelas coordenadas do ponto de destino é o ponto de origem. Fica claro quando usamos o Sistema de Coordenadas Cartesianas.
 
-### Exercício 1
+#### Exercício 1
 
 Em uma tarde quente em um bar à beira-mar, um velho pescador conversava com um jovem aprendiz sobre os vetores. "Eles são como o vento, têm direção, sentido e intensidade", disse o pescador. "Imagine dois pontos no mar, e queremos saber a direção e força do vento entre eles". Ele desenhou no chão com um pedaço de carvão os pontos: A(1,2,3) e B(-1,-2,3). "Agora", ele perguntou, "como determinamos o vetor entre esses dois pontos?"
 
@@ -271,11 +275,11 @@ Portanto, o vetor unitário $\vec{v}_{AB}$ será dado por:
 
 Vista através de retinas atentas a matemática é simples e, muitas vezes, bela.
 
-### Exercício 2
+#### Exercício 2
 
 Você é um capitão de um pequeno barco de pesca, perdido em alto mar. Sua bússola, impressa em um plano cartesiano, mostra a direção para o porto seguro como um vetor $\, \vec{a} = (4, 3, -1)$. Este vetor contém a direção e a força dos ventos e correntes que você deve enfrentar. Sua tarefa é simplificar essa informação em um vetor unitário que aponte a direção exata para o porto. Lembre-se, um vetor unitário tem magnitude $1$ e aponta na mesma direção e sentido do vetor original. Utilize suas habilidades em álgebra vetorial para encontrar esse vetor unitário e aponte seu barco para casa.
 
-### Exercício 3
+#### Exercício 3
 
 Em um antigo mapa de um navegador solitário, as distâncias eram indicadas apenas por unidades, sem definição específica de sua medida, como se fossem passos ou palmos. Naqueles tempos, a precisão não era tão exigente, e os navegadores costumavam confiar em seus instintos e habilidades de observação. Nesse mapa peculiar, o navegador anotou:
 
@@ -283,7 +287,7 @@ Em um antigo mapa de um navegador solitário, as distâncias eram indicadas apen
 2. Um vetor unitário $b$ que, também a partir da origem, aponta na direção de um segundo ponto de interesse, $B$, e é representado por $\vec{b} = \frac{(-2, 1, 3)}{2}$.
 3. Ele também fez uma anotação de que a distância entre os dois pontos de interesse, $A$ e $B$, era de 12 unidades. Talvez essa fosse a distância que ele precisava viajar em um dia para chegar ao ponto $B$ antes do anoitecer. Talvez fosse apenas um sonho, um destino que nunca foi percorrido. Não sabemos, mas talvez seja possível determinar as coordenada exatas do ponto $B$ no mapa. Dado essas informações, qual seria a localização exata do ponto $B$ no mapa?
 
-## Multiplicação por Escalar
+### Multiplicação por Escalar
 
 Um escalar é um número, um valor, frio, simples e direto. A informação contida no escalar não precisa de direção, sentido, ou qualquer outra informação. A massa do seu navio é um valor escalar, a velocidade com que ele singra os mares é um valor vetorial.
 
@@ -342,7 +346,7 @@ A multiplicação por escalar é comutativa, associativa, distributiva e fechada
 
     $$0\, \vec{a}=0$$
 
-## Vetor Oposto
+### Vetor Oposto
 
 A multiplicação de um vetor pelo escalar $-1$ é especial. Chamamos de **vetor oposto** ao vetor $\, \vec{a}$ ao vetor que tem a mesma intensidade, a mesma direção e sentido oposto ao sentido de $\, \vec{a}$. Um Vetor Oposto é o resultado da multiplicação de um vetor pelo escalar $-1$. Logo:
 
@@ -352,7 +356,7 @@ Há que ser oposto. Ele se opõe a grandeza que o vetor representa. Vetores não
 
 Um vetor é uma coleção de informações, uma direção, um sentido e uma magnitude. Uma tupla com três informações, nenhuma delas pode ser negativa. Por outro lado, sabemos que forças podem ser puxões, ou empurrões. Se forem iguais em um determinado ponto, não há efeito. Como representar algo que tenha a mesma intensidade, mesma direção e sentido oposto? Usamos um sinal de negativo. Sem o vetor oposto, a aritmética entre vetores seria muito complexa, ou impossível.
 
-## Adição e Subtração de Vetores
+### Adição e Subtração de Vetores
 
 Olhe para os pássaros no céu. Os vetores são como o rastro de um pássaro no céu, mostrando não apenas quão longe voou, mas também a direção que escolheu. Representam forças, esses ventos invisíveis que movem o mundo, que também são assim. Eles têm amplitude e direção, forças são vetores no universo da Álgebra Linear.
 
@@ -444,13 +448,12 @@ $$(\, \vec{a} - \vec{B}) - \vec{C} ≠ \, \vec{a} - (\vec{B} - \vec{C})$$
 
 Alice é uma engenheira trabalhando no projeto de construção de uma ponte. As forças aplicadas sobre um pilar foram simplificadas até que serem reduzidas a dois vetores: $\vec{F}_1 = 4\, \vec{a}_x + 3\, \vec{a}_y$ e $\vec{F}_2 = -1\, \vec{a}_x + 2\, \vec{a}_y$ a força aplicada ao pilar será o resultado da subtração entre os vetores. Alice precisa saber qual será a força resultante após aplicar uma correção de segurança ao vetor  $\vec{F}_2$ multiplicando-o por 2. O trabalho de Alice é definir as características físicas deste pilar, o seu é ajudar Alice com estes cálculos.
 
-
-### Exercício 5
+#### Exercício 5
 
 Larissa é uma física estudando o movimento de uma partícula em um campo elétrico. Ela reduziu o problema a dois vetores representando as velocidades da partícula em um momento específico:
 $\vec{V}_1 = 6\, \vec{a}_x - 4\, \vec{a}_y + 2\, \vec{a}_z$ e $\vec{V}_2 = 12\, \vec{a}_x + 8\, \vec{a}_y - 4\, \vec{a}_z$. Larissa precisa qual será a velocidade média da partícula se ele considerar que $\vec{V}_2$ deve ser dividido por $2$ graças ao efeito de uma força estranha ao sistema agindo sobre uma das partículas. Para ajudar Larissa ajude-a a determinar a velocidade média, sabendo que esta será dada pela soma destes vetores após a correção dos efeitos da força estranha ao sistema.
 
-### Exercício 6
+#### Exercício 6
 
 Marcela é uma física experimental realizando um experimento em um laboratório de pesquisas em um projeto para estudar o movimento de partículas subatômicas. As velocidades das partículas $A$ e $B$ são representadas pelos vetores $\vec{v}_A$ e $\vec{v}_B$, definidos por:
 
@@ -460,17 +463,15 @@ $$ \vec{v}_B = 8\, \vec{a}_x + 7\, \vec{a}_y - 2\, \vec{a}_z \, \text{m/s} $$
 
 Marcela precisa calcular a velocidade resultante $\vec{v}_R$ das partículas $A$ e $B$ sabendo que neste ambiente os as velocidades das partículas são afetadas por forças provenientes de campos externos que foram modeladas na equação $\vec{v}_R = 3\vec{v}_A - 4\vec{v}_B$. Qual o vetor unitário que determina a direção e o sentido de $\vec{v}_R$ nestas condições?
 
-
-### Exercício 7
+#### Exercício 7
 
 Tudo é relativo! A amável leitora já deve ter ouvido esta frase. Uma mentira, das mais vis deste nossos tempos. Tudo é relativo, na física! Seria mais honesto. Não existe qualquer documento, artigo, livro, ou entrevista onde [Einstein](https://en.wikipedia.org/wiki/Albert_Einstein) tenha dito tal sandice. Ainda assim, isso é repetido a exaustão. Não por nós. Nós dois estamos em busca da verdade do conhecimento. E aqui, neste ponto, entra o conceito de Einstein: as leis da física são as mesmas independente do observador. Isso quer dizer que, para entender um fenômeno, precisamos criar uma relação entre o observador e o fenômeno. Dito isso, considere que você está observando um trem que corta da direita para esquerda seu campo de visão em velocidade constante $\vec{V}_t = 10 \text{km/h}$. Nesse trem, um passageiro atravessa o vagão perpendicularmente ao movimento do trem em uma velocidade dada por $\vec{V}_p = 2 \text{km/h}$. Qual a velocidade deste passageiro para você, que está colocada de forma perfeitamente perpendicular ao movimento do trem?
 
-### Exercício 8
+#### Exercício 8
 
 Vamos tornar o exercício 7 mais interessante: considere que você está observando um trem que corta da direita para esquerda seu campo de visão em velocidade constante $\vec{V}_t = 10 \text{km/h}$ subindo uma ladeira com inclinação de $25^\circ$. Nesse trem, um passageiro atravessa o vagão perpendicularmente ao movimento do trem em uma velocidade dada por $\vec{V}_p = 2 \text{km/h}$. Qual a velocidade deste passageiro para você, que está colocada de forma perfeitamente perpendicular ao movimento do trem?
 
-
-## Vetores Posição e Distância
+### Vetores Posição e Distância
 
 Um vetor posição, ou vetor ponto, é uma ferramenta útil para descrever a posição de um ponto no espaço em relação a um ponto de referência (geralmente a origem do sistema de coordenadas). Como uma flecha que começa na origem, o coração do sistema de coordenadas, onde $x$, $y$, e $z$ são todos zero, $(0,0,0)$, e termina em um ponto $P$ no espaço. Este ponto $P$ tem suas próprias coordenadas - digamos, $x$, $y$, e $z$.
 
@@ -564,15 +565,15 @@ Sendo assim o perímetro será:
 
 Vetores são como os ventos que cruzam o mar, invisíveis mas poderosos, guiando navios e direcionando correntes. Na matemática, eles têm sua própria linguagem, um código entre o visível e o invisível, mapeando direções e magnitudes. Aqui, você encontrará exercícios que irão desafiar sua habilidade de navegar por esse oceano numérico. Não são apenas problemas, mas bússolas que apontam para o entendimento mais profundo. Então pegue lápis e papel como se fossem um leme e um mapa e prepare-se para traçar seu próprio curso.
 
-### Exercício 9
+#### Exercício 9
 
 Considere um sistema de referência onde as distâncias são dimensionadas apenas por unidades abstratas, sem especificação de unidades de medida. Nesse sistema, dois vetores são dados. O vetor $\, \vec{a}$ inicia na origem e termina no ponto $P$ com coordenadas $(8, -1, -5)$. Temos também um vetor unitário $\vec{c}$ que parte da origem em direção ao ponto $Q$, e é representado por $\frac{1}{3}(1, -3, 2)$. Se a distância entre os pontos $P$ e $Q$ é igual a 15 unidades, determine as coordenadas do ponto $Q$.
 
-### Exercício 10
+#### Exercício 10
 
 Considere os pontos $P$ e $Q$ localizados em $(1, 3, 2)$ e $(4, 0, -1)$, respectivamente. Calcule: (a) O vetor posição $\vec{P}$; (b) O vetor distância de $P$ para $Q$, $\vec{PQ}$; (c) A distância entre $P$ e $Q$; (d) Um vetor paralelo a $\vec{PQ}$ com magnitude de 10.
 
-## Produto Escalar
+### Produto Escalar
 
 Há um jeito de juntar dois vetores - setas no espaço - e obter algo diferente: um número, algo mais simples, sem direção, sem sentido, direto e frio. Este é o Produto Escalar. **O resultado do Produto Escalar entre dois vetores é um valor escalar**.
 
@@ -659,7 +660,7 @@ $$\, \vec{a}\cdot \vec{B} = \, \vec{a}_x\vec{b}_x +\, \vec{a}_y\vec{b}_y + \, \v
 
 Não vamos usar dimensões maiores que $3$ neste estudo. Contudo, achei que a gentil leitora deveria perceber esta generalização. No futuro, em outras disciplinas, certamente irá me entender.
 
-### Exercício 11
+#### Exercício 11
 
 Em um novo projeto de engenharia civil para a construção de uma estrutura triangular inovadora, foram demarcados três pontos principais para as fundações. Esses pontos, determinados por estudos topográficos e geotécnicos, foram identificados como $\mathbf{A}(4, 0, 3)$, $\mathbf{B}(-2, 3, -4)$ e $\mathbf{C}(1, 3, 1)$ em um espaço tridimensional utilizando o Sistema de Coordenadas Cartesianas. A equipe de engenheiros precisa compreender a relação espacial entre esses pontos, pois isto impacta diretamente na distribuição das cargas e na estabilidade da estrutura.
 
@@ -733,15 +734,15 @@ Primeiro, encontre $\vec{B} + \vec{C} = (1+3, 2+1, 0+3) = (4, 3, 3)$.
    \[\, \vec{a} \cdot \vec{B} + \, \vec{a} \cdot \vec{C} = 20\]
 </p>
   
-### Exercício 12
+#### Exercício 12
 
 Considere o vetor $\vec{F} = (x, y, z)$ perpendicular ao vetor $\vec{G} = (2, 3, 1)$. Sabendo que $\vec{F} \cdot \vec{F} = 9$. Determine os componentes que definem o vetor $\vec{F}$.
 
-### Exercício 13
+#### Exercício 13
 
 Calcule o Produto Escalar de $\vec{C} = \vec{A} - \vec{B}$ com ele mesmo.
 
-## Produto Vetorial
+### Produto Vetorial
 
 Imagine dois vetores, $\, \vec{a}$ e $\vec{B}$, como setas lançadas no espaço. Agora, imagine desenhar um paralelogramo com as magnitudes de $A$ e $B$ como lados. O Produto Vetorial de $A$ e $B$, representado por $\, \vec{a} \times \vec{B}$, é como uma seta disparada diretamente para fora desse paralelogramo, tão perfeitamente perpendicular quanto um mastro em um navio.
 
@@ -933,7 +934,7 @@ O Produto Vetorial é como uma dança entre vetores. E como todas as danças tem
 
   Esta propriedade do Produto Vetorial aplicado aos componentes de um vetor é mais uma ferramenta que precisamos manter à mão. Um conjunto de regras que irão simplificar equações e iluminar o desconhecido de forma quase natural.
 
-### Exercício 14
+#### Exercício 14
 
 Considerando a equação analítica do Produto escalar, $\vec{A}\cdot \vec{B} =|\, \vec{a}||\vec{B}|cos(\theta)$, e a equação analítica do Produto Vetorial, $\vec{A} \times \vec{A} = \vert \vec{A} \vert  \vert \vec{B} \vert sen(\theta_{AB})$ prove que estas duas operações são distributivas.
 
@@ -1007,7 +1008,6 @@ $$ \vec{A} \cdot (\vec{B} \times \vec{C}) \neq 0 $$
 
 ou seja, desde que os três vetores base não sejam coplanares.
 
-
 ## Usando a Álgebra Vetorial no Eletromagnetismo
 
 Em um mundo onde a ciência se entrelaça com a arte, a álgebra vetorial se ergue como uma ponte sólida entre o visível e o invisível. Neste ponto da nossa jornada, navegaremos pelas correntes do eletromagnetismo, uma jornada onde cada vetor conta uma história, cada Produto Escalar revela uma conexão profunda, e cada Produto Vetorial desvenda um mistério. A matemática da Álgebra Vetorial é a ferramenta que nos guiará.
@@ -1039,7 +1039,7 @@ Nesta equação:
 - $Q_1Q_2$ representa o produto entre as intensidades das cargas que no Sistema Internacional de Unidades são medidas em Coulombs ($C$).
 - $a_{21}$ representa o vetor unitário com origem em $Q1$ e destino em $Q2$.
 
-# Cálculo Vetorial
+## Cálculo Vetorial
 
 Cálculo vetorial, soa como algo saído de uma história de ficção científica. Mas é mais terra-a-terra do que podemos imaginar de longe. Trata-se uma técnica para lidar com quantidades que têm tanto magnitude quanto direção de forma contínua. Velocidade. Força. Fluxo de um rio, Campos Elétricos, Campos Magnéticos. Coisas que não apenas têm um tamanho, mas também uma direção, um sentido. Não sei se já falei sobre isso, são as grandezas que chamamos de vetoriais e representamos por vetores.
 
@@ -1069,7 +1069,7 @@ $$
 
 A única coisa que pode encher seus olhos de lágrimas é o sal trazido pela maresia, não o medo do Cálculo Vetorial. Então, não se intimide por estas equações herméticas, quase esotéricas. O Cálculo Vetorial é apenas conjunto de ferramentas, como um canivete suíço, que nos ajuda a explorar e entender o mundo ao nosso redor. Nós vamos abrir cada ferramenta deste canivete e aprender a usá-las.
 
-## Campos Vetoriais
+### Campos Vetoriais
 
 Quando olhamos as grandezas escalares, traçamos Campos Escalares. Como uma planície aberta, eles se estendem no espaço, sem direção, mas com magnitude, definidos por uma função $\mathbf{F}(x,y,z)$, onde $x$, $y$, $z$ pertencem a um universo de triplas de números reais. Agora, para as grandezas vetoriais, moldamos Campos Vetoriais, definidos por funções vetoriais $\mathbf{F}(x,y,z)$, onde $x$, $y$, $z$ são componentes vetoriais. Em outras palavras, representamos Campos Vetoriais no espaço como um sistema onde cada ponto do espaço puxa um vetor.
 
@@ -1099,7 +1099,7 @@ Visualizar um Campo Vetorial é como assistir a uma peça, com cada vetor como u
 
 O Campo Vetorial requer cuidado, carinho e atenção, ele está em todos os pontos do espaço. Contínuo e muitas vezes, infinito. Trabalhar com a continuidade e com o infinito requer mãos calejadas e fortes. Teremos que recorrer a Newton e [Leibniz](https://en.wikipedia.org/wiki/Gottfried_Wilhelm_Leibniz) e ao Cálculo Integral e Diferencial. Não tema! Ainda que muitos se acovardem frente a continuidade este não será nosso destino. Vamos conquistar integrais e diferenciais como [Odisseu](https://en.wikipedia.org/wiki/Odysseus) conquistou [Troia](https://en.wikipedia.org/wiki/Trojan_War), antes de entrar em batalha vamos afiar espadas, lustrar escudos e lanças, na forma de gradiente, divergência e rotacional.
 
-## Gradiente
+### Gradiente
 
 Imagine-se no topo de uma montanha, cercado por terreno acidentado. Seu objetivo é descer a montanha, mas o caminho não é claramente marcado. Você olha ao redor, tentando decidir para qual direção deve seguir. O gradiente é como uma bússola que indica a direção de maior inclinação. Se você seguir o gradiente, estará se movendo na direção de maior declividade. Se a velocidade for importante é nesta direção que descerá mais rápido.
 
@@ -1208,7 +1208,7 @@ Ao derivarmos parcialmente o Campo Vetorial $\mathbf{F}$ escolhemos nosso Sistem
 
 Assim como um navegador considera a variação da profundidade do oceano em diferentes direções para traçar a rota mais segura, a derivada parcial nos ajuda a entender como uma função se comporta quando mudamos suas variáveis de entrada. O gradiente é a forma de fazermos isso em todas as dimensões, derivando em uma incógnita de cada vez.
 
-### Significado do Gradiente
+#### Significado do Gradiente
 
 Em qualquer ponto $P$ o gradiente é um vetor que aponta na direção da maior variação de um Campo Escalar neste ponto. Nós podemos voltar ao exemplo 8 e tentar apresentar isso de uma forma mais didática. Primeiro o gráfico do Campo Escalar dado por: $\mathbf{F}(x,y) = 10sin(\frac{x^2}{5})+4y$.
 
@@ -1228,7 +1228,7 @@ Em cada ponto da Figura 5 a cor da superfície foi definida de acordo com a inte
 
 É só isso. Se a paciente leitora entendeu até aqui, entendeu o gradiente e já sabe aplicá-lo. Eu disse que a pouparia de lágrimas desnecessárias. E assim o fiz.
 
-### Propriedades do Gradiente
+#### Propriedades do Gradiente
 
 O reino do gradiente é o reino dos Campos Escalares, o gradiente tem características matemáticas distintas que o guiam em sua exploração:
 
@@ -1278,7 +1278,7 @@ Estas propriedades, como as leis imutáveis da física, regem a conduta do gradi
 
 Essas propriedades do gradiente são como setas, apontando o caminho através das complexidades do eletromagnetismo. O gradiente é a ferramenta mais simples do nosso canivete suíço do cálculo vetorial.
 
-## Divergência
+### Divergência
 
 Seu barco sempre será pequeno perto do oceano e da força do vento. Você sente o vento em seu rosto, cada sopro, uma força direcional, um vetor com magnitude e direção. Todo o oceano e a atmosfera acima dele compõem um campo vetorial, com o vento soprando em várias direções, forças aplicadas sobre o seu barco.
 
@@ -1296,7 +1296,7 @@ A divergência, então, é como a "taxa de expansão" do vento em um determinado
 
 Sendo um pouco mais frio podemos dizer que a divergência é um operador diferencial que atua sobre um Campo Vetorial para produzir um Campo Escalar. Em termos físicos, a divergência em um ponto específico de um Campo Vetorial representa a fonte ou dreno no ponto: uma divergência positiva indica que neste ponto existe uma fonte, ou fluxo de vetores para fora, divergindo. Enquanto uma divergência negativa indica um dreno ou fluxo para dentro, convergindo.
 
-### Fluxo e a Lei de Gauss
+#### Fluxo e a Lei de Gauss
 
 O fluxo, nas margens do cálculo vetorial, é **uma medida da quantidade de campo que passa através de uma superfície**. Imagine um rio, com a água fluindo com velocidades e direções variadas. Cada molécula de água tem uma velocidade - um vetor - e toda a massa de água compõe um Campo Vetorial.
 
@@ -1316,7 +1316,7 @@ $$
 
 Onde, $V$ é o volume da região, e **a Lei de Gauss afirma que a divergência de um campo vetorial em um ponto é igual à taxa de variação do fluxo do campo através de uma superfície que envolve o ponto**.
 
-### Teorema da Divergência
+#### Teorema da Divergência
 
 Imagine-se como um explorador atravessando o vasto terreno do cálculo vetorial. Você se depara com duas paisagens: a superfície e o volume. Cada uma tem suas próprias características e dificuldades, mas há uma ponte que as conecta, uma rota que permite viajar entre elas. Esta é a Lei de Gauss.
 
@@ -1330,7 +1330,7 @@ Uma integral tripla igual a uma integral dupla. Aqui, $dV$ é um pedaço infinit
 
 Com a Lei de Gauss, podemos ir e voltar entre a superfície e o volume, entre o plano e o volume. Esta é a beleza e o poder da matemática: a linguagem e as ferramentas para navegar pelos mais complexos terrenos.
 
-### Propriedades da Divergência
+#### Propriedades da Divergência
 
 No universo dos campos vetoriais, a divergência tem propriedades matemáticas distintas que servem como marcos na paisagem:
 
@@ -1366,7 +1366,7 @@ Esta propriedade é um reflexo do fato de que as linhas de campo do rotacional d
 
 Essas propriedades são como as leis inabaláveis que governam o comportamento da divergência em sua jornada através dos campos vetoriais.
 
-## Rotacional
+### Rotacional
 
 Imagine estar no meio de um tornado, onde o vento gira em um padrão circular em torno de um ponto central. O movimento deste vento pode ser descrito como um campo vetorial, que tem tanto uma direção quanto uma magnitude em cada ponto no espaço. Agora, considere um pequeno ponto neste campo - o rotacional é uma operação matemática que lhe dirá quão rapidamente e em que direção o vento está girando em torno deste ponto.
 
