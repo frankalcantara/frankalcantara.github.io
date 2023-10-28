@@ -129,43 +129,43 @@ Na física moderna, quântica principalmente, usamos os vetores como definido po
 
 Entender esses campos é uma forma de começar a entender o universo. É ler a história que está sendo escrita nas linhas invisíveis de força. É mergulhar no mar profundo do desconhecido, e emergir com um conhecimento novo e precioso. É se tornar um tradutor da linguagem cósmica, um leitor das marcas deixadas pelas forças em seus campos. É, em resumo, a essência da ciência. E é essa ciência, esse estudo dos campos e das forças que neles atuam, que iremos explorar. Para nós, sedentos de curiosidade, campos serão funções capazes de especificar valores em qualquer ponto de uma dada região do espaço [^1].
 
-Para lançar as pedras fundamentais do nosso conhecimento representaremos os vetores por meio de letras latinas maiúsculas $\, \vec{A}, \vec{B}, \vec{C}, ...$ marcadas com uma pequena seta. Estes vetores serão os elementos construtivos de um espaço vetorial $\textbf{V}$. Espaços vetoriais também serão representados por letras latinas maiúsculas, desta feita em negrito.
+Para lançar as pedras fundamentais do nosso conhecimento representaremos os vetores por meio de letras latinas maiúsculas $\, \vec{A}, \vec{B}, \vec{C}, ...$ marcadas com uma pequena seta. Estes vetores serão os elementos construtivos de um espaço vetorial $\mathbf{V}$. Como a leitora pode ver espaços vetoriais também serão representados por letras latinas maiúsculas, desta feita em negrito.
 
 Neste texto introdutório, mapa de nossa jornada, os espaços vetoriais serão sempre representados em três dimensões. O espaço que procuramos é o nosso, o espaço onde vivemos, a forma como percebemos mares, montanhas, planícies, o céu, nosso universo.
 
-Não é qualquer espaço, é um espaço específico, limitado à realidade e limitante das operações que podemos fazer para defini-lo. Assim, nosso estudo se fará a partir de um espaço vetorial que satisfaça às seguintes condições:
+Não é qualquer espaço, é um espaço específico, limitado à realidade e limitante das operações que podemos fazer com os elementos deste espaço. Assim, nosso estudo se fará a partir de um espaço vetorial específico. Um espaço vetorial $\mathbf{V}$ que satisfaça às seguintes condições:
 
-1. o espaço vetorial $\textbf{V}$ seja fechado em relação a adição. Isso quer dizer que para cada par de vetores $\, \vec{a}$ e $\vec{B}$ pertencentes a $\textbf{V}$ existe um, e somente um, vetor $\vec{C}$ que representa a soma de $\, \vec{a}$ e $\vec{B}$ e que também pertence ao espaço vetorial $\textbf{V}$, dizemos que:
+1. o espaço vetorial $\mathbf{V}$ seja fechado em relação a adição. Isso quer dizer que para cada par de vetores $\vec{A}$ e $\vec{B}$ pertencentes a $\mathbf{V}$ existe um, e somente um, vetor $\vec{C}$ que representa a soma de $\vec{A}$ e $\vec{B}$ e que também pertence ao espaço vetorial $\mathbf{V}$, dizemos que:
 
-    $$\exists \, \vec{a} \in \textbf{V} \wedge \exists \vec{B} \in \textbf{V} \therefore \exists (\, \vec{a}+\vec{B}=\vec{C}) \in \textbf{V}$$
+    $$\exists \, \vec{A} \in \mathbf{V} \wedge \exists \vec{B} \in \mathbf{V} \therefore \exists (\, \vec{a}+\vec{B}=\vec{C}) \in \mathbf{V}$$
 
 2. a adição seja associativa:
 
-   $$(\, \vec{a}+\vec{B})+\vec{C} = \, \vec{a}+(\vec{B}+\vec{C})$$
+   $$(\, \vec{A}+\vec{B})+\vec{C} = \, \vec{a}+(\vec{B}+\vec{C})$$
 
-3. existe um vetor zero: a adição deste vetor zero a qualquer vetor $\, \vec{a}$ resulta no próprio vetor $\, \vec{a}$, inalterado, imutável. De tal forma que:
+3. existe um vetor zero: a adição deste vetor zero a qualquer vetor $\, \vec{A}$ resulta no próprio vetor $\, \vec{A}$, inalterado, imutável. De tal forma que:
 
-   $$\forall \, \vec{a} \in \textbf{V} \space \space \exists \wedge \vec{0} \in \space \textbf{V} \space \therefore \space \vec{0}+\, \vec{a}=\, \vec{a}$$
+   $$\forall \, \vec{A} \in \mathbf{V} \space \space \exists \wedge \vec{0} \in \space \mathbf{V} \space \therefore \space \vec{0}+\, \vec{A}=\, \vec{A}$$
 
-4. existe um vetor negativo $-\, \vec{a}$ de forma que a soma de um vetor com seu vetor negativo resulta no vetor zero. Tal que:
+4. existe um vetor negativo $-\, \vec{A}$ de forma que a soma de um vetor com seu vetor negativo resulta no vetor zero. Tal que:
 
-   $$\exists -\, \vec{a} \in \textbf{V} \space \space \vert \space \space -\, \vec{a}+\, \vec{a}=\vec{0}$$
+   $$\exists -\, \vec{A} \in \mathbf{V} \space \space \vert \space \space -\, \vec{A}+\, \vec{A}=\vec{0}$$
 
-5. o espaço vetorial $\textbf{V}$ seja fechado em relação a multiplicação por um escalar, um valor sem direção ou sentido, de tal forma que para todo e qualquer elemento $c$ do conjunto dos números complexos $\mathbb{C}$ multiplicado por um vetor $\, \vec{a}$ do espaço vetorial $\textbf{V}$ existe um, e somente um vetor $c\, \vec{a}$ que também pertence ao espaço vetorial $\textbf{V}$. Tal que:
+5. o espaço vetorial $\mathbf{V}$ seja fechado em relação a multiplicação por um escalar, um valor sem direção ou sentido, de tal forma que para todo e qualquer elemento $c$ do conjunto dos números complexos $\mathbb{C}$ multiplicado por um vetor $\, \vec{a}$ do espaço vetorial $\mathbf{V}$ existe um, e somente um vetor $c\, \vec{a}$ que também pertence ao espaço vetorial $\mathbf{V}$. Tal que:
 
-   $$\exists \space c \in \mathbb{C} \space \space \wedge \space \space \exists \space \, \vec{a} \in \textbf{V} \space \space \therefore \space \space \exists \space c\, \vec{a} \in \textbf{V}$$
+   $$\exists \space c \in \mathbb{C} \space \space \wedge \space \space \exists \space \, \vec{A} \in \mathbf{V} \space \space \therefore \space \space \exists \space c\, \vec{A} \in \mathbf{V}$$
 
-6. Existe um escalar neutro $1$: tal que a multiplicação de qualquer vetor $\, \vec{a}$ por $1$ resulta em $\, \vec{a}$. Ou seja:
+6. Existe um escalar neutro $1$: tal que a multiplicação de qualquer vetor $\vec{A}$ por $1$ resulta em $\, \vec{A}$. Ou seja:
 
-   $$\exists \space 1 \in \mathbb{R} \space \space \wedge \space \space \exists \space \, \vec{a} \in \textbf{V} \space \space \vert \space \space 1\, \vec{a} = \, \vec{a}$$
+   $$\exists \space 1 \in \mathbb{R} \space \space \wedge \space \space \exists \space \, \vec{A} \in \mathbf{V} \space \space \vert \space \space 1\, \vec{A} = \, \vec{A}$$
 
-É preciso manter a atenção voltada para a verdade da hierarquia que rege o mundo dos conjuntos. O conjunto dos números reais $\mathbb{R}$ é um subconjunto do conjunto dos números imaginários $\mathbb{C}=\{a+bi \space \space a.b \in \mathbb{R}\}$. Esta relação de contenção determina que o conjunto $\mathbb{R}$, o conjunto dos números reais, se visto de forma mais abrangente, representa de forma concisa, todos os números imaginários cuja parte imaginária é igual a zero. Se usarmos a linguagem da matemática dizemos que:
+É preciso manter a atenção voltada para a hierarquia que rege o mundo dos conjuntos. O conjunto dos números reais $\mathbb{R}$ é um subconjunto do conjunto dos números imaginários $\mathbb{C}=\{a+bi \space \space a.b \in \mathbb{R}\}$. Esta relação de pertencimento determina que o conjunto $\mathbb{R}$, o conjunto dos números reais, se visto de forma mais abrangente, representa de forma concisa, todos os números imaginários cuja parte imaginária é igual a zero. Se usarmos a linguagem da matemática dizemos que:
 
 $$\mathbb{R}=\{a+bi \space \space \vert \space \space a.b \in \mathbb{R} \wedge b=0\}$$
 
-A representação algébrica dos vetores definida por [Willard Gibbs](https://en.wikipedia.org/wiki/Josiah_Willard_Gibbs) (1839–1903), que usaremos neste documento, indica que um vetor em um espaço vetorial $\textbf{V}$ qualquer é, pura e simplesmente, o resultado de operações realizadas entre os vetores que definem os componentes deste espaço vetorial.
+A representação algébrica dos vetores definida por [Willard Gibbs](https://en.wikipedia.org/wiki/Josiah_Willard_Gibbs) (1839–1903), que usaremos neste documento, indica que um vetor em um espaço vetorial $\mathbf{V}$ qualquer é, pura e simplesmente, o resultado de operações realizadas entre os vetores que definem os componentes deste espaço vetorial.
 
-Já sabemos que nosso espaço $\textbf{V}$ será formado em três dimensões então precisamos escolher um conjunto de coordenadas, que definam os pontos deste espaço e usar estes pontos para determinar os componentes vetoriais que usaremos para especificar todos os vetores do espaço $\textbf{V}$.
+Já sabemos que nosso espaço $\mathbf{V}$ será formado em três dimensões então precisamos escolher um conjunto de coordenadas, que definam os pontos deste espaço e usar estes pontos para determinar os componentes vetoriais que usaremos para especificar todos os vetores do espaço $\mathbf{V}$.
 
 [Maxwell](https://en.wikipedia.org/wiki/James_Clerk_Maxwell), seguindo os passos de [Newton](https://en.wikipedia.org/wiki/Isaac_Newton), também se apoiou nos ombros de gigantes. E eis que em nossa jornada nos defrontamos com um destes gigantes. Em meados do Século XVII, [René Descartes](https://plato.stanford.edu/entries/descartes/) criou um sistema de coordenadas definindo o espaço que conhecemos. Tão preciso, simples e eficiente que prevaleceu contra o tempo e até hoje leva o nome latino do seu criador: **Sistema de Coordenadas Cartesianas**.
 
@@ -179,7 +179,7 @@ No Sistema de Coordenadas Cartesianas, limitamos o espaço com três eixos, perp
 
 Lembrando: **a magnitude de um vetor é seu comprimento. Vetores unitários tem comprimento $1$**.
 
-O encanto da matemática se apresenta quando dizemos que todos os vetores do espaço vetorial $\textbf{V}$ podem ser representados por somas dos vetores unitários $(\, \vec{a}_x, \, \vec{a}_y, \, \vec{a}_z)$ desde que estes vetores sejam multiplicados independentemente por fatores escalares. Isto implica, ainda que não fique claro agora, que **qualquer vetor no espaço será o produto de um vetor unitário por um escalar**. Para que fique claro temos que entender os vetores unitários.
+O encanto da matemática se apresenta quando dizemos que todos os vetores do espaço vetorial $\mathbf{V}$ podem ser representados por somas dos vetores unitários $(\, \vec{a}_x, \, \vec{a}_y, \, \vec{a}_z)$ desde que estes vetores sejam multiplicados independentemente por fatores escalares. Isto implica, ainda que não fique claro agora, que **qualquer vetor no espaço será o produto de um vetor unitário por um escalar**. Para que fique claro temos que entender os vetores unitários.
 
 ### Vetores Unitários
 
@@ -193,7 +193,7 @@ $$\vert \, \vec{a}_B \vert=1$$
 
 Agora que conhecemos os vetores unitários podemos entender as regras que sustentam a Álgebra Vetorial e fazem com que todos os conceitos geométricos que fundamentaram a existência de vetores possam ser representados algebricamente, sem linhas nem ângulos, em um espaço, desde que este espaço esteja algebricamente definido em um sistema de coordenadas. Aqui, usaremos sistemas de coordenadas tridimensionais.
 
-Em um sistema de coordenadas tridimensionais ortogonais podemos expressar qualquer vetor na forma da soma dos seus componentes unitários ortogonais. Qualquer vetor, independente da sua direção, sentido, ou magnitude pode ser representado pela soma dos os vetores unitários que representam as direções, eixos e coordenadas, do sistema de coordenadas escolhido. A cada fator desta soma daremos o nome de _componente vetorial_, ou simplesmente componente. Existirá um componente para cada dimensão do sistema de coordenadas e estes componentes são específicos do sistema de coordenadas que escolhermos para representar o espaço que chamaremos $\textbf{V}$.
+Em um sistema de coordenadas tridimensionais ortogonais podemos expressar qualquer vetor na forma da soma dos seus componentes unitários ortogonais. Qualquer vetor, independente da sua direção, sentido, ou magnitude pode ser representado pela soma dos os vetores unitários que representam as direções, eixos e coordenadas, do sistema de coordenadas escolhido. A cada fator desta soma daremos o nome de _componente vetorial_, ou simplesmente componente. Existirá um componente para cada dimensão do sistema de coordenadas e estes componentes são específicos do sistema de coordenadas que escolhermos para representar o espaço que chamaremos $\mathbf{V}$.
 
 Como somos marinheiros de primeira viagem, navegamos de dia, em mares conhecidos mantendo a terra a vista. Neste caso, começaremos com o Sistema de Coordenadas Cartesianas. Um sistema de coordenadas conhecido, seguro e fácil de representar. Não será difícil visualizar um espaço vetorial definido neste sistema já que é o espaço em que vivemos. A sala de sua casa tem uma largura $x$, um comprimento $y$ e uma altura $z$. No Sistema de Coordenadas Cartesianas a representação de um vetor $\vec{B}$ qualquer, segundo seus componentes unitários e ortogonais será dada por:
 
@@ -305,7 +305,7 @@ Voltaremos aos números complexos quando for conveniente ao entendimento de fen�
 
 A multiplicação de um vetor $\vec{B}$ por um escalar implica na multiplicação de cada um dos componentes $b$ desse vetor por este escalar.
 
-Os escalares que usaremos nesta jornada serão elementos do conjunto dos números reais $\Bbb{R}$. Sem esquecer que, como vimos antes, os elementos dos conjunto dos números reais $\Bbb{R}$ são um subconjunto do conjunto dos números complexos $\Bbb{C}$ a mesma definição que utilizamos quando explicitamos as regras de formação do espaço vetorial $\textbf{V}$ ao definirmos o universo em que estamos navegando.
+Os escalares que usaremos nesta jornada serão elementos do conjunto dos números reais $\Bbb{R}$. Sem esquecer que, como vimos antes, os elementos dos conjunto dos números reais $\Bbb{R}$ são um subconjunto do conjunto dos números complexos $\Bbb{C}$ a mesma definição que utilizamos quando explicitamos as regras de formação do espaço vetorial $\mathbf{V}$ ao definirmos o universo em que estamos navegando.
 
 A multiplicação de cada componente por um escalar é muito simples e quase não requer um exemplo. Quase.
 
@@ -369,7 +369,7 @@ Como os pássaros no céu, os vetores também podem se juntar, ou se afastar. A 
 
 Eu não vou lhe guiar em uma jornada pelo mundo das formas e linhas, não aqui, não agora. Mesmo assim, a amável leitora precisa lembrar que a geometria, silenciosa e imóvel, sempre estará lá, por baixo de tudo, o esqueleto do invisível que dá forma física do nosso universo.
 
-A matemática irascível, nos força a dizer que o espaço vetorial $\textbf{V}$ é fechado em relação a soma de vetores. Forma direta de dizer que a soma de dois vetores do espaço $\textbf{V}$ resulta em um vetor deste mesmo espaço. Fechamento é um conceito da álgebra, e determina quais operações binárias que aplicadas os elementos de um conjunto, resultam em elementos deste mesmo conjunto.
+A matemática irascível, nos força a dizer que o espaço vetorial $\mathbf{V}$ é fechado em relação a soma de vetores. Forma direta de dizer que a soma de dois vetores do espaço $\mathbf{V}$ resulta em um vetor deste mesmo espaço. Fechamento é um conceito da álgebra, e determina quais operações binárias que aplicadas os elementos de um conjunto, resultam em elementos deste mesmo conjunto.
 
 Limitados como estamos pela Álgebra Linear, veremos que a soma de vetores em um dado espaço vetorial será feita componente a componente. Se considerarmos os vetores $\, \vec{a}$ e $\vec{B}$ poderemos encontrar um vetor $\vec{C}$ que será a soma de $\, \vec{a}$ e $\vec{B}$ representada por $\vec{C}=\, \vec{a}+\vec{B}$ por:
 
@@ -682,7 +682,7 @@ $$\, \vec{a}\cdot \, \vec{a} = \vert \, \vec{a} \vert^2$$
 
 Para simplificar, vamos dizer que $\, \vec{a}^2$ é o mesmo que $ \vert \, \vec{a} \vert ^2$. Uma notação, uma abreviação para o comprimento, magnitude, de $\, \vec{a}$ ao quadrado. Aqui está a lição: **um vetor e ele mesmo, lado a lado, são definidos pela magnitude do próprio vetor, ao quadrado**. É um pequeno pedaço de sabedoria, um truque, uma ferramenta. Mantenha esta ferramenta sempre à mão, você vai precisar.
 
-Assim como as ondas em uma praia, indo e voltando, de tempos em tempos precisamos rever as ferramentas que adquirimos e o conhecimento que construímos com elas. Em todos os sistemas de coordenadas que usamos para definir o espaço $\textbf{V}$ os vetores unitários são ortogonais. Setas no espaço que se cruzam em um ângulo reto. Este ângulo reto garante duas propriedades interessantes.
+Assim como as ondas em uma praia, indo e voltando, de tempos em tempos precisamos rever as ferramentas que adquirimos e o conhecimento que construímos com elas. Em todos os sistemas de coordenadas que usamos para definir o espaço $\mathbf{V}$ os vetores unitários são ortogonais. Setas no espaço que se cruzam em um ângulo reto. Este ângulo reto garante duas propriedades interessantes.
 
 $$\, \vec{a}_x\cdot \, \vec{a}_y=\, \vec{a}_x\cdot \, \vec{a}_z=\, \vec{a}_y\cdot \, \vec{a}_z=0$$
 
