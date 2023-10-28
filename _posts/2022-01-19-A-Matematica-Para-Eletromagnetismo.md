@@ -362,12 +362,14 @@ Olhe para os pássaros no céu. Os vetores são como o rastro de um pássaro no 
 
 Como os pássaros no céu, os vetores também podem se juntar, ou se afastar. A soma, a subtração, fazem parte do seu voo. Alguns podem achar útil imaginar isso, recorrendo a geometria, como um paralelogramo, uma forma com lados paralelos que mostra como um vetor soma ao outro.
 
-![Soma de Vetores com a Regra do Paralelogramo](/assets/images/SomaVetores.jpeg){:class="lazyimg"}
-<legend style="font-size: 1em;
-  text-align: center;
-  margin-bottom: 20px;">Figura 2 - Regra do Paralelogramo - Soma geométrica de Vetores.</legend>
+<div class="floatRight">
 
-Eu não vou lhe guiar em uma jornada pelo mundo das formas e linhas, não aqui, não agora. Mesmo assim, a amável leitora precisa lembrar que a geometria, silenciosa e imóvel, sempre estará lá, por baixo de tudo, o esqueleto do invisível que dá forma física do nosso universo.
+<img class="lazyimg" src="/assets/images/SomaVetores.jpeg" alt="Paralelogramo formado pelos vetores originais, suas translações no espaço e a representação do vetor soma.">
+
+<legend class="legenda">Figura 3 - Soma de vetores usando a regra do paralelogramo.</legend>
+</div>
+
+Eu não vou lhe guiar em uma jornada pelo mundo das formas e linhas, não aqui, não agora. Mesmo assim, a amável leitora precisa lembrar que a geometria, silenciosa e imóvel, sempre estará lá, por baixo de tudo, o esqueleto do invisível que dá forma física do nosso universo. A soma de vetores, pode ser visualizada em um espaço bidimensional, um plano. Neste caso, podemos transladar os vetores e formar um paralelogramo. A diagonal maior deste paralelogramo representa a soma dos vetores. A leitora precisa olhar esta soma com carinho e cuidado. Observe que quando encontramos a diagonal principal, encontramos também uma área. A área do paralelogramo.
 
 A matemática irascível, nos força a dizer que o espaço vetorial $\mathbf{V}$ é fechado em relação a soma de vetores. Forma direta de dizer que a soma de dois vetores do espaço $\mathbf{V}$ resulta em um vetor deste mesmo espaço. Fechamento é um conceito da álgebra, e determina quais operações binárias que aplicadas os elementos de um conjunto, resultam em elementos deste mesmo conjunto.
 
