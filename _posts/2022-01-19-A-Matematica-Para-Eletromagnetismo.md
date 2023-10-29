@@ -373,20 +373,20 @@ Eu não vou lhe guiar em uma jornada pelo mundo das formas e linhas, não aqui, 
 
 A matemática irascível, nos força a dizer que o espaço vetorial $\mathbf{V}$ é fechado em relação a soma de vetores. Forma direta de dizer que a soma de dois vetores do espaço $\mathbf{V}$ resulta em um vetor deste mesmo espaço. Fechamento é um conceito da álgebra, e determina quais operações binárias que aplicadas os elementos de um conjunto, resultam em elementos deste mesmo conjunto.
 
-Limitados como estamos pela Álgebra Linear, veremos que a soma de vetores em um dado espaço vetorial será feita componente a componente. Se considerarmos os vetores $\, \vec{a}$ e $\vec{B}$ poderemos encontrar um vetor $\vec{C}$ que será a soma de $\, \vec{a}$ e $\vec{B}$ representada por $\vec{C}=\, \vec{a}+\vec{B}$ por:
+Limitados como estamos pela Álgebra Linear, veremos que a soma de vetores em um dado espaço vetorial será feita componente a componente. Se considerarmos os vetores $\vec{A}$ e $\vec{B}$ poderemos encontrar um vetor $\vec{C}$ que será a soma de $\vec{A}$ e $\vec{B}$ representada por $\vec{C}=\vec{A}+\vec{B}$ por:
 
-$$\vec{C}=\, \vec{a}+\vec{B}=(\, \vec{a}_x \, \vec{a}_x+\, \vec{a}_y \, \vec{a}_y+\, \vec{a}_z \, \vec{a}_z)+(B_x \, \vec{a}_x+B_y \, \vec{a}_y+B_z \, \vec{a}_z)$$
+$$\vec{C}= \vec{A}+\vec{B}=(\, \vec{a}_x \, \vec{a}_x+\, \vec{a}_y \, \vec{a}_y+\, \vec{a}_z \, \vec{a}_z)+(B_x \, \vec{a}_x+B_y \, \vec{a}_y+B_z \, \vec{a}_z)$$
 
-$$\vec{C}=\, \vec{a}+\vec{B}=(\, \vec{a}_x+B_x)\, \vec{a}_x+(\, \vec{a}_y+B_y)\, \vec{a}_y+(\, \vec{a}_y+B_y)\, \vec{a}_z$$
+$$\vec{C}=\vec{A}+\vec{B}=(\, \vec{a}_x+B_x)\, \vec{a}_x+(\, \vec{a}_y+B_y)\, \vec{a}_y+(\, \vec{a}_y+B_y)\, \vec{a}_z$$
 
 <p class="exp">
 <b>Exemplo 4:</b><br>
-Se $\, \vec{a}=5\, \vec{a}_x-3\, \vec{a}_y+\, \vec{a}_z$ e $\vec{B}=\, \vec{a}_x+4\, \vec{a}_y-7\, \vec{a}_z$. Calcule $\vec{C}=vec{A}+\vec{B}$.<br><br>
+Se \vec{A}=5\vec{a}_x-3\, \vec{a}_y+\, \vec{a}_z$ e $\vec{B}=\, \vec{a}_x+4\, \vec{a}_y-7\, \vec{a}_z$. Calcule $\vec{C}=vec{A}+\vec{B}$.<br><br>
 <b>Solução</b>
 
-\[\vec{C}=\, \vec{a}+\vec{B}=(5\, \vec{a}_x-3\, \vec{a}_y+\, \vec{a}_z)+(1\, \vec{a}_x+4\, \vec{a}_y-7\, \vec{a}_z)\]
+\[\vec{C}=\vec{A}+\vec{B}=(5\, \vec{a}_x-3\, \vec{a}_y+\, \vec{a}_z)+(1\, \vec{a}_x+4\, \vec{a}_y-7\, \vec{a}_z)\]
 
-\[\vec{C}=\, \vec{a}+\vec{B}=(5+1)\, \vec{a}_x+(-3+4)\, \vec{a}_y+(1-7)\, \vec{a}_z \]
+\[\vec{C}=\vec{A}+\vec{B}=(5+1)\, \vec{a}_x+(-3+4)\, \vec{a}_y+(1-7)\, \vec{a}_z \]
 
 \[\vec{C}= 6\, \vec{a}_x+\, \vec{a}_y-6\, \vec{a}_z\]
 
@@ -407,48 +407,48 @@ Lembrando que <b>os componentes do vetor são, na verdade, a projeção do vetor
 
 Recorrendo ao auxílio da aritmética dos números escalares, podemos dizer que: a subtração entre dois vetores também será uma soma. Desta feita, uma soma entre um vetor e o vetor oposto de outro vetor Assim:
 
-$$\vec{C}=\, \vec{a}-\vec{B}=\, \vec{a}+(-\vec{B})=\, \vec{a}+(-1\vec{B})$$
+$$\vec{C}=\vec{A}-\vec{B}=\vec{A}+(-\vec{B})=\vec{A}+(-1\vec{B})$$
 
 Talvez um exemplo ajude a amável leitora a perceber que, vetorialmente, até quando subtraímos estamos somando.
 
 <p class="exp">
 <b>Exemplo 6:</b><br> 
-Considere $A=5\, \vec{a}_x-3\, \vec{a}_y+\, \vec{a}_z$ e $B=1\, \vec{a}_x+4\, \vec{a}_y-7\, \vec{a}_z$ e calcule $\vec{C}=\, \vec{a}-\vec{B}$. <br><br>
+Considere $\vec{A}=\vec{a}_x-3\, \vec{a}_y+\, \vec{a}_z$ e $\vec{B}=1\, \vec{a}_x+4\, \vec{a}_y-7\, \vec{a}_z$ e calcule $\vec{C}=\, \vec{a}-\vec{B}$. <br><br>
 <b>Solução:</b>
 
-\[\vec{C}=\, \vec{a}-\vec{B}=(5\, \vec{a}_x-3\, \vec{a}_y+\, \vec{a}_z)+(-1(1\, \vec{a}_x+4\, \vec{a}_y-7\, \vec{a}_z))\]
+\[\vec{C}=\vec{A}-\vec{B}=(5\, \vec{a}_x-3\, \vec{a}_y+\, \vec{a}_z)+(-1(1\, \vec{a}_x+4\, \vec{a}_y-7\, \vec{a}_z))\]
 
-\[\vec{C}=\, \vec{a}-\vec{B}=(5\, \vec{a}_x-3\, \vec{a}_y+\, \vec{a}_z)+(-1\, \vec{a}_x-4\, \vec{a}_y+7\, \vec{a}_z)\]
+\[\vec{C}=\vec{A}-\vec{B}=(5\, \vec{a}_x-3\, \vec{a}_y+\, \vec{a}_z)+(-1\, \vec{a}_x-4\, \vec{a}_y+7\, \vec{a}_z)\]
 
-\[\vec{C}=\, \vec{a}-\vec{B}=4\, \vec{a}_x-7\, \vec{a}_y+8\, \vec{a}_z\]
+\[\vec{C}=\vec{A}-\vec{B}=4\, \vec{a}_x-7\, \vec{a}_y+8\, \vec{a}_z\]
 
 </p>
 
-A consistência ressalta a beleza da matemática. As operações de adição e subtração de vetores obedecem a um conjunto de  propriedades matemáticas que garantem a consistência destas operações. Para tanto, considere os vetores $\, \vec{a}$, $\vec{B}$ e $\vec{B}$, e o escalar $m$:
+A consistência ressalta a beleza da matemática. As operações de adição e subtração de vetores obedecem a um conjunto de  propriedades matemáticas que garantem a consistência destas operações. Para tanto, considere os vetores $\vec{A}$, $\vec{B}$ e $\vec{B}$, e o escalar $m$:
 
-1. **comutatividade da adição de vetores:** a ordem dos vetores na adição não afeta o resultado final. Portanto, $\, \vec{a} + \vec{B} = \vec{B} + \, \vec{a}$. A subtração, entretanto, não é comutativa, ou seja, $\, \vec{a} - \vec{B} ≠ \vec{B} - \, \vec{a}$. A comutatividade é como uma dança onde a ordem dos parceiros não importa. Neste caso, subtrair não é como dançar e a ordem importa.
+1. **comutatividade da adição de vetores:** a ordem dos vetores na adição não afeta o resultado final. Portanto, $\vec{A} + \vec{B} = \vec{B} + \, \vec{a}$. A subtração, entretanto, não é comutativa, ou seja, $\vecAa} - \vec{B} ≠ \vec{B} - \vec{A}$. A comutatividade é como uma dança onde a ordem dos parceiros não importa. Neste caso, subtrair não é como dançar e a ordem importa.
 
-2. **associatividade da adição de vetores:** a forma como os vetores são agrupados na adição não afeta o resultado final. Assim, $(\, \vec{a} + \vec{B}) + \vec{C} = \, \vec{a} + (\vec{B} + \vec{C})$. A associatividade é como um grupo de amigos que se reúne. Não importa a ordem de chegada o resultado é uma festa. A subtração, entretanto, não é associativa, ou seja, $(\, \vec{a} - \vec{B}) - \vec{C} ≠ \, \vec{a} - (\vec{B} - \vec{C})$.
+2. **associatividade da adição de vetores:** a forma como os vetores são agrupados na adição não afeta o resultado final. Assim, $(\vec{A} + \vec{B}) + \vec{C} = \vec{A} + (\vec{B} + \vec{C})$. A associatividade é como um grupo de amigos que se reúne. Não importa a ordem de chegada o resultado é uma festa. A subtração, entretanto, não é associativa, ou seja, $(\vec{A} - \vec{B}) - \vec{C} ≠ \vec{A} - (\vec{B} - \vec{C})$.
 
-3. **Distributividade da multiplicação por escalar em relação à adição de vetores:** Se você multiplicar a soma de dois vetores por um escalar, o resultado será o mesmo que se você multiplicar cada vetor pelo escalar e somar os resultados. Isto é, $m*(\, \vec{a} + \vec{B}) = m\, \vec{a} + m\vec{B}$.
+3. **Distributividade da multiplicação por escalar em relação à adição de vetores:** Se você multiplicar a soma de dois vetores por um escalar, o resultado será o mesmo que se você multiplicar cada vetor pelo escalar e somar os resultados. Isto é, $m*(\vec{A} + \vec{B}) = m\vec{A} + m\vec{B}$.
 
 Essas propriedades são fundamentais para a manipulação de vetores em muitas áreas da física e da matemática e podem ser resumidas por:
 
-$$\, \vec{a}+\vec{B}=\vec{B}+\, \vec{a}$$
+$$\vecAa}+\vec{B}=\vec{B}+\vec{A}$$
 
-$$\, \vec{a}+(\vec{B}+\vec{C})=(\, \vec{a}+\vec{B})+\vec{C}$$
+$$\vec{A}+(\vec{B}+\vec{C})=(\vec{A}+\vec{B})+\vec{C}$$
 
-$$m(\, \vec{a}+\vec{B})=m\, \vec{a}+m\vec{C}$$
+$$m(\vec{A}+\vec{B})=m\vec{A}+m\vec{C}$$
 
 **Importante**: a subtração não é comutativa nem associativa. Logo:
 
-$$\, \vec{a} - \vec{B} ≠ \vec{B} - \, \vec{a}$$
+$$\vec{A} - \vec{B} ≠ \vec{B} - \vec{A}$$
 
-$$(\, \vec{a} - \vec{B}) - \vec{C} ≠ \, \vec{a} - (\vec{B} - \vec{C})$$
+$$(\vec{A} - \vec{B}) - \vec{C} ≠ \vec{A} - (\vec{B} - \vec{C})$$
 
 ### Exercício 4
 
-Alice é uma engenheira trabalhando no projeto de construção de uma ponte. As forças aplicadas sobre um pilar foram simplificadas até que serem reduzidas a dois vetores: $\vec{F}_1 = 4\, \vec{a}_x + 3\, \vec{a}_y$ e $\vec{F}_2 = -1\, \vec{a}_x + 2\, \vec{a}_y$ a força aplicada ao pilar será o resultado da subtração entre os vetores. Alice precisa saber qual será a força resultante após aplicar uma correção de segurança ao vetor  $\vec{F}_2$ multiplicando-o por 2. O trabalho de Alice é definir as características físicas deste pilar, o seu é ajudar Alice com estes cálculos.
+Alice é uma engenheira trabalhando no projeto de construção de uma ponte. As forças aplicadas sobre um pilar foram simplificadas até que serem reduzidas a dois vetores: $\vec{F}_1 = 4\, \vec{a}_x + 3\, \vec{a}_y$ e $\vec{F}_2 = -1\, \vec{a}_x + 2\, \vec{a}_y$ a força aplicada ao pilar será o resultado da subtração entre os vetores. Alice precisa saber qual será a força resultante após aplicar uma correção de segurança ao vetor  $\vec{F}_2$ multiplicando-o por $2$. O trabalho de Alice é definir as características físicas deste pilar, o seu é ajudar Alice com estes cálculos.
 
 #### Exercício 5
 
@@ -483,7 +483,7 @@ $$\vec{R}_p = x\, \vec{a}_x + y\, \vec{a}_y + z\, \vec{a}_z$$
 
 O que temos aprendido, na nossa jornada, até o momento, sobre vetores é simplesmente uma forma diferente de olhar para a mesma coisa. Sem nenhuma explicitação específica, estamos usando o conceito de Vetor Posição, desde que começamos este texto. 
 
-A soma de vetores unitários, $\, \vec{a}_x$, $\, \vec{a}_y$, $\, \vec{a}_z$, que define um vetor em qualquer direção que escolhemos, sob um olhar alternativo irá definir o Vetor Posição de um dado ponto no espaço. Isso é possível porque, neste caso, estamos consideramos o vetor como uma seta que parte do zero - a origem - e se estende até qualquer ponto no espaço.
+A soma de vetores unitários, $\vec{a}_x$, $\vec{a}_y$, $\vec{a}_z$, que define um vetor em qualquer direção que escolhemos, sob um olhar alternativo irá definir o Vetor Posição de um dado ponto no espaço. Isso é possível porque, neste caso, estamos consideramos o vetor como uma seta que parte do zero - a origem - e se estende até qualquer ponto no espaço.
 
 Como a doce leitora pode ver, está tudo conectado, cada parte fazendo sentido à luz da outra. Assim, aprenderemos a entender o espaço ao nosso redor, uma vetor de cada vez.
 
@@ -542,9 +542,9 @@ $$\, \vec{a} = 4\, \vec{a}_x+4\, \vec{a}_y+3\, \vec{a}_z$$
 
 Para calcular o vetor unitário na direção do vetor $P_M$ teremos:
 
-\[\, \vec{a}\_{P_M}=\frac{(1, 2, 4)}{|(1, 2, 4)|} = \frac{(1, 3, 4)}{\sqrt{1^2+2^2+4^2} }\]
+\[\vec{a}\_{P_M}=\frac{(1, 2, 4)}{|(1, 2, 4)|} = \frac{(1, 3, 4)}{\sqrt{1^2+2^2+4^2} }\]
 
-\[\, \vec{a}\_{P_M}=0.22\, \vec{a}_x+0.45\, \vec{a}_y+0.87\, \vec{a}_z\]
+\[\vec{a}\_{P_M}=0.22\, \vec{a}_x+0.45\, \vec{a}_y+0.87\, \vec{a}_z\]
 
 <b>(c)</b> finalmente, para calcular o perímetro do triângulo formado por: $P_1(4,4,3)$, $P_2(-2,0,5)$ e $P_3(7,-2,1)$, precisaremos somar os módulos dos vetores distância ente $P_1(4,3,2)$ e $P_2(-2,0,5)$, $P_2(-2,0,5)$ e $P_3(7,-2,1)$ e $P_3(7,-2,1)$ e $P_1(4,3,2)$.
 
@@ -569,7 +569,7 @@ Vetores são como os ventos que cruzam o mar, invisíveis mas poderosos, guiando
 
 #### Exercício 9
 
-Considere um sistema de referência onde as distâncias são dimensionadas apenas por unidades abstratas, sem especificação de unidades de medida. Nesse sistema, dois vetores são dados. O vetor $\, \vec{a}$ inicia na origem e termina no ponto $P$ com coordenadas $(8, -1, -5)$. Temos também um vetor unitário $\vec{c}$ que parte da origem em direção ao ponto $Q$, e é representado por $\frac{1}{3}(1, -3, 2)$. Se a distância entre os pontos $P$ e $Q$ é igual a 15 unidades, determine as coordenadas do ponto $Q$.
+Considere um sistema de referência onde as distâncias são dimensionadas apenas por unidades abstratas, sem especificação de unidades de medida. Nesse sistema, dois vetores são dados. O vetor $\vec{A}$ inicia na origem e termina no ponto $P$ com coordenadas $(8, -1, -5)$. Temos também um vetor unitário $\vec{c}$ que parte da origem em direção ao ponto $Q$, e é representado por $\frac{1}{3}(1, -3, 2)$. Se a distância entre os pontos $P$ e $Q$ é igual a 15 unidades, determine as coordenadas do ponto $Q$.
 
 #### Exercício 10
 
@@ -579,19 +579,19 @@ Considere os pontos $P$ e $Q$ localizados em $(1, 3, 2)$ e $(4, 0, -1)$, respect
 
 Há um jeito de juntar dois vetores - setas no espaço - e obter algo diferente: um número, algo mais simples, sem direção, sem sentido, direto e frio. Este é o Produto Escalar. **O resultado do Produto Escalar entre dois vetores é um valor escalar**.
 
-A operação Produto Escalar recebe dois vetores e resulta em um número que, no espaço vetorial $\textbf {V}$, definido anteriormente, será um número real. Esse resultado tem algo especial: sua invariância. Não importa a orientação, rotação ou o giro que você imponha ao espaço vetorial, o resultado do Produto Escalar, continuará imutável, inalterado.
+A operação Produto Escalar recebe dois vetores e resulta em um número que, no espaço vetorial $\textbf{V}$, definido anteriormente, será um número real. Esse resultado tem algo especial: sua invariância. Não importa a orientação, rotação ou o giro que você imponha ao espaço vetorial, o resultado do Produto Escalar, continuará imutável, inalterado.
 
 A amável leitora há de me perdoar, mas é preciso lembrar que escalares são quantidades que não precisam saber para onde estão apontando. Elas apenas são. Um exemplo? A Temperatura. Não importa como você oriente, gire ou mova um sistema de coordenadas aplicado no espaço para entender um fenômeno termodinâmico, a temperatura deste sistema permanecerá a mesma. A temperatura é uma quantidade que não tem direção nem sentido.
 
 Aqui está o pulo da onça: enquanto um vetor é uma entidade direcionada, seus componentes são meros escalares. Ao decompor um vetor em seus componentes unitários — cada qual seguindo a direção de um eixo coordenado — é preciso entender que esses elementos são fluidos e mutáveis dependem das características do sistema de coordenadas. Os componentes se ajustam, se transformam e se adaptam quando você roda ou reorienta o espaço. Em contraste, o Produto Escalar, apesar de sua simplicidade, permanece constante, imperturbável às mudanças espaciais. Ele é um pilar invariável, vital para compreender tanto a estrutura do espaço quanto as dinâmicas que nele ocorrem.
 
-Usando a linguagem da matemática, direta e linda, podemos dizer que dados os vetores $\, \vec{a}$ e $\vec{B}$, **o Produto Escalar entre $\, \vec{a}$ e $\vec{B}$ resultará em uma quantidade escalar**.  Esta operação será representada, usando a linguagem da matemática, por $\, \vec{a}\cdot \vec{B}$.
+Usando a linguagem da matemática, direta e linda, podemos dizer que dados os vetores $\vec{A}$ e $\vec{B}$, **o Produto Escalar entre $\vec{A}$ e $\vec{B}$ resultará em uma quantidade escalar**.  Esta operação será representada, usando a linguagem da matemática, por $\vec{A}\cdot \vec{B}$.
 
-Aqui abro mão da isenção e recorro a geometria. Mais que isso, faremos uso da trigonometria para reduzir o Produto Escalar ao máximo de simplicidade usando uma equação que inclua o ângulo entre os dois vetores. Sem nos perdermos nas intrincadas transformações trigonométricas diremos que o Produto Escalar entre $\, \vec{a}$ e $\vec{B}$ será:
+Aqui abro mão da isenção e recorro a geometria. Mais que isso, faremos uso da trigonometria para reduzir o Produto Escalar ao máximo de simplicidade usando uma equação que inclua o ângulo entre os dois vetores. Sem nos perdermos nas intrincadas transformações trigonométricas diremos que o Produto Escalar entre $\vec{A}$ e $\vec{B}$ será:
 
-$$\, \vec{a}\cdot \vec{B} = |\, \vec{a}||\vec{B}|cos(\theta_{AB})$$
+$$\vec{A}\cdot \vec{B} = \ver \vec{a}\vert \vert \vec{B} \vert cos(\theta_{AB})$$
 
-Onde $\theta_{AB}$ representa o ângulo entre os dois vetores. Esta é a equação analítica do Produto Escalar. A ferramenta mais simples que podemos usar. Não é uma equação qualquer, ela representa a projeção do vetor $\, \vec{a}$ sobre o vetor $\vec{B}$. Se não, a paciente leitora, não estiver vendo esta projeção deve voltar a geometria, não a acompanharei nesta viagem, tenho certeza do seu sucesso. Em bom português dizemos que **o Produto Escalar entre dois vetores $\, \vec{a}$ e $\vec{B}$ quaisquer é o produto entre o produto das magnitudes destes vetores e o cosseno do menor ângulo entre eles**.
+Onde $\theta_{AB}$ representa o ângulo entre os dois vetores. Esta é a equação analítica do Produto Escalar. A ferramenta mais simples que podemos usar. Não é uma equação qualquer, ela representa a projeção do vetor $\vec{A}$ sobre o vetor $\vec{B}$. Se não, a paciente leitora, não estiver vendo esta projeção deve voltar a geometria, não a acompanharei nesta viagem, tenho certeza do seu sucesso. Em bom português dizemos que **o Produto Escalar entre dois vetores $\vec{A}$ e $\vec{B}$ quaisquer é o produto entre o produto das magnitudes destes vetores e o cosseno do menor ângulo entre eles**.
 
 Vetores são como flechas atiradas no vazio do espaço. E como flechas, podem seguir diferentes caminhos.
 
@@ -605,34 +605,34 @@ Como flechas no espaço, vetores desenham caminhos - paralelos, transversais ou 
 
 A matemática da Álgebra Vetorial destila estes conceitos simplesmente como: se temos um vetor $\, \vec{a}$ e um vetor $\vec{B}$ teremos o Produto Escalar entre eles dado por:
 
-$$\, \vec{a}\cdot \vec{B} = A_xB_x+ A_yB_y+ A_zB_z$$
+$$\vec{A}\cdot \vec{B} = A_xB_x+ A_yB_y+ A_zB_z$$
 
 Seremos então capazes de abandonar a equação analítica, e voltarmos aos mares tranquilos de ventos suaves da Álgebra Linear. A matemática nos transmite paz e segurança. Exceto quando estamos aprendendo. Nestes momentos, nada como uma xícara de chá morno e um exemplo para acender a luz do entendimento.
 
 <p class="exp">
 <b>Exemplo 9:</b><br>
-Dados os vetores $\, \vec{a}=3\, \vec{a}_x+4\, \vec{a}_y+\, \vec{a}_z$ e $\vec{B}=\, \vec{a}_x+2\, \vec{a}_y-5\, \vec{a}_z$ encontre o ângulo $\theta$ entre $\, \vec{a}$ e $\vec{B}$.
+Dados os vetores $\vec{A}=3\, \vec{a}_x + 4\, \vec{a}_y + \, \vec{a}_z$ e $\vec{B}=\, \vec{a}_x+2\, \vec{a}_y-5\, \vec{a}_z$ encontre o ângulo $\theta$ entre $\, \vec{a}$ e $\vec{B}$.
 <br><br>
 <b>Solução:</b><br>
 Para calcular o ângulo vamos usar a equação analítica do Produto Escalar:
 
-\[\, \vec{a}\cdot \vec{B} =|\, \vec{a}||\vec{B}|cos(\theta)\]
+\[\vec{A}\cdot \vec{B} =\vert \vec{a}\vert \vert \vec{B} \vert cos(\theta)\]
 
 Precisaremos dos módulos dos vetores e do Produto Escalar entre eles. Calculando o Produto Escalar a partir dos componentes vetoriais de cada vetor teremos:
 
-\[\, \vec{a}\cdot \vec{B} = (3,4,1)\cdot(1,2,-5) \]
+\[\vec{A}\cdot \vec{B} = (3,4,1)\cdot(1,2,-5) \]
 
-\[\, \vec{a}\cdot \vec{B} = (3)(1)+(4)(2)+(1)(-5)=6\]
+\[\vec{A}\cdot \vec{B} = (3)(1)+(4)(2)+(1)(-5)=6\]
 
-Calculando os módulos de $\, \vec{a}$ e $\vec{B}$, teremos:
+Calculando os módulos de $\vec{A}$ e $\vec{B}$, teremos:
 
-\[ \vert \, \vec{a} \vert = \vert (3,4,1) \vert =\sqrt{3^2+4^2+1^2}=5,1\]
+\[ \vert \vec{A} \vert = \vert (3,4,1) \vert =\sqrt{3^2+4^2+1^2}=5,1\]
 
 \[ \vert \vec{B} \vert = \vert (1,2,-5) \vert =\sqrt{1^2+2^2+5^2}=5,48\]
 
 Já que temos o Produto Escalar e os módulos dos vetores podemos aplicar nossa equação analítica:
 
-\[ \, \vec{a}\cdot \vec{B} =|\, \vec{a}||\vec{B}|cos(\theta)\]
+\[ \vec{A}\cdot \vec{B} =\vert \vec{A}\vert \vert \vec{B} \vert cos(\theta)\]
 
 logo:
 
@@ -648,17 +648,17 @@ A verdade é que o universo é mais complexo do que as três dimensões que pode
 
 Álgebra vetorial é a ferramenta que usamos para desenhar mundos. Com ela, podemos expandir nosso pensamento para além das três dimensões, para espaços de muitas dimensões. Espaços que são mais estranhos, mais complicados, mas também mais ricos em possibilidades. Talvez seja hora de reescrever nossa definição de Produto Vetorial, a hora de expandir horizontes. Não apenas para o espaço tridimensional, mas para todos os espaços que podem existir. Isso é o que a álgebra vetorial é: uma linguagem para desenhar mundos, de três dimensões ou mais.
 
-Generalizando o Produto Escalar entre dois vetores $\, \vec{a}$ e $\vec{B}$ com $N$ dimensões teremos:
+Generalizando o Produto Escalar entre dois vetores $\vec{A}$ e $\vec{B}$ com $N$ dimensões teremos:
 
-$$\, \vec{a}\cdot \vec{B} = \sum\limits_{i=1}\limits^{N} \, \vec{a}_i\vec{b}_i$$
+$$\vec{A} \cdot \vec{B} = \sum\limits_{i=1}\limits^{N} \vec{A}_i\vec{b}_i$$
 
-Onde $i$ é o número de dimensões. Assim, se $i =3$ e chamarmos estas dimensões $x$, $y$, $z$ respectivamente para $i=1$, $i=2$ e $i=3$ teremos:
+Onde $i$ é o número de dimensões. Assim, se $i=3$ e chamarmos estas dimensões $x$, $y$, $z$ respectivamente para $i=1$, $i=2$ e $i=3$ teremos:
 
-$$\, \vec{a}\cdot \vec{B} = \sum\limits_{i=1}\limits^{3} \, \vec{a}_i\vec{b}_i = a_1b_1 +a_2b_2 + a_3b_3 $$
+$$\vec{A} \cdot \vec{B} = \sum\limits_{i=1}\limits^{3} \vec{a}_i\vec{b}_i = a_1b_1 +a_2b_2 + a_3b_3 $$
 
 Ou, substituindo os nomes das dimensões:
 
-$$\, \vec{a}\cdot \vec{B} = \, \vec{a}_x\vec{b}_x +\, \vec{a}_y\vec{b}_y + \, \vec{a}_z\vec{b}_z $$
+$$\vec{A} \cdot \vec{B} = \, \vec{a}_x\vec{b}_x +\, \vec{a}_y\vec{b}_y + \, \vec{a}_z\vec{b}_z $$
 
 Não vamos usar dimensões maiores que $3$ neste estudo. Contudo, achei que a gentil leitora deveria perceber esta generalização. No futuro, em outras disciplinas, certamente irá me entender.
 
@@ -670,25 +670,25 @@ Seu desafio será determinar o o ângulo $\theta_{BAC}$ entre estes vetores cruc
 
 Uma vez que tenhamos entendido a operação Produto Escalar, nos resta entender suas propriedades:
 
-1. **Comutatividade:** o Produto Escalar tem uma beleza simples quase rítmica. Como a batida de um tambor ou o toque de um sino, ele se mantém o mesmo não importa a ordem. Troque os vetores - a seta de $\, \vec{a}$ para $\vec{B}$ ou a flecha de $\vec{B}$ para $\, \vec{a}$ - e você obtém o mesmo número, o mesmo escalar. Isso é o que significa ser comutativo. Ou seja: $\, \vec{a}\cdot \vec{B} = \vec{B}\cdot \, \vec{a}$
+1. **Comutatividade:** o Produto Escalar tem uma beleza simples quase rítmica. Como a batida de um tambor ou o toque de um sino, ele se mantém o mesmo não importa a ordem. Troque os vetores - a seta de $\vec{A}$ para $\vec{B}$ ou a flecha de $\vec{B}$ para $\vec{A}$ - e você obtém o mesmo número, o mesmo escalar. Isso é o que significa ser comutativo. Ou seja: $\vec{A} \cdot \vec{B} = \vec{B}\cdot \vec{A}$
 
-2. **Distributividade em Relação a Adição:** o Produto Escalar também é como um rio dividindo-se em afluentes. Você pode distribuí-lo, espalhá-lo, dividir um vetor por muitos. Adicione dois vetores e multiplique-os por um terceiro - você pode fazer isso de uma vez ou pode fazer um por vez. O Produto Escalar não se importa. Ele dá o mesmo número, a mesma resposta. Isso é ser distributivo em relação a adição. Dessa forma teremos: $\, \vec{a}\cdot (\vec{B}+\vec{C}) = \, \vec{a}\cdot \vec{B} +\, \vec{a}\cdot \vec{C}$.
+2. **Distributividade em Relação a Adição:** o Produto Escalar também é como um rio dividindo-se em afluentes. Você pode distribuí-lo, espalhá-lo, dividir um vetor por muitos. Adicione dois vetores e multiplique-os por um terceiro - você pode fazer isso de uma vez ou pode fazer um por vez. O Produto Escalar não se importa. Ele dá o mesmo número, a mesma resposta. Isso é ser distributivo em relação a adição. Dessa forma teremos: $\vec{A}\cdot (\vec{B}+\vec{C}) = \vec{A}\cdot \vec{B} + \vec{A}\cdot \vec{C}$.
 
-3. **Associatividade com Escalares:** o Produto Escalar é como um maestro habilidoso que sabe equilibrar todos os instrumentos em uma orquestra. Imagine um escalar como a intensidade da música: aumente ou diminua, e a harmonia ainda será mantida. Multiplicar um vetor por um escalar e, em seguida, realizar o Produto Escalar com outro vetor é o mesmo que primeiro executar o Produto Escalar e depois ajustar a intensidade. O Produto Escalar, em sua elegância matemática, garante que o show continue de maneira harmoniosa, independentemente de quando a intensidade é ajustada. Essa é a essência da associatividade com escalares. Portanto, podemos dizer que: $k(\, \vec{a} \cdot \vec{B}) = (k\, \vec{a}) \cdot \vec{B} = \, \vec{a} \cdot (k\vec{B})$
+3. **Associatividade com Escalares:** o Produto Escalar é como um maestro habilidoso que sabe equilibrar todos os instrumentos em uma orquestra. Imagine um escalar como a intensidade da música: aumente ou diminua, e a harmonia ainda será mantida. Multiplicar um vetor por um escalar e, em seguida, realizar o Produto Escalar com outro vetor é o mesmo que primeiro executar o Produto Escalar e depois ajustar a intensidade. O Produto Escalar, em sua elegância matemática, garante que o show continue de maneira harmoniosa, independentemente de quando a intensidade é ajustada. Essa é a essência da associatividade com escalares. Portanto, podemos dizer que: $k(\vec{A} \cdot \vec{B}) = (k \vec{A}) \cdot \vec{B} = \vec{A} \cdot (k\vec{B})$
 
-4. **Produto Escalar do Vetor Consigo Mesmo:** O Produto Escalar tem um momento introspectivo, como um dançarino girando em um reflexo de espelho. Quando um vetor é multiplicado por si mesmo, ele revela sua verdadeira força, sua magnitude ao quadrado. É uma dança solitária, onde o vetor se alinha perfeitamente consigo mesmo, na mais pura sintonia. Esta auto-referência nos mostra o quanto o vetor se projeta em sua própria direção, revelando a essência de sua magnitude. Assim, temos: $ \, \vec{a} \cdot \, \vec{a} = \vert \, \vec{a} \vert^2$. Veja um vetor $\, \vec{a}$. Uma seta solitária estendendo-se no espaço. Imagine colocar outra seta exatamente igual, exatamente no mesmo lugar. Duas Setas juntas, $\, \vec{a}$ e $\, \vec{a}$, sem nenhum ângulo entre elas.
+4. **Produto Escalar do Vetor Consigo Mesmo:** O Produto Escalar tem um momento introspectivo, como um dançarino girando em um reflexo de espelho. Quando um vetor é multiplicado por si mesmo, ele revela sua verdadeira força, sua magnitude ao quadrado. É uma dança solitária, onde o vetor se alinha perfeitamente consigo mesmo, na mais pura sintonia. Esta auto-referência nos mostra o quanto o vetor se projeta em sua própria direção, revelando a essência de sua magnitude. Assim, temos: $\vec{A} \cdot \vec{A} = \vert \vec{A} \vert^2$. Veja um vetor $\vec{A}$. Uma seta solitária estendendo-se no espaço. Imagine colocar outra seta exatamente igual, exatamente no mesmo lugar. Duas Setas juntas, $\vec{A}$ e $\vec{A}$, sem nenhum ângulo entre elas.
 
 Por que? Porque o ângulo $\theta$ entre um vetor e ele mesmo é $zero$. E o cosseno de zero é $1$. Assim:
 
-$$\, \vec{a}\cdot \, \vec{a} = \vert \, \vec{a} \vert^2$$
+$$\vec{A}\cdot \vec{A} = \vert \vec{A} \vert^2$$
 
-Para simplificar, vamos dizer que $\, \vec{a}^2$ é o mesmo que $ \vert \, \vec{a} \vert ^2$. Uma notação, uma abreviação para o comprimento, magnitude, de $\, \vec{a}$ ao quadrado. Aqui está a lição: **um vetor e ele mesmo, lado a lado, são definidos pela magnitude do próprio vetor, ao quadrado**. É um pequeno pedaço de sabedoria, um truque, uma ferramenta. Mantenha esta ferramenta sempre à mão, você vai precisar.
+Para simplificar, vamos dizer que $\vec{A}^2$ é o mesmo que $ \vert \vec{A} \vert ^2$. Uma notação, uma abreviação para o comprimento, magnitude, de $\vec{A}$ ao quadrado. Aqui está a lição: **um vetor e ele mesmo, lado a lado, são definidos pela magnitude do próprio vetor, ao quadrado**. É um pequeno pedaço de sabedoria, um truque, uma ferramenta. Mantenha esta ferramenta sempre à mão, você vai precisar.
 
 Assim como as ondas em uma praia, indo e voltando, de tempos em tempos precisamos rever as ferramentas que adquirimos e o conhecimento que construímos com elas. Em todos os sistemas de coordenadas que usamos para definir o espaço $\mathbf{V}$ os vetores unitários são ortogonais. Setas no espaço que se cruzam em um ângulo reto. Este ângulo reto garante duas propriedades interessantes.
 
-$$\, \vec{a}_x\cdot \, \vec{a}_y=\, \vec{a}_x\cdot \, \vec{a}_z=\, \vec{a}_y\cdot \, \vec{a}_z=0$$
+$$\vec{a}_x\cdot \, \vec{a}_y=\, \vec{a}_x\cdot \, \vec{a}_z=\, \vec{a}_y\cdot \, \vec{a}_z=0$$
 
-$$\, \vec{a}_x\cdot \, \vec{a}_x=\, \vec{a}_y\cdot \, \vec{a}_y=\, \vec{a}_z\cdot \, \vec{a}_z=1$$
+$$\vec{a}_x\cdot \, \vec{a}_x=\, \vec{a}_y\cdot \, \vec{a}_y=\, \vec{a}_z\cdot \, \vec{a}_z=1$$
 
 A primeira garante que o Produto Escalar entre quaisquer dois componentes vetoriais ortogonais é $zero$, a segunda que o Produto Escalar entre os mesmos dois componentes vetoriais é $1$. Essas são duas verdades que podemos segurar firmes enquanto navegamos pelo oceano do espaço vetorial. Como um farol em uma noite tempestuosa, elas nos guiarão e nos ajudarão a entender o indescritível. Mais que isso, serão as ferramentas que usaremos para transformar o muito difícil em muito fácil.
 
@@ -707,33 +707,33 @@ $$
 
 Usando o Delta de Kronecker podemos escrever as propriedades dos componentes ortogonais unitários em relação ao Produto Escalar como:
 
-$$\, \vec{a}_\mu \cdot \, \vec{a}_\upsilon = \delta_{\mu \upsilon}$$
+$$\vec{a}_\mu \cdot \, \vec{a}_\upsilon = \delta_{\mu \upsilon}$$
 
 Que será útil na representação computacional de vetores e no entendimento de transformações vetoriais em espaços com mais de $3$ dimensões. Que, infelizmente, estão além deste ponto na nossa jornada. Não se deixe abater, ficaremos limitados a $3$ dimensões. Contudo, não nos limitaremos ao Produto Escalar. Outras maravilhas virão.
 
 <p class="exp">
 <b>Exemplo 10:</b><br>
-Dados os vetores $\, \vec{a} = (3, 2, 1)$ e $\vec{B} = (1, -4, 2)$, calcule o Produto Escalar $\, \vec{a} \cdot \vec{B}$ e também $\vec{B} \cdot \, \vec{a}$. Verifique a propriedade da comutatividade.
+Dados os vetores $\vec{A} = (3, 2, 1)$ e $\vec{B} = (1, -4, 2)$, calcule o Produto Escalar $\vec{A} \cdot \vec{B}$ e também $\vec{B} \cdot \vec{A}$. Verifique a propriedade da comutatividade.
 <br><br>
 <b>Solução:</b><br>
 Tudo que precisamos para provar a comutatividade é fazer o Produto Escalar em duas ordens diferentes em busca de resultados iguais.
-   \[\, \vec{a} \cdot \vec{B} = 3 \times 1 + 2 \times (-4) + 1 \times 2 = 3 - 8 + 2 = -3\]  
+   \[ \vec{A} \cdot \vec{B} = 3 \times 1 + 2 \times (-4) + 1 \times 2 = 3 - 8 + 2 = -3 \]  
 
-   \[\vec{B} \cdot \, \vec{a} = 1 \times 3 + (-4) \times 2 + 2 \times 1 = 3 - 8 + 2 = -3\]  
+   \[ \vec{B} \cdot \vec{A} = 1 \times 3 + (-4) \times 2 + 2 \times 1 = 3 - 8 + 2 = -3\]  
 </p>
 
 <p class="exp">
 <b>Exemplo 11:</b><br>
-Dados os vetores $\, \vec{a} = (2, 3, 1)$, $\vec{B} = (1, 2, 0)$ e $\vec{C} = (3, 1, 3)$, calcule $\, \vec{a} \cdot (\vec{B} + \vec{C})$ e compare com $\, \vec{a} \cdot \vec{B} + \, \vec{a} \cdot \vec{C}$.
+Dados os vetores $\vec{A} = (2, 3, 1)$, $\vec{B} = (1, 2, 0)$ e $\vec{C} = (3, 1, 3)$, calcule $\vec{A} \cdot (\vec{B} + \vec{C})$ e compare com $\vec{A} \cdot \vec{B} + \vec{A} \cdot \vec{C}$.
 <br><br>
 <b>Solução:</b><br>
 
 Primeiro, encontre $\vec{B} + \vec{C} = (1+3, 2+1, 0+3) = (4, 3, 3)$.  
 
-   \[\, \vec{a} \cdot (\vec{B} + \vec{C}) = 2 \times 4 + 3 \times 3 + 1 \times 3 = 8 + 9 + 3 = 20\]  
-   \[\, \vec{a} \cdot \vec{B} + \, \vec{a} \cdot \vec{C} = 2 \times 1 + 3 \times 2 + 1 \times 0 + 2 \times 3 + 3 \times 1 + 1 \times 3\]  
-   \[\, \vec{a} \cdot \vec{B} + \, \vec{a} \cdot \vec{C} = 2 + 6 + 0 + 6 + 3 + 3\]
-   \[\, \vec{a} \cdot \vec{B} + \, \vec{a} \cdot \vec{C} = 20\]
+   \[ \vec{A} \cdot (\vec{B} + \vec{C}) = 2 \times 4 + 3 \times 3 + 1 \times 3 = 8 + 9 + 3 = 20\]  
+   \[ \vec{A} \cdot \vec{B} + \vec{A} \cdot \vec{C} = 2 \times 1 + 3 \times 2 + 1 \times 0 + 2 \times 3 + 3 \times 1 + 1 \times 3\]  
+   \[ \vec{A} \cdot \vec{B} + \vec{A} \cdot \vec{C} = 2 + 6 + 0 + 6 + 3 + 3\]
+   \[ \vec{A} \cdot \vec{B} + \vec{A} \cdot \vec{C} = 20\]
 </p>
   
 #### Exercício 12
@@ -746,60 +746,60 @@ Calcule o Produto Escalar de $\vec{C} = \vec{A} - \vec{B}$ com ele mesmo.
 
 ### Produto Vetorial
 
-Imagine dois vetores, $\, \vec{a}$ e $\vec{B}$, como setas lançadas no espaço. Agora, imagine desenhar um paralelogramo com as magnitudes de $A$ e $B$ como lados. O Produto Vetorial de $A$ e $B$, representado por $\, \vec{a} \times \vec{B}$, é como uma seta disparada diretamente para fora desse paralelogramo, tão perfeitamente perpendicular quanto um mastro em um navio.
+Imagine dois vetores, $\vec{A}$ e $\vec{B}$, como setas lançadas no espaço. Agora, imagine desenhar um paralelogramo com as magnitudes de $\vec{A}$ e $\vec{B}$ como lados. O Produto Vetorial de $A$ e $B$, representado por $\vec{A} \times \vec{B}$, é como uma seta disparada diretamente para fora desse paralelogramo, tão perfeitamente perpendicular quanto um mastro em um navio.
 
-**A magnitude, o comprimento dessa seta, é a área do paralelogramo formado por $\, \vec{a}$ e $\vec{B}$**. É um número simples, mas importante. Descreve o quão longe a seta resultante da interação entre $\, \vec{a}$ e $\vec{B}$ se estende no espaço. O comprimento do vetor resultado do Produto Vetorial. **O resultado do Produto Vetorial entre dois vetores é um vetor.**
+**A magnitude, o comprimento dessa seta, é a área do paralelogramo formado por $\vec{A}$ e $\vec{B}$**. É um número simples, mas importante. Descreve o quão longe a seta resultante da interação entre $\vec{A}$ e $\vec{B}$ se estende no espaço. O comprimento do vetor resultado do Produto Vetorial. **O resultado do Produto Vetorial entre dois vetores é um vetor.**
 
-imagine que temos dois vetores, firme e diretos, apontando em suas direções particulares no espaço. Chamamos eles de $\, \vec{a}$ e $\vec{B}$. Esses dois, em uma dança matemática, se entrelaçam em um Produto Vetorial, formando um terceiro vetor, o $\vec{C}$, perpendicular a ambos $\, \vec{a}$ e $\vec{B}$. Mais que isso, perpendicular ao paralelogramo formado por $\, \vec{a}$ e $\vec{B}$. Ainda mais, perpendicular ao plano formado por $\, \vec{a}$ e $\vec{B}$. Esta é a característica mais marcante do Produto Vetorial.
+imagine que temos dois vetores, firme e diretos, apontando em suas direções particulares no espaço. Chamamos eles de $\vec{A}$ e $\vec{B}$. Esses dois, em uma dança matemática, se entrelaçam em um Produto Vetorial, formando um terceiro vetor, o $\vec{C}$, perpendicular a ambos $\vec{A}$ e $\vec{B}$. Mais que isso, perpendicular ao paralelogramo formado por $\vec{A}$ e $\vec{B}$. Ainda mais, perpendicular ao plano formado por $\vec{A}$ e $\vec{B}$. Esta é a característica mais marcante do Produto Vetorial.
 
 Portanto, a dança do Produto Vetorial é peculiar e intrigante, os dançarinos não trocam de lugar como a dança tradicional e a sequência de seus passos importa, mesmo assim ela acolhe a velha regra da distributividade. Uma dança peculiar no palco da matemática. Que leva a criação de uma novo dançarino, um novo vetor, perpendicular ao plano onde dançam os vetores originais. Esse novo vetor, esse Produto Vetorial, pode ser definido por uma equação analítica, geométrica, trigonométrica:
 
-$$A \times B = \vert A \vert  \vert B \vert sen(\theta_{AB}) a_n$$
+$$A \times B = \vert A \vert \vert B \vert sen(\theta_{AB}) a_n$$
 
 Onde $a_n$ representa o vetor unitário na direção perpendicular ao plano formado pelo paralelogramo formado por $A$ e $B$.
 É uma fórmula simples, mas poderosa. Ela nos diz como calcular o Produto Vetorial, como determinar a direção, o sentido e a intensidade desta seta, lançada ao espaço.
 
-A direção dessa seta, $a_n$, é decidida pela regra da mão direita. Estenda a mão, seus dedos apontando na direção de $A$. Agora, dobre seus dedos na direção de $B$. Seu polegar, erguido, aponta na direção de $a_n$, na direção do Produto Vetorial.
+A direção dessa seta, representada pelo vetor unitário $a_n$, será decidida pela regra da mão direita. Estenda a mão, seus dedos apontando na direção de $A$. Agora, dobre seus dedos na direção de $B$. Seu polegar, erguido, aponta na direção de $a_n$, na direção do Produto Vetorial.
 
-Assim, o Produto Vetorial determina uma forma de conectar dois vetores, $A$ e $B$, e criar algo novo: um terceiro vetor, lançado diretamente para fora do plano criado por $A$ e $B$. E esse vetor, esse Produto Vetorial, tem tanto uma magnitude - a área do paralelogramo - quanto uma direção - decidida pela regra da mão direita. É uma forma de entender o espaço tridimensional. E como todas as coisas na álgebra vetorial, é simples, mas poderoso.
+O Produto Vetorial determina uma forma de conectar dois vetores, $A$ e $B$, e criar algo novo: um terceiro vetor, lançado diretamente para fora do plano criado por $A$ e $B$. E esse vetor, esse Produto Vetorial, tem tanto uma magnitude - a área do paralelogramo - quanto uma direção - decidida pela regra da mão direita. É uma forma de entender o espaço tridimensional. E como todas as coisas na álgebra vetorial, é simples, mas poderoso.
 
 $$\vec{A} \times \vec{A} = \vert \vec{A} \vert  \vert \vec{B} \vert sen(\theta_{AB}) a_n$$
 
-É uma equação poderosa e simples, útil, muito útil, mas geométrica, trigonométrica e analítica. Algebricamente o Produto Vetorial pode ser encontrado usando uma matriz. As matrizes são os sargentos do exército da Álgebra Vetorial, úteis mas trabalhosas e cheias de regras. Considerando os vetores $\, \vec{a}=\, \vec{a}_x \, \vec{a}_x+\, \vec{a}_y \, \vec{a}_y+\, \vec{a}_z \, \vec{a}_z$ e $\vec{B}=B_x \, \vec{a}_x+B_y \, \vec{a}_y+B_z \, \vec{a}_z$ o Produto Vetorial $\, \vec{a}\times \vec{B}$ será encontrado resolvendo a matriz:
+É uma equação poderosa e simples, útil, muito útil, mas geométrica, trigonométrica e analítica. Algebricamente o Produto Vetorial pode ser encontrado usando uma matriz. As matrizes são os sargentos do exército da Álgebra Vetorial, úteis mas trabalhosas e cheias de regras. Considerando os vetores $\vec{a}=\, \vec{a}_x \, \vec{a}_x+\, \vec{a}_y \, \vec{a}_y+\, \vec{a}_z \, \vec{a}_z$ e $\vec{B}=B_x \, \vec{a}_x+B_y \, \vec{a}_y+B_z \, \vec{a}_z$ o Produto Vetorial $\vec{A}\times \vec{B}$ será encontrado resolvendo a matriz:
 
 $$
-\, \vec{a}\times \vec{B}=\begin{vmatrix}
-\, \vec{a}_x & \, \vec{a}_y & \, \vec{a}_z\\
-\, \vec{a}_x & \, \vec{a}_y & \, \vec{a}_z\\
+\vec{A}\times \vec{B}=\begin{vmatrix}
+\vec{a}_x & \, \vec{a}_y & \, \vec{a}_z\\
+\vec{a}_x & \, \vec{a}_y & \, \vec{a}_z\\
 B_x & B_y & B_z
 \end{vmatrix}
 $$
 
-A matriz será sempre montada desta forma. A primeira linha om os vetores unitários, a segunda com o primeiro operando, neste caso os componentes de $\, \vec{a}$ e na terceira com os componentes de $\vec{B}$. A Solução deste produto será encontrada, mais facilmente com o Método dos Cofatores. Para isso vamos ignorar a primeira linha.
+A matriz será sempre montada desta forma. A primeira linha om os vetores unitários, a segunda com o primeiro operando, neste caso os componentes de $\vec{A}$ e na terceira com os componentes de $\vec{B}$. A Solução deste produto será encontrada, mais facilmente com o Método dos Cofatores. Para isso vamos ignorar a primeira linha.
 
-Ignorando também a primeira coluna, a coluna do vetor unitário $\, \vec{a}_x$ resta uma matriz composta de:
+Ignorando também a primeira coluna, a coluna do vetor unitário $\vec{a}_x$ resta uma matriz composta de:
 
 $$
 \begin{vmatrix}
-\, \vec{a}_y & \, \vec{a}_z\\
+\vec{a}_y & \, \vec{a}_z\\
 B_y & B_z
 \end{vmatrix}
 $$
 
-O Esta matriz multiplicará o vetor unitário $\, \vec{a}_x$. Depois vamos construir outras duas matrizes como esta. A segunda será encontrada quando ignorarmos a coluna referente ao unitário $\, \vec{a}_y$, que multiplicará o oposto do vetor $\, \vec{a}_y$.
+O Esta matriz multiplicará o vetor unitário $\vec{a}_x$. Depois vamos construir outras duas matrizes como esta. A segunda será encontrada quando ignorarmos a coluna referente ao unitário $\vec{a}_y$, que multiplicará o oposto do vetor $\vec{a}_y$.
 
 $$
 \begin{vmatrix}
-\, \vec{a}_x & \, \vec{a}_z\\
+\vec{a}_x & \, \vec{a}_z\\
 B_x & B_z
 \end{vmatrix}
 $$
 
-Finalmente ignoramos a coluna referente ao vetor unitário $\, \vec{a}_z$ para obter:
+Finalmente ignoramos a coluna referente ao vetor unitário $\vec{a}_z$ para obter:
 
 $$
 \begin{vmatrix}
-\, \vec{a}_x & \, \vec{a}_y\\
+\vec{a}_x & \, \vec{a}_y\\
 B_x & B_y
 \end{vmatrix}
 $$
@@ -807,41 +807,41 @@ $$
 Que será multiplicada por $\, \vec{a}_z$. Colocando tudo junto, em uma equação matricial teremos:
 
 $$
-\, \vec{a}\times \vec{B}=\begin{vmatrix}
-\, \vec{a}_x & \, \vec{a}_y & \, \vec{a}_z\\
-\, \vec{a}_x & \, \vec{a}_y & \, \vec{a}_z\\
+\vec{A}\times \vec{B}=\begin{vmatrix}
+\vec{a}_x & \, \vec{a}_y & \, \vec{a}_z\\
+\vec{a}_x & \, \vec{a}_y & \, \vec{a}_z\\
 B_x & B_y & B_z
 \end{vmatrix}=\begin{vmatrix}
-\, \vec{a}_y & \, \vec{a}_z\\
+\vec{a}_y & \, \vec{a}_z\\
 B_y & B_z
 \end{vmatrix}\, \vec{a}_x-\begin{vmatrix}
-\, \vec{a}_x & \, \vec{a}_z\\
+\vec{a}_x & \, \vec{a}_z\\
 B_x & B_z
 \end{vmatrix}\, \vec{a}_y+\begin{vmatrix}
-\, \vec{a}_x & \, \vec{a}_y\\
+\vec{a}_x & \, \vec{a}_y\\
 B_x & B_y
 \end{vmatrix}\, \vec{a}_z
 $$
 
 Cuide o negativo no segundo termo como cuidaria do leme do seu barco, sua jornada depende disso e o resultado do Produto Vetorial Também. Uma vez que a equação matricial está montada. Cada matriz pode ser resolvida usando a [Regra de Sarrus](https://en.wikipedia.org/wiki/Rule_of_Sarrus) que, para matrizes de $2\times 2$ se resume a uma multiplicação cruzada. Assim, nosso Produto Vetorial será simplificado por:
 
-$$\, \vec{a}\times \vec{B}=(\, \vec{a}_y B_z- \, \vec{a}_z B_y)\, \vec{a}_x-(\, \vec{a}_x B_z-\, \vec{a}_z B_x)\, \vec{a}_y+(\, \vec{a}_x B_y-\, \vec{a}_y B_x)\, \vec{a}_z$$
+$$\vec{A}\times \vec{B}=(\vec{a}_y B_z- \, \vec{a}_z B_y)\, \vec{a}_x-(\vec{a}_x B_z-\, \vec{a}_z B_x)\,\vec{a}_y+(\vec{a}_x B_y-\, \vec{a}_y B_x)\, \vec{a}_z$$
 
 Cuidado com os determinantes, o Chapeleiro não era louco por causa do chumbo, muito usado na fabricação de chapéus quando [Lewis Carroll](https://en.wikipedia.org/wiki/Lewis_Carroll) escreveu as histórias de Alice. Ficou louco [resolvendo determinantes](https://www.johndcook.com/blog/2023/07/10/lewis-carroll-determinants/). Talvez um exemplo afaste a insanidade tempo suficiente para você continuar estudando eletromagnetismo.
 
 <p class="exp">
 <b>Exemplo 12:</b><br>
-Dados os vetores $\, \vec{a}=\, \vec{a}_x+2\, \vec{a}_y+3\, \vec{a}_z$ e $\vec{B}=4\, \vec{a}_x+5\, \vec{a}_y-6\, \vec{a}_z$. (a) Calcule o Produto Vetorial entre $\, \vec{a}$ e $\vec{B}$. (b) Encontre o ângulo $\theta$ entre $\, \vec{a}$ e $\vec{B}$.
+Dados os vetores $\vec{A}=\, \vec{a}_x+2\, \vec{a}_y+3\, \vec{a}_z$ e $\vec{B}=4\, \vec{a}_x+5\, \vec{a}_y-6\, \vec{a}_z$. (a) Calcule o Produto Vetorial entre $\vec{A}$ e $\vec{B}$. (b) Encontre o ângulo $\theta$ entre $\vec{A}$ e $\vec{B}$.
 <br><br>
 <b>Solução:</b><br>
 (a) Vamos começar com o Produto Vetorial:
 
 \[
-\, \vec{a}\times \vec{B}=\begin{vmatrix}
-\, \vec{a}_x & \, \vec{a}_y & \, \vec{a}_z\\
-\, \vec{a}_x & \, \vec{a}_y & \, \vec{a}_z\\
+\vec{A}\times \vec{B}=\begin{vmatrix}
+\vec{a}_x & \, \vec{a}_y & \, \vec{a}_z\\
+\vec{a}_x & \, \vec{a}_y & \, \vec{a}_z\\
 B_x & B_y & B_z \end{vmatrix} = \begin{vmatrix}
-\, \vec{a}_x & \, \vec{a}_y & \, \vec{a}_z\\
+\vec{a}_x & \, \vec{a}_y & \, \vec{a}_z\\
 1 & 2 & 3\\
 4 & 5 & -6
 \end{vmatrix}
@@ -850,7 +850,7 @@ B_x & B_y & B_z \end{vmatrix} = \begin{vmatrix}
 Que será reduzida a:
 
 \[
-\, \vec{a}\times \vec{B} = \begin{vmatrix}
+\vec{A}\times \vec{B} = \begin{vmatrix}
 2 & 3\\
 5 & -6
 \end{vmatrix}\, \vec{a}_x - \begin{vmatrix}
@@ -864,36 +864,36 @@ Que será reduzida a:
 
 Usando Sarrus em cada uma destas matrizes teremos:
 
-\[\, \vec{a} \times \vec{B} = (2(-6) - 3(5)) \, \vec{a}_x - (1(-6)-3(4)) \, \vec{a}_y + (1(5)-2(4)) \, \vec{a}_z\]
+\[\vec{A} \times \vec{B} = (2(-6) - 3(5)) \, \vec{a}_x - (1(-6)-3(4)) \, \vec{a}_y + (1(5)-2(4)) \, \vec{a}_z\]
 
-\[\, \vec{a} \times \vec{B} = -27 \, \vec{a}_x + 18 \, \vec{a}_y - 3 \, \vec{a}_z\]
+\[\vec{A} \times \vec{B} = -27 \, \vec{a}_x + 18 \, \vec{a}_y - 3 \, \vec{a}_z\]
 
-Esta foi a parte difícil, agora precisamos dos módulos, magnitudes, dos vetores $\, \vec{a}$ e $\vec{B}$.
+Esta foi a parte difícil, agora precisamos dos módulos, magnitudes, dos vetores $\vec{A}$ e $\vec{B}$.
 
-\[\vert \, \vec{a} \vert = \sqrt{1^2+2^2+3^2} = \sqrt{14} \approx 3.74165\]
+\[\vert \vec{A} \vert = \sqrt{1^2+2^2+3^2} = \sqrt{14} \approx 3.74165\]
 
 \[\vert \vec{B} \vert = \sqrt{4^2+5^2+6^2} = \sqrt{77} \approx 8.77496\]
 
 Para calcular o ângulo vamos usar a equação analítica, ou trigonométrica, do Produto Vetorial:
 
-\[\, \vec{a} \times \vec{B} = \vert \, \vec{a} \vert  \vert \vec{B} \vert sen(\theta_{AB}) a_n\]
+\[\vec{A} \times \vec{B} = \vert \vec{A} \vert  \vert \vec{B} \vert sen(\theta_{AB}) a_n\]
 
 A forma mais fácil de resolver este problema é aplicar o módulo aos dois lados da equação. Se fizermos isso, teremos:
 
-\[\vert \, \vec{a} \times \vec{B} \vert = \vert \, \vec{a} \vert  \vert \vec{B} \vert sen(\theta_{AB}) \vert a_n \vert \]
+\[\vert \vec{A} \times \vec{B} \vert = \vert \vec{A} \vert \vert \vec{B} \vert sen(\theta_{AB}) \vert a_n \vert \]
 
 Como $a_n$ é um vetor unitário, por definição $\vert a_n \vert = 1$ logo:
 
-\[\vert \, \vec{a} \times \vec{B} \vert = \vert \, \vec{a} \vert  \vert \vec{B} \vert sen(\theta_{AB})\]
+\[\vert \vec{A} \times \vec{B} \vert = \vert \vec{A} \vert \vert \vec{B} \vert sen(\theta_{AB})\]
 
 Ou, para ficar mais claro:
 
 \[sen(\theta_{AB}) = \frac{\vert \, \vec{a} \times \vec{B} \vert}{\vert \, \vec{a} \vert \vert \vec{B} \vert}\]
 
-Os módulos de $\, \vec{a}$ e $\vec{B}$ já tenos, precisamos apenas do módulo de $\, \vec{a}\times \vec{B}$.
+Os módulos de $\vec{A}$ e $\vec{B}$ já tenos, precisamos apenas do módulo de $\vec{A}\times \vec{B}$.
 
 \[
-\vert \, \vec{a}\times \vec{B} \vert = \sqrt{27^2+16^2+3^2} = \sqrt{994} \approx 31.5298
+\vert \vec{A}\times \vec{B} \vert = \sqrt{27^2+16^2+3^2} = \sqrt{994} \approx 31.5298
 \]
 
 Assim o seno do ângulo $\theta_{AB}$ será dado por:
@@ -908,17 +908,17 @@ Assim o seno do ângulo $\theta_{AB}$ será dado por:
 
 O Produto Vetorial é como uma dança entre vetores. E como todas as danças tem características únicas e interessantes expressas na forma de propriedades matemáticas:
 
-1. **Comutatividade:** no universo dos vetores, há uma dança estranha acontecendo. $\, \vec{a} \times \vec{B}$ e $\vec{B} \times \, \vec{a}$ não são a mesma coisa, eles não trocam de lugar facilmente como dançarinos em um salão de baile. Em vez disso, eles são como dois boxeadores em um ringue, um o espelho do outro, mas em direções opostas. Assim, $\, \vec{a} \times \vec{B}$ é o oposto de $\vec{B} \times \, \vec{a}$. Assim, **O Produto Vetorial não é comutativo**: 
+1. **Comutatividade:** no universo dos vetores, há uma dança estranha acontecendo. $\vec{A} \times \vec{B}$ e $\vec{B} \times \vec{A}$ não são a mesma coisa, eles não trocam de lugar facilmente como dançarinos em um salão de baile. Em vez disso, eles são como dois boxeadores em um ringue, um o espelho do outro, mas em direções opostas. Assim, $\vec{A} \times \vec{B}$ é o oposto de $\vec{B} \times \vec{A}$. Assim, **O Produto Vetorial não é comutativo**: 
 
-   $$ \, \vec{a} \times \vec{B} =-\vec{B} \times \, \vec{a}$$
+   $$\vec{A} \times \vec{B} =-\vec{B} \times \vec{A}$$
 
-2. **Associatividade:** imagine três dançarinos: $\, \vec{a}$, $\vec{B}$ e $\vec{C}$. A sequência de seus passos importa. $\, \vec{a}$ dançando com $\vec{B}$, depois com $\vec{C}$, não é o mesmo que $\, \vec{a}$ dançando com o resultado de $\vec{B}$ e $\vec{C}$ juntos. Assim como na dança, a ordem dos parceiros importa. **O Produto Vetorial não é associativo**. Desta forma:
+2. **Associatividade:** imagine três dançarinos: $\vec{A}$, $\vec{B}$ e $\vec{C}$. A sequência de seus passos importa. $\vec{A}$ dançando com $\vec{B}$, depois com $\vec{C}$, não é o mesmo que $\vec{A}$ dançando com o resultado de $\vec{B}$ e $\vec{C}$ juntos. Assim como na dança, a ordem dos parceiros importa. **O Produto Vetorial não é associativo**. Desta forma:
 
-   $$\, \vec{a} \times (\vec{B} \times \vec{C}) \neq (\, \vec{a} \times \vec{B}) \times \vec{C}$$
+   $$\vec{A} \times (\vec{B} \times \vec{C}) \neq (\vec{A} \times \vec{B}) \times \vec{C}$$
 
-3. **Distributividade:** existe um aspecto familiar. Quando $\, \vec{a}$ dança com a soma de $\vec{B}$ e $\vec{C}$, é a mesma coisa que $\, \vec{a}$ dançando com $\vec{B}$ e depois com $\vec{C}$. **O Produto Vetorial é distributivo**. A distributividade, uma velha amiga da aritmética, aparece aqui, guiando a dança. O que pode ser escrito como: 
+3. **Distributividade:** existe um aspecto familiar. Quando $\vec{A}$ dança com a soma de $\vec{B}$ e $\vec{C}$, é a mesma coisa que $\vec{A}$ dançando com $\vec{B}$ e depois com $\vec{C}$. **O Produto Vetorial é distributivo**. A distributividade, uma velha amiga, nos conhecemos deste dos tempos da aritmética, aparece aqui, guiando a dança. O que pode ser escrito como:
 
-   $$\, \vec{a} \times (\vec{B}+\vec{C}) = \, \vec{a} \times \vec{B} + \, \vec{a} \times \vec{C}$$
+   $$\vec{A} \times (\vec{B}+\vec{C}) = \vec{A} \times \vec{B} + \vec{A} \times \vec{C}$$
 
 4. **Multiplicação por Escalar:** agora entra em cena um escalar, $k$, um número simples, porém carregado de influência. Ele se aproxima do Produto Vetorial e o muda, mas não de maneira selvagem ou imprevisível, e sim com a precisão de um relojoeiro. A magnitude do Produto Vetorial é esticada ou contraída pelo escalar, dependendo de seu valor. Isto pode ser escrito matematicamente como:
 
@@ -926,19 +926,19 @@ O Produto Vetorial é como uma dança entre vetores. E como todas as danças tem
 
    Porém, como o norte em uma bússola, a direção do Produto Vetorial não se altera. O resultado é um novo vetor, $\vec{D}$, que é um múltiplo escalar do original $\vec{C}$. O vetor $\vec{D}$ carrega a influência do escalar $k$, mas mantém a orientação e sentido originais de $\vec{C}$ para todo $k >0$.
 
-5. **Componentes Unitários**: por fim, precisamos tirar para dançar os vetores unitários. Estrutura de formação dos nossos sistemas de coordenadas. Como Produto Vetorial $\, \vec{a}\times \vec{B}$ produz um vetor ortogonal ao plano formado por $\, \vec{a}$ e $\vec{B}$ a aplicação desta operação a dois dos vetores unitários de um sistema de coordenadas irá produzir o terceiro vetor deste sistema. Observando o Sistema de Coordenadas Cartesianas teremos:
+5. **Componentes Unitários**: por fim, precisamos tirar para dançar os vetores unitários. Estrutura de formação dos nossos sistemas de coordenadas. Como Produto Vetorial $\vec{A}\times \vec{B}$ produz um vetor ortogonal ao plano formado por $\vec{A}$ e $\vec{B}$ a aplicação desta operação a dois dos vetores unitários de um sistema de coordenadas irá produzir o terceiro vetor deste sistema. Observando o Sistema de Coordenadas Cartesianas teremos:
 
-  $$\, \vec{a}_x\times \, \vec{a}_y = \, \vec{a}_z$$
+  $$\vec{a}_x\times \, \vec{a}_y = \, \vec{a}_z$$
 
-  $$\, \vec{a}_x\times \, \vec{a}_z = \, \vec{a}_y$$
+  $$\vec{a}_x\times \, \vec{a}_z = \, \vec{a}_y$$
 
-  $$\, \vec{a}_y\times \, \vec{a}_z = \, \vec{a}_x$$
+  $$\vec{a}_y\times \, \vec{a}_z = \, \vec{a}_x$$
 
   Esta propriedade do Produto Vetorial aplicado aos componentes de um vetor é mais uma ferramenta que precisamos manter à mão. Um conjunto de regras que irão simplificar equações e iluminar o desconhecido de forma quase natural.
 
 #### Exercício 14
 
-Considerando a equação analítica do Produto escalar, $\vec{A}\cdot \vec{B} =|\, \vec{a}||\vec{B}|cos(\theta)$, e a equação analítica do Produto Vetorial, $\vec{A} \times \vec{A} = \vert \vec{A} \vert  \vert \vec{B} \vert sen(\theta_{AB})$ prove que estas duas operações são distributivas.
+Considerando a equação analítica do Produto escalar, $\vec{A}\cdot \vec{B} = \vert \vec{A} \vert  \vert \vec{B}|cos(\theta)$, e a equação analítica do Produto Vetorial, $\vec{A} \times \vec{A} = \vert \vec{A} \vert  \vert \vec{B} \vert sen(\theta_{AB})$ prove que estas duas operações são distributivas.
 
 ### Produto Triplo Escalar
 
