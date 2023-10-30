@@ -285,7 +285,9 @@ Em um antigo mapa de um navegador solitário, as distâncias eram indicadas apen
 
 1. Um trajeto que começa em seu ponto de partida, marcado como a origem, e vai até um ponto de interesse $A = (-3, 4, 5)$.
 2. Um vetor unitário $b$ que, também a partir da origem, aponta na direção de um segundo ponto de interesse, $B$, e é representado por $\vec{b} = \frac{(-2, 1, 3)}{2}$.
-3. Ele também fez uma anotação de que a distância entre os dois pontos de interesse, $A$ e $B$, era de 12 unidades. Talvez essa fosse a distância que ele precisava viajar em um dia para chegar ao ponto $B$ antes do anoitecer. Talvez fosse apenas um sonho, um destino que nunca foi percorrido. Não sabemos, mas talvez seja possível determinar as coordenada exatas do ponto $B$ no mapa. Dado essas informações, qual seria a localização exata do ponto $B$ no mapa?
+3. Ele também fez uma anotação de que a distância entre os dois pontos de interesse, $A$ e $B$, era de 12 unidades. Talvez essa fosse a distância que ele precisava viajar em um dia para chegar ao ponto $B$ antes do anoitecer. Talvez fosse apenas um sonho, um destino que nunca foi percorrido. Não sabemos, mas talvez seja possível determinar as coordenada exatas do ponto $B$ no mapa. 
+
+Considerando as informações disponíveis, qual seria a localização exata do ponto $B$ no mapa?
 
 ### Multiplicação por Escalar
 
@@ -369,7 +371,25 @@ Como os pássaros no céu, os vetores também podem se juntar, ou se afastar. A 
 <legend class="legenda">Figura 3 - Soma de vetores usando a regra do paralelogramo.</legend>
 </div>
 
-Eu não vou lhe guiar em uma jornada pelo mundo das formas e linhas, não aqui, não agora. Mesmo assim, a amável leitora precisa lembrar que a geometria, silenciosa e imóvel, sempre estará lá, por baixo de tudo, o esqueleto do invisível que dá forma física do nosso universo. A soma de vetores, pode ser visualizada em um espaço bidimensional, um plano. Neste caso, podemos transladar os vetores e formar um paralelogramo. A diagonal maior deste paralelogramo representa a soma dos vetores. A leitora precisa olhar esta soma com carinho e cuidado. Observe que quando encontramos a diagonal principal, encontramos também uma área. A área do paralelogramo.
+Eu não priorizar uma jornada pelo mundo das formas e linhas, não aqui, não agora. Mesmo assim, a amável leitora precisa lembrar que a geometria, silenciosa e imóvel, sempre estará lá, por baixo de tudo, o esqueleto do invisível que dá forma física do nosso universo. A soma de vetores, pode ser visualizada em um espaço bidimensional, um plano. Neste caso, podemos transladar os vetores e formar um paralelogramo. A diagonal maior deste paralelogramo representa a soma dos vetores.
+
+O vetor $\vec{R}$, resultante de $\vec{P}+\vec{Q}$ pode ser deduzido com a aplicação da trigonometria aplicada aos triângulos, formados pela translação dos vetores. Transladamos uma cópia de $\vec{Q}$ até o ponto $A$ e transladamos $P$ até o ponto $R$, formando o paralelogramo. A seguir, criamos uma linha perfeitamente paralela ao vetor $\vec{P}$ e criamos uma linha perfeitamente transversal a esta linha que passe pelo ponto $B$. Formando, além do paralelogramo que dá nome a regra, um triângulo retângulo, $OCB$, que nos ajudará a determinar a magnitude e ângulo do vetor $R$. Considerando os segmentos de reta $OC$, $OB$ e $BC$ e o Teorema de Pitágoras teremos:
+
+$$\overline{OB}^2 =\overline{OC}^2 + \overline{BC}^2 $$
+
+Que podemos escrever na forma:
+
+$$\overline{OB}^2 =(\overline{OA}+\overline{AC})^2 + \overline{BC}^2 \quad (\text{i})$$
+
+Observando o triângulo $ABC$: 
+
+$$cos \theta = \frac{\overline{AC} }{\overline{BC} } \space\space \therefore \space\space \overline{AC} = (cos \theta) (\overline{BC})$$
+
+Como $\overline{AB} = \overline{OD} = \vert \vec{Q} \vert$ teremos:
+
+$$\overline{AC} = (cos \theta) (\vert \vec{Q} \vert)$$
+
+A paciente leitora precisa olhar esta soma com carinho e cuidado. Observe que quando encontramos a diagonal principal, encontramos também uma área. A área do paralelogramo.
 
 A matemática irascível, nos força a dizer que o espaço vetorial $\mathbf{V}$ é fechado em relação a soma de vetores. Forma direta de dizer que a soma de dois vetores do espaço $\mathbf{V}$ resulta em um vetor deste mesmo espaço. Fechamento é um conceito da álgebra, e determina quais operações binárias que aplicadas os elementos de um conjunto, resultam em elementos deste mesmo conjunto.
 
@@ -426,7 +446,7 @@ Considere $\vec{A}=\vec{a}_x-3\, \vec{a}_y+\, \vec{a}_z$ e $\vec{B}=1\, \vec{a}_
 
 A consistência ressalta a beleza da matemática. As operações de adição e subtração de vetores obedecem a um conjunto de  propriedades matemáticas que garantem a consistência destas operações. Para tanto, considere os vetores $\vec{A}$, $\vec{B}$ e $\vec{B}$, e o escalar $m$:
 
-1. **comutatividade da adição de vetores:** a ordem dos vetores na adição não afeta o resultado final. Portanto, $\vec{A} + \vec{B} = \vec{B} + \, \vec{a}$. A subtração, entretanto, não é comutativa, ou seja, $\vecAa} - \vec{B} ≠ \vec{B} - \vec{A}$. A comutatividade é como uma dança onde a ordem dos parceiros não importa. Neste caso, subtrair não é como dançar e a ordem importa.
+1. **comutatividade da adição de vetores:** a ordem dos vetores na adição não afeta o resultado final. Portanto, $\vec{A} + \vec{B} = \vec{B} + \, \vec{a}$. A subtração, entretanto, não é comutativa, ou seja, $\vec{A} - \vec{B} ≠ \vec{B} - \vec{A}$. A comutatividade é como uma dança onde a ordem dos parceiros não importa. Neste caso, subtrair não é como dançar e a ordem importa.
 
 2. **associatividade da adição de vetores:** a forma como os vetores são agrupados na adição não afeta o resultado final. Assim, $(\vec{A} + \vec{B}) + \vec{C} = \vec{A} + (\vec{B} + \vec{C})$. A associatividade é como um grupo de amigos que se reúne. Não importa a ordem de chegada o resultado é uma festa. A subtração, entretanto, não é associativa, ou seja, $(\vec{A} - \vec{B}) - \vec{C} ≠ \vec{A} - (\vec{B} - \vec{C})$.
 
@@ -434,7 +454,7 @@ A consistência ressalta a beleza da matemática. As operações de adição e s
 
 Essas propriedades são fundamentais para a manipulação de vetores em muitas áreas da física e da matemática e podem ser resumidas por:
 
-$$\vecAa}+\vec{B}=\vec{B}+\vec{A}$$
+$$\vec{A}+\vec{B}=\vec{B}+\vec{A}$$
 
 $$\vec{A}+(\vec{B}+\vec{C})=(\vec{A}+\vec{B})+\vec{C}$$
 
@@ -589,7 +609,7 @@ Usando a linguagem da matemática, direta e linda, podemos dizer que dados os ve
 
 Aqui abro mão da isenção e recorro a geometria. Mais que isso, faremos uso da trigonometria para reduzir o Produto Escalar ao máximo de simplicidade usando uma equação que inclua o ângulo entre os dois vetores. Sem nos perdermos nas intrincadas transformações trigonométricas diremos que o Produto Escalar entre $\vec{A}$ e $\vec{B}$ será:
 
-$$\vec{A}\cdot \vec{B} = \ver \vec{a}\vert \vert \vec{B} \vert cos(\theta_{AB})$$
+$$\vec{A} \cdot \vec{B} = \vert \vec{A}\vert \vert \vec{B} \vert cos(\theta_{AB})$$
 
 Onde $\theta_{AB}$ representa o ângulo entre os dois vetores. Esta é a equação analítica do Produto Escalar. A ferramenta mais simples que podemos usar. Não é uma equação qualquer, ela representa a projeção do vetor $\vec{A}$ sobre o vetor $\vec{B}$. Se não, a paciente leitora, não estiver vendo esta projeção deve voltar a geometria, não a acompanharei nesta viagem, tenho certeza do seu sucesso. Em bom português dizemos que **o Produto Escalar entre dois vetores $\vec{A}$ e $\vec{B}$ quaisquer é o produto entre o produto das magnitudes destes vetores e o cosseno do menor ângulo entre eles**.
 
@@ -664,7 +684,7 @@ Não vamos usar dimensões maiores que $3$ neste estudo. Contudo, achei que a ge
 
 #### Exercício 11
 
-Em um novo projeto de engenharia civil para a construção de uma estrutura triangular inovadora, foram demarcados três pontos principais para as fundações. Esses pontos, determinados por estudos topográficos e geotécnicos, foram identificados como $\mathbf{A}(4, 0, 3)$, $\mathbf{B}(-2, 3, -4)$ e $\mathbf{C}(1, 3, 1)$ em um espaço tridimensional utilizando o Sistema de Coordenadas Cartesianas. A equipe de engenheiros precisa compreender a relação espacial entre esses pontos, pois isto impacta diretamente na distribuição das cargas e na estabilidade da estrutura.
+Em um novo projeto de engenharia civil para a construção de uma estrutura triangular inovadora, foram demarcados três pontos principais para as fundações. Esses pontos, determinados por estudos topográficos e geotécnicos, foram identificados como $A(4, 0, 3)$, $B(-2, 3, -4)$ e $C(1, 3, 1)$ em um espaço tridimensional utilizando o Sistema de Coordenadas Cartesianas. A equipe de engenheiros precisa compreender a relação espacial entre esses pontos, pois isto impacta diretamente na distribuição das cargas e na estabilidade da estrutura.
 
 Seu desafio será determinar o o ângulo $\theta_{BAC}$ entre estes vetores crucial para a análise estrutural, pois determina o direcionamento das forças na fundação.
 
@@ -938,7 +958,7 @@ O Produto Vetorial é como uma dança entre vetores. E como todas as danças tem
 
 #### Exercício 14
 
-Considerando a equação analítica do Produto escalar, $\vec{A}\cdot \vec{B} = \vert \vec{A} \vert  \vert \vec{B}|cos(\theta)$, e a equação analítica do Produto Vetorial, $\vec{A} \times \vec{A} = \vert \vec{A} \vert  \vert \vec{B} \vert sen(\theta_{AB})$ prove que estas duas operações são distributivas.
+Considerando a equação analítica do Produto escalar, $\vec{A} \cdot \vec{B} = \vert \vec{A} \vert \vert \vec{B} \vert cos(\theta)$, e a equação analítica do Produto Vetorial, $\vec{A} \times \vec{A} = \vert \vec{A} \vert \vert \vec{B} \vert sen(\theta_{AB})$ prove que estas duas operações são distributivas.
 
 ### Produto Triplo Escalar
 
@@ -989,7 +1009,7 @@ $$
 O Produto Triplo Escalar é zero se quaisquer dois dos vetores $\vec{A}$, $\vec{B}$, e $\vec{C}$ são paralelos, ou se $\vec{A}$, $\vec{B}$, e $\vec{C}$ são coplanares. Se $\vec{A}$, $\vec{B}$, e $\vec{C}$ não são coplanares, então qualquer vetor $\vec{R}$ pode ser escrito em termos deles:
 
 $$
-\vec{R} = \alpha \vec{A} + \beta \vec{B} + \gamma \vec{C} 
+\vec{R} = \alpha \vec{A} + \beta \vec{B} + \gamma \vec{C}
 $$
 
 Formando o produto escalar desta equação com $\vec{B} \times \vec{C}$, obtemos então
@@ -1001,10 +1021,10 @@ $$
 portanto,
 
 $$
-\alpha = \frac{\vec{R} \cdot (\vec{B} \times \vec{C})}{\vec{A} \cdot (\vec{B} \times \vec{C})} 
+\alpha = \frac{\vec{R} \cdot (\vec{B} \times \vec{C})}{\vec{A} \cdot (\vec{B} \times \vec{C})}
 $$
 
-Expressões análogas podem ser escritas para $\beta$ e $\gamma$. Os parâmetros $\alpha$, $\beta$, e $\gamma$ são unicamente determinados, desde que 
+Expressões análogas podem ser escritas para $\beta$ e $\gamma$. Os parâmetros $\alpha$, $\beta$, e $\gamma$ são unicamente determinados, desde que:
 
 $$ \vec{A} \cdot (\vec{B} \times \vec{C}) \neq 0 $$
 
@@ -1029,15 +1049,15 @@ $$
 Até o surgimento do trabalho de [Michael Faraday](https://en.wikipedia.org/wiki/Michael_Faraday) sobre linhas de força elétrica, a equação desenvolvida por Coulomb era considerada suficiente para descrever interações eletrostáticas. Quase um século depois de Coulomb, matemáticos como [Gauss](https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss), [Hamilton](https://en.wikipedia.org/wiki/William_Rowan_Hamilton), [Maxwell](https://en.wikipedia.org/wiki/James_Clerk_Maxwell) reformularam esta lei, incorporando-a em um contexto vetorial. Eles utilizaram o cálculo vetorial para expressar as direções e magnitudes da força, permitindo que Lei de Coulomb possa ser aplicada de forma mais geral em campos eletrostáticos e magnetostáticos.
 
 $$
-F_{21} = \frac{1}{4\pi \epsilon_0 \epsilon_r} \frac{Q_1Q_2}{R^2} a_{21} 
+F_{21} = \frac{1}{4\pi \epsilon_0 \epsilon_r} \frac{Q_1Q_2}{R^2} a_{21}
 $$
 
 Nesta equação:
 
 - $F_{21}$ é a força que é aplicada sobre a carga 2, $Q_2$, devido a existência da carga 1, $Q_1$.
-- $\epsilon_0$ representa a permissividade do vácuo, medida em Farads por metro ($F/m$). 
+- $\epsilon_0$ representa a permissividade do vácuo, medida em Farads por metro ($F/m$).
 - $\epsilon_r$ representa a permissividade do meio onde as cargas estão, um valor escalar e sem unidade.
-- $4\pi $ surge da existência da força em todos os pontos do espaço, uma esfera que se estende da carga até o infinito. 
+- $4\pi $ surge da existência da força em todos os pontos do espaço, uma esfera que se estende da carga até o infinito.
 - $Q_1Q_2$ representa o produto entre as intensidades das cargas que no Sistema Internacional de Unidades são medidas em Coulombs ($C$).
 - $a_{21}$ representa o vetor unitário com origem em $Q1$ e destino em $Q2$.
 
