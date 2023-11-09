@@ -364,6 +364,8 @@ Olhe para os pássaros no céu. Os vetores são como o rastro de um pássaro no 
 
 Como os pássaros no céu, os vetores também podem se juntar, ou se afastar. A soma, a subtração, fazem parte do seu voo. Alguns podem achar útil imaginar isso, recorrendo a geometria, como um paralelogramo, uma forma com lados paralelos que mostra como um vetor soma ao outro.
 
+Eu não vou priorizar uma jornada pelo mundo das formas e linhas, não aqui, não agora. Mesmo assim, a amável leitora precisa lembrar que a geometria, silenciosa e imóvel, sempre estará lá, por baixo de tudo, o esqueleto do invisível que dá forma física do nosso universo. Usando um pouco de geometria, a soma de vetores, pode ser facilmente visualizada em um espaço bidimensional, um plano. Neste caso, podemos transladar os vetores envolvidos de forma a criar um paralelogramo. A diagonal maior deste paralelogramo representará a soma dos vetores.
+
 <div class="floatRight">
 
 <img class="lazyimg" src="/assets/images/SomaVetores.jpeg" alt="Paralelogramo formado pelos vetores originais, suas translações no espaço e a representação do vetor soma.">
@@ -371,23 +373,29 @@ Como os pássaros no céu, os vetores também podem se juntar, ou se afastar. A 
 <legend class="legenda">Figura 3 - Soma de vetores usando a regra do paralelogramo.</legend>
 </div>
 
-Eu não priorizar uma jornada pelo mundo das formas e linhas, não aqui, não agora. Mesmo assim, a amável leitora precisa lembrar que a geometria, silenciosa e imóvel, sempre estará lá, por baixo de tudo, o esqueleto do invisível que dá forma física do nosso universo. A soma de vetores, pode ser visualizada em um espaço bidimensional, um plano. Neste caso, podemos transladar os vetores e formar um paralelogramo. A diagonal maior deste paralelogramo representa a soma dos vetores.
+Na Figura 3, o vetor $\vec{R}$, resultante de $\vec{P}+\vec{Q}$ pode ser deduzido com a aplicação da trigonometria aplicada aos triângulos, formados pela translação dos vetores. Transladamos uma cópia de $\vec{Q}$ até o ponto $A$ e transladamos uma cópia de $\vec{P}$ até o ponto $D$, formando um paralelogramo, $OABD$. 
 
-O vetor $\vec{R}$, resultante de $\vec{P}+\vec{Q}$ pode ser deduzido com a aplicação da trigonometria aplicada aos triângulos, formados pela translação dos vetores. Transladamos uma cópia de $\vec{Q}$ até o ponto $A$ e transladamos $P$ até o ponto $R$, formando o paralelogramo. A seguir, criamos uma linha perfeitamente paralela ao vetor $\vec{P}$ e criamos uma linha perfeitamente transversal a esta linha que passe pelo ponto $B$. Formando, além do paralelogramo que dá nome a regra, um triângulo retângulo, $OCB$, que nos ajudará a determinar a magnitude e ângulo do vetor $R$. Considerando os segmentos de reta $OC$, $OB$ e $BC$ e o Teorema de Pitágoras teremos:
+Para determinar o vetor $\vec{R}$, criamos uma linha perfeitamente sobreposta ao vetor $\vec{P}$ que se estenda além do seu comprimento, e um segmento de reta, perfeitamente transversal a extensão do vetor $\vec{P}$ que passe pelo ponto $B$. Chamaremos este segmento de reta perpendicular de $\overline{CB}$. Neste ponto, além do paralelogramo que dá nome a regra, formamos um triângulo retângulo, $OCB$.
+
+Considerando os segmentos de reta $\overline{OC}$, $\overline{OB}$ e $\overline{BC}$ que formam o triângulo $OCB$ e o Teorema de Pitágoras teremos:
 
 $$\overline{OB}^2 =\overline{OC}^2 + \overline{BC}^2 $$
 
-Que podemos escrever na forma:
+Que pode ser escrito em uma forma mais conveniente, de dividirmos $\overline{OC}$ em dois segmentos de reta:
 
 $$\overline{OB}^2 =(\overline{OA}+\overline{AC})^2 + \overline{BC}^2 \quad (\text{i})$$
 
-Observando o triângulo $ABC$: 
+Observando o triângulo $OCB$, e aplicando uma pitada de trigonometria podemos dizer que:
 
 $$cos \theta = \frac{\overline{AC} }{\overline{BC} } \space\space \therefore \space\space \overline{AC} = (cos \theta) (\overline{BC})$$
 
 Como $\overline{AB} = \overline{OD} = \vert \vec{Q} \vert$ teremos:
 
 $$\overline{AC} = (cos \theta) (\vert \vec{Q} \vert)$$
+
+Este não é o único triângulo que temos. Ainda podemos trabalhar com o triângulo $ABC$. Neste caso: 
+
+$$cos \theta = \frac{\overline{BC} }{\overline{AB} } \space\space \therefore \space\space \overline{BC} = (cos \theta) (\overline{AB})$$
 
 A paciente leitora precisa olhar esta soma com carinho e cuidado. Observe que quando encontramos a diagonal principal, encontramos também uma área. A área do paralelogramo.
 
@@ -450,7 +458,7 @@ A consistência ressalta a beleza da matemática. As operações de adição e s
 
 2. **associatividade da adição de vetores:** a forma como os vetores são agrupados na adição não afeta o resultado final. Assim, $(\vec{A} + \vec{B}) + \vec{C} = \vec{A} + (\vec{B} + \vec{C})$. A associatividade é como um grupo de amigos que se reúne. Não importa a ordem de chegada o resultado é uma festa. A subtração, entretanto, não é associativa, ou seja, $(\vec{A} - \vec{B}) - \vec{C} ≠ \vec{A} - (\vec{B} - \vec{C})$.
 
-3. **Distributividade da multiplicação por escalar em relação à adição de vetores:** Se você multiplicar a soma de dois vetores por um escalar, o resultado será o mesmo que se você multiplicar cada vetor pelo escalar e somar os resultados. Isto é, $m*(\vec{A} + \vec{B}) = m\vec{A} + m\vec{B}$.
+3. **Distributividade da multiplicação por escalar em relação à adição de vetores:** Se você multiplicar a soma de dois vetores por um escalar, o resultado será o mesmo que se você multiplicar cada vetor pelo escalar e somar os resultados. Isto é, $m(\vec{A} + \vec{B}) = m\vec{A} + m\vec{B}$.
 
 Essas propriedades são fundamentais para a manipulação de vetores em muitas áreas da física e da matemática e podem ser resumidas por:
 
