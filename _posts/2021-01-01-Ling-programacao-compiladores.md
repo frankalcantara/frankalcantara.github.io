@@ -5,7 +5,7 @@ author: Frank
 categories: [disciplina]
 tags: [interpretadores, linguagem natural, inteligência artificial, parsers]
 image: assets/images/gato1.jpg
-featured: true
+featured: false
 hidden: true
 rating: 3.5
 ---
