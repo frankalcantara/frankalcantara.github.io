@@ -3,7 +3,8 @@
 	"C_Cpp.default.intelliSenseMode": "windows-msvc-x64",
 	"C_Cpp.autocompleteAddParentheses": true,
 	"html.autoClosingTags": false,
-	"[markdown]": {},
+	"[markdown]": {
+	},
 	"cSpell.words": [
 		"antecendente",
 		"booleana",

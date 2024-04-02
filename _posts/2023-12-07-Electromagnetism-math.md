@@ -19,6 +19,7 @@ keywords:
   - Poetry
   - Vectorial Algebra
 rating: 5
+published: false
 ---
 
 Electromagnetism is the law, the ordering that cradles the universe. Like an ancient deity that governs the existence and movements of everything that exists. Two forces, electric and magnetic, in an endless dance, shape everything from a grain of dust to an ocean of stars. Even the very device you use to decipher these words owes its existence and functioning to Electromagnetism.
