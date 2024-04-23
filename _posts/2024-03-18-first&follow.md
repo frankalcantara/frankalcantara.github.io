@@ -45,7 +45,7 @@ Ambos são essenciais na análise sintática LL, uma vez que permitem prever qua
 
 ## Regras de criação dos conjuntos $FIRST \& FOLLOW$
 
-###Conjunto First
+### Conjunto First
 
 o conjunto $FIRST$ de um símbolo não-terminal é o conjunto de terminais que podem aparecer no início de alguma string derivada desse símbolo.
 
@@ -90,15 +90,15 @@ $$
 
 Logo: $FIRST =\{(S,\{a, b\}),(A,\{c, d\}),(B,\{e, f\})\}$, um conjunto de tuplas.
 
-###Conjunto FOLLOW
+### Conjunto FOLLOW
 
 O conjunto $FOLLOW$ de um símbolo não-terminal é o conjunto de terminais que podem aparecer imediatamente à direita desse não-terminal em alguma forma sentencial derivada. Para calcular o conjunto $FOLLOW(A)$ para cada não-terminal $A$, siga estes passos:
 
 1. Coloque o símbolo de fim de entrada $(\$)$ no $FOLLOW$ do símbolo inicial da gramática.
 
-  Ao colocar o símbolo de fim de entrada (\$) no $FOLLOW$ do símbolo inicial da gramática, garantimos que o analisador sintático reconheça a última derivação da gramática como válida. Isso significa que o analisador estará preparado para encontrar o símbolo (\$) ao final da string de entrada, indicando que a análise foi concluída com sucesso.
+    Ao colocar o símbolo de fim de entrada (\$) no $FOLLOW$ do símbolo inicial da gramática, garantimos que o analisador sintático reconheça a última derivação da gramática como válida. Isso significa que o analisador estará preparado para encontrar o símbolo (\$) ao final da string de entrada, indicando que a análise foi concluída com sucesso.
 
-  Em outras palavras, o símbolo (\$) no $FOLLOW$ do símbolo inicial representa a expectativa de que a string de entrada seja completamente processada e que não existam símbolos "soltos" após a última derivada.
+    Em outras palavras, o símbolo (\$) no $FOLLOW$ do símbolo inicial representa a expectativa de que a string de entrada seja completamente processada e que não existam símbolos "soltos" após a última derivada.
 
 2. Para cada produção $X \rightarrow \alpha B \beta$, onde $B$ seja um não-terminal e $\beta$ é uma sequência de símbolos que pode ser vazia:
 
@@ -127,20 +127,20 @@ Este conjunto de regras de produção permite criar:
 | A       | { c, d, \$ }    | A pode ser seguido por "c" na regra A -> c, "d" na regra A -> d, ou pelo símbolo de fim de entrada \$ em regras que contêm A. |
 | B       | { a, c, d, \$ } | B pode ser seguido por "a" na regra S -> aB, "c" na regra A -> cB, "d" na regra A -> d B, ou pelo símbolo de fim de entrada \$ em regras que contêm B. |
 
-
-###Construindo a tabela de análise LL(1)
+### Construindo a tabela de análise LL(1)
 
 A tabela de análise LL(1) é usada para determinar qual regra de produção aplicar, dada a entrada corrente e o não-terminal no topo da pilha de análise. Para construí-la:
 
 Para cada produção $A\rightarrow \alpha$ faça:
 
-   - Para cada terminal $a$ em $FIRST(\alpha)$, adicione a regra $A\rightarrow \alpha$ à tabela para a combinação $[A,a]$.
-   - Se $\varepsilon$ está em $FIRST(\alpha)$, então para cada símbolo $b$ em $FOLLOW(A)$, adicione a regra $A\rightarrow \alpha$ à tabela para a combinação $[A,b]$.
-   - Se $\\$$ está em $FOLLOW(A)$, adicione também para $[A, \$]$.
+- Para cada terminal $a$ em $FIRST(\alpha)$, adicione a regra $A\rightarrow \alpha$ à tabela para a combinação $[A,a]$.
+- Se $\varepsilon$ está em $FIRST(\alpha)$, então para cada símbolo $b$ em $FOLLOW(A)$, adicione a regra $A\rightarrow \alpha$ à tabela para a combinação $[A,b]$.
+- Se $\\$$ está em $FOLLOW(A)$, adicione também para $[A, \$]$.
 
 Se há conflitos na tabela (mais de uma regra para a mesma combinação de não-terminal e terminal de entrada), a gramática não é LL(1).
 
 ## Exemplo de criação de conjuntos $FIRST \& FOLLOW$
+
 Considerando o seguinte conjunto de regras de produção
 
 $$
@@ -320,8 +320,6 @@ Começamos com a pilha contendo o símbolo inicial da gramática, $ S $, e a str
 
 Como conseguimos consumir toda a entrada "n\*n$" e esvaziar a pilha sem encontrar nenhum erro, a string "n\*n" é de fato parte da linguagem identificada por este parser LL(1).
 
-
-
 ## Testando com "n*n+n"
 
 Para analisar a string "n*n+n" usando o parser LL(1) e a tabela de análise construída, seguiríamos o mesmo processo que usamos para a string anterior "n*n". No entanto, desta vez, adicionaremos o terminal '+' na entrada. Vamos ver o passo a passo:
@@ -451,8 +449,6 @@ Esses conjuntos FIRST indicam que as strings derivadas de $S$, $E$, $T$, e $F$ p
 - $F$ também é o último não-terminal nas produções de $T$ e $E$, assim tudo que está em FOLLOW(T) e FOLLOW(E) também deve estar em FOLLOW(F).
 - FOLLOW(F) = {+, -, *, /, ), \$}
 
-### Conclusão
-
 Os conjuntos FOLLOW para cada não-terminal são:
 
 - FOLLOW(S) = {\$}
@@ -487,9 +483,9 @@ Note que a tabela deixa várias células vazias, indicando erros de parsing para
 
 ### Observações Importantes
 
-1. **Tratamento de Erros:** A tabela de derivação apresentada é didática e oferece um caminho para analisar strings válidas de acordo com uma gramática explicitada por suas **Regras de Produção**. Porém, em um cenário real, entradas inválidas são comuns, e um _parser_ precisa de mecanismos para identificar, reportar e possivelmente corrigir erros sintáticos. Isso irá envolver estratégias diversas como pular _tokens_ até encontrar um que faça sentido no contexto atual ou fornecer mensagens de erro detalhadas que ajudem o usuário a corrigir a entrada.
+1. **Tratamento de Erros:** As tabelas de derivação apresentadas são didáticas e oferecem um caminho para analisar _strings_ válidas de acordo com uma gramática explicitada por suas **Regras de Produção**. Porém, em um cenário real, entradas inválidas são comuns, e um _parser_ precisa de mecanismos para identificar, reportar e possivelmente corrigir erros sintáticos. Isso irá envolver estratégias diversas como pular _tokens_ até encontrar um que faça sentido no contexto atual ou fornecer mensagens de erro detalhadas que ajudem o usuário a corrigir a entrada.
 
-2. **Manipulação de Símbolos de Fechamento de Escopo:** A gramática envolve o uso de parênteses para delinear o escopo de expressões. A tabela assume que os parênteses serão tratados corretamente como parte das regras de produção. No entanto, a implementação do parser precisa gerenciar explicitamente o escopo aberto e fechado pelos parênteses, garantindo que cada parêntese aberto seja correspondido por um fechamento apropriado e que os escopos sejam aninhados corretamente. Uma técnica para a solução deste problema envolve contagem positiva e negativa.
+2. **Manipulação de Símbolos de Fechamento de Escopo:** A gramática envolve o uso de parênteses para delinear o escopo de expressões. A tabela assume que os parênteses serão tratados corretamente como parte das regras de produção. No entanto, a implementação do parser precisa gerenciar explicitamente o escopo aberto e fechado pelos parênteses, garantindo que cada parêntese aberto seja correspondido por um fechamento apropriado e que os escopos sejam aninhados corretamente. Uma técnica para a solução deste problema envolve contagem positiva e negativa. Positiva a cada parênteses aberto e negativa a cada parenteses fechado. Se terminarmos a expressão com um valor diferente de zero este leite estragou.
 
 3. **Precedência e Associatividade de Operadores:** Enquanto a gramática e a tabela LL(1) refletem a precedência dos operadores (por exemplo, `*` e `/` têm maior precedência que `+` e `-`), a implementação precisa garantir que essas regras sejam aplicadas consistentemente para avaliar expressões corretamente. Além disso, a associatividade dos operadores (por exemplo, da esquerda para a direita) também precisa ser considerada ao analisar expressões com múltiplos operadores do mesmo nível de precedência.
 
