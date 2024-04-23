@@ -30,6 +30,7 @@ keywords:
   - Poetry
   - Vectorial Algebra
 rating: 5
+published: false
 ---
 
 # Frist & Follow
