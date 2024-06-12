@@ -11,7 +11,7 @@ tags:
     - Compiladores
 image: assets/images/deriva.jpeg
 description: Como construir os conjuntos First  e Follow que irão permitir a criação da tabela de análise para o algoritmo de parser.
-slug: parsers-ll(1)
+slug: first-follow
 keywords:
     - parsers
     - first
