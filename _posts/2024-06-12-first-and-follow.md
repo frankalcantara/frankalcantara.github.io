@@ -19,7 +19,7 @@ keywords:
     - derivation
     - derivação
 rating: 5
-published: false
+published: 2024-06-12T13:16:53.564Z
 draft: 2024-06-12T13:00:39.229Z
 preview: Como construir os conjuntos First  e Follow que irão permitir a criação da tabela de análise para o algoritmo de parser.
 ---
