@@ -11,7 +11,7 @@ tags:
     - Compiladores
 image: assets/images/deriva.jpeg
 description: Como criar tabelas de análise para parsers ll(1) usando os conjuntos First e Follow.
-slug: 2024-06-21T19:41:43.847Z
+slug: tabela-derivação
 keywords:
     - parsers
     - first
