@@ -30,7 +30,7 @@ Para construir a Tabela de Derivação $LL(1)$, acrescentaremos um $\$$ no final
 
 - Para cada terminal $a$ em $FIRST(\alpha)$, adicione a regra $A \to \alpha$ à célula $[A, a]$ da tabela.
 - Se $\varepsilon$ está em $FIRST(\alpha)$, adicione a regra $A \to \alpha$ à tabela em $[A, b]$ para cada $b$ em $FOLLOW(A)$.
-- Se $\$$ está em $FOLLOW(A)$, adicione também $A \to \alpha$ à célula $[A, \$]$.
+- Se $ \\$ $ está em $FOLLOW(A)$, adicione também $A \to \alpha$ à célula $[A, \\$]$.
 
 Podemos retornar ao um [exemplo 1 de criação do conjunto $FIRST$](https://frankalcantara.com/first-follow/) e, a partir deste exemplo, criar a Tabela de Derivação correspondente a gramática dada naquele exemplo.
 
