@@ -59,9 +59,9 @@ $X$ de uma gramática que esteja definida por um conjunto de regras de produçã
 
 Repita esses passos até que os conjuntos $FIRST$ de todos os símbolos não-terminais não possam ser alterado.
 
-### Exemplos de Criação de Conjuntos $FIRST$
+### Exemplo 1: Criação de Conjuntos $FIRST$
 
-**Exemplo 1**: Considere a gramática definida pelo seguinte conjunto de regras de produção:
+Considere a gramática definida pelo seguinte conjunto de regras de produção:
 
 $$
 \begin{array}{cc}
