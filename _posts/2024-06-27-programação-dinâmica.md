@@ -143,7 +143,7 @@ To calculate the number of times the function will be called for any value $n$, 
 
 $$ T(n) = T(n-1) + T(n-2) + 1 $$
 
-Where $T(n)$ is the total number of calls to calculate `fibonacci(n)`.
+Where $T (n) $ is the total number of calls to calculate `fibonacci(n)`.
 
 To illustrate the formula $T(n) = T(n-1) + T(n-2) + 1$ with $n = 10$, we can calculate the number of recursive calls $T(10)$. Let's start with the base values $T(0)$ and $T(1)$, and then calculate the subsequent values up to $T(10)$.
 
