@@ -17,7 +17,7 @@ tags:
     - Coding Examples
     - Algorithm Optimization
     - Practical Programming Guide
-image: assets/images/deriva.jpeg
+image: assets/images/prog_dinamic.jpeg
 description: Dynamic programming in C++ with practical examples, performance analysis, and detailed explanations to optimize your coding skills and algorithm efficiency.
 slug: dynamic-programming
 keywords:
