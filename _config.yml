@@ -42,11 +42,12 @@ paginate: 6
 paginate_path: /page:num/
 
 # Other
+highlighter: "blue"
 markdown: kramdown
 
 kramdown:
   input: GFM
-  syntax_highlighter: rouge
+  syntax_highlighter: "blue"
   syntax_highlighter_opts:
     block:
       line_numbers: true

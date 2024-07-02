@@ -43,11 +43,22 @@
 		<link href="{{ site.baseurl }}/assets/css/main.css" rel="stylesheet" />
 		<script src="{{ site.baseurl }}/assets/js/jquery.min.js"></script>
 
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/atom-one-dark.min.css"
-		/>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.css" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+		<style>
+			pre code {
+				counter-reset: line-numbering;
+			}
+			pre code .hljs::before {
+				content: counter(line-numbering);
+				counter-increment: line-numbering;
+				display: inline-block;
+				width: 2em;
+				padding-right: 1em;
+				text-align: right;
+				color: #ccc;
+			}
+		</style>
 		<script>
 			hljs.initHighlightingOnLoad();
 		</script>
