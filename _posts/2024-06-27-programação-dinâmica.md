@@ -179,6 +179,8 @@ If we look at dynamic programming, we will see an optimization technique that is
 
 In this case, we can see two examples in Python. First, an example of Dynamic Programming with memoization:
 
+### Example 2: memoization
+
 ```python
 # Criação do dicionário memo
 memo = {}
@@ -192,11 +194,11 @@ def fibonacci_memo(n, memo):
 
 ```
 
-In this example, `fibonacci_memo` stores the results of previous calls in the `memo` dictionary, avoiding repeated calculations. From the perspective of dynamic programming, this function divides the larger problem (calculating Fibonacci of \( n \)) into smaller subproblems (calculating Fibonacci of \( n-1 \) and \( n-2 \)), uses a data structure, the `memo` dictionary, to store the results of the subproblems. This avoids redundant calculations of the same values, and before calculating the Fibonacci value for a given \( n \), the function checks if the result is already stored in the `memo` dictionary. If it is, it reuses that result, saving computation time. Finally, the function ensures that each subproblem is solved only once, resulting in more efficiency compared to the simple recursive approach.
+In this example, `fibonacci_memo` stores the results of previous calls in the `memo` dictionary, avoiding repeated calculations. From the perspective of dynamic programming, this function divides the larger problem (calculating Fibonacci of $n$) into smaller subproblems (calculating Fibonacci of $n-1$ and $n-2$), uses a data structure, the `memo` dictionary, to store the results of the subproblems. This avoids redundant calculations of the same values, and before calculating the Fibonacci value for a given $n$, the function checks if the result is already stored in the `memo` dictionary. If it is, it reuses that result, saving computation time. Finally, the function ensures that each subproblem is solved only once, resulting in more efficiency compared to the simple recursive approach.
 
 The last statement of the previous paragraph requires reflection. I am considering performance in this statement only in terms of computation time. Performance can also be considered in relation to memory usage, energy consumption, and any other factor that is interesting or important for a given problem. Keep this in mind whenever I state that performance has improved in this text. Well, who is thinking about a example?
 
-### Example 2: Fibonacci with Tabulation
+### Example 3: Fibonacci with Tabulation
 
 Finally, we can have an example of Dynamic Programming with Tabulation. Again using Python as a kind of pseudocode:
 
