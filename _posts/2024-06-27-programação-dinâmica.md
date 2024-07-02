@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Programação Dinâmica
+title: Exploring Dynamic Programming in C++ - Techniques and Performance Insights
 author: Frank
 categories:
     - Matemática
@@ -11,53 +11,102 @@ tags:
     - Linguagens Formais
     - Programação Dinâmica
     - Dynamic Programming
+    - Dynamic Programming
+    - C++ Algorithms
+    - Performance Analysis
+    - Coding Examples
+    - Algorithm Optimization
+    - Practical Programming Guide
 image: assets/images/deriva.jpeg
-description: Introdução as técnicas de programação dinâmica com os exemplos mais comuns.
+description: Dynamic programming in C++ with practical examples, performance analysis, and detailed explanations to optimize your coding skills and algorithm efficiency.
 slug: dynamic-programming
 keywords:
-    - programming
-    - programação
-    - Dynamic
-    - Dinâmica
-    - Algorithms
-    - Algoritmos
+    - Dynamic Programming
+    - C++ Algorithms
+    - Coding Examples
+    - Performance Optimization
+    - Algorithm Efficiency
+    - Programming Guide
+    - Code Comparison
+    - Developer Tips
 rating: 5
 published: 2024-06-27T19:43:15.124Z
 draft: null
-preview: O que é programação dinâmica com exemplos de algoritmos desenvolvidos em C++
+preview: In this comprehensive guide, we delve into the world of dynamic programming with C++. Learn the core principles of dynamic programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 ---
 
-A programação dinâmica é uma forma diferente de pensar na hora de resolver problemas. Programar, por si só, já é uma forma diferente de pensar, então, tentando ser honesto, posso dizer que a programação dinâmica é uma forma diferente dentro de uma forma diferente de pensar. E, se não percebeu ainda, há um conceito de recursão tentando emergir nesta definição.
+Dynamic programming is a different way of thinking when it comes to solving problems. Programming itself is already a different way of thinking, so, to be honest, I can say that dynamic programming is a different way within a different way of thinking. And, if you haven't noticed yet, there is a concept of recursion trying to emerge in this definition.
 
-A ideia geral é que você, paciente leitora, seja capaz de dividir um problema grande e difícil em pedaços pequenos e fáceis. Para tanto, armazenaremos informações e reutilizaremos estas informações sempre que necessário no nosso algoritmo.
+The general idea is that you, dear reader, should be able to break a large and difficult problem into small and easy pieces. To do this, we will store information and reuse it whenever necessary in our algorithm.
 
-É muito provável que a amável leitora ao estudar algoritmos tenha sido apresentada a técnicas de programação dinâmica sem se dar conta. Então, também é muito provável que encontre algoritmos que já viu sem saber que se tratava de programação dinâmica.
+It is very likely that you, kind reader, have been introduced to dynamic programming techniques while studying algorithms without realizing it. So, it is also very likely that you will encounter, in this text, algorithms you have seen before without knowing they were dynamic programming.
 
-Minha pretensão será decompor o processo de programação dinâmica em etapas claras, focando no algoritmo de solução, de modo que você possa entender e implementar essas etapas por conta e risco sempre enfrentar um problema em entrevistas técnicas, ambientes de produção ou competições de programação.
+My intention is to break down the dynamic programming process into clear steps, focusing on the solution algorithm, so that you can understand and implement these steps on your own whenever you face a problem in technical interviews, production environments, or programming competitions. Without any hesitation, I will try to present performance tips and tricks in C++. However, this should not be considered a limitation; we will look at the algorithms before the code, and you will be able to implement the code in your preferred programming language.
 
-## Havia um quê de recursão se intrometendo
+## There was a hint of recursion sneaking in.
 
-Há quem diga que *a programação dinâmica é uma técnica para tornar o código recursivo mais eficiente*. Há uma relação que precisa ser explorada: todos os algoritmos de programação dinâmica são recursivos mas, nem todos os algoritmos recursivos são programação dinâmica.
+Some say that dynamic programming is a technique to make recursive code more efficient. There is a relationship that needs to be explored: *all dynamic programming algorithms are recursive, but not all recursive algorithms are dynamic programming*.
 
-A recursividade é uma poderosa técnica de resolução de problemas. Um código recursivo pode ser provado matematicamente correto de forma relativamente simples. E, só isso já seria motivo suficiente para usar recursão em todos os seus códigos.
+Recursion is a powerful problem-solving technique. Recursive code can be mathematically proven correct relatively easily. And that alone is reason enough to use recursion in all your code. So, let's begin with that.
 
-A prova da correção de um algoritmo recursivo geralmente envolve apenas duas etapas: a prova de que a base da recursão está correta e a prova de que o passo recursivo está correto. No domínio da prova matemática por indução podemos nos referir a estes componentes como a **base da indução** e o **passo da indução**, respectivamente. Neste caso:
+The proof of the correctness of a recursive algorithm generally involves only two steps: proving that the base case of the recursion is correct and proving that the recursive step is correct. In the domain of mathematical induction proof, we can refer to these components as the *base case* and the *inductive step*, respectively. In this case:
 
-  Para provar a **base da indução** verificamos o caso mais simples da recursão, geralmente o caso base ou os casos base, está correto. Esses são os casos que não dependem de chamadas recursivas.
+    - To prove the **base case**, we check the simplest case of the recursion, usually the base case or cases, to ensure it is correct. These are the cases that do not depend on recursive calls.
 
-  Para provar o **passo da indução** verificamos se a função recursiva está correta para todos os casos menores ou subproblemas, então ela também está correta para o caso geral. Ou seja, assume-se que a função está correta para entradas menores, ou para um conjunto menor de entradas, as hipótese de indução, e, com base nisso, provamos, ou não, que a função recursiva está correta.
+    - To prove the **inductive step**, we verify that if the recursive function is correct for all smaller cases or subproblems, then it is also correct for the general case. In other words, we assume that the function is correct for smaller inputs, or for a smaller set of inputs, the induction hypothesis, and based on this, we prove, or not, that the recursive function is correct.
 
-Além da facilidade de prova matemática, o código recursivo se destaca por ser claro e intuitivo, principalmente para os problemas que possuem estruturas repetitivas como a travessia de árvores, a resolução de labirintos e o cálculo de séries matemáticas.
+Beyond the ease of mathematical proof, recursive code stands out for being clear and intuitive, especially for problems with repetitive structures such as tree traversal, maze solving, and calculating mathematical series.
 
-Muitos problemas são naturalmente definidos de forma recursiva. Por exemplo, a definição matemática da sequência de Fibonacci ou a estrutura de árvores binárias são inerentemente recursivas a partir da sua própria. Nestes casos, a solução recursiva será mais simples, direta e, provavelmente, mais eficiente.
+Many problems are naturally defined in a recursive manner. For example, the mathematical definition of the Fibonacci sequence or the structure of binary trees are inherently recursive. In these cases, the recursive solution will be simpler, more straightforward, and likely more efficient.
 
-Frequentemente, a solução recursiva é mais concisa e requer menos linhas de código quando comparada com a solução iterativa. Menos linhas, menos erros, mais facilidade de leitura e entendimento. Parece bom.
+Often, the recursive solution is more concise and requires fewer lines of code compared to the iterative solution. Fewer lines, fewer errors, easier to read and understand. Sounds good.
 
-Por fim, a recursividade é a abordagem quase ideal para a aplicação das técnicas de solução baseadas em divisão e conquista. Desde Júlio Cesar que sabemos que é mais fácil dividir para conquistar. Neste caso, um problema é dividido em subproblemas, resolvidos individualmente e, em seguida, combinados para formar a solução final. Exemplos clássicos, e acadêmicos, destas técnicas incluem algoritmos de ordenação como *quicksort* e *mergesort*.
+Finally, recursion is an almost ideal approach for applying divide-and-conquer techniques. Since Julius Caesar, we know it is easier to divide and conquer. In this case, a problem is divided into subproblems, solved individually, and then combined to form the final solution. Classic academic examples of these techniques include sorting algorithms like quicksort and mergesort.
 
-A doce leitora deve ter erguido as sobrancelhas. É aqui que a recursão e a programação dinâmica se tocam, não de forma sutil e delicada, como a carícia de um amante no rosto da amada. Mas, com a decisão e impacto da luva de Mike Tyson no queixo do adversário. A divisão do problema principal em subproblemas é a essência fundamental da recursão e da programação dinâmica.
+The sweet reader might have raised her eyebrows. This is where recursion and dynamic programming touch, not subtly and delicately, like a lover's caress on the beloved's face. But with the decisiveness and impact of Mike Tyson's glove on the opponent's chin. The division of the main problem into subproblems is the fundamental essence of both recursion and dynamic programming.
 
-A programação dinâmica e a recursividade estão relacionadas, ambas envolvem a resolução de problemas com a divisão de um problema em problemas menores. No entanto, enquanto a recursividade resolve os problemas menores sem considerar o custo computacional das chamadas repetidas, a programação dinâmica otimiza essas soluções via armazenamento e reutilização de resultados já obtidos. O exemplo mais típico de recursividade é a determinação do valor de ordem $n$ da Sequência de Fibonacci.
+Dynamic programming and recursion are related; *both involve solving problems by breaking a problem into smaller problems. However, while recursion solves the smaller problems without considering the computational cost of repeated calls, dynamic programming optimizes these solutions by storing and reusing previously obtained results*. The most typical example of recursion is determining the nth order value of the Fibonacci sequence can be seen in Flowchart 1.
+
+![]({{ site.baseurl }}/assets/images/fibbo_recursivo_flow.png)
+*Flowchart 1 - Recursive Fibonacci nth algorithm*
+
+The Flowchart 1 represents a function for calculating the nth number of the Fibonacci Sequence, for all $n \geq 0$ as the desired number.
+
+In Flowchart 1 we will have:
+
+- **Base Case**: The base case is the condition that terminates the recursion. For the Fibonacci sequence, the base cases are for $n = 0$ and $n = 1$:
+  - When $n = 0$, the function returns 0.
+  - When $n = 1$, the function returns 1.
+
+- **Recursive Step**: The recursive step is the part of the function that calls itself to solve smaller subproblems. In the Fibonacci sequence, each number is the sum of the two preceding ones:
+
+$$F(n) = F(n - 1) + F(n - 2)$$
+
+When the function receives a value $n$:
+
+- **Base Case**: It checks if $n$ is 0 or 1. If so, it returns $n$.
+- **Recursive Step**: If $n$ is greater than 1, the function calls itself twice: once with $n - 1$ and once with $n - 2$. The sum of these two results is returned.
+
+This leads us to Example 1.
+
+### Example 1: Let's calculate $\text{fibonacci}(5)$:
+
+1. $\text{fibonacci}(5)$ calls $\text{fibonacci}(4)$ and $\text{fibonacci}(3)$
+2. $\text{fibonacci}(4)$ calls $\text{fibonacci}(3)$ and $\text{fibonacci}(2)$
+3. $\text{fibonacci}(3)$ calls $\text{fibonacci}(2)$ and $\text{fibonacci}(1)$
+4. $\text{fibonacci}(2)$ calls $\text{fibonacci}(1)$ and $\text{fibonacci}(0)$
+5. $\text{fibonacci}(1)$ returns 1
+6. $\text{fibonacci}(0)$ returns 0
+7. $\text{fibonacci}(2)$ returns $1 + 0 = 1$
+8. $\text{fibonacci}(3)$ returns $1 + 1 = 2$
+9. $\text{fibonacci}(2)$ returns 1 (recalculated)
+10. $\text{fibonacci}(4)$ returns $2 + 1 = 3$
+11. $\text{fibonacci}(3)$ returns 2 (recalculated)
+12. $\text{fibonacci}(5)$ returns $3 + 2 = 5$
+
+Thus, $\text{fibonacci}(5)$ returns 5. The function breaks down recursively until it reaches the base cases, then combines the results to produce the final value.
+
+And we can write it in Python as:
 
 ```python
 def fibonacci(n):
