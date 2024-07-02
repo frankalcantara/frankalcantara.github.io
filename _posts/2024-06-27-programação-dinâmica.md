@@ -51,9 +51,9 @@ Recursion is a powerful problem-solving technique. Recursive code can be mathema
 
 The proof of the correctness of a recursive algorithm generally involves only two steps: proving that the base case of the recursion is correct and proving that the recursive step is correct. In the domain of mathematical induction proof, we can refer to these components as the *base case* and the *inductive step*, respectively. In this case:
 
-    - To prove the **base case**, we check the simplest case of the recursion, usually the base case or cases, to ensure it is correct. These are the cases that do not depend on recursive calls.
+- To prove the **base case**, we check the simplest # case of the recursion, usually the base case or cases, to ensure it is correct. These are the cases that do not depend on recursive calls.
 
-    - To prove the **inductive step**, we verify that if the recursive function is correct for all smaller cases or subproblems, then it is also correct for the general case. In other words, we assume that the function is correct for smaller inputs, or for a smaller set of inputs, the induction hypothesis, and based on this, we prove, or not, that the recursive function is correct.
+- To prove the **inductive step**, we verify that if the recursive function is correct for all smaller cases or subproblems, then it is also correct for the general case. In other words, we assume that the function is correct for smaller inputs, or for a smaller set of inputs, the induction hypothesis, and based on this, we prove, or not, that the recursive function is correct.
 
 Beyond the ease of mathematical proof, recursive code stands out for being clear and intuitive, especially for problems with repetitive structures such as tree traversal, maze solving, and calculating mathematical series.
 
@@ -89,24 +89,24 @@ When the function receives a value $n$:
 
 This leads us to Example 1.
 
-### Example 1: Let's calculate $\text{fibonacci}(5)$:
+### Example 1: Let's calculate `fibonacci(5)`:
 
-1. $\text{fibonacci}(5)$ calls $\text{fibonacci}(4)$ and $\text{fibonacci}(3)$
-2. $\text{fibonacci}(4)$ calls $\text{fibonacci}(3)$ and $\text{fibonacci}(2)$
-3. $\text{fibonacci}(3)$ calls $\text{fibonacci}(2)$ and $\text{fibonacci}(1)$
-4. $\text{fibonacci}(2)$ calls $\text{fibonacci}(1)$ and $\text{fibonacci}(0)$
-5. $\text{fibonacci}(1)$ returns 1
-6. $\text{fibonacci}(0)$ returns 0
-7. $\text{fibonacci}(2)$ returns $1 + 0 = 1$
-8. $\text{fibonacci}(3)$ returns $1 + 1 = 2$
-9. $\text{fibonacci}(2)$ returns 1 (recalculated)
-10. $\text{fibonacci}(4)$ returns $2 + 1 = 3$
-11. $\text{fibonacci}(3)$ returns 2 (recalculated)
-12. $\text{fibonacci}(5)$ returns $3 + 2 = 5$
+1. `fibonacci(5)` calls `fibonacci(4)` and `fibonacci}(3)`
+2. `fibonacci(4)` calls `fibonacci(3)` and `fibonacci}(2)`
+3. `fibonacci(3)` calls `fibonacci(2)` and `fibonacci}(1)`
+4. `fibonacci(2)` calls `fibonacci(1)` and `fibonacci(0)`
+5. `fibonacci(1)` returns 1
+6. `fibonacci(0)` returns 0
+7. `fibonacci(2)` returns $1 + 0 = 1$
+8. `fibonacci(3)` returns $1 + 1 = 2$
+9. `fibonacci(2)` returns 1 (recalculated)
+10. `fibonacci(4)` returns $2 + 1 = 3$
+11. `fibonacci(3)` returns 2 (recalculated)
+12. `fibonacci(5)` returns $3 + 2 = 5$
 
-Thus, $\text{fibonacci}(5)$ returns 5. The function breaks down recursively until it reaches the base cases, then combines the results to produce the final value.
+Thus, `fibonacci(5)` returns $5$. The function breaks down recursively until it reaches the base cases, then combines the results to produce the final value.
 
-And we can write it in Python as:
+And we can write it in Python, using Python as a kind of pseudocode, as:
 
 ```python
 def fibonacci(n):
@@ -116,17 +116,68 @@ def fibonacci(n):
         return fibonacci(n-1) + fibonacci(n-2)
 ```
 
-Neste exemplo, a função `fibonacci` chama a si mesma para calcular os termos anteriores da Sequência de Fibonacci. Observe que para cada valor desejado, temos que passar por todos os outros. Este é um exemplo de recursão correto e inocente e, neste caso específico, muito eficiente. Veremos esta coisa da eficiência com mais cuidado logo a frente.
+In Example 1, the `fibonacci` function calls itself to calculate the preceding terms of the Fibonacci Sequence. Note that for each desired value, we have to go through all the others. This is an example of correct and straightforward recursion and, in this specific case, very efficient. We will look at this efficiency issue more carefully later.
 
-## Voltando a programação dinâmica
+To determine the number of times the `fibonacci` function is called to calculate the 5th number in the Fibonacci sequence, we can analyze the recursive call tree. Let's count all the function calls, including the duplicate calls.
 
-Se olharmos a programação dinâmica veremos uma técnica de otimização que se baseia na recursividade, mas adiciona armazenamento de resultados intermediários para evitar cálculos redundantes. Existem duas abordagens principais para implementar a programação dinâmica:
+Using the previous example and counting the calls:
 
-***memoização* (Top-Down)**: armazena os resultados das chamadas recursivas em uma estrutura de dados (como um dicionário, ou uma lista, etc.) para reutilização. O nome memoização é um estrangeirismo horrível da palavra *memoization* do inglês.
+1. `fibonacci(1)``fibonacci(5)`
+2. `fibonacci(4)` + `fibonacci(3)`
+3. `fibonacci(3)` + `fibonacci(2)` + `fibonacci(2)` + `fibonacci(1)`
+4. `fibonacci(2)` + `fibonacci(1)` + `fibonacci(1)` + `fibonacci(0)` + `fibonacci(1)` + `fibonacci(0)`
+5. `fibonacci(1)` + `fibonacci(0)`
 
-**Tabulação (Bottom-Up)**: resolve o problema de forma iterativa, preenchendo uma tabela (geralmente uma lista ou matriz) com os resultados dos subproblemas.
+Counting all the calls, we have:
 
-Neste caso, podemos ver dois exemplos em Python. Primeiro, um exemplo de Programação Dinâmica com *memoização*:
+- `fibonacci(5)`: 1 call
+- `fibonacci(4)`: 1 call
+- `fibonacci(3)`: 2 calls
+- `fibonacci(2)`: 3 calls
+- `fibonacci(1)`: 5 calls
+- `fibonacci(0)`: 3 calls
+
+Total: 15 calls. Therefore, the `fibonacci(n)` function is called 15 times to calculate `fibonacci(5)`.
+
+To calculate the number of times the function will be called for any value $n$, we can use the following formula based on the analysis of the recursion tree:
+
+$$ T(n) = T(n-1) + T(n-2) + 1 $$
+
+Where $T(n)$ is the total number of calls to calculate `fibonacci(n)`.
+
+To illustrate the formula $T(n) = T(n-1) + T(n-2) + 1$ with $n = 10$, we can calculate the number of recursive calls $T(10)$. Let's start with the base values $T(0)$ and $T(1)$, and then calculate the subsequent values up to $T(10)$.
+
+Assuming that $T(0) = 1$ and $T(1) = 1$:
+
+$$
+\begin{aligned}
+T(2) &= T(1) + T(0) + 1 = 1 + 1 + 1 = 3 \\
+T(3) &= T(2) + T(1) + 1 = 3 + 1 + 1 = 5 \\
+T(4) &= T(3) + T(2) + 1 = 5 + 3 + 1 = 9 \\
+T(5) &= T(4) + T(3) + 1 = 9 + 5 + 1 = 15 \\
+T(6) &= T(5) + T(4) + 1 = 15 + 9 + 1 = 25 \\
+T(7) &= T(6) + T(5) + 1 = 25 + 15 + 1 = 41 \\
+T(8) &= T(7) + T(6) + 1 = 41 + 25 + 1 = 67 \\
+T(9) &= T(8) + T(7) + 1 = 67 + 41 + 1 = 109 \\
+T(10) &= T(9) + T(8) + 1 = 109 + 67 + 1 = 177 \\
+\end{aligned}
+$$
+
+Therefore, $T(10) = 177$.
+
+Each value of $T(n)$ represents the number of recursive calls to compute $\text{fibonacci}(n)$ using the formula $T(n) = T(n-1) + T(n-2) + 1$. If everything is going well, at this point the esteemed reader must be thinking about creating a recursive function to count how many times the `fibonacci(n)` function will be called. But let's try to avoid this recursion of recursions.
+
+This formula can be used to build a recursion tree and sum the total number of recursive calls. However, for large values of $n$, this can become inefficient. A more efficient approach is to use dynamic programming to calculate and store the number of recursive calls, avoiding duplicate calls.
+
+## Returning to Dynamic Programming
+
+If we look at dynamic programming, we will see an optimization technique that is based on recursion but adds storage of intermediate results to avoid redundant calculations. There are two main approaches to implementing dynamic programming:
+
+- **Memoization (Top-Down)**: stores the results of recursive calls in a data structure (such as a dictionary or a list, etc.) for reuse. The name memoization is a horrible borrowing from the English word *memoization*.
+
+- **Tabulation (Bottom-Up)**: solves the problem iteratively, filling a table (usually a list or matrix) with the results of the subproblems.
+
+In this case, we can see two examples in Python. First, an example of Dynamic Programming with memoization:
 
 ```python
 # Criação do dicionário memo
@@ -141,11 +192,13 @@ def fibonacci_memo(n, memo):
 
 ```
 
-Neste exemplo, `fibonacci_memo` armazena os resultados das chamadas anteriores no dicionário `memo`, evitando cálculos repetidos. Do ponto de vista da programação dinâmica, esta função divide o problema maior (calcular Fibonacci de $n$) em subproblemas menores (calcular Fibonacci de $n-1$ e $n-2$), usa uma estrutura de dados, dicionário `memo`, para armazenar os resultados dos subproblemas. Isso evita o cálculo redundante dos mesmos valores e antes de calcular o valor de Fibonacci para um dado $n$, a função verifica se o resultado já está armazenado no dicionário `memo`. Se estiver, ela reutiliza esse resultado, economizando tempo de computação. Finalmente a função garante que cada subproblema é resolvido uma única vez, resultando em mais eficiência quando comparamos com a abordagem recursiva simples.
+In this example, `fibonacci_memo` stores the results of previous calls in the `memo` dictionary, avoiding repeated calculations. From the perspective of dynamic programming, this function divides the larger problem (calculating Fibonacci of \( n \)) into smaller subproblems (calculating Fibonacci of \( n-1 \) and \( n-2 \)), uses a data structure, the `memo` dictionary, to store the results of the subproblems. This avoids redundant calculations of the same values, and before calculating the Fibonacci value for a given \( n \), the function checks if the result is already stored in the `memo` dictionary. If it is, it reuses that result, saving computation time. Finally, the function ensures that each subproblem is solved only once, resulting in more efficiency compared to the simple recursive approach.
 
-A última afirmação do parágrafo anterior requer reflexão. Eu estou considerando performance, nesta afirmação, apenas no que diz respeito a tempo de computação. Performance pode ser considerada também em relação ao uso de memória, ao consumo de energia e a qualquer outro fator que seja interessante, ou importante, para um determinado problema. Lembre-se disso, sempre que, neste texto eu afirmar que a performance melhorou.
+The last statement of the previous paragraph requires reflection. I am considering performance in this statement only in terms of computation time. Performance can also be considered in relation to memory usage, energy consumption, and any other factor that is interesting or important for a given problem. Keep this in mind whenever I state that performance has improved in this text. Well, who is thinking about a example?
 
-Finalmente podemos ter um exemplo de Programação Dinâmica com Tabulação:
+### Example 2: Fibonacci with Tabulation
+
+Finally, we can have an example of Dynamic Programming with Tabulation. Again using Python as a kind of pseudocode:
 
 ```python
 def fibonacci_tabulation(n):
@@ -158,27 +211,26 @@ def fibonacci_tabulation(n):
     return dp[n]
 ```
 
-Neste exemplo, a função  `fibonacci_tabulation` usa uma lista dp para armazenar os resultados de todos os subproblemas, construindo a solução de baixo para cima.
+In this example, the `fibonacci_tabulation()` function uses a list `dp` to store the results of all subproblems, building the solution from the bottom up. Just to highlight, in Example 2 data is being stored.
 
-## Mas, no último exemplo dados estão sendo armazenados
+This is true! But look closely. The `fibonacci_tabulation(2)` function is an example of tabulation, not memoization, due to the specific characteristics of how the subproblems are solved and stored.
 
-Isso é verdade! Mas olhe bem. A função `fibonacci_tabulation` é um exemplo de tabulação, e não de *memoização*, devido às características específicas de como os subproblemas são resolvidos e armazenados.
+Tabulation is a bottom-up approach to dynamic programming where you solve all subproblems first and store their solutions in a data structure, usually a table, array, list, or tree. The solution to the larger problem is then built from these smaller solutions by traversing the data structure from the bottom up. This implies an iterative resolution process. The subproblems are solved iteratively, starting from the smallest until the larger problem is reached. In this case, recursion is irrelevant.
 
-A tabulação é uma abordagem *bottom-up* de programação dinâmica onde você resolve todos os subproblemas  primeiro e armazena suas soluções em uma estrutura de dados, geralmente uma tabela, *array*, lista ou árvore. A solução do problema maior é então construída a partir dessas soluções menores varrendo a estrutura de dados de baixo para cima. Isto implica em um processo de resolução iterativo. Os subproblemas são resolvidos iterativamente, começando dos menores até alcançar o problema maior. E, neste caso, a recursão é irrelevante.
+## There is more between heaven and earth, Mr. Shakespeare
 
-## Há mais entre o céu e a terra
+Memoization and Tabulation are the most common techniques, but they are not the only dynamic programming techniques:
 
-Memoização e Tabulação, são as técnicas mais comuns, mas não são as únicas técnicas de programação dinâmica:
+- **Dynamic Programming with State Compression**: The goal is to reduce the space needed to store the results of the subproblems by keeping only the states relevant to calculating the final solution.
+- **Dynamic Programming with Sliding Window**: Maintains only the results of the most recent subproblems in a fixed-size window, useful when the solution depends only on a limited number of previous subproblems.
+- **Dynamic Programming with Decision Tree**: Represents the subproblems and their relationships in a decision tree, allowing a clear visualization of the problem structure and the decisions to be made.
 
-- **Programação Dinâmica com Compressão de Estado**: o objetivo é reduzir o espaço necessário para armazenar os resultados dos subproblemas, mantendo apenas os estados relevantes para o cálculo da solução final.
-- **Programação Dinâmica com Janela Deslizante**: mantém apenas os resultados dos subproblemas mais recentes em uma janela de tamanho fixo, útil quando a solução depende apenas de um número limitado de subproblemas anteriores.
-- **Programação Dinâmica com Árvore de Decisão**: Representa os subproblemas e suas relações em uma árvore de decisão, permitindo uma visualização clara da estrutura do problema e das decisões a serem tomadas.
+Let's see how far we go in this text. At the moment of writing, I still have no idea.
 
-Vamos ver até onde vamos chegar neste texto. Neste momento em que escrevo, ainda não tenho ideia.
+## Now I realize: C++, where is C++?
 
-## Agora que me dei conta; Python
+Python is a relatively simple and very popular programming language. However, it is not yet the most suitable programming language when we talk about performance. So, yes. I started with Python, almost as if I were using pseudocode, just to highlight the concepts. From this point on, we will use C++. I will run all the code presented here on a Windows 11 machine, using Visual Studio Community Edition, configured for C++ 20. Just to maintain some coherence, let's revisit the functions we have already seen.
 
-O Python, é uma linguagem de programação relativamente simples e muito popular. Contudo, não é, ainda, a linguagem de programação mais adequada quando estamos falando de performance. Então, sim. Eu comecei com Python, quase como se estivesse usando pseudocódigo, apenas para destacar os conceitos. Deste ponto em diante vamos de C++. Eu vou rodar todos os códigos que apresentar aqui em uma máquina Windows 11, usando o Visual Studio Community Edition, configurado para o C++ 20. Só para manter um tanto de coerência, vamos voltar as funções que já vimos.
 
 ```Cpp
 #include <iostream>
