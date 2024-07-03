@@ -42,7 +42,6 @@ paginate: 6
 paginate_path: /page:num/
 
 # Other
-highlighter: "rouge"
 markdown: kramdown
 
 kramdown:
