@@ -68,7 +68,7 @@ The sweet reader might have raised her eyebrows. This is where recursion and dyn
 
 Dynamic programming and recursion are related; *both involve solving problems by breaking a problem into smaller problems. However, while recursion solves the smaller problems without considering the computational cost of repeated calls, dynamic programming optimizes these solutions by storing and reusing previously obtained results*. The most typical example of recursion is determining the nth order value of the Fibonacci sequence can be seen in Flowchart 1.
 
-![]({{ site.baseurl }}/assets/images/recursive-memo.jpg)
+![]({{ site.baseurl }}/assets/images/recursive.jpg)
 *Flowchart 1 - Recursive Fibonacci nth algorithm*
 
 The Flowchart 1 represents a function for calculating the nth number of the Fibonacci Sequence, for all $n \geq 0$ as the desired number.
@@ -187,6 +187,8 @@ Let's continue with the same problem, finding the nth number in the Fibonacci Se
 ![]({{ site.baseurl }}/assets/images/recursive-memo.jpg)
 *Flowchart 2 - Recursive Fibonacci nth algorithm with memoization*
 
+From Flowchart 2, we can derive the following Python code:
+
 ```python
 # Criação do dicionário memo
 memo = {}
@@ -199,16 +201,18 @@ def fibonacci_memo(n, memo):
     return memo[n]
 ```
 
-Let's analyze the provided code in detail.
+The `fibonacci_memo` function is then defined to calculate the n-th Fibonacci number using the stored values in a dictionary. Let's analyze the `fibonacci_memo()` code in detail.
 
 #### Function Definition and Initialization
+
+The `fibonacci_memo()` starts with:
 
 ```python
 memo = {}
 def fibonacci_memo(n, memo):
 ```
 
-In this code, a dictionary named `memo` is used to store the results of previous Fibonacci calculations, preventing redundant calculations and improving efficiency (this is memoization!). The `fibonacci_memo` function is then defined to calculate the n-th Fibonacci number using the stored values in this dictionary, which brings us to the consideration of the base case within recursion.
+In this code fragment, there is a dictionary named `memo` declaration, it will be used to store the results of previous Fibonacci calculations, preventing redundant calculations and improving efficiency (this is memoization!), which brings us to the consideration of the base case within recursion.
 
 #### Base Case
 
