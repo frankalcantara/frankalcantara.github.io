@@ -268,16 +268,18 @@ Let's see how far we go in this text. At the moment of writing, I still have no 
 
 ## Now I realize: C++, where is C++?
 
-Python is a relatively simple and very popular programming language. However, it is not yet the most suitable programming language when we talk about performance. So, yes. I started with Python, almost as if I were using pseudocode, just to highlight the concepts. From this point on, we will use C++. I will run all the code presented here on a Windows 11 machine, using Visual Studio Community Edition, configured for C++ 20. Just to maintain some coherence, let's revisit the functions we have already seen.
+Python, which I used as pseudocode, is a versatile and simple language. However, it is still not the most suitable language for high-performance use or programming competitions. Therefore, we will move to C++ 20 and, eventually, use data structures compatible with C 17, even in the C++ 20 environment. Speaking of the environment, from this point on, I will be using Visual Studio Community edition to run and evaluate all the code. To maintain consistency in our text so far, I will convert the same functions we wrote in Python to C++ and assess the results.
 
+### Code 1: `std::vectors`
 
 ```Cpp
 #include <iostream>
 #include <unordered_map>
+#include <vector>
 #include <chrono>
-#include <windows.h>  // Necessário para definir a página de código do console
+#include <functional>
 
-// Função recursiva para calcular o Fibonacci
+// Recursive function to calculate Fibonacci
 int fibonacci(int n) {
     if (n <= 1) {
         return n;
@@ -287,7 +289,7 @@ int fibonacci(int n) {
     }
 }
 
-// Função recursiva com memoização para calcular o Fibonacci
+// Recursive function with memoization to calculate Fibonacci
 int fibonacci_memo(int n, std::unordered_map<int, int>& memo) {
     if (memo.find(n) != memo.end()) {
         return memo[n];
@@ -299,12 +301,12 @@ int fibonacci_memo(int n, std::unordered_map<int, int>& memo) {
     return memo[n];
 }
 
-// Função iterativa com tabulação para calcular o Fibonacci usando arrays de estilo C
+// Iterative function with tabulation to calculate Fibonacci
 int fibonacci_tabulation(int n) {
     if (n <= 1) {
         return n;
     }
-    int dp[41] = { 0 };  // array para suportar até Fibonacci(40)
+    std::vector<int> dp(n + 1, 0);
     dp[1] = 1;
     for (int i = 2; i <= n; ++i) {
         dp[i] = dp[i - 1] + dp[i - 2];
@@ -312,55 +314,51 @@ int fibonacci_tabulation(int n) {
     return dp[n];
 }
 
-// Função para medir o tempo de execução e retornar o resultado
+// Function to measure execution time
 template <typename Func, typename... Args>
-std::pair<long long, int> measure_time(Func func, Args&&... args) {
+long long measure_time(Func func, Args&&... args) {
     auto start = std::chrono::high_resolution_clock::now();
-    int result = func(std::forward<Args>(args)...);  // Obtenha o resultado da função
+    func(std::forward<Args>(args)...);
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<long long, std::nano> duration = end - start;
-    return { duration.count(), result };
+    return duration.count();
 }
 
-// Função para calcular o tempo médio de execução e retornar o último resultado calculado
+// Function to calculate average execution time
 template <typename Func, typename... Args>
-std::pair<long long, int> average_time(Func func, int iterations, Args&&... args) {
+long long average_time(Func func, int iterations, Args&&... args) {
     long long total_time = 0;
-    int last_result = 0;
     for (int i = 0; i < iterations; ++i) {
-        auto [time, result] = measure_time(func, std::forward<Args>(args)...);
-        total_time += time;
-        last_result = result;
+        total_time += measure_time(func, std::forward<Args>(args)...);
     }
-    return { total_time / iterations, last_result };
+    return total_time / iterations;
 }
 
 int main() {
-    // Define a página de código do console para UTF-8
-    SetConsoleOutputCP(CP_UTF8);
+
+    // Set locale to Portuguese of Brazil with UTF-8 support
+    std::setlocale(LC_ALL, "pt_BR.UTF-8");
+    std::wcout.imbue(std::locale("pt_BR.UTF-8"));
 
     const int iterations = 1000;
-    int test_cases[] = { 10, 20, 30};  // array de estilo C para os casos de teste
+    std::vector<int> test_cases = { 10, 20, 30 };
 
     for (int n : test_cases) {
-        std::cout << "Calculando Fibonacci(" << n << ")\n";
+        std::cout << "Calculating Fibonacci(" << n << ")\n";
 
-        // Cálculo e tempo médio usando a função recursiva simples
-        auto [avg_time_recursive, result_recursive] = average_time(fibonacci, iterations, n);
-        std::cout << "Tempo médio Fibonacci recursivo: " << avg_time_recursive << " ns\n";
-        std::cout << "Fibonacci(" << n << ") = " << result_recursive << "\n";
+        // Calculation and average time using the simple recursive function
+        long long avg_time_recursive = average_time(fibonacci, iterations, n);
+        std::cout << "Average time for recursive Fibonacci: " << avg_time_recursive << " ns\n";
 
-        // Cálculo e tempo médio usando a função com memoização
+        // Calculation and average time using the memoization function
         std::unordered_map<int, int> memo;
         auto fibonacci_memo_wrapper = [&memo](int n) { return fibonacci_memo(n, memo); };
-        auto [avg_time_memo, result_memo] = average_time(fibonacci_memo_wrapper, iterations, n);
-        std::cout << "Tempo médio Fibonacci com memoização: " << avg_time_memo << " ns\n";
-        std::cout << "Fibonacci(" << n << ") = " << result_memo << "\n";
+        long long avg_time_memo = average_time(fibonacci_memo_wrapper, iterations, n);
+        std::cout << "Average time for memoized Fibonacci: " << avg_time_memo << " ns\n";
 
-        // Cálculo e tempo médio usando a função com tabulação
-        auto [avg_time_tabulation, result_tabulation] = average_time(fibonacci_tabulation, iterations, n);
-        std::cout << "Tempo médio Fibonacci com tabulação: " << avg_time_tabulation << " ns\n";
-        std::cout << "Fibonacci(" << n << ") = " << result_tabulation << "\n";
+        // Calculation and average time using the tabulation function
+        long long avg_time_tabulation = average_time(fibonacci_tabulation, iterations, n);
+        std::cout << "Average time for tabulated Fibonacci: " << avg_time_tabulation << " ns\n";
 
         std::cout << "-----------------------------------\n";
     }
@@ -369,46 +367,61 @@ int main() {
 }
 ```
 
-Este código, inocente e instintivo, gera um número de Fibonacci, armazena este número em um tipo inteiro (`int`) depois, para testes, encontra $3$ números de Fibonacci, o décimo, o vigésimo, e o trigésimo, $1000$ vezes seguidas para cada um, calcula o tempo médio para gerar cada um destes números usando as três funções que vimos em Python convertidas para seu equivalente em C++. Com um único cuidado. Eu usei para armazenar a estrutura de dados `Array` no estilo do C em busca de um pouto de velocidade. Ao rodar este código temos a seguinte saída:
+This simple and intuitive code generates a Fibonacci number, stores it in an integer (`int`), and then, for testing purposes, finds 3 specific Fibonacci numbers—the 10th, 20th, and 30th—1000 times each. This code uses `std::vectors` and `std::unordered_map` for storing the values of the Fibonacci sequence and, when executed, presents the following result.
 
 ```shell
-Calculando Fibonacci(10)
-Tempo médio Fibonacci recursivo: 1058 ns
-Fibonacci(10) = 55
-Tempo médio Fibonacci com memoização: 720 ns
-Fibonacci(10) = 55
-Tempo médio Fibonacci com tabulação: 67 ns
-Fibonacci(10) = 55
+Calculating Fibonacci(10)
+Average time for recursive Fibonacci: 660 ns
+Average time for memoized Fibonacci: 607 ns
+Average time for tabulated Fibonacci: 910 ns
 -----------------------------------
-Calculando Fibonacci(20)
-Tempo médio Fibonacci recursivo: 86602 ns
-Fibonacci(20) = 6765
-Tempo médio Fibonacci com memoização: 728 ns
-Fibonacci(20) = 6765
-Tempo médio Fibonacci com tabulação: 187 ns
-Fibonacci(20) = 6765
+Calculating Fibonacci(20)
+Average time for recursive Fibonacci: 75712 ns
+Average time for memoized Fibonacci: 444 ns
+Average time for tabulated Fibonacci: 1300 ns
 -----------------------------------
-Calculando Fibonacci(30)
-Tempo médio Fibonacci recursivo: 9265282 ns
-Fibonacci(30) = 832040
-Tempo médio Fibonacci com memoização: 541 ns
-Fibonacci(30) = 832040
-Tempo médio Fibonacci com tabulação: 116 ns
-Fibonacci(30) = 832040
+Calculating Fibonacci(30)
+Average time for recursive Fibonacci: 8603451 ns
+Average time for memoized Fibonacci: 414 ns
+Average time for tabulated Fibonacci: 1189 ns
 -----------------------------------
 ```
 
-A amável leitora deve observar que os tempos variam de forma não linear e que, em todos os casos, para este problema a versão da programação dinâmica usando tabulação foi mais rápida. Mas, na verdade, dá para fazer ainda mais rápido, se tirarmos o `std::unordered_map` que usamos na função de memoização. Como no código a seguir:
+The kind reader should note that the times vary in a non-linear fashion and that, in all cases, for this problem, the dynamic programming version using tabulation was faster. Much is said about the performance of the Vector class compared to the Array class.
+
+`std::vector` is a template class and a C++-only construct implemented as a dynamic array. Vectors grow and shrink dynamically, automatically managing their memory, which is freed upon destruction. They can be passed to or returned from functions by value and can be copied or assigned, performing a deep copy of all stored elements. Unlike arrays, vectors do not decay to pointers, but you can explicitly get a pointer to their data using `&vec[0]`. Vectors maintain their size (number of elements currently stored) and capacity (number of elements that can be stored in the currently allocated block) along with the internal dynamic array. This internal array is allocated dynamically by the allocator specified in the template parameter, usually obtaining memory from the freestore (heap) independently of the object's actual allocation. Although this can make vectors less efficient than regular arrays for small, short-lived, local arrays, vectors do not require a default constructor for stored objects and are better integrated with the rest of the STL, providing `begin()`/`end()` methods and the usual STL typedefs. When reallocating, vectors copy (or move, in C++11) their objects.
+
+`std::array` is a template class introduced in C++11, which provides a fixed-size array that is more integrated with the STL than traditional C-style arrays. Unlike `std::vector`, `std::array` does not manage its own memory dynamically; its size is fixed at compile-time, which makes it more efficient for cases where the array size is known in advance and does not change. `std::array` objects can be passed to and returned from functions, and they support copy and assignment operations. They provide the same `begin()`/`end()` methods as vectors, allowing for easy iteration and integration with other STL algorithms. One significant advantage of `std::array` over traditional arrays is that it encapsulates the array size within the type itself, eliminating the need for passing size information separately. Additionally, `std::array` provides member functions such as `size()`, which returns the number of elements in the array, enhancing safety and usability. However, since `std::array` has a fixed size, it does not offer the dynamic resizing capabilities of `std::vector`, making it less flexible in scenarios where the array size might need to change.
+
+When considering performance differences between `std::vector` and `std::array`, it's essential to understand their underlying characteristics and use cases. `std::array` is a fixed-size array, with its size determined at compile-time, making it highly efficient for situations where the array size is known and constant. The lack of dynamic memory allocation means that `std::array` avoids the overhead associated with heap allocations, resulting in faster access and manipulation times. This fixed-size nature allows the compiler to optimize memory layout and access patterns, often resulting in better cache utilization and reduced latency compared to dynamically allocated structures.
+
+In contrast, `std::vector` provides a dynamic array that can grow or shrink in size at runtime, offering greater flexibility but at a cost. The dynamic nature of `std::vector` necessitates managing memory allocations and deallocations, which introduces overhead. When a `std::vector` needs to resize, it typically allocates a new block of memory and copies existing elements to this new block, an operation that can be costly, especially for large vectors. Despite this, `std::vector` employs strategies such as capacity doubling to minimize the frequency of reallocations, balancing flexibility and performance.
+
+For small, fixed-size arrays, `std::array` usually outperforms `std::vector` due to its minimal overhead and compile-time size determination. It is particularly advantageous in performance-critical applications where predictable and low-latency access is required. On the other hand, `std::vector` shines in scenarios where the array size is not known in advance or can change, offering a more convenient and safer alternative to manually managing dynamic arrays.
+
+In summary, `std::array` generally offers superior performance for fixed-size arrays due to its lack of dynamic memory management and the resultant compiler optimizations. However, `std::vector` provides essential flexibility and ease of use for dynamically sized arrays, albeit with some performance trade-offs. The choice between `std::array` and `std::vector` should be guided by the specific requirements of the application, weighing the need for fixed-size efficiency against the benefits of dynamic resizing.
+
+| Feature        | `std::vector`                 | `std::array`                    |
+| -------------- | ------------------------------ | ------------------------------- |
+| Size           | Dynamic (can change at runtime) | Fixed (determined at compile time) |
+| Memory Management | Dynamic allocation on the heap     | Typically on the stack, no dynamic allocation |
+| Performance     | Can have overhead due to resizing | Generally more efficient for fixed-size data |
+| Use Cases       | When the number of elements is unknown or varies | When the number of elements is known and fixed |
+| Flexibility     | High (can add/remove elements easily) | Low (size cannot be changed)       |
+| STL Integration | Yes (works with algorithms and iterators) | Yes (similar interface to vector) |
+
+So, we can test this performance advantages.
+
+### Code 2: `std::array`
 
 ```Cpp
 #include <iostream>
 #include <unordered_map>
 #include <chrono>
+#include <functional>
 #include <array>
-#include <utility>
-#include <windows.h>  // Necessário para definir a página de código do console
 
-// Função recursiva para calcular o Fibonacci
+// Recursive function to calculate Fibonacci
 int fibonacci(int n) {
     if (n <= 1) {
         return n;
@@ -418,7 +431,7 @@ int fibonacci(int n) {
     }
 }
 
-// Função recursiva com memoização para calcular o Fibonacci
+// Recursive function with memoization to calculate Fibonacci
 int fibonacci_memo(int n, std::unordered_map<int, int>& memo) {
     if (memo.find(n) != memo.end()) {
         return memo[n];
@@ -430,12 +443,12 @@ int fibonacci_memo(int n, std::unordered_map<int, int>& memo) {
     return memo[n];
 }
 
-// Função iterativa com tabulação para calcular o Fibonacci usando arrays de estilo C
+// Iterative function with tabulation to calculate Fibonacci using arrays
 int fibonacci_tabulation(int n) {
     if (n <= 1) {
         return n;
     }
-    int dp[41] = { 0 };  // array para suportar até Fibonacci(40)
+    std::array<int, 41> dp = {};  // array to support up to Fibonacci(40)
     dp[1] = 1;
     for (int i = 2; i <= n; ++i) {
         dp[i] = dp[i - 1] + dp[i - 2];
@@ -443,116 +456,74 @@ int fibonacci_tabulation(int n) {
     return dp[n];
 }
 
-// Nova função com memoização utilizando arrays
-const int MAXN = 46; //o maior número de Fibonacci que cabe em um int é o 47.
-bool found[MAXN] = { false };
-int memo[MAXN] = { 0 };
-
-int novoFIbb(int n) {
-    if (found[n]) return memo[n];
-    if (n == 0) return 0;
-    if (n == 1) return 1;
-
-    found[n] = true;
-    return memo[n] = novofibb(n - 1) + novofibb(n - 2);
-}
-
-// Função para medir o tempo de execução e retornar o resultado
+// Function to measure execution time
 template <typename Func, typename... Args>
-std::pair<long long, int> measure_time(Func func, Args&&... args) {
+long long measure_time(Func func, Args&&... args) {
     auto start = std::chrono::high_resolution_clock::now();
-    int result = func(std::forward<Args>(args)...);  // Obtenha o resultado da função
+    func(std::forward<Args>(args)...);
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<long long, std::nano> duration = end - start;
-    return { duration.count(), result };
+    return duration.count();
 }
 
-// Função para calcular o tempo médio de execução e retornar o último resultado calculado
+// Function to calculate average execution time
 template <typename Func, typename... Args>
-std::pair<long long, int> average_time(Func func, int iterations, Args&&... args) {
+long long average_time(Func func, int iterations, Args&&... args) {
     long long total_time = 0;
-    int last_result = 0;
     for (int i = 0; i < iterations; ++i) {
-        auto [time, result] = measure_time(func, std::forward<Args>(args)...);
-        total_time += time;
-        last_result = result;
+        total_time += measure_time(func, std::forward<Args>(args)...);
     }
-    return { total_time / iterations, last_result };
+    return total_time / iterations;
 }
 
 int main() {
-    // Define a página de código do console para UTF-8
-    SetConsoleOutputCP(CP_UTF8);
-
     const int iterations = 1000;
-    int test_cases[] = { 10, 20, 30};  // array de estilo C para os casos de teste
+    std::vector<int> test_cases = { 10, 20, 30 };
 
     for (int n : test_cases) {
-        std::cout << "Calculando Fibonacci(" << n << ")\n";
+        std::cout << "Calculating Fibonacci(" << n << ")\n";
 
-        // Cálculo e tempo médio usando a função recursiva simples
-        auto [avg_time_recursive, result_recursive] = average_time(fibonacci, iterations, n);
-        std::cout << "Tempo médio Fibonacci recursivo: " << avg_time_recursive << " ns\n";
-        std::cout << "Fibonacci(" << n << ") = " << result_recursive << "\n";
+        // Calculation and average time using the simple recursive function
+        long long avg_time_recursive = average_time(fibonacci, iterations, n);
+        std::cout << "Average time for recursive Fibonacci: " << avg_time_recursive << " ns\n";
 
-        // Cálculo e tempo médio usando a função com memoização
+        // Calculation and average time using the memoization function
         std::unordered_map<int, int> memo;
         auto fibonacci_memo_wrapper = [&memo](int n) { return fibonacci_memo(n, memo); };
-        auto [avg_time_memo, result_memo] = average_time(fibonacci_memo_wrapper, iterations, n);
-        std::cout << "Tempo médio Fibonacci com memoização: " << avg_time_memo << " ns\n";
-        std::cout << "Fibonacci(" << n << ") = " << result_memo << "\n";
+        long long avg_time_memo = average_time(fibonacci_memo_wrapper, iterations, n);
+        std::cout << "Average time for memoized Fibonacci: " << avg_time_memo << " ns\n";
 
-        // Cálculo e tempo médio usando a função com tabulação
-        auto [avg_time_tabulation, result_tabulation] = average_time(fibonacci_tabulation, iterations, n);
-        std::cout << "Tempo médio Fibonacci com tabulação: " << avg_time_tabulation << " ns\n";
-        std::cout << "Fibonacci(" << n << ") = " << result_tabulation << "\n";
-
-        // Cálculo e tempo médio usando a nova função com memoização e arrays
-        auto [avg_time_novofIbb, result_novofIbb] = average_time(novoFIbb, iterations, n);
-        std::cout << "Tempo médio Fibonacci com nova memoização: " << avg_time_novofIbb << " ns\n";
-        std::cout << "Fibonacci(" << n << ") = " << result_novofIbb << "\n";
+        // Calculation and average time using the tabulation function
+        long long avg_time_tabulation = average_time(fibonacci_tabulation, iterations, n);
+        std::cout << "Average time for tabulated Fibonacci: " << avg_time_tabulation << " ns\n";
 
         std::cout << "-----------------------------------\n";
     }
 
     return 0;
 }
-``` 
+```
 
-Que ao ser executado gera a seguinte resposta:
+Which, when executed, produces the following output:
 
 ```shell
-Calculando Fibonacci(10)
-Tempo médio Fibonacci recursivo: 822 ns
-Fibonacci(10) = 55
-Tempo médio Fibonacci com memoização: 512 ns
-Fibonacci(10) = 55
-Tempo médio Fibonacci com tabulação: 82 ns
-Fibonacci(10) = 55
-Tempo médio Fibonacci com nova memoização: 50 ns
-Fibonacci(10) = 55
+Calculating Fibonacci(10)
+Average time for recursive Fibonacci: 807 ns
+Average time for memoized Fibonacci: 426 ns
+Average time for tabulated Fibonacci: 159 ns
 -----------------------------------
-Calculando Fibonacci(20)
-Tempo médio Fibonacci recursivo: 96510 ns
-Fibonacci(20) = 6765
-Tempo médio Fibonacci com memoização: 457 ns
-Fibonacci(20) = 6765
-Tempo médio Fibonacci com tabulação: 93 ns
-Fibonacci(20) = 6765
-Tempo médio Fibonacci com nova memoização: 38 ns
-Fibonacci(20) = 6765
+Calculating Fibonacci(20)
+Average time for recursive Fibonacci: 88721 ns
+Average time for memoized Fibonacci: 434 ns
+Average time for tabulated Fibonacci: 371 ns
 -----------------------------------
-Calculando Fibonacci(30)
-Tempo médio Fibonacci recursivo: 9236120 ns
-Fibonacci(30) = 832040
-Tempo médio Fibonacci com memoização: 510 ns
-Fibonacci(30) = 832040
-Tempo médio Fibonacci com tabulação: 142 ns
-Fibonacci(30) = 832040
-Tempo médio Fibonacci com nova memoização: 43 ns
-Fibonacci(30) = 832040
------------------------------------
+Calculating Fibonacci(30)
+Average time for recursive Fibonacci: 10059626 ns
+Average time for memoized Fibonacci: 414 ns
+Average time for tabulated Fibonacci: 439 ns
 
 ```
 
-Agora chegamos no Bom lugar! O cálculo dos números de Fibonacci, com memoização é, no pior caso, mais ou menos 215.000 vezes mais rápido que o versão recursiva que usamos tão frequentemente nos cursos de Ciência da Computação. Você pode encontrar o código original desta função. `novoFibb` no site {*Introduction to Dynamic Programming*](<https://cp-algorithms.com/dynamic_programming/intro-to-dp.html>). Creio que poderia melhorar um pouco mais a função usando tabulação mas, acho que a leitora já entendeu a ideia.
+We have reached an interesting point. Just interesting. We achieved a performance gain using memoization and tabulation. However, we still have some options.
+
+I will continue later.
