@@ -193,8 +193,46 @@ def fibonacci_memo(n, memo):
     return memo[n]
 
 ```
+Let's analyze the provided code in detail.
 
-In this example, `fibonacci_memo` stores the results of previous calls in the `memo` dictionary, avoiding repeated calculations. From the perspective of dynamic programming, this function divides the larger problem (calculating Fibonacci of $n$) into smaller subproblems (calculating Fibonacci of $n-1$ and $n-2$), uses a data structure, the `memo` dictionary, to store the results of the subproblems. This avoids redundant calculations of the same values, and before calculating the Fibonacci value for a given $n$, the function checks if the result is already stored in the `memo` dictionary. If it is, it reuses that result, saving computation time. Finally, the function ensures that each subproblem is solved only once, resulting in more efficiency compared to the simple recursive approach.
+#### Function Definition and Initialization
+
+```python
+memo = {}
+def fibonacci_memo(n, memo):
+```
+
+Here, `memo` is a dictionary used to store the results of previous Fibonacci calculations to avoid recalculating the same values multiple times, making the function more efficient (that is memoization!). The function `fibonacci_memo` is defined to calculate the n-th Fibonacci number using this dictionary.
+
+#### Base Case
+```python
+Copiar código
+    if n in memo:
+        return memo[n]
+    if n <= 1:
+        return n
+```
+
+if $n$ in `memo`: checks if the value of $n$ has already been calculated and stored in the `memo` dictionary. If so, it returns the stored value, avoiding recalculation.
+
+if $n <= 1$: handles the base cases of the Fibonacci sequence:
+
+- `fibonacci(0)` = 0
+- `fibonacci(1)` = 1
+
+#### Recursion and Memoization
+
+```python
+    memo[n] = fibonacci_memo(n-1, memo) + fibonacci_memo(n-2, memo)
+    return memo[n]
+```
+
+`memo[n] = fibonacci_memo(n-1, memo) + fibonacci_memo(n-2, memo)`:
+Calculates the value of `fibonacci(n-1)` and `fibonacci(n-2)` recursively.
+Stores the result in the memo dictionary to avoid future recalculations.
+`return memo[n]` returns the calculated and stored value.Complete Code Functionality
+
+In the Example 2, `fibonacci_memo` stores the results of previous calls in the `memo` dictionary, avoiding repeated calculations. From the perspective of dynamic programming, this function divides the larger problem (calculating Fibonacci of $n$) into smaller subproblems (calculating Fibonacci of $n-1$ and $n-2$), uses a data structure, the `memo` dictionary, to store the results of the subproblems. This avoids redundant calculations of the same values, and before calculating the Fibonacci value for a given $n$, the function checks if the result is already stored in the `memo` dictionary. If it is, it reuses that result, saving computation time. Finally, the function ensures that each subproblem is solved only once, resulting in more efficiency compared to the simple recursive approach.
 
 The last statement of the previous paragraph requires reflection. I am considering performance in this statement only in terms of computation time. Performance can also be considered in relation to memory usage, energy consumption, and any other factor that is interesting or important for a given problem. Keep this in mind whenever I state that performance has improved in this text. Well, who is thinking about a example?
 
