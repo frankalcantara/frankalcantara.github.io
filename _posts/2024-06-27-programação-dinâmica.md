@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Exploring Dynamic Programming in C++ - Techniques and Performance Insights
+title: Dynamic Programming in C++ - Techniques and Insights
 author: Frank
 categories:
     - Matemática
