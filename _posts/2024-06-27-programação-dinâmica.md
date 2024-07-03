@@ -191,7 +191,6 @@ def fibonacci_memo(n, memo):
         return n
     memo[n] = fibonacci_memo(n-1, memo) + fibonacci_memo(n-2, memo)
     return memo[n]
-
 ```
 Let's analyze the provided code in detail.
 
@@ -207,7 +206,6 @@ Here, `memo` is a dictionary used to store the results of previous Fibonacci cal
 #### Base Case
 
 ```python
-
     if n in memo:
         return memo[n]
     if n <= 1:
@@ -369,7 +367,6 @@ int main() {
 
     return 0;
 }
-
 ```
 
 Este código, inocente e instintivo, gera um número de Fibonacci, armazena este número em um tipo inteiro (`int`) depois, para testes, encontra $3$ números de Fibonacci, o décimo, o vigésimo, e o trigésimo, $1000$ vezes seguidas para cada um, calcula o tempo médio para gerar cada um destes números usando as três funções que vimos em Python convertidas para seu equivalente em C++. Com um único cuidado. Eu usei para armazenar a estrutura de dados `Array` no estilo do C em busca de um pouto de velocidade. Ao rodar este código temos a seguinte saída:
