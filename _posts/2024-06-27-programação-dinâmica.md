@@ -32,6 +32,7 @@ keywords:
 rating: 5
 published: 2024-06-27T19:43:15.124Z
 draft: null
+featured: true
 preview: In this comprehensive guide, we delve into the world of dynamic programming with C++. Learn the core principles of dynamic programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 ---
 
@@ -43,7 +44,7 @@ It is very likely that you, kind reader, have been introduced to dynamic program
 
 My intention is to break down the dynamic programming process into clear steps, focusing on the solution algorithm, so that you can understand and implement these steps on your own whenever you face a problem in technical interviews, production environments, or programming competitions. Without any hesitation, I will try to present performance tips and tricks in C++. However, this should not be considered a limitation; we will look at the algorithms before the code, and you will be able to implement the code in your preferred programming language.
 
-## There was a hint of recursion sneaking in.
+## There was a hint of recursion sneaking in
 
 Some say that dynamic programming is a technique to make recursive code more efficient. There is a relationship that needs to be explored: *All dynamic programming algorithms are recursive, but not all recursive algorithms are dynamic programming*.
 
@@ -89,7 +90,7 @@ When the function receives a value $n$:
 
 This leads us to Example 1.
 
-### Example 1: Let's calculate `fibonacci(5)`:
+### Example 1: Let's calculate `fibonacci(5)`
 
 1. `fibonacci(5)` calls `fibonacci(4)` and `fibonacci}(3)`
 2. `fibonacci(4)` calls `fibonacci(3)` and `fibonacci}(2)`
@@ -394,10 +395,6 @@ long long average_time(Func func, int iterations, Args&&... args) {
 }
 
 int main() {
-
-    // Set locale to Portuguese of Brazil with UTF-8 support
-    std::setlocale(LC_ALL, "pt_BR.UTF-8");
-    std::wcout.imbue(std::locale("pt_BR.UTF-8"));
 
     const int iterations = 1000;
     std::vector<int> test_cases = { 10, 20, 30 };
