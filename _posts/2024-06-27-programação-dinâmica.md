@@ -206,7 +206,7 @@ Here, `memo` is a dictionary used to store the results of previous Fibonacci cal
 
 #### Base Case
 ```python
-Copiar código
+
     if n in memo:
         return memo[n]
     if n <= 1:
