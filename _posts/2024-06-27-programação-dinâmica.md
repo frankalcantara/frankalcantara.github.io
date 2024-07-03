@@ -45,11 +45,11 @@ My intention is to break down the dynamic programming process into clear steps, 
 
 ## There was a hint of recursion sneaking in.
 
-Some say that dynamic programming is a technique to make recursive code more efficient. There is a relationship that needs to be explored: *all dynamic programming algorithms are recursive, but not all recursive algorithms are dynamic programming*.
+Some say that dynamic programming is a technique to make recursive code more efficient. There is a relationship that needs to be explored: *All dynamic programming algorithms are recursive, but not all recursive algorithms are dynamic programming*.
 
 Recursion is a powerful problem-solving technique. Recursive code can be mathematically proven correct relatively easily. And that alone is reason enough to use recursion in all your code. So, let's begin with that.
 
-The proof of the correctness of a recursive algorithm generally involves only two steps: proving that the base case of the recursion is correct and proving that the recursive step is correct. In the domain of mathematical induction proof, we can refer to these components as the *base case* and the *inductive step*, respectively. In this case:
+The proof of the correctness of a recursive algorithm generally involves only two steps: Proving that the base case of the recursion is correct and proving that the recursive step is correct. In the domain of mathematical induction proof, we can refer to these components as the *base case* and the *inductive step*, respectively. In this case:
 
 - To prove the **base case**, we check the simplest # case of the recursion, usually the base case or cases, to ensure it is correct. These are the cases that do not depend on recursive calls.
 
@@ -67,7 +67,7 @@ The sweet reader might have raised her eyebrows. This is where recursion and dyn
 
 Dynamic programming and recursion are related; *both involve solving problems by breaking a problem into smaller problems. However, while recursion solves the smaller problems without considering the computational cost of repeated calls, dynamic programming optimizes these solutions by storing and reusing previously obtained results*. The most typical example of recursion is determining the nth order value of the Fibonacci sequence can be seen in Flowchart 1.
 
-![]({{ site.baseurl }}/assets/images/fibbo_recursivo_flow.png)
+![]({{ site.baseurl }}/assets/images/recursive_memo.jpg)
 *Flowchart 1 - Recursive Fibonacci nth algorithm*
 
 The Flowchart 1 represents a function for calculating the nth number of the Fibonacci Sequence, for all $n \geq 0$ as the desired number.
@@ -85,7 +85,7 @@ $$F(n) = F(n - 1) + F(n - 2)$$
 When the function receives a value $n$:
 
 - **Base Case**: It checks if $n$ is 0 or 1. If so, it returns $n$.
-- **Recursive Step**: If $n$ is greater than 1, the function calls itself twice: once with $n - 1$ and once with $n - 2$. The sum of these two results is returned.
+- **Recursive Step**: If $n$ is greater than 1, the function calls itself twice: Once with $n - 1$ and once with $n - 2$. The sum of these two results is returned.
 
 This leads us to Example 1.
 
@@ -173,13 +173,18 @@ This formula can be used to build a recursion tree and sum the total number of r
 
 If we look at dynamic programming, we will see an optimization technique that is based on recursion but adds storage of intermediate results to avoid redundant calculations. There are two main approaches to implementing dynamic programming:
 
-- **Memoization (Top-Down)**: stores the results of recursive calls in a data structure (such as a dictionary or a list, etc.) for reuse. The name memoization is a horrible borrowing from the English word *memoization*.
+- **Memoization (Top-Down)**: Stores the results of recursive calls in a data structure (such as a dictionary or a list, etc.) for reuse. The name memoization is a horrible borrowing from the English word *memoization*.
 
-- **Tabulation (Bottom-Up)**: solves the problem iteratively, filling a table (usually a list or matrix) with the results of the subproblems.
+- **Tabulation (Bottom-Up)**: Solves the problem iteratively, filling a table (usually a list or matrix) with the results of the subproblems.
 
 In this case, we can see two examples in Python. First, an example of Dynamic Programming with memoization:
 
-### Example 2: memoization
+### Example 2: Memoization
+
+Let's continue with the same problem, finding the nth number in the Fibonacci Sequence. This time, using dynamic programming with memoization. This problem can be described with Flowchart 2.
+
+![]({{ site.baseurl }}/assets/images/recursive-memo.jpg)
+*Flowchart 2 - Recursive Fibonacci nth algorithm with memoization*
 
 ```python
 # Criação do dicionário memo
@@ -192,6 +197,7 @@ def fibonacci_memo(n, memo):
     memo[n] = fibonacci_memo(n-1, memo) + fibonacci_memo(n-2, memo)
     return memo[n]
 ```
+
 Let's analyze the provided code in detail.
 
 #### Function Definition and Initialization
@@ -201,7 +207,7 @@ memo = {}
 def fibonacci_memo(n, memo):
 ```
 
-Here, `memo` is a dictionary used to store the results of previous Fibonacci calculations to avoid recalculating the same values multiple times, making the function more efficient (that is memoization!). The function `fibonacci_memo` is defined to calculate the n-th Fibonacci number using this dictionary.
+In this code, a dictionary named `memo` is used to store the results of previous Fibonacci calculations, preventing redundant calculations and improving efficiency (this is memoization!). The `fibonacci_memo` function is then defined to calculate the n-th Fibonacci number using the stored values in this dictionary, which brings us to the consideration of the base case within recursion.
 
 #### Base Case
 
@@ -212,26 +218,29 @@ Here, `memo` is a dictionary used to store the results of previous Fibonacci cal
         return n
 ```
 
-if $n$ in `memo`: checks if the value of $n$ has already been calculated and stored in the `memo` dictionary. If so, it returns the stored value, avoiding recalculation.
+if $n$ in `memo`: Checks if the value of $n$ has already been calculated and stored in the `memo` dictionary. If so, it returns the stored value, avoiding recalculation.
 
-if $n <= 1$: handles the base cases of the Fibonacci sequence:
+if $n <= 1$: Handles the base cases of the Fibonacci sequence:
 
 - `fibonacci(0)` = 0
 - `fibonacci(1)` = 1
 
-#### Recursion and Memoization
+#### Recursive Step and Memoization
 
 ```python
     memo[n] = fibonacci_memo(n-1, memo) + fibonacci_memo(n-2, memo)
     return memo[n]
 ```
 
-`memo[n] = fibonacci_memo(n-1, memo) + fibonacci_memo(n-2, memo)`:
-Calculates the value of `fibonacci(n-1)` and `fibonacci(n-2)` recursively.
-Stores the result in the memo dictionary to avoid future recalculations.
-`return memo[n]` returns the calculated and stored value.Complete Code Functionality
+The line `fibonacci_memo(n-1, memo) + fibonacci_memo(n-2, memo)` makes recursive calls to calculate the $(n-1)$th and $(n-2)$th Fibonacci numbers. This is the fundamental recursive relationship in the Fibonacci Sequence: each number is the sum of the two preceding ones.
 
-In the Example 2, `fibonacci_memo` stores the results of previous calls in the `memo` dictionary, avoiding repeated calculations. From the perspective of dynamic programming, this function divides the larger problem (calculating Fibonacci of $n$) into smaller subproblems (calculating Fibonacci of $n-1$ and $n-2$), uses a data structure, the `memo` dictionary, to store the results of the subproblems. This avoids redundant calculations of the same values, and before calculating the Fibonacci value for a given $n$, the function checks if the result is already stored in the `memo` dictionary. If it is, it reuses that result, saving computation time. Finally, the function ensures that each subproblem is solved only once, resulting in more efficiency compared to the simple recursive approach.
+The `memo` dictionary is the key to memoization. Before making the recursive calls, the function checks if the results for $n-1$ and $n-2$ are already stored in `memo`. If so, those stored values are used directly, avoiding redundant calculations. If not, the recursive calls are made, and the results are stored in `memo` for future reference.
+
+The calculated result (`fibonacci_memo(n-1, memo) + fibonacci_memo(n-2, memo)`) is assigned to `memo[n]`, storing it for potential reuse later.
+
+Finally, return `memo[n]` returns the calculated (and now memoized) value for the n-th Fibonacci number.
+
+From the perspective of dynamic programming, the function `fibonacci_memo` divides the larger problem (calculating Fibonacci of $n$) into smaller subproblems (calculating Fibonacci of $n-1$ and $n-2$), uses a data structure, the `memo` dictionary, to store the results of the subproblems. This avoids redundant calculations of the same values, and before calculating the Fibonacci value for a given $n$, the function checks if the result is already stored in the `memo` dictionary. If it is, it reuses that result, saving computation time. Finally, the function ensures that each subproblem is solved only once, resulting in more efficiency compared to the simple recursive approach.
 
 The last statement of the previous paragraph requires reflection. I am considering performance in this statement only in terms of computation time. Performance can also be considered in relation to memory usage, energy consumption, and any other factor that is interesting or important for a given problem. Keep this in mind whenever I state that performance has improved in this text. Well, who is thinking about a example?
 

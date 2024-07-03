@@ -78,12 +78,44 @@
 			.hljs-ln-code {
 				padding-left: 5px !important;
 			}
+
+			.article-post p img {
+				vertical-align: middle;
+				border-style: none;
+				text-align: center;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				max-width: 100%;
+				max-height: 100%;
+			}
+			.legend {
+				text-align: center;
+				display: block;
+				font-weight: bold;
+			}
 		</style>
 		<script>
 			document.addEventListener("DOMContentLoaded", (event) => {
 				document.querySelectorAll("pre code").forEach((block) => {
 					hljs.highlightBlock(block);
 					hljs.initLineNumbersOnLoad();
+				});
+			});
+		</script>
+		<script>
+			document.addEventListener("DOMContentLoaded", function () {
+				// Seleciona todas as tags <em> na página
+				const emTags = document.querySelectorAll("em");
+
+				emTags.forEach(function (em) {
+					// Verifica se a tag <em> é precedida por uma tag <img>
+					if (em.previousElementSibling && em.previousElementSibling.tagName.toLowerCase() === "img") {
+						em.classList.add("legend");
+						return;
+					}
+					// Adiciona a classe 'mark' à tag <em> se não for precedida por uma tag <img>
+					em.classList.add("mark");
 				});
 			});
 		</script>
