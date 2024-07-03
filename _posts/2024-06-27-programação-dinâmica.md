@@ -67,7 +67,7 @@ The sweet reader might have raised her eyebrows. This is where recursion and dyn
 
 Dynamic programming and recursion are related; *both involve solving problems by breaking a problem into smaller problems. However, while recursion solves the smaller problems without considering the computational cost of repeated calls, dynamic programming optimizes these solutions by storing and reusing previously obtained results*. The most typical example of recursion is determining the nth order value of the Fibonacci sequence can be seen in Flowchart 1.
 
-![]({{ site.baseurl }}/assets/images/recursive_memo.jpg)
+![]({{ site.baseurl }}/assets/images/recursive-memo.jpg)
 *Flowchart 1 - Recursive Fibonacci nth algorithm*
 
 The Flowchart 1 represents a function for calculating the nth number of the Fibonacci Sequence, for all $n \geq 0$ as the desired number.
@@ -243,6 +243,56 @@ Finally, return `memo[n]` returns the calculated (and now memoized) value for th
 From the perspective of dynamic programming, the function `fibonacci_memo` divides the larger problem (calculating Fibonacci of $n$) into smaller subproblems (calculating Fibonacci of $n-1$ and $n-2$), uses a data structure, the `memo` dictionary, to store the results of the subproblems. This avoids redundant calculations of the same values, and before calculating the Fibonacci value for a given $n$, the function checks if the result is already stored in the `memo` dictionary. If it is, it reuses that result, saving computation time. Finally, the function ensures that each subproblem is solved only once, resulting in more efficiency compared to the simple recursive approach.
 
 The last statement of the previous paragraph requires reflection. I am considering performance in this statement only in terms of computation time. Performance can also be considered in relation to memory usage, energy consumption, and any other factor that is interesting or important for a given problem. Keep this in mind whenever I state that performance has improved in this text. Well, who is thinking about a example?
+
+#### How many recursive calls does a memoized Fibonacci function make?
+
+To figure this out, let's see how memoization changes the usual recursion tree:
+
+Base Case: If the Fibonacci number for n is already stored in our memoization cache, or if $n$ is $0$ or $1$, the function returns directly without any further calls.
+
+Memoization Check:  If $n$ isn't in the cache, the function makes two recursive calls: `fibonacci_memo(n-1, memo)` and `fibonacci_memo(n-2, memo)`.
+
+The Memoization Effect: The very first time we call `fibonacci_memo` with a new value of $n$, it will keep making recursive calls until it hits the base cases.  The key is that once a Fibonacci number is calculated, it gets stored in the cache. Any later calls with the same $$ simply return this stored value, preventing further recursion.
+
+Calculating the Number of Calls:
+
+Initial Call: We start the whole process with a single call to `fibonacci_memo(n, memo)`.
+
+Recursive Expansion: For every new $n$ value we encounter, the function branches out into calls for `fibonacci_memo(n-1, memo)` and `fibonacci_memo(n-2, memo)`.
+
+Memoization Storage: Each calculated value is stored, so any future calls with the same $n$ don't create new branches.
+
+Counting Unique Calls: Because of memoization, we only need to calculate each Fibonacci number once. This means the total number of recursive calls is roughly equal to the number of unique Fibonacci numbers up to $n$.
+
+In conclusion: While a naive Fibonacci implementation would have an exponential number of calls, memoization brings this down significantly. We still have roughly $2n$ calls to calculate Fibonacci numbers from $0$ to $n$, but the key is that each unique number is only calculated once, making the process efficient.
+
+To calculate the number of times the function will be called for any value $n$, we can use the following formula based on the analysis of the memoized recursion tree:
+
+$$ T(n) = T(n-1) + T(n-2) + 1 $$
+
+Where $T(n)$ is the total number of calls to calculate `fibonacci_memo(n)`.
+
+To illustrate the formula $T(n) = T(n-1) + T(n-2) + 1$ with $n = 10$, we can calculate the number of recursive calls $T(10)$. Let's start with the base values $T(0)$ and $T(1)$, and then calculate the subsequent values up to $T(10)$.
+
+Assuming that $T(0) = 1$ and $T(1) = 1$:
+
+$$
+\begin{aligned}
+T(2) &= T(1) + T(0) + 1 = 1 + 1 + 1 = 3 \\
+T(3) &= T(2) + T(1) + 1 = 3 + 1 + 1 = 5 \\
+T(4) &= T(3) + T(2) + 1 = 5 + 3 + 1 = 9 \\
+T(5) &= T(4) + T(3) + 1 = 9 + 5 + 1 = 15 \\
+T(6) &= T(5) + T(4) + 1 = 15 + 9 + 1 = 25 \\
+T(7) &= T(6) + T(5) + 1 = 25 + 15 + 1 = 41 \\
+T(8) &= T(7) + T(6) + 1 = 41 + 25 + 1 = 67 \\
+T(9) &= T(8) + T(7) + 1 = 67 + 41 + 1 = 109 \\
+T(10) &= T(9) + T(8) + 1 = 109 + 67 + 1 = 177 \\
+\end{aligned}
+$$
+
+Therefore, $T(10) = 177$.
+
+Each value of $T(n)$ represents the number of recursive calls to compute `fibonacci_memo(n)` using the formula $T(n) = T(n-1) + T(n-2) + 1$. And we have only 10 recursive calls.
 
 ### Example 3: Fibonacci with Tabulation
 
