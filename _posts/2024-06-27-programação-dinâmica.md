@@ -178,6 +178,28 @@ Each value of $T(n)$ represents the number of recursive calls to compute $\text{
 
 This formula can be used to build a recursion tree and sum the total number of recursive calls. However, for large values of $n$, this can become inefficient. A more efficient approach is to use dynamic programming to calculate and store the number of recursive calls, avoiding duplicate calls.
 
+### Efficiency
+
+The `fibonacci` function uses a straightforward recursive approach to calculate Fibonacci numbers. Let's break down its time and space complexity.
+
+To understand the time complexity, think about how many times the function gets called. Each call to `fibonacci(n)` results in two more calls: `fibonacci(n-1)` and `fibonacci(n-2)`. This branching continues until we reach the base cases.
+
+Imagine this process like a tree:
+
+- The root is `fibonacci(n)`.
+- The next level has two calls: `fibonacci(n-1)` and `fibonacci(n-2)`.
+- The level after that has four calls, and so on.
+
+Each level of the tree doubles the number of calls. If we keep doubling for each level until we reach the base case, we end up with about $2^n$ calls. This exponential growth means the time complexity of the function is $O(2^n)$. This is quite inefficient because the number of calls increases very quickly as $n$ gets larger.
+
+The space complexity depends on how deep the recursion goes. Every time the function calls itself, it adds a new frame to the call stack.
+
+- The deepest the function goes is $n$ levels (from `fibonacci(n)` down to `fibonacci(0)` or `fibonacci(1)`).
+
+Therefore, the space complexity is $O(n)$, because the stack can grow linearly with $n$.
+
+In short, *the recursive `fibonacci` function is simple but inefficient for large $n$ due to its exponential time complexity*. This conclusion justifies the need for Dynamic Programming.
+
 ## Returning to Dynamic Programming
 
 If we look at dynamic programming, we will see an optimization technique that is based on recursion but adds storage of intermediate results to avoid redundant calculations. Memoization and tabulation are the two most common dynamic programming techniques, each with its own approach to storing and reusing the results of subproblems:
@@ -306,7 +328,7 @@ Therefore, $T(10) = 177$.
 
 Each value of $T(n)$ represents the number of recursive calls to compute `fibonacci_memo(n)` using the formula $T(n) = T(n-1) + T(n-2) + 1$. And we have only 10 recursive calls.
 
-#### Efficiency  
+#### Time and Space Complexity
 
 We must procede one Big O analysis of the `fibonacci_memo` function, it uses memoization to calculate Fibonacci numbers. Let's analyze its time and space complexity.
 
@@ -327,7 +349,7 @@ Finally we are ready to study Dynamic Programming with Tabulation.
 
 ### Example 3: Fibonacci with Tabulation
 
-Finally, we can have an example of Dynamic Programming with Tabulation. Again let's start coding the Flowchart 3: 
+Finally, we can have an example of Dynamic Programming with Tabulation. Again let's start coding the Flowchart 3:
 
 ![]({{ site.baseurl }}/assets/images/interative-fibbo.jpg)
 *Flowchart 3 - Interactive Fibonacci nth algorithm*
@@ -398,7 +420,7 @@ This continues until $i = 10$.
 After the loop, `dp` is `[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55]`.
 Returns `dp[10]`, which is $55$.
 
-#### Efficiency
+#### Time and Space Complexity
 
 The tabulation method makes this approach very efficient with a time complexity of $O(n)$ and a space complexity of $O(n)$, as it iteratively computes and stores each Fibonacci number up to $n$.
 
@@ -417,6 +439,8 @@ Let's see how far we go in this text. At the moment of writing, I still have no 
 Python, which I used as pseudocode, is a versatile and simple language. However, it is still not the most suitable language for high-performance use or programming competitions. Therefore, we will move to C++ 20 and, eventually, use data structures compatible with C 17, even in the C++ 20 environment. Speaking of the environment, from this point on, I will be using Visual Studio Community edition to run and evaluate all the code. To maintain consistency in our text so far, I will convert the same functions we wrote in Python to C++ and assess the results.
 
 ### Code 1: `std::vectors`
+
+Let's begin with a straightforward, intuitive implementation in C++20, following the flow and data structures of the Python functions provided earlier.
 
 ```Cpp
 #include <iostream>
@@ -509,6 +533,252 @@ int main() {
 }
 ```
 
+Now, the attentive reader will agree with me: we need to break this code down. 
+
+#### The Recursive Function
+
+Let's start with `fibonacci(int n)`, the simple and pure recursive function.
+
+```Cpp
+int fibonacci(int n) {
+    if (n <= 1) {
+        return n;
+    }
+    else {
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+}
+```
+
+This is a similar C++ recursive function to the one we used to explain recursion in Python. Perhaps the most relevant aspect of `fibonacci(int n)` is its argument: `int n`. Using the `int` type limits our Fibonacci number to $46$. This is because the `int` type on my system, a 64-bit computer, is limited to $2^31 - 1 = 2,147,483,647$, and the $46$th Fibonacci number is $1,836,311,903$. Since Python uses floating-point numbers (like doubles) by default, we can calculate up to the $78$th Fibonacci number, which is $8,944,394,323,791,464$.
+
+The next function is the C++ memoization version:
+
+```Cpp
+// Recursive function with memoization to calculate Fibonacci
+int fibonacci_memo(int n, std::unordered_map<int, int>& memo) {
+    if (memo.find(n) != memo.end()) {
+        return memo[n];
+    }
+    if (n <= 1) {
+        return n;
+    }
+    memo[n] = fibonacci_memo(n - 1, memo) + fibonacci_memo(n - 2, memo);
+    return memo[n];
+}
+```
+
+Let's highlight the ´std::unordered_map<int, int>& memo` in function arguments. The argument `std::unordered_map<int, int>& memo` in C++ is used to pass a reference to an unordered map (hash table) that maps integers to integers. Breaking it down we will have:
+
+`std::unordered_map<int, int>` specifies the type of the argument. `std::unordered_map` is a template class provided by the C++ Standard Library that implements a hash table. The template parameters `<int, int>` specify that the keys and values stored in the unordered map are both integers.
+
+The ampersand (`&`) indicates that the argument is a reference. This means that the function will receive a reference to the original unordered map, rather than a copy of it. Passing by reference is efficient because it avoids copying the entire map, which could be expensive in terms of time and memory, especially for large maps. Pay attention: Changes made to the map inside the function will affect the original map outside the function.
+
+`memo` is the name of the parameter. In the context of memoization (hence the name `memo` we used earlier), this unordered map is used to store the results of previously computed values to avoid redundant calculations.
+
+One `unordered_map` in C++ is quite similar to Python's dict in terms of functionality. Both provide an associative container that allows for efficient key-value pair storage and lookup. The `std::unordered_map` is a template class and a C++ only construct implemented as a hash table. *Unordered maps store key-value pairs and provide average constant-time complexity for insertion, deletion, and lookup operations, thanks to their underlying hash table structure*. They grow dynamically as needed, managing their own memory, which is freed upon destruction. Unordered maps can be passed to or returned from functions by value and can be copied or assigned, performing a deep copy of all stored elements.
+
+Unlike arrays, unordered maps do not decay to pointers, and you cannot get a pointer to their internal data. Instead, unordered maps maintain an internal hash table, which is allocated dynamically by the allocator specified in the template parameter, usually obtaining memory from the freestore (heap) independently of the object's actual allocation. This makes unordered maps efficient for fast access and manipulation of key-value pairs, though they do not maintain any particular order of the elements.
+
+Unordered maps do not require a default constructor for stored objects and are well integrated with the rest of the STL, providing `begin()`/`end()` methods and the usual STL typedefs. When reallocating, unordered maps rehash their elements, which involves reassigning the elements to new buckets based on their hash values. This rehashing process can involve copying or moving (in C++11 and later) the elements to new locations in memory.
+
+Rehashing is a process used in `std::unordered_map` to maintain efficient performance by redistributing elements across a larger array when the load factor (the number of elements divided by the number of buckets) becomes too high. The rehashing process involves determining the new size, allocating a new array of buckets to hold the redistributed elements, rehashing elements by applying a hash function to each key to compute a new bucket index and inserting the elements into this new index, and finally, updating the internal state by updating internal pointers, references, and variables, and deallocating the old bucket array. Rehashing in `std::unordered_map` is crucial for maintaining efficient performance by managing the load factor and ensuring that hash collisions remain manageable.
+
+Overall, `std::unordered_map` is a versatile and efficient container for associative data storage, offering quick access and modification capabilities while seamlessly integrating with the C++ Standard Library.
+
+The `fibonacci_memo(int n, std::unordered_map<int, int>& memo)` function works just like the Python function we explained before with the same complexity, $O(n)$, for space and time. That said we can continue to `fibonacci_tabulation(int n)`.
+
+#### The Dynamic Programming Function Using Memoization
+
+The `fibonacci_tabulation(int n)`, which uses a `std::vector`, was designed to be as similar as possible to the tabulation function we studied in Python.
+
+```CPP
+// Iterative function with tabulation to calculate Fibonacci
+int fibonacci_tabulation(int n) {
+    if (n <= 1) {
+        return n;
+    }
+    std::vector<int> dp(n + 1, 0);
+    dp[1] = 1;
+    for (int i = 2; i <= n; ++i) {
+        dp[i] = dp[i - 1] + dp[i - 2];
+    }
+    return dp[n];
+}
+```
+
+The `std::vector` is a template class and a C++-only construct implemented as a dynamic array. Vectors grow and shrink dynamically, automatically managing their memory, which is freed upon destruction. They can be passed to or returned from functions by value and can be copied or assigned, performing a deep copy of all stored elements. Unlike arrays, vectors do not decay to pointers, but you can explicitly get a pointer to their data using `&vec[0]`. Vectors maintain their size (number of elements currently stored) and capacity (number of elements that can be stored in the currently allocated block) along with the internal dynamic array. This internal array is allocated dynamically by the allocator specified in the template parameter, usually obtaining memory from the freestore (heap) independently of the object's actual allocation. Although this can make vectors less efficient than regular arrays for small, short-lived, local arrays, vectors do not require a default constructor for stored objects and are better integrated with the rest of the STL, providing `begin()`/`end()` methods and the usual STL typedefs. When reallocating, vectors copy (or move, in C++11) their objects.
+
+Besides the `std::vector` template type, the time and space complexity are the same, $O(n)$, we found in Python version. What left us with the generic part of Code 1.
+
+#### Performance Evaluation and Support Functions
+
+All the effort we have made so far will be useless if we are not able to measure the execution times of these functions. In addition to complexity, we need to observe the execution time. This time will depend on the computational cost of the structures used, the efficiency of the compiler, and the machine on which the code will be executed. I chose to measure the average time of 1000 executions of each function to find the tenth, twentieth, and thirtieth Fibonacci numbers. To do this, I created two support functions:
+
+```Cpp
+// Function to measure execution time
+template <typename Func, typename... Args>
+long long measure_time(Func func, Args&&... args) {
+    auto start = std::chrono::high_resolution_clock::now();
+    func(std::forward<Args>(args)...);
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<long long, std::nano> duration = end - start;
+    return duration.count();
+}
+
+// Function to calculate average execution time
+template <typename Func, typename... Args>
+long long average_time(Func func, int iterations, Args&&... args) {
+    long long total_time = 0;
+    for (int i = 0; i < iterations; ++i) {
+        total_time += measure_time(func, std::forward<Args>(args)...);
+    }
+    return total_time / iterations;
+}
+
+The `long long measure_time(Func func, Args&&... args)` function is a template function designed to measure the execution time of a given function `func` with arbitrary arguments. It returns the time taken to execute the function in nanoseconds. Let's break down each part of this function to understand how it works in detail.
+
+```cpp
+template <typename Func, typename... Args>
+```
+
+The keyword `template` in `measure_time` declaration indicates that `measure_time` is a template function, which means it can operate with generic types.
+
+A template is a C++ language feature that allows functions and classes to operate with generic types, enabling code reuse and type safety, allowing the creation of functions and classes that can work with any data type without being rewritten for each specific type. This is achieved by defining a blueprint that specifies how the function or class should operate with type parameters that are provided when the template is instantiated. The advantage of templates is their ability to provide high levels of abstraction while maintaining performance, as template code is resolved at compile time, resulting in optimized and type-safe code. This leads to more flexible and reusable code structures, reducing redundancy and the potential for errors, and allowing developers to write more generic and maintainable code.
+
+The first argument, `typename Func` specifies that the first template parameter, `Func`, can be any callable type, such as functions, function pointers, lambdas, or functors. When `typename Func` is specified in a template definition, it indicates that the template will accept a callable entity as a parameter. The use of `typename` in this context ensures that the template parameter is interpreted as a type, enabling the compiler to correctly process the callable type during instantiation. I am using `Func` to call the function whose execution time will be measured.
+
+The last argument, `typename... Args`: This is a variadic template parameter, allowing the function to accept any number of additional arguments of any types.
+Function Definition. The `typename... Args` declaration is used in C++ templates to define a variadic template parameter, which allows a template to accept an arbitrary number of arguments of any types. When `typename... Args` is specified, it indicates that the template can handle a variable number of parameters, making it highly flexible and adaptable. This is particularly useful for functions and classes that need to operate on a diverse set of inputs without knowing their types or number in advance.
+
+
+```Cpp
+long long measure_time(Func func, Args&&... args) {
+```
+
+In the context of a template function, `Args&&... args` is often used to perfectly forward these arguments to another function, preserving their value categories (`lvalues` or `rvalues`). The use of `typename...` ensures that each parameter in the pack is treated as a type, enabling the compiler to correctly process each argument during template instantiation.
+
+The return type of the function, `long long`, represent the duration of the function execution in nanoseconds. I choose a `long long` integer because I have no idea how long our dynamic programming functions will take to compute, and to try to ensure a default function that can be used for all problems we will work on. The maximum value that can be stored in a `long long` type in C++ is defined by the limits of the type, which are specified in the `<climits>` header. For a signed `long long` type, the maximum value is $2^{63} - 1 = 9,223,372,036,854,775,807$.
+
+The function `measure_time` arguments are:
+
+- Func func: The callable entity whose execution time we want to measure.
+- Args&&... args: A parameter pack representing the arguments to be forwarded to the callable entity. The use of && indicates that these arguments are perfect forwarded, preserving their value category (`lvalue` or `rvalue`).
+Measuring Execution Time
+
+The the body of function `measure_time` starts with:
+
+```Cpp
+auto start = std::chrono::high_resolution_clock::now();
+```
+
+Where `auto start` declares a variable `start` to store the starting time point and
+`std::chrono::high_resolution_clock::now()` retrieves the current time using a high-resolution clock, which provides the most accurate and precise measurement of time available on the system. `std::chrono::high_resolution_clock::now()` returns a `time_point` object representing the current point in time.
+
+Following we have the function call:
+
+```Cpp
+Copiar código
+func(std::forward<Args>(args)...);
+```
+
+`func`: Calls the function or callable entity passed as the `func` parameter while `std::forward<Args>(args)...` forwards the arguments to the function call. This ensures that the arguments are passed to the called function, `func` with the same value category (`lvalue` or `rvalue`) that they were passed to `measure_time`.
+
+We measure the time and store it in `start`, then we call the function. Now we need to measure the time again.
+
+```Cpp
+auto end = std::chrono::high_resolution_clock::now();
+```
+
+In this linha `auto end` declares a variable `end` to store the ending time point while
+`std::chrono::high_resolution_clock::now()` retrieves the current time again after the function `func` has completed execution. Finally we can calculate the time spent to call the function `func`.
+
+```Cpp
+std::chrono::duration<long long, std::nano> duration = end - start;
+```
+
+Both the `start` and `end` variables store a `time_point` object. `std::chrono::duration<long long, std::nano>` represents a duration in nanoseconds. `end - start` calculates the difference between the ending and starting time points, which gives the duration of the function execution.
+
+In C++, the <chrono> library provides a set of types and functions for dealing with time and durations in a precise and efficient manner. One of the key components of this library is the std::chrono::duration class template, which represents a time duration with a specific period.
+
+The `std::chrono::duration<long long, std::nano>` declaration can be break down as:
+
+- `std::chrono`: This specifies that the `duration` class template is part of the `std::chrono` namespace, which contains types and functions for time utilities.
+- `duration<long long, std::nano>`: The `long long` is the representation type (`Rep`) of the `std::chrono::duration` class template, which is the type used to store the number of ticks (e.g., `int`, `long`, `double`). It indicates that the number of ticks will be stored as a `long long` integer, providing a large range to accommodate very fine-grained durations.
+- `std::nano` is the period type (`Period`) of the `std::chrono::duration` class template. The period type represents the tick period (e.g., seconds, milliseconds, nanoseconds). The default is `ratio<1>`, which means the duration is in seconds. `std::ratio` is a template that represents a compile-time rational number. The `std::nano` is a `typedef` for `std::ratio<1, 1000000000>`, which means each tick represents one nanosecond.
+
+The last line:
+
+```cpp
+return duration.count();
+```
+
+Where `duration.count()` returns the count of the duration in nanoseconds as a `long long` value, which is the total time taken by func to execute.
+
+Whew! That was long and exhausting. I'll try to be more concise in the future. I needed to provide some details because most of my students are very familiar with Python but have limited knowledge of C++.
+
+The next function is:
+
+```Cpp
+// Function to calculate average execution time
+template <typename Func, typename... Args>
+long long average_time(Func func, int iterations, Args&&... args) {
+    long long total_time = 0;
+    for (int i = 0; i < iterations; ++i) {
+        total_time += measure_time(func, std::forward<Args>(args)...);
+    }
+    return total_time / iterations;
+}
+```
+
+The `average_time` function template in C++ is designed to measure and calculate the average execution time of a given callable entity, such as a function, lambda, or functor, over a specified number of iterations. The template parameters `typename Func` and `typename... Args` allow the function to accept any callable type and a variadic list of arguments that can be forwarded to the callable. The function takes three parameters: the callable entity `func`, the number of iterations `iterations`, and the arguments `args` to be forwarded to the callable. Inside the function, a variable `total_time` is initialized to zero to accumulate the total execution time. A loop runs for the specified number of iterations, and during each iteration, the `measure_time` function is called to measure the execution time of `func` with the forwarded arguments, which is then added to `total_time`.
+
+After the loop completes, `total_time` contains the sum of the execution times for all iterations. The function then calculates the average execution time by dividing `total_time` by the number of iterations and returns this value. This approach ensures that the average time provides a more reliable measure of the callable's performance by accounting for variations in execution time across multiple runs. The use of `std::forward<Args>(args)...` in the call to `measure_time` ensures that the arguments are forwarded with their original value categories, maintaining their efficiency and correctness. Overall, `average_time` provides a robust method for benchmarking the performance of callable entities in a generic and flexible manner.
+
+I said I would be succinct! And we get to `int main()`:
+
+```Cpp
+int main() {
+
+    const int iterations = 1000;
+    std::vector<int> test_cases = { 10, 20, 30 };
+
+    for (int n : test_cases) {
+        std::cout << "Calculating Fibonacci(" << n << ")\n";
+
+        // Calculation and average time using the simple recursive function
+        long long avg_time_recursive = average_time(fibonacci, iterations, n);
+        std::cout << "Average time for recursive Fibonacci: " << avg_time_recursive << " ns\n";
+
+        // Calculation and average time using the memoization function
+        std::unordered_map<int, int> memo;
+        auto fibonacci_memo_wrapper = [&memo](int n) { return fibonacci_memo(n, memo); };
+        long long avg_time_memo = average_time(fibonacci_memo_wrapper, iterations, n);
+        std::cout << "Average time for memoized Fibonacci: " << avg_time_memo << " ns\n";
+
+        // Calculation and average time using the tabulation function
+        long long avg_time_tabulation = average_time(fibonacci_tabulation, iterations, n);
+        std::cout << "Average time for tabulated Fibonacci: " << avg_time_tabulation << " ns\n";
+
+        std::cout << "-----------------------------------\n";
+    }
+
+    return 0;
+}
+```
+
+The `main()` function measures and compares the average execution time of different implementations of the Fibonacci function. Here's a detailed explanation of each part:
+
+The program starts by defining the number of iterations (`const int iterations = 1000;`) and a vector of test cases (`std::vector<int> test_cases = { 10, 20, 30 };`). It then iterates over each test case, calculating the Fibonacci number using different methods and measuring their average execution times.
+
+For the memoized Fibonacci implementation, the program first creates an unordered map `memo` to store previously computed Fibonacci values. It then defines a lambda function `fibonacci_memo_wrapper` that captures `memo` by reference and calls the `fibonacci_memo` function. The `average_time` function is used to measure the average execution time of this memoized implementation over 1000 iterations for each test case.
+
+The other functions follow a similar pattern to measure and print their execution times. For instance, in the case of the recursive Fibonacci function, the line `long long avg_time_recursive = average_time(fibonacci, iterations, n);` calls the `average_time` function to measure the average execution time of the simple recursive Fibonacci function over 1000 iterations for the current test case `n`. The result, stored in `avg_time_recursive`, represents the average time in nanoseconds. The subsequent line, `std::cout << "Average time for recursive Fibonacci: " << avg_time_recursive << " ns\n";`, outputs this average execution time to the console, providing insight into the performance of the recursive method.
+
+The results are printed to the console, showing the performance gain achieved through memoization compared to the recursive and tabulation methods.
+
+#### Running
+
 This simple and intuitive code generates a Fibonacci number, stores it in an integer (`int`), and then, for testing purposes, finds 3 specific Fibonacci numbers—the 10th, 20th, and 30th—1000 times each. This code uses `std::vectors` and `std::unordered_map` for storing the values of the Fibonacci sequence and, when executed, presents the following result.
 
 ```shell
@@ -529,9 +799,10 @@ Average time for tabulated Fibonacci: 1189 ns
 -----------------------------------
 ```
 
-The kind reader should note that the times vary in a non-linear fashion and that, in all cases, for this problem, the dynamic programming version using tabulation was faster. Much is said about the performance of the Vector class compared to the Array class.
+The reader should note that the execution times vary non-linearly and, in all cases, for this problem, the dynamic programming version using tabulation was faster. There is much discussion about the performance of the Vector class compared to the Array class.
 
-`std::vector` is a template class and a C++-only construct implemented as a dynamic array. Vectors grow and shrink dynamically, automatically managing their memory, which is freed upon destruction. They can be passed to or returned from functions by value and can be copied or assigned, performing a deep copy of all stored elements. Unlike arrays, vectors do not decay to pointers, but you can explicitly get a pointer to their data using `&vec[0]`. Vectors maintain their size (number of elements currently stored) and capacity (number of elements that can be stored in the currently allocated block) along with the internal dynamic array. This internal array is allocated dynamically by the allocator specified in the template parameter, usually obtaining memory from the freestore (heap) independently of the object's actual allocation. Although this can make vectors less efficient than regular arrays for small, short-lived, local arrays, vectors do not require a default constructor for stored objects and are better integrated with the rest of the STL, providing `begin()`/`end()` methods and the usual STL typedefs. When reallocating, vectors copy (or move, in C++11) their objects.
+### Code 2: `std::array`
+
 
 `std::array` is a template class introduced in C++11, which provides a fixed-size array that is more integrated with the STL than traditional C-style arrays. Unlike `std::vector`, `std::array` does not manage its own memory dynamically; its size is fixed at compile-time, which makes it more efficient for cases where the array size is known in advance and does not change. `std::array` objects can be passed to and returned from functions, and they support copy and assignment operations. They provide the same `begin()`/`end()` methods as vectors, allowing for easy iteration and integration with other STL algorithms. One significant advantage of `std::array` over traditional arrays is that it encapsulates the array size within the type itself, eliminating the need for passing size information separately. Additionally, `std::array` provides member functions such as `size()`, which returns the number of elements in the array, enhancing safety and usability. However, since `std::array` has a fixed size, it does not offer the dynamic resizing capabilities of `std::vector`, making it less flexible in scenarios where the array size might need to change.
 
@@ -553,8 +824,6 @@ In summary, `std::array` generally offers superior performance for fixed-size ar
 | STL Integration | Yes (works with algorithms and iterators) | Yes (similar interface to vector) |
 
 So, we can test this performance advantages.
-
-### Code 2: `std::array`
 
 ```Cpp
 #include <iostream>
@@ -646,7 +915,11 @@ int main() {
 }
 ```
 
-Which, when executed, produces the following output:
+This is basically the same code that we discussed in the previous section, only replacing the `std::vector` class with the `std::array` class. Therefore, we do not need to analyze the code line by line and can consider the flowcharts and complexity analysis already performed.
+
+#### Running
+
+Running the Code 2 will produces the following result:
 
 ```shell
 Calculating Fibonacci(10)
@@ -666,6 +939,6 @@ Average time for tabulated Fibonacci: 439 ns
 
 ```
 
-We have reached an interesting point. Just interesting. We achieved a performance gain using memoization and tabulation. However, we still have some options.
+We have reached an interesting point. Just interesting. We achieved a performance gain using memoization and tabulation, as evidenced by the different complexities among the recursive $O(n^2)$, memoization $O(n)$, and tabulation $O(n)$. Additionally, we observed a slight improvement in execution time by choosing `std::array` instead of `std::vector`. However, we still have some options to explore.
 
 I will continue later.
