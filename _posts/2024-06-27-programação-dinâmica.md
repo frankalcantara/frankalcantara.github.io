@@ -259,7 +259,7 @@ Memoization Check:  If $n$ isn't in the cache, the function makes two recursive 
 
 The Memoization Effect: The very first time we call `fibonacci_memo` with a new value of $n$, it will keep making recursive calls until it hits the base cases.  The key is that once a Fibonacci number is calculated, it gets stored in the cache. Any later calls with the same $$ simply return this stored value, preventing further recursion.
 
-Calculating the Number of Calls:
+#### Calculating the Number of Recursive Calls
 
 Initial Call: We start the whole process with a single call to `fibonacci_memo(n, memo)`.
 
@@ -301,7 +301,12 @@ Each value of $T(n)$ represents the number of recursive calls to compute `fibona
 
 ### Example 3: Fibonacci with Tabulation
 
-Finally, we can have an example of Dynamic Programming with Tabulation. Again using Python as a kind of pseudocode:
+Finally, we can have an example of Dynamic Programming with Tabulation. Again let's start coding the Flowchart 3: 
+
+![]({{ site.baseurl }}/assets/images/interative-fibbo.jpg)
+*Flowchart 3 - Interactive Fibonacci nth algorithm*
+
+Using Python as a kind of pseudocode:
 
 ```python
 def fibonacci_tabulation(n):
@@ -314,11 +319,62 @@ def fibonacci_tabulation(n):
     return dp[n]
 ```
 
-In this example, the `fibonacci_tabulation()` function uses a list `dp` to store the results of all subproblems, building the solution from the bottom up. Just to highlight, in Example 2 data is being stored.
+Let's analyze the provided code in detail. Unlike the previous recursive function, this function uses an iterative approach known as tabulation, a bottom-up dynamic programming technique.
 
-This is true! But look closely. The `fibonacci_tabulation(2)` function is an example of tabulation, not memoization, due to the specific characteristics of how the subproblems are solved and stored.
+In the Example 3, the `fibonacci_tabulation()` function uses a list `dp` to store the results of all subproblems, building the solution from the bottom up. Just to highlight, in Example 3 data is being stored.
+
+This is true! But look closely. The `fibonacci_tabulation()` function is an example of tabulation, not memoization, due to the specific characteristics of how the subproblems are solved and stored.
 
 Tabulation is a bottom-up approach to dynamic programming where you solve all subproblems first and store their solutions in a data structure, usually a table, array, list, or tree. The solution to the larger problem is then built from these smaller solutions by traversing the data structure from the bottom up. This implies an iterative resolution process. The subproblems are solved iteratively, starting from the smallest until the larger problem is reached. In this case, recursion is irrelevant.
+
+#### Function Definition and Initialization
+
+```python
+def fibonacci_tabulation(n):
+    if n <= 1:
+        return n
+    dp = [0] * (n + 1)
+    dp[1] = 1
+```
+
+Here, the function `fibonacci_tabulation` is defined to calculate the n-th Fibonacci number using tabulation.
+
+if $n <= 1$: `return n`: This handles the base cases of the Fibonacci sequence. If $n$ is $0$ or $1$, it directly returns n because:
+
+- `fibonacci(0)` $= 0$
+- `fibonacci(1)` $= 1$
+
+`dp = [0] * (n + 1)`: This initializes a list dp with $n+1$ zeros. This list will store the Fibonacci numbers up to $n$.
+
+`dp[1] = 1`: This sets the second element of `dp` to $1$, since `fibonacci(1)` $= 1$.
+
+#### Iteration and Calculation
+
+```python
+    for i in range(2, n + 1):
+        dp[i] = dp[i-1] + dp[i-2]
+    return dp[n]
+```
+
+`for i in range(2, n + 1)`: This loop starts from $2$ and iterates up to $n$.
+`dp[i] = dp[i-1] + dp[i-2]`: This calculates the i-th Fibonacci number by summing the previous two Fibonacci numbers (i.e., `fibonacci(i-1)` and `fibonacci(i-2)`) and stores it in the dp list at index $i$.
+`return dp[n]`: After the loop completes, the function returns the n-th Fibonacci number stored in `dp[n]`.
+
+### Flow Explanation
+
+When `fibonacci_tabulation(10)` is called, it checks if $10 <= 1$. It is not, so it proceeds.
+Initializes the `dp` list with zeros: `dp = [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]`.
+Iterates from $2$ to $10$:
+`For i = 2: dp[2] = dp[1] + dp[0]` $= 1 + 0 = 1$
+`For i = 3: dp[3] = dp[2] + dp[1]` $= 1 + 1 = 2$
+`For i = 4: dp[4] = dp[3] + dp[2]` $= 2 + 1 = 3$
+This continues until $i = 10$.
+After the loop, `dp` is `[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55]`.
+Returns `dp[10]`, which is $55$.
+
+#### Efficiency
+
+The tabulation method makes this approach very efficient with a time complexity of $O(n)$ and a space complexity of $O(n)$, as it iteratively computes and stores each Fibonacci number up to $n$.
 
 ## There is more between heaven and earth, Mr. Shakespeare
 
