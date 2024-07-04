@@ -73,15 +73,13 @@ Dynamic programming and recursion are related; *both involve solving problems by
 
 The Flowchart 1 represents a function for calculating the nth number of the Fibonacci Sequence, for all $n \geq 0$ as the desired number.
 
-In Flowchart 1 we will have:
+In Flowchart 1 we have:
 
 - **Base Case**: The base case is the condition that terminates the recursion. For the Fibonacci sequence, the base cases are for $n = 0$ and $n = 1$:
-  - When $n = 0$, the function returns 0.
-  - When $n = 1$, the function returns 1.
+  - When $n = 0$, the function returns $0$.
+  - When $n = 1$, the function returns $1$.
 
-- **Recursive Step**: The recursive step is the part of the function that calls itself to solve smaller subproblems. In the Fibonacci sequence, each number is the sum of the two preceding ones:
-
-$$F(n) = F(n - 1) + F(n - 2)$$
+- **Recursive Step**: The recursive step is the part of the function that calls itself to solve smaller subproblems. In the Fibonacci sequence, each number is the sum of the two preceding ones: $F(n) = F(n - 1) + F(n - 2)$ which leads to a representation of the base cases as: $F(0) = 0$ and $F(1) = 1$
 
 When the function receives a value $n$:
 
@@ -140,11 +138,19 @@ Counting all the calls, we have:
 
 Total: 15 calls. Therefore, the `fibonacci(n)` function is called 15 times to calculate `fibonacci(5)`.
 
-To calculate the number of times the function will be called for any value $n$, we can use the following formula based on the analysis of the recursion tree:
+To understand the computational cost of the recursive Fibonacci function, let's analyze the number of function calls made for a given input n. We can express this using the following recurrence relation:
 
-$$ T(n) = T(n-1) + T(n-2) + 1 $$
+$$T(n) = T(n-1) + T(n-2) + 1$$
 
-Where $T (n) $ is the total number of calls to calculate `fibonacci(n)`.
+where:
+
+$T(n)$ represents the total number of calls to the `fibonacci(n)` function.
+$T(n-1)$ represents the number of calls made when calculating fibonacci(n-1).
+$T(n-2)$ represents the number of calls made when calculating fibonacci(n-2).
+The $+ 1$ term accounts for the current call to the `fibonacci(n)` function itself.
+The base cases for this recurrence relation are:
+
+These base cases indicate that calculating `fibonacci(0)` or `fibonacci(1)` requires a single function call.
 
 To illustrate the formula $T(n) = T(n-1) + T(n-2) + 1$ with $n = 10$, we can calculate the number of recursive calls $T(10)$. Let's start with the base values $T(0)$ and $T(1)$, and then calculate the subsequent values up to $T(10)$.
 
@@ -152,6 +158,8 @@ Assuming that $T(0) = 1$ and $T(1) = 1$:
 
 $$
 \begin{aligned}
+T(0) &= 1 \\
+T(1) &= 1 \\
 T(2) &= T(1) + T(0) + 1 = 1 + 1 + 1 = 3 \\
 T(3) &= T(2) + T(1) + 1 = 3 + 1 + 1 = 5 \\
 T(4) &= T(3) + T(2) + 1 = 5 + 3 + 1 = 9 \\
@@ -172,13 +180,12 @@ This formula can be used to build a recursion tree and sum the total number of r
 
 ## Returning to Dynamic Programming
 
-If we look at dynamic programming, we will see an optimization technique that is based on recursion but adds storage of intermediate results to avoid redundant calculations. There are two main approaches to implementing dynamic programming:
+If we look at dynamic programming, we will see an optimization technique that is based on recursion but adds storage of intermediate results to avoid redundant calculations. Memoization and tabulation are the two most common dynamic programming techniques, each with its own approach to storing and reusing the results of subproblems:
 
-- **Memoization (Top-Down)**: Stores the results of recursive calls in a data structure (such as a dictionary or a list, etc.) for reuse. The name memoization is a horrible borrowing from the English word *memoization*.
+- **Memoization (Top-Down)**: This technique is recursive in nature. It involves storing the results of expensive function calls and returning the cached result when the same inputs occur again. This approach can be seen as an optimization of the top-down recursive process.
+- **Tabulation (Bottom-Up**): Tabulation takes an iterative approach, solving smaller subproblems first and storing their solutions in a table (often an array or matrix). It then uses these stored values to calculate the solutions to larger subproblems, gradually building up to the final solution. The iterative nature of tabulation typically involves using loops to fill the table in a systematic manner.
 
-- **Tabulation (Bottom-Up)**: Solves the problem iteratively, filling a table (usually a list or matrix) with the results of the subproblems.
-
-In this case, we can see two examples in Python. First, an example of Dynamic Programming with memoization:
+At this point, we can take a look in two examples using Python as pseudocode. First, an example of Dynamic Programming with memoization:
 
 ### Example 2: Memoization
 
@@ -298,6 +305,25 @@ $$
 Therefore, $T(10) = 177$.
 
 Each value of $T(n)$ represents the number of recursive calls to compute `fibonacci_memo(n)` using the formula $T(n) = T(n-1) + T(n-2) + 1$. And we have only 10 recursive calls.
+
+#### Efficiency  
+
+We must procede one Big O analysis of the `fibonacci_memo` function, it uses memoization to calculate Fibonacci numbers. Let's analyze its time and space complexity.
+
+The key to understanding the time complexity is that each unique value of `n` is calculated only once and then stored in `memo`.
+
+- There are $n$ unique values (from $0$ to $n$).
+- For each value of $n$, the function performs a constant amount of work (checking, adding, and retrieving values from `memo`).
+
+Therefore, the total time complexity of the function is $O(n)$, since each Fibonacci number up to $n$ is computed and stored once.
+
+The space complexity is determined by the additional storage used by the memoization dictionary (`memo`).
+
+- The dictionary `memo` can contain up to $n$ entries (one for each Fibonacci number up to $n$).
+
+Thus, the space complexity is also $O(n)$ due to the space required to store the entries in the `memo` dictionary.
+
+Finally we are ready to study Dynamic Programming with Tabulation.
 
 ### Example 3: Fibonacci with Tabulation
 
