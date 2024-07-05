@@ -401,7 +401,7 @@ def fibonacci_tabulation(n):
 -`dp[i] = dp[i-1] + dp[i-2]`: This calculates the ith Fibonacci number by summing the previous two Fibonacci numbers (i.e., `fibonacci_tabulation(i-1)` and `fibonacci_tabulation(i-2)`) and stores it in the `dp` list at index $i$.
 -`return dp[n]`: After the loop completes, the function returns the nth Fibonacci number stored in `dp[n]`.
 
-### Flow Explanation
+#### Flow Explanation
 
 Let's try with the tenth Fibonacci number. When `fibonacci_tabulation(10)` is called, it checks if $10 <= 1$. It is not, so it proceeds.
 
@@ -533,6 +533,8 @@ int main() {
 }
 ```
 
+*Code 1 - running std::vector and tail recursion*{: class="legend"}
+
 Now, the attentive reader will agree with me: we must to break this code down.
 
 #### The Recursive Function
@@ -549,6 +551,8 @@ int fibonacci(int n) {
     }
 }
 ```
+
+*Code 1 - programming dynamic, simple tail recursion technique*{: class="legend"}
 
 This is a similar C++ recursive function to the one we used to explain recursion in Python. Perhaps the most relevant aspect of `fibonacci(int n)` is its argument: `int n`. Using the `int` type limits our Fibonacci number to $46$. Especially because the `int` type on my system, a 64-bit computer running Windows 11, is limited, by default, to storing a maximum value of $2^31 - 1 = 2,147,483,647$, and the $46$th Fibonacci number is $1,836,311,903$. The next one will be bigger than `int` capacity. Since Python uses floating-point numbers (like doubles) by default, we can calculate up to the $78$th Fibonacci number, which is $8,944,394,323,791,464$. We could achieve the same result in C++ by changing from `int` to another data type. However, that is not our goal here.
 
@@ -567,6 +571,8 @@ int fibonacci_memo(int n, std::unordered_map<int, int>& memo) {
     return memo[n];
 }
 ```
+
+*Code 1 - programming dynamic, memoization technique*{: class="legend"}
 
 Let's highlight the ´std::unordered_map<int, int>& memo´ in function arguments. The argument `std::unordered_map<int, int>& memo´ in C++ is used to pass a reference to an unordered map (hash table) that maps integers to integers. Breaking it down we will have:
 
@@ -605,7 +611,9 @@ int fibonacci_tabulation(int n) {
 }
 ```
 
-The `std::vector` is a template class and a C++-only construct implemented as a dynamic array. *Vectors grow and shrink dynamically, automatically managing their memory, which is freed upon destruction. They can be passed to or returned from functions by value and can be copied or assigned, performing a deep copy of all stored elements*. 
+*Code 1 - programming dynamic, tabulation technique*{: class="legend"}
+
+The `std::vector` is a template class and a C++-only construct implemented as a dynamic array. *Vectors grow and shrink dynamically, automatically managing their memory, which is freed upon destruction. They can be passed to or returned from functions by value and can be copied or assigned, performing a deep copy of all stored elements*.
 
 Unlike arrays, vectors do not decay to pointers, but you can explicitly get a pointer to their data using `&vec[0]`. Vectors maintain their size (number of elements currently stored) and capacity (number of elements that can be stored in the currently allocated block) along with the internal dynamic array. This internal array is allocated dynamically by the allocator specified in the template parameter, *usually obtaining memory from the freestore (heap) independently of the object's actual allocation*. Although this can make vectors less efficient than regular arrays for small, short-lived, local arrays, vectors do not require a default constructor for stored objects and are better integrated with the rest of the STL, providing `begin()`/`end()` methods and the usual STL typedefs. When reallocating, vectors copy (or move, in C++11) their objects.
 
@@ -635,8 +643,11 @@ long long average_time(Func func, int iterations, Args&&... args) {
     }
     return total_time / iterations;
 }
+```
 
-The `long long measure_time(Func func, Args&&... args)` function is a template function designed to measure the execution time of a given function `func` with arbitrary arguments `Args&&... args`. It returns the time taken to execute the function in nanoseconds. Let's break down each part of this function to understand how it works in detail.
+*Code 1 - support functions fragment*{: class="legend"}
+
+Let's initiate with Function 1, `long long average_time(Func func, int iterations, Args&&... args)`. This function is a template function designed to measure the execution time of a given function `func` with arbitrary arguments `Args&&... args`. It returns the time taken to execute the function in nanoseconds. Let's break down each part of this function to understand how it works in detail.
 
 ```cpp
 template <typename Func, typename... Args>
@@ -676,12 +687,13 @@ auto start = std::chrono::high_resolution_clock::now();
 ```
 
 Where `auto start` declares a variable `start` to store the starting time point and
-`std::chrono::high_resolution_clock::now()` retrieves the current time using a high-resolution clock, which provides the most accurate and precise measurement of time available on the system. `std::chrono::high_resolution_clock::now()` returns a `time_point` object representing the current point in time.
+`std::chrono::high_resolution_clock::now()` retrieves the current time using a high-resolution clock, which provides the most accurate and precise measurement of time available on the system. The `std::chrono::high_resolution_clock::now()` returns a `time_point` object representing the current point in time.
+
+>In C++, a `time_point` object is a part of the `<chrono>` library, which provides facilities for measuring and representing time. A `time_point` object represents a specific point in time relative to a clock. It is templated on a clock type and a duration, allowing for precise and high-resolution time measurements. The Clock is represented by a  `clock type`, and can be system_clock, steady_clock, or high_resolution_clock. The clock type determines the epoch (the starting point for time measurement) and the tick period (the duration between ticks). 
 
 Following we have the function call:
 
 ```Cpp
-Copiar código
 func(std::forward<Args>(args)...);
 ```
 
@@ -702,7 +714,7 @@ std::chrono::duration<long long, std::nano> duration = end - start;
 
 Both the `start` and `end` variables store a `time_point` object. `std::chrono::duration<long long, std::nano>` represents a duration in nanoseconds. `end - start` calculates the difference between the ending and starting time points, which gives the duration of the function execution.
 
-In C++, the `<chrono>` library provides a set of types and functions for dealing with time and durations in a precise and efficient manner. One of the key components of this library is the std::chrono::duration class template, which represents a time duration with a specific period.
+>In C++, the `<chrono>` library provides a set of types and functions for dealing with time and durations in a precise and efficient manner. One of the key components of this library is the std::chrono::duration class template, which represents a time duration with a specific period.
 
 The `std::chrono::duration<long long, std::nano>` declaration can be break down as:
 
@@ -710,20 +722,20 @@ The `std::chrono::duration<long long, std::nano>` declaration can be break down 
 - `duration<long long, std::nano>`: The `long long` is the representation type (`Rep`) of the `std::chrono::duration` class template, which is the type used to store the number of ticks (e.g., `int`, `long`, `double`). It indicates that the number of ticks will be stored as a `long long` integer, providing a large range to accommodate very fine-grained durations.
 - `std::nano` is the period type (`Period`) of the `std::chrono::duration` class template. The period type represents the tick period (e.g., seconds, milliseconds, nanoseconds). The default is `ratio<1>`, which means the duration is in seconds. `std::ratio` is a template that represents a compile-time rational number. The `std::nano` is a `typedef` for `std::ratio<1, 1000000000>`, which means each tick represents one nanosecond.
 
-The last line:
+The last line is:
 
 ```cpp
 return duration.count();
 ```
 
-Where `duration.count()` returns the count of the duration in nanoseconds as a `long long` value, which is the total time taken by func to execute.
+Where `duration.count()` returns the count of the duration in nanoseconds as a `long long` value, which is the total time taken by `func` to execute.
 
-Whew! That was long and exhausting. I'll try to be more concise in the future. I needed to provide some details because most of my students are very familiar with Python but have limited knowledge of C++.
+Whew! That was long and exhausting. I'll try to be more concise in the future. I had to provide some details because most of my students are familiar with Python but have limited knowledge of C++.
 
-The next function is:
+The next support function is Function 2, `long long average_time(Func func, int iterations, Args&&... args)`:
 
 ```Cpp
-// Function to calculate average execution time
+// Function 2: to calculate average execution time
 template <typename Func, typename... Args>
 long long average_time(Func func, int iterations, Args&&... args) {
     long long total_time = 0;
@@ -734,17 +746,18 @@ long long average_time(Func func, int iterations, Args&&... args) {
 }
 ```
 
-The `average_time` function template in C++ is designed to measure and calculate the average execution time of a given callable entity, such as a function, lambda, or functor, over a specified number of iterations. The template parameters `typename Func` and `typename... Args` allow the function to accept any callable type and a variadic list of arguments that can be forwarded to the callable. The function takes three parameters: the callable entity `func`, the number of iterations `iterations`, and the arguments `args` to be forwarded to the callable. Inside the function, a variable `total_time` is initialized to zero to accumulate the total execution time. A loop runs for the specified number of iterations, and during each iteration, the `measure_time` function is called to measure the execution time of `func` with the forwarded arguments, which is then added to `total_time`.
+The `average_time` function template was designed to measure and calculate the average execution time of a given callable entity, such as a function, lambda, or functor, over a specified number of iterations. The template parameters `typename Func` and `typename... Args` allow the function to accept any callable type and a variadic list of arguments that can be forwarded to the callable. The function takes three parameters: the callable entity `func`, the number of iterations `iterations`, and the arguments `args` to be forwarded to the callable. Inside the function, a variable, `total_time`, is initialized to zero to accumulate the total execution time. A loop runs for the specified number of iterations, and during each iteration, the `measure_time` function is called to measure the execution time of `func` with the forwarded arguments, which is then added to `total_time`.
 
-After the loop completes, `total_time` contains the sum of the execution times for all iterations. The function then calculates the average execution time by dividing `total_time` by the number of iterations and returns this value. This approach ensures that the average time provides a more reliable measure of the callable's performance by accounting for variations in execution time across multiple runs. The use of `std::forward<Args>(args)...` in the call to `measure_time` ensures that the arguments are forwarded with their original value categories, maintaining their efficiency and correctness. Overall, `average_time` provides a robust method for benchmarking the performance of callable entities in a generic and flexible manner.
+After the loop completes, `total_time` contains the sum of the execution times for all iterations. The function then calculates the average execution time by dividing `total_time` by the number of iterations and returns this value. This approach ensures that the average time provides a more reliable measure of the callable's performance by accounting for variations in execution time across multiple runs. The use of `std::forward<Args>(args)...` in the call to `measure_time` ensures that the arguments are forwarded with their original value categories, maintaining their efficiency and correctness. I like to think that `average_time()` provides a robust method for benchmarking the performance of callable entities in a generic and flexible manner.
 
-I said I would be succinct! And we get to `int main()`:
+I said I would be succinct! Despite all the setbacks, we have reached the
+ `int main()`:
 
 ```Cpp
 int main() {
 
     const int iterations = 1000;
-    std::vector<int> test_cases = { 10, 20, 30 };
+    std::vector<int> test_cases = { 10, 20, 30 }; //fibonacci numbers
 
     for (int n : test_cases) {
         std::cout << "Calculating Fibonacci(" << n << ")\n";
@@ -770,6 +783,8 @@ int main() {
 }
 ```
 
+*Code 1 - main() function*{: class="legend"}
+
 The `main()` function measures and compares the average execution time of different implementations of the Fibonacci function. Here's a detailed explanation of each part:
 
 The program starts by defining the number of iterations (`const int iterations = 1000;`) and a vector of test cases (`std::vector<int> test_cases = { 10, 20, 30 };`). It then iterates over each test case, calculating the Fibonacci number using different methods and measuring their average execution times.
@@ -780,9 +795,9 @@ The other functions follow a similar pattern to measure and print their executio
 
 The results are printed to the console, showing the performance gain achieved through memoization compared to the recursive and tabulation methods.
 
-#### Running
+#### Running Code 1 - `std::vector`
 
-This simple and intuitive code generates a Fibonacci number, stores it in an integer (`int`), and then, for testing purposes, finds 3 specific Fibonacci numbers—the 10th, 20th, and 30th—1000 times each. This code uses `std::vectors` and `std::unordered_map` for storing the values of the Fibonacci Sequence and, when executed, presents the following result.
+Code 1, the simple and intuitive code for testing purposes, finds three specific Fibonacci numbers — the 10th, 20th, and 30th — using three different functions, 1,000 times each. This code uses an `int`, `std::vector`, and `std::unordered_map` for storing the values of the Fibonacci sequence and, when executed, presents the following results.
 
 ```shell
 Calculating Fibonacci(10)
@@ -802,17 +817,21 @@ Average time for tabulated Fibonacci: 1189 ns
 -----------------------------------
 ```
 
-The reader should note that the execution times vary non-linearly and, in all cases, for this problem, the Dynamic Programming version using tabulation was faster. There is much discussion about the performance of the Vector class compared to the Array class.
+*Output 1 - running Code 1 - std::vector*{: class="legend"}
 
-### Code 2: `std::array`
+the careful reader should note that the execution times vary non-linearly and, in all cases, for this problem, the Dynamic Programming version using tabulation was faster. There is much discussion about the performance of the Vector class compared to the Array class. To test the performance differences between `std::vector` and `std::array`, we will retry using `std::array`
 
-The `std::array` is a template class introduced in C++11, which provides a fixed-size array that is more integrated with the STL than traditional C-style arrays. Unlike `std::vector`, `std::array` does not manage its own memory dynamically; its size is fixed at compile-time, which makes it more efficient for cases where the array size is known in advance and does not change. `std::array` objects can be passed to and returned from functions, and they support copy and assignment operations. They provide the same `begin()`/`end()` methods as vectors, allowing for easy iteration and integration with other STL algorithms. One significant advantage of `std::array` over traditional arrays is that it encapsulates the array size within the type itself, eliminating the need for passing size information separately. Additionally, `std::array` provides member functions such as `size()`, which returns the number of elements in the array, enhancing safety and usability. However, since `std::array` has a fixed size, it does not offer the dynamic resizing capabilities of `std::vector`, making it less flexible in scenarios where the array size might need to change.
+### Code 2: using `std::array`
 
-When considering performance differences between `std::vector` and `std::array`, it's essential to understand their underlying characteristics and use cases. `std::array` is a fixed-size array, with its size determined at compile-time, making it highly efficient for situations where the array size is known and constant. The lack of dynamic memory allocation means that `std::array` avoids the overhead associated with heap allocations, resulting in faster access and manipulation times. This fixed-size nature allows the compiler to optimize memory layout and access patterns, often resulting in better cache utilization and reduced latency compared to dynamically allocated structures.
+First and foremost, `std::array` is a container from the C++ Standard Library with some similarities to, and some differences from, `std::vector`, namely:
 
-In contrast, `std::vector` provides a dynamic array that can grow or shrink in size at runtime, offering greater flexibility but at a cost. The dynamic nature of `std::vector` necessitates managing memory allocations and deallocations, which introduces overhead. When a `std::vector` needs to resize, it typically allocates a new block of memory and copies existing elements to this new block, an operation that can be costly, especially for large vectors. Despite this, `std::vector` employs strategies such as capacity doubling to minimize the frequency of reallocations, balancing flexibility and performance.
+>The `std::array` is a template class introduced in C++11, which provides a fixed-size array that is more integrated with the STL than traditional C-style arrays. Unlike `std::vector`, `std::array` does not manage its own memory dynamically; its size is fixed at compile-time, which makes it more efficient for cases where the array size is known in advance and does not change. `std::array` objects can be passed to and returned from functions, and they support copy and assignment operations. They provide the same `begin()`/`end()` methods as vectors, allowing for easy iteration and integration with other STL algorithms. One significant advantage of `std::array` over traditional arrays is that it encapsulates the array size within the type itself, eliminating the need for passing size information separately. Additionally, `std::array` provides member functions such as `size()`, which returns the number of elements in the array, enhancing safety and usability. However, since `std::array` has a fixed size, it does not offer the dynamic resizing capabilities of `std::vector`, making it less flexible in scenarios where the array size might need to change.
 
-For small, fixed-size arrays, `std::array` usually outperforms `std::vector` due to its minimal overhead and compile-time size determination. It is particularly advantageous in performance-critical applications where predictable and low-latency access is required. On the other hand, `std::vector` shines in scenarios where the array size is not known in advance or can change, offering a more convenient and safer alternative to manually managing dynamic arrays.
+When considering performance differences between `std::vector` and `std::array`, it's essential to understand their underlying characteristics and use cases. *`std::array` is a fixed-size array, with its size determined at compile-time, making it highly efficient for situations where the array size is known and constant*. The lack of dynamic memory allocation means that `std::array` avoids the overhead associated with heap allocations, resulting in faster access and manipulation times. This fixed-size nature allows the compiler to optimize memory layout and access patterns, often resulting in better cache utilization and reduced latency compared to dynamically allocated structures.
+
+In contrast, *`std::vector` provides a dynamic array that can grow or shrink in size at runtime, offering greater flexibility but at a cost. The dynamic nature of `std::vector` necessitates managing memory allocations and deallocations, which introduces overhead*. When a `std::vector` needs to resize, it typically allocates a new block of memory and copies existing elements to this new block, an operation that can be costly, especially for large vectors. Despite this, `std::vector` employs strategies such as capacity doubling to minimize the frequency of reallocations, balancing flexibility and performance.
+
+*For small, fixed-size arrays, `std::array` usually outperforms `std::vector` due to its minimal overhead and compile-time size determination*. It is particularly advantageous in performance-critical applications where predictable and low-latency access is required. On the other hand, `std::vector` shines in scenarios where the array size is not known in advance or can change, offering a more convenient and safer alternative to manually managing dynamic arrays.
 
 In summary, `std::array` generally offers superior performance for fixed-size arrays due to its lack of dynamic memory management and the resultant compiler optimizations. However, `std::vector` provides essential flexibility and ease of use for dynamically sized arrays, albeit with some performance trade-offs. The choice between `std::array` and `std::vector` should be guided by the specific requirements of the application, weighing the need for fixed-size efficiency against the benefits of dynamic resizing.
 
@@ -825,39 +844,12 @@ In summary, `std::array` generally offers superior performance for fixed-size ar
 | Flexibility     | High (can add/remove elements easily) | Low (size cannot be changed)       |
 | STL Integration | Yes (works with algorithms and iterators) | Yes (similar interface to vector) |
 
-*Tabela 1 - Vector Array Comparison*
+*Tabela 1 - std::vector and std::array comparison*{: class="legend"}
 
-So, we can test this performance advantages, running a code using `std::array`.
+So, we can test this performance advantages, running a code using `std::array`. Since I am lazy, I took the same code used in Code 1 and only replaced the container in the `fibonacci_tabulation` function. You can see it below:
+
 
 ```Cpp
-#include <iostream>
-#include <unordered_map>
-#include <chrono>
-#include <functional>
-#include <array>
-
-// Recursive function to calculate Fibonacci
-int fibonacci(int n) {
-    if (n <= 1) {
-        return n;
-    }
-    else {
-        return fibonacci(n - 1) + fibonacci(n - 2);
-    }
-}
-
-// Recursive function with memoization to calculate Fibonacci
-int fibonacci_memo(int n, std::unordered_map<int, int>& memo) {
-    if (memo.find(n) != memo.end()) {
-        return memo[n];
-    }
-    if (n <= 1) {
-        return n;
-    }
-    memo[n] = fibonacci_memo(n - 1, memo) + fibonacci_memo(n - 2, memo);
-    return memo[n];
-}
-
 // Iterative function with tabulation to calculate Fibonacci using arrays
 int fibonacci_tabulation(int n) {
     if (n <= 1) {
@@ -870,58 +862,13 @@ int fibonacci_tabulation(int n) {
     }
     return dp[n];
 }
-
-// Function to measure execution time
-template <typename Func, typename... Args>
-long long measure_time(Func func, Args&&... args) {
-    auto start = std::chrono::high_resolution_clock::now();
-    func(std::forward<Args>(args)...);
-    auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<long long, std::nano> duration = end - start;
-    return duration.count();
-}
-
-// Function to calculate average execution time
-template <typename Func, typename... Args>
-long long average_time(Func func, int iterations, Args&&... args) {
-    long long total_time = 0;
-    for (int i = 0; i < iterations; ++i) {
-        total_time += measure_time(func, std::forward<Args>(args)...);
-    }
-    return total_time / iterations;
-}
-
-int main() {
-    const int iterations = 1000;
-    std::vector<int> test_cases = { 10, 20, 30 };
-
-    for (int n : test_cases) {
-        std::cout << "Calculating Fibonacci(" << n << ")\n";
-
-        // Calculation and average time using the simple recursive function
-        long long avg_time_recursive = average_time(fibonacci, iterations, n);
-        std::cout << "Average time for recursive Fibonacci: " << avg_time_recursive << " ns\n";
-
-        // Calculation and average time using the memoization function
-        std::unordered_map<int, int> memo;
-        auto fibonacci_memo_wrapper = [&memo](int n) { return fibonacci_memo(n, memo); };
-        long long avg_time_memo = average_time(fibonacci_memo_wrapper, iterations, n);
-        std::cout << "Average time for memoized Fibonacci: " << avg_time_memo << " ns\n";
-
-        // Calculation and average time using the tabulation function
-        long long avg_time_tabulation = average_time(fibonacci_tabulation, iterations, n);
-        std::cout << "Average time for tabulated Fibonacci: " << avg_time_tabulation << " ns\n";
-
-        std::cout << "-----------------------------------\n";
-    }
-
-    return 0;
-}
 ```
+
+*Code 2 - tabulation technique function*{: class="legend"}
 
 This is basically the same code that we discussed in the previous section, only replacing the `std::vector` class with the `std::array` class. Therefore, we do not need to analyze the code line by line and can consider the flowcharts and complexity analysis already performed.
 
-#### Running
+#### Running Code 2: using `std::array`
 
 Running the Code 2 will produces the following result:
 
@@ -943,11 +890,19 @@ Average time for tabulated Fibonacci: 439 ns
 
 ```
 
-We have reached an interesting point. Just interesting. We achieved a performance gain using memoization and tabulation, as evidenced by the different complexities among the recursive $O(n^2)$, memoization $O(n)$, and tabulation $O(n)$. Additionally, we observed a slight improvement in execution time by choosing `std::array` instead of `std::vector`. However, we still have some options to explore.
+*Output 2 - Code 2 running std::vector*{: class="legend"}
+
+We have reached an interesting point. Just interesting! 
+
+We achieved a performance gain using memoization and tabulation, as evidenced by the different complexities among the recursive $O(n^2)$, memoization $O(n)$, and tabulation $O(n)$. Additionally, we observed a slight improvement in execution time by choosing `std::array` instead of `std::vector`. However, we still have some options to explore. Options never end!
 
 ## Code 3: C-style Array
 
-We are using a container of integers to store the already calculated Fibonacci numbers as the basis for the two Dynamic Programming processes we are studying so far: memoization and tabulation. However, there is an even simpler container: the array. For compatibility, C++ allows the use of code written in C, including data structures, libraries, and functions. So, why not test these arrays? For this, I wrote new code, keeping the functions using `std::array` and creating two new dynamic functions using C-style arrays.
+We are using a C++ container of integers to store the already calculated Fibonacci numbers as the basis for the two Dynamic Programming processes we are studying so far, memoization and tabulation, one `std::unordered_map` and one `std::vector` or `std::array`. However, there is an even simpler container in C++: the array. The C-Style array.
+
+For compatibility, C++ allows the use of code written in C, including data structures, libraries, and functions. So, why not test these data structures? For this, I wrote new code, keeping the functions using `std::array` and `std::unordered_map` and creating two new dynamic functions using C-style arrays. We will call it The CODE 3.
+
+### Code 3: using C-Style Array
 
 ```Cpp
 #include <iostream>
@@ -1084,6 +1039,8 @@ int main() {
 }
 ```
 
+*Code 3: full code using C-Style array*{: class="legend"}
+
 This code is basically the same except for the following fragment:
 
 ```Cpp
@@ -1115,13 +1072,15 @@ int cArray_fibonacci_tabulation(int n) {
 }
 ```
 
-This code segment introduces two new functions for calculating Fibonacci numbers using C-style arrays, with a particular focus on the function for memoization. Instead of using an `std::unordered_map` to store the results of previously computed Fibonacci numbers, the memoization function `cArray_fibonacci_memo` uses two arrays: `found` and `memo`. The `found` array is a boolean array that tracks whether the Fibonacci number for a specific index has already been calculated, while the `memo` array stores the calculated Fibonacci values. The function checks if the result for the given $n$ is already computed by inspecting the `found` array. If it is, the function returns the value from the `memo` array. If not, it recursively computes the Fibonacci number, stores the result in the `memo` array, and marks the `found` array as true for that index.
+*Code 3: C-Style array functions*{: class="legend"}
 
-The `cArray_fibonacci_tabulation` function, on the other hand, implements the tabulation method using a single array `dp` to store the Fibonacci numbers up to the $n$-th value. The function initializes the base cases for the Fibonacci Sequence, with `dp[0]` set to 0 and `dp[1]` set to 1. It then iterates from 2 to $n$, filling in the `dp` array by summing the two preceding values. This iterative approach avoids the overhead of recursive calls, making it more efficient for larger values of $n$. Both functions are designed to be compatible with C-style arrays, providing an alternative to using the more complex `std::unordered_map` for memoization and maintaining the simplicity and efficiency of arrays for tabulation.
+As I said, this code segment introduces two new functions for calculating Fibonacci numbers using C-style arrays, with a particular focus on the function for memoization. Instead of using an `std::unordered_map` to store the results of previously computed Fibonacci numbers, the memoization function `cArray_fibonacci_memo` uses two arrays: `found` and `memo`. The `found` array is a boolean array that tracks whether the Fibonacci number for a specific index has already been calculated, while the `memo` array stores the calculated Fibonacci values. The function checks if the result for the given $n$ is already computed by inspecting the `found` array. If it is, the function returns the value from the `memo` array. If not, it recursively computes the Fibonacci number, stores the result in the `memo` array, and marks the `found` array as true for that index. To be completely honest, this idea of using two arrays comes from [this site]([URL](https://cp-algorithms.com/dynamic_programming/intro-to-dp.html)).
 
-Again succinct! I think I'm learning. This structure has the same space and time complexities that we have observed since the beginning of this text. In other words, all that remains is to run this code and evaluate the execution times.
+The `cArray_fibonacci_tabulation` function, on the other hand, implements the tabulation method using a single C-Style array `dp` to store the Fibonacci numbers up to the $n$th value. The function initializes the base cases for the Fibonacci Sequence, with `dp[0]` set to $0$ and `dp[1]` set to $1$. It then iterates from $2$ to $n$, filling in the `dp` array by summing the two preceding values. This iterative approach avoids the overhead of recursive calls, making it more efficient for larger values of $n$.
 
-### Running
+Again succinct! I think I'm learning. These structures have the same space and time complexities that we have observed since Code 1. In other words, all that remains is to run this code and evaluate the execution times.
+
+### Running Code 3: using C-Style Array
 
 ```Shell
 Calculating Fibonacci(10)
@@ -1161,10 +1120,11 @@ Average time for new tabulated Fibonacci: 115 ns
 Fibonacci(30) = 832040
 -----------------------------------
 ```
+*Output 3: running C-Style array*{: class="legend"}
 
-And there it is, we have found a code fast enough for calculating the nth Fibonacci number. The only problem is that we used C-Style arrays in a C++ solution. In other words, we gave up all C++ data structures to make the program as fast as possible. We traded a diverse and efficient language for a simple and straightforward one. This choice will be up to the kind reader. You will have to decide if you know enough C to solve any problem or if you need to use predefined data structures to solve your problems.
+And there it is, we have found a code fast enough for calculating the nth Fibonacci number in an execution time suitable to my ambitions. The only problem is that we used C-Style arrays in a C++ solution. In other words, we gave up all C++ data structures to make the program as fast as possible. We traded a diverse and efficient language for a simple and straightforward one. This choice will be up to the kind reader. You will have to decide if you know enough C to solve any problem or if you need to use predefined data structures to solve your problems. unless there is someone in the competition using C. In that case, it's C and that's it.
 
-Before we start solving problems with Dynamic Programming, let's summarize the execution time reports in a table for easy visualization.
+Before we start solving problems with dynamic programming, let's summarize the execution time reports in a table for easy visualization and to pique the curiosity of the kind reader.
 
 ### Execution Time Comparison Table
 
@@ -1180,4 +1140,6 @@ Before we start solving problems with Dynamic Programming, let's summarize the e
 |                 | 20               | 71,414                   | 28                      | 87                       |
 |                 | 30               | 8,765,969                | 29                      | 115                      |
 
-*Tabela 2 - Code Execution Time Comparison*
+*Tabela 2 - Code Execution Time Comparison*{: class="legend"}
+
+This will continue!!!
