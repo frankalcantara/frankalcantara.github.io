@@ -48,15 +48,18 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/python.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/cpp.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+
 		<style>
 			li code,
 			p code,
+			tr code,
 			h3 code {
-				color: #5856eb;
+				color: #4d98f4;
 				font-weight: bold;
 				font-size: 100%;
 				font-style: italic;
 			}
+
 			.hljs-ln-numbers {
 				-webkit-touch-callout: none;
 				-webkit-user-select: none;
@@ -64,7 +67,7 @@
 				-moz-user-select: none;
 				-ms-user-select: none;
 				user-select: none;
-
+				border: 0px;
 				text-align: center;
 				color: #ee6767;
 				border-right: 1px solid #ccc;
@@ -73,6 +76,14 @@
 
 				/* your custom style here */
 			}
+			.hljs-ln {
+				border-collapse: collapse;
+				border: 0px;
+			}
+
+			li {
+				text-align: justify !important;
+			}
 
 			/* for block of code */
 			.hljs-ln-code {
@@ -80,7 +91,6 @@
 			}
 
 			.article-post p img {
-				vertical-align: middle;
 				border-style: none;
 				text-align: center;
 				display: block;
@@ -89,33 +99,78 @@
 				max-width: 100%;
 				max-height: 100%;
 			}
+
 			.legend {
 				text-align: center;
 				display: block;
 				font-weight: bold;
 			}
+
+			table {
+				width: 100%;
+				border: 1px solid #cef;
+				text-align: left;
+			}
+
+			th {
+				font-weight: bold;
+				background-color: #acf;
+				border-bottom: 1px solid #cef;
+			}
+
+			.odd {
+				background-color: #def;
+			}
+
+			.odd td {
+				border-bottom: 1px solid #cef;
+			}
+
+			.mark {
+				padding: 4px;
+				margin: 5px 0;
+				font-style: italic;
+				background-color: white;
+				transition: background-color 0.5s ease;
+			}
 		</style>
+
 		<script>
-			document.addEventListener("DOMContentLoaded", (event) => {
+			document.addEventListener("DOMContentLoaded", function () {
+				// Adiciona a classe 'mark' a todas as tags <em> que não são precedidas por uma tag <img>
+				const emTags = document.querySelectorAll("em");
+				emTags.forEach(function (em) {
+					if (em.previousElementSibling && em.previousElementSibling.tagName.toLowerCase() === "img") {
+						em.classList.add("legend");
+					} else {
+						em.classList.add("mark");
+					}
+				});
+
+				// Inicializa o highlight.js e o plugin de numeração de linhas
 				document.querySelectorAll("pre code").forEach((block) => {
 					hljs.highlightBlock(block);
 					hljs.initLineNumbersOnLoad();
 				});
-			});
-		</script>
-		<script>
-			document.addEventListener("DOMContentLoaded", function () {
-				// Seleciona todas as tags <em> na página
-				const emTags = document.querySelectorAll("em");
 
-				emTags.forEach(function (em) {
-					// Verifica se a tag <em> é precedida por uma tag <img>
-					if (em.previousElementSibling && em.previousElementSibling.tagName.toLowerCase() === "img") {
-						em.classList.add("legend");
-						return;
-					}
-					// Adiciona a classe 'mark' à tag <em> se não for precedida por uma tag <img>
-					em.classList.add("mark");
+				// Adiciona classe 'odd' às linhas ímpares de uma tabela
+				$("tr:odd").addClass("odd");
+			});
+
+			document.addEventListener("scroll", function () {
+				const marks = document.querySelectorAll(".mark");
+				const viewportHeight = window.innerHeight;
+
+				marks.forEach((mark) => {
+					const markRect = mark.getBoundingClientRect();
+					const markCenter = markRect.top + markRect.height / 2;
+					const distanceToCenter = Math.abs(viewportHeight / 2 - markCenter);
+
+					// Calcula a opacidade proporcional à distância do centro da janela
+					let opacity = 1 - distanceToCenter / (viewportHeight / 2);
+					opacity = Math.max(0, opacity); // Garante que a opacidade não seja negativa
+
+					mark.style.backgroundColor = `rgba(244, 196, 255, ${opacity})`;
 				});
 			});
 		</script>
