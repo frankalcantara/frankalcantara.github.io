@@ -939,3 +939,58 @@ p {
   margin-bottom: 2%;
 }
 
+.toc__list:before {
+  content: "Table Of Contents";
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.toc__list {
+  border: 2px solid #eee;
+  border-radius: 4px;
+  line-height: 1.8rem;
+  padding: 1rem 1.5rem;
+  font-weight: 600;
+}
+
+.toc__sublist li {
+  padding-left: 1.25rem;
+}
+
+.toc-h2:first-child {
+  margin-top: 1rem;
+}
+
+#toc a {
+  color: black;
+  text-decoration: underline;
+}
+
+#toc a:hover {
+  color: #3028d4;
+}
+
+#toc h3:hover {
+  color: #3028d4;
+}
+
+#toc li {
+  text-align: left !important;
+  font-family: Merriweather;
+  font-size: 90%;
+}
+#toc {
+  height: 30px;
+  color: gray;
+  overflow: hidden;
+  background-color: white;
+  /* Hide content that overflows the height */
+  transition: height 0.5s ease;
+}
+
+#toc.expanded {
+  height: auto;
+ 
+  overflow: visible;
+  /* Make the content visible when expanded */
+}

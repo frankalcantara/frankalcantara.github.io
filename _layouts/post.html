@@ -47,12 +47,13 @@ post_class: post-template
             {% endif %}
             <div class="article-post">
                 {% if page.toc %}
+               
                     {% if page.beforetoc %}
-                        <p><em>{{page.beforetoc}}</em></p>
+                        <p><i>{{page.beforetoc}}</i></p>
                     {% endif %}
-                    <div class="toc mt-4 mb-4 lead">
-                        <h3 class="font-weight-bold">Summary</h3>
-                        {% include toc.html html=content %}
+                    <div id = "toc" class="toc mt-4 mb-4 lead">
+                        <h3 class="font-weight-bold">Table Of Contents</h3>
+                         {% include toc.html html=content class="anchor_class" %}
                     </div>
                 {% endif %}
                 {{content}}

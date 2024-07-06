@@ -39,6 +39,7 @@
 
 		<style>
 			li code,
+			ul code,
 			p code,
 			tr code,
 			h2 code,
@@ -63,8 +64,6 @@
 				border-right: 1px solid #ccc;
 				vertical-align: top;
 				padding-right: 5px !important;
-
-				/* your custom style here */
 			}
 			.hljs-ln {
 				border-collapse: collapse;
@@ -74,12 +73,9 @@
 			li {
 				text-align: justify !important;
 			}
-
-			/* for block of code */
 			.hljs-ln-code {
 				padding-left: 5px !important;
 			}
-
 			.article-post p img {
 				border-style: none;
 				text-align: center;
@@ -107,6 +103,10 @@
 				font-weight: bold;
 				background-color: #acf;
 				border-bottom: 1px solid #cef;
+				padding-left: 8px;
+			}
+			th code {
+				color: black;
 			}
 
 			.odd {
@@ -116,7 +116,9 @@
 			.odd td {
 				border-bottom: 1px solid #cef;
 			}
-
+			.MathJax {
+				font-size: 100% !important;
+			}
 			.mark {
 				padding: 4px;
 				margin: 5px 0;
@@ -124,47 +126,10 @@
 				background-color: white;
 				transition: background-color 0.5s ease;
 			}
+			a code {
+				color: inherit;
+			}
 		</style>
-
-		<script async>
-			document.addEventListener("DOMContentLoaded", function () {
-				// Adiciona a classe 'mark' a todas as tags <em> que não são precedidas por uma tag <img>
-				const emTags = document.querySelectorAll("em");
-				emTags.forEach(function (em) {
-					if (em.previousElementSibling && em.previousElementSibling.tagName.toLowerCase() === "img") {
-						em.classList.add("legend");
-					} else {
-						em.classList.add("mark");
-					}
-				});
-
-				// Inicializa o highlight.js e o plugin de numeração de linhas
-				document.querySelectorAll("pre code").forEach((block) => {
-					hljs.highlightBlock(block);
-					hljs.initLineNumbersOnLoad();
-				});
-
-				// Adiciona classe 'odd' às linhas ímpares de uma tabela
-				$("tr:odd").addClass("odd");
-			});
-
-			document.addEventListener("scroll", function () {
-				const marks = document.querySelectorAll(".mark");
-				const viewportHeight = window.innerHeight;
-
-				marks.forEach((mark) => {
-					const markRect = mark.getBoundingClientRect();
-					const markCenter = markRect.top + markRect.height / 2;
-					const distanceToCenter = Math.abs(viewportHeight / 2 - markCenter);
-
-					// Calcula a opacidade proporcional à distância do centro da janela
-					let opacity = 1 - distanceToCenter / (viewportHeight / 2);
-					opacity = Math.max(0, opacity); // Garante que a opacidade não seja negativa
-
-					mark.style.backgroundColor = `rgba(244, 196, 255, ${opacity})`;
-				});
-			});
-		</script>
 	</head>
 	{% if jekyll.environment == 'production' %} {% endif %} {% capture layout %}{% if page.layout %}layout-{{ page.layout
 	}}{% endif %}{% endcapture %}
@@ -290,5 +255,60 @@
 		<script src="{{ site.baseurl }}/assets/js/lazyload.js"></script>
 		{% endif %}
 		<script src="{{ site.baseurl }}/assets/js/ie10-viewport-bug-workaround.js"></script>
+		<script async>
+			document.addEventListener("DOMContentLoaded", function () {
+				// Adiciona a classe 'mark' a todas as tags <em> que não são precedidas por uma tag <img>
+				const emTags = document.querySelectorAll("em");
+				emTags.forEach(function (em) {
+					if (em.previousElementSibling && em.previousElementSibling.tagName.toLowerCase() === "img") {
+						em.classList.add("legend");
+					} else {
+						em.classList.add("mark");
+					}
+				});
+
+				// Inicializa o highlight.js e o plugin de numeração de linhas
+				document.querySelectorAll("pre code").forEach((block) => {
+					hljs.highlightBlock(block);
+					hljs.initLineNumbersOnLoad();
+				});
+
+				// Adiciona classe 'odd' às linhas ímpares de uma tabela
+				$("tr:odd").addClass("odd");
+
+				const toc = document.getElementById("toc");
+
+				toc.addEventListener("click", function () {
+					toc.classList.toggle("expanded");
+
+					if (toc.classList.contains("expanded")) {
+						// Remove inline styles to use the CSS rules
+						toc.style.height = "auto";
+						toc.style.backgroundColor = "";
+					} else {
+						// Set the initial styles
+						toc.style.height = "30px";
+						toc.style.backgroundColor = "white";
+					}
+				});
+			});
+
+			document.addEventListener("scroll", function () {
+				const marks = document.querySelectorAll(".mark");
+				const viewportHeight = window.innerHeight;
+
+				marks.forEach((mark) => {
+					const markRect = mark.getBoundingClientRect();
+					const markCenter = markRect.top + markRect.height / 2;
+					const distanceToCenter = Math.abs(viewportHeight / 2 - markCenter);
+
+					// Calcula a opacidade proporcional à distância do centro da janela
+					let opacity = 1 - distanceToCenter / (viewportHeight / 2);
+					opacity = Math.max(0, opacity); // Garante que a opacidade não seja negativa
+
+					mark.style.backgroundColor = `rgba(244, 196, 255, ${opacity})`;
+				});
+			});
+		</script>
 	</body>
 </html>

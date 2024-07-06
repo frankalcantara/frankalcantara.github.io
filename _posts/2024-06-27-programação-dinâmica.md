@@ -33,7 +33,10 @@ rating: 5
 published: 2024-06-27T19:43:15.124Z
 draft: null
 featured: true
-preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
+toc: true
+preview: "In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency."
+
+beforetoc: "In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency."
 ---
 
 Dynamic Programming is a different way of thinking when it comes to solving problems. Programming itself is already a different way of thinking, so, to be honest, I can say that Dynamic Programming is a different way within a different way of thinking. And, if you haven't noticed yet, there is a concept of recursion trying to emerge in this definition.
@@ -677,8 +680,8 @@ The return type of the function, `long long`, represents the duration of the fun
 
 The function `measure_time` arguments are:
 
-- Func func: The callable entity whose execution time we want to measure.
-- Args&&... args: A parameter pack representing the arguments to be forwarded to the callable entity. The use of && indicates that these arguments are perfect forwarded, preserving their value category (`lvalue` or `rvalue`).
+- `Func func`: The callable entity whose execution time we want to measure.
+- `Args&&... args: A parameter pack representing the arguments to be forwarded to the callable entity. The use of && indicates that these arguments are perfect forwarded, preserving their value category (`lvalue` or `rvalue`).
 
 The the body of function `measure_time` starts with:
 
