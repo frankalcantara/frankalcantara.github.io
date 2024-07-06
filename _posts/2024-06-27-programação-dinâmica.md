@@ -387,6 +387,8 @@ def fibonacci_tabulation(n):
     dp[1] = 1
 ```
 
+*Code Fragment 3A - Tabulation Function Initialization*{: class="legend"}
+
 - `if n <= 1: return n`: This handles the base cases of the Fibonacci Sequence. If $n$ is $0$ or $1$, it directly returns n because:
 
   - `fibonacci_tabulation(0)` $= 0$
@@ -403,6 +405,8 @@ def fibonacci_tabulation(n):
         dp[i] = dp[i-1] + dp[i-2]
     return dp[n]
 ```
+
+*Code Fragment 3A - Tabulation Function Iteration*{: class="legend"}
 
 -`for i in range(2, n + 1)`: This loop starts from $2$ and iterates up to $n$.
 -`dp[i] = dp[i-1] + dp[i-2]`: This calculates the ith Fibonacci number by summing the previous two Fibonacci numbers (i.e., `fibonacci_tabulation(i-1)` and `fibonacci_tabulation(i-2)`) and stores it in the `dp` list at index $i$.
