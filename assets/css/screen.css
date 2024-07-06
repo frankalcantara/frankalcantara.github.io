@@ -974,23 +974,123 @@ p {
   color: #3028d4;
 }
 
+#toc h5{
+  color: #d878f0;
+}
 #toc li {
   text-align: left !important;
   font-family: Merriweather;
   font-size: 90%;
 }
 #toc {
-  height: 40px;
+  height: 30px;
   color: gray;
   overflow: hidden;
-  background-color: white;
-  /* Hide content that overflows the height */
+  background-color: #f6f6f6 !important;
   transition: height 0.5s ease;
-}
-
+ }
 #toc.expanded {
   height: auto;
- 
   overflow: visible;
-  /* Make the content visible when expanded */
-}
+ }
+ li code,
+ ul code,
+ p code,
+ tr code {
+   color: #4d98f4;
+   font-weight: bold;
+   font-size: 100%;
+   font-style: italic;
+ }
+
+ h2 code,
+ h3 code,
+ h4 code {
+   color: black;
+ }
+
+ .hljs-ln-numbers {
+   -webkit-touch-callout: none;
+   -webkit-user-select: none;
+   -khtml-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+   border: 0px;
+   text-align: center;
+   color: #ee6767;
+   border-right: 1px solid #ccc;
+   vertical-align: top;
+   padding-right: 5px !important;
+ }
+
+ .hljs-ln {
+   border-collapse: collapse;
+   border: 0px;
+ }
+
+ li {
+   text-align: justify !important;
+ }
+
+ .hljs-ln-code {
+   padding-left: 5px !important;
+ }
+
+ .article-post p img {
+   border-style: none;
+   text-align: center;
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+   max-width: 100%;
+   max-height: 100%;
+ }
+
+ .legend {
+   text-align: center;
+   display: block;
+   font-weight: bold;
+   background-color: white !important;
+ }
+
+ table {
+   width: 100%;
+   border: 1px solid #cef;
+   text-align: left;
+ }
+
+ th {
+   font-weight: bold;
+   background-color: #acf;
+   border-bottom: 1px solid #cef;
+   padding-left: 8px;
+ }
+
+ th code {
+   color: black;
+ }
+
+ .odd {
+   background-color: #def;
+ }
+
+ .odd td {
+   border-bottom: 1px solid #cef;
+ }
+
+ .MathJax {
+   font-size: 100% !important;
+ }
+
+ .mark {
+   padding: 4px;
+   margin: 5px 0;
+   font-style: italic;
+   background-color: white;
+   transition: background-color 0.5s ease;
+ }
+
+ a code {
+   color: inherit;
+ }

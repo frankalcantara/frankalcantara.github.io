@@ -72,11 +72,9 @@ The sweet reader might have raised her eyebrows. This is where recursion and Dyn
 Dynamic Programming and recursion are related; *both involve solving problems by breaking a problem into smaller problems. However, while recursion solves the smaller problems without considering the computational cost of repeated calls, Dynamic Programming optimizes these solutions by storing and reusing previously obtained results*. The most typical example of recursion is determining the nth order value of the Fibonacci Sequence can be seen in Flowchart 1.
 
 ![]({{ site.baseurl }}/assets/images/recursive.jpg)
-*Flowchart 1 - Recursive Fibonacci nth algorithm*
+*Flowchart 1 - Recursive Fibonacci nth algorithm*{: class="legend"}
 
-The Flowchart 1 represents a function for calculating the nth number of the Fibonacci Sequence, for all $n \geq 0$ as the desired number.
-
-In Flowchart 1 we have:
+The Flowchart 1 represents a function for calculating the nth number of the Fibonacci Sequence, for all $n \geq 0$ as the desired number. In Flowchart 1 we have:
 
 - **Base Case**: *The base case is the condition that terminates the recursion*. For the Fibonacci Sequence, the base cases are for $n = 0$ and $n = 1$:
   - When $n = 0$, the function returns $0$.
@@ -91,7 +89,7 @@ When the function receives a value $n$:
 
 This leads us to Example 1.
 
-### Example 1: Let's calculate `fibonacci(5)`
+### Example 1: Recursion
 
 1. `fibonacci(5)` calls `fibonacci(4)` and `fibonacci}(3)`
 2. `fibonacci(4)` calls `fibonacci(3)` and `fibonacci}(2)`
@@ -119,6 +117,8 @@ def fibonacci(n):
 ```
 
 In Example 1, the `fibonacci` function calls itself to calculate the preceding terms of the Fibonacci Sequence. Note that for each desired value, we have to go through all the others. This is an example of correct and straightforward recursion and, in this specific case, very efficient. We will look at this efficiency issue more carefully later.
+
+#### Calculate the Number of Recursive Calls
 
 To determine the number of times the `fibonacci` function is called to calculate the 5th number in the Fibonacci Sequence, we can analyze the recursive call tree. Let's count all the function calls, including the duplicate calls.
 
@@ -159,9 +159,7 @@ The base cases for this recurrence relation are:
 
 These base cases indicate that calculating `fibonacci(0)` or `fibonacci(1)` requires a single function call.
 
-To illustrate the formula $T(n) = T(n-1) + T(n-2) + 1$ with $n = 10$, we can calculate the number of recursive calls $T(10)$. Let's start with the base values $T(0)$ and $T(1)$, and then calculate the subsequent values up to $T(10)$.
-
-Assuming that $T(0) = 1$ and $T(1) = 1$:
+To illustrate the formula $T(n) = T(n-1) + T(n-2) + 1$ with $n = 10$, we can calculate the number of recursive calls $T(10)$. Let's start with the base values $T(0)$ and $T(1)$, and then calculate the subsequent values up to $T(10)$. Therefore we will have:
 
 $$
 \begin{aligned}
@@ -186,9 +184,9 @@ Each value of $T(n)$ represents the number of recursive calls to compute `fibona
 The formula $T(n) = T(n-1) + T(n-2) + 1$ can be used to build a recursion tree, as we can see in Figure 1, and sum the total number of recursive calls. However, for large values of $n$, this can become inefficient. A more efficient approach is to use Dynamic Programming to calculate and store the number of recursive calls, avoiding duplicate calls.
 
 ![]({{ site.baseurl }}/assets/images/recursion_tree.jpg)
-*Figure 1 - Recursive Tree for Fibonacci 5*
+*Figure 1 - Recursive Tree for Fibonacci 5*{: class="legend"}
 
-### Space and Time Efficiency
+#### Space and Time Efficiency
 
 The `fibonacci(n)` function uses a straightforward recursive approach to calculate Fibonacci numbers. Let's break down its time and space complexity.
 
@@ -224,7 +222,7 @@ At this point, we can take a look at two examples using Python as pseudocode, si
 Let's continue with the same problem: finding the nth number in the Fibonacci sequence. This time, we'll use Dynamic Programming with memoization. This problem can be understood by paying a little bit of attention to Flowchart 2.
 
 ![]({{ site.baseurl }}/assets/images/recursive-memo.jpg)
-*Flowchart 2 - Recursive Fibonacci nth algorithm with memoization*
+*Flowchart 2 - Recursive Fibonacci nth algorithm with memoization*{: class="legend"}
 
 From Flowchart 2, we can derive the following Python code:
 
@@ -352,7 +350,7 @@ We are now ready to study Dynamic Programming with Tabulation.
 Finally, we can have an example of Dynamic Programming with Tabulation. Again let's start coding the Flowchart 3:
 
 ![]({{ site.baseurl }}/assets/images/interative-fibbo.jpg)
-*Flowchart 3 - Interactive Fibonacci nth algorithm*
+*Flowchart 3 - Interactive Fibonacci nth algorithm*{: class="legend"}
 
 Here is the function `fibonacci_tabulation` defined to calculate the nth Fibonacci number using tabulation, utilizing Python in a manner similar to pseudocode:
 
@@ -427,7 +425,7 @@ Assuming a complete implementation that iterates from $2$ to `n` to fill in the 
 
 The space complexity is dominated by the list `dp` with `n + 1` elements, which requires $O(n)$ space. Therefore, with the complete implementation in mind, the function achieves an efficient computation with both time and space complexities of $O(n)$. While the complexity analysis covers the basic aspects of the function's efficiency, there are additional considerations and potential optimizations that could further enhance its performance, inviting deeper exploration.
 
-## There is more between heaven and earth, Mr. Shakespeare
+### There is more between heaven and earth, Mr. Shakespeare
 
 Memoization and tabulation are the most common techniques in dynamic programming; however, they are not the only techniques.
 
@@ -441,7 +439,7 @@ Let's see how far we get in this text. As I write this, I still have no idea.
 
 Python, which I used as pseudocode, is a versatile and simple language. BBesides that, most of my students are accustomed to Python. However, it is still not the most suitable language for high-performance use or programming competitions. Therefore, we will move to C++ 20 and, eventually, use data structures compatible with C 17, in the C++ 20 environment. Speaking of the environment, from this point on, I will be using Visual Studio Community edition to run and evaluate all the code. Nevertheless, we cannot throw away all the work we have done so far. To maintain consistency in our text, I will convert the same functions we wrote in Python to C++ and assess the results.
 
-### Code 1: Fibonacci in C++ using `std::vectors`
+### Example 4: Fibonacci in C++ using `std::vectors`
 
 Let's begin with a straightforward, intuitive implementation in C++20, following the flow and data structures of the Python functions provided earlier.
 
@@ -536,7 +534,7 @@ int main() {
 }
 ```
 
-*Code 1 - running std::vector and tail recursion*{: class="legend"}
+*Example 4 - running std::vector and tail recursion*{: class="legend"}
 
 Now, the attentive reader will agree with me: we must to break this code down.
 
@@ -555,7 +553,7 @@ int fibonacci(int n) {
 }
 ```
 
-*Code 1 - programming dynamic, simple tail recursion technique*{: class="legend"}
+*Example 4 - programming dynamic, simple tail recursion technique*{: class="legend"}
 
 This is a similar C++ recursive function to the one we used to explain recursion in Python. Perhaps the most relevant aspect of `fibonacci(int n)` is its argument: `int n`. Using the `int` type limits our Fibonacci number to $46$. Especially because the `int` type on my system, a 64-bit computer running Windows 11, is limited, by default, to storing a maximum value of $2^31 - 1 = 2,147,483,647$, and the $46$th Fibonacci number is $1,836,311,903$. The next one will be bigger than `int` capacity. Since Python uses floating-point numbers (like doubles) by default, we can calculate up to the $78$th Fibonacci number, which is $8,944,394,323,791,464$. We could achieve the same result in C++ by changing from `int` to another data type. However, that is not our goal here.
 
@@ -575,9 +573,9 @@ int fibonacci_memo(int n, std::unordered_map<int, int>& memo) {
 }
 ```
 
-*Code 1 - programming dynamic, memoization technique*{: class="legend"}
+*Example 4 - programming dynamic, memoization technique*{: class="legend"}
 
-Let's highlight the ´std::unordered_map<int, int>& memo´ in function arguments. The argument `std::unordered_map<int, int>& memo´ in C++ is used to pass a reference to an unordered map (hash table) that maps integers to integers. Breaking it down we will have:
+Let's highlight the `std::unordered_map<int, int>& memo` in function arguments. The argument `std::unordered_map<int, int>& memo` in C++ is used to pass a reference to an unordered map (hash table) that maps integers to integers. Breaking it down we will have:
 
 The `std::unordered_map<int, int>` specifies the type of the argument. `std::unordered_map` is a template class provided by the C++ Standard Library that implements a hash table. The template parameters `<int, int>` specify that the keys and values stored in the unordered map are both integers.
 
@@ -614,13 +612,13 @@ int fibonacci_tabulation(int n) {
 }
 ```
 
-*Code 1 - programming dynamic, tabulation technique*{: class="legend"}
+*Example 4 - programming dynamic, tabulation technique*{: class="legend"}
 
 The `std::vector` is a template class and a C++-only construct implemented as a dynamic array. *Vectors grow and shrink dynamically, automatically managing their memory, which is freed upon destruction. They can be passed to or returned from functions by value and can be copied or assigned, performing a deep copy of all stored elements*.
 
 Unlike arrays, vectors do not decay to pointers, but you can explicitly get a pointer to their data using `&vec[0]`. Vectors maintain their size (number of elements currently stored) and capacity (number of elements that can be stored in the currently allocated block) along with the internal dynamic array. This internal array is allocated dynamically by the allocator specified in the template parameter, *usually obtaining memory from the freestore (heap) independently of the object's actual allocation*. Although this can make vectors less efficient than regular arrays for small, short-lived, local arrays, vectors do not require a default constructor for stored objects and are better integrated with the rest of the STL, providing `begin()`/`end()` methods and the usual STL typedefs. When reallocating, vectors copy (or move, in C++11) their objects.
 
-Besides the `std::vector` template type, the time and space complexity are the same, $O(n)$, we found in Python version. What left us with the generic part of Code 1. Evaluation.
+Besides the `std::vector` template type, the time and space complexity are the same, $O(n)$, we found in Python version. What left us with the generic part of Example 4. Evaluation.
 
 #### Performance Evaluation and Support Functions
 
@@ -648,7 +646,7 @@ long long average_time(Func func, int iterations, Args&&... args) {
 }
 ```
 
-*Code 1 - support functions fragment*{: class="legend"}
+*Example 4 - support functions fragment*{: class="legend"}
 
 Let's initiate with Function 1, `long long average_time(Func func, int iterations, Args&&... args)`. This function is a template function designed to measure the execution time of a given function `func` with arbitrary arguments `Args&&... args`. It returns the time taken to execute the function in nanoseconds. Let's break down each part of this function to understand how it works in detail.
 
@@ -786,7 +784,7 @@ int main() {
 }
 ```
 
-*Code 1 - main() function*{: class="legend"}
+*Example 4 - using `std::vector` main() function*{: class="legend"}
 
 The `main()` function measures and compares the average execution time of different implementations of the Fibonacci function. Here's a detailed explanation of each part:
 
@@ -798,9 +796,9 @@ The other functions follow a similar pattern to measure and print their executio
 
 The results are printed to the console, showing the performance gain achieved through memoization compared to the recursive and tabulation methods.
 
-#### Running Code 1 - `std::vector`
+#### Running Example 4 - `std::vector`
 
-Code 1, the simple and intuitive code for testing purposes, finds three specific Fibonacci numbers — the 10th, 20th, and 30th — using three different functions, 1,000 times each. This code uses an `int`, `std::vector`, and `std::unordered_map` for storing the values of the Fibonacci sequence and, when executed, presents the following results.
+Example 4, the simple and intuitive code for testing purposes, finds three specific Fibonacci numbers — the 10th, 20th, and 30th — using three different functions, 1,000 times each. This code uses an `int`, `std::vector`, and `std::unordered_map` for storing the values of the Fibonacci sequence and, when executed, presents the following results.
 
 ```shell
 Calculating Fibonacci(10)
@@ -820,11 +818,11 @@ Average time for tabulated Fibonacci: 1189 ns
 -----------------------------------
 ```
 
-*Output 1 - running Code 1 - std::vector*{: class="legend"}
+*Output 1 - running Example 4 - std::vector*{: class="legend"}
 
 the careful reader should note that the execution times vary non-linearly and, in all cases, for this problem, the Dynamic Programming version using tabulation was faster. There is much discussion about the performance of the Vector class compared to the Array class. To test the performance differences between `std::vector` and `std::array`, we will retry using `std::array`
 
-### Code 2: using `std::array`
+### Example 5: using `std::array`
 
 First and foremost, `std::array` is a container from the C++ Standard Library with some similarities to, and some differences from, `std::vector`, namely:
 
@@ -849,7 +847,7 @@ In summary, `std::array` generally offers superior performance for fixed-size ar
 
 *Tabela 1 - std::vector and std::array comparison*{: class="legend"}
 
-So, we can test this performance advantages, running a code using `std::array`. Since I am lazy, I took the same code used in Code 1 and only replaced the container in the `fibonacci_tabulation` function. You can see it below:
+So, we can test this performance advantages, running a code using `std::array`. Since I am lazy, I took the same code used in Example 4 and only replaced the container in the `fibonacci_tabulation` function. You can see it below:
 
 
 ```Cpp
@@ -867,13 +865,13 @@ int fibonacci_tabulation(int n) {
 }
 ```
 
-*Code 2 - tabulation technique function*{: class="legend"}
+*Example 5 - tabulation technique function*{: class="legend"}
 
 This is basically the same code that we discussed in the previous section, only replacing the `std::vector` class with the `std::array` class. Therefore, we do not need to analyze the code line by line and can consider the flowcharts and complexity analysis already performed.
 
-#### Running Code 2: using `std::array`
+#### Running Example 5: using `std::array`
 
-Running the Code 2 will produces the following result:
+Running the Example 5 will produces the following result:
 
 ```shell
 Calculating Fibonacci(10)
@@ -893,19 +891,17 @@ Average time for tabulated Fibonacci: 439 ns
 
 ```
 
-*Output 2 - Code 2 running std::vector*{: class="legend"}
+*Output 2 - Example 5 running std::vector*{: class="legend"}
 
 We have reached an interesting point. Just interesting! 
 
 We achieved a performance gain using memoization and tabulation, as evidenced by the different complexities among the recursive $O(n^2)$, memoization $O(n)$, and tabulation $O(n)$. Additionally, we observed a slight improvement in execution time by choosing `std::array` instead of `std::vector`. However, we still have some options to explore. Options never end!
 
-## Code 3: C-style Array
+### Code 3: C-style Array
 
 We are using a C++ container of integers to store the already calculated Fibonacci numbers as the basis for the two Dynamic Programming processes we are studying so far, memoization and tabulation, one `std::unordered_map` and one `std::vector` or `std::array`. However, there is an even simpler container in C++: the array. The C-Style array.
 
 For compatibility, C++ allows the use of code written in C, including data structures, libraries, and functions. So, why not test these data structures? For this, I wrote new code, keeping the functions using `std::array` and `std::unordered_map` and creating two new dynamic functions using C-style arrays. We will call it The CODE 3.
-
-### Code 3: using C-Style Array
 
 ```Cpp
 #include <iostream>
@@ -1081,9 +1077,9 @@ As I said, this code segment introduces two new functions for calculating Fibona
 
 The `cArray_fibonacci_tabulation` function, on the other hand, implements the tabulation method using a single C-Style array `dp` to store the Fibonacci numbers up to the $n$th value. The function initializes the base cases for the Fibonacci Sequence, with `dp[0]` set to $0$ and `dp[1]` set to $1$. It then iterates from $2$ to $n$, filling in the `dp` array by summing the two preceding values. This iterative approach avoids the overhead of recursive calls, making it more efficient for larger values of $n$.
 
-Again succinct! I think I'm learning. These structures have the same space and time complexities that we have observed since Code 1. In other words, all that remains is to run this code and evaluate the execution times.
+Again succinct! I think I'm learning. These structures have the same space and time complexities that we have observed since Example 4. In other words, all that remains is to run this code and evaluate the execution times.
 
-### Running Code 3: using C-Style Array
+#### Running Code 3: using C-Style Array
 
 ```Shell
 Calculating Fibonacci(10)
@@ -1125,11 +1121,11 @@ Fibonacci(30) = 832040
 ```
 *Output 3: running C-Style array*{: class="legend"}
 
-And there it is, we have found a code fast enough for calculating the nth Fibonacci number in an execution time suitable to my ambitions. The only problem is that we used C-Style arrays in a C++ solution. In other words, we gave up all C++ data structures to make the program as fast as possible. We traded a diverse and efficient language for a simple and straightforward one. This choice will be up to the kind reader. You will have to decide if you know enough C to solve any problem or if you need to use predefined data structures to solve your problems. unless there is someone in the competition using C. In that case, it's C and that's it.
+And there it is, we have found a code fast enough for calculating the nth Fibonacci number in an execution time suitable to my ambitions. The only problem is that we used C-Style arrays in a C++ solution. In other words, we gave up all C++ data structures to make the program as fast as possible. We traded a diverse and efficient language for a simple and straightforward one. This choice will be up to the kind reader. You will have to decide if you know enough C to solve any problem or if you need to use predefined data structures to solve your problems. *Unless there is someone in the competition using C. In that case, it's C and that's it*.
 
 Before we start solving problems with dynamic programming, let's summarize the execution time reports in a table for easy visualization and to pique the curiosity of the kind reader.
 
-### Execution Time Comparison Table
+## Execution Time Comparison Table
 
 | Container  | Number | Recursive (ns) | Memoized (ns) | Tabulated (ns) |
 |-----------------|------------------|--------------------------|-------------------------|--------------------------|

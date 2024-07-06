@@ -29,6 +29,7 @@
 
 		<link href="{{ site.baseurl }}/assets/css/screen.css" rel="stylesheet" />
 		<link href="{{ site.baseurl }}/assets/css/main.css" rel="stylesheet" />
+
 		<script src="{{ site.baseurl }}/assets/js/jquery.min.js"></script>
 
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.css" />
@@ -36,100 +37,6 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/python.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/cpp.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
-
-		<style>
-			li code,
-			ul code,
-			p code,
-			tr code,
-			h2 code,
-			h3 code,
-			h4 code {
-				color: #4d98f4;
-				font-weight: bold;
-				font-size: 100%;
-				font-style: italic;
-			}
-
-			.hljs-ln-numbers {
-				-webkit-touch-callout: none;
-				-webkit-user-select: none;
-				-khtml-user-select: none;
-				-moz-user-select: none;
-				-ms-user-select: none;
-				user-select: none;
-				border: 0px;
-				text-align: center;
-				color: #ee6767;
-				border-right: 1px solid #ccc;
-				vertical-align: top;
-				padding-right: 5px !important;
-			}
-			.hljs-ln {
-				border-collapse: collapse;
-				border: 0px;
-			}
-
-			li {
-				text-align: justify !important;
-			}
-			.hljs-ln-code {
-				padding-left: 5px !important;
-			}
-			.article-post p img {
-				border-style: none;
-				text-align: center;
-				display: block;
-				margin-left: auto;
-				margin-right: auto;
-				max-width: 100%;
-				max-height: 100%;
-			}
-
-			.legend {
-				text-align: center;
-				display: block;
-				font-weight: bold;
-				background-color: white !important;
-			}
-
-			table {
-				width: 100%;
-				border: 1px solid #cef;
-				text-align: left;
-			}
-
-			th {
-				font-weight: bold;
-				background-color: #acf;
-				border-bottom: 1px solid #cef;
-				padding-left: 8px;
-			}
-			th code {
-				color: black;
-			}
-
-			.odd {
-				background-color: #def;
-			}
-
-			.odd td {
-				border-bottom: 1px solid #cef;
-			}
-			.MathJax {
-				font-size: 100% !important;
-			}
-			.mark {
-				padding: 4px;
-				margin: 5px 0;
-				font-style: italic;
-				background-color: white;
-				transition: background-color 0.5s ease;
-			}
-			a code {
-				color: inherit;
-			}
-		</style>
 	</head>
 	{% if jekyll.environment == 'production' %} {% endif %} {% capture layout %}{% if page.layout %}layout-{{ page.layout
 	}}{% endif %}{% endcapture %}
@@ -237,12 +144,6 @@
 				</div>
 			</footer>
 		</div>
-		<!-- <script
-			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-			integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-			crossorigin="anonymous"
-		></script>
-		-->
 		<script
 			src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
 			integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
@@ -270,43 +171,55 @@
 				// Inicializa o highlight.js e o plugin de numeração de linhas
 				document.querySelectorAll("pre code").forEach((block) => {
 					hljs.highlightBlock(block);
-					hljs.initLineNumbersOnLoad();
+					if (typeof hljs.initLineNumbersOnLoad === "function") {
+						hljs.initLineNumbersOnLoad();
+					}
 				});
 
-				// Adiciona classe 'odd' às linhas ímpares de uma tabela
-				$("tr:odd").addClass("odd");
+				// Adiciona classe 'odd' às linhas ímpares de uma tabela usando JavaScript puro
+				document.querySelectorAll("tr:nth-child(odd)").forEach((row) => {
+					row.classList.add("odd");
+				});
 
 				const toc = document.getElementById("toc");
+				const initialOffsetTop = toc.offsetTop;
 
 				toc.addEventListener("click", function () {
 					toc.classList.toggle("expanded");
-
+					var h5 = toc.querySelector("h5");
 					if (toc.classList.contains("expanded")) {
-						// Remove inline styles to use the CSS rules
 						toc.style.height = "auto";
 						toc.style.backgroundColor = "";
+						h5.innerHTML = "&#9650; Article Navigation"; // Corrigido innerHTML
 					} else {
-						// Set the initial styles
 						toc.style.height = "30px";
 						toc.style.backgroundColor = "white";
+						h5.innerHTML = "&#9660; Article Navigation"; // Corrigido innerHTML
 					}
 				});
-			});
 
-			document.addEventListener("scroll", function () {
-				const marks = document.querySelectorAll(".mark");
-				const viewportHeight = window.innerHeight;
+				document.addEventListener("scroll", function () {
+					const currentScroll = window.pageYOffset;
+					if (currentScroll > initialOffsetTop) {
+						toc.classList.add("fixed");
+					} else {
+						toc.classList.remove("fixed");
+					}
 
-				marks.forEach((mark) => {
-					const markRect = mark.getBoundingClientRect();
-					const markCenter = markRect.top + markRect.height / 2;
-					const distanceToCenter = Math.abs(viewportHeight / 2 - markCenter);
+					const marks = document.querySelectorAll(".mark");
+					const viewportHeight = window.innerHeight;
 
-					// Calcula a opacidade proporcional à distância do centro da janela
-					let opacity = 1 - distanceToCenter / (viewportHeight / 2);
-					opacity = Math.max(0, opacity); // Garante que a opacidade não seja negativa
+					marks.forEach((mark) => {
+						const markRect = mark.getBoundingClientRect();
+						const markCenter = markRect.top + markRect.height / 2;
+						const distanceToCenter = Math.abs(viewportHeight / 2 - markCenter);
 
-					mark.style.backgroundColor = `rgba(244, 196, 255, ${opacity})`;
+						// Calcula a opacidade proporcional à distância do centro da janela
+						let opacity = 1 - distanceToCenter / (viewportHeight / 2);
+						opacity = Math.max(0, opacity); // Garante que a opacidade não seja negativa
+
+						mark.style.backgroundColor = `rgba(244, 196, 255, ${opacity})`;
+					});
 				});
 			});
 		</script>

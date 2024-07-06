@@ -5,6 +5,7 @@ archive: false
 post_class: post-template
 ---
 <div class="container">
+    
     <div class="row">
         <div class="col-md-2 pl-0">
             {% include share.html %}
@@ -52,7 +53,7 @@ post_class: post-template
                         <p><i>{{page.beforetoc}}</i></p>
                     {% endif %}
                     <div id = "toc" class="toc mt-4 mb-4 lead">
-                        <h3 class="font-weight-bold">Table Of Contents</h3>
+                        <h5 class="font-weight-bold">&#9660 Article Navigation</h3>
                          {% include toc.html html=content class="anchor_class" %}
                     </div>
                 {% endif %}
