@@ -1111,5 +1111,7 @@ p {
   width: 0;
   background: #4d98f4;
   transition: width 0.1s ease-out;
-  z-index: 10000;
+  z-index: 10000; 
+
+  
 }
