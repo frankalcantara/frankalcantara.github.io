@@ -886,7 +886,7 @@ iframe {
 }
 
 /** Lazy img **/
-.lazyimg {
+.lazyload {
   display: block;
   border: 0 none;
   opacity: 1;
@@ -896,8 +896,8 @@ iframe {
       width: 100%;
 }
 
-.lazyimg[data-src],
-.lazyimg[data-srcset] {
+.lazyload[data-src],
+.lazyload[data-srcset] {
   opacity: 0;
   transition: opacity 0.25s;
 }

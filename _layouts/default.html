@@ -12,32 +12,20 @@
 			integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 			crossorigin="anonymous"
 		/>
-		<script type="text/x-mathjax-config">
-			var font = "Neo-Euler";
-
-			MathJax.Hub.Config({
-				tex2jax: {
-					inlineMath: [['$','$']],
-					displayMath: [['\\[','\\]']],
-					processEscapes: true,
+		<script>
+			MathJax = {
+				tex: {
+					inlineMath: [
+						["$$", "$$"],
+						["$", "$"],
+					],
 				},
-				"SVG":{
-					font:font
+				svg: {
+					fontCache: "global",
 				},
-				"HTML-CSS": {
-					webFont: font,
-					imageFont: font,
-					preferredFont: font,
-					availableFonts: [],
-					scale: 100,
-					mtextFontInherit: true
-				}
-			});
+			};
 		</script>
-		<script
-			type="text/javascript"
-			src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
-		></script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 		<link href="{{ site.baseurl }}/assets/css/screen.css" rel="stylesheet" />
 		<link href="{{ site.baseurl }}/assets/css/main.css" rel="stylesheet" />
@@ -138,7 +126,7 @@
 			}
 		</style>
 
-		<script>
+		<script async>
 			document.addEventListener("DOMContentLoaded", function () {
 				// Adiciona a classe 'mark' a todas as tags <em> que não são precedidas por uma tag <img>
 				const emTags = document.querySelectorAll("em");
