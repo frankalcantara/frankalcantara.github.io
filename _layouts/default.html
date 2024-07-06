@@ -206,11 +206,8 @@
 
 				document.addEventListener("scroll", function () {
 					const currentScroll = window.pageYOffset;
-					if (currentScroll > initialOffsetTop) {
-						toc.classList.add("fixed");
-					} else {
-						toc.classList.remove("fixed");
-					}
+
+					var tocOffsetTop = toc.getBoundingClientRect().top + window.scrollY;
 
 					const marks = document.querySelectorAll(".mark");
 					const viewportHeight = window.innerHeight;

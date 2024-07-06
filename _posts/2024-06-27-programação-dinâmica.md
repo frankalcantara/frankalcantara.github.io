@@ -116,6 +116,8 @@ def fibonacci(n):
         return fibonacci(n-1) + fibonacci(n-2)
 ```
 
+*Code Fragment 1 - Recursive Fibonacci Function for the nth Term*{: class="legend"}
+
 In Example 1, the `fibonacci` function calls itself to calculate the preceding terms of the Fibonacci Sequence. Note that for each desired value, we have to go through all the others. This is an example of correct and straightforward recursion and, in this specific case, very efficient. We will look at this efficiency issue more carefully later.
 
 #### Calculate the Number of Recursive Calls
@@ -237,6 +239,8 @@ def fibonacci_memo(n, memo):
     memo[n] = fibonacci_memo(n-1, memo) + fibonacci_memo(n-2, memo)
     return memo[n]
 ```
+
+*Code Fragment 2 - Memoization Function for the nth Term*{: class="legend"}
 
 The `fibonacci_memo()` function is then defined to calculate the nth Fibonacci number using the stored values in a dictionary. Let's analyze the `fibonacci_memo()` code in detail.
 
@@ -364,6 +368,8 @@ def fibonacci_tabulation(n):
         dp[i] = dp[i-1] + dp[i-2]
     return dp[n]
 ```
+
+*Code Fragment 3 - Tabulation Function for the nth Term*{: class="legend"}
 
 Unlike the previous recursive function, this function uses an iterative approach known as tabulation, a bottom-up Dynamic Programming technique. In the Example 3, the `fibonacci_tabulation()` function uses a list, `dp`, to store the results of all subproblems, building the solution from the bottom up. To emphasize, data is being stored in Example 3.
 
@@ -553,7 +559,7 @@ int fibonacci(int n) {
 }
 ```
 
-*Example 4 - programming dynamic, simple tail recursion technique*{: class="legend"}
+*Code Fragment 4 - C++ Dynamic Programing, Tail Recursion Function*{: class="legend"}
 
 This is a similar C++ recursive function to the one we used to explain recursion in Python. Perhaps the most relevant aspect of `fibonacci(int n)` is its argument: `int n`. Using the `int` type limits our Fibonacci number to $46$. Especially because the `int` type on my system, a 64-bit computer running Windows 11, is limited, by default, to storing a maximum value of $2^31 - 1 = 2,147,483,647$, and the $46$th Fibonacci number is $1,836,311,903$. The next one will be bigger than `int` capacity. Since Python uses floating-point numbers (like doubles) by default, we can calculate up to the $78$th Fibonacci number, which is $8,944,394,323,791,464$. We could achieve the same result in C++ by changing from `int` to another data type. However, that is not our goal here.
 
@@ -573,7 +579,7 @@ int fibonacci_memo(int n, std::unordered_map<int, int>& memo) {
 }
 ```
 
-*Example 4 - programming dynamic, memoization technique*{: class="legend"}
+*Code Fragment 5 - C++ Memoization Function*{: class="legend"}
 
 Let's highlight the `std::unordered_map<int, int>& memo` in function arguments. The argument `std::unordered_map<int, int>& memo` in C++ is used to pass a reference to an unordered map (hash table) that maps integers to integers. Breaking it down we will have:
 
@@ -612,7 +618,7 @@ int fibonacci_tabulation(int n) {
 }
 ```
 
-*Example 4 - programming dynamic, tabulation technique*{: class="legend"}
+*Code Fragment 6 - C++ Tabulation Function*{: class="legend"}
 
 The `std::vector` is a template class and a C++-only construct implemented as a dynamic array. *Vectors grow and shrink dynamically, automatically managing their memory, which is freed upon destruction. They can be passed to or returned from functions by value and can be copied or assigned, performing a deep copy of all stored elements*.
 
@@ -646,7 +652,7 @@ long long average_time(Func func, int iterations, Args&&... args) {
 }
 ```
 
-*Example 4 - support functions fragment*{: class="legend"}
+*Code Fragment 7 - Support Functions for Time Execution Measurement*{: class="legend"}
 
 Let's initiate with Function 1, `long long average_time(Func func, int iterations, Args&&... args)`. This function is a template function designed to measure the execution time of a given function `func` with arbitrary arguments `Args&&... args`. It returns the time taken to execute the function in nanoseconds. Let's break down each part of this function to understand how it works in detail.
 
@@ -747,6 +753,8 @@ long long average_time(Func func, int iterations, Args&&... args) {
 }
 ```
 
+*Code Fragment 8 - Average Time Function*{: class="legend"}
+
 The `average_time` function template was designed to measure and calculate the average execution time of a given callable entity, such as a function, lambda, or functor, over a specified number of iterations. The template parameters `typename Func` and `typename... Args` allow the function to accept any callable type and a variadic list of arguments that can be forwarded to the callable. The function takes three parameters: the callable entity `func`, the number of iterations `iterations`, and the arguments `args` to be forwarded to the callable. Inside the function, a variable, `total_time`, is initialized to zero to accumulate the total execution time. A loop runs for the specified number of iterations, and during each iteration, the `measure_time` function is called to measure the execution time of `func` with the forwarded arguments, which is then added to `total_time`.
 
 After the loop completes, `total_time` contains the sum of the execution times for all iterations. The function then calculates the average execution time by dividing `total_time` by the number of iterations and returns this value. This approach ensures that the average time provides a more reliable measure of the callable's performance by accounting for variations in execution time across multiple runs. The use of `std::forward<Args>(args)...` in the call to `measure_time` ensures that the arguments are forwarded with their original value categories, maintaining their efficiency and correctness. I like to think that `average_time()` provides a robust method for benchmarking the performance of callable entities in a generic and flexible manner.
@@ -784,7 +792,7 @@ int main() {
 }
 ```
 
-*Example 4 - using `std::vector` main() function*{: class="legend"}
+*Code Fragment 9 - C++ `std::vector` main() function*{: class="legend"}
 
 The `main()` function measures and compares the average execution time of different implementations of the Fibonacci function. Here's a detailed explanation of each part:
 
@@ -864,7 +872,7 @@ int fibonacci_tabulation(int n) {
 }
 ```
 
-*Example 5 - tabulation technique function*{: class="legend"}
+*Code Fragment 10 - C++, `std::array`, Tabulation Function*{: class="legend"}
 
 This is basically the same code that we discussed in the previous section, only replacing the `std::vector` class with the `std::array` class. Therefore, we do not need to analyze the code line by line and can consider the flowcharts and complexity analysis already performed.
 
@@ -1070,7 +1078,7 @@ int cArray_fibonacci_tabulation(int n) {
 }
 ```
 
-*Code 3: C-Style array functions*{: class="legend"}
+*Code Fragment 11 - C++, C-Style Array, Memoization and Tabulation Functions*{: class="legend"}
 
 As I said, this code segment introduces two new functions for calculating Fibonacci numbers using C-style arrays, with a particular focus on the function for memoization. Instead of using an `std::unordered_map` to store the results of previously computed Fibonacci numbers, the memoization function `cArray_fibonacci_memo` uses two arrays: `found` and `memo`. The `found` array is a boolean array that tracks whether the Fibonacci number for a specific index has already been calculated, while the `memo` array stores the calculated Fibonacci values. The function checks if the result for the given $n$ is already computed by inspecting the `found` array. If it is, the function returns the value from the `memo` array. If not, it recursively computes the Fibonacci number, stores the result in the `memo` array, and marks the `found` array as true for that index. To be completely honest, this idea of using two arrays comes from [this site]([URL](https://cp-algorithms.com/dynamic_programming/intro-to-dp.html)).
 
@@ -1117,7 +1125,6 @@ Fibonacci(30) = 832040
 Average time for new tabulated Fibonacci: 115 ns
 Fibonacci(30) = 832040
 -----------------------------------
-
 
 *Output 3: running C-Style array*{: class="legend"}
 
