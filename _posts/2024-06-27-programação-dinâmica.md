@@ -349,7 +349,7 @@ We are now ready to study Dynamic Programming with Tabulation.
 
 Finally, we can have an example of Dynamic Programming with Tabulation. Again let's start coding the Flowchart 3:
 
-![]({{ site.baseurl }}/assets/images/interative-fibbo.jpg)
+![]({{ site.baseurl }}/assets/images/interactive-fibbo.jpg)
 *Flowchart 3 - Interactive Fibonacci nth algorithm*{: class="legend"}
 
 Here is the function `fibonacci_tabulation` defined to calculate the nth Fibonacci number using tabulation, utilizing Python in a manner similar to pseudocode:
@@ -419,7 +419,7 @@ Returns `dp[10]`, which is $55$. And this is the moment when we stop to celebrat
 
 #### Time and Space Complexity
 
-The time complexity analysis of the function `fibonacci_tabulation()` begins with the initial check to see if `n` is less than or equal to $1$, which is a constant time operation, $O(1)$. If `n` is greater than $1$, the function initializes a list `dp` with `n + 1` elements, which takes $O(n)$ time. After this, the function sets `dp[1]` to $1$, another constant time operation, $O(1)$.However, the main iterative computation part is missing from this snippet. 
+The time complexity analysis of the function `fibonacci_tabulation()` begins with the initial check to see if `n` is less than or equal to $1$, which is a constant time operation, $O(1)$. If `n` is greater than $1$, the function initializes a list `dp` with `n + 1` elements, which takes $O(n)$ time. After this, the function sets `dp[1]` to $1$, another constant time operation, $O(1)$.However, the main iterative computation part is missing from this snippet.
 
 Assuming a complete implementation that iterates from $2$ to `n` to fill in the `dp` array, the total time complexity would be $O(n)$, as each Fibonacci number up to `n` is computed and stored exactly once.
 
@@ -690,7 +690,7 @@ auto start = std::chrono::high_resolution_clock::now();
 Where `auto start` declares a variable `start` to store the starting time point and
 `std::chrono::high_resolution_clock::now()` retrieves the current time using a high-resolution clock, which provides the most accurate and precise measurement of time available on the system. The `std::chrono::high_resolution_clock::now()` returns a `time_point` object representing the current point in time.
 
->In C++, a `time_point` object is a part of the `<chrono>` library, which provides facilities for measuring and representing time. A `time_point` object represents a specific point in time relative to a clock. It is templated on a clock type and a duration, allowing for precise and high-resolution time measurements. The Clock is represented by a  `clock type`, and can be system_clock, steady_clock, or high_resolution_clock. The clock type determines the epoch (the starting point for time measurement) and the tick period (the duration between ticks). 
+>In C++, a `time_point` object is a part of the `<chrono>` library, which provides facilities for measuring and representing time. A `time_point` object represents a specific point in time relative to a clock. It is templated on a clock type and a duration, allowing for precise and high-resolution time measurements. The Clock is represented by a  `clock type`, and can be system_clock, steady_clock, or high_resolution_clock. The clock type determines the epoch (the starting point for time measurement) and the tick period (the duration between ticks).
 
 Following we have the function call:
 
@@ -849,7 +849,6 @@ In summary, `std::array` generally offers superior performance for fixed-size ar
 
 So, we can test this performance advantages, running a code using `std::array`. Since I am lazy, I took the same code used in Example 4 and only replaced the container in the `fibonacci_tabulation` function. You can see it below:
 
-
 ```Cpp
 // Iterative function with tabulation to calculate Fibonacci using arrays
 int fibonacci_tabulation(int n) {
@@ -893,7 +892,7 @@ Average time for tabulated Fibonacci: 439 ns
 
 *Output 2 - Example 5 running std::vector*{: class="legend"}
 
-We have reached an interesting point. Just interesting! 
+We have reached an interesting point. Just interesting!
 
 We achieved a performance gain using memoization and tabulation, as evidenced by the different complexities among the recursive $O(n^2)$, memoization $O(n)$, and tabulation $O(n)$. Additionally, we observed a slight improvement in execution time by choosing `std::array` instead of `std::vector`. However, we still have some options to explore. Options never end!
 
@@ -1118,7 +1117,8 @@ Fibonacci(30) = 832040
 Average time for new tabulated Fibonacci: 115 ns
 Fibonacci(30) = 832040
 -----------------------------------
-```
+
+
 *Output 3: running C-Style array*{: class="legend"}
 
 And there it is, we have found a code fast enough for calculating the nth Fibonacci number in an execution time suitable to my ambitions. The only problem is that we used C-Style arrays in a C++ solution. In other words, we gave up all C++ data structures to make the program as fast as possible. We traded a diverse and efficient language for a simple and straightforward one. This choice will be up to the kind reader. You will have to decide if you know enough C to solve any problem or if you need to use predefined data structures to solve your problems. *Unless there is someone in the competition using C. In that case, it's C and that's it*.
@@ -1154,7 +1154,5 @@ Dynamic programming concepts became popular in the early 21st century thanks to 
 For example, given the array: `[8, 10, 2, 9, 7, 5]` and the target sum: 11
 
 Your function should return a pair of numbers that add up to the target sum. Your answer must be a function in form: `Values(sequence, targetSum)`, In this case, your function should return (9, 2).
-
-
 
 This will continue!!!

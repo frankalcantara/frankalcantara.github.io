@@ -23,9 +23,9 @@ post_class: post-template
                         {% endif %}
                     </div>
                     <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
-                        <a target="_blank" class="link-dark" href="{{ author.web }}">{{ author.display_name }}</a><br>
+                        <a target="_blank" rel="noopener" class="link-dark" href="{{ author.web }}">{{ author.display_name }}</a><br>
                         <span class="author-description">{{ author.description }}</span><br>
-                        <span class="author-description"></span><a target="_blank" href="{{ author.twitter }}">Siga no Twitter</a>
+                        <span class="author-description"></span><a target="_blank" rel="noopener" href="{{ author.twitter }}">Siga no Twitter</a>
                     </div>
                 </div>
                 {% endif %}

@@ -30,29 +30,29 @@ Conceitos da teoria de linguagens formais e técnicas de Processamento de Lingua
 <h4>Processamento de Linguagem Natural</h4>
 
 <ol>
-<li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula1.html#/" target="_blank">Conceitos Básicos, Bibliotecas.</a></li>
+<li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula1.html#/" target="_blank" rel="noopener">Conceitos Básicos, Bibliotecas.</a></li>
 
-<li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula3.html#/" target="_blank">Vetorização.</a></li>
+<li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula3.html#/" target="_blank" rel="noopener">Vetorização.</a></li>
 
-<li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula2.html#/" target="_blank">Stopwords - Na Prática.</a></li>
+<li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula2.html#/" target="_blank" rel="noopener">Stopwords - Na Prática.</a></li>
 
-<li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula4.html#/" target="_blank">Word2Vec.</a></li>
+<li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula4.html#/" target="_blank" rel="noopener">Word2Vec.</a></li>
 
-<li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula5.html#/" target="_blank">Chatbot.</a></li>
+<li><a href="https://frankalcantara.com/Aulas/Nlp/out/Aula5.html#/" target="_blank" rel="noopener">Chatbot.</a></li>
         
 </ol>
 
 <h4>Código</h4>
 <ol>
-<li><a href="https://colab.research.google.com/drive/1E0XYyhNYAppdIkQ1cKHwClHGBKaB88bf" target="_blank">Introdução ao Processamento de Linguagem Natural (PNL) </a></li>
+<li><a href="https://colab.research.google.com/drive/1E0XYyhNYAppdIkQ1cKHwClHGBKaB88bf" target="_blank" rel="noopener">Introdução ao Processamento de Linguagem Natural (PNL) </a></li>
 
-<li><a href="https://github.com/frankalcantara/Aulas/blob/master/Interpretadores/code/operadoresAho.cpp" target="_blank">MEF - em C - Resolução de Exercício do Aho.</a></li>
+<li><a href="https://github.com/frankalcantara/Aulas/blob/master/Interpretadores/code/operadoresAho.cpp" target="_blank" rel="noopener">MEF - em C - Resolução de Exercício do Aho.</a></li>
 
-<li><a href="https://drive.google.com/file/d/1v5gBCUEnXY-qOVp8a48PBVr1tHveuQOY/view?usp=sharing" target="_blank">TF-IDF - Python.</a></li>
+<li><a href="https://drive.google.com/file/d/1v5gBCUEnXY-qOVp8a48PBVr1tHveuQOY/view?usp=sharing" target="_blank" rel="noopener">TF-IDF - Python.</a></li>
 
-<li><a href="https://colab.research.google.com/drive/1PyfwCcXXqwOIcnIwWssZDPydkrMmY1Cs" target="_blank">Word2Vec - Python.</a></li>
+<li><a href="https://colab.research.google.com/drive/1PyfwCcXXqwOIcnIwWssZDPydkrMmY1Cs" target="_blank" rel="noopener">Word2Vec - Python.</a></li>
 
-<li><a href="https://colab.research.google.com/drive/1BN-EqfuBzv8dTWyO6uIGyO6lTzTwru4I" target="_blank"> Chatbot.</a></li>
+<li><a href="https://colab.research.google.com/drive/1BN-EqfuBzv8dTWyO6uIGyO6lTzTwru4I" target="_blank" rel="noopener"> Chatbot.</a></li>
 </ol>
 
 <h4>O que estou lendo hoje</h4>

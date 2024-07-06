@@ -77,7 +77,7 @@ Quando o século XIX caminhava para seu final, [James Clerk Maxwell](https://en.
 
 <img class="lazyimg" src="/assets/images/jcMaxwell.jpg" alt="Fotografia de James Clerk Maxwell">
 
-<legend class="legenda">Figura 1 - James Clerk Maxwell. Fonte: <a href="https://en.wikipedia.org/wiki/James_Clerk_Maxwell/" target="_blank">Wikipedia</a></legend>
+<legend class="legenda">Figura 1 - James Clerk Maxwell. Fonte: <a href="https://en.wikipedia.org/wiki/James_Clerk_Maxwell/" target="_blank" rel="noopener">Wikipedia</a></legend>
 </div>
 
 Mas essa beleza, essa simplicidade, não é acessível a todos. Ela é um jardim murado, reservado àqueles que conquistaram o direito de entrar através de estudo e compreensão. Sem o conhecimento apropriado, seja da física que fundamenta o universo ou da matemática que o descreve, as equações de Maxwell são como flores de pedra: frias, inalteráveis, sem vida. Com esse entendimento, no entanto, elas florescem em cores e formas maravilhosas, vivas e palpitantes com significado.

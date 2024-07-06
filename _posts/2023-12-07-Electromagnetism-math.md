@@ -79,7 +79,7 @@ As the 19th century drew to a close, [James Clerk Maxwell](https://en.wikipedia.
 
 <img class="lazyimg" src="/assets/images/jcMaxwell.jpg" alt="Photograph of James Clerk Maxwell">
 
-<legend class="legenda">Figure 1 - James Clerk Maxwell. Source: <a href="https://en.wikipedia.org/wiki/James_Clerk_Maxwell/" target="_blank">Wikipedia</a></legend>
+<legend class="legenda">Figure 1 - James Clerk Maxwell. Source: <a href="https://en.wikipedia.org/wiki/James_Clerk_Maxwell/" target="_blank" rel="noopener">Wikipedia</a></legend>
 </div>
 
 But this beauty, this simplicity, is not accessible to all. It is a walled garden, reserved for those who have earned the right to enter through study and understanding. Without the appropriate knowledge, whether of the physics that underpins the universe or the mathematics that describes it, Maxwell's equations are like stone flowers: cold, unchanging, lifeless. With this understanding, however, they bloom in wonderful colors and shapes, alive and pulsating with meaning.
