@@ -53,8 +53,10 @@ post_class: post-template
                         <p><i>{{page.beforetoc}}</i></p>
                     {% endif %}
                     <div id = "toc" class="toc mt-4 mb-4 lead">
+                        <div class="loadingbar"></div>
                         <h5 class="font-weight-bold">&#9660 Article Navigation</h3>
                          {% include toc.html html=content class="anchor_class" %}
+                         
                     </div>
                 {% endif %}
                 {{content}}

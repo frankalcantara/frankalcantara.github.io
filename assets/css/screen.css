@@ -987,7 +987,11 @@ p {
   color: gray;
   overflow: hidden;
   background-color: #f6f6f6 !important;
-  transition: height 0.5s ease;
+  transition: height 1s ease;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 10000;
  }
 #toc.expanded {
   height: auto;
@@ -1101,3 +1105,11 @@ p {
       left: 0;
       right: 0;
  }
+
+ .loadingbar {
+  height: 3px;
+  width: 0;
+  background: #4d98f4;
+  transition: width 0.1s ease-out;
+  z-index: 10000;
+}

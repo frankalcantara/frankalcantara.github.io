@@ -223,6 +223,13 @@
 
 						mark.style.backgroundColor = `rgba(244, 196, 255, ${opacity})`;
 					});
+
+					//loading bar
+					var scrollTop = window.scrollY;
+					var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+					var scrollPercent = (scrollTop / docHeight) * 100;
+
+					document.querySelector(".loadingbar").style.width = scrollPercent + "%";
 				});
 			});
 		</script>
