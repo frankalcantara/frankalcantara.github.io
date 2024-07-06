@@ -1128,7 +1128,7 @@ Before we start solving problems with dynamic programming, let's summarize the e
 
 ### Execution Time Comparison Table
 
-| Data Structure  | Fibonacci Number | Recursive Fibonacci (ns) | Memoized Fibonacci (ns) | Tabulated Fibonacci (ns) |
+| Container  | Number | Recursive (ns) | Memoized (ns) | Tabulated (ns) |
 |-----------------|------------------|--------------------------|-------------------------|--------------------------|
 | **Vectors**     | 10               | 660                      | 607                     | 910                      |
 |                 | 20               | 75,712                   | 444                     | 1,300                    |
@@ -1141,5 +1141,21 @@ Before we start solving problems with dynamic programming, let's summarize the e
 |                 | 30               | 8,765,969                | 29                      | 115                      |
 
 *Tabela 2 - Code Execution Time Comparison*{: class="legend"}
+
+With sufficient practice, Dynamic Programming concepts will become intuitive. I know, the text is dense and complicated. I purposefully mixed concepts of Dynamic Programming, complexity analysis, C++, and performance. If the kind reader is feeling hopeless, stand up, have a soda, walk a bit, and start again. Like everything worthwhile in life, Dynamic Programming requires patience, effort, and time. If, on the other hand, you feel confident, let's move on to our first problem.
+
+## Your First Dynamic Programming Problem
+
+Dynamic programming concepts became popular in the early 21st century thanks to job interviews for large companies. Until then, only high-performance and competitive programmers were concerned with these techniques. Today, among others, we have [LeetCode](https://leetcode.com/) with hundreds, perhaps thousands of problems to solve. I strongly recommend trying to solve some of them. Here, I will only solve problems whose solutions are already available on other sites. You might even come across some from LeetCode problem, but that will be by accident. The only utility of LeetCode, for me, for you, and for them, is that the problems are not easy to find or solve. Let's start with a problem that is now a classic on the internet and, according to legend, was part of a Google interview.
+
+### Problem 1: The "Two Sum" problem
+
+**Statement**: In a technical interview, you've been given an array of numbers, and you need to find a pair of numbers that sum up to a given target value. The numbers can be positive, negative, or both. Can you design an algorithm that works in $O(n)$ time complexity or better?
+
+For example, given the array: `[8, 10, 2, 9, 7, 5]` and the target sum: 11
+
+Your function should return a pair of numbers that add up to the target sum. Your answer must be a function in form: `Values(sequence, targetSum)`, In this case, your function should return (9, 2).
+
+
 
 This will continue!!!
