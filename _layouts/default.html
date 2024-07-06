@@ -176,7 +176,7 @@
 
 				// Inicializa o highlight.js e o plugin de numeração de linhas
 				document.querySelectorAll("pre code").forEach((block) => {
-					hljs.highlightBlock(block);
+					hljs.highlightElement(block);
 					if (typeof hljs.initLineNumbersOnLoad === "function") {
 						hljs.initLineNumbersOnLoad();
 					}
