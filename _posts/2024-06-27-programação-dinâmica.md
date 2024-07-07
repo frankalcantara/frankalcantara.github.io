@@ -41,17 +41,17 @@ beforetoc: "In this comprehensive guide, we delve into the world of Dynamic Prog
 
 Dynamic Programming is a different way of thinking when it comes to solving problems. Programming itself is already a different way of thinking, so, to be honest, I can say that Dynamic Programming is a different way within a different way of thinking. And, if you haven't noticed yet, there is a concept of recursion trying to emerge in this definition.
 
-The general idea is that you, dear reader, should be able to break a large and difficult problem into small and easy pieces. To do this, we will store information and reuse it whenever necessary in our algorithm.
+The general idea is that you, dear reader, should be able to break a large and difficult problem into small and easy pieces. This involves storing and reusing information within the algorithm as needed.
 
 It is very likely that you, kind reader, have been introduced to Dynamic Programming techniques while studying algorithms without realizing it. So, it is also very likely that you will encounter, in this text, algorithms you have seen before without knowing they were Dynamic Programming.
 
-My intention is to break down the Dynamic Programming process into clear steps, focusing on the solution algorithm, so that you can understand and implement these steps on your own whenever you face a problem in technical interviews, production environments, or programming competitions. Without any hesitation, I will try to present performance tips and tricks in C++. However, this should not be considered a limitation; we will look at the algorithms before the code, and you will be able to implement the code in your preferred programming language.
+My intention is to break down the Dynamic Programming process into clear steps, focusing on the solution algorithm, so that you can understand and implement these steps on your own whenever you face a problem in technical interviews, production environments, or programming competitions. Without any hesitation, I will try to present performance tips and tricks in C++. However, this should not be considered a limitation; we will prioritize understanding the algorithms before diving into the code, and you will be able to implement the code in your preferred programming language.
 
 ## There was a hint of recursion sneaking in
 
-Some say that Dynamic Programming is a technique to make recursive code more efficient. There is a relationship that needs to be explored: *All Dynamic Programming algorithms are recursive, but not all recursive algorithms are Dynamic Programming*.
+Some say that Dynamic Programming is a technique to make recursive code more efficient. There is a connection worth examining: *All Dynamic Programming algorithms are recursive, but not all recursive algorithms are Dynamic Programming*.
 
-Recursion is a powerful problem-solving technique. Recursive code can be mathematically proven correct relatively easily. And that alone is reason enough to use recursion in all your code. So, let's begin with that.
+Recursion is a powerful problem-solving technique. Recursive code can be mathematically proven correct relatively easily. This clarity alone makes a compelling case for using recursion. So, let's begin with that.
 
 The proof of the correctness of a recursive algorithm generally involves only two steps: Proving that the base case of the recursion is correct and proving that the recursive step is correct. In the domain of mathematical induction proof, we can refer to these components as the *base case* and the *inductive step*, respectively. In this case:
 
@@ -69,7 +69,7 @@ Finally, recursion is an almost ideal approach for applying divide-and-conquer t
 
 The sweet reader might have raised her eyebrows. This is where recursion and Dynamic Programming touch, not subtly and delicately, like a lover's caress on the beloved's face. But with the decisiveness and impact of Mike Tyson's glove on the opponent's chin. The division of the main problem into subproblems is the fundamental essence of both recursion and Dynamic Programming.
 
-Dynamic Programming and recursion are related; *both involve solving problems by breaking a problem into smaller problems. However, while recursion solves the smaller problems without considering the computational cost of repeated calls, Dynamic Programming optimizes these solutions by storing and reusing previously obtained results*. The most typical example of recursion is determining the nth order value of the Fibonacci Sequence can be seen in Flowchart 1.
+Dynamic Programming and recursion are related; *both involve solving problems by breaking a problem into smaller problems. However, while recursion solves the smaller problems without considering the computational cost of repeated calls, Dynamic Programming optimizes these solutions by storing and reusing previously obtained results*.A classic illustration of recursion is the calculation of the nth term in the Fibonacci Sequence, as depicted in Flowchart 1.
 
 ![]({{ site.baseurl }}/assets/images/recursive.jpg)
 *Flowchart 1 - Recursive Fibonacci nth algorithm*{: class="legend"}
@@ -87,7 +87,7 @@ When the function receives a value $n$:
 - **Base Case**: It checks if $n$ is 0 or 1. If so, it returns $n$.
 - **Recursive Step**: If $n$ is greater than 1, the function calls itself twice: Once with $n - 1$ and once with $n - 2$. The sum of these two results is returned.
 
-This leads us to Example 1.
+To illustrate, let's calculate the tenth Fibonacci number.
 
 ### Example 1: Recursion
 
@@ -122,7 +122,7 @@ In Example 1, the `fibonacci` function calls itself to calculate the preceding t
 
 #### Calculate the Number of Recursive Calls
 
-To determine the number of times the `fibonacci` function is called to calculate the 5th number in the Fibonacci Sequence, we can analyze the recursive call tree. Let's count all the function calls, including the duplicate calls.
+To quantify the number of times the `fibonacci` function is called to calculate the 5th number in the Fibonacci Sequence, we can analyze the recursive call tree. "Let's enumerate all function calls, accounting for duplicates.
 
 Using the previous example and counting the calls:
 
@@ -190,9 +190,9 @@ The formula $T(n) = T(n-1) + T(n-2) + 1$ can be used to build a recursion tree, 
 
 #### Space and Time Efficiency
 
-The `fibonacci(n)` function uses a straightforward recursive approach to calculate Fibonacci numbers. Let's break down its time and space complexity.
+The `fibonacci(n)` function uses a straightforward recursive approach to calculate Fibonacci numbers. Let's analyze its time and space complexity..
 
-To understand the time complexity, think about how many times the function gets called. Each call to `fibonacci(n)` results in two more calls: `fibonacci(n-1)` and `fibonacci(n-2)`. This branching continues until we reach the base cases.
+To understand the time complexity, consider the frequency of function calls. Each call to `fibonacci(n)` results in two more calls: `fibonacci(n-1)` and `fibonacci(n-2)`. This branching continues until we reach the base cases.
 
 Imagine this process as a tree, as we saw earlier:
 
@@ -200,11 +200,11 @@ Imagine this process as a tree, as we saw earlier:
 - The next level has two calls: `fibonacci(n-1)` and `fibonacci(n-2)`.
 - The level after that has four calls, and so on.
 
-Each level of the tree doubles the number of calls. If we keep doubling for each level until we reach the base case, we end up with about $2^n$ calls. This exponential growth means the time complexity of the function is $O(2^n)$, meaning a exponencial growth. This is quite inefficient because the number of calls increases very quickly as $n$ gets larger.
+Each level of the tree results in a doubling of calls. If we keep doubling for each level until we reach the base case, we end up with about $2^n$ calls. This exponential growth results in a time complexity of O(2^n), meaning a exponencial growth. This is quite inefficient because the number of calls increases very quickly as $n$ gets larger.
 
 The space complexity depends on how deep the recursion goes. Every time the function calls itself, it adds a new frame to the call stack.
 
-- The deepest the function goes is $n$ levels (from `fibonacci(n)` down to `fibonacci(0)` or `fibonacci(1)`).
+- The maximum depth of recursion is $n$ levels (from `fibonacci(n)` down to `fibonacci(0)` or `fibonacci(1)`).
 
 Therefore, the space complexity is $O(n)$, because the stack can grow linearly with $n$.
 
@@ -221,7 +221,7 @@ At this point, we can take a look at two examples using Python as pseudocode, si
 
 ### Example 2: Memoization
 
-Let's continue with the same problem: finding the nth number in the Fibonacci sequence. This time, we'll use Dynamic Programming with memoization. This problem can be understood by paying a little bit of attention to Flowchart 2.
+Let's revisit the Fibonacci sequence problem: finding the nth number in the Fibonacci sequence. This time, we'll use Dynamic Programming with memoization. Flowchart 2 illustrates this approach.
 
 ![]({{ site.baseurl }}/assets/images/recursive-memo.jpg)
 *Flowchart 2 - Recursive Fibonacci nth algorithm with memoization*{: class="legend"}
@@ -246,7 +246,7 @@ The `fibonacci_memo()` function is then defined to calculate the nth Fibonacci n
 
 #### Function Definition and Initialization
 
-The `fibonacci_memo()` starts with:
+The `fibonacci_memo()` function begins by:
 
 ```python
 memo = {}
@@ -276,7 +276,7 @@ The line `if n in memo` checks if the value of $𝑛$ has already been calculate
     return memo[n]
 ```
 
-The line `fibonacci_memo(n-1, memo) + fibonacci_memo(n-2, memo)` makes recursive calls to calculate the $(n-1)$th and $(n-2)$th Fibonacci numbers. This is the fundamental recursive relationship in the Fibonacci Sequence: each number is the sum of the two preceding ones.
+The expression `fibonacci_memo(n-1, memo) + fibonacci_memo(n-2, memo)` initiates recursive calls to determine the $(n-1)$th and $(n-2)$th Fibonacci numbers. This is the fundamental recursive relationship in the Fibonacci Sequence: each number is the sum of the two preceding ones.
 
 The `memo` dictionary is the key to memoization. Before making the recursive calls, the function checks if the results for $n-1$ and $n-2$ are already stored in `memo`. If so, those stored values are used directly, avoiding redundant calculations. If not, the recursive calls are made, and the results are stored in `memo` for future reference.
 
@@ -284,7 +284,7 @@ The calculated result (`fibonacci_memo(n-1, memo) + fibonacci_memo(n-2, memo)`) 
 
 Finally, return `memo[n]` returns the calculated (and now memoized) value for the nth Fibonacci number.
 
-From the perspective of Dynamic Programming, the function `fibonacci_memo` divides the larger problem (calculating Fibonacci of $n$) into smaller subproblems (calculating Fibonacci of $n-1$ and $n-2$), uses a data structure, the `memo` dictionary, to store the results of the subproblems. This avoids redundant calculations of the same values, and before calculating the Fibonacci value for a given $n$, the function checks if the result is already stored in the `memo` dictionary. If it is, it reuses that result, saving computation time. Finally, the function ensures that each subproblem is solved only once, resulting in more efficiency compared to the simple recursive approach.
+From the perspective of Dynamic Programming, the `fibonacci_memo` function employs a divide-and-conquer strategy, breaking down the calculation of the nth Fibonacci number into smaller subproblems (calculating the ($n-1$)th and ($n-2$)th numbers). It leverages a dictionary, memo, to store and retrieve the results of these subproblems. This approach eliminates redundant computations, enhancing efficiency, and before calculating the Fibonacci value for a given $n$, the function checks if the result is already stored in the `memo` dictionary. If it is, it reuses that result, saving computation time. Finally, the function ensures that each subproblem is solved only once, resulting in more efficiency compared to the simple recursive approach.
 
 The last statement of the previous paragraph requires reflection. I am considering performance in this statement only in terms of computation time. Performance can also be considered in relation to memory usage, energy consumption, and any other factor that is interesting or important for a given problem. Keep this in mind whenever I state that performance has improved in this text.
 
@@ -292,13 +292,13 @@ Performance can be evaluated through complexity analysis. When analyzing the com
 
 For example, the naive recursive Fibonacci algorithm has a time complexity of $O(2^n)$ because it makes an exponential number of calls. With memoization, the time complexity is reduced to $O(n)$ since each Fibonacci number up to $n$ is computed only once. The space complexity also becomes $O(n)$ due to the storage of computed values in the `memo` dictionary.
 
-Well, who is thinking about how many recursive calls does a memoized Fibonacci function make?
+Now, you might wonder: How many recursive calls does a memoized Fibonacci function actually make?
 
 To figure this out, let's see how memoization changes the usual recursion tree:
 
 - **Base Case**: If the Fibonacci number for $n$ is already stored in our memoization cache, or if $n$ is $0$ or $1$, the function returns directly without any further calls.
 - **Memoization Check**:  If $n$ isn't in the cache, the function makes two recursive calls: `fibonacci_memo(n-1, memo)` and `fibonacci_memo(n-2, memo)`.
-- **The Memoization Effect**: The very first time we call `fibonacci_memo(n, memo)` with a new value of $n$, it will keep making recursive calls until it hits the base cases. The key is that once a Fibonacci number is calculated, it gets stored in the cache. Any later calls with the same $$ simply return this stored value, preventing further recursion.
+- **The Memoization Effect**: The very first time we call `fibonacci_memo(n, memo)` with a new value of $n$, it will keep making recursive calls until it hits the base cases. Crucially, each Fibonacci number, once computed, is stored in the cache, it gets stored in the cache. Subsequent calls with the same value of n retrieve the stored result, circumventing further recursive calls.
 
 #### Calculating the Number of Recursive Calls
 
@@ -306,7 +306,7 @@ To understand the efficiency of our memoized Fibonacci function, we need to calc
 
 - **Initial Call**: We start the whole process with a single call to `fibonacci_memo(n, memo)`.
 - **Recursive Expansion**: For every new $n$ value we encounter, the function branches out into calls for `fibonacci_memo(n-1, memo)` and `fibonacci_memo(n-2, memo)`.
-- **Memoization Storage**: Each calculated value is stored, so any future calls with the same $n$ don't create new branches.
+- **Memoization Storage**: Each calculated value is stored, hence any future calls with the same $n$ don't create new branches.
 - **Counting Unique Calls**: Because of memoization, we only need to calculate each Fibonacci number once. This means the total number of recursive calls is roughly equal to the number of unique Fibonacci numbers up to $n$.
 
 In conclusion, while a naive Fibonacci implementation would have an exponential number of calls, memoization brings this down significantly. We still have roughly $2n$ calls to calculate Fibonacci numbers from $0$ to $n$, this time a linear growth, but the key is that each unique number is only calculated once, making the process efficient.
@@ -343,15 +343,15 @@ Each value of $T(n)$ represents the number of recursive calls to compute `fibona
 
 We must proceed to the complexity analysis, focusing on the Big O notation, of the fibonacci_memo function, which uses memoization to calculate Fibonacci numbers. Let's analyze its time and space complexity. The key to understanding the time complexity is that each unique value of $n$ is calculated only once and then stored in `memo`.
 
-So, as there are $n$ unique values (from $0$ to $n$), for each value of $n$, the function performs a constant amount of work (checking, adding, and retrieving values from `memo`). Therefore, the total time complexity of the function is $O(n)$, since each Fibonacci number up to $n$ is computed and stored once, and only once.
+So, as there are $n$ unique values (from $0$ to $n$), for each value of $n$, the function executes a fixed amount of operations (checking, adding, and retrieving values from `memo`). Therefore, the total time complexity of the function is $O(n)$, since each Fibonacci number up to $n$ is computed and stored once, and only once.
 
-The space complexity is determined by the additional storage used by the memoization dictionary (`memo`). The dictionary `memo` can contain up to $n$ entries (one for each Fibonacci number up to $n$). Thus, the space complexity is also $O(n)$ due to the space required to store the entries in the `memo` dictionary.
+The space complexity is determined by the additional storage used by the memoization dictionary (`memo`). The dictionary `memo` can contain up to $n$ entries (one for each Fibonacci number up to $n$). Consequently, the space complexity is also $O(n)$ due to the storage needs of the `memo` dictionary.
 
 We are now ready to study Dynamic Programming with Tabulation.
 
 ### Example 3: Fibonacci with Tabulation
 
-Finally, we can have an example of Dynamic Programming with Tabulation. Again let's start coding the Flowchart 3:
+Now, let's explore an example of Dynamic Programming using the tabulation technique:
 
 ![]({{ site.baseurl }}/assets/images/interactive-fibbo.jpg)
 *Flowchart 3 - Interactive Fibonacci nth algorithm*{: class="legend"}
@@ -371,9 +371,9 @@ def fibonacci_tabulation(n):
 
 *Code Fragment 3 - Tabulation Function for the nth Term*{: class="legend"}
 
-Unlike the previous recursive function, this function uses an iterative approach known as tabulation, a bottom-up Dynamic Programming technique. In the Example 3, the `fibonacci_tabulation()` function uses a list, `dp`, to store the results of all subproblems, building the solution from the bottom up. To emphasize, data is being stored in Example 3.
+Unlike the previous recursive function, this function uses an iterative approach known as tabulation, a bottom-up Dynamic Programming technique. In the Example 3, the `fibonacci_tabulation()` function uses a list, `dp`, to store the results of all subproblems, building the solution from the bottom up. It is important to note that data is being stored in Example 3.
 
-This is true! But look closely. The `fibonacci_tabulation()` function is an example of tabulation, not memoization, due to the specific characteristics of how the subproblems are solved and stored.
+Indeed! But look closely. The `fibonacci_tabulation()` function is an example of tabulation, not memoization, due to the distinct manner in which subproblems are solved and their solutions stored.
 
 *Tabulation is a bottom-up approach to Dynamic Programming where you solve all subproblems first and store their solutions in a data structure, usually a table, array, list, or tree*. The solution to the larger problem is then built from these smaller solutions by traversing the data structure from the bottom up. *This implies an iterative resolution process*. The subproblems are solved iteratively, starting from the smallest until the larger problem is reached. In this case, recursion is irrelevant.
 
@@ -716,8 +716,7 @@ We measure the time and store it in `start`, then we call the function. Now we n
 auto end = std::chrono::high_resolution_clock::now();
 ```
 
-In this linha `auto end` declares a variable `end` to store the ending time point while
-`std::chrono::high_resolution_clock::now()` retrieves the current time again after the function `func` has completed execution. Finally we can calculate the time spent to call the function `func`.
+In this linha `auto end` declares a variable `end` to store the ending time point while `std::chrono::high_resolution_clock::now()` retrieves the current time again after the function `func` has completed execution. Finally we can calculate the time spent to call the function `func`.
 
 ```Cpp
 std::chrono::duration<long long, std::nano> duration = end - start;
