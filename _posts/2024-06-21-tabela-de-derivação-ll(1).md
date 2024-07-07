@@ -278,16 +278,13 @@ Se calcularmos os conjuntos $FIRST$ e $FOLLOW$ novamente, teremos:
 ### Conjunto $FIRST$
 
 1. **Para o não-terminal E:**
-
    - $E \rightarrow T E'$: o primeiro símbolo é $T$. Portanto, incluímos $FIRST(T)$ em $FIRST(E)$.
 
 2. **Para o não-terminal E':**
-
    - $E' \rightarrow + E$: o primeiro símbolo é $+$. Portanto, $FIRST(E')$ inclui $+$.
    - $E' \rightarrow \epsilon$: incluímos $\epsilon$ em $FIRST(E')$.
 
 3. **Para o não-terminal T:**
-
    - $T \rightarrow int$: o primeiro símbolo é $int$. Portanto, $FIRST(T)$ inclui $int$.
    - $T \rightarrow (E)$: o primeiro símbolo é $( $. Portanto, $FIRST(T)$ inclui $( $.
 
@@ -415,7 +412,7 @@ Assim como fiz nos artigos anteriores, vou sugerir um pseudocódigo, um tanto in
 
 ## Pseudocódigo para a criação da Tabela de Derivação
 
-```pseudo
+```Shell
 
 **Entrada:**
 - Conjuntos de produções da gramática: `Productions`
@@ -428,7 +425,6 @@ Assim como fiz nos artigos anteriores, vou sugerir um pseudocódigo, um tanto in
 **Saída:**
 - Tabela de Derivação `$LL(1)$`: `ParsingTable`
 
-```python
 # Inicialização da Tabela de Derivação $LL(1)$
 ParsingTable = {A: {a: None for a in Terminals + ['$']} for A in NonTerminals}
 
@@ -474,7 +470,6 @@ def compute_first(\alpha):
     else:
         first_set.add('\varepsilon')
     return first_set
-
 ```
 
 Caramba! Só notei agora, eu praticamente escrevo em python quando estou fazendo pseudocódigos. Isto deve ser mal, muito mal... Acho que vou ficar sem sorvete hoje. Em fim, este código pode ser implementado em python por:

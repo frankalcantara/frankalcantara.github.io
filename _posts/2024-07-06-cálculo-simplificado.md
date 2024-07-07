@@ -31,129 +31,125 @@ slug: 2024-07-06T19:30:41.459Z
 draft: 2024-07-06T19:30:40.256Z
 ---
 
-O livro **Calculus Made Easy** de [SILVANUS P. THOMPSON](https://en.wikipedia.org/wiki/Silvanus_P._Thompson) foi colocado em domínio público, tanto no Brasil quanto dos EUA. Este é um dos melhores livros introdutórios de cálculo já escrito. Simples, direto e abrangente. Sem nenhuma modéstia, ou vergonha na cara, escolhi este livro para tradução, atualização e expansão. Vou tentar ser o mais fiel possível ao autor. Mas, vou atualizar todo o conteúdo e expandir alguns conceitos e, principalmente, o número de exercícios resolvidos. Contudo, como o livro é ótimo, algumas coisas não podem ser deixadas de lado, como a observação da capa:
+O livro **Calculus Made Easy** de [SILVANUS P. THOMPSON](https://en.wikipedia.org/wiki/Silvanus_P._Thompson) foi colocado em domínio público, tanto no Brasil quanto dos EUA. Este é um dos melhores livros introdutórios de cálculo já escrito. Simples, direto e abrangente. Sem nenhuma modéstia, ou vergonha na cara, escolhi este livro para tradução, atualização e expansão. Vou tentar ser o mais fiel possível ao autor. Mas, vou atualizar todo o conteúdo e expandir alguns conceitos e, principalmente, o número de exercícios resolvidos. Contudo, como o livro é ótimo, algumas coisas não podem ser deixadas de lado, ou versionadas como a observação da capa:
 
-    O QUE UM TOLO PODE FAZER, OUTRO TAMBÉM PODE.
-    (Provérbio Simiano Antigo.)
+>O QUE UM TOLO PODE FAZER, OUTRO TAMBÉM PODE.
+>(Provérbio Simiano Antigo.)
 
-Em 1910 quando **Calculus Made Easy** foi publicado, ainda era aceitável e interessante, brincar e se divertir quando estudávamos matemática, ou ciência. Talvez seja por isso que este livro é lembrado por tantos professores com tanto carinho. Então, vamos ao prólogo de [SILVANUS P. THOMPSON](https://en.wikipedia.org/wiki/Silvanus_P._Thompson), com o máximo de fidelidade que consegue o tolo que escreve.
+Em 1910 quando **Calculus Made Easy** foi publicado, ainda era aceitável e interessante, brincar e se divertir quando estudávamos matemática, ou ciência. Talvez seja por isso que este livro é lembrado por tantos professores com tanto carinho. Então, vamos ao prólogo de [SILVANUS P. THOMPSON](https://en.wikipedia.org/wiki/Silvanus_P._Thompson), com o máximo de fidelidade que esse tolo consegue usar para traduzir e escrever.
 
-"Considerando quantos tolos conseguem calcular, é surpreendente que se pense que é uma tarefa difícil, ou tediosa, para qualquer outro tolo aprender a dominar os mesmos truques.
+>Considerando quantos tolos conseguem calcular, é surpreendente que se pense que é uma tarefa difícil, ou tediosa, para qualquer outro tolo aprender a dominar os mesmos truques.
+>Alguns truques de cálculo são bastante fáceis. Alguns são enormemente difíceis. Os tolos que escrevem os livros de texto de matemática avançada — e eles são na maioria tolos inteligentes — raramente se dão ao trabalho de mostrar como os cálculos fáceis são fáceis. Pelo contrário, eles parecem desejar impressioná-lo com sua tremenda astúcia, abordando-o da maneira mais difícil.
+>Sendo eu mesmo um sujeito notavelmente estúpido, tive que desaprender as dificuldades, e agora peço para apresentar aos meus colegas tolos as partes que não são difíceis. Domine estas completamente, e o resto seguirá. O que um tolo pode fazer, outro também pode.
 
-Alguns truques de cálculo são bastante fáceis. Alguns são enormemente difíceis. Os tolos que escrevem os livros de texto de matemática avançada — e eles são na maioria tolos inteligentes — raramente se dão ao trabalho de mostrar como os cálculos fáceis são fáceis. Pelo contrário, eles parecem desejar impressioná-lo com sua tremenda astúcia, abordando-o da maneira mais difícil.
-
-Sendo eu mesmo um sujeito notavelmente estúpido, tive que desaprender as dificuldades, e agora peço para apresentar aos meus colegas tolos as partes que não são difíceis. Domine estas completamente, e o resto seguirá. O que um tolo pode fazer, outro também pode."
+Deste ponto em diante, sempre que eu apenas traduzir o livro original, a tradução estará destacada. Todo o resto do livro será versionado. Isso significa que estarei comentando, atualizando e aprimorando tudo que puder e, nesse ritmo, segue o livro:
 
 ## № 1. PARA LIVRÁ-LO DOS TERRORES PRELIMINARES
 
-O terror preliminar, que sufoca a maioria dos meninos da quinta série de sequer tentar aprender cálculo, pode ser abolido de uma vez por todas simplesmente declarando qual é o significado — em termos de bom senso — dos dois símbolos principais que são usados no cálculo. Esses símbolos terríveis são:
+O terror preliminar, que sufoca a maioria dos meninos da quinta série impedindo-os de sequer tentar aprender cálculo, pode ser abolido de uma vez por todas, simplesmente declarando qual é o significado, em termos de bom senso, dos dois símbolos principais usados no cálculo. Esses símbolos terríveis são:
 
-(1) $d$ que significa meramente *um pedacinho de*. Ou se preferir, com um pouco mais de formalidade *uma fração muito pequena de*.
+1. $d$ que significa meramente *um pedacinho de*. Ou se preferir, com um pouco mais de formalidade *uma fração muito pequena de*. Assim, $dx$ significa um pedacinho de $x$; ou $du$ significa um pedacinho de $u$. Matemáticos ordinários acham mais educado dizer *um elemento de* em vez de *um pedacinho de*, ou ainda uma *fração infinitesimal de*. Esta coisa de *infinitesimal* quer dizer que é tão pequeno que quase se confunde com o zero. Você verá que esses pequenos pedaços podem ser considerados infinitamente pequenos.
 
-Assim, $dx$ significa um pedacinho de $x$; ou $du$ significa um pedacinho de $u$. Matemáticos comuns acham mais educado dizer *um elemento de* em vez de *um pedacinho de*, ou ainda uma *fração infinitesimal de*. Esta coisa de *infinitesimal* quer dizer que é tão pequeno que quase se confunde com o zero. Você verá que esses pequenos pedaços podem ser considerados infinitamente pequenos.
+2. $\int $ que é apenas um *S* longo, e pode ser lido, se você quiser, como *a soma de*. Assim, $\int dx$ significa a soma de todos os pequenos pedaços de $x$; ou $\int dt$ significa a soma de todos os pequenos pedaços de $t$. Matemáticos ordinários chamam esse símbolo de *a integral de*. Qualquer tolo pode ver que se $x$ for considerado como composto por muitos pequenos pedaços, cada um dos quais é chamado de $dx$, se você somá-los, obterá, como resultado, a soma de todos os $dx$'s. A soma de todos os $dx$ é a mesma coisa que $x$. A palavra *integral* simplesmente significa *o todo* e tem o mesmo sentido de *somar todas as pequenas partes que compõem o todo*.
 
-(2) $\int $ que é apenas um *S* longo, e pode ser chamado (se você quiser) de *a soma de*.
+Pensando na duração de uma hora, você pode, se quiser, considerar que este é um intervalo de tempo dividido em 3600 pequenos pedaços chamados de  segundos. O todo dos segundos é a hora e a hora é a soma dos seus $3600$ pequenos pedaços somados.
 
-Assim, $\int dx$ significa a soma de todos os pequenos pedaços de $x$; ou $\int dt$ significa a soma de todos os pequenos pedaços de $t$. Matemáticos comuns chamam esse símbolo de *a integral de*. Agora, qualquer tolo pode ver que se $x$ for considerado como composto por muitos pequenos pedaços, cada um dos quais é chamado de $dx$, se você somá-los, obterá a soma de todos os $dx$'s (que é a mesma coisa que o todo de $x$). A palavra *integral* simplesmente significa *o todo* e tem o mesmo sentido de *somar todas as pequenas partes que compõem o todo*.
-
-Se você pensar na duração de uma hora, pode, se quiser, pensar este intervalo de tempo como sendo dividido em 3600 pequenos pedaços chamados segundos. O todo dos 3600 pequenos pedaços somados juntos é uma hora.
-
-Quando você vê uma expressão que começa com esse símbolo aterrorizante, $\int $, você saberá, daqui em diante, que ele está lá apenas para lhe dar instruções de que agora você deve realizar a operação, sempre e se puder, de somar todos os pequenos pedaços indicados pelos símbolos que o seguem.
+A partir de agora, quando você encontrar uma expressão que começa com esse símbolo aterrorizante, $\int $, você saberá que ele está lá apenas para lhe dar instruções de que agora você deve realizar a operação soma, sempre e se puder, de todos os pequenos pedaços indicados pelos símbolos que o símbolo do medo, $\int $.
 
 E é só isso!
 
 ## № 2.SOBRE DIFERENTES GRAUS DE PEQUENEZ
 
-Descobriremos que em nossos processos de cálculo temos que lidar com pequenas quantidades de vários graus de pequenez. Um pequeno pode ser menor que outro.
+Pequenez, ou grau de quanto as coisas são pequenas, é uma palavra rara em português. Ainda assim, como descobriremos que em nossos processos de cálculo temos que lidar com quantidades pequenas de vários graus de pequenez. Precisamos desta palavra para entender que um pequeno pode ser menor que o outro.
 
-Teremos também que aprender em que circunstâncias podemos considerar pequenas quantidades tão minúsculas que podemos omiti-las das nossas considerações. Tudo depende da pequenez relativa.
+Teremos também que aprender em que circunstâncias podemos considerar pequenas quantidades tão minúsculas que podemos omiti-las das nossas considerações. Tão pequenas que são insignificantes. E tudo depende da pequenez relativa.
 
-    Esta pequenez relativa é uma expressão original de Sylvanos Thompson. Ele estava tentando ser o mais simples possível, para ficar claro, ele explicará que aquilo que consideramos pequeno é relativo ao problema que estamos tentando resolver. Ou, nem tudo que é pequeno para você o será para mim.
+>Esta pequenez relativa é uma tradução literal da palavra originalmente usada por Sylvanos Thompson. Ele estava tentando ser o mais simples possível, para ficar claro, ele explicará que aquilo que consideramos pequeno é relativo ao problema que estamos resolvendo. Ou seja, nem tudo que é pequeno para você será pequeno para mim.{: class="ntr"}
 
-Antes de fixarmos quaisquer regras, pensemos em alguns casos familiares. Existem $60$ minutos em uma hora, $24$ horas no dia, $7$ dias na semana. Portanto, existem $1440$ minutos no dia e $10080$ minutos na semana.
+Antes de imergirmos no mundo das quaisquer regras e formalidades da matemática, vamos considerar alguns casos familiares. Existem $60$ minutos em uma hora, $24$ horas em um dia e $7$ dias em uma semana. Portanto, existem $1440$ minutos no dia e $10080$ minutos na semana.
 
-Obviamente, $1$ minuto é uma quantidade muito pequena de tempo comparada a uma semana inteira. Na verdade, nossos antepassados consideravam pequeno em comparação com uma hora, e chamavam de *um minuto,* significando uma fração minúscula — um sexagésimo de uma hora. Quando passaram a exigir subdivisões ainda menores de tempo, dividiram cada minuto em $60$ partes menores, que, nos dias da **Rainha Elizabeth I**, chamavam de *segundos minutos* (isto é, a sexagésima parte da sexagésima parte da hora).
+Obviamente, $1$ minuto é uma quantidade muito pequena de tempo comparada a uma semana. Na verdade, nossos antepassados consideravam pequeno em comparação com uma hora, e chamavam de *um minuto,* significando uma fração minúscula — um sexagésimo de uma hora. Quando passaram a exigir subdivisões ainda menores de tempo, dividiram cada minuto em $60$ partes menores, que, nos dias da **Rainha Elizabeth I**, chamavam de *segundos minutos* (isto é, a sexagésima parte da sexagésima parte da hora).
 
-Agora, se um minuto é tão pequeno em comparação com um dia inteiro, quão menor em comparação é um segundo!
+> A palavra minuto tem origem na expressão latina "prima minuta", significando primeira parte pequena, usada por [Ptolomeu](https://en.wikipedia.org/wiki/Ptolemy) para dividir o círculo em 60 partes. A palavra segundo, origina-se na expressão latina "secunda minuta" {: ntr}
 
-    Aqui precisamos de um pouco de contexto antes de prosseguirmos s: Um *farthing* era uma moeda de baixo valor usada na Inglaterra, equivalente a um quarto de um *penny*. A palavra *farthing* deriva do inglês antigo *feorthing*, que significa *quarta parte*. No sistema monetário britânico pré-decimal, havia 240 pennies em uma libra esterlina (£1), e portanto, um *farthing* era igual a $\frac{1}{960}$ de uma libra. Havia ainda uma libra de ouro, chamada de *soberano*. Devido ao seu valor extremamente baixo, o *farthing* foi usado para transações de pequeno valor até ser desmonetizado em 1961. SILVANUS P. THOMPSON, nosso autor escreveu este livro em 1910 e neste tempo, ainda existiam *farthings*. Eu achei isso interessante demais para suprimir ou atualizar.
+Agora, se um minuto é tão pequeno em comparação com uma semana, quão menor em comparação é um segundo!
 
-Novamente, pense em um *farthing* em comparação com um *soberano*: ele, o *farthing* vale menos que $\frac{1}{1000}$ parte. Um *farthing* a mais ou a menos tem pouca importância em comparação com um *soberano* e, certamente, pode ser considerado uma quantidade *pequena*. Mas compare um *farthing* com £1000: relativamente a esta quantia maior, o *farthing* não tem mais importância do que $\frac{1}{1000}$ de um *farthing* teria para um soberano. Mesmo um *soberano* de ouro é relativamente uma quantidade insignificante na riqueza de um milionário.
+>Antes de seguirmos, precisamos de um pouco de contexto. Um "farthing" era uma moeda de baixo valor usada na Inglaterra, equivalente a um quarto de um "penny". A palavra "farthing" deriva do inglês antigo "feorthing", que significa quarta parte. No sistema monetário britânico pré-decimal, existiam 240 pennies em uma libra esterlina ($£1$), e portanto, um "farthing" era igual a $\frac{1}{960}$ de uma libra. Além da libra comum existia a libra de ouro, chamada de "sovereign", soberano. Um soberano valia exatamente uma libra, $£1$. Contudo, por ser de ouro, era muito utilizada como reserva de valor e no mercado internacional. Devido ao seu valor extremamente baixo, o "farthing" foi usado para transações de pequeno valor até ser desmonetizado em 1961. SILVANUS P. THOMPSON, nosso autor escreveu este livro em 1910 e neste tempo, ainda existiam "farthings". Eu achei isso interessante demais para suprimir atualizando as unidades monetárias. Faltou ele falar da "Ginea", guinéu, que valia $21$ "xelins", ou seja, valia uma libra e um "xelin" e era usado como moeda para bens de luxo. Quase esqueço! havia ainda o "halfpenny", a metade de um "penny".
 
-Agora, se fixarmos qualquer fração numérica como constituindo a proporção que, para qualquer propósito, chamamos relativamente pequena, podemos facilmente declarar outras frações de um grau mais elevado de pequenez. Assim, se, para o propósito do tempo, $\frac{1}{60}$ for chamada de uma *fração pequena*, então $\frac{1}{60}$ de $\frac{1}{60}$ (sendo uma *pequena fração de uma pequena fração*) pode ser considerada uma *quantidade pequena da segunda ordem de pequenez*.
+Voltando ao conceito de pequenez. Pense em um "farthing" em comparação com um soberano. Ele, o "farthing", pouco mais que $\frac{1}{1000}$ parte. Um "farthing" a mais ou a menos tem pouca importância em comparação com um soberano e, certamente, pode ser considerado uma quantidade muito pequena. Mas compare um "farthing" com £1000. Relativamente a esta quantia, o "farthing" não tem nem importância do que $\frac{1}{1000}$ de um "farthing" teria para um soberano. Mesmo um "soberano" é, relativamente, uma quantidade insignificante quando comparado com valores que se contem aos milhões de libras.
 
-*Os matemáticos falam sobre a segunda ordem de "magnitude" (isto é: grandeza) quando realmente querem dizer segunda ordem de *pequenez*. Isso é muito confuso para os iniciantes.
+Agora, se escolhermos uma fração numérica como constituindo a proporção que, para qualquer propósito, chamaremos de pequeno, poderemos facilmente identificar outras frações de graus maiores de pequenez. Vamos voltar a medida do tempo se a fração $\frac{1}{60}$ for chamada de uma *parte pequena*, então $\frac{1}{60}$ de $\frac{1}{60}$ (sendo uma *pequena fração de uma pequena fração*) pode ser considerada uma *quantidade pequena da segunda ordem de pequenez*.
 
-Ou, se para qualquer propósito pegássemos $1$ por cento (isto é: $\frac{1}{100}$) como uma *fração pequena*, então $1$ por cento de $1$ por cento (isto é: $\frac{1}{10.000}$) seria uma pequena fração ainda menor de *segunda ordem em redução*; e $\frac{1}{1.000.000}$ seria uma pequena fração da *terceira ordem em redução*, sendo $1$ por cento de $1$ por cento de $1$ por cento.
+>Os matemáticos falam sobre a segunda ordem de "magnitude" (isto é: grandeza) quando realmente querem dizer segunda ordem de *pequenez*. Isso é muito confuso para os iniciantes.{: class="ntr"}
 
-    A melhor tradução do termo usado pelo autor para *smallness*, em português é pequenez, mas este é um termo pouco usado neste começo de século XXI. Na verdade, Thompson está destacando a insignificância das coisas enquanto as dividimos em pedaços cada vez menores mantendo a mesma ordem de divisão.
+Ou, se para qualquer propósito pegássemos $1$ por cento (isto é: $\frac{1}{100}$) como uma *fração pequena*, então $1$ por cento de $1$ por cento (isto é: $\frac{1}{10.000}$) seria uma fração de *segunda ordem em pequenez*; e $\frac{1}{1.000.000}$ seria uma pequena fração da *terceira ordem em pequenez*, representando $1$ por cento de $1$ por cento de $1$ por cento.
 
-Por fim, suponha que, para algum propósito muito preciso, devamos considerar $\frac{1}{1.000.000}$ como *pequeno*. Assim, se um cronômetro de primeira categoria não deve perder ou ganhar mais de meio minuto em um ano, ele deve manter o tempo com uma precisão de $1$ parte em $1.051.200$. Agora, se, para tal propósito, considerarmos $\frac{1}{1.000.000}$ (ou um milionésimo) como uma quantidade pequena, então $\frac{1}{1.000.000}$ de $\frac{1}{1.000.000}$, ou seja, $\frac{1}{1.000.000.000.000}$ (ou um trilionésimo) será uma quantidade pequena da *segunda ordem de pequenez*, e pode ser completamente desconsiderada.
+>A melhor tradução do termo usado pelo autor para *smallness*, em português é pequenez, mas este é um termo pouco usado neste começo de século XXI. Na verdade, Thompson está destacando a insignificância das coisas enquanto as dividimos em pedaços cada vez menores e criando o conceito de insignificância relativa.{: class="ntr"}
 
-Então, vemos que quanto menor for uma quantidade pequena em si, mais insignificante se torna a correspondente quantidade pequena da segunda ordem. Portanto, sabemos que *em todos os casos estamos justificados em negligenciar as pequenas quantidades da segunda ou terceira (ou maior) ordens, se apenas considerarmos a pequena quantidade da primeira ordem suficientemente pequena em si mesma*. Um valor suficientemente pequeno que permita resolver o problema que lhe interessa resolver com o cálculo.
+Por fim, suponha que, para algum propósito específico, devamos considerar $\frac{1}{1.000.000}$ como *pequena*. Assim, se um cronômetro de primeira categoria não deve perder ou ganhar mais de meio minuto em um ano, ele deve manter o tempo com uma precisão de $1$ parte em $1.051.200$. Agora, se, para tal propósito, considerarmos $\frac{1}{1.000.000}$ (ou um milionésimo) como uma quantidade pequena, então $\frac{1}{1.000.000}$ de $\frac{1}{1.000.000}$, ou seja, $\frac{1}{1.000.000.000.000}$ (ou um trilionésimo) será uma quantidade pequena da *segunda ordem de pequenez*, e pode ser completamente desconsiderada.
 
-Mas, deve ser lembrado, que pequenas quantidades, se ocorrerem em nossas expressões como fatores multiplicados por algum outro fator, podem se tornar relevantes se o outro fator for em si grande. Mesmo um *farthing* se torna importante se for multiplicado por centenas, milhares ou milhões de vezes.
+Vimos que quanto menor for uma quantidade pequena em si, mais insignificante se torna a correspondente quantidade pequena da segunda ordem. Portanto, sabemos que *em todos os casos estamos justificados em negligenciar as pequenas quantidades da segunda, terceira, ou maior ordens, tudo que é necessário é que a quantidade pequena de primeira ordem seja considerada suficientemente pequena em si mesma*. A escolha deste valor irá depender do problema. Contudo, será um valor suficientemente pequeno que permita resolver o problema usando o cálculo.
 
-No cálculo, escrevemos $dx$ para representar um pequeno pedaço de $x$. Essas coisas como $dx$, e $du$, e $dy$, são chamadas de *diferenciais*, e lidas como o diferencial de $x$, ou o diferencial de $u$, ou o diferencial de $y$, conforme o caso. Ou ainda, a derivada de $x$, a derivada de $y$ ou a derivada de$u$. Se $dx$ for um pequeno pedaço de $x$, e relativamente pequeno em si mesmo, isso não implica que tais quantidades como $x \cdot dx$, ou $x^2 \, dx$, ou $a^x \, dx$ sejam insignificantes. Mas implica que $dx \times dx$ seria insignificante, já que seria uma quantidade pequena da segunda ordem.
+Outra coisa importante é que não podemos esquecer que pequenas quantidades, quando sujeitas, em nossas equações, a multiplicação por outro fator, podem se tornar relevantes caso o outro fator seja, em si grande para problema. Mesmo um "farthing" se torna importante se for multiplicado por centenas, milhares ou milhões de vezes.
+
+No cálculo, escrevemos $dx$ para representar um pedacinho de $x$, para representar uma fração muito pequena de $x$. Essas coisas como $dx$, e $du$, e $dy$, serão chamadas de *diferenciais*, e lidas como o diferencial de $x$, ou o diferencial de $u$, ou o diferencial de $y$, conforme o caso. Ou ainda, para sermos mais chegados a matemática, serão chamados de a derivada de $x$, a derivada de $y$ ou a derivada de$u$. Mesmo que $dx$ seja um pedacinho de $x$, e considerado relativamente pequeno em si mesmo para resolver o nosso problema, não deduzir que quantidades como $x \cdot dx$, ou $x^2 \, dx$, ou $a^x \, dx$ sejam insignificantes. Mas implica, sem nenhuma dúvida que $dx \times dx$ será insignificante, já que, neste caso teremos uma quantidade pequena da segunda ordem.
 
 Um exemplo muito simples servirá como ilustração.
 
-Vamos pensar em $x$ como uma quantidade que pode crescer um pouco de modo a se tornar $x + dx$, onde $dx$ é o pequeno incremento adicionado pelo crescimento. O quadrado de $x + dx$ será $x^2 + 2xdx + (dx)^2$. O segundo termo não é desprezível porque é uma quantidade de primeira ordem; enquanto o terceiro termo é da segunda ordem de pequenez, $(dx)^2 = dx\times dx$. Para ficar claro, se fizer $dx$ ter um valor numérico, digamos, $\frac{1}{60}$ de $x$, então o segundo termo seria $\frac{2x^2}{60}$, enquanto o terceiro termo seria $\frac{1}{3600}$. Este último termo é claramente menos importante que o segundo. Mas, se formos além, podemos considerar $dx$ como $\frac{1}{1000}$ de $x$, então o segundo termo será $\frac{2x^2}{1000}$, enquanto o terceiro termo será apenas $\frac{1}{1.000.000}$.
+Vamos pensar em $x$ como uma quantidade que pode crescer apenas um pedacinho de modo que, em algum momento, tenhamos $x + dx$, onde $dx$ é o pequeno incremento adicionado pelo crescimento. O quadrado de $x + dx$ será $x^2 + 2x \, dx + (dx)^2$. O segundo termo não é desprezível porque é uma quantidade de primeira ordem; enquanto o terceiro termo é da segunda ordem de pequenez, $(dx)^2 = dx\times dx$. Para ficar claro, se fizer $dx$ ter um valor numérico, digamos, $\frac{1}{60}$ de $x$, então o segundo termo seria $\frac{2x^2}{60}$, enquanto o terceiro termo seria $\frac{1}{3600}$. Este terceiro termo é claramente menos significativo que o segundo. Mas, se formos além, podemos considerar nosso pedacinho $dx$ como $\frac{1}{1000}$ de $x$, então o segundo termo será $\frac{2x^2}{1000}$, enquanto o terceiro termo será apenas $\frac{1}{1.000.000}$. *Aquilo que consideraremos pequeno irá depender do problema real, mas na matemática, o pequeno sempre será $dx$. Ou a derivada de qualquer outra variável independente*.
 
-**FIG 1 E FIG 2  Já está no One drive**
+![]({{ site.baseurl }}/assets/images/calc_Fig1.jpg){#figura1}
+*Figura 1 - Um quadrado acrescido de $dx$.*{: class="legend lazyimg"}
 
-Geometricamente, isso pode ser representado da seguinte forma: Desenhe um quadrado (Fig. 1) cujo lado representaremos como $x$. Agora, suponha que o quadrado cresça adicionando uma pequena quantidade, um $dx$, ao seu tamanho em cada direção. O quadrado ampliado será composto pelo quadrado original $x^2$, os dois retângulos na parte superior e na direita, cada um com área $xdx$ (ou juntos $2xdx$), e o pequeno quadrado no canto superior direito que é $(dx)^2$. Na Figura 2, representamos $dx$ como uma fração muito grande de $x$ — cerca de $\frac{1}{5}$ por razões didáticas e gráficas. Mas suponha que façamos $dx$ como $\frac{1}{100}$ — aproximadamente a espessura de uma linha desenhada com uma caneta fina. Então, o pequeno quadrado no canto superior direito terá uma área de apenas $\frac{1}{10,000}$ de $x^2$, e será praticamente invisível. Claramente, $(dx)^2$ é desprezível sempre que considerarmos o incremento $dx$ como suficientemente pequeno.
+Talvez um pouco de geometria básica possa ajudar.
 
-FIG 3
+Desenhe um quadrado ([Fig. 1a](#figura1)) cujo lado representaremos como $x$. Agora, suponha que o quadrado cresça adicionando uma pequena quantidade, um $dx$, ao seu tamanho em cada direção,([Fig. 1b](#figura1)). O quadrado ampliado será composto pelo quadrado original de área $x^2$, mais os dois retângulos na parte superior e na direita, cada um com área $xdx$ (ou juntos $2xdx$), e o pequeno quadrado no canto superior direito que é $(dx)^2$. Na [Fig. 1b](#figura1), representamos $dx$ como uma fração muito grande de $x$, — cerca de $\frac{1}{10}$ por razões didáticas e gráficas. Mas suponha que façamos $dx$ como $\frac{1}{100}$, aproximadamente a espessura de uma linha desenhada com uma caneta fina. Então, o pequeno quadrado no canto superior direito terá uma área de apenas $\frac{1}{10,000}$ de $x^2$, e será praticamente invisível. Claramente, $(dx)^2$ será desprezível sempre que considerarmos o incremento $dx$ suficientemente pequeno.
 
 Vamos considerar uma analogia.
 
-Suponha que um milionário dissesse ao seu secretário: na próxima semana, eu lhe darei uma pequena fração de qualquer valor monetário que eu receba. Suponha que o secretário dissesse ao seu filho: eu lhe darei uma pequena fração do que eu receber. Suponha que a fração em cada caso seja $\frac{1}{100}$. Agora, se o Sr. Milionário recebesse £1000 durante a próxima semana, o secretário receberia £10 e o garoto 2 xelins.
+Suponha que um milionário dissesse ao seu secretário: na próxima semana, eu lhe darei uma pequena fração de qualquer valor monetário que eu receba. Suponha que o secretário dissesse ao seu filho: eu lhe darei uma pequena fração de tudo que eu receber. Suponha que a fração em cada caso seja $\frac{1}{100}$ (um centésimo). Agora, se o Sr. Milionário recebesse £1000 durante a próxima semana, o secretário receberia £10 e o garoto 2 xelins.
 
-    Um *xelin* é um 20 avos de uma libra, então, £10 correspondem a 200 *xelins*. Um centésimo de 200 *xelins* é 2 *xelins*.
+>Um "xelin" é um 20 avos de uma libra, então, £10 correspondem a 200 "xelins". Um centésimo de 200 xelins* é 2 "xelins".{: class="ntr"}
 
-Dez libras seriam uma quantidade pequena em comparação com £1000; mas dois xelins é realmente uma quantidade muito pequena, uma quantidade de segunda ordem. Mas qual seria a desproporção se a fração, em vez de ser $\frac{1}{100}$, fosse $\frac{1}{1000}$? Então, enquanto o Sr. Milionário recebesse suas £1000, o Sr. Secretário receberia apenas £1, e o garoto menos de um *farthing*!
+Dez libras seriam uma quantidade pequena em comparação com £1000; mas dois xelins é realmente uma quantidade muito pequena, de segunda ordem. Mas qual seria esta relação se a fração, em vez de ser $\frac{1}{100}$, fosse $\frac{1}{1000}$ (um milésimo)? Neste caso, quando o Sr. Milionário recebesse suas £1000, o Sr. Secretário receberia apenas £1, e o garoto menos de um "farthing"!
 
-O espirituoso Dean Swift* uma vez escreveu:
+O espirituoso Dean Swift[^1] uma vez escreveu:{#nt1}
 
-So, Nat'ralists observe, a Flea
-Hath smaller Fleas that on him prey.
-And these have smaller Fleas to bite 'em,
-And so proceed ad infinitum.
+>So, Nat'ralists observe, a Flea
+>Hath smaller Fleas that on him prey.
+>And these have smaller Fleas to bite 'em,
+>And so proceed ad infinitum.
 
-*On Poetry: a Rhapsody* (p. 20), impresso em 1733 — geralmente citado incorretamente.
-
-Um boi pode se preocupar com uma pulga de tamanho comum — uma pequena criatura da primeira ordem de pequenez. Mas provavelmente não se incomodaria com a pulga de uma pulga; sendo da segunda ordem de pequenez, seria insignificante. Mesmo uma grande quantidade de pulgas de pulgas não teria muita importância para o boi.
+Um boi pode se preocupar com uma pulga de tamanho comum, uma criatura da primeira ordem de pequenez. Mas provavelmente não se incomodará com a pulga de uma pulga. Sendo esta uma criatura de segunda ordem de pequenez, seria insignificante. Mesmo uma quantidade gigantesca de pulgas de pulgas não teria muita importância para um boi.
 
 ## № 3. SOBRE CRESCIMENTOS RELATIVOS
 
-Durante todo o cálculo, lidamos com quantidades que estão variando, aumentando ou diminuindo e com suas taxas de variação. Classificaremos todas as quantidades em duas classes: *constantes* e *variáveis*. Aquelas que consideramos de valor fixo, e chamamos de *constantes*, geralmente denotamos algebricamente por letras do início do alfabeto latino, como $a$, $b$ ou $c$; enquanto aquelas que consideramos capazes de crescer, ou (como dizem os matemáticos) de "variar", denotamos por letras do final do alfabeto, como $x$, $y$, $z$, $u$, $v$, $w$ ou, às vezes, $t$.
+Durante todo o cálculo, lidaremos com quantidades que estão variando, aumentando ou diminuindo, e com as suas taxas de variação.
 
-Além disso, geralmente lidamos com mais de uma variável ao mesmo tempo e pensamos na forma como uma variável depende da outra: por exemplo, pensamos na forma como a altura atingida por um projétil depende do tempo necessário para atingir essa altura. Ou somos convidados a considerar um retângulo de área dada e a perguntar de quer forma qualquer aumento no comprimento dele implicará uma diminuição correspondente na largura dele, para manter a área constante. Ou pensamos na forma como qualquer variação na inclinação de uma escada causará uma variação na altura que ela atinge.
+Classificaremos todas as quantidades em duas classes: *constantes* e *variáveis*. Aquelas que consideramos de valor fixo, e chamamos de *constantes*, geralmente denotamos algebricamente usando letras do início do alfabeto latino, como $a$, $b$ ou $c$; enquanto aquelas que consideramos capazes de crescer ou diminuir, ou ainda, como dizem os matemáticos, capazes de "variar", denotamos por letras do final do alfabeto latino, como $x$, $y$, $z$, $u$, $v$, $w$ ou, às vezes, $t$.
 
-Suponha que tenhamos duas variáveis que dependem uma da outra. Uma alteração em uma causará uma alteração na outra, *por causa* dessa dependência. Vamos chamar uma das variáveis de $x$, e a outra que depende dela de $y$.
+Além disso, geralmente lidamos com mais de uma variável ao mesmo tempo e somos levados a considerar a forma como uma variável depende da outra: por exemplo, para um problema precisamos considerar a forma como a altura atingida por um projétil depende do tempo necessário para atingir essa altura. Ou somos convidados a investigar um retângulo de área dada e a perguntar de que forma um aumento, ainda que pequeno, no comprimento dele implicará em uma redução na sua largura, de forma a manter a área constante. Ou, ficamos intrigados como uma variação qualquer na inclinação de uma escada implicará qual variação na altura que ela atinge.
 
-    Dizemos que $x$ é a variável independente, $y$ a variável dependente.
+Suponha que tenhamos duas variáveis que dependem uma da outra. São variáveis que ocorrem em problemas tais que uma variação qualquer em uma delas causará uma alteração no valor da outra. *Vamos chamar uma das variáveis de $x$, a variável que não depende, e portanto é independente e de $y$ a variável que depende*. Neste caso, diremos que $x$ é a variável independente, $y$ a variável dependente.
 
-Suponha que façamos $x$ variar, ou seja, alteramos ou imaginamos que ela foi alterada, adicionando a ela um pequeno pedaço do seu valor que chamamos de $dx$. Assim, estamos fazendo $x$ se tornar $x + dx$. Então, porque $x$ foi alterado, $y$ também terá sido alterado, e terá se tornado $y + dy$. Aqui, o pouco $dy$ pode ser em alguns casos positivo, em outros negativo; e não será (exceto por um milagre) do mesmo tamanho que $dx$.
+Para manter esta linha de raciocínio, suponha agora que façamos $x$ variar, ou seja, alteramos, ou imaginamos que o valor de $x$ foi alterado, adicionando a ela uma fração muito pequena do seu valor. Fração que já chamamos de $dx$. Assim, faremos $x$ se tornar $x + dx$. Então, porque $x$ foi alterado, $y$ também terá sido alterado, e terá se tornado $y + dy$. Aqui, o pouco $dy$ pode ser em alguns casos positivo, em outros negativo; e não será, exceto por um milagre, do mesmo tamanho que $dx$.
 
-**FALTA A FIGURA 4**
+![]({{ site.baseurl }}/assets/images/calc_Fig2.jpg){#figura2}
+*Figura 2 - Um crescimento $dx$ em um triângulo.*{: class="legend lazyimg"}
 
 Considere dois exemplos.
 
-(1) Vamos fazer com que $x$ e $y$ sejam, respectivamente, a base e a altura de um triângulo retângulo (Fig. 4), cuja inclinação do outro lado está fixada em $30^\circ$. Se supusermos que este triângulo se expande e ainda mantém seus ângulos constantes, então, quando a base cresce de modo a se tornar $x + dx$, a altura se torna $y + dy$. Aqui, o aumento de $x$ resulta em um aumento de $y$. O pequeno triângulo, cuja altura é $dy$, e cuja base é $dx$, é semelhante ao triângulo original; e é óbvio que o valor da razão $\frac{dy}{dx}$ é o mesmo da razão $\frac{y}{x}$. Como o ângulo é $30^\circ$, será visto que aqui
+(1) Vamos fazer com que $x$ e $y$ sejam, respectivamente, a base e a altura de um triângulo retângulo, [Fig.2a](#figura2), cuja inclinação da hipotenusa esteja fixada em $30^\circ$. Se supusermos que este triângulo é capaz de se expandir e ainda manter seus ângulos constantes, então, quando a base crescer de modo a se tornar $x + dx$, a altura se tornará $y + dy$. Como visto na [Fig.2a](#figura2). Neste cenário, o aumento de $x$ resulta em um aumento de $y$. Observe ainda que o pequeno triângulo, cuja altura é $dy$, e cuja base é $dx$, é semelhante ao triângulo original. Deve ser óbvio que o valor da razão $\frac{dy}{dx}$ será o mesmo da razão $\frac{y}{x}$. Como o ângulo é $30^\circ$, é constante, veremos que:{#caso1}
 
 $$
 \frac{dy}{dx} = \frac{1}{1.73}.
 $$
 
-(2) Agora façamos $x$ representar, na Figura 5, a distância horizontal, a partir de uma parede, da extremidade inferior de uma escada, $AB$, de comprimento fixo; neste caso, $y$ será a altura que a escada atinge na parede. Agora, $y$ claramente depende de $x$. É fácil ver que, se puxarmos a extremidade inferior $A$ um pouco mais para longe da parede, a extremidade superior $B$ descerá um pouco. Vamos afirmar isso com um pouco mais de formalidade. Se aumentarmos $x$ para $x + dx$, então $y$ se tornará $y - dy$; isto é, quando $x$ recebe um incremento positivo, o incremento que resulta em $y$ é negativo.
+(2) Agora façamos com que $x$ represente, na [Fig.2b](#figura2), a distância horizontal, a partir de uma parede, da extremidade inferior de uma escada, $AB$ em lilás, de comprimento fixo; neste caso, $y$ será a altura que a escada atinge na parede. Agora, $y$ claramente depende de $x$. É fácil ver que, se puxarmos a extremidade inferior $A$ um pouco mais para longe da parede, a extremidade superior $B$ descerá um pouco ([Fig.2b](#figura2 em azul). Com uma pouco mais de formalidade matemática podemos afirmar que: se aumentarmos $x$ para $x + dx$, então $y$ se tornará $y - dy$; isto é, quando $x$ recebe um incremento positivo, o incremento em $y$ será negativo.{#caso2}
 
-**FALTA A FIGURA 5**
+Parece razoável, mas quanto? Suponha que a escada fosse tão longa que, quando a extremidade inferior $A$ estivesse a $50$ centímetros da parede, a extremidade superior $B$ alcançasse $4.5$ metros do chão. Agora, se você puxasse a extremidade inferior $2.5$ centímetros a mais, quanto a extremidade superior desceria? Vamos colocar tudo em metros: $x = 0.5 \,m$ e $y = 4.5 \, m$ . Agora, o incremento de $x$ que chamamos de $dx$ é de $0.025 \, m$. Sendo assim, $x + dx = 0.525 \, m$. Entendemos o $x$, a variável independente, variar $x$ significa variar $y$.
 
-Sim, mas quanto? Suponha que a escada fosse tão longa que, quando a extremidade inferior $A$ estivesse a $50$ centímetros da parede, a extremidade superior $B$ alcançasse $4.5$ metros do chão. Agora, se você puxasse a extremidade inferior $2.5$ centímetros a mais, quanto a extremidade superior desceria? Coloque tudo em metros: $x = 0.5$ metros, $y = 4.5$ metros. Agora, o incremento de $x$ que chamamos de $dx$ é de $0.025$ metros: ou $x + dx = 0.525$ metros.
-
-Quanto $y$ será diminuído? A nova altura será $y - dy$. Se calcularmos a altura pelo Teorema de Euclides I. 47, então poderemos descobrir quanto será $dy$. O comprimento da escada é
+Quanto $y$ irá variar? A nova altura será $y - dy$, sem dúvidas, mas temos que calcular este $dy$. Se calcularmos a altura pelo Teorema de Pitágoras poderemos descobrir quanto será $dy$. O comprimento da escada é:
 
 $$
 \sqrt{(4.5)^2 + (0.5)^2} = 4.52769 \text{ metros}.
@@ -178,12 +174,17 @@ $$
 \frac{dy}{dx} = \frac{0.00285}{0.025} = 0.11392.
 $$
 
-Também é fácil ver que (exceto em uma posição particular) $dy$ terá um tamanho diferente de $dx$.
+Também é possível perceber que, exceto em uma posição particular, $dy$ terá um tamanho diferente de $dx$. Que posição é essa?[^2]{#nt2}
 
-Agora, usando o cálculo diferencial, estamos buscando uma coisa curiosa, uma mera razão, a saber: a proporção que $dy$ tem em relação a $dx$ quando ambos são indefinidamente pequenos, dizemos quando ambos, $dx$ e $dy$, são infinitesimais.
+Voltando ao cálculo diferencial, nos dois casos anteriores, estamos buscando uma coisa curiosa, uma mera razão, à saber: a proporção que $dy$ tem em relação à $dx$, quando ambos são indefinidamente pequenos. Ou melhor, estamos procurando uma razão quando ambos, $dx$ e $dy$, são infinitesimais.
 
-Deve-se notar aqui que só podemos encontrar essa razão $\frac{dy}{dx}$ quando $y$ e $x$ estão relacionados de alguma forma, de modo que sempre que $x$ varia, $y$ também varia. No primeiro exemplo recém mencionado, se a base $x$ do triângulo for aumentada, a altura $y$ do triângulo também se tornará maior, e no segundo exemplo, se a distância $x$ do pé da escada à parede for aumentada, a altura $y$ atingida pela escada diminuirá de maneira correspondente, inicialmente devagar, mas mais e mais rapidamente à medida que $x$ se torna maior. Nestes casos, a relação entre $x$ e $y$ é perfeitamente definida, podendo ser expressa matematicamente, sendo $\frac{y}{x} = \tan 30^\circ$ e $x^2 + y^2 = l^2$ (onde $l$ é o comprimento da escada) respectivamente, e $\frac{dy}{dx}$ tem o significado que encontramos em cada caso.
+Note que só podemos encontrar essa razão, $\frac{dy}{dx}$, quando $y$ e $x$ estão relacionados de alguma forma. Geralmente escolhemos as variáveis de modo que sempre que $x$ varia, $y$ também varia.
 
+No (caso 1)[#caso1], recém mencionado, se a base, $x$, do triângulo for aumentada, a altura, $y$, do triângulo também se tornará maior, e no (caso 2)[caso2], se a distância, $x$, do pé da escada à parede for aumentada, a altura, $y$, atingida pela escada diminuirá de maneira correspondente, inicialmente devagar diminuirá muito devagar. Mas, diminuirá mais e mais rapidamente à medida que $x$ se torna maior. 
+
+Nos casos que vimos anteriormente, as relações entre $x$ e $y$ podem ser perfeitamente definidas usando um pouco de álgebra e geometria. Se fizermos isso encontraremos $\frac{y}{x} = \tan 30^\circ$ para o (caso 1)[#caso1] e $x^2 + y^2 = L^2$ para o (caso 2)[#caso2], desde que $L$ seja o comprimento da escada. Finalmente, $\frac{dy}{dx}$ tera apenas o significado que encontramos em cada caso.
+
+######################pareiaqui
 Se, enquanto $x$ é, como antes, a distância do pé da escada à parede, $y$ é, em vez da altura alcançada, o comprimento horizontal da parede, ou o número de tijolos nela, ou o número de anos desde que foi construída, qualquer mudança em $x$ naturalmente não causaria nenhuma mudança em $y$; neste caso, $\frac{dy}{dx}$ não tem significado algum, e não é possível encontrar uma expressão para isso.
 
 Sempre que usamos diferenciais $dx$, $dy$, $dz$, etc., a existência de algum tipo de relação entre $x$, $y$, $z$, etc., é implícita, e essa relação é chamada de *função* em $x$, $y$, $z$, etc.; as duas expressões dadas acima, por exemplo, a saber $\frac{y}{x} = \tan 30^\circ$ e $x^2 + y^2 = l^2$, são funções de $x$ e $y$. Tais expressões contêm implicitamente (isto é, contêm sem mostrar distintamente) os meios de expressar $x$ em termos de $y$ ou $y$ em termos de $x$, e por essa razão são chamadas de funções implícitas em $x$ e $y$; elas podem ser respectivamente colocadas nas formas
@@ -215,3 +216,15 @@ Coeficientes diferenciais de segunda ordem, que serão encontrados mais tarde. S
 Outra maneira de indicar que uma função foi diferenciada é colocando um acento no símbolo da função. Assim, se $y = F(x)$, o que significa que $y$ é alguma função não especificada de $x$ (veja aqui), podemos escrever $F'(x)$ em vez de $\frac{d(F(x))}{dx}$. Da mesma forma, $F''(x)$ significará que a função original $F(x)$ foi diferenciada duas vezes com respeito a $x$. Esta é a notação da Lagrange.
 
 Vamos usar as duas notações livremente neste texto.
+
+
+
+
+
+
+
+## Notas de Rodapé
+
+[^1]:SWIFT, Dean. **On Poetry: a Rhapsody**, p. 20, impresso em 1733 — geralmente citado incorretamente. [voltar](#nt1)
+
+[^2]:Nesta posição a relação entre $dx$ e $dy$ será 1, isso irá ocorrer quando os lados do triângulo formado entre a escada e o chão for de $45^\circ$. [voltar](#nt2)
