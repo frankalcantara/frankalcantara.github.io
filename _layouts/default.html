@@ -164,7 +164,7 @@
 		<script src="{{ site.baseurl }}/assets/js/ie10-viewport-bug-workaround.js"></script>
 		<script async>
 			document.addEventListener("DOMContentLoaded", function () {
-				// Adiciona a classe 'mark' a todas as tags <em> que não são precedidas por uma tag <img>
+				// Adiciona a classe 'legend' a todas as tags <em> que não são precedidas por uma tag <img>
 				const emTags = document.querySelectorAll("em");
 				emTags.forEach(function (em) {
 					if (em.previousElementSibling && em.previousElementSibling.tagName.toLowerCase() === "img") {
@@ -188,9 +188,9 @@
 				});
 
 				const toc = document.getElementById("toc");
-				const initialOffsetTop = toc.offsetTop;
 
-				toc.addEventListener("click", function () {
+				// Função para alternar a expansão do TOC
+				function toggleTOC() {
 					toc.classList.toggle("expanded");
 					var h5 = toc.querySelector("h5");
 					if (toc.classList.contains("expanded")) {
@@ -202,6 +202,17 @@
 						toc.style.backgroundColor = "white";
 						h5.innerHTML = "&#9660; Article Navigation"; // Corrigido innerHTML
 					}
+				}
+
+				toc.addEventListener("click", toggleTOC);
+
+				// Adiciona funcionalidade para recolher TOC ao clicar em um link dentro da div toc
+				toc.querySelectorAll("a").forEach(function (link) {
+					link.addEventListener("click", function (event) {
+						if (toc.classList.contains("expanded")) {
+							toggleTOC();
+						}
+					});
 				});
 
 				document.addEventListener("scroll", function () {
@@ -224,7 +235,7 @@
 						mark.style.backgroundColor = `rgba(244, 196, 255, ${opacity})`;
 					});
 
-					//loading bar
+					// Barra de carregamento
 					var scrollTop = window.scrollY;
 					var docHeight = document.documentElement.scrollHeight - window.innerHeight;
 					var scrollPercent = (scrollTop / docHeight) * 100;

@@ -147,7 +147,7 @@ $$
 
 (2) Agora façamos com que $x$ represente, na [Fig.2b](#figura2), a distância horizontal, a partir de uma parede, da extremidade inferior de uma escada, $AB$ em lilás, de comprimento fixo; neste caso, $y$ será a altura que a escada atinge na parede. Agora, $y$ claramente depende de $x$. É fácil ver que, se puxarmos a extremidade inferior $A$ um pouco mais para longe da parede, a extremidade superior $B$ descerá um pouco ([Fig.2b](#figura2 em azul). Com uma pouco mais de formalidade matemática podemos afirmar que: se aumentarmos $x$ para $x + dx$, então $y$ se tornará $y - dy$; isto é, quando $x$ recebe um incremento positivo, o incremento em $y$ será negativo.{#caso2}
 
-Parece razoável, mas quanto? Suponha que a escada fosse tão longa que, quando a extremidade inferior $A$ estivesse a $50$ centímetros da parede, a extremidade superior $B$ alcançasse $4.5$ metros do chão. Agora, se você puxasse a extremidade inferior $2.5$ centímetros a mais, quanto a extremidade superior desceria? Vamos colocar tudo em metros: $x = 0.5 \,m$ e $y = 4.5 \, m$ . Agora, o incremento de $x$ que chamamos de $dx$ é de $0.025 \, m$. Sendo assim, $x + dx = 0.525 \, m$. Entendemos o $x$, a variável independente, variar $x$ significa variar $y$.
+Parece razoável, mas quão razoável? Suponha que a escada fosse tão longa que, quando a extremidade inferior $A$ estivesse a $50$ centímetros da parede, a extremidade superior $B$ alcançasse $4.5$ metros do chão. Agora, se você puxasse a extremidade inferior $1$ centímetro a mais, quanto a extremidade superior desceria? Vamos colocar tudo em metros: $x = 0.5 \, m$ e $y = 4.5 \, m$. Agora, o incremento de $x$ que chamamos de $dx$ é de $0.01 \, m$. Sendo assim, $x + dx = 0.51 \, m$. Entendemos que o $x$, a variável independente, variar $x$ significa variar $y$.
 
 Quanto $y$ irá variar? A nova altura será $y - dy$, sem dúvidas, mas temos que calcular este $dy$. Se calcularmos a altura pelo Teorema de Pitágoras poderemos descobrir quanto será $dy$. O comprimento da escada é:
 
@@ -158,20 +158,27 @@ $$
 Claramente, então, a nova altura, que é $y - dy$, será tal que
 
 $$
-(y - dy)^2 = (4.52769)^2 - (0.525)^2 = 20.50026 - 0.27563 = 20.22463,
-$$
-$$
-y - dy = \sqrt{20.22463} = 4.49715 \text{ metros}.
+(y - dy)^2 = (4.52769)^2 - (0.51)^2 = 20.50026 - 0.2601 = 20.24016,
 $$
 
-Agora $y = 4.50000$, então $dy$ é $4.50000 - 4.49715 = 0.00285$ metros.
+$$
+y - dy = \sqrt{20.24016} = 4.49557 \text{ metros}.
+$$
 
-Vemos que fazer $dx$ um aumento de $0.025$ metros resultou em fazer $dy$ uma diminuição de $0.00504$ metros.
+Agora $y = 4.50000$, então $dy$ é $4.50000 - 4.49557 = 0.00443$ metros.
+
+Vemos que fazer $dx$ um aumento de $0.01$ metros resultou em fazer $dy$ uma diminuição de $0.00443$ metros.
 
 E a razão de $dy$ para $dx$ pode ser declarada da seguinte forma:
 
 $$
-\frac{dy}{dx} = \frac{0.00285}{0.025} = 0.11392.
+\frac{dy}{dx} = \frac{0.00443}{0.01} = 0.443.
+$$
+
+ou se preferirmos, como no enunciado eu escolhi $1 cm$ de deslocamento, este será o nosso valor pequeno então podemos dizer que:
+
+$$
+\frac{dy}{dx} = \frac{0.443}{1} = 0.443.
 $$
 
 Também é possível perceber que, exceto em uma posição particular, $dy$ terá um tamanho diferente de $dx$. Que posição é essa?[^2]{#nt2}
@@ -180,47 +187,137 @@ Voltando ao cálculo diferencial, nos dois casos anteriores, estamos buscando um
 
 Note que só podemos encontrar essa razão, $\frac{dy}{dx}$, quando $y$ e $x$ estão relacionados de alguma forma. Geralmente escolhemos as variáveis de modo que sempre que $x$ varia, $y$ também varia.
 
-No (caso 1)[#caso1], recém mencionado, se a base, $x$, do triângulo for aumentada, a altura, $y$, do triângulo também se tornará maior, e no (caso 2)[caso2], se a distância, $x$, do pé da escada à parede for aumentada, a altura, $y$, atingida pela escada diminuirá de maneira correspondente, inicialmente devagar diminuirá muito devagar. Mas, diminuirá mais e mais rapidamente à medida que $x$ se torna maior. 
+No (caso 1)[#caso1], recém mencionado, se a base, $x$, do triângulo for aumentada, a altura, $y$, do triângulo também se tornará maior, e no (caso 2)[caso2], se a distância, $x$, do pé da escada à parede for aumentada, a altura, $y$, atingida pela escada diminuirá de maneira correspondente, inicialmente devagar diminuirá muito devagar. Mas, diminuirá mais e mais rapidamente à medida que $x$ se torna maior.
 
 Nos casos que vimos anteriormente, as relações entre $x$ e $y$ podem ser perfeitamente definidas usando um pouco de álgebra e geometria. Se fizermos isso encontraremos $\frac{y}{x} = \tan 30^\circ$ para o (caso 1)[#caso1] e $x^2 + y^2 = L^2$ para o (caso 2)[#caso2], desde que $L$ seja o comprimento da escada. Finalmente, $\frac{dy}{dx}$ tera apenas o significado que encontramos em cada caso.
 
-######################pareiaqui
-Se, enquanto $x$ é, como antes, a distância do pé da escada à parede, $y$ é, em vez da altura alcançada, o comprimento horizontal da parede, ou o número de tijolos nela, ou o número de anos desde que foi construída, qualquer mudança em $x$ naturalmente não causaria nenhuma mudança em $y$; neste caso, $\frac{dy}{dx}$ não tem significado algum, e não é possível encontrar uma expressão para isso.
+Enquanto $x$ é, como antes, a distância do pé da escada à parede, $y$ é, em vez da altura alcançada, o comprimento horizontal da parede, ou número de tijolos na parede, ou ainda o número de anos desde que foi construída, qualquer mudança em $x$ não causará nenhuma mudança em $y$; neste caso, $\frac{dy}{dx}$ não tem significado algum, e não é possível encontrar uma expressão que relacione a variável independente $x$ com a variável dependente $y$.
 
-Sempre que usamos diferenciais $dx$, $dy$, $dz$, etc., a existência de algum tipo de relação entre $x$, $y$, $z$, etc., é implícita, e essa relação é chamada de *função* em $x$, $y$, $z$, etc.; as duas expressões dadas acima, por exemplo, a saber $\frac{y}{x} = \tan 30^\circ$ e $x^2 + y^2 = l^2$, são funções de $x$ e $y$. Tais expressões contêm implicitamente (isto é, contêm sem mostrar distintamente) os meios de expressar $x$ em termos de $y$ ou $y$ em termos de $x$, e por essa razão são chamadas de funções implícitas em $x$ e $y$; elas podem ser respectivamente colocadas nas formas
+Sempre que usarmos diferenciais $dx$, $dy$, $dz$, etc., a existência de algum tipo de relação entre $x$, $y$, $z$, etc., é implícita, e essa relação será chamada de "função" em $x$, $y$, $z$, etc. As duas expressões dadas acima, $\frac{y}{x} = \tan 30^\circ$ e $x^2 + y^2 = l^2$, são funções de $x$ e $y$. Tais expressões contêm implicitamente os meios de expressar $x$ em termos de $y$ ou $y$ em termos de $x$, e por essa razão são chamadas de funções implícitas em $x$ e $y$; elas podem ser respectivamente colocadas nas formas:
 
 $$y = x \tan 30^\circ \quad \text{ou} \quad x = \frac{y}{\tan 30^\circ}$$
 
 $$\text{e} \quad y = \sqrt{l^2 - x^2} \quad \text{ou} \quad x = \sqrt{l^2 - y^2}.$$
 
-Essas últimas expressões afirmam explicitamente o valor de $x$ em termos de $y$, ou de $y$ em termos de $x$, e por essa razão são chamadas de *funções explícitas* de $x$ ou $y$. Por exemplo, $x^2 + 3 = 2y - 7$ é uma função implícita em $x$ e $y$; pode ser escrita $y = \frac{x^2 + 10}{2}$ (função explícita de $x$) ou $x = \sqrt{2y - 10}$ (função explícita de $y$).
+Essas últimas expressões afirmam explicitamente o valor de $x$ em termos de $y$, ou de $y$ em termos de $x$, e por essa razão são chamadas de "funções explícitas" de $x$ ou $y$. Por exemplo, $x^2 + 3 = 2y - 7$ é uma função implícita em $x$ e $y$. A função $x^2 + 3 = 2y - 7$ pode ser escrita $y = \frac{x^2 + 10}{2}$ (função explícita de $x$) ou $x = \sqrt{2y - 10}$ (função explícita de $y$).
 
-Vemos que uma função explícita em $x$, $y$, $z$, etc., é simplesmente algo cujo valor muda quando $x$, $y$, $z$, etc., estão mudando. Por causa disso, o valor da função explícita é chamado de *variável dependente*, pois depende do valor das outras quantidades variáveis na função; essas outras variáveis são chamadas de *variáveis independentes* porque seu valor não é determinado pelo valor assumido pela função. Por exemplo, se $u = x^2 \sin \theta$, $x$ e $\theta$ são as variáveis independentes, e $u$ é a variável dependente.
+Vimos que uma função explícita em $x$, $y$, $z$, etc., é simplesmente algo cujo valor muda quando $x$, $y$, $z$, etc., estão mudando. Por causa disso, o valor que encontramos quando calculamos uma função explícita é chamado de "variável dependente*. muitas vezes optamos por funções em $x$ logo $y$ é a variável dependente pois depende do valor das outras variáveis na função; essas outras variáveis são chamadas de "variáveis independentes" porque seu valor não é determinado pelo valor assumido pela função, muitas vezes optamos por $x$. Por exemplo: se $u = x^2 \sin \theta$, $x$ e $\theta$ são as variáveis independentes, e $u$ é a variável dependente.
 
-Às vezes, a relação exata entre várias quantidades $x$, $y$, $z$ ou não é conhecida ou não é conveniente afirmá-la; é apenas conhecido, ou conveniente afirmar, que há algum tipo de relação entre essas variáveis, de modo que não se pode alterar $x$ ou $y$ ou $z$ individualmente sem afetar as outras quantidades; a existência de uma função em $x$, $y$, $z$ é então indicada pela notação $F(x, y, z)$ (função implícita) ou por $x = F(y, z)$, $y = F(x, z)$ ou $z = F(x, y)$ (funções explícitas). Às vezes, a letra $f$ ou $\phi$ é usada em vez de $F$, de modo que $y = F(x)$, $y = f(x)$ e $y = \phi(x)$ geralmente significam a mesma coisa, ou seja, que o valor de $y$ depende do valor de $x$ de alguma maneira que não está sendo afirmada.
+Às vezes, a relação exata entre várias quantidades $x$, $y$, $z$ não é conhecida, ou não é conveniente afirmá-la. Nestes casos, conhecemos, ou somos capazes de afirmar que existe algum tipo de relação entre essas variáveis, de modo que não se pode alterar $x$ ou $y$ ou $z$ individualmente sem afetar as outras quantidades. A existência de uma função em $x$, $y$, $z$ é então indicada pela notação $f(x, y, z)$ (função implícita) ou por $x = f(y, z)$, $y = f(x, z)$ ou $z = f(x, y)$ (funções explícitas). Às vezes, a letra $F$ ou $\phi$ é usada em vez de $f$, de modo que $y = f(x)$, $y = F(x)$ e $y = \phi(x)$ significam que o valor de $y$ depende do valor de $x$ de alguma forma que não está sendo afirmada, por não ser conhecida ou conveniente.
 
-Chamamos a razão $\frac{dy}{dx}$ de *derivada de $y$ com respeito a $x$* formalmente deveríamos chamar de *coeficiente diferencial de $y$ com respeito a $x$*, mas derivada basta. Ainda assim, é um nome científico, solene, para uma coisa muito simples. Mas não vamos nos assustar com nomes solenes, quando as coisas em si são tão fáceis. Em vez de nos assustarmos, simplesmente pronunciaremos uma breve maldição sobre a estupidez de dar nomes longos e complicados; e, tendo aliviado nossas mentes, passaremos à coisa simples em si, encontrar a razão $\frac{dy}{dx}$.
+Chamamos a razão $\frac{dy}{dx}$ de "derivada de $y$ com respeito a $x$"" formalmente deveríamos chamar de "coeficiente diferencial de $y$ com respeito a $x$", mas derivada basta. Ainda assim, é um nome científico e solene, para uma coisa tão simples. Entretanto, neste texto, não vamos nos assustar com nomes solenes. Em vez de nos assustarmos, simplesmente pronunciaremos uma breve maldição sobre a estupidez de dar nomes longos e complicados e, tendo aliviado nossos corações e mentes, passaremos à coisa simples em si, encontrar a razão $\frac{dy}{dx}$.
 
-Na álgebra comum que você aprendeu na escola, você estava sempre tentando encontrar alguma quantidade desconhecida que você chamava de $x$ ou $y$. Agora você tem que aprender a procurar estas quantidades de uma forma nova. O processo de encontrar o valor de $\frac{dy}{dx}$ é chamado de *diferenciação*. Mas, lembre-se, o que se deseja é o valor dessa razão quando tanto $dy$ quanto $dx$ são indefinidamente pequenos, esta é a última vez que vou lembrar isso: estamos preocupados em encontrar a razão $\frac{dy}{dx}$ quando $dx$ e $dy$ são infinitesimalmente pequenos, tão pequenos que tendem a zero.
+Na álgebra comum que você aprendeu na escola, você estava sempre tentando encontrar alguma quantidade desconhecida que você chamava de $x$ ou $y$. Agora você tem que aprender a procurar estas quantidades de uma forma nova. O processo de encontrar o valor de $\frac{dy}{dx}$ é chamado de *diferenciação*. Mas, lembre-se, o que se deseja é o valor dessa razão quando tanto $dy$ quanto $dx$ são indefinidamente pequenos, esta é a última vez que vou lembrar isso. Juro!
 
-Vamos agora aprender como buscar $\frac{dy}{dx}$.
+Estamos preocupados em encontrar a razão $\frac{dy}{dx}$ quando $dx$ e $dy$ são infinitesimalmente pequenos, tão pequenos que tendem a zero.
+
+Vamos agora aprender como encontrar $\frac{dy}{dx}$.
 
 ## Como ler diferenciais
 
-A amável leitora nunca deve cometer o erro de pensar que $dx$ significa $d$ vezes $x$, pois $d$ não é um fator – significa *um elemento de* ou *um pedacinho de* qualquer coisa que se siga com este mesmo sentido. Lê-se $dx$ assim: *de-xis*.
+A amável leitora nunca deve cometer o erro de pensar que $dx$ significa $d$ vezes $x$, pois $d$ não é um fator – significa "um elemento de" ou "um pedacinho de" qualquer coisa que se siga com este mesmo sentido. Lê-se $dx$ assim: "de-xis".
 
-Caso a leitora não tenha ninguém para guiá-lo em tais assuntos, pode-se simplesmente dizer que se lê os coeficientes diferenciais da seguinte maneira. O coeficiente diferencial $\frac{dy}{dx}$ é lido *de-ipsilon de-xis*. Ou seja, $\frac{du}{dt}$ é lido *de-u de-te*. Caramba! Como é difícil tentar escrever a pronúncia.
+Coeficientes diferenciais de segunda ordem, que serão encontrados mais tarde. Serão representados: $\frac{d^2y}{dx^2}$, o que é lido "de-dois-ipsilon de-xis-quadrado", significando que operação de diferenciar $y$ em relação a $x$ foi, ou tem que ser, feita duas vezes consecutivas. Esta é a notação de Leibnitz.
 
-Coeficientes diferenciais de segunda ordem, que serão encontrados mais tarde. Serão representados: $\frac{d^2y}{dx^2}$, o que é lido *de-dois-ipsilon de-xis-quadrado*, significando que operação de diferenciar $y$ em relação a $x$ foi, ou tem que ser, realizada duas vezes consecutivas. Esta é a notação de Leibnitz.
+Outra maneira de indicar que uma função foi diferenciada é colocando um acento no símbolo da função. Assim, se $y = F(x)$, o que significa que $y$ é alguma função não especificada em $x$, podemos escrever $f'(x)$ em vez de $\frac{d(f(x))}{dx}$, ou ainda $\frac{d}{dx}f(x)$ que eu gosto mais porque separa o coeficiente diferencial explicitando que ele não tem nenhuma relação com a divisão de $dx$ por $dy$. Da mesma forma, $f''(x)$ significará que a função original $f(x)$ foi diferenciada duas vezes com respeito a $x$.
 
-Outra maneira de indicar que uma função foi diferenciada é colocando um acento no símbolo da função. Assim, se $y = F(x)$, o que significa que $y$ é alguma função não especificada de $x$ (veja aqui), podemos escrever $F'(x)$ em vez de $\frac{d(F(x))}{dx}$. Da mesma forma, $F''(x)$ significará que a função original $F(x)$ foi diferenciada duas vezes com respeito a $x$. Esta é a notação da Lagrange.
-
-Vamos usar as duas notações livremente neste texto.
+Vamos usar as estas notações livremente neste texto.
 
 
 
+№4.
+CASOS MAIS SIMPLES
 
+Agora, vejamos como, a partir dos princípios fundamentais, podemos diferenciar algumas expressões algébricas simples.
 
+CASO 1
+
+Comecemos com a expressão simples $y = x^2$. Agora, lembre-se de que a noção fundamental do cálculo é a ideia de crescimento. Os matemáticos chamam isso de variação. Agora, como $y$ e $x^2$ são iguais, é claro que se $x$ cresce, $x^2$ também crescerá. E se $x^2$ crescer, então $y$ também crescerá. O que temos que descobrir é a proporção entre o crescimento de $y$ e o crescimento de $x$. Em outras palavras, nossa tarefa é descobrir a razão entre $dy$ e $dx$, ou, em resumo, encontrar o valor de $\frac{dy}{dx}$.
+
+Deixe $x$, então, crescer um pouco mais e se tornar $x + dx$; da mesma forma, $y$ crescerá um pouco mais e se tornará $y + dy$. Então, claramente, ainda será verdade que o $y$ aumentado será igual ao quadrado do $x$ aumentado. Escrevendo isso, temos:
+
+$$
+y + dy = (x + dx)^2.
+$$
+
+Fazendo o quadrado, obtemos:
+
+$$
+y + dy = x^2 + 2x \cdot dx + (dx)^2.
+$$
+O que $(dx)^2$ significa? Lembre-se de que $dx$ significava um pouco – um pouco de $x$. Então, $(dx)^2$ significará um pouco de um pouco de $x$; isto é, conforme explicado acima (aqui), é uma pequena quantidade da segunda ordem de pequenez. Pode, portanto, ser descartado como bastante insignificante em comparação com os outros termos. Deixando-o de fora, temos:
+
+$$
+y + dy = x^2 + 2x \cdot dx.
+$$
+
+Agora, $y = x^2$; então vamos subtrair isso da equação e ficamos com:
+
+$$
+dy = 2x \cdot dx.
+$$
+
+Dividindo por $dx$, encontramos:
+
+$$
+\frac{dy}{dx} = 2x.
+$$
+
+Agora *isso* é o que pretendíamos encontrar. A razão do crescimento de $y$ para o crescimento de $x$ é, no caso diante de nós, encontrada como $2x$.
+
+*Nota* – Esta razão $\frac{dy}{dx}$ é o resultado de diferenciar $y$ com respeito a $x$. Diferenciar significa encontrar o coeficiente diferencial. Suponha que tivéssemos outra função de $x$, como, por exemplo, $u = 7x^2 + 3$. Então, se nos mandassem diferenciar isso com respeito a $x$, deveríamos encontrar $\frac{du}{dx}$, ou, o que é a mesma coisa, $\frac{d(7x^2 + 3)}{dx}$. Por outro lado, podemos ter um caso em que o tempo era a variável independente (veja aqui), como neste caso: $y = b + \frac{1}{2}at^2$. Então, se nos mandassem diferenciar isso, isso significa que devemos encontrar seu coeficiente diferencial com respeito a $t$. Então, nosso trabalho seria tentar encontrar $\frac{dy}{dt}$, isto é, encontrar $\frac{d(b + \frac{1}{2}at^2)}{dt}$.
+
+Exemplo numérico.
+
+Suponha $x = 100$ e portanto $y = 10,000$. Então, deixe $x$ crescer até se tornar $101$ (ou seja, deixe $dx = 1$). Então, o $y$ aumentado será $101 \times 101 = 10,201$. Mas se concordarmos que podemos ignorar pequenas quantidades da segunda ordem, pode ser rejeitado em comparação com $10,000$; então podemos arredondar o $y$ aumentado para $10,200$. $y$ cresceu de $10,000$ para $10,200$; o acréscimo em $dy$ é, portanto, $200$.
+
+$$
+\frac{dy}{dx} = \frac{200}{1} = 200.
+$$
+
+De acordo com o trabalho algébrico do parágrafo anterior, encontramos $\frac{dy}{dx} = 2x$. E assim é; para $x = 100$ e $2x = 200$.
+
+Mas, você dirá, negligenciamos uma unidade inteira.
+
+Bem, tente novamente, tornando $dx$ ainda menor.
+
+Tente $dx = \frac{1}{10}$. Então $x + dx = 100.1$, e
+
+$$
+(x + dx)^2 = 100.1 \times 100.1 = 10,020.01.
+$$
+
+Agora, o último dígito 1 é apenas uma milionésima parte de $10,000$ e é totalmente insignificante; então podemos tomar $10,020$ sem o pequeno decimal no final. E isso faz $dy = 20$; e
+
+$$
+\frac{dy}{dx} = \frac{20}{0.1} = 200,
+$$
+
+o que ainda é o mesmo que $2x$.
+
+CASO 2
+
+Tente diferenciar $y = x^3$ da mesma maneira.
+
+Deixamos $y$ crescer para $y + dy$, enquanto $x$ cresce para $x + dx$.
+
+Então temos
+
+$$
+y + dy = (x + dx)^3.
+$$
+
+Fazendo a cubagem, obtemos
+
+$$
+y + dy = x^3 + 3x^2 \cdot dx + 3x(dx)^2 + (dx)^3.
+$$
+
+Agora sabemos que podemos negligenciar pequenas quantidades da segunda e terceira ordens; uma vez que, quando $dy$ e $dx$ são ambos feitos infinitamente pequenos, $(dx)^2$ e $(dx)^3$ se tornarão infinitamente menores em comparação. Assim, considerando-os insignificantes, temos:
+
+$$
+y + dy = x^3 + 3x^2 \cdot dx.
+$$
 
 
 ## Notas de Rodapé
