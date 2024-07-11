@@ -1091,6 +1091,8 @@ Again succinct! I think I'm learning. These structures have the same space and t
 
 #### Running Code 3: using C-Style Array
 
+Will give us the following answer:  
+
 ```Shell
 Calculating Fibonacci(10)
 Average time for recursive Fibonacci: 718 ns
@@ -1165,5 +1167,127 @@ Dynamic programming concepts became popular in the early 21st century thanks to 
 For example, given the array: `[8, 10, 2, 9, 7, 5]` and the target sum: 11
 
 Your function should return a pair of numbers that add up to the target sum. Your answer must be a function in form: `Values(sequence, targetSum)`, In this case, your function should return (9, 2).
+
+#### Brute Force for Two Sum's problem
+
+The most obvious solution, usually the first that comes to mind, involves checking all pairs in the array to see if any pair meets the desired target value. This solution is not efficient for large arrays; it has a time complexity of $O(n^2)$ where $n$ is the number of elements in the array. The flow of the brute force function can be seen in Flowchart 4.
+
+![]({{ site.baseurl }}/assets/images/flow4.jpg)
+*Flowchart 4 - Brute force solution for two sum problem*{: class="legend"}
+
+Flowchart 4 enables the creation of a function to solve the two-sum problem in C++20, as can be seen in Code 4 below:
+
+```Cpp
+#include <iostream>
+#include <vector>
+#include <utility>
+
+// Function to find a pair of numbers that add up to the target sum Brute Force
+std::pair<int, int> Values(const std::vector<int>& sequence, int targetSum) {
+    int n = sequence.size();
+
+    // Iterate over all possible pairs
+    for (int i = 0; i < n - 1; ++i) {
+        for (int j = i + 1; j < n; ++j) {
+            // Check if the current pair sums to the target
+            if (sequence[i] + sequence[j] == targetSum) {
+                return std::make_pair(sequence[i], sequence[j]); // Pair found
+            }
+        }
+    }
+
+    // No pair found
+    return std::make_pair(-1, -1);
+}
+
+int main() {
+    // Example usage
+    std::vector<int> sequence = { 8, 10, 2, 9, 7, 5 };
+    int targetSum = 11;
+
+    // Call the function and print the result
+    std::pair<int, int> result = Values(sequence, targetSum);
+    if (result.first != -1) {
+        std::cout << "Pair found: (" << result.first << ", " << result.second << ")" << std::endl;
+    }
+    else {
+        std::cout << "No pair found." << std::endl;
+    }
+
+    return 0;
+}
+```
+
+*Code 4: Full code of a two-sum using `std::vector`*{: class="legend"}
+
+The Values function is quite simple, but the use of `std::vector` and `std::pair` in Code 4 deserves a closer look. While `std::array` might offer a slight performance edge, the dynamic nature of `std::vector` makes it a better fit for interview and competition scenarios where the size of the input data isn't known in advance. This flexibility is crucial when dealing with data read from external sources like the terminal or text files.
+
+>`std::pair` is a standard template class in C++ used to store a pair of values, which can be of different types. It has been available since C++98 and is defined in the `<utility>` header. This class is particularly useful for returning two values from a function or for storing two related values together. It has two public member variables, `first` and `second`, which store the values. A `std::pair` can be initialized using constructors or the helper function `std::make_pair`.
+>The kind reader can create a `std::pair` directly using its constructor (`std::pair<int, double> p1(42, 3.14);`) or by using `std::make_pair` (`auto p2 = std::make_pair(42, 3.14);`). It is straightforward to access the members `first` and `second` directly (`std::cout << "First: " << p1.first << ", Second: " << p1.second << std::endl;`).
+>Since C++11, we also have `std::tuple` and `std::tie`, which extend the functionality of `std::pair` by allowing the grouping of more than two values. `std::tuple` can store any number of values of different types, making it more versatile than `std::pair`. The `std::tie` function can be used to unpack a `std::tuple` into individual variables. While `std::pair` is simpler and more efficient for just two values, `std::tuple` provides greater flexibility for functions needing to return multiple values. For example, a `std::tuple` can be created using `std::make_tuple` (`auto t = std::make_tuple(1, 2.5, "example");`), and its elements can be accessed using `std::get<index>(t)`.
+
+The kind reader may have noticed the use of `(-1, -1)` as sentinel values to indicate that the function did not find any pair. There is a better way to do this. Use the `std::optional` class as we can see in Code 5:
+
+```Cpp
+#include <iostream>
+#include <vector>
+#include <optional>
+#include <utility>
+
+// Function to find a pair of numbers that add up to the target sum
+std::optional<std::pair<int, int>> Values(const std::vector<int>& sequence, int targetSum) {
+    int n = sequence.size();
+    
+    // Iterate over all possible pairs
+    for (int i = 0; i < n - 1; ++i) {
+        for (int j = i + 1; j < n; ++j) {
+            // Check if the current pair sums to the target
+            if (sequence[i] + sequence[j] == targetSum) {
+                return std::make_pair(sequence[i], sequence[j]); // Pair found
+            }
+        }
+    }
+    
+    // No pair found
+    return std::nullopt;
+}
+
+int main() {
+    // Example usage
+    std::vector<int> sequence = {8, 10, 2, 9, 7, 5};
+    int targetSum = 11;
+    
+    // Call the function and print the result
+    if (auto result = Values(sequence, targetSum)) {
+        std::cout << "Pair found: (" << result->first << ", " << result->second << ")" << std::endl;
+    } else {
+        std::cout << "No pair found." << std::endl;
+    }
+    
+    return 0;
+}
+```
+
+*Code 4: Full code of a two-sum using `std::vector` and `std::optional`*
+
+>`std::optional` is a feature introduced in C++17 that provides a way to represent optional (or nullable) values. It is a template class that can contain a value or be empty, effectively indicating the presence or absence of a value without resorting to pointers or sentinel values. This makes `std::optional` particularly useful for functions that may not always return a meaningful result. By using `std::optional`, developers can avoid common pitfalls associated with null pointers and special sentinel values, thereby writing safer and more expressive code. `std::optional` is similar to the `Maybe` type in Haskell, which also represents an optional value that can either be `Just` a value or `Nothing`. An equivalent in Python is the use of `None` to represent the absence of a value, often combined with the `Optional` type hint from the `typing` module to indicate that a function can return either a value of a specified type or `None`.
+
+Here is an example of how you can use `Optional` from the `typing` module in Python to represent a function that may or may not return a value:
+
+```python
+from typing import Optional
+
+def find_min_max(numbers: list[int]) -> Optional[tuple[int, int]]:
+    if not numbers:
+        return None
+    
+    min_val = min(numbers)
+    max_val = max(numbers)
+    
+    return min_val, max_val
+```
+
+Relying solely on brute-force solutions won't impress interviewers or win coding competitions. It's crucial to strive for solutions with lower time complexity whenever possible. While some problems might not have more efficient alternatives, most interview and competition questions are designed to filter out candidates who only know brute-force approaches.
+
 
 This will continue!!!
