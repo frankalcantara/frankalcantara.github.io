@@ -17,7 +17,7 @@ description: Versão atualizada de Cálculo Made Easy com novos exercícios e ex
 date: 2024-07-06T19:31:18.251Z
 preview: Cálculo Simplificado é a versão atualizada e ampliada do clássico Cálculo Made Easy. Este livro foi revisado e enriquecido com novos exercícios e exemplos práticos para facilitar ainda mais o entendimento dos conceitos de cálculo. Ideal para estudantes e profissionais que desejam dominar o cálculo de forma intuitiva e eficaz, este guia aborda desde os fundamentos até tópicos mais avançados, sempre com explicações claras e acessíveis. Descubra como o cálculo pode ser descomplicado e aplicado em diversas áreas do conhecimento.
 keywords: Este livro é essencial para aqueles que buscam uma compreensão profunda e acessível do cálculo. A versão atualizada de Cálculo Simplificado não só mantém a fidelidade ao texto original de Cálculo Made Easy, mas também enriquece a experiência do leitor com explicações de detalhes pitorescos do início do século XX. Além disso, as unidades, teoremas e técnicas de resolução de problemas foram modernizados para refletir os avanços contemporâneos. Esta abordagem combinada proporciona uma visão completa e relevante, facilitando o aprendizado e a aplicação do cálculo nos dias atuais.
-toc: false
+toc: true
 published: false
 slug: calculo-simplificado
 draft: 2024-07-06T19:30:40.256Z
@@ -42,7 +42,7 @@ O terror preliminar, que sufoca a maioria dos meninos da quinta série impedindo
 
 1. $d$ que significa meramente *um pedacinho de*. Ou se preferir, com um pouco mais de formalidade *uma fração muito pequena de*. Assim, $dx$ significa um pedacinho de $x$; ou $du$ significa um pedacinho de $u$. Matemáticos ordinários acham mais educado dizer *um elemento de* em vez de *um pedacinho de*, ou ainda uma *fração infinitesimal de*. Esta coisa de *infinitesimal* quer dizer que é tão pequeno que quase se confunde com o zero. Você verá que esses pequenos pedaços podem ser considerados infinitamente pequenos.
 
-2. $\int $ que é apenas um *S* longo, e pode ser lido, se você quiser, como *a soma de*. Assim, $\int dx$ significa a soma de todos os pequenos pedaços de $x$; ou $\int dt$ significa a soma de todos os pequenos pedaços de $t$. Matemáticos ordinários chamam esse símbolo de *a integral de*. Qualquer tolo pode ver que se $x$ for considerado como composto por muitos pequenos pedaços, cada um dos quais é chamado de $dx$, se você somá-los, obterá, como resultado, a soma de todos os $dx$'s. A soma de todos os $dx$ é a mesma coisa que $x$. A palavra *integral* simplesmente significa *o todo* e tem o mesmo sentido de *somar todas as pequenas partes que compõem o todo*.
+2. $\int$que é apenas um *S* longo, e pode ser lido, se você quiser, como *a soma de*. Assim, $\int dx$ significa a soma de todos os pequenos pedaços de $x$; ou $\int dt$ significa a soma de todos os pequenos pedaços de $t$. Matemáticos ordinários chamam esse símbolo de *a integral de*. Qualquer tolo pode ver que se $x$ for considerado como composto por muitos pequenos pedaços, cada um dos quais é chamado de $dx$, se você somá-los, obterá, como resultado, a soma de todos os $dx$'s. A soma de todos os $dx$ é a mesma coisa que $x$. A palavra *integral* simplesmente significa *o todo* e tem o mesmo sentido de *somar todas as pequenas partes que compõem o todo*.
 
 Pensando na duração de uma hora, você pode, se quiser, considerar que este é um intervalo de tempo dividido em 3600 pequenos pedaços chamados de  segundos. O todo dos segundos é a hora e a hora é a soma dos seus $3600$ pequenos pedaços somados.
 
@@ -50,7 +50,7 @@ A partir de agora, quando você encontrar uma expressão que começa com esse s�
 
 E é só isso!
 
-## № 2.SOBRE DIFERENTES GRAUS DE PEQUENEZ
+## № 2. SOBRE DIFERENTES GRAUS DE PEQUENEZ
 
 Pequenez, ou grau de quanto as coisas são pequenas, é uma palavra rara em português. Ainda assim, como descobriremos que em nossos processos de cálculo temos que lidar com quantidades pequenas de vários graus de pequenez. Precisamos desta palavra para entender que um pequeno pode ser menor que o outro.
 
@@ -205,7 +205,7 @@ Estamos preocupados em encontrar a razão $\frac{dy}{dx}$ quando $dx$ e $dy$ sã
 
 Vamos agora aprender como encontrar $\frac{dy}{dx}$.
 
-## Como ler diferenciais
+### Como ler diferenciais
 
 A amável leitora nunca deve cometer o erro de pensar que $dx$ significa $d$ vezes $x$, pois $d$ não é um fator – significa "um elemento de" ou "um pedacinho de" qualquer coisa que se siga com este mesmo sentido. Lê-se $dx$ assim: "de-xis".
 
@@ -363,11 +363,9 @@ Todos os casos que vimos até o momento são muito fáceis, desde que você saib
 
 *Tabela 1 - Uma comparação entre $x^n$ e sua derivada, $dx$.*{: class="legend"}
 
-Apenas observe estes resultados: a operação de diferenciar parece ter tido o efeito de diminuir a potência de $x$ em $1$ (por exemplo, no último caso, reduzindo $x^4$ para $x^3$), e ao mesmo tempo, a operação de diferenciar parece estar multiplicando $x$ pelo mesmo número que pareceu originalmente como a potência. Volte aos CASOS 1, 2 e 3 e observe para ver se é isto que está acontecendo.
+Cuidadosamente observe a Tabela 1. A operação de diferenciar parece ter tido o efeito de diminuir a potência de $x$ em $1$ sempre que aplicada. Por exemplo: no último caso, reduzindo $x^4$ para $x^3$), e ao mesmo tempo, a operação de diferenciar parece estar multiplicando $x$ pelo mesmo valor da potência original. Sem pressa, volte aos casos 1, 2 e 3 e verifique se este parágrafo faz sentido.
 
-Como vimos isso acontecer várias vezes, podemos conjecturar como outras potências serão diferenciadas. Se esta regra observada estiver certa você deve esperar que diferenciar $x^5$ resultaria em $5x^4$, ou diferenciar $x^6$ resultaria $6x^5$. Se, a amável leitora, não estiver convencida, deve tentar diferenciar estes dois monômios.
-
-Vamos tentar com $y = x^5$. Neste caso:
+Se as observações sobre a Tabela 1 fizerem sentido para você, podemos conjecturar como outras potências serão diferenciadas. Se esta regra que inferimos estiver certa você deve achar que diferenciar $x^5$ resultaria em $5x^4$, ou diferenciar $x^6$ resultaria $6x^5$. Se, a amável leitora, pensou assim, parabéns. É exatamente isso. Entretanto, podemos conferir. Vamos tentar com $y = x^5$. Neste caso:
 
 $$
 y + dy = (x + dx)^5
@@ -377,13 +375,13 @@ $$
 = x^5 + 5x^4 \cdot dx + 10x^3 (dx)^2 + 10x^2 (dx)^3 + 5x (dx)^4 + (dx)^5.
 $$
 
-Ignorando todos os termos contendo pequenas quantidades de ordens superiores, temos:
+Ignorando todos os termos contendo pequenas quantidades de ordens superiores a 1, temos:
 
 $$
 y + dy = x^5 + 5x^4 \cdot dx,
 $$
 
-Subtraindo $y = x^5$, obtemos:
+Subtraindo $y = x^5$, dos dois lados do igual, obtemos:
 
 $$
 dy = 5x^4 \cdot dx,
@@ -395,7 +393,7 @@ $$
 \frac{dy}{dx} = 5x^4,
 $$
 
-Exatamente como conjecturamos poucas linhas acima. Seguindo logicamente nossa observação, devemos concluir que, se quisermos lidar com qualquer potência superior – que chamaremos de $n$ – poderíamos abordá-la da mesma maneira e seguir a mesma regra. Vamos fazer $y = x^n$:
+Exatamente como inferimos poucas linhas acima. Seguindo logicamente nossa observação, devemos concluir que, se quisermos lidar com qualquer potência superior – que chamaremos de $n$ – poderíamos abordá-la da mesma maneira e seguir a mesma regra. Vamos fazer $y = x^n$ para generalizar. Neste caso, teremos:
 
 $$
 \frac{dy}{dx} = nx^{(n-1)}.
@@ -407,11 +405,13 @@ $$
 \frac{dy}{dx} = 8x^7.
 $$
 
-De fato, existe uma regra de diferenciação, chamada de  Regra da Potência que diz que  diferenciar $x^n$ resultará $nx^{n-1}$ para todos os casos onde $n$ é um número inteiro e positivo. podemos Expandir $(x + dx)^n$ usando o Teorema Binomial de Newton e demonstrar.
+De fato, você acabou de aprender a sua primeira regra de diferenciação.
 
-#### Teorema Binomial para Expandir $(x+dx)^8$
+*Esta regra é chamada de **Regra da Potência** e diz que  diferenciar $x^n$ resultará $nx^{n-1}$, sendo válida todos os casos onde $n$ é um número inteiro e positivo*. Podemos demonstrar a validade da **Regra da Potência** acrescentando uma pequena fração de $x$ ao próprio $x$ e expandir $(x + dx)^n$ usando o Teorema Binomial de Newton:
 
-O Teorema Binomial de Newton[^2]{#nt3} nos diz que podemos expandir a expressão $(x + dx)^8$ em uma série de termos envolvendo coeficientes binomiais. A fórmula geral para o teorema binomial é:
+#### Usando o Teorema Binomial de Newton para Expandir $(x+dx)^8$
+
+O Teorema Binomial de Newton[^2]{#nt3} nos diz que podemos expandir a expressão $(x + dx)^8$ em uma série de termos envolvendo coeficientes binomiais. A fórmula geral para o Teorema Binomial é:
 
 $$
 (x + dx)^8 = \sum_{k=0}^{8} \binom{8}{k} x^{8-k} (dx)^k
@@ -423,9 +423,9 @@ $$
 \binom{8}{k} = \frac{8!}{k!(8-k)!}
 $$
 
-Vamos considerar um exemplo prático para expandir $(x + dx)^8$ usando o teorema binomial.
+Que representa a combinação de $k$ de $8$ em $8$. Vamos considerar um exemplo prático para expandir $(x + dx)^8$ usando o Teorema Binomial.
 
-#### Exemplo: Expansão de $(x + dx)^8$
+##### Exemplo: Expansão de $(x + dx)^8$
 
 A expansão de $(x + dx)^8$ é dada por:
 
@@ -472,11 +472,13 @@ Vamos calcular cada termo da soma individual e cuidadosamente:
     $$
 
 7. Para $k = 6$:
+
     $$
     \binom{8}{6} x^{8-6} (dx)^6 = 28 \cdot x^2 \cdot (dx)^6 = 28x^2 (dx)^6
     $$  
 
 8. Para $k = 7$:
+
     $$
     \binom{8}{7} x^{8-7} (dx)^7 = 8 \cdot x^1 \cdot (dx)^7 = 8x (dx)^7
     $$
@@ -499,21 +501,21 @@ $$
 (x + dx)^8 = x^8 + 8x^7 dx + 28x^6 (dx)^2 + 56x^5 (dx)^3 + 70x^4 (dx)^4 + 56x^3 (dx)^5 + 28x^2 (dx)^6 + 8x (dx)^7 + (dx)^8
 $$
 
-A questão de saber se esta regra que conjecturamos é verdadeira para casos onde $n$ tem valores negativos ou fracionários requer consideração adicional.
+A questão de saber se esta regra que conjecturamos é verdadeira para casos onde $n$ tem valores negativos ou fracionários requer considerações adicionais.
 
-#### Caso de uma potência negativa
+### Caso de uma potência negativa
 
-Deixe $y = x^{-2}$. Então proceda como antes:
+Vamos fazer com que nossa função seja $y = x^{-2}$. Podemos proceder exatamente como fizemos antes e ver onde chegamos. Neste caso:
 
 $$
 y + dy = (x + dx)^{-2}
 $$
 
 $$
-= x^{-2} \left(1 + \frac{dx}{x}\right)^{-2}.
+= x^{-2} \left(1 + \frac{dx}{x}\right)^{-2}
 $$
 
-Expandindo isso com o teorema binomial, obteremos
+Expandindo isso com o Teorema Binomial, obteremos:
 
 $$
 = x^{-2} \left[1 - \frac{2 \, dx}{x} + \frac{2(2 + 1)}{1 \times 2} \left(\frac{dx}{x}\right)^2 - \text{etc.}\right]
@@ -523,7 +525,7 @@ $$
 = x^{-2} - 2x^{-3} \cdot dx + 3x^{-4} (dx)^2 - 4x^{-5} (dx)^3 + \text{etc.}
 $$
 
-Assim, negligenciando as pequenas quantidades das ordens superiores de pequenez, temos:
+Assim, negligenciando as pequenas quantidades das ordens superiores de pequenez, teremos:
 
 $$
 y + dy = x^{-2} - 2x^{-3} \cdot dx.
@@ -539,18 +541,18 @@ $$
 \frac{dy}{dx} = -2x^{-3}.
 $$
 
-E isso ainda está de acordo com a regra que conjecturamos acima.
+E, veja que nosso resultado ainda está de acordo com a **Regra da Potência**.
 
-#### Caso de uma potência fracionária
+### Caso de uma potência fracionária
 
-Vamos tentar com $y = x^{\frac{1}{2}}$. Então, como antes,
+Vamos tentar com $y = x^{\frac{1}{2}}$. Então, novamente, vamos tentar como antes:
 
 $$
 y + dy = (x + dx)^{\frac{1}{2}} = x^{\frac{1}{2}} \left(1 + \frac{dx}{x}\right)^{\frac{1}{2}}
 $$
 
 $$
-= \sqrt{x} + \frac{1}{2} \frac{dx}{\sqrt{x}} - \frac{1}{8} \frac{(dx)^2}{x \sqrt{x}} + \text{termos com potências mais altas de } dx.
+= \sqrt{x} + \frac{1}{2} \frac{dx}{\sqrt{x}} - \frac{1}{8} \frac{(dx)^2}{x \sqrt{x}} + \text{termos com potências mais altas} dx.
 $$
 
 Subtraindo o original $y = x^{\frac{1}{2}}$, e ignorando as potências mais altas, temos:
@@ -565,46 +567,344 @@ $$
 \frac{dy}{dx} = \frac{1}{2} x^{-\frac{1}{2}}.
 $$
 
-Concordando com a regra geral.
+O que novamente concorda com a regra que inferimos.
 
 Para resumir: chegamos à seguinte regra: *Para diferenciar $x^n$, multiplique pela potência e reduza a potência em um, resultando em $nx^{n-1}$ como resultado*.
 
 ### EXERCÍCIOS I
 
-Resolva os Exercícios a seguir usando apenas as técnicas algébricas que vimos até o momento:
+Resolva os exercícios a seguir usando apenas as técnicas algébricas que vimos até o momento:
 
-1. $y = x^{13}$  Resposta: $\frac{dy}{dx} =13x^{12}$
-2. $y = x^{-\frac{3}{2}}$ Resposta: $\frac{dy}{dx} = -\frac{3}{2} x^{-\frac{5}{2}}$
-3. $y = x^{2a}$ Resposta: $\frac{dy}{dx} =2a x^{2a-1}$
-4. $u = t^{2.4}$ Resposta: $\frac{dy}{dx} =2.4 t^{1.4}$
-5. $z = \sqrt[3]{u}$ Resposta: $z = $\frac{dy}{dx} =\frac{1}{3} u^{-\frac{2}{3}}$
-6. $y = \sqrt[3]{x^{-5}}$ Resposta:  $\frac{dy}{dx} =-\frac{5}{3} x^{-\frac{8}{3}}$
-7. $u = \sqrt{\frac{1}{x^8}}$ Resposta: $\frac{dy}{dx} =\frac{du}{dx} = -4x^{-5}$
-8. $y = 2x^{a}$ Resposta: $\frac{dy}{dx} = 2a x^{a-1}$
-9. $y = \sqrt[3]{x^3}$ Resposta: $\frac{dy}{dx} = 1$
-10. $y = \sqrt{\frac{1}{x^m}}$ Resposta: $\frac{dy}{dx} = -\frac{m}{2} x^{-\frac{m+2}{2}}$
+1. $y = x^{13} \space\space\space\space$     Resposta: $\frac{dy}{dx} =13x^{12}$
+2. $y = x^{-\frac{3}{2}}\space\space\space\space$   Resposta: $\frac{dy}{dx} = -\frac{3}{2} x^{-\frac{5}{2}}$
+3. $y = x^{2a} \space\space\space\space$     Resposta: $\frac{dy}{dx} =2a x^{2a-1}$
+4. $u = t^{2.4} \space\space\space\space$    Resposta: $\frac{dy}{dx} =2.4 t^{1.4}$
+5. $z = \sqrt[3]{u} \space\space\space\space$    Resposta: $z = \frac{dy}{dx} =\frac{1}{3} u^{-\frac{2}{3}}$
+6. $y = \sqrt[3]{x^{-5}} \space\space\space\space$   Resposta:  $\frac{dy}{dx} =-\frac{5}{3} x^{-\frac{8}{3}}$
+7. $u = \sqrt{\frac{1}{x^8}} \space\space\space\space$   Resposta: $\frac{dy}{dx} =\frac{du}{dx} = -4x^{-5}$
+8. $y = 2x^{a} \space\space\space\space$     Resposta: $\frac{dy}{dx} = 2a x^{a-1}$
+9. $y = \sqrt[3]{x^3} \space\space\space\space$  Resposta: $\frac{dy}{dx} = 1$
+10. $y = \sqrt{\frac{1}{x^m}} \space\space\space\space$  Resposta: $\frac{dy}{dx} = -\frac{m}{2} x^{-\frac{m+2}{2}}$
 
-Você agora aprendeu como diferenciar potências de $x$. E viu como é fácil usando apenas a álgebra que aprendeu no ensino médio. Estes exercícios estão resolvidos [aqui](#EX1)
+Neste ponto, a amável leitora é capaz de diferenciar funções que sejam apenas potências de  $x$. E viu como é fácil usando apenas a álgebra que aprendeu no ensino médio?
+
+Os exercícios $1$ até $10$. Antes de ver as resoluções, tente por conta própria. Resolver exercícios é o caminho mais curto para o conhecimento.
 
 ## Nº 5. Próxima Etapa. O Que Fazer com Constantes
 
-Em nossas equações, consideramos \(x\) como crescente, e como resultado de \(x\) estar crescendo, \(y\) também mudou seu valor e cresceu. Nós geralmente pensamos em \(x\) como uma quantidade que podemos variar; e, considerando a variação de \(x\) como uma espécie de causa, consideramos a variação resultante de \(y\) como um efeito. Em outras palavras, consideramos o valor de \(y\) como dependente daquele de \(x\). Tanto \(x\) quanto \(y\) são variáveis, mas \(x\) é aquela que operamos, e \(y\) é a "variável dependente". Em todo o capítulo anterior, temos tentado encontrar regras para a proporção que a variação dependente em \(y\) tem em relação à variação independentemente feita em \(x\).
+Até o momento, em nossas funções, na maior parte das vezes, consideramos $x$ como crescente, e como resultado de $x$ também crescendo. Usamos $x$ para representar uma quantidade qualquer que podemos variar. E, considerando a variação de $x$ como uma espécie de causa, consideramos a variação resultante de $y$ como um efeito. Em outras palavras, consideramos o valor de $y$ como sendo dependente do valor de $x$. Tanto $x$ quanto $y$ são variáveis, mas *$x$ é aquela que operamos, a variável independente*, enquanto *$y$ é a "variável dependente*. Em todo o capítulo anterior, estivemos tentado encontrar regras para a determinar a proporção entre a variação dependente em $y$ em relação à variação independentemente feita em $x$.
 
-Nosso próximo passo é descobrir qual efeito no processo de diferenciação é causado pela presença de constantes, isto é, de números que não mudam quando \(x\) ou \(y\) mudam seus valores.
+Nosso próximo passo é descobrir qual o efeito de constantes, isto é, de números que não mudam quando $x$ ou $y$ mudam seus valores, no processo de diferenciação.
 
 ### Constantes Adicionadas
 
-Vamos começar com um caso simples de uma constante adicionada, assim: 
+Vamos começar estudando um caso simples: o caso da constante adicionada. Neste caso, teremos:
 
 $$
 y = x^3 + 5
 $$
 
-Assim como antes, suponha que \(x\) cresça para \(x + dx\) e \(y\) cresça para \(y + dy\).
+Assim como antes, vamos supor que $x$ cresça para $x + dx$ e $y$ cresça para $y + dy$.
 
+Então: $y + dy = (x + dx)^3 + 5$, que expandido será:
 
+$$ = x^3 + 3x^2 dx + 3x(dx)^2 + (dx)^3 + 5 $$
 
+Descartando as pequenas quantidades de ordens superiores, teremos:
 
+$$ y + dy = x^3 + 3x^2 \cdot dx + 5 $$
+
+Subtraindo  $y = x^3 + 5$, teremos:
+
+$$ dy = 3x^2 dx $$
+
+$$ \frac{dy}{dx} = 3x^2 $$
+
+Portanto, o $5$, o valor da constante acrescida, desapareceu completamente. Ele não acrescentou nada ao crescimento de $x$, e, sendo assim, não entra no coeficiente diferencial. Se tivéssemos colocado $7$, $800$, ou qualquer outro número, no lugar do $5$, o resultado seria o mesmo. Então, fazendo a letra $a$, ou $b$, ou $c$ para representar qualquer constante, ela simplesmente desaparecerá quando diferenciarmos.
+
+Só para ressaltar: se a constante adicional tivesse sido de valor negativo, como $-5$ ou $-b$, também teria desaparecido.
+
+### Constantes Multiplicadas
+
+Vamos considerar um experimento simples o seguinte caso:
+
+Seja $y = 7x^2$. Prosseguindo como antes, obteremos:
+
+$$ y + dy = 7(x + dx)^2 $$
+
+$$ = 7(x^2 + 2x \cdot dx + (dx)^2) $$
+
+$$ = 7x^2 + 14x \cdot dx + 7(dx)^2 $$
+
+Então, subtraindo $y = 7x^2$, e ignorando o último termo, temos:
+
+$$ dy = 14x \cdot dx $$
+
+$$ \frac{dy}{dx} = 14x $$
+
+Vamos ilustrar este exemplo traçando os gráficos das equações $y = 7x^2$ e $\frac{dy}{dx} = 14x$, atribuindo a $x$ um conjunto de valores sucessivos, 0, 1, 2, 3, etc., e encontrando os valores correspondentes de $y$ e de $\frac{dy}{dx}$.
+
+Esses valores podem tabulados da seguinte forma:
+
+| $x$          | 0  | 1  | 2  | 3  | 4  | 5  | -1  | -2  | -3  |
+|--------------|----|----|----|----|----|----|-----|-----|-----|
+| $y$          | 0  | 7  | 28 | 63 | 112| 175| 7   | 28  | 63  |
+| $\frac{dy}{dx}$ | 0  | 14 | 28 | 42 | 56 | 70 | -14 | -28 | -42 |
+
+*Tabela 1 - Comparação entre $f(x)=7x^2$ e sua derivada $\frac{dy}{dx}$.*{: class="legend"}
+
+O que nos permite gerar o Gráfico 1:
+
+*Figura 2 - Um crescimento $dx$ em um triângulo.*{: class="legend"}
+
+No Gráfico 1 vemos os valores de $x$, os correspondentes valores de $y$ e as duas curvas que nos interessam: em azul a função $f(x)=y=7x^2$ e em laranja sua derivada, a relação $\frac{dy}{dx} = 14x$.
+
+No Gráfico 1 compare cuidadosamente as duas curvas traçadas. Observe que a altura da ordenada, eixo $y$,  e verifique por inspeção que a altura da ordenada da curva derivada, em laranja, é proporcional à inclinação da curva original, em azul. À esquerda da origem, onde a curva da função original inclina negativamente (isto é, para baixo da esquerda para a direita, onde a função é decrescente), as ordenadas correspondentes da curva derivada são negativas.
+
+Agora, se olharmos novamente o Caso 1, veremos que diferenciar $x^2$ nos dará $2x$. Assim, o coeficiente diferencial de $7x^2$ é $7$ vezes maior que o de $x^2$. Se tivéssemos tomado $8x^2$, o coeficiente diferencial teria sido $8$ vezes maior que o coeficiente diferencial de $x^2$. Se colocarmos $y = ax^2$, obteremos
+
+$$
+\frac{dy}{dx} = a \cdot 2x.
+$$
+
+Se tivéssemos começado com $y = ax^n$, deveríamos ter encontrado:
+
+$$
+\frac{dy}{dx} = a \cdot nx^{n-1}.
+$$
+
+Então, qualquer multiplicação por uma constante reaparece como uma mera multiplicação do coeficiente diferencial quando a função é diferenciada. E, o que é verdadeiro para a multiplicação é igualmente verdadeiro para a divisão: pois, se no exemplo acima, tivéssemos tomado a constante $\frac{1}{7}$ em vez de $7$, teríamos o mesmo $\frac{1}{7}$ no resultado após a diferenciação.
+
+**Alguns Exemplos Adicionais**. Os seguintes exemplos, totalmente resolvidos, permitirão que você domine completamente o processo de diferenciação aplicado a expressões algébricas comuns, e permitirão que você resolva por si mesmo os exercícios sugeridos no final deste capítulo.
+
+1. Diferencie $y = \frac{x^5}{7} - \frac{3}{5}$. Onde:
+
+    $$
+    \frac{3}{5}
+    $$
+
+    É uma constante e, como tal, desaparece, como mostramos anteriormente. Sendo assim, Podemos escrever:
+
+    $$
+    \frac{dy}{dx} = \frac{1}{7} \times 5 \times x^{5-1},
+    $$
+
+    ou
+
+    $$
+    \frac{dy}{dx} = \frac{5}{7} x^4.
+    $$
+
+2. Diferencie $y = a \sqrt{x} - \frac{1}{2} \sqrt{a}$.
+
+    O termo $\frac{1}{2} \sqrt{a}$ desaparece, sendo uma constante adicionada. Como $a \sqrt{x}$, na forma de índice, é escrito $ax^{\frac{1}{2}}$, teremos
+
+    $$
+    \frac{dy}{dx} = a \times \frac{1}{2} \times x^{\frac{1}{2} - 1} = \frac{a}{2} \times x^{-\frac{1}{2}},
+    $$
+
+    ou
+
+    $$
+    \frac{dy}{dx} = \frac{a}{2 \sqrt{x}}.
+    $$
+
+3. Se $ay + bx = by - ax + (x + y) \sqrt{a^2 - b^2}$, encontre o coeficiente diferencial de $y$ em relação a $x$.
+
+    Uma expressão desse tipo precisará de um pouco mais de conhecimento do que adquirimos até agora; no entanto, sempre vale a pena tentar verificar se a expressão pode ser colocada em uma forma mais simples.
+
+    Primeiro, devemos tentar colocá-la na forma$y =$ alguma expressão envolvendo apenas$x$. Já que é o que sabemos derivar até aqui.
+
+    A expressão pode ser escrita como
+
+    $$
+    (a - b)y + (a + b)x = (x + y) \sqrt{a^2 - b^2}.
+    $$
+
+    Elevando ao quadrado, obtemos
+
+    $$
+    (a - b)^2 y^2 + (a + b)^2 x^2 + 2(a + b)(a - b)xy = (x^2 + y^2 + 2xy)(a^2 - b^2),
+    $$
+
+    o que simplifica para
+
+    $$
+    (a - b)^2 y^2 + (a + b)^2 x^2 = x^2 (a^2 - b^2) + y^2 (a^2 - b^2);
+    $$
+
+    ou
+
+    $$
+    [(a - b)^2 - (a^2 - b^2)] y^2 = [(a^2 - b^2) - (a + b)^2] x^2,
+    $$
+
+    ou seja:
+
+    $$
+    2b(b - a)y^2 = -2b(b + a)x^2;
+    $$
+
+    portanto,
+
+    $$
+    y = \sqrt{\frac{a + b}{a - b}} x \quad \text{e} \quad \frac{dy}{dx} = \sqrt{\frac{a + b}{a - b}}.
+    $$
+
+4. O volume de um cilindro de raio $r$ e altura $h$ é dado pela fórmula $V = \pi r^2 h$. Encontre a taxa de variação do volume em relação ao raio quando $r = 5.5 \, \text{cm}$ centímetros e $h = 20\, \text{cm}$. Se $r = h$, encontre as dimensões do cilindro para que uma mudança de $1\, \text{cm}$ no raio cause uma mudança de $400 \, \text{cm}^3$ no volume.
+
+    O problema pede para encontrar a taxa de variação do volume de um cilindro em relação ao seu raio, dado que o volume é $V = \pi r^2 h$. Em seguida, pede as dimensões do cilindro para que uma mudança de $1 \, \text{cm}$ no raio cause uma mudança de $400 \, \text{cm}^3$ no volume, quando $r = h$.
+
+    Podemos começar com a taxa de variação do volume em relação ao raio. Esta taxa de variação será obtida pela derivada:
+
+    $$\frac{d(\pi r^2 h)}{dr} = 2 \pi rh$$
+
+    Substituindo $r = 5.5\, \text{cm}$ e $h = 20\, \text{cm}$, obteremos:
+
+    $$\frac{dV}{dr} = 2 \pi (5.5)(20) = 691.15 \, \text{cm}^3/\text{cm}$$
+
+    Isso quer dizer que, para um cilindro com raio de $5.5\, \text{cm}$ e altura de $20\, \text{cm}$, o volume aumenta aproximadamente $691.15 \, \text{cm}^3$ para cada aumento de $1\, \text{cm}$ no raio. Observe que esta taxa de variação é específica para os valores dados de $$ e $h$.
+
+    A segunda parte do problema pede as dimensões do cilindro para uma mudança específica no volume:
+
+    Se $r = h$, temos:
+
+    $$\frac{d(\pi r^2 h)}{dr} = 2 \pi r^2$$
+
+    Queremos que uma mudança de $1\, \text{cm}$ no raio cause uma mudança de $400 \, \text{cm}^3$ no volume, ou seja:
+
+    $$2 \pi r^2 = 400$$
+
+    Resolvendo para $r$:
+
+    $$r = \sqrt{\frac{400}{2 \pi}} = 7.98 \, \text{cm}$$
+
+    Como $r = h$, as dimensões do cilindro são:
+
+    $$r = h = 7.98 \, \text{cm}$$
+
+5. A leitura, $\theta$, de um "Pirômetro de Radiação Féry"[^4] está relacionada à temperatura em graus Celsius $t$ do corpo observado pela relação dada por:
+
+$$
+\frac{\theta}{\theta_1} = \left( \frac{t}{t_1} \right)^4
+$$
+
+Onde $\theta_1$ é a leitura correspondente a uma temperatura conhecida $t_1$ do corpo observado. Compare a sensibilidade do pirômetro às temperaturas $800^\circ \text{C}$, $1000^\circ \text{C}$, $1200^\circ \text{C}$, dado que ele leu $2$ quando a temperatura era $1000^\circ \text{C}$.
+Precisamos lembrar que a sensibilidade é a taxa de variação da leitura com a temperatura, ou seja, $\frac{d \theta}{dt}$.
+
+A fórmula pode ser escrita como
+
+$$
+\theta = \frac{\theta_1}{t_1^4} t^4 = \frac{2 t^4}{1000^4},
+$$
+
+onde $\theta_1 = 2$ e $t_1 = 1000$. Simplificando a equação, temos
+
+$$
+\theta = \frac{2 t^4}{(10^3)^4} = \frac{2 t^4}{10^{12}} = \frac{t^4}{5 \times 10^{11}}.
+$$
+
+Agora, diferenciamos $\theta$ em relação a $t$:
+
+$$
+\frac{d\theta}{dt} = \frac{d}{dt} \left( \frac{t^4}{5 \times 10^{11}} \right) = \frac{4 t^3}{5 \times 10^{11}}.
+$$
+
+Vamos calcular a sensibilidade para $t = 800$, $1000$ e $1200$:
+
+Para $t = 800$:
+
+$$
+\frac{d\theta}{dt} \bigg|_{t=800} = \frac{4 \times 800^3}{5 \times 10^{11}} = \frac{4 \times 512 \times 10^6}{5 \times 10^{11}} = \frac{2048 \times 10^6}{5 \times 10^{11}} = 0.04096.
+$$
+
+Para $t = 1000$:
+
+$$
+\frac{d\theta}{dt} \bigg|_{t=1000} = \frac{4 \times 1000^3}{5 \times 10^{11}} = \frac{4 \times 10^9}{5 \times 10^{11}} = 0.08.
+$$
+
+Para $t = 1200$:
+
+$$
+\frac{d\theta}{dt} \bigg|_{t=1200} = \frac{4 \times 1200^3}{5 \times 10^{11}} = \frac{4 \times 1.728 \times 10^9}{5 \times 10^{11}} = \frac{6.912 \times 10^9}{5 \times 10^{11}} = 0.13824.
+$$
+
+A sensibilidade é aproximadamente dobrada de $800^\circ \text{C}$ para $1000^\circ \text{C}$, e torna-se aproximadamente 1.73 vezes maior novamente até $1200^\circ \text{C}$.
+
+### EXERCÍCIOS II
+
+Aplique os conceitos de derivação que vimos até agora para resolver os seguintes exercícios e problemas:
+
+(1) $ y = ax^3 + 6$. Resposta: $\frac{dx}{dy} = 3ax^2$
+
+(2) $ y = 13x^{\frac{3}{2}} - c$. Resposta: $\frac{dx}{dy} = 13 \times \frac{3}{2}x^{\frac{1}{2}}$
+
+(3) $ y = 12x^{\frac{1}{2}} + c x^{\frac{1}{2}}$. Resposta: $\frac{dx}{dy} = 6x^{-\frac{1}{2}} $
+
+(4) $ y = c^{\frac{1}{2}} x^{\frac{1}{2}}$. Resposta: $\frac{dx}{dy} = \frac{1}{2}C^{\frac{1}{2}}x^{-\frac{1}{2}}$
+
+(5) $ u = \frac{az^n - 1}{c}$. Resposta: $frac{du}{dy} = \frac{an}{c}z^{n-1}$
+
+(6) $ y = 1.18t^2 + 22.4$. Resposta: $frac{dx}{dy} = $2.36t$
+
+Crie alguns outros exemplos para si mesmo e tente diferenciá-los. E vamos ver alguns problemas:
+
+(7) Se $l_t$ e $l_0$ forem os comprimentos de uma barra de ferro nas temperaturas $ t^\circ \text{C}$ e $0^\circ \text{C}$, respectivamente, então $l_t = l_0 (1 + 0.000012t)$. Encontre a variação do comprimento da barra por grau Celsius. Resposta: $frac{dx}{dy} = 0.000012\times l_0$
+
+(8) Foi constatado que se $c$ for a potência de uma lâmpada incandescente e $V$ for a voltagem, $c = aV^b$, onde $a$ e $b$ são constantes. Encontre a taxa de variação da potência luminosa com a voltagem e calcule a mudança de potência luminosa por volt em 80, 100 e 120 volts no caso de uma lâmpada para a qual $a = 0.5 \times 10^{-10}$ e $b = 6$. Resposta: $
+\frac{dC}{dV} = abV^{b-1}, \, 0.98, \, 3.00 \, \text{e} \, 7.47 \, \text {watts por volt, respectivamente}$
+
+(9) A frequência $n$ de vibração de uma corda de diâmetro $D$, comprimento $L$ e gravidade específica $\sigma$, esticada com uma força $T$, é dada por
+
+$$
+n = \frac{1}{DL} \sqrt{\frac{gT}{\pi \sigma}}.
+$$
+
+Encontre a taxa de variação da frequência quando $D$, $L$, $\sigma$ e $T$ são variáveis independentes. Resposta:
+
+$$
+\frac{dn}{dD} = -\frac{1}{LD^2} \sqrt{\frac{gT}{\pi \sigma}}, \quad \frac{dn}{dL} = -\frac{1}{DL^2} \sqrt{\frac{gT}{\pi \sigma}},
+$$
+
+$$
+\frac{dn}{d\sigma} = -\frac{1}{2DL} \sqrt{\frac{gT}{\pi \sigma^3}}, \quad \frac{dn}{dT} = \frac{1}{2DL} \sqrt{\frac{g}{\pi \sigma T}}.
+$$
+
+(10) A maior pressão externa $P$ que um tubo pode suportar sem colapsar é dada por
+
+$$
+P = \left( \frac{2E}{1 - \sigma^2} \right) \frac{t^3}{D^3},
+$$
+
+onde $E$ e $\sigma$ são constantes, $t$ é a espessura do tubo e $D$ é seu diâmetro. (Esta fórmula assume que $4t$ é pequeno em comparação com $D$.)
+
+a) Compare a taxa em que $P$ varia para uma pequena mudança de espessura e para uma pequena mudança de diâmetro ocorrendo separadamente.
+
+b) Compare a taxa na qual $P$ varia para uma pequena mudança de espessura e para uma pequena mudança de diâmetro ocorrendo separadamente.
+
+Resposta:  
+$$
+\frac{\text{Taxa de variação de } P \text{ quando } t \text{ varia}}{\text{Taxa de variação de } P \text{ quando } D \text{ varia}} = -\frac{D}{t}
+$$
+
+(11) Encontre, a partir dos primeiros princípios, a taxa na qual os seguintes variam em relação a uma mudança no raio:
+(a) - a circunferência de um círculo de raio $r$;
+(b) - a área de um círculo de raio $r$;
+(c) - a área lateral de um cone de dimensão inclinada $l$;
+(d) - o volume de um cone de raio $r$ e altura $h$;
+(e) - a área de uma esfera de raio $r$;
+(f) - o volume de uma esfera de raio $r$.
+
+Resposta: $ \quad 2\pi, \, 2\pi r, \, \pi l, \, \frac{2}{3} \pi rh, \, 8\pi r, \, 4\pi r^2$
+
+(12) O comprimento $L$ de uma barra de ferro na temperatura $T$ é dado por
+$$
+L = l_t \left[ 1 + 0.000012 (T - t) \right],
+$$
+onde $l_t$ é o comprimento na temperatura $t$. Encontre a taxa de variação do diâmetro $D$ de um pneu de ferro adequado para ser encolhido em uma roda, quando a temperatura $T$ varia.
+
+Resposta: $ \quad \frac{dD}{dT} = \frac{0.000012 l_t}{\pi}$
 
 ## Notas de Rodapé
 
@@ -613,6 +913,8 @@ Assim como antes, suponha que \(x\) cresça para \(x + dx\) e \(y\) cresça para
 [^2]:Nesta posição a relação entre $dx$ e $dy$ será 1, isso irá ocorrer quando os lados do triângulo formado entre a escada e o chão for de $45^\circ$.
 
 [^3]A forma clássica do teorema binomial, com coeficientes binomiais e combinações, foi desenvolvida, ao longo do tempo, por matemáticos como Al-Karaji, Jia Xian e Omar Khayyam antes de Newton. Isaac Newton, por sua vez, generalizou o teorema para incluir potências fracionárias e negativas, expandindo seu alcance e aplicações.
+
+[^4] O Pirômetro de Radiação Féry é um dispositivo projetado para medir altas temperaturas detectando a radiação térmica emitida por um objeto. Inventado por Charles Féry no início do século XX, foi um avanço significativo na pirometria, a ciência da medição de temperatura.
 
 ## Apêndice 1 - Binômio de Newton
 
@@ -684,300 +986,486 @@ Estas duas formas do teorema binomial permitem a expansão de potências de bin�
 
 ## Exercícios Resolvidos
 
-### EXERCÍCIOS I
+### EXERCÍCIOS I RESOLVIDOS
 
 1. $y = x^{13}$
 
-$$
-y + dy = (x + dx)^{13}
-$$
+    $$
+    y + dy = (x + dx)^{13}
+    $$
 
-Expandindo pelo binômio de Newton, obtemos:
+    Expandindo pelo binômio de Newton, obtemos:
 
-$$
-y + dy = x^{13} + 13x^{12} \cdot dx + \text{termos com } (dx)^2 \text{ e superiores}
-$$
+    $$
+    y + dy = x^{13} + 13x^{12} \cdot dx + \text{termos com } (dx)^2 \text{ e superiores}
+    $$
 
-Negligenciando os termos de ordem superior:
+    Negligenciando os termos de ordem superior:
 
-$$
-y + dy = x^{13} + 13x^{12} \cdot dx
-$$
+    $$
+    y + dy = x^{13} + 13x^{12} \cdot dx
+    $$
 
-Subtraindo $y = x^{13}$:
+    Subtraindo $y = x^{13}$:
 
-$$
-dy = 13x^{12} \cdot dx
-$$
+    $$
+    dy = 13x^{12} \cdot dx
+    $$
 
-Portanto:
+    Portanto:
 
-$$
-\frac{dy}{dx} = 13x^{12}
-$$
+    $$
+    \frac{dy}{dx} = 13x^{12}
+    $$
 
 2. $y = x^{-\frac{3}{2}}$
 
-$$
-y + dy = (x + dx)^{-\frac{3}{2}}
-$$
+    $$
+    y + dy = (x + dx)^{-\frac{3}{2}}
+    $$
 
-Expandindo pelo binômio de Newton:
+    Expandindo pelo binômio de Newton:
 
-$$
-y + dy = x^{-\frac{3}{2}} - \frac{3}{2} x^{-\frac{5}{2}} \cdot dx + \text{termos com } (dx)^2 \text{ e superiores}
-$$
+    $$
+    y + dy = x^{-\frac{3}{2}} - \frac{3}{2} x^{-\frac{5}{2}} \cdot dx + \text{termos com } (dx)^2 \text{ e superiores}
+    $$
 
-Negligenciando os termos de ordem superior:
+    Negligenciando os termos de ordem superior:
 
-$$
-y + dy = x^{-\frac{3}{2}} - \frac{3}{2} x^{-\frac{5}{2}} \cdot dx
-$$
+    $$
+    y + dy = x^{-\frac{3}{2}} - \frac{3}{2} x^{-\frac{5}{2}} \cdot dx
+    $$
 
-Subtraindo $y = x^{-\frac{3}{2}}$:
+    Subtraindo $y = x^{-\frac{3}{2}}$:
 
-$$
-dy = -\frac{3}{2} x^{-\frac{5}{2}} \cdot dx
-$$
+    $$
+    dy = -\frac{3}{2} x^{-\frac{5}{2}} \cdot dx
+    $$
 
-Portanto:
+    Portanto:
 
-$$
-\frac{dy}{dx} = -\frac{3}{2} x^{-\frac{5}{2}}
-$$
+    $$
+    \frac{dy}{dx} = -\frac{3}{2} x^{-\frac{5}{2}}
+    $$
 
 3. $y = x^{2a}$
 
-$$
-y + dy = (x + dx)^{2a}
-$$
+    $$
+    y + dy = (x + dx)^{2a}
+    $$
 
-Expandindo pelo binômio de Newton:
+    Expandindo pelo binômio de Newton:
 
-$$
-y + dy = x^{2a} + 2a x^{2a-1} \cdot dx + \text{termos com } (dx)^2 \text{ e superiores}
-$$
+    $$
+    y + dy = x^{2a} + 2a x^{2a-1} \cdot dx + \text{termos com } (dx)^2 \text{ e superiores}
+    $$
 
-Negligenciando os termos de ordem superior:
+    Negligenciando os termos de ordem superior:
 
-$$
-y + dy = x^{2a} + 2a x^{2a-1} \cdot dx
-$$
+    $$
+    y + dy = x^{2a} + 2a x^{2a-1} \cdot dx
+    $$
 
-Subtraindo $y = x^{2a}$:
+    Subtraindo $y = x^{2a}$:
 
-$$
-dy = 2a x^{2a-1} \cdot dx
-$$
+    $$
+    dy = 2a x^{2a-1} \cdot dx
+    $$
 
-Portanto:
+    Portanto:
 
-$$
-\frac{dy}{dx} = 2a x^{2a-1}
-$$
+    $$
+    \frac{dy}{dx} = 2a x^{2a-1}
+    $$
 
 4. $u = t^{2.4}$
 
-$$
-u + du = (t + dt)^{2.4}
-$$
+    $$
+    u + du = (t + dt)^{2.4}
+    $$
 
-Expandindo pelo binômio de Newton:
+    Expandindo pelo binômio de Newton:
 
-$$
-u + du = t^{2.4} + 2.4 t^{1.4} \cdot dt + \text{termos com } (dt)^2 \text{ e superiores}
-$$
+    $$
+    u + du = t^{2.4} + 2.4 t^{1.4} \cdot dt + \text{termos com } (dt)^2 \text{ e superiores}
+    $$
 
-Negligenciando os termos de ordem superior:
+    Negligenciando os termos de ordem superior:
 
-$$
-u + du = t^{2.4} + 2.4 t^{1.4} \cdot dt
-$$
+    $$
+    u + du = t^{2.4} + 2.4 t^{1.4} \cdot dt
+    $$
 
-Subtraindo $u = t^{2.4}$:
+    Subtraindo $u = t^{2.4}$:
 
-$$
-du = 2.4 t^{1.4} \cdot dt
-$$
+    $$
+    du = 2.4 t^{1.4} \cdot dt
+    $$
 
-Portanto:
+    Portanto:
 
-$$
-\frac{du}{dt} = 2.4 t^{1.4}
-$$
+    $$
+    \frac{du}{dt} = 2.4 t^{1.4}
+    $$
 
 5. $z = \sqrt[3]{u}$
 
-$$
-z + dz = (u + du)^{\frac{1}{3}}
-$$
+    $$
+    z + dz = (u + du)^{\frac{1}{3}}
+    $$
 
-Expandindo pelo binômio de Newton:
+    Expandindo pelo binômio de Newton:
 
-$$
-z + dz = u^{\frac{1}{3}} + \frac{1}{3} u^{-\frac{2}{3}} \cdot du + \text{termos com } (du)^2 \text{ e superiores}
-$$
+    $$
+    z + dz = u^{\frac{1}{3}} + \frac{1}{3} u^{-\frac{2}{3}} \cdot du + \text{termos com } (du)^2 \text{ e superiores}
+    $$
 
-Negligenciando os termos de ordem superior:
+    Negligenciando os termos de ordem superior:
 
-$$
-z + dz = u^{\frac{1}{3}} + \frac{1}{3} u^{-\frac{2}{3}} \cdot du
-$$
+    $$
+    z + dz = u^{\frac{1}{3}} + \frac{1}{3} u^{-\frac{2}{3}} \cdot du
+    $$
 
-Subtraindo $z = u^{\frac{1}{3}}$:
+    Subtraindo $z = u^{\frac{1}{3}}$:
 
-$$
-dz = \frac{1}{3} u^{-\frac{2}{3}} \cdot du
-$$
+    $$
+    dz = \frac{1}{3} u^{-\frac{2}{3}} \cdot du
+    $$
 
-Portanto:
+    Portanto:
 
-$$
-\frac{dz}{du} = \frac{1}{3} u^{-\frac{2}{3}}
-$$
+    $$
+    \frac{dz}{du} = \frac{1}{3} u^{-\frac{2}{3}}
+    $$
 
 6. $y = \sqrt[3]{x^{-5}}$
 
-$$
-y + dy = (x + dx)^{-\frac{5}{3}}
-$$
+    $$
+    y + dy = (x + dx)^{-\frac{5}{3}}
+    $$
 
-Expandindo pelo binômio de Newton:
+    Expandindo pelo binômio de Newton:
 
-$$
-y + dy = x^{-\frac{5}{3}} - \frac{5}{3} x^{-\frac{8}{3}} \cdot dx + \text{termos com } (dx)^2 \text{ e superiores}
-$$
+    $$
+    y + dy = x^{-\frac{5}{3}} - \frac{5}{3} x^{-\frac{8}{3}} \cdot dx + \text{termos com } (dx)^2 \text{ e superiores}
+    $$
 
-Negligenciando os termos de ordem superior:
+    Negligenciando os termos de ordem superior:
 
-$$
-y + dy = x^{-\frac{5}{3}} - \frac{5}{3} x^{-\frac{8}{3}} \cdot dx
-$$
+    $$
+    y + dy = x^{-\frac{5}{3}} - \frac{5}{3} x^{-\frac{8}{3}} \cdot dx
+    $$
 
-Subtraindo $y = x^{-\frac{5}{3}}$:
+    Subtraindo $y = x^{-\frac{5}{3}}$:
 
-$$
-dy = -\frac{5}{3} x^{-\frac{8}{3}} \cdot dx
-$$
+    $$
+    dy = -\frac{5}{3} x^{-\frac{8}{3}} \cdot dx
+    $$
 
-Portanto:
+    Portanto:
 
-$$
-\frac{dy}{dx} = -\frac{5}{3} x^{-\frac{8}{3}}
-$$
+    $$
+    \frac{dy}{dx} = -\frac{5}{3} x^{-\frac{8}{3}}
+    $$
 
 7. $u = \sqrt{\frac{1}{x^8}}$
 
-$$
-u + du = (x + dx)^{-4}
-$$
+    $$
+    u + du = (x + dx)^{-4}
+    $$
 
-Expandindo pelo binômio de Newton:
+    Expandindo pelo binômio de Newton:
 
-$$
-u + du = x^{-4} - 4 x^{-5} \cdot dx + \text{termos com } (dx)^2 \text{ e superiores}
-$$
+    $$
+    u + du = x^{-4} - 4 x^{-5} \cdot dx + \text{termos com } (dx)^2 \text{ e superiores}
+    $$
 
-Negligenciando os termos de ordem superior:
+    Negligenciando os termos de ordem superior:
 
-$$
-u + du = x^{-4} - 4 x^{-5} \cdot dx
-$$
+    $$
+    u + du = x^{-4} - 4 x^{-5} \cdot dx
+    $$
 
-Subtraindo $u = x^{-4}$:
+    Subtraindo $u = x^{-4}$:
 
-$$
-du = -4 x^{-5} \cdot dx
-$$
+    $$
+    du = -4 x^{-5} \cdot dx
+    $$
 
-Portanto:
+    Portanto:
 
-$$
-\frac{du}{dx} = -4x^{-5}
-$$
+    $$
+    \frac{du}{dx} = -4x^{-5}
+    $$
 
 8. $y = 2x^{a}$
 
-$$
-y + dy = 2(x + dx)^{a}
-$$
+    $$
+    y + dy = 2(x + dx)^{a}
+    $$
 
-Expandindo pelo binômio de Newton:
+    Expandindo pelo binômio de Newton:
 
-$$
-y + dy = 2(x^a + a x^{a-1} \cdot dx + \text{termos com } (dx)^2 \text{ e superiores})
-$$
+    $$
+    y + dy = 2(x^a + a x^{a-1} \cdot dx + \text{termos com } (dx)^2 \text{ e superiores})
+    $$
 
-Negligenciando os termos de ordem superior:
+    Negligenciando os termos de ordem superior:
 
-$$
-y + dy = 2x^a + 2a x^{a-1} \cdot dx
-$$
+    $$
+    y + dy = 2x^a + 2a x^{a-1} \cdot dx
+    $$
 
-Subtraindo $y = 2x^a$:
+    Subtraindo $y = 2x^a$:
 
-$$
-dy = 2a x^{a-1} \cdot dx
-$$
+    $$
+    dy = 2a x^{a-1} \cdot dx
+    $$
 
-Portanto:
+    Portanto:
 
-$$
-\frac{dy}{dx} = 2a x^{a-1}
-$$
+    $$
+    \frac{dy}{dx} = 2a x^{a-1}
+    $$
 
 9. $y = \sqrt[3]{x^3}$
 
-$$
-y + dy = (x + dx)
-$$
+    $$
+    y + dy = (x + dx)
+    $$
 
-Expandindo:
+    Expandindo:
 
-$$
-y + dy = x + dx
-$$
+    $$
+    y + dy = x + dx
+    $$
 
-Subtraindo $y = x$:
+    Subtraindo $y = x$:
 
-$$
-dy = dx
-$$
+    $$
+    dy = dx
+    $$
 
-Portanto:
+    Portanto:
 
-$$
-\frac{dy}{dx} = 1
-$$
+    $$
+    \frac{dy}{dx} = 1
+    $$
 
 10. $y = \sqrt{\frac{1}{x^m}}$
 
+    $$
+    y + dy = (x + dx)^{-\frac{m}{2}}
+    $$
+
+    Expandindo pelo binômio de Newton:
+
+    $$
+    y + dy = x^{-\frac{m}{2}} - \frac{m}{2} x^{-\frac{m+2}{2}} \cdot dx + \text{termos com } (dx)^2 \text{ e superiores}
+    $$
+
+    Negligenciando os termos de ordem superior:
+
+    $$
+    y + dy = x^{-\frac{m}{2}} - \frac{m}{2} x^{-\frac{m+2}{2}} \cdot dx
+    $$
+
+    Subtraindo $y = x^{-\frac{m}{2}}$:
+
+    $$
+    dy = -\frac{m}{2} x^{-\frac{m+2}{2}} \cdot dx
+    $$
+
+    Portanto:
+
+    $$
+    \frac{dy}{dx} = -\frac{m}{2} x^{-\frac{m+2}{2}}
+    $$
+
+### Exercícios II Resolvidos
+
+Aplique os conceitos de derivação que vimos até agora para resolver os seguintes exercícios e problemas:
+
+1. $y = ax^3 + 6$:
+
+    Derivando ambos os lados da equação em relação a $x$:
+
+    $$
+    \frac{dy}{dx} = \frac{d}{dx}(ax^3 + 6)
+    $$
+
+    Observando que $3a$ é uma constante, podemos usar a regra da potência para derivar $ax^3$ e a constante somada, resultando em:
+
+    $$
+    \frac{dy}{dx} = 3ax^2 + 0 = 3ax^2
+    $$
+
+2. $y = 13x^{\frac{3}{2}} - c$:
+
+    Derive ambos os lados da equação em relação a $x$:
+
+    $$
+    \frac{dy}{dx} = \frac{d}{dx}(13x^{\frac{3}{2}} - c)
+    $$
+
+    Aplique a regra da potência para derivar $13x^{\frac{3}{2}}$ e a constante:
+
+    $$
+    \frac{dy}{dx} = 13 \times \frac{3}{2} x^{\frac{3}{2} - 1} = 13 \times \frac{3}{2} x^{\frac{1}{2}} = \frac{39}{2} x^{\frac{1}{2}}
+    $$
+
+3. $y = 12x^{\frac{1}{2}} + cx^{\frac{1}{2}}$:
+
+    Combine os termos semelhantes:
+
+    $$
+    y = (12 + c) x^{\frac{1}{2}}
+    $$
+
+    Derive ambos os lados da equação em relação a $x$:
+
+    $$
+    \frac{dy}{dx} = \frac{d}{dx}((12 + c) x^{\frac{1}{2}})
+    $$
+
+    Aplique a regra da potência:
+
+    $$
+    \frac{dy}{dx} = (12 + c) \times \frac{1}{2} x^{\frac{1}{2} - 1} = \frac{(12 + c)}{2} x^{-\frac{1}{2}}
+    $$
+
+4. $y = c^{\frac{1}{2}} x^{\frac{1}{2}}$:
+
+    Derive ambos os lados da equação em relação a $x$:
+
+    $$
+    \frac{dy}{dx} = \frac{d}{dx}(c^{\frac{1}{2}} x^{\frac{1}{2}})
+    $$
+
+    Aplique a regra da potência:
+
+    $$
+    \frac{dy}{dx} = c^{\frac{1}{2}} \cdot \frac{1}{2} x^{\frac{1}{2} - 1} = \frac{c^{\frac{1}{2}}}{2} x^{-\frac{1}{2}}
+    $$
+
+5. $u = \frac{az^n - 1}{c}$:
+
+    Derive ambos os lados da equação em relação a $z$:
+
+    $$
+    \frac{du}{dz} = \frac{d}{dz}\left(\frac{az^n - 1}{c}\right)
+    $$
+
+    A constante $\frac{1}{c}$ pode ser fatorada para fora da derivada:
+
+    $$
+    \frac{du}{dz} = \frac{1}{c} \frac{d}{dz}(az^n - 1)
+    $$
+
+    Aplique a regra da potência e a constante:
+
+    $$
+    \frac{du}{dz} = \frac{1}{c} \left( a \cdot \frac{d}{dz}(z^n) - \frac{d}{dz}(1) \right)
+    $$
+
+    Derive $z^n$:
+
+    $$
+    \frac{d}{dz}(z^n) = n z^{n-1}
+    $$
+
+    Substitua a derivada de $z^n$:
+
+    $$
+    \frac{du}{dz} = \frac{1}{c} \left( a \cdot n z^{n-1} - 0 \right) = \frac{an}{c} z^{n-1}
+    $$
+
+6. $u = \frac{az^n - 1}{c}$:
+
+    Derive ambos os lados da equação em relação a $z$:
+
+    $$
+    \frac{du}{dz} = \frac{d}{dz}\left(\frac{az^n - 1}{c}\right)
+    $$
+
+    A constante $\frac{1}{c}$ pode ser fatorada para fora da derivada:
+
+    $$
+    \frac{du}{dz} = \frac{1}{c} \frac{d}{dz}(az^n - 1)
+    $$
+
+    Aplique a regra da potência e a constante:
+
+    $$
+    \frac{du}{dz} = \frac{1}{c} \left( a \cdot \frac{d}{dz}(z^n) - \frac{d}{dz}(1) \right)
+    $$
+
+    Derive $z^n$:
+
+    $$
+    \frac{d}{dz}(z^n) = n z^{n-1}
+    $$
+
+    Substitua a derivada de $z^n$:
+
+    $$
+    \frac{du}{dz} = \frac{1}{c} \left( a \cdot n z^{n-1} - 0 \right) = \frac{an}{c} z^{n-1}
+    $$
+
+    Portanto, a solução correta é:
+
+    $$
+    \frac{du}{dz} = \frac{an}{c} z^{n-1}
+    $$
+
+7. $y = 1.18t^2 + 22.4$:
+
+    Derive ambos os lados da equação em relação a $t$:
+
+    $$
+    \frac{dy}{dt} = \frac{d}{dt}(1.18t^2 + 22.4)
+    $$
+
+    Aplique a regra da potência para derivar $1.18t^2$ e a constante:
+
+    $$
+    \frac{dy}{dt} = 1.18 \times 2 t + 0 = 2.36t
+    $$
+
+8. ### Problema 7
+#### Explicação do Problema
+Dado que \( l_t \) e \( l_0 \) são os comprimentos de uma barra de ferro nas temperaturas \( t^\circ \text{C} \) e \( 0^\circ \text{C} \), respectivamente, a relação entre o comprimento da barra e a temperatura é dada pela fórmula:
+
 $$
-y + dy = (x + dx)^{-\frac{m}{2}}
+l_t = l_0 (1 + 0.000012t)
 $$
 
-Expandindo pelo binômio de Newton:
+Desejamos encontrar a variação do comprimento da barra por grau Celsius, isto é, a taxa de variação do comprimento \( l_t \) em relação à temperatura \( t \).
+
+#### Solução
+
+1. Escreva a função original:
+   $$
+   l_t = l_0 (1 + 0.000012t)
+   $$
+
+2. Derive ambos os lados da equação em relação a \( t \):
+   $$
+   \frac{dl_t}{dt} = l_0 \cdot \frac{d}{dt}(1 + 0.000012t)
+   $$
+
+3. Aplique a regra da derivada:
+   $$
+   \frac{d}{dt}(1 + 0.000012t) = 0 + 0.000012 = 0.000012
+   $$
+
+4. Substitua a derivada na equação original:
+   $$
+   \frac{dl_t}{dt} = l_0 \cdot 0.000012 = 0.000012 \cdot l_0
+   $$
+
+Portanto, a solução correta é:
 
 $$
-y + dy = x^{-\frac{m}{2}} - \frac{m}{2} x^{-\frac{m+2}{2}} \cdot dx + \text{termos com } (dx)^2 \text{ e superiores}
+\frac{dl_t}{dt} = 0.000012 \times l_0
 $$
-
-Negligenciando os termos de ordem superior:
-
-$$
-y + dy = x^{-\frac{m}{2}} - \frac{m}{2} x^{-\frac{m+2}{2}} \cdot dx
-$$
-
-Subtraindo $y = x^{-\frac{m}{2}}$:
-
-$$
-dy = -\frac{m}{2} x^{-\frac{m+2}{2}} \cdot dx
-$$
-
-Portanto:
-
-$$
-\frac{dy}{dx} = -\frac{m}{2} x^{-\frac{m+2}{2}}
-$$
-
-Você agora aprendeu como diferenciar potências de $x$. Como é fácil!
