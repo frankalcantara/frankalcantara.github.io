@@ -39,7 +39,7 @@
         {
           "title": "featured",
           "name": "featured",
-          "type": "datetime"
+          "type": "boolean"
         },
         {
           "title": "rating",
@@ -64,26 +64,21 @@
         {
           "title": "keywords",
           "name": "keywords",
-          "type": "choice",
-          "choices": [
-            "lógica",
-            "Programação",
-            "programação lógica"
-          ]
+          "type": "string"
+        },
+        {
+          "title": "toc",
+          "name": "toc",
+          "type": "boolean"
         },
         {
           "title": "published",
           "name": "published",
-          "type": "datetime"
+          "type": "boolean"
         },
         {
           "title": "draft",
           "name": "draft",
-          "type": "datetime"
-        },
-        {
-          "title": "slug",
-          "name": "slug",
           "type": "datetime"
         }
       ]

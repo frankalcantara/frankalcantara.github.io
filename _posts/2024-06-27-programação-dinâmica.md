@@ -1128,6 +1128,7 @@ Fibonacci(30) = 832040
 Average time for new tabulated Fibonacci: 115 ns
 Fibonacci(30) = 832040
 -----------------------------------
+```
 
 *Output 3: running C-Style array*{: class="legend"}
 
