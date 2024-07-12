@@ -84,7 +84,7 @@ Vimos que quanto menor for uma quantidade pequena em si, mais insignificante se 
 
 Outra coisa importante é que não podemos esquecer que pequenas quantidades, quando sujeitas, em nossas equações, a multiplicação por outro fator, podem se tornar relevantes caso o outro fator seja, em si grande para problema. Mesmo um "farthing" se torna importante se for multiplicado por centenas, milhares ou milhões de vezes.
 
-No cálculo, escrevemos $dx$ para representar um pedacinho de $x$, para representar uma fração muito pequena de $x$. Essas coisas como $dx$, e $du$, e $dy$, serão chamadas de *diferenciais*, e lidas como o diferencial de $x$, ou o diferencial de $u$, ou o diferencial de $y$, conforme o caso. Ou ainda, para sermos mais chegados a matemática, serão chamados de a derivada de $x$, a derivada de $y$ ou a derivada de$u$. Mesmo que $dx$ seja um pedacinho de $x$, e considerado relativamente pequeno em si mesmo para resolver o nosso problema, não deduzir que quantidades como $x \cdot dx$, ou $x^2 \, dx$, ou $a^x \, dx$ sejam insignificantes. Mas implica, sem nenhuma dúvida que $dx \times dx$ será insignificante, já que, neste caso teremos uma quantidade pequena da segunda ordem.
+No cálculo, escrevemos $dx$ para representar um pedacinho de $x$, para representar uma fração muito pequena de $x$. Essas coisas como $dx$, e $du$, e $dy$, serão chamadas de *diferenciais*, e lidas como o diferencial de $x$, ou o diferencial de $u$, ou o diferencial de $y$, conforme o caso. Ou ainda, para sermos mais chegados a matemática, serão chamados de a derivada de $x$, a derivada de $y$ ou a derivada de$u$. Mesmo que $dx$ seja um pedacinho de $x$, e considerado relativamente pequeno em si mesmo para resolver o nosso problema, não deduzir que quantidades como $x \times dx$, ou $x^2 \, dx$, ou $a^x \, dx$ sejam insignificantes. Mas implica, sem nenhuma dúvida que $dx \times dx$ será insignificante, já que, neste caso teremos uma quantidade pequena da segunda ordem.
 
 Um exemplo muito simples servirá como ilustração.{#volta1}
 
@@ -234,19 +234,19 @@ $$
 Fazendo o quadrado, obtemos:
 
 $$
-y + dy = x^2 + 2x \cdot dx + (dx)^2
+y + dy = x^2 + 2x \times dx + (dx)^2
 $$
 
 O que $(dx)^2$ significa? Lembre-se de que $dx$ significava uma parte, fração, muito pequena de $x$. Então, $(dx)^2$ significará uma fração de uma fração $x$; isto é, conforme explicado anteriormente, é uma quantidade da segunda ordem de pequenez. Pode, portanto, ser descartado por ser insignificante em comparação com os outros termos. ou seja:
 
 $$
-y + dy = x^2 + 2x \cdot dx
+y + dy = x^2 + 2x \times dx
 $$
 
 Agora, $y = x^2$; então vamos subtrair isso da equação e ficamos com:
 
 $$
-dy = 2x \cdot dx
+dy = 2x \times dx
 $$
 
 Como estamos buscando uma razão, dividindo por $dx$, encontramos:
@@ -300,19 +300,19 @@ $$
 Abrindo este cubo, obtemos:
 
 $$
-y + dy = x^3 + 3x^2 \cdot dx + 3x(dx)^2 + (dx)^3
+y + dy = x^3 + 3x^2 \times dx + 3x(dx)^2 + (dx)^3
 $$
 
 Agora, como sabemos que podemos negligenciar pequenas quantidades da segunda e terceira ordens, sempre que $dy$ e $dx$ são considerados infinitamente pequenos, $(dx)^2$ e $(dx)^3$ se tornarão infinitamente menores que $dy$ e $dx$. Assim, considerando-os insignificantes, teremos:
 
 $$
-y + dy = x^3 + 3x^2 \cdot dx
+y + dy = x^3 + 3x^2 \times dx
 $$
 
 Como $y = x^3$; podemos subtrair $y$ dos dois lados e termos:
 
 $$
-dy = 3x^2 \cdot dx
+dy = 3x^2 \times dx
 $$
 
 Mas, o que queremos é uma relação. Logo:
@@ -332,19 +332,19 @@ $$
 Abrindo a quarta a quarta potência, obtemos:
 
 $$
-y + dy = x^4 + 4x^3 \cdot dx + 6x^2 (dx)^2 + 4x(dx)^3 + (dx)^4
+y + dy = x^4 + 4x^3 \times dx + 6x^2 (dx)^2 + 4x(dx)^3 + (dx)^4
 $$
 
 Então, eliminando os termos que contêm todas as maiores potências de $dx$, como sendo insignificantes, teremos:
 
 $$
-y + dy = x^4 + 4x^3 \cdot dx
+y + dy = x^4 + 4x^3 \times dx
 $$
 
 Subtraindo o original $y = x^4$, ficamos com:
 
 $$
-dy = 4x^3 \cdot dx
+dy = 4x^3 \times dx
 $$
 
 Como o que buscamos é uma relação:
@@ -372,19 +372,19 @@ y + dy = (x + dx)^5
 $$
 
 $$
-= x^5 + 5x^4 \cdot dx + 10x^3 (dx)^2 + 10x^2 (dx)^3 + 5x (dx)^4 + (dx)^5.
+= x^5 + 5x^4 \times dx + 10x^3 (dx)^2 + 10x^2 (dx)^3 + 5x (dx)^4 + (dx)^5.
 $$
 
 Ignorando todos os termos contendo pequenas quantidades de ordens superiores a 1, temos:
 
 $$
-y + dy = x^5 + 5x^4 \cdot dx,
+y + dy = x^5 + 5x^4 \times dx,
 $$
 
 Subtraindo $y = x^5$, dos dois lados do igual, obtemos:
 
 $$
-dy = 5x^4 \cdot dx,
+dy = 5x^4 \times dx,
 $$
 
 ou seja,
@@ -438,55 +438,55 @@ Vamos calcular cada termo da soma individual e cuidadosamente:
 1. Para $k = 0$:
 
     $$
-    \binom{8}{0} x^{8-0} (dx)^0 = 1 \cdot x^8 \cdot 1 = x^8
+    \binom{8}{0} x^{8-0} (dx)^0 = 1 \times x^8 \times 1 = x^8
     $$
 
 2. Para $k = 1$:
 
     $$
-    \binom{8}{1} x^{8-1} (dx)^1 = 8 \cdot x^7 \cdot dx = 8x^7 dx
+    \binom{8}{1} x^{8-1} (dx)^1 = 8 \times x^7 \times dx = 8x^7 dx
     $$
 
 3. Para $k = 2$:
 
     $$
-    \binom{8}{2} x^{8-2} (dx)^2 = 28 \cdot x^6 \cdot (dx)^2 = 28x^6 (dx)^2
+    \binom{8}{2} x^{8-2} (dx)^2 = 28 \times x^6 \times (dx)^2 = 28x^6 (dx)^2
     $$
 
 4. Para $k = 3$:
 
     $$
-    \binom{8}{3} x^{8-3} (dx)^3 = 56 \cdot x^5 \cdot (dx)^3 = 56x^5 (dx)^3
+    \binom{8}{3} x^{8-3} (dx)^3 = 56 \times x^5 \times (dx)^3 = 56x^5 (dx)^3
     $$
 
 5. Para $k = 4$:
 
     $$
-    \binom{8}{4} x^{8-4} (dx)^4 = 70 \cdot x^4 \cdot (dx)^4 = 70x^4 (dx)^4
+    \binom{8}{4} x^{8-4} (dx)^4 = 70 \times x^4 \times (dx)^4 = 70x^4 (dx)^4
     $$
 
 6. Para $k = 5$:
 
     $$
-    \binom{8}{5} x^{8-5} (dx)^5 = 56 \cdot x^3 \cdot (dx)^5 = 56x^3 (dx)^5
+    \binom{8}{5} x^{8-5} (dx)^5 = 56 \times x^3 \times (dx)^5 = 56x^3 (dx)^5
     $$
 
 7. Para $k = 6$:
 
     $$
-    \binom{8}{6} x^{8-6} (dx)^6 = 28 \cdot x^2 \cdot (dx)^6 = 28x^2 (dx)^6
+    \binom{8}{6} x^{8-6} (dx)^6 = 28 \times x^2 \times (dx)^6 = 28x^2 (dx)^6
     $$  
 
 8. Para $k = 7$:
 
     $$
-    \binom{8}{7} x^{8-7} (dx)^7 = 8 \cdot x^1 \cdot (dx)^7 = 8x (dx)^7
+    \binom{8}{7} x^{8-7} (dx)^7 = 8 \times x^1 \times (dx)^7 = 8x (dx)^7
     $$
 
 9. Para $k = 8$:
 
     $$
-    \binom{8}{8} x^{8-8} (dx)^8 = 1 \cdot x^0 \cdot (dx)^8 = (dx)^8
+    \binom{8}{8} x^{8-8} (dx)^8 = 1 \times x^0 \times (dx)^8 = (dx)^8
     $$
 
 Somando todos os termos, obtemos a expansão completa:
@@ -522,19 +522,19 @@ $$
 $$
 
 $$
-= x^{-2} - 2x^{-3} \cdot dx + 3x^{-4} (dx)^2 - 4x^{-5} (dx)^3 + \text{etc.}
+= x^{-2} - 2x^{-3} \times dx + 3x^{-4} (dx)^2 - 4x^{-5} (dx)^3 + \text{etc.}
 $$
 
 Assim, negligenciando as pequenas quantidades das ordens superiores de pequenez, teremos:
 
 $$
-y + dy = x^{-2} - 2x^{-3} \cdot dx.
+y + dy = x^{-2} - 2x^{-3} \times dx.
 $$
 
 Subtraindo o original $y = x^{-2}$, encontramos:
 
 $$
-dy = -2x^{-3} \cdot dx,
+dy = -2x^{-3} \times dx,
 $$
 
 $$
@@ -558,7 +558,7 @@ $$
 Subtraindo o original $y = x^{\frac{1}{2}}$, e ignorando as potências mais altas, temos:
 
 $$
-dy = \frac{1}{2} \frac{dx}{\sqrt{x}} = \frac{1}{2} x^{-\frac{1}{2}} \cdot dx,
+dy = \frac{1}{2} \frac{dx}{\sqrt{x}} = \frac{1}{2} x^{-\frac{1}{2}} \times dx,
 $$
 
 e, finalmente temos:
@@ -612,7 +612,7 @@ $$ = x^3 + 3x^2 dx + 3x(dx)^2 + (dx)^3 + 5 $$
 
 Descartando as pequenas quantidades de ordens superiores, teremos:
 
-$$ y + dy = x^3 + 3x^2 \cdot dx + 5 $$
+$$ y + dy = x^3 + 3x^2 \times dx + 5 $$
 
 Subtraindo  $y = x^3 + 5$, teremos:
 
@@ -632,13 +632,13 @@ Seja $y = 7x^2$. Prosseguindo como antes, obteremos:
 
 $$ y + dy = 7(x + dx)^2 $$
 
-$$ = 7(x^2 + 2x \cdot dx + (dx)^2) $$
+$$ = 7(x^2 + 2x \times dx + (dx)^2) $$
 
-$$ = 7x^2 + 14x \cdot dx + 7(dx)^2 $$
+$$ = 7x^2 + 14x \times dx + 7(dx)^2 $$
 
 Então, subtraindo $y = 7x^2$, e ignorando o último termo, temos:
 
-$$ dy = 14x \cdot dx $$
+$$ dy = 14x \times dx $$
 
 $$ \frac{dy}{dx} = 14x $$
 
@@ -664,13 +664,13 @@ No Gráfico 1 compare cuidadosamente as duas curvas traçadas. Observe que a alt
 Agora, se olharmos novamente o Caso 1, veremos que diferenciar $x^2$ nos dará $2x$. Assim, o coeficiente diferencial de $7x^2$ é $7$ vezes maior que o de $x^2$. Se tivéssemos tomado $8x^2$, o coeficiente diferencial teria sido $8$ vezes maior que o coeficiente diferencial de $x^2$. Se colocarmos $y = ax^2$, obteremos
 
 $$
-\frac{dy}{dx} = a \cdot 2x.
+\frac{dy}{dx} = a \times 2x.
 $$
 
 Se tivéssemos começado com $y = ax^n$, deveríamos ter encontrado:
 
 $$
-\frac{dy}{dx} = a \cdot nx^{n-1}.
+\frac{dy}{dx} = a \times nx^{n-1}.
 $$
 
 Então, qualquer multiplicação por uma constante reaparece como uma mera multiplicação do coeficiente diferencial quando a função é diferenciada. E, o que é verdadeiro para a multiplicação é igualmente verdadeiro para a divisão: pois, se no exemplo acima, tivéssemos tomado a constante $\frac{1}{7}$ em vez de $7$, teríamos o mesmo $\frac{1}{7}$ no resultado após a diferenciação.
@@ -836,42 +836,39 @@ A sensibilidade é aproximadamente dobrada de $800^\circ \text{C}$ para $1000^\c
 
 Aplique os conceitos de derivação que vimos até agora para resolver os seguintes exercícios e problemas:
 
-(1) $ y = ax^3 + 6$. Resposta: $\frac{dx}{dy} = 3ax^2$
+1. $ y = ax^3 + 6$. Resposta: $\frac{dx}{dy} = 3ax^2$
+2. $ y = 13x^{\frac{3}{2}} - c$. Resposta: $\frac{dx}{dy} = \frac{39}{2} x^{\frac{1}{2}}$
+3. $ y = 12x^{\frac{1}{2}} + c^{\frac{1}{2}}$. Resposta: $\frac{dx}{dy} = 6x^{-\frac{1}{2}} $
+4. $ y = c^{\frac{1}{2}} x^{\frac{1}{2}}$. Resposta: $\frac{dx}{dy} = \frac{1}{2}c^{\frac{1}{2}}x^{-\frac{1}{2}}$
+5. $ u = \frac{az^n - 1}{c}$. Resposta: $frac{du}{dy} = \frac{an}{c}z^{n-1}$
+6. $ y = 1.18t^2 + 22.4$. Resposta: $frac{dx}{dy} = $2.36t$
 
-(2) $ y = 13x^{\frac{3}{2}} - c$. Resposta: $\frac{dx}{dy} = 13 \times \frac{3}{2}x^{\frac{1}{2}}$
+    Crie alguns outros exemplos para si mesmo e tente diferenciá-los. E vamos ver alguns problemas:
 
-(3) $ y = 12x^{\frac{1}{2}} + c x^{\frac{1}{2}}$. Resposta: $\frac{dx}{dy} = 6x^{-\frac{1}{2}} $
+7. Se $l_t$ e $l_0$ forem os comprimentos de uma barra de ferro nas temperaturas $ t^\circ \text{C}$ e $0^\circ \text{C}$, respectivamente, então $l_t = l_0 (1 + 0.000012t)$. Encontre a variação do comprimento da barra por grau Celsius. Resposta: $frac{dx}{dy} = 0.000012\times l_0$
 
-(4) $ y = c^{\frac{1}{2}} x^{\frac{1}{2}}$. Resposta: $\frac{dx}{dy} = \frac{1}{2}C^{\frac{1}{2}}x^{-\frac{1}{2}}$
-
-(5) $ u = \frac{az^n - 1}{c}$. Resposta: $frac{du}{dy} = \frac{an}{c}z^{n-1}$
-
-(6) $ y = 1.18t^2 + 22.4$. Resposta: $frac{dx}{dy} = $2.36t$
-
-Crie alguns outros exemplos para si mesmo e tente diferenciá-los. E vamos ver alguns problemas:
-
-(7) Se $l_t$ e $l_0$ forem os comprimentos de uma barra de ferro nas temperaturas $ t^\circ \text{C}$ e $0^\circ \text{C}$, respectivamente, então $l_t = l_0 (1 + 0.000012t)$. Encontre a variação do comprimento da barra por grau Celsius. Resposta: $frac{dx}{dy} = 0.000012\times l_0$
-
-(8) Foi constatado que se $c$ for a potência de uma lâmpada incandescente e $V$ for a voltagem, $c = aV^b$, onde $a$ e $b$ são constantes. Encontre a taxa de variação da potência luminosa com a voltagem e calcule a mudança de potência luminosa por volt em 80, 100 e 120 volts no caso de uma lâmpada para a qual $a = 0.5 \times 10^{-10}$ e $b = 6$. Resposta: $
+8. Foi constatado que se $c$ for a potência de uma lâmpada incandescente e $V$ for a voltagem, $c = aV^b$, onde $a$ e $b$ são constantes. Encontre a taxa de variação da potência luminosa com a voltagem e calcule a mudança de potência luminosa por volt em 80, 100 e 120 volts no caso de uma lâmpada para a qual $a = 0.5 \times 10^{-10}$ e $b = 6$. Resposta: $
 \frac{dC}{dV} = abV^{b-1}, \, 0.98, \, 3.00 \, \text{e} \, 7.47 \, \text {watts por volt, respectivamente}$
 
-(9) A frequência $n$ de vibração de uma corda de diâmetro $D$, comprimento $L$ e gravidade específica $\sigma$, esticada com uma força $T$, é dada por
+9. A frequência $n$ de vibração de uma corda de diâmetro $D$, comprimento $L$ e gravidade específica $\sigma$, esticada com uma força $T$, é dada por
 
-$$
-n = \frac{1}{DL} \sqrt{\frac{gT}{\pi \sigma}}.
-$$
+    $$
+    n = \frac{1}{DL} \sqrt{\frac{gT}{\pi \sigma}}.
+    $$
 
-Encontre a taxa de variação da frequência quando $D$, $L$, $\sigma$ e $T$ são variáveis independentes. Resposta:
+    Encontre a taxa de variação da frequência quando $D$, $L$, $\sigma$ e $T$ são variáveis independentes. 
 
-$$
-\frac{dn}{dD} = -\frac{1}{LD^2} \sqrt{\frac{gT}{\pi \sigma}}, \quad \frac{dn}{dL} = -\frac{1}{DL^2} \sqrt{\frac{gT}{\pi \sigma}},
-$$
+    Resposta:
 
-$$
-\frac{dn}{d\sigma} = -\frac{1}{2DL} \sqrt{\frac{gT}{\pi \sigma^3}}, \quad \frac{dn}{dT} = \frac{1}{2DL} \sqrt{\frac{g}{\pi \sigma T}}.
-$$
+    $$
+    \frac{dn}{dD} = -\frac{1}{LD^2} \sqrt{\frac{gT}{\pi \sigma}}, \quad \frac{dn}{dL} = -\frac{1}{DL^2} \sqrt{\frac{gT}{\pi \sigma}},
+    $$
 
-(10) A maior pressão externa $P$ que um tubo pode suportar sem colapsar é dada por
+    $$
+    \frac{dn}{d\sigma} = -\frac{1}{2DL} \sqrt{\frac{gT}{\pi \sigma^3}}, \quad \frac{dn}{dT} = \frac{1}{2DL} \sqrt{\frac{g}{\pi \sigma T}}.
+    $$
+
+10. A maior pressão externa $P$ que um tubo pode suportar sem colapsar é dada por
 
 $$
 P = \left( \frac{2E}{1 - \sigma^2} \right) \frac{t^3}{D^3},
@@ -883,7 +880,8 @@ a) Compare a taxa em que $P$ varia para uma pequena mudança de espessura e para
 
 b) Compare a taxa na qual $P$ varia para uma pequena mudança de espessura e para uma pequena mudança de diâmetro ocorrendo separadamente.
 
-Resposta:  
+Resposta:
+
 $$
 \frac{\text{Taxa de variação de } P \text{ quando } t \text{ varia}}{\text{Taxa de variação de } P \text{ quando } D \text{ varia}} = -\frac{D}{t}
 $$
@@ -965,7 +963,7 @@ $$
 Onde o coeficiente binomial generalizado $\binom{n}{k}$ é definido por:
 
 $$
-\binom{n}{k} = \frac{n (n-1) (n-2) \cdots (n-k+1)}{k!}
+\binom{n}{k} = \frac{n (n-1) (n-2) \timess (n-k+1)}{k!}
 $$
 
 ou equivalentemente,
@@ -997,19 +995,19 @@ Estas duas formas do teorema binomial permitem a expansão de potências de bin�
     Expandindo pelo binômio de Newton, obtemos:
 
     $$
-    y + dy = x^{13} + 13x^{12} \cdot dx + \text{termos com } (dx)^2 \text{ e superiores}
+    y + dy = x^{13} + 13x^{12} \times dx + \text{termos com } (dx)^2 \text{ e superiores}
     $$
 
     Negligenciando os termos de ordem superior:
 
     $$
-    y + dy = x^{13} + 13x^{12} \cdot dx
+    y + dy = x^{13} + 13x^{12} \times dx
     $$
 
     Subtraindo $y = x^{13}$:
 
     $$
-    dy = 13x^{12} \cdot dx
+    dy = 13x^{12} \times dx
     $$
 
     Portanto:
@@ -1027,19 +1025,19 @@ Estas duas formas do teorema binomial permitem a expansão de potências de bin�
     Expandindo pelo binômio de Newton:
 
     $$
-    y + dy = x^{-\frac{3}{2}} - \frac{3}{2} x^{-\frac{5}{2}} \cdot dx + \text{termos com } (dx)^2 \text{ e superiores}
+    y + dy = x^{-\frac{3}{2}} - \frac{3}{2} x^{-\frac{5}{2}} \times dx + \text{termos com } (dx)^2 \text{ e superiores}
     $$
 
     Negligenciando os termos de ordem superior:
 
     $$
-    y + dy = x^{-\frac{3}{2}} - \frac{3}{2} x^{-\frac{5}{2}} \cdot dx
+    y + dy = x^{-\frac{3}{2}} - \frac{3}{2} x^{-\frac{5}{2}} \times dx
     $$
 
     Subtraindo $y = x^{-\frac{3}{2}}$:
 
     $$
-    dy = -\frac{3}{2} x^{-\frac{5}{2}} \cdot dx
+    dy = -\frac{3}{2} x^{-\frac{5}{2}} \times dx
     $$
 
     Portanto:
@@ -1057,19 +1055,19 @@ Estas duas formas do teorema binomial permitem a expansão de potências de bin�
     Expandindo pelo binômio de Newton:
 
     $$
-    y + dy = x^{2a} + 2a x^{2a-1} \cdot dx + \text{termos com } (dx)^2 \text{ e superiores}
+    y + dy = x^{2a} + 2a x^{2a-1} \times dx + \text{termos com } (dx)^2 \text{ e superiores}
     $$
 
     Negligenciando os termos de ordem superior:
 
     $$
-    y + dy = x^{2a} + 2a x^{2a-1} \cdot dx
+    y + dy = x^{2a} + 2a x^{2a-1} \times dx
     $$
 
     Subtraindo $y = x^{2a}$:
 
     $$
-    dy = 2a x^{2a-1} \cdot dx
+    dy = 2a x^{2a-1} \times dx
     $$
 
     Portanto:
@@ -1087,19 +1085,19 @@ Estas duas formas do teorema binomial permitem a expansão de potências de bin�
     Expandindo pelo binômio de Newton:
 
     $$
-    u + du = t^{2.4} + 2.4 t^{1.4} \cdot dt + \text{termos com } (dt)^2 \text{ e superiores}
+    u + du = t^{2.4} + 2.4 t^{1.4} \times dt + \text{termos com } (dt)^2 \text{ e superiores}
     $$
 
     Negligenciando os termos de ordem superior:
 
     $$
-    u + du = t^{2.4} + 2.4 t^{1.4} \cdot dt
+    u + du = t^{2.4} + 2.4 t^{1.4} \times dt
     $$
 
     Subtraindo $u = t^{2.4}$:
 
     $$
-    du = 2.4 t^{1.4} \cdot dt
+    du = 2.4 t^{1.4} \times dt
     $$
 
     Portanto:
@@ -1117,19 +1115,19 @@ Estas duas formas do teorema binomial permitem a expansão de potências de bin�
     Expandindo pelo binômio de Newton:
 
     $$
-    z + dz = u^{\frac{1}{3}} + \frac{1}{3} u^{-\frac{2}{3}} \cdot du + \text{termos com } (du)^2 \text{ e superiores}
+    z + dz = u^{\frac{1}{3}} + \frac{1}{3} u^{-\frac{2}{3}} \times du + \text{termos com } (du)^2 \text{ e superiores}
     $$
 
     Negligenciando os termos de ordem superior:
 
     $$
-    z + dz = u^{\frac{1}{3}} + \frac{1}{3} u^{-\frac{2}{3}} \cdot du
+    z + dz = u^{\frac{1}{3}} + \frac{1}{3} u^{-\frac{2}{3}} \times du
     $$
 
     Subtraindo $z = u^{\frac{1}{3}}$:
 
     $$
-    dz = \frac{1}{3} u^{-\frac{2}{3}} \cdot du
+    dz = \frac{1}{3} u^{-\frac{2}{3}} \times du
     $$
 
     Portanto:
@@ -1147,19 +1145,19 @@ Estas duas formas do teorema binomial permitem a expansão de potências de bin�
     Expandindo pelo binômio de Newton:
 
     $$
-    y + dy = x^{-\frac{5}{3}} - \frac{5}{3} x^{-\frac{8}{3}} \cdot dx + \text{termos com } (dx)^2 \text{ e superiores}
+    y + dy = x^{-\frac{5}{3}} - \frac{5}{3} x^{-\frac{8}{3}} \times dx + \text{termos com } (dx)^2 \text{ e superiores}
     $$
 
     Negligenciando os termos de ordem superior:
 
     $$
-    y + dy = x^{-\frac{5}{3}} - \frac{5}{3} x^{-\frac{8}{3}} \cdot dx
+    y + dy = x^{-\frac{5}{3}} - \frac{5}{3} x^{-\frac{8}{3}} \times dx
     $$
 
     Subtraindo $y = x^{-\frac{5}{3}}$:
 
     $$
-    dy = -\frac{5}{3} x^{-\frac{8}{3}} \cdot dx
+    dy = -\frac{5}{3} x^{-\frac{8}{3}} \times dx
     $$
 
     Portanto:
@@ -1177,19 +1175,19 @@ Estas duas formas do teorema binomial permitem a expansão de potências de bin�
     Expandindo pelo binômio de Newton:
 
     $$
-    u + du = x^{-4} - 4 x^{-5} \cdot dx + \text{termos com } (dx)^2 \text{ e superiores}
+    u + du = x^{-4} - 4 x^{-5} \times dx + \text{termos com } (dx)^2 \text{ e superiores}
     $$
 
     Negligenciando os termos de ordem superior:
 
     $$
-    u + du = x^{-4} - 4 x^{-5} \cdot dx
+    u + du = x^{-4} - 4 x^{-5} \times dx
     $$
 
     Subtraindo $u = x^{-4}$:
 
     $$
-    du = -4 x^{-5} \cdot dx
+    du = -4 x^{-5} \times dx
     $$
 
     Portanto:
@@ -1207,19 +1205,19 @@ Estas duas formas do teorema binomial permitem a expansão de potências de bin�
     Expandindo pelo binômio de Newton:
 
     $$
-    y + dy = 2(x^a + a x^{a-1} \cdot dx + \text{termos com } (dx)^2 \text{ e superiores})
+    y + dy = 2(x^a + a x^{a-1} \times dx + \text{termos com } (dx)^2 \text{ e superiores})
     $$
 
     Negligenciando os termos de ordem superior:
 
     $$
-    y + dy = 2x^a + 2a x^{a-1} \cdot dx
+    y + dy = 2x^a + 2a x^{a-1} \times dx
     $$
 
     Subtraindo $y = 2x^a$:
 
     $$
-    dy = 2a x^{a-1} \cdot dx
+    dy = 2a x^{a-1} \times dx
     $$
 
     Portanto:
@@ -1261,19 +1259,19 @@ Estas duas formas do teorema binomial permitem a expansão de potências de bin�
     Expandindo pelo binômio de Newton:
 
     $$
-    y + dy = x^{-\frac{m}{2}} - \frac{m}{2} x^{-\frac{m+2}{2}} \cdot dx + \text{termos com } (dx)^2 \text{ e superiores}
+    y + dy = x^{-\frac{m}{2}} - \frac{m}{2} x^{-\frac{m+2}{2}} \times dx + \text{termos com } (dx)^2 \text{ e superiores}
     $$
 
     Negligenciando os termos de ordem superior:
 
     $$
-    y + dy = x^{-\frac{m}{2}} - \frac{m}{2} x^{-\frac{m+2}{2}} \cdot dx
+    y + dy = x^{-\frac{m}{2}} - \frac{m}{2} x^{-\frac{m+2}{2}} \times dx
     $$
 
     Subtraindo $y = x^{-\frac{m}{2}}$:
 
     $$
-    dy = -\frac{m}{2} x^{-\frac{m+2}{2}} \cdot dx
+    dy = -\frac{m}{2} x^{-\frac{m+2}{2}} \times dx
     $$
 
     Portanto:
@@ -1294,7 +1292,7 @@ Aplique os conceitos de derivação que vimos até agora para resolver os seguin
     \frac{dy}{dx} = \frac{d}{dx}(ax^3 + 6)
     $$
 
-    Observando que $3a$ é uma constante, podemos usar a regra da potência para derivar $ax^3$ e a constante somada, resultando em:
+    Observando que $a$ é uma constante, podemos usar a regra da potência para derivar $ax^3$ e a constante somada, resultando em:
 
     $$
     \frac{dy}{dx} = 3ax^2 + 0 = 3ax^2
@@ -1314,24 +1312,20 @@ Aplique os conceitos de derivação que vimos até agora para resolver os seguin
     \frac{dy}{dx} = 13 \times \frac{3}{2} x^{\frac{3}{2} - 1} = 13 \times \frac{3}{2} x^{\frac{1}{2}} = \frac{39}{2} x^{\frac{1}{2}}
     $$
 
-3. $y = 12x^{\frac{1}{2}} + cx^{\frac{1}{2}}$:
-
-    Combine os termos semelhantes:
-
     $$
-    y = (12 + c) x^{\frac{1}{2}}
+    \frac{dy}{dx} = \frac{39}{2} x^{\frac{1}{2}}
     $$
 
-    Derive ambos os lados da equação em relação a $x$:
+3. $y = 12x^{\frac{1}{2}} + c^{\frac{1}{2}}$:
+
+    $c^{\frac{1}{2}}$ é um termo constante e, como tal, pode ser ignorado. No outro termo podemos aplicar a regra da potência: 
 
     $$
-    \frac{dy}{dx} = \frac{d}{dx}((12 + c) x^{\frac{1}{2}})
+    \frac{dy}{dx} = \frac{d}{dx} 12x^{\frac{1}{2}} = 12\frac{1}{2}x^{1-\frac{1}{2}} = 6x^{-\frac{1}{2}}
     $$
 
-    Aplique a regra da potência:
-
     $$
-    \frac{dy}{dx} = (12 + c) \times \frac{1}{2} x^{\frac{1}{2} - 1} = \frac{(12 + c)}{2} x^{-\frac{1}{2}}
+    \frac{dy}{dx} = 6x^{-\frac{1}{2}}
     $$
 
 4. $y = c^{\frac{1}{2}} x^{\frac{1}{2}}$:
@@ -1345,7 +1339,11 @@ Aplique os conceitos de derivação que vimos até agora para resolver os seguin
     Aplique a regra da potência:
 
     $$
-    \frac{dy}{dx} = c^{\frac{1}{2}} \cdot \frac{1}{2} x^{\frac{1}{2} - 1} = \frac{c^{\frac{1}{2}}}{2} x^{-\frac{1}{2}}
+    \frac{dy}{dx} = c^{\frac{1}{2}} \times \frac{1}{2} x^{\frac{1}{2} - 1} = \frac{c^{\frac{1}{2}}}{2} x^{-\frac{1}{2}}
+    $$
+
+    $$
+    $\frac{dx}{dy} = \frac{1}{2}c^{\frac{1}{2}}x^{-\frac{1}{2}}$
     $$
 
 5. $u = \frac{az^n - 1}{c}$:
@@ -1365,7 +1363,7 @@ Aplique os conceitos de derivação que vimos até agora para resolver os seguin
     Aplique a regra da potência e a constante:
 
     $$
-    \frac{du}{dz} = \frac{1}{c} \left( a \cdot \frac{d}{dz}(z^n) - \frac{d}{dz}(1) \right)
+    \frac{du}{dz} = \frac{1}{c} \left( a \times \frac{d}{dz}(z^n) - \frac{d}{dz}(1) \right)
     $$
 
     Derive $z^n$:
@@ -1377,95 +1375,878 @@ Aplique os conceitos de derivação que vimos até agora para resolver os seguin
     Substitua a derivada de $z^n$:
 
     $$
-    \frac{du}{dz} = \frac{1}{c} \left( a \cdot n z^{n-1} - 0 \right) = \frac{an}{c} z^{n-1}
+    \frac{du}{dz} = \frac{1}{c} \left( a \times n z^{n-1} - 0 \right) = \frac{an}{c} z^{n-1}
     $$
-
-6. $u = \frac{az^n - 1}{c}$:
-
-    Derive ambos os lados da equação em relação a $z$:
-
-    $$
-    \frac{du}{dz} = \frac{d}{dz}\left(\frac{az^n - 1}{c}\right)
-    $$
-
-    A constante $\frac{1}{c}$ pode ser fatorada para fora da derivada:
-
-    $$
-    \frac{du}{dz} = \frac{1}{c} \frac{d}{dz}(az^n - 1)
-    $$
-
-    Aplique a regra da potência e a constante:
-
-    $$
-    \frac{du}{dz} = \frac{1}{c} \left( a \cdot \frac{d}{dz}(z^n) - \frac{d}{dz}(1) \right)
-    $$
-
-    Derive $z^n$:
-
-    $$
-    \frac{d}{dz}(z^n) = n z^{n-1}
-    $$
-
-    Substitua a derivada de $z^n$:
-
-    $$
-    \frac{du}{dz} = \frac{1}{c} \left( a \cdot n z^{n-1} - 0 \right) = \frac{an}{c} z^{n-1}
-    $$
-
-    Portanto, a solução correta é:
 
     $$
     \frac{du}{dz} = \frac{an}{c} z^{n-1}
     $$
 
-7. $y = 1.18t^2 + 22.4$:
+6. $y = 1.18t^2 + 22.4$:
 
-    Derive ambos os lados da equação em relação a $t$:
-
-    $$
-    \frac{dy}{dt} = \frac{d}{dt}(1.18t^2 + 22.4)
-    $$
-
-    Aplique a regra da potência para derivar $1.18t^2$ e a constante:
+    Derive ambos os lados da equação em relação a $z$:
 
     $$
-    \frac{dy}{dt} = 1.18 \times 2 t + 0 = 2.36t
+    \frac{dy}{dt} = \frac{d}{dt}1.18t^2 + 22.4
     $$
 
-8. ### Problema 7
-#### Explicação do Problema
-Dado que \( l_t \) e \( l_0 \) são os comprimentos de uma barra de ferro nas temperaturas \( t^\circ \text{C} \) e \( 0^\circ \text{C} \), respectivamente, a relação entre o comprimento da barra e a temperatura é dada pela fórmula:
+    A constante $22.4$ pode ser ignorada:
+
+    $$
+    \frac{dy}{dt} = \frac{d}{dt}(1.18t^2)
+    $$
+
+    Aplique a regra da potência:
+
+    $$
+    \frac{dy}{dt} = 1.18\times 2t^{2-1}
+    $$
+
+    Portanto, a solução correta é:
+
+    $$
+    \frac{dy}{dt} = $2.36t$
+    $$
+
+7. Se $l_t$ e $l_0$ forem os comprimentos de uma barra de ferro nas temperaturas $ t^\circ \text{C}$ e $0^\circ \text{C}$, respectivamente, então $l_t = l_0 (1 + 0.000012t)$. Encontre a variação do comprimento da barra por grau Celsius. Resposta: $frac{dx}{dy} = 0.000012\times l_0$
+
+    Dado que $l_t$ e $l_0$ são os comprimentos de uma barra de ferro nas temperaturas $t^\circ \text{C}$ e $0^\circ \text{C}$, respectivamente, a relação entre o comprimento da barra e a temperatura é dada pela equação:
+
+    $$ l_t = l_0 (1 + 0.000012t) = l_0 + 0.000012 l_0 t $$
+
+    Desejamos encontrar a variação do comprimento da barra por grau Celsius, isto é, a taxa de variação do comprimento $l_t$ em relação à temperatura $t$.
+
+    Distribuímos $l_0$ na equação inicial:
+
+    $$
+    l_t = l_0 + 0.000012 l_0 t
+    $$
+
+    Derivamos ambos os lados da equação em relação a $t$:
+    $$
+    \frac{d l_t}{d t} = \frac{d}{d t} \left( l_0 + 0.000012 l_0 t \right)
+    $$
+
+    No primeiro termo temos $l_0$, que é constante e pode ser descartado. Para o segundo termo ($0.000012 l_0 t$), que é um produto de uma constante e uma variável podemos aplicar a regra da potência lembrando que $t=t^1$:
+    $$
+    \frac{d}{d t} (0.000012 l_0 t) = 0.000012l_0 \times (t^{1-1}) = 0.000012l_0
+    $$
+
+    Portanto, a variação do comprimento da barra por grau Celsius é:
+    $$
+    \frac{d l_t}{d t} = 0.000012 l_0
+    $$
+
+8. Foi constatado que se $c$ for a potência de uma lâmpada incandescente e $V$ for a voltagem, $c = aV^b$, onde $a$ e $b$ são constantes. Encontre a taxa de variação da potência luminosa com a voltagem e calcule a mudança de potência luminosa por volt em 80, 100 e 120 volts no caso de uma lâmpada para a qual $a = 0.5 \times 10^{-10}$ e $b = 6$.
+
+    Foi constatado que se $c$ for a potência de uma lâmpada incandescente e $V$ for a voltagem, $c = aV^b$, onde $a$ e $b$ são constantes. Desejamos encontrar a taxa de variação da potência luminosa com a voltagem e calcular a mudança de potência luminosa por volt em 80, 100 e 120 volts para uma lâmpada na qual $a = 0.5 \times 10^{-10}$ e $b = 6$.
+
+    Expressão inicial
+
+    $$
+    c = aV^b
+    $$
+
+    Derivada de $c$ em relação a $V$ aplicando a regra do produto entre constante e função, e a regra da potência:
+
+    $$
+    \frac{dc}{dV} = \frac{d}{dV} (aV^b) = a \times \frac{d}{dV} (V^b) = a \times bV^{b-1}
+    $$
+
+    Portanto, a taxa de variação da potência luminosa com a voltagem é:
+
+    $$
+    \frac{dc}{dV} = abV^{b-1}
+    $$
+
+    Cálculo da mudança de potência luminosa por volt para valores específicos de voltagem:
+
+    Para $a = 0.5 \times 10^{-10}$ e $b = 6$:
+
+    Quando $V = 80$ volts:
+
+    $$
+    \frac{dc}{dV} \bigg|_{V=80} = 0.5 \times 10^{-10} \times 6 \times 80^{5} = 3 \times 10^{-10} \times 80^5
+    $$
+
+    Calculando:
+
+    $$
+    80^5 = 3276800000 \quad \Rightarrow \quad 3 \times 10^{-10} \times 3276800000 = 0.98 \, \text{watts por volt}
+    $$
+
+    Quando $V = 100$ volts:**
+
+    $$
+     \frac{dc}{dV} \bigg|_{V=100} = 0.5 \times 10^{-10} \times 6 \times 100^{5} = 3 \times 10^{-10} \times 100^5
+    $$
+
+     Calculando:
+     $$
+     100^5 = 100000000 \quad \Rightarrow \quad 3 \times 10^{-10} \times 100000000 = 3.00 \, \text{watts por volt}
+     $$
+
+    Quando $V = 120$ volts:
+
+    $$
+    \frac{dc}{dV} \bigg|_{V=120} = 0.5 \times 10^{-10} \times 6 \times 120^{5} = 3 \times 10^{-10} \times 120^5
+    $$
+
+    Calculando:
+
+    $$
+    120^5 = 24883200000 \quad \Rightarrow \quad 3 \times 10^{-10} \times 24883200000 = 7.47 \, \text{watts por volt}
+    $$
+
+    Portanto, a mudança de potência luminosa por volt será dada por:
+
+    $$
+    \frac{dc}{dV} = abV^{b-1}, \, 0.98, \, 3.00 \, \text{e} \, 7.47 \, \text{watts por volt, respectivamente}
+    $$
+
+9. A frequência $n$ de vibração de uma corda de diâmetro $D$, comprimento $L$ e gravidade específica $\sigma$, esticada com uma força $T$, é dada por
+
+    $$
+    n = \frac{1}{DL} \sqrt{\frac{gT}{\pi \sigma}}.
+    $$
+
+Encontre a taxa de variação da frequência quando $D$, $L$, $\sigma$ e $T$ são variáveis independentes. 
+
+    Resposta:
+
+    Derivada de $n$ em relação a $D$:
+
+        A frequência $n$ de vibração de uma corda de diâmetro $D$, comprimento $L$ e gravidade específica $\sigma$, esticada com uma força $T$, é dada por:
+
+        $$ n = \frac{1}{DL} \sqrt{\frac{gT}{\pi \sigma}} $$
+
+        Desejamos encontrar a taxa de variação da frequência quando $D$, $L$, $\sigma$ e $T$ são variáveis independentes.
+
+        $$
+        n = \frac{1}{DL} \sqrt{\frac{gT}{\pi \sigma}} = \left(\frac{1}{L} \sqrt{\frac{gT}{\pi \sigma}}\right) \times D^{-1}
+        $$
+
+        Aplicando a regra da potência e a regra do produto entre constante e função:
+
+        $$
+        \frac{dn}{dD} = \left(\frac{1}{L} \sqrt{\frac{gT}{\pi \sigma}}\right) \times (-1) D^{-2} = -\frac{1}{LD^2} \sqrt{\frac{gT}{\pi \sigma}} 
+        $$
+
+        Portanto:
+
+        $$ 
+        \frac{dn}{dD} = -\frac{1}{LD^2} \sqrt{\frac{gT}{\pi \sigma}} 
+        $$
+
+    Derivada de $n$ em relação a $L$:
+
+        $$
+        n = \frac{1}{DL} \sqrt{\frac{gT}{\pi \sigma}} = \left(\frac{1}{D} \sqrt{\frac{gT}{\pi \sigma}}\right) \times L^{-1}
+        $$
+
+        Aplicando a regra da potência e a regra do produto entre constante e função:
+
+        $$ 
+        \frac{dn}{dL} = \left(\frac{1}{D} \sqrt{\frac{gT}{\pi \sigma}}\right) \times (-1) L^{-2} = -\frac{1}{DL^2} \sqrt{\frac{gT}{\pi \sigma}} 
+        $$
+
+        Portanto:
+
+        $$ 
+        \frac{dn}{dL} = -\frac{1}{DL^2} \sqrt{\frac{gT}{\pi \sigma}} 
+        $$
+
+    Derivada de $n$ em relação a $\sigma$:
+
+        $$ 
+        n = \frac{1}{DL} \left(\frac{gT}{\pi \sigma}\right)^{\frac{1}{2}} 
+        $$
+
+        Reescrevendo $\sqrt{\frac{gT}{\pi \sigma}}$ como $\left(\frac{gT}{\pi \sigma}\right)^{\frac{1}{2}}$, aplicamos a regra da potência:
+
+        $$
+        \frac{d}{d\sigma} \left( \left(\frac{gT}{\pi \sigma}\right)^{\frac{1}{2}} \right) = \frac{1}{2} \left(\frac{gT}{\pi \sigma}\right)^{-\frac{1}{2}} \times \left(-\frac{gT}{\pi \sigma^2}\right) = -\frac{1}{2} \left(\frac{gT}{\pi \sigma}\right)^{-\frac{1}{2}} \times \frac{gT}{\pi \sigma^2}
+        $$
+
+        $$
+        \frac{d}{d\sigma} \left( \left(\frac{gT}{\pi \sigma}\right)^{\frac{1}{2}} \right) = -\frac{1}{2} \left(\frac{gT}{\pi \sigma^3}\right)^{\frac{1}{2}}
+        $$
+
+        Portanto:
+
+        $$
+        \frac{dn}{d\sigma} = \frac{1}{DL} \times -\frac{1}{2} \sqrt{\frac{gT}{\pi \sigma^3}} = -\frac{1}{2DL} \sqrt{\frac{gT}{\pi \sigma^3}}
+        $$
+
+    Derivada de $n$ em relação a $T$:
+
+        $$
+        n = \frac{1}{DL} \left(\frac{gT}{\pi \sigma}\right)^{\frac{1}{2}}
+        $$
+
+        Aplicando a regra da potência:
+
+        $$
+        \frac{d}{dT} \left( \left(\frac{gT}{\pi \sigma}\right)^{\frac{1}{2}} \right) = \frac{1}{2} \left(\frac{gT}{\pi \sigma}\right)^{-\frac{1}{2}} \times \frac{g}{\pi \sigma}
+        $$
+
+        $$
+        \frac{d}{dT} \left( \left(\frac{gT}{\pi \sigma}\right)^{\frac{1}{2}} \right) = \frac{1}{2} \left(\frac{g}{\pi \sigma T}\right)^{\frac{1}{2}}
+        $$
+
+        Portanto:
+
+        $$
+        \frac{dn}{dT} = \frac{1}{DL} \times \frac{1}{2} \sqrt{\frac{g}{\pi \sigma T}} = \frac{1}{2DL} \sqrt{\frac{g}{\pi \sigma T}}
+        $$
+
+    Em resumo, respostas:
+
+        $$
+        \frac{dn}{dD} = -\frac{1}{LD^2} \sqrt{\frac{gT}{\pi \sigma}}, \quad \frac{dn}{dL} = -\frac{1}{DL^2} \sqrt{\frac{gT}{\pi \sigma}},
+        $$
+
+        $$
+        \frac{dn}{d\sigma} = -\frac{1}{2DL} \sqrt{\frac{gT}{\pi \sigma^3}}, \quad \frac{dn}{dT} = \frac{1}{2DL} \sqrt{\frac{g}{\pi \sigma T}}.
+        $$
+
+10. A maior pressão externa $P$ que um tubo pode suportar sem colapsar é dada por
 
 $$
-l_t = l_0 (1 + 0.000012t)
+P = \left( \frac{2E}{1 - \sigma^2} \right) \frac{t^3}{D^3},
 $$
 
-Desejamos encontrar a variação do comprimento da barra por grau Celsius, isto é, a taxa de variação do comprimento \( l_t \) em relação à temperatura \( t \).
+onde $E$ e $\sigma$ são constantes, $t$ é a espessura do tubo e $D$ é seu diâmetro. (Esta fórmula assume que $4t$ é pequeno em comparação com $D$.)
 
-#### Solução
+a) Compare a taxa em que $P$ varia para uma pequena mudança de espessura e para uma pequena mudança de diâmetro ocorrendo separadamente.
 
-1. Escreva a função original:
-   $$
-   l_t = l_0 (1 + 0.000012t)
-   $$
+b) Compare a taxa na qual $P$ varia para uma pequena mudança de espessura e para uma pequena mudança de diâmetro ocorrendo separadamente.
 
-2. Derive ambos os lados da equação em relação a \( t \):
-   $$
-   \frac{dl_t}{dt} = l_0 \cdot \frac{d}{dt}(1 + 0.000012t)
-   $$
+    Taxa de Variação da Pressão Externa $P$
 
-3. Aplique a regra da derivada:
-   $$
-   \frac{d}{dt}(1 + 0.000012t) = 0 + 0.000012 = 0.000012
-   $$
+    A maior pressão externa $P$ que um tubo pode suportar sem colapsar é dada por:
 
-4. Substitua a derivada na equação original:
-   $$
-   \frac{dl_t}{dt} = l_0 \cdot 0.000012 = 0.000012 \cdot l_0
-   $$
+    $$ 
+    P = \left( \frac{2E}{1 - \sigma^2} \right) \frac{t^3}{D^3} 
+    $$
 
-Portanto, a solução correta é:
+    onde $E$ e $\sigma$ são constantes, $t$ é a espessura do tubo e $D$ é seu diâmetro.
 
+    Letra a) Taxa de Variação com Respeito à Espessura $t$
+
+    Considere a expressão inicial:
+    
+    $$ 
+    P = \left( \frac{2E}{1 - \sigma^2} \right) \frac{t^3}{D^3} 
+    $$
+
+    Aplicando a regra do produto entre constante e função e a regra da potência:
+    
+    $$
+    \frac{dP}{dt} = \left( \frac{2E}{1 - \sigma^2} \right) \frac{d}{dt} \left( \frac{t^3}{D^3} \right) = \left( \frac{2E}{1 - \sigma^2} \right) \frac{3t^2}{D^3}
+    $$
+
+    Portanto:
+    $$ 
+    \frac{dP}{dt} = \left( \frac{2E}{1 - \sigma^2} \right) \frac{3t^2}{D^3} 
+    $$
+
+    Letra b) Taxa de Variação com Respeito ao Diâmetro $D$
+
+    Considere novamente a expressão inicial:
+
+    $$ 
+    P = \left( \frac{2E}{1 - \sigma^2} \right) \frac{t^3}{D^3} 
+    $$
+
+    Aplicando a regra do produto entre constante e função e a regra da potência:
+    
+    $$
+    \frac{dP}{dD} = \left( \frac{2E}{1 - \sigma^2} \right) \frac{d}{dD} \left( \frac{t^3}{D^3} \right) = \left( \frac{2E}{1 - \sigma^2} \right) \frac{t^3 \times (-3) D^{-4}}{1} = \left( \frac{2E}{1 - \sigma^2} \right) \frac{-3t^3}{D^4}
+    $$
+
+    Portanto:
+    $$ 
+    \frac{dP}{dD} = -\left( \frac{2E}{1 - \sigma^2} \right) \frac{3t^3}{D^4} 
+    $$
+
+    Respostas
+
+    1. Taxa de Variação com Respeito à Espessura $t$:
+
+    $$ 
+    \frac{dP}{dt} = \left( \frac{2E}{1 - \sigma^2} \right) \frac{3t^2}{D^3}
+    $$
+
+    2. Taxa de Variação com Respeito ao Diâmetro $D$:
+
+    $$ 
+    \frac{dP}{dD} = -\left( \frac{2E}{1 - \sigma^2} \right) \frac{3t^3}{D^4}
+    $$
+
+    Fazendo uma análise comparativa:
+
+    - A taxa de variação da pressão $P$ com respeito à espessura $t$ é proporcional a $t^2$, ou seja, aumenta rapidamente com $t$.
+  
+    - A taxa de variação da pressão $P$ com respeito ao diâmetro $D$ é proporcional a $\frac{1}{D^4}$, ou seja, diminui rapidamente com $D$.
+
+    Portanto, uma pequena mudança na espessura $t$ terá um impacto significativo na pressão $P$, enquanto uma pequena mudança no diâmetro $D$ também terá um impacto significativo, mas na direção oposta.
+
+11. Encontre, a partir dos primeiros princípios, a taxa na qual os seguintes variam em relação a uma mudança no raio:
+
+(a) - a circunferência de um círculo de raio $r$;
+(b) - a área de um círculo de raio $r$;
+(c) - a área lateral de um cone de dimensão inclinada $l$;
+(d) - o volume de um cone de raio $r$ e altura $h$;
+(e) - a área de uma esfera de raio $r$;
+(f) - o volume de uma esfera de raio $r$.
+
+    (a) Circunferência de um círculo de raio $r$
+
+        A circunferência $C$ de um círculo é dada por:
+
+        $$C = 2\pi r$$
+
+        Aplicando a regra da derivada do produto entre constante e função:
+
+        $$\frac{dC}{dr} = \frac{d}{dr}(2\pi r) = 2\pi \times \frac{d}{dr}(r) = 2\pi$$
+
+        Portanto, a taxa de variação da circunferência em relação ao raio é:
+        
+        $$\frac{dC}{dr} = 2\pi$$
+
+    (b) Área de um círculo de raio $r$
+
+        A área $A$ de um círculo é dada por:
+
+        $$A = \pi r^2$$
+
+        Aplicando a regra da potência:
+
+        $$\frac{dA}{dr} = \frac{d}{dr}(\pi r^2) = \pi \times 2r = 2\pi r$$
+
+        Portanto, a taxa de variação da área em relação ao raio é:
+
+        $$\frac{dA}{dr} = 2\pi r$$
+
+    (c) Área lateral de um cone de dimensão inclinada $l$
+
+        A área lateral $A$ de um cone é dada por:
+
+        $$A = \pi r l$$
+
+        Aplicando a regra da derivada do produto entre constante e função:
+
+        $$\frac{dA}{dr} = \frac{d}{dr}(\pi r l) = \pi l \times \frac{d}{dr}(r) = \pi l$$
+
+        Portanto, a taxa de variação da área lateral em relação ao raio é:
+
+        $$\frac{dA}{dr} = \pi l$$
+
+    (d) Volume de um cone de raio $r$ e altura $h$
+
+        O volume $V$ de um cone é dado por:
+
+        $$V = \frac{1}{3} \pi r^2 h$$
+
+        Aplicando a regra da potência e a regra do produto entre constante e função:
+
+        $$\frac{dV}{dr} = \frac{d}{dr}\left(\frac{1}{3} \pi r^2 h\right) = \frac{1}{3} \pi h \times \frac{d}{dr}(r^2) = \frac{1}{3} \pi h \times 2r = \frac{2}{3} \pi rh$$
+
+        Portanto, a taxa de variação do volume em relação ao raio é:
+
+        $$\frac{dV}{dr} = \frac{2}{3} \pi rh$$
+
+    (e) Área de uma esfera de raio $r$
+
+        A área $A$ de uma esfera é dada por:
+
+        $$A = 4\pi r^2$$
+
+        Aplicando a regra da potência:
+
+        $$\frac{dA}{dr} = \frac{d}{dr}(4\pi r^2) = 4\pi \times 2r = 8\pi r$$
+
+        Portanto, a taxa de variação da área em relação ao raio é:
+
+        $$\frac{dA}{dr} = 8\pi r$$
+
+    (f) Volume de uma esfera de raio $r$
+
+        O volume $V$ de uma esfera é dado por:
+
+        $$V = \frac{4}{3} \pi r^3$$
+
+        Aplicando a regra da potência:
+
+        $$\frac{dV}{dr} = \frac{d}{dr}\left(\frac{4}{3} \pi r^3\right) = \frac{4}{3} \pi \times 3r^2 = 4\pi r^2$$
+
+        Portanto, a taxa de variação do volume em relação ao raio é:
+
+        $$\frac{dV}{dr} = 4\pi r^2$$
+
+    Respostas:
+
+    (a) $ \frac{dC}{dr} = 2\pi $
+    (b) $ \frac{dA}{dr} = 2\pi r $
+    (c) $ \frac{dA}{dr} = \pi l $
+    (d) $ \frac{dV}{dr} = \frac{2}{3} \pi rh $
+    (e) $ \frac{dA}{dr} = 8\pi r $
+    (f) $ \frac{dV}{dr} = 4\pi r^2 $
+
+(12) O comprimento $L$ de uma barra de ferro na temperatura $T$ é dado por
 $$
-\frac{dl_t}{dt} = 0.000012 \times l_0
+L = l_t \left[ 1 + 0.000012 (T - t) \right],
 $$
+onde $l_t$ é o comprimento na temperatura $t$. Encontre a taxa de variação do diâmetro $D$ de um pneu de ferro adequado para ser encolhido em uma roda, quando a temperatura $T$ varia.
+
+    O comprimento $L$ de uma barra de ferro na temperatura $T$ é dado por:
+
+    $$L = l_t \left[ 1 + 0.000012 (T - t) \right]$$
+
+    onde $l_t$ é o comprimento na temperatura $t$. Desejamos encontrar a taxa de variação do diâmetro $D$ de um pneu de ferro adequado para ser encolhido em uma roda, quando a temperatura $T$ varia.
+
+        $$L = l_t \left[ 1 + 0.000012 (T - t) \right]$$
+
+        Aplicando a regra do produto entre constante e função:
+
+        $$\frac{dL}{dT} = l_t \times \frac{d}{dT} \left( 1 + 0.000012 (T - t) \right)$$
+
+        Derivada do termo dentro dos colchetes:
+
+        $$\frac{d}{dT} \left( 1 + 0.000012 (T - t) \right) = 0 + 0.000012 \times \frac{d}{dT}(T - t)$$
+
+        Como $t$ é constante, sua derivada em relação a $T$ é zero:**
+
+        $$\frac{d}{dT} (T - t) = \frac{dT}{dT} - \frac{dt}{dT} = 1 - 0 = 1$$
+
+        Portanto:
+
+        $$\frac{d}{dT} \left( 1 + 0.000012 (T - t) \right) = 0.000012$$
+
+        Substituindo na derivada de $L$:
+
+        $$\frac{dL}{dT} = l_t \times 0.000012 = 0.000012 l_t$$
+
+        Agora, considerando que o diâmetro $D$ está relacionado ao comprimento $L$ da barra, a taxa de variação do diâmetro $D$ em relação à temperatura $T$ será proporcional à taxa de variação do comprimento $L$. Para um pneu de ferro adequado para ser encolhido em uma roda, assumimos que o diâmetro $D$ varia linearmente com o comprimento $L$:
+
+        $$\frac{dD}{dT} = \frac{dD}{dL} \times \frac{dL}{dT}$$
+
+        Sabemos que $D$ é proporcional a $L$ e que a relação entre eles é $D = \frac{L}{\pi}$ (uma suposição de que o pneu tem uma forma circular onde $D = \frac{L}{\pi}$):
+
+        Portanto:
+
+        $$\frac{dD}{dL} = \frac{1}{\pi}$$
+
+        Então:
+
+        $$\frac{dD}{dT} = \frac{1}{\pi} \times 0.000012 l_t = \frac{0.000012 l_t}{\pi}$$
+
+        Resposta
+
+        $$\frac{dD}{dT} = \frac{0.000012 l_t}{\pi}$$
+
+## N.º 6. Somas, Diferenças, Produtos e Quocientes
+
+Aprendemos como diferenciar funções algébricas simples, tais como $x^2 + c$ ou $ax^4$, e agora temos que aprender como lidar com a soma de duas ou mais funções.
+
+Por exemplo, seja:
+
+$$ y = (x^2 + c) + (ax^4 + b) $$
+
+Qual será sua $\frac{dy}{dx}$? Como devemos proceder com essa nova tarefa?
+
+A resposta a esta questão é bastante simples: basta diferenciar cada termo separadamente, um após o outro, assim, teremos:
+
+$$ \frac{dy}{dx} = 2x + 4ax^3. \ (\text{Resposta}) $$
+
+Se você tiver dúvidas sobre a correção do cálculo acima, tente um caso mais geral, resolvendo-o pelos princípios fundamentais. que vimos anteriormente. Parece complicado, mas não é. Este é o caminho:
+
+Seja $ y = u + v $, onde $ u $ é qualquer função de $ x $, e $ v $ qualquer outra função de $ x $. Então, permitindo que $ x $ aumente para $ x + dx $, $ y $ aumentará para $ y + dy $; e $ u $ aumentará para $ u + du $; e $ v $ para $ v + dv $.
+
+E teremos:
+
+$$ y + dy = u + du + v + dv. $$
+
+Subtraindo o original $ y = u + v $, obtemos
+
+$$ dy = du + dv, $$
+
+e dividindo por $ dx $, obtemos:
+
+$$ \frac{dy}{dx} = \frac{du}{dx} + \frac{dv}{dx}. $$
+
+O que justifica nosso procedimento. Ou seja, você deve diferenciar cada função separadamente e somar os resultados. Esta é a *Regra da Soma que pode ser expressa como a diferencial da soma de funções e a soma da diferencial das funções*.
+
+Se agora pegarmos o exemplo do parágrafo anterior e colocarmos os valores das duas funções, teremos, usando a notação mostrada anteriormente,
+
+$$ \frac{dy}{dx} = \frac{d(x^2 + c)}{dx} + \frac{d(ax^4 + b)}{dx} $$
+
+$$ = 2x + 4ax^3 $$
+
+Exatamente como  encontramos antes.
+
+Se houvesse três funções em $x$, que poderíamos chamar de $ u $, $ v $ e $ w $, de modo que
+
+$$ y = u + v + w $$
+
+Sendo assim
+
+$$ \frac{dy}{dx} = \frac{du}{dx} + \frac{dv}{dx} + \frac{dw}{dx}. $$
+
+Quanto à subtração? não há problema algum quanto a subtração de funções. *Se a função $ v $ tivesse um sinal negativo, seu coeficiente diferencial também seria negativo*. Assim, ao diferenciar:
+
+$$ y = u - v $$
+
+Obteremos:
+
+$$ \frac{dy}{dx} = \frac{du}{dx} - \frac{dv}{dx}. $$
+
+Quando tratamos de Produtos de Funções, a coisa não é tão simples. Suponha que a amável leitora tivesse que diferenciar a expressão:
+
+$$ y = (x^2 + c) \times (ax^4 + b), $$
+
+Por onde começaria?
+
+Posso adiantar que o resultado certamente não será $2x \times 4ax^3$, pois é fácil ver que nem $c \times ax^4$, nem $x^2 \times b$ teriam sido considerados nesse resultado. Na verdade, existem duas formas de resolvermos este problema.
+
+Primeira forma: fazer a multiplicação primeiro, depois de resolvê-la, então diferenciar. Nesta forma faríamos assim:
+
+Multiplicamos $x^2 + c$ e $ax^4 + b$. Obtendo: $ax^6 + acx^4 + bx^2 + bc$.
+
+Agora que não temos multiplicação de funções, diferenciamos, usando a regra da soma, que vimos acima, e obtemos:
+
+$$ \frac{dy}{dx} = 6ax^5 + 4acx^3 + 2bx. $$
+
+Segunda forma: usando a regra do produto de funções que veremos a seguir. Antes, considere a equação:
+
+$$ y = u \times v $$
+
+onde $u$ é uma função de $ x $, e $ v $ é qualquer outra função de $ x $. Observe com cuidado porque isso é importante $u$ e $v$ são duas funções de $x$. Neste caso, e só neste caso, se $ x $ crescer para $ x + dx $; e $ y $ crescer para $ y + dy $, $ u $ se tornar $ u + du $, e $ v $ se tornar $ v + dv $, teremos:
+
+$$ y + dy = (u + du) \times (v + dv) $$
+
+$$ = u \times v + u \times dv + v \times du + du \times dv $$
+
+Agora, $ du \times dv $ é uma quantidade pequena de segunda ordem de pequenez, e, portanto, como fizemos até agora, pode ser descartada.
+
+$$ y + dy = u \times v + u \times dv + v \times du $$
+
+A seguir, subtraindo o original $ y = u \times v $, temos
+
+$$ dy = u \times dv + v \times du; $$
+
+e, dividindo por $ dx $, obtemos o resultado:
+
+$$ \frac{dy}{dx} = u \frac{dv}{dx} + v \frac{du}{dx}. $$
+
+A segunda forma nos permitiu chegar a Regra do Produto: *para diferenciar o produto de duas funções, multiplique cada função pelo coeficiente diferencial da outra, e some os dois produtos assim obtidos. Que pode ser memorizada usando a seguinte regra: $uv = vdu+udv$ que se lê: $u$ veze $v$ é igual a $vdu$ mais $udv$*.
+
+Certamente a atenta leitora notou que esse processo equivale a: Tratar $ u $ como constante enquanto diferencia $ v $; depois tratar $ v $ como constante enquanto diferencia $ u $. Assim, o coeficiente diferencial total $\frac{dy}{dx}$ será a soma desses dois tratamentos. Tendo encontrado essa regra, aplique-a ao exemplo concreto que foi considerado acima.
+
+Queremos diferenciar o produto:
+
+$$ (x^2 + c) \times (ax^4 + b). $$
+
+Chame $(x^2 + c) = u$; e $(ax^4 + b) = v$.
+
+Usando a Regra do Produto de Funções, podemos escrever:
+
+$$ \frac{dy}{dx} = (x^2 + c) \frac{d(ax^4 + b)}{dx} + (ax^4 + b) \frac{d(x^2 + c)}{dx} $$
+
+$$ = (x^2 + c) 4ax^3 + (ax^4 + b) 2x $$
+
+$$ = 4ax^5 + 4acx^3 + 2ax^5 + 2bx, $$
+
+$$ \frac{dy}{dx} = 6ax^5 + 4acx^3 + 2bx, $$
+
+Cujo resultado confirma o resultado que encontramos na primeira forma, quando multiplicamos os binômios antes de derivar. Por último, temos que diferenciar quocientes.
+
+Aqui a leitora precisa considerar este exemplo:
+
+$$ y = \frac{bx^5 + c}{x^2 + a} $$
+
+Em tal caso, não adianta tentar resolver a divisão previamente, porque $ x^2 + a $ não divide $ bx^5 + c $, e sequer  possuem qualquer fator comum. Então, não há nada a fazer a não ser lançar mão dos princípios que vimos até agora e encontrar uma regra. Simplificaremos o problema partindo de:
+
+$$ y = \frac{u}{v}; $$
+
+onde $ u $ e $ v $ são duas funções diferentes da variável independente $ x $. Quando $ x $ se tornar $ x + dx $, $ y $ se tornará $ y + dy $, e $ u $ se tornará $ u + du $, e $ v $ se tornará $ v + dv $.
+
+$$ y + dy = \frac{u + du}{v + dv}. $$
+
+Agora, podemos executar uma divisão algébrica, assim:
+
+$$ \frac{u + du}{v + dv} = \frac{u + du}{v} \cdot \frac{1}{1 + \frac{dv}{v}} = \frac{u + du}{v} \cdot (1 - \frac{dv}{v}) = \frac{u + du}{v} - \frac{u + du \cdot dv}{v^2} $$
+
+Que dará:
+
+$$ \frac{u + du}{v} - \frac{u \cdot dv + du \cdot dv}{v^2} $$
+
+Continuando a simplificação:
+
+$$ \frac{u + du}{v} - \frac{u \cdot dv}{v^2} - \frac{du \cdot dv}{v^2} $$
+
+Dividindo por $dx$, obtemos:
+
+$$ \frac{dy}{dx} = \frac{du}{dx} \cdot \frac{1}{v} + \frac{u}{v} \cdot \frac{dv}{dx} $$
+
+$$ - \frac{u \cdot dv}{v^2} - \frac{du \cdot dv}{v^2} + \frac{u \cdot dv \cdot dv}{v^2}. $$
+
+Como esses restos são pequenas quantidades de segunda ordem, podem ser negligenciados, e a divisão pode parar aqui, já que quaisquer outros restos seriam de magnitudes ainda menores. Desta forma, teremos:
+
+$$ y + dy = \frac{u}{v} + \frac{du}{v} - \frac{u \cdot dv}{v^2}$$
+
+Que pode ser escrito como:
+
+$$ = \frac{u}{v} + \frac{v \cdot du - u \cdot dv}{v^2}. $$
+
+Agora subtraia o original $ y = \frac{u}{v} $, e restará:
+
+$$ dy = \frac{v \cdot du - u \cdot dv}{v^2}; $$
+
+de onde
+
+$$ \frac{dy}{dx} = \frac{v \frac{du}{dx} - u \frac{dv}{dx}}{v^2}. $$
+
+Esta última equação contém as instruções sobre como diferenciar um quociente de duas funções. **Multiplique a função divisor pelo coeficiente diferencial da função dividendo; depois multiplique a função dividendo pelo coeficiente diferencial da função divisor; e subtraia. Por fim, divida pelo quadrado da função divisor*.
+
+Finalmente podemos tentar diferenciar a função que começou este dilema: $ y = \frac{bx^5 + c}{x^2 + a} $. Vamos considerar que: $ bx^5 + c = u $ e $ x^2 + a = v $. Se fizermos assim, teremos:
+
+$$ \frac{dy}{dx} = \frac{(x^2 + a) \frac{d(bx^5 + c)}{dx} - (bx^5 + c) \frac{d(x^2 + a)}{dx}}{(x^2 + a)^2} $$
+
+$$ = \frac{(x^2 + a)(5bx^4) - (bx^5 + c)(2x)}{(x^2 + a)^2} $$
+
+$$ \frac{dy}{dx} = \frac{3bx^6 + 5abx^4 - 2cx}{(x^2 + a)^2}. \ (\text{Resposta}) $$
+
+A resolução de quocientes é muitas vezes tediosa, mas é difícil! Alguns exemplos adicionais totalmente resolvidos são apresentados a seguir. A leitora agora deve ser paciente e persistente. Refaça todos os exemplos no seu caderno para melhorar a fixação destes conceitos.
+
+1. Diferenciar $ y = \frac{a}{b^2}x^3 - \frac{a^2}{b}x + \frac{a^2}{b^2} $.
+
+    Sendo uma constante, o último termo $\frac{a^2}{b^2}$ desaparece, e temos:
+
+    $$ \frac{dy}{dx} = \frac{a}{b^2} \times 3 \times x^{3-1} - \frac{a^2}{b} \times 1 \times x^{1-1}. $$
+
+    Como $ x^{1-1} = x^0 = 1 $ obtemos:
+
+    $$ \frac{dy}{dx} = \frac{3a}{b^2} x^2 - \frac{a^2}{b}. $$
+
+2. Diferenciar $ y = 2a\sqrt{bx^3} - \frac{3b\sqrt{a}}{x} - 2\sqrt{ab} $.
+
+    Colocando $ x $ na forma de índice, obtemos
+
+    $$ y = 2a\sqrt{b}x^{\frac{3}{2}} - 3b\sqrt{a}x^{-1} - 2\sqrt{ab} $$
+
+    Agora, temos:
+
+    $$ \frac{dy}{dx} = 2a\sqrt{b} \times \frac{3}{2} \times x^{\frac{3}{2} - 1} - 3b\sqrt{a} \times (-1) \times x^{-1-1}; $$
+
+    ou, finalmente:
+
+    $$ \frac{dy}{dx} = 3a\sqrt{bx} + \frac{3b\sqrt{a}}{x^2}. $$
+
+3. Diferenciar $ z = 1.8 \sqrt[3]{\frac{1}{\theta^2}} - \frac{4.4}{\sqrt[5]{\theta}} - 27^\circ $.
+
+    Essa função pode ser escrita como: $ z = 1.8 \theta^{-\frac{2}{3}} - 4.4 \theta^{-\frac{1}{5}} - 27^\circ $.
+
+    Os, por serem constantes, $ 27^\circ $ desaparecem, e teremos:
+
+    $$ \frac{dz}{d\theta} = 1.8 \times -\frac{2}{3} \times \theta^{-\frac{2}{3}-1} - 4.4 \times \left(-\frac{1}{5}\right) \theta^{-\frac{1}{5}-1}$$
+
+    ou:
+
+    $$ \frac{dz}{d\theta} = -1.2 \theta^{-\frac{5}{3}} + 0.88 \theta^{-\frac{6}{5}}; $$
+
+    ou,
+
+    $$ \frac{dz}{d\theta} = \frac{0.88}{\sqrt[5]{\theta^6}} - \frac{1.2}{\sqrt[3]{\theta^5}} $$
+
+4. Diferenciar $ v = (3t^2 - 1.2t + 1)^3 $.
+
+    Uma forma direta de resolver essa diferencial será explicada mais tarde. Contudo, com o que já sabemos, podemos resolve-la sem nenhuma dificuldade. Desenvolvendo o cubo, obtemos
+
+    $$ v = 27t^6 - 32.4t^5 + 39.96t^4 - 23.328t^3 + 13.32t^2 - 3.6t + 1; $$
+
+    portanto,
+
+    $$ \frac{dv}{dt} = 162t^5 - 162t^4 + 159.84t^3 - 69.984t^2 + 26.64t - 3.6. $$
+
+5. Diferenciar $ y = (2x - 3)(x + 1)^2 $.
+
+    $$ \frac{dy}{dx} = (2x - 3) \frac{d[(x + 1)(x + 1)]}{dx} + (x + 1)^2 \frac{d(2x - 3)}{dx} $$
+
+    $$ = (2x - 3) \left[ (x + 1) \frac{d(x + 1)}{dx} + (x + 1) \frac{d(x + 1)}{dx} \right] + (x + 1)^2 \frac{d(2x - 3)}{dx} $$
+
+    $$ = 2(x + 1) [(2x - 3) + (x + 1)] = 2(x + 1)(3x - 2) $$
+
+    ou, simplesmente, multiplique e depois diferencie.
+
+6. Diferenciar $ y = 0.5x^3(x - 3) $.
+
+    $$ \frac{dy}{dx} = 0.5 \left[ x^3 \frac{d(x - 3)}{dx} + (x - 3) \frac{d(x^3)}{dx} \right] $$
+
+    $$ = 0.5 \left[ x^3 + (x - 3) \times 3x^2 \right] = 2x^3 - 4.5x^2. $$
+
+    Valem as mesmas observações que fizemos no exemplo anterior.
+
+7. Diferenciar $ w = \left( \theta + \frac{1}{\theta} \right) \left( \sqrt{\theta} + \frac{1}{\sqrt{\theta}} \right) $.
+
+    Podemos escrever esta função como:
+
+    $$ w = (\theta + \theta^{-1})(\theta^{\frac{1}{2}} + \theta^{-\frac{1}{2}}). $$
+
+    O que nos levará a:
+
+    $$ \frac{dw}{d\theta} = (\theta + \theta^{-1}) \frac{d(\theta^{\frac{1}{2}} + \theta^{-\frac{1}{2}})}{d\theta} + (\theta^{\frac{1}{2}} + \theta^{-\frac{1}{2}}) \frac{d(\theta + \theta^{-1})}{d\theta} $$
+
+    $$ = (\theta + \theta^{-1}) \left( \frac{1}{2} \theta^{-\frac{1}{2}} - \frac{1}{2} \theta^{-\frac{3}{2}} \right) + (\theta^{\frac{1}{2}} + \theta^{-\frac{1}{2}})(1 - \theta^{-2}) $$
+
+    $$ = \frac{1}{2} (\theta^{\frac{1}{2}} + \theta^{-\frac{3}{2}} - \theta - \theta^{-\frac{5}{2}}) + \frac{1}{2} \left( \theta^{\frac{1}{2}} - \theta^{-\frac{1}{2}} \right) $$
+
+    $$ = \frac{3}{2} \left( \sqrt{\theta} - \frac{1}{\sqrt[5]{\theta}} \right) + \frac{1}{2} \left( \frac{1}{\sqrt{\theta}} - \frac{1}{\sqrt[3]{\theta}} \right). $$
+
+    Este resultado poderia ter sido obtido mais simplesmente multiplicando os dois fatores primeiro e diferenciando depois. Este processo, no entanto, nem sempre é possível. Veja, por exemplo, o exemplo 8, no qual a regra para diferenciar um produto *deve* ser usada.
+
+8. Diferenciar $ y = \frac{a}{1 + a\sqrt{x} + a^2 x} $.
+
+    $$ \frac{dy}{dx} = \frac{(1 + ax^{\frac{1}{2}} + a^2 x) \times 0 - a \frac{d(1 + ax^{\frac{1}{2}} + a^2 x)}{dx}}{(1 + a\sqrt{x} + a^2 x)^2} $$
+
+    $$ = -\frac{a \left(\frac{1}{2} ax^{-\frac{1}{2}} + a^2 \right)}{(1 + a\sqrt{x} + a^2 x)^2}. $$
+
+9. Diferenciar $ y = \frac{x^2}{x^2 + 1} $.
+
+    $$ \frac{dy}{dx} = \frac{(x^2 + 1) \cdot 2x - x^2 \cdot 2x}{(x^2 + 1)^2} = \frac{2x}{(x^2 + 1)^2}. $$
+
+10. Diferenciar $ y = \frac{a + \sqrt{x}}{a - \sqrt{x}} $.
+
+    Na forma de índice, $ y = \frac{a + x^{\frac{1}{2}}}{a - x^{\frac{1}{2}}} $.
+
+    $$ \frac{dy}{dx} = \frac{(a - x^{\frac{1}{2}}) \left(\frac{1}{2} x^{-\frac{1}{2}}\right) - (a + x^{\frac{1}{2}}) \left(-\frac{1}{2} x^{-\frac{1}{2}}\right)}{(a - x^{\frac{1}{2}})^2} $$
+
+    $$ = \frac{a - x^{\frac{1}{2}} + a + x^{\frac{1}{2}}}{2(a - x^{\frac{1}{2}})^2 x^{\frac{1}{2}}}; $$
+
+    portanto,
+
+    $$ \frac{dy}{dx} = \frac{a}{(a - \sqrt{x})^2 \sqrt{x}} $$
+
+11. Diferenciar
+
+    $$ \theta = \frac{1 - a\sqrt[3]{t^2}}{1 + a\sqrt[3]{t^3}} $$
+
+    Ajustando as raízes: $\theta = \frac{1 - at^{\frac{2}{3}}}{1 + at^{\frac{3}{2}}}$
+
+    $$ \frac{d\theta}{dt} = \frac{(1 + at^{\frac{3}{2}}) \left(-\frac{2}{3} at^{-\frac{1}{3}}\right) - (1 - at^{\frac{2}{3}}) \left(\frac{3}{2} at^{\frac{1}{2}}\right)}{(1 + at^{\frac{3}{2}})^2} $$
+
+    Logo:
+
+    $$ = \frac{5a^2 \sqrt[6]{t^7} - 4a \sqrt[3]{t} - 9a \sqrt{t}}{6(1 + a \sqrt[3]{t^3})^2}. $$
+
+12. Um reservatório de seção transversal quadrada tem lados inclinados em um ângulo de $45°$ com a vertical. O lado da base é $200\, \text{m}$. Encontre uma expressão para a quantidade que entra ou sai quando a profundidade da água varia em $1\, \text{m}$; portanto, encontre, em litros, a quantidade retirada por hora quando a profundidade é reduzida de $14$ para $10\, \text{m}$ em 24 horas.
+
+    O volume de um tronco de pirâmide de altura $H$, e de bases $A$ e $a$, é
+
+    $$ V = \frac{H}{3} (A + a + \sqrt{Aa}). $$
+
+    Vê-se facilmente que, sendo a inclinação $45°$, se a profundidade for $h$, o comprimento do lado da superfície quadrada da água é $200 + 2h$ metros, de modo que o volume de água é
+
+    $$ \frac{h}{3} \left[ 200^2 + (200 + 2h)^2 + 200(200 + 2h) \right] = 40,000h + 800h^2 + \frac{4h^3}{3}. $$
+
+    A taxa de variação do volume com relação à profundidade $h$ é dada por
+
+    $$ \frac{dV}{dh} = 40,000 + 1600h + 4h^2 $$
+
+    em metros cúbicos por metro de variação de profundidade. O nível médio de 14 para 10 metros é 12 metros. Quando $ h = 12 $,
+
+    $$ \frac{dV}{dh} = 40,000 + 1600 \times 12 + 4 \times 12^2 = 50,176 \, \text{m}^3. $$
+
+    A quantidade de água em metros cúbicos que sai do reservatório ao se reduzir a profundidade de 4 metros em 24 horas é
+
+    $$
+    \Delta V \approx \frac{dV}{dh} \bigg|_{h=12} \times \Delta h = 50,176 , \text{m}^3/\text{m} \times 4 , \text{m} = 200,704 , \text{m}^3
+    $$
+
+    Convertendo metros cúbicos para litros (1 metro cúbico = 1000 litros):
+
+    $$ 200,704 \, \text{m}^3 = 200,704,000 \, \text{litros}. $$
+
+    Portanto, a quantidade retirada por hora é de
+
+    $$
+    \frac{200,704 , \text{m}^3 \times 1000 , \text{litros/m}^3}{24 , \text{horas}} = 8,362,666.67 , \text{litros/hora}
+    $$
+
+13. A pressão absoluta, em atmosferas, $P$, do vapor saturado na temperatura $t^\circ \, \text{C}$. foi determinada por [Dulong](https://en.wikipedia.org/wiki/Pierre_Louis_Dulong) como sendo $P = \left( \frac{40 + t}{140} \right)^5$ desde que $t$ esteja acima de $80^\circ \, \text{C}$. Encontre a taxa de variação da pressão com a temperatura a $100^\circ \, \text{C}$.
+
+    Expanda o numerador usando o Teorema Binomial de Newton:
+
+    $$ P = \frac{1}{140^5} (40^5 + 5 \times 40^4 t + 10 \times 40^3 t^2 + 10 \times 40^2 t^3 + 5 \times 40t^4 + t^5); $$
+
+    portanto
+
+    $$ \frac{dP}{dt} = \frac{1}{537,824 \times 10^5} (5 \times 40^4 + 20 \times 40^3 t + 30 \times 40^2 t^2 + 20 \times 40t^3 + 5t^4)$$
+
+    Quando $ t = 100 $ a função resulta em $ 0.036 $ atmosferas por grau centrígrado de variação de temperatura.
+
+### EXERCÍCIOS III
+
+(1) Diferencie
+
+(a) $ u = 1 + x + \frac{x^2}{1 \times 2} + \frac{x^3}{1 \times 2 \times 3} + \cdots. $
+
+(b) $ y = ax^2 + bx + c. $
+
+(c) $ y = (x + a)^2. $
+
+(d) $ y = (x + a)^3. $
+
+(2) Se $ w = at - \frac{1}{2}bt^2 $, encontre $\frac{dw}{dt}$.
+
+(3) Encontre o coeficiente diferencial de:
+
+$$ y = (x + \sqrt{-1}) \times (x - \sqrt{-1}). $$
+
+(4) Diferencie
+
+$$ y = (197x - 34x^2) \times (7 + 22x - 83x^3). $$
+
+(5) Se $ x = (y + 3) \times (y + 5) $, encontre $\frac{dx}{dy}$.
+
+(6) Diferencie $ y = 1.3709x \times (112.6 + 45.202x^2) $.
+
+Encontre os coeficientes diferenciais de
+
+(7) $ y = \frac{2x + 3}{3x + 2}. $
+
+(8) $ y = \frac{1 + x + 2x^2 + 3x^3}{1 + x + 2x^2}. $
+
+(9) $ y = \frac{ax + b}{cx + d}. $
+
+(10) $ y = \frac{x^n + a}{x^{-n} + b}. $
+
+(11) A temperatura $ t $ do filamento de uma lâmpada elétrica incandescente está relacionada à corrente que passa pela lâmpada pela relação
+
+$$ C = a + bt + ct^2. $$
+
+Encontre uma expressão que forneça a variação da corrente correspondente a uma variação de temperatura.
+
+(12) As seguintes fórmulas foram propostas para expressar a relação entre a resistência elétrica $ R $ de um fio na temperatura $ t^\circ $ C, e a resistência $ R_0 $ desse mesmo fio a $ 0^\circ $ Centígrados, sendo $ a $, $ b $, $ c $ constantes.
+
+$$ R = R_0 (1 + at + bt^2). $$
+$$ R = R_0 (1 + at + b\sqrt{t}). $$
+$$ R = R_0 (1 + at + bt^2)^{-1}. $$
+
+Encontre a taxa de variação da resistência em relação à temperatura conforme dada por cada uma dessas fórmulas.
+
+(13) A força eletromotriz $ E $ de um certo tipo de célula padrão tem sido encontrada variando com a temperatura $ t $ de acordo com a relação
+
+$$ E = 1.4340 \left[ 1 - 0.000814(t - 15) + 0.000007(t - 15)^2 \right] \text{ volts}. $$
+
+Encontre a variação da força eletromotriz por grau, a $ 15^\circ $, $ 20^\circ $ e $ 25^\circ $.
+
+(14) A força eletromotriz necessária para manter um arco elétrico de comprimento $ l $ com uma corrente de intensidade $ i $ foi encontrada pela Sra. Ayrton como sendo
+
+$$ E = a + bl + \frac{c + kl}{i}, $$
+
+onde $ a $, $ b $, $ c $, $ k $ são constantes.
+
+Encontre uma expressão para a variação da força eletromotriz (a) com relação ao comprimento do arco; (b) com relação à intensidade da corrente.
+
