@@ -1634,9 +1634,7 @@ The bottom line?  Mastering dynamic programming and tabulation is a valuable ass
 
 ##### Execution Time Analysis
 
-I started by testing with the same code we used to test the Fibonacci functions. However, the execution times were very large, much larger than I expected.
-
-In my initial analysis, I noticed some inconsistencies in the execution times. To address this, I refined our measurement methodology by eliminating lambda functions and directly measuring execution time within the main loop. This removed potential overhead introduced by the lambdas, leading to more reliable results. So, I wrote a new, simpler, and more direct code to test the functions:
+I started by testing with the same code we used to test the Fibonacci functions. However, in my initial analysis, I noticed some inconsistencies in the execution times. To address this, I refined our measurement methodology by eliminating lambda functions and directly measuring execution time within the main loop. This removed potential overhead introduced by the lambdas, leading to more reliable results. So, I wrote a new, simpler, and more direct code to test the functions:
 
 ```Cpp
 #include <iostream>
@@ -1749,8 +1747,7 @@ std::optional<std::pair<int, int>> ValuesTabulation(const std::vector<int>& sequ
 int main() {
     std::vector<int> sequence = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
                                  11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-                                 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
-                                 31, 32, 33, 34, 35, 36, 8, 10 }; // 40 numbers
+                                 21, 22, 23, 24, 25, 26, 27, 28, 8, 10 }; // 40 numbers
     int targetSum = 18;
     int iterations = 1000;
 
@@ -1825,7 +1822,18 @@ The memoized solution, while clever, bears the brunt of both issues – extensiv
 
 In conclusion, the observed differences in execution times can be attributed to the distinct memory access patterns and associated overheads inherent in each approach. Understanding these nuances is crucial for making informed decisions when optimizing code for performance.
 
-And we will always have C. C-Style arrays will add performance to our code. However, C is not the focus of this text. Good luck with that. For us, having finished the basics, it's time to work on other classic problems.
+In this way, if you are in a programming competition where execution time is one of the ranking factors, Brute Force is your solution. It deeply pains my heart to write this. And we will always have C. *C-Style arrays will add performance to our code. However, C is not the focus of this text*. Good luck with that. For us, having finished the basics, it's time to work on other classic problems.
+
+### Exercises: Variations of the Two Sum
+
+There are few interesting variations of Two-Sum problem:
+
+1. The array can contain both positive and negative integers.
+2. Each input would have exactly one solution, and you may not use the same element twice.
+3. Each input can have multiple solutions, and the same element cannot be used twice in a pair.
+4. The function should return all pairs that sum to the target value.
+
+Try to solve these variations. Take as much time as you need; I will wait.
 
 ## The Dynamic Programming Classic Problems
 
