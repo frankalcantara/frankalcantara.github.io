@@ -1160,7 +1160,7 @@ With sufficient practice, Dynamic Programming concepts will become intuitive. I 
 
 Dynamic programming concepts became popular in the early 21st century thanks to job interviews for large companies. Until then, only high-performance and competitive programmers were concerned with these techniques. Today, among others, we have [LeetCode](https://leetcode.com/) with hundreds, perhaps thousands of problems to solve. I strongly recommend trying to solve some of them. Here, I will only solve problems whose solutions are already available on other sites. You might even come across some from LeetCode problem, but that will be by accident. The only utility of LeetCode, for me, for you, and for them, is that the problems are not easy to find or solve. Let's start with a problem that is now a classic on the internet and, according to legend, was part of a Google interview.
 
-### Problem 1: The "Two Sum" problem
+### The "Two-Sum" problem
 
 **Statement**: In a technical interview, you've been given an array of numbers, and you need to find a pair of numbers that sum up to a given target value. The numbers can be positive, negative, or both. Can you design an algorithm that works in $O(n)$ time complexity or better?
 
@@ -1168,12 +1168,12 @@ For example, given the array: `[8, 10, 2, 9, 7, 5]` and the target sum: 11
 
 Your function should return a pair of numbers that add up to the target sum. Your answer must be a function in form: `Values(sequence, targetSum)`, In this case, your function should return (9, 2).
 
-#### Brute Force for Two Sum's problem
+#### Brute Force for Two-Sum's problem
 
 The most obvious solution, usually the first that comes to mind, involves checking all pairs in the array to see if any pair meets the desired target value. This solution is not efficient for large arrays; it has a time complexity of $O(n^2)$ where $n$ is the number of elements in the array. The flow of the brute force function can be seen in Flowchart 4.
 
 ![]({{ site.baseurl }}/assets/images/flow4.jpg)
-*Flowchart 4 - Brute force solution for two sum problem*{: class="legend"}
+*Flowchart 4 - Brute force solution for Two-Sum problem*{: class="legend"}
 
 Flowchart 4 enables the creation of a function to solve the two-sum problem in C++20, as can be seen in Code 4 below:
 
@@ -1268,7 +1268,7 @@ int main() {
 }
 ```
 
-*Code 4: Full code of a two-sum using `std::vector` and `std::optional`*
+*Code 5: Full code of a two-sum using `std::vector` and `std::optional`*{: class="legend"}
 
 >`std::optional` is a feature introduced in C++17 that provides a way to represent optional (or nullable) values. It is a template class that can contain a value or be empty, effectively indicating the presence or absence of a value without resorting to pointers or sentinel values. This makes `std::optional` particularly useful for functions that may not always return a meaningful result. By using `std::optional`, developers can avoid common pitfalls associated with null pointers and special sentinel values, thereby writing safer and more expressive code. `std::optional` is similar to the `Maybe` type in Haskell, which also represents an optional value that can either be `Just` a value or `Nothing`. An equivalent in Python is the use of `None` to represent the absence of a value, often combined with the `Optional` type hint from the `typing` module to indicate that a function can return either a value of a specified type or `None`.
 
@@ -1287,7 +1287,546 @@ def find_min_max(numbers: list[int]) -> Optional[tuple[int, int]]:
     return min_val, max_val
 ```
 
+*Code Fragment 12 - Optional implemented in Python*{: class="legend"}
+
 Relying solely on brute-force solutions won't impress interviewers or win coding competitions. It's crucial to strive for solutions with lower time complexity whenever possible. While some problems might not have more efficient alternatives, most interview and competition questions are designed to filter out candidates who only know brute-force approaches.
 
+#### Recursive Approach: Divide and Conquer
+
+The recursive solution is based on dividing the problem into smaller and simpler subproblems until reaching a base case that can be solved directly. For that we'll have:
+
+##### Base Cases
+
+1. **Empty Array**: If the array is empty (or the start index is greater than or equal to the end index), there are no possible pairs, so we return a null value (`std::nullopt`).
+
+2. **Sum Found**: If the sum of the elements at the start and end positions of the array equals the target value, we have found a valid pair and return it as `std::make_optional(std::make_pair(arr[start], arr[end]))`.
+
+##### Recursive Step
+
+1. **Left Shift**: Recursively call the function, incrementing the start index (`start + 1`) while keeping the end index fixed. This explores pairs that include the next element after the current start.
+2. **Right Shift**: If the left shift does not find a valid pair, recursively call the function again, this time decrementing the end index (`end - 1`) while keeping the start index fixed. This explores pairs that include the next element before the current end.
+
+Which will bring us to the following C++ code:
+
+```Cpp
+```cpp
+#include <vector>
+#include <optional>
+#include <iostream>
+
+// Recursive function to find a pair of numbers that add up to the target sum
+std::optional<std::pair<int, int>> findPairRecursively(const std::vector<int>& arr, int target, int start, int end) {
+    // Base case: If start index is greater than or equal to end index, no pair is found
+    if (start >= end) {
+        return std::nullopt; // Return no value (null optional)
+    }
+    // Base case: If the sum of elements at start and end indices equals the target, pair is found
+    if (arr[start] + arr[end] == target) {
+        return std::make_optional(std::make_pair(arr[start], arr[end])); // Return the pair
+    }
+    // Recursive call: Move the start index forward to check the next element
+    auto result = findPairRecursively(arr, target, start + 1, end);
+    if (result) {
+        return result; // If a pair is found in the recursive call, return it
+    }
+    // Recursive call: Move the end index backward to check the previous element
+    return findPairRecursively(arr, target, start, end - 1);
+}
+
+// Function to find a pair of numbers that add up to the target sum
+std::optional<std::pair<int, int>> Values(const std::vector<int>& sequence, int targetSum) {
+    // Call the recursive function with initial indices (0 and size-1)
+    return findPairRecursively(sequence, targetSum, 0, sequence.size() - 1);
+}
+
+int main() {
+    // Example usage
+    std::vector<int> sequence = { 8, 10, 2, 9, 7, 5 }; // Input array
+    int targetSum = 11; // Target sum
+
+    // Call the function to find the pair
+    auto result = Values(sequence, targetSum);
+    
+    // Print the result
+    if (result) {
+        std::cout << "Pair found: (" << result->first << ", " << result->second << ")\n";
+    } else {
+        std::cout << "No pair found.\n";
+    }
+    
+    return 0;
+}
+```
+
+*Code 6: Full code of a two-sum using a recursive function*{: class="legend"}
+
+##### Solution Analysis
+
+The recursion systematically explores all possible pairs in the array by moving the start and end indices in a controlled manner. With each recursive call, the problem is reduced until one of the base cases is reached.
+
+The `std::optional<std::pair<int, int>> findPairRecursively(const std::vector<int>& arr, int target, int start, int end)` recursive function explores all possible pairs in the array by moving the `start` and `end` indices. Let's analyze its time complexity:
+
+1. **Base Case**: The base case occurs when `start` is greater than or equal to `end`. In the worst case, this happens after exploring all possible pairs.
+
+2. **Recursive Calls**: For each pair `(start, end)`, there are two recursive calls:
+   - One that increments the `start` index.
+   - Another that decrements the `end` index.
+
+Given an array of size `n`, the total number of pairs to explore is approximately `n^2 / 2` (combinatorial pairs). Since each recursive call reduces the problem size by one element, the number of recursive calls can be modeled as a binary tree with a height of `n`, leading to a total of `2^n` calls in the worst case.
+
+Thus, the time complexity of the recursive function is **O(2^n)**. This exponential complexity is due to the fact that each pair is explored through recursive calls, making this approach highly inefficient for large arrays.
+
+The space complexity is determined by the maximum depth of the recursion stack:
+
+1. **Recursive Depth**: In the worst case, the recursion stack will grow to a depth of `n`, as each call processes one element and makes further recursive calls until the base case is reached.
+
+2. **Auxiliary Space**: Apart from the recursion stack, no additional significant space is used.
+
+Thus, the space complexity of the recursive function is **O(n)**, where `n` is the size of the array. This linear space complexity arises because of the recursion stack that holds the function calls.
+
+Thanks to this, we have the following scenario:
+
+- **Time Complexity**: O(2^n)
+- **Space Complexity**: O(n)
+
+The recursive approach is highly inefficient in terms of time complexity, making it impractical for large inputs. Nevertheless, we need to compare it with the earlier brute force solutions.
+
+The brute force solution to the two-sum problem involves checking all possible pairs in the array to see if any pair meets the desired target value. This approach has a time complexity of $O(n^2)$ because it uses nested loops to iterate over all pairs. The space complexity is $O(1)$ as it does not require additional storage beyond the input array and a few variables.
+
+On the other hand, the recursive solution systematically explores all possible pairs by moving the `start` and `end` indices. Although it achieves the same goal, its time complexity is much worse, at $O(2^n)$. This exponential complexity arises because each recursive call generates two more calls, leading to an exponential growth in the number of calls. The space complexity of the recursive solution is $O(n)$, as it requires a recursion stack that can grow up to the depth of the array size.
+
+In summary, while both approaches solve the problem, the brute force solution is significantly more efficient in terms of time complexity ($O(n^2)$ vs. $O(2^n)$), and it also has a lower space complexity ($O(1)$ vs. $O(n)$). However, we are not interested in either of these solutions. The brute force solution is naive and offers no advantage, and the recursive solution is impractical. Thus, we are left with the dynamic programming solutions.
+
+#### Dynamic Programming: memoization
+
+>Regardless of the efficiency of the recursive code, the first law of dynamic programming says: always start with recursion. Thus, the recursive function will be useful for defining the structure of the code using memoization and tabulation.
+
+Memoization is a technique that involves storing the results of expensive function calls and reusing the cached result when the same inputs occur again. By storing intermediate results, we can avoid redundant calculations, thus optimizing the solution.
+
+In the context of the two-sum problem, memoization can help reduce the number of redundant checks by storing the pairs that have already been evaluated. We'll use a `std::unordered_map` to store the pairs of indices we've already checked and their sums. This will help us quickly determine if we've already computed the sum for a particular pair of indices.
+
+We'll modify the recursive function to check the memoization map before performing any further calculations. If the pair has already been computed, we'll use the stored result instead of recalculating. After calculating the sum of a pair, we'll store the result in the memoization map before returning it. This ensures that future calls with the same pair of indices can be resolved quickly. By using memoization, we aim to reduce the number of redundant calculations, thus improving the efficiency compared to a purely recursive approach.
+
+##### Memoized Recursive Solution in C++20
+
+So, our code is:
+
+```cpp
+#include <vector>
+#include <unordered_map>
+#include <optional>
+#include <utility>
+#include <iostream>
+
+// Helper function to create a unique key for memoization
+std::string createKey(int start, int end) {
+    return std::to_string(start) + "," + std::to_string(end);
+}
+
+// Recursive function with memoization to find a pair of numbers that add up to the target sum
+std::optional<std::pair<int, int>> findPairRecursivelyMemo(
+    const std::vector<int>& arr, 
+    int target, 
+    int start, 
+    int end, 
+    std::unordered_map<std::string, std::optional<std::pair<int, int>>>& memo
+) {
+    // Base case: If start index is greater than or equal to end index, no pair is found
+    if (start >= end) {
+        return std::nullopt; // Return no value (null optional)
+    }
+
+    // Create a unique key for memoization
+    std::string key = createKey(start, end);
+
+    // Check if the result is already in the memoization map
+    if (memo.find(key) != memo.end()) {
+        return memo[key]; // Return the memoized result
+    }
+
+    // Base case: If the sum of elements at start and end indices equals the target, pair is found
+    if (arr[start] + arr[end] == target) {
+        auto result = std::make_optional(std::make_pair(arr[start], arr[end]));
+        memo[key] = result; // Store the result in the memoization map
+        return result; // Return the pair
+    }
+
+    // Recursive call: Move the start index forward to check the next element
+    auto result = findPairRecursivelyMemo(arr, target, start + 1, end, memo);
+    if (result) {
+        memo[key] = result; // Store the result in the memoization map
+        return result; // If a pair is found in the recursive call, return it
+    }
+
+    // Recursive call: Move the end index backward to check the previous element
+    result = findPairRecursivelyMemo(arr, target, start, end - 1, memo);
+    memo[key] = result; // Store the result in the memoization map
+    return result; // Return the result
+}
+
+// Function to find a pair of numbers that add up to the target sum using memoization
+std::optional<std::pair<int, int>> ValuesMemo(const std::vector<int>& sequence, int targetSum) {
+    // Memoization map to store results of subproblems
+    std::unordered_map<std::string, std::optional<std::pair<int, int>>> memo;
+    // Call the recursive function with initial indices (0 and size-1)
+    return findPairRecursivelyMemo(sequence, targetSum, 0, sequence.size() - 1, memo);
+}
+
+int main() {
+    // Example usage
+    std::vector<int> sequence = { 8, 10, 2, 9, 7, 5 }; // Input array
+    int targetSum = 11; // Target sum
+
+    // Call the function to find the pair
+    auto result = ValuesMemo(sequence, targetSum);
+    
+    // Print the result
+    if (result) {
+        std::cout << "Pair found: (" << result->first << ", " << result->second << ")\n";
+    } else {
+        std::cout << "No pair found.\n";
+    }
+    
+    return 0;
+}
+```
+
+*Code 7: Full code of a two-sum using a Memoized function*{: class="legend"}
+
+##### Complexity Analysis of the Memoized Solution
+
+In the memoized solution, we store the results of the subproblems in a map to avoid redundant calculations. We can analyze the time complexity step-by-step:
+
+1. **Base Case Check**:
+   - If the base case is met (when `start >= end`), the function returns immediately. This takes constant time, $O(1)$.
+
+2. **Memoization Check**:
+   - Before performing any calculations, the function checks if the result for the current pair of indices (`start`, `end`) is already stored in the memoization map. Accessing the map has an average time complexity of $O(1)$.
+
+3. **Recursive Calls**:
+   - The function makes two recursive calls for each pair of indices: one that increments the `start` index and another that decrements the `end` index.
+   - In the worst case, without memoization, this would lead to $2^n$ recursive calls due to the binary nature of the recursive calls.
+
+However, with memoization, each unique pair of indices is computed only once and stored. Given that there are $n(n-1)/2$ unique pairs of indices in an array of size $n$, the memoized function will compute the sum for each pair only once. Thus, the total number of unique computations is limited to the number of pairs, which is $O(n^2)$. Therefore, the time complexity of the memoized solution is **O(n^2)**.
+
+The space complexity of the memoized solution is determined by two main factors:
+
+1. **Recursion Stack**:
+   - In the worst case, the recursion stack can grow to a depth of $n$, resulting in a space complexity of $O(n)$.
+
+2. **Memoization Map**:
+   - The memoization map stores the results for each unique pair of indices. There are $n(n-1)/2$ unique pairs, and storing each result takes constant space. Thus, the space required for the memoization map is $O(n^2)$.
+
+Combining these two factors, the total space complexity of the memoized solution is **O(n^2)**. What lead us to:
+
+- **Time Complexity**: O(n^2)
+- **Space Complexity**: O(n^2)
+
+By storing the results of subproblems, the memoized solution reduces redundant calculations, achieving a time complexity of $O(n^2)$. The memoization map and recursion stack together contribute to a space complexity of $O(n^2)$. Although it has the same time complexity as the brute force solution, memoization significantly improves efficiency by avoiding redundant calculations, making it more practical for larger arrays.
+
+The brute force solution involves nested loops to check all possible pairs, leading to a time complexity of $O(n^2)$. This solution does not use any additional space apart from a few variables, so its space complexity is $O(1)$. While straightforward, the brute force approach is not efficient for large arrays due to its quadratic time complexity.
+
+The naive recursive solution, on the other hand, explores all possible pairs without any optimization, resulting in an exponential time complexity of $O(2^n)$. The recursion stack can grow up to a depth of $n$, leading to a space complexity of $O(n)$. This approach is highly inefficient for large inputs because it redundantly checks the same pairs multiple times.
+
+At this point we can create a summary table.
+
+Summary Table
+
+| Solution Type   | Time Complexity | Space Complexity |
+|-----------------|-----------------|------------------|
+| Brute Force     | O(n^2)          | O(1)             |
+| Recursive       | O(2^n)          | O(n)             |
+| Memoized        | O(n^2)          | O(n^2)           |
+
+*Tabela 3 - Brute Force, Recursive and Memoized Solutions Complexity Comparison*{: class="legend"}
+
+The situation may seem grim, with the brute-force approach holding the lead as our best solution so far.  But don't lose hope just yet! We have a secret weapon up our sleeves: dynamic programming with tabulation.
+
+#### Dynamic Programming: tabulation
+
+Think of it like this: we've been wandering through a maze, trying every path to find the treasure (our solution). The brute-force approach means we're checking every single path, even ones we've already explored. It's exhausting and time-consuming.
+
+But dynamic programming with tabulation is like leaving breadcrumbs along the way.  As we explore the maze, we mark the paths we've already taken.  This way, we avoid wasting time revisiting those paths and focus on new possibilities. It's a smarter way to navigate the maze and find the treasure faster.
+
+In the context of our problem, tabulation means creating a table to store solutions to smaller subproblems.  As we solve larger problems, we can refer to this table to avoid redundant calculations.  It's a clever way to optimize our solution and potentially find the treasure much faster.
+
+So, even though the brute-force approach may seem like the only option right now, don't give up! Attention! Spoiler Alert! With dynamic programming and tabulation, we can explore the maze more efficiently and hopefully find the treasure we've been seeking.
+
+##### C++ code for Two-Sum problem using tabulation 
+
+The code is:
+
+```Cpp
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <optional>
+
+// Function to find a pair of numbers that add up to the target sum using tabulation
+std::optional<std::pair<int, int>> ValuesTabulation(const std::vector<int>& sequence, int targetSum) {
+    std::unordered_map<int, int> table; // Hash table to store elements and their indices
+
+    for (int i = 0; i < sequence.size(); ++i) {
+        int complement = targetSum - sequence[i];
+
+        // Check if the complement exists in the hash table
+        if (table.find(complement) != table.end()) {
+            return std::make_optional(std::make_pair(sequence[i], complement)); // Pair found
+        }
+
+        // Store the current element in the hash table
+        table[sequence[i]] = i;
+    }
+
+    // No pair found
+    return std::nullopt;
+}
+
+int main() {
+    // Example usage
+    std::vector<int> sequence = {8, 10, 2, 9, 7, 5}; // Input array
+    int targetSum = 11; // Target sum
+
+    // Call the function to find the pair
+    auto result = ValuesTabulation(sequence, targetSum);
+    
+    // Print the result
+    if (result) {
+        std::cout << "Pair found: (" << result->first << ", " << result->second << ")\n";
+    } else {
+        std::cout << "No pair found.\n";
+    }
+
+    return 0;
+}
+```
+
+*Code 8: Full code of a two-sum using a tabulated function*{: class="legend"}
+
+The `std::optional<std::pair<int, int>> ValuesTabulation(const std::vector<int>& sequence, int targetSum)` function uses a hash table (`std::unordered_map`) to store elements of the array and their indices. For each element in the array, it calculates the complement, which is the difference between the target sum and the current element. It then checks if the complement exists in the hash table. If the complement is found, a pair that sums to the target has been identified and the function returns this pair. If the complement does not exist, the function stores the current element and its index in the hash table and proceeds to the next element.
+
+##### Complexity Analysis of the Tabulation Function
+
+The `std::optional<std::pair<int, int>> ValuesTabulation(const std::vector<int>& sequence, int targetSum)` function uses a hash table to efficiently find a pair of numbers that add up to the target sum. The function iterates through each element of the array once, making its time complexity $O(n)$. For each element, it calculates the complement (the difference between the target sum and the current element) and checks if this complement exists in the hash table. *Accessing and inserting elements into the hash table both have an average time complexity of $O(1)$, contributing to the overall linear time complexity of the function*.
+
+The space complexity of the function is also $O(n)$, as it uses a hash table to store the elements of the array and their indices. The size of the hash table grows linearly with the number of elements in the array, which is why the space complexity is linear.
+
+Comparing this with the other solutions, the brute force solution has a time complexity of $O(n^2)$ because it involves nested loops to check all possible pairs, and its space complexity is $O(1)$ since it uses only a few additional variables. The recursive solution without optimization has an exponential time complexity of $O(2^n)$ due to redundant calculations in exploring all pairs, with a space complexity of $O(n)$ due to the recursion stack. The memoized solution improves upon the naive recursion by storing results of subproblems, achieving a time complexity of $O(n^2)$ and a space complexity of $O(n^2)$ due to the memoization map and recursion stack.
+
+*In comparison, the tabulation function is significantly more efficient in terms of both time and space complexity. It leverages the hash table to avoid redundant calculations and provides a linear time solution with linear space usage, making it the most efficient among the four approaches.* Wha we can see in the following table.
+
+| Solution Type    | Time Complexity | Space Complexity |
+|------------------|-----------------|------------------|
+| Brute Force      | O(n^2)          | O(1)             |
+| Recursive        | O(2^n)          | O(n)             |
+| Memoized         | O(n^2)          | O(n^2)           |
+| Tabulation       | O(n)            | O(n)             |
+
+*Tabela 4 - Brute Force, Recursive, Memoized and Tabulated Solutions Complexity Comparison*{: class="legend"}
+
+And so, it seems, we have a champion: dynamic programming with tabulation! Anyone armed with this technique has a significant advantage when tackling this problem, especially in job interviews where optimization and clever problem-solving are highly valued.
+
+However, let's be realistic:  in the fast-paced world of programming competitions, where every millisecond counts, tabulation might not always be the winner.  It can require more memory and setup time compared to other approaches, potentially slowing you down in a race against the clock.
+
+So, while tabulation shines in showcasing your understanding of optimization and problem-solving, it's important to be strategic in a competition setting. Sometimes, a simpler, faster solution might be the key to victory, even if it's less elegant.
+
+The bottom line?  Mastering dynamic programming and tabulation is a valuable asset, but knowing when and where to use it is the mark of a true programming champion. Now, all that's left is to analyze the execution times.
+
+##### Execution Time Analysis
+
+I started by testing with the same code we used to test the Fibonacci functions. However, the execution times were very large, much larger than I expected.
+
+In my initial analysis, I noticed some inconsistencies in the execution times. To address this, I refined our measurement methodology by eliminating lambda functions and directly measuring execution time within the main loop. This removed potential overhead introduced by the lambdas, leading to more reliable results. So, I wrote a new, simpler, and more direct code to test the functions:
+
+```Cpp
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <optional>
+#include <utility>
+#include <chrono>
+
+// Function to measure execution time
+template <typename Func, typename... Args>
+long long measure_time(Func func, Args&&... args) {
+    auto start = std::chrono::high_resolution_clock::now();
+    func(std::forward<Args>(args)...);
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<long long, std::nano> duration = end - start;
+    return duration.count();
+}
+
+// Function to calculate average execution time
+template <typename Func, typename... Args>
+long long average_time(Func func, int iterations, Args&&... args) {
+    long long total_time = 0;
+    for (int i = 0; i < iterations; ++i) {
+        total_time += measure_time(func, std::forward<Args>(args)...);
+    }
+    return total_time / iterations;
+}
+
+// Brute Force Solution
+std::pair<int, int> ValuesBruteForce(const std::vector<int>& sequence, int targetSum) {
+    int n = sequence.size();
+    for (int i = 0; i < n - 1; ++i) {
+        for (int j = i + 1; j < n; ++j) {
+            if (sequence[i] + sequence[j] == targetSum) {
+                return std::make_pair(sequence[i], sequence[j]);
+            }
+        }
+    }
+    return std::make_pair(-1, -1);
+}
+
+// Naive Recursive Solution
+std::optional<std::pair<int, int>> findPairRecursively(const std::vector<int>& arr, int target, int start, int end) {
+    if (start >= end) {
+        return std::nullopt;
+    }
+    if (arr[start] + arr[end] == target) {
+        return std::make_optional(std::make_pair(arr[start], arr[end]));
+    }
+    auto result = findPairRecursively(arr, target, start + 1, end);
+    if (result) {
+        return result;
+    }
+    return findPairRecursively(arr, target, start, end - 1);
+}
+
+std::optional<std::pair<int, int>> ValuesRecursive(const std::vector<int>& sequence, int targetSum) {
+    return findPairRecursively(sequence, targetSum, 0, sequence.size() - 1);
+}
+
+// Memoized Recursive Solution
+std::string createKey(int start, int end) {
+    return std::to_string(start) + "," + std::to_string(end);
+}
+
+std::optional<std::pair<int, int>> findPairRecursivelyMemo(
+    const std::vector<int>& arr, int target, int start, int end,
+    std::unordered_map<std::string, std::optional<std::pair<int, int>>>& memo) {
+    if (start >= end) {
+        return std::nullopt;
+    }
+    std::string key = createKey(start, end);
+    if (memo.find(key) != memo.end()) {
+        return memo[key];
+    }
+    if (arr[start] + arr[end] == target) {
+        auto result = std::make_optional(std::make_pair(arr[start], arr[end]));
+        memo[key] = result;
+        return result;
+    }
+    auto result = findPairRecursivelyMemo(arr, target, start + 1, end, memo);
+    if (result) {
+        memo[key] = result;
+        return result;
+    }
+    result = findPairRecursivelyMemo(arr, target, start, end - 1, memo);
+    memo[key] = result;
+    return result;
+}
+
+std::optional<std::pair<int, int>> ValuesMemoized(const std::vector<int>& sequence, int targetSum) {
+    std::unordered_map<std::string, std::optional<std::pair<int, int>>> memo;
+    return findPairRecursivelyMemo(sequence, targetSum, 0, sequence.size() - 1, memo);
+}
+
+// Tabulation Solution
+std::optional<std::pair<int, int>> ValuesTabulation(const std::vector<int>& sequence, int targetSum) {
+    std::unordered_map<int, int> table;
+    for (int i = 0; i < sequence.size(); ++i) {
+        int complement = targetSum - sequence[i];
+        if (table.find(complement) != table.end()) {
+            return std::make_optional(std::make_pair(sequence[i], complement));
+        }
+        table[sequence[i]] = i;
+    }
+    return std::nullopt;
+}
+
+int main() {
+    std::vector<int> sequence = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+                                 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                                 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+                                 31, 32, 33, 34, 35, 36, 8, 10 }; // 40 numbers
+    int targetSum = 18;
+    int iterations = 1000;
+
+    std::cout << "-----------------------------------\n";
+    std::cout << "Calculating Two-Sum (" << targetSum << ")\n";
+
+    // Measure average execution time for Brute Force Solution
+    auto bruteForceTime = average_time([](const std::vector<int>& seq, int target) {
+        ValuesBruteForce(seq, target);
+        }, iterations, sequence, targetSum);
+    std::cout << "Average time for Brute Force: " << bruteForceTime << " ns\n";
+
+    // Measure average execution time for Naive Recursive Solution
+    auto recursiveTime = average_time([](const std::vector<int>& seq, int target) {
+        ValuesRecursive(seq, target);
+        }, iterations, sequence, targetSum);
+    std::cout << "Average time for Recursive: " << recursiveTime << " ns\n";
+
+    // Measure average execution time for Memoized Recursive Solution
+    auto memoizedTime = average_time([](const std::vector<int>& seq, int target) {
+        ValuesMemoized(seq, target);
+        }, iterations, sequence, targetSum);
+    std::cout << "Average time for Memoized: " << memoizedTime << " ns\n";
+
+    // Measure average execution time for Tabulation Solution
+    auto tabulationTime = average_time([](const std::vector<int>& seq, int target) {
+        ValuesTabulation(seq, target);
+        }, iterations, sequence, targetSum);
+    std::cout << "Average time for Tabulation: " << tabulationTime << " ns\n";
+
+    std::cout << "-----------------------------------\n";
+
+    return 0;
+}
+```
+
+*Code 9: Code for execution time test of all functions we create to Two-Sum problem.*{: class="legend"}
+
+Running the new code, we have the following output:
+
+```Shell
+-----------------------------------
+Calculating Two-Sum (18)
+Average time for Brute Force: 217 ns
+Average time for Recursive: 415 ns
+Average time for Memoized: 41758 ns
+Average time for Tabulation: 15144 ns
+-----------------------------------
+```
+
+*Output 4: Execution time of Two-Sum solutions.*{: class="legend"}
+
+##### The Dynamic Memory Bottleneck
+
+There are some well-known bottlenecks that can explain why a code with lower complexity runs much slower in a particular environment.
+
+**Hash Table Overhead**: Both memoized and tabulation solutions rely on `std::unordered_map`, which inherently involves dynamic memory allocation. Operations like insertions and lookups, while powerful, come with a cost due to memory management overhead. This is typically slower than accessing elements in a simple array.
+
+**Recursion's Toll**: The naive recursive and memoized solutions utilize deep recursion, leading to a considerable overhead from managing the recursion stack. Each recursive call adds a new frame to the stack, requiring additional memory operations that accumulate over time.
+
+**Memoization's Complexity**: While memoization optimizes by storing intermediate results, it also introduces complexity through the use of `std::unordered_map`. Each new pair calculated requires storage in the hash table, involving dynamic allocations and hash computations, adding to the overall time complexity.
+
+**Cache Friendliness**: Dynamic memory allocations often lead to suboptimal cache utilization. In contrast, the brute force and tabulation solutions likely benefit from better cache locality due to their predominant use of array accesses. Accessing contiguous memory locations (as in arrays) generally results in faster execution due to improved cache hit rates.
+
+**Function Call Overhead**: The overhead from frequent function calls, including those made through lambda functions, can accumulate, particularly in performance-critical code.
+
+By understanding and mitigating these bottlenecks, we can better optimize our code and achieve the expected performance improvements.
+
+*In essence, the dynamic nature of memory operations associated with hash tables and recursion significantly affects execution times*. These operations are generally slower than accessing static memory structures like arrays. The deep recursion in the memoized and naive recursive approaches exacerbates this issue, as the growing recursion stack necessitates increased memory management.
+
+The memoized solution, while clever, bears the brunt of both issues – extensive recursion and frequent hash table operations. This combination leads to higher execution times compared to the brute force and tabulation approaches, which primarily rely on array accesses and enjoy the benefits of better cache performance and reduced memory management overhead.
+
+In conclusion, the observed differences in execution times can be attributed to the distinct memory access patterns and associated overheads inherent in each approach. Understanding these nuances is crucial for making informed decisions when optimizing code for performance.
+
+And we will always have C. C-Style arrays will add performance to our code. However, C is not the focus of this text. Good luck with that. For us, having finished the basics, it's time to work on other classic problems.
+
+## The Dynamic Programming Classic Problems
 
 This will continue!!!
