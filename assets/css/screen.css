@@ -1071,9 +1071,11 @@ p {
    padding-left: 8px;
  }
 
+ td { padding: 7px;}
  th code {
    color: black;
  }
+
 
  .odd {
    background-color: #def;
@@ -1081,6 +1083,7 @@ p {
 
  .odd td {
    border-bottom: 1px solid #cef;
+   
  }
 
  .MathJax {

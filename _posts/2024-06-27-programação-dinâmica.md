@@ -39,6 +39,8 @@ preview: "In this comprehensive guide, we delve into the world of Dynamic Progra
 beforetoc: "In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency."
 ---
 
+## Introduction
+
 Dynamic Programming is a different way of thinking when it comes to solving problems. Programming itself is already a different way of thinking, so, to be honest, I can say that Dynamic Programming is a different way within a different way of thinking. And, if you haven't noticed yet, there is a concept of recursion trying to emerge in this definition.
 
 The general idea is that you, dear reader, should be able to break a large and difficult problem into small and easy pieces. This involves storing and reusing information within the algorithm as needed.
@@ -46,6 +48,8 @@ The general idea is that you, dear reader, should be able to break a large and d
 It is very likely that you, kind reader, have been introduced to Dynamic Programming techniques while studying algorithms without realizing it. So, it is also very likely that you will encounter, in this text, algorithms you have seen before without knowing they were Dynamic Programming.
 
 My intention is to break down the Dynamic Programming process into clear steps, focusing on the solution algorithm, so that you can understand and implement these steps on your own whenever you face a problem in technical interviews, production environments, or programming competitions. Without any hesitation, I will try to present performance tips and tricks in C++. However, this should not be considered a limitation; we will prioritize understanding the algorithms before diving into the code, and you will be able to implement the code in your preferred programming language.
+
+I will be using functions for all the algorithms I study primarily because it will make it easier to measure and compare the execution time of each one, even though I am aware of the additional computational overhead associated with function calls. After studying the problems in C++ and identifying the solution with the lowest complexity, we will also explore this solution in C. Additionally, whenever possible, we will examine the most popular solution for the problem in question that I can find online.
 
 ## There was a hint of recursion sneaking in
 
@@ -354,7 +358,7 @@ We are now ready to study Dynamic Programming with Tabulation.
 Now, let's explore an example of Dynamic Programming using the tabulation technique:
 
 ![]({{ site.baseurl }}/assets/images/interactive-fibbo.jpg)
-*Flowchart 3 - Interactive Fibonacci nth algorithm*{: class="legend"}
+*Flowchart 3 - Interactive Fibonacci nth algorithm with tabulation*{: class="legend"}
 
 Here is the function `fibonacci_tabulation` defined to calculate the nth Fibonacci number using tabulation, utilizing Python in a manner similar to pseudocode:
 
@@ -911,146 +915,7 @@ We achieved a performance gain using memoization and tabulation, as evidenced by
 
 We are using a C++ container of integers to store the already calculated Fibonacci numbers as the basis for the two Dynamic Programming processes we are studying so far, memoization and tabulation, one `std::unordered_map` and one `std::vector` or `std::array`. However, there is an even simpler container in C++: the array. The C-Style array.
 
-For compatibility, C++ allows the use of code written in C, including data structures, libraries, and functions. So, why not test these data structures? For this, I wrote new code, keeping the functions using `std::array` and `std::unordered_map` and creating two new dynamic functions using C-style arrays. We will call it The CODE 3.
-
-```Cpp
-#include <iostream>
-#include <unordered_map>
-#include <chrono>
-#include <array>
-#include <utility>
-
-// Recursive function to calculate Fibonacci
-int fibonacci(int n) {
-    if (n <= 1) {
-        return n;
-    }
-    else {
-        return fibonacci(n - 1) + fibonacci(n - 2);
-    }
-}
-
-// Recursive function with memoization to calculate Fibonacci
-int fibonacci_memo(int n, std::unordered_map<int, int>& memo) {
-    if (memo.find(n) != memo.end()) {
-        return memo[n];
-    }
-    if (n <= 1) {
-        return n;
-    }
-    memo[n] = fibonacci_memo(n - 1, memo) + fibonacci_memo(n - 2, memo);
-    return memo[n];
-}
-
-// Iterative function with tabulation to calculate Fibonacci using C-style arrays
-int fibonacci_tabulation(int n) {
-    if (n <= 1) {
-        return n;
-    }
-    int dp[41] = { 0 };  // array to support up to Fibonacci(41) biggest in int type
-    dp[1] = 1;
-    for (int i = 2; i <= n; ++i) {
-        dp[i] = dp[i - 1] + dp[i - 2];
-    }
-    return dp[n];
-}
-
-// structs for C style functions
-const int MAXN = 100;
-bool found[MAXN] = { false };
-int memo[MAXN] = { 0 };
-
-// New function with memoization using arrays
-int cArray_fibonacci_memo(int n) {
-    if (found[n]) return memo[n];
-    if (n == 0) return 0;
-    if (n == 1) return 1;
-
-    found[n] = true;
-    return memo[n] = cArray_fibonacci_memo(n - 1) + cArray_fibonacci_memo(n - 2);
-}
-
-// New function with tabulation using arrays
-int cArray_fibonacci_tabulation(int n) {
-    if (n <= 1) {
-        return n;
-    }
-    int dp[MAXN] = { 0 };  // array to support up to MAXN
-    dp[1] = 1;
-    for (int i = 2; i <= n; ++i) {
-        dp[i] = dp[i - 1] + dp[i - 2];
-    }
-    return dp[n];
-}
-
-// Function to measure execution time and return the result
-template <typename Func, typename... Args>
-std::pair<long long, int> measure_time(Func func, Args&&... args) {
-    auto start = std::chrono::high_resolution_clock::now();
-    int result = func(std::forward<Args>(args)...);  // Get the function result
-    auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<long long, std::nano> duration = end - start;
-    return { duration.count(), result };
-}
-
-// Function to calculate average execution time and return the last calculated result
-template <typename Func, typename... Args>
-std::pair<long long, int> average_time(Func func, int iterations, Args&&... args) {
-    long long total_time = 0;
-    int last_result = 0;
-    for (int i = 0; i < iterations; ++i) {
-        auto [time, result] = measure_time(func, std::forward<Args>(args)...);
-        total_time += time;
-        last_result = result;
-    }
-    return { total_time / iterations, last_result };
-}
-
-int main() {
-    
-    const int iterations = 1000;
-    int test_cases[] = { 10, 20, 30};  // C-style array for test cases
-
-    for (int n : test_cases) {
-        std::cout << "Calculating Fibonacci(" << n << ")\n";
-
-        // Calculation and average time using the simple recursive function
-        auto [avg_time_recursive, result_recursive] = average_time(fibonacci, iterations, n);
-        std::cout << "Average time for recursive Fibonacci: " << avg_time_recursive << " ns\n";
-        std::cout << "Fibonacci(" << n << ") = " << result_recursive << "\n";
-
-        // Calculation and average time using the memoization function
-        std::unordered_map<int, int> memo;
-        auto fibonacci_memo_wrapper = [&memo](int n) { return fibonacci_memo(n, memo); };
-        auto [avg_time_memo, result_memo] = average_time(fibonacci_memo_wrapper, iterations, n);
-        std::cout << "Average time for memoized Fibonacci: " << avg_time_memo << " ns\n";
-        std::cout << "Fibonacci(" << n << ") = " << result_memo << "\n";
-
-        // Calculation and average time using the tabulation function
-        auto [avg_time_tabulation, result_tabulation] = average_time(fibonacci_tabulation, iterations, n);
-        std::cout << "Average time for tabulated Fibonacci: " << avg_time_tabulation << " ns\n";
-        std::cout << "Fibonacci(" << n << ") = " << result_tabulation << "\n";
-
-        // Calculation and average time using the new memoization function with arrays
-        auto [avg_time_novofIbb, result_cArray_fibonacci_memo] = average_time(cArray_fibonacci_memo, iterations, n);
-        std::cout << "Average time for new memoized Fibonacci: " << avg_time_novofIbb << " ns\n";
-        std::cout << "Fibonacci(" << n << ") = " << result_cArray_fibonacci_memo << "\n";
-
-        // Calculation and average time using the new tabulation function with arrays
-        auto [avg_time_novo_tabulation, result_cArray_tabulation] = average_time(cArray_fibonacci_tabulation, iterations, n);
-        std::cout << "Average time for new tabulated Fibonacci: " << avg_time_novo_tabulation << " ns\n";
-        std::cout << "Fibonacci(" << n << ") = " << result_cArray_tabulation << "\n";
-
-        std::cout << "-----------------------------------\n";
-    }
-
-    return 0;
-}
-```
-
-*Code 3: full code using C-Style array*{: class="legend"}
-
-This code is basically the same except for the following fragment:
+For compatibility, C++ allows the use of code written in C, including data structures, libraries, and functions. So, why not test these data structures? For this, I wrote new code, keeping the functions using `std::array` and `std::unordered_map` and creating two new dynamic functions using C-style arrays. The code is basically the same except for the following fragment:
 
 ```Cpp
 const int MAXN = 100;
@@ -1083,7 +948,7 @@ int cArray_fibonacci_tabulation(int n) {
 
 *Code Fragment 11 - C++, C-Style Array, Memoization and Tabulation Functions*{: class="legend"}
 
-As I said, this code segment introduces two new functions for calculating Fibonacci numbers using C-style arrays, with a particular focus on the function for memoization. Instead of using an `std::unordered_map` to store the results of previously computed Fibonacci numbers, the memoization function `cArray_fibonacci_memo` uses two arrays: `found` and `memo`. The `found` array is a boolean array that tracks whether the Fibonacci number for a specific index has already been calculated, while the `memo` array stores the calculated Fibonacci values. The function checks if the result for the given $n$ is already computed by inspecting the `found` array. If it is, the function returns the value from the `memo` array. If not, it recursively computes the Fibonacci number, stores the result in the `memo` array, and marks the `found` array as true for that index. To be completely honest, this idea of using two arrays comes from [this site]([URL](https://cp-algorithms.com/dynamic_programming/intro-to-dp.html)).
+As I said, this code segment introduces two new functions for calculating Fibonacci numbers using C-style arrays, with a particular focus on the function for memoization. Instead of using an `std::unordered_map` to store the results of previously computed Fibonacci numbers, the memoization function `cArray_fibonacci_memo` uses two arrays: `found` and `memo`. The `found` array is a boolean array that tracks whether the Fibonacci number for a specific index has already been calculated, while the `memo` array stores the calculated Fibonacci values[^1]. The function checks if the result for the given $n$ is already computed by inspecting the `found` array. If it is, the function returns the value from the `memo` array. If not, it recursively computes the Fibonacci number, stores the result in the `memo` array, and marks the `found` array as true for that index. To be completely honest, this idea of using two arrays comes from [this site]([URL](https://cp-algorithms.com/dynamic_programming/intro-to-dp.html)).
 
 The `cArray_fibonacci_tabulation` function, on the other hand, implements the tabulation method using a single C-Style array `dp` to store the Fibonacci numbers up to the $n$th value. The function initializes the base cases for the Fibonacci Sequence, with `dp[0]` set to $0$ and `dp[1]` set to $1$. It then iterates from $2$ to $n$, filling in the `dp` array by summing the two preceding values. This iterative approach avoids the overhead of recursive calls, making it more efficient for larger values of $n$.
 
@@ -1218,7 +1083,7 @@ int main() {
 }
 ```
 
-*Code 4: Full code of a two-sum using `std::vector`*{: class="legend"}
+*Code 3: Full code of a two-sum using `std::vector`*{: class="legend"}
 
 The Values function is quite simple, but the use of `std::vector` and `std::pair` in Code 4 deserves a closer look. While `std::array` might offer a slight performance edge, the dynamic nature of `std::vector` makes it a better fit for interview and competition scenarios where the size of the input data isn't known in advance. This flexibility is crucial when dealing with data read from external sources like the terminal or text files.
 
@@ -1268,7 +1133,7 @@ int main() {
 }
 ```
 
-*Code 5: Full code of a two-sum using `std::vector` and `std::optional`*{: class="legend"}
+*Code 4: Full code of a two-sum using `std::vector` and `std::optional`*{: class="legend"}
 
 >`std::optional` is a feature introduced in C++17 that provides a way to represent optional (or nullable) values. It is a template class that can contain a value or be empty, effectively indicating the presence or absence of a value without resorting to pointers or sentinel values. This makes `std::optional` particularly useful for functions that may not always return a meaningful result. By using `std::optional`, developers can avoid common pitfalls associated with null pointers and special sentinel values, thereby writing safer and more expressive code. `std::optional` is similar to the `Maybe` type in Haskell, which also represents an optional value that can either be `Just` a value or `Nothing`. An equivalent in Python is the use of `None` to represent the absence of a value, often combined with the `Optional` type hint from the `typing` module to indicate that a function can return either a value of a specified type or `None`.
 
@@ -1293,23 +1158,26 @@ Relying solely on brute-force solutions won't impress interviewers or win coding
 
 #### Recursive Approach: Divide and Conquer
 
-The recursive solution is based on dividing the problem into smaller and simpler subproblems until reaching a base case that can be solved directly. For that we'll have:
+The recursive solution leverages a two-pointer approach to efficiently explore the array within a dynamically shrinking window defined by the `start` and `end` indices. It operates by progressively dividing the search space into smaller subproblems, each represented by a narrower window, until a base case is reached or the target sum is found. Here's the refined description, flowchart and code:
 
 ##### Base Cases
 
-1. **Empty Array**: If the array is empty (or the start index is greater than or equal to the end index), there are no possible pairs, so we return a null value (`std::nullopt`).
+1. **Empty Input:** If the array is empty (or if the `start` index is greater than or equal to the `end` index), there are no pairs to consider. In this case, we return `std::nullopt` to indicate that no valid pair was found.
 
-2. **Sum Found**: If the sum of the elements at the start and end positions of the array equals the target value, we have found a valid pair and return it as `std::make_optional(std::make_pair(arr[start], arr[end]))`.
+2. **Target Sum Found:** If the sum of the elements at the current `start` and `end` indices equals the `target` value, we've found a matching pair. We return this pair as `std::optional<std::pair<int, int>>` to signal success and provide the result.
 
-##### Recursive Step
+##### Recursive Step**
 
-1. **Left Shift**: Recursively call the function, incrementing the start index (`start + 1`) while keeping the end index fixed. This explores pairs that include the next element after the current start.
-2. **Right Shift**: If the left shift does not find a valid pair, recursively call the function again, this time decrementing the end index (`end - 1`) while keeping the start index fixed. This explores pairs that include the next element before the current end.
+1. **Explore Leftward:** We make a recursive call to the function, incrementing the `start` index by one. This effectively shifts our focus to explore pairs that include the next element to the right of the current `start` position.
 
-Which will bring us to the following C++ code:
+2. **Explore Rightward (If Necessary):** If the recursive call in step 1 doesn't yield a solution, we make another recursive call, this time decrementing the `end` index by one. This shifts our focus to explore pairs that include the next element to the left of the current `end` position.
+
+This leads us to the illustration of the algorithm in Flowchart 4 and its implementation in C++ Code 5:
+
+![]({{ site.baseurl }}/assets/images/twoSumRecur.jpg)
+*Flowchart 4 - Two-Sum problem recursive solution*{: class="legend"}
 
 ```Cpp
-```cpp
 #include <vector>
 #include <optional>
 #include <iostream>
@@ -1327,7 +1195,7 @@ std::optional<std::pair<int, int>> findPairRecursively(const std::vector<int>& a
     // Recursive call: Move the start index forward to check the next element
     auto result = findPairRecursively(arr, target, start + 1, end);
     if (result) {
-        return result; // If a pair is found in the recursive call, return it
+        return result;   // If a pair is found in the recursive call, return it
     }
     // Recursive call: Move the end index backward to check the previous element
     return findPairRecursively(arr, target, start, end - 1);
@@ -1353,12 +1221,11 @@ int main() {
     } else {
         std::cout << "No pair found.\n";
     }
-    
     return 0;
 }
 ```
 
-*Code 6: Full code of a two-sum using a recursive function*{: class="legend"}
+*Code 5: Full code of a two-sum using a recursive function*{: class="legend"}
 
 ##### Solution Analysis
 
@@ -1374,22 +1241,22 @@ The `std::optional<std::pair<int, int>> findPairRecursively(const std::vector<in
 
 Given an array of size `n`, the total number of pairs to explore is approximately `n^2 / 2` (combinatorial pairs). Since each recursive call reduces the problem size by one element, the number of recursive calls can be modeled as a binary tree with a height of `n`, leading to a total of `2^n` calls in the worst case.
 
-Thus, the time complexity of the recursive function is **O(2^n)**. This exponential complexity is due to the fact that each pair is explored through recursive calls, making this approach highly inefficient for large arrays.
+Therefore, the recursive function exhibits a time complexity of $O(2^n)$. This exponential complexity arises because each unique pair of indices in the array triggers recursive calls, leading to a rapid increase in computation time as the array size grows. This makes the recursive approach impractical for handling large arrays.
 
-The space complexity is determined by the maximum depth of the recursion stack:
+The space complexity, however, is determined by the maximum depth of the recursion stack:
 
-1. **Recursive Depth**: In the worst case, the recursion stack will grow to a depth of `n`, as each call processes one element and makes further recursive calls until the base case is reached.
+1. **Recursion Stack Depth**: In the worst-case scenario, the recursive function will delve to a depth of $n$. This happens when each recursive call processes a single element and spawns further recursive calls until it reaches the base case (when a single element remains).
 
-2. **Auxiliary Space**: Apart from the recursion stack, no additional significant space is used.
+2. **Auxiliary Space**: Besides the space occupied by the recursion stack, no other substantial amount of memory is utilized.
 
-Thus, the space complexity of the recursive function is **O(n)**, where `n` is the size of the array. This linear space complexity arises because of the recursion stack that holds the function calls.
+Consequently, the recursive function's space complexity is $O(n)$, where $n$ denotes the array size. This linear space complexity results from the recursion stack, which stores information about each function call.
 
-Thanks to this, we have the following scenario:
+In summary, we have the following characteristics:
 
-- **Time Complexity**: O(2^n)
-- **Space Complexity**: O(n)
-
-The recursive approach is highly inefficient in terms of time complexity, making it impractical for large inputs. Nevertheless, we need to compare it with the earlier brute force solutions.
+- **Time Complexity**: $O(2^n)$;
+- **Space Complexity**: $O(n)$.
+  
+While the recursive approach proves to be highly inefficient in terms of time complexity, rendering it unsuitable for large inputs, it's crucial to compare its performance with the previously discussed brute-force solutions to gain a comprehensive understanding of its strengths and weaknesses.
 
 The brute force solution to the two-sum problem involves checking all possible pairs in the array to see if any pair meets the desired target value. This approach has a time complexity of $O(n^2)$ because it uses nested loops to iterate over all pairs. The space complexity is $O(1)$ as it does not require additional storage beyond the input array and a few variables.
 
@@ -1491,7 +1358,7 @@ int main() {
 }
 ```
 
-*Code 7: Full code of a two-sum using a Memoized function*{: class="legend"}
+*Code 6: Full code of a two-sum using a Memoized function*{: class="legend"}
 
 ##### Complexity Analysis of the Memoized Solution
 
@@ -1509,18 +1376,16 @@ In the memoized solution, we store the results of the subproblems in a map to av
 
 However, with memoization, each unique pair of indices is computed only once and stored. Given that there are $n(n-1)/2$ unique pairs of indices in an array of size $n$, the memoized function will compute the sum for each pair only once. Thus, the total number of unique computations is limited to the number of pairs, which is $O(n^2)$. Therefore, the time complexity of the memoized solution is **O(n^2)**.
 
-The space complexity of the memoized solution is determined by two main factors:
+The space complexity of the memoized solution is influenced by two primary factors:
 
-1. **Recursion Stack**:
-   - In the worst case, the recursion stack can grow to a depth of $n$, resulting in a space complexity of $O(n)$.
+1. **Recursion Stack Depth**: In the most extreme scenario, the recursion could reach a depth of $n$. This means $n$ function calls would be active simultaneously, each taking up space on the call stack.  This contributes $O(n)$ to the space complexity.
 
-2. **Memoization Map**:
-   - The memoization map stores the results for each unique pair of indices. There are $n(n-1)/2$ unique pairs, and storing each result takes constant space. Thus, the space required for the memoization map is $O(n^2)$.
+2. **Memoization Map Size**: This map is used to store the results of computations to avoid redundant calculations. The maximum number of unique entries in this map is determined by the number of distinct pairs of indices we can form from a set of $n$ elements. This number is given by the combination formula n^2, which simplifies to $n(n-1)/2$. As each entry in the map takes up constant space, the overall space used by the memoization map is $O(n^2)$.
 
-Combining these two factors, the total space complexity of the memoized solution is **O(n^2)**. What lead us to:
+Combining these two factors, the overall space complexity of the memoized solution is dominated by the larger of the two, which is $O(n^2)$. This leads us to the following conclusions:
 
-- **Time Complexity**: O(n^2)
-- **Space Complexity**: O(n^2)
+- **Time Complexity**: $O(n^2)$ - The time it takes to process the input grows quadratically with the input size due to the nested loops and memoization overhead.
+- **Space Complexity**: $O(n^2)$ - The amount of memory required for storing memoized results also increases quadratically with the input size because the memoization table grows proportionally to n^2.
 
 By storing the results of subproblems, the memoized solution reduces redundant calculations, achieving a time complexity of $O(n^2)$. The memoization map and recursion stack together contribute to a space complexity of $O(n^2)$. Although it has the same time complexity as the brute force solution, memoization significantly improves efficiency by avoiding redundant calculations, making it more practical for larger arrays.
 
@@ -1530,8 +1395,6 @@ The naive recursive solution, on the other hand, explores all possible pairs wit
 
 At this point we can create a summary table.
 
-Summary Table
-
 | Solution Type   | Time Complexity | Space Complexity |
 |-----------------|-----------------|------------------|
 | Brute Force     | O(n^2)          | O(1)             |
@@ -1540,7 +1403,7 @@ Summary Table
 
 *Tabela 3 - Brute Force, Recursive and Memoized Solutions Complexity Comparison*{: class="legend"}
 
-The situation may seem grim, with the brute-force approach holding the lead as our best solution so far.  But don't lose hope just yet! We have a secret weapon up our sleeves: dynamic programming with tabulation.
+The situation may seem grim, with the brute-force approach holding the lead as our best solution so far. But don't lose hope just yet! We have a secret weapon up our sleeves: dynamic programming with tabulation.
 
 #### Dynamic Programming: tabulation
 
@@ -1601,7 +1464,7 @@ int main() {
 }
 ```
 
-*Code 8: Full code of a two-sum using a tabulated function*{: class="legend"}
+*Code 7: Full code of a two-sum using a tabulated function*{: class="legend"}
 
 The `std::optional<std::pair<int, int>> ValuesTabulation(const std::vector<int>& sequence, int targetSum)` function uses a hash table (`std::unordered_map`) to store elements of the array and their indices. For each element in the array, it calculates the complement, which is the difference between the target sum and the current element. It then checks if the complement exists in the hash table. If the complement is found, a pair that sums to the target has been identified and the function returns this pair. If the complement does not exist, the function stores the current element and its index in the hash table and proceeds to the next element.
 
@@ -1626,7 +1489,7 @@ Comparing this with the other solutions, the brute force solution has a time com
 
 And so, it seems, we have a champion: dynamic programming with tabulation! Anyone armed with this technique has a significant advantage when tackling this problem, especially in job interviews where optimization and clever problem-solving are highly valued.
 
-However, let's be realistic:  in the fast-paced world of programming competitions, where every millisecond counts, tabulation might not always be the winner.  It can require more memory and setup time compared to other approaches, potentially slowing you down in a race against the clock.
+However, let's be realistic: in the fast-paced world of programming competitions, where every millisecond counts, tabulation might not always be the winner.  It can require more memory and setup time compared to other approaches, potentially slowing you down in a race against the clock.
 
 So, while tabulation shines in showcasing your understanding of optimization and problem-solving, it's important to be strategic in a competition setting. Sometimes, a simpler, faster solution might be the key to victory, even if it's less elegant.
 
@@ -1784,9 +1647,9 @@ int main() {
 }
 ```
 
-*Code 9: Code for execution time test of all functions we create to Two-Sum problem.*{: class="legend"}
+*Code 8: Code for execution time test of all functions we create to Two-Sum problem.*{: class="legend"}
 
-Running the new code, we have the following output:
+I simply replicated the functions from the previous code snippets, without any optimization, precisely because our current objective is to solely examine the execution times. Running the new code, we have the following output:
 
 ```Shell
 -----------------------------------
@@ -1799,6 +1662,10 @@ Average time for Tabulation: 15144 ns
 ```
 
 *Output 4: Execution time of Two-Sum solutions.*{: class="legend"}
+
+As we've seen, when dealing with a small amount of input data, the brute-force approach surprisingly outshines even more complex algorithms. This might seem counterintuitive, but it's all about the hidden costs of memory management.
+
+When we use sophisticated data structures like std::string and std::unordered_map, we pay a price in terms of computational overhead. Allocating and deallocating memory on the heap for these structures takes time and resources. This overhead becomes especially noticeable when dealing with small datasets, where the time spent managing memory can easily overshadow the actual computation involved. On the other hand, the brute-force method often relies on simple data types and avoids dynamic memory allocation, resulting in a faster and more efficient solution for smaller inputs. 
 
 ##### The Dynamic Memory Bottleneck
 
@@ -1837,7 +1704,7 @@ Try to solve these variations. Take as much time as you need; I will wait.
 
 ### The Dynamic Programming Classic Problems
 
-From now on, we will explore 10 classic dynamic programming problems. For each one, we will delve into brute force techniques, recursion, memoization, tabulation, and finally the most popular solution for each, even if it is not among the techniques we have chosen. The problems we will address are listed in the table below.
+From now on, we will explore 10 classic dynamic programming problems. For each one, we will delve into brute force techniques, recursion, memoization, tabulation, and finally the most popular solution for each, even if it is not among the techniques we have chosen. The problems we will address are listed in the table below[^2].
 
 | Name                                        | Description/Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 |---------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1859,3 +1726,9 @@ From now on, we will explore 10 classic dynamic programming problems. For each o
 Stop for a moment, perhaps have a soda or a good wine. Rest a bit, then gather your courage, arm yourself with patience, and continue. Practice makes perfect.
 
 This will continue!!!
+
+## Notes and References
+
+[^1] this ideia come from [Introduction to Dynamic Programming](https://cp-algorithms.com/dynamic_programming/intro-to-dp.html)
+
+[^2] most of this table came from [Introduction to Dynamic Programming](https://cp-algorithms.com/dynamic_programming/intro-to-dp.html)
