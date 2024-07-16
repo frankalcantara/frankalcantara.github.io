@@ -1876,7 +1876,7 @@ There are few interesting variations of Two-Sum problem:
 
 Try to solve these variations. Take as much time as you need; I will wait.
 
-### The Dynamic Programming Classic Problems
+## The Dynamic Programming Classic Problems
 
 From now on, we will explore 10 classic dynamic programming problems. For each one, we will delve into brute force techniques, recursion, memoization, tabulation, and finally the most popular solution for each, even if it is not among the techniques we have chosen. The problems we will address are listed in the table below[^2].
 
