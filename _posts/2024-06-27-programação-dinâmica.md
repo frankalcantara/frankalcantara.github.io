@@ -410,7 +410,7 @@ def fibonacci_tabulation(n):
     return dp[n]
 ```
 
-*Code Fragment 3A - Tabulation Function Iteration*{: class="legend"}
+*Code Fragment 3B - Tabulation Function Iteration*{: class="legend"}
 
 -`for i in range(2, n + 1)`: This loop starts from $2$ and iterates up to $n$.
 -`dp[i] = dp[i-1] + dp[i-2]`: This calculates the ith Fibonacci number by summing the previous two Fibonacci numbers (i.e., `fibonacci_tabulation(i-1)` and `fibonacci_tabulation(i-2)`) and stores it in the `dp` list at index $i$.
