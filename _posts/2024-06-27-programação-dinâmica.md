@@ -1276,20 +1276,9 @@ We'll modify the recursive function to check the memoization map before performi
 
 ##### Memoized Recursive Solution in C++20
 
-So, our code is:
+The only significant modification in Code 5 is the conversion of the recursive function to dynamic programming with memoization. Code 6 presents this updated function.
 
 ```cpp
-#include <vector>
-#include <unordered_map>
-#include <optional>
-#include <utility>
-#include <iostream>
-
-// Helper function to create a unique key for memoization
-std::string createKey(int start, int end) {
-    return std::to_string(start) + "," + std::to_string(end);
-}
-
 // Recursive function with memoization to find a pair of numbers that add up to the target sum
 std::optional<std::pair<int, int>> findPairRecursivelyMemo(
     const std::vector<int>& arr, 
@@ -1330,35 +1319,9 @@ std::optional<std::pair<int, int>> findPairRecursivelyMemo(
     memo[key] = result; // Store the result in the memoization map
     return result; // Return the result
 }
-
-// Function to find a pair of numbers that add up to the target sum using memoization
-std::optional<std::pair<int, int>> ValuesMemo(const std::vector<int>& sequence, int targetSum) {
-    // Memoization map to store results of subproblems
-    std::unordered_map<std::string, std::optional<std::pair<int, int>>> memo;
-    // Call the recursive function with initial indices (0 and size-1)
-    return findPairRecursivelyMemo(sequence, targetSum, 0, sequence.size() - 1, memo);
-}
-
-int main() {
-    // Example usage
-    std::vector<int> sequence = { 8, 10, 2, 9, 7, 5 }; // Input array
-    int targetSum = 11; // Target sum
-
-    // Call the function to find the pair
-    auto result = ValuesMemo(sequence, targetSum);
-    
-    // Print the result
-    if (result) {
-        std::cout << "Pair found: (" << result->first << ", " << result->second << ")\n";
-    } else {
-        std::cout << "No pair found.\n";
-    }
-    
-    return 0;
-}
 ```
 
-*Code 6: Full code of a two-sum using a Memoized function*{: class="legend"}
+*Code Fragment 13 - Two-sum using a Memoized function*{: class="legend"}
 
 ##### Complexity Analysis of the Memoized Solution
 
@@ -1415,7 +1378,7 @@ In the context of our problem, tabulation means creating a table to store soluti
 
 So, even though the brute-force approach may seem like the only option right now, don't give up! Attention! Spoiler Alert! With dynamic programming and tabulation, we can explore the maze more efficiently and hopefully find the treasure we've been seeking.
 
-##### C++ code for Two-Sum problem using tabulation 
+##### C++ code for Two-Sum problem using tabulation
 
 The code is:
 
@@ -1464,7 +1427,7 @@ int main() {
 }
 ```
 
-*Code 7: Full code of a two-sum using a tabulated function*{: class="legend"}
+*Code 9: Full code of a two-sum using a tabulated function*{: class="legend"}
 
 The `std::optional<std::pair<int, int>> ValuesTabulation(const std::vector<int>& sequence, int targetSum)` function uses a hash table (`std::unordered_map`) to store elements of the array and their indices. For each element in the array, it calculates the complement, which is the difference between the target sum and the current element. It then checks if the complement exists in the hash table. If the complement is found, a pair that sums to the target has been identified and the function returns this pair. If the complement does not exist, the function stores the current element and its index in the hash table and proceeds to the next element.
 
@@ -1608,10 +1571,8 @@ std::optional<std::pair<int, int>> ValuesTabulation(const std::vector<int>& sequ
 }
 
 int main() {
-    std::vector<int> sequence = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-                                 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-                                 21, 22, 23, 24, 25, 26, 27, 28, 8, 10 }; // 40 numbers
-    int targetSum = 18;
+    std::vector<int> sequence = {8, 10, 2, 9, 7, 5};; // 40 numbers
+    int targetSum = 11;
     int iterations = 1000;
 
     std::cout << "-----------------------------------\n";
@@ -1647,7 +1608,7 @@ int main() {
 }
 ```
 
-*Code 8: Code for execution time test of all functions we create to Two-Sum problem.*{: class="legend"}
+*Code 10: Code for execution time test of all functions we create to Two-Sum problem.*{: class="legend"}
 
 I simply replicated the functions from the previous code snippets, without any optimization, precisely because our current objective is to solely examine the execution times. Running the new code, we have the following output:
 
@@ -1665,7 +1626,7 @@ Average time for Tabulation: 15144 ns
 
 As we've seen, when dealing with a small amount of input data, the brute-force approach surprisingly outshines even more complex algorithms. This might seem counterintuitive, but it's all about the hidden costs of memory management.
 
-When we use sophisticated data structures like std::string and std::unordered_map, we pay a price in terms of computational overhead. Allocating and deallocating memory on the heap for these structures takes time and resources. This overhead becomes especially noticeable when dealing with small datasets, where the time spent managing memory can easily overshadow the actual computation involved. On the other hand, the brute-force method often relies on simple data types and avoids dynamic memory allocation, resulting in a faster and more efficient solution for smaller inputs. 
+When we use sophisticated data structures like `std::string` and `std::unordered_map`, we pay a price in terms of computational overhead. Allocating and deallocating memory on the heap for these structures takes time and resources. This overhead becomes especially noticeable when dealing with small datasets, where the time spent managing memory can easily overshadow the actual computation involved. On the other hand, the brute-force method often relies on simple data types and avoids dynamic memory allocation, resulting in a faster and more efficient solution for smaller inputs.
 
 ##### The Dynamic Memory Bottleneck
 
@@ -1689,7 +1650,220 @@ The memoized solution, while clever, bears the brunt of both issues – extensiv
 
 In conclusion, the observed differences in execution times can be attributed to the distinct memory access patterns and associated overheads inherent in each approach. Understanding these nuances is crucial for making informed decisions when optimizing code for performance.
 
-In this way, if you are in a programming competition where execution time is one of the ranking factors, Brute Force is your solution. It deeply pains my heart to write this. And we will always have C. *C-Style arrays will add performance to our code. However, C is not the focus of this text*. Good luck with that. For us, having finished the basics, it's time to work on other classic problems.
+### We will always have C
+
+As we delve into dynamic programming with C++, our focus is on techniques that shine in interviews and coding competitions. Since competitive coding often favors slick C-style code, we'll zero in on a tabulation solution for this problem. Tabulation, as we know, is usually the most efficient approach.  To show you what I mean, check out the `int* ValuesTabulationCStyle(const int* sequence, int length, int targetSum)` function in Code Fragment 12.
+
+```Cpp
+int* ValuesTabulationCStyle(const int* sequence, int length, int targetSum) {
+    const int MAX_VAL = 1000; // Assuming the values in the sequence are less than 1000
+    static int result[2] = { -1, -1 }; // Static array to return the result
+    int table[MAX_VAL];
+    memset(table, -1, sizeof(table));
+
+    for (int i = 0; i < length; ++i) {
+        int complement = targetSum - sequence[i];
+        if (complement >= 0 && table[complement] != -1) {
+            result[0] = sequence[i];
+            result[1] = complement;
+            return result;
+        }
+        table[sequence[i]] = i;
+    }
+    return result;
+}
+```
+
+*Code Fragment 14 - Two-sum with C-Style code, using a Memoized Function*{: class="legend"}
+
+
+The C-style function is as straightforward as it gets, and as far as I can tell, it's equivalent to the C++ tabulation function. Perhaps the only thing worth noting is the use of the memset function.
+
+>The `memset` function in C and C++ is your go-to tool for filling a block of memory with a specific value. You'll usually find it defined in the `<cstring>` header.  It takes a pointer to the memory block you want to fill (`ptr`), the value you want to set (converted to an `unsigned char`), and the number of bytes you want to set.
+>In our code, `memset(table, -1, sizeof(table))`; does exactly that—it fills the entire table array with the value $-1$, which is a handy way to mark those spots as empty or unused.
+>Why use `memset` instead of `malloc` or `alloc`? Well, `memset` is all about initializing memory that's already been allocated. `malloc` and `alloc` are for allocating new memory. If you need to do both, C++ has you covered with the `new` operator, which can allocate and initialize in one step.
+>So, `memset` is the memory magician for resetting or initializing arrays and structures, while `malloc`, `alloc`, and `calloc` handle the memory allocation part of the job.
+
+The use of `menset` bring us to analise the function complexity.
+
+#### Two-Sum C-Style Tabulation Function Complexity
+
+The function `ValuesTabulationCStyle` uses `memset` to initialize the `table` array. The complexity of the function can be divided into two parts:
+
+1. **Initialization with `memset`:**
+
+    ```cpp
+    memset(table, -1, sizeof(table));
+    ```
+
+    The memset function initializes each byte of the array. Since the size of the array is constant (`MAX_VAL`), the complexity of this operation is $O(1)$ in terms of asymptotic complexity, although it has a constant cost depending on the array size.
+
+    ```cpp
+    for (int i = 0; i < length; ++i) {
+        int complement = targetSum - sequence[i];
+        if (complement >= 0 && table[complement] != -1) {
+            result[0] = sequence[i];
+            result[1] = complement;
+            return result;
+        }
+        table[sequence[i]] = i;
+    }
+    ```
+
+2. The Main Loop
+
+    The main loop iterates over each element of the input array sequence. Therefore, the complexity of this part is $O(n)$, where n is the length of the sequence array.
+
+Combining all the pieces, the function's overall complexity is still $O(n)$. Even though initializing the array with `memset` takes $O(1)$ time, it doesn't change the fact that we have to loop through each element in the input array, which takes $O(n)$ time.
+
+Looking back at our original C++ function using `std::unordered_map`, we also had `O(1)` complexity for the map initialization and `O(n)` for the main loop. So, while using `memset` for our C-style array feels different, it doesn't change the big picture – both approaches end up with linear complexity.
+
+The key takeaway here is that while using `memset` might feel like a win for initialization time, it doesn't change the overall complexity when you consider the whole function. This leaves us with the task of running the code and analyzing the execution times, as shown in Output 5.
+
+```Shell
+-----------------------------------
+Calculating Two-Sum (11)
+Average time for Brute Force: 318 ns
+Average time for Recursive: 626 ns
+Average time for Memoized: 39078 ns
+Average time for Tabulation: 5882 ns
+Average time for Tabulation C-Style: 189 ns
+-----------------------------------
+```
+
+*Output 5: Execution time of Two-Sum solutions, including C-Style Arrays.*{: class="legend"}
+
+Analyzing Output 5, it's clear that the C-style solution is, for all intents and purposes, twice as fast as the C++ tabulation solution. However, there are a few caveats: the C++ code was written to showcase the language's flexibility, not to optimize for performance. On the other hand, the C-style function was designed for simplicity. Often, simplicity equates to speed, and this is something to maximize when creating a function with linear complexity. *Now, we need to compare the C solution with C++ code that prioritizes high performance over flexibility in writing*.
+
+### High Performance C++
+
+Code Fragment 15 was rewritten by stripping away all the complex data structures we were previously using. The `main()` function remains largely unchanged, so it's been omitted here. I've also removed the functions used for measuring and printing execution times.
+
+```Cpp
+// Brute Force Solution
+std::array<int, 2> ValuesBruteForce(const std::vector<int>& sequence, int targetSum) {
+    int n = sequence.size();
+    for (int i = 0; i < n - 1; ++i) {
+        for (int j = i + 1; j < n; ++j) {
+            if (sequence[i] + sequence[j] == targetSum) {
+                return { sequence[i], sequence[j] };
+            }
+        }
+    }
+    return { -1, -1 };
+}
+
+// Naive Recursive Solution
+std::array<int, 2> findPairRecursively(const std::vector<int>& arr, int target, int start, int end) {
+    if (start >= end) {
+        return { -1, -1 };
+    }
+    if (arr[start] + arr[end] == target) {
+        return { arr[start], arr[end] };
+    }
+    std::array<int, 2> result = findPairRecursively(arr, target, start + 1, end);
+    if (result[0] != -1) {
+        return result;
+    }
+    return findPairRecursively(arr, target, start, end - 1);
+}
+
+std::array<int, 2> ValuesRecursive(const std::vector<int>& sequence, int targetSum) {
+    return findPairRecursively(sequence, targetSum, 0, sequence.size() - 1);
+}
+
+// Memoized Recursive Solution
+std::array<int, 2> findPairRecursivelyMemo(
+    const std::vector<int>& arr, int target, int start, int end,
+    std::array<std::array<int, 2>, 1000>& memo) {
+    if (start >= end) {
+        return { -1, -1 };
+    }
+    if (memo[start][end][0] != -1) {
+        return memo[start][end];
+    }
+    if (arr[start] + arr[end] == target) {
+        memo[start][end] = { arr[start], arr[end] };
+        return { arr[start], arr[end] };
+    }
+    std::array<int, 2> result = findPairRecursivelyMemo(arr, target, start + 1, end, memo);
+    if (result[0] != -1) {
+        memo[start][end] = result;
+        return result;
+    }
+    result = findPairRecursivelyMemo(arr, target, start, end - 1, memo);
+    memo[start][end] = result;
+    return result;
+}
+
+std::array<int, 2> ValuesMemoized(const std::vector<int>& sequence, int targetSum) {
+    std::array<std::array<int, 2>, 1000> memo;
+    for (auto& row : memo) {
+        row = { -1, -1 };
+    }
+    return findPairRecursivelyMemo(sequence, targetSum, 0, sequence.size() - 1, memo);
+}
+
+// Tabulation Solution using C-style arrays
+std::array<int, 2> ValuesTabulationCStyle(const int* sequence, int length, int targetSum) {
+    const int MAX_VAL = 1000; // Assuming the values in the sequence are less than 1000
+    std::array<int, 2> result = { -1, -1 }; // Static array to return the result
+    int table[MAX_VAL];
+    memset(table, -1, sizeof(table));
+
+    for (int i = 0; i < length; ++i) {
+        int complement = targetSum - sequence[i];
+        if (complement >= 0 && table[complement] != -1) {
+            result[0] = sequence[i];
+            result[1] = complement;
+            return result;
+        }
+        table[sequence[i]] = i;
+    }
+    return result;
+}
+```
+
+*Code Fragment 15 - All Two-sum functions including a pure `std::array` tabulated function*{: class="legend"}
+
+Running this modified code, we get the following output:
+
+```Shell
+-----------------------------------
+Calculating Two-Sum (11)
+Average time for Brute Force: 157 ns
+Average time for Recursive: 652 ns
+Average time for Memoized: 39514 ns
+Average time for Tabulation: 5884 ns
+Average time for Tabulation C-Style: 149 ns
+-----------------------------------
+```
+
+*Output 6: Execution time of All Two-Sum solutions including C-style Tabulation.*{: class="legend"}
+
+Let's break down the results for calculating the Two-Sum problem, keeping in mind that the fastest solutions have a linear time complexity, O(n):
+
+- **Brute Force**: Blazing fast at 157 ns on average. This is our baseline, but remember, brute force doesn't always scale well for larger problems.
+- **Recursive**: A bit slower at 652 ns. Recursion can be elegant, but it can also lead to overhead.
+- **Memoized**: This one's the outlier at 39514 ns. Memoization can be a powerful optimization, but it looks like the overhead is outweighing the benefits in this case.
+- **Tabulation**: A respectable 5884 ns. Tabulation is a solid dynamic programming technique, and it shows here.
+- **Tabulation C-Style**: A close winner at 149 ns! This stripped-down, C-style implementation of tabulation is just a hair behind brute force in terms of speed.
+
+The C++ and C versions of our tabulation function are practically neck and neck in terms of speed for a few key reasons:
+
+1. **Shared Simplicity**: Both versions use plain old arrays (`std::array` in C++, C-style arrays in C) to store data. This means memory access is super efficient in both cases.
+
+2. **Speedy Setup**: We use `memset` to initialize the array in both versions.  This is a highly optimized operation, so the initialization step is lightning fast in both languages.
+
+3. **Compiler Magic**: Modern C++ compilers are incredibly smart. They can often optimize the code using `std::array` to be just as fast, or even faster, than hand-written C code.
+
+4. **No Frills**: Both functions have a straightforward design without any fancy branching or extra layers. The operations within the loops are simple and take the same amount of time every time, minimizing any overhead.
+
+5. **Compiler Boost**: *Compilers like GCC and Clang have a whole bag of tricks to make code run faster, like loop unrolling and smart prediction*. These tricks work equally well for both C and C++ code, especially when we're using basic data structures and simple algorithms.
+
+Thanks to all this, the C++ version of our function, using `std::array`, runs just as fast as its C counterpart.
+
+And this is how C++ code should be for competitions. However, not for interviews. In interviews, unless high performance is specifically requested, what they're looking for is your mastery of the language and the most efficient algorithms. So, an O(n) solution using the appropriate data structures will give you a better chance of success.
 
 ### Exercises: Variations of the Two Sum
 
