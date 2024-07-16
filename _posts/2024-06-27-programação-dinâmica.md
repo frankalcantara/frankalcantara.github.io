@@ -1360,9 +1360,9 @@ At this point we can create a summary table.
 
 | Solution Type   | Time Complexity | Space Complexity |
 |-----------------|-----------------|------------------|
-| Brute Force     | O(n^2)          | O(1)             |
-| Recursive       | O(2^n)          | O(n)             |
-| Memoized        | O(n^2)          | O(n^2)           |
+| Brute Force     | $O(n^2)$          | $O(1)$             |
+| Recursive       | $O(2^n)$          | $O(n)$             |
+| Memoized        | $O(n^2)$          | $O(n^2)$           |
 
 *Tabela 3 - Brute Force, Recursive and Memoized Solutions Complexity Comparison*{: class="legend"}
 
@@ -1443,10 +1443,10 @@ Comparing this with the other solutions, the brute force solution has a time com
 
 | Solution Type    | Time Complexity | Space Complexity |
 |------------------|-----------------|------------------|
-| Brute Force      | O(n^2)          | O(1)             |
-| Recursive        | O(2^n)          | O(n)             |
-| Memoized         | O(n^2)          | O(n^2)           |
-| Tabulation       | O(n)            | O(n)             |
+| Brute Force      | $O(n^2)$          | $O(1)$             |
+| Recursive        | $O(2^n)$          | $O(n)$             |
+| Memoized         | $O(n^2)$          | $O(n^2)$           |
+| Tabulation       | $O(n)$            | $O(n)$             |
 
 *Tabela 4 - Brute Force, Recursive, Memoized and Tabulated Solutions Complexity Comparison*{: class="legend"}
 
