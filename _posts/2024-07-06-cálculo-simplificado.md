@@ -1907,7 +1907,7 @@ Adotando esta notação fluxional, podemos escrever as equações mecânicas con
 
 [:1]:SWIFT, Dean. **On Poetry: a Rhapsody**, p. 20, impresso em 1733 — geralmente citado incorretamente.
 
-[:2]:Nesta posição a relação entre $dx$ e $dy$ será 1, isso irá ocorrer quando os lados do triângulo formado entre a escada e o chão for de $45^\circ$.
+[:2]:Nesta posição a relação entre $dx$ e $dy$ será 1, isso irá ocorrer quando o ângulo formado entre a escada e o chão for de $45^\circ$.
 
 [:3]:A forma clássica do teorema binomial, com coeficientes binomiais e combinações, foi desenvolvida, ao longo do tempo, por matemáticos como Al-Karaji, Jia Xian e Omar Khayyam antes de Newton. Isaac Newton, por sua vez, generalizou o teorema para incluir potências fracionárias e negativas, expandindo seu alcance e aplicações.
 
