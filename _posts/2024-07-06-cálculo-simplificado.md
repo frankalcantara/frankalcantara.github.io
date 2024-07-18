@@ -1909,9 +1909,9 @@ Adotando esta notação fluxional, podemos escrever as equações mecânicas con
 
 [:2]:Nesta posição a relação entre $dx$ e $dy$ será 1, isso irá ocorrer quando os lados do triângulo formado entre a escada e o chão for de $45^\circ$.
 
-[:3]A forma clássica do teorema binomial, com coeficientes binomiais e combinações, foi desenvolvida, ao longo do tempo, por matemáticos como Al-Karaji, Jia Xian e Omar Khayyam antes de Newton. Isaac Newton, por sua vez, generalizou o teorema para incluir potências fracionárias e negativas, expandindo seu alcance e aplicações.
+[:3]:A forma clássica do teorema binomial, com coeficientes binomiais e combinações, foi desenvolvida, ao longo do tempo, por matemáticos como Al-Karaji, Jia Xian e Omar Khayyam antes de Newton. Isaac Newton, por sua vez, generalizou o teorema para incluir potências fracionárias e negativas, expandindo seu alcance e aplicações.
 
-[:4] O Pirômetro de Radiação Féry é um dispositivo projetado para medir altas temperaturas detectando a radiação térmica emitida por um objeto. Inventado por Charles Féry no início do século XX, foi um avanço significativo na pirometria, a ciência da medição de temperatura.
+[:4]:O Pirômetro de Radiação Féry é um dispositivo projetado para medir altas temperaturas detectando a radiação térmica emitida por um objeto. Inventado por Charles Féry no início do século XX, foi um avanço significativo na pirometria, a ciência da medição de temperatura.
 
 ## APÊNDICE 1 - Binômio de Newton
 
