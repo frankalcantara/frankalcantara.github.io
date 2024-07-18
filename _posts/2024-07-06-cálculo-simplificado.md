@@ -590,7 +590,7 @@ Neste ponto, a amável leitora é capaz de diferenciar funções que sejam apena
 
 Os exercícios $1$ até $10$. Antes de ver as resoluções, tente por conta própria. Resolver exercícios é o caminho mais curto para o conhecimento.
 
-## Nº 5. Próxima Etapa. O Que Fazer com Constantes
+## Nº 5. PRÓXIMA ETAPA. O QUE FAZEMOS COM CONSTANTES
 
 Até o momento, em nossas funções, na maior parte das vezes, consideramos $x$ como crescente, e como resultado de $x$ também crescendo. Usamos $x$ para representar uma quantidade qualquer que podemos variar. E, considerando a variação de $x$ como uma espécie de causa, consideramos a variação resultante de $y$ como um efeito. Em outras palavras, consideramos o valor de $y$ como sendo dependente do valor de $x$. Tanto $x$ quanto $y$ são variáveis, mas *$x$ é aquela que operamos, a variável independente*, enquanto *$y$ é a "variável dependente*. Em todo o capítulo anterior, estivemos tentado encontrar regras para a determinar a proporção entre a variação dependente em $y$ em relação à variação independentemente feita em $x$.
 
@@ -856,7 +856,7 @@ Aplique os conceitos de derivação que vimos até agora para resolver os seguin
     n = \frac{1}{DL} \sqrt{\frac{gT}{\pi \sigma}}.
     $$
 
-    Encontre a taxa de variação da frequência quando $D$, $L$, $\sigma$ e $T$ são variáveis independentes. 
+    Encontre a taxa de variação da frequência quando $D$, $L$, $\sigma$ e $T$ são variáveis independentes.
 
     Resposta:
 
@@ -870,51 +870,1050 @@ Aplique os conceitos de derivação que vimos até agora para resolver os seguin
 
 10. A maior pressão externa $P$ que um tubo pode suportar sem colapsar é dada por
 
+    $$
+    P = \left( \frac{2E}{1 - \sigma^2} \right) \frac{t^3}{D^3},
+    $$
+
+    onde $E$ e $\sigma$ são constantes, $t$ é a espessura do tubo e $D$ é seu diâmetro. (Esta fórmula assume que $4t$ é pequeno em comparação com $D$.)
+
+    a) Compare a taxa em que $P$ varia para uma pequena mudança de espessura e para uma pequena mudança de diâmetro ocorrendo separadamente.
+
+    b) Compare a taxa na qual $P$ varia para uma pequena mudança de espessura e para uma pequena mudança de diâmetro ocorrendo separadamente.
+
+    Resposta:
+
+    $$
+    \frac{\text{Taxa de variação de } P \text{ quando } t \text{ varia}}{\text{Taxa de variação de } P \text{ quando } D \text{ varia}} = -\frac{D}{t}
+    $$
+
+11. Encontre, a partir dos primeiros princípios, a taxa na qual os seguintes variam em relação a uma mudança no raio:
+    (a) - a circunferência de um círculo de raio $r$;
+    (b) - a área de um círculo de raio $r$;
+    (c) - a área lateral de um cone de dimensão inclinada $l$;
+    (d) - o volume de um cone de raio $r$ e altura $h$;
+    (e) - a área de uma esfera de raio $r$;
+    (f) - o volume de uma esfera de raio $r$.
+
+    Resposta: $ \quad 2\pi, \, 2\pi r, \, \pi l, \, \frac{2}{3} \pi rh, \, 8\pi r, \, 4\pi r^2$
+
+12. O comprimento $L$ de uma barra de ferro na temperatura $T$ é dado por
+
+    $$
+    L = l_t \left[ 1 + 0.000012 (T - t) \right],
+    $$
+
+    onde $l_t$ é o comprimento na temperatura $t$. Encontre a taxa de variação do diâmetro $D$ de um pneu de ferro adequado para ser encolhido em uma roda, quando a temperatura $T$ varia.
+
+    Resposta: $ \quad \frac{dD}{dT} = \frac{0.000012 l_t}{\pi}$
+
+## N.º 6. SOMAS, DIFERENÇAS, PRODUTOS e QUOCIENTES
+
+Agora que a amável leitora já sabe como diferenciar funções algébricas simples, tais como $x^2 + c$ ou $ax^4$, temos que aprender como lidar com a soma de duas ou mais funções.
+
+Por exemplo, seja:
+
+$$ y = (x^2 + c) + (ax^4 + b) $$
+
+Qual será sua $\frac{dy}{dx}$? Como devemos proceder com essa nova tarefa?
+
+A resposta a esta questão é bastante simples: basta diferenciar cada termo separadamente, um após o outro, assim, teremos:
+
+$$ \frac{dy}{dx} = 2x + 4ax^3. \ (\text{Resposta}) $$
+
+Se você tiver dúvidas sobre a correção do cálculo acima, tente um caso mais geral, resolvendo-o pelos princípios fundamentais. que vimos anteriormente. Parece complicado, mas não é. Este é o caminho:
+
+Seja $ y = u + v $, onde $ u $ é qualquer função de $ x $, e $ v $ qualquer outra função de $ x $. Então, permitindo que $ x $ aumente para $ x + dx $, $ y $ aumentará para $ y + dy $; e $ u $ aumentará para $ u + du $; e $ v $ para $ v + dv $.
+
+E teremos:
+
+$$ y + dy = u + du + v + dv. $$
+
+Subtraindo o original $ y = u + v $, obtemos
+
+$$ dy = du + dv, $$
+
+e dividindo por $ dx $, obtemos:
+
+$$ \frac{dy}{dx} = \frac{du}{dx} + \frac{dv}{dx}. $$
+
+O que justifica nosso procedimento. Ou seja, você deve diferenciar cada função separadamente e somar os resultados. Esta é a *Regra da Soma que pode ser expressa como a diferencial da soma de funções e a soma da diferencial das funções*.
+
+Se agora pegarmos o exemplo do parágrafo anterior e colocarmos os valores das duas funções, teremos, usando a notação mostrada anteriormente,
+
+$$ \frac{dy}{dx} = \frac{d(x^2 + c)}{dx} + \frac{d(ax^4 + b)}{dx} $$
+
+$$ = 2x + 4ax^3 $$
+
+Exatamente como  encontramos antes.
+
+Se houvesse três funções em $x$, que poderíamos chamar de $ u $, $ v $ e $ w $, de modo que
+
+$$ y = u + v + w $$
+
+Sendo assim
+
+$$ \frac{dy}{dx} = \frac{du}{dx} + \frac{dv}{dx} + \frac{dw}{dx}. $$
+
+Quanto à subtração? não há problema algum quanto a subtração de funções. *Se a função $ v $ tivesse um sinal negativo, seu coeficiente diferencial também seria negativo*. Assim, ao diferenciar:
+
+$$ y = u - v $$
+
+Obteremos:
+
+$$ \frac{dy}{dx} = \frac{du}{dx} - \frac{dv}{dx}. $$
+
+Quando tratamos de Produtos de Funções, a coisa não é tão simples. Suponha que a amável leitora tivesse que diferenciar a expressão:
+
+$$ y = (x^2 + c) \times (ax^4 + b), $$
+
+Por onde, a esforçada leitora começaria?
+
+Posso adiantar que o resultado não será $2x \times 4ax^3$, pois é fácil ver que nem $c \times ax^4$, nem $x^2 \times b$ teriam sido considerados nesse resultado. Na verdade, existem duas formas de resolvermos este problema.
+
+**Primeira forma**: fazer a multiplicação primeiro, depois de resolvê-la, então diferenciar. Nesta forma faríamos assim:
+
+    Multiplicamos $x^2 + c$ e $ax^4 + b$. Obtendo: $ax^6 + acx^4 + bx^2 + bc$.
+
+    Agora que não temos multiplicação de funções, diferenciamos, usando a regra da soma, que vimos acima, e obtemos:
+
+    $$ \frac{dy}{dx} = 6ax^5 + 4acx^3 + 2bx. $$
+
+**Segunda forma**: usando a regra do produto de funções que veremos a seguir. Antes, considere a equação:
+
+    $$ y = u \times v $$
+
+    onde $u$ é uma função de $ x $, e $ v $ é qualquer outra função de $ x $. Observe com cuidado porque isso é importante $u$ e $v$ são duas funções de $x$. Neste caso, e só neste caso, se $ x $ crescer para $ x + dx $; e $ y $ crescer para $ y + dy $, $ u $ se tornar $ u + du $, e $ v $ se tornar $ v + dv $, teremos:
+
+    $$ y + dy = (u + du) \times (v + dv) $$
+
+    $$ = u \times v + u \times dv + v \times du + du \times dv $$
+
+    Agora, $ du \times dv $ é uma quantidade pequena de segunda ordem de pequenez, e, portanto, como fizemos até agora, pode ser descartada.
+
+    $$ y + dy = u \times v + u \times dv + v \times du $$
+
+    A seguir, subtraindo o original $ y = u \times v $, temos
+
+    $$ dy = u \times dv + v \times du; $$
+
+    e, dividindo por $ dx $, obtemos o resultado:
+
+    $$ \frac{dy}{dx} = u \frac{dv}{dx} + v \frac{du}{dx}. $$
+
+A segunda forma nos permitiu encontrar uma nova regra de diferenciação: a Regra do Produto: *para diferenciar o produto de duas funções, multiplique cada função pelo coeficiente diferencial da outra, e some os dois produtos assim obtidos. Que pode ser memorizada usando a seguinte estrutura: $uv = vdu+udv$ que se lê: $u$ vezes $v$ é igual a $vdu$ mais $udv$*.
+
+Certamente a atenta leitora notou que esse processo equivale a: Tratar $u$ como constante enquanto diferencia $v$; depois tratar $v$ como constante enquanto diferencia $u$. Assim, o coeficiente diferencial total $\frac{dy}{dx}$ será a soma desses dois tratamentos. Tendo encontrado essa regra, aplique-a ao exemplo concreto que foi considerado acima.
+
+Queremos diferenciar o produto:
+
+$$ (x^2 + c) \times (ax^4 + b). $$
+
+Chame $(x^2 + c) = u$; e $(ax^4 + b) = v$.
+
+Usando a Regra do Produto de Funções, podemos escrever:
+
+$$ \frac{dy}{dx} = (x^2 + c) \frac{d(ax^4 + b)}{dx} + (ax^4 + b) \frac{d(x^2 + c)}{dx} $$
+
+$$ = (x^2 + c) 4ax^3 + (ax^4 + b) 2x $$
+
+$$ = 4ax^5 + 4acx^3 + 2ax^5 + 2bx, $$
+
+$$ \frac{dy}{dx} = 6ax^5 + 4acx^3 + 2bx, $$
+
+Cujo resultado confirma o resultado que encontramos na primeira forma, quando multiplicamos os binômios antes de derivar. Por último, temos que diferenciar quocientes. Se sabemos diferenciar o produto de duas funções, podemos pensar em diferenciar a divisão de duas funções. Aqui será necessário que a leitora considere a seguinte função:
+
+$$ y = \frac{bx^5 + c}{x^2 + a} $$
+
+Em tal caso, não adianta tentar resolver a divisão previamente, porque $x^2 + a$ não divide $bx^5 + c$, e sequer  possuem qualquer fator comum. Então, não há nada a fazer a não ser lançar mão dos princípios que vimos até agora e procurar uma regra para a divisão de funções.
+
+Podemos começar simplificando o problema, criando uma representação das funções:
+
+$$ y = \frac{u}{v}; $$
+
+onde $u$ e $v$ são duas funções diferentes da variável independente $x$. Quando $x$ se tornar $x + dx$, $y$ se tornará $y + dy$, e $u$ se tornará $u + du$, e $v$ se tornará $v + dv$.
+
+$$ y + dy = \frac{u + du}{v + dv}. $$
+
+Agora, podemos executar uma divisão algébrica, assim:
+
+$$ \frac{u + du}{v + dv} = \frac{u + du}{v} \cdot \frac{1}{1 + \frac{dv}{v}} = \frac{u + du}{v} \cdot (1 - \frac{dv}{v}) = \frac{u + du}{v} - \frac{u + du \cdot dv}{v^2} $$
+
+Obtendo:
+
+$$ \frac{u + du}{v} - \frac{u \cdot dv + du \cdot dv}{v^2} $$
+
+Continuando a simplificação, teremos:
+
+$$ \frac{u + du}{v} - \frac{u \cdot dv}{v^2} - \frac{du \cdot dv}{v^2} $$
+
+Dividindo por $dx$, obtemos:
+
+$$ \frac{dy}{dx} = \frac{du}{dx} \cdot \frac{1}{v} + \frac{u}{v} \cdot \frac{dv}{dx} $$
+
+$$ - \frac{u \cdot dv}{v^2} - \frac{du \cdot dv}{v^2} + \frac{u \cdot dv \cdot dv}{v^2} $$
+
+Como os restos são pequenas quantidades de segunda ordem, podem ser negligenciados, e a divisão pode parar aqui, já que quaisquer outros restos seriam de magnitudes menores que os restos que já foram ignorados. Desta forma, teremos:
+
+$$ y + dy = \frac{u}{v} + \frac{du}{v} - \frac{u \cdot dv}{v^2}$$
+
+Que pode ser escrito como:
+
+$$ = \frac{u}{v} + \frac{v \cdot du - u \cdot dv}{v^2} $$
+
+Agora subtraia o original $ y = \frac{u}{v} $, e restará:
+
+$$ dy = \frac{v \cdot du - u \cdot dv}{v^2} $$
+
+Logo:
+
+$$ \frac{dy}{dx} = \frac{v \frac{du}{dx} - u \frac{dv}{dx}}{v^2}. $$
+
+Esta última equação contém as instruções sobre como diferenciar um quociente de duas funções. **Multiplique a função divisor pelo coeficiente diferencial da função dividendo; depois multiplique a função dividendo pelo coeficiente diferencial da função divisor; e subtraia. Por fim, divida pelo quadrado da função divisor. Que pode ser memorizado como: $u$ dividido por $v$ é igual a $vdu$ menos $udv$ tudo dividido por $v^2$*.
+
+Finalmente podemos tentar diferenciar a função que propomos no início deste dilema: $y = \frac{bx^5 + c}{x^2 + a}$. Vamos considerar que: $bx^5 + c = u$ e $x^2 + a = v$. Se fizermos assim, teremos:
+
+$$ \frac{dy}{dx} = \frac{(x^2 + a) \frac{d(bx^5 + c)}{dx} - (bx^5 + c) \frac{d(x^2 + a)}{dx}}{(x^2 + a)^2} $$
+
+$$ = \frac{(x^2 + a)(5bx^4) - (bx^5 + c)(2x)}{(x^2 + a)^2} $$
+
+$$ \frac{dy}{dx} = \frac{3bx^6 + 5abx^4 - 2cx}{(x^2 + a)^2}. \ (\text{Resposta}) $$
+
+A resolução da diferencial de quocientes é muitas vezes tediosa e trabalhosa, mas não é difícil! Alguns exemplos adicionais totalmente resolvidos, apresentados a seguir, devem permitir que a amável leitora, sedimente este processo. Este é o momento de ser paciente e persistente. Refaça todos os exemplos no seu caderno. Isso irá melhorar a compreensão deste processo de diferenciação.
+
+### Exemplos
+
+1. Diferenciar $ y = \frac{a}{b^2}x^3 - \frac{a^2}{b}x + \frac{a^2}{b^2} $.
+
+    Sendo uma constante, o último termo $\frac{a^2}{b^2}$ desaparece, e temos:
+
+    $$ \frac{dy}{dx} = \frac{a}{b^2} \times 3 \times x^{3-1} - \frac{a^2}{b} \times 1 \times x^{1-1}. $$
+
+    Como $ x^{1-1} = x^0 = 1 $ obtemos:
+
+    $$ \frac{dy}{dx} = \frac{3a}{b^2} x^2 - \frac{a^2}{b}. $$
+
+2. Diferenciar $ y = 2a\sqrt{bx^3} - \frac{3b\sqrt{a}}{x} - 2\sqrt{ab} $.
+
+    Colocando $ x $ na forma de índice, obtemos
+
+    $$ y = 2a\sqrt{b}x^{\frac{3}{2}} - 3b\sqrt{a}x^{-1} - 2\sqrt{ab} $$
+
+    Agora, temos:
+
+    $$ \frac{dy}{dx} = 2a\sqrt{b} \times \frac{3}{2} \times x^{\frac{3}{2} - 1} - 3b\sqrt{a} \times (-1) \times x^{-1-1}; $$
+
+    ou, finalmente:
+
+    $$ \frac{dy}{dx} = 3a\sqrt{bx} + \frac{3b\sqrt{a}}{x^2}. $$
+
+3. Diferenciar $ z = 1.8 \sqrt[3]{\frac{1}{\theta^2}} - \frac{4.4}{\sqrt[5]{\theta}} - 27^\circ $.
+
+    Essa função pode ser escrita como: $ z = 1.8 \theta^{-\frac{2}{3}} - 4.4 \theta^{-\frac{1}{5}} - 27^\circ $.
+
+    Os, por serem constantes, $ 27^\circ $ desaparecem, e teremos:
+
+    $$ \frac{dz}{d\theta} = 1.8 \times -\frac{2}{3} \times \theta^{-\frac{2}{3}-1} - 4.4 \times \left(-\frac{1}{5}\right) \theta^{-\frac{1}{5}-1}$$
+
+    ou:
+
+    $$ \frac{dz}{d\theta} = -1.2 \theta^{-\frac{5}{3}} + 0.88 \theta^{-\frac{6}{5}}; $$
+
+    ou,
+
+    $$ \frac{dz}{d\theta} = \frac{0.88}{\sqrt[5]{\theta^6}} - \frac{1.2}{\sqrt[3]{\theta^5}} $$
+
+4. Diferenciar $ v = (3t^2 - 1.2t + 1)^3 $.
+
+    Uma forma direta de resolver essa diferencial será explicada mais tarde. Contudo, com o que já sabemos, podemos resolve-la sem nenhuma dificuldade. Desenvolvendo o cubo, obtemos
+
+    $$ v = 27t^6 - 32.4t^5 + 39.96t^4 - 23.328t^3 + 13.32t^2 - 3.6t + 1; $$
+
+    portanto,
+
+    $$ \frac{dv}{dt} = 162t^5 - 162t^4 + 159.84t^3 - 69.984t^2 + 26.64t - 3.6. $$
+
+5. Diferenciar $ y = (2x - 3)(x + 1)^2 $.
+
+    $$ \frac{dy}{dx} = (2x - 3) \frac{d[(x + 1)(x + 1)]}{dx} + (x + 1)^2 \frac{d(2x - 3)}{dx} $$
+
+    $$ = (2x - 3) \left[ (x + 1) \frac{d(x + 1)}{dx} + (x + 1) \frac{d(x + 1)}{dx} \right] + (x + 1)^2 \frac{d(2x - 3)}{dx} $$
+
+    $$ = 2(x + 1) [(2x - 3) + (x + 1)] = 2(x + 1)(3x - 2) $$
+
+    ou, simplesmente, multiplique e depois diferencie.
+
+6. Diferenciar $ y = 0.5x^3(x - 3) $.
+
+    $$ \frac{dy}{dx} = 0.5 \left[ x^3 \frac{d(x - 3)}{dx} + (x - 3) \frac{d(x^3)}{dx} \right] $$
+
+    $$ = 0.5 \left[ x^3 + (x - 3) \times 3x^2 \right] = 2x^3 - 4.5x^2. $$
+
+    Valem as mesmas observações que fizemos no exemplo anterior.
+
+7. Diferenciar $ w = \left( \theta + \frac{1}{\theta} \right) \left( \sqrt{\theta} + \frac{1}{\sqrt{\theta}} \right) $.
+
+    Podemos escrever esta função como:
+
+    $$ w = (\theta + \theta^{-1})(\theta^{\frac{1}{2}} + \theta^{-\frac{1}{2}}). $$
+
+    O que nos levará a:
+
+    $$ \frac{dw}{d\theta} = (\theta + \theta^{-1}) \frac{d(\theta^{\frac{1}{2}} + \theta^{-\frac{1}{2}})}{d\theta} + (\theta^{\frac{1}{2}} + \theta^{-\frac{1}{2}}) \frac{d(\theta + \theta^{-1})}{d\theta} $$
+
+    $$ = (\theta + \theta^{-1}) \left( \frac{1}{2} \theta^{-\frac{1}{2}} - \frac{1}{2} \theta^{-\frac{3}{2}} \right) + (\theta^{\frac{1}{2}} + \theta^{-\frac{1}{2}})(1 - \theta^{-2}) $$
+
+    $$ = \frac{1}{2} (\theta^{\frac{1}{2}} + \theta^{-\frac{3}{2}} - \theta - \theta^{-\frac{5}{2}}) + \frac{1}{2} \left( \theta^{\frac{1}{2}} - \theta^{-\frac{1}{2}} \right) $$
+
+    $$ = \frac{3}{2} \left( \sqrt{\theta} - \frac{1}{\sqrt[5]{\theta}} \right) + \frac{1}{2} \left( \frac{1}{\sqrt{\theta}} - \frac{1}{\sqrt[3]{\theta}} \right). $$
+
+    Este resultado poderia ter sido obtido mais simplesmente multiplicando os dois fatores primeiro e diferenciando depois. Este processo, no entanto, nem sempre é possível. Veja, por exemplo, o exemplo 8, no qual a regra para diferenciar um produto *deve* ser usada.
+
+8. Diferenciar $ y = \frac{a}{1 + a\sqrt{x} + a^2 x} $.
+
+    $$ \frac{dy}{dx} = \frac{(1 + ax^{\frac{1}{2}} + a^2 x) \times 0 - a \frac{d(1 + ax^{\frac{1}{2}} + a^2 x)}{dx}}{(1 + a\sqrt{x} + a^2 x)^2} $$
+
+    $$ = -\frac{a \left(\frac{1}{2} ax^{-\frac{1}{2}} + a^2 \right)}{(1 + a\sqrt{x} + a^2 x)^2}. $$
+
+9. Diferenciar $ y = \frac{x^2}{x^2 + 1} $.
+
+    $$ \frac{dy}{dx} = \frac{(x^2 + 1) \cdot 2x - x^2 \cdot 2x}{(x^2 + 1)^2} = \frac{2x}{(x^2 + 1)^2}. $$
+
+10. Diferenciar $ y = \frac{a + \sqrt{x}}{a - \sqrt{x}} $.
+
+    Na forma de índice, $ y = \frac{a + x^{\frac{1}{2}}}{a - x^{\frac{1}{2}}} $.
+
+    $$ \frac{dy}{dx} = \frac{(a - x^{\frac{1}{2}}) \left(\frac{1}{2} x^{-\frac{1}{2}}\right) - (a + x^{\frac{1}{2}}) \left(-\frac{1}{2} x^{-\frac{1}{2}}\right)}{(a - x^{\frac{1}{2}})^2} $$
+
+    $$ = \frac{a - x^{\frac{1}{2}} + a + x^{\frac{1}{2}}}{2(a - x^{\frac{1}{2}})^2 x^{\frac{1}{2}}}; $$
+
+    portanto,
+
+    $$ \frac{dy}{dx} = \frac{a}{(a - \sqrt{x})^2 \sqrt{x}} $$
+
+11. Diferenciar
+
+    $$ \theta = \frac{1 - a\sqrt[3]{t^2}}{1 + a\sqrt[3]{t^3}} $$
+
+    Ajustando as raízes: $\theta = \frac{1 - at^{\frac{2}{3}}}{1 + at^{\frac{3}{2}}}$
+
+    $$ \frac{d\theta}{dt} = \frac{(1 + at^{\frac{3}{2}}) \left(-\frac{2}{3} at^{-\frac{1}{3}}\right) - (1 - at^{\frac{2}{3}}) \left(\frac{3}{2} at^{\frac{1}{2}}\right)}{(1 + at^{\frac{3}{2}})^2} $$
+
+    Logo:
+
+    $$ = \frac{5a^2 \sqrt[6]{t^7} - 4a \sqrt[3]{t} - 9a \sqrt{t}}{6(1 + a \sqrt[3]{t^3})^2}. $$
+
+12. Um reservatório de seção transversal quadrada tem lados inclinados em um ângulo de $45°$ com a vertical. O lado da base é $200\, \text{m}$. Encontre uma expressão para a quantidade que entra ou sai quando a profundidade da água varia em $1\, \text{m}$; portanto, encontre, em litros, a quantidade retirada por hora quando a profundidade é reduzida de $14$ para $10\, \text{m}$ em 24 horas.
+
+    O volume de um tronco de pirâmide de altura $H$, e de bases $A$ e $a$, é
+
+    $$ V = \frac{H}{3} (A + a + \sqrt{Aa}). $$
+
+    Vê-se facilmente que, sendo a inclinação $45°$, se a profundidade for $h$, o comprimento do lado da superfície quadrada da água é $200 + 2h$ metros, de modo que o volume de água é
+
+    $$ \frac{h}{3} \left[ 200^2 + (200 + 2h)^2 + 200(200 + 2h) \right] = 40,000h + 800h^2 + \frac{4h^3}{3}. $$
+
+    A taxa de variação do volume com relação à profundidade $h$ é dada por
+
+    $$ \frac{dV}{dh} = 40,000 + 1600h + 4h^2 $$
+
+    em metros cúbicos por metro de variação de profundidade. O nível médio de 14 para 10 metros é 12 metros. Quando $ h = 12 $,
+
+    $$ \frac{dV}{dh} = 40,000 + 1600 \times 12 + 4 \times 12^2 = 50,176 \, \text{m}^3. $$
+
+    A quantidade de água em metros cúbicos que sai do reservatório ao se reduzir a profundidade de 4 metros em 24 horas é
+
+    $$
+    \Delta V \approx \frac{dV}{dh} \bigg|_{h=12} \times \Delta h = 50,176 \, \text{m}^3/\text{m} \times 4 \, \text{m} = 200,704 \, \text{m}^3
+    $$
+
+    Convertendo metros cúbicos para litros (1 metro cúbico = 1000 litros):
+
+    $$ 200,704 \, \text{m}^3 = 200,704,000 \, \text{litros}. $$
+
+    Portanto, a quantidade retirada por hora é de
+
+    $$
+    \frac{200,704 \, \text{m}^3 \times 1000 \, \text{litros/m}^3}{24 \, \text{horas}} = 8,362,666.67 \, \text{litros/hora}
+    $$
+
+13. A pressão absoluta, em atmosferas, $P$, do vapor saturado na temperatura $t^\circ \, \text{C}$. foi determinada por [Dulong](https://en.wikipedia.org/wiki/Pierre_Louis_Dulong) como sendo $P = \left( \frac{40 + t}{140} \right)^5$ desde que $t$ esteja acima de $80^\circ \, \text{C}$. Encontre a taxa de variação da pressão com a temperatura a $100^\circ \, \text{C}$.
+
+    Expanda o numerador usando o Teorema Binomial de Newton:
+
+    $$ P = \frac{1}{140^5} (40^5 + 5 \times 40^4 t + 10 \times 40^3 t^2 + 10 \times 40^2 t^3 + 5 \times 40t^4 + t^5); $$
+
+    portanto
+
+    $$ \frac{dP}{dt} = \frac{1}{537,824 \times 10^5} (5 \times 40^4 + 20 \times 40^3 t + 30 \times 40^2 t^2 + 20 \times 40t^3 + 5t^4)$$
+
+    Quando $ t = 100 $ a função resulta em $ 0.036 $ atmosferas por grau centrígrado de variação de temperatura.
+
+### EXERCÍCIOS III
+
+1. Diferencie:
+
+    (a) $ u = 1 + x + \frac{x^2}{1 \times 2} + \frac{x^3}{1 \times 2 \times 3} + \cdots. $
+    (b) $ y = ax^2 + bx + c. $
+    (c) $ y = (x + a)^2. $
+    (d) $ y = (x + a)^3. $
+
+    Resposta: (a) $1 + x + \frac{x^2}{2} + \frac{x^3}{6} + \frac{x^4}{24} + \cdots$; (b) $2ax + b.$; (c) $2x + 2a.$; (d) $3x^2 + 6ax + 3a^2.$
+
+2. Se $ w = at - \frac{1}{2}bt^2 $, encontre $\frac{dw}{dt}$.
+
+    Resposta: $\frac{dw}{dt} = a - bt.$
+
+3. Encontre o coeficiente diferencial de:
+
+    $$ y = (x + \sqrt{-1}) \times (x - \sqrt{-1}) $$
+
+    Resposta: $\frac{dy}{dx} = 2x.$
+
+4. Diferencie:
+
+    $$ y = (197x - 34x^2) \times (7 + 22x - 83x^3) $$
+
+    Resposta: $14110x^4 - 65404x^3 - 2244x^2 + 8192x + 1379$
+
+5. Se $ x = (y + 3) \times (y + 5) $, encontre $\frac{dx}{dy}$.
+
+    Resposta: $\frac{dx}{dy} = 2y + 8.$
+
+6. Diferencie $ y = 1.3709x \times (112.6 + 45.202x^2) $.
+
+    Resposta: $185.9022654x^2 + 154.36334.$
+
+    Encontre os coeficientes diferenciais de
+
+7. $ y = \frac{2x + 3}{3x + 2}. $
+
+    Resposta: $\frac{-5}{(3x + 2)^2}$
+
+8. $ y = \frac{1 + x + 2x^2 + 3x^3}{1 + x + 2x^2}. $
+
+    Resposta: $\frac{6x^4 + 6x^3 + 9x^2}{(1 + x + 2x^2)^2}.$
+
+9. $ y = \frac{ax + b}{cx + d}. $
+
+    Resposta: $\frac{ad - bc}{(cx + d)^2}.$
+
+10. $ y = \frac{x^n + a}{x^{-n} + b}. $
+
+    Resposta: $\frac{anx^{-n-1} + bnx^{n-1} + 2nx^{-1}}{(x^{-n} + b)^2}.$
+
+11. A temperatura $ t $ do filamento de uma lâmpada elétrica incandescente está relacionada à corrente que passa pela lâmpada pela relação:
+
+    $$ C = a + bt + ct^2 $$
+
+    Encontre uma expressão que forneça a variação da corrente correspondente a uma variação de temperatura.
+
+    Resposta: $b + 2ct.$
+
+12. As seguintes fórmulas foram propostas para expressar a relação entre a resistência elétrica $ R $ de um fio na temperatura $ t^\circ $ C, e a resistência $ R_0 $ desse mesmo fio a $ 0^\circ $ Centígrados, sendo $ a $, $ b $, $ c $ constantes.
+
+    $$ R = R_0 (1 + at + bt^2). $$
+    $$ R = R_0 (1 + at + b\sqrt{t}). $$
+    $$ R = R_0 (1 + at + bt^2)^{-1}. $$
+
+    Encontre a taxa de variação da resistência em relação à temperatura conforme dada por cada uma dessas fórmulas.
+
+    Resposta: $R_0(a + 2bt), \quad R_0 \left( a + \frac{b}{2\sqrt{t}} \right), \quad - \frac{R_0(a + 2bt)}{(1 + at + bt^2)^2} \quad \text{ou} \quad \frac{R^2(a + 2bt)}{R_0}.$
+
+13. A força eletromotriz $ E $ de um certo tipo de célula padrão tem sido encontrada variando com a temperatura $ t $ de acordo com a relação
+
+    $$ E = 1.4340 \left[ 1 - 0.000814(t - 15) + 0.000007(t - 15)^2 \right] \text{ volts}. $$
+
+    Encontre a variação da força eletromotriz por grau, a $ 15^\circ $, $ 20^\circ $ e $ 25^\circ $.
+
+    Resposta: $1.4340(0.000014t - 0.001024), \quad -0.00117, \quad -0.00107, \quad -0.00097.$
+
+14. A força eletromotriz necessária para manter um arco elétrico de comprimento $ l $ com uma corrente de intensidade $ i $ foi encontrada pela Sra. Ayrton como sendo
+
+    $$ E = a + bl + \frac{c + kl}{i}, $$
+
+    onde $ a $, $ b $, $ c $, $ k $ são constantes. Encontre uma expressão para a variação da força eletromotriz (a) com relação ao comprimento do arco; (b) com relação à intensidade da corrente.
+
+    Resposta: $\frac{dE}{dl} = b + \frac{k}{i}, \quad \frac{dE}{di} = - \frac{c + kl}{i^2}$
+
+## N° 7. DIFERENCIAÇÃO SUCESSIVA
+
+Um fato interessante reside na possibilidade de derivar a mesma função sucessivamente. Para entender este processo e a nomenclatura envolvida, vamos averiguar o efeito de repetir várias vezes a operação de diferenciação sobre uma função. Comecemos com um caso concreto.
+
+Vamos fazer com que $y = x^5$.
+
+Primeira diferenciação:
+
 $$
-P = \left( \frac{2E}{1 - \sigma^2} \right) \frac{t^3}{D^3},
+5x^4
 $$
 
-onde $E$ e $\sigma$ são constantes, $t$ é a espessura do tubo e $D$ é seu diâmetro. (Esta fórmula assume que $4t$ é pequeno em comparação com $D$.)
-
-a) Compare a taxa em que $P$ varia para uma pequena mudança de espessura e para uma pequena mudança de diâmetro ocorrendo separadamente.
-
-b) Compare a taxa na qual $P$ varia para uma pequena mudança de espessura e para uma pequena mudança de diâmetro ocorrendo separadamente.
-
-Resposta:
+Segunda diferenciação, derivando a equação resultante da primeira derivada:
 
 $$
-\frac{\text{Taxa de variação de } P \text{ quando } t \text{ varia}}{\text{Taxa de variação de } P \text{ quando } D \text{ varia}} = -\frac{D}{t}
+5 \times 4x^3 = 20x^3
 $$
 
-(11) Encontre, a partir dos primeiros princípios, a taxa na qual os seguintes variam em relação a uma mudança no raio:
-(a) - a circunferência de um círculo de raio $r$;
-(b) - a área de um círculo de raio $r$;
-(c) - a área lateral de um cone de dimensão inclinada $l$;
-(d) - o volume de um cone de raio $r$ e altura $h$;
-(e) - a área de uma esfera de raio $r$;
-(f) - o volume de uma esfera de raio $r$.
+Terceira diferenciação, derivando a equação resultante da segunda derivada:
 
-Resposta: $ \quad 2\pi, \, 2\pi r, \, \pi l, \, \frac{2}{3} \pi rh, \, 8\pi r, \, 4\pi r^2$
-
-(12) O comprimento $L$ de uma barra de ferro na temperatura $T$ é dado por
 $$
-L = l_t \left[ 1 + 0.000012 (T - t) \right],
+5 \times 4 \times 3x^2 = 60x^2
 $$
-onde $l_t$ é o comprimento na temperatura $t$. Encontre a taxa de variação do diâmetro $D$ de um pneu de ferro adequado para ser encolhido em uma roda, quando a temperatura $T$ varia.
 
-Resposta: $ \quad \frac{dD}{dT} = \frac{0.000012 l_t}{\pi}$
+Quarta diferenciação, aqui a atenta leitora já percebeu o padrão:
 
-## Notas de Rodapé
+$$
+5 \times 4 \times 3 \times 2x = 120x
+$$
 
-[^1]:SWIFT, Dean. **On Poetry: a Rhapsody**, p. 20, impresso em 1733 — geralmente citado incorretamente.
+Quinta diferenciação:
 
-[^2]:Nesta posição a relação entre $dx$ e $dy$ será 1, isso irá ocorrer quando os lados do triângulo formado entre a escada e o chão for de $45^\circ$.
+$$
+5 \times 4 \times 3 \times 2 \times 1 = 120
+$$
 
-[^3]A forma clássica do teorema binomial, com coeficientes binomiais e combinações, foi desenvolvida, ao longo do tempo, por matemáticos como Al-Karaji, Jia Xian e Omar Khayyam antes de Newton. Isaac Newton, por sua vez, generalizou o teorema para incluir potências fracionárias e negativas, expandindo seu alcance e aplicações.
+Sexta diferenciação:
 
-[^4] O Pirômetro de Radiação Féry é um dispositivo projetado para medir altas temperaturas detectando a radiação térmica emitida por um objeto. Inventado por Charles Féry no início do século XX, foi um avanço significativo na pirometria, a ciência da medição de temperatura.
+$$
+0
+$$
 
-## Apêndice 1 - Binômio de Newton
+Mesmo que eu não tenha destacado isso, estamos, eventualmente usando uma notação para as funções. Já empregamos, aqui ou ali, o símbolo geral $f(x)$ para indicar função em $x$. Aqui, o símbolo $f()$ é lido como "função de", sem especificar qual função particular está sendo considerada. Assim, a declaração $y = f(x)$ apenas nos diz que $y$ é uma função de $x$; pode ser $x^2$ ou $ax^n$, ou $\cos x$ ou qualquer outra função mais complicada, ou assustadora, de $x$.
+
+*O símbolo correspondente para o coeficiente diferencial, definido por [Lagrange](https://pt.wikipedia.org/wiki/Joseph-Louis_Lagrange), é $f'(x)$, que é mais simples de escrever do que $\frac{dy}{dx}$. Isso é chamado de "função derivada" de $x$. A notação específica $\frac{d}{dx} f(x)$ foi criado por [Leibnitz](https://pt.wikipedia.org/wiki/Gottfried_Leibniz)*.
+
+Suponha que diferenciássemos novamente; obteremos a "segunda função derivada" ou o segundo coeficiente diferencial, ou ainda , a segunda derivada, que será denotado por $f''(x)$; e assim por diante.
+
+Agora vamos generalizar.
+
+Seja $y = f(x) = x^n$.
+
+Primeira diferenciação, $f'(x) = nx^{n-1}$.
+
+Segunda diferenciação, $f''(x) = n(n-1)x^{n-2}$.
+
+Terceira diferenciação, $f'''(x) = n(n-1)(n-2)x^{n-3}$.
+
+Quarta diferenciação, $f''''(x) = n(n-1)(n-2)(n-3)x^{n-4}$.
+
+etc., etc.
+
+Mas esta não é a única maneira de indicar diferenciações sucessivas. Pois, se a função original for $y = f(x)$;
+
+diferenciando uma vez, obtemos:
+
+$$
+\frac{dy}{dx} = f'(x);
+$$
+
+diferenciando duas vezes, obtemos:
+
+$$
+\frac{d}{dx} \left( \frac{dy}{dx} \right) = f''(x);
+$$
+
+e isso é mais convenientemente escrito como:
+
+$$
+\frac{d^2 y}{(dx)^2}, \quad \text{ou mais usualmente} \quad \frac{d^2 y}{dx^2}.
+$$
+
+Similarmente, podemos escrever o resultado da diferenciação três vezes como:
+
+$$
+\frac{d^3 y}{dx^3} = f'''(x).
+$$
+
+### Exemplos
+
+Agora, vamos tentar $y = f(x) = 7x^4 + 3.5x^3 - \frac{1}{2}x^2 + x - 2$.
+
+Primeira derivada:
+
+$$
+\frac{dy}{dx} = f'(x) = 28x^3 + 10.5x^3 - x + 1,
+$$
+
+Segunda derivada:
+
+$$
+\frac{d^2 y}{dx^2} = f''(x) = 84x^2 + 21x - 1,
+$$
+
+Terceira derivada:
+
+$$
+\frac{d^3 y}{dx^3} = f'''(x) = 168x + 21,
+$$
+
+Quarta derivada:
+
+$$
+\frac{d^4 y}{dx^4} = f''''(x) = 168,
+$$
+
+$$
+\frac{d^5 y}{dx^5} = f''''(x) = 0.
+$$
+
+De maneira semelhante, se $y = \phi(x) = 3x(x^2 - 4)$,
+
+Primeira derivada:
+
+$$
+\phi'(x) = \frac{dy}{dx} = 3 \left[ x \times 2x + (x^2 - 4) \times 1 \right] = 3(3x^2 - 4),
+$$
+
+Segunda derivada:
+
+$$
+\phi''(x) = \frac{d^2 y}{dx^2} = 3 \times 6x = 18x,
+$$
+
+Terceira derivada:
+
+$$
+\phi'''(x) = \frac{d^3 y}{dx^3} = 18,
+$$
+
+Quarta derivada:
+
+$$
+\phi''''(x) = \frac{d^4 y}{dx^4} = 0.
+$$
+
+### Exercícios IV
+
+Encontre $\frac{dy}{dx}$ e $\frac{d^2 y}{dx^2}$ para as seguintes expressões:
+
+(1) $y = 17x + 12x^2$. 
+
+(2) $y = \frac{x^2 + a}{x + a}$.
+
+(3) $y = 1 + \frac{x}{1} + \frac{x^2}{1 \times 2} + \frac{x^3}{1 \times 2 \times 3} + \frac{x^4}{1 \times 2 \times 3 \times 4}$.
+
+(4) Encontre a segunda e terceira derivadas nas funções derivadas no Exercício III e nos exemplos dados.
+
+## Nº 8. QUANDO O TEMPO VARIA
+
+Alguns dos problemas mais importantes resolvidos com o cálculo são aqueles em que o tempo é a variável independente, e temos que averiguar os valores de alguma outra grandeza que varia quando o tempo varia. Algumas coisas crescem à medida que o tempo passa; outras coisas diminuem. A distância que um trem percorreu desde seu ponto de partida continua aumentando à medida que o tempo passa. As árvores crescem mais altas à medida que os anos passam. Qual está crescendo a uma taxa maior: uma planta de $30 \, \text{cm}$ de altura que em um mês chega a $4 \, \text{cm}$, ou uma árvore de $12 \, \text{m}$ de altura que em um ano se chega a $14 \, \text{m}$?
+
+Neste capítulo, vamos fazer uso, descabido e descontrolado, da palavra **taxa**. Nada a ver com taxa de pobreza ou taxa de água (exceto que aqui a palavra sugere uma proporção – uma razão – tantos Reais por Kilo). Nada a ver com taxa de natalidade ou taxa de mortalidade, embora essas palavras sugiram tantos nascimentos ou mortes por mil da população. Afinal, o que quero dizer com a palavra *taxa*? Sempre usaremos taxa para nos referir a uma relação de proporcionalidade entre duas variáveis. Neste Capítulo uma das variáveis será o tempo. Se um carro passa voando por nós a, digamos $30 \, \text{m}$ por segundo, um simples cálculo mental nos mostrará que isso equivale – enquanto durar – a uma taxa de $1800 \, \text{m}$ por minuto, ou mais de $100 \, \text{Km}$ por hora.
+
+Agora, em que sentido é verdadeiro que uma velocidade de $30 \, \text{m}$ por segundo é o mesmo que $1800 \, \text{m}$por minuto? Trinta metros não são a mesma coisa que 1800 metros, nem um segundo é a mesma coisa que um minuto. O que queremos dizer ao afirmar que a **taxa** é a mesma, é: **que a proporção entre a distância percorrida e o tempo gasto para percorrê-la é a mesma em ambos os casos**.
+
+Vejamos outro exemplo. Um homem pode ter apenas alguns Reais em sua posse e, mesmo assim, ser capaz de gastar dinheiro à taxa de milhões por ano – desde que continue gastando dinheiro a essa taxa por apenas alguns minutos. Suponha que você entrega um Real no balcão para pagar por alguns produtos; e suponha que a operação dura exatamente um segundo. Então, durante essa breve operação, você está se separando do seu dinheiro à taxa de 1 Real por segundo, que é a mesma taxa que $R\$ \, 60,00$ por minuto, ou $R\$ \, 3600,00$ por hora, ou $R\$ \, 86400,00$ por dia, ou $R\$ \, 2.592.000,00$ por ano! Se você tem $R\$ \, 100,00$ no bolso, pode continuar gastando dinheiro à taxa de $R\$ \, 2.592.000,00$ por ano por apenas 1 minutos e 40 segundos.
+
+Juntos vamos tentar colocar algumas dessas ideias em notação diferencial.
+
+Vamos fazer com que $y$ represente o dinheiro, e com que $t$ represente o tempo.
+
+Se você está gastando dinheiro, e a quantidade que você gasta em um curto período de tempo $dt$ é chamada de $dy$, a **taxa** de gasto será $\frac{dy}{dt}$, ou melhor, deve ser escrita com um sinal de menos, como $-\frac{dy}{dt}$, porque $dy$ é um decréscimo, não um acréscimo. Mas dinheiro não é um bom exemplo para O cálculo, porque geralmente vem e vai aos saltos, não por um fluxo contínuo – você pode ganhar $R\$ \, 100.000,00$ por ano, mas este salário não será depositado todos os dias, o dia todo em um fluxo contínuo de pequenas quantidades. Seu salário é depositado, mensalmente, trimestralmente, em blocos: e seus gastos também saem em pagamentos repentinos. *Dizemos que este processo é um processo discreto, onde não existe continuidade entre dois pontos específicos no tempo*.
+
+Uma ilustração mais adequada da ideia de taxa, que quero passar, é fornecida pela velocidade de um corpo em movimento. De Londres (estação Euston) para Liverpool são $320\, \text{Km}$. Se um trem sai de Londres às 7 horas, e chega a Liverpool às 11 horas, você sabe que, como ele percorreu $320\, \text{Km}$ em $4\, \text{h}$, sua taxa média deve ter sido $80\, \text{Km/h}$; porque $ \frac{320}{4} = 80 $. 
+
+Neste ponto, a atenta leitora está fazendo uma comparação mental entre a distância percorrida e o tempo gasto para percorrê-la. Você está dividindo um pelo outro. Se $y$ é toda a distância, e $t$ todo o tempo, claramente a taxa média será $\frac{y}{t}$. Na verdade, se olharmos com cuidado, veremos que a velocidade não foi constante o tempo todo: ao partir, durante a aceleração; e durante a desaceleração no final da viagem, a velocidade foi menor. Provavelmente em algum ponto, talvez ao descer uma colina, a velocidade foi superior a $80\, \text{Km/h}$. Se, durante qualquer elemento particular de tempo $dt$, o elemento correspondente de distância percorrida foi $dy$, então naquela parte da viagem a velocidade foi $\frac{dy}{dt}$. **A taxa na qual uma grandeza, neste caso a distância, está mudando em relação a outra grandeza, neste caso, o tempo, será adequadamente expressa, ao declararmos o coeficiente diferencial de uma em relação à outra**.
+
+Uma velocidade, corretamente expressa, será a taxa na qual uma distância muito pequena em qualquer direção dada está sendo percorrida; e pode, portanto, ser escrita como:
+
+$$ v = \frac{dy}{dt} $$
+
+Se a velocidade $v$ não for constante, então deve estar ou aumentando ou diminuindo. *A taxa na qual uma velocidade está aumentando é chamada de aceleração*. Se um corpo em movimento está, em qualquer instante particular, ganhando uma velocidade adicional $dv$ em um elemento de tempo $dt$, então a aceleração $a$ naquele instante pode ser escrita por:
+
+$$
+a = \frac{dv}{dt};
+$$
+
+mas $dv$ é, por sua vez, $d\left(\frac{dy}{dt}\right)$. Assim, podemos colocar
+
+$$
+a = \frac{d\left(\frac{dy}{dt}\right)}{dt};
+$$
+
+A aceleração é, geralmente, representada por $a = \frac{d^2 y}{dt^2}$; ou *a aceleração é o segundo coeficiente diferencial do deslocamento, em relação ao tempo*. Onde o deslocamento é a distância percorrida. A aceleração será dita como uma mudança de velocidade por unidade de tempo, por exemplo, sendo tantos metros por segundo por segundo. Que escreveremos matematicamente como $\text{m/s}$.
+
+Quando um trem começa a se mover, sua velocidade $v$ é pequena; mas está rapidamente aumentando – está sendo acelerado pelo esforço do motor. Assim, seu $\frac{d^2 y}{dt^2}$ será grande. Quando atinge sua velocidade máxima, não está mais sendo acelerado, de modo que $\frac{d^2 y}{dt^2}$ cai para zero. E a velocidade tende a ser constante. Mas, quando se aproxima do seu local de parada, sua velocidade começa a diminuir. pode, de fato, diminuir muito rapidamente se os freios forem acionados, e durante esse período de desaceleração ou redução de velocidade, o valor de $\frac{dv}{dt}$, isto é, de $\frac{d^2 y}{dt^2}$ será negativo.
+
+Para acelerar uma massa $m$ é necessária a aplicação contínua de força. A força necessária para acelerar uma massa é proporcional à essa massa, e à aceleração que está sendo imposta. Portanto, podemos escrever para a força $f$, a expressão:
+
+$$
+f = ma;
+$$
+
+ou:
+
+$$
+f = m \frac{dv}{dt};
+$$
+
+ou ainda:
+
+$$
+f = m \frac{d^2 y}{dt^2}.
+$$
+
+*O produto de uma massa pela velocidade em que está se movendo é chamado de momento*, e é simbolizado por $mv$. Se diferenciarmos o momento em relação ao tempo, obteremos $\frac{d(mv)}{dt}$, a taxa de variação do momento. Mas, como $m$ é uma quantidade constante, podemos escrever $m \frac{dv}{dt}$, que vemos acima ser o mesmo que a força, $f$. Ou seja, *a força pode ser expressa tanto como massa vezes aceleração, quanto como taxa de variação do momento*.
+
+Além disso, se uma força é empregada para mover algo (contra uma força contrária igual e oposta), ela realiza *trabalho*. *A quantidade de trabalho realizado é medida pelo produto da força pela distância (em sua própria direção) através da qual seu ponto de aplicação se move para a frente*. Assim, se uma força $f$ se move para frente através de um comprimento $y$, o trabalho realizado (que podemos chamar de $w$) será
+
+$$
+w = f \times y;
+$$
+
+onde tomamos $f$ como uma força constante. Se a força varia em diferentes partes do intervalo $y$, então devemos encontrar uma expressão para seu valor de ponto a ponto. Se $f$ for a força ao longo do pequeno elemento de comprimento $dy$, a quantidade de trabalho realizado será $f \times dy$. Mas como $dy$ é apenas um elemento de comprimento, apenas um elemento de trabalho será realizado. Se escrevermos $w$ para trabalho, então um elemento de trabalho será $dw$; e teremos:
+
+$$
+dw = f \times dy;
+$$
+
+que pode ser escrito:
+
+$$
+dw = ma \cdot dy;
+$$
+
+ou:
+
+$$
+dw = m \frac{d^2 y}{dt^2} \cdot dy;
+$$
+
+ou ainda:
+
+$$
+dw = m \frac{dv}{dt} \cdot dy;
+$$
+
+finalmente:
+
+$$
+dw = m \frac{dy}{dt} \cdot dy.
+$$
+
+Além disso, podemos transpor a expressão e escrever
+
+$$
+\frac{dw}{dy} = f.
+$$
+
+Isso nos leva a uma terceira definição de *força*: que *se está sendo usada para produzir um deslocamento em qualquer direção, a força (nessa direção) é igual à taxa na qual o trabalho está sendo realizado por unidade de comprimento naquela direção*. Nesta última sentença, a palavra *taxa* claramente é usada em seu significado de razão ou proporção.
+
+[Sir Isaac Newton](https://en.wikipedia.org/wiki/Isaac_Newton), que quase ao mesmo tempo que Leibniz descobriu os métodos do cálculo, considerava todas as quantidades que variavam como *fluxos*; e a razão que hoje em dia chamamos de coeficiente diferencial, ele considerava como a taxa de fluxo, ou o *fluxion* da quantidade em questão. Newton não usava a notação de $dy$ e $dx$, e $dt$ (essa notação é devida a Leibniz). Se $y$ fosse uma quantidade que variava, ou "fluía", então seu símbolo para sua taxa de variação (ou "fluxion") era $\dot{y}$. Se $x$ fosse a variável, então sua *fluxion* era chamada de $\dot{x}$. O ponto acima da letra indicava que ela havia sido diferenciada. Mas essa notação não nos diz qual é a variável independente em relação à qual a diferenciação foi efetuada e nunca teve o apelo necessário para sua adoção. Prevaleceu a notação de Leibnitz. Quando vemos $\frac{dy}{dt}$ sabemos que $y$ deve ser diferenciado em relação a $t$. Se vemos $\frac{dy}{dx}$ sabemos que $y$ deve ser diferenciado em relação a $x$. Mas se vemos apenas $\dot{y}$, não podemos afirmar sem olhar para o contexto se isso significa $\frac{dy}{dx}$ ou $\frac{dy}{dt}$ ou $\frac{dy}{dz}$, ou qualquer outra variável. A notação fluxional, de Newton, é menos informativa do que a notação diferencial. Mas sua simplicidade lhe dá uma vantagem se apenas concordarmos em usá-la exclusivamente para os casos onde *tempo* é a variável independente. Nesse caso, $\dot{y}$ significará $\frac{dy}{dt}$ e $\dot{u}$ significará $\frac{du}{dt}$; e $\ddot{x}$ significará $\frac{d^2 x}{dt^2}$.
+
+Adotando esta notação fluxional, podemos escrever as equações mecânicas consideradas nos parágrafos acima, da seguinte forma:
+
+| distância    | $x$     |
+|--------------|-------------|
+| velocidade   | $v = \dot{x}$ |
+| aceleração   | $a = \dot{v} = \ddot{x}$ |
+| força        | $f = m\dot{v} = m\ddot{x}$ |
+| trabalho     | $w = x \times m\ddot{x}$ |
+
+---
+
+### Exemplos
+
+1. Um corpo se move de tal forma que a distância $x$ (em metros), que ele percorre a partir de um certo ponto $O$, é dada pela relação $x = 0.2t^2 + 10.4$, onde $t$ é o tempo em segundos decorridos desde um certo instante. Encontre a velocidade e a aceleração $5$ segundos após o corpo começar a se mover, e também encontre os valores correspondentes quando a distância percorrida é de $100$ metros. Encontre também a velocidade média durante os primeiros $10$ segundos de seu movimento. (Suponha que as distâncias e o movimento para a direita sejam positivos.).
+
+    Resolvendo teremos:
+
+    $$
+    x = 0.2t^2 + 10.4
+    $$
+
+    $$
+    v = \dot{x} = \frac{dx}{dt} = 0.4t;
+    $$
+
+    e
+
+    $$
+    a = \ddot{x} = \frac{d^2 x}{dt^2} = 0.4 \quad \text{constante}.
+    $$
+
+    Quando $t = 0$, $x = 10.4$ e $v = 0$. O corpo partiu inicialmente de um ponto 10.4 metros à direita do ponto $O$; e o tempo foi contado a partir do instante em que o corpo começou a se mover.
+
+    Quando $t = 5$, $v = 0.4 \times 5 = 2 \text{m/s}$; $a = 0.4 \text{m/s}^2$.
+
+    Quando $x = 100$, $100 = 0.2t^2 + 10.4$, ou $t^2 = 448$, e $t = 21.17$ segundos; $v = 0.4 \times 21.17 = 8.468 \text{m/s}$.
+
+    Quando $t = 10$,
+
+    distância percorrida $= 0.2 \times 10^2 + 10.4 - 10.4 = 20 \text{m}$.
+
+    velocidade média $= \frac{20}{10} = 2 \text{m/s}$.
+
+    É a mesma velocidade que a velocidade no meio do intervalo, $t = 5$; pois, com a aceleração sendo constante, a velocidade variou uniformemente de zero quando $t = 0$ para $4 \, \text{m/s}$ quando $t = 10$.
+
+2. No problema acima, vamos supor que tivéssemos:
+
+    $$
+    x = 0.2t^2 + 3t + 10.4.
+    $$
+
+    Neste caso teríamos:
+
+    $$
+    v = \dot{x} = \frac{dx}{dt} = 0.4t + 3;
+    $$
+
+    $$
+    a = \ddot{x} = \frac{d^2 x}{dt^2} = 0.4 \quad \text{constante}.
+    $$
+
+    Quando $t = 0$, $x = 10.4$ e $v = 3 \text{ m/s}$, o tempo é contado a partir do instante em que o corpo passou por um ponto $10.4$ metros do ponto $O$, sua velocidade sendo então já $3 \text{ m/s}$. Para encontrar o tempo decorrido desde que o corpo começou a se mover, façamos $v = 0$; então $0.4t + 3 = 0$, ou $t = -\frac{3}{0.4} = -7.5$ segundos. O corpo começou a se mover $7.5$ segundos antes do início da observação. $5$ segundos depois disso teremos $t = -2.5$ e $v = 0.4 \times -2.5 + 3 = 2 \text{ m/s}$.
+
+    Quando $x = 100 \text{ m}$,
+
+    $$
+    100 = 0.2t^2 + 3t + 10.4; \quad \text{ou} \quad t^2 + 15t - 448 = 0;
+    $$
+
+    portanto
+
+    $$
+    t = 14.95 \text{ s}, \quad v = 0.4 \times 14.95 + 3 = 8.98 \text{ m/s}.
+    $$
+
+    Para encontrar a distância percorrida durante os primeiros 10 segundos do movimento, é necessário saber quão longe o corpo estava do ponto $O$ quando começou.
+
+    Quando $t = -7.5$,
+
+    $$
+    x = 0.2 \times (-7.5)^2 - 3 \times 7.5 + 10.4 = -0.85 \text{ m},
+    $$
+
+    isso é 0.85 m à esquerda do ponto $O$.
+
+    Agora, quando $t = 2.5$,
+
+    $$
+    x = 0.2 \times 2.5^2 + 3 \times 2.5 + 10.4 = 19.15 \text{ m}.
+    $$
+
+    Então, em 10 segundos, a distância percorrida foi $19.15 + 0.85 = 20 \text{ m}$, e
+
+    a velocidade média
+
+    $$
+    \text{velocidade média} = \frac{20}{10} = 2 \text{ m/s}.
+    $$
+
+3. Considere um problema similar quando a distância é dada por $x = 0.2t^2 - 3t + 10.4$. Então $v = 0.4t - 3$, $a = 0.4 \quad \text{constante}$. Quando $t = 0$, $x = 10.4$ como antes, e $v = -3$; de modo que o corpo estava se movendo na direção oposta ao seu movimento nos casos anteriores. Como a aceleração é positiva, no entanto, vemos que essa velocidade diminuirá à medida que o tempo passa, até que se torne zero, quando $v = 0$ ou $0.4t - 3 = 0$; ou $t = 7.5$ s. Após isso, a velocidade torna-se positiva; e 5 segundos após o corpo começar, $t = 12.5$, e
+
+    $$
+    v = 0.4 \times 12.5 - 3 = 2 \text{ m/s}.
+    $$
+
+    Resolvendo:
+
+    Quando $x = 100 \text{ m}$,
+
+    $$
+    100 = 0.2t^2 - 3t + 10.4; \quad \text{ou} \quad t^2 - 15t - 448 = 0,
+    $$
+
+    e $t = 29.95$; $v = 0.4 \times 29.95 - 3 = 8.98 \text{ m/s}$.
+
+    Quando $v$ é zero,
+
+    $$
+    x = 0.2 \times 7.5^2 - 3 \times 7.5 + 10.4 = -0.85 \text{ m},
+    $$
+
+    informando-nos que o corpo se move de volta para 0.85 m além do ponto $O$ antes de parar. Dez segundos depois
+
+    $$
+    t = 17.5 \quad \text{e} \quad x = 0.2 \times 17.5^2 - 3 \times 17.5 + 10.4 = 19.15.
+    $$
+
+    A distância percorrida $= 0.85 + 19.15 = 20.0 \text{ m}$, e a velocidade média é novamente $2 \text{ m/s}$.
+
+4. Considere um problema similar quando a distância é dada por $x = 0.2t^3 - 3t^2 + 10.4$. Então $v = 0.6t^2 - 6t$ e $a = 1.2t - 6$. A aceleração não é mais constante.
+
+    Resolvendo:
+
+    Analisando as condições iniciais:
+
+    Quando $t = 0$, temos:
+
+    - $x = 0.2(0)^3 - 3(0)^2 + 10.4 = 10.4$ metros
+    - $v = 0.6(0)^2 - 6(0) = 0$ m/s
+    - $a = 1.2(0) - 6 = -6$ m/s²
+
+    - **Posição inicial:** O corpo começa a $10,4$ metros à direita do ponto $O$.
+    - **Velocidade inicial:** O corpo está inicialmente em repouso (velocidade zero).
+    - **Aceleração inicial:** A aceleração inicial é negativa ($-6 \, \text{m/s²}$), o que significa que o corpo começará a se mover para a esquerda (em direção ao ponto $O$).
+
+    A aceleração não é constante, mas varia linearmente com o tempo. Isso significa que a velocidade não mudará a uma taxa constante.
+
+    - **Velocidade:** A velocidade será negativa enquanto a aceleração for negativa. A velocidade se tornará zero em algum momento e depois se tornará positiva.
+    - **Posição:** A posição do corpo diminuirá inicialmente (movimento para a esquerda), atingirá um valor mínimo e depois começará a aumentar (movimento para a direita).
+
+    O corpo começa em repouso a $10,4$ metros à direita do ponto $O$. Devido à aceleração negativa inicial, ele começa a se mover para a esquerda. A velocidade aumenta em módulo (mantendo-se negativa) até que a aceleração se torne zero. Após esse ponto, a aceleração se torna positiva, a velocidade diminui em módulo (ainda negativa) até se tornar zero, e então o corpo inverte o sentido do movimento e passa a se mover para a direita com velocidade crescente.
+
+5. Se temos $x = 0.2t^3 - 3t + 10.4$, então $v = 0.6t^2 - 3$, e $a = 1.2t$.
+
+    Resolvendo:
+
+    Quando $t = 0$, $x = 10.4$; $v = -3$; $a = 0$.
+
+    O corpo está se movendo em direção ao ponto $O$ com uma velocidade de 3 m/s, e nesse instante a velocidade é uniforme.
+
+    Vemos que as condições do movimento podem sempre ser determinadas de uma vez a partir da equação tempo-distância e suas primeiras e segundas derivadas. Nos dois últimos casos, a velocidade média durante os primeiros 10 segundos e a velocidade 5 segundos após o início não serão mais as mesmas, pois a velocidade não está aumentando uniformemente, já que a aceleração não é mais constante.
+
+    ![]({{ site.baseurl }}/assets/images/calc_Fig3.jpg){: class="lazyimg"}
+    *Figura 3 - Gráfico das grandezas do Exemplo 5.*{: class="legend"}
+
+6. O ângulo $\theta$ (em radianos) percorrido por uma roda é dado por $\theta = 3 + 2t - 0.1t^3$, onde $t$ é o tempo em segundos a partir de um determinado instante; encontre a velocidade angular $\omega$ e a aceleração angular $\alpha$, (a) após 1 segundo; (b) depois que a roda tiver realizado uma revolução. Em que momento ela está em repouso e quantas revoluções ela realizou até esse instante?
+
+    Resolvendo:
+
+    Escrevendo para a aceleração,
+
+    $$
+    \omega = \dot{\theta} = \frac{d\theta}{dt} = 2 - 0.3t^2, \quad \alpha = \ddot{\theta} = \frac{d^2\theta}{dt^2} = -0.6t.
+    $$
+
+    Quando $t = 0$, $\theta = 3$; $\omega = 2 \text{ rad/s}$; $\alpha = 0$.
+
+    Quando $t = 1$,
+
+    $$
+    \omega = 2 - 0.3 = 1.7 \text{ rad/s}; \quad \alpha = -0.6 \text{ rad/s}^2.
+    $$
+
+    Isso é uma desaceleração; a roda está diminuindo a velocidade.
+
+    Depois de 1 revolução,
+
+    $$
+    \theta = 2\pi = 6.28; \quad 6.28 = 3 + 2t - 0.1t^3.
+    $$
+
+    Traçando o gráfico, $\theta = 3 + 2t - 0.1t^3$, podemos obter o valor ou os valores de $t$ para os quais $\theta = 6.28$; estes são 2.11 e 3.03 (há um terceiro valor negativo).
+
+    Quando $t = 2.11$,
+
+    $$
+    \theta = 6.28; \quad \omega = 2 - 1.34 = 0.66 \text{ rad/s}; \quad \alpha = -1.27 \text{ rad/s}^2.
+    $$
+
+    Quando $t = 3.03$,
+
+    $$
+    \theta = 6.28; \quad \omega = 2 - 2.754 = -0.754 \text{ rad/s}; \quad \alpha = -1.82 \text{ rad/s}^2.
+    $$
+
+    A velocidade é invertida. A roda está evidentemente em repouso entre esses dois instantes; está em repouso quando $\omega = 0$, isto é, quando $0 = 2 - 0.3t^3$, ou quando $t = 2.58$ segundos, ela realizou
+
+    $$
+    \frac{\theta}{2\pi} = \frac{3 + 2 \times 2.58 - 0.1 \times 2.58^3}{6.28} = 1.025 \text{ revoluções}.
+    $$
+
+### Exercícios V
+
+1. Se $y = a + bt^2 + ct^4$, encontre $\frac{dy}{dt}$ e $\frac{d^2 y}{dt^2}$.
+
+   Resposta: 
+   $$
+   \frac{dy}{dt} = 2bt + 4ct^3; \quad \frac{d^2 y}{dt^2} = 2b + 12ct^2.
+   $$
+
+2. Um corpo caindo livremente no espaço descreve em $t$ segundos um espaço $s$, em metros, expresso pela equação $s = 16t^2$. Desenhe uma curva mostrando a relação entre $s$ e $t$. Também determine a velocidade do corpo nos seguintes tempos a partir do seu ponto de partida: $t = 2$ segundos; $t = 4.6$ segundos; $t = 0.01$ segundo.
+
+    Resposta:
+
+    $64$; $147.2$; e $0.32$ metros por segundo.
+
+3. Se $x = at - \frac{1}{2}gt^2$, encontre $\dot{x}$ e $\ddot{x}$.
+
+    Resposta:
+
+    $x = a - gt; \quad \ddot{x} = -g$
+
+4. Se um corpo se move de acordo com a lei
+
+   $$
+   s = 12 - 4.5t + 6.2t^2,
+   $$
+
+   encontre sua velocidade quando $t = 4$ segundos; $s$ sendo em metros.
+
+    Resposta:
+
+    $45.1$ metros por segundo.
+
+5. Encontre a aceleração do corpo mencionado no exemplo anterior. A aceleração é a mesma para todos os valores de $t$?
+
+    Resposta:
+
+    $12.4$ metros por segundo por segundo. Sim.
+
+6. O ângulo $\theta$ (em radianos) percorrido por uma roda giratória está relacionado com o tempo $t$ (em segundos) decorrido desde o início; pela lei
+
+    $$
+    \theta = 2.1 - 3.2t + 4.8t^2.
+    $$
+
+    Encontre a velocidade angular (em radianos por segundo) dessa roda quando $1 \frac{1}{2}$ segundos se passaram. Encontre também sua aceleração angular.
+
+    Resposta:
+
+    Velocidade angular $= 11.2$ radianos por segundo; aceleração angular $= 9.6$ radianos por segundo ao quadrado.
+
+7. Um deslizante se move de tal forma que, durante a primeira parte de seu movimento, sua distância $s$ em metros do ponto de partida é dada pela expressão
+
+   $$
+   s = 6.8t^3 - 10.8t; \quad t \text{ em segundos}.
+   $$
+
+   Encontre a expressão para a velocidade e a aceleração a qualquer momento; e, portanto, encontre a velocidade e a aceleração após 3 segundos.
+
+    Resposta:
+
+    $v = 20.4t^2 - 10.8$. $a = 40.8t$. $172.8$ cm/s, $122.4$ cm/s².
+
+8. O movimento de um balão ascendente é tal que sua altura $h$, em quilômetros, é dada a qualquer instante pela expressão $h = 0.5 + \frac{1}{10} \sqrt[3]{t - 125}$; $t$ sendo em segundos.
+
+   Encontre uma expressão para a velocidade e a aceleração a qualquer momento. Desenhe curvas para mostrar a variação da altura, velocidade e aceleração durante os primeiros dez minutos da ascensão.
+
+   Resposta:
+
+    $$
+    v = \frac{1}{30 \sqrt[3]{(t - 125)^2}}, \quad a = -\frac{1}{45 \sqrt[5]{(t - 125)^5}}
+    $$
+
+9. Uma pedra é lançada para baixo na água e sua profundidade $p$ em metros em qualquer instante $t$ segundos após atingir a superfície da água é dada pela expressão
+
+   $$
+   p = \frac{4}{4 + t^2} + 0.8t - 1.
+   $$
+
+   Encontre uma expressão para a velocidade e a aceleração a qualquer momento. Encontre a velocidade e a aceleração após 10 segundos.
+
+   Resposta:
+
+    $$
+    v = 0.8 - \frac{8t}{(4 + t^2)^2}, \quad a = \frac{24t^2 - 32}{(4 + t^2)^3}, \quad 0.7926 \text{ m/s e } 0.00211 \text{ m/s}^2
+    $$
+
+10. Um corpo se move de tal forma que os espaços descritos no tempo $t$ a partir da partida são dados por $s = t^n$, onde $n$ é uma constante. Encontre o valor de $n$ quando a velocidade é dobrada do quinto ao décimo segundo; encontre também quando a velocidade é numericamente igual à aceleração ao final do décimo segundo.
+
+    Resposta:
+
+    $n = 2, \quad n = 11$
+
+## NOTAS DE RODAPÉ
+
+[:1]:SWIFT, Dean. **On Poetry: a Rhapsody**, p. 20, impresso em 1733 — geralmente citado incorretamente.
+
+[:2]:Nesta posição a relação entre $dx$ e $dy$ será 1, isso irá ocorrer quando os lados do triângulo formado entre a escada e o chão for de $45^\circ$.
+
+[:3]A forma clássica do teorema binomial, com coeficientes binomiais e combinações, foi desenvolvida, ao longo do tempo, por matemáticos como Al-Karaji, Jia Xian e Omar Khayyam antes de Newton. Isaac Newton, por sua vez, generalizou o teorema para incluir potências fracionárias e negativas, expandindo seu alcance e aplicações.
+
+[:4] O Pirômetro de Radiação Féry é um dispositivo projetado para medir altas temperaturas detectando a radiação térmica emitida por um objeto. Inventado por Charles Féry no início do século XX, foi um avanço significativo na pirometria, a ciência da medição de temperatura.
+
+## APÊNDICE 1 - Binômio de Newton
 
 O Teorema Binomial de Newton é uma fórmula matemática que permite expandir expressões da forma $(x + y)^n$, onde $n$ é um número. A fórmula tem o nome de Newton porque ele generalizou o teorema binomial para potências não inteiras. Contudo, o conceito de coeficientes binomiais e suas propriedades foram estudados por vários matemáticos ao longo da história:
 
@@ -963,7 +1962,7 @@ $$
 Onde o coeficiente binomial generalizado $\binom{n}{k}$ é definido por:
 
 $$
-\binom{n}{k} = \frac{n (n-1) (n-2) \timess (n-k+1)}{k!}
+\binom{n}{k} = \frac{n (n-1) (n-2) \times (n-k+1)}{k!}
 $$
 
 ou equivalentemente,
@@ -982,9 +1981,9 @@ onde $\Gamma(z)$ é a função gama, para outros valores de $n$.
 
 Estas duas formas do teorema binomial permitem a expansão de potências de binômios tanto para casos simples de inteiros positivos quanto para casos mais complexos envolvendo expoentes fracionários ou negativos.
 
-## Exercícios Resolvidos
+## EXERCÍCIOS RESOLVIDOS
 
-### EXERCÍCIOS I RESOLVIDOS
+### Exercícios I
 
 1. $y = x^{13}$
 
@@ -1280,7 +2279,7 @@ Estas duas formas do teorema binomial permitem a expansão de potências de bin�
     \frac{dy}{dx} = -\frac{m}{2} x^{-\frac{m+2}{2}}
     $$
 
-### Exercícios II Resolvidos
+### Exercícios II
 
 Aplique os conceitos de derivação que vimos até agora para resolver os seguintes exercícios e problemas:
 
@@ -1846,407 +2845,2175 @@ onde $l_t$ é o comprimento na temperatura $t$. Encontre a taxa de variação do
 
         $$\frac{dD}{dT} = \frac{0.000012 l_t}{\pi}$$
 
-## N.º 6. Somas, Diferenças, Produtos e Quocientes
+### Exercícios III
 
-Aprendemos como diferenciar funções algébricas simples, tais como $x^2 + c$ ou $ax^4$, e agora temos que aprender como lidar com a soma de duas ou mais funções.
+1. Letra (a): Diferencie $u = 1 + x + \frac{x^2}{1 \times 2} + \frac{x^3}{1 \times 2 \times 3} + \cdots$.
 
-Por exemplo, seja:
+    Começamos com a regra da potência para diferenciar cada termo:
 
-$$ y = (x^2 + c) + (ax^4 + b) $$
+    $$
+    \frac{du}{dx} = \frac{d}{dx} \left(1 + x + \frac{x^2}{2} + \frac{x^3}{6} + \cdots \right)
+    $$
 
-Qual será sua $\frac{dy}{dx}$? Como devemos proceder com essa nova tarefa?
+    Diferenciando cada termo, obtemos:
 
-A resposta a esta questão é bastante simples: basta diferenciar cada termo separadamente, um após o outro, assim, teremos:
+    $$
+    \frac{du}{dx} = 0 + 1 + \frac{2x}{2} + \frac{3x^2}{6} + \cdots
+    $$
 
-$$ \frac{dy}{dx} = 2x + 4ax^3. \ (\text{Resposta}) $$
+    Simplificando:
 
-Se você tiver dúvidas sobre a correção do cálculo acima, tente um caso mais geral, resolvendo-o pelos princípios fundamentais. que vimos anteriormente. Parece complicado, mas não é. Este é o caminho:
+    $$
+    \frac{du}{dx} = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + \cdots
+    $$
 
-Seja $ y = u + v $, onde $ u $ é qualquer função de $ x $, e $ v $ qualquer outra função de $ x $. Então, permitindo que $ x $ aumente para $ x + dx $, $ y $ aumentará para $ y + dy $; e $ u $ aumentará para $ u + du $; e $ v $ para $ v + dv $.
+    A função $u$ é a expansão em [Série de Maclaurin](https://en.wikipedia.org/wiki/Taylor_series) da função exponencial $e^x$. Portanto, a derivada de $u$ em relação a $x$ é a própria função:
 
-E teremos:
+    $$
+    \frac{du}{dx} = \frac{d}{dx} (e^x) = e^x
+    $$
 
-$$ y + dy = u + du + v + dv. $$
+    ou, escrito na forma da série:
 
-Subtraindo o original $ y = u + v $, obtemos
+    $$
+    \frac{du}{dx} = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + \cdots
+    $$
 
-$$ dy = du + dv, $$
+    Letra (b): Diferencie $y = ax^2 + bx + c$.
 
-e dividindo por $ dx $, obtemos:
+    Começamos, novamente, com a Regra da Potência e a regra da soma:
 
-$$ \frac{dy}{dx} = \frac{du}{dx} + \frac{dv}{dx}. $$
+    $$
+    \frac{dy}{dx} = \frac{d}{dx} (ax^2) + \frac{d}{dx} (bx) + \frac{d}{dx} (c)
+    $$
 
-O que justifica nosso procedimento. Ou seja, você deve diferenciar cada função separadamente e somar os resultados. Esta é a *Regra da Soma que pode ser expressa como a diferencial da soma de funções e a soma da diferencial das funções*.
+    Diferenciando cada termo, usando a Regra da Soma, obtemos:
 
-Se agora pegarmos o exemplo do parágrafo anterior e colocarmos os valores das duas funções, teremos, usando a notação mostrada anteriormente,
+    $$
+    \frac{dy}{dx} = 2ax + b + 0
+    $$
 
-$$ \frac{dy}{dx} = \frac{d(x^2 + c)}{dx} + \frac{d(ax^4 + b)}{dx} $$
+    Simplificando:
 
-$$ = 2x + 4ax^3 $$
+    $$
+    \frac{dy}{dx} = 2ax + b
+    $$
 
-Exatamente como  encontramos antes.
+    Letra (c): Diferencie $y = (x + a)^2$.
 
-Se houvesse três funções em $x$, que poderíamos chamar de $ u $, $ v $ e $ w $, de modo que
+    Primeiro, expandimos a expressão:
 
-$$ y = u + v + w $$
+    $$
+    y = (x + a)^2 = x^2 + 2ax + a^2
+    $$
 
-Sendo assim
+    Agora, diferenciamos cada termo usando a regra da potência, a regra da multiplicação de função por constante, e a regra da soma:
 
-$$ \frac{dy}{dx} = \frac{du}{dx} + \frac{dv}{dx} + \frac{dw}{dx}. $$
+    Derivada de $x^2$:
 
-Quanto à subtração? não há problema algum quanto a subtração de funções. *Se a função $ v $ tivesse um sinal negativo, seu coeficiente diferencial também seria negativo*. Assim, ao diferenciar:
+    $$
+    \frac{d}{dx} (x^2) = 2x
+    $$
 
-$$ y = u - v $$
+    Derivada de $2ax$:
 
-Obteremos:
+    $$
+    \frac{d}{dx} (2ax) = 2a \cdot \frac{d}{dx} (x) = 2a \cdot 1 = 2a
+    $$
 
-$$ \frac{dy}{dx} = \frac{du}{dx} - \frac{dv}{dx}. $$
+    Derivada de $a^2$:
 
-Quando tratamos de Produtos de Funções, a coisa não é tão simples. Suponha que a amável leitora tivesse que diferenciar a expressão:
+    $$
+    \frac{d}{dx} (a^2) = 0 \quad \text{(porque $a^2$ é uma constante em relação a $x$)}
+    $$
 
-$$ y = (x^2 + c) \times (ax^4 + b), $$
+    Somando as derivadas:
 
-Por onde começaria?
+    $$
+    \frac{dy}{dx} = 2x + 2a + 0 = 2x + 2a
+    $$
 
-Posso adiantar que o resultado certamente não será $2x \times 4ax^3$, pois é fácil ver que nem $c \times ax^4$, nem $x^2 \times b$ teriam sido considerados nesse resultado. Na verdade, existem duas formas de resolvermos este problema.
+    Portanto, a derivada de $y = (x + a)^2$ é:
 
-Primeira forma: fazer a multiplicação primeiro, depois de resolvê-la, então diferenciar. Nesta forma faríamos assim:
+    $$
+    \frac{dy}{dx} = 2x + 2a
+    $$
 
-Multiplicamos $x^2 + c$ e $ax^4 + b$. Obtendo: $ax^6 + acx^4 + bx^2 + bc$.
+    Este exercício seria mais simples se usássemos a Regra da Cadeia, que ainda não vimos.
 
-Agora que não temos multiplicação de funções, diferenciamos, usando a regra da soma, que vimos acima, e obtemos:
+    Letra (d): Diferencie $y = (x + a)^3$.
 
-$$ \frac{dy}{dx} = 6ax^5 + 4acx^3 + 2bx. $$
+    Novamente, seria mais simples usando a Regra da Cadeia, mas como ainda não vimos esta regra, começamos expandindo a expressão:
 
-Segunda forma: usando a regra do produto de funções que veremos a seguir. Antes, considere a equação:
+    $$
+    y = (x + a)^3 = x^3 + 3ax^2 + 3a^2x + a^3
+    $$
 
-$$ y = u \times v $$
+    Agora, diferenciamos cada termo usando a regra da potência, a regra da multiplicação de função por constante, e a regra da soma:
 
-onde $u$ é uma função de $ x $, e $ v $ é qualquer outra função de $ x $. Observe com cuidado porque isso é importante $u$ e $v$ são duas funções de $x$. Neste caso, e só neste caso, se $ x $ crescer para $ x + dx $; e $ y $ crescer para $ y + dy $, $ u $ se tornar $ u + du $, e $ v $ se tornar $ v + dv $, teremos:
+    Derivada de $x^3$:
 
-$$ y + dy = (u + du) \times (v + dv) $$
+    $$
+    \frac{d}{dx} (x^3) = 3x^2
+    $$
 
-$$ = u \times v + u \times dv + v \times du + du \times dv $$
+    Derivada de $3ax^2$:
 
-Agora, $ du \times dv $ é uma quantidade pequena de segunda ordem de pequenez, e, portanto, como fizemos até agora, pode ser descartada.
+    $$
+    \frac{d}{dx} (3ax^2) = 3a \cdot \frac{d}{dx} (x^2) = 3a \cdot 2x = 6ax
+    $$
 
-$$ y + dy = u \times v + u \times dv + v \times du $$
+    Derivada de $3a^2x$:
 
-A seguir, subtraindo o original $ y = u \times v $, temos
+    $$
+    \frac{d}{dx} (3a^2x) = 3a^2 \cdot \frac{d}{dx} (x) = 3a^2 \cdot 1 = 3a^2
+    $$
 
-$$ dy = u \times dv + v \times du; $$
+    Derivada de $a^3$:
 
-e, dividindo por $ dx $, obtemos o resultado:
+    $$
+    \frac{d}{dx} (a^3) = 0 \quad \text{(porque $a^3$ é uma constante em relação a $x$)}
+    $$
 
-$$ \frac{dy}{dx} = u \frac{dv}{dx} + v \frac{du}{dx}. $$
+    Agora, somamos as derivadas:
 
-A segunda forma nos permitiu chegar a Regra do Produto: *para diferenciar o produto de duas funções, multiplique cada função pelo coeficiente diferencial da outra, e some os dois produtos assim obtidos. Que pode ser memorizada usando a seguinte regra: $uv = vdu+udv$ que se lê: $u$ veze $v$ é igual a $vdu$ mais $udv$*.
+    $$
+    \frac{dy}{dx} = 3x^2 + 6ax + 3a^2 + 0 = 3x^2 + 6ax + 3a^2
+    $$
 
-Certamente a atenta leitora notou que esse processo equivale a: Tratar $ u $ como constante enquanto diferencia $ v $; depois tratar $ v $ como constante enquanto diferencia $ u $. Assim, o coeficiente diferencial total $\frac{dy}{dx}$ será a soma desses dois tratamentos. Tendo encontrado essa regra, aplique-a ao exemplo concreto que foi considerado acima.
+    Portanto, a derivada de $y = (x + a)^3$ é:
 
-Queremos diferenciar o produto:
+    $$
+    \frac{dy}{dx} = 3x^2 + 6ax + 3a^2
+    $$
 
-$$ (x^2 + c) \times (ax^4 + b). $$
+2. Se $w = at - \frac{1}{2}bt^2$, encontre $\frac{dw}{dt}$.
 
-Chame $(x^2 + c) = u$; e $(ax^4 + b) = v$.
+    Usamos a regra da potência e a regra da soma:
 
-Usando a Regra do Produto de Funções, podemos escrever:
+    $$
+    \frac{dw}{dt} = \frac{d}{dt} (at) - \frac{d}{dt} \left(\frac{1}{2}bt^2\right)
+    $$
 
-$$ \frac{dy}{dx} = (x^2 + c) \frac{d(ax^4 + b)}{dx} + (ax^4 + b) \frac{d(x^2 + c)}{dx} $$
+    Diferenciando cada termo, obtemos:
 
-$$ = (x^2 + c) 4ax^3 + (ax^4 + b) 2x $$
+    $$
+    \frac{dw}{dt} = a - bt
+    $$
 
-$$ = 4ax^5 + 4acx^3 + 2ax^5 + 2bx, $$
+3. Encontre o coeficiente diferencial de:
 
-$$ \frac{dy}{dx} = 6ax^5 + 4acx^3 + 2bx, $$
+    $$
+    y = (x + \sqrt{-1}) \times (x - \sqrt{-1})
+    $$
 
-Cujo resultado confirma o resultado que encontramos na primeira forma, quando multiplicamos os binômios antes de derivar. Por último, temos que diferenciar quocientes.
+    Primeiro, simplificamos a expressão:
 
-Aqui a leitora precisa considerar este exemplo:
+    $$
+    y = x^2 - (\sqrt{-1})^2 = x^2 + 1
+    $$
 
-$$ y = \frac{bx^5 + c}{x^2 + a} $$
+    Agora, diferenciamos:
 
-Em tal caso, não adianta tentar resolver a divisão previamente, porque $ x^2 + a $ não divide $ bx^5 + c $, e sequer  possuem qualquer fator comum. Então, não há nada a fazer a não ser lançar mão dos princípios que vimos até agora e encontrar uma regra. Simplificaremos o problema partindo de:
+    $$
+    \frac{dy}{dx} = \frac{d}{dx} (x^2 + 1) = 2x + 0 = 2x
+    $$
 
-$$ y = \frac{u}{v}; $$
+4. Diferencie:
 
-onde $ u $ e $ v $ são duas funções diferentes da variável independente $ x $. Quando $ x $ se tornar $ x + dx $, $ y $ se tornará $ y + dy $, e $ u $ se tornará $ u + du $, e $ v $ se tornará $ v + dv $.
+    $$
+    y = (197x - 34x^2) \times (7 + 22x - 83x^3)
+    $$
 
-$$ y + dy = \frac{u + du}{v + dv}. $$
+    Usamos a regra do produto:
 
-Agora, podemos executar uma divisão algébrica, assim:
+    $$
+    \frac{dy}{dx} = \frac{d}{dx} (197x - 34x^2) \cdot (7 + 22x - 83x^3) + (197x - 34x^2) \cdot \frac{d}{dx} (7 + 22x - 83x^3)
+    $$
 
-$$ \frac{u + du}{v + dv} = \frac{u + du}{v} \cdot \frac{1}{1 + \frac{dv}{v}} = \frac{u + du}{v} \cdot (1 - \frac{dv}{v}) = \frac{u + du}{v} - \frac{u + du \cdot dv}{v^2} $$
+    Diferenciando cada termo:
 
-Que dará:
+    $$
+    \frac{d}{dx} (197x - 34x^2) = 197 - 68x
+    $$
 
-$$ \frac{u + du}{v} - \frac{u \cdot dv + du \cdot dv}{v^2} $$
+    $$
+    \frac{d}{dx} (7 + 22x - 83x^3) = 22 - 249x^2
+    $$
 
-Continuando a simplificação:
+    Substituindo de volta na regra do produto:
 
-$$ \frac{u + du}{v} - \frac{u \cdot dv}{v^2} - \frac{du \cdot dv}{v^2} $$
+    $$
+    \frac{dy}{dx} = (197 - 68x)(7 + 22x - 83x^3) + (197x - 34x^2)(22 - 249x^2)
+    $$
 
-Dividindo por $dx$, obtemos:
+    Simplificando:
 
-$$ \frac{dy}{dx} = \frac{du}{dx} \cdot \frac{1}{v} + \frac{u}{v} \cdot \frac{dv}{dx} $$
+    $$
+    \frac{dy}{dx} = 1379 + 4322x - 14110x^4 - 65404x^3 - 2244x^2 + 8192x
+    $$
 
-$$ - \frac{u \cdot dv}{v^2} - \frac{du \cdot dv}{v^2} + \frac{u \cdot dv \cdot dv}{v^2}. $$
+    Rearranjando os termos:
 
-Como esses restos são pequenas quantidades de segunda ordem, podem ser negligenciados, e a divisão pode parar aqui, já que quaisquer outros restos seriam de magnitudes ainda menores. Desta forma, teremos:
+    $$
+    \frac{dy}{dx} = 14110x^4 - 65404x^3 - 2244x^2 + 8192x + 1379
+    $$
 
-$$ y + dy = \frac{u}{v} + \frac{du}{v} - \frac{u \cdot dv}{v^2}$$
+5. Se $x = (y + 3) \times (y + 5)$, encontre $\frac{dx}{dy}$.
 
-Que pode ser escrito como:
+    Usamos a regra do produto:
 
-$$ = \frac{u}{v} + \frac{v \cdot du - u \cdot dv}{v^2}. $$
+    $$
+    \frac{dx}{dy} = \frac{d}{dy} (y + 3) \cdot (y + 5) + (y + 3) \cdot \frac{d}{dy} (y + 5)
+    $$
 
-Agora subtraia o original $ y = \frac{u}{v} $, e restará:
+    Diferenciando cada termo:
 
-$$ dy = \frac{v \cdot du - u \cdot dv}{v^2}; $$
+    $$
+    \frac{d}{dy} (y + 3) = 1
+    +
+    $$
 
-de onde
+    $$
+    \frac{d}{dy} (y + 5) = 1
+    $$
 
-$$ \frac{dy}{dx} = \frac{v \frac{du}{dx} - u \frac{dv}{dx}}{v^2}. $$
+    Substituindo de volta na regra do produto:
 
-Esta última equação contém as instruções sobre como diferenciar um quociente de duas funções. **Multiplique a função divisor pelo coeficiente diferencial da função dividendo; depois multiplique a função dividendo pelo coeficiente diferencial da função divisor; e subtraia. Por fim, divida pelo quadrado da função divisor*.
+    $$
+    \frac{dx}{dy} = 1 \cdot (y + 5) + (y + 3) \cdot 1
+    $$
 
-Finalmente podemos tentar diferenciar a função que começou este dilema: $ y = \frac{bx^5 + c}{x^2 + a} $. Vamos considerar que: $ bx^5 + c = u $ e $ x^2 + a = v $. Se fizermos assim, teremos:
+    Simplificando:
 
-$$ \frac{dy}{dx} = \frac{(x^2 + a) \frac{d(bx^5 + c)}{dx} - (bx^5 + c) \frac{d(x^2 + a)}{dx}}{(x^2 + a)^2} $$
+    $$
+    \frac{dx}{dy} = y + 5 + y + 3 = 2y + 8
+    $$
 
-$$ = \frac{(x^2 + a)(5bx^4) - (bx^5 + c)(2x)}{(x^2 + a)^2} $$
+6. Diferencie $y = 1.3709x \times (112.6 + 45.202x^2)$.
 
-$$ \frac{dy}{dx} = \frac{3bx^6 + 5abx^4 - 2cx}{(x^2 + a)^2}. \ (\text{Resposta}) $$
+    Começamos com a Regra do Produto:
 
-A resolução de quocientes é muitas vezes tediosa, mas é difícil! Alguns exemplos adicionais totalmente resolvidos são apresentados a seguir. A leitora agora deve ser paciente e persistente. Refaça todos os exemplos no seu caderno para melhorar a fixação destes conceitos.
+    $$
+    \frac{dy}{dx} = \frac{d}{dx} \left( 1.3709x \right) \times (112.6 + 45.202x^2) + 1.3709x \times \frac{d}{dx} \left( 112.6 + 45.202x^2 \right)
+    $$
 
-1. Diferenciar $ y = \frac{a}{b^2}x^3 - \frac{a^2}{b}x + \frac{a^2}{b^2} $.
+    Diferenciando cada termo:
 
-    Sendo uma constante, o último termo $\frac{a^2}{b^2}$ desaparece, e temos:
+    $$
+    \frac{d}{dx} \left( 1.3709x \right) = 1.3709
+    $$
 
-    $$ \frac{dy}{dx} = \frac{a}{b^2} \times 3 \times x^{3-1} - \frac{a^2}{b} \times 1 \times x^{1-1}. $$
+    $$
+    \frac{d}{dx} \left( 112.6 + 45.202x^2 \right) = 0 + 2 \times 45.202x = 90.404x
+    $$
 
-    Como $ x^{1-1} = x^0 = 1 $ obtemos:
+    Substituindo de volta na regra do produto:
 
-    $$ \frac{dy}{dx} = \frac{3a}{b^2} x^2 - \frac{a^2}{b}. $$
+    $$
+    \frac{dy}{dx} = 1.3709 \times (112.6 + 45.202x^2) + 1.3709x \times 90.404x
+    $$
 
-2. Diferenciar $ y = 2a\sqrt{bx^3} - \frac{3b\sqrt{a}}{x} - 2\sqrt{ab} $.
+    Simplificando:
 
-    Colocando $ x $ na forma de índice, obtemos
+    $$
+    \frac{dy}{dx} = 1.3709 \times 112.6 + 1.3709 \times 45.202x^2 + 1.3709 \times 90.404x^2
+    $$
 
-    $$ y = 2a\sqrt{b}x^{\frac{3}{2}} - 3b\sqrt{a}x^{-1} - 2\sqrt{ab} $$
+    $$
+    \frac{dy}{dx} = 154.36334 + 1.3709 \times 135.606x^2
+    $$
 
-    Agora, temos:
+    $$
+    \frac{dy}{dx} = 154.36334 + 185.9022654x^2
+    $$
 
-    $$ \frac{dy}{dx} = 2a\sqrt{b} \times \frac{3}{2} \times x^{\frac{3}{2} - 1} - 3b\sqrt{a} \times (-1) \times x^{-1-1}; $$
+    Portanto, a derivada de $y = 1.3709x \times (112.6 + 45.202x^2)$ é:
 
-    ou, finalmente:
+    $$
+    \frac{dy}{dx} = 185.9022654x^2 + 154.36334
+    $$
 
-    $$ \frac{dy}{dx} = 3a\sqrt{bx} + \frac{3b\sqrt{a}}{x^2}. $$
+7. Diferencie $y = \frac{2x + 3}{3x + 2}$.
 
-3. Diferenciar $ z = 1.8 \sqrt[3]{\frac{1}{\theta^2}} - \frac{4.4}{\sqrt[5]{\theta}} - 27^\circ $.
+    Usamos a regra do quociente:
 
-    Essa função pode ser escrita como: $ z = 1.8 \theta^{-\frac{2}{3}} - 4.4 \theta^{-\frac{1}{5}} - 27^\circ $.
+    $$
+    \frac{dy}{dx} = \frac{(3x + 2) \cdot \frac{d}{dx}(2x + 3) - (2x + 3) \cdot \frac{d}{dx}(3x + 2)}{(3x + 2)^2}
+    $$
 
-    Os, por serem constantes, $ 27^\circ $ desaparecem, e teremos:
+    Diferenciando cada termo:
 
-    $$ \frac{dz}{d\theta} = 1.8 \times -\frac{2}{3} \times \theta^{-\frac{2}{3}-1} - 4.4 \times \left(-\frac{1}{5}\right) \theta^{-\frac{1}{5}-1}$$
+    $$
+    \frac{d}{dx} (2x + 3) = 2
+    $$
 
-    ou:
+    $$
+    \frac{d}{dx} (3x + 2) = 3
+    $$
 
-    $$ \frac{dz}{d\theta} = -1.2 \theta^{-\frac{5}{3}} + 0.88 \theta^{-\frac{6}{5}}; $$
+    Substituindo de volta na regra do quociente:
 
-    ou,
+    $$
+    \frac{dy}{dx} = \frac{(3x + 2) \cdot 2 - (2x + 3) \cdot 3}{(3x + 2)^2}
+    $$
 
-    $$ \frac{dz}{d\theta} = \frac{0.88}{\sqrt[5]{\theta^6}} - \frac{1.2}{\sqrt[3]{\theta^5}} $$
+    Simplificando:
 
-4. Diferenciar $ v = (3t^2 - 1.2t + 1)^3 $.
+    $$
+    \frac{dy}{dx} = \frac{6x + 4 - 6x - 9}{(3x + 2)^2}
+    $$
 
-    Uma forma direta de resolver essa diferencial será explicada mais tarde. Contudo, com o que já sabemos, podemos resolve-la sem nenhuma dificuldade. Desenvolvendo o cubo, obtemos
+    $$
+    \frac{dy}{dx} = \frac{-5}{(3x + 2)^2}
+    $$
 
-    $$ v = 27t^6 - 32.4t^5 + 39.96t^4 - 23.328t^3 + 13.32t^2 - 3.6t + 1; $$
+    Portanto, a derivada de $y = \frac{2x + 3}{3x + 2}$ é:
 
-    portanto,
+    $$
+    \frac{dy}{dx} = \frac{-5}{(3x + 2)^2}
+    $$
 
-    $$ \frac{dv}{dt} = 162t^5 - 162t^4 + 159.84t^3 - 69.984t^2 + 26.64t - 3.6. $$
+8. Diferencie $y = \frac{1 + x + 2x^2 + 3x^3}{1 + x + 2x^2}$.
 
-5. Diferenciar $ y = (2x - 3)(x + 1)^2 $.
+    Usamos a regra do quociente:
 
-    $$ \frac{dy}{dx} = (2x - 3) \frac{d[(x + 1)(x + 1)]}{dx} + (x + 1)^2 \frac{d(2x - 3)}{dx} $$
+    $$
+    \frac{dy}{dx} = \frac{(1 + x + 2x^2) \cdot \frac{d}{dx}(1 + x + 2x^2 + 3x^3) - (1 + x + 2x^2 + 3x^3) \cdot \frac{d}{dx}(1 + x + 2x^2)}{(1 + x + 2x^2)^2}
+    $$
 
-    $$ = (2x - 3) \left[ (x + 1) \frac{d(x + 1)}{dx} + (x + 1) \frac{d(x + 1)}{dx} \right] + (x + 1)^2 \frac{d(2x - 3)}{dx} $$
+    Diferenciando cada termo:
 
-    $$ = 2(x + 1) [(2x - 3) + (x + 1)] = 2(x + 1)(3x - 2) $$
+    $$
+    \frac{d}{dx} (1 + x + 2x^2 + 3x^3) = 0 + 1 + 4x + 9x^2 = 1 + 4x + 9x^2
+    $$
 
-    ou, simplesmente, multiplique e depois diferencie.
+    $$
+    \frac{d}{dx} (1 + x + 2x^2) = 0 + 1 + 4x = 1 + 4x
+    $$
 
-6. Diferenciar $ y = 0.5x^3(x - 3) $.
+    Substituindo de volta na regra do quociente:
 
-    $$ \frac{dy}{dx} = 0.5 \left[ x^3 \frac{d(x - 3)}{dx} + (x - 3) \frac{d(x^3)}{dx} \right] $$
+    $$
+    \frac{dy}{dx} = \frac{(1 + x + 2x^2) \cdot (1 + 4x + 9x^2) - (1 + x + 2x^2 + 3x^3) \cdot (1 + 4x)}{(1 + x + 2x^2)^2}
+    $$
 
-    $$ = 0.5 \left[ x^3 + (x - 3) \times 3x^2 \right] = 2x^3 - 4.5x^2. $$
+    Simplificando o numerador:
 
-    Valem as mesmas observações que fizemos no exemplo anterior.
+    $$
+    \begin{align*}
+    & (1 + x + 2x^2)(1 + 4x + 9x^2) - (1 + x + 2x^2 + 3x^3)(1 + 4x) \\
+    &= (1 + 4x + 9x^2 + x + 4x^2 + 9x^3 + 2x^2 + 8x^3 + 18x^4) \\
+    & - (1 + 4x + x + 4x^2 + 2x^2 + 8x^3 + 3x^3 + 12x^4) \\
+    &= 1 + 5x + 15x^2 + 17x^3 + 18x^4 - (1 + 4x + x + 4x^2 + 2x^2 + 8x^3 + 3x^3 + 12x^4) \\
+    &= 6x^3 + 6x^2 + 9x^4
+    \end{align*}
+    $$
 
-7. Diferenciar $ w = \left( \theta + \frac{1}{\theta} \right) \left( \sqrt{\theta} + \frac{1}{\sqrt{\theta}} \right) $.
+    Portanto:
 
-    Podemos escrever esta função como:
+    $$
+    \frac{dy}{dx} = \frac{6x^4 + 6x^3 + 9x^2}{(1 + x + 2x^2)^2}
+    $$
 
-    $$ w = (\theta + \theta^{-1})(\theta^{\frac{1}{2}} + \theta^{-\frac{1}{2}}). $$
+9. Diferencie $y = \frac{ax + b}{cx + d}$.
 
-    O que nos levará a:
+    Usamos a regra do quociente:
 
-    $$ \frac{dw}{d\theta} = (\theta + \theta^{-1}) \frac{d(\theta^{\frac{1}{2}} + \theta^{-\frac{1}{2}})}{d\theta} + (\theta^{\frac{1}{2}} + \theta^{-\frac{1}{2}}) \frac{d(\theta + \theta^{-1})}{d\theta} $$
+    $$
+    \frac{dy}{dx} = \frac{(cx + d) \cdot \frac{d}{dx}(ax + b) - (ax + b) \cdot \frac{d}{dx}(cx + d)}{(cx + d)^2}
+    $$
 
-    $$ = (\theta + \theta^{-1}) \left( \frac{1}{2} \theta^{-\frac{1}{2}} - \frac{1}{2} \theta^{-\frac{3}{2}} \right) + (\theta^{\frac{1}{2}} + \theta^{-\frac{1}{2}})(1 - \theta^{-2}) $$
+    Diferenciando cada termo:
 
-    $$ = \frac{1}{2} (\theta^{\frac{1}{2}} + \theta^{-\frac{3}{2}} - \theta - \theta^{-\frac{5}{2}}) + \frac{1}{2} \left( \theta^{\frac{1}{2}} - \theta^{-\frac{1}{2}} \right) $$
+    $$
+    \frac{d}{dx} (ax + b) = a
+    $$
 
-    $$ = \frac{3}{2} \left( \sqrt{\theta} - \frac{1}{\sqrt[5]{\theta}} \right) + \frac{1}{2} \left( \frac{1}{\sqrt{\theta}} - \frac{1}{\sqrt[3]{\theta}} \right). $$
+    $$
+    \frac{d}{dx} (cx + d) = c
+    $$
 
-    Este resultado poderia ter sido obtido mais simplesmente multiplicando os dois fatores primeiro e diferenciando depois. Este processo, no entanto, nem sempre é possível. Veja, por exemplo, o exemplo 8, no qual a regra para diferenciar um produto *deve* ser usada.
+    Substituindo de volta na regra do quociente:
 
-8. Diferenciar $ y = \frac{a}{1 + a\sqrt{x} + a^2 x} $.
+    $$
+    \frac{dy}{dx} = \frac{(cx + d) \cdot a - (ax + b) \cdot c}{(cx + d)^2}
+    $$
 
-    $$ \frac{dy}{dx} = \frac{(1 + ax^{\frac{1}{2}} + a^2 x) \times 0 - a \frac{d(1 + ax^{\frac{1}{2}} + a^2 x)}{dx}}{(1 + a\sqrt{x} + a^2 x)^2} $$
+    Simplificando:
 
-    $$ = -\frac{a \left(\frac{1}{2} ax^{-\frac{1}{2}} + a^2 \right)}{(1 + a\sqrt{x} + a^2 x)^2}. $$
+    $$
+    \frac{dy}{dx} = \frac{acx + ad - acx - bc}{(cx + d)^2}
+    $$
 
-9. Diferenciar $ y = \frac{x^2}{x^2 + 1} $.
+    $$
+    \frac{dy}{dx} = \frac{ad - bc}{(cx + d)^2}
+    $$
 
-    $$ \frac{dy}{dx} = \frac{(x^2 + 1) \cdot 2x - x^2 \cdot 2x}{(x^2 + 1)^2} = \frac{2x}{(x^2 + 1)^2}. $$
+    Portanto, a derivada de $y = \frac{ax + b}{cx + d}$ é:
 
-10. Diferenciar $ y = \frac{a + \sqrt{x}}{a - \sqrt{x}} $.
+    $$
+    \frac{dy}{dx} = \frac{ad - bc}{(cx + d)^2}
+    $$
 
-    Na forma de índice, $ y = \frac{a + x^{\frac{1}{2}}}{a - x^{\frac{1}{2}}} $.
+10. Diferencie $y = \frac{x^n + a}{x^{-n} + b}$.
 
-    $$ \frac{dy}{dx} = \frac{(a - x^{\frac{1}{2}}) \left(\frac{1}{2} x^{-\frac{1}{2}}\right) - (a + x^{\frac{1}{2}}) \left(-\frac{1}{2} x^{-\frac{1}{2}}\right)}{(a - x^{\frac{1}{2}})^2} $$
+    Começamos Aplicando a regra do quociente ao nosso problema:
 
-    $$ = \frac{a - x^{\frac{1}{2}} + a + x^{\frac{1}{2}}}{2(a - x^{\frac{1}{2}})^2 x^{\frac{1}{2}}}; $$
+    $$
+    \frac{dy}{dx} = \frac{(x^{-n} + b) \cdot \frac{d}{dx}(x^n + a) - (x^n + a) \cdot \frac{d}{dx}(x^{-n} + b)}{(x^{-n} + b)^2}
+    $$
 
-    portanto,
+    Agora vamos diferenciar cada termo individualmente. Usando a regra da potência, temos:
 
-    $$ \frac{dy}{dx} = \frac{a}{(a - \sqrt{x})^2 \sqrt{x}} $$
+    $$
+    \frac{d}{dx} (x^n + a) = nx^{n-1}
+    $$
 
-11. Diferenciar
+    e
 
-    $$ \theta = \frac{1 - a\sqrt[3]{t^2}}{1 + a\sqrt[3]{t^3}} $$
+    $$
+    \frac{d}{dx} (x^{-n} + b) = -nx^{-n-1}
+    $$
 
-    Ajustando as raízes: $\theta = \frac{1 - at^{\frac{2}{3}}}{1 + at^{\frac{3}{2}}}$
+    Substituímos as derivadas na regra do quociente.
 
-    $$ \frac{d\theta}{dt} = \frac{(1 + at^{\frac{3}{2}}) \left(-\frac{2}{3} at^{-\frac{1}{3}}\right) - (1 - at^{\frac{2}{3}}) \left(\frac{3}{2} at^{\frac{1}{2}}\right)}{(1 + at^{\frac{3}{2}})^2} $$
+    $$
+    \frac{dy}{dx} = \frac{(x^{-n} + b) \cdot nx^{n-1} - (x^n + a) \cdot (-nx^{-n-1})}{(x^{-n} + b)^2}
+    $$
+
+    Simplificando.
+
+    $$
+    \frac{dy}{dx} = \frac{nx^{n-1}x^{-n} + bnx^{n-1} + nx^{-n-1}x^n + anx^{-n-1}}{(x^{-n} + b)^2}
+    $$
+
+    Simplificando os expoentes, teremos:
+
+    $$
+    \frac{dy}{dx} = \frac{nx^{-1} + bnx^{n-1} + nx^{-1} + anx^{-n-1}}{(x^{-n} + b)^2}
+    $$
+
+    Combinando os termos semelhantes:
+
+    $$
+    \frac{dy}{dx} = \frac{2nx^{-1} + bnx^{n-1} + anx^{-n-1}}{(x^{-n} + b)^2}
+    $$
 
     Logo:
 
-    $$ = \frac{5a^2 \sqrt[6]{t^7} - 4a \sqrt[3]{t} - 9a \sqrt{t}}{6(1 + a \sqrt[3]{t^3})^2}. $$
-
-12. Um reservatório de seção transversal quadrada tem lados inclinados em um ângulo de $45°$ com a vertical. O lado da base é $200\, \text{m}$. Encontre uma expressão para a quantidade que entra ou sai quando a profundidade da água varia em $1\, \text{m}$; portanto, encontre, em litros, a quantidade retirada por hora quando a profundidade é reduzida de $14$ para $10\, \text{m}$ em 24 horas.
-
-    O volume de um tronco de pirâmide de altura $H$, e de bases $A$ e $a$, é
-
-    $$ V = \frac{H}{3} (A + a + \sqrt{Aa}). $$
-
-    Vê-se facilmente que, sendo a inclinação $45°$, se a profundidade for $h$, o comprimento do lado da superfície quadrada da água é $200 + 2h$ metros, de modo que o volume de água é
-
-    $$ \frac{h}{3} \left[ 200^2 + (200 + 2h)^2 + 200(200 + 2h) \right] = 40,000h + 800h^2 + \frac{4h^3}{3}. $$
-
-    A taxa de variação do volume com relação à profundidade $h$ é dada por
-
-    $$ \frac{dV}{dh} = 40,000 + 1600h + 4h^2 $$
-
-    em metros cúbicos por metro de variação de profundidade. O nível médio de 14 para 10 metros é 12 metros. Quando $ h = 12 $,
-
-    $$ \frac{dV}{dh} = 40,000 + 1600 \times 12 + 4 \times 12^2 = 50,176 \, \text{m}^3. $$
-
-    A quantidade de água em metros cúbicos que sai do reservatório ao se reduzir a profundidade de 4 metros em 24 horas é
-
     $$
-    \Delta V \approx \frac{dV}{dh} \bigg|_{h=12} \times \Delta h = 50,176 , \text{m}^3/\text{m} \times 4 , \text{m} = 200,704 , \text{m}^3
+    \frac{dy}{dx} = \frac{2nx^{-1} + bnx^{n-1} + anx^{-n-1}}{(x^{-n} + b)^2}
     $$
 
-    Convertendo metros cúbicos para litros (1 metro cúbico = 1000 litros):
+11. Encontre a variação da corrente $C$ em relação à temperatura $t$ para a expressão $C = a + bt + ct^2$.
 
-    $$ 200,704 \, \text{m}^3 = 200,704,000 \, \text{litros}. $$
-
-    Portanto, a quantidade retirada por hora é de
+    Diferenciamos a expressão com relação a $t$:
 
     $$
-    \frac{200,704 , \text{m}^3 \times 1000 , \text{litros/m}^3}{24 , \text{horas}} = 8,362,666.67 , \text{litros/hora}
+    \frac{dC}{dt} = \frac{d}{dt} (a + bt + ct^2)
     $$
 
-13. A pressão absoluta, em atmosferas, $P$, do vapor saturado na temperatura $t^\circ \, \text{C}$. foi determinada por [Dulong](https://en.wikipedia.org/wiki/Pierre_Louis_Dulong) como sendo $P = \left( \frac{40 + t}{140} \right)^5$ desde que $t$ esteja acima de $80^\circ \, \text{C}$. Encontre a taxa de variação da pressão com a temperatura a $100^\circ \, \text{C}$.
+    Usando a regra da soma, a regra da constante e a regra da potência:
 
-    Expanda o numerador usando o Teorema Binomial de Newton:
+    $$
+    \frac{dC}{dt} = 0 + b + 2ct
+    $$
 
-    $$ P = \frac{1}{140^5} (40^5 + 5 \times 40^4 t + 10 \times 40^3 t^2 + 10 \times 40^2 t^3 + 5 \times 40t^4 + t^5); $$
+    Portanto, a taxa de variação da corrente em relação à temperatura é:
 
-    portanto
+    $$
+    \frac{dC}{dt} = b + 2ct
+    $$
 
-    $$ \frac{dP}{dt} = \frac{1}{537,824 \times 10^5} (5 \times 40^4 + 20 \times 40^3 t + 30 \times 40^2 t^2 + 20 \times 40t^3 + 5t^4)$$
+12. Encontre a taxa de variação da resistência em relação à temperatura para as seguintes expressões.
 
-    Quando $ t = 100 $ a função resulta em $ 0.036 $ atmosferas por grau centrígrado de variação de temperatura.
+    Primeira equação: $R = R_0 (1 + at + bt^2)$
 
-### EXERCÍCIOS III
+    Diferenciamos a expressão com relação a $t$:
 
-(1) Diferencie
+    $$
+    \frac{dR}{dt} = R_0 \frac{d}{dt} (1 + at + bt^2)
+    $$
 
-(a) $ u = 1 + x + \frac{x^2}{1 \times 2} + \frac{x^3}{1 \times 2 \times 3} + \cdots. $
+    Usando a regra da soma, a regra da constante e a regra da potência:
 
-(b) $ y = ax^2 + bx + c. $
+    $$
+    \frac{dR}{dt} = R_0 (0 + a + 2bt)
+    $$
 
-(c) $ y = (x + a)^2. $
+    Portanto:
 
-(d) $ y = (x + a)^3. $
+    $$
+    \frac{dR}{dt} = R_0 (a + 2bt)
+    $$
 
-(2) Se $ w = at - \frac{1}{2}bt^2 $, encontre $\frac{dw}{dt}$.
+    Segunda equação: $R = R_0 (1 + at + b\sqrt{t})$
 
-(3) Encontre o coeficiente diferencial de:
+    Diferenciamos a expressão com relação a $t$:
 
-$$ y = (x + \sqrt{-1}) \times (x - \sqrt{-1}). $$
+    $$
+    \frac{dR}{dt} = R_0 \frac{d}{dt} (1 + at + b\sqrt{t})
+    $$
 
-(4) Diferencie
+    Usando a regra da soma, a regra da constante e a regra da raiz quadrada:
 
-$$ y = (197x - 34x^2) \times (7 + 22x - 83x^3). $$
+    Derivada de $1$:
 
-(5) Se $ x = (y + 3) \times (y + 5) $, encontre $\frac{dx}{dy}$.
+    $$
+    \frac{d}{dt} (1) = 0
+    $$
 
-(6) Diferencie $ y = 1.3709x \times (112.6 + 45.202x^2) $.
+    Derivada de $at$:
 
-Encontre os coeficientes diferenciais de
+    $$
+    \frac{d}{dt} (at) = a
+    $$
 
-(7) $ y = \frac{2x + 3}{3x + 2}. $
+    Derivada de $b\sqrt{t}$:
 
-(8) $ y = \frac{1 + x + 2x^2 + 3x^3}{1 + x + 2x^2}. $
+    $$
+    \frac{d}{dt} (b\sqrt{t}) = b \cdot \frac{1}{2\sqrt{t}} = \frac{b}{2\sqrt{t}}
+    $$
 
-(9) $ y = \frac{ax + b}{cx + d}. $
+    Portanto:
 
-(10) $ y = \frac{x^n + a}{x^{-n} + b}. $
+    $$
+    \frac{dR}{dt} = R_0 (0 + a + \frac{b}{2\sqrt{t}})
+    $$
 
-(11) A temperatura $ t $ do filamento de uma lâmpada elétrica incandescente está relacionada à corrente que passa pela lâmpada pela relação
+    Simplificando:
 
-$$ C = a + bt + ct^2. $$
+    $$
+    \frac{dR}{dt} = R_0 \left( a + \frac{b}{2\sqrt{t}} \right)
+    $$
 
-Encontre uma expressão que forneça a variação da corrente correspondente a uma variação de temperatura.
+    Terceira equação: $R = R_0 (1 + at + bt^2)^{-1}$
 
-(12) As seguintes fórmulas foram propostas para expressar a relação entre a resistência elétrica $ R $ de um fio na temperatura $ t^\circ $ C, e a resistência $ R_0 $ desse mesmo fio a $ 0^\circ $ Centígrados, sendo $ a $, $ b $, $ c $ constantes.
+    Usamos a regra do quociente, onde $f = R_0$ e $g = 1 + at + bt^2$:
 
-$$ R = R_0 (1 + at + bt^2). $$
-$$ R = R_0 (1 + at + b\sqrt{t}). $$
-$$ R = R_0 (1 + at + bt^2)^{-1}. $$
+    Primeiro, reescrevemos a expressão usando a regra do quociente:
 
-Encontre a taxa de variação da resistência em relação à temperatura conforme dada por cada uma dessas fórmulas.
+    $$
+    R = \frac{R_0}{1 + at + bt^2}
+    $$
 
-(13) A força eletromotriz $ E $ de um certo tipo de célula padrão tem sido encontrada variando com a temperatura $ t $ de acordo com a relação
+    Diferenciamos a expressão com relação a $t$:
 
-$$ E = 1.4340 \left[ 1 - 0.000814(t - 15) + 0.000007(t - 15)^2 \right] \text{ volts}. $$
+    $$
+    \frac{dR}{dt} = \frac{(1 + at + bt^2) \cdot 0 - R_0 \cdot \frac{d}{dt}(1 + at + bt^2)}{(1 + at + bt^2)^2}
+    $$
 
-Encontre a variação da força eletromotriz por grau, a $ 15^\circ $, $ 20^\circ $ e $ 25^\circ $.
+    Diferenciamos o denominador:
 
-(14) A força eletromotriz necessária para manter um arco elétrico de comprimento $ l $ com uma corrente de intensidade $ i $ foi encontrada pela Sra. Ayrton como sendo
+    Derivada de $1$:
 
-$$ E = a + bl + \frac{c + kl}{i}, $$
+    $$
+    \frac{d}{dt} (1) = 0
+    $$
 
-onde $ a $, $ b $, $ c $, $ k $ são constantes.
+    Derivada de $at$:
 
-Encontre uma expressão para a variação da força eletromotriz (a) com relação ao comprimento do arco; (b) com relação à intensidade da corrente.
+    $$
+    \frac{d}{dt} (at) = a
+    $$
+
+    Derivada de $bt^2$:
+
+    $$
+    \frac{d}{dt} (bt^2) = 2bt
+    $$
+
+    Portanto:
+
+    $$
+    \frac{d}{dt} (1 + at + bt^2) = a + 2bt
+    $$
+
+    Substituindo de volta na regra do quociente:
+
+    $$
+    \frac{dR}{dt} = \frac{0 - R_0 (a + 2bt)}{(1 + at + bt^2)^2}
+    $$
+
+    Simplificando:
+
+    $$
+    \frac{dR}{dt} = -R_0 \cdot \frac{a + 2bt}{(1 + at + bt^2)^2}
+    $$
+
+    Portanto, a taxa de variação da resistência em relação à temperatura é:
+
+    $$
+    \frac{dR}{dt} = -R_0 \cdot \frac{a + 2bt}{(1 + at + bt^2)^2}
+    $$
+
+13. A força eletromotriz $E$ varia com a temperatura $t$ de acordo com:
+
+    $$
+    E = 1.4340 \left[ 1 - 0.000814(t - 15) + 0.000007(t - 15)^2 \right]
+    $$
+
+    Encontre a variação da força eletromotriz por grau a $15^\circ$, $20^\circ$ e $25^\circ$.
+
+    Diferenciamos a expressão com relação a $t$:
+
+    $$
+    \frac{dE}{dt} = 1.4340 \left[ -0.000814 + 0.000014(t - 15) \right]
+    $$
+
+    Substituímos $t$ pelos valores dados:
+
+    Para $t = 15$:
+
+    $$
+    \frac{dE}{dt} \bigg|_{t=15} = 1.4340 \left[ -0.000814 + 0.000014(15 - 15) \right] = -0.00116796
+    $$
+
+    Para $t = 20$:
+
+    $$
+    \frac{dE}{dt} \bigg|_{t=20} = 1.4340 \left[ -0.000814 + 0.000014(20 - 15) \right] = -0.0010976
+    $$
+
+    Para $t = 25$:
+
+    $$
+    \frac{dE}{dt} \bigg|_{t=25} = 1.4340 \left[ -0.000814 + 0.000014(25 - 15) \right] = -0.0010272
+    $$
+
+14. A força eletromotriz $E$ para manter um arco elétrico de comprimento $l$ com corrente $i$ é dada por:
+
+    $$
+    E = a + bl + \frac{c + kl}{i}
+    $$
+
+    Parte 1: Variação da força eletromotriz com relação ao comprimento do arco $l$
+
+    Diferenciamos a expressão com relação a $l$:
+
+    $$
+    \frac{dE}{dl} = b + \frac{d}{dl} \left( \frac{c + kl}{i} \right)
+    $$
+
+    Usamos a regra da derivada de uma constante e a regra do quociente:
+
+    $$
+    \frac{d}{dl} \left( \frac{c + kl}{i} \right) = \frac{k}{i}
+    $$
+
+    Portanto:
+
+    $$
+    \frac{dE}{dl} = b + \frac{k}{i}
+    $$
+
+    Parte 2: Variação da força eletromotriz com relação à corrente $i$
+
+    Diferenciamos a expressão com relação a $i$:
+
+    $$
+    \frac{dE}{di} = \frac{d}{di} \left( a + bl + \frac{c + kl}{i} \right)
+    $$
+
+    Usamos a regra da derivada de uma constante e a regra do quociente:
+
+    $$
+    \frac{d}{di} \left( \frac{c + kl}{i} \right) = -\frac{c + kl}{i^2}
+    $$
+
+    Portanto:
+
+    $$
+    \frac{dE}{di} = -\frac{c + kl}{i^2}
+    $$
+
+### Exercícios IV
+
+Encontre $\frac{dy}{dx}$ e $\frac{d^2 y}{dx^2}$ para as seguintes expressões:
+
+1. $y = 17x + 12x^2$.
+
+    Primeira derivada:
+
+    $$
+    \frac{dy}{dx} = 17 + 24x
+    $$
+
+    Segunda derivada:
+
+    $$
+    \frac{d^2 y}{dx^2} = 24
+    $$
+
+2. $y = \frac{x^2 + a}{x + a}$.
+
+    Primeira derivada, usando a regra do quociente:
+
+    $$
+    \frac{dy}{dx} = \frac{(x + a) \cdot 2x - (x^2 + a) \cdot 1}{(x + a)^2} = \frac{2x(x + a) - (x^2 + a)}{(x + a)^2}
+    $$
+
+    Simplificando:
+
+    $$
+    \frac{dy}{dx} = \frac{2x^2 + 2ax - x^2 - a}{(x + a)^2} = \frac{x^2 + 2ax - a}{(x + a)^2}
+    $$
+
+    Segunda derivada:
+
+    Usamos a regra do quociente novamente:
+
+    $$
+    \frac{d^2 y}{dx^2} = \frac{(x + a)^2 \cdot \frac{d}{dx}(x^2 + 2ax - a) - (x^2 + 2ax - a) \cdot \frac{d}{dx}((x + a)^2)}{((x + a)^2)^2}
+    $$
+
+    Diferenciando o numerador e o denominador:
+
+    $$
+    \frac{d}{dx}(x^2 + 2ax - a) = 2x + 2a
+    $$
+
+    $$
+    \frac{d}{dx}((x + a)^2) = 2(x + a)
+    $$
+
+    Substituindo e simplificando:
+
+    $$
+    \frac{d^2 y}{dx^2} = \frac{(x + a)^2 \cdot (2x + 2a) - (x^2 + 2ax - a) \cdot 2(x + a)}{(x + a)^4}
+    $$
+
+    $$
+    = \frac{2(x + a)(x^2 + 2ax - a) - 2(x^2 + 2ax - a)(x + a)}{(x + a)^4}
+    $$
+
+    $$
+    = \frac{2a(a + 1)}{(x + a)^3}
+    $$
+
+3. $y = 1 + \frac{x}{1} + \frac{x^2}{1 \times 2} + \frac{x^3}{1 \times 2 \times 3} + \frac{x^4}{1 \times 2 \times 3 \times 4}$.
+
+    Já conhecemos esta série. Contudo, vamos resolver novamente.
+
+    Começamos com a regra da potência para diferenciar cada termo:
+
+    $$
+    \frac{du}{dx} = \frac{d}{dx} \left(1 + x + \frac{x^2}{2} + \frac{x^3}{6} + \cdots \right)
+    $$
+
+    Diferenciando cada termo, obtemos:
+
+    $$
+    \frac{du}{dx} = 0 + 1 + \frac{2x}{2} + \frac{3x^2}{6} + \cdots
+    $$
+
+    Simplificando:
+
+    $$
+    \frac{du}{dx} = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + \cdots
+    $$
+
+    A função $u$ é a expansão em [Série de Maclaurin](https://en.wikipedia.org/wiki/Taylor_series) da função exponencial $e^x$. Portanto, a derivada de $u$ em relação a $x$ é a própria função:
+
+    $$
+    \frac{du}{dx} = \frac{d}{dx} (e^x) = e^x
+    $$
+
+    ou, escrito na forma da série:
+
+    $$
+    \frac{du}{dx} = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + \cdots
+    $$
+
+    Para a segunda, terceira, quarta, etc. derivadas, teremos sempre o mesmo resultado.
+
+4. Encontre as funções derivadas de 2ª e 3ª ordem nos Exercícios III, números 1 a 7, e nos Exemplos dados, números 1 a 7.
+
+Considerando as questões do Exercício III,
+
+1. Letra (a): Diferencie $u = 1 + x + \frac{x^2}{1 \times 2} + \frac{x^3}{1 \times 2 \times 3} + \cdots$.
+
+    Primeira Derivada:
+
+    $$
+    \frac{du}{dx} = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + \cdots
+    $$
+
+    Resposta:
+
+    Este exercício está resolvido acima no item 3
+
+    Letra (b): Diferencie $y = ax^2 + bx + c$.
+
+    Primeira Derivada:
+
+    $$
+    \frac{dy}{dx} = 2ax + b
+    $$
+
+    Resposta:
+
+    Segunda Derivada:
+
+    $$
+    \frac{d^2y}{dx^2} = 2a
+    $$
+
+    Terceira Derivada:
+
+    $$
+    \frac{d^3y}{dx^3} = 0
+    $$
+
+    Letra (c): Diferencie $y = (x + a)^2$.
+
+    Primeira Derivada:
+
+    $$
+    \frac{dy}{dx} = 2x + 2a
+    $$
+
+    Resposta:
+
+    Segunda Derivada:
+
+    $$
+    \frac{d^2y}{dx^2} = 2
+    $$
+
+    Terceira Derivada:
+
+    $$
+    \frac{d^3y}{dx^3} = 0
+    $$
+
+    Letra (d): Diferencie $y = (x + a)^3$.
+
+    Primeira Derivada:
+
+    $$
+    \frac{dy}{dx} = 3x^2 + 6ax + 3a^2
+    $$
+
+    Resposta:
+
+    Segunda Derivada:
+
+    $$
+    \frac{d^2y}{dx^2} = 6x + 6a
+    $$
+
+    Terceira Derivada:
+
+    $$
+    \frac{d^3y}{dx^3} = 6
+    $$
+
+2. Se $w = at - \frac{1}{2}bt^2$, encontre $\frac{dw}{dt}$.
+
+    Primeira Derivada:
+
+    $$
+    \frac{dw}{dt} = a - bt
+    $$
+
+    Resposta:
+
+    Segunda Derivada:
+
+    $$
+    \frac{d^2w}{dt^2} = -b
+    $$
+
+    Terceira Derivada:
+
+    $$
+    \frac{d^3w}{dt^3} = 0
+    $$
+
+3. Encontre o coeficiente diferencial de:
+
+    $$
+    y = (x + \sqrt{-1}) \times (x - \sqrt{-1})
+    $$
+
+    Primeira derivada:
+
+    $$
+    \frac{dy}{dx} = \frac{d}{dx} (x^2 + 1) = 2x + 0 = 2x
+    $$
+
+    Resposta:
+
+    Segunda Derivada:
+
+    $$
+    \frac{d^2y}{dx^2} = 2
+    $$
+
+    Terceira Derivada:
+
+    $$
+    \frac{d^3y}{dx^3} = 0
+    $$
+
+4. Diferencie:
+
+    $$
+    y = (197x - 34x^2) \times (7 + 22x - 83x^3)
+    $$
+
+    Primeira derivada:
+
+    $$
+    \frac{dy}{dx} = 14110x^4 - 65404x^3 - 2244x^2 + 8192x + 1379
+    $$
+
+    Resposta:
+
+    Segunda Derivada:
+
+    $$
+    \frac{d^2y}{dx^2} = 56440x^3 - 196212x^2 - 4488x + 8192
+    $$
+
+    Terceira Derivada:
+
+    $$
+    \frac{d^3y}{dx^3} = 169320x^2 - 392424x - 4488
+    $$
+
+5. Se $x = (y + 3) \times (y + 5)$, encontre $\frac{dx}{dy}$.
+
+    Primeira derivada:
+
+    $$
+    \frac{dx}{dy} = y + 5 + y + 3 = 2y + 8
+    $$
+
+    Resposta:
+    Segunda Derivada:
+
+    $$
+    \frac{d^2x}{dy^2} = 2
+    $$
+
+    Terceira Derivada:
+
+    $$
+    \frac{d^3x}{dy^3} = 0
+    $$
+
+6. Diferencie $y = 1.3709x \times (112.6 + 45.202x^2)$.
+
+    Primeira derivada:
+
+    $$
+    \frac{dy}{dx} = 185.9022654x^2 + 154.36334
+    $$
+
+    Resposta:
+
+    Segunda Derivada:
+
+    $$
+    \frac{d^2y}{dx^2} = 2 \times 185.9022654x = 371.8045308x
+    $$
+
+    Terceira Derivada:
+
+    $$
+    \frac{d^3y}{dx^3} = 371.8045308
+    $$
+
+7. Diferencie $y = \frac{2x + 3}{3x + 2}$.
+
+    Primeira derivada:
+
+    $$
+    \frac{dy}{dx} = \frac{-5}{(3x + 2)^2}
+    $$
+
+    Resposta:
+
+    Segunda Derivada:
+
+    Usando a regra do quociente, diferenciamo novamente:
+
+    $$
+    \frac{d^2y}{dx^2} = \frac{d}{dx} \left( \frac{-5}{(3x + 2)^2} \right) = \frac{30}{(3x + 2)^3}
+    $$
+
+    Terceira Derivada:
+
+    $$
+    \frac{d^3y}{dx^3} = \frac{d}{dx} \left( \frac{30}{(3x + 2)^3} \right) = \frac{-270}{(3x + 2)^4}
+    $$
+
+8. Diferencie $y = \frac{1 + x + 2x^2 + 3x^3}{1 + x + 2x^2}$.
+
+    Primeira derivada:
+
+    $$
+    \frac{dy}{dx} = \frac{6x^4 + 6x^3 + 9x^2}{(1 + x + 2x^2)^2}
+    $$
+
+    Segunda Derivada:
+
+    Para a segunda derivada, usamos a regra do quociente e produto:
+
+    $$
+    \frac{d^2y}{dx^2} = \frac{d}{dx} \left( \frac{6x^4 + 6x^3 + 9x^2}{(1 + x + 2x^2)^2} \right)
+    $$
+
+    Vamos calcular separadamente a derivada do numerador e do denominador:
+
+    Numerador:
+
+    $$
+    \frac{d}{dx} (6x^4 + 6x^3 + 9x^2) = 24x^3 + 18x^2 + 18x
+    $$
+
+    Denominador:
+
+    $$
+    \frac{d}{dx} ((1 + x + 2x^2)^2) = 2(1 + x + 2x^2)(1 + 4x)
+    $$
+
+    Então,
+
+    $$
+    \frac{d^2y}{dx^2} = \frac{(24x^3 + 18x^2 + 18x)(1 + x + 2x^2)^2 - (6x^4 + 6x^3 + 9x^2)2(1 + x + 2x^2)(1 + 4x)}{(1 + x + 2x^2)^4}
+    $$
+
+    Terceira Derivada:
+
+    A terceira derivada é encontrada diferenciando a segunda derivada, o que envolve o uso novamente das regras do produto e quociente. Devido à complexidade do processo, a expressão completa será:
+
+    $$
+    \frac{d^3y}{dx^3} = \frac{d}{dx} \left( \frac{N}{D} \right)
+    $$
+
+    Para simplificação, expandimos:
+
+    $$
+    \frac{d^3y}{dx^3} = \frac{D \cdot \frac{dN}{dx} - N \cdot \frac{dD}{dx}}{D^2}
+    $$
+
+    Vamos calcular os termos separadamente:
+
+    Derivada do numerador $\frac{dN}{dx}$:
+
+    $$
+    \frac{dN}{dx} = \frac{d}{dx} \left( (1 + x + 2x^2)^2 (24x^3 + 18x^2 + 18x) \right) - \frac{d}{dx} \left( (6x^4 + 6x^3 + 9x^2) \cdot 2(1 + x + 2x^2)(1 + 4x) \right)
+    $$
+
+    Derivada do denominador $\frac{dD}{dx}$:
+
+    $$
+    \frac{dD}{dx} = 4(1 + x + 2x^2)^3 (1 + 4x)
+    $$
+
+    Substituindo essas derivadas na expressão para a terceira derivada:
+
+    $$
+    \frac{d^3y}{dx^3} = \frac{(1 + x + 2x^2)^4 \cdot \frac{dN}{dx} - N \cdot 4(1 + x + 2x^2)^3 (1 + 4x)}{(1 + x + 2x^2)^8}
+    $$
+
+9. Diferencie $y = \frac{ax + b}{cx + d}$.
+
+    Primeira derivada:
+
+    $$
+    \frac{dy}{dx} = \frac{ad - bc}{(cx + d)^2}
+    $$
+
+    Resposta:
+
+    Segunda Derivada:
+
+    Usando a regra do quociente, diferenciamo novamente:
+
+    $$
+    \frac{d^2y}{dx^2} = \frac{d}{dx} \left( \frac{ad - bc}{(cx + d)^2} \right) = \frac{2(ad - bc)c}{(cx + d)^3}
+    $$
+
+    Terceira Derivada:
+
+    $$
+    \frac{d^3y}{dx^3} = \frac{d}{dx} \left( \frac{2(ad - bc)c}{(cx + d)^3} \right) = \frac{-6(ad - bc)c^2}{(cx + d)^4}
+    $$
+
+10. Diferencie $y = \frac{x^n + a}{x^{-n} + b}$.
+
+    Primeira derivada:
+
+    $$
+    \frac{dy}{dx} = \frac{2nx^{-1} + bnx^{n-1} + anx^{-n-1}}{(x^{-n} + b)^2}
+    $$
+
+    Resposta:
+
+    Simplificando a primeira derivada:
+
+    $$
+    \frac{dy}{dx} = \frac{nx^{n-1}x^{-n} + bnx^{n-1} + nx^{-n-1}x^n + anx^{-n-1}}{(x^{-n} + b)^2} = \frac{nx^{-1} + bnx^{n-1} + anx^{-n-1}}{(x^{-n} + b)^2}
+    $$
+
+    Segunda derivada:
+
+    Para calcular a segunda derivada, utilizamos a regra do quociente novamente:
+
+    $$
+    \frac{d^2y}{dx^2} = \frac{(x^{-n} + b)^2 \cdot \frac{d}{dx}(nx^{-1} + bnx^{n-1} + anx^{-n-1}) - (nx^{-1} + bnx^{n-1} + anx^{-n-1}) \cdot \frac{d}{dx}((x^{-n} + b)^2)}{(x^{-n} + b)^4}
+    $$
+
+    Calculando as derivadas individuais:
+
+    Derivada do numerador:
+
+    $$
+    \frac{d}{dx}(nx^{-1} + bnx^{n-1} + anx^{-n-1}) = -nx^{-2} + bn(n-1)x^{n-2} - an(-n-1)x^{-n-2}
+    $$
+
+    Derivada do denominador:
+
+    $$
+    \frac{d}{dx}((x^{-n} + b)^2) = 2(x^{-n} + b)(-nx^{-n-1})
+    $$
+
+    Substituindo e simplificando, temos:
+
+    $$
+    \frac{d^2y}{dx^2} = \frac{(x^{-n} + b)^2 \cdot (-nx^{-2} + bn(n-1)x^{n-2} + annx^{-n-2}) - (nx^{-1} + bnx^{n-1} + anx^{-n-1}) \cdot 2(x^{-n} + b)(-nx^{-n-1})}{(x^{-n} + b)^4}
+    $$
+
+    Terceira derivada:
+
+    Para calcular a terceira derivada, utilizamos a regra do quociente novamente, diferenciando a segunda derivada:
+
+    $$
+    \frac{d^3y}{dx^3} = \frac{(x^{-n} + b)^4 \cdot \frac{d}{dx} \left[ (x^{-n} + b)^2 \cdot (-nx^{-2} + bn(n-1)x^{n-2} + annx^{-n-2}) - (nx^{-1} + bnx^{n-1} + anx^{-n-1}) \cdot 2(x^{-n} + b)(-nx^{-n-1}) \right] - \left[ (x^{-n} + b)^2 \cdot (-nx^{-2} + bn(n-1)x^{n-2} + annx^{-n-2}) - (nx^{-1} + bnx^{n-1} + anx^{-n-1}) \cdot 2(x^{-n} + b)(-nx^{-n-1}) \right] \cdot 4(x^{-n} + b)^3 \cdot (-nx^{-n-1})}{(x^{-n} + b)^8}
+    $$
+
+    Vamos simplificar a expressão resultante:
+
+    Diferenciamos cada termo no numerador:
+
+    $$
+    \frac{d}{dx} \left[ (x^{-n} + b)^2 \cdot (-nx^{-2} + bn(n-1)x^{n-2} + annx^{-n-2}) \right]
+    $$
+
+    $$
+    \frac{d}{dx} \left[ (nx^{-1} + bnx^{n-1} + anx^{-n-1}) \cdot 2(x^{-n} + b)(-nx^{-n-1}) \right]
+    $$
+
+    Substituímos as derivadas no numerador da terceira derivada.
+
+    Simplificamos os termos resultantes.
+
+    A terceira derivada completa é extensa, mas a abordagem geral envolve aplicar as regras do produto e do quociente repetidamente até obter a expressão final.
+
+    Portanto, a terceira derivada de $y = \frac{x^n + a}{x^{-n} + b}$ é:
+
+    $$
+    \frac{d^3y}{dx^3} = \frac{(x^{-n} + b)^4 \cdot \text{termo diferenciado} - \text{numerador diferenciado} \cdot 4(x^{-n} + b)^3 \cdot (-nx^{-n-1})}{(x^{-n} + b)^8}
+    $$
+
+11. Encontre a variação da corrente $C$ em relação à temperatura $t$ para a expressão $C = a + bt + ct^2$.
+
+    Primeira derivada:
+
+    $$
+    \frac{dC}{dt} = b + 2ct
+    $$
+
+    Resposta:
+
+    Segunda Derivada:
+
+    $$
+    \frac{d^2C}{dt^2} = 2c
+    $$
+
+    Terceira Derivada:
+
+    $$
+    \frac{d^3C}{dt^3} = 0
+    $$
+
+12. Encontre a taxa de variação da resistência em relação à temperatura para as seguintes expressões.
+
+    Primeira equação: $R = R_0 (1 + at + bt^2)$
+
+    Primeira derivada:
+
+    $$
+    \frac{dR}{dt} = R_0 (a + 2bt)
+    $$
+
+    Resposta:
+
+    Segunda Derivada:
+
+    $$
+    \frac{d^2R}{dt^2} = R_0 \cdot 2b = 2bR_0
+    $$
+
+    Terceira Derivada:
+
+    $$
+    \frac{d^3R}{dt^3} = 0
+    $$
+
+    Segunda equação: $R = R_0 (1 + at + b\sqrt{t})$
+
+    Primeira derivada:
+
+    $$
+    \frac{dR}{dt} = R_0 \left( a + \frac{b}{2\sqrt{t}} \right)
+    $$
+
+    Resposta:
+
+    Segunda Derivada:
+
+    $$
+    \frac{d^2R}{dt^2} = R_0 \left( 0 - \frac{b}{4t^{3/2}} \right) = -\frac{bR_0}{4t^{3/2}}
+    $$
+
+    Terceira Derivada:
+
+    $$
+    \frac{d^3R}{dt^3} = R_0 \left( \frac{3b}{8t^{5/2}} \right) = \frac{3bR_0}{8t^{5/2}}
+    $$
+
+    Terceira equação: $R = R_0 (1 + at + bt^2)^{-1}$
+
+    Primeira derivada:
+
+    $$
+    \frac{dR}{dt} = -R_0 \cdot \frac{a + 2bt}{(1 + at + bt^2)^2}
+    $$
+
+    Resposta:
+
+    Segunda Derivada:
+
+    Para calcular a segunda derivada, utilizamos a regra do quociente e produto:
+
+    $$
+    \frac{d^2R}{dt^2} = \frac{d}{dt} \left( -R_0 \cdot \frac{a + 2bt}{(1 + at + bt^2)^2} \right)
+    $$
+
+    Vamos simplificar a derivada:
+
+    $$
+    \frac{d^2R}{dt^2} = -R_0 \cdot \frac{(1 + at + bt^2)^2 \cdot \frac{d}{dt}(a + 2bt) - (a + 2bt) \cdot \frac{d}{dt}((1 + at + bt^2)^2)}{(1 + at + bt^2)^4}
+    $$
+
+    Calculando as derivadas individuais:
+
+    Derivada do numerador:
+
+    $$
+    \frac{d}{dt}(a + 2bt) = 2b
+    $$
+
+    Derivada do denominador:
+
+    $$
+    \frac{d}{dt}((1 + at + bt^2)^2) = 2(1 + at + bt^2)(a + 2bt)
+    $$
+
+    Substituindo e simplificando, temos:
+
+    $$
+    \frac{d^2R}{dt^2} = -R_0 \cdot \frac{(1 + at + bt^2)^2 \cdot 2b - (a + 2bt) \cdot 2(1 + at + bt^2)(a + 2bt)}{(1 + at + bt^2)^4}
+    $$
+
+    Simplificando mais:
+
+    $$
+    \frac{d^2R}{dt^2} = -R_0 \cdot \frac{2b(1 + at + bt^2)^2 - 2(a + 2bt)^2(1 + at + bt^2)}{(1 + at + bt^2)^4}
+    $$
+
+    $$
+    \frac{d^2R}{dt^2} = -R_0 \cdot \frac{2b(1 + at + bt^2) - 2(a + 2bt)^2}{(1 + at + bt^2)^3}
+    $$
+
+    Terceira Derivada:
+
+    Para calcular a terceira derivada, utilizamos a regra do quociente e produto novamente, diferenciando a segunda derivada:
+
+    $$
+    \frac{d^3R}{dt^3} = \frac{d}{dt} \left( -R_0 \cdot \frac{2b(1 + at + bt^2) - 2(a + 2bt)^2}{(1 + at + bt^2)^3} \right)
+    $$
+
+    Vamos simplificar a derivada:
+
+    $$
+    \frac{d^3R}{dt^3} = -R_0 \cdot \frac{(1 + at + bt^2)^3 \cdot \frac{d}{dt}(2b(1 + at + bt^2) - 2(a + 2bt)^2) - (2b(1 + at + bt^2) - 2(a + 2bt)^2) \cdot \frac{d}{dt}((1 + at + bt^2)^3)}{(1 + at + bt^2)^6}
+    $$
+
+    Calculando as derivadas individuais:
+
+    Derivada do numerador:
+
+    $$
+    \frac{d}{dt}(2b(1 + at + bt^2) - 2(a + 2bt)^2) = 2b(a + 2bt) + 2b(2t)
+    $$
+
+    Derivada do denominador:
+
+    $$
+    \frac{d}{dt}((1 + at + bt^2)^3) = 3(1 + at + bt^2)^2(a + 2bt)
+    $$
+
+    Substituindo e simplificando, temos:
+
+    $$
+    \frac{d^3R}{dt^3} = -R_0 \cdot \frac{(1 + at + bt^2)^3 \cdot (2b(a + 2bt) + 2b(2t)) - (2b(1 + at + bt^2) - 2(a + 2bt)^2) \cdot 3(1 + at + bt^2)^2(a + 2bt)}{(1 + at + bt^2)^6}
+    $$
+
+    Simplificando mais:
+
+    $$
+    \frac{d^3R}{dt^3} = -R_0 \cdot \frac{(1 + at + bt^2)^3 \cdot 2b(a + 2bt + 2t) - (2b(1 + at + bt^2) - 2(a + 2bt)^2) \cdot 3(1 + at + bt^2)^2(a + 2bt)}{(1 + at + bt^2)^6}
+    $$
+
+    $$
+    \frac{d^3R}{dt^3} = -R_0 \cdot \frac{2b(1 + at + bt^2)^3(a + 2bt + 2t) - 3(1 + at + bt^2)^2(2b(1 + at + bt^2) - 2(a + 2bt)^2)(a + 2bt)}{(1 + at + bt^2)^6}
+    $$
+
+    Portanto, a terceira derivada de $R = R_0 (1 + at + bt^2)^{-1}$ é:
+
+    $$
+    \frac{d^3R}{dt^3} = -R_0 \cdot \frac{2b(1 + at + bt^2)^3(a + 2bt + 2t) - 3(1 + at + bt^2)^2(2b(1 + at + bt^2) - 2(a + 2bt)^2)(a + 2bt)}{(1 + at + bt^2)^6}
+    $$
+
+13. A força eletromotriz $E$ varia com a temperatura $t$ de acordo com:
+
+    Primeira derivada:
+
+    $$
+    \frac{dE}{dt} = 1.4340 \left[ -0.000814 + 0.000014(t - 15) \right]
+    $$
+
+    Resposta:
+
+    Segunda Derivada:
+
+    $$
+    \frac{d^2E}{dt^2} = 1.4340 \cdot 0.000014
+    $$
+
+    Terceira Derivada:
+
+    $$
+    \frac{d^3E}{dt^3} = 0
+    $$
+
+14. A força eletromotriz $E$ para manter um arco elétrico de comprimento $l$ com corrente $i$ é dada por:
+
+    $$
+    E = a + bl + \frac{c + kl}{i}
+    $$
+
+    Parte 1: Variação da força eletromotriz com relação ao comprimento do arco $l$
+
+    Primeira derivada:
+
+    $$
+    \frac{dE}{dl} = b + \frac{k}{i}
+    $$
+
+    Resposta:
+
+    Segunda Derivada:
+
+    $$
+    \frac{d^2E}{dl^2} = 0
+    $$
+
+    Terceira Derivada:
+
+    $$
+    \frac{d^3E}{dl^3} = 0
+    $$
+
+    Parte 2: Variação da força eletromotriz com relação à corrente $i$
+
+    Primeira derivada:
+
+    $$
+    \frac{dE}{di} = -\frac{c + kl}{i^2}
+    $$
+
+    Resposta:
+
+    Segunda Derivada:
+
+    Usando a regra do quociente e da potência:
+
+    $$
+    \frac{d^2E}{di^2} = \frac{d}{di} \left( -\frac{c + kl}{i^2} \right)
+    $$
+
+    $$
+    \frac{d^2E}{di^2} = - (c + kl) \cdot \frac{d}{di} \left( i^{-2} \right)
+    $$
+
+    $$
+    \frac{d^2E}{di^2} = - (c + kl) \cdot (-2) i^{-3}
+    $$
+
+    $$
+    \frac{d^2E}{di^2} = 2 \frac{c + kl}{i^3}
+    $$
+
+    Terceira Derivada:
+
+    Usando a regra do quociente e da potência novamente:
+
+    $$
+    \frac{d^3E}{di^3} = \frac{d}{di} \left( 2 \frac{c + kl}{i^3} \right)
+    $$
+
+    $$
+    \frac{d^3E}{di^3} = 2 (c + kl) \cdot \frac{d}{di} \left( i^{-3} \right)
+    $$
+
+    $$
+    \frac{d^3E}{di^3} = 2 (c + kl) \cdot (-3) i^{-4}
+    $$
+
+    $$
+    \frac{d^3E}{di^3} = -6 \frac{c + kl}{i^4}
+    $$
+
+    Portanto, as derivadas da expressão $E = a + bl + \frac{c + kl}{i}$ são:
+
+    Com relação ao comprimento do arco $l$:
+
+    Primeira Derivada:
+
+    $$
+    \frac{dE}{dl} = b + \frac{k}{i}
+    $$
+
+    Resposta:
+    
+    Segunda Derivada:
+
+    $$
+    \frac{d^2E}{dl^2} = 0
+    $$
+
+    Terceira Derivada:
+
+    $$
+    \frac{d^3E}{dl^3} = 0
+    $$
+
+    Com relação à corrente $i$:
+
+    Primeira Derivada:
+
+    $$
+    \frac{dE}{di} = -\frac{c + kl}{i^2}
+    $$
+
+    Resposta:
+
+    Segunda Derivada:
+
+    $$
+    \frac{d^2E}{di^2} = 2 \frac{c + kl}{i^3}
+    $$
+
+    Terceira Derivada:
+
+    $$
+    \frac{d^3E}{di^3} = -6 \frac{c + kl}{i^4}
+    $$
+
+Ainda no item 4 do Exercício IV, precisamos calcular a segunda e terceiras derivadas das respostas dos exemplos do Capítulo 6.
+
+1. Diferenciar $y = \frac{a}{b^2}x^3 - \frac{a^2}{b}x + \frac{a^2}{b^2}$.
+
+    Primeira derivada:
+
+    $$
+    \frac{dy}{dx} = \frac{3a}{b^2} x^2 - \frac{a^2}{b}
+    $$
+
+    Resposta:
+
+    Segunda derivada:
+
+    $$
+    \frac{d^2y}{dx^2} = \frac{6a}{b^2} x
+    $$
+
+    Terceira derivada:
+
+    $$
+    \frac{d^3y}{dx^3} = \frac{6a}{b^2}
+    $$
+
+2. Diferenciar $y = 2a\sqrt{bx^3} - \frac{3b\sqrt{a}}{x} - 2\sqrt{ab}$.
+
+    Primeira derivada:
+
+    $$
+    \frac{dy}{dx} = 3a\sqrt{bx} + \frac{3b\sqrt{a}}{x^2}
+    $$
+
+    Resposta:
+
+    Segunda derivada:
+
+    $$
+    \frac{d^2y}{dx^2} = \frac{3a\sqrt{b}}{2\sqrt{x}} - \frac{6b\sqrt{a}}{x^3}
+    $$
+
+    Terceira derivada:
+
+    $$
+    \frac{d^3y}{dx^3} = -\frac{3a\sqrt{b}}{4x^{3/2}} + \frac{18b\sqrt{a}}{x^4}
+    $$
+
+3. Diferenciar $z = 1.8 \sqrt[3]{\frac{1}{\theta^2}} - \frac{4.4}{\sqrt[5]{\theta}} - 27^\circ$.
+
+    Primeira derivada:
+
+    $$
+    \frac{dz}{d\theta} = -1.2 \theta^{-\frac{5}{3}} + 0.88 \theta^{-\frac{6}{5}}
+    $$
+
+    Resposta:
+
+    Segunda derivada:
+
+    $$
+    \frac{d^2z}{d\theta^2} = 2.0 \theta^{-\frac{8}{3}} - 1.056 \theta^{-\frac{11}{5}}
+    $$
+
+    Terceira derivada:
+
+    $$
+    \frac{d^3z}{d\theta^3} = -\frac{20}{3} \theta^{-\frac{11}{3}} + \frac{11.616}{5} \theta^{-\frac{16}{5}}
+    $$
+
+4. Diferenciar $v = (3t^2 - 1.2t + 1)^3$.
+
+    Primeira derivada:
+
+    $$
+    \frac{dv}{dt} = 162t^5 - 162t^4 + 159.84t^3 - 69.984t^2 + 26.64t - 3.6
+    $$
+
+    Resposta:
+
+    Segunda derivada:
+
+    $$
+    \frac{d^2v}{dt^2} = 810t^4 - 648t^3 + 479.52t^2 - 139.968t + 26.64
+    $$
+
+    Terceira derivada:
+
+    $$
+    \frac{d^3v}{dt^3} = 3240t^3 - 1944t^2 + 959.04t - 139.968
+    $$
+
+5. Diferenciar $y = (2x - 3)(x + 1)^2$.
+
+    Primeira derivada:
+
+    $$
+    \frac{dy}{dx} = 2(x + 1)(3x - 2)
+    $$
+
+    Resposta:
+
+    Segunda derivada:
+
+    $$
+    \frac{d^2y}{dx^2} = 6x + 2
+    $$
+
+    Terceira derivada:
+
+    $$
+    \frac{d^3y}{dx^3} = 6
+    $$
+
+6. Diferenciar $y = 0.5x^3(x - 3)$.
+
+    Primeira derivada:
+
+    $$
+    \frac{dy}{dx} = 2x^3 - 4.5x^2
+    $$
+
+    Resposta:
+
+    Segunda derivada:
+
+    $$
+    \frac{d^2y}{dx^2} = 6x^2 - 9x
+    $$
+
+    Terceira derivada:
+
+    $$
+    \frac{d^3y}{dx^3} = 12x - 9
+    $$
+
+7. Diferenciar $w = \left( \theta + \frac{1}{\theta} \right) \left( \sqrt{\theta} + \frac{1}{\sqrt{\theta}} \right)$.
+
+    Primeira derivada:
+
+    $$
+    \frac{dw}{d\theta} = \frac{3}{2} \left( \sqrt{\theta} - \frac{1}{\sqrt[5]{\theta}} \right) + \frac{1}{2} \left( \frac{1}{\sqrt{\theta}} - \frac{1}{\sqrt[3]{\theta}} \right)
+    $$
+
+    Resposta:
+
+    Segunda derivada:
+
+    $$
+    \frac{d^2w}{d\theta^2} = \frac{3}{4} \theta^{-\frac{1}{2}} + \frac{3}{10} \theta^{-\frac{6}{5}} - \frac{1}{4} \theta^{-\frac{3}{2}} + \frac{1}{6} \theta^{-\frac{4}{3}}
+    $$
+
+    Terceira derivada:
+
+    $$
+    \frac{d^3w}{d\theta^3} = -\frac{3}{8} \theta^{-\frac{3}{2}} - \frac{18}{50} \theta^{-\frac{11}{5}} + \frac{3}{8} \theta^{-\frac{5}{2}} - \frac{4}{18} \theta^{-\frac{7}{3}}
+    $$
+
+8. Diferenciar $y = \frac{a}{1 + a\sqrt{x} + a^2 x}$.
+
+    Primeira derivada:
+
+    $$
+    \frac{dy}{dx} = -\frac{a \left(\frac{1}{2} ax^{-\frac{1}{2}} + a^2 \right)}{(1 + a\sqrt{x} + a^2 x)^2}
+    $$
+
+    Resposta:
+
+    Segunda derivada:
+
+    $$
+    \frac{d^2y}{dx^2} = \frac{a \left( \frac{1}{4} a^2 x^{-3/2} \right) (1 + a\sqrt{x} + a^2 x)^2 + 2a (\frac{1}{2} a x^{-1/2} + a^2) (1 + a\sqrt{x} + a^2 x) a \left( x^{-1/2} + 2 \right)}{(1 + a\sqrt{x} + a^2 x)^4}
+    $$
+
+    Terceira derivada:
+
+    $$
+    \frac{d^3y}{dx^3} = \frac{d}{dx} \left( \frac{d^2y}{dx^2} \right)
+    $$
+
+9. Diferenciar $y = \frac{x^2}{x^2 + 1}$.
+
+    Primeira derivada:
+
+    $$
+    \frac{dy}{dx} = \frac{2x}{(x^2 + 1)^2}
+    $$
+
+    Resposta:
+
+    Segunda derivada:
+
+    $$
+    \frac{d^2y}{dx^2} = \frac{2(x^2 + 1)^2 \cdot 2x' - 2x \cdot 2(x^2 + 1) \cdot 2x'}{(x^2 + 1)^4} = \frac{4(x^2 + 1) - 8x^2}{(x^2 + 1)^3}
+    $$
+
+    Terceira derivada:
+
+    $$
+    \frac{d^3y}{dx^3} = \frac{d}{dx} \left( \frac{4(x^2 + 1) - 8x^2}{(x^2 + 1)^3} \right)
+    $$
+
+10. Diferenciar $y = \frac{a + \sqrt{x}}{a - \sqrt{x}}$.
+
+    Primeira derivada:
+
+    $$
+    \frac{dy}{dx} = \frac{a}{(a - \sqrt{x})^2 \sqrt{x}}
+    $$
+
+    Resposta:
+
+    Segunda derivada:
+
+    $$
+    \frac{d^2y}{dx^2} = \frac{d}{dx} \left( \frac{a}{(a - \sqrt{x})^2 \sqrt{x}} \right)
+    $$
+
+    Terceira derivada:
+
+    $$
+    \frac{d^3y}{dx^3} = \frac{d}{dx} \left( \frac{d^2y}{dx^2} \right)
+    $$
+
+11. Diferenciar $\theta = \frac{1 - a\sqrt[3]{t^2}}{1 + a\sqrt[3]{t^3}}$.
+
+    Primeira derivada:
+
+    $$
+    \frac{d\theta}{dt} = \frac{(1 + a t^{\frac{2}{3}}) \left(-\frac{2}{3} a t^{-\frac{1}{3}}\right) - (1 - a t^{\frac{2}{3}}) \left(\frac{3}{2} a t^{\frac{1}{2}}\right)}{(1 + a t^{\frac{3}{2}})^2}
+    $$
+
+    Resposta:
+
+    Segunda derivada:
+
+    $$
+    \frac{d^2\theta}{dt^2} = \frac{d}{dt} \left( \frac{(1 + a t^{\frac{2}{3}}) \left(-\frac{2}{3} a t^{-\frac{1}{3}}\right) - (1 - a t^{\frac{2}{3}}) \left(\frac{3}{2} a t^{\frac{1}{2}}\right)}{(1 + a t^{\frac{3}{2}})^2} \right)
+    $$
+
+    Terceira derivada:
+
+    $$
+    \frac{d^3\theta}{dt^3} = \frac{d}{dt} \left( \frac{d^2\theta}{dt^2} \right)
+    $$
+
+12. Um reservatório de seção transversal quadrada tem lados inclinados em um ângulo de $45^\circ$ com a vertical. O lado da base é $200\, \text{m}$. Encontre uma expressão para a quantidade que entra ou sai quando a profundidade da água varia em $1\, \text{m}$; portanto, encontre, em litros, a quantidade retirada por hora quando a profundidade é reduzida de $14$ para $10\, \text{m}$ em 24 horas.
+
+    Primeira derivada:
+
+    $$
+    \frac{dV}{dh} = 40,000 + 1600h + 4h^2
+    $$
+
+    Resposta:
+
+    Segunda derivada:
+
+    $$
+    \frac{d^2V}{dh^2} = 1600 + 8h
+    $$
+
+    Terceira derivada:
+
+    $$
+    \frac{d^3V}{dh^3} = 8
+    $$
+
+13. A pressão absoluta, em atmosferas, $P$, do vapor saturado na temperatura $t^\circ \, \text{C}$. foi determinada por Dulong como sendo $P = \left( \frac{40 + t}{140} \right)^5$ desde que $t$ esteja acima de $80^\circ \, \text{C}$. Encontre a taxa de variação da pressão com a temperatura a $100^\circ \, \text{C}$.
+
+    Primeira derivada:
+
+    $$
+    \frac{dP}{dt} = \frac{5(40 + t)^4}{140^5}
+    $$
+
+    Resposta:
+
+    Segunda derivada:
+
+    $$
+    \frac{d^2P}{dt^2} = \frac{20(40 + t)^3}{140^5}
+    $$
+
+    Terceira derivada:
+
+    $$
+    \frac{d^3P}{dt^3} = \frac{60(40 + t)^2}{140^5}
+    $$
+
+### Exercícios V
+
+1. Se $y = a + bt^2 + ct^4$, encontre $\frac{dy}{dt}$ e $\frac{d^2 y}{dt^2}$.
+
+    Resolvendo:
+
+    Usando a regra da potência, da constante e da soma:
+
+    $$
+    \frac{dy}{dt} = \frac{d}{dt}(a) + \frac{d}{dt}(bt^2) + \frac{d}{dt}(ct^4)
+    $$
+
+    $$
+    \frac{dy}{dt} = 0 + 2bt + 4ct^3 = 2bt + 4ct^3
+    $$
+
+    Para a segunda derivada:
+
+    $$
+    \frac{d^2 y}{dt^2} = \frac{d}{dt}(2bt + 4ct^3)
+    $$
+
+    $$
+    \frac{d^2 y}{dt^2} = 2b + 12ct^2
+    $$
+
+    Resposta:
+
+    $$
+    \frac{dy}{dt} = 2bt + 4ct^3; \quad \frac{d^2 y}{dt^2} = 2b + 12ct^2
+    $$
+
+2. Um corpo caindo livremente no espaço descreve em $t$ segundos um espaço $s$, em metros, expresso pela equação $s = 16t^2$. Desenhe uma curva mostrando a relação entre $s$ e $t$. Também determine a velocidade do corpo nos seguintes tempos a partir do seu ponto de partida: $t = 2$ segundos; $t = 4.6$ segundos; $t = 0.01$ segundo.
+
+    Resolvendo
+
+    Usando a regra da potência e da constante:
+
+    $$
+    v = \frac{ds}{dt} = \frac{d}{dt}(16t^2) = 32t
+    $$
+
+    Para os tempos dados:
+
+    $$
+    v(t=2) = 32 \times 2 = 64 \text{ m/s}
+    $$
+
+    $$
+    v(t=4.6) = 32 \times 4.6 = 147.2 \text{ m/s}
+    $$
+
+    $$
+    v(t=0.01) = 32 \times 0.01 = 0.32 \text{ m/s}
+    $$
+
+    Resposta:
+
+    $64$; $147.2$; e $0.32$ metros por segundo.
+
+3. Se $x = at - \frac{1}{2}gt^2$, encontre $\dot{x}$ e $\ddot{x}$.
+
+    Resolvendo:
+
+    Usando a regra da constante que multiplica a função, da soma e da subtração:
+
+    $$
+    \dot{x} = \frac{d}{dt}(at) - \frac{d}{dt}\left(\frac{1}{2}gt^2\right)
+    $$
+
+    $$
+    \dot{x} = a - gt
+    $$
+
+    Para a segunda derivada:
+
+    $$
+    \ddot{x} = \frac{d}{dt}(a - gt) = -g
+    $$
+
+    Resposta:
+
+    $x = a - gt; \quad \ddot{x} = -g$
+
+4. Se um corpo se move de acordo com a lei $s = 12 - 4.5t + 6.2t^2$, encontre sua velocidade quando $t = 4$ segundos; $s$ sendo em metros.
+
+    Resolvendo:
+
+    Usando a regra da potência, da constante, da soma e da subtração:
+
+    $$
+    v = \frac{ds}{dt} = \frac{d}{dt}(12 - 4.5t + 6.2t^2)
+    $$
+
+    $$
+    v = 0 - 4.5 + 12.4t
+    $$
+
+    Para $t = 4$:
+
+    $$
+    v(t=4) = -4.5 + 12.4 \times 4 = -4.5 + 49.6 = 45.1 \text{ m/s}
+    $$
+
+    Resposta:
+
+    $45.1$ metros por segundo.
+
+5. Encontre a aceleração do corpo mencionado no exemplo anterior. A aceleração é a mesma para todos os valores de $t$?
+
+    Resolvendo:
+
+    Usando a regra da potência, da constante e da soma:
+
+    $$
+    a = \frac{dv}{dt} = \frac{d}{dt}(-4.5 + 12.4t) = 12.4
+    $$
+
+    A aceleração é constante.
+
+    Resposta:
+
+    $12.4$ metros por segundo por segundo. Sim.
+
+6. O ângulo $\theta$ (em radianos) percorrido por uma roda giratória está relacionado com o tempo $t$ (em segundos) decorrido desde o início; pela lei $\theta = 2.1 - 3.2t + 4.8t^2$. Encontre a velocidade angular (em radianos por segundo) dessa roda quando $1 \frac{1}{2}$ segundos se passaram. Encontre também sua aceleração angular.
+
+    Resolvendo:
+
+    Usando a regra da potência, da constante e da soma:
+
+    $$
+    \omega = \frac{d\theta}{dt} = \frac{d}{dt}(2.1 - 3.2t + 4.8t^2)
+    $$
+
+    $$
+    \omega = 0 - 3.2 + 9.6t
+    $$
+
+    Para $t = 1.5$:
+
+    $$
+    \omega(t=1.5) = -3.2 + 9.6 \times 1.5 = -3.2 + 14.4 = 11.2 \text{ rad/s}
+    $$
+
+    Para a aceleração angular:
+
+    $$
+    \alpha = \frac{d\omega}{dt} = \frac{d}{dt}(-3.2 + 9.6t) = 9.6
+    $$
+
+    Resposta:
+
+    Velocidade angular $= 11.2$ radianos por segundo; aceleração angular $= 9.6$ radianos por segundo ao quadrado.
+
+7. Um corpo deslizante se move de tal forma que, durante a primeira parte de seu movimento, sua distância $s$ em metros do ponto de partida é dada pela expressão $s = 6.8t^3 - 10.8t$; $t$ em segundos. Encontre a expressão para a velocidade e a aceleração a qualquer momento; e, portanto, encontre a velocidade e a aceleração após 3 segundos.
+
+    Resolvendo:
+
+    Usando a regra da potência, da constante e da soma:
+
+    $$
+    v = \frac{ds}{dt} = \frac{d}{dt}(6.8t^3 - 10.8t)
+    $$
+
+    $$
+    v = 20.4t^2 - 10.8
+    $$
+
+    Para $t = 3$:
+
+    $$
+    v(t=3) = 20.4 \times 3^2 - 10.8 = 20.4 \times 9 - 10.8 = 183.6 - 10.8 = 172.8 \text{ cm/s}
+    $$
+
+    Para a aceleração:
+
+    $$
+    a = \frac{dv}{dt} = \frac{d}{dt}(20.4t^2 - 10.8) = 40.8t
+    $$
+
+    Para $t = 3$:
+
+    $$
+    a(t=3) = 40.8 \times 3 = 122.4 \text{ cm/s}^2
+    $$
+
+    Resposta:
+
+    $v = 20.4t^2 - 10.8$. $a = 40.8t$. $172.8$ cm/s, $122.4$ cm/s².
+
+8. O movimento de um balão ascendente é tal que sua altura $h$, em quilômetros, é dada a qualquer instante pela expressão $h = 0.5 + \frac{1}{10} \sqrt[3]{t - 125}$; $t$ sendo em segundos. Encontre uma expressão para a velocidade e a aceleração a qualquer momento. Desenhe curvas para mostrar a variação da altura, velocidade e aceleração durante os primeiros dez minutos da ascensão.
+
+    Resolvendo:
+
+    Para a velocidade, usamos a regra da potência e da constante que multiplica função:
+
+    $$
+    v = \frac{dh}{dt} = \frac{d}{dt} \left(0.5 + \frac{1}{10} \sqrt[3]{t - 125}\right)
+    $$
+
+    $$
+    v = \frac{1}{10} \cdot \frac{d}{dt} \left((t - 125)^{1/3}\right)
+    $$
+
+    $$
+    v = \frac{1}{10} \cdot \frac{1}{3} (t - 125)^{-2/3} \cdot 1
+    $$
+
+    $$
+    v = \frac{1}{30} (t - 125)^{-2/3}
+    $$
+
+    Para a aceleração:
+
+    $$
+    a = \frac{dv}{dt} = \frac{d}{dt} \left(\frac{1}{30} (t - 125)^{-2/3}\\right)
+    $$
+
+    $$
+    a = \frac{1}{30} \cdot \frac{d}{dt} \left((t - 125)^{-2/3}\right)
+    $$
+
+    $$
+    a = \frac{1}{30} \cdot \left(-\frac{2}{3}\right) (t - 125)^{-5/3}
+    $$
+
+    $$
+    a = -\frac{1}{45} (t - 125)^{-5/3}
+    $$
+
+    Resposta:
+
+    $$
+    v = \frac{1}{30 \sqrt[3]{(t - 125)^2}}, \quad a = -\frac{1}{45 \sqrt[5]{(t - 125)^5}}
+    $$
+
+9. Uma pedra é lançada para baixo na água e sua profundidade $p$ em metros em qualquer instante $t$ segundos após atingir a superfície da água é dada pela expressão
+
+    $$
+    p = \frac{4}{4 + t^2} + 0.8t - 1
+    $$
+
+    Encontre uma expressão para a velocidade e a aceleração a qualquer momento. Encontre a velocidade e a aceleração após 10 segundos.
+
+    Resolvendo:
+
+    Para a velocidade:
+
+    $$
+    v = \frac{dp}{dt} = \frac{d}{dt} \left( \frac{4}{4 + t^2} + 0.8t - 1 \right)
+    $$
+
+    Usando a regra do quociente e da soma:
+
+    $$
+    v = \frac{d}{dt} \left( \frac{4}{4 + t^2} \right) + \frac{d}{dt} (0.8t) - \frac{d}{dt} (1)
+    $$
+
+    $$
+    v = \frac{-8t}{(4 + t^2)^2} + 0.8 - 0
+    $$
+
+    $$
+    v = 0.8 - \frac{8t}{(4 + t^2)^2}
+    $$
+
+    Para a aceleração:
+
+    $$
+    a = \frac{dv}{dt} = \frac{d}{dt} \left( 0.8 - \frac{8t}{(4 + t^2)^2} \right)
+    $$
+
+    $$
+    a = 0 - \frac{d}{dt} \left( \frac{8t}{(4 + t^2)^2} \right)
+    $$
+
+    Usando a regra do quociente:
+
+    $$
+    a = - \left( \frac{(4 + t^2)^2 \cdot 8 - 8t \cdot 2(4 + t^2) \cdot t}{(4 + t^2)^4} \right)
+    $$
+
+    $$
+    a = - \left( \frac{8(4 + t^2)^2 - 16t^2 (4 + t^2)}{(4 + t^2)^4} \right)
+    $$
+
+    $$
+    a = - \left( \frac{32 + 8t^2 - 16t^2 - 16t^4}{(4 + t^2)^3} \right)
+    $$
+
+    $$
+    a = - \frac{24t^2 - 16t^4}{(4 + t^2)^3}
+    $$
+
+    $$
+    a = \frac{24t^2 - 32}{(4 + t^2)^3}
+    $$
+
+    Para $t = 10$:
+
+    $$
+    v(t=10) = 0.8 - \frac{8 \cdot 10}{(4 + 10^2)^2} = 0.8 - \frac{80}{104^2} \approx 0.7926 \text{ m/s}
+    $$
+
+    $$
+    a(t=10) = \frac{24 \cdot 10^2 - 32}{(4 + 10^2)^3} = \frac{2400 - 32}{(4 + 100)^3} \approx 0.00211 \text{ m/s}^2
+    $$
+
+    Resposta:
+
+    $$
+    v = 0.8 - \frac{8t}{(4 + t^2)^2}, \quad a = \frac{24t^2 - 32}{(4 + t^2)^3}, \quad 0.7926 \text{ m/s e } 0.00211 \text{ m/s}^2
+    $$
+
+10. Um corpo se move de tal forma que os espaços descritos no tempo $t$ a partir da partida são dados por $s = t^n$, onde $n$ é uma constante. Encontre o valor de $n$ quando a velocidade é dobrada do quinto ao décimo segundo; encontre também quando a velocidade é numericamente igual à aceleração ao final do décimo segundo.
+
+    Resolvendo:
+
+    Para a velocidade:
+
+    $$
+    v = \frac{ds}{dt} = \frac{d}{dt}(t^n) = nt^{n-1}
+    $$
+
+    Para a aceleração:
+
+    $$
+    a = \frac{dv}{dt} = \frac{d}{dt}(nt^{n-1}) = n(n-1)t^{n-2}
+    $$
+
+    Quando a velocidade é dobrada do quinto ao décimo segundo:
+
+    $$
+    v(10) = 2v(5)
+    $$
+
+    $$
+    nt^{n-1} \bigg|_{t=10} = 2 \cdot nt^{n-1} \bigg|_{t=5}
+    $$
+
+    $$
+    n \cdot 10^{n-1} = 2n \cdot 5^{n-1}
+    $$
+
+    $$
+    10^{n-1} = 2 \cdot 5^{n-1}
+    $$
+
+    $$
+    \left(\frac{10}{5}\right)^{n-1} = 2
+    $$
+
+    $$
+    2^{n-1} = 2
+    $$
+
+    $$
+    n-1 = 1
+    $$
+
+    $$
+    n = 2
+    $$
+
+    Quando a velocidade é numericamente igual à aceleração ao final do décimo segundo:
+
+    $$
+    nt^{n-1} = n(n-1)t^{n-2}
+    $$
+
+    $$
+    t^{n-1} = (n-1)t^{n-2}
+    $$
+
+    $$
+    t \big|_{t=10} = n-1
+    $$
+
+    $$
+    10 = n-1
+    $$
+
+    $$
+    n = 11
+    $$
+
+    Resposta:
+
+    $n = 2, \quad n = 11$
 
