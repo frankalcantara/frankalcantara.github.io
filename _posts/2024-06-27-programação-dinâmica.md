@@ -1901,8 +1901,260 @@ Stop for a moment, perhaps have a soda or a good wine. Rest a bit, then gather y
 
 This will continue!!!
 
+## Problem 1 Statement: Counting All Possible Paths in a Matrix
+
+### Description
+
+Given two integers $m$ and $n$, representing the dimensions of a matrix, count all possible distinct paths from the top-left corner $(0,0)$ to the bottom-right corner $(m-1,n-1)$. Each step can either be to the right or down.
+
+### Input
+
+- Two integers $m$ and $n$ where $1 \leq m, n \leq 100$.
+
+### Output
+
+- An integer representing the number of distinct paths from $(0,0)$ to $(m-1,n-1)$.
+
+### Example
+
+Input:
+3 3
+
+Output:
+6
+
+### Constraints
+
+- You can only move to the right or down in each step.
+
+### Analysis
+
+Let's delve deeper into the "unique paths" problem.  Picture a matrix as a grid, where you start at the top-left corner $(0, 0)$ and your goal is to reach the bottom-right corner $(m-1, n-1)$.  The twist?  You're only allowed to move down or right.  The challenge is to figure out how many distinct paths you can take to get from start to finish.
+
+This problem so intriguing because it blends the elegance of combinatorics (the study of counting) with the power of dynamic programming (a clever problem-solving technique).  The solution involves combinations, a fundamental concept in combinatorics. Moreover, it's a classic example of how dynamic programming can streamline a seemingly complex problem.
+
+The applications of this type of problem extend beyond theoretical interest. They can be found in practical scenarios like robot navigation in a grid environment, calculating probabilities in games with grid-like movements, and analyzing maze-like structures. Understanding this problem provides valuable insights into a range of fields, from mathematics to robotics and beyond.
+
+Now, let's bring in some combinatorics! To journey from the starting point $(0, 0)$ to the destination $(m-1, n-1)$, you'll need a total of $(m - 1) + (n - 1)$ moves. That's a mix of downward and rightward steps.
+
+The exciting part is figuring out how many ways we can arrange those moves. Imagine choosing $(m - 1)$ moves to go down and $(n - 1)$ moves to go right, out of a total of $(m + n - 2)$ moves. This can be calculated using the following formula:
+
+$$C(m + n - 2, m - 1) = \frac{(m + n - 2)!}{(m - 1)! * (n - 1)!}$$
+
+For our 3x3 matrix example $(m = 3, n = 3)$, the calculation is:
+
+$$C(3 + 3 - 2, 3 - 1) = \frac{4!}{(2! * 2!)} = 6$$
+
+This tells us there are $6$ distinct paths to reach the bottom-right corner. Let's also visualize this using dynamic programming:
+
+**Filling the Matrix with Dynamic Programming:**
+
+1. **Initialize:** Start with a $dp$ matrix where $dp[0][0] = 1$ (one way to be at the start).
+
+    dp = \begin{bmatrix}
+    1 & 0 & 0 \
+    0 & 0 & 0 \
+    0 & 0 & 0
+    \end{bmatrix}
+
+2. **Fill First Row and Column:** There's only one way to reach each cell in the first row and column (either from the left or above).
+
+    dp = \begin{bmatrix}
+    1 & 1 & 1 \
+    1 & 0 & 0 \
+    1 & 0 & 0
+    \end{bmatrix}
+
+3. **Fill Remaining Cells:** For the rest, the number of paths to a cell is the sum of paths to the cell above and the cell to the left: $dp[i][j] = dp[i-1][j] + dp[i][j-1]$
+
+    dp = \begin{bmatrix}
+    1 & 1 & 1 \
+    1 & 2 & 3 \
+    1 & 3 & 6
+    \end{bmatrix}
+
+The bottom-right corner, $dp[2][2]$, holds our answer: $6$ unique paths.
+
+Bear with me, dear reader, as I temporarily diverge from our exploration of dynamic programming. Before delving deeper, it's essential to examine how we might solve this problem using a brute force approach.
+
+### Using Brute Force
+
+To tackle the unique paths problem with a brute force approach, we can use an iterative solution and a stack in C++20. The stack will keep track of our current position in the matrix and the number of paths that led us there. Here's a breakdown of how it works:
+
+1. **Create a Position Structure:**  We'll define a structure called `Position` to store the current coordinates $(i, j)$ and the count of paths leading to that position.
+
+2. **Initialize the Stack:** We'll start by pushing the initial position $(0, 0)$ onto the stack, along with a path count of $1$ (since there's one way to reach the starting point).
+
+3. **Iterate and Explore:**  While the stack isn't empty:
+  
+   - Pop the top position from the stack.
+   - If we've reached the bottom-right corner $(m-1, n-1)$, increment the total path count.
+   - If moving right is possible (within the matrix bounds), push the new position (with the same path count) onto the stack.
+   - If moving down is possible, do the same.
+
+4. **Obtain the Result:** When the stack is empty, the total path count will be the answer we seek – the total number of unique paths from $(0, 0)$ to $(m-1, n-1)$.
+
+Code Fragment 16 demonstrates how to implement this algorithm in C++.
+
+```cpp
+#include <iostream>
+#include <stack>
+#include <chrono>
+
+//.....
+// Structure to represent a position in the matrix
+struct Position {
+    int i, j;
+    int pathCount;
+};
+
+// Function to count paths using brute force
+int countPaths(int m, int n) {
+    std::stack<Position> stk;
+    stk.push({ 0, 0, 1 });
+    int totalPaths = 0;
+
+    while (!stk.empty()) {
+        Position pos = stk.top();
+        stk.pop();
+
+        int i = pos.i, j = pos.j, pathCount = pos.pathCount;
+
+        // If we reach the bottom-right corner, add to total paths
+        if (i == m - 1 && j == n - 1) {
+            totalPaths += pathCount;
+            continue;
+        }
+
+        // Move right if within bounds
+        if (j + 1 < n) {
+            stk.push({ i, j + 1, pathCount });
+        }
+
+        // Move down if within bounds
+        if (i + 1 < m) {
+            stk.push({ i + 1, j, pathCount });
+        }
+    }
+
+    return totalPaths;
+}
+//.....
+```
+
+*Code Fragment 16 - Count all paths function using Brute Force.*{: class="legend"}
+
+Let's start looking at `std::stack` data structure:
+
+>In C++20, the `std::stack` is a part of the Standard Template Library (STL) and is used to implement a stack data structure, which follows the Last-In-First-Out (LIFO) principle. A `std::stack` is a container adapter that provides a stack interface, designed to operate in a LIFO context. Elements are added to and removed from the top of the stack. The syntax for creating a stack is `std::stack<T> stack_name;` where `T` is the type of elements contained in the stack.
+>To create a stack, you can use constructors such as `std::stack<int> s1;` for the default constructor or `std::stack<int> s2(some_container);` to construct with a container. To add an element to the top of the stack, use the `push` function: `stack_name.push(value);`. To remove the element at the top of the stack, use the `pop` function: `stack_name.pop();`. To return a reference to the top element of the stack, use `T& top_element = stack_name.top();`. To check whether the stack is empty, use `bool is_empty = stack_name.empty();`. Finally, to return the number of elements in the stack, use `std::size_t stack_size = stack_name.size();`.
+>The `std::stack` class is a simple and effective way to manage a stack of elements, ensuring efficient access and modification of the last inserted element.
+
+In the context of our code for counting paths in a matrix using a stack, the line `stk.push({ 0, 0, 1 });` is used to initialize the stack with the starting position of the matrix traversal. The `stk` is a `std::stack` of `Position` structures. The `Position` structure is defined as follows:
+
+```cpp
+struct Position {
+    int i, j;
+    int pathCount;
+};
+```
+
+The `Position` structure has three members: `i` and `j`, which represent the current coordinates in the matrix, and `pathCount`, which represents the number of paths that lead to this position. 
+
+The line `stk.push({ 0, 0, 1 });` serves a specific purpose in our algorithm:
+
+1. It creates a `Position` object with the initializer list `{ 0, 0, 1 }`, setting `i = 0`, `j = 0`, and `pathCount = 1`.
+2. It then pushes this `Position` object onto the stack using the `push` function of `std::stack`.
+
+In simpler terms, this line of code initializes the stack with the starting position of the matrix traversal, which is the top-left corner of the matrix at coordinates $(0, 0)$. It also sets the initial path count to $1$, indicating that there is one path starting from this position. From here, the algorithm will explore all possible paths from the top-left corner.
+
+*The brute force solution for counting paths in a matrix involves exploring all possible paths from the top-left corner to the bottom-right corner. Each path consists of a series of moves either to the right or down. The algorithm uses a stack to simulate the recursive exploration of these paths*.
+
+To analyze the time complexity, consider that the function must explore each possible combination of moves in the matrix. For a matrix of size $m \times n$, there are a total of $m + n - 2$ moves required to reach the bottom-right corner from the top-left corner. Out of these moves, $m - 1$ must be down moves and $n - 1$ must be right moves. The total number of distinct paths is given by the binomial coefficient $C(m+n-2, m-1)$, which represents the number of ways to choose $m-1$ moves out of $m+n-2$.
+
+The time complexity of the brute force approach is exponential in nature because it explores every possible path. Specifically, the time complexity is $O(2^{m+n})$ since each step involves a choice between moving right or moving down, leading to $2^{m+n}$ possible combinations of moves in the worst case. This exponential growth makes the brute force approach infeasible for large matrices, as the number of paths grows very quickly with increasing $m$ and $n$.
+
+The space complexity is also significant because the algorithm uses a stack to store the state of each position it explores. In the worst case, the depth of the stack can be as large as the total number of moves, which is $m + n - 2$. Thus, the space complexity is $O(m+n)$, primarily due to the stack's storage requirements.
+
+In summary, the brute force solution has an exponential time complexity $O(2^{m+n})$ and a linear space complexity $O(m+n)$, making it suitable only for small matrices where the number of possible paths is manageable.
+
+My gut feeling tells me this complexity is very, very bad. We'll definitely find better complexities as we explore dynamic programming solutions. Either way, we need to measure the runtime. Running the function `int countPaths(int m, int n)` within the same structure we created earlier to measure execution time, we will have:
+
+```Shell
+-----------------------------------
+Calculating Paths in a 3x3 matrix
+Average time for Brute Force: 10865 ns
+-----------------------------------
+```
+
+*Output 7: Execution time of Counting all paths problem using Brute Force.*{: class="legend"}
+
+Finally, I won't be presenting the code done with pure recursion. As we've seen, recursion is very elegant and can score points in interviews. However, the memoization solution will include recursion, so if you use memoization and recursion in the same solution, you'll ace the interview.
+
+### Using Memoization
+
+Code Fragment 17 shows the functions I created to apply memoization. There are two functions: the `int countPathsMemoizationWrapper(int m, int n)` function used to initialize the dp data structure and call the recursive function `int countPathsMemoization(int m, int n, std::vector<std::vector<int>>& dp)`. I used `std::vector` already anticipating that we won't know the size of the matrix beforehand.
+
+```Cpp
+// Function to count paths using dynamic programming with memoization
+int countPathsMemoization(int m, int n, std::vector<std::vector<int>>& dp) {
+    if (m == 1 || n == 1) return 1;  // Base case
+    if (dp[m - 1][n - 1] != -1) return dp[m - 1][n - 1];  // Return memoized result
+    dp[m - 1][n - 1] = countPathsMemoization(m - 1, n, dp) + countPathsMemoization(m, n - 1, dp);  // Memoize result
+    return dp[m - 1][n - 1];
+}
+
+int countPathsMemoizationWrapper(int m, int n) {
+    std::vector<std::vector<int>> dp(m, std::vector<int>(n, -1));
+    return countPathsMemoization(m, n, dp);
+}
+
+```
+
+*Code Fragment 17 - Count all paths function using Memoization.*{: class="legend"}
+
+The function `int countPathsMemoization(int m, int n, std::vector<std::vector<int>>& dp)` counts all possible paths in an $m \times n$ matrix using dynamic programming with memoization. The `dp` matrix serves as a cache, storing and reusing intermediate results to avoid redundant calculations.
+
+Upon invocation, the function first checks if the current position is in the first row (`m == 1`) or first column (`n == 1`). If so, it returns $1$, as there is only one way to reach such cells.  Next, it checks the `dp[m-1][n-1]` cell. If the value is not $-1$ (the initial value indicating "not yet calculated"), it signifies that the result for this position has already been memoized and is immediately returned.
+
+Otherwise, the function recursively calculates the number of paths from the cell above (`m-1`, `n`) and the cell to the left (`m`, `n-1`). The sum of these values is then stored in `dp[m-1][n-1]` before being returned.
+
+Utilizing `std::vector<std::vector<int>>` for `dp` ensures efficient storage of intermediate results, significantly reducing the number of recursive calls required compared to a purely recursive approach. This memoized version substantially improves the function's performance, especially for larger matrices.
+
+The `countPathsMemoization` function exemplifies memoization rather than tabulation due to its top-down recursive approach, where results are stored on-the-fly. Memoization involves recursive function calls that cache subproblem results upon their first encounter, ensuring each subproblem is solved only once and reused when needed.
+
+Conversely, tabulation employs a bottom-up approach, utilizing an iterative method to systematically fill a table (or array) with subproblem solutions. This typically begins with the smallest subproblems, iteratively combining results to solve larger ones until the final solution is obtained.
+
+In `countPathsMemoization`, the function checks if the result for a specific cell is already computed and stored in the `dp` matrix. If not, it recursively computes the result by combining the results of smaller subproblems and then stores it in the `dp` matrix. This process continues until all necessary subproblems are solved, a characteristic of memoization.
+
+The `dp` matrix is utilized to store intermediate results, preventing redundant calculations. Each cell within `dp` corresponds to a subproblem, representing the number of paths to that cell from the origin. Recursive calls compute the number of paths to a given cell by summing the paths from the cell above and the cell to the left.
+
+The function boasts a time complexity of $O(m \times n)$. This is because each cell in the `dp` matrix is computed only once, with each computation requiring constant time. Thus, the total operations are proportional to the number of cells in the matrix, namely $m \times n$.
+
+Similarly, the space complexity is $O(m \times n)$ due to the `dp` matrix, which stores the number of paths for each cell. The matrix necessitates $m \times n$ space to accommodate these intermediate results.
+
+In essence, the dynamic programming approach with memoization transforms the exponential time complexity of the naive brute force solution into a linear complexity with respect to the matrix size. Consequently, this solution proves far more efficient and viable for larger matrices.
+
+Finally, we need to run this code and compare it to the brute force version.
+
+```Shell
+-----------------------------------
+Calculating Paths in a 3x3 matrix
+Average time for Brute Force: 12494 ns
+Average time for Memoization: 4685 ns
+-----------------------------------
+```
+
+*Output 8: Comparison between Brute Force and Memoization functions.*{: class="legend"}
+
+I ran it dozens of times and, most of the time, the memoized function was twice as fast as the brute force function, and sometimes it was three times faster. Now we need to look at the dynamic programming solution using tabulation.
+
+### Using Tabulation
+
+This will continue!
+
 ## Notes and References
 
-[^1] this ideia come from [Introduction to Dynamic Programming](https://cp-algorithms.com/dynamic_programming/intro-to-dp.html)
+[:1]: This ideia come from [Introduction to Dynamic Programming](https://cp-algorithms.com/dynamic_programming/intro-to-dp.html)
 
-[^2] most of this table came from [Introduction to Dynamic Programming](https://cp-algorithms.com/dynamic_programming/intro-to-dp.html)
+[:2]: Most of this table came from [Introduction to Dynamic Programming](https://cp-algorithms.com/dynamic_programming/intro-to-dp.html)
