@@ -1903,6 +1903,8 @@ Adotando esta notação fluxional, podemos escrever as equações mecânicas con
 
     $n = 2, \quad n = 11$
 
+    
+
 ## NOTAS DE RODAPÉ
 
 [:1]:SWIFT, Dean. **On Poetry: a Rhapsody**, p. 20, impresso em 1733 — geralmente citado incorretamente.

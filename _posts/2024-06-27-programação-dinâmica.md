@@ -1903,8 +1903,6 @@ This will continue!!!
 
 ## Problem 1 Statement: Counting All Possible Paths in a Matrix
 
-### Description
-
 Given two integers $m$ and $n$, representing the dimensions of a matrix, count all possible distinct paths from the top-left corner $(0,0)$ to the bottom-right corner $(m-1,n-1)$. Each step can either be to the right or down.
 
 ### Input
@@ -1981,18 +1979,18 @@ Bear with me, dear reader, as I temporarily diverge from our exploration of dyna
 
 To tackle the unique paths problem with a brute force approach, we can use an iterative solution and a stack in C++20. The stack will keep track of our current position in the matrix and the number of paths that led us there. Here's a breakdown of how it works:
 
-1. **Create a Position Structure:**  We'll define a structure called `Position` to store the current coordinates $(i, j)$ and the count of paths leading to that position.
+1. We'll define a structure called `Position` to store the current coordinates $(i, j)$ and the count of paths leading to that position.
 
-2. **Initialize the Stack:** We'll start by pushing the initial position $(0, 0)$ onto the stack, along with a path count of $1$ (since there's one way to reach the starting point).
+2. We'll start by pushing the initial position $(0, 0)$ onto the stack, along with a path count of $1$ (since there's one way to reach the starting point).
 
-3. **Iterate and Explore:**  While the stack isn't empty:
+3. While the stack isn't empty:
   
    - Pop the top position from the stack.
    - If we've reached the bottom-right corner $(m-1, n-1)$, increment the total path count.
    - If moving right is possible (within the matrix bounds), push the new position (with the same path count) onto the stack.
    - If moving down is possible, do the same.
 
-4. **Obtain the Result:** When the stack is empty, the total path count will be the answer we seek – the total number of unique paths from $(0, 0)$ to $(m-1, n-1)$.
+4. When the stack is empty, the total path count will be the answer we seek – the total number of unique paths from $(0, 0)$ to $(m-1, n-1)$.
 
 Code Fragment 16 demonstrates how to implement this algorithm in C++.
 
@@ -2201,8 +2199,6 @@ The key takeaway is this: both memoization and tabulation solutions share the sa
 
 ## Problem 2 Statement: Subset Sum
 
-### Description
-
 Given $N$ integers and $T$, determine whether there exists a subset of the given set whose elements sum up to $T$.
 
 ### Input
@@ -2235,8 +2231,6 @@ true
 The "Subset Sum" problem has already been tackled in the chapter: "Your First Dynamic Programming Problem." Therefore, our diligent reader should review the conditions presented here and see if the solution we presented for the "Two-Sum" problem applies in this case. If not, it'll be up to the reader to adapt the previous code accordingly. I'll kindly wait before we go on.
 
 ## Problem 3 Statement: Longest Increasing Subsequence
-
-### Description
 
 You are given an array containing $N$ integers. Your task is to determine the Longest Increasing Subsequence (LIS) in the array, where every element is larger than the previous one.
 
@@ -2478,8 +2472,6 @@ Ultimately, the choice between memoization and tabulation often comes down to pe
 
 ## Problem 4 Statement: Rod Cutting
 
-### Description
-
 Given a rod of length $n$ units and an integer array `cuts` where `cuts[i]` denotes a position you should perform a cut at, find the minimum total cost of the cuts. The cost of one cut is the length of the rod to be cut.
 
 ### Input
@@ -2508,8 +2500,6 @@ Output:
 
 ## Problem 5 Statement: Longest Common Subsequence
 
-### Description
-
 You are given strings $s$ and $t$. Find the length of the longest string that is a subsequence of both $s$ and $t$.
 
 ### Input
@@ -2535,8 +2525,6 @@ Output:
 
 ## Problem 6 Statement: Longest Palindromic Subsequence
 
-### Description
-
 Finding the Longest Palindromic Subsequence (LPS) of a given string.
 
 ### Input
@@ -2560,8 +2548,6 @@ Output:
 - $1 \leq |s| \leq 1000$
 
 ## Problem 7 Statement: Edit Distance
-
-### Description
 
 The edit distance between two strings is the minimum number of operations required to transform one string into the other. The allowed operations are ["Add", "Remove", "Replace"].
 
@@ -2587,8 +2573,6 @@ Output:
 - $1 \leq |s|, |t| \leq 1000$
 
 ## Problem 8 Statement: Coin Change Problem
-
-### Description
 
 Given an array of coin denominations and a target amount, find the minimum number of coins needed to make up that amount.
 
@@ -2617,8 +2601,6 @@ Output:
 - The list of coin denominations can have at most $100$ elements.
 
 ## Problem 9 Statement: 0-1 Knapsack
-
-### Description
 
 Given $W$, $N$, and $N$ items with weights $w_i$ and values $v_i$, what is the maximum $\sum_{i=1}^{k} v_i$ for each subset of items of size $k$ ($1 \leq k \leq N$) while ensuring $\sum_{i=1}^{k} w_i \leq W$?
 
@@ -2650,8 +2632,6 @@ Output:
 
 ## Problem 10 Statement: Longest Path in a Directed Acyclic Graph (DAG)
 
-### Description
-
 Finding the longest path in a Directed Acyclic Graph (DAG).
 
 ### Input
@@ -2678,8 +2658,6 @@ Output:
 - The number of edges does not exceed $N(N-1)/2$.
 
 ## Problem 11 Statement: Traveling Salesman Problem (TSP)
-
-### Description
 
 Given a list of cities and the distances between each pair of cities, find the shortest possible route that visits each city exactly once and returns to the origin city.
 
@@ -2708,8 +2686,6 @@ Output:
 
 ## Problem 12 Statement: Matrix Chain Multiplication
 
-### Description
-
 Given a sequence of matrices, find the most efficient way to multiply these matrices together. The problem is not actually to perform the multiplications, but merely to decide in which order to perform the multiplications.
 
 ### Input
@@ -2737,8 +2713,6 @@ Output:
 
 ## Problem 3 Statement: Longest Increasing Subsequence
 
-### Description
-
 You are given an array containing $N$ integers. Your task is to determine the Longest Increasing Subsequence (LIS) in the array, where every element is larger than the previous one.
 
 ### Input
@@ -2764,267 +2738,7 @@ Output:
 - $1 \leq N \leq 1000$
 - Each integer in the list can be positive or negative.
 
-## Problem 4 Statement: Rod Cutting
 
-### Description
-
-Given a rod of length $n$ units and an integer array `cuts` where `cuts[i]` denotes a position you should perform a cut at, find the minimum total cost of the cuts. The cost of one cut is the length of the rod to be cut.
-
-### Input
-
-- An integer $n$ representing the length of the rod.
-- An integer array `cuts` containing the positions of the cuts.
-
-### Output
-
-- An integer representing the minimum total cost of the cuts.
-
-### Example
-
-Input:
-7
-1 3 4 5
-
-Output:
-16
-
-### Constraints
-
-- $1 \leq n \leq 1000$
-- $1 \leq cuts[i] < n$
-- The array `cuts` can have at most $n-1$ elements.
-
-## Problem 5 Statement: Longest Common Subsequence
-
-### Description
-
-You are given strings $s$ and $t$. Find the length of the longest string that is a subsequence of both $s$ and $t$.
-
-### Input
-
-- Two strings $s$ and $t$.
-
-### Output
-
-- An integer representing the length of the Longest Common Subsequence.
-
-### Example
-
-Input:
-"abcde"
-"ace"
-
-Output:
-3
-
-### Constraints
-
-- $1 \leq |s|, |t| \leq 1000$
-
-## Problem 6 Statement: Longest Palindromic Subsequence
-
-### Description
-
-Finding the Longest Palindromic Subsequence (LPS) of a given string.
-
-### Input
-
-- A string $s$.
-
-### Output
-
-- An integer representing the length of the Longest Palindromic Subsequence.
-
-### Example
-
-Input:
-"bbbab"
-
-Output:
-4
-
-### Constraints
-
-- $1 \leq |s| \leq 1000$
-
-## Problem 7 Statement: Edit Distance
-
-### Description
-
-The edit distance between two strings is the minimum number of operations required to transform one string into the other. The allowed operations are ["Add", "Remove", "Replace"].
-
-### Input
-
-- Two strings $s$ and $t$.
-
-### Output
-
-- An integer representing the minimum number of operations required to transform one string into the other.
-
-### Example
-
-Input:
-"sunday"
-"saturday"
-
-Output:
-3
-
-### Constraints
-
-- $1 \leq |s|, |t| \leq 1000$
-
-## Problem 8 Statement: Coin Change Problem
-
-### Description
-
-Given an array of coin denominations and a target amount, find the minimum number of coins needed to make up that amount.
-
-### Input
-
-- An integer $T$ representing the target amount.
-- A list of integers representing the coin denominations.
-
-### Output
-
-- An integer representing the minimum number of coins needed to make up the target amount.
-
-### Example
-
-Input:
-11
-1 2 5
-
-Output:
-3
-
-### Constraints
-
-- $1 \leq T \leq 1000$
-- Each coin denomination is a positive integer not exceeding $100$.
-- The list of coin denominations can have at most $100$ elements.
-
-## Problem 9 Statement: 0-1 Knapsack
-
-### Description
-
-Given $W$, $N$, and $N$ items with weights $w_i$ and values $v_i$, what is the maximum $\sum_{i=1}^{k} v_i$ for each subset of items of size $k$ ($1 \le k \le N$) while ensuring $\sum_{i=1}^{k} w_i \le W$?
-
-### Input
-
-- An integer $W$ representing the maximum weight capacity of the knapsack.
-- An integer $N$ representing the number of items.
-- Two lists of $N$ integers: one for weights and one for values.
-
-### Output
-
-- An integer representing the maximum value that can be obtained without exceeding the weight capacity.
-
-### Example
-
-Input:
-50 3
-10 20 30
-60 100 120
-
-Output:
-220
-
-### Constraints
-
-- $1 \leq W \leq 1000$
-- $1 \leq N \leq 100$
-- Each weight and value is a positive integer not exceeding $1000$
-
-## Problem 10 Statement: Longest Path in a Directed Acyclic Graph (DAG)
-
-### Description
-
-Finding the longest path in a Directed Acyclic Graph (DAG).
-
-### Input
-
-- An integer $N$ representing the number of nodes.
-- A list of tuples representing the edges of the graph, where each tuple $(u, v)$ indicates an edge from node $u$ to node $v$.
-
-### Output
-
-- An integer representing the length of the longest path in the DAG.
-
-### Example
-
-Input:
-5
-[(1, 2), (2, 3), (3, 4), (4, 5)]
-
-Output:
-4
-
-### Constraints
-
-- $1 \leq N \leq 1000$
-- The number of edges does not exceed $N(N-1)/2$
-
-## Problem 11 Statement: Traveling Salesman Problem (TSP)
-
-### Description
-
-Given a list of cities and the distances between each pair of cities, find the shortest possible route that visits each city exactly once and returns to the origin city.
-
-### Input
-
-- An integer $N$ representing the number of cities.
-- A 2D list of integers representing the distances between each pair of cities.
-
-### Output
-
-- An integer representing the minimum distance of the round trip.
-
-### Example
-
-Input:
-4
-0 10 15 20
-10 0 35 25
-15 35 0 30
-20 25 30 0
-
-Output:
-80
-
-### Constraints
-
-- $1 \leq N \leq 10$
-- Each distance is a non-negative integer not exceeding $1000$
-
-## Problem 12 Statement: Matrix Chain Multiplication
-
-### Description
-
-Given a sequence of matrices, find the most efficient way to multiply these matrices together. The problem is not actually to perform the multiplications, but merely to decide in which order to perform the multiplications.
-
-### Input
-
-- An integer $N$ representing the number of matrices.
-- A list of $N+1$ integers representing the dimensions of the matrices.
-
-### Output
-
-- An integer representing the minimum number of scalar multiplications needed.
-
-### Example
-
-Input:
-4
-10 20 30 40 30
-
-Output:
-30000
-
-### Constraints
-
-- $1 \leq N \leq 100$
-- Each dimension is a positive integer not exceeding $1000$
 
 ## Notes and References
 
