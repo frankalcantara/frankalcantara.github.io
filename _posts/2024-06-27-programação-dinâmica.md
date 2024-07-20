@@ -2129,9 +2129,9 @@ In `countPathsMemoization`, the function checks if the result for a specific cel
 
 The `dp` matrix is utilized to store intermediate results, preventing redundant calculations. Each cell within `dp` corresponds to a subproblem, representing the number of paths to that cell from the origin. Recursive calls compute the number of paths to a given cell by summing the paths from the cell above and the cell to the left.
 
-The function boasts a time complexity of $O(m \times n)$. This is because each cell in the `dp` matrix is computed only once, with each computation requiring constant time. Thus, the total operations are proportional to the number of cells in the matrix, namely $m \times n$.
+*The function boasts a time complexity of $O(m \times n)$*. This is because each cell in the `dp` matrix is computed only once, with each computation requiring constant time. Thus, the total operations are proportional to the number of cells in the matrix, namely $m \times n$.
 
-Similarly, the space complexity is $O(m \times n)$ due to the `dp` matrix, which stores the number of paths for each cell. The matrix necessitates $m \times n$ space to accommodate these intermediate results.
+Similarly, *the space complexity is $O(m \times n)$ due to the `dp` matrix*, which stores the number of paths for each cell. The matrix necessitates $m \times n$ space to accommodate these intermediate results.
 
 In essence, the dynamic programming approach with memoization transforms the exponential time complexity of the naive brute force solution into a linear complexity with respect to the matrix size. Consequently, this solution proves far more efficient and viable for larger matrices.
 
@@ -2145,13 +2145,886 @@ Average time for Memoization: 4685 ns
 -----------------------------------
 ```
 
-*Output 8: Comparison between Brute Force and Memoization functions.*{: class="legend"}
+*Output 9: Comparison between Brute Force, Memoization and Tabulation functions.*{: class="legend"}
 
 I ran it dozens of times and, most of the time, the memoized function was twice as fast as the brute force function, and sometimes it was three times faster. Now we need to look at the dynamic programming solution using tabulation.
 
 ### Using Tabulation
 
-This will continue!
+Like I did before, the Code Fragment 18 shows the function I created to apply tabulation. The function `int countPathsTabulation(int m, int n)` uses dynamic programming with tabulation to count all possible paths in an $m \times n$ matrix.
+
+```Cpp
+// Function to count paths using dynamic programming with tabulation
+int countPathsTabulation(int m, int n) {
+    std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));
+
+    for (int i = 0; i < m; ++i) {
+        for (int j = 0; j < n; ++j) {
+            if (i == 0 || j == 0) {
+                dp[i][j] = 1;
+            } else {
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+            }
+        }
+    }
+
+    return dp[m - 1][n - 1];
+}
+```
+
+*Code Fragment 18 - Count all paths function using Tabulation.*{: class="legend"}
+
+The function `int countPathsTabulation(int m, int n)` counts all possible paths in an $m \times n$ matrix using dynamic programming with tabulation. The `dp` matrix is used to store the number of paths to each cell in a bottom-up manner, ensuring that each subproblem is solved iteratively. Each subproblem represents the number of distinct paths to a cell $(i, j)$ from the top-left corner $(0, 0)$.
+
+The function initializes a `dp` matrix of size $m \times n$ with all values set to $0$. It then iterates over each cell in the matrix. If a cell is in the first row or first column, it sets the value to $1$ because there is only one way to reach these cells (either all the way to the right or all the way down). For other cells, it calculates the number of paths by summing the values from the cell above (`dp[i - 1][j]`) and the cell to the left (`dp[i][j - 1]`). This sum is then stored in `dp[i][j]`.
+
+Using `std::array<std::array<int, MAX_SIZE>, MAX_SIZE>` for the `dp` matrix ensures efficient storage and retrieval of intermediate results. This tabulated approach systematically fills the `dp` matrix from the smallest subproblems up to the final solution, avoiding the overhead of recursive function calls and providing a clear and straightforward iterative solution.
+
+*The time complexity of this function is $O(m \times n)$*. Each cell in the `dp` matrix is computed once, and each computation takes constant time, making the total number of operations proportional to the number of cells in the matrix. Similarly, *the space complexity is $O(m \times n)$* due to the `dp` matrix, which requires $m \times n$ space to store the number of paths for each cell.
+
+This dynamic programming approach with tabulation significantly improves performance compared to the naive brute force solution. By transforming the problem into a series of iterative steps, it provides an efficient and scalable solution for counting paths in larger matrices.
+
+Here's something interesting, dear reader.  While using `std::vector` initially yielded similar execution times to the memoization function, switching to `std::array` resulted in a dramatic improvement. Not only did it significantly reduce memory usage, but it also made the function up to 4 times faster!
+
+After running additional tests, the tabulation function averaged $3$ times faster execution than the original. However, there's a caveat: using `std::array` necessitates knowing the input size beforehand, which might not always be practical in real-world scenarios. Finally we can take a look in this function execution time:
+
+```Shell
+-----------------------------------
+Calculating Paths in a 3x3 matrix
+Average time for Brute Force: 10453 ns
+Average time for Memoization: 5348 ns
+Average time for Tabulation: 1838 ns
+-----------------------------------
+```
+
+The key takeaway is this: both memoization and tabulation solutions share the same time complexity. Therefore, in an interview setting, the choice between them boils down to personal preference. But if performance is paramount, tabulation (especially with `std::array` if the input size is known) is the way to go. Of course, now it's up to the diligent reader to test all the functions we've developed to solve problem "Counting All Possible Paths in a Matrix" with `std::array`. Performance has its quirks, and since there are many factors outside the programmer's control involved in execution, we always need to test in the an environment just like the production environment.
+
+## Problem 2 Statement: Subset Sum
+
+### Description
+
+Given $N$ integers and $T$, determine whether there exists a subset of the given set whose elements sum up to $T$.
+
+### Input
+
+- An integer $N$ representing the number of integers.
+- An integer $T$ representing the target sum.
+- A list of $N$ integers.
+
+### Output
+
+- A boolean value indicating whether such a subset exists.
+
+### Example
+
+Input:
+5 10
+2 3 7 8 10
+
+Output:
+true
+
+### Constraints
+
+- $1 \leq N \leq 100$
+- $1 \leq T \leq 1000$
+- Each integer in the list is positive and does not exceed $100$.
+
+### Analysis
+
+The "Subset Sum" problem has already been tackled in the chapter: "Your First Dynamic Programming Problem." Therefore, our diligent reader should review the conditions presented here and see if the solution we presented for the "Two-Sum" problem applies in this case. If not, it'll be up to the reader to adapt the previous code accordingly. I'll kindly wait before we go on.
+
+## Problem 3 Statement: Longest Increasing Subsequence
+
+### Description
+
+You are given an array containing $N$ integers. Your task is to determine the Longest Increasing Subsequence (LIS) in the array, where every element is larger than the previous one.
+
+### Input
+
+- An integer $N$ representing the number of integers.
+- A list of $N$ integers.
+
+### Output
+
+- An integer representing the length of the Longest Increasing Subsequence.
+
+### Example
+
+Input:
+6
+5 2 8 6 3 6 9 7
+
+Output:
+4
+
+### Constraints
+
+- $1 \leq N \leq 1000$
+- Each integer in the list can be positive or negative.
+
+### Analysis
+
+The "Longest Increasing Subsequence" (LIS) problem is a classic problem in dynamic programming, often appearing in interviews and programming competitions. The goal is to find the length of the longest subsequence in a given array such that all elements of the subsequence are in strictly increasing order. *There are three main approaches to solving this problem: brute force, memoization, and tabulation. Coincidentally, these are the three solutions we are studying*. So, let's go.
+
+### Brute Force
+
+In the brute force approach, we systematically generate all possible subsequences of the array and examine each one to determine if it's strictly increasing. The length of the longest increasing subsequence is then tracked and ultimately returned. Here's the algorithm for solving the LIS problem using brute force:
+
+1. Iteratively generate all possible subsequences of the array. (We'll reserve recursion for the memoization approach.)
+2. For each subsequence, verify if it is strictly increasing.
+3. Keep track of the maximum length encountered among the increasing subsequences.
+
+Code Fragment 19 presents the function I developed using a brute-force approach.
+
+```Cpp
+// Iterative Brute Force LIS function
+int longestIncreasingSubsequenceBruteForce(const std::vector<int>& arr) {
+    int n = arr.size();
+    int maxLen = 0;
+
+    // Generate all possible subsequences using bitmasking
+    for (int mask = 1; mask < (1 << n); ++mask) {
+        std::vector<int> subsequence;
+        for (int i = 0; i < n; ++i) {
+            if (mask & (1 << i)) {
+                subsequence.push_back(arr[i]);
+            }
+        }
+
+        // Check if the subsequence is strictly increasing
+        bool isIncreasing = true;
+        for (int i = 1; i < subsequence.size(); ++i) {
+            if (subsequence[i] <= subsequence[i - 1]) {
+                isIncreasing = false;
+                break;
+            }
+        }
+
+        if (isIncreasing) {
+            maxLen = std::max(maxLen, (int)subsequence.size());
+        }
+    }
+
+    return maxLen;
+}
+```
+
+*Code Fragment 19 - Interactive function to solve the LIS problem.*{: class="legend"}
+
+In the function `int longestIncreasingSubsequenceBruteForce(const std::vector<int>& arr)`, bitmasking is used to generate all possible subsequences of the array. Bitmasking involves using a binary number, where each bit represents whether a particular element in the array is included in the subsequence. For an array of size $n$, there are $2^n$ possible subsequences, corresponding to all binary numbers from $1$ to $(1 << n) - 1$. In each iteration, the bitmask is checked, and if the i-th bit is set (i.e., `mask & (1 << i)` is true), the i-th element of the array is included in the current subsequence. This process ensures that every possible combination of elements is considered, allowing the function to generate all potential subsequences for further evaluation.
+
+For every generated subsequence, the function meticulously examines its elements to ensure they are in strictly increasing order. This involves comparing each element with its predecessor, discarding any subsequence where an element is not greater than the one before it.
+
+Throughout the process, the function keeps track of the maximum length among the valid increasing subsequences encountered. If a subsequence's length surpasses the current maximum, the function updates this value accordingly.
+
+While ingenious, this brute-force method has a notable drawback: *an exponential time complexity of $O(2^n * n)$*. This arises from the $2^n$ possible subsequences and the $n$ operations needed to verify the increasing order of each. Consequently, this approach becomes impractical for large arrays due to its high computational cost.
+
+Notice that, once again, I started by using `std::vector` since we usually don't know the size of the input dataset beforehand. Now, all that remains is to run this code and observe its execution time. Of course, my astute reader should remember that using `std::array` would likely require knowing the maximum input size in advance, but it would likely yield a faster runtime.
+
+```Cpp
+-----------------------------------
+Calculating LIS in the array
+Average time for LIS: 683023 ns
+-----------------------------------
+```
+
+*Output 10: Execution time for LIS solution using Brute Force.*{: class="legend"}
+
+At this point, our dear reader should have a mantra in mind: "Don't use brute force... Don't use brute force." With that said, let's delve into dynamic programming algorithms.
+
+### Memoization
+
+Memoization is a handy optimization technique that remembers the results of expensive function calls. If the same inputs pop up again, we can simply reuse the stored results, saving precious time. Let's see how this applies to our LIS problem.
+
+We can use memoization to avoid redundant calculations by storing the length of the LIS ending at each index. Here's the game plan:
+
+1. Define a recursive function `LIS(int i, const std::vector<int>& arr, std::vector<int>& dp)` that returns the length of the LIS ending at index `i`.
+2. Create a memoization array called `dp`, where `dp[i]` will store the length of the LIS ending at index `i`.
+3. For each element in the array, compute `LIS(i)` by checking all previous elements `j` where `arr[j]` is less than `arr[i]`. Update `dp[i]` accordingly.
+4. Finally, the maximum value in the `dp` array will be the length of the longest increasing subsequence.
+
+Here's the implementation of the function: (Code Snippet 21)
+
+```Cpp
+// Recursive function to find the length of LIS ending at index i with memoization
+int LIS(int i, const std::vector<int>& arr, std::vector<int>& dp) {
+    if (dp[i] != -1) return dp[i];
+
+    int maxLength = 1; // Minimum LIS ending at index i is 1
+    for (int j = 0; j < i; ++j) {
+        if (arr[j] < arr[i]) {
+            maxLength = std::max(maxLength, LIS(j, arr, dp) + 1);
+        }
+    }
+    dp[i] = maxLength;
+    return dp[i];
+}
+
+// Function to find the length of the Longest Increasing Subsequence using memoization
+int longestIncreasingSubsequenceMemoization(const std::vector<int>& arr) {
+    int n = arr.size();
+    if (n == 0) return 0;
+
+    std::vector<int> dp(n, -1);
+    int maxLength = 1;
+    for (int i = 0; i < n; ++i) {
+        maxLength = std::max(maxLength, LIS(i, arr, dp));
+    }
+
+    return maxLength;
+}
+```
+
+*Code Fragment 20 - Function to solve the LIS problem using recursion and Memoization.*{: class="legend"}
+
+Let's break down how these two functions work together to solve the Longest Increasing Subsequence (LIS) problem using memoization.
+
+**`LIS(int i, const std::vector<int>& arr, std::vector<int>& dp)`**
+
+This recursive function calculates the length of the LIS that ends at index $i$ within the input array `arr`. The `dp` vector acts as a memoization table, storing results to avoid redundant calculations. If `dp[i]` is not $-1$, it means the LIS ending at index `i` has already been calculated and stored. In this case, the function directly returns the stored value. If `dp[i]` is $-1$, the LIS ending at index `i` has not been computed yet. The function iterates through all previous elements (`j` from 0 to `i-1`) and checks if `arr[j]` is less than `arr[i]`. If so, it recursively calls itself to find the LIS ending at index `j`. The maximum length among these recursive calls (plus 1 to include the current element `arr[i]`) is then stored in `dp[i]` and returned as the result.
+
+**`longestIncreasingSubsequenceMemoization(const std::vector<int>& arr)`**
+
+This function serves as a wrapper for the `LIS` function and calculates the overall LIS of the entire array. It initializes the `dp` array with -1 for all indices, indicating that no LIS values have been computed yet. It iterates through the array and calls the `LIS` function for each index `i`. It keeps track of the maximum length encountered among the results returned by `LIS(i)` for all indices. Finally, it returns this maximum length as the length of the overall LIS of the array.
+
+Comparing the complexity of the memoization solution with the brute force solution highlights significant differences in efficiency. The brute force solution generates all possible subsequences using bitmasking, which results in a time complexity of $O(2^n \cdot n)$ due to the exponential number of subsequences and the linear time required to check each one. *In contrast, the memoization solution improves upon this by storing the results of previously computed LIS lengths, reducing redundant calculations. This reduces the time complexity to $O(n^2)$, as each element is compared with all previous elements, and each comparison is done once*. The space complexity also improves from potentially needing to store numerous subsequences in the brute force approach to a linear $O(n)$ space for the memoization array in the dynamic programming solution. Thus, the memoization approach provides a more scalable and practical solution for larger arrays compared to the brute force method. What can be seen in output 22:
+
+```Shell
+-----------------------------------
+Calculating LIS in the array
+Average time for LIS (Brute Force): 690399 ns
+Average time for LIS (Memoization): 3018 ns
+-----------------------------------
+```
+
+*Output 11: Execution time for LIS solution using Memoization.*{: class="legend"}
+
+The provided output clearly demonstrates the significant performance advantage of memoization over the brute force approach for calculating the Longest Increasing Subsequence (LIS).  The brute force method, with its average execution time of $690,399$ nanoseconds (ns), suffers from exponential time complexity, leading to a sharp decline in performance as the input size increases.
+
+In contrast, the memoization approach boasts an average execution time of a mere $3,018$ ns. This dramatic improvement is a direct result of eliminating redundant calculations through the storage and reuse of intermediate results. In this particular scenario, memoization is approximately $228$ times faster than brute force, highlighting the immense power of dynamic programming techniques in optimizing algorithms that involve overlapping subproblems.
+
+Now, let's turn our attention to the last dynamic programming technique we are studying: tabulation.
+
+### Tabulation
+
+Tabulation, a bottom-up dynamic programming technique, iteratively computes and stores results in a table. For the LIS problem, we create a table `dp` where `dp[i]` represents the length of the LIS ending at index `i`.
+
+Here's a breakdown of the steps involved:
+
+1. A table `dp` is initialized with all values set to 1, representing the minimum LIS (the element itself) ending at each index.
+2. Two nested loops are used to populate the `dp` table:
+   - The outer loop iterates through the array from the second element (`i` from 1 to N-1).
+   - The inner loop iterates through all preceding elements (`j` from 0 to i-1).
+   - For each pair (i, j), if `arr[j]` is less than `arr[i]`, it signifies that `arr[i]` can extend the LIS ending at `arr[j]`. In this case, `dp[i]` is updated to `dp[i] = max(dp[i], dp[j] + 1)`.
+3. After constructing the `dp` table, the maximum value within it is determined, representing the length of the longest increasing subsequence in the array.
+
+This brings us to Code Fragment 21, which demonstrates the implementation of this tabulation approach:
+
+```Cpp
+// Function to find the length of the Longest Increasing Subsequence using tabulation
+int longestIncreasingSubsequenceTabulation(const std::vector<int>& arr) {
+    int n = arr.size();
+    if (n == 0) return 0;
+
+    std::vector<int> dp(n, 1);
+    int maxLength = 1;
+
+    for (int i = 1; i < n; ++i) {
+        for (int j = 0; j < i; ++j) {
+            if (arr[i] > arr[j]) {
+                dp[i] = std::max(dp[i], dp[j] + 1);
+            }
+        }
+        maxLength = std::max(maxLength, dp[i]);
+    }
+
+    return maxLength;
+}
+```
+
+*Code Fragment 21 - Function to solve the LIS problem using recursion and Memoization.*{: class="legend"}
+
+The `int longestIncreasingSubsequenceTabulation(const std::vector<int>& arr)` function efficiently determines the length of the Longest Increasing Subsequence (LIS) in a given array using a tabulation approach.
+
+Initially, a vector `dp` of size `n` (the array's length) is created, with all elements initialized to $1$. This signifies that the minimum LIS ending at each index is $1$ (the element itself). Additionally, a variable `maxLength` is initialized to $1$ to track the overall maximum LIS length encountered.
+
+The function then employs nested loops to construct the `dp` table systematically. The outer loop iterates through the array starting from the second element (`i` from $1$ to `n-1`). The inner loop examines all previous elements (`j` from $0$ to `i-1`).
+
+For each pair of elements (`arr[i]`, `arr[j]`), the function checks if `arr[i]` is greater than `arr[j]`. If so, it means `arr[i]` can extend the LIS ending at `arr[j]`. In this case, `dp[i]` is updated to the maximum of its current value and `dp[j] + 1` (representing the length of the LIS ending at `j` plus the current element `arr[i]`).
+
+After each iteration of the outer loop, `maxLength` is updated to the maximum of its current value and `dp[i]`. This ensures that `maxLength` always reflects the length of the longest LIS found so far.
+
+Finally, the function returns `maxLength`, which now holds the length of the overall LIS in the entire array.
+
+In terms of complexity, the tabulation solution is on par with the memoization approach, both boasting a time complexity of $O(n^2)$. This is a substantial improvement over the brute force method's exponential $O(2^n \times n)$ time complexity. The quadratic time complexity arises from the nested loops in both tabulation and memoization, where each element is compared with all preceding elements to determine potential LIS extensions.
+
+However, *the tabulation approach has a slight edge in space complexity. While memoization requires $O(n)$ space to store the memoization table (``dp` array), tabulation only necessitates $O(n)$ space for the dp table as well.* This is because memoization might incur additional space overhead due to the recursive call stack, especially in cases with deep recursion.
+
+The Output 12 demonstrates this performance difference. Both memoization and tabulation significantly outperform the brute force approach, which takes an exorbitant amount of time compared to the other two. While the difference between memoization and tabulation is less pronounced in this specific example, tabulation can sometimes be slightly faster due to the overhead associated with recursive function calls in memoization.
+
+```Shell
+-----------------------------------
+Calculating LIS in the array
+Average time for LIS (Brute Force): 694237 ns
+Average time for LIS (Memoization): 2484 ns
+Average time for LIS (Tabulation): 2168 ns
+-----------------------------------
+```
+
+*Output 12: Execution time for LIS solution using Tabulation.*{: class="legend"}
+
+Ultimately, the choice between memoization and tabulation often comes down to personal preference and specific implementation details. Both offer substantial improvements over brute force and are viable options for solving the LIS problem efficiently.
+
+## Problem 4 Statement: Rod Cutting
+
+### Description
+
+Given a rod of length $n$ units and an integer array `cuts` where `cuts[i]` denotes a position you should perform a cut at, find the minimum total cost of the cuts. The cost of one cut is the length of the rod to be cut.
+
+### Input
+
+- An integer $n$ representing the length of the rod.
+- An integer array `cuts` containing the positions of the cuts.
+
+### Output
+
+- An integer representing the minimum total cost of the cuts.
+
+### Example
+
+Input:
+7
+[1, 3, 4, 5]
+
+Output:
+16
+
+### Constraints
+
+- $1 \leq n \leq 1000$
+- $1 \leq cuts[i] < n$
+- The array `cuts` can have at most $n-1$ elements.
+
+## Problem 5 Statement: Longest Common Subsequence
+
+### Description
+
+You are given strings $s$ and $t$. Find the length of the longest string that is a subsequence of both $s$ and $t$.
+
+### Input
+
+- Two strings $s$ and $t$.
+
+### Output
+
+- An integer representing the length of the Longest Common Subsequence.
+
+### Example
+
+Input:
+"abcde"
+"ace"
+
+Output:
+3
+
+### Constraints
+
+- $1 \leq |s|, |t| \leq 1000$
+
+## Problem 6 Statement: Longest Palindromic Subsequence
+
+### Description
+
+Finding the Longest Palindromic Subsequence (LPS) of a given string.
+
+### Input
+
+- A string $s$.
+
+### Output
+
+- An integer representing the length of the Longest Palindromic Subsequence.
+
+### Example
+
+Input:
+"bbbab"
+
+Output:
+4
+
+### Constraints
+
+- $1 \leq |s| \leq 1000$
+
+## Problem 7 Statement: Edit Distance
+
+### Description
+
+The edit distance between two strings is the minimum number of operations required to transform one string into the other. The allowed operations are ["Add", "Remove", "Replace"].
+
+### Input
+
+- Two strings $s$ and $t$.
+
+### Output
+
+- An integer representing the minimum number of operations required to transform one string into the other.
+
+### Example
+
+Input:
+"sunday"
+"saturday"
+
+Output:
+3
+
+### Constraints
+
+- $1 \leq |s|, |t| \leq 1000$
+
+## Problem 8 Statement: Coin Change Problem
+
+### Description
+
+Given an array of coin denominations and a target amount, find the minimum number of coins needed to make up that amount.
+
+### Input
+
+- An integer $T$ representing the target amount.
+- A list of integers representing the coin denominations.
+
+### Output
+
+- An integer representing the minimum number of coins needed to make up the target amount.
+
+### Example
+
+Input:
+11
+[1, 2, 5]
+
+Output:
+3
+
+### Constraints
+
+- $1 \leq T \leq 1000$
+- Each coin denomination is a positive integer not exceeding $100$.
+- The list of coin denominations can have at most $100$ elements.
+
+## Problem 9 Statement: 0-1 Knapsack
+
+### Description
+
+Given $W$, $N$, and $N$ items with weights $w_i$ and values $v_i$, what is the maximum $\sum_{i=1}^{k} v_i$ for each subset of items of size $k$ ($1 \leq k \leq N$) while ensuring $\sum_{i=1}^{k} w_i \leq W$?
+
+### Input
+
+- An integer $W$ representing the maximum weight capacity of the knapsack.
+- An integer $N$ representing the number of items.
+- Two lists of $N$ integers: one for weights and one for values.
+
+### Output
+
+- An integer representing the maximum value that can be obtained without exceeding the weight capacity.
+
+### Example
+
+Input:
+50 3
+[10, 20, 30]
+[60, 100, 120]
+
+Output:
+220
+
+### Constraints
+
+- $1 \leq W \leq 1000$
+- $1 \leq N \leq 100$
+- Each weight and value is a positive integer not exceeding $1000$.
+
+## Problem 10 Statement: Longest Path in a Directed Acyclic Graph (DAG)
+
+### Description
+
+Finding the longest path in a Directed Acyclic Graph (DAG).
+
+### Input
+
+- An integer $N$ representing the number of nodes.
+- A list of tuples representing the edges of the graph, where each tuple $(u, v)$ indicates an edge from node $u$ to node $v$.
+
+### Output
+
+- An integer representing the length of the longest path in the DAG.
+
+### Example
+
+Input:
+5
+[(1, 2), (2, 3), (3, 4), (4, 5)]
+
+Output:
+4
+
+### Constraints
+
+- $1 \leq N \leq 1000$
+- The number of edges does not exceed $N(N-1)/2$.
+
+## Problem 11 Statement: Traveling Salesman Problem (TSP)
+
+### Description
+
+Given a list of cities and the distances between each pair of cities, find the shortest possible route that visits each city exactly once and returns to the origin city.
+
+### Input
+
+- An integer $N$ representing the number of cities.
+- A 2D list of integers representing the distances between each pair of cities.
+
+### Output
+
+- An integer representing the minimum distance of the round trip.
+
+### Example
+
+Input:
+4
+[[0, 10, 15, 20], [10, 0, 35, 25], [15, 35, 0, 30], [20, 25, 30, 0]]
+
+Output:
+80
+
+### Constraints
+
+- $1 \leq N \leq 10$
+- Each distance is a non-negative integer not exceeding $1000$.
+
+## Problem 12 Statement: Matrix Chain Multiplication
+
+### Description
+
+Given a sequence of matrices, find the most efficient way to multiply these matrices together. The problem is not actually to perform the multiplications, but merely to decide in which order to perform the multiplications.
+
+### Input
+
+- An integer $N$ representing the number of matrices.
+- A list of $N+1$ integers representing the dimensions of the matrices.
+
+### Output
+
+- An integer representing the minimum number of scalar multiplications needed.
+
+### Example
+
+Input:
+4
+[10, 20, 30, 40, 30]
+
+Output:
+30000
+
+### Constraints
+
+- $1 \leq N \leq 100$
+- Each dimension is a positive integer not exceeding $1000$.
+
+## Problem 3 Statement: Longest Increasing Subsequence
+
+### Description
+
+You are given an array containing $N$ integers. Your task is to determine the Longest Increasing Subsequence (LIS) in the array, where every element is larger than the previous one.
+
+### Input
+
+- An integer $N$ representing the number of integers.
+- A list of $N$ integers.
+
+### Output
+
+- An integer representing the length of the Longest Increasing Subsequence.
+
+### Example
+
+Input:
+8
+5 2 8 6 3 6 9 7
+
+Output:
+4
+
+### Constraints
+
+- $1 \leq N \leq 1000$
+- Each integer in the list can be positive or negative.
+
+## Problem 4 Statement: Rod Cutting
+
+### Description
+
+Given a rod of length $n$ units and an integer array `cuts` where `cuts[i]` denotes a position you should perform a cut at, find the minimum total cost of the cuts. The cost of one cut is the length of the rod to be cut.
+
+### Input
+
+- An integer $n$ representing the length of the rod.
+- An integer array `cuts` containing the positions of the cuts.
+
+### Output
+
+- An integer representing the minimum total cost of the cuts.
+
+### Example
+
+Input:
+7
+1 3 4 5
+
+Output:
+16
+
+### Constraints
+
+- $1 \leq n \leq 1000$
+- $1 \leq cuts[i] < n$
+- The array `cuts` can have at most $n-1$ elements.
+
+## Problem 5 Statement: Longest Common Subsequence
+
+### Description
+
+You are given strings $s$ and $t$. Find the length of the longest string that is a subsequence of both $s$ and $t$.
+
+### Input
+
+- Two strings $s$ and $t$.
+
+### Output
+
+- An integer representing the length of the Longest Common Subsequence.
+
+### Example
+
+Input:
+"abcde"
+"ace"
+
+Output:
+3
+
+### Constraints
+
+- $1 \leq |s|, |t| \leq 1000$
+
+## Problem 6 Statement: Longest Palindromic Subsequence
+
+### Description
+
+Finding the Longest Palindromic Subsequence (LPS) of a given string.
+
+### Input
+
+- A string $s$.
+
+### Output
+
+- An integer representing the length of the Longest Palindromic Subsequence.
+
+### Example
+
+Input:
+"bbbab"
+
+Output:
+4
+
+### Constraints
+
+- $1 \leq |s| \leq 1000$
+
+## Problem 7 Statement: Edit Distance
+
+### Description
+
+The edit distance between two strings is the minimum number of operations required to transform one string into the other. The allowed operations are ["Add", "Remove", "Replace"].
+
+### Input
+
+- Two strings $s$ and $t$.
+
+### Output
+
+- An integer representing the minimum number of operations required to transform one string into the other.
+
+### Example
+
+Input:
+"sunday"
+"saturday"
+
+Output:
+3
+
+### Constraints
+
+- $1 \leq |s|, |t| \leq 1000$
+
+## Problem 8 Statement: Coin Change Problem
+
+### Description
+
+Given an array of coin denominations and a target amount, find the minimum number of coins needed to make up that amount.
+
+### Input
+
+- An integer $T$ representing the target amount.
+- A list of integers representing the coin denominations.
+
+### Output
+
+- An integer representing the minimum number of coins needed to make up the target amount.
+
+### Example
+
+Input:
+11
+1 2 5
+
+Output:
+3
+
+### Constraints
+
+- $1 \leq T \leq 1000$
+- Each coin denomination is a positive integer not exceeding $100$.
+- The list of coin denominations can have at most $100$ elements.
+
+## Problem 9 Statement: 0-1 Knapsack
+
+### Description
+
+Given $W$, $N$, and $N$ items with weights $w_i$ and values $v_i$, what is the maximum $\sum_{i=1}^{k} v_i$ for each subset of items of size $k$ ($1 \le k \le N$) while ensuring $\sum_{i=1}^{k} w_i \le W$?
+
+### Input
+
+- An integer $W$ representing the maximum weight capacity of the knapsack.
+- An integer $N$ representing the number of items.
+- Two lists of $N$ integers: one for weights and one for values.
+
+### Output
+
+- An integer representing the maximum value that can be obtained without exceeding the weight capacity.
+
+### Example
+
+Input:
+50 3
+10 20 30
+60 100 120
+
+Output:
+220
+
+### Constraints
+
+- $1 \leq W \leq 1000$
+- $1 \leq N \leq 100$
+- Each weight and value is a positive integer not exceeding $1000$
+
+## Problem 10 Statement: Longest Path in a Directed Acyclic Graph (DAG)
+
+### Description
+
+Finding the longest path in a Directed Acyclic Graph (DAG).
+
+### Input
+
+- An integer $N$ representing the number of nodes.
+- A list of tuples representing the edges of the graph, where each tuple $(u, v)$ indicates an edge from node $u$ to node $v$.
+
+### Output
+
+- An integer representing the length of the longest path in the DAG.
+
+### Example
+
+Input:
+5
+[(1, 2), (2, 3), (3, 4), (4, 5)]
+
+Output:
+4
+
+### Constraints
+
+- $1 \leq N \leq 1000$
+- The number of edges does not exceed $N(N-1)/2$
+
+## Problem 11 Statement: Traveling Salesman Problem (TSP)
+
+### Description
+
+Given a list of cities and the distances between each pair of cities, find the shortest possible route that visits each city exactly once and returns to the origin city.
+
+### Input
+
+- An integer $N$ representing the number of cities.
+- A 2D list of integers representing the distances between each pair of cities.
+
+### Output
+
+- An integer representing the minimum distance of the round trip.
+
+### Example
+
+Input:
+4
+0 10 15 20
+10 0 35 25
+15 35 0 30
+20 25 30 0
+
+Output:
+80
+
+### Constraints
+
+- $1 \leq N \leq 10$
+- Each distance is a non-negative integer not exceeding $1000$
+
+## Problem 12 Statement: Matrix Chain Multiplication
+
+### Description
+
+Given a sequence of matrices, find the most efficient way to multiply these matrices together. The problem is not actually to perform the multiplications, but merely to decide in which order to perform the multiplications.
+
+### Input
+
+- An integer $N$ representing the number of matrices.
+- A list of $N+1$ integers representing the dimensions of the matrices.
+
+### Output
+
+- An integer representing the minimum number of scalar multiplications needed.
+
+### Example
+
+Input:
+4
+10 20 30 40 30
+
+Output:
+30000
+
+### Constraints
+
+- $1 \leq N \leq 100$
+- Each dimension is a positive integer not exceeding $1000$
 
 ## Notes and References
 

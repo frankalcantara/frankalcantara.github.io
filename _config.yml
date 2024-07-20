@@ -29,9 +29,6 @@ plugins:
   - jekyll-gzip
 
 # TOC Settings
-
-
-
 toc:
  min_level: 1
  max_level: 2
