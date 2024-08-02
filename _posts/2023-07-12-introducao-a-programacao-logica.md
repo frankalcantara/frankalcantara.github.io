@@ -70,6 +70,7 @@ A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive 
     - [Generalização Existencial](#generalização-existencial)
     - [Instanciação Existencial](#instanciação-existencial)
   - [Problemas Interessantes Resolvidos com Lógica Proposicional e Predicativa](#problemas-interessantes-resolvidos-com-lógica-proposicional-e-predicativa)
+    - [Exemplos Extras de conversão de sentenças em predicados](#exemplos-extras-de-conversão-de-sentenças-em-predicados)
   - [Formas Normais](#formas-normais)
     - [Forma Normal Negativa (FNN)](#forma-normal-negativa-fnn)
       - [Estrutura da Forma Normal Negativa](#estrutura-da-forma-normal-negativa)
@@ -2612,7 +2613,7 @@ $$(T_A + T_B + T_A + T_C + T_D + T_B + T_A) \leq T$$
 
 Substituindo os valores dos tempos resulta em $15 \leq T$.
 
-1. **Quebra-cabeça: O Problema de Monty Hall**
+5. **Quebra-cabeça: O Problema de Monty Hall**
  Em um programa de game show, os concorrentes tentam adivinhar qual das três portas contém um prêmio valioso. Depois que um concorrente escolhe uma porta, o apresentador, que sabe o que está por trás de cada porta, abre uma das portas não escolhidas para revelar uma cabra, representando nenhum prêmio. O apresentador então pergunta ao concorrente se ele quer mudar sua escolha para a outra porta não aberta ou ficar com sua escolha inicial. O que o concorrente deve fazer para maximizar suas chances de ganhar o prêmio?
 
  **Solução**: o concorrente deve sempre mudar sua escolha. Inicialmente, a chance do prêmio estar atrás da porta escolhida é $1/3$ e a chance de estar atrás de uma das outras portas é $2/3$. Depois que o apresentador abre uma porta para revelar uma cabra, a chance do prêmio estar atrás da porta não escolhida e não aberta ainda é $2/3$.
@@ -2623,6 +2624,68 @@ Substituindo os valores dos tempos resulta em $15 \leq T$.
 $$(contemPremio(d1) \land \neg contemPremio(d2) \land \neg contemPremio(d3)) \\ \lor (contemPremio(d2)  \land \neg contemPremio(d1) \land \neg contemPremio(d3)) \\ \lor (contemPremio(d3) \land \neg contemPremio(d1) \land \neg contemPremio(d2))$$
 
 Esta condição afirma que o prêmio está exatamente atrás de uma das portas, e o concorrente deve mudar sua escolha depois que uma das portas é aberta para revelar nenhum prêmio.
+
+### Exemplos Extras de conversão de sentenças em predicados
+
+1. **Todos os pássaros voam e todos os peixes nadam.**
+
+   $$\forall x (Pássaro(x) \rightarrow Voa(x)) \land \forall y (Peixe(y) \rightarrow Nada(y))$$
+
+2. **Todos os estudantes estudam ou todos os professores ensinam.**
+
+   $$\forall x (Estudante(x) \rightarrow Estuda(x)) \lor \forall y (Professor(y) \rightarrow Ensina(y))$$
+
+3. **Todos os cães latem e todos os gatos miam, mas nem todos os animais fazem barulho.**
+
+   $$\forall x (Cão(x) \rightarrow Late(x)) \land \forall y (Gato(y) \rightarrow Mia(y)) \land \neg \forall z (Animal(z) \rightarrow FazBarulho(z))$$
+
+4. **Se todos os carros são vermelhos, então todos os caminhões são azuis.**
+
+   $$\forall x (Carro(x) \rightarrow Vermelho(x)) \rightarrow \forall y (Caminhão(y) \rightarrow Azul(y))$$
+
+5. **Todos os planetas orbitam uma estrela e todos os asteroides orbitam o sol.**
+
+   $$\forall x (Planeta(x) \rightarrow OrbitaEstrela(x)) \land \forall y (Asteroide(y) \rightarrow OrbitaSol(y))$$
+
+6. **Alguns pássaros não voam.**
+
+    $$\exists x (Pássaro(x) \land \neg Voa(x))$$
+
+7. **Existe pelo menos um estudante que não estuda**.
+
+    $$\exists x (Estudante(x) \land \neg Estuda(x))$$
+
+8. **Há algum animal que não faz barulho**.
+
+    $$\exists x (Animal(x) \land \neg FazBarulho(x))$$
+
+9. **Existe um carro que não é vermelho**.
+
+    $$\exists x (Carro(x) \land \neg Vermelho(x))$$
+
+10. **Há um planeta que não orbita uma estrela**.
+
+    $$\exists x (Planeta(x) \land \neg \exists y (Estrela(y) \land Orbita(x, y)))$$
+
+11. Todos os pássaros voam, mas existe um animal que não voa.
+
+    $$\forall x (Pássaro(x) \rightarrow Voa(x)) \land \exists y (Animal(y) \land \neg Voa(y))$$
+
+12. Para cada estudante, existe um professor que o ensina.
+
+    $$\forall x (Estudante(x) \rightarrow \exists y (Professor(y) \land Ensina(y, x)))$$
+
+13. Existe um cão que late para todos os gatos.
+
+    $$\exists x (Cão(x) \land \forall y (Gato(y) \rightarrow Late(x, y)))$$
+
+14. Para cada carro vermelho, existe um caminhão azul.
+
+    $$\forall x (Carro(x) \land Vermelho(x) \rightarrow \exists y (Caminhão(y) \land Azul(y)))$$
+
+15. Todos os planetas orbitam uma estrela, e existe um asteroide que orbita o sol.
+  
+    $$(\forall x (Planeta(x) \rightarrow \exists y (Estrela(y) \land Orbita(x, y)))) \land (\exists z (Asteroide(z) \land Orbita(z, Sol)))$$
 
 ## Formas Normais
 
