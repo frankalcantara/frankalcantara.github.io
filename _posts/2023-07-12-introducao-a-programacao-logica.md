@@ -1970,7 +1970,9 @@ Para validar $\forall x P(x)$ escolhemos o pior caso possível para $x$, todos o
 
 1. **Exemplo 1**: todos os números reais são maiores que 0. (Universo do discurso: $\{x \in \mathbb{R}\}$)
 
-$$\forall x (Número(x) \rightarrow x > 0)$$
+$$\forall x (x \in \mathbb{R} \rightarrow x > 0)$$
+
+Observe que este predicado, apesar de estar corretamente representado, é $Falso$.
 
 2. **Exemplo 2**: todos os triângulos em um plano euclidiano têm a soma dos ângulos internos igual a 180 graus. (Universo do discurso: $x$ é um triângulo em um plano euclidiano)
 
@@ -1978,7 +1980,7 @@ $$\forall x (Triângulo(x) \rightarrow \Sigma_{i=1}^3 ÂnguloInterno_i(x) = 180^
 
 3. **Exemplo 3**: todas as pessoas com mais de 18 anos podem tirar carteira de motorista." (Universo do discurso: $x$ é uma pessoa no Brasil)
 
-$$\forall x (Pessoa(x) \land Idade (x) > 18 \rightarrow PodeTirarCarteira(x))$$
+$$\forall x (Pessoa(x) \land Idade (x) \geq 18 \rightarrow PodeTirarCarteira(x))$$
 
 4. **Exemplo 4**: todo número par maior que 2 pode ser escrito como a soma de dois números primos. (Universo do discurso: $\{x \in \mathbb{Z}\}$
 
