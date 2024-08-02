@@ -10,6 +10,7 @@ disqus: ""
 mailchimp-list: ""
 include: ["_pages"]
 permalink: /:title/
+
 # Authors
 authors:
   Frank:
@@ -20,6 +21,7 @@ authors:
     web: https://frankalcantara.com
     twitter: https://twitter.com/frankalcantara
     description: "Pai, marido, professor e engenheiro."
+
 # Plugins
 plugins:
   - jekyll-paginate
@@ -54,7 +56,7 @@ markdown: kramdown
 kramdown:
   input: GFM
   syntax_highlighter: rouge
-
+  
 # Adsense (change to "enabled" to activate, also your client id and ad slot. Create a new ad unit from your Adsense account to get the slot.)
 adsense: "disabled"
 adsense-data-ad-client: "ca-pub-3412143450191416"

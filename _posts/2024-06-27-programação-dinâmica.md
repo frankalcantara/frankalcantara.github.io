@@ -313,7 +313,7 @@ To understand the efficiency of our memoized Fibonacci function, we need to calc
 - **Memoization Storage**: Each calculated value is stored, hence any future calls with the same $n$ don't create new branches.
 - **Counting Unique Calls**: Because of memoization, we only need to calculate each Fibonacci number once. This means the total number of recursive calls is roughly equal to the number of unique Fibonacci numbers up to $n$.
 
-In conclusion, while a naive Fibonacci implementation would have an exponential number of calls, memoization brings this down significantly. We still have roughly $2n$ calls to calculate Fibonacci numbers from $0$ to $n$, this time a linear growth, but the key is that each unique number is only calculated once, making the process efficient.
+In conclusion, while a naive Fibonacci implementation would have an exponential number of calls, memoization brings this down significantly. We still have roughly $2^n$ calls to calculate Fibonacci numbers from $0$ to $n$, this time a linear growth, but the key is that each unique number is only calculated once, making the process efficient.
 
 To calculate the number of times the function will be called for any value $n$, we can use the following formula based on the analysis of the memoized recursion tree:
 
@@ -1033,12 +1033,12 @@ For example, given the array: `[8, 10, 2, 9, 7, 5]` and the target sum: 11
 
 Your function should return a pair of numbers that add up to the target sum. Your answer must be a function in form: `Values(sequence, targetSum)`, In this case, your function should return (9, 2).
 
-#### Brute Force for Two-Sum's problem
+#### Brute-Force for Two-Sum's problem
 
-The most obvious solution, usually the first that comes to mind, involves checking all pairs in the array to see if any pair meets the desired target value. This solution is not efficient for large arrays; it has a time complexity of $O(n^2)$ where $n$ is the number of elements in the array. The flow of the brute force function can be seen in Flowchart 4.
+The most obvious solution, usually the first that comes to mind, involves checking all pairs in the array to see if any pair meets the desired target value. This solution is not efficient for large arrays; it has a time complexity of $O(n^2)$ where $n$ is the number of elements in the array. The flow of the Brute-Force function can be seen in Flowchart 4.
 
 ![]({{ site.baseurl }}/assets/images/flow4.jpg)
-*Flowchart 4 - Brute force solution for Two-Sum problem*{: class="legend"}
+*Flowchart 4 - Brute-Force solution for Two-Sum problem*{: class="legend"}
 
 Flowchart 4 enables the creation of a function to solve the two-sum problem in C++20, as can be seen in Code 4 below:
 
@@ -1047,7 +1047,7 @@ Flowchart 4 enables the creation of a function to solve the two-sum problem in C
 #include <vector>
 #include <utility>
 
-// Function to find a pair of numbers that add up to the target sum Brute Force
+// Function to find a pair of numbers that add up to the target sum Brute-Force
 std::pair<int, int> Values(const std::vector<int>& sequence, int targetSum) {
     int n = sequence.size();
 
@@ -1258,11 +1258,11 @@ In summary, we have the following characteristics:
   
 While the recursive approach proves to be highly inefficient in terms of time complexity, rendering it unsuitable for large inputs, it's crucial to compare its performance with the previously discussed brute-force solutions to gain a comprehensive understanding of its strengths and weaknesses.
 
-The brute force solution to the two-sum problem involves checking all possible pairs in the array to see if any pair meets the desired target value. This approach has a time complexity of $O(n^2)$ because it uses nested loops to iterate over all pairs. The space complexity is $O(1)$ as it does not require additional storage beyond the input array and a few variables.
+The Brute-Force solution to the two-sum problem involves checking all possible pairs in the array to see if any pair meets the desired target value. This approach has a time complexity of $O(n^2)$ because it uses nested loops to iterate over all pairs. The space complexity is $O(1)$ as it does not require additional storage beyond the input array and a few variables.
 
 On the other hand, the recursive solution systematically explores all possible pairs by moving the `start` and `end` indices. Although it achieves the same goal, its time complexity is much worse, at $O(2^n)$. This exponential complexity arises because each recursive call generates two more calls, leading to an exponential growth in the number of calls. The space complexity of the recursive solution is $O(n)$, as it requires a recursion stack that can grow up to the depth of the array size.
 
-In summary, while both approaches solve the problem, the brute force solution is significantly more efficient in terms of time complexity ($O(n^2)$ vs. $O(2^n)$), and it also has a lower space complexity ($O(1)$ vs. $O(n)$). However, we are not interested in either of these solutions. The brute force solution is naive and offers no advantage, and the recursive solution is impractical. Thus, we are left with the dynamic programming solutions.
+In summary, while both approaches solve the problem, the Brute-Force solution is significantly more efficient in terms of time complexity ($O(n^2)$ vs. $O(2^n)$), and it also has a lower space complexity ($O(1)$ vs. $O(n)$). However, we are not interested in either of these solutions. The Brute-Force solution is naive and offers no advantage, and the recursive solution is impractical. Thus, we are left with the dynamic programming solutions.
 
 #### Dynamic Programming: memoization
 
@@ -1350,9 +1350,9 @@ Combining these two factors, the overall space complexity of the memoized soluti
 - **Time Complexity**: $O(n^2)$ - The time it takes to process the input grows quadratically with the input size due to the nested loops and memoization overhead.
 - **Space Complexity**: $O(n^2)$ - The amount of memory required for storing memoized results also increases quadratically with the input size because the memoization table grows proportionally to n^2.
 
-By storing the results of subproblems, the memoized solution reduces redundant calculations, achieving a time complexity of $O(n^2)$. The memoization map and recursion stack together contribute to a space complexity of $O(n^2)$. Although it has the same time complexity as the brute force solution, memoization significantly improves efficiency by avoiding redundant calculations, making it more practical for larger arrays.
+By storing the results of subproblems, the memoized solution reduces redundant calculations, achieving a time complexity of $O(n^2)$. The memoization map and recursion stack together contribute to a space complexity of $O(n^2)$. Although it has the same time complexity as the Brute-Force solution, memoization significantly improves efficiency by avoiding redundant calculations, making it more practical for larger arrays.
 
-The brute force solution involves nested loops to check all possible pairs, leading to a time complexity of $O(n^2)$. This solution does not use any additional space apart from a few variables, so its space complexity is $O(1)$. While straightforward, the brute force approach is not efficient for large arrays due to its quadratic time complexity.
+The Brute-Force solution involves nested loops to check all possible pairs, leading to a time complexity of $O(n^2)$. This solution does not use any additional space apart from a few variables, so its space complexity is $O(1)$. While straightforward, the Brute-Force approach is not efficient for large arrays due to its quadratic time complexity.
 
 The naive recursive solution, on the other hand, explores all possible pairs without any optimization, resulting in an exponential time complexity of $O(2^n)$. The recursion stack can grow up to a depth of $n$, leading to a space complexity of $O(n)$. This approach is highly inefficient for large inputs because it redundantly checks the same pairs multiple times.
 
@@ -1360,11 +1360,11 @@ At this point we can create a summary table.
 
 | Solution Type   | Time Complexity | Space Complexity |
 |-----------------|-----------------|------------------|
-| Brute Force     | $O(n^2)$          | $O(1)$             |
+| Brute-Force     | $O(n^2)$          | $O(1)$             |
 | Recursive       | $O(2^n)$          | $O(n)$             |
 | Memoized        | $O(n^2)$          | $O(n^2)$           |
 
-*Tabela 3 - Brute Force, Recursive and Memoized Solutions Complexity Comparison*{: class="legend"}
+*Tabela 3 - Brute-Force, Recursive and Memoized Solutions Complexity Comparison*{: class="legend"}
 
 The situation may seem grim, with the brute-force approach holding the lead as our best solution so far. But don't lose hope just yet! We have a secret weapon up our sleeves: dynamic programming with tabulation.
 
@@ -1437,18 +1437,18 @@ The `std::optional<std::pair<int, int>> ValuesTabulation(const std::vector<int>&
 
 The space complexity of the function is also $O(n)$, as it uses a hash table to store the elements of the array and their indices. The size of the hash table grows linearly with the number of elements in the array, which is why the space complexity is linear.
 
-Comparing this with the other solutions, the brute force solution has a time complexity of $O(n^2)$ because it involves nested loops to check all possible pairs, and its space complexity is $O(1)$ since it uses only a few additional variables. The recursive solution without optimization has an exponential time complexity of $O(2^n)$ due to redundant calculations in exploring all pairs, with a space complexity of $O(n)$ due to the recursion stack. The memoized solution improves upon the naive recursion by storing results of subproblems, achieving a time complexity of $O(n^2)$ and a space complexity of $O(n^2)$ due to the memoization map and recursion stack.
+Comparing this with the other solutions, the Brute-Force solution has a time complexity of $O(n^2)$ because it involves nested loops to check all possible pairs, and its space complexity is $O(1)$ since it uses only a few additional variables. The recursive solution without optimization has an exponential time complexity of $O(2^n)$ due to redundant calculations in exploring all pairs, with a space complexity of $O(n)$ due to the recursion stack. The memoized solution improves upon the naive recursion by storing results of subproblems, achieving a time complexity of $O(n^2)$ and a space complexity of $O(n^2)$ due to the memoization map and recursion stack.
 
 *In comparison, the tabulation function is significantly more efficient in terms of both time and space complexity. It leverages the hash table to avoid redundant calculations and provides a linear time solution with linear space usage, making it the most efficient among the four approaches.* Wha we can see in the following table.
 
 | Solution Type    | Time Complexity | Space Complexity |
 |------------------|-----------------|------------------|
-| Brute Force      | $O(n^2)$          | $O(1)$             |
+| Brute-Force      | $O(n^2)$          | $O(1)$             |
 | Recursive        | $O(2^n)$          | $O(n)$             |
 | Memoized         | $O(n^2)$          | $O(n^2)$           |
 | Tabulation       | $O(n)$            | $O(n)$             |
 
-*Tabela 4 - Brute Force, Recursive, Memoized and Tabulated Solutions Complexity Comparison*{: class="legend"}
+*Tabela 4 - Brute-Force, Recursive, Memoized and Tabulated Solutions Complexity Comparison*{: class="legend"}
 
 And so, it seems, we have a champion: dynamic programming with tabulation! Anyone armed with this technique has a significant advantage when tackling this problem, especially in job interviews where optimization and clever problem-solving are highly valued.
 
@@ -1490,7 +1490,7 @@ long long average_time(Func func, int iterations, Args&&... args) {
     return total_time / iterations;
 }
 
-// Brute Force Solution
+// Brute-Force Solution
 std::pair<int, int> ValuesBruteForce(const std::vector<int>& sequence, int targetSum) {
     int n = sequence.size();
     for (int i = 0; i < n - 1; ++i) {
@@ -1578,11 +1578,11 @@ int main() {
     std::cout << "-----------------------------------\n";
     std::cout << "Calculating Two-Sum (" << targetSum << ")\n";
 
-    // Measure average execution time for Brute Force Solution
+    // Measure average execution time for Brute-Force Solution
     auto bruteForceTime = average_time([](const std::vector<int>& seq, int target) {
         ValuesBruteForce(seq, target);
         }, iterations, sequence, targetSum);
-    std::cout << "Average time for Brute Force: " << bruteForceTime << " ns\n";
+    std::cout << "Average time for Brute-Force: " << bruteForceTime << " ns\n";
 
     // Measure average execution time for Naive Recursive Solution
     auto recursiveTime = average_time([](const std::vector<int>& seq, int target) {
@@ -1615,7 +1615,7 @@ I simply replicated the functions from the previous code snippets, without any o
 ```Shell
 -----------------------------------
 Calculating Two-Sum (18)
-Average time for Brute Force: 217 ns
+Average time for Brute-Force: 217 ns
 Average time for Recursive: 415 ns
 Average time for Memoized: 41758 ns
 Average time for Tabulation: 15144 ns
@@ -1638,7 +1638,7 @@ There are some well-known bottlenecks that can explain why a code with lower com
 
 **Memoization's Complexity**: While memoization optimizes by storing intermediate results, it also introduces complexity through the use of `std::unordered_map`. Each new pair calculated requires storage in the hash table, involving dynamic allocations and hash computations, adding to the overall time complexity.
 
-**Cache Friendliness**: Dynamic memory allocations often lead to suboptimal cache utilization. In contrast, the brute force and tabulation solutions likely benefit from better cache locality due to their predominant use of array accesses. Accessing contiguous memory locations (as in arrays) generally results in faster execution due to improved cache hit rates.
+**Cache Friendliness**: Dynamic memory allocations often lead to suboptimal cache utilization. In contrast, the Brute-Force and tabulation solutions likely benefit from better cache locality due to their predominant use of array accesses. Accessing contiguous memory locations (as in arrays) generally results in faster execution due to improved cache hit rates.
 
 **Function Call Overhead**: The overhead from frequent function calls, including those made through lambda functions, can accumulate, particularly in performance-critical code.
 
@@ -1646,7 +1646,7 @@ By understanding and mitigating these bottlenecks, we can better optimize our co
 
 *In essence, the dynamic nature of memory operations associated with hash tables and recursion significantly affects execution times*. These operations are generally slower than accessing static memory structures like arrays. The deep recursion in the memoized and naive recursive approaches exacerbates this issue, as the growing recursion stack necessitates increased memory management.
 
-The memoized solution, while clever, bears the brunt of both issues – extensive recursion and frequent hash table operations. This combination leads to higher execution times compared to the brute force and tabulation approaches, which primarily rely on array accesses and enjoy the benefits of better cache performance and reduced memory management overhead.
+The memoized solution, while clever, bears the brunt of both issues – extensive recursion and frequent hash table operations. This combination leads to higher execution times compared to the Brute-Force and tabulation approaches, which primarily rely on array accesses and enjoy the benefits of better cache performance and reduced memory management overhead.
 
 In conclusion, the observed differences in execution times can be attributed to the distinct memory access patterns and associated overheads inherent in each approach. Understanding these nuances is crucial for making informed decisions when optimizing code for performance.
 
@@ -1723,7 +1723,7 @@ The key takeaway here is that while using `memset` might feel like a win for ini
 ```Shell
 -----------------------------------
 Calculating Two-Sum (11)
-Average time for Brute Force: 318 ns
+Average time for Brute-Force: 318 ns
 Average time for Recursive: 626 ns
 Average time for Memoized: 39078 ns
 Average time for Tabulation: 5882 ns
@@ -1740,7 +1740,7 @@ Analyzing Output 5, it's clear that the C-style solution is, for all intents and
 Code Fragment 15 was rewritten by stripping away all the complex data structures we were previously using. The `main()` function remains largely unchanged, so it's been omitted here. I've also removed the functions used for measuring and printing execution times.
 
 ```Cpp
-// Brute Force Solution
+// Brute-Force Solution
 std::array<int, 2> ValuesBruteForce(const std::vector<int>& sequence, int targetSum) {
     int n = sequence.size();
     for (int i = 0; i < n - 1; ++i) {
@@ -1831,7 +1831,7 @@ Running this modified code, we get the following output:
 ```Shell
 -----------------------------------
 Calculating Two-Sum (11)
-Average time for Brute Force: 157 ns
+Average time for Brute-Force: 157 ns
 Average time for Recursive: 652 ns
 Average time for Memoized: 39514 ns
 Average time for Tabulation: 5884 ns
@@ -1843,11 +1843,11 @@ Average time for Tabulation C-Style: 149 ns
 
 Let's break down the results for calculating the Two-Sum problem, keeping in mind that the fastest solutions have a linear time complexity, O(n):
 
-- **Brute Force**: Blazing fast at 157 ns on average. This is our baseline, but remember, brute force doesn't always scale well for larger problems.
+- **Brute-Force**: Blazing fast at 157 ns on average. This is our baseline, but remember, Brute-Force doesn't always scale well for larger problems.
 - **Recursive**: A bit slower at 652 ns. Recursion can be elegant, but it can also lead to overhead.
 - **Memoized**: This one's the outlier at 39514 ns. Memoization can be a powerful optimization, but it looks like the overhead is outweighing the benefits in this case.
 - **Tabulation**: A respectable 5884 ns. Tabulation is a solid dynamic programming technique, and it shows here.
-- **Tabulation C-Style**: A close winner at 149 ns! This stripped-down, C-style implementation of tabulation is just a hair behind brute force in terms of speed.
+- **Tabulation C-Style**: A close winner at 149 ns! This stripped-down, C-style implementation of tabulation is just a hair behind Brute-Force in terms of speed.
 
 The C++ and C versions of our tabulation function are practically neck and neck in terms of speed for a few key reasons:
 
@@ -1878,7 +1878,7 @@ Try to solve these variations. Take as much time as you need; I will wait.
 
 ## The Dynamic Programming Classic Problems
 
-From now on, we will explore 10 classic dynamic programming problems. For each one, we will delve into brute force techniques, recursion, memoization, tabulation, and finally the most popular solution for each, even if it is not among the techniques we have chosen. The problems we will address are listed in the table below[^2].
+From now on, we will explore 10 classic dynamic programming problems. For each one, we will delve into Brute-Force techniques, recursion, memoization, tabulation, and finally the most popular solution for each, even if it is not among the techniques we have chosen. The problems we will address are listed in the table below[^2].
 
 | Name                                        | Description/Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 |---------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1973,11 +1973,11 @@ This tells us there are $6$ distinct paths to reach the bottom-right corner. Let
 
 The bottom-right corner, $dp[2][2]$, holds our answer: $6$ unique paths.
 
-Bear with me, dear reader, as I temporarily diverge from our exploration of dynamic programming. Before delving deeper, it's essential to examine how we might solve this problem using a brute force approach.
+Bear with me, dear reader, as I temporarily diverge from our exploration of dynamic programming. Before delving deeper, it's essential to examine how we might solve this problem using a Brute-Force approach.
 
-### Using Brute Force
+### Using Brute-Force
 
-To tackle the unique paths problem with a brute force approach, we can use an iterative solution and a stack in C++20. The stack will keep track of our current position in the matrix and the number of paths that led us there. Here's a breakdown of how it works:
+To tackle the unique paths problem with a Brute-Force approach, we can use an iterative solution and a stack in C++20. The stack will keep track of our current position in the matrix and the number of paths that led us there. Here's a breakdown of how it works:
 
 1. We'll define a structure called `Position` to store the current coordinates $(i, j)$ and the count of paths leading to that position.
 
@@ -2006,7 +2006,7 @@ struct Position {
     int pathCount;
 };
 
-// Function to count paths using brute force
+// Function to count paths using Brute-Force
 int countPaths(int m, int n) {
     std::stack<Position> stk;
     stk.push({ 0, 0, 1 });
@@ -2037,10 +2037,9 @@ int countPaths(int m, int n) {
 
     return totalPaths;
 }
-//.....
 ```
 
-*Code Fragment 16 - Count all paths function using Brute Force.*{: class="legend"}
+*Code Fragment 16 - Count all paths function using Brute-Force.*{: class="legend"}
 
 Let's start looking at `std::stack` data structure:
 
@@ -2057,7 +2056,7 @@ struct Position {
 };
 ```
 
-The `Position` structure has three members: `i` and `j`, which represent the current coordinates in the matrix, and `pathCount`, which represents the number of paths that lead to this position. 
+The `Position` structure has three members: `i` and `j`, which represent the current coordinates in the matrix, and `pathCount`, which represents the number of paths that lead to this position.
 
 The line `stk.push({ 0, 0, 1 });` serves a specific purpose in our algorithm:
 
@@ -2066,26 +2065,26 @@ The line `stk.push({ 0, 0, 1 });` serves a specific purpose in our algorithm:
 
 In simpler terms, this line of code initializes the stack with the starting position of the matrix traversal, which is the top-left corner of the matrix at coordinates $(0, 0)$. It also sets the initial path count to $1$, indicating that there is one path starting from this position. From here, the algorithm will explore all possible paths from the top-left corner.
 
-*The brute force solution for counting paths in a matrix involves exploring all possible paths from the top-left corner to the bottom-right corner. Each path consists of a series of moves either to the right or down. The algorithm uses a stack to simulate the recursive exploration of these paths*.
+*The Brute-Force solution for counting paths in a matrix involves exploring all possible paths from the top-left corner to the bottom-right corner. Each path consists of a series of moves either to the right or down. The algorithm uses a stack to simulate the recursive exploration of these paths*.
 
 To analyze the time complexity, consider that the function must explore each possible combination of moves in the matrix. For a matrix of size $m \times n$, there are a total of $m + n - 2$ moves required to reach the bottom-right corner from the top-left corner. Out of these moves, $m - 1$ must be down moves and $n - 1$ must be right moves. The total number of distinct paths is given by the binomial coefficient $C(m+n-2, m-1)$, which represents the number of ways to choose $m-1$ moves out of $m+n-2$.
 
-The time complexity of the brute force approach is exponential in nature because it explores every possible path. Specifically, the time complexity is $O(2^{m+n})$ since each step involves a choice between moving right or moving down, leading to $2^{m+n}$ possible combinations of moves in the worst case. This exponential growth makes the brute force approach infeasible for large matrices, as the number of paths grows very quickly with increasing $m$ and $n$.
+The time complexity of the Brute-Force approach is exponential in nature because it explores every possible path. Specifically, the time complexity is $O(2^{m+n})$ since each step involves a choice between moving right or moving down, leading to $2^{m+n}$ possible combinations of moves in the worst case. This exponential growth makes the Brute-Force approach infeasible for large matrices, as the number of paths grows very quickly with increasing $m$ and $n$.
 
 The space complexity is also significant because the algorithm uses a stack to store the state of each position it explores. In the worst case, the depth of the stack can be as large as the total number of moves, which is $m + n - 2$. Thus, the space complexity is $O(m+n)$, primarily due to the stack's storage requirements.
 
-In summary, the brute force solution has an exponential time complexity $O(2^{m+n})$ and a linear space complexity $O(m+n)$, making it suitable only for small matrices where the number of possible paths is manageable.
+In summary, the Brute-Force solution has an exponential time complexity $O(2^{m+n})$ and a linear space complexity $O(m+n)$, making it suitable only for small matrices where the number of possible paths is manageable.
 
 My gut feeling tells me this complexity is very, very bad. We'll definitely find better complexities as we explore dynamic programming solutions. Either way, we need to measure the runtime. Running the function `int countPaths(int m, int n)` within the same structure we created earlier to measure execution time, we will have:
 
 ```Shell
 -----------------------------------
 Calculating Paths in a 3x3 matrix
-Average time for Brute Force: 10865 ns
+Average time for Brute-Force: 10865 ns
 -----------------------------------
 ```
 
-*Output 7: Execution time of Counting all paths problem using Brute Force.*{: class="legend"}
+*Output 7: Execution time of Counting all paths problem using Brute-Force.*{: class="legend"}
 
 Finally, I won't be presenting the code done with pure recursion. As we've seen, recursion is very elegant and can score points in interviews. However, the memoization solution will include recursion, so if you use memoization and recursion in the same solution, you'll ace the interview.
 
@@ -2131,21 +2130,21 @@ The `dp` matrix is utilized to store intermediate results, preventing redundant 
 
 Similarly, *the space complexity is $O(m \times n)$ due to the `dp` matrix*, which stores the number of paths for each cell. The matrix necessitates $m \times n$ space to accommodate these intermediate results.
 
-In essence, the dynamic programming approach with memoization transforms the exponential time complexity of the naive brute force solution into a linear complexity with respect to the matrix size. Consequently, this solution proves far more efficient and viable for larger matrices.
+In essence, the dynamic programming approach with memoization transforms the exponential time complexity of the naive Brute-Force solution into a linear complexity with respect to the matrix size. Consequently, this solution proves far more efficient and viable for larger matrices.
 
-Finally, we need to run this code and compare it to the brute force version.
+Finally, we need to run this code and compare it to the Brute-Force version.
 
 ```Shell
 -----------------------------------
 Calculating Paths in a 3x3 matrix
-Average time for Brute Force: 12494 ns
+Average time for Brute-Force: 12494 ns
 Average time for Memoization: 4685 ns
 -----------------------------------
 ```
 
-*Output 9: Comparison between Brute Force, Memoization and Tabulation functions.*{: class="legend"}
+*Output 9: Comparison between Brute-Force, Memoization and Tabulation functions.*{: class="legend"}
 
-I ran it dozens of times and, most of the time, the memoized function was twice as fast as the brute force function, and sometimes it was three times faster. Now we need to look at the dynamic programming solution using tabulation.
+I ran it dozens of times and, most of the time, the memoized function was twice as fast as the Brute-Force function, and sometimes it was three times faster. Now we need to look at the dynamic programming solution using tabulation.
 
 ### Using Tabulation
 
@@ -2180,7 +2179,7 @@ Using `std::array<std::array<int, MAX_SIZE>, MAX_SIZE>` for the `dp` matrix ensu
 
 *The time complexity of this function is $O(m \times n)$*. Each cell in the `dp` matrix is computed once, and each computation takes constant time, making the total number of operations proportional to the number of cells in the matrix. Similarly, *the space complexity is $O(m \times n)$* due to the `dp` matrix, which requires $m \times n$ space to store the number of paths for each cell.
 
-This dynamic programming approach with tabulation significantly improves performance compared to the naive brute force solution. By transforming the problem into a series of iterative steps, it provides an efficient and scalable solution for counting paths in larger matrices.
+This dynamic programming approach with tabulation significantly improves performance compared to the naive Brute-Force solution. By transforming the problem into a series of iterative steps, it provides an efficient and scalable solution for counting paths in larger matrices.
 
 Here's something interesting, dear reader.  While using `std::vector` initially yielded similar execution times to the memoization function, switching to `std::array` resulted in a dramatic improvement. Not only did it significantly reduce memory usage, but it also made the function up to 4 times faster!
 
@@ -2189,7 +2188,7 @@ After running additional tests, the tabulation function averaged $3$ times faste
 ```Shell
 -----------------------------------
 Calculating Paths in a 3x3 matrix
-Average time for Brute Force: 10453 ns
+Average time for Brute-Force: 10453 ns
 Average time for Memoization: 5348 ns
 Average time for Tabulation: 1838 ns
 -----------------------------------
@@ -2259,11 +2258,11 @@ Output:
 
 ### Analysis
 
-The "Longest Increasing Subsequence" (LIS) problem is a classic problem in dynamic programming, often appearing in interviews and programming competitions. The goal is to find the length of the longest subsequence in a given array such that all elements of the subsequence are in strictly increasing order. *There are three main approaches to solving this problem: brute force, memoization, and tabulation. Coincidentally, these are the three solutions we are studying*. So, let's go.
+The "Longest Increasing Subsequence" (LIS) problem is a classic problem in dynamic programming, often appearing in interviews and programming competitions. The goal is to find the length of the longest subsequence in a given array such that all elements of the subsequence are in strictly increasing order. *There are three main approaches to solving this problem: Brute-Force, memoization, and tabulation. Coincidentally, these are the three solutions we are studying*. So, let's go.
 
-### Brute Force
+### Brute-Force
 
-In the brute force approach, we systematically generate all possible subsequences of the array and examine each one to determine if it's strictly increasing. The length of the longest increasing subsequence is then tracked and ultimately returned. Here's the algorithm for solving the LIS problem using brute force:
+In the Brute-Force approach, we systematically generate all possible subsequences of the array and examine each one to determine if it's strictly increasing. The length of the longest increasing subsequence is then tracked and ultimately returned. Here's the algorithm for solving the LIS problem using Brute-Force:
 
 1. Iteratively generate all possible subsequences of the array. (We'll reserve recursion for the memoization approach.)
 2. For each subsequence, verify if it is strictly increasing.
@@ -2272,7 +2271,7 @@ In the brute force approach, we systematically generate all possible subsequence
 Code Fragment 19 presents the function I developed using a brute-force approach.
 
 ```Cpp
-// Iterative Brute Force LIS function
+// Iterative Brute-Force LIS function
 int longestIncreasingSubsequenceBruteForce(const std::vector<int>& arr) {
     int n = arr.size();
     int maxLen = 0;
@@ -2323,9 +2322,9 @@ Average time for LIS: 683023 ns
 -----------------------------------
 ```
 
-*Output 10: Execution time for LIS solution using Brute Force.*{: class="legend"}
+*Output 10: Execution time for LIS solution using Brute-Force.*{: class="legend"}
 
-At this point, our dear reader should have a mantra in mind: "Don't use brute force... Don't use brute force." With that said, let's delve into dynamic programming algorithms.
+At this point, our dear reader should have a mantra in mind: 'Don't use Brute-Force... Don't use Brute-Force.' With that said, let's delve into dynamic programming algorithms, keeping Brute-Force as a reference point for comparison.
 
 ### Memoization
 
@@ -2374,29 +2373,25 @@ int longestIncreasingSubsequenceMemoization(const std::vector<int>& arr) {
 
 Let's break down how these two functions work together to solve the Longest Increasing Subsequence (LIS) problem using memoization.
 
-**`LIS(int i, const std::vector<int>& arr, std::vector<int>& dp)`**
+The `LIS(int i, const std::vector<int>& arr, std::vector<int>& dp)` recursive function calculates the length of the LIS that ends at index $i$ within the input array `arr`. The `dp` vector acts as a memoization table, storing results to avoid redundant calculations. If `dp[i]` is not $-1$, it means the LIS ending at index `i` has already been calculated and stored. In this case, the function directly returns the stored value. If `dp[i]` is $-1$, the LIS ending at index `i` has not been computed yet. The function iterates through all previous elements (`j` from 0 to `i-1`) and checks if `arr[j]` is less than `arr[i]`. If so, it recursively calls itself to find the LIS ending at index `j`. The maximum length among these recursive calls (plus 1 to include the current element `arr[i]`) is then stored in `dp[i]` and returned as the result.
 
-This recursive function calculates the length of the LIS that ends at index $i$ within the input array `arr`. The `dp` vector acts as a memoization table, storing results to avoid redundant calculations. If `dp[i]` is not $-1$, it means the LIS ending at index `i` has already been calculated and stored. In this case, the function directly returns the stored value. If `dp[i]` is $-1$, the LIS ending at index `i` has not been computed yet. The function iterates through all previous elements (`j` from 0 to `i-1`) and checks if `arr[j]` is less than `arr[i]`. If so, it recursively calls itself to find the LIS ending at index `j`. The maximum length among these recursive calls (plus 1 to include the current element `arr[i]`) is then stored in `dp[i]` and returned as the result.
+The `longestIncreasingSubsequenceMemoization(const std::vector<int>& arr)` function serves as a wrapper for the `LIS` function and calculates the overall LIS of the entire array. It initializes the `dp` array with -1 for all indices, indicating that no LIS values have been computed yet. It iterates through the array and calls the `LIS` function for each index `i`. It keeps track of the maximum length encountered among the results returned by `LIS(i)` for all indices. Finally, it returns this maximum length as the length of the overall LIS of the array.
 
-**`longestIncreasingSubsequenceMemoization(const std::vector<int>& arr)`**
-
-This function serves as a wrapper for the `LIS` function and calculates the overall LIS of the entire array. It initializes the `dp` array with -1 for all indices, indicating that no LIS values have been computed yet. It iterates through the array and calls the `LIS` function for each index `i`. It keeps track of the maximum length encountered among the results returned by `LIS(i)` for all indices. Finally, it returns this maximum length as the length of the overall LIS of the array.
-
-Comparing the complexity of the memoization solution with the brute force solution highlights significant differences in efficiency. The brute force solution generates all possible subsequences using bitmasking, which results in a time complexity of $O(2^n \cdot n)$ due to the exponential number of subsequences and the linear time required to check each one. *In contrast, the memoization solution improves upon this by storing the results of previously computed LIS lengths, reducing redundant calculations. This reduces the time complexity to $O(n^2)$, as each element is compared with all previous elements, and each comparison is done once*. The space complexity also improves from potentially needing to store numerous subsequences in the brute force approach to a linear $O(n)$ space for the memoization array in the dynamic programming solution. Thus, the memoization approach provides a more scalable and practical solution for larger arrays compared to the brute force method. What can be seen in output 22:
+Comparing the complexity of the memoization solution with the Brute-Force solution highlights significant differences in efficiency. The Brute-Force solution generates all possible subsequences using bitmasking, which results in a time complexity of $O(2^n \cdot n)$ due to the exponential number of subsequences and the linear time required to check each one. *In contrast, the memoization solution improves upon this by storing the results of previously computed LIS lengths, reducing redundant calculations. This reduces the time complexity to $O(n^2)$, as each element is compared with all previous elements, and each comparison is done once*. The space complexity also improves from potentially needing to store numerous subsequences in the Brute-Force approach to a linear $O(n)$ space for the memoization array in the dynamic programming solution. Thus, the memoization approach provides a more scalable and practical solution for larger arrays compared to the Brute-Force method. What can be seen in output 22:
 
 ```Shell
 -----------------------------------
 Calculating LIS in the array
-Average time for LIS (Brute Force): 690399 ns
+Average time for LIS (Brute-Force): 690399 ns
 Average time for LIS (Memoization): 3018 ns
 -----------------------------------
 ```
 
 *Output 11: Execution time for LIS solution using Memoization.*{: class="legend"}
 
-The provided output clearly demonstrates the significant performance advantage of memoization over the brute force approach for calculating the Longest Increasing Subsequence (LIS).  The brute force method, with its average execution time of $690,399$ nanoseconds (ns), suffers from exponential time complexity, leading to a sharp decline in performance as the input size increases.
+The provided output clearly demonstrates the significant performance advantage of memoization over the Brute-Force approach for calculating the Longest Increasing Subsequence (LIS).  The Brute-Force method, with its average execution time of $690,399$ nanoseconds (ns), suffers from exponential time complexity, leading to a sharp decline in performance as the input size increases.
 
-In contrast, the memoization approach boasts an average execution time of a mere $3,018$ ns. This dramatic improvement is a direct result of eliminating redundant calculations through the storage and reuse of intermediate results. In this particular scenario, memoization is approximately $228$ times faster than brute force, highlighting the immense power of dynamic programming techniques in optimizing algorithms that involve overlapping subproblems.
+In contrast, the memoization approach boasts an average execution time of a mere $3,018$ ns. This dramatic improvement is a direct result of eliminating redundant calculations through the storage and reuse of intermediate results. In this particular scenario, memoization is approximately $228$ times faster than Brute-Force, highlighting the immense power of dynamic programming techniques in optimizing algorithms that involve overlapping subproblems.
 
 Now, let's turn our attention to the last dynamic programming technique we are studying: tabulation.
 
@@ -2451,16 +2446,16 @@ After each iteration of the outer loop, `maxLength` is updated to the maximum of
 
 Finally, the function returns `maxLength`, which now holds the length of the overall LIS in the entire array.
 
-In terms of complexity, the tabulation solution is on par with the memoization approach, both boasting a time complexity of $O(n^2)$. This is a substantial improvement over the brute force method's exponential $O(2^n \times n)$ time complexity. The quadratic time complexity arises from the nested loops in both tabulation and memoization, where each element is compared with all preceding elements to determine potential LIS extensions.
+In terms of complexity, the tabulation solution is on par with the memoization approach, both boasting a time complexity of $O(n^2)$. This is a substantial improvement over the Brute-Force method's exponential $O(2^n \times n)$ time complexity. The quadratic time complexity arises from the nested loops in both tabulation and memoization, where each element is compared with all preceding elements to determine potential LIS extensions.
 
 However, *the tabulation approach has a slight edge in space complexity. While memoization requires $O(n)$ space to store the memoization table (``dp` array), tabulation only necessitates $O(n)$ space for the dp table as well.* This is because memoization might incur additional space overhead due to the recursive call stack, especially in cases with deep recursion.
 
-The Output 12 demonstrates this performance difference. Both memoization and tabulation significantly outperform the brute force approach, which takes an exorbitant amount of time compared to the other two. While the difference between memoization and tabulation is less pronounced in this specific example, tabulation can sometimes be slightly faster due to the overhead associated with recursive function calls in memoization.
+The Output 12 demonstrates this performance difference. Both memoization and tabulation significantly outperform the Brute-Force approach, which takes an exorbitant amount of time compared to the other two. While the difference between memoization and tabulation is less pronounced in this specific example, tabulation can sometimes be slightly faster due to the overhead associated with recursive function calls in memoization.
 
 ```Shell
 -----------------------------------
 Calculating LIS in the array
-Average time for LIS (Brute Force): 694237 ns
+Average time for LIS (Brute-Force): 694237 ns
 Average time for LIS (Memoization): 2484 ns
 Average time for LIS (Tabulation): 2168 ns
 -----------------------------------
@@ -2468,7 +2463,7 @@ Average time for LIS (Tabulation): 2168 ns
 
 *Output 12: Execution time for LIS solution using Tabulation.*{: class="legend"}
 
-Ultimately, the choice between memoization and tabulation often comes down to personal preference and specific implementation details. Both offer substantial improvements over brute force and are viable options for solving the LIS problem efficiently.
+Ultimately, the choice between memoization and tabulation often comes down to personal preference and specific implementation details. Both offer substantial improvements over Brute-Force and are viable options for solving the LIS problem efficiently.
 
 ## Problem 4 Statement: Rod Cutting
 
@@ -2497,6 +2492,9 @@ Output:
 - $1 \leq n \leq 1000$
 - $1 \leq cuts[i] < n$
 - The array `cuts` can have at most $n-1$ elements.
+
+### Analysis
+
 
 ## Problem 5 Statement: Longest Common Subsequence
 
@@ -2742,6 +2740,6 @@ Output:
 
 ## Notes and References
 
-[:1]: This ideia come from [Introduction to Dynamic Programming](https://cp-algorithms.com/dynamic_programming/intro-to-dp.html)
+[:1] This ideia come from [Introduction to Dynamic Programming](https://cp-algorithms.com/dynamic_programming/intro-to-dp.html)
 
-[:2]: Most of this table came from [Introduction to Dynamic Programming](https://cp-algorithms.com/dynamic_programming/intro-to-dp.html)
+[:2] Most of this table came from [Introduction to Dynamic Programming](https://cp-algorithms.com/dynamic_programming/intro-to-dp.html)

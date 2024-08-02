@@ -1969,18 +1969,23 @@ Vamos voltar um pouco. O quantificador universal $\forall x P(x)$Afirma que a pr
 Para validar $\forall x P(x)$ escolhemos o pior caso possível para $x$, todos os valors que suspeitamos possa fazer $P(x)$ falso. Se conseguirmos provar que $P(x)$ é verdadeira nestes casos específicos, então $\forall x P(x)$ deve ser verdadeira. Novamente, vamos recorrer a exemplos na esperança de explicitar este conceito.
 
 1. **Exemplo 1**: todos os números reais são maiores que 0. (Universo do discurso: $\{x \in \mathbb{R}\}$)
+
 $$\forall x (Número(x) \rightarrow x > 0)$$
 
 2. **Exemplo 2**: todos os triângulos em um plano euclidiano têm a soma dos ângulos internos igual a 180 graus. (Universo do discurso: $x$ é um triângulo em um plano euclidiano)
+
 $$\forall x (Triângulo(x) \rightarrow \Sigma_{i=1}^3 ÂnguloInterno_i(x) = 180^\circ)$$
 
 3. **Exemplo 3**: todas as pessoas com mais de 18 anos podem tirar carteira de motorista." (Universo do discurso: $x$ é uma pessoa no Brasil)
+
 $$\forall x (Pessoa(x) \land Idade (x) > 18 \rightarrow PodeTirarCarteira(x))$$
 
 4. **Exemplo 4**: todo número par maior que 2 pode ser escrito como a soma de dois números primos. (Universo do discurso: $\{x \in \mathbb{Z}\}$
+
 $$\forall x\,(Par(x) \land x > 2 \rightarrow \exists a\exists b\, (Primo(a) \land Primo(b) \land x = a + b))$$
 
 5. **Exemplo 5**: para todo número natural, se ele é múltiplo de 4 e múltiplo de 6, então ele também é múltiplo de 12. (Universo do discurso: $\{x \in \mathbb{N}\}$)
+
 $$\forall x\,((\exists a\in\Bbb N\,(x = 4a) \land \exists b\in\Bbb N\,(x = 6b)) \rightarrow \exists c\in\Bbb N\,(x = 12c))$$
 
 O quantificador universal nos permite definir uma Fórmula Bem Formada representando todos os elementos de um conjunto, um universo do discurso, em relação a uma qualidade específica, um predicado. Esta é um artefato lógico interessante, mas não suficiente.
