@@ -71,6 +71,7 @@ A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive 
     - [Instanciação Existencial](#instanciação-existencial)
   - [Problemas Interessantes Resolvidos com Lógica Proposicional e Predicativa](#problemas-interessantes-resolvidos-com-lógica-proposicional-e-predicativa)
     - [Exemplos Extras de conversão de sentenças em predicados](#exemplos-extras-de-conversão-de-sentenças-em-predicados)
+    - [Exemplos Extras de Conversão de Predicados em Sentenças](#exemplos-extras-de-conversão-de-predicados-em-sentenças)
   - [Formas Normais](#formas-normais)
     - [Forma Normal Negativa (FNN)](#forma-normal-negativa-fnn)
       - [Estrutura da Forma Normal Negativa](#estrutura-da-forma-normal-negativa)
@@ -2686,6 +2687,68 @@ Esta condição afirma que o prêmio está exatamente atrás de uma das portas, 
 15. Todos os planetas orbitam uma estrela, e existe um asteroide que orbita o sol.
   
     $$(\forall x (Planeta(x) \rightarrow \exists y (Estrela(y) \land Orbita(x, y)))) \land (\exists z (Asteroide(z) \land Orbita(z, Sol)))$$
+
+### Exemplos Extras de Conversão de Predicados em Sentenças
+
+1. $\forall x (Gato(x) \rightarrow (Peludo(x) \land Dorminhoco(x)))$
+
+ $$\text{Todo gato é peludo e dorminhoco.}$$
+
+2. $\forall y (Árvore(y) \rightarrow (Verde(y) \land Grande(y)))$
+
+ $$\text{Toda árvore é verde e grande.}$$
+
+3. $(\forall x (Cidade(x) \rightarrow Populosa(x))) \rightarrow (\forall y (País(y) \rightarrow Populoso(y)))$
+
+  $$\text{Se toda cidade é populosa, então todo país é populoso.}$$
+
+4. $\forall x (Criança(x) \rightarrow (Inocente(x) \land Curiosa(x))) \land \neg \exists y (Adulto(y) \land (Inocente(y) \land Curioso(y)))$
+
+  $$\text{Toda criança é inocente e curiosa, e não existe um adulto que seja inocente e curioso.}$$
+
+5. $\forall x (Ave(x) \rightarrow Voa(x)) \land \forall y (Peixe(y) \rightarrow Nada(y))$
+
+  $$\text{Toda ave voa e todo peixe nada.}$$
+
+6. $\exists x (Pessoa(x) \land Feliz(x))$
+
+  $$\text{Existe uma pessoa que é feliz.}$$
+
+7. $\exists y (Livro(y) \land Interessante(y) \land \neg Longo(y))$
+
+  $$\text{Há um livro que é interessante e não é longo.}$$
+
+8. $\exists x (Estudante(x) \land (\forall y (Disciplina(y) \rightarrow Gosta(x, y))))$
+
+  $$\text{Existe um estudante que gosta de todas as disciplinas.}$$
+
+9. $\exists x (Carro(x) \land Rápido(x)) \land \exists y (Carro(y) \land \neg Rápido(y))$
+
+  $$\text{Existe um carro que é rápido, e existe um carro que não é rápido.}$$
+
+10. $\neg \exists x (Político(x) \land Honesto(x))$
+
+  $$\text{Não existe um político que seja honesto.}$$
+
+11. $$\forall x (Cachorro(x) \rightarrow (\exists y (Pessoa(y) \land Dono(y, x))))$$
+
+  $$\text{Todo cachorro tem uma pessoa que é seu dono.}
+
+12. $$\exists x (Música(x) \land (\forall y (Pessoa(y) \rightarrow Gosta(y, x))))$$
+
+  $$\text{Existe uma música que todas as pessoas gostam.}$$
+
+13. $$\forall x (Estudante(x) \rightarrow (\exists y (Professor(y) \land Ensina(y, x))))$$
+
+  $$\text{Para todo estudante, existe um professor que o ensina.}$$
+
+14. $$(\exists x (Médico(x) \land Competente(x))) \land (\forall y (Médico(y) \rightarrow Ocupado(y)))$$
+
+  $$\text{Existe um médico que é competente, e todo médico é ocupado.}$$
+
+15. $$(\forall x (Artista(x) \rightarrow Criativo(x))) \rightarrow (\exists y (Pintor(y) \land Criativo(y)))$$
+
+  $$\text{Se todo artista é criativo, então existe um pintor que é criativo.}$$  
 
 ## Formas Normais
 
