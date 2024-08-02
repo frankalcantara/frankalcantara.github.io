@@ -1975,7 +1975,7 @@ Para validar $\forall x P(x)$ escolhemos o pior caso possível para $x$, todos o
 
 $$\forall x (x \in \mathbb{R} \rightarrow x > 0)$$
 
-Observe que este predicado, apesar de estar corretamente representado, é $Falso$.
+>Observe que este predicado, apesar de estar corretamente representado, é $Falso$.
 
 **Exemplo 2**: todos os triângulos em um plano euclidiano têm a soma dos ângulos internos igual a 180 graus. (Universo do discurso: $x$ é um triângulo em um plano euclidiano)
 
@@ -2057,7 +2057,7 @@ $$
 \exists x (\text{PolígonoConvexo}(x) \land \sum_{i=1}^{n} \text{ÂnguloInterno}_i(x) \neq (n-2)\cdot 180^{\circ})
 $$
 
-Novamente, observe que este predicado é $falso$. Todos os polígonos convexos têm a soma dos ângulos internos igual a |$(n−2)cdot 180$, onde $𝑛$ é o número de lados do polígono.
+>Novamente, observe que este predicado é $falso$. Todos os polígonos convexos têm a soma dos ângulos internos igual a $(n−2)cdot 180$, onde $𝑛$ é o número de lados do polígono.
 
 ### Equivalências Interessantes
 
