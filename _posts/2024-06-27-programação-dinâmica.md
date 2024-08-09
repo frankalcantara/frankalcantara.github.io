@@ -49,17 +49,17 @@ It is very likely that you, kind reader, have been introduced to Dynamic Program
 
 My intention is to break down the Dynamic Programming process into clear steps, focusing on the solution algorithm, so that you can understand and implement these steps on your own whenever you face a problem in technical interviews, production environments, or programming competitions. Without any hesitation, I will try to present performance tips and tricks in C++. However, this should not be considered a limitation; we will prioritize understanding the algorithms before diving into the code, and you will be able to implement the code in your preferred programming language.
 
-I will be using functions for all the algorithms I study primarily because it will make it easier to measure and compare the execution time of each one, even though I am aware of the additional computational overhead associated with function calls. After studying the problems in C++ and identifying the solution with the lowest complexity, we will also explore this solution in C. Additionally, whenever possible, we will examine the most popular solution for the problem in question that I can find online.
+I will be using functions for all the algorithms I study primarily because it will make it easier to measure and compare the execution time of each one, even though I am aware of the additional computational overhead associated with function calls. After studying the problems in C++ and identifying the solution with the lowest complexity, eventually, we will also explore the best solution in C. Additionally, whenever possible, we will examine the most popular solution for the problem in question that I can find online.
 
 ## There was a hint of recursion sneaking in
 
-Some say that Dynamic Programming is a technique to make recursive code more efficient. There is a connection worth examining: *All Dynamic Programming algorithms are recursive, but not all recursive algorithms are Dynamic Programming*.
+Some say that Dynamic Programming is a technique to make recursive code more efficient.
 
-Recursion is a powerful problem-solving technique. Recursive code can be mathematically proven correct relatively easily. This clarity alone makes a compelling case for using recursion. So, let's begin with that.
+Recursion is a powerful problem-solving technique. Recursive code can be mathematically proven correct relatively easily. This clarity alone makes a compelling case for using recursion. So, let's begin with that. At its core, recursive code calls itself to solve smaller instances of the same problem. This approach often leads to elegant and intuitive solutions, especially for problems with repetitive structures.
 
 The proof of the correctness of a recursive algorithm generally involves only two steps: Proving that the base case of the recursion is correct and proving that the recursive step is correct. In the domain of mathematical induction proof, we can refer to these components as the *base case* and the *inductive step*, respectively. In this case:
 
-- To prove the **base case**, we check the simplest # case of the recursion, usually the base case or cases, to ensure it is correct. These are the cases that do not depend on recursive calls.
+- To prove the **base case**, we check the simplest case of the recursion, usually the base case or cases, to ensure it is correct. These are the cases that do not depend on recursive calls.
 
 - To prove the **inductive step**, we verify that if the recursive function is correct for all smaller cases or subproblems, then it is also correct for the general case. In other words, we assume that the function is correct for smaller inputs, or for a smaller set of inputs, the induction hypothesis, and based on this, we prove, or not, that the recursive function is correct.
 
@@ -91,13 +91,13 @@ When the function receives a value $n$:
 - **Base Case**: It checks if $n$ is 0 or 1. If so, it returns $n$.
 - **Recursive Step**: If $n$ is greater than 1, the function calls itself twice: Once with $n - 1$ and once with $n - 2$. The sum of these two results is returned.
 
-To illustrate, let's calculate the tenth Fibonacci number.
+To illustrate, let's calculate the 5th Fibonacci number.
 
 ### Example 1: Recursion
 
-1. `fibonacci(5)` calls `fibonacci(4)` and `fibonacci}(3)`
-2. `fibonacci(4)` calls `fibonacci(3)` and `fibonacci}(2)`
-3. `fibonacci(3)` calls `fibonacci(2)` and `fibonacci}(1)`
+1. `fibonacci(5)` calls `fibonacci(4)` and `fibonacci(3)`
+2. `fibonacci(4)` calls `fibonacci(3)` and `fibonacci(2)`
+3. `fibonacci(3)` calls `fibonacci(2)` and `fibonacci(1)`
 4. `fibonacci(2)` calls `fibonacci(1)` and `fibonacci(0)`
 5. `fibonacci(1)` returns 1
 6. `fibonacci(0)` returns 0
@@ -122,7 +122,7 @@ def fibonacci(n):
 
 *Code Fragment 1 - Recursive Fibonacci Function for the nth Term*{: class="legend"}
 
-In Example 1, the `fibonacci` function calls itself to calculate the preceding terms of the Fibonacci Sequence. Note that for each desired value, we have to go through all the others. This is an example of correct and straightforward recursion and, in this specific case, very efficient. We will look at this efficiency issue more carefully later.
+In Code Fragment 1, the `fibonacci` function calls itself to calculate the preceding terms of the Fibonacci Sequence. Note that for each desired value, we have to go through all the others. This is an example of correct and straightforward recursion and, in this specific case, very efficient. This implementation is clear and mirrors the mathematical definition of the Fibonacci sequence. However, it has some efficiency issues for larger values of $n$. Let's take a look at this efficiency issue more carefully later.
 
 #### Calculate the Number of Recursive Calls
 
@@ -145,7 +145,7 @@ Counting all the calls, we have:
 - `fibonacci(1)`: 5 calls
 - `fibonacci(0)`: 3 calls
 
-Total: 15 calls. Therefore, the `fibonacci(n)` function is called 15 times to calculate `fibonacci(5)`.
+Total: $15$ calls. Therefore, the `fibonacci(n)` function is called $15$ times to calculate `fibonacci(5)`.
 
 To understand the computational cost of the recursive Fibonacci function, let's analyze the number of function calls made for a given input $n$. We can express this using the following recurrence relation:
 
@@ -154,8 +154,8 @@ $$T(n) = T(n-1) + T(n-2) + 1$$
 where:
 
 - $T(n)$ represents the total number of calls to the `fibonacci(n)` function.
-- $T(n-1)$ represents the number of calls made when calculating fibonacci(n-1).
-- $T(n-2)$ represents the number of calls made when calculating fibonacci(n-2).
+- $T(n-1)$ represents the number of calls made when calculating `fibonacci(n-1)`.
+- $T(n-2)$ represents the number of calls made when calculating `fibonacci(n-2)`.
 - The $+ 1$ term accounts for the current call to the `fibonacci(n)` function itself.
 
 The base cases for this recurrence relation are:
@@ -189,7 +189,7 @@ Each value of $T(n)$ represents the number of recursive calls to compute `fibona
 
 The formula $T(n) = T(n-1) + T(n-2) + 1$ can be used to build a recursion tree, as we can see in Figure 1, and sum the total number of recursive calls. However, for large values of $n$, this can become inefficient. A more efficient approach is to use Dynamic Programming to calculate and store the number of recursive calls, avoiding duplicate calls.
 
-![]({{ site.baseurl }}/assets/images/recursion_tree.jpg)
+![]({{ site.baseurl }}/assets/images/recursion_tree.jpg){: class="lazyimg"}
 *Figure 1 - Recursive Tree for Fibonacci 5*{: class="legend"}
 
 #### Space and Time Efficiency
@@ -208,11 +208,11 @@ Each level of the tree results in a doubling of calls. If we keep doubling for e
 
 The space complexity depends on how deep the recursion goes. Every time the function calls itself, it adds a new frame to the call stack.
 
-- The maximum depth of recursion is $n$ levels (from `fibonacci(n)` down to `fibonacci(0)` or `fibonacci(1)`).
+- The maximum depth of recursion is $n$ levels (from `fibonacci(n)` down to `fibonacci(0)` or `fibonacci(1)`.
 
-Therefore, the space complexity is $O(n)$, because the stack can grow linearly with $n$.
+Therefore, the space complexity is $O(n)$ where $n$ is the maximum deep of the call stack, because the stack can grow linearly with $n$.
 
-In short, *the recursive `fibonacci` function is simple but inefficient for large $n$ due to its exponential time complexity*. This conclusion justifies the need for Dynamic Programming.
+In short, *the recursive `fibonacci` function is simple but inefficient for large $n$ due to its exponential time complexity*. This is where Dynamic Programming comes in. Dynamic Programming can optimize our recursive solution by storing the results of subproblems, avoiding redundant calculations.
 
 ## Returning to Dynamic Programming
 
@@ -221,7 +221,7 @@ If we look at Dynamic Programming, we will see an optimization technique that is
 - **Memoization (Top-Down)**: *This technique is recursive in nature*. It involves storing the results of expensive function calls and returning the cached result when the same inputs occur again. This approach can be seen as an optimization of the top-down recursive process.
 - **Tabulation (Bottom-Up**): *Tabulation takes an iterative approach, solving smaller subproblems first and storing their solutions in a table (often an array or matrix)*. It then uses these stored values to calculate the solutions to larger subproblems, gradually building up to the final solution. The iterative nature of tabulation typically involves using loops to fill the table in a systematic manner.
 
-At this point, we can take a look at two examples using Python as pseudocode, since most of my students feel comfortable with Python. First, an example of Dynamic Programming with memoization:
+At this point, we can take a look at two examples using Python as pseudocode, since many of my students feel comfortable with Python. First, an example of Dynamic Programming with memoization.
 
 ### Example 2: Memoization
 
@@ -233,8 +233,9 @@ Let's revisit the Fibonacci sequence problem: finding the nth number in the Fibo
 From Flowchart 2, we can derive the following Python code:
 
 ```python
-# Criação do dicionário memo
-memo = {}
+# dictionary creation
+memo = {} #just for style
+# function
 def fibonacci_memo(n, memo):
     if n in memo:
         return memo[n]
@@ -253,7 +254,7 @@ The `fibonacci_memo()` function is then defined to calculate the nth Fibonacci n
 The `fibonacci_memo()` function begins by:
 
 ```python
-memo = {}
+memo = {} #just for style
 def fibonacci_memo(n, memo):
 ```
 
@@ -313,35 +314,44 @@ To understand the efficiency of our memoized Fibonacci function, we need to calc
 - **Memoization Storage**: Each calculated value is stored, hence any future calls with the same $n$ don't create new branches.
 - **Counting Unique Calls**: Because of memoization, we only need to calculate each Fibonacci number once. This means the total number of recursive calls is roughly equal to the number of unique Fibonacci numbers up to $n$.
 
-In conclusion, while a naive Fibonacci implementation would have an exponential number of calls, memoization brings this down significantly. We still have roughly $2^n$ calls to calculate Fibonacci numbers from $0$ to $n$, this time a linear growth, but the key is that each unique number is only calculated once, making the process efficient.
+In conclusion, while a naive Fibonacci implementation would have an exponential number of calls, memoization brings this down significantly. We have approximately $n+1$ calls to calculate Fibonacci numbers from $0$ to $n$, resulting in linear growth. This is a significant improvement over the exponential growth (roughly $2^n$ calls) in the naive recursive approach. The key to this efficiency is that each unique Fibonacci number is calculated only once and then stored for future use, making the process much more efficient.
 
-To calculate the number of times the function will be called for any value $n$, we can use the following formula based on the analysis of the memoized recursion tree:
+To calculate the total number of recursive calls made when computing the nth Fibonacci number using our memoized function, we can use the following recurrence relation:
 
-$$ T(n) = T(n-1) + T(n-2) + 1 $$
+$$T(n) = \begin{cases}
+1 & \text{if } n \text{ is not in memo} \
+0 & \text{if } n \text{ is in memo}
+\end{cases}$$
 
-Where $T(n)$ is the total number of calls to calculate `fibonacci_memo(n)`.
+Where $T(n)$ represents the number of new recursive calls needed to compute the nth Fibonacci number using our memoized function.
 
-To illustrate the formula $T(n) = T(n-1) + T(n-2) + 1$ with $n = 10$, we can calculate the number of recursive calls $T(10)$. Let's start with the base values $T(0)$ and $T(1)$, and then calculate the subsequent values up to $T(10)$.
+This formula accounts for: a single new call if the value isn't memoized yet, $(1)$, and, no new calls if the value is already in the memo, $(0)$.
 
-Assuming that $T(0) = 1$ and $T(1) = 1$:
+It's important to note that this formula gives us the number of new calls for each Fibonacci number, not the cumulative number of calls. To illustrate how this works for $n = 10$, let's calculate the number of recursive calls $T(10)$. We'll start with the base values and then calculate the subsequent values up to $T(10)$.
+
+Assuming that no values are initially memoized:
 
 $$
 \begin{aligned}
-T(2) &= T(1) + T(0) + 1 = 1 + 1 + 1 = 3 \\
-T(3) &= T(2) + T(1) + 1 = 3 + 1 + 1 = 5 \\
-T(4) &= T(3) + T(2) + 1 = 5 + 3 + 1 = 9 \\
-T(5) &= T(4) + T(3) + 1 = 9 + 5 + 1 = 15 \\
-T(6) &= T(5) + T(4) + 1 = 15 + 9 + 1 = 25 \\
-T(7) &= T(6) + T(5) + 1 = 25 + 15 + 1 = 41 \\
-T(8) &= T(7) + T(6) + 1 = 41 + 25 + 1 = 67 \\
-T(9) &= T(8) + T(7) + 1 = 67 + 41 + 1 = 109 \\
-T(10) &= T(9) + T(8) + 1 = 109 + 67 + 1 = 177 \\
+T(0) &= 1 \text{ (not in memo)} \
+T(1) &= 1 \text{ (not in memo)} \
+T(2) &= 1 \text{ (not in memo)} \
+T(3) &= 1 \text{ (not in memo)} \
+T(4) &= 1 \text{ (not in memo)} \
+T(5) &= 1 \text{ (not in memo)} \
+T(6) &= 1 \text{ (not in memo)} \
+T(7) &= 1 \text{ (not in memo)} \
+T(8) &= 1 \text{ (not in memo)} \
+T(9) &= 1 \text{ (not in memo)} \
+T(10) &= 1 \text{ (not in memo)} \
 \end{aligned}
 $$
 
-Therefore, $T(10) = 177$.
+Therefore, the total number of new recursive calls to compute fibonacci_memo(10) is:
 
-Each value of $T(n)$ represents the number of recursive calls to compute `fibonacci_memo(n)` using the formula $T(n) = T(n-1) + T(n-2) + 1$. And we have only 10 recursive calls.
+$$\sum_{i=0}^{10} T(i) = 11$$
+
+Each value of $T(n)$ represents a new recursive call to compute `fibonacci_memo(n)`. And we have only $11$ new calls in total, demonstrating the efficiency of memoization compared to the non-memoized version which would have $177$ calls.
 
 #### Time and Space Complexity
 
@@ -375,7 +385,7 @@ def fibonacci_tabulation(n):
 
 *Code Fragment 3 - Tabulation Function for the nth Term*{: class="legend"}
 
-Unlike the previous recursive function, this function uses an iterative approach known as tabulation, a bottom-up Dynamic Programming technique. In the Example 3, the `fibonacci_tabulation()` function uses a list, `dp`, to store the results of all subproblems, building the solution from the bottom up. It is important to note that data is being stored in Example 3.
+Unlike the previous recursive function, this function uses an iterative approach known as tabulation, a bottom-up Dynamic Programming technique. In this implementation, the `fibonacci_tabulation()` function uses a list, `dp`, to store the results of all subproblems, building the solution from the bottom up. It is important to note that data is being stored in this tabulation approach.
 
 Indeed! But look closely. The `fibonacci_tabulation()` function is an example of tabulation, not memoization, due to the distinct manner in which subproblems are solved and their solutions stored.
 
@@ -433,15 +443,25 @@ Returns `dp[10]`, which is $55$. And this is the moment when we stop to celebrat
 
 #### Time and Space Complexity
 
-The time complexity analysis of the function `fibonacci_tabulation()` begins with the initial check to see if `n` is less than or equal to $1$, which is a constant time operation, $O(1)$. If `n` is greater than $1$, the function initializes a list `dp` with `n + 1` elements, which takes $O(n)$ time. After this, the function sets `dp[1]` to $1$, another constant time operation, $O(1)$.However, the main iterative computation part is missing from this snippet.
+The time complexity analysis of the function `fibonacci_tabulation()` begins with the initial check to see if `n` is less than or equal to $1$, which is a constant time operation, $O(1)$. If `n` is greater than $1$, the function initializes a list `dp` with `n + 1` elements, which takes $O(n)$ time. After this, the function sets `dp[1]` to $1$, another constant time operation, $O(1)$.
 
 Assuming a complete implementation that iterates from $2$ to `n` to fill in the `dp` array, the total time complexity would be $O(n)$, as each Fibonacci number up to `n` is computed and stored exactly once.
 
-The space complexity is dominated by the list `dp` with `n + 1` elements, which requires $O(n)$ space. Therefore, with the complete implementation in mind, the function achieves an efficient computation with both time and space complexities of $O(n)$. While the complexity analysis covers the basic aspects of the function's efficiency, there are additional considerations and potential optimizations that could further enhance its performance, inviting deeper exploration.
+The space complexity is dominated by the list `dp` with `n + 1` elements, which requires $O(n)$ space. Therefore, with the complete implementation in mind, the function achieves an efficient computation with both time and space complexities of $O(n)$.
+
+The time complexity of the `fibonacci_tabulation()` function is $O(n)$, as each Fibonacci number up to $n$ is computed and stored exactly once. The space complexity is also $O(n)$ due to the `dp` list with n + 1 elements. While this complexity analysis covers the basic aspects of the function's efficiency, there are additional considerations and potential optimizations that could further enhance its performance:
+
+- **Space Optimization**: The current implementation uses $O(n)$ space, but we only need the last two Fibonacci numbers to calculate the next one. We could optimize the space usage to $O(1)$ by using only two variables instead of an array.
+- **Modular Arithmetic**: For very large $n$, the Fibonacci numbers can grow extremely large. In some applications, we might only need the result modulo some number (e.g., 10^9 + 7). Implementing modular arithmetic can prevent integer overflow and improve performance.
+- **Matrix Exponentiation**: For extremely large $n$, we can use matrix exponentiation to calculate Fibonacci numbers in $O(log n)$ time, though this involves a more complex implementation.
+- **Parallelization**: For certain ranges of Fibonacci numbers, we could potentially use parallel processing to speed up computations, especially on multi-core systems.
+- **Memoization trade-offs**: While our tabulation approach is bottom-up, in some scenarios, a top-down memoized approach might be more suitable, especially if we don't always need all Fibonacci numbers up to $n$.
+
+These considerations invite deeper exploration into algorithm design, mathematical properties of Fibonacci numbers, and advanced programming techniques. Each optimization presents its own trade-offs in terms of implementation complexity, memory usage, and computational efficiency.
 
 ### There is more between heaven and earth, Mr. Shakespeare
 
-Memoization and tabulation are the most common techniques in dynamic programming; however, they are not the only techniques.
+Memoization and tabulation are the most common techniques in Dynamic Programming; however, they are not the only techniques.
 
 - **Dynamic Programming with State Compression**: The goal is to reduce the space needed to store the results of the subproblems by keeping only the states relevant to calculating the final solution.
 - **Dynamic Programming with Sliding Window**: Maintains only the results of the most recent subproblems in a fixed-size window, useful when the solution depends only on a limited number of previous subproblems.
@@ -451,11 +471,19 @@ Let's see how far we get in this text. As I write this, I still have no idea.
 
 ## Now I realize: C++, where is C++?
 
-Python, which I used as pseudocode, is a versatile and simple language. BBesides that, most of my students are accustomed to Python. However, it is still not the most suitable language for high-performance use or programming competitions. Therefore, we will move to C++ 20 and, eventually, use data structures compatible with C 17, in the C++ 20 environment. Speaking of the environment, from this point on, I will be using Visual Studio Community edition to run and evaluate all the code. Nevertheless, we cannot throw away all the work we have done so far. To maintain consistency in our text, I will convert the same functions we wrote in Python to C++ and assess the results.
+Throughout our exploration of Dynamic Programming concepts, we've been using Python as a form of pseudocode. Its versatility and simplicity have served us well, especially considering that many of my students are already familiar with it. Python's readability has made it an excellent choice for introducing and illustrating algorithmic concepts. However, as we progress into more advanced territory, it's time to acknowledge that Python, despite its strengths, isn't the most suitable language for high-performance applications or programming competitions.
+
+With this in mind, we're going to transition to using **C++ 20** as our primary language moving forward. C++ offers superior performance, which is crucial when dealing with computationally intensive tasks often found in competitive programming scenarios. It also provides more direct control over memory management, a feature that can be essential when optimizing algorithms for speed and efficiency. Additionally, we'll occasionally use data structures compatible with **C 17** within our **C++ 20** environment, ensuring a balance between modern features and broader compatibility.
+
+For our development environment, we'll be using Visual Studio Community Edition. This robust IDE will allow us to write, compile, and evaluate our C++ code effectively. It offers powerful debugging tools and performance profiling features, which will become increasingly valuable as we delve into optimizing our algorithms.
+
+Despite this shift, we won't be discarding the work we've done so far. To maintain consistency and provide a bridge between our previous discussions and this new approach, I'll be converting the functions we originally wrote in Python to C++.
+
+As we make this transition, we'll gradually introduce C++ specific optimizations and techniques, broadening your understanding of Dynamic Programming implementation across different language paradigms. I hope this approach will equip you with both a solid conceptual foundation and the practical skills needed for high-performance coding.
 
 ### Example 4: Fibonacci in C++ using `std::vectors`
 
-Let's begin with a straightforward, intuitive implementation in C++20, following the flow and data structures of the Python functions provided earlier.
+Let's begin with a straightforward, naive implementation in **C++20**, following the flow and data structures of the Python functions provided earlier.
 
 ```Cpp
 #include <iostream>
@@ -1001,7 +1029,7 @@ Fibonacci(30) = 832040
 
 And there it is, we have found a code fast enough for calculating the nth Fibonacci number in an execution time suitable to my ambitions. The only problem is that we used C-Style arrays in a C++ solution. In other words, we gave up all C++ data structures to make the program as fast as possible. We traded a diverse and efficient language for a simple and straightforward one. This choice will be up to the kind reader. You will have to decide if you know enough C to solve any problem or if you need to use predefined data structures to solve your problems. *Unless there is someone in the competition using C. In that case, it's C and that's it*.
 
-Before we start solving problems with dynamic programming, let's summarize the execution time reports in a table for easy visualization and to pique the curiosity of the kind reader.
+Before we start solving problems with Dynamic Programming, let's summarize the execution time reports in a table for easy visualization and to pique the curiosity of the kind reader.
 
 ## Execution Time Comparison Table
 
@@ -1023,7 +1051,7 @@ With sufficient practice, Dynamic Programming concepts will become intuitive. I 
 
 ## Your First Dynamic Programming Problem
 
-Dynamic programming concepts became popular in the early 21st century thanks to job interviews for large companies. Until then, only high-performance and competitive programmers were concerned with these techniques. Today, among others, we have [LeetCode](https://leetcode.com/) with hundreds, perhaps thousands of problems to solve. I strongly recommend trying to solve some of them. Here, I will only solve problems whose solutions are already available on other sites. You might even come across some from LeetCode problem, but that will be by accident. The only utility of LeetCode, for me, for you, and for them, is that the problems are not easy to find or solve. Let's start with a problem that is now a classic on the internet and, according to legend, was part of a Google interview.
+Dynamic Programming concepts became popular in the early 21st century thanks to job interviews for large companies. Until then, only high-performance and competitive programmers were concerned with these techniques. Today, among others, we have [LeetCode](https://leetcode.com/) with hundreds, perhaps thousands of problems to solve. I strongly recommend trying to solve some of them. Here, I will only solve problems whose solutions are already available on other sites. You might even come across some from LeetCode problem, but that will be by accident. The only utility of LeetCode, for me, for you, and for them, is that the problems are not easy to find or solve. Let's start with a problem that is now a classic on the internet and, according to legend, was part of a Google interview.
 
 ### The "Two-Sum" problem
 
@@ -1262,11 +1290,11 @@ The Brute-Force solution to the two-sum problem involves checking all possible p
 
 On the other hand, the recursive solution systematically explores all possible pairs by moving the `start` and `end` indices. Although it achieves the same goal, its time complexity is much worse, at $O(2^n)$. This exponential complexity arises because each recursive call generates two more calls, leading to an exponential growth in the number of calls. The space complexity of the recursive solution is $O(n)$, as it requires a recursion stack that can grow up to the depth of the array size.
 
-In summary, while both approaches solve the problem, the Brute-Force solution is significantly more efficient in terms of time complexity ($O(n^2)$ vs. $O(2^n)$), and it also has a lower space complexity ($O(1)$ vs. $O(n)$). However, we are not interested in either of these solutions. The Brute-Force solution is naive and offers no advantage, and the recursive solution is impractical. Thus, we are left with the dynamic programming solutions.
+In summary, while both approaches solve the problem, the Brute-Force solution is significantly more efficient in terms of time complexity ($O(n^2)$ vs. $O(2^n)$), and it also has a lower space complexity ($O(1)$ vs. $O(n)$). However, we are not interested in either of these solutions. The Brute-Force solution is naive and offers no advantage, and the recursive solution is impractical. Thus, we are left with the Dynamic Programming solutions.
 
 #### Dynamic Programming: memoization
 
->Regardless of the efficiency of the recursive code, the first law of dynamic programming says: always start with recursion. Thus, the recursive function will be useful for defining the structure of the code using memoization and tabulation.
+>Regardless of the efficiency of the recursive code, the first law of Dynamic Programming says: always start with recursion. Thus, the recursive function will be useful for defining the structure of the code using memoization and tabulation.
 
 Memoization is a technique that involves storing the results of expensive function calls and reusing the cached result when the same inputs occur again. By storing intermediate results, we can avoid redundant calculations, thus optimizing the solution.
 
@@ -1276,7 +1304,7 @@ We'll modify the recursive function to check the memoization map before performi
 
 ##### Memoized Recursive Solution in C++20
 
-The only significant modification in Code 5 is the conversion of the recursive function to dynamic programming with memoization. Code 6 presents this updated function.
+The only significant modification in Code 5 is the conversion of the recursive function to Dynamic Programming with memoization. Code 6 presents this updated function.
 
 ```cpp
 // Recursive function with memoization to find a pair of numbers that add up to the target sum
@@ -1366,17 +1394,17 @@ At this point we can create a summary table.
 
 *Tabela 3 - Brute-Force, Recursive and Memoized Solutions Complexity Comparison*{: class="legend"}
 
-The situation may seem grim, with the brute-force approach holding the lead as our best solution so far. But don't lose hope just yet! We have a secret weapon up our sleeves: dynamic programming with tabulation.
+The situation may seem grim, with the brute-force approach holding the lead as our best solution so far. But don't lose hope just yet! We have a secret weapon up our sleeves: Dynamic Programming with tabulation.
 
 #### Dynamic Programming: tabulation
 
 Think of it like this: we've been wandering through a maze, trying every path to find the treasure (our solution). The brute-force approach means we're checking every single path, even ones we've already explored. It's exhausting and time-consuming.
 
-But dynamic programming with tabulation is like leaving breadcrumbs along the way.  As we explore the maze, we mark the paths we've already taken.  This way, we avoid wasting time revisiting those paths and focus on new possibilities. It's a smarter way to navigate the maze and find the treasure faster.
+But Dynamic Programming with tabulation is like leaving breadcrumbs along the way.  As we explore the maze, we mark the paths we've already taken.  This way, we avoid wasting time revisiting those paths and focus on new possibilities. It's a smarter way to navigate the maze and find the treasure faster.
 
 In the context of our problem, tabulation means creating a table to store solutions to smaller subproblems.  As we solve larger problems, we can refer to this table to avoid redundant calculations.  It's a clever way to optimize our solution and potentially find the treasure much faster.
 
-So, even though the brute-force approach may seem like the only option right now, don't give up! Attention! Spoiler Alert! With dynamic programming and tabulation, we can explore the maze more efficiently and hopefully find the treasure we've been seeking.
+So, even though the brute-force approach may seem like the only option right now, don't give up! Attention! Spoiler Alert! With Dynamic Programming and tabulation, we can explore the maze more efficiently and hopefully find the treasure we've been seeking.
 
 ##### C++ code for Two-Sum problem using tabulation
 
@@ -1450,13 +1478,13 @@ Comparing this with the other solutions, the Brute-Force solution has a time com
 
 *Tabela 4 - Brute-Force, Recursive, Memoized and Tabulated Solutions Complexity Comparison*{: class="legend"}
 
-And so, it seems, we have a champion: dynamic programming with tabulation! Anyone armed with this technique has a significant advantage when tackling this problem, especially in job interviews where optimization and clever problem-solving are highly valued.
+And so, it seems, we have a champion: Dynamic Programming with tabulation! Anyone armed with this technique has a significant advantage when tackling this problem, especially in job interviews where optimization and clever problem-solving are highly valued.
 
 However, let's be realistic: in the fast-paced world of programming competitions, where every millisecond counts, tabulation might not always be the winner.  It can require more memory and setup time compared to other approaches, potentially slowing you down in a race against the clock.
 
 So, while tabulation shines in showcasing your understanding of optimization and problem-solving, it's important to be strategic in a competition setting. Sometimes, a simpler, faster solution might be the key to victory, even if it's less elegant.
 
-The bottom line?  Mastering dynamic programming and tabulation is a valuable asset, but knowing when and where to use it is the mark of a true programming champion. Now, all that's left is to analyze the execution times.
+The bottom line?  Mastering Dynamic Programming and tabulation is a valuable asset, but knowing when and where to use it is the mark of a true programming champion. Now, all that's left is to analyze the execution times.
 
 ##### Execution Time Analysis
 
@@ -1652,7 +1680,7 @@ In conclusion, the observed differences in execution times can be attributed to 
 
 ### We will always have C
 
-As we delve into dynamic programming with C++, our focus is on techniques that shine in interviews and coding competitions. Since competitive coding often favors slick C-style code, we'll zero in on a tabulation solution for this problem. Tabulation, as we know, is usually the most efficient approach.  To show you what I mean, check out the `int* ValuesTabulationCStyle(const int* sequence, int length, int targetSum)` function in Code Fragment 12.
+As we delve into Dynamic Programming with C++, our focus is on techniques that shine in interviews and coding competitions. Since competitive coding often favors slick C-style code, we'll zero in on a tabulation solution for this problem. Tabulation, as we know, is usually the most efficient approach.  To show you what I mean, check out the `int* ValuesTabulationCStyle(const int* sequence, int length, int targetSum)` function in Code Fragment 12.
 
 ```Cpp
 int* ValuesTabulationCStyle(const int* sequence, int length, int targetSum) {
@@ -1846,7 +1874,7 @@ Let's break down the results for calculating the Two-Sum problem, keeping in min
 - **Brute-Force**: Blazing fast at 157 ns on average. This is our baseline, but remember, Brute-Force doesn't always scale well for larger problems.
 - **Recursive**: A bit slower at 652 ns. Recursion can be elegant, but it can also lead to overhead.
 - **Memoized**: This one's the outlier at 39514 ns. Memoization can be a powerful optimization, but it looks like the overhead is outweighing the benefits in this case.
-- **Tabulation**: A respectable 5884 ns. Tabulation is a solid dynamic programming technique, and it shows here.
+- **Tabulation**: A respectable 5884 ns. Tabulation is a solid Dynamic Programming technique, and it shows here.
 - **Tabulation C-Style**: A close winner at 149 ns! This stripped-down, C-style implementation of tabulation is just a hair behind Brute-Force in terms of speed.
 
 The C++ and C versions of our tabulation function are practically neck and neck in terms of speed for a few key reasons:
@@ -1878,7 +1906,7 @@ Try to solve these variations. Take as much time as you need; I will wait.
 
 ## The Dynamic Programming Classic Problems
 
-From now on, we will explore 10 classic dynamic programming problems. For each one, we will delve into Brute-Force techniques, recursion, memoization, tabulation, and finally the most popular solution for each, even if it is not among the techniques we have chosen. The problems we will address are listed in the table below[^2].
+From now on, we will explore 10 classic Dynamic Programming problems. For each one, we will delve into Brute-Force techniques, recursion, memoization, tabulation, and finally the most popular solution for each, even if it is not among the techniques we have chosen. The problems we will address are listed in the table below[^2].
 
 | Name                                        | Description/Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 |---------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1929,7 +1957,7 @@ Output:
 
 Let's delve deeper into the "unique paths" problem.  Picture a matrix as a grid, where you start at the top-left corner $(0, 0)$ and your goal is to reach the bottom-right corner $(m-1, n-1)$.  The twist?  You're only allowed to move down or right.  The challenge is to figure out how many distinct paths you can take to get from start to finish.
 
-This problem so intriguing because it blends the elegance of combinatorics (the study of counting) with the power of dynamic programming (a clever problem-solving technique).  The solution involves combinations, a fundamental concept in combinatorics. Moreover, it's a classic example of how dynamic programming can streamline a seemingly complex problem.
+This problem so intriguing because it blends the elegance of combinatorics (the study of counting) with the power of Dynamic Programming (a clever problem-solving technique).  The solution involves combinations, a fundamental concept in combinatorics. Moreover, it's a classic example of how Dynamic Programming can streamline a seemingly complex problem.
 
 The applications of this type of problem extend beyond theoretical interest. They can be found in practical scenarios like robot navigation in a grid environment, calculating probabilities in games with grid-like movements, and analyzing maze-like structures. Understanding this problem provides valuable insights into a range of fields, from mathematics to robotics and beyond.
 
@@ -1943,7 +1971,7 @@ For our 3x3 matrix example $(m = 3, n = 3)$, the calculation is:
 
 $$C(3 + 3 - 2, 3 - 1) = \frac{4!}{(2! * 2!)} = 6$$
 
-This tells us there are $6$ distinct paths to reach the bottom-right corner. Let's also visualize this using dynamic programming:
+This tells us there are $6$ distinct paths to reach the bottom-right corner. Let's also visualize this using Dynamic Programming:
 
 **Filling the Matrix with Dynamic Programming:**
 
@@ -1973,7 +2001,7 @@ This tells us there are $6$ distinct paths to reach the bottom-right corner. Let
 
 The bottom-right corner, $dp[2][2]$, holds our answer: $6$ unique paths.
 
-Bear with me, dear reader, as I temporarily diverge from our exploration of dynamic programming. Before delving deeper, it's essential to examine how we might solve this problem using a Brute-Force approach.
+Bear with me, dear reader, as I temporarily diverge from our exploration of Dynamic Programming. Before delving deeper, it's essential to examine how we might solve this problem using a Brute-Force approach.
 
 ### Using Brute-Force
 
@@ -2075,7 +2103,7 @@ The space complexity is also significant because the algorithm uses a stack to s
 
 In summary, the Brute-Force solution has an exponential time complexity $O(2^{m+n})$ and a linear space complexity $O(m+n)$, making it suitable only for small matrices where the number of possible paths is manageable.
 
-My gut feeling tells me this complexity is very, very bad. We'll definitely find better complexities as we explore dynamic programming solutions. Either way, we need to measure the runtime. Running the function `int countPaths(int m, int n)` within the same structure we created earlier to measure execution time, we will have:
+My gut feeling tells me this complexity is very, very bad. We'll definitely find better complexities as we explore Dynamic Programming solutions. Either way, we need to measure the runtime. Running the function `int countPaths(int m, int n)` within the same structure we created earlier to measure execution time, we will have:
 
 ```Shell
 -----------------------------------
@@ -2093,7 +2121,7 @@ Finally, I won't be presenting the code done with pure recursion. As we've seen,
 Code Fragment 17 shows the functions I created to apply memoization. There are two functions: the `int countPathsMemoizationWrapper(int m, int n)` function used to initialize the dp data structure and call the recursive function `int countPathsMemoization(int m, int n, std::vector<std::vector<int>>& dp)`. I used `std::vector` already anticipating that we won't know the size of the matrix beforehand.
 
 ```Cpp
-// Function to count paths using dynamic programming with memoization
+// Function to count paths using Dynamic Programming with memoization
 int countPathsMemoization(int m, int n, std::vector<std::vector<int>>& dp) {
     if (m == 1 || n == 1) return 1;  // Base case
     if (dp[m - 1][n - 1] != -1) return dp[m - 1][n - 1];  // Return memoized result
@@ -2110,7 +2138,7 @@ int countPathsMemoizationWrapper(int m, int n) {
 
 *Code Fragment 17 - Count all paths function using Memoization.*{: class="legend"}
 
-The function `int countPathsMemoization(int m, int n, std::vector<std::vector<int>>& dp)` counts all possible paths in an $m \times n$ matrix using dynamic programming with memoization. The `dp` matrix serves as a cache, storing and reusing intermediate results to avoid redundant calculations.
+The function `int countPathsMemoization(int m, int n, std::vector<std::vector<int>>& dp)` counts all possible paths in an $m \times n$ matrix using Dynamic Programming with memoization. The `dp` matrix serves as a cache, storing and reusing intermediate results to avoid redundant calculations.
 
 Upon invocation, the function first checks if the current position is in the first row (`m == 1`) or first column (`n == 1`). If so, it returns $1$, as there is only one way to reach such cells.  Next, it checks the `dp[m-1][n-1]` cell. If the value is not $-1$ (the initial value indicating "not yet calculated"), it signifies that the result for this position has already been memoized and is immediately returned.
 
@@ -2130,7 +2158,7 @@ The `dp` matrix is utilized to store intermediate results, preventing redundant 
 
 Similarly, *the space complexity is $O(m \times n)$ due to the `dp` matrix*, which stores the number of paths for each cell. The matrix necessitates $m \times n$ space to accommodate these intermediate results.
 
-In essence, the dynamic programming approach with memoization transforms the exponential time complexity of the naive Brute-Force solution into a linear complexity with respect to the matrix size. Consequently, this solution proves far more efficient and viable for larger matrices.
+In essence, the Dynamic Programming approach with memoization transforms the exponential time complexity of the naive Brute-Force solution into a linear complexity with respect to the matrix size. Consequently, this solution proves far more efficient and viable for larger matrices.
 
 Finally, we need to run this code and compare it to the Brute-Force version.
 
@@ -2144,14 +2172,14 @@ Average time for Memoization: 4685 ns
 
 *Output 9: Comparison between Brute-Force, Memoization and Tabulation functions.*{: class="legend"}
 
-I ran it dozens of times and, most of the time, the memoized function was twice as fast as the Brute-Force function, and sometimes it was three times faster. Now we need to look at the dynamic programming solution using tabulation.
+I ran it dozens of times and, most of the time, the memoized function was twice as fast as the Brute-Force function, and sometimes it was three times faster. Now we need to look at the Dynamic Programming solution using tabulation.
 
 ### Using Tabulation
 
-Like I did before, the Code Fragment 18 shows the function I created to apply tabulation. The function `int countPathsTabulation(int m, int n)` uses dynamic programming with tabulation to count all possible paths in an $m \times n$ matrix.
+Like I did before, the Code Fragment 18 shows the function I created to apply tabulation. The function `int countPathsTabulation(int m, int n)` uses Dynamic Programming with tabulation to count all possible paths in an $m \times n$ matrix.
 
 ```Cpp
-// Function to count paths using dynamic programming with tabulation
+// Function to count paths using Dynamic Programming with tabulation
 int countPathsTabulation(int m, int n) {
     std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));
 
@@ -2171,7 +2199,7 @@ int countPathsTabulation(int m, int n) {
 
 *Code Fragment 18 - Count all paths function using Tabulation.*{: class="legend"}
 
-The function `int countPathsTabulation(int m, int n)` counts all possible paths in an $m \times n$ matrix using dynamic programming with tabulation. The `dp` matrix is used to store the number of paths to each cell in a bottom-up manner, ensuring that each subproblem is solved iteratively. Each subproblem represents the number of distinct paths to a cell $(i, j)$ from the top-left corner $(0, 0)$.
+The function `int countPathsTabulation(int m, int n)` counts all possible paths in an $m \times n$ matrix using Dynamic Programming with tabulation. The `dp` matrix is used to store the number of paths to each cell in a bottom-up manner, ensuring that each subproblem is solved iteratively. Each subproblem represents the number of distinct paths to a cell $(i, j)$ from the top-left corner $(0, 0)$.
 
 The function initializes a `dp` matrix of size $m \times n$ with all values set to $0$. It then iterates over each cell in the matrix. If a cell is in the first row or first column, it sets the value to $1$ because there is only one way to reach these cells (either all the way to the right or all the way down). For other cells, it calculates the number of paths by summing the values from the cell above (`dp[i - 1][j]`) and the cell to the left (`dp[i][j - 1]`). This sum is then stored in `dp[i][j]`.
 
@@ -2179,7 +2207,7 @@ Using `std::array<std::array<int, MAX_SIZE>, MAX_SIZE>` for the `dp` matrix ensu
 
 *The time complexity of this function is $O(m \times n)$*. Each cell in the `dp` matrix is computed once, and each computation takes constant time, making the total number of operations proportional to the number of cells in the matrix. Similarly, *the space complexity is $O(m \times n)$* due to the `dp` matrix, which requires $m \times n$ space to store the number of paths for each cell.
 
-This dynamic programming approach with tabulation significantly improves performance compared to the naive Brute-Force solution. By transforming the problem into a series of iterative steps, it provides an efficient and scalable solution for counting paths in larger matrices.
+This Dynamic Programming approach with tabulation significantly improves performance compared to the naive Brute-Force solution. By transforming the problem into a series of iterative steps, it provides an efficient and scalable solution for counting paths in larger matrices.
 
 Here's something interesting, dear reader.  While using `std::vector` initially yielded similar execution times to the memoization function, switching to `std::array` resulted in a dramatic improvement. Not only did it significantly reduce memory usage, but it also made the function up to 4 times faster!
 
@@ -2258,7 +2286,7 @@ Output:
 
 ### Analysis
 
-The "Longest Increasing Subsequence" (LIS) problem is a classic problem in dynamic programming, often appearing in interviews and programming competitions. The goal is to find the length of the longest subsequence in a given array such that all elements of the subsequence are in strictly increasing order. *There are three main approaches to solving this problem: Brute-Force, memoization, and tabulation. Coincidentally, these are the three solutions we are studying*. So, let's go.
+The "Longest Increasing Subsequence" (LIS) problem is a classic problem in Dynamic Programming, often appearing in interviews and programming competitions. The goal is to find the length of the longest subsequence in a given array such that all elements of the subsequence are in strictly increasing order. *There are three main approaches to solving this problem: Brute-Force, memoization, and tabulation. Coincidentally, these are the three solutions we are studying*. So, let's go.
 
 ### Brute-Force
 
@@ -2324,7 +2352,7 @@ Average time for LIS: 683023 ns
 
 *Output 10: Execution time for LIS solution using Brute-Force.*{: class="legend"}
 
-At this point, our dear reader should have a mantra in mind: 'Don't use Brute-Force... Don't use Brute-Force.' With that said, let's delve into dynamic programming algorithms, keeping Brute-Force as a reference point for comparison.
+At this point, our dear reader should have a mantra in mind: 'Don't use Brute-Force... Don't use Brute-Force.' With that said, let's delve into Dynamic Programming algorithms, keeping Brute-Force as a reference point for comparison.
 
 ### Memoization
 
@@ -2377,7 +2405,7 @@ The `LIS(int i, const std::vector<int>& arr, std::vector<int>& dp)` recursive fu
 
 The `longestIncreasingSubsequenceMemoization(const std::vector<int>& arr)` function serves as a wrapper for the `LIS` function and calculates the overall LIS of the entire array. It initializes the `dp` array with -1 for all indices, indicating that no LIS values have been computed yet. It iterates through the array and calls the `LIS` function for each index `i`. It keeps track of the maximum length encountered among the results returned by `LIS(i)` for all indices. Finally, it returns this maximum length as the length of the overall LIS of the array.
 
-Comparing the complexity of the memoization solution with the Brute-Force solution highlights significant differences in efficiency. The Brute-Force solution generates all possible subsequences using bitmasking, which results in a time complexity of $O(2^n \cdot n)$ due to the exponential number of subsequences and the linear time required to check each one. *In contrast, the memoization solution improves upon this by storing the results of previously computed LIS lengths, reducing redundant calculations. This reduces the time complexity to $O(n^2)$, as each element is compared with all previous elements, and each comparison is done once*. The space complexity also improves from potentially needing to store numerous subsequences in the Brute-Force approach to a linear $O(n)$ space for the memoization array in the dynamic programming solution. Thus, the memoization approach provides a more scalable and practical solution for larger arrays compared to the Brute-Force method. What can be seen in output 22:
+Comparing the complexity of the memoization solution with the Brute-Force solution highlights significant differences in efficiency. The Brute-Force solution generates all possible subsequences using bitmasking, which results in a time complexity of $O(2^n \cdot n)$ due to the exponential number of subsequences and the linear time required to check each one. *In contrast, the memoization solution improves upon this by storing the results of previously computed LIS lengths, reducing redundant calculations. This reduces the time complexity to $O(n^2)$, as each element is compared with all previous elements, and each comparison is done once*. The space complexity also improves from potentially needing to store numerous subsequences in the Brute-Force approach to a linear $O(n)$ space for the memoization array in the Dynamic Programming solution. Thus, the memoization approach provides a more scalable and practical solution for larger arrays compared to the Brute-Force method. What can be seen in output 22:
 
 ```Shell
 -----------------------------------
@@ -2391,13 +2419,13 @@ Average time for LIS (Memoization): 3018 ns
 
 The provided output clearly demonstrates the significant performance advantage of memoization over the Brute-Force approach for calculating the Longest Increasing Subsequence (LIS).  The Brute-Force method, with its average execution time of $690,399$ nanoseconds (ns), suffers from exponential time complexity, leading to a sharp decline in performance as the input size increases.
 
-In contrast, the memoization approach boasts an average execution time of a mere $3,018$ ns. This dramatic improvement is a direct result of eliminating redundant calculations through the storage and reuse of intermediate results. In this particular scenario, memoization is approximately $228$ times faster than Brute-Force, highlighting the immense power of dynamic programming techniques in optimizing algorithms that involve overlapping subproblems.
+In contrast, the memoization approach boasts an average execution time of a mere $3,018$ ns. This dramatic improvement is a direct result of eliminating redundant calculations through the storage and reuse of intermediate results. In this particular scenario, memoization is approximately $228$ times faster than Brute-Force, highlighting the immense power of Dynamic Programming techniques in optimizing algorithms that involve overlapping subproblems.
 
-Now, let's turn our attention to the last dynamic programming technique we are studying: tabulation.
+Now, let's turn our attention to the last Dynamic Programming technique we are studying: tabulation.
 
 ### Tabulation
 
-Tabulation, a bottom-up dynamic programming technique, iteratively computes and stores results in a table. For the LIS problem, we create a table `dp` where `dp[i]` represents the length of the LIS ending at index `i`.
+Tabulation, a bottom-up Dynamic Programming technique, iteratively computes and stores results in a table. For the LIS problem, we create a table `dp` where `dp[i]` represents the length of the LIS ending at index `i`.
 
 Here's a breakdown of the steps involved:
 
@@ -2494,7 +2522,6 @@ Output:
 - The array `cuts` can have at most $n-1$ elements.
 
 ### Analysis
-
 
 ## Problem 5 Statement: Longest Common Subsequence
 
