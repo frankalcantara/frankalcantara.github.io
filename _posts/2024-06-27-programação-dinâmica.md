@@ -208,7 +208,7 @@ Each level of the tree results in a doubling of calls. If we keep doubling for e
 
 The space complexity depends on how deep the recursion goes. Every time the function calls itself, it adds a new frame to the call stack.
 
-- The maximum depth of recursion is $n$ levels (from `fibonacci(n)` down to `fibonacci(0)` or `fibonacci(1)`.
+- The maximum depth of recursion is $n$ levels (from `fibonacci(n)` down to `fibonacci(0)` or `fibonacci(1)`).
 
 Therefore, the space complexity is $O(n)$ where $n$ is the maximum deep of the call stack, because the stack can grow linearly with $n$.
 
@@ -576,13 +576,15 @@ int main() {
 }
 ```
 
-*Example 4 - running std::vector and tail recursion*{: class="legend"}
+*Code 1 - Running `std::vector` and tail recursion*{: class="legend"}
+
+The Code 1 demonstrates not only our Fibonacci functions but also two functions for calculating execution time (`long long measure_time(Func func, Args&&... args)` and `long long measure_time(Func func, Args&&... args)`). From this point forward, I will be using this code model to maintain consistent computational cost when calculating the average execution time of the functions we create. This approach will ensure that our performance measurements are standardized across different implementations, allowing for more accurate comparisons as we explore various Dynamic Programming techniques.
 
 Now, the attentive reader will agree with me: we must to break this code down.
 
 #### The Recursive Function
 
-Let's start with `fibonacci(int n)`, the simple and pure recursive function.
+Let's start with `fibonacci(int n)`, the simple and pure tail recursive function.
 
 ```Cpp
 int fibonacci(int n) {
@@ -595,11 +597,13 @@ int fibonacci(int n) {
 }
 ```
 
-*Code Fragment 4 - C++ Dynamic Programing, Tail Recursion Function*{: class="legend"}
+*Code Fragment 1A - C++ Tail Recursion Function*{: class="legend"}
 
-This is a similar C++ recursive function to the one we used to explain recursion in Python. Perhaps the most relevant aspect of `fibonacci(int n)` is its argument: `int n`. Using the `int` type limits our Fibonacci number to $46$. Especially because the `int` type on my system, a 64-bit computer running Windows 11, is limited, by default, to storing a maximum value of $2^31 - 1 = 2,147,483,647$, and the $46$th Fibonacci number is $1,836,311,903$. The next one will be bigger than `int` capacity. Since Python uses floating-point numbers (like doubles) by default, we can calculate up to the $78$th Fibonacci number, which is $8,944,394,323,791,464$. We could achieve the same result in C++ by changing from `int` to another data type. However, that is not our goal here.
+This is a similar C++ recursive function to the one we used to explain recursion in Python. Perhaps the most relevant aspect of `fibonacci(int n)` is its argument: `int n`. Using the `int` type limits our Fibonacci number to $46$. Especially because the `int` type on my system, a 64-bit computer running Windows 11, is limited, by default, to storing a maximum value of $2^31 - 1 = 2,147,483,647$, and the $46$th Fibonacci number is $1,836,311,903$. The 47th Fibonacci number will be bigger will be bigger than `int` capacity.
 
 The next function is the C++ memoization version:
+
+#### The Dynamic Programming Function Using Memoization
 
 ```Cpp
 // Recursive function with memoization to calculate Fibonacci
@@ -615,19 +619,19 @@ int fibonacci_memo(int n, std::unordered_map<int, int>& memo) {
 }
 ```
 
-*Code Fragment 5 - C++ Memoization Function*{: class="legend"}
+*Code Fragment 2A - C++ Memoization Function*{: class="legend"}
 
 Let's highlight the `std::unordered_map<int, int>& memo` in function arguments. The argument `std::unordered_map<int, int>& memo` in C++ is used to pass a reference to an unordered map (hash table) that maps integers to integers. Breaking it down we will have:
 
-The `std::unordered_map<int, int>` specifies the type of the argument. `std::unordered_map` is a template class provided by the C++ Standard Library that implements a hash table. The template parameters `<int, int>` specify that the keys and values stored in the unordered map are both integers.
+>`std::unordered_map` is a template class provided by the C++ Standard Library (STL) that implements a hash table. The template parameters `<int, int>` specify that the keys and values stored in the unordered map are both integers.
 
 The ampersand (`&`) indicates that the argument is a reference. This means that the function will receive a reference to the original unordered map, rather than a copy of it. *Passing by reference is efficient because it avoids copying the entire map, which could be expensive in terms of time and memory, especially for large maps*. Pay attention: Thanks to the use of `&`, all changes made to the map inside the function will affect the original map outside the function. Finally `memo` is the identifier of the parameter which type is `std::unordered_map<int, int>`.In the context of memoization (hence the name `memo` we used earlier), this unordered map is used to store the results of previously computed values to avoid redundant calculations.
 
-One `unordered_map` in C++ is quite similar to Python's dict in terms of functionality. Both provide an associative container that allows for efficient key-value pair storage and lookup. The `std::unordered_map` is a template class and a C++ only construct implemented as a hash table. *Unordered maps store key-value pairs and provide average constant-time complexity for insertion, deletion, and lookup operations, thanks to their underlying hash table structure*. They grow dynamically as needed, managing their own memory, which is freed upon destruction. Unordered maps can be passed to or returned from functions by value and can be copied or assigned, performing a deep copy of all stored elements.
+>One `unordered_map` in C++ is quite similar to Python's dict in terms of functionality. Both provide an associative container that allows for efficient key-value pair storage and lookup. The `std::unordered_map` is a template class and a C++ only construct implemented as a hash table. *Unordered maps store key-value pairs and provide average constant-time complexity for insertion, deletion, and lookup operations, thanks to their underlying hash table structure*. They grow dynamically as needed, managing their own memory, which is freed upon destruction. Unordered maps can be passed to or returned from functions by value and can be copied or assigned, performing a deep copy of all stored elements.
 
-Unlike arrays, unordered maps do not decay to pointers, and you cannot get a pointer to their internal data. Instead, unordered maps maintain an internal hash table, which is allocated dynamically by the allocator specified in the template parameter, usually obtaining memory from the freestore (heap) independently of the object's actual allocation. This makes unordered maps efficient for fast access and manipulation of key-value pairs, though they do not maintain any particular order of the elements.
+>Unlike arrays, unordered maps do not decay to pointers, and you cannot get a pointer to their internal data. Instead, unordered maps maintain an internal hash table, which is allocated dynamically by the allocator specified in the template parameter, usually obtaining memory from the freestore (heap) independently of the object's actual allocation. This makes unordered maps efficient for fast access and manipulation of key-value pairs, though they do not maintain any particular order of the elements.
 
-Unordered maps do not require a default constructor for stored objects and are well integrated with the rest of the STL, providing `begin()`/`end()` methods and the usual STL typedefs. When reallocating, unordered maps rehash their elements, which involves reassigning the elements to new buckets based on their hash values. This rehashing process can involve copying or moving (in C++11 and later) the elements to new locations in memory.
+>Unordered maps do not require a default constructor for stored objects and are well integrated with the rest of the STL, providing `begin()`/`end()` methods and the usual STL typedefs. When reallocating, unordered maps rehash their elements, which involves reassigning the elements to new buckets based on their hash values. This rehashing process can involve copying or moving (in C++11 and later) the elements to new locations in memory.
 
 >Rehashing, is the process used in `std::unordered_map` to maintain efficient performance by redistributing elements across a larger array when the load factor (the number of elements divided by the number of buckets) becomes too high. The rehashing process involves determining the new size, allocating a new array of buckets to hold the redistributed elements, rehashing elements by applying a hash function to each key to compute a new bucket index and inserting the elements into this new index, and finally, updating the internal state by updating internal pointers, references, and variables, and deallocating the old bucket array. Rehashing in `std::unordered_map` is crucial for maintaining efficient performance by managing the load factor and ensuring that hash collisions remain manageable.
 
@@ -635,7 +639,9 @@ Overall, `std::unordered_map` is a versatile and efficient container for associa
 
 The `fibonacci_memo(int n, std::unordered_map<int, int>& memo)` function works just like the Python function we explained before with the same complexity, $O(n)$, for space and time. That said we can continue to `fibonacci_tabulation(int n)`.
 
-#### The Dynamic Programming Function Using Memoization
+Memoization offers significant advantages over the simple recursive approach when implementing the Fibonacci sequence. The primary benefit is improved time complexity, reducing it from exponential $O(2^n)$ to linear $O(n)$. This optimization is achieved by storing previously computed results in a hash table (memo), eliminating redundant calculations that plague the naive recursive method. This efficiency becomes increasingly apparent for larger $n$ values, where the simple recursive method's performance degrades exponentially, while the memoized version maintains linear time growth. Consequently, memoization allows for the computation of much larger Fibonacci numbers in practical time frames.
+
+#### The Dynamic Programming Function Using Tabulation
 
 The `fibonacci_tabulation(int n)`, which uses a `std::vector`, was designed to be as similar as possible to the tabulation function we studied in Python.
 
@@ -654,13 +660,13 @@ int fibonacci_tabulation(int n) {
 }
 ```
 
-*Code Fragment 6 - C++ Tabulation Function*{: class="legend"}
+*Code 1C - C++ Tabulation Function*{: class="legend"}
 
-The `std::vector` is a template class and a C++-only construct implemented as a dynamic array. *Vectors grow and shrink dynamically, automatically managing their memory, which is freed upon destruction. They can be passed to or returned from functions by value and can be copied or assigned, performing a deep copy of all stored elements*.
+>The `std::vector` is a template class and a C++ only construct implemented as a dynamic array. *Vectors grow and shrink dynamically, automatically managing their memory, which is freed upon destruction. They can be passed to or returned from functions by value and can be copied or assigned, performing a deep copy of all stored elements*.
+>
+>Unlike arrays, vectors do not decay to pointers, but you can explicitly get a pointer to their data using `&vec[0]`. Vectors maintain their size (number of elements currently stored) and capacity (number of elements that can be stored in the currently allocated block) along with the internal dynamic array. This internal array is allocated dynamically by the allocator specified in the template parameter, *usually obtaining memory from the freestore (heap) independently of the object's actual allocation*. Although this can make vectors less efficient than regular arrays for small, short-lived, local arrays, vectors do not require a default constructor for stored objects and are better integrated with the rest of the STL, providing `begin()`/`end()` methods and the usual STL typedefs. When reallocating, vectors copy (or move, in C++11) their objects.
 
-Unlike arrays, vectors do not decay to pointers, but you can explicitly get a pointer to their data using `&vec[0]`. Vectors maintain their size (number of elements currently stored) and capacity (number of elements that can be stored in the currently allocated block) along with the internal dynamic array. This internal array is allocated dynamically by the allocator specified in the template parameter, *usually obtaining memory from the freestore (heap) independently of the object's actual allocation*. Although this can make vectors less efficient than regular arrays for small, short-lived, local arrays, vectors do not require a default constructor for stored objects and are better integrated with the rest of the STL, providing `begin()`/`end()` methods and the usual STL typedefs. When reallocating, vectors copy (or move, in C++11) their objects.
-
-Besides the `std::vector` template type, the time and space complexity are the same, $O(n)$, we found in Python version. What left us with the generic part of Example 4. Evaluation.
+Besides the `std::vector` template type, the time and space complexity are the same, $O(n)$, we found in Python version. What left us with the generic part of Code 1: Evaluation.
 
 #### Performance Evaluation and Support Functions
 
@@ -690,7 +696,7 @@ long long average_time(Func func, int iterations, Args&&... args) {
 
 *Code Fragment 7 - Support Functions for Time Execution Measurement*{: class="legend"}
 
-Let's initiate with Function 1, `long long average_time(Func func, int iterations, Args&&... args)`. This function is a template function designed to measure the execution time of a given function `func` with arbitrary arguments `Args&&... args`. It returns the time taken to execute the function in nanoseconds. Let's break down each part of this function to understand how it works in detail.
+Let's initiate with function `long long average_time(Func func, int iterations, Args&&... args)`. This function is a template function designed to measure the execution time of a given function `func` with arbitrary arguments `Args&&... args`. It returns the time taken to execute the function in nanoseconds. Let's break down each part of this function to understand how it works in detail.
 
 ```cpp
 template <typename Func, typename... Args>
@@ -706,6 +712,35 @@ The last argument, `typename... Args`: This is a variadic template parameter, al
 
 >The `typename... Args` declaration is used in C++ templates to define a variadic template parameter, which allows a template to accept an arbitrary number of arguments of any types. When `typename... Args` is specified, it indicates that the template can handle a variable number of parameters, making it highly flexible and adaptable. This is particularly useful for functions and classes that need to operate on a diverse set of inputs without knowing their types or number in advance.
 
+The line `auto start = std::chrono::high_resolution_clock::now();` is a crucial component in precise time measurement in C++. It utilizes the C++ Standard Library's `<chrono>` library, which provides a set of time utilities.
+
+>The `std::chrono::high_resolution_clock` is a clock type that represents the clock with the smallest tick period available on the system. The `now()` function is a static member function of this clock class that returns the current time point. By calling `now()`, we capture the exact moment in time when this line is executed.
+>
+>The auto keyword is used here for type inference, allowing the compiler to automatically deduce the type of the start variable. In this case, start will be of type `std::chrono::time_point<std::chrono::high_resolution_clock>, which represents a point in time as measured by the high-resolution clock. This time point can later be compared with another time point (typically captured after the execution of the code we want to measure) to calculate the duration of the executed code.
+
+In our case, we will compare the `start` time with the `end` time acquired by `auto end = std::chrono::high_resolution_clock::now();`. Between this two lines is `func(std::forward<Args>(args)...);`.
+
+The line `func(std::forward<Args>(args)...);` is a key component of the `measure_time` function. In this context, it serves to execute the function `func` that we aim to measure, while passing along all arguments provided to `measure_time`. This line appears between the two time measurements (`start` and `end`), allowing us to capture the execution time of func with its given arguments. The use of `std::forward` and parameter pack expansion allows `measure_time` to work with functions of any signature, making it a flexible timing utility.
+
+In the context of template functions like `measure_time`, `func` typically represents a callable object. This can be a regular function, a function pointer, a lambda expression, or a function object (functor). The exact type of `func` is deduced by the compiler based on the argument passed to `measure_time`.
+
+>`std::forward` is a utility function template defined in the `<utility>` header of the C++20 Standard Library. Its primary use is in implementing perfect forwarding. `std::forward` preserves the value category (`lvalue` or `rvalue`) of a template function argument when passing it to another function. This allows the called function to receive the argument with the same value category as it was originally passed.
+>
+>Perfect forwarding allows a function template to pass its arguments to another function while retaining the `lvalue`/`rvalue` nature of the arguments. This is achieved by declaring function parameters as forwarding references (`T&&`) and using `std::forward` when passing these parameters to other functions.
+
+For example:
+
+```cpp
+template<class T>
+void wrapper(T&& arg) {
+    foo(std::forward<T>(arg));
+}
+```
+
+In this example, wrapper can accept both `lvalues` and `rvalues`, and will pass them to foo preserving their original value category. The combination of forwarding references and `std::forward` enables the creation of highly generic code that can work efficiently with a wide variety of argument types and value categories. This is particularly useful in library design and when creating wrapper functions or function templates that need to preserve the exact characteristics of their arguments when forwarding them to other functions.
+
+However, all this code will not work if we don't take the necessary precautions in the function signature.
+
 ```Cpp
 long long measure_time(Func func, Args&&... args) {
 ```
@@ -713,7 +748,9 @@ long long measure_time(Func func, Args&&... args) {
 In the context of a template function, `Args&&... args` is often used to perfectly forward these arguments to another function, preserving their value categories (`lvalues` or `rvalues`). The use of `typename...` ensures that each parameter in the pack is treated as a type, enabling the compiler to correctly process each argument during template instantiation.
 
 >An `lvalue` (locator value) represents an object that occupies a specific location in memory (i.e., has an identifiable address). `lvalues` are typically variables or dereferenced pointers. They can appear on the left-hand side of an assignment expression, hence the name `lvalue`.
+>
 >An `rvalue` (read value) represents a temporary value or an object that does not have a persistent memory location. rvalues are typically literals, temporary objects, or the result of expressions that do not persist. They can appear on the right-hand side of an assignment expression.
+>
 >C++11 introduced `rvalue` references to enhance performance by enabling move semantics. An rvalue reference is declared using `&&`, allowing functions to distinguish between copying and moving resources. This is particularly useful for optimizing the performance of classes that manage resources such as dynamic memory or file handles.
 
 The return type of the function, `long long`, represents the duration of the function execution in nanoseconds. I choose a `long long` integer because I have no idea how long our Dynamic Programming functions will take to compute, and I wanted to ensure a default function that can be used for all problems we will work on. The maximum value that can be stored in a `long long` type in C++ is defined by the limits of the type, which are specified in the `<climits>` header. For a signed `long long` type, the maximum value is $2^{63} - 1 = 9,223,372,036,854,775,807$.
@@ -723,7 +760,7 @@ The function `measure_time` arguments are:
 - `Func func`: The callable entity whose execution time we want to measure.
 - `Args&&... args: A parameter pack representing the arguments to be forwarded to the callable entity. The use of && indicates that these arguments are perfect forwarded, preserving their value category (`lvalue` or `rvalue`).
 
-The the body of function `measure_time` starts with:
+As we saw before, the the body of function `measure_time` starts with:
 
 ```Cpp
 auto start = std::chrono::high_resolution_clock::now();
