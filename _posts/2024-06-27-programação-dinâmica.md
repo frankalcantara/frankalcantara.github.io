@@ -1107,7 +1107,7 @@ The most obvious solution, usually the first that comes to mind, involves checki
 
 Flowchart 4 enables the creation of a function to solve the two-sum problem in C++20, as can be seen in Code 4 below:
 
-```Cpp
+```cpp
 #include <iostream>
 #include <vector>
 #include <utility>
@@ -1158,7 +1158,7 @@ The Values function is quite simple, but the use of `std::vector` and `std::pair
 
 The kind reader may have noticed the use of `(-1, -1)` as sentinel values to indicate that the function did not find any pair. There is a better way to do this. Use the `std::optional` class as we can see in Code 5:
 
-```Cpp
+```cpp
 #include <iostream>
 #include <vector>
 #include <optional>
