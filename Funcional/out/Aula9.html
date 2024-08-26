@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Frank Coelho de Alcantara - 2021">
+  <title>Classes de Tipos</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+  <link rel="stylesheet" href="../../rev/reset.css" />
+  <link rel="stylesheet" href="../../rev/reveal.css" />
+  <link rel="stylesheet" href="../../rev/plugin/highlight/monokai.css" />
+  <link rel="stylesheet" href="../../rev/interpret.css" />
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section id="title-slide" class = "nivel1">
+        <h1 class="title">List Comprehension Classes de Tipos</h1>
+        <p style="text-align: right !important;">Frank Coelho de Alcantara</p>
+      </section>
+      <section>
+        <!-- list comprehension-->
+        <section id="title-slide" class="nivel1">
+          <h1 class="title">List Comprehension</h1>
+          <p style="text-align: right !important;">Frank Coelho de Alcantara</p>
+        </section>
+        <section class="nivel1">
+          <h2>Uma Notação de Conjuntos</h2>
+          <small style="font-size: 70% !important;">
+            <p class="fragment fade-up">A linguagem Haskell trouxe para as linguagens de programação a sintaxe de definição de
+              conjuntos. </p>
+            <p class="fragment fade-up">$A = \{3x | x \in \mathbb{Z}, x < 3 \}$ </p>
+                <p class="fragment fade-up">Nesta definição, os elementos do conjunto são definidos por um <b>predicado</b>.
+                  Neste caso, teremos:</p>
+                <ul style="font-size: 85%;margin-left: 10%;width: 91%;">
+                  <li class="fragment fade-up">$x$: é a variável que representa os itens do conjunto;</li>
+                  <li class="fragment fade-up">$\mathbb {Z}$: representa o conjunto de entrada, neste caso, números inteiros;
+                  </li>
+                  <li class="fragment fade-up">$x < 3$: é parte do predicado e atua como se fora um filtro;</li>
+                  <li class="fragment fade-up">$3x$: é a regra de produção de itens do conjunto, que satisfazem o predicado;
+                  </li>
+                  <li class="fragment fade-up">$\{\}$: indica que o resultado será um conjunto;</li>
+                  <li class="fragment fade-up">$, \space$: a vírgula separa os predicados e pode ser lida como "E".</li>
+                </ul>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Em Haskell</h2>
+          <pre style="height: 437px;margin-bottom: 33px;" class="fragment fade-up language-haskell">
+            <code data-trim data-noescape>
+                      module Main where
+                      
+                      -- [&lt;output function&gt; | &lt;input set&gt;, ..., &lt;predicate&gt;, ... ]
+                      
+                      main::IO()
+                      main = do
+                        print [ x*x | x <- [1..10], mod x 2==0 ] 
+                        -- for x from 1 to 2 ... for y from 1 to 4
+                        print "olhe este"
+                        print [(x,y) | x <- [1..2], y <- [1..4] ] 
+                        -- for y from 1 to 4 ... for x from 1 to 2
+                        print "Invertido"
+                        print [(x,y) | y <- [1..4], x <- [1..2] ] 
+                                    
+                        print [x^y | x <- [1..10], y <-[1..4], even x ] 
+                        print [x*y | x <- [1..10], y <- [1..4], odd y ]
+                    </code>
+          </pre>
+          <p class="fragment fade-up" style="font-size: 68%;width: 90%;margin-left: 5%;">Geradores múltiplos são como laços
+            aninhados, o último gerador é o laço mais interno.</p>
+        </section>
+      </section>
+      <section> <!-- Classes de Tipos -->
+        <section id="title-slide" class="nivel1">
+          <h1 class="title">Classes de Tipos</h1>
+          <p style="text-align: right !important;">Frank Coelho de Alcantara</p>
+        </section>
+        <section class="nivel1">
+          <h2>Revendo</h2>
+          <small style="font-size: 69% !important;">
+          <p class = "">Classes de tipos definem um conjunto de funções que podem ter 
+          implementações diferentes de acordo com o tipo de dado.</p>
+          <pre style="height:25px; margin-bottom: 30px;" class="fragment fade-up language-haskell">
+            <code data-trim data-noescape>
+              (+) :: Num a => a -> a -> a
+            </code>
+          </pre>
+          <p class="fragment fade-up">Que deve ser lida como $(+)$ é do tipo $a \rightarrow a \rightarrow a$ para qualquer <i>tipo
+              numérico</i> $a$.
+            Uma classe de tipos, como é o caso da classe $Num$ contém um conjunto de métodos, como o $(+)$, que pode
+            ser definida de forma diferente para cada instância da classe. A seta dupla $\Rightarrow$, representa a existência de
+            uma restrição e
+            chamamos esta restrição de <i>contexto</i>. Neste caso, a restrição diz que
+            a função $(+)$ recebe dois valores do tipo $a$ e devolve um valor do tipo $a$ apenas se $a$ for da classe $Num$.</p>
+          <p class="fragment fade-up">Para todo $a$ que seja uma instância da classe $Num$, então $(+)$ tem o tipo $a \rightarrow
+            a \rightarrow a$.</p>
+          </small>
+        </section>
+        <section class="nivel1">
+            <h2>Números Naturais</h2>
+            <pre  class="language-haskell" style="height: 410px;margin-bottom: 61px; font-size: 33% !important;">
+              <code data-trim data-noescape>
+                module Main where
+                
+                -- definindo uma classe de tipos para números naturais
+                data Nat = Zero | Succ Nat
+                  
+                -- quer dizer que a classe Nat tem dois construtores Zero e Succ e o
+                -- Succ precisa de uma variável de tipo.
+                -- funções aritméticas
+                  
+                instance Eq Nat where
+                  Zero == Zero = True
+                  Zero == Succ n = False
+                  Succ m == Zero = False
+                  Succ m == Succ n = (m == n)
+                  
+                instance Ord Nat where
+                  Zero < Zero=False 
+                  Zero < Succ n=True 
+                  Succ m < Zero=False 
+                  Succ m < Succ n=(m < n) 
+                  Succ m <=Succ n=(m <=n) 
+                  
+                instance Show Nat where 
+                  show Zero="Zero" 
+                  show (Succ Zero)="Succ Zero" 
+                  show (Succ (Succ n))="Succ (" ++ show (Succ n) ++ ")" 
+                  
+                {- para gerar o valor numérico substitua por 
+                  
+                  show x=show (converte x) where 
+                    converte Zero=0 
+                    converte (Succ x)=1 + converte x 
+                
+                -} 
+                
+                instance Num Nat where 
+                  m + Zero=m 
+                  m + Succ n=Succ (m + n) 
+                  m * Zero=Zero m * (Succ n)=m*n+m 
+                  m - Zero=m Zero - Succ n=Zero 
+                  Succ m - Succ n=m - n 
+                  
+                  abs n=n 
+                  -- devolve -1 para valores negativos, 0 para zero e 1 para positivo 
+                  signum Zero=Zero 
+                  signum (Succ n)=Succ Zero 
+                  
+                  -- para poder usar números literais inteiros em classe Num 
+                  fromInteger x 
+                    | x <=0=Zero 
+                    | otherwise=Succ (fromInteger (x-1)) 
+                
+                soma :: Nat -> Nat -> Nat
+                soma x y = x + y
+                  
+                produto :: Nat -> Nat -> Nat
+                produto x y = x * y
+
+                main::IO()
+                main=do
+                  print (soma 4 4)
+                  print (produto 2 3)
+              </code>
+            </pre>
+            <p class="fragment fade-up" style="font-size: 75%;">O código pode ser encontrado <a href="https://replit.com/join/efaakyftee-frankalcantara" target="_blank" rel="noopener noreferrer">aqui</a>.</p>
+        </section>
+        <section class="nivel1">
+          <h2>Records</h2>
+          <!-- Volte aqui e coloque a solução dos exercícios-->
+          <pre class="language-haskell" style="height: 410px;margin-bottom: 61px; font-size: 33% !important;">
+            <code data-trim data-noescape>
+              module Main where
+              
+              -- Trabalhando com registros
+              {-
+              data Funcionario = Funcionario String String Int Float String String deriving (Show)
+              
+              nome :: Funcionario -> String
+              nome (Funcionario nome _ _ _ _ _) = nome
+              
+              sobrenome :: Funcionario -> String
+              sobrenome (Funcionario _ sobrenome _ _ _ _) = sobrenome
+              
+              idade :: Funcionario -> Int
+              idade (Funcionario _ _ idade _ _ _) = idade
+              
+              altura :: Funcionario -> Float
+              altura (Funcionario _ _ _ altura _ _) = altura
+              
+              telefone :: Funcionario -> String
+              telefone (Funcionario _ _ _ _ number _) = number
+              
+              cargo :: Funcionario -> String
+              cargo (Funcionario _ _ _ _ _ cargo) = cargo
+              -}
+              
+              data Funcionario = Funcionario { nome :: String
+                              , sobrenome :: String
+                              , idade :: Int
+                              , altura :: Float
+                              , telefone :: String
+                              , cargo :: String
+                              } deriving (Show, Eq)
+              
+              main=do
+                let frank = Funcionario "Frank" "Alcantara" 57 1.80 "414141414141" "Diretor"
+                let paulo = Funcionario "Paulo" "Alcantara" 57 1.80 "414141414141" "Diretor"
+                let outrocara = Funcionario "Frank" "Alcantara" 57 1.80 "414141414141" "Diretor"
+                
+                print(frank)
+                print(nome frank)
+                print (frank == paulo)
+                print (frank == outrocara)
+                print (show frank)
+            </code>
+          </pre>
+          <p  style="font-size: 75%;">O código pode ser encontrado <a href="https://replit.com/join/cbbksecfam-frankalcantara" target="_blank"
+              rel="noopener noreferrer">aqui</a>.</p>
+        </section>
+        <section class="nivel1">
+          <h2>Exemplo 1 - tipos</h2>
+            <p class="fragment fade-up">Crie uma função que devolva, a partir de uma lista de estudantes, aquele que tem a
+              maior nota. Observe que será necessário armazenar, o nome, o código de matrícula e a nota de
+              cada um dos estudantes da lista. Para testar, crie uma lista com pelo menos quatro estudantes.</p>
+              
+            <p class="fragment fade-up">Uma solução pode ser encontrada <a href="https://replit.com/@frankalcantara/EstudantesSimples?v=1" target="_blank" rel="noopener noreferrer">aqui</a> </p>
+        </section>
+        <section class="nivel1">
+          <h2>Exemplo 2</h2>
+            <p class="fragment fade-up">Crie um programa que determine qual a pizza é mais barata considerando sua área. Sua função 
+              deve comparar no mínimo duas pizzas, cujos raios e preços serão indicados pelo usuário do programa.
+            </p>
+            
+            <p class="fragment fade-up">Uma solução pode ser encontrada <a
+                href="https://replit.com/@frankalcantara/NovaPizza?v=1" target="_blank" rel="noopener noreferrer">aqui</a>
+            </p>
+        </section>
+        <section class="nivel1">
+          <h2>Classes de Tipos</h2>
+          <small>
+            <p class="fragment fade-up">
+            <pre style="height: 160px;margin-bottom: 33px;" class="fragment fade-up language-haskell">
+                <code data-trim data-noescape>
+                    class Num a where
+                       (+) :: a -> a -> a
+                       (-) :: a -> a -> a
+                       (*) :: a -> a -> a
+                        negate :: a -> a
+                        abs :: a -> a
+                        signum :: a -> a
+                 </code>
+              </pre>
+              </p>
+              <p class="fragment fade-up">Uma classe é a definição de um família de funções
+                que todos os membros da classe deverão implementar. Observe a variável de tipo.
+              </p>
+              <p class="fragment fade-up">Porque a divisão não está nesta lista?</p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Classes de Tipos Benefícios</h2>
+          <small>
+              <p class="fragment fade-up">Uma vez que você define uma função, esta função poderá 
+                ser aplicada a apenas um tipo específico.</p> 
+              <p class="fragment fade-up">Sem classe de tipos, você vai precisar 
+                definir uma função para cada tipo.
+              </p>
+              <p class="fragment fade-up">As classes de tipos permitem que você crie funções que 
+                poderão ser aplicadas a tipos que você nem sabe que existem.
+              </p>
+              <p class="fragment fade-up">
+                <pre style="height: 50px;margin-bottom: 33px;" class="fragment fade-up language-haskell">
+                <code data-trim data-noescape>
+                    someEDobre :: Num a => a -> a -> a
+                    someEDobre x y = (x + y)*2
+                 </code>
+                </pre>
+              </p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Revisitando Ord e Eq</h2>
+          <small>
+              <p class="fragment fade-up">
+                <pre style="height: 180px;margin-bottom: 33px;" class="fragment fade-up language-haskell">
+                <code data-trim data-noescape>
+                    class Eq a => Ord a where
+                      compare :: a -> a -> Ordering
+                      (<) :: a -> a -> Bool
+                      (<=) :: a -> a -> Bool
+                      (>) :: a -> a -> Bool
+                      (>=) :: a -> a -> Bool
+                      max :: a -> a -> a
+                      min :: a -> a -> a
+                 </code>
+                </pre>
+              </p>
+              <p class="fragment fade-up">Na definição da classe há uma restrição de classe! Para 
+                começar a entender Ord precisamos entender Eq.
+              </p>
+              <p class="fragment fade-up">
+                <pre style="height: 70px;margin-bottom: 33px;" class="fragment fade-up language-haskell">
+                <code data-trim data-noescape>
+                    class Eq a where
+                      (==) :: a -> a -> Bool
+                      (/=) :: a -> a -> Bool
+                 </code>
+                </pre>
+              </p>
+              <p class="fragment fade-up">Você só consegue ordenar itens de conjuntos que são fechados 
+                em relação as operações de igualdade e desigualdade. O contrário não é verdadeiro.
+              </p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Bounded</h2>
+          <small>
+              <p class="fragment fade-up">
+                <pre style="height: 250px;margin-bottom: 33px;" class="fragment fade-up language-haskell">
+                <code data-trim data-noescape>
+                    GHCi> :info Int
+                      data Int = GHC.Types.I# GHC.Prim.Int# -- Defined in 'GHC.Types'
+                      instance Bounded Int -- Defined in 'GHC.Enum'
+                      instance Enum Int -- Defined in 'GHC.Enum'
+                      instance Eq Int -- Defined in 'GHC.Classes'
+                      instance Integral Int -- Defined in 'GHC.Real'
+                      instance Num Int -- Defined in 'GHC.Num'
+                      instance Ord Int -- Defined in 'GHC.Classes'
+                      instance Read Int -- Defined in 'GHC.Read'
+                      instance Real Int -- Defined in 'GHC.Real'
+                      instance Show Int -- Defined in 'GHC.Show'
+                 </code>
+                </pre>
+              </p>
+              <p class="fragment fade-up">Use para tipos que devem ter um limite superior e um limite inferior.
+                Se você olhar o tipo $integer$ verá que este tipo não é $Bounded$.
+              </p>
+              <p class="fragment fade-up">
+                <pre style="height: 70px;margin-bottom: 33px;" class="fragment fade-up language-haskell">
+                <code data-trim data-noescape>
+                    class Bounded a where
+                        minBound :: a
+                        maxBound :: a
+                 </code>
+                </pre>
+              </p>
+             </small>
+        </section>
+        <section class="nivel1">
+          <h2>Derivação</h2>
+          <small>
+              <p class="fragment fade-up">
+                <pre style="height: 30px;margin-bottom: 33px;" class="fragment fade-up language-haskell">
+                <code data-trim data-noescape>
+                    data Sorvete = Chocolate | Creme
+                 </code>
+                </pre>
+              </p>
+              <p class="fragment fade-up">Se você olhar, este tipo $Sorvete$ é, para todos os efeitos idêntico ao tipo Bool:.
+              </p>
+              <p class="fragment fade-up">
+                <pre style="height: 30px;margin-bottom: 33px;" class="fragment fade-up language-haskell">
+                <code data-trim data-noescape>
+                    data Bool = False | True
+                 </code>
+                </pre>
+              </p>
+              <p class="fragment fade-up">A diferença é que o Bool implementa uma instância de $show$. Então:
+              </p>
+              <p class="fragment fade-up">
+                <pre style="height: 30px;margin-bottom: 33px;" class="fragment fade-up language-haskell">
+                <code data-trim data-noescape>
+                    data Sorvete = Chocolate | Creme deriving (Show)
+                 </code>
+                </pre>
+              </p>
+              <p class="fragment fade-up">Indo um pouco mais longe:
+              </p>
+              <p class="fragment fade-up">
+                <pre style="height: 30px;margin-bottom: 33px;" class="fragment fade-up language-haskell">
+                <code data-trim data-noescape>
+                    data Sorvete = Chocolate | Creme deriving (Show,Eq,Ord)
+                 </code>
+                </pre>
+              </p>
+             </small>
+        </section>
+        <section class="nivel1">
+          <h2>Vamos Jogar Dados</h2>
+          <small>
+              <p class="fragment fade-up">
+                <pre style="height: 540px;margin-top: -45px;" class="fragment fade-up language-haskell">
+                <code data-trim data-noescape>
+                    data Dado = F1|F2|F3|F4|F5|F6 
+                    instance Show Dado where
+                        show F1 = "um"
+                        show F2 = "dois"
+                        show F3 = "três"
+                        show F4 = "quatro"
+                        show F5 = "cinco"
+                        show F6 = "seis"
+                    instance Eq Dado where
+                        (==) F6 F6 = True
+                        (==) F5 F5 = True
+                        ...
+                        (==) _ _ = False
+                    instance Ord Dado where
+                        compare F6 F6 = EQ
+                        compare F6 _ = GT
+                        compare _ F6 = LT  
+                        ...  
+                    instance Enum Dado where
+                      toEnum 0 = F1
+                      toEnum 1 = F2
+                      ...
+                      toEnum _ = error "Este valor não existe"
+                      fromEnum F1 = 0
+                      fromEnum F2 = 1
+                      fromEnum F3 = 2
+                      ...
+                 </code>
+                </pre>
+              </p>
+            </small>
+        </section>
+      </section><!-- Classes de Tipos -->
+      <section> <!-- Um Pouco de Matemática -->
+        <section id="title-slide" class="nivel1">
+          <h1 class="title">Um Pouco de Matemática</h1>
+          <p style="text-align: right !important;">Frank Coelho de Alcantara</p>
+        </section>
+        <section class="nivel1">
+          <h2>Relações</h2>
+          <small>
+          <p class="fragment fade-up">Uma relação é uma forma de criar um vínculo entre dois itens de um conjunto, ou entre itens de 
+            dois ou mais conjuntos. Quando a relação é determinada entre itens do mesmo conjunto ela é chamada de endorelação, ou relação 
+            endógina. Quando a relação é criada entre itens de dois conjuntos ela é chamada de relação binária.</p>
+          <p class="fragment fade-up">A relação $\rho$ entre os conjuntos $\mathbb{S}$ e $\mathbb{T}$ será um subconjunto do produto 
+            cartesiano entre $\mathbb{S}$ e $\mathbb{T}$:
+            $$x \rho y |(x,y)\in \rho \wedge \rho \subseteq \mathbb{S}\times \mathbb{T} $$
+          </p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Operações entre Relações</h2>
+          <small>
+          <p class="fragment fade-up">Seja $\mathbb{B}$ o conjunto de todas as relações binárias em um conjunto $\mathbb{S}$ dado, teremos:
+            $$\rho \in \mathbb{B}\wedge \sigma \in \mathbb{B}\therefore \rho \subseteq \mathbb{S}\times \mathbb{S}\wedge \sigma \subseteq \mathbb{S}\times \mathbb{S}$$
+          </p>
+          <p class="fragment fade-up">Desta forma, todas as operações realizadas entre $\rho$ e $\sigma$ resultam em subconjuntos 
+            de $\mathbb{S}\times \mathbb{S}$. Ou seja:
+            <ul>
+              <li class="fragment fade-up" style="list-style-type: none;">$(\rho \cup \sigma)\subseteq \mathbb{S}\times \mathbb{S}$</li>
+              <li class="fragment fade-up" style="list-style-type: none;">$(\rho \cap \sigma)\subseteq \mathbb{S}\times \mathbb{S}$</li>
+              <li class="fragment fade-up" style="list-style-type: none;">$(\rho')\subseteq \mathbb{S}\times \mathbb{S}$</li>
+              <li class="fragment fade-up" style="list-style-type: none;">$(\sigma')\subseteq \mathbb{S}\times \mathbb{S}$</li>
+            </ul>
+          </p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Operações Lógicas e Fecho</h2>
+          <small>
+          <p class="fragment fade-up">Uma vez que tenham sido definidas as operações de união, interseção e complemento teremos:</p>
+          <p class="fragment fade-up">
+            <ul>
+              <li class="fragment fade-up" style="list-style-type: none;">$x (\rho \cup \sigma) y\leftrightarrow (x\rho y)\vee (x\sigma y)$</li>
+              <li class="fragment fade-up" style="list-style-type: none;">$x (\rho \cap \sigma) y\leftrightarrow(x\rho y)\wedge (x\sigma y)$</li>
+              <li class="fragment fade-up" style="list-style-type: none;">$x \rho' y\leftrightarrow \neg (x\rho y)$</li>
+            </ul>
+          </p>
+          <p class="fragment fade-up">Sejam $\rho : \mathbb{A} \rightarrow \mathbb{A}$ e um conjunto de propriedades $\mathbb{P}$ qualquer 
+            então o fecho de $\rho $ em relação a $\mathbb{A}$ 
+            é a menor endorrelação em $\mathbb{A}$ que contém $\rho $ e que satisfaz as propriedades de $\mathbb{P}$.</p>
+            <p class="fragment fade-up">Exemplo: Fecho Simétrico $\rho \cup \rho^{-1}$</p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Monoide</h2>
+          <small style="font-size:67% !important;">
+          <p class="fragment fade-up">Um $monoide$ é um conjunto fechado em relação a uma operação binária associativa 
+            $*:\mathbb{S}\times \mathbb{S}\rightarrow \mathbb{S}$ e uma função identidade $id \in \mathbb{S}$, geralmente a partir de um elemento 
+            neutro, de tal forma que para $a, b, c \in \mathbb{S}$ teremos: 
+          <ol  class="fragment fade-up">
+            <li>Fechamento (clojure): $a * b \in \mathbb{S}$;</li>
+            <li>Associatividade: $a*(b*c)=(a*b)*c$;</li>
+            <li>Identidade: $(\exists \space\space id) | (id*a\space\space =\space\space a*id =\space\space a)$.</li>
+          </ol>
+        </p>
+        <p class="fragment fade-up">Muitos conjuntos formam $monoides$ em relação a uma ou mais operações. Por exemplo, o 
+          conjunto dos inteiros $\mathbb{Z}$ forma $monoides$ na adição, na subtração e na multiplicação. Na adição e subtração com 
+          o $0$ e na multiplicação com o $1$. Um $monoide$ é um $semigrupo$ com identidade que, por sua vez, é um $magma$ com associatividade.
+          finalmente adicionando invertibilidade ao $monoide$, chegamos ao $grupo$.
+        </p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Exemplos</h2>
+          <small style="font-size:69% !important;">
+            <p class="fragment fade-up">$Magma$: $(\mathbb{N}, (n,m) \rightarrow n^m)$ o conjunto $\mathbb{N}$ e a operação de potência $(n,m)\rightarrow n^m$. Esta operação não é associativa.</p>
+            <p class="fragment fade-up">$Semigrupo$: $(A,*)$ onde $A ={a \in \mathbb{I} \wedge a \space mod \space 2 = 0}$ e $*$ indica a multiplicação. A 
+              associatividade está clara em $(a * b) * c = a * (b * c) | a,b,c \in A$. Não existe elemento neutro em $A$, nem função identidade em $(A,*)$.</p>
+            <p class="fragment fade-up">$Monoide$: $(\mathbb{N},+)$ possui associatividade e identidade. Não tem invertibilidade.</p>
+            <p class="fragment fade-up">$Grupo$: $(\mathbb{Z},+)$ possui associatividade e identidade. Tem invertibilidade:
+              $$\forall (a \in \mathbb{Z}) \rightarrow (a + (-a) = 0) \wedge ((-a)+a=0)$$</p>    
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Função</h2>
+          <small>
+          <p class="fragment fade-up"  style="font-size:80%;">Função é a aplicação de uma relação entre dois conjuntos $domínio$ e $contradomínio$ em que, 
+            para cada elemento do $domínio$, existirá um correspondente no $contradomínio$, esse correspondente é conhecido como $imagem$.
+          $$f:S \rightarrow T$$</p>
+          
+          <p class="fragment fade-up">Para definir a função precisamos: 
+            <ul style="font-size:80%;">
+              <li class="fragment fade-up" style="list-style-type: none;">A definição do Domínio;</li>
+              <li class="fragment fade-up" style="list-style-type: none;">A definição do Contradomínio;</li>
+              <li class="fragment fade-up" style="list-style-type: none;">Uma relação. </li> 
+            </ul>
+          </p>
+          <p class="fragment fade-up" style="font-size:80%;">A relação pode ser uma descrição verbal, um gráfico, uma equação
+             ou uma coleção de pares ordenados. Relações um-para-um e muitos-para-um.</p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Composição de Funções</h2>
+          <small>
+            <p class="fragment fade-up">Sejam as funções: 
+                    $$f:S\rightarrow T \space\space \wedge \space\space g: T\rightarrow U$$</p>
+            <p class="fragment fade-up">Então a função composta $g\bullet f$ é uma função de $S$ em $U$ definida por:
+                    $$(g\bullet f)(s)=g(f(s)) | s \in S$$</p> 
+            <p class="fragment fade-up">A função $g\bullet f$ é a composição de $g$ e $f$.</p>
+            <p class="fragment fade-up">Esta é a origem dos diagramas comutativos.</p>  
+            <p class="fragment fade-up">Um exemplo pode ser encontrado <a
+                href="https://replit.com/@frankalcantara/ArvoreBinariaComposicaoFuncao?v=1" target="_blank" rel="noopener noreferrer">aqui</a></p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Categorias</h2>
+          <small>
+            <p class="fragment fade-up">Uma categoria é um conjunto de objetos (elementos) e setas.</p>
+            <p class="fragment fade-up">Os objetos podem ser representados como círculos, pontos, ou letras e setas são setas.</p>
+            <p class="fragment fade-up">Uma categoria representa uma composição, ou vice-versa. As setas permitem criar a composição.</p>
+            <p class="fragment fade-up"><img data-src="../img/categoria1.png" style="display: block;width: 300px;margin: 0 auto;" alt="exemplo de categoria com uma seta partindo de S para T, uma de T para U e uma de S para U" /></p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Categorias Formalmente</h2>
+          <small style="font-size:54% !important;">
+            <p class="fragment fade-up">Uma categoria é uma coleção de objetos $A, B, S, T, U...$. 
+              Frequentemente estes objetos representam estrutura complexas, como estruturas topológicas ou grupos. 
+              Entretanto, para nosso objetivo, são apenas vértices de um grafo direcionado. Pense em tipos.</p>
+            <p class="fragment fade-up">Uma coleção de morfismos tipados $f:S\rightarrow T$ para cada par de objetos.
+              Aqui também os objetos $S$ e $T$ serão chamados de $domínio$ e $contradomínio$ de $f$. $Morfismos$ são 
+              funções de $S$ para $T$. De forma abstrata morfismos são apenas os vértices de um grafo direcionado.</p>
+            <p class="fragment fade-up">Um operador de composição $\circ$ tipado de tal forma que se existem 
+              $f:S\rightarrow T$ e $g:T\rightarrow U$ existe $g\circ f:S\rightarrow U$. </p>
+            <p class="fragment fade-up">Um morfismo identidade $id:S\rightarrow S$ para cada objeto de $S$. Os morfismos identidade são 
+              identidades para composição à direita e à esquerda.</p>
+            <p class="fragment fade-up">Exemplos: conjuntos, conjuntos de funções, grupos, espaços topológicos, espaços vetoriais em $\mathbb{R}$. 
+              Também seria um exemplo o conjunto, parcialmente ordenado $(X, \leq)$ composto de objetos $x$ tal que exista um morfismo 
+              $x \rightarrow y \space\space iff \space\space x \leq y$. Esta é uma categoria de ordenação. Ou seja, uma categoria é apenas um monoide tipado.
+            </p>
+           </small>
+        </section>
+        <section class="nivel1">
+          <h2>Functor</h2>
+          <small style="font-size:62% !important;">
+            <p class="fragment fade-up">Um $Functor$ é um mapeamento entre categorias que preserva suas estruturas.</p>
+            <p class="fragment fade-up">Se $C$ e $D$ são categorias, um Functor $F:C\rightarrow D$ mapeia objetos $A \in C$ em 
+              objetos $FA \in D$ e os morfismos $f: A\rightarrow B$ de $C$ nos morfismos $Ff: FA \rightarrow FB$ de $D$ de tal forma
+              que $F(g \circ f) = Fg \circ Ff$ e $F(idA)= idFA.
+            </p>
+            <p class="fragment fade-up">Functors são morfismos de categorias. O que pode ser entendido com sendo uma categoria de categorias. 
+              Apenas tome cuidado com esta metáfora já que podemos incorrer em alguns dos paradoxos da teoria dos conjuntos.</p>
+            <p class="fragment fade-up">Um Functor mapeias objetos e morfismos de uma categoria em outra, preservando os morfismos originais. Ou, 
+              em outras palavras, as composições são preservadas: 
+              Se aplicamos o Functor $F$ a composição $h = g\circ f $ teremos $Fh= Fg \circ Ff$. 
+            </p>
+           </small>
+        </section>
+        <section class="nivel1">
+          <h2>Functor em Haskell</h2>
+          <small style="font-size:62% !important;">
+            <p class="fragment fade-up">
+                <pre style="height: 30px;margin-bottom: 33px;" class="fragment fade-up language-haskell">
+                <code data-trim data-noescape>
+                    class Functor f where  
+                          fmap :: (a -> b) -> f a -> f b  
+                 </code>
+                </pre>
+              </p>
+              <p class="fragment fade-up">O tipo de $f$ é abstrato, ao contrário dos tipos $a$ que vimos até o momento. Neste caso, $f$ não é uma variável de tipos, é
+                um constructor de tipos que receberá, como parâmetro, um tipo.</p>
+                <p class="fragment fade-up">$fmap$ recebe uma função $a\rightarrow b$ que recebe um tipo e devolve outro e um 
+                  functor aplicado sobre um tipo $fa$ e devolve um functor aplicado ao outro tipo $fb$.
+                </p>
+                <p class="fragment fade-up">
+                <pre style="height: 30px;margin-bottom: 33px;" class="fragment fade-up language-haskell">
+                <code data-trim data-noescape>
+                    class Functor f where  
+                          map :: (a -> b) -> [a] -> [b]  
+                 </code>
+                </pre>
+              </p>
+              <p class="fragment fade-up">A classe $Functor$ define uma função, $fmap$, mas não fornece nenhuma implementação.</p>
+              <p class="fragment fade-up">Um exemplo em Haskell pode ser encontrado <a
+                href="https://replit.com/@frankalcantara/ExemploFunctor?v=1" target="_blank" rel="noopener noreferrer">aqui</a></p>
+            </small>
+        </section>
+        <section class="nivel1">
+          <h2>Monoid</h2>
+          <small style="font-size:62% !important;">
+            <p class="fragment fade-up">Formalmente o momoide é um primitivo da álgebra abstrata que define um 
+              conjunto fechado em relação a uma operação de tal forma que esta operação seja binária, associativa e 
+              possua um elemento identidade.
+            </p>
+              <p class="fragment fade-up">Em Haskell a $monoid$ é um tipo que define uma regra para definir como 
+                dois elementos daquele tipo podem ser combinados para definir um novo elemento do mesmo tipo.
+              </p>
+              <p class="fragment fade-up">A função $++$ é um bom exemplo, eu posso usar em $[1,2]$ e $[3,4]$ para obter 
+                $[1,2,3,4]$ no conjunto dos inteiros a operação soma é outro bom exemplo. 
+              </p>
+               <p class="fragment fade-up">
+                <pre style="height: 30px;margin-bottom: 104px;" class="fragment fade-up language-haskell">
+                <code data-trim data-noescape>
+                    class Monoid a where
+                            mempty  :: a
+                            -- identidade de mappend
+                            mappend :: a -> a -> a
+                            -- associatividade de mappend
+                            mconcat :: [a] -> a
+
+                 </code>
+                </pre>
+              </p>
+              <p class="fragment fade-up">Ou, com considerando $++$ poderíamos ter:</p>
+              <p class="fragment fade-up">
+                <pre style="height: 30px;margin-bottom: 80px;" class="fragment fade-up language-haskell">
+                <code data-trim data-noescape>
+                    instance Monoid [a] where
+                      mappend = (++)
+                      mempty = []
+                      a `mappend` mempty = a
+                      mempty `mappend` a = a
+                 </code>
+                </pre>
+              </p>
+              <p class="fragment fade-up">Um detalhamento dos monoides em Haskell pode ser encontrado  <a
+                href="https://gist.github.com/cscalfani/b0a263cf1d33d5d75ca746d81dac95c5" target="_blank" rel="noopener noreferrer">aqui</a></p>
+           </small>
+        </section>
+       </section>
+      </section> <!-- Um Pouco de Matemática -->    
+     </section>  
+     <section class="nivel1">
+          <h2>Functor: no Haskell</h2>
+          <small style="font-size:62% !important;">
+            <p class="fragment fade-up">Um $Functor$ é um map entre categorias que preserva suas estruturas.</p>
+            <p class="fragment fade-up">Se $C$ e $D$ são categorias, um Functor $F:C\rightarrow D$ mapeia objetos $A \in C$ em 
+              objetos $FA \in D$ e os morfismos $f: A\rightarrow B$ de $C$ nos morfismos $Ff: FA \rightarrow FB$ de $D$ de tal forma
+              que $F(g \circ f) = Fg \circ Ff$ e $F(idA)= idFA$.
+            </p>
+            <p class="fragment fade-up">Functors são morfismos de categorias. O que pode ser entendido com sendo uma categoria de categorias. 
+              Apenas tome cuidado com esta metáfora já que podemos incorrer em alguns dos paradoxos da teoria dos conjuntos.</p>
+            <p class="fragment fade-up">Um Functor mapeias objetos e morfismos de uma categoria em outra, preservando os morfismos originais. Ou, 
+              em outras palavras, as composições são preservadas: 
+              Se aplicamos o Functor $F$ a composição $h = g\circ f$ teremos $Fh= Fg \circ FF$. 
+            </p>
+            
+            <p class="fragment fade-up">Um exemplo em Haskell pode ser encontrado <a
+                href="https://replit.com/@frankalcantara/ExemploFunctor?v=1" target="_blank" rel="noopener noreferrer">aqui</a></p>
+           </small>
+        </section>
+       </section>
+      </section> <!-- Um Pouco de Matemática -->    
+     </section>  
+    </div>
+  </div>
+  <div class="home-button"><a href="https://frankalcantara.com"><i class="fas fa-home"></i></a></div>
+  <script src="../../rev/reveal.js"></script>
+  <script src="../../rev/plugin/notes/notes.js"></script>
+  <script src="../../rev/plugin/search/search.js"></script>
+  <script src="../../rev/plugin/zoom/zoom.js"></script>
+  <script src="../../rev/plugin/math/math.js"></script>
+  <script src="../../rev/plugin/menu/menu.js"></script>
+  <script src="../../rev/plugin/highlight/highlight.js"></script>
+  <script src="../../rev/plugin/chalkboard/plugin.js"></script>
+
+  <script>
+    // Full list of configuration options available at:
+    // https://revealjs.com/config/
+    Reveal.initialize({
+      // Push each slide change to the browser history
+      history: true,
+      // transition style
+      transition: "default", // none/fade/slide/convex/concave/zoom
+      center: false,
+      math: {
+        mathjax:
+          "https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js",
+        config: "TeX-AMS_HTML-full",
+        // pass other options into `MathJax.Hub.Config()`
+        TeX: {
+          Macros: {
+            RR: "{\\bf R}",
+          },
+        },
+      },
+      menu: {
+        side: "left",
+        width: "normal",
+        numbers: false,
+        titleSelector: "h1, h2, h3, h4, h5, h6",
+        useTextContentForMissingTitles: false,
+        hideMissingTitles: false,
+        markers: true,
+        custom: false,
+        themes: false,
+        themesPath: "dist/theme/",
+        transitions: false,
+        openButton: true,
+        openSlideNumber: false,
+        keyboard: true,
+        sticky: false,
+        autoOpen: true,
+        delayInit: false,
+        openOnInit: false,
+        loadIcons: true,
+      },
+
+      // reveal.js plugins
+      plugins: [
+        RevealNotes,
+        RevealMath,
+        RevealMenu,
+        RevealChalkboard,
+        RevealSearch,
+        RevealZoom,
+        RevealHighlight,
+      ],
+    });
+  </script>
+</body>
+
+</html>

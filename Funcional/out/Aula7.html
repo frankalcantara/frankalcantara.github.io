@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Frank Coelho de Alcantara - 2021">
+  <title>Listas</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+  <link rel="stylesheet" href="../../rev/reset.css" />
+  <link rel="stylesheet" href="../../rev/reveal.css" />
+  <link rel="stylesheet" href="../../rev/plugin/highlight/monokai.css" />
+  <link rel="stylesheet" href="../../rev/interpret.css" />
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section id="title-slide" class = "nivel1">
+        <h1 class="title">Exercícios </br> Práticos - 1</h1>
+        <p style="text-align: right !important;">Frank Coelho de Alcantara - 2021 &nbsp;&nbsp;&nbsp;</p>
+      </section>
+      <section>
+        <section class="nivel1">
+            <h2>Last usando foldr</h2>
+            <pre class="fragment fade-up language-haskell" style="height: 355px;margin-bottom: 50px;">
+              <code data-trim data-noescape>
+                module Main where
+                
+                import Data.Maybe
+                import Control.Applicative ((<|>))
+                
+                last_1 :: [a] -> a -- definição do tipo
+                -- uma função com muitas novidades
+                last_1 = fromJust . foldr (\x y -> y <|> Just x) Nothing 
+                
+                main::IO()
+                main = do
+                  print "coisa"
+                  print (last_1 [1,2,3,4,567]) --teste da função
+              </code>
+          </pre>
+            <p class="fragment fade-up" style="font-size: 75% !important; width: 90%; margin-left: 5%;">Em uma linha de código muita coisa nova. Vamos começar usando uma versão mais simples desta implementação.</p>
+        </section>
+        <section class="nivel1">
+          <h2>Last_4</h2>
+          <pre class="fragment fade-up language-haskell" style="height: 428px;"><code data-trim data-noescape>
+          module Main where
+          import Data.Maybe
+          import Control.Applicative ((<|>))
+                  
+          last_4 :: [a] -> a --definição de tipo
+          last_4 xs =
+            case foldr go Nothing xs of
+              Nothing -> error "last: lista vazia"
+              Just x -> x
+            where
+              go x (Just y) = Just y
+              go x Nothing = Just x
+          
+          main::IO()
+          main = do
+            print (last_4 [1,2,3,4,567]) --resultado 567
+          </code></pre>
+          <p class="fragment fade-up">Tente este código em um ambiente online de <i>Haskell</i>.</p>
+        </section>
+        <section class="nivel1">
+          <h2>Case</h2>
+          <small>
+          <p class="fragment fade-up">Um case deve ter, no mínimo, uma alternativa. Cada alternativa deve ter um corpo. Todos os corpos
+            devem ser do mesmo tipo e este será o tipo do case.</p>
+          <pre class="fragment fade-up language-haskell">
+            <code data-trim data-noescape>
+              module Main where
+
+              coisa x = case x of
+                1 -> "A"
+                2 -> "B"
+                3 -> "C"
+              --que poderia ser escrito como:  
+              coisa2 1 = "A"
+              coisa2 2 = "B"
+              coisa2 3 = "C"
+
+              main::IO()
+              main = do
+                print (coisa 3) --"C"
+                print (coisa2 3) --"C"
+            </code>
+          </pre>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Case Exercicio 1</h2>
+          <small>
+            <p class="fragment fade-up">Defina uma função <i>caseTail</i> que devolva o <i>tail</i> de uma lista usando a 
+            expressão <i>case</i>. Você tem 3 minutos para isso.</p>
+            <pre class="fragment fade-up language-haskell">
+              <code data-trim data-noescape>
+                module Main where
+                      
+                caseTail :: [a] -> [a]
+                caseTail x =
+                  case x of
+                    [] -> error "lista vazia não tem tail"
+                    (x:xs) -> xs
+                
+                main::IO()
+                main = do
+                  print (caseTail [1,2,3,4,567])
+              </code>
+            </pre>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Case Exemplo 2</h2>
+          <small style="font-size: 58% !important;">
+            <p class="fragment fade-up">Escreva uma função, que recebendo o código de um estado (RJ e PR) devolva o string:
+            vai visitar o (nome do estado por extenso), usando o case. Vamos ver o código.</p>
+            <pre class="fragment fade-up language-haskell">
+                    <code data-trim data-noescape>
+                      module Main where
+                      -- apenas para converter código em extenso       
+                      parseEstado :: String -> Maybe String
+                      parseEstado "RJ" = Just "Rio de Janeiro"
+                      parseEstado "PR" = Just "Paraná"
+                      parseEstado _ = Nothing
+                      -- usando o case
+                      visitar :: String -> String
+                      visitar codigoEstado = case parseEstado codigoEstado of
+                        Just estado -> "vai visitar o " ++ estado
+                        Nothing -> "resultado desconhecido"
+                      -- usando uma função de ajuda                   
+                      visitar2 :: String -> String
+                      visitar2 codigoEstado = tratando (parseEstado codigoEstado)
+                        where
+                          tratando (Just estado) = "vai visitar o " ++ estado
+                          tratando Nothing = "resultado desconhecido"
+                      
+                      main::IO()
+                      main = do
+                        print (visitar "RJ")
+                        print (visitar "AM")
+                        print (visitar2 "RJ")
+                        print (visitar2 "AM")
+                    </code>
+                  </pre>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Case Exercício 2</h2>
+          <small style="font-size: 58% !important;">
+            <p class="fragment fade-up">Escreva uma função, usando case, que determine se uma determinada frase é uma declaração,
+              uma pergunta ou uma exclamação. Escreva também esta mesma função usando uma função de ajuda. Você tem 10 minutos para isso.
+            </p>
+            <pre class="fragment fade-up language-haskell">
+              <code data-trim data-noescape>
+                module Main where
+                      
+                tipoSentenca :: String -> String
+                tipoSentenca sentenca = case (last sentenca) of
+                  '.' -> "declaracao"
+                  '?' -> "questao"
+                  '!' -> "exclamacao"
+                  _ -> "erro de sintaxe"
+                
+                tipoSentenca2 :: String -> String
+                tipoSentenca2 sentenca = classifica (last sentenca)
+                  where
+                    classifica '.' = "declaracao"
+                    classifica '?' = "questao"
+                    classifica '!' = "exclamacao"
+                    classifica _ = "erro de sintaxe"
+                
+                main::IO()
+                main = do
+                  print (tipoSentenca "isso é uma pergunta?")
+                  print (tipoSentenca2 "isso é uma pergunta!")
+              </code>
+            </pre>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Where</h2>
+          <small style="font-size: 68% !important">
+            <p class="fragment fade-up">Usamos <i>where</i>, entre outras coisas, para definir expressões intermediárias. Pegue, 
+              por exemplo, uma função qualquer:</p>
+            <pre class="fragment fade-up language-haskell" style="height: 50px; margin-bottom: 41px;">
+              <code data-trim data-noescape>
+                qualquerFunc :: Int -> Int -> Int -> Int
+                qualquerFunc a b c = (c - a) + (b - a) + (a + b + c) + a
+              </code>
+            </pre>
+            <p class="fragment fade-up">Podemos reescrever usando <i>where</i> e funções intermediárias, que só existem neste escopo.</p>
+            <pre class="fragment fade-up language-haskell" style="height: 113px; margin-bottom: 41px;">
+              <code data-trim data-noescape>
+                qualquerFunc2 :: Int -> Int -> Int -> Int
+                qualquerFunc2 a b c = dif1 + dif2 + som1 + a
+                  where
+                    diff1 = c - a
+                    diff2 = b - a
+                    som1 = a + b + c
+              </code>
+            </pre>
+            <p class="fragment fade-up">A ordem das funções não importa. E podemos usar <i>where</i> para declarar funções dentro de funções.</p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Let</h2>
+          <small style="font-size: 68% !important">
+            <p class="fragment fade-up">Podemos usar o <i>let</i> de forma muito parecida, com exceção que precisaremos do <i>in</i> e a ordem
+            das funções intermediárias importa na definição.</p>
+            <pre class="fragment fade-up language-haskell" style="height: 145px; margin-bottom: 41px;">
+              <code data-trim data-noescape>
+                qualquerFunc2 :: Int -> Int -> Int -> Int
+                qualquerFunc2 a b c = 
+                  let 
+                    diff1 = c - a
+                    diff2 = b - a
+                    som1 = a + b + c
+                  in 
+                    dif1 + dif2 + som1 + a
+              </code>
+              </pre>
+            <p class="fragment fade-up">Quando usamos $IO()$ não usamos o <i>in</i>. E podemos usar o <i>let</i> para definir a 
+              ligação de variáveis e funções.</i> </p>
+            <pre class="fragment fade-up language-haskell" >
+            <code data-trim data-noescape>
+              let formula = 7 * (let x = 3 in x + 100) + 2
+            </code>
+            </pre>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Let, where Exercício 1 </h2>
+              <p class="fragment fade-up" style="font-size: 90%;">O índice de massa muscular (IMM), uma lenda ainda usada pelos médicos, é o resultado da divisão 
+              do seu peso pelo quadrado da sua altura. Se ele for menor que 18.5, você está abaixo do peso. 
+              Se este índice estiver entre 18.5 e 25 você tem peso normal. Entre 25 e 30 você estará acima do peso mais que isso será obeso. 
+              Usando, obrigatoriamente <i>where</i>, ou <i>let</i> faça, em Haskell uma função para determinar o IMM de um indivíduo. Lembrando
+              que o resultado precisa indicar: abaixo do peso, normal, acima do peso ou obeso. Você tem 15 minutos para isso.
+            </p>
+        </section>
+        <section class="nivel1">
+          <h2>Resultados inexistentes</h2>
+          <small style="font-size: 58% !important">
+            <p class="fragment fade-up">Eventualmente encontramos uma situação, onde o valor desejado simplesmente não existe. Em linguagens de 
+              programação imperativas lidamos com isso de duas formas: 
+            </p>
+            <ol>
+              <li class="fragment fade-up"><b>Retornamos um erro:</b> cabe ao programador prever o problema, capturar o erro e emitir algum tipo de alerta de exceção. Alguma 
+                coisa como $try \space \space catch$ em C++. Um dos problemas que esta solução enfrenta é manter o erro informativo e, tratar 
+                cada erro possível e imaginável, na forma adequada. 
+              </li>
+              <li class="fragment fade-up"><b>Retornamos <i>null</i>:</b> ou <i>nil</i>, ou qualquer valor que indique inexistência. Neste caso, também cabe ao programador 
+                verificar o valor <i>null</i> em todos os lugares onde este valor possa ser usado. Além disso, os valores <i>null</i> são complexos e 
+                se comportam de forma diferente dos valores tradiconais. 
+              </li>  
+            </ol>
+            <p class="fragment fade-up">O Haskell resolve este problema usando o tipo <i>Maybe</i>, definido como:</p>
+            <pre class="fragment fade-up language-haskell">
+              <code data-trim data-noescape>
+                data Maybe a = Nothing | Just a
+              </code>
+            </pre>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Maybe</h2>
+          <small style="font-size: 58% !important">
+            <p class="fragment fade-up">No caso da definição do tipo <i>Maybe</i> usamos dois outros tipos:</p>
+            <pre class="fragment fade-up language-haskell" style="height: 16px; margin-bottom: 40px;">
+              <code data-trim data-noescape>
+                data Maybe a = Nothing | Just a
+              </code>
+            </pre>
+            <p class="fragment fade-up">O <i>data</i> indica que estamos definindo um novo tipo de dado. A barra vertical $|$ representa seleção, e pode 
+            ser lida como ou. O $a$ é o parâmetro do tipo. Ou seja, definimos um tipo, <i>Maybe</i>, que aplicado a um valor $a$ 
+            qualquer pode retornar <i>Nothing</i> ou <i>Just a</i>.</p>
+            <p class="fragment fade-up"><i>Just a</i> representa o próprio valor $a$, enquanto <i>Nothing</i> representa nada do tipo do valor $a$.</p>
+            <p class="fragment fade-up"><i>Maybe</i> é um construtor de tipos. Se passarmos um <i>char</i> como parâmetro, teremos um tipo 
+            <i>Maybe Char</i>. Se o $a$ for um inteiro termos o tipo <i>Maybe Int</i>... <i>Nothing</i>, por sua vez é um tipo polimórfico 
+            ele pode ser de qualquer um dos tipos estanciados por <i>Maybe a</i> e não requer parâmetros. <i>Just</i> também é polimórfico 
+            mas requer o parâmetro $a$ e será do mesmos tipo criado pelo <i>Maybe a</i>.</p>
+            <p class="fragment fade-up">Tipos paramétricos em <i>C++</i> são chamados de <i>templates</i>, em <i>java</i> de <i>generics</i></p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Exemplo Maybe</h2>
+          <small>
+            <p class="fragment fade-up">Tomemos como exemplo a definição da função <i>find</i></p>
+            <pre class="fragment fade-up language-haskell">
+              <code data-trim data-noescape>
+                -- | Find the first element from the list for which the predicate function
+                -- returns True. Return Nothing if there is no such element.
+                find :: (a -> Bool) -> [a] -> Maybe a
+                find _ [] = Nothing
+                find predicate (first:rest) =
+                  if predicate first
+                    then Just first
+                    else find predicate rest
+              </code>
+            </pre>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Voltando ao Last_4</h2>
+          <pre class="fragment fade-up language-haskell"  style="height: 428px;"><code data-trim data-noescape>
+                module Main where
+                import Data.Maybe
+                import Control.Applicative ((<|>))
+                        
+                last_4 :: [a] -> a --definição de tipo
+                last_4 xs =
+                  case foldr go Nothing xs of
+                    Nothing -> error "last: lista vazia"
+                    Just x -> x
+                  where
+                    go x (Just y) = Just y
+                    go x Nothing = Just x
+                
+                main::IO()
+                main = do
+                  print (last_4 [1,2,3,4,567]) --resultado 567
+                </code></pre>
+          <p class="fragment fade-up">Podemos simplificar um pouco.</p>
+        </section>
+        <section class="nivel1">
+          <h2>Last_3</h2>
+          <pre class="fragment fade-up language-haskell" style="height: 366px; margin-bottom: 50px;">
+            <code data-trim data-noescape>
+              module Main where
+              import Data.Maybe
+              import Control.Applicative ((<|>))
+                      
+              last_3 :: [a] -> a
+              last_3 xs =
+              case foldr (\x y -> y <|> Just x) Nothing xs of
+                Nothing -> error "last: lista vazia"
+                Just x -> x
+            
+              main::IO()
+              main = do
+                print (last_3 [1,2,3,4,567]) --resultado 567
+            </code>
+          </pre>
+          <p class="fragment fade-up" style="font-size: 80% !important;">Reduzimos a função $go$. Observe o operador alternative $<|>$. 
+            Agora quero tirar o <i>case</i>.</p>
+        </section>
+        <section class="nivel1">
+        <h2>Last_2</h2>
+        <pre class="fragment fade-up language-haskell" style="height: 380px; margin-bottom: 50px;">
+          <code data-trim data-noescape>
+            module Main where
+            import Data.Maybe
+            import Control.Applicative ((<|>))
+                    
+            last_2 :: [a] -> a
+            last_2 xs = fromJust $ foldr (\x y -> y <|> Just x) Nothing xs
+
+            -- que é a mesma coisa que:
+            last_2' :: [a] -> a
+            last_2' xs = fromJust (foldr (\x y -> y <|> Just x) Nothing xs)
+          
+            main::IO()
+            main = do
+              print (last_2 [1,2,3,4,567]) --resultado 567
+              print (last_2' [1,2,3,4,567]) --resultado 567
+          </code>
+        </pre>
+        <p class="fragment fade-up" style="font-size: 70% !important; width: 90%; margin-left: 5%;">O operador $\$$, operador de aplicação, pode ser usado para definir precedência e 
+          é mais "elegante" que o uso dos parênteses.</p>
+        </section>
+        <section class="nivel1">
+        <h2>Finalmente Last_1</h2>
+        <pre class="fragment fade-up language-haskell" style="height: 275px; margin-bottom: 50px;">
+              <code data-trim data-noescape>
+                module Main where
+                import Data.Maybe
+                import Control.Applicative ((<|>))
+                        
+                last_1 :: [a] -> a
+                last_1 = fromJust . foldr (\x y -> y <|> Just x) Nothing
+              
+                main::IO()
+                main = do
+                  print (last_1 [1,2,3,4,567]) --resultado 567
+              </code>
+            </pre>
+        <p class="fragment fade-up" style="font-size: 70% !important; width: 90%; margin-left: 5%;">E agora, do nada apareceu um ".".</p>
+        </section>
+        <section class="nivel1">
+        <h2>Composição de Funções</h2>
+        <pre class="fragment fade-up language-haskell" style="height: 375px; margin-bottom: 50px;">
+          <code data-trim data-noescape>
+              module Main where
+              -- (.) :: (b -> c) -> (a -> b) -> a -> c
+              
+              f :: Int -> Int
+              f x = * 2 x
+              
+              g :: Int -> Int
+              g x = x - 1
+            
+              h = f.g
+            main::IO()
+              main = do
+                print (h 5) --resultado 8
+                print ((f.g) 5) --resultado 8
+          </code>
+        </pre>
+        </section>
+        <section class="nivel1">
+          <h2>Exercício</h2>
+          <p class="fragment fade-up" style="font-size: 70% !important; width: 90%; margin-left: 5%;">Explique, detalhadamente,
+          as seguintes soluções:</p>
+          <pre class="fragment fade-up language-haskell" style="height: 420px; margin-bottom: 50px;">
+          <code data-trim data-noescape>
+              module Main where
+              -- implementando head
+              head_1 :: [a] -> a
+              head_1 = foldr (\x xs -> x) (error "head: lista vazia")
+              
+              -- implementado tail
+              tail_1 :: [a] -> Maybe (a, [a])
+              tail_1 = foldr go Nothing where
+                go x Nothing = Just (x, [])
+                go head (Just (head', tail)) = Just (head, head':tail)
+              
+              main::IO()
+              main = do
+                print (head_1 [1, 3, 4, 12, 675])
+                print (head_1 ['1', '3', '4'])
+                print (tail_1 [1, 2, 3])
+          </code>
+        </pre>
+        </section>
+      </section>
+    </div>
+  </div>
+  <div class="home-button"><a href="https://frankalcantara.com"><i class="fas fa-home"></i></a></div>
+  <script src="../../rev/reveal.js"></script>
+  <script src="../../rev/plugin/notes/notes.js"></script>
+  <script src="../../rev/plugin/search/search.js"></script>
+  <script src="../../rev/plugin/zoom/zoom.js"></script>
+  <script src="../../rev/plugin/math/math.js"></script>
+  <script src="../../rev/plugin/menu/menu.js"></script>
+  <script src="../../rev/plugin/highlight/highlight.js"></script>
+  <script src="../../rev/plugin/chalkboard/plugin.js"></script>
+
+  <script>
+    // Full list of configuration options available at:
+    // https://revealjs.com/config/
+    Reveal.initialize({
+      // Push each slide change to the browser history
+      history: true,
+      // transition style
+      transition: "default", // none/fade/slide/convex/concave/zoom
+      center: false,
+      math: {
+        mathjax:
+          "https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js",
+        config: "TeX-AMS_HTML-full",
+        // pass other options into `MathJax.Hub.Config()`
+        TeX: {
+          Macros: {
+            RR: "{\\bf R}",
+          },
+        },
+      },
+      menu: {
+        side: "left",
+        width: "normal",
+        numbers: false,
+        titleSelector: "h1, h2, h3, h4, h5, h6",
+        useTextContentForMissingTitles: false,
+        hideMissingTitles: false,
+        markers: true,
+        custom: false,
+        themes: false,
+        themesPath: "dist/theme/",
+        transitions: false,
+        openButton: true,
+        openSlideNumber: false,
+        keyboard: true,
+        sticky: false,
+        autoOpen: true,
+        delayInit: false,
+        openOnInit: false,
+        loadIcons: true,
+      },
+
+      // reveal.js plugins
+      plugins: [
+        RevealNotes,
+        RevealMath,
+        RevealMenu,
+        RevealChalkboard,
+        RevealSearch,
+        RevealZoom,
+        RevealHighlight,
+      ],
+    });
+  </script>
+</body>
+
+</html>

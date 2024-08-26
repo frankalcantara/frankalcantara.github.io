@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Frank Coelho de Alcantara ">
+  <title>lazy, tipos e exercícios</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+  <link rel="stylesheet" href="../../rev/reset.css" />
+  <link rel="stylesheet" href="../../rev/reveal.css" />
+  <link rel="stylesheet" href="../../rev/plugin/highlight/monokai.css" />
+  <link rel="stylesheet" href="../../rev/interpret.css" />
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section id="title-slide" class = "nivel1">
+        <h1 class="title">lazy, tipos e classes</h1>
+        <p style="text-align: right !important;">Frank Coelho de Alcantara - 2021 &nbsp;&nbsp;&nbsp;</p>
+      </section>
+      <section><!-- lazy Evaluation-->
+        <section id="title-slide" class="nivel1">
+          <h1 class="title">lazy </br> Evaluation</h1>
+          <p style="text-align: right !important;">Frank Coelho de Alcantara</p>
+        </section>
+        <section class="nivel1">
+          <h2>Modelo Mental</h2>
+          <small style="font-size: 67% !important;">
+            <p class="fragment fade-up">
+              Nós aprendemos a codificar algoritmos usando programação imperativa. Neste modelo, existe uma ordem para a avaliação das declarações:
+              <ul>
+                <li class="fragment fade-up">As declarações são avaliadas de cima para baixo e da esquerda para direita;</li>
+                <li class="fragment fade-up">Se uma função $A$ recebe como argumento uma função $B$, a função $B$ será avaliada primeiro;</li>
+                <li class="fragment fade-up">Se uma função $A$ recebe como argumentos as funções $B$, $C$, $D$, $B$ será avaliado antes de $C$ e $C$ será avaliado antes de $D$;
+                   </li>
+                <li class="fragment fade-up">Se uma função recebe como argumento uma operação aritmética, os operados serão avaliados de acordo com as regras da aritmética, da esquerda para direita;</li>   
+              </ul>
+            </p>
+            <p class="fragment fade-up">Em inglês este modelo é chamado de <i>syntactically straightforward</i>.</i></p>
+          </small>
+        </section>
+         <section class="nivel1">
+          <h2>lazy Evaluation</h2>
+            <small>
+              <p class="fragment fade-up"><i>lazy evaluation</i>, ou <i>avaliação preguiçosa</i> em português, é uma técnica de avaliação 
+                de expressões na qual, a expressão só é avaliada quando seu valor é necessário. Suponha que você tenha a seguinte definição:</p>
+                <pre class="fragment fade-up ">
+                <code data-trim data-noescape>
+                  module Main where
+                  -- lazy evaluation
+                  quadrado :: Int -> Int
+                  quadrado x = x * x
+                  
+                  main :: IO ()
+                  main = do
+                    print (quadrado (4+8))  -- resulta em 144
+                </code>
+              </pre>
+              <p class="fragment fade-up">Teríamos duas formas de avaliar $quadrado (4+8)$.</p>
+            </small>
+         </section>
+         <section class="nivel1">
+          <h2>Eager X lazy</h2>
+            <table class="fragment fade-up">
+              <tr>
+                <th>
+                  Eager
+                </th>
+                <th style="width: 55%;">
+                  lazy
+                </th>
+              </tr>
+              <tr>
+                <td>
+                    <pre style="height: 107px;width:97%;margin-bottom: 108px;" class="fragment fade-up ">
+                      <code data-trim data-noescape>
+                        quadrado (3+4)
+                        = quadrado 3+4
+                        = let x = 3+4 in x*x
+                        = 3+4*3+4
+                        = 7*9
+                        = 49
+                      </code>
+                    </pre>
+                </td>
+                <td>
+                    <pre style="height: 90px;margin-bottom: 108px;" class="fragment fade-up ">
+                      <code data-trim data-noescape>
+                        quadrado (3+4)
+                        = let x = 3+4 in x*x
+                        = let x = 7 in x*x
+                        = 7*7
+                        = 49
+                      </code>
+                    </pre>
+                </td>
+              </tr>
+            </table>
+            <p class="fragment fade-up" style="font-size: 85%; width: 83%;margin-left: 8%;">Neste caso o número de operações seria aproximadamente
+              o mesmo e o ganho computacional não fica evidente. Podemos melhorar isso usando um exemplo, um pouco mais complexo.</p>
+         </section>
+         <section class="nivel1">
+            <h2>lazy X Eager 2</h2>
+            <small>
+              <p class="fragment fade-up">Considere que queremos o primeiro elemento de um par onde ambos os valores 
+              precisam ser calculados usando a nossa função quadrado, neste caso teríamos:</p>
+              <table class="fragment fade-up">
+                <tr class="fragment fade-up">
+                  <th style="width: 41%;">
+                    Eager
+                  </th>
+                  <th style="width: 45%;">
+                   lazy
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    <pre style="height: 90px;margin-bottom: 108px;" class="fragment fade-up ">
+                      <code data-trim data-noescape>
+                        fst (quadrado 1,quadrado 2) 
+                        = fst (1*1,quadrado 2) 
+                        = fst (1,quadrado 2) 
+                        = fst (1,2*2) 
+                        = fst (1,4) 
+                        = 1 
+                      </code>
+                    </pre>
+                  </td>
+                  <td>
+                    <pre style="height: 90px;margin-bottom: 108px;" class="fragment fade-up ">
+                      <code data-trim data-noescape>
+                        fst (quadrado 1,quadrado 2)
+                        = let p = (quadrado 1,quadrado 2) 
+                          in fst p
+                        = quadrado 1
+                        = 1*1
+                        = 1
+                      </code>
+                    </pre>
+                  </td>
+                </tr>
+              </table>
+              <p class="fragment fade-up" style="font-size: 87%;">O custo computacional de calcular o quadrado de 2 não é necessário. </p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>lazy X Eager 3</h2>
+          <small style="font-size: 61% !important;">
+            <pre style="height: 150px; margin: 0 0 44px 52px !important;;" class="fragment fade-up ">
+              <code data-trim data-noescape>
+                              
+                fatorial :: Int -> Int
+                fatorial n = fact (n,1)
+                fat :: (Int,Int) -> Int
+                fat (x,y) = if x==0 then y else fact (x-1,x*y)
+                
+                main :: IO ()
+                main = do
+                  print (fatorial 3)
+              </code>
+            </pre>
+            <table class="fragment fade-up">
+              <tr class="fragment fade-up">
+                <th style="width: 41%;">
+                  Eager
+                </th>
+                <th style="width: 45%;">
+                  lazy
+                </th>
+              </tr>
+              <tr>
+                <td>
+                  <pre style="height: 60px;margin-bottom: 114px; margin-top: 0px;" class="fragment fade-up ">
+                    <code data-trim data-noescape>
+                      factorial 3 
+                      = fact (3,1)
+                      = fact (3-1,3*1)
+                      = fact (2,3)
+                      = fact (2-1,2*3)
+                      = fact (1,6)
+                      = fact (1-1,1*6)
+                      = fact (0,6)
+                      = 6 
+                    </code>
+                  </pre>
+                </td>
+                <td>
+                  <pre style="height: 60px;margin-bottom: 114px; margin-top: 0px;" class="fragment fade-up">
+                    <code data-trim data-noescape>
+                      factorial 3 
+                      = fact (3,1)
+                      = fact (3-1,3*1)
+                      = fact (2-1,2*(3*1))
+                      = fact (1-1,1*(2*(3*1)))
+                      = 1*(2*(3*1))
+                      = 1*(2*3)
+                      = 1*6
+                      = 6
+                    </code>
+                  </pre>
+                </td>
+              </tr>
+            </table>
+            <p class="fragment fade-up">A técnica <i>lazy</i> usa mais memória que a técnica <i>eager</i>. </p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Analisando Laziness</h2>
+          <small style="font-size: 54% !important;"> 
+            <p class="fragment fade-up">lazy representa a economia de ciclos de máquina, mas implica em consumo extra de memória.
+              A vantagem da avaliação preguiçosa aparece quando precisamos trabalhar com conjuntos de dados muito grandes, ou ilimitados.</p>
+              <p class="fragment fade-up">Vamos usar por exemplo, o Crivo de Eratóstenes. Segundo a tradição, o Terceiro Mestre Bibliotecário, da 
+                Biblioteca de Alexandria, Eratóstenes, que viveu no terceiro século antes de Cristo desenvolveu um algoritmo simples para encontrar
+                números primos. Uma versão deste algoritmo pode ser encontrada <a href="https://pt.wikipedia.org/wiki/Crivo_de_Erat%C3%B3stenes" target="_blank" rel="noopener noreferrer">aqui</a>.
+              </p>
+              <p class="fragment fade-up">Eratóstenes, para simplificar seus cálculos encontra a raiz quadrada inteira mais próxima do valor desejado.
+                Cria uma lista de números, até o valor desejado e vem eliminando, desta lista, os múltiplos de todos os primos em ordem exceto o um.
+              </p>
+              <p class="fragment fade-up">Assim, eliminando os múltiplos de 2 remove todos os pares, depois elimina todos os múltiplos de 3 e segue assim até
+                eliminar todos os múltiplos da raiz encontrada.</p>
+              <p class="fragment fade-up">Contudo, podemos eliminar o cálculo da raiz e usar o mesmo processo para encontrar, por exemplo, os primeiros 100 primos.</p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Exemplo 1 - Meio Crivo</h2>
+          <small>
+            <pre style="height: 166px; margin: 0 0 88px 52px !important;;" class="fragment fade-up language-haskell">
+              <code data-trim data-noescape>
+                module Main where
+                
+                crivo :: [Int] -> [Int]
+                crivo (p : xs) = p : crivo (filter (\x -> x `mod` p /= 0) xs)
+                numerosPrimos n=take n $ crivo [2..] 
+                
+                main::IO() 
+                main=do
+                  print(numerosPrimos 10)
+              </code>
+            </pre>
+            <p class="fragment fade-up">Este código está disponível <a href="http://tpcg.io/ASXLZO" target="_blank" rel="noopener noreferrer">aqui</a>.</p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Exemplo 1 - Análise</h2>
+          <small style="font-size: 64% !important;">
+            <pre style="height: 24px; margin: 0 0 34px 52px !important;" class="language-haskell">
+              <code data-trim data-noescape>
+                crivo (p : xs) = p : crivo (filter (\x -> x `mod` p /= 0) xs)
+              </code>
+            </pre>
+            <p>
+              <pre class="nalinha" style="width:147px;"><code data-trim data-noescape>crivo (p : xs)</code></pre> 
+              define uma função cujo único argumento é uma lista.
+            </p>
+            <p>
+              <pre class="nalinha" style="width:90px;"><code data-trim data-noescape>(p : xs)</code></pre> define uma lista cujo primeiro item é $p$ 
+              e o segundo item é o $tail$ da lista. Então a função $crivo$ retorna uma lista cujo primeiro item $p$ é o primeiro item da lista 
+              que ela recebe como argumento. O resto desta lista, o $tail$, será dado por:
+            </p>
+            <p>
+              <pre class="nalinha" style="width:350px;"><code data-trim data-noescape>crivo (filter (\x -> x `mod` p /= 0) xs)</code></pre>
+              uma chamada recursiva da função $crivo$ cujo argumento é uma lista resultante da aplicação da função $filter$. Na Função:
+            </p>
+            <p>
+              <pre class="nalinha"
+                style="width:282px;"><code data-trim data-noescape>filter (\x -> x `mod` p /= 0) xs</code></pre> o predicado é uma função 
+                que devolve $True$ se, e somente se, o resto da divisão de $x$ por $p$ é diferente de zero. O 
+                argumento da função $filter$ é o $tail$ da lista original. 
+            </p>
+            
+            <p>20 minutos para você desenvolver, em Haskell uma função que devolva a lista dos $n$ primeiros <a href="https://en.wikipedia.org/wiki/Narcissistic_number" target="_blank" rel="noopener noreferrer"> Números de Armstrong</a>.</p>
+            </small>
+        </section>
+      </section> <!-- lazy Evaluation-->
+      <section>  <!-- Tipos -->
+        <section id="title-slide" class="nivel1">
+          <h1 class="title">Tipos e Classes de Tipos</h1>
+          <p style="text-align: right !important;">Frank Coelho de Alcantara</p>
+        </section>
+        <section class="nivel1">
+          <h2 class="title">Funções e Tipos</h2>
+          <p class="fragment fade-up">Uma definição de função deve incluir: 
+            uma assinatura de tipos e a definição da função.</p>
+          <img class="fragment fade-up" data-src="../img/definicao_tipos.png" style=" height: 200px !important; margin-top: 6%;"
+            alt="Mostra a assinatura e a definição de uma função." />
+        </section>
+        <section class="nivel1">
+            <h2>Tipos Built-in - Primitivos</h2>
+              <small style="font-size:75% !important">
+                <p class="fragment fade-up">Tipos Primitivos:</p>
+                <ol>
+                  <li class="fragment fade-up">
+                    <b>Int</b>: limitado, com precisões derivadas da palavra do seu sistema (32 ou 64 bits). Performance melhor que o tipo Integer.
+                  </li>
+                  <li class="fragment fade-up">
+                    <b>Integer</b>: para números realmente grandes, limitados apenas pelo tamanho da memória do seu computador.
+                  </li>
+                  <li class="fragment fade-up">
+                    <b>Float</b>: ponto flutuante <i>IEEE-754</i> de precisão simples.
+                  </li>
+                  <li class="fragment fade-up">
+                    <b>Double</b>: ponto flutuante <i>IEEE-754</i> de precisão dupla.
+                  </li>
+                  <li class="fragment fade-up">
+                    <b>Char</b>: um caractere. Representado entre aspas simples: $'v'$.
+                  </li>
+                  <li class="fragment fade-up">
+                    <b>Bool</b>: tipo booleano. Tem, na verdade três valores. O terceiro é o valor $\bot$ (<i>undefined</i>). Todos os tipos em Haskell possuem o valor $\bot$.
+                  </li>
+                </ol>
+              </small>
+        </section>
+        <section class="nivel1">
+          <h2>Tipos Built-in - Compostos</h2>
+          <small style="font-size:75% !important">
+          <p class="fragment fade-up">Tipos compostos:</p>
+          <ol>
+            <li class="fragment fade-up">
+              <b>[Int]</b>: listas. No caso, uma lista de elementos do tipo Int.
+            </li>
+            <li class="fragment fade-up">
+              <b>(Int,Char)</b>: pares. No caso, um par de Int e Char.
+            </li>
+            <li class="fragment fade-up">
+              <b>(Int,Char,Bool)</b>: tripla. No caso, Int, Char e Bool.
+            </li>
+            <li class="fragment fade-up">
+              <b>()</b>: a tupla vazia.
+            </li>
+            <li class="fragment fade-up">
+              <b>Int -> Int</b>: uma função.
+            </li>
+            <li class="fragment fade-up">
+              <b>String</b>: uma lista de Chars.
+            </li>
+          </ol>
+          <p class="fragment fade-up">Sempre é uma boa prática fazer a definição dos tipos das funções antes de usar.
+            A tupla vazia $()$ tem dois valores o próprio $()$ e o $\bot$ (<i>undefined</i>).
+          </p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Definição de tipos</h2>
+          <small style="font-size:63% !important">
+            <p class="fragment fade-up">Suponha que você quer criar uma função que devolva $x$ primeiros elementos de uma lista.</p>
+            <pre style="height: 95px;margin-bottom: 52px;" class="fragment fade-up ">
+              <code data-trim data-noescape>
+                devolvex :: Int->[Int]->[Int] 
+                -- só funciona para inteiros.
+                devolvex2 :: Char->[Char]->[Char]
+                -- contudo o módulo list tem uma função take que funciona para tudo?!?!?!
+                take :: Int -> [a] -> [a]
+              </code>
+            </pre>
+            <p class="fragment fade-up">Este $a$ é uma variável de tipo. Uma variável de tipos pode assumir qualquer tipo e o identificador  
+              sempre começa com uma letra minúscula. Considere: </p>
+            <pre style="height: 62px;margin-bottom: 52px;" class="fragment fade-up ">
+              <code data-trim data-noescape>
+                (++) :: [a] -> [a] -> [a]
+                map :: (a -> b) -> [a] -> [b]
+                (.) :: (b -> c) -> (a -> b) -> (a -> c)
+              </code>
+            </pre>
+            <p class="fragment fade-up">Como você implementaria o tipo do operador $(+)$? Lembre-se que podemos criar nossos próprios tipos.</p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Para lembrar: Overloading</h2>
+          <small style="font-size:63% !important">
+            <p class="fragment fade-up">Um símbolo sofre um <i>overloading</i> quando possui dois ou mais sentidos diferenciados pelo tipo 
+              que serão determinados em tempo de compilação ou interpretação. Esta operação faz sentido quando a metáfora representada pelo símbolo 
+              é válida em todos os dois, ou mais sentidos. O exemplo clássico é a operação de soma que pode ser aplicada a números reais, inteiros ou 
+              imaginários.</p>
+            <p class="fragment fade-up">O processamento, e a estrutura de memória necessária para executar uma soma em um número inteiro, real ou 
+              imaginário é diferente para cada um destes casos e cabe ao compilador, ou interpretador, definir as regras corretas de acordo com 
+              o tipo definido dos operadores que serão usados.</p>
+            <p class="fragment fade-up">O <i>overloading</i> também é conhecido como $ad$ $hoc$ $polymorphism$.</p>
+            <p class="fragment fade-up">No Haskell usamos $parametric$ $polymorphism$.</p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Polimorfismo Paramétrico</h2>
+          <small style="font-size:63% !important">
+            <p class="fragment fade-up">Considere a variável de tipos $a$ com esta variável podemos definir: 
+              <pre style="height:25px; margin-bottom: 90px;" class="fragment fade-up language-haskell">
+              <code data-trim data-noescape>
+                funcTreco :: a -> a -> a
+                funcTreco x y = x && y
+
+                funcTreco 5 4
+              </code>
+              </pre>
+            </p>
+            <p class="fragment fade-up">A $funcTreco$ irá dar um erro indicando que não foi possível indicar um tipo para $a$. Que relacione o 
+              operador lógico $\&\&$ com os literais inteiros $5$ e $4$. Isto ocorre porque cabe a quem chama a função definir com que tipo uma 
+              determinada função polimórfica será chamada. Uma forma melhor seria: 
+              <pre style="height:25px; margin-bottom: 80px;" class="fragment fade-up language-haskell">
+              <code data-trim data-noescape>
+                funcSuperTreco a b = case (typeOf a) of
+                  Int -> a + b
+                  Bool -> b && b
+                  _ -> a
+              </code>
+              </pre>
+            </p>
+            <p class="fragment fade-up">Ou seja, não podemos ler $a \rightarrow a \rightarrow a$ como uma promessa de que a
+            função vai funcionar para qualquer tipo.</p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Classe de tipos</h2>
+          <small style="font-size:70% !important">
+            <p class="fragment fade-up">A solução encontrada são as classes de tipos como, por exemplo:</p>
+            <pre  style="height:25px; margin-bottom: 30px;" class="fragment fade-up language-haskell">
+              <code data-trim data-noescape>
+                (+) :: Num a => a -> a -> a
+              </code>
+            </pre>
+            <p class="fragment fade-up">Que deve ser lida como $(+)$ é do tipo $a \rightarrow a \rightarrow a$ para qualquer <i>tipo numérico</i> $a$. 
+              Uma classe de tipos, como é o caso da classe $Num$ contém um conjunto de métodos, como o $(+)$, que pode 
+              ser definida de forma diferente para cada instância da classe. A seta dupla $\Rightarrow$, representa a existência de uma restrição e 
+              chamamos esta restrição de <i>contexto</i>. Neste caso, a restrição diz que 
+              a função $(+)$ recebe dois valores do tipo $a$ e devolve um valor do tipo $a$ apenas se $a$ for da classe $Num$.</p>
+            <p class="fragment fade-up">Para todo $a$ que seja uma instância da classe $Num$, então $(+)$ tem o tipo $a \rightarrow a \rightarrow a$.</p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Uma Classe Simples</h2>
+          <small style="font-size:54% !important">
+            <p style="margin-bottom: 26px; height: 23px;" class="fragment fade-up">Tome como exemplo, uma versão simplificada da classe $Eq$:</p>
+            <pre style="height:25px; margin-bottom: 65px;" class="fragment fade-up language-haskell">
+              <code data-trim data-noescape>
+                class Eq a where
+                  (==) :: a -> a -> Bool
+                  (/=) :: a -> a -> Bool
+              </code>
+            </pre>
+            <p class="fragment fade-up">Esta definição indica que a classe $Eq$ é definida com um único parâmetro $a$. Qualquer tipo que seja 
+              instância de $Eq$ deve definir duas funções $(==)$ e $(/=)$ com as assinaturas de tipos necessárias. Por exemplo para fazer uma 
+              instância do $Eq$ para uso com o tipo $Int$ precisaríamos definir:
+            </p>
+            <pre style="height:25px; margin-bottom: 65px;" class="fragment fade-up language-haskell">
+              <code data-trim data-noescape>
+                  (==) :: Int -> Int -> Bool
+                  (/=) :: Int -> Int -> Bool
+              </code>
+            </pre>
+            <p class="fragment fade-up">Uma classe de tipos implementa um polimorfismo que garante que uma determinada função desta classe 
+              irá funcionar qualquer tipo escolhido desde que este tipo seja uma instância da classe em questão. O importante é notar que 
+              sempre que $(==)$, por exemplo, for usado, o compilador irá usar a inferência de tipos para definir qual a implementação de 
+              $(==)$ deve ser usado. Definir todas as funções todas as vezes é chato!
+            </p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Classes e mais classes</h2>
+          <small style="font-size:61% !important">
+            <p class="fragment fade-up">A definição da classe $Eq$ é um pouco mais complexa.</p>
+              <pre style="height: 44px; margin-bottom: 66px;" class="fragment fade-up language-haskell">
+                 <code data-trim data-noescape>
+                    class Eq a where
+                      (==), (/=) :: a -> a -> Bool
+                      x == y = not (x /= y)
+                      x /= y = not (x == y)
+                 </code>
+              </pre>
+            <p class="fragment fade-up">Isto quer dizer que quando declaramos uma função que terá tipo da classe $Eq$ podemos declarar apenas 
+              uma das funções e a outra estará devidamente declarada na própria classe. Mas ainda precisamos declarar uma das duas para evitar 
+              a recursão infinita.
+            </p>
+            <p class="fragment fade-up">Muito importante é que o compilador pode gerar instâncias automaticamente para algumas classes de tipos 
+              como as classes $Eq$, $Ord$, $Show$. Para isso usamos a função $deriving$ passando as classes desejadas como argumento. 
+            </p>
+            <pre style="height: 44px; margin-bottom: 45px;" class="fragment fade-up language-haskell">
+               <code data-trim data-noescape>
+                  data Coisa = F Int | G Char
+                    deriving (Eq, Ord, Show)
+               </code>
+            </pre>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Exemplo 1 - Cartão de Crédito</h2>
+          <small style="font-size:77% !important">
+            <p class="fragment fade-up">Uma determinada empresa de cartão de crédito fornece cartões com números de 10 dígitos
+              onde
+              os oito primeiros dígitos são aleatórios mas, os dois últimos representam a soma destes 8
+              dígitos (<i>checkSum</i>).</p>
+        
+            <p class="fragment fade-up">Construa uma função que receba uma <i>string</i> contendo 8 dígitos e devolva uma
+              <i>string</i> contendo
+              10 dígitos de forma que a <i>string</i> devolvida implemente a regra de geração dos dois últimos
+              dígitos explicitada acima. Esta função deverá ser do tipo $Card$.</p>
+        
+            <p class="fragment fade-up">Por fim, escreva uma função que receba uma <i>string</i> e devolva <i>True</i> caso esta
+              <i>string</i> represente um número de cartão válido. <a
+                href="https://replit.com/@frankalcantara/Cartaodecredito?v=1" target="_blank"
+                rel="noopener noreferrer">código</a>.
+            </p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Exercício 1</h2>
+          <p class="fragment fade-up">Escreva uma função, chamada raízes, que calcule as raízes de uma equação do segundo grau
+            na forma $ax^2+bx+c=0$.</p> 
+          <p class="fragment fade-up">Sua função deverá emitir um erro sempre que $ax^2$ for igual a zero e outro erro sempre que as raízes 
+            forem complexas. Esta função deverá retornar uma tupla, contendo as duas raízes reais da equação.
+            Dica, talvez a classe $RealFloat$ ajude. Você tem <i>20 minutos</i> para isso.</p>
+        </section>
+      </section> <!-- Tipos -->
+      </section>  
+    </div>
+  </div>
+  <div class="home-button"><a href="https://frankalcantara.com"><i class="fas fa-home"></i></a></div>
+  <script src="../../rev/reveal.js"></script>
+  <script src="../../rev/plugin/notes/notes.js"></script>
+  <script src="../../rev/plugin/search/search.js"></script>
+  <script src="../../rev/plugin/zoom/zoom.js"></script>
+  <script src="../../rev/plugin/math/math.js"></script>
+  <script src="../../rev/plugin/menu/menu.js"></script>
+  <script src="../../rev/plugin/highlight/highlight.js"></script>
+  <script src="../../rev/plugin/chalkboard/plugin.js"></script>
+
+  <script>
+    // Full list of configuration options available at:
+    // https://revealjs.com/config/
+    Reveal.initialize({
+      // Push each slide change to the browser history
+      history: true,
+      // transition style
+      transition: "default", // none/fade/slide/convex/concave/zoom
+      center: false,
+      math: {
+        mathjax:
+          "https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js",
+        config: "TeX-AMS_HTML-full",
+        // pass other options into `MathJax.Hub.Config()`
+        TeX: {
+          Macros: {
+            RR: "{\\bf R}",
+          },
+        },
+      },
+      menu: {
+        side: "left",
+        width: "normal",
+        numbers: false,
+        titleSelector: "h1, h2, h3, h4, h5, h6",
+        useTextContentForMissingTitles: false,
+        hideMissingTitles: false,
+        markers: true,
+        custom: false,
+        themes: false,
+        themesPath: "dist/theme/",
+        transitions: false,
+        openButton: true,
+        openSlideNumber: false,
+        keyboard: true,
+        sticky: false,
+        autoOpen: true,
+        delayInit: false,
+        openOnInit: false,
+        loadIcons: true,
+      },
+
+      // reveal.js plugins
+      plugins: [
+        RevealNotes,
+        RevealMath,
+        RevealMenu,
+        RevealChalkboard,
+        RevealSearch,
+        RevealZoom,
+        RevealHighlight,
+      ],
+    });
+  </script>
+</body>
+
+</html>

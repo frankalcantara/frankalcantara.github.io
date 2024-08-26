@@ -40,15 +40,15 @@ Deste ponto em diante, sempre que eu apenas traduzir o livro original, a traduç
 
 Se a interessada leitora chegou até aqui. Boa sorte e sucesso.
 
-## I. PARA LIVRÁ-LO DOS TERRORES PRELIMINARES
+## I. PARA LIVRÁ-LO DOS MEDOS MITOLÓGICOS
 
 O terror preliminar, que sufoca a maioria dos alunos iniciantes, impedindo-os de sequer tentar aprender cálculo, pode ser abolido de uma vez por todas, simplesmente declarando qual é o significado, em termos de bom senso, dos dois símbolos principais usados no cálculo. Esses símbolos terríveis são:
 
-1. $d \space \space$ que significa meramente *um pedacinho de*. Ou se preferir, com um pouco mais de formalidade *uma fração muito pequena de*. Assim, $dx$ significa um pedacinho muito pequeno de $x$; ou $du$ significa um pedacinho muito pequeno de $u$. Matemáticos ordinários acham mais educado dizer *um elemento de* em vez de *um pedacinho de*, ou ainda uma *fração infinitesimal de*. Esta coisa de *infinitesimal* quer dizer que é tão pequeno que quase se confunde com o zero. Você verá que esses pequenos pedaços podem ser considerados infinitamente pequenos.
+1. $d \space \space$ que significa meramente *um pequeno pedaço de*. Ou se preferir, com um pouco mais de formalidade *uma fração muito pequena de*. Assim, $dx$ significa um pedaço muito pequeno de $x$; ou $du$ significa um pedacinho muito pequeno de $u$. Matemáticos tradicionais acham mais educado dizer *um elemento de* em vez de *um pedacinho de*, ou ainda uma *fração infinitesimal de*. Esta coisa de *infinitesimal* quer dizer que é tão pequeno que quase se confunde com o zero. Você verá que esses pequenos pedaços podem ser considerados infinitamente pequenos.
 
 2. $\int  \space \space$ que é apenas um **S** longo, e pode ser lido, se você preferir, como *a soma de*. Assim, $\int dx$ significa a soma de todos os pequenos pedaços de $x$; ou $\int dt$ significa a soma de todos os pequenos pedaços de $t$. Nossos amigos matemáticos chamam esse símbolo de *a integral de*. Qualquer tolo pode ver que se $x$ for considerado como composto por muitos pequenos pedaços, cada um dos quais é chamado de $dx$, se você somá-los, obterá, como resultado, $x$. A soma de todos os $dx$ é a mesma coisa que $x$. A palavra *integral*, que os matemáticos preferem, simplesmente significa *o todo* e tem o mesmo sentido de *somar todas as pequenas partes que compõem o todo*.
 
-Pense na duração de uma hora, você pode pensar neste intervalo de tempo como sendo um intervalo dividido em $3600$ pequenos pedaços chamados de segundos. O todo dos segundos é a hora e a hora é a soma dos seus $3600$ pequenos pedaços somados.
+Para criar uma imagem desta soma de pequenos pedaços, pense na duração de uma hora. Você sempre poderá pensar neste intervalo de tempo como sendo um intervalo dividido em $3600$ pequenos pedaços chamados de segundos. O todo, sinônimo de _a integral_ dos segundos é a hora e a hora é a soma dos seus $3600$ pequenos pedaços somados.
 
 A partir de agora, quando você encontrar uma expressão que começa com esse símbolo aterrorizante, $\int $, você saberá que ele está lá apenas para lhe dar a instrução de que a partir deste momento, você deverá realizar uma operação de adição de todos os pequenos pedaços indicados pelo símbolo $\int $.
 
@@ -56,7 +56,7 @@ E cálculo é só isso!
 
 ## II. SOBRE DIFERENTES GRAUS DE PEQUENEZ
 
-Pequenez, ou o grau de quanto as coisas são pequenas, é uma palavra rara no português coloquial do Brasil. Ainda assim, como descobriremos que em nossos estudos de cálculo, teremos que lidar com quantidades pequenas de vários graus de pequenez. Precisamos desta palavra para entender que um pequeno pode ser menor que o outro.
+Pequenez, ou o grau de quanto as coisas são pequenas, é uma palavra rara no português coloquial do Brasil. Que muitas vezes é usada para indicar ausência de moral, mas que originalmente era a qualidade do pequeno. Indicando que um pequeno pode ser menor que outro. Pequenez será usada neste texto com seu sentido original e descobriremos que em nossos estudos de cálculo teremos que lidar com quantidades pequenas de vários graus de pequenez. A palavra pequenez nos permitirá entender que uma pequena fração, ou pequeno pedaço, pode ser menor que o outro.
 
 É crucial compreendermos em quais situações poderemos considerar certas quantidades tão diminutas que estas se tornem negligenciáveis em nossas análises. Essas quantidades são tão pequenas que seu impacto será insignificante no contexto geral. No entanto, é importante notar que esta "insignificância", ou pequenez, é sempre relativa e depende da escala do problema em questão. O que é considerado desprezível em um contexto pode ser significativo em outro, portanto, a decisão de omitir ou não uma quantidade deve sempre levar em conta a magnitude relativa em relação aos outros elementos envolvidos no problema.
 
@@ -74,7 +74,11 @@ Essa divisão sexagesimal do tempo, que persiste até hoje, tem suas raízes nos
 
 Agora, se um minuto é tão pequeno em comparação com uma semana, quão menor é um segundo?
 
->Antes de seguirmos, precisamos de um pouco de contexto para entender o contexto monetário na época do prof. Silvanus, pré-decimal e britânico, porque vou manter a analogia original de graus de pequenez. A libra esterlina (£1) era a unidade principal, dividida em 240 pennies. O "farthing", a menor unidade, valia 1/4 de um penny ou 1/960 de uma libra, derivando seu nome do inglês antigo "feorthing" (quarta parte). Havia também o "halfpenny", valendo metade de um penny. O "sovereign" ou soberano, uma moeda de ouro, equivalia a uma libra e era usado como reserva de valor e no mercado internacional. Embora não mencionada pelo prof. Silvanus, a "guinea" ou guinéu, valendo 21 xelins (uma libra e um xelim), era comumente usada para bens de luxo. Este complexo sistema monetário, parte integrante da vida cotidiana inglesa da época, foi mantido neste texto por seu valor histórico e cultural. O "farthing", usado para transações de baixíssimo valor, foi desmonetizado apenas em 1961, décadas após a escrita do livro.
+>Antes de seguirmos, precisamos de um pouco de contexto para entender o universo monetário na época do prof. Silvanus, pré-decimal e britânico, porque vou manter a analogia original de graus de pequenez que ele usou em seu livro. 
+>
+>A libra esterlina (£1) era a unidade principal, dividida em 240 pennies. O "farthing", a menor unidade, valia 1/4 de um penny ou 1/960 de uma libra, derivando seu nome do inglês antigo "feorthing" (quarta parte). Havia também o "halfpenny", valendo metade de um penny. O "sovereign" ou soberano, uma moeda de ouro, equivalia a uma libra e era usado como reserva de valor e no mercado internacional. Embora não mencionada pelo prof. Silvanus, a "guinea" ou guinéu, valendo 21 xelins (uma libra e um xelim), era comumente usada para bens de luxo. >
+>
+> Eu não resisti a tentação e este complexo sistema monetário, parte integrante da vida cotidiana inglesa da virada do século XX, foi mantido neste texto por seu valor histórico, cultural e, principalmente porque é interessante. O "farthing", usado para transações de baixíssimo valor, foi desmonetizado em 1961, décadas após a escrita do livro.
 
 Voltando ao conceito de pequenez. Pense em um "farthing" em comparação com um soberano. Ele, o "farthing", era pouco maior que a milésima parte da Libra. Um "farthing" a mais, ou a menos, terá pouca importância em comparação com um soberano e, certamente, pode ser considerado uma quantidade insignificante. Porém, podemos comparar um "farthing" com £1000.
 
@@ -94,7 +98,7 @@ Veja que quanto menor for uma quantidade pequena em si, mais insignificante se t
 
 O que definirá o que é "suficientemente pequena" depende do contexto do problema e da precisão requerida. Esta abordagem nos permite simplificar cálculos complexos, focando apenas nas quantidades que têm um impacto significativo no resultado final. No entanto, é crucial exercer julgamento cuidadoso ao decidir quais termos omitir, sempre considerando as implicações dessa simplificação na precisão global de nossa solução. A escolha deste valor que poderá ser desprezado irá depender do problema. Contudo, será um valor suficientemente pequeno para permitir que o problema possa ser resolvido com o cálculo.
 
-Uma coisa importante, que não podemos esquecer, é que pequenas quantidades, quando sujeitas a multiplicação por outro fator, podem se tornar relevantes. Isso ocorre se o fator de multiplicação seja, em si, grande em relação ao problema. Mesmo um "farthing" se torna importante se for multiplicado por valores na casa dos milhares ou milhões de vezes.
+Uma coisa importante, que não podemos esquecer, é que quantidades insignificantes, quando sujeitas a multiplicação por outro fator, podem se tornar relevantes. Isso ocorre se o fator de multiplicação seja, em si, grande em relação ao problema. Mesmo um "farthing" se torna importante se for multiplicado por valores na casa dos milhares ou milhões de vezes.
 
 No cálculo, escrevemos $dx$ para representar uma fração de primeira ordem de pequenez de $x$. Essas coisas como $dx$, e $du$, e $dy$, serão chamadas de *diferenciais*, e lidas como o diferencial de $x$, ou o diferencial de $u$, ou o diferencial de $y$, conforme o caso. Ou ainda, podem ser chamados de a derivada de $x$, a derivada de $y$ ou a derivada de$u$. Mesmo que $dx$ seja um pedacinho de $x$, e considerado relativamente pequeno em si mesmo, para resolver o nosso problema, não podemos considerar que quantidades como $x \cdot dx$, ou $x^2 \, dx$, ou $a^x \, dx$ sejam insignificantes. Por outro lado, sem nenhuma dúvida, podemos ter certeza que $dx \cdot dx$ será insignificante. *No caso de $dx \cdot dx$ teremos uma quantidade pequena da segunda ordem*.
 
@@ -115,7 +119,7 @@ Talvez, uma ilustração usando alguns conceitos da geometria básica possa ajud
 
 Desenhe um quadrado cujo lado será $x$, Fig. 1.1.a. Suponha que o quadrado cresça devido a adição de uma pequena quantidade, um $dx$, ao seu tamanho em cada direção,Fig. 1.1.b. O quadrado ampliado será composto pelo quadrado original de área $x^2$, mais os dois retângulos na parte superior e na direita, cada um com área $xdx$ (ou juntos $2xdx$), e o pequeno quadrado no canto superior direito que é $(dx)^2$. Na Fig. 1b, representei $dx$ como uma fração muito grande de $x$, cerca de $\frac{1}{10}$, por razões didáticas e gráficas. Suponha que eu considere $dx$ como $\frac{1}{100}$, aproximadamente a espessura de uma linha desenhada com uma caneta fina. Se fizer isso, você não poderá ver o quadrado no canto superior direito. Entretanto, ele terá uma área de apenas $\frac{1}{10,000}$ de $x^2$. Claramente, neste caso, $(dx)^2$ será desprezível.
 
-Vamos considerar outra analogia, desta vez, usando algo que dói.
+Vamos considerar outra analogia, desta vez, usando algo que dói na parte mais importante do corpo. O bolso.
 
 Suponha que um milionário dissesse ao seu secretário: — na próxima semana, eu lhe darei uma pequena comissão de qualquer valor monetário que eu receba. Suponha que o secretário dissesse ao seu filho: — eu lhe darei uma parte de tudo que eu receber. Finalmente, suponha que a fração em cada caso seja $\frac{1}{100}$ (um centésimo). Se o Sr. Milionário receber $£1000$ na próxima semana, o secretário receberá $£10$ e o seu filho, um centésimo disso, equivalente a $2$ xelins.
 
@@ -130,7 +134,7 @@ O espirituoso Dean Swift[^1]{#nt1} uma vez escreveu:{#nt1}
 >And these have smaller Fleas to bite 'em,
 >And so proceed ad infinitum.
 
-Talvez um boi possa se preocupar com uma pulga de tamanho comum, uma criatura da primeira ordem de pequenez. Mas, provavelmente um boi não se incomodará com a pulga de uma pulga. Sendo esta uma criatura de segunda ordem de pequenez, seria insignificante. Mesmo uma quantidade gigantesca de pulgas de pulgas não teria muita importância para um boi.
+Talvez um boi possa se preocupar com uma pulga, uma criatura da primeira ordem de pequenez. Mas, provavelmente um boi não se incomodará com a pulga da pulga. Se esta criatura existir será uma criatura de segunda ordem de pequenez e, portanto insignificante para o boi. Talvez, mesmo uma quantidade gigantesca de pulgas de pulgas não teria muita importância para um boi.
 
 E chega de analogias sobre a relatividade do que pode ser desprezado.
 
@@ -219,7 +223,7 @@ Chamamos a razão $\frac{dy}{dx}$ de "derivada de $y$ com respeito a $x$". Poré
 
 Na álgebra comum que você aprendeu na escola, a leitora estava sempre tentando encontrar alguma quantidade desconhecida que você chamava de $x$, ou $y$. Agora você terá que aprender a procurar estas quantidades usando formas de cálculo novas. O processo de encontrar o valor de $\frac{dy}{dx}$ é chamado de *diferenciação*. Não perca de vista que o que desejamos é o valor dessa razão quando tanto $dy$ quanto $dx$ são indefinidamente pequenos e relacionados um com o outro, esta é a última vez que vou lembrar isso. Juro!
 
-*No cálculo estamos preocupados em encontrar a razão $\frac{dy}{dx}$ quando $dx$ e $dy$ são infinitesimalmente pequenos, tão pequenos que tendem a zero e relacionados entre si*. Droga, menti!
+*No cálculo estamos preocupados em encontrar a razão $\frac{dy}{dx}$ quando $dx$ e $dy$ são tão infinitesimalmente pequenos que tendem a zero*. Droga, jurei em falso!
 
 Agora que tiramos o medo, e mostramos que os conceitos envolvidos são muito simples, podemos aprender como encontrar a razão $\frac{dy}{dx}$.
 
@@ -239,7 +243,7 @@ A partir dos princípios fundamentais da álgebra, podemos diferenciar algumas e
 
 ### CASO 1
 
-Vamos começar com uma função simples $y = x^2$. Antes de começarmos *lembre-se de que o conceito mais importante para entender o cálculo é a ideia de acréscimo, ou decréscimo*. Os matemáticos chamam isso de variação. Como $y$ é igual $x^2$, parece trivial observa que se $x$ cresce, $x^2$ também crescerá. É isso que significa ser igual.
+Vamos começar com uma função simples $y = x^2$. Antes de começarmos *lembre-se de que os conceitos mais importantes para entender o cálculo é são as ideias de acréscimo e decréscimo*. Os matemáticos chamam isso de variação. Como $y$ é igual $x^2$, parece trivial observa que se $x$ cresce, $x^2$ também crescerá. É isso que significa ser igual.
 
 O que queremos descobrir é a proporção entre o crescimento de $y$ e o crescimento de $x$. Em outras palavras: *nossa tarefa será descobrir a razão entre $dy$ e $dx$, que representamos na expressão $\frac{dy}{dx}$*.
 
@@ -277,7 +281,7 @@ Finalmente encontramos a razão do crescimento de $y$ dado um crescimento em $x$
 
 >*Nota* – Esta razão $\frac{dy}{dx}$ é o resultado de diferenciar $y$ com respeito a $x$. Diferenciar significa encontrar o coeficiente diferencial. Suponha que tivéssemos outra função de $x$, como, por exemplo, $u = 7x^2 + 3$. Então, se nos mandassem diferenciar isso com respeito a $x$, deveríamos encontrar $\frac{dx}{du}$, ou, o que é a mesma coisa que $\frac{d(7x^2 + 3)}{du}$. Muitas vezes teremos casos em que o tempo será a variável independente, por exemplo: $y = b + \frac{1}{2}at^2$. logo, se alguém a pedir para diferenciar esta função teríamos que encontrar o coeficiente diferencial de $y$ com respeito a $t$. Logo, nosso trabalho seria tentar encontrar $\frac{dy}{dt}$, isto é, encontrar $\frac{d(b + \frac{1}{2}at^2)}{dt}$.
 
-Um bom exemplo numérico pode clarear os pensamentos e mostrar que cálculo não é o mostro debaixo da cama.
+Um bom exemplo numérico pode clarear os pensamentos e mostrar que cálculo não é o bicho papão debaixo da cama.
 
 Considere novamente a função $y = x^2$. Suponha que $x$ tenha o valor inicial de $100$, resultando em $y = 10.000$. Agora, vamos aumentar o valor de $x$ em uma unidade, ou seja, $dx = 1$, de modo que $x$ se torne $101$. O novo valor de $y$ será $101^2 = 10.201$.
 
@@ -1097,19 +1101,19 @@ $$= \frac{(x^2 + a)(5bx^4) - (bx^5 + c)(2x)}{(x^2 + a)^2} $$
 
 $$\frac{dy}{dx} = \frac{3bx^6 + 5abx^4 - 2cx}{(x^2 + a)^2}. \ (\text{Resposta}) $$
 
-A resolução da diferencial de quocientes é muitas vezes tediosa e trabalhosa, mas não é difícil! Alguns exemplos adicionais totalmente resolvidos, apresentados a seguir, devem permitir que a amável leitora, sedimente este processo. Este é o momento de ser paciente e persistente. Refaça todos os exemplos no seu caderno.
+A resolução da diferencial de quocientes é, muitas vezes tediosa e trabalhosa, mas não é difícil! Alguns exemplos adicionais totalmente resolvidos, apresentados a seguir, devem permitir que a amável leitora, sedimente este processo. Este é o momento de ser paciente e persistente. Refaça todos os exemplos no seu caderno.
 
 ### Exemplos
 
 1. Diferenciar $ y = \frac{a}{b^2}x^3 - \frac{a^2}{b}x + \frac{a^2}{b^2} $.
 
-  Sendo uma constante, o último termo $\frac{a^2}{b^2}$ desaparece, e teremos:
+    Sendo uma constante, o último termo $\frac{a^2}{b^2}$ desaparece, e teremos:
 
-  $$\frac{dy}{dx} = \frac{a}{b^2} \cdot 3 \cdot x^{3-1} - \frac{a^2}{b} \cdot 1 \cdot x^{1-1}$$.
+    $$\frac{dy}{dx} = \frac{a}{b^2} \cdot 3 \cdot x^{3-1} - \frac{a^2}{b} \cdot 1 \cdot x^{1-1}$$.
 
-  Como $ x^{1-1} = x^0 = 1 $ obteremos:
+    Como $ x^{1-1} = x^0 = 1 $ obteremos:
 
-  $$\frac{dy}{dx} = \frac{3a}{b^2} x^2 - \frac{a^2}{b}$$.
+    $$\frac{dy}{dx} = \frac{3a}{b^2} x^2 - \frac{a^2}{b}$$.
 
 2. Diferenciar $ y = 2a\sqrt{bx^3} - \frac{3b\sqrt{a}}{x} - 2\sqrt{ab}$.
 
@@ -1546,7 +1550,7 @@ Encontre $\frac{dy}{dx}$ e $\frac{d^2 y}{dx^2}$ para as seguintes expressões:
 
 Alguns dos problemas mais importantes resolvidos com o cálculo são aqueles em que o tempo é a variável independente, e temos que averiguar os valores de alguma outra grandeza que varia quando o tempo varia. Algumas coisas crescem à medida que o tempo passa; outras coisas diminuem. A distância que um trem percorreu desde seu ponto de partida continua aumentando à medida que o tempo passa. As árvores crescem mais altas à medida que os anos passam. Qual está crescendo a uma taxa maior: uma planta de $30 \, \text{cm}$ de altura que em um mês chega a $4 \, \text{cm}$, ou uma árvore de $12 \, \text{m}$ de altura que em um ano se chega a $14 \, \text{m}$?
 
-Neste capítulo, vamos fazer uso, descabido e descontrolado, da palavra **taxa**. Nada a ver com taxa de pobreza ou taxa de água (exceto que aqui a palavra sugere uma proporção – uma razão – tantos Reais por Kilo). Nada a ver com taxa de natalidade ou taxa de mortalidade, embora essas palavras sugiram tantos nascimentos ou mortes por mil da população. Afinal, o que quero dizer com a palavra *taxa*? Sempre usaremos taxa para nos referir a uma relação de proporcionalidade entre duas variáveis. Neste Capítulo uma das variáveis será o tempo. Se um carro passa voando por nós a, digamos $30 \, \text{m}$ por segundo, um simples cálculo mental nos mostrará que isso equivale – enquanto durar – a uma taxa de $1800 \, \text{m}$ por minuto, ou mais de $100 \, \text{Km}$ por hora.
+Neste capítulo, vamos fazer uso, descabido e descontrolado, da palavra **taxa**. Usaremos a palavra taxa para nos referir a uma relação de proporcionalidade entre duas variáveis. Neste Capítulo uma das variáveis será o tempo. Se um carro passa voando por nós a, digamos $30 \, \text{m}$ por segundo, um simples cálculo mental nos mostrará que isso equivale – enquanto durar – a uma taxa de $1800 \, \text{m}$ por minuto, ou mais de $100 \, \text{Km}$ por hora.
 
 Agora, em que sentido é verdadeiro que uma velocidade de $30 \, \text{m}$ por segundo é o mesmo que $1800 \, \text{m}$por minuto? Trinta metros não são a mesma coisa que 1800 metros, nem um segundo é a mesma coisa que um minuto. O que queremos dizer ao afirmar que a **taxa** é a mesma, é: **que a proporção entre a distância percorrida e o tempo gasto para percorrê-la é a mesma em ambos os casos**.
 
@@ -1608,7 +1612,7 @@ $$
 
 *O produto da massa pela velocidade em que está se movendo é chamado de momento*, e é simbolizado por $mv$. Se diferenciarmos o momento em relação ao tempo, obteremos $\frac{d(mv)}{dt}$, a taxa de variação do momento. Mas, como $m$ é uma quantidade constante, podemos escrever $m \frac{dv}{dt}$, que sabemos, pelo que vimos antes, é o mesmo que a força, $f$. Ou seja, *a força pode ser expressa tanto como massa vezes aceleração, quanto como taxa de variação do momento*.
 
-O produto da massa pela velocidade em que está se movendo é chamado de *momento*, e é simbolizado por $mv$. 
+O produto da massa pela velocidade em que está se movendo é chamado de *momento*, e é simbolizado por $mv$.
 
 Se diferenciarmos o momento em relação ao tempo, obteremos $\frac{d(mv)}{dt}$, que é a taxa de variação do momento. Como $m$ é uma quantidade constante, podemos escrever $m \frac{dv}{dt}$. Pelo que vimos antes, sabemos que isso é o mesmo que a força, $f$. Portanto, *a força pode ser expressa tanto como massa vezes aceleração, quanto como taxa de variação do momento*.
 

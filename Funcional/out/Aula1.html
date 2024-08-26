@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Frank Coelho de Alcantara - 2021">
+  <title>Programação Funcional: Como chegamos aqui.</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+  <link rel="stylesheet" href="../../rev/reset.css" />
+  <link rel="stylesheet" href="../../rev/reveal.css" />
+  <link rel="stylesheet" href="../../rev/interpret.css" />
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section id="title-slide" class="nivel1">
+        <h1 class="title">Programação Funcional </h1>
+        <p style="text-align: right !important;">Frank Coelho de Alcantara - 2021 &nbsp;&nbsp;&nbsp;</p>
+      </section>
+      <section>
+        <section class="nivel1">
+          <h2>Professor</h2>
+          <img data-src="https://frankalcantara.com/assets/images/Frank.jpg"
+            style="float: left; margin-right: 5%; margin-left: 5%; height: 327px !important;"
+            alt="Foto Frank de Alcantara" />
+          <p class="fragment fade-up">
+            Pai, marido, professor, engenheiro eletricista especializado em eletrônica,
+            Mestre em Ciência Gestão e Tecnologia da Informação, CTO da Tefway Tecnologia, consultor e curioso.<br />
+            Muito Curioso!<br />
+            Estou no Linkedin - <a href="https://www.linkedin.com/in/frankalcantara/"><i
+                class="fab fa-linkedin-in"></i></a> e gostaria de tê-los na minha rede de relacionamentos.
+          </p>
+        </section>
+        <section class="nivel1">
+          <h2>Introdução</h2>
+          <p><img data-src="../img/djikstra1.jpg" alt="Foto de Dijkstra" /></p>
+        </section>
+        <section class="nivel1">
+          <h2>Introdução</h2>
+          <p class="fragment fade-up">Veremos um pouco da história da computação e da história das linguagens de programação.</p>
+          <p class="fragment fade-up">Vamos tratar de cálculo lambda, visto como base das linguagens funcionais, e da forma como ele influenciou a computação.</p>
+          <p class="fragment fade-up">Por fim, estudaremos aplicações práticas, de mercado, de linguagens funcionais. Com destaque para a Clojure e para o Haskel.</p>
+        </section>
+      </section>
+      <section>
+        <section class="nivel1">
+          <h2> A Raiz de Todo Mal</h2>
+          <p class="fragment fade-up">Paradoxo de Russell: Considere a seguinte definição: 
+          $$R=\{X |  X \notin X\}$$</p>
+          <p class="fragment fade-up">Seria $R$ um item de $R$?</p>
+          <p class="fragment fade-up">Suponha que não. Neste caso: $R \in \{X | X \notin X\}$ logo: $R \in R$.</p>
+          <p class="fragment fade-up">Suponha que sim. Neste caso: $R \in \{X | X \notin X\}$ logo: $R \notin R$.</p>
+        </section>
+        <section class="nivel1">
+          <h2>O que um barbeiro tem com isso?</h2>
+          <small style="float: left; width: 56%;font-size: 89% !important;">
+            <p class="fragment fade-up">Um barbeiro é aquele que barbeia todos os que não barbeiam a si mesmos.</p>
+            <p class="fragment fade-up">A grade dúvida: será que o barbeiro barbeia a si mesmo?</p>
+            <p class="fragment fade-up">Por isso chamamos de <b>Teoria Ingênua dos Conjuntos</b>.</p>
+            <p class="fragment fade-up">Seria impossível provar toda a matemática?</p>
+          </small>
+          <img data-src="../img/barber.jpg" style="float: right; width: 32%; margin-right: 3%;">
+        </section>
+        <section class="nivel1">
+          <h2>A base matemática</h2>
+          <p class="fragment fade-up"><a href="https://pt.wikipedia.org/wiki/David_Hilbert" target="_blank"
+              rel="noopener noreferrer">David Hilbert</a>,
+            <a href="https://pt.wikipedia.org/wiki/Wilhelm_Ackermann" target="_blank" rel="noopener noreferrer">Wilhem
+              Ackermann</a> e <a href="https://en.wikipedia.org/wiki/Entscheidungsproblem" target="_blank"
+              rel="noopener noreferrer">Entscheidungsproblem</a>,
+            O Problema da Decisão (1928): <i>dado uma proposição lógica de primeira ordem, crie um procedimento efetivo, para determinar sua veracidade.</i>
+          </p>
+          <p class="fragment fade-up"><a href="https://pt.wikipedia.org/wiki/Alonzo_Church" target="_blank"
+              rel="noopener noreferrer">Alonzo Church</a> e o Cálculo Lambda.</p>
+          <p class="fragment fade-up"><a href="https://pt.wikipedia.org/wiki/Kurt_G%C3%B6del" target="_blank"
+              rel="noopener noreferrer">Kurt Gödel</a>,
+            <a href="https://pt.wikipedia.org/wiki/Jacques_Herbrand" target="_blank" rel="noopener noreferrer">Jaques
+              Herbrand</a> e o cálculo recursivo.
+          </p>
+          <p class="fragment fade-up"><a href="https://en.wikipedia.org/wiki/Alan_Turing" target="_blank"
+              rel="noopener noreferrer">Alan Turing</a> e
+            <a href="https://academic.oup.com/plms/article-abstract/s2-42/1/230/1491926?redirectedFrom=PDF"
+              target="_blank" rel="noopener noreferrer">On Computable Numbers, with an Application to the
+              Entscheidungsproblem</a>.
+          </p>
+        </section>
+          <section class="nivel1">
+            <h2>Gödel e Church</h2>
+            <small style="font-size:80% !important;">
+              <p class="fragment fade-up"> <b>Gödel (1934):</b> Discute ideias sobre a computabilidade, ou não,
+                de funções. Mostra pouca confiança nos seus próprios resultados.</p>
+              <p class="fragment fade-up"><b>Church (1936):</b> Inventa o cálculo Lambda. E sugere que este pode ser usado
+                para definir o que é, ou não é computável. </p>
+              <p class="fragment fade-up"><b>Gödel, Post (1936):</b> argumentam que os argumentos de Church não se justificam.</p>
+              <p class="fragment fade-up"><b>Turing (1936):</b> descreve um novo modelo de computação, que conhecemos como
+                Máquinas de Turing.</p>
+              <p class="fragment fade-up"><b>Turing (1937):</b> Turing e Church provam que a Máquina de Turing é equivalente ao Cálculo Lambda.</p>
+            </small>
+          </section>
+          <section class="nivel1">
+            <h2>Church e Turing</h2>
+            <p class="fragment fade-up"><i>“Every effectively calculable function can be computed by a Turing-machine
+                transducer.”</i></p>
+            <p class="fragment fade-up">Isto será verdade desde que uma definição matemática, e precisa, do termo, <b>efetivamente
+                calculável</b> seja apresentada (Kleene, 1943).</p>
+            <p class="fragment fade-up">A Máquina de Turing, continua sendo a forma de definir a computabilidade, ou não, de um
+              problema, para todas as definições de <b>efetivamente calculável</b> apresentadas até hoje.</p>
+          </section>
+          <section class="nivel1">
+            <h2>Máquina de Turing</h2>
+            <img data-src="../img/Turing_Machine_Model_Davey_2012.jpg" style="width: 84%;">
+          </section>
+          <section class="nivel1">
+            <h2>Computabilidade</h2>
+            <p class="fragment fade-up">Um função/linguagem é dita computável desde que exista, pelo menos,
+              uma Maquina de Turing que Sempre Pare para esta função/linguagem.</p>
+            <p class="fragment fade-up">Uma função é dita computável desde que exista, pelo menos,
+              uma Maquina de Turing que Sempre Pare para esta função e retorne o seu resultado.</p>
+            <p class="fragment fade-up">Uma linguagem é dita computável desde que exista, pelo menos,
+              uma Maquina de Turing que Sempre Pare e retorne a informação se o <i>string</i> de entrada
+              faz parte desta linguagem, ou não.</p>
+          </section>
+          <section class="nivel1">
+          <h2>Os primeiros anos</h2>
+          <img data-src="../img/KonradSuze.jpg" style="float: right; height: 463px !important; margin-right: 2%;"
+            alt="Konrad Suze trabalhando em um sistema eletrônico." />
+          <small style=" font-size: 80% !important; width: 62%;">
+            <p>O conceito de linguagem de programação começou a ser construído a partir de 1946 com a criação de
+              <strong><em>Plankalkül</em></strong> por
+              <a href="https://pt.wikipedia.org/wiki/Konrad_Zuse" target="_blank"
+                rel="noopener noreferrer"><strong>Konrad Suze</strong></a>, um engenheiro alemão que criou o primeiro
+              computador com relés e com a sua própria linguagem de programação,
+              <strong><em>Plankalkül</em></strong>.
+            </p>
+            <p>Só a versão 4 das suas máquinas sobreviveu a Segunda Guerra Mundial e seu trabalho só foi publicado em
+              1972.</p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Grace Hopper</h2>
+          <p style="float: left; width: 40%;">Podemos correr o risco de afirmar que o compilador, foi criado em 1951
+            pela equipe liderada por <a href="https://en.wikipedia.org/wiki/Grace_Hopper"><strong>Grace
+                Hopper</strong></a> enquanto trabalhava na Remington Rand, e chamado de
+            <strong><em>A-0</em></strong>.
+          </p>
+          <img data-src="../img/Grace_Hopper_and_UNIVAC.jpg" style="float:right;"
+            alt="grace hopper e uma equipe de engenheiros trabalhando no univac" />
+          <p style=" font-size: 40%;float: right;width: 50%;">Source Flickr: <a
+              href="https://www.flickr.com/photos/8212496@N06/493885707" target="_blank" rel="noopener noreferrer">Grace
+              Hopper and UNIVAC</a></p>
+        </section>
+        <section class="nivel1">
+          <h2>Lisp, Fortran e Cobol</h2>
+          <p class="fragment fade-up">Em 1956 <a href="https://pt.wikipedia.org/wiki/John_McCarthy" target="_blank"
+              rel="noopener noreferrer">John McCarthy</a> cria o Lisp - <i>LISt Processing</i> graças a uma dúvida de
+            Graham em
+            aula</p>
+          <p class="fragment fade-up">Em 1957 <a href="https://en.wikipedia.org/wiki/John_Backus"><strong>John
+                Backus</strong></a>, trabalhando na IBM, criou o
+            <strong><em>Fortran</em></strong> (<strong>FOR</strong>mula <strong>TRAN</strong>slation).
+          </p>
+          <p class="fragment fade-up">Em 1959 <a href="https://pt.wikipedia.org/wiki/Grace_Hopper" target="_blank"
+              rel="noopener noreferrer">Grace Hopper</a>, apresenta o
+            Cobol - <i>COmmon Business Oriented Language​</i>.</p>
+          <p class="fragment fade-up"> <a href="https://pt.wikipedia.org/wiki/Ole-Johan_Dahl" target="_blank"
+              rel="noopener noreferrer">Em 1962 Ole-Johan Dahl</a> e <a
+              href="https://pt.wikipedia.org/wiki/Kristen_Nygaard" target="_blank" rel="noopener noreferrer">Kristen
+              Nygaard</a> criam a Simula em Oslo.</p>
+        </section>
+      </section>
+    </div>
+  </div>
+  <div class="home-button"><a href="https://frankalcantara.com"><i class="fas fa-home"></i></a></div>
+  <script src="../../rev/reveal.js"></script>
+  <script src="../../rev/plugin/notes/notes.js"></script>
+  <script src="../../rev/plugin/search/search.js"></script>
+  <script src="../../rev/plugin/zoom/zoom.js"></script>
+  <script src="../../rev/plugin/math/math.js"></script>
+  <script src="../../rev/plugin/menu/menu.js"></script>
+  <script src="../../rev/plugin/chalkboard/plugin.js"></script>
+
+  <script>
+    // Full list of configuration options available at:
+    // https://revealjs.com/config/
+    Reveal.initialize({
+      // Push each slide change to the browser history
+      history: true,
+      // Transition style
+      transition: "default", // none/fade/slide/convex/concave/zoom
+      center: false,
+      math: {
+        mathjax:
+          "https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js",
+        config: "TeX-AMS_HTML-full",
+        // pass other options into `MathJax.Hub.Config()`
+        TeX: {
+          Macros: {
+            RR: "{\\bf R}",
+          },
+        },
+      },
+      menu: {
+        side: "left",
+        width: "normal",
+        numbers: false,
+        titleSelector: "h1, h2, h3, h4, h5, h6",
+        useTextContentForMissingTitles: false,
+        hideMissingTitles: false,
+        markers: true,
+        custom: false,
+        themes: false,
+        themesPath: "dist/theme/",
+        transitions: false,
+        openButton: true,
+        openSlideNumber: false,
+        keyboard: true,
+        sticky: false,
+        autoOpen: true,
+        delayInit: false,
+        openOnInit: false,
+        loadIcons: true,
+      },
+
+      // reveal.js plugins
+      plugins: [
+        RevealNotes,
+        RevealMath,
+        RevealMenu,
+        RevealChalkboard,
+        RevealSearch,
+        RevealZoom,
+      ],
+    });
+  </script>
+</body>
+
+</html>

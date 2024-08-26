@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Frank Coelho de Alcantara - 2021">
+  <title>Cálculo Lambda</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+  <link rel="stylesheet" href="../../rev/reset.css" />
+  <link rel="stylesheet" href="../../rev/reveal.css" />
+  <link rel="stylesheet" href="../../rev/interpret.css" />
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section id="title-slide" class="nivel1">
+        <h1 class="title">Cálculo <br/>Lambda</h1>
+        <p style="text-align: right !important;">Frank Coelho de Alcantara - 2021 &nbsp;&nbsp;&nbsp;</p>
+      </section>
+      <section>
+        <section class="nivel1">
+          <h2>Visão Geral</h2>
+          <p class="fragment fade-up">Introduzido, nos anos 1930, por Alonzo Church. Estudo da computação por funções.</p>
+          <p class="fragment fade-up">Equivalente a Máquina de Turing.</p>
+          <p class="fragment fade-up">Notação minimalista: expõe apenas o que é necessário para computação com funções.</p>
+          <p class="fragment fade-up">Duas operações essenciais: criação e aplicação.</p>
+        </section>
+        <section class="nivel1">
+          <h2>Notação Tradicional</h2>
+          <small>
+            <p class="fragment fade-up">Uma abstração: abstração lambda: $$\lambda x.E$$</p>
+            <p class="fragment fade-up">Representando uma função ($\lambda$) com argumento $x$ e corpo $E$. 
+              O $E$ chamado de <b>termo $\lambda$</b> ou <b>expressão $\lambda$</b>. Ou ainda, de escopo da abstração.</p>
+            <p class="fragment fade-up">As funções não possuem nomes. $\lambda$ é um signo, uma notação para indicar o início da definição de uma função.</p>
+            <p class="fragment fade-up">Uma função que tem um parâmetro $x$ e retorna alguma coisa definida pelo corpo $E$.</p>
+            <p class="fragment fade-up"><b>Abstração lambda ou função anônima unária.</b></p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Funções Anônimas</h2>
+          <small>
+            <p class="fragment fade-up">O coração do cálculo lambda e da programação funcional são as funções anônimas.</p>
+            <ul>
+              <li class="fragment fade-up">C e Pascal: não</li>
+              <li class="fragment fade-up">C++ : sim (a partir da versão C++11)</li>
+              <li class="fragment fade-up">Javascript : sim</li>
+              <li class="fragment fade-up">Python e Ruby : sim</li>
+              <li class="fragment fade-up">C# : sim (a partir de versão 3.0)</li>
+              <li class="fragment fade-up">Java : sim (a partir de versão 8)</li>
+            </ul>
+            <p class="fragment fade-up"><b>E as linguagens funcionais, puras ou não: LISP, Scheme, Clojure, Scala, Ocaml, F#, Haskell, ... .</b></p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Cálculo</h2>
+          <p class="fragment fade-up">A medida que avançamos na álgebra podemos notar que a palavra cálculo representa um
+            conjunto de regras que determinam como podemos mover símbolos ($x,y,z,...$) em uma página em busca de simplificação 
+            ou significado. Isto é válido para integrais, diferenciais, equações diferenciais, transformadas, etc..</p>
+          <p class="fragment fade-up">O <b>cálculo lambda</b> está relacionado com definir e avaliar funções e é composto de uma linguagem e das 
+          regras de manipulação desta linguagem.</p>
+        </section>
+        <section class="nivel1">
+          <h2>Entendendo Melhor</h2>
+          <small>
+            <p class="fragment fade-up">$f(x) = a$ escreve-se: $\lambda x.\space a$</p>
+            <p class="fragment fade-up">$g(x)=x$ escreve-se: $\lambda x. \space x$</p>
+            <p class="fragment fade-up">$f(x) = x^2+3x+1$ escreve-se: $(\lambda x.x^2+3x+1)$ </p>
+            <p class="fragment fade-up">No último exemplo leremos: a função que, dado o argumento $x$ calcula o valor de $x^2+3x+1$.</p>
+            <p class="fragment fade-up">Não é necessário mas fica mais claro assim:$(\lambda x.\space (x^2+3x+1))$ </p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Sintaxe BNF</h2>
+          <table style="font-size: 90%;">
+            <tr class="fragment fade-up"> 
+              <td style="border: none !important;">expression</td>
+              <td style="border: none !important; width: 7%;">::=</td>
+              <td style="border: none !important; text-align: left !important; width: 60%;">constante</td>
+              <td style="border: none !important; text-align: right !important;"></td>
+            </tr>
+            <tr class="fragment fade-up">
+              <td style="border: none !important;"></td>
+              <td style="border: none !important; width: 7%;">|</td>
+              <td style="border: none !important; text-align: left !important; width: 60%;">variable</td>
+              <td style="border: none !important; text-align: right !important;"><b><i>&lt;=identificador</i></b></td>
+            </tr>
+            <tr class="fragment fade-up">
+              <td style="border: none !important;"></td>
+              <td style="border: none !important; width: 7%;">|</td>
+              <td style="border: none !important; text-align: left !important; width: 60%;">expression expression</td>
+              <td style="border: none !important; text-align: right !important;"><b><i>&lt;=aplicação</i></b></td>
+              <tr>
+            </tr>
+            <tr class="fragment fade-up">
+              <td style="border: none !important;"></td>
+              <td style="border: none !important; width: 7%;">|</td>
+              <td style="border: none !important; text-align: left !important; width: 60%;">$\lambda$ variable.expression</td>
+              <td style="border: none !important; text-align: right !important;"><b><i>&lt;=abstração</i></b></td>
+            </tr>
+            <tr class="fragment fade-up">
+              <td style="border: none !important;"></td>
+              <td style="border: none !important; width: 7%;">|</td>
+              <td style="border: none !important; text-align: left !important; width: 60%;">(expression)</td>
+              <td style="border: none !important; text-align: right !important;"><b><i>&lt;=agrupamento</i></b></td>
+            </tr>
+          </table>
+          <p class="fragment fade-up">Constante: números ou funções prédefinidas.</p>
+          <p class="fragment fade-up">Variable: identificadores como $x$ ou $y$.</p>
+        </section>
+        <section class="nivel1">
+          <h2>Derivação</h2>
+          <p class="fragment fade-up">Considere: $\lambda x.((+\space 1)\space x)$: </p>
+          <table style="font-size: 67%;">
+            <tr class="fragment fade-up">
+              <td style="border: none !important; width: 10%;">expression</td>
+              <td style="border: none !important; width: 7%;">$\Rightarrow$</td>
+              <td style="border: none !important; text-align: left !important; width: 60%;">$\lambda$ variable.expression</td>
+            </tr>
+            <tr class="fragment fade-up">
+              <td style="border: none !important;"></td>
+              <td style="border: none !important; width: 7%;">$\Rightarrow$</td>
+              <td style="border: none !important; text-align: left !important; width: 60%;">$\lambda x.$expression</td>
+            </tr>
+            <tr class="fragment fade-up">
+              <td style="border: none !important;"></td>
+              <td style="border: none !important; width: 7%;">$\Rightarrow$</td>
+              <td style="border: none !important; text-align: left !important; width: 60%;">$\lambda x.$(expression)</td>
+            <tr>
+            </tr>
+            <tr class="fragment fade-up">
+              <td style="border: none !important;"></td>
+              <td style="border: none !important; width: 7%;">$\Rightarrow$</td>
+              <td style="border: none !important; text-align: left !important; width: 60%;">$\lambda x.$(expression expression)</td>
+            </tr>
+            <tr class="fragment fade-up">
+              <td style="border: none !important;"></td>
+              <td style="border: none !important; width: 7%;">$\Rightarrow$</td>
+              <td style="border: none !important; text-align: left !important; width: 60%;">$\lambda x.$((expression) expression)</td>
+            </tr>
+            <tr class="fragment fade-up">
+              <td style="border: none !important;"></td>
+              <td style="border: none !important; width: 7%;">$\Rightarrow$</td>
+              <td style="border: none !important; text-align: left !important; width: 60%;">$\lambda x.$((expression expression) expression)
+              </td>
+            </tr>
+            <tr class="fragment fade-up">
+              <td style="border: none !important;"></td>
+              <td style="border: none !important; width: 7%;">$\Rightarrow$</td>
+              <td style="border: none !important; text-align: left !important; width: 60%;">$\lambda x.$((constante constante) expression)
+              </td>
+            </tr>
+            <tr class="fragment fade-up">
+              <td style="border: none !important;"></td>
+              <td style="border: none !important; width: 7%;">$\Rightarrow$</td>
+              <td style="border: none !important; text-align: left !important; width: 60%;">$\lambda x.((+\space 1)$ expression)
+              </td>
+            </tr>
+            <tr class="fragment fade-up">
+              <td style="border: none !important;"></td>
+              <td style="border: none !important; width: 7%;">$\Rightarrow$</td>
+              <td style="border: none !important; text-align: left !important; width: 60%;">$\lambda x.((+\space 1)$ variable)
+              </td>
+            </tr>
+            <tr class="fragment fade-up">
+              <td style="border: none !important;"></td>
+              <td style="border: none !important; width: 7%;">$\Rightarrow$</td>
+              <td style="border: none !important; text-align: left !important; width: 60%;">$\lambda x.((+\space 1)\space x)$
+              </td>
+            </tr>
+          </table>
+        </section>
+        <section class="nivel1">
+          <h2>Parênteses</h2>
+          <p class="fragment fade-up">Os parênteses são utilizados na aplicação e para eliminar qualquer ambiguidade na
+            interpretação.</p>
+          <p class="fragment fade-up">Mais claro $(\lambda x.((+\space 1)\space x))$ que $(\lambda x.\space +\space 1\space x)$
+          </p>
+          <p class="fragment fade-up">Lembre-se, ao colocar, ou retirar, parênteses que você está escrevendo para que outros
+            leiam.</p>
+          <p class="fragment fade-up">Se outra pessoa não conseguir entender a expressão que você escreveu, em alguns dias, você
+            também
+            não entenderá.</p>
+        </section>
+        <section class="nivel1">
+          <h2>Constantes e variáveis</h2>
+          <p class="fragment fade-up">$x$,$y$,$2$,$4$ são expressões lambda válidas que podem ser representados pelas seguintes abstrações:</p>
+          <ol>
+            <li class="fragment fade-up">$\lambda x.\space x$</li>
+            <li class="fragment fade-up">$\lambda y.\space y$</li>
+            <li class="fragment fade-up">$\lambda x.\space 2$</li>
+            <li class="fragment fade-up">$\lambda x.\space 4$</li>
+          </ol>
+          <p class="fragment fade-up">Também é possível escrever qualquer numero com abstrações lambda veja: 
+            <a href="http://https://en.wikipedia.org/wiki/Church_encoding" target="_blank" rel="noopener noreferrer">Church Encoding</a>.</p>
+        </section>
+        <section class="nivel1">
+          <h2>Universalidade</h2>
+          <p class="fragment fade-up">Com o cálculo Lambda podemos definir:</p>
+          <ol>
+            <li class="fragment fade-up">booleanos e condicionais</li>
+            <li class="fragment fade-up">aritmética</li>
+            <li class="fragment fade-up">estruturas de dados</li>
+            <li class="fragment fade-up">recursividade</li>
+          </ol>
+          <p class="fragment fade-up">O cálculo lambda é considerado <i>"a menor linguagem de programação"</i> e 
+            permite a criação de qualquer algoritmo. Dá tanto trabalho quanto o Assembly.</p>
+        </section>
+        <section class="nivel1">
+          <h2>Aplicação</h2>
+          <small style="font-size: 65% !important;">
+          <p class="fragment fade-up">A operação básica do cáculo lambda é a aplicação de funções.</p>
+          <p class="fragment fade-up">Considere: $\lambda x.((+\space 1)\space x)$</p>
+          <p class="fragment fade-up">Podemos aplicar a esta função o valor 3: $\lambda x.((+\space 1)\space x)\space 3$</p>
+          <p class="fragment fade-up">Neste caso estamos aplicando o valor 3 à função $\lambda x.((+\space 1)\space x)$</p>
+          <p class="fragment fade-up">Logo: $$\lambda x.((+\space 1)\space x)\space 3  = (+\space 1\space 3) \Rightarrow 4$$</p>
+          <p class="fragment fade-up">Só para reforçar, dizemos que aplicamos à função o valor 3. Historicamente 
+            chamamos este processo de <b><i>beta-conversion</i></b> ou <b><i>beta-reduction</i></b>.</p>
+          <p class="fragment fade-up">Observe que não encontramos um resultado. Encontramos o significado da aplicação. Esta é a forma normal, ou 
+            $\beta$-normal.</p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Beta Conversion</h2>
+          <small style="font-size:75% !important;">
+          <p class="fragment fade-up">Chamamos de <b><i>beta-conversion</i></b>, <b><i>beta-reduction</i></b> ou 
+               <b><i>$\beta$-conversion</i></b> ao processo de substituir uma variável ligada, no corpo da abstração lambda, pelo argumento
+                passado pela aplicação desta função. O processo inverso, transformar uma expressão já reduzida novamente à abstração é chamado de 
+               <b><i>$\beta$-abstraction</i></b>.</p>
+          <p class="fragment fade-up">De forma leiga, podemos dizer que a conversão beta é a aplicação da função ao seu argumento. Tome, por exemplo,
+               a função $f_{(x)}= 3x+1$ quando aplicamos o valor 2 nesta função, teremos: $f_{(2)}= 3\times 2+1 = 7$. Isto é cálculo algébrico. 
+               O que fizemos foi aplicar (substituir) à função ao valor 2 substituindo a variável $x$, a variável da função (está ligada).</p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Aplicação</h2>
+          <small>
+            <p class="fragment fade-up">Para simplificar podemos escrever $\lambda x.((+\space 1)\space x)\space 3$ como 
+              $\lambda x.(x+1)\space 3$. Não está sintaticamente correto, mas simplifica; 
+            </p>
+            <p class="fragment fade-up">Com isso temos a seguinte árvore sintática:</p>
+            <pre style="font-size: 26px;" class="fragment fade-up">   
+                   aplicação
+                    /   \
+                   λ     3
+                  / \
+                 x   +
+                    / \
+                   x   1
+            </pre>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Duas Aplicações</h2>
+          <small>
+            <p class="fragment fade-up">Considere a função $(\lambda x.x+1)(\lambda y.y+2)\space 3$
+              neste caso teríamos:
+            </p>
+            <p class="fragment fade-up">Com isso temos a seguinte árvore sintática:</p>
+            <pre style="font-size: 26px;" class="fragment fade-up">
+   aplicação =&gt;   aplicação =&gt;    aplicação =&gt;  +  =&gt; 6
+    /     \            /   \           /   \         / \
+   λ     aplicação    λ     +         λ     5       5   1
+  / \       /  \     / \   / \       / \
+ x   +     λ    3   x   + 3   2     x   +
+    / \   / \          / \             / \
+   x   1 y   +        x   1           x   1
+            / \                  
+           y   2
+          </pre>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Teste a si mesmo</h2>
+          <small>
+            <p class="fragment fade-up">Considere a função $(\lambda x.x+1)(\lambda y.y+2)\space 3$
+              E tente começar pela primeira função e escreva a árvore sintática:
+            </p>
+            <p class="fragment fade-up">Com isso temos a seguinte árvore sintática:</p>
+            <pre style="font-size: 26px;" class="fragment fade-up">
+    aplicação      =&gt;         +   =&gt;    + =&gt;  +  =&gt;  6
+    /     \                  / \       / \   / \
+  λ     aplicação     aplicação 1     +   1 5   1
+ / \       /  \          / \         / \
+x   +     λ    3        λ   3       3   2
+   / \   / \           / \     
+  x   1 y   +         y   +    
+           / \       / \
+          y   2     y   2
+           </pre>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Variáveis Ligadas</h2>
+          <small>
+            <p class="fragment fade-up">Uma variável $x$ qualquer, em uma expressão do cálculo lambda é dita ligada 
+              (<b><i>bound</i></b>) se esta variável for declarada como tal em uma determinada abstração lambda.</p>
+            <p class="fragment fade-up">Para $\lambda x. (\times \space 2)\space x$, $x$ é a variável ligada.</p>
+            <p class="fragment fade-up">Para $\lambda y. (+\space x)\space y$, $y$ é a variável ligada.</p>
+            <p class="fragment fade-up">Todas a variáveis que eventualmente ocorram na abstração e que não estejam ligadas serão 
+              ditas livres. ou globais. </p>
+            <p class="fragment fade-up">Ou seja: aplicando 2 a $\lambda y.(+\space x)\space y$ teremos $\lambda y.(+\space x)\space 2 \Rightarrow (+\space 2 \space x)$ </p>
+          </small>
+        </section>
+        
+        <section class="nivel1">
+          <h2>Variáveis Ligadas, ou não?</h2>
+          <small>
+            <p class="fragment fade-up">A mesma variável $x$ pode aparecer em contextos diferentes na mesma abstração lambda. Em algumas 
+                instâncias esta variável pode estar ligada e livre em outras. Tome como exemplo: $$(\lambda x. \space+\space(\lambda y.((\lambda x. \times \space x\space y\space )\space 2)) \space x) \space y) $$ </p>
+              
+            <p class="fragment fade-up">Observe que a variável $x$ após o $\times$ está em uma ligação diferente da variável $x$ mais externa. </p>
+            <p class="fragment fade-up">Observe também que o primeiro $y$ está ligado e que o segundo é livre.</p>
+           </small>
+        </section>
+        <section class="nivel1">
+          <h2>Combinadores</h2>
+          <small>
+            <p class="fragment fade-up">Uma abstração lambda sem variáveis livres são chamadas de <b>combinadores</b>, ou de
+              expressões fechadas.</p>
+            <p class="fragment fade-up">Combinadores são usados para combinar funções.</p>
+            <p class="fragment fade-up">O menor combinador possível é a função identidade $I$ $$I \equiv \lambda x.\space x$$
+            </p>
+            <p class="fragment fade-up">A função identidade, quando avaliada tem o significado da própria variável. $$(\lambda
+              x.\space x) 5 \Rightarrow 5$$</p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Exemplo 1 - $\beta$-reduction</h2>
+          <small>
+            <p class="fragment fade-up">Tomemos a função: $$((\lambda a.a) \lambda b. \lambda c. b)(x)\lambda e.f $$ </p>
+            <p class="fragment fade-up">$$(\lambda b. \lambda c.b) (x)\lambda e.f$$ </p>
+            <p class="fragment fade-up">$$(\lambda c.x) \lambda e.f $$</p>
+            <p class="fragment fade-up">$$x$$</p>
+            <p class="fragment fade-up">logo $x$ é a forma $beta$-normal de $((\lambda a.a) \lambda b. \lambda c. b)(x)\lambda e.f $</p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Exemplo 2 - $\beta$-reduction</h2>
+          <small>
+            <p class="fragment fade-up">Tomemos a função: 
+              $$(\lambda x. \space+\space(\lambda y.((\lambda x. \times \space x\space y\space )\space 2)) \space x) \space y) $$ </p>
+            <p class="fragment fade-up">Teremos:
+              $$(\lambda x. \space+\space((\lambda y.(\times \space 2\space y\space )) \space x) \space y) $$ </p>
+            <p class="fragment fade-up">$$(\lambda x. \space+\space((\times \space 2\space x\space )) \space y) $$</p>
+            <p class="fragment fade-up">$$(\lambda x. \space+\space(\times \space 2\space x\space ) \space y) $$</p>
+            <p class="fragment fade-up">ou seja, a forma $\beta$-normal desta função é equivalente a forma algébrica: $(2x+y)$</p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Passando por valor</h2>
+          <small>
+            <p class="fragment fade-up">Passar por valor é um conceito comum em linguagens de programação imperativas. O equivalente em lambda calculus seria:
+                $$(\lambda x.(\times \space x \space x)(+\space 2\space 3))$$ </p>
+            <p class="fragment fade-up">$$(\lambda x.(\times \space x\space x)\space 5)$$</p>
+            <p class="fragment fade-up">$$(\times \space 5 \space 5) \Rightarrow 25$$</p>
+            <p class="fragment fade-up">Ou seja, avaliamos as funções imediatamente passando o resultado para a próxima função.</p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Passando por referência</h2>
+          <small>
+            <p class="fragment fade-up">O nome correto é <b><i>Lazy Evaluation</i></b>.
+               $$(\lambda x.(\times \space x \space x)(+\space 2\space 3))$$ </p>
+            <p class="fragment fade-up">$$(\lambda x.(\times \space (+\space 2\space 3)\space (+\space 2\space 3)))$$</p>
+            <p class="fragment fade-up">$$(\times \space (+\space 2\space 3)\space (+\space 2\space 3))) \Rightarrow 25$$</p>
+            <p class="fragment fade-up">Ou seja, passamos as funções para outra funções e só avaliamos no final.</p>
+           </small>
+        </section>
+        <section class="nivel1">
+          <h2>Um problema Interessante</h2>
+          <small style="font-size: 72% !important;">
+            <p class="fragment fade-up">Considere:$$((\lambda x. \space x\space x)(\lambda x.\space x\space x))$$</p>
+            <p class="fragment fade-up">$$((\lambda x.\space x\space x)(\lambda x.\space x\space x))$$</p>
+            <p class="fragment fade-up">O que leva a uma recursão infinita.</p>
+            <p class="fragment fade-up">Considere agora: $$((\lambda y. 2)(\lambda x. \space x\space x)(\lambda x.\space x\space x)))$$</p>
+            <p class="fragment fade-up">Neste caso, passando por valor, continuamos com a indefinição provocada pela recursão. Mas, se 
+              passarmos por referência, o resultado é 2 já que não variável $y$ no corpo da função.
+            </p>
+          </small>
+        </section>
+      <section class="nivel1">
+        <h2>Exemplo 2 - Evaluation</h2>
+        <small style="font-size: 55% !important;">
+          <p class="fragment fade-up">Considere:$$(((\lambda f. (\lambda x. f\space (f\space x))) (\lambda y. (\times\space y\space y)))\space 3)$$</p>
+          <p class="fragment fade-up">Muito difícil de ler... vamos mudar um pouco a notação:</p>
+          <p class="fragment fade-up">$$\{(\lambda f. (\lambda x. f\space (f\space x))) (\lambda y. (\times\space y\space y))\space \} \space 3 $$</p>
+          <p class="fragment fade-up">Quase deu... vamos tentar novamente:</p>
+          <p class="fragment fade-up">$$\{[(\lambda x. (\lambda y. (\times\space y\space y)) \space ((\lambda y. (\times\space y\space y))\space x))] \space \} \space 3 $$</p>
+          <p class="fragment fade-up">$$\{[(\lambda x. (\lambda y. (\times\space y\space y)) \space (\times\space  x\space x)] \space \} \space 3 $$</p>
+          <p class="fragment fade-up">$$\{[(\lambda x. (\times\space (\times\space x\space x) \space (\times\space x\space x)) \space ]\space \} \space 3 $$</p>
+          <p class="fragment fade-up">$$\{[(\lambda x. (\times\space (\times\space 3\space 3) \space (\times\space 3\space 3)) \space ]\space \} \space  $$</p>
+          <p class="fragment fade-up">$$ (\times\space 9 \space 9) \Rightarrow 81$$</p>
+        </small>
+      </section>
+    <section class="nivel1">
+      <h2>$\alpha$-Reduction</h2>
+      <p class="fragment fade-up">A técnica conhecida como $\alpha$-Reduction é o formalismo que nos permite mudar o nome de
+        uma variável em uma abstração lambda.</p>
+      <ol>
+        <li class="fragment fade-up">$(\lambda x. \space +\space x\space 1)$</li>
+        <li class="fragment fade-up">$(\lambda y.\space +\space y\space 1)$</li>
+      </ol>
+      <p class="fragment fade-up">As duas funções acima são equivalentes.</p>
+      <p class="fragment fade-up">$$(\lambda x. \space +\space x\space 1) \Leftrightarrow_{\alpha} (\lambda y.\space +\space
+        y\space 1)$$</p>
+    </section>
+      <section class="nivel1">
+        <h2>Exercício 1</h2>
+          <p>Aplique a técnica $\beta$-Reduction, o máximo possível às seguintes abstrações:</p>
+          <ol>
+            <li>$(\lambda z. \space z)(\lambda y. \space y\space y)(\lambda x. \space x\space a) $</li>
+            <li>$(\lambda z. \space z)(\lambda z. \space z\space z)(\lambda z. \space z\space y) $</li>
+            <li>$((\lambda x.((\lambda y.(x\space y))\space x))(\lambda z.\space w))$</li>
+            <li>$(\lambda x.\space x\space x) (\lambda y.y\space x) z$</li>
+            <li>$(((\lambda x. \lambda y.(x\space y))(\lambda y.y))\space w)$</li>
+            <li>$(\lambda z.\space x)y$</li>
+          </ol>
+          <p>Lembre-se que você sempre pode usar $\alpha$-Reduction.</p>
+      </section>
+      <section class="nivel1">
+        <h2>Exercício 1-1</h2>
+        <p>$(\lambda z.z)(\lambda y.y\space y)(\lambda x.x\space a)$</p>
+        <ol>
+          <li class="fragment fade-up">$(\lambda y.y\space y)(\lambda x.x\space a)$</li>
+          <li class="fragment fade-up">$(\lambda x.x\space a)(\lambda x.x\space a)$</li>
+          <li class="fragment fade-up">$a \space a$</li>
+        </ol>
+      </section>
+      <section class="nivel1">
+        <h2>Exercício 1-3</h2>
+        <p>$((\lambda x.((\lambda y.(x\space y))\space x))(\lambda z.\space w))$</p>
+        <ol>
+          <li class="fragment fade-up">$((\lambda x.(x\space x))(\lambda z.\space w))$</li>
+          <li class="fragment fade-up">$((\lambda z.\space w)\space (\lambda z.\space w))$</li>
+          <li class="fragment fade-up">$w \space w$</li>
+        </ol>
+        <p class="fragment fade-up">Outra forma de resolver esta função incluiria a aplicação da $\alpha$-reduction.</p>
+      </section>
+      <section class="nivel1">
+        <h2>Exercício 1-5</h2>
+        <p>$(((\lambda x. \lambda y.(x\space y))(\lambda y.y))\space w)$</p>
+        <ol>
+          <li class="fragment fade-up">$(((\lambda x. \lambda a.(x\space a))(\lambda y.y))\space w)$</li>
+          <li class="fragment fade-up">$((\lambda a.(\lambda y.y)a))\space w)$</li>
+          <li class="fragment fade-up">$(\lambda y.y)w$</li>
+          <li class="fragment fade-up">$w$</li>
+        </ol>
+      </section>
+      <section class="nivel1">
+        <h2>Exercício 1-Respostas</h2>
+        <ol>
+          <li>$a\space a$</li>
+          <li>$y \space y$</li>
+          <li>$w \space w$</li>
+          <li>$x\space x\space z$</li>
+          <li>$w$</li>
+          <li>$x$</li>
+        </ol>
+      </section>
+      </section>
+     </div>
+  </div>
+  <div class="home-button"><a href="https://frankalcantara.com"><i class="fas fa-home"></i></a></div>
+  <script src="../../rev/reveal.js"></script>
+  <script src="../../rev/plugin/notes/notes.js"></script>
+  <script src="../../rev/plugin/search/search.js"></script>
+  <script src="../../rev/plugin/zoom/zoom.js"></script>
+  <script src="../../rev/plugin/math/math.js"></script>
+  <script src="../../rev/plugin/menu/menu.js"></script>
+  <script src="../../rev/plugin/chalkboard/plugin.js"></script>
+
+  <script>
+    // Full list of configuration options available at:
+    // https://revealjs.com/config/
+    Reveal.initialize({
+      // Push each slide change to the browser history
+      history: true,
+      // Transition style
+      transition: "default", // none/fade/slide/convex/concave/zoom
+      center: false,
+      math: {
+        mathjax:
+          "https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js",
+        config: "TeX-AMS_HTML-full",
+        // pass other options into `MathJax.Hub.Config()`
+        TeX: {
+          Macros: {
+            RR: "{\\bf R}",
+          },
+        },
+      },
+      menu: {
+        side: "left",
+        width: "normal",
+        numbers: false,
+        titleSelector: "h1, h2, h3, h4, h5, h6",
+        useTextContentForMissingTitles: false,
+        hideMissingTitles: false,
+        markers: true,
+        custom: false,
+        themes: false,
+        themesPath: "dist/theme/",
+        transitions: false,
+        openButton: true,
+        openSlideNumber: false,
+        keyboard: true,
+        sticky: false,
+        autoOpen: true,
+        delayInit: false,
+        openOnInit: false,
+        loadIcons: true,
+      },
+
+      // reveal.js plugins
+      plugins: [
+        RevealNotes,
+        RevealMath,
+        RevealMenu,
+        RevealChalkboard,
+        RevealSearch,
+        RevealZoom,
+      ],
+    });
+  </script>
+</body>
+
+</html>

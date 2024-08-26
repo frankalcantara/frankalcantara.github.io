@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Frank Coelho de Alcantara - 2021">
+  <title>Recursão</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+  <link rel="stylesheet" href="../../rev/reset.css" />
+  <link rel="stylesheet" href="../../rev/reveal.css" />
+  <link rel="stylesheet" href="../../rev/interpret.css" />
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section id="title-slide" class="nivel1">
+        <h1 class="title">Recursão</h1>
+        <p style="text-align: right !important;">Frank Coelho de Alcantara - 2021 &nbsp;&nbsp;&nbsp;</p>
+      </section>
+      <section>
+        <section class="nivel1">
+          <h2>História</h2>
+          <small style="font-size: 70% !important;">
+            <p class="fragment fade-up">Podemos encontrar referências a processos recursivos datadas de 700 AC.</p>
+            <p class="fragment fade-up">Em 1202, Leonardo Pisano Bigollo ( filho de bonacci, Fibonacci), em <i>Liber Abaci</i> propõe o uso dos algoritmos hindu-arábicos
+              que usamos hoje e a sequência numérica que recebeu seu nome: $F_0=1,F_2=1$ e $F_n = F_{n-1}+F_{n-2}$, enquanto estudava a reprodução de 
+              <a href="https://science.jrank.org/pages/2705/Fibonacci-Sequence-History.html" target="_blank" rel="noopener noreferrer">coelhos</a>. </p>
+            <p class="fragment fade-up">No final do século XIX <a href="https://en.wikipedia.org/wiki/Hermann_Grassmann" target="_blank" rel="noopener noreferrer">Grassmann</a> 
+              e <a href="https://pt.wikipedia.org/wiki/Charles_Sanders_Peirce" target="_blank" rel="noopener noreferrer">Pierce</a> usaram a recursão para definir a adição, a multiplicação e para provar as 
+              propriedades de associatividade, distributividade e comutatividade, destas operações.</p>
+            <p class="fragment fade-up">Em 1934 <a href="https://pt.wikipedia.org/wiki/Kurt_G%C3%B6del" target="_blank" rel="noopener noreferrer">Gödel</a> atualiza as definições de <a href="https://pt.wikipedia.org/wiki/Jacques_Herbrand" target="_blank" rel="noopener noreferrer">Jacques Herbrand</a> 
+              introduzindo a generalização do conceito de funções recursivas.</p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Funções Recursivas</h2>
+          <small style="font-size: 70% !important;">
+            <p class="fragment fade-up">A funções recursivas são uma classe de funções no domínio dos números naturais,
+              estudadas em teoria da computação, que receberam este nome devido ao processo de recursão segundo o qual o 
+              valor de uma função é definido pela aplicação da mesma função a partes cada vez menores do problema.</p>
+            <p class="fragment fade-up"> Tomemos por exemplo uma função para o cálculo do fatorial de um número $x$ representado  
+              por $x!$. Neste caso, uma função $fatorial(x)$ deverá devolver o produto $1 \times 2 \times 3... \times x$ para 
+              todo $x > 0$ e $1$ para $x=0$. Observe que podemos representar esta função usando dois casos distintos e recursão: 
+              $$
+              \begin{array}{lcl}
+              fatorial(0) & = & 1 \\
+              fatorial(x) & = & x \times fatorial(x-1)
+              \end{array}
+              $$
+            </p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Função Fatorial</h2>
+          <small style="font-size:65% !important;">
+            <p class="fragment fade-up"> $x!$ é calculado por $1 \times 2 \times 3... \times x$ para
+                            todo $x > 0$ e $1$ para $x=0$. Que pode ser representado recursivamente por:
+                $$
+                \begin{array}{lcl}
+                fatorial(0) & = & 1 \\
+                fatorial(x) & = & x \times fatorial(x-1)
+                \end{array}
+                $$
+            </p>
+            <p class="fragment fade-up">Sendo assim, para calcular o fatorial de $4$ teremos $fatorial(4) = 24$</p>
+            <p class="fragment fade-up">$fatorial(4)= 4 \times fatorial(3)$</p>
+            <p class="fragment fade-up">$fatorial(4)= 4 \times (3 \times fatorial(2))$</p>
+            <p class="fragment fade-up">$fatorial(4)= 4 \times (3 \times (2 \times fatorial(1)))$</p>
+            <p class="fragment fade-up">$fatorial(4)= 4 \times (3 \times (2 \times (1 \times fatorial(0))))$</p>
+            <p class="fragment fade-up">$fatorial(4)= 4 \times (3 \times (2 \times (1 \times 1))) = 24$</p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Algoritmo</h2>
+          <small style="font-size: 67% !important;">
+            <p class="fragment fade-up">A definição do cálculo do fatorial por meio de:
+              $$
+              \begin{array}{lcl}
+              fatorial(0) & = & 1 \\
+              fatorial(x) & = & x \times fatorial(x-1)
+              \end{array}
+              $$ Explicita um algoritmo para o cálculo do fatorial de um número inteiro e positivo.</p>
+            <p class="fragment fade-up">Um algoritmo é uma forma efetiva de resolver um problema que pode ser executada por uma pessoa, ou máquina, 
+              em um número finito de passos.</p>
+            <p class="fragment fade-up">Foi esta classe de funções recursivas, <i>general recursive functions</i>, que caracterizou o 
+            primeiro modelo matemático para a definição de computabilidade, sendo anterior, e equivalente, a Máquina de Turing.</p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Caso Base</h2>
+          <small style="font-size:75% !important;">
+            <p class="fragment fade-up">Podemos definir função recursiva como: <i>uma função que chama a si mesmo, para 
+              resolver uma versão menor da sua tarefa, até uma chamada final que não requer que a função chame a si mesmo</i>.</p>
+            <p class="fragment fade-up">Em funções recursivas é indispensável que exista um <i>Caso Base</i>, 
+              uma condição terminal, onde a aplicação da função, não requeira outra chamada recursiva. Sob pena de cair em um conjunto infinito de chamadas.</p>
+            <p class="fragment fade-up">Uma forma de encontrar o caso base é pensar primeiro no caso mais simples, e depois 
+              generalizar o problema. No caso da função fatorial nosso caso base é: $fatorial(0) = 1$. E a generalização 
+              está determinada por: $fatorial(x) = x \times fatorial(x-1)$. Podemos ver isso em Haskell.
+            </p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Exercício 1 - Fatorial</h2>
+            <small style="font-size: 70% !important;">
+              <p class="fragment fade-up">Escreva uma função para o cálculo do fatorial de um número inteiro positivo,
+                utilizando Haskell, ou qualquer outra linguagem de programação, desde que nesta linguagem você use uma 
+                função lambda para esta tarefa. Você tem <b>15 minutos</b> para isso.</p>
+              
+            </small>
+        </section>
+        <section class="nivel1">
+          <h2>Operações básicas em Haskell</h2>
+          <small>
+            <p class="fragment fade-up">Lógicos: $==$, $/=$, $>,<,<=,>=$, $\&\&,||$: Ex. $a == b$</p>
+            <p class="fragment fade-up">Aritmético: $+,-,*,/$: Ex. $3 * 8$ </p>
+            <p class="fragment fade-up">Potência: ^, ^^, **: Ex.  $4$ ^^$(-4)$ </p>
+            <p class="fragment fade-up">Funções: $abs$, $quot$, $rem$ ou $div$, $mod$: Ex. $quot \space \space 8 \space \space 5$ 
+              ou $8 \space \space `quot` \space \space 5$ </p>
+            <p class="fragment fade-up">Sequência: $..$: Ex. $[1..10]$ ou $[a..z]$ nunca $[10..1]$</p>
+          </small>
+        </section>
+        <section class="nivel1">
+            <h2>Exercício 2</h2>
+            <small style="font-size:65% !important;">
+              <p class="fragment fade-up">Um dos primeiros algoritmos documentados é o algoritmo para o cálculo do 
+                Maior Divisor Comum (MDC) de Euclides publicado por volta do ano 300 AC. Podemos simplificar este algoritmo dizendo 
+                que dados dois inteiros $A$ e $B$, o MDC entre eles será dado pelo valor absoluto de $A$ se $B=0$ e pelo MDC entre $B$ e o resto da 
+                divisão de $A$ por $B$ se $B>0$.</p>
+              <p class="fragment fade-up">Escreva uma função para o cálculo do MDC entre dois números inteiros positivos, usando o 
+                algoritmo de Euclides conforme apresentado aqui, utilizando Haskell.</p>
+                            
+            </small>
+        </section>
+        <section class="nivel1">
+          <h2>Exercício 3</h2>
+          <small style="font-size:75% !important;">
+            <p class="fragment fade-up">Escreva uma função recursiva que dado um número inteiro $n$, devolva a 
+              soma dos dígitos deste número. Exemplo: dado 1234 a função deverá devolver 10. Utilizando Haskell.</p>
+            
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Listas: conceito</h2>
+          <small style="font-size:75% !important;">
+            <p class="fragment fade-up">Estrutura de dados que representa um conjunto homogêneo sequencialmente ordenados.</p>
+            <p class="fragment fade-up">A estrutura primitiva da lista é a lista vazia representada por [].</p>
+            <p class="fragment fade-up">O operador $:$ é o construtor de listas. Este é um operador polimórfico, dado por: 
+              $$>:type (:):: a -> [a] -> [a]$$
+            </p>
+            <p class="fragment fade-up">As listas são construídas com elementos do mesmo tipo.</p>
+            <p class="fragment fade-up">Todas as listas são formadas de dois elementos, recursivamente.</p>
+            
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Listas: formação</h2>
+          <small style="font-size:65% !important;">
+            <p class="fragment fade-up">Função $head$ devolve o primeiro elemento de uma lista;</p>
+            <p class="fragment fade-up">Função $tail$ devolve todos os elementos da lista menos o primeiro;</p>
+            <p class="fragment fade-up">$head [a,b,c,d] = a$ e $tail [a,b,c,d] = [b,c,d]$</p>
+            <p class="fragment fade-up">Função $last$ devolve o último elemento de uma lista;</p>
+            <p class="fragment fade-up">Função $init$ devolve todos os elementos da lista menos o último;</p>
+            <p class="fragment fade-up">$last [a,b,c,d] = d$ e $init [a,b,c,d] = [a,b,c]$</p>
+            <p class="fragment fade-up">Listas podem ser criadas usando o operador de sequência:
+              $ [limiteInferior .. limiteSuperior] $</p>
+            <p class="fragment fade-up">Podemos formar as listas escrevendo os termos desejados:
+              $ [1otermo, 2otermo .. limiteSuperior] $ </p>
+          </small>
+        </section>
+         <section class="nivel1">
+          <h2>Listas: compreensão</h2>
+          <small style="font-size:63% !important;">
+            <p class="fragment fade-up">Expressões criadas a partir de elementos da teoria dos conjuntos:
+              $$F = { E(x) | x ∈ C ∧ P1(x) ∧ . . . ∧ Pn(x) }$$
+            </p>
+            <p class="fragment fade-up">Que em Haskell:
+              $$F = [ E(x) | x \leftarrow lista, P1(x), ... , Pn(x) ]$$
+            </p>
+            <p class="fragment fade-up">Por Exemplo, temos o conjunto:
+              $$A = { x^2|X \in N}$$ </p>
+            <p class="fragment fade-up">Em Haskell:
+                $$listaQuad = [ x^2 | x \leftarrow [1..30] ]$$ </p>
+                $$listaQuadInf = [ x^2 | x \leftarrow [1..] ] $$
+          </small>   
+        </section>
+        <section class="nivel1">
+          <h2>Exercício 4</h2>
+          <small style="font-size:75% !important;">
+            <p class="fragment fade-up">Escreva uma função recursiva que dado um <i>string</i> determine se este 
+              <i>string</i> é um palíndromo, ou não. Utilizando Haskell.</p>
+          </small>
+        </section>
+    </section>
+    </div>
+  </div>
+  <div class="home-button"><a href="https://frankalcantara.com"><i class="fas fa-home"></i></a></div>
+  <script src="../../rev/reveal.js"></script>
+  <script src="../../rev/plugin/notes/notes.js"></script>
+  <script src="../../rev/plugin/search/search.js"></script>
+  <script src="../../rev/plugin/zoom/zoom.js"></script>
+  <script src="../../rev/plugin/math/math.js"></script>
+  <script src="../../rev/plugin/menu/menu.js"></script>
+  <script src="../../rev/plugin/chalkboard/plugin.js"></script>
+
+  <script>
+    // Full list of configuration options available at:
+    // https://revealjs.com/config/
+    Reveal.initialize({
+      // Push each slide change to the browser history
+      history: true,
+      // transition style
+      transition: "default", // none/fade/slide/convex/concave/zoom
+      center: false,
+      math: {
+        mathjax:
+          "https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js",
+        config: "TeX-AMS_HTML-full",
+        // pass other options into `MathJax.Hub.Config()`
+        TeX: {
+          Macros: {
+            RR: "{\\bf R}",
+          },
+        },
+      },
+      menu: {
+        side: "left",
+        width: "normal",
+        numbers: false,
+        titleSelector: "h1, h2, h3, h4, h5, h6",
+        useTextContentForMissingTitles: false,
+        hideMissingTitles: false,
+        markers: true,
+        custom: false,
+        themes: false,
+        themesPath: "dist/theme/",
+        transitions: false,
+        openButton: true,
+        openSlideNumber: false,
+        keyboard: true,
+        sticky: false,
+        autoOpen: true,
+        delayInit: false,
+        openOnInit: false,
+        loadIcons: true,
+      },
+
+      // reveal.js plugins
+      plugins: [
+        RevealNotes,
+        RevealMath,
+        RevealMenu,
+        RevealChalkboard,
+        RevealSearch,
+        RevealZoom,
+      ],
+    });
+  </script>
+</body>
+
+</html>

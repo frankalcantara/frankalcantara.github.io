@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Frank Coelho de Alcantara - 2021">
+  <title>Introdução ao Haskell</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+  <link rel="stylesheet" href="../../rev/reset.css" />
+  <link rel="stylesheet" href="../../rev/reveal.css" />
+  <link rel="stylesheet" href="../../rev/interpret.css" />
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section id="title-slide" class="nivel1">
+        <h1 class="title">Introdução ao <br/>Haskell</h1>
+        <p style="text-align: right !important;">Frank Coelho de Alcantara - 2021 &nbsp;&nbsp;&nbsp;</p>
+      </section>
+      <section>
+        <section class="nivel1">
+          <h2>História</h2>
+          <p class="fragment fade-up">Se chama Haskell em homenagem <a href="https://en.wikipedia.org/wiki/Haskell_Curry" target="_blank" rel="noopener noreferrer">Haskell Curry</a>.</p>
+          <p class="fragment fade-up">A primeira versão foi lançada em 1990, apesar de estar em trabalho desde 1987.</p>
+          <p class="fragment fade-up">"Linguagem de uso geral, estaticamente tipada, puramente funcional, com inferência de tipos, e 
+            avaliação preguiçosa".</p>
+          <p class="fragment fade-up">Quase um sonho, do ponto de vista das linguagens de programação, criado sobre valores, funções e tipos.</p>
+        </section>
+        <section class="nivel1">
+          <h2>Valores e Funções</h2>
+          <small style="font-size: 70% !important;">
+            <p class="fragment fade-up">Valores são termos. Por exemplo: $10$ é um valor inteiro; $''frank''$ é uma coleção de caracteres e $3.1415$ é um 
+              número em ponto flutuante. Os valores são processados pelas funções. A função $+$ usa dois valores numéricos e devolve uma valor numérico 
+              enquanto a função $++$ toma duas coleções de caracteres (<i>strings</i>) e devolve uma <i>string</i>.
+            </p>
+            <p class="fragment fade-up" style="float: left; width: 45%;">Exatamente como na matemática, uma função mapeia um valor de entrada em um valor de saída. As funções podem ser combinadas por exemplo; $lenght ("frank" ++ " de Alcantara")$.</p>
+            <table style="float: right; width: 45%; font-size: 75%;">
+              <tr class="fragment fade-up">
+                <th>Matemática</th>
+                <th>Haskell</th>
+              </tr>
+              <tr class="fragment fade-up">
+                <td>$f_{(x)}$</td>
+                <td>$f \space x$</td>
+              </tr>
+              <tr class="fragment fade-up">
+                <td>$f_{(x,y)}$</td>
+                <td>$f \space x \space y$</td>
+              </tr>
+              <tr class="fragment fade-up">
+                <td>$f_{g_{(x)}}$</td>
+                <td>$f \space ( g \space x)$</td>
+              </tr>
+              <tr class="fragment fade-up">
+                <td>$f_{(x)}g_{(x)}$</td>
+                <td>$f \space x \times g \space x$</td>
+              </tr>
+            </table>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Tipos</h2>
+          <small>
+            <p class="fragment fade-up">Os tipos representam conjuntos de valores com propriedades e operações similares.</p>
+            <ul>
+              <li class="fragment fade-up"><strong>Int</strong> = $[1, 2, 3, ...]$.</li>
+              <li class="fragment fade-up"><strong>Float</strong> = números em ponto flutuante de precisão simples.</li>
+              <li class="fragment fade-up"><strong>Double</strong> = números em ponto flutuante de precisão dupla.</li>
+              <li class="fragment fade-up"><strong>Char</strong> = caracteres incluíndo todo o range Unicode.</li>
+              <li class="fragment fade-up"><strong>Strings</strong> = sequências de caracteres, listas.</li>
+              <li class="fragment fade-up"><strong>Bool</strong> = verdadeiro (true) ou falso (False).</li>
+            </ul>
+            <p class="fragment fade-up">$1 :: Int$ pode ser lido como <strong>um tem o tipo inteiro</strong>.</p>
+            <p class="fragment fade-up">$''frank'' :: String$ pode ser lido como <strong>frank tem o tipo string</strong>.</p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Funções</h2>
+          <small style="font-size: 70% !important;">
+          <p class="fragment fade-up">Uma função é composta de duas partes: <i>head</i> e <i>body</i>. 
+            Na head temos o nome da função e de seus argumentos:  $incrementa \space \space x$ e no <i>body</i>, ou corpo, temos a expressão do mapeamento.</p>
+          <p class="fragment fade-up">Por exemplo: $incrementa \space \space x = x+1$ é uma função que toma um valor x e devolve este valor acrescido de 1.</p>
+          <p class="fragment fade-up">Uma boa prática de programação e escrever uma declaração de tipo para a função. A esta declaração damos o 
+            nome de assinatura da função. Esta assinatura deve ser declarada antes da função em si. Logo:</p>
+            <table class="fragment fade-up">
+              <tr class="fragment fade-up"><td style="border: none !important; text-align: left !important;">$incrementa :: Int \rightarrow Int$</td></tr>
+              <tr class="fragment fade-up"><td style="border: none !important; text-align: left !important;">$incrementa \space \space x = x+1$</td></tr>
+            </table>
+            </small>
+        </section>
+        <section class="nivel1">
+          <h2>Identificadores</h2>
+            <p class="fragment fade-up">Os nomes devem começar com uma letra minúscula, ou com o sublinhado $\_$.</p>
+            <p class="fragment fade-up">Os nomes só podem conter o sublinhado $\_$, letras, números ou o apostrofo $'$.</p>
+            <p class="fragment fade-up">No caso das funções usamos, tradicionalmente, <strong>Camell Case</strong> separando os 
+              signos por significado. Por exemplo: $aplicarLogNaLista$ ou $toUpper$. São dois nomes de funções que explicitam 
+            o mapeamento que será realizado de forma clara.</p>
+        </section>
+        <section class="nivel1">
+          <h2>Avaliação</h2>
+            <small style="font-size: 70% !important;">
+            <table class="fragment fade-up">
+              <tr class="fragment fade-up">
+                <td style="border: none !important; text-align: left !important;">$incrementa :: Int \rightarrow Int$</td>
+              </tr>
+              <tr class="fragment fade-up">
+                <td style="border: none !important; text-align: left !important;">$incrementa \space \space x = x+1$</td>
+              </tr>
+              <tr class="fragment fade-up">
+                <td style="border: none !important; text-align: left !important;"></td>
+              </tr>
+              <tr class="fragment fade-up">
+                <td style="border: none !important; text-align: left !important;">$print (incrementa \space 10)$</td>
+              </tr>
+            </table>
+            <p class="fragment fade-up">Ao final da execução, ou avaliação da expressão, da última instrução, 
+              será apresentado o valor $11$: </p>
+            <p class="fragment fade-up">$incrementa \space \space 10 \Rightarrow (10 + 1) \Rightarrow 11$</p>
+            <p class="fragment fade-up">A seta dupla a direita está mostrando o processo de avaliação, passo a passo.</p>
+            </small>
+        </section>
+        <section class="nivel1">
+          <h2>Assinaturas de Tipos</h2>
+          <small>
+          <p class="fragment fade-up">Funções mapeiam valores de entrada em valores de saída.</p>
+            <table class="fragment fade-up">
+              <tr class="fragment fade-up">
+                <td style="border: none !important; text-align: left !important;">$incrementa :: Int \rightarrow Int$ <strong>-- assinatura</strong></td>
+              </tr>
+              <tr class="fragment fade-up">
+                <td style="border: none !important; text-align: left !important;">$incrementa \space \space x = x+1$ <strong>-- declaração</strong></td>
+              </tr>
+            </table>
+            <p class="fragment fade-up">Estas assinaturas, são opcionais, mas permitem a identificação de erros e documentam 
+              a sua intenção quando criou a função. </p>
+            <p class="fragment fade-up">Podemos usar comentários para melhorar a qualidade da documentação do código: <strong>--</strong>
+            para comentários na mesma linha e  <strong>{-</strong> e <strong>-}</strong> para comentários com muitas linhas.</p>
+            </small>
+        </section>
+        <section class="nivel1">
+          <h2>Argumentos múltiplos</h2>
+          <table class="fragment fade-up">
+            <tr class="fragment fade-up">
+              <td style="border: none !important; text-align: left !important;">$media :: Float \rightarrow Float \rightarrow Float$ <strong>--
+                  assinatura</strong></td>
+            </tr>
+            <tr class="fragment fade-up">
+              <td style="border: none !important; text-align: left !important;">$media \space \space a \space b = (a+b)/2.0$ <strong>--
+                  declaração</strong></td>
+            </tr>
+          </table>
+          <p class="fragment fade-up">Neste caso, temos uma função com dois argumentos em ponto flutuante que devolve um valor em ponto flutuante.</p>
+          <p class="fragment fade-up">$media \space \space 4.0 \space \space 5.0 \Rightarrow (4.0+5.0)/2.0 \Rightarrow 4.5$</p>
+          <p class="fragment fade-up">Existe um trabalho a ser feito sobre este tema.</p>
+        </section>
+        <section class="nivel1">
+          <h2>Variáveis</h2>
+          <p class="fragment fade-up">Identificadores são imutáveis em Haskell. Isso quer dizer que não existem variáveis.</p>
+          <table class="fragment fade-up">
+            <tr class="fragment fade-up">
+              <td style="border: none !important; text-align: left !important;">$x =5$</td>
+            </tr>
+            <tr class="fragment fade-up">
+              <td style="border: none !important; text-align: left !important;">$x = 6$</td>
+            </tr>
+            </table>
+            <p class="fragment fade-up">A existência destas duas declarações irá provocar um erro. Esta imutabilidade também impede a criação 
+              de laços de repetição. </p>
+              <p class="fragment fade-up">Usaremos muita recursão em Haskell.</p>
+        </section>
+        <section class="nivel1">
+          <h2>Infix e Prefix</h2>
+          <small style="font-size: 55% !important;">
+          <p class="fragment fade-up">Vimos no Cálculo Lambda a notação prefix, mas na nossa função $media$ usamos infix: </p>
+          <table class="fragment fade-up">
+            <tr class="fragment fade-up">
+              <td style="border: none !important; text-align: left !important;">$media :: Float \rightarrow Float \rightarrow
+                Float$ <strong>--
+                  assinatura</strong></td>
+            </tr>
+            <tr class="fragment fade-up">
+              <td style="border: none !important; text-align: left !important;">$media \space \space a \space b = (a+b)/2.0$
+                <strong>--
+                  declaração</strong></td>
+            </tr>
+          </table>
+          <p class="fragment fade-up">Poderíamos ter usado prefix: </p>
+          <table class="fragment fade-up">
+            <tr class="fragment fade-up">
+              <td style="border: none !important; text-align: left !important;">$media :: Float \rightarrow Float \rightarrow
+                Float$ <strong>--
+                  assinatura</strong></td>
+            </tr>
+            <tr class="fragment fade-up">
+              <td style="border: none !important; text-align: left !important;">$media \space \space a \space b = ((+) \space a \space b))/2.0$
+                <strong>--
+                  declaração</strong>
+              </td>
+            </tr>
+          </table>
+          <p class="fragment fade-up">Podemos usar a função $media$ de duas formas:</p>
+          <table class="fragment fade-up">
+            <tr class="fragment fade-up">
+              <td style="border: none !important; text-align: left !important;">$y = media \space \space 4.5 \space \space 5.4 $</td>
+            </tr>
+            <tr class="fragment fade-up">
+              <td style="border: none !important; text-align: left !important;">$y = 4.5 \space \space 'media' \space \space 5.4$</td>
+            </tr>
+          </table>
+          <p class="fragment fade-up">A assinatura de tipos de operadores só pode ser feita em infix: $(+) :: \space Int \rightarrow Int \rightarrow Int$ </p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Overloading</h2>
+          <small style="font-size: 65% !important;">
+            <p class="fragment fade-up">Poderíamos definir uma assinatura do operador $(+)$ para cada tipo de número.</p>
+            <p class="fragment fade-up">O Haskell usa um conceito mais avançado: Classes de tipos.</p>
+            <p class="fragment fade-up">Por exemplo temos a classe $Num$ que engloba todos os tipos numéricos da linguagem. </p>
+            <p class="fragment fade-up">Neste caso, podemos dizer que $a \in Num$ que em haskell fica abreviado por $Num \space \space a$.</p>
+            <p class="fragment fade-up">Então teremos: $(+):: \space \space Num \space \space a \Rightarrow a \rightarrow a \rightarrow a$</p>
+            <p class="fragment fade-up">Outras duas classes muito importantes são $Eq$ e $Show$.</p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Eq e Show</h2>
+          <small style="font-size:57% !important;">
+          <p class="fragment fade-up">A classe $Eq$ contém todos os tipos para os quais o operador $==$ está definido. Este é o operador 
+            usado em Haskell para verificar a igualdade lógica. $(==) :: \space \space Eq \Rightarrow a \rightarrow a \rightarrow Bool$</p>
+          <table class="fragment fade-up">
+            <tr class="fragment fade-up">
+              <td style="border: none !important; text-align: left !important;">$ 2 == 2 \Rightarrow true$
+              </td>
+            </tr>
+            <tr class="fragment fade-up">
+              <td style="border: none !important; text-align: left !important;">$4.5 == 5.4 \Rightarrow False$ </td>
+            </tr>
+            <tr class="fragment fade-up">
+              <td style="border: none !important; text-align: left !important;">$"frank \space de \space alcantara" == ("frank" ++ \Rightarrow " de alcantara") \Rightarrow true$</td>
+            </tr>
+          </table>
+          <p class="fragment fade-up">A classe $Show$ contém todos os tipos que o sistema sabe como converter para <i>string</i>. 
+            $show ::  Show \Rightarrow a \rightarrow String$</p>
+          <table class="fragment fade-up">
+            <tr class="fragment fade-up">
+              <td style="border: none !important; text-align: left !important;">$show \space 45 \space \space \Rightarrow \space \space ''45''$
+              </td>
+            </tr>
+            <tr class="fragment fade-up">
+              <td style="border: none !important; text-align: left !important;">$show \space 1.2 \space \space \Rightarrow \space \space ''1.2''$ </td>
+            </tr>
+           </table>
+          <p class="fragment fade-up">Se já não existir uma forma de converter para <i>string</i> será indicado o erro <i>No instance for Show...</i></p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Classes Frequentes</h2>
+          <small style="font-size: 70% !important;">
+            <table class="fragment fade-up">
+              <tr class="fragment fade-up">
+                <td style="border: none !important; text-align: left !important;">$Show:$</td>
+                <td style="border: none !important; text-align: left !important;">$show :: Show \space a \Rightarrow a \rightarrow String$</td>
+              </tr>
+              <tr class="fragment fade-up">
+                <td style="border: none !important; text-align: left !important;">$Eq$:</td>
+                <td style="border: none !important; text-align: left !important;">$(==), (/=):: Eq \space \space a \Rightarrow a \rightarrow a \rightarrow Bool$</td>
+              </tr>
+              <tr class="fragment fade-up">
+                <td style="border: none !important; text-align: left !important;">$Ord$:</td>
+                <td style="border: none !important; text-align: left !important;">$(\gt ), (\lt), (>=), (<=):: Ord \space \space a \Rightarrow a \rightarrow a \rightarrow Bool$</td>
+              </tr>
+              <tr class="fragment fade-up">
+                <td style="border: none !important; text-align: left !important;">$Num$:</td>
+                <td style="border: none !important; text-align: left !important;">$(+), (-), (*) :: Num \space \space a \Rightarrow a
+                    \rightarrow a \rightarrow a$</td>
+              </tr>
+              <tr class="fragment fade-up">
+                <td style="border: none !important; text-align: left !important;">$Integral$:</td>
+                <td style="border: none !important; text-align: left !important;">$div, mod :: Integral \space \space a \Rightarrow a
+                    \rightarrow a \rightarrow a$</td>
+              </tr>
+              <tr class="fragment fade-up">
+                <td style="border: none !important; text-align: left !important;">$Fractional$:</td>
+                <td style="border: none !important; text-align: left !important;">$(/) :: Fractional \space \space a \Rightarrow a
+                  \rightarrow a \rightarrow a$</td>
+              </tr>
+              <tr class="fragment fade-up">
+                <td style="border: none !important; text-align: left !important;">$Floating$:</td>
+                <td style="border: none !important; text-align: left !important;">$sin, cos, tan, exp, sqrt, ... :: Floating \space \space a \Rightarrow a
+                  \rightarrow a$</td>
+              </tr>
+            </table>
+            <p class="fragment fade-up">Para ver todas as classes de tipos, no GHCI, digite: <strong>:info NomeDaClasse</strong> (:info Num)</p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Branches (Decisão)</h2>
+          <small style="font-size: 75% !important;">
+            <p class="fragment fade-up">Suponha que você queira implementar uma função $maximo$ de devolve o maior entre dois valores.</p>
+            <table class="fragment fade-up">
+              <tr class="fragment fade-up">
+                <td style="border: none !important; text-align: left !important;">$maximo :: Ord \space \space a \Rightarrow a \rightarrow a \rightarrow a$ <strong>--
+                    assinatura</strong></td>
+              </tr>
+              <tr class="fragment fade-up">
+                <td style="border: none !important; text-align: left !important;">$maximo \space \space x \space \space y = if \space \space x >= y \space \space then \space \space x \space \space else \space \space y$
+                  <strong>--
+                    declaração</strong></td>
+              </tr>
+              <tr class="fragment fade-up">
+                <td style="border: none !important; text-align: left !important;">$maximo \space \space 4 \space \space 5  \Rightarrow 5$ <strong>-- uso</strong>
+                </td>
+              </tr>
+              <tr class="fragment fade-up">
+                <td style="border: none !important; text-align: left !important;">$maximo \space \space 5 \space \space 4 \Rightarrow
+                  5$ <strong>-- uso</strong>
+                </td>
+              </tr>
+            </table>
+            <p class="fragment fade-up">A comparação é feita com operadores que pertencem a classe $Ord$. Logo, faz sentido usar esta classe.</p>
+            <p class="fragment fade-up">O fator condicional $x >= y$ é avaliado primeiro, depois o $if$ </p>
+          </small>
+        </section>
+        <section class="nivel1">
+          <h2>Guardas (Decisão)</h2>
+          <p class="fragment fade-up">Podemos definir <i>branches</i> usando guardas.</p>
+          <small>
+            <table class="fragment fade-up">
+              <tr class="fragment fade-up">
+                <td style="border: none !important; text-align: left !important;">$maximo :: Ord \space \space a \Rightarrow a
+                  \rightarrow a \rightarrow a$ <strong>--
+                    assinatura</strong></td>
+              </tr>
+              <tr class="fragment fade-up">
+                <td style="border: none !important; text-align: left !important;">$maximo \space \space x \space \space y$ </br> $\space \space \space \space | x >= y = x$ </br>
+                  $\space \space \space \space |x < y \space \space = y$</td>
+              </tr>
+            </table>
+         
+              <p class="fragment fade-up">Ou ainda:</p>
+              <table class="fragment fade-up">
+                <tr class="fragment fade-up">
+                  <td style="border: none !important; text-align: left !important;">$maximo :: Ord \space \space a \Rightarrow a
+                    \rightarrow a \rightarrow a$ <strong>--assinatura</strong></td>
+                </tr>
+                <tr class="fragment fade-up">
+                  <td style="border: none !important; text-align: left !important;">$maximo \space \space x$ </br> $\space \space
+                    \space \space | x>= y \space \space= x$ </br>
+                    $\space \space \space \space |otherwise \space \space =y$</td>
+                </tr>
+              </table>
+           </small>
+        </section>
+    
+    </section>
+    </div>
+  </div>
+  <div class="home-button"><a href="https://frankalcantara.com"><i class="fas fa-home"></i></a></div>
+  <script src="../../rev/reveal.js"></script>
+  <script src="../../rev/plugin/notes/notes.js"></script>
+  <script src="../../rev/plugin/search/search.js"></script>
+  <script src="../../rev/plugin/zoom/zoom.js"></script>
+  <script src="../../rev/plugin/math/math.js"></script>
+  <script src="../../rev/plugin/menu/menu.js"></script>
+  <script src="../../rev/plugin/chalkboard/plugin.js"></script>
+
+  <script>
+    // Full list of configuration options available at:
+    // https://revealjs.com/config/
+    Reveal.initialize({
+      // Push each slide change to the browser history
+      history: true,
+      // transition style
+      transition: "default", // none/fade/slide/convex/concave/zoom
+      center: false,
+      math: {
+        mathjax:
+          "https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js",
+        config: "TeX-AMS_HTML-full",
+        // pass other options into `MathJax.Hub.Config()`
+        TeX: {
+          Macros: {
+            RR: "{\\bf R}",
+          },
+        },
+      },
+      menu: {
+        side: "left",
+        width: "normal",
+        numbers: false,
+        titleSelector: "h1, h2, h3, h4, h5, h6",
+        useTextContentForMissingTitles: false,
+        hideMissingTitles: false,
+        markers: true,
+        custom: false,
+        themes: false,
+        themesPath: "dist/theme/",
+        transitions: false,
+        openButton: true,
+        openSlideNumber: false,
+        keyboard: true,
+        sticky: false,
+        autoOpen: true,
+        delayInit: false,
+        openOnInit: false,
+        loadIcons: true,
+      },
+
+      // reveal.js plugins
+      plugins: [
+        RevealNotes,
+        RevealMath,
+        RevealMenu,
+        RevealChalkboard,
+        RevealSearch,
+        RevealZoom,
+      ],
+    });
+  </script>
+</body>
+
+</html>
