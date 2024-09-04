@@ -275,7 +275,7 @@ As declarações atômicas e compostas são costuradas por conectivos para produ
 
 Quando aplicamos a Tabela Verdade a uma declaração composta, obtemos um procedimento capaz de determinar se declaração composta é verdadeira ou falsa. Para isso, tudo que temos que fazer é aplicar, segundo as regras de procedência, a Tabela Verdade a expressão, simplificando-a. Uma alternativa mais simples que a aplicação algébrica dos axiomas da Lógica Proposicional.
 
-O operador $\vee $, também chamado de ou inclusivo, é verdade apenas quando ambos os termos são verdadeiros. Diferindo de um operador, que por não ser básico e fundamental, não consta da nossa lista, chamado de ou exclusivo, $\oplus $, falso se ambos os termos forem verdadeiros.
+O operador $\vee $, também chamado de ou inclusivo, é verdade quando um dos termos é verdadeiro. Diferindo de um operador, que por não ser básico e fundamental, não consta da nossa lista, chamado de ou exclusivo, $\oplus $, falso se ambos os termos forem verdadeiros.
 
 O condicional $\rightarrow $ não representa a implicação em nenhum sentido causal. Em particular, ele é definido como verdadeiro quando nenhum dos termos é verdadeiro, e é falso apenas quando o termo antecedente é verdadeiro e o consequente falso.
 
