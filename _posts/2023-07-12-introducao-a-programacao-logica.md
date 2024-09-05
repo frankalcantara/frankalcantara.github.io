@@ -16,13 +16,13 @@ categories:
   - material de Aula
   - matemática
 rating: 5
-slug: introducao-programacao-logica
+slug: decifrando-misterios-jornada-da-programacao-logica
 keywords:
   - lógica
   - Programação
   - Programação Lógica
 draft: true
-lastmod: 2024-09-04T16:13:10.525Z
+lastmod: 2024-09-05T18:08:53.158Z
 ---
 
 A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
