@@ -22,7 +22,7 @@ keywords:
   - Programação
   - Programação Lógica
 draft: true
-lastmod: 2024-09-05T18:08:53.158Z
+lastmod: 2024-09-05T18:30:44.157Z
 ---
 
 A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
@@ -439,7 +439,7 @@ Linguagens de programação que usam a Programação Lógica usam _unificação_
 <legend style="font-size: 1em; text-align: center;
  margin-bottom: 20px;">Tabela 3 - Equivalências em Lógica Proposicional.</legend>
 
-Como essas equivalências permitem validar Fórmulas Bem Formadas sem o uso de uma Tabela Verdade. Uma coisa interessante seria tentar provar cada uma delas.
+Como essas equivalências permitem validar Fórmulas Bem Formadas sem o uso de uma tabela verdade. Uma coisa interessante seria tentar provar cada uma delas.
 
 As equivalências que listei surgiram quase espontaneamente enquanto estava escrevendo este texto, mais por hábito e necessidade que por algum raciocínio organizado. São muitas as equivalências que existem, estas são as mais comuns no meu cotidiano. Talvez, alguns exemplos de validação de Fórmulas Bem Formadas usando apenas as equivalências apresentadas na Tabela 3, estufar as velas do conhecimento e nos levar pela rota que precisamos seguir:
 
@@ -564,12 +564,18 @@ Regras de inferência são esquemas que proporcionam a estrutura para derivaçõ
 Aqui uma regra de inferência será representada por:
 
 $$
-\frac{P_1, P_2, ..., P_n}{C}\\
+\frac{P_1, P_2, ..., P_n}{C},
 $$
 
-Onde o conjunto formado $P_1, P_2, ..., P_n$, chamado de contexto, ou antecedente, $\Gamma $, e $ c$, chamado de conclusão, ou consequente, são Formulas Bem Formadas. A regra significa que se o Proposição é verdadeiro então a conclusão $ c$ também é verdadeira.
+ou, eventualmente por:
 
-Eu vou tentar usar o par contexto e conclusão. Entretanto já vou me desculpando se escapar um antecendente e consequente. Será por mera força do hábito. Quando estudamos lógica chamamos de _argumento_ a uma lista de proposições, neste caso chamadas de premissas, seguidas de uma palavra, ou expressão (portanto, consequentemente, desta forma), e de outra proposição, neste caso, chamada de conclusão.
+$$
+P_1, P_2, ..., P_n \vdash C.
+$$
+
+Onde o conjunto formado $P_1, P_2, ..., P_n$, chamado de contexto, ou antecedente, $\Gamma$, e $C$, chamado de conclusão, ou consequente, são Formulas Bem Formadas. A regra significa que se as proposições que constituem a conjunção expressa no contexto é verdadeira então a conclusão $C$, consequência, também será verdadeira.
+
+Eu vou tentar usar o par contexto e conclusão. Entretanto já vou me desculpando se escapar um antecedente e consequente. Será por mera força do hábito. Quando estudamos lógica chamamos de _argumento_ a uma lista de proposições, neste caso chamadas de premissas, seguidas de uma palavra, ou expressão (portanto, consequentemente, desta forma), e de outra proposição, neste caso, chamada de conclusão.
 
 A representação que usamos é conhecida como sequência de dedução, é uma forma de indicar que se o Proposição, colocado acima da linha horizontal for verdadeiro, estamos dizendo que todas as preposições $P_1, P_2, ..., P_n$ são verdadeiras e todas as proposições colocas abaixo da linha, conclusão, também serão verdadeiras.
 
@@ -577,7 +583,7 @@ As regras de inferência são o alicerce da lógica dedutiva e do estudo das dem
 
 ### _Modus Ponens_
 
-A regra do _Modus Ponens_ permite inferir uma conclusão a partir de uma implicação e de sua premissa antecedente. Se temos uma implicação $P\rightarrow Q $, e sabemos que $P$ é verdadeiro, então podemos concluir que $Q$ também é verdadeiro.
+A regra do _Modus Ponens_ permite inferir uma conclusão a partir de uma implicação e de sua premissa antecedente. Se temos uma implicação $P\rightarrow Q$, e sabemos que $P$ é verdadeiro, então podemos concluir que $Q$ também é verdadeiro.
 
 $$
 P \rightarrow Q
@@ -669,7 +675,7 @@ $$
 
 ### _Modus Tollens_
 
-A regra do _Modus Tollens_ permite inferir a negação da premissa antecedente a partir de uma implicação e da negação de sua premissa consequente.Se temos uma implicação $P\rightarrow Q$, e sabemos que $Q$ é falso (ou seja, $\neg G$), então podemos concluir que $P$ também é falso.
+A regra do _Modus Tollens_ permite inferir a negação da premissa antecedente a partir de uma implicação e da negação de sua premissa consequente. Se temos uma implicação $P\rightarrow Q$, e sabemos que $Q$ é falso (ou seja, $\neg G$), então podemos concluir que $P$ também é falso.
 
 $$
 P \rightarrow Q
@@ -693,7 +699,7 @@ Algumas aplicações do _Modus Tollens_:
 
 - Refutar teorias mostrando que suas previsões são falsas. Por exemplo:
 
-  - Proposição: _se a teoria da geração espontânea, $ tG$ é correta, insetos irão se formar em carne deixada exposta ao ar, $I$_.
+  - Proposição: _se a teoria da geração espontânea, $TG$ é correta, insetos irão se formar em carne deixada exposta ao ar, $I$_.
   - Proposição: _insetos não se formam em carne deixada exposta ao ar_.
   - Conclusão: logo, _a teoria da geração espontânea_ é falsa.
 
@@ -729,12 +735,12 @@ $$
 
 - Fazer deduções lógicas baseadas na negação da conclusão. Por exemplo:
 
-  - Proposição: _se hoje, $H$, é sexta-feira, $ se $, amanhã é sábado $ sA$_.
+  - Proposição: _se hoje, $H$, é sexta-feira, $se$, amanhã é sábado $SA$_.
   - Proposição: _amanhã não é sábado_.
   - Conclusão: logo, _hoje não é sexta-feira_.
 
 $$
- (H=Se) \rightarrow (A=Sa)
+ (H=Se) \rightarrow (A=SA)
 $$
 
 $$
@@ -1357,6 +1363,52 @@ $$
 &I(9)
 \end{aligned}
 $$
+
+<table>
+        <tr>
+            <th>Regra</th>
+            <th>Descrição</th>
+            <th>Fórmula</th>
+        </tr>
+        <tr>
+            <td>Modus Ponens</td>
+            <td>Se $P \rightarrow Q$ e $P$ são verdadeiros, então $Q$ também é verdadeiro.</td>
+            <td>$\frac{P, P \rightarrow Q}{Q}$</td>
+        </tr>
+        <tr>
+            <td>Modus Tollens</td>
+            <td>Se $P \rightarrow Q$ e $\neg Q$ são verdadeiros, então $\neg P$ também é verdadeiro.</td>
+            <td>$\frac{\neg Q, P \rightarrow Q}{\neg P}$</td>
+        </tr>
+        <tr>
+            <td>Dupla Negação</td>
+            <td>A negação de uma negação é equivalente à afirmação original.</td>
+            <td>$\frac{\neg \neg P}{P}$</td>
+        </tr>
+        <tr>
+            <td>Adição</td>
+            <td>Se $P$ é verdadeiro, então $P \vee Q$ também é verdadeiro.</td>
+            <td>$\frac{P}{P \vee Q}$</td>
+        </tr>
+        <tr>
+            <td>Adjunção</td>
+            <td>Se $P$ e $Q$ são verdadeiros, então $P \wedge Q$ é verdadeiro.</td>
+            <td>$\frac{P, Q}{P \wedge Q}$</td>
+        </tr>
+        <tr>
+            <td>Simplificação</td>
+            <td>Se $P \wedge Q$ é verdadeiro, então $P$ (ou $Q$) é verdadeiro.</td>
+            <td>$\frac{P \wedge Q}{P}$</td>
+        </tr>
+        <tr>
+            <td>Bicondicionalidade</td>
+            <td>Se $P \leftrightarrow Q$, então $P \rightarrow Q$ e $Q \rightarrow P$ são verdadeiros.</td>
+            <td>$\frac{P \leftrightarrow Q}{P \rightarrow Q, Q \rightarrow P}$</td>
+        </tr>
+</table>
+<legend style="font-size: 1em;
+ text-align: center;
+ margin-bottom: 20px;">Tabela 4 - Resumo dos métodos de inferência.</legend>
 
 ## Classificando Fórmulas Proposicionais
 
