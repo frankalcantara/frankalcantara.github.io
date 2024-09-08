@@ -80,6 +80,16 @@
           "title": "draft",
           "name": "draft",
           "type": "datetime"
+        },
+        {
+          "title": "beforetoc",
+          "name": "beforetoc",
+          "type": "string"
+        },
+        {
+          "title": "lastmod",
+          "name": "lastmod",
+          "type": "datetime"
         }
       ]
     }
