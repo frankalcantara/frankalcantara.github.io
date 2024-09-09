@@ -1,34 +1,34 @@
 ---
 layout: post
-title: Dynamic Programming in C++ - Techniques and Insights
+title: Competitive programming in C++ - Techniques and Insights
 author: Frank
 categories:
-    - Matemática
-    - Linguagens Formais
-    - Programação
+  - Matemática
+  - Linguagens Formais
+  - Programação
 tags:
-    - Matemática
-    - Linguagens Formais
-    - Programação Dinâmica
-    - Dynamic Programming
-    - Dynamic Programming
-    - C++ Algorithms
-    - Performance Analysis
-    - Coding Examples
-    - Algorithm Optimization
-    - Practical Programming Guide
+  - Matemática
+  - Linguagens Formais
+  - Programação Dinâmica
+  - Dynamic Programming
+  - Dynamic Programming
+  - C++ Algorithms
+  - Performance Analysis
+  - Coding Examples
+  - Algorithm Optimization
+  - Practical Programming Guide
 image: assets/images/prog_dynamic.jpeg
 description: Dynamic Programming in C++ with practical examples, performance analysis, and detailed explanations to optimize your coding skills and algorithm efficiency.
 slug: dynamic-programming
 keywords:
-    - Dynamic Programming
-    - C++ Algorithms
-    - Coding Examples
-    - Performance Optimization
-    - Algorithm Efficiency
-    - Programming Guide
-    - Code Comparison
-    - Developer Tips
+  - Dynamic Programming
+  - C++ Algorithms
+  - Coding Examples
+  - Performance Optimization
+  - Algorithm Efficiency
+  - Programming Guide
+  - Code Comparison
+  - Developer Tips
 rating: 5
 published: 2024-06-27T19:43:15.124Z
 draft: null
@@ -36,10 +36,2438 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-04T15:10:04.681Z
+lastmod: 2024-09-09T01:43:02.316Z
 ---
 
 ## Introduction
+
+Dynamic programming (DP) is one of the most essential and versatile techniques in competitive programming. It provides a structured way to solve complex problems by breaking them down into simpler subproblems and using previously computed solutions to build the final answer efficiently. By mastering dynamic programming, you equip yourself with the ability to tackle a wide range of challenges, including optimization problems, decision-making tasks, and algorithmic puzzles. DP encourages thinking in terms of state transitions, recursive relations, and memoization, which are fundamental concepts in algorithm design.
+
+Starting with dynamic programming lays a strong foundation for competitive programming because it emphasizes critical problem-solving strategies such as identifying overlapping subproblems and recognizing optimal substructure. These strategies are crucial when working with time-constrained problems where brute-force solutions are impractical. By focusing on dynamic programming early, you gain the skills necessary to approach not only DP-specific problems but also to recognize when it can be applied in more complex, seemingly unrelated algorithmic challenges. This understanding significantly boosts your efficiency and performance in competitive programming contests.
+
+## C++ Competitive Programming Hacks
+
+In this section, we'll cover essential tips and tricks that will help you improve your efficiency and performance in competitive programming using C++. From mastering typing speed to reducing code verbosity and handling complexity, each aspect plays a crucial role in gaining a competitive edge.
+
+C++ is known for its speed and flexibility, but using it effectively requires a deep understanding of both the language and the common pitfalls that arise in competitive programmings. The goal here is to help you streamline your coding process, minimize errors, and ensure that your solutions run as efficiently as possible.
+
+We'll break down these tips into the following areas:
+
+- **Typing Efficiency**: How to type faster and more accurately, which can save you valuable time during competitive programmings.
+- **Code Reduction Techniques**: Ways to reduce code size without sacrificing clarity or correctness, using C++ features like the Standard Template Library (STL).
+- **Managing Complexity**: Strategies to handle the time and space complexity of algorithms, ensuring that your solutions scale efficiently with larger inputs.
+
+By applying these hacks, you'll be better equipped to tackle the challenges of competitive programming with C++ and improve your overall performance. Keep in mind that the code and techniques discussed here are optimized specifically for competitive programming environments, where the code is written for single-use and will not be maintained or reused. These approaches may not be suitable for professional development, where code readability, maintainability, and long-term reliability are critical.
+
+### Typing Tips
+
+If you don’t type quickly, **you should invest at least two hours per week** on the website: [https://www.speedcoder.net](https://www.speedcoder.net). Once you have completed the basic course, select the C++ lessons and practice regularly. Time is crucial in competitive programming, and slow typing can be disastrous.
+
+To expand on this, efficient typing isn’t just about speed; it’s about reducing errors and maintaining a steady flow of code. When you're in a competitive programming, every second matters. Correcting frequent typos or having to look at your keyboard will significantly slow down your progress. Touch typing—knowing the layout of the keyboard and typing without looking—becomes a vital skill.
+
+### Why Typing Speed Matters
+
+In a typical programming competitive programming, you’ll have to solve several problems within a fixed time frame. Faster typing allows you to focus more on problem-solving rather than struggling to input the code. However, typing speed without accuracy is meaningless. **Accurate and fast typing** ensures that once you have the solution, you can implement it efficiently.
+
+Typing slow or with many errors leads to:
+
+- Lost time correcting mistakes
+- Distractions from your problem-solving process
+- Higher risk of failing to complete solutions on time
+
+You should aim for a **typing speed** of at least 60 words per minute (WPM) with high accuracy. On platforms like [https://www.speedcoder.net](https://www.speedcoder.net), you can practice typing specific code syntax, which is more effective for programmers compared to general typing lessons. For example, learning C++ or Python shortcuts helps improve your typing speed in actual coding scenarios.
+
+$$
+\text{Time spent fixing errors} + \text{Time lost from slow typing} = \text{Lower overall performance in competitive programmings}
+$$
+
+### Advanced Typing Techniques for Programmers
+
+Here are some additional tips to improve your typing for competitive programming:
+
+1. **\*Use IDE shortcuts:** Learn keyboard shortcuts for your favorite Integrated Development Environment (IDE). Navigating and editing code using shortcuts reduces time spent moving between mouse and keyboard. In the case of [ICPC](https://icpc.global/) contests, the IDE provided will typically be [Eclipse](https://www.eclipse.org/downloads/packages/release/helios/sr2/eclipse-ide-cc-developers), so it’s crucial to familiarize yourself with its shortcuts and navigation to maximize efficiency during the competitive programming.
+2. **Focus on frequent patterns:** As you practice, focus on typing patterns you use frequently, such as loops, if-else conditions, and function declarations. Automating these patterns in your muscle memory will save valuable time.
+3. **Practice algorithm templates:** Some problems require similar algorithms, such as dynamic programming, sorting, or tree traversal. By practicing typing these algorithms regularly, you'll be able to quickly implement them during competitive programmings.
+
+In competitive programming, every second counts, and being proficient with your typing can give you a significant advantage.
+
+## Typing Less in Competitive Programming
+
+In competitive programming, time is a critical resource. Therefore, optimizing typing speed and avoiding repetitive code can make a significant difference. Below, we will discuss strategies to minimize typing when working with `std::vector` during competitive programmings, where access to the internet or pre-prepared code snippets may be restricted.
+
+### 1. Using `#define` for `std::vector` Abbreviations
+
+We can use `#define` to create short aliases for common vector types. This is particularly useful when you need to declare multiple vectors throughout the code.
+
+```cpp
+#define VI std::vector<int>
+#define VVI std::vector<std::vector<int>>
+#define VS std::vector<std::string>
+```
+
+With these definitions, declaring vectors becomes much faster:
+
+```cpp
+VI numbers;  // std::vector<int> numbers;
+VVI matrix;  // std::vector<std::vector<int>> matrix;
+VS words;    // std::vector<std::string> words;
+```
+
+However, it's important to note that in larger, professional projects, using `#define` for type aliases is generally discouraged because it does not respect C++ scoping rules and can lead to unexpected behavior during debugging. In competitive programming, where speed is essential, this technique can be useful, but it should be avoided in long-term or collaborative codebases.
+
+### 2. Predefined Utility Functions
+
+Another effective strategy is to define utility functions that you can reuse for common vector operations, such as reading from input, printing, or performing operations like sorting or summing elements.
+
+#### Reading Vectors
+
+```cpp
+#define FAST_IO std::ios::sync_with_stdio(false); std::cin.tie(nullptr);
+
+void read_vector(VI& vec, int n) {
+    for (int i = 0; i < n; ++i) {
+        int x;
+        std::cin >> x;
+        vec.push_back(x);
+    }
+}
+```
+
+With the `read_vector` function, you can quickly read a vector of `n` elements:
+
+```cpp
+VI numbers;
+read_vector(numbers, n);
+```
+
+#### Printing Vectors
+
+```cpp
+void print_vector(const VI& vec) {
+    for (const int& x : vec) {
+        std::cout << x << " ";
+    }
+    std::cout << "\n";
+}
+```
+
+This function allows you to easily print the contents of a vector:
+
+```cpp
+print_vector(numbers);
+```
+
+### 3. Predefining Common Operations
+
+If you know that certain operations, such as sorting or summing elements, are frequent in a competitive programming, consider defining these operations at the beginning of the code.
+
+#### Sorting Vectors
+
+```cpp
+#define SORT_VECTOR(vec) std::sort(vec.begin(), vec.end())
+```
+
+You can then sort any vector quickly:
+
+```cpp
+SORT_VECTOR(numbers);
+```
+
+#### Summing Elements
+
+```cpp
+int sum_vector(const VI& vec) {
+    return std::accumulate(vec.begin(), vec.end(), 0);
+}
+```
+
+To calculate the sum of a vector's elements:
+
+```cpp
+int total = sum_vector(numbers);
+```
+
+### 4. Using Lambda Functions
+
+In C++11 and later versions, lambda functions can be a quick and concise way to define operations inline for vectors:
+
+```cpp
+auto print_square = [](const VI& vec) {
+    for (int x : vec) {
+        std::cout << x * x << " ";
+    }
+    std::cout << "\n";
+};
+```
+
+These inline functions can be defined and used without the need to write complete functions:
+
+```cpp
+print_square(numbers);
+```
+
+### Prefer Not to Use `#define`
+
+Another way to reduce typing time is by using `typedef` or `using` to create abbreviations for frequently used vector types:
+
+```cpp
+typedef std::vector<int> VI;
+typedef std::vector<std::vector<int>> VVI;
+using VS = std::vector<std::string>;
+```
+
+In many cases, the use of `#define` can be replaced with more modern and safe C++ constructs like `using`, `typedef`, or `constexpr`. `#define` does not respect scoping rules and does not offer type checking, which can lead to unintended behavior. Using `typedef` or `using` provides better type safety and integrates smoothly with the C++ type system, making the code more predictable and easier to debug.
+
+#### 1. Replacing `#define` with Type Aliases
+
+For example:
+
+```cpp
+#define VI std::vector<int>
+#define VVI std::vector<std::vector<int>>
+#define VS std::vector<std::string>
+```
+
+Can be replaced with `using` or `typedef` to create type aliases:
+
+```cpp
+using VI = std::vector<int>;
+using VVI = std::vector<std::vector<int>>;
+using VS = std::vector<std::string>;
+
+// Or using typedef (more common in C++98/C++03)
+typedef std::vector<int> VI;
+typedef std::vector<std::vector<int>> VVI;
+typedef std::vector<std::string> VS;
+```
+
+**`using` and `typedef` are preferred because they respect C++ scoping rules and offer better support for debugging, making the code more secure and readable**.
+
+#### 2. Replacing `#define` with Constants
+
+If you're using `#define` to define numeric constants, you can replace them with `constexpr`, which also integrates better with the C++ type system and offers compile-time type checking.
+
+Example:
+
+```cpp
+#define PI 3.14159
+```
+
+Can be replaced with:
+
+```cpp
+constexpr double PI = 3.14159;
+```
+
+**`constexpr` allows the value to be treated as a constant of the correct type (`double` in this case), providing type checks and optimizing the code during compilation**.
+
+#### 3. Using `constexpr` in Functions
+
+If you have macros that perform calculations, you can replace them with `constexpr` functions:
+
+Example:
+
+```cpp
+#define SQUARE(x) ((x) * (x))
+```
+
+Can be replaced with:
+
+```cpp
+constexpr int square(int x) {
+    return x * x;
+}
+```
+
+**`constexpr` functions provide type safety, avoid unexpected side effects, and allow the compiler to evaluate the expression at compile-time, resulting in more efficient and safer code**.
+
+For competitive programming, using `#define` might seem like the fastest way to reduce typing and speed up coding. However, using `typedef` or `using` is generally more efficient because it avoids potential issues with macros and integrates better with the compiler. **While reducing variable names or abbreviating functions might save time during a competitive programming, remember that in professional code, clarity and maintainability are far more important**. Therefore, avoid using shortened names and unsafe constructs like `#define` in production code, libraries, or larger projects.
+
+## Optimizing File I/O in C++ for competitive programmings
+
+In many competitive programming contests, especially those involving large datasets, the program is required to read input from a file that can be very large. For this reason, it is crucial to optimize how files are read. Efficient file handling can make the difference between a solution that completes within the time limits and one that does not. Implementing techniques to speed up file I/O is indispensable for handling such cases effectively.
+
+### Disabling I/O Synchronization
+
+To improve the performance of input/output (I/O) operations, we disable the synchronization between the standard C and C++ I/O libraries:
+
+```cpp
+std::ios::sync_with_stdio(false);
+std::cin.tie(nullptr);
+```
+
+- The function `std::ios::sync_with_stdio(false)` disables the synchronization of the C++ streams with the C streams, allowing the program to perform I/O operations more quickly.
+- `std::cin.tie(nullptr)` detaches the input stream (`std::cin`) from the output stream (`std::cout`), preventing automatic flushes that can cause delays.
+
+When we disable synchronization with `std::ios::sync_with_stdio(false);`, the program benefits from better performance in I/O operations since it no longer needs to synchronize the C++ input/output functions (`std::cin`, `std::cout`) with the C functions (`scanf`, `printf`).
+
+This synchronization, when enabled, introduces overhead because the system ensures that both libraries can be used simultaneously without conflict. By removing this synchronization, we eliminate that overhead, allowing I/O operations to be processed more directly and faster.
+
+This optimization is particularly beneficial in programs that perform a large number of read and write operations, such as when processing large amounts of data from files. Additionally, by using `std::cin.tie(nullptr);`, we prevent `std::cout` from being automatically flushed before each input operation, avoiding another form of latency that could impact performance in I/O-heavy contexts.
+
+### Command Line Argument Checking
+
+Before proceeding with execution, the code checks if exactly one argument was passed through the command line, which represents the name of the file to be read:
+
+```cpp
+if (argc != 2) {
+    std::cerr << "Usage: " << argv[0] << " <file_name>\n";
+    return 1;
+}
+```
+
+- `argc` is the number of arguments passed to the program, including the name of the executable.
+- `argv` is an array of strings containing the arguments.
+- If the number of arguments is not 2, the program prints an error message and exits with `return 1`, indicating failure.
+
+### Opening and Verifying the File
+
+The code attempts to open the specified file and checks whether the opening was successful:
+
+```cpp
+std::ifstream file(argv[1]);
+if (!file) {
+    std::cerr << "Error opening file: " << argv[1] << "\n";
+    return 1;
+}
+```
+
+- `std::ifstream file(argv[1]);` attempts to open the file for reading.
+- If `file` is not in a valid state (i.e., the file couldn't be opened), an error message is displayed, and the program terminates.
+
+Of course, in competitive programmings, the input file will most often be handled by an automated testing system, so you probably won't need to check whether the file opened correctly or not.
+
+### Introduction to File I/O in C++
+
+In C++, file input and output (I/O) operations are handled through classes provided by the `<fstream>` library. The three main classes used for this purpose are `std::ifstream`, `std::ofstream`, and `std::fstream`. Each of these classes is specialized for different types of I/O operations.
+
+#### `std::ifstream`: File Reading
+
+The `std::ifstream` class (input file stream) is used exclusively for reading files. It inherits from `std::istream`, the base class for all input operations in C++.
+
+#### Opening Files for Reading
+
+In our code, we use `std::ifstream` to open a text file and read its contents:
+
+```cpp
+std::ifstream file(argv[1]);
+```
+
+- `std::ifstream file(argv[1]);`: Tries to open the file whose name is passed as a command-line argument. If the file cannot be opened, the `file` stream will be invalid.
+
+Off course we can use `std::ifstream` to read files from command line:
+
+```cpp
+#include <fstream>
+#include <iostream>
+#include <string>
+
+int main(int argc, char* argv[]) {
+    if (argc != 2) {
+        std::cerr << "Usage: " << argv[0] << " <filename>\n";
+        return 1;
+    }
+
+    // Abre o arquivo apenas para leitura
+    std::ifstream file(argv[1]);
+
+    if (!file.is_open()) {
+        std::cerr << "Error: Could not open the file " << argv[1] << "\n";
+        return 1;
+    }
+
+    std::string line;
+
+    // Lê o conteúdo do arquivo linha por linha e exibe no console
+    std::cout << "Contents of the file:\n";
+    while (std::getline(file, line)) {
+        std::cout << line << "\n";
+    }
+
+    file.close();
+    return 0;
+}
+```
+
+#### Verifying File Opening
+
+After attempting to open the file, it’s crucial to check whether the opening was successful:
+
+```cpp
+if (!file) {
+    std::cerr << "Error opening file: " << argv[1] << "\n";
+    return 1;
+}
+```
+
+- `if (!file)`: Checks if the `file` stream is in an invalid state (which indicates the file was not opened correctly). If the file can't be opened, an error message is displayed, and the program exits.
+
+Again, in competitive programmings, the input file will most often be handled by an automated testing system, so you probably won't need to check whether the file opened correctly or not.
+
+#### File Reading
+
+Once the file is successfully opened, we can read its contents:
+
+```cpp
+std::getline(file, line);
+while (file >> num) {
+    vec.push_back(num);
+}
+```
+
+- `std::getline(file, line);`: Reads a full line from the file and stores it in the string `line`.
+- `file >> num`: Reads numbers from the file and stores them in `num`, which are then added to the vector `vec` using `vec.push_back(num);`.
+
+#### File Closing
+
+After finishing with a file, it should be closed to free the associated resources. This happens automatically when the `std::ifstream` object is destroyed, but it can also be done explicitly:
+
+```cpp
+file.close();
+```
+
+- `file.close();`: Closes the file manually. Although the file is automatically closed when the object goes out of scope, explicitly closing the file can be useful to ensure the data is correctly released before the program ends or before opening another file.
+
+#### `std::ofstream`: File Writing
+
+While we didn’t use `std::ofstream` in the provided code, it's important to mention it. The `std::ofstream` class (output file stream) is used for writing to files. It inherits from `std::ostream`, the base class for all output operations in C++.
+
+#### Opening Files for Writing
+
+The syntax for opening a file for writing using `std::ofstream` is similar to that of `std::ifstream`:
+
+```cpp
+std::ofstream outFile("output.txt");
+```
+
+- `std::ofstream outFile("output.txt");`: Opens or creates a file called `output.txt` for writing. If the file already exists, its contents will be truncated (erased).
+
+#### `std::fstream`: File Reading and Writing
+
+The `std::fstream` class combines the functionality of both `std::ifstream` and `std::ofstream`, allowing for both reading from and writing to files. It inherits from `std::iostream`, the base class for bidirectional I/O operations.
+
+#### Opening Files for Reading and Writing
+
+An example of how to open a file for both reading and writing would be:
+
+```cpp
+std::fstream file("data.txt", std::ios::in | std::ios::out);
+```
+
+- `std::fstream file("data.txt", std::ios::in | std::ios::out);`: Opens `data.txt` for both reading and writing. The parameter `std::ios::in | std::ios::out` specifies that the file should be opened for both input and output.
+
+Or to use files read from command line we could use:
+
+```cpp
+#include <fstream>
+#include <iostream>
+#include <string>
+
+int main(int argc, char* argv[]) {
+    if (argc != 2) {
+        std::cerr << "Usage: " << argv[0] << " <filename>\n";
+        return 1;
+    }
+
+    // Abre o arquivo com leitura e escrita
+    std::fstream file(argv[1], std::ios::in | std::ios::out);
+
+    if (!file.is_open()) {
+        std::cerr << "Error: Could not open the file " << argv[1] << "\n";
+        return 1;
+    }
+
+    std::string line;
+
+    // Lê o conteúdo do arquivo e exibe no console
+    std::cout << "Contents of the file:\n";
+    while (std::getline(file, line)) {
+        std::cout << line << "\n";
+    }
+
+    // Reposiciona o ponteiro para o início do arquivo
+    file.clear(); // Limpa qualquer flag de erro
+    file.seekg(0, std::ios::beg);
+
+    // Adiciona uma nova linha ao final do arquivo
+    file << "\nNew line added to the file.\n";
+
+    // Reposiciona o ponteiro para o início novamente para leitura após a escrita
+    file.clear();
+    file.seekg(0, std::ios::beg);
+
+    std::cout << "\nUpdated contents of the file:\n";
+
+    // Lê e exibe o conteúdo atualizado do arquivo
+    while (std::getline(file, line)) {
+        std::cout << line << "\n";
+    }
+
+    file.close();
+    return 0;
+}
+```
+
+#### File Opening Modes
+
+When opening files, we can specify different opening modes using values from the `std::ios_base::openmode` enumeration. Some of the most common modes include:
+
+- `std::ios::in`: Open for reading (default for `std::ifstream`).
+- `std::ios::out`: Open for writing (default for `std::ofstream`).
+- `std::ios::app`: Open for writing at the end of the file, without truncating it.
+- `std::ios::ate`: Open and move the file pointer to the end of the file.
+- `std::ios::trunc`: Truncate the file (erase existing content).
+- `std::ios::binary`: Open the file in binary mode.
+
+## Advanced File I/O Techniques in C++
+
+There are faster ways to open and process files in C++, which can be especially useful in competitive programming when dealing with large data sets. Here are some techniques that can enhance the efficiency of file handling:
+
+1. **Disable I/O Synchronization**
+
+   As mentioned previously, disabling the synchronization between the C and C++ I/O libraries using `std::ios::sync_with_stdio(false)` and unlinking `std::cin` from `std::cout` with `std::cin.tie(nullptr)` can significantly speed up data reading.
+
+2. **Use Manual Buffering**
+
+   Manual buffering allows you to read the file in large chunks, which reduces the overhead of multiple I/O operations. Below is the code, followed by a detailed explanation of how we efficiently read the entire file into a buffer:
+
+   ```cpp
+   #include <fstream>
+   #include <iostream>
+   #include <vector>
+
+   int main(int argc, char* argv[]) {
+       if (argc != 2) {
+           std::cerr << "Usage: " << argv[0] << " <file_name>\n";
+           return 1;
+       }
+
+       std::ifstream file(argv[1], std::ios::in | std::ios::binary);
+       if (!file) {
+           std::cerr << "Error opening file: " << argv[1] << "\n";
+           return 1;
+       }
+
+       // Move file pointer to the end to determine file size
+       file.seekg(0, std::ios::end);
+       size_t fileSize = file.tellg();
+       file.seekg(0, std::ios::beg);
+
+       // Create buffer and read file in one go
+       std::vector<char> buffer(fileSize);
+       file.read(buffer.data(), fileSize);
+
+       // Process buffer contents
+       // Example: Print the first 100 characters of the file
+       for (int i = 0; i < 100 && i < fileSize; ++i) {
+           std::cout << buffer[i];
+       }
+
+       return 0;
+   }
+   ```
+
+   Let’s break down the most important lines used to read the file efficiently:
+
+   ```cpp
+   file.seekg(0, std::ios::end);
+   ```
+
+   This line moves the file pointer to the end of the file. The `seekg` function (seek "get" position) is used to set the position of the next read operation. Here, the first argument `0` means no offset, and the second argument `std::ios::end` moves the pointer to the end of the file. This allows us to calculate the size of the file, which is essential for creating a buffer that will hold the entire file's content.
+
+   ```cpp
+   size_t fileSize = file.tellg();
+   ```
+
+   After moving the pointer to the end of the file, we use `tellg()` (tell "get" position) to retrieve the current position of the pointer, which is now at the end. Since the file pointer is at the end, the value returned by `tellg()` represents the total size of the file in bytes. This value is stored in the variable `fileSize`, which we will use to allocate a buffer large enough to hold the file’s contents.
+
+   ```cpp
+   file.seekg(0, std::ios::beg);
+   ```
+
+   Now that we know the file's size, we move the file pointer back to the beginning of the file using `seekg(0, std::ios::beg)`. The argument `std::ios::beg` means we are setting the pointer to the start of the file, where the reading will begin. This ensures we are ready to read the file from the first byte.
+
+   ```cpp
+   std::vector<char> buffer(fileSize);
+   ```
+
+   We then create a `std::vector<char>` buffer with the size `fileSize`. This buffer will store the contents of the entire file in memory. Using a `std::vector` is convenient because it automatically manages memory and provides access to the underlying data using the `data()` method.
+
+   ```cpp
+   file.read(buffer.data(), fileSize);
+   ```
+
+   Finally, we use `file.read()` to read the entire file into the buffer. The method `buffer.data()` provides a pointer to the beginning of the buffer where the file’s contents will be stored. The second argument, `fileSize`, specifies how many bytes to read from the file. Since `fileSize` equals the total size of the file, the entire file is read into the buffer in one go.
+
+   By using `seekg()` to calculate the file size and then reading the file all at once into a buffer, we avoid multiple I/O operations, which would otherwise slow down the process. Reading the file in one operation reduces system calls and minimizes overhead, making the process faster, especially when dealing with large files.
+
+3. **Reading Lines More Efficiently**
+
+   Instead of using `std::getline()`, which can be relatively slow for large files, you can implement a custom buffer to store multiple lines at once, reducing the overhead of repeatedly calling the I/O functions.
+
+### Using `mmap` for Faster File I/O in Unix-Based Systems
+
+In competitive programming, especially in contests like ICPC where the environment is Unix-based (typically Linux), it is crucial to explore every possible optimization for handling large input files. One such technique is using the `mmap` system call, which provides an extremely fast option for reading large files by mapping them directly into memory. This allows almost instantaneous access to the file's content without multiple read operations, significantly reducing I/O overhead.
+
+The `mmap` function maps a file or device into memory. Once the file is mapped, it behaves as if it's part of the program's memory space, allowing you to access file contents through pointer arithmetic rather than explicit file read operations. This eliminates the need for repeated system calls for reading file data, as you access the file as if it were a simple array in memory.
+
+This approach is useful in environments like ICPC, where files can be very large, and efficiency is paramount. **However, it's important to note that `mmap` is specific to Unix-based systems and is not portable across all operating systems, such as Windows**.
+
+#### How to Use `mmap`
+
+Here's an example of how you can use `mmap` to read a file efficiently in C++ on a Unix-based system:
+
+```cpp
+#include <sys/mman.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <iostream>
+
+int main(int argc, char* argv[]) {
+    if (argc != 2) {
+        std::cerr << "Usage: " << argv[0] << " <file_name>\n";
+        return 1;
+    }
+
+    // Open the file
+    int fd = open(argv[1], O_RDONLY);
+    if (fd == -1) {
+        std::cerr << "Error opening file: " << argv[1] << "\n";
+        return 1;
+    }
+
+    // Get the size of the file
+    struct stat sb;
+    if (fstat(fd, &sb) == -1) {
+        std::cerr << "Error getting file size\n";
+        close(fd);
+        return 1;
+    }
+    size_t fileSize = sb.st_size;
+
+    // Memory-map the file
+    char* fileData = (char*)mmap(nullptr, fileSize, PROT_READ, MAP_PRIVATE, fd, 0);
+    if (fileData == MAP_FAILED) {
+        std::cerr << "Error mapping file to memory\n";
+        close(fd);
+        return 1;
+    }
+
+    // Process the file data (example: print the first 100 characters)
+    for (size_t i = 0; i < 100 && i < fileSize; ++i) {
+        std::cout << fileData[i];
+    }
+
+    // Unmap the file and close the file descriptor
+    if (munmap(fileData, fileSize) == -1) {
+        std::cerr << "Error unmapping file\n";
+    }
+    close(fd);
+
+    return 0;
+}
+```
+
+#### Explanation of Key Steps
+
+1. **Opening the File**:
+
+   ```cpp
+   int fd = open(argv[1], O_RDONLY);
+   ```
+
+   The `open()` function opens the file specified in the command-line arguments in read-only mode. The file descriptor `fd` is returned, which is later used to map the file into memory.
+
+2. **Getting the File Size**:
+
+   ```cpp
+   struct stat sb;
+   fstat(fd, &sb);
+   ```
+
+   The `fstat()` function retrieves the size of the file and stores it in the `stat` structure. The file size is crucial for knowing how much memory to map.
+
+3. **Mapping the File into Memory**:
+
+   ```cpp
+   char* fileData = (char*)mmap(nullptr, fileSize, PROT_READ, MAP_PRIVATE, fd, 0);
+   ```
+
+   The `mmap()` function maps the entire file into memory. The `PROT_READ` flag allows read-only access, and `MAP_PRIVATE` ensures that any modifications to the memory are private to this process (although we won't modify the file in this example). Once the file is mapped, `fileData` points to the beginning of the file's contents in memory.
+
+4. **Processing the Data**:
+   After mapping the file, you can access the file's content using `fileData` as if it were an array. For example, the above code prints the first 100 characters from the file.
+
+5. **Unmapping and Closing**:
+
+   ```cpp
+   munmap(fileData, fileSize);
+   close(fd);
+   ```
+
+   After processing the file, it is important to unmap the memory with `munmap()` and close the file descriptor with `close()`. This ensures that system resources are properly freed.
+
+`mmap` provides several advantages when it comes to handling large file I/O. First, it offers **speed** by allowing direct access to file contents in memory, eliminating the need for repeated system calls, which significantly reduces overhead. Additionally, **simplicity** is a key benefit, as the file can be accessed like a normal array after mapping, streamlining file processing logic. Finally, **memory efficiency** is improved, as `mmap` only loads the required parts of the file into memory, avoiding the need to load the entire file into a buffer, which is especially useful for large files.
+
+**portability**: it's important to note that the `mmap` function is specific to POSIX-compliant operating systems such as Linux, macOS, and other Unix-like systems. This function is not natively available on Windows platforms, which may limit the portability of code that uses it. For cross-platform development or in environments that include Windows systems, it's advisable to provide an alternative implementation or use libraries that offer similar functionality in a portable manner. In programming competitive programmings that occur in controlled environments, such as ICPC, where the operating system is usually specified (often Linux), the use of `mmap` may be appropriate. However, for code that needs to run on multiple platforms, consider using more universal I/O methods, such as `std::ifstream` or `fread`, which are supported on a wider range of operating systems.
+
+### Parallel Input/Output with Threads (C++20)
+
+CC++20 introduced several improvements for parallel programming, including the efficient use of threads and asynchronous tasks with `std::async`. In many competitive programming scenarios, input and output (I/O) operations are performed sequentially. **However, despite it being quite rare for input files to be very large in competitive programmings, in cases of intensive I/O or when there is a need to process large volumes of data simultaneously, parallel I/O can be an advantageous strategy**.
+
+In situations with heavy I/O workloads, such as reading and processing large input files or performing intensive calculations while still reading or writing data, `std::async` and threads can be used to split operations and execute different tasks simultaneously, making the best use of available time.
+
+### Example of Parallel I/O Using `std::async`
+
+Below is a simple example of how to use `std::async` to perform input and output operations in parallel. In this example, while data is being read, another thread can be used to process or display the data simultaneously, optimizing the time spent on I/O operations:
+
+```cpp
+#include <iostream>
+#include <future>
+#include <vector>
+
+// Function to read input from the user
+void read_input(std::vector<int>& vec, int n) {
+for (int i = 0; i < n; ++i) {
+std::cin >> vec[i];
+}
+}
+
+// Function to process and print the output
+void process_output(const std::vector<int>& vec) {
+for (int i : vec) {
+std::cout << i << " ";
+}
+std::cout << std::endl;
+}
+
+int main() {
+int n;
+std::cin >> n;
+
+    // Create a vector of size 'n'
+    std::vector<int> numbers(n);
+
+    // Use std::async to read the input asynchronously
+    auto readTask = std::async(std::launch::async, read_input, std::ref(numbers), n);
+
+    // Wait for the input reading to complete before proceeding
+    readTask.wait();
+
+    // Process and print the vector after reading
+    process_output(numbers);
+
+    return 0;
+
+}
+```
+
+In this example, the `std::async` function is used to run the `read_input` function asynchronously on a separate thread. This means that the data can be read in the background while other operations are prepared or started.
+
+`std::async` executes the `read_input` function in a new thread, passing the `numbers` vector and the number of inputs `n` as parameters. The `std::launch::async` option ensures that the function is run in parallel, and not lazily (i.e., when the result is needed). The call to `readTask.wait()` ensures that the asynchronous read operation is completed before the program continues. This synchronizes the operation, ensuring that the input is fully read before trying to process the data.
+
+Although this example uses the main thread to process the output after reading, in more complex scenarios, both processing and reading could be parallelized, or even multiple reads could occur simultaneously, depending on the needs:
+
+```cpp
+#include <iostream>
+#include <future>
+#include <vector>
+
+// Function to read input from the user
+void read_input(std::vector<int>& vec, int n) {
+    for (int i = 0; i < n; ++i) {
+        std::cin >> vec[i];
+    }
+}
+
+// Function to process and sum the input
+void process_output(const std::vector<int>& vec) {
+    int sum = 0;
+    for (int i : vec) {
+        sum += i;
+    }
+    std::cout << "Sum of elements: " << sum << std::endl;
+}
+
+int main() {
+    int n;
+    std::cin >> n;
+
+    // Vectors to store the input data
+    std::vector<int> numbers1(n);
+    std::vector<int> numbers2(n);
+
+    // Asynchronous read of the first data set
+    auto readTask1 = std::async(std::launch::async, read_input, std::ref(numbers1), n);
+
+    // Asynchronous read of the second data set in parallel
+    auto readTask2 = std::async(std::launch::async, read_input, std::ref(numbers2), n);
+
+    // Asynchronous processing of the first data set in parallel
+    auto processTask = std::async(std::launch::async, [&]() {
+        readTask1.wait(); // Wait for the first read to complete before processing
+        process_output(numbers1); // Process the first data set
+    });
+
+    // Wait for both reads to finish
+    readTask1.wait();
+    readTask2.wait();
+
+    // Output the second set of numbers
+    std::cout << "Second set of numbers: ";
+    for (int i : numbers2) {
+        std::cout << i << " ";
+    }
+    std::cout << std::endl;
+
+    // Wait for the asynchronous processing to finish
+    processTask.wait();
+
+    return 0;
+}
+```
+
+Using threads for parallel I/O can improve performance in scenarios where there is a large volume of data to be read or written, especially if the reading time can be _masked_ while another thread is processing data or preparing the next phase of the program.
+
+However, this technique should be used with care. Adding threads and asynchronous operations increases code complexity, requiring careful synchronization to avoid race conditions or data inconsistencies. That's why we should avoid this technique in competitive programming. While parallelism can improve execution time, creating and managing threads also has a computational cost. In some cases, the gain may not justify the added complexity. In many competitive programming environments, I/O is simple and sequential, meaning that this technique may not always be necessary or beneficial. It should be used in scenarios with extremely heavy I/O workloads or when processing and reading/writing can be separated.
+
+The use of parallel I/O in programming competitive programmings typically applies to scenarios where there are many read/write operations or when the program needs to process large volumes of data while still reading or writing files. This situation is usual in [AI competitive programmings](https://opencv.org/opencv-ai-competitive programming-2021/) and in hackatons. This technique can be useful in problems involving the manipulation of large datasets or intensive input/output processing, such as in "big data" challenges or reading/writing from disks. However, due to its complexity, the use of `std::async` and threads should be reserved for cases where parallelism offers a significant advantage over traditional sequential I/O.
+
+### Maximizing Input/Output Efficiency in Competitive Programming (Windows and Linux)
+
+In some competitive programming environments, inputs are provided via the command line. The first input is the size of the array, followed by the array elements separated by spaces. Efficiently reading this data and outputting the result is crucial, especially when dealing with large datasets. Below is an approach to handle input and output in the fastest way for both Windows and Linux.
+
+#### Optimized Input and Output
+
+The following example demonstrates how to read inputs and output results efficiently in C++ using the fastest I/O methods available on both Windows and Linux.
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <cstdio>
+
+int main() {
+    // Disable synchronization for faster I/O
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+
+    // Read the size of the array
+    int n;
+    std::cin >> n;
+
+    // Create a vector to store the array elements
+    std::vector<int> arr(n);
+
+    // Read the elements of the array
+    for (int i = 0; i < n; ++i) {
+        std::cin >> arr[i];
+    }
+
+    // Output the array elements
+    for (int i = 0; i < n; ++i) {
+        std::cout << arr[i] << " ";
+    }
+
+    std::cout << std::endl;
+    return 0;
+}
+```
+
+### Key Techniques for Faster I/O
+
+1. **Disabling I/O Synchronization**:
+   The line `std::ios::sync_with_stdio(false);` disables the synchronization between the C and C++ I/O streams. This allows the program to perform I/O operations faster because it no longer needs to synchronize `std::cin` and `std::cout` with `scanf` and `printf`.
+
+2. **Unlinking `cin` and `cout`**:
+   The line `std::cin.tie(nullptr);` ensures that `std::cout` will not be flushed automatically before every `std::cin` operation, which can slow down the program. By unlinking them, you have more control over when output is flushed.
+
+### Differences Between Windows and Linux
+
+On both **Windows** and **Linux**, the above code will work efficiently. However, since competitive programming platforms often use Linux, the synchronization of I/O streams plays a more significant role in Linux environments. Disabling synchronization is more crucial on Linux for achieving maximum performance, while the effect may be less noticeable on Windows. Nevertheless, the method remains valid and provides optimal speed in both environments.
+
+### Input and Output Through Standard Methods
+
+While `std::cin` and `std::cout` are often fast enough after synchronization is disabled, some competitive programmings on Unix-based systems like ICPC allow even faster input methods using `scanf` and `printf`. Below is an alternative version that uses `scanf` and `printf` for faster input/output handling:
+
+```cpp
+#include <cstdio>
+#include <vector>
+
+int main() {
+    // Read the size of the array
+    int n;
+    scanf("%d", &n);
+
+    // Create a vector to store the array elements
+    std::vector<int> arr(n);
+
+    // Read the elements of the array
+    for (int i = 0; i < n; ++i) {
+        scanf("%d", &arr[i]);
+    }
+
+    // Output the array elements
+    for (int i = 0; i < n; ++i) {
+        printf("%d ", arr[i]);
+    }
+
+    printf("\n");
+    return 0;
+}
+```
+
+It is important to highlight that `scanf` and `printf` are widely recognized as insecure functions due to their lack of built-in protections against common vulnerabilities such as buffer overflows. We are discussing them here only because the code created for competitive programming is typically used only once during a contest, and the primary focus is on speed and efficiency. However, these functions — and any others considered unsafe (see [stackoverflow](https://stackoverflow.com/questions/2565727/which-functions-from-the-standard-library-must-should-be-avoided))— should never be used in production code, libraries, or any other software outside the competitive programming environment. In professional development, you should always prefer safer alternatives such as `std::cin` and `std::cout`, which provide better type safety and avoid common vulnerabilities associated with older C-style I/O functions.
+
+### Usar Buffers Manuais com `fread` e `fwrite`
+
+Embora funções como `scanf` e `printf` sejam rápidas, o uso de `fread` e `fwrite` permite ler e escrever dados em grandes blocos, reduzindo o número de chamadas de sistema para I/O. Isso é particularmente útil ao lidar com grandes volumes de dados, pois a sobrecarga de múltiplas operações de leitura e escrita pode ser significativa.
+
+A função `fread` é usada para ler um número especificado de bytes de um arquivo ou do `stdin` (entrada padrão) e armazena esses dados em um buffer que você define. Ao fazer uma única leitura de um grande bloco de dados, você minimiza as chamadas ao sistema operacional, o que reduz o overhead e aumenta a eficiência.
+
+Exemplo de leitura com `fread`:
+
+```cpp
+#include <cstdio>
+#include <vector>
+
+int main() {
+    char buffer[1024];  // Buffer manual de 1 KB
+    size_t bytesRead = fread(buffer, 1, sizeof(buffer), stdin);
+
+    // Processar os dados lidos
+    for (size_t i = 0; i < bytesRead; ++i) {
+        // Usar putchar para imprimir os dados do buffer
+        putchar(buffer[i]);
+    }
+
+    return 0;
+}
+```
+
+A função `fread` lê até um número especificado de itens de um fluxo de dados e os armazena no buffer fornecido. No exemplo acima, `fread(buffer, 1, sizeof(buffer), stdin)` lê até 1024 bytes da entrada padrão (`stdin`) e armazena esses dados no buffer. O número de bytes lidos é retornado como `bytesRead`.
+
+A função `putchar` imprime um caractere de cada vez no `stdout` (saída padrão). No exemplo, usamos `putchar(buffer[i])` para imprimir cada caractere armazenado no buffer. Essa função é eficiente para lidar com dados de baixo nível, especialmente em situações em que você está processando caracteres individuais.
+
+Comparando com `scanf` e `printf`, que são mais convenientes quando se precisa de formatação específica, como ler números inteiros ou strings, `fread` e `fwrite` são mais eficientes para grandes volumes de dados "brutos" sem formatação, como arquivos binários ou grandes blocos de texto.
+
+Se precisar gravar dados de maneira igualmente eficiente, pode-se usar `fwrite` para escrever blocos de dados em um arquivo ou no `stdout`.
+
+Exemplo de escrita com `fwrite`:
+
+```cpp
+#include <cstdio>
+#include <vector>
+
+int main() {
+    const char* data = "Outputting large blocks of data quickly\n";
+    size_t dataSize = strlen(data);
+
+    // Escreve o buffer de dados para o stdout
+    fwrite(data, 1, dataSize, stdout);
+
+    return 0;
+}
+```
+
+A função `fwrite` funciona de maneira semelhante a `fread`, mas em vez de ler dados, ela grava o conteúdo de um buffer em um arquivo ou na saída padrão. No exemplo acima, `fwrite(data, 1, dataSize, stdout)` grava `dataSize` bytes do buffer `data` no `stdout`.
+
+Usar buffers manuais com `fread` e `fwrite` pode melhorar significativamente a performance em competições ao reduzir o número de chamadas ao sistema, o que é particularmente útil quando se lida com grandes volumes de dados. Essa técnica oferece maior controle sobre o processo de I/O e permite otimizações em situações de alto desempenho. No entanto, quando você precisa de formatação avançada, `scanf` e `printf` ainda podem ser mais convenientes e adequados.
+
+## Introduction to Namespaces
+
+In C++, **namespaces** are used to organize code and prevent name conflicts, especially in large projects or when multiple libraries are being used that may have functions, classes, or variables with the same name. They provide a scope for identifiers, allowing developers to define functions, classes, and variables without worrying about name collisions.
+
+A **namespace** is a declarative region that provides a scope to the identifiers (names of types, functions, variables, etc.) inside it. This allows different parts of a program or different libraries to have elements with the same name without causing ambiguity.
+
+### Basic Syntax of a Namespace
+
+```cpp
+namespace MyNamespace {
+    void myFunction() {
+        // Implementation
+    }
+
+    class MyClass {
+    public:
+        void method();
+    };
+}
+```
+
+The `MyNamespace` namespace encapsulates `myFunction` and `MyClass`, preventing these names from conflicting with others of the same name in different namespaces.
+
+#### Using Namespaces
+
+To access elements inside a namespace, you can use the **scope resolution operator** `::`.
+
+The **scope resolution operator** (`::`) in C++ is used to define or access elements that are within a specific scope, such as namespaces or class members. It allows the programmer to disambiguate between variables, functions, or classes that might have the same name but are defined in different contexts. For example, if a function is defined in a specific namespace, the scope resolution operator is used to call that function from the correct namespace. Similarly, within a class, it can be used to define a function outside the class declaration or to refer to static members of the class.
+
+In competitive programming, the scope resolution operator is often used to access elements from the `std` namespace, such as `std::cout` or `std::vector`. This ensures that the standard library components are used correctly without introducing ambiguity with any other variables or functions that might exist in the global scope or within other namespaces. **Although not as common in short competitive programming code, the operator becomes critical in larger projects to maintain clear and distinct references to elements that may share names across different parts of the program**.
+
+#### Accessing Elements of a Namespace
+
+```cpp
+int main() {
+    // Calling the function inside MyNamespace
+    MyNamespace::myFunction();
+
+    // Creating an object of the class inside the namespace
+    MyNamespace::MyClass obj;
+    obj.method();
+
+    return 0;
+}
+```
+
+#### `using namespace std;`
+
+The **std** namespace is the default namespace of the C++ Standard Library. It contains all the features of the standard library, such as `std::vector`, `std::cout`, `std::string`, and more.
+
+The statement `using namespace std;` allows you to use all elements of the `std` namespace without needing to prefix them with `std::`. This can make the code more concise and readable, especially in small programs or educational examples. Additionally, it reduces typing, which is beneficial when time is limited and valuable, such as during competitive programmings.
+
+#### Example Without `using namespace std;`
+
+```cpp
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<int> numbers = {1, 2, 3, 4, 5};
+    for (const int& num : numbers) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+    return 0;
+}
+```
+
+#### Example With `using namespace std;`
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    vector<int> numbers = {1, 2, 3, 4, 5};
+    for (const int& num : numbers) {
+        cout << num << " ";
+    }
+    cout << endl;
+    return 0;
+}
+```
+
+### Disadvantages of Using `using namespace std;`
+
+While using `using namespace std;` makes your code shorter and easier to read, it comes with some drawbacks. In larger projects or when working with multiple libraries, it increases the likelihood of name conflicts, where different namespaces contain elements with the same name. It can also lead to ambiguity, making it less clear where certain elements are coming from, which complicates code maintenance and comprehension. Because of these risks, using `using namespace std;` is generally discouraged in production code, especially in large projects or collaborative settings.
+
+### Alternatives to `using namespace std;`
+
+To avoid the risks associated with `using namespace std;`, one option is to import specific elements from the `std` namespace. For example, instead of importing the entire namespace, you can import only the functions and types you need, such as `std::cout` and `std::vector`. This approach reduces the risk of name conflicts while still allowing for more concise code.
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using std::cout;
+using std::endl;
+using std::vector;
+
+int main() {
+    vector<int> numbers = {1, 2, 3, 4, 5};
+    for (const int& num : numbers) {
+        cout << num << " ";
+    }
+    cout << endl;
+    return 0;
+}
+```
+
+Another option is to keep using the `std::` prefix throughout your code. Although it requires more typing, this approach makes it clear where each element comes from and completely avoids name conflicts.
+
+```cpp
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<int> numbers = {1, 2, 3, 4, 5};
+    for (const int& num : numbers) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+    return 0;
+}
+```
+
+To maintain clean, maintainable code, it's recommended to avoid `using namespace std;` in header files, as this can force all files that include the header to import the `std` namespace, increasing the risk of conflicts. If you decide to use `using`, it is better to do so in a limited scope, such as inside a function, to minimize its impact. Adopting a consistent approach to namespaces throughout your project also improves readability and makes collaboration easier.
+
+#### Advanced Example: Nested Namespace
+
+Namespaces can also be nested to better organize the code.
+
+```cpp
+namespace Company {
+    namespace Project {
+        class ProjectClass {
+        public:
+            void projectMethod();
+        };
+    }
+}
+
+int main() {
+    Company::Project::ProjectClass obj;
+    obj.projectMethod();
+    return 0;
+}
+```
+
+Nested namespaces allow for a more hierarchical organization of code, which is particularly useful in large projects with multiple modules. However, it can make accessing elements more complex, as the full namespace hierarchy must be used.
+
+**In competitive programming, it is generally unnecessary and inefficient to create or use custom namespaces beyond the standard `std` namespace. Since competitive programming code is typically small and written for single-use, the overhead of managing custom namespaces adds complexity without providing significant benefits. Additionally, custom namespaces are designed to prevent name conflicts in large projects with multiple libraries, but in competitive environments where the focus is on speed and simplicity, such conflicts are rare. Therefore, it is best to avoid using namespaces beyond `std` in competitive programming, and reserve namespace management for larger codebases with extensive dependencies and libraries.**
+
+## Working with Vectors
+
+Vectors are one of the most versatile data structures used in competitive programming. Many problems require frequent operations such as inserting, removing, resizing, and even manipulating entire matrices (2D vectors). Below we review common operations on vectors, showcasing standard implementations followed by optimized versions to minimize typing, which can be beneficial in time-critical competitive programmings.
+
+### Inserting Elements at a Specific Position
+
+This code inserts a value into a vector at position 5, provided that the vector has at least 6 elements:
+
+**Standard Version:**
+
+```cpp
+if (vec.size() > 5) {
+    vec.insert(vec.begin() + 5, 42);
+}
+```
+
+- $ \text{vec.insert(vec.begin() + 5, 42);} $ inserts the value 42 at position 5 in the vector.
+
+**Optimized for Minimal Typing:**
+
+```cpp
+if (vec.size() > 5) vec.insert(vec.begin() + 5, 42);
+```
+
+By removing the block braces $\{\}$, the code remains concise but still clear in cases where simplicity is essential. Alternatively, you can use the `#define` trick:
+
+```cpp
+#define VI std::vector<int>
+VI vec;
+if (vec.size() > 5) vec.insert(vec.begin() + 5, 42);
+```
+
+### Removing the Last Element and a Specific Element
+
+The following code removes the last element from the vector, followed by the removal of the element at position 3, assuming the vector has at least 4 elements:
+
+**Standard Version:**
+
+```cpp
+if (!vec.empty()) {
+    vec.pop_back();
+}
+
+if (vec.size() > 3) {
+    vec.erase(vec.begin() + 3);
+}
+```
+
+- $ \text{vec.pop_back();} $ removes the last element from the vector.
+- $ \text{vec.erase(vec.begin() + 3);} $ removes the element at position 3.
+
+**Optimized for Minimal Typing:**
+
+```cpp
+if (!vec.empty()) vec.pop_back();
+if (vec.size() > 3) vec.erase(vec.begin() + 3);
+```
+
+Using predefined macros, we can also reduce typing for common operations:
+
+```cpp
+#define ERASE_AT(vec, pos) vec.erase(vec.begin() + pos)
+if (!vec.empty()) vec.pop_back();
+if (vec.size() > 3) ERASE_AT(vec, 3);
+```
+
+### Creating a New Vector with a Default Value
+
+The following code creates a new vector with 5 elements, all initialized to the value 7:
+
+**Standard Version:**
+
+```cpp
+std::vector<int> vec2(5, 7);
+```
+
+- $ \text{std::vector<int> vec2(5, 7);} $ creates a vector `vec2` with 5 elements, each initialized to 7.
+
+**Optimized for Minimal Typing:**
+
+No significant reduction can be achieved here without compromising clarity, but using `#define` can help in repetitive situations:
+
+```cpp
+#define VI std::vector<int>
+VI vec2(5, 7);
+```
+
+### Resizing and Filling with Random Values
+
+The vector `vec2` is resized to 10 elements, and each element is filled with a random value between 1 and 100:
+
+**Standard Version:**
+
+```cpp
+vec2.resize(10);
+
+unsigned seed = static_cast<unsigned>(std::chrono::high_resolution_clock::now().time_since_epoch().count());
+std::mt19937 generator(seed);
+std::uniform_int_distribution<int> distribution(1, 100);
+
+for (size_t i = 0; i < vec2.size(); ++i) {
+    vec2[i] = distribution(generator);
+}
+```
+
+- $ \text{vec2.resize(10);} $ resizes the vector to contain 10 elements.
+- The generator $ \text{std::mt19937} $ is seeded based on the current time, and the distribution generates random integers between 1 and 100.
+
+**Optimized for Minimal Typing:**
+
+```cpp
+vec2.resize(10);
+std::mt19937 gen(std::random_device{}());
+std::uniform_int_distribution<int> dist(1, 100);
+for (auto& v : vec2) v = dist(gen);
+```
+
+By using modern C++ constructs such as ranged-based `for` loops, we reduce the complexity of the loop and the generator initialization, making the code cleaner and more efficient to type.
+
+### Sorting the Vector
+
+The following code sorts the vector `vec2` in ascending order:
+
+**Standard Version:**
+
+```cpp
+std::sort(vec2.begin(), vec2.end());
+```
+
+- $ \text{std::sort(vec2.begin(), vec2.end());} $ sorts the vector in ascending order.
+
+\*### Optimized for Minimal Typing with `constexpr`
+
+We can replace the `#define` with a `constexpr` function, which provides type safety and integrates better with the C++ type system.
+
+**Using `constexpr` for Sorting a Vector:**
+
+```cpp
+constexpr void sort_vector(std::vector<int>& vec) {
+    std::sort(vec.begin(), vec.end());
+}
+
+sort_vector(vec2);
+```
+
+- $ \text{constexpr void sort_vector(std::vector<int}\& vec);} $ is a type-safe way to define a reusable sorting function.
+- This method avoids the pitfalls of `#define`, such as lack of scoping and type checking, while still minimizing the amount of typing.
+
+### Creating and Filling a Matrix
+
+The code creates a 2x2 matrix (a vector of vectors) and fills each element with the value 1:
+
+**Standard Version:**
+
+```cpp
+int rows = 2, cols = 2;
+std::vector<std::vector<int>> matrix(rows, std::vector<int>(cols));
+
+for (int i = 0; i < rows; ++i) {
+    for (int j = 0; j < cols; ++j) {
+        matrix[i][j] = 1;
+    }
+}
+```
+
+- $ \text{std::vector<std::vector<int>> matrix(rows, std::vector<int>(cols));} $ creates a matrix of size 2x2.
+- The nested `for` loop fills each element of the matrix with 1.
+
+**Optimized for Minimal Typing:**
+
+```cpp
+std::vector<std::vector<int>> matrix(2, std::vector<int>(2, 1));
+```
+
+This version eliminates the need for the explicit loop by using the constructor to initialize the matrix with 1s directly.
+
+### Displaying the Matrix
+
+Finally, the matrix is printed in the standard format:
+
+**Standard Version:**
+
+```cpp
+for (const auto& row : matrix) {
+    for (const auto& element : row) {
+        std::cout << element << " ";
+    }
+    std::cout << std::endl;
+}
+```
+
+- The loop iterates over each row and prints all elements in the row, followed by a newline.
+
+**Optimized for Minimal Typing:**
+
+```cpp
+for (const auto& row : matrix) {
+    for (int el : row) std::cout << el << " ";
+    std::cout << "\n";
+}
+```
+
+Here, we replaced `std::endl` with `"\n"` to improve performance by avoiding the unnecessary flushing of the output buffer.
+
+To summarize, reducing typing in competitive programming can help you focus more on problem-solving than on code verbosity. While using macros like `#define` can be helpful in short contests, be cautious of overusing them in professional code. Instead, consider using more modern and safe C++ techniques, such as `using` and `typedef`, which respect scoping rules and improve the reliability of your code.
+
+### Vectors as Inputs and Outputs
+
+In competitive programming, a common input format involves receiving the size of a vector as the first integer, followed by the elements of the vector separated by spaces, with a newline at the end. Handling this efficiently is crucial when dealing with large inputs. Below is an optimized version using `fread` for input and `putchar` for output, ensuring minimal system calls and fast execution.
+
+This version reads the input, processes it, and then outputs the vector’s elements using the fastest possible I/O methods in C++.
+
+```cpp
+#include <cstdio>
+#include <vector>
+
+int main() {
+    // Buffer for reading input
+    char buffer[1 << 16]; // 64 KB buffer size
+    int idx = 0;
+
+    // Read the entire input at once
+    size_t bytesRead = fread(buffer, 1, sizeof(buffer), stdin);
+
+    // Parse the size of the vector from the input
+    int n = 0;
+    while (buffer[idx] >= '0' && buffer[idx] <= '9') {
+        n = n * 10 + (buffer[idx++] - '0');
+    }
+    ++idx; // Skip the space or newline after the number
+
+    // Create the vector and fill it with elements
+    std::vector<int> vec(n);
+    for (int i = 0; i < n; ++i) {
+        int num = 0;
+        while (buffer[idx] >= '0' && buffer[idx] <= '9') {
+            num = num * 10 + (buffer[idx++] - '0');
+        }
+        vec[i] = num;
+        ++idx; // Skip the space or newline after each number
+    }
+
+    // Output the vector elements using putchar
+    for (int i = 0; i < n; ++i) {
+        if (vec[i] == 0) putchar('0');
+        else {
+            int num = vec[i], digits[10], digitIdx = 0;
+            while (num) {
+                digits[digitIdx++] = num % 10;
+                num /= 10;
+            }
+            // Print digits in reverse order
+            while (digitIdx--) putchar('0' + digits[digitIdx]);
+        }
+        putchar(' '); // Space after each number
+    }
+    putchar('\n'); // End the output with a newline
+
+    return 0;
+}
+```
+
+In the previous code, we have the following functions:
+
+1. **Input with `fread`**:
+   - `fread` is used to read the entire input into a large buffer at once. This avoids multiple system calls, which are slower than reading in bulk.
+2. **Parsing the Input**:
+   - The input is parsed from the buffer using simple character arithmetic to convert the string of numbers into integers.
+3. **Output with `putchar`**:
+   - `putchar` is used to print the numbers, which is faster than `std::cout` for individual characters. The digits of each number are processed and printed in reverse order.
+
+The previous code method minimizes system calls and avoids using slower I/O mechanisms like `std::cin` and `std::cout`, making it highly optimized for competitive programming scenarios where speed is crucial.
+
+In competitive programming, it's also common to handle input from a file provided via the command line. This scenario requires efficient reading and processing, especially when dealing with large datasets. Below is the optimized version using `fread` to read from a file specified in the command line argument and `putchar` for output.
+
+### Optimized Version Using `fread` and `putchar` with Command-Line File Input
+
+This version reads the input file, processes it, and outputs the vector’s elements, ensuring fast I/O performance.
+
+```cpp
+#include <cstdio>
+#include <vector>
+
+int main(int argc, char* argv[]) {
+    // Check if the filename was provided
+    if (argc != 2) {
+        return 1;
+    }
+
+    // Open the file from the command line argument
+    FILE* file = fopen(argv[1], "r");
+    if (!file) {
+        return 1;
+    }
+
+    // Buffer for reading input
+    char buffer[1 << 16]; // 64 KB buffer size
+    int idx = 0;
+
+    // Read the entire input file at once
+    size_t bytesRead = fread(buffer, 1, sizeof(buffer), file);
+    fclose(file); // Close the file after reading
+
+    // Parse the size of the vector from the input
+    int n = 0;
+    while (buffer[idx] >= '0' && buffer[idx] <= '9') {
+        n = n * 10 + (buffer[idx++] - '0');
+    }
+    ++idx; // Skip the space or newline after the number
+
+    // Create the vector and fill it with elements
+    std::vector<int> vec(n);
+    for (int i = 0; i < n; ++i) {
+        int num = 0;
+        while (buffer[idx] >= '0' && buffer[idx] <= '9') {
+            num = num * 10 + (buffer[idx++] - '0');
+        }
+        vec[i] = num;
+        ++idx; // Skip the space or newline after each number
+    }
+
+    // Output the vector elements using putchar
+    for (int i = 0; i < n; ++i) {
+        if (vec[i] == 0) putchar('0');
+        else {
+            int num = vec[i], digits[10], digitIdx = 0;
+            while (num) {
+                digits[digitIdx++] = num % 10;
+                num /= 10;
+            }
+            // Print digits in reverse order
+            while (digitIdx--) putchar('0' + digits[digitIdx]);
+        }
+        putchar(' '); // Space after each number
+    }
+    putchar('\n'); // End the output with a newline
+
+    return 0;
+}
+```
+
+In the previous code we have:
+
+1. **File Input with `fread`**:
+
+   - The input is read from a file specified in the command line argument using `fread`. This reads the entire file into a buffer in one go, improving efficiency by reducing system calls.
+
+2. **File Handling**:
+
+   - The file is opened using `fopen` and closed immediately after reading the data. This ensures that system resources are released as soon as the file reading is complete.
+
+3. **Parsing and Output**:
+   - The rest of the program processes the input similarly to the previous version, parsing the numbers from the buffer and outputting them efficiently using `putchar`.
+
+This approach remains highly optimized for competitive programming environments where fast I/O handling is critical. But, in Linux we can use `mmap`
+
+```cpp
+#include <sys/mman.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <vector>
+#include <iostream>
+
+int main(int argc, char* argv[]) {
+    if (argc != 2) {
+        return 1;
+    }
+
+    // Open the file
+    int fd = open(argv[1], O_RDONLY);
+    if (fd == -1) {
+        return 1;
+    }
+
+    // Get the file size
+    struct stat sb;
+    if (fstat(fd, &sb) == -1) {
+        close(fd);
+        return 1;
+    }
+    size_t fileSize = sb.st_size;
+
+    // Memory-map the file
+    char* fileData = static_cast<char*>(mmap(nullptr, fileSize, PROT_READ, MAP_PRIVATE, fd, 0));
+    if (fileData == MAP_FAILED) {
+        close(fd);
+        return 1;
+    }
+
+    close(fd); // The file descriptor can be closed after mapping
+
+    // Parse the vector size
+    int idx = 0;
+    int n = 0;
+    while (fileData[idx] >= '0' && fileData[idx] <= '9') {
+        n = n * 10 + (fileData[idx++] - '0');
+    }
+    ++idx; // Skip the space or newline
+
+    // Create the vector and fill it with values from the memory-mapped file
+    std::vector<int> vec(n);
+    for (int i = 0; i < n; ++i) {
+        int num = 0;
+        while (fileData[idx] >= '0' && fileData[idx] <= '9') {
+            num = num * 10 + (fileData[idx++] - '0');
+        }
+        vec[i] = num;
+        ++idx; // Skip the space or newline
+    }
+
+    // Output the vector
+    for (const int& num : vec) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+
+    // Unmap the file from memory
+    munmap(fileData, fileSize);
+
+    return 0;
+}
+```
+
+## Using `std::span` for Efficient Data Handling (C++20)
+
+The `std::span` is a new feature introduced in C++20 that allows you to create lightweight, non-owning views of arrays and containers, such as `std::vector`. This avoids unnecessary copying of data and provides a flexible and efficient way to access and manipulate large blocks of data. `std::span` can be particularly useful when working with large datasets, file I/O, or when optimizing memory usage in competitive programming.
+
+Unlike containers such as `std::vector`, `std::span` doesn't own the data it references. This means it doesn't allocate new memory and works directly with existing data, leading to lower memory overhead. Additionally, `std::span` can work with both static arrays and dynamic containers (like `std::vector`) without requiring copies. It provides safer array handling compared to raw pointers, as it encapsulates size information. Since `std::span` eliminates the need for memory copies, it can speed up operations where large datasets need to be processed in-place, or only certain views of data are required.
+
+### Example of `std::span` for Efficient Data Access
+
+In this example, we create a `std::span` from a `std::vector` of integers, allowing us to iterate over the vector’s elements without copying the data:
+
+```cpp
+#include <iostream>
+#include <span>
+#include <vector>
+
+int main() {
+    // Create a vector of integers
+    std::vector<int> numbers = {1, 2, 3, 4, 5};
+
+    // Create a span view of the vector
+    std::span<int> view(numbers);
+
+    // Iterate over the span and print the values
+    for (int num : view) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
+```
+
+### How `std::span` Works:
+
+$ \text{std::span<int> view(numbers);} $ creates a non-owning view of the `std::vector<int>` `numbers`. This allows access to the elements of the vector without copying them. The loop $ \text{for (int num : view)} $ iterates over the elements in the `std::span`, just like it would with the original `std::vector`, but with no additional overhead from copying the data.
+
+### Efficient Use Cases for `std::span`
+
+`std::span` is especially useful when you want to work with sub-ranges of arrays or vectors. For example, when working with just part of a large dataset, you can use `std::span` to reference a subset without slicing or creating new containers:
+
+```cpp
+std::span<int> subrange = view.subspan(1, 3); // Access elements 1, 2, and 3
+for (int num : subrange) {
+    std::cout << num << " "; // Outputs: 2 3 4
+}
+```
+
+When passing data to functions, `std::span` provides an efficient alternative to passing large vectors or arrays by reference. You can pass a span instead, ensuring that no copies are made, while maintaining full access to the original data:
+
+```cpp
+void process_data(std::span<int> data) {
+    for (int num : data) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    std::vector<int> numbers = {10, 20, 30, 40, 50};
+    process_data(numbers); // Pass the vector as a span
+    return 0;
+}
+```
+
+In this example, the function `process_data` accepts a `std::span`, avoiding unnecessary copies and keeping the original data structure intact.
+
+### Comparing `std::span` to Traditional Methods
+
+| Feature          | `std::vector`           | Raw Pointers          | `std::span`     |
+| ---------------- | ----------------------- | --------------------- | --------------- |
+| Memory Ownership | Yes                     | No                    | No              |
+| Memory Overhead  | High (allocates memory) | Low                   | Low             |
+| Bounds Safety    | High                    | Low                   | High            |
+| Compatibility    | Works with STL          | Works with raw arrays | Works with both |
+
+Unlike `std::vector`, which manages its own memory, `std::span` does not allocate or own memory. This is similar to raw pointers but with added safety since `std::span` knows its size. `std::span` is safer than raw pointers because it carries bounds information, helping avoid out-of-bounds errors. While raw pointers offer flexibility, they lack the safety features provided by modern C++.
+
+### Practical Application: Using `std::span` in Competitive Programming
+
+When working with large datasets in competitive programming, using `std::span` avoids unnecessary memory copies, making operations faster and more efficient. You can easily pass sub-ranges of data to functions without creating temporary vectors or arrays. Additionally, it allows you to maintain full control over memory without introducing complex ownership semantics, as with `std::unique_ptr` or `std::shared_ptr`.
+
+**\* Example: Efficiently Passing Data in a Competitive Programming Scenario**
+
+```cpp
+#include <iostream>
+#include <span>
+#include <vector>
+
+void solve(std::span<int> data) {
+    for (int num : data) {
+        std::cout << num * 2 << " "; // Example: print double each value
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    std::vector<int> input = {100, 200, 300, 400, 500};
+
+    // Use std::span to pass the entire vector without copying
+    solve(input);
+
+    // Use a subspan to pass only a portion of the vector
+    solve(std::span<int>(input).subspan(1, 3)); // Pass elements 200, 300, 400
+
+    return 0;
+}
+```
+
+## Efficient Data Manipulation with `std::ranges` in C++20
+
+C++20 introduced the `<ranges>` library, which brings a powerful and flexible way to work with sequences of data through lazy-evaluated views and composable transformations. `std::ranges` allows you to create views over containers or arrays without modifying them or creating unnecessary copies. This is especially beneficial in competitive programming and high-performance applications, where minimizing both memory and computational overhead is crucial.
+
+In traditional programming with containers like `std::vector`, iterating over and transforming data often requires intermediate storage or manual loops to handle operations like filtering, transforming, or slicing the data. With `std::ranges`, these operations can be composed in a clean and expressive way while maintaining optimal performance through lazy evaluation. Lazy evaluation means that the transformations are only computed when the data is accessed, rather than immediately creating new containers or applying operations.
+
+### How `std::ranges` Works
+
+The core idea behind `std::ranges` is to create "views" over data. These views allow you to manipulate and query data without modifying the underlying container. A view in `std::ranges` is an abstraction that can represent any sequence of elements that can be iterated over, just like a container. The key difference is that a view is not required to own its elements; instead, it provides a "window" into an existing data sequence, allowing for efficient operations.
+
+#### Example: Filtering and Transforming Data with `std::ranges`
+
+Suppose we have a vector of integers and we want to filter out the odd numbers and then multiply the remaining even numbers by two. Using traditional methods, we would need to loop through the vector, apply conditions, and store the results in a new container. With `std::ranges`, this can be done in a more expressive and efficient way:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <ranges>
+
+int main() {
+    std::vector<int> numbers = {1, 2, 3, 4, 5};
+
+    // Create a lazy-evaluated view that filters out odd numbers and doubles the even ones
+    auto even_doubled = numbers
+                        | std::ranges::views::filter([](int n) { return n % 2 == 0; })
+                        | std::ranges::views::transform([](int n) { return n * 2; });
+
+    // Iterate over the view and print the results
+    for (int num : even_doubled) {
+        std::cout << num << " ";  // Output: 4 8 (only even numbers doubled)
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
+```
+
+In this example, we create a view `even_doubled` over the original vector `numbers`. The first operation, `std::ranges::views::filter`, filters out all the odd numbers from the vector. The second operation, `std::ranges::views::transform`, multiplies each of the remaining even numbers by two. Both of these operations are lazily evaluated, meaning that no new container is created, and the transformations are applied only when iterating over the view. This approach is not only cleaner in terms of code but also more efficient in terms of performance.
+
+### Composition of Operations
+
+One of the key strengths of `std::ranges` is its composability. Operations like filtering, transforming, or slicing can be composed together, and the result is still a view. This means that you can chain multiple operations together without needing intermediate containers or data structures. The result is a highly efficient pipeline of operations that is applied only when the data is accessed.
+
+Consider the following example, where we filter, transform, and take only a part of the data:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <ranges>
+
+int main() {
+    std::vector<int> numbers = {10, 15, 20, 25, 30, 35, 40};
+
+    // Filter out numbers less than 20, double the remaining, and take only the first three
+    auto result = numbers
+                  | std::ranges::views::filter([](int n) { return n >= 20; })
+                  | std::ranges::views::transform([](int n) { return n * 2; })
+                  | std::ranges::views::take(3);
+
+    // Iterate over the view and print the results
+    for (int num : result) {
+        std::cout << num << " ";  // Output: 40 50 60
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
+```
+
+In this example, we chain together three operations: filtering the numbers greater than or equal to 20, doubling them, and taking only the first three results. The operations are applied lazily and are only computed when iterating over the final view, `result`. This leads to highly efficient data processing, as no intermediate containers are created, and each transformation is performed only once for the relevant elements.
+
+### Memory and Performance Considerations
+
+The key advantage of `std::ranges` is its use of lazy evaluation, which minimizes memory usage by avoiding the creation of temporary containers. In traditional methods, each operation (e.g., filtering or transforming) might create a new container, leading to increased memory consumption and computational overhead. With `std::ranges`, the operations are "stacked" and evaluated only when needed. This reduces the memory footprint and ensures that performance remains high, even when dealing with large datasets.
+
+Another performance benefit comes from the fact that `std::ranges` operations are highly optimized. Since the operations are evaluated lazily and directly on the data, there's no need for unnecessary copying or allocation. This leads to more efficient cache usage and fewer CPU cycles spent on managing intermediate data structures.
+
+### Practical Use Cases in Competitive Programming
+
+In competitive programming, where speed and efficiency are critical, `std::ranges` can be a valuable tool for handling large datasets, filtering inputs, or applying transformations without introducing overhead. For example, when dealing with input that needs to be filtered, transformed, or sliced before solving a problem, using `std::ranges` can save both time and memory.
+
+Imagine a scenario where you need to process only a portion of the input data based on certain conditions. Using traditional methods, this might involve creating multiple containers or applying multiple iterations over the data. With `std::ranges`, you can chain these operations in a single pass, improving both performance and code readability.
+
+Consider the following example in a competitive programming context:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <ranges>
+#include <algorithm>
+
+int main() {
+    std::vector<int> data = {50, 40, 30, 20, 10, 5};
+
+    // Sort the data, filter values greater than 15, and transform them by subtracting 5
+    auto processed = data
+                     | std::ranges::views::sort
+                     | std::ranges::views::filter([](int n) { return n > 15; })
+                     | std::ranges::views::transform([](int n) { return n - 5; });
+
+    // Iterate and output the results
+    for (int num : processed) {
+        std::cout << num << " ";  // Output: 15 25 35 45
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
+```
+
+Here, the data is sorted, filtered, and transformed in a single efficient chain of operations. Each step is evaluated lazily, meaning that no intermediate containers or data copies are made, and each number is processed only once.
+
+`std::ranges` in C++20 brings a powerful new way to work with data by providing efficient, lazy-evaluated views over containers. This minimizes memory usage, avoids unnecessary copying, and allows for highly optimized data processing pipelines. In competitive programming and high-performance applications, where every CPU cycle and byte of memory counts, using `std::ranges` can significantly improve both performance and code clarity. Whether you're filtering, transforming, or composing operations, `std::ranges` allows you to build complex data processing pipelines that are both expressive and efficient.
+
+## Efficient Techniques for File I/O and Array Handling in Competitive Programming
+
+| Function/Operation               | Most Efficient Technique                                                                        | Description                                                                                                                                          |
+| -------------------------------- | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Reading from file (command line) | `std::ifstream` or `fread`/`mmap`                                                               | `std::ifstream` is efficient for small file reads, but `fread` and `mmap` are preferred for large files as they reduce system call overhead.         |
+| Reading from standard input      | Disable synchronization with `std::ios::sync_with_stdio(false)` and use `std::cin.tie(nullptr)` | Disables C/C++ stream synchronization to improve performance when reading from `std::cin`.                                                           |
+| Writing to terminal              | `putchar` or `printf`                                                                           | `putchar` is most efficient for writing individual characters, while `printf` is faster than `std::cout` in competitive programming.                 |
+| Working with arrays              | `std::vector` with `std::span` (C++20)                                                          | `std::span` allows access to arrays and vectors without additional copies, providing bounds safety and efficiency in data handling without overhead. |
+| Data processing                  | `std::ranges` (C++20)                                                                           | `std::ranges` enables efficient, lazy-evaluated chained operations like filtering and transforming data without extra memory allocation.             |
+| Parallel I/O                     | `std::async` with asynchronous read and write operations                                        | `std::async` improves performance in high I/O scenarios by enabling parallel read/write operations.                                                  |
+| Vector manipulation              | `std::vector` with preprocessing (e.g., macros, `constexpr`)                                    | Using macros or `constexpr` for frequent operations like sorting or summing elements can save time in competitive programmings.                      |
+| Handling large data volumes      | Manual buffering with `fread` and `fwrite`                                                      | `fread` and `fwrite` allow efficient reading and writing of large blocks of data, minimizing system call overhead.                                   |
+
+## Time and Space Complexity in Competitive Programming
+
+In this section, we will delve deeper into understanding both time and space complexities, providing a more comprehensive look into how these affect the efficiency of algorithms, particularly in competitive programming environments. This includes examining loops, recursive algorithms, and how various complexity classes dictate algorithm performance. We'll also consider the impact of space complexity and memory usage, which is crucial when dealing with large datasets.
+
+### Loops and Time Complexity
+
+**One of the most common reasons for slow algorithms is the presence of multiple loops iterating over input data**. The more nested loops an algorithm contains, the slower it becomes. If there are $k$ nested loops, the time complexity becomes $O(n^k)$.
+
+For instance, the time complexity of the following code is $O(n)$:
+
+```cpp
+for (int i = 1; i <= n; i++) {
+    // code
+}
+```
+
+And the time complexity of the following code is $O(n^2)$ due to the nested loops:
+
+```cpp
+for (int i = 1; i <= n; i++) {
+    for (int j = 1; j <= n; j++) {
+        // code
+    }
+}
+```
+
+### Space Complexity in Loops
+
+While the focus is often on time complexity, it's equally important to consider space complexity, especially when handling large inputs. A loop like the one below has a time complexity of $O(n)$ but also incurs a space complexity of $O(n)$ if an array is created to store values:
+
+```cpp
+std::vector<int> arr(n);
+for (int i = 1; i <= n; i++) {
+    arr.push_back(i);
+}
+```
+
+**In competitive programming, excessive memory use can cause the program to exceed memory limits**. Therefore, always account for the space complexity of your solution, particularly when using arrays, matrices, or data structures that grow with input size.
+
+## Order of Growth
+
+Time complexity doesn't tell us the exact number of times the code within a loop executes but rather gives the order of growth. In the following examples, the code inside the loop executes $3n$, $n+5$, and $\lfloor n/2 \rfloor$ times, but the time complexity of each code is still $O(n)$:
+
+```cpp
+for (int i = 1; i <= 3*n; i++) {
+    // code
+}
+```
+
+```cpp
+for (int i = 1; i <= n+5; i++) {
+    // code
+}
+```
+
+```cpp
+for (int i = 1; i <= n; i += 2) {
+    // code
+}
+```
+
+Another example where time complexity is $O(n^2)$:
+
+```cpp
+for (int i = 1; i <= n; i++) {
+    for (int j = i+1; j <= n; j++) {
+        // code
+    }
+}
+```
+
+### Phases and Time Complexity
+
+When an algorithm consists of consecutive phases, the total time complexity is the largest time complexity of any single phase. This is because the slowest phase typically becomes the bottleneck of the code.
+
+For instance, the following code has three phases with time complexities of $O(n)$, $O(n^2)$, and $O(n)$, respectively. Thus, the total time complexity is $O(n^2)$:
+
+```cpp
+for (int i = 1; i <= n; i++) {
+    // phase 1 code
+}
+for (int i = 1; i <= n; i++) {
+    for (int j = 1; j <= n; j++) {
+        // phase 2 code
+    }
+}
+for (int i = 1; i <= n; i++) {
+    // phase 3 code
+}
+```
+
+#### Space Complexity of Multiple Phases
+
+When analyzing algorithms that consist of multiple phases, consider that each phase may also introduce additional memory usage. In the example above, if phase 2 allocates a matrix of size $n \times n$, the space complexity would increase to $O(n^2)$, matching the time complexity.
+
+### Multiple Variables and Time Complexity
+
+Sometimes, time complexity depends on multiple factors. In this case, the formula for time complexity includes multiple variables. For example, the time complexity of the following code is $O(nm)$:
+
+```cpp
+for (int i = 1; i <= n; i++) {
+    for (int j = 1; j <= m; j++) {
+        // code
+    }
+}
+```
+
+#### Space Complexity with Multiple Variables
+
+If the above algorithm also uses a data structure such as a matrix of size $n \times m$, the space complexity would also be $O(nm)$, increasing memory usage significantly, particularly for large input sizes.
+
+### Recursive Algorithms
+
+The time complexity of a recursive function depends on the number of times the function is called and the time complexity of a single call. The total time complexity is the product of these values.
+
+For example, consider the following function:
+
+```cpp
+void f(int n) {
+    if (n == 1) return;
+    f(n-1);
+}
+```
+
+The call `f(n)` makes $n$ recursive calls, and the time complexity of each call is $O(1)$. Thus, the total time complexity is $O(n)$.
+
+#### Exponential Recursion
+
+Consider the following function, which makes two recursive calls for every input:
+
+```cpp
+void g(int n) {
+    if (n == 1) return;
+    g(n-1);
+    g(n-1);
+}
+```
+
+Here, each function call generates two other calls, except when $n = 1$. The table below shows the function calls for a single initial call to $g(n)$:
+
+| Function Call | Number of Calls |
+| ------------- | --------------- |
+| $g(n)$        | 1               |
+| $g(n-1)$      | 2               |
+| $g(n-2)$      | 4               |
+| ...           | ...             |
+| $g(1)$        | $2^{n-1}$       |
+
+Thus, the time complexity is:
+
+$$
+1 + 2 + 4 + \cdots + 2^{n-1} = 2^n - 1 = O(2^n)
+$$
+
+#### Space Complexity in Recursive Functions
+
+Recursive functions also have space complexity considerations. Each recursive call adds to the call stack, and in the case of deep recursion (like in the exponential example above), this can lead to $O(n)$ space complexity. Be cautious with recursive algorithms, as exceeding the maximum stack size can cause a program to fail due to stack overflow.
+
+### Common Complexity Classes
+
+Here is a list of common time complexities of algorithms:
+
+- $O(1)$: A constant-time algorithm doesn't depend on the input size. A typical example is a direct formula calculation.
+- $O(\log n)$: A logarithmic algorithm often halves the input size at each step, such as binary search.
+
+- $O(\sqrt{n})$: Slower than $O(\log n)$ but faster than $O(n)$, this complexity might appear in algorithms that involve square root reductions in input size.
+
+- $O(n)$: A linear-time algorithm processes the input a constant number of times.
+
+- $O(n \log n)$: Common in efficient sorting algorithms (e.g., mergesort, heapsort), or algorithms using data structures with $O(\log n)$ operations.
+
+- $O(n^2)$: Quadratic complexity, often seen with nested loops processing all pairs of input elements.
+
+- $O(n^3)$: Cubic complexity arises with three nested loops, such as algorithms processing all triples of input elements.
+
+- $O(2^n)$: This complexity usually indicates exponential growth, common in recursive algorithms that explore all subsets.
+
+- $O(n!)$: Common in algorithms that generate all permutations of the input.
+
+### Estimating Efficiency
+
+When calculating an algorithm's time complexity, you can estimate whether it will be efficient enough for the given problem before implementation. A modern computer can perform hundreds of millions of operations per second.
+
+For example, assume that the input size is $n = 10^5$. If the time complexity is $O(n^2)$, the algorithm would perform roughly $(10^5)^2 = 10^{10}$ operations, which would take several seconds, likely exceeding the time limits of most competitive programming environments.
+
+On the other hand, given the input size, we can estimate the required time complexity of an algorithm. The following table provides useful estimates, assuming a time limit of one second:
+
+| Input Size    | Required Time Complexity |
+| ------------- | ------------------------ |
+| $n \leq 10$   | $O(n!)$                  |
+| $n \leq 20$   | $O(2^n)$                 |
+| $n \leq 500$  | $O(n^3)$                 |
+| $n \leq 5000$ | $O(n^2)$                 |
+| $n \leq 10^6$ | $O(n \log n)$ or $O(n)$  |
+| $n$ is large  | $O(1)$ or $O(\log n)$    |
+
+For example, if the input size is $n = 10^5$, it is likely that the algorithm must have a time complexity of $O(n)$ or $O(n \log n)$. This insight can help guide the design of the algorithm and eliminate approaches that would result in worse time complexity.
+
+While time complexity is a good estimate of efficiency, it hides constant factors. For example, an $O(n)$ algorithm might perform $n/2$ or $5n$ operations, and these constants can significantly affect the actual running time.
+
+Since loops have a significant impact on code performance, we can dive deeper into the possible loop options available.
+
+## Deep Dive into `for` Loops in Competitive Programming
+
+C++ provides several ways to iterate over elements in a vector, using different types of `for` loops. In this section, we will explore the various `for` loop options available in C++20, discussing their performance and code-writing efficiency. We will also analyze which loops are best suited for competitive programming based on input size—whether dealing with small or large datasets.
+
+### 1. `for` Loop with Iterator
+
+The `for` loop using iterators is one of the most efficient ways to iterate over a vector, especially for complex operations where you need to manipulate the elements or the iterator’s position directly.
+
+```cpp
+for (auto it = vec.begin(); it != vec.end(); ++it) {
+    std::cout << *it << " ";
+}
+```
+
+Utilizing iterators directly avoids unnecessary function calls such as `operator[]` and allows fine-grained control over the iteration. Ideal when detailed control over the iterator is necessary or when iterating over containers that do not support direct index access (e.g., `std::list`).
+
+**Input Size Consideration**:
+
+- **For Small Inputs**: This is a solid option as it allows precise control over the iteration with negligible overhead.
+- **For Large Inputs**: Highly efficient due to minimal overhead and memory usage. However, ensure that the iterator’s operations do not induce cache misses, which can slow down performance for large datasets.
+
+### 2. Classic `for` Loop with Index
+
+The classic `for` loop using an index is efficient and provides precise control over the iteration process.
+
+```cpp
+for (size_t i = 0; i < vec.size(); ++i) {
+    std::cout << vec[i] << " ";
+}
+```
+
+Accessing elements via index is fast, but re-evaluating `vec.size()` in each iteration can introduce a small overhead. Useful when you need to access or modify elements by their index or when you may need to adjust the index inside the loop.
+
+**Input Size Consideration**:
+
+- **For Small Inputs**: Efficient and straightforward, especially when the overhead of re-evaluating `vec.size()` is negligible.
+- **For Large Inputs**: If performance is critical, store `vec.size()` in a separate variable before the loop to avoid repeated function calls, which can become significant for larger datasets.
+
+### 3. Range-Based `for-each` with Constant Reference
+
+Range-based `for-each` with constant reference is highly efficient for reading elements since it avoids unnecessary copies.
+
+```cpp
+for (const auto& elem : vec) {
+    std::cout << elem << " ";
+}
+```
+
+Using constant references avoids copying, making it very efficient for both memory and execution time. Recommended for reading elements when you don’t need to modify values or access their indices.
+
+**Input Size Consideration**:
+
+- **For Small Inputs**: Ideal for minimal syntax and efficient execution.
+- **For Large Inputs**: Excellent choice due to the avoidance of element copies, ensuring optimal memory usage and performance.
+
+### 4. Range-Based `for-each` by Value
+
+The `for-each` loop can also iterate over elements by value, which is useful when you want to work with copies of the elements.
+
+```cpp
+for (auto elem : vec) {
+    std::cout << elem << " ";
+}
+```
+
+Elements are copied, which can reduce performance, especially for large data types. Useful when you need to modify a copy of the elements without affecting the original vector.
+
+**Input Size Consideration**:
+
+- **For Small Inputs**: Suitable when the overhead of copying is negligible, especially if you need to modify copies of elements.
+- **For Large Inputs**: Avoid for large datasets or large element types, as the copying can lead to significant performance degradation.
+
+### 5. `for` Loop with Range Views (C++20)
+
+C++20 introduced `range views`, which allow iteration over subsets or transformations of elements in a container without creating copies.
+
+```cpp
+for (auto elem : vec | std::views::reverse) {
+    std::cout << elem << " ";
+}
+```
+
+Range views allow high-performance operations, processing only the necessary elements. Ideal for operations involving transformations, filtering, or iterating over subsets of elements.
+
+**Input Size Consideration**:
+
+- **For Small Inputs**: Works well, especially when applying transformations like reversing or filtering, while maintaining code readability.
+- **For Large Inputs**: Very efficient as no extra memory is allocated, and the processing is done lazily, meaning only the required elements are accessed.
+
+### 6. Parallel `for` Loop (C++17/C++20)
+
+While not a traditional `for` loop, using parallelism in loops is a powerful feature introduced in C++17 and further enhanced in C++20.
+
+```cpp
+#include <execution>
+
+std::for_each(std::execution::par, vec.begin(), vec.end(), [](int& elem) {
+elem \*= 2; // Parallelized operation
+});
+```
+
+Uses multiple threads to process elements in parallel, offering substantial performance gains for intensive operations that can be performed independently on large datasets. It requires more setup and understanding of parallelism concepts but can provide significant performance boosts for operations on large datasets.
+
+**Input Size Consideration**:
+
+- **For Small Inputs**: Overkill. The overhead of managing threads and synchronization outweighs the benefits for small datasets.
+- **For Large Inputs**: Extremely efficient. When dealing with large datasets, parallel processing can drastically reduce runtime, especially for computationally expensive operations.
+
+### Optimal `for` Loops for Competitive Programming
+
+Choosing the right type of `for` loop in competitive programming depends largely on input size and the specific use case. The following table summarizes the best choices for different scenarios:
+
+| Input Size      | Best `for` Loop Option                                             | Reasoning                                                                                            |
+| --------------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| Small           | Range-Based `for-each` with Constant Reference                     | Offers minimal syntax, high readability, and avoids copies, making it fast and efficient.            |
+| Small           | Classic `for` Loop with Index                                      | Provides precise control over the index, useful when index manipulation or modification is required. |
+| Large           | Iterator-Based `for` Loop                                          | Highly efficient for large datasets due to minimal memory overhead and optimized performance.        |
+| Large           | Parallel `for` Loop with `std::for_each` and `std::execution::par` | Ideal for computationally heavy tasks on large datasets, leveraging multiple threads to parallelize. |
+| Transformations | `for` Loop with Range Views (C++20)                                | Ideal for processing subsets or transformations of data without creating extra copies.               |
+
+## Now the `while` Loop which we all love
+
+The `while` loop is another fundamental control structure in C++ that is often used in competitive programming. It repeatedly executes a block of code as long as a specified condition evaluates to true. In this section, we will explore the different use cases for `while` loops, their performance considerations, and scenarios where they may be preferable to `for` loops. We will also examine their application with both small and large datasets.
+
+### 1. Basic `while` Loop
+
+A `while` loop continues executing its block of code until the condition becomes false. This makes it ideal for situations where the number of iterations is not known beforehand.
+
+```cpp
+int i = 0;
+while (i < n) {
+    std::cout << i << " ";
+    i++;
+}
+```
+
+The `while` loop is simple and provides clear control over the loop's exit condition. The loop runs while `i < n`, and the iterator `i` is incremented manually within the loop. This offers flexibility in determining when and how the loop terminates.
+
+**Input Size Consideration**:
+
+- **For Small Inputs**: This structure is efficient, especially when the number of iterations is small and predictable.
+- **For Large Inputs**: The `while` loop can be optimized for larger inputs by ensuring that the condition is simple to evaluate and that the incrementing logic doesn't introduce overhead.
+
+### 2. `while` Loop with Complex Conditions
+
+`while` loops are particularly useful when the condition for continuing the loop involves complex logic that cannot be easily expressed in a `for` loop.
+
+```cpp
+int i = 0;
+while (i < n && someComplexCondition(i)) {
+    std::cout << i << " ";
+    i++;
+}
+```
+
+In this case, the loop runs not only based on the value of `i`, but also on the result of a more complex function. This makes `while` loops a good choice when the exit condition depends on multiple variables or non-trivial logic.
+
+**Input Size Consideration**::
+
+- **For Small Inputs**: This is ideal for small inputs where the condition can vary significantly during the iterations.
+- **For Large Inputs**: Be cautious with complex conditions when dealing with large inputs, as evaluating the condition on every iteration may add performance overhead.
+
+### 3. Infinite `while` Loops
+
+An infinite `while` loop is a loop that runs indefinitely until an explicit `break` or `return` statement is encountered. This type of loop is typically used in scenarios where the termination condition depends on an external event, such as user input or reaching a specific solution.
+
+```cpp
+while (true) {
+    // Process some data
+    if (exitCondition()) break;
+}
+```
+
+The loop runs until `exitCondition()` is met, at which point it breaks out of the loop. This structure is useful for algorithms that require indefinite running until a specific event happens.
+
+**Input Size Consideration**:
+
+- **For Small Inputs**: Generally unnecessary for small inputs unless the exit condition is based on dynamic factors.
+- **For Large Inputs**: Useful for large inputs when the exact number of iterations is unknown, and the loop depends on a condition that could be influenced by the data itself.
+
+### 4. `do-while` Loop
+
+The `do-while` loop is similar to the `while` loop, but it guarantees that the code block is executed at least once. This is useful when you need to run the loop at least one time regardless of the condition.
+
+```cpp
+int i = 0;
+do {
+    std::cout << i << " ";
+    i++;
+} while (i < n);
+```
+
+In this case, the loop will print `i` at least once, even if `i` starts with a value that makes the condition false. This ensures that the loop runs at least one iteration.
+
+**Input Size Consideration**:
+
+- **For Small Inputs**: Ideal when you need to guarantee that the loop runs at least once, such as with small datasets where the minimum iteration is essential.
+- **For Large Inputs**: Suitable for large datasets where the first iteration must occur independently of the condition.
+
+### 5. `while` Loop with Early Exit
+
+The `while` loop can be combined with early exit strategies using `break` or `return` statements to optimize performance, particularly when the loop can terminate before completing all iterations.
+
+```cpp
+int i = 0;
+while (i < n) {
+    if (shouldExitEarly(i)) break;
+    std::cout << i << " ";
+    i++;
+}
+```
+
+By including a condition inside the loop that checks for an early exit, you can significantly reduce runtime in cases where processing all elements is unnecessary.
+
+**Input Size Consideration**:
+
+- **For Small Inputs**: It can improve performance when early termination conditions are common or likely.
+- **For Large Inputs**: Highly efficient for large datasets, particularly when the early exit condition is met frequently, saving unnecessary iterations.
+
+### 6. Combining `while` with Multiple Conditions
+
+A `while` loop can easily incorporate multiple conditions to create more complex termination criteria. This is particularly useful when multiple variables determine whether the loop should continue.
+
+```cpp
+int i = 0;
+while (i < n && someOtherCondition()) {
+    std::cout << i << " ";
+    i++;
+}
+```
+
+This allows the loop to run based on multiple dynamic conditions, providing more control over the iteration process than a standard `for` loop might offer.
+
+**Input Size Consideration**:
+
+- **For Small Inputs**: A flexible option when the conditions governing the loop may change during execution, even for small datasets.
+- **For Large Inputs**: Can be optimized for large datasets by ensuring that the condition checks are efficient and that unnecessary re-evaluations are minimized.
+
+### Optimal `while` Loops for Competitive Programming
+
+Choosing the right type of `while` loop depends on the nature of the input and the complexity of the condition. The following table summarizes the optimal choices for different input sizes:
+
+| Input Size | Best `while` Loop Option                   | Reasoning                                                                                                                  |
+| ---------- | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| Small      | Basic `while` Loop                         | Offers straightforward control over iteration with minimal overhead and is easy to implement.                              |
+| Small      | `do-while` Loop                            | Ensures at least one execution of the loop, which is crucial for cases where the first iteration is essential.             |
+| Large      | `while` with Early Exit                    | Improves performance by terminating the loop early when a specific condition is met, saving unnecessary iterations.        |
+| Large      | `while` with Complex Conditions            | Allows dynamic and flexible exit conditions, making it suitable for large datasets with evolving parameters.               |
+| Continuous | Infinite `while` Loop with Explicit Breaks | Best for situations where the exact number of iterations is unknown and depends on external factors or dynamic conditions. |
+|            |
+
+## Special Loops in C++20 for Competitive Programming
+
+In C++20, several advanced looping techniques have been introduced, each offering unique ways to improve code efficiency and readability. While some of these techniques provide remarkable performance optimizations, not all are well-suited for competitive programming. competitive programmings often involve handling dynamic inputs and generating outputs within strict time limits, so techniques relying heavily on compile-time computation are less practical. This section focuses on the most useful loop structures for competitive programmings, emphasizing runtime efficiency and adaptability to varying input sizes.
+
+### 1. Range-Based Loops with `std::ranges::views`
+
+C++20 introduces `ranges` and `views`, which allow you to create expressive and efficient loops by operating on views of containers without copying data. Views are lazily evaluated, meaning that operations like filtering, transformation, or reversing are applied only when accessed.
+
+**Example**:
+
+```cpp
+#include <ranges>
+#include <vector>
+#include <iostream>
+
+int main() {
+    std::vector<int> vec = {1, 2, 3, 4, 5};
+
+    // Using views to iterate in reverse
+    for (auto elem : vec | std::views::reverse) {
+        std::cout << elem << " ";
+    }
+
+    return 0;
+}
+```
+
+**Benefits**:
+
+Efficient and lazy evaluation ensures that operations like reversing or filtering are performed only when needed, rather than precomputing them or creating unnecessary copies of the data. This approach optimizes memory usage and speeds up execution, particularly when working with large datasets.
+
+The syntax is also highly expressive and concise, allowing you to write clear and readable code. This is particularly useful when applying multiple transformations in sequence, as it helps maintain code simplicity while handling complex operations.
+
+**Considerations for competitive programmings**:
+
+Range views are particularly useful when working with large datasets, as they enable efficient processing by avoiding the creation of unnecessary copies and reducing memory overhead. This approach allows for smoother handling of extensive input data, improving overall performance.
+
+Additionally, range views provide clarity and simplicity when dealing with complex operations. They streamline the process of transforming data, making it easier to apply multiple operations in a clean and readable manner, which is especially beneficial in competitive programming scenarios.
+
+### 2. Parallel Loops with `std::for_each` and `std::execution::par`
+
+C++20 enables parallelism in standard algorithms with `std::execution`. Using parallel execution policies, you can distribute loop iterations across multiple threads, which can drastically reduce the execution time for computationally expensive loops. This is especially useful when working with large datasets in competitive programming.
+
+**Example**:
+
+```cpp
+#include <execution>
+#include <vector>
+
+int main() {
+    std::vector<int> vec(1000000, 1);
+
+    std::for_each(std::execution::par, vec.begin(), vec.end(), [](int& elem) {
+        elem *= 2;
+    });
+
+    return 0;
+}
+```
+
+**Benefits**:
+
+Parallel loops offer high performance, particularly when dealing with large input sizes that involve intensive computation. By utilizing multiple CPU cores, they significantly reduce execution time and handle heavy workloads more efficiently.
+
+What makes this approach even more practical is that it requires minimal changes to existing code. The parallel execution is enabled simply by adding the execution policy `std::execution::par`, allowing traditional loops to run in parallel without requiring complex modifications.
+
+**Considerations for competitive programmings**:
+
+Parallel loops are highly effective for processing large datasets, making them ideal in competitive programming scenarios where massive inputs need to be handled efficiently. They can dramatically reduce execution time by distributing the workload across multiple threads.
+
+However, they are less suitable for small inputs. In such cases, the overhead associated with managing threads may outweigh the performance gains, leading to slower execution compared to traditional loops.
+
+### 3. `constexpr` Loops
+
+With C++20, `constexpr` has been extended to allow more complex loops and logic at compile time. While this can lead to ultra-efficient code where calculations are precomputed during compilation, this technique has limited utility in competitive programming, where dynamic inputs are a central aspect of the problem. Since competitive programming requires handling varying inputs provided at runtime, `constexpr` loops are generally less useful in this context.
+
+**Example**:
+
+```cpp
+#include <array>
+#include <iostream>
+
+constexpr std::array<int, 5> generate_squares() {
+    std::array<int, 5> arr{};
+    for (int i = 0; i < 5; ++i) {
+        arr[i] = i * i;
+    }
+    return arr;
+}
+
+int main() {
+    constexpr auto arr = generate_squares();
+    for (int i : arr) {
+        std::cout << i << " ";  // 0 1 4 9 16
+    }
+
+    return 0;
+}
+```
+
+**Benefits**:
+
+Compile-time efficiency allows for faster runtime performance, as all necessary computations are completed during the compilation phase. This eliminates the need for processing during execution, leading to quicker program runs.
+
+This approach is ideal for constant, static data. When all relevant data is known ahead of time, compile-time computation removes the need for runtime processing, providing a significant performance boost by bypassing real-time calculations.
+
+**Considerations for competitive programmings**:
+
+While constexpr loops are not suitable for processing dynamic inputs directly, they can be strategically used to create lookup tables or pre-compute values that are then utilized during runtime calculations. This can be particularly useful in problems involving mathematical sequences, combinatorics, or other scenarios where certain calculations can be predetermined. **However, it's important to balance the use of pre-computed data with memory constraints, as large lookup tables might exceed memory limits in some competitive programming environments**.
+
+### 4. Early Exit Loops
+
+In competitive programming, optimizing loops to exit early when a condition is met can drastically reduce execution time. This approach is especially useful when the solution does not require processing the entire input if an early condition is satisfied.
+
+**Example**:
+
+```cpp
+#include <vector>
+#include <iostream>
+
+int main() {
+    std::vector<int> vec = {1, 2, 3, 4, 5};
+
+    // Early exit if a condition is met
+    for (int i = 0; i < vec.size(); ++i) {
+        if (vec[i] == 3) break;
+        std::cout << vec[i] << " ";
+    }
+
+    return 0;
+}
+```
+
+**Benefits**:
+
+Early exit loops improve efficiency by terminating as soon as a specified condition is met, thus avoiding unnecessary iterations. This approach helps save time, especially when the loop would otherwise continue without contributing to the result.
+
+This technique is particularly useful in search problems. By exiting the loop early when a target value is found, it can significantly enhance performance, reducing the overall execution time.
+
+**Considerations for competitive programmings**:
+
+Early exit loops are highly practical, as they allow a solution to be reached without the need to examine all the data. By cutting down unnecessary iterations, they help reduce execution time, making them particularly useful in scenarios where a result can be determined quickly based on partial input.
+
+### 5. Indexed Loops with Range-Based `for`
+
+While C++ offers powerful range-based `for` loops, there are scenarios where accessing elements by index is essential, especially when the loop logic requires modifying the index or accessing adjacent elements. Range-based `for` loops cannot directly access the index, so indexed loops remain valuable for such cases.
+
+**Example**:
+
+```cpp
+#include <vector>
+#include <iostream>
+
+int main() {
+    std::vector<int> vec = {1, 2, 3, 4, 5};
+
+    for (size_t i = 0; i < vec.size(); ++i) {
+        std::cout << vec[i] << " ";
+    }
+
+    return 0;
+}
+```
+
+**Benefits**:
+
+Indexed loops offer precise control by providing direct access to elements through their index, giving you full control over how the index changes during iteration. This level of control is crucial when fine-tuning the behavior of the loop.
+
+They are essential when modifying iteration behavior, especially in cases where you need to adjust the index dynamically. This is useful for tasks such as skipping elements or implementing non-linear iteration patterns, allowing for flexible loop management.
+
+**Considerations for competitive programmings**:
+
+Indexed loops are well-suited for dynamic access, offering the flexibility required for more complex iteration logic. This makes them ideal for scenarios where direct control over the loop's behavior is necessary.
+
+However, they are less expressive compared to range-based loops. While they provide detailed control, they tend to be more verbose and less concise than the streamlined syntax offered by range-based alternatives.
+
+### 6. Standard Library Algorithms (`std::for_each`, `std::transform`)
+
+Using standard library algorithms like `std::for_each` and `std::transform` allows for highly optimized iteration and transformation of container elements. These algorithms are highly optimized, making them ideal for competitive programming scenarios where efficiency is crucial.
+
+**Example**:
+
+```cpp
+#include <algorithm>
+#include <vector>
+#include <iostream>
+
+int main() {
+    std::vector<int> vec = {1, 2, 3, 4, 5};
+
+    std::for_each(vec.begin(), vec.end(), [](int& x) { x *= 2; });
+
+    for (const int& x : vec) {
+        std::cout << x << " ";
+    }
+
+    return 0;
+}
+```
+
+**Benefits**:
+
+Standard library algorithms are highly optimized for performance, often surpassing the efficiency of manually written loops. Their internal optimizations make them a powerful tool for handling operations in a time-efficient manner.
+
+Additionally, these functions are concise and clear, providing a clean and expressive syntax to apply operations on containers. This simplicity enhances code readability while maintaining high performance, making them ideal for competitive programming.
+
+**Considerations for competitive programmings**:
+
+Standard library algorithms are great for transformation tasks, allowing you to apply operations on container elements with minimal code. They maximize efficiency while keeping the implementation simple and concise, making them particularly effective for handling transformations in competitive programming scenarios.
+
+### Summary Table of Useful Loop Techniques for competitive programmings
+
+| Technique                                 | Best Use Case                            | Efficiency Considerations                                                          |
+| ----------------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------------- |
+| `std::ranges::views`                      | Transforming or filtering large datasets | Lazily evaluated operations reduce memory overhead and improve runtime efficiency. |
+| Parallel Loops with `std::execution::par` | Large computational tasks                | Parallelism significantly improves performance for large, independent tasks.       |
+| Early Exit Loops                          | Search or conditional exit problems      | Avoids unnecessary iterations, improving efficiency in scenarios with early exits. |
+| Indexed Loops                             | Precise control over iteration           | Offers flexibility and control for complex iteration logic or index manipulation.  |
+| Standard Library Algorithms               | Applying transformations or actions      | Well-optimized algorithms that simplify code and improve performance.              |
+
+### Techniques Not Recommended for competitive programmings
+
+| Technique         | Reasoning                                                                                                      |
+| ----------------- | -------------------------------------------------------------------------------------------------------------- |
+| `constexpr` Loops | Compile-time only, cannot handle dynamic input, thus impractical for runtime competitive programming problems. |
+
+## Dynamic Programming
 
 Dynamic Programming is a different way of thinking when it comes to solving problems. Programming itself is already a different way of thinking, so, to be honest, I can say that Dynamic Programming is a different way within a different way of thinking. And, if you haven't noticed yet, there is a concept of recursion trying to emerge in this definition.
 
@@ -47,17 +2475,13 @@ The general idea is that you, dear reader, should be able to break a large and d
 
 It is very likely that you, kind reader, have been introduced to Dynamic Programming techniques while studying algorithms without realizing it. So, it is also very likely that you will encounter, in this text, algorithms you have seen before without knowing they were Dynamic Programming.
 
-My intention is to break down the Dynamic Programming process into clear steps, focusing on the solution algorithm, so that you can understand and implement these steps on your own whenever you face a problem in technical interviews, production environments, or programming competitions. Without any hesitation, I will try to present performance tips and tricks in C++. However, this should not be considered a limitation; we will prioritize understanding the algorithms before diving into the code, and you will be able to implement the code in your preferred programming language.
+My intention is to break down the Dynamic Programming process into clear steps, focusing on the solution algorithm, so that you can understand and implement these steps on your own whenever you face a problem in technical interviews, production environments, or programming competitive programmings. Without any hesitation, I will try to present performance tips and tricks in C++. However, this should not be considered a limitation; we will prioritize understanding the algorithms before diving into the code, and you will be able to implement the code in your preferred programming language.
 
 I will be using functions for all the algorithms I study primarily because it will make it easier to measure and compare the execution time of each one, even though I am aware of the additional computational overhead associated with function calls. After studying the problems in C++ and identifying the solution with the lowest complexity, eventually, we will also explore the best solution in C. Additionally, whenever possible, we will examine the most popular solution for the problem in question that I can find online.
 
 ## There was a hint of recursion sneaking in
 
-Some say that Dynamic Programming is a technique to make recursive code more efficient.
-
-## Returning to Dynamic Programming
-
-If we look at Dynamic Programming, we will see an optimization technique that is based on recursion but adds storage of intermediate results to avoid redundant calculations. _Memoization and tabulation are the two most common Dynamic Programming techniques_, each with its own approach to storing and reusing the results of subproblems:
+Some say that Dynamic Programming is a technique to make recursive code more efficient. If we look at Dynamic Programming, we will see an optimization technique that is based on recursion but adds storage of intermediate results to avoid redundant calculations. _Memoization and tabulation are the two most common Dynamic Programming techniques_, each with its own approach to storing and reusing the results of subproblems:
 
 - **Memoization (Top-Down)**: _This technique is recursive in nature_. It involves storing the results of expensive function calls and returning the cached result when the same inputs occur again. This approach can be seen as an optimization of the top-down recursive process.
 - **Tabulation (Bottom-Up**): _Tabulation takes an iterative approach, solving smaller subproblems first and storing their solutions in a table (often an array or matrix)_. It then uses these stored values to calculate the solutions to larger subproblems, gradually building up to the final solution. The iterative nature of tabulation typically involves using loops to fill the table in a systematic manner.
@@ -312,7 +2736,7 @@ Let's see how far we get in this text. As I write this, I still have no idea.
 
 ## Now I realize: C++, where is C++?
 
-Throughout our exploration of Dynamic Programming concepts, we've been using Python as a form of pseudocode. Its versatility and simplicity have served us well, especially considering that many of my students are already familiar with it. Python's readability has made it an excellent choice for introducing and illustrating algorithmic concepts. However, as we progress into more advanced territory, it's time to acknowledge that Python, despite its strengths, isn't the most suitable language for high-performance applications or programming competitions.
+Throughout our exploration of Dynamic Programming concepts, we've been using Python as a form of pseudocode. Its versatility and simplicity have served us well, especially considering that many of my students are already familiar with it. Python's readability has made it an excellent choice for introducing and illustrating algorithmic concepts. However, as we progress into more advanced territory, it's time to acknowledge that Python, despite its strengths, isn't the most suitable language for high-performance applications or programming competitive programmings.
 
 With this in mind, we're going to transition to using **C++ 20** as our primary language moving forward. C++ offers superior performance, which is crucial when dealing with computationally intensive tasks often found in competitive programming scenarios. It also provides more direct control over memory management, a feature that can be essential when optimizing algorithms for speed and efficiency. Additionally, we'll occasionally use data structures compatible with **C 17** within our **C++ 20** environment, ensuring a balance between modern features and broader compatibility.
 
@@ -905,7 +3329,7 @@ Fibonacci(30) = 832040
 
 _Output 3: running C-Style array_{: class="legend"}
 
-And there it is, we have found a code fast enough for calculating the nth Fibonacci number in an execution time suitable to my ambitions. The only problem is that we used C-Style arrays in a C++ solution. In other words, we gave up all C++ data structures to make the program as fast as possible. We traded a diverse and efficient language for a simple and straightforward one. This choice will be up to the kind reader. You will have to decide if you know enough C to solve any problem or if you need to use predefined data structures to solve your problems. _Unless there is someone in the competition using C. In that case, it's C and that's it_.
+And there it is, we have found a code fast enough for calculating the nth Fibonacci number in an execution time suitable to my ambitions. The only problem is that we used C-Style arrays in a C++ solution. In other words, we gave up all C++ data structures to make the program as fast as possible. We traded a diverse and efficient language for a simple and straightforward one. This choice will be up to the kind reader. You will have to decide if you know enough C to solve any problem or if you need to use predefined data structures to solve your problems. _Unless there is someone in the competitive programming using C. In that case, it's C and that's it_.
 
 Before we start solving problems with Dynamic Programming, let's summarize the execution time reports in a table for easy visualization and to pique the curiosity of the kind reader.
 
@@ -991,7 +3415,7 @@ int main() {
 
 _Code 3: Full code of a two-sum using `std::vector`_{: class="legend"}
 
-The Values function is quite simple, but the use of `std::vector` and `std::pair` in Code 4 deserves a closer look. While `std::array` might offer a slight performance edge, the dynamic nature of `std::vector` makes it a better fit for interview and competition scenarios where the size of the input data isn't known in advance. This flexibility is crucial when dealing with data read from external sources like the terminal or text files.
+The Values function is quite simple, but the use of `std::vector` and `std::pair` in Code 4 deserves a closer look. While `std::array` might offer a slight performance edge, the dynamic nature of `std::vector` makes it a better fit for interview and competitive programming scenarios where the size of the input data isn't known in advance. This flexibility is crucial when dealing with data read from external sources like the terminal or text files.
 
 > `std::pair` is a standard template class in C++ used to store a pair of values, which can be of different types. It has been available since C++98 and is defined in the `<utility>` header. This class is particularly useful for returning two values from a function or for storing two related values together. It has two public member variables, `first` and `second`, which store the values. A `std::pair` can be initialized using constructors or the helper function `std::make_pair`.
 > The kind reader can create a `std::pair` directly using its constructor (`std::pair<int, double> p1(42, 3.14);`) or by using `std::make_pair` (`auto p2 = std::make_pair(42, 3.14);`). It is straightforward to access the members `first` and `second` directly (`std::cout << "First: " << p1.first << ", Second: " << p1.second << std::endl;`).
@@ -1060,19 +3484,19 @@ def find_min_max(numbers: list[int]) -> Optional[tuple[int, int]]:
 
 _Code Fragment 12 - Optional implemented in Python_{: class="legend"}
 
-Relying solely on brute-force solutions won't impress interviewers or win coding competitions. It's crucial to strive for solutions with lower time complexity whenever possible. While some problems might not have more efficient alternatives, most interview and competition questions are designed to filter out candidates who only know brute-force approaches.
+Relying solely on brute-force solutions won't impress interviewers or win coding competitive programmings. It's crucial to strive for solutions with lower time complexity whenever possible. While some problems might not have more efficient alternatives, most interview and competitive programming questions are designed to filter out candidates who only know brute-force approaches.
 
 #### Recursive Approach: Divide and Conquer
 
 The recursive solution leverages a two-pointer approach to efficiently explore the array within a dynamically shrinking window defined by the `start` and `end` indices. It operates by progressively dividing the search space into smaller subproblems, each represented by a narrower window, until a base case is reached or the target sum is found. Here's the refined description, flowchart and code:
 
-##### Base Cases
+#### Base Cases
 
 1. **Empty Input:** If the array is empty (or if the `start` index is greater than or equal to the `end` index), there are no pairs to consider. In this case, we return `std::nullopt` to indicate that no valid pair was found.
 
 2. **Target Sum Found:** If the sum of the elements at the current `start` and `end` indices equals the `target` value, we've found a matching pair. We return this pair as `std::optional<std::pair<int, int>>` to signal success and provide the result.
 
-##### Recursive Step\*\*
+#### Recursive Step\*\*
 
 1. **Explore Leftward:** We make a recursive call to the function, incrementing the `start` index by one. This effectively shifts our focus to explore pairs that include the next element to the right of the current `start` position.
 
@@ -1133,7 +3557,7 @@ int main() {
 
 _Code 5: Full code of a two-sum using a recursive function_{: class="legend"}
 
-##### Solution Analysis
+#### Solution Analysis
 
 The recursion systematically explores all possible pairs in the array by moving the start and end indices in a controlled manner. With each recursive call, the problem is reduced until one of the base cases is reached.
 
@@ -1180,7 +3604,7 @@ In the context of the two-sum problem, memoization can help reduce the number of
 
 We'll modify the recursive function to check the memoization map before performing any further calculations. If the pair has already been computed, we'll use the stored result instead of recalculating. After calculating the sum of a pair, we'll store the result in the memoization map before returning it. This ensures that future calls with the same pair of indices can be resolved quickly. By using memoization, we aim to reduce the number of redundant calculations, thus improving the efficiency compared to a purely recursive approach.
 
-##### Memoized Recursive Solution in C++20
+#### Memoized Recursive Solution in C++20
 
 The only significant modification in Code 5 is the conversion of the recursive function to Dynamic Programming with memoization. Code 6 presents this updated function.
 
@@ -1229,7 +3653,7 @@ std::optional<std::pair<int, int>> findPairRecursivelyMemo(
 
 _Code Fragment 13 - Two-sum using a Memoized function_{: class="legend"}
 
-##### Complexity Analysis of the Memoized Solution
+#### Complexity Analysis of the Memoized Solution
 
 In the memoized solution, we store the results of the subproblems in a map to avoid redundant calculations. We can analyze the time complexity step-by-step:
 
@@ -1286,7 +3710,7 @@ In the context of our problem, tabulation means creating a table to store soluti
 
 So, even though the brute-force approach may seem like the only option right now, don't give up! Attention! Spoiler Alert! With Dynamic Programming and tabulation, we can explore the maze more efficiently and hopefully find the treasure we've been seeking.
 
-##### C++ code for Two-Sum problem using tabulation
+#### C++ code for Two-Sum problem using tabulation
 
 The code is:
 
@@ -1339,7 +3763,7 @@ _Code 9: Full code of a two-sum using a tabulated function_{: class="legend"}
 
 The `std::optional<std::pair<int, int>> ValuesTabulation(const std::vector<int>& sequence, int targetSum)` function uses a hash table (`std::unordered_map`) to store elements of the array and their indices. For each element in the array, it calculates the complement, which is the difference between the target sum and the current element. It then checks if the complement exists in the hash table. If the complement is found, a pair that sums to the target has been identified and the function returns this pair. If the complement does not exist, the function stores the current element and its index in the hash table and proceeds to the next element.
 
-##### Complexity Analysis of the Tabulation Function
+#### Complexity Analysis of the Tabulation Function
 
 The `std::optional<std::pair<int, int>> ValuesTabulation(const std::vector<int>& sequence, int targetSum)` function uses a hash table to efficiently find a pair of numbers that add up to the target sum. The function iterates through each element of the array once, making its time complexity $O(n)$. For each element, it calculates the complement (the difference between the target sum and the current element) and checks if this complement exists in the hash table. _Accessing and inserting elements into the hash table both have an average time complexity of $O(1)$, contributing to the overall linear time complexity of the function_.
 
@@ -1360,13 +3784,13 @@ _Tabela 4 - Brute-Force, Recursive, Memoized and Tabulated Solutions Complexity 
 
 And so, it seems, we have a champion: Dynamic Programming with tabulation! Anyone armed with this technique has a significant advantage when tackling this problem, especially in job interviews where optimization and clever problem-solving are highly valued.
 
-However, let's be realistic: in the fast-paced world of programming competitions, where every millisecond counts, tabulation might not always be the winner. It can require more memory and setup time compared to other approaches, potentially slowing you down in a race against the clock.
+However, let's be realistic: in the fast-paced world of programming competitive programmings, where every millisecond counts, tabulation might not always be the winner. It can require more memory and setup time compared to other approaches, potentially slowing you down in a race against the clock.
 
-So, while tabulation shines in showcasing your understanding of optimization and problem-solving, it's important to be strategic in a competition setting. Sometimes, a simpler, faster solution might be the key to victory, even if it's less elegant.
+So, while tabulation shines in showcasing your understanding of optimization and problem-solving, it's important to be strategic in a competitive programming setting. Sometimes, a simpler, faster solution might be the key to victory, even if it's less elegant.
 
 The bottom line? Mastering Dynamic Programming and tabulation is a valuable asset, but knowing when and where to use it is the mark of a true programming champion. Now, all that's left is to analyze the execution times.
 
-##### Execution Time Analysis
+#### Execution Time Analysis
 
 I started by testing with the same code we used to test the Fibonacci functions. However, in my initial analysis, I noticed some inconsistencies in the execution times. To address this, I refined our measurement methodology by eliminating lambda functions and directly measuring execution time within the main loop. This removed potential overhead introduced by the lambdas, leading to more reliable results. So, I wrote a new, simpler, and more direct code to test the functions:
 
@@ -1536,7 +3960,7 @@ As we've seen, when dealing with a small amount of input data, the brute-force a
 
 When we use sophisticated data structures like `std::string` and `std::unordered_map`, we pay a price in terms of computational overhead. Allocating and deallocating memory on the heap for these structures takes time and resources. This overhead becomes especially noticeable when dealing with small datasets, where the time spent managing memory can easily overshadow the actual computation involved. On the other hand, the brute-force method often relies on simple data types and avoids dynamic memory allocation, resulting in a faster and more efficient solution for smaller inputs.
 
-##### The Dynamic Memory Bottleneck
+#### The Dynamic Memory Bottleneck
 
 There are some well-known bottlenecks that can explain why a code with lower complexity runs much slower in a particular environment.
 
@@ -1560,7 +3984,7 @@ In conclusion, the observed differences in execution times can be attributed to 
 
 ### We will always have C
 
-As we delve into Dynamic Programming with C++, our focus is on techniques that shine in interviews and coding competitions. Since competitive coding often favors slick C-style code, we'll zero in on a tabulation solution for this problem. Tabulation, as we know, is usually the most efficient approach. To show you what I mean, check out the `int* ValuesTabulationCStyle(const int* sequence, int length, int targetSum)` function in Code Fragment 12.
+As we delve into Dynamic Programming with C++, our focus is on techniques that shine in interviews and coding competitive programmings. Since competitive coding often favors slick C-style code, we'll zero in on a tabulation solution for this problem. Tabulation, as we know, is usually the most efficient approach. To show you what I mean, check out the `int* ValuesTabulationCStyle(const int* sequence, int length, int targetSum)` function in Code Fragment 12.
 
 ```Cpp
 int* ValuesTabulationCStyle(const int* sequence, int length, int targetSum) {
@@ -1770,7 +4194,7 @@ The C++ and C versions of our tabulation function are practically neck and neck 
 
 Thanks to all this, the C++ version of our function, using `std::array`, runs just as fast as its C counterpart.
 
-And this is how C++ code should be for competitions. However, not for interviews. In interviews, unless high performance is specifically requested, what they're looking for is your mastery of the language and the most efficient algorithms. So, an O(n) solution using the appropriate data structures will give you a better chance of success.
+And this is how C++ code should be for competitive programmings. However, not for interviews. In interviews, unless high performance is specifically requested, what they're looking for is your mastery of the language and the most efficient algorithms. So, an O(n) solution using the appropriate data structures will give you a better chance of success.
 
 ### Exercises: Variations of the Two Sum
 
@@ -2165,7 +4589,7 @@ Output:
 
 ### Analysis
 
-The "Longest Increasing Subsequence" (LIS) problem is a classic problem in Dynamic Programming, often appearing in interviews and programming competitions. The goal is to find the length of the longest subsequence in a given array such that all elements of the subsequence are in strictly increasing order. _There are three main approaches to solving this problem: Brute-Force, memoization, and tabulation. Coincidentally, these are the three solutions we are studying_. So, let's go.
+The "Longest Increasing Subsequence" (LIS) problem is a classic problem in Dynamic Programming, often appearing in interviews and programming competitive programmings. The goal is to find the length of the longest subsequence in a given array such that all elements of the subsequence are in strictly increasing order. _There are three main approaches to solving this problem: Brute-Force, memoization, and tabulation. Coincidentally, these are the three solutions we are studying_. So, let's go.
 
 ### Brute-Force
 
