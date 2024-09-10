@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-10T15:58:11.508Z
+lastmod: 2024-09-10T18:00:39.535Z
 ---
 
 ## Introduction
@@ -3413,14 +3413,10 @@ void processInput(istream& in, osyncstream& out) {
 
 int main() {
     osyncstream syncout(cout);
-
+{% raw %}
     if constexpr (config::input_method == config::InputMethod::Hardcoded) {
-        vector<pair<vi, vvi>> tests = {
-            {{45, 52, 33, 64}, {{5,0}, {-20,1}, {-14,0}, {18,3}}},
-            {{40}, {{12,0}}},
-            {{30, 41, 55, 68, 72}, {{10,0}, {-15,2}, {22,1}, {-8,4}, {5,3}}}
-        };
-
+        vector<pair<vi, vvi>> tests = {{{45, 52, 33, 64}, {{5,0}, {-20,1}, {-14,0}, {18,3}}},{{40}, {{12,0}}},{{30, 41, 55, 68, 72}, {{10,0}, {-15,2}, {22,1}, {-8,4}, {5,3}}}};
+{% endraw %}
         for (int i = 0; i < tests.size(); ++i) {
             syncout << "Example " << i + 1 << ":\n";
             auto& [humidity, adjustments] = tests[i];
@@ -3473,12 +3469,13 @@ int main() {
     // Define a vector of pairs where each pair contains:
     // 1. A vector of humidity levels.
     // 2. A 2D vector representing adjustments (value, index) to be applied to the humidity levels.
+{% raw %}
     vector<pair<vi, vvi>> tests = {
         {{45, 52, 33, 64}, {{5,0}, {-20,1}, {-14,0}, {18,3}}},
         {{40}, {{12,0}}},
         {{30, 41, 55, 68, 72}, {{10,0}, {-15,2}, {22,1}, {-8,4}, {5,3}}}
     };
-
+{% endraw %}
     // Iterate over each hardcoded test case.
     for (int i = 0; i < tests.size(); ++i) {
         // Print the example number using synchronized output to avoid race conditions in a multithreaded context.
