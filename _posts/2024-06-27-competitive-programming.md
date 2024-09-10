@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-10T18:00:39.535Z
+lastmod: 2024-09-10T18:08:28.732Z
 ---
 
 ## Introduction
@@ -80,7 +80,10 @@ Typing slow or with many errors leads to:
 You should aim for a **typing speed** of at least 60 words per minute (WPM) with high accuracy. On platforms like [https://www.speedcoder.net](https://www.speedcoder.net), you can practice typing specific code syntax, which is more effective for programmers compared to general typing lessons. For example, learning C++ or Python shortcuts helps improve your typing speed in actual coding scenarios.
 
 $$
-\text{Time spent fixing errors} + \text{Time lost from slow typing} = \text{Lower overall performance in competitive programmings}
+\begin{align*}
+\text{Time spent fixing errors} + \text{Time lost from slow typing} \\
+= \text{Lower overall performance in competitive programming}
+\end{align*}
 $$
 
 ### Advanced Typing Techniques for Programmers
@@ -1276,7 +1279,7 @@ constexpr void sort_vector(std::vector<int>& vec) {
 sort_vector(vec2);
 ```
 
-- $ \text{constexpr void sort_vector(std::vector<int}\& vec);} $ is a type-safe way to define a reusable sorting function.
+- $ \text{constexpr void sort_vector(std::vector<int}\& vec)$ is a type-safe way to define a reusable sorting function.
 - This method avoids the pitfalls of `#define`, such as lack of scoping and type checking, while still minimizing the amount of typing.
 
 ### Creating and Filling a Matrix
