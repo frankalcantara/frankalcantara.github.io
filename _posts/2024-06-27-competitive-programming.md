@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-09T01:48:46.416Z
+lastmod: 2024-09-10T03:03:42.989Z
 ---
 
 ## Introduction
@@ -2469,7 +2469,79 @@ Standard library algorithms are great for transformation tasks, allowing you to 
 | ----------------- | -------------------------------------------------------------------------------------------------------------- |
 | `constexpr` Loops | Compile-time only, cannot handle dynamic input, thus impractical for runtime competitive programming problems. |
 
-## Dynamic Programming
+## 1. Problems on 1D Arrays
+
+### Sum and Prefix Sums
+
+Problems where computing the sum of elements or prefix sums can reduce time complexity from $O(n^2)$ to $O(n)$. In some cases, sums are stored in another array, requiring $O(n)$ additional memory. Maintaining a running sum is often sufficient, though some problems require storing more complex information, such as partial sums or weighted sums.
+
+### Difference Arrays
+
+In problems involving range updates (modifying a range of array elements by a constant), using a difference array can optimize updates to constant time $O(1)$. The difference array stores differences between consecutive elements, allowing each update to be made efficiently.
+
+### Static Array Queries
+
+When dealing with static arrays (i.e., arrays that do not change between queries), pre-processing techniques like prefix sums allow for efficient querying of sums, minimums, or maximums. For example, prefix sum arrays can be built in $O(n)$, and then range sum queries can be answered in constant time $O(1)$.
+
+### Range Minimum Queries (RMQ)
+
+This technique uses a pre-processing step to store information about minimum values in intervals of the array. After building a sparse table in $O(n \log n)$, it allows answering minimum queries over any range in $O(1)$.
+
+### Binary Indexed Tree (BIT)
+
+Also known as a Fenwick Tree, this structure allows for efficient range sum queries and updates in dynamic arrays. It can answer sum queries in $O(\log n)$ and perform updates in $O(\log n)$, making it ideal for problems where both queries and updates occur frequently.
+
+### Sliding Window Minimum
+
+In this problem, the goal is to find the minimum value in a window of fixed size as the window slides across the array. Using a deque to store the relevant elements of the current window allows maintaining the minimum in $O(n)$ time.
+
+### Mo’s Algorithm
+
+This algorithm is used to process multiple range queries efficiently. By organizing the queries in a specific order, the algorithm reduces the number of operations needed to adjust the interval, resulting in a complexity of $O((n + q) \sqrt{n})$, where $n$ is the size of the array and $q$ is the number of queries.
+
+## 2. Search and Sorting Algorithms
+
+### Binary Search
+
+Problems that require efficient lookup in a sorted array or determining a condition within a range can be solved using binary search with time complexity $O(\log n)$.
+
+### Sorting
+
+Sorting problems involve ordering data to simplify subsequent tasks. Efficient sorting algorithms, such as mergesort or quicksort, run in $O(n \log n)$ time and are frequently needed as a preprocessing step for more complex algorithms.
+
+## 3. Data Structures
+
+### Stacks and Queues
+
+Problems involving stack-based or queue-based flows, where order of insertion and removal (FIFO/LIFO) is critical, appear often.
+
+### Trees
+
+Binary trees, AVL trees, or binary search trees (BSTs) are used in problems requiring fast insertions, deletions, and lookups. Segment trees or Fenwick trees (binary indexed trees) are commonly used for range query problems.
+
+### Priority Queues (Heaps)
+
+Heaps are employed in problems like scheduling, dynamic sorting, or pathfinding (Dijkstra’s algorithm) to maintain a dynamic set of elements where the highest (or lowest) priority element can be accessed quickly.
+
+### Hashing
+
+Hash maps (or dictionaries) are essential in problems requiring constant time lookups for checking membership or counting frequencies of elements.
+
+## 4. Dynamic Programming (DP)
+
+### Knapsack Problem
+
+Select items to maximize a total value without exceeding a capacity. Variations include 0/1 Knapsack, fractional knapsack, and bounded knapsack.
+
+### Longest Increasing Subsequence
+
+Find the longest subsequence of a sequence where the elements are in increasing order. The time complexity can be reduced to $O(n \log n)$ using binary search in combination with dynamic programming.
+
+### Grid Pathfinding
+
+DP-based grid traversal problems, such as finding the minimum or maximum cost path from one corner of a grid to another, often appear.
+
+## 5. Dynamic Programming
 
 Dynamic Programming is a different way of thinking when it comes to solving problems. Programming itself is already a different way of thinking, so, to be honest, I can say that Dynamic Programming is a different way within a different way of thinking. And, if you haven't noticed yet, there is a concept of recursion trying to emerge in this definition.
 
@@ -2481,7 +2553,7 @@ My intention is to break down the Dynamic Programming process into clear steps, 
 
 I will be using functions for all the algorithms I study primarily because it will make it easier to measure and compare the execution time of each one, even though I am aware of the additional computational overhead associated with function calls. After studying the problems in C++ and identifying the solution with the lowest complexity, eventually, we will also explore the best solution in C. Additionally, whenever possible, we will examine the most popular solution for the problem in question that I can find online.
 
-## There was a hint of recursion sneaking in
+### There was a hint of recursion sneaking in
 
 Some say that Dynamic Programming is a technique to make recursive code more efficient. If we look at Dynamic Programming, we will see an optimization technique that is based on recursion but adds storage of intermediate results to avoid redundant calculations. _Memoization and tabulation are the two most common Dynamic Programming techniques_, each with its own approach to storing and reusing the results of subproblems:
 
@@ -2490,7 +2562,7 @@ Some say that Dynamic Programming is a technique to make recursive code more eff
 
 At this point, we can take a look at two examples using Python as pseudocode, since many of my students feel comfortable with Python. First, an example of Dynamic Programming with memoization.
 
-### Example 2: Memoization
+#### Example 2: Memoization
 
 Let's revisit the Fibonacci sequence problem: finding the nth number in the Fibonacci sequence. This time, we'll use Dynamic Programming with memoization. Flowchart 2 illustrates this approach.
 
@@ -2527,7 +2599,7 @@ def fibonacci_memo(n, memo):
 
 In this code fragment, there is a dictionary named memo declared as `memo = {}`. It will be used to _store the results of previous Fibonacci calculations, preventing redundant calculations and improving efficiency_ (this is memoization!), which brings us to the consideration of the base case within recursion.
 
-#### Base Case
+##### Base Case
 
 ```python
     if n in memo:
@@ -2541,7 +2613,7 @@ The line `if n in memo` checks if the value of $𝑛$ has already been calculate
 - `fibonacci(0) = 0`
 - `fibonacci(1) = 1`
 
-#### Recursive Step and Memoization
+##### Recursive Step and Memoization
 
 ```python
     memo[n] = fibonacci_memo(n-1, memo) + fibonacci_memo(n-2, memo)
@@ -2572,7 +2644,7 @@ To figure this out, let's see how memoization changes the usual recursion tree:
 - **Memoization Check**: If $n$ isn't in the cache, the function makes two recursive calls: `fibonacci_memo(n-1, memo)` and `fibonacci_memo(n-2, memo)`.
 - **The Memoization Effect**: The very first time we call `fibonacci_memo(n, memo)` with a new value of $n$, it will keep making recursive calls until it hits the base cases. Crucially, each Fibonacci number, once computed, is stored in the cache, it gets stored in the cache. Subsequent calls with the same value of n retrieve the stored result, circumventing further recursive calls.
 
-#### Calculating the Number of Recursive Calls
+##### Calculating the Number of Recursive Calls
 
 To understand the efficiency of our memoized Fibonacci function, we need to calculate the number of recursive calls made during its execution. Memoization significantly reduces the number of redundant calls, resulting in a more efficient algorithm. Below, we break down the process:
 
@@ -2622,7 +2694,7 @@ $$\sum_{i=0}^{10} T(i) = 11$$
 
 Each value of $T(n)$ represents a new recursive call to compute `fibonacci_memo(n)`. And we have only $11$ new calls in total, demonstrating the efficiency of memoization compared to the non-memoized version which would have $177$ calls.
 
-#### Time and Space Complexity
+##### Time and Space Complexity
 
 We must proceed to the complexity analysis, focusing on the Big O notation, of the fibonacci_memo function, which uses memoization to calculate Fibonacci numbers. Let's analyze its time and space complexity. The key to understanding the time complexity is that each unique value of $n$ is calculated only once and then stored in `memo`.
 
@@ -2632,7 +2704,7 @@ The space complexity is determined by the additional storage used by the memoiza
 
 We are now ready to study Dynamic Programming with Tabulation.
 
-### Example 3: Fibonacci with Tabulation
+#### Example 3: Fibonacci with Tabulation
 
 Now, let's explore an example of Dynamic Programming using the tabulation technique:
 
@@ -2660,7 +2732,7 @@ Indeed! But look closely. The `fibonacci_tabulation()` function is an example of
 
 _Tabulation is a bottom-up approach to Dynamic Programming where you solve all subproblems first and store their solutions in a data structure, usually a table, array, list, or tree_. The solution to the larger problem is then built from these smaller solutions by traversing the data structure from the bottom up. _This implies an iterative resolution process_. The subproblems are solved iteratively, starting from the smallest until the larger problem is reached. In this case, recursion is irrelevant.
 
-#### Function Definition and Initialization
+##### Function Definition and Initialization
 
 ```python
 def fibonacci_tabulation(n):
@@ -2681,7 +2753,7 @@ _Code Fragment 3A - Tabulation Function Initialization_{: class="legend"}
 
 - `dp[1] = 1`: This declaration sets the second element of `dp` to $1$, since `fibonacci_tabulation(1)` $= 1$.
 
-#### Iteration and Calculation
+##### Iteration and Calculation
 
 ```python
     for i in range(2, n + 1):
@@ -2693,7 +2765,7 @@ _Code Fragment 3B - Tabulation Function Iteration_{: class="legend"}
 
 -`for i in range(2, n + 1)`: This loop starts from $2$ and iterates up to $n$. -`dp[i] = dp[i-1] + dp[i-2]`: This calculates the ith Fibonacci number by summing the previous two Fibonacci numbers (i.e., `fibonacci_tabulation(i-1)` and `fibonacci_tabulation(i-2)`) and stores it in the `dp` list at index $i$. -`return dp[n]`: After the loop completes, the function returns the nth Fibonacci number stored in `dp[n]`.
 
-#### Flow Explanation
+##### Flow Explanation
 
 Let's try with the tenth Fibonacci number. When `fibonacci_tabulation(10)` is called, it checks if $10 <= 1$. It is not, so it proceeds.
 
@@ -2708,7 +2780,7 @@ Iterates from $2$ to $10$:
 After the loop, `dp` is `[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55]`.
 Returns `dp[10]`, which is $55$. And this is the moment when we stop to celebrate.
 
-#### Time and Space Complexity
+##### Time and Space Complexity
 
 The time complexity analysis of the function `fibonacci_tabulation()` begins with the initial check to see if `n` is less than or equal to $1$, which is a constant time operation, $O(1)$. If `n` is greater than $1$, the function initializes a list `dp` with `n + 1` elements, which takes $O(n)$ time. After this, the function sets `dp[1]` to $1$, another constant time operation, $O(1)$.
 
@@ -2726,7 +2798,7 @@ The time complexity of the `fibonacci_tabulation()` function is $O(n)$, as each 
 
 These considerations invite deeper exploration into algorithm design, mathematical properties of Fibonacci numbers, and advanced programming techniques. Each optimization presents its own trade-offs in terms of implementation complexity, memory usage, and computational efficiency.
 
-### There is more between heaven and earth, Mr. Shakespeare
+#### There is more between heaven and earth, Mr. Shakespeare
 
 Memoization and tabulation are the most common techniques in Dynamic Programming; however, they are not the only techniques.
 
@@ -2736,7 +2808,7 @@ Memoization and tabulation are the most common techniques in Dynamic Programming
 
 Let's see how far we get in this text. As I write this, I still have no idea.
 
-## Now I realize: C++, where is C++?
+### Now I realize: C++, where is C++?
 
 Throughout our exploration of Dynamic Programming concepts, we've been using Python as a form of pseudocode. Its versatility and simplicity have served us well, especially considering that many of my students are already familiar with it. Python's readability has made it an excellent choice for introducing and illustrating algorithmic concepts. However, as we progress into more advanced territory, it's time to acknowledge that Python, despite its strengths, isn't the most suitable language for high-performance applications or programming competitive programmings.
 
@@ -2748,7 +2820,7 @@ Despite this shift, we won't be discarding the work we've done so far. To mainta
 
 As we make this transition, we'll gradually introduce C++ specific optimizations and techniques, broadening your understanding of Dynamic Programming implementation across different language paradigms. I hope this approach will equip you with both a solid conceptual foundation and the practical skills needed for high-performance coding.
 
-### Example 4: Fibonacci in C++ using `std::vectors`
+#### Example 4: Fibonacci in C++ using `std::vectors`
 
 Let's begin with a straightforward, naive implementation in **C++20**, following the flow and data structures of the Python functions provided earlier.
 
@@ -2849,7 +2921,7 @@ The Code 1 demonstrates not only our Fibonacci functions but also two functions 
 
 Now, the attentive reader will agree with me: we must to break this code down.
 
-#### The Recursive Function
+##### The Recursive Function
 
 Let's start with `fibonacci(int n)`, the simple and pure tail recursive function.
 
@@ -2870,7 +2942,7 @@ This is a similar C++ recursive function to the one we used to explain recursion
 
 The next function is the C++ memoization version:
 
-#### The Dynamic Programming Function Using Memoization
+##### The Dynamic Programming Function Using Memoization
 
 ```Cpp
 // Recursive function with memoization to calculate Fibonacci
@@ -2895,11 +2967,11 @@ Let's highlight the `std::unordered_map<int, int>& memo` in function arguments. 
 The ampersand (`&`) indicates that the argument is a reference. This means that the function will receive a reference to the original unordered map, rather than a copy of it. _Passing by reference is efficient because it avoids copying the entire map, which could be expensive in terms of time and memory, especially for large maps_. Pay attention: Thanks to the use of `&`, all changes made to the map inside the function will affect the original map outside the function. Finally `memo` is the identifier of the parameter which type is `std::unordered_map<int, int>`.In the context of memoization (hence the name `memo` we used earlier), this unordered map is used to store the results of previously computed values to avoid redundant calculations.
 
 > One `unordered_map` in C++ is quite similar to Python's dict in terms of functionality. Both provide an associative container that allows for efficient key-value pair storage and lookup. The `std::unordered_map` is a template class and a C++ only construct implemented as a hash table. _Unordered maps store key-value pairs and provide average constant-time complexity for insertion, deletion, and lookup operations, thanks to their underlying hash table structure_. They grow dynamically as needed, managing their own memory, which is freed upon destruction. Unordered maps can be passed to or returned from functions by value and can be copied or assigned, performing a deep copy of all stored elements.
-
+>
 > Unlike arrays, unordered maps do not decay to pointers, and you cannot get a pointer to their internal data. Instead, unordered maps maintain an internal hash table, which is allocated dynamically by the allocator specified in the template parameter, usually obtaining memory from the freestore (heap) independently of the object's actual allocation. This makes unordered maps efficient for fast access and manipulation of key-value pairs, though they do not maintain any particular order of the elements.
-
+>
 > Unordered maps do not require a default constructor for stored objects and are well integrated with the rest of the STL, providing `begin()`/`end()` methods and the usual STL typedefs. When reallocating, unordered maps rehash their elements, which involves reassigning the elements to new buckets based on their hash values. This rehashing process can involve copying or moving (in C++11 and later) the elements to new locations in memory.
-
+>
 > Rehashing, is the process used in `std::unordered_map` to maintain efficient performance by redistributing elements across a larger array when the load factor (the number of elements divided by the number of buckets) becomes too high. The rehashing process involves determining the new size, allocating a new array of buckets to hold the redistributed elements, rehashing elements by applying a hash function to each key to compute a new bucket index and inserting the elements into this new index, and finally, updating the internal state by updating internal pointers, references, and variables, and deallocating the old bucket array. Rehashing in `std::unordered_map` is crucial for maintaining efficient performance by managing the load factor and ensuring that hash collisions remain manageable.
 
 Overall, `std::unordered_map` is a versatile and efficient container for associative data storage, offering quick access and modification capabilities while seamlessly integrating with the C++ Standard Library and, for our purposes, very similar to Python's dictionary
@@ -2908,7 +2980,7 @@ The `fibonacci_memo(int n, std::unordered_map<int, int>& memo)` function works j
 
 Memoization offers significant advantages over the simple recursive approach when implementing the Fibonacci sequence. The primary benefit is improved time complexity, reducing it from exponential $O(2^n)$ to linear $O(n)$. This optimization is achieved by storing previously computed results in a hash table (memo), eliminating redundant calculations that plague the naive recursive method. This efficiency becomes increasingly apparent for larger $n$ values, where the simple recursive method's performance degrades exponentially, while the memoized version maintains linear time growth. Consequently, memoization allows for the computation of much larger Fibonacci numbers in practical time frames.
 
-#### The Dynamic Programming Function Using Tabulation
+##### The Dynamic Programming Function Using Tabulation
 
 The `fibonacci_tabulation(int n)`, which uses a `std::vector`, was designed to be as similar as possible to the tabulation function we studied in Python.
 
@@ -2935,7 +3007,7 @@ _Code 1C - C++ Tabulation Function_{: class="legend"}
 
 Besides the `std::vector` template type, the time and space complexity are the same, $O(n)$, we found in Python version. What left us with the generic part of Code 1: Evaluation.
 
-#### Performance Evaluation and Support Functions
+##### Performance Evaluation and Support Functions
 
 All the effort we have made so far will be useless if we are not able to measure the execution times of these functions. In addition to complexity, we need to observe the execution time. This time will depend on the computational cost of the structures used, the efficiency of the compiler, and the machine on which the code will be executed. I chose to find the average execution time for calculating the tenth, twentieth, and thirtieth Fibonacci numbers. To find the average, we will calculate each of them 1000 times. For that, I created two support functions:
 
@@ -3143,7 +3215,7 @@ The other functions follow a similar pattern to measure and print their executio
 
 The results are printed to the console, showing the performance gain achieved through memoization compared to the recursive and tabulation methods.
 
-#### Running Example 4 - `std::vector`
+##### Running Example 4 - `std::vector`
 
 Example 4, the simple and intuitive code for testing purposes, finds three specific Fibonacci numbers — the 10th, 20th, and 30th — using three different functions, 1,000 times each. This code uses an `int`, `std::vector`, and `std::unordered_map` for storing the values of the Fibonacci sequence and, when executed, presents the following results.
 
@@ -3169,7 +3241,7 @@ _Output 1 - running Example 4 - std::vector_{: class="legend"}
 
 the careful reader should note that the execution times vary non-linearly and, in all cases, for this problem, the Dynamic Programming version using tabulation was faster. There is much discussion about the performance of the Vector class compared to the Array class. To test the performance differences between `std::vector` and `std::array`, we will retry using `std::array`
 
-### Example 5: using `std::array`
+#### Example 5: using `std::array`
 
 First and foremost, `std::array` is a container from the C++ Standard Library with some similarities to, and some differences from, `std::vector`, namely:
 
@@ -3215,7 +3287,7 @@ _Code Fragment 10 - C++, `std::array`, Tabulation Function_{: class="legend"}
 
 This is basically the same code that we discussed in the previous section, only replacing the `std::vector` class with the `std::array` class. Therefore, we do not need to analyze the code line by line and can consider the flowcharts and complexity analysis already performed.
 
-#### Running Example 5: using `std::array`
+##### Running Example 5: using `std::array`
 
 Running the Example 5 will produces the following result:
 
@@ -3243,7 +3315,7 @@ We have reached an interesting point. Just interesting!
 
 We achieved a performance gain using memoization and tabulation, as evidenced by the different complexities among the recursive $O(n^2)$, memoization $O(n)$, and tabulation $O(n)$. Additionally, we observed a slight improvement in execution time by choosing `std::array` instead of `std::vector`. However, we still have some options to explore. Options never end!
 
-### Code 3: C-style Array
+#### Code 3: C-style Array
 
 We are using a C++ container of integers to store the already calculated Fibonacci numbers as the basis for the two Dynamic Programming processes we are studying so far, memoization and tabulation, one `std::unordered_map` and one `std::vector` or `std::array`. However, there is an even simpler container in C++: the array. The C-Style array.
 
@@ -3286,7 +3358,7 @@ The `cArray_fibonacci_tabulation` function, on the other hand, implements the ta
 
 Again succinct! I think I'm learning. These structures have the same space and time complexities that we have observed since Example 4. In other words, all that remains is to run this code and evaluate the execution times.
 
-#### Running Code 3: using C-Style Array
+##### Running Code 3: using C-Style Array
 
 Will give us the following answer:
 
@@ -3335,7 +3407,7 @@ And there it is, we have found a code fast enough for calculating the nth Fibona
 
 Before we start solving problems with Dynamic Programming, let's summarize the execution time reports in a table for easy visualization and to pique the curiosity of the kind reader.
 
-## Execution Time Comparison Table
+### Execution Time Comparison Table
 
 | Container          | Number | Recursive (ns) | Memoized (ns) | Tabulated (ns) |
 | ------------------ | ------ | -------------- | ------------- | -------------- |
@@ -3353,11 +3425,11 @@ _Tabela 2 - Code Execution Time Comparison_{: class="legend"}
 
 With sufficient practice, Dynamic Programming concepts will become intuitive. I know, the text is dense and complicated. I purposefully mixed concepts of Dynamic Programming, complexity analysis, C++, and performance. If the kind reader is feeling hopeless, stand up, have a soda, walk a bit, and start again. Like everything worthwhile in life, Dynamic Programming requires patience, effort, and time. If, on the other hand, you feel confident, let's move on to our first problem.
 
-## Your First Dynamic Programming Problem
+### Your First Dynamic Programming Problem
 
 Dynamic Programming concepts became popular in the early 21st century thanks to job interviews for large companies. Until then, only high-performance and competitive programmers were concerned with these techniques. Today, among others, we have [LeetCode](https://leetcode.com/) with hundreds, perhaps thousands of problems to solve. I strongly recommend trying to solve some of them. Here, I will only solve problems whose solutions are already available on other sites. You might even come across some from LeetCode problem, but that will be by accident. The only utility of LeetCode, for me, for you, and for them, is that the problems are not easy to find or solve. Let's start with a problem that is now a classic on the internet and, according to legend, was part of a Google interview.
 
-### The "Two-Sum" problem
+#### The "Two-Sum" problem
 
 **Statement**: In a technical interview, you've been given an array of numbers, and you need to find a pair of numbers that sum up to a given target value. The numbers can be positive, negative, or both. Can you design an algorithm that works in $O(n)$ time complexity or better?
 
@@ -3488,17 +3560,17 @@ _Code Fragment 12 - Optional implemented in Python_{: class="legend"}
 
 Relying solely on brute-force solutions won't impress interviewers or win coding competitive programmings. It's crucial to strive for solutions with lower time complexity whenever possible. While some problems might not have more efficient alternatives, most interview and competitive programming questions are designed to filter out candidates who only know brute-force approaches.
 
-#### Recursive Approach: Divide and Conquer
+##### Recursive Approach: Divide and Conquer
 
 The recursive solution leverages a two-pointer approach to efficiently explore the array within a dynamically shrinking window defined by the `start` and `end` indices. It operates by progressively dividing the search space into smaller subproblems, each represented by a narrower window, until a base case is reached or the target sum is found. Here's the refined description, flowchart and code:
 
-#### Base Cases
+##### Base Cases
 
 1. **Empty Input:** If the array is empty (or if the `start` index is greater than or equal to the `end` index), there are no pairs to consider. In this case, we return `std::nullopt` to indicate that no valid pair was found.
 
 2. **Target Sum Found:** If the sum of the elements at the current `start` and `end` indices equals the `target` value, we've found a matching pair. We return this pair as `std::optional<std::pair<int, int>>` to signal success and provide the result.
 
-#### Recursive Step\*\*
+##### Recursive Step
 
 1. **Explore Leftward:** We make a recursive call to the function, incrementing the `start` index by one. This effectively shifts our focus to explore pairs that include the next element to the right of the current `start` position.
 
@@ -3559,7 +3631,7 @@ int main() {
 
 _Code 5: Full code of a two-sum using a recursive function_{: class="legend"}
 
-#### Solution Analysis
+##### Solution Analysis
 
 The recursion systematically explores all possible pairs in the array by moving the start and end indices in a controlled manner. With each recursive call, the problem is reduced until one of the base cases is reached.
 
@@ -3596,7 +3668,7 @@ On the other hand, the recursive solution systematically explores all possible p
 
 In summary, while both approaches solve the problem, the Brute-Force solution is significantly more efficient in terms of time complexity ($O(n^2)$ vs. $O(2^n)$), and it also has a lower space complexity ($O(1)$ vs. $O(n)$). However, we are not interested in either of these solutions. The Brute-Force solution is naive and offers no advantage, and the recursive solution is impractical. Thus, we are left with the Dynamic Programming solutions.
 
-#### Dynamic Programming: memoization
+##### Dynamic Programming: memoization
 
 > Regardless of the efficiency of the recursive code, the first law of Dynamic Programming says: always start with recursion. Thus, the recursive function will be useful for defining the structure of the code using memoization and tabulation.
 
@@ -3606,7 +3678,7 @@ In the context of the two-sum problem, memoization can help reduce the number of
 
 We'll modify the recursive function to check the memoization map before performing any further calculations. If the pair has already been computed, we'll use the stored result instead of recalculating. After calculating the sum of a pair, we'll store the result in the memoization map before returning it. This ensures that future calls with the same pair of indices can be resolved quickly. By using memoization, we aim to reduce the number of redundant calculations, thus improving the efficiency compared to a purely recursive approach.
 
-#### Memoized Recursive Solution in C++20
+##### Memoized Recursive Solution in C++20
 
 The only significant modification in Code 5 is the conversion of the recursive function to Dynamic Programming with memoization. Code 6 presents this updated function.
 
@@ -3655,7 +3727,7 @@ std::optional<std::pair<int, int>> findPairRecursivelyMemo(
 
 _Code Fragment 13 - Two-sum using a Memoized function_{: class="legend"}
 
-#### Complexity Analysis of the Memoized Solution
+##### Complexity Analysis of the Memoized Solution
 
 In the memoized solution, we store the results of the subproblems in a map to avoid redundant calculations. We can analyze the time complexity step-by-step:
 
@@ -3702,7 +3774,7 @@ _Tabela 3 - Brute-Force, Recursive and Memoized Solutions Complexity Comparison_
 
 The situation may seem grim, with the brute-force approach holding the lead as our best solution so far. But don't lose hope just yet! We have a secret weapon up our sleeves: Dynamic Programming with tabulation.
 
-#### Dynamic Programming: tabulation
+##### Dynamic Programming: tabulation
 
 Think of it like this: we've been wandering through a maze, trying every path to find the treasure (our solution). The brute-force approach means we're checking every single path, even ones we've already explored. It's exhausting and time-consuming.
 
@@ -3712,7 +3784,7 @@ In the context of our problem, tabulation means creating a table to store soluti
 
 So, even though the brute-force approach may seem like the only option right now, don't give up! Attention! Spoiler Alert! With Dynamic Programming and tabulation, we can explore the maze more efficiently and hopefully find the treasure we've been seeking.
 
-#### C++ code for Two-Sum problem using tabulation
+##### C++ code for Two-Sum problem using tabulation
 
 The code is:
 
@@ -3765,7 +3837,7 @@ _Code 9: Full code of a two-sum using a tabulated function_{: class="legend"}
 
 The `std::optional<std::pair<int, int>> ValuesTabulation(const std::vector<int>& sequence, int targetSum)` function uses a hash table (`std::unordered_map`) to store elements of the array and their indices. For each element in the array, it calculates the complement, which is the difference between the target sum and the current element. It then checks if the complement exists in the hash table. If the complement is found, a pair that sums to the target has been identified and the function returns this pair. If the complement does not exist, the function stores the current element and its index in the hash table and proceeds to the next element.
 
-#### Complexity Analysis of the Tabulation Function
+##### Complexity Analysis of the Tabulation Function
 
 The `std::optional<std::pair<int, int>> ValuesTabulation(const std::vector<int>& sequence, int targetSum)` function uses a hash table to efficiently find a pair of numbers that add up to the target sum. The function iterates through each element of the array once, making its time complexity $O(n)$. For each element, it calculates the complement (the difference between the target sum and the current element) and checks if this complement exists in the hash table. _Accessing and inserting elements into the hash table both have an average time complexity of $O(1)$, contributing to the overall linear time complexity of the function_.
 
@@ -3792,7 +3864,7 @@ So, while tabulation shines in showcasing your understanding of optimization and
 
 The bottom line? Mastering Dynamic Programming and tabulation is a valuable asset, but knowing when and where to use it is the mark of a true programming champion. Now, all that's left is to analyze the execution times.
 
-#### Execution Time Analysis
+##### Execution Time Analysis
 
 I started by testing with the same code we used to test the Fibonacci functions. However, in my initial analysis, I noticed some inconsistencies in the execution times. To address this, I refined our measurement methodology by eliminating lambda functions and directly measuring execution time within the main loop. This removed potential overhead introduced by the lambdas, leading to more reliable results. So, I wrote a new, simpler, and more direct code to test the functions:
 
@@ -3962,7 +4034,7 @@ As we've seen, when dealing with a small amount of input data, the brute-force a
 
 When we use sophisticated data structures like `std::string` and `std::unordered_map`, we pay a price in terms of computational overhead. Allocating and deallocating memory on the heap for these structures takes time and resources. This overhead becomes especially noticeable when dealing with small datasets, where the time spent managing memory can easily overshadow the actual computation involved. On the other hand, the brute-force method often relies on simple data types and avoids dynamic memory allocation, resulting in a faster and more efficient solution for smaller inputs.
 
-#### The Dynamic Memory Bottleneck
+##### The Dynamic Memory Bottleneck
 
 There are some well-known bottlenecks that can explain why a code with lower complexity runs much slower in a particular environment.
 
@@ -3984,7 +4056,7 @@ The memoized solution, while clever, bears the brunt of both issues – extensiv
 
 In conclusion, the observed differences in execution times can be attributed to the distinct memory access patterns and associated overheads inherent in each approach. Understanding these nuances is crucial for making informed decisions when optimizing code for performance.
 
-### We will always have C
+#### We will always have C
 
 As we delve into Dynamic Programming with C++, our focus is on techniques that shine in interviews and coding competitive programmings. Since competitive coding often favors slick C-style code, we'll zero in on a tabulation solution for this problem. Tabulation, as we know, is usually the most efficient approach. To show you what I mean, check out the `int* ValuesTabulationCStyle(const int* sequence, int length, int targetSum)` function in Code Fragment 12.
 
@@ -4019,7 +4091,7 @@ The C-style function is as straightforward as it gets, and as far as I can tell,
 
 The use of `menset` bring us to analise the function complexity.
 
-#### Two-Sum C-Style Tabulation Function Complexity
+##### Two-Sum C-Style Tabulation Function Complexity
 
 The function `ValuesTabulationCStyle` uses `memset` to initialize the `table` array. The complexity of the function can be divided into two parts:
 
@@ -4068,7 +4140,7 @@ _Output 5: Execution time of Two-Sum solutions, including C-Style Arrays._{: cla
 
 Analyzing Output 5, it's clear that the C-style solution is, for all intents and purposes, twice as fast as the C++ tabulation solution. However, there are a few caveats: the C++ code was written to showcase the language's flexibility, not to optimize for performance. On the other hand, the C-style function was designed for simplicity. Often, simplicity equates to speed, and this is something to maximize when creating a function with linear complexity. _Now, we need to compare the C solution with C++ code that prioritizes high performance over flexibility in writing_.
 
-### High Performance C++
+#### High Performance C++
 
 Code Fragment 15 was rewritten by stripping away all the complex data structures we were previously using. The `main()` function remains largely unchanged, so it's been omitted here. I've also removed the functions used for measuring and printing execution times.
 
@@ -4198,7 +4270,7 @@ Thanks to all this, the C++ version of our function, using `std::array`, runs ju
 
 And this is how C++ code should be for competitive programmings. However, not for interviews. In interviews, unless high performance is specifically requested, what they're looking for is your mastery of the language and the most efficient algorithms. So, an O(n) solution using the appropriate data structures will give you a better chance of success.
 
-### Exercises: Variations of the Two Sum
+#### Exercises: Variations of the Two Sum
 
 There are few interesting variations of Two-Sum problem:
 
@@ -4234,19 +4306,19 @@ Stop for a moment, perhaps have a soda or a good wine. Rest a bit, then gather y
 
 This will continue!!!
 
-## Problem 1 Statement: Counting All Possible Paths in a Matrix
+### Problem 1 Statement: Counting All Possible Paths in a Matrix
 
 Given two integers $m$ and $n$, representing the dimensions of a matrix, count all possible distinct paths from the top-left corner $(0,0)$ to the bottom-right corner $(m-1,n-1)$. Each step can either be to the right or down.
 
-### Input
+#### Input
 
 - Two integers $m$ and $n$ where $1 \leq m, n \leq 100$.
 
-### Output
+#### Output
 
 - An integer representing the number of distinct paths from $(0,0)$ to $(m-1,n-1)$.
 
-### Example
+#### Example
 
 Input:
 3 3
@@ -4254,11 +4326,11 @@ Input:
 Output:
 6
 
-### Constraints
+#### Constraints
 
 - You can only move to the right or down in each step.
 
-### Analysis
+#### Analysis
 
 Let's delve deeper into the "unique paths" problem. Picture a matrix as a grid, where you start at the top-left corner $(0, 0)$ and your goal is to reach the bottom-right corner $(m-1, n-1)$. The twist? You're only allowed to move down or right. The challenge is to figure out how many distinct paths you can take to get from start to finish.
 
@@ -4308,7 +4380,7 @@ The bottom-right corner, $dp[2][2]$, holds our answer: $6$ unique paths.
 
 Bear with me, dear reader, as I temporarily diverge from our exploration of Dynamic Programming. Before delving deeper, it's essential to examine how we might solve this problem using a Brute-Force approach.
 
-### Using Brute-Force
+#### Using Brute-Force
 
 To tackle the unique paths problem with a Brute-Force approach, we can use an iterative solution and a stack in C++20. The stack will keep track of our current position in the matrix and the number of paths that led us there. Here's a breakdown of how it works:
 
@@ -4421,7 +4493,7 @@ _Output 7: Execution time of Counting all paths problem using Brute-Force._{: cl
 
 Finally, I won't be presenting the code done with pure recursion. As we've seen, recursion is very elegant and can score points in interviews. However, the memoization solution will include recursion, so if you use memoization and recursion in the same solution, you'll ace the interview.
 
-### Using Memoization
+#### Using Memoization
 
 Code Fragment 17 shows the functions I created to apply memoization. There are two functions: the `int countPathsMemoizationWrapper(int m, int n)` function used to initialize the dp data structure and call the recursive function `int countPathsMemoization(int m, int n, std::vector<std::vector<int>>& dp)`. I used `std::vector` already anticipating that we won't know the size of the matrix beforehand.
 
@@ -4479,7 +4551,7 @@ _Output 9: Comparison between Brute-Force, Memoization and Tabulation functions.
 
 I ran it dozens of times and, most of the time, the memoized function was twice as fast as the Brute-Force function, and sometimes it was three times faster. Now we need to look at the Dynamic Programming solution using tabulation.
 
-### Using Tabulation
+#### Using Tabulation
 
 Like I did before, the Code Fragment 18 shows the function I created to apply tabulation. The function `int countPathsTabulation(int m, int n)` uses Dynamic Programming with tabulation to count all possible paths in an $m \times n$ matrix.
 
@@ -4529,21 +4601,21 @@ Average time for Tabulation: 1838 ns
 
 The key takeaway is this: both memoization and tabulation solutions share the same time complexity. Therefore, in an interview setting, the choice between them boils down to personal preference. But if performance is paramount, tabulation (especially with `std::array` if the input size is known) is the way to go. Of course, now it's up to the diligent reader to test all the functions we've developed to solve problem "Counting All Possible Paths in a Matrix" with `std::array`. Performance has its quirks, and since there are many factors outside the programmer's control involved in execution, we always need to test in the an environment just like the production environment.
 
-## Problem 2 Statement: Subset Sum
+### Problem 2 Statement: Subset Sum
 
 Given $N$ integers and $T$, determine whether there exists a subset of the given set whose elements sum up to $T$.
 
-### Input
+#### Input
 
 - An integer $N$ representing the number of integers.
 - An integer $T$ representing the target sum.
 - A list of $N$ integers.
 
-### Output
+#### Output
 
 - A boolean value indicating whether such a subset exists.
 
-### Example
+#### Example
 
 Input:
 5 10
@@ -4552,13 +4624,13 @@ Input:
 Output:
 true
 
-### Constraints
+#### Constraints
 
 - $1 \leq N \leq 100$
 - $1 \leq T \leq 1000$
 - Each integer in the list is positive and does not exceed $100$.
 
-### Analysis
+#### Analysis
 
 The "Subset Sum" problem has already been tackled in the chapter: "Your First Dynamic Programming Problem." Therefore, our diligent reader should review the conditions presented here and see if the solution we presented for the "Two-Sum" problem applies in this case. If not, it'll be up to the reader to adapt the previous code accordingly. I'll kindly wait before we go on.
 
@@ -4798,275 +4870,65 @@ _Output 12: Execution time for LIS solution using Tabulation._{: class="legend"}
 
 Ultimately, the choice between memoization and tabulation often comes down to personal preference and specific implementation details. Both offer substantial improvements over Brute-Force and are viable options for solving the LIS problem efficiently.
 
-## Problem 4 Statement: Rod Cutting
+## 5. Graphs and Graph Theory
 
-Given a rod of length $n$ units and an integer array `cuts` where `cuts[i]` denotes a position you should perform a cut at, find the minimum total cost of the cuts. The cost of one cut is the length of the rod to be cut.
+- **Depth-First Search (DFS) and Breadth-First Search (BFS)**: Basic graph traversal algorithms, often used to explore nodes or determine connectivity in graphs.
 
-### Input
+- **Minimum Spanning Tree**: Problems where the goal is to find a subset of the edges that connects all vertices in a weighted graph while minimizing the total edge weight (Kruskal’s and Prim’s algorithms).
 
-- An integer $n$ representing the length of the rod.
-- An integer array `cuts` containing the positions of the cuts.
+- **Shortest Path Algorithms**: Algorithms such as Dijkstra’s, Bellman-Ford, and Floyd-Warshall are used to find the shortest path between nodes in a graph.
 
-### Output
+- **Maximum Flow**: Problems involving optimizing flow through a network, such as Ford-Fulkerson and Edmonds-Karp algorithms.
 
-- An integer representing the minimum total cost of the cuts.
+- **Strongly Connected Components**: Identifying maximal strongly connected subgraphs in directed graphs using algorithms like Kosaraju or Tarjan’s.
 
-### Example
+## 6. Computational Geometry
 
-Input:
-7
-[1, 3, 4, 5]
+- **Convex Hull**: Given a set of points, determine the smallest convex polygon that contains all points. Algorithms like Graham’s scan and Jarvis march solve this problem.
 
-Output:
-16
+- **Intersection of Line Segments**: Problems that require determining whether line segments intersect, often solved with the sweep line algorithm.
 
-### Constraints
+- **Area and Distance Calculations**: Problems involving the calculation of polygon areas, distances between points, or other geometric properties.
 
-- $1 \leq n \leq 1000$
-- $1 \leq cuts[i] < n$
-- The array `cuts` can have at most $n-1$ elements.
+## 7. Number Theory and Modular Arithmetic
 
-### Analysis
+- **Sieve of Eratosthenes**: Efficiently find all prime numbers up to a certain limit in $O(n \log \log n)$ time.
 
-## Problem 5 Statement: Longest Common Subsequence
+- **Extended Euclidean Algorithm**: Solves Diophantine equations and finds modular inverses, commonly used in cryptography and problems requiring modular arithmetic.
 
-You are given strings $s$ and $t$. Find the length of the longest string that is a subsequence of both $s$ and $t$.
+- **Modular Exponentiation**: Used in problems requiring efficient exponentiation of large numbers modulo a given integer.
 
-### Input
+## 8. Combinatorics and Counting
 
-- Two strings $s$ and $t$.
+- **Permutations and Combinations**: Problems where the goal is to count or generate all possible arrangements or selections of elements.
 
-### Output
+- **Inclusion-Exclusion Principle**: Used for counting the number of elements in the union of several sets, especially when there are overlaps between sets.
 
-- An integer representing the length of the Longest Common Subsequence.
+- **Dynamic Counting Problems**: Counting the number of ways to reach a certain state or configuration, such as in grid traversal or combinatorial game problems.
 
-### Example
+## 9. String Processing
 
-Input:
-"abcde"
-"ace"
+- **Pattern Matching**: Finding occurrences of a substring within a string, typically solved using algorithms like KMP (Knuth-Morris-Pratt) or the Z-algorithm.
 
-Output:
-3
+- **String Hashing**: Allows for efficient comparison of substrings by computing hash values for each substring.
 
-### Constraints
+- **Trie Data Structures**: Used for efficiently storing and querying a large set of strings, especially useful in prefix-matching problems.
 
-- $1 \leq |s|, |t| \leq 1000$
+## 10. Simulation and Backtracking
 
-## Problem 6 Statement: Longest Palindromic Subsequence
+- **Simulation Problems**: Involve modeling the behavior of a system over time, often requiring careful handling of edge cases and efficiency in handling large inputs.
 
-Finding the Longest Palindromic Subsequence (LPS) of a given string.
+- **Backtracking**: Used for solving constraint satisfaction problems like Sudoku, N-Queens, and other combinatorial puzzles by trying possible solutions recursively.
 
-### Input
+## 11. NP-Complete Problems
 
-- A string $s$.
+- **Traveling Salesman Problem (TSP)**: Given a set of cities, determine the shortest possible route that visits each city exactly once and returns to the origin. Although NP-hard, approximate or heuristic solutions are commonly employed in competitions.
 
-### Output
+- **Clique, Vertex Cover, and Subset Sum**: These are classical NP-complete problems, and while exact solutions are impractical for large instances, small versions or approximation algorithms often appear.
 
-- An integer representing the length of the Longest Palindromic Subsequence.
+## 12. Ad-hoc Problems
 
-### Example
-
-Input:
-"bbbab"
-
-Output:
-4
-
-### Constraints
-
-- $1 \leq |s| \leq 1000$
-
-## Problem 7 Statement: Edit Distance
-
-The edit distance between two strings is the minimum number of operations required to transform one string into the other. The allowed operations are ["Add", "Remove", "Replace"].
-
-### Input
-
-- Two strings $s$ and $t$.
-
-### Output
-
-- An integer representing the minimum number of operations required to transform one string into the other.
-
-### Example
-
-Input:
-"sunday"
-"saturday"
-
-Output:
-3
-
-### Constraints
-
-- $1 \leq |s|, |t| \leq 1000$
-
-## Problem 8 Statement: Coin Change Problem
-
-Given an array of coin denominations and a target amount, find the minimum number of coins needed to make up that amount.
-
-### Input
-
-- An integer $T$ representing the target amount.
-- A list of integers representing the coin denominations.
-
-### Output
-
-- An integer representing the minimum number of coins needed to make up the target amount.
-
-### Example
-
-Input:
-11
-[1, 2, 5]
-
-Output:
-3
-
-### Constraints
-
-- $1 \leq T \leq 1000$
-- Each coin denomination is a positive integer not exceeding $100$.
-- The list of coin denominations can have at most $100$ elements.
-
-## Problem 9 Statement: 0-1 Knapsack
-
-Given $W$, $N$, and $N$ items with weights $w_i$ and values $v_i$, what is the maximum $\sum_{i=1}^{k} v_i$ for each subset of items of size $k$ ($1 \leq k \leq N$) while ensuring $\sum_{i=1}^{k} w_i \leq W$?
-
-### Input
-
-- An integer $W$ representing the maximum weight capacity of the knapsack.
-- An integer $N$ representing the number of items.
-- Two lists of $N$ integers: one for weights and one for values.
-
-### Output
-
-- An integer representing the maximum value that can be obtained without exceeding the weight capacity.
-
-### Example
-
-Input:
-50 3
-[10, 20, 30]
-[60, 100, 120]
-
-Output:
-220
-
-### Constraints
-
-- $1 \leq W \leq 1000$
-- $1 \leq N \leq 100$
-- Each weight and value is a positive integer not exceeding $1000$.
-
-## Problem 10 Statement: Longest Path in a Directed Acyclic Graph (DAG)
-
-Finding the longest path in a Directed Acyclic Graph (DAG).
-
-### Input
-
-- An integer $N$ representing the number of nodes.
-- A list of tuples representing the edges of the graph, where each tuple $(u, v)$ indicates an edge from node $u$ to node $v$.
-
-### Output
-
-- An integer representing the length of the longest path in the DAG.
-
-### Example
-
-Input:
-5
-[(1, 2), (2, 3), (3, 4), (4, 5)]
-
-Output:
-4
-
-### Constraints
-
-- $1 \leq N \leq 1000$
-- The number of edges does not exceed $N(N-1)/2$.
-
-## Problem 11 Statement: Traveling Salesman Problem (TSP)
-
-Given a list of cities and the distances between each pair of cities, find the shortest possible route that visits each city exactly once and returns to the origin city.
-
-### Input
-
-- An integer $N$ representing the number of cities.
-- A 2D list of integers representing the distances between each pair of cities.
-
-### Output
-
-- An integer representing the minimum distance of the round trip.
-
-### Example
-
-Input:
-4
-[[0, 10, 15, 20], [10, 0, 35, 25], [15, 35, 0, 30], [20, 25, 30, 0]]
-
-Output:
-80
-
-### Constraints
-
-- $1 \leq N \leq 10$
-- Each distance is a non-negative integer not exceeding $1000$.
-
-## Problem 12 Statement: Matrix Chain Multiplication
-
-Given a sequence of matrices, find the most efficient way to multiply these matrices together. The problem is not actually to perform the multiplications, but merely to decide in which order to perform the multiplications.
-
-### Input
-
-- An integer $N$ representing the number of matrices.
-- A list of $N+1$ integers representing the dimensions of the matrices.
-
-### Output
-
-- An integer representing the minimum number of scalar multiplications needed.
-
-### Example
-
-Input:
-4
-[10, 20, 30, 40, 30]
-
-Output:
-30000
-
-### Constraints
-
-- $1 \leq N \leq 100$
-- Each dimension is a positive integer not exceeding $1000$.
-
-## Problem 3 Statement: Longest Increasing Subsequence
-
-You are given an array containing $N$ integers. Your task is to determine the Longest Increasing Subsequence (LIS) in the array, where every element is larger than the previous one.
-
-### Input
-
-- An integer $N$ representing the number of integers.
-- A list of $N$ integers.
-
-### Output
-
-- An integer representing the length of the Longest Increasing Subsequence.
-
-### Example
-
-Input:
-8
-5 2 8 6 3 6 9 7
-
-Output:
-4
-
-### Constraints
-
-- $1 \leq N \leq 1000$
-- Each integer in the list can be positive or negative.
+- **Mathematical Logic or Puzzles**: Problems that require creative or non-standard solutions, often involving logical deduction or clever use of mathematics without a standard algorithmic approach.
 
 ## Notes and References
 
