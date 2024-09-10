@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-10T15:54:35.073Z
+lastmod: 2024-09-10T15:58:11.508Z
 ---
 
 ## Introduction
@@ -2491,7 +2491,7 @@ This technique uses a pre-processing step to store information about minimum val
 
 A **Binary Indexed Tree (BIT)**, also known as a **Fenwick Tree**[^4], is a data structure that allows efficient updates and queries of cumulative frequency tables or prefix sums. It can answer sum queries in $O(\log n)$ and perform updates in $O(\log n)$, making it ideal for problems where both queries and updates occur frequently.
 
-The Binary Indexed Tree is particularly useful when dealing with dynamic data where both the data itself and queries regarding it change over time, such as when we need to frequently update the values of an array and query the sum of elements in a range.
+The Binary Indexed Tree (BIT) is particularly useful when dealing with dynamic data where both the data itself and queries regarding it change over time, such as when we need to frequently update the values of an array and query the sum of elements in a range.
 
 Consider a scenario where you are asked to maintain a list of integers and repeatedly answer queries asking for the sum of a range of elements. A simple approach could be:
 
