@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-10T18:08:28.732Z
+lastmod: 2024-09-10T20:13:35.040Z
 ---
 
 ## Introduction
@@ -2553,21 +2553,24 @@ After adding $-20$ to $humidity[1]$, the array becomes $[50,32,33,64]$, and the 
 After adding $-14$ to $humidity[0]$, the array becomes $[36,32,33,64]$, and the sum of even values is $36 + 32 + 64 = 132$.  
 After adding $18$ to $humidity[3]$, the array becomes $[36,32,33,82]$, and the sum of even values is $36 + 32 + 82 = 150$.
 
-**Example 2:**
+**Example 2**:
 
 Input: $humidity = [40]$, $adjustments = [[12,0]]$  
 Output: $[52]$
 
-**Example 3:**
+**Example 3**:
 
 Input: $humidity = [30, 41, 55, 68, 72]$, $adjustments = [[10,0],[-15,2],[22,1],[-8,4],[5,3]]$  
-Output: $[140,140,162,230,230]$  
-Explanation: Initially, the array is $[30,41,55,68,72]$.  
-After adding $10$ to $humidity[0]$, the array becomes $[40,41,55,68,72]$, and the sum of even values is $40 + 68 + 72 = 140$.  
-After adding $-15$ to $humidity[2]$, the array becomes $[40,41,40,68,72]$, and the sum of even values is $40 + 40 + 68 + 72 = 140$.  
-After adding $22$ to $humidity[1]$, the array becomes $[40,63,40,68,72]$, and the sum of even values is $40 + 40 + 68 + 72 = 162$.  
-After adding $-8$ to $humidity[4]$, the array becomes $[40,63,40,68,64]$, and the sum of even values is $40 + 40 + 68 + 64 = 230$.  
-After adding $5$ to $humidity[3]$, the array becomes $[40,63,40,73,64]$, and the sum of even values is $40 + 40 + 64 = 230$.
+Output: $[140,140,162,230,230]$
+
+**Explanation**:
+
+- Initially, the array is $[30,41,55,68,72]$.
+- After adding $10$ to $humidity[0]$, the array becomes $[40,41,55,68,72]$, and the sum of even values is $40 + 68 + 72 = 140$.
+- After adding $-15$ to $humidity[2]$, the array becomes $[40,41,40,68,72]$, and the sum of even values is $40 + 40 + 68 + 72 = 140$.
+- After adding $22$ to $humidity[1]$, the array becomes $[40,63,40,68,72]$, and the sum of even values is $40 + 40 + 68 + 72 = 162$.
+- After adding $-8$ to $humidity[4]$, the array becomes $[40,63,40,68,64]$, and the sum of even values is $40 + 40 + 68 + 64 = 230$.
+- After adding $5$ to $humidity[3]$, the array becomes $[40,63,40,73,64]$, and the sum of even values is $40 + 40 + 64 = 230$.
 
 **Constraints:**
 
