@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-10T20:13:35.040Z
+lastmod: 2024-09-10T20:41:17.460Z
 ---
 
 ## Introduction
@@ -3693,21 +3693,21 @@ The **`inline constexpr`** constant `input_method` specifies which input method 
 > **Practical Use of `constexpr`**:
 > `constexpr` can be used in a wide variety of contexts, such as constructing constant data, optimizing algorithms, and defining efficient compile-time logic. Here are a few examples:
 >
-> 1.  **Compile-time array size**:
+> 1. **Compile-time array size**:
 >
 > ```cpp
 > constexpr int size = 5;
 > int array[size];  // The size is computed at compile time.
 > ```
 >
-> 1. **Compile-time strings**:
+> 2. **Compile-time strings**:
 >
 > ```cpp
 > constexpr const char* greet() { return "Hello, World!"; }
 > constexpr const char* message = greet();  // The message is computed at compile time.
 > ```
 >
-> 1.  **Compile-time mathematical operations**:
+> 3. **Compile-time mathematical operations**:
 >
 > ```cpp
 > constexpr int area(int length, int width) {
@@ -3726,6 +3726,175 @@ The **`inline constexpr`** constant `input_method` specifies which input method 
 > Overall, `constexpr` is valuable when solving problems with static data or fixed input sizes, but in typical ICPC-style competitions, its usage may be less frequent because most problems require dynamic input processing.
 >
 > In summary, **`inline`** helps with reducing overhead by allowing the compiler to replace function calls with the actual function code, and it prevents multiple definitions of variables in multiple translation units. **`constexpr`** enables computations to be performed at compile time, which can significantly optimize performance by avoiding runtime calculations, although its applicability in competitive programming may be limited.
+
+AINDA TEM MUITO QUE EXPLICAR AQUI.
+
+#### Problema 2 - The Plate Balancer
+
+In a famous restaurant, Chef André is known for his incredible skill in balancing plates. He has a long table with several plates, each containing a different amount of food.
+
+André wants to find the "Magic Plate" - the plate where, when he places his finger underneath it, the weight of the food on the left and right balances perfectly.
+
+Given a list of $plates$, where each number represents the weight of the food on each plate, your task is to help André find the index of the Magic Plate.
+
+The Magic Plate is the one where the sum of the weights of all plates to its left is equal to the sum of the weights of all plates to its right.
+
+If André places his finger under the leftmost plate, consider the weight on the left as $0$. The same applies if he chooses the rightmost plate.
+
+Return the leftmost Magic Plate index. If no such plate exists, return $-1$.
+
+**Example 1:**
+
+Input: $plates = [3,1,5,2,2]$  
+Output: $2$  
+Explanation:  
+The Magic Plate is at index $2$.  
+Weight on the left = $plates[0] + plates[1] = 3 + 1 = 4$  
+Weight on the right = $plates[3] + plates[4] = 2 + 2 = 4$
+
+**Example 2:**
+
+Input: $plates = [1,2,3]$  
+Output: $-1$  
+Explanation:  
+There is no plate that can be the Magic Plate.
+
+**Example 3:**
+
+Input: $plates = [2,1,-1]$  
+Output: $0$  
+Explanation:  
+The Magic Plate is the first plate.  
+Weight on the left = $0$ (no plates to the left of the first plate)  
+Weight on the right = $plates[1] + plates[2] = 1 + (-1) = 0$
+
+**Constraints:**
+
+$$1 \leq plates.length \leq 10^4$$  
+$$-1000 \leq plates[i] \leq 1000$$
+
+Note: André is very skilled, so don't worry about the real-world physics of balancing plates. Focus only on the mathematical calculations!
+
+##### Optimized O(n) Solution
+
+The code solves the problem of finding the "Magic Plate" by using two dictionaries (or hashmaps) to store cumulative sums: one for sums from the left and another for sums from the right. Here's the step-by-step breakdown:
+
+1. We start with two cumulative sums: `soma_e` (left sum) and `soma_d` (right sum), both initialized to zero.
+2. As we loop through the array, we simultaneously move from the left and from the right.
+3. For each element in the array:
+   - We update the left cumulative sum, `soma_e`, and store it in the `soma_esquerda` dictionary.
+   - We check if this left sum exists in the `soma_direita` dictionary at the same index. If it does, we found the "Magic Plate" and return the index.
+   - We update the right cumulative sum, `soma_d`, and store it in the `soma_direita` dictionary.
+   - We check if this right sum exists in the `soma_esquerda` dictionary at the same index. If it does, we also return the index.
+4. If no match is found after completing the loop, the code prints `-1` indicating there is no "Magic Plate."
+
+**Code 4**:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+
+void encontrar_prato_magico(const std::vector<int>& pratos) {
+    int n = pratos.size();
+
+    // dictionaries for sums and index. Sums are keys.
+    std::unordered_map<int, int> soma_esquerda;
+    std::unordered_map<int, int> soma_direita;
+
+    int soma_e = 0; // left sum
+    int soma_d = 0; // right sum
+
+    // main loop
+    for (int i = 0; i < n; ++i) {
+        // update left sum
+        soma_e += pratos[i];
+        soma_esquerda[i] = soma_e;
+
+        // verify if there is a soma_direita
+        if (soma_direita.contains(i) && soma_direita[i] == soma_e) {
+            std::cout << "Prato Mágico encontrado no índice: " << i << std::endl;
+            return;
+        }
+
+        // update soma_direita
+        soma_d += pratos[n - 1 - i];
+        soma_direita[n - 1 - i] = soma_d;
+
+        // verify if there is a soma_esquerda
+        if (soma_esquerda.contains(n - 1 - i) && soma_esquerda[n - 1 - i] == soma_d) {
+            std::cout << "Prato Mágico encontrado no índice: " << n - 1 - i << std::endl;
+            return;
+        }
+    }
+
+    // no pivot found
+    std::cout << "-1" << std::endl;
+}
+
+int main() {
+    // Testing with dishes1 = {3, 1, 5, 2, 2}
+    std::vector<int> dishes1 = { 3, 1, 5, 2, 2 };
+    std::cout << "TTesting with dishes1 = {3, 1, 5, 2, 2}:" << std::endl;
+    encontrar_prato_magico(pratos1);
+
+    // Example 2: dishes2 = {1, 2, 3}
+    std::vector<int> dishes2 = { 1, 2, 3 };
+    std::cout << "Testing with dishes2 = {1, 2, 3}:" << std::endl;
+    encontrar_prato_magico(pratos2);
+
+    // Example 3: dishes3 = {2, 1, -1}
+    std::vector<int> dishes3 = { 2, 1, -1 };
+    std::cout << "Testing with dishes3 = {2, 1, -1}:" << std::endl;
+    encontrar_prato_magico(pratos3);
+
+    return 0;
+}
+```
+
+##### Complexity Analysis
+
+**Time Complexity Analysis**:
+
+The function `encontrar_prato_magico` has a single loop that iterates through the array `pratos`, and during each iteration, it performs constant-time operations such as updating sums and checking dictionary entries. Here's a detailed breakdown:
+
+1. **Loop Iteration**:The loop runs exactly `n` times, where `n` is the number of plates in the `pratos` array. The loop iterates over each element in the array, from index `0` to `n-1`. Hence, this part has a time complexity of `O(n)`.
+
+2. **Dictionary Operations (`unordered_map`)**:
+   - In each iteration, the code performs two dictionary operations:
+     - Insertion of the cumulative sum into `soma_esquerda` and `soma_direita`.
+     - Lookup in the opposite dictionary to check if a match exists.
+   - Both the insertion and lookup operations in `unordered_map` have an average time complexity of `O(1)`. This is due to the fact that `unordered_map` in C++ provides constant-time access and insertion on average.
+   - Since these operations are performed `n` times (once for each iteration), the time complexity for dictionary operations remains `O(n)`.
+
+Thus, combining the iteration and dictionary operations, the overall **time complexity** is:
+
+$$
+O(n) \times O(1) = O(n)
+$$
+
+**Space Complexity Analysis**:
+
+The space complexity is determined by the space required to store the input and the additional space used by the dictionaries:
+
+1. **Input Array**:
+
+   - The array `pratos` occupies `O(n)` space, where `n` is the number of elements in the array.
+
+2. **Dictionaries**:
+   - Two dictionaries (`soma_esquerda` and `soma_direita`) are used to store the cumulative sums and their corresponding indices. In the worst case, each dictionary can store up to `n` entries.
+   - Therefore, the space used by the dictionaries is `O(n)` for `soma_esquerda` and `O(n)` for `soma_direita`.
+
+Thus, the overall **space complexity** is:
+
+$$
+O(n) + O(n) = O(n)
+$$
+
+### Conclusion
+
+- **Time Complexity**: `O(n)` where `n` is the size of the input array.
+- **Space Complexity**: `O(n)` due to the input array and the two dictionaries used to store cumulative sums.
 
 ### Sliding Window Minimum
 
