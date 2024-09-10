@@ -1040,9 +1040,9 @@ p {
  .hljs-ln-code {
    padding-left: 5px !important;
    word-wrap: break-word;
-   white-space: pre-warp;
+   white-space: pre-wrap;
  }
-
+ 
  .article-post p img {
    border-style: none;
    text-align: center;
