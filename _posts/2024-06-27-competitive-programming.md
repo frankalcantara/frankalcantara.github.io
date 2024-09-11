@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-10T20:41:17.460Z
+lastmod: 2024-09-11T12:54:10.574Z
 ---
 
 ## Introduction
@@ -1832,7 +1832,7 @@ for (int i = 1; i <= n; i++) {
 
 **In competitive programming, excessive memory use can cause the program to exceed memory limits**. Therefore, always account for the space complexity of your solution, particularly when using arrays, matrices, or data structures that grow with input size.
 
-## Order of Growth
+### Order of Growth
 
 Time complexity doesn't tell us the exact number of times the code within a loop executes but rather gives the order of growth. In the following examples, the code inside the loop executes $3n$, $n+5$, and $\lfloor n/2 \rfloor$ times, but the time complexity of each code is still $O(n)$:
 
@@ -2492,48 +2492,95 @@ This technique uses a pre-processing step to store information about minimum val
 
 ### Binary Indexed Tree (BIT)
 
-A **Binary Indexed Tree (BIT)**, also known as a **Fenwick Tree**[^4], is a data structure that allows efficient updates and queries of cumulative frequency tables or prefix sums. It can answer sum queries in $O(\log n)$ and perform updates in $O(\log n)$, making it ideal for problems where both queries and updates occur frequently.
+The Binary Indexed Tree (BIT), also known as the Fenwick Tree[^4], is data structure designed to handle dynamic cumulative frequency tables. It enables us to perform point updates and range queries in logarithmic time, making it ideal for applications that involve frequent updates and queries, such as competitive programming problems and real-time data analysis. The BIT is primarily used for:
 
-The Binary Indexed Tree (BIT) is particularly useful when dealing with dynamic data where both the data itself and queries regarding it change over time, such as when we need to frequently update the values of an array and query the sum of elements in a range.
+- Efficiently calculating prefix sums.
+- Updating individual elements in a dynamic array.
 
-Consider a scenario where you are asked to maintain a list of integers and repeatedly answer queries asking for the sum of a range of elements. A simple approach could be:
+It is particularly well-suited for cases where frequent updates to an array are needed, along with queries that involve the sum of elements within a specific range.
 
-- **Naive approach**: Recompute the sum for each query, which takes $O(n)$ time per query.
-- **Prefix sum array**: Build a prefix sum array in $O(n)$, allowing you to answer each range sum query in $O(1)$ time. However, if you need to update an element, recalculating the prefix sum array can be costly, taking $O(n)$ time per update.
+[FIGURE 1: Comparative diagram showing the efficiency of the BIT versus naive methods for calculating prefix sums and performing updates.]
 
-The **Binary Indexed Tree (BIT)** provides an efficient solution where both updates and prefix sum queries can be performed in **$O(\log n)$** time. The BIT is flexible, allowing for efficient updates and range queries on dynamic data.
+Given an array $A$ of size $n$, the BIT supports two main operations in $O(\log n)$ time:
 
-#### Structure
+1. **Querying the prefix sum** of elements from the start of the array up to a given index.
+2. **Updating** a specific element of the array with a given value.
 
-A BIT is typically represented as an array. The array is structured in such a way that each index contains information about a specific range of elements. The key idea is that every index $i$ in the BIT stores information that contributes to the sum of a range of elements from the original array.
+Unlike a naive approach where range sums might take $O(n)$ time, a BIT reduces this to $O(\log n)$ using a clever binary decomposition of the index range. The key idea behind the BIT is that each index represents a sum over a specific range of elements, and each range is carefully selected to ensure efficient updates and queries.
 
-The range covered by each index $i$ is determined by the least significant bit (LSB) of $i$. The LSB of $i$ indicates the number of elements that contribute to the sum stored at index $i$. For example, if $i = 12$, the binary representation is $1100_2$. The LSB of $12$ is $4$, so index $12$ in the BIT would store the sum of 4 elements.
+#### Structure and Construction
 
-#### Operations
+A Binary Indexed Tree is typically implemented as a one-indexed array `tree[]`, where each element `tree[i]` stores the sum of a specific subrange of the original array. The size of each subrange is determined by the largest power of two that divides the index $i$. For example, `tree[6]` will store the sum of the elements in the subrange from index $5$ to $6$, as the largest power of two that divides $6$ is $2$.
 
-There are two main operations performed on a BIT: **Update** and **Prefix Sum Query**.
+[FIGURE 2: Visual representation of the BIT structure, showing how the elements of the original array are mapped to the tree nodes.]
 
-For the **Update** operation, you modify the value of an element in the original array and update the corresponding ranges in the BIT. When updating an element at index $i$, you need to propagate the update to all the indices in the BIT that include $i$ in their range. The propagation follows a pattern based on the LSB of the index. The update operation is performed by repeatedly adding the LSB of the current index to move to the next relevant index. This operation takes $O(\log n)$ time because each step reduces the number of relevant indices by at least half.
+The update and query operations in a BIT are defined using bitwise operations, which efficiently compute the index ranges involved in the sum or update.
 
-In the **Prefix Sum Query**, you find the sum of the first $i$ elements in the original array. To compute the prefix sum up to index $i$, you need to sum up the values stored at various indices in the BIT. The indices contributing to the prefix sum are determined by repeatedly subtracting the LSB from the current index. This operation also takes $O(\log n)$ time because each step reduces the index by at least half.
+#### Update Operation
 
-#### Example
+To update the value at a specific index, we propagate the change to all relevant subranges. This can be done using the following formula for index manipulation:
 
-Consider an array $A = [1, 2, 3, 4, 5]$. The corresponding BIT would look like this after initialization:
+$$\text{next}(i) = i + (i \& -i)$$
 
-| Index | BIT Value |
-| ----- | --------- |
-| 1     | 1         |
-| 2     | 3         |
-| 3     | 3         |
-| 4     | 10        |
-| 5     | 5         |
+Here, $i \& -i$ isolates the least significant set bit of $i$, and by adding this value to $i$, we determine the next index that needs to be updated. The process is repeated until we reach the end of the array.
 
-The value at index 1 is $A[1] = 1$. The value at index 2 is the sum $A[1] + A[2] = 1 + 2 = 3$. The value at index 3 is $A[3] = 3$. The value at index 4 is the sum $A[1] + A[2] + A[3] + A[4] = 1 + 2 + 3 + 4 = 10$. The value at index 5 is $A[5] = 5$.
+[FIGURE 3: Flowchart or animation showing the step-by-step process of an update operation in a BIT.]
 
-The **Binary Indexed Tree (BIT)** is a powerful and efficient data structure for maintaining dynamic cumulative information, such as prefix sums, with both update and query operations taking $O(\log n)$ time. Its simplicity and efficiency make it a popular choice for a wide range of competitive programming and algorithmic problems.
+#### Query Operation
 
-#### 1. Humidity Levels in a Greenhouse (Frank - 09-2024 - Easy)
+To query the prefix sum up to a given index $i$, we accumulate the values stored in the tree at positions corresponding to ranges that form a partition of the subarray $[1, i]$. The index manipulation for querying is given by:
+
+$$\text{prev}(i) = i - (i \& -i)$$
+
+This formula works by subtracting the least significant set bit from $i$, which moves the index to the next subrange in the partition.
+
+[FIGURE 4: Flowchart or animation illustrating the step-by-step process of a query operation in a BIT.]
+
+#### Example: Construction and Operations
+
+Let’s consider an example array $A = [1, 3, 4, 8, 6, 1, 4, 2]$ and construct its corresponding BIT.
+
+- Step 1: Initialize the BIT with zeros.
+- Step 2: Perform updates for each element of the array.
+
+| Index     | 1   | 2   | 3   | 4   | 5   | 6   | 7   | 8   |
+| --------- | --- | --- | --- | --- | --- | --- | --- | --- |
+| $A[i]$    | 1   | 3   | 4   | 8   | 6   | 1   | 4   | 2   |
+| `tree[i]` | 1   | 4   | 4   | 16  | 6   | 7   | 4   | 29  |
+
+For example, `tree[4]` stores the sum of $A[1]$ to $A[4]$, and `tree[6]$ stores the sum of $A[5]$ and $A[6]$.
+
+[FIGURE 5: Visual representation of the constructed BIT, showing the correspondence between the elements of the original array and the tree nodes.]
+
+- Querying the sum from $1$ to $7$ involves summing the values in `tree[7]`, `tree[6]`, and `tree[4]`:
+
+$$\text{sum}(1,7) = 4 + 7 + 16 = 27$$
+
+This provides the sum of the elements from $A[1]$ to $A[7]$ in just three steps, instead of summing the entire subarray directly.
+
+#### Applications of Binary Indexed Trees
+
+BITs are commonly used in a wide range of problems, such as:
+
+- **Dynamic Range Queries**: Finding the sum of elements in a range subject to updates.
+- **Inversion Counting**: BITs can be used to efficiently count the number of inversions in an array.
+- **K-th Smallest Element Problem**: BITs help maintain an efficient dynamic frequency table for this type of query.
+
+BITs can also be extended to work with multidimensional arrays, where updates and queries are performed across two or more dimensions. This makes the BIT a highly versatile and powerful tool in competitive programming.
+
+[FIGURE 6: Infographic showing different applications of BITs in various problem scenarios.]
+
+#### Limitations and Extensions
+
+While BITs excel at sum queries and point updates, they are less suited for more complex range queries, such as finding the minimum or maximum in a given range. For such queries, segment trees are often a better choice.
+
+However, it is possible to extend BITs to support range updates and point queries by maintaining multiple BITs to handle different operations. This requires a more complex implementation but allows BITs to be used in scenarios where range queries and updates are required.
+
+[FIGURE 7: Comparative diagram showing the capabilities and limitations of BITs versus other data structures, such as segment trees.]
+
+#### Problems
+
+##### 1. Humidity Levels in a Greenhouse (Frank - 09-2024 - Easy)
 
 You are responsible for monitoring and adjusting the humidity levels in a greenhouse that contains various plants. The greenhouse has a set of humidity sensors, represented by an array $humidity$, where each position in the array corresponds to the reading of a sensor.
 
