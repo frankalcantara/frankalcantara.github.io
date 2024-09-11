@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-11T18:56:09.510Z
+lastmod: 2024-09-11T19:31:18.965Z
 ---
 
 ## Introduction
@@ -3189,16 +3189,16 @@ The usage of `long long` ensures that the results and intermediate sums are safe
    - For each value $h$ in the `humidity` array:
      - If $h$ is even (i.e., $h \bmod 2 = 0$), add $h$ to `even_sum`.
 
-3. For each adjustment $[adjustment_value, sensor_index]$ in the `adjustments` list:
+3. For each adjustment $[adjustment_value, sensor\_index]$ in the `adjustments` list:
 
-   a. Check if the current value in `humidity[sensor_index]` is even:
+   a. Check if the current value in `humidity[sensor\_index]` is even:
 
    - If it is, subtract it from `even_sum`.
 
    b. Update the sensor's value:
-   $humidity[sensor_index] = humidity[sensor_index] + adjustment_value$
+   $humidity[sensor\_index] = humidity[sensor\_index] + adjustment_value$
 
-   c. Check if the new value in `humidity[sensor_index]` is even:
+   c. Check if the new value in `humidity[sensor\_index]` is even:
 
    - If it is, add it to `even_sum`.
 
