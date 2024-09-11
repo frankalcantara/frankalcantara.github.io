@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-11T15:25:36.707Z
+lastmod: 2024-09-11T15:54:35.282Z
 ---
 
 ## Introduction
@@ -2490,16 +2490,16 @@ When dealing with static arrays (i.e., arrays that do not change between queries
 
 This technique uses a pre-processing step to store information about minimum values in intervals of the array. After building a sparse table in $O(n \log n)$, it allows answering minimum queries over any range in $O(1)$.
 
-### Binary Indexed Tree (BIT)
+### The Fenwick Tree
 
-The Binary Indexed Tree (BIT), also known as the Fenwick Tree, is an efficient data structure designed to handle dynamic cumulative frequency tables. It was introduced by Peter M. Fenwick in 1994 in his paper "A new data structure for cumulative frequency tables."
+The Fenwick Tree, also know as Binary Indexed Tree (BIT), is an efficient data structure designed to handle dynamic cumulative frequency tables. It was introduced by Peter M. Fenwick in 1994 in his paper _"A new data structure for cumulative frequency tables."_
 
-The BIT allows two main operations in $O(\log n)$ time:
+The Fenwick tree allows two main operations in $O(\log n)$ time:
 
 1. Compute the sum of elements in a range (range query)
 2. Update the value of an individual element (point update)
 
-These characteristics make the BIT ideal for applications involving frequent updates and queries, such as competitive programming problems and real-time data analysis.Consider the following problem: given an array $A$ of size $n$, efficiently perform the following operations:
+These characteristics make the Fenwick tree ideal for applications involving frequent updates and queries, such as competitive programming problems and real-time data analysis. Consider the following problem: given an array $A$ of size $n$, efficiently perform the following operations:
 
 1. Update the value of an element at a specific position
 2. Compute the sum of elements in a range $[l, r]$
@@ -2512,11 +2512,11 @@ void update(int i, int val) {
 }
 
 int rangeSum(int l, int r) {
-    int sum = 0;
-    for (int i = l; i <= r; i++) {
-        sum += A[i];
-    }
-    return sum;
+int sum = 0;
+for (int i = l; i <= r; i++) {
+sum += A[i];
+}
+return sum;
 }
 ```
 
@@ -2529,14 +2529,14 @@ This solution has $O(1)$ complexity for updates and $O(n)$ for sum queries. To i
 vector<int> prefixSum;
 
 void buildPrefixSum() {
-    prefixSum.resize(A.size() + 1, 0);
-    for (int i = 0; i < A.size(); i++) {
-        prefixSum[i + 1] = prefixSum[i] + A[i];
-    }
+prefixSum.resize(A.size() + 1, 0);
+for (int i = 0; i < A.size(); i++) {
+prefixSum[i + 1] = prefixSum[i] + A[i];
+}
 }
 
 int rangeSum(int l, int r) {
-    return prefixSum[r + 1] - prefixSum[l];
+return prefixSum[r + 1] - prefixSum[l];
 }
 ```
 
@@ -2553,56 +2553,72 @@ The Binary Indexed Tree (BIT) is built on the idea that each index $i$ in the tr
 
 > Note: In this explanation and the following examples, we use 0-based indexing. This means the first element of the array is at index 0, which is a common convention in programming.
 
-The LSB can be found using a bitwise operation:
+The LSB (_Least Significante bit_) can be found using a bitwise operation:
 
 $$\text{LSB}(i) = i \& (-i)$$
 
 This operation isolates the last set bit in the binary representation of $i$, which helps define the size of the segment for which the cumulative sum is stored. The segment starts at index $i - \text{LSB}(i) + 1$ and ends at $i$.
 
-For example, consider the binary representations:
+When you perform the bitwise $AND$ operation between $i$ and $-i$, what happens is:
 
-- $i = 11 \ (1011_2)$: $\text{LSB}(11) = 1 \ (0001_2)$, so index 11 only stores the value at position 11.
+- $i$ in its binary form contains some bits set to 1.
+- $-i$ is the complement of $i$ plus 1, which means it inverts all the bits of $i$ up to the last bit set to 1, and this last bit set to 1 remains.
 
-- $i = 12 \ (1100_2)$: $\text{LSB}(12) = 4 \ (0100_2)$, so index 12 represents the sum of elements from index $9$ to $12$.
+This operation effectively isolates the last bit set to 1 in $i$. In other words, all bits to the right of the last set bit are zeroed, while the least significant bit that was set remains. For example, let's take $i = 11 \ (1011_2)$:
+
+- $i = 1011_2$
+- $-i = 0101_2$
+
+Now, applying $AND$ bit by bit:
+
+$$1011_2 \& 0101_2 = 0001_2$$
+
+Therefore, $\text{LSB}(11) = 1$. This means that index 11 in the Fenwick tree only covers the value stored at position 11. Now let's take $i = 12 \ (1100_2)$:
+
+- $i = 1100_2$
+- $-i = 0100_2$
+
+Now, applying $AND$ bit by bit:
+
+$$1100_2 \& 0100_2 = 0100_2$$
+
+Therefore, $\text{LSB}(12) = 4$. This means that index 12 in the Fenwick tree represents the sum of elements from index 9 to index 12.
 
 ##### Example
 
-Let's consider an array $A = [3, 2, -1, 6, 5, 4, -3, 3, 7, 2, 3, 1]$. The corresponding BIT will store cumulative sums for segments determined by the $\text{LSB}(i)$:
+Let's consider an array $A = [3, 2, -1, 6, 5, 4, -3, 3, 7, 2, 3, 1]$. The corresponding Fenwick tree will store cumulative sums for segments determined by the $\text{LSB}(i)$:
 
-| Index $i$ | Binary $i$ | LSB(i) | Cumulative Sum Represented         | Value Stored in BIT[i] |
-| --------- | ---------- | ------ | ---------------------------------- | ---------------------- |
-| 0         | $0000_2$   | 1      | $A[0]$                             | 3                      |
-| 1         | $0001_2$   | 1      | $A[1]$                             | 2                      |
-| 2         | $0010_2$   | 2      | $A[0] + A[1] + A[2]$               | 4                      |
-| 3         | $0011_2$   | 1      | $A[2]$                             | -1                     |
-| 4         | $0100_2$   | 4      | $A[0] + A[1] + A[2] + A[3] + A[4]$ | 15                     |
-| 5         | $0101_2$   | 1      | $A[5]$                             | 4                      |
-| 6         | $0110_2$   | 2      | $A[4] + A[5] + A[6]$               | 6                      |
-| 7         | $0111_2$   | 1      | $A[6]$                             | -3                     |
-| 8         | $1000_2$   | 8      | $A[0] + \dots + A[7]$              | 19                     |
-| 9         | $1001_2$   | 1      | $A[8]$                             | 7                      |
-| 10        | $1010_2$   | 2      | $A[8] + A[9]$                      | 9                      |
-| 11        | $1011_2$   | 1      | $A[10]$                            | 3                      |
-| 12        | $1100_2$   | 4      | $A[8] + A[9] + A[10] + A[11]$      | 13                     |
+| Index $i$ | Binary $i$ | LSB(i) | Cumulative Sum Represented         | Value Stored in Fenwick tree[i] |
+| --------- | ---------- | ------ | ---------------------------------- | ------------------------------- |
+| 0         | $0000_2$   | 1      | $A[0]$                             | 3                               |
+| 1         | $0001_2$   | 1      | $A[1]$                             | 2                               |
+| 2         | $0010_2$   | 2      | $A[0] + A[1] + A[2]$               | 4                               |
+| 3         | $0011_2$   | 1      | $A[2]$                             | -1                              |
+| 4         | $0100_2$   | 4      | $A[0] + A[1] + A[2] + A[3] + A[4]$ | 15                              |
+| 5         | $0101_2$   | 1      | $A[5]$                             | 4                               |
+| 6         | $0110_2$   | 2      | $A[4] + A[5] + A[6]$               | 6                               |
+| 7         | $0111_2$   | 1      | $A[6]$                             | -3                              |
+| 8         | $1000_2$   | 8      | $A[0] + \dots + A[7]$              | 19                              |
+| 9         | $1001_2$   | 1      | $A[8]$                             | 7                               |
+| 10        | $1010_2$   | 2      | $A[8] + A[9]$                      | 9                               |
+| 11        | $1011_2$   | 1      | $A[10]$                            | 3                               |
+| 12        | $1100_2$   | 4      | $A[8] + A[9] + A[10] + A[11]$      | 13                              |
 
-The value stored in each position of the BIT is the incremental contribution that helps compose the cumulative sum.
-For example, at position 2, the value stored is $4$, which is the sum of $A[0] + A[1] + A[2]$.
-At position 4, the value stored is $15$, which is the sum of $A[0] + A[1] + A[2] + A[3] + A[4]$.
+The value stored in each position of the Fenwick tree is the incremental contribution that helps compose the cumulative sum. For example, at position 2, the value stored is $4$, which is the sum of $A[0] + A[1] + A[2]$. At position 4, the value stored is $15$, which is the sum of $A[0] + A[1] + A[2] + A[3] + A[4]$.
 
-![]({{ site.baseurl }}/assets/images/bit1.jpg){: class="lazyimg"}
-_Gráfico 1.1 - Example BIT diagram._{: class="legend"}
+![]({{ site.baseurl }}/assets/images/bit1.jpg){: class="lazyimg"}  
+_Gráfico 1.1 - Example Fenwick tree diagram._{: class="legend"}
 
-##### Querying the BIT
+##### Querying the Fenwick tree
 
-When querying the sum of elements from the start of the array to index $i$, the BIT allows us to sum over non-overlapping segments by traversing the tree upwards:
+When querying the sum of elements from the start of the array to index $i$, the Fenwick tree allows us to sum over non-overlapping segments by traversing the tree upwards:
 
 Here's the pseudocode for the sum operation:
 
 ```python
 def sum(i):
     total = 0
-    i += 1  # adjust for 0-based index
-    while i > 0:
+    while i >= 0:
         total += BIT[i]
         i -= LSB(i)
     return total
@@ -2614,21 +2630,21 @@ For example, to compute the sum of elements from index $0$ to $5$, we perform th
 - Move to index 4, since $5 - \text{LSB}(5) = 4$. The LSB of 4 is 4, so add $A[0] + A[1] + A[2] + A[3] + A[4]$.
 
 Thus, the sum of elements from index $0$ to $5$ is:
+
 $$ \text{sum}(0, 5) = \text{BIT}[5] + \text{BIT}[4] = A[5] + (A[0] + A[1] + A[2] + A[3] + A[4]) $$
 
-##### Updating the BIT
+##### Updating the Fenwick tree
 
-When updating the value of an element in the original array, the BIT allows us to update all the relevant cumulative sums efficiently. Here's the pseudocode for the update operation:
+When updating the value of an element in the original array, the Fenwick tree allows us to update all the relevant cumulative sums efficiently. Here's the pseudocode for the update operation:
 
 ```python
 def update(i, delta):
-    i += 1  # adjust for 0-based index
-    while i <= n:  # n is the size of the BIT
+    while i < len(BIT):
         BIT[i] += delta
         i += LSB(i)
 ```
 
-For example, if we update $A[4]$, the BIT must update the sums stored at indices that cover $A[4]$'s range.
+For example, if we update $A[4]$, the Fenwick tree must update the sums stored at indices that cover $A[4]$'s range.
 
 - Start at index 4. Add the change to $\text{BIT}[4]$.
 - Move to index 8 and update $\text{BIT}[8]$.
@@ -2650,16 +2666,16 @@ void update(int i, int delta) {
 ```
 
 **[Image placeholder]**  
-_Illustrate the update process, showing how the BIT array is updated step by step using the least significant bit._
+_Illustrate the update process, showing how the Fenwick tree array is updated step by step using the least significant bit._
 
 ##### 4.2 Prefix Sum Query
 
-To compute the sum of elements from 1 to $i$:
+To compute the sum of elements from 0 to $i$:
 
 ```cpp
 int query(int i) {
     int sum = 0;
-    for (; i > 0; i -= i & (-i)) {
+    for (; i >= 0; i -= i & (-i)) {
         sum += BIT[i];
     }
     return sum;
@@ -2667,7 +2683,7 @@ int query(int i) {
 ```
 
 **[Image placeholder]**  
-_Visualize the prefix sum query operation, showing how the BIT is traversed from $i$ down to 0 using the least significant bit._
+_Visualize the prefix sum query operation, showing how the Fenwick tree is traversed from $i$ down to 0 using the least significant bit._
 
 ##### 4.3 Range Query
 
@@ -2679,19 +2695,19 @@ int rangeQuery(int l, int r) {
 }
 ```
 
-#### 5. BIT Construction
+#### 5. Fenwick tree Construction
 
-The BIT can be constructed in $O(n)$ time using the following technique:
+The Fenwick tree can be constructed in $O(n)$ time using the following technique:
 
 ```cpp
 vector<int> constructBIT(const vector<int>& arr) {
     int n = arr.size();
-    vector<int> BIT(n + 1, 0);
+    vector<int> BIT(n, 0);
     for (int i = 0; i < n; i++) {
-        int idx = i + 1;
+        int idx = i;
         BIT[idx] += arr[i];
         int parent = idx + (idx & (-idx));
-        if (parent <= n) {
+        if (parent < n) {
             BIT[parent] += BIT[idx];
         }
     }
@@ -2700,7 +2716,7 @@ vector<int> constructBIT(const vector<int>& arr) {
 ```
 
 **[Image placeholder]**  
-_An illustration that explains how the BIT is constructed from an array, showing the incremental process of building the tree._
+_An illustration that explains how the Fenwick tree is constructed from an array, showing the incremental process of building the tree._
 
 #### 6. Complexity Analysis
 
@@ -2713,7 +2729,7 @@ _An illustration that explains how the BIT is constructed from an array, showing
 
 ##### 7.1 Range Update and Point Query
 
-It is possible to modify the BIT to support range updates and point queries:
+It is possible to modify the Fenwick tree to support range updates and point queries:
 
 ```cpp
 void rangeUpdate(int l, int r, int val) {
@@ -2728,7 +2744,7 @@ int pointQuery(int i) {
 
 ##### 7.2 Range Update and Range Query
 
-To support both range updates and range queries, we need two BITs:
+To support both range updates and range queries, we need two Fenwick trees:
 
 ```cpp
 void rangeUpdate(int l, int r, int val) {
@@ -2747,9 +2763,9 @@ int rangeQuery(int l, int r) {
 }
 ```
 
-##### 7.3 2D BIT
+##### 7.3 2D Fenwick tree
 
-The BIT can be extended to two dimensions:
+The Fenwick tree can be extended to two dimensions:
 
 ```cpp
 void update2D(int x, int y, int delta) {
@@ -2760,15 +2776,15 @@ void update2D(int x, int y, int delta) {
 
 int query2D(int x, int y) {
     int sum = 0;
-    for (int i = x; i > 0; i -= i & (-i))
-        for (int j = y; j > 0; j -= j & (-j))
+    for (int i = x; i >= 0; i -= i & (-i))
+        for (int j = y; j >= 0; j -= j & (-j))
             sum += BIT[i][j];
     return sum;
 }
 ```
 
 **[Image placeholder]**  
-_A diagram illustrating how a 2D BIT operates, showing how updates and queries are performed in two dimensions._
+_A diagram illustrating how a 2D Fenwick tree operates, showing how updates and queries are performed in two dimensions._
 
 #### 8. Applications
 
@@ -2784,9 +2800,9 @@ _A diagram illustrating how a 2D BIT operates, showing how updates and queries a
 | Array        | $O(1)$      | $O(n)$      | $O(n)$ |
 | Prefix Sum   | $O(n)$      | $O(1)$      | $O(n)$ |
 | Segment Tree | $O(\log n)$ | $O(\log n)$ | $O(n)$ |
-| BIT          | $O(\log n)$ | $O(\log n)$ | $O(n)$ |
+| Fenwick tree | $O(\log n)$ | $O(\log n)$ | $O(n)$ |
 
-The BIT offers a good balance between update and query efficiency, with a simpler implementation than a Segment Tree.
+The Fenwick tree offers a good balance between update and query efficiency, with a simpler implementation than a Segment Tree.
 
 #### Problems
 
@@ -3567,9 +3583,9 @@ By distributing the workload across multiple threads, the program can achieve si
 >
 > This enables `reduce` to sum the elements in `vec` concurrently, improving efficiency on large arrays, especially in multi-core environments.
 
-#### Finally, the code using BIT
+#### Finally, the code using Fenwick tree
 
-I chose to write this code using as much modern C++ as possible. This means you will face two challenges. The first is understanding the BIT algorithm, and the second is understanding the C++ syntax. To help make this easier, I will explain the code block by block, highlighting each C++ feature and why I chose to write it this way.
+I chose to write this code using as much modern C++ as possible. This means you will face two challenges. The first is understanding the Fenwick tree algorithm, and the second is understanding the C++ syntax. To help make this easier, I will explain the code block by block, highlighting each C++ feature and why I chose to write it this way.
 
 **Code 4**:
 
@@ -3601,7 +3617,7 @@ class BIT {
     int n;
 
 public:
-    BIT(int size) : tree(size + 1), n(size) {}
+    Fenwick tree(int size) : tree(size + 1), n(size) {}
 
     void update(int i, int delta) {
         for (++i; i <= n; i += i & -i) tree[i] += delta;
