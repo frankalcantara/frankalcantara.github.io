@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-11T19:31:18.965Z
+lastmod: 2024-09-11T19:47:43.157Z
 ---
 
 ## Introduction
@@ -4167,7 +4167,7 @@ $$
 - **Time Complexity**: `O(n)` where `n` is the size of the input array.
 - **Space Complexity**: `O(n)` due to the input array and the two dictionaries used to store cumulative sums.
 
-#### Problem-3 - Inventory Restocking
+#### 3 - Inventory Restocking
 
 You manage a warehouse where products are stored and moved frequently. The warehouse tracks its inventory by recording the stock count at different times during the day in an array $inventory$. Occasionally, inventory managers report the amount by which a product's stock needs to be adjusted, represented by an integer array $adjustments$, where each adjustment is a pair $[adjustment, index]$. Your task is to apply these adjustments and after each, calculate the total count of products with even stock numbers.
 
@@ -4184,6 +4184,8 @@ You manage a warehouse where products are stored and moved frequently. The wareh
 - $-10^4 \leq inventory[i], adjustment \leq 10^4$
 
 **Example Input:**
+
+```text
 6
 10 3 5 6 8 2
 4
@@ -4191,12 +4193,16 @@ You manage a warehouse where products are stored and moved frequently. The wareh
 [-4, 0]
 [2, 3]
 [-3, 4]
+```
 
 **Example Output:**
+
+```text
 26
 16
 20
 16
+```
 
 **Explanation:**
 
@@ -4217,7 +4223,7 @@ The input will be provided via **hardcoded values** inside the code for testing 
 - After the third adjustment $[2, 3]$, the inventory becomes $[6, 6, 5, 8, 8, 2]$. The even numbers are $6$, $6$, $8$, $8$, $2$. The sum is $20$.
 - After the fourth adjustment $[-3, 4]$, the inventory becomes $[6, 6, 5, 8, 5, 2]$. The even numbers are $6$, $6$, $8$, $2$. The sum is $16$.
 
-\*\*Pseudo Code Solution using python:
+**Pseudo Code Solution using python**:
 
 Here is a Python solution that solves the problem as simply and directly as requested:
 
@@ -4253,7 +4259,7 @@ for _ in range(q):
     print(even_sum)
 ```
 
-In this pseudo code we can see:
+In this pseudocode, we observe the following steps:
 
 1. **Input Reading**: First, we read the value of $n$ (inventory size) and the integer array $inventory$. Then, we read the number of adjustments $q$ and each adjustment.
 2. **Initial Calculation**: We calculate the initial sum of even numbers in the $inventory$ array.
@@ -4298,7 +4304,7 @@ int main() {
 - **`1` in Binary**: The number $1$ in binary is represented as $0000...0001$ (depending on the size of the integer). Since only the least significant bit is set to $1$, this operation focuses specifically on the least significant bit of `inventory[i]`.
 - **Bitwise AND (`&`)**: The bitwise AND operator returns $1$ if both corresponding bits of the operands are $1$. For other cases, it returns $0$.
 
-In the naîve code this operation checks whether the **least significant bit** (LSB) of the value at `inventory[i]` is $1$ or $0$, which directly indicates if the number is odd or even:
+In the naïve code this operation checks whether the **least significant bit** (LSB) of the value at `inventory[i]` is $1$ or $0$, which directly indicates if the number is odd or even:
 
 - If the result of `inventory[i] & 1` is $1$, the number is **odd**.
 - If the result of `inventory[i] & 1` is $0$, the number is **even**.
@@ -4313,10 +4319,10 @@ This bitwise approach is **faster** than using the modulo operation (`inventory[
   - $5 \& 1 = 1$
   - Since the result is $1$, 5 is **odd**.
 
-  > ### Bitwise Operations in C++
-  >
-  > Bitwise operations in C++ manipulate individual bits of integers. These operations are low-level but powerful, allowing programmers to perform tasks like toggling, setting, or clearing specific bits. They are commonly used in scenarios where performance is critical, such as embedded systems, cryptography, and competitive programming.
-
+> ### Bitwise Operations in C++
+>
+> Bitwise operations in C++ manipulate individual bits of integers. These operations are low-level but powerful, allowing programmers to perform tasks like toggling, setting, or clearing specific bits. They are commonly used in scenarios where performance is critical, such as embedded systems, cryptography, and competitive programming.
+>
 > C++ provides several bitwise operators that work directly on the binary representation of numbers. These operators include:
 >
 > - **AND (`&`)**
