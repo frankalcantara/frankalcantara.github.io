@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-11T15:54:35.282Z
+lastmod: 2024-09-11T16:20:22.206Z
 ---
 
 ## Introduction
@@ -90,7 +90,7 @@ $$
 
 Here are some additional tips to improve your typing for competitive programming:
 
-1. **\*Use IDE shortcuts:** Learn keyboard shortcuts for your favorite Integrated Development Environment (IDE). Navigating and editing code using shortcuts reduces time spent moving between mouse and keyboard. In the case of [ICPC](https://icpc.global/) contests, the IDE provided will typically be [Eclipse](https://www.eclipse.org/downloads/packages/release/helios/sr2/eclipse-ide-cc-developers), so it’s crucial to familiarize yourself with its shortcuts and navigation to maximize efficiency during the competitive programming.
+1. **Use IDE shortcuts:** Learn keyboard shortcuts for your favorite Integrated Development Environment (IDE). Navigating and editing code using shortcuts reduces time spent moving between mouse and keyboard. In the case of [ICPC](https://icpc.global/) contests, the IDE provided will typically be [Eclipse](https://www.eclipse.org/downloads/packages/release/helios/sr2/eclipse-ide-cc-developers), so it’s crucial to familiarize yourself with its shortcuts and navigation to maximize efficiency during the competitive programming.
 2. **Focus on frequent patterns:** As you practice, focus on typing patterns you use frequently, such as loops, if-else conditions, and function declarations. Automating these patterns in your muscle memory will save valuable time.
 3. **Practice algorithm templates:** Some problems require similar algorithms, such as dynamic programming, sorting, or tree traversal. By practicing typing these algorithms regularly, you'll be able to quickly implement them during competitive programmings.
 
@@ -250,9 +250,7 @@ typedef std::vector<std::string> VS;
 
 #### 2. Replacing `#define` with Constants
 
-If you're using `#define` to define numeric constants, you can replace them with `constexpr`, which also integrates better with the C++ type system and offers compile-time type checking.
-
-Example:
+If you're using `#define` to define numeric constants, you can replace them with `constexpr`, which also integrates better with the C++ type system and offers compile-time type checking. A example should help:
 
 ```cpp
 #define PI 3.14159
@@ -264,7 +262,7 @@ Can be replaced with:
 constexpr double PI = 3.14159;
 ```
 
-**`constexpr` allows the value to be treated as a constant of the correct type (`double` in this case), providing type checks and optimizing the code during compilation**.
+_`constexpr` allows the value to be treated as a constant of the correct type (`double` in this case), providing type checks and optimizing the code during compilation\*\*._
 
 #### 3. Using `constexpr` in Functions
 
