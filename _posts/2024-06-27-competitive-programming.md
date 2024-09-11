@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-11T12:57:08.722Z
+lastmod: 2024-09-11T15:25:36.707Z
 ---
 
 ## Introduction
@@ -2492,91 +2492,301 @@ This technique uses a pre-processing step to store information about minimum val
 
 ### Binary Indexed Tree (BIT)
 
-The Binary Indexed Tree (BIT), also known as the Fenwick Tree[^4], is data structure designed to handle dynamic cumulative frequency tables. It enables us to perform point updates and range queries in logarithmic time, making it ideal for applications that involve frequent updates and queries, such as competitive programming problems and real-time data analysis. The BIT is primarily used for:
+The Binary Indexed Tree (BIT), also known as the Fenwick Tree, is an efficient data structure designed to handle dynamic cumulative frequency tables. It was introduced by Peter M. Fenwick in 1994 in his paper "A new data structure for cumulative frequency tables."
 
-- Efficiently calculating prefix sums.
-- Updating individual elements in a dynamic array.
+The BIT allows two main operations in $O(\log n)$ time:
 
-It is particularly well-suited for cases where frequent updates to an array are needed, along with queries that involve the sum of elements within a specific range.
+1. Compute the sum of elements in a range (range query)
+2. Update the value of an individual element (point update)
 
-[FIGURE 1: Comparative diagram showing the efficiency of the BIT versus naive methods for calculating prefix sums and performing updates.]
+These characteristics make the BIT ideal for applications involving frequent updates and queries, such as competitive programming problems and real-time data analysis.Consider the following problem: given an array $A$ of size $n$, efficiently perform the following operations:
 
-Given an array $A$ of size $n$, the BIT supports two main operations in $O(\log n)$ time:
+1. Update the value of an element at a specific position
+2. Compute the sum of elements in a range $[l, r]$
 
-1. **Querying the prefix sum** of elements from the start of the array up to a given index.
-2. **Updating** a specific element of the array with a given value.
+A naive approach to solve this problem would be:
 
-Unlike a naive approach where range sums might take $O(n)$ time, a BIT reduces this to $O(\log n)$ using a clever binary decomposition of the index range. The key idea behind the BIT is that each index represents a sum over a specific range of elements, and each range is carefully selected to ensure efficient updates and queries.
+```cpp
+void update(int i, int val) {
+    A[i] = val;
+}
 
-#### Structure and Construction
+int rangeSum(int l, int r) {
+    int sum = 0;
+    for (int i = l; i <= r; i++) {
+        sum += A[i];
+    }
+    return sum;
+}
+```
 
-A Binary Indexed Tree is typically implemented as a one-indexed array `tree[]`, where each element `tree[i]` stores the sum of a specific subrange of the original array. The size of each subrange is determined by the largest power of two that divides the index $i$. For example, `tree[6]` will store the sum of the elements in the subrange from index $5$ to $6$, as the largest power of two that divides $6$ is $2$.
+**[Image placeholder]**  
+_An illustration showing a naive approach to range sum computation, where each element of the array is accessed individually, leading to $O(n)$ complexity._
 
-[FIGURE 2: Visual representation of the BIT structure, showing how the elements of the original array are mapped to the tree nodes.]
+This solution has $O(1)$ complexity for updates and $O(n)$ for sum queries. To improve query efficiency, we could use a prefix sum array:
 
-The update and query operations in a BIT are defined using bitwise operations, which efficiently compute the index ranges involved in the sum or update.
+```cpp
+vector<int> prefixSum;
 
-#### Update Operation
+void buildPrefixSum() {
+    prefixSum.resize(A.size() + 1, 0);
+    for (int i = 0; i < A.size(); i++) {
+        prefixSum[i + 1] = prefixSum[i] + A[i];
+    }
+}
 
-To update the value at a specific index, we propagate the change to all relevant subranges. This can be done using the following formula for index manipulation:
+int rangeSum(int l, int r) {
+    return prefixSum[r + 1] - prefixSum[l];
+}
+```
 
-$$\text{next}(i) = i + (i \& -i)$$
+**[Image placeholder]**  
+_Visualize the prefix sum technique, where the prefix sums are precomputed and used to speed up range sum queries._
 
-Here, $i \& -i$ isolates the least significant set bit of $i$, and by adding this value to $i$, we determine the next index that needs to be updated. The process is repeated until we reach the end of the array.
+Now, sum queries have $O(1)$ complexity, but updates still require $O(n)$ to rebuild the prefix sum array.
 
-[FIGURE 3: Flowchart or animation showing the step-by-step process of an update operation in a BIT.]
+The Binary Indexed Tree offers a balance between these two approaches, allowing both updates and queries in $O(\log n)$.
 
-#### Query Operation
+#### 3. Fundamental Concept
 
-To query the prefix sum up to a given index $i$, we accumulate the values stored in the tree at positions corresponding to ranges that form a partition of the subarray $[1, i]$. The index manipulation for querying is given by:
+The Binary Indexed Tree (BIT) is built on the idea that each index $i$ in the tree stores a cumulative sum of elements from the original array. **The range of elements summed at each index $i$ is determined by the position of the least significant set bit (LSB) in the binary representation of $i$**.
 
-$$\text{prev}(i) = i - (i \& -i)$$
+> Note: In this explanation and the following examples, we use 0-based indexing. This means the first element of the array is at index 0, which is a common convention in programming.
 
-This formula works by subtracting the least significant set bit from $i$, which moves the index to the next subrange in the partition.
+The LSB can be found using a bitwise operation:
 
-[FIGURE 4: Flowchart or animation illustrating the step-by-step process of a query operation in a BIT.]
+$$\text{LSB}(i) = i \& (-i)$$
 
-#### Example: Construction and Operations
+This operation isolates the last set bit in the binary representation of $i$, which helps define the size of the segment for which the cumulative sum is stored. The segment starts at index $i - \text{LSB}(i) + 1$ and ends at $i$.
 
-Let’s consider an example array $A = [1, 3, 4, 8, 6, 1, 4, 2]$ and construct its corresponding BIT.
+For example, consider the binary representations:
 
-- Step 1: Initialize the BIT with zeros.
-- Step 2: Perform updates for each element of the array.
+- $i = 11 \ (1011_2)$: $\text{LSB}(11) = 1 \ (0001_2)$, so index 11 only stores the value at position 11.
 
-| Index     | 1   | 2   | 3   | 4   | 5   | 6   | 7   | 8   |
-| --------- | --- | --- | --- | --- | --- | --- | --- | --- |
-| $A[i]$    | 1   | 3   | 4   | 8   | 6   | 1   | 4   | 2   |
-| `tree[i]` | 1   | 4   | 4   | 16  | 6   | 7   | 4   | 29  |
+- $i = 12 \ (1100_2)$: $\text{LSB}(12) = 4 \ (0100_2)$, so index 12 represents the sum of elements from index $9$ to $12$.
 
-For example, `tree[4]` stores the sum of $A[1]$ to $A[4]$, and `tree[6]$ stores the sum of $A[5]$ and $A[6]$.
+##### Example
 
-[FIGURE 5: Visual representation of the constructed BIT, showing the correspondence between the elements of the original array and the tree nodes.]
+Let's consider an array $A = [3, 2, -1, 6, 5, 4, -3, 3, 7, 2, 3, 1]$. The corresponding BIT will store cumulative sums for segments determined by the $\text{LSB}(i)$:
 
-- Querying the sum from $1$ to $7$ involves summing the values in `tree[7]`, `tree[6]`, and `tree[4]`:
+| Index $i$ | Binary $i$ | LSB(i) | Cumulative Sum Represented         | Value Stored in BIT[i] |
+| --------- | ---------- | ------ | ---------------------------------- | ---------------------- |
+| 0         | $0000_2$   | 1      | $A[0]$                             | 3                      |
+| 1         | $0001_2$   | 1      | $A[1]$                             | 2                      |
+| 2         | $0010_2$   | 2      | $A[0] + A[1] + A[2]$               | 4                      |
+| 3         | $0011_2$   | 1      | $A[2]$                             | -1                     |
+| 4         | $0100_2$   | 4      | $A[0] + A[1] + A[2] + A[3] + A[4]$ | 15                     |
+| 5         | $0101_2$   | 1      | $A[5]$                             | 4                      |
+| 6         | $0110_2$   | 2      | $A[4] + A[5] + A[6]$               | 6                      |
+| 7         | $0111_2$   | 1      | $A[6]$                             | -3                     |
+| 8         | $1000_2$   | 8      | $A[0] + \dots + A[7]$              | 19                     |
+| 9         | $1001_2$   | 1      | $A[8]$                             | 7                      |
+| 10        | $1010_2$   | 2      | $A[8] + A[9]$                      | 9                      |
+| 11        | $1011_2$   | 1      | $A[10]$                            | 3                      |
+| 12        | $1100_2$   | 4      | $A[8] + A[9] + A[10] + A[11]$      | 13                     |
 
-$$\text{sum}(1,7) = 4 + 7 + 16 = 27$$
+The value stored in each position of the BIT is the incremental contribution that helps compose the cumulative sum.
+For example, at position 2, the value stored is $4$, which is the sum of $A[0] + A[1] + A[2]$.
+At position 4, the value stored is $15$, which is the sum of $A[0] + A[1] + A[2] + A[3] + A[4]$.
 
-This provides the sum of the elements from $A[1]$ to $A[7]$ in just three steps, instead of summing the entire subarray directly.
+![]({{ site.baseurl }}/assets/images/bit1.jpg){: class="lazyimg"}
+_Gráfico 1.1 - Example BIT diagram._{: class="legend"}
 
-#### Applications of Binary Indexed Trees
+##### Querying the BIT
 
-BITs are commonly used in a wide range of problems, such as:
+When querying the sum of elements from the start of the array to index $i$, the BIT allows us to sum over non-overlapping segments by traversing the tree upwards:
 
-- **Dynamic Range Queries**: Finding the sum of elements in a range subject to updates.
-- **Inversion Counting**: BITs can be used to efficiently count the number of inversions in an array.
-- **K-th Smallest Element Problem**: BITs help maintain an efficient dynamic frequency table for this type of query.
+Here's the pseudocode for the sum operation:
 
-**BITs can also be extended to work with multidimensional arrays, where updates and queries are performed across two or more dimensions. This makes the BIT a highly versatile and powerful tool in competitive programming**.
+```python
+def sum(i):
+    total = 0
+    i += 1  # adjust for 0-based index
+    while i > 0:
+        total += BIT[i]
+        i -= LSB(i)
+    return total
+```
 
-[FIGURE 6: Infographic showing different applications of BITs in various problem scenarios.]
+For example, to compute the sum of elements from index $0$ to $5$, we perform the following steps:
 
-#### Limitations and Extensions
+- Start at index 5. The LSB of 5 is 1, so add $A[5]$.
+- Move to index 4, since $5 - \text{LSB}(5) = 4$. The LSB of 4 is 4, so add $A[0] + A[1] + A[2] + A[3] + A[4]$.
 
-While BITs excel at sum queries and point updates, they are less suited for more complex range queries, such as finding the minimum or maximum in a given range. For such queries, segment trees are often a better choice.
+Thus, the sum of elements from index $0$ to $5$ is:
+$$ \text{sum}(0, 5) = \text{BIT}[5] + \text{BIT}[4] = A[5] + (A[0] + A[1] + A[2] + A[3] + A[4]) $$
 
-However, it is possible to extend BITs to support range updates and point queries by maintaining multiple BITs to handle different operations. This requires a more complex implementation but allows BITs to be used in scenarios where range queries and updates are required.
+##### Updating the BIT
 
-[FIGURE 7: Comparative diagram showing the capabilities and limitations of BITs versus other data structures, such as segment trees.]
+When updating the value of an element in the original array, the BIT allows us to update all the relevant cumulative sums efficiently. Here's the pseudocode for the update operation:
+
+```python
+def update(i, delta):
+    i += 1  # adjust for 0-based index
+    while i <= n:  # n is the size of the BIT
+        BIT[i] += delta
+        i += LSB(i)
+```
+
+For example, if we update $A[4]$, the BIT must update the sums stored at indices that cover $A[4]$'s range.
+
+- Start at index 4. Add the change to $\text{BIT}[4]$.
+- Move to index 8 and update $\text{BIT}[8]$.
+
+In each case, the number of operations required is proportional to the number of set bits in the index, which guarantees that both update and query operations run in $O(\log n)$.
+
+#### 4. Basic Operations
+
+##### 4.1 Update
+
+To update an element at position $i$, we traverse the tree as follows:
+
+```cpp
+void update(int i, int delta) {
+    for (; i < n; i += i & (-i)) {
+        BIT[i] += delta;
+    }
+}
+```
+
+**[Image placeholder]**  
+_Illustrate the update process, showing how the BIT array is updated step by step using the least significant bit._
+
+##### 4.2 Prefix Sum Query
+
+To compute the sum of elements from 1 to $i$:
+
+```cpp
+int query(int i) {
+    int sum = 0;
+    for (; i > 0; i -= i & (-i)) {
+        sum += BIT[i];
+    }
+    return sum;
+}
+```
+
+**[Image placeholder]**  
+_Visualize the prefix sum query operation, showing how the BIT is traversed from $i$ down to 0 using the least significant bit._
+
+##### 4.3 Range Query
+
+To compute the sum of elements in the range $[l, r]$:
+
+```cpp
+int rangeQuery(int l, int r) {
+    return query(r) - query(l - 1);
+}
+```
+
+#### 5. BIT Construction
+
+The BIT can be constructed in $O(n)$ time using the following technique:
+
+```cpp
+vector<int> constructBIT(const vector<int>& arr) {
+    int n = arr.size();
+    vector<int> BIT(n + 1, 0);
+    for (int i = 0; i < n; i++) {
+        int idx = i + 1;
+        BIT[idx] += arr[i];
+        int parent = idx + (idx & (-idx));
+        if (parent <= n) {
+            BIT[parent] += BIT[idx];
+        }
+    }
+    return BIT;
+}
+```
+
+**[Image placeholder]**  
+_An illustration that explains how the BIT is constructed from an array, showing the incremental process of building the tree._
+
+#### 6. Complexity Analysis
+
+- Construction: $O(n)$
+- Update: $O(\log n)$
+- Query: $O(\log n)$
+- Space: $O(n)$
+
+#### 7. Variations and Extensions
+
+##### 7.1 Range Update and Point Query
+
+It is possible to modify the BIT to support range updates and point queries:
+
+```cpp
+void rangeUpdate(int l, int r, int val) {
+    update(l, val);
+    update(r + 1, -val);
+}
+
+int pointQuery(int i) {
+    return query(i);
+}
+```
+
+##### 7.2 Range Update and Range Query
+
+To support both range updates and range queries, we need two BITs:
+
+```cpp
+void rangeUpdate(int l, int r, int val) {
+    update(BIT1, l, val);
+    update(BIT1, r + 1, -val);
+    update(BIT2, l, val * (l - 1));
+    update(BIT2, r + 1, -val * r);
+}
+
+int prefixSum(int i) {
+    return query(BIT1, i) * i - query(BIT2, i);
+}
+
+int rangeQuery(int l, int r) {
+    return prefixSum(r) - prefixSum(l - 1);
+}
+```
+
+##### 7.3 2D BIT
+
+The BIT can be extended to two dimensions:
+
+```cpp
+void update2D(int x, int y, int delta) {
+    for (int i = x; i < n; i += i & (-i))
+        for (int j = y; j < m; j += j & (-j))
+            BIT[i][j] += delta;
+}
+
+int query2D(int x, int y) {
+    int sum = 0;
+    for (int i = x; i > 0; i -= i & (-i))
+        for (int j = y; j > 0; j -= j & (-j))
+            sum += BIT[i][j];
+    return sum;
+}
+```
+
+**[Image placeholder]**  
+_A diagram illustrating how a 2D BIT operates, showing how updates and queries are performed in two dimensions._
+
+#### 8. Applications
+
+1. Efficient computation of prefix sums in mutable arrays
+2. Counting inversions in an array
+3. Solving the "k-th smallest element" problem
+4. Implementation of arithmetic coding algorithm
+
+#### 9. Comparison with Other Structures
+
+| Structure    | Update      | Query       | Space  |
+| ------------ | ----------- | ----------- | ------ |
+| Array        | $O(1)$      | $O(n)$      | $O(n)$ |
+| Prefix Sum   | $O(n)$      | $O(1)$      | $O(n)$ |
+| Segment Tree | $O(\log n)$ | $O(\log n)$ | $O(n)$ |
+| BIT          | $O(\log n)$ | $O(\log n)$ | $O(n)$ |
+
+The BIT offers a good balance between update and query efficiency, with a simpler implementation than a Segment Tree.
 
 #### Problems
 
