@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-11T12:54:10.574Z
+lastmod: 2024-09-11T12:57:08.722Z
 ---
 
 ## Introduction
@@ -2566,7 +2566,7 @@ BITs are commonly used in a wide range of problems, such as:
 - **Inversion Counting**: BITs can be used to efficiently count the number of inversions in an array.
 - **K-th Smallest Element Problem**: BITs help maintain an efficient dynamic frequency table for this type of query.
 
-BITs can also be extended to work with multidimensional arrays, where updates and queries are performed across two or more dimensions. This makes the BIT a highly versatile and powerful tool in competitive programming.
+**BITs can also be extended to work with multidimensional arrays, where updates and queries are performed across two or more dimensions. This makes the BIT a highly versatile and powerful tool in competitive programming**.
 
 [FIGURE 6: Infographic showing different applications of BITs in various problem scenarios.]
 
@@ -2584,7 +2584,7 @@ However, it is possible to extend BITs to support range updates and point querie
 
 You are responsible for monitoring and adjusting the humidity levels in a greenhouse that contains various plants. The greenhouse has a set of humidity sensors, represented by an array $humidity$, where each position in the array corresponds to the reading of a sensor.
 
-Throughout the day, you receive a series of adjustment instructions called $adjustments$. Each adjustment instruction is represented by a pair $[adjustment, sensor\_index]$, where $adjustment$ indicates the change that must be made to the reading of the sensor located at $sensor\_index$.
+Throughout the day, you receive a series of adjustment instructions called $adjustments$. Each adjustment instruction is represented by a pair $[\text{adjustment,} \, \text{sensor}\_index]$, where $adjustment$ indicates the change that must be made to the reading of the sensor located at $s\text{sensor}\_index$.
 
 After each adjustment, you must verify the sum of the humidity levels that are within an acceptable range (i.e., are even).
 
