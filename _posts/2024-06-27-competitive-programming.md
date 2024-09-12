@@ -3,32 +3,32 @@ layout: post
 title: Competitive programming in C++ - Techniques and Insights
 author: Frank
 categories:
-  - Matemática
-  - Linguagens Formais
-  - Programação
+    - Matemática
+    - Linguagens Formais
+    - Programação
 tags:
-  - Matemática
-  - Linguagens Formais
-  - Programação Dinâmica
-  - Dynamic Programming
-  - Dynamic Programming
-  - C++ Algorithms
-  - Performance Analysis
-  - Coding Examples
-  - Algorithm Optimization
-  - Practical Programming Guide
+    - Matemática
+    - Linguagens Formais
+    - Programação Dinâmica
+    - Dynamic Programming
+    - Dynamic Programming
+    - C++ Algorithms
+    - Performance Analysis
+    - Coding Examples
+    - Algorithm Optimization
+    - Practical Programming Guide
 image: assets/images/prog_dynamic.jpeg
 description: Dynamic Programming in C++ with practical examples, performance analysis, and detailed explanations to optimize your coding skills and algorithm efficiency.
 slug: dynamic-programming
 keywords:
-  - Dynamic Programming
-  - C++ Algorithms
-  - Coding Examples
-  - Performance Optimization
-  - Algorithm Efficiency
-  - Programming Guide
-  - Code Comparison
-  - Developer Tips
+    - Dynamic Programming
+    - C++ Algorithms
+    - Coding Examples
+    - Performance Optimization
+    - Algorithm Efficiency
+    - Programming Guide
+    - Code Comparison
+    - Developer Tips
 rating: 5
 published: 2024-06-27T19:43:15.124Z
 draft: null
@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-12T01:25:17.603Z
+lastmod: 2024-09-12T16:53:49.210Z
 ---
 
 ## Introduction
@@ -762,7 +762,6 @@ std::cin >> n;
     process_output(numbers);
 
     return 0;
-
 }
 ```
 
@@ -831,11 +830,11 @@ int main() {
 }
 ```
 
-Using threads for parallel I/O can improve performance in scenarios where there is a large volume of data to be read or written, especially if the reading time can be _masked_ while another thread is processing data or preparing the next phase of the program.
+Using threads for parallel I/O can improve performance in scenarios where there is a large volume of data to be read or written, especially if the reading time can be masked while another thread is processing data or preparing the next phase of the program.
 
 However, this technique should be used with care. Adding threads and asynchronous operations increases code complexity, requiring careful synchronization to avoid race conditions or data inconsistencies. That's why we should avoid this technique in competitive programming. While parallelism can improve execution time, creating and managing threads also has a computational cost. In some cases, the gain may not justify the added complexity. In many competitive programming environments, I/O is simple and sequential, meaning that this technique may not always be necessary or beneficial. It should be used in scenarios with extremely heavy I/O workloads or when processing and reading/writing can be separated.
 
-The use of parallel I/O in programming competitive programmings typically applies to scenarios where there are many read/write operations or when the program needs to process large volumes of data while still reading or writing files. This situation is usual in [AI competitive programmings](https://opencv.org/opencv-ai-competitive programming-2021/) and in hackatons. This technique can be useful in problems involving the manipulation of large datasets or intensive input/output processing, such as in "big data" challenges or reading/writing from disks. However, due to its complexity, the use of `std::async` and threads should be reserved for cases where parallelism offers a significant advantage over traditional sequential I/O.
+The use of parallel I/O in programming competitive programmings typically applies to scenarios where there are many read/write operations or when the program needs to process large volumes of data while still reading or writing files. This situation is usual in [AI competitive programmings](https://opencv.org/opencv-ai-competitive-programming-2021/) and in hackatons. This technique can be useful in problems involving the manipulation of large datasets or intensive input/output processing, such as in "big data" challenges or reading/writing from disks. However, due to its complexity, the use of `std::async` and threads should be reserved for cases where parallelism offers a significant advantage over traditional sequential I/O.
 
 ### Maximizing Input/Output Efficiency in Competitive Programming (Windows and Linux)
 
@@ -1588,7 +1587,7 @@ int main() {
 }
 ```
 
-### How `std::span` Works:
+**How `std::span` Works**:
 
 $ \text{std::span<int> view(numbers);} $ creates a non-owning view of the `std::vector<int>` `numbers`. This allows access to the elements of the vector without copying them. The loop $ \text{for (int num : view)} $ iterates over the elements in the `std::span`, just like it would with the original `std::vector`, but with no additional overhead from copying the data.
 
@@ -2242,7 +2241,6 @@ Choosing the right type of `while` loop depends on the nature of the input and t
 | Large      | `while` with Early Exit                    | Improves performance by terminating the loop early when a specific condition is met, saving unnecessary iterations.        |
 | Large      | `while` with Complex Conditions            | Allows dynamic and flexible exit conditions, making it suitable for large datasets with evolving parameters.               |
 | Continuous | Infinite `while` Loop with Explicit Breaks | Best for situations where the exact number of iterations is unknown and depends on external factors or dynamic conditions. |
-|            |
 
 ## Special Loops in C++20 for Competitive Programming
 
@@ -2560,11 +2558,11 @@ Note: André is very skilled, so don't worry about the real-world physics of bal
 
 ####### Naïve Solution
 
-This solution is considered _naïve_ because it doesn't take advantage of any precomputation or optimization techniques such as the _Prefix Sum Array_. Instead, it recalculates the sum of elements to the left and right of each plate using two separate loops for every plate. This leads to a time complexity of $O(n^2)$, as for each plate, the entire array is traversed twice — once for the left sum and once for the right sum.
+This solution is considered naïve because it doesn't take advantage of any precomputation or optimization techniques such as the Prefix Sum Array. Instead, it recalculates the sum of elements to the left and right of each plate using two separate loops for every plate. This leads to a time complexity of $O(n^2)$, as for each plate, the entire array is traversed twice — once for the left sum and once for the right sum.
 
-A developer who writes this kind of code typically has a basic understanding of problem-solving but might not be familiar with more advanced algorithms or computational complexity analysis. They often rely on straightforward, brute-force approaches, focusing on getting a working solution without considering performance for large datasets. While this approach works for small inputs, it quickly becomes inefficient for larger ones due to its quadratic complexity.
+_A developer who writes this kind of code typically has a basic understanding of problem-solving but might not be familiar with more advanced algorithms or computational complexity analysis_. They often rely on straightforward, brute-force approaches, focusing on getting a working solution without considering performance for large datasets. While this approach works for small inputs, it quickly becomes inefficient for larger ones due to its quadratic complexity.
 
-The following is a Python pseudocode version of the _naïve_ C++ solution, using the same variables and logic:
+The following is a Python pseudocode version of the naïve C++ solution, using the same variables and logic:
 
 ```python
 def find_magic_plate_naive(plates):
@@ -2653,7 +2651,7 @@ int main() {
 }
 ```
 
-The C++20 code implements a naïve solution to the Magic Plate problem by iterating over each plate and calculating the sum of the plates to its left and right. For each plate, two separate loops are used: one for calculating the left sum and another for calculating the right sum. The outer loop runs through all the plates, starting from the first plate to the last, and for each plate, the two sums are calculated to determine if it is the Magic Plate.
+The C++20 code implements a solution to the Magic Plate problem by iterating over each plate and calculating the sum of the plates to its left and right. For each plate, two separate loops are used: one for calculating the left sum and another for calculating the right sum. The outer loop runs through all the plates, starting from the first plate to the last, and for each plate, the two sums are calculated to determine if it is the Magic Plate.
 
 The left sum is calculated by iterating from the first plate up to, but not including, the current plate. As the code checks plates further down the list, the left sum loop becomes longer, meaning that plates near the end of the list require more iterations. Similarly, the right sum is calculated by looping through the plates to the right of the current plate. This right sum loop becomes longer for plates near the beginning of the list. The code compares these two sums, and if they are equal, the current plate index is returned as the solution. If no such plate is found, the function returns `-1`.
 
@@ -2668,7 +2666,7 @@ The following table summarizes the time and space complexities of each step in t
 | Outer Loop (Plates Iteration) | Looping through each plate                             | $O(n)$          | $O(1)$           |
 | Overall Complexity            | Total time and space complexities                      | $O(n^2)$        | $O(1)$           |
 
-This approach, while correct, leads to a quadratic time complexity of $O(n^2)$ because it recalculates the sums from scratch for every plate. The space complexity remains constant at $O(1)$, as no extra space is required beyond the scalar variables for sum calculation. There are better solutions.
+This approach, while correct, leads to a quadratic time complexity of $O(n^2)$ because it recalculates the sums from scratch for every plate. The space complexity remains constant at $O(1)$, as no extra space is required beyond the scalar variables for sum calculation. Nevertheless, there are better solutions.
 
 ####### Prefix Sum Array Solution
 
@@ -2711,7 +2709,7 @@ result = find_magic_plate(plates)
 print(result)  # Should print 0
 ```
 
-And now using C++ 20 to implement the Prefix Sum Array algorithm:
+Now a solution using C++ 20 to implement the Prefix Sum Array algorithm without any consideration about verbosity:
 
 ```cpp
 #include <iostream>
@@ -2775,13 +2773,13 @@ int main() {
 }
 ```
 
-The code implements the _Prefix Sum Array_ algorithm to solve the problem _The Plate Balancer_. The approach starts by creating a prefix sum array (`prefix_sum`), which stores the cumulative sum of elements from the original `plates` array. The construction of this prefix sum array has a time complexity of $O(n)$, where $n$ is the number of plates. The _Prefix Sum Array_ is built in such a way that for each index $i$, the value `prefix_sum[i]` contains the sum of all elements from `plates[0]` to `plates[i-1]`. This allows the sum of elements to the left of a given index to be computed in constant time $O(1)$ by simply accessing `prefix_sum[i-1]`.
+The code implements the _Prefix Sum Array_ algorithm to solve the problem The Plate Balancer. The approach starts by creating a prefix sum array (`prefix_sum`), which stores the cumulative sum of elements from the original `plates` array. The construction of this prefix sum array has a time complexity of $O(n)$, where $n$ is the number of plates. The Prefix Sum Array is built in such a way that for each index $i$, the value `prefix_sum[i]` contains the sum of all elements from `plates[0]` to `plates[i-1]`. This allows the sum of elements to the left of a given index to be computed in constant time $O(1)$ by simply accessing `prefix_sum[i-1]`.
 
-The construction of the _Prefix Sum Array_ takes linear time $O(n)$ and requires additional space $O(n)$ for the array. For each plate, calculating the left and right sums is constant in time $O(1)$ due to the prefix sum array, but this is done $n$ times, resulting in $O(n)$ overall. The total sum is derived from the last value of the _Prefix Sum Array_, which is computed in constant time $O(1)$.
+The construction of the Prefix Sum Array takes linear time $O(n)$ and requires additional space $O(n)$ for the array. For each plate, calculating the left and right sums is constant in time $O(1)$ due to the prefix sum array, but this is done $n$ times, resulting in $O(n)$ overall. The total sum is derived from the last value of the Prefix Sum Array, which is computed in constant time $O(1)$.
 
-After building the _Prefix Sum Array_, the code uses it to calculate the left and right sums for each plate. The left sum of a plate at index $i$ is given by `prefix_sum[i-1]`, while the right sum is derived by subtracting `prefix_sum[i]` from the total sum (`total_sum`). If the left and right sums are equal, the index of the plate is returned as the Magic Plate. Otherwise, the loop continues to check all plates. If no balanced plate is found, the code returns `-1`, indicating that there is no Magic Plate.
+After building the Prefix Sum Array, the code uses it to calculate the left and right sums for each plate. The left sum of a plate at index $i$ is given by `prefix_sum[i-1]`, while the right sum is derived by subtracting `prefix_sum[i]` from the total sum (`total_sum`). If the left and right sums are equal, the index of the plate is returned as the Magic Plate. Otherwise, the loop continues to check all plates. If no balanced plate is found, the code returns `-1`, indicating that there is no Magic Plate.
 
-The implementation follows the _Prefix Sum Array_ algorithm efficiently, constructing the array in linear time $O(n)$, and checking if a plate is the Magic Plate in constant time $O(1)$ for each plate. The logic in C++20 utilizes standard functions such as `std::vector`, ensuring simplicity and clarity in the code. The identifiers have been adjusted to match those from the Python pseudocode, maintaining the same logic and structure as the original algorithm. Below is a detailed analysis of the time and space complexities for each operation in the C++20 implementation:
+The implementation follows the Prefix Sum Array algorithm efficiently, constructing the array in linear time $O(n)$, and checking if a plate is the Magic Plate in constant time $O(1)$ for each plate. The logic in C++20 utilizes standard functions such as `std::vector`, ensuring simplicity and clarity in the code. The identifiers have been adjusted to match those from the Python pseudocode, maintaining the same logic and structure as the original algorithm. Below is a detailed analysis of the time and space complexities for each operation in the C++20 implementation:
 
 | Step                           | Operation                                            | Time Complexity  | Space Complexity            |
 | ------------------------------ | ---------------------------------------------------- | ---------------- | --------------------------- |
@@ -2793,7 +2791,7 @@ The implementation follows the _Prefix Sum Array_ algorithm efficiently, constru
 
 ##### Competitive Solution
 
-The following C++20 code implements the _Prefix Sum Array_ algorithm, with several optimizations designed to reduce typing effort in a competitive programming context. We eliminated the use of functions, as the entire code is kept within the `main` block, avoiding the overhead of function calls. This approach prioritizes minimal typing and fast execution by copying and pasting the logic rather than encapsulating it into reusable components.
+The following C++20 code implements the _Prefix Sum Array_ algorithm, with several optimizations designed to reduce typing effort in a competitive programming context. We eliminated the use of functions, as the entire code is kept within the `main` block, avoiding the overhead of function calls. _This approach prioritizes minimal typing and fast execution by copying and pasting the logic rather than encapsulating it into reusable components_.
 
 **Key changes made**:
 
@@ -2803,13 +2801,13 @@ The following C++20 code implements the _Prefix Sum Array_ algorithm, with sever
 
 3. **Hardcoded input examples**: The input examples are directly written into the code (hardcoded), as is typical in competitive programming when no external input is required. The three provided examples are executed sequentially without the need for interactive input, allowing us to focus purely on solving the problem quickly.
 
-4. **Avoidance of function calls**: We opted to avoid wrapping the _Prefix Sum Array_ logic into functions to eliminate the slight cost of function calls. This decision was driven by the understanding that, in a competitive environment, even minimal overheads can accumulate and impact performance. Instead, we simply copied and pasted the algorithm, leveraging the simplicity and speed of direct logic execution.
+4. _**Avoidance of function calls**: We opted to avoid wrapping the Prefix Sum Array logic into functions to eliminate the slight cost of function calls. This decision was driven by the understanding that, in a competitive environment, even minimal overheads can accumulate and impact performance. Instead, we simply copied and pasted the algorithm, leveraging the simplicity and speed of direct logic execution_.
 
 **Warnings**:
 
 During the development of this code, some warnings arose, such as a potential arithmetic overflow when performing summations and a warning about the conversion from `size_t` to `int`. To mitigate the risk of overflow, we made adjustments by using `long long` for the array and sums. However, the warning regarding the `size_t` to `int` conversion persists. This conversion warning arises because `size_t` is often used for the size of arrays, but we assign it to an `int` type. While this may lead to data loss in rare edge cases with very large data sizes, in the context of competitive programming where input sizes are usually constrained, this warning can be safely ignored.
 
-Moreover, reducing the typing effort is crucial in competitive environments, and using `int` is often the most efficient approach when dealing with moderately sized inputs, which are common in contests. As such, we chose to keep this conversion despite the warning, knowing that it will not significantly affect the correctness of our solution for typical competition scenarios.
+_Moreover, reducing the typing effort is crucial in competitive environments, and using `int` is often the most efficient approach when dealing with moderately sized inputs, which are common in contests. As such, we chose to keep this conversion despite the warning, knowing that it will not significantly affect the correctness of our solution for typical competition scenarios_.
 
 > In C++20, `size_t` is an unsigned integer type, typically used to represent the size of objects or memory blocks. It is an alias for an unsigned integer that can hold the size of the largest object your system can handle. Its size depends on the architecture of the system:
 >
@@ -2828,7 +2826,7 @@ Moreover, reducing the typing effort is crucial in competitive environments, and
 > - **`++i`** is the **pre-increment** operator, which increments the value of `i` first and then returns the incremented value.
 > - **`i++`** is the **post-increment** operator, which returns the current value of `i` first and then increments it.
 >
-> The main difference between the two is in performance when used in certain contexts, particularly with non-primitive types like iterators. Using `++i` is slightly more efficient than `i++` because `i++` might involve creating a temporary copy of the value before incrementing, while `++i` modifies the value directly. For example:
+> _The main difference between the two is in performance when used in certain contexts, particularly with non-primitive types like iterators_. Using `++i` is slightly more efficient than `i++` because `i++` might involve creating a temporary copy of the value before incrementing, while `++i` modifies the value directly. For example:
 >
 > ```cpp
 > int i = 0;
@@ -2836,9 +2834,7 @@ Moreover, reducing the typing effort is crucial in competitive environments, and
 > int b = i++; // b = 1, i = 2 (post-increment: use the value first, then increment)
 > ```
 
-While creating a function would typically make the code cleaner and more modular, in this specific context of competitive programming, where inputs are hardcoded and every nanosecond counts, we chose to avoid this additional cost.
-
-Below is the final competitive code:
+Below is the final competitive, and ugly, code:
 
 ```cpp
 #include <iostream>
@@ -2848,8 +2844,8 @@ using namespace std;
 
 using ps = vector<int>;  // Alias for prefix_sum as a vector of long long
 using ts = int;          // Alias for total_sum as long long
-using pl = vector<int>;        // Alias for plates as a vector of int
-using vi = vector<int>;        // Alias for vector of int (similar to vi)
+using pl = vector<int>;  // Alias for plates as a vector of int
+using vi = vector<int>;  // Alias for vector of int (similar to vi)
 
 int main() {
     vi pl;
@@ -2902,472 +2898,151 @@ int main() {
 }
 ```
 
-#### 1.2 Difference Arrays
+#### 1.2 Difference Array: Efficient Range Updates
 
-Optimizes range updates to $O(1)$ by storing differences between adjacent
+The Difference Array algorithm is a powerful technique for handling multiple range update operations efficiently. It's particularly useful when you need to perform many updates on an array and only query the final result after all updates are complete. Optimizes range updates to $O(1)$ by storing differences between adjacent
 elements.
 
-- Algorithm: Difference Array
+Consider an array $A$ of size $n$. The difference array $D$ is defined as:
 
-- Problem Example: "Humidity Levels in a Greenhouse" - Applies adjustments at specific array positions
+$$
+D[i] = \begin{cases}
+A[i] - A[i-1], & \text{if } i > 0 \\
+A[i], & \text{if } i = 0
+\end{cases}
+$$
 
-#### 1.3 Static Array Queries
+Each element in $D$ represents the difference between consecutive elements in $A$. The key property of the difference array is that a range update on $A$ can be performed using only two operations on $D$.
 
-Techniques for arrays that don't change between queries, allowing efficient pre-calculations.
+To add a value $x$ to all elements in $A$ from index $l$ to $r$ (inclusive), we do:
 
-- Algorithm: Sparse Table
+$$D[l] += x$$
 
-- Problem Example: "Inventory Restocking" - Performs queries after each inventory adjustment
+$$D[r+1] -= x (\text{if} $r+1 < n)$$
 
-#### 1.4 Range Minimum Queries (RMQ)
+After all updates, we can reconstruct $A$ from $D$ using:
 
-Data structure to find the minimum in any range in $O(1)$ after $O(n \log n)$ preprocessing.
+$$A[i] = \sum_{j=0}^i D[j]$$
 
-- Algorithm: Sparse Table for RMQ
+This technique allows for $O(1)$ time complexity for each range update operation.
 
-#### 1.5 Fenwick Tree
+The Difference Array algorithm shines in various scenarios where multiple range updates are required, and the final result needs to be computed only after all updates have been applied. Here are some common applications where this technique proves to be particularly effective:
 
-Data structure for prefix sums and efficient updates, with operations in $O(\log n)$.
+1. **Range update queries**: When you need to perform multiple range updates and only query the final array state.
+2. **Traffic flow analysis**: Modeling entry and exit points of vehicles on a road.
+3. **Event scheduling**: Managing overlapping time slots or resources.
+4. **Image processing**: Applying filters or adjustments to specific regions of an image.
+5. **Time series data**: Efficiently updating ranges in time series data.
+6. **Competitive programming**: Solving problems involving multiple range updates.
 
-- Algorithm: Binary Indexed Tree (BIT)
-
-### 2. Sliding Window Algorithms
-
-Techniques for efficiently processing contiguous subarrays of fixed size.
-
-#### 2.1 Sliding Window Minimum
-
-Finds the minimum in a fixed-size window that slides through the array in $O(n)$ using a deque.
-
-- Algorithm: Monotonic Deque
-
-#### 2.2 Sliding Window Maximum
-
-Similar to the minimum, but for finding the maximum in each window.
-
-- Algorithm: Monotonic Deque
-
-- Problem Example: "Weather Monitoring System" - Uses a sliding window of size k to find the subarray with the highest average
-
-### 3. Multiple Query Processing
-
-Methods for handling multiple queries efficiently.
-
-#### 3.1 Mo's Algorithm
-
-Processes multiple range queries in $O((n + q) \sqrt{n})$, where $n$ is the array size and $q$ is the number of queries.
-
-- Algorithm: Mo's Algorithm
-
-- Problem Example: "Humidity Levels in a Greenhouse" - Processes multiple adjustment queries and sum calculations
-
-### 4. Auxiliary Data Structures
-
-Specific data structures used to optimize operations on arrays.
-
-#### 4.1 Deque (for Sliding Window Minimum/Maximum)
-
-Double-ended queue that maintains relevant elements of the current window.
-
-#### 4.2 Sparse Table (for RMQ)
-
-Structure that stores pre-computed results for power-of-2 intervals.
-
-#### 4.3 Segment Tree
-
-Tree-based data structure for range queries and updates in $O(\log n)$.
-
-### 5. Complexity Optimization Techniques
-
-Methods to reduce the computational complexity of common operations.
-
-#### 5.1 Reduction from $O(n^2)$ to $O(n)$
-
-Use of prefix sums to optimize range sum calculations.
-
-- Problem Example: "Sales Target Analysis" - Uses prefix sum technique to optimize subarray calculations
-
-#### 5.2 Update in $O(1)$
-
-Difference arrays for constant-time range updates.
-
-- Problem Example: "Inventory Restocking" - Makes point adjustments to the inventory
-
-#### 5.3 Query in $O(1)$ after preprocessing
-
-RMQ and static array queries with instant responses after pre-calculation.
-
-- Problem Example: "The Plate Balancer" - After calculating cumulative sums, can find the "Magic Plate" in O(n)
-
-#### 5.4 Processing in $O((n + q) \sqrt{n})$
-
-Mo's Algorithm to optimize multiple range queries.
-
-### 6. Subarray Algorithms
-
-Specific techniques for problems involving subarrays.
-
-#### 6.1 Kadane's Algorithm
-
-Finds the contiguous subarray with the largest sum in $O(n)$. Useful for sum maximization problems.
-
-- Algorithm: Kadane's Algorithm
-
-#### 6.2 Two Pointers
-
-Technique for problems involving pairs of elements or subarrays that satisfy certain conditions.
-
-- Algorithm: Two Pointers Method
-
-### 7. Hashing Techniques
-
-Methods that use hashing to optimize certain operations on arrays.
-
-#### 7.1 Prefix Hash
-
-Uses hashing to quickly compare substrings or subarrays.
-
-- Algorithm: Rolling Hash
-
-#### 7.2 Rolling Hash
-
-Technique to efficiently calculate hashes of substrings or subarrays when sliding a window.
-
-- Algorithm: Rabin-Karp Algorithm
-
-### 8. Partitioning Algorithms
-
-Techniques for dividing or reorganizing arrays.
-
-#### 8.1 Partition Algorithm (QuickSelect)
-
-Used to find the kth smallest element in average linear time.
-
-- Algorithm: QuickSelect
-
-#### 8.2 Dutch National Flag
-
-Algorithm to partition an array into three parts, useful in sorting problems with few unique values.
-
-- Algorithm: Dutch National Flag Algorithm
-
-### The Fenwick Tree
-
-The Fenwick Tree, also know as Binary Indexed Tree (BIT), is an efficient data structure designed to handle dynamic cumulative frequency tables. It was introduced by Peter M. Fenwick in 1994 in his paper _"A new data structure for cumulative frequency tables."_
-
-The Fenwick tree allows two main operations in $O(\log n)$ time:
-
-1. Compute the sum of elements in a range (range query)
-2. Update the value of an individual element (point update)
-
-These characteristics make the Fenwick tree ideal for applications involving frequent updates and queries, such as competitive programming problems and real-time data analysis. Consider the following problem: given an array $A$ of size $n$, efficiently perform the following operations:
-
-1. Update the value of an element at a specific position
-2. Compute the sum of elements in a range $[l, r]$
-
-A naive approach to solve this problem would be:
-
-```cpp
-void update(int i, int val) {
-    A[i] = val;
-}
-
-int rangeSum(int l, int r) {
-int sum = 0;
-for (int i = l; i <= r; i++) {
-sum += A[i];
-}
-return sum;
-}
-```
-
-**[Image placeholder]**  
-_An illustration showing a naive approach to range sum computation, where each element of the array is accessed individually, leading to $O(n)$ complexity._
-
-This solution has $O(1)$ complexity for updates and $O(n)$ for sum queries. To improve query efficiency, we could use a prefix sum array:
-
-```cpp
-vector<int> prefixSum;
-
-void buildPrefixSum() {
-prefixSum.resize(A.size() + 1, 0);
-for (int i = 0; i < A.size(); i++) {
-prefixSum[i + 1] = prefixSum[i] + A[i];
-}
-}
-
-int rangeSum(int l, int r) {
-return prefixSum[r + 1] - prefixSum[l];
-}
-```
-
-**[Image placeholder]**  
-_Visualize the prefix sum technique, where the prefix sums are precomputed and used to speed up range sum queries._
-
-Now, sum queries have $O(1)$ complexity, but updates still require $O(n)$ to rebuild the prefix sum array.
-
-The Binary Indexed Tree offers a balance between these two approaches, allowing both updates and queries in $O(\log n)$.
-
-#### 3. Fundamental Concept
-
-The Binary Indexed Tree (BIT) is built on the idea that each index $i$ in the tree stores a cumulative sum of elements from the original array. **The range of elements summed at each index $i$ is determined by the position of the least significant set bit (LSB) in the binary representation of $i$**.
-
-> Note: In this explanation and the following examples, we use 0-based indexing. This means the first element of the array is at index 0, which is a common convention in programming.
-
-The LSB (_Least Significante bit_) can be found using a bitwise operation:
-
-$$\text{LSB}(i) = i \& (-i)$$
-
-This operation isolates the last set bit in the binary representation of $i$, which helps define the size of the segment for which the cumulative sum is stored. The segment starts at index $i - \text{LSB}(i) + 1$ and ends at $i$.
-
-When you perform the bitwise $AND$ operation between $i$ and $-i$, what happens is:
-
-- $i$ in its binary form contains some bits set to 1.
-- $-i$ is the complement of $i$ plus 1, which means it inverts all the bits of $i$ up to the last bit set to 1, and this last bit set to 1 remains.
-
-This operation effectively isolates the last bit set to 1 in $i$. In other words, all bits to the right of the last set bit are zeroed, while the least significant bit that was set remains. For example, let's take $i = 11 \ (1011_2)$:
-
-- $i = 1011_2$
-- $-i = 0101_2$
-
-Now, applying $AND$ bit by bit:
-
-$$1011_2 \& 0101_2 = 0001_2$$
-
-Therefore, $\text{LSB}(11) = 1$. This means that index 11 in the Fenwick tree only covers the value stored at position 11. Now let's take $i = 12 \ (1100_2)$:
-
-- $i = 1100_2$
-- $-i = 0100_2$
-
-Now, applying $AND$ bit by bit:
-
-$$1100_2 \& 0100_2 = 0100_2$$
-
-Therefore, $\text{LSB}(12) = 4$. This means that index 12 in the Fenwick tree represents the sum of elements from index 9 to index 12.
-
-##### Example
-
-Let's consider an array $A = [3, 2, -1, 6, 5, 4, -3, 3, 7, 2, 3, 1]$. The corresponding Fenwick tree will store cumulative sums for segments determined by the $\text{LSB}(i)$:
-
-| Index $i$ | Binary $i$ | LSB(i) | Cumulative Sum Represented         | Value Stored in Fenwick tree[i] |
-| --------- | ---------- | ------ | ---------------------------------- | ------------------------------- |
-| 0         | $0000_2$   | 1      | $A[0]$                             | 3                               |
-| 1         | $0001_2$   | 1      | $A[1]$                             | 2                               |
-| 2         | $0010_2$   | 2      | $A[0] + A[1] + A[2]$               | 4                               |
-| 3         | $0011_2$   | 1      | $A[2]$                             | -1                              |
-| 4         | $0100_2$   | 4      | $A[0] + A[1] + A[2] + A[3] + A[4]$ | 15                              |
-| 5         | $0101_2$   | 1      | $A[5]$                             | 4                               |
-| 6         | $0110_2$   | 2      | $A[4] + A[5] + A[6]$               | 6                               |
-| 7         | $0111_2$   | 1      | $A[6]$                             | -3                              |
-| 8         | $1000_2$   | 8      | $A[0] + \dots + A[7]$              | 19                              |
-| 9         | $1001_2$   | 1      | $A[8]$                             | 7                               |
-| 10        | $1010_2$   | 2      | $A[8] + A[9]$                      | 9                               |
-| 11        | $1011_2$   | 1      | $A[10]$                            | 3                               |
-| 12        | $1100_2$   | 4      | $A[8] + A[9] + A[10] + A[11]$      | 13                              |
-
-The value stored in each position of the Fenwick tree is the incremental contribution that helps compose the cumulative sum. For example, at position 2, the value stored is $4$, which is the sum of $A[0] + A[1] + A[2]$. At position 4, the value stored is $15$, which is the sum of $A[0] + A[1] + A[2] + A[3] + A[4]$.
-
-![]({{ site.baseurl }}/assets/images/bit1.jpg){: class="lazyimg"}  
-_Gráfico 1.1 - Example Fenwick tree diagram._{: class="legend"}
-
-##### Querying the Fenwick tree
-
-When querying the sum of elements from the start of the array to index $i$, the Fenwick tree allows us to sum over non-overlapping segments by traversing the tree upwards:
-
-Here's the pseudocode for the sum operation:
+**Algorithm Implementation**: Pseudocode
 
 ```python
-def sum(i):
-    total = 0
-    while i >= 0:
-        total += BIT[i]
-        i -= LSB(i)
-    return total
+def initialize_diff_array(A):
+    n = len(A)
+    D = [0] * (n + 1)
+    D[0] = A[0]
+    for i in range(1, n):
+        D[i] = A[i] - A[i-1]
+    return D
+
+def range_update(D, l, r, x):
+    D[l] += x
+    if r + 1 < len(D):
+        D[r + 1] -= x
+
+def reconstruct_array(D):
+    A = [0] * (len(D) - 1)  # A has size len(D) - 1
+    A[0] = D[0]
+    for i in range(1, len(A)):  # Iterate only over valid indices of A
+        A[i] = A[i-1] + D[i]
+    return A
+
+# Usage
+
+A = [0, 0, 0, 0]
+D = initialize_diff_array(A)
+range_update(D, 1, 2, 3) # Add 3 to A[1:3]
+range_update(D, 0, 1, 2) # Add 2 to A[0:2]
+result = reconstruct_array(D)
+print(result) # Output: [2, 5, 3, 0]
 ```
 
-For example, to compute the sum of elements from index $0$ to $5$, we perform the following steps:
-
-- Start at index 5. The LSB of 5 is 1, so add $A[5]$.
-- Move to index 4, since $5 - \text{LSB}(5) = 4$. The LSB of 4 is 4, so add $A[0] + A[1] + A[2] + A[3] + A[4]$.
-
-Thus, the sum of elements from index $0$ to $5$ is:
-
-$$ \text{sum}(0, 5) = \text{BIT}[5] + \text{BIT}[4] = A[5] + (A[0] + A[1] + A[2] + A[3] + A[4]) $$
-
-##### Updating the Fenwick tree
-
-When updating the value of an element in the original array, the Fenwick tree allows us to update all the relevant cumulative sums efficiently. Here's the pseudocode for the update operation:
-
-```python
-def update(i, delta):
-    while i < len(BIT):
-        BIT[i] += delta
-        i += LSB(i)
-```
-
-For example, if we update $A[4]$, the Fenwick tree must update the sums stored at indices that cover $A[4]$'s range.
-
-- Start at index 4. Add the change to $\text{BIT}[4]$.
-- Move to index 8 and update $\text{BIT}[8]$.
-
-In each case, the number of operations required is proportional to the number of set bits in the index, which guarantees that both update and query operations run in $O(\log n)$.
-
-#### 4. Basic Operations
-
-##### 4.1 Update
-
-To update an element at position $i$, we traverse the tree as follows:
+**Algorithm Implementation**: C++20
 
 ```cpp
-void update(int i, int delta) {
-    for (; i < n; i += i & (-i)) {
-        BIT[i] += delta;
+#include <iostream>
+#include <vector>
+
+class DifferenceArray {
+    private:
+        std::vector<int> diff;
+
+public:
+    DifferenceArray(const std::vector<int>& A) {
+        diff.resize(A.size() + 1);
+        diff[0] = A[0];
+        for (size_t i = 1; i < A.size(); ++i) {
+            diff[i] = A[i] - A[i-1];
     }
 }
-```
 
-**[Image placeholder]**  
-_Illustrate the update process, showing how the Fenwick tree array is updated step by step using the least significant bit._
-
-##### 4.2 Prefix Sum Query
-
-To compute the sum of elements from 0 to $i$:
-
-```cpp
-int query(int i) {
-    int sum = 0;
-    for (; i >= 0; i -= i & (-i)) {
-        sum += BIT[i];
-    }
-    return sum;
-}
-```
-
-**[Image placeholder]**  
-_Visualize the prefix sum query operation, showing how the Fenwick tree is traversed from $i$ down to 0 using the least significant bit._
-
-##### 4.3 Range Query
-
-To compute the sum of elements in the range $[l, r]$:
-
-```cpp
-int rangeQuery(int l, int r) {
-    return query(r) - query(l - 1);
-}
-```
-
-#### 5. Fenwick tree Construction
-
-The Fenwick tree can be constructed in $O(n)$ time using the following technique:
-
-```cpp
-vector<int> constructBIT(const vector<int>& arr) {
-    int n = arr.size();
-    vector<int> BIT(n, 0);
-    for (int i = 0; i < n; i++) {
-        int idx = i;
-        BIT[idx] += arr[i];
-        int parent = idx + (idx & (-idx));
-        if (parent < n) {
-            BIT[parent] += BIT[idx];
+    void rangeUpdate(int l, int r, int x) {
+        diff[l] += x;
+        if (r + 1 < diff.size()) {
+            diff[r + 1] -= x;
         }
     }
-    return BIT;
+
+    std::vector<int> reconstructArray() {
+        std::vector<int> A(diff.size() - 1);
+        A[0] = diff[0];
+        for (size_t i = 1; i < A.size(); ++i) {
+            A[i] = A[i-1] + diff[i];
+        }
+        return A;
+    }
+
+};
+
+int main() {
+std::vector<int> A = {0, 0, 0, 0};
+DifferenceArray da(A);
+
+    da.rangeUpdate(1, 2, 3);  // Add 3 to A[1:3]
+    da.rangeUpdate(0, 1, 2);  // Add 2 to A[0:2]
+
+    auto result = da.reconstructArray();
+
+    for (int num : result) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;  // Output: 2 5 3 0
+
+    return 0;
 }
 ```
 
-**[Image placeholder]**  
-_An illustration that explains how the Fenwick tree is constructed from an array, showing the incremental process of building the tree._
+**Time and Space Complexity**:
 
-#### 6. Complexity Analysis
+Constructing the difference array requires $O(n)$ time, as we compute the differences between adjacent elements in the original array. Each range update operation is performed in constant time, $O(1)$, since only two elements in the difference array are modified. To reconstruct the final array, we traverse the entire difference array and compute the prefix sums, which takes $O(n)$. The space complexity of the algorithm is $O(n)$ because the difference array requires an additional array of size $n + 1$.
 
-- Construction: $O(n)$
-- Update: $O(\log n)$
-- Query: $O(\log n)$
-- Space: $O(n)$
+Thus, the total time complexity for the algorithm is $O(n + q)$, where $n$ is the size of the array and $q$ is the number of updates. The space complexity remains $O(n)$.
 
-#### 7. Variations and Extensions
+| Operation              | Time Complexity | Space Complexity |
+| ---------------------- | --------------- | ---------------- |
+| Initialization         | $O(n)$          | $O(n)$           |
+| Range update           | $O(1)$          | $O(n)$           |
+| Array reconstruction   | $O(n)$          | $O(n)$           |
+| **Overall Complexity** | $O(n + q)$      | $O(n)$           |
 
-##### 7.1 Range Update and Point Query
+**Advantages and Limitations**:
 
-It is possible to modify the Fenwick tree to support range updates and point queries:
+The Difference Array algorithm is highly efficient for handling multiple range updates. It allows constant time updates, $O(1)$, which makes it particularly useful in scenarios with a large number of updates. This efficiency makes the algorithm well-suited for large-scale problems that require numerous updates.
 
-```cpp
-void rangeUpdate(int l, int r, int val) {
-    update(l, val);
-    update(r + 1, -val);
-}
+However, the algorithm is not ideal for frequent individual element queries, as reconstructing the array after updates takes $O(n)$. Additionally, to access individual elements after performing multiple updates, it requires a full array reconstruction, which can be a drawback in cases where immediate access to array elements is needed.
 
-int pointQuery(int i) {
-    return query(i);
-}
-```
-
-##### 7.2 Range Update and Range Query
-
-To support both range updates and range queries, we need two Fenwick trees:
-
-```cpp
-void rangeUpdate(int l, int r, int val) {
-    update(BIT1, l, val);
-    update(BIT1, r + 1, -val);
-    update(BIT2, l, val * (l - 1));
-    update(BIT2, r + 1, -val * r);
-}
-
-int prefixSum(int i) {
-    return query(BIT1, i) * i - query(BIT2, i);
-}
-
-int rangeQuery(int l, int r) {
-    return prefixSum(r) - prefixSum(l - 1);
-}
-```
-
-##### 7.3 2D Fenwick tree
-
-The Fenwick tree can be extended to two dimensions:
-
-```cpp
-void update2D(int x, int y, int delta) {
-    for (int i = x; i < n; i += i & (-i))
-        for (int j = y; j < m; j += j & (-j))
-            BIT[i][j] += delta;
-}
-
-int query2D(int x, int y) {
-    int sum = 0;
-    for (int i = x; i >= 0; i -= i & (-i))
-        for (int j = y; j >= 0; j -= j & (-j))
-            sum += BIT[i][j];
-    return sum;
-}
-```
-
-**[Image placeholder]**  
-_A diagram illustrating how a 2D Fenwick tree operates, showing how updates and queries are performed in two dimensions._
-
-#### 8. Applications
-
-1. Efficient computation of prefix sums in mutable arrays
-2. Counting inversions in an array
-3. Solving the "k-th smallest element" problem
-4. Implementation of arithmetic coding algorithm
-
-#### 9. Comparison with Other Structures
-
-| Structure    | Update      | Query       | Space  |
-| ------------ | ----------- | ----------- | ------ |
-| Array        | $O(1)$      | $O(n)$      | $O(n)$ |
-| Prefix Sum   | $O(n)$      | $O(1)$      | $O(n)$ |
-| Segment Tree | $O(\log n)$ | $O(\log n)$ | $O(n)$ |
-| Fenwick tree | $O(\log n)$ | $O(\log n)$ | $O(n)$ |
-
-The Fenwick tree offers a good balance between update and query efficiency, with a simpler implementation than a Segment Tree.
-
-#### Problems
-
-##### 1. Humidity Levels in a Greenhouse (Frank - 09-2024 - Easy)
+##### Problem Example: "Humidity Levels in a Greenhouse" (Problem 1)
 
 You are responsible for monitoring and adjusting the humidity levels in a greenhouse that contains various plants. The greenhouse has a set of humidity sensors, represented by an array $humidity$, where each position in the array corresponds to the reading of a sensor.
 
@@ -3434,7 +3109,38 @@ Output: $[140,140,162,230,230]$
 
 3. Return the `results` list
 
-**Code 1**:
+**Implementation**: Pseudo code.
+
+```python
+def calculate_even_sum_after_adjustments(humidity, adjustments):
+    # Inicializa uma lista para armazenar os resultados
+    results = []
+
+    # Para cada ajuste na lista de ajustes
+    for adjustment, sensor_index in adjustments:
+        # Atualiza o valor do sensor correspondente no array de umidade
+        humidity[sensor_index] += adjustment
+
+        # Calcula a soma dos valores pares na lista de umidade
+        even_sum = 0
+        for h in humidity:
+            if h % 2 == 0:  # Verifica se o valor é par
+                even_sum += h
+
+        # Adiciona a soma atual dos valores pares na lista de resultados
+        results.append(even_sum)
+
+    # Retorna a lista de resultados
+    return results
+
+# Exemplo de uso:
+humidity = [45, 52, 33, 64]
+adjustments = [[5, 0], [-20, 1], [-14, 0], [18, 3]]
+result = calculate_even_sum_after_adjustments(humidity, adjustments)
+print(result)  # Saída: [166, 146, 132, 150]
+```
+
+**Implementation**: C++ 20
 
 ```cpp
 #include <iostream>  // Includes the library for input and output operations.
@@ -3511,7 +3217,7 @@ int main() {
 }
 ```
 
-The only noteworthy fragment is the lambda function used to calculate the sum sum in:
+The only noteworthy fragment in previous C++ implementation is the lambda function used to calculate the sum in:
 
 ```cpp
 // Calculates the sum of even values in the humidity array after the update.
@@ -3521,7 +3227,7 @@ The only noteworthy fragment is the lambda function used to calculate the sum su
             });
 ```
 
-This line calculates the sum of even values in the `humidity` array after the update. The `accumulate` function is used to iterate over the `humidity` array and sum only the even values. The first two parameters, `humidity.begin()` and `humidity.end()`, define the range of elements in the array to be processed. The third parameter, `0LL`, initializes the accumulator with a value of 0, where `LL` specifies that it is a `long long` integer.
+This line calculates the sum of even values in the `humidity` array after the update. The `accumulate` function is used to iterate over the `humidity` array and sum only the even values. The first two parameters, `humidity.begin()` and `humidity.end()`, define the range of elements in the array to be processed. The third parameter, `0LL`, initializes the accumulator with a value of $0$, where `LL` specifies that it is a `long long` integer.
 
 The fourth parameter is a lambda function that takes two arguments: `acc`, which is the accumulated sum so far, and `val`, the current value being processed from the array. Inside the lambda function, the expression `val % 2 == 0 ? val : 0` checks whether the current value `val` is even (i.e., divisible by 2). If `val` is even, it is added to the accumulator `acc`; otherwise, 0 is added, which does not affect the sum.
 
@@ -3740,7 +3446,7 @@ In total, the space complexity is $O(n + m)$.
 
 The usage of `long long` ensures that the results and intermediate sums are safe from overflow, but it may slightly increase memory usage compared to using `int`. The overall space requirements are manageable within typical constraints in competitive programming environments, where both $n$ and $m$ are capped at $10^4$.
 
-##### Algorithm for a Slightly Less Naive Code
+#### Algorithm for a Slightly Less Naive Code
 
 1. Initialization:
 
@@ -4411,6 +4117,7 @@ The conditional compilation directives (`#if`, `#elif`, `#else`) are used to inc
 These preprocessor directives enable the program to easily switch between input methods without having to manually modify the logic inside `main`, providing flexibility depending on how the input is expected during execution. But, since we are using C++20, this might not be the best solution. It may be the fastest for competitions, but there is a fundamental reason why I'm making things a bit more complex here. Beyond just learning how to write code for competitions, we are also learning C++20. Let's start by:
 
 The code starts by importing the `std` namespace globally with **`using namespace std;`, which allows using standard C++ objects (like `cout`, `vector`, etc.) without having to prefix them with `std::`**.
+s
 
 ```cpp
 using namespace std;  // Use the standard namespace to avoid typing "std::" before standard types.
@@ -4562,6 +4269,462 @@ The **`inline constexpr`** constant `input_method` specifies which input method 
 > In summary, **`inline`** helps with reducing overhead by allowing the compiler to replace function calls with the actual function code, and it prevents multiple definitions of variables in multiple translation units. **`constexpr`** enables computations to be performed at compile time, which can significantly optimize performance by avoiding runtime calculations, although its applicability in competitive programming may be limited.
 
 AINDA TEM MUITO QUE EXPLICAR AQUI.
+
+#### 1.3 Static Array Queries
+
+Techniques for arrays that don't change between queries, allowing efficient pre-calculations.
+
+- Algorithm: Sparse Table
+
+- Problem Example: "Inventory Restocking" - Performs queries after each inventory adjustment
+
+#### 1.4 Range Minimum Queries (RMQ)
+
+Data structure to find the minimum in any range in $O(1)$ after $O(n \log n)$ preprocessing.
+
+- Algorithm: Sparse Table for RMQ
+
+#### 1.5 Fenwick Tree
+
+Data structure for prefix sums and efficient updates, with operations in $O(\log n)$.
+
+- Algorithm: Binary Indexed Tree (BIT)
+
+### 2. Sliding Window Algorithms
+
+Techniques for efficiently processing contiguous subarrays of fixed size.
+
+#### 2.1 Sliding Window Minimum
+
+Finds the minimum in a fixed-size window that slides through the array in $O(n)$ using a deque.
+
+- Algorithm: Monotonic Deque
+
+#### 2.2 Sliding Window Maximum
+
+Similar to the minimum, but for finding the maximum in each window.
+
+- Algorithm: Monotonic Deque
+
+- Problem Example: "Weather Monitoring System" - Uses a sliding window of size k to find the subarray with the highest average
+
+### 3. Multiple Query Processing
+
+Methods for handling multiple queries efficiently.
+
+#### 3.1 Mo's Algorithm
+
+Processes multiple range queries in $O((n + q) \sqrt{n})$, where $n$ is the array size and $q$ is the number of queries.
+
+- Algorithm: Mo's Algorithm
+
+- Problem Example: "Humidity Levels in a Greenhouse" - Processes multiple adjustment queries and sum calculations
+
+### 4. Auxiliary Data Structures
+
+Specific data structures used to optimize operations on arrays.
+
+#### 4.1 Deque (for Sliding Window Minimum/Maximum)
+
+Double-ended queue that maintains relevant elements of the current window.
+
+#### 4.2 Sparse Table (for RMQ)
+
+Structure that stores pre-computed results for power-of-2 intervals.
+
+#### 4.3 Segment Tree
+
+Tree-based data structure for range queries and updates in $O(\log n)$.
+
+### 5. Complexity Optimization Techniques
+
+Methods to reduce the computational complexity of common operations.
+
+#### 5.1 Reduction from $O(n^2)$ to $O(n)$
+
+Use of prefix sums to optimize range sum calculations.
+
+- Problem Example: "Sales Target Analysis" - Uses prefix sum technique to optimize subarray calculations
+
+#### 5.2 Update in $O(1)$
+
+Difference arrays for constant-time range updates.
+
+- Problem Example: "Inventory Restocking" - Makes point adjustments to the inventory
+
+#### 5.3 Query in $O(1)$ after preprocessing
+
+RMQ and static array queries with instant responses after pre-calculation.
+
+- Problem Example: "The Plate Balancer" - After calculating cumulative sums, can find the "Magic Plate" in O(n)
+
+#### 5.4 Processing in $O((n + q) \sqrt{n})$
+
+Mo's Algorithm to optimize multiple range queries.
+
+### 6. Subarray Algorithms
+
+Specific techniques for problems involving subarrays.
+
+#### 6.1 Kadane's Algorithm
+
+Finds the contiguous subarray with the largest sum in $O(n)$. Useful for sum maximization problems.
+
+- Algorithm: Kadane's Algorithm
+
+#### 6.2 Two Pointers
+
+Technique for problems involving pairs of elements or subarrays that satisfy certain conditions.
+
+- Algorithm: Two Pointers Method
+
+### 7. Hashing Techniques
+
+Methods that use hashing to optimize certain operations on arrays.
+
+#### 7.1 Prefix Hash
+
+Uses hashing to quickly compare substrings or subarrays.
+
+- Algorithm: Rolling Hash
+
+#### 7.2 Rolling Hash
+
+Technique to efficiently calculate hashes of substrings or subarrays when sliding a window.
+
+- Algorithm: Rabin-Karp Algorithm
+
+### 8. Partitioning Algorithms
+
+Techniques for dividing or reorganizing arrays.
+
+#### 8.1 Partition Algorithm (QuickSelect)
+
+Used to find the kth smallest element in average linear time.
+
+- Algorithm: QuickSelect
+
+#### 8.2 Dutch National Flag
+
+Algorithm to partition an array into three parts, useful in sorting problems with few unique values.
+
+- Algorithm: Dutch National Flag Algorithm
+
+### The Fenwick Tree
+
+The Fenwick Tree, also know as Binary Indexed Tree (BIT), is an efficient data structure designed to handle dynamic cumulative frequency tables. It was introduced by Peter M. Fenwick in 1994 in his paper _"A new data structure for cumulative frequency tables."_
+
+The Fenwick tree allows two main operations in $O(\log n)$ time:
+
+1. Compute the sum of elements in a range (range query)
+2. Update the value of an individual element (point update)
+
+These characteristics make the Fenwick tree ideal for applications involving frequent updates and queries, such as competitive programming problems and real-time data analysis. Consider the following problem: given an array $A$ of size $n$, efficiently perform the following operations:
+
+1. Update the value of an element at a specific position
+2. Compute the sum of elements in a range $[l, r]$
+
+A naive approach to solve this problem would be:
+
+```cpp
+void update(int i, int val) {
+    A[i] = val;
+}
+
+int rangeSum(int l, int r) {
+int sum = 0;
+for (int i = l; i <= r; i++) {
+sum += A[i];
+}
+return sum;
+}
+```
+
+**[Image placeholder]**  
+_An illustration showing a naive approach to range sum computation, where each element of the array is accessed individually, leading to $O(n)$ complexity._
+
+This solution has $O(1)$ complexity for updates and $O(n)$ for sum queries. To improve query efficiency, we could use a prefix sum array:
+
+```cpp
+vector<int> prefixSum;
+
+void buildPrefixSum() {
+prefixSum.resize(A.size() + 1, 0);
+for (int i = 0; i < A.size(); i++) {
+prefixSum[i + 1] = prefixSum[i] + A[i];
+}
+}
+
+int rangeSum(int l, int r) {
+return prefixSum[r + 1] - prefixSum[l];
+}
+```
+
+**[Image placeholder]**  
+_Visualize the prefix sum technique, where the prefix sums are precomputed and used to speed up range sum queries._
+
+Now, sum queries have $O(1)$ complexity, but updates still require $O(n)$ to rebuild the prefix sum array.
+
+The Binary Indexed Tree offers a balance between these two approaches, allowing both updates and queries in $O(\log n)$.
+
+#### 3. Fundamental Concept
+
+The Binary Indexed Tree (BIT) is built on the idea that each index $i$ in the tree stores a cumulative sum of elements from the original array. **The range of elements summed at each index $i$ is determined by the position of the least significant set bit (LSB) in the binary representation of $i$**.
+
+> Note: In this explanation and the following examples, we use 0-based indexing. This means the first element of the array is at index 0, which is a common convention in programming.
+
+The LSB (_Least Significante bit_) can be found using a bitwise operation:
+
+$$\text{LSB}(i) = i \& (-i)$$
+
+This operation isolates the last set bit in the binary representation of $i$, which helps define the size of the segment for which the cumulative sum is stored. The segment starts at index $i - \text{LSB}(i) + 1$ and ends at $i$.
+
+When you perform the bitwise $AND$ operation between $i$ and $-i$, what happens is:
+
+- $i$ in its binary form contains some bits set to 1.
+- $-i$ is the complement of $i$ plus 1, which means it inverts all the bits of $i$ up to the last bit set to 1, and this last bit set to 1 remains.
+
+This operation effectively isolates the last bit set to 1 in $i$. In other words, all bits to the right of the last set bit are zeroed, while the least significant bit that was set remains. For example, let's take $i = 11 \ (1011_2)$:
+
+- $i = 1011_2$
+- $-i = 0101_2$
+
+Now, applying $AND$ bit by bit:
+
+$$1011_2 \& 0101_2 = 0001_2$$
+
+Therefore, $\text{LSB}(11) = 1$. This means that index 11 in the Fenwick tree only covers the value stored at position 11. Now let's take $i = 12 \ (1100_2)$:
+
+- $i = 1100_2$
+- $-i = 0100_2$
+
+Now, applying $AND$ bit by bit:
+
+$$1100_2 \& 0100_2 = 0100_2$$
+
+Therefore, $\text{LSB}(12) = 4$. This means that index 12 in the Fenwick tree represents the sum of elements from index 9 to index 12.
+
+##### Example
+
+Let's consider an array $A = [3, 2, -1, 6, 5, 4, -3, 3, 7, 2, 3, 1]$. The corresponding Fenwick tree will store cumulative sums for segments determined by the $\text{LSB}(i)$:
+
+| Index $i$ | Binary $i$ | LSB(i) | Cumulative Sum Represented         | Value Stored in Fenwick tree[i] |
+| --------- | ---------- | ------ | ---------------------------------- | ------------------------------- |
+| 0         | $0000_2$   | 1      | $A[0]$                             | 3                               |
+| 1         | $0001_2$   | 1      | $A[1]$                             | 2                               |
+| 2         | $0010_2$   | 2      | $A[0] + A[1] + A[2]$               | 4                               |
+| 3         | $0011_2$   | 1      | $A[2]$                             | -1                              |
+| 4         | $0100_2$   | 4      | $A[0] + A[1] + A[2] + A[3] + A[4]$ | 15                              |
+| 5         | $0101_2$   | 1      | $A[5]$                             | 4                               |
+| 6         | $0110_2$   | 2      | $A[4] + A[5] + A[6]$               | 6                               |
+| 7         | $0111_2$   | 1      | $A[6]$                             | -3                              |
+| 8         | $1000_2$   | 8      | $A[0] + \dots + A[7]$              | 19                              |
+| 9         | $1001_2$   | 1      | $A[8]$                             | 7                               |
+| 10        | $1010_2$   | 2      | $A[8] + A[9]$                      | 9                               |
+| 11        | $1011_2$   | 1      | $A[10]$                            | 3                               |
+| 12        | $1100_2$   | 4      | $A[8] + A[9] + A[10] + A[11]$      | 13                              |
+
+The value stored in each position of the Fenwick tree is the incremental contribution that helps compose the cumulative sum. For example, at position 2, the value stored is $4$, which is the sum of $A[0] + A[1] + A[2]$. At position 4, the value stored is $15$, which is the sum of $A[0] + A[1] + A[2] + A[3] + A[4]$.
+
+![]({{ site.baseurl }}/assets/images/bit1.jpg){: class="lazyimg"}  
+_Gráfico 1.1 - Example Fenwick tree diagram._{: class="legend"}
+
+##### Querying the Fenwick tree
+
+When querying the sum of elements from the start of the array to index $i$, the Fenwick tree allows us to sum over non-overlapping segments by traversing the tree upwards:
+
+Here's the pseudocode for the sum operation:
+
+```python
+def sum(i):
+    total = 0
+    while i >= 0:
+        total += BIT[i]
+        i -= LSB(i)
+    return total
+```
+
+For example, to compute the sum of elements from index $0$ to $5$, we perform the following steps:
+
+- Start at index 5. The LSB of 5 is 1, so add $A[5]$.
+- Move to index 4, since $5 - \text{LSB}(5) = 4$. The LSB of 4 is 4, so add $A[0] + A[1] + A[2] + A[3] + A[4]$.
+
+Thus, the sum of elements from index $0$ to $5$ is:
+
+$$ \text{sum}(0, 5) = \text{BIT}[5] + \text{BIT}[4] = A[5] + (A[0] + A[1] + A[2] + A[3] + A[4]) $$
+
+##### Updating the Fenwick tree
+
+When updating the value of an element in the original array, the Fenwick tree allows us to update all the relevant cumulative sums efficiently. Here's the pseudocode for the update operation:
+
+```python
+def update(i, delta):
+    while i < len(BIT):
+        BIT[i] += delta
+        i += LSB(i)
+```
+
+For example, if we update $A[4]$, the Fenwick tree must update the sums stored at indices that cover $A[4]$'s range.
+
+- Start at index 4. Add the change to $\text{BIT}[4]$.
+- Move to index 8 and update $\text{BIT}[8]$.
+
+In each case, the number of operations required is proportional to the number of set bits in the index, which guarantees that both update and query operations run in $O(\log n)$.
+
+#### 4. Basic Operations
+
+##### 4.1 Update
+
+To update an element at position $i$, we traverse the tree as follows:
+
+```cpp
+void update(int i, int delta) {
+    for (; i < n; i += i & (-i)) {
+        BIT[i] += delta;
+    }
+}
+```
+
+**[Image placeholder]**  
+_Illustrate the update process, showing how the Fenwick tree array is updated step by step using the least significant bit._
+
+##### 4.2 Prefix Sum Query
+
+To compute the sum of elements from 0 to $i$:
+
+```cpp
+int query(int i) {
+    int sum = 0;
+    for (; i >= 0; i -= i & (-i)) {
+        sum += BIT[i];
+    }
+    return sum;
+}
+```
+
+**[Image placeholder]**  
+_Visualize the prefix sum query operation, showing how the Fenwick tree is traversed from $i$ down to 0 using the least significant bit._
+
+##### 4.3 Range Query
+
+To compute the sum of elements in the range $[l, r]$:
+
+```cpp
+int rangeQuery(int l, int r) {
+    return query(r) - query(l - 1);
+}
+```
+
+#### 5. Fenwick tree Construction
+
+The Fenwick tree can be constructed in $O(n)$ time using the following technique:
+
+```cpp
+vector<int> constructBIT(const vector<int>& arr) {
+    int n = arr.size();
+    vector<int> BIT(n, 0);
+    for (int i = 0; i < n; i++) {
+        int idx = i;
+        BIT[idx] += arr[i];
+        int parent = idx + (idx & (-idx));
+        if (parent < n) {
+            BIT[parent] += BIT[idx];
+        }
+    }
+    return BIT;
+}
+```
+
+**[Image placeholder]**  
+_An illustration that explains how the Fenwick tree is constructed from an array, showing the incremental process of building the tree._
+
+#### 6. Complexity Analysis
+
+- Construction: $O(n)$
+- Update: $O(\log n)$
+- Query: $O(\log n)$
+- Space: $O(n)$
+
+#### 7. Variations and Extensions
+
+##### 7.1 Range Update and Point Query
+
+It is possible to modify the Fenwick tree to support range updates and point queries:
+
+```cpp
+void rangeUpdate(int l, int r, int val) {
+    update(l, val);
+    update(r + 1, -val);
+}
+
+int pointQuery(int i) {
+    return query(i);
+}
+```
+
+##### 7.2 Range Update and Range Query
+
+To support both range updates and range queries, we need two Fenwick trees:
+
+```cpp
+void rangeUpdate(int l, int r, int val) {
+    update(BIT1, l, val);
+    update(BIT1, r + 1, -val);
+    update(BIT2, l, val * (l - 1));
+    update(BIT2, r + 1, -val * r);
+}
+
+int prefixSum(int i) {
+    return query(BIT1, i) * i - query(BIT2, i);
+}
+
+int rangeQuery(int l, int r) {
+    return prefixSum(r) - prefixSum(l - 1);
+}
+```
+
+##### 7.3 2D Fenwick tree
+
+The Fenwick tree can be extended to two dimensions:
+
+```cpp
+void update2D(int x, int y, int delta) {
+    for (int i = x; i < n; i += i & (-i))
+        for (int j = y; j < m; j += j & (-j))
+            BIT[i][j] += delta;
+}
+
+int query2D(int x, int y) {
+    int sum = 0;
+    for (int i = x; i >= 0; i -= i & (-i))
+        for (int j = y; j >= 0; j -= j & (-j))
+            sum += BIT[i][j];
+    return sum;
+}
+```
+
+**[Image placeholder]**  
+_A diagram illustrating how a 2D Fenwick tree operates, showing how updates and queries are performed in two dimensions._
+
+#### 8. Applications
+
+1. Efficient computation of prefix sums in mutable arrays
+2. Counting inversions in an array
+3. Solving the "k-th smallest element" problem
+4. Implementation of arithmetic coding algorithm
+
+#### 9. Comparison with Other Structures
+
+| Structure    | Update      | Query       | Space  |
+| ------------ | ----------- | ----------- | ------ |
+| Array        | $O(1)$      | $O(n)$      | $O(n)$ |
+| Prefix Sum   | $O(n)$      | $O(1)$      | $O(n)$ |
+| Segment Tree | $O(\log n)$ | $O(\log n)$ | $O(n)$ |
+| Fenwick tree | $O(\log n)$ | $O(\log n)$ | $O(n)$ |
+
+The Fenwick tree offers a good balance between update and query efficiency, with a simpler implementation than a Segment Tree.
+
+#### Problems
 
 #### 3 - Inventory Restocking
 
@@ -4814,7 +4977,7 @@ This bitwise approach is **faster** than using the modulo operation (`inventory[
 >
 > The binary representation of 6 is $110$. Shifting it right by $1$ position results in $011$, which is $3$ in decimal.Shifting by $n$ positions is equivalent to dividing by $2^n$ (for non-negative integers).
 >
-> ### Summary Table of Bitwise Operations:
+> ### Summary Table of Bitwise Operations
 >
 > | Operation   | Symbol | Effect                                                                    |
 > | ----------- | ------ | ------------------------------------------------------------------------- | -------------------------------------------------- |
@@ -7505,5 +7668,4 @@ Ultimately, the choice between memoization and tabulation often comes down to pe
 
 [:2] Most of this table came from [Introduction to Dynamic Programming](https://cp-algorithms.com/dynamic_programming/intro-to-dp.html)
 
-[:3] Peter M. Fenwick (1994). "A new data structure for cumulative frequency tables". Software: Practice and Experience. 24 (3): 327–336. CiteSeerX 10.1.1.14.8917. [doi:10.1002/spe.4380240306](https://onlinelibrary.wiley.com/doi/10.1002/spe.4380240306). S2CID 7519761
-r
+[:3] Peter M. Fenwick (1994). "A new data structure for cumulative frequency tables". Software: Practice and Experience. 24 (3): 327–336. CiteSeerX 10.1.1.14.8917. [doi:10.1002/spe.4380240306](https://onlinelibrary.wiley.com/doi/10.1002/spe.4380240306).
