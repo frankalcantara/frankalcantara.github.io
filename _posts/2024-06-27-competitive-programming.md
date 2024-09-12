@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-11T19:47:43.157Z
+lastmod: 2024-09-12T01:25:17.603Z
 ---
 
 ## Introduction
@@ -2470,23 +2470,586 @@ Standard library algorithms are great for transformation tasks, allowing you to 
 | ----------------- | -------------------------------------------------------------------------------------------------------------- |
 | `constexpr` Loops | Compile-time only, cannot handle dynamic input, thus impractical for runtime competitive programming problems. |
 
-## 1. Problems on 1D Arrays
+## Classification of Problems in One-Dimensional Arrays
 
-### Sum and Prefix Sums
+One-dimensional arrays are fundamental data structures in computer science and are the basis for many algorithmic problems. This classification organizes common problem types, algorithms, and techniques used to solve challenges involving 1D arrays. From basic operations to advanced optimization strategies, this comprehensive guide covers a wide range of approaches, helping developers and algorithm enthusiasts to identify and apply the most efficient solutions to array-based problems.
 
-Problems where computing the sum of elements or prefix sums can reduce time complexity from $O(n^2)$ to $O(n)$. In some cases, sums are stored in another array, requiring $O(n)$ additional memory. Maintaining a running sum is often sufficient, though some problems require storing more complex information, such as partial sums or weighted sums.
+### 1. Preprocessing and Efficient Query Techniques
 
-### Difference Arrays
+Methods that prepare the array to respond to queries quickly, typically trading preprocessing time for faster queries. This approach involves investing time upfront to organize or transform the array data in a way that allows for rapid responses to subsequent queries. For example, in a scenario where frequent sum calculations of array intervals are needed, a preprocessing step might involve creating a prefix sum array. This initial step takes $O(n)$ time but enables constant-time $O(1)$ sum queries afterward, as opposed to $O(n)$ time per query without preprocessing. This trade-off is beneficial when the number of queries is large, as the initial time investment is offset by the significant speed improvement in query operations. Such techniques are common in algorithmic problem-solving, where strategic data preparation can dramatically enhance overall performance, especially in scenarios with repetitive operations on the same dataset.
 
-In problems involving range updates (modifying a range of array elements by a constant), using a difference array can optimize updates to constant time $O(1)$. The difference array stores differences between consecutive elements, allowing each update to be made efficiently.
+#### 1.1 Sums and Prefixes
 
-### Static Array Queries
+Calculation of cumulative sums for fast range queries. Reduces complexity from $O(n^2)$ to $O(n)$ in construction and $O(1)$ per query.
 
-When dealing with static arrays (i.e., arrays that do not change between queries), pre-processing techniques like prefix sums allow for efficient querying of sums, minimums, or maximums. For example, prefix sum arrays can be built in $O(n)$, and then range sum queries can be answered in constant time $O(1)$.
+##### Algorithm: Prefix Sum Array
 
-### Range Minimum Queries (RMQ)
+The Prefix Sum Array is a preprocessing technique used to efficiently calculate the sum of elements in a given range of an array. It works by creating a new array where each element is the sum of all previous elements in the original array, including the current one.
 
-This technique uses a pre-processing step to store information about minimum values in intervals of the array. After building a sparse table in $O(n \log n)$, it allows answering minimum queries over any range in $O(1)$.
+**Definition**:
+
+For an array $A$ of $n$ elements, the prefix sum array $P$ is defined as:
+$P[i] = A[0] + A[1] + A[2] + ... + A[i]$, for $0 \leq i < n$
+
+**Construction**:
+
+1. Initialize $P[0] = A[0]$
+2. For $i$ from $1$ to $n-1$:
+   $P[i] = P[i-1] + A[i]$
+
+**Time Complexity**: $O(n)$ for construction
+**Space Complexity**: $O(n)$ for the additional array
+
+**Usage**:
+To find the sum of elements from index $i$ to $j$ (inclusive) in the original array:
+
+$Sum(i, j) = P[j] - P[i-1]$ if $i > 0$, or simply $P[j]$ if $i = 0$
+
+This allows for constant time $O(1)$ range sum queries after the $O(n)$ preprocessing step.
+
+**Example**:
+Original array $A$: $[3, 1, 4, 1, 5, 9, 2, 6]$
+Prefix sum array $P$: $[3, 4, 8, 9, 14, 23, 25, 31]$
+
+To find the sum of elements from index 2 to 5 in $A$:
+$Sum(2, 5) = P[5] - P[1] = 23 - 4 = 19$
+
+This algorithm is particularly useful in scenarios requiring multiple range sum queries, as it significantly reduces the time complexity of these operations from $O(n)$ to $O(1)$ per query after the initial $O(n)$ preprocessing.
+
+###### The Plate Balancer (Problem 2)
+
+In a famous restaurant, Chef André is known for his incredible skill in balancing plates. He has a long table with several plates, each containing a different amount of food. André wants to find the "Magic Plate" - the plate where, when he places his finger underneath it, the weight of the food on the left and right balances perfectly.
+
+Given a list of $plates$, where each number represents the weight of the food on each plate, your task is to help André find the index of the Magic Plate. The Magic Plate is the one where the sum of the weights of all plates to its left is equal to the sum of the weights of all plates to its right.
+
+If André places his finger under the leftmost plate, consider the weight on the left as $0$. The same applies if he chooses the rightmost plate.
+
+Return the leftmost Magic Plate index. If no such plate exists, return $-1$.
+
+**Example 1:**
+
+Input: $plates = [3,1,5,2,2]$  
+Output: $2$  
+Explanation:  
+The Magic Plate is at index $2$.  
+Weight on the left = $plates[0] + plates[1] = 3 + 1 = 4$  
+Weight on the right = $plates[3] + plates[4] = 2 + 2 = 4$
+
+**Example 2:**
+
+Input: $plates = [1,2,3]$  
+Output: $-1$  
+Explanation:  
+There is no plate that can be the Magic Plate.
+
+**Example 3:**
+
+Input: $plates = [2,1,-1]$  
+Output: $0$  
+Explanation:  
+The Magic Plate is the first plate.  
+Weight on the left = $0$ (no plates to the left of the first plate)  
+Weight on the right = $plates[1] + plates[2] = 1 + (-1) = 0$
+
+**Constraints:**
+
+$$1 \leq plates.length \leq 10^4$$  
+$$-1000 \leq plates[i] \leq 1000$$
+
+Note: André is very skilled, so don't worry about the real-world physics of balancing plates. Focus only on the mathematical calculations!
+
+####### Naïve Solution
+
+This solution is considered _naïve_ because it doesn't take advantage of any precomputation or optimization techniques such as the _Prefix Sum Array_. Instead, it recalculates the sum of elements to the left and right of each plate using two separate loops for every plate. This leads to a time complexity of $O(n^2)$, as for each plate, the entire array is traversed twice — once for the left sum and once for the right sum.
+
+A developer who writes this kind of code typically has a basic understanding of problem-solving but might not be familiar with more advanced algorithms or computational complexity analysis. They often rely on straightforward, brute-force approaches, focusing on getting a working solution without considering performance for large datasets. While this approach works for small inputs, it quickly becomes inefficient for larger ones due to its quadratic complexity.
+
+The following is a Python pseudocode version of the _naïve_ C++ solution, using the same variables and logic:
+
+```python
+def find_magic_plate_naive(plates):
+    n = len(plates)
+
+    # Check every plate to see if it's the Magic Plate
+    for i in range(n):
+        left_sum = 0
+        right_sum = 0
+
+        # Calculate sum of elements to the left of plate i
+        for j in range(i):
+            left_sum += plates[j]
+
+        # Calculate sum of elements to the right of plate i
+        for j in range(i + 1, n):
+            right_sum += plates[j]
+
+        # If left and right sums are equal, return the current index
+        if left_sum == right_sum:
+            return i
+
+    # If no Magic Plate found, return -1
+    return -1
+
+# Example usage
+plates = [3, 1, 5, 2, 2]
+result = find_magic_plate_naive(plates)
+print(result)  # Should print 2
+```
+
+_The following C++20 code implements a naïve solution to the problem of finding the Magic Plate_. It uses a brute-force approach by iterating through each plate and calculating the sum of all plates to its left and right using two separate loops. While this method successfully solves the problem for small input sizes, it lacks efficiency, resulting in a time complexity of $O(n^2)$. This approach is typical of developers who prioritize a working solution over performance optimization, as it recalculates sums repeatedly without leveraging more advanced techniques such as the Prefix Sum Array.
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+// Function to find the index of the Magic Plate without optimization
+int find_magic_plate_naive(const vector<int>& plates) {
+    int n = plates.size();
+
+    // Check every plate to see if it's the Magic Plate
+    for (int i = 0; i < n; ++i) {
+        int left_sum = 0;
+        int right_sum = 0;
+
+        // Calculate sum of elements to the left of plate i
+        for (int j = 0; j < i; ++j) {
+            left_sum += plates[j];
+        }
+
+        // Calculate sum of elements to the right of plate i
+        for (int j = i + 1; j < n; ++j) {
+            right_sum += plates[j];
+        }
+
+        // If left and right sums are equal, return the current index
+        if (left_sum == right_sum) {
+            return i;
+        }
+    }
+
+    // If no Magic Plate found, return -1
+    return -1;
+}
+
+int main() {
+    // Example 1: plates = [3, 1, 5, 2, 2]
+    vector<int> plates1 = { 3, 1, 5, 2, 2 };
+    int result1 = find_magic_plate_naive(plates1);
+    cout << "Magic Plate index for plates1: " << result1 << endl;
+
+    // Example 2: plates = [1, 2, 3]
+    vector<int> plates2 = { 1, 2, 3 };
+    int result2 = find_magic_plate_naive(plates2);
+    cout << "Magic Plate index for plates2: " << result2 << endl;
+
+    // Example 3: plates = [2, 1, -1]
+    vector<int> plates3 = { 2, 1, -1 };
+    int result3 = find_magic_plate_naive(plates3);
+    cout << "Magic Plate index for plates3: " << result3 << endl;
+
+    return 0;
+}
+```
+
+The C++20 code implements a naïve solution to the Magic Plate problem by iterating over each plate and calculating the sum of the plates to its left and right. For each plate, two separate loops are used: one for calculating the left sum and another for calculating the right sum. The outer loop runs through all the plates, starting from the first plate to the last, and for each plate, the two sums are calculated to determine if it is the Magic Plate.
+
+The left sum is calculated by iterating from the first plate up to, but not including, the current plate. As the code checks plates further down the list, the left sum loop becomes longer, meaning that plates near the end of the list require more iterations. Similarly, the right sum is calculated by looping through the plates to the right of the current plate. This right sum loop becomes longer for plates near the beginning of the list. The code compares these two sums, and if they are equal, the current plate index is returned as the solution. If no such plate is found, the function returns `-1`.
+
+In terms of complexity, the time required to calculate the left and right sums for each plate depends on the position of the plate in the list. For the $i^{th}$ plate, the left sum takes approximately $O(i)$ iterations, while the right sum takes $O(n-i-1)$ iterations, where $n$ is the total number of plates. Since these calculations are done for every plate, the overall time complexity of the algorithm is $O(n^2)$. The space complexity is $O(1)$ because no additional arrays or data structures are created; the sums are calculated using simple scalar variables.
+
+The following table summarizes the time and space complexities of each step in the algorithm:
+
+| Step                          | Operation                                              | Time Complexity | Space Complexity |
+| ----------------------------- | ------------------------------------------------------ | --------------- | ---------------- |
+| Left Sum Calculation          | Calculating sum of elements to the left of each plate  | $O(i)$          | $O(1)$           |
+| Right Sum Calculation         | Calculating sum of elements to the right of each plate | $O(n-i-1)$      | $O(1)$           |
+| Outer Loop (Plates Iteration) | Looping through each plate                             | $O(n)$          | $O(1)$           |
+| Overall Complexity            | Total time and space complexities                      | $O(n^2)$        | $O(1)$           |
+
+This approach, while correct, leads to a quadratic time complexity of $O(n^2)$ because it recalculates the sums from scratch for every plate. The space complexity remains constant at $O(1)$, as no extra space is required beyond the scalar variables for sum calculation. There are better solutions.
+
+####### Prefix Sum Array Solution
+
+Let's start solving the problem "The Plate Balancer" using the Prefix Sum Array algorithm, using Python to create a pseudocode:
+
+```python
+def find_magic_plate(plates):
+    n = length(plates)
+
+    # Create prefix sum array
+    prefix_sum = [0] * (n + 1)
+    for i in range(1, n + 1):
+        prefix_sum[i] = prefix_sum[i-1] + plates[i-1]
+
+    # Calculate total sum
+    total_sum = prefix_sum[n]
+
+    # Find magic plate
+    for i in range(1, n + 1):
+        left_sum = prefix_sum[i-1]
+        right_sum = total_sum - prefix_sum[i]
+
+        if left_sum == right_sum:
+            return i - 1  # Return 0-based index
+
+    # If no magic plate found
+    return -1
+
+# Example usage
+plates = [3, 1, 5, 2, 2]
+result = find_magic_plate(plates)
+print(result)  # Should print 2
+
+plates = [1, 2, 3]
+result = find_magic_plate(plates)
+print(result)  # Should print -1
+
+plates = [2, 1, -1]
+result = find_magic_plate(plates)
+print(result)  # Should print 0
+```
+
+And now using C++ 20 to implement the Prefix Sum Array algorithm:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+// Function to find the index of the Magic Plate
+int find_magic_plate(const vector<int>& plates) {
+    int n = plates.size();
+
+    // If there is only one plate, it is automatically the Magic Plate
+    if (n == 1) return 0;
+
+    // Create a prefix sum array to store the cumulative sum up to each plate
+    vector<int> prefix_sum(n + 1, 0);
+
+    // Build the prefix sum array where each element contains the sum of elements up to that index
+    for (int i = 1; i <= n; ++i) {
+        prefix_sum[i] = prefix_sum[i - 1] + plates[i - 1];
+    }
+
+    // Calculate total sum (optional step, just for clarity)
+    int total_sum = prefix_sum[n];
+
+    // Check for each plate if the left sum equals the right sum
+    for (int i = 1; i <= n; ++i) {
+        // Left sum is the sum of elements before the current plate
+        int left_sum = prefix_sum[i - 1];
+
+        // Right sum is the total sum minus the current prefix sum
+        int right_sum = total_sum - prefix_sum[i];
+
+        // If the left and right sums are equal, return the current index (0-based)
+        if (left_sum == right_sum) {
+            return i - 1;
+        }
+    }
+
+    // If no Magic Plate is found, return -1
+    return -1;
+}
+
+int main() {
+    // Example 1: plates = [3, 1, 5, 2, 2]
+    vector<int> plates1 = { 3, 1, 5, 2, 2 };
+    int result1 = find_magic_plate(plates1);
+    cout << "Magic Plate index for plates1: " << result1 << endl;
+
+    // Example 2: plates = [1, 2, 3]
+    vector<int> plates2 = { 1, 2, 3 };
+    int result2 = find_magic_plate(plates2);
+    cout << "Magic Plate index for plates2: " << result2 << endl;
+
+    // Example 3: plates = [2, 1, -1]
+    vector<int> plates3 = { 2, 1, -1 };
+    int result3 = find_magic_plate(plates3);
+    cout << "Magic Plate index for plates3: " << result3 << endl;
+
+    return 0;
+}
+```
+
+The code implements the _Prefix Sum Array_ algorithm to solve the problem _The Plate Balancer_. The approach starts by creating a prefix sum array (`prefix_sum`), which stores the cumulative sum of elements from the original `plates` array. The construction of this prefix sum array has a time complexity of $O(n)$, where $n$ is the number of plates. The _Prefix Sum Array_ is built in such a way that for each index $i$, the value `prefix_sum[i]` contains the sum of all elements from `plates[0]` to `plates[i-1]`. This allows the sum of elements to the left of a given index to be computed in constant time $O(1)$ by simply accessing `prefix_sum[i-1]`.
+
+The construction of the _Prefix Sum Array_ takes linear time $O(n)$ and requires additional space $O(n)$ for the array. For each plate, calculating the left and right sums is constant in time $O(1)$ due to the prefix sum array, but this is done $n$ times, resulting in $O(n)$ overall. The total sum is derived from the last value of the _Prefix Sum Array_, which is computed in constant time $O(1)$.
+
+After building the _Prefix Sum Array_, the code uses it to calculate the left and right sums for each plate. The left sum of a plate at index $i$ is given by `prefix_sum[i-1]`, while the right sum is derived by subtracting `prefix_sum[i]` from the total sum (`total_sum`). If the left and right sums are equal, the index of the plate is returned as the Magic Plate. Otherwise, the loop continues to check all plates. If no balanced plate is found, the code returns `-1`, indicating that there is no Magic Plate.
+
+The implementation follows the _Prefix Sum Array_ algorithm efficiently, constructing the array in linear time $O(n)$, and checking if a plate is the Magic Plate in constant time $O(1)$ for each plate. The logic in C++20 utilizes standard functions such as `std::vector`, ensuring simplicity and clarity in the code. The identifiers have been adjusted to match those from the Python pseudocode, maintaining the same logic and structure as the original algorithm. Below is a detailed analysis of the time and space complexities for each operation in the C++20 implementation:
+
+| Step                           | Operation                                            | Time Complexity  | Space Complexity            |
+| ------------------------------ | ---------------------------------------------------- | ---------------- | --------------------------- |
+| Prefix Sum Array Construction  | Building the prefix sum array `prefix_sum`           | $O(n)$           | $O(n)$                      |
+| Left and Right Sum Calculation | Calculating left and right sums for each plate       | $O(1)$ per plate | $O(n)$ (reusing prefix sum) |
+| Total Sum Calculation          | Calculating the total sum using the prefix sum array | $O(1)$           | $O(n)$                      |
+| Loop Through Plates            | Checking all plates for the Magic Plate              | $O(n)$           | $O(1)$                      |
+| Overall Complexity             | Total time and space complexities                    | $O(n)$           | $O(n)$                      |
+
+##### Competitive Solution
+
+The following C++20 code implements the _Prefix Sum Array_ algorithm, with several optimizations designed to reduce typing effort in a competitive programming context. We eliminated the use of functions, as the entire code is kept within the `main` block, avoiding the overhead of function calls. This approach prioritizes minimal typing and fast execution by copying and pasting the logic rather than encapsulating it into reusable components.
+
+**Key changes made**:
+
+1. **Use of `using` for shorter variable names**: We introduced `using` directives to reduce the typing for commonly used variables. For instance, `prefix_sum` became `ps`, `total_sum` became `ts`, and `plates` became `pl`. This allows us to minimize the amount of text written while keeping the code readable and maintainable in a fast-paced environment. We let comments in following code but not in the real competitive code available in [github](https://github.com/frankalcantara/Competitive).
+
+2. **Reuse of the same array for multiple test cases**: Instead of declaring multiple arrays for different input examples, we reuse the same array `pl` and the variable `n` for the array size. By resetting `pl` and `n` for each example, we save both memory and typing effort, while maintaining clarity.
+
+3. **Hardcoded input examples**: The input examples are directly written into the code (hardcoded), as is typical in competitive programming when no external input is required. The three provided examples are executed sequentially without the need for interactive input, allowing us to focus purely on solving the problem quickly.
+
+4. **Avoidance of function calls**: We opted to avoid wrapping the _Prefix Sum Array_ logic into functions to eliminate the slight cost of function calls. This decision was driven by the understanding that, in a competitive environment, even minimal overheads can accumulate and impact performance. Instead, we simply copied and pasted the algorithm, leveraging the simplicity and speed of direct logic execution.
+
+**Warnings**:
+
+During the development of this code, some warnings arose, such as a potential arithmetic overflow when performing summations and a warning about the conversion from `size_t` to `int`. To mitigate the risk of overflow, we made adjustments by using `long long` for the array and sums. However, the warning regarding the `size_t` to `int` conversion persists. This conversion warning arises because `size_t` is often used for the size of arrays, but we assign it to an `int` type. While this may lead to data loss in rare edge cases with very large data sizes, in the context of competitive programming where input sizes are usually constrained, this warning can be safely ignored.
+
+Moreover, reducing the typing effort is crucial in competitive environments, and using `int` is often the most efficient approach when dealing with moderately sized inputs, which are common in contests. As such, we chose to keep this conversion despite the warning, knowing that it will not significantly affect the correctness of our solution for typical competition scenarios.
+
+> In C++20, `size_t` is an unsigned integer type, typically used to represent the size of objects or memory blocks. It is an alias for an unsigned integer that can hold the size of the largest object your system can handle. Its size depends on the architecture of the system:
+>
+> - On **32-bit systems**, `size_t` is typically 4 bytes (32 bits), which means it can hold values from 0 to $2^{32} - 1$.
+> - On **64-bit systems**, `size_t` is typically 8 bytes (64 bits), which means it can hold values from 0 to $2^{64} - 1$.
+>
+> **Typical Sizes of `int`, `long long`, and `size_t`**: On most modern systems, the sizes of these types are as follows (though they can vary depending on the platform and architecture):
+>
+> - **`int`**: 4 bytes (32 bits): Range: $-2^{31}$ to $2^{31} - 1$
+> - **`long long`**: 8 bytes (64 bits): Range: $-2^{63}$ to $2^{63} - 1$ > **`size_t`**: **4 bytes (32 bits)** on 32-bit systems, with a range from 0 to $2^{32} - 1$ and **8 bytes (64 bits)** on 64-bit systems, with a range from 0 to $2^{64} - 1$.
+>
+> Since `size_t` is unsigned, it can store only non-negative values, making it ideal for representing sizes and lengths where negative numbers don't make sense (e.g., array indices, sizes of memory blocks).
+>
+> **Difference Between `++i` and `i++`**
+>
+> - **`++i`** is the **pre-increment** operator, which increments the value of `i` first and then returns the incremented value.
+> - **`i++`** is the **post-increment** operator, which returns the current value of `i` first and then increments it.
+>
+> The main difference between the two is in performance when used in certain contexts, particularly with non-primitive types like iterators. Using `++i` is slightly more efficient than `i++` because `i++` might involve creating a temporary copy of the value before incrementing, while `++i` modifies the value directly. For example:
+>
+> ```cpp
+> int i = 0;
+> int a = ++i; // a = 1, i = 1 (pre-increment: increment first, then use the value)
+> int b = i++; // b = 1, i = 2 (post-increment: use the value first, then increment)
+> ```
+
+While creating a function would typically make the code cleaner and more modular, in this specific context of competitive programming, where inputs are hardcoded and every nanosecond counts, we chose to avoid this additional cost.
+
+Below is the final competitive code:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+using ps = vector<int>;  // Alias for prefix_sum as a vector of long long
+using ts = int;          // Alias for total_sum as long long
+using pl = vector<int>;        // Alias for plates as a vector of int
+using vi = vector<int>;        // Alias for vector of int (similar to vi)
+
+int main() {
+    vi pl;
+    int n;
+    vi ps;
+
+    pl = {3, 1, 5, 2, 2};
+    n = pl.size();
+    ps = vi(n + 1, 0);
+    for (int i = 1; i <= n; ++i) ps[i] = ps[i - 1] + pl[i - 1];
+    ts = ps[n];
+    for (int i = 1; i <= n; ++i) {
+        int ls = ps[i - 1], rs = ts - ps[i];
+        if (ls == rs) {
+            cout << i - 1 << endl;
+            break;
+        }
+        if (i == n) cout << -1 << endl;
+    }
+
+    pl = {1, 2, 3};
+    n = pl.size();
+    ps = vi(n + 1, 0);
+    for (int i = 1; i <= n; ++i) ps[i] = ps[i - 1] + pl[i - 1];
+    ts = ps[n];
+    for (int i = 1; i <= n; ++i) {
+        int ls = ps[i - 1], rs = ts - ps[i];
+        if (ls == rs) {
+            cout << i - 1 << endl;
+            break;
+        }
+        if (i == n) cout << -1 << endl;
+    }
+
+    pl = {2, 1, -1};
+    n = pl.size();
+    ps = vi(n + 1, 0);
+    for (int i = 1; i <= n; ++i) ps[i] = ps[i - 1] + pl[i - 1];
+    ts = ps[n];
+    for (int i = 1; i <= n; ++i) {
+        int ls = ps[i - 1], rs = ts - ps[i];
+        if (ls == rs) {
+            cout << i - 1 << endl;
+            break;
+        }
+        if (i == n) cout << -1 << endl;
+    }
+
+    return 0;
+}
+```
+
+#### 1.2 Difference Arrays
+
+Optimizes range updates to $O(1)$ by storing differences between adjacent
+elements.
+
+- Algorithm: Difference Array
+
+- Problem Example: "Humidity Levels in a Greenhouse" - Applies adjustments at specific array positions
+
+#### 1.3 Static Array Queries
+
+Techniques for arrays that don't change between queries, allowing efficient pre-calculations.
+
+- Algorithm: Sparse Table
+
+- Problem Example: "Inventory Restocking" - Performs queries after each inventory adjustment
+
+#### 1.4 Range Minimum Queries (RMQ)
+
+Data structure to find the minimum in any range in $O(1)$ after $O(n \log n)$ preprocessing.
+
+- Algorithm: Sparse Table for RMQ
+
+#### 1.5 Fenwick Tree
+
+Data structure for prefix sums and efficient updates, with operations in $O(\log n)$.
+
+- Algorithm: Binary Indexed Tree (BIT)
+
+### 2. Sliding Window Algorithms
+
+Techniques for efficiently processing contiguous subarrays of fixed size.
+
+#### 2.1 Sliding Window Minimum
+
+Finds the minimum in a fixed-size window that slides through the array in $O(n)$ using a deque.
+
+- Algorithm: Monotonic Deque
+
+#### 2.2 Sliding Window Maximum
+
+Similar to the minimum, but for finding the maximum in each window.
+
+- Algorithm: Monotonic Deque
+
+- Problem Example: "Weather Monitoring System" - Uses a sliding window of size k to find the subarray with the highest average
+
+### 3. Multiple Query Processing
+
+Methods for handling multiple queries efficiently.
+
+#### 3.1 Mo's Algorithm
+
+Processes multiple range queries in $O((n + q) \sqrt{n})$, where $n$ is the array size and $q$ is the number of queries.
+
+- Algorithm: Mo's Algorithm
+
+- Problem Example: "Humidity Levels in a Greenhouse" - Processes multiple adjustment queries and sum calculations
+
+### 4. Auxiliary Data Structures
+
+Specific data structures used to optimize operations on arrays.
+
+#### 4.1 Deque (for Sliding Window Minimum/Maximum)
+
+Double-ended queue that maintains relevant elements of the current window.
+
+#### 4.2 Sparse Table (for RMQ)
+
+Structure that stores pre-computed results for power-of-2 intervals.
+
+#### 4.3 Segment Tree
+
+Tree-based data structure for range queries and updates in $O(\log n)$.
+
+### 5. Complexity Optimization Techniques
+
+Methods to reduce the computational complexity of common operations.
+
+#### 5.1 Reduction from $O(n^2)$ to $O(n)$
+
+Use of prefix sums to optimize range sum calculations.
+
+- Problem Example: "Sales Target Analysis" - Uses prefix sum technique to optimize subarray calculations
+
+#### 5.2 Update in $O(1)$
+
+Difference arrays for constant-time range updates.
+
+- Problem Example: "Inventory Restocking" - Makes point adjustments to the inventory
+
+#### 5.3 Query in $O(1)$ after preprocessing
+
+RMQ and static array queries with instant responses after pre-calculation.
+
+- Problem Example: "The Plate Balancer" - After calculating cumulative sums, can find the "Magic Plate" in O(n)
+
+#### 5.4 Processing in $O((n + q) \sqrt{n})$
+
+Mo's Algorithm to optimize multiple range queries.
+
+### 6. Subarray Algorithms
+
+Specific techniques for problems involving subarrays.
+
+#### 6.1 Kadane's Algorithm
+
+Finds the contiguous subarray with the largest sum in $O(n)$. Useful for sum maximization problems.
+
+- Algorithm: Kadane's Algorithm
+
+#### 6.2 Two Pointers
+
+Technique for problems involving pairs of elements or subarrays that satisfy certain conditions.
+
+- Algorithm: Two Pointers Method
+
+### 7. Hashing Techniques
+
+Methods that use hashing to optimize certain operations on arrays.
+
+#### 7.1 Prefix Hash
+
+Uses hashing to quickly compare substrings or subarrays.
+
+- Algorithm: Rolling Hash
+
+#### 7.2 Rolling Hash
+
+Technique to efficiently calculate hashes of substrings or subarrays when sliding a window.
+
+- Algorithm: Rabin-Karp Algorithm
+
+### 8. Partitioning Algorithms
+
+Techniques for dividing or reorganizing arrays.
+
+#### 8.1 Partition Algorithm (QuickSelect)
+
+Used to find the kth smallest element in average linear time.
+
+- Algorithm: QuickSelect
+
+#### 8.2 Dutch National Flag
+
+Algorithm to partition an array into three parts, useful in sorting problems with few unique values.
+
+- Algorithm: Dutch National Flag Algorithm
 
 ### The Fenwick Tree
 
@@ -4000,173 +4563,6 @@ The **`inline constexpr`** constant `input_method` specifies which input method 
 
 AINDA TEM MUITO QUE EXPLICAR AQUI.
 
-#### Problema 2 - The Plate Balancer
-
-In a famous restaurant, Chef André is known for his incredible skill in balancing plates. He has a long table with several plates, each containing a different amount of food.
-
-André wants to find the "Magic Plate" - the plate where, when he places his finger underneath it, the weight of the food on the left and right balances perfectly.
-
-Given a list of $plates$, where each number represents the weight of the food on each plate, your task is to help André find the index of the Magic Plate.
-
-The Magic Plate is the one where the sum of the weights of all plates to its left is equal to the sum of the weights of all plates to its right.
-
-If André places his finger under the leftmost plate, consider the weight on the left as $0$. The same applies if he chooses the rightmost plate.
-
-Return the leftmost Magic Plate index. If no such plate exists, return $-1$.
-
-**Example 1:**
-
-Input: $plates = [3,1,5,2,2]$  
-Output: $2$  
-Explanation:  
-The Magic Plate is at index $2$.  
-Weight on the left = $plates[0] + plates[1] = 3 + 1 = 4$  
-Weight on the right = $plates[3] + plates[4] = 2 + 2 = 4$
-
-**Example 2:**
-
-Input: $plates = [1,2,3]$  
-Output: $-1$  
-Explanation:  
-There is no plate that can be the Magic Plate.
-
-**Example 3:**
-
-Input: $plates = [2,1,-1]$  
-Output: $0$  
-Explanation:  
-The Magic Plate is the first plate.  
-Weight on the left = $0$ (no plates to the left of the first plate)  
-Weight on the right = $plates[1] + plates[2] = 1 + (-1) = 0$
-
-**Constraints:**
-
-$$1 \leq plates.length \leq 10^4$$  
-$$-1000 \leq plates[i] \leq 1000$$
-
-Note: André is very skilled, so don't worry about the real-world physics of balancing plates. Focus only on the mathematical calculations!
-
-##### Optimized O(n) Solution
-
-The code solves the problem of finding the "Magic Plate" by using two dictionaries (or hashmaps) to store cumulative sums: one for sums from the left and another for sums from the right. Here's the step-by-step breakdown:
-
-1. We start with two cumulative sums: `soma_e` (left sum) and `soma_d` (right sum), both initialized to zero.
-2. As we loop through the array, we simultaneously move from the left and from the right.
-3. For each element in the array:
-   - We update the left cumulative sum, `soma_e`, and store it in the `soma_esquerda` dictionary.
-   - We check if this left sum exists in the `soma_direita` dictionary at the same index. If it does, we found the "Magic Plate" and return the index.
-   - We update the right cumulative sum, `soma_d`, and store it in the `soma_direita` dictionary.
-   - We check if this right sum exists in the `soma_esquerda` dictionary at the same index. If it does, we also return the index.
-4. If no match is found after completing the loop, the code prints `-1` indicating there is no "Magic Plate."
-
-**Code 4**:
-
-```cpp
-#include <iostream>
-#include <vector>
-#include <unordered_map>
-
-void encontrar_prato_magico(const std::vector<int>& pratos) {
-    int n = pratos.size();
-
-    // dictionaries for sums and index. Sums are keys.
-    std::unordered_map<int, int> soma_esquerda;
-    std::unordered_map<int, int> soma_direita;
-
-    int soma_e = 0; // left sum
-    int soma_d = 0; // right sum
-
-    // main loop
-    for (int i = 0; i < n; ++i) {
-        // update left sum
-        soma_e += pratos[i];
-        soma_esquerda[i] = soma_e;
-
-        // verify if there is a soma_direita
-        if (soma_direita.contains(i) && soma_direita[i] == soma_e) {
-            std::cout << "Prato Mágico encontrado no índice: " << i << std::endl;
-            return;
-        }
-
-        // update soma_direita
-        soma_d += pratos[n - 1 - i];
-        soma_direita[n - 1 - i] = soma_d;
-
-        // verify if there is a soma_esquerda
-        if (soma_esquerda.contains(n - 1 - i) && soma_esquerda[n - 1 - i] == soma_d) {
-            std::cout << "Prato Mágico encontrado no índice: " << n - 1 - i << std::endl;
-            return;
-        }
-    }
-
-    // no pivot found
-    std::cout << "-1" << std::endl;
-}
-
-int main() {
-    // Testing with dishes1 = {3, 1, 5, 2, 2}
-    std::vector<int> dishes1 = { 3, 1, 5, 2, 2 };
-    std::cout << "TTesting with dishes1 = {3, 1, 5, 2, 2}:" << std::endl;
-    encontrar_prato_magico(pratos1);
-
-    // Example 2: dishes2 = {1, 2, 3}
-    std::vector<int> dishes2 = { 1, 2, 3 };
-    std::cout << "Testing with dishes2 = {1, 2, 3}:" << std::endl;
-    encontrar_prato_magico(pratos2);
-
-    // Example 3: dishes3 = {2, 1, -1}
-    std::vector<int> dishes3 = { 2, 1, -1 };
-    std::cout << "Testing with dishes3 = {2, 1, -1}:" << std::endl;
-    encontrar_prato_magico(pratos3);
-
-    return 0;
-}
-```
-
-##### Complexity Analysis
-
-**Time Complexity Analysis**:
-
-The function `encontrar_prato_magico` has a single loop that iterates through the array `pratos`, and during each iteration, it performs constant-time operations such as updating sums and checking dictionary entries. Here's a detailed breakdown:
-
-1. **Loop Iteration**:The loop runs exactly `n` times, where `n` is the number of plates in the `pratos` array. The loop iterates over each element in the array, from index `0` to `n-1`. Hence, this part has a time complexity of `O(n)`.
-
-2. **Dictionary Operations (`unordered_map`)**:
-   - In each iteration, the code performs two dictionary operations:
-     - Insertion of the cumulative sum into `soma_esquerda` and `soma_direita`.
-     - Lookup in the opposite dictionary to check if a match exists.
-   - Both the insertion and lookup operations in `unordered_map` have an average time complexity of `O(1)`. This is due to the fact that `unordered_map` in C++ provides constant-time access and insertion on average.
-   - Since these operations are performed `n` times (once for each iteration), the time complexity for dictionary operations remains `O(n)`.
-
-Thus, combining the iteration and dictionary operations, the overall **time complexity** is:
-
-$$
-O(n) \times O(1) = O(n)
-$$
-
-**Space Complexity Analysis**:
-
-The space complexity is determined by the space required to store the input and the additional space used by the dictionaries:
-
-1. **Input Array**:
-
-   - The array `pratos` occupies `O(n)` space, where `n` is the number of elements in the array.
-
-2. **Dictionaries**:
-   - Two dictionaries (`soma_esquerda` and `soma_direita`) are used to store the cumulative sums and their corresponding indices. In the worst case, each dictionary can store up to `n` entries.
-   - Therefore, the space used by the dictionaries is `O(n)` for `soma_esquerda` and `O(n)` for `soma_direita`.
-
-Thus, the overall **space complexity** is:
-
-$$
-O(n) + O(n) = O(n)
-$$
-
-##### Conclusion
-
-- **Time Complexity**: `O(n)` where `n` is the size of the input array.
-- **Space Complexity**: `O(n)` due to the input array and the two dictionaries used to store cumulative sums.
-
 #### 3 - Inventory Restocking
 
 You manage a warehouse where products are stored and moved frequently. The warehouse tracks its inventory by recording the stock count at different times during the day in an array $inventory$. Occasionally, inventory managers report the amount by which a product's stock needs to be adjusted, represented by an integer array $adjustments$, where each adjustment is a pair $[adjustment, index]$. Your task is to apply these adjustments and after each, calculate the total count of products with even stock numbers.
@@ -4401,8 +4797,8 @@ This bitwise approach is **faster** than using the modulo operation (`inventory[
 > The **left shift** operator shifts the bits of its first operand to the left by the number of positions specified by the second operand. This effectively multiplies the number by powers of 2.
 >
 > ```cpp
-> int a = 3;    // Binary: 011
-> int result = a << 1;  // result = 6 (Binary: 110)
+> int a = 3;    // Binary: 00000000 00000000 00000000 00000011
+> int result = a << 1;  // result = 6 (Binary: 00000000 00000000 00000000 00000110)
 > ```
 >
 > The binary representation of 3 is $011$. Shifting it left by $1$ position results in $110$, which is $6$ in decimal. Shifting by $n$ positions is equivalent to multiplying by $2^n$.
@@ -4412,8 +4808,8 @@ This bitwise approach is **faster** than using the modulo operation (`inventory[
 > The **right shift** operator shifts the bits of its first operand to the right by the number of positions specified by the second operand. This effectively divides the number by powers of 2 (for positive integers).
 >
 > ```cpp
-> int a = 6;    // Binary: 110
-> int result = a >> 1;  // result = 3 (Binary: 011)
+> int a = 6;    // Binary: 00000000 00000000 00000000 00000110
+> int result = a >> 1;  // result = 3 (Binary: 00000000 00000000 00000000 00000011)
 > ```
 >
 > The binary representation of 6 is $110$. Shifting it right by $1$ position results in $011$, which is $3$ in decimal.Shifting by $n$ positions is equivalent to dividing by $2^n$ (for non-negative integers).
@@ -4434,26 +4830,26 @@ This bitwise approach is **faster** than using the modulo operation (`inventory[
 > 1. **Efficiency**: Bitwise operations are faster than arithmetic operations, making them useful in performance-critical code.
 > 2. **Bit Manipulation**: They are commonly used for tasks such as toggling, setting, and clearing bits in low-level programming, such as working with hardware or network protocols.
 > 3. **Masking and Flagging**: Bitwise operators are often used to manipulate flags in bitmasks, where individual bits represent different conditions or options.
->
-> .
 
-#### Problem 4 - Sales Target Analysis
+#### 4 - Sales Target Analysis
 
-You are tasked with analyzing sales data to determine how many subarrays of daily sales sum to a multiple of a target value T . The sales data is recorded in an array sales , and you need to calculate how many contiguous subarrays of sales have a sum divisible by T .
+You are tasked with analyzing sales data to determine how many subarrays of daily sales sum to a multiple of a target value $T$ . The sales data is recorded in an array sales , and you need to calculate how many contiguous subarrays of sales have a sum divisible by $T$ .
 
-Input Format:
+**Input Format**:
 
-The first line contains two integers n (the size of the sales array) and T (the target value).
-The second line contains n integers, representing the daily sales data.
+The first line contains two integers $n$ (the size of the sales array) and $T$ (the target value).
+The second line contains $n$ integers, representing the daily sales data.
 Constraints:
 
-1≤n≤105
-1≤T≤104
-−104≤sales[i]≤104
+$$
+1 \leq n \leq 10^5 \\
+1 \leq T \leq 10^4 \\
+-10^4 \leq \text{sales}[i] \leq 10^4
+$$
 
 Output Format:
 
-Output a single integer representing the number of subarrays whose sum is divisible by T .
+Output a single integer representing the number of subarrays whose sum is divisible by $T$ .
 
 Example Input: 6 5 4 5 0 -2 -3 1
 
@@ -4461,8 +4857,9 @@ Example Output: 7
 
 Explanation:
 
-There are 7 subarrays whose sum is divisible by T=5 :
+There are $7$ subarrays whose sum is divisible by $T=5$ :
 
+```text
 [4,5,0,−2,−3,1]
 [5]
 [5,0]
@@ -4470,7 +4867,9 @@ There are 7 subarrays whose sum is divisible by T=5 :
 [0]
 [0,−2,−3]
 [−2,−3]
-Input Method:
+```
+
+**Input Method**:
 
 The input is provided via command-line arguments.
 
@@ -4668,14 +5067,6 @@ int main(int argc, char* argv[]) {
 > | Base Conversion    | Only base 10                  | Supports multiple bases                               |
 > | Exception Safety   | No                            | Yes (uses C++ exceptions)                             |
 > | Overflow/Underflow | No handling                   | Detects and throws `std::out_of_range`                |
-
-### Sliding Window Minimum
-
-In this problem, the goal is to find the minimum value in a window of fixed size as the window slides across the array. Using a _deque_ to store the relevant elements of the current window allows maintaining the minimum in $O(n)$ time.
-
-### Mo’s Algorithm
-
-This algorithm is used to process multiple range queries efficiently. By organizing the queries in a specific order, the algorithm reduces the number of operations needed to adjust the interval, resulting in a complexity of $O((n + q) \sqrt{n})$, where $n$ is the size of the array and $q$ is the number of queries.
 
 ## 2. Search and Sorting Algorithms
 
@@ -7114,4 +7505,5 @@ Ultimately, the choice between memoization and tabulation often comes down to pe
 
 [:2] Most of this table came from [Introduction to Dynamic Programming](https://cp-algorithms.com/dynamic_programming/intro-to-dp.html)
 
-[:4] Peter M. Fenwick (1994). "A new data structure for cumulative frequency tables". Software: Practice and Experience. 24 (3): 327–336. CiteSeerX 10.1.1.14.8917. [doi:10.1002/spe.4380240306](https://onlinelibrary.wiley.com/doi/10.1002/spe.4380240306). S2CID 7519761
+[:3] Peter M. Fenwick (1994). "A new data structure for cumulative frequency tables". Software: Practice and Experience. 24 (3): 327–336. CiteSeerX 10.1.1.14.8917. [doi:10.1002/spe.4380240306](https://onlinelibrary.wiley.com/doi/10.1002/spe.4380240306). S2CID 7519761
+r
