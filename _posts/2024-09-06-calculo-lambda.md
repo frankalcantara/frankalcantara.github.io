@@ -3,18 +3,18 @@ layout: post
 title: O Cálculo Lambda - Fundamentos da Computação Funcional
 author: Frank
 categories:
-   - Matemática
-   - Linguagens Formais
-   - Lógica Matemática
+  - Matemática
+  - Linguagens Formais
+  - Lógica Matemática
 tags:
-   - Matemática
-   - Linguagens Formais
+  - Matemática
+  - Linguagens Formais
 image: assets/images/calculolambda.jpg
 description: Introdução ao cálculo lambda.
 slug: calculo-lambda-fundamentos-da-computacao-funcional
 keywords:
-   - Cálculo Lambda
-   - Code Comparison
+  - Cálculo Lambda
+  - Code Comparison
 rating: 5
 published: 2024-09-08T21:19:20.392Z
 draft: 2024-09-08T21:19:20.392Z
@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Neste guia abrangente, exploramos o mundo do Cálculo Lambda, abordando desde os fundamentos teóricos até suas aplicações práticas em linguagens de programação funcionais. Entenda os conceitos de abstração, aplicação e recursão, veja exemplos detalhados de *currying* e combinadores de ponto fixo, e descubra como o cálculo lambda fornece uma base sólida para a computação funcional.
 beforetoc: Neste guia abrangente, exploramos o Cálculo Lambda e suas implicações na programação funcional. Aprofundamos em tópicos como abstração, aplicação, *currying*, e combinadores de ponto fixo, ilustrando como conceitos teóricos se traduzem em práticas de programação modernas. Ideal para quem deseja entender a fundo a expressividade e a elegância matemática do cálculo lambda.
-lastmod: 2024-09-12T20:46:04.062Z
+lastmod: 2024-09-14T01:11:18.353Z
 date: 2024-09-08T21:19:30.955Z
 ---
 

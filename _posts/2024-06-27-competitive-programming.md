@@ -17,7 +17,7 @@ tags:
   - Coding Examples
   - Algorithm Optimization
   - Practical Programming Guide
-image: https://imagedelivery.net/1hxs9ILXdwdbfdPXf_9gnA/913aaca6-2fce-45af-e759-e62d8e215d00/
+image: assets/images/prog_dynamic.jpeg
 description: Dynamic Programming in C++ with practical examples, performance analysis, and detailed explanations to optimize your coding skills and algorithm efficiency.
 slug: competitive-programming-techniques-insights
 keywords:
@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-14T01:00:31.864Z
+lastmod: 2024-09-14T01:05:36.812Z
 ---
 
 ## Introduction
@@ -7692,7 +7692,3 @@ Ultimately, the choice between memoization and tabulation often comes down to pe
 [:3] Peter M. Fenwick (1994). "A new data structure for cumulative frequency tables". Software: Practice and Experience. 24 (3): 327–336. CiteSeerX 10.1.1.14.8917. [doi:10.1002/spe.4380240306](https://onlinelibrary.wiley.com/doi/10.1002/spe.4380240306).
 
 [1]: https://cp-algorithms.com/dynamic_programming/intro-to-dp.html
-
-```
-
-```
