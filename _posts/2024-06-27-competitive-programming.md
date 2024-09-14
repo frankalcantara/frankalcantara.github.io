@@ -3,32 +3,32 @@ layout: post
 title: Competitive programming in C++ - Techniques and Insights
 author: Frank
 categories:
-    - Matemática
-    - Linguagens Formais
-    - Programação
+  - Matemática
+  - Linguagens Formais
+  - Programação
 tags:
-    - Matemática
-    - Linguagens Formais
-    - Programação Dinâmica
-    - Dynamic Programming
-    - Dynamic Programming
-    - C++ Algorithms
-    - Performance Analysis
-    - Coding Examples
-    - Algorithm Optimization
-    - Practical Programming Guide
+  - Matemática
+  - Linguagens Formais
+  - Programação Dinâmica
+  - Dynamic Programming
+  - Dynamic Programming
+  - C++ Algorithms
+  - Performance Analysis
+  - Coding Examples
+  - Algorithm Optimization
+  - Practical Programming Guide
 image: assets/images/prog_dynamic.jpeg
 description: Dynamic Programming in C++ with practical examples, performance analysis, and detailed explanations to optimize your coding skills and algorithm efficiency.
-slug: dynamic-programming
+slug: competitive-programming-techniques-insights
 keywords:
-    - Dynamic Programming
-    - C++ Algorithms
-    - Coding Examples
-    - Performance Optimization
-    - Algorithm Efficiency
-    - Programming Guide
-    - Code Comparison
-    - Developer Tips
+  - Dynamic Programming
+  - C++ Algorithms
+  - Coding Examples
+  - Performance Optimization
+  - Algorithm Efficiency
+  - Programming Guide
+  - Code Comparison
+  - Developer Tips
 rating: 5
 published: 2024-06-27T19:43:15.124Z
 draft: null
@@ -36,16 +36,35 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-12T16:53:49.210Z
+lastmod: 2024-09-14T00:52:43.830Z
 ---
 
 ## Introduction
 
-C++ remains one of the most popular languages in competitive programming due to its performance, flexibility, and rich standard library. Mastering efficient C++ techniques is crucial for success in programming contests, where solving complex problems under strict time and memory constraints is the norm. This guide delves into advanced C++ programming strategies, focusing on optimizing input/output operations, leveraging modern C++ features, and utilizing efficient data structures and algorithms.
+C++ remains one of the most popular languages in competitive programming due to its performance, flexibility, and rich standard library. Mastering efficient C++ techniques is crucial for success in programming contests, where solving complex problems under strict time and memory constraints is the norm. This guide delves into advanced C++ programming strategies, focusing on Dynamic Programming - a powerful algorithmic paradigm that solves complex problems by breaking them down into simpler subproblems. By optimizing input/output operations, leveraging modern C++ features, and utilizing efficient data structures and algorithms, we'll explore how to apply Dynamic Programming techniques to tackle a wide range of computational challenges.
 
-We begin by exploring various methods to enhance file I/O and array handling, which are fundamental to processing large datasets quickly. The guide then progresses through different looping constructs, from basic for and while loops to more advanced C++20 features like range-based for loops with views and parallel execution policies. We also cover important optimizations such as minimizing typing overhead, utilizing the Standard Template Library (STL) effectively, and employing memory-efficient techniques like std::span.
+For instance, one common optimization in competitive programming is to speed up input/output operations. By default, C++ performs synchronized I/O with C's standard I/O libraries, which can be slower. A simple trick to improve I/O speed is disabling this synchronization:
 
-By mastering these C++ techniques, you'll be well-equipped to tackle a wide range of competitive programming challenges. Whether you're dealing with large-scale data processing, intricate algorithmic puzzles, or time-critical optimizations, the strategies outlined in this guide will provide you with the tools to write faster, more efficient code. This knowledge not only enhances your performance in competitions but also deepens your understanding of C++ and algorithmic thinking, skills that are valuable beyond the competitive arena.
+```cpp
+    std::ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+```
+
+This small change can make a significant difference when dealing with large input datasets. Throughout this guide, we will cover similar techniques, along with advanced input/output operations, efficient use of data structures like arrays and vectors, and modern C++20 features that help streamline your code. You'll also learn optimizations to minimize overhead and how to effectively leverage STL containers and algorithms to improve both runtime performance and code readability. Whether you are solving large-scale data processing problems or optimizing for time-critical solutions, the strategies in this guide will equip you to perform at a high level in programming contests.
+
+We begin by exploring various methods to enhance file I/O and array handling, which are fundamental to processing large datasets quickly. The guide then progresses through different looping constructs, from basic for and while loops to more advanced C++20 features like range-based for loops with views and parallel execution policies. We also cover important optimizations such as minimizing typing overhead, utilizing the Standard Template Library (STL) effectively, and employing memory-efficient techniques like std::span. Throughout this journey, we'll focus on how these C++ features and optimizations can be applied to implement efficient Dynamic Programming solutions, enabling you to solve complex algorithmic puzzles with improved performance and reduced memory usage.
+
+C++ is particularly effective for solving a wide range of problems in competitive programming. Some common types of problems where C++ excels include:
+
+1. Array Manipulation: Efficiently processing and querying large arrays or sequences.
+2. Graph Algorithms: Implementing complex graph traversals and shortest path algorithms.
+3. String Processing: Handling string matching, parsing, and manipulation tasks.
+4. Data Structures: Implementing and utilizing advanced data structures like segment trees or Fenwick trees.
+5. Computational Geometry: Solving geometric problems with high precision and efficiency.
+
+These problem types demonstrate how C++'s performance and rich standard library can be leveraged to create optimal solutions in competitive programming scenarios.
+
+By mastering these C++20 techniques, you'll be well-equipped to tackle a wide range of competitive programming challenges. Whether you're dealing with large-scale data processing, intricate algorithmic puzzles, or time-critical optimizations, the strategies outlined in this guide will provide you with the tools to write faster, more efficient code. This knowledge not only enhances your performance in competitions but also deepens your understanding of C++ and algorithmic thinking, skills that are valuable beyond the competitive arena.
 
 ## C++ Competitive Programming Hacks
 
@@ -55,7 +74,7 @@ C++ is known for its speed and flexibility, but using it effectively requires a 
 
 We'll break down these tips into the following areas:
 
-- **Typing Efficiency**: How to type faster and more accurately, which can save you valuable time during competitive programmings.
+- **Typing Efficiency**: How to type faster and more accurately, which can save you valuable time during competitive programming.
 - **Code Reduction Techniques**: Ways to reduce code size without sacrificing clarity or correctness, using C++ features like the Standard Template Library (STL).
 - **Managing Complexity**: Strategies to handle the time and space complexity of algorithms, ensuring that your solutions scale efficiently with larger inputs.
 
@@ -90,17 +109,17 @@ $$
 
 Here are some additional tips to improve your typing for competitive programming:
 
-1. **Use IDE shortcuts:** Learn keyboard shortcuts for your favorite Integrated Development Environment (IDE). Navigating and editing code using shortcuts reduces time spent moving between mouse and keyboard. In the case of [ICPC](https://icpc.global/) contests, the IDE provided will typically be [Eclipse](https://www.eclipse.org/downloads/packages/release/helios/sr2/eclipse-ide-cc-developers), so it’s crucial to familiarize yourself with its shortcuts and navigation to maximize efficiency during the competitive programming.
+1. **Use IDE shortcuts:** 1. **Use IDE shortcuts:** Learn keyboard shortcuts for your favorite Integrated Development Environment (IDE). Navigating and editing code using shortcuts reduces time spent moving between mouse and keyboard. In the case of [ICPC](https://icpc.global/) contests, the IDE provided will typically be [Eclipse](https://www.eclipse.org/downloads/packages/release/helios/sr2/eclipse-ide-cc-developers), so it's crucial to familiarize yourself with its shortcuts and navigation to maximize efficiency during the competitive programming. However, it's important to note that the choice of IDE may change, and contestants should always check the specific rules and environments for each competition.
 2. **Focus on frequent patterns:** As you practice, focus on typing patterns you use frequently, such as loops, if-else conditions, and function declarations. Automating these patterns in your muscle memory will save valuable time.
 3. **Practice algorithm templates:** Some problems require similar algorithms, such as dynamic programming, sorting, or tree traversal. By practicing typing these algorithms regularly, you'll be able to quickly implement them during competitive programmings.
 
 In competitive programming, every second counts, and being proficient with your typing can give you a significant advantage.
 
-## Typing Less in Competitive Programming
+### Typing Less in Competitive Programming
 
 In competitive programming, time is a critical resource. Therefore, optimizing typing speed and avoiding repetitive code can make a significant difference. Below, we will discuss strategies to minimize typing when working with `std::vector` during competitive programmings, where access to the internet or pre-prepared code snippets may be restricted.
 
-### 1. Using `#define` for `std::vector` Abbreviations
+#### 1. Using `#define` for `std::vector` Abbreviations
 
 We can use `#define` to create short aliases for common vector types. This is particularly useful when you need to declare multiple vectors throughout the code.
 
@@ -120,11 +139,11 @@ VS words;    // std::vector<std::string> words;
 
 However, it's important to note that in larger, professional projects, using `#define` for type aliases is generally discouraged because it does not respect C++ scoping rules and can lead to unexpected behavior during debugging. In competitive programming, where speed is essential, this technique can be useful, but it should be avoided in long-term or collaborative codebases.
 
-### 2. Predefined Utility Functions
+#### 2. Predefined Utility Functions
 
 Another effective strategy is to define utility functions that you can reuse for common vector operations, such as reading from input, printing, or performing operations like sorting or summing elements.
 
-#### Reading Vectors
+##### Reading Vectors
 
 ```cpp
 #define FAST_IO std::ios::sync_with_stdio(false); std::cin.tie(nullptr);
@@ -145,7 +164,7 @@ VI numbers;
 read_vector(numbers, n);
 ```
 
-#### Printing Vectors
+##### Printing Vectors
 
 ```cpp
 void print_vector(const VI& vec) {
@@ -162,11 +181,11 @@ This function allows you to easily print the contents of a vector:
 print_vector(numbers);
 ```
 
-### 3. Predefining Common Operations
+#### 3. Predefining Common Operations
 
 If you know that certain operations, such as sorting or summing elements, are frequent in a competitive programming, consider defining these operations at the beginning of the code.
 
-#### Sorting Vectors
+##### Sorting Vectors
 
 ```cpp
 #define SORT_VECTOR(vec) std::sort(vec.begin(), vec.end())
@@ -178,7 +197,7 @@ You can then sort any vector quickly:
 SORT_VECTOR(numbers);
 ```
 
-#### Summing Elements
+##### Summing Elements
 
 ```cpp
 int sum_vector(const VI& vec) {
@@ -192,7 +211,7 @@ To calculate the sum of a vector's elements:
 int total = sum_vector(numbers);
 ```
 
-### 4. Using Lambda Functions
+#### 4. Using Lambda Functions
 
 In C++11 and later versions, lambda functions can be a quick and concise way to define operations inline for vectors:
 
@@ -211,7 +230,9 @@ These inline functions can be defined and used without the need to write complet
 print_square(numbers);
 ```
 
-### Prefer Not to Use `#define`
+_While lambda functions can be very useful for quick, one-off operations, it's important to note that excessive use of lambdas, especially complex ones, can make code harder to read and maintain. In competitive programming, where code clarity might be sacrificed for speed, this may be less of a concern. However, it's a good practice to be mindful of code readability, especially when debugging complex algorithms_.
+
+#### Prefer Not to Use `#define`
 
 Another way to reduce typing time is by using `typedef` or `using` to create abbreviations for frequently used vector types:
 
@@ -223,7 +244,7 @@ using VS = std::vector<std::string>;
 
 In many cases, the use of `#define` can be replaced with more modern and safe C++ constructs like `using`, `typedef`, or `constexpr`. `#define` does not respect scoping rules and does not offer type checking, which can lead to unintended behavior. Using `typedef` or `using` provides better type safety and integrates smoothly with the C++ type system, making the code more predictable and easier to debug.
 
-#### 1. Replacing `#define` with Type Aliases
+##### 1. Replacing `#define` with Type Aliases
 
 For example:
 
@@ -248,7 +269,7 @@ typedef std::vector<std::string> VS;
 
 **`using` and `typedef` are preferred because they respect C++ scoping rules and offer better support for debugging, making the code more secure and readable**.
 
-#### 2. Replacing `#define` with Constants
+##### 2. Replacing `#define` with Constants
 
 If you're using `#define` to define numeric constants, you can replace them with `constexpr`, which also integrates better with the C++ type system and offers compile-time type checking. A example should help:
 
@@ -264,7 +285,7 @@ constexpr double PI = 3.14159;
 
 _`constexpr` allows the value to be treated as a constant of the correct type (`double` in this case), providing type checks and optimizing the code during compilation._
 
-#### 3. Using `constexpr` in Functions
+##### 3. Using `constexpr` in Functions
 
 If you have macros that perform calculations, you can replace them with `constexpr` functions:
 
@@ -286,11 +307,11 @@ constexpr int square(int x) {
 
 For competitive programming, using `#define` might seem like the fastest way to reduce typing and speed up coding. However, using `typedef` or `using` is generally more efficient because it avoids potential issues with macros and integrates better with the compiler. **While reducing variable names or abbreviating functions might save time during a competitive programming, remember that in professional code, clarity and maintainability are far more important**. Therefore, avoid using shortened names and unsafe constructs like `#define` in production code, libraries, or larger projects.
 
-## Optimizing File I/O in C++ for competitive programmings
+### Optimizing File I/O in C++ for competitive programmings
 
 In many competitive programming contests, especially those involving large datasets, the program is required to read input from a file that can be very large. For this reason, it is crucial to optimize how files are read. Efficient file handling can make the difference between a solution that completes within the time limits and one that does not. Implementing techniques to speed up file I/O is indispensable for handling such cases effectively.
 
-### Disabling I/O Synchronization
+#### Disabling I/O Synchronization
 
 To improve the performance of input/output (I/O) operations, we disable the synchronization between the standard C and C++ I/O libraries:
 
@@ -308,7 +329,7 @@ This synchronization, when enabled, introduces overhead because the system ensur
 
 This optimization is particularly beneficial in programs that perform a large number of read and write operations, such as when processing large amounts of data from files. Additionally, by using `std::cin.tie(nullptr);`, we prevent `std::cout` from being automatically flushed before each input operation, avoiding another form of latency that could impact performance in I/O-heavy contexts.
 
-### Command Line Argument Checking
+#### Command Line Argument Checking
 
 Before proceeding with execution, the code checks if exactly one argument was passed through the command line, which represents the name of the file to be read:
 
@@ -323,7 +344,7 @@ if (argc != 2) {
 - `argv` is an array of strings containing the arguments.
 - If the number of arguments is not 2, the program prints an error message and exits with `return 1`, indicating failure.
 
-### Opening and Verifying the File
+#### Opening and Verifying the File
 
 The code attempts to open the specified file and checks whether the opening was successful:
 
@@ -338,13 +359,13 @@ if (!file) {
 - `std::ifstream file(argv[1]);` attempts to open the file for reading.
 - If `file` is not in a valid state (i.e., the file couldn't be opened), an error message is displayed, and the program terminates.
 
-Of course, in competitive programmings, the input file will most often be handled by an automated testing system, so you probably won't need to check whether the file opened correctly or not.
+While good practice in general software development, is usually unnecessary in competitive programming contests. Instead, you can often assume the file exists and start reading from it directly. This saves valuable coding time and simplifies your solution.
 
-### Introduction to File I/O in C++
+## Introduction to File I/O in C++
 
 In C++, file input and output (I/O) operations are handled through classes provided by the `<fstream>` library. The three main classes used for this purpose are `std::ifstream`, `std::ofstream`, and `std::fstream`. Each of these classes is specialized for different types of I/O operations.
 
-#### `std::ifstream`: File Reading
+### `std::ifstream`: File Reading
 
 The `std::ifstream` class (input file stream) is used exclusively for reading files. It inherits from `std::istream`, the base class for all input operations in C++.
 
@@ -522,7 +543,7 @@ When opening files, we can specify different opening modes using values from the
 - `std::ios::trunc`: Truncate the file (erase existing content).
 - `std::ios::binary`: Open the file in binary mode.
 
-## Advanced File I/O Techniques in C++
+### Advanced File I/O Techniques in C++
 
 There are faster ways to open and process files in C++, which can be especially useful in competitive programming when dealing with large data sets. Here are some techniques that can enhance the efficiency of file handling:
 
@@ -608,7 +629,7 @@ There are faster ways to open and process files in C++, which can be especially 
 
    Instead of using `std::getline()`, which can be relatively slow for large files, you can implement a custom buffer to store multiple lines at once, reducing the overhead of repeatedly calling the I/O functions.
 
-### Using `mmap` for Faster File I/O in Unix-Based Systems
+#### Using `mmap` for Faster File I/O in Unix-Based Systems
 
 In competitive programming, especially in contests like ICPC where the environment is Unix-based (typically Linux), it is crucial to explore every possible optimization for handling large input files. One such technique is using the `mmap` system call, which provides an extremely fast option for reading large files by mapping them directly into memory. This allows almost instantaneous access to the file's content without multiple read operations, significantly reducing I/O overhead.
 
@@ -616,7 +637,7 @@ The `mmap` function maps a file or device into memory. Once the file is mapped, 
 
 This approach is useful in environments like ICPC, where files can be very large, and efficiency is paramount. **However, it's important to note that `mmap` is specific to Unix-based systems and is not portable across all operating systems, such as Windows**.
 
-#### How to Use `mmap`
+##### How to Use `mmap`
 
 Here's an example of how you can use `mmap` to read a file efficiently in C++ on a Unix-based system:
 
@@ -672,7 +693,7 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-#### Explanation of Key Steps
+##### Explanation of Key Steps
 
 1. **Opening the File**:
 
@@ -721,7 +742,7 @@ CC++20 introduced several improvements for parallel programming, including the e
 
 In situations with heavy I/O workloads, such as reading and processing large input files or performing intensive calculations while still reading or writing data, `std::async` and threads can be used to split operations and execute different tasks simultaneously, making the best use of available time.
 
-### Example of Parallel I/O Using `std::async`
+#### Example of Parallel I/O Using `std::async`
 
 Below is a simple example of how to use `std::async` to perform input and output operations in parallel. In this example, while data is being read, another thread can be used to process or display the data simultaneously, optimizing the time spent on I/O operations:
 
@@ -836,11 +857,11 @@ However, this technique should be used with care. Adding threads and asynchronou
 
 The use of parallel I/O in programming competitive programmings typically applies to scenarios where there are many read/write operations or when the program needs to process large volumes of data while still reading or writing files. This situation is usual in [AI competitive programmings](https://opencv.org/opencv-ai-competitive-programming-2021/) and in hackatons. This technique can be useful in problems involving the manipulation of large datasets or intensive input/output processing, such as in "big data" challenges or reading/writing from disks. However, due to its complexity, the use of `std::async` and threads should be reserved for cases where parallelism offers a significant advantage over traditional sequential I/O.
 
-### Maximizing Input/Output Efficiency in Competitive Programming (Windows and Linux)
+## Maximizing Input/Output Efficiency in Competitive Programming (Windows and Linux)
 
 In some competitive programming environments, inputs are provided via the command line. The first input is the size of the array, followed by the array elements separated by spaces. Efficiently reading this data and outputting the result is crucial, especially when dealing with large datasets. Below is an approach to handle input and output in the fastest way for both Windows and Linux.
 
-#### Optimized Input and Output
+### Optimized Input and Output
 
 The following example demonstrates how to read inputs and output results efficiently in C++ using the fastest I/O methods available on both Windows and Linux.
 
@@ -921,25 +942,25 @@ int main() {
 
 It is important to highlight that `scanf` and `printf` are widely recognized as insecure functions due to their lack of built-in protections against common vulnerabilities such as buffer overflows. We are discussing them here only because the code created for competitive programming is typically used only once during a contest, and the primary focus is on speed and efficiency. However, these functions — and any others considered unsafe (see [stackoverflow](https://stackoverflow.com/questions/2565727/which-functions-from-the-standard-library-must-should-be-avoided))— should never be used in production code, libraries, or any other software outside the competitive programming environment. In professional development, you should always prefer safer alternatives such as `std::cin` and `std::cout`, which provide better type safety and avoid common vulnerabilities associated with older C-style I/O functions.
 
-### Usar Buffers Manuais com `fread` e `fwrite`
+### Using Manual Buffers with `fread` and `fwrite`
 
-Embora funções como `scanf` e `printf` sejam rápidas, o uso de `fread` e `fwrite` permite ler e escrever dados em grandes blocos, reduzindo o número de chamadas de sistema para I/O. Isso é particularmente útil ao lidar com grandes volumes de dados, pois a sobrecarga de múltiplas operações de leitura e escrita pode ser significativa.
+While functions like `scanf` and `printf` are fast, using `fread` and `fwrite` allows reading and writing data in large blocks, reducing the number of system calls for I/O. This is particularly useful when dealing with large volumes of data, as the overhead of multiple read and write operations can be significant.
 
-A função `fread` é usada para ler um número especificado de bytes de um arquivo ou do `stdin` (entrada padrão) e armazena esses dados em um buffer que você define. Ao fazer uma única leitura de um grande bloco de dados, você minimiza as chamadas ao sistema operacional, o que reduz o overhead e aumenta a eficiência.
+The `fread` function is used to read a specified number of bytes from a file or `stdin` (standard input) and store that data in a buffer you define. By performing a single read of a large block of data, you minimize system calls, which reduces overhead and increases efficiency.
 
-Exemplo de leitura com `fread`:
+Example of reading with `fread`:
 
 ```cpp
 #include <cstdio>
 #include <vector>
 
 int main() {
-    char buffer[1024];  // Buffer manual de 1 KB
+    char buffer[1024];  // 1 KB manual buffer
     size_t bytesRead = fread(buffer, 1, sizeof(buffer), stdin);
 
-    // Processar os dados lidos
+    // Process the read data
     for (size_t i = 0; i < bytesRead; ++i) {
-        // Usar putchar para imprimir os dados do buffer
+        // Use putchar to print the data from the buffer
         putchar(buffer[i]);
     }
 
@@ -947,15 +968,15 @@ int main() {
 }
 ```
 
-A função `fread` lê até um número especificado de itens de um fluxo de dados e os armazena no buffer fornecido. No exemplo acima, `fread(buffer, 1, sizeof(buffer), stdin)` lê até 1024 bytes da entrada padrão (`stdin`) e armazena esses dados no buffer. O número de bytes lidos é retornado como `bytesRead`.
+The `fread` function reads up to a specified number of items from a data stream and stores them in the provided buffer. In the example above, `fread(buffer, 1, sizeof(buffer), stdin)` reads up to 1024 bytes from the standard input (`stdin`) and stores this data in the buffer. The number of bytes read is returned as `bytesRead`.
 
-A função `putchar` imprime um caractere de cada vez no `stdout` (saída padrão). No exemplo, usamos `putchar(buffer[i])` para imprimir cada caractere armazenado no buffer. Essa função é eficiente para lidar com dados de baixo nível, especialmente em situações em que você está processando caracteres individuais.
+The `putchar` function prints one character at a time to `stdout` (standard output). In the example, we use `putchar(buffer[i])` to print each character stored in the buffer. This function is efficient for handling low-level data, especially in situations where you are processing individual characters.
 
-Comparando com `scanf` e `printf`, que são mais convenientes quando se precisa de formatação específica, como ler números inteiros ou strings, `fread` e `fwrite` são mais eficientes para grandes volumes de dados "brutos" sem formatação, como arquivos binários ou grandes blocos de texto.
+Compared to `scanf` and `printf`, which are more convenient when specific formatting is needed, such as reading integers or strings, `fread` and `fwrite` are more efficient for large volumes of unformatted "raw" data, like binary files or large blocks of text.
 
-Se precisar gravar dados de maneira igualmente eficiente, pode-se usar `fwrite` para escrever blocos de dados em um arquivo ou no `stdout`.
+If you need to write data equally efficiently, you can use `fwrite` to write data blocks to a file or to `stdout`.
 
-Exemplo de escrita com `fwrite`:
+Example of writing with `fwrite`:
 
 ```cpp
 #include <cstdio>
@@ -965,16 +986,16 @@ int main() {
     const char* data = "Outputting large blocks of data quickly\n";
     size_t dataSize = strlen(data);
 
-    // Escreve o buffer de dados para o stdout
+    // Write the data buffer to stdout
     fwrite(data, 1, dataSize, stdout);
 
     return 0;
 }
 ```
 
-A função `fwrite` funciona de maneira semelhante a `fread`, mas em vez de ler dados, ela grava o conteúdo de um buffer em um arquivo ou na saída padrão. No exemplo acima, `fwrite(data, 1, dataSize, stdout)` grava `dataSize` bytes do buffer `data` no `stdout`.
+The `fwrite` function works similarly to `fread`, but instead of reading data, it writes the content of a buffer to a file or to standard output. In the example above, `fwrite(data, 1, dataSize, stdout)` writes `dataSize` bytes from the `data` buffer to `stdout`.
 
-Usar buffers manuais com `fread` e `fwrite` pode melhorar significativamente a performance em competições ao reduzir o número de chamadas ao sistema, o que é particularmente útil quando se lida com grandes volumes de dados. Essa técnica oferece maior controle sobre o processo de I/O e permite otimizações em situações de alto desempenho. No entanto, quando você precisa de formatação avançada, `scanf` e `printf` ainda podem ser mais convenientes e adequados.
+Using manual buffers with `fread` and `fwrite` can significantly improve performance in competitions by reducing the number of system calls, which is particularly useful when dealing with large volumes of data. This technique offers greater control over the I/O process and allows for optimizations in high-performance scenarios. However, when advanced formatting is required, `scanf` and `printf` might still be more convenient and suitable.
 
 ## Introduction to Namespaces
 
@@ -2526,32 +2547,32 @@ Return the leftmost Magic Plate index. If no such plate exists, return $-1$.
 
 **Example 1:**
 
-Input: $plates = [3,1,5,2,2]$  
-Output: $2$  
-Explanation:  
-The Magic Plate is at index $2$.  
-Weight on the left = $plates[0] + plates[1] = 3 + 1 = 4$  
+Input: $plates = [3,1,5,2,2]$
+Output: $2$
+Explanation:
+The Magic Plate is at index $2$.
+Weight on the left = $plates[0] + plates[1] = 3 + 1 = 4$
 Weight on the right = $plates[3] + plates[4] = 2 + 2 = 4$
 
 **Example 2:**
 
-Input: $plates = [1,2,3]$  
-Output: $-1$  
-Explanation:  
+Input: $plates = [1,2,3]$
+Output: $-1$
+Explanation:
 There is no plate that can be the Magic Plate.
 
 **Example 3:**
 
-Input: $plates = [2,1,-1]$  
-Output: $0$  
-Explanation:  
-The Magic Plate is the first plate.  
-Weight on the left = $0$ (no plates to the left of the first plate)  
+Input: $plates = [2,1,-1]$
+Output: $0$
+Explanation:
+The Magic Plate is the first plate.
+Weight on the left = $0$ (no plates to the left of the first plate)
 Weight on the right = $plates[1] + plates[2] = 1 + (-1) = 0$
 
 **Constraints:**
 
-$$1 \leq plates.length \leq 10^4$$  
+$$1 \leq plates.length \leq 10^4$$
 $$-1000 \leq plates[i] \leq 1000$$
 
 Note: André is very skilled, so don't worry about the real-world physics of balancing plates. Focus only on the mathematical calculations!
@@ -3054,22 +3075,22 @@ Your goal is to calculate this sum for each adjustment and report it in a final 
 
 **Example 1:**
 
-Input: $humidity = [45, 52, 33, 64]$, $adjustments = [[5,0],[-20,1],[-14,0],[18,3]]$  
-Output: $[166,146,132,150]$  
-Explanation: Initially, the array is $[45,52,33,64]$.  
-After adding $5$ to $humidity[0]$, the array becomes $[50,52,33,64]$, and the sum of even values is $50 + 52 + 64 = 166$.  
-After adding $-20$ to $humidity[1]$, the array becomes $[50,32,33,64]$, and the sum of even values is $50 + 32 + 64 = 146$.  
-After adding $-14$ to $humidity[0]$, the array becomes $[36,32,33,64]$, and the sum of even values is $36 + 32 + 64 = 132$.  
+Input: $humidity = [45, 52, 33, 64]$, $adjustments = [[5,0],[-20,1],[-14,0],[18,3]]$
+Output: $[166,146,132,150]$
+Explanation: Initially, the array is $[45,52,33,64]$.
+After adding $5$ to $humidity[0]$, the array becomes $[50,52,33,64]$, and the sum of even values is $50 + 52 + 64 = 166$.
+After adding $-20$ to $humidity[1]$, the array becomes $[50,32,33,64]$, and the sum of even values is $50 + 32 + 64 = 146$.
+After adding $-14$ to $humidity[0]$, the array becomes $[36,32,33,64]$, and the sum of even values is $36 + 32 + 64 = 132$.
 After adding $18$ to $humidity[3]$, the array becomes $[36,32,33,82]$, and the sum of even values is $36 + 32 + 82 = 150$.
 
 **Example 2**:
 
-Input: $humidity = [40]$, $adjustments = [[12,0]]$  
+Input: $humidity = [40]$, $adjustments = [[12,0]]$
 Output: $[52]$
 
 **Example 3**:
 
-Input: $humidity = [30, 41, 55, 68, 72]$, $adjustments = [[10,0],[-15,2],[22,1],[-8,4],[5,3]]$  
+Input: $humidity = [30, 41, 55, 68, 72]$, $adjustments = [[10,0],[-15,2],[22,1],[-8,4],[5,3]]$
 Output: $[140,140,162,230,230]$
 
 **Explanation**:
@@ -4440,7 +4461,7 @@ return sum;
 }
 ```
 
-**[Image placeholder]**  
+**[Image placeholder]**
 _An illustration showing a naive approach to range sum computation, where each element of the array is accessed individually, leading to $O(n)$ complexity._
 
 This solution has $O(1)$ complexity for updates and $O(n)$ for sum queries. To improve query efficiency, we could use a prefix sum array:
@@ -4460,7 +4481,7 @@ return prefixSum[r + 1] - prefixSum[l];
 }
 ```
 
-**[Image placeholder]**  
+**[Image placeholder]**
 _Visualize the prefix sum technique, where the prefix sums are precomputed and used to speed up range sum queries._
 
 Now, sum queries have $O(1)$ complexity, but updates still require $O(n)$ to rebuild the prefix sum array.
@@ -4526,7 +4547,7 @@ Let's consider an array $A = [3, 2, -1, 6, 5, 4, -3, 3, 7, 2, 3, 1]$. The corres
 
 The value stored in each position of the Fenwick tree is the incremental contribution that helps compose the cumulative sum. For example, at position 2, the value stored is $4$, which is the sum of $A[0] + A[1] + A[2]$. At position 4, the value stored is $15$, which is the sum of $A[0] + A[1] + A[2] + A[3] + A[4]$.
 
-![]({{ site.baseurl }}/assets/images/bit1.jpg){: class="lazyimg"}  
+![]({{ site.baseurl }}/assets/images/bit1.jpg){: class="lazyimg"}
 _Gráfico 1.1 - Example Fenwick tree diagram._{: class="legend"}
 
 ##### Querying the Fenwick tree
@@ -4585,7 +4606,7 @@ void update(int i, int delta) {
 }
 ```
 
-**[Image placeholder]**  
+**[Image placeholder]**
 _Illustrate the update process, showing how the Fenwick tree array is updated step by step using the least significant bit._
 
 ##### 4.2 Prefix Sum Query
@@ -4602,7 +4623,7 @@ int query(int i) {
 }
 ```
 
-**[Image placeholder]**  
+**[Image placeholder]**
 _Visualize the prefix sum query operation, showing how the Fenwick tree is traversed from $i$ down to 0 using the least significant bit._
 
 ##### 4.3 Range Query
@@ -4635,7 +4656,7 @@ vector<int> constructBIT(const vector<int>& arr) {
 }
 ```
 
-**[Image placeholder]**  
+**[Image placeholder]**
 _An illustration that explains how the Fenwick tree is constructed from an array, showing the incremental process of building the tree._
 
 #### 6. Complexity Analysis
@@ -4703,7 +4724,7 @@ int query2D(int x, int y) {
 }
 ```
 
-**[Image placeholder]**  
+**[Image placeholder]**
 _A diagram illustrating how a 2D Fenwick tree operates, showing how updates and queries are performed in two dimensions._
 
 #### 8. Applications
@@ -7664,8 +7685,14 @@ Ultimately, the choice between memoization and tabulation often comes down to pe
 
 ## Notes and References
 
-[:1] This ideia come from [Introduction to Dynamic Programming](https://cp-algorithms.com/dynamic_programming/intro-to-dp.html)
+[:1] This ideia comes from [Introduction to Dynamic Programming][1]
 
-[:2] Most of this table came from [Introduction to Dynamic Programming](https://cp-algorithms.com/dynamic_programming/intro-to-dp.html)
+[:2] Most of this table came from [Introduction to Dynamic Programming][1]
 
 [:3] Peter M. Fenwick (1994). "A new data structure for cumulative frequency tables". Software: Practice and Experience. 24 (3): 327–336. CiteSeerX 10.1.1.14.8917. [doi:10.1002/spe.4380240306](https://onlinelibrary.wiley.com/doi/10.1002/spe.4380240306).
+
+[1]: https://cp-algorithms.com/dynamic_programming/intro-to-dp.html
+
+```
+
+```
