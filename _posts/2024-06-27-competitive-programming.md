@@ -17,7 +17,7 @@ tags:
   - Coding Examples
   - Algorithm Optimization
   - Practical Programming Guide
-image: assets/images/prog_dynamic.jpeg
+image: https://imagedelivery.net/1hxs9ILXdwdbfdPXf_9gnA/913aaca6-2fce-45af-e759-e62d8e215d00/
 description: Dynamic Programming in C++ with practical examples, performance analysis, and detailed explanations to optimize your coding skills and algorithm efficiency.
 slug: competitive-programming-techniques-insights
 keywords:
@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-14T00:52:43.830Z
+lastmod: 2024-09-14T01:00:31.864Z
 ---
 
 ## Introduction
