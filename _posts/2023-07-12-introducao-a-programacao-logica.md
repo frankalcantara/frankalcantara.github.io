@@ -1459,7 +1459,7 @@ Com um pouco mais de formalidade podemos dizer que: considere as proposições $
 $$
 \begin{array}{|c|c|c|c|c|}
  \hline
- P & Q & P \implies Q & \lnot Q \implies \lnot P & P \implies Q \iff \lnot Q \implies \lnot P \\
+ P & Q & P \rightarrow Q & \lnot Q \rightarrow \lnot P & P \rightarrow Q \leftrightarrow \lnot Q \rightarrow \lnot P \\
  \hline
  F & F & T & T & T \\
  \hline
@@ -1472,7 +1472,7 @@ $$
  \end{array}
 $$
 
-Como a coluna da operação principal de $P\implies Q \iff \lnot Q \implies \lnot P$ contém apenas valores verdadeiros, a proposição bicondicional é uma tautologia, consequentemente e as fórmulas $P\implies Q$ e $\lnot Q \implies \lnot P$ são logicamente equivalentes.
+Como a coluna da operação principal de $P\rightarrow Q \iff \lnot Q \rightarrow \lnot P$ contém apenas valores verdadeiros, a proposição bicondicional é uma tautologia, consequentemente e as fórmulas $P\rightarrow Q$ e $\lnot Q \rightarrow \lnot P$ são logicamente equivalentes.
 
 **Exemplo 2:** Vamos mostrar que $P\land Q$ não é logicamente equivalente A$P\lor Q$.
 
@@ -1500,7 +1500,7 @@ Verificando a Tabela Verdade:
 $$
 \begin{array}{|c|c|c|c|c|c|}
  \hline
- P & Q & \neg P & \neg P \lor Q & P \rightarrow Q \iff \neg P \lor Q\\
+ P & Q & \neg P & \neg P \lor Q & P \rightarrow Q \leftrightarrow \neg P \lor Q\\
  \hline
  V & V & F & V & V\\
  \hline
@@ -2974,14 +2974,14 @@ Converter uma fórmula para a FND geralmente envolve os seguintes passos:
 **Exemplo 5**: $\neg(p \land q) \rightarrow (r \leftrightarrow s)$
 
 $$
-\begin{align\*}
+\begin{align*}
 \quad 1. & \quad \neg(p \land q) \rightarrow (r \leftrightarrow s) \\
 \quad 2. & \quad \neg(p \land q) \rightarrow ((r \rightarrow s) \land (s \rightarrow r)) \, \text{ (Substituindo a equivalência por suas implicações)} \\
 \quad 3. & \quad \neg(p \land q) \rightarrow ((\neg r \lor s) \land (\neg s \lor r)) \, \text{ (Convertendo as implicações em disjunções)} \\
 \quad 4. & \quad (\neg \neg(p \land q)) \lor ((\neg r \lor s) \land (\neg s \lor r)) \, \text{ (Aplicando a equivalência } p \rightarrow q \equiv \neg p \lor q \text{)} \\
 \quad 5. & \quad (p \land q) \lor ((\neg r \lor s) \land (\neg s \lor r)) \, \text{ (Aplicando a dupla negação)} \\
 \quad 6. & \quad (p \land q) \lor (r \land s) \lor (\neg r \land \neg s) \, \text{ (Aplicando a distributividade para obter a FND)}
-   \end{align\*}
+   \end{align*}
 $$
 
 A Forma Normal Disjuntiva é útil porque qualquer fórmula lógica pode ser representada desta forma, e a representação é única (à exceção da ordem dos literais e cláusulas).
@@ -3031,7 +3031,7 @@ Converter uma fórmula para a Forma Normal Conjuntiva, já incluindo os conceito
 
 **Exemplo 1**: $(A \land B) \rightarrow (C \lor D)$
 
-1. Eliminar Implicações\*\*:
+1. Eliminar Implicações\*:
 
    $$\neg (A \land B) \lor (C \lor D) \rightarrow (\neg A \lor \neg B) \lor (C \lor D)$$
 
