@@ -23,7 +23,7 @@ keywords:
   - Programação Lógica
 draft: true
 toc: true
-lastmod: 2024-09-15T01:15:32.399Z
+lastmod: 2024-09-15T01:21:02.881Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -41,7 +41,7 @@ Na Programação Descritiva, o programador fornece uma descrição lógica ou fu
 
 Na Programação Lógica, um dos paradigmas da **Programação Descritiva** usamos a dedução para resolver problemas.
 
-_Uma hipótese é uma suposição, expressa na forma de proposição, que é acreditada ser verdadeira, mas ainda não foi provada_. Uma sentença declarativa que precisa ser verificada em busca da sua validação. Na linguagem natural, conjecturas são frequentemente expressas como declarações. Na Lógica de Primeira Ordem, serão proposições e as proposições serão tratadas como sentenças que foram criadas para serem verificadas na busca da verdade. Para testar a verdade expressa nestas sentenças usaremos as ferramentas da própria Lógica de Primeira Ordem.
+_Uma hipótese é uma suposição, expressa na forma de proposição, que é acreditada ser verdadeira, mas que ainda não foi provada_. Uma sentença declarativa que precisa ser verificada em busca da sua validação. Na linguagem natural, conjecturas são frequentemente expressas como declarações. Na Lógica de Primeira Ordem, serão proposições e as proposições serão tratadas como sentenças que foram criadas para serem verificadas na busca da verdade. Para testar a verdade expressa nestas sentenças usaremos as ferramentas da própria Lógica de Primeira Ordem.
 
 ![Diagrama de Significado de Conjecturas](/assets/images/conjecturas.jpeg)
 
@@ -109,7 +109,7 @@ Termos são variáveis, constantes ou mesmo funções aplicadas a termos e segue
 2. uma constante $A$ é um termo em si; uma proposição que a contenha será verdadeira $(T)$ ou falsa $(F)$;
 3. se $\mathbf{f}$ é uma função de termos $(t_1, ... t_n)$ então $\mathbf{f}(t_1, ... t_n)$ é um termo.
 
-Cada proposição, ou sentença, na Lógica Proposicional é um fato fundamental e indivisível. _A chuva cai_, _O sol brilha_ - cada uma dessas proposições é verdadeira ou falsa por si só, como uma unidade, um átomo, elemento básico e fundamental de todas as expressões. Mais tarde, chamaremos de átomos a todo predicado aplicado aos termos de uma fórmula. Assim, precisamos definir os predicados.
+**Cada proposição, ou sentença, na Lógica Proposicional é um fato fundamental e indivisível**. _A chuva cai_, _O sol brilha_ - cada uma dessas proposições é verdadeira ou falsa por si só, como uma unidade, um átomo, elemento básico e fundamental de todas as expressões. Mais tarde, chamaremos de átomos a todo predicado aplicado aos termos de uma fórmula. Assim, precisamos definir os predicados.
 
 1. se $P$ é um predicado de termos $(t_1, ... t_n)$ então $P(t_1, ... t_n)$ é uma Fórmula Bem Formada, um átomo.
 2. se $P$ e $Q$ são Fórmulas Bem Formadas então: $\neg P$, $P\wedge Q$, $P \vee Q$, $P \rightarrow Q$ e $P \leftrightarrow Q$ são Fórmulas Bem Formadas.
@@ -121,7 +121,7 @@ Finalmente podemos definir a linguagem da Lógica de Primeira Ordem como o conju
 
 ## Lógica Proposicional
 
-Esse sistema, também chamado de álgebra booleana, fundamental para o desenvolvimento da computação, é uma verdadeira tapeçaria de possibilidades. Na Lógica Proposicional, declarações atômicas, que só podem ter valores verdadeiro, $T$, ou falso $F$, são entrelaçadas em declarações compostas cuja veracidade, segundo as regras desse cálculo, depende dos valores de verdade das declarações atômicas que as compõem quando sujeitas aos operadores, ou conectivos, que definimos anteriormente.
+Esse sistema, também chamado de álgebra booleana, fundamental para o desenvolvimento da computação, é uma verdadeira tapeçaria de possibilidades. **Na Lógica Proposicional, declarações atômicas, que só podem ter valores verdadeiro, $T$, ou falso $F$, são entrelaçadas em declarações compostas cuja veracidade, segundo as regras desse cálculo, depende dos valores de verdade das declarações atômicas que as compõem quando sujeitas aos operadores, ou aos conectivos, que definimos anteriormente**.
 
 Vamos representar essas declarações atômicas por literais $A$, $B$, $X_1$, $X_2$ etc., e suas negações por $\neg A$, $\neg B$, $\neg X_1$, $\neg X_2$ etc. Todos os símbolos individuais e suas negações são conhecidos como literais.
 
