@@ -23,7 +23,7 @@ keywords:
   - Programação Lógica
 draft: true
 toc: true
-lastmod: 2024-09-15T01:26:44.085Z
+lastmod: 2024-09-15T01:40:20.229Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -97,7 +97,7 @@ $$\neg, \forall, \exists, \wedge, \vee, \rightarrow, \leftrightarrow$$
 
 Dando maior precedência a $\neg$ e a menor a $\leftrightarrow$.
 
-O uso dos parênteses e da ordem de precedência requer cautela, muita cautela. Os parênteses permitem que possamos escrever $(\forall x(\exists y (\mathbf{p}(x,y)\rightarrow \mathbf{q}(x))))$ ou $\forall x \exists y (\mathbf{p}(x,y)\rightarrow \mathbf{q}(x))$ que são a mesma Fórmula Bem Formada. Escolha a opção que seja mais fácil de ler e entender.
+O uso dos parênteses e da ordem de precedência requer cautela, muita cautela. Os parênteses permitem que possamos escrever $(\forall x(\exists y (\mathbf{p}(x,y)\rightarrow \mathbf{q}(x))))$ ou $\forall x \exists y (\mathbf{p}(x,y)\rightarrow \mathbf{q}(x))\,$ que são a mesma Fórmula Bem Formada. Escolha a opção que seja mais fácil de ler e entender.
 
 Nesta linguagem cada sentença, ou proposição, deve ser verdadeira ou falsa, nunca pode ser verdadeira e falsa ao mesmo tempo, e não pode ser algo diferente de verdadeiro ou falso. Para que uma sentença, ou proposição, seja verdadeira ela precisa ser logicamente verdadeira. Uma sentença contraditória é aquela que é sempre falsa, independentemente da interpretação.
 
@@ -125,7 +125,7 @@ Esse sistema, também chamado de álgebra booleana, fundamental para o desenvolv
 
 Vamos representar essas declarações atômicas por literais $A$, $B$, $X_1$, $X_2$ etc., e suas negações por $\neg A$, $\neg B$, $\neg X_1$, $\neg X_2$ etc. Todos os símbolos individuais e suas negações são conhecidos como literais.
 
-Na Lógica Proposicional, as fórmulas, chamadas de Fórmulas Bem Formadas, podem ser atômicas, ou compostas. No caso das fórmulas compostas, existe um operador principal que conecta duas fórmulas atômicas ou duas fórmulas compostas.
+Na Lógica Proposicional, as fórmulas são conhecidas como Fórmulas Bem Formadas. Elas podem ser atômicas ou compostas. Nas fórmulas compostas, um operador principal liga duas fórmulas atômicas ou duas compostas.
 
 As declarações atômicas e compostas são costuradas por conectivos para produzir declarações compostas, cujo valor de verdade depende dos valores de verdade das declarações componentes. Os conectivos que consideramos inicialmente, e suas tabelas verdade serão:
 
@@ -185,7 +185,7 @@ As declarações atômicas e compostas são costuradas por conectivos para produ
  text-align: center;
  margin-bottom: 20px;">Tabela 1 - Tabela Verdade, operadores básicos.</legend>
 
-Quando aplicamos a Tabela Verdade a uma declaração composta, obtemos um procedimento capaz de determinar se declaração composta é verdadeira ou falsa. Para isso, tudo que temos que fazer é aplicar, segundo as regras de procedência, a Tabela Verdade a expressão, simplificando-a. Uma alternativa mais simples que a aplicação algébrica dos axiomas da Lógica Proposicional.
+Quando usamos a Tabela Verdade em uma declaração composta, podemos ver se ela é verdadeira ou falsa. Basta seguir as regras de precedência e aplicar a Tabela Verdade, simplificando a expressão. É uma alternativa mais direta do que o uso dos axiomas da Lógica Proposicional.
 
 O operador $\vee$, também chamado de ou inclusivo, é verdade quando pelo menos um dos termos é verdadeiro. Diferindo de um operador, que por não ser básico e fundamental, não consta da nossa lista, chamado de ou exclusivo, $\oplus $, falso se ambos os termos forem iguais, ou verdadeiros ou falsos.
 
@@ -234,11 +234,11 @@ Cada operador com sua própria aridade:
 
 Ainda observando a Tabela 1, que contem a Tabela Verdade dos operadores da Lógica Proposicional, é fácil perceber que se tivermos quatro termos diferentes, em vez de dois, teremos $2^4 = 16$ linhas. Independente do número de termos, se para uma determinada Fórmula Bem Formada todos os resultados forem verdadeiros, $T$, teremos uma _tautologia_, se todos forem falsos, $f$ uma _contradição_.
 
-Uma _tautologia_ é uma fórmula que é sempre verdadeira, não importando atribuição de valores às variáveis. Em Programação Lógica, tautologias representam verdades universais sobre o domínio do problema. Já uma _contradição_ é uma fórmula que é sempre falsa, independentemente da atribuição de valores às variáveis. Na Programação Lógica, contradições indicam inconsistências ou impossibilidades lógicas no domínio do problema.
+**Uma tautologia é uma fórmula que é sempre verdadeira, não importa os valores dados às variáveis**. Na Programação Lógica, tautologias são verdades universais no domínio do problema. Uma contradição é uma fórmula que é sempre falsa, independente dos valores das variáveis. Em Programação Lógica, contradições mostram inconsistências ou impossibilidades lógicas no domínio.
 
 Identificar tautologias permite simplificar expressões e fazer inferências válidas automaticamente. Reconhecer contradições evita o custo de tentar provar algo logicamente impossível.
 
-Linguagens de programação que usam a Programação Lógica usam **unificação** e resolução para fazer deduções. Tautologias geram cláusulas vazias que simplificam esta resolução. Em problemas de **satisfatibilidade**, se obtivermos uma contradição, sabemos que as premissas são insatisfatíveis. Segure as lágrimas e o medo. Os termos **unificação** e **satisfatibilidade** serão explicados assim que sejam necessários. Antes disso, precisamos falar de _equivalências_. Para isso vamos incluir um metacaractere no alfabeto da nossa linguagem: o caractere $\equiv $ que permitirá o entendimento das principais equivalências da Lógica Proposicional explicitadas a seguir:
+Linguagens de programação que usam a Programação Lógica usam **unificação** e resolução para fazer deduções. Tautologias geram cláusulas vazias que simplificam esta resolução. Em problemas de **satisfatibilidade**, se obtivermos uma contradição, sabemos que as premissas são insatisfatíveis. Segure as lágrimas e o medo. Os termos **unificação** e **satisfatibilidade** serão explicados assim que sejam necessários. Antes disso, precisamos falar de _equivalências_. Para isso vamos incluir um metacaractere no alfabeto da nossa linguagem: o caractere $\equiv$ que permitirá o entendimento das principais equivalências da Lógica Proposicional explicitadas a seguir:
 
 <table style="width: 100%; margin: auto; border-collapse: collapse;">
  <tr style="background-color: #f2f2f2;">
@@ -352,7 +352,7 @@ Linguagens de programação que usam a Programação Lógica usam **unificação
 
 Como essas equivalências permitem validar Fórmulas Bem Formadas sem o uso de uma tabela verdade. Uma coisa interessante seria tentar provar cada uma delas. Mas, isso fica, por enquanto, a cargo da amável leitora.
 
-As equivalências que listei surgiram quase espontaneamente enquanto estava escrevendo este texto, mais por hábito e necessidade que por algum raciocínio organizado. São muitas as equivalências que existem, estas são as mais comuns no meu cotidiano. Talvez, alguns exemplos de validação de Fórmulas Bem Formadas usando apenas as equivalências apresentadas na Tabela 3, estufar as velas do conhecimento e nos levar pela rota que precisamos seguir:
+AAs equivalências que mencionei surgiram quase naturalmente enquanto escrevia, mais por hábito e necessidade do que por um raciocínio organizado. Existem muitas equivalências, mas essas são as que uso com mais frequência. Talvez, alguns exemplos de validação de Fórmulas Bem Formadas, usando apenas as equivalências da Tabela 3, possam inflar as velas do conhecimento e nos guiar pelo caminho que devemos seguir:
 
 **Exemplo 1**:$P \wedge (Q \vee (P \wedge R))$
 
@@ -460,13 +460,11 @@ $$
 \end{align*}
 $$
 
-A Lógica Proposicional é a estrutura mais simples e profunda que usamos para fazer sentido do universo. Imagine um universo de verdades e falsidades, onde cada proposição é um átomo indivisível que detém uma verdade única e inalterada. Neste cosmos de lógica, estas proposições são as estrelas, e as operações lógicas - conjunção, disjunção, negação, implicação, e bi-implicação - são as forças gravitacionais que as unem em constelações mais complexas de significado.
+A Lógica Proposicional é essencial para entendermos o mundo. Ela é a base de argumentos sólidos e da avaliação de proposições. Nasceu da necessidade humana de buscar a verdade e resolver conflitos com a lógica. Mas sua beleza vai além da filosofia, do discurso e da matemática. É a fundação da Álgebra de [George Boole](https://en.wikipedia.org/wiki/George_Boole), que sustenta o design de circuitos eletrônicos e a construção dos computadores modernos.
 
-A Lógica Proposicional é essencial para a forma como entendemos e interagimos com o mundo ao nosso redor. Ela fornece a base para a construção de argumentos sólidos e para a avaliação da validade de proposições. Originadas na necessidade humana de descobrir a verdade e diminuir os conflitos a partir da lógica. No entanto, a beleza da Lógica Proposicional se estende além dos campos da filosofia, do discurso e da matemática. Ela é a fundação da Álgebra de [George Boole](https://en.wikipedia.org/wiki/George_Boole), a qual, por sua vez, é a base para o design de circuitos eletrônicos e a construção de computadores modernos.
+Em seu trabalho de conclusão de curso, [Claude Shannon](https://en.wikipedia.org/wiki/Claude_Shannon) usou a Álgebra de Boole para simplificar circuitos de controle. Desde então, as operações básicas dessa álgebra — AND, OR, NOT — são os blocos fundamentais dos sistemas digitais. Eles formam o núcleo dos computadores, celulares e, na verdade, de toda a nossa civilização digital. A Lógica Proposicional é a base de todo o raciocínio lógico. Como a tabela periódica para químicos ou as leis de Newton para físicos. É simples, elegante e poderosa.
 
-Em seu trabalho de conclusão de curso, [Claude Shannon](https://en.wikipedia.org/wiki/Claude_Shannon) aplicou a Álgebra de Boole à simplificação de circuitos de controle. Desde então, as operações básicas da Álgebra de Boole - AND, OR, NOT - são os componentes fundamentais dos sistemas digitais que formam o núcleo dos computadores, telefones celulares e, de fato, de toda a nossa civilização essencialmente digital. A Lógica Proposicional a base sobre a qual construímos todo o edifício do raciocínio lógico. É como a tabela periódica para os químicos ou as leis de Newton para os físicos. É simples, elegante e, acima de tudo, poderosa.
-
-Tão importante quanto o impacto da **Lógica Proposicional** na tecnologia digital é a sua importância no pensamento racional, tomada de decisão e prova de teoremas. Neste destino, nosso teodolito são as **Regras de Inferência**.
+Tão importante quanto o impacto da **Lógica Proposicional** na tecnologia digital é seu papel no pensamento racional, na tomada de decisões e na prova de teoremas. Neste caminho, nosso guia são as **Regras de Inferência**.
 
 ## Regras de Inferência
 
@@ -482,11 +480,9 @@ $$P_1, P_2, ..., P_n \vdash C.$$
 
 Onde o conjunto formado $P_1, P_2, ..., P_n$, chamado de contexto, ou antecedente, $\Gamma$, e $C$, chamado de conclusão, ou consequente, são Formulas Bem Formadas. A regra significa que se as proposições que constituem a conjunção expressa no contexto é verdadeira então a conclusão $C$, consequência, também será verdadeira.
 
-Eu vou tentar usar o par contexto e conclusão. Entretanto já vou me desculpando se escapar um antecedente e consequente. Será por mera força do hábito. Quando estudamos lógica chamamos de **argumento** a uma lista de proposições, neste caso chamadas de premissas, seguidas de uma palavra, ou expressão (portanto, consequentemente, desta forma), e de outra proposição, neste caso, chamada de conclusão.
+Eu vou tentar usar contexto e conclusão. Mas me perdoem se eu escapar para antecedente e consequente. É apenas o hábito. Quando estudamos lógica, chamamos de **argumento** uma lista de proposições, que aqui são as premissas. Elas vêm seguidas de uma palavra ou expressão (portanto, consequentemente, desta forma) e de outra proposição, que chamamos de conclusão. A forma que usamos para representar isso é chamada de sequência de dedução. É uma maneira de mostrar que, se a proposição colocada acima da linha horizontal for verdadeira, então estamos afirmando que todas as proposições $P_1, P_2, ..., P_n$ acima da linha são verdadeiras. E, por isso, a proposição abaixo da linha, a conclusão, também será verdadeira.
 
-A representação que usamos é conhecida como sequência de dedução, é uma forma de indicar que se o Proposição, colocado acima da linha horizontal for verdadeiro, estamos dizendo que todas as preposições $P_1, P_2, ..., P_n$ são verdadeiras e todas as proposições colocas abaixo da linha, conclusão, também serão verdadeiras.
-
-As regras de inferência são o alicerce da lógica dedutiva e do estudo das demonstrações matemáticas. Elas permitem que raciocínios complexos sejam quebrados em passos mais simples, cada um dos quais pode ser justificado pela aplicação de uma regra de inferência. Algumas das regras de inferência mais utilizadas estão listadas a seguir:
+**As regras de inferência são o alicerce da lógica dedutiva e das provas matemáticas. Elas permitem que raciocínios complexos sejam divididos em passos simples, onde cada passo é justificado pela aplicação de uma regra de inferência**. A seguir, estão algumas das regras de inferência mais usadas:
 
 ### Modus Ponens
 
