@@ -22,156 +22,12 @@ keywords:
   - Programação
   - Programação Lógica
 draft: true
-lastmod: 2024-09-05T18:30:44.157Z
+toc: true
+lastmod: 2024-09-15T01:15:32.399Z
+beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
-A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
-
 > "Logic programming is the future of artificial intelligence." - [Marvin Minsky](https://en.wikipedia.org/wiki/marvin_Minsky)
-
-- [Introdução](#introdução)
-- [Lógica de Primeira Ordem](#lógica-de-primeira-ordem)
-  - [Lógica Proposicional](#lógica-proposicional)
-  - [Regras de Inferência](#regras-de-inferência)
-    - [Modus Ponens](#modus-ponens)
-    - [Modus Tollens](#modus-tollens)
-    - [Dupla Negação](#dupla-negação)
-    - [Adição](#adição)
-    - [Modus Tollendo Ponens](#modus-tollendo-ponens)
-    - [Adjunção](#adjunção)
-    - [Simplificação](#simplificação)
-    - [Bicondicionalidade](#bicondicionalidade)
-    - [Equivalência](#equivalência)
-  - [Classificando Fórmulas Proposicionais](#classificando-fórmulas-proposicionais)
-- [Um Sistema de Prova](#um-sistema-de-prova)
-  - [Contrapositivas e Recíprocas](#contrapositivas-e-recíprocas)
-    - [Logicamente Equivalente](#logicamente-equivalente)
-    - [Contrapositiva](#contrapositiva)
-    - [Recíproca](#recíproca)
-  - [Análise de Argumentos](#análise-de-argumentos)
-  - [Finalmente, um Sistema de Prova](#finalmente-um-sistema-de-prova)
-    - [Lema](#lema)
-    - [Hipóteses](#hipóteses)
-- [Lógica Predicativa](#lógica-predicativa)
-  - [Introdução aos Predicados](#introdução-aos-predicados)
-  - [Universo do Discurso](#universo-do-discurso)
-    - [Entendendo Predicados](#entendendo-predicados)
-  - [Quantificadores](#quantificadores)
-  - [Quantificador Universal](#quantificador-universal)
-  - [Quantificador Existencial](#quantificador-existencial)
-    - [Equivalências Interessantes](#equivalências-interessantes)
-  - [Dos Predicados à Linguagem Natural](#dos-predicados-à-linguagem-natural)
-    - [Exercícios de Conversão de Linguagem Natural em Expressões Predicativas](#exercícios-de-conversão-de-linguagem-natural-em-expressões-predicativas)
-    - [Exercícios de Conversão de Expressões Predicativas em Linguagem Natural](#exercícios-de-conversão-de-expressões-predicativas-em-linguagem-natural)
-  - [Ordem de Aplicação dos Quantificadores](#ordem-de-aplicação-dos-quantificadores)
-    - [Negação dos Quantificadores](#negação-dos-quantificadores)
-  - [Regras de Inferência usando Quantificadores](#regras-de-inferência-usando-quantificadores)
-    - [Repetição](#repetição)
-    - [Instanciação Universal](#instanciação-universal)
-    - [Generalização Existencial](#generalização-existencial)
-    - [Instanciação Existencial](#instanciação-existencial)
-  - [Problemas Interessantes Resolvidos com Lógica Proposicional e Predicativa](#problemas-interessantes-resolvidos-com-lógica-proposicional-e-predicativa)
-    - [Exemplos Extras de conversão de sentenças em predicados](#exemplos-extras-de-conversão-de-sentenças-em-predicados)
-    - [Exemplos Extras de Conversão de Predicados em Sentenças](#exemplos-extras-de-conversão-de-predicados-em-sentenças)
-- [Formas Normais](#formas-normais)
-  - [Forma Normal Negativa (FNN)](#forma-normal-negativa-fnn)
-    - [Estrutura da Forma Normal Negativa](#estrutura-da-forma-normal-negativa)
-    - [Conversão para Forma Normal Negativa](#conversão-para-forma-normal-negativa)
-    - [Exemplo 1: Converta a fórmula $\\neg (A \\land (B \\rightarrow C))$ Para FNN](#exemplo-1-converta-a-fórmula-neg-a-land-b-rightarrow-c-para-fnn)
-    - [Exemplo 2: Converta a fórmula $(A \\rightarrow B) \\land \\neg (C \\lor D)$ Para FNN](#exemplo-2-converta-a-fórmula-a-rightarrow-b-land-neg-c-lor-d-para-fnn)
-  - [Forma Normal Disjuntiva (FND)](#forma-normal-disjuntiva-fnd)
-    - [Estrutura da Forma Normal Disjuntiva](#estrutura-da-forma-normal-disjuntiva)
-    - [Conversão para Forma Normal Disjuntiva](#conversão-para-forma-normal-disjuntiva)
-    - [Exemplos de Conversão para a Forma Normal Disjuntiva (Proposicional)](#exemplos-de-conversão-para-a-forma-normal-disjuntiva-proposicional)
-  - [Forma Normal Conjuntiva (FNC)](#forma-normal-conjuntiva-fnc)
-    - [Estrutura da Forma Normal Conjuntiva](#estrutura-da-forma-normal-conjuntiva)
-    - [Conversão para Forma Normal Conjuntiva](#conversão-para-forma-normal-conjuntiva)
-    - [Exemplos de Conversão para Forma Normal Conjuntiva](#exemplos-de-conversão-para-forma-normal-conjuntiva)
-  - [Usando a Tabela-Verdade para Gerar Formas Normais](#usando-a-tabela-verdade-para-gerar-formas-normais)
-    - [Gerando a Forma Normal Disjuntiva](#gerando-a-forma-normal-disjuntiva)
-    - [Gerando a Forma Normal Conjuntiva](#gerando-a-forma-normal-conjuntiva)
-  - [Skolemização](#skolemização)
-  - [Forma Normal Prenex](#forma-normal-prenex)
-    - [Estrutura da Forma Normal Prenex](#estrutura-da-forma-normal-prenex)
-    - [Conversão para Forma Normal Prenex](#conversão-para-forma-normal-prenex)
-    - [Regras de Equivalência Prenex](#regras-de-equivalência-prenex)
-  - [Conversão para Formas Normais Conjuntiva (FNC) e Disjuntiva (FND)](#conversão-para-formas-normais-conjuntiva-fnc-e-disjuntiva-fnd)
-    - [Exemplos Interessantes da Forma Prenex](#exemplos-interessantes-da-forma-prenex)
-    - [Observações Importantes](#observações-importantes)
-    - [Exemplos de conversão em formas normais, conjuntiva e disjuntiva](#exemplos-de-conversão-em-formas-normais-conjuntiva-e-disjuntiva)
-- [Definição de um Mundo na Lógica de Primeira Ordem](#definição-de-um-mundo-na-lógica-de-primeira-ordem)
-  - [3. Definição Formal de um Mundo](#3-definição-formal-de-um-mundo)
-  - [4. Exemplo de Construção de um Mundo](#4-exemplo-de-construção-de-um-mundo)
-  - [5. Discussão sobre o Mundo Definido](#5-discussão-sobre-o-mundo-definido)
-  - [6. Aplicações e Importância](#6-aplicações-e-importância)
-    - [Exemplo: Teoria dos Modelos](#exemplo-teoria-dos-modelos)
-      - [Regras](#regras)
-    - [Ciência da Computação](#ciência-da-computação)
-      - [Exemplo 1](#exemplo-1)
-      - [Exemplo 2](#exemplo-2)
-    - [Linguística Computacional](#linguística-computacional)
-      - [Exemplo 1](#exemplo-1-1)
-    - [Exemplos de Aplicação da Lógica de Primeira Ordem em Biologia e Economia](#exemplos-de-aplicação-da-lógica-de-primeira-ordem-em-biologia-e-economia)
-      - [Exemplo 1: Biologia](#exemplo-1-biologia)
-      - [Exemplo 2: Economia](#exemplo-2-economia)
-    - [Exercício 1](#exercício-1)
-      - [Descrição do problema](#descrição-do-problema)
-      - [Solução](#solução)
-      - [Consultas possíveis](#consultas-possíveis)
-    - [Exercício 2](#exercício-2)
-      - [Solução](#solução-1)
-    - [Exercício 3 \[:2\]](#exercício-3-2)
-      - [Solução](#solução-2)
-    - [Exercício 4](#exercício-4)
-      - [Descrição do problema](#descrição-do-problema-1)
-      - [Solução](#solução-3)
-      - [Regras e Axiomas](#regras-e-axiomas)
-      - [Axiomas específicos:](#axiomas-específicos)
-      - [Consultas possíveis:](#consultas-possíveis-1)
-    - [Exercício 5](#exercício-5)
-      - [Movimentos](#movimentos)
-      - [Objetivo](#objetivo)
-      - [Formalização em Lógica de Primeira Ordem](#formalização-em-lógica-de-primeira-ordem)
-      - [Regras e Axiomas](#regras-e-axiomas-1)
-      - [Consultas Possíveis](#consultas-possíveis-2)
-    - [Exercício 6](#exercício-6)
-    - [Solução](#solução-4)
-    - [Regras e Axiomas](#regras-e-axiomas-2)
-    - [Consultas Possíveis](#consultas-possíveis-3)
-    - [Exercício 7: Formalização do Problema da Torre de Hanói (Muito Completo)](#exercício-7-formalização-do-problema-da-torre-de-hanói-muito-completo)
-      - [Regras e Axiomas](#regras-e-axiomas-3)
-      - [Solução](#solução-5)
-      - [Axiomas](#axiomas)
-      - [Consultas Possíveis](#consultas-possíveis-4)
-  - [Cláusula de Horn](#cláusula-de-horn)
-    - [Definição da Cláusula de Horn](#definição-da-cláusula-de-horn)
-      - [Forma Geral](#forma-geral)
-      - [Tipos de Cláusulas de Horn](#tipos-de-cláusulas-de-horn)
-      - [Exemplo 1: Sistema de Recomendação de Roupas](#exemplo-1-sistema-de-recomendação-de-roupas)
-      - [Exemplo 2: Sistema de Diagnóstico Médico](#exemplo-2-sistema-de-diagnóstico-médico)
-      - [Exemplo 3: Mundo Núcleo Familiar](#exemplo-3-mundo-núcleo-familiar)
-  - [Fatos (Cláusulas de Horn Unitárias)](#fatos-cláusulas-de-horn-unitárias)
-  - [Regras (Cláusulas de Horn Não-Unitárias)](#regras-cláusulas-de-horn-não-unitárias)
-  - [Consultas (Metas)](#consultas-metas)
-    - [Explicação](#explicação)
-    - [Exemplo 4 - Torre de Hanói](#exemplo-4---torre-de-hanói)
-      - [Predicados](#predicados)
-      - [Fatos (Cláusulas de Horn Unitárias)](#fatos-cláusulas-de-horn-unitárias-1)
-      - [Regras (Cláusulas de Horn Não-Unitárias)](#regras-cláusulas-de-horn-não-unitárias-1)
-      - [Consultas (Metas)](#consultas-metas-1)
-    - [Quantificadores em Cláusulas de Horn](#quantificadores-em-cláusulas-de-horn)
-      - [Usando o Quantificador Universal em Cláusulas de Horn](#usando-o-quantificador-universal-em-cláusulas-de-horn)
-      - [Usando o Quantificador Existencial em Cláusulas de Horn](#usando-o-quantificador-existencial-em-cláusulas-de-horn)
-    - [Conversão de Fórmulas](#conversão-de-fórmulas)
-      - [Exemplo: dada a fórmula](#exemplo-dada-a-fórmula)
-      - [Transformação de Forma Normal Conjuntiva (FNC) para Cláusulas de Horn](#transformação-de-forma-normal-conjuntiva-fnc-para-cláusulas-de-horn)
-      - [Etapas de Transformação](#etapas-de-transformação)
-      - [Problemas interessantes resolvidos com a Cláusula de Horn](#problemas-interessantes-resolvidos-com-a-cláusula-de-horn)
-    - [Cláusulas de Horn e o Prolog](#cláusulas-de-horn-e-o-prolog)
-      - [Exemplo 1: O mais simples possível](#exemplo-1-o-mais-simples-possível)
-      - [Exemplo 2: Sistema de Recomendação de Roupas em Prolog](#exemplo-2-sistema-de-recomendação-de-roupas-em-prolog)
-    - [Um Problema Interessante Em Prolog](#um-problema-interessante-em-prolog)
-- [Glossário](#glossário)
 
 # Introdução
 
@@ -3209,7 +3065,15 @@ Partindo da mesma tabela verdade da expressão $(A \lor B) \rightarrow (C \land 
 
    Combinando-os com uma conjunção, temos a Forma Normal Conjuntiva:
 
-   $$(A \lor B) \rightarrow (C \land \neg A) \equiv (\neg A \lor \neg B \lor \neg C \lor A) \\ \land (\neg A \lor \neg B \lor C \lor A) \land (\neg A \lor B \lor \neg C \lor A) \\ \land (\neg A \lor B \lor C \lor A) \land (A \lor \neg B \lor C \lor \neg A)$$
+   $$
+   \begin{align*}
+   (A \lor B) \rightarrow (C \land \neg A) &\equiv (\neg A \lor \neg B \lor \neg C \lor A) \\
+   &\land (\neg A \lor \neg B \lor C \lor A) \\
+   &\land (\neg A \lor B \lor \neg C \lor A) \\
+   &\land (\neg A \lor B \lor C \lor A) \\
+   &\land (A \lor \neg B \lor C \lor \neg A)
+   \end{align*}
+   $$
 
 Lamentavelmente, as tabelas verdade não têm utilidade na Lógica de Primeira Ordem quando usamos predicados e quantificadores. Skolemização e Forma Normal Prenex são as rotas que precisaremos dominar para desvendar esse enigma.
 
@@ -3349,10 +3213,10 @@ Isso permite _mover_ o quantificador para dentro do escopo do operador lógico. 
 **4. Eliminar os Quantificadores Existenciais**: substitua cada quantificador existencial $\exists x$ Por um novo termo constante ou Função Skolem, dependendo das variáveis livres em seu escopo. Para eliminar os quantificadores existenciais, é necessário introduzir novos termos: Constantes ou Funções Skolem.
 
 1. **Se o quantificador existencial não tem quantificadores universais à sua esquerda:**
-   SubstituA$\exists x P(x)$ Por $P(c)$, onde $c$ é uma nova constante.
+   Substitua $\exists x P(x)$ Por $P(c)$, onde $c$ é uma nova constante.
 
 2. **Se o quantificador existencial tem quantificadores universais à sua esquerda:**
-   SubstituA$\exists x P(x)$ Por $P(f(y_1, y_2, \ldots, y_n))$, onde $f$ é uma nova função Skolem, e $y_1, y_2, \ldots, y_n$ são as variáveis universais à esquerda do quantificador existencial.
+   Substitua $\exists x P(x)$ Por $P(f(y_1, y_2, \ldots, y_n))$, onde $f$ é uma nova função Skolem, e $y_1, y_2, \ldots, y_n$ são as variáveis universais à esquerda do quantificador existencial.
 
 **5. Mover os Quantificadores Universais para Fora**: mova todos os quantificadores universais para fora, para a esquerda da expressão. Isso cria uma Forma Prenex da fórmula.
 
@@ -5057,7 +4921,7 @@ Os fatos indicam que "João é homem" e "maria é mulher".
 mortal(X) :- homem(X).
 ```
 
-A regra estabelece que "Se X é homem, então X é mortal". O símbolo :- representa implicação.
+A regra estabelece que "Se $X$ é homem, então $X$ é mortal". O símbolo $:-$ representa implicação.
 
 **Consulta:**
 
@@ -5105,7 +4969,7 @@ Imagine que estamos construindo um sistema lógico simples em Prolog para recome
  camiseta :- temperatura_acima_de_20.
 ```
 
-**Consultas**: agora, podemos fazer consultas ao nosso sistema para obter recomendações de roupas.
+Agora, podemos fazer consultas ao nosso sistema para obter recomendações de roupas.
 
 - **Consulta 1**: está ensolarado e a temperatura está acima de 20°C. O que devo vestir?
 
@@ -5178,11 +5042,11 @@ estado_inicial :-
 % ?- estado_inicial.
 ```
 
-[Niklaus Wirth](https://en.wikipedia.org/wiki/Niklaus_Wirth) em seu livro _Algorithms + Data Structures = Programs_ [^1] cita um problema interessante que foi publicado em um jornal de _Zürich_ em 1922, que cito em tradução livre a seguir:
+[Niklaus Wirth](https://en.wikipedia.org/wiki/Niklaus_Wirth) em seu livro _Algorithms + Data Structures = Programs_ [^1] cita um problema interessante que foi publicado em um jornal de **Zürich** em 1922, que cito em tradução livre a seguir:
 
 > Casei com uma viúva (vamos chamá-la de W) que tem uma filha adulta (chame-a de D). Meu pai (F), que nos visitava com bastante frequência, apaixonou-se pela minha enteada e casou-se com ela. Por isso, meu pai se tornou meu genro e minha enteada se tornou minha madrasta. Alguns meses depois, minha esposa deu à luz um filho (S1), que se tornou cunhado do meu pai, e meu tio. A esposa do meu pai, ou seja, minha enteada, também teve um filho (S2). Em outras palavras, para todos os efeitos, eu sou meu próprio avo.
 
-Usando este relato como base podemos criar uma base de conhecimento em Prolog, incluir algumas regras, e finalmente verificar se é verdade que o _narrador_ é o seu próprio avô.
+Usando este relato como base podemos criar uma base de conhecimento em Prolog, incluir algumas regras, e finalmente verificar se é verdade que o **narrador** é o seu próprio avô.
 
 ```prolog
  % predicados
