@@ -5,6 +5,7 @@
 	"html.autoClosingTags": false,
 	"[markdown]": {},
 	"cSpell.words": [
+		"Aciclicidade",
 		"alloc",
 		"antecendente",
 		"atoi",
@@ -77,6 +78,7 @@
 		"heapsort",
 		"Heapsort",
 		"Hemingway",
+		"Herbrand",
 		"ICPC",
 		"ifstream",
 		"infinitezimalmente",
@@ -175,8 +177,9 @@
 		"unmapping",
 		"unseq",
 		"Warshall",
+		"WIRTH",
 		"xelin",
 		"Zermelo-Fraenkel"
 	],
-	"cSpell.ignoreWords": ["pmatrix", "μάγμα"]
+	"cSpell.ignoreWords": ["Aviao", "Unico", "conexao", "covid", "grao", "pmatrix", "μάγμα"]
 }

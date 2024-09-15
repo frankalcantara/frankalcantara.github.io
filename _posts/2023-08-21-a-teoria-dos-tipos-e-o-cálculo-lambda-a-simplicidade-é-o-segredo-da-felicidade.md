@@ -82,7 +82,7 @@ $a \in F(a) \iff a \in A \iff a \notin F(a)$ e, novamente, encontramos a contrad
 
 [Bertrand Russell](https://en.wikipedia.org/wiki/Bertrand_Russell) discutiu este paradoxo no Appendix B: The Doctrine of Types do seu livro [The Principles of Mathmatics](https://people.umass.edu/klement/pom/) de 1903. Para resolve-lo, Russell sugeriu a criação de um processo de separação de elementos por níveis específicos o que hoje chamamos de Teoria dos Tipos.
 
-Russell separou os conjuntos em níveis, como prateleiras distintas em uma biblioteca. Como os tipos não se misturam, o paradoxo desaparece. O método é chamado de diagonalização. É como ler uma lista na diagonal. Encontra-se coisas que não podem ser listadas. 
+Russell separou os conjuntos em níveis, como prateleiras distintas em uma biblioteca. Como os tipos não se misturam, o paradoxo desaparece. O método é chamado de diagonalização. É como ler uma lista na diagonal. Encontra-se coisas que não podem ser listadas.
 
 A diagonalização é um método de prova utilizado para mostrar que certas correspondências ou mapeamentos não podem existir. A ideia básica é argumentar por contradição, criando uma situação em que um suposto mapeamento falha em ter uma propriedade que deveria possuir. Prova por contradição é, geralmente, mais fácil.
 
@@ -106,7 +106,7 @@ Na técnica de Russell, a diagonalização não é exatamente igual a de Cantor 
 
 3. A afirmação acima é contraditória: afirma que $R$ pertence a si mesmo se e somente se $R$ não pertence a si mesmo.
 
-Examinamos uma certa _diagonal_. Neste caso, a propriedade de pertencer ou não a si mesmo. E chegamos a uma contradição ao tentar caracterizar a propriedade de um objeto que se auto-referencia. Em resumo, nossa metáfora e nosso paradoxo podem ser resumidos como: 
+Examinamos uma certa _diagonal_. Neste caso, a propriedade de pertencer ou não a si mesmo. E chegamos a uma contradição ao tentar caracterizar a propriedade de um objeto que se auto-referencia. Em resumo, nossa metáfora e nosso paradoxo podem ser resumidos como:
 
 **A Biblioteca e a Classe $X$**: a biblioteca representa o universo de todos os conjuntos, ou, no nosso contexto, a classe $X$.
 
@@ -133,20 +133,16 @@ Essa é a essência do Paradoxo de Russell, e é aqui que a teoria dos tipos ent
 
 Assim, a questão de se o catálogo se cita ou não se torna irrelevante por perder todo sentido. Um catálogo, tipo superior, não pode conter ou referir-se a si mesmo, do mesmo tipo. A hierarquia de tipos impede a formação do paradoxo, restringindo as relações que podem existir entre os objetos.
 
-A contradição é clara. A solução é lógica. A biblioteca é silenciosa novamente, mas a questão permanece. A matemática é simples, a realidade complexa. Uma contradição levou a uma nova compreensão. E a biblioteca permanece lá, intacta, mas mudada. Agora os livros têm tipos diferentes. 
-
-
-
-
+A contradição é clara. A solução é lógica. A biblioteca é silenciosa novamente, mas a questão permanece. A matemática é simples, a realidade complexa. Uma contradição levou a uma nova compreensão. E a biblioteca permanece lá, intacta, mas mudada. Agora os livros têm tipos diferentes.
 
 1. Paradoxos e Teorias de Tipo de Russell
-A teoria dos tipos foi introduzida por Russell para lidar com algumas contradições que ele encontrou em sua descrição da teoria dos conjuntos e foi introduzida em "Apêndice B: A Doutrina dos Tipos" de Russell 1903. 
+   A teoria dos tipos foi introduzida por Russell para lidar com algumas contradições que ele encontrou em sua descrição da teoria dos conjuntos e foi introduzida em "Apêndice B: A Doutrina dos Tipos" de Russell 1903.
 
 Alguns comentários são necessários. Primeiro, a prova não usa a lei do terceiro excluído e é assim válida intuicionisticamente. Segundo, o método usado, chamado de diagonalização, já estava presente no trabalho de du Bois-Reymond para construir funções reais que crescem mais rapidamente do que qualquer função em uma sequência de funções.
 
 Russell analisou o que acontece se aplicarmos este teorema ao caso em que A é a classe de todas as classes, admitindo que exista tal classe. Ele foi então levado a considerar a classe especial das classes que não pertencem a si mesmas
 
-(*)
+(\*)
 
 \( R = \{w \mid w \notin w\} \).
 
@@ -155,12 +151,12 @@ Então temos
 \( R \in R \iff R \notin R \).
 Parece que Cantor já estava ciente do fato de que a classe de todos os conjuntos não pode ser considerada um conjunto.
 
-Russell comunicou esse problema a Frege, e sua carta, juntamente com a resposta de Frege, aparece em van Heijenoort 1967. É importante perceber que a formulação (*) não se aplica como está ao sistema de Frege. Como o próprio Frege escreveu em sua resposta a Russell, a expressão "um predicado é predicado de si mesmo" não é exata. Frege tinha uma distinção entre predicados (conceitos) e objetos. Um predicado (de primeira ordem) se aplica a um objeto, mas não pode ter um predicado como argumento. A formulação exata do paradoxo no sistema de Frege usa a noção da extensão de um predicado \(P\), que designamos como \(\varepsilon P\). A extensão de um predicado é ela mesma um objeto. O importante axioma V é:
+Russell comunicou esse problema a Frege, e sua carta, juntamente com a resposta de Frege, aparece em van Heijenoort 1967. É importante perceber que a formulação (\*) não se aplica como está ao sistema de Frege. Como o próprio Frege escreveu em sua resposta a Russell, a expressão "um predicado é predicado de si mesmo" não é exata. Frege tinha uma distinção entre predicados (conceitos) e objetos. Um predicado (de primeira ordem) se aplica a um objeto, mas não pode ter um predicado como argumento. A formulação exata do paradoxo no sistema de Frege usa a noção da extensão de um predicado \(P\), que designamos como \(\varepsilon P\). A extensão de um predicado é ela mesma um objeto. O importante axioma V é:
 
 (Axioma V)
 
 \( \varepsilon P = \varepsilon Q \iff \forall x [P(x) \iff Q(x)] \)
-Este axioma afirma que a extensão de \(P\) é idêntica à extensão de \(Q\) se e somente se \(P\) e \(Q\) são materialmente equivalentes. Podemos então traduzir o paradoxo de Russell (*) no sistema de Frege, definindo o predicado
+Este axioma afirma que a extensão de \(P\) é idêntica à extensão de \(Q\) se e somente se \(P\) e \(Q\) são materialmente equivalentes. Podemos então traduzir o paradoxo de Russell (\*) no sistema de Frege, definindo o predicado
 
 \( R(x) \iff \exists P [x = \varepsilon P \land \neg P(x)] \)
 Pode então ser verificado, usando o Axioma V de maneira crucial, que
@@ -169,6 +165,3 @@ Pode então ser verificado, usando o Axioma V de maneira crucial, que
 e temos uma contradição também. (Observe que, para definir o predicado \(R\), usamos uma quantificação existencial impredicativa sobre predicados. Pode ser mostrado que a versão predicativa do sistema de Frege é consistente (veja Heck 1996 e para mais refinamentos Ferreira 2002).
 
 Está claro a partir desta conta que uma ideia de tipos já estava presente no trabalho de Frege: lá encontramos uma distinção entre objetos, predicados (ou conceitos), predicados de predicados, etc. (Este ponto é enfatizado em Quine 1940.) Essa hierarquia é chamada de "hierarquia extensional" por Russell (1959), e sua necessidade foi reconhecida por Russell como uma consequência de seu paradoxo.
-
-
-

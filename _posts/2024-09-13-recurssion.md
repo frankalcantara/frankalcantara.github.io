@@ -22,7 +22,7 @@ featured: false
 toc: true
 preview: In this comprehensive guide on recursion, you will learn how this fundamental concept in computer science can be used to solve complex problems. Starting with simple examples of recursive functions and moving to advanced divide-and-conquer algorithms, we explore how recursion simplifies solutions and enables more concise and efficient code. Understand the importance of base cases, direct and indirect recursion, and see how these concepts apply in both functional and imperative programming languages.
 beforetoc: Recursion is a powerful tool that allows you to solve complex problems in a simple and elegant way. In this guide, we will explore the fundamentals of recursion, including practical examples that demonstrate how to efficiently solve problems involving repeated subproblems. Topics such as tail recursion, mutual recursion, and common pitfalls to avoid when using recursion in algorithms are explored in detail.
-lastmod: 2024-09-14T01:43:29.937Z
+lastmod: 2024-09-14T01:59:25.265Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
