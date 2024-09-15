@@ -7,23 +7,23 @@ date: 2023-07-13T02:50:56.534Z
 preview: ""
 image: assets/images/prolog1.jpeg
 tags:
-  - Lógica
-  - Programação Lógica
-  - Prolog
+   - Lógica
+   - Programação Lógica
+   - Prolog
 categories:
-  - disciplina
-  - Lógica
-  - material de Aula
-  - matemática
+   - disciplina
+   - Lógica
+   - material de Aula
+   - matemática
 rating: 5
 slug: decifrando-misterios-jornada-da-programacao-logica
 keywords:
-  - lógica
-  - Programação
-  - Programação Lógica
+   - lógica
+   - Programação
+   - Programação Lógica
 draft: true
 toc: true
-lastmod: 2024-09-15T02:40:08.973Z
+lastmod: 2024-09-15T22:05:57.343Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -1450,7 +1450,7 @@ F & F & T \\
 \end{array}
 $$
 
-Se olharmos para a primeira linha, se $P$ é verdadeiro e $P→ Q$ é verdadeiro, então $Q$ é necessariamente verdadeiro, o que é exatamente a forma de _Modus Ponens_.
+SSe olharmos para a primeira linha, se $P$ é verdadeiro e $P→ Q$ é verdadeiro, então $Q$ é necessariamente verdadeiro, o que é exatamente a forma de Modus Ponens.
 
 **Modus Tollens** : se é verdade que se uma pessoa é um pássaro $P$, então essa pessoa pode voar $Q$, e também é verdade que essa pessoa não pode voar $\neg Q$, então podemos concluir que essa pessoa não é um pássaro $\neg P$. Ou:
 
@@ -1480,7 +1480,7 @@ F & F & T & T & T \\
 \end{array}
 $$
 
-Se olharmos para a segunda linha, se $Q$ é falso e $P\rightarrow Q$ é verdadeiro, então $P$ é necessariamente falso, o que é exatamente a forma de Modus Tollens.
+Se olharmos para a quarta linha, se $Q$ é falso e $P\rightarrow Q$ é verdadeiro, então $P$ é necessariamente falso, o que é exatamente a forma de Modus Tollens.
 
 **Silogismo Hipotético** : _se é verdade que se eu acordar cedo $P$, então eu irei correr $Q$, e também é verdade que se eu correr $Q$, então eu irei tomar um café da manhã saudável $R$, podemos concluir que se eu acordar cedo $P$, então eu irei tomar um café da manhã saudável $R$_.
 
@@ -2221,7 +2221,7 @@ Portanto, as duas fórmulas têm o mesmo valor verdade. Elas são logicamente eq
   </tr>
 </table>
 <legend style="font-size: 1em; text-align: center;
- margin-bottom: 20px;">Tabela 4 - Equivalências entre Quantificadores.</legend>
+ margin-bottom: 20px;">Tabela 5 - Equivalências entre Quantificadores.</legend>
 
 ## Regras de Inferência usando Quantificadores
 
@@ -2947,7 +2947,7 @@ Converter uma fórmula para a Forma Normal Conjuntiva, já incluindo os conceito
 
    $$((p \land \neg q) \lor p) \land \neg p$$
 
-3. Simplificamos a expressão usando propriedades como $p \lor p \equiv p$ e, em seguida, redistribuímos os termos para alcançar a forma normal conjuntiva:
+3. Simplificamos a expressão usando propriedades como $p \lor p \equiv p$ e, em seguida, redistribuímos os termos para alcançar a Forma Normal Conjuntiva:
 
    $$(p \land (\neg q \lor p)) \land \neg p$$
 
@@ -4699,7 +4699,7 @@ Este mundo representa um jogo onde:
 - O Jogador 1 venceu
 - Não houve empate
 
-## Cláusula de Horn
+# Cláusula de Horn
 
 A **Cláusula de Horn** foi nomeada em homenagem ao matemático e lógico americano [Alfred Horn](https://en.wikipedia.org/wiki/Alfred_Horn), que a introduziu em [um artigo publicado em 1951](https://www.cambridge.org/core/journals/journal-of-symbolic-logic/article/abs/on-sentences-which-are-true-of-direct-unions-of-algebras1/DF348CB269B06D6702DA3AE4DCF38C39). O contexto histórico e a motivação para a introdução da Cláusula de Horn são profundamente enraizados na solução do Problema da Decidibilidade. Na primeira metade do século XX, a lógica matemática estava focada na questão da decidibilidade: determinar se uma afirmação lógica é verdadeira ou falsa de maneira algorítmica.
 
@@ -4709,7 +4709,7 @@ Alfred Horn identificou um desses subconjuntos em seu artigo de 1951, introduzin
 
 Se prepare vamos ver porque $P \lor \neg Q \lor \neg R $ é uma Cláusula de Horn e $P \lor Q \lor \neg R$ não é.
 
-### Definição da Cláusula de Horn
+## Definição da Cláusula de Horn
 
 A **Cláusula de Horn** é uma forma especial de cláusula na Lógica de Primeira Ordem. Ela é caracterizada por **ter no máximo um literal positivo**.
 
@@ -4723,7 +4723,7 @@ onde:
 
 -$P_i$ são literais positivos. Um literal positivo é uma proposição atômica. Pode haver no máximo um literal positivo. -$P$ é um literal positivo ou uma contradição (falso). -$n$ é o número de literais negativos na cláusula. Os literais negativos são representados por $\neg P_i$. Ou seja, os literais negativos são as negações de proposições atômicas. Podem haver zero ou mais literais negativos.
 
-#### Tipos de Cláusulas de Horn
+### Tipos de Cláusulas de Horn
 
 A Cláusula de Horn pode ser classificada em três tipos principais:
 
@@ -4748,7 +4748,7 @@ Para entender melhor, imagine que estamos construindo um cenário mental fundame
 
 Podemos tentar avaliar alguns exemplos de uso de Fatos, Regras e Consultas:
 
-#### Exemplo 1: Sistema de Recomendação de Roupas
+### Exemplo 1: Sistema de Recomendação de Roupas
 
 Imagine que estamos construindo um sistema lógico para recomendar o tipo de roupa que uma pessoa deve vestir com base no clima. Vamos usar Cláusulas de Horn para representar o conhecimento e a lógica do sistema.
 
@@ -4782,7 +4782,7 @@ As consultas representam todas as consultas que podem ser feitas neste cenário.
 
 Neste exemplo, as Cláusulas de Horn nos permitiram representar o conhecimento sobre o clima e as regras para escolher roupas. Os fatos forneceram a base de conhecimento, as regras permitiram inferências lógicas, e a consulta nos permitiu explorar o sistema para obter recomendações práticas.
 
-#### Exemplo 2: Sistema de Diagnóstico Médico
+### Exemplo 2: Sistema de Diagnóstico Médico
 
 Imagine que estamos construindo um sistema lógico para diagnosticar doenças com base em sintomas, histórico médico e outros fatores relevantes. Vamos usar Cláusulas de Horn para representar o conhecimento e a lógica do sistema.
 
@@ -4811,11 +4811,11 @@ Imagine que estamos construindo um sistema lógico para diagnosticar doenças co
 
 **5. Conclusão**: este exemplo ilustra como as Cláusulas de Horn podem ser usadas em um contexto mais complexo, como um sistema de diagnóstico médico. A mesma abordagem pode ser aplicada a outros domínios, como diagnósticos de falhas em máquinas, sistemas legais, planejamento financeiro e muito mais.
 
-#### Exemplo 3: Mundo Núcleo Familiar
+### Exemplo 3: Mundo Núcleo Familiar
 
 Vamos definir um "mundo" que representa uma família e suas relações usando apenas Cláusulas de Horn. Isso demonstrará como podemos representar conhecimento e fazer inferências usando esta forma lógica.
 
-## Fatos (Cláusulas de Horn Unitárias)
+**Fatos (Cláusulas de Horn Unitárias)**:
 
 1. homem(joão).
 2. homem(pedro).
@@ -4826,7 +4826,7 @@ Vamos definir um "mundo" que representa uma família e suas relações usando ap
 7. progenitor(joão, ana).
 8. progenitor(maria, ana).
 
-## Regras (Cláusulas de Horn Não-Unitárias)
+**Regras (Cláusulas de Horn Não-Unitárias)**:
 
 1. pai(X, Y) :- homem(X), progenitor(X, Y).
 
@@ -4852,7 +4852,7 @@ Vamos definir um "mundo" que representa uma família e suas relações usando ap
 
    $$\neg mulher(X) \lor \neg progenitor(X, Z) \lor \neg progenitor(Z, Y) \lor avó(X, Y)$$
 
-## Consultas (Metas)
+**Consultas (Metas)**:
 
 Podemos fazer várias consultas a este mundo. Por exemplo:
 
@@ -4868,19 +4868,19 @@ Podemos fazer várias consultas a este mundo. Por exemplo:
 
    $$\neg avó(X, ana)$$
 
-#### Explicação
+**Explicação**:
 
-1-8. Os fatos estabelecem informações básicas sobre indivíduos e suas relações diretas.
+Os fatos estabelecem informações básicas sobre indivíduos e suas relações diretas.
 
-9-14. As regras definem relações mais complexas baseadas nos fatos e em outras regras.
+As regras definem relações mais complexas baseadas nos fatos e em outras regras.
 
-15-17. As consultas permitem fazer perguntas sobre o mundo e obter respostas baseadas nos fatos e regras definidos.
+As consultas permitem fazer perguntas sobre o mundo e obter respostas baseadas nos fatos e regras definidos.
 
 Este mundo em Cláusulas de Horn permite representar e raciocinar sobre relações familiares de forma lógica e computacionalmente tratável. Pode ser facilmente estendido para incluir mais fatos, regras e relações complexas.
 
 ### Exemplo 4 - Torre de Hanói
 
-#### Predicados
+**Predicados**:
 
 - $Disco(x)$: $x$ é um disco
 - $Poste(x)$: $x$ é um poste
@@ -4889,7 +4889,7 @@ Este mundo em Cláusulas de Horn permite representar e raciocinar sobre relaçõ
 - $Em(x, y)$: o disco $x$ está no poste $y$
 - $Sobre(x, y)$: o disco $x$ está sobre o disco $y$
 
-#### Fatos (Cláusulas de Horn Unitárias)
+**Fatos (Cláusulas de Horn Unitárias)**:
 
 1. $Disco(d_1)$
 2. $Disco(d_2)$
@@ -4901,7 +4901,7 @@ Este mundo em Cláusulas de Horn permite representar e raciocinar sobre relaçõ
 8. $Maior(d_2, d_1)$
 9. $Maior(d_3, d_2)$
 
-#### Regras (Cláusulas de Horn Não-Unitárias)
+**Regras (Cláusulas de Horn Não-Unitárias)**:
 
 1. Movimento válido:
 
@@ -5208,7 +5208,7 @@ Agora, podemos fazer consultas ao nosso sistema para obter recomendações de ro
  ?- óculos_de_sol, chapéu, camiseta.
 ```
 
-### Um Problema Interessante Em Prolog
+### Torre de Hanói - Um Problema Interessante Em Prolog
 
 ```prolog
 % Fatos
