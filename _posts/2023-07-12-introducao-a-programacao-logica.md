@@ -23,7 +23,7 @@ keywords:
   - Programação Lógica
 draft: true
 toc: true
-lastmod: 2024-09-15T01:21:02.881Z
+lastmod: 2024-09-15T01:26:44.085Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -3260,7 +3260,7 @@ $$
 \forall x (P(x) \rightarrow \exists y Q(x,y))
 $$
 
-Não pode ser convertida à Forma Prenex pois o quantificador $\exists y$ está dentro do escopo de $\rightarrow$.
+Não pode ser convertida à Forma Prenex pois o quantificador $\exists y$ está dentro do escopo de de uma implicação ($\rightarrow$).
 
 ### Observações Importantes
 
@@ -3417,17 +3417,11 @@ Vamos ilustrar a definição acima com um exemplo concreto.
 
 $$D = \{ a, b, c \}$$
 
-Onde:
+**Onde**: $a$, $b$ e $c$ são objetos distintos no domínio.
 
-- $a$, $b$ e $c$ são objetos distintos no domínio.
+**Símbolos de Constante:** $e$: representa um elemento específico do domínio.
 
-**Símbolos de Constante:**
-
-- $e$: representa um elemento específico do domínio.
-
-**Símbolos de Função:**
-
-- $f(x)$: "o melhor amigo de x."
+**Símbolos de Função:** $f(x)$: "o melhor amigo de x."
 
 **Símbolos de Predicado:**
 
@@ -3435,9 +3429,7 @@ Onde:
 - $Q(x)$: "x é um animal."
 - $R(x, y)$: "x gosta de y."
 
-**Interpretação no Mundo:**
-
-Atribuímos significado aos símbolos não lógicos:
+**Interpretação no Mundo:** atribuímos significado aos símbolos não lógicos:
 
 - $I(e) = a$ (a constante $e$ refere-se ao objeto $a$)
 - $I(f)(a) = b$ (o melhor amigo de $a$ é $b$)
@@ -3487,9 +3479,7 @@ O mundo que definimos acima, embora simples, ilustra vários conceitos important
 
 4. **Incerteza:** A lógica de primeira ordem clássica lida com afirmações definitivamente verdadeiras ou falsas. Não há representação direta de probabilidades ou incertezas.
 
-**Extensões Possíveis:**
-
-Para tornar este mundo mais rico e realista, poderíamos:
+**Extensões Possíveis:** para tornar este mundo mais rico e realista, poderíamos:
 
 1. Adicionar mais objetos ao domínio.
 2. Introduzir predicados mais complexos, como $Irmão(x,y)$ ou $MaisVelho(x,y)$.
@@ -3512,13 +3502,15 @@ $$D = \{0, 1, 2, 3, 4, 5\}$$
 
 Este domínio representa um conjunto de números inteiros de $0$ a $5$. A interpretação $I$ atribui significados aos símbolos não lógicos:
 
-1. **Função de Adição ($+$):** Mapeia pares de elementos do domínio para sua soma.
+1. **Função de Adição ($+$):** mapeia pares de elementos do domínio para sua soma.
+
    $$ I(+) : (x, y) \mapsto (x + y \mod 6)$$$
    (A adição é feita com módulo $6$).
 
-2. **Símbolo de Constante:** A constante $c = 3$.
+2. **Símbolo de Constante:** a constante $c = 3$.
 
 3. **Predicado de Paridade:** $P(x)$ significa "x é par".
+
    $$ I(P) = \{0, 2, 4\} $$
 
 Com isso, podemos construir fórmulas na linguagem formal e verificar se são satisfeitas no modelo $M$.
