@@ -23,7 +23,7 @@ keywords:
   - Programação Lógica
 draft: true
 toc: true
-lastmod: 2024-09-15T01:40:20.229Z
+lastmod: 2024-09-15T02:40:08.973Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -4455,6 +4455,249 @@ No jogo **Torre de Hanói**, três postes são dados, e discos de tamanhos difer
 5. **Verificar se um disco foi movido para um poste em um determinado instante**:
    - Consulta: $move(d, p, t)$
    - Resposta: _Verdadeiro_ se o disco $d$ foi movido para o poste $p$ no tempo $t$, _Falso_ caso contrário.
+
+### Exercício 8 -Modelo de Família com Meios-Irmãos
+
+**Variáveis Proposicionais**:
+
+Para pessoas:
+
+- $P_i$: Pessoa i (onde i é um identificador único)
+- $H_i$: Pessoa i é homem
+- $M_i$: Pessoa i é mulher
+
+Para relações:
+
+- $PaiDe(i,j)$: Pessoa i é pai de pessoa j
+- $MaeDe(i,j)$: Pessoa i é mãe de pessoa j
+- $FilhoDe(i,j)$: Pessoa i é filho de pessoa j
+- $FilhaDe(i,j)$: Pessoa i é filha de pessoa j
+- $IrmaoDe(i,j)$: Pessoa i é irmão de pessoa j
+- $IrmaDe(i,j)$: Pessoa i é irmã de pessoa j
+- $MeioIrmaoDe(i,j)$: Pessoa i é meio-irmão de pessoa j
+- $MeioIrmaDe(i,j)$: Pessoa i é meia-irmã de pessoa j
+
+#### Regras do Modelo
+
+1. Cada pessoa é homem ou mulher, mas não ambos:
+
+   $$ \forall i, P_i \rightarrow (H_i \oplus M_i) $$
+
+2. Relações de paternidade e maternidade:
+
+   $$ \forall i,j, PaiDe(i,j) \rightarrow (H_i \land (FilhoDe(j,i) \lor FilhaDe(j,i))) $$
+
+   $$ \forall i,j, MaeDe(i,j) \rightarrow (M_i \land (FilhoDe(j,i) \lor FilhaDe(j,i))) $$
+
+3. Relações de filiação:
+
+   $$ \forall i,j, FilhoDe(i,j) \rightarrow (H_i \land (PaiDe(j,i) \lor MaeDe(j,i))) $$
+
+   $$ \forall i,j, FilhaDe(i,j) \rightarrow (M_i \land (PaiDe(j,i) \lor MaeDe(j,i))) $$
+
+4. Relações de irmandade:
+
+   $$ \forall i,j, IrmaoDe(i,j) \rightarrow (H_i \land \exists k, (PaiDe(k,i) \land PaiDe(k,j)) \land \exists l, (MaeDe(l,i) \land MaeDe(l,j)) \land (i \neq j)) $$
+
+   $$ \forall i,j, IrmaDe(i,j) \rightarrow (M_i \land \exists k, (PaiDe(k,i) \land PaiDe(k,j)) \land \exists l, (MaeDe(l,i) \land MaeDe(l,j)) \land (i \neq j)) $$
+
+5. Relações de meio-irmandade:
+
+   $$ \forall i,j, MeioIrmaoDe(i,j) \rightarrow (H_i \land (((\exists k, PaiDe(k,i) \land PaiDe(k,j)) \oplus (\exists l, MaeDe(l,i) \land MaeDe(l,j))) \land (i \neq j))) $$
+
+   $$ \forall i,j, MeioIrmaDe(i,j) \rightarrow (M_i \land (((\exists k, PaiDe(k,i) \land PaiDe(k,j)) \oplus (\exists l, MaeDe(l,i) \land MaeDe(l,j))) \land (i \neq j))) $$
+
+6. Uma pessoa não pode ser seu próprio pai ou mãe:
+
+   $$ \forall i, \lnot PaiDe(i,i) \land \lnot MaeDe(i,i) $$
+
+7. Uma pessoa não pode ser irmão ou meio-irmão de si mesma:
+
+   $$ \forall i, \lnot IrmaoDe(i,i) \land \lnot IrmaDe(i,i) \land \lnot MeioIrmaoDe(i,i) \land \lnot MeioIrmaDe(i,i) $$
+
+8. Simetria nas relações de irmandade:
+
+   $$ \forall i,j, IrmaoDe(i,j) \leftrightarrow IrmaoDe(j,i) $$
+
+   $$ \forall i,j, IrmaDe(i,j) \leftrightarrow IrmaDe(j,i) $$
+
+   $$ \forall i,j, MeioIrmaoDe(i,j) \leftrightarrow MeioIrmaoDe(j,i) $$
+
+   $$ \forall i,j, MeioIrmaDe(i,j) \leftrightarrow MeioIrmaDe(j,i) $$
+
+9. Uma pessoa não pode ser simultaneamente irmão e meio-irmão de outra:
+
+   $$ \forall i,j, \lnot(IrmaoDe(i,j) \land MeioIrmaoDe(i,j)) \land \lnot(IrmaDe(i,j) \land MeioIrmaDe(i,j)) $$
+
+Neste caso podemos definir um dos estados do mundo: para representar que $P1$ é pai de $P2$ e $P3$, $P4$ é mãe de $P2$, $P5$ é mãe de $P3$, e $P2$ e $P3$ são meios-irmãos:
+
+$$
+\begin{align*}
+P1 \land P2 \land P3 \land P4 \land P5 \land \\
+H_1 \land H_2 \land H_3 \land M_4 \land M_5 \land \\
+PaiDe(1,2) \land PaiDe(1,3) \land \\
+MaeDe(4,2) \land MaeDe(5,3) \land \\
+FilhoDe(2,1) \land FilhoDe(2,4) \land \\
+FilhoDe(3,1) \land FilhoDe(3,5) \land \\
+MeioIrmaoDe(2,3) \land MeioIrmaoDe(3,2)
+\end{align*}
+$$
+
+#### Consultas Possíveis:
+
+1. **Verificar se uma pessoa existe no mundo**:
+
+   - Consulta: $P_i$
+   - Resposta: Verdadeiro se a pessoa i existe no mundo, Falso caso contrário.
+
+2. **Verificar o sexo de uma pessoa**:
+
+   - Consulta: $H_i$ ou $M_i$
+   - Resposta: Verdadeiro se a pessoa i é homem (H_i) ou mulher (M_i), Falso caso contrário.
+
+3. **Verificar relação de paternidade**:
+
+   - Consulta: $PaiDe(i,j)$
+   - Resposta: Verdadeiro se a pessoa i é pai da pessoa j, Falso caso contrário.
+
+4. **Verificar relação de maternidade**:
+
+   - Consulta: $MaeDe(i,j)$
+   - Resposta: Verdadeiro se a pessoa i é mãe da pessoa j, Falso caso contrário.
+
+5. **Verificar se duas pessoas são irmãos**:
+
+   - Consulta: $IrmaosDe(i,j)$
+   - Resposta: Verdadeiro se as pessoas i e j são irmãos (mesmo pai e mesma mãe), Falso caso contrário.
+
+6. **Verificar se duas pessoas são meios-irmãos**:
+
+   - Consulta: $MeiosIrmaosDe(i,j)$
+   - Resposta: Verdadeiro se as pessoas i e j são meios-irmãos (mesmo pai OU mesma mãe, mas não ambos), Falso caso contrário.
+
+7. **Encontrar o pai de uma pessoa**:
+
+   - Consulta: $\exists x, PaiDe(x,i)$
+   - Resposta: Verdadeiro se existe um pai para a pessoa i, Falso caso contrário.
+   - Para obter o pai específico: $x$ tal que $PaiDe(x,i)$ é verdadeiro.
+
+8. **Encontrar a mãe de uma pessoa**:
+
+   - Consulta: $\exists x, MaeDe(x,i)$
+   - Resposta: Verdadeiro se existe uma mãe para a pessoa i, Falso caso contrário.
+   - Para obter a mãe específica: $x$ tal que $MaeDe(x,i)$ é verdadeiro.
+
+9. **Verificar se duas pessoas têm o mesmo pai**:
+
+   - Consulta: $\exists x, (PaiDe(x,i) \land PaiDe(x,j))$
+   - Resposta: Verdadeiro se as pessoas i e j têm o mesmo pai, Falso caso contrário.
+
+10. **Verificar se duas pessoas têm a mesma mãe**:
+
+    - Consulta: $\exists x, (MaeDe(x,i) \land MaeDe(x,j))$
+    - Resposta: Verdadeiro se as pessoas i e j têm a mesma mãe, Falso caso contrário.
+
+11. **Contar o número de filhos de uma pessoa**:
+
+    - Consulta: $\text{Contagem}(\{j : PaiDe(i,j) \lor MaeDe(i,j)\})$
+    - Resposta: O número de filhos da pessoa i.
+
+12. **Verificar se uma pessoa é filho único**:
+
+    - Consulta: $\lnot \exists j, (j \neq i \land (IrmaosDe(i,j) \lor MeiosIrmaosDe(i,j)))$
+    - Resposta: Verdadeiro se a pessoa i não tem irmãos nem meios-irmãos, Falso caso contrário.
+
+    ### Mundo (Modelo) para o Jogo Pedra, Papel e Tesoura
+
+#### Variáveis Proposicionais:
+
+Para jogadas:
+
+- $P_i$: Jogador i escolheu Pedra
+- $A_i$: Jogador i escolheu Papel
+- $T_i$: Jogador i escolheu Tesoura
+
+Para resultados:
+
+- $V_i$: Jogador i venceu
+- $E$: O jogo terminou em empate
+
+#### Regras do Mundo:
+
+1. Cada jogador faz exatamente uma jogada:
+   $$ \forall i, ((P_i \lor A_i \lor T_i) \land \lnot(P_i \land A_i) \land \lnot(P_i \land T_i) \land \lnot(A_i \land T_i)) $$
+
+2. Condições de vitória para o Jogador 1:
+   $$ V_1 \leftrightarrow ((P_1 \land T_2) \lor (T_1 \land A_2) \lor (A_1 \land P_2)) $$
+
+3. Condições de vitória para o Jogador 2:
+   $$ V_2 \leftrightarrow ((P_2 \land T_1) \lor (T_2 \land A_1) \lor (A_2 \land P_1)) $$
+
+4. Condição de empate:
+   $$ E \leftrightarrow ((P_1 \land P_2) \lor (A_1 \land A_2) \lor (T_1 \land T_2)) $$
+
+5. O jogo tem exatamente um resultado:
+   $$ (V_1 \lor V_2 \lor E) \land \lnot(V_1 \land V_2) \land \lnot(V_1 \land E) \land \lnot(V_2 \land E) $$
+
+6. Não é possível que ambos os jogadores vençam:
+   $$ \lnot(V_1 \land V_2) $$
+
+#### Consultas Possíveis:
+
+1. **Verificar a jogada de um jogador**:
+
+   - Consulta: $P_i$, $A_i$, ou $T_i$
+   - Resposta: Verdadeiro se o Jogador i escolheu a jogada correspondente, Falso caso contrário.
+
+2. **Verificar o vencedor**:
+
+   - Consulta: $V_1$ ou $V_2$
+   - Resposta: Verdadeiro se o Jogador correspondente venceu, Falso caso contrário.
+
+3. **Verificar se houve empate**:
+
+   - Consulta: $E$
+   - Resposta: Verdadeiro se o jogo terminou em empate, Falso caso contrário.
+
+4. **Determinar o resultado do jogo**:
+
+   - Consulta:
+     $$
+     resultado = \begin{cases}
+       1 & \text{se } V_1 \\
+       2 & \text{se } V_2 \\
+       0 & \text{se } E
+     \end{cases}
+     $$
+   - Resposta:
+     - 0 se o jogo terminou em empate
+     - 1 se o Jogador 1 venceu
+     - 2 se o Jogador 2 venceu
+
+5. **Verificar se um jogador escolheu uma jogada específica e venceu**:
+
+   - Consulta: $(P_i \land V_i)$, $(A_i \land V_i)$, ou $(T_i \land V_i)$
+   - Resposta: Verdadeiro se o Jogador i escolheu a jogada específica e venceu, Falso caso contrário.
+
+6. **Verificar se o jogo foi válido**:
+   - Consulta: $((P_1 \lor A_1 \lor T_1) \land \lnot(P_1 \land A_1) \land \lnot(P_1 \land T_1) \land \lnot(A_1 \land T_1)) \land$
+     $((P_2 \lor A_2 \lor T_2) \land \lnot(P_2 \land A_2) \land \lnot(P_2 \land T_2) \land \lnot(A_2 \land T_2)) \land$
+     $((V_1 \lor V_2 \lor E) \land \lnot(V_1 \land V_2) \land \lnot(V_1 \land E) \land \lnot(V_2 \land E))$
+   - Resposta: Verdadeiro se o jogo seguiu todas as regras (uma jogada por jogador e um único resultado), Falso caso contrário.
+
+#### Exemplo de um estado válido deste Mundo:
+
+$$
+P_1 \land T_2 \land V_1 \land \lnot V_2 \land \lnot E \land \\
+   \lnot A_1 \land \lnot T_1 \land \lnot P_2 \land \lnot A_2
+$$
+
+Este mundo representa um jogo onde:
+
+- O Jogador 1 escolheu Pedra
+- O Jogador 2 escolheu Tesoura
+- O Jogador 1 venceu
+- Não houve empate
 
 ## Cláusula de Horn
 
