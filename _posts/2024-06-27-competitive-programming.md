@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-16T00:11:18.149Z
+lastmod: 2024-09-16T12:55:59.809Z
 ---
 
 ## Introduction
@@ -1020,7 +1020,7 @@ namespace MyNamespace {
 
 The `MyNamespace` namespace encapsulates `myFunction` and `MyClass`, preventing these names from conflicting with others of the same name in different namespaces.
 
-#### Using Namespaces
+### Using Namespaces
 
 To access elements inside a namespace, you can use the **scope resolution operator** `::`.
 
@@ -1049,7 +1049,7 @@ The **std** namespace is the default namespace of the C++ Standard Library. It c
 
 The statement `using namespace std;` allows you to use all elements of the `std` namespace without needing to prefix them with `std::`. This can make the code more concise and readable, especially in small programs or educational examples. Additionally, it reduces typing, which is beneficial when time is limited and valuable, such as during competitive programmings.
 
-#### Example Without `using namespace std;`
+##### Example Without `using namespace std;`
 
 ```cpp
 #include <iostream>
@@ -1065,7 +1065,7 @@ int main() {
 }
 ```
 
-#### Example With `using namespace std;`
+##### Example With `using namespace std;`
 
 ```cpp
 #include <iostream>
@@ -1127,7 +1127,7 @@ int main() {
 
 To maintain clean, maintainable code, it's recommended to avoid `using namespace std;` in header files, as this can force all files that include the header to import the `std` namespace, increasing the risk of conflicts. If you decide to use `using`, it is better to do so in a limited scope, such as inside a function, to minimize its impact. Adopting a consistent approach to namespaces throughout your project also improves readability and makes collaboration easier.
 
-#### Advanced Example: Nested Namespace
+##### Advanced Example: Nested Namespace
 
 Namespaces can also be nested to better organize the code.
 
@@ -1763,8 +1763,6 @@ Another performance benefit comes from the fact that `std::ranges` operations ar
 
 ### Practical Use Cases in Competitive Programming
 
-In competitive programming, where speed and efficiency are critical, `std::ranges` can be a valuable tool for handling large datasets, filtering inputs, or applying transformations without introducing overhead. For example, when dealing with input that needs to be filtered, transformed, or sliced before solving a problem, using `std::ranges` can save both time and memory.
-
 Imagine a scenario where you need to process only a portion of the input data based on certain conditions. Using traditional methods, this might involve creating multiple containers or applying multiple iterations over the data. With `std::ranges`, you can chain these operations in a single pass, improving both performance and code readability.
 
 Consider the following example in a competitive programming context:
@@ -1906,7 +1904,7 @@ for (int i = 1; i <= n; i++) {
 
 When analyzing algorithms that consist of multiple phases, consider that each phase may also introduce additional memory usage. In the example above, if phase 2 allocates a matrix of size $n \times n$, the space complexity would increase to $O(n^2)$, matching the time complexity.
 
-### Multiple Variables and Time Complexity
+#### Multiple Variables and Time Complexity
 
 Sometimes, time complexity depends on multiple factors. In this case, the formula for time complexity includes multiple variables. For example, the time complexity of the following code is $O(nm)$:
 
@@ -1918,7 +1916,7 @@ for (int i = 1; i <= n; i++) {
 }
 ```
 
-#### Space Complexity with Multiple Variables
+##### Space Complexity with Multiple Variables
 
 If the above algorithm also uses a data structure such as a matrix of size $n \times m$, the space complexity would also be $O(nm)$, increasing memory usage significantly, particularly for large input sizes.
 
@@ -2489,15 +2487,15 @@ Standard library algorithms are great for transformation tasks, allowing you to 
 | ----------------- | -------------------------------------------------------------------------------------------------------------- |
 | `constexpr` Loops | Compile-time only, cannot handle dynamic input, thus impractical for runtime competitive programming problems. |
 
-## Classification of Problems in One-Dimensional Arrays
+## Problems in One-Dimensional Arrays
 
 One-dimensional arrays are fundamental data structures in computer science and are the basis for many algorithmic problems. This classification organizes common problem types, algorithms, and techniques used to solve challenges involving 1D arrays. From basic operations to advanced optimization strategies, this comprehensive guide covers a wide range of approaches, helping developers and algorithm enthusiasts to identify and apply the most efficient solutions to array-based problems.
 
-### 1. Preprocessing and Efficient Query Techniques
+### Preprocessing and Efficient Query Techniques
 
 Methods that prepare the array to respond to queries quickly, typically trading preprocessing time for faster queries. This approach involves investing time upfront to organize or transform the array data in a way that allows for rapid responses to subsequent queries. For example, in a scenario where frequent sum calculations of array intervals are needed, a preprocessing step might involve creating a prefix sum array. This initial step takes $O(n)$ time but enables constant-time $O(1)$ sum queries afterward, as opposed to $O(n)$ time per query without preprocessing. This trade-off is beneficial when the number of queries is large, as the initial time investment is offset by the significant speed improvement in query operations. Such techniques are common in algorithmic problem-solving, where strategic data preparation can dramatically enhance overall performance, especially in scenarios with repetitive operations on the same dataset.
 
-#### 1.1 Sums and Prefixes
+#### Sums and Prefixes
 
 Calculation of cumulative sums for fast range queries. Reduces complexity from $O(n^2)$ to $O(n)$ in construction and $O(1)$ per query.
 
@@ -2810,7 +2808,7 @@ The implementation follows the Prefix Sum Array algorithm efficiently, construct
 | Loop Through Plates            | Checking all plates for the Magic Plate              | $O(n)$           | $O(1)$                      |
 | Overall Complexity             | Total time and space complexities                    | $O(n)$           | $O(n)$                      |
 
-##### Competitive Solution
+###### Competitive Solution
 
 The following C++20 code implements the _Prefix Sum Array_ algorithm, with several optimizations designed to reduce typing effort in a competitive programming context. We eliminated the use of functions, as the entire code is kept within the `main` block, avoiding the overhead of function calls. _This approach prioritizes minimal typing and fast execution by copying and pasting the logic rather than encapsulating it into reusable components_.
 
@@ -2919,7 +2917,7 @@ int main() {
 }
 ```
 
-#### 1.2 Difference Array: Efficient Range Updates
+#### Difference Array: Efficient Range Updates
 
 The Difference Array algorithm is a powerful technique for handling multiple range update operations efficiently. It's particularly useful when you need to perform many updates on an array and only query the final result after all updates are complete. Optimizes range updates to $O(1)$ by storing differences between adjacent
 elements.
@@ -4291,7 +4289,7 @@ The **`inline constexpr`** constant `input_method` specifies which input method 
 
 AINDA TEM MUITO QUE EXPLICAR AQUI.
 
-#### 1.3 Static Array Queries
+#### Static Array Queries
 
 Techniques for arrays that don't change between queries, allowing efficient pre-calculations.
 
@@ -4299,29 +4297,29 @@ Techniques for arrays that don't change between queries, allowing efficient pre-
 
 - Problem Example: "Inventory Restocking" - Performs queries after each inventory adjustment
 
-#### 1.4 Range Minimum Queries (RMQ)
+#### Range Minimum Queries (RMQ)
 
 Data structure to find the minimum in any range in $O(1)$ after $O(n \log n)$ preprocessing.
 
 - Algorithm: Sparse Table for RMQ
 
-#### 1.5 Fenwick Tree
+#### Fenwick Tree
 
 Data structure for prefix sums and efficient updates, with operations in $O(\log n)$.
 
 - Algorithm: Binary Indexed Tree (BIT)
 
-### 2. Sliding Window Algorithms
+### Sliding Window Algorithms
 
 Techniques for efficiently processing contiguous subarrays of fixed size.
 
-#### 2.1 Sliding Window Minimum
+#### Sliding Window Minimum
 
 Finds the minimum in a fixed-size window that slides through the array in $O(n)$ using a deque.
 
 - Algorithm: Monotonic Deque
 
-#### 2.2 Sliding Window Maximum
+#### Sliding Window Maximum
 
 Similar to the minimum, but for finding the maximum in each window.
 
@@ -4329,11 +4327,11 @@ Similar to the minimum, but for finding the maximum in each window.
 
 - Problem Example: "Weather Monitoring System" - Uses a sliding window of size k to find the subarray with the highest average
 
-### 3. Multiple Query Processing
+### Multiple Query Processing
 
 Methods for handling multiple queries efficiently.
 
-#### 3.1 Mo's Algorithm
+#### Mo's Algorithm
 
 Imagine you're organizing a library with thousands of books. You need to answer questions about specific sections of the shelves, and each question feels like wandering through endless rows, searching for the right answers. Enter Mo's Algorithm. It’s like having a librarian who doesn’t waste time. This librarian knows exactly how to group your questions, answering them swiftly, without scouring the entire library each time.
 
@@ -4727,91 +4725,91 @@ For **large inputs** (e.g., very large values of $n$ and $m$):
 
 - The **Slightly Less Naive** solution, while efficient for small inputs, may struggle with scalability as it does not benefit from logarithmic or square root optimizations, leading to potential performance bottlenecks for very large input sizes.
 
-### 4. Auxiliary Data Structures
+### Auxiliary Data Structures
 
 Specific data structures used to optimize operations on arrays.
 
-#### 4.1 Deque (for Sliding Window Minimum/Maximum)
+#### Deque (for Sliding Window Minimum/Maximum)
 
 Double-ended queue that maintains relevant elements of the current window.
 
-#### 4.2 Sparse Table (for RMQ)
+#### Sparse Table (for RMQ)
 
 Structure that stores pre-computed results for power-of-2 intervals.
 
-#### 4.3 Segment Tree
+#### Segment Tree
 
 Tree-based data structure for range queries and updates in $O(\log n)$.
 
-### 5. Complexity Optimization Techniques
+### Complexity Optimization Techniques
 
 Methods to reduce the computational complexity of common operations.
 
-#### 5.1 Reduction from $O(n^2)$ to $O(n)$
+#### Reduction from $O(n^2)$ to $O(n)$
 
 Use of prefix sums to optimize range sum calculations.
 
 - Problem Example: "Sales Target Analysis" - Uses prefix sum technique to optimize subarray calculations
 
-#### 5.2 Update in $O(1)$
+#### Update in $O(1)$
 
 Difference arrays for constant-time range updates.
 
 - Problem Example: "Inventory Restocking" - Makes point adjustments to the inventory
 
-#### 5.3 Query in $O(1)$ after preprocessing
+#### Query in $O(1)$ after preprocessing
 
 RMQ and static array queries with instant responses after pre-calculation.
 
 - Problem Example: "The Plate Balancer" - After calculating cumulative sums, can find the "Magic Plate" in O(n)
 
-#### 5.4 Processing in $O((n + q) \sqrt{n})$
+#### Processing in $O((n + q) \sqrt{n})$
 
 Mo's Algorithm to optimize multiple range queries.
 
-### 6. Subarray Algorithms
+### Subarray Algorithms
 
 Specific techniques for problems involving subarrays.
 
-#### 6.1 Kadane's Algorithm
+#### Kadane's Algorithm
 
 Finds the contiguous subarray with the largest sum in $O(n)$. Useful for sum maximization problems.
 
 - Algorithm: Kadane's Algorithm
 
-#### 6.2 Two Pointers
+#### Two Pointers
 
 Technique for problems involving pairs of elements or subarrays that satisfy certain conditions.
 
 - Algorithm: Two Pointers Method
 
-### 7. Hashing Techniques
+### Hashing Techniques
 
 Methods that use hashing to optimize certain operations on arrays.
 
-#### 7.1 Prefix Hash
+#### Prefix Hash
 
 Uses hashing to quickly compare substrings or subarrays.
 
 - Algorithm: Rolling Hash
 
-#### 7.2 Rolling Hash
+#### Rolling Hash
 
 Technique to efficiently calculate hashes of substrings or subarrays when sliding a window.
 
 - Algorithm: Rabin-Karp Algorithm
 
-### 8. Partitioning Algorithms
+### Partitioning Algorithms
 
 Techniques for dividing or reorganizing arrays.
 
-#### 8.1 Partition Algorithm (QuickSelect)
+#### Partition Algorithm (QuickSelect)
 
 Used to find the kth smallest element in average linear time.
 
 - Algorithm: QuickSelect
 
-#### 8.2 Dutch National Flag
+#### Dutch National Flag
 
 Algorithm to partition an array into three parts, useful in sorting problems with few unique values.
 
@@ -4874,7 +4872,7 @@ Now, sum queries have $O(1)$ complexity, but updates still require $O(n)$ to reb
 
 The Binary Indexed Tree offers a balance between these two approaches, allowing both updates and queries in $O(\log n)$.
 
-#### 3. Fundamental Concept
+#### Fundamental Concept
 
 The Binary Indexed Tree (BIT) is built on the idea that each index $i$ in the tree stores a cumulative sum of elements from the original array. **The range of elements summed at each index $i$ is determined by the position of the least significant set bit (LSB) in the binary representation of $i$**.
 
@@ -4978,9 +4976,9 @@ For example, if we update $A[4]$, the Fenwick tree must update the sums stored a
 
 In each case, the number of operations required is proportional to the number of set bits in the index, which guarantees that both update and query operations run in $O(\log n)$.
 
-#### 4. Basic Operations
+#### Basic Operations
 
-##### 4.1 Update
+##### Update
 
 To update an element at position $i$, we traverse the tree as follows:
 
@@ -5045,16 +5043,16 @@ vector<int> constructBIT(const vector<int>& arr) {
 **[Image placeholder]**
 _An illustration that explains how the Fenwick tree is constructed from an array, showing the incremental process of building the tree._
 
-#### 6. Complexity Analysis
+#### Complexity Analysis
 
 - Construction: $O(n)$
 - Update: $O(\log n)$
 - Query: $O(\log n)$
 - Space: $O(n)$
 
-#### 7. Variations and Extensions
+#### Variations and Extensions
 
-##### 7.1 Range Update and Point Query
+##### Range Update and Point Query
 
 It is possible to modify the Fenwick tree to support range updates and point queries:
 
@@ -5069,7 +5067,7 @@ int pointQuery(int i) {
 }
 ```
 
-##### 7.2 Range Update and Range Query
+##### Range Update and Range Query
 
 To support both range updates and range queries, we need two Fenwick trees:
 
@@ -5090,7 +5088,7 @@ int rangeQuery(int l, int r) {
 }
 ```
 
-##### 7.3 2D Fenwick tree
+##### 2D Fenwick tree
 
 The Fenwick tree can be extended to two dimensions:
 
@@ -5113,14 +5111,14 @@ int query2D(int x, int y) {
 **[Image placeholder]**
 _A diagram illustrating how a 2D Fenwick tree operates, showing how updates and queries are performed in two dimensions._
 
-#### 8. Applications
+#### Applications
 
 1. Efficient computation of prefix sums in mutable arrays
 2. Counting inversions in an array
 3. Solving the "k-th smallest element" problem
 4. Implementation of arithmetic coding algorithm
 
-#### 9. Comparison with Other Structures
+#### Comparison with Other Structures
 
 | Structure    | Update      | Query       | Space  |
 | ------------ | ----------- | ----------- | ------ |
@@ -5133,7 +5131,7 @@ The Fenwick tree offers a good balance between update and query efficiency, with
 
 #### Problems
 
-#### 3 - Inventory Restocking
+#### Inventory Restocking
 
 You manage a warehouse where products are stored and moved frequently. The warehouse tracks its inventory by recording the stock count at different times during the day in an array $inventory$. Occasionally, inventory managers report the amount by which a product's stock needs to be adjusted, represented by an integer array $adjustments$, where each adjustment is a pair $[adjustment, index]$. Your task is to apply these adjustments and after each, calculate the total count of products with even stock numbers.
 
@@ -5638,7 +5636,7 @@ int main(int argc, char* argv[]) {
 > | Exception Safety   | No                            | Yes (uses C++ exceptions)                             |
 > | Overflow/Underflow | No handling                   | Detects and throws `std::out_of_range`                |
 
-## 2. Search and Sorting Algorithms
+## Search and Sorting Algorithms
 
 ### Binary Search
 
@@ -5648,7 +5646,7 @@ Problems that require efficient lookup in a sorted array or determining a condit
 
 Sorting problems involve ordering data to simplify subsequent tasks. Efficient sorting algorithms, such as mergesort or quicksort, run in $O(n \log n)$ time and are frequently needed as a preprocessing step for more complex algorithms.
 
-## 3. Data Structures
+## Data Structures
 
 ### Stacks and Queues
 
@@ -5666,7 +5664,7 @@ Heaps are employed in problems like scheduling, dynamic sorting, or pathfinding 
 
 Hash maps (or dictionaries) are essential in problems requiring constant time lookups for checking membership or counting frequencies of elements.
 
-## 4. Dynamic Programming (DP)
+## Dynamic Programming (DP)
 
 ### Knapsack Problem
 
@@ -5680,7 +5678,7 @@ Find the longest subsequence of a sequence where the elements are in increasing 
 
 DP-based grid traversal problems, such as finding the minimum or maximum cost path from one corner of a grid to another, often appear.
 
-## 5. Dynamic Programming
+## Dynamic Programming
 
 Dynamic Programming is a different way of thinking when it comes to solving problems. Programming itself is already a different way of thinking, so, to be honest, I can say that Dynamic Programming is a different way within a different way of thinking. And, if you haven't noticed yet, there is a concept of recursion trying to emerge in this definition.
 
@@ -5692,262 +5690,10 @@ My intention is to break down the Dynamic Programming process into clear steps, 
 
 I will be using functions for all the algorithms I study primarily because it will make it easier to measure and compare the execution time of each one, even though I am aware of the additional computational overhead associated with function calls. After studying the problems in C++ and identifying the solution with the lowest complexity, eventually, we will also explore the best solution in C. Additionally, whenever possible, we will examine the most popular solution for the problem in question that I can find online.
 
-### There was a hint of recursion sneaking in
-
 Some say that Dynamic Programming is a technique to make recursive code more efficient. If we look at Dynamic Programming, we will see an optimization technique that is based on recursion but adds storage of intermediate results to avoid redundant calculations. _Memoization and tabulation are the two most common Dynamic Programming techniques_, each with its own approach to storing and reusing the results of subproblems:
 
 - **Memoization (Top-Down)**: _This technique is recursive in nature_. It involves storing the results of expensive function calls and returning the cached result when the same inputs occur again. This approach can be seen as an optimization of the top-down recursive process.
 - **Tabulation (Bottom-Up**): _Tabulation takes an iterative approach, solving smaller subproblems first and storing their solutions in a table (often an array or matrix)_. It then uses these stored values to calculate the solutions to larger subproblems, gradually building up to the final solution. The iterative nature of tabulation typically involves using loops to fill the table in a systematic manner.
-
-At this point, we can take a look at two examples using Python as pseudocode, since many of my students feel comfortable with Python. First, an example of Dynamic Programming with memoization.
-
-#### Example 2: Memoization
-
-Let's revisit the Fibonacci sequence problem: finding the nth number in the Fibonacci sequence. This time, we'll use Dynamic Programming with memoization. Flowchart 2 illustrates this approach.
-
-![]({{ site.baseurl }}/assets/images/recursive-memo.jpg)
-_Flowchart 2 - Recursive Fibonacci nth algorithm with memoization_{: class="legend"}
-
-From Flowchart 2, we can derive the following Python code:
-
-```python
-# dictionary creation
-memo = {} #just for style
-# function
-def fibonacci_memo(n, memo):
-    if n in memo:
-        return memo[n]
-    if n <= 1:
-        return n
-    memo[n] = fibonacci_memo(n-1, memo) + fibonacci_memo(n-2, memo)
-    return memo[n]
-```
-
-_Code Fragment 2 - Memoization Function for the nth Term_{: class="legend"}
-
-The `fibonacci_memo()` function is then defined to calculate the nth Fibonacci number using the stored values in a dictionary. Let's analyze the `fibonacci_memo()` code in detail.
-
-#### Function Definition and Initialization
-
-The `fibonacci_memo()` function begins by:
-
-```python
-memo = {} #just for style
-def fibonacci_memo(n, memo):
-```
-
-In this code fragment, there is a dictionary named memo declared as `memo = {}`. It will be used to _store the results of previous Fibonacci calculations, preventing redundant calculations and improving efficiency_ (this is memoization!), which brings us to the consideration of the base case within recursion.
-
-##### Base Case
-
-```python
-    if n in memo:
-        return memo[n]
-    if n <= 1:
-        return n
-```
-
-The line `if n in memo` checks if the value of $𝑛$ has already been calculated and stored in the `memo` dictionary. If so, it returns the stored value, avoiding recalculation. On the other hand, `if n <= 1` handles the base cases of the Fibonacci sequence:
-
-- `fibonacci(0) = 0`
-- `fibonacci(1) = 1`
-
-##### Recursive Step and Memoization
-
-```python
-    memo[n] = fibonacci_memo(n-1, memo) + fibonacci_memo(n-2, memo)
-    return memo[n]
-```
-
-The expression `fibonacci_memo(n-1, memo) + fibonacci_memo(n-2, memo)` initiates recursive calls to determine the $(n-1)$th and $(n-2)$th Fibonacci numbers. This is the fundamental recursive relationship in the Fibonacci Sequence: each number is the sum of the two preceding ones.
-
-The `memo` dictionary is the key to memoization. Before making the recursive calls, the function checks if the results for $n-1$ and $n-2$ are already stored in `memo`. If so, those stored values are used directly, avoiding redundant calculations. If not, the recursive calls are made, and the results are stored in `memo` for future reference.
-
-The calculated result (`fibonacci_memo(n-1, memo) + fibonacci_memo(n-2, memo)`) is assigned to `memo[n]`, storing it for potential reuse later.
-
-Finally, return `memo[n]` returns the calculated (and now memoized) value for the nth Fibonacci number.
-
-From the perspective of Dynamic Programming, the `fibonacci_memo` function employs a divide-and-conquer strategy, breaking down the calculation of the nth Fibonacci number into smaller subproblems (calculating the ($n-1$)th and ($n-2$)th numbers). It leverages a dictionary, memo, to store and retrieve the results of these subproblems. This approach eliminates redundant computations, enhancing efficiency, and before calculating the Fibonacci value for a given $n$, the function checks if the result is already stored in the `memo` dictionary. If it is, it reuses that result, saving computation time. Finally, the function ensures that each subproblem is solved only once, resulting in more efficiency compared to the simple recursive approach.
-
-The last statement of the previous paragraph requires reflection. I am considering performance in this statement only in terms of computation time. Performance can also be considered in relation to memory usage, energy consumption, and any other factor that is interesting or important for a given problem. Keep this in mind whenever I state that performance has improved in this text.
-
-Performance can be evaluated through complexity analysis. When analyzing the complexity of an algorithm, we often refer to its time complexity and space complexity. _Time complexity refers to the amount of time an algorithm takes to run as a function of the size of its input. Space complexity refers to the amount of memory an algorithm uses as a function of the size of its input_. Both are crucial aspects of performance.
-
-For example, the naive recursive Fibonacci algorithm has a time complexity of $O(2^n)$ because it makes an exponential number of calls. With memoization, the time complexity is reduced to $O(n)$ since each Fibonacci number up to $n$ is computed only once. The space complexity also becomes $O(n)$ due to the storage of computed values in the `memo` dictionary.
-
-Now, you might wonder: How many recursive calls does a memoized Fibonacci function actually make?
-
-To figure this out, let's see how memoization changes the usual recursion tree:
-
-- **Base Case**: If the Fibonacci number for $n$ is already stored in our memoization cache, or if $n$ is $0$ or $1$, the function returns directly without any further calls.
-- **Memoization Check**: If $n$ isn't in the cache, the function makes two recursive calls: `fibonacci_memo(n-1, memo)` and `fibonacci_memo(n-2, memo)`.
-- **The Memoization Effect**: The very first time we call `fibonacci_memo(n, memo)` with a new value of $n$, it will keep making recursive calls until it hits the base cases. Crucially, each Fibonacci number, once computed, is stored in the cache, it gets stored in the cache. Subsequent calls with the same value of n retrieve the stored result, circumventing further recursive calls.
-
-##### Calculating the Number of Recursive Calls
-
-To understand the efficiency of our memoized Fibonacci function, we need to calculate the number of recursive calls made during its execution. Memoization significantly reduces the number of redundant calls, resulting in a more efficient algorithm. Below, we break down the process:
-
-- **Initial Call**: We start the whole process with a single call to `fibonacci_memo(n, memo)`.
-- **Recursive Expansion**: For every new $n$ value we encounter, the function branches out into calls for `fibonacci_memo(n-1, memo)` and `fibonacci_memo(n-2, memo)`.
-- **Memoization Storage**: Each calculated value is stored, hence any future calls with the same $n$ don't create new branches.
-- **Counting Unique Calls**: Because of memoization, we only need to calculate each Fibonacci number once. This means the total number of recursive calls is roughly equal to the number of unique Fibonacci numbers up to $n$.
-
-In conclusion, while a naive Fibonacci implementation would have an exponential number of calls, memoization brings this down significantly. We have approximately $n+1$ calls to calculate Fibonacci numbers from $0$ to $n$, resulting in linear growth. This is a significant improvement over the exponential growth (roughly $2^n$ calls) in the naive recursive approach. The key to this efficiency is that each unique Fibonacci number is calculated only once and then stored for future use, making the process much more efficient.
-
-To calculate the total number of recursive calls made when computing the nth Fibonacci number using our memoized function, we can use the following recurrence relation:
-
-$$
-T(n) = \begin{cases}
-1 & \text{if } n \text{ is not in memo} \
-0 & \text{if } n \text{ is in memo}
-\end{cases}
-$$
-
-Where $T(n)$ represents the number of new recursive calls needed to compute the nth Fibonacci number using our memoized function.
-
-This formula accounts for: a single new call if the value isn't memoized yet, $(1)$, and, no new calls if the value is already in the memo, $(0)$.
-
-It's important to note that this formula gives us the number of new calls for each Fibonacci number, not the cumulative number of calls. To illustrate how this works for $n = 10$, let's calculate the number of recursive calls $T(10)$. We'll start with the base values and then calculate the subsequent values up to $T(10)$.
-
-Assuming that no values are initially memoized:
-
-$$
-\begin{aligned}
-T(0) &= 1 \text{ (not in memo)} \
-T(1) &= 1 \text{ (not in memo)} \
-T(2) &= 1 \text{ (not in memo)} \
-T(3) &= 1 \text{ (not in memo)} \
-T(4) &= 1 \text{ (not in memo)} \
-T(5) &= 1 \text{ (not in memo)} \
-T(6) &= 1 \text{ (not in memo)} \
-T(7) &= 1 \text{ (not in memo)} \
-T(8) &= 1 \text{ (not in memo)} \
-T(9) &= 1 \text{ (not in memo)} \
-T(10) &= 1 \text{ (not in memo)} \
-\end{aligned}
-$$
-
-Therefore, the total number of new recursive calls to compute fibonacci_memo(10) is:
-
-$$\sum_{i=0}^{10} T(i) = 11$$
-
-Each value of $T(n)$ represents a new recursive call to compute `fibonacci_memo(n)`. And we have only $11$ new calls in total, demonstrating the efficiency of memoization compared to the non-memoized version which would have $177$ calls.
-
-##### Time and Space Complexity
-
-We must proceed to the complexity analysis, focusing on the Big O notation, of the fibonacci_memo function, which uses memoization to calculate Fibonacci numbers. Let's analyze its time and space complexity. The key to understanding the time complexity is that each unique value of $n$ is calculated only once and then stored in `memo`.
-
-So, as there are $n$ unique values (from $0$ to $n$), for each value of $n$, the function executes a fixed amount of operations (checking, adding, and retrieving values from `memo`). Therefore, the total time complexity of the function is $O(n)$, since each Fibonacci number up to $n$ is computed and stored once, and only once.
-
-The space complexity is determined by the additional storage used by the memoization dictionary (`memo`). The dictionary `memo` can contain up to $n$ entries (one for each Fibonacci number up to $n$). Consequently, the space complexity is also $O(n)$ due to the storage needs of the `memo` dictionary.
-
-We are now ready to study Dynamic Programming with Tabulation.
-
-#### Example 3: Fibonacci with Tabulation
-
-Now, let's explore an example of Dynamic Programming using the tabulation technique:
-
-![]({{ site.baseurl }}/assets/images/interactive-fibbo.jpg)
-_Flowchart 3 - Interactive Fibonacci nth algorithm with tabulation_{: class="legend"}
-
-Here is the function `fibonacci_tabulation` defined to calculate the nth Fibonacci number using tabulation, utilizing Python in a manner similar to pseudocode:
-
-```python
-def fibonacci_tabulation(n):
-    if n <= 1:
-        return n
-    dp = [0] * (n + 1)
-    dp[1] = 1
-    for i in range(2, n + 1):
-        dp[i] = dp[i-1] + dp[i-2]
-    return dp[n]
-```
-
-_Code Fragment 3 - Tabulation Function for the nth Term_{: class="legend"}
-
-Unlike the previous recursive function, this function uses an iterative approach known as tabulation, a bottom-up Dynamic Programming technique. In this implementation, the `fibonacci_tabulation()` function uses a list, `dp`, to store the results of all subproblems, building the solution from the bottom up. It is important to note that data is being stored in this tabulation approach.
-
-Indeed! But look closely. The `fibonacci_tabulation()` function is an example of tabulation, not memoization, due to the distinct manner in which subproblems are solved and their solutions stored.
-
-_Tabulation is a bottom-up approach to Dynamic Programming where you solve all subproblems first and store their solutions in a data structure, usually a table, array, list, or tree_. The solution to the larger problem is then built from these smaller solutions by traversing the data structure from the bottom up. _This implies an iterative resolution process_. The subproblems are solved iteratively, starting from the smallest until the larger problem is reached. In this case, recursion is irrelevant.
-
-##### Function Definition and Initialization
-
-```python
-def fibonacci_tabulation(n):
-    if n <= 1:
-        return n
-    dp = [0] * (n + 1)
-    dp[1] = 1
-```
-
-_Code Fragment 3A - Tabulation Function Initialization_{: class="legend"}
-
-- `if n <= 1: return n`: This handles the base cases of the Fibonacci Sequence. If $n$ is $0$ or $1$, it directly returns n because:
-
-  - `fibonacci_tabulation(0)` $= 0$
-  - `fibonacci_tabulation(1)` $= 1$
-
-- `dp = [0] * (n + 1)`: This initializes a list dp with `n+1` zeros. This list will store the Fibonacci numbers up to $n$.
-
-- `dp[1] = 1`: This declaration sets the second element of `dp` to $1$, since `fibonacci_tabulation(1)` $= 1$.
-
-##### Iteration and Calculation
-
-```python
-    for i in range(2, n + 1):
-        dp[i] = dp[i-1] + dp[i-2]
-    return dp[n]
-```
-
-_Code Fragment 3B - Tabulation Function Iteration_{: class="legend"}
-
--`for i in range(2, n + 1)`: This loop starts from $2$ and iterates up to $n$. -`dp[i] = dp[i-1] + dp[i-2]`: This calculates the ith Fibonacci number by summing the previous two Fibonacci numbers (i.e., `fibonacci_tabulation(i-1)` and `fibonacci_tabulation(i-2)`) and stores it in the `dp` list at index $i$. -`return dp[n]`: After the loop completes, the function returns the nth Fibonacci number stored in `dp[n]`.
-
-##### Flow Explanation
-
-Let's try with the tenth Fibonacci number. When `fibonacci_tabulation(10)` is called, it checks if $10 <= 1$. It is not, so it proceeds.
-
-Initializes the `dp` list with zeros: `dp = [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]`.
-Iterates from $2$ to $10$:
-
-- `For i = 2: dp[2] = dp[1] + dp[0]` $= 1 + 0 = 1$
-- `For i = 3: dp[3] = dp[2] + dp[1]` $= 1 + 1 = 2$
-- `For i = 4: dp[4] = dp[3] + dp[2]` $= 2 + 1 = 3$
-- This continues until $i = 10$.
-
-After the loop, `dp` is `[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55]`.
-Returns `dp[10]`, which is $55$. And this is the moment when we stop to celebrate.
-
-##### Time and Space Complexity
-
-The time complexity analysis of the function `fibonacci_tabulation()` begins with the initial check to see if `n` is less than or equal to $1$, which is a constant time operation, $O(1)$. If `n` is greater than $1$, the function initializes a list `dp` with `n + 1` elements, which takes $O(n)$ time. After this, the function sets `dp[1]` to $1$, another constant time operation, $O(1)$.
-
-Assuming a complete implementation that iterates from $2$ to `n` to fill in the `dp` array, the total time complexity would be $O(n)$, as each Fibonacci number up to `n` is computed and stored exactly once.
-
-The space complexity is dominated by the list `dp` with `n + 1` elements, which requires $O(n)$ space. Therefore, with the complete implementation in mind, the function achieves an efficient computation with both time and space complexities of $O(n)$.
-
-The time complexity of the `fibonacci_tabulation()` function is $O(n)$, as each Fibonacci number up to $n$ is computed and stored exactly once. The space complexity is also $O(n)$ due to the `dp` list with n + 1 elements. While this complexity analysis covers the basic aspects of the function's efficiency, there are additional considerations and potential optimizations that could further enhance its performance:
-
-- **Space Optimization**: The current implementation uses $O(n)$ space, but we only need the last two Fibonacci numbers to calculate the next one. We could optimize the space usage to $O(1)$ by using only two variables instead of an array.
-- **Modular Arithmetic**: For very large $n$, the Fibonacci numbers can grow extremely large. In some applications, we might only need the result modulo some number (e.g., 10^9 + 7). Implementing modular arithmetic can prevent integer overflow and improve performance.
-- **Matrix Exponentiation**: For extremely large $n$, we can use matrix exponentiation to calculate Fibonacci numbers in $O(log n)$ time, though this involves a more complex implementation.
-- **Parallelization**: For certain ranges of Fibonacci numbers, we could potentially use parallel processing to speed up computations, especially on multi-core systems.
-- **Memoization trade-offs**: While our tabulation approach is bottom-up, in some scenarios, a top-down memoized approach might be more suitable, especially if we don't always need all Fibonacci numbers up to $n$.
-
-These considerations invite deeper exploration into algorithm design, mathematical properties of Fibonacci numbers, and advanced programming techniques. Each optimization presents its own trade-offs in terms of implementation complexity, memory usage, and computational efficiency.
-
-#### There is more between heaven and earth, Mr. Shakespeare
-
-Memoization and tabulation are the most common techniques in Dynamic Programming; however, they are not the only techniques.
-
-- **Dynamic Programming with State Compression**: The goal is to reduce the space needed to store the results of the subproblems by keeping only the states relevant to calculating the final solution.
-- **Dynamic Programming with Sliding Window**: Maintains only the results of the most recent subproblems in a fixed-size window, useful when the solution depends only on a limited number of previous subproblems.
-- **Dynamic Programming with Decision Tree**: Represents the subproblems and their relationships in a decision tree, allowing a clear visualization of the problem structure and the decisions to be made.
-
-Let's see how far we get in this text. As I write this, I still have no idea.
-
-### Now I realize: C++, where is C++?
 
 Throughout our exploration of Dynamic Programming concepts, we've been using Python as a form of pseudocode. Its versatility and simplicity have served us well, especially considering that many of my students are already familiar with it. Python's readability has made it an excellent choice for introducing and illustrating algorithmic concepts. However, as we progress into more advanced territory, it's time to acknowledge that Python, despite its strengths, isn't the most suitable language for high-performance applications or programming competitive programmings.
 
@@ -5961,7 +5707,7 @@ As we make this transition, we'll gradually introduce C++ specific optimizations
 
 #### Example 4: Fibonacci in C++ using `std::vectors`
 
-Let's begin with a straightforward, naive implementation in **C++20**, following the flow and data structures of the Python functions provided earlier.
+Let's begin with a straightforward, naive implementation in **C++20**.
 
 ```Cpp
 #include <iostream>
