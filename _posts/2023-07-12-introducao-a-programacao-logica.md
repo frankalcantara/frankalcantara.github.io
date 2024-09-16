@@ -7,23 +7,23 @@ date: 2023-07-13T02:50:56.534Z
 preview: ""
 image: assets/images/prolog1.jpeg
 tags:
-  - Lógica
-  - Programação Lógica
-  - Prolog
+   - Lógica
+   - Programação Lógica
+   - Prolog
 categories:
-  - disciplina
-  - Lógica
-  - material de Aula
-  - matemática
+   - disciplina
+   - Lógica
+   - material de Aula
+   - matemática
 rating: 5
 slug: decifrando-misterios-jornada-da-programacao-logica
 keywords:
-  - lógica
-  - Programação
-  - Programação Lógica
+   - lógica
+   - Programação
+   - Programação Lógica
 draft: true
 toc: true
-lastmod: 2024-09-16T14:48:01.504Z
+lastmod: 2024-09-16T15:17:34.381Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -2165,9 +2165,9 @@ Existe uma equivalência entre as negações dos quantificadores. De tal forma q
 
 1. **Negação do Quantificador Universal ($\forall $):** A negação de uma afirmação universal significa que existe pelo menos um caso no Universo do Discurso, onde a afirmação não é verdadeira. Isso pode ser expresso pela seguinte equivalência:
 
-$$\neg \forall x \, P(x) \equiv \exists x \, \neg P(x)$$
+   $$\neg \forall x \, P(x) \equiv \exists x \, \neg P(x)$$
 
-Em linguagem natural podemos entender como: negar que _para todos os $x$, $P(x)$ é verdadeiro_ é equivalente a afirmar que _existe algum $x$ tal que $P(x)$ não é verdadeiro_.
+   Em linguagem natural podemos entender como: negar que _para todos os $x$, $P(x)$ é verdadeiro_ é equivalente a afirmar que _existe algum $x$ tal que $P(x)$ não é verdadeiro_.
 
 2. **Negação do Quantificador Existencial ( $\exists $ ):** A negação de uma afirmação existencial significa que a afirmação não é verdadeira para nenhum caso no Universo do Discurso. Isso pode ser expresso pela seguinte equivalência:
 
@@ -3676,7 +3676,7 @@ Este uso sofisticado da lógica de primeira ordem demonstra como sistemas de IA 
 
 Na linguística computacional, a semântica formal emprega a lógica de primeira ordem para modelar o significado de sentenças e discursos em linguagens naturais. As gramáticas formais, por sua vez, se beneficiam dessa abordagem na descrição da estrutura sintática de linguagens, e a análise do discurso utiliza esses princípios para representar contexto e relações entre sentenças em textos.
 
-#### Exemplo 1
+#### Exemplo 1 - Linguística Computacional
 
 Na linguística, particularmente no estudo de gramáticas formais, a lógica de primeira ordem pode ser usada para definir e analisar estruturas sintáticas. Considere o seguinte exemplo de um mundo lógico representando uma gramática simplificada:
 
@@ -3843,7 +3843,7 @@ A importância da definição de mundos na lógica de primeira ordem reside em s
 
 Imagine que você está trabalhando como engenheiro de redes para uma grande empresa de tecnologia. Sua tarefa é planejar as conexões entre os servidores da empresa, de modo que as comunicações entre eles não gerem conflitos. O problema consiste em garantir que servidores diretamente conectados não utilizem o mesmo canal de comunicação (representado por uma cor). Você tem no máximo $n$ servidores e deseja utilizar menos de $k+1$ canais de comunicação, respeitando que cada servidor só pode se conectar diretamente a um número limitado de outros servidores, cujo limite é dado pelo grau de conexão $m$.
 
-#### Descrição do problema
+**Descrição do Problema**:
 
 - **Servidor**: Representado como um nó em um grafo.
 - **Conexão direta**: Representada como uma aresta entre dois nós.
@@ -3853,7 +3853,7 @@ Imagine que você está trabalhando como engenheiro de redes para uma grande emp
 
 O objetivo é determinar uma forma de atribuir um canal a cada servidor de modo que não haja conflitos de comunicação entre servidores diretamente conectados e usando menos de $k+1$ canais.
 
-#### Solução
+**Solução**:
 
 - Uma função unária $cor$, onde $cor(x)$ é o canal de comunicação (cor) associado ao servidor $x$.
 - Um predicado unário $servidor$, onde $servidor(x)$ significa que $x$ é um servidor.
@@ -3873,7 +3873,7 @@ O objetivo é determinar uma forma de atribuir um canal a cada servidor de modo 
 
    Cada servidor $x$ receba uma cor no conjunto $\{1, 2, ..., m\}$, assegurando menos de $m+1$ cores sejam usadas na rede.
 
-#### Consultas possíveis
+**Consultas Possíveis**:
 
 Com este modelo, você pode fazer as seguintes consultas:
 
@@ -3918,7 +3918,7 @@ Forneça uma linguagem de Lógica de Primeira Ordem e um conjunto de axiomas que
 4. Para cada cor, existe pelo menos um nó com essa cor.
 5. O grafo é composto por $|C|$ subgrafos disjuntos e não vazios, um para cada cor.
 
-#### Solução
+**Solução**:
 
 - Um predicado binário $edge$, onde $edge(n, m)$ significa que o nó $n$ está conectado ao nó $m$.
 - Um predicado binário $color$, onde $color(n, x)$ significa que o nó $n$ tem a cor $x$.
@@ -4002,7 +4002,7 @@ Forneça, em uma linguagem de Lógica de Primeira Ordem, um mundo que permita fo
 ![]({{ site.baseurl }}/assets/images/mines.jpg){: class="lazyimg"}
 _Figura 1 - Um estado do jogo Minesweeper._{: class="legend"}
 
-#### Solução
+**Solução**:
 
 1. Um predicado unário $mine$, onde $mine(x)$ significa que a célula $x$ contém uma mina.
 2. Um predicado binário $adj$, onde $adj(x, y)$ significa que a célula $x$ é adjacente à célula $y$.
@@ -4042,14 +4042,14 @@ _Figura 1 - Um estado do jogo Minesweeper._{: class="legend"}
 
 Imagine que você é responsável pela gestão de voos entre várias cidades brasileiras. A tarefa envolve criar uma representação formal das conexões aéreas entre essas cidades, considerando diferentes tipos de voos, como voos domésticos e internacionais, e as restrições específicas que regulam essas conexões. O objetivo é formalizar essas conexões de forma que se possa responder a perguntas sobre as rotas disponíveis e as restrições envolvidas.
 
-#### Descrição do problema
+**Descrição do Problema**:
 
 - **Cidades brasileiras**: Representadas como nós de um grafo.
 - **Voos diretos**: Representados como arestas que conectam duas cidades diretamente (sem escalas intermediárias).
 - **Tipos de voos**: Diferentes categorias de voos, como domésticos (doméstico) e internacionais (internacional), com restrições sobre onde eles podem operar.
 - **Cidades pequenas**: Algumas cidades são classificadas como pequenas, e certas restrições se aplicam a essas cidades.
 
-#### Solução
+**Solução**:
 
 - As constantes $SP$, $RJ$, $BSB$, $FLN$, $MAO$ são identificadores das cidades São Paulo, Rio de Janeiro, Brasília, Florianópolis, Manaus.
 - As constantes $Domestico$, $Internacional$ são os identificadores dos tipos de voo.
@@ -4060,7 +4060,7 @@ Imagine que você é responsável pela gestão de voos entre várias cidades bra
 - O predicado binário $PertenceEstado(x, y)$ significa que a cidade $x$ está no estado $y$.
 - O predicado ternário $ConexaoDireta(x, y, z)$ significa que o voo $x$ conecta diretamente as cidades $y$ e $z$ (sem escalas intermediárias).
 
-#### Regras e Axiomas
+**Regras e Axiomas**:
 
 1. Um avião tem exatamente um tipo de voo:
 
@@ -4086,7 +4086,7 @@ Imagine que você é responsável pela gestão de voos entre várias cidades bra
 
    $$ Cidade(SP) \land Cidade(RJ) \land Cidade(BSB) \land Cidade(FLN) \land Cidade(MAO) $$
 
-#### Axiomas específicos:
+#### Axiomas específicos
 
 1. Não há conexão direta de São Paulo para Manaus:
 
@@ -4104,7 +4104,7 @@ Imagine que você é responsável pela gestão de voos entre várias cidades bra
 
    $$ \forall x y z (ConexaoDireta(x, y, z) \land TipoVoo(x, Internacional) \rightarrow \neg CidadePequena(y) \land \neg CidadePequena(z)) $$
 
-#### Consultas possíveis:
+**Consultas Possíveis**:
 
 1. **Verificar se há uma conexão direta entre duas cidades:**
 
@@ -4164,7 +4164,7 @@ O jogador vence ao capturar todas as peças do adversário ou ao impossibilitar 
 - O predicado unário $turn(x, t)$ significa que é a vez do jogador $x$ no tempo $t$.
 - O predicado binário $lastRow(x, y)$ significa que a casa $x$ está na última fileira para o jogador com cor $y$.
 
-#### Regras e Axiomas
+**Regras e Axiomas**:
 
 1. Cada peça é branca ou preta:
 
@@ -4212,7 +4212,7 @@ $$ \forall t: (\neg \exists x: (piece(x) \land white(x) \land contain(y, x, t)) 
 
 $$ \neg \exists x, y: (piece(x) \land contain(y, x, t) \land turn(color(x), t) \land ((\exists z: (empty(z, t) \land adjacent(y, z))) \lor (\exists w, z: (piece(w) \land color(w) \neq color(x) \land contain(z, w, t) \land adjacent(y, z) \land \exists v: (empty(v, t) \land adjacent(z, v)))))) \rightarrow gameOver(t)) $$
 
-#### Consultas Possíveis
+**Consultas Possíveis**:
 
 1. **Verificar se uma casa está vazia no tempo $t$**:
 
@@ -4328,13 +4328,13 @@ No jogo **Torre de Hanói**, três postes são dados, e discos de tamanhos difer
 1. Somente um disco pode ser movido de cada vez.
 2. Nenhum disco pode ser colocado sobre um disco menor.
 
-#### Regras e Axiomas
+**Regras e Axiomas**:
 
 1. Formalize a regra de que apenas um disco pode ser movido de cada vez.
 2. Formalize a regra de que nenhum disco pode ser colocado sobre um disco menor.
 3. Formalize a condição de vitória, isto é, todos os discos estão no terceiro poste.
 
-#### Solução
+**Solução**:
 
 - O predicado unário $disk(x)$ significa que $x$ é um disco.
 - O predicado unário $peg(x)$ significa que $x$ é um poste.
@@ -4430,7 +4430,7 @@ No jogo **Torre de Hanói**, três postes são dados, e discos de tamanhos difer
 
     Este axioma assegura que, se não há nenhum disco abaixo de $d$, então $d$ está na base da pilha ou é o único disco no poste $p$.
 
-#### Consultas Possíveis
+**Consultas Possíveis**:
 
 1. **Verificar se um disco está em um determinado poste no tempo $t$**:
 
@@ -4543,7 +4543,7 @@ MeioIrmaoDe(2,3) \land MeioIrmaoDe(3,2)
 \end{align*}
 $$
 
-#### Consultas Possíveis:
+**Consultas Possíveis**::
 
 1. **Verificar se uma pessoa existe no mundo**:
 
@@ -4609,7 +4609,7 @@ $$
 
     ### Mundo (Modelo) para o Jogo Pedra, Papel e Tesoura
 
-#### Variáveis Proposicionais:
+#### Variáveis Proposicionais
 
 Para jogadas:
 
@@ -4622,7 +4622,7 @@ Para resultados:
 - $V_i$: Jogador i venceu
 - $E$: O jogo terminou em empate
 
-#### Regras do Mundo:
+#### Regras do Mundo
 
 1. Cada jogador faz exatamente uma jogada:
    $$ \forall i, ((P_i \lor A_i \lor T_i) \land \lnot(P_i \land A_i) \land \lnot(P_i \land T_i) \land \lnot(A_i \land T_i)) $$
@@ -4642,7 +4642,7 @@ Para resultados:
 6. Não é possível que ambos os jogadores vençam:
    $$ \lnot(V_1 \land V_2) $$
 
-#### Consultas Possíveis:
+**Consultas Possíveis**::
 
 1. **Verificar a jogada de um jogador**:
 
@@ -4685,7 +4685,7 @@ Para resultados:
      $((V_1 \lor V_2 \lor E) \land \lnot(V_1 \land V_2) \land \lnot(V_1 \land E) \land \lnot(V_2 \land E))$
    - Resposta: Verdadeiro se o jogo seguiu todas as regras (uma jogada por jogador e um único resultado), Falso caso contrário.
 
-#### Exemplo de um estado válido deste Mundo:
+#### Exemplo de um estado válido deste Mundo
 
 $$
 P_1 \land T_2 \land V_1 \land \lnot V_2 \land \lnot E \land \\
@@ -4713,7 +4713,7 @@ Se prepare vamos ver porque $P \lor \neg Q \lor \neg R $ é uma Cláusula de Hor
 
 A **Cláusula de Horn** é uma forma especial de cláusula na Lógica de Primeira Ordem. Ela é caracterizada por **ter no máximo um literal positivo**.
 
-#### Forma Geral
+**Forma Geral**:
 
 Uma Cláusula de Horn pode ser representada pela fórmula dada por:
 
