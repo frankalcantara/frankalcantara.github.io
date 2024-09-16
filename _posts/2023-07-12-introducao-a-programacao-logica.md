@@ -23,7 +23,7 @@ keywords:
   - Programação Lógica
 draft: true
 toc: true
-lastmod: 2024-09-16T15:26:44.920Z
+lastmod: 2024-09-16T17:15:22.175Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -53,7 +53,7 @@ Em nossa jornada, percorreremos a **Lógica de Primeira Ordem**. Esta será a no
 
 Pretensioso este timoneiro tenta não ser. Partiremos da _Lógica Proposicional_ com esperança de encontrar bons ventos que nos levem até o Prolog.
 
-A _Lógica Proposicional_ é um tipo de linguagem matemática, suficientemente rica para expressar os problemas que precisamos resolver e suficientemente simples para que computadores possam lidar com ela. Ferramenta tão útil ao homem quanto a máquina. Quando esta ferramenta estiver conhecida mergulharemos na alma da _Lógica de Primeira Ordem_, a _Lógica Predicativa_, ou Lógica de Predicados, e então poderemos fazer sentido do mundo real de forma clara e bela.
+_A **Lógica Proposicional** é um tipo de linguagem matemática, suficientemente rica para expressar os problemas que precisamos resolver e suficientemente simples para que computadores possam lidar com ela. Quando esta ferramenta estiver conhecida mergulharemos na alma da **Lógica de Primeira Ordem**, a **Lógica Predicativa**, ou Lógica de Predicados, e então poderemos fazer sentido do mundo real de forma clara e bela_.
 
 Vamos enfrentar a inferência e a dedução, duas ferramentas para extração de conhecimento de declarações lógicas. Voltando a metáfora do Detetive, podemos dizer que a inferência é quase como um detetive que tira conclusões a partir de pistas: teremos algumas verdades, nossas pistas, e precisaremos descobrir outras verdades, consequências diretas das primeiras verdades, para encontrar o que procuramos de forma incontestável. A verdade da lógica não abarca opiniões ou contestações. É linda e inquestionável.
 
@@ -87,19 +87,19 @@ O alfabeto $\Sigma$ que estamos definindo poderá ser dividido em classes formad
 
 6. **Fórmulas Bem Formadas**: usaremos para representar as Fórmulas Bem Formadas: $P$, $Q$, $R$, $S$, $T$.
 
-Na lógica matemática, uma Fórmula Bem Formada, também conhecida como expressão bem formada, é uma sequência **finita** de símbolos que é formada de acordo com as regras gramaticais de uma linguagem lógica específica.
+Na lógica matemática, uma Fórmula Bem Formada, ou Expressão Bem Formada, é uma sequência **finita** de símbolos formada de acordo com as regras gramaticais de uma linguagem formal especificamente desenvolvida para a redação das fórmulas da lógica.
 
-Em Lógica de Primeira Ordem, uma Fórmula Bem Formada é uma expressão que **só pode ser** verdadeira ou falsa. As Fórmulas Bem Formadas são compostas de quantificadores, variáveis, constantes, predicados, e conectivos lógicos, e devem obedecer a regras específicas de sintaxe.
+_Em Lógica de Primeira Ordem, uma Fórmula Bem Formada é uma expressão que **só pode ser** verdadeira ou falsa_. As Fórmulas Bem Formadas são compostas de símbolos que representam quantificadores, variáveis, constantes, predicados, e conectivos lógicos. Cuja distribuição e uso seguirão as regras sintáticas, gramaticais e semânticas da linguagem da lógica. Aprender lógica é aprender esta linguagem.
 
-Em qualquer linguagem matemática regra sintática mais importante é a precedência das operações, uma espécie de receita. Que deve ser seguida à letra. Vamos nos restringir a seguinte ordem de precedência:
+Em qualquer linguagem matemática, sem dúvida, a regra sintática mais importante é a precedência das operações, uma espécie de receita indexada. Que deve ser seguida à letra. Neste texto, vamos nos restringir a seguinte ordem de precedência:
 
 $$\neg, \forall, \exists, \wedge, \vee, \rightarrow, \leftrightarrow$$
 
-Dando maior precedência a $\neg$ e a menor a $\leftrightarrow$.
+Dando maior precedência a $\neg$ (negação) e a menor a $\leftrightarrow$ (equivalência).
 
-O uso dos parênteses e da ordem de precedência requer cautela, muita cautela. Os parênteses permitem que possamos escrever $(\forall x(\exists y (\mathbf{p}(x,y)\rightarrow \mathbf{q}(x))))$ ou $\forall x \exists y (\mathbf{p}(x,y)\rightarrow \mathbf{q}(x))\,$ que são a mesma Fórmula Bem Formada. Escolha a opção que seja mais fácil de ler e entender.
+O uso dos parênteses e da ordem de precedência requer cautela, muita cautela. Os parênteses permitem que possamos escrever $(\forall x(\exists y (\mathbf{p}(x,y)\rightarrow \mathbf{q}(x))))$ ou $\forall x \exists y (\mathbf{p}(x,y)\rightarrow \mathbf{q}(x))\,$ duas expressões diferentes que são a mesma Fórmula Bem Formada. Escolha a opção que seja mais fácil de ler,entender e explicar.
 
-Nesta linguagem cada sentença, ou proposição, deve ser verdadeira ou falsa, nunca pode ser verdadeira e falsa ao mesmo tempo, e não pode ser algo diferente de verdadeiro ou falso. Para que uma sentença, ou proposição, seja verdadeira ela precisa ser logicamente verdadeira. Uma sentença contraditória é aquela que é sempre falsa, independentemente da interpretação.
+Na linguagem da lógica cada sentença, ou proposição, deve ser verdadeira ou falsa, nunca pode ser verdadeira e falsa ao mesmo tempo, e não pode ser algo diferente de verdadeiro ou falso. Para que uma sentença, ou proposição, seja verdadeira ela precisa ser logicamente verdadeira. Uma sentença contraditória é aquela que é sempre falsa, independentemente da interpretação.
 
 Da mesma forma que aprendemos nossa língua materna reconhecendo padrões, repetições e regularidades, também reconhecemos Fórmulas Bem Formadas por seus padrões característicos. os símbolos estarão dispostos de forma organizada em termos sobre os quais se aplicam operações, funções e quantificadores.
 
@@ -462,7 +462,7 @@ $$
 
 A lógica proposicional é essencial para entendermos o mundo. É a base de argumentos sólidos e da avaliação de proposições. Nasceu da necessidade humana de buscar a verdade e resolver conflitos com a lógica. Mas sua beleza vai além da filosofia, do discurso e da matemática. É a fundação da álgebra de [George Boole](https://en.wikipedia.org/wiki/George_Boole), que sustenta o design de circuitos eletrônicos e a construção dos computadores modernos.
 
-_Em sua dissertação de final de curso, [Claude Shannon](https://en.wikipedia.org/wiki/Claude_Shannon) usou a álgebra booleana para simplificar circuitos de controle. Desde então, as operações básicas dessa álgebra — **AND**, **OR**, **NOT** — tornaram-se os blocos fundamentais dos sistemas digitais. Elas formam o núcleo dos computadores, celulares e, na verdade, de toda a nossa civilização digital. A lógica proposicional é a base de todo o raciocínio lógico. Como a tabela periódica para químicos ou as leis de Newton para físicos. É simples, elegante e poderosa_.
+_Em sua dissertação de final de curso, [Claude Shannon](https://en.wikipedia.org/wiki/Claude_Shannon) usou a álgebra booleana para simplificar circuitos de controle. Desde então, as operações básicas dessa álgebra — **AND**, **OR**, **NOT** — tornaram-se os blocos fundamentais dos sistemas digitais. Elas formam o núcleo dos computadores, dos celulares e, na verdade, de toda a nossa civilização digital. A lógica proposicional é a base de todo o raciocínio lógico. Como a tabela periódica para químicos ou as leis de Newton para físicos. Ela é simples, elegante e poderosa_.
 
 Tão importante quanto o impacto da **lógica proposicional** na tecnologia digital é seu papel no pensamento racional, na tomada de decisões e na prova de teoremas. Neste caminho, nosso guia são as **regras de inferência**.
 
@@ -1888,7 +1888,7 @@ Essa preferência não é arbitrária, mas baseada nas limitações que os outro
 
 Comecemos com a conjunção. Quando usamos $∀x(P(x) ∧ Q(x))$, estamos afirmando que para todo $x$, tanto $P(x)$ quanto $Q(x)$ são verdadeiros. Isso é extremamente restritivo e raramente reflete situações do mundo real. Por exemplo, se disséssemos _Todos os animais são mamíferos e podem voar_, estaríamos fazendo uma afirmação falsa, pois nem todos os animais são mamíferos e nem todos podem voar. Outro exemplo seria _Todos os números são pares e primos_, o que é claramente falso, pois nenhum número (exceto 2) satisfaz ambas as condições simultaneamente.
 
-A disjunção, por outro lado, é muito fraca quando combinada com o quantificador universal. $∀x(P(x) ∨ Q(x))$ afirma que para todo $x$, ou $P(x)$ ou $Q(x)$ (ou ambos) são verdadeiros. Isso geralmente não captura relações condicionais úteis. Por exemplo, _Todo número é par ou ímpar_ é uma afirmação verdadeira, mas não nos diz muito sobre a relação entre paridade e números. Da mesma forma, _Toda pessoa é alta ou baixa_ é uma afirmação tão ampla que se torna quase sem sentido, pois não fornece informações úteis sobre a altura das pessoas.
+A disjunção, por outro lado, é muito fraca quando combinada com o quantificador universal. $∀x(P(x) ∨ Q(x))$ afirma que para todo $x$, ou $P(x)$ ou $Q(x)$ (ou ambos) são verdadeiros. Isso geralmente não captura relações condicionais úteis. Por exemplo, _Todo número é par ou ímpar_ é uma afirmação verdadeira, mas não nos diz muito sobre a relação entre paridade e números. Da mesma forma, _Toda pessoa é alta ou baixa_ é uma afirmação de tal amplitude que se torna quase sem sentido, pois não fornece informações úteis sobre a altura das pessoas.
 
 A equivalência ($\leftrightarrow$) com o quantificador universal também apresenta problemas. $∀x(P(x) \leftrightarrow Q(x))$ afirma que para todo $x$, $P(x)$ é verdadeiro se e somente se $Q(x)$ for verdadeiro. Isso é uma condição muito forte e raramente é satisfeita em situações reais. Por exemplo, _Um número é par se e somente se é divisível por 4_ é falso, pois há números pares que não são divisíveis por $4$ (como $2$ e $6$). Outro exemplo seria _Uma pessoa é feliz se e somente se é rica_, o que claramente não reflete a realidade complexa da felicidade e riqueza.
 
@@ -3839,68 +3839,67 @@ A importância da definição de mundos na lógica de primeira ordem reside em s
 
 À medida que os sistemas se tornam mais complexos e as demandas por inteligência artificial aumentam, a habilidade de definir e trabalhar com mundos lógicos torna-se cada vez mais crucial para o avanço tecnológico e científico.
 
-### Exercício 1
+### Exercise 1
 
-Imagine que você está trabalhando como engenheiro de redes para uma grande empresa de tecnologia. Sua tarefa é planejar as conexões entre os servidores da empresa, de modo que as comunicações entre eles não gerem conflitos. O problema consiste em garantir que servidores diretamente conectados não utilizem o mesmo canal de comunicação (representado por uma cor). Você tem no máximo $n$ servidores e deseja utilizar menos de $k+1$ canais de comunicação, respeitando que cada servidor só pode se conectar diretamente a um número limitado de outros servidores, cujo limite é dado pelo grau de conexão $m$.
+Imagine you are working as a network engineer for a large technology company. Your task is to plan the connections between the company's servers, ensuring that communications between them do not create conflicts. The problem consists of ensuring that directly connected servers do not use the same communication channel (represented by a color). You have at most $n$ servers and wish to use fewer than $k+1$ communication channels, respecting that each server can only directly connect to a limited number of other servers, whose limit is given by the connection degree $m$.
 
-**Descrição do Problema**:
+**Problem Description**:
 
-- **Servidor**: Representado como um nó em um grafo.
-- **Conexão direta**: Representada como uma aresta entre dois nós.
-- **Cor**: Representa o canal de comunicação atribuído a um servidor. Dois servidores conectados diretamente não podem ter o mesmo canal.
-- **Grau de um servidor**: O número de conexões diretas que ele possui com outros servidores.
-- **Grau de conexão da rede**: O maior grau entre os servidores da rede.
+- **Server**: Represented as a node in a graph.
+- **Direct connection**: Represented as an edge between two nodes.
+- **Color**: Represents the communication channel assigned to a server. Two directly connected servers cannot share the same channel.
+- **Degree of a server**: The number of direct connections it has with other servers.
+- **Network connection degree**: The highest degree among the servers in the network.
 
-O objetivo é determinar uma forma de atribuir um canal a cada servidor de modo que não haja conflitos de comunicação entre servidores diretamente conectados e usando menos de $k+1$ canais.
+The goal is to determine a way to assign a communication channel to each server such that there are no communication conflicts between directly connected servers, using fewer than $k+1$ channels.
 
-**Solução**:
+**Solution**:
+We will use first-order logic to model this problem without using functions, only relations and variables.
 
-- Uma função unária $cor$, onde $cor(x)$ é o canal de comunicação (cor) associado ao servidor $x$.
-- Um predicado unário $servidor$, onde $servidor(x)$ significa que $x$ é um servidor.
-- Um predicado binário $conexao$, onde $conexao(x, y)$ significa que $x$ está conectado diretamente a $y$.
+- A unary predicate $cor(x)$, where $cor(x)$ means the channel (color) assigned to server $x$.
+- A unary predicate $servidor(x)$, meaning $x$ is a server.
+- A binary predicate $conexao(x, y)$, meaning $x$ is directly connected to $y$.
 
-**Regras ou Axiomas**:
+**Rules or Axioms**:
 
-1. $ \forall x \forall y: (conexao(x, y) \rightarrow (cor(x) \neq cor(y)) )$
+1. $$ \forall x \forall y: (servidor(x) \land servidor(y) \land conexao(x, y) \rightarrow (cor(x) \neq cor(y)) ) $$
 
-   Dois servidores diretamente conectados não podem utilizar o mesmo canal de comunicação.
+   Two directly connected servers cannot use the same communication channel.
 
-2. $$ \forall x \forall x*1 \dots \forall x*{m+1}: \left( \bigwedge*{h=1}^{m+1} conexao(x, x_h) \rightarrow \bigvee*{i,j=1; j \neq i}^{m+1} x_i = x_j \right) $$
+2. $$ \forall x \left( servidor(x) \rightarrow \forall x*1 \dots \forall x_m \left( \bigwedge*{h=1}^{m} conexao(x, x*h) \rightarrow \neg \exists x*{m+1} conexao(x, x\_{m+1}) \right) \right) $$
 
-   Um servidor não pode ter mais de $m$ servidores diretamente conectados.
+   A server cannot have more than $m$ distinct directly connected servers.
 
-3. $$ \forall x: servidor(x) \rightarrow cor(x) \in \{1, 2, ..., m\} $$
+3. $$ \forall x: servidor(x) \rightarrow cor(x) \in \{1, 2, ..., k\} $$
 
-   Cada servidor $x$ receba uma cor no conjunto $\{1, 2, ..., m\}$, assegurando menos de $m+1$ cores sejam usadas na rede.
+   Every server $x$ must receive a channel (color) from the set $\{1, 2, ..., k\}$, ensuring that fewer than $k+1$ colors are used in the network.
 
-**Consultas Possíveis**:
+**Possible Queries**:
+With this model, you can make the following queries:
 
-Com este modelo, você pode fazer as seguintes consultas:
+1. **Check if two servers are directly connected:**
 
-1. **Verificar se dois servidores estão diretamente conectados:**
+   - Query: $conexao(a, b)$
+   - Response: **True** if server $a$ is directly connected to server $b$, **False** otherwise.
 
-   - Consulta: $conexao(a, b)$
-   - Resposta: **True** se o servidor $a$ estiver diretamente conectado ao servidor $b$, e **False** caso contrário.
+2. **Check which communication channel (color) was assigned to a server:**
 
-2. **Verificar qual canal de comunicação (cor) foi atribuído a um servidor:**
+   - Query: $cor(a)$
+   - Response: Returns the color assigned to server $a$.
 
-   - Consulta: $cor(a)$
-   - Resposta: Retorna a cor associada ao servidor $a$.
+3. **Check if two connected servers have different colors:**
 
-3. **Verificar se dois servidores conectados têm cores diferentes:**
+   - Query: $conexao(a, b) \land cor(a) \neq cor(b)$
+   - Response: **True** if servers $a$ and $b$ are directly connected and have different colors, **False** if they share the same color or are not connected.
 
-   - Consulta: $conexao(a, b) \land cor(a) \neq cor(b)$
-   - Resposta: **True** se os servidores $a$ e $b$ estão diretamente conectados e têm cores diferentes, **False** se possuem a mesma cor ou não estão conectados.
+4. **Check if a server has more than $m$ direct connections:**
 
-4. **Verificar se um servidor tem mais de $k$ conexões diretas:**
+   - Query: $$ \exists x*1, \dots, x*{m+1} \left( \bigwedge\_{h=1}^{m+1} conexao(a, x_h) \right) $$
+   - Response: **True** if server $a$ has more than $m$ directly connected servers, **False** otherwise.
 
-   - Consulta: $$ \exists x*1, \dots, x*{m+1} \left( \bigwedge\_{h=1}^{m+1} conexao(a, x_h) \right) $$
-   - Resposta: **True** se o servidor $a$ tem mais de $k$ servidores conectados diretamente, **False** caso contrário.
-
-5. **Verificar se a coloração da rede é válida:**
-
-   - Consulta: $$ \forall x \forall y (conexao(x, y) \rightarrow cor(x) \neq cor(y)) $$
-   - Resposta: **True** se todos os servidores diretamente conectados têm cores diferentes, **False** se houver algum conflito de cores.
+5. **Check if the network's coloring is valid:**
+   - Query: $$ \forall x \forall y (servidor(x) \land servidor(y) \land conexao(x, y) \rightarrow cor(x) \neq cor(y)) $$
+   - Response: **True** if all directly connected servers have different colors, **False** if there is any color conflict.
 
 ### Exercício 2
 
