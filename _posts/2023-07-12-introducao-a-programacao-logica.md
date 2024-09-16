@@ -7,23 +7,23 @@ date: 2023-07-13T02:50:56.534Z
 preview: ""
 image: assets/images/prolog1.jpeg
 tags:
-   - Lógica
-   - Programação Lógica
-   - Prolog
+  - Lógica
+  - Programação Lógica
+  - Prolog
 categories:
-   - disciplina
-   - Lógica
-   - material de Aula
-   - matemática
+  - disciplina
+  - Lógica
+  - material de Aula
+  - matemática
 rating: 5
 slug: decifrando-misterios-jornada-da-programacao-logica
 keywords:
-   - lógica
-   - Programação
-   - Programação Lógica
+  - lógica
+  - Programação
+  - Programação Lógica
 draft: true
 toc: true
-lastmod: 2024-09-15T22:07:06.569Z
+lastmod: 2024-09-16T14:48:01.504Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -2830,10 +2830,10 @@ $$
 \quad 1. & \quad \neg(p \land q) \rightarrow (r \leftrightarrow s) \\
 \quad 2. & \quad \neg(p \land q) \rightarrow ((r \rightarrow s) \land (s \rightarrow r)) \, \text{ (Substituindo a equivalência por suas implicações)} \\
 \quad 3. & \quad \neg(p \land q) \rightarrow ((\neg r \lor s) \land (\neg s \lor r)) \, \text{ (Convertendo as implicações em disjunções)} \\
-\quad 4. & \quad (\neg \neg(p \land q)) \lor ((\neg r \lor s) \land (\neg s \lor r)) \, \text{ (Aplicando a equivalência } p \rightarrow q \equiv \neg p \lor q \text{)} \\
-\quad 5. & \quad (p \land q) \lor ((\neg r \lor s) \land (\neg s \lor r)) \, \text{ (Aplicando a dupla negação)} \\
-\quad 6. & \quad (p \land q) \lor (r \land s) \lor (\neg r \land \neg s) \, \text{ (Aplicando a distributividade para obter a FND)}
-   \end{align*}
+\quad 4. & \quad (\neg (p \land q)) \lor ((\neg r \lor s) \land (\neg s \lor r)) \, \text{ (Aplicando a equivalência } p \rightarrow q \equiv \neg p \lor q \text{)} \\
+\quad 5. & \quad (\neg p \lor \neg q) \lor ((\neg r \lor s) \land (\neg s \lor r)) \, \text{ (Aplicando a De Morgan em } \neg(p \land q) \text{)} \\
+\quad 6. & \quad (\neg p \lor \neg q \lor \neg r \lor s) \land (\neg p \lor \neg q \lor \neg s \lor r) \, \text{ (Aplicando a distributividade para obter a FND)}
+\end{align*}
 $$
 
 A Forma Normal Disjuntiva é útil porque qualquer fórmula lógica pode ser representada desta forma, e a representação é única (à exceção da ordem dos literais e cláusulas).
