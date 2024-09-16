@@ -7,23 +7,23 @@ date: 2023-07-13T02:50:56.534Z
 preview: ""
 image: assets/images/prolog1.jpeg
 tags:
-   - Lógica
-   - Programação Lógica
-   - Prolog
+  - Lógica
+  - Programação Lógica
+  - Prolog
 categories:
-   - disciplina
-   - Lógica
-   - material de Aula
-   - matemática
+  - disciplina
+  - Lógica
+  - material de Aula
+  - matemática
 rating: 5
 slug: decifrando-misterios-jornada-da-programacao-logica
 keywords:
-   - lógica
-   - Programação
-   - Programação Lógica
+  - lógica
+  - Programação
+  - Programação Lógica
 draft: true
 toc: true
-lastmod: 2024-09-16T15:17:34.381Z
+lastmod: 2024-09-16T15:26:44.920Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -187,11 +187,11 @@ As declarações atômicas e compostas são costuradas por conectivos para produ
 
 Quando usamos a Tabela Verdade em uma declaração composta, podemos ver se ela é verdadeira ou falsa. Basta seguir as regras de precedência e aplicar a Tabela Verdade, simplificando a expressão. É uma alternativa mais direta do que o uso dos axiomas da Lógica Proposicional.
 
-O operador $\vee$, também chamado de ou inclusivo, é verdade quando pelo menos um dos termos é verdadeiro. Diferindo de um operador, que por não ser básico e fundamental, não consta da nossa lista, chamado de ou exclusivo, $\oplus $, falso se ambos os termos forem iguais, ou verdadeiros ou falsos.
+O operador $\vee$, também chamado de ou inclusivo, é verdade quando pelo menos um dos termos é verdadeiro. Diferindo de um operador, que por não ser básico e fundamental, não consta da nossa lista, chamado de ou exclusivo, $\oplus$, falso se ambos os termos forem iguais, ou verdadeiros ou falsos.
 
 O condicional $\rightarrow$ não implica em causalidade. O condicional $\rightarrow$ é falso apenas quando o antecedente é verdadeiro e o consequente é falso.
 
-O bicondicional $\leftrightarrow$ equivale a ambos os componentes terem o mesmo valor-verdade. Todos os operadores, ou conectivos, conectam duas declarações, exceto $\neg $ que se aplica a apenas um termo.
+O bicondicional $\leftrightarrow$ equivale a ambos os componentes terem o mesmo valor-verdade. Todos os operadores, ou conectivos, conectam duas declarações, exceto $\neg$ que se aplica a apenas um termo.
 
 Cada operador com sua própria aridade:
 
@@ -460,11 +460,11 @@ $$
 \end{align*}
 $$
 
-A Lógica Proposicional é essencial para entendermos o mundo. Ela é a base de argumentos sólidos e da avaliação de proposições. Nasceu da necessidade humana de buscar a verdade e resolver conflitos com a lógica. Mas sua beleza vai além da filosofia, do discurso e da matemática. É a fundação da Álgebra de [George Boole](https://en.wikipedia.org/wiki/George_Boole), que sustenta o design de circuitos eletrônicos e a construção dos computadores modernos.
+A lógica proposicional é essencial para entendermos o mundo. É a base de argumentos sólidos e da avaliação de proposições. Nasceu da necessidade humana de buscar a verdade e resolver conflitos com a lógica. Mas sua beleza vai além da filosofia, do discurso e da matemática. É a fundação da álgebra de [George Boole](https://en.wikipedia.org/wiki/George_Boole), que sustenta o design de circuitos eletrônicos e a construção dos computadores modernos.
 
-Em seu trabalho de conclusão de curso, [Claude Shannon](https://en.wikipedia.org/wiki/Claude_Shannon) usou a Álgebra de Boole para simplificar circuitos de controle. Desde então, as operações básicas dessa álgebra — AND, OR, NOT — são os blocos fundamentais dos sistemas digitais. Eles formam o núcleo dos computadores, celulares e, na verdade, de toda a nossa civilização digital. A Lógica Proposicional é a base de todo o raciocínio lógico. Como a tabela periódica para químicos ou as leis de Newton para físicos. É simples, elegante e poderosa.
+_Em sua dissertação de final de curso, [Claude Shannon](https://en.wikipedia.org/wiki/Claude_Shannon) usou a álgebra booleana para simplificar circuitos de controle. Desde então, as operações básicas dessa álgebra — **AND**, **OR**, **NOT** — tornaram-se os blocos fundamentais dos sistemas digitais. Elas formam o núcleo dos computadores, celulares e, na verdade, de toda a nossa civilização digital. A lógica proposicional é a base de todo o raciocínio lógico. Como a tabela periódica para químicos ou as leis de Newton para físicos. É simples, elegante e poderosa_.
 
-Tão importante quanto o impacto da **Lógica Proposicional** na tecnologia digital é seu papel no pensamento racional, na tomada de decisões e na prova de teoremas. Neste caminho, nosso guia são as **Regras de Inferência**.
+Tão importante quanto o impacto da **lógica proposicional** na tecnologia digital é seu papel no pensamento racional, na tomada de decisões e na prova de teoremas. Neste caminho, nosso guia são as **regras de inferência**.
 
 ## Regras de Inferência
 
