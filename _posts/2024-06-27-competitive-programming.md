@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-14T01:05:36.812Z
+lastmod: 2024-09-16T00:11:18.149Z
 ---
 
 ## Introduction
@@ -4335,11 +4335,397 @@ Methods for handling multiple queries efficiently.
 
 #### 3.1 Mo's Algorithm
 
-Processes multiple range queries in $O((n + q) \sqrt{n})$, where $n$ is the array size and $q$ is the number of queries.
+Imagine you're organizing a library with thousands of books. You need to answer questions about specific sections of the shelves, and each question feels like wandering through endless rows, searching for the right answers. Enter Mo's Algorithm. It’s like having a librarian who doesn’t waste time. This librarian knows exactly how to group your questions, answering them swiftly, without scouring the entire library each time.
 
-- Algorithm: Mo's Algorithm
+Mo's Algorithm was developed by the Bangladeshi programmer [Mostofa Saad Ibrahim](https://sites.google.com/site/mostafasibrahim/). It’s a technique that allows efficient answers to range queries on arrays. The trick? It works best with offline queries, those you can reorder. Over time, it has become a crucial part of the competitive programmer’s toolkit, speeding up what once was slow.
 
-- Problem Example: "Humidity Levels in a Greenhouse" - Processes multiple adjustment queries and sum calculations
+$$ Mo's \, Algorithm \, = \, \text{Efficient \, Librarian} $$
+
+With Mo's Algorithm, each question becomes easier, and each answer quicker, which makes it invaluable for competitive programming.
+
+Imagine you have an array of $n$ elements and $q$ queries. Each query asks for some property, maybe the sum or the frequency of elements, over a subarray $[L_i, R_i]$. The simple way is to handle each query on its own. You would go through the array again and again, and before you know it, you’re dealing with a time complexity of $O(n \times q)$. For large arrays and many queries, that’s just too slow.
+
+This is where Mo's Algorithm steps in. It answers all your queries in $O(n \sqrt{n})$ time, assuming add and remove operations take $O(1)$. For big datasets, that’s the difference between drowning in work and getting it done on time.
+
+Mo’s Algorithm works by processing queries in a way that reduces how often elements are added or removed from the current segment. It achieves this in two steps:
+
+$$ 1. \, \text{Reorder \, queries \, for \, efficiency.} $$
+
+$$ 2. \, \text{Add \, and \, remove \, elements \, smartly.} $$
+
+With Mo's Algorithm, even large sets of queries can be handled efficiently:
+
+1. **Sorting the queries**: The array is divided into blocks of size $\sqrt{n}$. Queries are then sorted, first by the block of $L_i$, and within the same block, by $R_i$.
+
+2. **Processing the queries**: As we move from one query to the next, we adjust the boundaries of the current segment, adding or removing elements as necessary.
+
+This method keeps the operations minimal and ensures a much faster solution.
+
+##### Why Choose $\sqrt{n}$ as the Block Size?
+
+The choice of $\sqrt{n}$ as the block size is crucial for the algorithm's efficiency. Here's why:
+
+- The number of blocks becomes $\sqrt{n}$.
+- The number of times we change the left boundary is $O(\sqrt{n})$.
+- The total number of add/remove operations is $O(n \sqrt{n})$.
+
+This choice balances the work done when moving between blocks and within blocks, optimizing overall performance.
+
+##### Complexity Analysis
+
+**Time Complexity Analysis**:
+
+The total time complexity of Mo's Algorithm is:
+
+$$O\left( q \times \frac{n}{\sqrt{n}} + n \sqrt{n} \right) = O(n \sqrt{n})$$
+
+To understand this, sorting the queries takes $O(q \log q)$ time. Given that $q$ is generally $O(n)$, this remains efficient. The adjustment of segment boundaries between queries takes $O(n \sqrt{n})$ time, which contributes to the overall complexity. When compared to the naive approach with a time complexity of $O(n \times q)$, Mo's Algorithm provides a marked improvement, particularly when dealing with larger datasets.
+
+**Space Complexity Analysis**:
+
+The space complexity of Mo's Algorithm is:
+
+$$O(n + q)$$
+
+To understand the space complexity, we need $O(n)$ space to store the array elements and $O(q)$ space to store the queries. As a result, the overall space usage is linear, ensuring that the algorithm remains efficient even for large datasets.
+
+##### Implementation
+
+Let's see how to implement Mo's Algorithm in Python and C++20. These implementations assume we're calculating the sum over intervals, but the concept can be adapted for other types of queries.
+
+##### Python Pseudocode
+
+```python
+import math
+
+# Function to process the queries using Mo's Algorithm
+def mo_algorithm(arr, queries):
+    n = len(arr)  # Length of the input array
+    q = len(queries)  # Number of queries
+    sqrt_n = int(math.sqrt(n))  # Square root of n, used for block size
+
+    # Result array to store the answers to the queries
+    result = [0] * q
+
+    # Frequency array to keep track of the frequency of elements in the current range
+    freq = [0] * (max(arr) + 1)
+
+    # Sorting the queries using Mo's Algorithm
+    queries.sort(key=lambda x: (x[0] // sqrt_n, x[1]))  # Sort by block and then by R value
+
+    currL, currR = 0, 0  # Initialize current left and right pointers
+    curr_sum = 0  # Variable to keep track of the current sum (or any other property)
+
+    # Process each query
+    for i in range(q):
+        L, R, idx = queries[i]  # Extract the left, right bounds and the original index of the query
+
+        # Move current left pointer to L
+        while currL < L:
+            curr_sum -= arr[currL]  # Remove element from current sum
+            freq[arr[currL]] -= 1   # Decrease frequency of the element
+            currL += 1              # Move left pointer to the right
+
+        while currL > L:
+            currL -= 1              # Move left pointer to the left
+            curr_sum += arr[currL]  # Add element to current sum
+            freq[arr[currL]] += 1   # Increase frequency of the element
+
+        # Move current right pointer to R
+        while currR <= R:
+            curr_sum += arr[currR]  # Add element to current sum
+            freq[arr[currR]] += 1   # Increase frequency of the element
+            currR += 1              # Move right pointer to the right
+
+        while currR > R + 1:
+            currR -= 1              # Move right pointer to the left
+            curr_sum -= arr[currR]  # Remove element from current sum
+            freq[arr[currR]] -= 1   # Decrease frequency of the element
+
+        # Store the result for the current query
+        result[idx] = curr_sum
+
+    # Return the final results for all queries
+    return result
+
+# Example usage
+arr = [1, 2, 3, 4, 5]  # Example array
+queries = [(0, 2, 0), (1, 3, 1), (2, 4, 2)]  # Example queries (L, R, index)
+result = mo_algorithm(arr, queries)  # Process the queries
+print(result)  # Output the results
+```
+
+##### C++20 Code Example
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+using namespace std;
+
+// Structure to store each query
+struct Query {
+    int L, R, idx; // L and R are the bounds of the subarray, idx is the original index of the query
+};
+
+// Comparison function used to sort queries in Mo's Algorithm
+bool compare(Query a, Query b) {
+    // Define the block size as the square root of the number of elements
+    int block_a = a.L / sqrt_n;
+    int block_b = b.L / sqrt_n;
+
+    // If the two blocks are different, sort by block
+    if (block_a != block_b)
+        return block_a < block_b;
+
+    // If the blocks are the same, sort by the value of R
+    return a.R < b.R;
+}
+
+// Function to process the queries using Mo's Algorithm
+void moAlgorithm(vector<int>& arr, vector<Query>& queries) {
+    int n = arr.size();            // Size of the input array
+    int q = queries.size();        // Number of queries
+    sqrt_n = sqrt(n);              // Square root of n, used for block size
+
+    vector<int> result(q);         // Array to store the results of the queries
+    vector<int> freq(1000001, 0);  // Frequency array to count occurrences of elements
+
+    // Sort the queries using the compare function
+    sort(queries.begin(), queries.end(), compare);
+
+    int currL = 0, currR = 0;      // Initialize current left and right pointers
+    int currSum = 0;               // Variable to store the current sum (or any other property)
+
+    // Iterate over all queries
+    for (int i = 0; i < q; i++) {
+        int L = queries[i].L;      // Left bound of the current query
+        int R = queries[i].R;      // Right bound of the current query
+
+        // Move the current left pointer to L
+        while (currL < L) {
+            currSum -= arr[currL];  // Remove the element from the sum
+            freq[arr[currL]]--;     // Decrease the frequency of the element
+            currL++;                // Increment the current left pointer
+        }
+        while (currL > L) {
+            currL--;                // Decrement the current left pointer
+            currSum += arr[currL];  // Add the element to the sum
+            freq[arr[currL]]++;     // Increase the frequency of the element
+        }
+
+        // Move the current right pointer to R
+        while (currR <= R) {
+            currSum += arr[currR];  // Add the element to the sum
+            freq[arr[currR]]++;     // Increase the frequency of the element
+            currR++;                // Increment the current right pointer
+        }
+        while (currR > R + 1) {
+            currR--;                // Decrement the current right pointer
+            currSum -= arr[currR];  // Remove the element from the sum
+            freq[arr[currR]]--;     // Decrease the frequency of the element
+        }
+
+        // Store the result of the current query in the result array
+        result[queries[i].idx] = currSum;
+    }
+
+    // Output the results of all queries
+    for (int i = 0; i < q; i++) {
+        cout << result[i] << endl;
+    }
+}
+```
+
+The code begins by reading the array and the queries. Next, the queries are sorted using the block decomposition technique. As we process each query, the current segment is adjusted to match the query’s range, and the current sum is updated. Finally, the answers are stored and output in the order of the original queries.
+
+##### Example
+
+Let's look at a concrete example to better understand how Mo's Algorithm works in practice.
+
+Given an array of $n$ integers, answer $q$ queries, each asking for the sum of a subarray from index $L_i$ to $R_i$.
+
+**Sample Input**:
+
+```txt
+n = 5
+arr = [1, 2, 3, 4, 5]
+q = 3
+queries = [(0, 2), (1, 3), (2, 4)]
+```
+
+**Expected Output**:
+
+```txt
+6   # Sum of arr[0...2] = 1 + 2 + 3
+9   # Sum of arr[1...3] = 2 + 3 + 4
+12  # Sum of arr[2...4] = 3 + 4 + 5
+```
+
+**Step-by-Step**:
+
+1. **Sorting Queries**:
+   With $\sqrt{5} \approx 2$, we divide the array into blocks of size 2.
+   The sorted queries become: [(0, 2), (1, 3), (2, 4)]
+
+2. **Processing**:
+
+   - For (0, 2): We sum $1 + 2 + 3 = 6$
+   - For (1, 3): We remove 1, add 4. New sum: $6 - 1 + 4 = 9$
+   - For (2, 4): We remove 2, add 5. New sum: $9 - 2 + 5 = 12$
+
+3. **Result**: [6, 9, 12]
+
+This example shows how Mo's Algorithm minimizes work between adjacent queries, leveraging previous calculations.
+
+Mo's Algorithm is highly effective for range query problems, making it ideal when multiple queries need to be answered over array intervals. Its efficiency has made it a popular tool in competitive programming, where speed is essential. Beyond that, it can also be adapted for data analysis, offering a way to efficiently handle subsets of large datasets.
+
+However, there are some limitations to the algorithm. It is not suitable for handling online queries, where answers are required immediately as queries arrive. Additionally, since all queries must be stored, this can become a challenge for extremely large datasets. Finally, implementing Mo's Algorithm can be more complex than simpler, more straightforward methods, which might not be ideal in all cases.
+
+##### Problem: "Humidity Levels in a Greenhouse" (Problem 1)
+
+We've already solved this type of problem in _Section 5: Range Query Problems_ of the attached document. In that section, we explored different algorithms and analyzed their time and space complexities when applied to various range query scenarios.
+
+Below is a summary of the time complexity for each solution, showing how Mo's Algorithm compares to other approaches.
+
+| Solution                    | Time Complexity     | Space Complexity |
+| --------------------------- | ------------------- | ---------------- |
+| Naive Solution              | $O(n \times m)$     | $O(1)$           |
+| Slightly Less Naive         | $O(n + m)$          | $O(1)$           |
+| Parallel with `std::reduce` | $O(n + m)$          | $O(n)$           |
+| Fenwick Tree (BIT)          | $O((n + m) \log n)$ | $O(n)$           |
+
+Where:
+
+$n$ = \text{number of sensors in the greenhouse}
+
+$m$ = \text{number of adjustments}
+
+These solutions have been discussed in depth, along with their respective advantages and limitations. For the current problem, all we need to do is implement Mo's Algorithm in C++, which provides a substantial performance improvement for large input sizes.
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+// Function to handle Mo's Algorithm for the humidity adjustments
+vector<int> mo_algorithm(vector<int>& humidity, vector<pair<int, int>>& adjustments) {
+    int n = humidity.size();  // Number of sensors
+    int q = adjustments.size();  // Number of adjustments
+
+    vector<int> result(q);  // To store the result for each adjustment
+    int even_sum = 0;  // To keep track of the sum of even numbers
+
+    // Calculate initial even sum
+    for (int i = 0; i < n; i++) {
+        if (humidity[i] % 2 == 0) {
+            even_sum += humidity[i];
+        }
+    }
+
+    // Process each adjustment
+    for (int i = 0; i < q; i++) {
+        int adj_value = adjustments[i].first;  // Value to add
+        int sensor_index = adjustments[i].second;  // Sensor index
+
+        // If the current value is even, remove it from the even sum
+        if (humidity[sensor_index] % 2 == 0) {
+            even_sum -= humidity[sensor_index];
+        }
+
+        // Apply the adjustment to the sensor
+        humidity[sensor_index] += adj_value;
+
+        // If the new value is even, add it to the even sum
+        if (humidity[sensor_index] % 2 == 0) {
+            even_sum += humidity[sensor_index];
+        }
+
+        // Store the result for this adjustment
+        result[i] = even_sum;
+    }
+
+    return result;
+}
+
+void print_example(const vector<int>& humidity, const vector<pair<int, int>>& adjustments, const vector<int>& result, int example_num) {
+    // Print the formatted example output
+    cout << "Example " << example_num << ":" << endl;
+    cout << "Input: humidity = [";
+    for (size_t i = 0; i < humidity.size(); ++i) {
+        cout << humidity[i];
+        if (i < humidity.size() - 1) cout << ", ";
+    }
+    cout << "], adjustments = [";
+    for (size_t i = 0; i < adjustments.size(); ++i) {
+        cout << "[" << adjustments[i].first << "," << adjustments[i].second << "]";
+        if (i < adjustments.size() - 1) cout << ",";
+    }
+    cout << "]" << endl;
+    cout << "Output: ";
+    for (size_t i = 0; i < result.size(); ++i) {
+        cout << result[i];
+        if (i < result.size() - 1) cout << " ";
+    }
+    cout << endl << endl;
+}
+
+int main() {
+    // Example 1
+    vector<int> humidity1 = { 45, 52, 33, 64 };
+    vector<pair<int, int>> adjustments1 = { {5, 0}, {-20, 1}, {-14, 0}, {18, 3} };
+    vector<int> result1 = mo_algorithm(humidity1, adjustments1);  // Process the adjustments
+    print_example(humidity1, adjustments1, result1, 1);
+
+    // Example 2
+    vector<int> humidity2 = { 40 };
+    vector<pair<int, int>> adjustments2 = { {12, 0} };
+    vector<int> result2 = mo_algorithm(humidity2, adjustments2);  // Process the adjustments
+    print_example(humidity2, adjustments2, result2, 2);
+
+    // Example 3
+    vector<int> humidity3 = { 30, 41, 55, 68, 72 };
+    vector<pair<int, int>> adjustments3 = { {10, 0}, {-15, 2}, {22, 1}, {-8, 4}, {5, 3} };
+    vector<int> result3 = mo_algorithm(humidity3, adjustments3);  // Process the adjustments
+    print_example(humidity3, adjustments3, result3, 3);
+
+    return 0;
+}
+```
+
+Now that we have implemented Mo's Algorithm in C++, we can compare its complexity with the previous solutions to the same problem. From a complexity point of view, the **Slightly Less Naive** solution has the lowest complexity, as shown in the table bellow.
+
+| Solution                    | Time Complexity       | Space Complexity |
+| --------------------------- | --------------------- | ---------------- |
+| Naive Solution              | $O(n \times m)$       | $O(1)$           |
+| Slightly Less Naive         | $O(n + m)$            | $O(1)$           |
+| Parallel with `std::reduce` | $O(n + m)$            | $O(n)$           |
+| Fenwick Tree (BIT)          | $O((n + m) \log n)$   | $O(n)$           |
+| Mo's Algorithm              | $O((n + m) \sqrt{n})$ | $O(n)$           |
+
+Where:
+
+$n$ = \text{number of sensors in the greenhouse}
+
+$m$ = \text{number of adjustments}
+
+**Analysis for Small and Large Inputs**:
+
+For **small inputs** (e.g., small values of $n$ and $m$):
+
+- The **Slightly Less Naive** solution, with a time complexity of $O(n + m)$, will likely perform best due to its simplicity and minimal overhead. This solution efficiently handles small problems because the number of operations remains proportional to the sum of $n$ and $m$, without the logarithmic or square root factors present in more advanced algorithms.
+
+- On the other hand, **Mo's Algorithm** and the **Fenwick Tree (BIT)** may introduce additional computational overhead due to the $\log n$ and $\sqrt{n}$ terms, which might not justify their use when $n$ and $m$ are small.
+
+For **large inputs** (e.g., very large values of $n$ and $m$):
+
+- **Mo's Algorithm**, with its complexity of $O((n + m)\sqrt{n})$, becomes more advantageous as $n$ grows, especially in cases where $\sqrt{n}$ is much smaller than $\log n$. This is particularly useful for large datasets where balancing query and update efficiency is crucial.
+
+- The **Fenwick Tree (BIT)** remains efficient for large inputs as well, with a complexity of $O((n + m) \log n)$. However, depending on the relative sizes of $n$ and $m$, the logarithmic factor might make it slightly less competitive than **Mo's Algorithm** for extremely large inputs, particularly when $n$ grows significantly.
+
+- The **Slightly Less Naive** solution, while efficient for small inputs, may struggle with scalability as it does not benefit from logarithmic or square root optimizations, leading to potential performance bottlenecks for very large input sizes.
 
 ### 4. Auxiliary Data Structures
 
@@ -7686,9 +8072,6 @@ Ultimately, the choice between memoization and tabulation often comes down to pe
 ## Notes and References
 
 [:1] This ideia comes from [Introduction to Dynamic Programming][1]
-
 [:2] Most of this table came from [Introduction to Dynamic Programming][1]
-
 [:3] Peter M. Fenwick (1994). "A new data structure for cumulative frequency tables". Software: Practice and Experience. 24 (3): 327–336. CiteSeerX 10.1.1.14.8917. [doi:10.1002/spe.4380240306](https://onlinelibrary.wiley.com/doi/10.1002/spe.4380240306).
-
 [1]: https://cp-algorithms.com/dynamic_programming/intro-to-dp.html
