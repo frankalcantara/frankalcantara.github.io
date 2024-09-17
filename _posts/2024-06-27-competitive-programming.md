@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-17T02:35:16.750Z
+lastmod: 2024-09-17T04:22:14.100Z
 ---
 
 ## Introduction
@@ -856,6 +856,19 @@ Using threads for parallel I/O can improve performance in scenarios where there 
 However, this technique should be used with care. Adding threads and asynchronous operations increases code complexity, requiring careful synchronization to avoid race conditions or data inconsistencies. That's why we should avoid this technique in competitive programming. While parallelism can improve execution time, creating and managing threads also has a computational cost. In some cases, the gain may not justify the added complexity. In many competitive programming environments, I/O is simple and sequential, meaning that this technique may not always be necessary or beneficial. It should be used in scenarios with extremely heavy I/O workloads or when processing and reading/writing can be separated.
 
 The use of parallel I/O in programming competitive programmings typically applies to scenarios where there are many read/write operations or when the program needs to process large volumes of data while still reading or writing files. This situation is usual in [AI competitive programmings](https://opencv.org/opencv-ai-competitive-programming-2021/) and in hackatons. This technique can be useful in problems involving the manipulation of large datasets or intensive input/output processing, such as in "big data" challenges or reading/writing from disks. However, due to its complexity, the use of `std::async` and threads should be reserved for cases where parallelism offers a significant advantage over traditional sequential I/O.
+
+### Efficient Techniques for File I/O and Array Handling in Competitive Programming
+
+| Function/Operation               | Most Efficient Technique                                                                        | Description                                                                                                                                          |
+| -------------------------------- | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Reading from file (command line) | `std::ifstream` or `fread`/`mmap`                                                               | `std::ifstream` is efficient for small file reads, but `fread` and `mmap` are preferred for large files as they reduce system call overhead.         |
+| Reading from standard input      | Disable synchronization with `std::ios::sync_with_stdio(false)` and use `std::cin.tie(nullptr)` | Disables C/C++ stream synchronization to improve performance when reading from `std::cin`.                                                           |
+| Writing to terminal              | `putchar` or `printf`                                                                           | `putchar` is most efficient for writing individual characters, while `printf` is faster than `std::cout` in competitive programming.                 |
+| Working with arrays              | `std::vector` with `std::span` (C++20)                                                          | `std::span` allows access to arrays and vectors without additional copies, providing bounds safety and efficiency in data handling without overhead. |
+| Data processing                  | `std::ranges` (C++20)                                                                           | `std::ranges` enables efficient, lazy-evaluated chained operations like filtering and transforming data without extra memory allocation.             |
+| Parallel I/O                     | `std::async` with asynchronous read and write operations                                        | `std::async` improves performance in high I/O scenarios by enabling parallel read/write operations.                                                  |
+| Vector manipulation              | `std::vector` with preprocessing (e.g., macros, `constexpr`)                                    | Using macros or `constexpr` for frequent operations like sorting or summing elements can save time in competitive programmings.                      |
+| Handling large data volumes      | Manual buffering with `fread` and `fwrite`                                                      | `fread` and `fwrite` allow efficient reading and writing of large blocks of data, minimizing system call overhead.                                   |
 
 ## Maximizing Input/Output Efficiency in Competitive Programming (Windows and Linux)
 
@@ -1796,19 +1809,6 @@ Here, the data is sorted, filtered, and transformed in a single efficient chain 
 
 `std::ranges` in C++20 brings a powerful new way to work with data by providing efficient, lazy-evaluated views over containers. This minimizes memory usage, avoids unnecessary copying, and allows for highly optimized data processing pipelines. In competitive programming and high-performance applications, where every CPU cycle and byte of memory counts, using `std::ranges` can significantly improve both performance and code clarity. Whether you're filtering, transforming, or composing operations, `std::ranges` allows you to build complex data processing pipelines that are both expressive and efficient.
 
-## Efficient Techniques for File I/O and Array Handling in Competitive Programming
-
-| Function/Operation               | Most Efficient Technique                                                                        | Description                                                                                                                                          |
-| -------------------------------- | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Reading from file (command line) | `std::ifstream` or `fread`/`mmap`                                                               | `std::ifstream` is efficient for small file reads, but `fread` and `mmap` are preferred for large files as they reduce system call overhead.         |
-| Reading from standard input      | Disable synchronization with `std::ios::sync_with_stdio(false)` and use `std::cin.tie(nullptr)` | Disables C/C++ stream synchronization to improve performance when reading from `std::cin`.                                                           |
-| Writing to terminal              | `putchar` or `printf`                                                                           | `putchar` is most efficient for writing individual characters, while `printf` is faster than `std::cout` in competitive programming.                 |
-| Working with arrays              | `std::vector` with `std::span` (C++20)                                                          | `std::span` allows access to arrays and vectors without additional copies, providing bounds safety and efficiency in data handling without overhead. |
-| Data processing                  | `std::ranges` (C++20)                                                                           | `std::ranges` enables efficient, lazy-evaluated chained operations like filtering and transforming data without extra memory allocation.             |
-| Parallel I/O                     | `std::async` with asynchronous read and write operations                                        | `std::async` improves performance in high I/O scenarios by enabling parallel read/write operations.                                                  |
-| Vector manipulation              | `std::vector` with preprocessing (e.g., macros, `constexpr`)                                    | Using macros or `constexpr` for frequent operations like sorting or summing elements can save time in competitive programmings.                      |
-| Handling large data volumes      | Manual buffering with `fread` and `fwrite`                                                      | `fread` and `fwrite` allow efficient reading and writing of large blocks of data, minimizing system call overhead.                                   |
-
 ## Time and Space Complexity in Competitive Programming
 
 In this section, we will delve deeper into understanding both time and space complexities, providing a more comprehensive look into how these affect the efficiency of algorithms, particularly in competitive programming environments. This includes examining loops, recursive algorithms, and how various complexity classes dictate algorithm performance. We'll also consider the impact of space complexity and memory usage, which is crucial when dealing with large datasets.
@@ -2011,11 +2011,15 @@ While time complexity is a good estimate of efficiency, it hides constant factor
 
 Since loops have a significant impact on code performance, we can dive deeper into the possible loop options available.
 
-## Deep Dive into `for` Loops in Competitive Programming
+## Loops the heart of all competitive programming
+
+Loops are, without a doubt, the most important part of any code, whether for competitive programming, high-performance applications, or even solving academic problems. Most programming languages offer more than one way to implement loops. In this text, since Python is only our pseudocode language, we will focus on studying loops in C++.
+
+### Deep Dive into `for` Loops in Competitive Programming
 
 C++ provides several ways to iterate over elements in a vector, using different types of `for` loops. In this section, we will explore the various `for` loop options available in C++20, discussing their performance and code-writing efficiency. We will also analyze which loops are best suited for competitive programming based on input size—whether dealing with small or large datasets.
 
-### 1. `for` Loop with Iterator
+#### 1. `for` Loop with Iterator
 
 The `for` loop using iterators is one of the most efficient ways to iterate over a vector, especially for complex operations where you need to manipulate the elements or the iterator’s position directly.
 
@@ -2032,7 +2036,7 @@ Utilizing iterators directly avoids unnecessary function calls such as `operator
 - **For Small Inputs**: This is a solid option as it allows precise control over the iteration with negligible overhead.
 - **For Large Inputs**: Highly efficient due to minimal overhead and memory usage. However, ensure that the iterator’s operations do not induce cache misses, which can slow down performance for large datasets.
 
-### 2. Classic `for` Loop with Index
+#### 2. Classic `for` Loop with Index
 
 The classic `for` loop using an index is efficient and provides precise control over the iteration process.
 
@@ -2049,7 +2053,7 @@ Accessing elements via index is fast, but re-evaluating `vec.size()` in each ite
 - **For Small Inputs**: Efficient and straightforward, especially when the overhead of re-evaluating `vec.size()` is negligible.
 - **For Large Inputs**: If performance is critical, store `vec.size()` in a separate variable before the loop to avoid repeated function calls, which can become significant for larger datasets.
 
-### 3. Range-Based `for-each` with Constant Reference
+#### 3. Range-Based `for-each` with Constant Reference
 
 Range-based `for-each` with constant reference is highly efficient for reading elements since it avoids unnecessary copies.
 
@@ -2066,7 +2070,7 @@ Using constant references avoids copying, making it very efficient for both memo
 - **For Small Inputs**: Ideal for minimal syntax and efficient execution.
 - **For Large Inputs**: Excellent choice due to the avoidance of element copies, ensuring optimal memory usage and performance.
 
-### 4. Range-Based `for-each` by Value
+#### 4. Range-Based `for-each` by Value
 
 The `for-each` loop can also iterate over elements by value, which is useful when you want to work with copies of the elements.
 
@@ -2083,7 +2087,7 @@ Elements are copied, which can reduce performance, especially for large data typ
 - **For Small Inputs**: Suitable when the overhead of copying is negligible, especially if you need to modify copies of elements.
 - **For Large Inputs**: Avoid for large datasets or large element types, as the copying can lead to significant performance degradation.
 
-### 5. `for` Loop with Range Views (C++20)
+#### 5. `for` Loop with Range Views (C++20)
 
 C++20 introduced `range views`, which allow iteration over subsets or transformations of elements in a container without creating copies.
 
@@ -2100,7 +2104,7 @@ Range views allow high-performance operations, processing only the necessary ele
 - **For Small Inputs**: Works well, especially when applying transformations like reversing or filtering, while maintaining code readability.
 - **For Large Inputs**: Very efficient as no extra memory is allocated, and the processing is done lazily, meaning only the required elements are accessed.
 
-### 6. Parallel `for` Loop (C++17/C++20)
+#### 6. Parallel `for` Loop (C++17/C++20)
 
 While not a traditional `for` loop, using parallelism in loops is a powerful feature introduced in C++17 and further enhanced in C++20.
 
@@ -2119,7 +2123,7 @@ Uses multiple threads to process elements in parallel, offering substantial perf
 - **For Small Inputs**: Overkill. The overhead of managing threads and synchronization outweighs the benefits for small datasets.
 - **For Large Inputs**: Extremely efficient. When dealing with large datasets, parallel processing can drastically reduce runtime, especially for computationally expensive operations.
 
-### Optimal `for` Loops for Competitive Programming
+#### Optimal `for` Loops for Competitive Programming
 
 Choosing the right type of `for` loop in competitive programming depends largely on input size and the specific use case. The following table summarizes the best choices for different scenarios:
 
@@ -2131,11 +2135,11 @@ Choosing the right type of `for` loop in competitive programming depends largely
 | Large           | Parallel `for` Loop with `std::for_each` and `std::execution::par` | Ideal for computationally heavy tasks on large datasets, leveraging multiple threads to parallelize. |
 | Transformations | `for` Loop with Range Views (C++20)                                | Ideal for processing subsets or transformations of data without creating extra copies.               |
 
-## Now the `while` Loop which we all love
+### Now the `while` Loop which we all love
 
 The `while` loop is another fundamental control structure in C++ that is often used in competitive programming. It repeatedly executes a block of code as long as a specified condition evaluates to true. In this section, we will explore the different use cases for `while` loops, their performance considerations, and scenarios where they may be preferable to `for` loops. We will also examine their application with both small and large datasets.
 
-### 1. Basic `while` Loop
+#### 1. Basic `while` Loop
 
 A `while` loop continues executing its block of code until the condition becomes false. This makes it ideal for situations where the number of iterations is not known beforehand.
 
@@ -2154,7 +2158,7 @@ The `while` loop is simple and provides clear control over the loop's exit condi
 - **For Small Inputs**: This structure is efficient, especially when the number of iterations is small and predictable.
 - **For Large Inputs**: The `while` loop can be optimized for larger inputs by ensuring that the condition is simple to evaluate and that the incrementing logic doesn't introduce overhead.
 
-### 2. `while` Loop with Complex Conditions
+#### 2. `while` Loop with Complex Conditions
 
 `while` loops are particularly useful when the condition for continuing the loop involves complex logic that cannot be easily expressed in a `for` loop.
 
@@ -2173,7 +2177,7 @@ In this case, the loop runs not only based on the value of `i`, but also on the 
 - **For Small Inputs**: This is ideal for small inputs where the condition can vary significantly during the iterations.
 - **For Large Inputs**: Be cautious with complex conditions when dealing with large inputs, as evaluating the condition on every iteration may add performance overhead.
 
-### 3. Infinite `while` Loops
+#### 3. Infinite `while` Loops
 
 An infinite `while` loop is a loop that runs indefinitely until an explicit `break` or `return` statement is encountered. This type of loop is typically used in scenarios where the termination condition depends on an external event, such as user input or reaching a specific solution.
 
@@ -2210,7 +2214,7 @@ In this case, the loop will print `i` at least once, even if `i` starts with a v
 - **For Small Inputs**: Ideal when you need to guarantee that the loop runs at least once, such as with small datasets where the minimum iteration is essential.
 - **For Large Inputs**: Suitable for large datasets where the first iteration must occur independently of the condition.
 
-### 5. `while` Loop with Early Exit
+#### 5. `while` Loop with Early Exit
 
 The `while` loop can be combined with early exit strategies using `break` or `return` statements to optimize performance, particularly when the loop can terminate before completing all iterations.
 
@@ -2230,7 +2234,7 @@ By including a condition inside the loop that checks for an early exit, you can 
 - **For Small Inputs**: It can improve performance when early termination conditions are common or likely.
 - **For Large Inputs**: Highly efficient for large datasets, particularly when the early exit condition is met frequently, saving unnecessary iterations.
 
-### 6. Combining `while` with Multiple Conditions
+#### 6. Combining `while` with Multiple Conditions
 
 A `while` loop can easily incorporate multiple conditions to create more complex termination criteria. This is particularly useful when multiple variables determine whether the loop should continue.
 
@@ -2249,7 +2253,7 @@ This allows the loop to run based on multiple dynamic conditions, providing more
 - **For Small Inputs**: A flexible option when the conditions governing the loop may change during execution, even for small datasets.
 - **For Large Inputs**: Can be optimized for large datasets by ensuring that the condition checks are efficient and that unnecessary re-evaluations are minimized.
 
-### Optimal `while` Loops for Competitive Programming
+#### Optimal `while` Loops for Competitive Programming
 
 Choosing the right type of `while` loop depends on the nature of the input and the complexity of the condition. The following table summarizes the optimal choices for different input sizes:
 
@@ -2261,11 +2265,11 @@ Choosing the right type of `while` loop depends on the nature of the input and t
 | Large      | `while` with Complex Conditions            | Allows dynamic and flexible exit conditions, making it suitable for large datasets with evolving parameters.               |
 | Continuous | Infinite `while` Loop with Explicit Breaks | Best for situations where the exact number of iterations is unknown and depends on external factors or dynamic conditions. |
 
-## Special Loops in C++20 for Competitive Programming
+### Special Loops in C++20 for Competitive Programming
 
 In C++20, several advanced looping techniques have been introduced, each offering unique ways to improve code efficiency and readability. While some of these techniques provide remarkable performance optimizations, not all are well-suited for competitive programming. competitive programmings often involve handling dynamic inputs and generating outputs within strict time limits, so techniques relying heavily on compile-time computation are less practical. This section focuses on the most useful loop structures for competitive programmings, emphasizing runtime efficiency and adaptability to varying input sizes.
 
-### 1. Range-Based Loops with `std::ranges::views`
+#### 1. Range-Based Loops with `std::ranges::views`
 
 C++20 introduces `ranges` and `views`, which allow you to create expressive and efficient loops by operating on views of containers without copying data. Views are lazily evaluated, meaning that operations like filtering, transformation, or reversing are applied only when accessed.
 
@@ -2300,7 +2304,7 @@ Range views are particularly useful when working with large datasets, as they en
 
 Additionally, range views provide clarity and simplicity when dealing with complex operations. They streamline the process of transforming data, making it easier to apply multiple operations in a clean and readable manner, which is especially beneficial in competitive programming scenarios.
 
-### 2. Parallel Loops with `std::for_each` and `std::execution::par`
+#### 2. Parallel Loops with `std::for_each` and `std::execution::par`
 
 C++20 enables parallelism in standard algorithms with `std::execution`. Using parallel execution policies, you can distribute loop iterations across multiple threads, which can drastically reduce the execution time for computationally expensive loops. This is especially useful when working with large datasets in competitive programming.
 
@@ -2371,7 +2375,7 @@ This approach is ideal for constant, static data. When all relevant data is know
 
 While constexpr loops are not suitable for processing dynamic inputs directly, they can be strategically used to create lookup tables or pre-compute values that are then utilized during runtime calculations. This can be particularly useful in problems involving mathematical sequences, combinatorics, or other scenarios where certain calculations can be predetermined. **However, it's important to balance the use of pre-computed data with memory constraints, as large lookup tables might exceed memory limits in some competitive programming environments**.
 
-### 4. Early Exit Loops
+#### 4. Early Exit Loops
 
 In competitive programming, optimizing loops to exit early when a condition is met can drastically reduce execution time. This approach is especially useful when the solution does not require processing the entire input if an early condition is satisfied.
 
@@ -2495,7 +2499,7 @@ One-dimensional arrays are fundamental data structures in computer science and a
 
 Methods that prepare the array to respond to queries quickly, typically trading preprocessing time for faster queries. This approach involves investing time upfront to organize or transform the array data in a way that allows for rapid responses to subsequent queries. For example, in a scenario where frequent sum calculations of array intervals are needed, a preprocessing step might involve creating a prefix sum array. This initial step takes $O(n)$ time but enables constant-time $O(1)$ sum queries afterward, as opposed to $O(n)$ time per query without preprocessing. This trade-off is beneficial when the number of queries is large, as the initial time investment is offset by the significant speed improvement in query operations. Such techniques are common in algorithmic problem-solving, where strategic data preparation can dramatically enhance overall performance, especially in scenarios with repetitive operations on the same dataset.
 
-#### Sums and Prefixes
+#### Algorithm: Sums and Prefixes
 
 Calculation of cumulative sums for fast range queries. Reduces complexity from $O(n^2)$ to $O(n)$ in construction and $O(1)$ per query.
 
@@ -2937,13 +2941,66 @@ To add a value $x$ to all elements in $A$ from index $l$ to $r$ (inclusive), we 
 
 $$D[l] += x$$
 
-$$D[r+1] -= x (\text{if} $r+1 < n)$$
+$$D[r+1] -= x (\text{if} r+1 < n)$$
 
 After all updates, we can reconstruct $A$ from $D$ using:
 
 $$A[i] = \sum_{j=0}^i D[j]$$
 
 This technique allows for $O(1)$ time complexity for each range update operation.
+
+##### Mathematical Proof
+
+Let's prove that the range update operation on $D$ correctly reflects the change in $A$.
+
+1. For $i < l$:
+
+   $$A'[i] = \sum_{j=0}^i D'[j] = \sum_{j=0}^i D[j] = A[i]$$
+
+2. For $l \leq i \leq r$:
+
+   $$
+   \begin{aligned}
+   A'[i] &= \sum_{j=0}^i D'[j] \\
+        &= \sum_{j=0}^{l-1} D[j] + (D[l] + x) + \sum_{j=l+1}^i D[j] \\
+        &= (\sum_{j=0}^i D[j]) + x \\
+        &= A[i] + x
+   \end{aligned}
+   $$
+
+3. For $i > r$:
+
+   $$
+   \begin{aligned}
+   A'[i] &= \sum_{j=0}^i D'[j] \\
+        &= \sum_{j=0}^{l-1} D[j] + (D[l] + x) + \sum_{j=l+1}^r D[j] + (D[r+1] - x) + \sum_{j=r+2}^i D[j] \\
+        &= (\sum_{j=0}^i D[j]) + x - x \\
+        &= A[i]
+   \end{aligned}
+   $$
+
+This proves that the range update operation on $D$ correctly reflects the desired change in $A$.
+
+##### Complexity Analysis
+
+The Difference Array algorithm offers significant performance benefits, particularly for scenarios involving multiple range updates. Let's examine its complexity:
+
+1. **Range Update Operation**: The beauty of this algorithm lies in its constant-time range updates. Regardless of the size of the range being updated, we only modify two elements in the difference array $D$. This results in a time complexity of $O(1)$ for each range update operation.
+
+2. **Array Reconstruction**: When we need to reconstruct the original array $A$ from the difference array $D$, we perform a single pass through $D$, computing cumulative sums. This operation has a time complexity of $O(n)$, where $n$ is the size of the array.
+
+3. **Space Complexity**: The algorithm requires an additional array $D$ of the same size as the original array $A$. Therefore, the space complexity is $O(n)$.
+
+The efficiency of this algorithm becomes apparent when dealing with multiple range updates followed by a single query or reconstruction. In such scenarios, we can perform $m$ range updates in $O(m)$ time, followed by a single $O(n)$ reconstruction, resulting in a total time complexity of $O(m + n)$. This is significantly more efficient than performing $m$ range updates directly on the original array, which would take $O(mn)$ time.
+
+| Operation              | Time Complexity | Space Complexity |
+| ---------------------- | --------------- | ---------------- |
+| Initialization         | $O(n)$          | $O(n)$           |
+| Range update           | $O(1)$          | $O(n)$           |
+| Array reconstruction   | $O(n)$          | $O(n)$           |
+| **Overall Complexity** | $O(n + q)$      | $O(n)$           |
+
+##### Usage
 
 The Difference Array algorithm shines in various scenarios where multiple range updates are required, and the final result needs to be computed only after all updates have been applied. Here are some common applications where this technique proves to be particularly effective:
 
@@ -3041,19 +3098,6 @@ DifferenceArray da(A);
     return 0;
 }
 ```
-
-**Time and Space Complexity**:
-
-Constructing the difference array requires $O(n)$ time, as we compute the differences between adjacent elements in the original array. Each range update operation is performed in constant time, $O(1)$, since only two elements in the difference array are modified. To reconstruct the final array, we traverse the entire difference array and compute the prefix sums, which takes $O(n)$. The space complexity of the algorithm is $O(n)$ because the difference array requires an additional array of size $n + 1$.
-
-Thus, the total time complexity for the algorithm is $O(n + q)$, where $n$ is the size of the array and $q$ is the number of updates. The space complexity remains $O(n)$.
-
-| Operation              | Time Complexity | Space Complexity |
-| ---------------------- | --------------- | ---------------- |
-| Initialization         | $O(n)$          | $O(n)$           |
-| Range update           | $O(1)$          | $O(n)$           |
-| Array reconstruction   | $O(n)$          | $O(n)$           |
-| **Overall Complexity** | $O(n + q)$      | $O(n)$           |
 
 **Advantages and Limitations**:
 
@@ -4329,7 +4373,7 @@ The algorithm's overall time complexity can be expressed as $O(n + m)$, where $n
 
 In scenarios involving large arrays with frequent updates, the Incremental Sum Algorithm offers substantial performance benefits. It proves particularly useful in real-time data processing, financial calculations, and various computational problems where maintaining a running sum is crucial. By avoiding redundant calculations, it not only improves execution speed but also reduces computational resource usage, making it an invaluable tool for efficient array manipulation and sum maintenance in a wide range of applications.
 
-###### Mathematical Definitions
+##### Incremental Sum Mathematical Definitions
 
 Let:
 
@@ -4388,38 +4432,28 @@ These two operations ensure that the sum $S$ is correctly maintained after each 
 
 Let us demonstrate the update for a generic example. Suppose we have the initial array:
 
-$$
-A = [a_0, a_1, a_2, \dots, a_{n-1}]
-$$
+$$A = [a_0, a_1, a_2, \dots, a_{n-1}]$$
 
 The initial sum of even numbers will be:
 
-$$
-S = \sum_{i=0}^{n-1} \text{if } a_i \% 2 == 0 \text{ then } a_i
-$$
+$$S = \sum_{i=0}^{n-1} \text{if } a_i \% 2 == 0 \text{ then } a_i$$
 
 Now, let $adjustments[k] = [val_k, index_k]$ be an adjustment:
 
 - The previous value of $A[index_k]$ is $a_{index_k}$.
 - The new value will be:
 
-  $$
-  \text{new\_value} = a_{index_k} + val_k
-  $$
+  $$\text{new\_value} = a_{index_k} + val_k$$
 
 The sum $S$ will be updated as follows:
 
 - If $a_{index_k} \% 2 == 0$ (i.e., the old value was even), then:
 
-  $$
-  S = S - a_{index_k}
-  $$
+  $$S = S - a_{index_k}$$
 
 - If $\text{new\_value} \% 2 == 0$ (i.e., the new value is even), then:
 
-  $$
-  S = S + \text{new\_value}
-  $$
+  $$S = S + \text{new\_value}$$
 
 **Mathematical Justification**:
 
@@ -4430,7 +4464,7 @@ With each adjustment, we ensure that:
 
 These operations guarantee that the sum of all even numbers is correctly maintained without the need to recalculate the entire sum after each adjustment.
 
-###### Problem Example: "Humidity Levels in a Greenhouse" (Problem 1)
+#### Problem Example: "Humidity Levels in a Greenhouse" (Problem 1)
 
 The same problem we saw earlier in the section: **Algorithm: Difference Array - Efficient Range Updates**. Below is the implementation in C++20:
 
@@ -8166,7 +8200,7 @@ true
 
 The "Subset Sum" problem has already been tackled in the chapter: "Your First Dynamic Programming Problem." Therefore, our diligent reader should review the conditions presented here and see if the solution we presented for the "Two-Sum" problem applies in this case. If not, it'll be up to the reader to adapt the previous code accordingly. I'll kindly wait before we go on.
 
-## Problem 3 Statement: Longest Increasing Subsequence
+### Problem 3 Statement: Longest Increasing Subsequence
 
 You are given an array containing $N$ integers. Your task is to determine the Longest Increasing Subsequence (LIS) in the array, where every element is larger than the previous one.
 
@@ -8199,11 +8233,11 @@ You are given an array containing $N$ integers. Your task is to determine the Lo
 - $1 \leq N \leq 1000$
 - Each integer in the list can be positive or negative.
 
-### Analysis
+**Analysis**:
 
 The "Longest Increasing Subsequence" (LIS) problem is a classic problem in Dynamic Programming, often appearing in interviews and programming competitive programmings. The goal is to find the length of the longest subsequence in a given array such that all elements of the subsequence are in strictly increasing order. _There are three main approaches to solving this problem: Brute-Force, memoization, and tabulation. Coincidentally, these are the three solutions we are studying_. So, let's go.
 
-### Brute-Force
+#### Brute-Force
 
 In the Brute-Force approach, we systematically generate all possible subsequences of the array and examine each one to determine if it's strictly increasing. The length of the longest increasing subsequence is then tracked and ultimately returned. Here's the algorithm for solving the LIS problem using Brute-Force:
 
@@ -8269,7 +8303,7 @@ _Output 10: Execution time for LIS solution using Brute-Force._{: class="legend"
 
 At this point, our dear reader should have a mantra in mind: 'Don't use Brute-Force... Don't use Brute-Force.' With that said, let's delve into Dynamic Programming algorithms, keeping Brute-Force as a reference point for comparison.
 
-### Memoization
+#### Memoization
 
 Memoization is a handy optimization technique that remembers the results of expensive function calls. If the same inputs pop up again, we can simply reuse the stored results, saving precious time. Let's see how this applies to our LIS problem.
 
@@ -8338,7 +8372,7 @@ In contrast, the memoization approach boasts an average execution time of a mere
 
 Now, let's turn our attention to the last Dynamic Programming technique we are studying: tabulation.
 
-### Tabulation
+#### Tabulation
 
 Tabulation, a bottom-up Dynamic Programming technique, iteratively computes and stores results in a table. For the LIS problem, we create a table `dp` where `dp[i]` represents the length of the LIS ending at index `i`.
 
