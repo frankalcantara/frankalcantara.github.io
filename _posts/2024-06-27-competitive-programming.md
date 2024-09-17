@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-16T12:55:59.809Z
+lastmod: 2024-09-17T02:35:16.750Z
 ---
 
 ## Introduction
@@ -742,7 +742,7 @@ CC++20 introduced several improvements for parallel programming, including the e
 
 In situations with heavy I/O workloads, such as reading and processing large input files or performing intensive calculations while still reading or writing data, `std::async` and threads can be used to split operations and execute different tasks simultaneously, making the best use of available time.
 
-#### Example of Parallel I/O Using `std::async`
+#**Example**: of Parallel I/O Using `std::async`
 
 Below is a simple example of how to use `std::async` to perform input and output operations in parallel. In this example, while data is being read, another thread can be used to process or display the data simultaneously, optimizing the time spent on I/O operations:
 
@@ -909,7 +909,7 @@ int main() {
 
 On both **Windows** and **Linux**, the above code will work efficiently. However, since competitive programming platforms often use Linux, the synchronization of I/O streams plays a more significant role in Linux environments. Disabling synchronization is more crucial on Linux for achieving maximum performance, while the effect may be less noticeable on Windows. Nevertheless, the method remains valid and provides optimal speed in both environments.
 
-### Input and Output Through Standard Methods
+**Input**: and Output Through Standard Methods
 
 While `std::cin` and `std::cout` are often fast enough after synchronization is disabled, some competitive programmings on Unix-based systems like ICPC allow even faster input methods using `scanf` and `printf`. Below is an alternative version that uses `scanf` and `printf` for faster input/output handling:
 
@@ -1049,7 +1049,7 @@ The **std** namespace is the default namespace of the C++ Standard Library. It c
 
 The statement `using namespace std;` allows you to use all elements of the `std` namespace without needing to prefix them with `std::`. This can make the code more concise and readable, especially in small programs or educational examples. Additionally, it reduces typing, which is beneficial when time is limited and valuable, such as during competitive programmings.
 
-##### Example Without `using namespace std;`
+##**Example**: Without `using namespace std;`
 
 ```cpp
 #include <iostream>
@@ -1065,7 +1065,7 @@ int main() {
 }
 ```
 
-##### Example With `using namespace std;`
+##**Example**: With `using namespace std;`
 
 ```cpp
 #include <iostream>
@@ -1582,7 +1582,7 @@ The `std::span` is a new feature introduced in C++20 that allows you to create l
 
 Unlike containers such as `std::vector`, `std::span` doesn't own the data it references. This means it doesn't allocate new memory and works directly with existing data, leading to lower memory overhead. Additionally, `std::span` can work with both static arrays and dynamic containers (like `std::vector`) without requiring copies. It provides safer array handling compared to raw pointers, as it encapsulates size information. Since `std::span` eliminates the need for memory copies, it can speed up operations where large datasets need to be processed in-place, or only certain views of data are required.
 
-### Example of `std::span` for Efficient Data Access
+**Example**: of `std::span` for Efficient Data Access
 
 In this example, we create a `std::span` from a `std::vector` of integers, allowing us to iterate over the vector’s elements without copying the data:
 
@@ -1694,7 +1694,7 @@ In traditional programming with containers like `std::vector`, iterating over an
 
 The core idea behind `std::ranges` is to create "views" over data. These views allow you to manipulate and query data without modifying the underlying container. A view in `std::ranges` is an abstraction that can represent any sequence of elements that can be iterated over, just like a container. The key difference is that a view is not required to own its elements; instead, it provides a "window" into an existing data sequence, allowing for efficient operations.
 
-#### Example: Filtering and Transforming Data with `std::ranges`
+#**Example**:: Filtering and Transforming Data with `std::ranges`
 
 Suppose we have a vector of integers and we want to filter out the odd numbers and then multiply the remaining even numbers by two. Using traditional methods, we would need to loop through the vector, apply conditions, and store the results in a new container. With `std::ranges`, this can be done in a more expressive and efficient way:
 
@@ -1713,7 +1713,7 @@ int main() {
 
     // Iterate over the view and print the results
     for (int num : even_doubled) {
-        std::cout << num << " ";  // Output: 4 8 (only even numbers doubled)
+        std::cout << num << " ";  // **Output**: 4 8 (only even numbers doubled)
     }
     std::cout << std::endl;
 
@@ -1745,7 +1745,7 @@ int main() {
 
     // Iterate over the view and print the results
     for (int num : result) {
-        std::cout << num << " ";  // Output: 40 50 60
+        std::cout << num << " ";  // **Output**: 40 50 60
     }
     std::cout << std::endl;
 
@@ -1784,7 +1784,7 @@ int main() {
 
     // Iterate and output the results
     for (int num : processed) {
-        std::cout << num << " ";  // Output: 15 25 35 45
+        std::cout << num << " ";  // **Output**: 15 25 35 45
     }
     std::cout << std::endl;
 
@@ -1937,7 +1937,7 @@ The call `f(n)` makes $n$ recursive calls, and the time complexity of each call 
 
 #### Exponential Recursion
 
-Consider the following function, which makes two recursive calls for every input:
+Consider the following function, which makes two recursive calls for every **Input**:
 
 ```cpp
 void g(int n) {
@@ -2545,8 +2545,8 @@ Return the leftmost Magic Plate index. If no such plate exists, return $-1$.
 
 **Example 1:**
 
-Input: $plates = [3,1,5,2,2]$
-Output: $2$
+**Input**: $plates = [3,1,5,2,2]$
+**Output**: $2$
 Explanation:
 The Magic Plate is at index $2$.
 Weight on the left = $plates[0] + plates[1] = 3 + 1 = 4$
@@ -2554,15 +2554,15 @@ Weight on the right = $plates[3] + plates[4] = 2 + 2 = 4$
 
 **Example 2:**
 
-Input: $plates = [1,2,3]$
-Output: $-1$
+**Input**: $plates = [1,2,3]$
+**Output**: $-1$
 Explanation:
 There is no plate that can be the Magic Plate.
 
 **Example 3:**
 
-Input: $plates = [2,1,-1]$
-Output: $0$
+**Input**: $plates = [2,1,-1]$
+**Output**: $0$
 Explanation:
 The Magic Plate is the first plate.
 Weight on the left = $0$ (no plates to the left of the first plate)
@@ -2917,7 +2917,7 @@ int main() {
 }
 ```
 
-#### Difference Array: Efficient Range Updates
+#### Algorithm: Difference Array - Efficient Range Updates
 
 The Difference Array algorithm is a powerful technique for handling multiple range update operations efficiently. It's particularly useful when you need to perform many updates on an array and only query the final result after all updates are complete. Optimizes range updates to $O(1)$ by storing differences between adjacent
 elements.
@@ -2984,7 +2984,7 @@ D = initialize_diff_array(A)
 range_update(D, 1, 2, 3) # Add 3 to A[1:3]
 range_update(D, 0, 1, 2) # Add 2 to A[0:2]
 result = reconstruct_array(D)
-print(result) # Output: [2, 5, 3, 0]
+print(result) # **Output**: [2, 5, 3, 0]
 ```
 
 **Algorithm Implementation**: C++20
@@ -3036,7 +3036,7 @@ DifferenceArray da(A);
     for (int num : result) {
         std::cout << num << " ";
     }
-    std::cout << std::endl;  // Output: 2 5 3 0
+    std::cout << std::endl;  // **Output**: 2 5 3 0
 
     return 0;
 }
@@ -3073,8 +3073,8 @@ Your goal is to calculate this sum for each adjustment and report it in a final 
 
 **Example 1:**
 
-Input: $humidity = [45, 52, 33, 64]$, $adjustments = [[5,0],[-20,1],[-14,0],[18,3]]$
-Output: $[166,146,132,150]$
+**Input**: $humidity = [45, 52, 33, 64]$, $adjustments = [[5,0],[-20,1],[-14,0],[18,3]]$
+**Output**: $[166,146,132,150]$
 Explanation: Initially, the array is $[45,52,33,64]$.
 After adding $5$ to $humidity[0]$, the array becomes $[50,52,33,64]$, and the sum of even values is $50 + 52 + 64 = 166$.
 After adding $-20$ to $humidity[1]$, the array becomes $[50,32,33,64]$, and the sum of even values is $50 + 32 + 64 = 146$.
@@ -3083,22 +3083,22 @@ After adding $18$ to $humidity[3]$, the array becomes $[36,32,33,82]$, and the s
 
 **Example 2**:
 
-Input: $humidity = [40]$, $adjustments = [[12,0]]$
-Output: $[52]$
+**Input**: $humidity = [40]$, $adjustments = [[12,0]]$
+**Output**: $[52]$
 
 **Example 3**:
 
-Input: $humidity = [30, 41, 55, 68, 72]$, $adjustments = [[10,0],[-15,2],[22,1],[-8,4],[5,3]]$
-Output: $[140,140,162,230,230]$
+**Input**: $humidity = [30, 41, 55, 68, 72]$, $adjustments = [[10,0],[-15,2],[22,1],[-8,4],[5,3]]$
+**Output**: $[180,220,220,212,144]$
 
 **Explanation**:
 
 - Initially, the array is $[30,41,55,68,72]$.
-- After adding $10$ to $humidity[0]$, the array becomes $[40,41,55,68,72]$, and the sum of even values is $40 + 68 + 72 = 140$.
-- After adding $-15$ to $humidity[2]$, the array becomes $[40,41,40,68,72]$, and the sum of even values is $40 + 40 + 68 + 72 = 140$.
-- After adding $22$ to $humidity[1]$, the array becomes $[40,63,40,68,72]$, and the sum of even values is $40 + 40 + 68 + 72 = 162$.
-- After adding $-8$ to $humidity[4]$, the array becomes $[40,63,40,68,64]$, and the sum of even values is $40 + 40 + 68 + 64 = 230$.
-- After adding $5$ to $humidity[3]$, the array becomes $[40,63,40,73,64]$, and the sum of even values is $40 + 40 + 64 = 230$.
+- After adding $10$ to $humidity[0]$, the array becomes $[40,41,55,68,72]$, and the sum of the even values is $40 + 68 + 72 = 180$.
+- After adding $-15$ to $humidity[2]$, the array becomes $[40,41,40,68,72]$, and the sum of the even values is $40 + 40 + 68 + 72 = 220$.
+- After adding $22$ to $humidity[1]$, the array becomes $[40,63,40,68,72]$, and the sum of the even values is $40 + 40 + 68 + 72 = 220$.
+- After adding $-8$ to $humidity[4]$, the array becomes $[40,63,40,68,64]$, and the sum of the even values is $40 + 40 + 68 + 64 = 212$.
+- After adding $5$ to $humidity[3]$, the array becomes $[40,63,40,73,64]$, and the sum of the even values is $40 + 40 + 64 = 144$.
 
 **Constraints:**
 
@@ -3198,7 +3198,7 @@ vector<long long> adjustHumidity(vector<int>& humidity, const vector<vector<int>
 // Helper function to print the results in a formatted way.
 void printResult(const vector<int>& humidity, const vector<vector<int>>& adjustments, const vector<long long>& result) {
     // Prints the initial humidity and the adjustments.
-    cout << "Input: humidity = [";
+    cout << "**Input**: humidity = [";
     for (size_t i = 0; i < humidity.size(); ++i) {
         cout << humidity[i] << (i < humidity.size() - 1 ? ", " : "");  // Prints each humidity value, separating them with commas.
     }
@@ -3210,7 +3210,7 @@ void printResult(const vector<int>& humidity, const vector<vector<int>>& adjustm
     cout << "]\n";
 
     // Prints the result after each adjustment.
-    cout << "Output: ";
+    cout << "**Output**: ";
     for (long long res : result) {
         cout << res << " ";  // Prints each result, separating them by spaces.
     }
@@ -3465,7 +3465,7 @@ In total, the space complexity is $O(n + m)$.
 
 The usage of `long long` ensures that the results and intermediate sums are safe from overflow, but it may slightly increase memory usage compared to using `int`. The overall space requirements are manageable within typical constraints in competitive programming environments, where both $n$ and $m$ are capped at $10^4$.
 
-#### Algorithm for a Slightly Less Naive Code
+###### Algorithm for a Slightly Less Naive Code
 
 1. Initialization:
 
@@ -3547,7 +3547,7 @@ vector<long long> adjustHumidity(vector<int>& humidity, const vector<vector<int>
 // Helper function to print the results in a formatted way.
 void printResult(const vector<int>& humidity, const vector<vector<int>>& adjustments, const vector<long long>& result) {
     // Print the initial humidity values and the adjustments.
-    cout << "Input: humidity = [";
+    cout << "**Input**: humidity = [";
     for (size_t i = 0; i < humidity.size(); ++i) {
         cout << humidity[i] << (i < humidity.size() - 1 ? ", " : "");
     }
@@ -3558,7 +3558,7 @@ void printResult(const vector<int>& humidity, const vector<vector<int>>& adjustm
     cout << "]\n";
 
     // Print the result after each adjustment.
-    cout << "Output: ";
+    cout << "**Output**: ";
     for (long long res : result) {
         cout << res << " ";
     }
@@ -3638,7 +3638,7 @@ Finally, the results vector is returned, which contains the sum of even numbers 
 >
 > Here, the lambda function uses `auto` to deduce the types of its parameters, making it applicable to both integers and floating-point numbers.
 
-##### A Parallel Competitive Code
+###### A Parallel Competitive Code
 
 Using parallel code in this problem offers a advantage by allowing the calculation of the sum of even humidity values to be distributed across multiple processing threads. This can improve performance, especially for large humidity arrays, as the `reduce` function could leverage parallel execution policies to sum even values concurrently, reducing overall runtime. However, in the current implementation, the sequential execution policy (`exec_seq`) is used to maintain order. Additionally, the Code 3 already employs techniques to reduce verbosity, such as type aliases (`vi`, `vvi`, `vll`) and the use of `auto` for type deduction, making the code cleaner and easier to maintain without sacrificing readability.
 
@@ -3665,7 +3665,7 @@ using exec_seq = execution::sequenced_policy; // Alias for execution::seq (seque
 // Helper function to print the results in a formatted way.
 void printResult(const vi& humidity, const vvi& adjustments, const vll& result) {
     // Prints the initial humidity array and the adjustments array.
-    cout << "Input: humidity = [";
+    cout << "**Input**: humidity = [";
     for (size_t i = 0; i < humidity.size(); ++i) {
         // Print each humidity value, separating them with commas.
         cout << humidity[i] << (i < humidity.size() - 1 ? ", " : "");
@@ -3678,7 +3678,7 @@ void printResult(const vi& humidity, const vvi& adjustments, const vll& result) 
     cout << "]\n";
 
     // Prints the results after each adjustment.
-    cout << "Output: ";
+    cout << "**Output**: ";
     for (auto res : result) {  // Using `auto` to automatically deduce the type (long long)
         cout << res << " ";    // Print each result followed by a space.
     }
@@ -3869,7 +3869,7 @@ By distributing the workload across multiple threads, the program can achieve si
 >
 > This enables `reduce` to sum the elements in `vec` concurrently, improving efficiency on large arrays, especially in multi-core environments.
 
-##### Finally, the code using Fenwick tree
+###### Finally, the code using Fenwick tree
 
 I chose to write this code using as much modern C++ as possible. This means you will face two challenges. The first is understanding the Fenwick tree algorithm, and the second is understanding the C++ syntax. To help make this easier, I will explain the code block by block, highlighting each C++ feature and why I chose to write it this way.
 
@@ -3942,12 +3942,12 @@ vll adjustHumidity(vi& humidity, const vvi& adjustments) {
 }
 
 void printResult(osyncstream& out, const vi& humidity, const vvi& adjustments, const vll& result) {
-    out << "Input: humidity = [" << humidity[0];
+    out << "**Input**: humidity = [" << humidity[0];
     for (int i = 1; i < humidity.size(); ++i) out << ", " << humidity[i];
     out << "], adjustments = [";
     for (const auto& adj : adjustments)
         out << "[" << adj[0] << "," << adj[1] << "]" << (&adj != &adjustments.back() ? ", " : "");
-    out << "]\nOutput: ";
+    out << "]\n**Output**: ";
     for (auto res : result) out << res << " ";
     out << "\n\n";
 }
@@ -4184,7 +4184,7 @@ namespace config {
 >
 > int main() {
 >     InputMethod method = InputMethod::File;
->     selectInputMethod(method);  // Output: Reading input from a file.
+>     selectInputMethod(method);  // **Output**: Reading input from a file.
 >     return 0;
 > }
 > ```
@@ -4288,6 +4288,227 @@ The **`inline constexpr`** constant `input_method` specifies which input method 
 > In summary, **`inline`** helps with reducing overhead by allowing the compiler to replace function calls with the actual function code, and it prevents multiple definitions of variables in multiple translation units. **`constexpr`** enables computations to be performed at compile time, which can significantly optimize performance by avoiding runtime calculations, although its applicability in competitive programming may be limited.
 
 AINDA TEM MUITO QUE EXPLICAR AQUI.
+
+#### Algorithm: Incremental Sum
+
+The **Incremental Sum Algorithm** offers an efficient method for maintaining a running sum of specific elements (such as even numbers) in an array while applying adjustments. This approach eliminates the need to recalculate the entire sum after each modification, instead updating the sum incrementally by subtracting old values and adding new ones as necessary.
+
+The algorithm begins with an initial calculation of the sum of even numbers in the array. This step has a time complexity of $O(n)$, where $n$ represents the array size. For example, in Python, this initial calculation could be implemented as:
+
+```python
+def initial_sum(arr):
+    return sum(x for x in arr if x % 2 == 0)
+```
+
+Following the initial calculation, the algorithm processes each adjustment to the array. For each adjustment, it performs three key operations: If the old value at the adjusted index was even, it subtracts this value from the sum. It then updates the array element with the new value. Finally, if the new value is even, it adds this value to the sum. This process maintains the sum's accuracy with a constant time complexity of $O(1)$ per adjustment. In C++, this adjustment process could be implemented as follows:
+
+```cpp
+void adjust(vector<int>& arr, int index, int new_value, int& even_sum) {
+    if (arr[index] % 2 == 0) even_sum -= arr[index];
+    arr[index] = new_value;
+    if (new_value % 2 == 0) even_sum += new_value;
+}
+```
+
+The algorithm's efficiency stems from its ability to process adjustments in constant time, regardless of the array's size. This approach is particularly beneficial when dealing with numerous adjustments, as it eliminates the need for repeated full array traversals.
+
+To illustrate the algorithm's operation, consider the following example:
+
+```python
+arr = [1, 2, 3, 4, 5]
+even_sum = initial_sum(arr)  # even_sum = 6 (2 + 4)
+
+# Adjustment 1: Change arr[0] from 1 to 6
+adjust(arr, 0, 6, even_sum)  # even_sum = 12 (6 + 2 + 4)
+
+# Adjustment 2: Change arr[1] from 2 to 3
+adjust(arr, 1, 3, even_sum)  # even_sum = 10 (6 + 4)
+```
+
+The algorithm's overall time complexity can be expressed as $O(n + m)$, where $n$ is the initial array size and $m$ is the number of adjustments. This represents a significant improvement over the naive approach of recalculating the sum after each adjustment, which would result in a time complexity of $O(n \times m)$.
+
+In scenarios involving large arrays with frequent updates, the Incremental Sum Algorithm offers substantial performance benefits. It proves particularly useful in real-time data processing, financial calculations, and various computational problems where maintaining a running sum is crucial. By avoiding redundant calculations, it not only improves execution speed but also reduces computational resource usage, making it an invaluable tool for efficient array manipulation and sum maintenance in a wide range of applications.
+
+###### Mathematical Definitions
+
+Let:
+
+- $n$ be the size of the array $A$,
+- $Q$ be the number of queries (adjustments),
+- $A[i]$ be the value at index $i$ in the array,
+- $adjustments[k] = [val_k, index_k]$ be the adjustment in the $k$-th query, where $val_k$ is the adjustment value and $index_k$ is the index to be adjusted.
+
+Our goal is to calculate the sum of the even numbers in $A$ after each adjustment incrementally, without recalculating the entire sum from scratch after each query.
+
+**Step 1: Initial Calculation of the Sum of Even Numbers**:
+
+First, define $S$ as the initial sum of even numbers in the array $A$. This sum can be expressed as:
+
+$$S = \sum_{i=0}^{n-1} \text{if } (A[i] \% 2 == 0) \text{ then } A[i]$$
+
+The conditional function indicates that only even values are summed.
+
+**Step 2: Incremental Update**:
+
+When we receive a query $adjustments[k] = [val_k, index_k]$, we adjust the value at index $index_k$ by adding $val_k$ to the current value of $A[index_k]$. The new value is:
+
+$$\text{new\_value} = A[index_k] + val_k$$
+
+We update the sum $S$ efficiently as follows:
+
+1. If the original value $A[index_k]$ was **even**, we subtract it from $S$:
+
+   $$
+   S = S - A[index_k]
+   $$
+
+2. After applying the adjustment, if the new value $\text{new\_value}$ is **even**, we add it to $S$:
+
+   $$
+   S = S + \text{new\_value}
+   $$
+
+**Formal Analysis of Updates**:
+
+For each adjustment, we have the following operations:
+
+- **Remove the old value (if even):**
+  If $A[index_k]$ is even before the adjustment:
+
+  $$ S = S - A[index_k] $$
+
+- **Add the new value (if even):**
+  If $\text{new\_value}$ is even after the adjustment:
+
+  $$ S = S + \text{new_value} $$
+
+These two operations ensure that the sum $S$ is correctly maintained after each adjustment.
+
+**Demonstration for a Generic Example**:
+
+Let us demonstrate the update for a generic example. Suppose we have the initial array:
+
+$$
+A = [a_0, a_1, a_2, \dots, a_{n-1}]
+$$
+
+The initial sum of even numbers will be:
+
+$$
+S = \sum_{i=0}^{n-1} \text{if } a_i \% 2 == 0 \text{ then } a_i
+$$
+
+Now, let $adjustments[k] = [val_k, index_k]$ be an adjustment:
+
+- The previous value of $A[index_k]$ is $a_{index_k}$.
+- The new value will be:
+
+  $$
+  \text{new\_value} = a_{index_k} + val_k
+  $$
+
+The sum $S$ will be updated as follows:
+
+- If $a_{index_k} \% 2 == 0$ (i.e., the old value was even), then:
+
+  $$
+  S = S - a_{index_k}
+  $$
+
+- If $\text{new\_value} \% 2 == 0$ (i.e., the new value is even), then:
+
+  $$
+  S = S + \text{new\_value}
+  $$
+
+**Mathematical Justification**:
+
+With each adjustment, we ensure that:
+
+1. If the old value was even, it is removed from the sum $S$.
+2. If the new value is even, it is added to the sum $S$.
+
+These operations guarantee that the sum of all even numbers is correctly maintained without the need to recalculate the entire sum after each adjustment.
+
+###### Problem Example: "Humidity Levels in a Greenhouse" (Problem 1)
+
+The same problem we saw earlier in the section: **Algorithm: Difference Array - Efficient Range Updates**. Below is the implementation in C++20:
+
+```cpp
+#include <vector>
+#include <iostream>
+using namespace std;
+using vi = vector<long long>;
+
+// Function to compute the sum of even numbers after each adjustment
+vi sumEvenAfterAdjustments(vi& humidity, const vector<vi>& adjustments) {
+    long long sumEven = 0;
+    vi result;
+
+    // Calculate the initial sum of even numbers in the humidity array
+    for (auto level : humidity) {
+        if (level % 2 == 0) {
+            sumEven += level;
+        }
+    }
+
+    // Process each adjustment
+    for (const auto& adjustment : adjustments) {
+        long long val = adjustment[0];  // The adjustment value to add
+        int index = adjustment[1];      // The index of the sensor to adjust
+        long long oldValue = humidity[index];  // Store the old humidity value
+        long long newValue = oldValue + val;   // Compute the new humidity value
+
+        // Apply the adjustment to the humidity array
+        humidity[index] = newValue;
+
+        // --- Incremental sum update algorithm starts here ---
+        // Update sumEven based on the old and new values
+
+        // If the old value was even, subtract it from sumEven
+        if (oldValue % 2 == 0) {
+            sumEven -= oldValue;  // Remove the old even value from the sum
+        }
+        // If the new value is even, add it to sumEven
+        if (newValue % 2 == 0) {
+            sumEven += newValue;  // Add the new even value to the sum
+        }
+        // --- Incremental sum update algorithm ends here ---
+
+        // Store the current sum after the adjustment
+        result.push_back(sumEven);
+    }
+    return result;
+}
+
+int main() {
+    // Example 1
+    vi humidity1 = { 45, 52, 33, 64 };
+    vector<vi> adjustments1 = { {5, 0}, {-20, 1}, {-14, 0}, {18, 3} };
+    vi result1 = sumEvenAfterAdjustments(humidity1, adjustments1);
+    cout << "Example 1: ";
+    for (const auto& sum : result1) cout << sum << " ";
+    cout << endl;
+
+    // Example 2
+    vi humidity2 = { 40 };
+    vector<vi> adjustments2 = { {12, 0} };
+    vi result2 = sumEvenAfterAdjustments(humidity2, adjustments2);
+    cout << "Example 2: ";
+    for (const auto& sum : result2) cout << sum << " ";
+    cout << endl;
+
+    // Example 3
+    vi humidity3 = { 30, 41, 55, 68, 72 };
+    vector<vi> adjustments3 = { {10, 0}, {-15, 2}, {22, 1}, {-8, 4}, {5, 3} };
+    vi result3 = sumEvenAfterAdjustments(humidity3, adjustments3);
+    cout << "Example 3: ";
+    for (const auto& sum : result3) cout << sum << " ";
+    cout << endl;
+
+    return 0;
+}
+```
 
 #### Static Array Queries
 
@@ -4538,7 +4759,7 @@ void moAlgorithm(vector<int>& arr, vector<Query>& queries) {
 
 The code begins by reading the array and the queries. Next, the queries are sorted using the block decomposition technique. As we process each query, the current segment is adjusted to match the query’s range, and the current sum is updated. Finally, the answers are stored and output in the order of the original queries.
 
-##### Example
+##**Example**:
 
 Let's look at a concrete example to better understand how Mo's Algorithm works in practice.
 
@@ -4651,7 +4872,7 @@ vector<int> mo_algorithm(vector<int>& humidity, vector<pair<int, int>>& adjustme
 void print_example(const vector<int>& humidity, const vector<pair<int, int>>& adjustments, const vector<int>& result, int example_num) {
     // Print the formatted example output
     cout << "Example " << example_num << ":" << endl;
-    cout << "Input: humidity = [";
+    cout << "**Input**: humidity = [";
     for (size_t i = 0; i < humidity.size(); ++i) {
         cout << humidity[i];
         if (i < humidity.size() - 1) cout << ", ";
@@ -4662,7 +4883,7 @@ void print_example(const vector<int>& humidity, const vector<pair<int, int>>& ad
         if (i < adjustments.size() - 1) cout << ",";
     }
     cout << "]" << endl;
-    cout << "Output: ";
+    cout << "**Output**: ";
     for (size_t i = 0; i < result.size(); ++i) {
         cout << result[i];
         if (i < result.size() - 1) cout << " ";
@@ -4909,7 +5130,7 @@ $$1100_2 \& 0100_2 = 0100_2$$
 
 Therefore, $\text{LSB}(12) = 4$. This means that index 12 in the Fenwick tree represents the sum of elements from index 9 to index 12.
 
-##### Example
+##**Example**:
 
 Let's consider an array $A = [3, 2, -1, 6, 5, 4, -3, 3, 7, 2, 3, 1]$. The corresponding Fenwick tree will store cumulative sums for segments determined by the $\text{LSB}(i)$:
 
@@ -5129,7 +5350,427 @@ _A diagram illustrating how a 2D Fenwick tree operates, showing how updates and 
 
 The Fenwick tree offers a good balance between update and query efficiency, with a simpler implementation than a Segment Tree.
 
-#### Problems
+#### Problem Example: "Humidity Levels in a Greenhouse" (Problem 1)
+
+The same problem we saw earlier in the section: **Algorithm: Difference Array - Efficient Range Updates**. Below is the implementation in C++20:
+
+I chose to write this code using as much modern C++ as possible. This means you will face two challenges. The first is understanding the Fenwick tree algorithm, and the second is understanding the C++ syntax. To help make this easier, I will explain the code block by block, highlighting each C++ feature and why I chose to write it this way.
+
+**Code 4**:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <numeric>
+#include <fstream>
+#include <sstream>
+#include <filesystem>
+#include <syncstream>
+
+using namespace std;
+namespace fs = filesystem;
+
+namespace config {
+    enum class InputMethod { Hardcoded, Stdin, File };
+
+    // Altere esta linha para mudar o método de entrada
+    inline constexpr InputMethod input_method = InputMethod::Hardcoded;
+}
+
+using vi = vector<int>;
+using vvi = vector<vector<int>>;
+using vll = vector<long long>;
+
+class BIT {
+    vi tree;
+    int n;
+
+public:
+    Fenwick tree(int size) : tree(size + 1), n(size) {}
+
+    void update(int i, int delta) {
+        for (++i; i <= n; i += i & -i) tree[i] += delta;
+    }
+
+    long long query(int i) const {
+        long long sum = 0;
+        for (++i; i > 0; i -= i & -i) sum += tree[i];
+        return sum;
+    }
+};
+
+vll adjustHumidity(vi& humidity, const vvi& adjustments) {
+    int n = humidity.size();
+    BIT bit(n);
+    vll result;
+    result.reserve(adjustments.size());
+
+    auto updateBit = [&](int i, int old_val, int new_val) {
+        if (!(old_val & 1)) bit.update(i, -old_val);
+        if (!(new_val & 1)) bit.update(i, new_val);
+        };
+
+    for (int i = 0; i < n; ++i) {
+        if (!(humidity[i] & 1)) bit.update(i, humidity[i]);
+    }
+
+    for (const auto& adj : adjustments) {
+        int i = adj[1], old_val = humidity[i], new_val = old_val + adj[0];
+        updateBit(i, old_val, new_val);
+        humidity[i] = new_val;
+        result.push_back(bit.query(n - 1));
+    }
+
+    return result;
+}
+
+void printResult(osyncstream& out, const vi& humidity, const vvi& adjustments, const vll& result) {
+    out << "**Input**: humidity = [" << humidity[0];
+    for (int i = 1; i < humidity.size(); ++i) out << ", " << humidity[i];
+    out << "], adjustments = [";
+    for (const auto& adj : adjustments)
+        out << "[" << adj[0] << "," << adj[1] << "]" << (&adj != &adjustments.back() ? ", " : "");
+    out << "]\n**Output**: ";
+    for (auto res : result) out << res << " ";
+    out << "\n\n";
+}
+
+pair<vi, vvi> readInput(istream& in) {
+    vi humidity;
+    vvi adjustments;
+    int n, m;
+    in >> n;
+    humidity.resize(n);
+    for (int& h : humidity) in >> h;
+    in >> m;
+    adjustments.resize(m, vi(2));
+    for (auto& adj : adjustments) in >> adj[0] >> adj[1];
+    return { humidity, adjustments };
+}
+
+void processInput(istream& in, osyncstream& out) {
+    int t;
+    in >> t;
+    for (int i = 1; i <= t; ++i) {
+        out << "Example " << i << ":\n";
+        auto [humidity, adjustments] = readInput(in);
+        auto result = adjustHumidity(humidity, adjustments);
+        printResult(out, humidity, adjustments, result);
+    }
+}
+
+int main() {
+    osyncstream syncout(cout);
+{% raw %}
+    if constexpr (config::input_method == config::InputMethod::Hardcoded) {
+        vector<pair<vi, vvi>> tests = {{{45, 52, 33, 64}, {{5,0}, {-20,1}, {-14,0}, {18,3}}},{{40}, {{12,0}}},{{30, 41, 55, 68, 72}, {{10,0}, {-15,2}, {22,1}, {-8,4}, {5,3}}}};
+{% endraw %}
+        for (int i = 0; i < tests.size(); ++i) {
+            syncout << "Example " << i + 1 << ":\n";
+            auto& [humidity, adjustments] = tests[i];
+            auto result = adjustHumidity(humidity, adjustments);
+            printResult(syncout, humidity, adjustments, result);
+        }
+    }
+    else if constexpr (config::input_method == config::InputMethod::Stdin) {
+        processInput(cin, syncout);
+    }
+    else if constexpr (config::input_method == config::InputMethod::File) {
+        fs::path inputPath = "input.txt";
+        if (fs::exists(inputPath)) {
+            ifstream inputFile(inputPath);
+            processInput(inputFile, syncout);
+        }
+        else {
+            syncout << "Input file not found: " << inputPath << endl;
+        }
+    }
+    else {
+        syncout << "Invalid input method defined" << endl;
+    }
+
+    return 0;
+}
+```
+
+The first thing you should notice is that I chose to include all three possible input methods in the same code. Obviously, in a competition, you wouldn't do that. You would include only the method that interests you. Additionally, I opted to use modern C++20 capabilities instead of using the old preprocessor directives (`#defines`). However, before diving into the analysis of Code 4, let's look at an example of what the `main` function would look like if we were using preprocessor directives.
+
+```cpp
+#include ...
+
+// Define input methods
+#define INPUT_HARDCODED 1
+#define INPUT_STDIN 2
+#define INPUT_FILE 3
+
+// Select input method here
+#define INPUT_METHOD INPUT_STDIN
+
+// lot of code goes here
+
+int main() {
+    // Creates a synchronized output stream (osyncstream) to ensure thread-safe output to cout.
+    osyncstream syncout(cout);
+
+    // Check if the input method is defined as INPUT_HARDCODED using preprocessor directives.
+#if INPUT_METHOD == INPUT_HARDCODED
+    // Define a vector of pairs where each pair contains:
+    // 1. A vector of humidity levels.
+    // 2. A 2D vector representing adjustments (value, index) to be applied to the humidity levels.
+{% raw %}
+    vector<pair<vi, vvi>> tests = {
+        {{45, 52, 33, 64}, {{5,0}, {-20,1}, {-14,0}, {18,3}}},
+        {{40}, {{12,0}}},
+        {{30, 41, 55, 68, 72}, {{10,0}, {-15,2}, {22,1}, {-8,4}, {5,3}}}
+    };
+{% endraw %}
+    // Iterate over each hardcoded test case.
+    for (int i = 0; i < tests.size(); ++i) {
+        // Print the example number using synchronized output to avoid race conditions in a multithreaded context.
+        syncout << "Example " << i + 1 << ":\n";
+
+        // Extract the humidity vector and adjustments vector using structured bindings (C++17 feature).
+        auto& [humidity, adjustments] = tests[i];
+
+        // Call the adjustHumidity function to apply the adjustments and get the results.
+        auto result = adjustHumidity(humidity, adjustments);
+
+        // Print the humidity, adjustments, and the results using the printResult function.
+        printResult(syncout, humidity, adjustments, result);
+    }
+
+    // If the input method is INPUT_STDIN, process input from standard input.
+#elif INPUT_METHOD == INPUT_STDIN
+    // Call processInput to read input from standard input and produce output.
+    processInput(cin, syncout);
+
+    // If the input method is INPUT_FILE, read input from a file.
+#elif INPUT_METHOD == INPUT_FILE
+    // Define the file path where the input data is expected.
+    fs::path inputPath = "input.txt";
+
+    // Check if the file exists at the specified path.
+    if (fs::exists(inputPath)) {
+        // If the file exists, open it as an input file stream.
+        ifstream inputFile(inputPath);
+
+        // Call processInput to read data from the input file and produce output.
+        processInput(inputFile, syncout);
+    } else {
+        // If the file does not exist, print an error message indicating that the input file was not found.
+        syncout << "Input file not found: " << inputPath << endl;
+    }
+
+    // If none of the above input methods are defined, print an error message for an invalid input method.
+#else
+    syncout << "Invalid INPUT_METHOD defined" << endl;
+#endif
+
+    // Return 0 to indicate successful program termination.
+    return 0;
+}
+```
+
+The code fragment uses **preprocessor directives** to switch between different input methods for reading data, based on a pre-defined configuration. This is done using `#define` statements at the top of the code and `#if`, `#elif`, and `#else` directives in the `main` function.
+
+**Input Method Definitions**:
+
+```cpp
+#define INPUT_HARDCODED 1
+#define INPUT_STDIN 2
+#define INPUT_FILE 3
+```
+
+These `#define` statements assign integer values to three possible input methods:
+
+- `INPUT_HARDCODED`: The input data is hardcoded directly into the program.
+- `INPUT_STDIN`: The input data is read from standard input (`stdin`), such as from the console.
+- `INPUT_FILE`: The input data is read from a file, typically stored on disk.
+
+**Input Method Selection**:
+
+```cpp
+#define INPUT_METHOD INPUT_STDIN
+```
+
+This line selects the input method by defining `INPUT_METHOD`. In this case, it is set to `INPUT_STDIN`, meaning that the program will expect to read input from the console. Changing this to `INPUT_HARDCODED` or `INPUT_FILE` would switch the input source.
+
+**Conditional Compilation (`#if`, `#elif`, `#else`)**:
+
+The conditional compilation directives (`#if`, `#elif`, `#else`) are used to include or exclude specific blocks of code based on the value of `INPUT_METHOD`.
+
+```cpp
+#if INPUT_METHOD == INPUT_HARDCODED
+    // Code for hardcoded input goes here
+#elif INPUT_METHOD == INPUT_STDIN
+    // Code for reading from standard input goes here
+#elif INPUT_METHOD == INPUT_FILE
+    // Code for reading from a file goes here
+#else
+    // Code for handling invalid input method goes here
+#endif
+```
+
+- **`#if INPUT_METHOD == INPUT_HARDCODED`**: If the input method is hardcoded, a predefined set of test cases (humidity levels and adjustments) will be used.
+- **`#elif INPUT_METHOD == INPUT_STDIN`**: If the input method is set to standard input, the program will read from the console.
+- **`#elif INPUT_METHOD == INPUT_FILE`**: If the input method is set to file input, the program will attempt to read from a file (`input.txt`).
+- **`#else`**: If an invalid `INPUT_METHOD` is defined, an error message is printed.
+
+These preprocessor directives enable the program to easily switch between input methods without having to manually modify the logic inside `main`, providing flexibility depending on how the input is expected during execution. But, since we are using C++20, this might not be the best solution. It may be the fastest for competitions, but there is a fundamental reason why I'm making things a bit more complex here. Beyond just learning how to write code for competitions, we are also learning C++20. Let's start by:
+
+The code starts by importing the `std` namespace globally with **`using namespace std;`, which allows using standard C++ objects (like `cout`, `vector`, etc.) without having to prefix them with `std::`**.
+s
+
+```cpp
+using namespace std;  // Use the standard namespace to avoid typing "std::" before standard types.
+```
+
+The line **`namespace fs = filesystem;`** creates an alias for the `filesystem` namespace, allowing the code to reference `filesystem` functions more concisely, using `fs::` instead of `std::filesystem::`.
+
+```cpp
+namespace fs = filesystem;  // Alias for the filesystem namespace.
+```
+
+Inside the **`config` namespace**, there is an **enum class** `InputMethod` that defines three possible input methods: `Hardcoded`, `Stdin`, and `File`. This helps manage how input will be provided to the program.
+
+```cpp
+namespace config {
+    enum class InputMethod { Hardcoded, Stdin, File };  // Enum to define input methods
+```
+
+> The **`namespace config`** is used to encapsulate related constants and configuration settings into a specific scope. In this case, it organizes the input methods and settings used in the program. By placing these within a namespace, we avoid cluttering the global namespace, ensuring that these settings are logically grouped together. This encapsulation makes it easier to maintain the code, preventing potential naming conflicts and allowing future expansion of the configuration without affecting other parts of the program.
+>
+> The **`namespace config`** does not come from the standard C++ library; it is created specifically within this code to group configurations like the `InputMethod`. The use of namespaces in C++ allows developers to organize code and avoid naming conflicts but is independent of the C++ Standard Library or language itself.
+>
+> The **`enum class InputMethod`** provides a strongly typed, scoped enumeration. Unlike traditional enums, an `enum class` does not implicitly convert its values to integers, which helps prevent accidental misuse of values. The scoped nature of `enum class` also means that its values are contained within the enumeration itself, avoiding naming conflicts with other parts of the program. For instance, instead of directly using `Hardcoded`, you use `InputMethod::Hardcoded`, making the code more readable and avoiding ambiguity.
+>
+> Here's an example of using an **enum class** in a small program. This example demonstrates how to select an input method based on the defined `InputMethod`:
+>
+> ```cpp
+> #include <iostream>
+>
+> enum class InputMethod { Hardcoded, Stdin, File };
+>
+> void selectInputMethod(InputMethod method) {
+>     switch (method) {
+>         case InputMethod::Hardcoded:
+>             std::cout << "Using hardcoded input.\n";
+>             break;
+>         case InputMethod::Stdin:
+>             std::cout << "Reading input from stdin.\n";
+>             break;
+>         case InputMethod::File:
+>             std::cout << "Reading input from a file.\n";
+>             break;
+>     }
+> }
+>
+> int main() {
+>     InputMethod method = InputMethod::File;
+>     selectInputMethod(method);  // **Output**: Reading input from a file.
+>     return 0;
+> }
+> ```
+>
+> In this example, the `enum class InputMethod` allows for a clear, type-safe way to represent the input method, making the code easier to manage and less error-prone.
+
+The **`inline constexpr`** constant `input_method` specifies which input method will be used by default. In this case, it is set to `InputMethod::Hardcoded`, meaning the input will be predefined inside the code. The `inline constexpr` allows the value to be defined at compile time, making it a more efficient configuration option.
+
+```cpp
+    inline constexpr InputMethod input_method = InputMethod::Hardcoded;  // Default input method is hardcoded.
+}
+```
+
+> The **`inline`** keyword in C++ specifies that a function, variable, or constant is defined inline, meaning the compiler should attempt to replace function calls with the actual code of the function. This can improve performance by avoiding the overhead of a function call. However, the main use of `inline` in modern C++ is to avoid the "multiple definition" problem when defining variables or functions in header files that are included in multiple translation units.
+>
+> ```cpp
+> inline int square(int x) {
+>     return x * x;  // This function is defined inline, so calls to square(3) may be replaced with 3 * 3 directly.
+> }
+> ```
+>
+> When `inline` is used with **variables or constants**, it allows those variables or constants to be defined in a header file without violating the One Definition Rule (ODR). Each translation unit that includes the header will have its own copy of the inline variable, but the linker will ensure that only one copy is used in the final binary.
+>
+> ```cpp
+> inline constexpr int max_value = 100;  // This constant can be included in multiple translation units without causing redefinition errors.
+> ```
+>
+> The **`constexpr`** keyword specifies that a function or variable can be evaluated at compile-time. It guarantees that, if possible, the function will be computed by the compiler, not at runtime. This is especially useful in optimization, as it allows constants to be determined and used during the compilation process rather than execution.
+>
+> **`constexpr` with Variables**:
+> When you use `constexpr` with variables, the compiler knows that the variable's value is constant and should be computed at compile time.
+>
+> ```cpp
+> constexpr int max_items = 42;  // The value of max_items is known at compile-time and cannot change.
+> ```
+>
+> You can use `constexpr` variables to define array sizes or template parameters because their values are known during compilation.
+>
+> ```cpp
+> constexpr int size = 10;
+> int array[size];  // Valid, because size is a constant expression.
+> ```
+>
+> **`constexpr` with Functions**:
+> A **`constexpr` function** is a function whose return value can be computed at compile time if the inputs are constant expressions. The function must have a single return statement and all operations within it must be valid at compile time.
+>
+> ```cpp
+> constexpr int factorial(int n) {
+>     return n <= 1 ? 1 : n * factorial(n - 1);  // Recursive function that computes the factorial at compile time.
+> }
+> ```
+>
+> If `factorial(5)` is called with a constant value, the compiler will compute the result at compile time and replace the function call with `120` in the generated binary.
+> ?
+> **Combining `inline` and `constexpr`**:
+> A function can be both **`inline`** and **`constexpr`**, which means the function can be evaluated at compile time and its calls may be inlined if appropriate.
+>
+> ```cpp
+> inline constexpr int power(int base, int exp) {
+>     return (exp == 0) ? 1 : base * power(base, exp - 1);
+> }
+> ```
+>
+> In this case, the `power` function will be inlined when called at runtime and computed at compile time if the arguments are constant. For example, `power(2, 3)` would be replaced by `8` at compile time.
+>
+> **Practical Use of `constexpr`**:
+> `constexpr` can be used in a wide variety of contexts, such as constructing constant data, optimizing algorithms, and defining efficient compile-time logic. Here are a few examples:
+>
+> 1. **Compile-time array size**:
+>
+> ```cpp
+> constexpr int size = 5;
+> int array[size];  // The size is computed at compile time.
+> ```
+>
+> 2. **Compile-time strings**:
+>
+> ```cpp
+> constexpr const char* greet() { return "Hello, World!"; }
+> constexpr const char* message = greet();  // The message is computed at compile time.
+> ```
+>
+> 3. **Compile-time mathematical operations**:
+>
+> ```cpp
+> constexpr int area(int length, int width) {
+>     return length * width;
+> }
+> constexpr int room_area = area(10, 12);  // Computed at compile time.
+> ```
+>
+> **Using `constexpr` in Competitive Programming**:
+> In competitive programming, **`constexpr`** can be both an advantage and a disadvantage, depending on how it is used.
+>
+> - **Advantage**: `constexpr` can optimize code by computing results at compile time rather than runtime, which can save valuable processing time. For example, if you know certain values or calculations are constant throughout the competition, you can use `constexpr` to precompute them, thereby avoiding recalculations during execution.
+>
+> - **Disadvantage**: However, in many competitive programming problems, the input is dynamic and provided at runtime, meaning that `constexpr` cannot be used for computations that depend on this input. Since the focus in competitive programming is on runtime efficiency, the use of `constexpr` is limited to cases where you can precompute values before the competition or during compilation.
+>
+> Overall, `constexpr` is valuable when solving problems with static data or fixed input sizes, but in typical ICPC-style competitions, its usage may be less frequent because most problems require dynamic input processing.
+>
+> In summary, **`inline`** helps with reducing overhead by allowing the compiler to replace function calls with the actual function code, and it prevents multiple definitions of variables in multiple translation units. **`constexpr`** enables computations to be performed at compile time, which can significantly optimize performance by avoiding runtime calculations, although its applicability in competitive programming may be limited.
+
+AINDA TEM MUITO QUE EXPLICAR AQUI.
 
 #### Inventory Restocking
 
@@ -5147,7 +5788,7 @@ You manage a warehouse where products are stored and moved frequently. The wareh
 - $1 \leq n, q \leq 10^5$
 - $-10^4 \leq inventory[i], adjustment \leq 10^4$
 
-**Example Input:**
+**Example **Input**:**
 
 ```text
 6
@@ -5159,7 +5800,7 @@ You manage a warehouse where products are stored and moved frequently. The wareh
 [-3, 4]
 ```
 
-**Example Output:**
+**Example **Output**:**
 
 ```text
 26
@@ -5419,9 +6060,9 @@ Output Format:
 
 Output a single integer representing the number of subarrays whose sum is divisible by $T$ .
 
-Example Input: 6 5 4 5 0 -2 -3 1
+Example **Input**: 6 5 4 5 0 -2 -3 1
 
-Example Output: 7
+Example **Output**: 7
 
 Explanation:
 
@@ -5558,7 +6199,7 @@ int main(int argc, char* argv[]) {
 > int main() {
 >     const char* str = "12345";
 >     int num = atoi(str);
->     std::cout << num << std::endl;  // Output: 12345
+>     std::cout << num << std::endl;  // **Output**: 12345
 >     return 0;
 > }
 > ```
@@ -5594,7 +6235,7 @@ int main(int argc, char* argv[]) {
 > int main() {
 >     std::string str = "6789";
 >     int num = stoi(str);
->     std::cout << num << std::endl;  // Output: 6789
+>     std::cout << num << std::endl;  // **Output**: 6789
 >
 >     // Handling conversion with an invalid character
 >     try {
@@ -5623,7 +6264,7 @@ int main(int argc, char* argv[]) {
 > ```cpp
 > std::string hex_str = "1A";  // Hexadecimal string
 > int num = stoi(hex_str, nullptr, 16);  // Converts from base 16 (hex) to base 10
-> std::cout << num << std::endl;  // Output: 26
+> std::cout << num << std::endl;  // **Output**: 26
 > ```
 >
 > **Summary of Differences**:
@@ -5705,7 +6346,7 @@ Despite this shift, we won't be discarding the work we've done so far. To mainta
 
 As we make this transition, we'll gradually introduce C++ specific optimizations and techniques, broadening your understanding of Dynamic Programming implementation across different language paradigms. I hope this approach will equip you with both a solid conceptual foundation and the practical skills needed for high-performance coding.
 
-#### Example 4: Fibonacci in C++ using `std::vectors`
+#**Example**: 4: Fibonacci in C++ using `std::vectors`
 
 Let's begin with a straightforward, naive implementation in **C++20**.
 
@@ -6126,7 +6767,7 @@ _Output 1 - running Example 4 - std::vector_{: class="legend"}
 
 the careful reader should note that the execution times vary non-linearly and, in all cases, for this problem, the Dynamic Programming version using tabulation was faster. There is much discussion about the performance of the Vector class compared to the Array class. To test the performance differences between `std::vector` and `std::array`, we will retry using `std::array`
 
-#### Example 5: using `std::array`
+#**Example**: 5: using `std::array`
 
 First and foremost, `std::array` is a container from the C++ Standard Library with some similarities to, and some differences from, `std::vector`, namely:
 
@@ -6451,7 +7092,7 @@ The recursive solution leverages a two-pointer approach to efficiently explore t
 
 ##### Base Cases
 
-1. **Empty Input:** If the array is empty (or if the `start` index is greater than or equal to the `end` index), there are no pairs to consider. In this case, we return `std::nullopt` to indicate that no valid pair was found.
+1. **Empty **Input**:** If the array is empty (or if the `start` index is greater than or equal to the `end` index), there are no pairs to consider. In this case, we return `std::nullopt` to indicate that no valid pair was found.
 
 2. **Target Sum Found:** If the sum of the elements at the current `start` and `end` indices equals the `target` value, we've found a matching pair. We return this pair as `std::optional<std::pair<int, int>>` to signal success and provide the result.
 
@@ -6901,7 +7542,7 @@ int main() {
 
 _Code 10: Code for execution time test of all functions we create to Two-Sum problem._{: class="legend"}
 
-I simply replicated the functions from the previous code snippets, without any optimization, precisely because our current objective is to solely examine the execution times. Running the new code, we have the following output:
+I simply replicated the functions from the previous code snippets, without any optimization, precisely because our current objective is to solely examine the execution times. Running the new code, we have the following **Output**:
 
 ```Shell
 -----------------------------------
@@ -7116,7 +7757,7 @@ std::array<int, 2> ValuesTabulationCStyle(const int* sequence, int length, int t
 
 _Code Fragment 15 - All Two-sum functions including a pure `std::array` tabulated function_{: class="legend"}
 
-Running this modified code, we get the following output:
+Running this modified code, we get the following **Output**:
 
 ```Shell
 -----------------------------------
@@ -7195,27 +7836,27 @@ This will continue!!!
 
 Given two integers $m$ and $n$, representing the dimensions of a matrix, count all possible distinct paths from the top-left corner $(0,0)$ to the bottom-right corner $(m-1,n-1)$. Each step can either be to the right or down.
 
-#### Input
+#**Input**:
 
 - Two integers $m$ and $n$ where $1 \leq m, n \leq 100$.
 
-#### Output
+#\*_Output_:
 
 - An integer representing the number of distinct paths from $(0,0)$ to $(m-1,n-1)$.
 
-#### Example
+#**Example**:
 
-Input:
+**Input**:
 3 3
 
-Output:
+**Output**:
 6
 
-#### Constraints
+#**Constraints**:
 
 - You can only move to the right or down in each step.
 
-#### Analysis
+**Analysis**:
 
 Let's delve deeper into the "unique paths" problem. Picture a matrix as a grid, where you start at the top-left corner $(0, 0)$ and your goal is to reach the bottom-right corner $(m-1, n-1)$. The twist? You're only allowed to move down or right. The challenge is to figure out how many distinct paths you can take to get from start to finish.
 
@@ -7490,32 +8131,38 @@ The key takeaway is this: both memoization and tabulation solutions share the sa
 
 Given $N$ integers and $T$, determine whether there exists a subset of the given set whose elements sum up to $T$.
 
-#### Input
+**Input**:
 
 - An integer $N$ representing the number of integers.
 - An integer $T$ representing the target sum.
 - A list of $N$ integers.
 
-#### Output
+**Output**:
 
 - A boolean value indicating whether such a subset exists.
 
-#### Example
+**Example**:
 
-Input:
+**Input**:
+
+```txt
 5 10
 2 3 7 8 10
+```
 
-Output:
+**Output**:
+
+```txt
 true
+```
 
-#### Constraints
+**Constraints**:
 
 - $1 \leq N \leq 100$
 - $1 \leq T \leq 1000$
 - Each integer in the list is positive and does not exceed $100$.
 
-#### Analysis
+**Analysis**:
 
 The "Subset Sum" problem has already been tackled in the chapter: "Your First Dynamic Programming Problem." Therefore, our diligent reader should review the conditions presented here and see if the solution we presented for the "Two-Sum" problem applies in this case. If not, it'll be up to the reader to adapt the previous code accordingly. I'll kindly wait before we go on.
 
@@ -7523,25 +8170,31 @@ The "Subset Sum" problem has already been tackled in the chapter: "Your First Dy
 
 You are given an array containing $N$ integers. Your task is to determine the Longest Increasing Subsequence (LIS) in the array, where every element is larger than the previous one.
 
-### Input
+**Input**:
 
 - An integer $N$ representing the number of integers.
 - A list of $N$ integers.
 
-### Output
+**Output**:
 
 - An integer representing the length of the Longest Increasing Subsequence.
 
-### Example
+**Example**:
 
-Input:
+**Input**:
+
+```txt
 6
 5 2 8 6 3 6 9 7
+```
 
-Output:
+**Output**:
+
+```txt
 4
+```
 
-### Constraints
+**Constraints**:
 
 - $1 \leq N \leq 1000$
 - Each integer in the list can be positive or negative.
