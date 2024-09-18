@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-17T04:50:04.055Z
+lastmod: 2024-09-18T17:45:07.254Z
 ---
 
 ## Introduction
@@ -3049,51 +3049,58 @@ print(result) # **Output**: [2, 5, 3, 0]
 ```cpp
 #include <iostream>
 #include <vector>
+#include <span>
+#include <algorithm>
 
-class DifferenceArray {
-    private:
-        std::vector<int> diff;
+// Function to create the difference array
+std::vector<int> create_difference_array(std::span<const int> A) {
+    std::vector<int> diff(A.size() + 1);
+    diff[0] = A[0];  // First element of diff is same as first element of A
 
-public:
-    DifferenceArray(const std::vector<int>& A) {
-        diff.resize(A.size() + 1);
-        diff[0] = A[0];
-        for (size_t i = 1; i < A.size(); ++i) {
-            diff[i] = A[i] - A[i-1];
+    // Calculate differences for the rest of the elements
+    std::adjacent_difference(A.begin(), A.end(), diff.begin());
+
+    return diff;
+}
+
+// Function to perform range update on the difference array
+void range_update(std::span<int> diff, int l, int r, int x) {
+    diff[l] += x;  // Add x to the left boundary
+    if (r + 1 < diff.size()) {
+        diff[r + 1] -= x;  // Subtract x from the element after right boundary
     }
 }
 
-    void rangeUpdate(int l, int r, int x) {
-        diff[l] += x;
-        if (r + 1 < diff.size()) {
-            diff[r + 1] -= x;
-        }
-    }
+// Function to reconstruct the original array from the difference array
+std::vector<int> reconstruct_array(std::span<const int> diff) {
+    std::vector<int> A(diff.size() - 1);
+    A[0] = diff[0];  // First element of A is same as first element of diff
 
-    std::vector<int> reconstructArray() {
-        std::vector<int> A(diff.size() - 1);
-        A[0] = diff[0];
-        for (size_t i = 1; i < A.size(); ++i) {
-            A[i] = A[i-1] + diff[i];
-        }
-        return A;
-    }
+    // Calculate prefix sum to get the original array
+    std::partial_sum(diff.begin(), diff.end() - 1, A.begin());
 
-};
+    return A;
+}
 
 int main() {
-std::vector<int> A = {0, 0, 0, 0};
-DifferenceArray da(A);
+    // Initialize the original array
+    std::vector<int> A = {0, 0, 0, 0};
 
-    da.rangeUpdate(1, 2, 3);  // Add 3 to A[1:3]
-    da.rangeUpdate(0, 1, 2);  // Add 2 to A[0:2]
+    // Create the difference array
+    auto diff = create_difference_array(A);
 
-    auto result = da.reconstructArray();
+    // Perform range updates
+    range_update(diff, 1, 2, 3);  // Add 3 to A[1:3]
+    range_update(diff, 0, 1, 2);  // Add 2 to A[0:2]
 
+    // Reconstruct the array after updates
+    auto result = reconstruct_array(diff);
+
+    // Print the result
     for (int num : result) {
         std::cout << num << " ";
     }
-    std::cout << std::endl;  // **Output**: 2 5 3 0
+    std::cout << std::endl;  // Expected output: 2 5 3 0
 
     return 0;
 }
