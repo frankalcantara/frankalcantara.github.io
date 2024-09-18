@@ -7,23 +7,23 @@ date: 2023-07-13T02:50:56.534Z
 preview: ""
 image: assets/images/prolog1.jpeg
 tags:
-  - Lógica
-  - Programação Lógica
-  - Prolog
+   - Lógica
+   - Programação Lógica
+   - Prolog
 categories:
-  - disciplina
-  - Lógica
-  - material de Aula
-  - matemática
+   - disciplina
+   - Lógica
+   - material de Aula
+   - matemática
 rating: 5
 slug: decifrando-misterios-jornada-da-programacao-logica
 keywords:
-  - lógica
-  - Programação
-  - Programação Lógica
+   - lógica
+   - Programação
+   - Programação Lógica
 draft: true
 toc: true
-lastmod: 2024-09-16T17:15:22.175Z
+lastmod: 2024-09-18T12:31:55.846Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -2476,9 +2476,88 @@ Aqui estão cinco quebra-cabeças clássicos juntamente com suas soluções usan
 1. **Quebra-cabeça: O Mentiroso e o Verdadeiro**
    Você encontra dois habitantes: $A$ e $B$. Você sabe que um sempre diz a verdade e o outro sempre mente, mas você não sabe quem é quem. Você pergunta a $A$, _Você é o verdadeiro?_ A responde, mas você não consegue ouvir a resposta dele. $B$ então te diz, _A disse que ele é o mentiroso_.
 
-**Solução**: $B$ deve ser o verdadeiro e $A$ deve ser o mentiroso. Se $A$fosse o verdadeiro, ele nunca diria que é o mentiroso. Portanto, $A$ deve ser o mentiroso e $B$ deve ser o verdadeiro, independentemente do que $A$ disse.
+**Solução**: $A$ deve ser o verdadeiro e $B$ deve ser o mentiroso. Se $B$fosse o verdadeiro, ele nunca diria que é o mentiroso. Portanto, $B$ deve ser o mentiroso e $A$ deve ser o verdadeiro, independentemente do que $B$ disse.
 
-Usando Lógica de Primeira Ordem: Vamos denotar a resposta de $A$ como $A$. Então o predicado $falaVerdade (A, a)$ será falso porque um verdadeiro nunca pode dizer que é um mentiroso. Portanto, $\neg falaVerdade (A, a)$ e daí, $falaVerdade (B, \neg a)$.
+Usando apenas lógica proposicional teremos:
+
+**Definições**:
+VA: A é o verdadeiro
+MA: A é o mentiroso
+VB: B é o verdadeiro
+MB: B é o mentiroso
+RA: A respondeu "Sim" à pergunta "Você é o verdadeiro?"
+
+**Axiomas**:
+
+1. $VA \lor MA$ (A é verdadeiro ou mentiroso)
+2. $\neg(VA \land MA)$ (A não é ambos verdadeiro e mentiroso)
+3. $VB \lor MB$ (B é verdadeiro ou mentiroso)
+4. $\neg(VB \land MB)$ (B não é ambos verdadeiro e mentiroso)
+5. $VA \to \neg VB$ (Se A é verdadeiro, B não é verdadeiro)
+6. $VA \to RA$ (Se A é verdadeiro, ele respondeu "Sim")
+7. $MA \to \neg RA$ (Se A é mentiroso, ele respondeu "Não")
+8. $VB \to (B \text{ diz } \neg RA)$ (Se B é verdadeiro, ele diz a verdade sobre a resposta de A)
+9. $MB \to (B \text{ diz } RA)$ (Se B é mentiroso, ele mente sobre a resposta de A)
+
+**Fato observado**:
+
+$$B \text{ diz } \neg RA$$
+
+**Prova**:
+
+1. $B \text{ diz } \neg RA$ (Fato observado)
+2. $(VB \land \neg RA) \lor (MB \land RA)$ (Por 8, 9 e 1)
+3. Suponha $MA$:
+   3.1. $\neg RA$ (Por 7)
+   3.2. $VB$ (Por 3, 4 e 5)
+   3.3. Mas isto contradiz 2, pois teríamos $(VB \land RA)$
+4. Portanto, $\neg MA$ (Por reductio ad absurdum)
+5. $VA$ (Por 1 e 4)
+
+Conclusão:
+
+$$VA \land \neg MA$$
+
+$A$ é o verdadeiro e não é o mentiroso.
+
+Usando lógica de primeiro grau teremos:
+
+**Definições**:
+V(x): x é o verdadeiro
+M(x): x é o mentiroso
+R(x): x respondeu "Sim" à pergunta "Você é o verdadeiro?"
+D(x, p): x diz que p é verdadeiro
+
+**Axiomas**:
+
+1. $\forall x (V(x) \lor M(x))$ (Todo x é verdadeiro ou mentiroso)
+2. $\forall x (V(x) \to \neg M(x))$ (Ninguém é ambos verdadeiro e mentiroso)
+3. $\forall x (V(x) \to R(x))$ (Se x é verdadeiro, x responde "Sim")
+4. $\forall x (M(x) \to \neg R(x))$ (Se x é mentiroso, x responde "Não")
+5. $\forall x \forall y \forall p (V(x) \to (D(x, p) \leftrightarrow p))$ (Se x é verdadeiro, x diz p se e somente se p é verdadeiro)
+6. $\forall x \forall y \forall p (M(x) \to (D(x, p) \leftrightarrow \neg p))$ (Se x é mentiroso, x diz p se e somente se p é falso)
+
+**Fatos observados**:
+
+$$D(B, \neg R(A))$$
+
+**Prova**:
+
+1. $D(B, \neg R(A))$ (Fato observado)
+2. $V(A) \lor M(A)$ (Por 1)
+3. Suponha $M(A)$:
+   3.1. $\neg R(A)$ (Por 4)
+   3.2. $V(B)$ (Pois apenas um é mentiroso, por 1 e 2)
+   3.3. $D(B, \neg R(A)) \leftrightarrow \neg R(A)$ (Por 5)
+   3.4. $\neg R(A)$ (Por 1 e 3.3)
+   3.5. Mas isto contradiz 3.1 e 3.4
+4. Portanto, $\neg M(A)$ (Por reductio ad absurdum)
+5. $V(A)$ (Por 2 e 4)
+
+**Conclusão**:
+$$V(A) \land \neg M(A)$$
+
+$A$ é o verdadeiro e não é o mentiroso.
 
 1. **Quebra-cabeça: As Três Lâmpadas**
    Existem três lâmpadas incandescentes em uma sala, e existem três interruptores fora da sala. Você pode manipular os interruptores o quanto quiser, mas só pode entrar na sala uma vez. Como você pode determinar qual interruptor opera qual lâmpada?
