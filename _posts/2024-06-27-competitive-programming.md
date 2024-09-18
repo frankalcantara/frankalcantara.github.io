@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-18T17:45:07.254Z
+lastmod: 2024-09-18T17:59:04.231Z
 ---
 
 ## Introduction
@@ -3013,35 +3013,77 @@ The Difference Array algorithm shines in various scenarios where multiple range 
 
 **Algorithm Implementation**: Pseudocode
 
+**Example Problem**:
+
+Starting with $N(1 \leq N \leq 1,000,000, N \text{ odd})$ empty stacks.
+Beatriz receives a sequence of $K$ instructions $(1 \leq K \leq 25,000)$,
+each in the format "A B", which means that Beatriz should add
+a new layer of hay to the top of each stack in the interval $A..B$.
+Calculate the median of the heights after the operations.
+
+**Input**: $N = 7, K = 4$ Example Output:
+
+```txt
+3 5
+5 5
+2 4
+4 6
+```
+
+**Output**:
+
+```txt
+1
+```
+
+Heights after updates: 0, 0, 1, 1, 2, 3, 3
+Final height: 0 1 1 2 3 3 3
+Indices: 1 2 3 4 5 6 7
+
 ```python
-def initialize_diff_array(A):
-    n = len(A)
-    D = [0] * (n + 1)
-    D[0] = A[0]
-    for i in range(1, n):
-        D[i] = A[i] - A[i-1]
-    return D
+def range_update(diff, l, r, x):
+    diff[l] += x
+    if r + 1 < len(diff):
+        diff[r + 1] -= x
 
-def range_update(D, l, r, x):
-    D[l] += x
-    if r + 1 < len(D):
-        D[r + 1] -= x
+def reconstruct_heights(diff):
+    heights = [0] * len(diff)
+    heights[0] = diff[0]
+    for i in range(1, len(diff)):
+        heights[i] = heights[i-1] + diff[i]
+    return heights
 
-def reconstruct_array(D):
-    A = [0] * (len(D) - 1)  # A has size len(D) - 1
-    A[0] = D[0]
-    for i in range(1, len(A)):  # Iterate only over valid indices of A
-        A[i] = A[i-1] + D[i]
-    return A
+# Hardcoded inputs
+N = 7  # Number of stacks
+K = 4  # Number of instructions
+instructions = [
+    (3, 5),
+    (5, 5),
+    (2, 4),
+    (4, 6)
+]
 
-# Usage
+# Initialize difference array
+diff = [0] * (N + 1)
 
-A = [0, 0, 0, 0]
-D = initialize_diff_array(A)
-range_update(D, 1, 2, 3) # Add 3 to A[1:3]
-range_update(D, 0, 1, 2) # Add 2 to A[0:2]
-result = reconstruct_array(D)
-print(result) # **Output**: [2, 5, 3, 0]
+# Apply all instructions
+for A, B in instructions:
+    range_update(diff, A - 1, B - 1, 1)  # -1 for 0-based indexing
+
+# Reconstruct final heights
+final_heights = reconstruct_heights(diff)
+
+# Print final heights for verification
+print("Final heights:", final_heights[:-1])  # Exclude the last element as it's not part of the original array
+
+# Calculate the median
+sorted_heights = sorted(final_heights[:-1])
+if N % 2 == 1:
+    median = sorted_heights[N // 2]
+else:
+    median = (sorted_heights[(N - 1) // 2] + sorted_heights[N // 2]) // 2
+
+print("Median height:", median)*Output**: [2, 5, 3, 0]
 ```
 
 **Algorithm Implementation**: C++20
@@ -3049,58 +3091,65 @@ print(result) # **Output**: [2, 5, 3, 0]
 ```cpp
 #include <iostream>
 #include <vector>
-#include <span>
 #include <algorithm>
+#include <numeric>
 
-// Function to create the difference array
-std::vector<int> create_difference_array(std::span<const int> A) {
-    std::vector<int> diff(A.size() + 1);
-    diff[0] = A[0];  // First element of diff is same as first element of A
-
-    // Calculate differences for the rest of the elements
-    std::adjacent_difference(A.begin(), A.end(), diff.begin());
-
-    return diff;
-}
+using namespace std;
 
 // Function to perform range update on the difference array
-void range_update(std::span<int> diff, int l, int r, int x) {
-    diff[l] += x;  // Add x to the left boundary
-    if (r + 1 < diff.size()) {
-        diff[r + 1] -= x;  // Subtract x from the element after right boundary
+void range_update(vector<int>& diff, int l, int r, int x) {
+    diff[l] += x;
+    if (r + 1 < static_cast<int>(diff.size())) {
+        diff[r + 1] -= x;
     }
 }
 
-// Function to reconstruct the original array from the difference array
-std::vector<int> reconstruct_array(std::span<const int> diff) {
-    std::vector<int> A(diff.size() - 1);
-    A[0] = diff[0];  // First element of A is same as first element of diff
-
-    // Calculate prefix sum to get the original array
-    std::partial_sum(diff.begin(), diff.end() - 1, A.begin());
-
-    return A;
+// Function to reconstruct the final heights from the difference array
+vector<int> reconstruct_heights(const vector<int>& diff) {
+    vector<int> heights(diff.size());
+    partial_sum(diff.begin(), diff.end(), heights.begin());
+    return heights;
 }
 
 int main() {
-    // Initialize the original array
-    std::vector<int> A = {0, 0, 0, 0};
+    // Hardcoded inputs based on the example in the image
+    int N = 7;  // Number of stacks
+    int K = 4;  // Number of instructions
+    vector<pair<int, int>> instructions = {
+        {3, 5},
+        {5, 5},
+        {2, 4},
+        {4, 6}
+    };
 
-    // Create the difference array
-    auto diff = create_difference_array(A);
+    vector<int> diff(N + 1, 0);  // Difference array initialized with 0s
 
-    // Perform range updates
-    range_update(diff, 1, 2, 3);  // Add 3 to A[1:3]
-    range_update(diff, 0, 1, 2);  // Add 2 to A[0:2]
-
-    // Reconstruct the array after updates
-    auto result = reconstruct_array(diff);
-
-    // Print the result
-    for (int num : result) {
-        std::cout << num << " ";
+    // Apply all instructions
+    for (const auto& [A, B] : instructions) {
+        range_update(diff, A - 1, B - 1, 1);  // -1 for 0-based indexing
     }
-    std::cout << std::endl;  // Expected output: 2 5 3 0
+
+    vector<int> final_heights = reconstruct_heights(diff);
+
+    // Print final heights for verification
+    cout << "Final heights: ";
+    for (int height : final_heights) {
+        cout << height << " ";
+    }
+    cout << endl;
+
+    // Sort the heights to find the median
+    sort(final_heights.begin(), final_heights.end());
+
+    // Calculate the median
+    int median;
+    if (N % 2 == 1) {
+        median = final_heights[N / 2];
+    } else {
+        median = (final_heights[(N - 1) / 2] + final_heights[N / 2]) / 2;
+    }
+
+    cout << "Median height: " << median << endl;
 
     return 0;
 }
