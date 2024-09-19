@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-19T20:09:37.703Z
+lastmod: 2024-09-19T23:56:10.470Z
 ---
 
 # 1. Introduction
@@ -844,7 +844,7 @@ However, this technique should be used with care. Adding threads and asynchronou
 
 The use of parallel I/O in programming competitive programmings typically applies to scenarios where there are many read/write operations or when the program needs to process large volumes of data while still reading or writing files. This situation is usual in [AI competitive programmings](https://opencv.org/opencv-ai-competitive-programming-2021/) and in hackatons. This technique can be useful in problems involving the manipulation of large datasets or intensive input/output processing, such as in "big data" challenges or reading/writing from disks. However, due to its complexity, the use of `std::async` and threads should be reserved for cases where parallelism offers a significant advantage over traditional sequential I/O.
 
-## Efficient Techniques for File I/O and Array Handling in Competitive Programming
+## 4.3 Efficient Techniques for File I/O and Array Handling in Competitive Programming
 
 | Function/Operation               | Most Efficient Technique                                                                        | Description                                                                                                                                          |
 | -------------------------------- | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
