@@ -172,6 +172,7 @@
 		"typedefs",
 		"underbrace",
 		"underflows",
+		"unicode",
 		"unistd",
 		"Unmap",
 		"unmapping",

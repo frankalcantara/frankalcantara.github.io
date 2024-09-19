@@ -36,7 +36,7 @@ featured: false
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-19T15:48:13.411Z
+lastmod: 2024-09-19T15:51:04.883Z
 date: 2024-09-19T15:45:55.405Z
 ---
 
@@ -94,7 +94,7 @@ Happy coding, and may your algorithms always be efficient! 🖥️💪
 
 ## First Week's Challenges
 
-1. Widget Batch Sorting
+1. **Widget Batch Sorting**
 
    A factory produces widgets in batches. Each batch is assigned a number between 2000 and 3200. Batches divisible by 7 are sent to Warehouse A, unless they're also divisible by 5, in which case they go to Warehouse B. Write a program to list all batch numbers sent to Warehouse A.
 
@@ -109,7 +109,7 @@ Happy coding, and may your algorithms always be efficient! 🖥️💪
 
    Hint: Use a `list` to store the batch numbers and the `range()` function for iteration. The `join()` method can be used to create the comma-separated output string.
 
-2. Bacterial Growth Calculator
+2. **Bacterial Growth Calculator**
 
    A microbiologist is studying bacterial growth. The population doubles every generation. Given the number of generations, calculate the final population if starting with a single bacterium.
 
@@ -122,7 +122,7 @@ Happy coding, and may your algorithms always be efficient! 🖥️💪
 
    Hint: This is effectively a factorial calculation. Implement a recursive function. Use `int()` to convert input to an integer.
 
-3. Student Square Number Reference
+3. **Student Square Number Reference**
 
    A teacher wants to create a quick reference sheet for square numbers. For a given number of students $n$, create a dictionary where the keys are student numbers (1 to $n$) and the values are their numbers squared.
 
@@ -135,7 +135,7 @@ Happy coding, and may your algorithms always be efficient! 🖥️💪
 
    Hint: Use a `dict()` to create the dictionary. A `for` loop with `range()` can generate the student number and squared value pairs.
 
-4. Daily Sales Data Analyzer
+4. **Daily Sales Data Analyzer**
 
    A grocery store manager needs to analyze sales data. Write a program that takes comma-separated prices of items sold in a day, and generates both a list and a tuple of these prices.
 
@@ -153,7 +153,7 @@ Happy coding, and may your algorithms always be efficient! 🖥️💪
 
    Hint: Use `string.split()` to parse the input. Convert the result directly to a `list` and then to a `tuple`.
 
-5. Chatbot Text Processor
+5. **Chatbot Text Processor**
 
    Design a simple text processing class for a chatbot. It should have methods to get input from a user and to respond with the input converted to uppercase.
 
@@ -166,7 +166,7 @@ Happy coding, and may your algorithms always be efficient! 🖥️💪
 
    Hint: Use `raw_input()` (or `input()` in Python 3) for getting input. Implement `__init__` method to initialize an empty string attribute.
 
-6. Water Tank Volume Calculator
+6. **Water Tank Volume Calculator**
 
    An engineer is designing a series of water tanks. The volume $Q$ of each cylindrical tank is given by:
    $Q = \sqrt{\frac{2 * C * D}{H}}$
@@ -182,7 +182,7 @@ Happy coding, and may your algorithms always be efficient! 🖥️💪
 
    Hint: Use `math.sqrt()` for square root. Parse input into a `list` and use list comprehension to calculate volumes.
 
-7. Simple Voice Recognition
+7. **Simple Voice Recognition**
 
    Create a simple voice recognition program that prints "Command Accepted" if it hears "Yes" in any capitalization, otherwise it prints "Command Declined".
 
@@ -199,7 +199,7 @@ Happy coding, and may your algorithms always be efficient! 🖥️💪
 
    Hint: Use string methods like `lower()` or `upper()` to standardize the input before comparison.
 
-8. ASCII to UTF-8 Converter
+8. **ASCII to UTF-8 Converter**
 
    A data analyst needs to convert ASCII-encoded data from an old system into UTF-8 for modern analysis. Write a program to perform this conversion on a given input string.
 
@@ -212,7 +212,7 @@ Happy coding, and may your algorithms always be efficient! 🖥️💪
 
    Hint: In Python 2, use `unicode()` function with 'utf-8' encoding. In Python 3, strings are already unicode.
 
-9. Savings Growth Calculator
+9. **Savings Growth Calculator**
 
    An economist is modeling savings growth. The model is:
 
@@ -229,7 +229,7 @@ Happy coding, and may your algorithms always be efficient! 🖥️💪
 
    Hint: Implement a recursive function. Use a base case for $n=0$. Convert input to integer using int().
 
-10. Library Book Checkout System
+10. **Library Book Checkout System**
 
     A local library is implementing a digital system to track book checkouts. Each book has a unique 5-digit ID number. Books with ID numbers divisible by 3 are placed on the "Featured" shelf. However, if the ID is also divisible by 4, it goes to the "Classics" section instead. Create a program to help librarians quickly determine where to place a book.
 
