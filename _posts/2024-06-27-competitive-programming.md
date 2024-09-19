@@ -36,10 +36,10 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-19T17:18:26.425Z
+lastmod: 2024-09-19T20:09:37.703Z
 ---
 
-## Introduction
+# 1. Introduction
 
 C++ remains one of the most popular languages in competitive programming due to its performance, flexibility, and rich standard library. Mastering efficient C++ techniques is crucial for success in programming contests, where solving complex problems under strict time and memory constraints is the norm. This guide delves into advanced C++ programming strategies, focusing on Dynamic Programming - a powerful algorithmic paradigm that solves complex problems by breaking them down into simpler subproblems. By optimizing input/output operations, leveraging modern C++ features, and utilizing efficient data structures and algorithms, we'll explore how to apply Dynamic Programming techniques to tackle a wide range of computational challenges.
 
@@ -66,7 +66,7 @@ These problem types demonstrate how C++'s performance and rich standard library 
 
 By mastering these C++20 techniques, you'll be well-equipped to tackle a wide range of competitive programming challenges. Whether you're dealing with large-scale data processing, intricate algorithmic puzzles, or time-critical optimizations, the strategies outlined in this guide will provide you with the tools to write faster, more efficient code. This knowledge not only enhances your performance in competitions but also deepens your understanding of C++ and algorithmic thinking, skills that are valuable beyond the competitive arena.
 
-## C++ Competitive Programming Hacks
+# 2. C++ Competitive Programming Hacks
 
 In this section, we'll cover essential tips and tricks that will help you improve your efficiency and performance in competitive programming using C++. From mastering typing speed to reducing code verbosity and handling complexity, each aspect plays a crucial role in gaining a competitive edge.
 
@@ -80,13 +80,13 @@ We'll break down these tips into the following areas:
 
 By applying these hacks, you'll be better equipped to tackle the challenges of competitive programming with C++ and improve your overall performance. Keep in mind that the code and techniques discussed here are optimized specifically for competitive programming environments, where the code is written for single-use and will not be maintained or reused. These approaches may not be suitable for professional development, where code readability, maintainability, and long-term reliability are critical.
 
-### Typing Tips
+## 2.1 Typing Tips
 
 If you don’t type quickly, **you should invest at least two hours per week** on the website: [https://www.speedcoder.net](https://www.speedcoder.net). Once you have completed the basic course, select the C++ lessons and practice regularly. Time is crucial in competitive programming, and slow typing can be disastrous.
 
 To expand on this, efficient typing isn’t just about speed; it’s about reducing errors and maintaining a steady flow of code. When you're in a competitive programming, every second matters. Correcting frequent typos or having to look at your keyboard will significantly slow down your progress. Touch typing—knowing the layout of the keyboard and typing without looking—becomes a vital skill.
 
-### Why Typing Speed Matters
+## 2.2 Why Typing Speed Matters
 
 In a typical programming competitive programming, you’ll have to solve several problems within a fixed time frame. Faster typing allows you to focus more on problem-solving rather than struggling to input the code. However, typing speed without accuracy is meaningless. **Accurate and fast typing** ensures that once you have the solution, you can implement it efficiently.
 
@@ -105,7 +105,7 @@ $$
 \end{align*}
 $$
 
-### Advanced Typing Techniques for Programmers
+## 2.3 Advanced Typing Techniques for Programmers
 
 Here are some additional tips to improve your typing for competitive programming:
 
@@ -115,11 +115,11 @@ Here are some additional tips to improve your typing for competitive programming
 
 In competitive programming, every second counts, and being proficient with your typing can give you a significant advantage.
 
-### Typing Less in Competitive Programming
+## 2.4 Typing Less in Competitive Programming
 
 In competitive programming, time is a critical resource. Therefore, optimizing typing speed and avoiding repetitive code can make a significant difference. Below, we will discuss strategies to minimize typing when working with `std::vector` during competitive programmings, where access to the internet or pre-prepared code snippets may be restricted.
 
-#### 1. Using `#define` for `std::vector` Abbreviations
+### 2.4.1. Using `#define` for `std::vector` Abbreviations
 
 We can use `#define` to create short aliases for common vector types. This is particularly useful when you need to declare multiple vectors throughout the code.
 
@@ -139,11 +139,11 @@ VS words;    // std::vector<std::string> words;
 
 However, it's important to note that in larger, professional projects, using `#define` for type aliases is generally discouraged because it does not respect C++ scoping rules and can lead to unexpected behavior during debugging. In competitive programming, where speed is essential, this technique can be useful, but it should be avoided in long-term or collaborative codebases.
 
-#### 2. Predefined Utility Functions
+### 2.4.2. Predefined Utility Functions
 
 Another effective strategy is to define utility functions that you can reuse for common vector operations, such as reading from input, printing, or performing operations like sorting or summing elements.
 
-##### Reading Vectors
+**Reading Vectors**:
 
 ```cpp
 #define FAST_IO std::ios::sync_with_stdio(false); std::cin.tie(nullptr);
@@ -167,7 +167,7 @@ VI numbers;
 read_vector(numbers, n);
 ```
 
-##### Printing Vectors
+**Printing Vectors**
 
 ```cpp
 void print_vector(const VI& vec) {
@@ -184,11 +184,11 @@ This function allows you to easily print the contents of a vector:
 print_vector(numbers);
 ```
 
-#### 3. Predefining Common Operations
+### 2.4.3. Predefining Common Operations
 
 If you know that certain operations, such as sorting or summing elements, are frequent in a competitive programming, consider defining these operations at the beginning of the code.
 
-##### Sorting Vectors
+**Sorting Vectors**:
 
 ```cpp
 #define SORT_VECTOR(vec) std::sort(vec.begin(), vec.end())
@@ -200,7 +200,7 @@ You can then sort any vector quickly:
 SORT_VECTOR(numbers);
 ```
 
-##### Summing Elements
+**Summing Elements**:
 
 ```cpp
 int sum_vector(const VI& vec) {
@@ -214,7 +214,7 @@ To calculate the sum of a vector's elements:
 int total = sum_vector(numbers);
 ```
 
-#### 4. Using Lambda Functions
+### 2.4.4. Using Lambda Functions
 
 In C++11 and later versions, lambda functions can be a quick and concise way to define operations inline for vectors:
 
@@ -235,7 +235,7 @@ print_square(numbers);
 
 _While lambda functions can be very useful for quick, one-off operations, it's important to note that excessive use of lambdas, especially complex ones, can make code harder to read and maintain. In competitive programming, where code clarity might be sacrificed for speed, this may be less of a concern. However, it's a good practice to be mindful of code readability, especially when debugging complex algorithms_.
 
-#### Prefer Not to Use `#define`
+### 2.4.5 Prefer Not to Use `#define`
 
 Another way to reduce typing time is by using `typedef` or `using` to create abbreviations for frequently used vector types:
 
@@ -247,74 +247,60 @@ using VS = std::vector<std::string>;
 
 In many cases, the use of `#define` can be replaced with more modern and safe C++ constructs like `using`, `typedef`, or `constexpr`. `#define` does not respect scoping rules and does not offer type checking, which can lead to unintended behavior. Using `typedef` or `using` provides better type safety and integrates smoothly with the C++ type system, making the code more predictable and easier to debug.
 
-##### 1. Replacing `#define` with Type Aliases
+1. **Replacing `#define` with Type Aliases**
 
-For example:
+   For example:
 
-```cpp
-#define VI std::vector<int>
-#define VVI std::vector<std::vector<int>>
-#define VS std::vector<std::string>
-```
+   ```cpp
+   #define VI std::vector<int>
+   #define VVI std::vector<std::vector<int>>
+   #define VS std::vector<std::string>
+   ```
 
-Can be replaced with `using` or `typedef` to create type aliases:
+   Can be replaced with `using` or `typedef` to create type aliases:
 
-```cpp
-using VI = std::vector<int>;
-using VVI = std::vector<std::vector<int>>;
-using VS = std::vector<std::string>;
+   ```cpp
+   using VI = std::vector<int>;
+   using VVI = std::vector<std::vector<int>>;
+   using VS = std::vector<std::string>;
 
-// Or using typedef (more common in C++98/C++03)
-typedef std::vector<int> VI;
-typedef std::vector<std::vector<int>> VVI;
-typedef std::vector<std::string> VS;
-```
+   // Or using typedef (more common in C++98/C++03)
+   typedef std::vector<int> VI;
+   typedef std::vector<std::vector<int>> VVI;
+   typedef std::vector<std::string> VS;
+   ```
 
-**`using` and `typedef` are preferred because they respect C++ scoping rules and offer better support for debugging, making the code more secure and readable**.
+   **`using` and `typedef` are preferred because they respect C++ scoping rules and offer better support for debugging, making the code more secure and readable**.
 
-##### 2. Replacing `#define` with Constants
+2. **Replacing `#define` with Constants**
 
-If you're using `#define` to define numeric constants, you can replace them with `constexpr`, which also integrates better with the C++ type system and offers compile-time type checking. A example should help:
+3. **Using `constexpr` in Functions**
 
-```cpp
-#define PI 3.14159
-```
+   If you have macros that perform calculations, you can replace them with `constexpr` functions:
 
-Can be replaced with:
+   Example:
 
-```cpp
-constexpr double PI = 3.14159;
-```
+   ```cpp
+   #define SQUARE(x) ((x) * (x))
+   ```
 
-_`constexpr` allows the value to be treated as a constant of the correct type (`double` in this case), providing type checks and optimizing the code during compilation._
+   Can be replaced with:
 
-##### 3. Using `constexpr` in Functions
+   ```cpp
+   constexpr int square(int x) {
+       return x * x;
+   }
+   ```
 
-If you have macros that perform calculations, you can replace them with `constexpr` functions:
-
-Example:
-
-```cpp
-#define SQUARE(x) ((x) * (x))
-```
-
-Can be replaced with:
-
-```cpp
-constexpr int square(int x) {
-    return x * x;
-}
-```
-
-**`constexpr` functions provide type safety, avoid unexpected side effects, and allow the compiler to evaluate the expression at compile-time, resulting in more efficient and safer code**.
+   **`constexpr` functions provide type safety, avoid unexpected side effects, and allow the compiler to evaluate the expression at compile-time, resulting in more efficient and safer code**.
 
 For competitive programming, using `#define` might seem like the fastest way to reduce typing and speed up coding. However, using `typedef` or `using` is generally more efficient because it avoids potential issues with macros and integrates better with the compiler. **While reducing variable names or abbreviating functions might save time during a competitive programming, remember that in professional code, clarity and maintainability are far more important**. Therefore, avoid using shortened names and unsafe constructs like `#define` in production code, libraries, or larger projects.
 
-### Optimizing File I/O in C++ for competitive programmings
+## 3. Optimizing File I/O in C++ for competitive programmings
 
 In many competitive programming contests, especially those involving large datasets, the program is required to read input from a file that can be very large. For this reason, it is crucial to optimize how files are read. Efficient file handling can make the difference between a solution that completes within the time limits and one that does not. Implementing techniques to speed up file I/O is indispensable for handling such cases effectively.
 
-#### Disabling I/O Synchronization
+### 3.1 Disabling I/O Synchronization
 
 To improve the performance of input/output (I/O) operations, we disable the synchronization between the standard C and C++ I/O libraries:
 
@@ -332,7 +318,7 @@ This synchronization, when enabled, introduces overhead because the system ensur
 
 This optimization is particularly beneficial in programs that perform a large number of read and write operations, such as when processing large amounts of data from files. Additionally, by using `std::cin.tie(nullptr);`, we prevent `std::cout` from being automatically flushed before each input operation, avoiding another form of latency that could impact performance in I/O-heavy contexts.
 
-#### Command Line Argument Checking
+### 3.2 Command Line Argument Checking
 
 Before proceeding with execution, the code checks if exactly one argument was passed through the command line, which represents the name of the file to be read:
 
@@ -347,7 +333,7 @@ if (argc != 2) {
 - `argv` is an array of strings containing the arguments.
 - If the number of arguments is not 2, the program prints an error message and exits with `return 1`, indicating failure.
 
-#### Opening and Verifying the File
+### 3.3 Opening and Verifying the File
 
 The code attempts to open the specified file and checks whether the opening was successful:
 
@@ -364,15 +350,15 @@ if (!file) {
 
 While good practice in general software development, is usually unnecessary in competitive programming contests. Instead, you can often assume the file exists and start reading from it directly. This saves valuable coding time and simplifies your solution.
 
-## Introduction to File I/O in C++
+# 4. Introduction to File I/O in C++
 
 In C++, file input and output (I/O) operations are handled through classes provided by the `<fstream>` library. The three main classes used for this purpose are `std::ifstream`, `std::ofstream`, and `std::fstream`. Each of these classes is specialized for different types of I/O operations.
 
-### `std::ifstream`: File Reading
+## 4.1 `std::ifstream`: File Reading
 
 The `std::ifstream` class (input file stream) is used exclusively for reading files. It inherits from `std::istream`, the base class for all input operations in C++.
 
-#### Opening Files for Reading
+### 4.1.1 Opening Files for Reading
 
 In our code, we use `std::ifstream` to open a text file and read its contents:
 
@@ -416,7 +402,7 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-#### Verifying File Opening
+### 4.1.2 Verifying File Opening
 
 After attempting to open the file, it’s crucial to check whether the opening was successful:
 
@@ -431,7 +417,7 @@ if (!file) {
 
 Again, in competitive programmings, the input file will most often be handled by an automated testing system, so you probably won't need to check whether the file opened correctly or not.
 
-#### File Reading
+### 4.1.3 File Reading
 
 Once the file is successfully opened, we can read its contents:
 
@@ -445,7 +431,7 @@ while (file >> num) {
 - `std::getline(file, line);`: Reads a full line from the file and stores it in the string `line`.
 - `file >> num`: Reads numbers from the file and stores them in `num`, which are then added to the vector `vec` using `vec.push_back(num);`.
 
-#### File Closing
+### 4.1.4 File Closing
 
 After finishing with a file, it should be closed to free the associated resources. This happens automatically when the `std::ifstream` object is destroyed, but it can also be done explicitly:
 
@@ -455,25 +441,23 @@ file.close();
 
 - `file.close();`: Closes the file manually. Although the file is automatically closed when the object goes out of scope, explicitly closing the file can be useful to ensure the data is correctly released before the program ends or before opening another file.
 
-#### `std::ofstream`: File Writing
+### 4.1.5 File Writing - `std::ofstream`
 
 While we didn’t use `std::ofstream` in the provided code, it's important to mention it. The `std::ofstream` class (output file stream) is used for writing to files. It inherits from `std::ostream`, the base class for all output operations in C++.
 
-#### Opening Files for Writing
+1. **Opening Files for Writing**
 
-The syntax for opening a file for writing using `std::ofstream` is similar to that of `std::ifstream`:
+   The syntax for opening a file for writing using `std::ofstream` is similar to that of `std::ifstream`:
 
-```cpp
-std::ofstream outFile("output.txt");
-```
+   ```cpp
+   std::ofstream outFile("output.txt");
+   ```
 
-- `std::ofstream outFile("output.txt");`: Opens or creates a file called `output.txt` for writing. If the file already exists, its contents will be truncated (erased).
+   - `std::ofstream outFile("output.txt");`: Opens or creates a file called `output.txt` for writing. If the file already exists, its contents will be truncated (erased).
 
-#### `std::fstream`: File Reading and Writing
+### 4.1.6 File Reading and Writing - `std::fstream`
 
 The `std::fstream` class combines the functionality of both `std::ifstream` and `std::ofstream`, allowing for both reading from and writing to files. It inherits from `std::iostream`, the base class for bidirectional I/O operations.
-
-#### Opening Files for Reading and Writing
 
 An example of how to open a file for both reading and writing would be:
 
@@ -535,7 +519,7 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-#### File Opening Modes
+### 4.1.7 File Opening Modes
 
 When opening files, we can specify different opening modes using values from the `std::ios_base::openmode` enumeration. Some of the most common modes include:
 
@@ -546,7 +530,7 @@ When opening files, we can specify different opening modes using values from the
 - `std::ios::trunc`: Truncate the file (erase existing content).
 - `std::ios::binary`: Open the file in binary mode.
 
-### Advanced File I/O Techniques in C++
+## 4.2 Advanced File I/O Techniques in C++
 
 There are faster ways to open and process files in C++, which can be especially useful in competitive programming when dealing with large data sets. Here are some techniques that can enhance the efficiency of file handling:
 
@@ -632,7 +616,7 @@ There are faster ways to open and process files in C++, which can be especially 
 
    Instead of using `std::getline()`, which can be relatively slow for large files, you can implement a custom buffer to store multiple lines at once, reducing the overhead of repeatedly calling the I/O functions.
 
-#### Using `mmap` for Faster File I/O in Unix-Based Systems
+### 4.2.1 Using `mmap` for Faster File I/O in Unix-Based Systems
 
 In competitive programming, especially in contests like ICPC where the environment is Unix-based (typically Linux), it is crucial to explore every possible optimization for handling large input files. One such technique is using the `mmap` system call, which provides an extremely fast option for reading large files by mapping them directly into memory. This allows almost instantaneous access to the file's content without multiple read operations, significantly reducing I/O overhead.
 
@@ -640,7 +624,7 @@ The `mmap` function maps a file or device into memory. Once the file is mapped, 
 
 This approach is useful in environments like ICPC, where files can be very large, and efficiency is paramount. **However, it's important to note that `mmap` is specific to Unix-based systems and is not portable across all operating systems, such as Windows**.
 
-##### How to Use `mmap`
+#### 4.2.1.1 How to Use `mmap`
 
 Here's an example of how you can use `mmap` to read a file efficiently in C++ on a Unix-based system:
 
@@ -696,7 +680,7 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-##### Explanation of Key Steps
+**Explanation of Key Steps**:
 
 1. **Opening the File**:
 
@@ -739,13 +723,13 @@ int main(int argc, char* argv[]) {
 
 **portability**: it's important to note that the `mmap` function is specific to POSIX-compliant operating systems such as Linux, macOS, and other Unix-like systems. This function is not natively available on Windows platforms, which may limit the portability of code that uses it. For cross-platform development or in environments that include Windows systems, it's advisable to provide an alternative implementation or use libraries that offer similar functionality in a portable manner. In programming competitive programmings that occur in controlled environments, such as ICPC, where the operating system is usually specified (often Linux), the use of `mmap` may be appropriate. However, for code that needs to run on multiple platforms, consider using more universal I/O methods, such as `std::ifstream` or `fread`, which are supported on a wider range of operating systems.
 
-### Parallel Input/Output with Threads (C++20)
+### 4.2.2 Parallel Input/Output with Threads (C++20)
 
-CC++20 introduced several improvements for parallel programming, including the efficient use of threads and asynchronous tasks with `std::async`. In many competitive programming scenarios, input and output (I/O) operations are performed sequentially. **However, despite it being quite rare for input files to be very large in competitive programmings, in cases of intensive I/O or when there is a need to process large volumes of data simultaneously, parallel I/O can be an advantageous strategy**.
+C++20 introduced several improvements for parallel programming, including the efficient use of threads and asynchronous tasks with `std::async`. In many competitive programming scenarios, input and output (I/O) operations are performed sequentially. **However, despite it being quite rare for input files to be very large in competitive programmings, in cases of intensive I/O or when there is a need to process large volumes of data simultaneously, parallel I/O can be an advantageous strategy**.
 
 In situations with heavy I/O workloads, such as reading and processing large input files or performing intensive calculations while still reading or writing data, `std::async` and threads can be used to split operations and execute different tasks simultaneously, making the best use of available time.
 
-#**Example**: of Parallel I/O Using `std::async`
+**Example of Parallel I/O Using `std::async`**
 
 Below is a simple example of how to use `std::async` to perform input and output operations in parallel. In this example, while data is being read, another thread can be used to process or display the data simultaneously, optimizing the time spent on I/O operations:
 
@@ -860,7 +844,7 @@ However, this technique should be used with care. Adding threads and asynchronou
 
 The use of parallel I/O in programming competitive programmings typically applies to scenarios where there are many read/write operations or when the program needs to process large volumes of data while still reading or writing files. This situation is usual in [AI competitive programmings](https://opencv.org/opencv-ai-competitive-programming-2021/) and in hackatons. This technique can be useful in problems involving the manipulation of large datasets or intensive input/output processing, such as in "big data" challenges or reading/writing from disks. However, due to its complexity, the use of `std::async` and threads should be reserved for cases where parallelism offers a significant advantage over traditional sequential I/O.
 
-### Efficient Techniques for File I/O and Array Handling in Competitive Programming
+## Efficient Techniques for File I/O and Array Handling in Competitive Programming
 
 | Function/Operation               | Most Efficient Technique                                                                        | Description                                                                                                                                          |
 | -------------------------------- | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -873,11 +857,11 @@ The use of parallel I/O in programming competitive programmings typically applie
 | Vector manipulation              | `std::vector` with preprocessing (e.g., macros, `constexpr`)                                    | Using macros or `constexpr` for frequent operations like sorting or summing elements can save time in competitive programmings.                      |
 | Handling large data volumes      | Manual buffering with `fread` and `fwrite`                                                      | `fread` and `fwrite` allow efficient reading and writing of large blocks of data, minimizing system call overhead.                                   |
 
-## Maximizing Input/Output Efficiency in Competitive Programming (Windows and Linux)
+# Maximizing Input/Output Efficiency in Competitive Programming (Windows and Linux)
 
 In some competitive programming environments, inputs are provided via the command line. The first input is the size of the array, followed by the array elements separated by spaces. Efficiently reading this data and outputting the result is crucial, especially when dealing with large datasets. Below is an approach to handle input and output in the fastest way for both Windows and Linux.
 
-### Optimized Input and Output
+## Optimized Input and Output
 
 The following example demonstrates how to read inputs and output results efficiently in C++ using the fastest I/O methods available on both Windows and Linux.
 
@@ -913,7 +897,7 @@ int main() {
 }
 ```
 
-### Key Techniques for Faster I/O
+## Key Techniques for Faster I/O
 
 1. **Disabling I/O Synchronization**:
    The line `std::ios::sync_with_stdio(false);` disables the synchronization between the C and C++ I/O streams. This allows the program to perform I/O operations faster because it no longer needs to synchronize `std::cin` and `std::cout` with `scanf` and `printf`.
@@ -921,7 +905,7 @@ int main() {
 2. **Unlinking `cin` and `cout`**:
    The line `std::cin.tie(nullptr);` ensures that `std::cout` will not be flushed automatically before every `std::cin` operation, which can slow down the program. By unlinking them, you have more control over when output is flushed.
 
-### Differences Between Windows and Linux
+## Differences Between Windows and Linux
 
 On both **Windows** and **Linux**, the above code will work efficiently. However, since competitive programming platforms often use Linux, the synchronization of I/O streams plays a more significant role in Linux environments. Disabling synchronization is more crucial on Linux for achieving maximum performance, while the effect may be less noticeable on Windows. Nevertheless, the method remains valid and provides optimal speed in both environments.
 
@@ -958,7 +942,7 @@ int main() {
 
 It is important to highlight that `scanf` and `printf` are widely recognized as insecure functions due to their lack of built-in protections against common vulnerabilities such as buffer overflows. We are discussing them here only because the code created for competitive programming is typically used only once during a contest, and the primary focus is on speed and efficiency. However, these functions — and any others considered unsafe (see [stackoverflow](https://stackoverflow.com/questions/2565727/which-functions-from-the-standard-library-must-should-be-avoided))— should never be used in production code, libraries, or any other software outside the competitive programming environment. In professional development, you should always prefer safer alternatives such as `std::cin` and `std::cout`, which provide better type safety and avoid common vulnerabilities associated with older C-style I/O functions.
 
-### Using Manual Buffers with `fread` and `fwrite`
+## Using Manual Buffers with `fread` and `fwrite`
 
 While functions like `scanf` and `printf` are fast, using `fread` and `fwrite` allows reading and writing data in large blocks, reducing the number of system calls for I/O. This is particularly useful when dealing with large volumes of data, as the overhead of multiple read and write operations can be significant.
 
@@ -1013,13 +997,13 @@ The `fwrite` function works similarly to `fread`, but instead of reading data, i
 
 Using manual buffers with `fread` and `fwrite` can significantly improve performance in competitions by reducing the number of system calls, which is particularly useful when dealing with large volumes of data. This technique offers greater control over the I/O process and allows for optimizations in high-performance scenarios. However, when advanced formatting is required, `scanf` and `printf` might still be more convenient and suitable.
 
-## Introduction to Namespaces
+# Introduction to Namespaces
 
 In C++, **namespaces** are used to organize code and prevent name conflicts, especially in large projects or when multiple libraries are being used that may have functions, classes, or variables with the same name. They provide a scope for identifiers, allowing developers to define functions, classes, and variables without worrying about name collisions.
 
 A **namespace** is a declarative region that provides a scope to the identifiers (names of types, functions, variables, etc.) inside it. This allows different parts of a program or different libraries to have elements with the same name without causing ambiguity.
 
-### Basic Syntax of a Namespace
+## Basic Syntax of a Namespace
 
 ```cpp
 namespace MyNamespace {
@@ -1036,7 +1020,7 @@ namespace MyNamespace {
 
 The `MyNamespace` namespace encapsulates `myFunction` and `MyClass`, preventing these names from conflicting with others of the same name in different namespaces.
 
-### Using Namespaces
+## Using Namespaces
 
 To access elements inside a namespace, you can use the **scope resolution operator** `::`.
 
@@ -1044,7 +1028,7 @@ The **scope resolution operator** (`::`) in C++ is used to define or access elem
 
 In competitive programming, the scope resolution operator is often used to access elements from the `std` namespace, such as `std::cout` or `std::vector`. This ensures that the standard library components are used correctly without introducing ambiguity with any other variables or functions that might exist in the global scope or within other namespaces. **Although not as common in short competitive programming code, the operator becomes critical in larger projects to maintain clear and distinct references to elements that may share names across different parts of the program**.
 
-#### Accessing Elements of a Namespace
+### Accessing Elements of a Namespace
 
 ```cpp
 int main() {
@@ -1059,7 +1043,7 @@ int main() {
 }
 ```
 
-#### `using namespace std;`
+### `using namespace std;`
 
 The **std** namespace is the default namespace of the C++ Standard Library. It contains all the features of the standard library, such as `std::vector`, `std::cout`, `std::string`, and more.
 
@@ -1099,11 +1083,11 @@ int main() {
 }
 ```
 
-### Disadvantages of Using `using namespace std;`
+## Disadvantages of Using `using namespace std;`
 
 While using `using namespace std;` makes your code shorter and easier to read, it comes with some drawbacks. In larger projects or when working with multiple libraries, it increases the likelihood of name conflicts, where different namespaces contain elements with the same name. It can also lead to ambiguity, making it less clear where certain elements are coming from, which complicates code maintenance and comprehension. Because of these risks, using `using namespace std;` is generally discouraged in production code, especially in large projects or collaborative settings.
 
-### Alternatives to `using namespace std;`
+## Alternatives to `using namespace std;`
 
 To avoid the risks associated with `using namespace std;`, one option is to import specific elements from the `std` namespace. For example, instead of importing the entire namespace, you can import only the functions and types you need, such as `std::cout` and `std::vector`. This approach reduces the risk of name conflicts while still allowing for more concise code.
 
@@ -1143,7 +1127,7 @@ int main() {
 
 To maintain clean, maintainable code, it's recommended to avoid `using namespace std;` in header files, as this can force all files that include the header to import the `std` namespace, increasing the risk of conflicts. If you decide to use `using`, it is better to do so in a limited scope, such as inside a function, to minimize its impact. Adopting a consistent approach to namespaces throughout your project also improves readability and makes collaboration easier.
 
-##### Advanced Example: Nested Namespace
+### Advanced Example: Nested Namespace
 
 Namespaces can also be nested to better organize the code.
 
@@ -1168,9 +1152,19 @@ Nested namespaces allow for a more hierarchical organization of code, which is p
 
 **In competitive programming, it is generally unnecessary and inefficient to create or use custom namespaces beyond the standard `std` namespace. Since competitive programming code is typically small and written for single-use, the overhead of managing custom namespaces adds complexity without providing significant benefits. Additionally, custom namespaces are designed to prevent name conflicts in large projects with multiple libraries, but in competitive environments where the focus is on speed and simplicity, such conflicts are rare. Therefore, it is best to avoid using namespaces beyond `std` in competitive programming, and reserve namespace management for larger codebases with extensive dependencies and libraries.**
 
-## Working with Vectors
+# Working with Vector and Matrix
 
-Vectors are one of the most versatile data structures used in competitive programming. Many problems require frequent operations such as inserting, removing, resizing, and even manipulating entire matrices (2D vectors). Below we review common operations on vectors, showcasing standard implementations followed by optimized versions to minimize typing, which can be beneficial in time-critical competitive programmings.
+Vectors are one of the most versatile data structures used in competitive programming due to their dynamic size and ease of use. They allow for efficient insertion, removal, resizing, and access operations, making them suitable for a wide range of applications. Not only can vectors handle single-dimensional data, but they can also represent more complex structures, such as matrices (2D vectors), which are often used to solve grid-based problems, dynamic table calculations, or simulations of multi-dimensional data.
+
+Matrices, represented as vectors of vectors, are particularly useful in problems involving multi-dimensional data manipulation, such as game boards, adjacency matrices in graphs, and dynamic programming tables. Vectors and matrices enable frequent operations like row and column manipulation, matrix transposition, and access to specific submatrices, providing flexibility and control over data arrangement and processing.
+
+### Vectors
+
+In C++, the `vector` class, part of the Standard Template Library (STL), is a dynamic array that provides a versatile and efficient way to manage collections of elements. Unlike traditional arrays, vectors can automatically resize themselves when elements are added or removed, making them particularly useful in competitive programming where the size of data structures may vary during execution.
+
+Vectors offer several advantages: they provide random access to elements, support iteration with iterators, and allow dynamic resizing, which is crucial for managing datasets of unknown or varying lengths. They also support a range of built-in functions for modifying the collection, such as `push_back`, `pop_back`, `insert`, `erase`, and `resize`, allowing developers to manage data efficiently without needing to manually handle memory allocations.
+
+The `vector` class is particularly useful in scenarios involving frequent insertions, deletions, or resizes, as well as when working with dynamic data structures like lists, queues, stacks, or even matrices (2D vectors). Its simplicity and flexibility make it an indispensable tool for implementing a wide range of algorithms quickly and effectively in C++.
 
 ### Inserting Elements at a Specific Position
 
@@ -1316,6 +1310,14 @@ sort_vector(vec2);
 - $ \text{constexpr void sort_vector(std::vector<int}\& vec)$ is a type-safe way to define a reusable sorting function.
 - This method avoids the pitfalls of `#define`, such as lack of scoping and type checking, while still minimizing the amount of typing.
 
+## Matrices
+
+In C++20, matrices are typically represented as vectors of vectors (`std::vector<std::vector<T>>`), where each inner vector represents a row of the matrix. This approach allows for dynamic sizing and easy manipulation of multi-dimensional data, making matrices ideal for problems involving grids, tables, or any 2D structure.
+
+Matrices in C++ offer flexibility in managing data: you can resize rows and columns independently, access elements using intuitive indexing, and leverage standard vector operations for rows. Additionally, the use of `ranges` and `views` introduced in C++20 enhances the ability to iterate and transform matrix data more expressively and efficiently.
+
+_The use of matrices is common in competitive programming for tasks such as implementing dynamic programming tables, graph adjacency matrices, or performing transformations on 2D data. With the powerful capabilities of C++20's STL, matrices become a highly adaptable and efficient way to handle complex, multi-dimensional computations in a structured manner_.
+
 ### Creating and Filling a Matrix
 
 The code creates a 2x2 matrix (a vector of vectors) and fills each element with the value 1:
@@ -1372,7 +1374,200 @@ for (const auto& row : matrix) {
 
 Here, we replaced `std::endl` with `"\n"` to improve performance by avoiding the unnecessary flushing of the output buffer.
 
-To summarize, reducing typing in competitive programming can help you focus more on problem-solving than on code verbosity. While using macros like `#define` can be helpful in short contests, be cautious of overusing them in professional code. Instead, consider using more modern and safe C++ techniques, such as `using` and `typedef`, which respect scoping rules and improve the reliability of your code.
+### Inserting Elements at a Specific Position
+
+To insert an element at a specific position in a matrix (vector of vectors) in C++ 20, we use the `insert` function. This function can insert rows or columns in a specific location, modifying the structure of the matrix.
+
+```cpp
+
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<std::vector<int>> matrix = {{1, 2}, {3, 4}};
+
+    // Insert a row at position 1
+    matrix.insert(matrix.begin() + 1, std::vector<int>{5, 6});
+
+    // Insert a column value at position 0 in the first row
+    matrix[0].insert(matrix[0].begin(), 0);
+
+    // Display the modified matrix
+    for (const auto& row : matrix) {
+        for (int el : row) std::cout << el << " ";
+        std::cout << "\n";
+    }
+
+    return 0;
+}
+```
+
+This code inserts a new row at position 1 and a new column value at position 0 in the first row. The result is a modified matrix.
+
+### Removing the Last Element and a Specific Element
+
+To remove the last element of a matrix or a specific element, you can use the `pop_back` function for removing the last row and the `erase` function for removing specific rows or columns.
+
+```cpp
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<std::vector<int>> matrix = {{1, 2}, {3, 4}, {5, 6}};
+
+    // Remove the last row
+    matrix.pop_back();
+
+    // Remove the first element of the first row
+    matrix[0].erase(matrix[0].begin());
+
+    // Display the modified matrix
+    for (const auto& row : matrix) {
+        for (int el : row) std::cout << el << " ";
+        std::cout << "\n";
+    }
+
+    return 0;
+}
+```
+
+This code removes the last row from the matrix and removes the first element of the first row.
+
+### Creating a New Vector with a Default Value
+
+To create a new matrix filled with a default value, you can specify this value in the constructor of the vector.
+
+```cpp
+#include <iostream>
+#include <vector>
+
+int main() {
+    // Create a 3x3 matrix filled with the default value 7
+    std::vector<std::vector<int>> matrix(3, std::vector<int>(3, 7));
+
+    // Display the matrix
+    for (const auto& row : matrix) {
+        for (int el : row) std::cout << el << " ";
+        std::cout << "\n";
+    }
+
+    return 0;
+}
+```
+
+This code initializes a 3x3 matrix with all elements set to 7.
+
+### Resizing and Filling with Random Values
+
+To resize a matrix and fill it with random values, you can use the `resize` function along with the `<random>` library.
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <random>
+
+int main() {
+    std::vector<std::vector<int>> matrix;
+    int rows = 3, cols = 3;
+
+    // Resize the matrix
+    matrix.resize(rows, std::vector<int>(cols));
+
+    // Fill the matrix with random values
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(1, 10);
+
+    for (auto& row : matrix) {
+        for (auto& el : row) {
+            el = dis(gen);
+        }
+    }
+
+    // Display the matrix
+    for (const auto& row : matrix) {
+        for (int el : row) std::cout << el << " ";
+        std::cout << "\n";
+    }
+
+    return 0;
+}
+```
+
+This code resizes the matrix to 3x3 and fills it with random values between 1 and 10.
+
+### Sorting Matrices by Rows and Columns
+
+In C++20, we can sort matrices (represented as vectors of vectors) both by rows and by columns. Here are examples of how to do both:
+
+#### Sorting by Rows
+
+Sorting by rows is straightforward, as we can use the `std::sort` function directly on each row of the matrix.
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+   std::vector<std::vector<int>> matrix = {{3, 1, 4}, {1, 5, 9}, {2, 6, 5}};
+
+   // Sort each row of the matrix
+   for (auto& row : matrix) {
+       std::sort(row.begin(), row.end());
+   }
+
+   // Display the sorted matrix
+   for (const auto& row : matrix) {
+       for (int el : row) std::cout << el << " ";
+       std::cout << "\n";
+   }
+
+   return 0;
+}
+```
+
+This code sorts each row of the matrix independently. The time complexity for sorting by rows is $O(m \cdot n \log n)$, where $m$ is the number of rows and $n$ is the number of columns.
+
+### Sorting by Columns
+
+Sorting by columns is more complex because the elements in a column are not contiguous in memory. We need to extract each column, sort it, and then put the sorted elements back into the matrix.
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+   std::vector<std::vector<int>> matrix = {{3, 1, 4}, {1, 5, 9}, {2, 6, 5}};
+   int rows = matrix.size();
+   int cols = matrix[0].size();
+
+   // Sort each column of the matrix
+   for (int j = 0; j < cols; ++j) {
+       std::vector<int> column;
+       for (int i = 0; i < rows; ++i) {
+           column.push_back(matrix[i][j]);
+       }
+       std::sort(column.begin(), column.end());
+       for (int i = 0; i < rows; ++i) {
+           matrix[i][j] = column[i];
+       }
+   }
+
+   // Display the sorted matrix
+   for (const auto& row : matrix) {
+       for (int el : row) std::cout << el << " ";
+       std::cout << "\n";
+   }
+
+   return 0;
+}
+```
+
+This code sorts each column of the matrix independently. The time complexity for sorting by columns is $O(n \cdot m \log m)$, where $n$ is the number of columns and $m$ is the number of rows.
+
+Note that this method of sorting by columns is not the most efficient for very large matrices, as it involves many data copies. For large matrices, it might be more efficient to use an approach that sorts the row indices based on the values in a specific column.
 
 ### Vectors as Inputs and Outputs
 
@@ -1443,7 +1638,7 @@ The previous code method minimizes system calls and avoids using slower I/O mech
 
 In competitive programming, it's also common to handle input from a file provided via the command line. This scenario requires efficient reading and processing, especially when dealing with large datasets. Below is the optimized version using `fread` to read from a file specified in the command line argument and `putchar` for output.
 
-### Optimized Version Using `fread` and `putchar` with Command-Line File Input
+#### Optimized Version Using `fread` and `putchar` with Command-Line File Input
 
 This version reads the input file, processes it, and outputs the vector’s elements, ensuring fast I/O performance.
 
@@ -1592,13 +1787,19 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-## Using `std::span` for Efficient Data Handling (C++20)
+# Efficient Data Manipulation in C++ using Span and Ranges
+
+In the fast-paced world of competitive programming and high-performance computing, efficient data manipulation is paramount. C++20 introduces two powerful features - `std::span` and `std::ranges` - that significantly enhance a programmer's ability to handle data effectively and write optimized code.
+
+These features are particularly important because they address common performance bottlenecks in data-intensive applications. `std::span` provides a lightweight, non-owning view into contiguous data, reducing unnecessary copying and allowing for flexible, efficient data access. `std::ranges`, on the other hand, offers a unified, composable interface for working with sequences of data, enabling more intuitive and often more performant algorithm implementations. Together, they form a potent toolkit for developers seeking to push the boundaries of what's possible in terms of code efficiency and elegance in C++.
+
+## Using `std::span`
 
 The `std::span` is a new feature introduced in C++20 that allows you to create lightweight, non-owning views of arrays and containers, such as `std::vector`. This avoids unnecessary copying of data and provides a flexible and efficient way to access and manipulate large blocks of data. `std::span` can be particularly useful when working with large datasets, file I/O, or when optimizing memory usage in competitive programming.
 
 Unlike containers such as `std::vector`, `std::span` doesn't own the data it references. This means it doesn't allocate new memory and works directly with existing data, leading to lower memory overhead. Additionally, `std::span` can work with both static arrays and dynamic containers (like `std::vector`) without requiring copies. It provides safer array handling compared to raw pointers, as it encapsulates size information. Since `std::span` eliminates the need for memory copies, it can speed up operations where large datasets need to be processed in-place, or only certain views of data are required.
 
-**Example**: of `std::span` for Efficient Data Access
+**Example of `std::span` for Efficient Data Access**:
 
 In this example, we create a `std::span` from a `std::vector` of integers, allowing us to iterate over the vector’s elements without copying the data:
 
@@ -1673,7 +1874,7 @@ Unlike `std::vector`, which manages its own memory, `std::span` does not allocat
 
 When working with large datasets in competitive programming, using `std::span` avoids unnecessary memory copies, making operations faster and more efficient. You can easily pass sub-ranges of data to functions without creating temporary vectors or arrays. Additionally, it allows you to maintain full control over memory without introducing complex ownership semantics, as with `std::unique_ptr` or `std::shared_ptr`.
 
-**\* Example: Efficiently Passing Data in a Competitive Programming Scenario**
+**Example: Efficiently Passing Data in a Competitive Programming Scenario**:
 
 ```cpp
 #include <iostream>
@@ -1710,7 +1911,7 @@ In traditional programming with containers like `std::vector`, iterating over an
 
 The core idea behind `std::ranges` is to create "views" over data. These views allow you to manipulate and query data without modifying the underlying container. A view in `std::ranges` is an abstraction that can represent any sequence of elements that can be iterated over, just like a container. The key difference is that a view is not required to own its elements; instead, it provides a "window" into an existing data sequence, allowing for efficient operations.
 
-#**Example**:: Filtering and Transforming Data with `std::ranges`
+**Example Filtering and Transforming Data with `std::ranges`**:
 
 Suppose we have a vector of integers and we want to filter out the odd numbers and then multiply the remaining even numbers by two. Using traditional methods, we would need to loop through the vector, apply conditions, and store the results in a new container. With `std::ranges`, this can be done in a more expressive and efficient way:
 
@@ -1812,11 +2013,11 @@ Here, the data is sorted, filtered, and transformed in a single efficient chain 
 
 `std::ranges` in C++20 brings a powerful new way to work with data by providing efficient, lazy-evaluated views over containers. This minimizes memory usage, avoids unnecessary copying, and allows for highly optimized data processing pipelines. In competitive programming and high-performance applications, where every CPU cycle and byte of memory counts, using `std::ranges` can significantly improve both performance and code clarity. Whether you're filtering, transforming, or composing operations, `std::ranges` allows you to build complex data processing pipelines that are both expressive and efficient.
 
-## Time and Space Complexity in Competitive Programming
+# Time and Space Complexity in Competitive Programming
 
 In this section, we will delve deeper into understanding both time and space complexities, providing a more comprehensive look into how these affect the efficiency of algorithms, particularly in competitive programming environments. This includes examining loops, recursive algorithms, and how various complexity classes dictate algorithm performance. We'll also consider the impact of space complexity and memory usage, which is crucial when dealing with large datasets.
 
-### Loops and Time Complexity
+## Loops, Time and Space Complexity
 
 **One of the most common reasons for slow algorithms is the presence of multiple loops iterating over input data**. The more nested loops an algorithm contains, the slower it becomes. If there are $k$ nested loops, the time complexity becomes $O(n^k)$.
 
@@ -1837,8 +2038,6 @@ for (int i = 1; i <= n; i++) {
     }
 }
 ```
-
-### Space Complexity in Loops
 
 While the focus is often on time complexity, it's equally important to consider space complexity, especially when handling large inputs. A loop like the one below has a time complexity of $O(n)$ but also incurs a space complexity of $O(n)$ if an array is created to store values:
 
@@ -1883,7 +2082,7 @@ for (int i = 1; i <= n; i++) {
 }
 ```
 
-### Phases and Time Complexity
+### Algorithm Phases and Time Complexity
 
 When an algorithm consists of consecutive phases, the total time complexity is the largest time complexity of any single phase. This is because the slowest phase typically becomes the bottleneck of the code.
 
@@ -1903,11 +2102,9 @@ for (int i = 1; i <= n; i++) {
 }
 ```
 
-#### Space Complexity of Multiple Phases
+#### Space and Time Complexity of Multiple Phases
 
 When analyzing algorithms that consist of multiple phases, consider that each phase may also introduce additional memory usage. In the example above, if phase 2 allocates a matrix of size $n \times n$, the space complexity would increase to $O(n^2)$, matching the time complexity.
-
-#### Multiple Variables and Time Complexity
 
 Sometimes, time complexity depends on multiple factors. In this case, the formula for time complexity includes multiple variables. For example, the time complexity of the following code is $O(nm)$:
 
@@ -1919,11 +2116,9 @@ for (int i = 1; i <= n; i++) {
 }
 ```
 
-##### Space Complexity with Multiple Variables
-
 If the above algorithm also uses a data structure such as a matrix of size $n \times m$, the space complexity would also be $O(nm)$, increasing memory usage significantly, particularly for large input sizes.
 
-### Recursive Algorithms
+## Recursive Algorithms
 
 The time complexity of a recursive function depends on the number of times the function is called and the time complexity of a single call. The total time complexity is the product of these values.
 
@@ -1938,7 +2133,7 @@ void f(int n) {
 
 The call `f(n)` makes $n$ recursive calls, and the time complexity of each call is $O(1)$. Thus, the total time complexity is $O(n)$.
 
-#### Exponential Recursion
+### Exponential Recursion
 
 Consider the following function, which makes two recursive calls for every **Input**:
 
@@ -1962,11 +2157,7 @@ Here, each function call generates two other calls, except when $n = 1$. The tab
 
 Thus, the time complexity is:
 
-$$
-1 + 2 + 4 + \cdots + 2^{n-1} = 2^n - 1 = O(2^n)
-$$
-
-#### Space Complexity in Recursive Functions
+$$1 + 2 + 4 + \cdots + 2^{n-1} = 2^n - 1 = O(2^n)$$
 
 Recursive functions also have space complexity considerations. Each recursive call adds to the call stack, and in the case of deep recursion (like in the exponential example above), this can lead to $O(n)$ space complexity. Be cautious with recursive algorithms, as exceeding the maximum stack size can cause a program to fail due to stack overflow.
 
@@ -2014,15 +2205,15 @@ While time complexity is a good estimate of efficiency, it hides constant factor
 
 Since loops have a significant impact on code performance, we can dive deeper into the possible loop options available.
 
-## Loops the heart of all competitive programming
+# Loops the heart of all competitive programming
 
 Loops are, without a doubt, the most important part of any code, whether for competitive programming, high-performance applications, or even solving academic problems. Most programming languages offer more than one way to implement loops. In this text, since Python is only our pseudocode language, we will focus on studying loops in C++.
 
-### Deep Dive into `for` Loops in Competitive Programming
+## Deep Dive into `for` Loops in Competitive Programming
 
 C++ provides several ways to iterate over elements in a vector, using different types of `for` loops. In this section, we will explore the various `for` loop options available in C++20, discussing their performance and code-writing efficiency. We will also analyze which loops are best suited for competitive programming based on input size—whether dealing with small or large datasets.
 
-#### 1. `for` Loop with Iterator
+### 1. `for` Loop with Iterator
 
 The `for` loop using iterators is one of the most efficient ways to iterate over a vector, especially for complex operations where you need to manipulate the elements or the iterator’s position directly.
 
@@ -2039,7 +2230,7 @@ Utilizing iterators directly avoids unnecessary function calls such as `operator
 - **For Small Inputs**: This is a solid option as it allows precise control over the iteration with negligible overhead.
 - **For Large Inputs**: Highly efficient due to minimal overhead and memory usage. However, ensure that the iterator’s operations do not induce cache misses, which can slow down performance for large datasets.
 
-#### 2. Classic `for` Loop with Index
+### 2. Classic `for` Loop with Index
 
 The classic `for` loop using an index is efficient and provides precise control over the iteration process.
 
@@ -2056,7 +2247,7 @@ Accessing elements via index is fast, but re-evaluating `vec.size()` in each ite
 - **For Small Inputs**: Efficient and straightforward, especially when the overhead of re-evaluating `vec.size()` is negligible.
 - **For Large Inputs**: If performance is critical, store `vec.size()` in a separate variable before the loop to avoid repeated function calls, which can become significant for larger datasets.
 
-#### 3. Range-Based `for-each` with Constant Reference
+### 3. Range-Based `for-each` with Constant Reference
 
 Range-based `for-each` with constant reference is highly efficient for reading elements since it avoids unnecessary copies.
 
@@ -2073,7 +2264,7 @@ Using constant references avoids copying, making it very efficient for both memo
 - **For Small Inputs**: Ideal for minimal syntax and efficient execution.
 - **For Large Inputs**: Excellent choice due to the avoidance of element copies, ensuring optimal memory usage and performance.
 
-#### 4. Range-Based `for-each` by Value
+### 4. Range-Based `for-each` by Value
 
 The `for-each` loop can also iterate over elements by value, which is useful when you want to work with copies of the elements.
 
@@ -2090,7 +2281,7 @@ Elements are copied, which can reduce performance, especially for large data typ
 - **For Small Inputs**: Suitable when the overhead of copying is negligible, especially if you need to modify copies of elements.
 - **For Large Inputs**: Avoid for large datasets or large element types, as the copying can lead to significant performance degradation.
 
-#### 5. `for` Loop with Range Views (C++20)
+### 5. `for` Loop with Range Views (C++20)
 
 C++20 introduced `range views`, which allow iteration over subsets or transformations of elements in a container without creating copies.
 
@@ -2107,7 +2298,7 @@ Range views allow high-performance operations, processing only the necessary ele
 - **For Small Inputs**: Works well, especially when applying transformations like reversing or filtering, while maintaining code readability.
 - **For Large Inputs**: Very efficient as no extra memory is allocated, and the processing is done lazily, meaning only the required elements are accessed.
 
-#### 6. Parallel `for` Loop (C++17/C++20)
+### 6. Parallel `for` Loop (C++17/C++20)
 
 While not a traditional `for` loop, using parallelism in loops is a powerful feature introduced in C++17 and further enhanced in C++20.
 
@@ -2126,7 +2317,7 @@ Uses multiple threads to process elements in parallel, offering substantial perf
 - **For Small Inputs**: Overkill. The overhead of managing threads and synchronization outweighs the benefits for small datasets.
 - **For Large Inputs**: Extremely efficient. When dealing with large datasets, parallel processing can drastically reduce runtime, especially for computationally expensive operations.
 
-#### Optimal `for` Loops for Competitive Programming
+### Optimal `for` Loops for Competitive Programming
 
 Choosing the right type of `for` loop in competitive programming depends largely on input size and the specific use case. The following table summarizes the best choices for different scenarios:
 
@@ -2138,11 +2329,11 @@ Choosing the right type of `for` loop in competitive programming depends largely
 | Large           | Parallel `for` Loop with `std::for_each` and `std::execution::par` | Ideal for computationally heavy tasks on large datasets, leveraging multiple threads to parallelize. |
 | Transformations | `for` Loop with Range Views (C++20)                                | Ideal for processing subsets or transformations of data without creating extra copies.               |
 
-### Now the `while` Loop which we all love
+## Now the `while` Loop which we all love
 
 The `while` loop is another fundamental control structure in C++ that is often used in competitive programming. It repeatedly executes a block of code as long as a specified condition evaluates to true. In this section, we will explore the different use cases for `while` loops, their performance considerations, and scenarios where they may be preferable to `for` loops. We will also examine their application with both small and large datasets.
 
-#### 1. Basic `while` Loop
+### 1. Basic `while` Loop
 
 A `while` loop continues executing its block of code until the condition becomes false. This makes it ideal for situations where the number of iterations is not known beforehand.
 
@@ -2161,7 +2352,7 @@ The `while` loop is simple and provides clear control over the loop's exit condi
 - **For Small Inputs**: This structure is efficient, especially when the number of iterations is small and predictable.
 - **For Large Inputs**: The `while` loop can be optimized for larger inputs by ensuring that the condition is simple to evaluate and that the incrementing logic doesn't introduce overhead.
 
-#### 2. `while` Loop with Complex Conditions
+### 2. `while` Loop with Complex Conditions
 
 `while` loops are particularly useful when the condition for continuing the loop involves complex logic that cannot be easily expressed in a `for` loop.
 
@@ -2180,7 +2371,7 @@ In this case, the loop runs not only based on the value of `i`, but also on the 
 - **For Small Inputs**: This is ideal for small inputs where the condition can vary significantly during the iterations.
 - **For Large Inputs**: Be cautious with complex conditions when dealing with large inputs, as evaluating the condition on every iteration may add performance overhead.
 
-#### 3. Infinite `while` Loops
+### 3. Infinite `while` Loops
 
 An infinite `while` loop is a loop that runs indefinitely until an explicit `break` or `return` statement is encountered. This type of loop is typically used in scenarios where the termination condition depends on an external event, such as user input or reaching a specific solution.
 
@@ -2217,7 +2408,7 @@ In this case, the loop will print `i` at least once, even if `i` starts with a v
 - **For Small Inputs**: Ideal when you need to guarantee that the loop runs at least once, such as with small datasets where the minimum iteration is essential.
 - **For Large Inputs**: Suitable for large datasets where the first iteration must occur independently of the condition.
 
-#### 5. `while` Loop with Early Exit
+### 5. `while` Loop with Early Exit
 
 The `while` loop can be combined with early exit strategies using `break` or `return` statements to optimize performance, particularly when the loop can terminate before completing all iterations.
 
@@ -2237,7 +2428,7 @@ By including a condition inside the loop that checks for an early exit, you can 
 - **For Small Inputs**: It can improve performance when early termination conditions are common or likely.
 - **For Large Inputs**: Highly efficient for large datasets, particularly when the early exit condition is met frequently, saving unnecessary iterations.
 
-#### 6. Combining `while` with Multiple Conditions
+### 6. Combining `while` with Multiple Conditions
 
 A `while` loop can easily incorporate multiple conditions to create more complex termination criteria. This is particularly useful when multiple variables determine whether the loop should continue.
 
@@ -2256,7 +2447,7 @@ This allows the loop to run based on multiple dynamic conditions, providing more
 - **For Small Inputs**: A flexible option when the conditions governing the loop may change during execution, even for small datasets.
 - **For Large Inputs**: Can be optimized for large datasets by ensuring that the condition checks are efficient and that unnecessary re-evaluations are minimized.
 
-#### Optimal `while` Loops for Competitive Programming
+### Optimal `while` Loops for Competitive Programming
 
 Choosing the right type of `while` loop depends on the nature of the input and the complexity of the condition. The following table summarizes the optimal choices for different input sizes:
 
@@ -2268,11 +2459,11 @@ Choosing the right type of `while` loop depends on the nature of the input and t
 | Large      | `while` with Complex Conditions            | Allows dynamic and flexible exit conditions, making it suitable for large datasets with evolving parameters.               |
 | Continuous | Infinite `while` Loop with Explicit Breaks | Best for situations where the exact number of iterations is unknown and depends on external factors or dynamic conditions. |
 
-### Special Loops in C++20 for Competitive Programming
+## Special Loops in C++20 for Competitive Programming
 
 In C++20, several advanced looping techniques have been introduced, each offering unique ways to improve code efficiency and readability. While some of these techniques provide remarkable performance optimizations, not all are well-suited for competitive programming. competitive programmings often involve handling dynamic inputs and generating outputs within strict time limits, so techniques relying heavily on compile-time computation are less practical. This section focuses on the most useful loop structures for competitive programmings, emphasizing runtime efficiency and adaptability to varying input sizes.
 
-#### 1. Range-Based Loops with `std::ranges::views`
+### 1. Range-Based Loops with `std::ranges::views`
 
 C++20 introduces `ranges` and `views`, which allow you to create expressive and efficient loops by operating on views of containers without copying data. Views are lazily evaluated, meaning that operations like filtering, transformation, or reversing are applied only when accessed.
 
@@ -2307,7 +2498,7 @@ Range views are particularly useful when working with large datasets, as they en
 
 Additionally, range views provide clarity and simplicity when dealing with complex operations. They streamline the process of transforming data, making it easier to apply multiple operations in a clean and readable manner, which is especially beneficial in competitive programming scenarios.
 
-#### 2. Parallel Loops with `std::for_each` and `std::execution::par`
+### 2. Parallel Loops with `std::for_each` and `std::execution::par`
 
 C++20 enables parallelism in standard algorithms with `std::execution`. Using parallel execution policies, you can distribute loop iterations across multiple threads, which can drastically reduce the execution time for computationally expensive loops. This is especially useful when working with large datasets in competitive programming.
 
@@ -2340,7 +2531,7 @@ Parallel loops are highly effective for processing large datasets, making them i
 
 However, they are less suitable for small inputs. In such cases, the overhead associated with managing threads may outweigh the performance gains, leading to slower execution compared to traditional loops.
 
-### 3. `constexpr` Loops
+## 3. `constexpr` Loops
 
 With C++20, `constexpr` has been extended to allow more complex loops and logic at compile time. While this can lead to ultra-efficient code where calculations are precomputed during compilation, this technique has limited utility in competitive programming, where dynamic inputs are a central aspect of the problem. Since competitive programming requires handling varying inputs provided at runtime, `constexpr` loops are generally less useful in this context.
 
@@ -2374,11 +2565,11 @@ Compile-time efficiency allows for faster runtime performance, as all necessary 
 
 This approach is ideal for constant, static data. When all relevant data is known ahead of time, compile-time computation removes the need for runtime processing, providing a significant performance boost by bypassing real-time calculations.
 
-**Considerations for competitive programmings**:
+### Considerations for competitive programmings
 
-While constexpr loops are not suitable for processing dynamic inputs directly, they can be strategically used to create lookup tables or pre-compute values that are then utilized during runtime calculations. This can be particularly useful in problems involving mathematical sequences, combinatorics, or other scenarios where certain calculations can be predetermined. **However, it's important to balance the use of pre-computed data with memory constraints, as large lookup tables might exceed memory limits in some competitive programming environments**.
+While constexpr loops are not suitable for processing dynamic inputs directly, they can be strategically used to create lookup tables or pre-compute values that are then utilized during runtime calculations. This can be particularly useful in problems involving mathematical sequences, combinatorics, or other scenarios where certain calculations can be predetermined. _However, it's important to balance the use of pre-computed data with memory constraints, as large lookup tables might exceed memory limits in some competitive programming environments_.
 
-#### 4. Early Exit Loops
+## 4. Early Exit Loops
 
 In competitive programming, optimizing loops to exit early when a condition is met can drastically reduce execution time. This approach is especially useful when the solution does not require processing the entire input if an early condition is satisfied.
 
@@ -2407,11 +2598,11 @@ Early exit loops improve efficiency by terminating as soon as a specified condit
 
 This technique is particularly useful in search problems. By exiting the loop early when a target value is found, it can significantly enhance performance, reducing the overall execution time.
 
-**Considerations for competitive programmings**:
+### Considerations for competitive programmings
 
 Early exit loops are highly practical, as they allow a solution to be reached without the need to examine all the data. By cutting down unnecessary iterations, they help reduce execution time, making them particularly useful in scenarios where a result can be determined quickly based on partial input.
 
-### 5. Indexed Loops with Range-Based `for`
+## 5. Indexed Loops with Range-Based `for`
 
 While C++ offers powerful range-based `for` loops, there are scenarios where accessing elements by index is essential, especially when the loop logic requires modifying the index or accessing adjacent elements. Range-based `for` loops cannot directly access the index, so indexed loops remain valuable for such cases.
 
@@ -2444,7 +2635,7 @@ Indexed loops are well-suited for dynamic access, offering the flexibility requi
 
 However, they are less expressive compared to range-based loops. While they provide detailed control, they tend to be more verbose and less concise than the streamlined syntax offered by range-based alternatives.
 
-### 6. Standard Library Algorithms (`std::for_each`, `std::transform`)
+## 6. Standard Library Algorithms (`std::for_each`, `std::transform`)
 
 Using standard library algorithms like `std::for_each` and `std::transform` allows for highly optimized iteration and transformation of container elements. These algorithms are highly optimized, making them ideal for competitive programming scenarios where efficiency is crucial.
 
@@ -2474,11 +2665,11 @@ Standard library algorithms are highly optimized for performance, often surpassi
 
 Additionally, these functions are concise and clear, providing a clean and expressive syntax to apply operations on containers. This simplicity enhances code readability while maintaining high performance, making them ideal for competitive programming.
 
-**Considerations for competitive programmings**:
+### Considerations for competitive programmings
 
 Standard library algorithms are great for transformation tasks, allowing you to apply operations on container elements with minimal code. They maximize efficiency while keeping the implementation simple and concise, making them particularly effective for handling transformations in competitive programming scenarios.
 
-### Summary Table of Useful Loop Techniques for competitive programmings
+## Summary Table of Useful Loop Techniques for competitive programmings
 
 | Technique                                 | Best Use Case                            | Efficiency Considerations                                                          |
 | ----------------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------------- |
@@ -2488,25 +2679,25 @@ Standard library algorithms are great for transformation tasks, allowing you to 
 | Indexed Loops                             | Precise control over iteration           | Offers flexibility and control for complex iteration logic or index manipulation.  |
 | Standard Library Algorithms               | Applying transformations or actions      | Well-optimized algorithms that simplify code and improve performance.              |
 
-### Techniques Not Recommended for competitive programmings
+**Techniques Not Recommended for competitive programmings**:
 
 | Technique         | Reasoning                                                                                                      |
 | ----------------- | -------------------------------------------------------------------------------------------------------------- |
 | `constexpr` Loops | Compile-time only, cannot handle dynamic input, thus impractical for runtime competitive programming problems. |
 
-## Problems in One-Dimensional Arrays
+# Problems in One-Dimensional Arrays
 
 One-dimensional arrays are fundamental data structures in computer science and are the basis for many algorithmic problems. This classification organizes common problem types, algorithms, and techniques used to solve challenges involving 1D arrays. From basic operations to advanced optimization strategies, this comprehensive guide covers a wide range of approaches, helping developers and algorithm enthusiasts to identify and apply the most efficient solutions to array-based problems.
 
-### Preprocessing and Efficient Query Techniques
+## Preprocessing and Efficient Query Techniques
 
 Methods that prepare the array to respond to queries quickly, typically trading preprocessing time for faster queries. This approach involves investing time upfront to organize or transform the array data in a way that allows for rapid responses to subsequent queries. For example, in a scenario where frequent sum calculations of array intervals are needed, a preprocessing step might involve creating a prefix sum array. This initial step takes $O(n)$ time but enables constant-time $O(1)$ sum queries afterward, as opposed to $O(n)$ time per query without preprocessing. This trade-off is beneficial when the number of queries is large, as the initial time investment is offset by the significant speed improvement in query operations. Such techniques are common in algorithmic problem-solving, where strategic data preparation can dramatically enhance overall performance, especially in scenarios with repetitive operations on the same dataset.
 
-#### Algorithm: Sums and Prefixes
+### Algorithm: Sums and Prefixes
 
 Calculation of cumulative sums for fast range queries. Reduces complexity from $O(n^2)$ to $O(n)$ in construction and $O(1)$ per query.
 
-##### Algorithm: Prefix Sum Array
+#### Algorithm: Prefix Sum Array
 
 The Prefix Sum Array is a preprocessing technique used to efficiently calculate the sum of elements in a given range of an array. It works by creating a new array where each element is the sum of all previous elements in the# Prefix Sum Array Algorithm
 
@@ -2558,7 +2749,7 @@ We will prove that the range sum $\text{Sum}(i, j) = P[j] - P[i - 1]$ correctly 
   $$
 - This shows that $\text{Sum}(i, j)$ correctly computes the sum of elements from $A[i]$ to $A[j]$.
 
-##### Algorithm Prefix Sum in Plain English
+#### Algorithm Prefix Sum in Plain English
 
 The **Prefix Sum Array** is an algorithm that helps quickly calculate the sum of any subarray (a range of elements) within an original array. After an initial preprocessing step, you can find the sum of elements between any two indices in constant time.
 
@@ -2586,7 +2777,7 @@ The **Prefix Sum Array** is an algorithm that helps quickly calculate the sum of
    - $P[j]$ includes the sum from $A[0]$ to $A[j]$.
    - Subtracting $P[i - 1]$, which is the sum from $A[0]$ to $A[i - 1]$, leaves us with the sum from $A[i]$ to $A[j]$.
 
-#### Underatanding
+### Underatanding
 
 1. **Construction Phase**:
 
@@ -2603,7 +2794,7 @@ The **Prefix Sum Array** is an algorithm that helps quickly calculate the sum of
    - **Quick Calculation**:
      - By using the formula, we reduce the time complexity of range sum queries to $O(1)$.
 
-##### Example
+#### Example
 
 Suppose we have the array:
 
@@ -2636,7 +2827,7 @@ Example Query\*: Find the sum of elements from index $2$ to $5$ in $A$.
   - Sum of $A[2]$ to $A[5]$:
     - $A[2] + A[3] + A[4] + A[5] = 4 + 1 + 5 + 9 = 19$
 
-##### Complexity Analysis
+#### Complexity Analysis
 
 The Prefix Sum Array algorithm's complexity can be analyzed by considering its two main operations: constructing the prefix sum array and performing range sum queries.
 
@@ -2652,7 +2843,7 @@ The space complexity for executing queries is $O(1)$, as no additional space is 
 
 In conclusion, the Prefix Sum Array algorithm has a time complexity of $O(n)$ for the preprocessing step of constructing the prefix sum array and $O(1)$ time per range sum query. The overall space complexity is $O(n)$ due to the storage of the prefix sum array. This efficiency makes the algorithm particularly useful when dealing with multiple range sum queries on a static array, as it significantly reduces the time complexity per query from $O(n)$ to $O(1)$ after the initial preprocessing.
 
-###### The Plate Balancer (Problem 2)
+##### The Plate Balancer (Problem 2)
 
 In a famous restaurant, Chef André is known for his incredible skill in balancing plates. He has a long table with several plates, each containing a different amount of food. André wants to find the "Magic Plate" - the plate where, when he places his finger underneath it, the weight of the food on the left and right balances perfectly.
 
@@ -2694,7 +2885,7 @@ $$-1000 \leq plates[i] \leq 1000$$
 
 Note: André is very skilled, so don't worry about the real-world physics of balancing plates. Focus only on the mathematical calculations!
 
-####### Naïve Solution
+###### Naïve Solution
 
 This solution is considered naïve because it doesn't take advantage of any precomputation or optimization techniques such as the Prefix Sum Array. Instead, it recalculates the sum of elements to the left and right of each plate using two separate loops for every plate. This leads to a time complexity of $O(n^2)$, as for each plate, the entire array is traversed twice — once for the left sum and once for the right sum.
 
@@ -2806,7 +2997,7 @@ The following table summarizes the time and space complexities of each step in t
 
 This approach, while correct, leads to a quadratic time complexity of $O(n^2)$ because it recalculates the sums from scratch for every plate. The space complexity remains constant at $O(1)$, as no extra space is required beyond the scalar variables for sum calculation. Nevertheless, there are better solutions.
 
-####### Prefix Sum Array Solution
+###### Prefix Sum Array Solution
 
 Let's start solving the problem "The Plate Balancer" using the Prefix Sum Array algorithm, using Python to create a pseudocode:
 
@@ -2927,7 +3118,7 @@ The implementation follows the Prefix Sum Array algorithm efficiently, construct
 | Loop Through Plates            | Checking all plates for the Magic Plate              | $O(n)$           | $O(1)$                      |
 | Overall Complexity             | Total time and space complexities                    | $O(n)$           | $O(n)$                      |
 
-###### Competitive Solution
+##### Competitive Solution
 
 The following C++20 code implements the _Prefix Sum Array_ algorithm, with several optimizations designed to reduce typing effort in a competitive programming context. We eliminated the use of functions, as the entire code is kept within the `main` block, avoiding the overhead of function calls. _This approach prioritizes minimal typing and fast execution by copying and pasting the logic rather than encapsulating it into reusable components_.
 
@@ -3036,7 +3227,7 @@ int main() {
 }
 ```
 
-#### Algorithm: Difference Array - Efficient Range Updates
+### Algorithm: Difference Array - Efficient Range Updates
 
 The Difference Array algorithm is a powerful technique for handling multiple range update operations efficiently. It's particularly useful when you need to perform many updates on an array and only query the final result after all updates are complete. Optimizes range updates to $O(1)$ by storing differences between adjacent
 elements.
@@ -3064,7 +3255,7 @@ $$A[i] = \sum_{j=0}^i D[j]$$
 
 This technique allows for $O(1)$ time complexity for each range update operation.
 
-##### Mathematical Proof
+#### Mathematical Proof
 
 Let's prove that the range update operation on $D$ correctly reflects the change in $A$.
 
@@ -3096,7 +3287,7 @@ Let's prove that the range update operation on $D$ correctly reflects the change
 
 This proves that the range update operation on $D$ correctly reflects the desired change in $A$.
 
-##### Difference Array Algorithm Explained in Plain English
+#### Difference Array Algorithm Explained in Plain English
 
 1. **Initialize the Difference Array**
 
@@ -3195,7 +3386,7 @@ $$
 
 The Difference Array algorithm optimizes multiple range updates by reducing the time complexity to $O(1)$ per update. It is especially useful when dealing with scenarios that require numerous range modifications followed by queries for the final array state.
 
-##### Complexity Analysis
+#### Complexity Analysis
 
 The Difference Array algorithm offers significant performance benefits, particularly for scenarios involving multiple range updates. Let's examine its complexity:
 
@@ -3214,7 +3405,7 @@ The efficiency of this algorithm becomes apparent when dealing with multiple ran
 | Array reconstruction   | $O(n)$          | $O(n)$           |
 | **Overall Complexity** | $O(n + q)$      | $O(n)$           |
 
-##### Usage
+#### Usage
 
 The Difference Array algorithm shines in various scenarios where multiple range updates are required, and the final result needs to be computed only after all updates have been applied. Here are some common applications where this technique proves to be particularly effective:
 
@@ -3375,7 +3566,7 @@ The Difference Array algorithm is highly efficient for handling multiple range u
 
 However, the algorithm is not ideal for frequent individual element queries, as reconstructing the array after updates takes $O(n)$. Additionally, to access individual elements after performing multiple updates, it requires a full array reconstruction, which can be a drawback in cases where immediate access to array elements is needed.
 
-##### Problem Example: "Humidity Levels in a Greenhouse" (Problem 1)
+#### Problem Example: "Humidity Levels in a Greenhouse" (Problem 1)
 
 You are responsible for monitoring and adjusting the humidity levels in a greenhouse that contains various plants. The greenhouse has a set of humidity sensors, represented by an array $humidity$, where each position in the array corresponds to the reading of a sensor.
 
@@ -3421,7 +3612,7 @@ After adding $18$ to $humidity[3]$, the array becomes $[36,32,33,82]$, and the s
 - The number of adjustments during the day can vary between $1$ and $10,000$.
 - Each adjustment can increase or decrease the sensor reading by up to $10,000$ units.
 
-###### Naïve Solution
+##### Naïve Solution
 
 **Algorithm**:
 
@@ -3747,7 +3938,7 @@ Finally, we need to clarify lambda functions in C++ 20.
 >
 >   In this case, the lambda can process both integer and floating-point numbers, dynamically adapting to the types of its arguments.
 
-####### Data Type Analysis in the `adjustHumidity` Function
+###### Data Type Analysis in the `adjustHumidity` Function
 
 The choice of `long long` for the return type of the `adjustHumidity` function and for storing intermediate sums is made to ensure safety and prevent overflow in extreme cases:
 
@@ -3760,14 +3951,14 @@ The choice of `long long` for the return type of the `adjustHumidity` function a
 
 By using `long long`, we ensure that no overflow occurs, even in extreme or unexpected cases. However, this could potentially lead to higher memory usage, which may exceed the limits in some competitive programming environments, depending on memory constraints.
 
-####### Time Complexity Analysis
+###### Time Complexity Analysis
 
 The current implementation recalculates the sum of even numbers in the `humidity` array after each adjustment using the `std::accumulate` function. This results in a time complexity of $O(n \times m)$, where $n$ is the size of the `humidity` array and $m$ is the number of adjustments in the `adjustments` list.
 
 - **Accumulation per adjustment**: For each adjustment, the `std::accumulate` function iterates over all `n` elements in the `humidity` array. This operation takes $O(n)$ time.
 - **Total complexity**: Since there are $m$ adjustments, the overall time complexity becomes $O(n \times m)$. This approach is inefficient for large values of $n$ and $m$ (e.g., if both $n$ and $m$ approach $10^4$), leading to performance issues in cases where the number of elements or adjustments is large.
 
-####### Space Complexity Analysis
+###### Space Complexity Analysis
 
 The space complexity is primarily influenced by the size of the input arrays:
 
@@ -3779,7 +3970,7 @@ In total, the space complexity is $O(n + m)$.
 
 The usage of `long long` ensures that the results and intermediate sums are safe from overflow, but it may slightly increase memory usage compared to using `int`. The overall space requirements are manageable within typical constraints in competitive programming environments, where both $n$ and $m$ are capped at $10^4$.
 
-###### Algorithm for a Slightly Less Naive Code
+##### Algorithm for a Slightly Less Naive Code
 
 1. Initialization:
 
@@ -3952,7 +4143,7 @@ Finally, the results vector is returned, which contains the sum of even numbers 
 >
 > Here, the lambda function uses `auto` to deduce the types of its parameters, making it applicable to both integers and floating-point numbers.
 
-###### A Parallel Competitive Code
+##### A Parallel Competitive Code
 
 Using parallel code in this problem offers a advantage by allowing the calculation of the sum of even humidity values to be distributed across multiple processing threads. This can improve performance, especially for large humidity arrays, as the `reduce` function could leverage parallel execution policies to sum even values concurrently, reducing overall runtime. However, in the current implementation, the sequential execution policy (`exec_seq`) is used to maintain order. Additionally, the Code 3 already employs techniques to reduce verbosity, such as type aliases (`vi`, `vvi`, `vll`) and the use of `auto` for type deduction, making the code cleaner and easier to maintain without sacrificing readability.
 
@@ -4183,7 +4374,7 @@ By distributing the workload across multiple threads, the program can achieve si
 >
 > This enables `reduce` to sum the elements in `vec` concurrently, improving efficiency on large arrays, especially in multi-core environments.
 
-###### Finally, the code using Fenwick tree
+##### Finally, the code using Fenwick tree
 
 I chose to write this code using as much modern C++ as possible. This means you will face two challenges. The first is understanding the Fenwick tree algorithm, and the second is understanding the C++ syntax. To help make this easier, I will explain the code block by block, highlighting each C++ feature and why I chose to write it this way.
 
@@ -4570,8 +4761,8 @@ The **`inline constexpr`** constant `input_method` specifies which input method 
 > 1. **Compile-time array size**:
 >
 > ```cpp
-> constexpr int size = 5;
-> int array[size];  // The size is computed at compile time.
+>  constexpr int size = 5;
+>  int array[size];  // The size is computed at compile time.
 > ```
 >
 > 2. **Compile-time strings**:
@@ -4603,7 +4794,7 @@ The **`inline constexpr`** constant `input_method` specifies which input method 
 
 AINDA TEM MUITO QUE EXPLICAR AQUI.
 
-#### Algorithm: Incremental Sum
+### Algorithm: Incremental Sum
 
 The **Incremental Sum Algorithm** offers an efficient method for maintaining a running sum of specific elements (such as even numbers) in an array while applying adjustments. This approach eliminates the need to recalculate the entire sum after each modification, instead updating the sum incrementally by subtracting old values and adding new ones as necessary.
 
@@ -4639,13 +4830,13 @@ adjust(arr, 0, 6, even_sum)  # even_sum = 12 (6 + 2 + 4)
 adjust(arr, 1, 3, even_sum)  # even_sum = 10 (6 + 4)
 ```
 
-##### Complexity Analysis
+#### Complexity Analysis
 
 The algorithm's overall time complexity can be expressed as $O(n + m)$, where $n$ is the initial array size and $m$ is the number of adjustments. This represents a significant improvement over the naive approach of recalculating the sum after each adjustment, which would result in a time complexity of $O(n \times m)$.
 
 In scenarios involving large arrays with frequent updates, the Incremental Sum Algorithm offers substantial performance benefits. It proves particularly useful in real-time data processing, financial calculations, and various computational problems where maintaining a running sum is crucial. By avoiding redundant calculations, it not only improves execution speed but also reduces computational resource usage, making it an invaluable tool for efficient array manipulation and sum maintenance in a wide range of applications.
 
-##### Incremental Sum Mathematical Definitions
+#### Incremental Sum Mathematical Definitions
 
 Let:
 
@@ -4736,7 +4927,7 @@ With each adjustment, we ensure that:
 
 These operations guarantee that the sum of all even numbers is correctly maintained without the need to recalculate the entire sum after each adjustment.
 
-#### Incremental Sum Algorithm Explained in Plain English
+### Incremental Sum Algorithm Explained in Plain English
 
 The **Incremental Sum Algorithm** efficiently maintains the sum of specific elements in an array (such as even numbers) when the array undergoes frequent changes. Instead of recalculating the entire sum after each modification, it updates the sum incrementally, which saves time and computational resources.
 
@@ -4816,7 +5007,7 @@ Adjustment 3: Change `A[2]` from $3$ to $2$
 3.  **New Value**: `A[2] = 2` (even)
     - Add the new value to the sum: Sum = 10 + 2 = **12**
 
-#### Problem Example: "Humidity Levels in a Greenhouse" (Problem 1)
+### Problem Example: "Humidity Levels in a Greenhouse" (Problem 1)
 
 The same problem we saw earlier in the section: **Algorithm: Difference Array - Efficient Range Updates**. Below is the implementation in C++20:
 
@@ -4896,7 +5087,7 @@ int main() {
 }
 ```
 
-#### Static Array Queries
+### Static Array Queries
 
 Techniques for arrays that don't change between queries, allowing efficient pre-calculations.
 
@@ -4904,29 +5095,29 @@ Techniques for arrays that don't change between queries, allowing efficient pre-
 
 - Problem Example: "Inventory Restocking" - Performs queries after each inventory adjustment
 
-#### Range Minimum Queries (RMQ)
+### Range Minimum Queries (RMQ)
 
 Data structure to find the minimum in any range in $O(1)$ after $O(n \log n)$ preprocessing.
 
 - Algorithm: Sparse Table for RMQ
 
-#### Fenwick Tree
+### Fenwick Tree
 
 Data structure for prefix sums and efficient updates, with operations in $O(\log n)$.
 
 - Algorithm: Binary Indexed Tree (BIT)
 
-### Sliding Window Algorithms
+## Sliding Window Algorithms
 
 Techniques for efficiently processing contiguous subarrays of fixed size.
 
-#### Sliding Window Minimum
+### Sliding Window Minimum
 
 Finds the minimum in a fixed-size window that slides through the array in $O(n)$ using a deque.
 
 - Algorithm: Monotonic Deque
 
-#### Sliding Window Maximum
+### Sliding Window Maximum
 
 Similar to the minimum, but for finding the maximum in each window.
 
@@ -4934,11 +5125,11 @@ Similar to the minimum, but for finding the maximum in each window.
 
 - Problem Example: "Weather Monitoring System" - Uses a sliding window of size k to find the subarray with the highest average
 
-### Multiple Query Processing
+## Multiple Query Processing
 
 Methods for handling multiple queries efficiently.
 
-#### Mo's Algorithm
+### Mo's Algorithm
 
 Imagine you're organizing a library with thousands of books. You need to answer questions about specific sections of the shelves, and each question feels like wandering through endless rows, searching for the right answers. Enter Mo's Algorithm. It’s like having a librarian who doesn’t waste time. This librarian knows exactly how to group your questions, answering them swiftly, without scouring the entire library each time.
 
@@ -4966,7 +5157,7 @@ With Mo's Algorithm, even large sets of queries can be handled efficiently:
 
 This method keeps the operations minimal and ensures a much faster solution.
 
-##### Why Choose $\sqrt{n}$ as the Block Size?
+#### Why Choose $\sqrt{n}$ as the Block Size?
 
 The choice of $\sqrt{n}$ as the block size is crucial for the algorithm's efficiency. Here's why:
 
@@ -4976,7 +5167,7 @@ The choice of $\sqrt{n}$ as the block size is crucial for the algorithm's effici
 
 This choice balances the work done when moving between blocks and within blocks, optimizing overall performance.
 
-##### Complexity Analysis
+#### Complexity Analysis
 
 **Time Complexity Analysis**:
 
@@ -4994,11 +5185,11 @@ $$O(n + q)$$
 
 To understand the space complexity, we need $O(n)$ space to store the array elements and $O(q)$ space to store the queries. As a result, the overall space usage is linear, ensuring that the algorithm remains efficient even for large datasets.
 
-##### Implementation
+#### Implementation
 
 Let's see how to implement Mo's Algorithm in Python and C++20. These implementations assume we're calculating the sum over intervals, but the concept can be adapted for other types of queries.
 
-##### Python Pseudocode
+#### Python Pseudocode
 
 ```python
 import math
@@ -5060,7 +5251,7 @@ result = mo_algorithm(arr, queries)  # Process the queries
 print(result)  # Output the results
 ```
 
-##### C++20 Code Example
+#### C++20 Code Example
 
 ```cpp
 #include <iostream>
@@ -5188,7 +5379,7 @@ Mo's Algorithm is highly effective for range query problems, making it ideal whe
 
 However, there are some limitations to the algorithm. It is not suitable for handling online queries, where answers are required immediately as queries arrive. Additionally, since all queries must be stored, this can become a challenge for extremely large datasets. Finally, implementing Mo's Algorithm can be more complex than simpler, more straightforward methods, which might not be ideal in all cases.
 
-##### Problem: "Humidity Levels in a Greenhouse" (Problem 1)
+#### Problem: "Humidity Levels in a Greenhouse" (Problem 1)
 
 We've already solved this type of problem in _Section 5: Range Query Problems_ of the attached document. In that section, we explored different algorithms and analyzed their time and space complexities when applied to various range query scenarios.
 
@@ -5332,97 +5523,97 @@ For **large inputs** (e.g., very large values of $n$ and $m$):
 
 - The **Slightly Less Naive** solution, while efficient for small inputs, may struggle with scalability as it does not benefit from logarithmic or square root optimizations, leading to potential performance bottlenecks for very large input sizes.
 
-### Auxiliary Data Structures
+## Auxiliary Data Structures
 
 Specific data structures used to optimize operations on arrays.
 
-#### Deque (for Sliding Window Minimum/Maximum)
+### Deque (for Sliding Window Minimum/Maximum)
 
 Double-ended queue that maintains relevant elements of the current window.
 
-#### Sparse Table (for RMQ)
+### Sparse Table (for RMQ)
 
 Structure that stores pre-computed results for power-of-2 intervals.
 
-#### Segment Tree
+### Segment Tree
 
 Tree-based data structure for range queries and updates in $O(\log n)$.
 
-### Complexity Optimization Techniques
+## Complexity Optimization Techniques
 
 Methods to reduce the computational complexity of common operations.
 
-#### Reduction from $O(n^2)$ to $O(n)$
+### Reduction from $O(n^2)$ to $O(n)$
 
 Use of prefix sums to optimize range sum calculations.
 
 - Problem Example: "Sales Target Analysis" - Uses prefix sum technique to optimize subarray calculations
 
-#### Update in $O(1)$
+### Update in $O(1)$
 
 Difference arrays for constant-time range updates.
 
 - Problem Example: "Inventory Restocking" - Makes point adjustments to the inventory
 
-#### Query in $O(1)$ after preprocessing
+### Query in $O(1)$ after preprocessing
 
 RMQ and static array queries with instant responses after pre-calculation.
 
 - Problem Example: "The Plate Balancer" - After calculating cumulative sums, can find the "Magic Plate" in O(n)
 
-#### Processing in $O((n + q) \sqrt{n})$
+### Processing in $O((n + q) \sqrt{n})$
 
 Mo's Algorithm to optimize multiple range queries.
 
-### Subarray Algorithms
+## Subarray Algorithms
 
 Specific techniques for problems involving subarrays.
 
-#### Kadane's Algorithm
+### Kadane's Algorithm
 
 Finds the contiguous subarray with the largest sum in $O(n)$. Useful for sum maximization problems.
 
 - Algorithm: Kadane's Algorithm
 
-#### Two Pointers
+### Two Pointers
 
 Technique for problems involving pairs of elements or subarrays that satisfy certain conditions.
 
 - Algorithm: Two Pointers Method
 
-### Hashing Techniques
+## Hashing Techniques
 
 Methods that use hashing to optimize certain operations on arrays.
 
-#### Prefix Hash
+### Prefix Hash
 
 Uses hashing to quickly compare substrings or subarrays.
 
 - Algorithm: Rolling Hash
 
-#### Rolling Hash
+### Rolling Hash
 
 Technique to efficiently calculate hashes of substrings or subarrays when sliding a window.
 
 - Algorithm: Rabin-Karp Algorithm
 
-### Partitioning Algorithms
+## Partitioning Algorithms
 
 Techniques for dividing or reorganizing arrays.
 
-#### Partition Algorithm (QuickSelect)
+### Partition Algorithm (QuickSelect)
 
 Used to find the kth smallest element in average linear time.
 
 - Algorithm: QuickSelect
 
-#### Dutch National Flag
+### Dutch National Flag
 
 Algorithm to partition an array into three parts, useful in sorting problems with few unique values.
 
 - Algorithm: Dutch National Flag Algorithm
 
-### The Fenwick Tree
+## The Fenwick Tree
 
 The Fenwick Tree, also know as Binary Indexed Tree (BIT), is an efficient data structure designed to handle dynamic cumulative frequency tables. It was introduced by Peter M. Fenwick in 1994 in his paper _"A new data structure for cumulative frequency tables."_
 
@@ -5479,7 +5670,7 @@ Now, sum queries have $O(1)$ complexity, but updates still require $O(n)$ to reb
 
 The Binary Indexed Tree offers a balance between these two approaches, allowing both updates and queries in $O(\log n)$.
 
-#### Fundamental Concept
+### Fundamental Concept
 
 The Binary Indexed Tree (BIT) is built on the idea that each index $i$ in the tree stores a cumulative sum of elements from the original array. **The range of elements summed at each index $i$ is determined by the position of the least significant set bit (LSB) in the binary representation of $i$**.
 
@@ -5541,7 +5732,7 @@ The value stored in each position of the Fenwick tree is the incremental contrib
 ![]({{ site.baseurl }}/assets/images/bit1.jpg){: class="lazyimg"}
 _Gráfico 1.1 - Example Fenwick tree diagram._{: class="legend"}
 
-##### Querying the Fenwick tree
+#### Querying the Fenwick tree
 
 When querying the sum of elements from the start of the array to index $i$, the Fenwick tree allows us to sum over non-overlapping segments by traversing the tree upwards:
 
@@ -5565,7 +5756,7 @@ Thus, the sum of elements from index $0$ to $5$ is:
 
 $$ \text{sum}(0, 5) = \text{BIT}[5] + \text{BIT}[4] = A[5] + (A[0] + A[1] + A[2] + A[3] + A[4]) $$
 
-##### Updating the Fenwick tree
+#### Updating the Fenwick tree
 
 When updating the value of an element in the original array, the Fenwick tree allows us to update all the relevant cumulative sums efficiently. Here's the pseudocode for the update operation:
 
@@ -5583,9 +5774,9 @@ For example, if we update $A[4]$, the Fenwick tree must update the sums stored a
 
 In each case, the number of operations required is proportional to the number of set bits in the index, which guarantees that both update and query operations run in $O(\log n)$.
 
-#### Basic Operations
+### Basic Operations
 
-##### Update
+#### Update
 
 To update an element at position $i$, we traverse the tree as follows:
 
@@ -5600,7 +5791,7 @@ void update(int i, int delta) {
 **[Image placeholder]**
 _Illustrate the update process, showing how the Fenwick tree array is updated step by step using the least significant bit._
 
-##### 4.2 Prefix Sum Query
+#### 4.2 Prefix Sum Query
 
 To compute the sum of elements from 0 to $i$:
 
@@ -5617,7 +5808,7 @@ int query(int i) {
 **[Image placeholder]**
 _Visualize the prefix sum query operation, showing how the Fenwick tree is traversed from $i$ down to 0 using the least significant bit._
 
-##### 4.3 Range Query
+#### 4.3 Range Query
 
 To compute the sum of elements in the range $[l, r]$:
 
@@ -5627,7 +5818,7 @@ int rangeQuery(int l, int r) {
 }
 ```
 
-#### 5. Fenwick tree Construction
+### 5. Fenwick tree Construction
 
 The Fenwick tree can be constructed in $O(n)$ time using the following technique:
 
@@ -5650,16 +5841,16 @@ vector<int> constructBIT(const vector<int>& arr) {
 **[Image placeholder]**
 _An illustration that explains how the Fenwick tree is constructed from an array, showing the incremental process of building the tree._
 
-#### Complexity Analysis
+### Complexity Analysis
 
 - Construction: $O(n)$
 - Update: $O(\log n)$
 - Query: $O(\log n)$
 - Space: $O(n)$
 
-#### Variations and Extensions
+### Variations and Extensions
 
-##### Range Update and Point Query
+#### Range Update and Point Query
 
 It is possible to modify the Fenwick tree to support range updates and point queries:
 
@@ -5674,7 +5865,7 @@ int pointQuery(int i) {
 }
 ```
 
-##### Range Update and Range Query
+#### Range Update and Range Query
 
 To support both range updates and range queries, we need two Fenwick trees:
 
@@ -5695,7 +5886,7 @@ int rangeQuery(int l, int r) {
 }
 ```
 
-##### 2D Fenwick tree
+#### 2D Fenwick tree
 
 The Fenwick tree can be extended to two dimensions:
 
@@ -5718,14 +5909,14 @@ int query2D(int x, int y) {
 **[Image placeholder]**
 _A diagram illustrating how a 2D Fenwick tree operates, showing how updates and queries are performed in two dimensions._
 
-#### Applications
+### Applications
 
 1. Efficient computation of prefix sums in mutable arrays
 2. Counting inversions in an array
 3. Solving the "k-th smallest element" problem
 4. Implementation of arithmetic coding algorithm
 
-#### Comparison with Other Structures
+### Comparison with Other Structures
 
 | Structure    | Update      | Query       | Space  |
 | ------------ | ----------- | ----------- | ------ |
@@ -5736,7 +5927,7 @@ _A diagram illustrating how a 2D Fenwick tree operates, showing how updates and 
 
 The Fenwick tree offers a good balance between update and query efficiency, with a simpler implementation than a Segment Tree.
 
-#### Problem Example: "Humidity Levels in a Greenhouse" (Problem 1)
+### Problem Example: "Humidity Levels in a Greenhouse" (Problem 1)
 
 The same problem we saw earlier in the section: **Algorithm: Difference Array - Efficient Range Updates**. Below is the implementation in C++20:
 
@@ -6158,7 +6349,7 @@ The **`inline constexpr`** constant `input_method` specifies which input method 
 
 AINDA TEM MUITO QUE EXPLICAR AQUI.
 
-#### Inventory Restocking
+### Inventory Restocking
 
 You manage a warehouse where products are stored and moved frequently. The warehouse tracks its inventory by recording the stock count at different times during the day in an array $inventory$. Occasionally, inventory managers report the amount by which a product's stock needs to be adjusted, represented by an integer array $adjustments$, where each adjustment is a pair $[adjustment, index]$. Your task is to apply these adjustments and after each, calculate the total count of products with even stock numbers.
 
@@ -6206,7 +6397,7 @@ Initially, the array is $[10, 3, 5, 6, 8, 2]$, and the sum of even values is $10
 
 The input will be provided via **hardcoded values** inside the code for testing purposes.
 
-##### Naïve Solution
+#### Naïve Solution
 
 - Initially, the even numbers in $inventory$ are $10$, $6$, $8$, $2$. The sum of these values is $26$.
 - After the first adjustment $[3, 1]$, the inventory becomes $[10, 6, 5, 6, 8, 2]$. The even numbers are now $10$, $6$, $8$, $2$. The sum remains $26$.
@@ -6426,7 +6617,7 @@ This bitwise approach is **faster** than using the modulo operation (`inventory[
 > 2. **Bit Manipulation**: They are commonly used for tasks such as toggling, setting, and clearing bits in low-level programming, such as working with hardware or network protocols.
 > 3. **Masking and Flagging**: Bitwise operators are often used to manipulate flags in bitmasks, where individual bits represent different conditions or options.
 
-#### 4 - Sales Target Analysis
+### 4 - Sales Target Analysis
 
 You are tasked with analyzing sales data to determine how many subarrays of daily sales sum to a multiple of a target value $T$ . The sales data is recorded in an array sales , and you need to calculate how many contiguous subarrays of sales have a sum divisible by $T$ .
 
@@ -6468,7 +6659,7 @@ There are $7$ subarrays whose sum is divisible by $T=5$ :
 
 The input is provided via command-line arguments.
 
-##### Naïve Code
+#### Naïve Code
 
 The algorithm works as follows:
 
@@ -6663,49 +6854,49 @@ int main(int argc, char* argv[]) {
 > | Exception Safety   | No                            | Yes (uses C++ exceptions)                             |
 > | Overflow/Underflow | No handling                   | Detects and throws `std::out_of_range`                |
 
-## Search and Sorting Algorithms
+# Search and Sorting Algorithms
 
-### Binary Search
+## Binary Search
 
 Problems that require efficient lookup in a sorted array or determining a condition within a range can be solved using binary search with time complexity $O(\log n)$.
 
-### Sorting
+## Sorting
 
 Sorting problems involve ordering data to simplify subsequent tasks. Efficient sorting algorithms, such as mergesort or quicksort, run in $O(n \log n)$ time and are frequently needed as a preprocessing step for more complex algorithms.
 
-## Data Structures
+# Data Structures
 
-### Stacks and Queues
+## Stacks and Queues
 
 Problems involving stack-based or queue-based flows, where order of insertion and removal (FIFO/LIFO) is critical, appear often.
 
-### Trees
+## Trees
 
 Binary trees, AVL trees, or binary search trees (BSTs) are used in problems requiring fast insertions, deletions, and lookups. Segment trees or Fenwick trees (binary indexed trees) are commonly used for range query problems.
 
-### Priority Queues (Heaps)
+## Priority Queues (Heaps)
 
 Heaps are employed in problems like scheduling, dynamic sorting, or pathfinding (Dijkstra’s algorithm) to maintain a dynamic set of elements where the highest (or lowest) priority element can be accessed quickly.
 
-### Hashing
+## Hashing
 
 Hash maps (or dictionaries) are essential in problems requiring constant time lookups for checking membership or counting frequencies of elements.
 
-## Dynamic Programming (DP)
+# Dynamic Programming (DP)
 
-### Knapsack Problem
+## Knapsack Problem
 
 Select items to maximize a total value without exceeding a capacity. Variations include 0/1 Knapsack, fractional knapsack, and bounded knapsack.
 
-### Longest Increasing Subsequence
+## Longest Increasing Subsequence
 
 Find the longest subsequence of a sequence where the elements are in increasing order. The time complexity can be reduced to $O(n \log n)$ using binary search in combination with dynamic programming.
 
-### Grid Pathfinding
+## Grid Pathfinding
 
 DP-based grid traversal problems, such as finding the minimum or maximum cost path from one corner of a grid to another, often appear.
 
-## Dynamic Programming
+# Dynamic Programming
 
 Dynamic Programming is a different way of thinking when it comes to solving problems. Programming itself is already a different way of thinking, so, to be honest, I can say that Dynamic Programming is a different way within a different way of thinking. And, if you haven't noticed yet, there is a concept of recursion trying to emerge in this definition.
 
@@ -6833,7 +7024,7 @@ The Code 1 demonstrates not only our Fibonacci functions but also two functions 
 
 Now, the attentive reader will agree with me: we must to break this code down.
 
-##### The Recursive Function
+#### The Recursive Function
 
 Let's start with `fibonacci(int n)`, the simple and pure tail recursive function.
 
@@ -6854,7 +7045,7 @@ This is a similar C++ recursive function to the one we used to explain recursion
 
 The next function is the C++ memoization version:
 
-##### The Dynamic Programming Function Using Memoization
+#### The Dynamic Programming Function Using Memoization
 
 ```Cpp
 // Recursive function with memoization to calculate Fibonacci
@@ -6892,7 +7083,7 @@ The `fibonacci_memo(int n, std::unordered_map<int, int>& memo)` function works j
 
 Memoization offers significant advantages over the simple recursive approach when implementing the Fibonacci sequence. The primary benefit is improved time complexity, reducing it from exponential $O(2^n)$ to linear $O(n)$. This optimization is achieved by storing previously computed results in a hash table (memo), eliminating redundant calculations that plague the naive recursive method. This efficiency becomes increasingly apparent for larger $n$ values, where the simple recursive method's performance degrades exponentially, while the memoized version maintains linear time growth. Consequently, memoization allows for the computation of much larger Fibonacci numbers in practical time frames.
 
-##### The Dynamic Programming Function Using Tabulation
+#### The Dynamic Programming Function Using Tabulation
 
 The `fibonacci_tabulation(int n)`, which uses a `std::vector`, was designed to be as similar as possible to the tabulation function we studied in Python.
 
@@ -6919,7 +7110,7 @@ _Code 1C - C++ Tabulation Function_{: class="legend"}
 
 Besides the `std::vector` template type, the time and space complexity are the same, $O(n)$, we found in Python version. What left us with the generic part of Code 1: Evaluation.
 
-##### Performance Evaluation and Support Functions
+#### Performance Evaluation and Support Functions
 
 All the effort we have made so far will be useless if we are not able to measure the execution times of these functions. In addition to complexity, we need to observe the execution time. This time will depend on the computational cost of the structures used, the efficiency of the compiler, and the machine on which the code will be executed. I chose to find the average execution time for calculating the tenth, twentieth, and thirtieth Fibonacci numbers. To find the average, we will calculate each of them 1000 times. For that, I created two support functions:
 
@@ -7127,7 +7318,7 @@ The other functions follow a similar pattern to measure and print their executio
 
 The results are printed to the console, showing the performance gain achieved through memoization compared to the recursive and tabulation methods.
 
-##### Running Example 4 - `std::vector`
+#### Running Example 4 - `std::vector`
 
 Example 4, the simple and intuitive code for testing purposes, finds three specific Fibonacci numbers — the 10th, 20th, and 30th — using three different functions, 1,000 times each. This code uses an `int`, `std::vector`, and `std::unordered_map` for storing the values of the Fibonacci sequence and, when executed, presents the following results.
 
@@ -7199,7 +7390,7 @@ _Code Fragment 10 - C++, `std::array`, Tabulation Function_{: class="legend"}
 
 This is basically the same code that we discussed in the previous section, only replacing the `std::vector` class with the `std::array` class. Therefore, we do not need to analyze the code line by line and can consider the flowcharts and complexity analysis already performed.
 
-##### Running Example 5: using `std::array`
+#### Running Example 5: using `std::array`
 
 Running the Example 5 will produces the following result:
 
@@ -7227,7 +7418,7 @@ We have reached an interesting point. Just interesting!
 
 We achieved a performance gain using memoization and tabulation, as evidenced by the different complexities among the recursive $O(n^2)$, memoization $O(n)$, and tabulation $O(n)$. Additionally, we observed a slight improvement in execution time by choosing `std::array` instead of `std::vector`. However, we still have some options to explore. Options never end!
 
-#### Code 3: C-style Array
+### Code 3: C-style Array
 
 We are using a C++ container of integers to store the already calculated Fibonacci numbers as the basis for the two Dynamic Programming processes we are studying so far, memoization and tabulation, one `std::unordered_map` and one `std::vector` or `std::array`. However, there is an even simpler container in C++: the array. The C-Style array.
 
@@ -7270,7 +7461,7 @@ The `cArray_fibonacci_tabulation` function, on the other hand, implements the ta
 
 Again succinct! I think I'm learning. These structures have the same space and time complexities that we have observed since Example 4. In other words, all that remains is to run this code and evaluate the execution times.
 
-##### Running Code 3: using C-Style Array
+#### Running Code 3: using C-Style Array
 
 Will give us the following answer:
 
@@ -7319,7 +7510,7 @@ And there it is, we have found a code fast enough for calculating the nth Fibona
 
 Before we start solving problems with Dynamic Programming, let's summarize the execution time reports in a table for easy visualization and to pique the curiosity of the kind reader.
 
-### Execution Time Comparison Table
+## Execution Time Comparison Table
 
 | Container          | Number | Recursive (ns) | Memoized (ns) | Tabulated (ns) |
 | ------------------ | ------ | -------------- | ------------- | -------------- |
@@ -7337,11 +7528,11 @@ _Tabela 2 - Code Execution Time Comparison_{: class="legend"}
 
 With sufficient practice, Dynamic Programming concepts will become intuitive. I know, the text is dense and complicated. I purposefully mixed concepts of Dynamic Programming, complexity analysis, C++, and performance. If the kind reader is feeling hopeless, stand up, have a soda, walk a bit, and start again. Like everything worthwhile in life, Dynamic Programming requires patience, effort, and time. If, on the other hand, you feel confident, let's move on to our first problem.
 
-### Your First Dynamic Programming Problem
+## Your First Dynamic Programming Problem
 
 Dynamic Programming concepts became popular in the early 21st century thanks to job interviews for large companies. Until then, only high-performance and competitive programmers were concerned with these techniques. Today, among others, we have [LeetCode](https://leetcode.com/) with hundreds, perhaps thousands of problems to solve. I strongly recommend trying to solve some of them. Here, I will only solve problems whose solutions are already available on other sites. You might even come across some from LeetCode problem, but that will be by accident. The only utility of LeetCode, for me, for you, and for them, is that the problems are not easy to find or solve. Let's start with a problem that is now a classic on the internet and, according to legend, was part of a Google interview.
 
-#### The "Two-Sum" problem
+### The "Two-Sum" problem
 
 **Statement**: In a technical interview, you've been given an array of numbers, and you need to find a pair of numbers that sum up to a given target value. The numbers can be positive, negative, or both. Can you design an algorithm that works in $O(n)$ time complexity or better?
 
@@ -7349,7 +7540,7 @@ For example, given the array: `[8, 10, 2, 9, 7, 5]` and the target sum: 11
 
 Your function should return a pair of numbers that add up to the target sum. Your answer must be a function in form: `Values(sequence, targetSum)`, In this case, your function should return (9, 2).
 
-#### Brute-Force for Two-Sum's problem
+### Brute-Force for Two-Sum's problem
 
 The most obvious solution, usually the first that comes to mind, involves checking all pairs in the array to see if any pair meets the desired target value. This solution is not efficient for large arrays; it has a time complexity of $O(n^2)$ where $n$ is the number of elements in the array. The flow of the Brute-Force function can be seen in Flowchart 4.
 
@@ -7472,17 +7663,17 @@ _Code Fragment 12 - Optional implemented in Python_{: class="legend"}
 
 Relying solely on brute-force solutions won't impress interviewers or win coding competitive programmings. It's crucial to strive for solutions with lower time complexity whenever possible. While some problems might not have more efficient alternatives, most interview and competitive programming questions are designed to filter out candidates who only know brute-force approaches.
 
-##### Recursive Approach: Divide and Conquer
+#### Recursive Approach: Divide and Conquer
 
 The recursive solution leverages a two-pointer approach to efficiently explore the array within a dynamically shrinking window defined by the `start` and `end` indices. It operates by progressively dividing the search space into smaller subproblems, each represented by a narrower window, until a base case is reached or the target sum is found. Here's the refined description, flowchart and code:
 
-##### Base Cases
+#### Base Cases
 
 1. **Empty **Input**:** If the array is empty (or if the `start` index is greater than or equal to the `end` index), there are no pairs to consider. In this case, we return `std::nullopt` to indicate that no valid pair was found.
 
 2. **Target Sum Found:** If the sum of the elements at the current `start` and `end` indices equals the `target` value, we've found a matching pair. We return this pair as `std::optional<std::pair<int, int>>` to signal success and provide the result.
 
-##### Recursive Step
+#### Recursive Step
 
 1. **Explore Leftward:** We make a recursive call to the function, incrementing the `start` index by one. This effectively shifts our focus to explore pairs that include the next element to the right of the current `start` position.
 
@@ -7543,7 +7734,7 @@ int main() {
 
 _Code 5: Full code of a two-sum using a recursive function_{: class="legend"}
 
-##### Solution Analysis
+#### Solution Analysis
 
 The recursion systematically explores all possible pairs in the array by moving the start and end indices in a controlled manner. With each recursive call, the problem is reduced until one of the base cases is reached.
 
@@ -7580,7 +7771,7 @@ On the other hand, the recursive solution systematically explores all possible p
 
 In summary, while both approaches solve the problem, the Brute-Force solution is significantly more efficient in terms of time complexity ($O(n^2)$ vs. $O(2^n)$), and it also has a lower space complexity ($O(1)$ vs. $O(n)$). However, we are not interested in either of these solutions. The Brute-Force solution is naive and offers no advantage, and the recursive solution is impractical. Thus, we are left with the Dynamic Programming solutions.
 
-##### Dynamic Programming: memoization
+#### Dynamic Programming: memoization
 
 > Regardless of the efficiency of the recursive code, the first law of Dynamic Programming says: always start with recursion. Thus, the recursive function will be useful for defining the structure of the code using memoization and tabulation.
 
@@ -7590,7 +7781,7 @@ In the context of the two-sum problem, memoization can help reduce the number of
 
 We'll modify the recursive function to check the memoization map before performing any further calculations. If the pair has already been computed, we'll use the stored result instead of recalculating. After calculating the sum of a pair, we'll store the result in the memoization map before returning it. This ensures that future calls with the same pair of indices can be resolved quickly. By using memoization, we aim to reduce the number of redundant calculations, thus improving the efficiency compared to a purely recursive approach.
 
-##### Memoized Recursive Solution in C++20
+#### Memoized Recursive Solution in C++20
 
 The only significant modification in Code 5 is the conversion of the recursive function to Dynamic Programming with memoization. Code 6 presents this updated function.
 
@@ -7639,7 +7830,7 @@ std::optional<std::pair<int, int>> findPairRecursivelyMemo(
 
 _Code Fragment 13 - Two-sum using a Memoized function_{: class="legend"}
 
-##### Complexity Analysis of the Memoized Solution
+#### Complexity Analysis of the Memoized Solution
 
 In the memoized solution, we store the results of the subproblems in a map to avoid redundant calculations. We can analyze the time complexity step-by-step:
 
@@ -7686,7 +7877,7 @@ _Tabela 3 - Brute-Force, Recursive and Memoized Solutions Complexity Comparison_
 
 The situation may seem grim, with the brute-force approach holding the lead as our best solution so far. But don't lose hope just yet! We have a secret weapon up our sleeves: Dynamic Programming with tabulation.
 
-##### Dynamic Programming: tabulation
+#### Dynamic Programming: tabulation
 
 Think of it like this: we've been wandering through a maze, trying every path to find the treasure (our solution). The brute-force approach means we're checking every single path, even ones we've already explored. It's exhausting and time-consuming.
 
@@ -7696,7 +7887,7 @@ In the context of our problem, tabulation means creating a table to store soluti
 
 So, even though the brute-force approach may seem like the only option right now, don't give up! Attention! Spoiler Alert! With Dynamic Programming and tabulation, we can explore the maze more efficiently and hopefully find the treasure we've been seeking.
 
-##### C++ code for Two-Sum problem using tabulation
+#### C++ code for Two-Sum problem using tabulation
 
 The code is:
 
@@ -7749,7 +7940,7 @@ _Code 9: Full code of a two-sum using a tabulated function_{: class="legend"}
 
 The `std::optional<std::pair<int, int>> ValuesTabulation(const std::vector<int>& sequence, int targetSum)` function uses a hash table (`std::unordered_map`) to store elements of the array and their indices. For each element in the array, it calculates the complement, which is the difference between the target sum and the current element. It then checks if the complement exists in the hash table. If the complement is found, a pair that sums to the target has been identified and the function returns this pair. If the complement does not exist, the function stores the current element and its index in the hash table and proceeds to the next element.
 
-##### Complexity Analysis of the Tabulation Function
+#### Complexity Analysis of the Tabulation Function
 
 The `std::optional<std::pair<int, int>> ValuesTabulation(const std::vector<int>& sequence, int targetSum)` function uses a hash table to efficiently find a pair of numbers that add up to the target sum. The function iterates through each element of the array once, making its time complexity $O(n)$. For each element, it calculates the complement (the difference between the target sum and the current element) and checks if this complement exists in the hash table. _Accessing and inserting elements into the hash table both have an average time complexity of $O(1)$, contributing to the overall linear time complexity of the function_.
 
@@ -7776,7 +7967,7 @@ So, while tabulation shines in showcasing your understanding of optimization and
 
 The bottom line? Mastering Dynamic Programming and tabulation is a valuable asset, but knowing when and where to use it is the mark of a true programming champion. Now, all that's left is to analyze the execution times.
 
-##### Execution Time Analysis
+#### Execution Time Analysis
 
 I started by testing with the same code we used to test the Fibonacci functions. However, in my initial analysis, I noticed some inconsistencies in the execution times. To address this, I refined our measurement methodology by eliminating lambda functions and directly measuring execution time within the main loop. This removed potential overhead introduced by the lambdas, leading to more reliable results. So, I wrote a new, simpler, and more direct code to test the functions:
 
@@ -7946,7 +8137,7 @@ As we've seen, when dealing with a small amount of input data, the brute-force a
 
 When we use sophisticated data structures like `std::string` and `std::unordered_map`, we pay a price in terms of computational overhead. Allocating and deallocating memory on the heap for these structures takes time and resources. This overhead becomes especially noticeable when dealing with small datasets, where the time spent managing memory can easily overshadow the actual computation involved. On the other hand, the brute-force method often relies on simple data types and avoids dynamic memory allocation, resulting in a faster and more efficient solution for smaller inputs.
 
-##### The Dynamic Memory Bottleneck
+#### The Dynamic Memory Bottleneck
 
 There are some well-known bottlenecks that can explain why a code with lower complexity runs much slower in a particular environment.
 
@@ -7968,7 +8159,7 @@ The memoized solution, while clever, bears the brunt of both issues – extensiv
 
 In conclusion, the observed differences in execution times can be attributed to the distinct memory access patterns and associated overheads inherent in each approach. Understanding these nuances is crucial for making informed decisions when optimizing code for performance.
 
-#### We will always have C
+### We will always have C
 
 As we delve into Dynamic Programming with C++, our focus is on techniques that shine in interviews and coding competitive programmings. Since competitive coding often favors slick C-style code, we'll zero in on a tabulation solution for this problem. Tabulation, as we know, is usually the most efficient approach. To show you what I mean, check out the `int* ValuesTabulationCStyle(const int* sequence, int length, int targetSum)` function in Code Fragment 12.
 
@@ -8003,7 +8194,7 @@ The C-style function is as straightforward as it gets, and as far as I can tell,
 
 The use of `menset` bring us to analise the function complexity.
 
-##### Two-Sum C-Style Tabulation Function Complexity
+#### Two-Sum C-Style Tabulation Function Complexity
 
 The function `ValuesTabulationCStyle` uses `memset` to initialize the `table` array. The complexity of the function can be divided into two parts:
 
@@ -8052,7 +8243,7 @@ _Output 5: Execution time of Two-Sum solutions, including C-Style Arrays._{: cla
 
 Analyzing Output 5, it's clear that the C-style solution is, for all intents and purposes, twice as fast as the C++ tabulation solution. However, there are a few caveats: the C++ code was written to showcase the language's flexibility, not to optimize for performance. On the other hand, the C-style function was designed for simplicity. Often, simplicity equates to speed, and this is something to maximize when creating a function with linear complexity. _Now, we need to compare the C solution with C++ code that prioritizes high performance over flexibility in writing_.
 
-#### High Performance C++
+### High Performance C++
 
 Code Fragment 15 was rewritten by stripping away all the complex data structures we were previously using. The `main()` function remains largely unchanged, so it's been omitted here. I've also removed the functions used for measuring and printing execution times.
 
@@ -8182,7 +8373,7 @@ Thanks to all this, the C++ version of our function, using `std::array`, runs ju
 
 And this is how C++ code should be for competitive programmings. However, not for interviews. In interviews, unless high performance is specifically requested, what they're looking for is your mastery of the language and the most efficient algorithms. So, an O(n) solution using the appropriate data structures will give you a better chance of success.
 
-#### Exercises: Variations of the Two Sum
+### Exercises: Variations of the Two Sum
 
 There are few interesting variations of Two-Sum problem:
 
@@ -8193,7 +8384,7 @@ There are few interesting variations of Two-Sum problem:
 
 Try to solve these variations. Take as much time as you need; I will wait.
 
-## The Dynamic Programming Classic Problems
+# The Dynamic Programming Classic Problems
 
 From now on, we will explore 10 classic Dynamic Programming problems. For each one, we will delve into Brute-Force techniques, recursion, memoization, tabulation, and finally the most popular solution for each, even if it is not among the techniques we have chosen. The problems we will address are listed in the table below[^2].
 
@@ -8218,7 +8409,7 @@ Stop for a moment, perhaps have a soda or a good wine. Rest a bit, then gather y
 
 This will continue!!!
 
-### Problem 1 Statement: Counting All Possible Paths in a Matrix
+## Problem 1 Statement: Counting All Possible Paths in a Matrix
 
 Given two integers $m$ and $n$, representing the dimensions of a matrix, count all possible distinct paths from the top-left corner $(0,0)$ to the bottom-right corner $(m-1,n-1)$. Each step can either be to the right or down.
 
@@ -8292,7 +8483,7 @@ The bottom-right corner, $dp[2][2]$, holds our answer: $6$ unique paths.
 
 Bear with me, dear reader, as I temporarily diverge from our exploration of Dynamic Programming. Before delving deeper, it's essential to examine how we might solve this problem using a Brute-Force approach.
 
-#### Using Brute-Force
+### Using Brute-Force
 
 To tackle the unique paths problem with a Brute-Force approach, we can use an iterative solution and a stack in C++20. The stack will keep track of our current position in the matrix and the number of paths that led us there. Here's a breakdown of how it works:
 
@@ -8405,7 +8596,7 @@ _Output 7: Execution time of Counting all paths problem using Brute-Force._{: cl
 
 Finally, I won't be presenting the code done with pure recursion. As we've seen, recursion is very elegant and can score points in interviews. However, the memoization solution will include recursion, so if you use memoization and recursion in the same solution, you'll ace the interview.
 
-#### Using Memoization
+### Using Memoization
 
 Code Fragment 17 shows the functions I created to apply memoization. There are two functions: the `int countPathsMemoizationWrapper(int m, int n)` function used to initialize the dp data structure and call the recursive function `int countPathsMemoization(int m, int n, std::vector<std::vector<int>>& dp)`. I used `std::vector` already anticipating that we won't know the size of the matrix beforehand.
 
@@ -8463,7 +8654,7 @@ _Output 9: Comparison between Brute-Force, Memoization and Tabulation functions.
 
 I ran it dozens of times and, most of the time, the memoized function was twice as fast as the Brute-Force function, and sometimes it was three times faster. Now we need to look at the Dynamic Programming solution using tabulation.
 
-#### Using Tabulation
+### Using Tabulation
 
 Like I did before, the Code Fragment 18 shows the function I created to apply tabulation. The function `int countPathsTabulation(int m, int n)` uses Dynamic Programming with tabulation to count all possible paths in an $m \times n$ matrix.
 
@@ -8513,7 +8704,7 @@ Average time for Tabulation: 1838 ns
 
 The key takeaway is this: both memoization and tabulation solutions share the same time complexity. Therefore, in an interview setting, the choice between them boils down to personal preference. But if performance is paramount, tabulation (especially with `std::array` if the input size is known) is the way to go. Of course, now it's up to the diligent reader to test all the functions we've developed to solve problem "Counting All Possible Paths in a Matrix" with `std::array`. Performance has its quirks, and since there are many factors outside the programmer's control involved in execution, we always need to test in the an environment just like the production environment.
 
-### Problem 2 Statement: Subset Sum
+## Problem 2 Statement: Subset Sum
 
 Given $N$ integers and $T$, determine whether there exists a subset of the given set whose elements sum up to $T$.
 
@@ -8552,7 +8743,7 @@ true
 
 The "Subset Sum" problem has already been tackled in the chapter: "Your First Dynamic Programming Problem." Therefore, our diligent reader should review the conditions presented here and see if the solution we presented for the "Two-Sum" problem applies in this case. If not, it'll be up to the reader to adapt the previous code accordingly. I'll kindly wait before we go on.
 
-### Problem 3 Statement: Longest Increasing Subsequence
+## Problem 3 Statement: Longest Increasing Subsequence
 
 You are given an array containing $N$ integers. Your task is to determine the Longest Increasing Subsequence (LIS) in the array, where every element is larger than the previous one.
 
@@ -8589,7 +8780,7 @@ You are given an array containing $N$ integers. Your task is to determine the Lo
 
 The "Longest Increasing Subsequence" (LIS) problem is a classic problem in Dynamic Programming, often appearing in interviews and programming competitive programmings. The goal is to find the length of the longest subsequence in a given array such that all elements of the subsequence are in strictly increasing order. _There are three main approaches to solving this problem: Brute-Force, memoization, and tabulation. Coincidentally, these are the three solutions we are studying_. So, let's go.
 
-#### Brute-Force
+### Brute-Force
 
 In the Brute-Force approach, we systematically generate all possible subsequences of the array and examine each one to determine if it's strictly increasing. The length of the longest increasing subsequence is then tracked and ultimately returned. Here's the algorithm for solving the LIS problem using Brute-Force:
 
@@ -8655,7 +8846,7 @@ _Output 10: Execution time for LIS solution using Brute-Force._{: class="legend"
 
 At this point, our dear reader should have a mantra in mind: 'Don't use Brute-Force... Don't use Brute-Force.' With that said, let's delve into Dynamic Programming algorithms, keeping Brute-Force as a reference point for comparison.
 
-#### Memoization
+### Memoization
 
 Memoization is a handy optimization technique that remembers the results of expensive function calls. If the same inputs pop up again, we can simply reuse the stored results, saving precious time. Let's see how this applies to our LIS problem.
 
@@ -8724,7 +8915,7 @@ In contrast, the memoization approach boasts an average execution time of a mere
 
 Now, let's turn our attention to the last Dynamic Programming technique we are studying: tabulation.
 
-#### Tabulation
+### Tabulation
 
 Tabulation, a bottom-up Dynamic Programming technique, iteratively computes and stores results in a table. For the LIS problem, we create a table `dp` where `dp[i]` represents the length of the LIS ending at index `i`.
 
@@ -8794,7 +8985,7 @@ _Output 12: Execution time for LIS solution using Tabulation._{: class="legend"}
 
 Ultimately, the choice between memoization and tabulation often comes down to personal preference and specific implementation details. Both offer substantial improvements over Brute-Force and are viable options for solving the LIS problem efficiently.
 
-## 5. Graphs and Graph Theory
+# 5. Graphs and Graph Theory
 
 - **Depth-First Search (DFS) and Breadth-First Search (BFS)**: Basic graph traversal algorithms, often used to explore nodes or determine connectivity in graphs.
 
@@ -8806,7 +8997,7 @@ Ultimately, the choice between memoization and tabulation often comes down to pe
 
 - **Strongly Connected Components**: Identifying maximal strongly connected subgraphs in directed graphs using algorithms like Kosaraju or Tarjan’s.
 
-## 6. Computational Geometry
+# 6. Computational Geometry
 
 - **Convex Hull**: Given a set of points, determine the smallest convex polygon that contains all points. Algorithms like Graham’s scan and Jarvis march solve this problem.
 
@@ -8814,7 +9005,7 @@ Ultimately, the choice between memoization and tabulation often comes down to pe
 
 - **Area and Distance Calculations**: Problems involving the calculation of polygon areas, distances between points, or other geometric properties.
 
-## 7. Number Theory and Modular Arithmetic
+# 7. Number Theory and Modular Arithmetic
 
 - **Sieve of Eratosthenes**: Efficiently find all prime numbers up to a certain limit in $O(n \log \log n)$ time.
 
@@ -8822,7 +9013,7 @@ Ultimately, the choice between memoization and tabulation often comes down to pe
 
 - **Modular Exponentiation**: Used in problems requiring efficient exponentiation of large numbers modulo a given integer.
 
-## 8. Combinatorics and Counting
+# 8. Combinatorics and Counting
 
 - **Permutations and Combinations**: Problems where the goal is to count or generate all possible arrangements or selections of elements.
 
@@ -8830,7 +9021,7 @@ Ultimately, the choice between memoization and tabulation often comes down to pe
 
 - **Dynamic Counting Problems**: Counting the number of ways to reach a certain state or configuration, such as in grid traversal or combinatorial game problems.
 
-## 9. String Processing
+# 9. String Processing
 
 - **Pattern Matching**: Finding occurrences of a substring within a string, typically solved using algorithms like KMP (Knuth-Morris-Pratt) or the Z-algorithm.
 
@@ -8838,23 +9029,23 @@ Ultimately, the choice between memoization and tabulation often comes down to pe
 
 - **Trie Data Structures**: Used for efficiently storing and querying a large set of strings, especially useful in prefix-matching problems.
 
-## 10. Simulation and Backtracking
+# 10. Simulation and Backtracking
 
 - **Simulation Problems**: Involve modeling the behavior of a system over time, often requiring careful handling of edge cases and efficiency in handling large inputs.
 
 - **Backtracking**: Used for solving constraint satisfaction problems like Sudoku, N-Queens, and other combinatorial puzzles by trying possible solutions recursively.
 
-## 11. NP-Complete Problems
+# 11. NP-Complete Problems
 
 - **Traveling Salesman Problem (TSP)**: Given a set of cities, determine the shortest possible route that visits each city exactly once and returns to the origin. Although NP-hard, approximate or heuristic solutions are commonly employed in competitions.
 
 - **Clique, Vertex Cover, and Subset Sum**: These are classical NP-complete problems, and while exact solutions are impractical for large instances, small versions or approximation algorithms often appear.
 
-## 12. Ad-hoc Problems
+# 12. Ad-hoc Problems
 
 - **Mathematical Logic or Puzzles**: Problems that require creative or non-standard solutions, often involving logical deduction or clever use of mathematics without a standard algorithmic approach.
 
-## Notes and References
+# Notes and References
 
 [:1] This ideia comes from [Introduction to Dynamic Programming][1]
 [:2] Most of this table came from [Introduction to Dynamic Programming][1]
