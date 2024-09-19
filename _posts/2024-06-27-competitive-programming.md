@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-18T17:59:04.231Z
+lastmod: 2024-09-18T19:53:46.924Z
 ---
 
 ## Introduction
@@ -160,6 +160,8 @@ void read_vector(VI& vec, int n) {
 With the `read_vector` function, you can quickly read a vector of `n` elements:
 
 ```cpp
+FAST_IO
+
 VI numbers;
 read_vector(numbers, n);
 ```
