@@ -36,7 +36,7 @@ featured: false
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-19T15:51:04.883Z
+lastmod: 2024-09-19T15:59:51.591Z
 date: 2024-09-19T15:45:55.405Z
 ---
 
@@ -169,7 +169,9 @@ Happy coding, and may your algorithms always be efficient! 🖥️💪
 6. **Water Tank Volume Calculator**
 
    An engineer is designing a series of water tanks. The volume $Q$ of each cylindrical tank is given by:
-   $Q = \sqrt{\frac{2 * C * D}{H}}$
+
+   $$Q = \sqrt{\frac{2 * C * D}{H}}$$
+
    where $C = 50$ (a flow coefficient) and $H = 30$ (the height of each tank).
    $D$ is the diameter, which varies for each tank. Write a program to calculate $Q$ for a series of diameters input as a comma-separated sequence.
 
@@ -217,6 +219,7 @@ Happy coding, and may your algorithms always be efficient! 🖥️💪
    An economist is modeling savings growth. The model is:
 
    $$savings(n)=savings(n−1)+100savings(n) = savings(n-1) + 100savings(n)=savings(n−1)+100$$
+
    where $n$ is the number of months and $savings(0) = 1000$.
    Write a program to calculate savings for a given number of months.
 

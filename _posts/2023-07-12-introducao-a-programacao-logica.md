@@ -7,23 +7,23 @@ date: 2023-07-13T02:50:56.534Z
 preview: ""
 image: assets/images/prolog1.jpeg
 tags:
-   - Lógica
-   - Programação Lógica
-   - Prolog
+  - Lógica
+  - Programação Lógica
+  - Prolog
 categories:
-   - disciplina
-   - Lógica
-   - material de Aula
-   - matemática
+  - disciplina
+  - Lógica
+  - material de Aula
+  - matemática
 rating: 5
 slug: decifrando-misterios-jornada-da-programacao-logica
 keywords:
-   - lógica
-   - Programação
-   - Programação Lógica
+  - lógica
+  - Programação
+  - Programação Lógica
 draft: true
 toc: true
-lastmod: 2024-09-18T12:31:55.846Z
+lastmod: 2024-09-19T15:59:03.419Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -2523,10 +2523,10 @@ $A$ é o verdadeiro e não é o mentiroso.
 Usando lógica de primeiro grau teremos:
 
 **Definições**:
-V(x): x é o verdadeiro
-M(x): x é o mentiroso
-R(x): x respondeu "Sim" à pergunta "Você é o verdadeiro?"
-D(x, p): x diz que p é verdadeiro
+$V(x)$: $x$ é o verdadeiro
+$M(x)$: $x$ é o mentiroso
+$R(x)$: $x$ respondeu "Sim" à pergunta "Você é o verdadeiro?"
+$D(x, p)$: $x$ diz que p é verdadeiro
 
 **Axiomas**:
 
