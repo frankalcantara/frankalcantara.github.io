@@ -36,7 +36,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-19T23:56:10.470Z
+lastmod: 2024-09-20T00:06:40.707Z
 ---
 
 # 1. Introduction
@@ -167,7 +167,7 @@ VI numbers;
 read_vector(numbers, n);
 ```
 
-**Printing Vectors**
+**Printing Vectors**:
 
 ```cpp
 void print_vector(const VI& vec) {
@@ -1049,7 +1049,7 @@ The **std** namespace is the default namespace of the C++ Standard Library. It c
 
 The statement `using namespace std;` allows you to use all elements of the `std` namespace without needing to prefix them with `std::`. This can make the code more concise and readable, especially in small programs or educational examples. Additionally, it reduces typing, which is beneficial when time is limited and valuable, such as during competitive programmings.
 
-##**Example**: Without `using namespace std;`
+**Example Without `using namespace std;`**:
 
 ```cpp
 #include <iostream>
@@ -1065,7 +1065,7 @@ int main() {
 }
 ```
 
-##**Example**: With `using namespace std;`
+**Example With `using namespace std;`**:
 
 ```cpp
 #include <iostream>
@@ -1158,7 +1158,7 @@ Vectors are one of the most versatile data structures used in competitive progra
 
 Matrices, represented as vectors of vectors, are particularly useful in problems involving multi-dimensional data manipulation, such as game boards, adjacency matrices in graphs, and dynamic programming tables. Vectors and matrices enable frequent operations like row and column manipulation, matrix transposition, and access to specific submatrices, providing flexibility and control over data arrangement and processing.
 
-### Vectors
+## Vectors
 
 In C++, the `vector` class, part of the Standard Template Library (STL), is a dynamic array that provides a versatile and efficient way to manage collections of elements. Unlike traditional arrays, vectors can automatically resize themselves when elements are added or removed, making them particularly useful in competitive programming where the size of data structures may vary during execution.
 
@@ -2777,7 +2777,7 @@ The **Prefix Sum Array** is an algorithm that helps quickly calculate the sum of
    - $P[j]$ includes the sum from $A[0]$ to $A[j]$.
    - Subtracting $P[i - 1]$, which is the sum from $A[0]$ to $A[i - 1]$, leaves us with the sum from $A[i]$ to $A[j]$.
 
-### Underatanding
+### Understanding
 
 1. **Construction Phase**:
 
@@ -4944,17 +4944,17 @@ The **Incremental Sum Algorithm** efficiently maintains the sum of specific elem
 
    1. **Subtract the Old Value (if it affects the sum)**:
 
-   - Check if the old value at the adjusted index meets the condition (e.g., is even).
-   - If it does, subtract this old value from the sum.
+      - Check if the old value at the adjusted index meets the condition (e.g., is even).
+      - If it does, subtract this old value from the sum.
 
    2. **Update the Array Element**:
 
-   - Modify the array element with the new value.
+      - Modify the array element with the new value.
 
    3. **Add the New Value (if it affects the sum)**:
 
-   - Check if the new value meets the condition.
-   - If it does, add the new value to the sum.
+      - Check if the new value meets the condition.
+      - If it does, add the new value to the sum.
 
    These steps ensure that the sum remains accurate without needing to recalculate it from scratch.
 
@@ -5336,7 +5336,7 @@ void moAlgorithm(vector<int>& arr, vector<Query>& queries) {
 
 The code begins by reading the array and the queries. Next, the queries are sorted using the block decomposition technique. As we process each query, the current segment is adjusted to match the query’s range, and the current sum is updated. Finally, the answers are stored and output in the order of the original queries.
 
-##**Example**:
+**Example**:
 
 Let's look at a concrete example to better understand how Mo's Algorithm works in practice.
 
@@ -5707,7 +5707,7 @@ $$1100_2 \& 0100_2 = 0100_2$$
 
 Therefore, $\text{LSB}(12) = 4$. This means that index 12 in the Fenwick tree represents the sum of elements from index 9 to index 12.
 
-##**Example**:
+**Example**:
 
 Let's consider an array $A = [3, 2, -1, 6, 5, 4, -3, 3, 7, 2, 3, 1]$. The corresponding Fenwick tree will store cumulative sums for segments determined by the $\text{LSB}(i)$:
 
@@ -6923,7 +6923,7 @@ Despite this shift, we won't be discarding the work we've done so far. To mainta
 
 As we make this transition, we'll gradually introduce C++ specific optimizations and techniques, broadening your understanding of Dynamic Programming implementation across different language paradigms. I hope this approach will equip you with both a solid conceptual foundation and the practical skills needed for high-performance coding.
 
-#**Example**: 4: Fibonacci in C++ using `std::vectors`
+**Example 4: Fibonacci in C++ using `std::vectors`**:
 
 Let's begin with a straightforward, naive implementation in **C++20**.
 
@@ -7024,7 +7024,7 @@ The Code 1 demonstrates not only our Fibonacci functions but also two functions 
 
 Now, the attentive reader will agree with me: we must to break this code down.
 
-#### The Recursive Function
+## The Recursive Function
 
 Let's start with `fibonacci(int n)`, the simple and pure tail recursive function.
 
@@ -7045,7 +7045,7 @@ This is a similar C++ recursive function to the one we used to explain recursion
 
 The next function is the C++ memoization version:
 
-#### The Dynamic Programming Function Using Memoization
+### The Dynamic Programming Function Using Memoization
 
 ```Cpp
 // Recursive function with memoization to calculate Fibonacci
@@ -7083,7 +7083,7 @@ The `fibonacci_memo(int n, std::unordered_map<int, int>& memo)` function works j
 
 Memoization offers significant advantages over the simple recursive approach when implementing the Fibonacci sequence. The primary benefit is improved time complexity, reducing it from exponential $O(2^n)$ to linear $O(n)$. This optimization is achieved by storing previously computed results in a hash table (memo), eliminating redundant calculations that plague the naive recursive method. This efficiency becomes increasingly apparent for larger $n$ values, where the simple recursive method's performance degrades exponentially, while the memoized version maintains linear time growth. Consequently, memoization allows for the computation of much larger Fibonacci numbers in practical time frames.
 
-#### The Dynamic Programming Function Using Tabulation
+### The Dynamic Programming Function Using Tabulation
 
 The `fibonacci_tabulation(int n)`, which uses a `std::vector`, was designed to be as similar as possible to the tabulation function we studied in Python.
 
@@ -7110,7 +7110,7 @@ _Code 1C - C++ Tabulation Function_{: class="legend"}
 
 Besides the `std::vector` template type, the time and space complexity are the same, $O(n)$, we found in Python version. What left us with the generic part of Code 1: Evaluation.
 
-#### Performance Evaluation and Support Functions
+### Performance Evaluation and Support Functions
 
 All the effort we have made so far will be useless if we are not able to measure the execution times of these functions. In addition to complexity, we need to observe the execution time. This time will depend on the computational cost of the structures used, the efficiency of the compiler, and the machine on which the code will be executed. I chose to find the average execution time for calculating the tenth, twentieth, and thirtieth Fibonacci numbers. To find the average, we will calculate each of them 1000 times. For that, I created two support functions:
 
@@ -7318,7 +7318,7 @@ The other functions follow a similar pattern to measure and print their executio
 
 The results are printed to the console, showing the performance gain achieved through memoization compared to the recursive and tabulation methods.
 
-#### Running Example 4 - `std::vector`
+**Running Example 4 - `std::vector`**
 
 Example 4, the simple and intuitive code for testing purposes, finds three specific Fibonacci numbers — the 10th, 20th, and 30th — using three different functions, 1,000 times each. This code uses an `int`, `std::vector`, and `std::unordered_map` for storing the values of the Fibonacci sequence and, when executed, presents the following results.
 
@@ -7344,7 +7344,7 @@ _Output 1 - running Example 4 - std::vector_{: class="legend"}
 
 the careful reader should note that the execution times vary non-linearly and, in all cases, for this problem, the Dynamic Programming version using tabulation was faster. There is much discussion about the performance of the Vector class compared to the Array class. To test the performance differences between `std::vector` and `std::array`, we will retry using `std::array`
 
-#**Example**: 5: using `std::array`
+**Example 5: using `std::array`**:
 
 First and foremost, `std::array` is a container from the C++ Standard Library with some similarities to, and some differences from, `std::vector`, namely:
 
@@ -7390,7 +7390,7 @@ _Code Fragment 10 - C++, `std::array`, Tabulation Function_{: class="legend"}
 
 This is basically the same code that we discussed in the previous section, only replacing the `std::vector` class with the `std::array` class. Therefore, we do not need to analyze the code line by line and can consider the flowcharts and complexity analysis already performed.
 
-#### Running Example 5: using `std::array`
+**Example 5: using `std::array`**
 
 Running the Example 5 will produces the following result:
 
@@ -7418,7 +7418,7 @@ We have reached an interesting point. Just interesting!
 
 We achieved a performance gain using memoization and tabulation, as evidenced by the different complexities among the recursive $O(n^2)$, memoization $O(n)$, and tabulation $O(n)$. Additionally, we observed a slight improvement in execution time by choosing `std::array` instead of `std::vector`. However, we still have some options to explore. Options never end!
 
-### Code 3: C-style Array
+#### Code 3: C-style Array
 
 We are using a C++ container of integers to store the already calculated Fibonacci numbers as the basis for the two Dynamic Programming processes we are studying so far, memoization and tabulation, one `std::unordered_map` and one `std::vector` or `std::array`. However, there is an even simpler container in C++: the array. The C-Style array.
 
@@ -8413,7 +8413,7 @@ This will continue!!!
 
 Given two integers $m$ and $n$, representing the dimensions of a matrix, count all possible distinct paths from the top-left corner $(0,0)$ to the bottom-right corner $(m-1,n-1)$. Each step can either be to the right or down.
 
-#**Input**:
+**Input**:
 
 - Two integers $m$ and $n$ where $1 \leq m, n \leq 100$.
 
@@ -8421,7 +8421,7 @@ Given two integers $m$ and $n$, representing the dimensions of a matrix, count a
 
 - An integer representing the number of distinct paths from $(0,0)$ to $(m-1,n-1)$.
 
-#**Example**:
+**Example**:
 
 **Input**:
 3 3
@@ -8429,7 +8429,7 @@ Given two integers $m$ and $n$, representing the dimensions of a matrix, count a
 **Output**:
 6
 
-#**Constraints**:
+**Constraints**:
 
 - You can only move to the right or down in each step.
 
@@ -9050,4 +9050,4 @@ Ultimately, the choice between memoization and tabulation often comes down to pe
 [:1] This ideia comes from [Introduction to Dynamic Programming][1]
 [:2] Most of this table came from [Introduction to Dynamic Programming][1]
 [:3] Peter M. Fenwick (1994). "A new data structure for cumulative frequency tables". Software: Practice and Experience. 24 (3): 327–336. CiteSeerX 10.1.1.14.8917. [doi:10.1002/spe.4380240306](https://onlinelibrary.wiley.com/doi/10.1002/spe.4380240306).
-[1]: https://cp-algorithms.com/dynamic_programming/intro-to-dp.html
+[:1] https://cp-algorithms.com/dynamic_programming/intro-to-dp.html
