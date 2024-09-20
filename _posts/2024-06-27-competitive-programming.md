@@ -11,7 +11,6 @@ tags:
   - Linguagens Formais
   - Programação Dinâmica
   - Dynamic Programming
-  - Dynamic Programming
   - C++ Algorithms
   - Performance Analysis
   - Coding Examples
@@ -36,7 +35,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-20T00:06:40.707Z
+lastmod: 2024-09-20T13:40:35.951Z
 ---
 
 # 1. Introduction
@@ -1377,6 +1376,7 @@ Here, we replaced `std::endl` with `"\n"` to improve performance by avoiding the
 ### Inserting Elements at a Specific Position
 
 To insert an element at a specific position in a matrix (vector of vectors) in C++ 20, we use the `insert` function. This function can insert rows or columns in a specific location, modifying the structure of the matrix.
+{% raw %}
 
 ```cpp
 
@@ -1402,11 +1402,15 @@ int main() {
 }
 ```
 
+{% endraw %}
+
 This code inserts a new row at position 1 and a new column value at position 0 in the first row. The result is a modified matrix.
 
 ### Removing the Last Element and a Specific Element
 
 To remove the last element of a matrix or a specific element, you can use the `pop_back` function for removing the last row and the `erase` function for removing specific rows or columns.
+
+{% raw %}
 
 ```cpp
 #include <iostream>
@@ -1430,6 +1434,8 @@ int main() {
     return 0;
 }
 ```
+
+{% endraw %}
 
 This code removes the last row from the matrix and removes the first element of the first row.
 
@@ -1504,13 +1510,17 @@ In C++20, we can sort matrices (represented as vectors of vectors) both by rows 
 
 Sorting by rows is straightforward, as we can use the `std::sort` function directly on each row of the matrix.
 
+{% raw %}
+
 ```cpp
 #include <iostream>
 #include <vector>
 #include <algorithm>
 
 int main() {
-   std::vector<std::vector<int>> matrix = {{3, 1, 4}, {1, 5, 9}, {2, 6, 5}};
+   std::vector<std::vector<int>> matrix = {
+        {3, 1, 4}, {1, 5, 9}, {2, 6, 5}
+    };
 
    // Sort each row of the matrix
    for (auto& row : matrix) {
@@ -1527,6 +1537,8 @@ int main() {
 }
 ```
 
+{% endraw %}
+
 This code sorts each row of the matrix independently. The time complexity for sorting by rows is $O(m \cdot n \log n)$, where $m$ is the number of rows and $n$ is the number of columns.
 
 ### Sorting by Columns
@@ -1539,7 +1551,7 @@ Sorting by columns is more complex because the elements in a column are not cont
 #include <algorithm>
 
 int main() {
-   std::vector<std::vector<int>> matrix = {{3, 1, 4}, {1, 5, 9}, {2, 6, 5}};
+   std::vector<std::vector<int>> matrix = { {3, 1, 4}, {1, 5, 9}, {2, 6, 5} };
    int rows = matrix.size();
    int cols = matrix[0].size();
 
@@ -8386,7 +8398,7 @@ Try to solve these variations. Take as much time as you need; I will wait.
 
 # The Dynamic Programming Classic Problems
 
-From now on, we will explore 10 classic Dynamic Programming problems. For each one, we will delve into Brute-Force techniques, recursion, memoization, tabulation, and finally the most popular solution for each, even if it is not among the techniques we have chosen. The problems we will address are listed in the table below[^2].
+From now on, we will explore 10 classic Dynamic Programming problems. For each one, we will delve into Brute-Force techniques, recursion, memoization, tabulation, and finally the most popular solution for each, even if it is not among the techniques we have chosen. The problems we will address are listed in the table below[^1].
 
 | Name                                           | Description/Example                                                                                                                                                                                                            |
 | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -9047,7 +9059,5 @@ Ultimately, the choice between memoization and tabulation often comes down to pe
 
 # Notes and References
 
-[:1] This ideia comes from [Introduction to Dynamic Programming][1]
-[:2] Most of this table came from [Introduction to Dynamic Programming][1]
+[:1] This ideia comes from [Introduction to Dynamic Programming](https://cp-algorithms.com/dynamic_programming/intro-to-dp.html)
 [:3] Peter M. Fenwick (1994). "A new data structure for cumulative frequency tables". Software: Practice and Experience. 24 (3): 327–336. CiteSeerX 10.1.1.14.8917. [doi:10.1002/spe.4380240306](https://onlinelibrary.wiley.com/doi/10.1002/spe.4380240306).
-[:1] https://cp-algorithms.com/dynamic_programming/intro-to-dp.html
