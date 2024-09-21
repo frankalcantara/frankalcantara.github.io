@@ -35,7 +35,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-20T13:40:35.951Z
+lastmod: 2024-09-21T01:34:42.686Z
 ---
 
 # 1. Introduction
@@ -856,11 +856,11 @@ The use of parallel I/O in programming competitive programmings typically applie
 | Vector manipulation              | `std::vector` with preprocessing (e.g., macros, `constexpr`)                                    | Using macros or `constexpr` for frequent operations like sorting or summing elements can save time in competitive programmings.                      |
 | Handling large data volumes      | Manual buffering with `fread` and `fwrite`                                                      | `fread` and `fwrite` allow efficient reading and writing of large blocks of data, minimizing system call overhead.                                   |
 
-# Maximizing Input/Output Efficiency in Competitive Programming (Windows and Linux)
+# 5. Maximizing Input/Output Efficiency in Competitive Programming (Windows and Linux)
 
 In some competitive programming environments, inputs are provided via the command line. The first input is the size of the array, followed by the array elements separated by spaces. Efficiently reading this data and outputting the result is crucial, especially when dealing with large datasets. Below is an approach to handle input and output in the fastest way for both Windows and Linux.
 
-## Optimized Input and Output
+## 5.1 Optimized Input and Output
 
 The following example demonstrates how to read inputs and output results efficiently in C++ using the fastest I/O methods available on both Windows and Linux.
 
@@ -896,7 +896,7 @@ int main() {
 }
 ```
 
-## Key Techniques for Faster I/O
+## 5.2 Key Techniques for Faster I/O
 
 1. **Disabling I/O Synchronization**:
    The line `std::ios::sync_with_stdio(false);` disables the synchronization between the C and C++ I/O streams. This allows the program to perform I/O operations faster because it no longer needs to synchronize `std::cin` and `std::cout` with `scanf` and `printf`.
@@ -904,7 +904,7 @@ int main() {
 2. **Unlinking `cin` and `cout`**:
    The line `std::cin.tie(nullptr);` ensures that `std::cout` will not be flushed automatically before every `std::cin` operation, which can slow down the program. By unlinking them, you have more control over when output is flushed.
 
-## Differences Between Windows and Linux
+## 5.3 Differences Between Windows and Linux
 
 On both **Windows** and **Linux**, the above code will work efficiently. However, since competitive programming platforms often use Linux, the synchronization of I/O streams plays a more significant role in Linux environments. Disabling synchronization is more crucial on Linux for achieving maximum performance, while the effect may be less noticeable on Windows. Nevertheless, the method remains valid and provides optimal speed in both environments.
 
@@ -941,7 +941,7 @@ int main() {
 
 It is important to highlight that `scanf` and `printf` are widely recognized as insecure functions due to their lack of built-in protections against common vulnerabilities such as buffer overflows. We are discussing them here only because the code created for competitive programming is typically used only once during a contest, and the primary focus is on speed and efficiency. However, these functions — and any others considered unsafe (see [stackoverflow](https://stackoverflow.com/questions/2565727/which-functions-from-the-standard-library-must-should-be-avoided))— should never be used in production code, libraries, or any other software outside the competitive programming environment. In professional development, you should always prefer safer alternatives such as `std::cin` and `std::cout`, which provide better type safety and avoid common vulnerabilities associated with older C-style I/O functions.
 
-## Using Manual Buffers with `fread` and `fwrite`
+## 5.4 Using Manual Buffers with `fread` and `fwrite`
 
 While functions like `scanf` and `printf` are fast, using `fread` and `fwrite` allows reading and writing data in large blocks, reducing the number of system calls for I/O. This is particularly useful when dealing with large volumes of data, as the overhead of multiple read and write operations can be significant.
 
@@ -996,13 +996,13 @@ The `fwrite` function works similarly to `fread`, but instead of reading data, i
 
 Using manual buffers with `fread` and `fwrite` can significantly improve performance in competitions by reducing the number of system calls, which is particularly useful when dealing with large volumes of data. This technique offers greater control over the I/O process and allows for optimizations in high-performance scenarios. However, when advanced formatting is required, `scanf` and `printf` might still be more convenient and suitable.
 
-# Introduction to Namespaces
+# 6. Introduction to Namespaces
 
 In C++, **namespaces** are used to organize code and prevent name conflicts, especially in large projects or when multiple libraries are being used that may have functions, classes, or variables with the same name. They provide a scope for identifiers, allowing developers to define functions, classes, and variables without worrying about name collisions.
 
 A **namespace** is a declarative region that provides a scope to the identifiers (names of types, functions, variables, etc.) inside it. This allows different parts of a program or different libraries to have elements with the same name without causing ambiguity.
 
-## Basic Syntax of a Namespace
+## 6.1 Basic Syntax of a Namespace
 
 ```cpp
 namespace MyNamespace {
@@ -1019,7 +1019,7 @@ namespace MyNamespace {
 
 The `MyNamespace` namespace encapsulates `myFunction` and `MyClass`, preventing these names from conflicting with others of the same name in different namespaces.
 
-## Using Namespaces
+## 6.2 Using Namespaces
 
 To access elements inside a namespace, you can use the **scope resolution operator** `::`.
 
@@ -1027,7 +1027,7 @@ The **scope resolution operator** (`::`) in C++ is used to define or access elem
 
 In competitive programming, the scope resolution operator is often used to access elements from the `std` namespace, such as `std::cout` or `std::vector`. This ensures that the standard library components are used correctly without introducing ambiguity with any other variables or functions that might exist in the global scope or within other namespaces. **Although not as common in short competitive programming code, the operator becomes critical in larger projects to maintain clear and distinct references to elements that may share names across different parts of the program**.
 
-### Accessing Elements of a Namespace
+### 6.2.1 Accessing Elements of a Namespace
 
 ```cpp
 int main() {
@@ -1042,7 +1042,7 @@ int main() {
 }
 ```
 
-### `using namespace std;`
+### 6.2.2 `using namespace std;`
 
 The **std** namespace is the default namespace of the C++ Standard Library. It contains all the features of the standard library, such as `std::vector`, `std::cout`, `std::string`, and more.
 
@@ -1082,11 +1082,11 @@ int main() {
 }
 ```
 
-## Disadvantages of Using `using namespace std;`
+## 6.3 Disadvantages of Using `using namespace std;`
 
 While using `using namespace std;` makes your code shorter and easier to read, it comes with some drawbacks. In larger projects or when working with multiple libraries, it increases the likelihood of name conflicts, where different namespaces contain elements with the same name. It can also lead to ambiguity, making it less clear where certain elements are coming from, which complicates code maintenance and comprehension. Because of these risks, using `using namespace std;` is generally discouraged in production code, especially in large projects or collaborative settings.
 
-## Alternatives to `using namespace std;`
+## 6.4 Alternatives to `using namespace std;`
 
 To avoid the risks associated with `using namespace std;`, one option is to import specific elements from the `std` namespace. For example, instead of importing the entire namespace, you can import only the functions and types you need, such as `std::cout` and `std::vector`. This approach reduces the risk of name conflicts while still allowing for more concise code.
 
@@ -1126,7 +1126,7 @@ int main() {
 
 To maintain clean, maintainable code, it's recommended to avoid `using namespace std;` in header files, as this can force all files that include the header to import the `std` namespace, increasing the risk of conflicts. If you decide to use `using`, it is better to do so in a limited scope, such as inside a function, to minimize its impact. Adopting a consistent approach to namespaces throughout your project also improves readability and makes collaboration easier.
 
-### Advanced Example: Nested Namespace
+### 6.4.1 Advanced Example: Nested Namespace
 
 Namespaces can also be nested to better organize the code.
 
@@ -1151,13 +1151,13 @@ Nested namespaces allow for a more hierarchical organization of code, which is p
 
 **In competitive programming, it is generally unnecessary and inefficient to create or use custom namespaces beyond the standard `std` namespace. Since competitive programming code is typically small and written for single-use, the overhead of managing custom namespaces adds complexity without providing significant benefits. Additionally, custom namespaces are designed to prevent name conflicts in large projects with multiple libraries, but in competitive environments where the focus is on speed and simplicity, such conflicts are rare. Therefore, it is best to avoid using namespaces beyond `std` in competitive programming, and reserve namespace management for larger codebases with extensive dependencies and libraries.**
 
-# Working with Vector and Matrix
+# 7. Working with Vector and Matrix
 
 Vectors are one of the most versatile data structures used in competitive programming due to their dynamic size and ease of use. They allow for efficient insertion, removal, resizing, and access operations, making them suitable for a wide range of applications. Not only can vectors handle single-dimensional data, but they can also represent more complex structures, such as matrices (2D vectors), which are often used to solve grid-based problems, dynamic table calculations, or simulations of multi-dimensional data.
 
 Matrices, represented as vectors of vectors, are particularly useful in problems involving multi-dimensional data manipulation, such as game boards, adjacency matrices in graphs, and dynamic programming tables. Vectors and matrices enable frequent operations like row and column manipulation, matrix transposition, and access to specific submatrices, providing flexibility and control over data arrangement and processing.
 
-## Vectors
+## 7.1 Vectors
 
 In C++, the `vector` class, part of the Standard Template Library (STL), is a dynamic array that provides a versatile and efficient way to manage collections of elements. Unlike traditional arrays, vectors can automatically resize themselves when elements are added or removed, making them particularly useful in competitive programming where the size of data structures may vary during execution.
 
@@ -1165,7 +1165,7 @@ Vectors offer several advantages: they provide random access to elements, suppor
 
 The `vector` class is particularly useful in scenarios involving frequent insertions, deletions, or resizes, as well as when working with dynamic data structures like lists, queues, stacks, or even matrices (2D vectors). Its simplicity and flexibility make it an indispensable tool for implementing a wide range of algorithms quickly and effectively in C++.
 
-### Inserting Elements at a Specific Position
+### 7.1.1 Inserting Elements at a Specific Position
 
 This code inserts a value into a vector at position 5, provided that the vector has at least 6 elements:
 
@@ -1193,7 +1193,7 @@ VI vec;
 if (vec.size() > 5) vec.insert(vec.begin() + 5, 42);
 ```
 
-### Removing the Last Element and a Specific Element
+### 7.1.2 Removing the Last Element and a Specific Element
 
 The following code removes the last element from the vector, followed by the removal of the element at position 3, assuming the vector has at least 4 elements:
 
@@ -1227,7 +1227,7 @@ if (!vec.empty()) vec.pop_back();
 if (vec.size() > 3) ERASE_AT(vec, 3);
 ```
 
-### Creating a New Vector with a Default Value
+### 7.1.3 Creating a New Vector with a Default Value
 
 The following code creates a new vector with 5 elements, all initialized to the value 7:
 
@@ -1248,7 +1248,7 @@ No significant reduction can be achieved here without compromising clarity, but 
 VI vec2(5, 7);
 ```
 
-### Resizing and Filling with Random Values
+### 7.1.4 Resizing and Filling with Random Values
 
 The vector `vec2` is resized to 10 elements, and each element is filled with a random value between 1 and 100:
 
@@ -1280,7 +1280,7 @@ for (auto& v : vec2) v = dist(gen);
 
 By using modern C++ constructs such as ranged-based `for` loops, we reduce the complexity of the loop and the generator initialization, making the code cleaner and more efficient to type.
 
-### Sorting the Vector
+### 7.1.5 Sorting the Vector
 
 The following code sorts the vector `vec2` in ascending order:
 
@@ -1309,279 +1309,7 @@ sort_vector(vec2);
 - $ \text{constexpr void sort_vector(std::vector<int}\& vec)$ is a type-safe way to define a reusable sorting function.
 - This method avoids the pitfalls of `#define`, such as lack of scoping and type checking, while still minimizing the amount of typing.
 
-## Matrices
-
-In C++20, matrices are typically represented as vectors of vectors (`std::vector<std::vector<T>>`), where each inner vector represents a row of the matrix. This approach allows for dynamic sizing and easy manipulation of multi-dimensional data, making matrices ideal for problems involving grids, tables, or any 2D structure.
-
-Matrices in C++ offer flexibility in managing data: you can resize rows and columns independently, access elements using intuitive indexing, and leverage standard vector operations for rows. Additionally, the use of `ranges` and `views` introduced in C++20 enhances the ability to iterate and transform matrix data more expressively and efficiently.
-
-_The use of matrices is common in competitive programming for tasks such as implementing dynamic programming tables, graph adjacency matrices, or performing transformations on 2D data. With the powerful capabilities of C++20's STL, matrices become a highly adaptable and efficient way to handle complex, multi-dimensional computations in a structured manner_.
-
-### Creating and Filling a Matrix
-
-The code creates a 2x2 matrix (a vector of vectors) and fills each element with the value 1:
-
-**Standard Version:**
-
-```cpp
-int rows = 2, cols = 2;
-std::vector<std::vector<int>> matrix(rows, std::vector<int>(cols));
-
-for (int i = 0; i < rows; ++i) {
-    for (int j = 0; j < cols; ++j) {
-        matrix[i][j] = 1;
-    }
-}
-```
-
-- $ \text{std::vector<std::vector<int>> matrix(rows, std::vector<int>(cols));} $ creates a matrix of size 2x2.
-- The nested `for` loop fills each element of the matrix with 1.
-
-**Optimized for Minimal Typing:**
-
-```cpp
-std::vector<std::vector<int>> matrix(2, std::vector<int>(2, 1));
-```
-
-This version eliminates the need for the explicit loop by using the constructor to initialize the matrix with 1s directly.
-
-### Displaying the Matrix
-
-Finally, the matrix is printed in the standard format:
-
-**Standard Version:**
-
-```cpp
-for (const auto& row : matrix) {
-    for (const auto& element : row) {
-        std::cout << element << " ";
-    }
-    std::cout << std::endl;
-}
-```
-
-- The loop iterates over each row and prints all elements in the row, followed by a newline.
-
-**Optimized for Minimal Typing:**
-
-```cpp
-for (const auto& row : matrix) {
-    for (int el : row) std::cout << el << " ";
-    std::cout << "\n";
-}
-```
-
-Here, we replaced `std::endl` with `"\n"` to improve performance by avoiding the unnecessary flushing of the output buffer.
-
-### Inserting Elements at a Specific Position
-
-To insert an element at a specific position in a matrix (vector of vectors) in C++ 20, we use the `insert` function. This function can insert rows or columns in a specific location, modifying the structure of the matrix.
-{% raw %}
-
-```cpp
-
-#include <iostream>
-#include <vector>
-
-int main() {
-    std::vector<std::vector<int>> matrix = {{1, 2}, {3, 4}};
-
-    // Insert a row at position 1
-    matrix.insert(matrix.begin() + 1, std::vector<int>{5, 6});
-
-    // Insert a column value at position 0 in the first row
-    matrix[0].insert(matrix[0].begin(), 0);
-
-    // Display the modified matrix
-    for (const auto& row : matrix) {
-        for (int el : row) std::cout << el << " ";
-        std::cout << "\n";
-    }
-
-    return 0;
-}
-```
-
-{% endraw %}
-
-This code inserts a new row at position 1 and a new column value at position 0 in the first row. The result is a modified matrix.
-
-### Removing the Last Element and a Specific Element
-
-To remove the last element of a matrix or a specific element, you can use the `pop_back` function for removing the last row and the `erase` function for removing specific rows or columns.
-
-{% raw %}
-
-```cpp
-#include <iostream>
-#include <vector>
-
-int main() {
-    std::vector<std::vector<int>> matrix = {{1, 2}, {3, 4}, {5, 6}};
-
-    // Remove the last row
-    matrix.pop_back();
-
-    // Remove the first element of the first row
-    matrix[0].erase(matrix[0].begin());
-
-    // Display the modified matrix
-    for (const auto& row : matrix) {
-        for (int el : row) std::cout << el << " ";
-        std::cout << "\n";
-    }
-
-    return 0;
-}
-```
-
-{% endraw %}
-
-This code removes the last row from the matrix and removes the first element of the first row.
-
-### Creating a New Vector with a Default Value
-
-To create a new matrix filled with a default value, you can specify this value in the constructor of the vector.
-
-```cpp
-#include <iostream>
-#include <vector>
-
-int main() {
-    // Create a 3x3 matrix filled with the default value 7
-    std::vector<std::vector<int>> matrix(3, std::vector<int>(3, 7));
-
-    // Display the matrix
-    for (const auto& row : matrix) {
-        for (int el : row) std::cout << el << " ";
-        std::cout << "\n";
-    }
-
-    return 0;
-}
-```
-
-This code initializes a 3x3 matrix with all elements set to 7.
-
-### Resizing and Filling with Random Values
-
-To resize a matrix and fill it with random values, you can use the `resize` function along with the `<random>` library.
-
-```cpp
-#include <iostream>
-#include <vector>
-#include <random>
-
-int main() {
-    std::vector<std::vector<int>> matrix;
-    int rows = 3, cols = 3;
-
-    // Resize the matrix
-    matrix.resize(rows, std::vector<int>(cols));
-
-    // Fill the matrix with random values
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(1, 10);
-
-    for (auto& row : matrix) {
-        for (auto& el : row) {
-            el = dis(gen);
-        }
-    }
-
-    // Display the matrix
-    for (const auto& row : matrix) {
-        for (int el : row) std::cout << el << " ";
-        std::cout << "\n";
-    }
-
-    return 0;
-}
-```
-
-This code resizes the matrix to 3x3 and fills it with random values between 1 and 10.
-
-### Sorting Matrices by Rows and Columns
-
-In C++20, we can sort matrices (represented as vectors of vectors) both by rows and by columns. Here are examples of how to do both:
-
-#### Sorting by Rows
-
-Sorting by rows is straightforward, as we can use the `std::sort` function directly on each row of the matrix.
-
-{% raw %}
-
-```cpp
-#include <iostream>
-#include <vector>
-#include <algorithm>
-
-int main() {
-   std::vector<std::vector<int>> matrix = {
-        {3, 1, 4}, {1, 5, 9}, {2, 6, 5}
-    };
-
-   // Sort each row of the matrix
-   for (auto& row : matrix) {
-       std::sort(row.begin(), row.end());
-   }
-
-   // Display the sorted matrix
-   for (const auto& row : matrix) {
-       for (int el : row) std::cout << el << " ";
-       std::cout << "\n";
-   }
-
-   return 0;
-}
-```
-
-{% endraw %}
-
-This code sorts each row of the matrix independently. The time complexity for sorting by rows is $O(m \cdot n \log n)$, where $m$ is the number of rows and $n$ is the number of columns.
-
-### Sorting by Columns
-
-Sorting by columns is more complex because the elements in a column are not contiguous in memory. We need to extract each column, sort it, and then put the sorted elements back into the matrix.
-
-```cpp
-#include <iostream>
-#include <vector>
-#include <algorithm>
-
-int main() {
-   std::vector<std::vector<int>> matrix = { {3, 1, 4}, {1, 5, 9}, {2, 6, 5} };
-   int rows = matrix.size();
-   int cols = matrix[0].size();
-
-   // Sort each column of the matrix
-   for (int j = 0; j < cols; ++j) {
-       std::vector<int> column;
-       for (int i = 0; i < rows; ++i) {
-           column.push_back(matrix[i][j]);
-       }
-       std::sort(column.begin(), column.end());
-       for (int i = 0; i < rows; ++i) {
-           matrix[i][j] = column[i];
-       }
-   }
-
-   // Display the sorted matrix
-   for (const auto& row : matrix) {
-       for (int el : row) std::cout << el << " ";
-       std::cout << "\n";
-   }
-
-   return 0;
-}
-```
-
-This code sorts each column of the matrix independently. The time complexity for sorting by columns is $O(n \cdot m \log m)$, where $n$ is the number of columns and $m$ is the number of rows.
-
-Note that this method of sorting by columns is not the most efficient for very large matrices, as it involves many data copies. For large matrices, it might be more efficient to use an approach that sorts the row indices based on the values in a specific column.
-
-### Vectors as Inputs and Outputs
+### 7.1.6 Vectors as Inputs and Outputs
 
 In competitive programming, a common input format involves receiving the size of a vector as the first integer, followed by the elements of the vector separated by spaces, with a newline at the end. Handling this efficiently is crucial when dealing with large inputs. Below is an optimized version using `fread` for input and `putchar` for output, ensuring minimal system calls and fast execution.
 
@@ -1650,7 +1378,7 @@ The previous code method minimizes system calls and avoids using slower I/O mech
 
 In competitive programming, it's also common to handle input from a file provided via the command line. This scenario requires efficient reading and processing, especially when dealing with large datasets. Below is the optimized version using `fread` to read from a file specified in the command line argument and `putchar` for output.
 
-#### Optimized Version Using `fread` and `putchar` with Command-Line File Input
+#### 7.1.6.1 Optimized Version Using `fread` and `putchar` with Command-Line File Input
 
 This version reads the input file, processes it, and outputs the vector’s elements, ensuring fast I/O performance.
 
@@ -1799,13 +1527,546 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-# Efficient Data Manipulation in C++ using Span and Ranges
+## 7.2 Matrices
+
+In C++20, matrices are typically represented as vectors of vectors (`std::vector<std::vector<T>>`), where each inner vector represents a row of the matrix. This approach allows for dynamic sizing and easy manipulation of multi-dimensional data, making matrices ideal for problems involving grids, tables, or any 2D structure.
+
+Matrices in C++ offer flexibility in managing data: you can resize rows and columns independently, access elements using intuitive indexing, and leverage standard vector operations for rows. Additionally, the use of `ranges` and `views` introduced in C++20 enhances the ability to iterate and transform matrix data more expressively and efficiently.
+
+_The use of matrices is common in competitive programming for tasks such as implementing dynamic programming tables, graph adjacency matrices, or performing transformations on 2D data. With the powerful capabilities of C++20's STL, matrices become a highly adaptable and efficient way to handle complex, multi-dimensional computations in a structured manner_.
+
+### 7.2.1 Creating and Filling a Matrix
+
+The code creates a 2x2 matrix (a vector of vectors) and fills each element with the value 1:
+
+**Standard Version:**
+
+```cpp
+int rows = 2, cols = 2;
+std::vector<std::vector<int>> matrix(rows, std::vector<int>(cols));
+
+for (int i = 0; i < rows; ++i) {
+    for (int j = 0; j < cols; ++j) {
+        matrix[i][j] = 1;
+    }
+}
+```
+
+- $ \text{std::vector<std::vector<int>> matrix(rows, std::vector<int>(cols));} $ creates a matrix of size $2\times 2$.
+- The nested `for` loop fills each element of the matrix with $1$.
+
+**Optimized for Minimal Typing:**
+
+```cpp
+std::vector<std::vector<int>> matrix(2, std::vector<int>(2, 1));
+```
+
+This version eliminates the need for the explicit loop by using the constructor to initialize the matrix with 1s directly.
+
+### 7.2.2 Displaying the Matrix
+
+Finally, the matrix is printed in the standard format:
+
+**Standard Version:**
+
+```cpp
+for (const auto& row : matrix) {
+    for (const auto& element : row) {
+        std::cout << element << " ";
+    }
+    std::cout << std::endl;
+}
+```
+
+- The loop iterates over each row and prints all elements in the row, followed by a newline.
+
+**Optimized for Minimal Typing:**
+
+```cpp
+for (const auto& row : matrix) {
+    for (int el : row) std::cout << el << " ";
+    std::cout << "\n";
+}
+```
+
+Here, we replaced `std::endl` with `"\n"` to improve performance by avoiding the unnecessary flushing of the output buffer.
+
+### 7.2.3 Inserting Elements at a Specific Position
+
+To insert an element at a specific position in a matrix (vector of vectors) in C++ 20, we use the `insert` function. This function can insert rows or columns in a specific location, modifying the structure of the matrix.
+
+```cpp
+
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<std::vector<int>> matrix = { {1, 2}, {3, 4} };
+
+    // Insert a row at position 1
+    matrix.insert(matrix.begin() + 1, std::vector<int>{5, 6});
+
+    // Insert a column value at position 0 in the first row
+    matrix[0].insert(matrix[0].begin(), 0);
+
+    // Display the modified matrix
+    for (const auto& row : matrix) {
+        for (int el : row) std::cout << el << " ";
+        std::cout << "\n";
+    }
+
+    return 0;
+}
+```
+
+This code inserts a new row at position 1 and a new column value at position 0 in the first row. The result is a modified matrix.
+
+### 7.2.4 Removing the Last Element and a Specific Element
+
+To remove the last element of a matrix or a specific element, you can use the `pop_back` function for removing the last row and the `erase` function for removing specific rows or columns.
+
+```cpp
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<std::vector<int>> matrix = { {1, 2}, {3, 4}, {5, 6} };
+
+    // Remove the last row
+    matrix.pop_back();
+
+    // Remove the first element of the first row
+    matrix[0].erase(matrix[0].begin());
+
+    // Display the modified matrix
+    for (const auto& row : matrix) {
+        for (int el : row) std::cout << el << " ";
+        std::cout << "\n";
+    }
+
+    return 0;
+}
+```
+
+This code removes the last row from the matrix and removes the first element of the first row.
+
+### 7.2.5 Creating a New Vector with a Default Value
+
+To create a new matrix filled with a default value, you can specify this value in the constructor of the vector.
+
+```cpp
+#include <iostream>
+#include <vector>
+
+int main() {
+    // Create a 3x3 matrix filled with the default value 7
+    std::vector<std::vector<int>> matrix(3, std::vector<int>(3, 7));
+
+    // Display the matrix
+    for (const auto& row : matrix) {
+        for (int el : row) std::cout << el << " ";
+        std::cout << "\n";
+    }
+
+    return 0;
+}
+```
+
+This code initializes a 3x3 matrix with all elements set to 7.
+
+### 7.2.6 Resizing and Filling with Random Values
+
+To resize a matrix and fill it with random values, you can use the `resize` function along with the `<random>` library.
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <random>
+
+int main() {
+    std::vector<std::vector<int>> matrix;
+    int rows = 3, cols = 3;
+
+    // Resize the matrix
+    matrix.resize(rows, std::vector<int>(cols));
+
+    // Fill the matrix with random values
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(1, 10);
+
+    for (auto& row : matrix) {
+        for (auto& el : row) {
+            el = dis(gen);
+        }
+    }
+
+    // Display the matrix
+    for (const auto& row : matrix) {
+        for (int el : row) std::cout << el << " ";
+        std::cout << "\n";
+    }
+
+    return 0;
+}
+```
+
+This code resizes the matrix to 3x3 and fills it with random values between 1 and 10.
+
+### 7.2.7 Sorting Matrices by Rows and Columns
+
+In C++20, we can sort matrices (represented as vectors of vectors) both by rows and by columns. Here are examples of how to do both:
+
+#### 7.2.7.1 Sorting by Rows
+
+Sorting by rows is straightforward, as we can use the `std::sort` function directly on each row of the matrix.
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+   std::vector<std::vector<int>> matrix = {
+        {3, 1, 4}, {1, 5, 9}, {2, 6, 5}
+    };
+
+   // Sort each row of the matrix
+   for (auto& row : matrix) {
+       std::sort(row.begin(), row.end());
+   }
+
+   // Display the sorted matrix
+   for (const auto& row : matrix) {
+       for (int el : row) std::cout << el << " ";
+       std::cout << "\n";
+   }
+
+   return 0;
+}
+```
+
+This code sorts each row of the matrix independently. The time complexity for sorting by rows is $O(m \cdot n \log n)$, where $m$ is the number of rows and $n$ is the number of columns.
+
+#### 7.2.7.2 Sorting by Columns
+
+Sorting by columns is more complex because the elements in a column are not contiguous in memory. We need to extract each column, sort it, and then put the sorted elements back into the matrix.
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+   std::vector<std::vector<int>> matrix = { {3, 1, 4}, {1, 5, 9}, {2, 6, 5} };
+   int rows = matrix.size();
+   int cols = matrix[0].size();
+
+   // Sort each column of the matrix
+   for (int j = 0; j < cols; ++j) {
+       std::vector<int> column;
+       for (int i = 0; i < rows; ++i) {
+           column.push_back(matrix[i][j]);
+       }
+       std::sort(column.begin(), column.end());
+       for (int i = 0; i < rows; ++i) {
+           matrix[i][j] = column[i];
+       }
+   }
+
+   // Display the sorted matrix
+   for (const auto& row : matrix) {
+       for (int el : row) std::cout << el << " ";
+       std::cout << "\n";
+   }
+
+   return 0;
+}
+```
+
+This code sorts each column of the matrix independently. The time complexity for sorting by columns is $O(n \cdot m \log m)$, where $n$ is the number of columns and $m$ is the number of rows.
+
+Note that this method of sorting by columns is not the most efficient for very large matrices, as it involves many data copies. For large matrices, it might be more efficient to use an approach that sorts the row indices based on the values in a specific column.
+
+## 7.2.8 Optimizing Matrix Input and Output in Competitive Programming
+
+In competitive programming, efficiently handling matrices for input and output is crucial. Let's explore optimized techniques in C++ that minimize system calls and maximize execution speed.
+
+Typically, the input for a matrix consists of:
+
+1. Two integers $n$ and $m$, representing the number of rows and columns, respectively.
+2. $n \times m$ elements of the matrix, separated by spaces and newlines.
+
+For example:
+
+```txt
+3 4
+1 2 3 4
+5 6 7 8
+9 10 11 12
+```
+
+### 7.2.8.1 Optimized Reading with `fread`
+
+To optimize reading, we can use `fread` to load the entire input at once into a buffer, then parse the numbers from the buffer. This approach reduces the number of system calls compared to reading the input one character or one line at a time.
+
+```cpp
+#include <cstdio>
+#include <vector>
+
+int main() {
+    char buffer[1 << 16];
+    size_t bytesRead = fread(buffer, 1, sizeof(buffer), stdin);
+    size_t idx = 0;
+
+    auto readInt = [&](int& num) {
+        while (idx < bytesRead && (buffer[idx] < '0' || buffer[idx] > '9') && buffer[idx] != '-') ++idx;
+        bool neg = false;
+        if (buffer[idx] == '-') {
+            neg = true;
+            ++idx;
+        }
+        num = 0;
+        while (idx < bytesRead && buffer[idx] >= '0' && buffer[idx] <= '9') {
+            num = num * 10 + (buffer[idx++] - '0');
+        }
+        if (neg) num = -num;
+    };
+
+    int n, m;
+    readInt(n);
+    readInt(m);
+
+    std::vector<std::vector<int>> matrix(n, std::vector<int>(m));
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            readInt(matrix[i][j]);
+        }
+    }
+
+    // Matrix processing...
+
+    return 0;
+}
+```
+
+In this code: We define a lambda function `readInt` to read integers from the buffer, handling possible whitespace and negative numbers. The `readInt` function skips over any non-digit characters and captures negative signs. This ensures robust parsing of the input data.
+
+### 7.2.8.2 Optimized Output with `putchar_unlocked`
+
+For output, using `putchar_unlocked` offers better performance than `std::cout` or even `putchar`, as it is not thread-safe and thus faster.
+
+```cpp
+#include <cstdio>
+#include <vector>
+
+void writeInt(int num) {
+    if (num == 0) {
+        putchar_unlocked('0');
+        return;
+    }
+    if (num < 0) {
+        putchar_unlocked('-');
+        num = -num;
+    }
+    char digits[10];
+    int idx = 0;
+    while (num) {
+        digits[idx++] = '0' + num % 10;
+        num /= 10;
+    }
+    while (idx--) {
+        putchar_unlocked(digits[idx]);
+    }
+}
+
+int main() {
+    // Assume matrix is already populated
+    int n = /* number of rows */;
+    int m = /* number of columns */;
+    std::vector<std::vector<int>> matrix = /* your matrix */;
+
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            writeInt(matrix[i][j]);
+            putchar_unlocked(j == m - 1 ? '\n' : ' ');
+        }
+    }
+
+    return 0;
+}
+```
+
+In this code: We define a function `writeInt` to output integers efficiently. It handles zero and negative numbers correctly, and we use `putchar_unlocked` for faster character output.
+
+> `putchar_unlocked` is a non-thread-safe version of `putchar`. It writes a character to `stdout` without locking the output stream, eliminating the overhead associated with ensuring thread safety. This makes `putchar_unlocked` faster than `putchar`, which locks the output stream to prevent concurrent access from multiple threads.
+>
+> When comparing `putchar` and `putchar_unlocked`, we find that `putchar` is thread-safe and locks `stdout` to prevent data races, but incurs overhead due to locking. On the other hand, `putchar_unlocked` is not thread-safe and does not lock `stdout`, making it faster due to the absence of locking overhead.
+>
+> Here's an example of using `putchar_unlocked` to output an integer efficiently:
+>
+> ```cpp
+> #include <cstdio>
+>
+> void writeInt(int num) {
+>    if (num == 0) {
+>        putchar_unlocked('0');
+>        return;
+>    }
+>    if (num < 0) {
+>        putchar_unlocked('-');
+>        num = -num;
+>    }
+>    char digits[10];
+>    int idx = 0;
+>    while (num) {
+>        digits[idx++] = '0' + (num % 10);
+>        num /= 10;
+>    }
+>    while (idx--) {
+>        putchar_unlocked(digits[idx]);
+>    }
+> }
+>
+> int main() {
+>    int number = 12345;
+>    writeInt(number);
+>    putchar_unlocked('\n');
+>    return 0;
+> }
+> ```
+>
+> In contrast, using `putchar` would involve replacing `putchar_unlocked` with `putchar`:
+>
+> ```cpp
+> #include <cstdio>
+>
+> void writeInt(int num) {
+>    if (num == 0) {
+>        putchar('0');
+>        return;
+>    }
+>    if (num < 0) {
+>        putchar('-');
+>        num = -num;
+>    }
+>    char digits[10];
+>    int idx = 0;
+>    while (num) {
+>        digits[idx++] = '0' + (num % 10);
+>        num /= 10;
+>    }
+>    while (idx--) {
+>        putchar(digits[idx]);
+>    }
+> }
+>
+> int main() {
+>    int number = 12345;
+>    writeInt(number);
+>    putchar('\n');
+>    return 0;
+> }
+> ```
+>
+> `putchar_unlocked` is best used in single-threaded programs where maximum output performance is required. It's particularly >useful in competitive programming scenarios where execution time is critical and the program is guaranteed to be >single-threaded.
+>
+> However, caution must be exercised when using `putchar_unlocked`. It is not thread-safe, and in multi-threaded applications, >using it can lead to data races and undefined behavior. Additionally, it is a POSIX function and may not be available or >behave differently on non-POSIX systems.
+>
+> _Both `putchar` and `putchar_unlocked` are functions from the C standard library `<cstdio>`, which is included in C++ for >compatibility purposes. The prototype for `putchar` is `int putchar(int character);`, which writes the character to `stdout` >and returns the character written, or `EOF` on error. It is thread-safe due to internal locking mechanisms_.
+>
+> The prototype for `putchar_unlocked` is `int putchar_unlocked(int character);`. It's a faster version of `putchar` without >internal locking, but it's not thread-safe and may not be part of the C++ standard in all environments.
+>
+> If both performance and thread safety are needed, consider using buffered output or high-performance C++ I/O techniques. For >example:
+>
+> ```cpp
+> #include <iostream>
+> #include <vector>
+>
+> int main() {
+>    std::ios::sync_with_stdio(false);
+>    std::cin.tie(nullptr);
+>
+>    std::vector<int> numbers = {1, 2, 3, 4, 5};
+>    for (int num : numbers) {
+>        std::cout << num << ' ';
+>    }
+>    std::cout << '\n';
+>
+>    return 0;
+> }
+> ```
+>
+> By untethering C++ streams from C streams using `std::ios::sync_with_stdio(false);` and untangling `cin` from `cout` with >`std::cin.tie(nullptr);`, you can achieve faster I/O while maintaining thread safety and standard compliance.
+
+### 7.2.8.3 Complexity Analysis
+
+The time complexity for reading and writing is $O(nm)$, where $n$ and $m$ are the dimensions of the matrix. The space complexity is also $O(nm)$, as we store the entire matrix in memory. However, the constant factors are significantly reduced compared to standard I/O methods, leading to faster execution times in practice.
+
+### 7.2.8.4 Using `mmap` on Unix Systems
+
+On Unix systems, we can use `mmap` to map a file (or standard input) directly into memory, potentially improving I/O performance even further.
+
+```cpp
+#include <sys/mman.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <vector>
+#include <cstdio>
+
+int main() {
+    struct stat sb;
+    fstat(0, &sb); // File descriptor 0 is stdin
+    size_t fileSize = sb.st_size;
+    char* data = static_cast<char*>(mmap(nullptr, fileSize, PROT_READ, MAP_PRIVATE, 0, 0));
+
+    size_t idx = 0;
+
+    auto readInt = [&](int& num) {
+        while (idx < fileSize && (data[idx] < '0' || data[idx] > '9') && data[idx] != '-') ++idx;
+        bool neg = false;
+        if (data[idx] == '-') {
+            neg = true;
+            ++idx;
+        }
+        num = 0;
+        while (idx < fileSize && data[idx] >= '0' && data[idx] <= '9') {
+            num = num * 10 + (data[idx++] - '0');
+        }
+        if (neg) num = -num;
+    };
+
+    int n, m;
+    readInt(n);
+    readInt(m);
+
+    std::vector<std::vector<int>> matrix(n, std::vector<int>(m));
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            readInt(matrix[i][j]);
+        }
+    }
+
+    munmap(data, fileSize);
+
+    // Matrix processing...
+
+    return 0;
+}
+```
+
+_**Note:** Using `mmap` can be risky, as it relies on the entire input being available and may not be portable across different systems or handle input streams properly. Use it only when you are certain of the input's nature and when maximum performance is essential._
+
+_**Remember:** The efficiency of these approaches comes at the cost of increased code complexity and reduced readability. In scenarios where performance is not critical, standard I/O methods are preferable for their simplicity and maintainability._
+
+# 8. Efficient Data Manipulation in C++ using Span and Ranges
 
 In the fast-paced world of competitive programming and high-performance computing, efficient data manipulation is paramount. C++20 introduces two powerful features - `std::span` and `std::ranges` - that significantly enhance a programmer's ability to handle data effectively and write optimized code.
 
 These features are particularly important because they address common performance bottlenecks in data-intensive applications. `std::span` provides a lightweight, non-owning view into contiguous data, reducing unnecessary copying and allowing for flexible, efficient data access. `std::ranges`, on the other hand, offers a unified, composable interface for working with sequences of data, enabling more intuitive and often more performant algorithm implementations. Together, they form a potent toolkit for developers seeking to push the boundaries of what's possible in terms of code efficiency and elegance in C++.
 
-## Using `std::span`
+## 8.1 Using `std::span`
 
 The `std::span` is a new feature introduced in C++20 that allows you to create lightweight, non-owning views of arrays and containers, such as `std::vector`. This avoids unnecessary copying of data and provides a flexible and efficient way to access and manipulate large blocks of data. `std::span` can be particularly useful when working with large datasets, file I/O, or when optimizing memory usage in competitive programming.
 
@@ -1841,7 +2102,7 @@ int main() {
 
 $ \text{std::span<int> view(numbers);} $ creates a non-owning view of the `std::vector<int>` `numbers`. This allows access to the elements of the vector without copying them. The loop $ \text{for (int num : view)} $ iterates over the elements in the `std::span`, just like it would with the original `std::vector`, but with no additional overhead from copying the data.
 
-### Efficient Use Cases for `std::span`
+### 8.1.1 Efficient Use Cases for `std::span`
 
 `std::span` is especially useful when you want to work with sub-ranges of arrays or vectors. For example, when working with just part of a large dataset, you can use `std::span` to reference a subset without slicing or creating new containers:
 
@@ -1871,7 +2132,7 @@ int main() {
 
 In this example, the function `process_data` accepts a `std::span`, avoiding unnecessary copies and keeping the original data structure intact.
 
-### Comparing `std::span` to Traditional Methods
+### 8.1.2 Comparing `std::span` to Traditional Methods
 
 | Feature          | `std::vector`           | Raw Pointers          | `std::span`     |
 | ---------------- | ----------------------- | --------------------- | --------------- |
@@ -1882,7 +2143,7 @@ In this example, the function `process_data` accepts a `std::span`, avoiding unn
 
 Unlike `std::vector`, which manages its own memory, `std::span` does not allocate or own memory. This is similar to raw pointers but with added safety since `std::span` knows its size. `std::span` is safer than raw pointers because it carries bounds information, helping avoid out-of-bounds errors. While raw pointers offer flexibility, they lack the safety features provided by modern C++.
 
-### Practical Application: Using `std::span` in Competitive Programming
+### 8.1.3 Practical Application: Using `std::span` in Competitive Programming
 
 When working with large datasets in competitive programming, using `std::span` avoids unnecessary memory copies, making operations faster and more efficient. You can easily pass sub-ranges of data to functions without creating temporary vectors or arrays. Additionally, it allows you to maintain full control over memory without introducing complex ownership semantics, as with `std::unique_ptr` or `std::shared_ptr`.
 
@@ -1913,13 +2174,13 @@ int main() {
 }
 ```
 
-## Efficient Data Manipulation with `std::ranges` in C++20
+## 8.2 Efficient Data Manipulation with `std::ranges` in C++20
 
 C++20 introduced the `<ranges>` library, which brings a powerful and flexible way to work with sequences of data through lazy-evaluated views and composable transformations. `std::ranges` allows you to create views over containers or arrays without modifying them or creating unnecessary copies. This is especially beneficial in competitive programming and high-performance applications, where minimizing both memory and computational overhead is crucial.
 
 In traditional programming with containers like `std::vector`, iterating over and transforming data often requires intermediate storage or manual loops to handle operations like filtering, transforming, or slicing the data. With `std::ranges`, these operations can be composed in a clean and expressive way while maintaining optimal performance through lazy evaluation. Lazy evaluation means that the transformations are only computed when the data is accessed, rather than immediately creating new containers or applying operations.
 
-### How `std::ranges` Works
+### 8.2.1 How `std::ranges` Works
 
 The core idea behind `std::ranges` is to create "views" over data. These views allow you to manipulate and query data without modifying the underlying container. A view in `std::ranges` is an abstraction that can represent any sequence of elements that can be iterated over, just like a container. The key difference is that a view is not required to own its elements; instead, it provides a "window" into an existing data sequence, allowing for efficient operations.
 
@@ -1952,7 +2213,7 @@ int main() {
 
 In this example, we create a view `even_doubled` over the original vector `numbers`. The first operation, `std::ranges::views::filter`, filters out all the odd numbers from the vector. The second operation, `std::ranges::views::transform`, multiplies each of the remaining even numbers by two. Both of these operations are lazily evaluated, meaning that no new container is created, and the transformations are applied only when iterating over the view. This approach is not only cleaner in terms of code but also more efficient in terms of performance.
 
-### Composition of Operations
+### 8.2.2 Composition of Operations
 
 One of the key strengths of `std::ranges` is its composability. Operations like filtering, transforming, or slicing can be composed together, and the result is still a view. This means that you can chain multiple operations together without needing intermediate containers or data structures. The result is a highly efficient pipeline of operations that is applied only when the data is accessed.
 
@@ -1984,13 +2245,13 @@ int main() {
 
 In this example, we chain together three operations: filtering the numbers greater than or equal to 20, doubling them, and taking only the first three results. The operations are applied lazily and are only computed when iterating over the final view, `result`. This leads to highly efficient data processing, as no intermediate containers are created, and each transformation is performed only once for the relevant elements.
 
-### Memory and Performance Considerations
+### 8.2.3 Memory and Performance Considerations
 
 The key advantage of `std::ranges` is its use of lazy evaluation, which minimizes memory usage by avoiding the creation of temporary containers. In traditional methods, each operation (e.g., filtering or transforming) might create a new container, leading to increased memory consumption and computational overhead. With `std::ranges`, the operations are "stacked" and evaluated only when needed. This reduces the memory footprint and ensures that performance remains high, even when dealing with large datasets.
 
 Another performance benefit comes from the fact that `std::ranges` operations are highly optimized. Since the operations are evaluated lazily and directly on the data, there's no need for unnecessary copying or allocation. This leads to more efficient cache usage and fewer CPU cycles spent on managing intermediate data structures.
 
-### Practical Use Cases in Competitive Programming
+### 8.2.3 Practical Use Cases in Competitive Programming
 
 Imagine a scenario where you need to process only a portion of the input data based on certain conditions. Using traditional methods, this might involve creating multiple containers or applying multiple iterations over the data. With `std::ranges`, you can chain these operations in a single pass, improving both performance and code readability.
 
@@ -2025,11 +2286,11 @@ Here, the data is sorted, filtered, and transformed in a single efficient chain 
 
 `std::ranges` in C++20 brings a powerful new way to work with data by providing efficient, lazy-evaluated views over containers. This minimizes memory usage, avoids unnecessary copying, and allows for highly optimized data processing pipelines. In competitive programming and high-performance applications, where every CPU cycle and byte of memory counts, using `std::ranges` can significantly improve both performance and code clarity. Whether you're filtering, transforming, or composing operations, `std::ranges` allows you to build complex data processing pipelines that are both expressive and efficient.
 
-# Time and Space Complexity in Competitive Programming
+# 9. Time and Space Complexity in Competitive Programming
 
 In this section, we will delve deeper into understanding both time and space complexities, providing a more comprehensive look into how these affect the efficiency of algorithms, particularly in competitive programming environments. This includes examining loops, recursive algorithms, and how various complexity classes dictate algorithm performance. We'll also consider the impact of space complexity and memory usage, which is crucial when dealing with large datasets.
 
-## Loops, Time and Space Complexity
+## 9.1 Loops, Time and Space Complexity
 
 **One of the most common reasons for slow algorithms is the presence of multiple loops iterating over input data**. The more nested loops an algorithm contains, the slower it becomes. If there are $k$ nested loops, the time complexity becomes $O(n^k)$.
 
@@ -2062,7 +2323,7 @@ for (int i = 1; i <= n; i++) {
 
 **In competitive programming, excessive memory use can cause the program to exceed memory limits**. Therefore, always account for the space complexity of your solution, particularly when using arrays, matrices, or data structures that grow with input size.
 
-### Order of Growth
+## 9.2 Order of Growth
 
 Time complexity doesn't tell us the exact number of times the code within a loop executes but rather gives the order of growth. In the following examples, the code inside the loop executes $3n$, $n+5$, and $\lfloor n/2 \rfloor$ times, but the time complexity of each code is still $O(n)$:
 
@@ -2094,7 +2355,7 @@ for (int i = 1; i <= n; i++) {
 }
 ```
 
-### Algorithm Phases and Time Complexity
+## 9.3 Algorithm Phases and Time Complexity
 
 When an algorithm consists of consecutive phases, the total time complexity is the largest time complexity of any single phase. This is because the slowest phase typically becomes the bottleneck of the code.
 
@@ -2114,8 +2375,6 @@ for (int i = 1; i <= n; i++) {
 }
 ```
 
-#### Space and Time Complexity of Multiple Phases
-
 When analyzing algorithms that consist of multiple phases, consider that each phase may also introduce additional memory usage. In the example above, if phase 2 allocates a matrix of size $n \times n$, the space complexity would increase to $O(n^2)$, matching the time complexity.
 
 Sometimes, time complexity depends on multiple factors. In this case, the formula for time complexity includes multiple variables. For example, the time complexity of the following code is $O(nm)$:
@@ -2130,7 +2389,7 @@ for (int i = 1; i <= n; i++) {
 
 If the above algorithm also uses a data structure such as a matrix of size $n \times m$, the space complexity would also be $O(nm)$, increasing memory usage significantly, particularly for large input sizes.
 
-## Recursive Algorithms
+## 9.4 Recursive Algorithms
 
 The time complexity of a recursive function depends on the number of times the function is called and the time complexity of a single call. The total time complexity is the product of these values.
 
@@ -2145,7 +2404,7 @@ void f(int n) {
 
 The call `f(n)` makes $n$ recursive calls, and the time complexity of each call is $O(1)$. Thus, the total time complexity is $O(n)$.
 
-### Exponential Recursion
+### 9.4.1 Exponential Recursion
 
 Consider the following function, which makes two recursive calls for every **Input**:
 
@@ -2173,11 +2432,12 @@ $$1 + 2 + 4 + \cdots + 2^{n-1} = 2^n - 1 = O(2^n)$$
 
 Recursive functions also have space complexity considerations. Each recursive call adds to the call stack, and in the case of deep recursion (like in the exponential example above), this can lead to $O(n)$ space complexity. Be cautious with recursive algorithms, as exceeding the maximum stack size can cause a program to fail due to stack overflow.
 
-### Common Complexity Classes
+### 9.4.2 Common Complexity Classes
 
 Here is a list of common time complexities of algorithms:
 
 - $O(1)$: A constant-time algorithm doesn't depend on the input size. A typical example is a direct formula calculation.
+
 - $O(\log n)$: A logarithmic algorithm often halves the input size at each step, such as binary search.
 
 - $O(\sqrt{n})$: Slower than $O(\log n)$ but faster than $O(n)$, this complexity might appear in algorithms that involve square root reductions in input size.
@@ -2194,7 +2454,7 @@ Here is a list of common time complexities of algorithms:
 
 - $O(n!)$: Common in algorithms that generate all permutations of the input.
 
-### Estimating Efficiency
+### 9.4.3 Estimating Efficiency
 
 When calculating an algorithm's time complexity, you can estimate whether it will be efficient enough for the given problem before implementation. A modern computer can perform hundreds of millions of operations per second.
 
@@ -2217,15 +2477,15 @@ While time complexity is a good estimate of efficiency, it hides constant factor
 
 Since loops have a significant impact on code performance, we can dive deeper into the possible loop options available.
 
-# Loops the heart of all competitive programming
+# 10. Loops the Heart of All Competitive Programming
 
 Loops are, without a doubt, the most important part of any code, whether for competitive programming, high-performance applications, or even solving academic problems. Most programming languages offer more than one way to implement loops. In this text, since Python is only our pseudocode language, we will focus on studying loops in C++.
 
-## Deep Dive into `for` Loops in Competitive Programming
+## 10.1 Deep Dive into `for` Loops in Competitive Programming
 
 C++ provides several ways to iterate over elements in a vector, using different types of `for` loops. In this section, we will explore the various `for` loop options available in C++20, discussing their performance and code-writing efficiency. We will also analyze which loops are best suited for competitive programming based on input size—whether dealing with small or large datasets.
 
-### 1. `for` Loop with Iterator
+### 10.1.1 `for` Loop with Iterator
 
 The `for` loop using iterators is one of the most efficient ways to iterate over a vector, especially for complex operations where you need to manipulate the elements or the iterator’s position directly.
 
@@ -2242,7 +2502,7 @@ Utilizing iterators directly avoids unnecessary function calls such as `operator
 - **For Small Inputs**: This is a solid option as it allows precise control over the iteration with negligible overhead.
 - **For Large Inputs**: Highly efficient due to minimal overhead and memory usage. However, ensure that the iterator’s operations do not induce cache misses, which can slow down performance for large datasets.
 
-### 2. Classic `for` Loop with Index
+### 10.1.2. Classic `for` Loop with Index
 
 The classic `for` loop using an index is efficient and provides precise control over the iteration process.
 
@@ -2259,7 +2519,7 @@ Accessing elements via index is fast, but re-evaluating `vec.size()` in each ite
 - **For Small Inputs**: Efficient and straightforward, especially when the overhead of re-evaluating `vec.size()` is negligible.
 - **For Large Inputs**: If performance is critical, store `vec.size()` in a separate variable before the loop to avoid repeated function calls, which can become significant for larger datasets.
 
-### 3. Range-Based `for-each` with Constant Reference
+### 10.1.3. Range-Based `for-each` with Constant Reference
 
 Range-based `for-each` with constant reference is highly efficient for reading elements since it avoids unnecessary copies.
 
@@ -2276,7 +2536,7 @@ Using constant references avoids copying, making it very efficient for both memo
 - **For Small Inputs**: Ideal for minimal syntax and efficient execution.
 - **For Large Inputs**: Excellent choice due to the avoidance of element copies, ensuring optimal memory usage and performance.
 
-### 4. Range-Based `for-each` by Value
+### 10.1.4. Range-Based `for-each` by Value
 
 The `for-each` loop can also iterate over elements by value, which is useful when you want to work with copies of the elements.
 
@@ -2293,7 +2553,7 @@ Elements are copied, which can reduce performance, especially for large data typ
 - **For Small Inputs**: Suitable when the overhead of copying is negligible, especially if you need to modify copies of elements.
 - **For Large Inputs**: Avoid for large datasets or large element types, as the copying can lead to significant performance degradation.
 
-### 5. `for` Loop with Range Views (C++20)
+### 10.1.5. `for` Loop with Range Views (C++20)
 
 C++20 introduced `range views`, which allow iteration over subsets or transformations of elements in a container without creating copies.
 
@@ -2310,7 +2570,7 @@ Range views allow high-performance operations, processing only the necessary ele
 - **For Small Inputs**: Works well, especially when applying transformations like reversing or filtering, while maintaining code readability.
 - **For Large Inputs**: Very efficient as no extra memory is allocated, and the processing is done lazily, meaning only the required elements are accessed.
 
-### 6. Parallel `for` Loop (C++17/C++20)
+### 10.1.6. Parallel `for` Loop (C++17/C++20)
 
 While not a traditional `for` loop, using parallelism in loops is a powerful feature introduced in C++17 and further enhanced in C++20.
 
@@ -2329,7 +2589,7 @@ Uses multiple threads to process elements in parallel, offering substantial perf
 - **For Small Inputs**: Overkill. The overhead of managing threads and synchronization outweighs the benefits for small datasets.
 - **For Large Inputs**: Extremely efficient. When dealing with large datasets, parallel processing can drastically reduce runtime, especially for computationally expensive operations.
 
-### Optimal `for` Loops for Competitive Programming
+### 10.1.7. Optimal `for` Loops for Competitive Programming
 
 Choosing the right type of `for` loop in competitive programming depends largely on input size and the specific use case. The following table summarizes the best choices for different scenarios:
 
@@ -2341,11 +2601,11 @@ Choosing the right type of `for` loop in competitive programming depends largely
 | Large           | Parallel `for` Loop with `std::for_each` and `std::execution::par` | Ideal for computationally heavy tasks on large datasets, leveraging multiple threads to parallelize. |
 | Transformations | `for` Loop with Range Views (C++20)                                | Ideal for processing subsets or transformations of data without creating extra copies.               |
 
-## Now the `while` Loop which we all love
+## 10.2 Now the `while` Loop which we all love
 
 The `while` loop is another fundamental control structure in C++ that is often used in competitive programming. It repeatedly executes a block of code as long as a specified condition evaluates to true. In this section, we will explore the different use cases for `while` loops, their performance considerations, and scenarios where they may be preferable to `for` loops. We will also examine their application with both small and large datasets.
 
-### 1. Basic `while` Loop
+### 10.2.1. Basic `while` Loop
 
 A `while` loop continues executing its block of code until the condition becomes false. This makes it ideal for situations where the number of iterations is not known beforehand.
 
@@ -2364,7 +2624,7 @@ The `while` loop is simple and provides clear control over the loop's exit condi
 - **For Small Inputs**: This structure is efficient, especially when the number of iterations is small and predictable.
 - **For Large Inputs**: The `while` loop can be optimized for larger inputs by ensuring that the condition is simple to evaluate and that the incrementing logic doesn't introduce overhead.
 
-### 2. `while` Loop with Complex Conditions
+### 10.2.2. `while` Loop with Complex Conditions
 
 `while` loops are particularly useful when the condition for continuing the loop involves complex logic that cannot be easily expressed in a `for` loop.
 
@@ -2383,7 +2643,7 @@ In this case, the loop runs not only based on the value of `i`, but also on the 
 - **For Small Inputs**: This is ideal for small inputs where the condition can vary significantly during the iterations.
 - **For Large Inputs**: Be cautious with complex conditions when dealing with large inputs, as evaluating the condition on every iteration may add performance overhead.
 
-### 3. Infinite `while` Loops
+### 10.2.3. Infinite `while` Loops
 
 An infinite `while` loop is a loop that runs indefinitely until an explicit `break` or `return` statement is encountered. This type of loop is typically used in scenarios where the termination condition depends on an external event, such as user input or reaching a specific solution.
 
@@ -2401,7 +2661,7 @@ The loop runs until `exitCondition()` is met, at which point it breaks out of th
 - **For Small Inputs**: Generally unnecessary for small inputs unless the exit condition is based on dynamic factors.
 - **For Large Inputs**: Useful for large inputs when the exact number of iterations is unknown, and the loop depends on a condition that could be influenced by the data itself.
 
-### 4. `do-while` Loop
+### 10.2.4. `do-while` Loop
 
 The `do-while` loop is similar to the `while` loop, but it guarantees that the code block is executed at least once. This is useful when you need to run the loop at least one time regardless of the condition.
 
@@ -2420,7 +2680,7 @@ In this case, the loop will print `i` at least once, even if `i` starts with a v
 - **For Small Inputs**: Ideal when you need to guarantee that the loop runs at least once, such as with small datasets where the minimum iteration is essential.
 - **For Large Inputs**: Suitable for large datasets where the first iteration must occur independently of the condition.
 
-### 5. `while` Loop with Early Exit
+### 10.2.5. `while` Loop with Early Exit
 
 The `while` loop can be combined with early exit strategies using `break` or `return` statements to optimize performance, particularly when the loop can terminate before completing all iterations.
 
@@ -2440,7 +2700,7 @@ By including a condition inside the loop that checks for an early exit, you can 
 - **For Small Inputs**: It can improve performance when early termination conditions are common or likely.
 - **For Large Inputs**: Highly efficient for large datasets, particularly when the early exit condition is met frequently, saving unnecessary iterations.
 
-### 6. Combining `while` with Multiple Conditions
+### 10.2.6. Combining `while` with Multiple Conditions
 
 A `while` loop can easily incorporate multiple conditions to create more complex termination criteria. This is particularly useful when multiple variables determine whether the loop should continue.
 
@@ -2459,7 +2719,7 @@ This allows the loop to run based on multiple dynamic conditions, providing more
 - **For Small Inputs**: A flexible option when the conditions governing the loop may change during execution, even for small datasets.
 - **For Large Inputs**: Can be optimized for large datasets by ensuring that the condition checks are efficient and that unnecessary re-evaluations are minimized.
 
-### Optimal `while` Loops for Competitive Programming
+### 10.2.7. Optimal `while` Loops for Competitive Programming
 
 Choosing the right type of `while` loop depends on the nature of the input and the complexity of the condition. The following table summarizes the optimal choices for different input sizes:
 
@@ -2471,11 +2731,11 @@ Choosing the right type of `while` loop depends on the nature of the input and t
 | Large      | `while` with Complex Conditions            | Allows dynamic and flexible exit conditions, making it suitable for large datasets with evolving parameters.               |
 | Continuous | Infinite `while` Loop with Explicit Breaks | Best for situations where the exact number of iterations is unknown and depends on external factors or dynamic conditions. |
 
-## Special Loops in C++20 for Competitive Programming
+## 10.3 Special Loops in C++20 for Competitive Programming
 
 In C++20, several advanced looping techniques have been introduced, each offering unique ways to improve code efficiency and readability. While some of these techniques provide remarkable performance optimizations, not all are well-suited for competitive programming. competitive programmings often involve handling dynamic inputs and generating outputs within strict time limits, so techniques relying heavily on compile-time computation are less practical. This section focuses on the most useful loop structures for competitive programmings, emphasizing runtime efficiency and adaptability to varying input sizes.
 
-### 1. Range-Based Loops with `std::ranges::views`
+### 10.3.1. Range-Based Loops with `std::ranges::views`
 
 C++20 introduces `ranges` and `views`, which allow you to create expressive and efficient loops by operating on views of containers without copying data. Views are lazily evaluated, meaning that operations like filtering, transformation, or reversing are applied only when accessed.
 
@@ -2510,7 +2770,7 @@ Range views are particularly useful when working with large datasets, as they en
 
 Additionally, range views provide clarity and simplicity when dealing with complex operations. They streamline the process of transforming data, making it easier to apply multiple operations in a clean and readable manner, which is especially beneficial in competitive programming scenarios.
 
-### 2. Parallel Loops with `std::for_each` and `std::execution::par`
+### 10.3.2. Parallel Loops with `std::for_each` and `std::execution::par`
 
 C++20 enables parallelism in standard algorithms with `std::execution`. Using parallel execution policies, you can distribute loop iterations across multiple threads, which can drastically reduce the execution time for computationally expensive loops. This is especially useful when working with large datasets in competitive programming.
 
@@ -2543,7 +2803,7 @@ Parallel loops are highly effective for processing large datasets, making them i
 
 However, they are less suitable for small inputs. In such cases, the overhead associated with managing threads may outweigh the performance gains, leading to slower execution compared to traditional loops.
 
-## 3. `constexpr` Loops
+## 10.4. `constexpr` Loops
 
 With C++20, `constexpr` has been extended to allow more complex loops and logic at compile time. While this can lead to ultra-efficient code where calculations are precomputed during compilation, this technique has limited utility in competitive programming, where dynamic inputs are a central aspect of the problem. Since competitive programming requires handling varying inputs provided at runtime, `constexpr` loops are generally less useful in this context.
 
@@ -2577,11 +2837,11 @@ Compile-time efficiency allows for faster runtime performance, as all necessary 
 
 This approach is ideal for constant, static data. When all relevant data is known ahead of time, compile-time computation removes the need for runtime processing, providing a significant performance boost by bypassing real-time calculations.
 
-### Considerations for competitive programmings
+### 10.4.1 Considerations for competitive programmings
 
 While constexpr loops are not suitable for processing dynamic inputs directly, they can be strategically used to create lookup tables or pre-compute values that are then utilized during runtime calculations. This can be particularly useful in problems involving mathematical sequences, combinatorics, or other scenarios where certain calculations can be predetermined. _However, it's important to balance the use of pre-computed data with memory constraints, as large lookup tables might exceed memory limits in some competitive programming environments_.
 
-## 4. Early Exit Loops
+## 10.5. Early Exit Loops
 
 In competitive programming, optimizing loops to exit early when a condition is met can drastically reduce execution time. This approach is especially useful when the solution does not require processing the entire input if an early condition is satisfied.
 
@@ -2610,11 +2870,9 @@ Early exit loops improve efficiency by terminating as soon as a specified condit
 
 This technique is particularly useful in search problems. By exiting the loop early when a target value is found, it can significantly enhance performance, reducing the overall execution time.
 
-### Considerations for competitive programmings
+_Early exit loops are highly practical, as they allow a solution to be reached without the need to examine all the data. By cutting down unnecessary iterations, they help reduce execution time, making them particularly useful in scenarios where a result can be determined quickly based on partial input._
 
-Early exit loops are highly practical, as they allow a solution to be reached without the need to examine all the data. By cutting down unnecessary iterations, they help reduce execution time, making them particularly useful in scenarios where a result can be determined quickly based on partial input.
-
-## 5. Indexed Loops with Range-Based `for`
+## 10.6. Indexed Loops with Range-Based `for`
 
 While C++ offers powerful range-based `for` loops, there are scenarios where accessing elements by index is essential, especially when the loop logic requires modifying the index or accessing adjacent elements. Range-based `for` loops cannot directly access the index, so indexed loops remain valuable for such cases.
 
@@ -2641,13 +2899,11 @@ Indexed loops offer precise control by providing direct access to elements throu
 
 They are essential when modifying iteration behavior, especially in cases where you need to adjust the index dynamically. This is useful for tasks such as skipping elements or implementing non-linear iteration patterns, allowing for flexible loop management.
 
-**Considerations for competitive programmings**:
-
 Indexed loops are well-suited for dynamic access, offering the flexibility required for more complex iteration logic. This makes them ideal for scenarios where direct control over the loop's behavior is necessary.
 
 However, they are less expressive compared to range-based loops. While they provide detailed control, they tend to be more verbose and less concise than the streamlined syntax offered by range-based alternatives.
 
-## 6. Standard Library Algorithms (`std::for_each`, `std::transform`)
+## 10.7. Standard Library Algorithms (`std::for_each`, `std::transform`)
 
 Using standard library algorithms like `std::for_each` and `std::transform` allows for highly optimized iteration and transformation of container elements. These algorithms are highly optimized, making them ideal for competitive programming scenarios where efficiency is crucial.
 
@@ -2677,11 +2933,9 @@ Standard library algorithms are highly optimized for performance, often surpassi
 
 Additionally, these functions are concise and clear, providing a clean and expressive syntax to apply operations on containers. This simplicity enhances code readability while maintaining high performance, making them ideal for competitive programming.
 
-### Considerations for competitive programmings
-
 Standard library algorithms are great for transformation tasks, allowing you to apply operations on container elements with minimal code. They maximize efficiency while keeping the implementation simple and concise, making them particularly effective for handling transformations in competitive programming scenarios.
 
-## Summary Table of Useful Loop Techniques for competitive programmings
+## 10.8 Summary Table of Useful Loop Techniques for competitive programmings
 
 | Technique                                 | Best Use Case                            | Efficiency Considerations                                                          |
 | ----------------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------------- |
