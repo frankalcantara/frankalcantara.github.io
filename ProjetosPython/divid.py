@@ -44,7 +44,7 @@ def main(input_filename):
         adjusted_section = section
 
         # Extrair o título a partir do heading
-        title_match = re.match(r'^# (.*)', section)
+        title_match = re.match(r'^## (.*)', section)
         if title_match:
             title = title_match.group(1).strip()
         else:

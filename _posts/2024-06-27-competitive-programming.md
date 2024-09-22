@@ -35,7 +35,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-21T01:34:42.686Z
+lastmod: 2024-09-22T22:28:50.172Z
 ---
 
 # 1. Introduction
@@ -2951,19 +2951,17 @@ Standard library algorithms are great for transformation tasks, allowing you to 
 | ----------------- | -------------------------------------------------------------------------------------------------------------- |
 | `constexpr` Loops | Compile-time only, cannot handle dynamic input, thus impractical for runtime competitive programming problems. |
 
-# Problems in One-Dimensional Arrays
+# 11. Problems in One-Dimensional Arrays
 
 One-dimensional arrays are fundamental data structures in computer science and are the basis for many algorithmic problems. This classification organizes common problem types, algorithms, and techniques used to solve challenges involving 1D arrays. From basic operations to advanced optimization strategies, this comprehensive guide covers a wide range of approaches, helping developers and algorithm enthusiasts to identify and apply the most efficient solutions to array-based problems.
 
-## Preprocessing and Efficient Query Techniques
+## 11.1. Preprocessing and Efficient Query Techniques
 
 Methods that prepare the array to respond to queries quickly, typically trading preprocessing time for faster queries. This approach involves investing time upfront to organize or transform the array data in a way that allows for rapid responses to subsequent queries. For example, in a scenario where frequent sum calculations of array intervals are needed, a preprocessing step might involve creating a prefix sum array. This initial step takes $O(n)$ time but enables constant-time $O(1)$ sum queries afterward, as opposed to $O(n)$ time per query without preprocessing. This trade-off is beneficial when the number of queries is large, as the initial time investment is offset by the significant speed improvement in query operations. Such techniques are common in algorithmic problem-solving, where strategic data preparation can dramatically enhance overall performance, especially in scenarios with repetitive operations on the same dataset.
 
-### Algorithm: Sums and Prefixes
+### 11.1.1 Algorithm: Prefix Sum Array
 
 Calculation of cumulative sums for fast range queries. Reduces complexity from $O(n^2)$ to $O(n)$ in construction and $O(1)$ per query.
-
-#### Algorithm: Prefix Sum Array
 
 The Prefix Sum Array is a preprocessing technique used to efficiently calculate the sum of elements in a given range of an array. It works by creating a new array where each element is the sum of all previous elements in the# Prefix Sum Array Algorithm
 
@@ -3015,7 +3013,7 @@ We will prove that the range sum $\text{Sum}(i, j) = P[j] - P[i - 1]$ correctly 
   $$
 - This shows that $\text{Sum}(i, j)$ correctly computes the sum of elements from $A[i]$ to $A[j]$.
 
-#### Algorithm Prefix Sum in Plain English
+#### 11.1.1.1. Algorithm Prefix Sum in Plain English
 
 The **Prefix Sum Array** is an algorithm that helps quickly calculate the sum of any subarray (a range of elements) within an original array. After an initial preprocessing step, you can find the sum of elements between any two indices in constant time.
 
@@ -3043,7 +3041,7 @@ The **Prefix Sum Array** is an algorithm that helps quickly calculate the sum of
    - $P[j]$ includes the sum from $A[0]$ to $A[j]$.
    - Subtracting $P[i - 1]$, which is the sum from $A[0]$ to $A[i - 1]$, leaves us with the sum from $A[i]$ to $A[j]$.
 
-### Understanding
+Let's understand this algorithm set by step:
 
 1. **Construction Phase**:
 
@@ -3060,7 +3058,7 @@ The **Prefix Sum Array** is an algorithm that helps quickly calculate the sum of
    - **Quick Calculation**:
      - By using the formula, we reduce the time complexity of range sum queries to $O(1)$.
 
-#### Example
+**Example - Prefix Sum Array**:
 
 Suppose we have the array:
 
@@ -3093,7 +3091,7 @@ Example Query\*: Find the sum of elements from index $2$ to $5$ in $A$.
   - Sum of $A[2]$ to $A[5]$:
     - $A[2] + A[3] + A[4] + A[5] = 4 + 1 + 5 + 9 = 19$
 
-#### Complexity Analysis
+### 11.1.1.2. Complexity Analysis
 
 The Prefix Sum Array algorithm's complexity can be analyzed by considering its two main operations: constructing the prefix sum array and performing range sum queries.
 
@@ -3109,7 +3107,7 @@ The space complexity for executing queries is $O(1)$, as no additional space is 
 
 In conclusion, the Prefix Sum Array algorithm has a time complexity of $O(n)$ for the preprocessing step of constructing the prefix sum array and $O(1)$ time per range sum query. The overall space complexity is $O(n)$ due to the storage of the prefix sum array. This efficiency makes the algorithm particularly useful when dealing with multiple range sum queries on a static array, as it significantly reduces the time complexity per query from $O(n)$ to $O(1)$ after the initial preprocessing.
 
-##### The Plate Balancer (Problem 2)
+### 11.1.1.3. Typical Problem: The Plate Balancer (Problem 2)
 
 In a famous restaurant, Chef André is known for his incredible skill in balancing plates. He has a long table with several plates, each containing a different amount of food. André wants to find the "Magic Plate" - the plate where, when he places his finger underneath it, the weight of the food on the left and right balances perfectly.
 
@@ -3151,7 +3149,7 @@ $$-1000 \leq plates[i] \leq 1000$$
 
 Note: André is very skilled, so don't worry about the real-world physics of balancing plates. Focus only on the mathematical calculations!
 
-###### Naïve Solution
+#### 11.1.1.3.A Naïve Solution
 
 This solution is considered naïve because it doesn't take advantage of any precomputation or optimization techniques such as the Prefix Sum Array. Instead, it recalculates the sum of elements to the left and right of each plate using two separate loops for every plate. This leads to a time complexity of $O(n^2)$, as for each plate, the entire array is traversed twice — once for the left sum and once for the right sum.
 
@@ -3263,7 +3261,7 @@ The following table summarizes the time and space complexities of each step in t
 
 This approach, while correct, leads to a quadratic time complexity of $O(n^2)$ because it recalculates the sums from scratch for every plate. The space complexity remains constant at $O(1)$, as no extra space is required beyond the scalar variables for sum calculation. Nevertheless, there are better solutions.
 
-###### Prefix Sum Array Solution
+#### 11.1.1.3.B Prefix Sum Array Solution
 
 Let's start solving the problem "The Plate Balancer" using the Prefix Sum Array algorithm, using Python to create a pseudocode:
 
@@ -3384,7 +3382,7 @@ The implementation follows the Prefix Sum Array algorithm efficiently, construct
 | Loop Through Plates            | Checking all plates for the Magic Plate              | $O(n)$           | $O(1)$                      |
 | Overall Complexity             | Total time and space complexities                    | $O(n)$           | $O(n)$                      |
 
-##### Competitive Solution
+#### 11.1.1.3.C Competitive Solution
 
 The following C++20 code implements the _Prefix Sum Array_ algorithm, with several optimizations designed to reduce typing effort in a competitive programming context. We eliminated the use of functions, as the entire code is kept within the `main` block, avoiding the overhead of function calls. _This approach prioritizes minimal typing and fast execution by copying and pasting the logic rather than encapsulating it into reusable components_.
 
@@ -3493,10 +3491,18 @@ int main() {
 }
 ```
 
-### Algorithm: Difference Array - Efficient Range Updates
+### 11.1.2. Algorithm: Difference Array - Efficient Range Updates
 
-The Difference Array algorithm is a powerful technique for handling multiple range update operations efficiently. It's particularly useful when you need to perform many updates on an array and only query the final result after all updates are complete. Optimizes range updates to $O(1)$ by storing differences between adjacent
-elements.
+The Difference Array algorithm is a powerful technique for handling multiple range update operations efficiently. It's particularly useful when you need to perform many updates on an array and only query the final result after all updates are complete. Optimizes range updates to $O(1)$ by storing differences between adjacent elements.
+
+The Difference Array algorithm shines in various scenarios where multiple range updates are required, and the final result needs to be computed only after all updates have been applied. Here are some common applications where this technique proves to be particularly effective:
+
+1. **Range update queries**: When you need to perform multiple range updates and only query the final array state.
+2. **Traffic flow analysis**: Modeling entry and exit points of vehicles on a road.
+3. **Event scheduling**: Managing overlapping time slots or resources.
+4. **Image processing**: Applying filters or adjustments to specific regions of an image.
+5. **Time series data**: Efficiently updating ranges in time series data.
+6. **Competitive programming**: Solving problems involving multiple range updates.
 
 Consider an array $A$ of size $n$. The difference array $D$ is defined as:
 
@@ -3520,8 +3526,6 @@ After all updates, we can reconstruct $A$ from $D$ using:
 $$A[i] = \sum_{j=0}^i D[j]$$
 
 This technique allows for $O(1)$ time complexity for each range update operation.
-
-#### Mathematical Proof
 
 Let's prove that the range update operation on $D$ correctly reflects the change in $A$.
 
@@ -3553,7 +3557,7 @@ Let's prove that the range update operation on $D$ correctly reflects the change
 
 This proves that the range update operation on $D$ correctly reflects the desired change in $A$.
 
-#### Difference Array Algorithm Explained in Plain English
+#### 11.1.2.1 Difference Array Algorithm Explained in Plain English
 
 1. **Initialize the Difference Array**
 
@@ -3652,45 +3656,10 @@ $$
 
 The Difference Array algorithm optimizes multiple range updates by reducing the time complexity to $O(1)$ per update. It is especially useful when dealing with scenarios that require numerous range modifications followed by queries for the final array state.
 
-#### Complexity Analysis
-
-The Difference Array algorithm offers significant performance benefits, particularly for scenarios involving multiple range updates. Let's examine its complexity:
-
-1. **Range Update Operation**: The beauty of this algorithm lies in its constant-time range updates. Regardless of the size of the range being updated, we only modify two elements in the difference array $D$. This results in a time complexity of $O(1)$ for each range update operation.
-
-2. **Array Reconstruction**: When we need to reconstruct the original array $A$ from the difference array $D$, we perform a single pass through $D$, computing cumulative sums. This operation has a time complexity of $O(n)$, where $n$ is the size of the array.
-
-3. **Space Complexity**: The algorithm requires an additional array $D$ of the same size as the original array $A$. Therefore, the space complexity is $O(n)$.
-
-The efficiency of this algorithm becomes apparent when dealing with multiple range updates followed by a single query or reconstruction. In such scenarios, we can perform $m$ range updates in $O(m)$ time, followed by a single $O(n)$ reconstruction, resulting in a total time complexity of $O(m + n)$. This is significantly more efficient than performing $m$ range updates directly on the original array, which would take $O(mn)$ time.
-
-| Operation              | Time Complexity | Space Complexity |
-| ---------------------- | --------------- | ---------------- |
-| Initialization         | $O(n)$          | $O(n)$           |
-| Range update           | $O(1)$          | $O(n)$           |
-| Array reconstruction   | $O(n)$          | $O(n)$           |
-| **Overall Complexity** | $O(n + q)$      | $O(n)$           |
-
-#### Usage
-
-The Difference Array algorithm shines in various scenarios where multiple range updates are required, and the final result needs to be computed only after all updates have been applied. Here are some common applications where this technique proves to be particularly effective:
-
-1. **Range update queries**: When you need to perform multiple range updates and only query the final array state.
-2. **Traffic flow analysis**: Modeling entry and exit points of vehicles on a road.
-3. **Event scheduling**: Managing overlapping time slots or resources.
-4. **Image processing**: Applying filters or adjustments to specific regions of an image.
-5. **Time series data**: Efficiently updating ranges in time series data.
-6. **Competitive programming**: Solving problems involving multiple range updates.
-
-**Algorithm Implementation**: Pseudocode
-
-**Example Problem**:
+##### 11.1.2.1.A Example Problem
 
 Starting with $N(1 \leq N \leq 1,000,000, N \text{ odd})$ empty stacks.
-Beatriz receives a sequence of $K$ instructions $(1 \leq K \leq 25,000)$,
-each in the format "A B", which means that Beatriz should add
-a new layer of hay to the top of each stack in the interval $A..B$.
-Calculate the median of the heights after the operations.
+Beatriz receives a sequence of $K$ instructions $(1 \leq K \leq 25,000)$, each in the format "A B", which means that Beatriz should add a new layer of hay to the top of each stack in the interval $A..B$. Calculate the median of the heights after the operations.
 
 **Input**: $N = 7, K = 4$ Example Output:
 
@@ -3826,59 +3795,30 @@ int main() {
 }
 ```
 
-**Advantages and Limitations**:
+#### 11.1.2.2 Complexity Analysis
 
-The Difference Array algorithm is highly efficient for handling multiple range updates. It allows constant time updates, $O(1)$, which makes it particularly useful in scenarios with a large number of updates. This efficiency makes the algorithm well-suited for large-scale problems that require numerous updates.
+The Difference Array algorithm offers significant performance benefits, particularly for scenarios involving multiple range updates. Let's examine its complexity:
 
-However, the algorithm is not ideal for frequent individual element queries, as reconstructing the array after updates takes $O(n)$. Additionally, to access individual elements after performing multiple updates, it requires a full array reconstruction, which can be a drawback in cases where immediate access to array elements is needed.
+1. **Range Update Operation**: The beauty of this algorithm lies in its constant-time range updates. Regardless of the size of the range being updated, we only modify two elements in the difference array $D$. This results in a time complexity of $O(1)$ for each range update operation.
 
-#### Problem Example: "Humidity Levels in a Greenhouse" (Problem 1)
+2. **Array Reconstruction**: When we need to reconstruct the original array $A$ from the difference array $D$, we perform a single pass through $D$, computing cumulative sums. This operation has a time complexity of $O(n)$, where $n$ is the size of the array.
 
-You are responsible for monitoring and adjusting the humidity levels in a greenhouse that contains various plants. The greenhouse has a set of humidity sensors, represented by an array $humidity$, where each position in the array corresponds to the reading of a sensor.
+3. **Space Complexity**: The algorithm requires an additional array $D$ of the same size as the original array $A$. Therefore, the space complexity is $O(n)$.
 
-Throughout the day, you receive a series of adjustment instructions called $adjustments$. Each adjustment instruction is represented by a pair $[\text{adjustment,} \, \text{sensor}\_index]$, where $adjustment$ indicates the change that must be made to the reading of the sensor located at $s\text{sensor}\_index$.
+The efficiency of this algorithm becomes apparent when dealing with multiple range updates followed by a single query or reconstruction. In such scenarios, we can perform $m$ range updates in $O(m)$ time, followed by a single $O(n)$ reconstruction, resulting in a total time complexity of $O(m + n)$. This is significantly more efficient than performing $m$ range updates directly on the original array, which would take $O(mn)$ time.
 
-After each adjustment, you must verify the sum of the humidity levels that are within an acceptable range (i.e., are even).
+| Operation              | Time Complexity | Space Complexity |
+| ---------------------- | --------------- | ---------------- |
+| Initialization         | $O(n)$          | $O(n)$           |
+| Range update           | $O(1)$          | $O(n)$           |
+| Array reconstruction   | $O(n)$          | $O(n)$           |
+| **Overall Complexity** | $O(n + q)$      | $O(n)$           |
 
-Your goal is to calculate this sum for each adjustment and report it in a final report.
+#### 11.1.2.3. Typical Problem: Humidity Levels in a Greenhouse (Problem 1)
 
-**Example 1:**
+This problem is the same as the one described in section 11.1.1.3. To solve it, we need to efficiently compute the sum of even humidity readings after each adjustment without recalculating the entire sum each time. We start by calculating the initial sum $S$ of all even numbers in the $humidity$ array. For each adjustment $[\text{adjustment}, \, \text{sensor\_index}]$, we first retrieve the original value $v = humidity[\text{sensor\_index}]$. If $v$ is even, we subtract it from $S$ because its value will change and it may no longer be even. We then update the humidity reading to $v_{\text{new}} = v + \text{adjustment}$. If $v_{\text{new}}$ is even, we add it to $S$. This way, after each adjustment, $S$ accurately reflects the sum of even humidity readings. By updating $S$ incrementally, we avoid the need to sum over the entire array after each adjustment, thus optimizing the computation.
 
-**Input**: $humidity = [45, 52, 33, 64]$, $adjustments = [[5,0],[-20,1],[-14,0],[18,3]]$
-**Output**: $[166,146,132,150]$
-Explanation: Initially, the array is $[45,52,33,64]$.
-After adding $5$ to $humidity[0]$, the array becomes $[50,52,33,64]$, and the sum of even values is $50 + 52 + 64 = 166$.
-After adding $-20$ to $humidity[1]$, the array becomes $[50,32,33,64]$, and the sum of even values is $50 + 32 + 64 = 146$.
-After adding $-14$ to $humidity[0]$, the array becomes $[36,32,33,64]$, and the sum of even values is $36 + 32 + 64 = 132$.
-After adding $18$ to $humidity[3]$, the array becomes $[36,32,33,82]$, and the sum of even values is $36 + 32 + 82 = 150$.
-
-**Example 2**:
-
-**Input**: $humidity = [40]$, $adjustments = [[12,0]]$
-**Output**: $[52]$
-
-**Example 3**:
-
-**Input**: $humidity = [30, 41, 55, 68, 72]$, $adjustments = [[10,0],[-15,2],[22,1],[-8,4],[5,3]]$
-**Output**: $[180,220,220,212,144]$
-
-**Explanation**:
-
-- Initially, the array is $[30,41,55,68,72]$.
-- After adding $10$ to $humidity[0]$, the array becomes $[40,41,55,68,72]$, and the sum of the even values is $40 + 68 + 72 = 180$.
-- After adding $-15$ to $humidity[2]$, the array becomes $[40,41,40,68,72]$, and the sum of the even values is $40 + 40 + 68 + 72 = 220$.
-- After adding $22$ to $humidity[1]$, the array becomes $[40,63,40,68,72]$, and the sum of the even values is $40 + 40 + 68 + 72 = 220$.
-- After adding $-8$ to $humidity[4]$, the array becomes $[40,63,40,68,64]$, and the sum of the even values is $40 + 40 + 68 + 64 = 212$.
-- After adding $5$ to $humidity[3]$, the array becomes $[40,63,40,73,64]$, and the sum of the even values is $40 + 40 + 64 = 144$.
-
-**Constraints:**
-
-- The number of sensors in the greenhouse is at least $1$ and at most $10,000$.
-- Each humidity reading is between $-10,000$ and $10,000$.
-- The number of adjustments during the day can vary between $1$ and $10,000$.
-- Each adjustment can increase or decrease the sensor reading by up to $10,000$ units.
-
-##### Naïve Solution
+##### 11.1.2.3.A. Naïve Solution
 
 **Algorithm**:
 
@@ -3899,7 +3839,7 @@ After adding $18$ to $humidity[3]$, the array becomes $[36,32,33,82]$, and the s
 
 3. Return the `results` list
 
-**Implementation**: Pseudo code.
+**Implementation - Pseudo code**:
 
 ```python
 def calculate_even_sum_after_adjustments(humidity, adjustments):
@@ -3930,7 +3870,7 @@ result = calculate_even_sum_after_adjustments(humidity, adjustments)
 print(result)  # Saída: [166, 146, 132, 150]
 ```
 
-**Implementation**: C++ 20
+**Implementation - C++ 20**:
 
 ```cpp
 #include <iostream>  // Includes the library for input and output operations.
@@ -4204,7 +4144,7 @@ Finally, we need to clarify lambda functions in C++ 20.
 >
 >   In this case, the lambda can process both integer and floating-point numbers, dynamically adapting to the types of its arguments.
 
-###### Data Type Analysis in the `adjustHumidity` Function
+**Data Type Analysis in the `adjustHumidity` Function:**
 
 The choice of `long long` for the return type of the `adjustHumidity` function and for storing intermediate sums is made to ensure safety and prevent overflow in extreme cases:
 
@@ -4217,55 +4157,32 @@ The choice of `long long` for the return type of the `adjustHumidity` function a
 
 By using `long long`, we ensure that no overflow occurs, even in extreme or unexpected cases. However, this could potentially lead to higher memory usage, which may exceed the limits in some competitive programming environments, depending on memory constraints.
 
-###### Time Complexity Analysis
+**Time and Space Complexity Analysis**:
 
 The current implementation recalculates the sum of even numbers in the `humidity` array after each adjustment using the `std::accumulate` function. This results in a time complexity of $O(n \times m)$, where $n$ is the size of the `humidity` array and $m$ is the number of adjustments in the `adjustments` list.
 
 - **Accumulation per adjustment**: For each adjustment, the `std::accumulate` function iterates over all `n` elements in the `humidity` array. This operation takes $O(n)$ time.
 - **Total complexity**: Since there are $m$ adjustments, the overall time complexity becomes $O(n \times m)$. This approach is inefficient for large values of $n$ and $m$ (e.g., if both $n$ and $m$ approach $10^4$), leading to performance issues in cases where the number of elements or adjustments is large.
 
-###### Space Complexity Analysis
-
-The space complexity is primarily influenced by the size of the input arrays:
-
-- **Humidity array**: The `humidity` array contains $n$ elements, each of which is an `int`, so the space required for this array is $O(n)$.
-- **Adjustments array**: The `adjustments` array contains $m$ adjustments, where each adjustment is a pair of integers. Therefore, the space required for this array is $O(m)$.
-- **Result array**: The `result` vector stores $m$ results, each of type `long long`, so the space required for this vector is $O(m)$.
-
-In total, the space complexity is $O(n + m)$.
+The space complexity is primarily influenced by the size of the input arrays: The `humidity` array contains $n$ elements, each of which is an `int`, so the space required for this array is $O(n)$; The `adjustments` array contains $m$ adjustments, where each adjustment is a pair of integers. Therefore, the space required for this array is $O(m)$. Finally, the `result` vector stores $m$ results, each of type `long long`, so the space required for this vector is $O(m)$. _In total, the space complexity is $O(n + m)$_.
 
 The usage of `long long` ensures that the results and intermediate sums are safe from overflow, but it may slightly increase memory usage compared to using `int`. The overall space requirements are manageable within typical constraints in competitive programming environments, where both $n$ and $m$ are capped at $10^4$.
 
-##### Algorithm for a Slightly Less Naive Code
+##### 11.1.2.3.B. Algorithm for a Slightly Less Naive Code
 
-1. Initialization:
+Let's try a slightly less naive solution starting from we saw earlier: Initialize the variable `even_sum` with the value $0$ and create an empty list `results` to store the sums of even values after each adjustment.
 
-   - Create a variable `even_sum` initialized to 0.
-   - Create an empty list `results` to store the sums of even values after each adjustment.
+Initially, calculate the sum of the even values in the `humidity` array. For each value $h$ in `humidity`, if $h$ is even (i.e., $h \bmod 2 = 0$), add $h$ to `even_sum`.
 
-2. Initial calculation of the sum of even values:
+For each adjustment $[adjustment\_value, sensor\_index]$ in the `adjustments` list, check if the current value in `humidity[sensor\_index]` is even. If it is, subtract it from `even_sum`. Then, update the sensor's value by adding `adjustment\_value` to the existing value:
 
-   - For each value $h$ in the `humidity` array:
-     - If $h$ is even (i.e., $h \bmod 2 = 0$), add $h$ to `even_sum`.
+$$
+humidity[sensor\_index] = humidity[sensor\_index] + adjustment\_value
+$$
 
-3. For each adjustment $[adjustment_value, sensor\_index]$ in the `adjustments` list:
+Check if the new value in `humidity[sensor\_index]` is even. If it is, add it to `even_sum`. Add the current value of `even_sum` to the `results` list. Finally, return the `results` list.
 
-   a. Check if the current value in `humidity[sensor\_index]` is even:
-
-   - If it is, subtract it from `even_sum`.
-
-   b. Update the sensor's value:
-   $humidity[sensor\_index] = humidity[sensor\_index] + adjustment_value$
-
-   c. Check if the new value in `humidity[sensor\_index]` is even:
-
-   - If it is, add it to `even_sum`.
-
-   d. Add the current value of `even_sum` to the `results` list.
-
-4. Return the `results` list.
-
-**Code 2**:
+**Implementation - C++ 20**:
 
 ```cpp
 #include <iostream>
@@ -4355,7 +4272,7 @@ int main() {
 }
 ```
 
-The Code 2 adjusts the humidity levels in an array and computes the sum of even numbers after each adjustment. It begins by initializing the sum of even numbers from the `humidity` array, adding each even element to a running total. This sum is stored in the variable `sum`, which is later updated based on adjustments made to the `humidity` array.
+This code adjusts the humidity levels in an array and computes the sum of even numbers after each adjustment. It begins by initializing the sum of even numbers from the `humidity` array, adding each even element to a running total. This sum is stored in the variable `sum`, which is later updated based on adjustments made to the `humidity` array.
 
 For each adjustment in the `adjustments` list, the code checks if the value at the target sensor index (i.e., `humidity[index]`) is even. If it is, that value is subtracted from the running total. After updating the sensor's value, the code checks again if the new value is even and adds it to the total if true. This ensures that only even numbers are considered in the running total, which is then stored in a results vector after each adjustment.
 
@@ -4639,6 +4556,313 @@ By distributing the workload across multiple threads, the program can achieve si
 > ```
 >
 > This enables `reduce` to sum the elements in `vec` concurrently, improving efficiency on large arrays, especially in multi-core environments.
+
+### 11.1.3. Algorithm: Incremental Sum
+
+The **Incremental Sum Algorithm** offers an efficient method for maintaining a running sum of specific elements (such as even numbers) in an array while applying adjustments. This approach eliminates the need to recalculate the entire sum after each modification, instead updating the sum incrementally by subtracting old values and adding new ones as necessary.
+
+The algorithm begins with an initial calculation of the sum of even numbers in the array. This step has a time complexity of $O(n)$, where $n$ represents the array size. For example, in Python, this initial calculation could be implemented as:
+
+```python
+def initial_sum(arr):
+    return sum(x for x in arr if x % 2 == 0)
+```
+
+Following the initial calculation, the algorithm processes each adjustment to the array. For each adjustment, it performs three key operations: If the old value at the adjusted index was even, it subtracts this value from the sum. It then updates the array element with the new value. Finally, if the new value is even, it adds this value to the sum. This process maintains the sum's accuracy with a constant time complexity of $O(1)$ per adjustment. In C++, this adjustment process could be implemented as follows:
+
+```cpp
+void adjust(vector<int>& arr, int index, int new_value, int& even_sum) {
+    if (arr[index] % 2 == 0) even_sum -= arr[index];
+    arr[index] = new_value;
+    if (new_value % 2 == 0) even_sum += new_value;
+}
+```
+
+The algorithm's efficiency stems from its ability to process adjustments in constant time, regardless of the array's size. This approach is particularly beneficial when dealing with numerous adjustments, as it eliminates the need for repeated full array traversals.
+
+To illustrate the algorithm's operation, consider the following example:
+
+```python
+arr = [1, 2, 3, 4, 5]
+even_sum = initial_sum(arr)  # even_sum = 6 (2 + 4)
+
+# Adjustment 1: Change arr[0] from 1 to 6
+adjust(arr, 0, 6, even_sum)  # even_sum = 12 (6 + 2 + 4)
+
+# Adjustment 2: Change arr[1] from 2 to 3
+adjust(arr, 1, 3, even_sum)  # even_sum = 10 (6 + 4)
+```
+
+Let's try to look at it from another perspective:
+
+- Let $n$ be the size of the array $A$.
+- Let $Q$ be the number of queries (adjustments).
+- Let $A[i]$ be the value at index $i$ in the array.
+- Let $adjustments[k] = [val_k, index_k]$ represent the adjustment in the $k$-th query, where $val_k$ is the adjustment value and $index_k$ is the index to be adjusted.
+
+Our goal is to calculate the sum of the even numbers in $A$ incrementally after each adjustment, without recalculating the entire sum from scratch after each query.
+
+**Step 1: Initial Calculation of the Sum of Even Numbers**:
+
+First, define $S$ as the initial sum of even numbers in the array $A$. This sum can be expressed as:
+
+$$S = \sum_{i=0}^{n-1} \text{if } (A[i] \% 2 == 0) \text{ then } A[i]$$
+
+The conditional function indicates that only even values are summed.
+
+**Step 2: Incremental Update**:
+
+When we receive a query $adjustments[k] = [val_k, index_k]$, we adjust the value at index $index_k$ by adding $val_k$ to the current value of $A[index_k]$. The new value is:
+
+$$\text{new\_value} = A[index_k] + val_k$$
+
+We update the sum $S$ efficiently as follows:
+
+1. If the original value $A[index_k]$ was **even**, we subtract it from $S$:
+
+   $$S = S - A[index_k]$$
+
+2. After applying the adjustment, if the new value $\text{new\_value}$ is **even**, we add it to $S$:
+
+   $$S = S + \text{new\_value}$$
+
+**Formal Analysis of Updates**:
+
+For each adjustment, we have the following operations:
+
+- **Remove the old value (if even):**
+  If $A[index_k]$ is even before the adjustment:
+
+  $$S = S - A[index_k]$$
+
+- **Add the new value (if even):**
+  If $\text{new\_value}$ is even after the adjustment:
+
+  $$S = S + \text{new_value}$$
+
+These two operations ensure that the sum $S$ is correctly maintained after each adjustment.
+
+**Demonstration for a Generic Example**:
+
+Let us demonstrate the update for a generic example. Suppose we have the initial array:
+
+$$A = [a_0, a_1, a_2, \dots, a_{n-1}]$$
+
+The initial sum of even numbers will be:
+
+$$S = \sum_{i=0}^{n-1} \text{if } a_i \% 2 == 0 \text{ then } a_i$$
+
+Now, let $adjustments[k] = [val_k, index_k]$ be an adjustment:
+
+- The previous value of $A[index_k]$ is $a_{index_k}$.
+- The new value will be:
+
+  $$\text{new\_value} = a_{index_k} + val_k$$
+
+The sum $S$ will be updated as follows:
+
+- If $a_{index_k} \% 2 == 0$ (i.e., the old value was even), then:
+
+  $$S = S - a_{index_k}$$
+
+- If $\text{new\_value} \% 2 == 0$ (i.e., the new value is even), then:
+
+  $$S = S + \text{new\_value}$$
+
+**Mathematical Justification**:
+
+With each adjustment, we ensure that:
+
+1. If the old value was even, it is removed from the sum $S$.
+2. If the new value is even, it is added to the sum $S$.
+
+These operations guarantee that the sum of all even numbers is correctly maintained without the need to recalculate the entire sum after each adjustment.
+
+#### 11.1.3.1. Incremental Sum Algorithm Explained in Plain English
+
+The **Incremental Sum Algorithm** efficiently maintains the sum of specific elements in an array (such as even numbers) when the array undergoes frequent changes. Instead of recalculating the entire sum after each modification, it updates the sum incrementally, which saves time and computational resources.
+
+1. **Initial Sum Calculation**
+
+   - **Step 1**: Calculate the initial sum of the elements of interest in the array.
+     - For example, sum all even numbers in the array.
+     - Iterate through the array once.
+     - Add each element to the sum if it meets the condition (e.g., if it's even).
+
+2. Processing Adjustments
+
+   When an element in the array is adjusted (modified), the algorithm updates the sum as follows:
+
+   1. **Subtract the Old Value (if it affects the sum)**:
+
+      - Check if the old value at the adjusted index meets the condition (e.g., is even).
+      - If it does, subtract this old value from the sum.
+
+   2. **Update the Array Element**:
+
+      - Modify the array element with the new value.
+
+   3. **Add the New Value (if it affects the sum)**:
+
+      - Check if the new value meets the condition.
+      - If it does, add the new value to the sum.
+
+   These steps ensure that the sum remains accurate without needing to recalculate it from scratch.
+
+**Example**:
+
+Consider the array:
+
+```txt
+A = [1, 2, 3, 4, 5]
+```
+
+Initial Sum of Even Numbers: $Sum = 2 + 4 = 6$
+
+Adjustment 1: Change `A[0]` from $1$ to $6$
+
+1. **Old Value**: `A[0] = 1` (odd)
+
+   - Since it's odd, it doesn't affect the sum.
+
+2. **Update Element**:
+
+   - `A[0] = 1 + 5 = 6`
+
+3. **New Value**: `A[0] = 6` (even)
+   - Add the new value to the sum: Sum = 6 + 6 = **12**
+
+Adjustment 2: Change `A[1]` from $2$ to $3$
+
+1. **Old Value**: `A[1] = 2` (even)
+
+   - Subtract the old value from the sum: Sum = 12 - 2 = **10**
+
+2. **Update Element**:
+
+   - `A[1] = 2 + 1 = 3`
+
+3. **New Value**: `A[1] = 3` (odd)
+   - Since it's odd, the sum remains unchanged.
+
+Adjustment 3: Change `A[2]` from $3$ to $2$
+
+1. **Old Value**: `A[2] = 3` (odd)
+
+   - Doesn't affect the sum.
+
+2. **Update Element**:
+
+   - `A[2] = 3 - 1 = 2`
+
+3. **New Value**: `A[2] = 2` (even)
+   - Add the new value to the sum: Sum = 10 + 2 = **12**
+
+#### 11.1.3.2 Complexity Analysis
+
+The algorithm's overall time complexity can be expressed as $O(n + m)$, where $n$ is the initial array size and $m$ is the number of adjustments. This represents a significant improvement over the naive approach of recalculating the sum after each adjustment, which would result in a time complexity of $O(n \times m)$.
+
+In scenarios involving large arrays with frequent updates, the Incremental Sum Algorithm offers substantial performance benefits. It proves particularly useful in real-time data processing, financial calculations, and various computational problems where maintaining a running sum is crucial. By avoiding redundant calculations, it not only improves execution speed but also reduces computational resource usage, making it an invaluable tool for efficient array manipulation and sum maintenance in a wide range of applications.
+
+### 11.1.4. Typical Problem: "Humidity Levels in a Greenhouse" (Problem 1)
+
+The same problem we saw earlier in the section: 11.1.1.3. Below is the implementation of Difference Array Algorithm in C++20:
+
+```cpp
+#include <vector>
+#include <iostream>
+using namespace std;
+using vi = vector<long long>;
+
+// Function to compute the sum of even numbers after each adjustment
+vi sumEvenAfterAdjustments(vi& humidity, const vector<vi>& adjustments) {
+    long long sumEven = 0;
+    vi result;
+
+    // Calculate the initial sum of even numbers in the humidity array
+    for (auto level : humidity) {
+        if (level % 2 == 0) {
+            sumEven += level;
+        }
+    }
+
+    // Process each adjustment
+    for (const auto& adjustment : adjustments) {
+        long long val = adjustment[0];  // The adjustment value to add
+        int index = adjustment[1];      // The index of the sensor to adjust
+        long long oldValue = humidity[index];  // Store the old humidity value
+        long long newValue = oldValue + val;   // Compute the new humidity value
+
+        // Apply the adjustment to the humidity array
+        humidity[index] = newValue;
+
+        // --- Incremental sum update algorithm starts here ---
+        // Update sumEven based on the old and new values
+
+        // If the old value was even, subtract it from sumEven
+        if (oldValue % 2 == 0) {
+            sumEven -= oldValue;  // Remove the old even value from the sum
+        }
+        // If the new value is even, add it to sumEven
+        if (newValue % 2 == 0) {
+            sumEven += newValue;  // Add the new even value to the sum
+        }
+        // --- Incremental sum update algorithm ends here ---
+
+        // Store the current sum after the adjustment
+        result.push_back(sumEven);
+    }
+    return result;
+}
+
+int main() {
+    // Example 1
+    vi humidity1 = { 45, 52, 33, 64 };
+    vector<vi> adjustments1 = { {5, 0}, {-20, 1}, {-14, 0}, {18, 3} };
+    vi result1 = sumEvenAfterAdjustments(humidity1, adjustments1);
+    cout << "Example 1: ";
+    for (const auto& sum : result1) cout << sum << " ";
+    cout << endl;
+
+    // Example 2
+    vi humidity2 = { 40 };
+    vector<vi> adjustments2 = { {12, 0} };
+    vi result2 = sumEvenAfterAdjustments(humidity2, adjustments2);
+    cout << "Example 2: ";
+    for (const auto& sum : result2) cout << sum << " ";
+    cout << endl;
+
+    // Example 3
+    vi humidity3 = { 30, 41, 55, 68, 72 };
+    vector<vi> adjustments3 = { {10, 0}, {-15, 2}, {22, 1}, {-8, 4}, {5, 3} };
+    vi result3 = sumEvenAfterAdjustments(humidity3, adjustments3);
+    cout << "Example 3: ";
+    for (const auto& sum : result3) cout << sum << " ";
+    cout << endl;
+
+    return 0;
+}
+```
+
+### Static Array Queries
+
+Techniques for arrays that don't change between queries, allowing efficient pre-calculations.
+
+- Algorithm: Sparse Table
+
+- Problem Example: "Inventory Restocking" - Performs queries after each inventory adjustment
+
+### Range Minimum Queries (RMQ)
+
+Data structure to find the minimum in any range in $O(1)$ after $O(n \log n)$ preprocessing.
+
+- Algorithm: Sparse Table for RMQ
+
+### Fenwick Tree
+
+Data structure for prefix sums and efficient updates, with operations in $O(\log n)$.
+
+- Algorithm: Binary Indexed Tree (BIT)
 
 ##### Finally, the code using Fenwick tree
 
@@ -5059,319 +5283,6 @@ The **`inline constexpr`** constant `input_method` specifies which input method 
 > In summary, **`inline`** helps with reducing overhead by allowing the compiler to replace function calls with the actual function code, and it prevents multiple definitions of variables in multiple translation units. **`constexpr`** enables computations to be performed at compile time, which can significantly optimize performance by avoiding runtime calculations, although its applicability in competitive programming may be limited.
 
 AINDA TEM MUITO QUE EXPLICAR AQUI.
-
-### Algorithm: Incremental Sum
-
-The **Incremental Sum Algorithm** offers an efficient method for maintaining a running sum of specific elements (such as even numbers) in an array while applying adjustments. This approach eliminates the need to recalculate the entire sum after each modification, instead updating the sum incrementally by subtracting old values and adding new ones as necessary.
-
-The algorithm begins with an initial calculation of the sum of even numbers in the array. This step has a time complexity of $O(n)$, where $n$ represents the array size. For example, in Python, this initial calculation could be implemented as:
-
-```python
-def initial_sum(arr):
-    return sum(x for x in arr if x % 2 == 0)
-```
-
-Following the initial calculation, the algorithm processes each adjustment to the array. For each adjustment, it performs three key operations: If the old value at the adjusted index was even, it subtracts this value from the sum. It then updates the array element with the new value. Finally, if the new value is even, it adds this value to the sum. This process maintains the sum's accuracy with a constant time complexity of $O(1)$ per adjustment. In C++, this adjustment process could be implemented as follows:
-
-```cpp
-void adjust(vector<int>& arr, int index, int new_value, int& even_sum) {
-    if (arr[index] % 2 == 0) even_sum -= arr[index];
-    arr[index] = new_value;
-    if (new_value % 2 == 0) even_sum += new_value;
-}
-```
-
-The algorithm's efficiency stems from its ability to process adjustments in constant time, regardless of the array's size. This approach is particularly beneficial when dealing with numerous adjustments, as it eliminates the need for repeated full array traversals.
-
-To illustrate the algorithm's operation, consider the following example:
-
-```python
-arr = [1, 2, 3, 4, 5]
-even_sum = initial_sum(arr)  # even_sum = 6 (2 + 4)
-
-# Adjustment 1: Change arr[0] from 1 to 6
-adjust(arr, 0, 6, even_sum)  # even_sum = 12 (6 + 2 + 4)
-
-# Adjustment 2: Change arr[1] from 2 to 3
-adjust(arr, 1, 3, even_sum)  # even_sum = 10 (6 + 4)
-```
-
-#### Complexity Analysis
-
-The algorithm's overall time complexity can be expressed as $O(n + m)$, where $n$ is the initial array size and $m$ is the number of adjustments. This represents a significant improvement over the naive approach of recalculating the sum after each adjustment, which would result in a time complexity of $O(n \times m)$.
-
-In scenarios involving large arrays with frequent updates, the Incremental Sum Algorithm offers substantial performance benefits. It proves particularly useful in real-time data processing, financial calculations, and various computational problems where maintaining a running sum is crucial. By avoiding redundant calculations, it not only improves execution speed but also reduces computational resource usage, making it an invaluable tool for efficient array manipulation and sum maintenance in a wide range of applications.
-
-#### Incremental Sum Mathematical Definitions
-
-Let:
-
-- $n$ be the size of the array $A$,
-- $Q$ be the number of queries (adjustments),
-- $A[i]$ be the value at index $i$ in the array,
-- $adjustments[k] = [val_k, index_k]$ be the adjustment in the $k$-th query, where $val_k$ is the adjustment value and $index_k$ is the index to be adjusted.
-
-Our goal is to calculate the sum of the even numbers in $A$ after each adjustment incrementally, without recalculating the entire sum from scratch after each query.
-
-**Step 1: Initial Calculation of the Sum of Even Numbers**:
-
-First, define $S$ as the initial sum of even numbers in the array $A$. This sum can be expressed as:
-
-$$S = \sum_{i=0}^{n-1} \text{if } (A[i] \% 2 == 0) \text{ then } A[i]$$
-
-The conditional function indicates that only even values are summed.
-
-**Step 2: Incremental Update**:
-
-When we receive a query $adjustments[k] = [val_k, index_k]$, we adjust the value at index $index_k$ by adding $val_k$ to the current value of $A[index_k]$. The new value is:
-
-$$\text{new\_value} = A[index_k] + val_k$$
-
-We update the sum $S$ efficiently as follows:
-
-1. If the original value $A[index_k]$ was **even**, we subtract it from $S$:
-
-   $$
-   S = S - A[index_k]
-   $$
-
-2. After applying the adjustment, if the new value $\text{new\_value}$ is **even**, we add it to $S$:
-
-   $$
-   S = S + \text{new\_value}
-   $$
-
-**Formal Analysis of Updates**:
-
-For each adjustment, we have the following operations:
-
-- **Remove the old value (if even):**
-  If $A[index_k]$ is even before the adjustment:
-
-  $$ S = S - A[index_k] $$
-
-- **Add the new value (if even):**
-  If $\text{new\_value}$ is even after the adjustment:
-
-  $$ S = S + \text{new_value} $$
-
-These two operations ensure that the sum $S$ is correctly maintained after each adjustment.
-
-**Demonstration for a Generic Example**:
-
-Let us demonstrate the update for a generic example. Suppose we have the initial array:
-
-$$A = [a_0, a_1, a_2, \dots, a_{n-1}]$$
-
-The initial sum of even numbers will be:
-
-$$S = \sum_{i=0}^{n-1} \text{if } a_i \% 2 == 0 \text{ then } a_i$$
-
-Now, let $adjustments[k] = [val_k, index_k]$ be an adjustment:
-
-- The previous value of $A[index_k]$ is $a_{index_k}$.
-- The new value will be:
-
-  $$\text{new\_value} = a_{index_k} + val_k$$
-
-The sum $S$ will be updated as follows:
-
-- If $a_{index_k} \% 2 == 0$ (i.e., the old value was even), then:
-
-  $$S = S - a_{index_k}$$
-
-- If $\text{new\_value} \% 2 == 0$ (i.e., the new value is even), then:
-
-  $$S = S + \text{new\_value}$$
-
-**Mathematical Justification**:
-
-With each adjustment, we ensure that:
-
-1. If the old value was even, it is removed from the sum $S$.
-2. If the new value is even, it is added to the sum $S$.
-
-These operations guarantee that the sum of all even numbers is correctly maintained without the need to recalculate the entire sum after each adjustment.
-
-### Incremental Sum Algorithm Explained in Plain English
-
-The **Incremental Sum Algorithm** efficiently maintains the sum of specific elements in an array (such as even numbers) when the array undergoes frequent changes. Instead of recalculating the entire sum after each modification, it updates the sum incrementally, which saves time and computational resources.
-
-1. **Initial Sum Calculation**
-
-   - **Step 1**: Calculate the initial sum of the elements of interest in the array.
-     - For example, sum all even numbers in the array.
-     - Iterate through the array once.
-     - Add each element to the sum if it meets the condition (e.g., if it's even).
-
-2. Processing Adjustments
-
-   When an element in the array is adjusted (modified), the algorithm updates the sum as follows:
-
-   1. **Subtract the Old Value (if it affects the sum)**:
-
-      - Check if the old value at the adjusted index meets the condition (e.g., is even).
-      - If it does, subtract this old value from the sum.
-
-   2. **Update the Array Element**:
-
-      - Modify the array element with the new value.
-
-   3. **Add the New Value (if it affects the sum)**:
-
-      - Check if the new value meets the condition.
-      - If it does, add the new value to the sum.
-
-   These steps ensure that the sum remains accurate without needing to recalculate it from scratch.
-
-**Example**:
-
-Consider the array:
-
-```txt
-A = [1, 2, 3, 4, 5]
-```
-
-Initial Sum of Even Numbers: $Sum = 2 + 4 = 6$
-
-Adjustment 1: Change `A[0]` from $1$ to $6$
-
-1.  **Old Value**: `A[0] = 1` (odd)
-
-    - Since it's odd, it doesn't affect the sum.
-
-2.  **Update Element**:
-
-    - `A[0] = 1 + 5 = 6`
-
-3.  **New Value**: `A[0] = 6` (even)
-    - Add the new value to the sum: Sum = 6 + 6 = **12**
-
-Adjustment 2: Change `A[1]` from $2$ to $3$
-
-1.  **Old Value**: `A[1] = 2` (even)
-
-    - Subtract the old value from the sum: Sum = 12 - 2 = **10**
-
-2.  **Update Element**:
-
-    - `A[1] = 2 + 1 = 3`
-
-3.  **New Value**: `A[1] = 3` (odd)
-    - Since it's odd, the sum remains unchanged.
-
-Adjustment 3: Change `A[2]` from $3$ to $2$
-
-1.  **Old Value**: `A[2] = 3` (odd)
-
-    - Doesn't affect the sum.
-
-2.  **Update Element**:
-
-    - `A[2] = 3 - 1 = 2`
-
-3.  **New Value**: `A[2] = 2` (even)
-    - Add the new value to the sum: Sum = 10 + 2 = **12**
-
-### Problem Example: "Humidity Levels in a Greenhouse" (Problem 1)
-
-The same problem we saw earlier in the section: **Algorithm: Difference Array - Efficient Range Updates**. Below is the implementation in C++20:
-
-```cpp
-#include <vector>
-#include <iostream>
-using namespace std;
-using vi = vector<long long>;
-
-// Function to compute the sum of even numbers after each adjustment
-vi sumEvenAfterAdjustments(vi& humidity, const vector<vi>& adjustments) {
-    long long sumEven = 0;
-    vi result;
-
-    // Calculate the initial sum of even numbers in the humidity array
-    for (auto level : humidity) {
-        if (level % 2 == 0) {
-            sumEven += level;
-        }
-    }
-
-    // Process each adjustment
-    for (const auto& adjustment : adjustments) {
-        long long val = adjustment[0];  // The adjustment value to add
-        int index = adjustment[1];      // The index of the sensor to adjust
-        long long oldValue = humidity[index];  // Store the old humidity value
-        long long newValue = oldValue + val;   // Compute the new humidity value
-
-        // Apply the adjustment to the humidity array
-        humidity[index] = newValue;
-
-        // --- Incremental sum update algorithm starts here ---
-        // Update sumEven based on the old and new values
-
-        // If the old value was even, subtract it from sumEven
-        if (oldValue % 2 == 0) {
-            sumEven -= oldValue;  // Remove the old even value from the sum
-        }
-        // If the new value is even, add it to sumEven
-        if (newValue % 2 == 0) {
-            sumEven += newValue;  // Add the new even value to the sum
-        }
-        // --- Incremental sum update algorithm ends here ---
-
-        // Store the current sum after the adjustment
-        result.push_back(sumEven);
-    }
-    return result;
-}
-
-int main() {
-    // Example 1
-    vi humidity1 = { 45, 52, 33, 64 };
-    vector<vi> adjustments1 = { {5, 0}, {-20, 1}, {-14, 0}, {18, 3} };
-    vi result1 = sumEvenAfterAdjustments(humidity1, adjustments1);
-    cout << "Example 1: ";
-    for (const auto& sum : result1) cout << sum << " ";
-    cout << endl;
-
-    // Example 2
-    vi humidity2 = { 40 };
-    vector<vi> adjustments2 = { {12, 0} };
-    vi result2 = sumEvenAfterAdjustments(humidity2, adjustments2);
-    cout << "Example 2: ";
-    for (const auto& sum : result2) cout << sum << " ";
-    cout << endl;
-
-    // Example 3
-    vi humidity3 = { 30, 41, 55, 68, 72 };
-    vector<vi> adjustments3 = { {10, 0}, {-15, 2}, {22, 1}, {-8, 4}, {5, 3} };
-    vi result3 = sumEvenAfterAdjustments(humidity3, adjustments3);
-    cout << "Example 3: ";
-    for (const auto& sum : result3) cout << sum << " ";
-    cout << endl;
-
-    return 0;
-}
-```
-
-### Static Array Queries
-
-Techniques for arrays that don't change between queries, allowing efficient pre-calculations.
-
-- Algorithm: Sparse Table
-
-- Problem Example: "Inventory Restocking" - Performs queries after each inventory adjustment
-
-### Range Minimum Queries (RMQ)
-
-Data structure to find the minimum in any range in $O(1)$ after $O(n \log n)$ preprocessing.
-
-- Algorithm: Sparse Table for RMQ
-
-### Fenwick Tree
-
-Data structure for prefix sums and efficient updates, with operations in $O(\log n)$.
-
-- Algorithm: Binary Indexed Tree (BIT)
 
 ## Sliding Window Algorithms
 
