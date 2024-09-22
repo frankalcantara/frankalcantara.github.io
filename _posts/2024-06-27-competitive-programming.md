@@ -35,7 +35,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-22T22:28:50.172Z
+lastmod: 2024-09-22T22:40:10.400Z
 ---
 
 # 1. Introduction
@@ -2955,7 +2955,7 @@ Standard library algorithms are great for transformation tasks, allowing you to 
 
 One-dimensional arrays are fundamental data structures in computer science and are the basis for many algorithmic problems. This classification organizes common problem types, algorithms, and techniques used to solve challenges involving 1D arrays. From basic operations to advanced optimization strategies, this comprehensive guide covers a wide range of approaches, helping developers and algorithm enthusiasts to identify and apply the most efficient solutions to array-based problems.
 
-## 11.1. Preprocessing and Efficient Query Techniques
+## 11.1. Preprocessing and Efficient Query Techniques - Arrays
 
 Methods that prepare the array to respond to queries quickly, typically trading preprocessing time for faster queries. This approach involves investing time upfront to organize or transform the array data in a way that allows for rapid responses to subsequent queries. For example, in a scenario where frequent sum calculations of array intervals are needed, a preprocessing step might involve creating a prefix sum array. This initial step takes $O(n)$ time but enables constant-time $O(1)$ sum queries afterward, as opposed to $O(n)$ time per query without preprocessing. This trade-off is beneficial when the number of queries is large, as the initial time investment is offset by the significant speed improvement in query operations. Such techniques are common in algorithmic problem-solving, where strategic data preparation can dramatically enhance overall performance, especially in scenarios with repetitive operations on the same dataset.
 
@@ -4844,7 +4844,7 @@ int main() {
 }
 ```
 
-### Static Array Queries
+### 11.1.5. Static Array Queries
 
 Techniques for arrays that don't change between queries, allowing efficient pre-calculations.
 
@@ -4852,13 +4852,13 @@ Techniques for arrays that don't change between queries, allowing efficient pre-
 
 - Problem Example: "Inventory Restocking" - Performs queries after each inventory adjustment
 
-### Range Minimum Queries (RMQ)
+### 11.1.6. Range Minimum Queries (RMQ)
 
 Data structure to find the minimum in any range in $O(1)$ after $O(n \log n)$ preprocessing.
 
 - Algorithm: Sparse Table for RMQ
 
-### Fenwick Tree
+### 11.1.7. Fenwick Tree
 
 Data structure for prefix sums and efficient updates, with operations in $O(\log n)$.
 
@@ -5284,17 +5284,17 @@ The **`inline constexpr`** constant `input_method` specifies which input method 
 
 AINDA TEM MUITO QUE EXPLICAR AQUI.
 
-## Sliding Window Algorithms
+## 11.2. Sliding Window Algorithms
 
 Techniques for efficiently processing contiguous subarrays of fixed size.
 
-### Sliding Window Minimum
+### 11.2.1. Sliding Window Minimum
 
 Finds the minimum in a fixed-size window that slides through the array in $O(n)$ using a deque.
 
 - Algorithm: Monotonic Deque
 
-### Sliding Window Maximum
+### 11.2.2. Sliding Window Maximum
 
 Similar to the minimum, but for finding the maximum in each window.
 
@@ -5302,11 +5302,11 @@ Similar to the minimum, but for finding the maximum in each window.
 
 - Problem Example: "Weather Monitoring System" - Uses a sliding window of size k to find the subarray with the highest average
 
-## Multiple Query Processing
+## 11.3. Multiple Query Processing
 
 Methods for handling multiple queries efficiently.
 
-### Mo's Algorithm
+### 11.3.1 Mo's Algorithm
 
 Imagine you're organizing a library with thousands of books. You need to answer questions about specific sections of the shelves, and each question feels like wandering through endless rows, searching for the right answers. Enter Mo's Algorithm. It’s like having a librarian who doesn’t waste time. This librarian knows exactly how to group your questions, answering them swiftly, without scouring the entire library each time.
 
@@ -5334,7 +5334,7 @@ With Mo's Algorithm, even large sets of queries can be handled efficiently:
 
 This method keeps the operations minimal and ensures a much faster solution.
 
-#### Why Choose $\sqrt{n}$ as the Block Size?
+#### 11.3.1.1 Why Choose $\sqrt{n}$ as the Block Size?
 
 The choice of $\sqrt{n}$ as the block size is crucial for the algorithm's efficiency. Here's why:
 
@@ -5344,7 +5344,7 @@ The choice of $\sqrt{n}$ as the block size is crucial for the algorithm's effici
 
 This choice balances the work done when moving between blocks and within blocks, optimizing overall performance.
 
-#### Complexity Analysis
+#### 11.3.1.2. Complexity Analysis
 
 **Time Complexity Analysis**:
 
@@ -5362,11 +5362,11 @@ $$O(n + q)$$
 
 To understand the space complexity, we need $O(n)$ space to store the array elements and $O(q)$ space to store the queries. As a result, the overall space usage is linear, ensuring that the algorithm remains efficient even for large datasets.
 
-#### Implementation
+#### 11.3.1.3 Implementation
 
 Let's see how to implement Mo's Algorithm in Python and C++20. These implementations assume we're calculating the sum over intervals, but the concept can be adapted for other types of queries.
 
-#### Python Pseudocode
+**Python Pseudocode**:
 
 ```python
 import math
@@ -5428,7 +5428,7 @@ result = mo_algorithm(arr, queries)  # Process the queries
 print(result)  # Output the results
 ```
 
-#### C++20 Code Example
+**Implementation: C++20**:
 
 ```cpp
 #include <iostream>
@@ -5556,9 +5556,9 @@ Mo's Algorithm is highly effective for range query problems, making it ideal whe
 
 However, there are some limitations to the algorithm. It is not suitable for handling online queries, where answers are required immediately as queries arrive. Additionally, since all queries must be stored, this can become a challenge for extremely large datasets. Finally, implementing Mo's Algorithm can be more complex than simpler, more straightforward methods, which might not be ideal in all cases.
 
-#### Problem: "Humidity Levels in a Greenhouse" (Problem 1)
+#### 11.3.1.4. Typical Problem: Humidity Levels in a Greenhouse (Problem 1)
 
-We've already solved this type of problem in _Section 5: Range Query Problems_ of the attached document. In that section, we explored different algorithms and analyzed their time and space complexities when applied to various range query scenarios.
+We've already solved this type of problem earlier in _Section: 11.1.1.3_ of this document. In that section, we explored different algorithms and analyzed their time and space complexities when applied to various range query scenarios.
 
 Below is a summary of the time complexity for each solution, showing how Mo's Algorithm compares to other approaches.
 
@@ -5700,97 +5700,97 @@ For **large inputs** (e.g., very large values of $n$ and $m$):
 
 - The **Slightly Less Naive** solution, while efficient for small inputs, may struggle with scalability as it does not benefit from logarithmic or square root optimizations, leading to potential performance bottlenecks for very large input sizes.
 
-## Auxiliary Data Structures
+## 11.4. Auxiliary Data Structures
 
 Specific data structures used to optimize operations on arrays.
 
-### Deque (for Sliding Window Minimum/Maximum)
+### 11.4.1 Deque (for Sliding Window Minimum/Maximum)
 
 Double-ended queue that maintains relevant elements of the current window.
 
-### Sparse Table (for RMQ)
+### 11.4.2 Sparse Table (for RMQ)
 
 Structure that stores pre-computed results for power-of-2 intervals.
 
-### Segment Tree
+### 11.4.3 Segment Tree
 
 Tree-based data structure for range queries and updates in $O(\log n)$.
 
-## Complexity Optimization Techniques
+## 11.5. Complexity Optimization Techniques
 
 Methods to reduce the computational complexity of common operations.
 
-### Reduction from $O(n^2)$ to $O(n)$
+### 11.5.1. Reduction from $O(n^2)$ to $O(n)$
 
 Use of prefix sums to optimize range sum calculations.
 
 - Problem Example: "Sales Target Analysis" - Uses prefix sum technique to optimize subarray calculations
 
-### Update in $O(1)$
+### 11.5.2. Update in $O(1)$
 
 Difference arrays for constant-time range updates.
 
 - Problem Example: "Inventory Restocking" - Makes point adjustments to the inventory
 
-### Query in $O(1)$ after preprocessing
+### 11.5.3. Query in $O(1)$ after preprocessing
 
 RMQ and static array queries with instant responses after pre-calculation.
 
 - Problem Example: "The Plate Balancer" - After calculating cumulative sums, can find the "Magic Plate" in O(n)
 
-### Processing in $O((n + q) \sqrt{n})$
+### 11.5.4. Processing in $O((n + q) \sqrt{n})$
 
 Mo's Algorithm to optimize multiple range queries.
 
-## Subarray Algorithms
+## 11.6. Subarray Algorithms
 
 Specific techniques for problems involving subarrays.
 
-### Kadane's Algorithm
+### 11.6.1 Kadane's Algorithm
 
 Finds the contiguous subarray with the largest sum in $O(n)$. Useful for sum maximization problems.
 
 - Algorithm: Kadane's Algorithm
 
-### Two Pointers
+### 11.6.2 Two Pointers
 
 Technique for problems involving pairs of elements or subarrays that satisfy certain conditions.
 
 - Algorithm: Two Pointers Method
 
-## Hashing Techniques
+## 11.7. Hashing Techniques
 
 Methods that use hashing to optimize certain operations on arrays.
 
-### Prefix Hash
+### 11.6.1. Prefix Hash
 
 Uses hashing to quickly compare substrings or subarrays.
 
 - Algorithm: Rolling Hash
 
-### Rolling Hash
+### 11.6.2. Rolling Hash
 
 Technique to efficiently calculate hashes of substrings or subarrays when sliding a window.
 
 - Algorithm: Rabin-Karp Algorithm
 
-## Partitioning Algorithms
+## 11.8. Partitioning Algorithms
 
 Techniques for dividing or reorganizing arrays.
 
-### Partition Algorithm (QuickSelect)
+### 11.6.1. Partition Algorithm (QuickSelect)
 
 Used to find the kth smallest element in average linear time.
 
 - Algorithm: QuickSelect
 
-### Dutch National Flag
+### 11.6.2. Dutch National Flag
 
 Algorithm to partition an array into three parts, useful in sorting problems with few unique values.
 
 - Algorithm: Dutch National Flag Algorithm
 
-## The Fenwick Tree
+## 11.7. The Fenwick Tree
 
 The Fenwick Tree, also know as Binary Indexed Tree (BIT), is an efficient data structure designed to handle dynamic cumulative frequency tables. It was introduced by Peter M. Fenwick in 1994 in his paper _"A new data structure for cumulative frequency tables."_
 
@@ -5847,7 +5847,7 @@ Now, sum queries have $O(1)$ complexity, but updates still require $O(n)$ to reb
 
 The Binary Indexed Tree offers a balance between these two approaches, allowing both updates and queries in $O(\log n)$.
 
-### Fundamental Concept
+### 11.7.1 Fundamental Concept
 
 The Binary Indexed Tree (BIT) is built on the idea that each index $i$ in the tree stores a cumulative sum of elements from the original array. **The range of elements summed at each index $i$ is determined by the position of the least significant set bit (LSB) in the binary representation of $i$**.
 
@@ -5909,7 +5909,7 @@ The value stored in each position of the Fenwick tree is the incremental contrib
 ![]({{ site.baseurl }}/assets/images/bit1.jpg){: class="lazyimg"}
 _Gráfico 1.1 - Example Fenwick tree diagram._{: class="legend"}
 
-#### Querying the Fenwick tree
+### 11.7.2. Querying the Fenwick tree
 
 When querying the sum of elements from the start of the array to index $i$, the Fenwick tree allows us to sum over non-overlapping segments by traversing the tree upwards:
 
@@ -5933,7 +5933,7 @@ Thus, the sum of elements from index $0$ to $5$ is:
 
 $$ \text{sum}(0, 5) = \text{BIT}[5] + \text{BIT}[4] = A[5] + (A[0] + A[1] + A[2] + A[3] + A[4]) $$
 
-#### Updating the Fenwick tree
+### 11.7.3. Updating the Fenwick tree
 
 When updating the value of an element in the original array, the Fenwick tree allows us to update all the relevant cumulative sums efficiently. Here's the pseudocode for the update operation:
 
@@ -5951,7 +5951,7 @@ For example, if we update $A[4]$, the Fenwick tree must update the sums stored a
 
 In each case, the number of operations required is proportional to the number of set bits in the index, which guarantees that both update and query operations run in $O(\log n)$.
 
-### Basic Operations
+### 11.7.4. Basic Operations
 
 #### Update
 
