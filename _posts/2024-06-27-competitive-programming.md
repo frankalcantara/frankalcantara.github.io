@@ -3,39 +3,39 @@ layout: post
 title: Competitive programming in C++ - Techniques and Insights
 author: Frank
 categories:
-  - Matemática
-  - Linguagens Formais
-  - Programação
+    - Matemática
+    - Linguagens Formais
+    - Programação
 tags:
-  - Matemática
-  - Linguagens Formais
-  - Programação Dinâmica
-  - Dynamic Programming
-  - C++ Algorithms
-  - Performance Analysis
-  - Coding Examples
-  - Algorithm Optimization
-  - Practical Programming Guide
+    - Matemática
+    - Linguagens Formais
+    - Programação Dinâmica
+    - Dynamic Programming
+    - C++ Algorithms
+    - Performance Analysis
+    - Coding Examples
+    - Algorithm Optimization
+    - Practical Programming Guide
 image: assets/images/prog_dynamic.jpeg
 description: Dynamic Programming in C++ with practical examples, performance analysis, and detailed explanations to optimize your coding skills and algorithm efficiency.
 slug: competitive-programming-techniques-insights
 keywords:
-  - Dynamic Programming
-  - C++ Algorithms
-  - Coding Examples
-  - Performance Optimization
-  - Algorithm Efficiency
-  - Programming Guide
-  - Code Comparison
-  - Developer Tips
+    - Dynamic Programming
+    - C++ Algorithms
+    - Coding Examples
+    - Performance Optimization
+    - Algorithm Efficiency
+    - Programming Guide
+    - Code Comparison
+    - Developer Tips
 rating: 5
 published: 2024-06-27T19:43:15.124Z
 draft: null
 featured: true
 toc: true
-preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-22T22:40:10.400Z
+preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
+beforetoc: In this comprehensive guide, we delve into the world of Competitive Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
+lastmod: 2024-09-24T15:55:45.012Z
 ---
 
 # 1. Introduction
@@ -51,7 +51,7 @@ For instance, one common optimization in competitive programming is to speed up 
 
 This small change can make a significant difference when dealing with large input datasets. Throughout this guide, we will cover similar techniques, along with advanced input/output operations, efficient use of data structures like arrays and vectors, and modern C++20 features that help streamline your code. You'll also learn optimizations to minimize overhead and how to effectively leverage STL containers and algorithms to improve both runtime performance and code readability. Whether you are solving large-scale data processing problems or optimizing for time-critical solutions, the strategies in this guide will equip you to perform at a high level in programming contests.
 
-We begin by exploring various methods to enhance file I/O and array handling, which are fundamental to processing large datasets quickly. The guide then progresses through different looping constructs, from basic for and while loops to more advanced C++20 features like range-based for loops with views and parallel execution policies. We also cover important optimizations such as minimizing typing overhead, utilizing the Standard Template Library (STL) effectively, and employing memory-efficient techniques like std::span. Throughout this journey, we'll focus on how these C++ features and optimizations can be applied to implement efficient Dynamic Programming solutions, enabling you to solve complex algorithmic puzzles with improved performance and reduced memory usage.
+We begin by exploring various methods to strengthen file I/O and array handling, which are fundamental to processing large datasets quickly. The guide then progresses through different looping constructs, from basic for and while loops to more advanced C++20 features like range-based for loops with views and parallel execution policies. We also cover important optimizations such as minimizing typing overhead, utilizing the Standard Template Library (STL) effectively, and employing memory-efficient techniques like std::span. Throughout this journey, we'll focus on how these C++ features and optimizations can be applied to implement efficient Dynamic Programming solutions, enabling you to solve complex algorithmic puzzles with improved performance and reduced memory usage.
 
 C++ is particularly effective for solving a wide range of problems in competitive programming. Some common types of problems where C++ excels include:
 
@@ -63,7 +63,7 @@ C++ is particularly effective for solving a wide range of problems in competitiv
 
 These problem types demonstrate how C++'s performance and rich standard library can be leveraged to create optimal solutions in competitive programming scenarios.
 
-By mastering these C++20 techniques, you'll be well-equipped to tackle a wide range of competitive programming challenges. Whether you're dealing with large-scale data processing, intricate algorithmic puzzles, or time-critical optimizations, the strategies outlined in this guide will provide you with the tools to write faster, more efficient code. This knowledge not only enhances your performance in competitions but also deepens your understanding of C++ and algorithmic thinking, skills that are valuable beyond the competitive arena.
+By mastering these C++20 techniques, you'll be well-equipped to tackle a wide range of competitive programming challenges. Whether you're dealing with large-scale data processing, intricate algorithmic puzzles, or time-critical optimizations, the strategies outlined in this guide will provide you with the tools to write faster, more efficient code. This knowledge not only boosts your performance in competitions but also deepens your understanding of C++ and algorithmic thinking, skills that are valuable beyond the competitive arena.
 
 # 2. C++ Competitive Programming Hacks
 
@@ -531,7 +531,7 @@ When opening files, we can specify different opening modes using values from the
 
 ## 4.2 Advanced File I/O Techniques in C++
 
-There are faster ways to open and process files in C++, which can be especially useful in competitive programming when dealing with large data sets. Here are some techniques that can enhance the efficiency of file handling:
+There are faster ways to open and process files in C++, which can be especially useful in competitive programming when dealing with large data sets. Here are some techniques that can improve the efficiency of file handling:
 
 1. **Disable I/O Synchronization**
 
@@ -1531,7 +1531,7 @@ int main(int argc, char* argv[]) {
 
 In C++20, matrices are typically represented as vectors of vectors (`std::vector<std::vector<T>>`), where each inner vector represents a row of the matrix. This approach allows for dynamic sizing and easy manipulation of multi-dimensional data, making matrices ideal for problems involving grids, tables, or any 2D structure.
 
-Matrices in C++ offer flexibility in managing data: you can resize rows and columns independently, access elements using intuitive indexing, and leverage standard vector operations for rows. Additionally, the use of `ranges` and `views` introduced in C++20 enhances the ability to iterate and transform matrix data more expressively and efficiently.
+Matrices in C++ offer flexibility in managing data: you can resize rows and columns independently, access elements using intuitive indexing, and leverage standard vector operations for rows. Additionally, the use of `ranges` and `views` introduced in C++20 boosts the ability to iterate and transform matrix data more expressively and efficiently.
 
 _The use of matrices is common in competitive programming for tasks such as implementing dynamic programming tables, graph adjacency matrices, or performing transformations on 2D data. With the powerful capabilities of C++20's STL, matrices become a highly adaptable and efficient way to handle complex, multi-dimensional computations in a structured manner_.
 
@@ -2062,7 +2062,7 @@ _**Remember:** The efficiency of these approaches comes at the cost of increased
 
 # 8. Efficient Data Manipulation in C++ using Span and Ranges
 
-In the fast-paced world of competitive programming and high-performance computing, efficient data manipulation is paramount. C++20 introduces two powerful features - `std::span` and `std::ranges` - that significantly enhance a programmer's ability to handle data effectively and write optimized code.
+In the fast-paced world of competitive programming and high-performance computing, efficient data manipulation is paramount. C++20 introduces two powerful features - `std::span` and `std::ranges` for that.
 
 These features are particularly important because they address common performance bottlenecks in data-intensive applications. `std::span` provides a lightweight, non-owning view into contiguous data, reducing unnecessary copying and allowing for flexible, efficient data access. `std::ranges`, on the other hand, offers a unified, composable interface for working with sequences of data, enabling more intuitive and often more performant algorithm implementations. Together, they form a potent toolkit for developers seeking to push the boundaries of what's possible in terms of code efficiency and elegance in C++.
 
@@ -2572,7 +2572,7 @@ Range views allow high-performance operations, processing only the necessary ele
 
 ### 10.1.6. Parallel `for` Loop (C++17/C++20)
 
-While not a traditional `for` loop, using parallelism in loops is a powerful feature introduced in C++17 and further enhanced in C++20.
+While not a traditional `for` loop, using parallelism in loops is a powerful feature introduced in C++17 and further improved in C++20.
 
 ```cpp
 #include <execution>
@@ -2866,9 +2866,7 @@ int main() {
 
 **Benefits**:
 
-Early exit loops improve efficiency by terminating as soon as a specified condition is met, thus avoiding unnecessary iterations. This approach helps save time, especially when the loop would otherwise continue without contributing to the result.
-
-This technique is particularly useful in search problems. By exiting the loop early when a target value is found, it can significantly enhance performance, reducing the overall execution time.
+Early exit loops improve efficiency by terminating as soon as a specified condition is met, thus avoiding unnecessary iterations. This approach helps save time, especially when the loop would otherwise continue without contributing to the result. This technique is particularly useful in search problems. By exiting the loop early when a target value is found, it can improve performance, reducing the overall execution time.
 
 _Early exit loops are highly practical, as they allow a solution to be reached without the need to examine all the data. By cutting down unnecessary iterations, they help reduce execution time, making them particularly useful in scenarios where a result can be determined quickly based on partial input._
 
@@ -2931,7 +2929,7 @@ int main() {
 
 Standard library algorithms are highly optimized for performance, often surpassing the efficiency of manually written loops. Their internal optimizations make them a powerful tool for handling operations in a time-efficient manner.
 
-Additionally, these functions are concise and clear, providing a clean and expressive syntax to apply operations on containers. This simplicity enhances code readability while maintaining high performance, making them ideal for competitive programming.
+Additionally, these functions are concise and clear, providing a clean and expressive syntax to apply operations on containers. This simplicity improve code readability while maintaining high performance, making them ideal for competitive programming.
 
 Standard library algorithms are great for transformation tasks, allowing you to apply operations on container elements with minimal code. They maximize efficiency while keeping the implementation simple and concise, making them particularly effective for handling transformations in competitive programming scenarios.
 
@@ -4278,7 +4276,7 @@ For each adjustment in the `adjustments` list, the code checks if the value at t
 
 Finally, the results vector is returned, which contains the sum of even numbers in the `humidity` array after each adjustment. The `printResult` function is used to display the initial humidity values, the adjustments applied, and the resulting sums in a formatted manner.
 
-> The `auto` keyword in C++ is used to automatically deduce the type of a variable at compile-time. This feature has been available since C++11, but with C++20, its functionality has been further enhanced, allowing for greater flexibility in template functions, lambdas, and other contexts where type inference can simplify code. The `auto` keyword is particularly useful when dealing with complex types, such as iterators, lambdas, or template instantiations, as it reduces the need for explicitly specifying types.
+> The `auto` keyword in C++ is used to automatically deduce the type of a variable at compile-time. This feature has been available since C++11, but with C++20, its functionality has been improved, allowing for greater flexibility in template functions, lambdas, and other contexts where type inference can simplify code. The `auto` keyword is particularly useful when dealing with complex types, such as iterators, lambdas, or template instantiations, as it reduces the need for explicitly specifying types.
 >
 > When declaring a variable with `auto`, the type is inferred from the initializer. This eliminates the need to explicitly specify the type, which can be especially useful when working with types that are long or difficult to express.
 >
@@ -7370,7 +7368,7 @@ In the context of a template function, `Args&&... args` is often used to perfect
 >
 > An `rvalue` (read value) represents a temporary value or an object that does not have a persistent memory location. rvalues are typically literals, temporary objects, or the result of expressions that do not persist. They can appear on the right-hand side of an assignment expression.
 >
-> C++11 introduced `rvalue` references to enhance performance by enabling move semantics. An rvalue reference is declared using `&&`, allowing functions to distinguish between copying and moving resources. This is particularly useful for optimizing the performance of classes that manage resources such as dynamic memory or file handles.
+> C++11 introduced `rvalue` references to boost performance by enabling move semantics. An rvalue reference is declared using `&&`, allowing functions to distinguish between copying and moving resources. This is particularly useful for optimizing the performance of classes that manage resources such as dynamic memory or file handles.
 
 The return type of the function, `long long`, represents the duration of the function execution in nanoseconds. I choose a `long long` integer because I have no idea how long our Dynamic Programming functions will take to compute, and I wanted to ensure a default function that can be used for all problems we will work on. The maximum value that can be stored in a `long long` type in C++ is defined by the limits of the type, which are specified in the `<climits>` header. For a signed `long long` type, the maximum value is $2^{63} - 1 = 9,223,372,036,854,775,807$.
 
