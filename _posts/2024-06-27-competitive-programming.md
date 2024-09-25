@@ -35,7 +35,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Competitive Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
-lastmod: 2024-09-25T01:02:03.794Z
+lastmod: 2024-09-25T01:04:46.671Z
 ---
 
 # 1. Introduction
@@ -3028,7 +3028,7 @@ The **Prefix Sum Array** is an algorithm that helps quickly calculate the sum of
    - Each element $P[i]$ represents the total sum of all elements from $A[0]$ up to $A[i]$.
 
 ![]({{ site.baseurl }}/assets/images/PrefixSum1.jpg)
-\_Figura 11.1.1.1.A - Step in the Prefix Sum Algorithm: The image shows the calculation of the first two elements of the prefix sum array $P$ from the original array $A$.\_{: class="legend"}
+_Figura 11.1.1.1.A - Step in the Prefix Sum Algorithm: The image shows the calculation of the first two elements of the prefix sum array $P$ from the original array $A$._{: class="legend"}
 
 1. **Perform Range Sum Queries**
 
