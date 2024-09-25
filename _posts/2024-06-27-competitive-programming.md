@@ -35,7 +35,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Competitive Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
-lastmod: 2024-09-25T01:07:08.162Z
+lastmod: 2024-09-25T01:36:11.515Z
 ---
 
 # 1. Introduction
@@ -3065,7 +3065,7 @@ $$A = [3, 1, 4, 1, 5, 9, 2, 6]$$
 **Step 1**: Construct the Prefix Sum Array $P$
 
 ![]({{ site.baseurl }}/assets/images/PrefixSum1.jpg)
-_Figura 11.1.1.1.A - Step in the Prefix Sum Algorithm: The image shows the calculation of the first two elements of the prefix sum array $P$ from the original array $A$._{: class="legend"}
+_Figura 11.1.1.1.A - Step in the Prefix Sum Algorithm: The image shows the calculation of the fifth element of the prefix sum array $P$ from the original array $A$._{: class="legend"}
 
 Compute $P$:
 
@@ -3084,13 +3084,19 @@ $$P = [3, 4, 8, 9, 14, 23, 25, 31]$$
 
 **Step 2**: Perform Range Sum Queries
 
-Example Query\*: Find the sum of elements from index $2$ to $5$ in $A$.
+Example Query: Find the sum of elements from index $2$ to $5$ in $A$.
+
+![]({{ site.baseurl }}/assets/images/PrefixSum3.jpg)
+_Figura 11.1.1.1.A - The image illustrates how the prefix sum array $P$ is constructed from the original array $A$. Example shows the sum calculation from $A[2]$ to $A[5]$ using the prefix sums._{: class="legend"}
 
 - **Compute**: Since $i = 2 > 0$, use $\text{Sum}(2, 5) = P[5] - P[1]$
 - **Calculate**: $\text{Sum}(2, 5) = 23 - 4 = 19$
 - **Verification**:
   - Sum of $A[2]$ to $A[5]$:
     - $A[2] + A[3] + A[4] + A[5] = 4 + 1 + 5 + 9 = 19$
+
+![]({{ site.baseurl }}/assets/images/PrefixSum4.jpg)
+_Figura 11.1.1.1.A - The image demonstrates how to use the prefix sum array $P$ to calculate the sum of elements from $A[2]$ to $A[5]$. The calculation is done using the formula $P[5] - P[1]$, resulting in $23 - 4 = 19$._{: class="legend"}
 
 ### 11.1.1.2. Complexity Analysis
 
