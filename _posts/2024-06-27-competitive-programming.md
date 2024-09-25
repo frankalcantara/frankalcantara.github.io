@@ -35,7 +35,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Competitive Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
-lastmod: 2024-09-25T01:36:11.515Z
+lastmod: 2024-09-25T02:00:27.857Z
 ---
 
 # 1. Introduction
@@ -3127,27 +3127,38 @@ Return the leftmost Magic Plate index. If no such plate exists, return $-1$.
 **Example 1:**
 
 **Input**: $plates = [3,1,5,2,2]$
+
 **Output**: $2$
-Explanation:
+
+**Explanation**:
+
 The Magic Plate is at index $2$.
-Weight on the left = $plates[0] + plates[1] = 3 + 1 = 4$
-Weight on the right = $plates[3] + plates[4] = 2 + 2 = 4$
+
+- Weight on the left = $plates[0] + plates[1] = 3 + 1 = 4$
+- Weight on the right = $plates[3] + plates[4] = 2 + 2 = 4$
 
 **Example 2:**
 
 **Input**: $plates = [1,2,3]$
+
 **Output**: $-1$
-Explanation:
+
+**Explanation**:
+
 There is no plate that can be the Magic Plate.
 
 **Example 3:**
 
 **Input**: $plates = [2,1,-1]$
+
 **Output**: $0$
-Explanation:
+
+**Explanation**:
+
 The Magic Plate is the first plate.
-Weight on the left = $0$ (no plates to the left of the first plate)
-Weight on the right = $plates[1] + plates[2] = 1 + (-1) = 0$
+
+- Weight on the left = $0$ (no plates to the left of the first plate)
+- Weight on the right = $plates[1] + plates[2] = 1 + (-1) = 0$
 
 **Constraints:**
 
