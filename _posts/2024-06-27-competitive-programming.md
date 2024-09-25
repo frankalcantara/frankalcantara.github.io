@@ -3,31 +3,31 @@ layout: post
 title: Competitive programming in C++ - Techniques and Insights
 author: Frank
 categories:
-    - Matemática
-    - Linguagens Formais
-    - Programação
+  - Matemática
+  - Linguagens Formais
+  - Programação
 tags:
-    - Matemática
-    - Linguagens Formais
-    - Programação Dinâmica
-    - Dynamic Programming
-    - C++ Algorithms
-    - Performance Analysis
-    - Coding Examples
-    - Algorithm Optimization
-    - Practical Programming Guide
+  - Matemática
+  - Linguagens Formais
+  - Programação Dinâmica
+  - Dynamic Programming
+  - C++ Algorithms
+  - Performance Analysis
+  - Coding Examples
+  - Algorithm Optimization
+  - Practical Programming Guide
 image: assets/images/prog_dynamic.jpeg
 description: Dynamic Programming in C++ with practical examples, performance analysis, and detailed explanations to optimize your coding skills and algorithm efficiency.
 slug: competitive-programming-techniques-insights
 keywords:
-    - Dynamic Programming
-    - C++ Algorithms
-    - Coding Examples
-    - Performance Optimization
-    - Algorithm Efficiency
-    - Programming Guide
-    - Code Comparison
-    - Developer Tips
+  - Dynamic Programming
+  - C++ Algorithms
+  - Coding Examples
+  - Performance Optimization
+  - Algorithm Efficiency
+  - Programming Guide
+  - Code Comparison
+  - Developer Tips
 rating: 5
 published: 2024-06-27T19:43:15.124Z
 draft: null
@@ -35,7 +35,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Competitive Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
-lastmod: 2024-09-24T15:55:45.012Z
+lastmod: 2024-09-24T15:59:01.038Z
 ---
 
 # 1. Introduction
@@ -2961,7 +2961,7 @@ Methods that prepare the array to respond to queries quickly, typically trading 
 
 Calculation of cumulative sums for fast range queries. Reduces complexity from $O(n^2)$ to $O(n)$ in construction and $O(1)$ per query.
 
-The Prefix Sum Array is a preprocessing technique used to efficiently calculate the sum of elements in a given range of an array. It works by creating a new array where each element is the sum of all previous elements in the# Prefix Sum Array Algorithm
+The Prefix Sum Array is a preprocessing technique used to efficiently calculate the sum of elements in a given range of an array. It works by creating a new array where each element is the sum of all previous elements in the Prefix Sum Array Algorithm
 
 The **Prefix Sum Array** is a technique used to calculate the sum of elements in a given range of an array efficiently. It involves creating a new array where each element is the cumulative sum of all previous elements in the original array, including the current one.
 
