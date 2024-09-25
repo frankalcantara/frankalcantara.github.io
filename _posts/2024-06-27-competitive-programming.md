@@ -35,7 +35,7 @@ featured: true
 toc: true
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
 beforetoc: In this comprehensive guide, we delve into the world of Competitive Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
-lastmod: 2024-09-24T15:59:01.038Z
+lastmod: 2024-09-25T01:02:03.794Z
 ---
 
 # 1. Introduction
@@ -3027,7 +3027,10 @@ The **Prefix Sum Array** is an algorithm that helps quickly calculate the sum of
    - **Purpose**:
    - Each element $P[i]$ represents the total sum of all elements from $A[0]$ up to $A[i]$.
 
-2. **Perform Range Sum Queries**
+![]({{ site.baseurl }}/assets/images/PrefixSum1.jpg)
+\_Figura 11.1.1.1.A - Step in the Prefix Sum Algorithm: The image shows the calculation of the first two elements of the prefix sum array $P$ from the original array $A$.\_{: class="legend"}
+
+1. **Perform Range Sum Queries**
 
    To find the sum of elements from index $i$ to $j$ (inclusive):
 
@@ -5818,7 +5821,6 @@ return sum;
 }
 ```
 
-**[Image placeholder]**
 _An illustration showing a naive approach to range sum computation, where each element of the array is accessed individually, leading to $O(n)$ complexity._
 
 This solution has $O(1)$ complexity for updates and $O(n)$ for sum queries. To improve query efficiency, we could use a prefix sum array:
@@ -9224,3 +9226,4 @@ Ultimately, the choice between memoization and tabulation often comes down to pe
 
 [:1] This ideia comes from [Introduction to Dynamic Programming](https://cp-algorithms.com/dynamic_programming/intro-to-dp.html)
 [:3] Peter M. Fenwick (1994). "A new data structure for cumulative frequency tables". Software: Practice and Experience. 24 (3): 327–336. CiteSeerX 10.1.1.14.8917. [doi:10.1002/spe.4380240306](https://onlinelibrary.wiley.com/doi/10.1002/spe.4380240306).
+![alt](https://)
