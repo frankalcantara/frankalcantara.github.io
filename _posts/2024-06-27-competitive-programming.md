@@ -8,12 +8,6 @@ categories:
   - Programação
 tags:
   - Matemática
-  - Linguagens Formais
-  - Programação Dinâmica
-  - Dynamic Programming
-  - C++ Algorithms
-  - Performance Analysis
-  - Coding Examples
   - Algorithm Optimization
   - Practical Programming Guide
 image: assets/images/prog_dynamic.jpeg
@@ -22,20 +16,14 @@ slug: competitive-programming-techniques-insights
 keywords:
   - Dynamic Programming
   - C++ Algorithms
-  - Coding Examples
-  - Performance Optimization
-  - Algorithm Efficiency
-  - Programming Guide
-  - Code Comparison
-  - Developer Tips
 rating: 5
 published: 2024-06-27T19:43:15.124Z
 draft: null
 featured: true
 toc: true
-preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
+preview: C++ is essential in competitive programming for its speed and flexibility. This guide covers advanced techniques like Dynamic Programming, input/output optimization, modern C++20 features, and efficient data structures, equipping you to solve complex algorithmic challenges efficiently and effectively.
 beforetoc: In this comprehensive guide, we delve into the world of Competitive Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
-lastmod: 2024-09-25T02:00:27.857Z
+lastmod: 2024-09-25T23:55:15.659Z
 ---
 
 # 1. Introduction
@@ -3163,6 +3151,7 @@ The Magic Plate is the first plate.
 **Constraints:**
 
 $$1 \leq plates.length \leq 10^4$$
+
 $$-1000 \leq plates[i] \leq 1000$$
 
 Note: André is very skilled, so don't worry about the real-world physics of balancing plates. Focus only on the mathematical calculations!
@@ -3695,7 +3684,9 @@ Beatriz receives a sequence of $K$ instructions $(1 \leq K \leq 25,000)$, each i
 ```
 
 Heights after updates: 0, 0, 1, 1, 2, 3, 3
+
 Final height: 0 1 1 2 3 3 3
+
 Indices: 1 2 3 4 5 6 7
 
 ```python
@@ -3744,7 +3735,7 @@ else:
 print("Median height:", median)*Output**: [2, 5, 3, 0]
 ```
 
-**Algorithm Implementation**: C++20
+**Algorithm Implementation in C++20**:
 
 ```cpp
 #include <iostream>
@@ -4675,17 +4666,17 @@ Now, let $adjustments[k] = [val_k, index_k]$ be an adjustment:
 - The previous value of $A[index_k]$ is $a_{index_k}$.
 - The new value will be:
 
-  $$\text{new\_value} = a_{index_k} + val_k$$
+  $$\text{new_value} = a_{k} + val_k$$
 
 The sum $S$ will be updated as follows:
 
-- If $a_{index_k} \% 2 == 0$ (i.e., the old value was even), then:
+- If $a_{index_k} % 2 == 0$ (i.e., the old value was even), then:
 
   $$S = S - a_{index_k}$$
 
-- If $\text{new\_value} \% 2 == 0$ (i.e., the new value is even), then:
+- If $\text{new-value} \% 2 == 0$ (i.e., the new value is even), then:
 
-  $$S = S + \text{new\_value}$$
+  $$S = S + \text{new-value}$$
 
 **Mathematical Justification**:
 
@@ -4721,7 +4712,6 @@ The **Incremental Sum Algorithm** efficiently maintains the sum of specific elem
       - Modify the array element with the new value.
 
    3. **Add the New Value (if it affects the sum)**:
-
       - Check if the new value meets the condition.
       - If it does, add the new value to the sum.
 
@@ -4867,7 +4857,6 @@ int main() {
 Techniques for arrays that don't change between queries, allowing efficient pre-calculations.
 
 - Algorithm: Sparse Table
-
 - Problem Example: "Inventory Restocking" - Performs queries after each inventory adjustment
 
 ### 11.1.6. Range Minimum Queries (RMQ)
@@ -4882,7 +4871,7 @@ Data structure for prefix sums and efficient updates, with operations in $O(\log
 
 - Algorithm: Binary Indexed Tree (BIT)
 
-##### Finally, the code using Fenwick tree
+#### Finally, the code using Fenwick tree
 
 I chose to write this code using as much modern C++ as possible. This means you will face two challenges. The first is understanding the Fenwick tree algorithm, and the second is understanding the C++ syntax. To help make this easier, I will explain the code block by block, highlighting each C++ feature and why I chose to write it this way.
 
