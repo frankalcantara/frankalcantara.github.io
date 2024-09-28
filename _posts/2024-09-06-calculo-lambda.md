@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Neste guia exploramos o mundo do Cálculo Lambda, abordando desde os fundamentos teóricos até suas aplicações práticas em linguagens de programação funcionais. Entenda os conceitos de abstração, aplicação e recursão, veja exemplos detalhados de *currying* e combinadores de ponto fixo, e descubra como o cálculo lambda fornece uma base sólida para a computação funcional.
 beforetoc: Neste guia abrangente, exploramos o Cálculo Lambda e suas implicações na programação funcional. Aprofundamos em tópicos como abstração, aplicação, *currying*, e combinadores de ponto fixo, ilustrando como conceitos teóricos se traduzem em práticas de programação modernas. Ideal para quem deseja entender a fundo a expressividade e a elegância matemática do cálculo lambda.
-lastmod: 2024-09-25T23:54:14.282Z
+lastmod: 2024-09-28T20:29:59.881Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -227,7 +227,7 @@ Para o cálculo lambda, o domínio é geralmente construído como um conjunto de
 Por exemplo, uma semântica denotacional simples para termos lambda é definida da seguinte maneira:
 
 - $[x]_{\rho} = \rho(x)$, onde $\rho$ é um ambiente que mapeia variáveis para valores.
-- $[\lambda x.e]_{\rho} = f$ tal que $f(v) = [e]_{\rho[x \mapsto v]}$, significando que uma função é interpretada como um mapeamento de valores para o resultado da interpretação do corpo em um ambiente atualizado.
+- $[\lambda x . e]_{\rho} = f$ tal que $f(v) = [e]_{\rho[x \mapsto v]}$, significando que uma função é interpretada como um mapeamento de valores para o resultado da interpretação do corpo em um ambiente atualizado.
 - $[e_1 e_2]_{\rho} = [e_1]_{\rho}([e_2]_{\rho})$, significando que a aplicação é interpretada aplicando o significado de $e_1$ ao significado de $e_2$.
 
 Essa abordagem constrói uma compreensão composicional dos termos do cálculo lambda, permitindo um raciocínio modular sobre as expressões.

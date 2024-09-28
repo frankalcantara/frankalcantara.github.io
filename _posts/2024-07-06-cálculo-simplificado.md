@@ -21,7 +21,7 @@ toc: true
 published: false
 slug: calculo-simplificado
 draft: 2024-07-06T19:30:40.256Z
-lastmod: 2024-09-08T21:43:33.185Z
+lastmod: 2024-09-28T14:02:20.355Z
 ---
 
 O livro **Calculus Made Easy** de [SILVANUS P. THOMPSON](https://en.wikipedia.org/wiki/Silvanus_P._Thompson) foi colocado em domínio público, tanto no Brasil quanto nos EUA. Este é um dos melhores livros introdutórios de cálculo já escrito. Simples, direto e abrangente. Sem nenhuma modéstia, ou vergonha na cara, escolhi este livro para tradução, atualização e expansão. Na esperança de criar um material atualizado para o ensino e fomento do cálculo entre alguns estudantes de língua portuguesa. Vou traduzir, atualizar, comentar e expandir o conteúdo. Contudo, como o livro é ótimo, algumas coisas precisam ser mantidas o mais original possível por curiosidade e pelo valor cultural. Um bom exemplo é a brincadeira da capa:
@@ -113,8 +113,8 @@ Indo além, podemos considerar nosso pedacinho $dx$ como $\frac{1}{1000}$ de $x$
 
 _Aquilo que consideraremos pequeno irá depender do problema que desejamos solucionar, mas no cálculo o pequeno sempre será $dx$_.
 
-![]({{ site.baseurl }}/assets/images/calc_Fig1.jpg)
-_Figura 1.1 - Um quadrado acrescido de $dx$._
+![]({{ site.baseurl }}/assets/images/calc*Fig1.jpg)
+\_Figura 1.1 - Um quadrado acrescido de $dx$.*
 
 Talvez, uma ilustração usando alguns conceitos da geometria básica possa ajudar a visualização destes conceitos de níveis diferentes de grandeza.
 
@@ -151,8 +151,8 @@ Suponha que tenhamos duas variáveis que dependem uma da outra. São variáveis 
 
 Para manter esta linha de raciocínio, suponha agora que façamos $x$ variar, ou seja, alteraremos, ou imaginaremos que o valor de $x$ foi alterado, adicionando a ela uma fração muito pequena do seu valor. Fração esta que já chamamos de $dx$. Assim, faremos $x$ se tornar $x + dx$. Então, porque $x$ foi alterado, $y$ também terá sido alterado, e terá se tornado $y + dy$. O pequeno $dy$ poderá ser em alguns casos positivo, aumentando, em outros negativo, diminuindo. Contudo, não será, exceto em casos raros, do mesmo tamanho que $dx$.
 
-![]({{ site.baseurl }}/assets/images/calc_Fig2.jpg)
-_Figura 2.1 - Um crescimento $dx$ em um triângulo._{: class="legend"}
+![]({{ site.baseurl }}/assets/images/calc*Fig2.jpg)
+\_Figura 2.1 - Um crescimento $dx$ em um triângulo.*{: class="legend"}
 
 Para ilustrar, vamos analisar dois exemplos:
 
@@ -3214,7 +3214,136 @@ Se uma curva tem a forma peculiar da Figura 10.4, os valores de $\frac{dy}{dx}$ 
 ![]({{ site.baseurl }}/assets/images/cap10-4.jpg){#figura7}
 *Figura 10.4 - Análise da derivada em uma curva com concavidade horizontal.*{: class="legend"}
 
+## CAPITULO XVII - INTEGRAÇÃO
 
+O segredo já foi revelado: o símbolo misterioso $\int$ é apenas um $S$ alongado, significa simplesmente _a soma de_ ou _a soma de todas essas quantidades._ Ele se assemelha ao símbolo $\sum$ (a letra Sigma grega), que também indica soma. Mas há uma diferença prática no uso desses símbolos pelos matemáticos: enquanto $\sum$ é geralmente usado para somar um número finito de quantidades, o sinal de integral $\int$ é usado para somar um vasto número de pequenas quantidades infinitamente pequenas, meros elementos que, juntos, formam o total desejado. Assim, $\int dy = y$, e $\int dx = x$.
+
+Neste ponto, a amável leitora já deve entender que o todo de algo pode ser visto como sendo composto por muitos pequenos pedaços; quanto menores os pedaços, mais deles haverá. Por exemplo, uma linha de uma polegada pode ser vista como composta de 10 partes, cada uma com $\frac{1}{10}$ de polegada; ou de 100 partes, cada uma com $\frac{1}{100}$ de polegada; ou de 1.000.000 de partes, cada uma com $\frac{1}{1.000.000}$ de polegada; ou, levando esse pensamento ao limite, pode ser considerada como composta por um número infinito de elementos, cada um infinitesimalmente pequeno.
+
+A leitora deve se perguntar: qual é a utilidade de pensar assim? Por que não pensar no todo diretamente? A resposta é simples: existem muitos casos em que não se pode calcular a grandeza de uma coisa como um todo sem somar muitas pequenas partes. O processo de _integração_ nos permite calcular totais que, de outra forma, não conseguiríamos estimar diretamente.
+
+Vamos começar considerando alguns casos simples para nos familiarizarmos com essa ideia de somar muitas partes separadas.
+
+Considere a série:
+
+$$1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \frac{1}{16} + \frac{1}{32} + \frac{1}{64} + \text{etc.}$$
+
+Aqui, cada termo é metade do anterior. Qual seria o valor total se continuássemos até um número infinito de termos? A maioria dos estudantes de ensino médio sabe que a resposta é $2$. Imagine isso como uma linha, como mostrado na Figura XX. Comece com uma polegada, adicione meia polegada, depois um quarto, depois um oitavo, e assim por diante. Se pararmos em qualquer ponto, sempre faltará uma parte para completar as 2 polegadas; e essa parte será do mesmo tamanho que o último termo adicionado. Por exemplo, se somarmos 1, $\frac{1}{2}$ e $\frac{1}{4}$, faltará $\frac{1}{4}$. Se formos até $\frac{1}{64}$, ainda faltará $\frac{1}{64}$. A peça que falta é sempre igual ao último termo adicionado. Somente com um número infinito de operações atingiremos as $2$ polegadas completas.
+
+Na prática, chegaremos perto quando as partes forem tão pequenas que não possam ser desenhadas, isso acontece por volta do décimo termo, pois o décimo primeiro é $\frac{1}{1024}$. Se formos a um ponto onde nem mesmo uma máquina de medição de precisão detecte a diferença, bastará ir até uns 20 termos. Um microscópio não mostrará o $18º$ termo!
+
+A operação de integração é como pegar todo o lote de uma vez. Existem casos em que a integral nos dará o total exato que resultaria de um número infinito de operações. Nesse sentido, o cálculo integral oferece um caminho rápido e direto para um resultado que, de outra forma, demandaria um trabalho interminável e minucioso. Esta é uma das razões pelas quais é importante aprender a integrar.
+
+### INCLINAÇÕES DE CURVAS E AS PRÓPRIAS CURVAS
+
+Vamos fazer uma investigação preliminar sobre as inclinações das curvas. Já vimos que diferenciar uma curva significa encontrar uma expressão para sua inclinação (ou inclinações em diferentes pontos). Mas, será que podemos fazer o processo inverso? Podemos reconstruir a curva inteira se conhecermos sua inclinação (ou inclinações)?
+
+Voltemos ao caso (2). Aqui temos a curva mais simples: uma linha reta com a equação
+
+$$y = ax + b.$$
+
+[A imagem mostra o gráfico de uma linha reta inclinada. O eixo vertical é marcado como Y e o eixo horizontal como X. A linha intercepta o eixo Y em um ponto marcado como $b$. A inclinação da linha é mostrada com pequenos triângulos retângulos ao longo da linha, indicando a taxa constante de variação.]
+
+FIG. 47.
+
+Sabemos que aqui $b$ representa a altura inicial de $y$ quando $x = 0$, e que $a$, que é o mesmo que $\frac{dy}{dx}$, é a "inclinação" da linha. A linha tem uma inclinação constante. Ao longo dela, os triângulos elementares
+
+[A imagem mostra um pequeno triângulo retângulo com a hipotenusa inclinada. O lado vertical é marcado como $dy$ e o lado horizontal como $dx$.]
+
+têm sempre a mesma proporção entre altura e base. Suponha que consideremos os $dx$'s e $dy$'s com magnitudes finitas, de modo que 10 $dx$'s somem uma polegada. Nesse caso, teríamos dez pequenos triângulos como este:
+
+[A imagem mostra uma série de 10 pequenos triângulos retângulos idênticos, alinhados lado a lado.]
+
+Agora, suponha que a tarefa fosse reconstruir a _curva_ apenas com a informação de que $\frac{dy}{dx} = a$. Como procederíamos? Mantendo os pequenos $d$'s de tamanho finito, poderíamos desenhar 10 triângulos, todos com a mesma inclinação, e então uni-los, ponta a ponta, assim:
+
+[A imagem mostra dois gráficos de linhas retas inclinadas. O eixo vertical é marcado como Y e o eixo horizontal como X. A linha inferior é sólida e começa na origem O, enquanto a linha superior é tracejada e começa em um ponto C acima de O no eixo Y. Ambas as linhas são compostas por uma série de pequenos triângulos retângulos, indicando sua inclinação constante.]
+
+FIG. 48.
+
+Como a inclinação é a mesma para todos, eles se juntam para formar, como na Figura 48, uma linha inclinada com a inclinação correta $\frac{dy}{dx} = a$. Seja considerando os $dy$s e $dx$s como finitos ou infinitamente pequenos, sendo todos iguais, é claro que $\frac{y}{x} = a$, se considerarmos $y$ como o total de todos os $dy$s e $x$ como o total de todos os $dx$s. Mas onde colocar essa linha inclinada? Devemos começar na origem $O$ ou mais acima?
+
+Como a única informação que temos é sobre a inclinação, não temos instruções sobre a altura exata acima de $O$. Na verdade, a altura inicial é indeterminada. A inclinação permanece a mesma, independentemente da altura inicial. Então, faremos uma tentativa do que pode ser o desejado e iniciaremos a linha inclinada a uma altura $C$ acima de $O$. Ou seja, temos a equação:
+
+$$y = ax + C.$$
+
+Agora fica claro que, nesse caso, a constante adicionada indica o valor particular que $y$ assume quando $x = 0$.
+
+Vamos agora para um caso mais complicado: uma linha cuja inclinação não é constante, mas que se torna cada vez mais acentuada. Suponha que a inclinação aumente em proporção ao crescimento de $x$. Em símbolos, isso é expresso por:
+
+$$\frac{dy}{dx} = ax.$$
+
+Para um exemplo concreto, tome $a = \frac{1}{5}$, o que nos dá:
+
+$$\frac{dy}{dx} = \frac{1}{5}x.$$
+
+Para entender melhor, vamos calcular alguns valores da inclinação para diferentes valores de $x$ e desenhar pequenos diagramas correspondentes. Quando
+
+[A imagem mostra uma tabela com três colunas e seis linhas. A primeira coluna exibe valores de $x$ de 0 a 5. A segunda coluna mostra os valores correspondentes de $\frac{dy}{dx}$, calculados como $0.2x$. A terceira coluna contém pequenos diagramas de triângulos retângulos, representando visualmente a inclinação para cada valor de $x$.]
+
+| $x$   | $\frac{dy}{dx}$ | Diagrama                          |
+|-------|------------------|-----------------------------------|
+| $x = 0$ | $\frac{dy}{dx} = 0,$   | [linha horizontal]              |
+| $x = 1$ | $\frac{dy}{dx} = 0.2,$ | [triângulo com inclinação leve] |
+| $x = 2$ | $\frac{dy}{dx} = 0.4,$ | [triângulo mais inclinado]      |
+| $x = 3$ | $\frac{dy}{dx} = 0.6,$ | [triângulo ainda mais inclinado]|
+| $x = 4$ | $\frac{dy}{dx} = 0.8,$ | [triângulo muito inclinado]     |
+| $x = 5$ | $\frac{dy}{dx} = 1.0.$ | [triângulo com inclinação de 45°]|
+
+Os diagramas na terceira coluna mostram triângulos retângulos com inclinações crescentes, correspondendo aos valores calculados de $\frac{dy}{dx}$.
+
+Agora tente juntar as peças, posicionando cada uma de modo que o meio de sua base esteja na posição correta à direita, encaixando-se nos cantos; como mostrado na Figura 49. O resultado, obviamente, não é uma curva suave, mas uma aproximação de uma. Se tivéssemos usado partes com metade do comprimento, e duas vezes mais numerosas, como na Figura 50, teríamos uma aproximação melhor. Para uma curva perfeita, precisaríamos que cada $dx$ e seu correspondente $dy$ fossem infinitamente pequenos e infinitamente numerosos.
+
+[A imagem mostra dois gráficos, rotulados como Fig. 49 e Fig. 50.]
+
+**Fig. 49:**
+[Um gráfico mostra uma curva aproximada formada por segmentos de reta. O eixo Y está à esquerda e o eixo X embaixo. A curva começa na origem O e sobe de forma cada vez mais íngreme até um ponto P. Há 5 segmentos de reta, cada um representando um intervalo de $x = 1$, com triângulos retângulos mostrando a inclinação crescente.]
+
+**Fig. 50:**
+[Um gráfico semelhante ao anterior, mas com segmentos de reta menores e mais numerosos, resultando em uma aproximação mais suave da curva. Também começa em O e termina em P, mas com 10 segmentos de reta, cada um representando um intervalo de $x = 0.5$.]
+
+Então, qual deve ser o valor de qualquer $y$? Claramente, em qualquer ponto $P$ da curva, o valor de $y$ é a soma de todos os pequenos $dy$s de 0 até aquele ponto, ou seja, $\int dy = y$. Como cada $dy$ é igual a $\frac{1}{5}x \cdot dx$, segue que o $y$ total será a soma de todos esses pedaços como $\frac{1}{5}x \cdot dx$, ou, como devemos escrever, $\int \frac{1}{5}x \cdot dx$.
+
+Se $x$ fosse constante, $\int \frac{1}{5}x \cdot dx$ seria o mesmo que $\frac{1}{5}x \int dx$, ou $\frac{1}{5}x^2$. Mas $x$ começa em 0 e aumenta até o valor de $x$ no ponto $P$, então seu valor médio de 0 até esse ponto é $\frac{1}{2}x$. Assim, $\int \frac{1}{5}x dx = \frac{1}{10}x^2$, resultando em $y = \frac{1}{10}x^2$.
+
+Como no caso anterior, é necessário adicionar uma constante indeterminada $C$, pois não foi especificado a que altura a curva começa acima da origem quando $x = 0$. Portanto, a equação da curva mostrada na Figura 51 é:
+
+$$y = \frac{1}{10}x^2 + C.$$
+
+[A imagem mostra um gráfico rotulado como Fig. 51. O eixo vertical é marcado como Y e o horizontal como X. Uma curva parabólica é desenhada, começando em um ponto $C$ acima da origem $O$ no eixo Y. A curva se torna mais íngreme à medida que se move para a direita. Uma linha vertical tracejada marca um ponto na curva, com o intervalo entre essa linha e o eixo Y marcado como $x$, e o intervalo entre o eixo X e o ponto na curva marcado como $y$.]
+
+EXERCÍCIOS XVI
+
+(1) Encontre a soma final de $\frac{2}{3} + \frac{1}{3} + \frac{1}{6} + \frac{1}{12} + \frac{1}{24}$ + etc.
+
+(2) Mostre que a série $1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} - \frac{1}{6} + \frac{1}{7}$ etc., é convergente, e encontre sua soma até 8 termos.
+
+(3) Se $\log_e(1 + x) = x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4}$ + etc., encontre $\log_e 1,3$.
+
+(4) Seguindo um raciocínio similar ao explicado neste capítulo, encontre $y$,
+
+  (a)se $\frac{dy}{dx} = \frac{1}{4}x$; (b)se $\frac{dy}{dx} = \cos x$.
+
+(5) Se $\frac{dy}{dx} = 2x + 3$, encontre $y$.
+
+RESPOSTAS
+
+(1) $1\frac{1}{3}$.
+
+(2) 0,6344.
+
+(3) 0,2624.
+
+(4) (a) $y = \frac{1}{8}x^2 + C$; (b) $y = \sin x + C$.
+
+(5) $y = x^2 + 3x + C$.
+
+## CAPÍTULO XVIII INTEGRAÇÃO COMO O REVERSO DA DIFERENCIAÇÃO
+
+Diferenciar é o processo pelo qual, quando $y$ é dado como uma função de $x$, podemos encontrar $\frac{dy}{dx}$.
+
+Como qualquer operação matemática, o processo de diferenciação deve poder ser revertido. Por exemplo, se diferenciar $y = x^4$ encontrará $\frac{dy}{dx} = 4x^3$, então começar com $\frac{dy}{dx} = 4x^3$ e reverter o processo deverá resultar em $y = x^4$. Mas aqui aparece um ponto curioso: poderíamos obter $\frac{dy}{dx} = 4x^3$ a partir de $x^4$, $x^4 + a$, $x^4 + c$, ou $x^4$ com qualquer constante adicionada.
+
+Isso deixa claro que, ao ir de $\frac{dy}{dx}$ para $y$, devemos prever a possibilidade de uma constante adicionada, cujo valor permanece indeterminado até ser confirmado de outra forma. Assim, se diferenciar $x^n$ resulta em $nx^{n-1}$, reverter de $\frac{dy}{dx} = nx^{n-1}$ nos dá $y = x^n + C$, onde $C$ representa a constante indeterminada possível.
 
 
 ## NOTAS DE RODAPÉ
@@ -4048,6 +4177,7 @@ $$
 
   Derivamos ambos os lados da equação em relação a $t$:
 
+
 $$
 
 \frac{d l_t}{d t} = \frac{d}{d t} \left( l_0 + 0.000012 \space \space l_0 t \right)
@@ -4056,6 +4186,7 @@ $$
 
   No primeiro termo temos $l_0$, que é constante e pode ser descartado. Para o segundo termo ($0.000012  \space \space  l_0 t$), que é um produto de uma constante e uma variável podemos aplicar a regra da potência lembrando que $t=t^1$:
 
+
 $$
 
 \frac{d}{d t} (0.000012 \space \space l_0 t) = 0.000012 \space \space l_0 \cdot (t^{1-1}) = 0.000012 \space \space l_0
@@ -4063,6 +4194,7 @@ $$
 $$
 
   Portanto, a variação do comprimento da barra por grau Celsius é:
+
 
 $$
 
@@ -4355,6 +4487,7 @@ $$
 
   Considere a expressão inicial:
 
+
 $$
 
 P = \left( \frac{2E}{1 - \sigma^2} \right) \frac{t^3}{D^3}
@@ -4362,6 +4495,7 @@ P = \left( \frac{2E}{1 - \sigma^2} \right) \frac{t^3}{D^3}
 $$
 
   Aplicando a regra do produto entre constante e função e a regra da potência:
+
 
 $$
 
@@ -4388,6 +4522,7 @@ P = \left( \frac{2E}{1 - \sigma^2} \right) \frac{t^3}{D^3}
 $$
 
   Aplicando a regra do produto entre constante e função e a regra da potência:
+
 
 $$
 

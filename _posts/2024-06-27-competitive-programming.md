@@ -23,7 +23,7 @@ featured: true
 toc: true
 preview: C++ is essential in competitive programming for its speed and flexibility. This guide covers advanced techniques like Dynamic Programming, input/output optimization, modern C++20 features, and efficient data structures, equipping you to solve complex algorithmic challenges efficiently and effectively.
 beforetoc: In this comprehensive guide, we delve into the world of Competitive Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
-lastmod: 2024-09-25T23:55:15.659Z
+lastmod: 2024-09-26T22:30:57.708Z
 ---
 
 # 1. Introduction
@@ -5214,79 +5214,17 @@ The **`inline constexpr`** constant `input_method` specifies which input method 
 > inline constexpr int max_value = 100;  // This constant can be included in multiple translation units without causing redefinition errors.
 > ```
 >
-> The **`constexpr`** keyword specifies that a function or variable can be evaluated at compile-time. It guarantees that, if possible, the function will be computed by the compiler, not at runtime. This is especially useful in optimization, as it allows constants to be determined and used during the compilation process rather than execution.
->
-> **`constexpr` with Variables**:
-> When you use `constexpr` with variables, the compiler knows that the variable's value is constant and should be computed at compile time.
->
-> ```cpp
-> constexpr int max_items = 42;  // The value of max_items is known at compile-time and cannot change.
-> ```
->
-> You can use `constexpr` variables to define array sizes or template parameters because their values are known during compilation.
->
-> ```cpp
-> constexpr int size = 10;
-> int array[size];  // Valid, because size is a constant expression.
-> ```
->
-> **`constexpr` with Functions**:
-> A **`constexpr` function** is a function whose return value can be computed at compile time if the inputs are constant expressions. The function must have a single return statement and all operations within it must be valid at compile time.
->
-> ```cpp
-> constexpr int factorial(int n) {
->     return n <= 1 ? 1 : n * factorial(n - 1);  // Recursive function that computes the factorial at compile time.
-> }
-> ```
->
-> If `factorial(5)` is called with a constant value, the compiler will compute the result at compile time and replace the function call with `120` in the generated binary.
-> ?
 > **Combining `inline` and `constexpr`**:
-> A function can be both **`inline`** and **`constexpr`**, which means the function can be evaluated at compile time and its calls may be inlined if appropriate.
+>
+> A function can be both `inline` and `constexpr`. This means the function can be evaluated at compile time, and its calls may be inlined if appropriate.
 >
 > ```cpp
 > inline constexpr int power(int base, int exp) {
->     return (exp == 0) ? 1 : base * power(base, exp - 1);
+>    return (exp == 0) ? 1 : base * power(base, exp - 1);
 > }
 > ```
 >
-> In this case, the `power` function will be inlined when called at runtime and computed at compile time if the arguments are constant. For example, `power(2, 3)` would be replaced by `8` at compile time.
->
-> **Practical Use of `constexpr`**:
-> `constexpr` can be used in a wide variety of contexts, such as constructing constant data, optimizing algorithms, and defining efficient compile-time logic. Here are a few examples:
->
-> 1. **Compile-time array size**:
->
-> ```cpp
->  constexpr int size = 5;
->  int array[size];  // The size is computed at compile time.
-> ```
->
-> 2. **Compile-time strings**:
->
-> ```cpp
-> constexpr const char* greet() { return "Hello, World!"; }
-> constexpr const char* message = greet();  // The message is computed at compile time.
-> ```
->
-> 3. **Compile-time mathematical operations**:
->
-> ```cpp
-> constexpr int area(int length, int width) {
->     return length * width;
-> }
-> constexpr int room_area = area(10, 12);  // Computed at compile time.
-> ```
->
-> **Using `constexpr` in Competitive Programming**:
-> In competitive programming, **`constexpr`** can be both an advantage and a disadvantage, depending on how it is used.
->
-> - **Advantage**: `constexpr` can optimize code by computing results at compile time rather than runtime, which can save valuable processing time. For example, if you know certain values or calculations are constant throughout the competition, you can use `constexpr` to precompute them, thereby avoiding recalculations during execution.
->
-> - **Disadvantage**: However, in many competitive programming problems, the input is dynamic and provided at runtime, meaning that `constexpr` cannot be used for computations that depend on this input. Since the focus in competitive programming is on runtime efficiency, the use of `constexpr` is limited to cases where you can precompute values before the competition or during compilation.
->
-> Overall, `constexpr` is valuable when solving problems with static data or fixed input sizes, but in typical ICPC-style competitions, its usage may be less frequent because most problems require dynamic input processing.
->
+> In this case, the `power` function is computed at compile time if arguments are constant. For example, `power(2, 3)` becomes `8` at compile time.
 > In summary, **`inline`** helps with reducing overhead by allowing the compiler to replace function calls with the actual function code, and it prevents multiple definitions of variables in multiple translation units. **`constexpr`** enables computations to be performed at compile time, which can significantly optimize performance by avoiding runtime calculations, although its applicability in competitive programming may be limited.
 
 AINDA TEM MUITO QUE EXPLICAR AQUI.
