@@ -7,23 +7,23 @@ date: 2023-07-13T02:50:56.534Z
 preview: ""
 image: assets/images/prolog1.jpeg
 tags:
-  - Lógica
-  - Programação Lógica
-  - Prolog
+   - Lógica
+   - Programação Lógica
+   - Prolog
 categories:
-  - disciplina
-  - Lógica
-  - material de Aula
-  - matemática
+   - disciplina
+   - Lógica
+   - material de Aula
+   - matemática
 rating: 5
 slug: decifrando-misterios-jornada-da-programacao-logica
 keywords:
-  - lógica
-  - Programação
-  - Programação Lógica
+   - lógica
+   - Programação
+   - Programação Lógica
 draft: true
 toc: true
-lastmod: 2024-09-19T18:37:15.098Z
+lastmod: 2024-10-01T22:22:49.072Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -3918,67 +3918,69 @@ A importância da definição de mundos na lógica de primeira ordem reside em s
 
 À medida que os sistemas se tornam mais complexos e as demandas por inteligência artificial aumentam, a habilidade de definir e trabalhar com mundos lógicos torna-se cada vez mais crucial para o avanço tecnológico e científico.
 
-### Exercise 1
+### Exercício 1
 
-Imagine you are working as a network engineer for a large technology company. Your task is to plan the connections between the company's servers, ensuring that communications between them do not create conflicts. The problem consists of ensuring that directly connected servers do not use the same communication channel (represented by a color). You have at most $n$ servers and wish to use fewer than $k+1$ communication channels, respecting that each server can only directly connect to a limited number of other servers, whose limit is given by the connection degree $m$.
+Imagine que você está trabalhando como engenheiro de redes para uma grande empresa de tecnologia. Sua tarefa é planejar as conexões entre os servidores da empresa, garantindo que as comunicações entre eles não criem conflitos. O problema consiste em garantir que os servidores diretamente conectados não utilizem o mesmo canal de comunicação (representado por uma cor). Você tem, no máximo, $n$ servidores e deseja utilizar menos de $k+1$ canais de comunicação, respeitando que cada servidor pode se conectar diretamente a um número limitado de outros servidores, cujo limite é dado pelo grau de conexão $m$.
 
-**Problem Description**:
+**Descrição do Problema**:
 
-- **Server**: Represented as a node in a graph.
-- **Direct connection**: Represented as an edge between two nodes.
-- **Color**: Represents the communication channel assigned to a server. Two directly connected servers cannot share the same channel.
-- **Degree of a server**: The number of direct connections it has with other servers.
-- **Network connection degree**: The highest degree among the servers in the network.
+- **Servidor**: Representado como um nó em um grafo.
+- **Conexão direta**: Representada como uma aresta entre dois nós.
+- **Cor**: Representa o canal de comunicação atribuído a um servidor. Dois servidores diretamente conectados não podem compartilhar o mesmo canal.
+- **Grau de um servidor**: O número de conexões diretas que ele tem com outros servidores.
+- **Grau de conexão da rede**: O maior grau entre os servidores da rede.
 
-The goal is to determine a way to assign a communication channel to each server such that there are no communication conflicts between directly connected servers, using fewer than $k+1$ channels.
+O objetivo é determinar uma forma de atribuir um canal de comunicação a cada servidor de forma que não haja conflitos de comunicação entre servidores diretamente conectados, utilizando menos de $k+1$ canais.
 
-**Solution**:
-We will use first-order logic to model this problem without using functions, only relations and variables.
+**Solução**:
 
-- A unary predicate $cor(x)$, where $cor(x)$ means the channel (color) assigned to server $x$.
-- A unary predicate $servidor(x)$, meaning $x$ is a server.
-- A binary predicate $conexao(x, y)$, meaning $x$ is directly connected to $y$.
+Vamos usar lógica de primeira ordem para modelar este problema sem utilizar funções, apenas relações e variáveis.
 
-**Rules or Axioms**:
+- Um predicado unário $cor(x)$, onde $cor(x)$ significa o canal (cor) atribuído ao servidor $x$.
+- Um predicado unário $servidor(x)$, que significa que $x$ é um servidor.
+- Um predicado binário $conexao(x, y)$, que significa que $x$ está diretamente conectado a $y$.
+
+**Regras ou Axiomas**:
 
 1. $$ \forall x \forall y: (servidor(x) \land servidor(y) \land conexao(x, y) \rightarrow (cor(x) \neq cor(y)) ) $$
 
-   Two directly connected servers cannot use the same communication channel.
+   Dois servidores diretamente conectados não podem usar o mesmo canal de comunicação.
 
 2. $$ \forall x \left( servidor(x) \rightarrow \forall x*1 \dots \forall x_m \left( \bigwedge*{h=1}^{m} conexao(x, x*h) \rightarrow \neg \exists x*{m+1} conexao(x, x\_{m+1}) \right) \right) $$
 
-   A server cannot have more than $m$ distinct directly connected servers.
+   Um servidor não pode ter mais do que $m$ servidores diretamente conectados distintos.
 
 3. $$ \forall x: servidor(x) \rightarrow cor(x) \in \{1, 2, ..., k\} $$
 
-   Every server $x$ must receive a channel (color) from the set $\{1, 2, ..., k\}$, ensuring that fewer than $k+1$ colors are used in the network.
+   Cada servidor $x$ deve receber um canal (cor) do conjunto $\{1, 2, ..., k\}$, garantindo que menos de $k+1$ cores sejam usadas na rede.
 
-**Possible Queries**:
-With this model, you can make the following queries:
+**Consultas Possíveis**:
 
-1. **Check if two servers are directly connected:**
+Com esse modelo, você pode fazer as seguintes consultas:
 
-   - Query: $conexao(a, b)$
-   - Response: **True** if server $a$ is directly connected to server $b$, **False** otherwise.
+1. **Verificar se dois servidores estão diretamente conectados**:
 
-2. **Check which communication channel (color) was assigned to a server:**
+   - Consulta: `conexao(a, b)`
+   - Resposta: **True** se o servidor `a` estiver diretamente conectado ao servidor `b`, **False** caso contrário.
 
-   - Query: $cor(a)$
-   - Response: Returns the color assigned to server $a$.
+2. **Verificar qual canal de comunicação (cor) foi atribuído a um servidor**:
 
-3. **Check if two connected servers have different colors:**
+   - Consulta: `cor(a)`
+   - Resposta: Retorna a cor atribuída ao servidor `a`.
 
-   - Query: $conexao(a, b) \land cor(a) \neq cor(b)$
-   - Response: **True** if servers $a$ and $b$ are directly connected and have different colors, **False** if they share the same color or are not connected.
+3. **Verificar se dois servidores conectados têm cores diferentes**:
 
-4. **Check if a server has more than $m$ direct connections:**
+   - Consulta: `conexao(a, b) \land cor(a) \neq cor(b)`
+   - Resposta: **True** se os servidores `a` e `b` estiverem diretamente conectados e tiverem cores diferentes, **False** se eles compartilharem a mesma cor ou não estiverem conectados.
 
-   - Query: $$ \exists x*1, \dots, x*{m+1} \left( \bigwedge\_{h=1}^{m+1} conexao(a, x_h) \right) $$
-   - Response: **True** if server $a$ has more than $m$ directly connected servers, **False** otherwise.
+4. **Verificar se um servidor tem mais de $m$ conexões diretas**:
 
-5. **Check if the network's coloring is valid:**
-   - Query: $$ \forall x \forall y (servidor(x) \land servidor(y) \land conexao(x, y) \rightarrow cor(x) \neq cor(y)) $$
-   - Response: **True** if all directly connected servers have different colors, **False** if there is any color conflict.
+   - Consulta: $$ \exists x*1, \dots, x*{m+1} \left( \bigwedge\_{h=1}^{m+1} conexao(a, x_h) \right) $$
+   - Resposta: **True** se o servidor `a` tiver mais de $m$ servidores diretamente conectados, **False** caso contrário.
+
+5. **Verificar se a coloração da rede é válida**:
+   - Consulta: $$ \forall x \forall y (servidor(x) \land servidor(y) \land conexao(x, y) \rightarrow cor(x) \neq cor(y)) $$
+   - Resposta: **True** se todos os servidores diretamente conectados tiverem cores diferentes, **False** se houver algum conflito de cores.
 
 ### Exercício 2
 
@@ -4534,7 +4536,7 @@ No jogo **Torre de Hanói**, três postes são dados, e discos de tamanhos difer
    - Consulta: $move(d, p, t)$
    - Resposta: _Verdadeiro_ se o disco $d$ foi movido para o poste $p$ no tempo $t$, _Falso_ caso contrário.
 
-### Exercício 8 -Modelo de Família com Meios-Irmãos
+### Exercício 8 - Modelo de Família com Meios-Irmãos
 
 **Variáveis Proposicionais**:
 
@@ -4776,6 +4778,88 @@ Este mundo representa um jogo onde:
 - O Jogador 2 escolheu Tesoura
 - O Jogador 1 venceu
 - Não houve empate
+
+### Exercício 9
+
+### Enunciado
+
+Elabore um mundo para um ginásio de esportes. O modelo deve incluir atletas, modalidades esportivas, treinadores, e competições. Considere que um atleta pode praticar múltiplas modalidades, um treinador pode especializar-se em uma ou mais modalidades, e uma competição envolve uma modalidade específica com vários atletas participantes. Crie consultas para responder se algum atleta pratica todas as modalidades, se algum treinador é especializado em todas as modalidades e mais duas a seu critério.
+
+### Fatos:
+
+- $A(x)$: $x$ é um atleta
+- $M(x)$: $x$ é uma modalidade esportiva
+- $T(x)$: $x$ é um treinador
+- $C(x)$: $x$ é uma competição
+- $Pratica(x,y)$: atleta $x$ pratica a modalidade $y$
+- $Especializa(x,y)$: treinador $x$ é especializado na modalidade $y$
+- $Participa(x,y)$: atleta $x$ participa da competição $y$
+- $EnvolveModalidade(x,y)$: competição $x$ envolve a modalidade $y$
+
+### Regras:
+
+1. Todo atleta pratica pelo menos uma modalidade:
+   $$ \forall x(A(x) \rightarrow \exists y(M(y) \land Pratica(x,y))) $$
+
+2. Todo treinador é especializado em pelo menos uma modalidade:
+   $$ \forall x(T(x) \rightarrow \exists y(M(y) \land Especializa(x,y))) $$
+
+3. Toda competição envolve exatamente uma modalidade:
+   $$ \forall x(C(x) \rightarrow \exists! y(M(y) \land EnvolveModalidade(x,y))) $$
+
+4. Um atleta só pode participar de uma competição se praticar a modalidade envolvida:
+   $$ \forall x \forall y(Participa(x,y) \rightarrow \exists z(M(z) \land Pratica(x,z) \land EnvolveModalidade(y,z))) $$
+
+### Consultas:
+
+1. Verificar se um atleta pratica uma modalidade específica:
+
+   - Consulta: `Pratica(atleta,modalidade)`
+   - Resposta: Verdadeiro se o atleta pratica a modalidade, Falso caso contrário.
+
+2. Verificar se um treinador é especializado em uma modalidade específica:
+
+   - Consulta: `Especializa(treinador,modalidade)`
+   - Resposta: Verdadeiro se o treinador é especializado na modalidade, Falso caso contrário.
+
+3. Verificar se um atleta participa de uma competição específica:
+
+   - Consulta: `Participa(atleta,competicao)`
+   - Resposta: Verdadeiro se o atleta participa da competição, Falso caso contrário.
+
+4. Verificar se uma competição envolve uma modalidade específica:
+
+   - Consulta: `EnvolveModalidade(competicao,modalidade)`
+   - Resposta: Verdadeiro se a competição envolve a modalidade, Falso caso contrário.
+
+5. Verificar se existe um atleta que pratica todas as modalidades:
+
+   - Consulta: $$ \exists x(A(x) \land \forall y(M(y) \rightarrow Pratica(x,y))) $$
+   - Resposta: Verdadeiro se existe um atleta que pratica todas as modalidades, Falso caso contrário.
+
+6. Verificar se existe um treinador especializado em todas as modalidades:
+
+   - Consulta: $$ \exists x(T(x) \land \forall y(M(y) \rightarrow Especializa(x,y))) $$
+   - Resposta: Verdadeiro se existe um treinador especializado em todas as modalidades, Falso caso contrário.
+
+7. Verificar se existe uma modalidade praticada por todos os atletas:
+
+   - Consulta: $$ \exists y(M(y) \land \forall x(A(x) \rightarrow Pratica(x,y))) $$
+   - Resposta: Verdadeiro se existe uma modalidade praticada por todos os atletas, Falso caso contrário.
+
+8. Verificar se existe uma competição em que todos os atletas participam:
+
+   - Consulta: $$ \exists y(C(y) \land \forall x(A(x) \rightarrow Participa(x,y))) $$
+   - Resposta: Verdadeiro se existe uma competição com participação de todos os atletas, Falso caso contrário.
+
+9. Verificar se um atleta está qualificado para participar de uma competição específica:
+
+   - Consulta: $$ \exists z(M(z) \land Pratica(atleta,z) \land EnvolveModalidade(competicao,z)) $$
+   - Resposta: Verdadeiro se o atleta pratica a modalidade envolvida na competição, Falso caso contrário.
+
+10. Verificar se existe um treinador especializado na modalidade de uma competição específica:
+    - Consulta: $$ \exists x \exists y(T(x) \land M(y) \land Especializa(x,y) \land EnvolveModalidade(competicao,y)) $$
+    - Resposta: Verdadeiro se existe um treinador especializado na modalidade da competição, Falso caso contrário.
 
 # Cláusula de Horn
 

@@ -1,67 +1,124 @@
 ---
 author: Frank
 beforetoc: |-
-  [Anterior](2024-09-24-7-7.-Working-with-Vector-and-Matrix.md)
-  [Próximo](2024-09-24-9-9.-Time-and-Space-Complexity-in-Competitive-Programming.md)
+    [Anterior](2024-09-24-7-7.-Working-with-Vector-and-Matrix.md)
+    [Próximo](2024-09-24-9-9.-Time-and-Space-Complexity-in-Competitive-Programming.md)
 categories:
-  - Matemática
-  - Linguagens Formais
-  - Programação
+    - Matemática
+    - Linguagens Formais
+    - Programação
 description: Explore efficient data manipulation in C++ using Span and Ranges with practical examples, performance insights, and coding tips.
 draft: null
 featured: false
 image: assets/images/prog_dynamic.jpeg
 keywords:
-  - Developer Tips
-lastmod: 2024-09-26T14:58:18.548Z
+    - Developer Tips
+lastmod: 2024-09-30T01:33:22.853Z
 layout: post
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
 published: false
 rating: 5
 slug: efficient-data-manipulation-in-C++
 tags:
-  - Coding Examples
-  - Algorithm Optimization
-  - Practical Programming Guide
+    - Coding Examples
+    - Algorithm Optimization
+    - Practical Programming Guide
 title: 7. Efficient Data Manipulation in C++
 toc: true
 ---
 
-# 7. Working with Vector and Matrix
+# 3. Optimizing Loops and Data Structures
 
-Vectors are one of the most versatile data structures used in competitive programming due to their dynamic size and ease of use. They allow for efficient insertion, removal, resizing, and access operations, making them suitable for a wide range of applications. Not only can vectors handle single-dimensional data, but they can also represent more complex structures, such as matrices (2D vectors), which are often used to solve grid-based problems, dynamic table calculations, or simulations of multi-dimensional data.
+In competitive programming, mastering the basics of C++20 is essential for writing efficient and optimized code. This section focuses on fundamental control structures like loops and essential data structures such as vectors and matrices. Both elements play a important role in solving problems under time constraints.
 
-Matrices, represented as vectors of vectors, are particularly useful in problems involving multi-dimensional data manipulation, such as game boards, adjacency matrices in graphs, and dynamic programming tables. Vectors and matrices enable frequent operations like row and column manipulation, matrix transposition, and access to specific submatrices, providing flexibility and control over data arrangement and processing.
+C++20 introduces several features that enhance the flexibility and performance of loops. Techniques like range views and parallel execution allow programmers to process data with greater efficiency. Whether you are dealing with small arrays or large datasets, choosing the right loop can significantly impact the runtime of your solution.
 
-## 7.1 Vectors
+Alongside loops, vectors and matrices serve as the foundation for storing and manipulating data. Understanding how to effectively use these data structures, combined with modern C++ features, allows you to handle complex computations with ease.
 
-In C++, the `vector` class, part of the Standard Template Library (STL), is a dynamic array that provides a versatile and efficient way to manage collections of elements. Unlike traditional arrays, vectors can automatically resize themselves when elements are added or removed, making them particularly useful in competitive programming where the size of data structures may vary during execution.
+In the following sections, we will explore these elements in-depth, providing examples and performance considerations to help you develop competitive programming skills using C++20.
 
-Vectors offer several advantages: they provide random access to elements, support iteration with iterators, and allow dynamic resizing, which is crucial for managing datasets of unknown or varying lengths. They also support a range of built-in functions for modifying the collection, such as `push_back`, `pop_back`, `insert`, `erase`, and `resize`, allowing developers to manage data efficiently without needing to manually handle memory allocations.
+# 3.1. Working with Vector and Matrix
 
-The `vector` class is particularly useful in scenarios involving frequent insertions, deletions, or resizes, as well as when working with dynamic data structures like lists, queues, stacks, or even matrices (2D vectors). Its simplicity and flexibility make it an indispensable tool for implementing a wide range of algorithms quickly and effectively in C++.
+Vectors are flexible. They change size and are easy to use. You can insert, remove, and resize them with little effort. They work well for many tasks in competitive programming. Vectors hold one-dimensional data, but can also represent matrices. These two-dimensional vectors are often used for grids, tables, or simulations.
 
-### 7.1.1 Inserting Elements at a Specific Position
+Matrices, built from vectors, handle multi-dimensional problems. They are good for game boards, adjacency matrices, and dynamic programming. You can change rows and columns, transpose the matrix, or access submatrices. Vectors and matrices give you control over how you store and process data. Starting with vectors.
 
-This code inserts a value into a vector at position 5, provided that the vector has at least 6 elements:
+In C++20, vectors have several important features that make them a powerful tool for managing collections of elements. First, vectors dynamically resize. This means they grow automatically when you add elements beyond their current capacity. You don’t need to manually manage memory like you would with arrays.
 
-**Standard Version:**
+Vectors also provide random access. You can access any element by its index using `[]`, just as you would with a regular array. This makes it easy to work with elements directly without needing to traverse the vector.
+
+## 3.1.1. Vetores, basic operations
+
+In C++, the `std::vector` class is part of the Standard Template Library (STL). It is a dynamic array that manages collections of elements. Unlike arrays, vectors resize when elements are added or removed. This makes them useful in competitive programming when data sizes change during execution.
+
+Vectors offer random access to elements. They support iteration with iterators and allow dynamic resizing. They provide functions like `push_back`, `pop_back`, `insert`, `erase`, and `resize`. These make managing data easier without manual memory handling.
+
+The following example shows how to create a vector in C++20, reserve memory, and initialize elements. We start by creating a vector, reserving space for $10$ elements, and then resizing it to hold $10$ elements initialized to $0$.
+
+```cpp
+std::vector<int> vec;
+vec.reserve(10); // Reserves memory for 10 elements without changing size
+vec.resize(10, 0); // Resizes the vector to 10 elements, all initialized to 0
+```
+
+`vec.reserve(10);` reserves memory for $10$ elements but doesn’t affect the vector’s size. This means no elements are created yet, but space is allocated in advance to avoid future reallocations. Then, `vec.resize(10, 0);` creates $10$ elements, all initialized to $0$, using the reserved memory.
+
+The class template `std::vector` is part of the Standard Template Library (STL) and is a dynamic array. It allows for efficient management of collections of elements. When you write `std::vector<int>`, you are creating a vector where each element is of type `int`.
+
+`std::vector` is a _generic_ class. This means it can store elements of any type, not just integers. For example, `std::vector<double>` stores `double` values, and `std::vector<std::string>` stores strings. The class is defined with a template parameter that specifies the type of the elements.
+
+Here’s an example of creating vectors with different types:
+
+```cpp
+std::vector<int> intVec; // Vector of integers
+std::vector<double> doubleVec; // Vector of doubles
+std::vector<std::string> stringVec; // Vector of strings
+```
+
+When you create a `std::vector<int>`, the compiler generates a specialized version of the `std::vector` class for integers. The same applies to any other type you use with `std::vector`. This is the power of _generic programming_, the ability to write code that works with any type while maintaining type safety.
+
+One important feature of `std::vector` is efficient memory management. By using methods like `reserve` and `shrink_to_fit`, you can control the vector’s capacity. Reserving memory early ensures that the vector has enough space for future elements. This avoids multiple reallocations, which can be expensive because each reallocation involves copying the entire vector to a new memory location. When you know in advance how many elements the vector will need, calling `reserve` improves performance by minimizing these costly reallocations. We saw `reserve` before so let's see `shrink_to_fit`.
+
+`shrink_to_fit` requests the vector to reduce its capacity to match its size. This helps free unused memory after adding or removing elements. It’s not guaranteed, but it allows the system to optimize memory usage.
+
+Here’s a simple example:
+
+```cpp
+std::vector<int> vec;
+vec.reserve(100);  // Reserve space for 100 elements
+vec.resize(10);    // Resize to hold 10 elements
+vec.shrink_to_fit(); // Reduce capacity to fit size
+```
+
+In this example, we reserve space for $100$ elements, resize it to $10$, and then call `shrink_to_fit` to match capacity to the actual number of elements. It ensures memory is not wasted on unused space.
+
+Vectors classe also come with several built-in functions that make them easy to use. For example, `push_back` allows you to add an element to the end of the vector, while `pop_back` removes the last element. The `insert` function lets you add elements at specific positions within the vector.
+
+For example, inserting a value into a vector' end:
+
+```cpp
+intVec.push_back(5); // Adds the value 5 to the end of the vector
+```
+
+`intVec.push_back(5);` appends the value $5$ to the end of the vector. This function resizes the vector if necessary, allocating more memory if the capacity is reached.
+
+The following code shows how to inserts a value into a vector at position $5$, provided that the vector has at least $6$ elements:
 
 ```cpp
 if (vec.size() > 5) {
-    vec.insert(vec.begin() + 5, 42);
+    vec.insert(vec.begin() + 5, 32);
 }
 ```
 
-- $ \text{vec.insert(vec.begin() + 5, 42);} $ inserts the value 42 at position 5 in the vector.
-
-**Optimized for Minimal Typing:**
+`vec.insert(vec.begin() + 5, 42);` inserts the value $32$ at position $5$ in the vector. The condition `vec.size() > 5` ensures the vector has enough elements to avoid out-of-bounds errors.
 
 ```cpp
 if (vec.size() > 5) vec.insert(vec.begin() + 5, 42);
 ```
 
-By removing the block braces $\{\}$, the code remains concise but still clear in cases where simplicity is essential. Alternatively, you can use the `#define` trick:
+By removing the block braces `{}`, the code becomes more concise while keeping the logic intact. This is useful when clarity is maintained without additional syntax.
+
+Using `#define` for Typing Efficiency:
 
 ```cpp
 #define VI std::vector<int>
@@ -69,11 +126,9 @@ VI vec;
 if (vec.size() > 5) vec.insert(vec.begin() + 5, 42);
 ```
 
-### 7.1.2 Removing the Last Element and a Specific Element
+The `#define` statement creates a shorthand for `std::vector<int>`, reducing typing. `VI vec;` now declares the vector `vec` as a vector of integers. The rest of the logic remains unchanged, making the code easier to write without losing clarity.
 
-The following code removes the last element from the vector, followed by the removal of the element at position 3, assuming the vector has at least 4 elements:
-
-**Standard Version:**
+Insert is not enough. The following code removes the last element from the vector, followed by the removal of the element at position $3$, assuming the vector has at least $4$ elements:
 
 ```cpp
 if (!vec.empty()) {
@@ -85,17 +140,7 @@ if (vec.size() > 3) {
 }
 ```
 
-- $ \text{vec.pop_back();} $ removes the last element from the vector.
-- $ \text{vec.erase(vec.begin() + 3);} $ removes the element at position 3.
-
-**Optimized for Minimal Typing:**
-
-```cpp
-if (!vec.empty()) vec.pop_back();
-if (vec.size() > 3) vec.erase(vec.begin() + 3);
-```
-
-Using predefined macros, we can also reduce typing for common operations:
+`vec.pop_back();` removes the last element from the vector while `vec.erase(vec.begin() + 3);` removes the element at position $3$. Using predefined macros, we can also reduce typing for common operations:
 
 ```cpp
 #define ERASE_AT(vec, pos) vec.erase(vec.begin() + pos)
@@ -103,37 +148,26 @@ if (!vec.empty()) vec.pop_back();
 if (vec.size() > 3) ERASE_AT(vec, 3);
 ```
 
-### 7.1.3 Creating a New Vector with a Default Value
-
-The following code creates a new vector with 5 elements, all initialized to the value 7:
-
-**Standard Version:**
+We also can create vectors with a default value in all positions. The following code creates a new integer vector with $5$ elements, all initialized to the value $7$:
 
 ```cpp
 std::vector<int> vec2(5, 7);
 ```
 
-- $ \text{std::vector<int> vec2(5, 7);} $ creates a vector `vec2` with 5 elements, each initialized to 7.
-
-**Optimized for Minimal Typing:**
-
-No significant reduction can be achieved here without compromising clarity, but using `#define` can help in repetitive situations:
+No significant reduction can be achieved here without compromising clarity, but using `#define` can help in repetitive vector use situations or multiple operations:
 
 ```cpp
 #define VI std::vector<int>
 VI vec2(5, 7);
 ```
 
-### 7.1.4 Resizing and Filling with Random Values
-
-The vector `vec2` is resized to 10 elements, and each element is filled with a random value between 1 and 100:
-
-**Standard Version:**
+In the next code fragment, a more complex example, the vector `vec2` is resized to $10$ elements, and each element is filled with a random value between $1$ and $100$:
 
 ```cpp
 vec2.resize(10);
 
 unsigned seed = static_cast<unsigned>(std::chrono::high_resolution_clock::now().time_since_epoch().count());
+
 std::mt19937 generator(seed);
 std::uniform_int_distribution<int> distribution(1, 100);
 
@@ -142,10 +176,13 @@ for (size_t i = 0; i < vec2.size(); ++i) {
 }
 ```
 
-- $ \text{vec2.resize(10);} $ resizes the vector to contain 10 elements.
-- The generator $ \text{std::mt19937} $ is seeded based on the current time, and the distribution generates random integers between 1 and 100.
+The line `vec2.resize(10);` changes the size of the vector to hold $10$ elements. If the vector had fewer than $10$ elements, new ones are added. If it had more, extra elements are removed.
 
-**Optimized for Minimal Typing:**
+Next, the line `unsigned seed = static_cast<unsigned>(std::chrono::high_resolution_clock::now().time_since_epoch().count());` creates a seed for the random number generator. It uses the current time, converts it to a count of time units, and casts it to an unsigned integer. This ensures the random numbers change each time the program runs.
+
+The code then defines the generator `std::mt19937 generator(seed);` using the seed. This creates a Mersenne Twister random number generator, which is fast and reliable. The next line, `std::uniform_int_distribution<int> distribution(1, 100);`, sets up the distribution. It ensures random numbers between 1 and 100 are generated evenly.
+
+Finally, the `for` loop runs through each element in the vector. It assigns a random number to each position, filling the vector with random values between $1$ and $100$. We can rewrite this same code with less typing.
 
 ```cpp
 vec2.resize(10);
@@ -154,7 +191,72 @@ std::uniform_int_distribution<int> dist(1, 100);
 for (auto& v : vec2) v = dist(gen);
 ```
 
-By using modern C++ constructs such as ranged-based `for` loops, we reduce the complexity of the loop and the generator initialization, making the code cleaner and more efficient to type.
+> In C++20, we use the `<random>` library for generating random numbers. This library gives us flexible and efficient ways to create random data. It includes generators and distributions to produce random numbers in various forms.
+>
+> We start with `std::mt19937`, which is a Mersenne Twister generator. This generator is known for being fast and producing high-quality random numbers. It's not new to C++20, but it’s still a strong choice. The generator works by taking a seed, usually an integer, to initialize its random sequence. In the code, we use:
+>
+> ```cpp
+> std::mt19937 generator(seed);
+> ```
+>
+> Here, `seed` is an unsigned integer. It ensures that every run of the program generates different numbers. We seed the generator using the current time from `std::chrono::high_resolution_clock::now()`, converted into an unsigned integer. This makes the sequence unpredictable.
+>
+> The generator itself only produces random bits. To convert those bits into a useful range, we use a distribution. C++20 offers several kinds of distributions. For example, we use `std::uniform_int_distribution<int>`, which produces integers evenly spread across a given range:
+>
+> ```cpp
+> std::uniform_int_distribution<int> distribution(1, 100);
+> ```
+>
+> This tells the program to create numbers between $1$ and $100$, all with equal probability. When we call:
+>
+> ```cpp
+> distribution(generator);
+> ```
+>
+> The generator provides the random bits, and the distribution maps those bits to numbers between $1$ and $100$.
+>
+> C++20 keeps these ideas separate: generators produce bits, and distributions map those bits to useful values. You can also use other distributions like `std::normal_distribution` for normal (Gaussian) distributions or `std::bernoulli_distribution` for true/false outcomes.
+>
+> If you need more control, C++20 introduces new features like `std::seed_seq` for better seeding and >`std::random_device` for non-deterministic seeds. But for most competitive programming tasks, the Mersenne >Twister and a simple distribution will do the job well. You can see a example in the following code:
+>
+> ```cpp
+> #include <iostream>
+> #include <vector>
+> #include <random>
+> #include <chrono>
+>
+> int main() {
+>     // Step 1: Initialize a vector with 10 elements
+>     std::vector<int> vec;
+>     vec.resize(10); // Resizing the vector to hold 10 elements
+>
+>     // Step 2: Use std::random_device for non-deterministic seeding
+>     std::random_device rd; // Non-deterministic random seed generator
+>
+>     // Step 3: Use std::seed_seq for better seeding control
+>     std::seed_seq seed{rd(), rd(), rd(), rd(), rd()}; // Collect multiple seeds
+>     std::mt19937 generator(seed); // Mersenne Twister seeded with the seed sequence
+>
+>     // Step 4: Create a uniform distribution to generate integers between 1 and 100
+>     std::uniform_int_distribution<int> distribution(1, 100);
+>
+>     // Step 5: Fill the vector with random integers using the generator and distribution
+>     for (size_t i = 0; i < vec.size(); ++i) {
+>         vec[i] = distribution(generator); // Assign a random value to each element
+>     }
+>
+>     // Step 6: Print the randomly generated numbers in the vector
+>     std::cout << "Random numbers in the vector: ";
+>     for (const auto& num : vec) {
+>         std::cout << num << " "; // Output each random number
+>     }
+>     std::cout << std::endl;
+>
+>     return 0;
+> }
+> ```
+>
+> The key to using random numbers in C++20 is understanding the separation of concerns: generators make the random >bits, and distributions convert those bits into meaningful values. This approach makes the system flexible and >powerful.
 
 ### 7.1.5 Sorting the Vector
 
