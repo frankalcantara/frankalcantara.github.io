@@ -1,28 +1,28 @@
 ---
 author: Frank
 beforetoc: |-
-    [Anterior](2024-09-24-2-1.-Introduction.md)
-    [Próximo](2024-09-24-4-4.-Introduction-to-File-IO-in-C%2B%2B.md)
+   [Anterior](2024-09-24-2-1.-Introduction.md)
+   [Próximo](2024-09-24-4-4.-Introduction-to-File-IO-in-C%2B%2B.md)
 categories:
-    - Matemática
-    - Linguagens Formais
-    - Programação
+   - Matemática
+   - Linguagens Formais
+   - Programação
 description: Competitive Programming in C++ and Python for newbies.
 draft: null
 featured: false
 image: assets/images/prog_dynamic.jpeg
 keywords:
-    - Code Comparison
-    - Developer Tips
-lastmod: 2024-10-02T16:55:11.331Z
+   - Code Comparison
+   - Developer Tips
+lastmod: 2024-10-02T16:58:57.281Z
 layout: post
 preview: Competitive Programming in C++ and Python for newbies. Explore various algorithmic examples, and understand performance differences. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
 published: false
 rating: 5
 slug: competitive-programming-techniques-insights
 tags:
-    - Matemática
-    - Linguagens Formais
+   - Matemática
+   - Linguagens Formais
 title: 2. C++ Competitive Programming Hacks
 toc: true
 ---
@@ -47,7 +47,7 @@ In C++, file input and output (I/O) operations are managed using classes from th
 
 The `std::ifstream` class reads files. It is only for input. It inherits from `std::istream`, the main class for input in C++. Use `std::ifstream` to open a file and read its data. You can read line by line or in parts. It is straightforward and efficient. This class also checks file status and handles errors. It is a basic tool for reading in C++.
 
-In our code, use `std::ifstream` to open a text file and read its contents:
+In your code, use `std::ifstream` to open a text file and read its contents:
 
 ```cpp
 std::ifstream file("path_to_file");

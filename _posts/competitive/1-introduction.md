@@ -12,7 +12,7 @@ draft: null
 featured: true
 image: assets/images/compte_introd.jpg
 keywords: Competitive Programming, C++ Algorithms, Dynamic Programming, Performance Analysis, Coding Examples, Algorithm Optimization, Practical Programming Guide
-lastmod: 2024-10-02T16:02:51.313Z
+lastmod: 2024-10-02T18:12:54.569Z
 layout: post
 preview: Why we will study C++ 20 and a bunch of algorithms for competitive programming, Here are the reasons for use C++ 20 and write this huge document.
 published: false
@@ -216,6 +216,8 @@ Here, each call to the function creates two more calls, except when $n = 1$. The
 | ...           | ...             |
 | $g(1)$        | $2^{n-1}$       |
 
+_Table 1.1.2.A - Counting calls to understand exponential growth._{: class="legend"}
+
 So, the total time complexity is:
 
 $$1 + 2 + 4 + \cdots + 2^{n-1} = 2^n - 1 = O(2^n)$$
@@ -238,6 +240,8 @@ Here is a table of common time complexities of algorithms:
 | $O(2^n)$      | Exponential growth; often in recursive algorithms exploring all subsets.                       | Subset generation, recursive searches. |
 | $O(n!)$       | Factorial time; algorithms generating all permutations of the input.                           | Permutation generation.                |
 
+_Table 1.1.3.A - Common time complexities of algorithms._{: class="legend"}
+
 ### 1.1.4. Estimating Efficiency
 
 When figuring out an algorithm’s time complexity, you can estimate if it’ll be fast enough before you even start coding. A modern computer can handle hundreds of millions of operations per second.
@@ -254,6 +258,8 @@ You can also judge what time complexity you need based on the input size. Here�
 | $n \leq 5000$ | $O(n^2)$                 |
 | $n \leq 10^6$ | $O(n \log n)$ or $O(n)$  |
 | $n$ is large  | $O(1)$ or $O(\log n)$    |
+
+_Table 1.1.4.A - Theoretical relationship between time complexity and input size._{: class="legend"}
 
 So, if your input size is $n = 10^5$, you’ll probably need an algorithm with $O(n)$ or $O(n \log n)$ time complexity. This helps you steer clear of approaches that are too slow.
 
@@ -366,6 +372,8 @@ int main() {
     return 0;
 }
 ```
+
+_Code 1.2.1.A - Code for self-assessment of your typing speed._{: class="legend"}
 
 Don't give up before trying. If you can't type fast enough, don't stop here. Keep going. With each new algorithm, copy and practice again until it feels natural to type between 60 and 80 words per minute with an accuracy above $95%$.
 
@@ -539,7 +547,7 @@ Can be replaced with:
 
 In competitive programming, you might think using `#define` is the fastest way to type less and code faster. But `typedef` or `using` are usually more efficient. They avoid issues with macros and integrate better with the compiler. **While reducing variable names or abbreviating functions might save time in a contest, remember that in professional code, clarity and maintainability are more important than typing speed**. So avoid using shortened names and unsafe constructs like `#define` in production code, libraries, or larger projects.
 
-> To understand better.In C++, you can create aliases for types. This makes your code cleaner. You use `typedef` or `using` to do this.
+> In C++, you can create aliases for types. This makes your code cleaner. You use `typedef` or `using` to do this.
 >
 > `typedef` lets you give a new name to an existing type.
 >
@@ -613,21 +621,92 @@ std::sort(ALL(vec)); Another way to use the macro to sort
 > 1 2 3 4 5
 > ```
 
-**Summing Elements**:
+Another common operation in competitions is the addition of elements within the same vector. For this, C++20 offers `std::accumulate`.
+
+The difference between `sum` and `accumulate` is in their usage and flexibility. In C++, `std::accumulate` is part of the `<numeric>` library and calculates the sum (or other operations) over a range of elements starting from an initial value. Unlike other languages, C++ does not have a built-in `sum` function, but `std::accumulate` serves that purpose.
+
+In the provided code:
 
 ```cpp
+#define ALL(x) x.begin(), x.end()
+
+\\...
+
 int sum_vector(const VI& vec) {
-    return std::accumulate(vec.begin(), vec.end(), 0);
+    return std::accumulate(ALL(vec), 0);
 }
 ```
 
-To calculate the sum of a vector's elements:
+The code `std::accumulate(ALL(vec), 0);` will be replaced in compilation time for std::accumulate(vec.begin(), vec.end(), 0)` witch takes three arguments:
 
-```cpp
-int total = sum_vector(numbers);
-```
+- The first two define the range to sum (`vec.begin()` to `vec.end()`).
+- The third argument is the initial value, which is $0$, added to the summation result.
+
+If `std::accumulate` is used without a custom function, it defaults to addition, behaving like a simple summation. To calculate the sum of a vector's elements:
+
+> `std::accumulate` uses functions to operate on elements. These functions are straightforward. They take two values and return one. Let's see how they work.
+>
+> We can begin for Lambda functions, they are unnamed functions, useful for quick operations.
+>
+> ```cpp
+> [](int a, int b) { return a + b; }
+> ```
+>
+> This lambda adds two numbers. The `[]` is the capture list. It's empty here. `(int a, int b)` are the parameters. `{ return a + b; }` is the function body. For example we could write:
+>
+> ```cpp
+> int sum = std::accumulate(ALL(vec), 0, [](int a, int b) { return a + b; });
+> ```
+>
+> This lambda sums all elements in `v`. Nevertheless, the C++ provides standard functions for common operations in `std::accumulate`.
+>
+> ```cpp
+> int sum = std::accumulate(All(vec), 0, std::plus<>());
+> ```
+>
+> `std::plus<>` adds two numbers. It’s the default for `std::accumulate`.
+>
+> ```cpp
+> int product = std::accumulate(ALL(vec), 1, std::multiplies<>());
+> ```
+>
+> `std::multiplies<>` multiplies two numbers.
+>
+> Using lambda functions, or not, you can create your own functions.
+>
+> ```cpp
+> int max_element = std::accumulate(ALL(vec), v[0],
+>     [](int a, int b) { return std::max(a, b); });
+> ```
+>
+> This lambda function finds the largest element in `v`. In this case, `std::accumulate` applies the function repeatedly. It starts with an initial value. For each element:
+>
+> 1. It takes the previous result.
+> 2. It takes the current element.
+> 3. It applies the function to both values.
+> 4. The result is used in the next iteration.
+>
+> This process continues until the sequence ends. Let’s see how `std::accumulate` sums the squares of numbers:
+>
+> ```cpp
+> std::vector<int> vec = {1, 2, 3, 4};
+> int sum_of_squares = std::accumulate(ALL(vec), 0,
+>     [](int acc, int x) { return acc + x * x; });
+> ```
+>
+> The process goes like this:
+>
+> 1. Start: $acc = 0$
+> 2. For $1$: $acc = 0 + 1 * 1 = 1$
+> 3. For $2$: $acc = 1 + 2 * 2 = 5$
+> 4. For $3$: $acc = 5 + 3 * 3 = 14$
+> 5. For $4$: $acc = 14 + 4 * 4 = 30$
+>
+> The final result is $30$.
 
 ### 1.2.2.3. Using Lambda Functions
+
+Let's can back to Lambdas.
 
 Starting with C++11, C++ introduced lambda functions. Lambdas are anonymous functions that can be defined exactly where they are needed. If your code needs a simple function used only once, you should consider using lambdas. Let’s start with a simple example, written without competitive programming tricks.
 
