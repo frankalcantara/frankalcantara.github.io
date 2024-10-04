@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
 beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
-lastmod: 2024-10-04T21:59:00.147Z
+lastmod: 2024-10-04T23:01:58.284Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -155,7 +155,7 @@ Essa correspondência deu origem ao paradigma de _provas como programas_. O cál
 
 O cálculo lambda continua a influenciar a ciência da computação. O desenvolvimento do cálculo lambda tipado levou à criação de sistemas de tipos complexos, fundamentais para a verificação formal de software e para linguagens de programação modernas, como Haskell, Coq e Agda. Esses sistemas garantem propriedades de programas, como segurança e correção, utilizando princípios do cálculo lambda.
 
-A contribuição de Alonzo Church ainda molda nossa compreensão da computação. A simplicidade e a precisão do cálculo lambda — com variáveis, aplicação e abstração — tornam-no uma ferramenta fundamental para o estudo da computação e da lógica, além de seu papel original como sistema para manipulação de funções.
+A contribuição de Alonzo Church ainda molda nossa compreensão da computação. A simplicidade e a precisão do cálculo lambda — com variáveis, aplicação e abstração, — tornam-no uma ferramenta fundamental para o estudo da computação e da lógica, além de seu papel original como sistema para manipulação de funções.
 
 O cálculo lambda não é apenas um conceito teórico abstrato; ele possui implicações práticas, especialmente na programação funcional. Ele é o alicerce teórico sobre o qual muitas linguagens de programação funcional se apoiam. Linguagens como Lisp, Haskell, OCaml e F# incorporam princípios do cálculo lambda. Exemplos incluem:
 
@@ -257,14 +257,16 @@ No cálculo lambda, o domínio é geralmente construído como um conjunto de fun
 Por exemplo, uma semântica denotacional simples para termos lambda é definida da seguinte maneira:
 
 - $[x]_{\rho} = \rho(x)$, onde $\rho$ é um ambiente que mapeia variáveis para valores.
+  
 - $[\lambda x . e]_{\rho} = f$, tal que $f(v) = [e]_{\rho[x \mapsto v]}$. Isso significa que uma função é interpretada como um mapeamento de valores para o resultado da interpretação do corpo em um ambiente atualizado.
+  
 - $[e_1 e_2]_{\rho} = [e_1]_{\rho}([e_2]_{\rho})$, significando que a aplicação é interpretada aplicando o significado de $e_1$ ao significado de $e_2$.
 
 Essa abordagem constrói uma compreensão composicional dos termos do cálculo lambda, permitindo um raciocínio modular sobre as expressões.
 
 **Exemplo**:
 
-Considere a expressão $(\lambda x. x + 1) 2$. Usando a redução beta, substituímos $2$ por $x$ na expressão $x + 1$, resultando em $2 + 1 = 3$.
+Considere a expressão $(\lambda x. x + 1)\ 2$. Usando a redução beta, substituímos $2$ por $x$ na expressão $x + 1$, resultando em $2 + 1 = 3$.
 
 A mesma expressão pode ser interpretada denotacionalmente, onde $(\lambda x. x + 1)$ é visto como uma função que adiciona $1$ ao seu argumento. Aplicando-a a $2$, obtemos $3$.
 
@@ -501,30 +503,35 @@ $$ \lambda x. (\lambda z. z + x) z \to\_\alpha \lambda x. (\lambda w. w + x) z $
 
 ### Substituição no Cálculo Lambda
 
-A substituição é uma das operações mais fundamentais no cálculo lambda. Ela é usada para substituir uma variável livre por um termo, e sua formalização evita a captura de variáveis, garantindo que a substituição ocorra de maneira correta. A substituição é definida recursivamente da seguinte forma:
+A substituição é uma operação central no cálculo lambda. Ela substitui uma variável livre por um termo, e sua formalização evita a captura de variáveis, garantindo que ocorra de forma correta. A substituição é definida de maneira recursiva:
 
 1. $[N/x]x = N$
 2. $[N/x]y = y$, se $x \neq y$
 3. $[N/x](M_1 M_2) = ([N/x]M_1)([N/x]M_2)$
 4. $[N/x](\lambda y.M) = \lambda y.([N/x]M)$, se $x \neq y$ e $y \notin FV(N)$
 
-onde $FV(N)$ denota o conjunto de variáveis livres de $N$. A condição de que $y \notin FV(N)$ é necessária para evitar a captura de variáveis livres. Considere, por exemplo:
+Aqui, $FV(N)$ é o conjunto de variáveis livres de $N$. A condição $y \notin FV(N)$ é necessária para evitar a captura de variáveis livres. Considere, por exemplo:
 
 $$[y/x](\lambda y.x) \neq \lambda y.y$$
 
-Neste caso, uma substituição ingênua capturaria a variável livre $y$, alterando o significado do termo. Para evitar essa situação, utilizamos a chamada _substituição com evasão de captura_. Para ilustrar a substituição com evasão de captura, considere:
+Nesse caso, uma substituição direta capturaria a variável livre $y$, alterando o significado do termo. Para evitar isso, utilizamos a **substituição com evasão de captura**.
+
+Para ilustrar a substituição com evasão de captura, considere:
 
 $$[y/x](\lambda y.x) = \lambda z.[y/x]([z/y]x) = \lambda z.y$$
 
-Aqui, renomeamos a variável ligada $y$ para $z$ antes de realizar a substituição, evitando assim a captura da variável livre $y$. Outro exemplo importante é:
+Renomeamos a variável ligada $y$ para $z$ antes de realizar a substituição, evitando a captura da variável livre $y$.
+
+Outro exemplo relevante:
 
 $$[z/x](\lambda z.x) \neq \lambda z.z$$
 
-Neste caso, se fizermos a substituição diretamente, a variável $z$ será capturada, mudando o significado do termo. A solução correta é renomear a variável ligada antes da substituição:
+Se fizermos a substituição diretamente, a variável $z$ será capturada, mudando o significado do termo. A solução correta é renomear a variável ligada antes da substituição:
 
 $$[z/x](\lambda z.x) = \lambda w.[z/x]([w/z]x) = \lambda w.z$$
 
-Este processo garante que a variável livre $z$ não seja inadvertidamente capturada pela abstração $\lambda z$.
+Este processo garante que a variável livre $z$ não seja capturada pela abstração $\lambda z$.
+
 
 ### Redução Alfa e Substituição
 
@@ -3577,8 +3584,7 @@ $$
 
 A confluência, combinada com a normalização forte, garante a **unicidade da forma normal** para termos bem tipados. Isso significa que, independentemente da ordem de redução escolhida, um termo bem tipado sempre converge para a mesma forma normal, garantindo consistência e previsibilidade no processo de redução.
 
-
-$$
+$
 
 ## A Teoria dos Tipos Simples
 
@@ -3586,7 +3592,7 @@ A **Teoria dos Tipos Simples**, desenvolvida por Alonzo Church na década de 194
 
 ### Contexto Histórico e Motivação
 
-O cálculo lambda não tipado, proposto por Church na década de 1930, ofereceu um modelo poderoso de computabilidade, mas sua flexibilidade permitiu a formulação de termos paradoxais, como o **combinador Y** (um fixpoint combinator) e o termo **$\omega = \lambda x. x x$**, que resulta em reduções infinitas. Esses termos paradoxais tornavam o cálculo lambda inconsistente, uma vez que permitiam a criação de expressões que não convergiam para uma forma normal, gerando loops infinitos.
+O cálculo lambda não tipado, proposto por Church na década de 1930, ofereceu um modelo poderoso de computabilidade, mas sua flexibilidade permitiu a formulação de termos paradoxais, como o **combinador Y** (um fixpoint combinator) e o termo **$\omega = \lambda x. x\ x$**, que resulta em reduções infinitas. Esses termos paradoxais tornavam o cálculo lambda inconsistente, uma vez que permitiam a criação de expressões que não convergiam para uma forma normal, gerando loops infinitos.
 
 O problema era análogo aos paradoxos que surgiram na teoria dos conjuntos ingênua, como o paradoxo de Russell. A solução proposta por Church envolvia restringir o cálculo lambda através da introdução de tipos, criando um sistema onde apenas combinações de funções e argumentos compatíveis fossem permitidas, prevenindo a criação de termos paradoxais.
 
@@ -3657,7 +3663,7 @@ Embora poderosa, a **Teoria dos Tipos Simples** tem limitações:
 
 Para superar essas limitações, surgiram várias extensões da teoria:
 
-1. **Sistemas de Tipos Polimórficos**: Como o **Sistema F** de Girard, que introduz quantificação sobre tipos, permitindo a definição de funções polimórficas.
+1. **Sistemas de Tipos Polimórficos**: Como o **Sistema F** de [Girard](https://en.wikipedia.org/wiki/Jean-Yves_Girard), que introduz quantificação sobre tipos, permitindo a definição de funções polimórficas.
 
 2. **Teoria dos Tipos Dependentes**: Extensões que permitem que tipos dependam de valores, aumentando significativamente a expressividade e permitindo raciocínios mais complexos.
 
