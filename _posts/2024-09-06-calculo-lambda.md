@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
 beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
-lastmod: 2024-10-05T19:29:50.637Z
+lastmod: 2024-10-05T19:57:52.854Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -172,7 +172,7 @@ O cálculo lambda é um sistema formal para representar computação baseado na 
 
 1. **Variáveis**: Representadas por letras minúsculas como $x$, $y$, $z$. As variáveis não possuem valor intrínseco, como em linguagens como Python ou C++. Atuam como espaços reservados para entradas potenciais de funções.
 
-2. **Aplicação**: A aplicação $(M \, N)$ indica a aplicação da função $M$ ao argumento $N$. A aplicação é associativa à esquerda, então $M N P$ é interpretado como $((M \, N) P)$.
+2. **Aplicação**: A aplicação $(M \, N)$ indica a aplicação da função $M$ ao argumento $N$. A aplicação é associativa à esquerda, então $M \, N \, P$ é interpretado como $((M \, N) \,  P)$.
 
 3. **Abstração**: A abstração $ (\lambda x. \, E)$ representa uma função que tem $x$ como parâmetro e $E$ como corpo. O símbolo $\lambda$ indica que estamos definindo uma função. Por exemplo, $ (\lambda x. \, x)$ é a função identidade.
 
@@ -409,12 +409,12 @@ No cálculo lambda, as variáveis têm escopo léxico. O escopo é determinado p
 Uma variável é **ligada** quando aparece dentro do escopo de uma abstração que a introduz. Por exemplo:
 
 - Em $\lambda x.\lambda y.x \, y$, tanto $x$ quanto $y$ estão ligadas.
-- Em $\lambda x.(\lambda x.x) \, x$, ambas as ocorrências de $x$ estão ligadas, mas a ocorrência interna (no termo $\lambda x.x$) "esconde" a externa.
+- Em $\lambda x.(\lambda x. \, x) \, x$, ambas as ocorrências de $x$ estão ligadas, mas a ocorrência interna (no termo $\lambda x. \, x$) "esconde" a externa.
 
 Uma variável é **livre** quando não está ligada por nenhuma abstração. Por exemplo:
 
-- Em $\lambda x.x \, y$, $x$ está ligada, mas $y$ está livre.
-- Em $(\lambda x.x) \, y$, $y$ está livre.
+- Em $\lambda x. \, x \, y$, $x$ está ligada, mas $y$ está livre.
+- Em $(\lambda x. \, x) \, y$, $y$ está livre.
 
 O conjunto de variáveis livres de um termo $E$, denotado por $FV(E)$, pode ser definido recursivamente:
 
@@ -434,7 +434,7 @@ $$
 
 Devemos ter cuidado para não capturar variáveis livres:
 
-$$\lambda x.x \, y \neq_\alpha \lambda y.y \, y$$
+$$\lambda x. \, x \, y \neq_\alpha \lambda y. \, y \, y$$
 
 No segundo termo, a variável livre $y$ foi capturada, o que altera o significado do termo.
 
@@ -849,15 +849,15 @@ Esses exemplos ilustram como o _Currying_ é um conceito fundamental no cálculo
 
 **9**: transforme a função $ f(x, y) = x + 2y $ em uma expressão lambda curried e aplique-a aos valores $ x = 1 $ e $ y = 4 $.
 
-   **Solução:** A função curried é $ \lambda x. \lambda y. \, x + 2y $. Aplicando $ x = 1 $ e $ y = 4 $:
+   **Solução:** A função curried é $\lambda x. \lambda y. \, x + 2y$. Aplicando $x = 1 $ e $ y = 4$:
 
-   $$  (\lambda x. \lambda y. \, x + 2y) 1 4 = 1 + 2 \cdot 4 = 1 + 8 = 9 $$
+   $$(\lambda x. \lambda y. \, x + 2y) 1 4 = 1 + 2 \cdot 4 = 1 + 8 = 9$$
 
-**10**: crie uma função curried para representar a soma de três números, ou seja, $ f(x, y, z) = x + y + z $, e aplique-a aos valores $ x = 3 $, $ y = 5 $, e $ z = 7 $.
+**10**: crie uma função curried para representar a soma de três números, ou seja, $f(x, y, z) = x + y + z$, e aplique-a aos valores $x = 3$, $y = 5$, e $z = 7$.
 
-   **Solução:** A função curried é $ \lambda x. \lambda y. \, \lambda z. x + y + z $. Aplicando $ x = 3 $, $ y = 5 $, e $ z = 7 $:
+   **Solução:** A função curried é $\lambda x. \lambda y. \, \lambda z. \, x + y + z$. Aplicando $x = 3$, $y = 5$, e $z = 7$:
 
-   $$  (\lambda x. \lambda y. \, \lambda z. x + y + z) 3 5 7 = 3 + 5 + 7 = 15 $$
+   $$(\lambda x. \lambda y. \, \lambda z. x + y + z) \, 3 \, 5 \, 7 = 3 + 5 + 7 = 15$$
 
 ## Redução Beta no Cálculo Lambda
 
@@ -873,51 +873,57 @@ Onde $[N/x]\, M$ denota a substituição de todas as ocorrências livres de $x$ 
 
    Considere a expressão:
 
-   $$(\lambda x.x+1)2$$
+   $$(\lambda x. \, x+1)2$$
 
    Aplicando a redução beta:
 
-   $$(\lambda x.x+1)2 \to_\beta [2/x](x+1) = 2+1 = 3$$
+   $$(\lambda x. \, x+1)2 \to_\beta [2/x](x+1) = 2+1 = 3$$
 
    Aqui, o valor $2$ é substituído pela variável $x$ na expressão $x + 1$, resultando em $2 + 1 = 3$.
 
 Agora, um exemplo mais complexo envolvendo uma função de ordem superior:
 
-   $$(\lambda f.\lambda x.f(f x))(\lambda y.y*2)3$$
+   $$(\lambda f.\lambda x. \, f \, (f \, x))(\lambda y. \, y*2) \, 3$$
 
    Reduzindo passo a passo:
 
-   1. $ (\lambda f.\lambda x.\, f(f x))(\lambda y.\, y\*2)3 $
-   2. $ \to\_\beta (\lambda x.(\lambda y.\, y*2)((\lambda y.\, y*2) x))3 $
-   3. $ \to\_\beta (\lambda y.\, y*2)((\lambda y.\, y*2) 3) $
-   4. $ \to\_\beta (\lambda y.\, y*2)(3*2) $
-   5. $ \to\_\beta (\lambda y.\, y\*2)(6) $
-   6. $ \to\_\beta 6\*2 $
-   7. $ = 12 $
+   $$(\lambda f.\lambda x.\, f(f \, x))(\lambda y.\, y \cdot 2)3$$
 
-Neste exemplo, aplicamos primeiro a função $(\lambda f.\lambda x.\, f(f x))$ ao argumento $(\lambda y.\, y*2)$, resultando em uma expressão que aplica duas vezes a função de duplicação ao número $3$, obtendo $12$.
+   $$\to_\beta (\lambda x.(\lambda y.\, y \cdot 2)((\lambda y.\, y \cdot 2) x)) \, 3$$
+
+   $$\to_\beta (\lambda y.\, y \cdot 2)((\lambda y.\, y \cdot 2)\, 3)$$
+
+   $$\to_\beta (\lambda y.\, y \cdot 2) \, (3 \cdot 2)$$
+
+   $$\to_\beta (\lambda y.\, y \cdot 2) \, (6)$$
+
+   $$\to_\beta 6 \cdot 2$$
+
+   $$= 12$$
+
+Neste exemplo, aplicamos primeiro a função $(\lambda f.\lambda x.\, f \, (f \, x))$ ao argumento $(\lambda y.\, y*2)$, resultando em uma expressão que aplica duas vezes a função de duplicação ao número $3$, obtendo $12$.
 
 ### Ordem Normal e Estratégias de Avaliação
 
 A ordem em que as reduções beta são aplicadas pode afetar tanto a eficiência quanto a terminação do cálculo. Existem duas principais estratégias de avaliação:
 
-1.**Ordem Normal**: Sempre reduz o redex mais externo à esquerda primeiro. Essa estratégia garante encontrar a forma normal de um termo, se ela existir. Na ordem normal, aplicamos a função antes de avaliar seus argumentos.
+1. **Ordem Normal**: Sempre reduz o redex mais externo à esquerda primeiro. Essa estratégia garante encontrar a forma normal de um termo, se ela existir. Na ordem normal, aplicamos a função antes de avaliar seus argumentos.
 
-2.**Ordem Aplicativa**: Nesta estratégia, os argumentos são reduzidos antes da aplicação da função. Embora mais eficiente em alguns casos, pode não terminar em expressões que a ordem normal resolveria.
+2. **Ordem Aplicativa**: Nesta estratégia, os argumentos são reduzidos antes da aplicação da função. Embora mais eficiente em alguns casos, pode não terminar em expressões que a ordem normal resolveria.
 
 Por exemplo, considere a expressão:
 
-$$(\lambda x.\, y)(\lambda z.\, z z)$$
+$$(\lambda x.\, y)(\lambda z.\, z \, z)$$
 
-   -**Ordem Normal**: A função $(\lambda x.\, y)$ é aplicada diretamente ao argumento $(\lambda z.\, z z)$, resultando em:
+- **Ordem Normal**: A função $(\lambda x.\, y)$ é aplicada diretamente ao argumento $(\lambda z.\, z \, z)$, resultando em:
 
-   $$(\lambda x.\, y)(\lambda z.\, z z) \to_\beta y$$
+   $$(\lambda x.\, y)(\lambda z.\, z \, z) \to_\beta y$$
 
    Aqui, não precisamos avaliar o argumento, pois a função simplesmente retorna $y$.
 
-   -**Ordem Aplicativa**: Primeiro, tentamos reduzir o argumento $(\lambda z.\, z \, z)$, resultando em uma expressão que se auto-aplica indefinidamente, causando um loop infinito:
+- **Ordem Aplicativa**: Primeiro, tentamos reduzir o argumento $(\lambda z.\, z \, z)$, resultando em uma expressão que se auto-aplica indefinidamente, causando um loop infinito:
 
-   $$(\lambda x.\, y)(\lambda z.\, z z) \to_\beta (\lambda x.\, y)((\lambda z.\, z\,  z)(\lambda z.\, z\,  z)) \to_\beta ...$$
+   $$(\lambda x.\, y)(\lambda z.\, z \, z) \to_\beta (\lambda x.\, y)((\lambda z.\, z\,  z)(\lambda z.\, z\,  z)) \to_\beta ...$$
 
 Este exemplo mostra que a ordem aplicativa pode levar a uma não terminação, enquanto a ordem normal encontra uma solução.
 
@@ -955,11 +961,11 @@ Este teorema tem várias consequências importantes:
 
    $$  (\lambda x. \lambda y. \, x + y) 2 3 \to*\beta  (\lambda y. \, 2 + y) 3 \to*\beta 2 + 3 = 5 $$
 
-**3**: Aplique a redução beta na expressão $ (\lambda f. \lambda x. \, f(f x))  (\lambda y. \, y + 1) 4 $.
+**3**: Aplique a redução beta na expressão $ (\lambda f. \lambda x. \, f(f \, x))  (\lambda y. \, y + 1) 4 $.
 
    **Solução:** Primeiro aplicamos $  (\lambda y. \, y + 1) $ a $ f $, e depois $ 4 $ a $ x $:
 
-   1. $ (\lambda f. \lambda x. \, f(f x))  (\lambda y. \, y + 1) 4 $
+   1. $ (\lambda f. \lambda x. \, f(f \, x))  (\lambda y. \, y + 1) 4 $
    2. $ \to\_\beta  (\lambda x. \,  (\lambda y. \, y + 1)( (\lambda y. \, y + 1) x)) 4 $
    3. $ \to\_\beta  (\lambda y. \, y + 1)( (\lambda y. \, y + 1) 4) $
    4. $ \to\_\beta  (\lambda y. \, y + 1)(4 + 1) $
@@ -1138,11 +1144,11 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
    **Solução:** O combinador $ Y $ é definido como:
 
-   $$ Y = \lambda f.  (\lambda x. \, f(x x))  (\lambda x. \, f(x x)) $$
+   $$ Y = \lambda f.  (\lambda x. \, f(x \, x))  (\lambda x. \, f(x \, x)) $$
 
    Aplicando-o à função $ f(x) = x + 1 $:
 
-   $$ Y (\lambda x. \, x + 1) \to  (\lambda x. \,  (\lambda x. \, x + 1)(x x))  (\lambda x. \,  (\lambda x. \, x + 1)(x x)) $$
+   $$ Y (\lambda x. \, x + 1) \to  (\lambda x. \,  (\lambda x. \, x + 1)(x \, x))  (\lambda x. \,  (\lambda x. \, x + 1)(x \, x)) $$
 
    Este processo gera uma recursão infinita, pois a função continua chamando a si mesma.
 
@@ -1349,7 +1355,7 @@ No contexto do cálculo lambda e linguagens de programação, existem duas princ
 2.**Avaliação por Nome**: Argumentos são passados para a função sem serem avaliados imediatamente. A avaliação ocorre apenas quando o argumento é necessário. Esta estratégia corresponde à**ordem normal de redução**, em que a função é aplicada diretamente e o argumento só é avaliado quando estritamente necessário. Uma vantagem desta abordagem é que ela pode evitar avaliações desnecessárias, especialmente em contextos onde certos argumentos nunca são utilizados.
 
 **Exemplo**:
- Usando a mesma expressão $  (\lambda x. \, x + 1) (2 + 3) $, com**avaliação por nome**, a função seria aplicada sem avaliar o argumento de imediato:
+ Usando a mesma expressão $ \lambda x. \, x + 1) (2 + 3) $, com**avaliação por nome**, a função seria aplicada sem avaliar o argumento de imediato:
 
  $$  (\lambda x. \, x + 1) (2 + 3) \rightarrow (2 + 3) + 1 \rightarrow 5 + 1 \rightarrow 6 $$
 
@@ -1458,13 +1464,13 @@ Na**ordem normal**, a redução prioriza o _redex_ mais externo à esquerda (red
    **Exemplo**:
    Considere a expressão:
 
-   $$  (\lambda x. \lambda y. \, y) ((\lambda z. \, z z) (\lambda w. w w)) $$
+   $$  (\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) $$
 
    Na**ordem normal**, a redução ocorre da seguinte maneira:
 
-   $$  (\lambda x. \lambda y. \, y) ((\lambda z. \, z z) (\lambda w. w w)) \to\_\beta \lambda y. \, y $$
+   $$  (\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) \to\_\beta \lambda y. \, y $$
 
-   O argumento $((\lambda z. \, z z) (\lambda w. w w))$ não é avaliado, pois ele nunca é utilizado no corpo da função.
+   O argumento $((\lambda z. \, z \, z) (\lambda w. w w))$ não é avaliado, pois ele nunca é utilizado no corpo da função.
 
 ## Ordem Aplicativa (Applicative-Order)
 
@@ -1477,24 +1483,24 @@ Na**ordem aplicativa**, os argumentos de uma função são avaliados antes da ap
 **Exemplo**:
  Utilizando a mesma expressão:
 
- $$  (\lambda x. \lambda y. \, y) ((\lambda z. \, z z) (\lambda w. w w)) $$
+ $$  (\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) $$
 
- Na**ordem aplicativa**, primeiro o argumento $((\lambda z. \, z z) (\lambda w. w w))$ é avaliado antes da aplicação da função:
+ Na**ordem aplicativa**, primeiro o argumento $((\lambda z. \, z \, z) (\lambda w. w w))$ é avaliado antes da aplicação da função:
 
- $$  (\lambda x. \lambda y. \, y) ((\lambda z. \, z z) (\lambda w. w w)) \to*\beta  (\lambda x. \lambda y. \, y) ((\lambda w. w w) (\lambda w. w w)) \to*\beta ... $$
+ $$  (\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) \to*\beta  (\lambda x. \lambda y. \, y) ((\lambda w. w w) (\lambda w. w w)) \to*\beta ... $$
 
  Isso leva a uma avaliação infinita, uma vez que a expressão $((\lambda w. w w) (\lambda w. w w))$ entra em um loop sem fim.
 
 ### Exercícios sobre Ordem Normal e Aplicativa
 
-**1**: Aplique a**ordem normal**à expressão $  (\lambda x. \lambda y. \, y) ((\lambda z. \, z z) (\lambda w. w w)) $.
+**1**: Aplique a**ordem normal**à expressão $  (\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) $.
 
 **Solução:**
  A ordem normal prioriza a redução externa:
 
- $$  (\lambda x. \lambda y. \, y) ((\lambda z. \, z z) (\lambda w. w w)) \rightarrow\_\beta \lambda y. \, y $$
+ $$  (\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) \rightarrow\_\beta \lambda y. \, y $$
 
- O argumento $((\lambda z. \, z z) (\lambda w. w w))$ nunca é avaliado.
+ O argumento $((\lambda z. \, z \, z) (\lambda w. w w))$ nunca é avaliado.
 
 **2**: Reduza a expressão $  (\lambda x. \lambda y. \, x) ((\lambda z. \, z + 1) 5) $ usando a**ordem normal**.
 
@@ -1505,21 +1511,21 @@ Na**ordem aplicativa**, os argumentos de uma função são avaliados antes da ap
 
  O argumento não é avaliado porque a função não o utiliza.
 
-**3**: Considere a expressão $  (\lambda x. \lambda y. \, y + 1) ((\lambda z. \, z z) (\lambda w. w w)) $. Avalie-a usando**ordem normal**.
+**3**: Considere a expressão $  (\lambda x. \lambda y. \, y + 1) ((\lambda z. \, z \, z) (\lambda w. w w)) $. Avalie-a usando**ordem normal**.
 
 **Solução:**
  A ordem normal evita a avaliação do argumento:
 
- $$  (\lambda x. \lambda y. \, y + 1) ((\lambda z. \, z z) (\lambda w. w w)) \rightarrow\_\beta \lambda y. \, y + 1 $$
+ $$  (\lambda x. \lambda y. \, y + 1) ((\lambda z. \, z \, z) (\lambda w. w w)) \rightarrow\_\beta \lambda y. \, y + 1 $$
 
- O termo $((\lambda z. \, z z) (\lambda w. w w))$ nunca é avaliado.
+ O termo $((\lambda z. \, z \, z) (\lambda w. w w))$ nunca é avaliado.
 
-**4**: Aplique a**ordem normal**na expressão $  (\lambda x. \, x) ((\lambda z. \, z z) (\lambda w. w w)) $.
+**4**: Aplique a**ordem normal**na expressão $  (\lambda x. \, x) ((\lambda z. \, z \, z) (\lambda w. w w)) $.
 
 **Solução:**
  Primeiro aplicamos a função sem avaliar o argumento:
 
- $$  (\lambda x. \, x) ((\lambda z. \, z z) (\lambda w. w w)) \rightarrow\_\beta ((\lambda z. \, z z) (\lambda w. w w)) $$
+ $$  (\lambda x. \, x) ((\lambda z. \, z \, z) (\lambda w. w w)) \rightarrow\_\beta ((\lambda z. \, z \, z) (\lambda w. w w)) $$
 
  Agora a expressão é indefinida, pois avaliaremos uma expressão sem fim.
 
@@ -1543,12 +1549,12 @@ Na**ordem aplicativa**, os argumentos de uma função são avaliados antes da ap
 
  $$  (\lambda x. \lambda y. \, x) 6 \rightarrow\_\beta \lambda y. \, 6 $$
 
-**7**: Aplique a**ordem aplicativa**à expressão $  (\lambda x. \, x) ((\lambda z. \, z z) (\lambda w. w w)) $.
+**7**: Aplique a**ordem aplicativa**à expressão $  (\lambda x. \, x) ((\lambda z. \, z \, z) (\lambda w. w w)) $.
 
 **Solução:**
  Na ordem aplicativa, o argumento é avaliado primeiro, o que leva a um loop sem fim:
 
- $$ ((\lambda z. \, z z) (\lambda w. w w)) \rightarrow*\beta (\lambda w. w w) (\lambda w. w w) \rightarrow*\beta ... $$
+ $$ ((\lambda z. \, z \, z) (\lambda w. w w)) \rightarrow*\beta (\lambda w. w w) (\lambda w. w w) \rightarrow*\beta ... $$
 
  A expressão entra em uma recursão infinita.
 
@@ -1583,12 +1589,12 @@ Na**ordem aplicativa**, os argumentos de uma função são avaliados antes da ap
 
  $$  (\lambda x. \, x + 1) 5 \rightarrow\_\beta 5 + 1 = 6 $$
 
-**11**: Compare a avaliação da expressão $  (\lambda x. \, 2) ((\lambda z. \, z z) (\lambda w. w w)) $ usando**ordem normal**e**ordem aplicativa**.
+**11**: Compare a avaliação da expressão $  (\lambda x. \, 2) ((\lambda z. \, z \, z) (\lambda w. w w)) $ usando**ordem normal**e**ordem aplicativa**.
 
 **Solução (Ordem Normal):**
  A ordem normal evita a avaliação do argumento:
 
- $$  (\lambda x. \, 2) ((\lambda z. \, z z) (\lambda w. w w)) \rightarrow\_\beta 2 $$
+ $$  (\lambda x. \, 2) ((\lambda z. \, z \, z) (\lambda w. w w)) \rightarrow\_\beta 2 $$
 
 **Solução (Ordem Aplicativa):**
  Na ordem aplicativa, o argumento é avaliado, levando a um loop sem fim.
@@ -1613,12 +1619,12 @@ Na ordem aplicativa, avaliamos o argumento primeiro:
 
  $$  (\lambda x. \lambda y. \, x + y) 4 4 \rightarrow\_\beta 4 + 4 = 8 $$
 
-**13**: Aplique**ordem normal**e**ordem aplicativa**à expressão $  (\lambda x. \lambda y. \, y) ((\lambda z. \, z z) (\lambda w. w w)) 3 $.
+**13**: Aplique**ordem normal**e**ordem aplicativa**à expressão $  (\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) 3 $.
 
 **Solução (Ordem Normal):**
  A função é aplicada sem avaliar o argumento:
 
- $$  (\lambda x. \lambda y. \, y) ((\lambda z. \, z z) (\lambda w. w w)) 3 \rightarrow\_\beta \lambda y. \, y $$
+ $$  (\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) 3 \rightarrow\_\beta \lambda y. \, y $$
 
  Agora aplicamos a função:
 
@@ -1717,7 +1723,7 @@ Formalmente, a relação $=_\beta$ é a menor relação de equivalência que sat
 
  Isto garante que se dois termos são equivalentes, então suas abstrações (funções que os utilizam) também serão equivalentes.
 
-4.**Compatibilidade com aplicação**: Se $M\to_\beta M'$ e $N\to_\beta N'$, então $MN\to_\beta M'N'$
+4.**Compatibilidade com aplicação**: Se $M\to_\beta M'$ e $N\to_\beta N'$, então $M \, N\to_\beta M'N'$
 
  Esta regra assegura que a equivalência se propaga para as aplicações de funções, mantendo a consistência da equivalência.
 
@@ -1739,9 +1745,9 @@ A equivalência $\to_\beta$ é fundamental para o raciocínio sobre programas em
 
 **Exemplo 1**:
 
- $$ \lambda x.(\lambda y.y)x \to\_\beta \lambda x.x $$
+ $$ \lambda x.(\lambda y. \, y)x \to\_\beta \lambda x. \, x $$
 
- Aqui, a função interna $\lambda y.y$ é a função identidade, que simplesmente retorna o valor de $x$. Após a aplicação, obtemos $\lambda x.x$, que também é a função identidade.
+ Aqui, a função interna $\lambda y. \, y$ é a função identidade, que simplesmente retorna o valor de $x$. Após a aplicação, obtemos $\lambda x. \, x$, que também é a função identidade.
 
 **Exemplo 2**:
 
@@ -1759,7 +1765,7 @@ A equivalência $\to_\beta$ é fundamental para o raciocínio sobre programas em
 
 **Exemplo 1**:
 
- $$ (\lambda x.\lambda y.x)M N \to\_\beta M $$
+ $$ (\lambda x.\lambda y.x)M \, N \to\_\beta M $$
 
  Neste exemplo, a função $\lambda x.\lambda y.x$ retorna sempre seu primeiro argumento, ignorando o segundo. Aplicando isso a dois termos $M$ e $N$, o resultado é simplesmente $M$.
 
@@ -1799,7 +1805,7 @@ A equivalência $\to_\beta$ é fundamental para o raciocínio sobre programas em
 
 **Exemplo 1**:
 
- $$ (\lambda x.xx)(\lambda x.xx) \to\_\beta (\lambda x.xx)(\lambda x.xx) $$
+ $$ (\lambda x. \, xx)(\lambda x. \, xx) \to\_\beta (\lambda x. \, xx)(\lambda x. \, xx) $$
 
  Este é o famoso _combinador $\Omega$_, que se reduz a si mesmo indefinidamente, criando um ciclo infinito de auto-aplicações. Apesar de não ter forma normal (não termina), ele é equivalente a si mesmo por definição.
 
@@ -1819,7 +1825,7 @@ A equivalência $\to_\beta$ é fundamental para o raciocínio sobre programas em
 
 **Exemplo 1**:
 
- $$ (\lambda f.\lambda g.\lambda x.f(gx))MN \to\_\beta \lambda x.M(Nx) $$
+ $$ (\lambda f.\lambda g.\lambda x.f(gx))M \, N \to\_\beta \lambda x.M \, (N \, x)$$
 
  Neste caso, a composição de duas funções, $M$ e $N$, é expressa como uma função que aplica $N$ ao argumento $x$, e então aplica $M$ ao resultado. A redução demonstra como a composição de funções pode ser representada e simplificada no cálculo lambda.
 
@@ -1849,10 +1855,10 @@ Formalmente:
 
 $$
 \begin{align*}
-&\text{1. } (\lambda x.M)N\to*\beta M[N/x] \text{ ($\beta$-redução)} \\
-&\text{2. } \lambda x.Mx\to*\beta M, \text{ se $x$ não ocorre livre em $M$ ($\eta$-conversão)} \\
-&\text{3. Se } M\to*\beta M' \text{, então } \lambda x.M\to*\beta \lambda x.M' \text{ (compatibilidade com abstração)} \\
-&\text{4. Se } M\to*\beta M' \text{ e } N\to*\beta N' \text{, então } MN\to\_\beta M'N' \text{ (compatibilidade com aplicação)}
+&\text{1. } (\lambda x. \, M) \, N\to*\beta M \, [N/x] \text{ ($\beta$-redução)} \\
+&\text{2. } \lambda x. \, Mx\to*\beta M, \text{ se $x$ não ocorre livre em $M$ ($\eta$-conversão)} \\
+&\text{3. Se } M\to*\beta M' \text{, então } \lambda x. \, M\to*\beta \lambda x. \, M' \text{ (compatibilidade com abstração)} \\
+&\text{4. Se } M\to*\beta M' \text{ e } N\to*\beta N' \text{, então } M \, N\to\_\beta M' \, N' \text{ (compatibilidade com aplicação)}
 \end{align*}
 $$
 
@@ -2095,21 +2101,21 @@ zero :: Church a
 zero = \f -> \x -> x
 
 one :: Church a
-one = \f -> \x -> f x
+one = \f -> \x -> f \, x
 
 two :: Church a
-two = \f -> \x -> f (f x)
+two = \f -> \x -> f (f \, x)
 
 three :: Church a
-three = \f -> \x -> f (f (f x))
+three = \f -> \x -> f (f (f \, x))
 
 -- Função sucessor
 succ' :: Church a -> Church a
-succ' n = \f -> \x -> f (n f x)
+succ' n = \f -> \x -> f (n f \, x)
 
 -- Adição
 add :: Church a -> Church a -> Church a
-add m n = \f -> \x -> m f (n f x)
+add m n = \f -> \x -> m f (n f \, x)
 
 -- Multiplicação
 mult :: Church a -> Church a -> Church a
@@ -2962,7 +2968,7 @@ Haskell implementa diretamente muitos conceitos do cálculo lambda. Vejamos algu
 1. Funções Lambda: em Haskell, funções lambda são criadas usando a sintaxe \x -> ..., que é análoga à notação $\lambda x.$ do cálculo lambda.
 
  ```haskell
- -- Cálculo lambda: λx.x
+ -- Cálculo lambda: λx. \, x
  identidade = \x -> x
  -- Cálculo lambda: λx.λy.x
  constante = \x -> \y -> x
@@ -2975,7 +2981,7 @@ Haskell implementa diretamente muitos conceitos do cálculo lambda. Vejamos algu
 2. Aplicação de Função: a aplicação de função em Haskell é semelhante ao cálculo lambda, usando justaposição:
 
  ```haskell
- -- Cálculo lambda: (λx.x+1) 5
+ -- Cálculo lambda: (λx. \, x+1) 5
  incrementar = (\x -> x + 1) 5
  main = print incrementar -- Saída: 6
  ```
@@ -3012,7 +3018,7 @@ Haskell implementa diretamente muitos conceitos do cálculo lambda. Vejamos algu
  $$
  \begin{aligned}
  \text{true} &= \lambda x.\lambda y.x \
- \text{false} &= \lambda x.\lambda y.y
+ \text{false} &= \lambda x.\lambda y. \, y
  \end{aligned}
  $$
 
@@ -3038,10 +3044,10 @@ Haskell implementa diretamente muitos conceitos do cálculo lambda. Vejamos algu
 
  $$
  \begin{aligned}
- 0 &= \lambda f.\lambda x.x \
- 1 &= \lambda f.\lambda x.f x \
- 2 &= \lambda f.\lambda x.f (f x) \
- 3 &= \lambda f.\lambda x.f (f (f x))
+ 0 &= \lambda f.\lambda x. \, x \
+ 1 &= \lambda f.\lambda x.f \, x \
+ 2 &= \lambda f.\lambda x.f (f \, x) \
+ 3 &= \lambda f.\lambda x.f (f (f \, x))
  \end{aligned}
  $$
 
@@ -3054,7 +3060,7 @@ Haskell implementa diretamente muitos conceitos do cálculo lambda. Vejamos algu
  zero = \f -> \x -> x
 
  succ' :: Church a -> Church a
- succ' n = \f -> \x -> f (n f x)
+ succ' n = \f -> \x -> f (n f \, x)
 
  one :: Church a
  one = succ' zero
@@ -3104,7 +3110,7 @@ As regras de tipagem no cálculo lambda tipado simples fornecem um sistema forma
 
 -**Regra de Abstração**: Se sob o contexto $\Gamma$, temos que $\Gamma, x:A \vdash M:B$, então podemos derivar que $\Gamma \vdash (\lambda x:A.M) : A \rightarrow B$.
 
--**Regra de Aplicação**: Se $\Gamma \vdash M : A \rightarrow B$ e $\Gamma \vdash N : A$, então podemos derivar que $\Gamma \vdash (MN) : B$.
+-**Regra de Aplicação**: Se $\Gamma \vdash M : A \rightarrow B$ e $\Gamma \vdash N : A$, então podemos derivar que $\Gamma \vdash (M \, N) : B$.
 
 Essas regras fornecem a base para a derivação de tipos em expressões complexas no cálculo lambda tipado, garantindo que cada parte da expressão esteja correta e que a aplicação de funções seja válida.
 
@@ -3122,11 +3128,13 @@ O cálculo lambda tipado possui várias propriedades importantes, derivadas da i
 
 Uma das contribuições mais profundas do cálculo lambda tipado é a chamada *correspondência de Curry-Howard*, que estabelece uma equivalência entre tipos e proposições lógicas. De acordo com essa correspondência:
 
--**Tipos**correspondem a**proposições**.
--**Termos**correspondem a**provas**.
--**Normalização de termos**corresponde à**normalização de provas**.
+-**Tipos** correspondem a **proposições**.
 
-Por exemplo, o tipo $A \rightarrow B$ pode ser interpretado como a proposição "se $A$, então $B$". Essa correspondência é a base para a conexão entre o cálculo lambda e a lógica intuicionista, além de fornecer o fundamento para sistemas de provas formais e linguagens de programação funcional.
+-**Termos** correspondem a **provas**.
+
+-**Normalização de termos** corresponde à **normalização de provas**.
+
+Por exemplo, o tipo $A \rightarrow B$ pode ser interpretado como a proposição "se $A$, então $B$". Essa correspondência é a base para a conexão entre o cálculo lambda e a lógica intuicionista[^nota6], além de fornecer o fundamento para sistemas de provas formais e linguagens de programação funcional.
 
 O cálculo lambda tipado representa uma extensão natural do cálculo lambda não tipado, que resolve problemas de consistência ao introduzir tipos para restringir as operações permitidas sobre funções e argumentos. Isso transforma o cálculo lambda em uma ferramenta fundamental tanto para a lógica matemática quanto para a ciência da computação. A adição de tipos oferece uma base teórica sólida para o desenvolvimento de linguagens de programação funcionais e sistemas de provas formais, tornando-o uma estrutura essencial para a verificação de programas e a formalização de provas matemáticas.
 
@@ -3209,7 +3217,7 @@ Essa regra assegura que a função $\lambda x : A . M$ é corretamente formada e
 #### Regra de Aplicação
 A regra de aplicação governa a forma como funções são aplicadas a seus argumentos. Se $M$ é uma função do tipo $A \rightarrow B$ e $N$ é um termo do tipo $A$, então a aplicação $M \, N$ tem tipo $B$:
 
-$$\frac{\Gamma \vdash M : A \rightarrow B \quad \Gamma \vdash N : A}{\Gamma \vdash M N : B}$$
+$$\frac{\Gamma \vdash M : A \rightarrow B \quad \Gamma \vdash N : A}{\Gamma \vdash M \, N : B}$$
 
 Essa regra garante que, ao aplicar uma função $M$ a um argumento $N$, a aplicação resulta em um termo do tipo esperado $B$.
 
@@ -3327,7 +3335,7 @@ A ideia central da**Teoria dos Tipos Simples**é organizar as expressões lambda
 
 2.**Tipos de Função**: Se $A$ e $B$ são tipos, então $A \rightarrow B$ representa uma função que recebe um valor do tipo $A$ e retorna um valor do tipo $B$. Esta construção é crucial para definir funções no cálculo lambda tipado.
 
-3.**Hierarquia de Tipos**: Os tipos formam uma hierarquia estrita. Tipos base estão na camada inferior, enquanto os tipos de função, que podem tomar funções como argumentos e retornar funções como resultados, estão em níveis superiores. Isso evita que funções sejam aplicadas a si mesmas de maneira paradoxal, como em $\lambda x . x x$.
+3.**Hierarquia de Tipos**: Os tipos formam uma hierarquia estrita. Tipos base estão na camada inferior, enquanto os tipos de função, que podem tomar funções como argumentos e retornar funções como resultados, estão em níveis superiores. Isso evita que funções sejam aplicadas a si mesmas de maneira paradoxal, como em $\lambda x . x \, x$.
 
 ### Sistema de Tipos e Regras de Tipagem
 
@@ -3345,10 +3353,10 @@ $$
 \frac{\Gamma, x : A \vdash M : B}{\Gamma \vdash (\lambda x : A . M) : A \rightarrow B}
 $$
 
--**Regra da Aplicação**: Se $M$ é uma função do tipo $A \rightarrow B$ e $N$ é um termo do tipo $A$, então a aplicação $M N$ resulta em um termo do tipo $B$:
+-**Regra da Aplicação**: Se $M$ é uma função do tipo $A \rightarrow B$ e $N$ é um termo do tipo $A$, então a aplicação $M \, N$ resulta em um termo do tipo $B$:
 
 $$
-\frac{\Gamma \vdash M : A \rightarrow B \quad \Gamma \vdash N : A}{\Gamma \vdash M N : B}
+\frac{\Gamma \vdash M : A \rightarrow B \quad \Gamma \vdash N : A}{\Gamma \vdash M \, N : B}
 $$
 
 Essas regras garantem que as expressões sejam tipadas corretamente e que o sistema evite inconsistências lógicas, como a auto-aplicação de funções.
@@ -3404,3 +3412,5 @@ Para superar essas limitações, surgiram várias extensões da teoria:
 [^nota4]: O **Cálculo de Construções** é um sistema formal que combina elementos do cálculo lambda e da teoria dos tipos para fornecer uma base para a lógica construtiva. Ele foi desenvolvido por [Thierry Coquand](https://en.wikipedia.org/wiki/Thierry_Coquand) e é uma extensão do Sistema F, com a capacidade de definir tipos dependentes e níveis mais complexos de abstração. O cálculo de construções é a base da linguagem **Coq**, um assistente de prova amplamente utilizado para formalizar demonstrações matemáticas e desenvolver software verificado.
 
 [^nota5]: Extensionalidade refere-se ao princípio de que objetos ou funções são iguais se têm o mesmo efeito em todos os contextos possíveis. Em lógica, duas funções são consideradas extensionais se, para todo argumento, elas produzem o mesmo resultado. Em linguística, extensionalidade se refere a expressões cujo significado é determinado exclusivamente por seu valor de referência, sem levar em conta contexto ou conotação.
+
+[^nota6]: A lógica intuicionista é um sistema formal de lógica desenvolvido por [Arend Heyting](https://en.wikipedia.org/wiki/Arend_Heyting), baseado nas ideias do matemático [L.E.J. Brouwer](https://en.wikipedia.org/wiki/L._E._J._Brouwer). Diferentemente da lógica clássica, a lógica intuicionista rejeita o princípio do terceiro excluído (A ou não-A) e a lei da dupla negação (não-não-A implica A). Ela exige provas construtivas, onde a existência de um objeto matemático só é aceita se houver um método para construí-lo. Esta abordagem tem implicações profundas na matemática e na ciência da computação, especialmente na teoria dos tipos e na programação funcional, onde se alinha naturalmente com o conceito de computabilidade.
