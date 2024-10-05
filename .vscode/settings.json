@@ -1,3 +1,17 @@
 {
-	"cSpell.words": ["fixpoint", "Girard", "Matiyasevich"]
+	"cSpell.words": [
+		"Barendregt",
+		"booleanas",
+		"booleano",
+		"Curryed",
+		"endl",
+		"extensionalidade",
+		"fibonacci",
+		"fixpoint",
+		"Girard",
+		"Matiyasevich",
+		"redex",
+		"Rosser"
+	],
+	"cSpell.ignoreWords": ["beforetoc", "calculolambda", "computacao", "lastmod", "mult"]
 }
