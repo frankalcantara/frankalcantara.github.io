@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
 beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
-lastmod: 2024-10-05T19:57:52.854Z
+lastmod: 2024-10-05T20:06:43.209Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -1366,10 +1366,10 @@ No contexto do cálculo lambda e linguagens de programação, existem duas princ
 **Solução:**
  Na avaliação por valor, o argumento é avaliado antes de ser aplicado à função:
 
- $$ (2 + 3) \rightarrow 5 $$ 
+ $$(2 + 3) \rightarrow 5$$
  Agora, aplicamos a função:
 
- $$  (\lambda x. \, x + 1) 5 \rightarrow 5 + 1 \rightarrow 6 $$
+ $$(\lambda x. \, x + 1) 5 \rightarrow 5 + 1 \rightarrow 6 $$
 
 **2**: Use a**avaliação por nome**na expressão $  (\lambda x. \, x + 1) (2 + 3) $ e explique o processo.
 
@@ -1383,10 +1383,10 @@ No contexto do cálculo lambda e linguagens de programação, existem duas princ
 **Solução:**
  Primeiro, avaliamos o argumento:
 
- $$ (2 + 3) + 1 \rightarrow 5 + 1 = 6 $$ 
+ $$ (2 + 3) + 1 \rightarrow 5 + 1 \to  6 $$ 
  Agora, aplicamos a função:
 
- $$  (\lambda x. \, x \cdot x) 6 \rightarrow 6 \cdot 6 = 36 $$
+ $$  (\lambda x. \, x \cdot x) 6 \rightarrow 6 \cdot 6 \to  36 $$
 
 **4**: Aplique a**avaliação por nome**na expressão $  (\lambda x. \, x \cdot x) ((2 + 3) + 1) $ e explique cada passo.
 
@@ -1396,17 +1396,17 @@ No contexto do cálculo lambda e linguagens de programação, existem duas princ
  $$  (\lambda x. \, x \cdot x) ((2 + 3) + 1) \rightarrow ((2 + 3) + 1) \cdot ((2 + 3) + 1) $$ 
  Agora, avaliamos o argumento quando necessário:
 
- $$ (5 + 1) \cdot (5 + 1) = 6 \cdot 6 = 36 $$
+ $$ (5 + 1) \cdot (5 + 1) \to  6 \cdot 6 \to  36 $$
 
 **5**: Considere a expressão $  (\lambda x. \, x + 1) ( (\lambda y. \, y + 2) 3) $. Avalie-a usando a**ordem aplicativa de redução**(avaliação por valor).
 
 **Solução:**
  Primeiro, avaliamos o argumento $  (\lambda y. \, y + 2) 3 $:
 
- $$  (\lambda y. \, y + 2) 3 \rightarrow 3 + 2 = 5 $$ 
+ $$  (\lambda y. \, y + 2) 3 \rightarrow 3 + 2 \to  5 $$ 
  Agora, aplicamos $ 5 $ à função:
 
- $$  (\lambda x. \, x + 1) 5 \rightarrow 5 + 1 = 6 $$
+ $$  (\lambda x. \, x + 1) 5 \rightarrow 5 + 1 \to  6 $$
 
 **6**: Aplique a**ordem normal de redução**(avaliação por nome) na expressão $  (\lambda x. \, x + 1) ( (\lambda y. \, y + 2) 3) $.
 
@@ -1416,7 +1416,7 @@ No contexto do cálculo lambda e linguagens de programação, existem duas princ
  $$  (\lambda x. \, x + 1) ( (\lambda y. \, y + 2) 3) \rightarrow ( (\lambda y. \, y + 2) 3) + 1 $$ 
  Agora, avaliamos o argumento:
 
- $$ (3 + 2) + 1 = 5 + 1 = 6 $$
+ $$ (3 + 2) + 1 \to  5 + 1 \to  6 $$
 
 **7**: Considere a expressão $  (\lambda x. \, x + 1)  (\lambda y. \, y + 2) $. Avalie-a usando**avaliação por valor**e explique por que ocorre um erro ou indefinição.
 
@@ -1436,10 +1436,10 @@ No contexto do cálculo lambda e linguagens de programação, existem duas princ
 **Solução:**
  Primeiro, avaliamos o argumento $ 2 + 3 $:
 
- $$ 2 + 3 = 5 $$ 
+ $$ 2 + 3 \to  5 $$ 
  Agora, aplicamos a função $  (\lambda x. \lambda y. \, x + y) $:
 
- $$  (\lambda x. \lambda y. \, x + y) 5 4 \rightarrow  (\lambda y. \, 5 + y) 4 \rightarrow 5 + 4 = 9 $$
+ $$  (\lambda x. \lambda y. \, x + y) 5 4 \rightarrow  (\lambda y. \, 5 + y) 4 \rightarrow 5 + 4 \to  9 $$
 
 **10**: Use a**ordem normal de redução**para avaliar a expressão $  (\lambda x. \lambda y. \, x + y) (2 + 3) 4 $.
 
@@ -1449,7 +1449,7 @@ No contexto do cálculo lambda e linguagens de programação, existem duas princ
  $$  (\lambda x. \lambda y. \, x + y) (2 + 3) 4 \rightarrow  (\lambda y. \, (2 + 3) + y) 4 $$ 
  Agora, avaliamos os argumentos:
 
- $$ (5) + 4 = 9 $$
+ $$ (5) + 4 \to  9 $$
 
 # Estratégias de Redução
 
@@ -1563,11 +1563,11 @@ Na**ordem aplicativa**, os argumentos de uma função são avaliados antes da ap
 **Solução:**
  Primeiro, o argumento $ (\lambda z. \, z + 3) 4 $ é avaliado:
 
- $$ (\lambda z. \, z + 3) 4 \rightarrow\_\beta 4 + 3 = 7 $$
+ $$ (\lambda z. \, z + 3) 4 \rightarrow\_\beta 4 + 3 \to  7 $$
 
  Agora aplicamos a função:
 
- $$  (\lambda x. \, x \cdot 2) 7 \rightarrow\_\beta 7 \cdot 2 = 14 $$
+ $$  (\lambda x. \, x \cdot 2) 7 \rightarrow\_\beta 7 \cdot 2 \to  14 $$
 
 **9**: Considere a expressão $  (\lambda x. \, x + 1)  (\lambda y. \, y + 2) $. Avalie-a usando**ordem aplicativa**e explique o resultado.
 
@@ -1583,11 +1583,11 @@ Na**ordem aplicativa**, os argumentos de uma função são avaliados antes da ap
 **Solução:**
  Primeiro avaliamos o argumento:
 
- $$ (\lambda z. \, z + 2) 3 \rightarrow\_\beta 3 + 2 = 5 $$
+ $$ (\lambda z. \, z + 2) 3 \rightarrow\_\beta 3 + 2 \to  5 $$
 
  Agora aplicamos a função:
 
- $$  (\lambda x. \, x + 1) 5 \rightarrow\_\beta 5 + 1 = 6 $$
+ $$  (\lambda x. \, x + 1) 5 \rightarrow\_\beta 5 + 1 \to  6 $$
 
 **11**: Compare a avaliação da expressão $  (\lambda x. \, 2) ((\lambda z. \, z \, z) (\lambda w. w w)) $ usando**ordem normal**e**ordem aplicativa**.
 
@@ -1608,7 +1608,7 @@ Na**ordem aplicativa**, os argumentos de uma função são avaliados antes da ap
 
  Agora avaliamos o argumento:
 
- $$ ((3 + 1) + 4) = 8 $$
+ $$ ((3 + 1) + 4) \to  8 $$
 
 **Solução (Ordem Aplicativa):**
 Na ordem aplicativa, avaliamos o argumento primeiro:
@@ -1617,7 +1617,7 @@ Na ordem aplicativa, avaliamos o argumento primeiro:
 
  Agora aplicamos a função:
 
- $$  (\lambda x. \lambda y. \, x + y) 4 4 \rightarrow\_\beta 4 + 4 = 8 $$
+ $$  (\lambda x. \lambda y. \, x + y) 4 4 \rightarrow\_\beta 4 + 4 \to  8 $$
 
 **13**: Aplique**ordem normal**e**ordem aplicativa**à expressão $  (\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) 3 $.
 
@@ -1709,7 +1709,7 @@ Dois termos lambda $M$ e $N$ são considerados equivalentes, denotado por $M\to_
 
 3.**$\eta$-conversões**: que expressam a extensionalidade[^nota5] de funções, permitindo igualar duas funções que se comportam da mesma forma quando aplicadas a qualquer argumento.
 
-Formalmente, a relação $=_\beta$ é a menor relação de equivalência que satisfaz as seguintes propriedades fundamentais:
+Formalmente, a relação $\to _\beta$ é a menor relação de equivalência que satisfaz as seguintes propriedades fundamentais:
 
 1.**$\beta$-redução**: $ (\lambda x.M)N \to\_\beta M[N/x] $
 
@@ -1729,7 +1729,7 @@ Formalmente, a relação $=_\beta$ é a menor relação de equivalência que sat
 
 É importante notar que a ordem em que as reduções são aplicadas não afeta o resultado final, devido à propriedade de Church-Rosser do cálculo lambda. Isso garante que, independentemente de como o termo é avaliado, se ele tem uma forma normal, a avaliação eventualmente a encontrará.
 
-A relação $=_\beta$ é uma**relação de equivalência**, o que significa que ela possui três propriedades fundamentais:
+A relação $\to _\beta$ é uma**relação de equivalência**, o que significa que ela possui três propriedades fundamentais:
 
 1.**Reflexiva**: Para todo termo $M$, temos que $M\to_\beta M$. Isto significa que qualquer termo é equivalente a si mesmo, o que é esperado.
 
@@ -1920,7 +1920,7 @@ $$
 
  3. A função `h` é definida como uma aplicação de `f` à função show.
 
- 4. O sistema de tipos de Haskell realiza as seguintes inferências: `show` tem o tipo `Show a => a -> String`. Ao aplicar `f` a show, o compilador infere que `a = Int` e `b = String`. Portanto, `h` tem o tipo `[Int] -> [String]`.
+ 4. O sistema de tipos de Haskell realiza as seguintes inferências: `show` tem o tipo `Show a \Rightarrow a \rightarrow String`. Ao aplicar `f` a show, o compilador infere que `a = Int` e `b = String`. Portanto, `h` tem o tipo `[Int] -> [String]`.
 
  Esta inferência demonstra como a equivalência lambda é usada pelo sistema de tipos: `f show` é equivalente a `map show`. O tipo de `map show` é inferido como `[Int] -> [String]`. No `main`, vemos um exemplo de uso de `h`, que converte uma lista de inteiros em uma lista de _strings_.
 
@@ -2003,7 +2003,7 @@ Os números de Church, vislumbrados por Alonzo Church, são uma representação 
 
 A ideia fundamental por trás dos números de Church é representar um número $n$ como uma função que aplica outra função $f$ $n$ vezes a um argumento $x$. Formalmente, o número $n$ de Church é definido como:
 
-$$ n = \lambda s. \lambda z. s^n(z) $$
+$$ n = \lambda s. \lambda z. \, s^n(z) $$
 
 onde $s^n(z)$ denota a aplicação de $s$ a $z$ $n$ vezes. Aqui, $s$ representa o sucessor e $z$ representa zero. Essa definição captura a essência dos números naturais: zero é o elemento base, e cada número subsequente é obtido aplicando a função sucessor repetidamente.
 
@@ -2042,9 +2042,9 @@ Para entender como isso funciona na prática, vamos aplicar $\text{succ}$ ao nú
 
 $$
 \begin{aligned}
-\text{succ } \, 2 &= (\lambda n. \lambda s. \lambda z. s(n \, s \, z)) (\lambda s. \lambda z. s(s(z))) \\
-&= \lambda s. \lambda z. s((\lambda s. \lambda z. s(s(z))) \, s \, z) \\
-&= \lambda s. \lambda z. s(s(s(z))) \\
+\text{succ } \, 2 &= (\lambda n. \lambda s. \lambda z.\, s(n \, s \, z)) (\lambda s. \lambda z.\, s\, (s\, (z))) \\
+&= \lambda s. \lambda z.\, s((\lambda s. \lambda z.\, s\, (s\, (z))) \, s \, z) \\
+&= \lambda s. \lambda z. \, s\, (s\, (s\, (z))) \\
 &= 3
 \end{aligned}
 $$
@@ -2062,10 +2062,10 @@ $$
 
 ## Operações Avançadas
 
-Agora, podemos expandir o conceito de números de Church para incluir mais operações aritméticas. Por exemplo, a subtração pode ser definida de forma mais complexa, utilizando combinadores avançados como o**combinador de predecessor**. A definição é a seguinte:
+Agora, podemos expandir o conceito de números de Church para incluir mais operações aritméticas. Por exemplo, a subtração pode ser definida de forma mais complexa, utilizando combinadores avançados como o **combinador de predecessor**. A definição é a seguinte:
 
 $$
-\text{pred} = \lambda n. \lambda f. \lambda x. \, n (\lambda g. \lambda h. h (g f)) (\lambda u. x) (\lambda u. u)
+\text{pred} = \lambda n. \lambda f. \lambda x. \, n (\lambda g. \lambda h.\, h\, (g\, f)) (\lambda u.\, x) (\lambda u.\, u)
 $$
 
 Esta função retorna o predecessor de $n$, ou seja, o número $n - 1$.
@@ -2076,9 +2076,9 @@ A aplicação de $\text{pred}$ ao número $3$ resulta em:
 
 $$
 \begin{aligned}
-\text{pred } \, 3 &= (\lambda n. \lambda f. \lambda x. \, n (\lambda g. \lambda h. h (g f)) (\lambda u. x) (\lambda u. u)) (\lambda s. \lambda z. s(s(s(z)))) \\
-&= \lambda f. \lambda x. \, (\lambda s. \lambda z. s(s(s(z)))) (\lambda g. \lambda h. h (g f)) (\lambda u. x) (\lambda u. u) \\
-&= \lambda f. \lambda x. \, f(f(x)) \\
+\text{pred } \, 3 &= (\lambda n. \lambda f. \lambda x. \, n (\lambda g. \lambda h.\, h\, (g\, f)) (\lambda u. x) (\lambda u. u)) (\lambda s. \lambda z.\, s(\, s(\, s\, (z)))) \\
+&= \lambda f. \lambda x. \, (\lambda s. \lambda z.\, s(\, s(\, s\, (z)))) (\lambda g. \lambda h.\, h \, (g\, f)) (\lambda u.\, x) (\lambda u.\, u) \\
+&= \lambda f. \lambda x. \, f\, (f\, (x)) \\
 &= 2
 \end{aligned}
 $$
