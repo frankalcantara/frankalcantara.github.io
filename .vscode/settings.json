@@ -3,6 +3,7 @@
 		"Barendregt",
 		"booleanas",
 		"booleano",
+		"Coquand",
 		"Curryed",
 		"endl",
 		"extensionalidade",
@@ -11,7 +12,8 @@
 		"Girard",
 		"Matiyasevich",
 		"redex",
-		"Rosser"
+		"Rosser",
+		"Thierry"
 	],
 	"cSpell.ignoreWords": ["beforetoc", "calculolambda", "computacao", "lastmod", "mult"]
 }
