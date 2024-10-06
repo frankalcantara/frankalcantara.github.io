@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
 beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
-lastmod: 2024-10-06T01:52:32.961Z
+lastmod: 2024-10-06T02:11:21.979Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -2667,6 +2667,73 @@ O combinador $Y$ aplica $\text{Fac}$ a si mesmo de maneira que $\text{fac}$ se e
 
 Vamos calcular $\text{fac}\, 3$ usando o combinador Y.
 
+# Normalização Forte e Fraca
+
+O cálculo lambda é um sistema minimalista. Mas tem muita força. É a base da programação funcional. E possui propriedades poderosas. Uma característica importante para a criação de linguagens de programação é a normalização. Existem dois tipos de normalização:
+
+1. Normalização fraca: Todo termo tem uma forma normal. Você vai chegar lá eventualmente.
+
+2. Normalização forte: Toda sequência de reduções termina. Não importa como você reduz, vai alcançar uma forma normal.
+
+A normalização forte é o que realmente interessa. É o que queremos.
+
+No cálculo lambda simplesmente tipado, temos normalização forte. Isso é algo belo.
+
+## Prova Informal da Normalização
+
+A prova não é elegante. Mas aqui está a essência:
+
+1. Atribuímos um "tamanho" a cada termo.
+2. Mostramos que cada redução torna o termo menor.
+3. Como não dá para diminuir para sempre, você tem que parar.
+
+Os detalhes são complicados. Mas essa é a ideia.
+
+Aqui está um esboço da função de tamanho:
+
+$$
+size(\lambda x:A.M) = size(M) + 1
+$$
+$$
+size(MN) = size(M) + size(N) + 1
+$$
+
+Cada $\beta$-redução diminui o termo. Não dá para reduzir para sempre. Então, você tem que parar.
+
+## Aplicações Práticas
+
+A normalização não é só teoria. Ela é prática.
+
+Em Haskell, a normalização garante a terminação de programas bem tipados. Nada de loops infinitos. Nada de falhas. Apenas funções puras que terminam.
+
+O OCaml também usa isso. O sistema de tipos garante a normalização forte. É uma rede de segurança para programadores.
+
+## Exemplos
+
+Vamos ver a normalização em ação:
+
+1. Função identidade:
+
+   $(\lambda x:A.x)M \to M$
+
+   Um passo. Acabou. Forma normal atingida.
+
+2. Função constante:
+
+   $(\lambda x:A.\lambda y:B.x)MN \to (\lambda y:B.M)N \to M$
+
+   Dois passos. Forma normal atingida.
+
+3. Números de Church:
+
+   $2 3 \equiv (\lambda f.\lambda x.f(fx))(\lambda y.yyy) \to_\beta \lambda x.(\lambda y.yyy)((\lambda y.yyy)x) \to_\beta \lambda x.(xxx)(xxx) \to_\beta \lambda x.xxxxxxxxx$
+
+   Vários passos. Mas termina. Isso é a normalização em ação.
+
+A normalização é poderosa. É a espinha dorsal da programação funcional. É o que torna essas linguagens seguras e previsíveis.
+
+Lembre-se: no cálculo lambda, tudo termina. Essa é a beleza. Esse é o poder da normalização.
+
 # Verificação dos Cálculos em Lambda Calculus
 
 Vamos verificar passo a passo os cálculos fornecidos para a função fatorial usando o Combinador Y no cálculo lambda.
@@ -3076,7 +3143,7 @@ Haskell implementa diretamente muitos conceitos do cálculo lambda. Vejamos algu
 
 O cálculo lambda é a base teórica para muitos conceitos da programação funcional, especialmente em Haskell. Compreender o cálculo lambda ajuda os programadores a entender os princípios da programação funcional e usar funções de ordem superior, currying e avaliação preguiçosa. Embora Haskell adicione recursos além do cálculo lambda puro, como tipos algébricos, sistema de tipos estático e avaliação preguiçosa, sua essência reflete os princípios do cálculo lambda. Isso faz de Haskell uma linguagem poderosa para expressar computações de forma concisa e precisa.
 
-## Introdução ao Cálculo Lambda Tipado
+# Introdução ao Cálculo Lambda Tipado
 
 O cálculo lambda não tipado apresenta problemas de consistência e paradoxos, como o paradoxo de Curry. Para resolver esses problemas, foi introduzido o conceito de tipos, resultando no cálculo lambda tipado, que adiciona regras formais para restringir as operações permitidas sobre funções e argumentos.
 
