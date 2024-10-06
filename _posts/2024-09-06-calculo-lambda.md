@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
 beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
-lastmod: 2024-10-06T01:50:02.535Z
+lastmod: 2024-10-06T01:52:32.961Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -3222,7 +3222,7 @@ Essa regra garante que, ao aplicar uma função $M$ a um argumento $N$, a aplica
 
 ### Termos Bem Tipados e Segurança do Sistema
 
-Um termo é considerado**bem tipado**se sua derivação de tipo pode ser construída usando as regras de tipagem formais. A tipagem estática é uma característica importante do cálculo lambda tipado, pois permite detectar erros de tipo durante o processo de compilação, antes mesmo de o programa ser executado. Isso é essencial para a segurança e confiabilidade dos sistemas, já que garante que funções não sejam aplicadas a argumentos incompatíveis.
+Um termo é considerado **bem tipado** se sua derivação de tipo pode ser construída usando as regras de tipagem formais. A tipagem estática é uma característica importante do cálculo lambda tipado, pois permite detectar erros de tipo durante o processo de compilação, antes mesmo de o programa ser executado. Isso é essencial para a segurança e confiabilidade dos sistemas, já que garante que funções não sejam aplicadas a argumentos incompatíveis.
 
 Além disso, o sistema de tipos do cálculo lambda tipado exclui automaticamente termos paradoxais como o combinador $\omega = \lambda x. \, x \, x$. Para que $\omega$ fosse bem tipado, a variável $x$ precisaria ter o tipo $A \rightarrow A$ e ao mesmo tempo o tipo $A$, o que é impossível. Assim, a auto-aplicação de funções é evitada, garantindo a consistência do sistema.
 
@@ -3240,11 +3240,11 @@ O cálculo lambda tipado apresenta várias propriedades que reforçam a robustez
 
 ### Correspondência de Curry-Howard
 
-A**correspondência de Curry-Howard**estabelece uma relação profunda entre o cálculo lambda tipado e a lógica proposicional intuicionista. Sob essa correspondência, termos no cálculo lambda tipado são vistos como provas, e tipos são interpretados como proposições. Em particular:
+A **correspondência de Curry-Howard** estabelece uma relação profunda entre o cálculo lambda tipado e a lógica proposicional intuicionista. Sob essa correspondência, termos no cálculo lambda tipado são vistos como provas, e tipos são interpretados como proposições. Em particular:
 
--**Tipos correspondem a proposições**.
--**Termos correspondem a provas**.
--**Normalização de termos corresponde à normalização de provas**.
+-Tipos correspondem a proposições.
+-Termos correspondem a provas.
+-Normalização de termos corresponde à normalização de provas.
 
 Por exemplo, o tipo $A \rightarrow B$ pode ser interpretado como a proposição lógica "se $A$, então $B$", e um termo deste tipo representa uma prova dessa proposição. Essa correspondência fornece a base para a verificação formal de programas e para a lógica assistida por computador.
 
