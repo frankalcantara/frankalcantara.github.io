@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
 beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
-lastmod: 2024-10-07T01:16:46.422Z
+lastmod: 2024-10-07T01:24:48.369Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -827,59 +827,59 @@ Esses exemplos ilustram como o _Currying_ é um conceito fundamental no cálculo
 
 #### Exercícios Currying
 
-**1**: escreva uma expressão lambda que representa a função $ f(x, y) = x + y $ usando currying. Aplique-a aos valores $ x = 4 $ e $ y = 5 $.
+**1**: escreva uma expressão lambda que representa a função $f(x, y) = x + y$ usando currying. Aplique-a aos valores $x = 4$ e $y = 5$.
 
- **Solução:** A função curried é $ \lambda x. \lambda y. \, x + y $. Aplicando $ x = 4 $ e $ y = 5 $:
+ **Solução:** A função curried é $\lambda x. \lambda y. \, x + y$. Aplicando $x = 4$ e $y = 5$:
 
- $$ (\lambda x. \lambda y. \, x + y) 4 5 = 4 + 5 = 9 $$
+ $$(\lambda x. \lambda y. \, x + y) \, 4 \, 5 = 4 + 5 = 9$$
 
-**2**: transforme a função $ f(x, y, z) = x \cdot y + z $ em uma expressão lambda usando currying e aplique-a aos valores $ x = 2 $, $ y = 3 $, e $ z = 4 $.
+**2**: transforme a função $f(x, y, z) = x \cdot y + z$ em uma expressão lambda usando currying e aplique-a aos valores $x = 2$, $y = 3$, e $z = 4$.
 
- **Solução:** A função curried é $ \lambda x. \lambda y. \, \lambda z. \, x \cdot y + z $. Aplicando $ x = 2 $, $ y = 3 $, e $ z = 4 $:
+ **Solução:** A função curried é $\lambda x. \lambda y. \, \lambda z. \, x \cdot y + z$. Aplicando $x = 2$, $y = 3$, e $z = 4$:
 
- $$ (\lambda x. \lambda y. \, \lambda z. \, x \cdot y + z) 2 3 4 = 2 \cdot 3 + 4 = 6 + 4 = 10 $$
+ $$(\lambda x. \lambda y. \, \lambda z. \, x \cdot y + z) \, 2 \, 3 \, 4 = 2 \cdot 3 + 4 = 6 + 4 = 10$$
 
-**3**: crie uma função curried que representa $ f(x, y) = x^2 + y^2 $. Aplique a função a $ x = 1 $ e $ y = 2 $.
+**3**: crie uma função curried que representa $f(x, y) = x^2 + y^2$. Aplique a função a $x = 1$ e $y = 2$.
 
- **Solução:** A função curried é $ \lambda x. \lambda y. \, x^2 + y^2 $. Aplicando $ x = 1 $ e $ y = 2 $:
+ **Solução:** A função curried é $\lambda x. \lambda y. \, x^2 + y^2$. Aplicando $x = 1$ e $y = 2$:
 
- $$ (\lambda x. \lambda y. \, x^2 + y^2) 1 2 = 1^2 + 2^2 = 1 + 4 = 5 $$
+ $$ (\lambda x. \lambda y. \, x^2 + y^2) \, 1 \, 2 = 1^2 + 2^2 = 1 + 4 = 5 $$
 
-**4**: converta a função $ f(x, y) = \frac{x}{y} $ em uma expressão lambda usando currying e aplique-a aos valores $ x = 9 $ e $ y = 3 $.
+**4**: converta a função $f(x, y) = \frac{x}{y}$ em uma expressão lambda usando currying e aplique-a aos valores $x = 9$ e $y = 3$.
 
- **Solução:** A função curried é $ \lambda x. \lambda y. \, \frac{x}{y} $. Aplicando $ x = 9 $ e $ y = 3 $:
+ **Solução:** A função curried é $\lambda x. \lambda y. \, \frac{x}{y}$. Aplicando $x = 9$ e $y = 3$:
 
- $$ (\lambda x. \lambda y. \, \frac{x}{y}) 9 3 = \frac{9}{3} = 3 $$
+ $$(\lambda x. \lambda y. \, \frac{x}{y}) \, 9 \, 3 = \frac{9}{3} = 3$$
 
-**5**: defina uma função curried que calcule a diferença entre dois números, ou seja, $ f(x, y) = x - y $, e aplique-a aos valores $ x = 8 $ e $ y = 6 $.
+**5**: defina uma função curried que calcule a diferença entre dois números, ou seja, $f(x, y) = x - y$, e aplique-a aos valores $x = 8$ e $y = 6$.
 
- **Solução:** A função curried é $ \lambda x. \lambda y. \, x - y $. Aplicando $ x = 8 $ e $ y = 6 $:
+ **Solução:** A função curried é $\lambda x. \lambda y. \, x - y$. Aplicando $x = 8$ e $y = 6$:
 
- $$ (\lambda x. \lambda y. \, x - y) 8 6 = 8 - 6 = 2 $$
+ $$(\lambda x. \lambda y. \, x - y) \, 8 \, 6 = 8 - 6 = 2$$
 
-**6**: crie uma função curried para calcular a área de um retângulo, ou seja, $ f(l, w) = l \cdot w $, e aplique-a aos valores $ l = 7 $ e $ w = 5 $.
+**6**: crie uma função curried para calcular a área de um retângulo, ou seja, $f(l, w) = l \cdot w$, e aplique-a aos valores $l = 7$ e $w = 5$.
 
- **Solução:** A função curried é $ \lambda l. \lambda w. l \cdot w $. Aplicando $ l = 7 $ e $ w = 5 $:
+ **Solução:** A função curried é $\lambda l. \lambda w. l \cdot w$. Aplicando $l = 7$ e $w = 5$:
 
- $$ (\lambda l. \lambda w. l \cdot w) 7 5 = 7 \cdot 5 = 35 $$
+ $$(\lambda l. \lambda w. l \cdot w) \, 7 \, 5 = 7 \cdot 5 = 35$$
 
-**7**: transforme a função $ f(x, y) = x^y $ (potência) em uma expressão lambda usando currying e aplique-a aos valores $ x = 2 $ e $ y = 3 $.
+**7**: transforme a função $f(x, y) = x^y$ (potência) em uma expressão lambda usando currying e aplique-a aos valores $x = 2$ e $y = 3$.
 
- **Solução:** A função curried é $ \lambda x. \lambda y. \, x^y $. Aplicando $ x = 2 $ e $ y = 3 $:
+ **Solução:** A função curried é $\lambda x. \lambda y. \, x^y$. Aplicando $x = 2$ e $y = 3$:
 
- $$ (\lambda x. \lambda y. \, x^y) 2 3 = 2^3 = 8 $$
+ $$(\lambda x. \lambda y. \, x^y) \, 2 \, 3 = 2^3 = 8$$
 
-**8**: defina uma função curried que represente a multiplicação de três números, ou seja, $ f(x, y, z) = x \cdot y \cdot z $, e aplique-a aos valores $ x = 2 $, $ y = 3 $, e $ z = 4 $.
+**8**: defina uma função curried que represente a multiplicação de três números, ou seja, $f(x, y, z) = x \cdot y \cdot z$, e aplique-a aos valores $x = 2$, $y = 3$, e $z = 4$.
 
- **Solução:** A função curried é $ \lambda x. \lambda y. \, \lambda z. \, x \cdot y \cdot z $. Aplicando $ x = 2 $, $ y = 3 $, e $ z = 4 $:
+ **Solução:** A função curried é $\lambda x. \lambda y. \, \lambda z. \, x \cdot y \cdot z$. Aplicando $x = 2$, $y = 3$, e $z = 4$:
 
- $$ (\lambda x. \lambda y. \, \lambda z. \, x \cdot y \cdot z) 2 3 4 = 2 \cdot 3 \cdot 4 = 24 $$
+ $$ (\lambda x. \lambda y. \, \lambda z. \, x \cdot y \cdot z) \, 2 \, 3 \, 4 = 2 \cdot 3 \cdot 4 = 24$$
 
-**9**: transforme a função $ f(x, y) = x + 2y $ em uma expressão lambda curried e aplique-a aos valores $ x = 1 $ e $ y = 4 $.
+**9**: transforme a função $f(x, y) = x + 2y$ em uma expressão lambda curried e aplique-a aos valores $x = 1$ e $y = 4$.
 
  **Solução:** A função curried é $\lambda x. \lambda y. \, x + 2y$. Aplicando $x = 1 $ e $ y = 4$:
 
- $$(\lambda x. \lambda y. \, x + 2y) 1 4 = 1 + 2 \cdot 4 = 1 + 8 = 9$$
+ $$(\lambda x. \lambda y. \, x + 2y) \, 1 \, 4 = 1 + 2 \cdot 4 = 1 + 8 = 9$$
 
 **10**: crie uma função curried para representar a soma de três números, ou seja, $f(x, y, z) = x + y + z$, e aplique-a aos valores $x = 3$, $y = 5$, e $z = 7$.
 
