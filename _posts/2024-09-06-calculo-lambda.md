@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
 beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
-lastmod: 2024-10-08T15:10:51.382Z
+lastmod: 2024-10-08T15:16:20.376Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -40,7 +40,7 @@ Cálculo lambda tem três componentes principais:
 2. Abstração: $\lambda x. M$, onde $M$ é uma expressão lambda
 3. Aplicação: $(M \, N)$, onde $M$ e $N$ são expressões lambda
 
-Estas regras simples são suficientes para expressar qualquer computação possível. Cálculo lambda é a base da programação 
+Estas regras simples são suficientes para expressar qualquer computação possível. Cálculo lambda é a base da programação
 funcional e teoria da computação.
 
 Na década de 1930, matemáticos buscavam entender os limites da computação. Questionavam: Quais problemas podem ser resolvidos por algoritmos? Existem problemas não computáveis?
@@ -57,7 +57,7 @@ Desenvolvido por [Alonzo Church](https://en.wikipedia.org/wiki/Alonzo_Church) no
 
 O objetivo de Church era entender e formalizar a noção de _computabilidade_. Nesta época os matemáticos se perguntavam: Quais problemas podem ser resolvidos por algoritmos? Existem problemas não computáveis?
 
-Church queria um modelo matemático preciso para computabilidade. Nesta busca ele criou uma forma de representar funções e operações matemáticas de forma abstrata. 
+Church queria um modelo matemático preciso para computabilidade. Nesta busca ele criou uma forma de representar funções e operações matemáticas de forma abstrata.
 
 Na mesma época, [Alan Turing](https://en.wikipedia.org/wiki/Alan_Turing) desenvolveu a [máquina de Turing](https://en.wikipedia.org/wiki/Turing_machine), uma abordagem diferente para tratar a computabilidade. Apesar de suas diferenças, essas duas abordagens provaram ser equivalentes e, juntas, estabeleceram as bases da teoria da computação moderna.
 
@@ -118,7 +118,7 @@ A notação $\lambda$ indica apenas que estamos criando uma função anônima. E
 
 O cálculo lambda é poderoso. Ele pode expressar qualquer função computável. Mas tem limitações: **não tem tipos nativos**. Tudo é função. Números, booleanos, estruturas de dados - todos são codificados como funções; **Não tem estado mutável**. Cada expressão produz um novo resultado. Não modifica valores existentes. Isso é uma vantagem em alguns cenários, mas agrega complexidade a definição de algoritmos; **não tem controle de fluxo direto**. Loops e condicionais são simulados com funções recursivas. Apesar de ser chamado de _a menor linguagem de programação_ a criação de algoritmos sem controle de fluxo não é natural para programadores, e matemáticos, nativos do mundo imperativo; **pode ser ineficiente**. Codificações como números de Church podem levar a cálculos lentos. Performance nunca foi um objetivo.
 
-Sistemas mais avançados de cálculo lambda abordam essas limitações: 
+Sistemas mais avançados de cálculo lambda abordam essas limitações:
 
 1. **sistemas de tipos**: O cálculo lambda tipado adiciona tipos. O Sistema F permite polimorfismo:
 
@@ -142,11 +142,11 @@ Sistemas mais avançados de cálculo lambda abordam essas limitações:
 
    $$ 2 + 3 \rightarrow 5 $$
 
- Este cálculo usa aritmética de máquina, não números de Church.
+ Este cálculo usa aritmética tradicional, não números de Church.
 
 Estas extensões agregam funcionalidade e transformam o cálculo lambda em uma ferramenta matemática mais flexível. Facilitam a criação de algoritmos e utilização do cálculo lambda na criação de linguagens funcionais.
 
-# Representação Sintática Básica do Cálculo Lambda
+# Representação Sintática
 
 O cálculo lambda usa uma notação simples para definir e aplicar funções. Ele se baseia em três elementos principais: _variáveis, abstrações e aplicações_.
 
@@ -246,7 +246,6 @@ $$
 
 Essa gramática permite verificar, ou produzir, qualquer expressão lambda sintaticamente. O sentido semântico, é um pouco mais complicado.
 
-
 # Sintaxe e Semântica
 
 **O cálculo lambda é um sistema formal que representa a computação por meio da abstração de funções e sua aplicação.** Sua sintaxe é simples, mas poderosa. O cálculo lambda é formado por três elementos principais: _variáveis, abstrações e aplicações_.
@@ -291,41 +290,41 @@ Existem duas estratégias principais para realizar a redução beta:
 
 1. **Ordem normal**: Reduzimos a aplicação mais à esquerda e mais externa primeiro. Essa estratégia sempre encontra a forma normal, se existir.
 
- **Exemplo:**
+   **Exemplo:**
 
- $$(\lambda x.\, (\lambda y.\, y + x)\ 2)\ (3 + 4)$$
+   $$(\lambda x.\, (\lambda y.\, y + x)\ 2)\ (3 + 4)$$
 
- Não reduzimos $3 + 4$ imediatamente. Aplicamos a função externa:
+   Não reduzimos $3 + 4$ imediatamente. Aplicamos a função externa:
 
- $$(\lambda x.\, (\lambda y.\, y + x)\ 2)\ 7$$
+   $$(\lambda x.\, (\lambda y.\, y + x)\ 2)\ 7$$
 
- Substituímos $x$ por $7$ em $(\lambda y.\, y + x)\ 2$:
+   Substituímos $x$ por $7$ em $(\lambda y.\, y + x)\ 2$:
 
- $$(\lambda y.\, y + 7)\ 2$$
+   $$(\lambda y.\, y + 7)\ 2$$
 
- Aplicamos a função interna:
+   Aplicamos a função interna:
 
- $$2 + 7 \rightarrow 9$$
+   $$2 + 7 \rightarrow 9$$
 
 2. **Ordem aplicativa**: Avaliamos primeiro as subexpressões (argumentos) antes de aplicar a função.
 
- **Exemplo:**
+   **Exemplo:**
 
- $$(\lambda x.\, (\lambda y.\, y + x)\ 2)\ (3 + 4)$$
+   $$(\lambda x.\, (\lambda y.\, y + x)\ 2)\ (3 + 4)$$
 
- Avaliamos $3 + 4$:
+   Avaliamos $3 + 4$:
 
- $$(\lambda x.\, (\lambda y.\, y + x)\ 2)\ 7$$
+   $$(\lambda x.\, (\lambda y.\, y + x)\ 2)\ 7$$
 
- Substituímos $x$ por $7$:
+   Substituímos $x$ por $7$:
 
- $$(\lambda y.\, y + 7)\ 2$$
+   $$(\lambda y.\, y + 7)\ 2$$
 
- Avaliamos $2 + 7$:
+   Avaliamos $2 + 7$:
 
- $$9$$
+   $$9$$
 
-Além da redução beta, existem as seguintes conversões:
+   Além da redução beta, existem as seguintes conversões:
 
 - **$\alpha$-conversão**: Renomeia variáveis ligadas para evitar conflitos.
 
@@ -394,7 +393,6 @@ Este processo garante que a variável livre $z$ não seja capturada pela abstra�
  $$[w/x](\lambda w.\, x) = \lambda v.\, [w/x]([v/w]x) = \lambda v.\, w$$
 
  Aqui, renomeamos a variável ligada $w$ para $v$ antes de fazer a substituição, garantindo que a variável livre $w$ não seja capturada.
-
 
 ## Semântica Denotacional
 
@@ -778,7 +776,6 @@ Isso simplifica muito a manipulação de termos lambda, pois não precisamos nos
  $$ [y/x] (\lambda x. \, x + (\lambda z. \, x + z)) = \lambda x. \, x + (\lambda z. \, x + z) $$
 
 ## Redução Beta
-
 
 ### Teorema de Church-Rosser
 
@@ -1765,19 +1762,19 @@ Formalmente, a relação $\to_\beta$ é a menor relação de equivalência que s
 
 1. **$\beta$-redução**: $ (\lambda x.M)N \to_\beta M[N/x] $
 
- Isto significa que a aplicação de uma função $ (\lambda x.M) $ a um argumento $N$ resulta na substituição de todas as ocorrências de $x$ em $M$ pelo valor $N$.
+   Isto significa que a aplicação de uma função $ (\lambda x.M) $ a um argumento $N$ resulta na substituição de todas as ocorrências de $x$ em $M$ pelo valor $N$.
 
 2. **$\eta$-conversão**: $\lambda x. \, Mx\to_\beta M$, se $x$ não ocorre livre em $M$
 
- A $\eta$-conversão captura a ideia de extensionalidade. Se uma função $\lambda x.Mx$ aplica $M$ a $x$ sem modificar $x$, ela é equivalente a $M$.
+   A $\eta$-conversão captura a ideia de extensionalidade. Se uma função $\lambda x.Mx$ aplica $M$ a $x$ sem modificar $x$, ela é equivalente a $M$.
 
 3. **Compatibilidade com abstração**: Se $M\to_\beta M'$, então $\lambda x. \, M\to_\beta \lambda x.M'$
 
- Isto garante que se dois termos são equivalentes, então suas abstrações (funções que os utilizam) também serão equivalentes.
+   Isto garante que se dois termos são equivalentes, então suas abstrações (funções que os utilizam) também serão equivalentes.
 
 4. **Compatibilidade com aplicação**: Se $M\to_\beta M'$ e $N\to_\beta N'$, então $M \, N\to_\beta M'N'$
 
- Esta regra assegura que a equivalência se propaga para as aplicações de funções, mantendo a consistência da equivalência.
+   Esta regra assegura que a equivalência se propaga para as aplicações de funções, mantendo a consistência da equivalência.
 
 É importante notar que a ordem em que as reduções são aplicadas não afeta o resultado final, devido à propriedade de Church-Rosser do cálculo lambda. Isso garante que, independentemente de como o termo é avaliado, se ele tem uma forma normal, a avaliação eventualmente a encontrará.
 
@@ -2888,7 +2885,7 @@ Agora, vamos verificar o cálculo de $\text{fatorial}\, 3$ seguindo o mesmo proc
 
 ### Usando Funções de Ordem Superior
 
-Vamos rever o combinador $Y$, desta vez, usando funções de ordem superior. Começamos definindo algumas funções de ordem superior. 
+Vamos rever o combinador $Y$, desta vez, usando funções de ordem superior. Começamos definindo algumas funções de ordem superior.
 
  **$\text{isZero}$**:
 
@@ -3020,7 +3017,7 @@ A correspondência [Curry-Howard](https://groups.seas.harvard.edu/courses/cs152/
 
 Embora o cálculo lambda puro não possua estruturas de dados nativas, podemos representá-las usando funções. Um exemplo clássico é a codificação de listas no estilo de Church, que nos permite aplicar recursão a essas estruturas.
 
-### Representação de Listas no Cálculo Lambda
+## Representação de Listas no Cálculo Lambda
 
 No cálculo lambda, representamos listas usando funções. Esta codificação permite manipular listas e aplicar funções recursivas.
 
@@ -3074,7 +3071,7 @@ Chegamos a essa representação da seguinte forma:
 
 Esta é a representação completa da lista $[1, 2, 3]$ em cálculo lambda puro. Esta representação permite operações recursivas sobre listas, como mapear funções ou calcular comprimentos. Podemos, por exemplo, definir uma função para calcular o comprimento de listas
 
-#### Função Comprimento (Length)
+### Função Comprimento (Length)
 
 Vamos definir uma função para calcular o comprimento de uma lista usando o combinador $Y$:
 
@@ -3383,7 +3380,7 @@ Haskell implementa diretamente muitos conceitos do cálculo lambda. Vejamos algu
 
 O cálculo lambda é a base teórica para muitos conceitos da programação funcional, especialmente em Haskell. Compreender o cálculo lambda ajuda os programadores a entender os princípios da programação funcional e usar funções de ordem superior, currying e avaliação preguiçosa.
 
-# Introdução ao Cálculo Lambda Tipado 
+# Introdução ao Cálculo Lambda Tipado
 
 O cálculo lambda não tipado é poderoso. Ele expressa todas as funções computáveis. Mas tem limites.
 
@@ -3790,4 +3787,3 @@ Para superar essas limitações, surgiram várias extensões da teoria:
 [^nota5]: Extensionalidade refere-se ao princípio de que objetos ou funções são iguais se têm o mesmo efeito em todos os contextos possíveis. Em lógica, duas funções são consideradas extensionais se, para todo argumento, elas produzem o mesmo resultado. Em linguística, extensionalidade se refere a expressões cujo significado é determinado exclusivamente por seu valor de referência, sem levar em conta contexto ou conotação.
 
 [^nota6]: A lógica intuicionista é um sistema formal de lógica desenvolvido por [Arend Heyting](https://en.wikipedia.org/wiki/Arend_Heyting), baseado nas ideias do matemático [L.E.J. Brouwer](https://en.wikipedia.org/wiki/L._E._J._Brouwer). Diferentemente da lógica clássica, a lógica intuicionista rejeita o princípio do terceiro excluído (A ou não-A) e a lei da dupla negação (não-não-A implica A). Ela exige provas construtivas, onde a existência de um objeto matemático só é aceita se houver um método para construí-lo. Esta abordagem tem implicações profundas na matemática e na ciência da computação, especialmente na teoria dos tipos e na programação funcional, onde se alinha naturalmente com o conceito de computabilidade.
-
