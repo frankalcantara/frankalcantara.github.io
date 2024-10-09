@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
 beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
-lastmod: 2024-10-08T15:16:20.376Z
+lastmod: 2024-10-09T00:39:55.152Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -3380,7 +3380,7 @@ Haskell implementa diretamente muitos conceitos do cálculo lambda. Vejamos algu
 
 O cálculo lambda é a base teórica para muitos conceitos da programação funcional, especialmente em Haskell. Compreender o cálculo lambda ajuda os programadores a entender os princípios da programação funcional e usar funções de ordem superior, currying e avaliação preguiçosa.
 
-# Introdução ao Cálculo Lambda Tipado
+# Cálculo Lambda Tipado
 
 O cálculo lambda não tipado é poderoso. Ele expressa todas as funções computáveis. Mas tem limites.
 
@@ -3540,7 +3540,7 @@ Em Haskell, a normalização garante a terminação de programas bem tipados. Na
 
 O OCaml também usa isso. O sistema de tipos garante a normalização forte. É uma rede de segurança para programadores.
 
-## Exemplos
+### Exemplos
 
 Vamos ver a normalização em ação:
 
@@ -3694,8 +3694,6 @@ A confluência, combinada com a normalização forte, garante a **unicidade da f
 
 A **Teoria dos Tipos Simples**, desenvolvida por Alonzo Church na década de 1940, representa um marco na história da lógica matemática e da ciência da computação. Criada para resolver problemas de inconsistência no cálculo lambda não tipado, essa teoria introduziu um framework robusto para formalizar o raciocínio matemático e computacional, abordando paradoxos semelhantes ao **paradoxo de Russell** na teoria dos conjuntos. A teoria dos tipos simples foi uma das primeiras soluções práticas para garantir que expressões lambda fossem bem formadas, evitando contradições lógicas e permitindo cálculos confiáveis.
 
-### Contexto Histórico e Motivação
-
 O cálculo lambda não tipado, proposto por Church na década de 1930, ofereceu um modelo poderoso de computabilidade, mas sua flexibilidade permitiu a formulação de termos paradoxais, como o **combinador Y** (um fixpoint combinator) e o termo**$\omega = \lambda x. \, x\ x$**, que resulta em reduções infinitas. Esses termos paradoxais tornavam o cálculo lambda inconsistente, uma vez que permitiam a criação de expressões que não convergiam para uma forma normal, gerando loops infinitos.
 
 O problema era análogo aos paradoxos que surgiram na teoria dos conjuntos ingênua, como o paradoxo de Russell. A solução proposta por Church envolvia restringir o cálculo lambda através da introdução de tipos, criando um sistema onde apenas combinações de funções e argumentos compatíveis fossem permitidas, prevenindo a criação de termos paradoxais.
@@ -3774,7 +3772,7 @@ Para superar essas limitações, surgiram várias extensões da teoria:
 
 3. **Teoria dos Tipos Homotópica**: Uma extensão recente que conecta a teoria dos tipos com a topologia algébrica, oferecendo novos insights sobre a matemática e a computação.
 
-## Notas e Referências
+# Notas e Referências
 
 [^nota1]: Os problemas de Hilbert são uma lista de 23 problemas matemáticos propostos por David Hilbert em 1900, durante o Congresso Internacional de Matemáticos em Paris. Esses problemas abordam questões fundamentais em várias áreas da matemática e estimularam muitas descobertas ao longo do século XX. Cada problema visava impulsionar a pesquisa e delinear os desafios mais importantes da matemática da época. Alguns dos problemas foram resolvidos, enquanto outros permanecem abertos ou foram provados como indecidíveis, como o **décimo problema de Hilbert**, que pergunta se existe um algoritmo capaz de determinar se um polinômio com coeficientes inteiros possui soluções inteiras.
 
