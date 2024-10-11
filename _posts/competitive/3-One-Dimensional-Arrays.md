@@ -1,32 +1,32 @@
 ---
 author: Frank
 beforetoc: |-
-  [Anterior](2024-09-24-10-10.-Loops-the-Heart-of-All-Competitive-Programming.md)
-  [Próximo](2024-09-24-12-Search-and-Sorting-Algorithms.md)
+    [Anterior](2024-09-24-10-10.-Loops-the-Heart-of-All-Competitive-Programming.md)
+    [Próximo](2024-09-24-12-Search-and-Sorting-Algorithms.md)
 categories:
-  - Matemática
-  - Linguagens Formais
-  - Programação
+    - Matemática
+    - Linguagens Formais
+    - Programação
 description: Dynamic Programming in C++ with practical examples, performance analysis, and detailed explanations to optimize your coding skills and algorithm efficiency.
 draft: null
 featured: false
 image: assets/images/prog_dynamic.jpeg
 keywords:
-  - Dynamic Programming
-  - C++ Algorithms
-lastmod: 2024-09-25T23:32:19.409Z
+    - Dynamic Programming
+    - C++ Algorithms
+lastmod: 2024-10-09T18:07:06.544Z
 layout: post
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
 published: false
 rating: 5
 slug: competitive-programming-techniques-insights
 tags:
-  - Practical Programming Guide
+    - Practical Programming Guide
 title: 11. Problems in One-Dimensional Arrays
 toc: true
 ---
 
-# 11. Problems in One-Dimensional Arrays
+# One-Dimensional Arrays
 
 One-dimensional arrays are fundamental data structures in computer science and are the basis for many algorithmic problems. This classification organizes common problem types, algorithms, and techniques used to solve challenges involving 1D arrays. From basic operations to advanced optimization strategies, this comprehensive guide covers a wide range of approaches, helping developers and algorithm enthusiasts to identify and apply the most efficient solutions to array-based problems.
 
@@ -175,7 +175,7 @@ _Figura 11.1.1.1.A - The image illustrates how the prefix sum array $P$ is const
 ![]({{ site.baseurl }}/assets/images/PrefixSum4.jpg)
 _Figura 11.1.1.1.A - The image demonstrates how to use the prefix sum array $P$ to calculate the sum of elements from $A[2]$ to $A[5]$. The calculation is done using the formula $P[5] - P[1]$, resulting in $23 - 4 = 19$._{: class="legend"}
 
-### 11.1.1.2. Complexity Analysis
+#### 11.1.1.2. Complexity Analysis
 
 The Prefix Sum Array algorithm's complexity can be analyzed by considering its two main operations: constructing the prefix sum array and performing range sum queries.
 
@@ -191,7 +191,7 @@ The space complexity for executing queries is $O(1)$, as no additional space is 
 
 In conclusion, the Prefix Sum Array algorithm has a time complexity of $O(n)$ for the preprocessing step of constructing the prefix sum array and $O(1)$ time per range sum query. The overall space complexity is $O(n)$ due to the storage of the prefix sum array. This efficiency makes the algorithm particularly useful when dealing with multiple range sum queries on a static array, as it significantly reduces the time complexity per query from $O(n)$ to $O(1)$ after the initial preprocessing.
 
-### 11.1.1.3. Typical Problem: The Plate Balancer (Problem 2)
+#### 11.1.1.3. Typical Problem: The Plate Balancer (Problem 2)
 
 In a famous restaurant, Chef André is known for his incredible skill in balancing plates. He has a long table with several plates, each containing a different amount of food. André wants to find the "Magic Plate" - the plate where, when he places his finger underneath it, the weight of the food on the left and right balances perfectly.
 
@@ -244,7 +244,7 @@ $$-1000 \leq plates[i] \leq 1000$$
 
 Note: André is very skilled, so don't worry about the real-world physics of balancing plates. Focus only on the mathematical calculations!
 
-#### 11.1.1.3.A Naïve Solution
+##### 11.1.1.3.A Naïve Solution
 
 This solution is considered naïve because it doesn't take advantage of any precomputation or optimization techniques such as the Prefix Sum Array. Instead, it recalculates the sum of elements to the left and right of each plate using two separate loops for every plate. This leads to a time complexity of $O(n^2)$, as for each plate, the entire array is traversed twice — once for the left sum and once for the right sum.
 
@@ -356,7 +356,7 @@ The following table summarizes the time and space complexities of each step in t
 
 This approach, while correct, leads to a quadratic time complexity of $O(n^2)$ because it recalculates the sums from scratch for every plate. The space complexity remains constant at $O(1)$, as no extra space is required beyond the scalar variables for sum calculation. Nevertheless, there are better solutions.
 
-#### 11.1.1.3.B Prefix Sum Array Solution
+##### 11.1.1.3.B Prefix Sum Array Solution
 
 Let's start solving the problem "The Plate Balancer" using the Prefix Sum Array algorithm, using Python to create a pseudocode:
 
@@ -477,7 +477,7 @@ The implementation follows the Prefix Sum Array algorithm efficiently, construct
 | Loop Through Plates            | Checking all plates for the Magic Plate              | $O(n)$           | $O(1)$                      |
 | Overall Complexity             | Total time and space complexities                    | $O(n)$           | $O(n)$                      |
 
-#### 11.1.1.3.C Competitive Solution
+##### 11.1.1.3.C Competitive Solution
 
 The following C++20 code implements the _Prefix Sum Array_ algorithm, with several optimizations designed to reduce typing effort in a competitive programming context. We eliminated the use of functions, as the entire code is kept within the `main` block, avoiding the overhead of function calls. _This approach prioritizes minimal typing and fast execution by copying and pasting the logic rather than encapsulating it into reusable components_.
 
@@ -585,6 +585,328 @@ int main() {
     return 0;
 }
 ```
+
+### 11.1.2 Histogram
+
+Histograms are sequences of bars with distinct heights anchored to a common baseline. These structures are vital in algorithmic problem-solving, especially in computational geometry and data analysis. Many problems with histograms involve calculating specific metrics about these bars, like finding the largest rectangle that can be formed from consecutive bars.
+
+![]({{ site.baseurl }}/assets/images/histo1.png)
+_Image 11.1.3.A - Histogram example_{: class="legend"}
+
+Efficient preprocessing is key to solving histogram problems. A simple approach calculates the area for every possible combination of bars, leading to a time complexity of $O(n^2)$. Advanced methods reduce this to $O(n)$ by using better data structures.
+
+A common technique for solving histogram problems is to manage the sequence of bar heights well. One effective approach is to use a stack to track bar indices. This method makes it easier to decide when to process each bar to maximize its contribution to the area. The stack keeps the order and helps identify which bars to evaluate at each step.
+
+To find the largest rectangle in a histogram, iterate through the bars while maintaining a stack. Push each bar onto the stack if it forms an ascending sequence. When a lower bar appears, pop bars from the stack and calculate areas based on their heights until the current bar can be pushed. This ensures you find the largest possible area for each bar efficiently.
+
+Histogram problems also include challenges like computing the maximum area under a set of heights or finding consecutive bars that meet certain conditions. In each case, careful tracking of bar heights is crucial, which makes preprocessing valuable.
+
+By using stacks and managing each bar's height well, you can reduce time complexity. The goal is to avoid redundant calculations and keep track of potential areas without repeating work. The histogram is a simple yet effective tool for tackling problems with sequences of heights, using efficient algorithms and preprocessing.
+
+#### 11.1.3.1. Typical Problem: Radar Coverage on a Highway
+
+A highway has **N** radar posts positioned along its length. Each radar post has a **detection range** that extends to a certain height from the ground, represented by a sequence `R_i`, where $1 \leq R_i \leq 10^6$ and $1 \leq N \leq 10^6$. The goal is to install the minimum number of **antennas** to cover the detection ranges of all radar posts along the highway.
+
+- Each **antenna** can be installed at a specific height, and it will cover all radar posts whose detection range is equal to or less than the height of the antenna.
+- The **antenna moves from left to right**, and when it covers a radar post, its height decreases by one unit (as soon it hits a radar).
+- An antenna can only cover a radar post if its current height is equal to the radar's detection range, not greater than or equal to it.
+- The task is to determine the **minimum number of antennas** required to cover all radar posts.
+
+- **Input**: The first value is the number of radar posts, followed by their detection ranges in sequence.
+
+- **Output**: The output is the minimum number of antennas required.
+
+Example 1
+
+Input: 6
+Detection ranges: 3 1 4 5 1 2
+
+Output: 4
+
+Explanation: The radar posts have varying detection ranges. The first antenna is set at height 3 to cover the first radar. A new antenna is needed for the second radar with a range of 1. The third radar, with a range of 4, requires a new antenna. This antenna also covers the fourth radar (height 5, which decreases). Finally, two more antennas are needed for the last two radars (1 and 2). This results in four antennas being used.
+
+Example 2
+
+Input: 7
+Detection ranges: 6 2 5 4 5 1 6
+
+Output: 5
+
+Explanation: The sequence begins with a radar at height 6, requiring an antenna at 6. The second radar, at height 2, needs its own antenna. For the next sequence (5, 4, 5), a new antenna at 5 is used, and it can be decreased to cover the next heights. The sixth radar, at height 1, needs another antenna. The last radar at height 6 also requires a separate antenna, resulting in a total of five antennas.
+
+Example 3
+
+Input: 5
+Detection ranges: 4 5 2 1 4
+
+Output: 3
+
+Explanation: The radar posts start with a detection range of 4, requiring an antenna at height 4. The next radar at height 5 requires a new antenna at 5. The third radar, with a detection range of 2, does not match any current antenna, so a new one is needed at 2. The fourth radar, at height 1, can be covered by the existing antenna at 2, reducing its height. The final radar, at height 4, is already covered by the antenna initially set at 5 that has decreased to height 4. Therefore, three antennas are sufficient.
+
+The solution to this problem uses a strategy like histogram problems. We use a tracking mechanism to manage antennas and keep installations minimal. Each antenna covers one radar post and keeps moving, with its height reduced.
+
+An efficient solution uses a stack or a height count array, like in the largest rectangle in a histogram. This ensures we use the antennas well, covering all radar posts with the fewest installations. The goal is to track heights efficiently, like managing bar heights in a histogram, to cut redundancy and cover effectively.
+
+##### Solution Naive
+
+The following code shows a solution from a newbie. 
+
+```cpp
+
+#include <cstdio>
+#include <vector>
+using namespace std;
+
+int main() {
+    int n = 0;          // Variable to store the number of radar posts
+    char c;             // Character for reading input
+
+    // Read the number of radar posts using getchar()
+    while ((c = getchar()) != '\n' && c != EOF && c != ' ') {
+        if (c >= '0' && c <= '9') {
+            n = n * 10 + (c - '0');
+        }
+    }
+
+    vector<int> r;          // Vector to store the detection ranges
+    int current_value = 0;  // Variable to build the current detection range value
+    bool reading_value = false; // Flag to indicate if we're currently reading a number
+
+    // Read the detection ranges using getchar()
+    while (true) {
+        c = getchar();
+        if (c == EOF || c == '\n') {
+            if (reading_value) {
+                r.push_back(current_value);
+                current_value = 0;
+                reading_value = false;
+            }
+            break;
+        }
+        else if (c >= '0' && c <= '9') {
+            current_value = current_value * 10 + (c - '0');
+            reading_value = true;
+        }
+        else if (c == ' ' || c == ',') {
+            if (reading_value) {
+                r.push_back(current_value);
+                current_value = 0;
+                reading_value = false;
+            }
+        }
+    }
+
+    int n_radar = r.size();
+    int min_antennas = 0;
+    vector<bool> covered(n_radar, false); // Vector to keep track of covered radar posts
+
+    // Loop through each position to place antennas
+    for (int i = 0; i < n_radar; ++i) {
+        if (!covered[i]) {
+            int antenna_height = r[i]; // Install antenna at the radar's detection range
+            min_antennas++;            // Increment the number of antennas
+
+            // Antenna moves from position i to the right
+            int height = antenna_height;
+            for (int j = i; j < n_radar && height > 0; ++j, --height) {
+                if (height == r[j]) {
+                    covered[j] = true; // Mark radar post as covered
+                }
+            }
+        }
+    }
+
+    // Output the minimum number of antennas required
+    printf("%d\n", min_antennas);
+    return 0;
+}
+```
+
+This code has a interesting complexity analysis.  
+
+###### Naïve Code Complexity Analysis
+
+The algorithm reads input. It does this in two parts. First, it reads the number of radar posts. This takes $O(K)$ time. $K$ is the number of digits in the count. It is small compared to $N$. Then, it reads the detection ranges. This takes $O(N)$ time. $N$ is the number of radar posts.
+
+The total time for input reading is $O(N)$. This is straightforward.
+
+The main logic has two loops. They work together.
+
+```cpp
+for (int i = 0; i < n_radar; ++i)
+```
+
+This loop runs $N$ times. It goes through each radar post.
+
+```cpp
+for (int j = i; j < n_radar && height > 0; ++j, --height)
+```
+
+This loop is more complex. It can run many times or few times. In the worst case, it runs $O(N)$ times for each outer loop. In the best case, it runs $O(1)$ times for each outer loop.
+
+We can look at the total number of times the inner loop runs. Call this number $T$.
+
+$$T = \sum_{k=1}^{A} h_k$$
+
+$A$ is the number of antennas placed. $h_k$ is the height of each antenna.
+
+There is a limit to $T$. It cannot be more than $N$ times $R_{max}$. $R_{max}$ is the largest detection range.
+
+The worst case is $O(N^2)$. This happens when we need many tall antennas.
+
+The best case is $O(N)$. This happens when we need few short antennas.
+
+The average case depends on the input. Without knowing more, we assume the worst case.
+
+We can say $O(N \times R_{max})$ is a tighter bound. But $R_{max}$ could be as big as $N$. So $O(N^2)$ is still correct.
+
+The space used is $O(N)$. This comes from the vectors that store radar ranges and coverage information.
+
+**Conclusion**:
+
+The time complexity is $O(N^2)$ in the worst case. It could be better, depending on the input.
+The space complexity is $O(N)$. This is simple and constant.
+
+#### O(n) Solution
+
+```cpp
+
+#include <cstdio>
+#include <unordered_map>
+using namespace std;
+
+int main() {
+    int n = 0;          // Variable to store the number of radar posts
+    char c;             // Character for reading input
+
+    // Read the number of radar posts using getchar()
+    while ((c = getchar()) != '\n' && c != EOF && c != ' ') {
+        if (c >= '0' && c <= '9') {
+            // Convert character digit to integer and build the number
+            n = n * 10 + (c - '0');
+        }
+    }
+
+    int r_i;                        // Variable to store each radar's detection range
+    unordered_map<int, int> counts; // Map to keep track of antennas at each current height
+    int min_antennas = 0;           // Counter for the minimum number of antennas needed
+    int current_value = 0;          // Variable to build the current detection range value
+    bool reading_value = false;     // Flag to indicate if we're currently reading a number
+
+    // Read and process each radar detection range
+    while (true) {
+        c = getchar();  // Read the next character from input
+
+        // Check for end of input or end of line
+        if (c == EOF || c == '\n') {
+            if (reading_value) {
+                // Finish reading the current number (detection range)
+                r_i = current_value;
+                current_value = 0;
+                reading_value = false;
+
+                // Process the radar post
+                // Check if there is an antenna of height r_i + 1 available
+                if (counts[r_i + 1] > 0) {
+                    // An antenna of height r_i + 1 exists and can be used
+                    // Decrease its count since we're using it
+                    counts[r_i + 1]--;
+                }
+                else {
+                    // No antenna can be used to cover this radar
+                    // Install a new antenna at height r_i
+                    min_antennas++;
+                }
+                // After covering this radar, the antenna is at height r_i
+                // Increase the count of antennas at height r_i
+                counts[r_i]++;
+            }
+            break;  // Exit the loop as we've reached the end of input
+        }
+        else if (c >= '0' && c <= '9') {
+            // If the character is a digit, build the current number
+            current_value = current_value * 10 + (c - '0');
+            reading_value = true;   // We are currently reading a number
+        }
+        else if (c == ' ' || c == ',') {
+            // If we encounter a space or comma, it signifies the end of a number
+            if (reading_value) {
+                // Finish reading the current number (detection range)
+                r_i = current_value;
+                current_value = 0;
+                reading_value = false;
+
+                // Process the radar post
+                // Check if there is an antenna of height r_i + 1 available
+                if (counts[r_i + 1] > 0) {
+                    // Use an existing antenna of height r_i + 1
+                    counts[r_i + 1]--;
+                }
+                else {
+                    // No existing antenna can cover this radar
+                    // Install a new antenna at height r_i
+                    min_antennas++;
+                }
+                // Update the count of antennas at height r_i
+                counts[r_i]++;
+            }
+            // Ignore the space or comma and continue reading
+        }
+        // Other characters (if any) are ignored
+    }
+
+    // Output the minimum number of antennas required
+    printf("%d\n", min_antennas);
+    return 0;
+}
+```
+
+###### O(n) Complexity Analisys
+
+The algorithm reads input character by character. It does this once. For each character, it does simple operations. It builds the number of radar posts $n$ and each detection range $r_i$.
+
+The total time for input reading is $O(N)$. $N$ is the number of radar posts.
+
+For each radar post, the algorithm does these things:
+
+1. It checks if an antenna of height $r_i + 1$ exists in the `counts` map. This takes $O(1)$ average time.
+2. It changes counts in the `unordered_map`. This also takes $O(1)$ average time.
+3. It updates the `min_antennas` counter. This takes $O(1)$ time.
+
+The algorithm processes each radar post once.
+
+The total time is based on going through all radar posts once. Each post involves constant-time operations.
+
+The overall time complexity is $O(N)$. $N$ is the number of radar posts.
+
+The algorithm uses some simple variables. These use constant space.
+
+It also uses an `unordered_map` called `counts`. This map stores antenna counts at different heights.
+
+In the worst case, each radar post has a unique detection range. This could lead to $N$ unique heights in the map.
+
+Each entry in the `unordered_map` uses space for a key and a value. Both are integers.
+
+The total space for the map is $O(N)$ in the worst case.
+
+The space used grows linearly with the number of radar posts. This is because of the `counts` map.
+
+The overall space complexity is $O(N)$. $N$ is the number of radar posts.
+
+**Conclusion**
+
+Time Complexity: $O(N)$
+Space Complexity: $O(N)$
+
+The algorithm processes each radar post once. It uses constant-time operations for each post.
+
+The `unordered_map` might store up to $N$ different antenna heights in the worst case. The algorithm scales well for large inputs. It can handle up to $N = 10^6$ or more posts.
+
+Using `unordered_map` is efficient for this problem. If we know the range of detection ranges, we could use a fixed-size array instead. This might be faster, but it would use more space if the range is large.
+
+For example, if $1 \leq R_i \leq 10^6$, we could use a vector of size $10^6$. This would remove the overhead of hashing. But it would use more space, especially if the actual range of detection ranges is small.
+
+**Note**: The `unordered_map` gives average-case constant-time complexity for insertions and lookups. Hash collisions could make this worse. But with a good hash function, the average-case stays $O(1)$.
 
 ### 11.1.2. Algorithm: Difference Array - Efficient Range Updates
 
@@ -1947,12 +2269,6 @@ Techniques for arrays that don't change between queries, allowing efficient pre-
 
 - Problem Example: "Inventory Restocking" - Performs queries after each inventory adjustment
 
-### 11.1.6. Range Minimum Queries (RMQ)
-
-Data structure to find the minimum in any range in $O(1)$ after $O(n \log n)$ preprocessing.
-
-- Algorithm: Sparse Table for RMQ
-
 ### 11.1.7. Fenwick Tree
 
 Data structure for prefix sums and efficient updates, with operations in $O(\log n)$.
@@ -2381,21 +2697,405 @@ AINDA TEM MUITO QUE EXPLICAR AQUI.
 
 ## 11.2. Sliding Window Algorithms
 
-Techniques for efficiently processing contiguous subarrays of fixed size.
+Sliding window algorithms handle data sequences by moving a window over them. The window captures a subset of elements, and we perform computations on this subset.
+
+### Sliding Window Fixed Sum
+
+This problem involves finding a fixed-size window (of size $k$) where the sum of elements equals a target value. We compute the sum of elements within a fixed-size window as it moves along the sequence. For an array $A$ and window size $k$, the sum at position $i$ is:
+
+$$
+\text{Sum}_i = \sum_{j=i}^{i+k-1} A_j
+$$
+
+To calculate sums efficiently, we update the sum by subtracting the element leaving the window and adding the new element entering.
+
+```python
+window_sum = sum(A[:k])
+result = [window_sum]
+
+for i in range(k, len(A)):
+    window_sum += A[i] - A[i - k]
+    result.append(window_sum)
+```
+
+In C++20 we could have:
+
+```cpp
+#include <vector>
+
+std::vector<int> sliding_window_fixed_sum(const std::vector<int>& A, int k) {
+    std::vector<int> result;
+    int window_sum = 0;
+
+    for (int i = 0; i < k; ++i)
+        window_sum += A[i];
+    result.push_back(window_sum);
+
+    for (size_t i = k; i < A.size(); ++i) {
+        window_sum += A[i] - A[i - k];
+        result.push_back(window_sum);
+    }
+    return result;
+}
+```
+
+#### Typical Problem
+
+Given a 1-indexed array of integers `numbers` that is already sorted in non-decreasing order, find a contiguous subarray of length $k$ such that the sum of its elements is equal to a specific target number. 
+
+Let the subarray be `numbers[index1, index1+1, ..., index1+k-1]` where $1 \leq \text{index1} \leq \text{numbers.length} - k + 1$.
+
+Return the starting index of the subarray, `index1`, added by one. If no such subarray exists, return $-1$.
+
+The solution must use only constant extra space.
+
+**Input Format**:
+
+- The first line contains a single integer $n$ ($2 \leq n \leq 3 \times 10^4$), the length of the array.
+- The second line contains $n$ space-separated integers $numbers_i$ ($-1000 \leq numbers_i \leq 1000$), representing the array elements.
+- The third line contains two space-separated integers $k$ and $target$ ($1 \leq k \leq n$, $-10^6 \leq target \leq 10^6$), where $k$ is the window size and $target$ is the sum to find.
+
+**Example 1**:
+Input:
+5
+1 2 3 4 5
+3 9
+
+Output: 3
+Explanation: The subarray [2, 3, 4] sums to 9. Therefore, index1 = 2. We return 2 + 1 = 3.
+
+**Example 2**:
+Input:
+4
+2 4 6 8
+2 10
+
+Output: 3
+Explanation: The subarray [4, 6] sums to 10. Therefore index1 = 2. We return 2 + 1 = 3.
+
+**Example 3**:
+Input:
+3
+1 2 3
+3 10
+
+Output: -1
+Explanation: There is no subarray of length 3 that sums to 10.
+
+**Example 4**:
+Input:
+10
+1 3 2 5 4 6 8 7 9 10
+4 20
+
+Output: 5
+Explanation: The subarray [4, 6, 8, 7] sums to 20. Therefore, index1 = 4. We return 4 + 1 = 5.
+
+**Constraints**:
+
+- $2 \leq \text{numbers.length} \leq 3 \times 10^4$
+- $1 \leq k \leq \text{numbers.length}$
+- $-1000 \leq \text{numbers}[i] \leq 1000$
+- `numbers` is sorted in non-decreasing order.
+- $-10^6 \leq \text{target} \leq 10^6$
 
 ### 11.2.1. Sliding Window Minimum
 
-Finds the minimum in a fixed-size window that slides through the array in $O(n)$ using a deque.
+We find the minimum value within each window. Using a deque, we maintain candidates for the minimum value.
 
-- Algorithm: Monotonic Deque
+```python
+from collections import deque
+
+def sliding_window_minimum(A, k):
+    q = deque()
+    result = []
+
+    for i in range(len(A)):
+        while q and q[-1] > A[i]:
+            q.pop()
+        q.append(A[i])
+        if i >= k and q[0] == A[i - k]:
+            q.popleft()
+        if i >= k - 1:
+            result.append(q[0])
+    return result
+```
+
+Or
+
+```cpp
+#include <vector>
+#include <deque>
+
+std::vector<int> sliding_window_minimum(const std::vector<int>& A, int k) {
+    std::deque<int> q;
+    std::vector<int> result;
+
+    for (size_t i = 0; i < A.size(); ++i) {
+        while (!q.empty() && q.back() > A[i])
+            q.pop_back();
+        q.push_back(A[i]);
+        if (i >= k && q.front() == A[i - k])
+            q.pop_front();
+        if (i >= k - 1)
+            result.push_back(q.front());
+    }
+    return result;
+}
+```
+
+>The `std::deque` class has been part of C++ since the standardization in 1998. It provides a double-ended queue, allowing fast insertions and deletions at both the front and back of the sequence. You can access any element by its index in constant time.
+>
+>Consider adding an element to the end:
+>
+> ```cpp
+> #include <deque>
+> 
+> std::deque<int> dq;
+> dq.push_back(10); // The deque now contains: 10
+> ```
+>
+>You can also add an element to the front:
+>
+> ```cpp
+> dq.push_front(20); // The deque now contains: 20, 10
+> ```
+>
+> Removing elements works the same way. Remove from the back:
+>
+> ```cpp
+> dq.pop_back(); // The deque now contains: 20
+> ```
+>
+> Or remove from the front:
+> 
+> ```cpp
+> dq.pop_front(); // The deque is now empty
+> ```
+>
+> Access elements by index:
+>
+> ```cpp
+> dq.push_back(30);
+> dq.push_back(40); // The deque now contains: 30, 40
+> int value = dq[1]; // value is 40
+> ```
+>
+> To find out how many elements are in the deque:
+>
+> ```cpp
+> size_t size = dq.size(); // size is 2
+> ```
+>
+> Here is how you might use `std::deque` in a sliding window maximum problem:
+>
+> ```cpp
+> #include <iostream>
+> #include <deque>
+> #include <vector>
+>
+> std::vector<int> sliding_window_maximum(const std::vector<int>& nums, int k) {
+>     std::deque<int> dq;
+>     std::vector<int> result;
+>
+>     for (size_t i = 0; i < nums.size(); ++i) {
+>         if (!dq.empty() && dq.front() == i - k)
+>             dq.pop_front();
+>
+>         while (!dq.empty() && nums[dq.back()] < nums[i])
+>             dq.pop_back();
+>
+>         dq.push_back(i);
+>
+>         if (i >= k - 1)
+>            result.push_back(nums[dq.front()]);
+>    }
+>    return result;
+> }
+>
+> int main() {
+>     std::vector<int> nums = {1, 3, 2, 5, 4, 6};
+>     int k = 3;
+>     std::vector<int> max_values = sliding_window_maximum(nums, k);
+>
+>     for (int val : max_values)
+>         std::cout << val << " "; // Outputs: 3 5 5 6
+>
+>     return 0;
+>}
+> ```
+>
+>In this example, we keep track of indices in the deque. We remove indices that are out of the current window or whose values are less than the current number. The front of the deque always holds the index of the maximum value in the current window.
+>
+>The `std::deque` provides constant-time access to elements using the subscript operator. **Inserting or deleting elements at either end takes constant time as well. However, inserting or deleting in the middle takes linear time**. In general we have:
+>
+> - Insertion/deletion at ends: $O(1)$
+> - Insertion/deletion in middle: $O(n)$
+> - Random access: $O(1)$
+>
+>Check if the deque is empty:
+>
+> ```cpp
+> if (dq.empty()) {
+>     // The deque is empty
+> }
+> ```
+>
+> Remove all elements:
+>
+> ```cpp
+> dq.clear(); // The deque is now empty
+> ```
+>
+> Iterate over the deque:
+>
+> ```cpp
+> for (auto it = dq.begin(); it != dq.end(); ++it) {
+>    std::cout << *it << " ";
+>}
+> ```
+>
+> If you need to insert an element at a specific position:
+>
+> ```cpp
+> dq.insert(dq.begin() + 1, 25); // Inserts 25 at index 1
+> ```
+>
+>Or erase an element:
+>
+> ```cpp
+> dq.erase(dq.begin()); // Removes the first element
+> ```
+>
+>The `std::deque` is useful when you need a dynamic array with fast insertions and deletions at both ends. It is implemented as a sequence of contiguous memory blocks. This allows it to grow in both directions without reallocating the entire container.
+>
+>**Comparison with Other Structures**
+>
+>The `std::deque` offers a unique balance between `std::vector` and `std::list`, combining advantages of both.
+>
+>Unlike `std::vector`, `std::deque` allows efficient insertions at the beginning in $O(1)$ time, which is particularly useful for implementing queues or for algorithms that frequently add elements to the front of the container. Similar to `std::vector` but unlike `std::list`, `std::deque` offers random access to elements in $O(1)$ time. This means you can quickly access any element by its index, making it suitable for scenarios where both fast insertion/deletion at ends and quick random access are required. `std::deque` doesn't require contiguous memory like `std::vector`, which means it can handle larger datasets without the need for expensive reallocation operations when it grows. However, `std::deque` may have slightly higher memory overhead compared to `std::vector` due to its more complex internal structure. 
+>
+>Unlike `std::list`, which excels at insertions and deletions anywhere in the container, `std::deque` is optimized for operations at both ends, making it an excellent choice for double-ended queues or sliding window algorithms. This balance of features makes `std::deque` a versatile container, often providing a good compromise when neither `std::vector` nor `std::list` is ideal for a particular use case.
+>
+>`std::deque` uses a structure of memory blocks:
+>
+> ```cpp
+> [Block1][Block2][Block3]...[BlockN]
+> ```
+>
+>This structure allows efficient growth in both directions without frequent reallocations. However, `std::deque` may use more memory than `std::vector` due to its internal structure:
+>
+> $$ \text{Memory} \approx n \cdot \text{sizeof}(T) + \text>{overhead}$$
+>
+>Where $n$ is the number of elements and $T$ is the element type.
+>
+>**Finally, `std::deque` iterators are random access, but can be invalidated: In a std::deque, insertions or deletions at any position can invalidate iterators. Specifically, insertions or deletions at the ends invalidate all iterators but do not affect references or pointers to existing elements. Insertions or deletions in the middle of the deque invalidate all iterators, references, and pointers to elements.**.
+>
+>
+>Beyond those methods already mentioned, `std::deque` offers:
+>
+>- `at(n)`: Access with bounds checking.
+>- `front()` and `back()`: Access to first and last elements.
+>- `emplace_front()` and `emplace_back()`: In-place construction.
+>
+> `emplace_front()` and `emplace_back()` are methods for efficient element Construction.
+>
+>`emplace_front()` and `emplace_back()` build new elements directly in the deque. They don't create temporary objects. This saves time and memory. You pass the constructor arguments directly to these methods. The deque then makes the new element in place. 
+>
+>For types with complex constructors, this is faster than `push_front()` or `push_back()`. Those methods would create a temporary object first. With `emplace_front()`, the new element goes at the start of the deque. With `emplace_back()`, it goes at the end. Use these when you need to add elements often and want the best performance. They work well with objects that are expensive to copy or move.
+>
+> The std::deque is compatible with most STL algorithms::
+>
+> ```cpp
+> #include <algorithm>
+> #include <deque>
+> 
+> std::deque<int> dq = {3, 1, 4, 1, 5, 9};
+> std::sort(dq.begin(), dq.end());
+> ```
+>
+>Like most STL containers, `std::deque` is not thread-safe by default. For concurrent access, consider using mutex:
+>
+> ```cpp
+> #include <mutex>
+> #include <deque>
+> 
+> std::mutex mtx;
+> std::deque<int> shared_deque;
+> 
+> // In a thread:
+> {
+>     std::lock_guard<std::mutex> lock(mtx);
+>     shared_deque.push_back(42);
+> }
+> ```
+>
+>C++20 introduces `std::erase` and `std::erase_if` for `std::deque`:
+>
+> ```cpp
+> #include <deque>
+> #include <algorithm>
+> 
+> std::deque<int> dq = {1, 2, 3, 2, 4, 2};
+> std::erase(dq, 2);  // Removes all 2s
+> ```
+>
+> This addition simplifies element removal based on value or predicate.
+>
+>C++20's `std::erase` and `std::erase_if` for `std::deque` are useful but come with costs. The time complexity is linear, $O(n)$, where $n$ is the number of elements in the deque. These functions must check each element and may move elements to fill gaps. For `std::erase(dq, value)`, it checks every element, always taking $O(n)$ time. It moves elements to close gaps, which can take up to $O(n)$ time. In the worst case, it removes all elements, taking $O(n)$ time. `std::erase_if(dq, pred)` behaves similarly. It checks every element with the predicate, always taking $O(n)$ time. Moving elements to close gaps can take up to $O(n)$ time. The worst case is the same as `std::erase`. The space complexity for both is $O(1)$. These functions don't use extra storage that grows with input size. Here's an example:
+>
+> ```cpp
+> std::deque<int> dq = {1, 2, 3, 2, 4, 2};
+> std::erase(dq, 2);  // This operation is O(n)
+> ```
+>
+>These functions are simple to use. But for large deques or frequent use, consider the performance impact. In some cases, manual element removal might be faster. It depends on your specific needs.
+>
 
 ### 11.2.2. Sliding Window Maximum
 
-Similar to the minimum, but for finding the maximum in each window.
+This method tracks the maximum value in each window. It uses a similar approach to the minimum.
 
-- Algorithm: Monotonic Deque
+```python
+from collections import deque
 
-- Problem Example: "Weather Monitoring System" - Uses a sliding window of size k to find the subarray with the highest average
+def sliding_window_maximum(A, k):
+    q = deque()
+    result = []
+
+    for i in range(len(A)):
+        while q and q[-1] < A[i]:
+            q.pop()
+        q.append(A[i])
+        if i >= k and q[0] == A[i - k]:
+            q.popleft()
+        if i >= k - 1:
+            result.append(q[0])
+    return result
+```
+
+Or, in C++20:
+
+```cpp
+#include <vector>
+#include <deque>
+
+std::vector<int> sliding_window_maximum(const std::vector<int>& A, int k) {
+    std::deque<int> q;
+    std::vector<int> result;
+
+    for (size_t i = 0; i < A.size(); ++i) {
+        while (!q.empty() && q.back() < A[i])
+            q.pop_back();
+        q.push_back(A[i]);
+        if (i >= k && q.front() == A[i - k])
+            q.pop_front();
+        if (i >= k - 1)
+            result.push_back(q.front());
+    }
+    return result;
+}
+```
 
 ## 11.3. Multiple Query Processing
 
@@ -4124,3 +4824,4 @@ int main(int argc, char* argv[]) {
 > | Base Conversion    | Only base 10                  | Supports multiple bases                               |
 > | Exception Safety   | No                            | Yes (uses C++ exceptions)                             |
 > | Overflow/Underflow | No handling                   | Detects and throws `std::out_of_range`                |
+        
