@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
 beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
-lastmod: 2024-10-12T00:58:23.570Z
+lastmod: 2024-10-12T01:31:14.026Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -4173,17 +4173,52 @@ Estas propriedades juntas garantem a consistência e a robustez do sistema de ti
 
 ## Correspondência de Curry-Howard
 
-Uma das contribuições mais profundas do cálculo lambda tipado é a chamada _correspondência de Curry-Howard_, que estabelece uma equivalência entre tipos e proposições lógicas. De acordo com essa correspondência:
+A Correspondência de Curry-Howard, também conhecida como Isomorfismo de Curry-Howard estabelece uma profunda conexão entre tipos em linguagens de programação e proposições em lógica construtiva.
 
--**Tipos** correspondem a **proposições**.
+O isomorfismo de Curry-Howard tem raízes no trabalho realizado por um conjunto de pesquisadores ao longo do século XX. [Haskell Curry](https://en.wikipedia.org/wiki/Haskell_Curry), em 1934, foi o primeiro a observar uma conexão entre a lógica combinatória e os tipos de funções, notando que os tipos dos combinadores correspondiam a tautologias na lógica proposicional.
 
--**Termos** correspondem a **provas**.
+Um longo hiato se passou, até que [William Howard](https://en.wikipedia.org/wiki/William_Alvin_Howard), em 1969, expandiu esta observação para um isomorfismo completo entre lógica intuicionista e cálculo lambda tipado, mostrando que as regras de dedução natural correspondiam às regras de tipagem no cálculo lambda simplesmente tipado.
 
--**Normalização de termos** corresponde à **normalização de provas**.
+A correspondência foi posteriormente generalizada por [Jean-Yves Girard](https://en.wikipedia.org/wiki/Jean-Yves_Girard) e [John C. Reynolds](https://en.wikipedia.org/wiki/John_C._Reynolds), que independentemente, em 1971-72, estenderam o isomorfismo para incluir a quantificação de segunda ordem. Eles demonstraram que o Sistema F (cálculo lambda polimórfico) corresponde à lógica de segunda ordem, estabelecendo assim as bases para uma compreensão profunda da relação entre lógica e computação. Estas descobertas tiveram um impacto no desenvolvimento de linguagens de programação e sistemas de prova assistidos por computador.
 
-Por exemplo, o tipo $A \rightarrow B$ pode ser interpretado como a proposição "se $A$, então $B$". Essa correspondência é a base para a conexão entre o cálculo lambda e a lógica intuicionista[^nota6], além de fornecer o fundamento para sistemas de provas formais e linguagens de programação funcional.
+Assim, chegamos aos dias atuais com a correspondência Curry-Howard tendo implicações tanto para a teoria da computação quanto para o desenvolvimento de linguagens de programação. Vamos examinar os principais aspectos deste isomorfismo:
 
-O cálculo lambda tipado representa uma extensão natural do cálculo lambda não tipado, que resolve problemas de consistência ao introduzir tipos para restringir as operações permitidas sobre funções e argumentos. Isso transforma o cálculo lambda em uma ferramenta fundamental tanto para a lógica matemática quanto para a ciência da computação. A adição de tipos oferece uma base teórica sólida para o desenvolvimento de linguagens de programação funcionais e sistemas de provas formais, tornando-o uma estrutura essencial para a verificação de programas e a formalização de provas matemáticas.
+### 1. Proposições como tipos
+
+Na lógica construtiva, **a verdade de uma proposição é equivalente à sua demonstrabilidade**. Isso significa que para uma proposição $\phi$ ser verdadeira, deve existir uma prova de $\phi$.
+
+Formalmente: Uma proposição $\phi$ é verdadeira se, e somente se, existe uma prova $p$ de $\phi$, denotada por $p : \phi$.
+
+**Exemplo**: A proposição "existe um número primo maior que 100" é verdadeira porque podemos fornecer uma prova construtiva, como o número 101 e uma demonstração de que este é um número primo.
+
+### 2. Provas como programas
+
+**As regras de inferência na lógica construtiva correspondem às regras de tipagem em linguagens de programação**. Assim, um programa bem tipado pode ser visto como uma prova de sua especificação tipo.
+
+Formalmente: Se $\Gamma \vdash e : \tau$, então $e$ pode ser interpretado como uma prova da proposição representada por $\tau$ no contexto $\Gamma$.
+
+**Exemplo**: Um programa $e$ do tipo $\text{Nat} \rightarrow \text{Nat}$ é uma prova da proposição "existe uma função dos números naturais para os números naturais".
+
+### 3. Correspondência entre conectivos lógicos e tipos
+
+Existe uma correspondência direta entre conectivos lógicos e construtores de tipos:
+
+1. Conjunção ($\wedge$) = Tipo produto ($\times$)
+2. Disjunção ($\vee$) = Tipo soma ($+$)
+3. Implicação ($\rightarrow$) = Tipo função ($\rightarrow$)
+4. Quantificação universal ($\forall$) = Polimorfismo paramétrico ($\forall$)
+
+**Exemplo**: A proposição $\phi_1 \wedge \phi_2 \rightarrow \phi_3$ corresponde ao tipo $\tau_1 \times \tau_2 \rightarrow \tau_3$.
+
+### 4. Invalidade e tipos inabitados
+
+Uma proposição falsa na lógica construtiva corresponde a um tipo inabitado na teoria de tipos.
+
+Formalmente: Uma proposição $\phi$ é falsa se e somente se não existe termo $e$ tal que $e : \phi$.
+
+**Exemplo**: O tipo $\forall X. X$ é inabitado, correspondendo a uma proposição falsa na lógica.
+
+Estas correspondências fornecem uma base sólida para o desenvolvimento de linguagens de programação com sistemas de tipos expressivos e para a verificação formal de programas.
 
 ## Sintaxe do Cálculo Lambda Tipado
 
