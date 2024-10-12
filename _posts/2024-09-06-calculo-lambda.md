@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
 beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
-lastmod: 2024-10-11T22:53:57.532Z
+lastmod: 2024-10-12T00:58:23.570Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -361,7 +361,64 @@ $$
 \end{align*}
 $$
 
-Essa gramática indica que uma expressão pode ser uma variável, uma constante, uma abstração lambda, um termo aplicado a um termo, uma aplicação de função ou um termo entre parênteses e é só. Por outro lado, a semântica do cálculo lambda pode ser dividida em **semântica operacional** e **semântica denotacional**.
+Uma forma de facilitar o entendimento de abstrações e aplicações é pensar em um termo como uma árvore, cuja forma corresponde à maneira como o termo corresponde à gramática. Podemos chamar este tipo de árvore de árvore sintática. Esta árvore será a representação, em um grafo deste termo. em formato de árvore. Para um dado termo $s$ está árvore terá vértices rotulados por $λx$ ou $@$, e folhas rotuladas por variáveis. Ela é dada indutivamente por:
+
+1. A árvore de construção de uma variável $x$ é uma única folha, rotulada por $x$.
+
+2. A árvore de construção de uma abstração $λx.s$ consiste em um nó rotulado por $λx$ com uma única subárvore, que é a árvore de construção de $s$.
+
+3. A árvore de construção de uma aplicação $s\,t# consiste em um nó rotulado por $@$ com duas subárvores: a subárvore esquerda é a árvore de construção de $s$ e a subárvore direita é a árvore de construção de $t$.
+
+Por exemplo, a árvore de construção do termo $λxy.xλz.yz$ será: 
+
+ $$
+\begin{array}{c}
+\lambda x \\
+\downarrow \\
+\lambda y \\
+\downarrow \\
+\diagup \quad \diagdown \\
+\begin{array}{cc}
+\quad x \quad & \quad \lambda z \quad \\
+& \downarrow \\
+& \begin{array}{cc}
+\, y & \, z
+\end{array}
+\end{array}
+\end{array}
+$$
+
+Neste texto, vamos dar prioridade a derivação gramatical, e evitaremos as árvores. Contudo, como as árvores são excelentes para visualização e entendimento, vamos ver mais dois exemplos.
+
+**Exemplo 1: Representação da abstração $\lambda x.\ x\ x$**
+
+$$
+\begin{array}{c}
+\lambda x \\
+\downarrow \\
+\begin{array}{c}
+@ \\
+\diagup \quad \diagdown \\
+x \quad \quad \quad x
+\end{array}
+\end{array}
+$$
+
+**Exemplo 2**: Representação da aplicação $(\lambda x.\ x + 1)\ 2$
+
+$$
+\begin{array}{c}
+@ \\
+\diagup \quad \diagdown \\
+\begin{array}{c}
+\lambda x & \quad 2 \\
+\downarrow \\
+x + 1
+\end{array}
+\end{array}
+$$
+
+Como vimos, a gramática é simples, poucas regras de produção e poucos símbolos. Por outro lado, a semântica do cálculo lambda pode ser dividida em **semântica operacional** e **semântica denotacional**.
 
 ## Semântica Operacional
 
@@ -3900,13 +3957,219 @@ Essas regras fornecem a base para a derivação de tipos em expressões complexa
 
 ## Propriedades do Cálculo Lambda Tipado
 
-O cálculo lambda tipado possui várias propriedades importantes, derivadas da imposição de regras de tipos. Entre elas, destacam-se:
+A partir das regras de tipagem, podemos definir um conjunto de propriedades da tipagem no cálculo lambda. Essas propriedades têm implicações tanto para a teoria quanto para a prática da programação. Vamos destacar:
 
--**Normalização forte**: Todo termo bem tipado possui uma forma normal e qualquer sequência de reduções eventualmente termina. Isso garante que as reduções de expressões no cálculo lambda tipado sempre produzirão um resultado final, eliminando loops infinitos.
+1. **Normalização forte**: Todo termo bem tipado possui uma forma normal e qualquer sequência de reduções eventualmente termina. Isso garante que as reduções de expressões no cálculo lambda tipado sempre produzirão um resultado final, eliminando loops infinitos. É importante notar que a propriedade de normalização forte é garantida no cálculo lambda simplesmente tipado. Em sistemas de tipos mais avançados, como aqueles que suportam recursão ou tipos dependentes, a normalização forte pode não se aplicar, podendo existir termos bem tipados que não convergem para uma forma normal.
 
--**Preservação de tipos**: Se uma expressão $M$ possui o tipo $A$ sob o contexto $\Gamma$, e $M$ pode ser reduzido para $N$ pela regra $\beta$-redução ($M \rightarrow_\beta N$), então $N$ também possui o tipo $A$. Essa propriedade é essencial para garantir que as transformações de termos dentro do sistema de tipos mantenham a consistência tipológica.
+   Formalmente, se $\Gamma \vdash M : \tau$, então existe uma sequência finita de reduções $M \rightarrow_\beta M_1 \rightarrow_\beta ... \rightarrow_\beta M_n$ onde $M_n$ está em forma normal.
 
--**Decidibilidade da tipagem**: Um algoritmo pode decidir se uma expressão possui um tipo válido no sistema de tipos, o que é uma propriedade crucial para a análise de tipos em linguagens de programação.
+   **Exemplo**: considere o termo $(\lambda x:\text{Nat}. x + 1) 2$. Este termo é bem tipado e reduz para $3$ em um número finito de passos:
+
+   $$(\lambda x:\text{Nat}. x + 1) 2 \rightarrow_\beta 2 + 1 \rightarrow 3$$
+
+2. **Preservação de tipos** (_subject reduction_): se uma expressão $M$ possui o tipo $A$ sob o contexto $\Gamma$, e $M$ pode ser reduzido para $N$ pela regra $\beta$-redução ($M \rightarrow_\beta N$), então $N$ também possui o tipo $A$. Essa propriedade é essencial para garantir que as transformações de termos dentro do sistema de tipos mantenham a consistência tipológica.
+
+   Formalmente: Se $\Gamma \vdash M : \tau$ e $M \rightarrow_\beta N$, então $\Gamma \vdash N : \tau$.
+
+   **Exemplo**: se $\Gamma \vdash (\lambda x:\text{Nat}. x + 1) 2 : \text{Nat}$, então após a redução, teremos $\Gamma \vdash 3 : \text{Nat}$.
+
+3. **Decidibilidade da tipagem**: um algoritmo pode decidir se uma expressão possui um tipo válido no sistema de tipos, o que é uma propriedade crucial para a análise de tipos em linguagens de programação.
+
+   Isso significa que existe um procedimento efetivo que, dado um contexto $\Gamma$ e um termo $M$, pode determinar se existe um tipo $A$ tal que $\Gamma \vdash M : \tau$.
+
+   **Exemplo**: um algoritmo de verificação de tipos pode determinar que:
+   - $\lambda x:\text{Nat}. x + 1$ tem tipo $\text{Nat} \rightarrow \text{Nat}$
+   - $(\lambda x:\text{Nat}. x) \text{true}$ não é bem tipado
+
+4. **Progresso**: uma propriedade adicional importante é o progresso. Se um termo é bem tipado e não está em forma normal, então existe uma redução que pode ser aplicada a ele.
+
+   Formalmente: Se $\Gamma \vdash M : \tau$ e $M$ não está em forma normal, então existe $N$ tal que $M \rightarrow_\beta N$.
+
+   Esta propriedade, junto com a preservação de tipos, garante que termos bem tipados ou estão em forma normal ou podem continuar sendo reduzidos sem ficarem "presos" em um estado intermediário.
+
+Estas propriedades juntas garantem a consistência e a robustez do sistema de tipos do cálculo lambda tipado, fornecendo uma base sólida para o desenvolvimento de linguagens de programação tipadas e sistemas de verificação formal.
+
+### Exercícios de Propriedades do Cálculo Lambda Tipado
+
+**1**. Considere o termo $(\lambda x:\text{Nat}. x + 1) 2$. Mostre a sequência de reduções que leva este termo à sua forma normal, ilustrando a propriedade de normalização forte.
+
+   **Solução**:
+
+   $$
+   (\lambda x:\text{Nat}. x + 1) 2 \rightarrow_\beta 2 + 1 \rightarrow 3
+   $$
+
+   O termo reduz à sua forma normal, $3$, em um número finito de passos.
+
+**2**. Dado o termo $(\lambda f:\text{Nat}\rightarrow\text{Nat}. \lambda x:\text{Nat}. f (f x)) (\lambda y:\text{Nat}. y + 1) 2$, mostre que ele é bem tipado e reduz para um valor do tipo $\text{Nat}$.
+
+   **Solução**: 0 termo é bem tipado: $(\text{Nat}\rightarrow\text{Nat})\rightarrow\text{Nat}\rightarrow\text{Nat}$
+
+   Redução:
+
+   $$
+   \begin{aligned}
+   &(\lambda f:\text{Nat}\rightarrow\text{Nat}. \lambda x:\text{Nat}. f (f x)) (\lambda y:\text{Nat}. y + 1) 2 \\
+   &\rightarrow_\beta (\lambda x:\text{Nat}. (\lambda y:\text{Nat}. y + 1) ((\lambda y:\text{Nat}. y + 1) x)) 2 \\
+   &\rightarrow_\beta (\lambda y:\text{Nat}. y + 1) ((\lambda y:\text{Nat}. y + 1) 2) \\
+   &\rightarrow_\beta (\lambda y:\text{Nat}. y + 1) (2 + 1) \\
+   &\rightarrow_\beta (\lambda y:\text{Nat}. y + 1) 3 \\
+   &\rightarrow_\beta 3 + 1 \\
+   &\rightarrow 4
+   \end{aligned}
+   $$
+
+   O resultado final (4) é do tipo $\text{Nat}$, ilustrando a preservação de tipos.
+
+**3**. Explique por que o termo $(\lambda x:\text{Bool}. x + 1)$ não é bem tipado. Como isso se relaciona com a propriedade de decidibilidade da tipagem?
+
+   **Solução**: o termo não é bem tipado porque tenta adicionar 1 a um valor booleano, o que é uma operação inválida. A decidibilidade da tipagem permite que um algoritmo detecte este erro de tipo, rejeitando o termo como mal tipado.
+
+**4**. Considere o termo:
+
+   $$
+   M = (\lambda x:\text{Nat}.\ \text{if } x = 0\ \text{then}\ 1\ \text{else}\ x \times ((\lambda y:\text{Nat}.\ y - 1)\ x))
+   $$
+
+   Este termo calcula $x$ multiplicado por $x - 1$. Mostre que ele satisfaz a propriedade de **preservação de tipos** para uma entrada específica.
+
+   **Solução:** vamos aplicar o termo $M$ a $x = 3$ e verificar a preservação de tipos durante as reduções.
+
+   1. **Tipagem Inicial:**
+
+      - Tipo de $M$:
+
+      $$
+      \Gamma \vdash M : \text{Nat} \rightarrow \text{Nat}
+      $$
+
+      $M$ é uma função que recebe um $\text{Nat}$ e retorna um $\text{Nat}$.
+
+      Tipo do Argumento $3$:
+
+      $$
+      \Gamma \vdash 3 : \text{Nat}
+      $$
+
+   2. **Aplicação da Função:**
+
+      Aplicação:
+
+      $$
+      M\ 3 = (\lambda x:\text{Nat}.\ \text{if } x = 0\ \text{then}\ 1\ \text{else}\ x \times ((\lambda y:\text{Nat}.\ y - 1)\ x))\ 3
+      $$
+
+      Redução por $\beta$-redução:
+
+      $$
+      \rightarrow_\beta \text{if } 3 = 0\ \text{then}\ 1\ \text{else}\ 3 \times ((\lambda y:\text{Nat}.\ y - 1)\ 3)
+      $$
+
+   3. **Avaliação da Condicional:**
+
+      Como $3 \neq 0$, seguimos para o ramo "else":
+
+      $$
+      \rightarrow 3 \times ((\lambda y:\text{Nat}.\ y - 1)\ 3)
+      $$
+
+   4. **Redução do Parêntese Interno:**
+
+      Aplicação da Função Interna:
+
+      $$
+      (\lambda y:\text{Nat}.\ y - 1)\ 3 \rightarrow_\beta 3 - 1 = 2
+      $$
+
+      Atualização da Expressão:
+
+      $$
+      \rightarrow 3 \times 2
+      $$
+
+   5. **Cálculo Final:**
+
+      Multiplicação:
+
+      $$
+      3 \times 2 = 6
+      $$
+
+      Tipo do Resultado:
+
+      $$
+      \Gamma \vdash 6 : \text{Nat}
+      $$
+
+   **Demonstrando a Preservação de Tipos:**
+
+   Antes da Redução: a função $M$ tem tipo $\text{Nat} \rightarrow \text{Nat}$; o argumento $3$ tem tipo $\text{Nat}$. Portanto, pela **Regra de Aplicação**:
+
+   $$
+   \frac{\Gamma\ \vdash\ M : \text{Nat} \rightarrow \text{Nat} \quad \Gamma\ \vdash\ 3 : \text{Nat}}{\, \Gamma\ \vdash\ M\ 3 : \text{Nat}}
+   $$
+
+   Durante as Reduções, cada passo manteve o tipo $\text{Nat}$:
+
+- $\Gamma \vdash 3 \times 2 : \text{Nat}$
+  
+- $\Gamma \vdash 6 : \text{Nat}$
+
+  O termo inicial $M\ 3$ tem tipo $\text{Nat}$. Após as reduções, o resultado $6$ também tem tipo $\text{Nat}$. Portanto, a propriedade de preservação de tipos é satisfeita.
+
+   **Observação:** uso das regras de tipagem.
+
+  1. **Regra da Variável**: definimos os tipos das variáveis $x$ e $y$ como $\text{Nat}$.
+
+  2. **Regra de Abstração**: As funções anônimas $\lambda x:\text{Nat}.\ \dots$ e $\lambda y:\text{Nat}.\ y - 1$ são tipadas como $\text{Nat} \rightarrow \text{Nat}$.
+
+  3. **Regra de Aplicação**: Aplicamos as funções aos argumentos correspondentes, mantendo a consistência de tipos.
+
+  Este exercício demonstra como as reduções em um termo bem tipado mantêm o tipo consistente.
+
+**5**. Dê um exemplo de um termo que não satisfaz a propriedade de progresso no cálculo lambda não tipado, mas que seria rejeitado no cálculo lambda tipado.
+
+   **Solução**: considere o termo $(\lambda x. x x) (\lambda x. x x)$. No cálculo lambda não tipado, este termo reduz infinitamente para si mesmo:
+
+   $$
+   (\lambda x. x x) (\lambda x. x x) \rightarrow_\beta (\lambda x. x x) (\lambda x. x x) \rightarrow_\beta ...
+   $$
+
+   No cálculo lambda tipado, este termo seria rejeitado porque não é possível atribuir um tipo consistente para $x$ em $x x$.
+
+**6**. Explique como a propriedade de normalização forte garante que não existem loops infinitos em programas bem tipados no cálculo lambda tipado.
+
+   **Solução**: a normalização forte garante que toda sequência de reduções de um termo bem tipado eventualmente termina em uma forma normal. Isso implica que não pode haver loops infinitos, pois se houvesse, a sequência de reduções nunca terminaria, contradizendo a propriedade de normalização forte.
+
+**7**. Considere o termo $(\lambda x:\text{Nat}\rightarrow\text{Nat}. x 3) (\lambda y:\text{Nat}. y * 2)$. Mostre que este termo satisfaz as propriedades de preservação de tipos e progresso.
+
+   **Solução**: preservação de tipos: O termo inicial tem tipo $\text{Nat}$. Após a redução:
+
+   $$
+   (\lambda x:\text{Nat}\rightarrow\text{Nat}. x 3) (\lambda y:\text{Nat}. y * 2) \rightarrow_\beta (\lambda y:\text{Nat}. y * 2) 3 \rightarrow_\beta 3 * 2 \rightarrow 6
+   $$
+
+   O resultado final $6$ ainda é do tipo $\text{Nat}$.
+
+   Progresso: O termo inicial não está em forma normal e pode ser reduzido, como mostrado acima.
+
+**8**. Explique por que a decidibilidade da tipagem é importante para compiladores de linguagens de programação tipadas.
+
+   **Solução**: a decidibilidade da tipagem permite que compiladores verifiquem estaticamente se um programa está bem tipado. Isso é crucial para detectar erros de tipo antes da execução do programa, melhorando a segurança e a eficiência. Sem esta propriedade, seria impossível garantir que um programa está livre de erros de tipo em tempo de compilação.
+
+**9**. Dê um exemplo de um termo que é bem tipado no cálculo lambda tipado, mas que não teria uma representação direta em uma linguagem sem tipos de ordem superior (como C).
+
+   **Solução**: considere o termo:
+
+   $$
+   \lambda f:(\text{Nat}\rightarrow\text{Nat})\rightarrow\text{Nat}. f (\lambda x:\text{Nat}. x + 1)
+   $$
+
+   Este termo tem tipo $((\text{Nat}\rightarrow\text{Nat})\rightarrow\text{Nat})\rightarrow\text{Nat}$. Ele representa uma função que toma como argumento outra função (que por sua vez aceita uma função como argumento). Linguagens sem tipos de ordem superior, como C, não podem representar diretamente funções que aceitam ou retornam outras funções.
+
+**10**. Como a propriedade de preservação de tipos contribui para a segurança de execução em linguagens de programação baseadas no cálculo lambda tipado?
+
+   **Solução**: a preservação de tipos garante que, à medida que um programa é executado (ou seja, à medida que os termos são reduzidos), os tipos dos termos permanecem consistentes. Isso significa que operações bem tipadas no início da execução permanecerão bem tipadas durante toda a execução. Esta propriedade previne erros de tipo em tempo de execução, contribuindo significativamente para a segurança de execução ao garantir que operações inválidas (como tentar adicionar um booleano a um número) nunca ocorrerão durante a execução de um programa bem tipado.
 
 ## Correspondência de Curry-Howard
 
