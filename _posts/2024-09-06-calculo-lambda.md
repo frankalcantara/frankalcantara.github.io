@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
 beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
-lastmod: 2024-10-13T19:50:34.036Z
+lastmod: 2024-10-13T20:09:11.596Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -46,7 +46,7 @@ Esta função soma dois números. **Todas as funções lambda são, por definiç
 
 O trabalho de Church estabeleceu limites claros para computação, ajudando a revelar o que é e o que não é computável. Sobre esta formalização foi construída a ciência da computação. Seu objetivo era entender e formalizar a noção de _computabilidade_. Church buscava um modelo matemático preciso para computabilidade. Nesta busca ele criou uma forma de representar funções e operações matemáticas de forma abstrata, usando como base a lógica combinatória desenvolvida anos antes [^cita4].
 
-Na mesma época, [Alan Turing](https://en.wikipedia.org/wiki/Alan_Turing) desenvolveu a [máquina de Turing](https://en.wikipedia.org/wiki/Turing_machine), uma abordagem diferente para tratar a computabilidade. Apesar das diferenças, essas duas abordagens provaram ser equivalentes e, juntas, estabeleceram os alicerces da teoria da computação moderna. O objetivo de Church era capturar o conceito de _cálculo efetivo_[^cita5]. Seu trabalho foi uma das primeiras tentativas de formalizar matematicamente o ato de computar. Mais tarde, a equivalência entre o cálculo lambda e a máquina de Turing consolidou a ideia de que ambos podiam representar qualquer função computável, levando à formulação da [Tese de Church-Turing](https://en.wikipedia.org/wiki/Church%E2%80%93Turing_thesis). Afirmando que qualquer função computável pode ser resolvida pela máquina de touring e, equivalentemente, pelo cálculo lambda, fornecendo uma definição matemática precisa do que é, ou não, computável. 
+Na mesma época, [Alan Turing](https://en.wikipedia.org/wiki/Alan_Turing) desenvolveu a [máquina de Turing](https://en.wikipedia.org/wiki/Turing_machine), uma abordagem diferente para tratar a computabilidade. Apesar das diferenças, essas duas abordagens provaram ser equivalentes e, juntas, estabeleceram os alicerces da teoria da computação moderna. O objetivo de Church era capturar o conceito de _cálculo efetivo_[^cita5]. Seu trabalho foi uma das primeiras tentativas de formalizar matematicamente o ato de computar. Mais tarde, a equivalência entre o cálculo lambda e a máquina de Turing consolidou a ideia de que ambos podiam representar qualquer função computável, levando à formulação da [Tese de Church-Turing](https://en.wikipedia.org/wiki/Church%E2%80%93Turing_thesis). Afirmando que qualquer função computável pode ser resolvida pela máquina de touring e, equivalentemente, pelo cálculo lambda, fornecendo uma definição matemática precisa do que é, ou não, computável.
 
 A partir do meio da década de 1930, vários matemáticos e lógicos, como [Church](https://en.wikipedia.org/wiki/Alonzo_Church), [Turing](https://en.wikipedia.org/wiki/Alan_Turing), [Gödel](https://en.wikipedia.org/wiki/Kurt_G%C3%B6del) e [Post](https://en.wikipedia.org/wiki/Emil_Leon_Post), desenvolveram modelos diferentes para formalizar a computabilidade. Cada um desses modelos abordou o problema de uma perspectiva exclusiva.
 
@@ -172,7 +172,6 @@ O cálculo lambda usa uma notação específica para representar funções e ope
 - $\eta$-conversão: Expressa a extensionalidade de funções, denotada por $\rightarrow_\eta$.
 
 Estas notações e convenções formam a base da linguagem formal do cálculo lambda, permitindo a expressão precisa de funções e suas transformações.
-
 
 ## Convenção de Nomes e Variáveis Livres e Ligadas
 
@@ -330,7 +329,6 @@ $$ (\lambda x. \, x + 1) \, 2 $$
 
 Esses elementos básicos, _variáveis, abstração e aplicação_, formam a base do cálculo lambda. Eles permitem definir e aplicar funções de forma simples sem a necessidade de nomes ou símbolos adicionais.
 
-
 ## Estrutura Sintática - Gramática
 
 O cálculo lambda é um sistema formal para representar computação baseado na abstração de funções e sua aplicação. Sua sintaxe é simples e poderosa em termos de expressão. Enfatizando a simplicidade. Tudo é uma expressão (ou termo) e existem apenas três tipos de termos:
@@ -369,7 +367,7 @@ Uma forma de facilitar o entendimento de abstrações e aplicações é pensar e
 
 3. A árvore de construção de uma aplicação $s\,t# consiste em um nó rotulado por $@$ com duas subárvores: a subárvore esquerda é a árvore de construção de $s$ e a subárvore direita é a árvore de construção de $t$.
 
-Por exemplo, a árvore de construção do termo $\lambda xy.x\lambda z.yz$ será: 
+Por exemplo, a árvore de construção do termo $\lambda xy.x\lambda z.yz$ será:
 
  $$
 \begin{array}{c}
@@ -2035,63 +2033,63 @@ Talvez algumas aplicações em linguagem Haskell ajude a fixar os conceitos.
 
 1. **Eliminação de Código Redundante**
 
- A equivalência lambda permite a substituição de expressões por versões mais simples sem alterar o comportamento do programa. Por exemplo:
+   A equivalência lambda permite a substituição de expressões por versões mais simples sem alterar o comportamento do programa. Por exemplo:
 
- ```haskell
- -- Antes da otimização
- let x = (\y -> y + 1) 5 in x * 2
- -- Após a otimização (equivalente)
- let x = 6 in x * 2
- ```
+   ```haskell
+   -- Antes da otimização
+   let x = (\y -> y + 1) 5 in x * 2
+   -- Após a otimização (equivalente)
+   let x = 6 in x * 2
+   ```
 
- Aqui, o compilador pode realizar a $\beta$-redução $ (\lambda y. \, y + 1) 5\to_\beta 6$ em tempo de compilação, simplificando o código.
+   Aqui, o compilador pode realizar a $\beta$-redução $ (\lambda y. \, y + 1) 5\to_\beta 6$ em tempo de compilação, simplificando o código.
 
 2. **Transformações Seguras de Código**
 
- Os Compiladores podem aplicar refatorações automáticas baseadas em equivalências lambda. Por exemplo:
+   Os Compiladores podem aplicar refatorações automáticas baseadas em equivalências lambda. Por exemplo:
 
- ```haskell
- -- Antes da transformação
- map (\x -> f (g x)) xs
+   ```haskell
+   -- Antes da transformação
+   map (\x -> f (g x)) xs
 
- -- Após a transformação (equivalente)
- map (f . g) xs
- ```
+   -- Após a transformação (equivalente)
+   map (f . g) xs
+   ```
 
- Esta transformação, baseada na lei de composição $f \circ g \equiv \lambda x. \, f(g(x))$, pode melhorar a eficiência e legibilidade do código.
+   Esta transformação, baseada na lei de composição $f \circ g \equiv \lambda x. \, f(g(x))$, pode melhorar a eficiência e legibilidade do código.
 
 3. Inferência de Tipos
 
- A equivalência lambda é crucial em sistemas de tipos avançados. Considere:
+   A equivalência lambda é crucial em sistemas de tipos avançados. Considere:
 
- ```haskell
- -- Definição de uma função polimórfica f
- f :: (a -> b) -> ([a] -> [b])
- f g = map g
- -- Uso de f com a função show
- h :: ([Int] -> [String])
- h = f show
+   ```haskell
+   -- Definição de uma função polimórfica f
+   f :: (a -> b) -> ([a] -> [b])
+   f g = map g
+   -- Uso de f com a função show
+   h :: ([Int] -> [String])
+   h = f show
 
- -- Exemplo de uso
- main :: IO ()
- main = do
- let numbers = [1, 2, 3, 4, 5]
- print $ h numbers
- ```
+   -- Exemplo de uso
+   main :: IO ()
+   main = do
+   let numbers = [1, 2, 3, 4, 5]
+   print $ h numbers
+   ```
 
- Neste exemplo:
+   Neste exemplo:
 
- 1. A função `f` é definida de forma polimórfica. Ela aceita uma função `g` de tipo `a -> b` e retorna uma função que mapeia listas de a para listas de `b`.
+   1. A função `f` é definida de forma polimórfica. Ela aceita uma função `g` de tipo `a -> b` e retorna uma função que mapeia listas de a para listas de `b`.
 
- 2. A implementação de `f` usa `map`, que aplica a função `g` a cada elemento de uma lista.
+   2. A implementação de `f` usa `map`, que aplica a função `g` a cada elemento de uma lista.
 
- 3. A função `h` é definida como uma aplicação de `f` à função show.
+   3. A função `h` é definida como uma aplicação de `f` à função show.
 
- 4. O sistema de tipos de Haskell realiza as seguintes inferências: `show` tem o tipo `Show a \Rightarrow a \rightarrow String`. Ao aplicar `f` a show, o compilador infere que `a = Int` e `b = String`. Portanto, `h` tem o tipo `[Int] -> [String]`.
+   4. O sistema de tipos de Haskell realiza as seguintes inferências: `show` tem o tipo `Show a \Rightarrow a \rightarrow String`. Ao aplicar `f` a show, o compilador infere que `a = Int` e `b = String`. Portanto, `h` tem o tipo `[Int] -> [String]`.
 
- Esta inferência demonstra como a equivalência lambda é usada pelo sistema de tipos: `f show` é equivalente a `map show`. O tipo de `map show` é inferido como `[Int] -> [String]`. No `main`, vemos um exemplo de uso de `h`, que converte uma lista de inteiros em uma lista de _strings_.
+   Esta inferência demonstra como a equivalência lambda é usada pelo sistema de tipos: `f show` é equivalente a `map show`. O tipo de `map show` é inferido como `[Int] -> [String]`. No `main`, vemos um exemplo de uso de `h`, que converte uma lista de inteiros em uma lista de _strings_.
 
- O sistema de tipos usa equivalência lambda para inferir que `f show` é um termo válido do tipo `[Int] -> [String]`.
+   O sistema de tipos usa equivalência lambda para inferir que `f show` é um termo válido do tipo `[Int] -> [String]`.
 
 4. Avaliação Preguiçosa
 
@@ -2130,29 +2128,29 @@ A equivalência Lambda, ainda que muito importante, não resolve todos os proble
 
 2. **Efeitos Colaterais**: Em linguagens com efeitos colaterais, a equivalência lambda pode não preservar a semântica do programa. Por exemplo:
 
- ```haskell
- -- Estas expressões não são equivalentes em presença de efeitos colaterais
- f1 = (\x -> putStrLn ("Processando " ++ show x) >> return (x + 1))
- f2 = \x -> do
- putStrLn ("Processando " ++ show x)
- return (x + 1)
+   ```haskell
+   -- Estas expressões não são equivalentes em presença de efeitos colaterais
+   f1 = (\x -> putStrLn ("Processando " ++ show x) >> return (x + 1))
+   f2 = \x -> do
+   putStrLn ("Processando " ++ show x)
+   return (x + 1)
 
- main = do
- let x = f1 5
- y <- x
- print y
+   main = do
+      let x = f1 5
+      y <- x
+      print y
 
- let z = f2 5
- w <- z
- print w
- ```
+      let z = f2 5
+      w <- z
+      print w
+   ```
 
- Neste exemplo, `f1` e `f2` parecem equivalentes do ponto de vista do cálculo lambda puro. No entanto, em Haskell, que tem um sistema de I/O baseado em _monads_, elas se comportam diferentemente:
+   Neste exemplo, `f1` e `f2` parecem equivalentes do ponto de vista do cálculo lambda puro. No entanto, em Haskell, que tem um sistema de I/O baseado em _monads_, elas se comportam diferentemente:
 
- - `f1` cria uma ação de I/O que, quando executada, imprimirá a mensagem e retornará o resultado.
- - `f2` também cria uma ação de I/O, mas a mensagem será impressa imediatamente quando `f2` for chamada.
+   - `f1` cria uma ação de I/O que, quando executada, imprimirá a mensagem e retornará o resultado.
+   - `f2` também cria uma ação de I/O, mas a mensagem será impressa imediatamente quando `f2` for chamada.
 
- Ao executar este programa, você verá que a saída para `f1` e `f2` é diferente devido ao momento em que os efeitos colaterais (impressão) ocorrem.
+   Ao executar este programa, você verá que a saída para `f1` e `f2` é diferente devido ao momento em que os efeitos colaterais (impressão) ocorrem.
 
 3. **Complexidade Computacional**: Mesmo quando decidível, verificar equivalências pode ser computacionalmente caro, exigindo um equilíbrio entre otimização e tempo de compilação.
 
@@ -2813,11 +2811,11 @@ Aqui, utilizamos funções auxiliares como $\text{isZero}$, $\text{mult}$ (multi
 
 1. **Defina uma função auxiliar que recebe como parâmetro a função recursiva**:
 
- $$
- \text{Fac} = \lambda f.\, \lambda n.\, \text{if } (n = 0) \, \text{then } 1 \, \text{else } n \cdot (f\, (n - 1))
- $$
+   $$
+   \text{Fac} = \lambda f.\, \lambda n.\, \text{if } (n = 0) \, \text{then } 1 \, \text{else } n \cdot (f\, (n - 1))
+   $$
 
- Aqui, $\text{Fac}$ é uma função que, dado um função $f$, retorna outra função que calcula o fatorial usando $f$ para a chamada recursiva.
+   Aqui, $\text{Fac}$ é uma função que, dado um função $f$, retorna outra função que calcula o fatorial usando $f$ para a chamada recursiva.
 
 2. **Aplique o combinador $Y$ a $\text{Fac}$ para obter a função recursiva**:
 
@@ -3117,7 +3115,7 @@ A **Tese de Church-Turing** formalizou essa ideia, afirmando que qualquer funç�
 
 O cálculo lambda possui uma relação direta com a lógica matemática, especialmente através do **isomorfismo de Curry-Howard**. Esse isomorfismo cria uma correspondência entre provas matemáticas e programas computacionais. Em termos simples, uma prova de um teorema é um programa que constrói um valor a partir de uma entrada, e provar teoremas equivale a computar funções.
 
-Essa correspondência deu origem ao paradigma das _provas como programas_. 
+Essa correspondência deu origem ao paradigma das _provas como programas_.
 
 >O paradigma de _provas como programas_ é uma correspondência entre demonstrações matemáticas e programas de computador, também conhecida como **correspondência de Curry-Howard**. Segundo esse paradigma, cada prova em lógica formal corresponde a um programa e cada tipo ao qual uma prova pertence corresponde ao tipo de dado que um programa manipula. Essa ideia estabelece uma ponte entre a lógica e a teoria da computação, permitindo a formalização de demonstrações como estruturas computáveis e o desenvolvimento de sistemas de prova automáticos e seguros.
 
@@ -3503,9 +3501,9 @@ Haskell implementa diretamente muitos conceitos do cálculo lambda. Vejamos algu
    toInt :: Church Int -> Int
    toInt n = n (+1) 0
    main = do
-   print (toInt zero) -- Saída: 0
-   print (toInt one) -- Saída: 1
-   print (toInt two) -- Saída: 2
+      print (toInt zero) -- Saída: 0
+      print (toInt one) -- Saída: 1
+      print (toInt two) -- Saída: 2
    ```
 
 O cálculo lambda é a base teórica para muitos conceitos da programação funcional, especialmente em Haskell. Mas, para isso, precisamos considerar os tipos.
@@ -3518,7 +3516,7 @@ Uma característica do Cálculo Lambda Simplesmente Tipado é sua relação com 
 
 Geralmente não percebemos que, na matemática, uma a definição de uma função inclui a determinação dos tipos de dados que ela recebe e dos tipos de dados que ela devolve. Por exemplo, a função de quadrado aceita números inteiros $n$ como entradas e produz números inteiros $n^2$ como saídas. Considere uma função para determinar se um número é zero ou não, $isZero$, esta função aceitará números inteiros e produzirá valores booleanos como resposta. Fazemos isso, quase instintivamente, sem definir os domínios relacionados com os valores sobre os quais aplicaremos a função e com o resultado desta aplicação.
 
-Nesta seção, examinaremos os elementos do Cálculo Lambda Simplesmente Tipado, incluindo sua sintaxe, regras de tipagem e propriedades. Exploraremos como este sistema se relaciona com o design de linguagens de programação e a verificação formal de programas. A discussão incluirá exemplos matemáticos e práticos para ilustrar como os conceitos teóricos se traduzem em construções de programação e raciocínio lógico. Mas, antes precisamos entender como chegamos até aqui. 
+Nesta seção, examinaremos os elementos do Cálculo Lambda Simplesmente Tipado, incluindo sua sintaxe, regras de tipagem e propriedades. Exploraremos como este sistema se relaciona com o design de linguagens de programação e a verificação formal de programas. A discussão incluirá exemplos matemáticos e práticos para ilustrar como os conceitos teóricos se traduzem em construções de programação e raciocínio lógico. Mas, antes precisamos entender como chegamos até aqui.
 
 ## A Teoria dos Tipos Simples
 
@@ -3574,7 +3572,7 @@ Na verificação formal, a teoria dos tipos simples fornece a base para sistemas
 
 Ela também contribui para a semântica formal das linguagens de programação, oferecendo uma maneira rigorosa de descrever o comportamento das construções de linguagem.
 
-A teoria dos tipos simples é ligada à *Correspondência de Curry-Howard*, que estabelece uma relação entre proposições lógicas e tipos, e entre provas e programas. Esta correspondência trata da conexão entre lógica e computação, reforçando o papel dos tipos na verificação de propriedades em sistemas computacionais e matemáticos.
+A teoria dos tipos simples é ligada à _Correspondência de Curry-Howard_, que estabelece uma relação entre proposições lógicas e tipos, e entre provas e programas. Esta correspondência trata da conexão entre lógica e computação, reforçando o papel dos tipos na verificação de propriedades em sistemas computacionais e matemáticos.
 
 A **Teoria dos Tipos Simples** tem limitações. Uma delas é a expressividade limitada, pois o sistema não pode expressar diretamente conceitos como indução, que são usados em muitos contextos matemáticos. Outra limitação é a ausência de polimorfismo, já que não há suporte nativo para funções polimórficas, que operam de forma genérica sobre múltiplos tipos.
 
@@ -3856,9 +3854,7 @@ A aplicação das regras de tipagem, semântica estática, e das reduções, sem
 
    Esta propriedade garante que a redução preserva os tipos, assegurando que a avaliação de um termo bem tipado sempre resulta em um termo do mesmo tipo. Considere o seguinte termo no cálculo lambda simplesmente tipado:
 
-   $$
-   (\lambda x: \text{Nat}. x + 1) \, 3
-   $$
+   $$(\lambda x: \text{Nat}. x + 1) \, 3$$
 
    Aqui, temos uma função que incrementa um número natural ($x + 1$) e a aplicamos ao número $3$. A tipagem desse termo pode ser verificada da seguinte maneira: o termo $\lambda x: \text{Nat}. x + 1$ tem tipo $\text{Nat} \rightarrow \text{Nat}$, pois é uma função que recebe um número natural e retorna outro número natural; o número $3$ tem o tipo $\text{Nat}$. Agora, aplicamos a **regra de aplicação**:
 
@@ -3868,15 +3864,13 @@ A aplicação das regras de tipagem, semântica estática, e das reduções, sem
 
    Após a aplicação, o termo é reduzido usando a **redução beta**:
 
-   $$
-   (\lambda x: \text{Nat}. x + 1) \, 3 \rightarrow 3 + 1 \rightarrow 4
-   $$
+   $$(\lambda x: \text{Nat}. x + 1) \, 3 \rightarrow 3 + 1 \rightarrow 4$$
 
    Como resultado, o termo final é $4$, que tem tipo $\text{Nat}$. A preservação de tipos garante que, ao longo da redução, o tipo do termo permaneceu como $\text{Nat}$.
 
    Em Haskell, a preservação de tipos é garantida pelo sistema de tipos estático e pelo compilador. Considere o seguinte exemplo:
 
- ```haskell
+   ```haskell
    data Bool = True | False
 
    not :: Bool -> Bool
@@ -3885,7 +3879,7 @@ A aplicação das regras de tipagem, semântica estática, e das reduções, sem
 
    alwaysBool :: Bool
    alwaysBool = not (not True)
- ```
+   ```
 
    Neste exemplo, a função `not` tem o tipo `Bool -> Bool`, o que corresponde a $\text{Bool} \rightarrow \text{Bool}$ no cálculo lambda tipado. O compilador Haskell garante que: `not True` tem tipo `Bool` e  `not (not True)` também tem tipo `Bool`
 
@@ -3905,18 +3899,18 @@ A aplicação das regras de tipagem, semântica estática, e das reduções, sem
    (\lambda f: \text{Nat} \rightarrow \text{Nat}. \lambda x: \text{Nat}. f (f \, x)) \, (\lambda y: \text{Nat}. y + 1) \, 0
    $$
 
-   Este termo descreve uma função que aplica outra função $f$ duas vezes a um argumento $x$. Aplicamos essa função à função que incrementa $y$ e ao valor $0$. Vamos ver como o termo se reduz, 
+   Este termo descreve uma função que aplica outra função $f$ duas vezes a um argumento $x$. Aplicamos essa função à função que incrementa $y$ e ao valor $0$. Vamos ver como o termo se reduz,
 
    Primeiro, aplicamos:
 
       $$\lambda f: \text{Nat} \rightarrow \text{Nat}. \lambda x: \text{Nat}. f (f \, x)$ à função $\lambda y: \text{Nat}. y + 1$$
 
-      $$(\lambda f: \text{Nat} \rightarrow \text{Nat}. \lambda x: \text{Nat}. f (f \, x)) \, (\lambda y: \text{Nat}. y + 1) 
+      $$(\lambda f: \text{Nat} \rightarrow \text{Nat}. \lambda x: \text{Nat}. f (f \, x)) \, (\lambda y: \text{Nat}. y + 1)
       \rightarrow \lambda x: \text{Nat}. (\lambda y: \text{Nat}. y + 1) ((\lambda y: \text{Nat}. y + 1) \, x)$$
 
       Agora, aplicamos essa função ao valor $0$:
 
-      $$(\lambda x: \text{Nat}. (\lambda y: \text{Nat}. y + 1) ((\lambda y: \text{Nat}. y + 1) \, x)) \, 0 
+      $$(\lambda x: \text{Nat}. (\lambda y: \text{Nat}. y + 1) ((\lambda y: \text{Nat}. y + 1) \, x)) \, 0
       \rightarrow (\lambda y: \text{Nat}. y + 1) ((\lambda y: \text{Nat}. y + 1) \, 0)$$
 
       Avaliando a primeira aplicação:
@@ -4069,18 +4063,18 @@ As regras de tipagem no cálculo lambda tipado fornecem um sistema formal para g
 
    Haskell permite definir funções anônimas (lambdas) de forma similar ao cálculo lambda tipado:
 
-```haskell
+   ```haskell
    multiplyBy2 :: Int -> Int
    multiplyBy2 = \x -> x * 2
-```
+   ```
 
    Esta definição em Haskell é equivalente a $\lambda x:\text{Int}. x * 2$ no cálculo lambda tipado. O tipo Int -> Int corresponde a $A \rightarrow B$, onde tanto $A$ quanto $B$ são Int. O sistema de tipos do Haskell infere automaticamente que x é do tipo Int baseado no contexto da multiplicação.
    Podemos usar esta função assim:
 
-```haskell
+   ```haskell
    result :: Int
    result = multiplyBy2 3  -- Retorna 6
-```
+   ```
 
    Este exemplo demonstra como a abstração lambda do cálculo tipado se traduz diretamente para uma linguagem de programação funcional moderna.
 
@@ -4100,13 +4094,13 @@ As regras de tipagem no cálculo lambda tipado fornecem um sistema formal para g
 
    Em Haskell, a aplicação de função é direta e o sistema de tipos verifica automaticamente a compatibilidade:
 
-```haskell
+   ```haskell
    increment :: Int -> Int
    increment x = x + 1
 
    result :: Int
    result = increment 5  -- Retorna 6
-```
+   ```
 
    Neste exemplo, increment tem tipo `Int -> Int` (equivalente a $A \rightarrow B$), e 5 tem tipo Int (equivalente a $A$). A aplicação increment $5$ resulta em um `Int` (equivalente a $B$), demonstrando a regra de aplicação na prática.
 
@@ -4123,45 +4117,33 @@ Essas regras fornecem a base para a derivação de tipos em expressões complexa
 
    Considere o contexto:
 
-   $$
-   \Gamma = \{ x : \text{Nat},\, y : \text{Bool} \}
-   $$
+   $$\Gamma = \{ x : \text{Nat},\, y : \text{Bool} \}$$
 
    Aplicando a Regra da Variável teremos:
 
    Como $(x : \text{Nat}) \in \Gamma$, então:
 
-   $$
-   \Gamma \vdash x : \text{Nat}
-   $$
+   $$\Gamma \vdash x : \text{Nat}$$
 
    Como $(y : \text{Bool}) \in \Gamma$, então:
 
-   $$
-   \Gamma \vdash y : \text{Bool}
-   $$
+   $$\Gamma \vdash y : \text{Bool}$$
 
 **Exemplo**: Regra de Abstração
 
    Considere a função:
 
-   $$
-   \lambda x:\text{Nat}.\, x + 1
-   $$
+   $$\lambda x:\text{Nat}.\, x + 1$$
 
    Aplicação da regra:
 
    No contexto $\Gamma$ estendido com $x:\text{Nat}$:
 
-   $$
-   \Gamma,\, x:\text{Nat} \vdash x + 1 : \text{Nat}
-   $$
+   $$\Gamma,\, x:\text{Nat} \vdash x + 1 : \text{Nat}$$
 
    Aplicando a Regra de Abstração:
 
-   $$
-   \frac{\Gamma,\, x:\text{Nat} \vdash x + 1 : \text{Nat}}{\, \Gamma \vdash (\lambda x:\text{Nat}.\, x + 1) : \text{Nat} \rightarrow \text{Nat}}
-   $$
+   $$\frac{\Gamma,\, x:\text{Nat} \vdash x + 1 : \text{Nat}}{\, \Gamma \vdash (\lambda x:\text{Nat}.\, x + 1) : \text{Nat} \rightarrow \text{Nat}}$$
 
 **Exemplo**: Regra de Aplicação
 
@@ -4169,45 +4151,33 @@ Essas regras fornecem a base para a derivação de tipos em expressões complexa
 
    Tipagem da função $M$:
 
-   $$
-   \Gamma \vdash M : \text{Nat} \rightarrow \text{Nat}
-   $$
+   $$\Gamma \vdash M : \text{Nat} \rightarrow \text{Nat}$$
 
    Tipagem do argumento $N$:
 
-   $$
-   \Gamma \vdash 5 : \text{Nat}
-   $$
+   $$\Gamma \vdash 5 : \text{Nat}$$
 
    Aplicando a Regra de Aplicação:
 
-   $$
-   \frac{\Gamma\, \vdash\, M : \text{Nat} \rightarrow \text{Nat} \quad \Gamma\, \vdash\, 5 : \text{Nat}}{\, \Gamma\, \vdash\, M\, 5 : \text{Nat}}
-   $$
+   $$\frac{\Gamma\, \vdash\, M : \text{Nat} \rightarrow \text{Nat} \quad \Gamma\, \vdash\, 5 : \text{Nat}}{\, \Gamma\, \vdash\, M\, 5 : \text{Nat}}$$
 
 ### Exercícios Regras de Tipagem no Cálculo Lambda
 
 **1**. Dado o contexto:
 
-   $$
-   \Gamma = \{ z : \text{Bool} \}
-   $$
+   $$\Gamma = \{ z : \text{Bool} \}$$
 
    Use a **Regra da Variável** para derivar o tipo de $z$ no contexto $\Gamma$.
 
    **Solução**: dela **Regra da Variável**:
 
-   $$
-   \frac{z : \text{Bool} \in \Gamma}{\Gamma \vdash z : \text{Bool}}
-   $$
+   $$\frac{z : \text{Bool} \in \Gamma}{\Gamma \vdash z : \text{Bool}}$$
 
    Portanto, no contexto $\Gamma$, $z$ tem tipo $\text{Bool}$.
 
 **2**. Considere a função:
 
-   $$
-   \lambda y:\text{Nat}.\, y \times 2
-   $$
+   $$\lambda y:\text{Nat}.\, y \times 2$$
 
    Usando a **Regra de Abstração**, mostre que esta função tem o tipo $\text{Nat} \rightarrow \text{Nat}$.
 
@@ -4215,17 +4185,13 @@ Essas regras fornecem a base para a derivação de tipos em expressões complexa
 
    Aplicando a **Regra de Abstração**:
 
-   $$
-   \frac{\Gamma, y:\text{Nat} \vdash y \times 2 : \text{Nat}}{\Gamma \vdash \lambda y:\text{Nat}.\, y \times 2 : \text{Nat} \rightarrow \text{Nat}}
-   $$
+   $$\frac{\Gamma, y:\text{Nat} \vdash y \times 2 : \text{Nat}}{\Gamma \vdash \lambda y:\text{Nat}.\, y \times 2 : \text{Nat} \rightarrow \text{Nat}}$$
 
    Portanto, a função tem tipo $\text{Nat} \rightarrow \text{Nat}$.
 
 **3**. No contexto vazio $\Gamma = \{\}$, determine se a seguinte aplicação é bem tipada usando a **Regra de Aplicação**:
 
-   $$
-   (\lambda x:\text{Bool}.\, x)\, \text{true}
-   $$
+   $$(\lambda x:\text{Bool}.\, x)\, \text{true}$$
 
    **Solução**: aplicando a **Regra de Aplicação**:
 
@@ -4293,25 +4259,19 @@ Essas regras fornecem a base para a derivação de tipos em expressões complexa
 
 **6**. No contexto:
 
-   $$
-   \Gamma = \{ x : \text{Nat} \times \text{Bool} \}
-   $$
+   $$\Gamma = \{ x : \text{Nat} \times \text{Bool} \}$$
 
    Utilize a **Regra da Variável** para derivar o tipo de $x$ em $\Gamma$.
 
    **Solução**: pela **Regra da Variável**:
 
-   $$
-   \frac{x : \text{Nat} \times \text{Bool} \in \Gamma}{\Gamma \vdash x : \text{Nat} \times \text{Bool}}
-   $$
+   $$\frac{x : \text{Nat} \times \text{Bool} \in \Gamma}{\Gamma \vdash x : \text{Nat} \times \text{Bool}}$$
 
    Portanto, $x$ tem tipo $\text{Nat} \times \text{Bool}$ no contexto $\Gamma$.
 
 **7**. Mostre, usando a **Regra de Abstração**, que a função:
 
-   $$
-   \lambda p:\text{Nat} \times \text{Bool}.\, \pi_1\, p
-   $$
+   $$\lambda p:\text{Nat} \times \text{Bool}.\, \pi_1\, p$$
 
    Tem o tipo $(\text{Nat} \times \text{Bool}) \rightarrow \text{Nat}$.
 
@@ -4321,23 +4281,17 @@ Essas regras fornecem a base para a derivação de tipos em expressões complexa
 
    2. A operação $\pi_1\, p$ extrai o primeiro componente do par, portanto:
 
-      $$
-      \Gamma, p:\text{Nat} \times \text{Bool} \vdash \pi_1\, p : \text{Nat}
-      $$
+      $$\Gamma, p:\text{Nat} \times \text{Bool} \vdash \pi_1\, p : \text{Nat}$$
 
    3. Aplicando a **Regra de Abstração**:
 
-   $$
-   \frac{\Gamma, p:\text{Nat} \times \text{Bool} \vdash \pi_1\, p : \text{Nat}}{\Gamma \vdash \lambda p:\text{Nat} \times \text{Bool}.\, \pi_1\, p : (\text{Nat} \times \text{Bool}) \rightarrow \text{Nat}}
-   $$
+   $$\frac{\Gamma, p:\text{Nat} \times \text{Bool} \vdash \pi_1\, p : \text{Nat}}{\Gamma \vdash \lambda p:\text{Nat} \times \text{Bool}.\, \pi_1\, p : (\text{Nat} \times \text{Bool}) \rightarrow \text{Nat}}$$
 
    Portanto, a função tem tipo $(\text{Nat} \times \text{Bool}) \rightarrow \text{Nat}$.
 
 **8**. No contexto vazio, determine se a seguinte aplicação é bem tipada:
 
-   $$
-   (\lambda x:\text{Nat}.\, x + 1)\, \text{true}
-   $$
+   $$(\lambda x:\text{Nat}.\, x + 1)\, \text{true}$$
 
    Explique qual regra de tipagem é violada se a aplicação não for bem tipada.
 
@@ -4399,9 +4353,7 @@ Essas regras fornecem a base para a derivação de tipos em expressões complexa
 
    1. Primeiro, analisamos a função:
 
-      $$
-      \lambda f:\text{Nat} \rightarrow \text{Nat}.\, f\, (f\, 2)
-      $$
+      $$\lambda f:\text{Nat} \rightarrow \text{Nat}.\, f\, (f\, 2)$$
 
       - Dentro desta função, $f : \text{Nat} \rightarrow \text{Nat}$.
       - Sabemos que $2 : \text{Nat}$.
@@ -4410,15 +4362,11 @@ Essas regras fornecem a base para a derivação de tipos em expressões complexa
 
    2. Portanto, a função tem tipo:
 
-      $$
-      (\text{Nat} \rightarrow \text{Nat}) \rightarrow \text{Nat}
-      $$
+      $$(\text{Nat} \rightarrow \text{Nat}) \rightarrow \text{Nat}$$
 
    3. Agora, consideramos o argumento:
 
-      $$
-      \lambda x:\text{Nat}.\, x + 3
-      $$
+      $$\lambda x:\text{Nat}.\, x + 3$$
 
       - Esta função tem tipo $\text{Nat} \rightarrow \text{Nat}$.
 
@@ -4427,7 +4375,6 @@ Essas regras fornecem a base para a derivação de tipos em expressões complexa
       $$\frac{\Gamma \vdash \lambda f:\text{Nat} \rightarrow \text{Nat}.\, f\, (f\, 2) : (\text{Nat} \rightarrow \text{Nat}) \rightarrow \text{Nat} \quad \Gamma \vdash \lambda x:\text{Nat}.\, x + 3 : \text{Nat} \rightarrow \text{Nat}}{\Gamma \vdash (\lambda f:\text{Nat} \rightarrow \text{Nat}.\, f\, (f\, 2))\, (\lambda x:\text{Nat}.\, x + 3) : \text{Nat}}$$
 
    Assim, a expressão completa tem tipo $\text{Nat}$.
-
 
 ## Conversão e Redução no Cálculo Lambda Tipado
 
