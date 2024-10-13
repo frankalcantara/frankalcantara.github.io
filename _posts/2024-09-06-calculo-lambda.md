@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
 beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
-lastmod: 2024-10-13T04:29:55.673Z
+lastmod: 2024-10-13T19:50:34.036Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -1874,7 +1874,9 @@ Dois termos lambda $M$ e $N$ são considerados equivalentes, denotado por $M\to_
 
 2. **$\beta$-reduções**: que representam a aplicação de uma função ao seu argumento, o princípio básico da computação no cálculo lambda.
 
-3. **$\eta$-conversões**: que expressam a extensionalidade[^nota5] de funções, permitindo igualar duas funções que se comportam da mesma forma quando aplicadas a qualquer argumento.
+3. **$\eta$-conversões**: que expressam a extensionalidade de funções, permitindo igualar duas funções que se comportam da mesma forma quando aplicadas a qualquer argumento.
+
+>Extensionalidade refere-se ao princípio de que objetos ou funções são iguais se têm o mesmo efeito em todos os contextos possíveis. Em lógica, duas funções são consideradas extensionais se, para todo argumento, elas produzem o mesmo resultado. Em linguística, extensionalidade se refere a expressões cujo significado é determinado exclusivamente por seu valor de referência, sem levar em conta contexto ou conotação.
 
 Formalmente, a relação $\to_\beta$ é a menor relação de equivalência que satisfaz as seguintes propriedades fundamentais:
 
@@ -1910,103 +1912,103 @@ Vamos ver alguns exemplos de equivalência.
 
 1. **Identidade e aplicação trivial**:
 
- **Exemplo 1**:
+   **Exemplo 1**:
 
- $$ \lambda x.(\lambda y. \, y)x \to\_\beta \lambda x. \, x $$
+   $$ \lambda x.(\lambda y. \, y)x \to\_\beta \lambda x. \, x $$
 
- Aqui, a função interna $\lambda y. \, y$ é a função identidade, que simplesmente retorna o valor de $x$. Após a aplicação, obtemos $\lambda x. \, x$, que também é a função identidade.
+   Aqui, a função interna $\lambda y. \, y$ é a função identidade, que simplesmente retorna o valor de $x$. Após a aplicação, obtemos $\lambda x. \, x$, que também é a função identidade.
 
- **Exemplo 2**:
+   **Exemplo 2**:
 
- $$ \lambda z.(\lambda w.w)z \to\_\beta \lambda z.z $$
+   $$ \lambda z.(\lambda w.w)z \to\_\beta \lambda z.z $$
 
- Assim como no exemplo original, a função interna $\lambda w.w$ é a função identidade. Após a aplicação, o valor de $z$ é retornado.
+   Assim como no exemplo original, a função interna $\lambda w.w$ é a função identidade. Após a aplicação, o valor de $z$ é retornado.
 
- **Exemplo 3**:
+   **Exemplo 3**:
 
- $$ \lambda a.(\lambda b.b)a \to\_\beta \lambda a.a $$
+   $$ \lambda a.(\lambda b.b)a \to\_\beta \lambda a.a $$
 
- A função $\lambda b.b$ é aplicada ao valor $a$, retornando o próprio $a$. Isso demonstra mais uma aplicação da função identidade.
+   A função $\lambda b.b$ é aplicada ao valor $a$, retornando o próprio $a$. Isso demonstra mais uma aplicação da função identidade.
 
 2. **Função constante**:
 
- **Exemplo 1**:
+   **Exemplo 1**:
 
- $$ (\lambda x.\lambda y.x)M \, N \to\_\beta M $$
+   $$ (\lambda x.\lambda y.x)M \, N \to\_\beta M $$
 
- Neste exemplo, a função $\lambda x.\lambda y.x$ retorna sempre seu primeiro argumento, ignorando o segundo. Aplicando isso a dois termos $M$ e $N$, o resultado é simplesmente $M$.
+   Neste exemplo, a função $\lambda x.\lambda y.x$ retorna sempre seu primeiro argumento, ignorando o segundo. Aplicando isso a dois termos $M$ e $N$, o resultado é simplesmente $M$.
 
- **Exemplo 2**:
+   **Exemplo 2**:
 
- $$ (\lambda a.\lambda b.a)P Q \to\_\beta P $$
+   $$ (\lambda a.\lambda b.a)P Q \to\_\beta P $$
 
- A função constante $\lambda a.\lambda b.a$ retorna sempre o primeiro argumento ($P$), ignorando $Q$.
+   A função constante $\lambda a.\lambda b.a$ retorna sempre o primeiro argumento ($P$), ignorando $Q$.
 
- **Exemplo 3**:
+   **Exemplo 3**:
 
- $$ (\lambda u.\lambda v.u)A B \to\_\beta A $$
+   $$ (\lambda u.\lambda v.u)A B \to\_\beta A $$
 
- Aqui, o comportamento é o mesmo: o primeiro argumento ($A$) é retornado, enquanto o segundo ($B$) é ignorado.
+   Aqui, o comportamento é o mesmo: o primeiro argumento ($A$) é retornado, enquanto o segundo ($B$) é ignorado.
 
 3. **$\eta$-conversão**:
 
- **Exemplo 1**:
+   **Exemplo 1**:
 
- $$ \lambda x.(\lambda y.M)x \to\_\beta \lambda x.M[x/y] $$
+   $$ \lambda x.(\lambda y.M)x \to\_\beta \lambda x.M[x/y] $$
 
- Se $x$ não ocorre livre em $M$, podemos usar a $\eta$-conversão para "encurtar" a expressão, pois aplicar $M$ a $x$ não altera o comportamento da função. Este exemplo mostra como podemos internalizar a aplicação, eliminando a dependência desnecessária de $x$.
+   Se $x$ não ocorre livre em $M$, podemos usar a $\eta$-conversão para "encurtar" a expressão, pois aplicar $M$ a $x$ não altera o comportamento da função. Este exemplo mostra como podemos internalizar a aplicação, eliminando a dependência desnecessária de $x$.
 
- **Exemplo 2**:
+   **Exemplo 2**:
 
- $$ \lambda x.(\lambda z.N)x \to\_\beta \lambda x.N[x/z] $$
+   $$ \lambda x.(\lambda z.N)x \to\_\beta \lambda x.N[x/z] $$
 
- Similarmente, se $x$ não ocorre em $N$, a $\eta$-conversão simplifica a expressão para $\lambda x.N$.
+   Similarmente, se $x$ não ocorre em $N$, a $\eta$-conversão simplifica a expressão para $\lambda x.N$.
 
- **Exemplo 3**:
+   **Exemplo 3**:
 
- $$ \lambda f.(\lambda g.P)f \to\_\beta \lambda f.P[f/g] $$
+   $$ \lambda f.(\lambda g.P)f \to\_\beta \lambda f.P[f/g] $$
 
- Aqui, a $\eta$-conversão elimina a aplicação de $f$ em $P$, resultando em $\lambda f.P$.
+   Aqui, a $\eta$-conversão elimina a aplicação de $f$ em $P$, resultando em $\lambda f.P$.
 
 4. **Termo $\Omega$ (não-terminante)**:
 
- **Exemplo 1**:
+   **Exemplo 1**:
 
- $$ (\lambda x. \, xx)(\lambda x. \, xx) \to\_\beta (\lambda x. \, xx)(\lambda x. \, xx) $$
+   $$ (\lambda x. \, xx)(\lambda x. \, xx) \to\_\beta (\lambda x. \, xx)(\lambda x. \, xx) $$
 
- Este é o famoso _combinador $\Omega$_, que se reduz a si mesmo indefinidamente, criando um ciclo infinito de auto-aplicações. Apesar de não ter forma normal (não termina), ele é equivalente a si mesmo por definição.
+   Este é o famoso _combinador $\Omega$_, que se reduz a si mesmo indefinidamente, criando um ciclo infinito de auto-aplicações. Apesar de não ter forma normal (não termina), ele é equivalente a si mesmo por definição.
 
- **Exemplo 2**:
+   **Exemplo 2**:
 
- $$ (\lambda f.\, f\,f)(\lambda f.\,f\,f) \to\_\beta (\lambda f.\,f\,f)(\lambda f.\,f\,f) $$
+   $$ (\lambda f.\, f\,f)(\lambda f.\,f\,f) \to\_\beta (\lambda f.\,f\,f)(\lambda f.\,f\,f) $$
 
- Assim como o combinador $\Omega$, este termo também cria um ciclo infinito de auto-aplicação.
+   Assim como o combinador $\Omega$, este termo também cria um ciclo infinito de auto-aplicação.
 
- **Exemplo 3**:
+   **Exemplo 3**:
 
- $$ (\lambda u.\,u\,u)(\lambda u.\,u\,u) \to\_\beta (\lambda u.\,u\,u)(\lambda u.\,u\,u) $$
+   $$ (\lambda u.\,u\,u)(\lambda u.\,u\,u) \to\_\beta (\lambda u.\,u\,u)(\lambda u.\,u\,u) $$
 
- Outra variação do combinador $\Omega$, que também resulta em uma redução infinita sem forma normal.
+   Outra variação do combinador $\Omega$, que também resulta em uma redução infinita sem forma normal.
 
 5. **Composição de funções**:
 
- **Exemplo 1**:
+   **Exemplo 1**:
 
- $$ (\lambda f.\lambda g.\lambda x.\,f\,(g\,x))\,M \, N \to\_\beta \lambda x.\,M \, (N \, x)$$
+   $$ (\lambda f.\lambda g.\lambda x.\,f\,(g\,x))\,M \, N \to\_\beta \lambda x.\,M \, (N \, x)$$
 
- Neste caso, a composição de duas funções, $M$ e $N$, é expressa como uma função que aplica $N$ ao argumento $x$, e então aplica $M$ ao resultado. A redução demonstra como a composição de funções pode ser representada e simplificada no cálculo lambda.
+   Neste caso, a composição de duas funções, $M$ e $N$, é expressa como uma função que aplica $N$ ao argumento $x$, e então aplica $M$ ao resultado. A redução demonstra como a composição de funções pode ser representada e simplificada no cálculo lambda.
 
- **Exemplo 2**:
+   **Exemplo 2**:
 
- $$ (\lambda f.\lambda g.\lambda y.\,f\,(g\,y))\,A\,B \to\_\beta \lambda y.\,A\,(B\,y) $$
+   $$ (\lambda f.\lambda g.\lambda y.\,f\,(g\,y))\,A\,B \to\_\beta \lambda y.\,A\,(B\,y) $$
 
- A composição de $A$ e $B$ é aplicada ao argumento $y$, e o resultado de $By$ é então passado para $A$.
+   A composição de $A$ e $B$ é aplicada ao argumento $y$, e o resultado de $By$ é então passado para $A$.
 
- **Exemplo 3**:
+   **Exemplo 3**:
 
- $$(\lambda h.\lambda k.\lambda z.\,h\,(k\,z))\,P\,Q \to_\beta \lambda z.\,P\,(Q\,z)$$
+   $$(\lambda h.\lambda k.\lambda z.\,h\,(k\,z))\,P\,Q \to_\beta \lambda z.\,P\,(Q\,z)$$
 
- Similarmente, a composição de $P$ e $Q$ é aplicada ao argumento $z$, e o resultado de $Qz$ é passado para $P$.
+   Similarmente, a composição de $P$ e $Q$ é aplicada ao argumento $z$, e o resultado de $Qz$ é passado para $P$.
 
 ## Equivalência Lambda e seu Impacto em Linguagens de Programação
 
@@ -3097,11 +3099,13 @@ $$
 
 Turing demonstrou, por meio de um argumento de diagonalização, que tal função $f$ não pode existir. Esse resultado mostra que não é possível determinar, de forma algorítmica, o comportamento de todos os programas para todas as possíveis entradas..
 
-Outro problema indecidível, elucidado pelas descobertas em computabilidade, é o _décimo problema de Hilbert_[^nota1]. Esse problema questiona se existe um algoritmo que, dado um polinômio com coeficientes inteiros, possa determinar se ele possui soluções inteiras. Formalmente, o problema pode ser expresso assim:
+Outro problema indecidível, elucidado pelas descobertas em computabilidade, é o _décimo problema de Hilbert_. Esse problema questiona se existe um algoritmo que, dado um polinômio com coeficientes inteiros, possa determinar se ele possui soluções inteiras. Formalmente, o problema pode ser expresso assim:
 
 $$
 P(x_1, x_2, \dots, x_n) = 0
 $$
+
+>Os problemas de Hilbert são uma lista de 23 problemas matemáticos propostos por David Hilbert em 1900, durante o Congresso Internacional de Matemáticos em Paris. Esses problemas abordam questões fundamentais em várias áreas da matemática e estimularam muitas descobertas ao longo do século XX. Cada problema visava impulsionar a pesquisa e delinear os desafios mais importantes da matemática da época. Alguns dos problemas foram resolvidos, enquanto outros permanecem abertos ou foram provados como indecidíveis, como o **décimo problema de Hilbert**, que pergunta se existe um algoritmo capaz de determinar se um polinômio com coeficientes inteiros possui soluções inteiras.
 
 Em 1970, [Yuri Matiyasevich](Yuri Matiyasevich), em colaboração com [Julia Robinson](https://en.wikipedia.org/wiki/Julia_Robinson), [Martin Davis](<https://en.wikipedia.org/wiki/Martin_Davis_(mathematician)>) e [Hilary Putnam](https://en.wikipedia.org/wiki/Hilary_Putnam), provou que tal algoritmo não existe. Esse resultado teve implicações profundas na teoria dos números e demonstrou a indecidibilidade de um problema central na matemática.
 
@@ -3113,7 +3117,15 @@ A **Tese de Church-Turing** formalizou essa ideia, afirmando que qualquer funç�
 
 O cálculo lambda possui uma relação direta com a lógica matemática, especialmente através do **isomorfismo de Curry-Howard**. Esse isomorfismo cria uma correspondência entre provas matemáticas e programas computacionais. Em termos simples, uma prova de um teorema é um programa que constrói um valor a partir de uma entrada, e provar teoremas equivale a computar funções.
 
-Essa correspondência deu origem ao paradigma das _provas como programas_[^nota2] . O cálculo lambda define computações e serve como uma linguagem para representar e verificar a correção de algoritmos. Esse conceito se expandiu na pesquisa moderna e fundamenta muitos assistentes de prova e linguagens de programação com sistemas de tipos avançados, como o **Sistema F**[^nota3] e o **Cálculo de Construções**[^nota4].
+Essa correspondência deu origem ao paradigma das _provas como programas_. 
+
+>O paradigma de _provas como programas_ é uma correspondência entre demonstrações matemáticas e programas de computador, também conhecida como **correspondência de Curry-Howard**. Segundo esse paradigma, cada prova em lógica formal corresponde a um programa e cada tipo ao qual uma prova pertence corresponde ao tipo de dado que um programa manipula. Essa ideia estabelece uma ponte entre a lógica e a teoria da computação, permitindo a formalização de demonstrações como estruturas computáveis e o desenvolvimento de sistemas de prova automáticos e seguros.
+
+O cálculo lambda define computações e serve como uma linguagem para representar e verificar a correção de algoritmos. Esse conceito se expandiu na pesquisa moderna e fundamenta muitos assistentes de prova e linguagens de programação com sistemas de tipos avançados, como o **Sistema F** e o **Cálculo de Construções**.
+
+>O **Sistema F**, também conhecido como cálculo lambda polimórfico de segunda ordem, é uma extensão do cálculo lambda que permite quantificação universal sobre tipos. Desenvolvido por [Jean-Yves Girard](https://en.wikipedia.org/wiki/Jean-Yves_Girard) e [John Reynolds](https://en.wikipedia.org/wiki/John_C._Reynolds) de forma independente, o Sistema F é fundamental para a teoria da tipagem em linguagens de programação, permitindo expressar abstrações mais poderosas, como tipos genéricos e polimorfismo paramétrico. Ele serve como uma base para a formalização de muitos sistemas de tipos usados em linguagens funcionais modernas.
+>
+>O **Cálculo de Construções** é um sistema formal que combina elementos do cálculo lambda e da teoria dos tipos para fornecer uma base para a lógica construtiva. Ele foi desenvolvido por [Thierry Coquand](https://en.wikipedia.org/wiki/Thierry_Coquand) e é uma extensão do Sistema F, com a capacidade de definir tipos dependentes e níveis mais complexos de abstração. O cálculo de construções é a base da linguagem **Coq**, um assistente de prova amplamente utilizado para formalizar demonstrações matemáticas e desenvolver software verificado.
 
 O cálculo lambda continua a influenciar a ciência da computação. O desenvolvimento do cálculo lambda tipado levou à criação de sistemas de tipos complexos, fundamentais para a verificação formal de software e para linguagens de programação modernas, como Haskell, Coq e Agda. Esses sistemas garantem propriedades de programas, como segurança e correção, utilizando princípios do cálculo lambda.
 
@@ -4704,7 +4716,9 @@ A Correspondência de Curry-Howard, também conhecida como Isomorfismo de Curry-
 
 O isomorfismo de Curry-Howard tem raízes no trabalho realizado por um conjunto de pesquisadores ao longo do século XX. Contudo, [Haskell Curry](https://en.wikipedia.org/wiki/Haskell_Curry), em 1934, foi o primeiro a observar uma conexão entre a lógica combinatória e os tipos de funções, notando que os tipos dos combinadores correspondiam a tautologias na lógica proposicional.
 
-Um longo hiato se passou, até que [William Howard](https://en.wikipedia.org/wiki/William_Alvin_Howard), em 1969, expandiu esta observação para um isomorfismo completo entre lógica intuicionista[^nota6] e cálculo lambda tipado, mostrando que as regras de dedução natural correspondiam às regras de tipagem no cálculo lambda simplesmente tipado.
+Um longo hiato se passou, até que [William Howard](https://en.wikipedia.org/wiki/William_Alvin_Howard), em 1969, expandiu esta observação para um isomorfismo completo entre lógica intuicionista e cálculo lambda tipado, mostrando que as regras de dedução natural correspondiam às regras de tipagem no cálculo lambda simplesmente tipado.
+
+>A lógica intuicionista é um sistema formal de lógica desenvolvido por [Arend Heyting](https://en.wikipedia.org/wiki/Arend_Heyting), baseado nas ideias do matemático [L.E.J. Brouwer](https://en.wikipedia.org/wiki/L._E._J._Brouwer). Diferentemente da lógica clássica, a lógica intuicionista rejeita o princípio do terceiro excluído (A ou não-A) e a lei da dupla negação (não-não-A implica A). Ela exige provas construtivas, onde a existência de um objeto matemático só é aceita se houver um método para construí-lo. Esta abordagem tem implicações profundas na matemática e na ciência da computação, especialmente na teoria dos tipos e na programação funcional, onde se alinha naturalmente com o conceito de computabilidade.
 
 A correspondência foi posteriormente generalizada por [Jean-Yves Girard](https://en.wikipedia.org/wiki/Jean-Yves_Girard) e [John C. Reynolds](https://en.wikipedia.org/wiki/John_C._Reynolds), que independentemente, em 1971-72, estenderam o isomorfismo para incluir a quantificação de segunda ordem. Eles demonstraram que o **Sistema F** (cálculo lambda polimórfico) corresponde à lógica de segunda ordem, estabelecendo assim as bases para uma compreensão profunda da relação entre lógica e computação. Estas descobertas tiveram um impacto no desenvolvimento de linguagens de programação e sistemas de prova assistidos por computador.
 
@@ -4743,7 +4757,9 @@ Estas correspondências fornecem uma base sólida para o desenvolvimento de ling
 
 ### Provando: Implicação Lógica para Tipo de Função
 
-Nas lógicas construtivista e proposicional[^nota7], a implicação $A \rightarrow B$ significa que, se $A$ é verdadeiro, então $B$ também deve ser verdadeiro. Uma prova de $A \rightarrow B$ consiste em assumir $A$ e derivar $B$.
+Nas lógicas construtivista e proposicional, a implicação $A \rightarrow B$ significa que, se $A$ é verdadeiro, então $B$ também deve ser verdadeiro. Uma prova de $A \rightarrow B$ consiste em assumir $A$ e derivar $B$.
+
+>A lógica construtivista e a lógica proposicional diferem significativamente em seus princípios e métodos. Enquanto a lógica proposicional aceita a lei do terceiro excluído ($P \vee \neg P$) e provas por contradição, a lógica construtivista as rejeita em certos contextos, exigindo construções explícitas para provar existência. A lógica construtivista tem forte conexão com a teoria da computação, interpretando quantificadores de forma distinta e enfatizando métodos de prova algorítmicos. Essas diferenças impactam a formulação de teoremas matemáticos e têm implicações importantes para a fundação da matemática e ciência da computação.
 
 Usando apenas a matemática, podemos partir da definição da implicação:
 
@@ -4928,20 +4944,6 @@ A Correspondência de Curry-Howard estabelece uma conexão profunda entre o cál
 O estudo do cálculo lambda tipado e suas extensões continua a influenciar o design de linguagens de programação, sistemas de tipos avançados e métodos formais para o desenvolvimento de software. À medida que a complexidade dos sistemas de software aumenta, os princípios derivados do cálculo lambda tipado tornam-se cada vez mais relevantes para garantir a correção e a segurança dos programas.
 
 # Notas e Referências
-
-[^nota1]: Os problemas de Hilbert são uma lista de 23 problemas matemáticos propostos por David Hilbert em 1900, durante o Congresso Internacional de Matemáticos em Paris. Esses problemas abordam questões fundamentais em várias áreas da matemática e estimularam muitas descobertas ao longo do século XX. Cada problema visava impulsionar a pesquisa e delinear os desafios mais importantes da matemática da época. Alguns dos problemas foram resolvidos, enquanto outros permanecem abertos ou foram provados como indecidíveis, como o **décimo problema de Hilbert**, que pergunta se existe um algoritmo capaz de determinar se um polinômio com coeficientes inteiros possui soluções inteiras.
-
-[^nota2]: O paradigma de _provas como programas_ é uma correspondência entre demonstrações matemáticas e programas de computador, também conhecida como **correspondência de Curry-Howard**. Segundo esse paradigma, cada prova em lógica formal corresponde a um programa e cada tipo ao qual uma prova pertence corresponde ao tipo de dado que um programa manipula. Essa ideia estabelece uma ponte entre a lógica e a teoria da computação, permitindo a formalização de demonstrações como estruturas computáveis e o desenvolvimento de sistemas de prova automáticos e seguros.
-
-[^nota3]: O **Sistema F**, também conhecido como cálculo lambda polimórfico de segunda ordem, é uma extensão do cálculo lambda que permite quantificação universal sobre tipos. Desenvolvido por [Jean-Yves Girard](https://en.wikipedia.org/wiki/Jean-Yves_Girard) e [John Reynolds](https://en.wikipedia.org/wiki/John_C._Reynolds) de forma independente, o Sistema F é fundamental para a teoria da tipagem em linguagens de programação, permitindo expressar abstrações mais poderosas, como tipos genéricos e polimorfismo paramétrico. Ele serve como uma base para a formalização de muitos sistemas de tipos usados em linguagens funcionais modernas.
-
-[^nota4]: O **Cálculo de Construções** é um sistema formal que combina elementos do cálculo lambda e da teoria dos tipos para fornecer uma base para a lógica construtiva. Ele foi desenvolvido por [Thierry Coquand](https://en.wikipedia.org/wiki/Thierry_Coquand) e é uma extensão do Sistema F, com a capacidade de definir tipos dependentes e níveis mais complexos de abstração. O cálculo de construções é a base da linguagem **Coq**, um assistente de prova amplamente utilizado para formalizar demonstrações matemáticas e desenvolver software verificado.
-
-[^nota5]: Extensionalidade refere-se ao princípio de que objetos ou funções são iguais se têm o mesmo efeito em todos os contextos possíveis. Em lógica, duas funções são consideradas extensionais se, para todo argumento, elas produzem o mesmo resultado. Em linguística, extensionalidade se refere a expressões cujo significado é determinado exclusivamente por seu valor de referência, sem levar em conta contexto ou conotação.
-
-[^nota6]: A lógica intuicionista é um sistema formal de lógica desenvolvido por [Arend Heyting](https://en.wikipedia.org/wiki/Arend_Heyting), baseado nas ideias do matemático [L.E.J. Brouwer](https://en.wikipedia.org/wiki/L._E._J._Brouwer). Diferentemente da lógica clássica, a lógica intuicionista rejeita o princípio do terceiro excluído (A ou não-A) e a lei da dupla negação (não-não-A implica A). Ela exige provas construtivas, onde a existência de um objeto matemático só é aceita se houver um método para construí-lo. Esta abordagem tem implicações profundas na matemática e na ciência da computação, especialmente na teoria dos tipos e na programação funcional, onde se alinha naturalmente com o conceito de computabilidade.
-
-[^nota7]: A lógica construtivista e a lógica proposicional diferem significativamente em seus princípios e métodos. Enquanto a lógica proposicional aceita a lei do terceiro excluído ($P \vee \neg P$) e provas por contradição, a lógica construtivista as rejeita em certos contextos, exigindo construções explícitas para provar existência. A lógica construtivista tem forte conexão com a teoria da computação, interpretando quantificadores de forma distinta e enfatizando métodos de prova algorítmicos. Essas diferenças impactam a formulação de teoremas matemáticos e têm implicações importantes para a fundação da matemática e ciência da computação.
 
 [^cita1]: Schönfinkel, Moses. "Über die Bausteine der mathematischen Logik." *Mathematische Annalen*, vol. 92, no. 1-2, 1924, pp. 305-316.
 
