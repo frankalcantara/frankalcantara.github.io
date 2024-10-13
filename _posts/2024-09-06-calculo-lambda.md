@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
 beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
-lastmod: 2024-10-13T03:23:27.591Z
+lastmod: 2024-10-13T03:46:17.888Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -3143,29 +3143,29 @@ Definimos dois elementos básicos:
 
 1. Lista vazia ($\text{nil}$):
 
- $$ \text{nil} = \lambda c. \lambda n. n $$
+   $$ \text{nil} = \lambda c. \lambda n. n $$
 
- Esta função ignora o primeiro argumento e retorna o segundo.
+   Esta função ignora o primeiro argumento e retorna o segundo.
 
 2. Construtor de lista ($\text{cons}$):
 
- $$ \text{cons} = \lambda h. \lambda t. \lambda c. \lambda n. c \, h \, (t \, c \, n) $$
+   $$ \text{cons} = \lambda h. \lambda t. \lambda c. \lambda n. c \, h \, (t \, c \, n) $$
 
 O construtor recebe um elemento $h$ e uma lista $t$. Ele cria uma nova lista com $h$ na frente de $t$.
 
 Com $\text{nil}$ e $\text{cons}$, podemos criar e manipular listas. Por exemplo, a lista $[1, 2, 3]$ é representada como:
 
- $$ \text{cons} \, 1 \, (\text{cons} \, 2 \, (\text{cons} \, 3 \, \text{nil})) $$
+$$\text{cons} \, 1 \, (\text{cons} \, 2 \, (\text{cons} \, 3 \, \text{nil}))$$
 
 Chegamos a essa representação da seguinte forma:
 
  **Começamos com a lista vazia**:
 
- $$ \text{nil} = \lambda c. \lambda n. n $$
+ $$\text{nil} = \lambda c. \lambda n. n$$
 
  **Adicionamos o elemento 3**:
 
- $$ \text{cons} \, 3 \, \text{nil} = (\lambda h. \lambda t. \lambda c. \lambda n. c \, h \, (t \, c \, n)) \, 3 \, (\lambda c. \lambda n. n) $$
+ $$\text{cons} \, 3 \, \text{nil} = (\lambda h. \lambda t. \lambda c. \lambda n. c \, h \, (t \, c \, n)) \, 3 \, (\lambda c. \lambda n. n)$$
 
  Após a redução $\beta$, temos:
 
@@ -3570,9 +3570,36 @@ Para superar essas limitações, surgiram várias extensões da teoria. Os siste
 
 ## Estruturas de Dados e Segurança de Tipos
 
-A presença de tipos não altera de forma alguma a avaliação de uma expressão. Usaremos os tipos para restringir quais expressões iremos avaliar. Especificamente, o sistema de tipos para o cálculo lambda simplesmente tipado assegura que qualquer programa bem tipado não correrá o risco de ficar preso em um _loop_ infinito.
+A presença de tipos não altera de forma alguma a avaliação de uma expressão. Usaremos os tipos para restringir quais expressões iremos avaliar. Especificamente, o sistema de tipos para o cálculo lambda simplesmente tipado assegura que qualquer programa bem tipado não correrá o risco de ficar preso em um _loop_ infinito, ou simplesmente preso.
 
-O cálculo lambda não tipado é poderoso. Ele expressa todas as funções computáveis. Mas tem limites. Algumas expressões no cálculo lambda não tipado levam a paradoxos. O termo $\omega = \lambda x. \, x \, x$ aplicado a si mesmo resulta em redução infinita:
+No cálculo lambda não tipado estendido com booleanos, podemos encontrar termos bem formados que ficam _presos_ - ou seja, não são valores, mas não podem ser reduzidos. Por exemplo, considere o termo:
+
+$\text{true} \, (\lambda x. x)$
+
+Este termo é uma aplicação, então não é um valor. No entanto, não pode ser reduzido, pois nenhuma das regras de redução se aplica. Já que Não é uma aplicação de abstração, então a regra $\beta$ não se aplica. E também não é uma expressão condicional (if-then-else), então as regras de redução para booleanos não se aplicam.
+
+Outro exemplo é:
+
+$\text{if} \, (\lambda x. x) \, \text{then} \, \text{true} \, \text{else} \, \text{false}$
+
+Este termo também fica "preso" porque a condição do `if` não é um booleano, mas uma abstração. Não há regra de redução que possa ser aplicada a este termo.
+
+Por outro lado, Um loop infinito ocorre quando um termo pode ser reduzido indefinidamente sem nunca chegar a um valor. Um exemplo clássico é o termo omega:
+
+   $(\lambda x. \, x \, x) \, (\lambda x. \, x \, x)$
+
+   Este termo reduz a si mesmo indefinidamente:
+
+   $(\lambda x. \, x \, x) \, (\lambda x. \, x \, x) \to (\lambda x. \, x \, x) \, (\lambda x. \, x \, x) \to \ldots$
+
+Em uma linguagem de programação real, estes seriam considerados erros de tipo. Por exemplo, em Haskell, tentar definir funções equivalentes resultaria em erros de compilação:
+
+```haskell
+stuck1 = True (\x -> x)
+stuck2 = if (\x -> x) then True else False
+```
+
+Ou seja, o cálculo lambda não tipado é poderoso. Ele expressa todas as funções computáveis. Mas tem limites. Algumas expressões no cálculo lambda não tipado levam a paradoxos. O termo $\omega = \lambda x. \, x \, x$ aplicado a si mesmo resulta em redução infinita:
 
 $$(\lambda x. \, x \, x) (\lambda x. \, x \, x) \to (\lambda x. \, x \, x) (\lambda x. \, x \, x) \to ...$$
 
@@ -3965,6 +3992,20 @@ $$(\lambda x : \text{Nat}. \, x + 1) \, 2 \rightarrow 2 + 1 \rightarrow 3$$
 Esse processo de substituição e simplificação é a base para a computação de expressões no cálculo lambda tipado, e é fundamental para a avaliação de programas em linguagens de programação funcionais.
 
 ## Regras de Tipagem
+
+Antes de apresentarmos as regras formais do cálculo lambda tipado, é importante entender como chegamos a este sistema de tipos. O desenvolvimento do sistema de tipos foi um processo gradual, partindo de ideias simples e evoluindo para um sistema mais expressivo.
+
+O sistema de tipos do cálculo lambda tipado evoluiu gradualmente a partir de ideias mais simples. Inicialmente, poderíamos considerar um sistema muito básico com apenas dois tipos: $\text{bool}$ para valores booleanos e $\to$ para funções. Neste sistema primitivo, $T := \text{bool} \mid \to$, qualquer função seria simplesmente representada pelo tipo $\to$.
+
+Este sistema é excessivamente simplista. Considere as funções $\lambda x. \text{true}$ e $\lambda x. \lambda y. \text{false}$. Ambas teriam o tipo $\to$, apesar de serem fundamentalmente diferentes - a primeira retorna imediatamente um booleano, enquanto a segunda retorna outra função.
+
+Para resolver essa limitação, refinamos nossa ideia de tipos de função. Em vez de um tipo genérico $\to$, introduzimos tipos de função da forma $T_1 \to T_2$, onde $T_1$ é o tipo do input e $T_2$ é o tipo do output. Nossa definição de tipos agora se torna recursiva: $T := \text{bool} \mid T \to T$.
+
+Esta definição recursiva nos permite construir tipos mais complexos. Por exemplo, $(\text{bool} \to \text{bool}) \to \text{bool}$ representa uma função que aceita outra função (que mapeia booleanos para booleanos) e retorna um booleano.
+
+Com este sistema refinado, podemos diferenciar nossas funções anteriores: $\lambda x. \text{true}$ teria o tipo $T \to \text{bool}$ para qualquer tipo $T$, enquanto $\lambda x. \lambda y. \text{false}$ teria o tipo $T_1 \to (T_2 \to \text{bool})$ para quaisquer tipos $T_1$ e $T_2$.
+
+Este desenvolvimento nos leva a um sistema de tipos mais expressivo, capaz de capturar nuances importantes sobre o comportamento das funções. No entanto, ainda existem limitações. Por exemplo, não podemos expressar funções polimórficas como a função identidade $\lambda x. x$, que deve funcionar para qualquer tipo. Estas limitações motivarão desenvolvimentos futuros, como o polimorfismo paramétrico, que estudaremos mais adiante.
 
 As regras de tipagem no cálculo lambda tipado fornecem um sistema formal para garantir que as expressões sejam bem formadas. As principais regras são:
 
