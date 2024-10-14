@@ -1,8 +1,8 @@
 ---
 author: Frank
 beforetoc: |-
-  [Anterior](2024-09-24-18-6.-Computational-Geometry.md)
-  [Próximo](2024-09-24-20-8.-Combinatorics-and-Counting.md)
+  [Anterior](2024-09-24-19-7.-Number-Theory-and-Modular-Arithmetic.md)
+  [Próximo](2024-09-24-21-9.-String-Processing.md)
 categories:
   - Matemática
   - Linguagens Formais
@@ -13,8 +13,8 @@ featured: false
 image: assets/images/prog_dynamic.jpeg
 keywords:
   - Dynamic Programming
-  - C++ Algorithms
-lastmod: 2024-09-25T23:33:38.698Z
+  - Developer Tips
+lastmod: 2024-10-13T20:33:18.745Z
 layout: post
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
 published: false
@@ -23,15 +23,17 @@ slug: competitive-programming-techniques-insights
 tags:
   - Matemática
   - Linguagens Formais
-  - Programação Dinâmica
-title: 7. Number Theory and Modular Arithmetic
+title: 8. Combinatorics and Counting
 toc: true
 ---
 
-# 7. Number Theory and Modular Arithmetic
+# 8. Combinatorics and Counting
 
-- **Sieve of Eratosthenes**: Efficiently find all prime numbers up to a certain limit in $O(n \log \log n)$ time.
+**This is a work in progress, we will get there sooner or later.**
 
-- **Extended Euclidean Algorithm**: Solves Diophantine equations and finds modular inverses, commonly used in cryptography and problems requiring modular arithmetic.
 
-- **Modular Exponentiation**: Used in problems requiring efficient exponentiation of large numbers modulo a given integer.
+- **Permutations and Combinations**: Problems where the goal is to count or generate all possible arrangements or selections of elements.
+
+- **Inclusion-Exclusion Principle**: Used for counting the number of elements in the union of several sets, especially when there are overlaps between sets.
+
+- **Dynamic Counting Problems**: Counting the number of ways to reach a certain state or configuration, such as in grid traversal or combinatorial game problems.

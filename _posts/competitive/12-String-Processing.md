@@ -13,7 +13,7 @@ featured: false
 image: assets/images/prog_dynamic.jpeg
 keywords:
   - Dynamic Programming
-lastmod: 2024-09-25T23:33:57.954Z
+lastmod: 2024-10-13T20:33:17.781Z
 layout: post
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
 published: false
@@ -26,6 +26,9 @@ toc: true
 ---
 
 # 9. String Processing
+
+**This is a work in progress, we will get there sooner or later.**
+
 
 - **Pattern Matching**: Finding occurrences of a substring within a string, typically solved using algorithms like KMP (Knuth-Morris-Pratt) or the Z-algorithm.
 

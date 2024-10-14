@@ -1,31 +1,35 @@
 ---
 author: Frank
 beforetoc: |-
-  [Anterior](2024-09-24-12-Search-and-Sorting-Algorithms.md)
-  [Próximo](2024-09-24-14-Dynamic-Programming-%28DP%29.md)
+    [Anterior](2024-09-24-12-Search-and-Sorting-Algorithms.md)
+    [Próximo](2024-09-24-14-Dynamic-Programming-%28DP%29.md)
 categories:
-  - Matemática
-  - Linguagens Formais
-  - Programação
+    - Matemática
+    - Linguagens Formais
+    - Programação
 description: Dynamic Programming in C++ with practical examples, performance analysis, and detailed explanations to optimize your coding skills and algorithm efficiency.
 draft: null
 featured: false
 image: assets/images/prog_dynamic.jpeg
 keywords:
-  - Dynamic Programming
-lastmod: 2024-09-25T23:32:40.388Z
+    - Dynamic Programming
+lastmod: 2024-10-13T20:26:54.325Z
 layout: post
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
 published: false
 rating: 5
 slug: competitive-programming-techniques-insights
 tags:
-  - Matemática
+    - Matemática
 title: Data Structures
 toc: true
 ---
 
 # Data Structures
+
+
+**This is a work in progress, we will get there sooner or later.**
+
 
 ## Stacks and Queues
 

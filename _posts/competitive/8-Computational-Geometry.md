@@ -1,8 +1,8 @@
 ---
 author: Frank
 beforetoc: |-
-  [Anterior](2024-09-24-19-7.-Number-Theory-and-Modular-Arithmetic.md)
-  [Próximo](2024-09-24-21-9.-String-Processing.md)
+  [Anterior](2024-09-24-17-5.-Graphs-and-Graph-Theory.md)
+  [Próximo](2024-09-24-19-7.-Number-Theory-and-Modular-Arithmetic.md)
 categories:
   - Matemática
   - Linguagens Formais
@@ -12,9 +12,10 @@ draft: null
 featured: false
 image: assets/images/prog_dynamic.jpeg
 keywords:
-  - Dynamic Programming
+  - Programming Guide
+  - Code Comparison
   - Developer Tips
-lastmod: 2024-09-25T23:33:50.193Z
+lastmod: 2024-10-13T20:33:20.662Z
 layout: post
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
 published: false
@@ -22,15 +23,18 @@ rating: 5
 slug: competitive-programming-techniques-insights
 tags:
   - Matemática
-  - Linguagens Formais
-title: 8. Combinatorics and Counting
+title: 6. Computational Geometry
 toc: true
 ---
 
-# 8. Combinatorics and Counting
+# 6. Computational Geometry
 
-- **Permutations and Combinations**: Problems where the goal is to count or generate all possible arrangements or selections of elements.
 
-- **Inclusion-Exclusion Principle**: Used for counting the number of elements in the union of several sets, especially when there are overlaps between sets.
+**This is a work in progress, we will get there sooner or later.**
 
-- **Dynamic Counting Problems**: Counting the number of ways to reach a certain state or configuration, such as in grid traversal or combinatorial game problems.
+
+- **Convex Hull**: Given a set of points, determine the smallest convex polygon that contains all points. Algorithms like Graham’s scan and Jarvis march solve this problem.
+
+- **Intersection of Line Segments**: Problems that require determining whether line segments intersect, often solved with the sweep line algorithm.
+
+- **Area and Distance Calculations**: Problems involving the calculation of polygon areas, distances between points, or other geometric properties.

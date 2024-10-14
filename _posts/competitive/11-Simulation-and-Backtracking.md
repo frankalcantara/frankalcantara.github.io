@@ -1,8 +1,8 @@
 ---
 author: Frank
 beforetoc: |-
-  [Anterior](2024-09-24-22-10.-Simulation-and-Backtracking.md)
-  [Próximo](2024-09-24-24-12.-Ad-hoc-Problems.md)
+  [Anterior](2024-09-24-21-9.-String-Processing.md)
+  [Próximo](2024-09-24-23-11.-NP-Complete-Problems.md)
 categories:
   - Matemática
   - Linguagens Formais
@@ -13,8 +13,7 @@ featured: false
 image: assets/images/prog_dynamic.jpeg
 keywords:
   - Dynamic Programming
-  - Developer Tips
-lastmod: 2024-09-25T23:34:22.081Z
+lastmod: 2024-10-13T20:33:14.059Z
 layout: post
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
 published: false
@@ -22,16 +21,16 @@ rating: 5
 slug: competitive-programming-techniques-insights
 tags:
   - Matemática
-  - Performance Analysis
-  - Coding Examples
-  - Algorithm Optimization
-  - Practical Programming Guide
-title: 11. NP-Complete Problems
+title: 10. Simulation and Backtracking
 toc: true
 ---
 
-# 11. NP-Complete Problems
+# 10. Simulation and Backtracking
 
-- **Traveling Salesman Problem (TSP)**: Given a set of cities, determine the shortest possible route that visits each city exactly once and returns to the origin. Although NP-hard, approximate or heuristic solutions are commonly employed in competitions.
 
-- **Clique, Vertex Cover, and Subset Sum**: These are classical NP-complete problems, and while exact solutions are impractical for large instances, small versions or approximation algorithms often appear.
+**This is a work in progress, we will get there sooner or later.**
+
+
+- **Simulation Problems**: Involve modeling the behavior of a system over time, often requiring careful handling of edge cases and efficiency in handling large inputs.
+
+- **Backtracking**: Used for solving constraint satisfaction problems like Sudoku, N-Queens, and other combinatorial puzzles by trying possible solutions recursively.

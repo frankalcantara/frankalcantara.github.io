@@ -1,8 +1,8 @@
 ---
 author: Frank
 beforetoc: |-
-  [Anterior](2024-09-24-13-Data-Structures.md)
-  [Próximo](2024-09-24-15-Dynamic-Programming.md)
+  [Anterior](2024-09-24-22-10.-Simulation-and-Backtracking.md)
+  [Próximo](2024-09-24-24-12.-Ad-hoc-Problems.md)
 categories:
   - Matemática
   - Linguagens Formais
@@ -12,29 +12,29 @@ draft: null
 featured: false
 image: assets/images/prog_dynamic.jpeg
 keywords:
+  - Dynamic Programming
   - Developer Tips
-lastmod: 2024-09-25T23:32:48.661Z
+lastmod: 2024-09-25T23:34:22.081Z
 layout: post
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
 published: false
 rating: 5
 slug: competitive-programming-techniques-insights
 tags:
+  - Matemática
+  - Performance Analysis
+  - Coding Examples
+  - Algorithm Optimization
   - Practical Programming Guide
-title: Dynamic Programming (DP)
+title: 11. NP-Complete Problems
 toc: true
 ---
 
-# Dynamic Programming (DP)
+# 11. NP-Complete Problems
 
-## Knapsack Problem
+**This is a work in progress, we will get there sooner or later.**
 
-Select items to maximize a total value without exceeding a capacity. Variations include 0/1 Knapsack, fractional knapsack, and bounded knapsack.
 
-## Longest Increasing Subsequence
+- **Traveling Salesman Problem (TSP)**: Given a set of cities, determine the shortest possible route that visits each city exactly once and returns to the origin. Although NP-hard, approximate or heuristic solutions are commonly employed in competitions.
 
-Find the longest subsequence of a sequence where the elements are in increasing order. The time complexity can be reduced to $O(n \log n)$ using binary search in combination with dynamic programming.
-
-## Grid Pathfinding
-
-DP-based grid traversal problems, such as finding the minimum or maximum cost path from one corner of a grid to another, often appear.
+- **Clique, Vertex Cover, and Subset Sum**: These are classical NP-complete problems, and while exact solutions are impractical for large instances, small versions or approximation algorithms often appear.
