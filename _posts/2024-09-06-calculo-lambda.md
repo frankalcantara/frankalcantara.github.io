@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
 beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
-lastmod: 2024-10-14T21:26:30.036Z
+lastmod: 2024-10-14T23:23:03.052Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -687,17 +687,17 @@ $$\lambda x.\, \lambda y.\, x + y \to_\alpha \lambda x.\, \lambda z.\, x + z$$
 
 Agora, podemos aplicar a redução beta, substituindo $x$ por $y$:
 
-$$(\lambda x.\, \lambda z.\, x + z)\ y \to_\beta \lambda z.\, y + z$$
+$$(\lambda x.\, \lambda z.\, x + z)\,y \to_\beta \lambda z.\, y + z$$
 
 Desta forma é possível evitar a captura da variável livre $y$, e o significado original da expressão é preservado.
 
 **Exemplo 2**: Considere o termo:
 
-$$(\lambda x.\, x)\ (\lambda y.\, y)$$
+$$(\lambda x.\, x)\,(\lambda y.\, y)$$
 
 Aplicando a redução beta:
 
-$$(\lambda x.\, x)\ (\lambda y.\, y) \to_\beta \lambda y.\, y$$
+$$(\lambda x.\, x)\,(\lambda y.\, y) \to_\beta \lambda y.\, y$$
 
 Neste exemplo, não existe conflito de variáveis. A variável $y$ está ligada no termo $\lambda y.\, y$, e não havendo necessidade de aplicar a redução alfa.
 
@@ -711,7 +711,7 @@ $$\lambda x.\, \lambda x.\, x \to_\alpha \lambda x.\, \lambda z.\, z$$
 
 Assim, podemos aplicar a redução beta:
 
-$$(\lambda x.\, \lambda z.\, z)\ y \to_\beta \lambda z.\, z$$
+$$(\lambda x.\, \lambda z.\, z)\,y \to_\beta \lambda z.\, z$$
 
 Resultando em uma expressão clara, sem ambiguidade nas variáveis ligadas.
 
@@ -919,7 +919,7 @@ Ambos representam a mesma função, diferindo apenas nos nomes das variáveis li
 
 A redução beta é um mecanismo de computação no cálculo lambda que **permite simplificar expressões por meio da aplicação de funções aos seus argumentos**. Formalmente, a redução beta é definida como:
 
-$$(\lambda x.\, E)\ N \to_\beta [x/N]E$$
+$$(\lambda x.\, E)\,N \to_\beta [x/N]E$$
 
 A notação $[x/N]M$ representa a substituição de todas as ocorrências livres da variável $x$ no termo $E$ pelo termo $N$. Eventualmente, quando estudamos semântica denotacional ou provas formais usamos a notação $E[x := y]$.
 
@@ -930,9 +930,7 @@ _Exemplo de Redução Beta_{: legenda}
 
 Considere, por exemplo, o termo $E = (\lambda y.\, x + y)$ e o objetivo de substituir $x$ por $N = y$. Se fizermos a substituição diretamente, obteremos:
 
-$$
-[x/y]E = (\lambda y.\, y + y)
-$$
+$$[x/y]E = (\lambda y.\, y + y)$$
 
 Nesse caso, a variável livre $y$ em $N$ tornou-se ligada devido ao $\lambda y$ em $E$, resultando em captura de variável e alterando o significado original da expressão. Para evitar a captura, aplicamos uma redução alfa ao termo $E$, renomeando a variável ligada $y$ para uma nova variável que não apareça em $N$, como $z$:
 
@@ -960,21 +958,21 @@ Em suma, ao realizar a substituição $[x/N]E$, é essencial garantir que as var
 
 **Exemplo 1**: considere a expressão:
 
-$$(\lambda x.\, x + y)\ 3$$
+$$(\lambda x.\, x + y)\,3$$
 
 Aplicando a redução beta:
 
-$$(\lambda x.\, x + y)\ 3 \to_\beta 3 + y$$
+$$(\lambda x.\, x + y)\,3 \to_\beta 3 + y$$
 
 Neste caso, substituímos $x$ por $3$ no corpo da função $x + y$, resultando em $3 + y$. A variável $y$ permanece inalterada por ser uma variável livre.
 
 **Exemplo 2**: se houver risco de captura de variáveis, é necessário realizar uma redução alfa antes. Por exemplo:
 
-$$(\lambda x.\, \lambda y.\, x + y)\ y$$
+$$(\lambda x.\, \lambda y.\, x + y)\,y$$
 
 Aplicando a redução beta diretamente:
 
-$$(\lambda x.\, \lambda y.\, x + y)\ y \to_\beta \lambda y.\, y + y$$
+$$(\lambda x.\, \lambda y.\, x + y)\,y \to_\beta \lambda y.\, y + y$$
 
 Aqui, a variável livre $y$ no argumento foi capturada pela variável ligada $y$ na função interna. Para evitar isso, realizamos uma redução alfa renomeando a variável ligada $y$ para $z$:
 
@@ -982,7 +980,7 @@ Aqui, a variável livre $y$ no argumento foi capturada pela variável ligada $y$
 
 Agora podemos aplicar a redução beta:
 
-   $$(\lambda x.\, \lambda z.\, x + z)\ y \to_\beta \lambda z.\, y + z$$
+   $$(\lambda x.\, \lambda z.\, x + z)\,y \to_\beta \lambda z.\, y + z$$
 
 Assim, evitamos a captura da variável livre $y$, mantendo o significado original da expressão.
 
@@ -2273,95 +2271,123 @@ Por outro lado, a ordem normal pode ser ineficiente em termos de tempo, já que,
 
  $$(\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w))$$
 
- Na **ordem normal**, a redução ocorre da seguinte maneira:
+ Na ordem normal, a redução ocorre da seguinte maneira:
 
  $$(\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) \to_\beta \lambda y. \, y $$
 
  O argumento $((\lambda z. \, z \, z) (\lambda w. w w))$ não é avaliado, pois ele nunca é utilizado no corpo da função.
 
-**Exemplo 2**: considere a expressão:
+**Exemplo 2**: Considere a expressão:
 
-$$(\lambda f.\, (\lambda x.\, f\, (x\, x))\, (\lambda x.\, f\, (x\, x)))\ (\lambda y.\, y + 1)$$
+$$M = (\lambda f.\, (\lambda x.\, f\ (x\ x))\ (\lambda x.\, f\ (x\ x)))\ (\lambda y.\, y + 1)$$
 
-Na **ordem normal**, a redução ocorre da seguinte maneira: primeiro reduzimos o redex mais externo à esquerda:
+Vamos reduzir $M$ passo a passo usando a ordem normal.
 
-$$(\lambda f.\, (\lambda x.\, f\, (x\, x))\, (\lambda x.\, f\, (x\, x)))\ (\lambda y.\, y + 1) \to_\beta (\lambda x.\, (\lambda y.\, y + 1)\, (x\, x))\, (\lambda x.\, (\lambda y.\, y + 1)\, (x\, x))$$
+**Passo 1**: Identificamos o redex mais externo à esquerda:
 
-Aplicamos a função externa sem avaliar os argumentos internos imediatamente:
+$$\underline{(\lambda f.\, (\lambda x.\, f\ (x\ x))\ (\lambda x.\, f\ (x\ x)))\ (\lambda y.\, y + 1)}$$
 
-$$\to_\beta (\lambda y.\, y + 1)\, ((\lambda x.\, (\lambda y.\, y + 1)\, (x\, x))\, (\lambda x.\, (\lambda y.\, y + 1)\, (x\, x)))$$
+Aplicamos a redução beta ao redex, substituindo $f$ por $(\lambda y.\, y + 1)$:
 
-Continuamos reduzindo o redex mais externo:
+$$\to_\beta (\lambda x.\, (\lambda y.\, y + 1)\ (x\ x))\ (\lambda x.\, (\lambda y.\, y + 1)\ (x\ x))$$
 
-$$\to_\beta ((\lambda x.\, (\lambda y.\, y + 1)\, (x\, x))\, (\lambda x.\, (\lambda y.\, y + 1)\, (x\, x))) + 1$$
+**Passo 2**: Novamente, identificamos o redex mais externo à esquerda:
+
+$$\underline{(\lambda x.\, (\lambda y.\, y + 1)\ (x\ x))\ (\lambda x.\, (\lambda y.\, y + 1)\ (x\ x))}$$
+
+Aplicamos a redução beta, substituindo $x$ por $(\lambda x.\, (\lambda y.\, y + 1)\ (x\ x))$:
+
+$$\to_\beta (\lambda y.\, y + 1)\ \left( \underline{(\lambda x.\, (\lambda y.\, y + 1)\ (x\ x))\ (\lambda x.\, (\lambda y.\, y + 1)\ (x\ x))} \right)$$
+
+**Passo 3**: Dentro do argumento, identificamos o redex mais externo:
+
+$$\underline{(\lambda x.\, (\lambda y.\, y + 1)\ (x\ x))\ (\lambda x.\, (\lambda y.\, y + 1)\ (x\ x))}$$
+
+Aplicamos a redução beta novamente, substituindo $x$ por $(\lambda x.\, (\lambda y.\, y + 1)\ (x\ x))$:
+
+$$\to_\beta (\lambda y.\, y + 1)\ \left( (\lambda y.\, y + 1)\ \left( \underline{(\lambda x.\, (\lambda y.\, y + 1)\ (x\ x))\ (\lambda x.\, (\lambda y.\, y + 1)\ (x\ x))} \right) \right)$$
+
+**Passo 4**: Observamos que o processo está se repetindo. A cada aplicação da redução beta, o termo dentro dos parênteses permanece o mesmo, indicando um **loop infinito**:
+
+$$\to_\beta (\lambda y.\, y + 1)\ \left( (\lambda y.\, y + 1)\ \left( (\lambda y.\, y + 1)\ \left( \cdots \right) \right) \right)$$
+
+Na estratégia de ordem normal, a redução do termo $M$ não termina, pois entra em um ciclo infinito de reduções. Não é possível alcançar uma forma normal para $M$ usando esta estratégia, já que continuaremos expandindo o termo indefinidamente sem simplificá-lo a um resultado final. Este exemplo ilustra como a ordem normal pode levar a reduções infinitas em certos casos, especialmente quando lidamos com termos autoreferenciados ou combinadores que causam expansão infinita.
 
 Observamos que a expressão começa a repetir a si mesma, indicando um ciclo infinito. Contudo, na ordem normal, como o argumento não é necessário para o resultado final, a redução pode ser concluída sem avaliá-lo.
 
-**Exemplo 2**: considere a expressão:
+**Exemplo 2**: Considere a expressão:
 
-$$(\lambda x.\, (\lambda y.\, x))\ \left( (\lambda z.\, z + z)\ 3 \right)\ \left( (\lambda w.\, w\ w)\ (\lambda w.\, w\ w) \right)$$
+$$M = (\lambda x.\, (\lambda y.\, x))\,\left( (\lambda z.\, z + z)\,3 \right)\,\left( (\lambda w.\, w\,w)\,(\lambda w.\, w\,w) \right)$$
 
-Na **ordem normal**, a redução ocorre da seguinte maneira: reduzimos o redex mais externo à esquerda:
+Vamos reduzir $M$ passo a passo usando a ordem normal.
 
-$$(\lambda x.\, (\lambda y.\, x))\ \left( (\lambda z.\, z + z)\ 3 \right)\ \left( (\lambda w.\, w\ w)\ (\lambda w.\, w\ w) \right) \to_\beta (\lambda y.\, \left( (\lambda z.\, z + z)\ 3 \right) )$$
+**Passo 1**: Identificamos o redex mais externo à esquerda:
 
-A função resultante não utiliza o argumento $y$, portanto, o segundo argumento $\left( (\lambda w.\, w\ w)\ (\lambda w.\, w\ w) \right)$ não é avaliado.
+$$\underline{(\lambda x.\, (\lambda y.\, x))\,\left( (\lambda z.\, z + z)\,3 \right)}\ \left( (\lambda w.\, w\,w)\,(\lambda w.\, w\,w) \right)$$
 
-Calculamos a expressão $(\lambda z.\, z + z)\ 3$:
+Aplicamos a redução beta ao redex, substituindo $x$ por $\left( (\lambda z.\, z + z)\,3 \right)$:
 
-$$(\lambda z.\, z + z)\ 3 \to_\beta 3 + 3 = 6$$
+$$\to_\beta\ (\lambda y.\, \left( (\lambda z.\, z + z)\,3 \right))\ \left( (\lambda w.\, w\,w)\,(\lambda w.\, w\,w) \right)$$
 
-Portanto, o resultado final é:
+**Passo 2**: Observamos que a função resultante não utiliza o argumento $y$ no corpo da função. Portanto, o segundo argumento $\left( (\lambda w.\, w\,w)\,(\lambda w.\, w\,w) \right)$ não é avaliado na ordem normal, pois não é necessário.
+
+**Passo 3**: Calculamos a expressão $(\lambda z.\, z + z)\,3$ no corpo da função:
+
+$$(\lambda z.\, z + z)\,3\ \to_\beta\ 3 + 3 = 6$$
+
+**Passo 4**: Substituímos o resultado no corpo da função:
 
 $$\lambda y.\, 6$$
+
+Este é o resultado final da redução na ordem normal.
 
 ### Exercícios de Ordem Normal
 
 **1**: Reduza o seguinte termo usando a estratégia de **ordem normal**:
 
-$$M = (\lambda x.\, x)\ ((\lambda y.\, y\ y)\ (\lambda y.\, y\ y))$$
+$$M = (\lambda x.\, x)\,((\lambda y.\, y\,y)\,(\lambda y.\, y\,y))$$
 
 **Solução**: na **ordem normal**, reduzimos o redex mais externo à esquerda primeiro. Começamos por identificar o redex mais externo:
 
-$$(\lambda x.\, x)\ \underline{((\lambda y.\, y\ y)\ (\lambda y.\, y\ y))}$$
+$$(\lambda x.\, x)\,\underline{((\lambda y.\, y\,y)\,(\lambda y.\, y\,y))}$$
 
 Aplicamos a redução beta ao redex externo:
 
-$$\to_\beta \underline{((\lambda y.\, y\ y)\ (\lambda y.\, y\ y))}$$
+$$\to_\beta \underline{((\lambda y.\, y\,y)\,(\lambda y.\, y\,y))}$$
 
 Neste ponto, o termo resultante é:
 
-$$M' = (\lambda y.\, y\ y)\ (\lambda y.\, y\ y)$$
+$$M' = (\lambda y.\, y\,y)\,(\lambda y.\, y\,y)$$
 
 Novamente, identificamos o redex mais externo à esquerda:
 
-$$\underline{(\lambda y.\, y\ y)\ (\lambda y.\, y\ y)}$$
+$$\underline{(\lambda y.\, y\,y)\,(\lambda y.\, y\,y)}$$
 
 Aplicamos a redução beta:
 
-$$\to_\beta (\lambda y.\, y\ y)\ (\lambda y.\, y\ y)$$
+$$\to_\beta (\lambda y.\, y\,y)\,(\lambda y.\, y\,y)$$
 
 Observamos que o termo repete-se indefinidamente, indicando uma redução infinita. Ou seja, aplicando a estratégia de ordem normal, continuamos a reduzir o redex mais externo à esquerda. Neste caso, a redução não termina, indicando que o termo não possui forma normal.
 
 **2**: Reduza o seguinte termo usando a estratégia de **ordem normal**:
 
-$$M = (\lambda x.\, \lambda y.\, x)\ ((\lambda z.\, z + 1)\ 5)\ ((\lambda w.\, w \times 2)\ 3)$$
+$$M = (\lambda x.\, \lambda y.\, x)\,((\lambda z.\, z + 1)\,5)\,((\lambda w.\, w \times 2)\,3)$$
 
 **Solução**: começamos identificando o redex mais externo:
 
-$$\underline{(\lambda x.\, \lambda y.\, x)\ ((\lambda z.\, z + 1)\ 5)}\ ((\lambda w.\, w \times 2)\ 3)$$
+$$\underline{(\lambda x.\, \lambda y.\, x)\,((\lambda z.\, z + 1)\,5)}\,((\lambda w.\, w \times 2)\,3)$$
 
 Aplicamos a redução beta ao redex externo:
 
-$$\to_\beta \lambda y.\, \underline{((\lambda z.\, z + 1)\ 5)}$$
+$$\to_\beta \lambda y.\, \underline{((\lambda z.\, z + 1)\,5)}$$
 
 O termo resultante é:
 
-$$M' = \lambda y.\, ((\lambda z.\, z + 1)\ 5)$$
+$$M' = \lambda y.\, ((\lambda z.\, z + 1)\,5)$$
 
 Identificamos o próximo redex mais externo à esquerda no corpo:
 
-$$\lambda y.\, \underline{((\lambda z.\, z + 1)\ 5)}$$
+$$\lambda y.\, \underline{((\lambda z.\, z + 1)\,5)}$$
 
 Aplicamos a redução beta:
 
@@ -2371,23 +2397,23 @@ Realizamos a operação aritmética e encontramos a forma normal:
 
 $$\lambda y.\, 6$$
 
-O argumento $((\lambda w.\, w \times 2)\ 3)$ não é avaliado, pois não é utilizado no corpo da função resultante.
+O argumento $((\lambda w.\, w \times 2)\,3)$ não é avaliado, pois não é utilizado no corpo da função resultante.
 
 **3**: Reduza o seguinte termo usando a estratégia de **ordem normal**:
 
-$$M = (\lambda f.\, f\ 5)\ (\lambda x.\, x \times x)$$
+$$M = (\lambda f.\, f\,5)\,(\lambda x.\, x \times x)$$
 
 **Solução**: identificamos o redex mais externo:
 
-$$\underline{(\lambda f.\, f\ 5)\ (\lambda x.\, x \times x)}$$
+$$\underline{(\lambda f.\, f\,5)\,(\lambda x.\, x \times x)}$$
 
 Aplicamos a redução beta ao redex externo:
 
-$$\to_\beta \underline{(\lambda x.\, x \times x)\ 5}$$
+$$\to_\beta \underline{(\lambda x.\, x \times x)\,5}$$
 
 Identificamos o próximo redex:
 
-$$\underline{(\lambda x.\, x \times x)\ 5}$$
+$$\underline{(\lambda x.\, x \times x)\,5}$$
 
 Aplicamos a redução beta:
 
@@ -2401,23 +2427,23 @@ O termo reduzido na ordem normal resulta em $25$, que é a forma normal.
 
 **4**: Reduza o seguinte termo usando a estratégia de **ordem normal**:
 
-$$M = (\lambda x.\, x\ 4)\ (\lambda y.\, y\ \times\ y)$$
+$$M = (\lambda x.\, x\,4)\,(\lambda y.\, y\,\times\,y)$$
 
 **Solução**: na **ordem normal**, reduzimos o redex mais externo à esquerda primeiro. Começamos identificando o redex mais externo:
 
-$$\underline{(\lambda x.\, x\ 4)\ (\lambda y.\, y\ \times\ y)}$$
+$$\underline{(\lambda x.\, x\,4)\,(\lambda y.\, y\,\times\,y)}$$
 
 Aplicamos a redução beta ao redex externo:
 
-$$\to_\beta \underline{(\lambda y.\, y\ \times\ y)\ 4}$$
+$$\to_\beta \underline{(\lambda y.\, y\,\times\,y)\,4}$$
 
 Identificamos o próximo redex mais externo à esquerda:
 
-$$\underline{(\lambda y.\, y\ \times\ y)\ 4}$$
+$$\underline{(\lambda y.\, y\,\times\,y)\,4}$$
 
 Aplicamos a redução beta:
 
-$$\to_\beta 4\ \times\ 4$$
+$$\to_\beta 4\,\times\,4$$
 
 Realizamos a operação aritmética:
 
@@ -2427,39 +2453,39 @@ O termo reduzido na ordem normal resulta em $16$, nossa forma normal.
 
 **5**: Reduza o seguinte termo usando a estratégia de **ordem normal**:
 
-$$M = (\lambda x.\, \lambda y.\, y\ x)\ ((\lambda z.\, z\ z)\ (\lambda z.\, z\ z))\ 5$$
+$$M = (\lambda x.\, \lambda y.\, y\,x)\,((\lambda z.\, z\,z)\,(\lambda z.\, z\,z))\,5$$
 
 **Solução**: identificamos o redex mais externo:
 
-$$\underline{(\lambda x.\, \lambda y.\, y\ x)\ ((\lambda z.\, z\ z)\ (\lambda z.\, z\ z))}\ 5$$
+$$\underline{(\lambda x.\, \lambda y.\, y\,x)\,((\lambda z.\, z\,z)\,(\lambda z.\, z\,z))}\,5$$
 
 Aplicamos a redução beta ao redex externo:
 
-$$\to_\beta \lambda y.\, y\ \underline{((\lambda z.\, z\ z)\ (\lambda z.\, z\ z))}$$
+$$\to_\beta \lambda y.\, y\,\underline{((\lambda z.\, z\,z)\,(\lambda z.\, z\,z))}$$
 
-Observamos que o argumento $x = ((\lambda z.\, z\ z)\ (\lambda z.\, z\ z))$ é um termo que se reduz infinitamente. No entanto, na ordem normal, só o avaliamos se necessário.
+Observamos que o argumento $x = ((\lambda z.\, z\,z)\,(\lambda z.\, z\,z))$ é um termo que se reduz infinitamente. No entanto, na ordem normal, só o avaliamos se necessário.
 
 Aplicamos a função resultante ao argumento $5$:
 
-$$(\lambda y.\, y\ ((\lambda z.\, z\ z)\ (\lambda z.\, z\ z)))\ 5 \to_\beta \underline{5\ ((\lambda z.\, z\ z)\ (\lambda z.\, z\ z))}$$
+$$(\lambda y.\, y\,((\lambda z.\, z\,z)\,(\lambda z.\, z\,z)))\,5 \to_\beta \underline{5\,((\lambda z.\, z\,z)\,(\lambda z.\, z\,z))}$$
 
-Aqui, precisamos avaliar $((\lambda z.\, z\ z)\ (\lambda z.\, z\ z))$ para continuar. No entanto, esse termo não possui forma normal e leva a uma redução infinita. Portanto, a redução não termina, indicando que o termo não possui forma normal na ordem normal.
+Aqui, precisamos avaliar $((\lambda z.\, z\,z)\,(\lambda z.\, z\,z))$ para continuar. No entanto, esse termo não possui forma normal e leva a uma redução infinita. Portanto, a redução não termina, indicando que o termo não possui forma normal na ordem normal.
 
 **6**: Reduza o seguinte termo usando a estratégia de **ordem normal**:
 
-$$M = (\lambda x.\, \lambda y.\, x\ y)\ (\lambda w.\, w + 2)\ 3$$
+$$M = (\lambda x.\, \lambda y.\, x\,y)\,(\lambda w.\, w + 2)\,3$$
 
 **Solução**: identificamos o redex mais externo:
 
-$$\underline{(\lambda x.\, \lambda y.\, x\ y)\ (\lambda w.\, w + 2)}\ 3$$
+$$\underline{(\lambda x.\, \lambda y.\, x\,y)\,(\lambda w.\, w + 2)}\,3$$
 
 Aplicamos a redução beta ao redex externo:
 
-$$\to_\beta \lambda y.\, (\lambda w.\, w + 2)\ y$$
+$$\to_\beta \lambda y.\, (\lambda w.\, w + 2)\,y$$
 
 Aplicamos a função resultante ao argumento $3$:
 
-$$(\lambda y.\, (\lambda w.\, w + 2)\ y)\ 3 \to_\beta \underline{(\lambda w.\, w + 2)\ 3}$$
+$$(\lambda y.\, (\lambda w.\, w + 2)\,y)\,3 \to_\beta \underline{(\lambda w.\, w + 2)\,3}$$
 
 Aplicamos a redução beta ao redex:
 
@@ -2473,19 +2499,19 @@ O termo reduzido na ordem normal resulta em $5$, que é a forma normal.
 
 **7**: Reduza o seguinte termo usando a estratégia de **ordem normal**:
 
-$$M = (\lambda x.\, x)\ ((\lambda y.\, y + y)\ 4)$$
+$$M = (\lambda x.\, x)\,((\lambda y.\, y + y)\,4)$$
 
 **Solução**: na **ordem normal**, reduzimos o redex mais externo à esquerda primeiro. Começamos identificando o redex mais externo:
 
-$$(\lambda x.\, x)\ \underline{((\lambda y.\, y + y)\ 4)}$$
+$$(\lambda x.\, x)\,\underline{((\lambda y.\, y + y)\,4)}$$
 
 Aplicamos a redução beta ao redex externo:
 
-$$\to_\beta \underline{((\lambda y.\, y + y)\ 4)}$$
+$$\to_\beta \underline{((\lambda y.\, y + y)\,4)}$$
 
 Agora, identificamos o próximo redex:
 
-$$\underline{(\lambda y.\, y + y)\ 4}$$
+$$\underline{(\lambda y.\, y + y)\,4}$$
 
 Aplicamos a redução beta:
 
@@ -2495,13 +2521,13 @@ O termo reduzido na ordem normal resulta em $8$, que é a forma normal.
 
 **8**: Reduza o seguinte termo usando a estratégia de **ordem normal**:
 
-$$M = (\lambda x.\, 5)\ ((\lambda y.\, y\ y)\ (\lambda y.\, y\ y))$$
+$$M = (\lambda x.\, 5)\,((\lambda y.\, y\,y)\,(\lambda y.\, y\,y))$$
 
 **Solução**: na **ordem normal**, reduzimos o redex mais externo à esquerda primeiro.
 
 Identificamos o redex mais externo:
 
-$$\underline{(\lambda x.\, 5)\ ((\lambda y.\, y\ y)\ (\lambda y.\, y\ y))}$$
+$$\underline{(\lambda x.\, 5)\,((\lambda y.\, y\,y)\,(\lambda y.\, y\,y))}$$
 
 Aplicamos a redução beta ao redex externo:
 
@@ -2509,19 +2535,19 @@ $$\to_\beta 5$$
 
 O termo reduzido na ordem normal resulta em $5$, que é a forma normal.
 
-O argumento $((\lambda y.\, y\ y)\ (\lambda y.\, y\ y))$ não é avaliado, evitando uma redução infinita.
+O argumento $((\lambda y.\, y\,y)\,(\lambda y.\, y\,y))$ não é avaliado, evitando uma redução infinita.
 
 **9**: Reduza o seguinte termo usando a estratégia de **ordem normal**:
 
-$$M = (\lambda x.\, x\ 2)\ (\lambda y.\, 3)$$
+$$M = (\lambda x.\, x\,2)\,(\lambda y.\, 3)$$
 
 **Solução**: identificamos o redex mais externo:
 
-$$\underline{(\lambda x.\, x\ 2)\ (\lambda y.\, 3)}$$
+$$\underline{(\lambda x.\, x\,2)\,(\lambda y.\, 3)}$$
 
 Aplicamos a redução beta ao redex externo:
 
-$$\to_\beta \underline{(\lambda y.\, 3)\ 2}$$
+$$\to_\beta \underline{(\lambda y.\, 3)\,2}$$
 
 Aplicamos a redução beta ao redex interno:
 
@@ -2531,15 +2557,15 @@ O termo reduzido na ordem normal resulta em $3$, que é a forma normal.
 
 **10**: Reduza o seguinte termo usando a estratégia de **ordem normal**:
 
-$$M = (\lambda x.\, x\ 3)\ (\lambda y.\, y + 2)$$
+$$M = (\lambda x.\, x\,3)\,(\lambda y.\, y + 2)$$
 
 **Solução**: identificamos o redex mais externo:
 
-$$\underline{(\lambda x.\, x\ 3)\ (\lambda y.\, y + 2)}$$
+$$\underline{(\lambda x.\, x\,3)\,(\lambda y.\, y + 2)}$$
 
 Aplicamos a redução beta ao redex externo:
 
-$$\to_\beta \underline{(\lambda y.\, y + 2)\ 3}$$
+$$\to_\beta \underline{(\lambda y.\, y + 2)\,3}$$
 
 Aplicamos a redução beta ao redex interno:
 
@@ -2569,37 +2595,37 @@ A ordem aplicativa pode ser mais eficiente quando o resultado de um argumento é
 
 Considere a expressão:
 
-$$M = (\lambda f.\, (\lambda x.\, f\ (x\ x))\ (\lambda x.\, f\ (x\ x)))\ (\lambda y.\, y + 1)$$
+$$M = (\lambda f.\, (\lambda x.\, f\,(x\,x))\,(\lambda x.\, f\,(x\,x)))\,(\lambda y.\, y + 1)$$
 
 Na ordem aplicativa, avaliamos primeiro os argumentos internos antes de aplicar as funções externas. Avaliamos o argumento $\lambda y.\, y + 1$, mas como é uma função, não há redução a ser feita.
 
 Agora avaliamos o corpo da função:
 
-$$(\lambda x.\, f\ (x\ x))\ (\lambda x.\, f\ (x\ x))$$
+$$(\lambda x.\, f\,(x\,x))\,(\lambda x.\, f\,(x\,x))$$
 
-Avaliamos o argumento interno $(\lambda x.\, f\ (x\ x))$: não há redução possível, pois é uma função.
+Avaliamos o argumento interno $(\lambda x.\, f\,(x\,x))$: não há redução possível, pois é uma função.
 
 Aplicamos a função externa ao argumento interno:
 
-$$(\lambda x.\, f\ (x\ x))\ (\lambda x.\, f\ (x\ x)) \to_\beta f\ ((\lambda x.\, f\ (x\ x))\ (\lambda x.\, f\ (x\ x)))$$
+$$(\lambda x.\, f\,(x\,x))\,(\lambda x.\, f\,(x\,x)) \to_\beta f\,((\lambda x.\, f\,(x\,x))\,(\lambda x.\, f\,(x\,x)))$$
 
 Agora, substituímos $f$ por $\lambda y.\, y + 1$:
 
-$$f\ ((\lambda x.\, f\ (x\ x))\ (\lambda x.\, f\ (x\ x))) \to (\lambda y.\, y + 1)\ ((\lambda x.\, f\ (x\ x))\ (\lambda x.\, f\ (x\ x)))$$
+$$f\,((\lambda x.\, f\,(x\,x))\,(\lambda x.\, f\,(x\,x))) \to (\lambda y.\, y + 1)\,((\lambda x.\, f\,(x\,x))\,(\lambda x.\, f\,(x\,x)))$$
 
-Para continuar, precisamos avaliar $((\lambda x.\, f\ (x\ x))\ (\lambda x.\, f\ (x\ x)))$, que se expande infinitamente. Neste caso, a ordem aplicativa leva a uma redução infinita neste caso, pois tenta avaliar completamente os argumentos que causam loops infinitos.
+Para continuar, precisamos avaliar $((\lambda x.\, f\,(x\,x))\,(\lambda x.\, f\,(x\,x)))$, que se expande infinitamente. Neste caso, a ordem aplicativa leva a uma redução infinita neste caso, pois tenta avaliar completamente os argumentos que causam loops infinitos.
 
 **Exemplo 3**:
 
 Considere a expressão:
 
-$$M = (\lambda x.\, 42)\ \left( (\lambda z.\, z\ z)\ (\lambda z.\, z\ z) \right)$$
+$$M = (\lambda x.\, 42)\,\left( (\lambda z.\, z\,z)\,(\lambda z.\, z\,z) \right)$$
 
 Na ordem aplicativa, avaliamos primeiro o argumento antes de aplicar a função.
 
-Avaliamos o argumento $(\lambda z.\, z\ z)\ (\lambda z.\, z\ z)$: aplicamos a redução beta:
+Avaliamos o argumento $(\lambda z.\, z\,z)\,(\lambda z.\, z\,z)$: aplicamos a redução beta:
 
-$$(\lambda z.\, z\ z)\ (\lambda z.\, z\ z) \to_\beta (\lambda z.\, z\ z)\ (\lambda z.\, z\ z)$$
+$$(\lambda z.\, z\,z)\,(\lambda z.\, z\,z) \to_\beta (\lambda z.\, z\,z)\,(\lambda z.\, z\,z)$$
 
 Podemos observar que a redução é infinita, pois o termo se repete indefinidamente. Como o argumento não pode ser totalmente avaliado, a aplicação da função não ocorre, e a redução não termina.
 
