@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
 beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
-lastmod: 2024-10-14T23:23:03.052Z
+lastmod: 2024-10-14T23:57:13.117Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -1933,7 +1933,7 @@ A capacidade de expressar qualquer função computável usando apenas combinador
 
  Quando aplicamos $f$ a qualquer valor, o resultado será sempre $A$, pois o segundo argumento é ignorado.
 
- ****Exemplo 2**: Definindo a aplicação de uma função com o combinador $S$
+ **Exemplo 2**: Definindo a aplicação de uma função com o combinador $S$
 
  O combinador $S$ permite aplicar uma função a dois argumentos e combiná-los. Ele pode ser usado para definir uma função que aplica duas funções diferentes ao mesmo argumento e, em seguida, combina os resultados.
 
@@ -2399,7 +2399,7 @@ $$\lambda y.\, 6$$
 
 O argumento $((\lambda w.\, w \times 2)\,3)$ não é avaliado, pois não é utilizado no corpo da função resultante.
 
-**3**: Reduza o seguinte termo usando a estratégia de **ordem normal**:
+**3**: Reduza o seguinte termo usando a estratégia de ordem normal:
 
 $$M = (\lambda f.\, f\,5)\,(\lambda x.\, x \times x)$$
 
@@ -2575,61 +2575,93 @@ O termo reduzido na ordem normal resulta em $5$, nossa forma normal.
 
 ## Ordem Aplicativa (Applicative-Order)
 
-Na **ordem aplicativa**, os argumentos de uma função são avaliados antes da aplicação da função em si (redução interna). Esta é a estratégia mais comum em linguagens de programação imperativas e em algumas funcionais. Ela pode ser mais eficiente em termos de tempo, pois garante que os argumentos são avaliados apenas uma vez.
+Na **ordem aplicativa**, a estratégia de redução no cálculo lambda consiste em avaliar primeiro os argumentos de uma função antes de aplicar a função em si. Isso significa que a redução ocorre das partes mais internas para as mais externas (redução interna). Essa abordagem corresponde à **avaliação estrita**, onde os argumentos são completamente avaliados antes da aplicação da função.
 
-A ordem aplicativa pode ser mais eficiente quando o resultado de um argumento é utilizado várias vezes, pois evita a reavaliação. Por outro lado, pode resultar em não-terminação em casos onde a ordem normal encontraria uma solução. Além disso, pode desperdiçar recursos ao avaliar argumentos que não são necessários.
+A ordem aplicativa é utilizada em muitas linguagens de programação, especialmente nas imperativas e em algumas funcionais, como ML e Scheme. Uma vantagem dessa estratégia é que, quando o resultado de um argumento é utilizado várias vezes no corpo da função, a avaliação prévia evita reavaliações redundantes, podendo ser mais eficiente em termos de tempo.
 
-**Exemplo 1**:
+No entanto, a ordem aplicativa pode levar a problemas de não-terminação em casos onde a ordem normal encontraria uma solução. Além disso, pode resultar em desperdício de recursos ao avaliar argumentos que não são necessários para o resultado final da função.
 
- Utilizando a mesma expressão:
+**Exemplo 1**: Considere a expressão:
 
- $$(\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w))$$
+$$M = (\lambda x.\, x)\ ((\lambda y.\, y\ y)\ (\lambda y.\, y\ y))$$
 
- Na ordem aplicativa, primeiro o argumento $((\lambda z. \, z \, z) (\lambda w. w w))$ é avaliado antes da aplicação da função:
+Na **ordem aplicativa**, avaliamos primeiro o argumento: Avaliamos o argumento $N = ((\lambda y.\, y\ y)\ (\lambda y.\, y\ y))$:
 
- $$(\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) \to*\beta (\lambda x. \lambda y. \, y) ((\lambda w. w w) (\lambda w. w w)) \to*\beta ... $$
+Aplicamos a redução beta:
 
- Isso leva a uma avaliação infinita, uma vez que a expressão $((\lambda w. w w) (\lambda w. w w))$ entra em um loop sem fim.
+$$(\lambda y.\, y\ y)\ (\lambda y.\, y\ y) \to_\beta (\lambda y.\, y\ y)\ (\lambda y.\, y\ y)$$
 
-**Exemplo 2**:
+Observamos que o termo se repete indefinidamente, resultando em uma **redução infinita**. Como o argumento não pode ser completamente avaliado, a aplicação da função não ocorre, e a redução não termina.
 
-Considere a expressão:
+Na **ordem normal**, a função $(\lambda x.\, x)$ não utiliza o argumento além de retornar o próprio argumento. No entanto, na ordem aplicativa, a avaliação do argumento impede a conclusão da redução.
 
-$$M = (\lambda f.\, (\lambda x.\, f\,(x\,x))\,(\lambda x.\, f\,(x\,x)))\,(\lambda y.\, y + 1)$$
+**Exemplo 2**: considere a expressão:
 
-Na ordem aplicativa, avaliamos primeiro os argumentos internos antes de aplicar as funções externas. Avaliamos o argumento $\lambda y.\, y + 1$, mas como é uma função, não há redução a ser feita.
+$$M = (\lambda x.\, \lambda y.\, x)\ \left( (\lambda z.\, z + 1)\ 5 \right)\ \left( (\lambda w.\, w \times 2)\ 3 \right)$$
 
-Agora avaliamos o corpo da função:
+Na ordem aplicativa, procedemos da seguinte forma: avaliamos o primeiro argumento:
 
-$$(\lambda x.\, f\,(x\,x))\,(\lambda x.\, f\,(x\,x))$$
+ Calculamos $A = (\lambda z.\, z + 1)\ 5$:
 
-Avaliamos o argumento interno $(\lambda x.\, f\,(x\,x))$: não há redução possível, pois é uma função.
+$$(\lambda z.\, z + 1)\ 5 \to_\beta 5 + 1 = 6$$
 
-Aplicamos a função externa ao argumento interno:
+Avaliamos o segundo argumento:
 
-$$(\lambda x.\, f\,(x\,x))\,(\lambda x.\, f\,(x\,x)) \to_\beta f\,((\lambda x.\, f\,(x\,x))\,(\lambda x.\, f\,(x\,x)))$$
+Calculamos $B = (\lambda w.\, w \times 2)\ 3$:
 
-Agora, substituímos $f$ por $\lambda y.\, y + 1$:
+$$(\lambda w.\, w \times 2)\ 3 \to_\beta 3 \times 2 = 6$$
 
-$$f\,((\lambda x.\, f\,(x\,x))\,(\lambda x.\, f\,(x\,x))) \to (\lambda y.\, y + 1)\,((\lambda x.\, f\,(x\,x))\,(\lambda x.\, f\,(x\,x)))$$
+Aplicamos a função ao primeiro argumento avaliado:
 
-Para continuar, precisamos avaliar $((\lambda x.\, f\,(x\,x))\,(\lambda x.\, f\,(x\,x)))$, que se expande infinitamente. Neste caso, a ordem aplicativa leva a uma redução infinita neste caso, pois tenta avaliar completamente os argumentos que causam loops infinitos.
+$$(\lambda x.\, \lambda y.\, x)\ 6 \to_\beta \lambda y.\, 6$$
 
-**Exemplo 3**:
+Aplicamos a função resultante ao segundo argumento avaliado:
 
-Considere a expressão:
+$$(\lambda y.\, 6)\ 6 \to_\beta 6$$
 
-$$M = (\lambda x.\, 42)\,\left( (\lambda z.\, z\,z)\,(\lambda z.\, z\,z) \right)$$
+O resultado final é $6$. Note que ambos os argumentos foram avaliados, embora o segundo argumento não seja utilizado no resultado final. Isso exemplifica como a ordem aplicativa pode desperdiçar recursos ao avaliar argumentos desnecessários.
 
-Na ordem aplicativa, avaliamos primeiro o argumento antes de aplicar a função.
+**Exemplo 3**: considere a expressão:
 
-Avaliamos o argumento $(\lambda z.\, z\,z)\,(\lambda z.\, z\,z)$: aplicamos a redução beta:
+$$M = (\lambda x.\, 42)\ \left( (\lambda y.\, y\ y)\ (\lambda y.\, y\ y) \right)$$
 
-$$(\lambda z.\, z\,z)\,(\lambda z.\, z\,z) \to_\beta (\lambda z.\, z\,z)\,(\lambda z.\, z\,z)$$
+Na ordem aplicativa, avaliamos primeiro o argumento:
 
-Podemos observar que a redução é infinita, pois o termo se repete indefinidamente. Como o argumento não pode ser totalmente avaliado, a aplicação da função não ocorre, e a redução não termina.
+Avaliamos o argumento $N = (\lambda y.\, y\ y)\ (\lambda y.\, y\ y)$:
 
-Na ordem aplicativa, a avaliação do argumento leva a uma não-terminação, mesmo que a função externa simplesmente retorne um valor constante.
+Aplicamos a redução beta:
+
+$$(\lambda y.\, y\ y)\ (\lambda y.\, y\ y) \to_\beta (\lambda y.\, y\ y)\ (\lambda y.\, y\ y) \to_\beta \cdots$$
+
+O termo entra em uma **redução infinita**.
+
+Como o argumento não pode ser completamente avaliado, a aplicação da função não ocorre, e a redução não termina. Na **ordem normal**, a função $(\lambda x.\, 42)$ não utiliza o argumento $x$, portanto, o resultado seria imediatamente $42$, sem necessidade de avaliar o argumento que causa a não-terminação.
+
+**Exemplo 4**: considere a expressão:
+
+$$M = (\lambda f.\, f\ (f\ 2))\ (\lambda x.\, x \times x)$$
+
+Na ordem aplicativa, procedemos assim:
+
+Avaliamos o argumento $N = (\lambda x.\, x \times x)$, que é uma função e não requer avaliação adicional.
+
+Aplicamos a função externa ao argumento:
+
+$$(\lambda f.\, f\ (f\ 2))\ (\lambda x.\, x \times x) \to_\beta (\lambda x.\, x \times x)\ ((\lambda x.\, x \times x)\ 2)$$
+
+Avaliamos o argumento interno $(\lambda x.\, x \times x)\ 2$:
+
+Aplicamos a redução beta:
+
+$$(\lambda x.\, x \times x)\ 2 \to_\beta 2 \times 2 = 4$$
+
+Aplicamos a função externa ao resultado:
+
+$$(\lambda x.\, x \times x)\ 4 \to_\beta 4 \times 4 = 16$$
+
+O resultado final é $16$. Neste caso, a ordem aplicativa é eficiente, pois avalia os argumentos necessários e evita reavaliações.
+
+A escolha entre ordem aplicativa e ordem normal depende do contexto e das necessidades específicas da computação. Em situações onde todos os argumentos são necessários e podem ser avaliados sem risco de não-terminação, a ordem aplicativa pode ser preferível. No entanto, quando há possibilidade de argumentos não terminarem ou não serem necessários, a ordem normal oferece uma estratégia mais segura.
 
 ### Exercícios sobre Ordem Normal e Aplicativa
 
