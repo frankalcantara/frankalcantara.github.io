@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
 beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
-lastmod: 2024-10-13T20:09:11.596Z
+lastmod: 2024-10-14T21:26:30.036Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -30,7 +30,7 @@ date: 2024-09-08T21:19:30.955Z
 
 O cálculo lambda é uma teoria formal para expressar computação por meio da visão de funções como fórmulas. Um sistema para manipular funções como sentenças, desenvolvido por Alonzo [Church](https://en.wikipedia.org/wiki/Alonzo_Church) sob uma visão extensionista das funções na década de 1930. Nesta teoria usamos funções para representar todos os dados e operações. Em cálculo lambda, tudo é uma função e uma função simples será parecida com:
 
-$$ \lambda x. \, x + 1 $$
+$$\lambda x. \, x + 1 $$
 
 Esta função adiciona $1$ ao seu argumento. O $\lambda$ indica que estamos definindo uma função.
 
@@ -40,7 +40,7 @@ A década de 1930 encerrou a busca pela consistência da matemática iniciada na
 
 Estas questões surgiram como consequência dos trabalhos no campo da lógica e da lógica combinatória que despontaram no final do século XIX e começo do século XX. Em um momento crítico, Church ofereceu respostas, definindo que as funções computáveis são aquelas que podem ser expressas em cálculo lambda. Um exemplo simples de função computável seria:
 
-$$ \text{soma} = \lambda m. \lambda n. \, m + n $$
+$$\text{soma} = \lambda m. \lambda n. \, m + n $$
 
 Esta função soma dois números. **Todas as funções lambda são, por definição unárias e anônimas**. Assim, a função acima está sacrificando o rigor matemático para facilitar o entendimento. Esta é uma liberdade que será abusada descaradamente neste texto sempre com a esperança que estando mais próximo do que aprendemos nos ciclos básicos de estudo, será mais simples de entender.
 
@@ -56,7 +56,7 @@ Em 1936, [Alan Turing](https://en.wikipedia.org/wiki/Alan_Turing) propôs a máq
 
 A visão de Turing apresentava uma abordagem mecânica da computação, complementando a perspectiva simbólica de Church. Church havia provado que algumas funções não são computáveis. O _problema da parada_ é um exemplo famoso:
 
-$$ \text{parada} = \lambda f. \lambda x. \text{("f(x) para?")} $$
+$$\text{parada} = \lambda f. \lambda x. \text{("f(x) para?")} $$
 
 Church mostrou que esta função não pode ser expressa no cálculo lambda e, consequentemente, não pode ser computada. Church e Turing, não trabalharam sozinhos.
 
@@ -93,7 +93,7 @@ Essa notação equivale à notação matemática clássica, porém permite contr
 
 **No cálculo lambda, usamos _abstração_ e _aplicação_ para criar e aplicar funções.** Na criação de uma função que soma dois números, escrita como:
 
-$$ \lambda x. \lambda y. \, (x + y) $$
+$$\lambda x. \lambda y. \, (x + y)$$
 
 A notação $\lambda$ indica que estamos criando uma função anônima. Essa abstração explícita é menos comum na notação matemática clássica na qual, geralmente definimos funções nomeadas.
 
@@ -105,19 +105,19 @@ Sistemas mais avançados de cálculo lambda abordam essas limitações:
 
 1. **sistemas de tipos**: O cálculo lambda tipado adiciona tipos. O Sistema F permite polimorfismo:
 
-   $$ \Lambda \alpha. \lambda x:\alpha. \, x $$
+   $$\Lambda \alpha. \lambda x:\alpha. \, x $$
 
    Esta função é polimórfica. Funciona para qualquer tipo $\alpha$. Veremos cálculo lambda tipado, quanto ao Sistema F, ainda não tenho certeza.
 
 2. **Efeitos colaterais**: O cálculo lambda com efeitos colaterais permite mutação e I/O:
 
-   $$ \text{let} \; x = \text{ref} \; 0 \; \text{in} \; x := !x + 1 $$
+   $$\text{let} \; x = \text{ref} \; 0 \; \text{in} \; x := !x + 1 $$
 
    Esta expressão cria uma referência mutável e a incrementa.
 
 3. **Construções imperativas**: Algumas extensões adicionam estruturas de controle diretas:
 
-   $$ \text{if} \; b \; \text{then} \; e_1 \; \text{else} \; e_2 $$
+   $$\text{if} \; b \; \text{then} \; e_1 \; \text{else} \; e_2 $$
 
    Este é um condicional direto, não codificado como função.
 
@@ -209,15 +209,15 @@ No segundo termo, a variável livre $y$ foi capturada, o que altera o significad
 
 ## Diferença entre abstração e aplicação
 
-A abstração e a aplicação são os dois mecanismos fundamentais do cálculo lambda. Cada um tem um papel distinto. **A abstração $ \lambda x. \, E$ define uma função**. Aqui, $x$ é o parâmetro e $E$ é o corpo da função. Por exemplo:
+A abstração e a aplicação são os dois mecanismos fundamentais do cálculo lambda. Cada um tem um papel distinto. **A abstração $\lambda x. \, E$ define uma função**. Aqui, $x$ é o parâmetro e $E$ é o corpo da função. Por exemplo:
 
-- $ \lambda x. \, x + 5$ define uma função que soma $5$ ao seu argumento.
+- $\lambda x. \, x + 5$ define uma função que soma $5$ ao seu argumento.
 
 - $\lambda f. \lambda x. \, f \, (f \, x)$ define uma função que aplica o primeiro argumento duas vezes ao segundo.
 
 **A abstração cria funções no cálculo lambda**. A aplicação $M \, N$ aplica uma função a um argumento. Aqui, $M$ é a função e $N$ é o argumento. Por exemplo:
 
-- $ (\lambda x. \, x + 5) \, 3$ aplica a função $ \lambda x. \, x + 5$ ao valor $3$.
+- $(\lambda x. \, x + 5) \, 3$ aplica a função $\lambda x. \, x + 5$ ao valor $3$.
 
 - $(\lambda f. \lambda x. \, f \, (f \, x)) \, (\lambda y. \, y * 2) \, 3$ aplica a função de composição dupla à função de duplicação e ao número $3$.
 
@@ -313,19 +313,19 @@ O cálculo lambda usa uma notação simples para definir e aplicar funções. El
 
 **A abstração é a definição de uma função**. No cálculo lambda, uma abstração é escrita usando a notação $\lambda$, seguida de uma variável, um ponto e uma expressão. Por exemplo:
 
-$$ \lambda x. \, x^2 + 2x + 1 $$
+$$\lambda x. \, x^2 + 2x + 1 $$
 
 **Aqui, $\lambda x.$ indica que estamos criando uma função de $x$**. A expressão $x^2 + 2x + 1$ é o corpo da função. A abstração define uma função anônima que pode ser aplicada a um argumento.
 
-**A aplicação é o processo de usar uma função em um argumento**. No cálculo lambda, representamos a aplicação de uma função a um argumento colocando-os lado a lado. Por exemplo, se tivermos a função $ \lambda x. \, x + 1\,$ e quisermos aplicá-la ao valor $2$, escrevemos:
+**A aplicação é o processo de usar uma função em um argumento**. No cálculo lambda, representamos a aplicação de uma função a um argumento colocando-os lado a lado. Por exemplo, se tivermos a função $\lambda x. \, x + 1\,$ e quisermos aplicá-la ao valor $2$, escrevemos:
 
-$$ (\lambda x. \, x + 1) \, 2 $$
+$$(\lambda x. \, x + 1) \, 2 $$
 
 **O resultado da aplicação é a substituição da variável $x$ pelo valor $2$,** resultando em $2 + 1$ equivalente a $3$. Outros exemplos interessantes são:
 
-- **Identidade**: A função identidade, que retorna o próprio valor, é escrita como $ \lambda x. \, x$.
+- **Identidade**: A função identidade, que retorna o próprio valor, é escrita como $\lambda x. \, x$.
 
-- **Soma de Dois Números**: Uma função que soma dois números pode ser escrita como $ \lambda x. \lambda y. \, (x + y)$. Temos duas abstrações $\lambda x$ e $\lambda y$, com duas variáveis. Logo, $ \lambda x. \lambda y. \, (x + y)$ precisa ser aplicada a dois argumentos. Tal como: $ \lambda x. \lambda y. \, (x + y) 3 4$.
+- **Soma de Dois Números**: Uma função que soma dois números pode ser escrita como $\lambda x. \lambda y. \, (x + y)$. Temos duas abstrações $\lambda x$ e $\lambda y$, com duas variáveis. Logo, $\lambda x. \lambda y. \, (x + y)$ precisa ser aplicada a dois argumentos. Tal como: $\lambda x. \lambda y. \, (x + y) 3 4$.
 
 Esses elementos básicos, _variáveis, abstração e aplicação_, formam a base do cálculo lambda. Eles permitem definir e aplicar funções de forma simples sem a necessidade de nomes ou símbolos adicionais.
 
@@ -337,7 +337,7 @@ O cálculo lambda é um sistema formal para representar computação baseado na 
 
 2. **Aplicação**: A aplicação $(M \, N)$ indica a aplicação da função $M$ ao argumento $N$. A aplicação é associativa à esquerda, então $M \, N \, P$ é interpretado como $((M \, N) \, P)$.
 
-3. **Abstração**: A abstração $ (\lambda x. \, E)$ representa uma função que tem $x$ como parâmetro e $E$ como corpo. O símbolo $\lambda$ indica que estamos definindo uma função. Por exemplo, $ (\lambda x. \, x)$ é a função identidade.
+3. **Abstração**: A abstração $(\lambda x. \, E)$ representa uma função que tem $x$ como parâmetro e $E$ como corpo. O símbolo $\lambda$ indica que estamos definindo uma função. Por exemplo, $(\lambda x. \, x)$ é a função identidade.
 
 **A abstração é central no cálculo lambda**. Ela permite criar funções anonimamente, sem a necessidade de nomeá-las.
 
@@ -482,7 +482,7 @@ Existem duas estratégias principais para realizar a redução beta:
 
  $$\lambda x.\, f(x) \rightarrow f$$
 
-Essas regras garantem que a avaliação seja consistente. Por fim, mas não menos importante, o **Teorema de Church-Rosser** parece assegurar que, **se uma expressão pode ser reduzida de várias maneiras então todas chegarão à mesma forma normal, se existir**[^cita5].
+Essas regras garantem que a avaliação seja consistente. Por fim, mas não menos importante, o **Teorema de Church-Rosser** parece implicar que, **se uma expressão pode ser reduzida de várias maneiras então todas chegarão à mesma forma normal, se existir**[^cita5].
 
 ## Substituição
 
@@ -564,7 +564,7 @@ A semântica denotacional permite pensar em expressões lambda como funções ma
 
 ## Exercícios de Semântica Denotacional
 
-**1**: Dada a função lambda $ \lambda x. \, x + 2 $, aplique-a ao valor 5 e calcule o resultado.
+**1**: Dada a função lambda $\lambda x. \, x + 2 $, aplique-a ao valor 5 e calcule o resultado.
 
  **Solução:**
  Aplicando a função ao valor $5$, temos:
@@ -576,7 +576,7 @@ A semântica denotacional permite pensar em expressões lambda como funções ma
  **Solução:**
  A função pode ser representada como $\lambda x. \lambda y. \, x^2 + y^2$. Aplicando $x = 3$ e $y = 4$:
 
- $$ (\lambda x. \lambda y. \, x^2 + y^2) \, 3 \, 4 = 3^2 + 4^2 = 9 + 16 = 25 $$
+ $$(\lambda x. \lambda y. \, x^2 + y^2) \, 3 \, 4 = 3^2 + 4^2 = 9 + 16 = 25 $$
 
 **3**: Crie uma expressão lambda para a função identidade $I(x) = x$ e aplique-a ao valor $10$.
 
@@ -634,38 +634,96 @@ A semântica denotacional permite pensar em expressões lambda como funções ma
 
  $$(\lambda x. \lambda y. \, x^2 - y^2) \, 9 \, 3 = 9^2 - 3^2 = 81 - 9 = 72$$
 
-## Redução (Alfa-Redução)
+# Técnicas de Redução, Confluência e Combinadores
 
-A redução $\alpha$ (ou $\alpha$-conversão) é o processo de renomear variáveis ligadas. Isso garante que funções que diferem apenas nos nomes de suas variáveis ligadas sejam tratadas como equivalentes. Formalmente, temos:
+As técnicas de redução no cálculo lambda são mecanismos para simplificar e avaliar expressões lambda. Estas incluem a redução alfa e a redução beta, que são utilizadas para manipular e computar expressões lambda. Essas técnicas são relevantes tanto para a teoria quanto para a implementação prática de sistemas baseados em lambda, incluindo linguagens de programação funcional. A compreensão dessas técnicas permite entender como funções são definidas, aplicadas e transformadas no contexto do cálculo lambda. A redução alfa lida com a renomeação de variáveis ligadas, enquanto a redução beta trata da aplicação de funções a argumentos.
 
-$$\lambda x.M \to_\alpha \lambda y.[y/x]\,E$$
+O Teorema de Church-Rosser, também conhecido como propriedade de confluência, estabelece a consistência do processo de redução no cálculo lambda. Currying, por sua vez, é uma técnica que transforma funções com múltiplos argumentos em uma sequência de funções de um único argumento. Os combinadores, como `S`, `K`, e `I`, são expressões lambda sem variáveis livres que permitem a construção de funções complexas a partir de blocos básicos. Esses conceitos complementam as técnicas de redução e formam a base teórica para a manipulação e avaliação de expressões no cálculo lambda.
 
-Aqui, $[y/x]\,E$ significa substituir todas as ocorrências livres de $x$ em $M$ por $y$, onde $y$ não ocorre livre em $E$. Essa condição é essencial para evitar a captura de variáveis livres.
+## Redução Alfa
 
-**Exemplo**:
+A redução alfa, ou _alpha reduction_, é o processo de renomear variáveis ligadas em termos lambda, de forma a preservar o comportamento funcional dos termos. **Dois termos são equivalentes sob redução alfa se diferem apenas nos nomes de suas variáveis ligadas**.
 
-$$\lambda x.\lambda y.x \, y \to_\alpha \lambda z.\lambda y.z \, y \to_\alpha \lambda w.\lambda v.w \, v$$
+A atenta leitora deve considerar um termo lambda $\lambda x.\, E$, onde $E$ é o corpo do termo. A redução alfa permitirá a substituição da variável ligada $x$ por outra variável, digamos $y$, desde que $y$ não apareça livre em $E$. O termo resultante é $\lambda y.\, E[x \mapsto y]$, onde a notação $E[x \mapsto y]$ indica a substituição de todas as ocorrências de $x$ por $y$ em $E$. Formalmente:
 
-A redução $\alpha$ é importante por:
+Seja $\lambda x.\, E$ um termo lambda, teremos:
 
-1. **Evitar conflitos de nomes** durante operações como a redução $\Beta$, garantindo que variáveis ligadas não interfiram com variáveis livres.
+$$\lambda x.\, E \to_\alpha \lambda y.\, E[x \mapsto y]$$
 
-2. **Uniformizar funções** que diferem apenas nos nomes de suas variáveis ligadas, simplificando a identificação de equivalências semânticas.
+com a condição:
 
-3. **Ser a base para escopos léxicos** em linguagens de programação, onde renomear variáveis ligadas garante a correta correspondência entre variáveis e seus valores.
+$$y \notin \text{FV}(E)$$
 
-A redução $\alpha$ está intimamente ligada ao conceito de escopo léxico em linguagens de programação. **O escopo léxico garante que o significado de uma variável seja determinado por sua posição no texto do programa, não pela ordem de execução.** A redução $\alpha$ indica que podemos renomear variáveis sem alterar o comportamento do programa, desde que respeitemos as regras de escopo.
+Onde $\text{FV}(E)$ representa o conjunto de variáveis livres em $E$, e $E[x \mapsto y]$ indica o termo resultante da substituição de todas as ocorrências da variável $x$ por $y$ em $E$, respeitando as ligações de variáveis para evitar a captura. A substituição $E[x \mapsto y]$ é definida formalmente por indução na estrutura de $E$. As possibilidades que devemos analisar são:
 
-Em linguagens funcionais como Haskell ou OCaml, a redução $\alpha$ ocorre implicitamente. Por exemplo, as seguintes definições são tratadas como equivalentes em Haskell:
+1. Se $E$ é uma variável, então se $E$ é igual a $x$, a substituição resulta em $y$; caso contrário, $E[x \mapsto y]$ é o próprio $E$.
 
-```haskell
-f = \x -> x + 1
-f = \y -> y + 1
-```
+2. Se $E$ é uma aplicação $E_1\, E_2$, a substituição será aplicada a ambos os componentes, ou seja, $E[x \mapsto y] = E_1[x \mapsto y]\, E_2[x \mapsto y]$. Finalmente,
 
-Ambas representam a mesma função, e a renomeação da variável não altera seu comportamento.
+3. Se $E$ é uma abstração $\lambda z.\, E'$, a situação depende da relação entre $z$ e $x$.
 
-### Exercícios de Redução Alfa no Cálculo Lambda
+   - Se $z$ é igual a $x$, então $E[x \mapsto y]$ é $\lambda z.\, E'$, pois $x$ está ligada por $\lambda z$ e não deve ser substituída dentro de seu próprio escopo.
+   - Se $z$ é diferente de $x$, e $y$ não aparece livre em $E'$ e $z$ é diferente de $y$, então $E[x \mapsto y]$ é $\lambda z.\, E'[x \mapsto y]$.
+
+4. Se $y$ aparece livre em $E'$ ou $z$ é igual a $y$, é necessário renomear a variável ligada $z$ para uma nova variável $w$ que não apareça em $E'$ nem em $y$, reescrevendo $E$ como $\lambda w.\, E'[z \mapsto w]$ e então procedendo com a substituição: $E[x \mapsto y] = \lambda w.\, E'[z \mapsto w][x \mapsto y]$.
+
+Finalmente temos que a condição $y \notin \text{FV}(E)$ é a forma de evitar a captura de variáveis livres durante a substituição, garantindo que o conjunto de variáveis livres permaneça inalterado e que a semântica do termo seja preservada.
+
+Usamos A redução alfa para evitar a captura de variáveis livres durante a substituição na redução beta. Ao substituir um termo $N$ em um termo $E$, é possível que variáveis livres em $N$ tornem-se ligadas em $E$, o que irá alterar o significado semântico do termo. Para evitar isso, é necessário renomear as variáveis ligadas em $E$ para novas variáveis que não conflitem com as variáveis livres em $N$.
+
+**Exemplo 1:** Considere o termo:
+
+$$(\lambda x.\, \lambda y.\, x + y)\, y$$
+
+Ao aplicarmos a redução beta diretamente, substituindo $x$ por $y$, obteremos:
+
+$$(\lambda x.\, \lambda y.\, x + y)\, y \to_\beta \lambda y.\, y + y$$
+
+Neste caso, a variável livre $y$ no argumento foi capturada pelo $\lambda y$ interno, alterando o significado da expressão original. Para evitar a captura de variáveis, realiza-se uma redução alfa antes da substituição, renomeando a variável ligada $y$ no corpo da função para uma nova variável que não conflite com variáveis livres no argumento. Escolhe-se, por exemplo, $z$. Então teremos:
+
+Aplicando a redução alfa:
+
+$$\lambda x.\, \lambda y.\, x + y \to_\alpha \lambda x.\, \lambda z.\, x + z$$
+
+Agora, podemos aplicar a redução beta, substituindo $x$ por $y$:
+
+$$(\lambda x.\, \lambda z.\, x + z)\ y \to_\beta \lambda z.\, y + z$$
+
+Desta forma é possível evitar a captura da variável livre $y$, e o significado original da expressão é preservado.
+
+**Exemplo 2**: Considere o termo:
+
+$$(\lambda x.\, x)\ (\lambda y.\, y)$$
+
+Aplicando a redução beta:
+
+$$(\lambda x.\, x)\ (\lambda y.\, y) \to_\beta \lambda y.\, y$$
+
+Neste exemplo, não existe conflito de variáveis. A variável $y$ está ligada no termo $\lambda y.\, y$, e não havendo necessidade de aplicar a redução alfa.
+
+**Exemplo 3**: Considere o termo:
+
+$$(\lambda x.\, \lambda x.\, x)\, y$$
+
+Neste termo, a variável $x$ está ligada duas vezes em escopos diferentes. Para evitar confusão, pode-se aplicar a redução alfa para renomear a variável ligada interna:
+
+$$\lambda x.\, \lambda x.\, x \to_\alpha \lambda x.\, \lambda z.\, z$$
+
+Assim, podemos aplicar a redução beta:
+
+$$(\lambda x.\, \lambda z.\, z)\ y \to_\beta \lambda z.\, z$$
+
+Resultando em uma expressão clara, sem ambiguidade nas variáveis ligadas.
+
+### Formalização da Equivalência Alfa
+
+Dois termos lambda $M$ e $N$ são equivalentes alfa, denotado por $M \equiv_\alpha N$, se um termo pode ser obtido do outro por meio de renomeações consistentes de variáveis ligadas. A relação de equivalência alfa é reflexiva, simétrica e transitiva.
+
+Para que a afirmação anterior seja verdadeira precisamos que apenas variáveis ligadas podem ser renomeadas; variáveis livres devem permanecer inalteradas. Além disso, precisamos cuidar que ao renomear uma variável ligada, todas as suas ocorrências dentro de seu escopo devem ser substituídas pelo novo nome. Finalmente, o novo nome escolhido para a variável ligada não deve aparecer livre no termo onde a substituição ocorre, para evitar captura de variáveis.
+
+Neste ponto, a leitora já entendeu que a redução alfa é a ferramenta que permite o uso da redução beta e a substituição.
+
+### Exercícios de Redução Alfa
 
 **1**: Aplique a redução alfa para renomear a variável da expressão $\lambda x. \, x + 2$ para $z$.
 
@@ -677,25 +735,25 @@ Ambas representam a mesma função, e a renomeação da variável não altera se
 
  **Solução:** A redução alfa renomeia $y$ para $w$:
 
- $$ \lambda x. \lambda y. \, x + y \to_\alpha \lambda x. \, \lambda w. \, x + w $$
+ $$\lambda x. \lambda y. \, x + y \to_\alpha \lambda x. \, \lambda w. \, x + w $$
 
 **3**: Aplique a redução alfa para renomear a variável $z$ na expressão $\lambda z. \, z^2$ para $a$.
 
  **Solução:** Substituímos $z$ por $a$:
 
- $$ \lambda z. \, z^2 \to_\alpha \lambda a. a^2 $$
+ $$\lambda z. \, z^2 \to_\alpha \lambda a. a^2 $$
 
 **4**: Renomeie a variável $f$ na expressão $\lambda f. \lambda x. \, f(x)$ para $g$, utilizando a redução alfa.
 
  **Solução:** Substituímos $f$ por $g$:
 
- $$ \lambda f. \lambda x. \, f(x) \to_\alpha \lambda g. \lambda x. \, g(x) $$
+ $$\lambda f. \lambda x. \, f(x) \to_\alpha \lambda g. \lambda x. \, g(x)$$
 
 **5**: Na expressão $\lambda x. \, (\lambda x. \, x + 1) \, x$, renomeie a variável ligada interna $x$ para $z$.
 
  **Solução:** Substituímos a variável ligada interna $x$ por $z$:
 
- $$ \lambda x. \, (\lambda x. \, x + 1) x \to_\alpha \lambda x. \, (\lambda z. \, z + 1) x $$
+ $$\lambda x. \, (\lambda x. \, x + 1) x \to_\alpha \lambda x. \, (\lambda z. \, z + 1) x $$
 
 **6**: Aplique a redução alfa na expressão $\lambda x. \lambda y. \, x \cdot y$ renomeando $x$ para $a$ e $y$ para $b$.
 
@@ -725,35 +783,21 @@ Ambas representam a mesma função, e a renomeação da variável não altera se
 
  **Solução:** Substituímos $z$ na função interna por $w$:
 
- $$ \lambda x. \, (\lambda z. \, z + x) \, z \to_\alpha \lambda x. \, (\lambda w. w + x) \, z$$
-
-### Redução Alfa e Substituição
-
-A redução alfa é intimamente ligada à substituição. Muitas vezes precisamos renomear variáveis antes de realizar substituições para evitar conflitos de nomes. Por exemplo:
-
-$$(\lambda x.\, \lambda y.\, x)\, y$$
-
-Para reduzir este termo corretamente, renomeamos a variável $y$ na abstração interna, evitando conflito com o argumento:
-
-$$(\lambda x.\, \lambda y.\, x)y\to_\alpha (\lambda x.\, \lambda z.\, x)y \rightarrow_\beta \lambda z.\, y$$
-
-Sem a redução alfa, teríamos obtido incorretamente $\lambda y. \, y$, o que mudaria o comportamento da função.
-
-A redução alfa é essencial para evitar ambiguidades, especialmente em casos onde variáveis ligadas compartilham nomes com variáveis livres.
+ $$\lambda x. \, (\lambda z. \, z + x) \, z \to_\alpha \lambda x. \, (\lambda w. w + x) \, z$$
 
 ### Convenções Práticas: Convenção de Variáveis de Barendregt
 
-Na prática, a redução alfa é aplicada implicitamente durante as substituições. A _convenção de variável de Barendregt_ estabelece que todas as variáveis ligadas em um termo devem ser distintas entre si e das variáveis livres. Isso elimina a necessidade de renomeações explícitas frequentes e simplifica a manipulação de termos no cálculo lambda.
+Na prática, a redução alfa é frequentemente aplicada implicitamente durante as substituições no cálculo lambda. A **convenção das variáveis de [Barendregt](https://en.wikipedia.org/wiki/Henk_Barendregt)**[^cita9] estabelece que todas as variáveis ligadas em um termo devem ser escolhidas de modo que sejam distintas entre si e também distintas de quaisquer variáveis livres presentes no termo. Essa convenção elimina a necessidade de renomeações explícitas frequentes e simplifica a manipulação dos termos lambda.
 
-Com essa convenção, podemos simplificar a definição de substituição para:
+A partir da Convenção de Barendregt, a definição de substituição pode ser simplificada. Em particular, ao realizar a substituição $[N/x](\lambda y.\, M)$, podemos escrever:
 
-$$[N/x](\lambda y.\, M) = \lambda y.\, ([N/x]M)$$
+$$[N/x](\lambda y.\, M) = \lambda y.\, [N/x]M$$
 
-assumindo implicitamente que $y$ será renomeado, se necessário. Ou seja, a convenção de Barendregt nos permite tratar termos alfa-equivalentes como idênticos. Por exemplo, podemos considerar os seguintes termos como iguais:
+Assumindo implicitamente que, se necessário, a variável ligada $y$ será renomeada para evitar conflitos, garantindo que $y \neq x$ e que $y$ não apareça livre em $N$. Isso significa que não precisamos nos preocupar com a captura de variáveis livres durante a substituição, pois a convenção assegura que as variáveis ligadas são sempre escolhidas de forma apropriada. Permitido que tratemos os termos alfa-equivalentes como se fossem idênticos. Por exemplo, podemos considerar os seguintes termos como iguais:
 
-$$\lambda x.\, \lambda y.\, x y = \lambda a.\, \lambda b.\, a b$$
+$$\lambda x.\, \lambda y.\, x\, y = \lambda a.\, \lambda b.\, a\, b$$
 
-Isso simplifica muito a manipulação de termos lambda, pois não precisamos nos preocupar constantemente com conflitos de nomes.
+Ambos representam a mesma função, diferindo apenas nos nomes das variáveis ligadas. Essa abordagem simplifica significativamente a manipulação de termos lambda, pois não precisamos constantemente lidar com conflitos de nomes ou realizar reduções alfa explícitas. Podemos focar nas reduções beta e na estrutura funcional dos termos, sabendo que a escolha dos nomes das variáveis ligadas não afeta o comportamento das funções representadas.
 
 ### Exercícios de Substituição, Redução Alfa e Convenção de Barendregt
 
@@ -761,218 +805,814 @@ Isso simplifica muito a manipulação de termos lambda, pois não precisamos nos
 
  **Solução:** A substituição de $x$ por $y$ é direta:
 
- $$ [y/x]x = y $$
+ $$[y/x]x = y$$
 
 **2**: Aplique a substituição $[y/x] (\lambda x. \, x + 1)$ e explique por que a substituição não ocorre.
 
- **Solução:** A variável $x$ está ligada dentro da abstração $ \lambda x $, então a substituição não afeta o corpo da função:
+ **Solução:** A variável $x$ está ligada dentro da abstração $\lambda x $, então a substituição não afeta o corpo da função:
 
- $$ [y/x] (\lambda x. \, x + 1) = \lambda x. \, x + 1 $$
+ $$[y/x] (\lambda x. \, x + 1) = \lambda x. \, x + 1$$
 
 **3**: Aplique a substituição $[z/x](\lambda z. \, x + z)$. Utilize redução alfa para evitar captura de variáveis.
 
  **Solução:** A substituição direta causaria captura de variáveis. Aplicamos a redução alfa para renomear $z$ antes de fazer a substituição:
 
- $$ [z/x](\lambda z. \, x + z) = \lambda w. z + w $$
+ $$[z/x](\lambda z. \, x + z) = \lambda w. z + w$$
 
-**4**: Considere a expressão $ (\lambda x. \lambda y. \, x + y) z $. Aplique a substituição $ [z/x] $ e explique a necessidade de redução alfa.
+**4**: Considere a expressão $(\lambda x. \lambda y. \, x + y) z$. Aplique a substituição $[z/x]$ e explique a necessidade de redução alfa.
 
  **Solução:** Como $x$ não está ligada, podemos realizar a substituição sem necessidade de alfa. A expressão resultante é:
 
- $$ [z/x] (\lambda x. \lambda y. \, x + y) = \lambda y. \, z + y $$
+ $$[z/x] (\lambda x. \lambda y. \, x + y) = \lambda y. \, z + y$$
 
-**5**: Aplique a substituição $ [z/x](\lambda z. \, x + z) $ sem realizar a redução alfa. O que ocorre?
+**5**: Aplique a substituição $[z/x](\lambda z. \, x + z)$ sem realizar a redução alfa. O que ocorre?
 
  **Solução:** Se aplicarmos diretamente a substituição sem evitar a captura, a variável $z$ será capturada e a substituição resultará incorretamente em:
 
- $$ [z/x](\lambda z. \, x + z) = \lambda z. \, z + z $$
+ $$[z/x](\lambda z. \, x + z) = \lambda z. \, z + z$$
 
-**6**: Considere a expressão $ (\lambda x. \lambda y. \, x + y) (\lambda z. \, z \cdot z) $. Aplique a substituição $ [(\lambda z. \, z \cdot z)/x] $ e use a convenção de Barendregt.
+**6**: Considere a expressão $(\lambda x. \lambda y. \, x + y) (\lambda z. \, z \cdot z)$. Aplique a substituição $[(\lambda z. \, z \cdot z)/x]$ e use a convenção de Barendregt.
 
  **Solução:** Aplicamos a substituição:
 
- $$ [(\lambda z. \, z \cdot z)/x] (\lambda x. \lambda y. \, x + y) = \lambda y. \, (\lambda z. \, z \cdot z) + y $$
+ $$[(\lambda z. \, z \cdot z)/x] (\lambda x. \lambda y. \, x + y) = \lambda y. \, (\lambda z. \, z \cdot z) + y$$
 
  Com a convenção de Barendregt, variáveis ligadas não entram em conflito.
 
-**7**: Aplique a redução alfa na expressão $ \lambda x. \lambda y. \, x + y $ para renomear $ x $ e $ y $ para $ a $ e $ b $, respectivamente, e aplique a substituição $ [3/a] $.
+**7**: Aplique a redução alfa na expressão $\lambda x. \lambda y. \, x + y$ para renomear $ x $ e $ y $ para $ a $ e $ b $, respectivamente, e aplique a substituição $[3/a]$.
 
 **Solução:** Primeiro, aplicamos a redução alfa:
 
- $$ \lambda x. \lambda y. \, x + y \to_\alpha \lambda a. \lambda b. a + b $$
+ $$\lambda x. \lambda y. \, x + y \to_\alpha \lambda a. \lambda b. a + b$$
 
  Agora, aplicamos a substituição:
 
- $$ [3/a](\lambda a. \lambda b. a + b) = \lambda b. 3 + b $$
+ $$[3/a](\lambda a. \lambda b. a + b) = \lambda b. 3 + b$$
 
-**8**: Aplique a convenção de Barendregt na expressão $ \lambda x. \, (\lambda x. \, x + 1) x $ antes de realizar a substituição $ [y/x] $.
+**8**: Aplique a convenção de Barendregt na expressão $\lambda x. \, (\lambda x. \, x + 1) x$ antes de realizar a substituição $[y/x]$.
 
  **Solução:** Aplicando a convenção de Barendregt, renomeamos a variável ligada interna para evitar conflitos:
 
- $$ \lambda x. \, (\lambda x. \, x + 1) x \to_\alpha \lambda x. \, (\lambda z. \, z + 1) x $$
+ $$\lambda x. \, (\lambda x. \, x + 1) x \to_\alpha \lambda x. \, (\lambda z. \, z + 1) x$$
 
  Agora, aplicamos a substituição:
 
- $$ [y/x] (\lambda x. \, (\lambda z. \, z + 1) x) = \lambda x. \, (\lambda z. \, z + 1) y $$
+ $$[y/x] (\lambda x. \, (\lambda z. \, z + 1) x) = \lambda x. \, (\lambda z. \, z + 1) y$$
 
-**9**: Aplique a redução alfa na expressão $ \lambda x. \, (\lambda y. \, x + y) $, renomeando $ y $ para $ z $, e depois aplique a substituição $ [5/x] $.
+**9**: Aplique a redução alfa na expressão $\lambda x. \, (\lambda y. \, x + y)$, renomeando $ y $ para $ z $, e depois aplique a substituição $[5/x]$.
 
  **Solução:** Primeiro, aplicamos a redução alfa:
 
- $$ \lambda x. \, (\lambda y. \, x + y) \to_\alpha \lambda x. \, (\lambda z. \, x + z) $$
+ $$\lambda x. \, (\lambda y. \, x + y) \to_\alpha \lambda x. \, (\lambda z. \, x + z)$$
 
  Agora, aplicamos a substituição:
 
- $$ [5/x] (\lambda x. \, (\lambda z. \, x + z)) = \lambda z. 5 + z $$
+ $$[5/x] (\lambda x. \, (\lambda z. \, x + z)) = \lambda z. 5 + z $$
 
-**10**: Aplique a substituição $ [y/x] (\lambda x. \, x + z) $ e explique por que a convenção de Barendregt nos permite evitar a redução alfa neste caso.
+**10**: Aplique a substituição $[y/x] (\lambda x. \, x + z)$ e explique por que a convenção de Barendregt nos permite evitar a redução alfa neste caso.
 
  **Solução:** Como $x$ é ligado e não há conflitos com variáveis livres, a substituição não afeta o termo, e a convenção de Barendregt garante que não há necessidade de renomeação:
 
- $$ [y/x] (\lambda x. \, x + z) = \lambda x. \, x + z $$
+ $$[y/x] (\lambda x. \, x + z) = \lambda x. \, x + z $$
 
-**11**: Considere o termo $ [z/x] (\lambda y. \, x + (\lambda x. \, x + y)) $. Aplique a substituição e a redução alfa se necessário.
+**11**: Considere o termo $[z/x] (\lambda y. \, x + (\lambda x. \, x + y))$. Aplique a substituição e a redução alfa se necessário.
 
  **Solução:** Como há um conflito com a variável $x$ no corpo da função, aplicamos redução alfa antes da substituição:
 
- $$ \lambda y. \, x + (\lambda x. \, x + y) \to_\alpha \lambda y. \, x + (\lambda w. w + y) $$
+ $$\lambda y. \, x + (\lambda x. \, x + y) \to_\alpha \lambda y. \, x + (\lambda w. w + y)$$
 
  Agora, aplicamos a substituição:
 
- $$ [z/x] (\lambda y. \, x + (\lambda w. w + y)) = \lambda y. \, z + (\lambda w. w + y) $$
+ $$[z/x] (\lambda y. \, x + (\lambda w. w + y)) = \lambda y. \, z + (\lambda w. w + y)$$
 
-**12**: Aplique a substituição $ [y/x](\lambda z. \, x + z) $ onde $ z \notin FV(y) $, e explique o processo.
+**12**: Aplique a substituição $[y/x](\lambda z. \, x + z)$ onde $ z \notin FV(y)$, e explique o processo.
 
  **Solução:** Como não há conflitos de variáveis livres e ligadas, aplicamos a substituição diretamente:
 
- $$ [y/x](\lambda z. \, x + z) = \lambda z. y + z $$
+ $$[y/x](\lambda z. \, x + z) = \lambda z. y + z $$
 
-**13**: Aplique a substituição $ [z/x] (\lambda y. \, x \cdot y) $ onde $ z \in FV(x) $. Utilize a convenção de Barendregt.
+**13**: Aplique a substituição $[z/x] (\lambda y. \, x \cdot y)$ onde $ z \in FV(x)$. Utilize a convenção de Barendregt.
 
  **Solução:** Como $z$ não causa conflito de variáveis livres ou ligadas, aplicamos a substituição diretamente:
 
- $$ [z/x] (\lambda y. \, x \cdot y) = \lambda y. \, z \cdot y $$
+ $$[z/x] (\lambda y. \, x \cdot y) = \lambda y. \, z \cdot y $$
 
  A convenção de Barendregt garante que não precisamos renomear variáveis.
 
-**14**: Aplique a redução alfa na expressão $ \lambda x. \, (\lambda y. \, x + y) $ e renomeie $ y $ para $ t $, depois aplique a substituição $ [2/x] $.
+**14**: Aplique a redução alfa na expressão $\lambda x. \, (\lambda y. \, x + y)$ e renomeie $ y $ para $ t $, depois aplique a substituição $[2/x]$.
 
  **Solução:** Primeiro aplicamos a redução alfa:
 
- $$ \lambda x. \, (\lambda y. \, x + y) \to_\alpha \lambda x. \, (\lambda t. \, x + t) $$
+ $$\lambda x. \, (\lambda y. \, x + y) \to_\alpha \lambda x. \, (\lambda t. \, x + t)$$
 
  Agora, aplicamos a substituição:
 
- $$ [2/x] (\lambda x. \, (\lambda t. \, x + t)) = \lambda t. 2 + t $$
+ $$[2/x] (\lambda x. \, (\lambda t. \, x + t)) = \lambda t. 2 + t $$
 
-**15**: Aplique a substituição $ [y/x] (\lambda x. \, x + (\lambda z. \, x + z)) $ e explique por que não é necessário aplicar a redução alfa.
+**15**: Aplique a substituição $[y/x] (\lambda x. \, x + (\lambda z. \, x + z))$ e explique por que não é necessário aplicar a redução alfa.
 
  **Solução:** Como a variável $x$ está ligada e não entra em conflito com outras variáveis, a substituição não altera o termo:
 
- $$ [y/x] (\lambda x. \, x + (\lambda z. \, x + z)) = \lambda x. \, x + (\lambda z. \, x + z) $$
+ $$[y/x] (\lambda x. \, x + (\lambda z. \, x + z)) = \lambda x. \, x + (\lambda z. \, x + z)$$
 
 ## Redução Beta
 
-### Teorema de Church-Rosser
+A redução beta é um mecanismo de computação no cálculo lambda que **permite simplificar expressões por meio da aplicação de funções aos seus argumentos**. Formalmente, a redução beta é definida como:
 
-O **Teorema de Church-Rosser**, também conhecido como propriedade de confluência, é um resultado fundamental no cálculo lambda. Ele afirma que:
+$$(\lambda x.\, E)\ N \to_\beta [x/N]E$$
 
-Se um termo $M$ pode ser reduzido para $N_1$ e $N_2$ por sequências de reduções beta, então existe um termo $P$ tal que tanto $N_1$ quanto $N_2$ podem ser reduzidos para $P$.
+A notação $[x/N]M$ representa a substituição de todas as ocorrências livres da variável $x$ no termo $E$ pelo termo $N$. Eventualmente, quando estudamos semântica denotacional ou provas formais usamos a notação $E[x := y]$.
 
-Formalmente:
+A substituição indicada em uma Redução Beta deve ser realizada com cuidado para evitar a captura de variáveis livres em $N$ que possam se tornar ligadas em $E$ após a substituição. Para evitar a captura de varáveis livres, pode ser necessário realizar uma redução alfa antes de começar a redução beta, renomeando variáveis ligadas em $E$ que possam entrar em conflito com variáveis livres em $N$, Figura 2.
 
-Se $M \twoheadrightarrow_\beta N_1$ e $M \twoheadrightarrow_\beta N_2$, então existe $P$ tal que $N_1 \twoheadrightarrow_\beta P$ e $N_2 \twoheadrightarrow_\beta P$.
+![](assets/images/beta.png)
+_Exemplo de Redução Beta_{: legenda}
 
-Onde $\twoheadrightarrow_\beta$ denota zero ou mais reduções beta.
+Considere, por exemplo, o termo $E = (\lambda y.\, x + y)$ e o objetivo de substituir $x$ por $N = y$. Se fizermos a substituição diretamente, obteremos:
 
-Este teorema tem várias consequências importantes:
+$$
+[x/y]E = (\lambda y.\, y + y)
+$$
 
-1. **Unicidade da Forma Normal**: Se um termo tem uma forma normal, ela é única.
+Nesse caso, a variável livre $y$ em $N$ tornou-se ligada devido ao $\lambda y$ em $E$, resultando em captura de variável e alterando o significado original da expressão. Para evitar a captura, aplicamos uma redução alfa ao termo $E$, renomeando a variável ligada $y$ para uma nova variável que não apareça em $N$, como $z$:
 
-2. **Independência da Estratégia de Redução**: A forma normal de um termo (se existir) não depende da ordem em que as reduções são aplicadas.
+$$E = (\lambda y.\, x + y) \quad \xrightarrow{\text{alfa}} \quad (\lambda z.\, x + z)$$
 
-3. **Consistência**: Não é possível derivar termos contraditórios no cálculo lambda puro.
+Agora, ao substituir $x$ por $y$, obtemos:
 
-#### Exercícios de Redução Beta no Cálculo Lambda
+$$[x/y]E = (\lambda z.\, y + z)$$
 
-**1**: Aplique a redução beta na expressão $ (\lambda x. \, x + 1) 5 $.
+Dessa forma, a variável livre $y$ permanece livre após a substituição, e a captura é evitada. Outro exemplo é o termo $E = (\lambda x.\, \lambda y.\, x + y)$ com $N = y$. Tentando substituir diretamente, temos:
+
+$$[x/y]E = (\lambda y.\, y + y)$$
+
+Aqui, a variável livre $y$ em $N$ foi capturada pelo $\lambda y$ interno. Para prevenir isso, realizamos uma redução alfa renomeando a variável ligada $y$ para $z$:
+
+$$E = (\lambda x.\, \lambda y.\, x + y) \quad \xrightarrow{\text{alfa}} \quad (\lambda x.\, \lambda z.\, x + z)$$
+
+Procedendo com a substituição:
+
+$$[x/y]E = (\lambda z.\, y + z)$$
+
+Assim, a variável livre $y$ não é capturada, preservando o significado da expressão original.
+
+Em suma, ao realizar a substituição $[x/N]E$, é essencial garantir que as variáveis livres em $N$ permaneçam livres após a substituição e não sejam capturadas por variáveis ligadas em $E$. A persistente leitora deve avaliar os exemplos a seguir:
+
+**Exemplo 1**: considere a expressão:
+
+$$(\lambda x.\, x + y)\ 3$$
+
+Aplicando a redução beta:
+
+$$(\lambda x.\, x + y)\ 3 \to_\beta 3 + y$$
+
+Neste caso, substituímos $x$ por $3$ no corpo da função $x + y$, resultando em $3 + y$. A variável $y$ permanece inalterada por ser uma variável livre.
+
+**Exemplo 2**: se houver risco de captura de variáveis, é necessário realizar uma redução alfa antes. Por exemplo:
+
+$$(\lambda x.\, \lambda y.\, x + y)\ y$$
+
+Aplicando a redução beta diretamente:
+
+$$(\lambda x.\, \lambda y.\, x + y)\ y \to_\beta \lambda y.\, y + y$$
+
+Aqui, a variável livre $y$ no argumento foi capturada pela variável ligada $y$ na função interna. Para evitar isso, realizamos uma redução alfa renomeando a variável ligada $y$ para $z$:
+
+   $$\lambda x.\, \lambda z.\, x + z$$
+
+Agora podemos aplicar a redução beta:
+
+   $$(\lambda x.\, \lambda z.\, x + z)\ y \to_\beta \lambda z.\, y + z$$
+
+Assim, evitamos a captura da variável livre $y$, mantendo o significado original da expressão.
+
+**Exemplo 3**: considere a expressão:
+
+ $$(\lambda x. \, x+1)2$$
+
+ Aplicando a redução beta:
+
+ $$(\lambda x. \, x+1)2 \to_\beta [2/x](x+1) = 2+1 = 3$$
+
+ Aqui, o valor $2$ é substituído pela variável $x$ na expressão $x + 1$, resultando em $2 + 1 = 3$.
+
+**Exemplo 4**: um exemplo mais complexo envolvendo uma função de ordem superior:
+
+ $$(\lambda f.\lambda x. \, f \, (f \, x))(\lambda y. \, y*2) \, 3$$
+
+ Reduzindo passo a passo:
+
+ $$(\lambda f.\lambda x.\, f(f \, x))(\lambda y.\, y \cdot 2)3$$
+
+ $$\to_\beta (\lambda x.(\lambda y.\, y \cdot 2)((\lambda y.\, y \cdot 2) x)) \, 3$$
+
+ $$\to_\beta (\lambda y.\, y \cdot 2)((\lambda y.\, y \cdot 2)\, 3)$$
+
+ $$\to_\beta (\lambda y.\, y \cdot 2) \, (3 \cdot 2)$$
+
+ $$\to_\beta (\lambda y.\, y \cdot 2) \, (6)$$
+
+ $$\to_\beta 6 \cdot 2$$
+
+ $$= 12$$
+
+Neste exemplo, aplicamos primeiro a função $(\lambda f.\lambda x.\, f \, (f \, x))$ ao argumento $(\lambda y.\, y*2)$, resultando em uma expressão que aplica duas vezes a função de duplicação ao número $3$, obtendo $12$.
+
+### Exercícios de Redução Beta
+
+**1**: Aplique a redução beta na expressão $(\lambda x. \, x + 1) 5$.
 
  **Solução:** Aplicamos a substituição de $ x $ por $ 5 $ no corpo da função:
 
- $$ (\lambda x. \, x + 1) 5 \to\_\beta [5/x](x + 1) = 5 + 1 = 6 $$
+ $$(\lambda x. \, x + 1) 5 \to_\beta [5/x](x + 1) = 5 + 1 = 6$$
 
-**2**: Simplifique a expressão $ (\lambda x. \lambda y. \, x + y) 2 3 $ utilizando a redução beta.
+**2**: Simplifique a expressão $(\lambda x. \lambda y. \, x + y) 2 3 $ utilizando a redução beta.
 
- **Solução:** Primeiro, aplicamos $ 2 $ ao parâmetro $ x $, e depois $ 3 $ ao parâmetro $ y $:
+ **Solução:** Primeiro, aplicamos $ 2 $ ao parâmetro $ x $, e depois $ 3 $ ao parâmetro $y$:
 
- $$ (\lambda x. \lambda y. \, x + y) 2 3 \to*\beta (\lambda y. \, 2 + y) 3 \to*\beta 2 + 3 = 5 $$
+ $$(\lambda x. \lambda y. \, x + y) 2 3 \to*\beta (\lambda y. \, 2 + y) 3 \to*\beta 2 + 3 = 5$$
 
-**3**: Aplique a redução beta na expressão $ (\lambda f. \lambda x. \, f(f \, x)) (\lambda y. \, y + 1) 4 $.
+**3**: Aplique a redução beta na expressão $(\lambda f. \lambda x. \, f(f \, x)) (\lambda y. \, y + 1) 4$.
 
- **Solução:** Primeiro aplicamos $ (\lambda y. \, y + 1) $ a $ f $, e depois $ 4 $ a $ x $:
+ **Solução:** Primeiro aplicamos $(\lambda y. \, y + 1)$ a $ f $, e depois $ 4 $ a $ x$:
 
- 1. $ (\lambda f. \lambda x. \, f(f \, x)) (\lambda y. \, y + 1) 4 $
- 2. $ \to\_\beta (\lambda x. \, (\lambda y. \, y + 1)( (\lambda y. \, y + 1) x)) 4 $
- 3. $ \to\_\beta (\lambda y. \, y + 1)( (\lambda y. \, y + 1) 4) $
- 4. $ \to\_\beta (\lambda y. \, y + 1)(4 + 1) $
- 5. $ \to\_\beta (\lambda y. \, y + 1)(5) $
- 6. $ \to\_\beta 5 + 1 = 6 $
+$$(\lambda f. \lambda x. \, f(f \, x)) (\lambda y. \, y + 1) 4$$
 
-**4**: Reduza a expressão $ (\lambda x. \lambda y. \, x \cdot y) 3 4 $ utilizando a redução beta.
+$$\to_\beta (\lambda x. \, (\lambda y. \, y + 1)( (\lambda y. \, y + 1) x)) 4$$
 
- **Solução:** Primeiro aplicamos $ 3 $ a $ x $ e depois $ 4 $ a $ y $:
+$$\to_\beta (\lambda y. \, y + 1)( (\lambda y. \, y + 1) 4)$$
 
- $$ (\lambda x. \lambda y. \, x \cdot y) 3 4 \to*\beta (\lambda y. \, 3 \cdot y) 4 \to*\beta 3 \cdot 4 = 12 $$
+$$\to_\beta (\lambda y. \, y + 1)(4 + 1)$$
 
-**5**: Aplique a redução beta na expressão $ (\lambda x. \lambda y. \, x - y) 10 6 $.
+$$\to_\beta (\lambda y. \, y + 1)(5)$$
+
+$$\to_\beta 5 + 1 = 6$$
+
+**4**: Reduza a expressão $(\lambda x. \lambda y. \, x \cdot y) 3 4$ utilizando a redução beta.
+
+ **Solução:** Primeiro aplicamos $ 3 $ a $ x $ e depois $4$ a $y$:
+
+ $$(\lambda x. \lambda y. \, x \cdot y) 3 4 \to*\beta (\lambda y. \, 3 \cdot y) 4 \to*\beta 3 \cdot 4 = 12$$
+
+**5**: Aplique a redução beta na expressão $(\lambda x. \lambda y. \, x - y) 10 6$.
 
  **Solução:** Aplicamos a função da seguinte forma:
 
- $$ (\lambda x. \lambda y. \, x - y) 10 6 \to*\beta (\lambda y. \, 10 - y) 6 \to*\beta 10 - 6 = 4 $$
+ $$(\lambda x. \lambda y. \, x - y) 10 6 \to*\beta (\lambda y. \, 10 - y) 6 \to*\beta 10 - 6 = 4$$
 
-**6**: Reduza a expressão $ (\lambda f. f(2)) (\lambda x. \, x + 3) $ utilizando a redução beta.
+**6**: Reduza a expressão $(\lambda f. f(2)) (\lambda x. \, x + 3)$ utilizando a redução beta.
 
- **Solução:** Primeiro aplicamos $ (\lambda x. \, x + 3) $ a $ f $, e depois aplicamos $ 2 $ a $ x $:
+ **Solução:** Primeiro aplicamos $(\lambda x. \, x + 3)$ a $f$, e depois aplicamos $2$ a $x$:
 
- $$ (\lambda f. f(2)) (\lambda x. \, x + 3) \to*\beta (\lambda x. \, x + 3)(2) \to*\beta 2 + 3 = 5 $$
+ $$(\lambda f. f(2)) (\lambda x. \, x + 3) \to*\beta (\lambda x. \, x + 3)(2) \to*\beta 2 + 3 = 5$$
 
-**7**: Simplifique a expressão $ (\lambda f. \lambda x. \, f(x + 2)) (\lambda y. \, y \cdot 3) 4 $ utilizando a redução beta.
+**7**: Simplifique a expressão $(\lambda f. \lambda x. \, f(x + 2)) (\lambda y. \, y \cdot 3) 4 $ utilizando a redução beta.
 
- **Solução:** Primeiro aplicamos $ (\lambda y. \, y \cdot 3) $ a $ f $ e depois $ 4 $ a $ x $:
+ **Solução:** Primeiro aplicamos $(\lambda y. \, y \cdot 3)$ a $ f $ e depois $4$ a $x$:
 
- 1. $ (\lambda f. \lambda x. \, f(x + 2)) (\lambda y. \, y \cdot 3) 4 $
- 2. $ \to\_\beta (\lambda x. \, (\lambda y. \, y \cdot 3)(x + 2)) 4 $
- 3. $ \to\_\beta (\lambda y. \, y \cdot 3)(4 + 2) $
- 4. $ \to\_\beta (6 \cdot 3) = 18 $
+$$(\lambda f. \lambda x. \, f(x + 2)) (\lambda y. \, y \cdot 3) 4$$
 
-**8**: Aplique a redução beta na expressão $ (\lambda x. \lambda y. \, x^2 + y^2) (3 + 1) (2 + 2) $.
+$$\to_\beta (\lambda x. \, (\lambda y. \, y \cdot 3)(x + 2)) 4$$
+
+$$\to_\beta (\lambda y. \, y \cdot 3)(4 + 2)$$
+
+$$\to_\beta (6 \cdot 3) = 18$$
+
+**8**: Aplique a redução beta na expressão $(\lambda x. \lambda y. \, x^2 + y^2) (3 + 1) (2 + 2)$.
 
  **Solução:** Primeiro simplificamos as expressões internas e depois aplicamos as funções:
 
- 1. $ (\lambda x. \lambda y. \, x^2 + y^2) (3 + 1) (2 + 2) $
- 2. $ \to\_\beta (\lambda x. \lambda y. \, x^2 + y^2) 4 4 $
- 3. $ \to\_\beta (\lambda y. \, 4^2 + y^2) 4 $
- 4. $ \to\_\beta 16 + 4^2 = 16 + 16 = 32 $
+$$(\lambda x. \lambda y. \, x^2 + y^2) (3 + 1) (2 + 2)$$
 
-**9**: Reduza a expressão $ (\lambda f. \lambda x. \, f(f(x))) (\lambda y. \, y + 2) 3 $ utilizando a redução beta.
+$$\to_\beta (\lambda x. \lambda y. \, x^2 + y^2) 4 4$$
+
+$$\to_\beta (\lambda y. \, 4^2 + y^2) 4$$
+
+$$\to_\beta 16 + 4^2 = 16 + 16 = 32$$
+
+**9**: Reduza a expressão $(\lambda f. \lambda x. \, f(f(x))) (\lambda y. \, y + 2) 3$ utilizando a redução beta.
 
  **Solução:** Aplicamos a função duas vezes ao argumento:
 
- 1. $ (\lambda f. \lambda x. \, f(f(x))) (\lambda y. \, y + 2) 3 $
- 2. $ \to\_\beta (\lambda x. \, (\lambda y. \, y + 2)( (\lambda y. \, y + 2) x)) 3 $
- 3. $ \to\_\beta (\lambda y. \, y + 2)( (\lambda y. \, y + 2) 3) $
- 4. $ \to\_\beta (\lambda y. \, y + 2)(3 + 2) $
- 5. $ \to\_\beta (\lambda y. \, y + 2)(5) $
- 6. $ \to\_\beta 5 + 2 = 7 $$
+$$(\lambda f. \lambda x. \, f(f(x))) (\lambda y. \, y + 2) 3$$
 
-**10**: Reduza a expressão $ (\lambda x. \lambda y. \, x - 2 \cdot y) (6 + 2) 3 $ utilizando a redução beta.
+$$\to_\beta (\lambda x. \, (\lambda y. \, y + 2)( (\lambda y. \, y + 2) x)) 3$$
+
+$$\to_\beta (\lambda y. \, y + 2)( (\lambda y. \, y + 2) 3)$$
+
+$$\to_\beta (\lambda y. \, y + 2)(3 + 2)$$
+
+$$\to_\beta (\lambda y. \, y + 2)(5)$$
+
+$$\to_\beta 5 + 2 = 7$$
+
+**10**: Reduza a expressão $(\lambda x. \lambda y. \, x - 2 \cdot y) (6 + 2) 3$ utilizando a redução beta.
 
  **Solução:** Primeiro simplificamos as expressões e depois aplicamos as funções:
 
- 1. $ (\lambda x. \lambda y. \, x - 2 \cdot y) (6 + 2) 3 $
- 2. $ \to\_\beta (\lambda x. \lambda y. \, x - 2 \cdot y) 8 3 $
- 3. $ \to\_\beta (\lambda y. \, 8 - 2 \cdot y) 3 $
- 4. $ \to\_\beta 8 - 2 \cdot 3 = 8 - 6 = 2 $
+$$(\lambda x. \lambda y. \, x - 2 \cdot y) (6 + 2) 3$$
+
+$$\to_\beta (\lambda x. \lambda y. \, x - 2 \cdot y) 8 3$$
+
+$$\to_\beta (\lambda y. \, 8 - 2 \cdot y) 3$$
+
+$$\to_\beta 8 - 2 \cdot 3 = 8 - 6 = 2$$
+
+## Teorema de Church-Rosser
+
+Um dos obstáculos enfrentado por Church durante o desenvolvimento do cálculo lambda dizia respeito a consistência do processo de redução. Ou seja, provar que um termo lambda mesmo que reduzido de formas diferentes, chegaria a mesma forma normal, caso esta forma existisse. Em busca desta consistência, Church e [J. Barkley Rosser](https://en.wikipedia.org/wiki/J._Barkley_Rosser), seu estudante de doutorado, formularam o teorema que viria a ser chamado de **Teorema de Church-Rosser**[^cita8]. Este teorema, também chamado de propriedade de confluência, garante a consistência e a previsibilidade do sistema de redução beta, afirmando que, **independentemente da ordem em que as reduções beta são aplicadas, o resultado final, se existir, será o mesmo** Figura 1.
+
+![](assets/images/conflu.png)
+_Diagrama da Propriedade de Confluência determinada pelo Teorema de Church-Rosser_{: legenda}
+
+Formalmente teremos:
+
+$$\forall M, N_1, N_2 \, (\text{se} \, M \twoheadrightarrow_\beta N_1 \, \text{e} \, M \twoheadrightarrow_\beta N_2, \, \text{então existe um} \, P \, \text{tal que} \, N_1 \twoheadrightarrow_\beta P \, \text{e} \, N_2 \twoheadrightarrow_\beta P).$$
+
+Ou, de forma ainda mais concisa:
+
+$$
+(M \twoheadrightarrow_\beta N_1 \land M \twoheadrightarrow_\beta N_2) \implies \exists P \, (N_1 \twoheadrightarrow_\beta P \land N_2 \twoheadrightarrow_\beta P)
+$$
+
+Onde $\twoheadrightarrow_\beta$ representa uma sequência, possivelmente vazia, de reduções beta. Com um pouco menos de formalidade, podemos ler o enunciado do Teorema de Church-Rosser como:
+
+**Se um termo $M$ pode ser reduzido a $N_1$ e $N_2$ por meio de sequências de reduções beta, então existe um termo $P$ tal que $N_1$ e $N_2$ podem ser reduzidos a $P$.**
+
+O Teorema de Church-Rosser estabelecendo que o cálculo lambda é um sistema **confluente**, estabelece que, embora possam existir diferentes caminhos de redução a partir de um termo inicial, todos os caminhos levam a um resultado comum, desde que as reduções possam continuar até o fim.
+
+A prova do Teorema de Church-Rosser, além de provar a consistência do cálculo lambda, implicou na existência da unicidade da forma normal, na independência da estratégia de redução.
+
+Dizemos que o cálculo lambda é consistente porque como não é possível derivar termos contraditórios, ou ambíguos, o cálculo lambda puro é um sistema consistente. A consistência, por sua vez, implica na confiabilidade em sistemas formais e linguagens de programação funcional.
+
+Por sua vez, a _Unicidade da Forma Normal_ é uma consequência imediata da consistência. Se um termo $M$ possui uma forma normal, um termo irreduzível, então essa forma normal é única. Isso assegura que o processo de computação no cálculo lambda é determinístico em termos do resultado final. Até aqui, vimos que o cálculo lambda é consistente e determinístico.
+
+A última consequência do Teorema de Church-Rosser, a _Independência da Estratégia de Redução_ garante que a ordem, ou estratégia, com que as reduções beta são aplicadas não afeta a forma normal final de um termo. Isso permite flexibilidade na implementação de estratégias de avaliação, como avaliação preguiçosa (_lazy evaluation_) ou avaliação estrita (_eager evaluation_).
+
+Finalmente, podemos dizer que o Teorema de Church-Rosser é o suporte necessário para que a amável leitora possa entender que o cálculo lambda é consistente, determinístico e flexível. A esforçada leitora de acompanhar os seguintes exemplos:
+
+**Exemplo 1**: redução de uma Função Aplicada a Dois Argumentos. Considere o termo:
+
+$$M_1 = (\lambda x.\, (\lambda y.\, x + y))\, 3\, 2$$
+
+Caminho 1: reduza o termo externo primeiro:
+
+$$M_1 = (\lambda x.\, (\lambda y.\, x + y))\, 3\, 2$$
+
+$$\to_\beta (\lambda y.\, 3 + y)\, 2$$
+
+Agora, aplique a segunda função:
+
+$$\to_\beta 3 + 2 = 5$$
+
+Caminho 2: reduza o termo interno primeiro:
+
+$$M_1 = (\lambda x.\, (\lambda y.\, x + y))\, 3\, 2$$
+
+$$\to_\beta (\lambda x.\, (\lambda y.\, x + y))\, 3$$
+
+Reduza o termo externo:
+
+$$\to_\beta (\lambda y.\, 3 + y)\, 2$$
+
+Finalmente, aplique a segunda função:
+
+$$\to_\beta 3 + 2 = 5$$
+
+Neste exemplo, ambos os caminhos de redução resultam na forma normal $5$.
+
+**Exemplo 2**: redução de uma Função de Ordem Superior. Considere o termo:
+
+$$M_2 = (\lambda f.\, (\lambda x.\, f (f x)))\, (\lambda y.\, y + 1)\, 1$$
+
+Caminho 1: reduza o termo externo primeiro:
+
+$$M_2 = (\lambda f.\, (\lambda x.\, f (f x)))\, (\lambda y.\, y + 1)\, 1$$
+
+$$\to_\beta (\lambda x.\, (\lambda y.\, y + 1)\, ((\lambda y.\, y + 1)\, x))\, 1$$
+
+Aplique a função interna:
+
+$$\to_\beta (\lambda y.\, y + 1)\, ((\lambda y.\, y + 1)\, 1)$$
+
+Aplique a primeira função:
+
+$$\to_\beta (\lambda y.\, y + 1)\, (1 + 1)$$
+
+Aplique a segunda função:
+
+$$\to_\beta 2 + 1 = 3$$
+
+Caminho 2: reduza o termo interno primeiro:
+
+$$M_2 = (\lambda f.\, (\lambda x.\, f (f x)))\, (\lambda y.\, y + 1)\, 1$$
+
+$$\to_\beta (\lambda f.\, (\lambda x.\, f (f x)))\, (\lambda y.\, y + 1)$$
+
+Aplique a função externa:
+
+$$\to_\beta (\lambda x.\, (\lambda y.\, y + 1)\, ((\lambda y.\, y + 1)\, x))\, 1$$
+
+Agora, aplique a função interna:
+
+$$\to_\beta (\lambda y.\, y + 1)\, ((\lambda y.\, y + 1)\, 1)$$
+
+Aplique a primeira função:
+
+$$\to_\beta (\lambda y.\, y + 1)\, (1 + 1)$$
+
+Aplique a segunda função:
+
+$$\to_\beta 2 + 1 = 3$$
+
+Neste exemplo, ambos os caminhos de redução resultam na forma normal $3$.
+
+**Exemplo 3**: considere o termo lambda:
+
+$$M = (\lambda x.\, x\, x) (\lambda x.\, x\, x)$$
+
+Este termo pode ser reduzido de formas diferentes:
+
+Caminho 1: reduza o termo externo primeiro:
+
+$$\begin{align*}
+M &= (\lambda x.\, x\, x) (\lambda x.\, x\, x) \\
+&\to_\beta (\lambda x.\, x\, x) (\lambda x.\, x\, x)
+\end{align*}$$
+
+Se tomarmos o caminho 1, este processo continuará indefinidamente, indicando que não há forma normal.
+
+Caminho 2: reduza o termo interno primeiro:
+
+$$\begin{align*}
+M &= (\lambda x.\, x\, x) (\lambda x.\, x\, x) \\
+&\to_\beta (\lambda x.\, x\, x) (\lambda x.\, x\, x)
+\end{align*}$$
+
+Novamente, o processo é infinito e não temos uma forma normal.
+
+Neste caso, ambos os caminhos levam a um processo de redução infinito, mas o Teorema de Church-Rosser assegura que, se houvesse uma forma normal, ela seria única, independentemente do caminho escolhido.
+
+A confluência garantida pelo Teorema de Church-Rosser é análoga a um rio com vários afluentes que eventualmente convergem para o mesmo oceano. Ou se preferir a antiga expressão latina _Omnes viae Romam ducunt_ Não importa qual caminho a água siga, ou que estrada você pegue, ela acabará chegando ao mesmo destino. No contexto do cálculo lambda, isso significa que diferentes sequências de reduções beta não causam ambiguidades no resultado final da computação.
+
+O Teorema de Church-Rosser fornece uma base teórica para otimizações de compiladores e interpretadores, garantindo que mudanças na ordem de avaliação não alterem o resultado final. Tem impacto na teoria da computação já que a confluência é uma propriedade desejável em sistemas de reescrita de termos, assegurando a consistência lógica e a previsibilidade dos sistemas formais. E, em sistemas de provas formais e lógica matemática o Teorema de Church-Rosser ajuda a garantir que as demonstrações não levem a contradições.
+
+### Exercícios Relacionados ao Teorema de Church-Rosser
+
+**1**. Reduza o termo a seguir usando dois caminhos diferentes de redução:
+
+$$
+M = (\lambda x.\, (\lambda y.\, x \cdot y))\, 5\, 3
+$$
+
+**Solução:**
+Caminho 1: aplique a primeira função:
+
+$$
+M = (\lambda x.\, (\lambda y.\, x \cdot y))\, 5\, 3$$
+
+$$\to_\beta (\lambda y.\, 5 \cdot y)\, 3$$
+
+Agora, aplique a segunda função:
+
+$$
+\to_\beta 5 \cdot 3 = 15
+$$
+
+Caminho 2: Primeiro, aplique a segunda função:
+
+$$M = (\lambda x.\, (\lambda y.\, x \cdot y))\, 5\, 3$$
+
+$$\to_\beta (\lambda x.\, (\lambda y.\, x \cdot y))\, 5$$
+
+Agora, aplique a primeira função:
+
+$$
+\to_\beta (\lambda y.\, 5 \cdot y)\, 3
+$$
+
+Aplique a segunda função:
+
+$$
+\to_\beta 5 \cdot 3 = 15
+$$
+
+Ambos os caminhos levam à forma normal $15$.
+
+**2**. Mostre dois caminhos distintos de redução para o termo:
+
+$$
+M = (\lambda f.\, (\lambda x.\, f (f x)))\, (\lambda y.\, y + 1)\, 2
+$$
+
+**Solução:**
+Caminho 1: aplique a função externa:
+
+$$M = (\lambda f.\, (\lambda x.\, f (f x)))\, (\lambda y.\, y + 1)\, 2$$
+
+$$\to_\beta (\lambda x.\, (\lambda y.\, y + 1) ((\lambda y.\, y + 1) x))\, 2$$
+
+Aplique a função interna:
+
+$$\to_\beta (\lambda y.\, y + 1) ((\lambda y.\, y + 1)\, 2)$$
+
+$$\to_\beta (\lambda y.\, y + 1)\, (2 + 1)$$
+
+$$\to_\beta 3 + 1 = 4$$
+
+Caminho 2: primeiro, aplique a função interna:
+
+$$M = (\lambda f.\, (\lambda x.\, f (f x)))\, (\lambda y.\, y + 1)\, 2$$
+
+$$\to_\beta (\lambda f.\, (\lambda x.\, f (f x)))\, (\lambda y.\, y + 1)$$
+
+Agora, aplique a função externa:
+
+$$
+\to_\beta (\lambda x.\, (\lambda y.\, y + 1)\, ((\lambda y.\, y + 1)\, x))\, 2
+$$
+
+$$\to_\beta (\lambda y.\, y + 1)\, ((\lambda y.\, y + 1)\, 2)$$
+
+$$\to_\beta (\lambda y.\, y + 1)\, (2 + 1)$$
+
+$$\to_\beta 3 + 1 = 4$$
+
+Ambos os caminhos levam à forma normal $4$.
+
+**3**. Mostre que, independentemente do caminho escolhido, o termo resulta na mesma forma normal.
+
+$$
+M = (\lambda x.\, (\lambda y.\, x + y))\, 7\, 8
+$$
+
+**Solução:**
+Caminho 1: aplique a primeira função:
+
+$$M = (\lambda x.\, (\lambda y.\, x + y))\, 7\, 8$$
+$$\to_\beta (\lambda y.\, 7 + y)\, 8$$
+
+Aplique a segunda função:
+
+$$
+\to_\beta 7 + 8 = 15
+$$
+
+Caminho 2: primeiro, aplique a segunda função:
+
+$$
+M = (\lambda x.\, (\lambda y.\, x + y))\, 7\, 8 \to_\beta (\lambda x.\, (\lambda y.\, x + y))\, 7
+$$
+
+Agora, aplique a função:
+
+$$\to_\beta (\lambda y.\, 7 + y)\, 8$$
+
+$$\to_\beta 7 + 8 = 15$$
+
+Ambos os caminhos levam à forma normal $15$.
+
+**4**. Prove que o termo satisfaz a confluência para diferentes sequências de reduções.
+
+$$
+M = (\lambda f.\, f (f 3))\, (\lambda x.\, x + 1)
+$$
+
+**Solução:**
+Caminho 1: aplique a função externa:
+
+$$M = (\lambda f.\, f (f 3))\, (\lambda x.\, x + 1)$$
+
+$$\to_\beta (\lambda x.\, x + 1) ((\lambda x.\, x + 1)\, 3)$$
+
+Aplique a função interna:
+
+$$\to_\beta (\lambda x.\, x + 1)\, (3 + 1)$$
+
+$$\to_\beta 4 + 1 = 5$$
+
+Caminho 2: aplique a função interna primeiro:
+
+$$
+M = (\lambda f.\, f (f 3))\, (\lambda x.\, x + 1) \to_\beta (\lambda f.\, f (f 3))
+$$
+
+Agora, aplique a função externa:
+
+$$\to_\beta (\lambda x.\, x + 1) ((\lambda x.\, x + 1)\, 3)$$
+
+$$\to_\beta (\lambda x.\, x + 1)\, (3 + 1)$$
+
+$$\to_\beta 4 + 1 = 5$$
+
+Ambos os caminhos levam à forma normal $5$.
+
+**5**. Identifique a forma normal do termo abaixo usando diferentes estratégias de redução.
+
+$$
+M = (\lambda x.\, (\lambda y.\, x + y))\, 6\, 4
+$$
+
+**Solução:**
+Caminho 1: aplique a primeira função:
+
+$$M = (\lambda x.\, (\lambda y.\, x + y))\, 6\, 4$$
+
+$$\to_\beta (\lambda y.\, 6 + y)\, 4$$
+
+Aplique a segunda função:
+
+$$
+\to_\beta 6 + 4 = 10
+$$
+
+Caminho 2: aplique a segunda função primeiro:
+
+$$M = (\lambda x.\, (\lambda y.\, x + y))\, 6\, 4$$
+
+$$\to_\beta (\lambda x.\, (\lambda y.\, x + y))\, 6$$
+
+Agora, aplique a função:
+
+$$
+\to_\beta (\lambda y.\, 6 + y)\, 4 \to_\beta 6 + 4 = 10
+$$
+
+Ambos os caminhos resultam na forma normal $10$.
+
+**6**. Considere o termo abaixo e prove que a forma normal é única, independentemente da estratégia de redução.
+
+$$
+M = (\lambda f.\, (\lambda x.\, f (f x)))\, (\lambda y.\, y^2)\, 2
+$$
+
+**Solução:**
+Caminho 1: aplique a função externa:
+
+$$M = (\lambda f.\, (\lambda x.\, f (f x)))\, (\lambda y.\, y^2)\, 2$$
+
+$$\to_\beta (\lambda x.\, (\lambda y.\, y^2)\, ((\lambda y.\, y^2)\, x))\, 2$$
+
+Aplique a função interna:
+
+$$\to_\beta (\lambda y.\, y^2)\, ((\lambda y.\, y^2)\, 2)$$
+
+$$\to_\beta (\lambda y.\, y^2)\, (2^2)$$
+
+$$\to_\beta 4^2 = 16$$
+
+Caminho 2: aplique a função interna primeiro:
+
+$$M = (\lambda f.\, (\lambda x.\, f (f x)))\, (\lambda y.\, y^2)\, 2$$
+
+$$\to_\beta (\lambda f.\, (\lambda x.\, f (f x)))\, (\lambda y.\, y^2)$$
+
+Agora, aplique a função externa:
+
+$$\to_\beta (\lambda x.\, (\lambda y.\, y^2)\, ((\lambda y.\, y^2)\, x))\, 2$$
+
+$$\to_\beta (\lambda y.\, y^2)\, ((\lambda y.\, y^2)\, 2)$$
+
+$$\to_\beta (\lambda y.\, y^2)\, (2^2)$$
+
+$$\to_\beta 4^2 = 16$$
+
+Ambos os caminhos resultam na forma normal $16$.
+
+**7**. Dado o termo abaixo, mostre que a forma normal é alcançada com diferentes estratégias de redução e que a unicidade da forma normal se mantém.
+
+$$
+M = (\lambda x.\, (\lambda y.\, x + y))\, 8\, 2
+$$
+
+**Solução:**
+Caminho 1: aplique a função externa:
+
+$$M = (\lambda x.\, (\lambda y.\, x + y))\, 8\, 2$$
+
+$$\to_\beta (\lambda y.\, 8 + y)\, 2$$
+
+$$\to_\beta 8 + 2 = 10$$
+
+Caminho 2: aplique a função interna primeiro:
+
+$$M = (\lambda x.\, (\lambda y.\, x + y))\, 8\, 2$$
+
+$$\to_\beta (\lambda x.\, (\lambda y.\, x + y))\, 8$$
+
+Agora, aplique a função:
+
+$$\to_\beta (\lambda y.\, 8 + y)\, 2$$
+$$\to_\beta 8 + 2 = 10$$
+
+Ambos os caminhos resultam na forma normal $10$.
+
+**8**. Considere o termo abaixo. Demonstre que a forma normal é única mesmo utilizando diferentes estratégias de redução.
+
+$$
+M = (\lambda f.\, f (f 3))\, (\lambda x.\, x + 4)
+$$
+
+**Solução:**
+Caminho 1: aplique a função externa:
+
+$$M = (\lambda f.\, f (f 3))\, (\lambda x.\, x + 4)$$
+
+$$\to_\beta (\lambda x.\, x + 4) ((\lambda x.\, x + 4)\, 3)$$
+
+Aplique a função interna:
+
+$$\to_\beta (\lambda x.\, x + 4)\, (3 + 4)$$
+
+$$\to_\beta 7 + 4 = 11$$
+
+Caminho 2: aplique a função interna primeiro:
+
+$$M = (\lambda f.\, f (f 3))\, (\lambda x.\, x + 4)$$
+
+$$\to_\beta (\lambda f.\, f (f 3))$$
+
+Agora, aplique a função externa:
+
+$$\to_\beta (\lambda x.\, x + 4) ((\lambda x.\, x + 4)\, 3)$$
+
+$$\to_\beta (\lambda x.\, x + 4)\, (3 + 4)$$
+
+$$\to_\beta 7 + 4 = 11$$
+
+Ambos os caminhos resultam na forma normal $11$.
+
+**9**. Dado o termo a seguir, identifique a forma normal e mostre que ela é única, mesmo utilizando diferentes estratégias de redução.
+
+$$
+M = (\lambda f.\, f (f 1))\, (\lambda x.\, x + 2)
+$$
+
+**Solução:**
+Caminho 1: aplique a função externa:
+
+$$M = (\lambda f.\, f (f 1))\, (\lambda x.\, x + 2)$$
+
+$$\to_\beta (\lambda x.\, x + 2) ((\lambda x.\, x + 2)\, 1)$$
+
+Aplique a função interna:
+
+$$\to_\beta (\lambda x.\, x + 2)\, (1 + 2)$$
+
+$$\to_\beta 3 + 2 = 5$$
+
+Caminho 2: aplique a função interna primeiro:
+
+$$M = (\lambda f.\, f (f 1))\, (\lambda x.\, x + 2)$$
+
+$$\to_\beta (\lambda f.\, f (f 1))$$
+
+Agora, aplique a função externa:
+
+$$\to_\beta (\lambda x.\, x + 2) ((\lambda x.\, x + 2)\, 1)$$
+
+$$\to_\beta (\lambda x.\, x + 2)\, (1 + 2)$$
+
+$$\to_\beta 3 + 2 = 5$$
+
+Ambos os caminhos resultam na forma normal $5$.
+
+**10**. Considere o termo abaixo. Prove que ele satisfaz a confluência e que a forma normal é única para diferentes estratégias de redução.
+
+$$
+M = (\lambda x.\, (\lambda y.\, x + y))\, 9\, (\lambda z.\, z \cdot 2)\, 4
+$$
+
+**Solução:**
+Caminho 1: aplique a função externa:
+
+$$M = (\lambda x.\, (\lambda y.\, x + y))\, 9\, (\lambda z.\, z \cdot 2)\, 4$$
+
+$$\to_\beta (\lambda y.\, 9 + y)\, ((\lambda z.\, z \cdot 2)\, 4)$$
+
+Aplique a função interna:
+
+$$\to_\beta (\lambda y.\, 9 + y)\, (4 \cdot 2)$$
+
+$$\to_\beta (\lambda y.\, 9 + y)\, 8$$
+
+$$\to_\beta 9 + 8 = 17$$
+
+Caminho 2: aplique a função interna primeiro:
+
+$$M = (\lambda x.\, (\lambda y.\, x + y))\, 9\, (\lambda z.\, z \cdot 2)\, 4$$
+
+$$\to_\beta (\lambda x.\, (\lambda y.\, x + y))\, 9$$
+
+Agora, aplique a função externa:
+
+$$\to_\beta (\lambda y.\, 9 + y)\, ((\lambda z.\, z \cdot 2)\, 4)$$
+
+$$\to_\beta (\lambda y.\, 9 + y)\, 8$$
+
+$$\to_\beta 9 + 8 = 17$$
+
+Ambos os caminhos resultam na forma normal $17$.
 
 ## Currying
 
@@ -1022,11 +1662,11 @@ $$(\text{add} \, 2) \, 3 = (\lambda x. \lambda y. \, x + y) \, 2 \, 3$$
 
 A aplicação funciona da seguinte forma:
 
-$$ (\lambda x. \lambda y. \, x + y) \, 2 = \lambda y. \, 2 + y$$
+$$(\lambda x. \lambda y. \, x + y) \, 2 = \lambda y. \, 2 + y$$
 
 E, em seguida:
 
-$$ (\lambda y. \, 2 + y) \, 3 = 2 + 3 = 5$$
+$$(\lambda y. \, 2 + y) \, 3 = 2 + 3 = 5$$
 
 Esse é um exemplo claro de como _Currying_ permite a aplicação parcial de funções no cálculo lambda puro. Outro exemplo mais complexo seria uma função de multiplicação:
 
@@ -1038,7 +1678,7 @@ $$(\text{mult} \, 3) = \lambda y. \, 3 \times y$$
 
 Agora, podemos aplicar o segundo argumento:
 
-$$ (\lambda y. \, 3 \times y) \, 4 = 3 \times 4 = 12$$
+$$(\lambda y. \, 3 \times y) \, 4 = 3 \times 4 = 12$$
 
 Esses exemplos ilustram como o _Currying_ é um conceito fundamental no cálculo lambda, permitindo a definição e aplicação parcial de funções. Mas, ainda não vimos tudo.
 
@@ -1060,7 +1700,7 @@ Esses exemplos ilustram como o _Currying_ é um conceito fundamental no cálculo
 
  **Solução:** A função curried é $\lambda x. \lambda y. \, x^2 + y^2$. Aplicando $x = 1$ e $y = 2$:
 
- $$ (\lambda x. \lambda y. \, x^2 + y^2) \, 1 \, 2 = 1^2 + 2^2 = 1 + 4 = 5 $$
+ $$(\lambda x. \lambda y. \, x^2 + y^2) \, 1 \, 2 = 1^2 + 2^2 = 1 + 4 = 5 $$
 
 **4**: converta a função $f(x, y) = \frac{x}{y}$ em uma expressão lambda usando currying e aplique-a aos valores $x = 9$ e $y = 3$.
 
@@ -1080,7 +1720,7 @@ Esses exemplos ilustram como o _Currying_ é um conceito fundamental no cálculo
 
  $$(\lambda l. \lambda w. l \cdot w) \, 7 \, 5 = 7 \cdot 5 = 35$$
 
-**7**: transforme a função $f(x, y) = x^y$ (potência) em uma expressão lambda usando currying e aplique-a aos valores $x = 2$ e $y = 3$.
+**7**: transforme a função $f(x, y) = x^y$(potência) em uma expressão lambda usando currying e aplique-a aos valores $x = 2$ e $y = 3$.
 
  **Solução:** A função curried é $\lambda x. \lambda y. \, x^y$. Aplicando $x = 2$ e $y = 3$:
 
@@ -1090,7 +1730,7 @@ Esses exemplos ilustram como o _Currying_ é um conceito fundamental no cálculo
 
  **Solução:** A função curried é $\lambda x. \lambda y. \, \lambda z. \, x \cdot y \cdot z$. Aplicando $x = 2$, $y = 3$, e $z = 4$:
 
- $$ (\lambda x. \lambda y. \, \lambda z. \, x \cdot y \cdot z) \, 2 \, 3 \, 4 = 2 \cdot 3 \cdot 4 = 24$$
+ $$(\lambda x. \lambda y. \, \lambda z. \, x \cdot y \cdot z) \, 2 \, 3 \, 4 = 2 \cdot 3 \cdot 4 = 24$$
 
 **9**: transforme a função $f(x, y) = x + 2y$ em uma expressão lambda curried e aplique-a aos valores $x = 1$ e $y = 4$.
 
@@ -1167,6 +1807,9 @@ $$(\lambda x.\, y)(\lambda z.\, z \, z)$$
 - **Ordem Aplicativa**: Primeiro, tentamos reduzir o argumento $(\lambda z.\, z \, z)$, resultando em uma expressão que se auto-aplica indefinidamente, causando um loop infinito:
 
  $$(\lambda x.\, y)(\lambda z.\, z \, z) \to_\beta (\lambda x.\, y)((\lambda z.\, z\, z)(\lambda z.\, z\, z)) \to_\beta ...$$
+
+ ![](/assets/images/normvsaplic.png)
+ _Diagrama de Aplicação nas Ordens Normal e Aplicativa_.{: legenda}
 
 Este exemplo mostra que a ordem aplicativa pode levar a uma não terminação, enquanto a ordem normal encontra uma solução.
 
@@ -1314,11 +1957,11 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
  **Solução:** O combinador $ Y $ é definido como:
 
- $$ Y = \lambda f. (\lambda x. \, f(x \, x)) (\lambda x. \, f(x \, x)) $$
+ $$ Y = \lambda f. (\lambda x. \, f(x \, x)) (\lambda x. \, f(x \, x))$$
 
  Aplicando-o à função $ f(x) = x + 1 $:
 
- $$ Y (\lambda x. \, x + 1) \to (\lambda x. \, (\lambda x. \, x + 1)(x \, x)) (\lambda x. \, (\lambda x. \, x + 1)(x \, x)) $$
+ $$ Y (\lambda x. \, x + 1) \to (\lambda x. \, (\lambda x. \, x + 1)(x \, x)) (\lambda x. \, (\lambda x. \, x + 1)(x \, x))$$
 
  Este processo gera uma recursão infinita, pois a função continua chamando a si mesma.
 
@@ -1339,17 +1982,17 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
  $$Y (\lambda x. \, x^2 - 1)$$
 
- A função continuará sendo aplicada indefinidamente, mas o ponto fixo é a solução de $x = x^2 - 1$, que leva ao ponto fixo $x = P = \frac{1 + \sqrt{5}}{2}$ (a razão áurea).
+ A função continuará sendo aplicada indefinidamente, mas o ponto fixo é a solução de $x = x^2 - 1$, que leva ao ponto fixo $x = P = \frac{1 + \sqrt{5}}{2}$(a razão áurea).
 
 **4**: Use o combinador de ponto fixo para definir uma função recursiva que calcula o fatorial de um número.
 
  **Solução:** A função fatorial pode ser definida como:
 
- $$ f = \lambda f. \lambda n. \, (n = 0 ? 1 : n \cdot f \, (n-1)) $$
+ $$ f = \lambda f. \lambda n. \, (n = 0 ? 1 : n \cdot f \, (n-1))$$
 
  Aplicando o combinador $ Y $:
 
- $$ Y(f) = \lambda n. \, (n = 0 ? 1 : n \cdot Y \, (f) \, (n-1)) $$
+ $$ Y(f) = \lambda n. \, (n = 0 ? 1 : n \cdot Y \, (f) \, (n-1))$$
 
  Agora podemos calcular o fatorial de um número, como $ 3! = 3 \cdot 2 \cdot 1 = 6 $.
 
@@ -1357,11 +2000,11 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
  **Solução:** A função para Fibonacci pode ser definida como:
 
- $$ f = \lambda f. \lambda n. \, (n = 0 ? 0 : (n = 1 ? 1 : f \, (n-1) + f \, (n-2))) $$
+ $$ f = \lambda f. \lambda n. \, (n = 0 ? 0 : (n = 1 ? 1 : f \, (n-1) + f \, (n-2)))$$
 
  Aplicando o combinador $ Y $:
 
- $$ Y \, (f) = \lambda n. \, (n = 0 ? 0 : (n = 1 ? 1 : Y \, (f) \, (n-1) + Y \, (f) \, (n-2))) $$
+ $$ Y \, (f) = \lambda n. \, (n = 0 ? 0 : (n = 1 ? 1 : Y \, (f) \, (n-1) + Y \, (f) \, (n-2)))$$
 
  Agora podemos calcular Fibonacci, como $F_5 = 5$.
 
@@ -1373,7 +2016,7 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
  **Solução:** Aplicando o combinador $Y$ à função exponencial $f(x) = 2^x$:
 
- $$ Y (\lambda x. \, 2^x) $$
+ $$ Y (\lambda x. \, 2^x)$$
 
  A primeira iteração seria:
 
@@ -1387,11 +2030,11 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
  **Solução:** A função de soma até $n$ pode ser definida como:
 
- $$ f = \lambda f. \lambda n. \, (n = 0 ? 0 : n + f \, (n-1)) $$
+ $$ f = \lambda f. \lambda n. \, (n = 0 ? 0 : n + f \, (n-1))$$
 
  Aplicando o combinador $Y$:
 
- $$ Y(f) = \lambda n. \, (n = 0 ? 0 : n + Y \, (f) \, (n-1)) $$
+ $$ Y(f) = \lambda n. \, (n = 0 ? 0 : n + Y \, (f) \, (n-1))$$
 
  Agora podemos calcular a soma, como $\sum\_{i=1}^{3} = 3 + 2 + 1 = 6$.
 
@@ -1399,11 +2042,11 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
  **Solução:** A função MDC pode ser definida como:
 
- $$ f = \lambda f. \lambda a. \lambda b. \, (b = 0 ? a : f \, (b, a \% b)) $$
+ $$ f = \lambda f. \lambda a. \lambda b. \, (b = 0 ? a : f \, (b, a \% b))$$
 
  Aplicando o combinador $Y$:
 
- $$ Y(f) = \lambda a. \lambda b. \, (b = 0 ? a : Y \, (f) \, (b, a \% b)) $$
+ $$ Y(f) = \lambda a. \lambda b. \, (b = 0 ? a : Y \, (f) \, (b, a \% b))$$
 
  Agora podemos calcular o MDC, como $\text{MDC}(15, 5) = 5 $.
 
@@ -1421,7 +2064,7 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
 **13**: Defina a expressão $ S(\lambda z. \, z^2)(\lambda z. \, z + 1) 4 $ e reduza-a passo a passo.
 
- **Solução:** Aplicamos o combinador $ S = \lambda f. \lambda g. \lambda x. \, f(x) \, (g \, (x)) $ às funções $f = \lambda z. \, z^2 $ e $ g = \lambda z. \, z + 1$, e ao valor $4$:
+ **Solução:** Aplicamos o combinador $ S = \lambda f. \lambda g. \lambda x. \, f(x) \, (g \, (x))$ às funções $f = \lambda z. \, z^2 $ e $ g = \lambda z. \, z + 1$, e ao valor $4$:
 
  $$S(\lambda z. \, z^2)(\lambda z. \, z + 1) \, 4$$
 
@@ -1459,11 +2102,11 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
  **Solução:** Usamos o combinador $S$ para aplicar duas funções ao mesmo argumento:
 
- $$ S \, (K \, (3)) \, (K \, (4)) = (\lambda f. \lambda g. \lambda x. \, f \, (x) \, (g \, (x))) \, (K \, (3))(K \, (4)) $$
+ $$ S \, (K \, (3)) \, (K \, (4)) = (\lambda f. \lambda g. \lambda x. \, f \, (x) \, (g \, (x))) \, (K \, (3))(K \, (4))$$
 
  Aplicamos $f$ e $g$:
 
- $$ \rightarrow*\beta (\lambda x. \, K(3)(x)(K(4)(x))) \rightarrow*\beta (\lambda x. \, 3 + 4) = 7$$
+ $$\rightarrow*\beta (\lambda x. \, K(3)(x)(K(4)(x))) \rightarrow*\beta (\lambda x. \, 3 + 4) = 7$$
 
 **18**: Reduza a expressão $S \, K \, K$ e explique o que o combinador $S \, (K) \, (K)$ representa.
 
@@ -1473,12 +2116,12 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
  Substituímos $ f $ e $ g $ por $ K $:
 
- $$ = (\lambda x. \, K(x)(K(x))) $$
+ $$ = (\lambda x. \, K(x)(K(x)))$$
  Aplicamos $ K $:
 
  $$ = \lambda x. \, (\lambda y. \, x)( (\lambda y. \, x)) \rightarrow\_\beta \lambda x. \, x $$
 
- Portanto, $ S(K)(K) $ é equivalente ao combinador identidade $ I $.
+ Portanto, $ S(K)(K)$ é equivalente ao combinador identidade $ I $.
 
 **19**: Explique por que o combinador $ K $ pode ser usado para representar constantes em expressões lambda.
 
@@ -1516,22 +2159,22 @@ No contexto do cálculo lambda e linguagens de programação, existem duas princ
 
 1. **Avaliação por Valor**: Nesta estratégia, os argumentos são avaliados antes de serem passados para uma função. O cálculo é feito de forma estrita, ou seja, os argumentos são avaliados imediatamente. Isso corresponde à **ordem aplicativa de redução**, onde a função é aplicada apenas após a avaliação completa de seus argumentos. A vantagem desta estratégia é que ela pode ser mais eficiente em alguns contextos, pois o argumento é avaliado apenas uma vez.
 
-   **Exemplo**: Considere a expressão $ (\lambda x. \, x + 1) (2 + 3) $.
+   **Exemplo**: Considere a expressão $(\lambda x. \, x + 1) (2 + 3)$.
 
    Na **avaliação por valor**, primeiro o argumento $2 + 3$ é avaliado para $5$, e em seguida a função é aplicada:
 
-   $$ (\lambda x. \, x + 1) 5 \rightarrow 5 + 1 \rightarrow 6 $$
+   $$(\lambda x. \, x + 1) 5 \rightarrow 5 + 1 \rightarrow 6 $$
 
 2. Avaliação por Nome**: Argumentos são passados para a função sem serem avaliados imediatamente. A avaliação ocorre apenas quando o argumento é necessário. Esta estratégia corresponde à **ordem normal de redução**, em que a função é aplicada diretamente e o argumento só é avaliado quando estritamente necessário. Uma vantagem desta abordagem é que ela pode evitar avaliações desnecessárias, especialmente em contextos onde certos argumentos nunca são utilizados.
 
    **Exemplo**:
-   Usando a mesma expressão $ \lambda x. \, x + 1) (2 + 3) $, com **avaliação por nome**, a função seria aplicada sem avaliar o argumento de imediato:
+   Usando a mesma expressão $\lambda x. \, x + 1) (2 + 3)$, com **avaliação por nome**, a função seria aplicada sem avaliar o argumento de imediato:
 
-   $$ (\lambda x. \, x + 1) (2 + 3) \rightarrow (2 + 3) + 1 \rightarrow 5 + 1 \rightarrow 6 $$
+   $$(\lambda x. \, x + 1) (2 + 3) \rightarrow (2 + 3) + 1 \rightarrow 5 + 1 \rightarrow 6 $$
 
 ### Exercícios sobre Estratégias de Avaliação
 
-**1**: Considere a expressão $ (\lambda x. \, x + 1) (2 + 3) $. Avalie-a usando a estratégia de**avaliação por valor**.
+**1**: Considere a expressão $(\lambda x. \, x + 1) (2 + 3)$. Avalie-a usando a estratégia de**avaliação por valor**.
 
 **Solução:** Na avaliação por valor, o argumento é avaliado antes de ser aplicado à função:
 
@@ -1540,81 +2183,81 @@ No contexto do cálculo lambda e linguagens de programação, existem duas princ
 
  $$(\lambda x. \, x + 1) 5 \rightarrow 5 + 1 \rightarrow 6 $$
 
-**2**: Use a **avaliação por nome**na expressão $ (\lambda x. \, x + 1) (2 + 3) $ e explique o processo.
+**2**: Use a **avaliação por nome**na expressão $(\lambda x. \, x + 1) (2 + 3)$ e explique o processo.
 
 **Solução:** Na avaliação por nome, o argumento é passado diretamente para a função:
 
- $$ (\lambda x. \, x + 1) (2 + 3) \rightarrow (2 + 3) + 1 \rightarrow 5 + 1 \rightarrow 6 $$
+ $$(\lambda x. \, x + 1) (2 + 3) \rightarrow (2 + 3) + 1 \rightarrow 5 + 1 \rightarrow 6 $$
 
-**3**: A expressão $ (\lambda x. \, x \cdot x) ((2 + 3) + 1) $ é dada. Avalie-a usando a **avaliação por valor**.
+**3**: A expressão $(\lambda x. \, x \cdot x) ((2 + 3) + 1)$ é dada. Avalie-a usando a **avaliação por valor**.
 
 **Solução:** Primeiro, avaliamos o argumento:
 
- $$ (2 + 3) + 1 \rightarrow 5 + 1 \to 6 $$
+ $$(2 + 3) + 1 \rightarrow 5 + 1 \to 6 $$
  Agora, aplicamos a função:
 
- $$ (\lambda x. \, x \cdot x) 6 \rightarrow 6 \cdot 6 \to 36 $$
+ $$(\lambda x. \, x \cdot x) 6 \rightarrow 6 \cdot 6 \to 36 $$
 
-**4**: Aplique a **avaliação por nome** na expressão $ (\lambda x. \, x \cdot x) ((2 + 3) + 1) $ e explique cada passo.
+**4**: Aplique a **avaliação por nome** na expressão $(\lambda x. \, x \cdot x) ((2 + 3) + 1)$ e explique cada passo.
 
 **Solução:** Usando avaliação por nome, o argumento não é avaliado imediatamente:
 
- $$ (\lambda x. \, x \cdot x) ((2 + 3) + 1) \rightarrow ((2 + 3) + 1) \cdot ((2 + 3) + 1) $$
+ $$(\lambda x. \, x \cdot x) ((2 + 3) + 1) \rightarrow ((2 + 3) + 1) \cdot ((2 + 3) + 1)$$
 
  Agora, avaliamos o argumento quando necessário:
 
- $$ (5 + 1) \cdot (5 + 1) \to 6 \cdot 6 \to 36 $$
+ $$(5 + 1) \cdot (5 + 1) \to 6 \cdot 6 \to 36 $$
 
-**5**: Considere a expressão $ (\lambda x. \, x + 1) ( (\lambda y. \, y + 2) 3) $. Avalie-a usando a **ordem aplicativa de redução** (avaliação por valor).
+**5**: Considere a expressão $(\lambda x. \, x + 1) ( (\lambda y. \, y + 2) 3)$. Avalie-a usando a **ordem aplicativa de redução** (avaliação por valor).
 
-**Solução:** Primeiro, avaliamos o argumento $ (\lambda y. \, y + 2) 3 $:
+**Solução:** Primeiro, avaliamos o argumento $(\lambda y. \, y + 2) 3 $:
 
- $$ (\lambda y. \, y + 2) 3 \rightarrow 3 + 2 \to 5 $$
+ $$(\lambda y. \, y + 2) 3 \rightarrow 3 + 2 \to 5 $$
  Agora, aplicamos $ 5 $ à função:
 
- $$ (\lambda x. \, x + 1) 5 \rightarrow 5 + 1 \to 6 $$
+ $$(\lambda x. \, x + 1) 5 \rightarrow 5 + 1 \to 6 $$
 
-**6**: Aplique a **ordem normal de redução** (avaliação por nome) na expressão $ (\lambda x. \, x + 1) ( (\lambda y. \, y + 2) 3) $.
+**6**: Aplique a **ordem normal de redução** (avaliação por nome) na expressão $(\lambda x. \, x + 1) ( (\lambda y. \, y + 2) 3)$.
 
 **Solução:** Usando a ordem normal, aplicamos a função sem avaliar o argumento imediatamente:
 
- $$ (\lambda x. \, x + 1) ( (\lambda y. \, y + 2) 3) \rightarrow ( (\lambda y. \, y + 2) 3) + 1 $$
+ $$(\lambda x. \, x + 1) ( (\lambda y. \, y + 2) 3) \rightarrow ( (\lambda y. \, y + 2) 3) + 1 $$
 
  Agora, avaliamos o argumento:
 
- $$ (3 + 2) + 1 \to 5 + 1 \to 6 $$
+ $$(3 + 2) + 1 \to 5 + 1 \to 6 $$
 
-**7**: Considere a expressão $ (\lambda x. \, x + 1) (\lambda y. \, y + 2) $. Avalie-a usando **avaliação por valor** e explique por que ocorre um erro ou indefinição.
+**7**: Considere a expressão $(\lambda x. \, x + 1) (\lambda y. \, y + 2)$. Avalie-a usando **avaliação por valor** e explique por que ocorre um erro ou indefinição.
 
-**Solução:** Na avaliação por valor, tentaríamos primeiro avaliar o argumento $ \lambda y. \, y + 2 $. No entanto, esse é um termo que não pode ser avaliado diretamente, pois é uma função. Logo, a expressão não pode ser reduzida, resultando em um erro ou indefinição, já que a função não pode ser aplicada diretamente sem um argumento concreto.
+**Solução:** Na avaliação por valor, tentaríamos primeiro avaliar o argumento $\lambda y. \, y + 2 $. No entanto, esse é um termo que não pode ser avaliado diretamente, pois é uma função. Logo, a expressão não pode ser reduzida, resultando em um erro ou indefinição, já que a função não pode ser aplicada diretamente sem um argumento concreto.
 
-**8**: Aplique a **avaliação por nome** na expressão $ (\lambda x. \, x + 1) (\lambda y. \, y + 2) $.
+**8**: Aplique a **avaliação por nome** na expressão $(\lambda x. \, x + 1) (\lambda y. \, y + 2)$.
 
 **Solução:** Na avaliação por nome, passamos o argumento sem avaliá-lo:
 
- $$ (\lambda x. \, x + 1) (\lambda y. \, y + 2) \rightarrow (\lambda y. \, y + 2) + 1 $$
+ $$(\lambda x. \, x + 1) (\lambda y. \, y + 2) \rightarrow (\lambda y. \, y + 2) + 1 $$
 
- Como a função $ \lambda y. \, y + 2 $ não pode ser somada diretamente a um número, a expressão resultante será indefinida ou produzirá um erro.
+ Como a função $\lambda y. \, y + 2 $ não pode ser somada diretamente a um número, a expressão resultante será indefinida ou produzirá um erro.
 
-**9**: Dada a expressão $ (\lambda x. \lambda y. \, x + y) (2 + 3) 4 $, aplique a **ordem aplicativa de redução**.
+**9**: Dada a expressão $(\lambda x. \lambda y. \, x + y) (2 + 3) 4 $, aplique a **ordem aplicativa de redução**.
 
 **Solução:** Primeiro, avaliamos o argumento $ 2 + 3 $:
 
  $$ 2 + 3 \to 5 $$
 
- Agora, aplicamos a função $ (\lambda x. \lambda y. \, x + y) $:
+ Agora, aplicamos a função $(\lambda x. \lambda y. \, x + y)$:
 
- $$ (\lambda x. \lambda y. \, x + y) 5 4 \rightarrow (\lambda y. \, 5 + y) 4 \rightarrow 5 + 4 \to 9 $$
+ $$(\lambda x. \lambda y. \, x + y) 5 4 \rightarrow (\lambda y. \, 5 + y) 4 \rightarrow 5 + 4 \to 9 $$
 
-**10**: Use a **ordem normal de redução** para avaliar a expressão $ (\lambda x. \lambda y. \, x + y) (2 + 3) 4 $.
+**10**: Use a **ordem normal de redução** para avaliar a expressão $(\lambda x. \lambda y. \, x + y) (2 + 3) 4 $.
 
 **Solução:** Na ordem normal, aplicamos a função sem avaliar o argumento imediatamente:
 
- $$ (\lambda x. \lambda y. \, x + y) (2 + 3) 4 \rightarrow (\lambda y. \, (2 + 3) + y) 4 $$
+ $$(\lambda x. \lambda y. \, x + y) (2 + 3) 4 \rightarrow (\lambda y. \, (2 + 3) + y) 4 $$
 
  Agora, avaliamos os argumentos:
 
- $$ (5) + 4 \to 9 $$
+ $$(5) + 4 \to 9 $$
 
 # Estratégias de Redução
 
@@ -1622,232 +2265,528 @@ No contexto do cálculo lambda e linguagens de programação, existem duas princ
 
 Na **ordem normal**, a redução prioriza o _redex_ mais externo à esquerda (redução externa). Essa estratégia é garantida para encontrar a forma normal de um termo, caso ela exista. Além disso, como o argumento não é avaliado de imediato, é possível evitar o cálculo de argumentos que nunca serão utilizados, tornando-a equivalente à _avaliação preguiçosa_ em linguagens de programação.
 
-- **Vantagens**: sempre encontra a forma normal de um termo, se ela existir; pode evitar a avaliação de argumentos desnecessários, melhorando a eficiência em termos de espaço.
+Uma vantagem da ordem normal é que sempre que encontramos a forma normal de um termo, se existir, podemos evitar a avaliação de argumentos desnecessários. Melhorando a eficiência do processo em termos de espaço.
 
-- **Desvantagens**: pode ser ineficiente em termos de tempo, pois reavalia expressões várias vezes quando elas são necessárias repetidamente.
+Por outro lado, a ordem normal pode ser ineficiente em termos de tempo, já que, acabamos por reavaliar expressões várias vezes quando elas são necessárias repetidamente.
 
- **Exemplo**:
- Considere a expressão:
+ **Exemplo 1**: considere a expressão:
 
- $$ (\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) $$
+ $$(\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w))$$
 
  Na **ordem normal**, a redução ocorre da seguinte maneira:
 
- $$ (\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) \to\_\beta \lambda y. \, y $$
+ $$(\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) \to_\beta \lambda y. \, y $$
 
  O argumento $((\lambda z. \, z \, z) (\lambda w. w w))$ não é avaliado, pois ele nunca é utilizado no corpo da função.
+
+**Exemplo 2**: considere a expressão:
+
+$$(\lambda f.\, (\lambda x.\, f\, (x\, x))\, (\lambda x.\, f\, (x\, x)))\ (\lambda y.\, y + 1)$$
+
+Na **ordem normal**, a redução ocorre da seguinte maneira: primeiro reduzimos o redex mais externo à esquerda:
+
+$$(\lambda f.\, (\lambda x.\, f\, (x\, x))\, (\lambda x.\, f\, (x\, x)))\ (\lambda y.\, y + 1) \to_\beta (\lambda x.\, (\lambda y.\, y + 1)\, (x\, x))\, (\lambda x.\, (\lambda y.\, y + 1)\, (x\, x))$$
+
+Aplicamos a função externa sem avaliar os argumentos internos imediatamente:
+
+$$\to_\beta (\lambda y.\, y + 1)\, ((\lambda x.\, (\lambda y.\, y + 1)\, (x\, x))\, (\lambda x.\, (\lambda y.\, y + 1)\, (x\, x)))$$
+
+Continuamos reduzindo o redex mais externo:
+
+$$\to_\beta ((\lambda x.\, (\lambda y.\, y + 1)\, (x\, x))\, (\lambda x.\, (\lambda y.\, y + 1)\, (x\, x))) + 1$$
+
+Observamos que a expressão começa a repetir a si mesma, indicando um ciclo infinito. Contudo, na ordem normal, como o argumento não é necessário para o resultado final, a redução pode ser concluída sem avaliá-lo.
+
+**Exemplo 2**: considere a expressão:
+
+$$(\lambda x.\, (\lambda y.\, x))\ \left( (\lambda z.\, z + z)\ 3 \right)\ \left( (\lambda w.\, w\ w)\ (\lambda w.\, w\ w) \right)$$
+
+Na **ordem normal**, a redução ocorre da seguinte maneira: reduzimos o redex mais externo à esquerda:
+
+$$(\lambda x.\, (\lambda y.\, x))\ \left( (\lambda z.\, z + z)\ 3 \right)\ \left( (\lambda w.\, w\ w)\ (\lambda w.\, w\ w) \right) \to_\beta (\lambda y.\, \left( (\lambda z.\, z + z)\ 3 \right) )$$
+
+A função resultante não utiliza o argumento $y$, portanto, o segundo argumento $\left( (\lambda w.\, w\ w)\ (\lambda w.\, w\ w) \right)$ não é avaliado.
+
+Calculamos a expressão $(\lambda z.\, z + z)\ 3$:
+
+$$(\lambda z.\, z + z)\ 3 \to_\beta 3 + 3 = 6$$
+
+Portanto, o resultado final é:
+
+$$\lambda y.\, 6$$
+
+### Exercícios de Ordem Normal
+
+**1**: Reduza o seguinte termo usando a estratégia de **ordem normal**:
+
+$$M = (\lambda x.\, x)\ ((\lambda y.\, y\ y)\ (\lambda y.\, y\ y))$$
+
+**Solução**: na **ordem normal**, reduzimos o redex mais externo à esquerda primeiro. Começamos por identificar o redex mais externo:
+
+$$(\lambda x.\, x)\ \underline{((\lambda y.\, y\ y)\ (\lambda y.\, y\ y))}$$
+
+Aplicamos a redução beta ao redex externo:
+
+$$\to_\beta \underline{((\lambda y.\, y\ y)\ (\lambda y.\, y\ y))}$$
+
+Neste ponto, o termo resultante é:
+
+$$M' = (\lambda y.\, y\ y)\ (\lambda y.\, y\ y)$$
+
+Novamente, identificamos o redex mais externo à esquerda:
+
+$$\underline{(\lambda y.\, y\ y)\ (\lambda y.\, y\ y)}$$
+
+Aplicamos a redução beta:
+
+$$\to_\beta (\lambda y.\, y\ y)\ (\lambda y.\, y\ y)$$
+
+Observamos que o termo repete-se indefinidamente, indicando uma redução infinita. Ou seja, aplicando a estratégia de ordem normal, continuamos a reduzir o redex mais externo à esquerda. Neste caso, a redução não termina, indicando que o termo não possui forma normal.
+
+**2**: Reduza o seguinte termo usando a estratégia de **ordem normal**:
+
+$$M = (\lambda x.\, \lambda y.\, x)\ ((\lambda z.\, z + 1)\ 5)\ ((\lambda w.\, w \times 2)\ 3)$$
+
+**Solução**: começamos identificando o redex mais externo:
+
+$$\underline{(\lambda x.\, \lambda y.\, x)\ ((\lambda z.\, z + 1)\ 5)}\ ((\lambda w.\, w \times 2)\ 3)$$
+
+Aplicamos a redução beta ao redex externo:
+
+$$\to_\beta \lambda y.\, \underline{((\lambda z.\, z + 1)\ 5)}$$
+
+O termo resultante é:
+
+$$M' = \lambda y.\, ((\lambda z.\, z + 1)\ 5)$$
+
+Identificamos o próximo redex mais externo à esquerda no corpo:
+
+$$\lambda y.\, \underline{((\lambda z.\, z + 1)\ 5)}$$
+
+Aplicamos a redução beta:
+
+$$\to_\beta \lambda y.\, 5 + 1$$
+
+Realizamos a operação aritmética e encontramos a forma normal:
+
+$$\lambda y.\, 6$$
+
+O argumento $((\lambda w.\, w \times 2)\ 3)$ não é avaliado, pois não é utilizado no corpo da função resultante.
+
+**3**: Reduza o seguinte termo usando a estratégia de **ordem normal**:
+
+$$M = (\lambda f.\, f\ 5)\ (\lambda x.\, x \times x)$$
+
+**Solução**: identificamos o redex mais externo:
+
+$$\underline{(\lambda f.\, f\ 5)\ (\lambda x.\, x \times x)}$$
+
+Aplicamos a redução beta ao redex externo:
+
+$$\to_\beta \underline{(\lambda x.\, x \times x)\ 5}$$
+
+Identificamos o próximo redex:
+
+$$\underline{(\lambda x.\, x \times x)\ 5}$$
+
+Aplicamos a redução beta:
+
+$$\to_\beta 5 \times 5$$
+
+Realizamos a operação aritmética:
+
+$$25$$
+
+O termo reduzido na ordem normal resulta em $25$, que é a forma normal.
+
+**4**: Reduza o seguinte termo usando a estratégia de **ordem normal**:
+
+$$M = (\lambda x.\, x\ 4)\ (\lambda y.\, y\ \times\ y)$$
+
+**Solução**: na **ordem normal**, reduzimos o redex mais externo à esquerda primeiro. Começamos identificando o redex mais externo:
+
+$$\underline{(\lambda x.\, x\ 4)\ (\lambda y.\, y\ \times\ y)}$$
+
+Aplicamos a redução beta ao redex externo:
+
+$$\to_\beta \underline{(\lambda y.\, y\ \times\ y)\ 4}$$
+
+Identificamos o próximo redex mais externo à esquerda:
+
+$$\underline{(\lambda y.\, y\ \times\ y)\ 4}$$
+
+Aplicamos a redução beta:
+
+$$\to_\beta 4\ \times\ 4$$
+
+Realizamos a operação aritmética:
+
+$$16$$
+
+O termo reduzido na ordem normal resulta em $16$, nossa forma normal.
+
+**5**: Reduza o seguinte termo usando a estratégia de **ordem normal**:
+
+$$M = (\lambda x.\, \lambda y.\, y\ x)\ ((\lambda z.\, z\ z)\ (\lambda z.\, z\ z))\ 5$$
+
+**Solução**: identificamos o redex mais externo:
+
+$$\underline{(\lambda x.\, \lambda y.\, y\ x)\ ((\lambda z.\, z\ z)\ (\lambda z.\, z\ z))}\ 5$$
+
+Aplicamos a redução beta ao redex externo:
+
+$$\to_\beta \lambda y.\, y\ \underline{((\lambda z.\, z\ z)\ (\lambda z.\, z\ z))}$$
+
+Observamos que o argumento $x = ((\lambda z.\, z\ z)\ (\lambda z.\, z\ z))$ é um termo que se reduz infinitamente. No entanto, na ordem normal, só o avaliamos se necessário.
+
+Aplicamos a função resultante ao argumento $5$:
+
+$$(\lambda y.\, y\ ((\lambda z.\, z\ z)\ (\lambda z.\, z\ z)))\ 5 \to_\beta \underline{5\ ((\lambda z.\, z\ z)\ (\lambda z.\, z\ z))}$$
+
+Aqui, precisamos avaliar $((\lambda z.\, z\ z)\ (\lambda z.\, z\ z))$ para continuar. No entanto, esse termo não possui forma normal e leva a uma redução infinita. Portanto, a redução não termina, indicando que o termo não possui forma normal na ordem normal.
+
+**6**: Reduza o seguinte termo usando a estratégia de **ordem normal**:
+
+$$M = (\lambda x.\, \lambda y.\, x\ y)\ (\lambda w.\, w + 2)\ 3$$
+
+**Solução**: identificamos o redex mais externo:
+
+$$\underline{(\lambda x.\, \lambda y.\, x\ y)\ (\lambda w.\, w + 2)}\ 3$$
+
+Aplicamos a redução beta ao redex externo:
+
+$$\to_\beta \lambda y.\, (\lambda w.\, w + 2)\ y$$
+
+Aplicamos a função resultante ao argumento $3$:
+
+$$(\lambda y.\, (\lambda w.\, w + 2)\ y)\ 3 \to_\beta \underline{(\lambda w.\, w + 2)\ 3}$$
+
+Aplicamos a redução beta ao redex:
+
+$$\to_\beta 3 + 2$$
+
+Realizamos a operação aritmética:
+
+$$5$$
+
+O termo reduzido na ordem normal resulta em $5$, que é a forma normal.
+
+**7**: Reduza o seguinte termo usando a estratégia de **ordem normal**:
+
+$$M = (\lambda x.\, x)\ ((\lambda y.\, y + y)\ 4)$$
+
+**Solução**: na **ordem normal**, reduzimos o redex mais externo à esquerda primeiro. Começamos identificando o redex mais externo:
+
+$$(\lambda x.\, x)\ \underline{((\lambda y.\, y + y)\ 4)}$$
+
+Aplicamos a redução beta ao redex externo:
+
+$$\to_\beta \underline{((\lambda y.\, y + y)\ 4)}$$
+
+Agora, identificamos o próximo redex:
+
+$$\underline{(\lambda y.\, y + y)\ 4}$$
+
+Aplicamos a redução beta:
+
+$$\to_\beta 4 + 4 = 8$$
+
+O termo reduzido na ordem normal resulta em $8$, que é a forma normal.
+
+**8**: Reduza o seguinte termo usando a estratégia de **ordem normal**:
+
+$$M = (\lambda x.\, 5)\ ((\lambda y.\, y\ y)\ (\lambda y.\, y\ y))$$
+
+**Solução**: na **ordem normal**, reduzimos o redex mais externo à esquerda primeiro.
+
+Identificamos o redex mais externo:
+
+$$\underline{(\lambda x.\, 5)\ ((\lambda y.\, y\ y)\ (\lambda y.\, y\ y))}$$
+
+Aplicamos a redução beta ao redex externo:
+
+$$\to_\beta 5$$
+
+O termo reduzido na ordem normal resulta em $5$, que é a forma normal.
+
+O argumento $((\lambda y.\, y\ y)\ (\lambda y.\, y\ y))$ não é avaliado, evitando uma redução infinita.
+
+**9**: Reduza o seguinte termo usando a estratégia de **ordem normal**:
+
+$$M = (\lambda x.\, x\ 2)\ (\lambda y.\, 3)$$
+
+**Solução**: identificamos o redex mais externo:
+
+$$\underline{(\lambda x.\, x\ 2)\ (\lambda y.\, 3)}$$
+
+Aplicamos a redução beta ao redex externo:
+
+$$\to_\beta \underline{(\lambda y.\, 3)\ 2}$$
+
+Aplicamos a redução beta ao redex interno:
+
+$$\to_\beta 3$$
+
+O termo reduzido na ordem normal resulta em $3$, que é a forma normal.
+
+**10**: Reduza o seguinte termo usando a estratégia de **ordem normal**:
+
+$$M = (\lambda x.\, x\ 3)\ (\lambda y.\, y + 2)$$
+
+**Solução**: identificamos o redex mais externo:
+
+$$\underline{(\lambda x.\, x\ 3)\ (\lambda y.\, y + 2)}$$
+
+Aplicamos a redução beta ao redex externo:
+
+$$\to_\beta \underline{(\lambda y.\, y + 2)\ 3}$$
+
+Aplicamos a redução beta ao redex interno:
+
+$$\to_\beta 3 + 2 = 5$$
+
+O termo reduzido na ordem normal resulta em $5$, nossa forma normal.
 
 ## Ordem Aplicativa (Applicative-Order)
 
 Na **ordem aplicativa**, os argumentos de uma função são avaliados antes da aplicação da função em si (redução interna). Esta é a estratégia mais comum em linguagens de programação imperativas e em algumas funcionais. Ela pode ser mais eficiente em termos de tempo, pois garante que os argumentos são avaliados apenas uma vez.
 
-- **Vantagens**: Pode ser mais eficiente quando o resultado de um argumento é utilizado várias vezes, pois evita a reavaliação.
+A ordem aplicativa pode ser mais eficiente quando o resultado de um argumento é utilizado várias vezes, pois evita a reavaliação. Por outro lado, pode resultar em não-terminação em casos onde a ordem normal encontraria uma solução. Além disso, pode desperdiçar recursos ao avaliar argumentos que não são necessários.
 
-- **Desvantagens**: Pode resultar em não-terminação em casos onde a ordem normal encontraria uma solução. Além disso, pode desperdiçar recursos ao avaliar argumentos que não são necessários.
+**Exemplo 1**:
 
-**Exemplo**:
  Utilizando a mesma expressão:
 
- $$ (\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) $$
+ $$(\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w))$$
 
- Na **ordem aplicativa**, primeiro o argumento $((\lambda z. \, z \, z) (\lambda w. w w))$ é avaliado antes da aplicação da função:
+ Na ordem aplicativa, primeiro o argumento $((\lambda z. \, z \, z) (\lambda w. w w))$ é avaliado antes da aplicação da função:
 
- $$ (\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) \to*\beta (\lambda x. \lambda y. \, y) ((\lambda w. w w) (\lambda w. w w)) \to*\beta ... $$
+ $$(\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) \to*\beta (\lambda x. \lambda y. \, y) ((\lambda w. w w) (\lambda w. w w)) \to*\beta ... $$
 
  Isso leva a uma avaliação infinita, uma vez que a expressão $((\lambda w. w w) (\lambda w. w w))$ entra em um loop sem fim.
 
+**Exemplo 2**:
+
+Considere a expressão:
+
+$$M = (\lambda f.\, (\lambda x.\, f\ (x\ x))\ (\lambda x.\, f\ (x\ x)))\ (\lambda y.\, y + 1)$$
+
+Na ordem aplicativa, avaliamos primeiro os argumentos internos antes de aplicar as funções externas. Avaliamos o argumento $\lambda y.\, y + 1$, mas como é uma função, não há redução a ser feita.
+
+Agora avaliamos o corpo da função:
+
+$$(\lambda x.\, f\ (x\ x))\ (\lambda x.\, f\ (x\ x))$$
+
+Avaliamos o argumento interno $(\lambda x.\, f\ (x\ x))$: não há redução possível, pois é uma função.
+
+Aplicamos a função externa ao argumento interno:
+
+$$(\lambda x.\, f\ (x\ x))\ (\lambda x.\, f\ (x\ x)) \to_\beta f\ ((\lambda x.\, f\ (x\ x))\ (\lambda x.\, f\ (x\ x)))$$
+
+Agora, substituímos $f$ por $\lambda y.\, y + 1$:
+
+$$f\ ((\lambda x.\, f\ (x\ x))\ (\lambda x.\, f\ (x\ x))) \to (\lambda y.\, y + 1)\ ((\lambda x.\, f\ (x\ x))\ (\lambda x.\, f\ (x\ x)))$$
+
+Para continuar, precisamos avaliar $((\lambda x.\, f\ (x\ x))\ (\lambda x.\, f\ (x\ x)))$, que se expande infinitamente. Neste caso, a ordem aplicativa leva a uma redução infinita neste caso, pois tenta avaliar completamente os argumentos que causam loops infinitos.
+
+**Exemplo 3**:
+
+Considere a expressão:
+
+$$M = (\lambda x.\, 42)\ \left( (\lambda z.\, z\ z)\ (\lambda z.\, z\ z) \right)$$
+
+Na ordem aplicativa, avaliamos primeiro o argumento antes de aplicar a função.
+
+Avaliamos o argumento $(\lambda z.\, z\ z)\ (\lambda z.\, z\ z)$: aplicamos a redução beta:
+
+$$(\lambda z.\, z\ z)\ (\lambda z.\, z\ z) \to_\beta (\lambda z.\, z\ z)\ (\lambda z.\, z\ z)$$
+
+Podemos observar que a redução é infinita, pois o termo se repete indefinidamente. Como o argumento não pode ser totalmente avaliado, a aplicação da função não ocorre, e a redução não termina.
+
+Na ordem aplicativa, a avaliação do argumento leva a uma não-terminação, mesmo que a função externa simplesmente retorne um valor constante.
+
 ### Exercícios sobre Ordem Normal e Aplicativa
 
-**1**: Aplique a **ordem normal** à expressão $ (\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) $.
+**1**: Aplique a ordem normal à expressão $(\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w))$.
 
 **Solução:**
  A ordem normal prioriza a redução externa:
 
- $$ (\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) \rightarrow\_\beta \lambda y. \, y $$
+ $$(\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) \rightarrow\_\beta \lambda y. \, y $$
 
  O argumento $((\lambda z. \, z \, z) (\lambda w. w w))$ nunca é avaliado.
 
-**2**: Reduza a expressão $ (\lambda x. \lambda y. \, x) ((\lambda z. \, z + 1) 5) $ usando a **ordem normal**.
+**2**: Reduza a expressão $(\lambda x. \lambda y. \, x) ((\lambda z. \, z + 1) 5)$ usando a ordem normal.
 
 **Solução:**
  Na ordem normal, aplicamos a função sem avaliar o argumento imediatamente:
 
- $$ (\lambda x. \lambda y. \, x) ((\lambda z. \, z + 1) 5) \rightarrow\_\beta \lambda y. \, ((\lambda z. \, z + 1) 5) $$
+ $$(\lambda x. \lambda y. \, x) ((\lambda z. \, z + 1) 5) \rightarrow\_\beta \lambda y. \, ((\lambda z. \, z + 1) 5)$$
 
  O argumento não é avaliado porque a função não o utiliza.
 
-**3**: Considere a expressão $ (\lambda x. \lambda y. \, y + 1) ((\lambda z. \, z \, z) (\lambda w. w w)) $. Avalie-a usando **ordem normal**.
+**3**: Considere a expressão $(\lambda x. \lambda y. \, y + 1) ((\lambda z. \, z \, z) (\lambda w. w w))$. Avalie-a usando ordem normal.
 
 **Solução:**
  A ordem normal evita a avaliação do argumento:
 
- $$ (\lambda x. \lambda y. \, y + 1) ((\lambda z. \, z \, z) (\lambda w. w w)) \rightarrow\_\beta \lambda y. \, y + 1 $$
+ $$(\lambda x. \lambda y. \, y + 1) ((\lambda z. \, z \, z) (\lambda w. w w)) \rightarrow\_\beta \lambda y. \, y + 1 $$
 
  O termo $((\lambda z. \, z \, z) (\lambda w. w w))$ nunca é avaliado.
 
-**4**: Aplique a **ordem normal** na expressão $ (\lambda x. \, x) ((\lambda z. \, z \, z) (\lambda w. w w)) $.
+**4**: Aplique a ordem normal na expressão $(\lambda x. \, x) ((\lambda z. \, z \, z) (\lambda w. w w))$.
 
 **Solução:**
  Primeiro aplicamos a função sem avaliar o argumento:
 
- $$ (\lambda x. \, x) ((\lambda z. \, z \, z) (\lambda w. w w)) \rightarrow\_\beta ((\lambda z. \, z \, z) (\lambda w. w w)) $$
+ $$(\lambda x. \, x) ((\lambda z. \, z \, z) (\lambda w. w w)) \rightarrow\_\beta ((\lambda z. \, z \, z) (\lambda w. w w))$$
 
  Agora a expressão é indefinida, pois avaliaremos uma expressão sem fim.
 
-**5**: Reduza a expressão $ (\lambda x. \, 3) ((\lambda z. \, z + 1) 5) $ utilizando a **ordem normal**.
+**5**: Reduza a expressão $(\lambda x. \, 3) ((\lambda z. \, z + 1) 5)$ utilizando a ordem normal.
 
 **Solução:**
  Na ordem normal, o argumento não é avaliado:
 
- $$ (\lambda x. \, 3) ((\lambda z. \, z + 1) 5) \rightarrow\_\beta 3 $$
+ $$(\lambda x. \, 3) ((\lambda z. \, z + 1) 5) \rightarrow\_\beta 3 $$
 
  O argumento $((\lambda z. \, z + 1) 5)$ nunca é avaliado.
 
-**6**: Avalie a expressão $ (\lambda x. \lambda y. \, x) ((\lambda z. \, z + 1) 5) $ usando **ordem aplicativa**.
+**6**: Avalie a expressão $(\lambda x. \lambda y. \, x) ((\lambda z. \, z + 1) 5)$ usando ordem aplicativa.
 
 **Solução:**
  Na ordem aplicativa, o argumento é avaliado primeiro:
 
- $$ (\lambda z. \, z + 1) 5 \rightarrow\_\beta 6 $$
+ $$(\lambda z. \, z + 1) 5 \rightarrow\_\beta 6 $$
 
  Agora aplicamos a função:
 
- $$ (\lambda x. \lambda y. \, x) 6 \rightarrow\_\beta \lambda y. \, 6 $$
+ $$(\lambda x. \lambda y. \, x) 6 \rightarrow\_\beta \lambda y. \, 6 $$
 
-**7**: Aplique a **ordem aplicativa** à expressão $ (\lambda x. \, x) ((\lambda z. \, z \, z) (\lambda w. w w)) $.
+**7**: Aplique a ordem aplicativa à expressão $(\lambda x. \, x) ((\lambda z. \, z \, z) (\lambda w. w w))$.
 
 **Solução:**
  Na ordem aplicativa, o argumento é avaliado primeiro, o que leva a um loop sem fim:
 
- $$ ((\lambda z. \, z \, z) (\lambda w. w w)) \rightarrow*\beta (\lambda w. w w) (\lambda w. w w) \rightarrow*\beta ... $$
+ $$((\lambda z. \, z \, z) (\lambda w. w w)) \rightarrow*\beta (\lambda w. w w) (\lambda w. w w) \rightarrow*\beta ... $$
 
  A expressão entra em uma recursão infinita.
 
-**8**: Reduza a expressão $ (\lambda x. \, x \cdot 2) ((\lambda z. \, z + 3) 4) $ usando **ordem aplicativa**.
+**8**: Reduza a expressão $(\lambda x. \, x \cdot 2) ((\lambda z. \, z + 3) 4)$ usando ordem aplicativa.
 
 **Solução:**
- Primeiro, o argumento $ (\lambda z. \, z + 3) 4 $ é avaliado:
+ Primeiro, o argumento $(\lambda z. \, z + 3) 4 $ é avaliado:
 
- $$ (\lambda z. \, z + 3) 4 \rightarrow\_\beta 4 + 3 \to 7 $$
+ $$(\lambda z. \, z + 3) 4 \rightarrow\_\beta 4 + 3 \to 7 $$
 
  Agora aplicamos a função:
 
- $$ (\lambda x. \, x \cdot 2) 7 \rightarrow\_\beta 7 \cdot 2 \to 14 $$
+ $$(\lambda x. \, x \cdot 2) 7 \rightarrow\_\beta 7 \cdot 2 \to 14 $$
 
-**9**: Considere a expressão $ (\lambda x. \, x + 1) (\lambda y. \, y + 2) $. Avalie-a usando **ordem aplicativa** e explique o resultado.
+**9**: Considere a expressão $(\lambda x. \, x + 1) (\lambda y. \, y + 2)$. Avalie-a usando ordem aplicativa e explique o resultado.
 
 **Solução:**
  Na ordem aplicativa, tentamos avaliar o argumento primeiro:
 
- $$ (\lambda y. \, y + 2) \rightarrow\_\beta \lambda y. \, y + 2 $$
+ $$(\lambda y. \, y + 2) \rightarrow\_\beta \lambda y. \, y + 2 $$
 
  Como o argumento não pode ser avaliado (é uma função), o resultado não pode ser reduzido, levando a um erro ou indefinição.
 
-**10**: Aplique a **ordem aplicativa** à expressão $ (\lambda x. \, x + 1) ((\lambda z. \, z + 2) 3) $.
+**10**: Aplique a ordem aplicativa à expressão $(\lambda x. \, x + 1) ((\lambda z. \, z + 2) 3)$.
 
 **Solução:**
  Primeiro avaliamos o argumento:
 
- $$ (\lambda z. \, z + 2) 3 \rightarrow\_\beta 3 + 2 \to 5 $$
+ $$(\lambda z. \, z + 2) 3 \rightarrow\_\beta 3 + 2 \to 5 $$
 
  Agora aplicamos a função:
 
- $$ (\lambda x. \, x + 1) 5 \rightarrow\_\beta 5 + 1 \to 6 $$
+ $$(\lambda x. \, x + 1) 5 \rightarrow\_\beta 5 + 1 \to 6 $$
 
-**11**: Compare a avaliação da expressão $ (\lambda x. \, 2) ((\lambda z. \, z \, z) (\lambda w. w w)) $ usando **ordem normal** e **ordem aplicativa**.
+**11**: Compare a avaliação da expressão $(\lambda x. \, 2) ((\lambda z. \, z \, z) (\lambda w. w w))$ usando ordem normal e ordem aplicativa.
 
 **Solução (Ordem Normal):**
  A ordem normal evita a avaliação do argumento:
 
- $$ (\lambda x. \, 2) ((\lambda z. \, z \, z) (\lambda w. w w)) \rightarrow\_\beta 2 $$
+ $$(\lambda x. \, 2) ((\lambda z. \, z \, z) (\lambda w. w w)) \rightarrow\_\beta 2 $$
 
 **Solução (Ordem Aplicativa):**
  Na ordem aplicativa, o argumento é avaliado, levando a um loop sem fim.
 
-**12**: Considere a expressão $ (\lambda x. \lambda y. \, x + y) ((\lambda z. \, z + 1) 3) 4 $. Avalie usando **ordem normal** e **ordem aplicativa**.
+**12**: Considere a expressão $(\lambda x. \lambda y. \, x + y) ((\lambda z. \, z + 1) 3) 4 $. Avalie usando ordem normal e ordem aplicativa.
 
 **Solução (Ordem Normal):**
  Aplicamos a função sem avaliar o argumento:
 
- $$ (\lambda x. \lambda y. \, x + y) ((\lambda z. \, z + 1) 3) 4 \rightarrow\_\beta (\lambda y. \, ((\lambda z. \, z + 1) 3) + y) 4 $$
+ $$(\lambda x. \lambda y. \, x + y) ((\lambda z. \, z + 1) 3) 4 \rightarrow\_\beta (\lambda y. \, ((\lambda z. \, z + 1) 3) + y) 4 $$
 
  Agora avaliamos o argumento:
 
- $$ ((3 + 1) + 4) \to 8 $$
+ $$((3 + 1) + 4) \to 8 $$
 
 **Solução (Ordem Aplicativa):**
 Na ordem aplicativa, avaliamos o argumento primeiro:
 
- $$ (\lambda z. \, z + 1) 3 \rightarrow\_\beta 4 $$
+ $$(\lambda z. \, z + 1) 3 \rightarrow\_\beta 4 $$
 
  Agora aplicamos a função:
 
- $$ (\lambda x. \lambda y. \, x + y) 4 4 \rightarrow\_\beta 4 + 4 \to 8 $$
+ $$(\lambda x. \lambda y. \, x + y) 4 4 \rightarrow\_\beta 4 + 4 \to 8 $$
 
-**13**: Aplique **ordem normal** e **ordem aplicativa** à expressão $ (\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) 3 $.
+**13**: Aplique ordem normal e ordem aplicativa à expressão $(\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) 3 $.
 
 **Solução (Ordem Normal):**
  A função é aplicada sem avaliar o argumento:
 
- $$ (\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) 3 \rightarrow\_\beta \lambda y. \, y $$
+ $$(\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) 3 \rightarrow\_\beta \lambda y. \, y $$
 
  Agora aplicamos a função:
 
- $$ (\lambda y. \, y) 3 \rightarrow\_\beta 3 $$
+ $$(\lambda y. \, y) 3 \rightarrow\_\beta 3 $$
 
 **Solução (Ordem Aplicativa):**
  Na ordem aplicativa, o argumento é avaliado, resultando em um loop infinito.
 
-**14**: Avalie a expressão $ (\lambda x. \, x) ((\lambda z. \, z + 1) 3) $ usando **ordem normal** e **ordem aplicativa**.
+**14**: Avalie a expressão $(\lambda x. \, x) ((\lambda z. \, z + 1) 3)$ usando ordem normal e ordem aplicativa.
 
 **Solução (Ordem Normal):**
  A função é aplicada sem avaliar o argumento:
 
- $$ (\lambda x. \, x) ((\lambda z. \, z + 1) 3) \rightarrow*\beta ((\lambda z. \, z + 1) 3) \rightarrow*\beta 4 $$
+ $$(\lambda x. \, x) ((\lambda z. \, z + 1) 3) \rightarrow*\beta ((\lambda z. \, z + 1) 3) \rightarrow*\beta 4 $$
 
 **Solução (Ordem Aplicativa):**
  Na ordem aplicativa, o argumento é avaliado primeiro:
 
- $$ (\lambda z. \, z + 1) 3 \rightarrow\_\beta 4 $$
+ $$(\lambda z. \, z + 1) 3 \rightarrow\_\beta 4 $$
 
  Agora aplicamos a função:
 
- $$ (\lambda x. \, x) 4 \rightarrow\_\beta 4 $$
+ $$(\lambda x. \, x) 4 \rightarrow\_\beta 4 $$
 
-**15**: Reduza a expressão $ (\lambda x. \, x) (\lambda y. \, y + 2) $ usando **ordem normal** e **ordem aplicativa**.
+**15**: Reduza a expressão $(\lambda x. \, x) (\lambda y. \, y + 2)$ usando ordem normal e ordem aplicativa.
 
 **Solução (Ordem Normal):**
  Aplicamos a função sem avaliar o argumento:
 
- $$ (\lambda x. \, x) (\lambda y. \, y + 2$$
+ $$(\lambda x. \, x) (\lambda y. \, y + 2$$
 
 ## Impactos em Linguagens de Programação
 
 Haskell é uma linguagem de programação que utiliza **avaliação preguiçosa**, que corresponde à **ordem normal**. Isso significa que os argumentos só são avaliados quando absolutamente necessários, o que permite trabalhar com estruturas de dados potencialmente infinitas.
 
-**Exemplo**:
+**Exemplo 1**:
 
  ```haskell
  naturals = [0..]
- take 5 naturals -- Retorna [0,1,2,3,4]
+ take 5 naturals 
+ -- Retorna [0,1,2,3,4]
  ```
 
  Aqui, a lista infinita `naturals` nunca é totalmente avaliada. Somente os primeiros 5 elementos são calculados, graças à avaliação preguiçosa.
 
- A linguagem OCaml, por padrão, usa avaliação estrita (ordem aplicativa), mas fornece suporte para avaliação preguiçosa através do módulo Lazy.
-
-**Exemplo**:
-
- ```ocaml
- let lazy_value = lazy (expensive_computation())
- let result = Lazy.force lazy_value
- ```
-
- Nesse exemplo, `expensive_computation` só será avaliada quando `Lazy.force` for chamado. Até então, o valor é mantido em um estado _preguiçoso_, economizando recursos se o valor nunca for utilizado.
-
 Já o JavaScript usa apenas avaliação estrita. Contudo, oferece suporte à avaliação preguiçosa por meio de geradores, que permitem gerar valores sob demanda.
 
-**Exemplo**:
+**Exemplo 2**:
 
  ```javascript
  function* naturalNumbers() {
@@ -1878,9 +2817,9 @@ Dois termos lambda $M$ e $N$ são considerados equivalentes, denotado por $M\to_
 
 Formalmente, a relação $\to_\beta$ é a menor relação de equivalência que satisfaz as seguintes propriedades fundamentais:
 
-1. **$\beta$-redução**: $ (\lambda x.M)N \to_\beta M[N/x] $
+1. **$\beta$-redução**: $(\lambda x.M)N \to_\beta M[N/x]$
 
-   Isto significa que a aplicação de uma função $ (\lambda x.M) $ a um argumento $N$ resulta na substituição de todas as ocorrências de $x$ em $M$ pelo valor $N$.
+   Isto significa que a aplicação de uma função $(\lambda x.M)$ a um argumento $N$ resulta na substituição de todas as ocorrências de $x$ em $M$ pelo valor $N$.
 
 2. **$\eta$-conversão**: $\lambda x. \, Mx\to_\beta M$, se $x$ não ocorre livre em $M$
 
@@ -1912,19 +2851,19 @@ Vamos ver alguns exemplos de equivalência.
 
    **Exemplo 1**:
 
-   $$ \lambda x.(\lambda y. \, y)x \to\_\beta \lambda x. \, x $$
+   $$\lambda x.(\lambda y. \, y)x \to_\beta \lambda x. \, x $$
 
    Aqui, a função interna $\lambda y. \, y$ é a função identidade, que simplesmente retorna o valor de $x$. Após a aplicação, obtemos $\lambda x. \, x$, que também é a função identidade.
 
    **Exemplo 2**:
 
-   $$ \lambda z.(\lambda w.w)z \to\_\beta \lambda z.z $$
+   $$\lambda z.(\lambda w.w)z \to_\beta \lambda z.z $$
 
    Assim como no exemplo original, a função interna $\lambda w.w$ é a função identidade. Após a aplicação, o valor de $z$ é retornado.
 
    **Exemplo 3**:
 
-   $$ \lambda a.(\lambda b.b)a \to\_\beta \lambda a.a $$
+   $$\lambda a.(\lambda b.b)a \to_\beta \lambda a.a $$
 
    A função $\lambda b.b$ é aplicada ao valor $a$, retornando o próprio $a$. Isso demonstra mais uma aplicação da função identidade.
 
@@ -1932,19 +2871,19 @@ Vamos ver alguns exemplos de equivalência.
 
    **Exemplo 1**:
 
-   $$ (\lambda x.\lambda y.x)M \, N \to\_\beta M $$
+   $$(\lambda x.\lambda y.x)M \, N \to_\beta M $$
 
    Neste exemplo, a função $\lambda x.\lambda y.x$ retorna sempre seu primeiro argumento, ignorando o segundo. Aplicando isso a dois termos $M$ e $N$, o resultado é simplesmente $M$.
 
    **Exemplo 2**:
 
-   $$ (\lambda a.\lambda b.a)P Q \to\_\beta P $$
+   $$(\lambda a.\lambda b.a)P Q \to_\beta P $$
 
    A função constante $\lambda a.\lambda b.a$ retorna sempre o primeiro argumento ($P$), ignorando $Q$.
 
    **Exemplo 3**:
 
-   $$ (\lambda u.\lambda v.u)A B \to\_\beta A $$
+   $$(\lambda u.\lambda v.u)A B \to_\beta A $$
 
    Aqui, o comportamento é o mesmo: o primeiro argumento ($A$) é retornado, enquanto o segundo ($B$) é ignorado.
 
@@ -1952,39 +2891,39 @@ Vamos ver alguns exemplos de equivalência.
 
    **Exemplo 1**:
 
-   $$ \lambda x.(\lambda y.M)x \to\_\beta \lambda x.M[x/y] $$
+   $$\lambda x.(\lambda y.M)x \to_\beta \lambda x.M[x/y]$$
 
    Se $x$ não ocorre livre em $M$, podemos usar a $\eta$-conversão para "encurtar" a expressão, pois aplicar $M$ a $x$ não altera o comportamento da função. Este exemplo mostra como podemos internalizar a aplicação, eliminando a dependência desnecessária de $x$.
 
    **Exemplo 2**:
 
-   $$ \lambda x.(\lambda z.N)x \to\_\beta \lambda x.N[x/z] $$
+   $$\lambda x.(\lambda z.N)x \to_\beta \lambda x.N[x/z]$$
 
    Similarmente, se $x$ não ocorre em $N$, a $\eta$-conversão simplifica a expressão para $\lambda x.N$.
 
    **Exemplo 3**:
 
-   $$ \lambda f.(\lambda g.P)f \to\_\beta \lambda f.P[f/g] $$
+   $$\lambda f.(\lambda g.P)f \to_\beta \lambda f.P[f/g]$$
 
    Aqui, a $\eta$-conversão elimina a aplicação de $f$ em $P$, resultando em $\lambda f.P$.
 
-4. **Termo $\Omega$ (não-terminante)**:
+4. **Termo $\Omega$(não-terminante)**:
 
    **Exemplo 1**:
 
-   $$ (\lambda x. \, xx)(\lambda x. \, xx) \to\_\beta (\lambda x. \, xx)(\lambda x. \, xx) $$
+   $$(\lambda x. \, xx)(\lambda x. \, xx) \to_\beta (\lambda x. \, xx)(\lambda x. \, xx)$$
 
    Este é o famoso _combinador $\Omega$_, que se reduz a si mesmo indefinidamente, criando um ciclo infinito de auto-aplicações. Apesar de não ter forma normal (não termina), ele é equivalente a si mesmo por definição.
 
    **Exemplo 2**:
 
-   $$ (\lambda f.\, f\,f)(\lambda f.\,f\,f) \to\_\beta (\lambda f.\,f\,f)(\lambda f.\,f\,f) $$
+   $$(\lambda f.\, f\,f)(\lambda f.\,f\,f) \to_\beta (\lambda f.\,f\,f)(\lambda f.\,f\,f)$$
 
    Assim como o combinador $\Omega$, este termo também cria um ciclo infinito de auto-aplicação.
 
    **Exemplo 3**:
 
-   $$ (\lambda u.\,u\,u)(\lambda u.\,u\,u) \to\_\beta (\lambda u.\,u\,u)(\lambda u.\,u\,u) $$
+   $$(\lambda u.\,u\,u)(\lambda u.\,u\,u) \to_\beta (\lambda u.\,u\,u)(\lambda u.\,u\,u)$$
 
    Outra variação do combinador $\Omega$, que também resulta em uma redução infinita sem forma normal.
 
@@ -1992,13 +2931,13 @@ Vamos ver alguns exemplos de equivalência.
 
    **Exemplo 1**:
 
-   $$ (\lambda f.\lambda g.\lambda x.\,f\,(g\,x))\,M \, N \to\_\beta \lambda x.\,M \, (N \, x)$$
+   $$(\lambda f.\lambda g.\lambda x.\,f\,(g\,x))\,M \, N \to_\beta \lambda x.\,M \, (N \, x)$$
 
    Neste caso, a composição de duas funções, $M$ e $N$, é expressa como uma função que aplica $N$ ao argumento $x$, e então aplica $M$ ao resultado. A redução demonstra como a composição de funções pode ser representada e simplificada no cálculo lambda.
 
    **Exemplo 2**:
 
-   $$ (\lambda f.\lambda g.\lambda y.\,f\,(g\,y))\,A\,B \to\_\beta \lambda y.\,A\,(B\,y) $$
+   $$(\lambda f.\lambda g.\lambda y.\,f\,(g\,y))\,A\,B \to_\beta \lambda y.\,A\,(B\,y)$$
 
    A composição de $A$ e $B$ é aplicada ao argumento $y$, e o resultado de $By$ é então passado para $A$.
 
@@ -2023,9 +2962,9 @@ Formalmente:
 $$
 \begin{align*}
 &\text{1. } (\lambda x. \, M) \, N\to*\beta M \, [N/x] \text{ ($\beta$-redução)} \\
-&\text{2. } \lambda x. \, Mx\to*\beta M, \text{ se $x$ não ocorre livre em $M$ ($\eta$-conversão)} \\
+&\text{2. } \lambda x. \, Mx\to*\beta M, \text{ se $x$ não ocorre livre em $M$($\eta$-conversão)} \\
 &\text{3. Se } M\to*\beta M' \text{, então } \lambda x. \, M\to*\beta \lambda x. \, M' \text{ (compatibilidade com abstração)} \\
-&\text{4. Se } M\to*\beta M' \text{ e } N\to*\beta N' \text{, então } M \, N\to\_\beta M' \, N' \text{ (compatibilidade com aplicação)}
+&\text{4. Se } M\to*\beta M' \text{ e } N\to*\beta N' \text{, então } M \, N\to_\beta M' \, N' \text{ (compatibilidade com aplicação)}
 \end{align*}
 $$
 
@@ -2042,7 +2981,7 @@ Talvez algumas aplicações em linguagem Haskell ajude a fixar os conceitos.
    let x = 6 in x * 2
    ```
 
-   Aqui, o compilador pode realizar a $\beta$-redução $ (\lambda y. \, y + 1) 5\to_\beta 6$ em tempo de compilação, simplificando o código.
+   Aqui, o compilador pode realizar a $\beta$-redução $(\lambda y. \, y + 1) 5\to_\beta 6$ em tempo de compilação, simplificando o código.
 
 2. **Transformações Seguras de Código**
 
@@ -2187,7 +3126,7 @@ A representação dos números naturais no cálculo lambda permite definir funç
 
 A função sucessor, que incrementa um número natural como sucessor de outro número natural, é definida como:
 
-$$ \text{succ} = \lambda n. \lambda s. \lambda z. \, s \, (n \, s \, z) $$
+$$\text{succ} = \lambda n. \lambda s. \lambda z. \, s \, (n \, s \, z)$$
 
 A **função sucessor** é essencial para entender como os números naturais são criados. No entanto, para que os números de Church sejam considerados números naturais, é preciso implementar operações aritméticas no cálculo lambda puro. Para entender como isso funciona na prática, vamos aplicar $\text{succ}$ ao número $2$:
 
@@ -2213,27 +3152,27 @@ $$3 = \lambda s. \lambda z. \, s \, (s \, (s \, z))$$
 
 Agora, aplicamos a função de adição de números de Church:
 
-$$ \text{add} = \lambda m. \lambda n. \lambda s. \lambda z. \, m \, s \, (n \, s \, z) $$
+$$\text{add} = \lambda m. \lambda n. \lambda s. \lambda z. \, m \, s \, (n \, s \, z)$$
 
 Substituímos $m$ por $2$ e $n$ por $3$:
 
-$$ \text{add} \, 2 \, 3 = (\lambda m. \lambda n. \lambda s. \lambda z. \, m \, s \, (n \, s \, z)) \, 2 \, 3 $$
+$$\text{add} \, 2 \, 3 = (\lambda m. \lambda n. \lambda s. \lambda z. \, m \, s \, (n \, s \, z)) \, 2 \, 3 $$
 
 Expandimos a função:
 
-$$ = \lambda s. \lambda z. 2 \, s \, (3 \, s \, z) $$
+$$ = \lambda s. \lambda z. 2 \, s \, (3 \, s \, z)$$
 
 Substituímos as representações de $2$ e $3$:
 
-$$ = \lambda s. \lambda z. (\lambda s. \lambda z. s \, (s \, z)) \, s \, ( (\lambda s. \lambda z. s \, (s \, (s \, z))) \, s \, z) $$
+$$ = \lambda s. \lambda z. (\lambda s. \lambda z. s \, (s \, z)) \, s \, ( (\lambda s. \lambda z. s \, (s \, (s \, z))) \, s \, z)$$
 
 Primeiro, resolvemos o termo $3 \, s \, z$:
 
-$$ = s \, (s \, (s \, z)) $$
+$$ = s \, (s \, (s \, z))$$
 
 Agora, aplicamos $2 \, s$ ao resultado:
 
-$$ = s \, (s \, (s \, (s \, (s \, z)))) $$
+$$ = s \, (s \, (s \, (s \, (s \, z))))$$
 
 E chegamos ao aninhamento de cinco funções o que representa $5$, ou seja, o resultado de $2 + 3$ em cálculo lambda puro.
 
@@ -2243,53 +3182,53 @@ $$\text{mult} = \lambda m. \lambda n. \lambda s. m \, (n \, s)$$
 
 Nesse caso, a função $n \, s$ aplica $s$, $n$ vezes, representando o número $n$. Então, aplicamos $m$ vezes essa função, resultando em $s$ sendo aplicada $m \times n$ vezes. A multiplicação, portanto, é obtida através da repetição combinada da aplicação de $s$. Vamos usar os números de Church para calcular a multiplicação de $2 \times 2$ em cálculo lambda puro. Primeiro, representamos o número $2$ usando a definição de números de Church:
 
-$$ 2 = \lambda s. \lambda z. \, s \, (s \, z) $$
+$$ 2 = \lambda s. \lambda z. \, s \, (s \, z)$$
 
 Agora, aplicamos a função de multiplicação de números de Church:
 
-$$ \text{mult} = \lambda m. \lambda n. \lambda s. \, m \, (n \, s) $$
+$$\text{mult} = \lambda m. \lambda n. \lambda s. \, m \, (n \, s)$$
 
 Substituímos $m$ e $n$ por $2$:
 
-$$ \text{mult} \, 2 \, 2 = (\lambda m. \lambda n. \lambda s. \, m \, (n \, s)) \, 2 \, 2 $$
+$$\text{mult} \, 2 \, 2 = (\lambda m. \lambda n. \lambda s. \, m \, (n \, s)) \, 2 \, 2 $$
 
 Expandimos a função:
 
-$$ = \lambda s. 2 \, (2 \, s) $$
+$$ = \lambda s. 2 \, (2 \, s)$$
 
 Substituímos a representação de $2$:
 
-$$ = \lambda s. (\lambda s. \lambda z. s \, (s \, z)) \, (2 \, s) $$
+$$ = \lambda s. (\lambda s. \lambda z. s \, (s \, z)) \, (2 \, s)$$
 
 Agora resolvemos o termo $2 \, s$:
 
-$$ 2 \, s = \lambda z. \, s \, (s \, z) $$
+$$ 2 \, s = \lambda z. \, s \, (s \, z)$$
 
 Substituímos isso na expressão original:
 
-$$ = \lambda s. (\lambda z. \, s \, (s \, z)) $$
+$$ = \lambda s. (\lambda z. \, s \, (s \, z))$$
 
 Agora aplicamos a função $2 \, s$ mais uma vez:
 
-$$ = \lambda s. \lambda z. \, s \, (s \, (s \, (s \, z))) $$
+$$ = \lambda s. \lambda z. \, s \, (s \, (s \, (s \, z)))$$
 
 O que representa $4$, ou seja, o resultado de $2 \times 2$ em cálculo lambda puro.
 
 A exponenciação, por sua vez, é dada pela fórmula:
 
-$$ \text{exp} = \lambda b. \lambda e. \, e \, b $$
+$$\text{exp} = \lambda b. \lambda e. \, e \, b $$
 
 Aqui, a função $e \, b$ aplica $b$, $e$ vezes. Como $b$ já é um número de Church, aplicar $e$ vezes sobre ele significa calcular $b^e$. Dessa forma, a exponenciação é realizada repetindo a aplicação da base $b$ sobre si mesma, $e$ vezes. Vamos usar os números de Church para calcular a exponenciação $2^2$ em cálculo lambda puro. Primeiro, representamos o número $2$ usando a definição de números de Church:
 
-$$ 2 = \lambda s. \lambda z. \, s \, (s \, z) $$
+$$ 2 = \lambda s. \lambda z. \, s \, (s \, z)$$
 
 Agora, aplicamos a função de exponenciação de números de Church:
 
-$$ \text{exp} = \lambda b. \lambda e. \, e \, b $$
+$$\text{exp} = \lambda b. \lambda e. \, e \, b $$
 
 Substituímos $b$ e $e$ por $2$:
 
-$$ \text{exp} \, 2 \, 2 = (\lambda b. \lambda e. \, e \, b) \, 2 \, 2 $$
+$$\text{exp} \, 2 \, 2 = (\lambda b. \lambda e. \, e \, b) \, 2 \, 2 $$
 
 Expandimos a função:
 
@@ -2301,7 +3240,7 @@ $$ = (\lambda s. \lambda z. \, s \, (s \, z)) \, 2 $$
 
 Agora aplicamos $2$ a $b$:
 
-$$ = (\lambda z. \, 2 \, (2 \, z)) $$
+$$ = (\lambda z. \, 2 \, (2 \, z))$$
 
 Substituímos a definição de $2$ para ambos os termos:
 
@@ -2309,7 +3248,7 @@ $$ = \lambda z. (\lambda s. \lambda z. \, s \, (s \, z)) \, (\lambda s. \lambda 
 
 Aplicamos a função de $2$:
 
-$$ = \lambda z. \lambda s. \, s \, (s \, (s \, (s \, z))) $$
+$$ = \lambda z. \lambda s. \, s \, (s \, (s \, (s \, z)))$$
 
 O que representa $4$, ou seja, o resultado de $2^2$ em cálculo lambda puro.
 
@@ -2379,7 +3318,7 @@ $$= \lambda s. \lambda p. (\lambda s. \lambda p. \, s \, (s \, (s \, p))) \, s \
 
 Resolvemos primeiro o termo $-2 \, s \, p$:
 
-$$= p \, (p \, s) $$
+$$= p \, (p \, s)$$
 
 Agora aplicamos o termo $3 \, s$ ao resultado:
 
@@ -2389,15 +3328,15 @@ O que representa $1$, ou seja, o resultado de $3 + (-2)$ em cálculo lambda puro
 
 Para implementar a divisão corretamente no cálculo lambda puro, precisamos do combinador $Y$, que permite recursão. O combinador $Y$ veremos o combinador $Y$ com mais cuidado em outra parte deste texto, por enquanto, basta saber que ele é definido assim:
 
-$$ Y = \lambda f. (\lambda x. f \, (x \, x)) (\lambda x. f \, (x \, x)) $$
+$$ Y = \lambda f. (\lambda x. f \, (x \, x)) (\lambda x. f \, (x \, x))$$
 
 Agora, podemos definir a função de divisão com o combinador $Y$. Primeiro, definimos a lógica de subtração repetida:
 
-$$ \text{divLogic} = \lambda f. \lambda m. \lambda n. \lambda s. \lambda z. \, \text{ifZero} \, (\text{sub} \, m \, n) \, z \, (\lambda q. \text{succ} \, (f \, (\text{sub} \, m \, n) \, n \, s \, z)) $$
+$$\text{divLogic} = \lambda f. \lambda m. \lambda n. \lambda s. \lambda z. \, \text{ifZero} \, (\text{sub} \, m \, n) \, z \, (\lambda q. \text{succ} \, (f \, (\text{sub} \, m \, n) \, n \, s \, z))$$
 
 Aplicamos o combinador Y para permitir a recursão:
 
-$$ \text{div} = Y \, \text{divLogic} $$
+$$\text{div} = Y \, \text{divLogic} $$
 
 Para chegar a divisão precisamos utilizar o combinador $Y$ que permite a recursão necessária para subtrair repetidamente o divisor do dividendo. A função $\text{ifZero}$, que não definimos anteriormente usada para verificar se o resultado da subtração é zero ou negativo. A função $\text{sub}$ subtrai $n$ de $m$. Finalmente usamos a função $\text{succ}$ para contar quantas vezes subtraímos o divisor.
 
@@ -2584,20 +3523,20 @@ $$
 &\text{Substituímos $\text{True}$, $\text{False}$ e $\text{And}$ por suas definições em cálculo lambda:} \\
 &= (\lambda x. \lambda y. \, x \, y \, (\lambda x. \lambda y. \, y)) \, (\lambda x. \lambda y. \, x) \, (\lambda x. \lambda y. \, y) \\
 \\
-&\text{Aplicamos a primeira redução beta, substituindo $x$ por $ (\lambda x. \lambda y. \, x)$ na função $\text{And}$:} \\
+&\text{Aplicamos a primeira redução beta, substituindo $x$ por $(\lambda x. \lambda y. \, x)$ na função $\text{And}$:} \\
 &\to_\beta (\lambda y. \, (\lambda x. \lambda y. \, x) \, y \, (\lambda x. \lambda y. \, y)) \, (\lambda x. \lambda y. \, y) \\
 \\
-&\text{Nesta etapa, a substituição de $x$ por $ (\lambda x. \lambda y. \, x)$ resulta em uma nova função que depende de $y$. A expressão interna aplica $\text{True}$ ($ \lambda x. \lambda y. \, x$) ao argumento $y$ e ao $\text{False}$ ($ \lambda x. \lambda y. \, y$).} \\
+&\text{Nesta etapa, a substituição de $x$ por $(\lambda x. \lambda y. \, x)$ resulta em uma nova função que depende de $y$. A expressão interna aplica $\text{True}$($\lambda x. \lambda y. \, x$) ao argumento $y$ e ao $\text{False}$($\lambda x. \lambda y. \, y$).} \\
 \\
-&\text{Agora, aplicamos a segunda redução beta, substituindo $y$ por $ (\lambda x. \lambda y. \, y)$:} \\
+&\text{Agora, aplicamos a segunda redução beta, substituindo $y$ por $(\lambda x. \lambda y. \, y)$:} \\
 &\to_\beta (\lambda x. \lambda y. \, x) \, (\lambda x. \lambda y. \, y) \, (\lambda x. \lambda y. \, y) \\
 \\
 &\text{A substituição de $y$ por $\text{False}$ resulta na expressão acima. Aqui, $\text{True}$ é aplicada ao primeiro argumento $\text{False}$, ignorando o segundo argumento.} \\
 \\
-&\text{Aplicamos a próxima redução beta, aplicando $ \lambda x. \lambda y. \, x$ ao primeiro argumento $ (\lambda x. \lambda y. \, y)$:} \\
+&\text{Aplicamos a próxima redução beta, aplicando $\lambda x. \lambda y. \, x$ ao primeiro argumento $(\lambda x. \lambda y. \, y)$:} \\
 &\to_\beta \lambda y. \, (\lambda x. \lambda y. \, y) \\
 \\
-&\text{Neste ponto, temos uma função que, quando aplicada a $y$, sempre retorna $\text{False}$, já que $ \lambda x. \lambda y. \, x$ retorna o primeiro argumento.} \\
+&\text{Neste ponto, temos uma função que, quando aplicada a $y$, sempre retorna $\text{False}$, já que $\lambda x. \lambda y. \, x$ retorna o primeiro argumento.} \\
 \\
 &\text{Finalmente, aplicamos a última redução beta, que ignora o argumento de $\lambda y$ e retorna diretamente $\text{False}$:} \\
 &\to_\beta \lambda x. \lambda y. \, y \\
@@ -2765,7 +3704,7 @@ y f = f (y f)
 
 -- Definição da função fatorial usando o Y-combinator
 factorial :: Integer -> Integer
-factorial = y $ \f n -> if n == 0 then 1 else n * f (n - 1)
+factorial = y $\f n -> if n == 0 then 1 else n * f (n - 1)
 
 main :: IO ()
 main = do
@@ -2778,7 +3717,7 @@ Podemos estender este exemplo para outras funções recursivas, como a sequênci
 
 ```haskell
 fibonacci :: Integer -> Integer
-fibonacci = y $ \f n -> if n <= 1 then n else f (n - 1) + f (n - 2)
+fibonacci = y $\f n -> if n <= 1 then n else f (n - 1) + f (n - 2)
 
 main :: IO ()
 main = do
@@ -2807,7 +3746,7 @@ $$
 \text{factorial} = Y \, (\lambda f. \lambda n. \text{if} \, (\text{isZero} \, n) \, 1 \, (\text{mult} \, n \, (f \, (\text{pred} \, n))))
 $$
 
-Aqui, utilizamos funções auxiliares como $\text{isZero}$, $\text{mult}$ (multiplicação), e $\text{pred}$ (predecessor), todas definíveis no cálculo lambda. O combinador $Y$ cuida da recursão, aplicando a função a si mesma até que a condição de parada ($n = 0$) seja atendida. Vamos ver isso com mais detalhes usando o combinador $Y$ para definir $\text{fac}$
+Aqui, utilizamos funções auxiliares como $\text{isZero}$, $\text{mult}$(multiplicação), e $\text{pred}$(predecessor), todas definíveis no cálculo lambda. O combinador $Y$ cuida da recursão, aplicando a função a si mesma até que a condição de parada ($n = 0$) seja atendida. Vamos ver isso com mais detalhes usando o combinador $Y$ para definir $\text{fac}$
 
 1. **Defina uma função auxiliar que recebe como parâmetro a função recursiva**:
 
@@ -3013,7 +3952,7 @@ Vamos rever o combinador $Y$, desta vez, usando funções de ordem superior. Com
 
  $$\text{mult} = \lambda m.\, \lambda n.\, \lambda f.\, m\, (n\, f)$$
 
- **$\text{pred}$ (Predecessor):**
+ **$\text{pred}$(Predecessor):**
 
  $$\text{pred} = \lambda n.\, \lambda f.\, \lambda x.\, n\, (\lambda g.\, \lambda h.\, h\, (g\, f))\, (\lambda u.\, x)\, (\lambda u.\, u)$$
 
@@ -3153,13 +4092,13 @@ Definimos dois elementos básicos:
 
 1. Lista vazia ($\text{nil}$):
 
-   $$ \text{nil} = \lambda c. \lambda n. n $$
+   $$\text{nil} = \lambda c. \lambda n. n $$
 
    Esta função ignora o primeiro argumento e retorna o segundo.
 
 2. Construtor de lista ($\text{cons}$):
 
-   $$ \text{cons} = \lambda h. \lambda t. \lambda c. \lambda n. c \, h \, (t \, c \, n) $$
+   $$\text{cons} = \lambda h. \lambda t. \lambda c. \lambda n. c \, h \, (t \, c \, n)$$
 
 O construtor recebe um elemento $h$ e uma lista $t$. Ele cria uma nova lista com $h$ na frente de $t$.
 
@@ -3179,23 +4118,23 @@ Chegamos a essa representação da seguinte forma:
 
  Após a redução $\beta$, temos:
 
- $$ \lambda c. \lambda n. c \, 3 \, ((\lambda c. \lambda n. n) \, c \, n) $$
+ $$\lambda c. \lambda n. c \, 3 \, ((\lambda c. \lambda n. n) \, c \, n)$$
 
  **Adicionamos o elemento 2**:
 
- $$ \text{cons} \, 2 \, (\text{cons} \, 3 \, \text{nil}) = (\lambda h. \lambda t. \lambda c. \lambda n. c \, h \, (t \, c \, n)) \, 2 \, (\lambda c. \lambda n. c \, 3 \, ((\lambda c. \lambda n. n) \, c \, n)) $$
+ $$\text{cons} \, 2 \, (\text{cons} \, 3 \, \text{nil}) = (\lambda h. \lambda t. \lambda c. \lambda n. c \, h \, (t \, c \, n)) \, 2 \, (\lambda c. \lambda n. c \, 3 \, ((\lambda c. \lambda n. n) \, c \, n))$$
 
  Após a redução $\beta$, obtemos:
 
- $$ \lambda c. \lambda n. c \, 2 \, ((\lambda c. \lambda n. c \, 3 \, ((\lambda c. \lambda n. n) \, c \, n)) \, c \, n) $$
+ $$\lambda c. \lambda n. c \, 2 \, ((\lambda c. \lambda n. c \, 3 \, ((\lambda c. \lambda n. n) \, c \, n)) \, c \, n)$$
 
  **Finalmente, adicionamos o elemento 1**:
 
- $$ \text{cons} \, 1 \, (\text{cons} \, 2 \, (\text{cons} \, 3 \, \text{nil})) = (\lambda h. \lambda t. \lambda c. \lambda n. c \, h \, (t \, c \, n)) \, 1 \, (\lambda c. \lambda n. c \, 2 \, ((\lambda c. \lambda n. c \, 3 \, ((\lambda c. \lambda n. n) \, c \, n)) \, c \, n)) $$
+ $$\text{cons} \, 1 \, (\text{cons} \, 2 \, (\text{cons} \, 3 \, \text{nil})) = (\lambda h. \lambda t. \lambda c. \lambda n. c \, h \, (t \, c \, n)) \, 1 \, (\lambda c. \lambda n. c \, 2 \, ((\lambda c. \lambda n. c \, 3 \, ((\lambda c. \lambda n. n) \, c \, n)) \, c \, n))$$
 
  Após a redução $\beta$, a representação final é:
 
- $$ \lambda c. \lambda n. c \, 1 \, ((\lambda c. \lambda n. c \, 2 \, ((\lambda c. \lambda n. c \, 3 \, ((\lambda c. \lambda n. n) \, c \, n)) \, c \, n)) \, c \, n) $$
+ $$\lambda c. \lambda n. c \, 1 \, ((\lambda c. \lambda n. c \, 2 \, ((\lambda c. \lambda n. c \, 3 \, ((\lambda c. \lambda n. n) \, c \, n)) \, c \, n)) \, c \, n)$$
 
 Esta é a representação completa da lista $[1, 2, 3]$ em cálculo lambda puro. Esta representação permite operações recursivas sobre listas, como mapear funções ou calcular comprimentos. Podemos, por exemplo, definir uma função para calcular o comprimento de listas
 
@@ -3211,35 +4150,35 @@ Aqui, $\text{succ}$ é a função que retorna o sucessor de um número, e o corp
 
  **Definição de $\text{length}$**:
 
- $$ \text{length} = Y \, (\lambda f. \lambda l. l \, (\lambda h. \lambda t. \text{succ} \, (f \, t)) \, 0) $$
+ $$\text{length} = Y \, (\lambda f. \lambda l. l \, (\lambda h. \lambda t. \text{succ} \, (f \, t)) \, 0)$$
 
  **Representação da lista $[1, 2, 3]$**:
 
- $$ [1, 2, 3] = \lambda c. \lambda n. c \, 1 \, (c \, 2 \, (c \, 3 \, n)) $$
+ $$[1, 2, 3] = \lambda c. \lambda n. c \, 1 \, (c \, 2 \, (c \, 3 \, n))$$
 
  **Aplicamos $\text{length}$ à lista**:
 
- $$ \text{length} \, [1, 2, 3] = Y \, (\lambda f. \lambda l. l \, (\lambda h. \lambda t. \text{succ} \, (f \, t)) \, 0) \, (\lambda c. \lambda n. c \, 1 \, (c \, 2 \, (c \, 3 \, n))) $$
+ $$\text{length} \, [1, 2, 3] = Y \, (\lambda f. \lambda l. l \, (\lambda h. \lambda t. \text{succ} \, (f \, t)) \, 0) \, (\lambda c. \lambda n. c \, 1 \, (c \, 2 \, (c \, 3 \, n)))$$
 
  O combinador $Y$ permite a recursão. Após aplicá-lo, obtemos:
 
- $$ (\lambda l. l \, (\lambda h. \lambda t. \text{succ} \, (\text{length} \, t)) \, 0) \, (\lambda c. \lambda n. c \, 1 \, (c \, 2 \, (c \, 3 \, n))) $$
+ $$(\lambda l. l \, (\lambda h. \lambda t. \text{succ} \, (\text{length} \, t)) \, 0) \, (\lambda c. \lambda n. c \, 1 \, (c \, 2 \, (c \, 3 \, n)))$$
 
  **Aplicamos a função à lista**:
 
- $$ (\lambda c. \lambda n. c \, 1 \, (c \, 2 \, (c \, 3 \, n))) \, (\lambda h. \lambda t. \text{succ} \, (\text{length} \, t)) \, 0 $$
+ $$(\lambda c. \lambda n. c \, 1 \, (c \, 2 \, (c \, 3 \, n))) \, (\lambda h. \lambda t. \text{succ} \, (\text{length} \, t)) \, 0 $$
 
  Reduzimos, aplicando $c$ e $n$:
 
- $$ (\lambda h. \lambda t. \text{succ} \, (\text{length} \, t)) \, 1 \, ((\lambda h. \lambda t. \text{succ} \, (\text{length} \, t)) \, 2 \, ((\lambda h. \lambda t. \text{succ} \, (\text{length} \, t)) \, 3 \, 0)) $$
+ $$(\lambda h. \lambda t. \text{succ} \, (\text{length} \, t)) \, 1 \, ((\lambda h. \lambda t. \text{succ} \, (\text{length} \, t)) \, 2 \, ((\lambda h. \lambda t. \text{succ} \, (\text{length} \, t)) \, 3 \, 0))$$
 
  Reduzimos cada aplicação de $(\lambda h. \lambda t. \text{succ} \, (\text{length} \, t))$:
 
- $$ \text{succ} \, (\text{succ} \, (\text{succ} \, (\text{length} \, \text{nil}))) $$
+ $$\text{succ} \, (\text{succ} \, (\text{succ} \, (\text{length} \, \text{nil})))$$
 
  Sabemos que $\text{length} \, \text{nil} = 0$, então:
 
- $$ \text{succ} \, (\text{succ} \, (\text{succ} \, 0)) $$
+ $$\text{succ} \, (\text{succ} \, (\text{succ} \, 0))$$
 
  Cada $\text{succ}$ incrementa o número por 1, então o resultado final é 3.
 
@@ -3257,36 +4196,36 @@ Essa função percorre a lista somando os elementos, aplicando recursão via o c
 
  **Representação da lista $[1, 2, 3]$**:
 
- $$ [1, 2, 3] = \lambda c. \lambda n. c \, 1 \, (c \, 2 \, (c \, 3 \, n)) $$
+ $$[1, 2, 3] = \lambda c. \lambda n. c \, 1 \, (c \, 2 \, (c \, 3 \, n))$$
 
  **Aplicamos $\text{sum}$ à lista**:
 
- $$ \text{sum} \, [1, 2, 3] = Y \, (\lambda f. \lambda l. l \, (\lambda h. \lambda t. \text{add} \, h \, (f \, t)) \, 0) \, (\lambda c. \lambda n. c \, 1 \, (c \, 2 \, (c \, 3 \, n))) $$
+ $$\text{sum} \, [1, 2, 3] = Y \, (\lambda f. \lambda l. l \, (\lambda h. \lambda t. \text{add} \, h \, (f \, t)) \, 0) \, (\lambda c. \lambda n. c \, 1 \, (c \, 2 \, (c \, 3 \, n)))$$
 
  O combinador $Y$ permite a recursão. Após aplicá-lo, obtemos:
 
- $$ (\lambda l. l \, (\lambda h. \lambda t. \text{add} \, h \, (\text{sum} \, t)) \, 0) \, (\lambda c. \lambda n. c \, 1 \, (c \, 2 \, (c \, 3 \, n))) $$
+ $$(\lambda l. l \, (\lambda h. \lambda t. \text{add} \, h \, (\text{sum} \, t)) \, 0) \, (\lambda c. \lambda n. c \, 1 \, (c \, 2 \, (c \, 3 \, n)))$$
 
  **Aplicamos a função à lista**:
 
- $$ (\lambda c. \lambda n. c \, 1 \, (c \, 2 \, (c \, 3 \, n))) \, (\lambda h. \lambda t. \text{add} \, h \, (\text{sum} \, t)) \, 0 $$
+ $$(\lambda c. \lambda n. c \, 1 \, (c \, 2 \, (c \, 3 \, n))) \, (\lambda h. \lambda t. \text{add} \, h \, (\text{sum} \, t)) \, 0 $$
 
  **Reduzimos, aplicando $c$ e $n$**:
 
- $$ (\lambda h. \lambda t. \text{add} \, h \, (\text{sum} \, t)) \, 1 \, ((\lambda h. \lambda t. \text{add} \, h \, (\text{sum} \, t)) \, 2 \, ((\lambda h. \lambda t. \text{add} \, h \, (\text{sum} \, t)) \, 3 \, 0)) $$
+ $$(\lambda h. \lambda t. \text{add} \, h \, (\text{sum} \, t)) \, 1 \, ((\lambda h. \lambda t. \text{add} \, h \, (\text{sum} \, t)) \, 2 \, ((\lambda h. \lambda t. \text{add} \, h \, (\text{sum} \, t)) \, 3 \, 0))$$
 
  Reduzimos cada aplicação de $(\lambda h. \lambda t. \text{add} \, h \, (\text{sum} \, t))$:
 
- $$ \text{add} \, 1 \, (\text{add} \, 2 \, (\text{add} \, 3 \, (\text{sum} \, \text{nil}))) $$
+ $$\text{add} \, 1 \, (\text{add} \, 2 \, (\text{add} \, 3 \, (\text{sum} \, \text{nil})))$$
 
  Sabemos que $\text{sum} \, \text{nil} = 0$, então:
 
- $$ \text{add} \, 1 \, (\text{add} \, 2 \, (\text{add} \, 3 \, 0)) $$
+ $$\text{add} \, 1 \, (\text{add} \, 2 \, (\text{add} \, 3 \, 0))$$
 
  **Realizamos as adições de dentro para fora**:
 
- $$ \text{add} \, 1 \, (\text{add} \, 2 \, 3) $$
- $$ \text{add} \, 1 \, 5 $$
+ $$\text{add} \, 1 \, (\text{add} \, 2 \, 3)$$
+ $$\text{add} \, 1 \, 5 $$
  $$ 6 $$
 
 Portanto, $\text{sum} \, [1, 2, 3] = 6$ em cálculo lambda puro.
@@ -3295,25 +4234,25 @@ Portanto, $\text{sum} \, [1, 2, 3] = 6$ em cálculo lambda puro.
 
 As funções Head e Tail são funções uteis na manipulação de listas, principalmente em linguagens funcionais. Vamos definir estas funções em cálculo lambda puro. Começando pela função $\text{head}$:
 
-$$ \text{head} = \lambda l. \, l \, (\lambda h. \lambda t. \, h) \, (\lambda x. \, x) $$
+$$\text{head} = \lambda l. \, l \, (\lambda h. \lambda t. \, h) \, (\lambda x. \, x)$$
 
 Em seguida, temos a função $\text{tail}$:
 
-$$ \text{tail} = \lambda l. l \, (\lambda h. \lambda t. t) \, (\lambda x. \, x) $$
+$$\text{tail} = \lambda l. l \, (\lambda h. \lambda t. t) \, (\lambda x. \, x)$$
 
 **Exemplo 1**: Aplicação à lista [1, 2, 3]
 
  **Aplicação de Head**: Aplicamos Head à lista:
 
- $$ \text{head} \, [1, 2, 3] = (\lambda l. l \, (\lambda h. \lambda t. h) \, (\lambda x. \, x)) \, (\lambda c. \lambda n. c \, 1 \, (c \, 2 \, (c \, 3 \, n))) $$
+ $$\text{head} \, [1, 2, 3] = (\lambda l. l \, (\lambda h. \lambda t. h) \, (\lambda x. \, x)) \, (\lambda c. \lambda n. c \, 1 \, (c \, 2 \, (c \, 3 \, n)))$$
 
  Reduzimos:
 
- $$ (\lambda c. \lambda n. c \, 1 \, (c \, 2 \, (c \, 3 \, n))) \, (\lambda h. \lambda t. h) \, (\lambda x. \, x) $$
+ $$(\lambda c. \lambda n. c \, 1 \, (c \, 2 \, (c \, 3 \, n))) \, (\lambda h. \lambda t. h) \, (\lambda x. \, x)$$
 
  Aplicamos $c$ e $n$:
 
- $$ (\lambda h. \lambda t. h) \, 1 \, ((\lambda h. \lambda t. h) \, 2 \, ((\lambda h. \lambda t. h) \, 3 \, (\lambda x. \, x))) $$
+ $$(\lambda h. \lambda t. h) \, 1 \, ((\lambda h. \lambda t. h) \, 2 \, ((\lambda h. \lambda t. h) \, 3 \, (\lambda x. \, x)))$$
 
  Reduzimos:
 
@@ -3325,19 +4264,19 @@ Portanto, $\text{head} \, [1, 2, 3] = 1$.
 
  Aplicamos Tail à lista:
 
- $$ \text{tail} \, [1, 2, 3] = (\lambda l. l \, (\lambda h. \lambda t. t) \, (\lambda x. \, x)) \, (\lambda c. \lambda n. c \, 1 \, (c \, 2 \, (c \, 3 \, n))) $$
+ $$\text{tail} \, [1, 2, 3] = (\lambda l. l \, (\lambda h. \lambda t. t) \, (\lambda x. \, x)) \, (\lambda c. \lambda n. c \, 1 \, (c \, 2 \, (c \, 3 \, n)))$$
 
  Reduzimos:
 
- $$ (\lambda c. \lambda n. c \, 1 \, (c \, 2 \, (c \, 3 \, n))) \, (\lambda h. \lambda t. t) \, (\lambda x. \, x) $$
+ $$(\lambda c. \lambda n. c \, 1 \, (c \, 2 \, (c \, 3 \, n))) \, (\lambda h. \lambda t. t) \, (\lambda x. \, x)$$
 
  Aplicamos $c$ e $n$:
 
- $$ (\lambda h. \lambda t. t) \, 1 \, ((\lambda h. \lambda t. t) \, 2 \, ((\lambda h. \lambda t. t) \, 3 \, (\lambda x. \, x))) $$
+ $$(\lambda h. \lambda t. t) \, 1 \, ((\lambda h. \lambda t. t) \, 2 \, ((\lambda h. \lambda t. t) \, 3 \, (\lambda x. \, x)))$$
 
  Reduzimos:
 
- $$ \lambda c. \lambda n. c \, 2 \, (c \, 3 \, n) $$
+ $$\lambda c. \lambda n. c \, 2 \, (c \, 3 \, n)$$
 
 Portanto, $\text{tail} \, [1, 2, 3] = [2, 3]$.
 
@@ -3347,11 +4286,11 @@ Listas são um tipo de dado composto útil para a maior parte das linguagens de 
 
 Definimos uma tupla de dois elementos como:
 
-$$ (x, y) = \lambda f. f \, x \, y $$
+$$(x, y) = \lambda f. f \, x \, y $$
 
 A tupla $(3,4)$ será representada assim:
 
-$$ (3, 4) = \lambda f. f \, 3 \, 4$$
+$$(3, 4) = \lambda f. f \, 3 \, 4$$
 
 Para que uma tupla seja realmente útil, precisamos ser capazes de trabalhar com seus elementos individualmente. Para isso, podemos definir duas funções: $\text{first}$ e $\text{follow}$.
 
@@ -3359,17 +4298,17 @@ Para que uma tupla seja realmente útil, precisamos ser capazes de trabalhar com
 
 A função First retorna o primeiro elemento da tupla:
 
-$$ \text{first} = \lambda p. p \, (\lambda x. \lambda y. \, x) $$
+$$\text{first} = \lambda p. p \, (\lambda x. \lambda y. \, x)$$
 
  **Exemplo**: Aplicação a $(3,4)$:
 
- $$\text{first} \, (3, 4) = (\lambda p. p \, (\lambda x. \lambda y. \, x)) \, (\lambda f. f \, 3 \, 4) $$
+ $$\text{first} \, (3, 4) = (\lambda p. p \, (\lambda x. \lambda y. \, x)) \, (\lambda f. f \, 3 \, 4)$$
 
  Redução:
 
- $$ (\lambda f. f \, 3 \, 4) \, (\lambda x. \lambda y. \, x) $$
+ $$(\lambda f. f \, 3 \, 4) \, (\lambda x. \lambda y. \, x)$$
 
- $$ (\lambda x. \lambda y. \, x) \, 3 \, 4 $$
+ $$(\lambda x. \lambda y. \, x) \, 3 \, 4 $$
 
  $$ 3 $$
 
@@ -3385,9 +4324,9 @@ $$\text{last} = \lambda p. p \, (\lambda x. \lambda y. y)$$
 
  Redução:
 
- $$ (\lambda f. f \, 3 \, 4) \, (\lambda x. \lambda y. y) $$
+ $$(\lambda f. f \, 3 \, 4) \, (\lambda x. \lambda y. y)$$
 
- $$ (\lambda x. \lambda y. y) \, 3 \, 4 $$
+ $$(\lambda x. \lambda y. y) \, 3 \, 4 $$
 
  $$ 4 $$
 
@@ -3625,17 +4564,17 @@ No sistema de tipos simples, variáveis têm tipos atribuídos, no formato $x\, 
 
 Podemos simplificar o conceito de tipos a dois conceitos:
 
-1. **Tipos básicos**, como $\text{Bool}$ (booleanos) ou $\text{Nat}$ (números naturais).
+1. **Tipos básicos**, como $\text{Bool}$(booleanos) ou $\text{Nat}$(números naturais).
 
 2. **Tipos de função**, como $A \rightarrow B$, que representam funções que mapeiam valores de $A$ para $B$.
 
-Considere a expressão $ \lambda x. \, x + 1$. No cálculo lambda tipado, essa função será válida se $x$ for de um tipo numérico, como $x : \text{Nat}$, neste caso considerando $1$ com um literal natural. Sendo assim, a função seria tipada e sua assinatura a definirá como uma função que aceita um número natural e retorna um número natural:
+Considere a expressão $\lambda x. \, x + 1$. No cálculo lambda tipado, essa função será válida se $x$ for de um tipo numérico, como $x : \text{Nat}$, neste caso considerando $1$ com um literal natural. Sendo assim, a função seria tipada e sua assinatura a definirá como uma função que aceita um número natural e retorna um número natural:
 
 $$\lambda x : \text{Nat}. \, x + 1 : \text{Nat} \rightarrow \text{Nat}$$
 
 Isso assegura que apenas valores do tipo $\text{Nat}$ possam ser aplicados a essa função, evitando a aplicação incorreta de argumentos não numéricos.
 
-Com um pouco mais de formalidade, vamos considerar um conjunto de tipos básicos. Usaremos a letra grega $\tau$ ("tau") minúscula para indicar um tipo básico. O conjunto de tipos simples será definido pela seguinte gramática BNF:
+Com um pouco mais de formalidade, vamos considerar um conjunto de tipos básicos. Usaremos a letra grega $\tau$("tau") minúscula para indicar um tipo básico. O conjunto de tipos simples será definido pela seguinte gramática BNF:
 
 $$A,B ::= \tau \mid A \rightarrow B \mid A \times B \mid 1$$
 
@@ -3973,7 +4912,7 @@ A semântica do cálculo lambda tipado, portanto, não apenas define o comportam
 
 ### Abstrações Lambda e Tipos
 
-No cálculo lambda tipado, as abstrações são expressas na forma $\lambda x : A. M$, onde $x$ é uma variável de tipo $A$ e $M$ é a expressão cujo resultado dependerá de $x$. O tipo dessa abstração é dado por $A \rightarrow B$, onde $B$ é o tipo do resultado de $M$. Por exemplo, a abstração $\lambda x : \text{Nat}. \, x + 1$ define uma função que aceita um argumento do tipo $\text{Nat}$ (número natural) e retorna outro número natural. Nesse caso, o tipo da abstração é $\text{Nat} \rightarrow \text{Nat}$, o que significa que a função mapeia um número natural para outro número natural.
+No cálculo lambda tipado, as abstrações são expressas na forma $\lambda x : A. M$, onde $x$ é uma variável de tipo $A$ e $M$ é a expressão cujo resultado dependerá de $x$. O tipo dessa abstração é dado por $A \rightarrow B$, onde $B$ é o tipo do resultado de $M$. Por exemplo, a abstração $\lambda x : \text{Nat}. \, x + 1$ define uma função que aceita um argumento do tipo $\text{Nat}$(número natural) e retorna outro número natural. Nesse caso, o tipo da abstração é $\text{Nat} \rightarrow \text{Nat}$, o que significa que a função mapeia um número natural para outro número natural.
 
 $$\lambda x : \text{Nat}. \, x + 1 : \text{Nat} \rightarrow \text{Nat}$$
 
@@ -4017,7 +4956,7 @@ As regras de tipagem no cálculo lambda tipado fornecem um sistema formal para g
 
 1. **Regra da Variável**: Se uma variável $x$ possui o tipo $\tau$ no contexto $\Gamma$, então podemos derivar que $\Gamma \vdash x : A$.
 
-   O contexto de tipagem, denotado por `$ \Gamma $`, é um conjunto de associações entre variáveis e seus tipos. Formalmente temos:
+   O contexto de tipagem, denotado por `$\Gamma $`, é um conjunto de associações entre variáveis e seus tipos. Formalmente temos:
 
    $$
    \frac{}{\, \Gamma \vdash x : A} \quad \text{se } (x : \tau) \in \Gamma
@@ -4546,7 +5485,7 @@ Estas propriedades juntas garantem a consistência e a robustez do sistema de ti
 
       Tipo do Argumento $3$:
 
-      $$ \Gamma \vdash 3 : \text{Nat}
+      $$\Gamma \vdash 3 : \text{Nat}
       $$
 
    2. **Aplicação da Função:**
@@ -4907,3 +5846,7 @@ O estudo do cálculo lambda tipado e suas extensões continua a influenciar o de
 *Proceedings of the London Mathematical Society*, 42:230–265, 1936. Published 1937.
 
 [^cita7]: SELINGER, Peter. *Lecture Notes on the Lambda Calculus*. Department of Mathematics and Statistics, Dalhousie University, Halifax, Canada.
+
+[^cita8]: Church, A., & Rosser, J. B. (1936). Some properties of conversion. Transactions of the American Mathematical Society, 39(3), 472-482. <https://www.ams.org/journals/tran/1936-039-03/S0002-9947-1936-1501858-0/S0002-9947-1936-1501858-0.pdf>
+
+[^cita9]: Barendregt, H. P. (1984). *The Lambda Calculus: Its Syntax and Semantics*. North-Holland.
