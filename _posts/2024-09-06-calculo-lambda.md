@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
 beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
-lastmod: 2024-10-14T23:57:13.117Z
+lastmod: 2024-10-15T02:58:03.800Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -167,17 +167,15 @@ O cálculo lambda usa uma notação específica para representar funções e ope
 
 - $FV(M)$: Representa o conjunto de variáveis livres no termo $M$.
 
-- $\alpha$-conversão: Renomeação de variáveis ligadas, denotada por $\equiv_\alpha$.
+- $\alpha$-redução: Renomeação de variáveis ligadas, denotada por $\equiv_\alpha$.
 
-- $\eta$-conversão: Expressa a extensionalidade de funções, denotada por $\rightarrow_\eta$.
+- $\eta$-redução: Expressa a extensionalidade de funções, denotada por $\rightarrow_\eta$.
 
 Estas notações e convenções formam a base da linguagem formal do cálculo lambda, permitindo a expressão precisa de funções e suas transformações.
 
 ## Convenção de Nomes e Variáveis Livres e Ligadas
 
-No cálculo lambda, as variáveis têm escopo léxico. O escopo é determinado pela estrutura sintática do termo, não pela ordem de avaliação.
-
-Uma variável é **ligada** quando aparece dentro do escopo de uma abstração que a introduz. Por exemplo:
+No cálculo lambda, as variáveis têm escopo léxico. O escopo é determinado pela estrutura sintática do termo, não pela ordem de avaliação. Uma variável é **ligada** quando aparece dentro do escopo de uma abstração que a introduz. Por exemplo:
 
 - Em $\lambda x.\lambda y.x \, y$, tanto $x$ quanto $y$ estão ligadas.
 - Em $\lambda x.(\lambda x. \, x) \, x$, ambas as ocorrências de $x$ estão ligadas, mas a ocorrência interna (no termo $\lambda x. \, x$) "esconde" a externa.
@@ -197,7 +195,7 @@ FV(E \, N) &= FV(E) \cup FV(N)
 \end{align*}
 $$
 
-Uma convenção importante no cálculo lambda é que podemos renomear variáveis ligadas sem alterar o significado do termo, desde que não capturemos variáveis livres. **Esta operação é chamada de $\alpha$-conversão**. Por exemplo:
+Uma convenção importante no cálculo lambda é que podemos renomear variáveis ligadas sem alterar o significado do termo, desde que não capturemos variáveis livres. **Esta operação é chamada de $\alpha$-redução**. Por exemplo:
 
 $$\lambda x.\lambda y.x \, y \to_\alpha \lambda z.\lambda w.z \, w$$
 
@@ -235,7 +233,7 @@ A abstração e a aplicação são os dois mecanismos fundamentais do cálculo l
 
 **Solução**: substituímos $x$ por $3$ e teremos: $(\lambda x. \, x + 2) 3 = 3 + 2 = 5$
 
-**4**: Simplifique a expressão $(\lambda x. \lambda y. x)(5)(6)$.
+**4**: Simplifique a expressão $(\lambda x. \lambda y. \, x)(5)(6)$.
 
 **Solução**: primeiro, aplicamos a função ao valor $5$, o que resulta na função $\lambda y. 5$. Agora, aplicamos essa nova função ao valor $6$:
 
@@ -255,12 +253,12 @@ $$
 
 A função $\lambda y. y$ é a identidade e o resultado final é a própria função identidade.
 
-**6**: aplique a função $\lambda x. \lambda y. x + y$ aos valores $3$ e $4$.
+**6**: aplique a função $\lambda x. \lambda y. \, x + y$ aos valores $3$ e $4$.
 
 **Solução**: Aplicamos a função a $3$ e depois a $4$:
 
 $$
-(\lambda x. \lambda y. x + y) 3 = \lambda y. 3 + y
+(\lambda x. \lambda y. \, x + y) 3 = \lambda y. 3 + y
 $$
 
 Agora aplicamos $4$:
@@ -271,9 +269,9 @@ $$
 
 O resultado final é $7$.
 
-**7**: A função $\lambda x. \lambda y. x$ é uma função de primeira ordem ou segunda ordem?
+**7**: A função $\lambda x. \lambda y. \, x$ é uma função de primeira ordem ou segunda ordem?
 
-**Solução**: a função $\lambda x. \lambda y. x$ é uma função de segunda ordem, pois é uma função que retorna outra função.
+**Solução**: a função $\lambda x. \lambda y. \, x$ é uma função de segunda ordem, pois é uma função que retorna outra função.
 
 **8**: Defina uma função lambda que troca a ordem dos argumentos de uma função de dois argumentos.
 
@@ -470,13 +468,13 @@ Existem duas estratégias principais para realizar a redução beta:
 
    Além da redução beta, existem as seguintes conversões:
 
-- **$\alpha$-conversão**: Renomeia variáveis ligadas para evitar conflitos.
+- **$\alpha$-redução**: Renomeia variáveis ligadas para evitar conflitos.
 
  **Exemplo:**
 
  $$\lambda x.\, x + 1 \rightarrow \lambda y.\, y + 1$$
 
-- **$\eta$-conversão**: Captura a equivalência entre funções que produzem os mesmos resultados.
+- **$\eta$-redução**: Captura a equivalência entre funções que produzem os mesmos resultados.
 
  **Exemplo:**
 
@@ -817,7 +815,7 @@ Ambos representam a mesma função, diferindo apenas nos nomes das variáveis li
 
  **Solução:** A substituição direta causaria captura de variáveis. Aplicamos a redução alfa para renomear $z$ antes de fazer a substituição:
 
- $$[z/x](\lambda z. \, x + z) = \lambda w. z + w$$
+ $$[z/x](\lambda z. \, x + z) = \lambda w. \, z + w$$
 
 **4**: Considere a expressão $(\lambda x. \lambda y. \, x + y) z$. Aplique a substituição $[z/x]$ e explique a necessidade de redução alfa.
 
@@ -1115,6 +1113,391 @@ $$\to_\beta (\lambda x. \lambda y. \, x - 2 \cdot y) 8 3$$
 $$\to_\beta (\lambda y. \, 8 - 2 \cdot y) 3$$
 
 $$\to_\beta 8 - 2 \cdot 3 = 8 - 6 = 2$$
+
+## Redução Eta
+
+A **redução eta** é uma das três formas fundamentais de redução no cálculo lambda, juntamente com as reduções alfa e beta. A redução eta captura a ideia de extensionalidade, permitindo simplificar termos que representam a mesma função em termos de comportamento externo. Formalmente A redução eta é definida pela seguinte regra:
+
+$$\lambda x.\, f\, x \to_\eta f \quad \text{se } x \notin \text{FV}(f)$$
+
+Neste caso, esta expressão é formada por: uma função $\lambda x.\, f\, x$ que recebe um argumento $x$ e aplica a função $f$ a $x$; $\text{FV}(f)$ representa o conjunto de variáveis livres em $f$ e a condição $x \notin \text{FV}(f)$ garante que $x$ não aparece livre em $f$, evitando a captura de variáveis.
+
+A redução eta permite eliminar a abstração $\lambda x$ quando a função aplica $f$ diretamente a $x$, resultando que $\lambda x.\, f\, x$ é equivalente a $f$ em termos de comportamento. Isso ocorre quando $x$ não aparece livre em $f$, garantindo que a eliminação da abstração não altera o significado do termo. Em outras palavras podemos dizer que a redução eta expressa o princípio de que duas funções são iguais se, para todos os argumentos, elas produzem os mesmos resultados. Em outras palavras, se uma função $\lambda x.\, f\, x$ aplica $f$ diretamente ao seu argumento $x$, e $x$ não aparece livre em $f$, então $\lambda x.\, f\, x$ pode ser reduzido a $f$.
+
+**Exemplo 1**: Considere o termo:
+
+$$\lambda x.\, f\, x$$
+
+Se $f = \lambda y.\, y + 2$ e $x$ não aparece livre em $f$, a redução eta pode ser aplicada:
+
+$$\lambda x.\, f\, x \to_\eta f = \lambda y.\, y + 2$$
+
+Assim, $\lambda x.\, f\, x$ reduz-se a $f$.
+
+**Exemplo 2**: Considere o termo:
+
+$$\lambda x.\, (\lambda y.\, y^2)\, x$$
+
+Como $x$ não aparece livre em $f = \lambda y.\, y^2$, a redução eta pode ser aplicada:
+
+$$\lambda x.\, f\, x \to_\eta f = \lambda y.\, y^2$$
+
+Portanto, $\lambda x.\, (\lambda y.\, y^2)\, x$ reduz-se a $\lambda y.\, y^2$.
+
+Se $x$ aparece livre em $f$, a redução eta não é aplicável, pois a eliminação de $\lambda x$ alteraria o comportamento do termo. Por exemplo, se $f = \lambda y.\, x + y$, onde $x$ é uma variável livre em $f$, então:
+
+$$\lambda x.\, f\, x = \lambda x.\, (\lambda y.\, x + y)\, x \to_\beta \lambda x.\, x + x$$
+
+Neste caso, não é possível aplicar a redução eta para obter $f$, pois $x$ aparece livre em $f$, e remover $\lambda x$ deixaria $x$ indefinida.
+
+A condição $x \notin \text{FV}(f)$ é crucial. Se $x$ aparecer livre em $f$, a redução eta não pode ser aplicada, pois a remoção da abstração $\lambda x$ poderia alterar o significado do termo.
+
+**Exemplo Contrário**: Considere a expressão:
+
+$$\lambda x.\, x\, x$$
+
+Aqui, $x$ aparece livre no corpo $x\, x$. Não podemos aplicar a redução eta para obter $x$, pois isso alteraria o comportamento da função.
+
+### Propriedade de Extensionalidade
+
+A redução eta está relacionada ao conceito de **extensionalidade** em matemática, onde duas funções são consideradas iguais se produzem os mesmos resultados para todos os argumentos. No cálculo lambda, a redução eta formaliza esse conceito, permitindo a simplificação de funções que são extensionais.
+
+>Em matemática, o conceito de extensionalidade refere-se à ideia de que dois objetos são considerados iguais se têm as mesmas propriedades externas ou observáveis. No contexto das funções, a extensionalidade implica que duas funções $f$ e $g$ são consideradas iguais se, para todo argumento $x$ em seu domínio comum, $f(x) = g(x)$. Isso significa que a identidade de uma função é determinada pelos seus valores de saída para cada entrada possível, e não pela sua definição interna ou pela forma como é construída.
+>
+>A extensionalidade é um princípio em várias áreas da matemática, incluindo teoria dos conjuntos e lógica matemática. Na teoria dos conjuntos, o axioma da extensionalidade afirma que dois conjuntos são iguais se e somente se contêm exatamente os mesmos elementos. No cálculo lambda e na programação funcional, a extensionalidade se manifesta através de conceitos como a redução eta, que permite tratar funções que produzem os mesmos resultados para todas as entradas como equivalentes, independentemente de suas estruturas internas.
+
+Para ilustrar o conceito de extensionalidade e sua relação com a redução eta, a esforçada leitora deve considerar os seguintes exemplos:
+
+**Exemplo 1**: Suponha que temos duas funções no cálculo lambda:
+
+$$f = \lambda x.\, x^2 + 2x + 1$$
+
+e
+
+$$g = \lambda x.\, (x + 1)^2$$
+
+Embora $f$ e $g$ tenham definições diferentes, podemos demonstrar que elas produzem o mesmo resultado para qualquer valor de $x$:
+
+$$
+f(x) = x^2 + 2x + 1 \\
+g(x) = (x + 1)^2 = x^2 + 2x + 1
+$$
+
+Portanto, para todo $x$, $f(x) = g(x)$, o que significa que $f$ e $g$ são extensionais, apesar de suas diferentes expressões internas.
+
+**Exemplo 2**: Considere as funções:
+
+$$
+h = \lambda x.\, f\, x \\
+k = f
+$$
+
+Se $x$ não aparece livre em $f$, a redução eta nos permite afirmar que $h$ é equivalente a $k$:
+
+$$h = \lambda x.\, f\, x \to_\eta f = k$$
+
+Isso mostra que, embora $h$ seja definido como uma função que aplica $f$ a $x$, ela é extensionamente igual a $f$ em si, reforçando o princípio de que a forma interna da função é menos relevante do que seu comportamento externo.
+
+**Exemplo 3**: No contexto da programação funcional, suponha que temos a seguinte função em Haskell:
+
+```haskell
+-- Definição explícita
+doubleList :: [Int] -> [Int]
+doubleList xs = map (\x -> x * 2) xs
+```
+
+Aplicando a redução eta e considerando o conceito de extensionalidade, podemos simplificar a função:
+
+```haskell
+-- Após a redução eta
+doubleList :: [Int] -> [Int]
+doubleList = map (* 2)
+```
+
+Apesar das diferenças na implementação, ambas as versões de `doubleList` produzem os mesmos resultados para qualquer lista de inteiros fornecida, demonstrando que são extensionais.
+
+**Exemplo 4**: Na teoria dos conjuntos, considere:
+
+$$
+A = \{ x \mid x \text{ é um número natural par} \} \\
+B = \{ 2n \mid n \in \mathbb{N} \}
+$$
+
+Ambos os conjuntos $A$ e $B$ contêm exatamente os mesmos elementos. Pelo axioma da extensionalidade, concluímos que $A = B$, mesmo que suas definições sejam diferentes.
+
+Em resumo, a extensionalidade nos permite focar no comportamento observável das funções ou conjuntos, em vez de suas definições internas. No cálculo lambda, a redução eta é a ferramenta que formaliza esse princípio, simplificando termos que representam funções com o mesmo efeito para todos os argumentos. Ao aplicar a redução eta, estamos essencialmente afirmando que a forma como a função é construída é irrelevante se seu comportamento externo permanece inalterado.
+
+### Expansão Eta
+
+Além da redução eta, existe a **expansão eta**, que é a operação inversa da redução eta:
+
+$$f \to_\eta \lambda x.\, f\, x \quad \text{se } x \notin \text{FV}(f)$$
+
+A expansão eta pode ser útil para transformar termos em formas que facilitam outras reduções ou para provar equivalências entre funções. Neste caso, a equivalência lambda ($\equiv$) é a relação de equivalência gerada pelas reduções alfa, beta e eta. Dois termos $M$ e $N$ são equivalentes lambda ($M \equiv N$) se podem ser transformados um no outro por uma sequência finita de reduções e expansões alfa, beta e eta.
+
+**Exemplo**: considere a definição de uma função identidade:
+
+$$I = \lambda x.\, x$$
+
+E uma função $F$ definida como:
+
+$$F = \lambda x.\, I\, x$$
+
+Aplicando a redução eta a $F$ podemos observar que $I\, x = (\lambda y.\, y)\, x \to_\beta x$, ou seja:
+
+$$F = \lambda x.\, I\, x \equiv \lambda x.\, x$$
+
+Ou seja, $F$ pode ser reduzido a $I$. No entanto, usando a redução eta diretamente:
+
+$$F = \lambda x.\, I\, x \to_\eta I \quad \text{(se } x \notin \text{FV}(I))$$
+
+Como $x$ não aparece livre em $I$, podemos aplicar a redução eta para obter $F = I$.
+
+### Relação entre Redução Eta e outras Formas de Redução
+
+No cálculo lambda, as reduções alfa, beta e eta formam um conjunto integrado de transformações que permitem manipular e simplificar expressões lambda. Cada uma dessas reduções desempenha um papel específico, mas elas frequentemente interagem e complementam-se mutuamente.
+
+Vamos começar com a redução alfa, que lida com a renomeação de variáveis ligadas, pode ser necessária antes de aplicar a redução eta para evitar conflitos de nomes. Por exemplo:
+
+$$\lambda x. (\lambda y. \, x y) x \to_\alpha \lambda x. (\lambda z. \, x z) x \to_\eta \lambda x. \, x$$
+
+Neste caso, a redução alfa foi aplicada primeiro para renomear $y$ para $z$, evitando a captura de variável, antes de aplicar a redução eta.
+
+A interação entre redução eta e beta é particularmente interessante. Em alguns casos, a redução eta pode simplificar expressões após a aplicação da redução beta:
+
+$$(\lambda f. \lambda x. f x) (\lambda y. y + 1) \to_\beta \lambda x. (\lambda y. y + 1) x \to_\eta \lambda y. y + 1$$
+
+Aqui, a redução beta é aplicada primeiro, seguida pela redução eta para simplificar ainda mais a expressão.
+
+Nesta interação entre as reduções precisamos tomar cuidado com a ordem de aplicação das reduções pode afetar o resultado final e a eficiência do processo de redução. Em linhas gerais, podemos seguir as seguintes regras:
+
+1. A redução alfa é aplicada conforme necessário para evitar conflitos de nomes.
+
+2. A redução beta é frequentemente aplicada após a aplicação alfa para realizar computações.
+
+3. A redução eta é aplicada para simplificar a estrutura da função após as reduções beta.
+
+**O processo de aplicar todas as reduções possíveis (alfa, beta e eta) até que nenhuma outra redução seja possível é chamado de normalização. A forma normal de um termo lambda é única, se existir, independentemente da ordem das reduções, graças ao Teorema de Church-Rosser.**
+
+**Exemplo Integrado**: Considere a seguinte expressão:
+
+$$(\lambda x. \lambda y. \, x) (\lambda z. \, z)$$
+
+Podemos aplicar as reduções na seguinte ordem:
+
+1. Redução beta: $(\lambda x. \lambda y. \, x) (\lambda z. \, z) \to_\beta \lambda y. (\lambda z. \, z)$
+
+2. Redução eta: $\lambda y. (\lambda z. \, z) \to_\eta \lambda z. \, z$
+
+O resultado final, $\lambda z. \, z$, é a função identidade, obtida através da aplicação combinada de reduções beta e eta.
+
+Entender a interação entre estas formas de redução é crucial para manipular eficientemente expressões lambda e para compreender a semântica de linguagens de programação funcional baseadas no cálculo lambda.
+
+### Relação entre a Redução Eta e a Programação Funcional
+
+A redução eta é frequentemente utilizada em programação funcional para simplificar código e torná-lo mais conciso. Em Haskell, essa técnica é particularmente comum. Vejamos alguns exemplos práticos:
+
+**Exemplo 1**: Simplificação de Funções
+
+Em Haskell, podemos usar a redução eta para simplificar definições de funções:
+
+```haskell
+-- Antes da redução eta
+addOne :: Int -> Int
+addOne x = (+ 1) x
+
+-- Após a redução eta
+addOne :: Int -> Int
+addOne = (+ 1)
+```
+
+Neste exemplo, definimos uma função `addOne` que adiciona $1$ a um número inteiro. Vamos entender como a redução eta é aplicada aqui:
+
+Na versão antes da redução eta: `addOne x = (+ 1) x` define uma função que toma um argumento `x`. Enquanto `(+ 1)` é uma função parcialmente aplicada em Haskell, equivalente a `\y -> y + 1`. A função `addOne` aplica `(+ 1)` ao argumento `x`.
+
+A redução eta nos permite simplificar esta definição: observamos que `x` aparece como o último argumento tanto no lado esquerdo (`addOne x`) quanto no lado direito (`(+ 1) x`) da equação. A redução eta permite remover este argumento `x` de ambos os lados.
+
+Após a redução eta temos `addOne = (+ 1)` é a forma simplificada. Isso significa que `addOne` é definida como sendo exatamente a função `(+ 1)`.
+
+Em termos de cálculo lambda, temos:
+
+$$\lambda x. (\lambda y. \, y + 1) x \to_\eta \lambda y. \, y + 1$$
+
+Em Haskell, isso se traduz em remover o argumento $x$ e a aplicação deste argumento. Graças a redução eta, as duas versões de `addOne` são funcionalmente idênticas. Para qualquer entrada `n`, tanto `addOne n` quanto `(+ 1) n` produzirão o mesmo resultado.
+
+**Exemplo 2**: Composição de Funções
+
+```haskell
+-- Antes da redução eta
+compose :: (b -> c) -> (a -> b) -> a -> c
+compose f g x = f (g x)
+
+-- Após a redução eta
+compose :: (b -> c) -> (a -> b) -> a -> c
+compose f g = f . g
+```
+
+Este exemplo demonstra como a redução eta pode simplificar a definição de uma função de composição. Vamos entender passo a passo:
+
+1. Antes da redução eta temos: - `compose f g x = f (g x)` define uma função que toma três argumentos: `f`, `g`, e `x`. Onde `f` é uma função de tipo `b -> c`, `g` é uma função de tipo `a -> b` e `x` é um valor de tipo `a`. Ou seja, a função aplica `g` a `x`, e então aplica `f` ao resultado.
+
+2. Aplicando a redução eta observamos que `x` aparece como o último argumento tanto no lado esquerdo (`compose f g x`) quanto no lado direito (`f (g x)`) da equação. A redução eta nos permite remover este argumento `x` de ambos os lados.
+
+3. Após a redução eta temos: `compose f g = f . g` é a forma simplificada. Neste caso, o operador `.` em Haskell representa a composição de funções. Sendo assim, `(f . g)` é equivalente a `\x -> f (g x)`.
+
+Em termos de cálculo lambda, temos:
+
+$$\lambda f. \lambda g. \lambda x. \, f \, (g \, x) \to_\eta \lambda f. \lambda g. \, (f \circ g)$$
+
+Onde $\circ$ representa a composição de funções. Em Haskell, isso se traduz em remover o argumento `x` e usar o operador de composição `.`. Desta forma, as duas versão de `compose` são funcionalmente idênticas. Ou seja, para quaisquer funções `f` e `g` e um valor `x`, tanto `compose f g x` quanto `(f . g) x` produzirão o mesmo resultado.
+
+A versão após a redução eta expressa mais diretamente o conceito de composição de funções. Já que, elimina a necessidade de mencionar explicitamente o argumento `x`, focando na relação entre as funções `f` e `g`. A redução eta neste caso não apenas simplifica a sintaxe, mas também destaca a natureza da composição de funções como uma operação sobre funções, em vez de uma operação sobre os valores que essas funções processam.
+
+**Exemplo 3**: Funções de Ordem Superior
+
+```haskell
+-- Antes da redução eta
+map' :: (a -> b) -> [a] -> [b]
+map' f xs = map f xs
+
+-- Após a redução eta
+map' :: (a -> b) -> [a] -> [b]
+map' = map
+```
+
+Este exemplo demonstra como a redução eta pode simplificar a definição de uma função que envolve outra função de ordem superior. Vamos detalhar o processo, novamente, passo a passo:
+
+1. Antes da redução eta: `map' f xs = map f xs` define uma função `map'` que toma dois argumentos: `f` (uma função) e `xs` (uma lista). Esta função simplesmente aplica a função `map` padrão do Haskell com os mesmos argumentos.
+
+2. Aplicando a redução eta: observamos que tanto `f` quanto `xs` aparecem na mesma ordem no lado esquerdo e direito da equação. A redução eta nos permite remover ambos os argumentos.
+
+3. Após a redução eta: `map' = map` é a forma simplificada. Isso define `map'` como sendo exatamente a função `map` padrão do Haskell.
+
+Em termos de cálculo lambda, temos:
+
+$$\lambda f. \lambda xs. (\text{map} \; f \; xs) \to_\eta \lambda f. \lambda xs. \text{map} \; f \to_\eta \text{map}$$
+
+Cada passo remove um argumento, resultando na função `map` por si só.
+
+Do ponto de vista da equivalência funcional temos: `map' f xs` e `map f xs` são funcionalmente idênticas para quaisquer `f` e `xs`. Finalmente, a versão reduzida `map' = map` expressa que `map'` é exatamente a mesma função que `map`. Esta redução mostra que `map'` não adiciona nenhuma funcionalidade extra à `map`. Em um cenário real, se não houver necessidade de uma função wrapper, a definição de `map'` poderia ser completamente omitida, usando-se diretamente `map`.
+
+A redução eta neste caso revela que `map'` é apenas um alias para `map`. Isso demonstra como a redução eta pode ajudar a identificar e eliminar definições de funções redundantes, levando a um código mais conciso e direto.
+
+**Exemplo 4**: Funções Parcialmente Aplicadas
+
+```haskell
+-- Antes da redução eta
+sumList :: [Int] -> Int
+sumList xs = foldr (+) 0 xs
+
+-- Após a redução eta
+sumList :: [Int] -> Int
+sumList = foldr (+) 0
+```
+
+Este exemplo demonstra como a redução eta pode simplificar a definição de uma função que usa aplicação parcial. Vamos detalhar o processo:
+
+1. Antes da redução eta: temos `sumList xs = foldr (+) 0 xs` define uma função `sumList` que toma uma lista de inteiros `xs` como argumento. A função usa `foldr` (fold right) com o operador `+` e o valor inicial `0` para somar todos os elementos da lista.
+
+2. Aplicando a redução eta: observamos que `xs` aparece como o último argumento tanto no lado esquerdo (`sumList xs`) quanto no lado direito (`foldr (+) 0 xs`) da equação. A redução eta nos permite remover este argumento `xs` de ambos os lados.
+
+3. Após a redução eta: `sumList = foldr (+) 0` é a forma simplificada. Isso define `sumList` como a aplicação parcial de `foldr` com os argumentos `(+)` e `0`.
+
+Em termos de cálculo lambda, temos:
+
+$$\lambda xs. (\text{foldr} \; (+) \; 0 \; xs) \to_\eta \text{foldr} \; (+) \; 0$$
+
+O argumento `xs` é removido, deixando a aplicação parcial de `foldr`.
+
+Podemos ver, outra vez, como isso funciona em programação funcional: ambas as versões de `sumList` são funcionalmente idênticas. Para qualquer lista `xs`, tanto `sumList xs` quanto `foldr (+) 0 xs` produzirão o mesmo resultado. Como nos exemplos anteriores, a versão após a redução eta expressa mais diretamente que `sumList` é uma especialização de `foldr`. Elimina a necessidade de mencionar explicitamente o argumento `xs`, focando na operação de soma em si.
+
+Neste exemplo, `foldr (+) 0` é uma função parcialmente aplicada. Ela espera receber uma lista como seu último argumento. O que demonstra como a redução eta pode revelar e tirar proveito da aplicação parcial em Haskell. A redução eta neste caso não apenas simplifica a sintaxe, mas também destaca o conceito de aplicação parcial em programação funcional. Ela mostra como `sumList` pode ser definida como uma especialização de `foldr`, pronta para ser aplicada a uma lista de inteiros.
+
+**Exemplo 5**. Operadores Infixos
+
+```haskell
+-- Antes da redução eta
+divideBy :: Int -> Int -> Int
+divideBy x y = x `div` y
+
+-- Após a redução eta
+divideBy :: Int -> Int -> Int
+divideBy = div
+```
+
+Este exemplo demonstra como a redução eta pode simplificar a definição de uma função que utiliza um operador infixo. Vamos detalhar o processo:
+
+1. Antes da redução eta temos: `divideBy x y = x` ``div`` `y` que define uma função que usa o operador infixo `div` para divisão inteira. Onde ``div`` é a notação infixa para a função `div`.
+
+   Em Haskell, operadores infixos são funções que são normalmente usadas entre dois argumentos. Qualquer função de dois argumentos pode ser usada como um operador infixo colocando-a entre crases (\`). Neste caso, `x` ``div`` `y` é equivalente a `div x y`.
+
+2. Aplicando a redução eta observamos que `x` e `y` aparecem na mesma ordem no lado esquerdo e direito da equação. Logo, a redução eta nos permite remover ambos os argumentos.
+
+3. Após a redução eta temos: `divideBy = div` é a forma simplificada. Isso define `divideBy` como sendo exatamente a função ``div``.
+
+Se considerarmos o cálculo lambda teremos: 
+
+$$\lambda x. \lambda y. (x \; \text{div} \; y) \to_\eta \lambda x. \lambda y. \text{div} \; x \; y \to_\eta \text{div}$$
+
+Cada passo remove um argumento, resultando na função `div` por si só. Funcionalmente teremos `divideBy x y` e `div x y` são funcionalmente idênticas para quaisquer `x` e `y`. Sendo assim, a versão reduzida `divideBy = div` expressa que `divideBy` é exatamente a mesma função que `div`.
+
+Observe que graças a redução eta a definição se torna mais concisa e direta. Revelando que `divideBy` não adiciona nenhuma funcionalidade extra à `div`. Permitindo que `divideBy` seja usado tanto de forma infixa quanto prefixa, assim como `div`. Neste caso, a redução eta mostra com um operador infixo pode ser simplificada para revelar sua equivalência direta com a função de divisão padrão. Isso ilustra a flexibilidade do Haskell em tratar operadores e funções de maneira intercambiável.
+
+### 6. Funções Anônimas
+
+```haskell
+-- Antes da redução eta
+processList :: [Int] -> [Int]
+processList = map (\x -> x * 2)
+
+-- Após a redução eta
+processList :: [Int] -> [Int]
+processList = map (* 2)
+```
+
+Este exemplo demonstra como a redução eta pode simplificar o uso de funções anônimas, também conhecidas como lambdas em Haskell. Vamos detalhar o processo:
+
+1. Antes da redução eta temos: `processList = map (\x -> x * 2)` define uma função que aplica `map` a uma função anônima. Ou seja, a função anônima `\x -> x * 2` multiplica cada elemento por 2.
+
+2. Aplicando a redução eta: observamos que a função anônima `\x -> x * 2` pode ser reescrita como uma aplicação parcial do operador `*`. Sendo assim,  `(\x -> x * 2)` é equivalente a `(* 2)`.
+
+Após a redução eta temos: `processList = map (* 2)` é a forma simplificada. Onde `(* 2)` é uma seção em Haskell, uma forma de aplicação parcial para operadores infixos.
+
+Em termos de cálculo lambda temos: 
+
+$$\lambda x. x * 2 \to_\eta (* \; 2)$$
+
+Onde o argumento `x` é removido, deixando a aplicação parcial do operador `*`.
+
+No caso da programação funcional, as duas versões de `processList` são funcionalmente idênticas. Sendo assim, para qualquer lista de inteiros, tanto `map (\x -> x * 2)` quanto `map (* 2)` produzirão o mesmo resultado.
+
+Observe que a versão após a redução eta é mais concisa e expressiva. Eliminando a necessidade de criar uma função anônima explícita e, ao mesmo tempo, aproveitando a notação de seção do Haskell para operadores infixos.
+
+Finalmente, talvez a amável leitora deva saber que uma seção é uma forma de aplicar parcialmente um operador infixo. Ou seja, `(* 2)` é equivalente a `\x -> x * 2`. Seções podem ser formadas com o operando à esquerda `(2 *)` ou à direita `(* 2)`. Neste caso, a redução eta não apenas simplifica a sintaxe, mas também demonstra como aproveitar as características da linguagem Haskell, como operadores infixos e seções, para criar código mais conciso e expressivo.
+
+### A Redução Eta e a Otimização de Compiladores
+
+A redução eta, além de ser um conceito teórico do cálculo lambda e uma técnica de refatoração em programação funcional, tem implicações significativas na otimização de código por compiladores. Ela oferece várias oportunidades para melhorar a eficiência do código gerado, especialmente em linguagens funcionais.
+
+Uma das principais aplicações da redução eta na otimização é a eliminação de funções intermediárias desnecessárias. Por exemplo, uma função definida como `f x y = g (h x) y` pode ser otimizada para `f = g . h`. Esta simplificação reduz a criação de _closures_ e o número de chamadas de função, resultando em código mais eficiente.
+
+>No contexto da otimização de compiladores e redução eta, closures são estruturas de dados que encapsulam uma função junto com seu ambiente léxico. Elas são criadas quando uma função captura variáveis do escopo externo, permitindo que a função acesse essas variáveis mesmo depois que o escopo original tenha terminado. Em linguagens funcionais, closures são frequentemente usadas para implementar funções de ordem superior e currying. Do ponto de vista da otimização, a criação e manutenção de closures podem ter um custo em termos de memória e desempenho. A redução eta pode ajudar a eliminar closures desnecessárias, por exemplo, quando uma função simplesmente passa todos os seus argumentos para outra função sem modificação. Nestes casos, o compilador pode usar a redução eta para substituir a criação de uma closure intermediária por uma referência direta à função original, potencialmente melhorando tanto o uso de memória quanto o tempo de execução.
+
+A redução eta também facilita o _inlining_ de funções, uma técnica onde o compilador substitui chamadas de função por seu corpo. Por exemplo, uma definição como `map' f = map f` pode levar o compilador a fazer inline de `map'`, substituindo-a diretamente por ``map``. Isso não apenas melhora o desempenho, mas também reduz a alocação de memória para _closures_, o que é particularmente benéfico em linguagens com coleta de lixo, _garbage collector_, como é o cado do Haskell.
+
+Em linguagens que utilizam currying extensivamente, a redução eta pode otimizar a aplicação parcial de funções. Uma expressão como `addOne = (+) 1` pode ser otimizada para evitar a criação de uma _closure_ intermediária, melhorando tanto o uso de memória quanto o desempenho.
+
+A fusão de funções é outra área onde a redução eta pode ser útil. Ela pode facilitar a combinação de múltiplas funções em uma única passagem, como transformar `sum . map (*2)` em uma única função que multiplica e soma em uma operação. Isso reduz o _overhead_ de iterações múltiplas sobre estruturas de dados.
+
+Além disso, a redução eta simplifica a análise de fluxo de dados, permitindo que o compilador rastreie mais facilmente como os valores são usados e transformados. Isso pode levar a otimizações mais eficazes em nível de código de máquina. Em alguns casos, pode até transformar chamadas não-tail em chamadas _tail_, permitindo a otimização de _tail call_, crucial para linguagens que garantem essa otimização, como Scheme.
+
+A simplificação da estrutura das funções através da redução eta pode resultar em código de máquina mais eficiente e mais fácil de otimizar posteriormente. Isso também pode ajudar na especialização de funções polimórficas, levando a implementações mais eficientes para tipos específicos.
+
+No contexto de otimizações inter-procedurais, a redução eta pode facilitar a análise e otimização de funções através de limites de módulos, permitindo otimizações mais abrangentes.
+
+É importante notar que a aplicação dessas otimizações deve ser equilibrada com outros fatores, como tempo de compilação e tamanho do código gerado. Em alguns casos, a redução eta pode interferir com outras otimizações ou com a legibilidade do código de depuração. Compiladores modernos para linguagens funcionais, como o GHC para Haskell, incorporam a redução eta como parte de um conjunto mais amplo de técnicas de otimização.
+
+Em suma, a redução eta desempenha um papel importante na otimização de compiladores, especialmente para linguagens funcionais, contribuindo significativamente para a geração de código mais eficiente e performático.
 
 ## Teorema de Church-Rosser
 
@@ -1818,10 +2201,10 @@ Os combinadores também tem origem no trabalho de [Moses Schönfinkel](https://e
 | Abreviação Original | Função Original em Alemão    | Tradução para o Inglês     | Expressão Lambda                       | Abreviação Atual |
 |---------------------|-----------------------------|----------------------------|----------------------------------------|-----------------|
 | $I$                 | Identitätsfunktion           | "função identidade"         | $\lambda x. \, x$                         | $I$             |
-| $C$                 | Konstanzfunktion             | "função de constância"      | $\lambda xy. x$                        | $K$             |
-| $T$                 | Vertauschungsfunktion        | "função de troca"           | $\lambda xyz. zxy$                     | $C$             |
-| $Z$                 | Zusammensetzungsfunktion     | "função de composição"      | $\lambda xyz. xz(yz)$                  | $B$             |
-| $S$                 | Verschmelzungsfunktion       | "função de fusão"           | $\lambda xyz. xz(yz)$                  | $S$             |
+| $C$                 | Konstanzfunktion             | "função de constância"      | $\lambda xy. \, x$                        | $K$             |
+| $T$                 | Vertauschungsfunktion        | "função de troca"           | $\lambda xyz. \, zxy$                     | $C$             |
+| $Z$                 | Zusammensetzungsfunktion     | "função de composição"      | $\lambda xyz. \, xz(yz)$                  | $B$             |
+| $S$                 | Verschmelzungsfunktion       | "função de fusão"           | $\lambda xyz. \, xz(yz)$                  | $S$             |
 
 Schönfinkel também tinha combinadores que representavam operações lógicas, um para o [traço de Sheffer](https://en.wikipedia.org/wiki/Sheffer_stroke)(NAND), descoberto em 1913, e outro para a quantificação, porém, nenhum dos dois interessa neste momento. Contudo, Lembre-se de que qualquer circuito booleano pode ser construído apenas com portas NAND. Schönfinkel buscou, de maneira análoga, reduzir a lógica de predicados ao menor número possível de elementos, e, anos mais tarde, descobriu-se que os quantificadores "para todo" e "existe" da lógica de predicados se comportam como abstrações lambda.
 
@@ -2034,7 +2417,7 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
  $$ Y(f) = \lambda n. \, (n = 0 ? 0 : n + Y \, (f) \, (n-1))$$
 
- Agora podemos calcular a soma, como $\sum\_{i=1}^{3} = 3 + 2 + 1 = 6$.
+ Agora podemos calcular a soma, como $\sum_{i=1}^{3} = 3 + 2 + 1 = 6$.
 
 **10**: Aplique o combinador $Y$ para definir uma função recursiva que calcula o máximo divisor comum (MDC) de dois números.
 
@@ -2052,7 +2435,7 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
  **Solução:** Aplicamos o combinador identidade:
 
- $$ I \, 10 = (\lambda x. \, x) \, 10 \rightarrow\_\beta 10 $$
+ $$ I \, 10 = (\lambda x. \, x) \, 10 \rightarrow_\beta 10 $$
 
 **12**: Aplique o combinador $K = \lambda x. \lambda y. \, x$ aos valores $3$ e $7$. O que ocorre?
 
@@ -2072,13 +2455,13 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
  Agora, substituímos e aplicamos as funções a $4$:
 
- $$(\lambda z. \, z^2) 4 ((\lambda z. \, z + 1) 4) \rightarrow\_\beta 4^2 \, (4 + 1) = 16 \cdot 5 = 80 $$
+ $$(\lambda z. \, z^2) 4 ((\lambda z. \, z + 1) 4) \rightarrow_\beta 4^2 \, (4 + 1) = 16 \cdot 5 = 80 $$
 
 **14**: Aplique o combinador identidade $I$ a uma função anônima $\lambda y. \, y + 2$ e explique o resultado.
 
  **Solução:** Aplicamos o combinador identidade $I$ à função anônima:
 
- $$ I (\lambda y. \, y + 2) = (\lambda x. \, x) (\lambda y. \, y + 2) \rightarrow\_\beta \lambda y. \, y + 2 $$
+ $$ I (\lambda y. \, y + 2) = (\lambda x. \, x) (\lambda y. \, y + 2) \rightarrow_\beta \lambda y. \, y + 2 $$
 
  O combinador identidade retorna a própria função, sem modificações.
 
@@ -2117,7 +2500,7 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
  $$ = (\lambda x. \, K(x)(K(x)))$$
  Aplicamos $ K $:
 
- $$ = \lambda x. \, (\lambda y. \, x)( (\lambda y. \, x)) \rightarrow\_\beta \lambda x. \, x $$
+ $$ = \lambda x. \, (\lambda y. \, x)( (\lambda y. \, x)) \rightarrow_\beta \lambda x. \, x $$
 
  Portanto, $ S(K)(K)$ é equivalente ao combinador identidade $ I $.
 
@@ -2670,7 +3053,7 @@ A escolha entre ordem aplicativa e ordem normal depende do contexto e das necess
 **Solução:**
  A ordem normal prioriza a redução externa:
 
- $$(\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) \rightarrow\_\beta \lambda y. \, y $$
+ $$(\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) \rightarrow_\beta \lambda y. \, y $$
 
  O argumento $((\lambda z. \, z \, z) (\lambda w. w w))$ nunca é avaliado.
 
@@ -2679,7 +3062,7 @@ A escolha entre ordem aplicativa e ordem normal depende do contexto e das necess
 **Solução:**
  Na ordem normal, aplicamos a função sem avaliar o argumento imediatamente:
 
- $$(\lambda x. \lambda y. \, x) ((\lambda z. \, z + 1) 5) \rightarrow\_\beta \lambda y. \, ((\lambda z. \, z + 1) 5)$$
+ $$(\lambda x. \lambda y. \, x) ((\lambda z. \, z + 1) 5) \rightarrow_\beta \lambda y. \, ((\lambda z. \, z + 1) 5)$$
 
  O argumento não é avaliado porque a função não o utiliza.
 
@@ -2688,7 +3071,7 @@ A escolha entre ordem aplicativa e ordem normal depende do contexto e das necess
 **Solução:**
  A ordem normal evita a avaliação do argumento:
 
- $$(\lambda x. \lambda y. \, y + 1) ((\lambda z. \, z \, z) (\lambda w. w w)) \rightarrow\_\beta \lambda y. \, y + 1 $$
+ $$(\lambda x. \lambda y. \, y + 1) ((\lambda z. \, z \, z) (\lambda w. w w)) \rightarrow_\beta \lambda y. \, y + 1 $$
 
  O termo $((\lambda z. \, z \, z) (\lambda w. w w))$ nunca é avaliado.
 
@@ -2697,7 +3080,7 @@ A escolha entre ordem aplicativa e ordem normal depende do contexto e das necess
 **Solução:**
  Primeiro aplicamos a função sem avaliar o argumento:
 
- $$(\lambda x. \, x) ((\lambda z. \, z \, z) (\lambda w. w w)) \rightarrow\_\beta ((\lambda z. \, z \, z) (\lambda w. w w))$$
+ $$(\lambda x. \, x) ((\lambda z. \, z \, z) (\lambda w. w w)) \rightarrow_\beta ((\lambda z. \, z \, z) (\lambda w. w w))$$
 
  Agora a expressão é indefinida, pois avaliaremos uma expressão sem fim.
 
@@ -2706,7 +3089,7 @@ A escolha entre ordem aplicativa e ordem normal depende do contexto e das necess
 **Solução:**
  Na ordem normal, o argumento não é avaliado:
 
- $$(\lambda x. \, 3) ((\lambda z. \, z + 1) 5) \rightarrow\_\beta 3 $$
+ $$(\lambda x. \, 3) ((\lambda z. \, z + 1) 5) \rightarrow_\beta 3 $$
 
  O argumento $((\lambda z. \, z + 1) 5)$ nunca é avaliado.
 
@@ -2715,11 +3098,11 @@ A escolha entre ordem aplicativa e ordem normal depende do contexto e das necess
 **Solução:**
  Na ordem aplicativa, o argumento é avaliado primeiro:
 
- $$(\lambda z. \, z + 1) 5 \rightarrow\_\beta 6 $$
+ $$(\lambda z. \, z + 1) 5 \rightarrow_\beta 6 $$
 
  Agora aplicamos a função:
 
- $$(\lambda x. \lambda y. \, x) 6 \rightarrow\_\beta \lambda y. \, 6 $$
+ $$(\lambda x. \lambda y. \, x) 6 \rightarrow_\beta \lambda y. \, 6 $$
 
 **7**: Aplique a ordem aplicativa à expressão $(\lambda x. \, x) ((\lambda z. \, z \, z) (\lambda w. w w))$.
 
@@ -2735,18 +3118,18 @@ A escolha entre ordem aplicativa e ordem normal depende do contexto e das necess
 **Solução:**
  Primeiro, o argumento $(\lambda z. \, z + 3) 4 $ é avaliado:
 
- $$(\lambda z. \, z + 3) 4 \rightarrow\_\beta 4 + 3 \to 7 $$
+ $$(\lambda z. \, z + 3) 4 \rightarrow_\beta 4 + 3 \to 7 $$
 
  Agora aplicamos a função:
 
- $$(\lambda x. \, x \cdot 2) 7 \rightarrow\_\beta 7 \cdot 2 \to 14 $$
+ $$(\lambda x. \, x \cdot 2) 7 \rightarrow_\beta 7 \cdot 2 \to 14 $$
 
 **9**: Considere a expressão $(\lambda x. \, x + 1) (\lambda y. \, y + 2)$. Avalie-a usando ordem aplicativa e explique o resultado.
 
 **Solução:**
  Na ordem aplicativa, tentamos avaliar o argumento primeiro:
 
- $$(\lambda y. \, y + 2) \rightarrow\_\beta \lambda y. \, y + 2 $$
+ $$(\lambda y. \, y + 2) \rightarrow_\beta \lambda y. \, y + 2 $$
 
  Como o argumento não pode ser avaliado (é uma função), o resultado não pode ser reduzido, levando a um erro ou indefinição.
 
@@ -2755,18 +3138,18 @@ A escolha entre ordem aplicativa e ordem normal depende do contexto e das necess
 **Solução:**
  Primeiro avaliamos o argumento:
 
- $$(\lambda z. \, z + 2) 3 \rightarrow\_\beta 3 + 2 \to 5 $$
+ $$(\lambda z. \, z + 2) 3 \rightarrow_\beta 3 + 2 \to 5 $$
 
  Agora aplicamos a função:
 
- $$(\lambda x. \, x + 1) 5 \rightarrow\_\beta 5 + 1 \to 6 $$
+ $$(\lambda x. \, x + 1) 5 \rightarrow_\beta 5 + 1 \to 6 $$
 
 **11**: Compare a avaliação da expressão $(\lambda x. \, 2) ((\lambda z. \, z \, z) (\lambda w. w w))$ usando ordem normal e ordem aplicativa.
 
 **Solução (Ordem Normal):**
  A ordem normal evita a avaliação do argumento:
 
- $$(\lambda x. \, 2) ((\lambda z. \, z \, z) (\lambda w. w w)) \rightarrow\_\beta 2 $$
+ $$(\lambda x. \, 2) ((\lambda z. \, z \, z) (\lambda w. w w)) \rightarrow_\beta 2 $$
 
 **Solução (Ordem Aplicativa):**
  Na ordem aplicativa, o argumento é avaliado, levando a um loop sem fim.
@@ -2776,7 +3159,7 @@ A escolha entre ordem aplicativa e ordem normal depende do contexto e das necess
 **Solução (Ordem Normal):**
  Aplicamos a função sem avaliar o argumento:
 
- $$(\lambda x. \lambda y. \, x + y) ((\lambda z. \, z + 1) 3) 4 \rightarrow\_\beta (\lambda y. \, ((\lambda z. \, z + 1) 3) + y) 4 $$
+ $$(\lambda x. \lambda y. \, x + y) ((\lambda z. \, z + 1) 3) 4 \rightarrow_\beta (\lambda y. \, ((\lambda z. \, z + 1) 3) + y) 4 $$
 
  Agora avaliamos o argumento:
 
@@ -2785,22 +3168,22 @@ A escolha entre ordem aplicativa e ordem normal depende do contexto e das necess
 **Solução (Ordem Aplicativa):**
 Na ordem aplicativa, avaliamos o argumento primeiro:
 
- $$(\lambda z. \, z + 1) 3 \rightarrow\_\beta 4 $$
+ $$(\lambda z. \, z + 1) 3 \rightarrow_\beta 4 $$
 
  Agora aplicamos a função:
 
- $$(\lambda x. \lambda y. \, x + y) 4 4 \rightarrow\_\beta 4 + 4 \to 8 $$
+ $$(\lambda x. \lambda y. \, x + y) 4 4 \rightarrow_\beta 4 + 4 \to 8 $$
 
 **13**: Aplique ordem normal e ordem aplicativa à expressão $(\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) 3 $.
 
 **Solução (Ordem Normal):**
  A função é aplicada sem avaliar o argumento:
 
- $$(\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) 3 \rightarrow\_\beta \lambda y. \, y $$
+ $$(\lambda x. \lambda y. \, y) ((\lambda z. \, z \, z) (\lambda w. w w)) 3 \rightarrow_\beta \lambda y. \, y $$
 
  Agora aplicamos a função:
 
- $$(\lambda y. \, y) 3 \rightarrow\_\beta 3 $$
+ $$(\lambda y. \, y) 3 \rightarrow_\beta 3 $$
 
 **Solução (Ordem Aplicativa):**
  Na ordem aplicativa, o argumento é avaliado, resultando em um loop infinito.
@@ -2815,11 +3198,11 @@ Na ordem aplicativa, avaliamos o argumento primeiro:
 **Solução (Ordem Aplicativa):**
  Na ordem aplicativa, o argumento é avaliado primeiro:
 
- $$(\lambda z. \, z + 1) 3 \rightarrow\_\beta 4 $$
+ $$(\lambda z. \, z + 1) 3 \rightarrow_\beta 4 $$
 
  Agora aplicamos a função:
 
- $$(\lambda x. \, x) 4 \rightarrow\_\beta 4 $$
+ $$(\lambda x. \, x) 4 \rightarrow_\beta 4 $$
 
 **15**: Reduza a expressão $(\lambda x. \, x) (\lambda y. \, y + 2)$ usando ordem normal e ordem aplicativa.
 
@@ -2861,31 +3244,31 @@ O código JavaScript do exemplo utiliza um gerador para criar uma sequência inf
 
 # Equivalência Lambda e Definição de Igualdade
 
-No cálculo lambda, a noção de equivalência vai além da simples comparação sintática entre dois termos. Ela trata de quando dois termos podem ser considerados **igualmente computáveis** ou **equivalentes** em um sentido mais profundo, independentemente de suas formas superficiais. Esta equivalência é central para otimizações de programas, verificação de tipos e raciocínio em linguagens funcionais.
+No cálculo lambda, a noção de equivalência vai além da simples comparação sintática entre dois termos. Ela trata de quando dois termos podem ser considerados **igualmente computáveis** ou **equivalentes** em um sentido mais profundo, independentemente de suas formas superficiais. Esta equivalência tem impactos na otimizações de programas, verificação de tipos e raciocínio em linguagens funcionais.
 
-Dois termos lambda $M$ e $N$ são considerados equivalentes, denotado por $M\to_\beta N$, se podemos transformar um no outro através de uma sequência (possivelmente vazia) de:
+Dois termos lambda $M$ e $N$ são considerados equivalentes, denotado por $M\to_\beta N$, se podemos transformar um no outro através de uma sequência, possivelmente vazia de:
 
-1. **$\alpha$-conversões**: que permitem a renomeação de variáveis ligadas, assegurando que a identidade de variáveis internas não afeta o comportamento da função.
+1. **$\alpha$-reduções**: que permitem a renomeação de variáveis ligadas, assegurando que a identidade de variáveis internas não afeta o comportamento da função.
 
 2. **$\beta$-reduções**: que representam a aplicação de uma função ao seu argumento, o princípio básico da computação no cálculo lambda.
 
-3. **$\eta$-conversões**: que expressam a extensionalidade de funções, permitindo igualar duas funções que se comportam da mesma forma quando aplicadas a qualquer argumento.
+3. **$\eta$-reduções**: que expressam a extensionalidade de funções, permitindo igualar duas funções que se comportam da mesma forma quando aplicadas a qualquer argumento.
 
 >Extensionalidade refere-se ao princípio de que objetos ou funções são iguais se têm o mesmo efeito em todos os contextos possíveis. Em lógica, duas funções são consideradas extensionais se, para todo argumento, elas produzem o mesmo resultado. Em linguística, extensionalidade se refere a expressões cujo significado é determinado exclusivamente por seu valor de referência, sem levar em conta contexto ou conotação.
 
 Formalmente, a relação $\to_\beta$ é a menor relação de equivalência que satisfaz as seguintes propriedades fundamentais:
 
-1. **$\beta$-redução**: $(\lambda x.M)N \to_\beta M[N/x]$
+1. **$\beta$-redução**: $(\lambda x. \, M)N \to_\beta M[N/x]$
 
-   Isto significa que a aplicação de uma função $(\lambda x.M)$ a um argumento $N$ resulta na substituição de todas as ocorrências de $x$ em $M$ pelo valor $N$.
+   Isto significa que a aplicação de uma função $(\lambda x. \, M)$ a um argumento $N$ resulta na substituição de todas as ocorrências de $x$ em $M$ pelo valor $N$.
 
-2. **$\eta$-conversão**: $\lambda x. \, Mx\to_\beta M$, se $x$ não ocorre livre em $M$
+2. **$\eta$-redução**: $\lambda x. \, Mx\to_\beta M$, se $x$ não ocorre livre em $M$
 
-   A $\eta$-conversão captura a ideia de extensionalidade. Se uma função $\lambda x.Mx$ aplica $M$ a $x$ sem modificar $x$, ela é equivalente a $M$.
+   A $\eta$-redução captura a ideia de extensionalidade. Se uma função $\lambda x. \, Mx$ aplica $M$ a $x$ sem modificar $x$, ela é equivalente a $M$.
 
-3. **Compatibilidade com abstração**: Se $M\to_\beta M'$, então $\lambda x. \, M\to_\beta \lambda x.M'$
+3. **Compatibilidade com abstração**: Se $M\to_\beta M'$, então $\lambda x. \, M\to_\beta \lambda x. \, M'$
 
-   Isto garante que se dois termos são equivalentes, então suas abstrações (funções que os utilizam) também serão equivalentes.
+   Isto garante que se dois termos são equivalentes, então suas abstrações, funções que os utilizam, também serão equivalentes.
 
 4. **Compatibilidade com aplicação**: Se $M\to_\beta M'$ e $N\to_\beta N'$, então $M \, N\to_\beta M'N'$
 
@@ -2893,17 +3276,11 @@ Formalmente, a relação $\to_\beta$ é a menor relação de equivalência que s
 
 É importante notar que a ordem em que as reduções são aplicadas não afeta o resultado final, devido à propriedade de Church-Rosser do cálculo lambda. Isso garante que, independentemente de como o termo é avaliado, se ele tem uma forma normal, a avaliação eventualmente a encontrará.
 
-A relação $\to_\beta$ é uma **relação de equivalência**, o que significa que ela possui três propriedades fundamentais:
-
-1. **Reflexiva**: Para todo termo $M$, temos que $M\to_\beta M$. Isto significa que qualquer termo é equivalente a si mesmo, o que é esperado.
-
-2. **Simétrica**: Se $M\to_\beta N$, então $N\to_\beta M$. Se um termo $M$ pode ser transformado em $N$, então o oposto também é verdade.
-
-3. **Transitiva**: Se $M\to_\beta N$ e $N\to_\beta P$, então $M\to_\beta P$. Isso implica que, se podemos transformar $M$ em $N$ e $N$ em $P$, então podemos transformar diretamente $M$ em $P$.
+A relação $\to_\beta$ é uma **relação de equivalência**, o que significa que ela possui três propriedades: é uma relação **Reflexiva**. Ou seja, para todo termo $M$, temos que $M\to_\beta M$. O que significa que qualquer termo é equivalente a si mesmo, o que é esperado; é uma relação **Simétrica**. Isso significa que se $M\to_\beta N$, então $N\to_\beta M$. Se um termo $M$ pode ser transformado em $N$, então o oposto também é verdade. E, finalmente, é uma relação **Transitiva**. Neste caso, se $M\to_\beta N$ e $N\to_\beta P$, então $M\to_\beta P$. Isso implica que, se podemos transformar $M$ em $N$ e $N$ em $P$, então podemos transformar diretamente $M$ em $P$.
 
 A equivalência $\to_\beta$ é fundamental para o raciocínio sobre programas em linguagens funcionais, permitindo substituições e otimizações que preservam o significado computacional. As propriedades da equivalência $\to_\beta$ garantem que podemos substituir termos equivalentes em qualquer contexto, sem alterar o significado ou o resultado da computação. Em termos de linguagens de programação, isso permite otimizações e refatorações que preservam a correção do programa.
 
-Vamos ver alguns exemplos de equivalência.
+Neste ponto, a leitora deve estar ansiosa para ver alguns exemplos de equivalência.
 
 1. **Identidade e aplicação trivial**:
 
@@ -2945,25 +3322,25 @@ Vamos ver alguns exemplos de equivalência.
 
    Aqui, o comportamento é o mesmo: o primeiro argumento ($A$) é retornado, enquanto o segundo ($B$) é ignorado.
 
-3. **$\eta$-conversão**:
+3. **$\eta$-redução**:
 
    **Exemplo 1**:
 
-   $$\lambda x.(\lambda y.M)x \to_\beta \lambda x.M[x/y]$$
+   $$\lambda x.(\lambda y.M)x \to_\beta \lambda x. \, M[x/y]$$
 
-   Se $x$ não ocorre livre em $M$, podemos usar a $\eta$-conversão para "encurtar" a expressão, pois aplicar $M$ a $x$ não altera o comportamento da função. Este exemplo mostra como podemos internalizar a aplicação, eliminando a dependência desnecessária de $x$.
+   Se $x$ não ocorre livre em $M$, podemos usar a $\eta$-redução para "encurtar" a expressão, pois aplicar $M$ a $x$ não altera o comportamento da função. Este exemplo mostra como podemos internalizar a aplicação, eliminando a dependência desnecessária de $x$.
 
    **Exemplo 2**:
 
    $$\lambda x.(\lambda z.N)x \to_\beta \lambda x.N[x/z]$$
 
-   Similarmente, se $x$ não ocorre em $N$, a $\eta$-conversão simplifica a expressão para $\lambda x.N$.
+   Similarmente, se $x$ não ocorre em $N$, a $\eta$-redução simplifica a expressão para $\lambda x.N$.
 
    **Exemplo 3**:
 
    $$\lambda f.(\lambda g.P)f \to_\beta \lambda f.P[f/g]$$
 
-   Aqui, a $\eta$-conversão elimina a aplicação de $f$ em $P$, resultando em $\lambda f.P$.
+   Aqui, a $\eta$-redução elimina a aplicação de $f$ em $P$, resultando em $\lambda f.P$.
 
 4. **Termo $\Omega$(não-terminante)**:
 
@@ -3011,7 +3388,7 @@ A equivalência lambda influencia o desenvolvimento e a otimização de linguage
 
 Dois termos lambda $M$ e $N$ são considerados equivalentes, denotado por $M\to_\beta N$, se é possível transformar um no outro através de uma sequência (possivelmente vazia) de:
 
-1. $\alpha$-conversões (renomeação de variáveis ligadas)
+1. $\alpha$ - reduções (renomeação de variáveis ligadas)
 2. $\beta$-reduções (aplicação de funções)
 3. $\eta$-conversões (extensionalidade de funções)
 
@@ -3020,7 +3397,7 @@ Formalmente:
 $$
 \begin{align*}
 &\text{1. } (\lambda x. \, M) \, N\to*\beta M \, [N/x] \text{ ($\beta$-redução)} \\
-&\text{2. } \lambda x. \, Mx\to*\beta M, \text{ se $x$ não ocorre livre em $M$($\eta$-conversão)} \\
+&\text{2. } \lambda x. \, Mx\to*\beta M, \text{ se $x$ não ocorre livre em $M$($\eta$-redução)} \\
 &\text{3. Se } M\to*\beta M' \text{, então } \lambda x. \, M\to*\beta \lambda x. \, M' \text{ (compatibilidade com abstração)} \\
 &\text{4. Se } M\to*\beta M' \text{ e } N\to*\beta N' \text{, então } M \, N\to_\beta M' \, N' \text{ (compatibilidade com aplicação)}
 \end{align*}
@@ -4507,7 +4884,7 @@ O cálculo lambda é a base teórica para muitos conceitos da programação func
 
 # Cálculo Lambda Simplesmente Tipado
 
-O Cálculo Lambda Simplesmente Tipado é uma extensão do cálculo lambda não tipado que introduz uma estrutura de tipos. Este sistema aborda questões de consistência lógica encontradas no cálculo lambda não tipado, como o termo $\omega = \lambda x. x x$, que leva a reduções infinitas.
+O Cálculo Lambda Simplesmente Tipado é uma extensão do cálculo lambda não tipado que introduz uma estrutura de tipos. Este sistema aborda questões de consistência lógica encontradas no cálculo lambda não tipado, como o termo $\omega = \lambda x. \, x x$, que leva a reduções infinitas.
 
 Uma característica do Cálculo Lambda Simplesmente Tipado é sua relação com a lógica e a computação, exemplificada pela Correspondência de Curry-Howard. Esta correspondência estabelece uma conexão entre provas matemáticas e programas de computador.
 
@@ -4581,13 +4958,13 @@ A presença de tipos não altera de forma alguma a avaliação de uma expressão
 
 No cálculo lambda não tipado estendido com booleanos, podemos encontrar termos bem formados que ficam _presos_ - ou seja, não são valores, mas não podem ser reduzidos. Por exemplo, considere o termo:
 
-$\text{true} \, (\lambda x. x)$
+$\text{true} \, (\lambda x. \, x)$
 
 Este termo é uma aplicação, então não é um valor. No entanto, não pode ser reduzido, pois nenhuma das regras de redução se aplica. Já que Não é uma aplicação de abstração, então a regra $\beta$ não se aplica. E também não é uma expressão condicional (if-then-else), então as regras de redução para booleanos não se aplicam.
 
 Outro exemplo é:
 
-$\text{if} \, (\lambda x. x) \, \text{then} \, \text{true} \, \text{else} \, \text{false}$
+$\text{if} \, (\lambda x. \, x) \, \text{then} \, \text{true} \, \text{else} \, \text{false}$
 
 Este termo também fica "preso" porque a condição do `if` não é um booleano, mas uma abstração. Não há regra de redução que possa ser aplicada a este termo.
 
@@ -4661,7 +5038,7 @@ Estes termos são chamados de "brutos" porque  representam a estrutura sintátic
 
 Diferentemente do que fizemos no cálculo lambda não tipado, adicionamos aqui uma sintaxe especial para pares. Especificamente, $\langle M,N \rangle$ é um par de termos, $\pi_iM$ é uma projeção, com a intenção de que $\pi_i\langle M_1,M_2 \rangle = M_i$, usadas para extrair os componentes de um par. Especificamente, a intenção é que $\pi_1\langle M_1,M_2 \rangle$ resulte $M_1$ e $\pi_2\langle M_1,M_2 \rangle$ resulte em $M_2$. Criando uma regra que permite o acesso aos elementos individuais de um par.
 
-Além disso, adicionamos um termo $*$, que é o único elemento do tipo $1$. Outra mudança em relação ao cálculo lambda não tipado é que agora escrevemos $\lambda x^A.M$ para uma abstração lambda para indicar que $x$ tem tipo $A$. No entanto, às vezes omitiremos os sobrescritos e escreveremos $\lambda x.M$ como antes.
+Além disso, adicionamos um termo $*$, que é o único elemento do tipo $1$. Outra mudança em relação ao cálculo lambda não tipado é que agora escrevemos $\lambda x^A.M$ para uma abstração lambda para indicar que $x$ tem tipo $A$. No entanto, às vezes omitiremos os sobrescritos e escreveremos $\lambda x. \, M$ como antes.
 
 Esta gramática permite que as abstrações lambda incluam anotações de tipo na forma $\lambda  x:\tau. M$, indicando explicitamente que a variável $x$ tem o tipo $\tau$. Isso permite que o sistema verifique se as aplicações de função são feitas corretamente e se os termos são bem tipados.
 
@@ -4673,7 +5050,7 @@ Em resumo as sintáticas permitem que o cálculo lambda tipado:
 
 - **Garanta a Segurança de Tipos**: As anotações de tipo em variáveis e a sintaxe enriquecida ajudam a prevenir erros, como a aplicação indevida de funções ou a formação de expressões paradoxais, assegurando que apenas termos bem tipados sejam considerados válidos.
 
-As noções de variáveis livres e ligadas e $\alpha$-conversão são definidas como no cálculo lambda não tipado; novamente identificamos termos $\alpha$-equivalentes.
+As noções de variáveis livres e ligadas e $\alpha$-redução são definidas como no cálculo lambda não tipado; novamente identificamos termos $\alpha$-equivalentes.
 
 ## Sintaxe do Cálculo Lambda Tipado
 
@@ -4742,13 +5119,13 @@ Vamos ver alguns exemplos de uso da gramática para definição de expressões e
 
 **Exemplo 2**: Construção de uma abstração lambda:
 
-   $$\lambda x : \text{Nat}. x$$
+   $$\lambda x : \text{Nat}. \, x$$
 
    Esta é uma função de identidade, bem tipada, para números naturais, e seu resultado ao ser aplicada a um valor será o próprio valor.
 
 **Exemplo 3**: Construção de uma aplicação:
 
-   $$(\lambda x : \text{Nat}. x) \, 5$$
+   $$(\lambda x : \text{Nat}. \, x) \, 5$$
 
    Aqui, aplicamos a função de identidade ao número $5$, e o resultado da aplicação é $5$.
 
@@ -4760,7 +5137,7 @@ Vamos ver alguns exemplos de uso da gramática para definição de expressões e
 
 Além da construção de funções e abstrações tipadas, o básico para a criação de expressões no cálculo lambda tipado, a gramática também pode ser usada para validar expressões. Vamos fazer uma derivação, passo a passo, para validar a expressão lambda tipada:
 
-$$(\lambda x : \text{Nat}. \lambda y : \text{Bool}. x) \, 3 \, \text{true}$$
+$$(\lambda x : \text{Nat}. \lambda y : \text{Bool}. \, x) \, 3 \, \text{true}$$
 
 1. Começamos com o termo completo:
 
@@ -4768,7 +5145,7 @@ $$(\lambda x : \text{Nat}. \lambda y : \text{Bool}. x) \, 3 \, \text{true}$$
 
 2. Expandimos o primeiro termo:
 
-   $$(\lambda x : \text{Nat}. \lambda y : \text{Bool}. x) \, 3 \, \text{true}$$
+   $$(\lambda x : \text{Nat}. \lambda y : \text{Bool}. \, x) \, 3 \, \text{true}$$
 
    $$\text{termo} \rightarrow (\text{termo}) \, \text{termo} \, \text{termo}$$
 
@@ -4837,7 +5214,7 @@ A semântica dinâmica define como as expressões são avaliadas. O principal me
    Onde $t[x := s]$ denota a substituição de todas as ocorrências livres de $x$ em $t$ por $s$. Isso corresponde à aplicação de uma função ao seu argumento.
 
    Exemplo:
-   $$(\lambda x:\text{Nat}. x + 1) \; 5 \rightarrow 5 + 1 \rightarrow 6$$
+   $$(\lambda x:\text{Nat}. \, x + 1) \; 5 \rightarrow 5 + 1 \rightarrow 6$$
 
 2. **Redução Eta** (uma forma de extensionalidade):
 
@@ -4851,17 +5228,17 @@ A aplicação das regras de tipagem, semântica estática, e das reduções, sem
 
    Esta propriedade garante que a redução preserva os tipos, assegurando que a avaliação de um termo bem tipado sempre resulta em um termo do mesmo tipo. Considere o seguinte termo no cálculo lambda simplesmente tipado:
 
-   $$(\lambda x: \text{Nat}. x + 1) \, 3$$
+   $$(\lambda x: \text{Nat}. \, x + 1) \, 3$$
 
-   Aqui, temos uma função que incrementa um número natural ($x + 1$) e a aplicamos ao número $3$. A tipagem desse termo pode ser verificada da seguinte maneira: o termo $\lambda x: \text{Nat}. x + 1$ tem tipo $\text{Nat} \rightarrow \text{Nat}$, pois é uma função que recebe um número natural e retorna outro número natural; o número $3$ tem o tipo $\text{Nat}$. Agora, aplicamos a **regra de aplicação**:
+   Aqui, temos uma função que incrementa um número natural ($x + 1$) e a aplicamos ao número $3$. A tipagem desse termo pode ser verificada da seguinte maneira: o termo $\lambda x: \text{Nat}. \, x + 1$ tem tipo $\text{Nat} \rightarrow \text{Nat}$, pois é uma função que recebe um número natural e retorna outro número natural; o número $3$ tem o tipo $\text{Nat}$. Agora, aplicamos a **regra de aplicação**:
 
    $$
-   \frac{\Gamma \vdash (\lambda x: \text{Nat}. x + 1) : \text{Nat} \rightarrow \text{Nat} \quad \Gamma \vdash 3 : \text{Nat}}{\Gamma \vdash (\lambda x: \text{Nat}. x + 1) \, 3 : \text{Nat}}
+   \frac{\Gamma \vdash (\lambda x: \text{Nat}. \, x + 1) : \text{Nat} \rightarrow \text{Nat} \quad \Gamma \vdash 3 : \text{Nat}}{\Gamma \vdash (\lambda x: \text{Nat}. \, x + 1) \, 3 : \text{Nat}}
    $$
 
    Após a aplicação, o termo é reduzido usando a **redução beta**:
 
-   $$(\lambda x: \text{Nat}. x + 1) \, 3 \rightarrow 3 + 1 \rightarrow 4$$
+   $$(\lambda x: \text{Nat}. \, x + 1) \, 3 \rightarrow 3 + 1 \rightarrow 4$$
 
    Como resultado, o termo final é $4$, que tem tipo $\text{Nat}$. A preservação de tipos garante que, ao longo da redução, o tipo do termo permaneceu como $\text{Nat}$.
 
@@ -4922,17 +5299,17 @@ A aplicação das regras de tipagem, semântica estática, e das reduções, sem
 
 3. **Church-Rosser** (Confluência): Se um termo pode ser reduzido de duas maneiras diferentes, então existe uma forma comum que ambas as reduções eventualmente alcançarão. Isso garante que a ordem de avaliação não afeta o resultado final. Para entender, considere o seguinte termo lambda tipado:
 
-$$(\lambda x:\text{Nat}. \lambda y:\text{Nat}. x + y) \; 3 \; ((\lambda z:\text{Nat}. z * 2) \; 2)$$
+$$(\lambda x:\text{Nat}. \lambda y:\text{Nat}. \, x + y) \; 3 \; ((\lambda z:\text{Nat}. \, z * 2) \; 2)$$
 
 Este termo pode ser reduzido de duas maneiras diferentes:
 
 1. Reduzindo a aplicação externa primeiro:
 
-   $$(\lambda x:\text{Nat}. \lambda y:\text{Nat}. x + y) \; 3 \; ((\lambda z:\text{Nat}. z * 2) \; 2)$$
+   $$(\lambda x:\text{Nat}. \lambda y:\text{Nat}. \, x + y) \; 3 \; ((\lambda z:\text{Nat}. \, z * 2) \; 2)$$
 
-   $$\rightarrow (\lambda y:\text{Nat}. 3 + y) \; ((\lambda z:\text{Nat}. z * 2) \; 2)$$
+   $$\rightarrow (\lambda y:\text{Nat}. 3 + y) \; ((\lambda z:\text{Nat}. \, z * 2) \; 2)$$
 
-   $$\rightarrow 3 + ((\lambda z:\text{Nat}. z * 2) \; 2)$$
+   $$\rightarrow 3 + ((\lambda z:\text{Nat}. \, z * 2) \; 2)$$
 
    $$\rightarrow 3 + (2 * 2)$$
 
@@ -4942,11 +5319,11 @@ Este termo pode ser reduzido de duas maneiras diferentes:
 
 2. Reduzindo a aplicação interna primeiro:
 
-   $$(\lambda x:\text{Nat}. \lambda y:\text{Nat}. x + y) \; 3 \; ((\lambda z:\text{Nat}. z * 2) \; 2)$$
+   $$(\lambda x:\text{Nat}. \lambda y:\text{Nat}. \, x + y) \; 3 \; ((\lambda z:\text{Nat}. \, z * 2) \; 2)$$
 
-   $$\rightarrow (\lambda x:\text{Nat}. \lambda y:\text{Nat}. x + y) \; 3 \; (2 * 2)$$
+   $$\rightarrow (\lambda x:\text{Nat}. \lambda y:\text{Nat}. \, x + y) \; 3 \; (2 * 2)$$
 
-   $$\rightarrow (\lambda x:\text{Nat}. \lambda y:\text{Nat}. x + y) \; 3 \; 4$$
+   $$\rightarrow (\lambda x:\text{Nat}. \lambda y:\text{Nat}. \, x + y) \; 3 \; 4$$
 
    $$\rightarrow (\lambda y:\text{Nat}. 3 + y) \; 4$$
 
@@ -5008,7 +5385,7 @@ Esta definição recursiva nos permite construir tipos mais complexos. Por exemp
 
 Com este sistema refinado, podemos diferenciar nossas funções anteriores: $\lambda x. \text{true}$ teria o tipo $T \to \text{bool}$ para qualquer tipo $T$, enquanto $\lambda x. \lambda y. \text{false}$ teria o tipo $T_1 \to (T_2 \to \text{bool})$ para quaisquer tipos $T_1$ e $T_2$.
 
-Este desenvolvimento nos leva a um sistema de tipos mais expressivo, capaz de capturar nuances importantes sobre o comportamento das funções. No entanto, ainda existem limitações. Por exemplo, não podemos expressar funções polimórficas como a função identidade $\lambda x. x$, que deve funcionar para qualquer tipo. Estas limitações motivarão desenvolvimentos futuros, como o polimorfismo paramétrico, que estudaremos mais adiante.
+Este desenvolvimento nos leva a um sistema de tipos mais expressivo, capaz de capturar nuances importantes sobre o comportamento das funções. No entanto, ainda existem limitações. Por exemplo, não podemos expressar funções polimórficas como a função identidade $\lambda x. \, x$, que deve funcionar para qualquer tipo. Estas limitações motivarão desenvolvimentos futuros, como o polimorfismo paramétrico, que estudaremos mais adiante.
 
 As regras de tipagem no cálculo lambda tipado fornecem um sistema formal para garantir que as expressões sejam bem formadas. As principais regras são:
 
@@ -5065,7 +5442,7 @@ As regras de tipagem no cálculo lambda tipado fornecem um sistema formal para g
    multiplyBy2 = \x -> x * 2
    ```
 
-   Esta definição em Haskell é equivalente a $\lambda x:\text{Int}. x * 2$ no cálculo lambda tipado. O tipo Int -> Int corresponde a $A \rightarrow B$, onde tanto $A$ quanto $B$ são Int. O sistema de tipos do Haskell infere automaticamente que x é do tipo Int baseado no contexto da multiplicação.
+   Esta definição em Haskell é equivalente a $\lambda x:\text{Int}. \, x * 2$ no cálculo lambda tipado. O tipo Int -> Int corresponde a $A \rightarrow B$, onde tanto $A$ quanto $B$ são Int. O sistema de tipos do Haskell infere automaticamente que x é do tipo Int baseado no contexto da multiplicação.
    Podemos usar esta função assim:
 
    ```haskell
@@ -5381,29 +5758,29 @@ No cálculo lambda tipado, os processos de conversão e redução são essenciai
 
 A**$\beta$-redução**é o mecanismo central de computação no cálculo lambda tipado. Ela ocorre quando uma função é aplicada a um argumento, substituindo todas as ocorrências da variável ligada pelo valor do argumento na expressão. Formalmente, se temos uma abstração $\lambda x : A . M$ e aplicamos a um termo $N$ do tipo $A$, a $\beta$-redução é expressa como:
 
-$$(\lambda x : A . M) \, N \rightarrow\_\beta M[N/x]$$
+$$(\lambda x : A . M) \, N \rightarrow_\beta M[N/x]$$
 
 onde $M[N/x]$ denota a substituição de todas as ocorrências livres de $x$ em $M$ por $N$. A $\beta$-redução é o passo básico da computação no cálculo lambda, e sua correta aplicação preserva os tipos das expressões envolvidas.
 
 Por exemplo, considere a função de incremento aplicada ao número $2$:
 
-$$(\lambda x : \text{Nat} . \, x + 1) \, 2 \rightarrow\_\beta 2 + 1 \rightarrow 3$$
+$$(\lambda x : \text{Nat} . \, x + 1) \, 2 \rightarrow_\beta 2 + 1 \rightarrow 3$$
 
 Aqui, a variável $x$ é substituída pelo valor $2$ e, em seguida, a expressão é simplificada para $3$. No cálculo lambda tipado, a $\beta$-redução garante que os tipos sejam preservados, de modo que o termo final também é do tipo $\text{Nat}$, assim como o termo original.
 
 ### Conversões $\alpha$ e $\eta$
 
-Além da $\beta$-redução, existem duas outras formas importantes de conversão no cálculo lambda: a **$\alpha$-conversão** e a **$\eta$-conversão**.
+Além da $\beta$-redução, existem duas outras formas importantes de conversão no cálculo lambda: a **$\alpha$-redução** e a **$\eta$-redução**.
 
-- **$\alpha$-conversão**: Esta operação permite a renomeação de variáveis ligadas, desde que a nova variável não conflite com variáveis livres. Por exemplo, as expressões $\lambda x : A . \, x$ e $\lambda y : A . y$ são equivalentes sob $\alpha$-conversão:
+- **$\alpha$-redução**: Esta operação permite a renomeação de variáveis ligadas, desde que a nova variável não conflite com variáveis livres. Por exemplo, as expressões $\lambda x : A . \, x$ e $\lambda y : A . y$ são equivalentes sob $\alpha$-redução:
 
-$$\lambda x : A . \, x \equiv\_\alpha \lambda y : A . y$$
+$$\lambda x : A . \, x \equiv_\alpha \lambda y : A . y$$
 
- A $\alpha$-conversão é importante para evitar a captura de variáveis durante o processo de substituição, garantindo que a renomeação de variáveis ligadas não afete o comportamento da função.
+ A $\alpha$-redução é importante para evitar a captura de variáveis durante o processo de substituição, garantindo que a renomeação de variáveis ligadas não afete o comportamento da função.
 
-- **$\eta$-conversão**: A $\eta$-conversão expressa o princípio de extensionalidade, que afirma que duas funções são idênticas se elas produzem o mesmo resultado para todos os argumentos. Formalmente, a $\eta$-conversão permite que uma abstração lambda da forma $\lambda x : A . f \, x$ seja convertida para $f$, desde que $x$ não ocorra livre em $f$:
+- **$\eta$-redução**: A $\eta$-redução expressa o princípio de extensionalidade, que afirma que duas funções são idênticas se elas produzem o mesmo resultado para todos os argumentos. Formalmente, a $\eta$-redução permite que uma abstração lambda da forma $\lambda x : A . f \, x$ seja convertida para $f$, desde que $x$ não ocorra livre em $f$:
 
-$$\lambda x : A . f \, x \rightarrow\_\eta f$$
+$$\lambda x : A . f \, x \rightarrow_\eta f$$
 
 Esta propriedade se reflete em linguagens funcionais como Haskell, que suportam naturalmente funções de ordem superior. Por exemplo:
 
@@ -5421,7 +5798,7 @@ result = applyTwice increment 5
 
 Neste exemplo, `applyTwice` é uma função de ordem superior que toma uma função `f` do tipo `a -> a` e um valor `x` do tipo `a`, e aplica `f` duas vezes a `x`. A função increment é passada como argumento para `applyTwice`, demonstrando como funções podem ser tratadas como valores de primeira classe.
 
-A $\eta$-conversão simplifica as funções removendo abstrações redundantes, tornando as expressões mais curtas e mais diretas.
+A $\eta$-redução simplifica as funções removendo abstrações redundantes, tornando as expressões mais curtas e mais diretas.
 
 ### Normalização e Estratégias de Redução
 
@@ -5442,7 +5819,7 @@ Todas essas estratégias são **normalizantes**no cálculo lambda tipado, ou sej
 Um princípio fundamental no cálculo lambda tipado é a **preservação de tipos** durante a redução, também conhecida como **subject reduction**. Essa propriedade assegura que, se um termo $M$ tem um tipo $A$ e $M$ é reduzido a $N$ através de $\beta$-redução, então $N$ também terá o tipo $A$. Formalmente:
 
 $$
-\frac{\Gamma \vdash M : A \quad M \rightarrow\_\beta N}{\Gamma \vdash N : A}
+\frac{\Gamma \vdash M : A \quad M \rightarrow_\beta N}{\Gamma \vdash N : A}
 $$
 
 Essa propriedade, combinada com a **propriedade de progresso**, que afirma que todo termo bem tipado ou é um valor ou pode ser reduzido, estabelece a segurança do sistema de tipos no cálculo lambda tipado. Isso garante que, durante a computação, nenhum termo incorreto em termos de tipo será gerado.
@@ -5465,23 +5842,23 @@ A partir das regras de tipagem, podemos definir um conjunto de propriedades da t
 
    Formalmente, se $\Gamma \vdash M : \tau$, então existe uma sequência finita de reduções $M \rightarrow_\beta M_1 \rightarrow_\beta ... \rightarrow_\beta M_n$ onde $M_n$ está em forma normal.
 
-   **Exemplo**: considere o termo $(\lambda x:\text{Nat}. x + 1) 2$. Este termo é bem tipado e reduz para $3$ em um número finito de passos:
+   **Exemplo**: considere o termo $(\lambda x:\text{Nat}. \, x + 1) 2$. Este termo é bem tipado e reduz para $3$ em um número finito de passos:
 
-   $$(\lambda x:\text{Nat}. x + 1) 2 \rightarrow_\beta 2 + 1 \rightarrow 3$$
+   $$(\lambda x:\text{Nat}. \, x + 1) 2 \rightarrow_\beta 2 + 1 \rightarrow 3$$
 
 2. **Preservação de tipos** (_subject reduction_): se uma expressão $M$ possui o tipo $A$ sob o contexto $\Gamma$, e $M$ pode ser reduzido para $N$ pela regra $\beta$-redução ($M \rightarrow_\beta N$), então $N$ também possui o tipo $A$. Essa propriedade é essencial para garantir que as transformações de termos dentro do sistema de tipos mantenham a consistência tipológica.
 
    Formalmente: Se $\Gamma \vdash M : \tau$ e $M \rightarrow_\beta N$, então $\Gamma \vdash N : \tau$.
 
-   **Exemplo**: se $\Gamma \vdash (\lambda x:\text{Nat}. x + 1) 2 : \text{Nat}$, então após a redução, teremos $\Gamma \vdash 3 : \text{Nat}$.
+   **Exemplo**: se $\Gamma \vdash (\lambda x:\text{Nat}. \, x + 1) 2 : \text{Nat}$, então após a redução, teremos $\Gamma \vdash 3 : \text{Nat}$.
 
 3. **Decidibilidade da tipagem**: um algoritmo pode decidir se uma expressão possui um tipo válido no sistema de tipos, o que é uma propriedade crucial para a análise de tipos em linguagens de programação.
 
    Isso significa que existe um procedimento efetivo que, dado um contexto $\Gamma$ e um termo $M$, pode determinar se existe um tipo $A$ tal que $\Gamma \vdash M : \tau$.
 
    **Exemplo**: um algoritmo de verificação de tipos pode determinar que:
-   - $\lambda x:\text{Nat}. x + 1$ tem tipo $\text{Nat} \rightarrow \text{Nat}$
-   - $(\lambda x:\text{Nat}. x) \text{true}$ não é bem tipado
+   - $\lambda x:\text{Nat}. \, x + 1$ tem tipo $\text{Nat} \rightarrow \text{Nat}$
+   - $(\lambda x:\text{Nat}. \, x) \text{true}$ não é bem tipado
 
 4. **Progresso**: uma propriedade adicional importante é o progresso. Se um termo é bem tipado e não está em forma normal, então existe uma redução que pode ser aplicada a ele.
 
@@ -5493,11 +5870,11 @@ Estas propriedades juntas garantem a consistência e a robustez do sistema de ti
 
 ### Exercícios de Propriedades do Cálculo Lambda Tipado
 
-**1**. Considere o termo $(\lambda x:\text{Nat}. x + 1) 2$. Mostre a sequência de reduções que leva este termo à sua forma normal, ilustrando a propriedade de normalização forte.
+**1**. Considere o termo $(\lambda x:\text{Nat}. \, x + 1) 2$. Mostre a sequência de reduções que leva este termo à sua forma normal, ilustrando a propriedade de normalização forte.
 
    **Solução**:
 
-   $$(\lambda x:\text{Nat}. x + 1) 2 \rightarrow_\beta 2 + 1 \rightarrow 3$$
+   $$(\lambda x:\text{Nat}. \, x + 1) 2 \rightarrow_\beta 2 + 1 \rightarrow 3$$
 
    O termo reduz à sua forma normal, $3$, em um número finito de passos.
 
@@ -5519,7 +5896,7 @@ Estas propriedades juntas garantem a consistência e a robustez do sistema de ti
 
    O resultado final (4) é do tipo $\text{Nat}$, ilustrando a preservação de tipos.
 
-**3**. Explique por que o termo $(\lambda x:\text{Bool}. x + 1)$ não é bem tipado. Como isso se relaciona com a propriedade de decidibilidade da tipagem?
+**3**. Explique por que o termo $(\lambda x:\text{Bool}. \, x + 1)$ não é bem tipado. Como isso se relaciona com a propriedade de decidibilidade da tipagem?
 
    **Solução**: o termo não é bem tipado porque tenta adicionar 1 a um valor booleano, o que é uma operação inválida. A decidibilidade da tipagem permite que um algoritmo detecte este erro de tipo, rejeitando o termo como mal tipado.
 
@@ -5622,11 +5999,11 @@ Repita este exercício. Ele demonstra como as reduções em um termo bem tipado 
 
    **Solução**: a normalização forte garante que toda sequência de reduções de um termo bem tipado eventualmente termina em uma forma normal. Isso implica que não pode haver loops infinitos, pois se houvesse, a sequência de reduções nunca terminaria, contradizendo a propriedade de normalização forte.
 
-**7**. Considere o termo $(\lambda x:\text{Nat}\rightarrow\text{Nat}. x 3) (\lambda y:\text{Nat}. y * 2)$. Mostre que este termo satisfaz as propriedades de preservação de tipos e progresso.
+**7**. Considere o termo $(\lambda x:\text{Nat}\rightarrow\text{Nat}. \, x 3) (\lambda y:\text{Nat}. y * 2)$. Mostre que este termo satisfaz as propriedades de preservação de tipos e progresso.
 
    **Solução**: preservação de tipos: O termo inicial tem tipo $\text{Nat}$. Após a redução:
 
-   $$(\lambda x:\text{Nat}\rightarrow\text{Nat}. x 3) (\lambda y:\text{Nat}. y \cdot 2) \rightarrow_\beta (\lambda y:\text{Nat}. y \cdot 2) 3 \rightarrow_\beta 3 \cdot 2 \rightarrow 6$$
+   $$(\lambda x:\text{Nat}\rightarrow\text{Nat}. \, x 3) (\lambda y:\text{Nat}. y \cdot 2) \rightarrow_\beta (\lambda y:\text{Nat}. y \cdot 2) 3 \rightarrow_\beta 3 \cdot 2 \rightarrow 6$$
 
    O resultado final $6$ ainda é do tipo $\text{Nat}$.
 
@@ -5640,7 +6017,7 @@ Repita este exercício. Ele demonstra como as reduções em um termo bem tipado 
 
    **Solução**: considere o termo:
 
-   $$\lambda f:(\text{Nat}\rightarrow\text{Nat})\rightarrow\text{Nat}. f (\lambda x:\text{Nat}. x + 1)$$
+   $$\lambda f:(\text{Nat}\rightarrow\text{Nat})\rightarrow\text{Nat}. f (\lambda x:\text{Nat}. \, x + 1)$$
 
    Este termo tem tipo $((\text{Nat}\rightarrow\text{Nat})\rightarrow\text{Nat})\rightarrow\text{Nat}$. Ele representa uma função que toma como argumento outra função (que por sua vez aceita uma função como argumento). Linguagens sem tipos de ordem superior, como C, não podem representar diretamente funções que aceitam ou retornam outras funções.
 
@@ -5695,7 +6072,7 @@ Assim, chegamos aos dias atuais com a correspondência Curry-Howard tendo implic
 
    Uma proposição falsa na lógica construtiva corresponde a um tipo inabitado na teoria de tipos.
 
-   Formalmente: Uma proposição $P$ é falsa se e somente se não existe termo $e$ tal que $e : P$. Sendo assim, o tipo $\forall X. X$ é inabitado, correspondendo a uma proposição falsa na lógica.
+   Formalmente: Uma proposição $P$ é falsa se e somente se não existe termo $e$ tal que $e : P$. Sendo assim, o tipo $\forall X. \, x$ é inabitado, correspondendo a uma proposição falsa na lógica.
 
 Estas correspondências fornecem uma base sólida para o desenvolvimento de linguagens de programação com sistemas de tipos expressivos e para a verificação formal de programas. Por outro lado, provar a veracidade destas quatro correspondências é desafiador. Vamos nos arriscar com a terceira delas, correspondência entre conectivos lógicos e tipos. Nos limitando ao item três, a relação entre a implicação lógica e o tipo da função. Principalmente por esta ser a base da correspondência de Curry-Howard. Provar que a implicação lógica corresponde ao tipo função estabelece o fundamento para as outras correspondências.
 
@@ -5768,7 +6145,7 @@ Esta demonstração usando matemática e programação, da correspondência entr
 
 ### Sistema de Tipos
 
-No cálculo lambda tipado, os tipos podem ser básicos ou compostos. Tipos básicos incluem, por exemplo, $\text{Bool}$, que representa valores booleanos, e $\text{Nat}$, que denota números naturais. Tipos de função são construídos a partir de outros tipos; $A \rightarrow B$ denota uma função que mapeia valores do tipo $A$ para valores do tipo $B$. Por exemplo, em Haskell, podemos definir uma função simples que representa $\lambda x:\text{Nat}. x + 1$:
+No cálculo lambda tipado, os tipos podem ser básicos ou compostos. Tipos básicos incluem, por exemplo, $\text{Bool}$, que representa valores booleanos, e $\text{Nat}$, que denota números naturais. Tipos de função são construídos a partir de outros tipos; $A \rightarrow B$ denota uma função que mapeia valores do tipo $A$ para valores do tipo $B$. Por exemplo, em Haskell, podemos definir uma função simples que representa $\lambda x:\text{Nat}. \, x + 1$:
 
 ```haskell
 increment :: Int -> Int
@@ -5881,7 +6258,7 @@ compose :: (b -> c) -> (a -> b) -> a -> c
 compose f g = \x -> f (g x)
 ```
 
-Estas implementações em Haskell refletem diretamente os conceitos do cálculo lambda tipado. A função `identity` corresponde à abstração $\lambda x:A. x$, `applyFunction` demonstra a regra de aplicação, e `compose` ilustra como funções de ordem superior são tratadas no sistema de tipos.
+Estas implementações em Haskell refletem diretamente os conceitos do cálculo lambda tipado. A função `identity` corresponde à abstração $\lambda x:A. \, x$, `applyFunction` demonstra a regra de aplicação, e `compose` ilustra como funções de ordem superior são tratadas no sistema de tipos.
 
 A Correspondência de Curry-Howard estabelece uma conexão profunda entre o cálculo lambda tipado e a lógica proposicional, unificando os conceitos de computação e prova formal. Esta correspondência tem implicações para o desenvolvimento de assistentes de prova baseados em tipos, a derivação de programas a partir de especificações formais e a verificação formal de propriedades de programas.
 
@@ -5891,7 +6268,7 @@ O estudo do cálculo lambda tipado e suas extensões continua a influenciar o de
 
 [^cita1]: Schönfinkel, Moses. "Über die Bausteine der mathematischen Logik." *Mathematische Annalen*, vol. 92, no. 1-2, 1924, pp. 305-316.
 
-[^cita2]: Malpas, J., “Donald Davidson”, The Stanford Encyclopedia of Philosophy (Winter 2012 Edition), Edward N. Zalta and Uri Nodelman (eds.), URL = <https://plato.stanford.edu/entries/lambda-calculus/#Com>.
+[^cita2]: Malpas, J., “Donald Davidson”, The Stanford Encyclopedia of Philosophy (Winter 2012 Edition), Edward N. \, zalta and Uri Nodelman (eds.), URL = <https://plato.stanford.edu/entries/lambda-calculus/#Com>.
 
 [^cita3]: DOMINUS, Mark, Why is the S combinator an S?, URL = <https://blog.plover.com/math/combinator-s.html>.
 
