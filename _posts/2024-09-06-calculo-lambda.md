@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
 beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
-lastmod: 2024-10-15T02:58:03.800Z
+lastmod: 2024-10-15T03:15:31.774Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -363,7 +363,7 @@ Uma forma de facilitar o entendimento de abstrações e aplicações é pensar e
 
 2. A árvore de construção de uma abstração $\lambda x.s$ consiste em um nó rotulado por $\lambda x$ com uma única subárvore, que é a árvore de construção de $s$.
 
-3. A árvore de construção de uma aplicação $s\,t# consiste em um nó rotulado por $@$ com duas subárvores: a subárvore esquerda é a árvore de construção de $s$ e a subárvore direita é a árvore de construção de $t$.
+3. A árvore de construção de uma aplicação $s\,t$ consiste em um nó rotulado por $@$ com duas subárvores: a subárvore esquerda é a árvore de construção de $s$ e a subárvore direita é a árvore de construção de $t$.
 
 Por exemplo, a árvore de construção do termo $\lambda xy.x\lambda z.yz$ será:
 
@@ -1435,7 +1435,7 @@ Este exemplo demonstra como a redução eta pode simplificar a definição de um
 
 3. Após a redução eta temos: `divideBy = div` é a forma simplificada. Isso define `divideBy` como sendo exatamente a função ``div``.
 
-Se considerarmos o cálculo lambda teremos: 
+Se considerarmos o cálculo lambda teremos:
 
 $$\lambda x. \lambda y. (x \; \text{div} \; y) \to_\eta \lambda x. \lambda y. \text{div} \; x \; y \to_\eta \text{div}$$
 
@@ -1463,7 +1463,7 @@ Este exemplo demonstra como a redução eta pode simplificar o uso de funções 
 
 Após a redução eta temos: `processList = map (* 2)` é a forma simplificada. Onde `(* 2)` é uma seção em Haskell, uma forma de aplicação parcial para operadores infixos.
 
-Em termos de cálculo lambda temos: 
+Em termos de cálculo lambda temos:
 
 $$\lambda x. x * 2 \to_\eta (* \; 2)$$
 
