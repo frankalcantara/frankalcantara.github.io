@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2024-10-16T02:31:12.871Z
+lastmod: 2024-10-16T02:33:21.390Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -6234,7 +6234,7 @@ No cálculo lambda tipado, os tipos podem ser básicos ou compostos. Tipos bási
 increment :: Int -> Int
 increment x = x + 1
 ```
-O sistema de tipos, portanto, tem uma estrutura recursiva, permitindo a construção de tipos complexos a partir de tipos mais simples.
+O sistema de tipos tem uma estrutura recursiva, permitindo a construção de tipos complexos a partir de tipos mais simples.
 
 A tipagem de variáveis assegura que cada variável esteja associada a um tipo específico. Uma variável $x$ do tipo $A$ é denotada como $x : A$. Isso implica que $x$ só pode ser associado a valores que respeitem as regras do tipo $A$, restringindo o comportamento da função.
 
@@ -6254,7 +6254,7 @@ No cálculo lambda simplesmente tipado, temos normalização forte. Isso é algo
 
 1. Atribuímos um "tamanho" a cada termo.
 2. Mostramos que cada redução torna o termo menor.
-3. Como não dá para diminuir para sempre, você tem que parar.
+3. Como não dá para diminuir para sempre, podemos parar.
 
 Os detalhes são complicados. Mas essa é a ideia. Aqui está um esboço da função de tamanho:
 
