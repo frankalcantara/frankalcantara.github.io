@@ -20,21 +20,21 @@ published: 2024-09-08T21:19:20.392Z
 draft: 2024-09-08T21:19:20.392Z
 featured: true
 toc: true
-preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
-beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é uma base para a computação funcional.
-lastmod: 2024-10-15T03:15:31.774Z
+preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
+beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
+lastmod: 2024-10-16T02:31:12.871Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
 # Introdução, História e Motivações e Limites
 
-O cálculo lambda é uma teoria formal para expressar computação por meio da visão de funções como fórmulas. Um sistema para manipular funções como sentenças, desenvolvido por Alonzo [Church](https://en.wikipedia.org/wiki/Alonzo_Church) sob uma visão extensionista das funções na década de 1930. Nesta teoria usamos funções para representar todos os dados e operações. Em cálculo lambda, tudo é uma função e uma função simples será parecida com:
+O cálculo lambda é uma teoria formal para expressar computação por meio da visão de funções como fórmulas. Um sistema para manipular funções como sentenças, desenvolvido por Alonzo [Church](https://en.wikipedia.org/wiki/Alonzo_Church) sob uma visão extensionista das funções na década de 1930. Nesta teoria usamos funções para representar todos os dados e operações. Em cálculo lambda, tudo é uma função e uma função simples é parecida com:
 
 $$\lambda x. \, x + 1 $$
 
 Esta função adiciona $1$ ao seu argumento. O $\lambda$ indica que estamos definindo uma função.
 
-Na teoria da computação definida por Church com o cálculo lambda existem três componentes básicos: as variáveis: $x$, $y$, $z$; as abstrações $\lambda x. E$, onde $E$ é uma expressão lambda e a aplicação $(E \, M)$, onde $E$ e $M$ são expressões lambda. Com estes três componentes e o cálculo lambda é possível expressar qualquer função computacionalmente possível.
+Na teoria da computação definida por Church com o cálculo lambda existem três componentes básicos: as variáveis: $x$, $y$, $z$; as abstrações $\lambda x. \, E$, onde $E$ é uma expressão lambda e a aplicação $(E \, M)$, onde $E$ e $M$ são expressões lambda. Com estes três componentes e o cálculo lambda é possível expressar qualquer função computacionalmente possível.
 
 A década de 1930 encerrou a busca pela consistência da matemática iniciada nas última décadas do século XIX. Neste momento histórico os matemáticos buscavam entender os limites da computação. Questionavam: Quais problemas podem ser resolvidos por algoritmos? Existem problemas não computáveis?
 
@@ -42,19 +42,19 @@ Estas questões surgiram como consequência dos trabalhos no campo da lógica e 
 
 $$\text{soma} = \lambda m. \lambda n. \, m + n $$
 
-Esta função soma dois números. **Todas as funções lambda são, por definição unárias e anônimas**. Assim, a função acima está sacrificando o rigor matemático para facilitar o entendimento. Esta é uma liberdade que será abusada descaradamente neste texto sempre com a esperança que estando mais próximo do que aprendemos nos ciclos básicos de estudo, será mais simples de entender.
+Esta função soma dois números. **Todas as funções lambda são, por definição unárias e anônimas**. Assim, a função acima está sacrificando o rigor matemático para facilitar o entendimento. Esta é uma liberdade que é abusada descaradamente, neste texto, sempre com a esperança que estando mais próximo do que aprendemos nos ciclos básicos de estudo, é mais simples criar o nível de entendimento necessário.
 
 O trabalho de Church estabeleceu limites claros para computação, ajudando a revelar o que é e o que não é computável. Sobre esta formalização foi construída a ciência da computação. Seu objetivo era entender e formalizar a noção de _computabilidade_. Church buscava um modelo matemático preciso para computabilidade. Nesta busca ele criou uma forma de representar funções e operações matemáticas de forma abstrata, usando como base a lógica combinatória desenvolvida anos antes [^cita4].
 
-Na mesma época, [Alan Turing](https://en.wikipedia.org/wiki/Alan_Turing) desenvolveu a [máquina de Turing](https://en.wikipedia.org/wiki/Turing_machine), uma abordagem diferente para tratar a computabilidade. Apesar das diferenças, essas duas abordagens provaram ser equivalentes e, juntas, estabeleceram os alicerces da teoria da computação moderna. O objetivo de Church era capturar o conceito de _cálculo efetivo_[^cita5]. Seu trabalho foi uma das primeiras tentativas de formalizar matematicamente o ato de computar. Mais tarde, a equivalência entre o cálculo lambda e a máquina de Turing consolidou a ideia de que ambos podiam representar qualquer função computável, levando à formulação da [Tese de Church-Turing](https://en.wikipedia.org/wiki/Church%E2%80%93Turing_thesis). Afirmando que qualquer função computável pode ser resolvida pela máquina de touring e, equivalentemente, pelo cálculo lambda, fornecendo uma definição matemática precisa do que é, ou não, computável.
+Na mesma época, [Alan Turing](https://en.wikipedia.org/wiki/Alan_Turing) desenvolveu a [máquina de Turing](https://en.wikipedia.org/wiki/Turing_machine), uma abordagem diferente para tratar a computabilidade. Apesar das diferenças, essas duas abordagens provaram ser equivalentes e, juntas, estabeleceram os alicerces da teoria da computação moderna. O objetivo de Church era capturar o conceito de _cálculo efetivo_[^cita5]. Seu trabalho foi uma das primeiras tentativas de formalizar matematicamente o ato de computar. Mais tarde, a equivalência entre o cálculo lambda e a máquina de Turing consolidou a ideia de que ambos podiam representar qualquer função computável, levando à formulação da [Tese de Church-Turing](https://en.wikipedia.org/wiki/Church%E2%80%93Turing_thesis). Afirmando que qualquer função computável pode ser resolvida pela máquina de touring e, equivalentemente, pelo cálculo lambda, fornecendo uma definição matemática precisa do que é, ou não é, computável.
 
 A partir do meio da década de 1930, vários matemáticos e lógicos, como [Church](https://en.wikipedia.org/wiki/Alonzo_Church), [Turing](https://en.wikipedia.org/wiki/Alan_Turing), [Gödel](https://en.wikipedia.org/wiki/Kurt_G%C3%B6del) e [Post](https://en.wikipedia.org/wiki/Emil_Leon_Post), desenvolveram modelos diferentes para formalizar a computabilidade. Cada um desses modelos abordou o problema de uma perspectiva exclusiva.
 
 Church propôs o cálculo lambda para descrever funções de forma simbólica, usando a _abstração lambda_. Esse modelo representa funções como estruturas de primeira classe formalizando a computabilidade em termos de funções e variáveis.
 
-Em 1936, [Alan Turing](https://en.wikipedia.org/wiki/Alan_Turing) propôs a máquina de Turing. Essa máquina, conceitual, é formadas por uma fita infinita que pode ser lida e manipulada por uma cabeça de leitura/escrita, seguindo um conjunto de regras e se movendo entre estados fixos.
+Em 1936, [Alan Turing](https://en.wikipedia.org/wiki/Alan_Turing) propôs a máquina de Turing. Essa máquina, conceitual, é formada por uma fita infinita que pode ser lida e manipulada por uma cabeça de leitura/escrita, seguindo um conjunto de regras e se movendo entre estados fixos.
 
-A visão de Turing apresentava uma abordagem mecânica da computação, complementando a perspectiva simbólica de Church. Church havia provado que algumas funções não são computáveis. O _problema da parada_ é um exemplo famoso:
+A visão de Turing apresentava uma abordagem mecânica da computação, complementando a perspectiva simbólica de Church e sendo complementada por esta. Church havia provado que algumas funções não são computáveis. O _problema da parada_ é um exemplo famoso:
 
 $$\text{parada} = \lambda f. \lambda x. \text{("f(x) para?")} $$
 
@@ -64,13 +64,13 @@ Church mostrou que esta função não pode ser expressa no cálculo lambda e, co
 
 Em paralelo, [Emil Post](https://en.wikipedia.org/wiki/Emil_Leon_Post) desenvolveu os sistemas de reescrita, baseados em regras de substituição de strings. Embora menos conhecido, o trabalho de Post foi importante para a teoria das linguagens formais e complementou as outras abordagens, fornecendo uma visão baseada em regras de substituição.
 
-Apesar das diferenças estruturais entre o cálculo lambda, as máquinas de Turing, as funções recursivas e os sistemas de Post, todos esses modelos têm o mesmo poder computacional. Uma função que não for computável em um destes modelos, não o será em todos os outros. E neste ponto temos uma base sólida para a ciência da computação.
+Apesar das diferenças estruturais entre o cálculo lambda, as máquinas de Turing, as funções recursivas e os sistemas de Post, todos esses modelos têm o mesmo poder computacional. Uma função que não for computável em um destes modelos, não o é em todos os outros. \, E neste ponto temos uma base sólida para a ciência da computação.
 
 ## A Inovação de Church: Abstração Funcional
 
 O trabalho de Alonzo Church é estruturado sobre a ideia de _abstração funcional_. Esta abstração permitiu tratar funções como estruturas de primeira classe. Estruturas que podem ser passadas como argumentos, retornadas como resultados e usadas em expressões composta, assim como qualquer outro valor na álgebra tradicional.
 
-No cálculo lambda, uma função é escrita como $\lambda x . E$. Aqui, $\lambda$ indica que é uma função, $x$ é a variável ligada, onde a função será aplicada, e $E$ é o corpo da função. Por exemplo, a função que soma $1$ a um número será escrita como $\lambda x . \, x + 1$. Isso possibilita a manipulação direta de funções, sem a necessidade de linguagens ou estruturas rígidas.
+No cálculo lambda, uma função é escrita como $\lambda x . \, E$. Aqui, $\lambda$ indica que é uma função, $x$ é a variável ligada, onde a função é aplicada, e $E$ é o corpo da função. Por exemplo, a função que soma $1$ a um número é escrita como $\lambda x . \, x + 1$. Isso possibilita a manipulação direta de funções, sem a necessidade de linguagens ou estruturas rígidas.
 
 A abstração funcional também criou o conceito de **funções anônimas**. Hoje, muitas linguagens modernas, como Haskell, Lisp, Python e JavaScript, adotam essas funções como parte das ferramentas disponíveis em sua sintaxe. Tais funções são conhecidas como _lambda functions_ ou _arrow functions_.
 
@@ -89,7 +89,7 @@ def f(x):
  return x**2 + 2*x + 1
 ```
 
-Essa notação equivale à notação matemática clássica, porém permite controle sobre o fluxo de execução e manipulação de dados. As linguagens funcionais representam funções a partir das estruturas do cálculo lambda. Neste caso, funções são tratadas como elementos fundamentais e a aplicação de funções é central. Muitos textos acadêmicos dizem que funções são cidadãos de primeira classe.
+Essa notação equivale à notação matemática clássica, porém permite controle sobre o fluxo de execução e manipulação de dados. As linguagens funcionais representam funções a partir das estruturas do cálculo lambda. Neste caso, funções são tratadas como elementos fundamentais e a aplicação de funções é a operação que define a computação. São tão importantes que muitos textos acadêmicos dizem que, no cálculo lambda, funções são cidadãos de primeira classe. Uma metáfora triste. Mas, consistente.
 
 **No cálculo lambda, usamos _abstração_ e _aplicação_ para criar e aplicar funções.** Na criação de uma função que soma dois números, escrita como:
 
@@ -97,93 +97,112 @@ $$\lambda x. \lambda y. \, (x + y)$$
 
 A notação $\lambda$ indica que estamos criando uma função anônima. Essa abstração explícita é menos comum na notação matemática clássica na qual, geralmente definimos funções nomeadas.
 
+A atenta leitora deve notar que a abstração e a aplicação são operações distintas do cálculo lambda.
+
+A abstração, representada por $\lambda x. \, E$, define uma função onde $x$ é o parâmetro e $E$ é o corpo da função. Por exemplo, $\lambda x. \, x + 5$ define uma função que soma $5$ ao argumento fornecido. Outro exemplo é $\lambda f. \lambda x. \, f \, (f \, x)$, que descreve uma função que aplica o argumento $f$ duas vezes ao segundo argumento $x$.
+
+A abstração cria uma função sem necessariamente avaliá-la. A variável $x$ em $\lambda x. \, E$ está ligada à função e não é avaliada até que um argumento seja aplicado. **A abstração é puramente declarativa**, descreve apenas o comportamento da função sem produzir um valor imediato.
+
+**A aplicação**, expressa por $M \, N$, **é o processo de avaliar uma função com um argumento**. Aqui, $M$ representa a função e $N$ o argumento que é passado para essa função. 
+
+Considere a expressão:
+
+$$(\lambda x. \, x + 5) \, 3$$
+
+Neste caso temos a aplicação da função $\lambda x. \, x + 5$ ao argumento $3$, resultando em $8$. Outro exemplo: 
+
+$$(\lambda f. \lambda x. \, f \, (f \, x)) \, (\lambda y. \, y * 2) \, 3$$
+
+Neste caso, temos uma função de composição dupla é aplicada à função que multiplica valores por dois e, em seguida, ao número $3$, resultando em $12$.
+
+Em resumo, **a abstração define uma função ao associar um parâmetro a um corpo de expressão; enquanto a aplicação avalia essa função ao fornecer um argumento**. Ambas operações são independentes, mas mas interagem para permitir a avaliação de expressões no cálculo lambda.
+
 ## Limitações do Cálculo Lambda e Sistemas Avançados
 
-O cálculo lambda é poderoso. Ele pode expressar qualquer função computável. Mas tem limitações: **não tem tipos nativos**. Tudo é função. Números, booleanos, estruturas de dados - todos são codificados como funções; **Não tem estado mutável**. Cada expressão produz um novo resultado. Não modifica valores existentes. Isso é uma vantagem em alguns cenários, mas agrega complexidade a definição de algoritmos; **não tem controle de fluxo direto**. Loops e condicionais são simulados com funções recursivas. Apesar de ser chamado de _a menor linguagem de programação_ a criação de algoritmos sem controle de fluxo não é natural para programadores, e matemáticos, nativos do mundo imperativo; **pode ser ineficiente**. Codificações como números de Church podem levar a cálculos lentos. Performance nunca foi um objetivo.
+O cálculo lambda é poderoso. Ele pode expressar qualquer função computável. Mas tem limitações: **não tem tipos nativos**. Tudo é função. Logo, números, booleanos, estruturas de dados são codificados como funções; **Não tem estado mutável**. cada expressão produz um novo resultado. Não modifica valores existentes. Isso é uma vantagem em alguns cenários, mas agrega complexidade a definição de algoritmos; **não tem controle de fluxo direto**, _Loops_ e condicionais são simulados com funções recursivas. 
 
-Sistemas mais avançados de cálculo lambda abordam essas limitações:
+Apesar de o cálculo lambda ser chamado de _a menor linguagem de programação_ a criação de algoritmos sem controle de fluxo não é natural para programadores, e matemáticos, nativos do mundo imperativo.
 
-1. **sistemas de tipos**: O cálculo lambda tipado adiciona tipos. O Sistema F permite polimorfismo:
+Por fim, o cálculo lambda **pode ser ineficiente**. Por mais que doa confessar isso, codificações como números de Church podem levar a cálculos lentos. Performance nunca foi um objetivo.
 
-   $$\Lambda \alpha. \lambda x:\alpha. \, x $$
+Sistemas mais avançados de cálculo lambda abordam essas expandindo, ou provando conceitos, criando novos sistemas lógicos e criando ferramentas de integração. Entre estes sistemas, a leitora precisa considerar:
 
-   Esta função é polimórfica. Funciona para qualquer tipo $\alpha$. Veremos cálculo lambda tipado, quanto ao Sistema F, ainda não tenho certeza.
+1. **sistemas de tipos**: o cálculo lambda tipado adiciona tipos. **O Sistema F**, por exemplo, permite polimorfismo. A função $\Lambda \alpha. \lambda x:\alpha. \, x$ é polimórfica e funciona para qualquer tipo $\alpha$.
 
-2. **Efeitos colaterais**: O cálculo lambda com efeitos colaterais permite mutação e I/O:
+2. **Efeitos colaterais**: o cálculo lambda com efeitos colaterais permite mutação e I/O. A função $\text{let} \; x = \text{ref} \; 0 \; \text{in} \; x := !x + 1$ cria uma referência mutável e providencia um incremento.
 
-   $$\text{let} \; x = \text{ref} \; 0 \; \text{in} \; x := !x + 1 $$
+3. **Construções imperativas**: algumas extensões adicionam estruturas de controle diretas. Este é o caso de $\text{if} \; b \; \text{then} \; e_1 \; \text{else} \; e_2$. Neste caso, temos um condicional direto, não implementado como uma função.
 
-   Esta expressão cria uma referência mutável e a incrementa.
+4. **Otimizações**: implementações eficientes usam representações otimizadas. A função $2 + 3 \rightarrow 5$ usa aritmética tradicional, não números de Church. Aqui, a observadora leitora já deve ter percebido que, neste texto, quando encontrarmos uma operação aritmética, vamos tratá-la como tal.
 
-3. **Construções imperativas**: Algumas extensões adicionam estruturas de controle diretas:
+Estas extensões agregam funcionalidade e transformam o cálculo lambda em uma ferramenta matemática mais flexível. Muitas vezes com o objetivo de criar algoritmos, facilitar o uso de linguagens de programação baseadas em cálculo lambda no universo fora da matemática.
 
-   $$\text{if} \; b \; \text{then} \; e_1 \; \text{else} \; e_2 $$
+## Notações e Convenções
 
-   Este é um condicional direto, não codificado como função.
-
-4. **Otimizações**: Implementações eficientes usam representações otimizadas:
-
-   $$ 2 + 3 \rightarrow 5 $$
-
- Este cálculo usa aritmética tradicional, não números de Church.
-
-Estas extensões agregam funcionalidade e transformam o cálculo lambda em uma ferramenta matemática mais flexível. Facilitam a criação de algoritmos e utilização do cálculo lambda na criação de linguagens funcionais.
-
-## Notação e Convenções
-
-O cálculo lambda usa uma notação específica para representar funções e operações. Aqui estão os elementos fundamentais:
+O cálculo lambda utiliza uma notação específica para representar funções, variáveis, termos e operações. Abaixo estão as notações e convenções fundamentais, além de algumas expansões necessárias para a compreensão completa.
 
 ### Símbolos Básicos
 
-- $\lambda$: Indica a definição de uma função. Por exemplo, $\lambda x. \, x + 1$ define uma função que adiciona 1 ao seu argumento.
+- **$\lambda$**: indica a definição de uma função anônima. Por exemplo, $\lambda x. \, x + 1$ define uma função que recebe $x$ e retorna $x + 1$.
+  
+- **Variáveis**: letras minúsculas, como $x$, $y$, $z$, representam variáveis no cálculo lambda.
 
-- $x, y, z$: Letras minúsculas geralmente representam variáveis.
+- **Termos**: letras maiúsculas, como $M$, $N$, representam termos ou expressões lambda.
 
-- $M, N$: Letras maiúsculas geralmente representam termos ou expressões lambda.
+- **Aplicação de função**: a aplicação de uma função a um argumento é representada como $(M \, N)$, onde $M$ é uma função e $N$ é o argumento. Quando há múltiplas aplicações, como em $((M \, N) \, P)$, elas são processadas da esquerda para a direita.
 
-- $(M \, N)$: Parênteses indicam a aplicação de uma função $M$ a um argumento $N$.
+- **Redução**: a seta $\rightarrow$ indica o processo de avaliação, ou redução, de uma expressão lambda. Por exemplo, $(\lambda x. \, x + 1) \, 2 \rightarrow 3$. Indica que depois da aplicação e substituição a função chegará a $3$.
 
-- $\rightarrow$: Usado para indicar redução ou avaliação. Por exemplo, $(\lambda x. \, x + 1) \, 2 \rightarrow 3$.
+- **Redução $\beta$**: a notação $ \rightarrow_\beta $ é usada para indicar a redução beta, um passo específico de substituição em uma expressão lambda. Exemplo: $(\lambda x. \, x + 1) \, 2 \rightarrow_\beta 3$. A redução beta será a substituição de $x$ por $2$, resultando em $2+1$ e finalmente em $3$.
 
-- $\rightarrow_\beta$: Indica especificamente uma redução beta.
+- **Equivalência de termos**: o símbolo $\equiv$ denota equivalência entre termos. Dois termos $M \equiv N$ são considerados estruturalmente equivalentes.
 
-- $\equiv$: Indica equivalência entre termos.
+### Tipagem e Contexto
 
-- $\Gamma$: Representa um contexto de tipagem, um conjunto de associações entre variáveis e seus tipos.
+- **Contexto de Tipagem ($\Gamma$)**: representa o contexto de tipagem, que é um conjunto de associações entre variáveis e seus tipos. Por exemplo, $\Gamma = \{ x: \text{Nat}, y: \text{Bool} \}$. Dentro de um contexto $\Gamma$, um termo pode ter um tipo associado: $\Gamma \vdash M : A$ significa que no contexto $ \Gamma $, o termo $M$ tem tipo $A$.
 
-- $\vdash$: Usado em julgamentos de tipo. Por exemplo, $\Gamma \vdash M : A$ significa que no contexto $\Gamma$, o termo $M$ tem tipo $A$.
+- **Julgamento de tipo**: o símbolo $\vdash$ é utilizado para julgar o tipo de um termo dentro de um contexto de tipagem. Por exemplo, $\Gamma \vdash M : A$ significa que, no contexto $\Gamma$, o termo $M$ tem o tipo $A$.
 
-### Convenções de Escrita
+- **Tipagem explícita**: usamos $x : A$ para declarar que a variável $x$ tem tipo $A$. Por exemplo, $n : \text{Nat}$ indica que $n$ é do tipo número natural ($\text{Nat}$).
 
-- Abstrações múltiplas podem ser abreviadas: $\lambda x. \lambda y. M$ pode ser escrito como $\lambda x y. M$.
+### Funções de Alta Ordem e Abstrações
 
-- Aplicações são associativas à esquerda: $M \, N \, P$ significa $((M \, N) \, P)$.
+- **Funções de Alta Ordem**: funções que recebem outras funções como argumentos ou retornam funções como resultado são chamadas de funções de alta ordem. Por exemplo, $(\lambda f. \lambda x. \, f(f \, x))$ é uma função de alta ordem que aplica $f$ duas vezes ao argumento $x$.
 
-- Tipos de função são associativos à direita: $A \rightarrow B \rightarrow C$ significa $A \rightarrow (B \rightarrow C)$.
+- **Abstrações Múltiplas**: abstrações aninhadas podem ser usadas para criar expressões mais complexas, como $(\lambda x. \, (\lambda y. \, x + y))$. Esse termo define uma função que retorna outra função.
 
-### Notações Especiais
+### Variáveis Livres e Ligadas
 
-- $[N/x]M$: Denota a substituição de todas as ocorrências livres de $x$ em $M$ por $N$.
+- **Variáveis Livres**: uma variável $x$ é considerada livre em uma expressão lambda se não estiver ligada a um operador $\lambda$. A notação $FV(M)$ é usada para representar o conjunto de variáveis livres em um termo $M$. Por exemplo, em $\lambda y. \, x + y$, a variável $x$ é livre e $y$ é ligada.
 
-- $FV(M)$: Representa o conjunto de variáveis livres no termo $M$.
+- **Variáveis Ligadas**: uma variável é considerada ligada se estiver associada a um operador $\lambda$. Por exemplo, em $\lambda x. \, x + 1$, a variável $x$ é ligada.
 
-- $\alpha$-redução: Renomeação de variáveis ligadas, denotada por $\equiv_\alpha$.
+### Operações Aritméticas
 
-- $\eta$-redução: Expressa a extensionalidade de funções, denotada por $\rightarrow_\eta$.
+O cálculo lambda permite incluir operações aritméticas dentro das expressões. Por exemplo:
 
-Estas notações e convenções formam a base da linguagem formal do cálculo lambda, permitindo a expressão precisa de funções e suas transformações.
+- **Adição**: $x + 1$, onde $x$ é uma variável e $+$ é a operação de soma.
+- **Multiplicação**: $x \cdot 2$, onde $\cdot$ representa a multiplicação.
+- **Potência**: $x^2$, onde o operador de potência eleva $x$ ao quadrado.
+- **Operações compostas**: exemplos incluem $x^2 + 2x + 1$ e $x \cdot y$, que seguem as regras usuais de aritmética.
 
-## Convenção de Nomes e Variáveis Livres e Ligadas
+### Expansões Específicas
 
-No cálculo lambda, as variáveis têm escopo léxico. O escopo é determinado pela estrutura sintática do termo, não pela ordem de avaliação. Uma variável é **ligada** quando aparece dentro do escopo de uma abstração que a introduz. Por exemplo:
+- **Notação de Tuplas e Produtos Cartesianos**: o produto cartesiano de conjuntos pode ser representado por notações como $(A \times B) \rightarrow C$, que denota uma função que recebe um par de elementos de $A$ e $B$ e retorna um valor em $C$.
 
-- Em $\lambda x.\lambda y.x \, y$, tanto $x$ quanto $y$ estão ligadas.
-- Em $\lambda x.(\lambda x. \, x) \, x$, ambas as ocorrências de $x$ estão ligadas, mas a ocorrência interna (no termo $\lambda x. \, x$) "esconde" a externa.
+- **Funções Recursivas**: funções recursivas podem ser descritas usando notação lambda. Um exemplo comum é a definição da função de fatoriais: $f = \lambda n. \, \text{if} \, n = 0 \, \text{then} \, 1 \, \text{else} \, n \cdot f(n - 1)$.
 
-**Uma variável é livre quando não está ligada por nenhuma abstração**. Por exemplo:
+### Notações Alternativas
 
-- Em $\lambda x. \, x \, y$, $x$ está ligada, mas $y$ está livre.
-- Em $(\lambda x. \, x) \, y$, $y$ está livre.
+- **Parênteses Explícitos**: em muitos casos, os parênteses são omitidos por convenção, mas podem ser adicionados para clareza em expressões mais complexas, como $((M \, N) \, P)$.
+
+- **Reduções Sequenciais**: Quando múltiplas reduções são realizadas, pode-se usar notação como $M \rightarrow_\beta N \rightarrow_\beta P$, para descrever o processo completo de avaliação.
+
+### Convenção de Nomes e Variáveis Livres e Ligadas
+
+No cálculo lambda, as variáveis têm escopo léxico. O escopo é determinado pela estrutura sintática do termo, não pela ordem de avaliação. Uma variável é **ligada** quando aparece dentro do escopo de uma abstração que a introduz. Por exemplo: em $\lambda x.\lambda y.x \, y$, tanto $x$ quanto $y$ estão ligadas e em $\lambda x.(\lambda x. \, x) \, x$, ambas as ocorrências de $x$ estão ligadas, mas a ocorrência interna (no termo $\lambda x. \, x$) sombreia a externa.
+
+**Uma variável é livre quando não está ligada por nenhuma abstração**. por exemplo: em $\lambda x. \, x \, y$, $x$ está ligada, mas $y$ está livre. Ou ainda, em $(\lambda x. \, x) \, y$, $y$ está livre.
 
 O conjunto de variáveis livres de um termo $E$, denotado por $FV(E)$, pode ser definido recursivamente:
 
@@ -195,29 +214,27 @@ FV(E \, N) &= FV(E) \cup FV(N)
 \end{align*}
 $$
 
-Uma convenção importante no cálculo lambda é que podemos renomear variáveis ligadas sem alterar o significado do termo, desde que não capturemos variáveis livres. **Esta operação é chamada de $\alpha$-redução**. Por exemplo:
+A amável leitora deve entender o conceito de variáveis livres e ligadas observando uma convenção importante no cálculo lambda que diz que podemos renomear variáveis ligadas, _bound variables_, sem alterar o significado do termo, desde que não capturemos variáveis livres durante o processo de renomeação. **Esta operação é chamada de redução $\alpha$** e é estudada com mais fervor em outra parte do livro. Neste momento, podemos dizer que essa renomeação não deve alterar o comportamento ou o significado da função, desde que seja feita com cuidado evitando a captura de variáveis livres. A afoita leitora pode avaliar os exemplos a seguir:
+
+**Exemplo 1**: renomeação segura de variáveis ligadas. Considere a expressão:
+
+$$\lambda x.\lambda y.x \, y$$
+
+Nesta expressão, temos duas abstrações aninhadas. A primeira, $\lambda x$, define uma função que recebe $x$ como argumento. A segunda, $\lambda y$, define uma função que recebe $y$. O termo $x \, y$ é a aplicação de $x$ ao argumento $y$. Podemos realizar uma **redução $\alpha$** para renomear as variáveis ligadas sem alterar o significado da expressão. Como não há variáveis livres aqui, podemos renomear $x$ para $z$ e $y$ para $w$:
 
 $$\lambda x.\lambda y.x \, y \to_\alpha \lambda z.\lambda w.z \, w$$
 
-Devemos ter cuidado para não capturar variáveis livres:
+As variáveis ligadas $x$ e $y$ foram renomeadas para $z$ e $w$, respectivamente, mas o significado da função permanece o mesmo: ela ainda aplica o primeiro argumento ao segundo. Este é um exemplo de renomeação correta, sem captura de variáveis livres.
+
+**Exemplo 2**: problema de captura de variáveis livres. Para entender este problema, vejamos o segundo exemplo:
 
 $$\lambda x. \, x \, y \neq_\alpha \lambda y. \, y \, y$$
 
-No segundo termo, a variável livre $y$ foi capturada, o que altera o significado do termo.
+No primeiro termo, $y$ é uma variável livre, ou seja, não está ligada por uma abstração $\lambda$ dentro da expressão e pode representar um valor externo. Se tentarmos renomear $x$ para $y$, acabamos capturando a variável livre $y$ em uma abstração. No segundo termo, $y$ se torna uma variável ligada dentro da abstração $\lambda y$, o que altera o comportamento do termo. O termo original dependia de $y$ como uma variável livre, mas no segundo termo, $y$ está ligada e aplicada a si mesma:
 
-## Diferença entre abstração e aplicação
+$$\lambda x. \, x \, y \neq_\alpha \lambda y. \, y \, y$$
 
-A abstração e a aplicação são os dois mecanismos fundamentais do cálculo lambda. Cada um tem um papel distinto. **A abstração $\lambda x. \, E$ define uma função**. Aqui, $x$ é o parâmetro e $E$ é o corpo da função. Por exemplo:
-
-- $\lambda x. \, x + 5$ define uma função que soma $5$ ao seu argumento.
-
-- $\lambda f. \lambda x. \, f \, (f \, x)$ define uma função que aplica o primeiro argumento duas vezes ao segundo.
-
-**A abstração cria funções no cálculo lambda**. A aplicação $M \, N$ aplica uma função a um argumento. Aqui, $M$ é a função e $N$ é o argumento. Por exemplo:
-
-- $(\lambda x. \, x + 5) \, 3$ aplica a função $\lambda x. \, x + 5$ ao valor $3$.
-
-- $(\lambda f. \lambda x. \, f \, (f \, x)) \, (\lambda y. \, y * 2) \, 3$ aplica a função de composição dupla à função de duplicação e ao número $3$.
+No termo original, $y$ poderia ter um valor externo fornecido de outro contexto. No termo renomeado, $y$ foi capturada e usada como uma variável ligada, o que altera o comportamento do termo. Este é um exemplo de renomeação incorreta por captura de uma variável livre, mudando o significado do termo original.
 
 ## Exercícios
   
@@ -237,35 +254,27 @@ A abstração e a aplicação são os dois mecanismos fundamentais do cálculo l
 
 **Solução**: primeiro, aplicamos a função ao valor $5$, o que resulta na função $\lambda y. 5$. Agora, aplicamos essa nova função ao valor $6$:
 
-$$
-(\lambda y. 5) 6 = 5
-$$
+$$(\lambda y. 5) 6 = 5$$
 
 O resultado final é $5$.
 
-**5**: Simplifique a expressão $(\lambda x. \, x)(\lambda y. y)$.
+**5**: Simplifique a expressão $(\lambda x. \, x)(\lambda y.\, y)$.
 
-**Solução**: aplicamos a função $\lambda x. \, x$ à função $\lambda y. y$:
+**Solução**: aplicamos a função $\lambda x. \, x$ à função $\lambda y.\, y$:
 
-$$
-(\lambda x. \, x)(\lambda y. y) = \lambda y. y
-$$
+$$(\lambda x. \, x)(\lambda y.\, y) = \lambda y.\, y$$
 
-A função $\lambda y. y$ é a identidade e o resultado final é a própria função identidade.
+A função $\lambda y.\, y$ é a identidade e o resultado final é a própria função identidade.
 
-**6**: aplique a função $\lambda x. \lambda y. \, x + y$ aos valores $3$ e $4$.
+**6**: Aplique a função $\lambda x. \lambda y. \, x + y$ aos valores $3$ e $4$.
 
-**Solução**: Aplicamos a função a $3$ e depois a $4$:
+**Solução**: aplicamos a função a $3$ e depois a $4$:
 
-$$
-(\lambda x. \lambda y. \, x + y) 3 = \lambda y. 3 + y
-$$
+$$(\lambda x. \lambda y. \, x + y) 3 = \lambda y. 3 + y$$
 
 Agora aplicamos $4$:
 
-$$
-(\lambda y. 3 + y) 4 = 3 + 4 = 7
-$$
+$$(\lambda y. 3 + y) 4 = 3 + 4 = 7$$
 
 O resultado final é $7$.
 
@@ -277,9 +286,7 @@ O resultado final é $7$.
 
 **Solução**: essa função pode ser definida como:
 
-$$
-\lambda f. \lambda x. \lambda y. f \, y \, x
-$$
+$$\lambda f. \lambda x. \lambda y. f \, y \, x$$
 
 Ela aplica a função $f$ aos argumentos $y$ e $x$, trocando a ordem.
 
@@ -287,9 +294,7 @@ Ela aplica a função $f$ aos argumentos $y$ e $x$, trocando a ordem.
 
 **Solução**: se aplicarmos $\lambda x. \, x \, x$ a si mesma, teremos:
 
-$$
-(\lambda x. \, x \, x)(\lambda x. \, x \, x)
-$$
+$$(\lambda x. \, x \, x)(\lambda x. \, x \, x)$$
 
 Isso resultaria em uma aplicação infinita da função a si mesma, o que leva a um comportamento indefinido ou a um erro de recursão infinita.
 
@@ -297,9 +302,7 @@ Isso resultaria em uma aplicação infinita da função a si mesma, o que leva a
 
 **Solução**: substituímos $x$ por $2$:
 
-$$
-(\lambda x. \, x \, x) 2 = 2 \times 2 = 4
-$$
+$$(\lambda x. \, x \, x) 2 = 2 \times 2 = 4$$
 
 O resultado final é $4$.
 
@@ -317,35 +320,27 @@ $$\lambda x. \, x^2 + 2x + 1 $$
 
 **A aplicação é o processo de usar uma função em um argumento**. No cálculo lambda, representamos a aplicação de uma função a um argumento colocando-os lado a lado. Por exemplo, se tivermos a função $\lambda x. \, x + 1\,$ e quisermos aplicá-la ao valor $2$, escrevemos:
 
-$$(\lambda x. \, x + 1) \, 2 $$
+$$(\lambda x. \, x + 1) \, 2$$
 
-**O resultado da aplicação é a substituição da variável $x$ pelo valor $2$,** resultando em $2 + 1$ equivalente a $3$. Outros exemplos interessantes são:
+**O resultado da aplicação é a substituição da variável $x$ pelo valor $2$,** resultando em $2 + 1$ equivalente a $3$. Outros exemplos interessantes de função são a **função identidade**, que retorna o próprio valor e que é escrita como $\lambda x. \, x$ e uma função que some dois números e que pode ser escrita como $\lambda x. \lambda y. \, (x + y)$.
 
-- **Identidade**: A função identidade, que retorna o próprio valor, é escrita como $\lambda x. \, x$.
-
-- **Soma de Dois Números**: Uma função que soma dois números pode ser escrita como $\lambda x. \lambda y. \, (x + y)$. Temos duas abstrações $\lambda x$ e $\lambda y$, com duas variáveis. Logo, $\lambda x. \lambda y. \, (x + y)$ precisa ser aplicada a dois argumentos. Tal como: $\lambda x. \lambda y. \, (x + y) 3 4$.
+No caso da função que soma dois números, $\lambda x. \lambda y. \, (x + y)$, temos duas abstrações $\lambda x$ e $\lambda y$, cada uma com sua própria variável. Logo, $\lambda x. \lambda y. \, (x + y)$ precisa ser aplicada a dois argumentos. Tal como: $\lambda x. \lambda y. \, (x + y) 3 4$.
 
 Esses elementos básicos, _variáveis, abstração e aplicação_, formam a base do cálculo lambda. Eles permitem definir e aplicar funções de forma simples sem a necessidade de nomes ou símbolos adicionais.
 
 ## Estrutura Sintática - Gramática
 
-O cálculo lambda é um sistema formal para representar computação baseado na abstração de funções e sua aplicação. Sua sintaxe é simples e poderosa em termos de expressão. Enfatizando a simplicidade. Tudo é uma expressão (ou termo) e existem apenas três tipos de termos:
+O cálculo lambda é um sistema formal para representar computação baseado na abstração de funções e sua aplicação. Sua sintaxe é simples e poderosa em termos de expressão. Enfatizando a simplicidade. Tudo é uma expressão, ou termo, e existem apenas três tipos de termos:
 
-1. **Variáveis**: Representadas por letras minúsculas como $x$, $y$, $z$. As variáveis não possuem valor intrínseco, como em linguagens como Python ou C++. Atuam como espaços reservados para entradas potenciais de funções.
+1. **Variáveis**: representadas por letras minúsculas como $x$, $y$, $z$. As variáveis não possuem valor intrínseco, como em linguagens como Python ou C++. Atuam como espaços reservados para entradas potenciais de funções.
 
-2. **Aplicação**: A aplicação $(M \, N)$ indica a aplicação da função $M$ ao argumento $N$. A aplicação é associativa à esquerda, então $M \, N \, P$ é interpretado como $((M \, N) \, P)$.
+2. **Aplicação**: a aplicação $(M \, N)$ indica a aplicação da função $M$ ao argumento $N$. A aplicação é associativa à esquerda, então $M \, N \, P$ é interpretado como $((M \, N) \, P)$.
 
-3. **Abstração**: A abstração $(\lambda x. \, E)$ representa uma função que tem $x$ como parâmetro e $E$ como corpo. O símbolo $\lambda$ indica que estamos definindo uma função. Por exemplo, $(\lambda x. \, x)$ é a função identidade.
+3. **Abstração**: a abstração $(\lambda x. \, E)$ representa uma função que tem $x$ como parâmetro e $E$ como corpo. O símbolo $\lambda$ indica que estamos definindo uma função. Por exemplo, $(\lambda x. \, x)$ é a função identidade.
 
-**A abstração é central no cálculo lambda**. Ela permite criar funções anonimamente, sem a necessidade de nomeá-las.
+**A abstração é a base do cálculo lambda**. Ela permite criar funções anonimas. **Um conceito importante relacionado à abstração é a distinção entre variáveis livres e ligadas**. Uma variável é **ligada** se aparece no escopo de uma abstração lambda que a define. Em $(\lambda x. \, x y)$, $x$ é uma variável ligada. Por outro lado, uma variável é **livre** se não estiver ligada a nenhuma abstração. No exemplo anterior, $y$ é uma variável livre.
 
-**Um conceito importante relacionado à abstração é a distinção entre variáveis livres e ligadas**:
-
-- Uma variável é **ligada** se aparece no escopo de uma abstração lambda que a define. Em $(\lambda x. \, x y)$, $x$ é uma variável ligada.
-
-- Uma variável é **livre** se não está ligada por nenhuma abstração. No exemplo anterior, $y$ é uma variável livre.
-
-A distinção entre variáveis livres e ligadas é indispensável para entender a substituição no cálculo lambda. A substituição é a base do processo de computação no cálculo lambda. O poder do cálculo lambda está na forma como esses elementos simples podem ser combinados para expressar operações complexas como valores booleanos, estruturas de dados e até mesmo recursão usando apenas esses os conceitos básicos, _variáveis, abstração e aplicação_, e a ligação de variáveis. Formalmente, podemos definir a sintaxe do cálculo lambda usando uma gramática na [Forma de Backus-Naur](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form) (BNF) como:
+A distinção entre variáveis livres e ligadas permitirá o entendimento da operação de substituição no cálculo lambda. A substituição é a base do processo de computação no cálculo lambda. O poder computacional do cálculo lambda está na forma como esses elementos simples podem ser combinados para expressar operações complexas como valores booleanos, estruturas de dados e até mesmo recursão usando apenas esses os conceitos básicos, _variáveis, abstração e aplicação_, e a existência, ou não, de variáveis ligadas. Formalmente, podemos definir a sintaxe do cálculo lambda usando uma gramática representada usando uma aplicação pouco formal da [Forma de Backus-Naur](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form) (BNF):
 
 $$
 \begin{align*}
@@ -357,15 +352,9 @@ $$
 \end{align*}
 $$
 
-Uma forma de facilitar o entendimento de abstrações e aplicações é pensar em um termo como uma árvore, cuja forma corresponde à maneira como o termo corresponde à gramática. Podemos chamar este tipo de árvore de árvore sintática. Esta árvore será a representação, em um grafo deste termo. em formato de árvore. Para um dado termo $s$ está árvore terá vértices rotulados por $\lambda x$ ou $@$, e folhas rotuladas por variáveis. Ela é dada indutivamente por:
+A gentil leitora pode facilitar o entendimento de abstrações e aplicações se pensar em um termo lambda como sendo uma árvore, cuja forma corresponde à maneira como o termo aplica as regras de produção da gramática. Chamamos a árvore criada pela derivação das regras de produção de de árvore sintática ou árvore de derivação. Para um dado termo $M$, qualquer, está árvore terá vértices rotulados por $\lambda x$ ou $@$, enquanto as folhas serão rotuladas por variáveis.
 
-1. A árvore de construção de uma variável $x$ é uma única folha, rotulada por $x$.
-
-2. A árvore de construção de uma abstração $\lambda x.s$ consiste em um nó rotulado por $\lambda x$ com uma única subárvore, que é a árvore de construção de $s$.
-
-3. A árvore de construção de uma aplicação $s\,t$ consiste em um nó rotulado por $@$ com duas subárvores: a subárvore esquerda é a árvore de construção de $s$ e a subárvore direita é a árvore de construção de $t$.
-
-Por exemplo, a árvore de construção do termo $\lambda xy.x\lambda z.yz$ será:
+Indutivamente, podemos definir que a árvore de construção de uma variável $x$ é apenas uma folha, rotulada por $x$. A árvore de construção de uma abstração $\lambda x. \, E$ consistirá em um vértice rotulado por $\lambda x$ com uma única subárvore, que é a árvore de construção de $E$. Por fim, a árvore de construção de uma aplicação $E\, N$ consistirá em um vértice rotulado por $@$ com duas subárvores: a subárvore esquerda é a árvore de construção de $E$ e a subárvore direita é a árvore de construção de $N$. Por exemplo, a árvore de construção do termo $\lambda x \lambda y.\, x \,y \,\lambda z. \, y \, z$ é:
 
  $$
 \begin{array}{c}
@@ -384,9 +373,13 @@ Por exemplo, a árvore de construção do termo $\lambda xy.x\lambda z.yz$ será
 \end{array}
 $$
 
-Neste texto, vamos dar prioridade a derivação gramatical, e evitaremos as árvores. Contudo, como as árvores são excelentes para visualização e entendimento, vamos ver mais dois exemplos.
+Neste texto, vamos dar prioridade a derivação gramatical, deixando as árvores para suporte a explicação das abstrações. Pelo sim, pelo não, vamos ver mais dois exemplos.
 
-**Exemplo 1: Representação da abstração $\lambda x.\, x\, x$**
+**Exemplo 1**: Representação da abstração $\lambda x.\, x\, x$
+
+Antes de vermos a árvore, podemos analisar a estrutura do termo $\lambda x.\, x\, x$. Nesta expressão, o termo $\lambda x$ indica que $x$ é o parâmetro da função e o corpo da função é $x\, x$, a aplicação de $x$ a si mesmo.
+
+Agora que a curiosa leitora entendeu a expressão construir a árvore.
 
 $$
 \begin{array}{c}
@@ -400,7 +393,11 @@ x \quad \quad \quad x
 \end{array}
 $$
 
+Esta árvore é composta de um vértice raiz, no topo, $\lambda x$, indicando a abstração de $x$. Logo em seguida, a leitora pode ver o vértice de aplicação $@$ no meio da árvore representando que $x$ está sendo aplicado a $x$. Finalmente, as folhas da árvore são as variáveis $x$ à esquerda e à direita do vértice de aplicação, correspondendo às duas ocorrências de $x$ no corpo da função.
+
 **Exemplo 2**: Representação da aplicação $(\lambda x.\, x + 1)\, 2$
+
+Outra vez podemos começar com a estrutura do termo $(\lambda x.\, x + 1)\, 2$. A expressão $\lambda x.\, x + 1$ define uma função que recebe $x$ como argumento e retorna $x + 1$. O termo $2$ é o argumento que é passado para a função. Consequentemente, a aplicação $(\lambda x.\, x + 1)\, 2$ envolve a substituição de $x$ por $2$ no corpo da função, o que resultará na expressão $2 + 1$. Esta função é representada pela árvore:
 
 $$
 \begin{array}{c}
@@ -414,11 +411,15 @@ x + 1
 \end{array}
 $$
 
-Como vimos, a gramática é simples, poucas regras de produção e poucos símbolos. Por outro lado, a semântica do cálculo lambda pode ser dividida em **semântica operacional** e **semântica denotacional**.
+A árvore sintática representa a aplicação de uma função a um argumento. O vértice de aplicação é representado por $@$ e suas subárvores mostram a função e o argumento.
+
+Em detalhes, temos: o vértice de aplicação, $@$, no topo da árvore temos indica uma aplicação. \, E não poderia ser diferente já que a aplicação de uma função a um argumento é sempre representada por esse vértice. O galho à esquerda, e abaixo do vértice de aplicação, representa $\lambda x.\, x + 1$. Essa parte da árvore representa a função que toma $x$ como parâmetro e retorna $x + 1$. Sendo assim, abaixo de $\lambda x$, está o corpo da função, $x + 1$, que mostra como o argumento $x$ é manipulado. No galho a direita do vértice de aplicação está o valor $2$. Este é o argumento que é aplicado a função. Ou, sendo mais claro, o valor $2$ substituirá $x$ no corpo da função. Por último, temos o corpo da função no nível mais baixo, sob $\lambda x$, vemos o corpo da função $x + 1$. No processo de redução, esse termo é avaliado como $2 + 1$, resultando em $3$.
+
+Como vimos, a gramática é simples, poucas regras de produção e poucos símbolos. Entretanto, a combinação destas regras pode criar termos complexos. Para facilitar o entendimento a semântica do cálculo lambda pode ser dividida em **semântica operacional** e **semântica denotacional**.
 
 ## Semântica Operacional
 
-A semântica operacional descreve como as expressões são avaliadas passo a passo. A principal regra é a **redução beta ($\beta$-redução)**. Ela ocorre quando uma função é aplicada a um argumento. A redução beta substitui a variável ligada no corpo da função pelo argumento fornecido:
+A semântica operacional descreve como as expressões são avaliadas passo a passo. A principal regra é a **redução beta (redução $\beta$)**. Ela ocorre quando uma função é aplicada a um argumento. A redução beta substitui a variável ligada no corpo da função pelo argumento fornecido:
 
 $$(\lambda x.\, e_1)\, e_2\, \rightarrow\, e_1[x := e_2]$$
 
@@ -430,7 +431,7 @@ $$(\lambda x.\, x^2)\, 3\, \rightarrow\, 3^2$$
 
 Existem duas estratégias principais para realizar a redução beta:
 
-1. **Ordem normal**: Reduzimos a aplicação mais à esquerda e mais externa primeiro. Essa estratégia sempre encontra a forma normal, se existir.
+1. **Ordem normal**: reduzimos a aplicação mais à esquerda e mais externa primeiro. Essa estratégia sempre encontra a forma normal, se existir.
 
    **Exemplo:**
 
@@ -448,7 +449,7 @@ Existem duas estratégias principais para realizar a redução beta:
 
    $$2 + 7 \rightarrow 9$$
 
-2. **Ordem aplicativa**: Avaliamos primeiro as subexpressões (argumentos) antes de aplicar a função.
+2. **Ordem aplicativa**: avaliamos primeiro as subexpressões (argumentos) antes de aplicar a função.
 
    **Exemplo:**
 
@@ -468,7 +469,7 @@ Existem duas estratégias principais para realizar a redução beta:
 
    Além da redução beta, existem as seguintes conversões:
 
-- **$\alpha$-redução**: Renomeia variáveis ligadas para evitar conflitos.
+- **redução $\alpha$**: renomeia variáveis ligadas para evitar conflitos.
 
  **Exemplo:**
 
@@ -502,11 +503,11 @@ $$[y/x](\lambda y. \, x) = \lambda z.\, [y/x]([z/y]x) = \lambda z.\, y$$
 
 Renomeamos a variável ligada $y$ para $z$ antes de realizar a substituição, evitando a captura da variável livre $y$.
 
-Outro exemplo relevante:
+Outro exemplo:
 
 $$[z/x](\lambda z.\, x) \neq \lambda z. \, z$$
 
-Se fizermos a substituição diretamente, a variável $z$ será capturada, mudando o significado do termo. A solução correta é renomear a variável ligada antes da substituição:
+Se fizermos a substituição diretamente, a variável $z$ é capturada, mudando o significado do termo. A solução correta é renomear a variável ligada antes da substituição:
 
 $$[z/x](\lambda z.\, x) = \lambda w.\, [z/x]([w/z]x) = \lambda w.\, z$$
 
@@ -654,9 +655,9 @@ $$y \notin \text{FV}(E)$$
 
 Onde $\text{FV}(E)$ representa o conjunto de variáveis livres em $E$, e $E[x \mapsto y]$ indica o termo resultante da substituição de todas as ocorrências da variável $x$ por $y$ em $E$, respeitando as ligações de variáveis para evitar a captura. A substituição $E[x \mapsto y]$ é definida formalmente por indução na estrutura de $E$. As possibilidades que devemos analisar são:
 
-1. Se $E$ é uma variável, então se $E$ é igual a $x$, a substituição resulta em $y$; caso contrário, $E[x \mapsto y]$ é o próprio $E$.
+1. Se $E$ é uma variável, e for igual a $x$, a substituição resulta em $y$; caso contrário, $E[x \mapsto y]$ é o próprio $E$.
 
-2. Se $E$ é uma aplicação $E_1\, E_2$, a substituição será aplicada a ambos os componentes, ou seja, $E[x \mapsto y] = E_1[x \mapsto y]\, E_2[x \mapsto y]$. Finalmente,
+2. Se $E$ é uma aplicação $E_1\, E_2$, a substituição é aplicada a ambos os componentes, ou seja, $E[x \mapsto y] = E_1[x \mapsto y]\, E_2[x \mapsto y]$.
 
 3. Se $E$ é uma abstração $\lambda z.\, E'$, a situação depende da relação entre $z$ e $x$.
 
@@ -669,57 +670,138 @@ Finalmente temos que a condição $y \notin \text{FV}(E)$ é a forma de evitar a
 
 Usamos A redução alfa para evitar a captura de variáveis livres durante a substituição na redução beta. Ao substituir um termo $N$ em um termo $E$, é possível que variáveis livres em $N$ tornem-se ligadas em $E$, o que irá alterar o significado semântico do termo. Para evitar isso, é necessário renomear as variáveis ligadas em $E$ para novas variáveis que não conflitem com as variáveis livres em $N$.
 
-**Exemplo 1:** Considere o termo:
-
-$$(\lambda x.\, \lambda y.\, x + y)\, y$$
-
-Ao aplicarmos a redução beta diretamente, substituindo $x$ por $y$, obteremos:
-
-$$(\lambda x.\, \lambda y.\, x + y)\, y \to_\beta \lambda y.\, y + y$$
-
-Neste caso, a variável livre $y$ no argumento foi capturada pelo $\lambda y$ interno, alterando o significado da expressão original. Para evitar a captura de variáveis, realiza-se uma redução alfa antes da substituição, renomeando a variável ligada $y$ no corpo da função para uma nova variável que não conflite com variáveis livres no argumento. Escolhe-se, por exemplo, $z$. Então teremos:
-
-Aplicando a redução alfa:
-
-$$\lambda x.\, \lambda y.\, x + y \to_\alpha \lambda x.\, \lambda z.\, x + z$$
-
-Agora, podemos aplicar a redução beta, substituindo $x$ por $y$:
-
-$$(\lambda x.\, \lambda z.\, x + z)\,y \to_\beta \lambda z.\, y + z$$
-
-Desta forma é possível evitar a captura da variável livre $y$, e o significado original da expressão é preservado.
-
-**Exemplo 2**: Considere o termo:
+**Exemplo 1**: Considere o termo:
 
 $$(\lambda x.\, x)\,(\lambda y.\, y)$$
 
-Aplicando a redução beta:
+Este termo é uma aplicação de função com duas funções identidade. Podemos começar com a estrutura do termo: uma função externa $\lambda x.\, x$ aplicada a um argumento que também é uma função, $\lambda y.\, y$.
 
-$$(\lambda x.\, x)\,(\lambda y.\, y) \to_\beta \lambda y.\, y$$
+Uma vez que entendemos a estrutura, podemos fazer a análise das variáveis ligadas. Na função externa, $(\lambda x.\, x)$, $x$ é uma variável ligada. No argumento, $(\lambda y.\, y)$, $y$ é uma variável ligada.
 
-Neste exemplo, não existe conflito de variáveis. A variável $y$ está ligada no termo $\lambda y.\, y$, e não havendo necessidade de aplicar a redução alfa.
+Nosso próximo passo é verificar o escopo das variáveis. No termo original, $x$ está ligada apenas no escopo de $\lambda x.\, x$ e $y$ está ligada apenas no escopo de $\lambda y.\, y$
 
-**Exemplo 3**: Considere o termo:
+Em resumo, no termo original, $(\lambda x.\, x)\,(\lambda y.\, y)$, as variáveis ligadas $x$ e $y$ estão em escopos diferentes. Não há sobreposição ou conflito entre os escopos de $x$ e $y$. Ou seja, a substituição de $x$ por $(\lambda y.\, y)$, durante a aplicação, não causará captura de variáveis. Neste caso, não há necessidade de aplicar a redução alfa. Sendo assim, as variáveis $x$ e $y$ podem permanecer com seus nomes originais sem causar ambiguidade ou conflito.
+
+Neste ponto, já sabemos que não há necessidade de redução $\alpha$ o que simplifica o processo de avaliação do termo. Logo, a aplicação, redução $\beta$, pode ser aplicada diretamente. Neste caso, substituímos todas as ocorrências de $x$ no corpo da abstração externa pelo argumento $\lambda y.\, y$, como $x$ aparece uma vez no corpo, o resultado é simplesmente $\lambda y.\, y$.
+
+Este exemplo ilustra uma situação em que, apesar de termos múltiplas variáveis ligadas ($x$ e $y$), suas definições em escopos distintos e não sobrepostos eliminam a necessidade de redução $\alpha$. 
+
+Com o Exemplo 2 podemos perceber que a necessidade de redução $\alpha$ não depende apenas da presença de variáveis ligadas, mas também de como seus escopos interagem no termo como um todo.
+
+**Exemplo 2**: Considere o termo:
 
 $$(\lambda x.\, \lambda x.\, x)\, y$$
 
-Neste termo, a variável $x$ está ligada duas vezes em escopos diferentes. Para evitar confusão, pode-se aplicar a redução alfa para renomear a variável ligada interna:
+Observe que neste termo, a variável $x$ está ligada duas vezes em escopos diferentes, duas abstrações lambda. Para evitar confusão, podemos aplicar a redução alfa para renomear uma das variáveis ligadas. Podemos aplicar na abstração interna ou na abstração externa. Vejamos:
 
-$$\lambda x.\, \lambda x.\, x \to_\alpha \lambda x.\, \lambda z.\, z$$
+1. Renomear a variável ligada interna:
 
-Assim, podemos aplicar a redução beta:
+   $$\lambda x.\, \lambda x.\, x \to_\alpha \lambda x.\, \lambda z.\, z$$
+
+   Esta escolha é interessante por alguns motivos. O primeiro é que esta redução preserva a semântica do termo mantendo o significado original da função externa intacto. Além disso, a redução da abstração interna preserva o escopo mínimo de mudança. Alterando apenas o escopo mais interno, minimizamos o impacto em possíveis referências externas.
+
+   A escolha pela abstração interna mantém a clareza da substituição. Durante a aplicação, redução $\beta$, ficará evidente que $y$ irá substituir o $x$ externo, enquanto $z$ permanece inalterado. Por fim, a redução da abstração interna é consistente com as práticas de programação e reflete o princípio de menor surpresa, mantendo variáveis externas estáveis. Por último, a escolha da abstração interna previne a captura acidental de variáveis livres.
+
+2. Renomear a variável ligada externa:
+
+   $$\lambda x.\, \lambda x.\, x \to_\alpha \lambda z.\, \lambda x.\, x$$
+
+   A escolha pela abstração externa implica no risco de alteração semântica, correndo o risco de mudar o comportamento se o termo for parte de uma expressão maior que referencia $x$. Outro risco está na perda de informação estrutural. Isso será percebido após a aplicação, redução-$\beta$, ($\lambda x.\, x$), perde-se a informação sobre a abstração dupla original. Existe ainda possibilidade de criarmos uma confusão de escopos que pode acarretar uma interpretações errônea sobre qual variável está sendo referenciada em contextos mais amplos.
+
+   Há uma razão puramente empírica. A escolha pela abstração externa contraria as práticas comuns ao cálculo lambda, onde as variáveis externas geralmente permanecem estáveis. Por fim, a escolha pela abstração externa reduz a rastreabilidade das transformações em sistemas de tipos ou em sistemas de análise estáticas.
+
+A perspicaz leitora deve ter percebido o esforço para justificar a aplicação da redução alfa a abstração interna. Agora que a convenci, podemos fazer a aplicando, β-redução, após a abordagem 1:
 
 $$(\lambda x.\, \lambda z.\, z)\,y \to_\beta \lambda z.\, z$$
 
-Resultando em uma expressão clara, sem ambiguidade nas variáveis ligadas.
+Esta redução resulta em uma expressão que preserva a estrutura essencial do termo original, mantendo a abstração interna intacta e substituindo apenas a variável externa, conforme esperado na semântica do cálculo lambda.
 
 ### Formalização da Equivalência Alfa
 
-Dois termos lambda $M$ e $N$ são equivalentes alfa, denotado por $M \equiv_\alpha N$, se um termo pode ser obtido do outro por meio de renomeações consistentes de variáveis ligadas. A relação de equivalência alfa é reflexiva, simétrica e transitiva.
+A equivalência alfa é um conceito do cálculo lambda que estabelece quando dois termos são considerados essencialmente idênticos, diferindo apenas nos nomes de suas variáveis ligadas. Formalmente dizemos que **dois termos lambda $M$ e $N$ são considerados alfa-equivalentes, denotado por $M \equiv_\alpha N$, se um pode ser obtido do outro por meio de uma sequência finita de renomeações consistentes de variáveis ligadas**.
 
-Para que a afirmação anterior seja verdadeira precisamos que apenas variáveis ligadas podem ser renomeadas; variáveis livres devem permanecer inalteradas. Além disso, precisamos cuidar que ao renomear uma variável ligada, todas as suas ocorrências dentro de seu escopo devem ser substituídas pelo novo nome. Finalmente, o novo nome escolhido para a variável ligada não deve aparecer livre no termo onde a substituição ocorre, para evitar captura de variáveis.
+Podemos definir a equivalência alfa considerando as três estruturas básicas do cálculo lambda:
 
-Neste ponto, a leitora já entendeu que a redução alfa é a ferramenta que permite o uso da redução beta e a substituição.
+1. **Variáveis**:
+   $x \equiv_\alpha x$
+
+2. **Aplicação**:
+   Se $E_1 \equiv_\alpha F_1$ e $E_2 \equiv_\alpha F_2$, então $(E_1 \, E_2) \equiv_\alpha (F_1 \, F_2)$
+
+3. **Abstração**:
+   Se $E \equiv_\alpha F[y/x]$ e $y$ não ocorre livre em $E$, então $\lambda x. \, E \equiv_\alpha \lambda y. F$
+
+Onde $F[y/x]$ indica a substituição de todas as ocorrências livres de $x$ por $y$ no corpo $F$.
+
+Para que a equivalência alfa seja válida, precisamos seguir três regras básicas: **garantir que apenas as variáveis ligas a um termo lambda sejam renomadas**; **ao renomear uma variável ligada aplicamos a renomeação a todas as ocorrências da variável dentro de seu escopo**, corpo $E$, devem ser substituídas pelo novo nome; e finalmente, **o novo nome escolhido para a variável ligada não deve aparecer livre no corpo $E$** onde a substituição for aplicada.
+
+Do ponto de vista da análise relacional, a relação $\equiv_\alpha$ é uma relação de equivalência, o que significa que ela possui as propriedades de: **Reflexividade**,  significando que para todo termo $M$, $M \equiv_\alpha M$. Ou seja, todo termo é alfa equivalente a si mesmo; **Simetria**, se $M \equiv_\alpha N$, então $N \equiv_\alpha M$. Todos os termos equivalentes, são equivalentes entre si; e **Transitividade**, se $M \equiv_\alpha N$ e $N \equiv_\alpha P$, então $M \equiv_\alpha P$. Se dois termos, $M$ e $N$ são equivalentes entre si e um deles e equivalente a um terceiro termo, então o outro também será equivalente ao terceiro termo. 
+
+**Exemplo 1**:
+
+   $$\lambda x. \, E \equiv_\alpha \lambda y. \, E[y/x]$$
+
+   Neste termo, $E$ representa o corpo da função, e $E[y/x]$ representa a substituição de $x$ por $y$ em $E$.
+
+**Exemplo 2**:
+
+   $$\lambda x. \lambda y. \, E \equiv_\alpha \lambda a. \lambda b. \, E[a/x][b/y]$$
+
+   Aqui $E[a/x][b/y]$ representa o corpo $E$ com $x$ substituído por $a$ e $y$ por $b$.
+
+**Exemplo 3**:
+
+   $$\lambda x. \, E \equiv_\alpha \lambda z. \, E[z/x]$$
+
+   Onde $y$ é livre em $E$. Neste caso, a variável ligada $x$ foi renomeada para $z$, mas qualquer variável livre $y$ em $E$ permanece inalterada.
+
+**Exemplo 4**: Renomeação Inválida. Considere a expressão:
+
+$$\lambda x. \lambda y. \, E$$
+
+Uma tentativa inválida de renomeação seria:
+
+$$\lambda x. \lambda y. \, E \not\equiv_\alpha \lambda x. \lambda x. \, E[x/y]$$
+
+Esta renomeação é inválida:
+
+1. **Violação da regra de captura de variáveis**: ao renomear $y$ para $x$, estamos potencialmente capturando ocorrências livres de $x$ que possam existir em $E$.
+
+2. **Perda de distinção**: as variáveis $x$ e $y$, que originalmente eram distintas, agora se tornaram a mesma variável, alterando potencialmente o significado da expressão.
+
+3. **Mudança na estrutura de escopo**: o escopo da variável $x$ externa foi efetivamente estendido para incluir o que antes era o escopo de $y$.
+
+Para ilustrar com um exemplo concreto, considere:
+
+$$\lambda x. \, \lambda y. \, x + y$$
+
+A renomeação inválida resultaria em:
+
+$$\lambda x. \, \lambda x. \, x + x$$
+
+Observe que o significado da expressão mudou completamente. Na expressão original, $x$ e $y$ poderiam ter valores diferentes, mas na versão renomeada incorretamente, elas são forçadas a ter o mesmo valor.
+
+Uma renomeação válida seria:
+
+$$\lambda x. \, \lambda y. \, x + y \equiv_\alpha \lambda x. \, \lambda z. \, x + z$$
+
+Aqui, renomeamos $y$ para $z$, mantendo a distinção entre as variáveis e preservando a estrutura e o significado da expressão original.
+
+#### Importância para a Redução Beta
+
+A equivalência alfa é impacta na correção da aplicação da redução $\beta$. Vamos analisar o seguinte exemplo:
+
+$$(\lambda x. \lambda y. \, E) \, y$$
+
+Se aplicássemos a redução $\beta$ diretamente, obteríamos $\lambda y. \, E[y/x]$, o que poderia mudar o significado da expressão se $y$ ocorrer livre em $E$. Para evitar isso, primeiro aplicamos uma redução $\alpha$:
+
+$$(\lambda x. \lambda y. \, E) \, y \equiv_\alpha (\lambda x. \, \lambda z. \, E[z/y]) \, y$$
+
+Agora podemos aplicar a redução $\beta$ com segurança:
+
+$$(\lambda x. \lambda z. \, E[z/y]) \, y \to_\beta \lambda z. \, E[z/y][y/x]$$
+
+Este exemplo ilustra como a equivalência alfa, através da redução alfa, é uma ferramenta essencial que permite o uso seguro da redução beta e da substituição no cálculo lambda, preservando o significado pretendido do corpo $E$ da função.
 
 ### Exercícios de Redução Alfa
 
@@ -729,7 +811,7 @@ Neste ponto, a leitora já entendeu que a redução alfa é a ferramenta que per
 
  $$\lambda x. \, x + 2 \to_\alpha \lambda z. \, z + 2$$
 
-**2**: Renomeie a variável ligada $ y $ na expressão $\lambda x. \lambda y. \, x + y$ para $w$.
+**2**: Renomeie a variável ligada $y$ na expressão $\lambda x. \lambda y. \, x + y$ para $w$.
 
  **Solução:** A redução alfa renomeia $y$ para $w$:
 
@@ -749,9 +831,15 @@ Neste ponto, a leitora já entendeu que a redução alfa é a ferramenta que per
 
 **5**: Na expressão $\lambda x. \, (\lambda x. \, x + 1) \, x$, renomeie a variável ligada interna $x$ para $z$.
 
- **Solução:** Substituímos a variável ligada interna $x$ por $z$:
+Para entender este exercício podemos começar analisando a estrutura inicial. Na expressão original, $\lambda x. \, (\lambda x. \, x + 1) \, x$, temos uma abstração externa $\lambda x$ e uma abstração interna $\lambda x$. Observe que a variável $x$ está sendo usada em dois escopos diferentes.
 
- $$\lambda x. \, (\lambda x. \, x + 1) x \to_\alpha \lambda x. \, (\lambda z. \, z + 1) x $$
+O problema aparece porque a repetição de $x$ cria ambiguidade já que o $x$ interno sombreia o $x$ externo. Neste caso, vamos a redução $\alpha$.
+
+Para aplicar a redução $\alpha$ renomeamos apenas o $x$ interno para $z$, preservando o significado original enquanto remove a ambiguidade.
+
+$$\lambda x. \, (\lambda x. \, x + 1) x \to_\alpha \lambda x. \, (\lambda z. \, z + 1) x$$
+
+Após a redução $\alpha$ temos $x$ no escopo externo e $z$ no escopo interno. Ou seja, o $x$ após o parêntese se refere ao $x$ do escopo externo.
 
 **6**: Aplique a redução alfa na expressão $\lambda x. \lambda y. \, x \cdot y$ renomeando $x$ para $a$ e $y$ para $b$.
 
@@ -779,9 +867,15 @@ Neste ponto, a leitora já entendeu que a redução alfa é a ferramenta que per
 
 **10**: Aplique a redução alfa na expressão $\lambda x. \, (\lambda z. \, z + x) \, z$, renomeando $z$ na função interna para $w$.
 
- **Solução:** Substituímos $z$ na função interna por $w$:
+Neste exemplo podemos começar observando a estrutura original. Neste caso temos uma abstração externa $\lambda x$, uma abstração interna $\lambda z$ e um $z$ livre após o parêntese.
 
- $$\lambda x. \, (\lambda z. \, z + x) \, z \to_\alpha \lambda x. \, (\lambda w. w + x) \, z$$
+Uma vez que a estrutura está clara podemos avaliar as variáveis: o $z$ na função interna é uma variável ligada. Contudo, o $z$ após o parêntese é uma variável livre, não está ligada a nenhum $\lambda$.
+
+Neste caso, a aplicação da redução $\alpha$ renomeará apenas o $z$ ligado, na função interna, para $w$ enquanto o $z$ livre permanece inalterado.
+
+$$\lambda x. \, (\lambda z. \, z + x) \, z \to_\alpha \lambda x. \, (\lambda w. w + x) \, z$$
+
+Após a aplicação da redução $\alpha$, temos $w$ como variável ligada na função interna. O $z$ livre permanece, mas agora está claramente diferenciado do $w$ ligado. Esta redução evita possíveis confusões entre a variável ligada e a variável livre enquanto mantém a semântica original da expressão.
 
 ### Convenções Práticas: Convenção de Variáveis de Barendregt
 
@@ -791,7 +885,7 @@ A partir da Convenção de Barendregt, a definição de substituição pode ser 
 
 $$[N/x](\lambda y.\, M) = \lambda y.\, [N/x]M$$
 
-Assumindo implicitamente que, se necessário, a variável ligada $y$ será renomeada para evitar conflitos, garantindo que $y \neq x$ e que $y$ não apareça livre em $N$. Isso significa que não precisamos nos preocupar com a captura de variáveis livres durante a substituição, pois a convenção assegura que as variáveis ligadas são sempre escolhidas de forma apropriada. Permitido que tratemos os termos alfa-equivalentes como se fossem idênticos. Por exemplo, podemos considerar os seguintes termos como iguais:
+Assumindo implicitamente que, se necessário, a variável ligada $y$ é renomeada para evitar conflitos, garantindo que $y \neq x$ e que $y$ não apareça livre em $N$. Isso significa que não precisamos nos preocupar com a captura de variáveis livres durante a substituição, pois a convenção assegura que as variáveis ligadas são sempre escolhidas de forma apropriada. Permitido que tratemos os termos alfa-equivalentes como se fossem idênticos. Por exemplo, podemos considerar os seguintes termos como iguais:
 
 $$\lambda x.\, \lambda y.\, x\, y = \lambda a.\, \lambda b.\, a\, b$$
 
@@ -825,7 +919,7 @@ Ambos representam a mesma função, diferindo apenas nos nomes das variáveis li
 
 **5**: Aplique a substituição $[z/x](\lambda z. \, x + z)$ sem realizar a redução alfa. O que ocorre?
 
- **Solução:** Se aplicarmos diretamente a substituição sem evitar a captura, a variável $z$ será capturada e a substituição resultará incorretamente em:
+ **Solução:** Se aplicarmos diretamente a substituição sem evitar a captura, a variável $z$ é capturada e a substituição resultará incorretamente em:
 
  $$[z/x](\lambda z. \, x + z) = \lambda z. \, z + z$$
 
@@ -1265,7 +1359,7 @@ Neste caso, a redução alfa foi aplicada primeiro para renomear $y$ para $z$, e
 
 A interação entre redução eta e beta é particularmente interessante. Em alguns casos, a redução eta pode simplificar expressões após a aplicação da redução beta:
 
-$$(\lambda f. \lambda x. f x) (\lambda y. y + 1) \to_\beta \lambda x. (\lambda y. y + 1) x \to_\eta \lambda y. y + 1$$
+$$(\lambda f. \lambda x. f x) (\lambda y.\, y + 1) \to_\beta \lambda x. (\lambda y.\, y + 1) x \to_\eta \lambda y.\, y + 1$$
 
 Aqui, a redução beta é aplicada primeiro, seguida pela redução eta para simplificar ainda mais a expressão.
 
@@ -1465,7 +1559,7 @@ Após a redução eta temos: `processList = map (* 2)` é a forma simplificada. 
 
 Em termos de cálculo lambda temos:
 
-$$\lambda x. x * 2 \to_\eta (* \; 2)$$
+$$\lambda x.\, x * 2 \to_\eta (* \; 2)$$
 
 Onde o argumento `x` é removido, deixando a aplicação parcial do operador `*`.
 
@@ -1501,7 +1595,7 @@ Em suma, a redução eta desempenha um papel importante na otimização de compi
 
 ## Teorema de Church-Rosser
 
-Um dos obstáculos enfrentado por Church durante o desenvolvimento do cálculo lambda dizia respeito a consistência do processo de redução. Ou seja, provar que um termo lambda mesmo que reduzido de formas diferentes, chegaria a mesma forma normal, caso esta forma existisse. Em busca desta consistência, Church e [J. Barkley Rosser](https://en.wikipedia.org/wiki/J._Barkley_Rosser), seu estudante de doutorado, formularam o teorema que viria a ser chamado de **Teorema de Church-Rosser**[^cita8]. Este teorema, também chamado de propriedade de confluência, garante a consistência e a previsibilidade do sistema de redução beta, afirmando que, **independentemente da ordem em que as reduções beta são aplicadas, o resultado final, se existir, será o mesmo** Figura 1.
+Um dos obstáculos enfrentado por Church durante o desenvolvimento do cálculo lambda dizia respeito a consistência do processo de redução. Ou seja, provar que um termo lambda mesmo que reduzido de formas diferentes, chegaria a mesma forma normal, caso esta forma existisse. Em busca desta consistência, Church e [J. Barkley Rosser](https://en.wikipedia.org/wiki/J._Barkley_Rosser), seu estudante de doutorado, formularam o teorema que viria a ser chamado de **Teorema de Church-Rosser**[^cita8]. Este teorema, também chamado de propriedade de confluência, garante a consistência e a previsibilidade do sistema de redução beta, afirmando que, **independentemente da ordem em que as reduções beta são aplicadas, o resultado final, se existir, é o mesmo** Figura 1.
 
 ![](assets/images/conflu.png)
 _Diagrama da Propriedade de Confluência determinada pelo Teorema de Church-Rosser_{: legenda}
@@ -1636,7 +1730,7 @@ Neste caso, ambos os caminhos levam a um processo de redução infinito, mas o T
 
 A confluência garantida pelo Teorema de Church-Rosser é análoga a um rio com vários afluentes que eventualmente convergem para o mesmo oceano. Ou se preferir a antiga expressão latina _Omnes viae Romam ducunt_ Não importa qual caminho a água siga, ou que estrada você pegue, ela acabará chegando ao mesmo destino. No contexto do cálculo lambda, isso significa que diferentes sequências de reduções beta não causam ambiguidades no resultado final da computação.
 
-O Teorema de Church-Rosser fornece uma base teórica para otimizações de compiladores e interpretadores, garantindo que mudanças na ordem de avaliação não alterem o resultado final. Tem impacto na teoria da computação já que a confluência é uma propriedade desejável em sistemas de reescrita de termos, assegurando a consistência lógica e a previsibilidade dos sistemas formais. E, em sistemas de provas formais e lógica matemática o Teorema de Church-Rosser ajuda a garantir que as demonstrações não levem a contradições.
+O Teorema de Church-Rosser fornece uma base teórica para otimizações de compiladores e interpretadores, garantindo que mudanças na ordem de avaliação não alterem o resultado final. Tem impacto na teoria da computação já que a confluência é uma propriedade desejável em sistemas de reescrita de termos, assegurando a consistência lógica e a previsibilidade dos sistemas formais. \, E, em sistemas de provas formais e lógica matemática o Teorema de Church-Rosser ajuda a garantir que as demonstrações não levem a contradições.
 
 ### Exercícios Relacionados ao Teorema de Church-Rosser
 
@@ -2246,7 +2340,7 @@ Existem três combinadores considerados como fundamentais na construção de fun
 
  $$K \, 7 \, 4 \rightarrow_\beta (\lambda x.\lambda y. \, x) \, 7 \, 4 \rightarrow_\beta (\lambda y. \, 7) \, 4 \rightarrow_\beta 7$$
 
- Aqui, o valor $7$ será retornado, e o valor $4$ ignorando.
+ Aqui, o valor $7$ é retornado, e o valor $4$ ignorando.
 
 3.**Combinador S (Substituição)**:
 
@@ -2314,7 +2408,7 @@ A capacidade de expressar qualquer função computável usando apenas combinador
 
  $$f = K \, A = \lambda x.\lambda y. ; x A = \lambda y. \, A$$
 
- Quando aplicamos $f$ a qualquer valor, o resultado será sempre $A$, pois o segundo argumento é ignorado.
+ Quando aplicamos $f$ a qualquer valor, o resultado é sempre $A$, pois o segundo argumento é ignorado.
 
  **Exemplo 2**: Definindo a aplicação de uma função com o combinador $S$
 
@@ -2506,7 +2600,7 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
 **19**: Explique por que o combinador $ K $ pode ser usado para representar constantes em expressões lambda.
 
- **Solução:** O combinador $K = \lambda x. \lambda y. \, x$ descarta o segundo argumento e retorna o primeiro. Isso significa que qualquer valor aplicado ao combinador $K$ será mantido como constante, independentemente de quaisquer outros argumentos fornecidos. Por isso, o combinador $K$ pode ser usado para representar constantes, uma vez que sempre retorna o valor do primeiro argumento, ignorando os subsequentes.
+ **Solução:** O combinador $K = \lambda x. \lambda y. \, x$ descarta o segundo argumento e retorna o primeiro. Isso significa que qualquer valor aplicado ao combinador $K$ é mantido como constante, independentemente de quaisquer outros argumentos fornecidos. Por isso, o combinador $K$ pode ser usado para representar constantes, uma vez que sempre retorna o valor do primeiro argumento, ignorando os subsequentes.
 
 **20**: Reduza a expressão $S \, (K \, S) \, K$ e explique o que esta combinação de combinadores representa.
 
@@ -2618,7 +2712,7 @@ No contexto do cálculo lambda e linguagens de programação, existem duas princ
 
  $$(\lambda x. \, x + 1) (\lambda y. \, y + 2) \rightarrow (\lambda y. \, y + 2) + 1 $$
 
- Como a função $\lambda y. \, y + 2 $ não pode ser somada diretamente a um número, a expressão resultante será indefinida ou produzirá um erro.
+ Como a função $\lambda y. \, y + 2 $ não pode ser somada diretamente a um número, a expressão resultante é indefinida ou produzirá um erro.
 
 **9**: Dada a expressão $(\lambda x. \lambda y. \, x + y) (2 + 3) 4 $, aplique a **ordem aplicativa de redução**.
 
@@ -3258,7 +3352,7 @@ Dois termos lambda $M$ e $N$ são considerados equivalentes, denotado por $M\to_
 
 Formalmente, a relação $\to_\beta$ é a menor relação de equivalência que satisfaz as seguintes propriedades fundamentais:
 
-1. **$\beta$-redução**: $(\lambda x. \, M)N \to_\beta M[N/x]$
+1. **redução $\beta$**: $(\lambda x. \, M)N \to_\beta M[N/x]$
 
    Isto significa que a aplicação de uma função $(\lambda x. \, M)$ a um argumento $N$ resulta na substituição de todas as ocorrências de $x$ em $M$ pelo valor $N$.
 
@@ -3276,7 +3370,7 @@ Formalmente, a relação $\to_\beta$ é a menor relação de equivalência que s
 
 É importante notar que a ordem em que as reduções são aplicadas não afeta o resultado final, devido à propriedade de Church-Rosser do cálculo lambda. Isso garante que, independentemente de como o termo é avaliado, se ele tem uma forma normal, a avaliação eventualmente a encontrará.
 
-A relação $\to_\beta$ é uma **relação de equivalência**, o que significa que ela possui três propriedades: é uma relação **Reflexiva**. Ou seja, para todo termo $M$, temos que $M\to_\beta M$. O que significa que qualquer termo é equivalente a si mesmo, o que é esperado; é uma relação **Simétrica**. Isso significa que se $M\to_\beta N$, então $N\to_\beta M$. Se um termo $M$ pode ser transformado em $N$, então o oposto também é verdade. E, finalmente, é uma relação **Transitiva**. Neste caso, se $M\to_\beta N$ e $N\to_\beta P$, então $M\to_\beta P$. Isso implica que, se podemos transformar $M$ em $N$ e $N$ em $P$, então podemos transformar diretamente $M$ em $P$.
+A relação $\to_\beta$ é uma **relação de equivalência**, o que significa que ela possui três propriedades: é uma relação **Reflexiva**. Ou seja, para todo termo $M$, temos que $M\to_\beta M$. O que significa que qualquer termo é equivalente a si mesmo, o que é esperado; é uma relação **Simétrica**. Isso significa que se $M\to_\beta N$, então $N\to_\beta M$. Se um termo $M$ pode ser transformado em $N$, então o oposto também é verdade. \, E, finalmente, é uma relação **Transitiva**. Neste caso, se $M\to_\beta N$ e $N\to_\beta P$, então $M\to_\beta P$. Isso implica que, se podemos transformar $M$ em $N$ e $N$ em $P$, então podemos transformar diretamente $M$ em $P$.
 
 A equivalência $\to_\beta$ é fundamental para o raciocínio sobre programas em linguagens funcionais, permitindo substituições e otimizações que preservam o significado computacional. As propriedades da equivalência $\to_\beta$ garantem que podemos substituir termos equivalentes em qualquer contexto, sem alterar o significado ou o resultado da computação. Em termos de linguagens de programação, isso permite otimizações e refatorações que preservam a correção do programa.
 
@@ -3396,7 +3490,7 @@ Formalmente:
 
 $$
 \begin{align*}
-&\text{1. } (\lambda x. \, M) \, N\to*\beta M \, [N/x] \text{ ($\beta$-redução)} \\
+&\text{1. } (\lambda x. \, M) \, N\to*\beta M \, [N/x] \text{ (redução $\beta$)} \\
 &\text{2. } \lambda x. \, Mx\to*\beta M, \text{ se $x$ não ocorre livre em $M$($\eta$-redução)} \\
 &\text{3. Se } M\to*\beta M' \text{, então } \lambda x. \, M\to*\beta \lambda x. \, M' \text{ (compatibilidade com abstração)} \\
 &\text{4. Se } M\to*\beta M' \text{ e } N\to*\beta N' \text{, então } M \, N\to_\beta M' \, N' \text{ (compatibilidade com aplicação)}
@@ -3416,7 +3510,7 @@ Talvez algumas aplicações em linguagem Haskell ajude a fixar os conceitos.
    let x = 6 in x * 2
    ```
 
-   Aqui, o compilador pode realizar a $\beta$-redução $(\lambda y. \, y + 1) 5\to_\beta 6$ em tempo de compilação, simplificando o código.
+   Aqui, o compilador pode realizar a redução $\beta$ $(\lambda y. \, y + 1) 5\to_\beta 6$ em tempo de compilação, simplificando o código.
 
 2. **Transformações Seguras de Código**
 
@@ -3461,7 +3555,7 @@ Talvez algumas aplicações em linguagem Haskell ajude a fixar os conceitos.
 
    4. O sistema de tipos de Haskell realiza as seguintes inferências: `show` tem o tipo `Show a \Rightarrow a \rightarrow String`. Ao aplicar `f` a show, o compilador infere que `a = Int` e `b = String`. Portanto, `h` tem o tipo `[Int] -> [String]`.
 
-   Esta inferência demonstra como a equivalência lambda é usada pelo sistema de tipos: `f show` é equivalente a `map show`. O tipo de `map show` é inferido como `[Int] -> [String]`. No `main`, vemos um exemplo de uso de `h`, que converte uma lista de inteiros em uma lista de _strings_.
+   Esta inferência demonstra como a equivalência lambda é usada pelo sistema de tipos: `f show` é equivalente a `map show`. O tipo de `map show` é inferido como `[Int] -> [String]`. No `main`, podemos ver um exemplo de uso de `h`, que converte uma lista de inteiros em uma lista de _strings_.
 
    O sistema de tipos usa equivalência lambda para inferir que `f show` é um termo válido do tipo `[Int] -> [String]`.
 
@@ -3490,11 +3584,11 @@ Neste exemplo: `expensive_computation` é uma função que realiza um cálculo c
 
 `lazy_example` é uma função que demonstra a avaliação preguiçosa. Ela aceita um argumento `booleano condition`. Dentro de `lazy_example`, `x` é definido como `expensive_computation`, mas devido à avaliação preguiçosa, este cálculo não é realizado imediatamente.
 
-Se `condition for True`, o programa calculará `x + 1`, o que forçará a avaliação de `expensive_computation`. Se `condition for False`, o programa retornará `0`, e `expensive_computation` nunca será avaliado.
+Se `condition for True`, o programa calculará `x + 1`, o que forçará a avaliação de `expensive_computation`. Se `condition for False`, o programa retornará `0`, e `expensive_computation` nunca é avaliado.
 
 Ao executar este programa, você verá que: quando `condition` é `True`, o programa levará um tempo considerável para calcular o resultado. Quando `condition` é `False`, o programa retorna instantaneamente, pois `expensive_computation` não é avaliado.
 
-Graças à equivalência lambda e à avaliação preguiçosa, `expensive_computation` só será avaliado se `condition` for verdadeira.
+Graças à equivalência lambda e à avaliação preguiçosa, `expensive_computation` só é avaliado se `condition` for verdadeira.
 
 A equivalência Lambda, ainda que muito importante, não resolve todos os problemas possíveis. Alguns dos desafios estão relacionados com:
 
@@ -3522,7 +3616,7 @@ A equivalência Lambda, ainda que muito importante, não resolve todos os proble
    Neste exemplo, `f1` e `f2` parecem equivalentes do ponto de vista do cálculo lambda puro. No entanto, em Haskell, que tem um sistema de I/O baseado em _monads_, elas se comportam diferentemente:
 
    - `f1` cria uma ação de I/O que, quando executada, imprimirá a mensagem e retornará o resultado.
-   - `f2` também cria uma ação de I/O, mas a mensagem será impressa imediatamente quando `f2` for chamada.
+   - `f2` também cria uma ação de I/O, mas a mensagem é impressa imediatamente quando `f2` for chamada.
 
    Ao executar este programa, você verá que a saída para `f1` e `f2` é diferente devido ao momento em que os efeitos colaterais (impressão) ocorrem.
 
@@ -4015,7 +4109,7 @@ $$
 \end{align*}
 $$
 
-A operação _Xor_ (ou **disjunção exclusiva**) retorna _True_ se um, e apenas um, dos operandos for _True_. Sua definição no cálculo lambda será dada por:
+A operação _Xor_ (ou **disjunção exclusiva**) retorna _True_ se um, e apenas um, dos operandos for _True_. Sua definição no cálculo lambda é dada por:
 
 $$
 \text{Xor} = \lambda b. \lambda c. b \, (\text{Not} \, c) \, c
@@ -4723,7 +4817,7 @@ Definimos uma tupla de dois elementos como:
 
 $$(x, y) = \lambda f. f \, x \, y $$
 
-A tupla $(3,4)$ será representada assim:
+A tupla $(3,4)$ é representada assim:
 
 $$(3, 4) = \lambda f. f \, 3 \, 4$$
 
@@ -4751,17 +4845,17 @@ $$\text{first} = \lambda p. p \, (\lambda x. \lambda y. \, x)$$
 
 A função Last retorna o último elemento da tupla:
 
-$$\text{last} = \lambda p. p \, (\lambda x. \lambda y. y)$$
+$$\text{last} = \lambda p. p \, (\lambda x. \lambda y.\, y)$$
 
  **Exemplo 2**: Aplicação a $(3,4)$:
 
- $$\text{last} \, (3, 4) = (\lambda p. p \, (\lambda x. \lambda y. y)) \, (\lambda f. f \, 3 \, 4)$$
+ $$\text{last} \, (3, 4) = (\lambda p. p \, (\lambda x. \lambda y.\, y)) \, (\lambda f. f \, 3 \, 4)$$
 
  Redução:
 
- $$(\lambda f. f \, 3 \, 4) \, (\lambda x. \lambda y. y)$$
+ $$(\lambda f. f \, 3 \, 4) \, (\lambda x. \lambda y.\, y)$$
 
- $$(\lambda x. \lambda y. y) \, 3 \, 4 $$
+ $$(\lambda x. \lambda y.\, y) \, 3 \, 4 $$
 
  $$ 4 $$
 
@@ -4960,7 +5054,7 @@ No cálculo lambda não tipado estendido com booleanos, podemos encontrar termos
 
 $\text{true} \, (\lambda x. \, x)$
 
-Este termo é uma aplicação, então não é um valor. No entanto, não pode ser reduzido, pois nenhuma das regras de redução se aplica. Já que Não é uma aplicação de abstração, então a regra $\beta$ não se aplica. E também não é uma expressão condicional (if-then-else), então as regras de redução para booleanos não se aplicam.
+Este termo é uma aplicação, então não é um valor. No entanto, não pode ser reduzido, pois nenhuma das regras de redução se aplica. Já que Não é uma aplicação de abstração, então a regra $\beta$ não se aplica. \, E também não é uma expressão condicional (if-then-else), então as regras de redução para booleanos não se aplicam.
 
 Outro exemplo é:
 
@@ -5003,13 +5097,13 @@ Podemos simplificar o conceito de tipos a dois conceitos:
 
 2. **Tipos de função**, como $A \rightarrow B$, que representam funções que mapeiam valores de $A$ para $B$.
 
-Considere a expressão $\lambda x. \, x + 1$. No cálculo lambda tipado, essa função será válida se $x$ for de um tipo numérico, como $x : \text{Nat}$, neste caso considerando $1$ com um literal natural. Sendo assim, a função seria tipada e sua assinatura a definirá como uma função que aceita um número natural e retorna um número natural:
+Considere a expressão $\lambda x. \, x + 1$. No cálculo lambda tipado, essa função é válida se $x$ for de um tipo numérico, como $x : \text{Nat}$, neste caso considerando $1$ com um literal natural. Sendo assim, a função seria tipada e sua assinatura a definirá como uma função que aceita um número natural e retorna um número natural:
 
 $$\lambda x : \text{Nat}. \, x + 1 : \text{Nat} \rightarrow \text{Nat}$$
 
 Isso assegura que apenas valores do tipo $\text{Nat}$ possam ser aplicados a essa função, evitando a aplicação incorreta de argumentos não numéricos.
 
-Com um pouco mais de formalidade, vamos considerar um conjunto de tipos básicos. Usaremos a letra grega $\tau$("tau") minúscula para indicar um tipo básico. O conjunto de tipos simples será definido pela seguinte gramática BNF:
+Com um pouco mais de formalidade, vamos considerar um conjunto de tipos básicos. Usaremos a letra grega $\tau$("tau") minúscula para indicar um tipo básico. O conjunto de tipos simples é definido pela seguinte gramática BNF:
 
 $$A,B ::= \tau \mid A \rightarrow B \mid A \times B \mid 1$$
 
@@ -5019,24 +5113,15 @@ O tipo $1$ é um tipo de um elemento literal, um tipo especial que contém exata
 
 Vamos adotar uma regra de precedência: $\times$ tem precedência sobre $\rightarrow$, e $\rightarrow$ associa-se à direita. Assim, $A \times B \rightarrow C$ é $(A \times B) \rightarrow C$, e $A \rightarrow B \rightarrow C$ é $A \rightarrow (B \rightarrow C)$[^cita7].
 
-O conjunto de termos lambda tipados puros e brutos será definido pela seguinte BNF:
+O conjunto de termos lambda tipados puros e brutos é definido pela seguinte BNF:
 
 Termos brutos: $M,N ::= x \mid M N \mid \lambda x^A.M \mid \langle M,N \rangle \mid \pi_1M \mid \pi_2M \mid *$
 
-Onde:
+Onde temos $x$ representando variáveis; $M N$ representando aplicação de função; $\lambda x^A.M$ representando abstração lambda com anotação de tipo; $\langle M,N \rangle$ representando tuplas; $\pi_1M$ e $\pi_2M$ representam projeções de tuplas e $*$ representando o elemento único do tipo $1$. Desta forma, a amável leitora notará que definimos a sintaxe básica dos termos no cálculo lambda tipado, antes de qualquer verificação de tipo ou análise semântica. Por isso, os chamamos estes tipos simples ou brutos. Ou, em outras palavras, estes termos são chamados de _brutos_ porque  representam a estrutura sintática pura dos termos, sem garantia de que sejam _bem tipados_.
 
-- $x$ representa variáveis
-- $M N$ representa aplicação de função
-- $\lambda x^A.M$ representa abstração lambda com anotação de tipo
-- $\langle M,N \rangle$ representa pares
-- $\pi_1M$ e $\pi_2M$ representam projeções de pares
-- $*$ representa o elemento único do tipo $1$
+Esta sintaxe, simples, pode incluir termos que não são válidos no sistema de tipos, mas que seguem a gramática definida. Ainda assim, usaremos esta gramática como o ponto de partida para o processo de verificação de tipos e, posteriormente, para análise semântica. Posteriormente estes termos _brutos_ serão submetidos a um conjunto de regras de tipagem que determinará se as expressões  estão bem formadas no sistema de tipos do cálculo lambda simplesmente tipado.
 
-Aqui definimos a sintaxe básica dos termos no cálculo lambda tipado, antes de qualquer verificação de tipo ou análise semântica. Por isso, os chamamos de simples ou brutos.
-
-Estes termos são chamados de "brutos" porque  representam a estrutura sintática pura dos termos, sem garantia de que sejam bem tipados. Esta sintaxe pode incluir termos que não são válidos no sistema de tipos, mas que seguem a gramática básica. Usaremos esta gramática como o ponto de partida para o processo de verificação de tipos e análise semântica. Estes termos brutos serão posteriormente submetidos a regras de tipagem para determinar se são bem formados no sistema de tipos do cálculo lambda tipado.
-
-Diferentemente do que fizemos no cálculo lambda não tipado, adicionamos aqui uma sintaxe especial para pares. Especificamente, $\langle M,N \rangle$ é um par de termos, $\pi_iM$ é uma projeção, com a intenção de que $\pi_i\langle M_1,M_2 \rangle = M_i$, usadas para extrair os componentes de um par. Especificamente, a intenção é que $\pi_1\langle M_1,M_2 \rangle$ resulte $M_1$ e $\pi_2\langle M_1,M_2 \rangle$ resulte em $M_2$. Criando uma regra que permite o acesso aos elementos individuais de um par.
+Diferentemente do que fizemos no cálculo lambda não tipado, vamos adicionar uma sintaxe especial para pares. Especificamente, $\langle M,N \rangle$ é um par de termos, $\pi_iM$ é uma projeção, com a intenção de que $\pi_i\langle M_1,M_2 \rangle = M_i$, usadas para extrair os componentes de um par. Especificamente, a intenção é que $\pi_1\langle M_1,M_2 \rangle$ resulte $M_1$ e $\pi_2\langle M_1,M_2 \rangle$ resulte em $M_2$. Criando uma regra que permite o acesso aos elementos individuais de um par.
 
 Além disso, adicionamos um termo $*$, que é o único elemento do tipo $1$. Outra mudança em relação ao cálculo lambda não tipado é que agora escrevemos $\lambda x^A.M$ para uma abstração lambda para indicar que $x$ tem tipo $A$. No entanto, às vezes omitiremos os sobrescritos e escreveremos $\lambda x. \, M$ como antes.
 
@@ -5050,7 +5135,7 @@ Em resumo as sintáticas permitem que o cálculo lambda tipado:
 
 - **Garanta a Segurança de Tipos**: As anotações de tipo em variáveis e a sintaxe enriquecida ajudam a prevenir erros, como a aplicação indevida de funções ou a formação de expressões paradoxais, assegurando que apenas termos bem tipados sejam considerados válidos.
 
-As noções de variáveis livres e ligadas e $\alpha$-redução são definidas como no cálculo lambda não tipado; novamente identificamos termos $\alpha$-equivalentes.
+As noções de variáveis livres e ligadas e redução $\alpha$ são definidas como no cálculo lambda não tipado; novamente identificamos termos $\alpha$-equivalentes.
 
 ## Sintaxe do Cálculo Lambda Tipado
 
@@ -5121,7 +5206,7 @@ Vamos ver alguns exemplos de uso da gramática para definição de expressões e
 
    $$\lambda x : \text{Nat}. \, x$$
 
-   Esta é uma função de identidade, bem tipada, para números naturais, e seu resultado ao ser aplicada a um valor será o próprio valor.
+   Esta é uma função de identidade, bem tipada, para números naturais, e seu resultado ao ser aplicada a um valor é o próprio valor.
 
 **Exemplo 3**: Construção de uma aplicação:
 
@@ -5335,7 +5420,7 @@ Observe que, independentemente da ordem em que as reduções são aplicadas, che
 
 A semântica do cálculo lambda tipado tem implicações para a teoria da computação e o design de linguagens de programação. Ela promove a segurança de tipos, assegurando que programas bem tipados não causam erros de tipo durante a execução. Por exemplo, em uma linguagem com tipagem estática baseada no cálculo lambda tipado, uma expressão como `1 + true` seria rejeitada em tempo de compilação, evitando erros em tempo de execução. Esse cálculo serve como base para linguagens funcionais tipadas, como Haskell e ML, que herdaram suas propriedades formais. A correspondência de Curry-Howard une programas e provas matemáticas, onde tipos correspondem a proposições e termos a provas, unificando lógica e computação. O cálculo lambda tipado oferece uma base sólida para sistemas de verificação formal de programas, permitindo provas rigorosas de correção. Na prática, isso permite a criação de software crítico com alto grau de confiabilidade, como em sistemas de controle de voo ou protocolos de segurança criptográfica.
 
-Nos sistemas onde a propriedade de Church-Rosser, confluência, é válida, o cálculo lambda assegura que o resultado final de um programa seja determinístico, independentemente da estratégia de avaliação. Isso permite que compiladores realizem otimizações, já que a ordem de avaliação não altera o resultado final. Por exemplo, em uma expressão como $(\lambda x. \, x + 1) \, (2 + 3)$, o compilador pode escolher avaliar $(2 + 3)$ primeiro ou aplicar a função $\lambda x. \, x + 1$ diretamente a $(2 + 3)$, sabendo que o resultado final será o mesmo. Em sistemas confluentes, o raciocínio equacional se torna uma ferramenta útil, permitindo equivalências entre expressões e facilitando provas e transformações de programas.
+Nos sistemas onde a propriedade de Church-Rosser, confluência, é válida, o cálculo lambda assegura que o resultado final de um programa seja determinístico, independentemente da estratégia de avaliação. Isso permite que compiladores realizem otimizações, já que a ordem de avaliação não altera o resultado final. Por exemplo, em uma expressão como $(\lambda x. \, x + 1) \, (2 + 3)$, o compilador pode escolher avaliar $(2 + 3)$ primeiro ou aplicar a função $\lambda x. \, x + 1$ diretamente a $(2 + 3)$, sabendo que o resultado final é o mesmo. Em sistemas confluentes, o raciocínio equacional se torna uma ferramenta útil, permitindo equivalências entre expressões e facilitando provas e transformações de programas.
 
 A propriedade de Church-Rosser varia conforme o sistema de cálculo lambda tipado. No _cálculo lambda simplesmente tipado_, a confluência é garantida, pois o sistema se baseia em tipos básicos e tipos de função, sem construções que poderiam causar ambiguidades na redução. Em sistemas com tipos dependentes, como o Cálculo das Construções, a propriedade tende a se manter, embora a prova de confluência seja mais complexa devido à interação entre termos e tipos. Em sistemas que modelam computações com estado ou efeitos colaterais, a confluência pode ser perdida, pois a mutação de estado pode fazer com que a ordem das operações altere o resultado final. Nos sistemas com recursão irrestrita, a confluência permanece, mas a normalização forte é comprometida, pois nem todos os termos têm uma forma normal. Entretanto, os diferentes caminhos de redução podem ainda convergir, se a convergência for possível. Extensões que incluem operadores adicionais, como paralelismo ou concorrência, podem comprometer a confluência, pois nesses casos a ordem de avaliação pode impactar o resultado final.
 
@@ -5347,7 +5432,7 @@ A semântica do cálculo lambda tipado, portanto, não apenas define o comportam
 
 ### Abstrações Lambda e Tipos
 
-No cálculo lambda tipado, as abstrações são expressas na forma $\lambda x : A. M$, onde $x$ é uma variável de tipo $A$ e $M$ é a expressão cujo resultado dependerá de $x$. O tipo dessa abstração é dado por $A \rightarrow B$, onde $B$ é o tipo do resultado de $M$. Por exemplo, a abstração $\lambda x : \text{Nat}. \, x + 1$ define uma função que aceita um argumento do tipo $\text{Nat}$(número natural) e retorna outro número natural. Nesse caso, o tipo da abstração é $\text{Nat} \rightarrow \text{Nat}$, o que significa que a função mapeia um número natural para outro número natural.
+No cálculo lambda tipado, as abstrações são expressas na forma $\lambda x : A. \, E$, onde $x$ é uma variável de tipo $A$ e $E$ é a expressão cujo resultado dependerá de $x$. O tipo dessa abstração é dado por $A \rightarrow B$, onde $B$ é o tipo do resultado de $E$. Por exemplo, a abstração $\lambda x : \text{Nat}. \, x + 1$ define uma função que aceita um argumento do tipo $\text{Nat}$(número natural) e retorna outro número natural. Nesse caso, o tipo da abstração é $\text{Nat} \rightarrow \text{Nat}$, o que significa que a função mapeia um número natural para outro número natural.
 
 $$\lambda x : \text{Nat}. \, x + 1 : \text{Nat} \rightarrow \text{Nat}$$
 
@@ -5363,9 +5448,9 @@ Aqui, a função de tipo $\text{Nat} \rightarrow \text{Nat}$ é aplicada ao núm
 
 ### Substituição e Redução
 
-A operação de substituição no cálculo lambda tipado segue o mesmo princípio do cálculo não tipado, com a adição de restrições de tipo. Quando uma função é aplicada a um argumento, a variável vinculada à função é substituída pelo valor do argumento na expressão. Formalmente, a substituição de $N$ pela variável $x$ em $M$ é denotada por $[N/x]M$, indicando que todas as ocorrências livres de $x$ em $M$ devem ser substituídas por $N$.
+A operação de substituição no cálculo lambda tipado segue o mesmo princípio do cálculo não tipado, com a adição de restrições de tipo. Quando uma função é aplicada a um argumento, a variável vinculada à função é substituída pelo valor do argumento na expressão. Formalmente, a substituição de $N$ pela variável $x$ em $E$ é denotada por $[N/x]E$, indicando que todas as ocorrências livres de $x$ em $E$ devem ser substituídas por $N$.
 
-A redução no cálculo lambda tipado segue a estratégia de $\beta$-redução, onde aplicamos a função ao seu argumento e substituímos a variável ligada pelo valor fornecido. Um exemplo clássico de $\beta$-redução seria:
+A redução no cálculo lambda tipado segue a estratégia de redução $\beta$, onde aplicamos a função ao seu argumento e substituímos a variável ligada pelo valor fornecido. Um exemplo clássico de redução $\beta$ seria:
 
 $$(\lambda x : \text{Nat}. \, x + 1) \, 2 \rightarrow 2 + 1 \rightarrow 3$$
 
@@ -5425,17 +5510,15 @@ As regras de tipagem no cálculo lambda tipado fornecem um sistema formal para g
 
    A Regra da Variável fundamenta a tipagem sendo a base para atribuição de tipos a expressões mais complexas. Sem essa regra, não seria possível inferir os tipos das variáveis em expressões. Além disso, essa regra garante a consistência do sistema  asseguramos que as variáveis são usadas de acordo com seus tipos declarados, evitamos erros de tipagem e comportamentos imprevistos.
 
-2. **Regra de Abstração**: Se sob o contexto $\Gamma$, temos que $\Gamma, x:\tau \vdash M:B$, então podemos derivar que $\Gamma \vdash (\lambda x:A.M) : A \rightarrow B$.
+2. **Regra de Abstração**: Se sob o contexto $\Gamma$, temos que $\Gamma, x:\tau \vdash E:B$, então podemos derivar que $\Gamma \vdash (\lambda x:A.E) : A \rightarrow B$.
 
    A **Regra de Abstração** no cálculo lambda tipado permite derivar o tipo de uma função lambda baseada no tipo de seu corpo e no tipo de seu parâmetro. Formalmente, a regra é expressa como:
 
-   $$
-   \frac{\Gamma,\, x:\tau \, \vdash\, M:B}{\, \Gamma\, \vdash\, (\lambda x:\tau.\, M) : A \rightarrow B}
-   $$
+   $$\frac{\Gamma,\, x:\tau \, \vdash\, E:B}{\, \Gamma\, \vdash\, (\lambda x:\tau.\, E) : A \rightarrow B}$$
 
-   Isso significa que, se no contexto $\Gamma$, ao adicionar a associação $x:\tau$, podemos derivar que $M$ tem tipo $B$, então podemos concluir que a abstração lambda $(\lambda x:\tau.\, M)$ tem tipo $A \rightarrow B$ no contexto original $\Gamma$.
+   Isso significa que, se no contexto $\Gamma$, ao adicionar a associação $x:\tau$, podemos derivar que $E$ tem tipo $B$, então podemos concluir que a abstração lambda $(\lambda x:\tau.\, E)$ tem tipo $A \rightarrow B$ no contexto original $\Gamma$.
 
-   Haskell permite definir funções anônimas (lambdas) de forma similar ao cálculo lambda tipado:
+   A linguagem Haskell permite definir funções anônimas, chamadas de funções lambda, de forma similar ao cálculo lambda simplesmente tipado:
 
    ```haskell
    multiplyBy2 :: Int -> Int
@@ -5452,7 +5535,7 @@ As regras de tipagem no cálculo lambda tipado fornecem um sistema formal para g
 
    Este exemplo demonstra como a abstração lambda do cálculo tipado se traduz diretamente para uma linguagem de programação funcional moderna.
 
-   Novamente temos o contexto de tipagem $\Gamma$ indicando Conjunto de associações entre variáveis e seus tipos. O julgamento será feito por _sob o contexto $\Gamma$, a expressão $M$ tem tipo $B$_. Finalmente, existe uma adição ao contexto definida ao considerar a variável $x$ com tipo $\tau$, expandimos o contexto para $\Gamma,\, x:\tau$.
+   Novamente temos o contexto de tipagem $\Gamma$ indicando Conjunto de associações entre variáveis e seus tipos. O julgamento é feito por _sob o contexto $\Gamma$, a expressão $M$ tem tipo $B$_. Finalmente, existe uma adição ao contexto definida ao considerar a variável $x$ com tipo $\tau$, expandimos o contexto para $\Gamma,\, x:\tau$.
 
    A Regra de Abstração define Tipos de Funções: Permite derivar o tipo de uma função lambda a partir dos tipos de seu parâmetro e de seu corpo, enquanto parece assegurar a coerência por garantir que a função está bem tipada e que pode ser aplicada a argumentos do tipo correto.
 
@@ -5756,27 +5839,27 @@ No cálculo lambda tipado, os processos de conversão e redução são essenciai
 
 ### Redução $\beta$
 
-A**$\beta$-redução**é o mecanismo central de computação no cálculo lambda tipado. Ela ocorre quando uma função é aplicada a um argumento, substituindo todas as ocorrências da variável ligada pelo valor do argumento na expressão. Formalmente, se temos uma abstração $\lambda x : A . M$ e aplicamos a um termo $N$ do tipo $A$, a $\beta$-redução é expressa como:
+A**redução $\beta$**é o mecanismo central de computação no cálculo lambda tipado. Ela ocorre quando uma função é aplicada a um argumento, substituindo todas as ocorrências da variável ligada pelo valor do argumento na expressão. Formalmente, se temos uma abstração $\lambda x : A . M$ e aplicamos a um termo $N$ do tipo $A$, a redução $\beta$ é expressa como:
 
 $$(\lambda x : A . M) \, N \rightarrow_\beta M[N/x]$$
 
-onde $M[N/x]$ denota a substituição de todas as ocorrências livres de $x$ em $M$ por $N$. A $\beta$-redução é o passo básico da computação no cálculo lambda, e sua correta aplicação preserva os tipos das expressões envolvidas.
+onde $M[N/x]$ denota a substituição de todas as ocorrências livres de $x$ em $M$ por $N$. A redução $\beta$ é o passo básico da computação no cálculo lambda, e sua correta aplicação preserva os tipos das expressões envolvidas.
 
 Por exemplo, considere a função de incremento aplicada ao número $2$:
 
 $$(\lambda x : \text{Nat} . \, x + 1) \, 2 \rightarrow_\beta 2 + 1 \rightarrow 3$$
 
-Aqui, a variável $x$ é substituída pelo valor $2$ e, em seguida, a expressão é simplificada para $3$. No cálculo lambda tipado, a $\beta$-redução garante que os tipos sejam preservados, de modo que o termo final também é do tipo $\text{Nat}$, assim como o termo original.
+Aqui, a variável $x$ é substituída pelo valor $2$ e, em seguida, a expressão é simplificada para $3$. No cálculo lambda tipado, a redução $\beta$ garante que os tipos sejam preservados, de modo que o termo final também é do tipo $\text{Nat}$, assim como o termo original.
 
 ### Conversões $\alpha$ e $\eta$
 
-Além da $\beta$-redução, existem duas outras formas importantes de conversão no cálculo lambda: a **$\alpha$-redução** e a **$\eta$-redução**.
+Além da redução $\beta$, existem duas outras formas importantes de conversão no cálculo lambda: a **redução $\alpha$** e a **$\eta$-redução**.
 
-- **$\alpha$-redução**: Esta operação permite a renomeação de variáveis ligadas, desde que a nova variável não conflite com variáveis livres. Por exemplo, as expressões $\lambda x : A . \, x$ e $\lambda y : A . y$ são equivalentes sob $\alpha$-redução:
+- **redução $\alpha$**: Esta operação permite a renomeação de variáveis ligadas, desde que a nova variável não conflite com variáveis livres. Por exemplo, as expressões $\lambda x : A . \, x$ e $\lambda y : A . y$ são equivalentes sob redução $\alpha$:
 
 $$\lambda x : A . \, x \equiv_\alpha \lambda y : A . y$$
 
- A $\alpha$-redução é importante para evitar a captura de variáveis durante o processo de substituição, garantindo que a renomeação de variáveis ligadas não afete o comportamento da função.
+ A redução $\alpha$ é importante para evitar a captura de variáveis durante o processo de substituição, garantindo que a renomeação de variáveis ligadas não afete o comportamento da função.
 
 - **$\eta$-redução**: A $\eta$-redução expressa o princípio de extensionalidade, que afirma que duas funções são idênticas se elas produzem o mesmo resultado para todos os argumentos. Formalmente, a $\eta$-redução permite que uma abstração lambda da forma $\lambda x : A . f \, x$ seja convertida para $f$, desde que $x$ não ocorra livre em $f$:
 
@@ -5806,7 +5889,7 @@ Uma das propriedades mais importantes do cálculo lambda tipado é a **normaliza
 
 Existem diferentes estratégias de redução que podem ser aplicadas ao calcular expressões no cálculo lambda tipado:
 
-1. **Redução por ordem normal**: Nessa estratégia, reduzimos sempre o redex mais à esquerda e mais externo primeiro. Essa abordagem garante que, se existir uma forma normal, ela será encontrada.
+1. **Redução por ordem normal**: Nessa estratégia, reduzimos sempre o redex mais à esquerda e mais externo primeiro. Essa abordagem garante que, se existir uma forma normal, ela é encontrada.
 
 2. **Redução por ordem de chamada (call-by-name)**: Nesta estratégia, apenas os termos que realmente são necessários para a computação são reduzidos. Isso implementa uma avaliação "preguiçosa", comum em linguagens funcionais como Haskell.
 
@@ -5816,13 +5899,13 @@ Todas essas estratégias são **normalizantes**no cálculo lambda tipado, ou sej
 
 ### Preservação de Tipos e Segurança
 
-Um princípio fundamental no cálculo lambda tipado é a **preservação de tipos** durante a redução, também conhecida como **subject reduction**. Essa propriedade assegura que, se um termo $M$ tem um tipo $A$ e $M$ é reduzido a $N$ através de $\beta$-redução, então $N$ também terá o tipo $A$. Formalmente:
+Um princípio fundamental no cálculo lambda tipado é a **preservação de tipos** durante a redução, também conhecida como **subject reduction**. Essa propriedade assegura que, se um termo $M$ tem um tipo $A$ e $M$ é reduzido a $N$ através de redução $\beta$, então $N$ também terá o tipo $A$. Formalmente:
 
 $$
 \frac{\Gamma \vdash M : A \quad M \rightarrow_\beta N}{\Gamma \vdash N : A}
 $$
 
-Essa propriedade, combinada com a **propriedade de progresso**, que afirma que todo termo bem tipado ou é um valor ou pode ser reduzido, estabelece a segurança do sistema de tipos no cálculo lambda tipado. Isso garante que, durante a computação, nenhum termo incorreto em termos de tipo será gerado.
+Essa propriedade, combinada com a **propriedade de progresso**, que afirma que todo termo bem tipado ou é um valor ou pode ser reduzido, estabelece a segurança do sistema de tipos no cálculo lambda tipado. Isso garante que, durante a computação, nenhum termo incorreto em termos de tipo é gerado.
 
 ### Confluência e Unicidade da Forma Normal
 
@@ -5846,7 +5929,7 @@ A partir das regras de tipagem, podemos definir um conjunto de propriedades da t
 
    $$(\lambda x:\text{Nat}. \, x + 1) 2 \rightarrow_\beta 2 + 1 \rightarrow 3$$
 
-2. **Preservação de tipos** (_subject reduction_): se uma expressão $M$ possui o tipo $A$ sob o contexto $\Gamma$, e $M$ pode ser reduzido para $N$ pela regra $\beta$-redução ($M \rightarrow_\beta N$), então $N$ também possui o tipo $A$. Essa propriedade é essencial para garantir que as transformações de termos dentro do sistema de tipos mantenham a consistência tipológica.
+2. **Preservação de tipos** (_subject reduction_): se uma expressão $M$ possui o tipo $A$ sob o contexto $\Gamma$, e $M$ pode ser reduzido para $N$ pela regra redução $\beta$ ($M \rightarrow_\beta N$), então $N$ também possui o tipo $A$. Essa propriedade é essencial para garantir que as transformações de termos dentro do sistema de tipos mantenham a consistência tipológica.
 
    Formalmente: Se $\Gamma \vdash M : \tau$ e $M \rightarrow_\beta N$, então $\Gamma \vdash N : \tau$.
 
@@ -5929,7 +6012,7 @@ Estas propriedades juntas garantem a consistência e a robustez do sistema de ti
 
       $$M\, 3 = (\lambda x:\text{Nat}.\, \text{if } x = 0\, \text{then}\, 1\, \text{else}\, x \times ((\lambda y:\text{Nat}.\, y - 1)\, x))\, 3$$
 
-      Redução por $\beta$-redução:
+      Redução por redução $\beta$:
 
       $$
       \rightarrow_\beta \text{if } 3 = 0\, \text{then}\, 1\, \text{else}\, 3 \times ((\lambda y:\text{Nat}.\, y - 1)\, 3)
@@ -6179,13 +6262,11 @@ $$size(\lambda x:A.M) = size(M) + 1$$
 
 $$size(MN) = size(M) + size(N) + 1$$
 
-Cada $\beta$-redução diminui o termo. Não dá para reduzir para sempre. Então, você tem que parar.
+Cada redução $\beta$ diminui o termo. Não dá para reduzir para sempre. Então, você tem que parar.
 
 A normalização não é só teoria. Ela é prática.
 
 Em Haskell, a normalização garante a terminação de programas bem tipados. Nada de loops infinitos. Nada de falhas. Apenas funções puras que terminam.
-
-O OCaml também usa isso. O sistema de tipos garante a normalização forte. É uma rede de segurança para programadores.
 
 ### Exemplos
 
@@ -6223,7 +6304,7 @@ Além disso, o sistema de tipos do cálculo lambda tipado exclui automaticamente
 
 O cálculo lambda tipado apresenta várias propriedades que reforçam a robustez do sistema:
 
--**Normalização Forte**: Todo termo bem tipado tem uma forma normal, ou seja, pode ser reduzido até uma forma final através de $\beta$-redução. Isso implica que termos bem tipados não entram em loops infinitos de computação.
+-**Normalização Forte**: Todo termo bem tipado tem uma forma normal, ou seja, pode ser reduzido até uma forma final através de redução $\beta$. Isso implica que termos bem tipados não entram em loops infinitos de computação.
 
 -**Preservação de Tipos (Subject Reduction)**: Se $\Gamma \vdash M : A$ e $M \rightarrow_\beta N$, então $\Gamma \vdash N : A$. Isso garante que a tipagem é preservada durante a redução de termos, assegurando a consistência dos tipos ao longo das transformações.
 
