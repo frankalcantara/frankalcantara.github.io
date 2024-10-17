@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2024-10-16T02:33:21.390Z
+lastmod: 2024-10-17T00:44:07.567Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -488,72 +488,597 @@ Essas regras garantem que a avaliação seja consistente. Por fim, mas não meno
 A substituição é a operação central no cálculo lambda. Ela funciona substituindo uma variável livre por um termo, e sua formalização evita a captura de variáveis, garantindo que ocorra de forma correta. A substituição é definida de maneira recursiva:
 
 1. $[N/x]x = N$
-2. $[N/x]y = y$, se $x
-eq y$
+2. $[N/x]y = y$, se $x \neq y$
 3. $[N/x](M_1 M_2) = ([N/x]M_1)([N/x]M_2)$
 4. $[N/x](\lambda y.M) = \lambda y.([N/x]M)$, se $x \neq y$ e $y \notin FV(N)$
 
-Aqui, $FV(N)$ é o conjunto de variáveis livres de $N$. A condição $y \notin FV(N)$ é necessária para evitar a captura de variáveis livres. Considere, por exemplo:
+Aqui, $FV(N)$ é o conjunto de variáveis livres de $N$. A condição $y \notin FV(N)$ é necessária para evitar a captura de variáveis livres.
 
-$$[y/x](\lambda y. \, x) \neq \lambda y. \, y$$
+Podemos pensar na substituição como um processo de _buscar e substituir_ em uma expressão, mas com algumas regras especiais. Lendo estas regras em bom português teríamos:
 
-Nesse caso, uma substituição direta capturaria a variável livre $y$, alterando o significado do termo. Para evitar isso, utilizamos a **substituição com evasão de captura**. Considere:
+- A regra 1: $[N/x]x = N$ indica que a variável $x$ será substituída pelo termo $N$. **Esta é a regra fundamental da Substituição**. De forma mais intuitiva podemos dizer que esta regra significa que se encontrarmos exatamente a variável que estamos procurando, substituímos por nosso novo termo. Por exemplo, em $[3/x]x$, substituímos $x$ por $3$.
 
-$$[y/x](\lambda y. \, x) = \lambda z.\, [y/x]([z/y]x) = \lambda z.\, y$$
+- A regra 2: $[N/x]y = y$, se $x \neq y$, está correta ao indicar que as variáveis que não são $x$ permanecem inalteradas. Ou seja, se durante a substituição de uma variável encontramos uma variável diferente, deixamos como está. Por exemplo: na substituição $[3/x]y$, $y$ permanece $y$
 
-Renomeamos a variável ligada $y$ para $z$ antes de realizar a substituição, evitando a captura da variável livre $y$.
+- A regra 3: $[N/x](M_1 M_2) = ([N/x]M_1)([N/x]M_2)$ define corretamente a substituição em uma aplicação de termos. O que quer dizer que, se estivermos substituindo em uma aplicação de função, fazemos a substituição em ambas as partes. Por exemplo: em $[3/x](x y)$, substituímos em $x$ e $y$ separadamente, resultando em $(3 y)$.
 
-Outro exemplo:
+- A regra 4: $[N/x](\lambda y.M) = \lambda y.([N/x]M)$, se $x \neq y$ e $y \notin FV(N)$, está bem formulada, indicando que a variável vinculada $y$ não será substituída se $x \neq y$ e $y$ não estiverem no conjunto de variáveis livres de $N$, o que evita a captura de variáveis. Em uma forma mais intuitiva podemos dizer que se encontrarmos uma abstração lambda, temos que ter cuidado: se a variável ligada for a mesma que estamos substituindo, paramos; se for diferente, substituímos no corpo, mas apenas se for seguro (sem captura de variáveis). Por exemplo: em $[3/x](\lambda y.x)$, substituímos $x$ no corpo, resultando em $\lambda y.3$.
 
-$$[z/x](\lambda z.\, x) \neq \lambda z. \, z$$
+Para que a esforçada leitora possa reforçar o entendimento destes conceitos, considere o seguinte exemplo:
 
-Se fizermos a substituição diretamente, a variável $z$ é capturada, mudando o significado do termo. A solução correta é renomear a variável ligada antes da substituição:
+$$[y/x](\lambda y.\, x) \neq \lambda y.\, y$$
+
+Se realizarmos a substituição diretamente, a variável livre $y$ será capturada, alterando o significado do termo original. Para evitar isso, utilizamos a **substituição com evasão de captura**. Isto é feito com a aplicando a redução $\alpha$ para as variáveis ligadas que possam causar conflito. Considere:
+
+$$[y/x](\lambda y.\, x) = \lambda z.\, [y/x]([z/y]x) = \lambda z.\, y$$
+
+Neste processo, a variável ligada $y$ foi renomeada como $z$ antes de realizar a substituição, evitando assim a captura da variável livre $y$.
+
+Outro exemplo ilustrativo:
+
+$$[z/x](\lambda z.\, x) \neq \lambda z.\, z$$
+
+Se fizermos a substituição diretamente, a variável $z$ livre em $x$ será capturada pela abstração $\lambda z$, modificando o significado do termo. A solução correta é renomear a variável ligada antes da substituição:
 
 $$[z/x](\lambda z.\, x) = \lambda w.\, [z/x]([w/z]x) = \lambda w.\, z$$
 
-Este processo garante que a variável livre $z$ não seja capturada pela abstração $\lambda z$.
+Este procedimento assegura que a variável livre $z$ em $x$ não seja capturada pela abstração $\lambda z$, preservando o significado original do termo.
 
- **Exemplo 1**: Substituição direta sem captura de variável livre
+**Exemplo 1**: Substituição direta sem captura de variável livre
 
- $$[a/x](x + y) = a + y$$
+$$[a/x](x + y) = a + y$$
 
- Aqui, substituímos a variável $x$ pelo termo $a$, resultando em $a + y$. Não há risco de captura, pois $y$ não está ligada.
+Neste caso, substituímos a variável $x$ pelo termo $a$ na expressão $x + y$, resultando em $a + y$. Não há risco de captura de variáveis livres, pois $y$ não está ligada a nenhuma abstração e permanece livre na expressão resultante.
 
- **Exemplo 2**: Substituição direta de variáveis livres
+**Exemplo 2**: Substituição direta mantendo variáveis livres
 
- $$[b/x](x \, z) = b \, z$$
+$$[b/x](x \, z) = b \, z$$
 
- Nesse exemplo, substituímos $x$ por $b$, resultando em $b \, z$. A variável $z$ permanece livre.
+Aqui, substituímos $x$ por $b$ na expressão $x \, z$, obtendo $b \, z$. A variável $z$ permanece livre e não ocorre captura, pois não está sob o escopo de nenhuma abstração lambda que a ligue.
 
- **Exemplo 3**: Evasão de captura com renomeação
+**Exemplo 3**: Evasão de captura com renomeação de variável ligada
 
- $$[y/x](\lambda y.\, x) = \lambda z.\, [y/x]([z/y]x) = \lambda z.\, y$$
+$$[y/x](\lambda y.\, x) = \lambda z.\, [y/x]([z/y]x) = \lambda z.\, y$$
 
- Renomeamos a variável ligada $y$ para $z$ antes de realizar a substituição, evitando que a variável livre $y$ seja capturada.
+Neste exemplo, se realizássemos a substituição diretamente, a variável livre $y$ em $x$ seria capturada pela abstração $\lambda y$, alterando o significado da expressão. Para evitar isso, seguimos os passos:
 
- **Exemplo 4**: Evasão de captura para preservar significado
+1. **Renomeação (Redução Alfa)**: Renomeamos a variável ligada $y$ para $z$ na abstração, obtendo $\lambda z.\, [z/y]x$.
 
- $$[w/x](\lambda w.\, x) = \lambda v.\, [w/x]([v/w]x) = \lambda v.\, w$$
+2. **Substituição**: Aplicamos $[y/x](x)$, resultando em $y$.
 
- Aqui, renomeamos a variável ligada $w$ para $v$ antes de fazer a substituição, garantindo que a variável livre $w$ não seja capturada.
+3. **Resultado Final**: A expressão torna-se $\lambda z.\, y$, onde $y$ permanece livre.
 
-## Semântica Denotacional
+Dessa forma, evitamos a captura da variável livre $y$ pela abstração lambda.
 
-Na semântica denotacional, cada expressão é mapeada para um objeto matemático. Isso fornece uma interpretação mais abstrata da computação. O domínio é construído como um conjunto de funções. O significado de uma expressão é definido por sua interpretação nesse domínio.
+**Exemplo 4**: Evasão de captura para preservar o significado da expressão
 
-A interpretação denotacional é definida por:
+$$[w/x](\lambda w.\, x) = \lambda v.\, [w/x]([v/w]x) = \lambda v.\, w$$
 
-- $[x]_\rho = \rho(x)$
+Neste caso, a substituição direta capturaria a variável livre $w$ em $x$. Para prevenir isso:
 
-- $[\lambda x.\, e]_\rho = f$, onde $f(v) = [e]_{\rho[x \mapsto v]}$
+1. **Renomeação (Redução Alfa)**: Renomeamos a variável ligada $w$ para $v$, obtendo $\lambda v.\, [v/w]x$.
 
-- $[e_1\, e_2]_\rho = [e_1]_\rho([e_2]_\rho)$
+2. **Substituição**: Aplicamos $[w/x](x)$, resultando em $w$.
 
-**Exemplo:**
+3. **Resultado Final**: A expressão fica $\lambda v.\, w$, mantendo $w$ como variável livre.
 
-Para a expressão $(\lambda x.\, x + 1)\, 2$, interpretamos $\lambda x.\, x + 1$ como uma função que adiciona 1. Aplicando a 2, obtemos 3.
+Assim, garantimos que a variável livre $w$ não seja capturada, preservando o significado original da expressão.
 
-A semântica denotacional permite pensar em expressões lambda como funções matemáticas. Já a semântica operacional foca nos passos da computação.
+Ao aplicar a **evasão de captura** por meio da renomeação de variáveis ligadas (redução $\alpha$), asseguramos que as substituições não alterem o comportamento semântico das expressões, mantendo as variáveis livres intactas.
+
+### Relação da Substituição com Outros Conceitos do Cálculo Lambda
+
+A substituição não é um processo autônomo. Esta integrada às reduções $\alpha$ e $\beta$, ao conceito de variáveis ligadas, ao conceito de recursão e ponto fixo. A atenta leitora já deve ter percebido que sem esta integração a substituição não seria possível, ou não possibilitaria as reduções.
+
+Começando com a redução $\beta$: a redução $beta$ utiliza a substituição como parte de seu mecanismo. A regra de redução beta é definida como:
+
+   $$(\lambda x.M)N \to_\beta [N/x]M$$
+
+Neste caso, $[N/x]M$ indica a substituição de todas as ocorrências livres de $x$ em $M$ por $N$. Por exemplo:
+
+   $$(\lambda x.x + 2)3 \to_\beta [3/x](x + 2) = 3 + 2$$
+
+A computação, ou avaliação de expressões, envolve uma série de reduções beta, cada uma requerendo substituições. Considere a expressão:
+
+   $$(\lambda x.\lambda y.x + y)3 4$$
+
+ Sua avaliação procede assim:
+
+   $$(\lambda x.\lambda y.x + y)3 4 \to_\beta (\lambda y.3 + y)4 \to_\beta 3 + 4 = 7$$
+
+A redução $\alfa$, por outro lado, é usada durante a substituição para evitar a captura de variáveis. Por exemplo:
+
+   $$[y/x](\lambda y.x) = \lambda z.[y/x]([z/y]x) = \lambda z.y$$
+
+Neste caso, a redução $\alfa$ é usada para renomear $y$ para $z$ antes da substituição.
+
+Finalmente, a substituição $[N/x]M$, regra primordial da substituição, afeta apenas as ocorrências livres de $x$ em $M$. As ocorrências ligadas de $x$ em $M$ permanecem inalteradas. Esta é a relação entre a substituição e os conceitos de variáveis livres e ligadas.
+
+Além destes conceitos que já vimos, a amável leitora, deve ter em mente que a substituição também está relacionada com os conceitos de recursão e ponto fixo, que ainda não estudamos neste texto. De fato, a substituição é usada na definição de combinadores de ponto fixo, como o combinador Y:
+
+   $$Y = \lambda f.(\lambda x.f(x x))(\lambda x.f(x x))$$
+
+A aplicação deste combinador envolve substituições que permitem a definição de funções recursivas.
+
+A substituição interage com estes conceitos no funcionamento do cálculo lambda e em sua aplicação em linguagens de programação funcionais. A atenta leitora deve dedicar algum tempo para analisar o código em Haskell, a seguir.
+
+A implementação da substituição em Haskell pode ajudar a concretizar os conceitos teóricos do cálculo lambda. Vamos analisar o código sugerido:
+
+```haskell
+data Expr = Var String | App Expr Expr | Lam String Expr
+  deriving (Eq, Show)
+
+-- Função de substituição que inclui a redução alfa para evitar captura
+substitute :: String -> Expr -> Expr -> Expr
+substitute x n (Var y)
+  | x == y    = n
+  | otherwise = Var y
+substitute x n (App e1 e2) = App (substitute x n e1) (substitute x n e2)
+substitute x n (Lam y e)
+  | y == x = Lam y e  -- Variável ligada é a mesma que estamos substituindo
+  | y `elem` freeVars n =  -- Risco de captura, aplicar redução alfa
+      let y' = freshVar y (n : e : [])
+          e' = substitute y (Var y') e
+      in Lam y' (substitute x n e')
+  | otherwise = Lam y (substitute x n e)
+
+-- Função para obter as variáveis livres em uma expressão
+freeVars :: Expr -> [String]
+freeVars (Var x) = [x]
+freeVars (App e1 e2) = freeVars e1 ++ freeVars e2
+freeVars (Lam x e) = filter (/= x) (freeVars e)
+
+-- Função para gerar um novo nome de variável que não cause conflitos
+freshVar :: String -> [Expr] -> String
+freshVar x exprs = head $ filter (`notElem` allVars) candidates
+  where
+    allVars = concatMap (\e -> freeVars e ++ boundVars e) exprs
+    candidates = [x ++ show n | n <- [1..]]
+
+-- Função para obter as variáveis ligadas em uma expressão
+boundVars :: Expr -> [String]
+boundVars (Var _) = []
+boundVars (App e1 e2) = boundVars e1 ++ boundVars e2
+boundVars (Lam x e) = x : boundVars e
+```
+
+Este código possui algumas características que requerem a nossa atenção. Começando com a definição de tipos:
+
+```haskell
+data Expr = Var String | App Expr Expr | Lam String Expr
+  deriving (Eq, Show)
+```
+
+Esta linha define, em Haskell, o tipo de dados `Expr` que representa expressões do cálculo lambda: `Var String`: representa uma variável; `App Expr Expr`: representa a aplicação de uma função e `Lam String Expr`: representa uma abstração lambda.
+
+A seguir, no código, temos a assinatura e a definição da função de substituição que inclui a redução $\alpha$:
+
+```haskell
+substitute :: String -> Expr -> Expr -> Expr
+```
+
+A função `substitute` implementa a substituição $[N/x]M$. Ela recebe três argumentos: a variável a ser substituída (`x`); o termo substituto (`n`) e a expressão na qual fazer a substituição (`Expr`).
+
+Agora, que definmos a assinatura da função `substitute` vamos analisar cada um dos seus casos:
+
+1. **Substituição em Variáveis**:
+
+   ```haskell
+   substitute x n (Var y)
+     | x == y    = n
+     | otherwise = Var y
+   ```
+
+   - **Se** a variável `y` é a mesma que estamos substituindo (`x`), retornamos o termo substituto `n`. Isto corresponde à **regra 1** da substituição formal.
+   - **Caso contrário**, mantemos a variável original `y` inalterada, conforme a **regra 2**.
+
+2. **Substituição em Aplicações**:
+
+   ```haskell
+   substitute x n (App e1 e2) = App (substitute x n e1) (substitute x n e2)
+   ```
+
+   - Aplicamos a substituição recursivamente em ambos os termos da aplicação. Isto reflete a **regra 3** da substituição formal.
+
+3. **Substituição em Abstrações Lambda**:
+
+   ```haskell
+   substitute x n (Lam y e)
+     | y == x = Lam y e  -- Variável ligada é a mesma que estamos substituindo
+     | y `elem` freeVars n =  -- Risco de captura, aplicar redução alfa
+         let y' = freshVar y (n : e : [])
+             e' = substitute y (Var y') e
+         in Lam y' (substitute x n e')
+     | otherwise = Lam y (substitute x n e)
+   ```
+
+   Este é o caso mais complexo e corresponde à **regra 4** da substituição formal. Aqui, temos três subcasos:
+
+   - **Se a variável ligada `y` é a mesma que estamos substituindo (`x`)**:
+     - Não fazemos nada, pois `x` está "sombreada" pela ligação de `y`.
+   - **Se `y` está nas variáveis livres do termo substituto `n`**:
+     - Existe o risco de **captura de variável livre**. Para evitar isso, aplicamos a **redução $\alpha$**, renomeando `y` para um novo nome `y'` que não cause conflito.
+     - Utilizamos a função `freshVar` para gerar um novo nome que não esteja nas variáveis livres ou ligadas das expressões envolvidas.
+     - Realizamos a substituição no corpo `e` após a renomeação.
+   - **Caso contrário**:
+     - Substituímos recursivamente no corpo da abstração `e`, mantendo `y` inalterado.
+
+4. **Função para Variáveis Livres**:
+
+   ```haskell
+   freeVars :: Expr -> [String]
+   freeVars (Var x) = [x]
+   freeVars (App e1 e2) = freeVars e1 ++ freeVars e2
+   freeVars (Lam x e) = filter (/= x) (freeVars e)
+   ```
+
+   - Esta função calcula o conjunto de variáveis livres em uma expressão, essencial para evitar a captura de variáveis durante a substituição.
+
+5. **Função para Gerar Novos Nomes de Variáveis**:
+
+   ```haskell
+   freshVar :: String -> [Expr] -> String
+   freshVar x exprs = head $ filter (`notElem` allVars) candidates
+     where
+       allVars = concatMap (\e -> freeVars e ++ boundVars e) exprs
+       candidates = [x ++ show n | n <- [1..]]
+   ```
+
+   - A função `freshVar` gera um novo nome de variável (`y'`) que não está presente em nenhuma das variáveis livres ou ligadas das expressões fornecidas.
+   - Isso é crucial para a redução $\alpha$, garantindo que o novo nome não cause conflitos.
+
+6. **Função para Variáveis Ligadas**:
+
+   ```haskell
+   boundVars :: Expr -> [String]
+   boundVars (Var _) = []
+   boundVars (App e1 e2) = boundVars e1 ++ boundVars e2
+   boundVars (Lam x e) = x : boundVars e
+   ```
+
+   - Esta função auxilia `freshVar` ao fornecer o conjunto de variáveis ligadas em uma expressão.
+
+Implementando a redução $\alpha$ no código, conseguimos evitar a captura de variáveis livres durante a substituição, conforme ilustrado nos exemplos anteriores. Vamos ver um exemplo de evasão de captura com renomeação de variável ligada. Considere o termo:
+
+$$[y/x](\lambda y.\, x) = \lambda z.\, y$$
+
+No código Haskell, este caso seria processado da seguinte forma:
+
+1. **Detectar o Risco de Captura**:
+   - A variável ligada `y` está presente nas variáveis livres do termo substituto `n` (que é `y`).
+   - Portanto, precisamos aplicar a redução $\alpha$.
+
+2. **Aplicar Redução $\alpha$**:
+   - Utilizamos `freshVar` para gerar um novo nome, digamos `z`.
+   - Renomeamos `y` para `z` na abstração, e substituímos `y` por `z` no corpo.
+
+3. **Realizar a Substituição**:
+   - Substituímos `x` por `y` no corpo renomeado.
+
+4. **Resultado Final**:
+   - A expressão resultante é `\lambda z.\, y`, onde `y` permanece livre.
+
+Neste ponto, se a amável leitora se perdeu no Haskell, deve voltar as definições formais da substituição e tentar fazer o paralelo entre as definições formais e o código em Haskell. A importância desta implementação está na demonstração de como os conceitos teóricos do cálculo lambda podem ser traduzidos para código executável, fornecendo uma ponte entre a teoria e a prática.
+
+### Exercícios de Substituição
+
+**1**: Realize a substituição $[3/x](x + y)$.
+
+**Solução**:
+
+1. Começando observando que a função de substituição indica que estamos substituindo $x$ por $3$ na expressão $x + y$.
+
+2. Aplicamos a regra formal 3 da substituição: $[N/x](M_1 M_2) = ([N/x]M_1)([N/x]M_2)$. Neste caso, $M_1 = x$, $M_2 = y$, e a operação $+$ é tratada como uma aplicação.
+
+3. Substituímos em $M_1$: $[3/x]x = 3$ (pela regra 1).
+
+4. Substituímos em $M_2$: $[3/x]y = y$ (pela regra 2, pois $x \neq y$).
+
+5. Reconstruímos a expressão: $(3) + (y)$.
+
+O resultado de $[3/x](x + y)$ é $3 + y$. Ou seja, a variável $x$ foi substituída por $3$, enquanto $y$ permaneceu inalterada por ser uma variável diferente de $x$.
+
+**2**: Realize a substituição $[(\lambda z.z)/x](\lambda y.x y)$.
+
+**Solução**:
+
+1. Estamos substituindo $x$ por $(\lambda z.z)$ na expressão $\lambda y.x y$.
+
+2. Começamos aplicando a regra formal 4 da substituição: $[N/x](\lambda y.M) = \lambda y.([N/x]M)$, pois $x \neq y$ e $y \notin FV((\lambda z.z))$.
+
+3. Agora mudamos o foco para a substituição dentro do corpo da abstração: $[(\lambda z.z)/x](x y)$
+
+4. Aplicamos a regra 3 para a aplicação dentro do corpo: $([(\lambda z.z)/x]x)([(\lambda z.z)/x]y)$
+
+5. Resolvemos cada parte:
+   - $[(\lambda z.z)/x]x = \lambda z.z$ (pela regra 1)
+   - $[(\lambda z.z)/x]y = y$ (pela regra 2, pois $x \neq y$)
+
+6. Reconstruímos a expressão: $\lambda y.((\lambda z.z) y)$
+
+O resultado da substituição $[(\lambda z.z)/x](\lambda y.x y)$ é $\lambda y.((\lambda z.z) y)$. Neste caso, a ocorrência livre de $x$ no corpo da abstração foi substituída por $(\lambda z.z)$. A variável $y$ permaneceu ligada e não foi afetada pela substituição.
+
+**3**: Realize a substituição $[y/x](\lambda y.x)$.
+
+**Solução**:
+
+1. Estamos substituindo $x$ por $y$ na expressão $\lambda y.x$. Este é um caso onde precisamos ter cuidado com a captura de variáveis.
+
+2. Não podemos aplicar diretamente a regra 4, pois $y \in FV(y)$. Para evitar a captura de variáveis, realizamos uma redução $\alpha$ primeiro: $\lambda y.x \to_\alpha \lambda z.x$.
+
+3. Agora podemos aplicar a substituição com segurança: $[y/x](\lambda z.x)$.
+
+4. Aplicamos a regra 4: $[y/x](\lambda z.x) = \lambda z.([y/x]x)$
+
+5. Resolvemos a substituição no corpo: $\lambda z.([y/x]x) = \lambda z.y$ (pela regra 1)
+
+O resultado de $[y/x](\lambda y.x)$ é $\lambda z.y$. Para evitar a captura da variável livre $y$ que estamos introduzindo, primeiro renomeamos a variável ligada $y$ para $z$, redução $\alpha$. Depois, realizamos a substituição normalmente, resultando em uma abstração que retorna a variável livre $y$.
+
+**4**: Realize a substituição $[(\lambda x.xx)/y](y z)$.
+
+**Solução**:
+
+1. Estamos substituindo $y$ por $(\lambda x.xx)$ na expressão $y z$. Este é um caso de substituição em uma aplicação.
+
+2. Aplicamos a regra 3: $[(\lambda x.xx)/y](y z) = ([(\lambda x.xx)/y]y)([(\lambda x.xx)/y]z)$
+
+3. Resolvemos a primeira parte: $[(\lambda x.xx)/y]y = (\lambda x.xx)$ (pela regra 1)
+
+4. Resolvemos a segunda parte: $[(\lambda x.xx)/y]z = z$ (pela regra 2, pois $y \neq z$)
+
+5. Reconstruímos a expressão: $((\lambda x.xx) z)$
+
+O resultado de $[(\lambda x.xx)/y](y z)$ é $((\lambda x.xx) z)$. A variável $y$ foi substituída pela abstração $(\lambda x.xx)$, enquanto $z$ permaneceu inalterado.
+
+**5**: Realize a substituição $[a/x](\lambda y.\lambda x.xy)$.
+
+**Solução**:
+
+1. Estamos substituindo $x$ por $a$ na expressão $\lambda y.\lambda x.xy$. Temos uma abstração aninhada aqui.
+
+2. Aplicamos a regra 4 para a abstração externa: $[a/x](\lambda y.\lambda x.xy) = \lambda y.([a/x](\lambda x.xy))$
+
+3. Para a abstração interna, não precisamos substituir, pois a variável ligada $x$ "sombreia" a substituição: $\lambda y.(\lambda x.xy)$
+
+4. O resultado permanece inalterado.
+
+O resultado de $[a/x](\lambda y.\lambda x.xy)$ é $\lambda y.\lambda x.xy$. A substituição não afetou a expressão devido ao sombreamento da variável $x$ na abstração interna.
+
+**6**: Realize a substituição $[(\lambda z.z)/x](x (\lambda y.xy))$.
+
+**Solução**:
+
+1. Estamos substituindo $x$ por $(\lambda z.z)$ na expressão $x (\lambda y.xy)$. Esta é uma aplicação onde $x$ aparece livre duas vezes.
+
+2. Aplicamos a regra 3: $[(\lambda z.z)/x](x (\lambda y.xy)) = ([(\lambda z.z)/x]x) ([(\lambda z.z)/x](\lambda y.xy))$
+
+3. Resolvemos a primeira parte: $[(\lambda z.z)/x]x = (\lambda z.z)$ (pela regra 1)
+
+4. Para a segunda parte, aplicamos a regra 4: $[(\lambda z.z)/x](\lambda y.xy) = \lambda y.([(\lambda z.z)/x](xy))$
+
+5. Aplicamos a regra 3 novamente dentro da abstração: $\lambda y.(([(\lambda z.z)/x]x)([(\lambda z.z)/x]y))$
+
+6. Resolvemos: $\lambda y.((\lambda z.z)y)$
+
+7. Reconstruímos a expressão completa: $((\lambda z.z) (\lambda y.((\lambda z.z)y)))$
+
+O resultado de $[(\lambda z.z)/x](x (\lambda y.xy))$ é $((\lambda z.z) (\lambda y.((\lambda z.z)y)))$. Todas as ocorrências livres de $x$ foram substituídas por $(\lambda z.z)$.
+
+**7**: Realize a substituição $[y/x](\lambda y.(\lambda x.y))$.
+
+**Solução**:
+
+1. Estamos substituindo $x$ por $y$ na expressão $\lambda y.(\lambda x.y)$. Este caso requer atenção para evitar captura de variáveis.
+
+2. Aplicamos a regra 4 para a abstração externa. Como $y$ é a variável ligada e também o termo de substituição, precisamos fazer uma redução $\alpha$ primeiro:
+   $\lambda y.(\lambda x.y) \to_\alpha \lambda z.(\lambda x.z)$
+
+3. Agora podemos aplicar a substituição com segurança: $[y/x](\lambda z.(\lambda x.z))$
+
+4. Aplicamos a regra 4: $\lambda z.([y/x](\lambda x.z))$
+
+5. Para a abstração interna, não precisamos substituir, pois $x$ está ligado: $\lambda z.(\lambda x.z)$
+
+O resultado de $[y/x](\lambda y.(\lambda x.y))$ é $\lambda z.(\lambda x.z)$. A redução $\alpha$ foi necessária para evitar a captura da variável $y$, e a substituição não afetou o corpo interno devido à ligação de $x$.
+
+**8**: Realize a substituição $[(\lambda x.xy)/z](\lambda y.zy)$.
+
+**Solução**:
+
+1. Estamos substituindo $z$ por $(\lambda x.xy)$ na expressão $\lambda y.zy$. Temos que ter cuidado com a possível captura de variáveis.
+
+2. Aplicamos a regra 4: $[(\lambda x.xy)/z](\lambda y.zy) = \lambda y'.([(\lambda x.xy)/z](zy'))$
+   Note que fizemos uma redução $\alpha$ preventiva, renomeando $y$ para $y'$ para evitar possível captura.
+
+3. Agora aplicamos a regra 3 no corpo da abstração: $\lambda y'.(([(\lambda x.xy)/z]z)([(\lambda x.xy)/z]y'))$
+
+4. Resolvemos a primeira parte: $[(\lambda x.xy)/z]z = (\lambda x.xy)$ (pela regra 1)
+
+5. Resolvemos a segunda parte: $[(\lambda x.xy)/z]y' = y'$ (pela regra 2, pois $z \neq y'$)
+
+6. Reconstruímos a expressão: $\lambda y'.((\lambda x.xy)y')$
+
+O resultado de $[(\lambda x.xy)/z](\lambda y.zy)$ é $\lambda y'.((\lambda x.xy)y')$. A redução $\alpha$ preventiva evitou a captura de variáveis, e a substituição foi realizada corretamente no corpo da abstração.
+
+**9**: Realize a substituição $[(\lambda x.x)/y](\lambda x.yx)$.
+
+**Solução**:
+
+1. Estamos substituindo $y$ por $(\lambda x.x)$ na expressão $\lambda x.yx$. Precisamos ter cuidado com a variável ligada $x$.
+
+2. Aplicamos a regra 4: $[(\lambda x.x)/y](\lambda x.yx) = \lambda x'.([(\lambda x.x)/y](yx'))$
+   Realizamos uma redução $\alpha$ preventiva, renomeando $x$ para $x'$.
+
+3. Aplicamos a regra 3 no corpo da abstração: $\lambda x'.(([(\lambda x.x)/y]y)([(\lambda x.x)/y]x'))$
+
+4. Resolvemos a primeira parte: $[(\lambda x.x)/y]y = (\lambda x.x)$ (pela regra 1)
+
+5. Resolvemos a segunda parte: $[(\lambda x.x)/y]x' = x'$ (pela regra 2, pois $y \neq x'$)
+
+6. Reconstruímos a expressão: $\lambda x'.((\lambda x.x)x')$
+
+O resultado de $[(\lambda x.x)/y](\lambda x.yx)$ é $\lambda x'.((\lambda x.x)x')$. A redução $\alpha$ preventiva evitou conflitos com a variável ligada $x$, e a substituição foi realizada corretamente.
+
+**10**: Realize a substituição $[(\lambda z.zw)/x](\lambda y.\lambda w.xyw)$.
+
+**Solução**:
+
+1. Estamos substituindo $x$ por $(\lambda z.zw)$ na expressão $\lambda y.\lambda w.xyw$. Temos que considerar as variáveis ligadas $y$ e $w$.
+
+2. Aplicamos a regra 4 para a abstração externa: $[(\lambda z.zw)/x](\lambda y.\lambda w.xyw) = \lambda y.([(\lambda z.zw)/x](\lambda w.xyw))$
+
+3. Aplicamos a regra 4 novamente para a abstração interna:
+   $\lambda y.\lambda w'.([(\lambda z.zw)/x](xyw'))$
+   Note que fizemos uma redução $\alpha$, renomeando $w$ para $w'$ para evitar captura.
+
+4. Agora aplicamos a regra 3 no corpo da abstração mais interna:
+   $\lambda y.\lambda w'.(([(\lambda z.zw)/x]x)([(\lambda z.zw)/x]y)([(\lambda z.zw)/x]w'))$
+
+5. Resolvemos cada parte:
+   - $[(\lambda z.zw)/x]x = (\lambda z.zw)$ (pela regra 1)
+   - $[(\lambda z.zw)/x]y = y$ (pela regra 2, pois $x \neq y$)
+   - $[(\lambda z.zw)/x]w' = w'$ (pela regra 2, pois $x \neq w'$)
+
+6. Reconstruímos a expressão: $\lambda y.\lambda w'.((\lambda z.zw)yw')$
+
+O resultado de $[(\lambda z.zw)/x](\lambda y.\lambda w.xyw)$ é $\lambda y.\lambda w'.((\lambda z.zw)yw')$. A redução $\alpha$ preventiva na variável $w$ evitou a captura, e a substituição foi realizada corretamente, preservando a estrutura da abstração dupla.
+
+## Semântica Denotacional no Cálculo Lambda
+
+A semântica denotacional é uma abordagem matemática para atribuir significados formais às expressões de uma linguagem de programação, como o cálculo lambda. Nesta semântica, cada expressão é mapeada para um objeto matemático que representa seu comportamento computacional. Isso fornece uma interpretação abstrata da computação, permitindo analisar e provar propriedades sobre programas de maneira rigorosa.
+
+No contexto do cálculo lambda, o domínio semântico é construído como um conjunto de funções e valores. O significado de uma expressão é definido por sua interpretação nesse domínio, utilizando um ambiente $\rho$ que associa variáveis a seus valores.
+
+A interpretação denotacional é formalmente definida pelas seguintes regras:
+
+1. **Variáveis**:
+
+   $$[x]_\rho = \rho(x)$$
+
+   - O significado de uma variável $x$ é o valor associado a ela no ambiente $\rho$.Intuitivamente podemos entender esta regra como: quando encontramos uma variável $x$, consultamos o ambiente $\rho$ para obter seu valor associado.
+
+   **Exemplo**: suponha um ambiente $\rho$ onde $\rho(x) = 5$.
+
+   $$[x]_\rho = \rho(x) = 5$$
+
+   Assim, o significado da variável $x$ é o valor $5$ no ambiente atual.
+
+2. **Abstrações Lambda**:
+
+   $$[\lambda x.\, e]_\rho = f$$
+
+   - Onde $f$ é uma função tal que:
+
+     $$f(v) = [e]_{\rho[x \mapsto v]}$$
+
+   - Isso significa que a interpretação de $\lambda x.\, e$ é uma função que, dado um valor $v$, avalia o corpo $e$ no ambiente onde $x$ está associado a $v$. Em bom português esta regra significa que uma abstração $\lambda x.\, e$ representa uma função anônima. Na semântica denotacional, mapeamos essa abstração para uma função matemática que, dado um valor de entrada, produz um valor de saída. Neste caso, teremos dois passos:
+
+   - **Definição da Função $f$**: A abstração é interpretada como uma função $f$, onde para cada valor de entrada $v$, calculamos o significado do corpo $e$ no ambiente estendido $\rho[x \mapsto v]$.
+   - **Ambiente Estendido**: O ambiente $\rho[x \mapsto v]$ é igual a $\rho$, exceto que a variável $x$ agora está associada ao valor $v$.
+
+   **Exemplo**:
+
+   Considere a expressão $\lambda x.\, x + 1$.
+
+   Interpretação:
+
+    $$[\lambda x.\, x + 1]_\rho = f$$
+
+    Onde $f(v) = [x + 1]_{\rho[x \mapsto v]} = v + 1$.
+
+   Significado: A abstração é interpretada como a função que incrementa seu argumento em 1.
+
+3. **Aplicações**:
+
+   $$[e_1\, e_2]_\rho = [e_1]_\rho\left([e_2]_\rho\right)$$
+
+   - O significado de uma aplicação $e_1\, e_2$ é obtido aplicando o valor da expressão $e_1$ (que deve ser uma função) ao valor da expressão $e_2$. Para interpretar uma aplicação $e_1\, e_2$, avaliamos ambas as expressões e aplicamos o resultado de $e_1$ ao resultado de $e_2$. Neste cenário temos três passos:
+
+   - **Avaliar $e_1$**: Obtemos $[e_1]_\rho$, que deve ser uma função.
+  
+   - **Avaliar $e_2$**: Obtemos $[e_2]_\rho$, que é o argumento para a função.
+  
+   - **Aplicar**: Calculamos $[e_1]_\rho\left([e_2]_\rho\right)$.
+
+   **Exemplo**: considere a expressão $(\lambda x.\, x + 1)\, 4$. Seguiremos três passos:
+
+   **Passo 1**: Interpretar $\lambda x.\, x + 1$.
+
+    $$[\lambda x.\, x + 1]_\rho = f, \quad \text{onde} \quad f(v) = v + 1$$
+
+   **Passo 2**: Interpretar $4$.
+
+    $$[4]_\rho = 4$$
+
+   **Passo 3**: Aplicar $f$ a $4$.
+
+    $$[(\lambda x.\, x + 1)\, 4]_\rho = f(4) = 4 + 1 = 5$$
+
+   A expressão inteira é interpretada como o valor $5$.
+
+### Ambiente $\rho$ e Associação de Variáveis
+
+O ambiente $\rho$ é fundamental na semântica denotacional, pois armazena as associações entre variáveis e seus valores.
+
+$\rho$ é uma função que, dado um nome de variável, retorna seu valor correspondente. Quando avaliamos uma abstração, estendemos o ambiente com uma nova associação usando $[x \mapsto v]$.
+
+   **Exemplo de Atualização**:
+
+   - Ambiente inicial: $\rho = \{ y \mapsto 2 \}$
+
+   - Avaliando $\lambda x.\, x + y$ com $x = 3$:
+
+   - Novo ambiente: $\rho' = \rho[x \mapsto 3] = \{ y \mapsto 2, x \mapsto 3 \}$
+
+      - Avaliamos $x + y$ em $\rho'$:
+
+      $$[x + y]_{\rho'} = \rho'(x) + \rho'(y) = 3 + 2 = 5$$
+
+A semântica denotacional facilita o entendimento do comportamento dos programas sem se preocupar com detalhes de implementação. Permite demonstrar formalmente que um programa satisfaz determinadas propriedades. Na semântica denotacional o significado de uma expressão complexa é construído a partir dos significados de suas partes.
+
+Exemplos, facilitam o entendimento e nunca são suficientes. 
+
+**Exemplo 1**: Com Variáveis Livres: considere a expressão $\lambda x.\, x + y$, onde $y$ é uma variável livre.
+
+- Ambiente Inicial: $\rho = \{ y \mapsto 4 \}$
+- Interpretação da Abstração:
+
+  $$
+  [\lambda x.\, x + y]_\rho = f, \quad \text{onde} \quad f(v) = [x + y]_{\rho[x \mapsto v]} = v + 4
+  $$
+
+- Aplicação: Avaliando $f(6)$, obtemos $6 + 4 = 10$.
+
+**Exemplo 2**: Aninhamento de Abstrações. Considere $\lambda x.\, \lambda y.\, x + y$.
+
+- Interpretação:
+
+  - Primeiro, interpretamos a abstração externa:
+
+    $$
+    [\lambda x.\, \lambda y.\, x + y]_\rho = f, \quad \text{onde} \quad f(v) = [\lambda y.\, x + y]_{\rho[x \mapsto v]}
+    $$
+
+  - Agora, interpretamos a abstração interna no ambiente estendido:
+
+    $$
+    f(v) = g, \quad \text{onde} \quad g(w) = [x + y]_{\rho[x \mapsto v, y \mapsto w]} = v + w
+    $$
+
+- Aplicação:
+
+  - Avaliando $((\lambda x.\, \lambda y.\, x + y)\, 3)\, 5$:
+
+    - $f(3) = g$, onde $g(w) = 3 + w$
+    - $g(5) = 3 + 5 = 8$
+
+A semântica denotacional oferece uma maneira sistemática e matemática de atribuir significados às expressões do cálculo lambda. Ao mapear expressões para objetos matemáticos, valores e funções, podemos analisar programas de forma precisa e rigorosa. Entender essas regras permite uma compreensão mais profunda de como funções e aplicações funcionam no cálculo lambda.
+
+Conceitos da semântica denotacional são fundamentais em linguagens funcionais modernas, como Haskell e OCaml.
+
+Ferramentas baseadas em semântica denotacional podem ser usadas para verificar propriedades de programas, como terminação e correção.
+
+Finalmente, a atenta leitora pode perceber que a semântica denotacional permite pensar em expressões lambda como funções matemáticas. Já a semântica operacional foca nos passos da computação.
 
 >Observe que a **Semântica Operacional** é geralmente mais adequada para descrever a execução passo a passo de linguagens que usam passagem por referência, pois permite capturar facilmente como os estados mudam durante a execução. Por outro lado, a **Semântica Denotacional** é mais alinhada com linguagens puras, que preferem passagem por cópia, evitando efeitos colaterais e garantindo que o comportamento das funções possa ser entendido em termos de funções matemáticas.
 >
@@ -561,89 +1086,248 @@ A semântica denotacional permite pensar em expressões lambda como funções ma
 >
 >No caso do cálculo lambda, a semântica denotacional é preferida. O cálculo lambda é uma linguagem puramente funcional sem efeitos colaterais. A semântica denotacional modela suas expressões como funções matemáticas. Isso está em alinhamento com a natureza do cálculo lambda. Embora a semântica operacional possa descrever os passos de computação, a semântica denotacional fornece uma interpretação matemática abstrata adequada para linguagens que evitam efeitos colaterais.
 
-## Exercícios de Semântica Denotacional
+## Avaliação dos Exercícios de Semântica Denotacional
 
-**1**: Dada a função lambda $\lambda x. \, x + 2 $, aplique-a ao valor 5 e calcule o resultado.
+**1**: Dada a função lambda $\lambda x.\, x + 2$, aplique-a ao valor $5$ e calcule o resultado.
 
- **Solução:**
- Aplicando a função ao valor $5$, temos:
+**Solução:**
 
- $$(\lambda x. \, x + 2) \, 5 = 5 + 2 = 7$$
+1. Definindo a função lambda:
+
+   $$f = \lambda x.\, x + 2$$
+
+2. Aplicando a função ao valor $5$:
+
+   $$f(5) = (\lambda x.\, x + 2)\, 5$$
+
+3. Substituir $x$ por $5$ no corpo da função:
+
+   $$x + 2 \rightarrow 5 + 2$$
+
+4. Calculando o resultado:
+
+   $$5 + 2 = 7$$
 
 **2**: Escreva uma expressão lambda que represente a função $f(x, y) = x^2 + y^2$, e aplique-a aos valores $x = 3$ e $y = 4$.
 
- **Solução:**
- A função pode ser representada como $\lambda x. \lambda y. \, x^2 + y^2$. Aplicando $x = 3$ e $y = 4$:
+**Solução:**
 
- $$(\lambda x. \lambda y. \, x^2 + y^2) \, 3 \, 4 = 3^2 + 4^2 = 9 + 16 = 25 $$
+1. Definindo a função lambda:
+
+   $$f = \lambda x.\, \lambda y.\, x^2 + y^2$$
+
+2. Aplicando a função aos valores $x = 3$ e $y = 4$:
+
+   $$f(3)(4) = (\lambda x.\, \lambda y.\, x^2 + y^2)\, 3\, 4$$
+
+3. Primeira aplicação: aplicamos $\lambda x$ ao valor $3$:
+
+     $$f(3) = \lambda y.\, 3^2 + y^2$$
+
+4. Segunda aplicação: aplicamos $\lambda y$ ao valor $4$:
+
+     $$f(3)(4) = 3^2 + 4^2$$
+
+5. Calculando o resultado:
+
+   $$9 + 16 = 25$$
 
 **3**: Crie uma expressão lambda para a função identidade $I(x) = x$ e aplique-a ao valor $10$.
 
- **Solução:**
- A função identidade é $\lambda x. \, x$. Aplicando ao valor 10:
+**Solução:**
 
- $$(\lambda x. \, x) \, 10 = 10$$
+1. Definindo a função identidade:
+
+   $$I = \lambda x.\, x$$
+
+2. Aplicando a função ao valor $10$:
+
+   $$I(10) = (\lambda x.\, x)\, 10$$
+
+3. Substituir $x$ por $10$ no corpo da função:
+
+   $$x \rightarrow 10$$
+
+4. Resultado:
+
+   $$10$$
 
 **4**: Defina uma função lambda que aceita um argumento $x$ e retorna o valor $x^3 + 1$. Aplique a função ao valor $2$.
 
- **Solução:**
- A função lambda é $\lambda x. \, x^3 + 1$. Aplicando ao valor 2:
+**Solução:**
 
- $$(\lambda x. \, x^3 + 1) \, 2 = 2^3 + 1 = 8 + 1 = 9$$
+1. Definindo a função lambda:
+
+   $$f = \lambda x.\, x^3 + 1$$
+
+2. Aplicando a função ao valor $2$:
+
+   $$f(2) = (\lambda x.\, x^3 + 1)\, 2$$
+
+3. Substituir $x$ por $2$ no corpo da função:
+
+   $$2^3 + 1$$
+
+4. Calculando o resultado:
+
+   $$8 + 1 = 9$$
 
 **5**: Escreva uma função lambda que represente a soma de dois números, ou seja, $f(x, y) = x + y$, e aplique-a aos valores $x = 7$ e $y = 8$.
 
- **Solução:**
- A função lambda é $\lambda x. \lambda y. \, x + y$. Aplicando $x = 7$ e $y = 8$:
+**Solução:**
 
- $$(\lambda x. \lambda y. \, x + y) \, 7 \, 8 = 7 + 8 = 15$$
+1. Definindo a função lambda:
+
+   $$f = \lambda x.\, \lambda y.\, x + y$$
+
+2. Aplicando a função aos valores $x = 7$ e $y = 8$:
+
+   $$f(7)(8) = (\lambda x.\, \lambda y.\, x + y)\, 7\, 8$$
+
+3. Primeira aplicação: aplicamos $\lambda x$ ao valor $7$:
+
+     $$f(7) = \lambda y.\, 7 + y$$
+
+4. Segunda aplicação: aplicamos $\lambda y$ ao valor $8$:
+
+     $$f(7)(8) = 7 + 8$$
+
+5. Calculando o resultado:
+   
+   $$15$$
 
 **6**: Crie uma função lambda para a multiplicação de dois números, ou seja, $f(x, y) = x \cdot y$, e aplique-a aos valores $x = 6$ e $y = 9$.
 
- **Solução:**
- A função lambda é $\lambda x. \lambda y. \, x \cdot y$. Aplicando $x = 6$ e $y = 9$:
+**Solução:**
 
- $$(\lambda x. \lambda y. \, x \cdot y) 6 9 = 6 \cdot 9 = 54$$
+1. Definindo a função lambda:
 
-**7**: Dada a expressão lambda $\lambda x. \lambda y. \, x^2 + 2xy + y^2$, aplique-a aos valores $x = 1$ e $y = 2$ e calcule o resultado.
+   $$f = \lambda x.\, \lambda y.\, x \cdot y$$
 
- **Solução:**
- A função lambda é $\lambda x. \lambda y. \, x^2 + 2xy + y^2$. Aplicando $x = 1$ e $y = 2$:
+2. Aplicando a função aos valores $x = 6$ e $y = 9$:
 
- $$(\lambda x. \lambda y. \, x^2 + 2xy + y^2) 1 2 = 1^2 + 2(1)(2) + 2^2 = 1 + 4 + 4 = 9$$
+   $$f(6)(9) = (\lambda x.\, \lambda y.\, x \cdot y)\, 6\, 9$$
+
+3. Primeira aplicação: aplicamos $\lambda x$ ao valor $6$:
+
+     $$f(6) = \lambda y.\, 6 \cdot y$$
+
+4. Segunda aplicação: aplicamos $\lambda y$ ao valor $9$:
+
+     $$f(6)(9) = 6 \cdot 9$$
+
+5. Calculando o resultado:
+
+   $$54$$
+
+**7**: Dada a expressão lambda $\lambda x.\, \lambda y.\, x^2 + 2xy + y^2$, aplique-a aos valores $x = 1$ e $y = 2$ e calcule o resultado.
+
+**Solução:**
+
+1. Definindo a função lambda:
+
+   $$f = \lambda x.\, \lambda y.\, x^2 + 2xy + y^2$$
+
+2. Aplicando a função aos valores $x = 1$ e $y = 2$:
+   $$
+   f(1)(2) = (\lambda x.\, \lambda y.\, x^2 + 2xy + y^2)\, 1\, 2
+   $$
+
+3. Primeira aplicação: aplicamos $\lambda x$ ao valor $1$:
+
+     $$f(1) = \lambda y.\, 1^2 + 2 \cdot 1 \cdot y + y^2$$
+
+4. Segunda aplicação: aplicamos $\lambda y$ ao valor $2$:
+
+     $$f(1)(2) = 1^2 + 2 \cdot 1 \cdot 2 + 2^2$$
+
+5. Calculando o resultado:
+
+   $$1 + 4 + 4 = 9$$
 
 **8**: Escreva uma função lambda que aceite dois argumentos $x$ e $y$ e retorne o valor de $x - y$. Aplique-a aos valores $x = 15$ e $y = 5$.
 
- **Solução:**
- A função lambda é $\lambda x. \lambda y. \, x - y$. Aplicando $ x = 15 $ e $ y = 5 $:
+**Solução:**
 
- $$(\lambda x. \lambda y. \, x - y) \, 15 \, 5 = 15 - 5 = 10$$
+1. Definindo a função lambda:
 
-**9**: Defina uma função lambda que represente a divisão de dois números, ou seja, $ f(x, y) = \frac{x}{y} $, e aplique-a aos valores $x = 20$ e $y = 4$.
+   $$f = \lambda x.\, \lambda y.\, x - y$$
 
- **Solução:**
- A função lambda é $\lambda x. \lambda y. \, \frac{x}{y}$. Aplicando $x = 20$ e $y = 4$:
+2. Aplicando a função aos valores $x = 15$ e $y = 5$:
 
- $$(\lambda x. \lambda y. \, \frac{x}{y}) \, 20 \, 4 = \frac{20}{4} = 5$$
+   $$f(15)(5) = (\lambda x.\, \lambda y.\, x - y)\, 15\, 5$$
+
+3. Primeira aplicação: aplicamos $\lambda x$ ao valor $15$:
+
+     $$f(15) = \lambda y.\, 15 - y$$
+
+4. Segunda aplicação: aplicamos $\lambda y$ ao valor $5$:
+
+     $$f(15)(5) = 15 - 5$$
+
+5. Calculando o resultado:
+
+   $$10$$
+
+**9**: Defina uma função lambda que represente a divisão de dois números, ou seja, $f(x, y) = \dfrac{x}{y}$, e aplique-a aos valores $x = 20$ e $y = 4$.
+
+**Solução:**
+
+1. Definindo a função lambda:
+
+   $$f = \lambda x.\, \lambda y.\, \dfrac{x}{y}$$
+
+2. Aplicando a função aos valores $x = 20$ e $y = 4$:
+
+   $$f(20)(4) = (\lambda x.\, \lambda y.\, \dfrac{x}{y})\, 20\, 4$$
+
+3. Primeira aplicação: aplicamos $\lambda x$ ao valor $20$:
+
+     $$f(20) = \lambda y.\, \dfrac{20}{y}$$
+
+4. Segunda aplicação: aplicamos $\lambda y$ ao valor $4$:
+
+     $$f(20)(4) = \dfrac{20}{4}$$
+
+5. Calculando o resultado:
+
+   $$5$$
 
 **10**: Escreva uma função lambda que calcule a função $f(x, y) = x^2 - y^2$, e aplique-a aos valores $x = 9$ e $y = 3$.
 
- **Solução:**
- A função lambda é $\lambda x. \lambda y. \, x^2 - y^2$. Aplicando $x = 9$ e $y = 3$:
+**Solução:**
 
- $$(\lambda x. \lambda y. \, x^2 - y^2) \, 9 \, 3 = 9^2 - 3^2 = 81 - 9 = 72$$
+1. Definindo a função lambda:
+
+   $$f = \lambda x.\, \lambda y.\, x^2 - y^2$$
+
+2. Aplicando a função aos valores $x = 9$ e $y = 3$:
+
+   $$f(9)(3) = (\lambda x.\, \lambda y.\, x^2 - y^2)\, 9\, 3$$
+
+3. Primeira aplicação: aplicamos $\lambda x$ ao valor $9$:
+
+     $$f(9) = \lambda y.\, 9^2 - y^2$$
+
+4. Segunda aplicação: aplicamos $\lambda y$ ao valor $3$:
+
+     $$f(9)(3) = 9^2 - 3^2$$
+
+5. Calculando o resultado:
+
+   $$81 - 9 = 72$$
 
 # Técnicas de Redução, Confluência e Combinadores
 
-As técnicas de redução no cálculo lambda são mecanismos para simplificar e avaliar expressões lambda. Estas incluem a redução alfa e a redução beta, que são utilizadas para manipular e computar expressões lambda. Essas técnicas são relevantes tanto para a teoria quanto para a implementação prática de sistemas baseados em lambda, incluindo linguagens de programação funcional. A compreensão dessas técnicas permite entender como funções são definidas, aplicadas e transformadas no contexto do cálculo lambda. A redução alfa lida com a renomeação de variáveis ligadas, enquanto a redução beta trata da aplicação de funções a argumentos.
+As técnicas de redução no cálculo lambda são mecanismos para simplificar e avaliar expressões lambda. Estas incluem a redução $\alpha$ e a redução beta, que são utilizadas para manipular e computar expressões lambda. Essas técnicas são relevantes tanto para a teoria quanto para a implementação prática de sistemas baseados em lambda, incluindo linguagens de programação funcional. A compreensão dessas técnicas permite entender como funções são definidas, aplicadas e transformadas no contexto do cálculo lambda. A redução $\alpha$ lida com a renomeação de variáveis ligadas, enquanto a redução beta trata da aplicação de funções a argumentos.
 
 O Teorema de Church-Rosser, também conhecido como propriedade de confluência, estabelece a consistência do processo de redução no cálculo lambda. Currying, por sua vez, é uma técnica que transforma funções com múltiplos argumentos em uma sequência de funções de um único argumento. Os combinadores, como `S`, `K`, e `I`, são expressões lambda sem variáveis livres que permitem a construção de funções complexas a partir de blocos básicos. Esses conceitos complementam as técnicas de redução e formam a base teórica para a manipulação e avaliação de expressões no cálculo lambda.
 
 ## Redução Alfa
 
-A redução alfa, ou _alpha reduction_, é o processo de renomear variáveis ligadas em termos lambda, de forma a preservar o comportamento funcional dos termos. **Dois termos são equivalentes sob redução alfa se diferem apenas nos nomes de suas variáveis ligadas**.
+A redução $\alpha$, ou _alpha reduction_, é o processo de renomear variáveis ligadas em termos lambda, de forma a preservar o comportamento funcional dos termos. **Dois termos são equivalentes sob redução $\alpha$ se diferem apenas nos nomes de suas variáveis ligadas**.
 
-A atenta leitora deve considerar um termo lambda $\lambda x.\, E$, onde $E$ é o corpo do termo. A redução alfa permitirá a substituição da variável ligada $x$ por outra variável, digamos $y$, desde que $y$ não apareça livre em $E$. O termo resultante é $\lambda y.\, E[x \mapsto y]$, onde a notação $E[x \mapsto y]$ indica a substituição de todas as ocorrências de $x$ por $y$ em $E$. Formalmente:
+A atenta leitora deve considerar um termo lambda $\lambda x.\, E$, onde $E$ é o corpo do termo. A redução $\alpha$ permitirá a substituição da variável ligada $x$ por outra variável, digamos $y$, desde que $y$ não apareça livre em $E$. O termo resultante é $\lambda y.\, E[x \mapsto y]$, onde a notação $E[x \mapsto y]$ indica a substituição de todas as ocorrências de $x$ por $y$ em $E$. Formalmente:
 
 Seja $\lambda x.\, E$ um termo lambda, teremos:
 
@@ -668,7 +1352,7 @@ Onde $\text{FV}(E)$ representa o conjunto de variáveis livres em $E$, e $E[x \m
 
 Finalmente temos que a condição $y \notin \text{FV}(E)$ é a forma de evitar a captura de variáveis livres durante a substituição, garantindo que o conjunto de variáveis livres permaneça inalterado e que a semântica do termo seja preservada.
 
-Usamos A redução alfa para evitar a captura de variáveis livres durante a substituição na redução beta. Ao substituir um termo $N$ em um termo $E$, é possível que variáveis livres em $N$ tornem-se ligadas em $E$, o que irá alterar o significado semântico do termo. Para evitar isso, é necessário renomear as variáveis ligadas em $E$ para novas variáveis que não conflitem com as variáveis livres em $N$.
+Usamos A redução $\alpha$ para evitar a captura de variáveis livres durante a substituição na redução beta. Ao substituir um termo $N$ em um termo $E$, é possível que variáveis livres em $N$ tornem-se ligadas em $E$, o que irá alterar o significado semântico do termo. Para evitar isso, é necessário renomear as variáveis ligadas em $E$ para novas variáveis que não conflitem com as variáveis livres em $N$.
 
 **Exemplo 1**: Considere o termo:
 
@@ -680,7 +1364,7 @@ Uma vez que entendemos a estrutura, podemos fazer a análise das variáveis liga
 
 Nosso próximo passo é verificar o escopo das variáveis. No termo original, $x$ está ligada apenas no escopo de $\lambda x.\, x$ e $y$ está ligada apenas no escopo de $\lambda y.\, y$
 
-Em resumo, no termo original, $(\lambda x.\, x)\,(\lambda y.\, y)$, as variáveis ligadas $x$ e $y$ estão em escopos diferentes. Não há sobreposição ou conflito entre os escopos de $x$ e $y$. Ou seja, a substituição de $x$ por $(\lambda y.\, y)$, durante a aplicação, não causará captura de variáveis. Neste caso, não há necessidade de aplicar a redução alfa. Sendo assim, as variáveis $x$ e $y$ podem permanecer com seus nomes originais sem causar ambiguidade ou conflito.
+Em resumo, no termo original, $(\lambda x.\, x)\,(\lambda y.\, y)$, as variáveis ligadas $x$ e $y$ estão em escopos diferentes. Não há sobreposição ou conflito entre os escopos de $x$ e $y$. Ou seja, a substituição de $x$ por $(\lambda y.\, y)$, durante a aplicação, não causará captura de variáveis. Neste caso, não há necessidade de aplicar a redução $\alpha$. Sendo assim, as variáveis $x$ e $y$ podem permanecer com seus nomes originais sem causar ambiguidade ou conflito.
 
 Neste ponto, já sabemos que não há necessidade de redução $\alpha$ o que simplifica o processo de avaliação do termo. Logo, a aplicação, redução $\beta$, pode ser aplicada diretamente. Neste caso, substituímos todas as ocorrências de $x$ no corpo da abstração externa pelo argumento $\lambda y.\, y$, como $x$ aparece uma vez no corpo, o resultado é simplesmente $\lambda y.\, y$.
 
@@ -692,7 +1376,7 @@ Com o Exemplo 2 podemos perceber que a necessidade de redução $\alpha$ não de
 
 $$(\lambda x.\, \lambda x.\, x)\, y$$
 
-Observe que neste termo, a variável $x$ está ligada duas vezes em escopos diferentes, duas abstrações lambda. Para evitar confusão, podemos aplicar a redução alfa para renomear uma das variáveis ligadas. Podemos aplicar na abstração interna ou na abstração externa. Vejamos:
+Observe que neste termo, a variável $x$ está ligada duas vezes em escopos diferentes, duas abstrações lambda. Para evitar confusão, podemos aplicar a redução $\alpha$ para renomear uma das variáveis ligadas. Podemos aplicar na abstração interna ou na abstração externa. Vejamos:
 
 1. Renomear a variável ligada interna:
 
@@ -710,7 +1394,7 @@ Observe que neste termo, a variável $x$ está ligada duas vezes em escopos dife
 
    Há uma razão puramente empírica. A escolha pela abstração externa contraria as práticas comuns ao cálculo lambda, onde as variáveis externas geralmente permanecem estáveis. Por fim, a escolha pela abstração externa reduz a rastreabilidade das transformações em sistemas de tipos ou em sistemas de análise estáticas.
 
-A perspicaz leitora deve ter percebido o esforço para justificar a aplicação da redução alfa a abstração interna. Agora que a convenci, podemos fazer a aplicando, β-redução, após a abordagem 1:
+A perspicaz leitora deve ter percebido o esforço para justificar a aplicação da redução $\alpha$ a abstração interna. Agora que a convenci, podemos fazer a aplicando, β-redução, após a abordagem 1:
 
 $$(\lambda x.\, \lambda z.\, z)\,y \to_\beta \lambda z.\, z$$
 
@@ -763,15 +1447,7 @@ Uma tentativa inválida de renomeação seria:
 
 $$\lambda x. \lambda y. \, E \not\equiv_\alpha \lambda x. \lambda x. \, E[x/y]$$
 
-Esta renomeação é inválida:
-
-1. **Violação da regra de captura de variáveis**: ao renomear $y$ para $x$, estamos potencialmente capturando ocorrências livres de $x$ que possam existir em $E$.
-
-2. **Perda de distinção**: as variáveis $x$ e $y$, que originalmente eram distintas, agora se tornaram a mesma variável, alterando potencialmente o significado da expressão.
-
-3. **Mudança na estrutura de escopo**: o escopo da variável $x$ externa foi efetivamente estendido para incluir o que antes era o escopo de $y$.
-
-Para ilustrar com um exemplo concreto, considere:
+Esta renomeação é inválida porque: **Viola a regra de captura de variáveis**: ao renomear $y$ para $x$, estamos potencialmente capturando ocorrências livres de $x$ que possam existir em $E$; **Provoca Perda de distinção**: as variáveis $x$ e $y$, que originalmente eram distintas, agora se tornaram a mesma variável, alterando potencialmente o significado da expressão; e **Altera a estrutura de escopo**: o escopo da variável $x$ externa foi efetivamente estendido para incluir o que antes era o escopo de $y$. Para ilustrar com um exemplo concreto desse problema, considere:
 
 $$\lambda x. \, \lambda y. \, x + y$$
 
@@ -779,7 +1455,7 @@ A renomeação inválida resultaria em:
 
 $$\lambda x. \, \lambda x. \, x + x$$
 
-Observe que o significado da expressão mudou completamente. Na expressão original, $x$ e $y$ poderiam ter valores diferentes, mas na versão renomeada incorretamente, elas são forçadas a ter o mesmo valor.
+Observe que o significado da expressão mudou. Na expressão original, $x$ e $y$ poderiam ter valores diferentes, mas na versão renomeada incorretamente, elas são forçadas a ter o mesmo valor.
 
 Uma renomeação válida seria:
 
@@ -787,7 +1463,7 @@ $$\lambda x. \, \lambda y. \, x + y \equiv_\alpha \lambda x. \, \lambda z. \, x 
 
 Aqui, renomeamos $y$ para $z$, mantendo a distinção entre as variáveis e preservando a estrutura e o significado da expressão original.
 
-#### Importância para a Redução Beta
+#### Importância para a redução $\beta$
 
 A equivalência alfa é impacta na correção da aplicação da redução $\beta$. Vamos analisar o seguinte exemplo:
 
@@ -801,11 +1477,11 @@ Agora podemos aplicar a redução $\beta$ com segurança:
 
 $$(\lambda x. \lambda z. \, E[z/y]) \, y \to_\beta \lambda z. \, E[z/y][y/x]$$
 
-Este exemplo ilustra como a equivalência alfa, através da redução alfa, é uma ferramenta essencial que permite o uso seguro da redução beta e da substituição no cálculo lambda, preservando o significado pretendido do corpo $E$ da função.
+Este exemplo ilustra como a equivalência alfa permite o uso seguro da redução beta e da substituição no cálculo lambda, preservando o significado pretendido do corpo $E$ da função original.
 
 ### Exercícios de Redução Alfa
 
-**1**: Aplique a redução alfa para renomear a variável da expressão $\lambda x. \, x + 2$ para $z$.
+**1**: Aplique a redução $\alpha$ para renomear a variável da expressão $\lambda x. \, x + 2$ para $z$.
 
  **Solução:** Substituímos a variável ligada $x$ por $z$:
 
@@ -813,17 +1489,17 @@ Este exemplo ilustra como a equivalência alfa, através da redução alfa, é u
 
 **2**: Renomeie a variável ligada $y$ na expressão $\lambda x. \lambda y. \, x + y$ para $w$.
 
- **Solução:** A redução alfa renomeia $y$ para $w$:
+ **Solução:** A redução $\alpha$ renomeia $y$ para $w$:
 
  $$\lambda x. \lambda y. \, x + y \to_\alpha \lambda x. \, \lambda w. \, x + w $$
 
-**3**: Aplique a redução alfa para renomear a variável $z$ na expressão $\lambda z. \, z^2$ para $a$.
+**3**: Aplique a redução $\alpha$ para renomear a variável $z$ na expressão $\lambda z. \, z^2$ para $a$.
 
  **Solução:** Substituímos $z$ por $a$:
 
  $$\lambda z. \, z^2 \to_\alpha \lambda a. a^2 $$
 
-**4**: Renomeie a variável $f$ na expressão $\lambda f. \lambda x. \, f(x)$ para $g$, utilizando a redução alfa.
+**4**: Renomeie a variável $f$ na expressão $\lambda f. \lambda x. \, f(x)$ para $g$, utilizando a redução $\alpha$.
 
  **Solução:** Substituímos $f$ por $g$:
 
@@ -841,7 +1517,7 @@ $$\lambda x. \, (\lambda x. \, x + 1) x \to_\alpha \lambda x. \, (\lambda z. \, 
 
 Após a redução $\alpha$ temos $x$ no escopo externo e $z$ no escopo interno. Ou seja, o $x$ após o parêntese se refere ao $x$ do escopo externo.
 
-**6**: Aplique a redução alfa na expressão $\lambda x. \lambda y. \, x \cdot y$ renomeando $x$ para $a$ e $y$ para $b$.
+**6**: Aplique a redução $\alpha$ na expressão $\lambda x. \lambda y. \, x \cdot y$ renomeando $x$ para $a$ e $y$ para $b$.
 
  **Solução:** Substituímos $x$ por $a$ e $y$ por $b$:
 
@@ -853,21 +1529,21 @@ Após a redução $\alpha$ temos $x$ no escopo externo e $z$ no escopo interno. 
 
  $$\lambda x. \, (\lambda y. \, y + x) \to_\alpha \lambda x. \, (\lambda t. t + x)$$
 
-**8**: Aplique a redução alfa na expressão $\lambda f. \lambda x. \, f(x + 2)$ renomeando $f$ para $h$.
+**8**: Aplique a redução $\alpha$ na expressão $\lambda f. \lambda x. \, f(x + 2)$ renomeando $f$ para $h$.
 
  **Solução:** Substituímos $f$ por $h$:
 
  $$\lambda f. \lambda x. \, f(x + 2) \to_\alpha \lambda h. \lambda x. \, h(x + 2)$$
 
-**9**: Na expressão $\lambda x. \, (\lambda y. \, x - y)$, renomeie a variável $y$ para $v$ utilizando a redução alfa.
+**9**: Na expressão $\lambda x. \, (\lambda y. \, x - y)$, renomeie a variável $y$ para $v$ utilizando a redução $\alpha$.
 
  **Solução:** Substituímos $y$ por $v$:
 
  $$\lambda x. \, (\lambda y. \, x - y) \to_\alpha \lambda x. \, (\lambda v. \, x - v)$$
 
-**10**: Aplique a redução alfa na expressão $\lambda x. \, (\lambda z. \, z + x) \, z$, renomeando $z$ na função interna para $w$.
+**10**: Aplique a redução $\alpha$ na expressão $\lambda x. \, (\lambda z. \, z + x) \, z$, renomeando $z$ na função interna para $w$.
 
-Neste exemplo podemos começar observando a estrutura original. Neste caso temos uma abstração externa $\lambda x$, uma abstração interna $\lambda z$ e um $z$ livre após o parêntese.
+Neste exemplo, podemos começar observando a estrutura original. Neste caso temos uma abstração externa $\lambda x$, uma abstração interna $\lambda z$ e um $z$ livre após o parêntese.
 
 Uma vez que a estrutura está clara podemos avaliar as variáveis: o $z$ na função interna é uma variável ligada. Contudo, o $z$ após o parêntese é uma variável livre, não está ligada a nenhum $\lambda$.
 
@@ -879,7 +1555,7 @@ Após a aplicação da redução $\alpha$, temos $w$ como variável ligada na fu
 
 ### Convenções Práticas: Convenção de Variáveis de Barendregt
 
-Na prática, a redução alfa é frequentemente aplicada implicitamente durante as substituições no cálculo lambda. A **convenção das variáveis de [Barendregt](https://en.wikipedia.org/wiki/Henk_Barendregt)**[^cita9] estabelece que todas as variáveis ligadas em um termo devem ser escolhidas de modo que sejam distintas entre si e também distintas de quaisquer variáveis livres presentes no termo. Essa convenção elimina a necessidade de renomeações explícitas frequentes e simplifica a manipulação dos termos lambda.
+Na prática, a redução $\alpha$ é frequentemente aplicada implicitamente durante as substituições no cálculo lambda. A convenção das variáveis de [Barendregt](https://en.wikipedia.org/wiki/Henk_Barendregt)[^cita9] **estabelece que todas as variáveis ligadas em um termo devem ser escolhidas de modo que sejam distintas entre si e também distintas de quaisquer variáveis livres presentes no termo**. Essa convenção elimina a necessidade de renomeações explícitas frequentes e simplifica a manipulação dos termos lambda.
 
 A partir da Convenção de Barendregt, a definição de substituição pode ser simplificada. Em particular, ao realizar a substituição $[N/x](\lambda y.\, M)$, podemos escrever:
 
@@ -905,19 +1581,19 @@ Ambos representam a mesma função, diferindo apenas nos nomes das variáveis li
 
  $$[y/x] (\lambda x. \, x + 1) = \lambda x. \, x + 1$$
 
-**3**: Aplique a substituição $[z/x](\lambda z. \, x + z)$. Utilize redução alfa para evitar captura de variáveis.
+**3**: Aplique a substituição $[z/x](\lambda z. \, x + z)$. Utilize redução $\alpha$ para evitar captura de variáveis.
 
- **Solução:** A substituição direta causaria captura de variáveis. Aplicamos a redução alfa para renomear $z$ antes de fazer a substituição:
+ **Solução:** A substituição direta causaria captura de variáveis. Aplicamos a redução $\alpha$ para renomear $z$ antes de fazer a substituição:
 
  $$[z/x](\lambda z. \, x + z) = \lambda w. \, z + w$$
 
-**4**: Considere a expressão $(\lambda x. \lambda y. \, x + y) z$. Aplique a substituição $[z/x]$ e explique a necessidade de redução alfa.
+**4**: Considere a expressão $(\lambda x. \lambda y. \, x + y) z$. Aplique a substituição $[z/x]$ e explique a necessidade de redução $\alpha$.
 
  **Solução:** Como $x$ não está ligada, podemos realizar a substituição sem necessidade de alfa. A expressão resultante é:
 
  $$[z/x] (\lambda x. \lambda y. \, x + y) = \lambda y. \, z + y$$
 
-**5**: Aplique a substituição $[z/x](\lambda z. \, x + z)$ sem realizar a redução alfa. O que ocorre?
+**5**: Aplique a substituição $[z/x](\lambda z. \, x + z)$ sem realizar a redução $\alpha$. O que ocorre?
 
  **Solução:** Se aplicarmos diretamente a substituição sem evitar a captura, a variável $z$ é capturada e a substituição resultará incorretamente em:
 
@@ -931,9 +1607,9 @@ Ambos representam a mesma função, diferindo apenas nos nomes das variáveis li
 
  Com a convenção de Barendregt, variáveis ligadas não entram em conflito.
 
-**7**: Aplique a redução alfa na expressão $\lambda x. \lambda y. \, x + y$ para renomear $ x $ e $ y $ para $ a $ e $ b $, respectivamente, e aplique a substituição $[3/a]$.
+**7**: Aplique a redução $\alpha$ na expressão $\lambda x. \lambda y. \, x + y$ para renomear $ x $ e $ y $ para $ a $ e $ b $, respectivamente, e aplique a substituição $[3/a]$.
 
-**Solução:** Primeiro, aplicamos a redução alfa:
+**Solução:** Primeiro, aplicamos a redução $\alpha$:
 
  $$\lambda x. \lambda y. \, x + y \to_\alpha \lambda a. \lambda b. a + b$$
 
@@ -951,9 +1627,9 @@ Ambos representam a mesma função, diferindo apenas nos nomes das variáveis li
 
  $$[y/x] (\lambda x. \, (\lambda z. \, z + 1) x) = \lambda x. \, (\lambda z. \, z + 1) y$$
 
-**9**: Aplique a redução alfa na expressão $\lambda x. \, (\lambda y. \, x + y)$, renomeando $ y $ para $ z $, e depois aplique a substituição $[5/x]$.
+**9**: Aplique a redução $\alpha$ na expressão $\lambda x. \, (\lambda y. \, x + y)$, renomeando $ y $ para $ z $, e depois aplique a substituição $[5/x]$.
 
- **Solução:** Primeiro, aplicamos a redução alfa:
+ **Solução:** Primeiro, aplicamos a redução $\alpha$:
 
  $$\lambda x. \, (\lambda y. \, x + y) \to_\alpha \lambda x. \, (\lambda z. \, x + z)$$
 
@@ -961,15 +1637,15 @@ Ambos representam a mesma função, diferindo apenas nos nomes das variáveis li
 
  $$[5/x] (\lambda x. \, (\lambda z. \, x + z)) = \lambda z. 5 + z $$
 
-**10**: Aplique a substituição $[y/x] (\lambda x. \, x + z)$ e explique por que a convenção de Barendregt nos permite evitar a redução alfa neste caso.
+**10**: Aplique a substituição $[y/x] (\lambda x. \, x + z)$ e explique por que a convenção de Barendregt nos permite evitar a redução $\alpha$ neste caso.
 
  **Solução:** Como $x$ é ligado e não há conflitos com variáveis livres, a substituição não afeta o termo, e a convenção de Barendregt garante que não há necessidade de renomeação:
 
  $$[y/x] (\lambda x. \, x + z) = \lambda x. \, x + z $$
 
-**11**: Considere o termo $[z/x] (\lambda y. \, x + (\lambda x. \, x + y))$. Aplique a substituição e a redução alfa se necessário.
+**11**: Considere o termo $[z/x] (\lambda y. \, x + (\lambda x. \, x + y))$. Aplique a substituição e a redução $\alpha$ se necessário.
 
- **Solução:** Como há um conflito com a variável $x$ no corpo da função, aplicamos redução alfa antes da substituição:
+ **Solução:** Como há um conflito com a variável $x$ no corpo da função, aplicamos redução $\alpha$ antes da substituição:
 
  $$\lambda y. \, x + (\lambda x. \, x + y) \to_\alpha \lambda y. \, x + (\lambda w. w + y)$$
 
@@ -991,9 +1667,9 @@ Ambos representam a mesma função, diferindo apenas nos nomes das variáveis li
 
  A convenção de Barendregt garante que não precisamos renomear variáveis.
 
-**14**: Aplique a redução alfa na expressão $\lambda x. \, (\lambda y. \, x + y)$ e renomeie $ y $ para $ t $, depois aplique a substituição $[2/x]$.
+**14**: Aplique a redução $\alpha$ na expressão $\lambda x. \, (\lambda y. \, x + y)$ e renomeie $ y $ para $ t $, depois aplique a substituição $[2/x]$.
 
- **Solução:** Primeiro aplicamos a redução alfa:
+ **Solução:** Primeiro aplicamos a redução $\alpha$:
 
  $$\lambda x. \, (\lambda y. \, x + y) \to_\alpha \lambda x. \, (\lambda t. \, x + t)$$
 
@@ -1001,21 +1677,21 @@ Ambos representam a mesma função, diferindo apenas nos nomes das variáveis li
 
  $$[2/x] (\lambda x. \, (\lambda t. \, x + t)) = \lambda t. 2 + t $$
 
-**15**: Aplique a substituição $[y/x] (\lambda x. \, x + (\lambda z. \, x + z))$ e explique por que não é necessário aplicar a redução alfa.
+**15**: Aplique a substituição $[y/x] (\lambda x. \, x + (\lambda z. \, x + z))$ e explique por que não é necessário aplicar a redução $\alpha$.
 
  **Solução:** Como a variável $x$ está ligada e não entra em conflito com outras variáveis, a substituição não altera o termo:
 
  $$[y/x] (\lambda x. \, x + (\lambda z. \, x + z)) = \lambda x. \, x + (\lambda z. \, x + z)$$
 
-## Redução Beta
+## redução $\beta$
 
-A redução beta é um mecanismo de computação no cálculo lambda que **permite simplificar expressões por meio da aplicação de funções aos seus argumentos**. Formalmente, a redução beta é definida como:
+A redução beta é o mecanismo de computação do cálculo lambda que **permite simplificar expressões por meio da aplicação de funções aos seus argumentos**. As outras reduções $\beta$ e $\eta$ são mecanismos de transformação que facilitam, ou possibilitam, a redução $\beta$.Formalmente, a redução beta é definida como:
 
 $$(\lambda x.\, E)\,N \to_\beta [x/N]E$$
 
-A notação $[x/N]M$ representa a substituição de todas as ocorrências livres da variável $x$ no termo $E$ pelo termo $N$. Eventualmente, quando estudamos semântica denotacional ou provas formais usamos a notação $E[x := y]$.
+A notação $[x/N]M$ representa a substituição de todas as ocorrências livres da variável $x$ no termo $E$ pelo termo $N$. Eventualmente, quando estudamos semântica denotacional, ou provas formais, usamos a notação $E[x := y]$.
 
-A substituição indicada em uma Redução Beta deve ser realizada com cuidado para evitar a captura de variáveis livres em $N$ que possam se tornar ligadas em $E$ após a substituição. Para evitar a captura de varáveis livres, pode ser necessário realizar uma redução alfa antes de começar a redução beta, renomeando variáveis ligadas em $E$ que possam entrar em conflito com variáveis livres em $N$, Figura 2.
+A substituição indicada em uma redução $\beta$ deve ser realizada com cuidado para evitar a captura de variáveis livres em $N$ que possam se tornar ligadas em $E$ após a substituição. Para evitar a captura de varáveis livres, pode ser necessário realizar uma redução $\alpha$ antes de começar a redução beta, renomeando variáveis ligadas em $E$ que possam entrar em conflito com variáveis livres em $N$, Figura 2.
 
 ![](assets/images/beta.png)
 _Exemplo de Redução Beta_{: legenda}
@@ -1024,7 +1700,7 @@ Considere, por exemplo, o termo $E = (\lambda y.\, x + y)$ e o objetivo de subst
 
 $$[x/y]E = (\lambda y.\, y + y)$$
 
-Nesse caso, a variável livre $y$ em $N$ tornou-se ligada devido ao $\lambda y$ em $E$, resultando em captura de variável e alterando o significado original da expressão. Para evitar a captura, aplicamos uma redução alfa ao termo $E$, renomeando a variável ligada $y$ para uma nova variável que não apareça em $N$, como $z$:
+Nesse caso, a variável livre $y$ em $N$ tornou-se ligada devido ao $\lambda y$ em $E$, resultando em captura de variável e alterando o significado original da expressão. Para evitar a captura, aplicamos uma redução $\alpha$ ao termo $E$, renomeando a variável ligada $y$ para uma nova variável que não apareça em $N$, como $z$:
 
 $$E = (\lambda y.\, x + y) \quad \xrightarrow{\text{alfa}} \quad (\lambda z.\, x + z)$$
 
@@ -1036,7 +1712,7 @@ Dessa forma, a variável livre $y$ permanece livre após a substituição, e a c
 
 $$[x/y]E = (\lambda y.\, y + y)$$
 
-Aqui, a variável livre $y$ em $N$ foi capturada pelo $\lambda y$ interno. Para prevenir isso, realizamos uma redução alfa renomeando a variável ligada $y$ para $z$:
+Aqui, a variável livre $y$ em $N$ foi capturada pelo $\lambda y$ interno. Para prevenir isso, realizamos uma redução $\alpha$ renomeando a variável ligada $y$ para $z$:
 
 $$E = (\lambda x.\, \lambda y.\, x + y) \quad \xrightarrow{\text{alfa}} \quad (\lambda x.\, \lambda z.\, x + z)$$
 
@@ -1058,7 +1734,7 @@ $$(\lambda x.\, x + y)\,3 \to_\beta 3 + y$$
 
 Neste caso, substituímos $x$ por $3$ no corpo da função $x + y$, resultando em $3 + y$. A variável $y$ permanece inalterada por ser uma variável livre.
 
-**Exemplo 2**: se houver risco de captura de variáveis, é necessário realizar uma redução alfa antes. Por exemplo:
+**Exemplo 2**: se houver risco de captura de variáveis, é necessário realizar uma redução $\alpha$ antes. Por exemplo:
 
 $$(\lambda x.\, \lambda y.\, x + y)\,y$$
 
@@ -1066,7 +1742,7 @@ Aplicando a redução beta diretamente:
 
 $$(\lambda x.\, \lambda y.\, x + y)\,y \to_\beta \lambda y.\, y + y$$
 
-Aqui, a variável livre $y$ no argumento foi capturada pela variável ligada $y$ na função interna. Para evitar isso, realizamos uma redução alfa renomeando a variável ligada $y$ para $z$:
+Aqui, a variável livre $y$ no argumento foi capturada pela variável ligada $y$ na função interna. Para evitar isso, realizamos uma redução $\alpha$ renomeando a variável ligada $y$ para $z$:
 
    $$\lambda x.\, \lambda z.\, x + z$$
 
@@ -1108,7 +1784,7 @@ Assim, evitamos a captura da variável livre $y$, mantendo o significado origina
 
 Neste exemplo, aplicamos primeiro a função $(\lambda f.\lambda x.\, f \, (f \, x))$ ao argumento $(\lambda y.\, y*2)$, resultando em uma expressão que aplica duas vezes a função de duplicação ao número $3$, obtendo $12$.
 
-### Exercícios de Redução Beta
+### Exercícios de redução $\beta$
 
 **1**: Aplique a redução beta na expressão $(\lambda x. \, x + 1) 5$.
 
@@ -1351,11 +2027,11 @@ Como $x$ não aparece livre em $I$, podemos aplicar a redução eta para obter $
 
 No cálculo lambda, as reduções alfa, beta e eta formam um conjunto integrado de transformações que permitem manipular e simplificar expressões lambda. Cada uma dessas reduções desempenha um papel específico, mas elas frequentemente interagem e complementam-se mutuamente.
 
-Vamos começar com a redução alfa, que lida com a renomeação de variáveis ligadas, pode ser necessária antes de aplicar a redução eta para evitar conflitos de nomes. Por exemplo:
+Vamos começar com a redução $\alpha$, que lida com a renomeação de variáveis ligadas, pode ser necessária antes de aplicar a redução eta para evitar conflitos de nomes. Por exemplo:
 
 $$\lambda x. (\lambda y. \, x y) x \to_\alpha \lambda x. (\lambda z. \, x z) x \to_\eta \lambda x. \, x$$
 
-Neste caso, a redução alfa foi aplicada primeiro para renomear $y$ para $z$, evitando a captura de variável, antes de aplicar a redução eta.
+Neste caso, a redução $\alpha$ foi aplicada primeiro para renomear $y$ para $z$, evitando a captura de variável, antes de aplicar a redução eta.
 
 A interação entre redução eta e beta é particularmente interessante. Em alguns casos, a redução eta pode simplificar expressões após a aplicação da redução beta:
 
@@ -1365,7 +2041,7 @@ Aqui, a redução beta é aplicada primeiro, seguida pela redução eta para sim
 
 Nesta interação entre as reduções precisamos tomar cuidado com a ordem de aplicação das reduções pode afetar o resultado final e a eficiência do processo de redução. Em linhas gerais, podemos seguir as seguintes regras:
 
-1. A redução alfa é aplicada conforme necessário para evitar conflitos de nomes.
+1. A redução $\alpha$ é aplicada conforme necessário para evitar conflitos de nomes.
 
 2. A redução beta é frequentemente aplicada após a aplicação alfa para realizar computações.
 
@@ -2225,7 +2901,7 @@ Formalmente, a redução beta é definida como:
 
 $$(\lambda x.\,E)\, N \to_\beta [N/x]\, M$$
 
-Onde $[N/x]\, M$ denota a substituição de todas as ocorrências livres de $x$ em $M$ por $N$. Isso reflete o processo de aplicação de uma função, onde substituímos o parâmetro formal $x$ pelo argumento $N$ no corpo da função $M$. Note que a substituição deve ser feita de maneira a evitar a captura de variáveis livres. Isso pode exigir a renomeação de variáveis ligadas (redução alfa) antes da substituição.
+Onde $[N/x]\, M$ denota a substituição de todas as ocorrências livres de $x$ em $M$ por $N$. Isso reflete o processo de aplicação de uma função, onde substituímos o parâmetro formal $x$ pelo argumento $N$ no corpo da função $M$. Note que a substituição deve ser feita de maneira a evitar a captura de variáveis livres. Isso pode exigir a renomeação de variáveis ligadas (redução $\alpha$) antes da substituição.
 
  **Exemplos**:
 
@@ -2756,37 +3432,37 @@ Por outro lado, a ordem normal pode ser ineficiente em termos de tempo, já que,
 
 **Exemplo 2**: Considere a expressão:
 
-$$M = (\lambda f.\, (\lambda x.\, f\ (x\ x))\ (\lambda x.\, f\ (x\ x)))\ (\lambda y.\, y + 1)$$
+$$M = (\lambda f.\, (\lambda x.\, f\, (x\, x))\, (\lambda x.\, f\, (x\, x)))\, (\lambda y.\, y + 1)$$
 
 Vamos reduzir $M$ passo a passo usando a ordem normal.
 
 **Passo 1**: Identificamos o redex mais externo à esquerda:
 
-$$\underline{(\lambda f.\, (\lambda x.\, f\ (x\ x))\ (\lambda x.\, f\ (x\ x)))\ (\lambda y.\, y + 1)}$$
+$$\underline{(\lambda f.\, (\lambda x.\, f\, (x\, x))\, (\lambda x.\, f\, (x\, x)))\, (\lambda y.\, y + 1)}$$
 
 Aplicamos a redução beta ao redex, substituindo $f$ por $(\lambda y.\, y + 1)$:
 
-$$\to_\beta (\lambda x.\, (\lambda y.\, y + 1)\ (x\ x))\ (\lambda x.\, (\lambda y.\, y + 1)\ (x\ x))$$
+$$\to_\beta (\lambda x.\, (\lambda y.\, y + 1)\, (x\, x))\, (\lambda x.\, (\lambda y.\, y + 1)\, (x\, x))$$
 
 **Passo 2**: Novamente, identificamos o redex mais externo à esquerda:
 
-$$\underline{(\lambda x.\, (\lambda y.\, y + 1)\ (x\ x))\ (\lambda x.\, (\lambda y.\, y + 1)\ (x\ x))}$$
+$$\underline{(\lambda x.\, (\lambda y.\, y + 1)\, (x\, x))\, (\lambda x.\, (\lambda y.\, y + 1)\, (x\, x))}$$
 
-Aplicamos a redução beta, substituindo $x$ por $(\lambda x.\, (\lambda y.\, y + 1)\ (x\ x))$:
+Aplicamos a redução beta, substituindo $x$ por $(\lambda x.\, (\lambda y.\, y + 1)\, (x\, x))$:
 
-$$\to_\beta (\lambda y.\, y + 1)\ \left( \underline{(\lambda x.\, (\lambda y.\, y + 1)\ (x\ x))\ (\lambda x.\, (\lambda y.\, y + 1)\ (x\ x))} \right)$$
+$$\to_\beta (\lambda y.\, y + 1)\, \left( \underline{(\lambda x.\, (\lambda y.\, y + 1)\, (x\, x))\, (\lambda x.\, (\lambda y.\, y + 1)\, (x\, x))} \right)$$
 
 **Passo 3**: Dentro do argumento, identificamos o redex mais externo:
 
-$$\underline{(\lambda x.\, (\lambda y.\, y + 1)\ (x\ x))\ (\lambda x.\, (\lambda y.\, y + 1)\ (x\ x))}$$
+$$\underline{(\lambda x.\, (\lambda y.\, y + 1)\, (x\, x))\, (\lambda x.\, (\lambda y.\, y + 1)\, (x\, x))}$$
 
-Aplicamos a redução beta novamente, substituindo $x$ por $(\lambda x.\, (\lambda y.\, y + 1)\ (x\ x))$:
+Aplicamos a redução beta novamente, substituindo $x$ por $(\lambda x.\, (\lambda y.\, y + 1)\, (x\, x))$:
 
-$$\to_\beta (\lambda y.\, y + 1)\ \left( (\lambda y.\, y + 1)\ \left( \underline{(\lambda x.\, (\lambda y.\, y + 1)\ (x\ x))\ (\lambda x.\, (\lambda y.\, y + 1)\ (x\ x))} \right) \right)$$
+$$\to_\beta (\lambda y.\, y + 1)\, \left( (\lambda y.\, y + 1)\, \left( \underline{(\lambda x.\, (\lambda y.\, y + 1)\, (x\, x))\, (\lambda x.\, (\lambda y.\, y + 1)\, (x\, x))} \right) \right)$$
 
 **Passo 4**: Observamos que o processo está se repetindo. A cada aplicação da redução beta, o termo dentro dos parênteses permanece o mesmo, indicando um **loop infinito**:
 
-$$\to_\beta (\lambda y.\, y + 1)\ \left( (\lambda y.\, y + 1)\ \left( (\lambda y.\, y + 1)\ \left( \cdots \right) \right) \right)$$
+$$\to_\beta (\lambda y.\, y + 1)\, \left( (\lambda y.\, y + 1)\, \left( (\lambda y.\, y + 1)\, \left( \cdots \right) \right) \right)$$
 
 Na estratégia de ordem normal, a redução do termo $M$ não termina, pois entra em um ciclo infinito de reduções. Não é possível alcançar uma forma normal para $M$ usando esta estratégia, já que continuaremos expandindo o termo indefinidamente sem simplificá-lo a um resultado final. Este exemplo ilustra como a ordem normal pode levar a reduções infinitas em certos casos, especialmente quando lidamos com termos autoreferenciados ou combinadores que causam expansão infinita.
 
@@ -2800,17 +3476,17 @@ Vamos reduzir $M$ passo a passo usando a ordem normal.
 
 **Passo 1**: Identificamos o redex mais externo à esquerda:
 
-$$\underline{(\lambda x.\, (\lambda y.\, x))\,\left( (\lambda z.\, z + z)\,3 \right)}\ \left( (\lambda w.\, w\,w)\,(\lambda w.\, w\,w) \right)$$
+$$\underline{(\lambda x.\, (\lambda y.\, x))\,\left( (\lambda z.\, z + z)\,3 \right)}\, \left( (\lambda w.\, w\,w)\,(\lambda w.\, w\,w) \right)$$
 
 Aplicamos a redução beta ao redex, substituindo $x$ por $\left( (\lambda z.\, z + z)\,3 \right)$:
 
-$$\to_\beta\ (\lambda y.\, \left( (\lambda z.\, z + z)\,3 \right))\ \left( (\lambda w.\, w\,w)\,(\lambda w.\, w\,w) \right)$$
+$$\to_\beta\, (\lambda y.\, \left( (\lambda z.\, z + z)\,3 \right))\, \left( (\lambda w.\, w\,w)\,(\lambda w.\, w\,w) \right)$$
 
 **Passo 2**: Observamos que a função resultante não utiliza o argumento $y$ no corpo da função. Portanto, o segundo argumento $\left( (\lambda w.\, w\,w)\,(\lambda w.\, w\,w) \right)$ não é avaliado na ordem normal, pois não é necessário.
 
 **Passo 3**: Calculamos a expressão $(\lambda z.\, z + z)\,3$ no corpo da função:
 
-$$(\lambda z.\, z + z)\,3\ \to_\beta\ 3 + 3 = 6$$
+$$(\lambda z.\, z + z)\,3\, \to_\beta\, 3 + 3 = 6$$
 
 **Passo 4**: Substituímos o resultado no corpo da função:
 
@@ -3060,13 +3736,13 @@ No entanto, a ordem aplicativa pode levar a problemas de não-terminação em ca
 
 **Exemplo 1**: Considere a expressão:
 
-$$M = (\lambda x.\, x)\ ((\lambda y.\, y\ y)\ (\lambda y.\, y\ y))$$
+$$M = (\lambda x.\, x)\, ((\lambda y.\, y\, y)\, (\lambda y.\, y\, y))$$
 
-Na **ordem aplicativa**, avaliamos primeiro o argumento: Avaliamos o argumento $N = ((\lambda y.\, y\ y)\ (\lambda y.\, y\ y))$:
+Na **ordem aplicativa**, avaliamos primeiro o argumento: Avaliamos o argumento $N = ((\lambda y.\, y\, y)\, (\lambda y.\, y\, y))$:
 
 Aplicamos a redução beta:
 
-$$(\lambda y.\, y\ y)\ (\lambda y.\, y\ y) \to_\beta (\lambda y.\, y\ y)\ (\lambda y.\, y\ y)$$
+$$(\lambda y.\, y\, y)\, (\lambda y.\, y\, y) \to_\beta (\lambda y.\, y\, y)\, (\lambda y.\, y\, y)$$
 
 Observamos que o termo se repete indefinidamente, resultando em uma **redução infinita**. Como o argumento não pode ser completamente avaliado, a aplicação da função não ocorre, e a redução não termina.
 
@@ -3074,41 +3750,41 @@ Na **ordem normal**, a função $(\lambda x.\, x)$ não utiliza o argumento alé
 
 **Exemplo 2**: considere a expressão:
 
-$$M = (\lambda x.\, \lambda y.\, x)\ \left( (\lambda z.\, z + 1)\ 5 \right)\ \left( (\lambda w.\, w \times 2)\ 3 \right)$$
+$$M = (\lambda x.\, \lambda y.\, x)\, \left( (\lambda z.\, z + 1)\, 5 \right)\, \left( (\lambda w.\, w \times 2)\, 3 \right)$$
 
 Na ordem aplicativa, procedemos da seguinte forma: avaliamos o primeiro argumento:
 
- Calculamos $A = (\lambda z.\, z + 1)\ 5$:
+ Calculamos $A = (\lambda z.\, z + 1)\, 5$:
 
-$$(\lambda z.\, z + 1)\ 5 \to_\beta 5 + 1 = 6$$
+$$(\lambda z.\, z + 1)\, 5 \to_\beta 5 + 1 = 6$$
 
 Avaliamos o segundo argumento:
 
-Calculamos $B = (\lambda w.\, w \times 2)\ 3$:
+Calculamos $B = (\lambda w.\, w \times 2)\, 3$:
 
-$$(\lambda w.\, w \times 2)\ 3 \to_\beta 3 \times 2 = 6$$
+$$(\lambda w.\, w \times 2)\, 3 \to_\beta 3 \times 2 = 6$$
 
 Aplicamos a função ao primeiro argumento avaliado:
 
-$$(\lambda x.\, \lambda y.\, x)\ 6 \to_\beta \lambda y.\, 6$$
+$$(\lambda x.\, \lambda y.\, x)\, 6 \to_\beta \lambda y.\, 6$$
 
 Aplicamos a função resultante ao segundo argumento avaliado:
 
-$$(\lambda y.\, 6)\ 6 \to_\beta 6$$
+$$(\lambda y.\, 6)\, 6 \to_\beta 6$$
 
 O resultado final é $6$. Note que ambos os argumentos foram avaliados, embora o segundo argumento não seja utilizado no resultado final. Isso exemplifica como a ordem aplicativa pode desperdiçar recursos ao avaliar argumentos desnecessários.
 
 **Exemplo 3**: considere a expressão:
 
-$$M = (\lambda x.\, 42)\ \left( (\lambda y.\, y\ y)\ (\lambda y.\, y\ y) \right)$$
+$$M = (\lambda x.\, 42)\, \left( (\lambda y.\, y\, y)\, (\lambda y.\, y\, y) \right)$$
 
 Na ordem aplicativa, avaliamos primeiro o argumento:
 
-Avaliamos o argumento $N = (\lambda y.\, y\ y)\ (\lambda y.\, y\ y)$:
+Avaliamos o argumento $N = (\lambda y.\, y\, y)\, (\lambda y.\, y\, y)$:
 
 Aplicamos a redução beta:
 
-$$(\lambda y.\, y\ y)\ (\lambda y.\, y\ y) \to_\beta (\lambda y.\, y\ y)\ (\lambda y.\, y\ y) \to_\beta \cdots$$
+$$(\lambda y.\, y\, y)\, (\lambda y.\, y\, y) \to_\beta (\lambda y.\, y\, y)\, (\lambda y.\, y\, y) \to_\beta \cdots$$
 
 O termo entra em uma **redução infinita**.
 
@@ -3116,7 +3792,7 @@ Como o argumento não pode ser completamente avaliado, a aplicação da função
 
 **Exemplo 4**: considere a expressão:
 
-$$M = (\lambda f.\, f\ (f\ 2))\ (\lambda x.\, x \times x)$$
+$$M = (\lambda f.\, f\, (f\, 2))\, (\lambda x.\, x \times x)$$
 
 Na ordem aplicativa, procedemos assim:
 
@@ -3124,17 +3800,17 @@ Avaliamos o argumento $N = (\lambda x.\, x \times x)$, que é uma função e nã
 
 Aplicamos a função externa ao argumento:
 
-$$(\lambda f.\, f\ (f\ 2))\ (\lambda x.\, x \times x) \to_\beta (\lambda x.\, x \times x)\ ((\lambda x.\, x \times x)\ 2)$$
+$$(\lambda f.\, f\, (f\, 2))\, (\lambda x.\, x \times x) \to_\beta (\lambda x.\, x \times x)\, ((\lambda x.\, x \times x)\, 2)$$
 
-Avaliamos o argumento interno $(\lambda x.\, x \times x)\ 2$:
+Avaliamos o argumento interno $(\lambda x.\, x \times x)\, 2$:
 
 Aplicamos a redução beta:
 
-$$(\lambda x.\, x \times x)\ 2 \to_\beta 2 \times 2 = 4$$
+$$(\lambda x.\, x \times x)\, 2 \to_\beta 2 \times 2 = 4$$
 
 Aplicamos a função externa ao resultado:
 
-$$(\lambda x.\, x \times x)\ 4 \to_\beta 4 \times 4 = 16$$
+$$(\lambda x.\, x \times x)\, 4 \to_\beta 4 \times 4 = 16$$
 
 O resultado final é $16$. Neste caso, a ordem aplicativa é eficiente, pois avalia os argumentos necessários e evita reavaliações.
 
@@ -5292,7 +5968,7 @@ Se tentássemos aplicar `increment` a um argumento de tipo incompatível, como e
 
 A semântica dinâmica define como as expressões são avaliadas. O principal mecanismo de avaliação é a redução beta:
 
-1. **Redução Beta**:
+1. **redução $\beta$**:
 
    $$(\lambda x:A. t) \; s \rightarrow t[x := s]$$
 
