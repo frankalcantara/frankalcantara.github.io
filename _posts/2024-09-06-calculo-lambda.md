@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2024-10-17T16:05:57.650Z
+lastmod: 2024-10-17T16:09:47.641Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -798,7 +798,7 @@ O resultado de $[3 / x](x + y)$ é $3 + y$. Ou seja, a variável $x$ foi substit
 
 O resultado da substituição $[(\lambda z. \, z)/x](\lambda y.x y)$ é $\lambda y.((\lambda z. \, z) y)$. Neste caso, a ocorrência livre de $x$ no corpo da abstração foi substituída por $(\lambda z. \, z)$. A variável $y$ permaneceu ligada e não foi afetada pela substituição.
 
-**3**: Realize a substituição $[y/x](\lambda y.x)$.
+**3**: Realize a substituição $[y/x](\lambda y. \, x)$.
 
 **Solução**:
 
@@ -806,15 +806,15 @@ O resultado da substituição $[(\lambda z. \, z)/x](\lambda y.x y)$ é $\lambda
 
 2. Não podemos aplicar diretamente a regra 4, pois $y \in FV(y)$. Para evitar a captura de variáveis, realizamos uma redução $\alpha$ primeiro: $\lambda y.x \to_\alpha \lambda z.x$.
 
-3. Agora podemos aplicar a substituição com segurança: $[y/x](\lambda z.x)$.
+3. Agora podemos aplicar a substituição com segurança: $[y/x](\lambda x. \, z$.
 
-4. Aplicamos a regra 4: $[y/x](\lambda z.x) = \lambda z.([y/x]x)$
+4. Aplicamos a regra 4: $[y/x](\lambda x. \, z = \lambda z. \, ([y/x]x)$
 
-5. Resolvemos a substituição no corpo: $\lambda z.([y/x]x) = \lambda z.y$ (pela regra 1)
+5. Resolvemos a substituição no corpo: $\lambda z. \, ([y/x]x) = \lambda z. \, y$ (pela regra 1)
 
-O resultado de $[y/x](\lambda y.x)$ é $\lambda z.y$. Para evitar a captura da variável livre $y$ que estamos introduzindo, primeiro renomeamos a variável ligada $y$ para $z$, redução $\alpha$. Depois, realizamos a substituição normalmente, resultando em uma abstração que retorna a variável livre $y$.
+O resultado de $[y/x](\lambda y. \, x)$ é $\lambda z. \, y$. Para evitar a captura da variável livre $y$ que estamos introduzindo, primeiro renomeamos a variável ligada $y$ para $z$, redução $\alpha$. Depois, realizamos a substituição normalmente, resultando em uma abstração que retorna a variável livre $y$.
 
-**4**: Realize a substituição $[(\lambda x.xx)/y](y z)$.
+**4**: Realize a substituição $[(\lambda x. \, x \, x)/y](y \, z)$.
 
 **Solução**:
 
