@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2024-10-17T00:44:07.567Z
+lastmod: 2024-10-17T15:31:28.917Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -89,7 +89,7 @@ def f(x):
  return x**2 + 2*x + 1
 ```
 
-Essa notação equivale à notação matemática clássica, porém permite controle sobre o fluxo de execução e manipulação de dados. As linguagens funcionais representam funções a partir das estruturas do cálculo lambda. Neste caso, funções são tratadas como elementos fundamentais e a aplicação de funções é a operação que define a computação. São tão importantes que muitos textos acadêmicos dizem que, no cálculo lambda, funções são cidadãos de primeira classe. Uma metáfora triste. Mas, consistente.
+Essa notação equivale à notação matemática clássica, porém permite controle sobre o fluxo de execução e manipulação de dados. As linguagens funcionais representam funções a partir das estruturas do cálculo lambda. Neste caso, funções são tratadas como elementos e a aplicação de funções é a operação que define a computação. São tão importantes que muitos textos acadêmicos dizem que, no cálculo lambda, funções são cidadãos de primeira classe. Uma metáfora triste. Mas, consistente.
 
 **No cálculo lambda, usamos _abstração_ e _aplicação_ para criar e aplicar funções.** Na criação de uma função que soma dois números, escrita como:
 
@@ -139,7 +139,7 @@ Estas extensões agregam funcionalidade e transformam o cálculo lambda em uma f
 
 ## Notações e Convenções
 
-O cálculo lambda utiliza uma notação específica para representar funções, variáveis, termos e operações. Abaixo estão as notações e convenções fundamentais, além de algumas expansões necessárias para a compreensão completa.
+O cálculo lambda utiliza uma notação específica para representar funções, variáveis, termos e operações. Abaixo estão as notações e convenções, além de algumas expansões necessárias para a compreensão completa.
 
 ### Símbolos Básicos
 
@@ -182,15 +182,15 @@ O cálculo lambda utiliza uma notação específica para representar funções, 
 O cálculo lambda permite incluir operações aritméticas dentro das expressões. Por exemplo:
 
 - **Adição**: $x + 1$, onde $x$ é uma variável e $+$ é a operação de soma.
-- **Multiplicação**: $x \cdot 2$, onde $\cdot$ representa a multiplicação.
+- **Multiplicação**: $x \times 2$, onde $\times$ representa a multiplicação.
 - **Potência**: $x^2$, onde o operador de potência eleva $x$ ao quadrado.
-- **Operações compostas**: exemplos incluem $x^2 + 2x + 1$ e $x \cdot y$, que seguem as regras usuais de aritmética.
+- **Operações compostas**: exemplos incluem $x^2 + 2x + 1$ e $x \times y$, que seguem as regras usuais de aritmética.
 
 ### Expansões Específicas
 
 - **Notação de Tuplas e Produtos Cartesianos**: o produto cartesiano de conjuntos pode ser representado por notações como $(A \times B) \rightarrow C$, que denota uma função que recebe um par de elementos de $A$ e $B$ e retorna um valor em $C$.
 
-- **Funções Recursivas**: funções recursivas podem ser descritas usando notação lambda. Um exemplo comum é a definição da função de fatoriais: $f = \lambda n. \, \text{if} \, n = 0 \, \text{then} \, 1 \, \text{else} \, n \cdot f(n - 1)$.
+- **Funções Recursivas**: funções recursivas podem ser descritas usando notação lambda. Um exemplo comum é a definição da função de fatoriais: $f = \lambda n. \, \text{if} \, n = 0 \, \text{then} \, 1 \, \text{else} \, n \times f(n - 1)$.
 
 ### Notações Alternativas
 
@@ -244,11 +244,11 @@ No termo original, $y$ poderia ter um valor externo fornecido de outro contexto.
 
 **2**: Escreva uma função lambda que representa uma constante, sempre retornando o número $5$, independentemente do argumento.
 
-**Solução**: a função constante pode ser representada por: $\lambda x. 5$, uma função que sempre retorna $5$, independentemente de $x$.
+**Solução**: a função constante pode ser representada por: $\lambda x. \, 5$, uma função que sempre retorna $5$, independentemente de $x$.
 
 **3**: Dado $\lambda x. \, x + 2$, aplique a função ao número $3$.
 
-**Solução**: substituímos $x$ por $3$ e teremos: $(\lambda x. \, x + 2) 3 = 3 + 2 = 5$
+**Solução**: substituímos $x$ por $3$ e teremos: $(\lambda x. \, x + 2) \, 3 = 3 + 2 = 5$
 
 **4**: Simplifique a expressão $(\lambda x. \lambda y. \, x)(5)(6)$.
 
@@ -496,7 +496,7 @@ Aqui, $FV(N)$ é o conjunto de variáveis livres de $N$. A condição $y \notin 
 
 Podemos pensar na substituição como um processo de _buscar e substituir_ em uma expressão, mas com algumas regras especiais. Lendo estas regras em bom português teríamos:
 
-- A regra 1: $[N/x]x = N$ indica que a variável $x$ será substituída pelo termo $N$. **Esta é a regra fundamental da Substituição**. De forma mais intuitiva podemos dizer que esta regra significa que se encontrarmos exatamente a variável que estamos procurando, substituímos por nosso novo termo. Por exemplo, em $[3/x]x$, substituímos $x$ por $3$.
+- A regra 1: $[N/x]x = N$ indica que a variável $x$ será substituída pelo termo $N$. **Esta é a regra estrutura da substituição**. De forma mais intuitiva podemos dizer que esta regra significa que se encontrarmos exatamente a variável que estamos procurando, substituímos por nosso novo termo. Por exemplo, em $[3/x]x$, substituímos $x$ por $3$.
 
 - A regra 2: $[N/x]y = y$, se $x \neq y$, está correta ao indicar que as variáveis que não são $x$ permanecem inalteradas. Ou seja, se durante a substituição de uma variável encontramos uma variável diferente, deixamos como está. Por exemplo: na substituição $[3/x]y$, $y$ permanece $y$
 
@@ -1018,25 +1018,23 @@ A interpretação denotacional é formalmente definida pelas seguintes regras:
 
 ### Ambiente $\rho$ e Associação de Variáveis
 
-O ambiente $\rho$ é fundamental na semântica denotacional, pois armazena as associações entre variáveis e seus valores.
+O ambiente $\rho$ armazena as associações entre variáveis e seus valores correspondentes. Especificamente, $\rho$ é uma função que, dado o nome de uma variável, retorna seu valor associado. Ao avaliarmos uma abstração, estendemos o ambiente com uma nova associação utilizando $[x \mapsto v]$.
 
-$\rho$ é uma função que, dado um nome de variável, retorna seu valor correspondente. Quando avaliamos uma abstração, estendemos o ambiente com uma nova associação usando $[x \mapsto v]$.
+**Exemplo de Atualização**:
 
-   **Exemplo de Atualização**:
+- Ambiente inicial: $\rho = \{ y \mapsto 2 \}$
 
-   - Ambiente inicial: $\rho = \{ y \mapsto 2 \}$
+- Avaliando $\lambda x.\, x + y$ com $x = 3$:
 
-   - Avaliando $\lambda x.\, x + y$ com $x = 3$:
+- Novo ambiente: $\rho' = \rho[x \mapsto 3] = \{ y \mapsto 2, x \mapsto 3 \}$
 
-   - Novo ambiente: $\rho' = \rho[x \mapsto 3] = \{ y \mapsto 2, x \mapsto 3 \}$
+- Avaliamos $x + y$ em $\rho'$:
 
-      - Avaliamos $x + y$ em $\rho'$:
-
-      $$[x + y]_{\rho'} = \rho'(x) + \rho'(y) = 3 + 2 = 5$$
+$$[x + y]_{\rho'} = \rho'(x) + \rho'(y) = 3 + 2 = 5$$
 
 A semântica denotacional facilita o entendimento do comportamento dos programas sem se preocupar com detalhes de implementação. Permite demonstrar formalmente que um programa satisfaz determinadas propriedades. Na semântica denotacional o significado de uma expressão complexa é construído a partir dos significados de suas partes.
 
-Exemplos, facilitam o entendimento e nunca são suficientes. 
+A experta leitora deve concordar que eExemplos, facilitam o entendimento e nunca temos o bastante.
 
 **Exemplo 1**: Com Variáveis Livres: considere a expressão $\lambda x.\, x + y$, onde $y$ é uma variável livre.
 
@@ -1196,25 +1194,25 @@ Finalmente, a atenta leitora pode perceber que a semântica denotacional permite
    
    $$15$$
 
-**6**: Crie uma função lambda para a multiplicação de dois números, ou seja, $f(x, y) = x \cdot y$, e aplique-a aos valores $x = 6$ e $y = 9$.
+**6**: Crie uma função lambda para a multiplicação de dois números, ou seja, $f(x, y) = x \times y$, e aplique-a aos valores $x = 6$ e $y = 9$.
 
 **Solução:**
 
 1. Definindo a função lambda:
 
-   $$f = \lambda x.\, \lambda y.\, x \cdot y$$
+   $$f = \lambda x.\, \lambda y.\, x \times y$$
 
 2. Aplicando a função aos valores $x = 6$ e $y = 9$:
 
-   $$f(6)(9) = (\lambda x.\, \lambda y.\, x \cdot y)\, 6\, 9$$
+   $$f(6)(9) = (\lambda x.\, \lambda y.\, x \times y)\, 6\, 9$$
 
 3. Primeira aplicação: aplicamos $\lambda x$ ao valor $6$:
 
-     $$f(6) = \lambda y.\, 6 \cdot y$$
+     $$f(6) = \lambda y.\, 6 \times y$$
 
 4. Segunda aplicação: aplicamos $\lambda y$ ao valor $9$:
 
-     $$f(6)(9) = 6 \cdot 9$$
+     $$f(6)(9) = 6 \times 9$$
 
 5. Calculando o resultado:
 
@@ -1235,11 +1233,11 @@ Finalmente, a atenta leitora pode perceber que a semântica denotacional permite
 
 3. Primeira aplicação: aplicamos $\lambda x$ ao valor $1$:
 
-     $$f(1) = \lambda y.\, 1^2 + 2 \cdot 1 \cdot y + y^2$$
+     $$f(1) = \lambda y.\, 1^2 + 2 \times 1 \times y + y^2$$
 
 4. Segunda aplicação: aplicamos $\lambda y$ ao valor $2$:
 
-     $$f(1)(2) = 1^2 + 2 \cdot 1 \cdot 2 + 2^2$$
+     $$f(1)(2) = 1^2 + 2 \times 1 \times 2 + 2^2$$
 
 5. Calculando o resultado:
 
@@ -1437,31 +1435,31 @@ Do ponto de vista da análise relacional, a relação $\equiv_\alpha$ é uma rel
 
    $$\lambda x. \, E \equiv_\alpha \lambda z. \, E[z/x]$$
 
-   Onde $y$ é livre em $E$. Neste caso, a variável ligada $x$ foi renomeada para $z$, mas qualquer variável livre $y$ em $E$ permanece inalterada.
+   Essa expressão indica que a abstração lambda $\lambda x. , E$ é alfa-equivalente à abstração $\lambda z. , E[z/x]$, onde a variável ligada $x$ foi substituída por $z$. Esse processo de renomeação não afeta as variáveis livres em $E$. Se em $E$ existir uma variável $y$, esta variável seria livre e não seria afetada.
 
 **Exemplo 4**: Renomeação Inválida. Considere a expressão:
 
-$$\lambda x. \lambda y. \, E$$
+   $$\lambda x. \lambda y. \, E$$
 
-Uma tentativa inválida de renomeação seria:
+   Uma tentativa inválida de renomeação seria:
 
-$$\lambda x. \lambda y. \, E \not\equiv_\alpha \lambda x. \lambda x. \, E[x/y]$$
+   $$\lambda x. \lambda y. \, E \not\equiv_\alpha \lambda x. \lambda x. \, E[x/y]$$
 
-Esta renomeação é inválida porque: **Viola a regra de captura de variáveis**: ao renomear $y$ para $x$, estamos potencialmente capturando ocorrências livres de $x$ que possam existir em $E$; **Provoca Perda de distinção**: as variáveis $x$ e $y$, que originalmente eram distintas, agora se tornaram a mesma variável, alterando potencialmente o significado da expressão; e **Altera a estrutura de escopo**: o escopo da variável $x$ externa foi efetivamente estendido para incluir o que antes era o escopo de $y$. Para ilustrar com um exemplo concreto desse problema, considere:
+   Esta renomeação é inválida porque: **Viola a regra de captura de variáveis**: ao renomear $y$ para $x$, estamos potencialmente capturando ocorrências livres de $x$ que possam existir em $E$; **Provoca Perda de distinção**: as variáveis $x$ e $y$, que originalmente eram distintas, agora se tornaram a mesma variável, alterando potencialmente o significado da expressão; e **Altera a estrutura de escopo**: o escopo da variável $x$ externa foi efetivamente estendido para incluir o que antes era o escopo de $y$. Para ilustrar com um exemplo concreto desse problema, considere:
 
-$$\lambda x. \, \lambda y. \, x + y$$
+   $$\lambda x. \, \lambda y. \, x + y$$
 
-A renomeação inválida resultaria em:
+   A renomeação inválida resultaria em:
 
-$$\lambda x. \, \lambda x. \, x + x$$
+   $$\lambda x. \, \lambda x. \, x + x$$
 
-Observe que o significado da expressão mudou. Na expressão original, $x$ e $y$ poderiam ter valores diferentes, mas na versão renomeada incorretamente, elas são forçadas a ter o mesmo valor.
+   Observe que o significado da expressão mudou. Na expressão original, $x$ e $y$ poderiam ter valores diferentes, mas na versão renomeada incorretamente, elas são forçadas a ter o mesmo valor.
 
-Uma renomeação válida seria:
+   Uma renomeação válida seria:
 
-$$\lambda x. \, \lambda y. \, x + y \equiv_\alpha \lambda x. \, \lambda z. \, x + z$$
+   $$\lambda x. \, \lambda y. \, x + y \equiv_\alpha \lambda x. \, \lambda z. \, x + z$$
 
-Aqui, renomeamos $y$ para $z$, mantendo a distinção entre as variáveis e preservando a estrutura e o significado da expressão original.
+   Aqui, renomeamos $y$ para $z$, mantendo a distinção entre as variáveis e preservando a estrutura e o significado da expressão original.
 
 #### Importância para a redução $\beta$
 
@@ -1517,11 +1515,11 @@ $$\lambda x. \, (\lambda x. \, x + 1) x \to_\alpha \lambda x. \, (\lambda z. \, 
 
 Após a redução $\alpha$ temos $x$ no escopo externo e $z$ no escopo interno. Ou seja, o $x$ após o parêntese se refere ao $x$ do escopo externo.
 
-**6**: Aplique a redução $\alpha$ na expressão $\lambda x. \lambda y. \, x \cdot y$ renomeando $x$ para $a$ e $y$ para $b$.
+**6**: Aplique a redução $\alpha$ na expressão $\lambda x. \lambda y. \, x \times y$ renomeando $x$ para $a$ e $y$ para $b$.
 
  **Solução:** Substituímos $x$ por $a$ e $y$ por $b$:
 
- $$\lambda x. \lambda y. \, x \cdot y \to_\alpha \lambda a. \lambda b. a \cdot b$$
+ $$\lambda x. \lambda y. \, x \times y \to_\alpha \lambda a. \lambda b. a \times b$$
 
 **7**: Renomeie a variável ligada $y$ na expressão $\lambda x. \, (\lambda y. \, y + x)$ para $t$.
 
@@ -1599,11 +1597,11 @@ Ambos representam a mesma função, diferindo apenas nos nomes das variáveis li
 
  $$[z/x](\lambda z. \, x + z) = \lambda z. \, z + z$$
 
-**6**: Considere a expressão $(\lambda x. \lambda y. \, x + y) (\lambda z. \, z \cdot z)$. Aplique a substituição $[(\lambda z. \, z \cdot z)/x]$ e use a convenção de Barendregt.
+**6**: Considere a expressão $(\lambda x. \lambda y. \, x + y) (\lambda z. \, z \times z)$. Aplique a substituição $[(\lambda z. \, z \times z)/x]$ e use a convenção de Barendregt.
 
  **Solução:** Aplicamos a substituição:
 
- $$[(\lambda z. \, z \cdot z)/x] (\lambda x. \lambda y. \, x + y) = \lambda y. \, (\lambda z. \, z \cdot z) + y$$
+ $$[(\lambda z. \, z \times z)/x] (\lambda x. \lambda y. \, x + y) = \lambda y. \, (\lambda z. \, z \times z) + y$$
 
  Com a convenção de Barendregt, variáveis ligadas não entram em conflito.
 
@@ -1659,11 +1657,11 @@ Ambos representam a mesma função, diferindo apenas nos nomes das variáveis li
 
  $$[y/x](\lambda z. \, x + z) = \lambda z. y + z $$
 
-**13**: Aplique a substituição $[z/x] (\lambda y. \, x \cdot y)$ onde $ z \in FV(x)$. Utilize a convenção de Barendregt.
+**13**: Aplique a substituição $[z/x] (\lambda y. \, x \times y)$ onde $ z \in FV(x)$. Utilize a convenção de Barendregt.
 
  **Solução:** Como $z$ não causa conflito de variáveis livres ou ligadas, aplicamos a substituição diretamente:
 
- $$[z/x] (\lambda y. \, x \cdot y) = \lambda y. \, z \cdot y $$
+ $$[z/x] (\lambda y. \, x \times y) = \lambda y. \, z \times y $$
 
  A convenção de Barendregt garante que não precisamos renomear variáveis.
 
@@ -1693,7 +1691,7 @@ A notação $[x/N]M$ representa a substituição de todas as ocorrências livres
 
 A substituição indicada em uma redução $\beta$ deve ser realizada com cuidado para evitar a captura de variáveis livres em $N$ que possam se tornar ligadas em $E$ após a substituição. Para evitar a captura de varáveis livres, pode ser necessário realizar uma redução $\alpha$ antes de começar a redução beta, renomeando variáveis ligadas em $E$ que possam entrar em conflito com variáveis livres em $N$, Figura 2.
 
-![](assets/images/beta.png)
+![](/assets/images/beta.png)
 _Exemplo de Redução Beta_{: legenda}
 
 Considere, por exemplo, o termo $E = (\lambda y.\, x + y)$ e o objetivo de substituir $x$ por $N = y$. Se fizermos a substituição diretamente, obteremos:
@@ -1768,17 +1766,17 @@ Assim, evitamos a captura da variável livre $y$, mantendo o significado origina
 
  Reduzindo passo a passo:
 
- $$(\lambda f.\lambda x.\, f(f \, x))(\lambda y.\, y \cdot 2)3$$
+ $$(\lambda f.\lambda x.\, f(f \, x))(\lambda y.\, y \times 2)3$$
 
- $$\to_\beta (\lambda x.(\lambda y.\, y \cdot 2)((\lambda y.\, y \cdot 2) x)) \, 3$$
+ $$\to_\beta (\lambda x.(\lambda y.\, y \times 2)((\lambda y.\, y \times 2) x)) \, 3$$
 
- $$\to_\beta (\lambda y.\, y \cdot 2)((\lambda y.\, y \cdot 2)\, 3)$$
+ $$\to_\beta (\lambda y.\, y \times 2)((\lambda y.\, y \times 2)\, 3)$$
 
- $$\to_\beta (\lambda y.\, y \cdot 2) \, (3 \cdot 2)$$
+ $$\to_\beta (\lambda y.\, y \times 2) \, (3 \times 2)$$
 
- $$\to_\beta (\lambda y.\, y \cdot 2) \, (6)$$
+ $$\to_\beta (\lambda y.\, y \times 2) \, (6)$$
 
- $$\to_\beta 6 \cdot 2$$
+ $$\to_\beta 6 \times 2$$
 
  $$= 12$$
 
@@ -1786,27 +1784,27 @@ Neste exemplo, aplicamos primeiro a função $(\lambda f.\lambda x.\, f \, (f \,
 
 ### Exercícios de redução $\beta$
 
-**1**: Aplique a redução beta na expressão $(\lambda x. \, x + 1) 5$.
+**1**: Aplique a redução beta na expressão $(\lambda x. \, x + 1) \, 5$.
 
- **Solução:** Aplicamos a substituição de $ x $ por $ 5 $ no corpo da função:
+ **Solução:** Aplicamos a substituição de $x$ por $5$ no corpo da função:
 
  $$(\lambda x. \, x + 1) 5 \to_\beta [5/x](x + 1) = 5 + 1 = 6$$
 
-**2**: Simplifique a expressão $(\lambda x. \lambda y. \, x + y) 2 3 $ utilizando a redução beta.
+**2**: Simplifique a expressão $(\lambda x. \lambda y. \, x + y) \, 2 \, 3 $ utilizando a redução beta.
 
- **Solução:** Primeiro, aplicamos $ 2 $ ao parâmetro $ x $, e depois $ 3 $ ao parâmetro $y$:
+ **Solução:** Primeiro, aplicamos $2$ ao parâmetro $x$, e depois $3$ ao parâmetro $y$:
 
- $$(\lambda x. \lambda y. \, x + y) 2 3 \to*\beta (\lambda y. \, 2 + y) 3 \to*\beta 2 + 3 = 5$$
+ $$(\lambda x. \lambda y. \, x + y) \, 2 \, 3 \to_\beta (\lambda y. \, 2 + y) \, 3 \to_\beta 2 + 3 = 5$$
 
-**3**: Aplique a redução beta na expressão $(\lambda f. \lambda x. \, f(f \, x)) (\lambda y. \, y + 1) 4$.
+**3**: Aplique a redução beta na expressão $(\lambda f. \lambda x. \, f(f \, x)) (\lambda y. \, y + 1) \, 4$.
 
- **Solução:** Primeiro aplicamos $(\lambda y. \, y + 1)$ a $ f $, e depois $ 4 $ a $ x$:
+ **Solução:** Primeiro aplicamos $(\lambda y. \, y + 1)$ a $f$, e depois $4$ a $x$:
 
-$$(\lambda f. \lambda x. \, f(f \, x)) (\lambda y. \, y + 1) 4$$
+$$(\lambda f. \lambda x. \, f(f \, x)) \, (\lambda y. \, y + 1) \, 4$$
 
-$$\to_\beta (\lambda x. \, (\lambda y. \, y + 1)( (\lambda y. \, y + 1) x)) 4$$
+$$\to_\beta (\lambda x. \, (\lambda y. \, y + 1) \, ( (\lambda y. \, y + 1) x)) \, 4$$
 
-$$\to_\beta (\lambda y. \, y + 1)( (\lambda y. \, y + 1) 4)$$
+$$\to_\beta (\lambda y. \, y + 1)((\lambda y. \, y + 1) \, 4)$$
 
 $$\to_\beta (\lambda y. \, y + 1)(4 + 1)$$
 
@@ -1814,57 +1812,57 @@ $$\to_\beta (\lambda y. \, y + 1)(5)$$
 
 $$\to_\beta 5 + 1 = 6$$
 
-**4**: Reduza a expressão $(\lambda x. \lambda y. \, x \cdot y) 3 4$ utilizando a redução beta.
+**4**: Reduza a expressão $(\lambda x. \lambda y. \, x \times y) \, 3 \, 4$ utilizando a redução beta.
 
- **Solução:** Primeiro aplicamos $ 3 $ a $ x $ e depois $4$ a $y$:
+ **Solução:** Primeiro aplicamos $3$ a $x$ e depois $4$ a $y$:
 
- $$(\lambda x. \lambda y. \, x \cdot y) 3 4 \to*\beta (\lambda y. \, 3 \cdot y) 4 \to*\beta 3 \cdot 4 = 12$$
+ $$(\lambda x. \lambda y. \, x \times y) \, 3 \, 4 \to_\beta (\lambda y. \, 3 \times y) \, 4 \to_\beta 3 \times 4 = 12$$
 
-**5**: Aplique a redução beta na expressão $(\lambda x. \lambda y. \, x - y) 10 6$.
+**5**: Aplique a redução beta na expressão $(\lambda x. \lambda y. \, x - y) \, 10 \, 6$.
 
  **Solução:** Aplicamos a função da seguinte forma:
 
- $$(\lambda x. \lambda y. \, x - y) 10 6 \to*\beta (\lambda y. \, 10 - y) 6 \to*\beta 10 - 6 = 4$$
+ $$(\lambda x. \lambda y. \, x - y) \, 10 \, 6 \to_\beta (\lambda y. \, 10 - y) \, 6 \to_\beta 10 - 6 = 4$$
 
-**6**: Reduza a expressão $(\lambda f. f(2)) (\lambda x. \, x + 3)$ utilizando a redução beta.
+**6**: Reduza a expressão $(\lambda f. \, f(2)) (\lambda x. \, x + 3)$ utilizando a redução beta.
 
  **Solução:** Primeiro aplicamos $(\lambda x. \, x + 3)$ a $f$, e depois aplicamos $2$ a $x$:
 
- $$(\lambda f. f(2)) (\lambda x. \, x + 3) \to*\beta (\lambda x. \, x + 3)(2) \to*\beta 2 + 3 = 5$$
+ $$(\lambda f. \, f(2)) (\lambda x. \, x + 3) \to_\beta (\lambda x. \, x + 3) \, (2) \to_\beta 2 + 3 = 5$$
 
-**7**: Simplifique a expressão $(\lambda f. \lambda x. \, f(x + 2)) (\lambda y. \, y \cdot 3) 4 $ utilizando a redução beta.
+**7**: Simplifique a expressão $(\lambda f. \lambda x. \, f(x + 2)) (\lambda y. \, y \times 3) \, 4 $ utilizando a redução beta.
 
- **Solução:** Primeiro aplicamos $(\lambda y. \, y \cdot 3)$ a $ f $ e depois $4$ a $x$:
+ **Solução:** Primeiro aplicamos $(\lambda y. \, y \times 3)$ a $f$ e depois $4$ a $x$:
 
-$$(\lambda f. \lambda x. \, f(x + 2)) (\lambda y. \, y \cdot 3) 4$$
+$$(\lambda f. \lambda x. \, f(x + 2)) (\lambda y. \, y \times 3) \, 4$$
 
-$$\to_\beta (\lambda x. \, (\lambda y. \, y \cdot 3)(x + 2)) 4$$
+$$\to_\beta (\lambda x. \, (\lambda y. \, y \times 3)(x + 2)) \, 4$$
 
-$$\to_\beta (\lambda y. \, y \cdot 3)(4 + 2)$$
+$$\to_\beta (\lambda y. \, y \times 3)(4 + 2)$$
 
-$$\to_\beta (6 \cdot 3) = 18$$
+$$\to_\beta (6 \times 3) = 18$$
 
-**8**: Aplique a redução beta na expressão $(\lambda x. \lambda y. \, x^2 + y^2) (3 + 1) (2 + 2)$.
+**8**: Aplique a redução beta na expressão $(\lambda x. \lambda y. \, x^2 + y^2) \, (3 + 1) \, (2 + 2)$.
 
  **Solução:** Primeiro simplificamos as expressões internas e depois aplicamos as funções:
 
-$$(\lambda x. \lambda y. \, x^2 + y^2) (3 + 1) (2 + 2)$$
+$$(\lambda x. \lambda y. \, x^2 + y^2) \, (3 + 1) \, (2 + 2)$$
 
-$$\to_\beta (\lambda x. \lambda y. \, x^2 + y^2) 4 4$$
+$$\to_\beta (\lambda x. \lambda y. \, x^2 + y^2) \, 4 \, 4$$
 
-$$\to_\beta (\lambda y. \, 4^2 + y^2) 4$$
+$$\to_\beta (\lambda y. \, 4^2 + y^2) \, 4$$
 
 $$\to_\beta 16 + 4^2 = 16 + 16 = 32$$
 
-**9**: Reduza a expressão $(\lambda f. \lambda x. \, f(f(x))) (\lambda y. \, y + 2) 3$ utilizando a redução beta.
+**9**: Reduza a expressão $(\lambda f. \lambda x. \, f(f(x))) (\lambda y. \, y + 2) \, 3$ utilizando a redução beta.
 
  **Solução:** Aplicamos a função duas vezes ao argumento:
 
-$$(\lambda f. \lambda x. \, f(f(x))) (\lambda y. \, y + 2) 3$$
+$$(\lambda f. \lambda x. \, f(f(x))) (\lambda y. \, y + 2) \, 3$$
 
-$$\to_\beta (\lambda x. \, (\lambda y. \, y + 2)( (\lambda y. \, y + 2) x)) 3$$
+$$\to_\beta (\lambda x. \, (\lambda y. \, y + 2)((\lambda y. \, y + 2) x)) \, 3$$
 
-$$\to_\beta (\lambda y. \, y + 2)( (\lambda y. \, y + 2) 3)$$
+$$\to_\beta (\lambda y. \, y + 2)((\lambda y. \, y + 2) \, 3)$$
 
 $$\to_\beta (\lambda y. \, y + 2)(3 + 2)$$
 
@@ -1872,21 +1870,21 @@ $$\to_\beta (\lambda y. \, y + 2)(5)$$
 
 $$\to_\beta 5 + 2 = 7$$
 
-**10**: Reduza a expressão $(\lambda x. \lambda y. \, x - 2 \cdot y) (6 + 2) 3$ utilizando a redução beta.
+**10**: Reduza a expressão $(\lambda x. \lambda y. \, x - 2 \times y) (6 + 2) \, 3$ utilizando a redução beta.
 
  **Solução:** Primeiro simplificamos as expressões e depois aplicamos as funções:
 
-$$(\lambda x. \lambda y. \, x - 2 \cdot y) (6 + 2) 3$$
+$$(\lambda x. \lambda y. \, x - 2 \times y) \, (6 + 2) \, 3$$
 
-$$\to_\beta (\lambda x. \lambda y. \, x - 2 \cdot y) 8 3$$
+$$\to_\beta (\lambda x. \lambda y. \, x - 2 \times y) \, 8 \, 3$$
 
-$$\to_\beta (\lambda y. \, 8 - 2 \cdot y) 3$$
+$$\to_\beta (\lambda y. \, 8 - 2 \times y) \, 3$$
 
-$$\to_\beta 8 - 2 \cdot 3 = 8 - 6 = 2$$
+$$\to_\beta 8 - 2 \times 3 = 8 - 6 = 2$$
 
 ## Redução Eta
 
-A **redução eta** é uma das três formas fundamentais de redução no cálculo lambda, juntamente com as reduções alfa e beta. A redução eta captura a ideia de extensionalidade, permitindo simplificar termos que representam a mesma função em termos de comportamento externo. Formalmente A redução eta é definida pela seguinte regra:
+A redução eta é uma das três formas de redução no cálculo lambda, juntamente com as reduções alfa e beta. A redução eta captura a ideia de extensionalidade, permitindo simplificar termos que representam a mesma função em termos de comportamento externo. Formalmente A redução eta é definida pela seguinte regra:
 
 $$\lambda x.\, f\, x \to_\eta f \quad \text{se } x \notin \text{FV}(f)$$
 
@@ -2273,7 +2271,7 @@ Em suma, a redução eta desempenha um papel importante na otimização de compi
 
 Um dos obstáculos enfrentado por Church durante o desenvolvimento do cálculo lambda dizia respeito a consistência do processo de redução. Ou seja, provar que um termo lambda mesmo que reduzido de formas diferentes, chegaria a mesma forma normal, caso esta forma existisse. Em busca desta consistência, Church e [J. Barkley Rosser](https://en.wikipedia.org/wiki/J._Barkley_Rosser), seu estudante de doutorado, formularam o teorema que viria a ser chamado de **Teorema de Church-Rosser**[^cita8]. Este teorema, também chamado de propriedade de confluência, garante a consistência e a previsibilidade do sistema de redução beta, afirmando que, **independentemente da ordem em que as reduções beta são aplicadas, o resultado final, se existir, é o mesmo** Figura 1.
 
-![](assets/images/conflu.png)
+![](/assets/images/conflu.png)
 _Diagrama da Propriedade de Confluência determinada pelo Teorema de Church-Rosser_{: legenda}
 
 Formalmente teremos:
@@ -2413,39 +2411,39 @@ O Teorema de Church-Rosser fornece uma base teórica para otimizações de compi
 **1**. Reduza o termo a seguir usando dois caminhos diferentes de redução:
 
 $$
-M = (\lambda x.\, (\lambda y.\, x \cdot y))\, 5\, 3
+M = (\lambda x.\, (\lambda y.\, x \times y))\, 5\, 3
 $$
 
 **Solução:**
 Caminho 1: aplique a primeira função:
 
 $$
-M = (\lambda x.\, (\lambda y.\, x \cdot y))\, 5\, 3$$
+M = (\lambda x.\, (\lambda y.\, x \times y))\, 5\, 3$$
 
-$$\to_\beta (\lambda y.\, 5 \cdot y)\, 3$$
+$$\to_\beta (\lambda y.\, 5 \times y)\, 3$$
 
 Agora, aplique a segunda função:
 
 $$
-\to_\beta 5 \cdot 3 = 15
+\to_\beta 5 \times 3 = 15
 $$
 
 Caminho 2: Primeiro, aplique a segunda função:
 
-$$M = (\lambda x.\, (\lambda y.\, x \cdot y))\, 5\, 3$$
+$$M = (\lambda x.\, (\lambda y.\, x \times y))\, 5\, 3$$
 
-$$\to_\beta (\lambda x.\, (\lambda y.\, x \cdot y))\, 5$$
+$$\to_\beta (\lambda x.\, (\lambda y.\, x \times y))\, 5$$
 
 Agora, aplique a primeira função:
 
 $$
-\to_\beta (\lambda y.\, 5 \cdot y)\, 3
+\to_\beta (\lambda y.\, 5 \times y)\, 3
 $$
 
 Aplique a segunda função:
 
 $$
-\to_\beta 5 \cdot 3 = 15
+\to_\beta 5 \times 3 = 15
 $$
 
 Ambos os caminhos levam à forma normal $15$.
@@ -2731,19 +2729,19 @@ Ambos os caminhos resultam na forma normal $5$.
 **10**. Considere o termo abaixo. Prove que ele satisfaz a confluência e que a forma normal é única para diferentes estratégias de redução.
 
 $$
-M = (\lambda x.\, (\lambda y.\, x + y))\, 9\, (\lambda z.\, z \cdot 2)\, 4
+M = (\lambda x.\, (\lambda y.\, x + y))\, 9\, (\lambda z.\, z \times 2)\, 4
 $$
 
 **Solução:**
 Caminho 1: aplique a função externa:
 
-$$M = (\lambda x.\, (\lambda y.\, x + y))\, 9\, (\lambda z.\, z \cdot 2)\, 4$$
+$$M = (\lambda x.\, (\lambda y.\, x + y))\, 9\, (\lambda z.\, z \times 2)\, 4$$
 
-$$\to_\beta (\lambda y.\, 9 + y)\, ((\lambda z.\, z \cdot 2)\, 4)$$
+$$\to_\beta (\lambda y.\, 9 + y)\, ((\lambda z.\, z \times 2)\, 4)$$
 
 Aplique a função interna:
 
-$$\to_\beta (\lambda y.\, 9 + y)\, (4 \cdot 2)$$
+$$\to_\beta (\lambda y.\, 9 + y)\, (4 \times 2)$$
 
 $$\to_\beta (\lambda y.\, 9 + y)\, 8$$
 
@@ -2751,13 +2749,13 @@ $$\to_\beta 9 + 8 = 17$$
 
 Caminho 2: aplique a função interna primeiro:
 
-$$M = (\lambda x.\, (\lambda y.\, x + y))\, 9\, (\lambda z.\, z \cdot 2)\, 4$$
+$$M = (\lambda x.\, (\lambda y.\, x + y))\, 9\, (\lambda z.\, z \times 2)\, 4$$
 
 $$\to_\beta (\lambda x.\, (\lambda y.\, x + y))\, 9$$
 
 Agora, aplique a função externa:
 
-$$\to_\beta (\lambda y.\, 9 + y)\, ((\lambda z.\, z \cdot 2)\, 4)$$
+$$\to_\beta (\lambda y.\, 9 + y)\, ((\lambda z.\, z \times 2)\, 4)$$
 
 $$\to_\beta (\lambda y.\, 9 + y)\, 8$$
 
@@ -2773,7 +2771,10 @@ Ambos os caminhos resultam na forma normal $17$.
 
 O conceito de **currying** vem do trabalho do matemático [Moses Schönfinkel](https://en.wikipedia.org/wiki/Moses_Sch%C3%B6nfinkel), que iniciou o estudo da lógica combinatória nos anos 1920. Mais tarde, Haskell Curry popularizou e expandiu essas ideias, dando nome à técnica. O cálculo lambda foi amplamente influenciado por esses estudos, tornando o currying uma parte essencial da programação funcional e da teoria dos tipos.
 
-Por exemplo, uma função de dois argumentos $f(x, y)$ pode ser convertida em uma sequência de funções $f'(x)(y)$. Aqui, $f'(x)$ retorna uma nova função que aceita $y$ como argumento. Assim, uma função que requer múltiplos parâmetros pode ser aplicada parcialmente, fornecendo apenas alguns argumentos de cada vez, resultando em uma nova função que espera os argumentos restantes.
+Por exemplo, uma função de dois argumentos $f(x, y)$ pode ser convertida em uma sequência de funções $f'(x)(y)$. Aqui, $f'(x)$ retorna uma nova função que aceita $y$ como argumento. Assim, uma função que requer múltiplos parâmetros pode ser aplicada parcialmente, fornecendo apenas alguns argumentos de cada vez, resultando em uma nova função que espera os argumentos restantes. Como pode ser visto na Figura 1:
+
+![](/assets/images/curry.png)
+_Diagrama mostrando o processo de currying em Cálculo lambda_{: legenda}
 
 Formalmente, o processo de **currying** pode ser descrito como um isomorfismo entre funções do tipo.
 
@@ -2831,7 +2832,7 @@ Agora, podemos aplicar o segundo argumento:
 
 $$(\lambda y. \, 3 \times y) \, 4 = 3 \times 4 = 12$$
 
-Esses exemplos ilustram como o _Currying_ é um conceito fundamental no cálculo lambda, permitindo a definição e aplicação parcial de funções. Mas, ainda não vimos tudo.
+Esses exemplos ilustram como o _Currying_ permite a definição e aplicação parcial de funções. Mas, ainda não vimos tudo.
 
 #### Exercícios Currying
 
@@ -2841,11 +2842,11 @@ Esses exemplos ilustram como o _Currying_ é um conceito fundamental no cálculo
 
  $$(\lambda x. \lambda y. \, x + y) \, 4 \, 5 = 4 + 5 = 9$$
 
-**2**: transforme a função $f(x, y, z) = x \cdot y + z$ em uma expressão lambda usando currying e aplique-a aos valores $x = 2$, $y = 3$, e $z = 4$.
+**2**: transforme a função $f(x, y, z) = x \times y + z$ em uma expressão lambda usando currying e aplique-a aos valores $x = 2$, $y = 3$, e $z = 4$.
 
- **Solução:** A função curried é $\lambda x. \lambda y. \, \lambda z. \, x \cdot y + z$. Aplicando $x = 2$, $y = 3$, e $z = 4$:
+ **Solução:** A função curried é $\lambda x. \lambda y. \, \lambda z. \, x \times y + z$. Aplicando $x = 2$, $y = 3$, e $z = 4$:
 
- $$(\lambda x. \lambda y. \, \lambda z. \, x \cdot y + z) \, 2 \, 3 \, 4 = 2 \cdot 3 + 4 = 6 + 4 = 10$$
+ $$(\lambda x. \lambda y. \, \lambda z. \, x \times y + z) \, 2 \, 3 \, 4 = 2 \times 3 + 4 = 6 + 4 = 10$$
 
 **3**: crie uma função curried que representa $f(x, y) = x^2 + y^2$. Aplique a função a $x = 1$ e $y = 2$.
 
@@ -2865,11 +2866,11 @@ Esses exemplos ilustram como o _Currying_ é um conceito fundamental no cálculo
 
  $$(\lambda x. \lambda y. \, x - y) \, 8 \, 6 = 8 - 6 = 2$$
 
-**6**: crie uma função curried para calcular a área de um retângulo, ou seja, $f(l, w) = l \cdot w$, e aplique-a aos valores $l = 7$ e $w = 5$.
+**6**: crie uma função curried para calcular a área de um retângulo, ou seja, $f(l, w) = l \times w$, e aplique-a aos valores $l = 7$ e $w = 5$.
 
- **Solução:** A função curried é $\lambda l. \lambda w. l \cdot w$. Aplicando $l = 7$ e $w = 5$:
+ **Solução:** A função curried é $\lambda l. \lambda w. l \times w$. Aplicando $l = 7$ e $w = 5$:
 
- $$(\lambda l. \lambda w. l \cdot w) \, 7 \, 5 = 7 \cdot 5 = 35$$
+ $$(\lambda l. \lambda w. l \times w) \, 7 \, 5 = 7 \times 5 = 35$$
 
 **7**: transforme a função $f(x, y) = x^y$(potência) em uma expressão lambda usando currying e aplique-a aos valores $x = 2$ e $y = 3$.
 
@@ -2877,17 +2878,17 @@ Esses exemplos ilustram como o _Currying_ é um conceito fundamental no cálculo
 
  $$(\lambda x. \lambda y. \, x^y) \, 2 \, 3 = 2^3 = 8$$
 
-**8**: defina uma função curried que represente a multiplicação de três números, ou seja, $f(x, y, z) = x \cdot y \cdot z$, e aplique-a aos valores $x = 2$, $y = 3$, e $z = 4$.
+**8**: defina uma função curried que represente a multiplicação de três números, ou seja, $f(x, y, z) = x \times y \times z$, e aplique-a aos valores $x = 2$, $y = 3$, e $z = 4$.
 
- **Solução:** A função curried é $\lambda x. \lambda y. \, \lambda z. \, x \cdot y \cdot z$. Aplicando $x = 2$, $y = 3$, e $z = 4$:
+ **Solução:** A função curried é $\lambda x. \lambda y. \, \lambda z. \, x \times y \times z$. Aplicando $x = 2$, $y = 3$, e $z = 4$:
 
- $$(\lambda x. \lambda y. \, \lambda z. \, x \cdot y \cdot z) \, 2 \, 3 \, 4 = 2 \cdot 3 \cdot 4 = 24$$
+ $$(\lambda x. \lambda y. \, \lambda z. \, x \times y \times z) \, 2 \, 3 \, 4 = 2 \times 3 \times 4 = 24$$
 
 **9**: transforme a função $f(x, y) = x + 2y$ em uma expressão lambda curried e aplique-a aos valores $x = 1$ e $y = 4$.
 
  **Solução:** A função curried é $\lambda x. \lambda y. \, x + 2y$. Aplicando $x = 1 $ e $ y = 4$:
 
- $$(\lambda x. \lambda y. \, x + 2y) \, 1 \, 4 = 1 + 2 \cdot 4 = 1 + 8 = 9$$
+ $$(\lambda x. \lambda y. \, x + 2y) \, 1 \, 4 = 1 + 2 \times 4 = 1 + 8 = 9$$
 
 **10**: crie uma função curried para representar a soma de três números, ou seja, $f(x, y, z) = x + y + z$, e aplique-a aos valores $x = 3$, $y = 5$, e $z = 7$.
 
@@ -2895,7 +2896,7 @@ Esses exemplos ilustram como o _Currying_ é um conceito fundamental no cálculo
 
  $$(\lambda x. \lambda y. \, \lambda z. \, x + y + z) \, 3 \, 5 \, 7 = 3 + 5 + 7 = 15$$
 
-A redução beta é o mecanismo fundamental de computação no cálculo lambda, permitindo a simplificação de expressões através da aplicação de funções a seus argumentos.
+A redução beta é o mecanismo de computação no cálculo lambda, permitindo a simplificação de expressões através da aplicação de funções a seus argumentos.
 
 Formalmente, a redução beta é definida como:
 
@@ -2921,17 +2922,17 @@ Agora, um exemplo mais complexo envolvendo uma função de ordem superior:
 
  Reduzindo passo a passo:
 
- $$(\lambda f.\lambda x.\, f(f \, x))(\lambda y.\, y \cdot 2)3$$
+ $$(\lambda f.\lambda x.\, f(f \, x))(\lambda y.\, y \times 2)3$$
 
- $$\to_\beta (\lambda x.(\lambda y.\, y \cdot 2)((\lambda y.\, y \cdot 2) x)) \, 3$$
+ $$\to_\beta (\lambda x.(\lambda y.\, y \times 2)((\lambda y.\, y \times 2) x)) \, 3$$
 
- $$\to_\beta (\lambda y.\, y \cdot 2)((\lambda y.\, y \cdot 2)\, 3)$$
+ $$\to_\beta (\lambda y.\, y \times 2)((\lambda y.\, y \times 2)\, 3)$$
 
- $$\to_\beta (\lambda y.\, y \cdot 2) \, (3 \cdot 2)$$
+ $$\to_\beta (\lambda y.\, y \times 2) \, (3 \times 2)$$
 
- $$\to_\beta (\lambda y.\, y \cdot 2) \, (6)$$
+ $$\to_\beta (\lambda y.\, y \times 2) \, (6)$$
 
- $$\to_\beta 6 \cdot 2$$
+ $$\to_\beta 6 \times 2$$
 
  $$= 12$$
 
@@ -2978,7 +2979,7 @@ Os combinadores também tem origem no trabalho de [Moses Schönfinkel](https://e
 
 Schönfinkel também tinha combinadores que representavam operações lógicas, um para o [traço de Sheffer](https://en.wikipedia.org/wiki/Sheffer_stroke)(NAND), descoberto em 1913, e outro para a quantificação, porém, nenhum dos dois interessa neste momento. Contudo, Lembre-se de que qualquer circuito booleano pode ser construído apenas com portas NAND. Schönfinkel buscou, de maneira análoga, reduzir a lógica de predicados ao menor número possível de elementos, e, anos mais tarde, descobriu-se que os quantificadores "para todo" e "existe" da lógica de predicados se comportam como abstrações lambda.
 
-Para nós, neste momento, um combinador é uma _expressão lambda_ fechada, ou seja, sem variáveis livres. Isso significa que todas as variáveis usadas no combinador estão ligadas dentro da própria expressão. Combinadores são elementos fundamentais da teoria do cálculo lambda, eles permitem criar funções complexas usando apenas blocos simples, sem a necessidade de referenciar variáveis externas.
+Para nós, neste momento, um combinador é uma _expressão lambda_ fechada, ou seja, sem variáveis livres. Isso significa que todas as variáveis usadas no combinador estão ligadas dentro da própria expressão. Combinadores permitem criar funções complexas usando apenas blocos simples, sem a necessidade de referenciar variáveis externas.
 
 Começamos com o combinador $K$, definido como:
 
@@ -2990,7 +2991,7 @@ Por exemplo, $KAB$ reduz para $A$, sem considerar o valor de $B$:
 
 $$KAB = (\lambda x.\lambda y.x)AB \rightarrow_\beta (\lambda y.A)B \rightarrow_\beta A$$
 
-Existem três combinadores considerados como fundamentais na construção de funções no cálculo lambda:
+Os três combinadores, a seguir, são referenciados como básicos e estruturais para a definição de funções compostas em cálculo lambda:
 
 1.**Combinador I (Identidade)**:
 
@@ -3116,16 +3117,16 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
  Este processo gera uma recursão infinita, pois a função continua chamando a si mesma.
 
-**2**: Aplique o combinador $Y$ à função $f(x) = x \cdot 2$ e calcule as duas primeiras iterações do ponto fixo.
+**2**: Aplique o combinador $Y$ à função $f(x) = x \times 2$ e calcule as duas primeiras iterações do ponto fixo.
 
- **Solução:** Aplicando o combinador $Y$ a $f(x) = x \cdot 2$:
+ **Solução:** Aplicando o combinador $Y$ a $f(x) = x \times 2$:
 
- $$Y (\lambda x. \, x \cdot 2)$$
+ $$Y (\lambda x. \, x \times 2)$$
 
  As duas primeiras iterações seriam:
 
  $$x_1 = 2$$
- $$x_2 = 2 \cdot 2 = 4$$
+ $$x_2 = 2 \times 2 = 4$$
 
 **3**: Mostre como o combinador $ Y $ pode ser aplicado para encontrar o ponto fixo da função $ f(x) = x^2 - 1 $.
 
@@ -3139,13 +3140,13 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
  **Solução:** A função fatorial pode ser definida como:
 
- $$ f = \lambda f. \lambda n. \, (n = 0 ? 1 : n \cdot f \, (n-1))$$
+ $$ f = \lambda f. \lambda n. \, (n = 0 ? 1 : n \times f \, (n-1))$$
 
  Aplicando o combinador $ Y $:
 
- $$ Y(f) = \lambda n. \, (n = 0 ? 1 : n \cdot Y \, (f) \, (n-1))$$
+ $$ Y(f) = \lambda n. \, (n = 0 ? 1 : n \times Y \, (f) \, (n-1))$$
 
- Agora podemos calcular o fatorial de um número, como $ 3! = 3 \cdot 2 \cdot 1 = 6 $.
+ Agora podemos calcular o fatorial de um número, como $ 3! = 3 \times 2 \times 1 = 6 $.
 
 **5**: Utilize o combinador $ Y $ para definir uma função recursiva que calcula a sequência de Fibonacci.
 
@@ -3225,7 +3226,7 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
  Agora, substituímos e aplicamos as funções a $4$:
 
- $$(\lambda z. \, z^2) 4 ((\lambda z. \, z + 1) 4) \rightarrow_\beta 4^2 \, (4 + 1) = 16 \cdot 5 = 80 $$
+ $$(\lambda z. \, z^2) 4 ((\lambda z. \, z + 1) 4) \rightarrow_\beta 4^2 \, (4 + 1) = 16 \times 5 = 80 $$
 
 **14**: Aplique o combinador identidade $I$ a uma função anônima $\lambda y. \, y + 2$ e explique o resultado.
 
@@ -3241,13 +3242,13 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
  $$ K \, (I \, 7) \, 9 = K \, 7 \, 9 = (\lambda x. \lambda y. \, x) \, 7 \, 9 \rightarrow*\beta (\lambda y. \, 7) \, 9 \rightarrow*\beta 7 $$
 
-**16**: Aplique o combinador $K$ à função $\lambda z. \, z \cdot z $ e o valor $5$. O que ocorre?
+**16**: Aplique o combinador $K$ à função $\lambda z. \, z \times z $ e o valor $5$. O que ocorre?
 
  **Solução:** Aplicamos o combinador $K$ à função e ao valor:
 
- $$ K \, (\lambda z. \, z \cdot z) \, 5 = (\lambda x. \lambda y. \, x) \, (\lambda z. \, z \cdot z) \, 5 \rightarrow*\beta (\lambda y. \, \lambda z. \, z \cdot z) 5 \rightarrow*\beta \lambda z. \, z \cdot z $$
+ $$ K \, (\lambda z. \, z \times z) \, 5 = (\lambda x. \lambda y. \, x) \, (\lambda z. \, z \times z) \, 5 \rightarrow*\beta (\lambda y. \, \lambda z. \, z \times z) 5 \rightarrow*\beta \lambda z. \, z \times z $$
 
- O combinador $K$ descarta o segundo argumento, retornando a função original $\lambda z. \, z \cdot z$.
+ O combinador $K$ descarta o segundo argumento, retornando a função original $\lambda z. \, z \times z$.
 
 **17**: Construa uma função anônima que soma dois números sem usar nomes de variáveis explícitas, apenas usando combinadores $ S $ e $ K $.
 
@@ -3340,24 +3341,24 @@ No contexto do cálculo lambda e linguagens de programação, existem duas princ
 
  $$(\lambda x. \, x + 1) (2 + 3) \rightarrow (2 + 3) + 1 \rightarrow 5 + 1 \rightarrow 6 $$
 
-**3**: A expressão $(\lambda x. \, x \cdot x) ((2 + 3) + 1)$ é dada. Avalie-a usando a **avaliação por valor**.
+**3**: A expressão $(\lambda x. \, x \times x) ((2 + 3) + 1)$ é dada. Avalie-a usando a **avaliação por valor**.
 
 **Solução:** Primeiro, avaliamos o argumento:
 
  $$(2 + 3) + 1 \rightarrow 5 + 1 \to 6 $$
  Agora, aplicamos a função:
 
- $$(\lambda x. \, x \cdot x) 6 \rightarrow 6 \cdot 6 \to 36 $$
+ $$(\lambda x. \, x \times x) 6 \rightarrow 6 \times 6 \to 36 $$
 
-**4**: Aplique a **avaliação por nome** na expressão $(\lambda x. \, x \cdot x) ((2 + 3) + 1)$ e explique cada passo.
+**4**: Aplique a **avaliação por nome** na expressão $(\lambda x. \, x \times x) ((2 + 3) + 1)$ e explique cada passo.
 
 **Solução:** Usando avaliação por nome, o argumento não é avaliado imediatamente:
 
- $$(\lambda x. \, x \cdot x) ((2 + 3) + 1) \rightarrow ((2 + 3) + 1) \cdot ((2 + 3) + 1)$$
+ $$(\lambda x. \, x \times x) ((2 + 3) + 1) \rightarrow ((2 + 3) + 1) \times ((2 + 3) + 1)$$
 
  Agora, avaliamos o argumento quando necessário:
 
- $$(5 + 1) \cdot (5 + 1) \to 6 \cdot 6 \to 36 $$
+ $$(5 + 1) \times (5 + 1) \to 6 \times 6 \to 36 $$
 
 **5**: Considere a expressão $(\lambda x. \, x + 1) ( (\lambda y. \, y + 2) 3)$. Avalie-a usando a **ordem aplicativa de redução** (avaliação por valor).
 
@@ -3883,7 +3884,7 @@ A escolha entre ordem aplicativa e ordem normal depende do contexto e das necess
 
  A expressão entra em uma recursão infinita.
 
-**8**: Reduza a expressão $(\lambda x. \, x \cdot 2) ((\lambda z. \, z + 3) 4)$ usando ordem aplicativa.
+**8**: Reduza a expressão $(\lambda x. \, x \times 2) ((\lambda z. \, z + 3) 4)$ usando ordem aplicativa.
 
 **Solução:**
  Primeiro, o argumento $(\lambda z. \, z + 3) 4 $ é avaliado:
@@ -3892,7 +3893,7 @@ A escolha entre ordem aplicativa e ordem normal depende do contexto e das necess
 
  Agora aplicamos a função:
 
- $$(\lambda x. \, x \cdot 2) 7 \rightarrow_\beta 7 \cdot 2 \to 14 $$
+ $$(\lambda x. \, x \times 2) 7 \rightarrow_\beta 7 \times 2 \to 14 $$
 
 **9**: Considere a expressão $(\lambda x. \, x + 1) (\lambda y. \, y + 2)$. Avalie-a usando ordem aplicativa e explique o resultado.
 
@@ -4026,7 +4027,7 @@ Dois termos lambda $M$ e $N$ são considerados equivalentes, denotado por $M\to_
 
 >Extensionalidade refere-se ao princípio de que objetos ou funções são iguais se têm o mesmo efeito em todos os contextos possíveis. Em lógica, duas funções são consideradas extensionais se, para todo argumento, elas produzem o mesmo resultado. Em linguística, extensionalidade se refere a expressões cujo significado é determinado exclusivamente por seu valor de referência, sem levar em conta contexto ou conotação.
 
-Formalmente, a relação $\to_\beta$ é a menor relação de equivalência que satisfaz as seguintes propriedades fundamentais:
+Formalmente, a relação $\to_\beta$ é a menor relação de equivalência que satisfaz as seguintes propriedades:
 
 1. **redução $\beta$**: $(\lambda x. \, M)N \to_\beta M[N/x]$
 
@@ -4048,7 +4049,7 @@ Formalmente, a relação $\to_\beta$ é a menor relação de equivalência que s
 
 A relação $\to_\beta$ é uma **relação de equivalência**, o que significa que ela possui três propriedades: é uma relação **Reflexiva**. Ou seja, para todo termo $M$, temos que $M\to_\beta M$. O que significa que qualquer termo é equivalente a si mesmo, o que é esperado; é uma relação **Simétrica**. Isso significa que se $M\to_\beta N$, então $N\to_\beta M$. Se um termo $M$ pode ser transformado em $N$, então o oposto também é verdade. \, E, finalmente, é uma relação **Transitiva**. Neste caso, se $M\to_\beta N$ e $N\to_\beta P$, então $M\to_\beta P$. Isso implica que, se podemos transformar $M$ em $N$ e $N$ em $P$, então podemos transformar diretamente $M$ em $P$.
 
-A equivalência $\to_\beta$ é fundamental para o raciocínio sobre programas em linguagens funcionais, permitindo substituições e otimizações que preservam o significado computacional. As propriedades da equivalência $\to_\beta$ garantem que podemos substituir termos equivalentes em qualquer contexto, sem alterar o significado ou o resultado da computação. Em termos de linguagens de programação, isso permite otimizações e refatorações que preservam a correção do programa.
+A equivalência $\to_\beta$ influencia o raciocínio sobre programas em linguagens funcionais, permitindo substituições e otimizações que preservam o significado computacional. As propriedades da equivalência $\to_\beta$ garantem que podemos substituir termos equivalentes em qualquer contexto, sem alterar o significado ou o resultado da computação. Em termos de linguagens de programação, isso permite otimizações e refatorações que preservam a correção do programa.
 
 Neste ponto, a leitora deve estar ansiosa para ver alguns exemplos de equivalência.
 
@@ -4166,10 +4167,10 @@ Formalmente:
 
 $$
 \begin{align*}
-&\text{1. } (\lambda x. \, M) \, N\to*\beta M \, [N/x] \text{ (redução $\beta$)} \\
-&\text{2. } \lambda x. \, Mx\to*\beta M, \text{ se $x$ não ocorre livre em $M$($\eta$-redução)} \\
-&\text{3. Se } M\to*\beta M' \text{, então } \lambda x. \, M\to*\beta \lambda x. \, M' \text{ (compatibilidade com abstração)} \\
-&\text{4. Se } M\to*\beta M' \text{ e } N\to*\beta N' \text{, então } M \, N\to_\beta M' \, N' \text{ (compatibilidade com aplicação)}
+&\text{1. } (\lambda x. \, M) \, N\to_\beta M \, [N/x] \text{ (redução $\beta$)} \\
+&\text{2. } \lambda x. \, Mx\to_\beta M, \text{ se $x$ não ocorre livre em $M$($\eta$-redução)} \\
+&\text{3. Se } M\to_\beta M' \text{, então } \lambda x. \, M\to_\beta \lambda x. \, M' \text{ (compatibilidade com abstração)} \\
+&\text{4. Se } M\to_\beta M' \text{ e } N\to_\beta N' \text{, então } M \, N\to_\beta M' \, N' \text{ (compatibilidade com aplicação)}
 \end{align*}
 $$
 
@@ -4688,13 +4689,13 @@ Os números de Church mostram como o cálculo lambda pode codificar dados comple
 
 ## Lógica Proposicional no Cálculo Lambda
 
-O cálculo lambda oferece uma representação formal para lógica proposicional, similar aos números de Church para os números naturais. Ele pode codificar valores de verdade e operações lógicas como funções. Essa abordagem permite que operações booleanas sejam realizadas através de expressões funcionais. Neste caso, os dois valores de verdade fundamentais, _True_ (Verdadeiro) e _False_ (Falso), podem ser representados da seguinte maneira:
+O cálculo lambda oferece uma representação formal para lógica proposicional, similar aos números de Church para os números naturais. Ele pode codificar valores de verdade e operações lógicas como funções. Essa abordagem permite que operações booleanas sejam realizadas através de expressões funcionais. Neste caso, os dois valores de verdade, _True_ (Verdadeiro) e _False_ (Falso), podem ser representados da seguinte maneira:
 
 - **True**: $\text{True} = \lambda x. \lambda y. \, x$
 
 - **False**: $\text{False} = \lambda x. \lambda y. \, y$
 
-Aqui, _True_ é uma função que quando aplicada a dois argumentos, retorna o primeiro, enquanto _False_ retorna o segundo. Estes são os fundamentos sobre os quais todas as operações lógicas podem ser construídas. Podemos começar com as operações fundamentais da lógica proposicional: negação (Not), conjunção (And), disjunção (Or), disjunção exclusiva (Xor) e condicional (If-Then-Else).
+Aqui, _True_ é uma função que quando aplicada a dois argumentos, retorna o primeiro, enquanto _False_ retorna o segundo. Estes são os fundamentos sobre os quais todas as operações lógicas podem ser construídas. Podemos começar com as operações estruturais da lógica proposicional: negação (Not), conjunção (And), disjunção (Or), disjunção exclusiva (Xor) e condicional (If-Then-Else).
 
 A operação de **negação**, que inverte o valor de uma proposição, pode ser definida como:
 
@@ -4846,7 +4847,7 @@ Como resultado, a expressão retorna _False_, como esperado.
 No cálculo lambda, uma linguagem puramente funcional, não há uma forma direta de definir funções recursivas. Isso acontece porque, ao tentar criar uma função que se refere a si mesma, como o fatorial, acabamos com uma definição circular que o cálculo lambda puro não consegue resolver. Uma tentativa ingênua de definir o fatorial seria:
 
 $$
-\text{fac} = \lambda n.\, \text{if } (n = 0) \, \text{then } 1 \, \text{else } n \cdot (\text{fac} \, (n - 1))
+\text{fac} = \lambda n.\, \text{if } (n = 0) \, \text{then } 1 \, \text{else } n \times (\text{fac} \, (n - 1))
 $$
 
 Aqui, $\text{fac}$ aparece nos dois lados da equação, criando uma dependência circular. No cálculo lambda puro, não existem nomes ou atribuições; tudo se baseia em funções anônimas. _Portanto, não é possível referenciar $\text{fac}$ dentro de sua própria definição._
@@ -4859,7 +4860,7 @@ No cálculo lambda, todas as funções são anônimas. Não existem variáveis g
 Não há um mecanismo para definir uma função que possa se referenciar diretamente. Na definição:
 
 $$
-\text{fac} = \lambda n.\, \text{if } (n = 0) \, \text{then } 1 \, \text{else } n \cdot (\text{fac} \, (n - 1))
+\text{fac} = \lambda n.\, \text{if } (n = 0) \, \text{then } 1 \, \text{else } n \times (\text{fac} \, (n - 1))
 $$
 
 queremos que $\text{fac}$ possa chamar a si mesma. Mas no cálculo lambda puro:
@@ -4956,7 +4957,7 @@ Aqui, utilizamos funções auxiliares como $\text{isZero}$, $\text{mult}$(multip
 1. **Defina uma função auxiliar que recebe como parâmetro a função recursiva**:
 
    $$
-   \text{Fac} = \lambda f.\, \lambda n.\, \text{if } (n = 0) \, \text{then } 1 \, \text{else } n \cdot (f\, (n - 1))
+   \text{Fac} = \lambda f.\, \lambda n.\, \text{if } (n = 0) \, \text{then } 1 \, \text{else } n \times (f\, (n - 1))
    $$
 
    Aqui, $\text{Fac}$ é uma função que, dado um função $f$, retorna outra função que calcula o fatorial usando $f$ para a chamada recursiva.
@@ -5247,7 +5248,7 @@ $$
 P(x_1, x_2, \dots, x_n) = 0
 $$
 
->Os problemas de Hilbert são uma lista de 23 problemas matemáticos propostos por David Hilbert em 1900, durante o Congresso Internacional de Matemáticos em Paris. Esses problemas abordam questões fundamentais em várias áreas da matemática e estimularam muitas descobertas ao longo do século XX. Cada problema visava impulsionar a pesquisa e delinear os desafios mais importantes da matemática da época. Alguns dos problemas foram resolvidos, enquanto outros permanecem abertos ou foram provados como indecidíveis, como o **décimo problema de Hilbert**, que pergunta se existe um algoritmo capaz de determinar se um polinômio com coeficientes inteiros possui soluções inteiras.
+>Os problemas de Hilbert são uma lista de 23 problemas matemáticos propostos por David Hilbert em 1900, durante o Congresso Internacional de Matemáticos em Paris. Esses problemas abordam questões em várias áreas da matemática e estimularam muitas descobertas ao longo do século XX. Cada problema visava impulsionar a pesquisa e delinear os desafios mais importantes da matemática da época. Alguns dos problemas foram resolvidos, enquanto outros permanecem abertos ou foram provados como indecidíveis, como o **décimo problema de Hilbert**, que pergunta se existe um algoritmo capaz de determinar se um polinômio com coeficientes inteiros possui soluções inteiras.
 
 Em 1970, [Yuri Matiyasevich](Yuri Matiyasevich), em colaboração com [Julia Robinson](https://en.wikipedia.org/wiki/Julia_Robinson), [Martin Davis](<https://en.wikipedia.org/wiki/Martin_Davis_(mathematician)>) e [Hilary Putnam](https://en.wikipedia.org/wiki/Hilary_Putnam), provou que tal algoritmo não existe. Esse resultado teve implicações profundas na teoria dos números e demonstrou a indecidibilidade de um problema central na matemática.
 
@@ -5265,25 +5266,23 @@ Essa correspondência deu origem ao paradigma das _provas como programas_.
 
 O cálculo lambda define computações e serve como uma linguagem para representar e verificar a correção de algoritmos. Esse conceito se expandiu na pesquisa moderna e fundamenta muitos assistentes de prova e linguagens de programação com sistemas de tipos avançados, como o **Sistema F** e o **Cálculo de Construções**.
 
->O **Sistema F**, também conhecido como cálculo lambda polimórfico de segunda ordem, é uma extensão do cálculo lambda que permite quantificação universal sobre tipos. Desenvolvido por [Jean-Yves Girard](https://en.wikipedia.org/wiki/Jean-Yves_Girard) e [John Reynolds](https://en.wikipedia.org/wiki/John_C._Reynolds) de forma independente, o Sistema F é fundamental para a teoria da tipagem em linguagens de programação, permitindo expressar abstrações mais poderosas, como tipos genéricos e polimorfismo paramétrico. Ele serve como uma base para a formalização de muitos sistemas de tipos usados em linguagens funcionais modernas.
->
->O **Cálculo de Construções** é um sistema formal que combina elementos do cálculo lambda e da teoria dos tipos para fornecer uma base para a lógica construtiva. Ele foi desenvolvido por [Thierry Coquand](https://en.wikipedia.org/wiki/Thierry_Coquand) e é uma extensão do Sistema F, com a capacidade de definir tipos dependentes e níveis mais complexos de abstração. O cálculo de construções é a base da linguagem **Coq**, um assistente de prova amplamente utilizado para formalizar demonstrações matemáticas e desenvolver software verificado.
+>O **Sistema F**, também conhecido como cálculo lambda polimórfico de segunda ordem, é uma extensão do cálculo lambda que permite quantificação universal sobre tipos. Desenvolvido por [Jean-Yves Girard](https://en.wikipedia.org/wiki/Jean-Yves_Girard) e [John Reynolds](https://en.wikipedia.org/wiki/John_C._Reynolds) de forma independente. 
 
-O cálculo lambda continua a influenciar a ciência da computação. O desenvolvimento do cálculo lambda tipado levou à criação de sistemas de tipos complexos, fundamentais para a verificação formal de software e para linguagens de programação modernas, como Haskell, Coq e Agda. Esses sistemas garantem propriedades de programas, como segurança e correção, utilizando princípios do cálculo lambda.
+O **Sistema F** é utilizado na teoria da tipagem em linguagens de programação, permitindo expressar abstrações mais poderosas, como tipos genéricos e polimorfismo paramétrico. Servindo como base para a formalização de alguns sistemas de tipos usados em linguagens funcionais modernas.
 
-O cálculo lambda não é apenas um conceito teórico abstrato; ele possui implicações práticas, especialmente na programação funcional. Ele é o alicerce teórico sobre o qual muitas linguagens de programação funcional se apoiam. Linguagens como Lisp, Haskell, OCaml e F# incorporam princípios do cálculo lambda. Exemplos incluem:
+>O **Cálculo de Construções** é um sistema formal que combina elementos do cálculo lambda e da teoria dos tipos para fornecer uma base para a lógica construtiva. Ele foi desenvolvido por [Thierry Coquand](https://en.wikipedia.org/wiki/Thierry_Coquand) e é uma extensão do **Sistema F**, com a capacidade de definir tipos dependentes e níveis mais complexos de abstração. O cálculo de construções é a base da linguagem **Coq**, um assistente de prova utilizado para formalizar demonstrações matemáticas e desenvolver software verificado.
 
-1. **Funções como cidadãos de primeira classe**: No cálculo lambda, funções são valores. Podem ser passadas como argumentos, retornadas como resultados e manipuladas livremente. Isso é um princípio central da programação funcional.
+A atenta leitora deve ter percebido que o cálculo lambda não é apenas um conceito teórico abstrato; ele possui implicações práticas, especialmente na programação funcional. Linguagens como Lisp, Haskell, OCaml e F# incorporam princípios do cálculo lambda. Exemplos incluem:
 
-2. **Funções de ordem superior**: O cálculo lambda permite a criação de funções que operam sobre outras funções. Isso se traduz em conceitos como `map`, `filter` e `reduce` em linguagens funcionais.
+1. **Funções como cidadãos de primeira classe**: No cálculo lambda, funções são valores. Podem ser passadas como argumentos, retornadas como resultados e manipuladas livremente. Isso é um princípio central da programação funcional, notadamente em Haskell.
 
-3. **Currying**: A técnica de transformar uma função com múltiplos argumentos em uma sequência de funções de um único argumento é natural no cálculo lambda.
+2. **Funções de ordem superior**: O cálculo lambda permite a criação de funções que operam sobre outras funções. Isso se traduz em conceitos aplicados em funções como `map`, `filter` e `reduce` em linguagens funcionais.
 
-4. **Avaliação preguiçosa (_lazy_)**: Embora não faça parte do cálculo lambda puro, a semântica de redução do cálculo lambda inspirou o conceito de avaliação preguiçosa em linguagens como Haskell.
+3. **Currying**: A técnica de transformar uma função com múltiplos argumentos em uma sequência de funções de um único argumento é natural no cálculo lambda e no Haskell e em outras linguagens funcionais.
+
+4. **Avaliação preguiçosa (_lazy_)**: Embora não faça parte do cálculo lambda puro, a semântica de redução do cálculo lambda, notadamente a estratégia de redução normal inspirou o conceito de avaliação preguiçosa em linguagens como Haskell.
 
 5. **Recursão**: Definir funções recursivas é essencial em programação funcional. No cálculo lambda, isso é feito com combinadores de ponto fixo.
-
-A correspondência [Curry-Howard](https://groups.seas.harvard.edu/courses/cs152/2021sp/lectures/lec15-curryhoward.pdf), também conhecida como **isomorfismo proposições-como-tipos**, estabelece uma relação entre sistemas de tipos em linguagens de programação e sistemas lógicos. Especificamente, ela indica que programas correspondem a provas, tipos correspondem a proposições lógicas e a avaliação de programas corresponde à simplificação de provas. Isso fornece uma base teórica para a relação entre programação e lógica matemática, influenciando o desenvolvimento de linguagens de programação e sistemas de prova formais.
 
 # Estruturas de Dados Compostas
 
@@ -5575,7 +5574,7 @@ Haskell implementa diretamente muitos conceitos do cálculo lambda. Vejamos algu
    print (incrementar 4) -- Saída: 5
    ```
 
-4. Funções de Ordem Superior: Haskell suporta funções de ordem superior, um conceito fundamental do cálculo lambda:
+4. Funções de Ordem Superior: Haskell suporta funções de ordem superior, um dos conceitos do cálculo lambda:
 
    ```haskell
    -- map é uma função de ordem superior
@@ -5674,13 +5673,13 @@ O problema era análogo aos paradoxos que surgiram na teoria dos conjuntos ingê
 
 A ideia central da **Teoria dos Tipos Simples** é organizar as expressões lambda em uma hierarquia de tipos que impõe restrições sobre a formação de termos. Isso garante que termos paradoxais, como $\omega$, sejam automaticamente excluídos. A estrutura básica da teoria é composta por:
 
-1. **Tipos Base**: Esses são os tipos fundamentais, como $\text{Bool}$ para valores booleanos e $\text{Nat}$ para números naturais. Esses tipos representam os elementos básicos manipulados pelo sistema.
+1. **Tipos Base**: Esses são os tipos diretamente relacionados com o hardware, como $\text{Bool}$ para valores booleanos e $\text{Nat}$ para números naturais. Esses tipos representam os elementos básicos manipulados pelo sistema.
 
 2. **Tipos de Função**: Se $A$ e $B$ são tipos, então $A \rightarrow B$ representa uma função que recebe um valor do tipo $A$ e retorna um valor do tipo $B$. Esta construção é crucial para definir funções no cálculo lambda tipado.
 
 3. **Hierarquia de Tipos**: Os tipos formam uma hierarquia estrita. Tipos base estão na camada inferior, enquanto os tipos de função, que podem tomar funções como argumentos e retornar funções como resultados, estão em níveis superiores. Isso evita que funções sejam aplicadas a si mesmas de maneira paradoxal, como em $\lambda x . \, x \, x$.
 
-O **sistema de tipos** no cálculo lambda tipado simples é definido por um conjunto de regras que especificam como os tipos podem ser atribuídos aos termos. Essas regras garantem que as expressões sejam consistentes e bem formadas. As três regras fundamentais são:
+O **sistema de tipos** no cálculo lambda tipado simples é definido por um conjunto de regras que especificam como os tipos podem ser atribuídos aos termos. Essas regras garantem que as expressões sejam consistentes e bem formadas. Estas regras são:
 
 - **Regra da Variável**: Se uma variável $x$ tem o tipo $A$ no contexto $\Gamma$, então ela é bem tipada:
 
@@ -5815,7 +5814,7 @@ As noções de variáveis livres e ligadas e redução $\alpha$ são definidas c
 
 ## Sintaxe do Cálculo Lambda Tipado
 
-O cálculo lambda tipado estende o cálculo lambda não tipado, adicionando uma estrutura de tipos que restringe a formação e a aplicação de funções. Essa extensão preserva os princípios fundamentais do cálculo lambda, mas introduz um sistema de tipos que promove maior consistência e evita paradoxos lógicos. Enquanto no cálculo lambda não tipado as funções podem ser aplicadas livremente a qualquer argumento, o cálculo lambda tipado impõe restrições que garantem que as funções sejam aplicadas apenas a argumentos compatíveis com seu tipo.
+O cálculo lambda tipado estende o cálculo lambda não tipado, adicionando uma estrutura de tipos que restringe a formação e a aplicação de funções. Essa extensão preserva os princípios do cálculo lambda, mas introduz um sistema de tipos que promove maior consistência e evita paradoxos lógicos. Enquanto no cálculo lambda não tipado as funções podem ser aplicadas livremente a qualquer argumento, o cálculo lambda tipado impõe restrições que garantem que as funções sejam aplicadas apenas a argumentos compatíveis com seu tipo.
 
 No cálculo lambda tipado, as expressões são construídas a partir de três elementos principais: variáveis, abstrações e aplicações. Esses componentes definem a estrutura básica das funções e seus argumentos, e a adição de tipos funciona como um mecanismo de segurança, assegurando que as funções sejam aplicadas de forma correta. Uma variável $x$, por exemplo, é anotada com um tipo específico como $x : A$, onde $A$ pode ser um tipo básico como $\text{Nat}$ ou $\text{Bool}$, ou um tipo de função como $A \rightarrow B$.
 
@@ -5924,7 +5923,7 @@ A semântica do cálculo lambda tipado define o significado das expressões e co
 
 O sistema de tipos do cálculo lambda tipado é responsável por atribuir tipos às expressões e garantir que apenas expressões bem tipadas sejam aceitas. Já passamos por estas regras antes. Contudo, para manter o contexto vamos a última vez:
 
-As regras de tipagem no cálculo lambda tipado são geralmente expressas através da inferência natural. Abaixo, as regras fundamentais são detalhadas, sempre partindo de premissas para uma conclusão.
+As regras de tipagem no cálculo lambda tipado são geralmente expressas através da inferência natural. Abaixo, estas regras são detalhadas, sempre partindo de premissas em direção a conclusão.
 
 #### Regra da Variável
 
@@ -6092,7 +6091,7 @@ Este termo pode ser reduzido de duas maneiras diferentes:
 
    $$\rightarrow 7$$
 
-Observe que, independentemente da ordem em que as reduções são aplicadas, chegamos ao mesmo resultado final: $7$. Esta propriedade atesta que a ordem de avaliação em um programa lambda tipado não afeta o resultado final, desde que o programa termine. Isso é fundamental para a confiabilidade e previsibilidade dos sistemas baseados no cálculo lambda tipado, como muitas linguagens de programação funcional.
+Observe que, independentemente da ordem em que as reduções são aplicadas, chegamos ao mesmo resultado final: $7$. Esta propriedade atesta que a ordem de avaliação em um programa lambda tipado não afeta o resultado final, desde que o programa termine. Esta propriedade implica na confiabilidade e previsibilidade dos sistemas baseados no cálculo lambda tipado, como muitas linguagens de programação funcional.
 
 A semântica do cálculo lambda tipado tem implicações para a teoria da computação e o design de linguagens de programação. Ela promove a segurança de tipos, assegurando que programas bem tipados não causam erros de tipo durante a execução. Por exemplo, em uma linguagem com tipagem estática baseada no cálculo lambda tipado, uma expressão como `1 + true` seria rejeitada em tempo de compilação, evitando erros em tempo de execução. Esse cálculo serve como base para linguagens funcionais tipadas, como Haskell e ML, que herdaram suas propriedades formais. A correspondência de Curry-Howard une programas e provas matemáticas, onde tipos correspondem a proposições e termos a provas, unificando lógica e computação. O cálculo lambda tipado oferece uma base sólida para sistemas de verificação formal de programas, permitindo provas rigorosas de correção. Na prática, isso permite a criação de software crítico com alto grau de confiabilidade, como em sistemas de controle de voo ou protocolos de segurança criptográfica.
 
@@ -6104,7 +6103,7 @@ A semântica do cálculo lambda tipado estabelece uma ligação entre lógica, t
 
 A semântica do cálculo lambda tipado tem implicações profundas: na **segurança de Tipos**, assegurando que programas bem tipados não causarão erros de tipo durante a execução; servindo de **Base para Linguagens Funcionais**. Muitas linguagens funcionais tipadas, como Haskell e ML, são baseadas no cálculo lambda tipado. Além disso: a **correspondência de Curry-Howard** estabelece uma conexão entre programas e provas matemáticas, onde tipos correspondem a proposições e termos a provas. Finalmente, a **verificação Formal** fornece uma base para o desenvolvimento de sistemas de verificação formal de programas.
 
-A semântica do cálculo lambda tipado, portanto, não apenas define o comportamento de programas, mas também estabelece uma ponte fundamental entre lógica, teoria dos tipos e programação, influenciando profundamente o design de linguagens de programação modernas e técnicas de verificação formal.
+A semântica do cálculo lambda tipado, portanto, não apenas define o comportamento de programas, mas também estabelece uma ponte entre lógica, teoria dos tipos e programação, influenciando profundamente o design de linguagens de programação modernas e técnicas de verificação formal.
 
 ### Abstrações Lambda e Tipos
 
@@ -6130,7 +6129,7 @@ A redução no cálculo lambda tipado segue a estratégia de redução $\beta$, 
 
 $$(\lambda x : \text{Nat}. \, x + 1) \, 2 \rightarrow 2 + 1 \rightarrow 3$$
 
-Esse processo de substituição e simplificação é a base para a computação de expressões no cálculo lambda tipado, e é fundamental para a avaliação de programas em linguagens de programação funcionais.
+Esse processo de substituição e simplificação é a forma de computação de expressões no cálculo lambda tipado, e é usado na avaliação de programas em linguagens de programação funcionais.
 
 ## Regras de Tipagem
 
@@ -6138,7 +6137,7 @@ Antes de apresentarmos as regras formais do cálculo lambda tipado, é important
 
 O sistema de tipos do cálculo lambda tipado evoluiu gradualmente a partir de ideias mais simples. Inicialmente, poderíamos considerar um sistema muito básico com apenas dois tipos: $\text{bool}$ para valores booleanos e $\to$ para funções. Neste sistema primitivo, $T := \text{bool} \mid \to$, qualquer função seria simplesmente representada pelo tipo $\to$.
 
-Este sistema é excessivamente simplista. Considere as funções $\lambda x. \text{true}$ e $\lambda x. \lambda y. \text{false}$. Ambas teriam o tipo $\to$, apesar de serem fundamentalmente diferentes - a primeira retorna imediatamente um booleano, enquanto a segunda retorna outra função.
+Este sistema é excessivamente simplista. Considere as funções $\lambda x. \text{true}$ e $\lambda x. \lambda y. \text{false}$. Ambas teriam o tipo $\to$, apesar de serem diferentes - a primeira retorna imediatamente um booleano, enquanto a segunda retorna outra função.
 
 Para resolver essa limitação, refinamos nossa ideia de tipos de função. Em vez de um tipo genérico $\to$, introduzimos tipos de função da forma $T_1 \to T_2$, onde $T_1$ é o tipo do input e $T_2$ é o tipo do output. Nossa definição de tipos agora se torna recursiva: $T := \text{bool} \mid T \to T$.
 
@@ -6240,7 +6239,7 @@ As regras de tipagem no cálculo lambda tipado fornecem um sistema formal para g
    Analisando temos, novamente, o contexto de tipagem $\Gamma$), 0 julgamentos de Tipagem $\Gamma\, \vdash\, M : \tau \rightarrow B$: A expressão $M$ é uma função que leva um argumento do tipo $\tau$ e retorna um resultado do tipo $B$. Finalmente $\Gamma\, \vdash\, N : \tau$: A expressão $N$ é um argumento do tipo $\tau$.
    Ou seja, $\Gamma\, \vdash\, (M\, N) : B$: A aplicação da função $M$ ao argumento $N$ resulta em um termo do tipo $B$.
 
-   Esta regra Permite Compor funções e argumentos determinando como funções tipadas podem ser aplicadas a argumentos tipados para produzir resultados tipados. Também mostra que as funções são aplicadas a argumentos do tipo correto, evitando erros de tipagem. Esta regra estabelece que, se temos uma função que espera um argumento de um certo tipo e temos um argumento desse tipo, então a aplicação da função ao argumento é bem tipada e seu tipo é o tipo de retorno da função. Isso é fundamental para a construção de programas bem tipados no cálculo lambda tipado, garantindo a segurança e a coerência do sistema de tipos.
+   Esta regra Permite Compor funções e argumentos determinando como funções tipadas podem ser aplicadas a argumentos tipados para produzir resultados tipados. Também mostra que as funções são aplicadas a argumentos do tipo correto, evitando erros de tipagem. Esta regra estabelece que, se temos uma função que espera um argumento de um certo tipo e temos um argumento desse tipo, então a aplicação da função ao argumento é bem tipada e seu tipo é o tipo de retorno da função, garantindo a segurança e a coerência do sistema de tipos.
 
 Essas regras fornecem a base para a derivação de tipos em expressões complexas no cálculo lambda tipado, garantindo que cada parte da expressão esteja correta e que a aplicação de funções seja válida.
 
@@ -6511,7 +6510,7 @@ Essas regras fornecem a base para a derivação de tipos em expressões complexa
 
 ## Conversão e Redução no Cálculo Lambda Tipado
 
-No cálculo lambda tipado, os processos de conversão e redução são essenciais para a manipulação e simplificação de expressões, garantindo que as transformações sejam consistentes com a estrutura de tipos. Essas operações são fundamentais para entender como as funções são aplicadas e como as expressões podem ser transformadas mantendo a segurança e a consistência do sistema tipado.
+No cálculo lambda tipado, os processos de conversão e redução são essenciais para a manipulação e simplificação de expressões, garantindo que as transformações sejam consistentes com a estrutura de tipos. Essas operações permitem entender como as funções são aplicadas e como as expressões podem ser transformadas mantendo a segurança e a consistência do sistema tipado.
 
 ### Redução $\beta$
 
@@ -6575,7 +6574,7 @@ Todas essas estratégias são **normalizantes**no cálculo lambda tipado, ou sej
 
 ### Preservação de Tipos e Segurança
 
-Um princípio fundamental no cálculo lambda tipado é a **preservação de tipos** durante a redução, também conhecida como **subject reduction**. Essa propriedade assegura que, se um termo $M$ tem um tipo $A$ e $M$ é reduzido a $N$ através de redução $\beta$, então $N$ também terá o tipo $A$. Formalmente:
+Um dos princípios do cálculo lambda tipado é a **preservação de tipos** durante a redução, também conhecida como **subject reduction**. Essa propriedade assegura que, se um termo $M$ tem um tipo $A$ e $M$ é reduzido a $N$ através de redução $\beta$, então $N$ também terá o tipo $A$. Formalmente:
 
 $$
 \frac{\Gamma \vdash M : A \quad M \rightarrow_\beta N}{\Gamma \vdash N : A}
@@ -6762,7 +6761,7 @@ Repita este exercício. Ele demonstra como as reduções em um termo bem tipado 
 
    **Solução**: preservação de tipos: O termo inicial tem tipo $\text{Nat}$. Após a redução:
 
-   $$(\lambda x:\text{Nat}\rightarrow\text{Nat}. \, x 3) (\lambda y:\text{Nat}. y \cdot 2) \rightarrow_\beta (\lambda y:\text{Nat}. y \cdot 2) 3 \rightarrow_\beta 3 \cdot 2 \rightarrow 6$$
+   $$(\lambda x:\text{Nat}\rightarrow\text{Nat}. \, x 3) (\lambda y:\text{Nat}. y \times 2) \rightarrow_\beta (\lambda y:\text{Nat}. y \times 2) 3 \rightarrow_\beta 3 \times 2 \rightarrow 6$$
 
    O resultado final $6$ ainda é do tipo $\text{Nat}$.
 
@@ -6918,51 +6917,47 @@ Um **contexto de tipagem**, representado por $\Gamma$, é um conjunto de associa
 
 ### Normalização Forte e Fraca
 
-O cálculo lambda é um sistema minimalista. Porém, muito forte e consistente, base das linguagens de programação funcional. Uma característica importante para a criação de linguagens de programação é a normalização. Existem dois tipos de normalização:
+O cálculo lambda é um sistema minimalista. Porém, forte e consistente. Uma característica importante para a criação de linguagens de programação, que podemos destacar é a normalização. Existem dois tipos de normalização:
 
-1. Normalização fraca: Todo termo tem uma forma normal e Você vai chegar lá eventualmente.
+1. **Normalização fraca**: todo termo tem uma forma normal e Você vai chegar lá eventualmente.
 
-2. Normalização forte: Toda sequência de reduções termina em forma normal. Não importa como você reduz, vai alcançar uma forma normal.
+2. **Normalização forte**: toda sequência de reduções termina em forma normal. Não importa como você reduz, vai alcançar uma forma normal.
 
-A normalização forte é o que realmente interessa. É o que queremos e buscamos em todos os ambientes computacionais.
+A normalização forte é, para nós, de suprema importância. É o que almejamos em todos os ambientes computacionais, garante que todos os programas terminem após um número finito de passos, evitando _loops_ infinitos e comportamentos imprevisíveis. No cálculo lambda simplesmente tipado, essa propriedade está assegurada, o que é algo notável.
 
-No cálculo lambda simplesmente tipado, temos normalização forte. Isso é algo belo. Como qualquer coisa na matemática, a normalização precisa ser provada. Para facilitar, vamos ver uma prova informal. A prova não é elegante. Mas aqui está a essência:
+Como em qualquer resultado matemático, a normalização precisa ser provada. Para simplificar, apresentaremos uma prova informal. Embora não seja a mais elegante, capturaremos a essência do argumento. Para tanto:
 
-1. Atribuímos um "tamanho" a cada termo.
+1. Atribuímos um _tamanho_ a cada termo.
 2. Mostramos que cada redução torna o termo menor.
 3. Como não dá para diminuir para sempre, podemos parar.
 
-Os detalhes são complicados. Mas essa é a ideia. Aqui está um esboço da função de tamanho:
+Os detalhes são complicados. Mas essa é a ideia principal. Aqui está um esboço da função de tamanho:
 
 $$size(\lambda x:A.M) = size(M) + 1$$
 
 $$size(MN) = size(M) + size(N) + 1$$
 
-Cada redução $\beta$ diminui o termo. Não dá para reduzir para sempre. Então, você tem que parar.
-
-A normalização não é só teoria. Ela é prática.
-
-Em Haskell, a normalização garante a terminação de programas bem tipados. Nada de loops infinitos. Nada de falhas. Apenas funções puras que terminam.
+Cada redução $\beta$ diminui o termo. Observe que não dá para reduzir para sempre. Então, você tem que parar. A prática da normalização pode ser vista em Haskell, a normalização garante a terminação de programas bem tipados. Nada de loops infinitos. Nada de falhas. Apenas funções puras que terminam.
 
 ### Exemplos
 
-Vamos ver a normalização em ação:
+Vamos ver a normalização em ação com três estruturas que vimos antes:
 
 1. Função identidade:
 
- $(\lambda x:A.x)M \to M$
+ $(\lambda x:A.x)\, M \to M$
 
- Um passo. Acabou. Forma normal atingida.
+ Um passo e Acabou. Forma normal atingida.
 
 2. Função constante:
 
  $(\lambda x:A.\lambda y:B.x)MN \to (\lambda y:B.M)N \to M$
 
- Dois passos. Forma normal atingida.
+ Dois passos. E forma normal atingida.
 
 3. Números de Church:
 
- $2 3 \equiv (\lambda f.\lambda x.f(fx))(\lambda y.yyy) \to_\beta \lambda x.(\lambda y.yyy)((\lambda y.yyy)x) \to_\beta \lambda x.(xxx)(xxx) \to_\beta \lambda x.xxxxxxxxx$
+ $2\,3 \equiv (\lambda f.\lambda x.f(fx))(\lambda y.yyy) \to_\beta \lambda x.(\lambda y.yyy)((\lambda y.yyy)x) \to_\beta \lambda x.(xxx)(xxx) \to_\beta \lambda x.xxxxxxxxx$
 
  Vários passos. Mas termina. Isso é a normalização em ação.
 
@@ -7000,9 +6995,7 @@ Por exemplo, o tipo $A \rightarrow B$ pode ser interpretado como a proposição 
 
 ## Conclusão
 
-O Cálculo Lambda Simplesmente Tipado fornece uma base formal para o estudo de linguagens de programação tipadas e sistemas de verificação formal. Suas propriedades fundamentais, como normalização forte, preservação de tipos e decidibilidade da tipagem, têm implicações significativas tanto para a teoria quanto para a prática da ciência da computação.
-
-A correspondência entre o cálculo lambda tipado e linguagens de programação modernas pode ser observada em várias construções. Por exemplo, em Haskell:
+O Cálculo Lambda Simplesmente Tipado fornece uma base formal para o estudo de linguagens de programação tipadas e sistemas de verificação formal. Suas propriedades, como normalização forte, preservação de tipos e decidibilidade da tipagem, têm implicações tanto para a teoria quanto para a prática da ciência da computação. A correspondência entre o cálculo lambda tipado e linguagens de programação modernas pode ser observada em várias construções. Por exemplo, em Haskell:
 
 ```haskell
 identity :: a -> a
