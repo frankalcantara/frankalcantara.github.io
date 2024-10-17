@@ -22,7 +22,7 @@ featured: true
 toc: true
 preview: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2024-10-17T15:31:28.917Z
+lastmod: 2024-10-17T16:05:57.650Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -500,9 +500,9 @@ Podemos pensar na substituição como um processo de _buscar e substituir_ em um
 
 - A regra 2: $[N/x]y = y$, se $x \neq y$, está correta ao indicar que as variáveis que não são $x$ permanecem inalteradas. Ou seja, se durante a substituição de uma variável encontramos uma variável diferente, deixamos como está. Por exemplo: na substituição $[3/x]y$, $y$ permanece $y$
 
-- A regra 3: $[N/x](M_1 M_2) = ([N/x]M_1)([N/x]M_2)$ define corretamente a substituição em uma aplicação de termos. O que quer dizer que, se estivermos substituindo em uma aplicação de função, fazemos a substituição em ambas as partes. Por exemplo: em $[3/x](x y)$, substituímos em $x$ e $y$ separadamente, resultando em $(3 y)$.
+- A regra 3: $[N/x](M_1 \, M_2) = ([N/x]M_1)([N/x]M_2)$ define corretamente a substituição em uma aplicação de termos. O que quer dizer que, se estivermos substituindo em uma aplicação de função, fazemos a substituição em ambas as partes. Por exemplo: em $[3/x](x \, y)$, substituímos em $x$ e $y$ separadamente, resultando em $(3 \, y)$.
 
-- A regra 4: $[N/x](\lambda y.M) = \lambda y.([N/x]M)$, se $x \neq y$ e $y \notin FV(N)$, está bem formulada, indicando que a variável vinculada $y$ não será substituída se $x \neq y$ e $y$ não estiverem no conjunto de variáveis livres de $N$, o que evita a captura de variáveis. Em uma forma mais intuitiva podemos dizer que se encontrarmos uma abstração lambda, temos que ter cuidado: se a variável ligada for a mesma que estamos substituindo, paramos; se for diferente, substituímos no corpo, mas apenas se for seguro (sem captura de variáveis). Por exemplo: em $[3/x](\lambda y.x)$, substituímos $x$ no corpo, resultando em $\lambda y.3$.
+- A regra 4: $[N/x](\lambda y. \, M) = \lambda y. \, ([N/x]M)$, se $x \neq y$ e $y \notin FV(N)$, está bem formulada, indicando que a variável vinculada $y$ não será substituída se $x \neq y$ e $y$ não estiverem no conjunto de variáveis livres de $N$, o que evita a captura de variáveis. Em uma forma mais intuitiva podemos dizer que se encontrarmos uma abstração lambda, temos que ter cuidado: se a variável ligada for a mesma que estamos substituindo, paramos; se for diferente, substituímos no corpo, mas apenas se for seguro (sem captura de variáveis). Por exemplo: em $[3/x](\lambda y. \, x)$, substituímos $x$ no corpo, resultando em $\lambda y. \, 3$.
 
 Para que a esforçada leitora possa reforçar o entendimento destes conceitos, considere o seguinte exemplo:
 
@@ -586,11 +586,11 @@ A computação, ou avaliação de expressões, envolve uma série de reduções 
 
    $$(\lambda x.\lambda y.x + y)3 4 \to_\beta (\lambda y.3 + y)4 \to_\beta 3 + 4 = 7$$
 
-A redução $\alfa$, por outro lado, é usada durante a substituição para evitar a captura de variáveis. Por exemplo:
+A redução $\alpha$, por outro lado, é usada durante a substituição para evitar a captura de variáveis. Por exemplo:
 
    $$[y/x](\lambda y.x) = \lambda z.[y/x]([z/y]x) = \lambda z.y$$
 
-Neste caso, a redução $\alfa$ é usada para renomear $y$ para $z$ antes da substituição.
+Neste caso, a redução $\alpha$ é usada para renomear $y$ para $z$ antes da substituição.
 
 Finalmente, a substituição $[N/x]M$, regra primordial da substituição, afeta apenas as ocorrências livres de $x$ em $M$. As ocorrências ligadas de $x$ em $M$ permanecem inalteradas. Esta é a relação entre a substituição e os conceitos de variáveis livres e ligadas.
 
@@ -776,27 +776,27 @@ Neste ponto, se a amável leitora se perdeu no Haskell, deve voltar as definiç�
 
 5. Reconstruímos a expressão: $(3) + (y)$.
 
-O resultado de $[3/x](x + y)$ é $3 + y$. Ou seja, a variável $x$ foi substituída por $3$, enquanto $y$ permaneceu inalterada por ser uma variável diferente de $x$.
+O resultado de $[3 / x](x + y)$ é $3 + y$. Ou seja, a variável $x$ foi substituída por $3$, enquanto $y$ permaneceu inalterada por ser uma variável diferente de $x$.
 
-**2**: Realize a substituição $[(\lambda z.z)/x](\lambda y.x y)$.
+**2**: Realize a substituição $[(\lambda z. \, z)/x](\lambda y.x y)$.
 
 **Solução**:
 
-1. Estamos substituindo $x$ por $(\lambda z.z)$ na expressão $\lambda y.x y$.
+1. Estamos substituindo $x$ por $(\lambda z. \, z)$ na expressão $\lambda y.x y$.
 
-2. Começamos aplicando a regra formal 4 da substituição: $[N/x](\lambda y.M) = \lambda y.([N/x]M)$, pois $x \neq y$ e $y \notin FV((\lambda z.z))$.
+2. Começamos aplicando a regra formal 4 da substituição: $[N/x](\lambda y. \, M) = \lambda y. \, ([N/x]M)$, pois $x \neq y$ e $y \notin FV((\lambda z. \, z))$.
 
-3. Agora mudamos o foco para a substituição dentro do corpo da abstração: $[(\lambda z.z)/x](x y)$
+3. Agora mudamos o foco para a substituição dentro do corpo da abstração: $[(\lambda z. \, z)/x](x \, y)$
 
-4. Aplicamos a regra 3 para a aplicação dentro do corpo: $([(\lambda z.z)/x]x)([(\lambda z.z)/x]y)$
+4. Aplicamos a regra 3 para a aplicação dentro do corpo: $([(\lambda z. \, z)/x]x)([(\lambda z. \, z)/x]y)$
 
 5. Resolvemos cada parte:
-   - $[(\lambda z.z)/x]x = \lambda z.z$ (pela regra 1)
-   - $[(\lambda z.z)/x]y = y$ (pela regra 2, pois $x \neq y$)
+   - $[(\lambda z. \, z)/x]x = \lambda z. \, z$ (pela regra 1)
+   - $[(\lambda z. \, z)/x]y = y$ (pela regra 2, pois $x \neq y$)
 
-6. Reconstruímos a expressão: $\lambda y.((\lambda z.z) y)$
+6. Reconstruímos a expressão: $\lambda y. \, ((\lambda z. \, z) y)$
 
-O resultado da substituição $[(\lambda z.z)/x](\lambda y.x y)$ é $\lambda y.((\lambda z.z) y)$. Neste caso, a ocorrência livre de $x$ no corpo da abstração foi substituída por $(\lambda z.z)$. A variável $y$ permaneceu ligada e não foi afetada pela substituição.
+O resultado da substituição $[(\lambda z. \, z)/x](\lambda y.x y)$ é $\lambda y.((\lambda z. \, z) y)$. Neste caso, a ocorrência livre de $x$ no corpo da abstração foi substituída por $(\lambda z. \, z)$. A variável $y$ permaneceu ligada e não foi afetada pela substituição.
 
 **3**: Realize a substituição $[y/x](\lambda y.x)$.
 
@@ -826,7 +826,7 @@ O resultado de $[y/x](\lambda y.x)$ é $\lambda z.y$. Para evitar a captura da v
 
 4. Resolvemos a segunda parte: $[(\lambda x.xx)/y]z = z$ (pela regra 2, pois $y \neq z$)
 
-5. Reconstruímos a expressão: $((\lambda x.xx) z)$
+5. Reconstruímos a expressão: $((\lambda x. \, x \, x) z)$
 
 O resultado de $[(\lambda x.xx)/y](y z)$ é $((\lambda x.xx) z)$. A variável $y$ foi substituída pela abstração $(\lambda x.xx)$, enquanto $z$ permaneceu inalterado.
 
@@ -844,104 +844,104 @@ O resultado de $[(\lambda x.xx)/y](y z)$ é $((\lambda x.xx) z)$. A variável $y
 
 O resultado de $[a/x](\lambda y.\lambda x.xy)$ é $\lambda y.\lambda x.xy$. A substituição não afetou a expressão devido ao sombreamento da variável $x$ na abstração interna.
 
-**6**: Realize a substituição $[(\lambda z.z)/x](x (\lambda y.xy))$.
+**6**: Realize a substituição $[(\lambda z. \, z)/x](x (\lambda y.xy))$.
 
 **Solução**:
 
-1. Estamos substituindo $x$ por $(\lambda z.z)$ na expressão $x (\lambda y.xy)$. Esta é uma aplicação onde $x$ aparece livre duas vezes.
+1. Estamos substituindo $x$ por $(\lambda z. \, z)$ na expressão $x (\lambda y.xy)$. Esta é uma aplicação onde $x$ aparece livre duas vezes.
 
-2. Aplicamos a regra 3: $[(\lambda z.z)/x](x (\lambda y.xy)) = ([(\lambda z.z)/x]x) ([(\lambda z.z)/x](\lambda y.xy))$
+2. Aplicamos a regra 3: $[(\lambda z. \, z)/x](x (\lambda y.xy)) = ([(\lambda z. \, z)/x]x) ([(\lambda z. \, z)/x](\lambda y.xy))$
 
-3. Resolvemos a primeira parte: $[(\lambda z.z)/x]x = (\lambda z.z)$ (pela regra 1)
+3. Resolvemos a primeira parte: $[(\lambda z. \, z)/x]x = (\lambda z. \, z)$ (pela regra 1)
 
-4. Para a segunda parte, aplicamos a regra 4: $[(\lambda z.z)/x](\lambda y.xy) = \lambda y.([(\lambda z.z)/x](xy))$
+4. Para a segunda parte, aplicamos a regra 4: $[(\lambda z. \, z)/x](\lambda y.xy) = \lambda y.([(\lambda z. \, z)/x](x \, y))$
 
-5. Aplicamos a regra 3 novamente dentro da abstração: $\lambda y.(([(\lambda z.z)/x]x)([(\lambda z.z)/x]y))$
+5. Aplicamos a regra 3 novamente dentro da abstração: $\lambda y. \, (([(\lambda z. \, z)/x]x)([(\lambda z. \, z)/x]y))$
 
-6. Resolvemos: $\lambda y.((\lambda z.z)y)$
+6. Resolvemos: $\lambda y.((\lambda z. \, z)y)$
 
-7. Reconstruímos a expressão completa: $((\lambda z.z) (\lambda y.((\lambda z.z)y)))$
+7. Reconstruímos a expressão completa: $((\lambda z. \, z) (\lambda y. \, ((\lambda z. \, z) \, y)))$
 
-O resultado de $[(\lambda z.z)/x](x (\lambda y.xy))$ é $((\lambda z.z) (\lambda y.((\lambda z.z)y)))$. Todas as ocorrências livres de $x$ foram substituídas por $(\lambda z.z)$.
+O resultado de $[(\lambda z. \, z) / x](x (\lambda y.x \, y))$ é $((\lambda z. \, z) (\lambda y. \, ((\lambda z. \, z)y)))$. Todas as ocorrências livres de $x$ foram substituídas por $(\lambda z. \, z)$.
 
-**7**: Realize a substituição $[y/x](\lambda y.(\lambda x.y))$.
+**7**: Realize a substituição $[y/x](\lambda y. \, (\lambda x. \, y))$.
 
 **Solução**:
 
-1. Estamos substituindo $x$ por $y$ na expressão $\lambda y.(\lambda x.y)$. Este caso requer atenção para evitar captura de variáveis.
+1. Estamos substituindo $x$ por $y$ na expressão $\lambda y.(\lambda x. \, y)$. Este caso requer atenção para evitar captura de variáveis.
 
 2. Aplicamos a regra 4 para a abstração externa. Como $y$ é a variável ligada e também o termo de substituição, precisamos fazer uma redução $\alpha$ primeiro:
-   $\lambda y.(\lambda x.y) \to_\alpha \lambda z.(\lambda x.z)$
+   $\lambda y.(\lambda x. \, y) \to_\alpha \lambda z. \, (\lambda x.z)$
 
-3. Agora podemos aplicar a substituição com segurança: $[y/x](\lambda z.(\lambda x.z))$
+3. Agora podemos aplicar a substituição com segurança: $[y/x](\lambda z. \, (\lambda x. \, z))$
 
-4. Aplicamos a regra 4: $\lambda z.([y/x](\lambda x.z))$
+4. Aplicamos a regra 4: $\lambda z.([y/x](\lambda x. \, z))$
 
-5. Para a abstração interna, não precisamos substituir, pois $x$ está ligado: $\lambda z.(\lambda x.z)$
+5. Para a abstração interna, não precisamos substituir, pois $x$ está ligado: $\lambda z. \, (\lambda x. \, z)$
 
-O resultado de $[y/x](\lambda y.(\lambda x.y))$ é $\lambda z.(\lambda x.z)$. A redução $\alpha$ foi necessária para evitar a captura da variável $y$, e a substituição não afetou o corpo interno devido à ligação de $x$.
+O resultado de $[y/x](\lambda y. \, (\lambda x. \, y))$ é $\lambda z. \, (\lambda x. \, z)$. A redução $\alpha$ foi necessária para evitar a captura da variável $y$, e a substituição não afetou o corpo interno devido à ligação de $x$.
 
-**8**: Realize a substituição $[(\lambda x.xy)/z](\lambda y.zy)$.
+**8**: Realize a substituição $[(\lambda x.xy)/z](\lambda y. \, z \, y)$.
 
 **Solução**:
 
-1. Estamos substituindo $z$ por $(\lambda x.xy)$ na expressão $\lambda y.zy$. Temos que ter cuidado com a possível captura de variáveis.
+1. Estamos substituindo $z$ por $(\lambda x.xy)$ na expressão $\lambda y. \, z \, y$. Temos que ter cuidado com a possível captura de variáveis.
 
-2. Aplicamos a regra 4: $[(\lambda x.xy)/z](\lambda y.zy) = \lambda y'.([(\lambda x.xy)/z](zy'))$
+2. Aplicamos a regra 4: $[(\lambda x.xy)/z](\lambda y. \, z \, y) = \lambda y'.([(\lambda x. \, x \, y)/z](zy'))$
    Note que fizemos uma redução $\alpha$ preventiva, renomeando $y$ para $y'$ para evitar possível captura.
 
-3. Agora aplicamos a regra 3 no corpo da abstração: $\lambda y'.(([(\lambda x.xy)/z]z)([(\lambda x.xy)/z]y'))$
+3. Agora aplicamos a regra 3 no corpo da abstração: $\lambda y'. \, (([(\lambda x.xy)/z]z)([(\lambda x. \, x \, y)/z]y'))$
 
-4. Resolvemos a primeira parte: $[(\lambda x.xy)/z]z = (\lambda x.xy)$ (pela regra 1)
+4. Resolvemos a primeira parte: $[(\lambda x. \, x \, y)/z]z = (\lambda x. \, x \, y)$ (pela regra 1)
 
-5. Resolvemos a segunda parte: $[(\lambda x.xy)/z]y' = y'$ (pela regra 2, pois $z \neq y'$)
+5. Resolvemos a segunda parte: $[(\lambda x. \, x \, y)/z]y' = y'$ (pela regra 2, pois $z \neq y'$)
 
-6. Reconstruímos a expressão: $\lambda y'.((\lambda x.xy)y')$
+6. Reconstruímos a expressão: $\lambda y'.((\lambda x. \, x \, y)y')$
 
-O resultado de $[(\lambda x.xy)/z](\lambda y.zy)$ é $\lambda y'.((\lambda x.xy)y')$. A redução $\alpha$ preventiva evitou a captura de variáveis, e a substituição foi realizada corretamente no corpo da abstração.
+O resultado de $[(\lambda x. \, x \, y)/z](\lambda y. \, z \, y)$ é $\lambda y'. \, ((\lambda x. \, x \, y)y')$. A redução $\alpha$ preventiva evitou a captura de variáveis, e a substituição foi realizada corretamente no corpo da abstração.
 
-**9**: Realize a substituição $[(\lambda x.x)/y](\lambda x.yx)$.
+**9**: Realize a substituição $[(\lambda x. \, x)/y](\lambda x. \, y \, x)$.
 
 **Solução**:
 
-1. Estamos substituindo $y$ por $(\lambda x.x)$ na expressão $\lambda x.yx$. Precisamos ter cuidado com a variável ligada $x$.
+1. Estamos substituindo $y$ por $(\lambda x. \, x)$ na expressão $\lambda x. \, y \, x$. Precisamos ter cuidado com a variável ligada $x$.
 
-2. Aplicamos a regra 4: $[(\lambda x.x)/y](\lambda x.yx) = \lambda x'.([(\lambda x.x)/y](yx'))$
+2. Aplicamos a regra 4: $[(\lambda x.x)/y](\lambda x. \, y \, x) = \lambda x'. \, ([(\lambda x. \, x)/y](yx'))$
    Realizamos uma redução $\alpha$ preventiva, renomeando $x$ para $x'$.
 
-3. Aplicamos a regra 3 no corpo da abstração: $\lambda x'.(([(\lambda x.x)/y]y)([(\lambda x.x)/y]x'))$
+3. Aplicamos a regra 3 no corpo da abstração: $\lambda x'. \, (([(\lambda x. \, x)/y]y)([(\lambda x. \, x)/y]x'))$
 
-4. Resolvemos a primeira parte: $[(\lambda x.x)/y]y = (\lambda x.x)$ (pela regra 1)
+4. Resolvemos a primeira parte: $[(\lambda x. \, x)/y]y = (\lambda x. \, x)$ (pela regra 1)
 
-5. Resolvemos a segunda parte: $[(\lambda x.x)/y]x' = x'$ (pela regra 2, pois $y \neq x'$)
+5. Resolvemos a segunda parte: $[(\lambda x. \, x)/y]x' = x'$ (pela regra 2, pois $y \neq x'$)
 
-6. Reconstruímos a expressão: $\lambda x'.((\lambda x.x)x')$
+6. Reconstruímos a expressão: $\lambda x'. \, ((\lambda x. \, x) \, x')$
 
-O resultado de $[(\lambda x.x)/y](\lambda x.yx)$ é $\lambda x'.((\lambda x.x)x')$. A redução $\alpha$ preventiva evitou conflitos com a variável ligada $x$, e a substituição foi realizada corretamente.
+O resultado de $[(\lambda x. \, x)/y](\lambda x. \, y \, x)$ é $\lambda x'. \, ((\lambda x. \, x)x')$. A redução $\alpha$ preventiva evitou conflitos com a variável ligada $x$, e a substituição foi realizada corretamente.
 
-**10**: Realize a substituição $[(\lambda z.zw)/x](\lambda y.\lambda w.xyw)$.
+**10**: Realize a substituição $[(\lambda z. \, z \, w)/x](\lambda y. \, \lambda w. \, x \, y \, w)$.
 
 **Solução**:
 
-1. Estamos substituindo $x$ por $(\lambda z.zw)$ na expressão $\lambda y.\lambda w.xyw$. Temos que considerar as variáveis ligadas $y$ e $w$.
+1. Estamos substituindo $x$ por $(\lambda z. \, z \, w)$ na expressão $\lambda y.\lambda w. \, x \, y \, w$. Temos que considerar as variáveis ligadas $y$ e $w$.
 
-2. Aplicamos a regra 4 para a abstração externa: $[(\lambda z.zw)/x](\lambda y.\lambda w.xyw) = \lambda y.([(\lambda z.zw)/x](\lambda w.xyw))$
+2. Aplicamos a regra 4 para a abstração externa: $[(\lambda z. \, z \, w)/x](\lambda y. \, \lambda w.x \, y \, w) = \lambda y. \, ([(\lambda z. \, z \, w)/x](\lambda w. \, x \, y \, w))$
 
 3. Aplicamos a regra 4 novamente para a abstração interna:
-   $\lambda y.\lambda w'.([(\lambda z.zw)/x](xyw'))$
+   $\lambda y.\lambda w'. \, ([(\lambda z. \, z \, w)/x](xyw'))$
    Note que fizemos uma redução $\alpha$, renomeando $w$ para $w'$ para evitar captura.
 
 4. Agora aplicamos a regra 3 no corpo da abstração mais interna:
-   $\lambda y.\lambda w'.(([(\lambda z.zw)/x]x)([(\lambda z.zw)/x]y)([(\lambda z.zw)/x]w'))$
+   $\lambda y.\lambda w'. \, (([(\lambda z. \, z \, w)/x]x)([(\lambda z. \, z \, w)/x]y)([(\lambda z. \, z \, w)/x]w'))$
 
 5. Resolvemos cada parte:
-   - $[(\lambda z.zw)/x]x = (\lambda z.zw)$ (pela regra 1)
-   - $[(\lambda z.zw)/x]y = y$ (pela regra 2, pois $x \neq y$)
-   - $[(\lambda z.zw)/x]w' = w'$ (pela regra 2, pois $x \neq w'$)
+   - $[(\lambda z. \, z \, w)/x]x = (\lambda z. \, z \, w)$ (pela regra 1)
+   - $[(\lambda z. \, z \, w)/x]y = y$ (pela regra 2, pois $x \neq y$)
+   - $[(\lambda z. \, z \, w)/x]w' = w'$ (pela regra 2, pois $x \neq w'$)
 
-6. Reconstruímos a expressão: $\lambda y.\lambda w'.((\lambda z.zw)yw')$
+6. Reconstruímos a expressão: $\lambda y.\lambda w'. \, ((\lambda z. \, z \, w) \, y \, w')$
 
-O resultado de $[(\lambda z.zw)/x](\lambda y.\lambda w.xyw)$ é $\lambda y.\lambda w'.((\lambda z.zw)yw')$. A redução $\alpha$ preventiva na variável $w$ evitou a captura, e a substituição foi realizada corretamente, preservando a estrutura da abstração dupla.
+O resultado de $[(\lambda z. \, z. \, w)/x](\lambda y.\lambda w. \, x \, y \, w)$ é $\lambda y.\lambda w'.((\lambda z. \, z. \, w) \, y \, w')$. A redução $\alpha$ preventiva na variável $w$ evitou a captura, e a substituição foi realizada corretamente, preservando a estrutura da abstração dupla.
 
 ## Semântica Denotacional no Cálculo Lambda
 
@@ -4063,7 +4063,7 @@ Neste ponto, a leitora deve estar ansiosa para ver alguns exemplos de equivalên
 
    **Exemplo 2**:
 
-   $$\lambda z.(\lambda w.w)z \to_\beta \lambda z.z $$
+   $$\lambda z.(\lambda w.w)z \to_\beta \lambda z. \, z $$
 
    Assim como no exemplo original, a função interna $\lambda w.w$ é a função identidade. Após a aplicação, o valor de $z$ é retornado.
 
