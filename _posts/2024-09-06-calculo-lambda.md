@@ -34,7 +34,7 @@ featured: true
 toc: true
 preview: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2024-10-18T16:26:46.784Z
+lastmod: 2024-10-18T16:34:03.337Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -69,7 +69,7 @@ A partir do meio da década de 1930, vários matemáticos e lógicos, como [Chur
 | Funções Recursivas   | Gödel, $1934$         | • Baseado em teoria dos números<br>• Usa recursão e minimização<br>• Definição indutiva de funções | • Formalização rigorosa<br>• Conexão com lógica matemática<br>• Base para teoria da recursão |
 | Sistemas de Reescrita| Post, $1943$          | • Manipulação de strings<br>• Regras de produção<br>• Transformação de símbolos | • Simplicidade conceitual<br>• Base para gramáticas formais<br>• Influenciou linguagens de programação |
 
-_Tabela 1. Relaão entre as contribuições de Church, Gödel e Post_{: Legenda}
+_Tabela 1. Relação entre as contribuições de Church, Gödel e Post_{: Legenda}
 
 Church propôs o cálculo lambda para descrever funções de forma simbólica, usando a _abstração lambda_. Esse modelo representa funções como estruturas de primeira classe formalizando a computabilidade em termos de funções e variáveis.
 
