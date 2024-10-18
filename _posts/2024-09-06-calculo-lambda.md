@@ -34,7 +34,7 @@ featured: true
 toc: true
 preview: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2024-10-18T17:23:41.438Z
+lastmod: 2024-10-18T18:26:29.431Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -262,71 +262,71 @@ No termo original, $y\,$ poderia ter um valor externo fornecido de outro context
   
 **1**: Escreva uma função lambda para representar a identidade, que retorna o próprio argumento.
 
-**Solução**: a função identidade é simplesmente: $\lambda x. \;x$, essa função retorna o argumento $x\,$.
+   **Solução**: a função identidade é simplesmente: $\lambda x. \;x$, essa função retorna o argumento $x\,$.
 
 **2**: Escreva uma função lambda que representa uma constante, sempre retornando o número $5\,$, independentemente do argumento.
 
-**Solução**: a função constante pode ser representada por: $\lambda x. \;5\,$, uma função que sempre retorna $5\,$, independentemente de $x\,$.
+   **Solução**: a função constante pode ser representada por: $\lambda x. \;5\,$, uma função que sempre retorna $5\,$, independentemente de $x\,$.
 
 **3**: Dado $\lambda x. \;x + 2\,$, aplique a função ao número $3\,$.
 
-**Solução**: substituímos $x\,$ por $3\,$ e teremos: $(\lambda x. \;x + 2) \;3 = 3 + 2 = 5\,$
+   **Solução**: substituímos $x\,$ por $3\,$ e teremos: $(\lambda x. \;x + 2) \;3 = 3 + 2 = 5\,$
 
 **4**: Simplifique a expressão $(\lambda x. \lambda y. \;x)(5)(6)\,$.
 
-**Solução**: primeiro, aplicamos a função ao valor $5\,$, o que resulta na função $\lambda y. 5\,$. Agora, aplicamos essa nova função ao valor $6\,$:
+   **Solução**: primeiro, aplicamos a função ao valor $5\,$, o que resulta na função $\lambda y. 5\,$. Agora, aplicamos essa nova função ao valor $6\,$:
 
-$$(\lambda y. 5)\, 6 = 5$$
+   $$(\lambda y. 5)\, 6 = 5$$
 
-O resultado final é $5\,$.
+   O resultado final é $5\,$.
 
 **5**: Simplifique a expressão $(\lambda x. \;x)(\lambda y.\;y)\,$.
 
-**Solução**: aplicamos a função $\lambda x. \;x\,$ à função $\lambda y.\;y\,$:
+   **Solução**: aplicamos a função $\lambda x. \;x\,$ à função $\lambda y.\;y\,$:
 
-$$(\lambda x. \;x)(\lambda y.\;y) \, = \lambda y.\;y$$
+   $$(\lambda x. \;x)(\lambda y.\;y) \, = \lambda y.\;y$$
 
-A função $\lambda y.\;y\,$ é a identidade e o resultado final é a própria função identidade.
+   A função $\lambda y.\;y\,$ é a identidade e o resultado final é a própria função identidade.
 
 **6**: Aplique a função $\lambda x. \lambda y. \;x + y\,$ aos valores $3\,$ e $4\,$.
 
-**Solução**: aplicamos a função a $3\,$ e depois a $4\,$:
+   **Solução**: aplicamos a função a $3\,$ e depois a $4\,$:
 
-$$(\lambda x. \lambda y. \;x + y) 3 = \lambda y. 3 + y$$
+   $$(\lambda x. \lambda y. \;x + y) 3 = \lambda y. 3 + y$$
 
-Agora aplicamos $4\,$:
+   Agora aplicamos $4\,$:
 
-$$(\lambda y. 3 + y) 4 = 3 + 4 = 7$$
+   $$(\lambda y. 3 + y) 4 = 3 + 4 = 7$$
 
-O resultado final é $7$.
+   O resultado final é $7$.
 
 **7**: A função $\lambda x. \lambda y. \;x\,$ é uma função de primeira ordem ou segunda ordem?
 
-**Solução**: a função $\lambda x. \lambda y. \;x\,$ é uma função de segunda ordem, pois é uma função que retorna outra função.
+   **Solução**: a função $\lambda x. \lambda y. \;x\,$ é uma função de segunda ordem, pois é uma função que retorna outra função.
 
 **8**: Defina uma função lambda que troca a ordem dos argumentos de uma função de dois argumentos.
 
-**Solução**: essa função pode ser definida como:
+   **Solução**: essa função pode ser definida como:
 
-$$\lambda f. \lambda x. \lambda y. f \;y \;x$$
+   $$\lambda f. \lambda x. \lambda y. f \;y \;x$$
 
-Ela aplica a função $f\,$ aos argumentos $y\,$ e $x\,$, trocando a ordem.
+   Ela aplica a função $f\,$ aos argumentos $y\,$ e $x\,$, trocando a ordem.
 
 **9**: Dada a função $\lambda x. \;x \;x\,$, por que ela não pode ser aplicada a si mesma diretamente?
 
-**Solução**: se aplicarmos $\lambda x. \;x \;x\,$ a si mesma, teremos:
+   **Solução**: se aplicarmos $\lambda x. \;x \;x\,$ a si mesma, teremos:
 
-$$(\lambda x. \;x \;x)(\lambda x. \;x \;x)$$
+   $$(\lambda x. \;x \;x)(\lambda x. \;x \;x)$$
 
-Isso resultaria em uma aplicação infinita da função a si mesma, o que leva a um comportamento indefinido ou a um erro de recursão infinita.
+   Isso resultaria em uma aplicação infinita da função a si mesma, o que leva a um comportamento indefinido ou a um erro de recursão infinita.
 
 **10**: Aplique a função $\lambda x. \;x \;x\,$ ao valor $2\,$.
 
-**Solução**: substituímos $x\,$ por $2\,$:
+   **Solução**: substituímos $x\,$ por $2\,$:
 
-$$(\lambda x. \;x \;x) 2 = 2 \times 2 = 4$$
+   $$(\lambda x. \;x \;x) 2 = 2 \times 2 = 4$$
 
-O resultado final é $4\,$.
+   O resultado final é $4\,$.
 
 # Sintaxe e Semântica
 
@@ -691,8 +691,7 @@ Agora, que definimos a assinatura da função `substitute` vamos analisar cada u
      | otherwise = Var y
    ```
 
-   - **Se** a variável `y` é a mesma que estamos substituindo (`x`), retornamos o termo substituto `n`. Isto corresponde à **regra 1** da substituição formal.
-   - **Caso contrário**, mantemos a variável original `y` inalterada, conforme a **regra 2**.
+   Se a variável `y` é a mesma que estamos substituindo (`x`), retornamos o termo substituto `n`. Isto corresponde à **regra 1** da substituição formal. Caso contrário, mantemos a variável original `y` inalterada, conforme a regra 2.
 
 2. **Substituição em Aplicações**:
 
@@ -700,7 +699,7 @@ Agora, que definimos a assinatura da função `substitute` vamos analisar cada u
    substitute x n (App e1 e2) \, = App (substitute x n e1) (substitute x n e2)
    ```
 
-   - Aplicamos a substituição recursivamente em ambos os termos da aplicação. Isto reflete a **regra 3** da substituição formal.
+   Aplicamos a substituição recursivamente em ambos os termos da aplicação. Isto reflete a regra 3 da substituição formal.
 
 3. **Substituição em Abstrações Lambda**:
 
@@ -716,16 +715,11 @@ Agora, que definimos a assinatura da função `substitute` vamos analisar cada u
 
    Este é o caso mais complexo e corresponde à **regra 4** da substituição formal. Aqui, temos três subcasos:
 
-   1. **Se a variável ligada `y` é a mesma que estamos substituindo (`x`)**:
-      - Não fazemos nada, pois `x` está _sombreada_ pela ligação de `y`.
+   1. Se a variável ligada `y` é a mesma que estamos substituindo (`x`). Não fazemos nada, pois `x` está _sombreada_ pela ligação de `y`.
 
-   2. **Se `y` está nas variáveis livres do termo substituto `n`**:
-      - Existe o risco de **captura de variável livre**. Para evitar isso, aplicamos a **redução $\alpha\,$**, renomeando `y` para um novo nome `y'` que não cause conflito.
-      - Utilizamos a função `freshVar` para gerar um novo nome que não esteja nas variáveis livres ou ligadas das expressões envolvidas.
-      - Realizamos a substituição no corpo `e` após a renomeação.
+   2. Se `y` está nas variáveis livres do termo substituto `n`: existe o risco de **captura de variável livre**. Para evitar isso, aplicamos a **redução $\alpha\,$**, renomeando `y` para um novo nome `y'` que não cause conflito. Utilizamos a função `freshVar` para gerar um novo nome que não esteja nas variáveis livres ou ligadas das expressões envolvidas. Realizamos a substituição no corpo `e` após a renomeação.
 
-   3. **Caso contrário**:
-      - Substituímos recursivamente no corpo da abstração `e`, mantendo `y` inalterado.
+   3. Caso contrário: substituímos recursivamente no corpo da abstração `e`, mantendo `y` inalterado.
 
 4. **Função para Variáveis Livres**:
 
@@ -769,19 +763,13 @@ $$[y/x] \;(\lambda y.\;x) \, = \lambda z.\;y$$
 
 No código Haskell, este caso seria processado da seguinte forma:
 
-1. **Detectar o Risco de Captura**:
-   - A variável ligada `y` está presente nas variáveis livres do termo substituto `n` (que é `y`).
-   - Portanto, precisamos aplicar a redução $\alpha\,$.
+   1. **Detectar o Risco de Captura**: a variável ligada `y` está presente nas variáveis livres do termo substituto `n` (que é `y`). Portanto, precisamos aplicar a redução $\alpha\,$.
 
-2. **Aplicar Redução $\alpha\,$**:
-   - Utilizamos `freshVar` para gerar um novo nome, digamos `z`.
-   - Renomeamos `y` para `z` na abstração, e substituímos `y` por `z` no corpo.
+   2. **Aplicar Redução $\alpha\,$**: utilizamos `freshVar` para gerar um novo nome, digamos `z`. Renomeamos `y` para `z` na abstração, e substituímos `y` por `z` no corpo.
 
-3. **Realizar a Substituição**:
-   - Substituímos `x` por `y` no corpo renomeado.
+   3. **Realizar a Substituição**: substituímos `x` por `y` no corpo renomeado.
 
-4. **Resultado Final**:
-   - A expressão resultante é `\lambda z.\;y`, onde `y` permanece livre.
+   4. **Resultado Final**: a expressão resultante é `\lambda z.\;y`, onde `y` permanece livre.
 
 Neste ponto, se a amável leitora se perdeu no Haskell, deve voltar as definições formais da substituição e tentar fazer o paralelo entre as definições formais e o código em Haskell. A importância desta implementação está na demonstração de como os conceitos teóricos do cálculo lambda podem ser traduzidos para código executável, fornecendo uma ponte entre a teoria e a prática.
 
@@ -789,202 +777,202 @@ Neste ponto, se a amável leitora se perdeu no Haskell, deve voltar as definiç�
 
 **1**: Realize a substituição $[3/x] \;(x + y)\,$.
 
-**Solução**:
+   **Solução**:
 
-1. Começando observando que a função de substituição indica que estamos substituindo $x\,$ por $3\,$ na expressão $x + y\,$.
+   1. Começando observando que a função de substituição indica que estamos substituindo $x\,$ por $3\,$ na expressão $x + y\,$.
 
-2. Aplicamos a regra formal 3 da substituição:
+   2. Aplicamos a regra formal 3 da substituição:
 
-   $$[N/x] \;(M_1 M_2) \, = ([N/x]M_1)([N/x]M_2)$$
+      $$[N/x] \;(M_1 M_2) \, = ([N/x]M_1)([N/x]M_2)$$
 
-   Neste caso, $M_1 = x\,$, $M_2 = y$, e a operação $+$ é tratada como uma aplicação.
+      Neste caso, $M_1 = x\,$, $M_2 = y$, e a operação $+$ é tratada como uma aplicação.
 
-3. Substituímos em $M_1\,$: $[3/x]\,x = 3\,$ (pela regra 1).
+   3. Substituímos em $M_1\,$: $[3/x]\,x = 3\,$ (pela regra 1).
 
-4. Substituímos em $M_2\,$: $[3/x]\,y = y\,$ (pela regra 2, pois $x \neq y\,$).
+   4. Substituímos em $M_2\,$: $[3/x]\,y = y\,$ (pela regra 2, pois $x \neq y\,$).
 
-5. Reconstruímos a expressão: $(3) + (y)\,$.
+   5. Reconstruímos a expressão: $(3) + (y)\,$.
 
-O resultado de $[3/x] \ ,(x + y)\,$ é $3 + y\,$. Ou seja, a variável $x\,$ foi substituída por $3\,$, enquanto $y\,$ permaneceu inalterada por ser uma variável diferente de $x\,$.
+   O resultado de $[3/x] \ ,(x + y)\,$ é $3 + y\,$. Ou seja, a variável $x\,$ foi substituída por $3\,$, enquanto $y\,$ permaneceu inalterada por ser uma variável diferente de $x\,$.
 
 **2**: Realize a substituição $[(\lambda z. \;z)/x] \;(\lambda y.\;x\;y)\,$.
 
-**Solução**:
+   **Solução**:
 
-1. Estamos substituindo $x\,$ por $(\lambda z. \;z)\,$ na expressão $\lambda y.\;x\;y\,$.
+   1. Estamos substituindo $x\,$ por $(\lambda z. \;z)\,$ na expressão $\lambda y.\;x\;y\,$.
 
-2. Começamos aplicando a regra formal 4 da substituição:
+   2. Começamos aplicando a regra formal 4 da substituição:
 
-   $$[N/x] \;(\lambda y. \;M) \, = \lambda y. \;([N/x]M)$$
+      $$[N/x] \;(\lambda y. \;M) \, = \lambda y. \;([N/x]M)$$
 
-   pois $x \neq y\,$ e $y \notin FV((\lambda z. \;z))$$
+      pois $x \neq y\,$ e $y \notin FV((\lambda z. \;z))$$
 
-3. Agora mudamos o foco para a substituição dentro do corpo da abstração:
+   3. Agora mudamos o foco para a substituição dentro do corpo da abstração:
 
-   $$[(\lambda z. \;z)/x]\,(x \;y)\,$$
+      $$[(\lambda z. \;z)/x]\,(x \;y)\,$$
 
-4. Aplicamos a regra 3 para a aplicação dentro do corpo:
+   4. Aplicamos a regra 3 para a aplicação dentro do corpo:
 
-   $$([(\lambda z. \;z)/x]\,x)([(\lambda z. \;z)/x]\,y)\,$$
+      $$([(\lambda z. \;z)/x]\,x)([(\lambda z. \;z)/x]\,y)\,$$
 
-5. Resolvemos cada parte:
-   - $[(\lambda z. \;z)/x]\,x = \lambda z. \;z\,$ (pela regra 1)
-   - $[(\lambda z. \;z)/x]\,y = y\,$ (pela regra 2, pois $x \neq y\,$)
+   5. Resolvemos cada parte:
+      - $[(\lambda z. \;z)/x]\,x = \lambda z. \;z\,$ (pela regra 1)
+      - $[(\lambda z. \;z)/x]\,y = y\,$ (pela regra 2, pois $x \neq y\,$)
 
-6. Reconstruímos a expressão: $\lambda y. \;((\lambda z. \;z) y)\,$
+   6. Reconstruímos a expressão: $\lambda y. \;((\lambda z. \;z) y)\,$
 
-O resultado da substituição $[(\lambda z. \;z)/x] \;(\lambda y.x \;y)\,$ é $\lambda y.((\lambda z. \;z) y)\,$. Neste caso, a ocorrência livre de $x\,$ no corpo da abstração foi substituída por $(\lambda z. \;z)\,$. A variável $y\,$ permaneceu ligada e não foi afetada pela substituição.
+   O resultado da substituição $[(\lambda z. \;z)/x] \;(\lambda y.x \;y)\,$ é $\lambda y.((\lambda z. \;z) y)\,$. Neste caso, a ocorrência livre de $x\,$ no corpo da abstração foi substituída por $(\lambda z. \;z)\,$. A variável $y\,$ permaneceu ligada e não foi afetada pela substituição.
 
 **3**: Realize a substituição $[y/x] \;(\lambda y. \;x)\,$.
 
-**Solução**:
+   **Solução**:
 
-1. Estamos substituindo $x\,$ por $y\,$ na expressão $\lambda y.x\,$. Este é um caso onde precisamos ter cuidado com a captura de variáveis.
+   1. Estamos substituindo $x\,$ por $y\,$ na expressão $\lambda y.x\,$. Este é um caso onde precisamos ter cuidado com a captura de variáveis.
 
-2. Não podemos aplicar diretamente a regra 4, pois $y \in FV(y)\,$. Para evitar a captura de variáveis, realizamos uma redução $\alpha\,$ primeiro: $\lambda y.x \to_\alpha \lambda z.x\,$.
+   2. Não podemos aplicar diretamente a regra 4, pois $y \in FV(y)\,$. Para evitar a captura de variáveis, realizamos uma redução $\alpha\,$ primeiro: $\lambda y.x \to_\alpha \lambda z.x\,$.
 
-3. Agora podemos aplicar a substituição com segurança: $[y/x] \;(\lambda x. \;z\,$.
+   3. Agora podemos aplicar a substituição com segurança: $[y/x] \;(\lambda x. \;z\,$.
 
-4. Aplicamos a regra 4: $[y/x] \;(\lambda x. \;z = \lambda z. \;([y/x]\,x)\,$
+   4. Aplicamos a regra 4: $[y/x] \;(\lambda x. \;z = \lambda z. \;([y/x]\,x)\,$
 
-5. Resolvemos a substituição no corpo: $\lambda z. \;([y/x]\,x) \, = \lambda z. \;y\,$ (pela regra 1)
+   5. Resolvemos a substituição no corpo: $\lambda z. \;([y/x]\,x) \, = \lambda z. \;y\,$ (pela regra 1)
 
-O resultado de $[y/x] \;(\lambda y. \;x)\,$ é $\lambda z. \;y\,$. Para evitar a captura da variável livre $y\,$ que estamos introduzindo, primeiro renomeamos a variável ligada $y\,$ para $z$, redução $\alpha\,$. Depois, realizamos a substituição normalmente, resultando em uma abstração que retorna a variável livre $y\,$.
+   O resultado de $[y/x] \;(\lambda y. \;x)\,$ é $\lambda z. \;y\,$. Para evitar a captura da variável livre $y\,$ que estamos introduzindo, primeiro renomeamos a variável ligada $y\,$ para $z$, redução $\alpha\,$. Depois, realizamos a substituição normalmente, resultando em uma abstração que retorna a variável livre $y\,$.
 
 **4**: Realize a substituição $[(\lambda x. \;x \;x)/y] \ ,(y \;z)\,$.
 
 **Solução**:
 
-1. Estamos substituindo $y\,$ por $(\lambda x.\, x \;x)\,$ na expressão $y \;z\,$. Este é um caso de substituição em uma aplicação.
+   1. Estamos substituindo $y\,$ por $(\lambda x.\, x \;x)\,$ na expressão $y \;z\,$. Este é um caso de substituição em uma aplicação.
 
-2. Aplicamos a regra 3: $[(\lambda x.\, x \;x)/y] \ ,(y \;z) \, = ([(\lambda x.\, x \;x)/y]\,y)([(\lambda x.\, x \;x)/y]z)\,$
+   2. Aplicamos a regra 3: $[(\lambda x.\, x \;x)/y] \ ,(y \;z) \, = ([(\lambda x.\, x \;x)/y]\,y)([(\lambda x.\, x \;x)/y]z)\,$
 
-3. Resolvemos a primeira parte: $[(\lambda x.\, x \;x)/y]\,y = (\lambda x.\, x \;x)\,$ (pela regra 1)
+   3. Resolvemos a primeira parte: $[(\lambda x.\, x \;x)/y]\,y = (\lambda x.\, x \;x)\,$ (pela regra 1)
 
-4. Resolvemos a segunda parte: $[(\lambda x.\, x \;x)/y]z = z\,$ (pela regra 2, pois $y \neq z\,$)
+   4. Resolvemos a segunda parte: $[(\lambda x.\, x \;x)/y]z = z\,$ (pela regra 2, pois $y \neq z\,$)
 
-5. Reconstruímos a expressão: $((\lambda x. \;x \;x) z)\,$
+   5. Reconstruímos a expressão: $((\lambda x. \;x \;x) z)\,$
 
-O resultado de $[(\lambda x.\, x \;x)/y] \ ,(y \;z)\,$ é $((\lambda x.\, x \;x) z)\,$. A variável $y\,$ foi substituída pela abstração $(\lambda x.\, x \;x)$, enquanto $z\,$ permaneceu inalterado.
+   O resultado de $[(\lambda x.\, x \;x)/y] \ ,(y \;z)\,$ é $((\lambda x.\, x \;x) z)\,$. A variável $y\,$ foi substituída pela abstração $(\lambda x.\, x \;x)$, enquanto $z\,$ permaneceu inalterado.
 
 **5**: Realize a substituição $[a/x] \;(\lambda y.\lambda x.\;y \;x)\,$.
 
-**Solução**:
+   **Solução**:
 
-1. Estamos substituindo $x\,$ por $a\,$ na expressão $\lambda y.\lambda x.\;y \;x\,$. Temos uma abstração aninhada aqui.
+   1. Estamos substituindo $x\,$ por $a\,$ na expressão $\lambda y.\lambda x.\;y \;x\,$. Temos uma abstração aninhada aqui.
 
-2. Aplicamos a regra 4 para a abstração externa: $[a/x] \;(\lambda y.\lambda x.\;y \;x) \, = \lambda y.([a/x] \;(\lambda x.\;y \;x))\,$
+   2. Aplicamos a regra 4 para a abstração externa: $[a/x] \;(\lambda y.\lambda x.\;y \;x) \, = \lambda y.([a/x] \;(\lambda x.\;y \;x))\,$
 
-3. Para a abstração interna, não precisamos substituir, pois a variável ligada $x\,$ _sombreia_ a substituição: $\lambda y.(\lambda x.\;y \;x)\,$
+   3. Para a abstração interna, não precisamos substituir, pois a variável ligada $x\,$ _sombreia_ a substituição: $\lambda y.(\lambda x.\;y \;x)\,$
 
-4. O resultado permanece inalterado.
+   4. O resultado permanece inalterado.
 
-O resultado de $[a/x] \;(\lambda y.\lambda x.\;y \;x)\,$ é $\lambda y.\lambda x.\;y \;x\,$. A substituição não afetou a expressão devido ao sombreamento da variável $x\,$ na abstração interna.
+   O resultado de $[a/x] \;(\lambda y.\lambda x.\;y \;x)\,$ é $\lambda y.\lambda x.\;y \;x\,$. A substituição não afetou a expressão devido ao sombreamento da variável $x\,$ na abstração interna.
 
 **6**: Realize a substituição $[(\lambda z. \;z)/x] \;(x (\lambda y.\;y \;x))\,$.
 
-**Solução**:
+   **Solução**:
 
-1. Estamos substituindo $x\,$ por $(\lambda z. \;z)\,$ na expressão $x (\lambda y.\;y \;x)\,$. Esta é uma aplicação onde $x\,$ aparece livre duas vezes.
+   1. Estamos substituindo $x\,$ por $(\lambda z. \;z)\,$ na expressão $x (\lambda y.\;y \;x)\,$. Esta é uma aplicação onde $x\,$ aparece livre duas vezes.
 
-2. Aplicamos a regra 3: $[(\lambda z. \;z)/x] \;(x (\lambda y.\;y \;x)) \, = ([(\lambda z. \;z)/x]\,x) ([(\lambda z. \;z)/x] \;(\lambda y.\;y \;x))\,$
+   2. Aplicamos a regra 3: $[(\lambda z. \;z)/x] \;(x (\lambda y.\;y \;x)) \, = ([(\lambda z. \;z)/x]\,x) ([(\lambda z. \;z)/x] \;(\lambda y.\;y \;x))\,$
 
-3. Resolvemos a primeira parte: $[(\lambda z. \;z)/x]\,x = (\lambda z. \;z)\,$ (pela regra 1)
+   3. Resolvemos a primeira parte: $[(\lambda z. \;z)/x]\,x = (\lambda z. \;z)\,$ (pela regra 1)
 
-4. Para a segunda parte, aplicamos a regra 4: $[(\lambda z. \;z)/x] \;(\lambda y.\;y \;x) \, = \lambda y.([(\lambda z. \;z)/x] \;(x \;y))\,$
+   4. Para a segunda parte, aplicamos a regra 4: $[(\lambda z. \;z)/x] \;(\lambda y.\;y \;x) \, = \lambda y.([(\lambda z. \;z)/x] \;(x \;y))\,$
 
-5. Aplicamos a regra 3 novamente dentro da abstração: $\lambda y. \;(([(\lambda z. \;z)/x]\,x)([(\lambda z. \;z)/x]\,y))\,$
+   5. Aplicamos a regra 3 novamente dentro da abstração: $\lambda y. \;(([(\lambda z. \;z)/x]\,x)([(\lambda z. \;z)/x]\,y))\,$
 
-6. Resolvemos: $\lambda y.((\lambda z. \;z)y)\,$
+   6. Resolvemos: $\lambda y.((\lambda z. \;z)y)\,$
 
-7. Reconstruímos a expressão completa: $((\lambda z. \;z) (\lambda y. \;((\lambda z. \;z) \;y)))\,$
+   7. Reconstruímos a expressão completa: $((\lambda z. \;z) (\lambda y. \;((\lambda z. \;z) \;y)))\,$
 
-O resultado de $[(\lambda z. \;z) / x] \ ,(x (\lambda y.x \;y))\,$ é $((\lambda z. \;z) (\lambda y. \;((\lambda z. \;z)y)))\,$. Todas as ocorrências livres de $x\,$ foram substituídas por $(\lambda z. \;z)\,$.
+   O resultado de $[(\lambda z. \;z) / x] \ ,(x (\lambda y.x \;y))\,$ é $((\lambda z. \;z) (\lambda y. \;((\lambda z. \;z)y)))\,$. Todas as ocorrências livres de $x\,$ foram substituídas por $(\lambda z. \;z)\,$.
 
 **7**: Realize a substituição $[y/x] \;(\lambda y. \;(\lambda x. \;y))\,$.
 
-**Solução**:
+   **Solução**:
 
-1. Estamos substituindo $x\,$ por $y\,$ na expressão $\lambda y.(\lambda x. \;y)\,$. Este caso requer atenção para evitar captura de variáveis.
+   1. Estamos substituindo $x\,$ por $y\,$ na expressão $\lambda y.(\lambda x. \;y)\,$. Este caso requer atenção para evitar captura de variáveis.
 
-2. Aplicamos a regra 4 para a abstração externa. Como $y\,$ é a variável ligada e também o termo de substituição, precisamos fazer uma redução $\alpha\,$ primeiro:
+   2. Aplicamos a regra 4 para a abstração externa. Como $y\,$ é a variável ligada e também o termo de substituição, precisamos fazer uma redução $\alpha\,$ primeiro:
 
-   $$\lambda y.(\lambda x. \;y) \to_\alpha \lambda z. \;(\lambda x.z)\,$$
+      $$\lambda y.(\lambda x. \;y) \to_\alpha \lambda z. \;(\lambda x.z)\,$$
 
-3. Agora podemos aplicar a substituição com segurança:
+   3. Agora podemos aplicar a substituição com segurança:
 
-   $$[y/x] \;(\lambda z. \;(\lambda x. \;z))\,$$
+      $$[y/x] \;(\lambda z. \;(\lambda x. \;z))\,$$
 
-4. Aplicamos a regra 4: $\lambda z.([y/x] \;(\lambda x. \;z))\,$
+   4. Aplicamos a regra 4: $\lambda z.([y/x] \;(\lambda x. \;z))\,$
 
-5. Para a abstração interna, não precisamos substituir, pois $x\,$ está ligado: $\lambda z. \;(\lambda x. \;z)\,$
+   5. Para a abstração interna, não precisamos substituir, pois $x\,$ está ligado: $\lambda z. \;(\lambda x. \;z)\,$
 
-O resultado de $[y/x] \;(\lambda y. \;(\lambda x. \;y))\,$ é $\lambda z. \;(\lambda x. \;z)\,$. A redução $\alpha\,$ foi necessária para evitar a captura da variável $y$, e a substituição não afetou o corpo interno devido à ligação de $x\,$.
+   O resultado de $[y/x] \;(\lambda y. \;(\lambda x. \;y))\,$ é $\lambda z. \;(\lambda x. \;z)\,$. A redução $\alpha\,$ foi necessária para evitar a captura da variável $y$, e a substituição não afetou o corpo interno devido à ligação de $x\,$.
 
 **8**: Realize a substituição $[(\lambda x.\;y \;x)/z] \ ,(\lambda y. \;z \;y)\,$.
 
-**Solução**:
+   **Solução**:
 
-1. Estamos substituindo $z\,$ por $(\lambda x.\;y \;x)\,$ na expressão $\lambda y. \;z \;y\,$. Temos que ter cuidado com a possível captura de variáveis.
+   1. Estamos substituindo $z\,$ por $(\lambda x.\;y \;x)\,$ na expressão $\lambda y. \;z \;y\,$. Temos que ter cuidado com a possível captura de variáveis.
 
-2. Aplicamos a regra 4: $[(\lambda x.\;y \;x)/z] \ ,(\lambda y. \;z \;y) \, = \lambda y'.([(\lambda x. \;x \;y)/z] \ ,(zy'))\,$
-   Note que fizemos uma redução $\alpha\,$ preventiva, renomeando $y\,$ para $y'$ para evitar possível captura.
+   2. Aplicamos a regra 4: $[(\lambda x.\;y \;x)/z] \ ,(\lambda y. \;z \;y) \, = \lambda y'.([(\lambda x. \;x \;y)/z] \ ,(zy'))\,$
+      Note que fizemos uma redução $\alpha\,$ preventiva, renomeando $y\,$ para $y'$ para evitar possível captura.
 
-3. Agora aplicamos a regra 3 no corpo da abstração: $\lambda y'. \;(([(\lambda x.\;y \;x)/z]z)([(\lambda x. \;x \;y)/z]y'))\,$
+   3. Agora aplicamos a regra 3 no corpo da abstração: $\lambda y'. \;(([(\lambda x.\;y \;x)/z]z)([(\lambda x. \;x \;y)/z]y'))\,$
 
-4. Resolvemos a primeira parte: $[(\lambda x. \;x \;y)/z]z = (\lambda x. \;x \;y)\,$ (pela regra 1)
+   4. Resolvemos a primeira parte: $[(\lambda x. \;x \;y)/z]z = (\lambda x. \;x \;y)\,$ (pela regra 1)
 
-5. Resolvemos a segunda parte: $[(\lambda x. \;x \;y)/z]y' = y'$ (pela regra 2, pois $z \neq y'$)
+   5. Resolvemos a segunda parte: $[(\lambda x. \;x \;y)/z]y' = y'$ (pela regra 2, pois $z \neq y'$)
 
-6. Reconstruímos a expressão: $\lambda y'.((\lambda x. \;x \;y)y')\,$
+   6. Reconstruímos a expressão: $\lambda y'.((\lambda x. \;x \;y)y')\,$
 
-O resultado de $[(\lambda x. \;x \;y)/z] \ ,(\lambda y. \;z \;y)\,$ é $\lambda y'. \;((\lambda x. \;x \;y)y')\,$. A redução $\alpha\,$ preventiva evitou a captura de variáveis, e a substituição foi realizada corretamente no corpo da abstração.
+   O resultado de $[(\lambda x. \;x \;y)/z] \ ,(\lambda y. \;z \;y)\,$ é $\lambda y'. \;((\lambda x. \;x \;y)y')\,$. A redução $\alpha\,$ preventiva evitou a captura de variáveis, e a substituição foi realizada corretamente no corpo da abstração.
 
 **9**: Realize a substituição $[(\lambda x. \;x)/y] \ ,(\lambda x. \;y \;x)\,$.
 
-**Solução**:
+   **Solução**:
 
-1. Estamos substituindo $y\,$ por $(\lambda x. \;x)\,$ na expressão $\lambda x. \;y \;x\,$. Precisamos ter cuidado com a variável ligada $x\,$.
+   1. Estamos substituindo $y\,$ por $(\lambda x. \;x)\,$ na expressão $\lambda x. \;y \;x\,$. Precisamos ter cuidado com a variável ligada $x\,$.
 
-2. Aplicamos a regra 4: $[(\lambda x.x)/y] \ ,(\lambda x. \;y \;x) \, = \lambda x'. \;([(\lambda x. \;x)/y] \ ,(yx'))\,$
-   Realizamos uma redução $\alpha\,$ preventiva, renomeando $x\,$ para $x'$.
+   2. Aplicamos a regra 4: $[(\lambda x.x)/y] \ ,(\lambda x. \;y \;x) \, = \lambda x'. \;([(\lambda x. \;x)/y] \ ,(yx'))\,$
+      Realizamos uma redução $\alpha\,$ preventiva, renomeando $x\,$ para $x'$.
 
-3. Aplicamos a regra 3 no corpo da abstração: $\lambda x'. \;(([(\lambda x. \;x)/y]\,y)([(\lambda x. \;x)/y]x'))\,$
+   3. Aplicamos a regra 3 no corpo da abstração: $\lambda x'. \;(([(\lambda x. \;x)/y]\,y)([(\lambda x. \;x)/y]x'))\,$
 
-4. Resolvemos a primeira parte: $[(\lambda x. \;x)/y]\,y = (\lambda x. \;x)\,$ (pela regra 1)
+   4. Resolvemos a primeira parte: $[(\lambda x. \;x)/y]\,y = (\lambda x. \;x)\,$ (pela regra 1)
 
-5. Resolvemos a segunda parte: $[(\lambda x. \;x)/y]x' = x'$ (pela regra 2, pois $y \neq x'$)
+   5. Resolvemos a segunda parte: $[(\lambda x. \;x)/y]x' = x'$ (pela regra 2, pois $y \neq x'$)
 
-6. Reconstruímos a expressão: $\lambda x'. \;((\lambda x. \;x) \;x')\,$
+   6. Reconstruímos a expressão: $\lambda x'. \;((\lambda x. \;x) \;x')\,$
 
-O resultado de $[(\lambda x. \;x)/y] \ ,(\lambda x. \;y \;x)\,$ é $\lambda x'. \;((\lambda x. \;x)x')\,$. A redução $\alpha\,$ preventiva evitou conflitos com a variável ligada $x\,$, e a substituição foi realizada corretamente.
+   O resultado de $[(\lambda x. \;x)/y] \ ,(\lambda x. \;y \;x)\,$ é $\lambda x'. \;((\lambda x. \;x)x')\,$. A redução $\alpha\,$ preventiva evitou conflitos com a variável ligada $x\,$, e a substituição foi realizada corretamente.
 
 **10**: Realize a substituição $[(\lambda z. \;z \;w)/x] \;(\lambda y. \;\lambda w. \;x \;y \;w)\,$.
 
-**Solução**:
+   **Solução**:
 
-1. Estamos substituindo $x\,$ por $(\lambda z. \;z \;w)\,$ na expressão $\lambda y.\lambda w. \;x \;y \;w$. Temos que considerar as variáveis ligadas $y\,$ e $w$.
+   1. Estamos substituindo $x\,$ por $(\lambda z. \;z \;w)\,$ na expressão $\lambda y.\lambda w. \;x \;y \;w$. Temos que considerar as variáveis ligadas $y\,$ e $w$.
 
-2. Aplicamos a regra 4 para a abstração externa: $[(\lambda z. \;z \;w)/x] \;(\lambda y. \;\lambda w.x \;y \;w) \, = \lambda y. \;([(\lambda z. \;z \;w)/x] \;(\lambda w. \;x \;y \;w))\,$
+   2. Aplicamos a regra 4 para a abstração externa: $[(\lambda z. \;z \;w)/x] \;(\lambda y. \;\lambda w.x \;y \;w) \, = \lambda y. \;([(\lambda z. \;z \;w)/x] \;(\lambda w. \;x \;y \;w))\,$
 
-3. Aplicamos a regra 4 novamente para a abstração interna:
+   3. Aplicamos a regra 4 novamente para a abstração interna:
 
-   $$\lambda y.\lambda w'. \;([(\lambda z. \;z \;w)/x] \;(\;y \;xw'))\,$$
+      $$\lambda y.\lambda w'. \;([(\lambda z. \;z \;w)/x] \;(\;y \;xw'))\,$$
 
-   Note que fizemos uma redução $\alpha$, renomeando $w$ para $w'$ para evitar captura.
+      Note que fizemos uma redução $\alpha$, renomeando $w$ para $w'$ para evitar captura.
 
-4. Agora aplicamos a regra 3 no corpo da abstração mais interna:
+   4. Agora aplicamos a regra 3 no corpo da abstração mais interna:
 
-   $$\lambda y.\lambda w'. \;(([(\lambda z. \;z \;w)/x]\,x)([(\lambda z. \;z \;w)/x]\,y)([(\lambda z. \;z \;w)/x]w'))\,$$
+      $$\lambda y.\lambda w'. \;(([(\lambda z. \;z \;w)/x]\,x)([(\lambda z. \;z \;w)/x]\,y)([(\lambda z. \;z \;w)/x]w'))\,$$
 
-5. Resolvemos cada parte:
-   - $[(\lambda z. \;z \;w)/x]\,x = (\lambda z. \;z \;w)\,$ (pela regra 1)
-   - $[(\lambda z. \;z \;w)/x]\,y = y\,$ (pela regra 2, pois $x \neq y\,$)
-   - $[(\lambda z. \;z \;w)/x]w' = w'$ (pela regra 2, pois $x \neq w'$)
+   5. Resolvemos cada parte:
+      - $[(\lambda z. \;z \;w)/x]\,x = (\lambda z. \;z \;w)\,$ (pela regra 1)
+      - $[(\lambda z. \;z \;w)/x]\,y = y\,$ (pela regra 2, pois $x \neq y\,$)
+      - $[(\lambda z. \;z \;w)/x]w' = w'$ (pela regra 2, pois $x \neq w'$)
 
-6. Reconstruímos a expressão: $\lambda y.\lambda w'. \;((\lambda z. \;z \;w) \;y \;w')\,$
+   6. Reconstruímos a expressão: $\lambda y.\lambda w'. \;((\lambda z. \;z \;w) \;y \;w')\,$
 
-O resultado de $[(\lambda z. \;z. \;w)/x] \;(\lambda y.\lambda w. \;x \;y \;w)\,$ é $\lambda y.\lambda w'.((\lambda z. \;z. \;w) \;y \;w')\,$. A redução $\alpha\,$ preventiva na variável $w$ evitou a captura, e a substituição foi realizada corretamente, preservando a estrutura da abstração dupla.
+   O resultado de $[(\lambda z. \;z. \;w)/x] \;(\lambda y.\lambda w. \;x \;y \;w)\,$ é $\lambda y.\lambda w'.((\lambda z. \;z. \;w) \;y \;w')\,$. A redução $\alpha\,$ preventiva na variável $w$ evitou a captura, e a substituição foi realizada corretamente, preservando a estrutura da abstração dupla.
 
 ## Semântica Denotacional no Cálculo Lambda
 
@@ -1132,7 +1120,7 @@ Finalmente, a atenta leitora pode perceber que a semântica denotacional permite
 
 **1**: Dada a função lambda $\lambda x.\;x + 2\,$, aplique-a ao valor $5\,$ e calcule o resultado.
 
-**Solução:**
+   **Solução:**
 
    1. Definindo a função lambda:
 
@@ -1152,7 +1140,7 @@ Finalmente, a atenta leitora pode perceber que a semântica denotacional permite
 
 **2**: Escreva uma expressão lambda que represente a função $f(x, y) \, = x^2 + y^2\,$, e aplique-a aos valores $x = 3\,$ e $y = 4\,$.
 
-**Solução:**
+   **Solução:**
 
    1. Definindo a função lambda:
 
@@ -1172,11 +1160,11 @@ Finalmente, a atenta leitora pode perceber que a semântica denotacional permite
 
    5. Calculando o resultado:
 
-      $$9 + 16 = 25$$
+         $$9 + 16 = 25$$
 
 **3**: Crie uma expressão lambda para a função identidade $I(x) \, = x\,$ e aplique-a ao valor $10$.
 
-**Solução:**
+   **Solução:**
 
    1. Definindo a função identidade:
 
@@ -1196,7 +1184,7 @@ Finalmente, a atenta leitora pode perceber que a semântica denotacional permite
 
 **4**: Defina uma função lambda que aceita um argumento $x\,$ e retorna o valor $x^3 + 1\,$. Aplique a função ao valor $2\,$.
 
-**Solução:**
+   **Solução:**
 
    1. Definindo a função lambda:
 
@@ -1216,7 +1204,7 @@ Finalmente, a atenta leitora pode perceber que a semântica denotacional permite
 
 **5**: Escreva uma função lambda que represente a soma de dois números, ou seja, $f(x, y) \, = x + y$, e aplique-a aos valores $x = 7$ e $y = 8$.
 
-**Solução:**
+   **Solução:**
 
    1. Definindo a função lambda:
 
@@ -1236,11 +1224,11 @@ Finalmente, a atenta leitora pode perceber que a semântica denotacional permite
 
    5. Calculando o resultado:
 
-      $$15$$
+         $$15$$
 
 **6**: Crie uma função lambda para a multiplicação de dois números, ou seja, $f(x, y) \, = x \times y$, e aplique-a aos valores $x = 6\,$ e $y = 9$.
 
-**Solução:**
+   **Solução:**
 
    1. Definindo a função lambda:
 
@@ -1260,11 +1248,11 @@ Finalmente, a atenta leitora pode perceber que a semântica denotacional permite
 
    5. Calculando o resultado:
 
-$$54$$
+      $$54$$
 
 **7**: Dada a expressão lambda $\lambda x.\;\lambda y.\;x^2 + 2\;y \;x + y^2\,$, aplique-a aos valores $x = 1\,$ e $y = 2\,$ e calcule o resultado.
 
-**Solução:**
+   **Solução:**
 
    1. Definindo a função lambda:
 
@@ -1288,7 +1276,7 @@ $$54$$
 
 **8**: Escreva uma função lambda que aceite dois argumentos $x\,$ e $y\,$ e retorne o valor de $x - y\,$. Aplique-a aos valores $x = 15\,$ e $y = 5\,$.
 
-**Solução:**
+   **Solução:**
 
    1. Definindo a função lambda:
 
@@ -1308,11 +1296,11 @@ $$54$$
 
    5. Calculando o resultado:
 
-      $$10$$
+         $$10$$
 
 **9**: Defina uma função lambda que represente a divisão de dois números, ou seja, $f(x, y) \, = \dfrac{x}{y}$, e aplique-a aos valores $x = 20$ e $y = 4\,$.
 
-**Solução:**
+   **Solução:**
 
    1. Definindo a função lambda:
 
@@ -1336,7 +1324,7 @@ $$54$$
 
 **10**: Escreva uma função lambda que calcule a função $f(x, y) \, = x^2 - y^2\,$, e aplique-a aos valores $x = 9$ e $y = 3\,$.
 
-**Solução:**
+   **Solução:**
 
    1. Definindo a função lambda:
 
