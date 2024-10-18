@@ -34,7 +34,7 @@ featured: true
 toc: true
 preview: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2024-10-18T20:51:31.439Z
+lastmod: 2024-10-18T21:57:00.264Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -104,7 +104,21 @@ Na notação matemática clássica, as funções são representadas usando símb
 
 $$f(x) \, = x^2 + 2x + 1$$
 
-Essa notação é direta e representa um relação matemática entre dois conjuntos. Descrevendo o resultado da aplicação da relação a um dos elementos de un conjunto, encontrando o elemento relacionado no outro. A definição da função não apresenta o processo de computação necessário. O cálculo lambda, por outro lado, descreve um processo de aplicação e transformação de variáveis. Enquanto a Máquina de Turing descreve a computação de forma mecânica, o cálculo lambda foca na transformação de expressões.
+Essa notação é direta e representa um relação matemática entre dois conjuntos. Descrevendo o resultado da aplicação da relação a um dos elementos de un conjunto, encontrando o elemento relacionado no outro. No exemplo acima, se aplicarmos $f$ em $2$ teremos $9$ como resultado da aplicação. A definição da função $f$ não apresenta o processo de computação necessário. Nós sabemos como calcular o resultado porque conhecemos a sintaxe da aritmética e a semântica da álgebra.
+
+O cálculo lambda descreve um processo de aplicação e transformação de variáveis. Enquanto a Máquina de Turing descreve a computação de forma mecânica, o cálculo lambda foca na transformação de expressões. Para começarmos a entender o poder do cálculo lambda, podemos trazer a função $F$ um pouco mais perto dos conceitos de Church. 
+
+Vamos começar definindo uma expressão $M$ contendo uma variável $x$, na forma:
+
+$$M(x) = x^2 + 2x + 1$$
+
+A medida que $x$ varia no domínio dos números naturais podemos obter a função representada na notação matemática padrão por $x \mapsto x^2 + x + 1$ este relação define o conjunto de valores que $M$ pode apresentar em relação aos valores de $x$. Porém, se fornecermos um valor de entrada específico, por exemplo, $2$, para $x$, valor da função será $2^2 + 4 + 1 = 9$.
+
+Avaliando funções desta forma, Church introduziu a notação
+
+$$λx: (x^2 + x + 1)$$
+
+Para representar a expressão $M$. Nesta representação temos uma abstração. Justamente porque a expressão estática $M(x)$, para $x$ fixo, torna-se uma função _abstrata_ representada por $λx:M$.
 
 Linguagens de programação modernas, como Python ou JavaScript, têm suas próprias formas de representar funções. Por exemplo, em Python, uma função pode ser representada assim:
 
@@ -131,7 +145,7 @@ A abstração, representada por $\lambda x. \;E$, define uma função onde $x\,$
 
 A abstração cria uma função sem necessariamente avaliá-la. A variável $x\,$ em $\lambda x. \;E\,$ está ligada à função e não é avaliada até que um argumento seja aplicado. **A abstração é puramente declarativa**, descreve apenas o comportamento da função sem produzir um valor imediato.
 
-**A aplicação**, expressa por $M \;N$, **é o processo de avaliar uma função com um argumento**. Aqui, $M\,$ representa a função e $N\,$ o argumento que é passado para essa função. Ou, como dizemos em cálculo lambda, **o argumento que será aplicado a função***. Considere a expressão:
+**A aplicação**, expressa por $M \;N$, **é o processo equivalente a avaliar uma função algébrica em um argumento**. Aqui, $M\,$ representa a função e $N\,$ o argumento que é passado para essa função. Ou, como dizemos em cálculo lambda, **o argumento que será aplicado a função***. Considere a expressão:
 
 $$(\lambda x. \;x + 5) \;3$$
 
@@ -142,6 +156,18 @@ $$(\lambda f. \lambda x. \;f \;(f \;x)) \;(\lambda y. \;y * 2) \;3$$
 Neste caso, temos uma função de composição dupla é aplicada à função que multiplica valores por dois e, em seguida, ao número $3$, resultando em $12\,$.
 
 Em resumo, **a abstração define uma função ao associar um parâmetro a um corpo de expressão; enquanto a aplicação avalia essa função ao fornecer um argumento**. Ambas operações são independentes, mas mas interagem para permitir a avaliação de expressões no cálculo lambda.
+
+O elo entre abstração e aplicação é uma forma de avaliação chamada redução $\beta$. Dada uma abstração $λ$, $λx:M$ e algum outro termo $N$, pensado como um argumento, temos a regra de avaliação, chamada redução $\beta$ dada por:
+
+$$(λx:M)\ N \longrightarrow_{\beta} M[x := N];$$
+
+onde $M[N/x]$ indica o resultado de substituir $N$ em todas as ocorrências de $x$ em $M$. Por exemplo, se $M = λx: (x^2 + x + 1)$ e $N = 2y + 1$, teremos:
+
+$$(λx: (x^2 + x + 1))(2y + 1) \longrightarrow_{\beta} (2y + 1)^2 + 2y + 1 + 1.$$
+
+Esta uma operação puramente formal, inserindo $N$ onde quer que $x$ ocorra em $M$.
+
+Ainda há uma coisa que a amável leitora deve ter em mente antes de continuarmos.  No cálculo lambda, os números naturais, as operações aritméticas $+$ e $\times$, assim como a exponenciação que usamos em $M$ precisam ser representados como termos $λ$. Só assim, a avaliação das expressões lambda irão computar corretamente.
 
 ## Limitações do Cálculo Lambda e Sistemas Avançados
 
@@ -242,7 +268,21 @@ A amável leitora deve entender o conceito de variáveis livres e ligadas observ
 
 $$\lambda x.\lambda y.x \;y$$
 
-Nesta expressão, temos duas abstrações aninhadas. A primeira, $\lambda x\,$, define uma função que recebe $x\,$ como argumento. A segunda, $\lambda y$, define uma função que recebe $y\,$. O termo $x \;y\,$ é a aplicação de $x\,$ ao argumento $y\,$. Podemos realizar uma **redução $\alpha\,$** para renomear as variáveis ligadas sem alterar o significado da expressão. Como não há variáveis livres aqui, podemos renomear $x\,$ para $z\,$ e $y\,$ para $w$:
+Nesta expressão, temos duas abstrações aninhadas. A primeira, $\lambda x\,$, define uma função que recebe $x\,$ como argumento. A segunda, $\lambda y$, define uma função que recebe $y\,$. O termo $x \;y\,$ é a aplicação de $x\,$ ao argumento $y\,$. Este termo pode ser visto na árvore sintática a seguir:
+
+$$
+\begin{array}{c}
+\lambda x \\
+\downarrow \\
+\lambda y \\
+\downarrow \\
+@ \\
+\diagup \quad \diagdown \\
+x \quad \quad \quad y
+\end{array}
+$$
+
+A observadora leitora já deve ter percebido que podemos realizar uma **redução $\alpha\,$** para renomear as variáveis ligadas sem alterar o significado da expressão. Como não há variáveis livres aqui, podemos renomear $x\,$ para $z\,$ e $y\,$ para $w$:
 
 $$\lambda x.\lambda y.x \;y \to_\alpha \lambda z.\lambda w.z \;w$$
 
@@ -347,6 +387,14 @@ $$(\lambda x. \;x + 1) \;2$$
 **O resultado da aplicação é a substituição da variável $x\,$ pelo valor $2\,$,** resultando em $2 + 1\,$ equivalente a $3\,$. Outros exemplos interessantes de função são a **função identidade**, que retorna o próprio valor e que é escrita como $\lambda x. \;x\,$ e uma função que some dois números e que pode ser escrita como $\lambda x. \lambda y. \;(x + y)\,$.
 
 No caso da função que soma dois números, $\lambda x. \lambda y. \;(x + y)$, temos duas abstrações $\lambda x\,$ e $\lambda y$, cada uma com sua própria variável. Logo, $\lambda x. \lambda y. \;(x + y)\,$ precisa ser aplicada a dois argumentos. Tal como: $\lambda x. \lambda y. \;(x + y)\;3\;4$.
+
+Formalmente dizemos que: 
+
+1. Se $x$ é uma variável, então $x$ é um termo lambda.
+
+2. Se $M$ e $N$ são termos lambda, então $(M\; N)$ é um termo lambda chamado de aplicação.
+
+3. Se $E$ é um termo lambda, e $x$ é uma variável, então a expressão $(λx. E)$ é um termo lambda chamado de abstração lambda.
 
 Esses elementos básicos, _variáveis, abstração e aplicação_, formam a base do cálculo lambda. Eles permitem definir e aplicar funções de forma simples sem a necessidade de nomes ou símbolos adicionais.
 
@@ -3462,7 +3510,7 @@ No cálculo lambda, a ordem em que as expressões são avaliadas define o proces
 
 Na _estratégia normal_, as expressões mais externas são reduzidas antes das internas. Já na _estratégia aplicativa_, os argumentos de uma função são reduzidos primeiro, antes de aplicar a função.
 
-Essas estratégias influenciam o resultado e o comportamento do processo de computação, especialmente em expressões que podem divergir ou não possuir valor definido. Vamos ver estas estratégias com atenção. 
+Essas estratégias influenciam o resultado e o comportamento do processo de computação, especialmente em expressões que podem divergir ou não possuir valor definido. Vamos ver estas estratégias com atenção.
 
 ## Ordem Normal (Normal-Order)
 
