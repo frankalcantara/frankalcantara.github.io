@@ -34,7 +34,7 @@ featured: true
 toc: true
 preview: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2024-10-18T21:57:00.264Z
+lastmod: 2024-10-18T22:15:38.890Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -225,9 +225,38 @@ O cálculo lambda utiliza uma notação específica para representar funções, 
 
 ### Variáveis Livres e Ligadas
 
-- **Variáveis Livres**: uma variável $x\,$ é considerada livre em uma expressão lambda se não estiver ligada a um operador $\lambda\,$. A notação $FV(M)\,$ é usada para representar o conjunto de variáveis livres em um termo $M\,$. Por exemplo, em $\lambda y. \;x + y$, a variável $x\,$ é livre e $y\,$ é ligada.
+- **Variáveis Livres**: uma variável $x\,$ é considerada livre em uma expressão lambda se não estiver ligada a um operador $\lambda\,$. A notação $FV(M)\,$ é usada para representar o conjunto de variáveis livres, _Free Variables_, em um termo $M\,$. Por exemplo, em $\lambda y. \;x + y$, a variável $x\,$ é livre e $y\,$ é ligada.
 
-- **Variáveis Ligadas**: uma variável é considerada ligada se estiver associada a um operador $\lambda\,$. Por exemplo, em $\lambda x. \;x + 1$, a variável $x\,$ é ligada.
+- **Variáveis Ligadas**: uma variável é considerada ligada se estiver associada a um operador $\lambda\,$. Por exemplo, em $\lambda x. \;x + 1$, a variável $x\,$ é ligada. A notação $BV(M)$ representa o conjunto das variáveis ligadas, _Bound Variable_, no termo $M$.
+
+Formalmente dizemos que: para qualquer termo termo lambda $M$, o conjunto $FV(M)$ de variáveis livres de $M$ e o conjunto $BV(M)$ de variáveis ligadas em $M$ são definidos de forma indutiva da seguinte maneira:
+
+1. Se $M = x$ (uma variável), então:
+   - $FV(x) = \{x\}$
+   - $BV(x) = \emptyset$
+
+2. Se $M = (M_1 M_2)$, então:
+   - $FV(M) = FV(M_1) \cup FV(M_2)$
+   - $BV(M) = BV(M_1) \cup BV(M_2)$
+
+3. Se $M = (\lambda x: M_1)$, então:
+   - $FV(M) = FV(M_1) \setminus \{x\}$
+   - $BV(M) = BV(M_1) \cup \{x\}$
+
+Se $x \in FV(M_1)$, dizemos que as ocorrências da variável $x$ ocorrem no escopo de $\lambda$. Um termo lambda $M$ é fechado se $FV(M) = \emptyset$, ou seja, se não possui variáveis livres.
+
+O que a atenta leitora não deve perder de vista é que as variáveis ligadas são apenas marcadores de posição, de modo que elas podem ser renomeadas livremente sem alterar o comportamento de redução do termo, desde que não entrem em conflito com as variáveis livres. Por exemplo, os termos $\lambda x:\;(x(\lambda y:\;x(y\;x))$ e $\lambda x:\;(x(\lambda z: x\;(z\;x))$ devem ser considerados equivalentes. Da mesma forma, os termos $\lambda x:\; (x\;(\lambda y:\; x\;(y\;x))$ e $\lambda w:\; (w\;(\lambda z:\; w\;(z\;w))$ serão considerados equivalentes. No cálculo lambda está definido um conjunto de regras, redução $\alpha$ que determina como podemos renomear variáveis. 
+
+
+**Exemplo 7.2**:
+\[
+FV\left((\lambda x: yx)z\right) = \{y, z\}, \quad BV\left((\lambda x: yx)z\right) = \{x\}
+\]
+e
+\[
+FV\left((\lambda xy: yx)zw\right) = \{z, w\}, \quad BV\left((\lambda xy: yx)zw\right) = \{x, y\}.
+\]
+
 
 ### Operações Aritméticas
 
