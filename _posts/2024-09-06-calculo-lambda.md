@@ -34,7 +34,7 @@ featured: true
 toc: true
 preview: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2024-10-18T17:15:59.065Z
+lastmod: 2024-10-18T17:23:41.438Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -93,7 +93,7 @@ O trabalho de Alonzo Church é estruturado sobre a ideia de _abstração funcion
 
 No cálculo lambda, uma função é escrita como $\lambda x . \;E\,$. Aqui, $\lambda\,$ indica que é uma função, $x\,$ é a variável ligada, onde a função é aplicada, e $E\,$ é o corpo da função. Por exemplo, a função que soma $1\,$ a um número é escrita como $\lambda x . \;x + 1\,$. Isso possibilita a manipulação direta de funções, sem a necessidade de linguagens ou estruturas rígidas. A Figura 1 apresenta o conceito de funções de primeira classe.
 
-![](/assets/images/funcPrima.png)
+![Diagrama mostrando uma função cujo corpo é composto por outra função lambda e um valor. No diagrama vemos a função principal recebendo a função do corpo, e um valor. Finalmente mostra a função composta e o resultado da sua aplicação](/assets/images/funcPrima.png)
 _Diagrama de Abstração e Aplicação usando funções no corpo da função. A função principal é a função de ordem superior, ou de primeira classe_{: legenda}
 
 A abstração funcional também criou o conceito de **funções anônimas**. Hoje, muitas linguagens modernas, como Haskell, Lisp, Python e JavaScript, adotam essas funções como parte das ferramentas disponíveis em sua sintaxe. Tais funções são conhecidas como _lambda functions_ ou _arrow functions_.
@@ -124,7 +124,7 @@ A notação $\lambda\,$ indica que estamos criando uma função anônima. Essa a
 
 A atenta leitora deve notar que a abstração e a aplicação são operações distintas do cálculo lambda, como pode ser visto na Figura 1.
 
-![](/assets/images/abstAplica.png)
+![Diagrama mostrando abstração, a aplicação da função a um valor e, finalmente a forma normal obtida como resultado da aplicação da função](/assets/images/abstAplica.png)
 _Diagrama da relação entre abstração e aplicação no cálculo lambda_{: legenda}
 
 A abstração, representada por $\lambda x. \;E$, define uma função onde $x\,$ é o parâmetro e $E\,$ é o corpo da função. Por exemplo, $\lambda x. \;x + 5\,$ define uma função que soma $5\,$ ao argumento fornecido. Outro exemplo é $\lambda f. \lambda x. \;f \;(f \;x)$, que descreve uma função que aplica o argumento $f\,$ duas vezes ao segundo argumento $x\,$.
@@ -1734,7 +1734,7 @@ A notação $[x/N]M\,$ representa a substituição de todas as ocorrências livr
 
 A substituição indicada em uma redução $\beta\,$ deve ser realizada com cuidado para evitar a captura de variáveis livres em $N\,$ que possam se tornar ligadas em $E\,$ após a substituição. Para evitar a captura de varáveis livres, pode ser necessário realizar uma redução $\alpha\,$ antes de começar a redução beta, renomeando variáveis ligadas em $E\,$ que possam entrar em conflito com variáveis livres em $N$, Figura 2.
 
-![](/assets/images/beta.png)
+![Diagrama mostrando uma função aplicada a um valor, a regra formal da redução beta e a forma normal obtida](/assets/images/beta.png)
 _Exemplo de Redução Beta_{: legenda}
 
 Considere, por exemplo, o termo $E = (\lambda y.\;x + y)\,$ e o objetivo de substituir $x\,$ por $N = y\,$. Se fizermos a substituição diretamente, obteremos:
@@ -2314,7 +2314,7 @@ Em suma, a redução $\eta$ desempenha um papel importante na otimização de co
 
 Um dos obstáculos enfrentado por Church durante o desenvolvimento do cálculo lambda dizia respeito a consistência do processo de redução. Ou seja, provar que um termo lambda mesmo que reduzido de formas diferentes, chegaria a mesma forma normal, caso esta forma existisse. Em busca desta consistência, Church e [J. Barkley Rosser](https://en.wikipedia.org/wiki/J._Barkley_Rosser), seu estudante de doutorado, formularam o teorema que viria a ser chamado de **Teorema de Church-Rosser**[^cita8]. Este teorema, também chamado de propriedade de confluência, garante a consistência e a previsibilidade do sistema de redução beta, afirmando que, **independentemente da ordem em que as reduções beta são aplicadas, o resultado final, se existir, é o mesmo** Figura 1.
 
-![](/assets/images/conflu.png)
+![Um diagrama com um termo principal, M e dois caminhos de redução chegando ao mesmo ponto](/assets/images/conflu.png)
 _Diagrama da Propriedade de Confluência determinada pelo Teorema de Church-Rosser_{: legenda}
 
 Formalmente teremos:
@@ -7182,7 +7182,7 @@ Repita este exercício. Ele demonstra como as reduções em um termo bem tipado 
 
    **Solução**: considere o termo $(\lambda x. \;x \;x) (\lambda x. \;x \;x)\,$. No cálculo lambda não tipado, este termo reduz infinitamente para si mesmo:
 
-$$(\lambda x. \;x \;x) (\lambda x. \;x \;x) \rightarrow_\beta (\lambda x. \;x \;x) (\lambda x. \;x \;x) \rightarrow_\beta \cdots$$
+   $$(\lambda x. \;x \;x) (\lambda x. \;x \;x) \rightarrow_\beta (\lambda x. \;x \;x) (\lambda x. \;x \;x) \rightarrow_\beta \cdots$$
 
    No cálculo lambda tipado, este termo seria rejeitado porque não é possível atribuir um tipo consistente para $x\,$ em $x \;x\,$.
 
@@ -7218,9 +7218,9 @@ $$(\lambda x. \;x \;x) (\lambda x. \;x \;x) \rightarrow_\beta (\lambda x. \;x \;
 
 O cálculo lambda tipado, com suas regras de tipagem e propriedades de normalização, oferece um conjunto de ferramentas para analisar programas e suas características. Esta estrutura formal permite a construção de programas com certas garantias e revela uma relação entre a lógica proposicional e os sistemas de tipos.
 
-Esta relação é formalizada na Correspondência de Curry-Howard, que estabelece uma conexão entre programas e provas matemáticas. A correspondência liga duas áreas da matemática e da ciência da computação. Como pode ser visto na Figura 1. 
+Esta relação é formalizada na Correspondência de Curry-Howard, que estabelece uma conexão entre programas e provas matemáticas. A correspondência liga duas áreas da matemática e da ciência da computação. Como pode ser visto na Figura 1.
 
-![](/assets/images/churchRosser.png)
+![Um diagrama de blocos mostrando a relação entre a aplicação de função e a lógica proposicional](/assets/images/churchRosser.png)
 _Diagrama da Relação entre cálculo lambda e lógica proposicional mostrando a importância do Teorema de Church-Rosser._ {: legenda}
 
 Na Correspondência de Curry-Howard, os tipos em linguagens de programação podem ser vistos como proposições lógicas, e os programas bem tipados como provas dessas proposições. Esta perspectiva fornece uma forma de analisar sistemas de tipos e oferece abordagens para o desenvolvimento de software e a verificação formal de programas.
