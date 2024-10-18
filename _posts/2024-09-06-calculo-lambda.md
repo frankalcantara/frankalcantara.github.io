@@ -33,8 +33,8 @@ draft: 2024-09-08T21:19:20.392Z
 featured: true
 toc: true
 preview: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2024-10-18T14:25:19.742Z
+beforetoc: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
+lastmod: 2024-10-18T16:26:46.784Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -60,7 +60,16 @@ O trabalho de Church estabeleceu limites claros para computação, ajudando a re
 
 Na mesma época, [Alan Turing](https://en.wikipedia.org/wiki/Alan_Turing) desenvolveu a [máquina de Turing](https://en.wikipedia.org/wiki/Turing_machine), uma abordagem diferente para tratar a computabilidade. Apesar das diferenças, essas duas abordagens provaram ser equivalentes e, juntas, estabeleceram os alicerces da teoria da computação moderna. O objetivo de Church era capturar o conceito de _cálculo efetivo_[^cita5]. Seu trabalho foi uma das primeiras tentativas de formalizar matematicamente o ato de computar. Mais tarde, a equivalência entre o cálculo lambda e a máquina de Turing consolidou a ideia de que ambos podiam representar qualquer função computável, levando à formulação da [Tese de Church-Turing](https://en.wikipedia.org/wiki/Church%E2%80%93Turing_thesis). Afirmando que qualquer função computável pode ser resolvida pela máquina de touring e, equivalentemente, pelo cálculo lambda, fornecendo uma definição matemática precisa do que é, ou não é, computável.
 
-A partir do meio da década de 1930, vários matemáticos e lógicos, como [Church](https://en.wikipedia.org/wiki/Alonzo_Church), [Turing](https://en.wikipedia.org/wiki/Alan_Turing), [Gödel](https://en.wikipedia.org/wiki/Kurt_G%C3%B6del) e [Post](https://en.wikipedia.org/wiki/Emil_Leon_Post), desenvolveram modelos diferentes para formalizar a computabilidade. Cada um desses modelos abordou o problema de uma perspectiva exclusiva.
+A partir do meio da década de 1930, vários matemáticos e lógicos, como [Church](https://en.wikipedia.org/wiki/Alonzo_Church), [Turing](https://en.wikipedia.org/wiki/Alan_Turing), [Gödel](https://en.wikipedia.org/wiki/Kurt_G%C3%B6del) e [Post](https://en.wikipedia.org/wiki/Emil_Leon_Post), desenvolveram modelos diferentes para formalizar a computabilidade. Cada um desses modelos abordou o problema de uma perspectiva exclusiva. Como pode ser visto na Tabela 1.
+
+| Abordagem            | Criador e Ano         | Características Principais                                      | Contribuições / Diferenças                                           |
+|----------------------|-----------------------|----------------------------------------------------------------|----------------------------------------------------------------------|
+| Cálculo Lambda       | Church, $1936$        | • Sistema formal baseado em funções<br>• Usa abstração ($\lambda$) e aplicação<br>• Funções como objetos de primeira classe | • Base para linguagens funcionais<br>• Ênfase em composição de funções<br>• Influenciou teoria dos tipos |
+| Máquina de Turing    | Turing, $1936$        | • Modelo abstrato de máquina<br>• Fita infinita, cabeçote de leitura/escrita<br>• Estados finitos e transições | • Modelo intuitivo de computação<br>• Base para análise de complexidade<br>• Inspirou arquitetura de computadores |
+| Funções Recursivas   | Gödel, $1934$         | • Baseado em teoria dos números<br>• Usa recursão e minimização<br>• Definição indutiva de funções | • Formalização rigorosa<br>• Conexão com lógica matemática<br>• Base para teoria da recursão |
+| Sistemas de Reescrita| Post, $1943$          | • Manipulação de strings<br>• Regras de produção<br>• Transformação de símbolos | • Simplicidade conceitual<br>• Base para gramáticas formais<br>• Influenciou linguagens de programação |
+
+_Tabela 1. Relaão entre as contribuições de Church, Gödel e Post_{: Legenda}
 
 Church propôs o cálculo lambda para descrever funções de forma simbólica, usando a _abstração lambda_. Esse modelo representa funções como estruturas de primeira classe formalizando a computabilidade em termos de funções e variáveis.
 
@@ -82,7 +91,10 @@ Apesar das diferenças estruturais entre o cálculo lambda, as máquinas de Turi
 
 O trabalho de Alonzo Church é estruturado sobre a ideia de _abstração funcional_. Esta abstração permitiu tratar funções como estruturas de primeira classe. Estruturas que podem ser passadas como argumentos, retornadas como resultados e usadas em expressões composta, assim como qualquer outro valor na álgebra tradicional.
 
-No cálculo lambda, uma função é escrita como $\lambda x . \;E\,$. Aqui, $\lambda\,$ indica que é uma função, $x\,$ é a variável ligada, onde a função é aplicada, e $E\,$ é o corpo da função. Por exemplo, a função que soma $1\,$ a um número é escrita como $\lambda x . \;x + 1\,$. Isso possibilita a manipulação direta de funções, sem a necessidade de linguagens ou estruturas rígidas.
+No cálculo lambda, uma função é escrita como $\lambda x . \;E\,$. Aqui, $\lambda\,$ indica que é uma função, $x\,$ é a variável ligada, onde a função é aplicada, e $E\,$ é o corpo da função. Por exemplo, a função que soma $1\,$ a um número é escrita como $\lambda x . \;x + 1\,$. Isso possibilita a manipulação direta de funções, sem a necessidade de linguagens ou estruturas rígidas. A Figura 1 apresenta o conceito de funções de primeira classe.
+
+![](/assets/images/funcPrima.png)
+_Diagrama de Abstração e Aplicação usando funções no corpo da função. A função principal é a função de ordem superior, ou de primeira classe_{: legenda}
 
 A abstração funcional também criou o conceito de **funções anônimas**. Hoje, muitas linguagens modernas, como Haskell, Lisp, Python e JavaScript, adotam essas funções como parte das ferramentas disponíveis em sua sintaxe. Tais funções são conhecidas como _lambda functions_ ou _arrow functions_.
 
@@ -90,7 +102,7 @@ A abstração funcional possibilitou a criação de operações de combinação,
 
 Na notação matemática clássica, as funções são representadas usando símbolos de variáveis e operadores. Por exemplo, uma função quadrática pode ser escrita como:
 
-$$ f(x) \, = x^2 + 2x + 1$$
+$$f(x) \, = x^2 + 2x + 1$$
 
 Essa notação é direta e representa um relação matemática entre dois conjuntos. Descrevendo o resultado da aplicação da relação a um dos elementos de un conjunto, encontrando o elemento relacionado no outro. A definição da função não apresenta o processo de computação necessário. O cálculo lambda, por outro lado, descreve um processo de aplicação e transformação de variáveis. Enquanto a Máquina de Turing descreve a computação de forma mecânica, o cálculo lambda foca na transformação de expressões.
 
@@ -110,7 +122,10 @@ $$\lambda x. \lambda y. \;(x + y)$$
 
 A notação $\lambda\,$ indica que estamos criando uma função anônima. Essa abstração explícita é menos comum na notação matemática clássica na qual, geralmente definimos funções nomeadas.
 
-A atenta leitora deve notar que a abstração e a aplicação são operações distintas do cálculo lambda.
+A atenta leitora deve notar que a abstração e a aplicação são operações distintas do cálculo lambda, como pode ser visto na Figura 1.
+
+![](/assets/images/abstAplica.png)
+_Diagrama da relação entre abstração e aplicação no cálculo lambda_{: legenda}
 
 A abstração, representada por $\lambda x. \;E$, define uma função onde $x\,$ é o parâmetro e $E\,$ é o corpo da função. Por exemplo, $\lambda x. \;x + 5\,$ define uma função que soma $5\,$ ao argumento fornecido. Outro exemplo é $\lambda f. \lambda x. \;f \;(f \;x)$, que descreve uma função que aplica o argumento $f\,$ duas vezes ao segundo argumento $x\,$.
 
@@ -2998,6 +3013,11 @@ Os combinadores também tem origem no trabalho de [Moses Schönfinkel](https://e
 | $S$                 | Verschmelzungsfunktion       | função de fusão           | $\lambda \;y \;xz. \;xz(yz)\,$                  | $S$             |
 
 _Tabela 1: Relação dos Combinadores Originais._{: legenda}
+
+A Figura 1 mostra as definições dos combinadores $I$, $K$, $S$ e uma aplicação de cada um.
+
+![](/assets/images/comb.png)
+_Definição e Aplicação dos Combinadores $I$, $K$, $S$_{: legenda}
 
 Schönfinkel também tinha combinadores que representavam operações lógicas, um para o [traço de Sheffer](https://en.wikipedia.org/wiki/Sheffer_stroke)(NAND), descoberto em 1913, e outro para a quantificação. 
 
@@ -7220,7 +7240,10 @@ $$\lambda f:(\text{Nat}\rightarrow\text{Nat})\rightarrow\text{Nat}. f (\lambda x
 
 O cálculo lambda tipado, com suas regras de tipagem e propriedades de normalização, oferece um conjunto de ferramentas para analisar programas e suas características. Esta estrutura formal permite a construção de programas com certas garantias e revela uma relação entre a lógica proposicional e os sistemas de tipos.
 
-Esta relação é formalizada na Correspondência de Curry-Howard, que estabelece uma conexão entre programas e provas matemáticas. A correspondência liga duas áreas da matemática e da ciência da computação.
+Esta relação é formalizada na Correspondência de Curry-Howard, que estabelece uma conexão entre programas e provas matemáticas. A correspondência liga duas áreas da matemática e da ciência da computação. Como pode ser visto na Figura 1. 
+
+![](/assets/images/churchRosser.png)
+_Diagrama da Relação entre cálculo lambda e lógica proposicional mostrando a importância do Teorema de Church-Rosser._ {: legenda}
 
 Na Correspondência de Curry-Howard, os tipos em linguagens de programação podem ser vistos como proposições lógicas, e os programas bem tipados como provas dessas proposições. Esta perspectiva fornece uma forma de analisar sistemas de tipos e oferece abordagens para o desenvolvimento de software e a verificação formal de programas.
 
