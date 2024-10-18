@@ -34,7 +34,7 @@ featured: true
 toc: true
 preview: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Este guia apresenta o cálculo lambda. Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2024-10-18T00:20:09.860Z
+lastmod: 2024-10-18T00:50:37.877Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -2435,16 +2435,13 @@ $$
 **Solução:**
 Caminho 1: aplique a primeira função:
 
-$$
-M = (\lambda x.\; (\lambda y.\; x \times y))\; 5\; 3$$
+$$M = (\lambda x.\; (\lambda y.\; x \times y))\; 5\; 3$$
 
 $$\to_\beta (\lambda y.\; 5 \times y)\; 3$$
 
 Agora, aplique a segunda função:
 
-$$
-\to_\beta 5 \times 3 = 15
-$$
+$$\to_\beta 5 \times 3 = 15$$
 
 Caminho 2: Primeiro, aplique a segunda função:
 
