@@ -21,7 +21,7 @@ toc: true
 published: false
 slug: calculo-simplificado
 draft: 2024-07-06T19:30:40.256Z
-lastmod: 2024-09-28T14:02:20.355Z
+lastmod: 2024-10-17T20:56:19.744Z
 ---
 
 O livro **Calculus Made Easy** de [SILVANUS P. THOMPSON](https://en.wikipedia.org/wiki/Silvanus_P._Thompson) foi colocado em domínio público, tanto no Brasil quanto nos EUA. Este é um dos melhores livros introdutórios de cálculo já escrito. Simples, direto e abrangente. Sem nenhuma modéstia, ou vergonha na cara, escolhi este livro para tradução, atualização e expansão. Na esperança de criar um material atualizado para o ensino e fomento do cálculo entre alguns estudantes de língua portuguesa. Vou traduzir, atualizar, comentar e expandir o conteúdo. Contudo, como o livro é ótimo, algumas coisas precisam ser mantidas o mais original possível por curiosidade e pelo valor cultural. Um bom exemplo é a brincadeira da capa:
@@ -158,9 +158,7 @@ Para ilustrar, vamos analisar dois exemplos:
 
 1. Vamos fazer com que $x$ e $y$ sejam, respectivamente, a base e a altura de um triângulo retângulo, Figura 2.1.a, cuja inclinação da hipotenusa esteja fixada em $30^\circ$. Supondo que este triângulo seja capaz de se expandir e ainda manter seus ângulos constantes. Quando a base do triângulo crescer de modo a se tornar $x + dx$, a altura se tornará $y + dy$. Como visto na Figura 2.2.a. Neste cenário, o aumento de $x$ resulta em um aumento de $y$. Observe ainda que o triângulo menor, cuja altura é $dy$, e cuja base é $dx$, é semelhante ao triângulo original. Deve ser óbvio que o valor da razão $\frac{dy}{dx}$ será o mesmo da razão $\frac{y}{x}$. Como o ângulo é $30^\circ$, é constante, veremos que:
 
-$$
-\frac{dy}{dx} = \frac{1}{1.73}.
-$$
+    $$\frac{dy}{dx} = \frac{1}{1.73}$$
 
 2. Considere a Figura 2.2.b, onde uma escada $AB$ (em lilás) de comprimento fixo está apoiada contra uma parede. Definiremos $x$ como a distância horizontal entre a base da escada (ponto A) e a parede, enquanto $y$ representará a altura alcançada pela escada na parede (ponto B). Observe que $y$ depende diretamente de $x$. Intuitivamente, se afastarmos a base da escada da parede (aumentando $x$), a extremidade superior da escada descerá (diminuindo $y$), como ilustrado na Figura 2.2.b (em azul). Matematicamente, podemos expressar isso da seguinte forma: se incrementarmos $x$ para $x + dx$, $y será reduzido para $y - dy$. Em outras palavras, um incremento positivo em $x$ resulta em um incremento negativo em $y$, demonstrando a relação inversa entre estas variáveis no contexto deste problema geométrico. Parece razoável, mas quão razoável? Suponha que a escada fosse tão longa que, quando a extremidade inferior $A$ estivesse a $50$ centímetros da parede, a extremidade superior $B$ alcançasse $4.5$ metros do chão. Se você puxar a extremidade inferior $1$ centímetro a mais, quanto a extremidade superior descerá?
 
