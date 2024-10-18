@@ -34,7 +34,7 @@ featured: true
 toc: true
 preview: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2024-10-18T16:34:03.337Z
+lastmod: 2024-10-18T17:15:59.065Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -819,7 +819,7 @@ O resultado de $[3/x] \ ,(x + y)\,$ é $3 + y\,$. Ou seja, a variável $x\,$ foi
 
    pois $x \neq y\,$ e $y \notin FV((\lambda z. \;z))$$
 
-3. Agora mudamos o foco para a substituição dentro do corpo da abstração: 
+3. Agora mudamos o foco para a substituição dentro do corpo da abstração:
 
    $$[(\lambda z. \;z)/x]\,(x \;y)\,$$
 
@@ -2451,7 +2451,7 @@ O Teorema de Church-Rosser fornece uma base teórica para otimizações de compi
 
 ### Exercícios Relacionados ao Teorema de Church-Rosser
 
-**1**. Reduza o termo a seguir usando dois caminhos diferentes de redução:
+**1**: Reduza o termo a seguir usando dois caminhos diferentes de redução:
 
 $$
 M = (\lambda x.\;(\lambda y.\;x \times y))\;5\;3
@@ -2488,7 +2488,7 @@ $$
 
 Ambos os caminhos levam à forma normal $15\,$.
 
-**2**. Mostre dois caminhos distintos de redução para o termo:
+**2**: Mostre dois caminhos distintos de redução para o termo:
 
 $$
 M = (\lambda f.\;(\lambda x.\;f (f x)))\;(\lambda y.\;y + 1)\;2
@@ -2561,7 +2561,7 @@ $$\to_\beta 7 + 8 = 15$$
 
 Ambos os caminhos levam à forma normal $15\,$.
 
-**4**. Prove que o termo satisfaz a confluência para diferentes sequências de reduções.
+**4**: Prove que o termo satisfaz a confluência para diferentes sequências de reduções.
 
 $$
 M = (\lambda f.\;f (f 3))\;(\lambda x.\;x + 1)
@@ -2596,7 +2596,7 @@ $$\to_\beta 4 + 1 = 5$$
 
 Ambos os caminhos levam à forma normal $5\,$.
 
-**5**. Identifique a forma normal do termo abaixo usando diferentes estratégias de redução.
+**5**: Identifique a forma normal do termo abaixo usando diferentes estratégias de redução.
 
 $$
 M = (\lambda x.\;(\lambda y.\;x + y))\;6\;4
@@ -2627,7 +2627,7 @@ $$\to_\beta (\lambda y.\;6 + y)\;4 \to_\beta 6 + 4 = 10$$
 
 Ambos os caminhos resultam na forma normal $10$.
 
-**6**. Considere o termo abaixo e prove que a forma normal é única, independentemente da estratégia de redução.
+**6**: Considere o termo abaixo e prove que a forma normal é única, independentemente da estratégia de redução.
 
 $$
 M = (\lambda f.\;(\lambda x.\;f (f x)))\;(\lambda y.\;y^2)\;2
@@ -2666,7 +2666,7 @@ $$\to_\beta 4^2 = 16$$
 
 Ambos os caminhos resultam na forma normal $16\,$.
 
-**7**. Dado o termo abaixo, mostre que a forma normal é alcançada com diferentes estratégias de redução e que a unicidade da forma normal se mantém.
+**7**: Dado o termo abaixo, mostre que a forma normal é alcançada com diferentes estratégias de redução e que a unicidade da forma normal se mantém.
 
 $$
 M = (\lambda x.\;(\lambda y.\;x + y))\;8\;2
@@ -2695,7 +2695,7 @@ $$\to_\beta 8 + 2 = 10$$
 
 Ambos os caminhos resultam na forma normal $10$.
 
-**8**. Considere o termo abaixo. Demonstre que a forma normal é única mesmo utilizando diferentes estratégias de redução.
+**8**: Considere o termo abaixo. Demonstre que a forma normal é única mesmo utilizando diferentes estratégias de redução.
 
 $$M = (\lambda f.\;f (f 3))\;(\lambda x.\;x + 4)$$
 
@@ -2728,7 +2728,7 @@ $$\to_\beta 7 + 4 = 11$$
 
 Ambos os caminhos resultam na forma normal $11\,$.
 
-**9**. Dado o termo a seguir, identifique a forma normal e mostre que ela é única, mesmo utilizando diferentes estratégias de redução.
+**9**: Dado o termo a seguir, identifique a forma normal e mostre que ela é única, mesmo utilizando diferentes estratégias de redução.
 
 $$M = (\lambda f.\;f (f 1))\;(\lambda x.\;x + 2)$$
 
@@ -2979,7 +2979,7 @@ A ordem em que as reduções beta são aplicadas pode afetar tanto a eficiência
 
 2. **Ordem Aplicativa**: Nesta estratégia, os argumentos são reduzidos antes da aplicação da função. Embora mais eficiente em alguns casos, pode não terminar em expressões que a ordem normal resolveria.
 
-A Figura 1 apresenta um diagrama destas duas estratégias de avalição.
+A Figura 1 apresenta um diagrama destas duas estratégias de avaliação.
 
 ![](/assets/images/normvsaplic.png)
  _Diagrama de Aplicação nas Ordens Normal e Aplicativa_.{: legenda}
@@ -3019,7 +3019,7 @@ A Figura 1 mostra as definições dos combinadores $I$, $K$, $S$ e uma aplicaç�
 ![](/assets/images/comb.png)
 _Definição e Aplicação dos Combinadores $I$, $K$, $S$_{: legenda}
 
-Schönfinkel também tinha combinadores que representavam operações lógicas, um para o [traço de Sheffer](https://en.wikipedia.org/wiki/Sheffer_stroke)(NAND), descoberto em 1913, e outro para a quantificação. 
+Schönfinkel também tinha combinadores que representavam operações lógicas, um para o [traço de Sheffer](https://en.wikipedia.org/wiki/Sheffer_stroke)(NAND), descoberto em 1913, e outro para a quantificação.
 
 >Em funções booleanas e no cálculo proposicional, o _traço de Sheffer_ é uma operação lógica que representa a negação da conjunção. Essa operação é expressa em linguagem comum como _não ambos_. Ou seja, dados dois operandos, ao menos um deles deve ser falso. Em termos técnicos, essa operação é chamada de _não-conjunção_ ou _negação alternativa_, Simplesmente porque esta operação nega a conjunção dos operandos. Finalmente, na eletrônica esta operação conhecida como a operação _NAND_, abreviação de _not and_.
 >
@@ -4094,7 +4094,7 @@ Haskell é uma linguagem de programação que utiliza **avaliação preguiçosa*
 
  ```haskell
  naturals = [0..]
- take 5 naturals 
+ take 5 naturals
  -- Retorna [0,1,2,3,4]
  ```
 
@@ -4732,7 +4732,7 @@ Church succ = [] \ ,(Church n) {
 };
 
 // Convert a Church numeral to a standard integer.
-// `to_int` takes a Church numeral `n`, applies the function `[] \ ,(int x) { return x + 1; }` to it, 
+// `to_int` takes a Church numeral `n`, applies the function `[] \ ,(int x) { return x + 1; }` to it,
 // which acts like a successor function in the integer world, starting from 0.
 int to_int(Church n) {
  return n([] \ ,(int x) { return x + 1; })(0); // Start from 0 and apply `f` the number of times encoded by `n`.
@@ -4768,7 +4768,7 @@ def succ(n):
  return lambda f: lambda x: f(n(f)(x)) # Apply `f` one more time than `n` does.
 
 # Convert a Church numeral to a standard integer.
-# `to_int` takes a Church numeral `church_n` and applies the function `lambda x: x + 1` to it, 
+# `to_int` takes a Church numeral `church_n` and applies the function `lambda x: x + 1` to it,
 # which mimics the successor function for integers, starting from 0.
 def to_int(church_n):
  return church_n(lambda x: x + 1)(0) # Start from 0 and apply `f` the number of times encoded by `church_n`.
@@ -5396,7 +5396,7 @@ Para nos mantermos na mesma linha de raciocínio, vamos lembrar que:
 
 1. **Listas**: Representam coleções ordenadas de elementos, potencialmente infinitas.
 
-2. **Tuplas**: Representam coleções finitas e heterogêneas de elementos. Nesta seção, tuplas representarão pares ordenados. 
+2. **Tuplas**: Representam coleções finitas e heterogêneas de elementos. Nesta seção, tuplas representarão pares ordenados.
 
 No cálculo lambda, estas estruturas são representadas usando funções de ordem superior. Por exemplo, uma lista $[1, 2, 3]$ em cálculo lambda puro é representada como:
 
@@ -5655,7 +5655,7 @@ A função Last retorna o último elemento da tupla:
 
 ## Exercícios de Listas e Tuplas
 
-**1**. Dada a definição de lista vazia (`nil`) e o construtor de lista (`cons`):
+**1**: Dada a definição de lista vazia (`nil`) e o construtor de lista (`cons`):
 
    $$ \text{nil} = \lambda c.\,\lambda n.\;n $$
 
@@ -5681,7 +5681,7 @@ Construa a lista $[1, 2]$ em cálculo lambda.
 
    $$ \text{cons} \;1 \;(\text{cons} \;2 \;\text{nil}) $$
 
-**2**. Dada a definição de tupla de dois elementos:
+**2**: Dada a definição de tupla de dois elementos:
 
    $$ (x, y) = \lambda f. f \;x \;y $$
 
@@ -5747,7 +5747,7 @@ Aplique esta função à lista $[5, 6, 7]$ construída no cálculo lambda.
 
 Portanto, `head [5, 6, 7] = 5`.
 
-**4**. Dada a função `tail` para listas:
+**4**: Dada a função `tail` para listas:
 
    $$ \text{tail} = \lambda l. l \;(\lambda h. \lambda t. t) \;(\lambda x. \;x) $$
 
@@ -5777,7 +5777,7 @@ Aplique esta função à lista $[3, 4, 5]$ construída no cálculo lambda.
 
 Portanto, `tail [3, 4, 5] = [4, 5]`.
 
-**5**. Dada a definição de tupla de três elementos:
+**5**: Dada a definição de tupla de três elementos:
 
    $$ (x, y, z) = \lambda f. f \;x \;y \;z $$
 
@@ -5807,7 +5807,7 @@ Crie a tupla $(5, 6, 7)$ e aplique a função `second` a ela.
 
 Portanto, `second (5, 6, 7) = 6`.
 
-**6**. Considere a função `map` para listas em cálculo lambda:
+**6**: Considere a função `map` para listas em cálculo lambda:
 
    $$ \text{map} = Y \;(\lambda f. \lambda g. \lambda l. l \;(\lambda h. \lambda t. \text{cons} \;(g \;h) \;(f \;g \;t)) \;\text{nil}) $$
 
@@ -5839,7 +5839,7 @@ Onde $Y$ é o combinador de ponto fixo. Aplique a função `map` à lista $[1, 2
 
 Portanto, `map (λx. x + 1) [1, 2, 3] = [2, 3, 4]`.
 
-**7**. Considere a função `filter` para listas em cálculo lambda:
+**7**: Considere a função `filter` para listas em cálculo lambda:
 
    $$ \text{filter} = Y \;(\lambda f. \lambda p. \lambda l. l \;(\lambda h. \lambda t. \text{if} \;(p \;h) \;(\text{cons} \;h \;(f \;p \;t)) \;(f \;p \;t)) \;\text{nil}) $$
 
@@ -5873,7 +5873,7 @@ Aplique a função `filter` à lista $[1, 2, 3, 4, 5]$ com o predicado $p = \lam
 
 Portanto, `filter (λx. isEven x) [1, 2, 3, 4, 5] = [2, 4]`.
 
-**8**. Dada a definição de lista de tuplas de dois elementos:
+**8**: Dada a definição de lista de tuplas de dois elementos:
 
    $$ [(x_1, y_1), (x_2, y_2), ..., (x_n, y_n)] = \text{cons} \;(\lambda f. f \;x_1 \;y_1) \;(\text{cons} \;(\lambda f. f \;x_2 \;y_2) \;(...\;(\text{cons} \;(\lambda f. f \;x_n \;y_n) \;\text{nil})...)) $$
 
@@ -5897,11 +5897,10 @@ $$
 \text{sum\_pairs} = Y \;(\lambda f. \lambda l. l \;(\lambda h. \lambda t. \text{cons} \;(h \;(\lambda x. \lambda y. x + y)) \;(f \;t)) \;\text{nil})
 $$
 
-
 3. Redução (simplificada):
 
    $$ = \text{cons} \;((\lambda f. f \;1 \;2) \;(\lambda x. \lambda y. x + y)) \;(\text{sum_pairs} \;(\text{cons} \;(\lambda f. f \;3 \;4) \;(\text{cons} \;(\lambda f. f \;5 \;6) \;\text{nil}))) $$
- 
+
    $$ = \text{cons} \;3 \;(\text{cons} \;((\lambda f. f \;3 \;4) \;(\lambda x. \lambda y. x + y)) \;(\text{sum_pairs} \;(\text{cons} \;(\lambda f. f \;5 \;6) \;\text{nil}))) $$
 
    $$ = \text{cons} \;3 \;(\text{cons} \;7 \;(\text{cons} \;((\lambda f. f \;5 \;6) \;(\lambda x. \lambda y. x + y)) \;(\text{sum_pairs} \;\text{nil}))) $$
@@ -5910,7 +5909,7 @@ $$
 
 Portanto, `sum_pairs [(1, 2), (3, 4), (5, 6)] = [3, 7, 11]`.
 
-**9**. Considere a função `fold_right` (também conhecida como `reduce`) para listas em cálculo lambda:
+**9**: Considere a função `fold_right` (também conhecida como `reduce`) para listas em cálculo lambda:
 
    $$ \text{fold_right} = Y \;(\lambda f. \lambda g. \lambda a. \lambda l. l \;(\lambda h. \lambda t. g \;h \;(f \;g \;a \;t)) \;a) $$
 
@@ -5934,11 +5933,11 @@ Onde $Y$ é o combinador de ponto fixo. Use `fold_right` para implementar a fun�
 4. Redução (simplificada):
 
    $$ = (\lambda x. \lambda acc. \text{succ} \;acc) \;1 \;(\text{fold_right} \;(\lambda x. \lambda acc. \text{succ} \;acc) \;0 \;[2, 3, 4])$$
- 
+
    $$ = \text{succ} \;(\text{fold_right} \;(\lambda x. \lambda acc. \text{succ} \;acc) \;0 \;[2, 3, 4])$$
- 
+
    $$ = \text{succ} \;(\text{succ} \;(\text{fold_right} \;(\lambda x. \lambda acc. \text{succ} \;acc) \;0 \;[3, 4]))$$
- 
+
    $$ = \text{succ} \;(\text{succ} \;(\text{succ} \;(\text{fold_right} \;(\lambda x. \lambda acc. \text{succ} \;acc) \;0 \;[4])))$$
 
    $$ = \text{succ} \;(\text{succ} \;(\text{succ} \;(\text{succ} \;(\text{fold_right} \;(\lambda x. \lambda acc. \text{succ} \;acc) \;0 \;\text{nil})))) $$
@@ -5979,13 +5978,11 @@ Aplique `tree_map` à árvore $\text{node} \;1 \;(\text{leaf} \;2) \;(\text{leaf
 
 4. Redução (simplificada):
 
-   $$
-    = \text{node} \;(g \;1) \;(\text{tree_map} \;g \;(\text{leaf} \;2)) \;(\text{tree_map} \;g \;(\text{leaf} \;3))
-   $$
+   $$= \text{node} \;(g \;1) \;(\text{tree_map} \;g \;(\text{leaf} \;2)) \;(\text{tree_map} \;g \;(\text{leaf} \;3))$$
 
-   $$ = \text{node} \;2 \;(\text{leaf} \;(g \;2)) \;(\text{leaf} \;(g \;3)) $$
+   $$ = \text{node} \;2 \;(\text{leaf} \;(g \;2)) \;(\text{leaf} \;(g \;3))$$
 
-   $$ = \text{node} \;2 \;(\text{leaf} \;4) \;(\text{leaf} \;6) $$
+   $$ = \text{node} \;2 \;(\text{leaf} \;4) \;(\text{leaf} \;6)$$
 
 Portanto, `tree_map (λx. x * 2) (node 1 (leaf 2) (leaf 3)) = node 2 (leaf 4) (leaf 6)`.
 
@@ -6750,7 +6747,7 @@ $$\frac{\Gamma\;\vdash\;M : \text{Nat} \rightarrow \text{Nat} \quad \Gamma\;\vda
 
 ### Exercícios Regras de Tipagem no Cálculo Lambda
 
-**1**. Dado o contexto:
+**1**: Dado o contexto:
 
 $$\Gamma = \{ z : \text{Bool} \}$$
 
@@ -6762,7 +6759,7 @@ $$\frac{z : \text{Bool} \in \Gamma}{\Gamma \vdash z : \text{Bool}}$$
 
    Portanto, no contexto $\Gamma$, $z\,$ tem tipo $\text{Bool}\,$.
 
-**2**. Considere a função:
+**2**: Considere a função:
 
 $$\lambda y:\text{Nat}.\;y \times 2$$
 
@@ -6794,7 +6791,7 @@ $$
 
    A aplicação é bem tipada e tem tipo $\text{Bool}\,$.
 
-**4**. Dado o contexto:
+**4**: Dado o contexto:
 
 $$
    \Gamma = \{ f : \text{Nat} \rightarrow \text{Nat},\;n : \text{Nat} \}
@@ -6810,13 +6807,11 @@ $$
 
    3. Portanto:
 
-$$
-   \frac{\Gamma \vdash f : \text{Nat} \rightarrow \text{Nat} \quad \Gamma \vdash n : \text{Nat}}{\Gamma \vdash f\;n : \text{Nat}}
-$$
+   $$\frac{\Gamma \vdash f : \text{Nat} \rightarrow \text{Nat} \quad \Gamma \vdash n : \text{Nat}}{\Gamma \vdash f\;n : \text{Nat}}$$
 
    Assim, $f\;n$ tem tipo $\text{Nat}\,$.
 
-**5**. Usando as regras de tipagem, determine o tipo da expressão:
+**5**: Usando as regras de tipagem, determine o tipo da expressão:
 
 $$
    \lambda f:\text{Nat} \rightarrow \text{Bool}.\;\lambda n:\text{Nat}.\;f\;n
@@ -6832,23 +6827,19 @@ $$
 
    4. Aplicando a **Regra de Abstração** para $n$:
 
-  $$
-      \frac{\Gamma, f:\text{Nat} \rightarrow \text{Bool}, n:\text{Nat} \vdash f\;n : \text{Bool}}{\Gamma, f:\text{Nat} \rightarrow \text{Bool} \vdash \lambda n:\text{Nat}.\;f\;n : \text{Nat} \rightarrow \text{Bool}}
-  $$
+   $$\frac{\Gamma, f:\text{Nat} \rightarrow \text{Bool}, n:\text{Nat} \vdash f\;n : \text{Bool}}{\Gamma, f:\text{Nat} \rightarrow \text{Bool} \vdash \lambda n:\text{Nat}.\;f\;n : \text{Nat} \rightarrow \text{Bool}}$$
 
    5. Aplicando a **Regra de Abstração** para $f\,$:
 
-$$
-   \frac{\Gamma \vdash \lambda n:\text{Nat}.\;f\;n : \text{Nat} \rightarrow \text{Bool}}{\Gamma \vdash \lambda f:\text{Nat} \rightarrow \text{Bool}.\;\lambda n:\text{Nat}.\;f\;n : (\text{Nat} \rightarrow \text{Bool}) \rightarrow (\text{Nat} \rightarrow \text{Bool})}
-$$
+   $$\frac{\Gamma \vdash \lambda n:\text{Nat}.\;f\;n : \text{Nat} \rightarrow \text{Bool}}{\Gamma \vdash \lambda f:\text{Nat} \rightarrow \text{Bool}.\;\lambda n:\text{Nat}.\;f\;n : (\text{Nat} \rightarrow \text{Bool}) \rightarrow (\text{Nat} \rightarrow \text{Bool})}$$
 
    Portanto, o tipo da expressão é $(\text{Nat} \rightarrow \text{Bool}) \rightarrow (\text{Nat} \rightarrow \text{Bool})\,$.
 
-**6**. No contexto:
+**6**: No contexto:
 
-$$\Gamma = \{ x : \text{Nat} \times \text{Bool} \}$$
+   $$\Gamma = \{ x : \text{Nat} \times \text{Bool} \}$$
 
-   Utilize a **Regra da Variável** para derivar o tipo de $x\,$ em $\Gamma\,$.
+ Utilize a **Regra da Variável** para derivar o tipo de $x\,$ em $\Gamma\,$.
 
    **Solução**: pela **Regra da Variável**:
 
@@ -6856,7 +6847,7 @@ $$\frac{x : \text{Nat} \times \text{Bool} \in \Gamma}{\Gamma \vdash x : \text{Na
 
    Portanto, $x\,$ tem tipo $\text{Nat} \times \text{Bool}\,$ no contexto $\Gamma\,$.
 
-**7**. Mostre, usando a **Regra de Abstração**, que a função:
+**7**: Mostre, usando a **Regra de Abstração**, que a função:
 
 $$\lambda p:\text{Nat} \times \text{Bool}.\;\pi_1\;p$$
 
@@ -6872,11 +6863,11 @@ $$\lambda p:\text{Nat} \times \text{Bool}.\;\pi_1\;p$$
 
    3. Aplicando a **Regra de Abstração**:
 
-$$\frac{\Gamma, p:\text{Nat} \times \text{Bool} \vdash \pi_1\;p : \text{Nat}}{\Gamma \vdash \lambda p:\text{Nat} \times \text{Bool}.\;\pi_1\;p : (\text{Nat} \times \text{Bool}) \rightarrow \text{Nat}}$$
+   $$\frac{\Gamma, p:\text{Nat} \times \text{Bool} \vdash \pi_1\;p : \text{Nat}}{\Gamma \vdash \lambda p:\text{Nat} \times \text{Bool}.\;\pi_1\;p : (\text{Nat} \times \text{Bool}) \rightarrow \text{Nat}}$$
 
    Portanto, a função tem tipo $(\text{Nat} \times \text{Bool}) \rightarrow \text{Nat}\,$.
 
-**8**. No contexto vazio, determine se a seguinte aplicação é bem tipada:
+**8**: No contexto vazio, determine se a seguinte aplicação é bem tipada:
 
 $$(\lambda x:\text{Nat}.\;x + 1)\;\text{true}$$
 
@@ -6890,9 +6881,7 @@ $$(\lambda x:\text{Nat}.\;x + 1)\;\text{true}$$
 
    3. Pela **Regra de Aplicação**, para que a aplicação seja bem tipada, o tipo do argumento deve corresponder ao tipo esperado pela função:
 
-  $$
-      \frac{\Gamma \vdash M : A \rightarrow B \quad \Gamma \vdash N : A}{\Gamma \vdash M\;N : B}
-  $$
+   $$\frac{\Gamma \vdash M : A \rightarrow B \quad \Gamma \vdash N : A}{\Gamma \vdash M\;N : B}$$
 
    4. Aqui, $M\,$ espera um argumento do tipo $\text{Nat}$, mas $N\,$ é de tipo $\text{Bool}\,$.
 
@@ -6900,7 +6889,7 @@ $$(\lambda x:\text{Nat}.\;x + 1)\;\text{true}$$
 
    A **Regra de Aplicação** é violada porque o tipo do argumento fornecido não corresponde ao tipo esperado pela função.
 
-**9**. Dado:
+**9**: Dado:
 
 $$M = \lambda x:\text{Bool}.\;\lambda y:\text{Bool}.\;x \land y$$
 
@@ -6916,23 +6905,17 @@ $$M = \lambda x:\text{Bool}.\;\lambda y:\text{Bool}.\;x \land y$$
 
    4. Aplicando a **Regra de Abstração** para $y\,$:
 
-  $$
-      \frac{\Gamma, x:\text{Bool}, y:\text{Bool} \vdash x \land y : \text{Bool}}{\Gamma, x:\text{Bool} \vdash \lambda y:\text{Bool}.\;x \land y : \text{Bool} \rightarrow \text{Bool}}
-  $$
+  $$\frac{\Gamma, x:\text{Bool}, y:\text{Bool} \vdash x \land y : \text{Bool}}{\Gamma, x:\text{Bool} \vdash \lambda y:\text{Bool}.\;x \land y : \text{Bool} \rightarrow \text{Bool}}$$
 
    5. Aplicando a **Regra de Abstração** para $x\,$:
 
-$$
-   \frac{\Gamma \vdash \lambda y:\text{Bool}.\;x \land y : \text{Bool} \rightarrow \text{Bool}}{\Gamma \vdash \lambda x:\text{Bool}.\;\lambda y:\text{Bool}.\;x \land y : \text{Bool} \rightarrow (\text{Bool} \rightarrow \text{Bool})}
-$$
+   $$\frac{\Gamma \vdash \lambda y:\text{Bool}.\;x \land y : \text{Bool} \rightarrow \text{Bool}}{\Gamma \vdash \lambda x:\text{Bool}.\;\lambda y:\text{Bool}.\;x \land y : \text{Bool} \rightarrow (\text{Bool} \rightarrow \text{Bool})}$$
 
    Portanto, o tipo de $M\,$ é $\text{Bool} \rightarrow \text{Bool} \rightarrow \text{Bool}\,$.
 
 **10**. Utilize as regras de tipagem para mostrar que a expressão:
 
-$$
-   (\lambda f:\text{Nat} \rightarrow \text{Nat}.\;f\;(f\;2))\;(\lambda x:\text{Nat}.\;x + 3)
-$$
+   $$(\lambda f:\text{Nat} \rightarrow \text{Nat}.\;f\;(f\;2))\;(\lambda x:\text{Nat}.\;x + 3)$$
 
    Tem tipo $\text{Nat}\,$.
 
@@ -6940,7 +6923,7 @@ $$
 
    1. Primeiro, analisamos a função:
 
-  $$\lambda f:\text{Nat} \rightarrow \text{Nat}.\;f\;(f\;2)$$
+   $$\lambda f:\text{Nat} \rightarrow \text{Nat}.\;f\;(f\;2)$$
 
       - Dentro desta função, $f : \text{Nat} \rightarrow \text{Nat}\,$.
       - Sabemos que $2 : \text{Nat}\,$.
@@ -6949,17 +6932,17 @@ $$
 
    2. Portanto, a função tem tipo:
 
-  $$(\text{Nat} \rightarrow \text{Nat}) \rightarrow \text{Nat}$$
+   $$(\text{Nat} \rightarrow \text{Nat}) \rightarrow \text{Nat}$$
 
    3. Agora, consideramos o argumento:
 
-  $$\lambda x:\text{Nat}.\;x + 3$$
+   $$\lambda x:\text{Nat}.\;x + 3$$
 
       - Esta função tem tipo $\text{Nat} \rightarrow \text{Nat}\,$.
 
    4. Aplicando a **Regra de Aplicação**:
 
-  $$\frac{\Gamma \vdash \lambda f:\text{Nat} \rightarrow \text{Nat}.\;f\;(f\;2) : (\text{Nat} \rightarrow \text{Nat}) \rightarrow \text{Nat} \quad \Gamma \vdash \lambda x:\text{Nat}.\;x + 3 : \text{Nat} \rightarrow \text{Nat}}{\Gamma \vdash (\lambda f:\text{Nat} \rightarrow \text{Nat}.\;f\;(f\;2))\;(\lambda x:\text{Nat}.\;x + 3) : \text{Nat}}$$
+   $$\frac{\Gamma \vdash \lambda f:\text{Nat} \rightarrow \text{Nat}.\;f\;(f\;2) : (\text{Nat} \rightarrow \text{Nat}) \rightarrow \text{Nat} \quad \Gamma \vdash \lambda x:\text{Nat}.\;x + 3 : \text{Nat} \rightarrow \text{Nat}}{\Gamma \vdash (\lambda f:\text{Nat} \rightarrow \text{Nat}.\;f\;(f\;2))\;(\lambda x:\text{Nat}.\;x + 3) : \text{Nat}}$$
 
    Assim, a expressão completa tem tipo $\text{Nat}\,$.
 
@@ -7083,7 +7066,7 @@ Estas propriedades juntas garantem a consistência e a robustez do sistema de ti
 
 ### Exercícios de Propriedades do Cálculo Lambda Tipado
 
-**1**. Considere o termo $(\lambda x:\text{Nat}. \;x + 1) 2\,$. Mostre a sequência de reduções que leva este termo à sua forma normal, ilustrando a propriedade de normalização forte.
+**1**: Considere o termo $(\lambda x:\text{Nat}. \;x + 1) 2\,$. Mostre a sequência de reduções que leva este termo à sua forma normal, ilustrando a propriedade de normalização forte.
 
    **Solução**:
 
@@ -7091,7 +7074,7 @@ $$(\lambda x:\text{Nat}. \;x + 1) 2 \rightarrow_\beta 2 + 1 \rightarrow 3$$
 
    O termo reduz à sua forma normal, $3$, em um número finito de passos.
 
-**2**. Dado o termo $(\lambda f:\text{Nat}\rightarrow\text{Nat}. \lambda x:\text{Nat}. f (f x)) (\lambda y:\text{Nat}. y + 1) 2\,$, mostre que ele é bem tipado e reduz para um valor do tipo $\text{Nat}\,$.
+**2**: Dado o termo $(\lambda f:\text{Nat}\rightarrow\text{Nat}. \lambda x:\text{Nat}. f (f x)) (\lambda y:\text{Nat}. y + 1) 2\,$, mostre que ele é bem tipado e reduz para um valor do tipo $\text{Nat}\,$.
 
    **Solução**: 0 termo é bem tipado: $(\text{Nat}\rightarrow\text{Nat})\rightarrow\text{Nat}\rightarrow\text{Nat}\,$
 
@@ -7113,7 +7096,7 @@ $$\begin{aligned}
 
    **Solução**: o termo não é bem tipado porque tenta adicionar 1 a um valor booleano, o que é uma operação inválida. A decidibilidade da tipagem permite que um algoritmo detecte este erro de tipo, rejeitando o termo como mal tipado.
 
-**4**. Considere o termo:
+**4**: Considere o termo:
 
 $$
    M = (\lambda x:\text{Nat}.\;\text{if } x = 0\;\text{then}\;1\;\text{else}\;x \times ((\lambda y:\text{Nat}.\;y - 1)\;x))
@@ -7127,60 +7110,55 @@ $$
 
       Tipo de $M\,$:
 
-  $$\Gamma \vdash M : \text{Nat} \rightarrow \text{Nat}$$
+      $$\Gamma \vdash M : \text{Nat} \rightarrow \text{Nat}$$
 
       $M\,$ é uma função que recebe um $\text{Nat}\,$ e retorna um $\text{Nat}\,$.
 
       Tipo do Argumento $3\,$:
 
-  $$\Gamma \vdash 3 : \text{Nat}
-  $$
+      $$\Gamma \vdash 3 : \text{Nat}$$
 
    2. **Aplicação da Função:**
 
       Aplicação:
 
-  $$M\;3 = (\lambda x:\text{Nat}.\;\text{if } x = 0\;\text{then}\;1\;\text{else}\;x \times ((\lambda y:\text{Nat}.\;y - 1)\;x))\;3$$
+      $$M\;3 = (\lambda x:\text{Nat}.\;\text{if } x = 0\;\text{then}\;1\;\text{else}\;x \times ((\lambda y:\text{Nat}.\;y - 1)\;x))\;3$$
 
       Redução por redução $\beta\,$:
 
-  $$
-      \rightarrow_\beta \text{if } 3 = 0\;\text{then}\;1\;\text{else}\;3 \times ((\lambda y:\text{Nat}.\;y - 1)\;3)
-  $$
+      $$\rightarrow_\beta \text{if } 3 = 0\;\text{then}\;1\;\text{else}\;3 \times ((\lambda y:\text{Nat}.\;y - 1)\;3)$$
 
    3. **Avaliação da Condicional:**
 
       Como $3 \neq 0$, seguimos para o ramo _else_:
 
-  $$\rightarrow 3 \times ((\lambda y:\text{Nat}.\;y - 1)\;3)$$
+      $$\rightarrow 3 \times ((\lambda y:\text{Nat}.\;y - 1)\;3)$$
 
    4. **Redução do Parêntese Interno:**
 
       Aplicação da Função Interna:
 
-  $$(\lambda y:\text{Nat}.\;y - 1)\;3 \rightarrow_\beta 3 - 1 = 2$$
+      $$(\lambda y:\text{Nat}.\;y - 1)\;3 \rightarrow_\beta 3 - 1 = 2$$
 
       Atualização da Expressão:
 
-  $$\rightarrow 3 \times 2$$
+      $$\rightarrow 3 \times 2$$
 
    5. **Cálculo Final:**
 
       Multiplicação:
 
-  $$3 \times 2 = 6$$
+      $$3 \times 2 = 6$$
 
       Tipo do Resultado:
 
-  $$\Gamma \vdash 6 : \text{Nat}$$
+      $$\Gamma \vdash 6 : \text{Nat}$$
 
    **Demonstrando a Preservação de Tipos:**
 
    Antes da Redução: a função $M\,$ tem tipo $\text{Nat} \rightarrow \text{Nat}\,$; o argumento $3\,$ tem tipo $\text{Nat}\,$. Portanto, pela **Regra de Aplicação**:
 
-$$
-   \frac{\Gamma\;\vdash\;M : \text{Nat} \rightarrow \text{Nat} \quad \Gamma\;\vdash\;3 : \text{Nat}}{\;\Gamma\;\vdash\;M\;3 : \text{Nat}}
-$$
+   $$\frac{\Gamma\;\vdash\;M : \text{Nat} \rightarrow \text{Nat} \quad \Gamma\;\vdash\;3 : \text{Nat}}{\;\Gamma\;\vdash\;M\;3 : \text{Nat}}$$
 
    Durante as Reduções, cada passo manteve o tipo $\text{Nat}\,$:
 
@@ -7200,7 +7178,7 @@ $$
 
 Repita este exercício. Ele demonstra como as reduções em um termo bem tipado mantêm o tipo consistente.
 
-**5**. Dê um exemplo de um termo que não satisfaz a propriedade de progresso no cálculo lambda não tipado, mas que seria rejeitado no cálculo lambda tipado.
+**5**: Dê um exemplo de um termo que não satisfaz a propriedade de progresso no cálculo lambda não tipado, mas que seria rejeitado no cálculo lambda tipado.
 
    **Solução**: considere o termo $(\lambda x. \;x \;x) (\lambda x. \;x \;x)\,$. No cálculo lambda não tipado, este termo reduz infinitamente para si mesmo:
 
@@ -7208,29 +7186,29 @@ $$(\lambda x. \;x \;x) (\lambda x. \;x \;x) \rightarrow_\beta (\lambda x. \;x \;
 
    No cálculo lambda tipado, este termo seria rejeitado porque não é possível atribuir um tipo consistente para $x\,$ em $x \;x\,$.
 
-**6**. Explique como a propriedade de normalização forte garante que não existem loops infinitos em programas bem tipados no cálculo lambda tipado.
+**6**: Explique como a propriedade de normalização forte garante que não existem loops infinitos em programas bem tipados no cálculo lambda tipado.
 
    **Solução**: a normalização forte garante que toda sequência de reduções de um termo bem tipado eventualmente termina em uma forma normal. Isso implica que não pode haver loops infinitos, pois se houvesse, a sequência de reduções nunca terminaria, contradizendo a propriedade de normalização forte.
 
-**7**. Considere o termo $(\lambda x:\text{Nat}\rightarrow\text{Nat}. \;x 3) (\lambda y:\text{Nat}. y * 2)\,$. Mostre que este termo satisfaz as propriedades de preservação de tipos e progresso.
+**7**: Considere o termo $(\lambda x:\text{Nat}\rightarrow\text{Nat}. \;x 3) (\lambda y:\text{Nat}. y * 2)\,$. Mostre que este termo satisfaz as propriedades de preservação de tipos e progresso.
 
    **Solução**: preservação de tipos: O termo inicial tem tipo $\text{Nat}\,$. Após a redução:
 
-$$(\lambda x:\text{Nat}\rightarrow\text{Nat}. \;x 3) (\lambda y:\text{Nat}. y \times 2) \rightarrow_\beta (\lambda y:\text{Nat}. y \times 2) 3 \rightarrow_\beta 3 \times 2 \rightarrow 6$$
+   $$(\lambda x:\text{Nat}\rightarrow\text{Nat}. \;x 3) (\lambda y:\text{Nat}. y \times 2) \rightarrow_\beta (\lambda y:\text{Nat}. y \times 2) 3 \rightarrow_\beta 3 \times 2 \rightarrow 6$$
 
    O resultado final $6\,$ ainda é do tipo $\text{Nat}\,$.
 
    Progresso: O termo inicial não está em forma normal e pode ser reduzido, como mostrado acima.
 
-**8**. Explique por que a decidibilidade da tipagem é importante para compiladores de linguagens de programação tipadas.
+**8**: Explique por que a decidibilidade da tipagem é importante para compiladores de linguagens de programação tipadas.
 
    **Solução**: a decidibilidade da tipagem permite que compiladores verifiquem estaticamente se um programa está bem tipado. Isso é crucial para detectar erros de tipo antes da execução do programa, melhorando a segurança e a eficiência. Sem esta propriedade, seria impossível garantir que um programa está livre de erros de tipo em tempo de compilação.
 
-**9**. Dê um exemplo de um termo que é bem tipado no cálculo lambda tipado, mas que não teria uma representação direta em uma linguagem sem tipos de ordem superior (como C).
+**9**: Dê um exemplo de um termo que é bem tipado no cálculo lambda tipado, mas que não teria uma representação direta em uma linguagem sem tipos de ordem superior (como C).
 
    **Solução**: considere o termo:
 
-$$\lambda f:(\text{Nat}\rightarrow\text{Nat})\rightarrow\text{Nat}. f (\lambda x:\text{Nat}. \;x + 1)$$
+   $$\lambda f:(\text{Nat}\rightarrow\text{Nat})\rightarrow\text{Nat}. f (\lambda x:\text{Nat}. \;x + 1)$$
 
    Este termo tem tipo $((\text{Nat}\rightarrow\text{Nat})\rightarrow\text{Nat})\rightarrow\text{Nat}\,$. Ele representa uma função que toma como argumento outra função (que por sua vez aceita uma função como argumento). Linguagens sem tipos de ordem superior, como C, não podem representar diretamente funções que aceitam ou retornam outras funções.
 
