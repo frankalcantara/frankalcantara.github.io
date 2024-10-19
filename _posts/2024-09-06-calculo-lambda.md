@@ -34,7 +34,7 @@ featured: true
 toc: true
 preview: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de currying e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de currying e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2024-10-19T22:47:34.875Z
+lastmod: 2024-10-19T22:55:45.295Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -5408,7 +5408,7 @@ Afirmamos anteriormente que o cálculo lambda é um modelo de computação compl
 
 ### Exercícios de Lógica Proposicional em Cálculo Lambda
 
-**1**. Avalie a expressão $\lnot P$ onde $P$ é verdadeiro, usando funções nomeadas.
+**1**: Avalie a expressão $\lnot P$ onde $P$ é verdadeiro, usando funções nomeadas.
 
    **Soluçao**:
 
@@ -5430,7 +5430,7 @@ Afirmamos anteriormente que o cálculo lambda é um modelo de computação compl
    \end{align*}
    $$
 
-**2**. Calcule $P \land Q$ onde $P$ é verdadeiro e $Q$ é falso, usando funções nomeadas.
+**2**: Calcule $P \land Q$ onde $P$ é verdadeiro e $Q$ é falso, usando funções nomeadas.
 
    **Soluçao**:
 
@@ -5455,7 +5455,7 @@ Afirmamos anteriormente que o cálculo lambda é um modelo de computação compl
    \end{align*}
    $$
 
-**3**. Avalie $P \lor Q$ onde $P$ é falso e $Q$ é verdadeiro, usando funções nomeadas.
+**3**: Avalie $P \lor Q$ onde $P$ é falso e $Q$ é verdadeiro, usando funções nomeadas.
 
    **Soluçao**:
 
@@ -5480,7 +5480,7 @@ Afirmamos anteriormente que o cálculo lambda é um modelo de computação compl
    \end{align*}
    $$
 
-**4**. Calcule $P \oplus P$ onde $P$ é verdadeiro, usando funções nomeadas.
+**4**: Calcule $P \oplus P$ onde $P$ é verdadeiro, usando funções nomeadas.
 
    **Soluçao**:
 
@@ -5508,7 +5508,7 @@ Afirmamos anteriormente que o cálculo lambda é um modelo de computação compl
    \end{align*}
    $$
 
-**5**. Avalie a expressão $(\lnot (P \land Q)) \lor (R \oplus S)$ onde $P$ é verdadeiro, $Q$ é falso, $R$ é falso e $S$ é verdadeiro, usando funções nomeadas.
+**5**: Avalie a expressão $(\lnot (P \land Q)) \lor (R \oplus S)$ onde $P$ é verdadeiro, $Q$ é falso, $R$ é falso e $S$ é verdadeiro, usando funções nomeadas.
 
    **Soluçao**:
 
@@ -5530,7 +5530,7 @@ Afirmamos anteriormente que o cálculo lambda é um modelo de computação compl
    \end{align*}
    $$
 
-**6**. Calcule a expressão $P \rightarrow (Q \land R) \lor (S \lor T)$ onde $P$ é verdadeiro, $Q$ é falso, $R$ é verdadeiro, $S$ é verdadeiro e $T$ é falso, usando funções nomeadas.
+**6**: Calcule a expressão $P \rightarrow (Q \land R) \lor (S \lor T)$ onde $P$ é verdadeiro, $Q$ é falso, $R$ é verdadeiro, $S$ é verdadeiro e $T$ é falso, usando funções nomeadas.
 
    **Soluçao**:
 
@@ -5552,7 +5552,7 @@ Afirmamos anteriormente que o cálculo lambda é um modelo de computação compl
    \end{align*}
    $$
 
-**7**. Avalie a expressão $(P \rightarrow Q) \land (\lnot P)$ onde $P$ é verdadeiro e $Q$ é falso, em cálculo lambda puro.
+**7**: Avalie a expressão $(P \rightarrow Q) \land (\lnot P)$ onde $P$ é verdadeiro e $Q$ é falso, em cálculo lambda puro.
 
    **Soluçao**:
 
@@ -5574,7 +5574,7 @@ Afirmamos anteriormente que o cálculo lambda é um modelo de computação compl
    \end{align*}
    $$
 
-**8**. Calcule $(P \rightarrow Q) \rightarrow ((Q \rightarrow R) \rightarrow (P \rightarrow R))$ onde $P$, $Q$, e $R$ são verdadeiros, em cálculo lambda puro.
+**8**: Calcule $(P \rightarrow Q) \rightarrow ((Q \rightarrow R) \rightarrow (P \rightarrow R))$ onde $P$, $Q$, e $R$ são verdadeiros, em cálculo lambda puro.
 
    **Soluçao**:
 
@@ -5596,7 +5596,7 @@ Afirmamos anteriormente que o cálculo lambda é um modelo de computação compl
    \end{align*}
    $$
 
-**9**. Avalie a expressão $(P \rightarrow (Q \rightarrow R)) \rightarrow ((P \rightarrow Q) \rightarrow (P \rightarrow R))$ onde $P$, $Q$, e $R$ são verdadeiros, em cálculo lambda puro.
+**9**: Avalie a expressão $(P \rightarrow (Q \rightarrow R)) \rightarrow ((P \rightarrow Q) \rightarrow (P \rightarrow R))$ onde $P$, $Q$, e $R$ são verdadeiros, em cálculo lambda puro.
 
    **Solução**:
 
@@ -5624,7 +5624,7 @@ Afirmamos anteriormente que o cálculo lambda é um modelo de computação compl
    \end{align*}
    $$
 
-**10**. Calcule a expressão $((P \rightarrow P) \rightarrow P) \rightarrow P$ onde $P$ é verdadeiro, em cálculo lambda puro.
+**10**: Calcule a expressão $((P \rightarrow P) \rightarrow P) \rightarrow P$ onde $P$ é verdadeiro, em cálculo lambda puro.
 
    **Solução**:
 
