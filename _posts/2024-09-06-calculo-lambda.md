@@ -32,9 +32,9 @@ published: 2024-09-08T21:19:20.392Z
 draft: 2024-09-08T21:19:20.392Z
 featured: true
 toc: true
-preview: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-beforetoc: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de *currying* e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2024-10-19T20:59:49.203Z
+preview: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de currying e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
+beforetoc: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de currying e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
+lastmod: 2024-10-19T22:47:34.875Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -52,7 +52,7 @@ A década de 1930 encerrou a busca pela consistência da matemática iniciada na
 
 Estas questões surgiram como consequência dos trabalhos no campo da lógica e da lógica combinatória que despontaram no final do século XIX e começo do século XX. Em um momento crítico, Church ofereceu respostas, definindo que as funções computáveis são aquelas que podem ser expressas em cálculo lambda. Um exemplo simples de função computável seria:
 
-$$\text{soma} = \lambda m. \lambda n.\;m + n$$
+$$\text{add} = \lambda m. \lambda n.\;m + n$$
 
 Esta função soma dois números. **Todas as funções lambda são, por definição unárias e anônimas**. Assim, a função acima está sacrificando o rigor matemático para facilitar o entendimento. Esta é uma liberdade que é abusada descaradamente, neste livro, sempre com a esperança que estando mais próximo do que aprendemos nos ciclos básicos de estudo, é mais simples criar o nível de entendimento necessário.
 
@@ -2933,76 +2933,163 @@ $$M = (\lambda x.\;(\lambda y.\;x + y))\;9\;(\lambda z.\;z \times 2)\;4$$
 
 ## Currying
 
-**Currying** é uma técnica no cálculo lambda em que uma função com múltiplos argumentos é transformada em uma sequência de funções unárias. Cada função aceita um único argumento e retorna outra função que aceita o próximo argumento, até que todos os argumentos sejam fornecidos.
+O cálculo Lambda assume intrinsecamente que uma função possui um único argumento. Esta é a ideia por trás da aplicação. Como a atenta leitora deve lembrar: dado um termo $M$ visto como uma função e um argumento $N$, o termo $(M\;N)$ representa o resultado de aplicar $M$ ao argumento $N$. A avaliação é realizada pela redução-$\beta$.
 
-**Em cálculo lambda puro, todas as funções recebem um, e apenas um, argumento. Não me ative a esta regra de forma estrita, para facilitar o entendimento do processo de substituição e aplicação.**
+**Embora o cálculo lambda defina funções unárias estritamente, aqui, não nos limitaremos a essa regra para facilitar o entendimento dos conceitos de substituição e aplicação.**
 
-O conceito de **currying** vem do trabalho do matemático [Moses Schönfinkel](https://en.wikipedia.org/wiki/Moses_Sch%C3%B6nfinkel), que iniciou o estudo da lógica combinatória nos anos 1920. Mais tarde, Haskell Curry popularizou e expandiu essas ideias, dando nome à técnica. O cálculo lambda foi amplamente influenciado por esses estudos, tornando o currying uma parte essencial da programação funcional e da teoria dos tipos.
+O conceito de currying vem do trabalho do matemático [Moses Schönfinkel](https://en.wikipedia.org/wiki/Moses_Sch%C3%B6nfinkel), que iniciou o estudo da lógica combinatória nos anos 1920. Mais tarde, Haskell Curry popularizou e expandiu essas ideias. O cálculo lambda foi amplamente influenciado por esses estudos, tornando o currying uma parte essencial da programação funcional e da teoria dos tipos.
 
-Por exemplo, uma função de dois argumentos $f(x, y)\,$ pode ser convertida em uma sequência de funções $f'(x)(y)\,$. Aqui, $f'(x)\,$ retorna uma nova função que aceita $y\,$ como argumento. Assim, uma função que requer múltiplos parâmetros pode ser aplicada parcialmente, fornecendo apenas alguns argumentos de cada vez, resultando em uma nova função que espera os argumentos restantes. Como pode ser visto na Figura 1:
+Por exemplo, uma função de dois argumentos $f(x, y)\,$ pode ser convertida em uma sequência de funções $f'(x)(y)\,$. Aqui, $f'(x)\,$ retorna uma nova função que aceita $y\,$ como argumento. Assim, uma função que requer múltiplos parâmetros pode ser aplicada parcialmente, fornecendo apenas alguns argumentos de cada vez, resultando em uma nova função que espera os argumentos restantes. Ou, com um pouco mais de formalidade: uma função de $n$ argumentos é vista como uma função de um argumento que toma uma função de $n - 1$ argumentos como argumento.
 
-![](/assets/images/curry.png)
+Considere uma função $f$ que aceita dois argumentos: $f(x, y)$ a  versão _currificada_ desta função será:
+
+   $$F = \lambda x.(\lambda y.\ ; f(x, y))$$
+
+Agora, $F$ é uma função que aceita um argumento $x$ e retorna outra função que aceita $y$. Podemos ver isso com um exemplo: suponha que temos uma função que soma dois números: $soma(x, y) = x + y$. A versão _currificada_ seria:
+
+$$add = \lambda x.\;(\lambda y.\;(x + y))$$
+
+Isso significa que $add$ é uma função que recebe um argumento $x$ e retorna outra função $\lambda y.(\;x + y)$. Esta função resultante espera um segundo argumento $y$ para calcular a soma de $x$ e $y$.
+
+Quando aplicamos $add$ ao argumento $3$, obteremos:
+
+   $$(add \; 3) = (\lambda x.\;(\lambda y.\;(x + y))) \; 3$$
+
+Nesse ponto, estamos substituindo $x$ por $3$ na função externa, resultando em:
+
+   $$\lambda y.\;(3 + y)$$
+
+Isso é uma nova função que espera um segundo argumento $y$. Agora, aplicamos o segundo argumento, $4$, à função resultante:
+
+   $$(\lambda y.\;(3 + y))\;4$$
+
+Substituímos $y$ por $4$, obtendo:
+
+   $$3 + 4$$
+
+Finalmente:
+
+   $$7$$
+
+Assim, $(add \;3) \;4$ é avaliado para $7$ após a aplicação sequencial de argumentos à função currificada. A Figura 1, apresenta a aplicação $(add \; 3) = (\lambda x.\;(\lambda y.\;(x + y))) \; 3$ que explicamos acima.
+
+![Diagrama da função add currificada como explicado anteriormente](/assets/images/curry.png)
 _Diagrama mostrando o processo de currying em Cálculo lambda_{: legenda}
 
-Formalmente, o processo de **currying** pode ser descrito como um isomorfismo entre funções do tipo.
+No currying, uma função que originalmente recebe dois argumentos, como $f: \mathbb{N} \times \mathbb{N} \rightarrow \mathbb{N}$, é transformada em uma função que recebe um argumento e retorna outra função. O resultado é uma função da forma $f': \mathbb{N} \rightarrow (\mathbb{N} \rightarrow \mathbb{N})$. Assim, $f'$ recebe o primeiro argumento e retorna uma nova função que espera o segundo argumento para realizar o cálculo final.
 
-$$f : (A \times B) \to C$ e $g : A \to (B \to C)$$
+Podemos representar essa transformação de forma mais abstrata usando a notação da teoria dos conjuntos. Uma função que recebe dois argumentos é representada como $\mathbb{N}^{\mathbb{N} \times \mathbb{N}}$, o que significa "o conjunto de todas as funções que mapeiam pares de números naturais para números naturais". Quando fazemos *currying*, essa função é transformada em $(\mathbb{N}^{\mathbb{N}})^{\mathbb{N}}$, o que significa "o conjunto de todas as funções que mapeiam um número natural para outra função que, por sua vez, mapeia um número natural para outro". Assim, temos uma cadeia de funções aninhadas.
 
- **Exemplo**:
+Podemos fazer uma analogia com a álgebra:
 
- Considere a seguinte função que soma dois números:
+$$(m^n)^p = m^{n \cdot p}$$
 
-$$\text{add}(x, y) \, = x + y$$
+Aqui, elevar uma potência a outra potência equivale a multiplicar os expoentes. De forma similar, no currying, estamos estruturando as funções de forma aninhada, mas o resultado final é equivalente, não importando se aplicamos todos os argumentos de uma vez ou um por um.
+Portanto, o currying cria um _isomorfismo_ entre as funções dos tipos:
 
- Essa função pode ser _Curryed_ da seguinte forma:
+$$f : (A \times B) \to C$$
 
-$$\text{add}(x) \, = \lambda y.\;(x + y)$$
+e
 
- Aqui, $\text{add}(x)\,$ é uma função que aceita $y\,$ como argumento e retorna a soma de $x\,$ e $y\,$. Isso permite a aplicação parcial da função:
+$$g : A \to (B \to C)$$
 
-$$\text{add}(2) \, = \lambda y.\;(2 + y)$$
+Este _isomorfismo_ significa que as duas formas são estruturalmente equivalentes e podem ser convertidas uma na outra sem perda de informação ou alteração do comportamento da função. A função $f$ que recebe um par de argumentos $(a, b)$ é equivalente à função $g$ que, ao receber $a$, retorna uma nova função que espera $b$, permitindo que os argumentos sejam aplicados um por vez.
 
- Agora, $\text{add}(2)\,$ é uma função que aceita um argumento e retorna esse valor somado a 2.
+Podemos entender melhor o conceito de currying dentro de um contexto mais abstrato, o da teoria das categorias. A teoria das categorias é uma área da matemática que busca generalizar e estudar relações entre diferentes estruturas matemáticas através de objetos e mapeamentos entre eles, chamados de morfismos. No caso do currying, ele se encaixa no conceito de uma _categoria fechada cartesiana (CCC)_. Uma _CCC_ é uma categoria que possui certas propriedades que tornam possível a definição e manipulação de funções de maneira bastante abstrata, incluindo a existência de produtos, como pares ordenados de elementos, e exponenciais, que são equivalentes ao conjunto de todas as funções entre dois objetos.
 
-### Propriedades e Vantagens do Currying
+No contexto do currying, uma _CCC_ permite que funções multivariadas sejam representadas de maneira equivalente a funções que aceitam um argumento por vez. Por exemplo, quando representamos uma função como $f: A \times B \to C$, estamos dizendo que $f$ aceita um par de argumentos e retorna um valor. Com currying, essa função pode ser reestruturada como $g: A \to (B \to C)$, onde $g$ aceita um argumento $a$, e retorna uma nova função que aceita um argumento $b$ para então retornar o valor final. Esse tipo de reestruturação só é possível porque as operações básicas de uma CCC, como produto e exponenciais, garantem que esse tipo de transformação é sempre viável e consistente. Assim, a noção de categoria fechada cartesiana formaliza a ideia de que funções podem ser aplicadas um argumento de cada vez, sem perder a equivalência com uma aplicação de múltiplos argumentos simultâneos.
 
-1. **Aplicação Parcial**: _Currying_ permite que funções sejam aplicadas parcialmente, o que pode simplificar o código e melhorar a reutilização. Em vez de aplicar todos os argumentos de uma vez, pode-se aplicar apenas alguns e obter uma nova função que espera os argumentos restantes.
+Essa estrutura abstrata da teoria das categorias ajuda a explicar por que o currying é uma ferramenta tão natural no cálculo lambda e na programação funcional. No cálculo lambda, todas as funções são unárias por definição; qualquer função que precise de múltiplos argumentos é, na verdade, uma cadeia de funções unárias que se encaixam umas nas outras. Esse comportamento é um reflexo direto das propriedades de uma categoria fechada cartesiana. Cada vez que transformamos uma função multivariada em uma sequência de funções aninhadas, estamos explorando a propriedade exponencial dessa categoria, que se comporta de forma semelhante à exponenciação que conhecemos na álgebra. A identidade $(m^n)^p = m^{n \cdot p}$ é um exemplo de como uma estrutura aninhada pode ser vista de forma equivalente a uma única operação combinada.
 
-2. **Flexibilidade**: Permite compor funções mais facilmente, combinando funções parciais em novos contextos sem a necessidade de redefinições.
+Entender o currying como uma parte de uma categoria fechada cartesiana também nos dá uma visão mais profunda sobre como a programação funcional e o cálculo lambda operam. O currying não é apenas uma técnica prática para simplificar a aplicação de funções; é, na verdade, uma manifestação de uma estrutura matemática muito mais ampla, que envolve composição, abstração e a criação de novas funções a partir de funções existentes. Essa perspectiva ajuda a conectar o ato prático de currificar funções com a teoria abstrata que fundamenta essas operações, revelando a elegância que há na reestruturação de funções e na capacidade de manipular argumentos um por um.
 
-3. **Isomorfismo com Funções Multivariadas**: Em muitos casos, funções que aceitam múltiplos argumentos podem ser tratadas como funções que aceitam um único argumento e retornam outra função. Essa correspondência torna o _Currying_ uma técnica natural para linguagens funcionais.
+Voltando ao cálculo lambda, a atenta leitora deve lembrar que todas as funções são unárias, por definição. Assim, funções que parecem aceitar múltiplos argumentos são, na verdade, uma cadeia de funções que retornam outras funções. Vamos ilustrar isso com um exemplo usando a concatenação de strings.
 
-**No cálculo lambda, toda função é, por definição, uma função unária, o que significa que toda função no cálculo lambda já está implicitamente _Curryed_**. Funções de múltiplos argumentos são definidas como uma cadeia de funções que retornam outras funções. Uma função que soma dois números no cálculo lambda pode ser definida como:
+Para começar, vamos definir uma função que concatena duas strings:
 
-$$\text{add} = \lambda x. \lambda y.\;x + y$$
+$$\text{concat} = \lambda s_1.\; (\lambda s_2.\; s_1 + s_2)$$
 
-Aqui, $\lambda x\,$ define uma função que aceita $x\,$ como argumento e retorna uma nova função $\lambda y\,$ que aceita $y\,$ e retorna a soma $x + y\,$. Quando aplicada, temos:
+Aqui, $\lambda s_1$ cria uma função que recebe a primeira string $s_1$ e retorna outra função $\lambda s_2$, que então recebe a segunda string $s_2$ e realiza a concatenação. Quando aplicamos o primeiro argumento, obtemos:
 
-$$(\text{add}\;2)\;3 = (\lambda x. \lambda y.\;x + y)\;2\;3$$
-
-A aplicação funciona da seguinte forma:
-
-$$(\lambda x. \lambda y.\;x + y)\;2 = \lambda y.\;2 + y$$
-
-E, em seguida:
-
-$$(\lambda y.\;2 + y)\;3 = 2 + 3 = 5$$
-
-Esse é um exemplo claro de como _Currying_ permite a aplicação parcial de funções no cálculo lambda puro. Outro exemplo mais complexo seria uma função de multiplicação:
-
-$$\text{mult} = \lambda x. \lambda y.\;x \times y$$
-
-Aplicando parcialmente:
-
-$$(\text{mult}\;3) \, = \lambda y.\;3 \times y$$
+$$(\text{concat}\;\text{"Hello, "}) = \lambda s_2.\;(\text{"Hello, "} + s_2)$$
 
 Agora, podemos aplicar o segundo argumento:
 
-$$(\lambda y.\;3 \times y)\;4 = 3 \times 4 = 12$$
+$$(\lambda s_2.\;(\text{"Hello, "} + s_2))\;\text{"World!"} = \text{"Hello, World!"}$$
 
-Esses exemplos ilustram como o _Currying_ permite a definição e aplicação parcial de funções. Mas, ainda não vimos tudo.
+Outro exemplo seria uma função que cria uma saudação personalizada. Primeiro, vamos definir a função currificada:
 
-#### Exercícios Currying
+$$\text{saudacao} = \lambda nome.\; (\lambda saudacao.\; saudacao + ", " + nome)$$
+
+Aplicando o primeiro argumento:
+
+$$(\text{saudacao}\;\text{"Alice"}) = \lambda saudacao.\;(\text{saudacao} + ", " + \text{"Alice"})$$
+
+E, em seguida, aplicando o segundo argumento:
+
+$$(\lambda saudacao.\;(\text{saudacao} + ", " + \text{"Alice"}))\;\text{"Bom dia"} = \text{"Bom dia, Alice"}$$
+
+Esses exemplos mostram como o currying facilita a aplicação parcial de funções, especialmente em contextos onde queremos criar funções específicas a partir de funções mais gerais, aplicando apenas alguns dos argumentos inicialmente. Dessa forma, podemos obter mais flexibilidade e modularidade no desenvolvimento de nossas funções.
+
+### Currying em Haskell
+
+Haskell implementa o currying por padrão para todas as funções. Isso significa que cada função em Haskell tecnicamente aceita apenas um argumento, mas pode ser aplicada parcialmente para criar novas funções. Podemos definir uma função de múltiplos argumentos assim:
+
+```haskell
+add :: Int -> Int -> Int
+add x y = x + y
+```
+
+Essa definição é equivalente a:
+
+```haskell
+add :: Int -> (Int -> Int)
+add = \x -> (\y -> x + y)
+```
+
+Aqui, `add` é uma função que aceita um `Int` e retorna uma função que aceita outro `Int` e retorna a soma.
+
+A aplicação parcial é trivial em Haskell. Sempre podemos criar novas funções simplesmente não fornecendo todos os argumentos:
+
+```haskell
+addCinco :: Int -> Int
+addCinco = add 5
+
+resultado :: Int
+resultado = addCinco 3  -- Retorna 8
+```
+
+Além da definição de funções usando currying e da aplicação parcial. O uso do currying no Haskell torna as funções de ordem superior naturais em Haskell:
+
+```haskell
+aplicaDuasVezes :: (a -> a) -> a -> a
+aplicaDuasVezes f x = f (f x)
+
+incrementaDuasVezes :: Int -> Int
+incrementaDuasVezes = aplicaDuasVezes (+1)
+
+resultado :: Int
+resultado = incrementaDuasVezes 5  -- Retorna 7
+```
+
+Operadores infixos são funções binárias (que aceitam dois argumentos) escritas entre seus operandos. Por exemplo, `+`, `-`, `*`, `/` são operadores infixos comuns. Em Haskell, operadores infixos podem ser facilmente convertidos em funções currificadas usando seções. 
+
+Seções são uma característica do Haskell que permite a aplicação parcial de operadores infixos. Elas são uma forma concisa de criar funções anônimas a partir de operadores binários.
+
+1. **Definição**:
+   Uma seção é criada ao colocar um operador infixo e um de seus operandos entre parênteses. Isso cria uma função que espera o operando faltante.
+
+```haskell
+dobra :: Int -> Int
+dobra = (*2)
+
+metade :: Float -> Float
+metade = (/2)
+```
+
+Finalmente em Haskell o uso do currying permite escrever código mais conciso e expressivo. Enquanto facilita a criação de funções especializadas a partir de funções mais gerais e torna a composição de funções mais natural e intuitiva.
+
+### Exercícios Currying
 
 **1**: escreva uma expressão lambda que representa a função $f(x, y) \, = x + y\,$ usando currying. Aplique-a aos valores $x = 4\,$ e $y = 5\,$.
 
@@ -3095,24 +3182,24 @@ Este exemplo mostra que a ordem aplicativa pode levar a uma não terminação, e
 
 ## Combinadores e Funções Anônimas
 
-Os combinadores também tem origem no trabalho de [Moses Schönfinkel](https://en.wikipedia.org/wiki/Moses_Sch%C3%B6nfinkel). Em um artigo de 1924 de Moses Schönfinkel[^cita1]. Nele, ele define uma família de combinadores incluindo os padrões $S$, $K$ e $I$ e demonstra que apenas $S$ e $K$ são necessários[^cite3]. Seu conjunto inicial de combinadores inclui:
+Os combinadores também tem origem no trabalho de [Moses Schönfinkel](https://en.wikipedia.org/wiki/Moses_Sch%C3%B6nfinkel). Em um artigo de 1924 de Moses Schönfinkel[^cita1]. Nele, ele define uma família de combinadores incluindo os padrões $S$, $K$ e $I$ e demonstra que apenas $S$ e $K$ são necessários[^cite3]. Seu conjunto inicial de combinadores pode ser visto na Figura 1:
 
 | Abreviação Original | Função Original em Alemão    | Tradução para o Inglês     | Expressão Lambda                       | Abreviação Atual |
 |---------------------|-----------------------------|----------------------------|----------------------------------------|-----------------|
 | $I$                 | Identitätsfunktion           | função identidade         | $\lambda x.\;x\,$                         | $I$             |
-| $C$                 | Konstanzfunktion             | função de constância      | $\lambda\;y\;x.\;x\,$                        | $K$             |
+| $K$                 | Konstanzfunktion             | função de constância      | $\lambda\;y\;x.\;x\,$                        | $C$             |
 | $T$                 | Vertauschungsfunktion        | função de troca           | $\lambda\;y\;xz.\;z\;y\;x\,$                     | $C$             |
 | $Z$                 | Zusammensetzungsfunktion     | função de composição      | $\lambda\;y\;xz.\;xz(yz)\,$                  | $B$             |
 | $S$                 | Verschmelzungsfunktion       | função de fusão           | $\lambda\;y\;xz.\;xz(yz)\,$                  | $S$             |
 
 _Tabela 1: Relação dos Combinadores Originais._{: legenda}
 
-A Figura 1 mostra as definições dos combinadores $I$, $K$, $S$ e uma aplicação de cada um.
+A Figura 1 mostra as definições dos combinadores $I$, $K$, $S$, e uma aplicação de cada um.
 
 ![](/assets/images/comb.png)
 _Definição e Aplicação dos Combinadores $I$, $K$, $S$_{: legenda}
 
-Schönfinkel também tinha combinadores que representavam operações lógicas, um para o [traço de Sheffer](https://en.wikipedia.org/wiki/Sheffer_stroke)(NAND), descoberto em 1913, e outro para a quantificação.
+Schönfinkel também tinha combinadores que representavam operações lógicas, um para o [traço de Sheffer](https://en.wikipedia.org/wiki/Sheffer_stroke), _NAND_, descoberto em 1913, e outro para a quantificação.
 
 >Em funções booleanas e no cálculo proposicional, o _traço de Sheffer_ é uma operação lógica que representa a negação da conjunção. Essa operação é expressa em linguagem comum como _não ambos_. Ou seja, dados dois operandos, ao menos um deles deve ser falso. Em termos técnicos, essa operação é chamada de _não-conjunção_ ou _negação alternativa_, Simplesmente porque esta operação nega a conjunção dos operandos. Finalmente, na eletrônica esta operação conhecida como a operação _NAND_, abreviação de _not and_.
 >
@@ -6123,7 +6210,7 @@ A atenta leitora deve ter percebido que o cálculo lambda não é apenas um conc
 
 2. **Funções de ordem superior**: O cálculo lambda permite a criação de funções que operam sobre outras funções. Isso se traduz em conceitos aplicados em funções como `map`, `filter` e `reduce` em linguagens funcionais.
 
-3. **Currying**: A técnica de transformar uma função com múltiplos argumentos em uma sequência de funções de um único argumento é natural no cálculo lambda e no Haskell e em outras linguagens funcionais.
+3. *currying*: A técnica de transformar uma função com múltiplos argumentos em uma sequência de funções de um único argumento é natural no cálculo lambda e no Haskell e em outras linguagens funcionais.
 
 4. **Avaliação preguiçosa (_lazy_)**: Embora não faça parte do cálculo lambda puro, a semântica de redução do cálculo lambda, notadamente a estratégia de redução normal inspirou o conceito de avaliação preguiçosa em linguagens como Haskell.
 
@@ -6761,7 +6848,7 @@ Haskell implementa diretamente muitos conceitos do cálculo lambda. Vejamos algu
    main = print incrementar -- Saída: 6
    ```
 
-3. **Currying**: Haskell usa currying por padrão, permitindo aplicação parcial de funções:
+3. *currying*: Haskell usa currying por padrão, permitindo aplicação parcial de funções:
 
    ```haskell
    -- Função de dois argumentos
