@@ -10,7 +10,7 @@ tags:
   - álgebra
   - exercícios
   - problemas resolvidos
-image: assets/images/prog_dynamic.jpeg
+image: assets/images/prog_dynamic.webp
 featured: false
 rating: 5
 description: Versão atualizada de Cálculo Made Easy com novos exercícios e exemplos. Aprenda cálculo de forma intuitiva desde os fundamentos até tópicos avançados.
@@ -21,7 +21,7 @@ toc: true
 published: false
 slug: calculo-simplificado
 draft: 2024-07-06T19:30:40.256Z
-lastmod: 2024-10-17T20:56:19.744Z
+lastmod: 2024-10-21T20:22:25.183Z
 ---
 
 O livro **Calculus Made Easy** de [SILVANUS P. THOMPSON](https://en.wikipedia.org/wiki/Silvanus_P._Thompson) foi colocado em domínio público, tanto no Brasil quanto nos EUA. Este é um dos melhores livros introdutórios de cálculo já escrito. Simples, direto e abrangente. Sem nenhuma modéstia, ou vergonha na cara, escolhi este livro para tradução, atualização e expansão. Na esperança de criar um material atualizado para o ensino e fomento do cálculo entre alguns estudantes de língua portuguesa. Vou traduzir, atualizar, comentar e expandir o conteúdo. Contudo, como o livro é ótimo, algumas coisas precisam ser mantidas o mais original possível por curiosidade e pelo valor cultural. Um bom exemplo é a brincadeira da capa:
@@ -1982,7 +1982,7 @@ $$
 
   Vemos que as condições do movimento podem sempre ser determinadas a partir da equação tempo-distância e suas primeiras e segundas derivadas. Nos dois últimos exemplos a velocidade média durante os primeiros $10$ segundos e durante os $5$ segundos após o início não será mais a mesma, pois a velocidade não está aumentando uniformemente, já que a aceleração não é mais constante.
 
-  ![]({{ site.baseurl }}/assets/images/calc_Fig3.jpg)
+  ![]({{ site.baseurl }}/assets/images/calc_Fig3.webp)
 *Figura 5.1 - Gráfico das grandezas do Exemplo 5.*{: class="legend"}
 
 6. O ângulo $\theta$ (em radianos) percorrido por uma roda é dado por $\theta = 3 + 2t - 0.1t^3$, onde $t$ é o tempo em segundos a partir de um determinado instante; encontre a velocidade angular $\omega$ e a aceleração angular $\alpha$: (a) após 1 segundo; (b) depois que a roda tiver realizado uma revolução. Em que momento a roda está em repouso e quantas revoluções ela realizou até esse instante?
@@ -3183,7 +3183,7 @@ Consideraremos, doravante, que $\frac{dy}{dx}$ representa a inclinação da curv
 
 *Se a curva inclina-se para cima muito suavemente, como na Figura 10.1.c, $\frac{dy}{dx}$ será uma fração menor que $1$*.
 
-![]({{ site.baseurl }}/assets/images/cap10-2.jpg){#figura7}
+![]({{ site.baseurl }}/assets/images/cap10-2.webp){#figura7}
 *Figura 10.2 - Significado Geométrico da derivada.*{: class="legend"}
 
 *Para uma linha horizontal, ou um ponto horizontal em uma curva, $dy = 0$. Isso significa que um aumento infinitesimal, ou não, em $x$, não modifica o valor de $y$ e, portanto, $\frac{dy}{dx} = 0$*.
@@ -3204,12 +3204,12 @@ Se uma curva primeiro sobe e depois desce, como na Figura 10.3.b, os valores de 
 
 *A característica de um ponto de máximo é que $y$ deve imediatamente diminuir em ambos os lados deste ponto. Para o valor particular de $x$ que faz $y$ um máximo, o valor de $\frac{dy}{dx} = 0$*.
 
-![]({{ site.baseurl }}/assets/images/cap10-3.jpg){#figura7}
+![]({{ site.baseurl }}/assets/images/cap10-3.webp){#figura7}
 *Figura 10.3 - Análise da derivada em curvas crescentes e decrescentes.*{: class="legend"}
 
 Se uma curva tem a forma peculiar da Figura 10.4, os valores de $\frac{dy}{dx}$ serão sempre positivos; mas haverá um lugar particular onde a inclinação é menor, onde o valor de $\frac{dy}{dx}$ será um mínimo; ou seja, menos do que é em qualquer outra parte da curva.
 
-![]({{ site.baseurl }}/assets/images/cap10-4.jpg){#figura7}
+![]({{ site.baseurl }}/assets/images/cap10-4.webp){#figura7}
 *Figura 10.4 - Análise da derivada em uma curva com concavidade horizontal.*{: class="legend"}
 
 ## CAPITULO XVII - INTEGRAÇÃO

@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-		<link rel="icon" href="{{ site.baseurl }}/assets/images/logo.png" />
+		<link rel="icon" href="{{ site.baseurl }}/assets/images/logo.webp" />
 		<title>{{ page.title }} | {{site.name}}</title>
 		{% seo %}
 		<link
@@ -15,18 +15,29 @@
 		<script>
 			MathJax = {
 				tex: {
-					inlineMath: [
-						["$", "$"],
-						["$$", "$$"],
-					],
+					inlineMath: [["$", "$"]],
+					displayMath: [['$$', '$$'], ['\\[', '\\]']],
+					packages: {'[+]': ['base']} // Carrega apenas o pacote base
 				},
 				svg: {
-					fontCache: "global",
-					scale: 3.5, // Aumenta o tamanho da fonte em 200%
+					fontCache: "global", // Ativa o cache global de fontes
+					scale: 2 // Reduz a escala para melhorar o desempenho
 				},
+				options: {
+					skipHtmlTags: ["script", "noscript", "style", "textarea", "pre"], // Ignora tags para evitar conflitos
+				},
+				loader: {
+					load: ['input/tex', 'output/svg'], // Carrega apenas os módulos essenciais
+				},
+				startup: {
+					ready: () => {
+						MathJax.startup.defaultReady();
+						console.log("MathJax carregado e pronto");
+					}
+				}
 			};
 		</script>
-		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+		<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 
 		<link href="{{ site.baseurl }}/assets/css/screen.css" rel="stylesheet" />
 		<link href="{{ site.baseurl }}/assets/css/main.css" rel="stylesheet" />

@@ -1,28 +1,28 @@
 ---
 author: Frank
 beforetoc: |-
-   [Anterior](2024-09-24-2-1.-Introduction.md)
-   [Próximo](2024-09-24-4-4.-Introduction-to-File-IO-in-C%2B%2B.md)
+    [Anterior](2024-09-24-2-1.-Introduction.md)
+    [Próximo](2024-09-24-4-4.-Introduction-to-File-IO-in-C%2B%2B.md)
 categories:
-   - Matemática
-   - Linguagens Formais
-   - Programação
+    - Matemática
+    - Linguagens Formais
+    - Programação
 description: Competitive Programming in C++ and Python for newbies.
 draft: null
 featured: false
-image: assets/images/prog_dynamic.jpeg
+image: assets/images/prog_dynamic.webp
 keywords:
-   - Code Comparison
-   - Developer Tips
-lastmod: 2024-10-02T16:58:57.281Z
+    - Code Comparison
+    - Developer Tips
+lastmod: 2024-10-21T20:23:43.654Z
 layout: post
 preview: Competitive Programming in C++ and Python for newbies. Explore various algorithmic examples, and understand performance differences. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
 published: false
 rating: 5
 slug: competitive-programming-techniques-insights
 tags:
-   - Matemática
-   - Linguagens Formais
+    - Matemática
+    - Linguagens Formais
 title: 2. C++ Competitive Programming Hacks
 toc: true
 ---

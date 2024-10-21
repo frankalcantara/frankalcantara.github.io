@@ -1115,7 +1115,7 @@ $$\mathbf{F}(x, y) = (P(x, y), Q(x, y))$$
 
 Uma função, uma definição direta, e simples, ainda assim, sem nenhum apelo visual. Mas somos insistentes e estamos estudando matemática, a rota que nos levará ao horizonte do Eletromagnetismo. Que nasce na carga elétrica, fenômeno simples, estrutural e belo que cria forças que se espalham por todo universo. Vamos pegar duas cargas de mesma intensidade e colocar no nosso palco.
 
-![Campo Vetorial devido a duas cargas elétricas](/assets/images/CampoVetorial1.jpeg){:class="lazyimg"}
+![Campo Vetorial devido a duas cargas elétricas](/assets/images/CampoVetorial1.webp){:class="lazyimg"}
 
 <legend style="font-size: 1em;
   text-align: center;
@@ -1242,14 +1242,14 @@ Assim como um navegador considera a variação da profundidade do oceano em dife
 
 Em qualquer ponto $P$ o gradiente é um vetor que aponta na direção da maior variação de um Campo Escalar neste ponto. Nós podemos voltar ao exemplo 8 e tentar apresentar isso de uma forma mais didática. Primeiro o gráfico do Campo Escalar dado por: $\mathbf{F}(x,y) = 10sin(\frac{x^2}{5})+4y$.
 
-![Gráfico do Campo Escalar](/assets/images/Func1Grad.jpeg){:# class="lazyimg"}
+![Gráfico do Campo Escalar](/assets/images/Func1Grad.webp){:# class="lazyimg"}
 <legend style="font-size: 1em;
   text-align: center;
   margin-bottom: 20px;">Figura 4 - Gráfico de um Campo Escalar $f(x,y)$.</legend>
 
 Na Figura 4 é possível ver a variação do do campo $\mathbf{F}(x,y)$ eu escolhi uma função em $\mathbf{F}(x,y)$ no domínio dos $\mathbb{R}^2$ por ser mais fácil de desenhar e visualizar, toda a variação fica no domínio de $z$. Podemos plotar o gradiente na superfície criada pelo campo $\mathbf{F}(x,y)$.
 
-![Gráfico do Campo Escalar mostrando a intensidade do gradiente ](/assets/images/func1Grad2.jpeg){:class="lazyimg"}
+![Gráfico do Campo Escalar mostrando a intensidade do gradiente ](/assets/images/func1Grad2.webp){:class="lazyimg"}
 <legend style="font-size: 1em;
   text-align: center;
   margin-bottom: 20px;">Figura 5 - Gráfico de um Campo Escalar $f(x,y) representando o Gradiente$.</legend>

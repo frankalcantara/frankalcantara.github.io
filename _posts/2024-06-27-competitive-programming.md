@@ -3,19 +3,19 @@ layout: post
 title: Competitive programming in C++ - Techniques and Insights
 author: Frank
 categories:
-  - Matemática
-  - Linguagens Formais
-  - Programação
+    - Matemática
+    - Linguagens Formais
+    - Programação
 tags:
-  - Matemática
-  - Algorithm Optimization
-  - Practical Programming Guide
-image: assets/images/prog_dynamic.jpeg
+    - Matemática
+    - Algorithm Optimization
+    - Practical Programming Guide
+image: assets/images/prog_dynamic.webp
 description: Dynamic Programming in C++ with practical examples, performance analysis, and detailed explanations to optimize your coding skills and algorithm efficiency.
 slug: competitive-programming-techniques-insights
 keywords:
-  - Dynamic Programming
-  - C++ Algorithms
+    - Dynamic Programming
+    - C++ Algorithms
 rating: 5
 published: 2024-06-27T19:43:15.124Z
 draft: null
@@ -23,7 +23,7 @@ featured: true
 toc: true
 preview: C++ is essential in competitive programming for its speed and flexibility. This guide covers advanced techniques like Dynamic Programming, input/output optimization, modern C++20 features, and efficient data structures, equipping you to solve complex algorithmic challenges efficiently and effectively.
 beforetoc: In this comprehensive guide, we delve into the world of Competitive Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
-lastmod: 2024-09-26T22:30:57.708Z
+lastmod: 2024-10-21T20:24:15.819Z
 ---
 
 # 1. Introduction
@@ -3052,7 +3052,7 @@ $$A = [3, 1, 4, 1, 5, 9, 2, 6]$$
 
 **Step 1**: Construct the Prefix Sum Array $P$
 
-![]({{ site.baseurl }}/assets/images/PrefixSum1.jpg)
+![]({{ site.baseurl }}/assets/images/PrefixSum1.webp)
 _Figura 11.1.1.1.A - Step in the Prefix Sum Algorithm: The image shows the calculation of the fifth element of the prefix sum array $P$ from the original array $A$._{: class="legend"}
 
 Compute $P$:
@@ -3074,7 +3074,7 @@ $$P = [3, 4, 8, 9, 14, 23, 25, 31]$$
 
 Example Query: Find the sum of elements from index $2$ to $5$ in $A$.
 
-![]({{ site.baseurl }}/assets/images/PrefixSum3.jpg)
+![]({{ site.baseurl }}/assets/images/PrefixSum3.webp)
 _Figura 11.1.1.1.A - The image illustrates how the prefix sum array $P$ is constructed from the original array $A$. Example shows the sum calculation from $A[2]$ to $A[5]$ using the prefix sums._{: class="legend"}
 
 - **Compute**: Since $i = 2 > 0$, use $\text{Sum}(2, 5) = P[5] - P[1]$
@@ -3083,7 +3083,7 @@ _Figura 11.1.1.1.A - The image illustrates how the prefix sum array $P$ is const
   - Sum of $A[2]$ to $A[5]$:
     - $A[2] + A[3] + A[4] + A[5] = 4 + 1 + 5 + 9 = 19$
 
-![]({{ site.baseurl }}/assets/images/PrefixSum4.jpg)
+![]({{ site.baseurl }}/assets/images/PrefixSum4.webp)
 _Figura 11.1.1.1.A - The image demonstrates how to use the prefix sum array $P$ to calculate the sum of elements from $A[2]$ to $A[5]$. The calculation is done using the formula $P[5] - P[1]$, resulting in $23 - 4 = 19$._{: class="legend"}
 
 ### 11.1.1.2. Complexity Analysis
@@ -5850,7 +5850,7 @@ Let's consider an array $A = [3, 2, -1, 6, 5, 4, -3, 3, 7, 2, 3, 1]$. The corres
 
 The value stored in each position of the Fenwick tree is the incremental contribution that helps compose the cumulative sum. For example, at position 2, the value stored is $4$, which is the sum of $A[0] + A[1] + A[2]$. At position 4, the value stored is $15$, which is the sum of $A[0] + A[1] + A[2] + A[3] + A[4]$.
 
-![]({{ site.baseurl }}/assets/images/bit1.jpg){: class="lazyimg"}
+![]({{ site.baseurl }}/assets/images/bit1.webp){: class="lazyimg"}
 _Gráfico 1.1 - Example Fenwick tree diagram._{: class="legend"}
 
 ### 11.7.2. Querying the Fenwick tree
@@ -7665,7 +7665,7 @@ Your function should return a pair of numbers that add up to the target sum. You
 
 The most obvious solution, usually the first that comes to mind, involves checking all pairs in the array to see if any pair meets the desired target value. This solution is not efficient for large arrays; it has a time complexity of $O(n^2)$ where $n$ is the number of elements in the array. The flow of the Brute-Force function can be seen in Flowchart 4.
 
-![]({{ site.baseurl }}/assets/images/flow4.jpg)
+![]({{ site.baseurl }}/assets/images/flow4.webp)
 _Flowchart 4 - Brute-Force solution for Two-Sum problem_{: class="legend"}
 
 Flowchart 4 enables the creation of a function to solve the two-sum problem in C++20, as can be seen in Code 4 below:
@@ -7802,7 +7802,7 @@ The recursive solution leverages a two-pointer approach to efficiently explore t
 
 This leads us to the illustration of the algorithm in Flowchart 4 and its implementation in C++ Code 5:
 
-![]({{ site.baseurl }}/assets/images/twoSumRecur.jpg)
+![]({{ site.baseurl }}/assets/images/twoSumRecur.webp)
 _Flowchart 4 - Two-Sum problem recursive solution_{: class="legend"}
 
 ```Cpp

@@ -10,10 +10,10 @@ categories:
 description: Dynamic Programming in C++ with practical examples, performance analysis, and detailed explanations to optimize your coding skills and algorithm efficiency.
 draft: null
 featured: false
-image: assets/images/prog_dynamic.jpeg
+image: assets/images/prog_dynamic..webp
 keywords:
     - Developer Tips
-lastmod: 2024-10-13T20:28:24.131Z
+lastmod: 2024-10-21T20:25:21.943Z
 layout: post
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
 published: false
@@ -691,7 +691,7 @@ Your function should return a pair of numbers that add up to the target sum. You
 
 The most obvious solution, usually the first that comes to mind, involves checking all pairs in the array to see if any pair meets the desired target value. This solution is not efficient for large arrays; it has a time complexity of $O(n^2)$ where $n$ is the number of elements in the array. The flow of the Brute-Force function can be seen in Flowchart 4.
 
-![]({{ site.baseurl }}/assets/images/flow4.jpg)
+![]({{ site.baseurl }}/assets/images/flow4.webp)
 _Flowchart 4 - Brute-Force solution for Two-Sum problem_{: class="legend"}
 
 Flowchart 4 enables the creation of a function to solve the two-sum problem in C++20, as can be seen in Code 4 below:
@@ -828,7 +828,7 @@ The recursive solution leverages a two-pointer approach to efficiently explore t
 
 This leads us to the illustration of the algorithm in Flowchart 4 and its implementation in C++ Code 5:
 
-![]({{ site.baseurl }}/assets/images/twoSumRecur.jpg)
+![]({{ site.baseurl }}/assets/images/twoSumRecur.webp)
 _Flowchart 4 - Two-Sum problem recursive solution_{: class="legend"}
 
 ```Cpp

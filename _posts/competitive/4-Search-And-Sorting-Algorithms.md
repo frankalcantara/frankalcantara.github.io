@@ -10,10 +10,10 @@ categories:
 description: Dynamic Programming in C++ with practical examples, performance analysis, and detailed explanations to optimize your coding skills and algorithm efficiency.
 draft: null
 featured: false
-image: assets/images/prog_dynamic.jpeg
+image: assets/images/prog_dynamic.webp
 keywords:
   - Dynamic Programming
-lastmod: 2024-09-25T23:32:29.183Z
+lastmod: 2024-10-21T20:24:31.054Z
 layout: post
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
 published: false

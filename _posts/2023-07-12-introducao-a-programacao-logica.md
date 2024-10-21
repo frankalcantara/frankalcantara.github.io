@@ -43,7 +43,7 @@ Na Programação Lógica, um dos paradigmas da **Programação Descritiva** usam
 
 _Uma hipótese é uma suposição, expressa na forma de proposição, que é acreditada ser verdadeira, mas que ainda não foi provada_. Uma sentença declarativa que precisa ser verificada em busca da sua validação. Na linguagem natural, conjecturas são frequentemente expressas como declarações. Na Lógica de Primeira Ordem, serão proposições e as proposições serão tratadas como sentenças que foram criadas para serem verificadas na busca da verdade. Para testar a verdade expressa nestas sentenças usaremos as ferramentas da própria Lógica de Primeira Ordem.
 
-![Diagrama de Significado de Conjecturas](/assets/images/conjecturas.jpeg)
+![Diagrama de Significado de Conjecturas](/assets/images/conjecturas.webp)
 
 Em resumo: **programação imperativa** focada no processo, no _como_ chegar à solução; **programação descritiva** focada no problema em si, no _o que_ precisa ser feito. Eu, sempre que posso escolho uma linguagem descritiva. Não há glória, nem honra nesta escolha apenas as lamúrias da opinião pessoal.
 
@@ -5649,7 +5649,7 @@ Na Programação Lógica, um dos paradigmas da **Programação Descritiva** usam
 
 _Uma hipótese é uma suposição, expressa na forma de proposição, que é acreditada ser verdadeira, mas que ainda não foi provada_. Uma sentença declarativa que precisa ser verificada em busca da sua validação. Na linguagem natural, conjecturas são frequentemente expressas como declarações. Na Lógica de Primeira Ordem, serão proposições e as proposições serão tratadas como sentenças que foram criadas para serem verificadas na busca da verdade. Para testar a verdade expressa nestas sentenças usaremos as ferramentas da própria Lógica de Primeira Ordem.
 
-![Diagrama de Significado de Conjecturas](/assets/images/conjecturas.jpeg)
+![Diagrama de Significado de Conjecturas](/assets/images/conjecturas.webp)
 
 Em resumo: **programação imperativa** focada no processo, no _como_ chegar à solução; **programação descritiva** focada no problema em si, no _o que_ precisa ser feito. Eu, sempre que posso escolho uma linguagem descritiva. Não há glória, nem honra nesta escolha apenas as lamúrias da opinião pessoal.
 

@@ -64,7 +64,7 @@ The sweet reader might have raised her eyebrows. This is where recursion and Dyn
 
 Dynamic Programming and recursion are related; _both involve solving problems by breaking a problem into smaller problems. However, while recursion solves the smaller problems without considering the computational cost of repeated calls, Dynamic Programming optimizes these solutions by storing and reusing previously obtained results_.A classic illustration of recursion is the calculation of the nth term in the Fibonacci Sequence, as depicted in Flowchart 1.
 
-![]({{ site.baseurl }}/assets/images/recursive.jpg)
+![]({{ site.baseurl }}/assets/images/recursive.webp)
 _Flowchart 1 - Recursive Fibonacci nth algorithm_{: class="legend"}
 
 The Flowchart 1 represents a function for calculating the nth number of the Fibonacci Sequence, for all $n \geq 0$ as the desired number. In Flowchart 1 we have:

@@ -3,32 +3,32 @@ layout: post
 title: Competitive Programming Primer
 author: Frank
 categories:
-  - Matemática
-  - Linguagens Formais
-  - Programação
+    - Matemática
+    - Linguagens Formais
+    - Programação
 tags:
-  - Matemática
-  - Linguagens Formais
-  - Programação Dinâmica
-  - Dynamic Programming
-  - Dynamic Programming
-  - C++ Algorithms
-  - Performance Analysis
-  - Coding Examples
-  - Algorithm Optimization
-  - Practical Programming Guide
-image: assets/images/prog_dynamic.jpeg
+    - Matemática
+    - Linguagens Formais
+    - Programação Dinâmica
+    - Dynamic Programming
+    - Dynamic Programming
+    - C++ Algorithms
+    - Performance Analysis
+    - Coding Examples
+    - Algorithm Optimization
+    - Practical Programming Guide
+image: assets/images/prog_dynamic.webp
 description: Sharpen your competitive programming skills with our 100 curated challenges.
 slug: competitive-programming-primer
 keywords:
-  - Dynamic Programming
-  - C++ Algorithms
-  - Coding Examples
-  - Performance Optimization
-  - Algorithm Efficiency
-  - Programming Guide
-  - Code Comparison
-  - Developer Tips
+    - Dynamic Programming
+    - C++ Algorithms
+    - Coding Examples
+    - Performance Optimization
+    - Algorithm Efficiency
+    - Programming Guide
+    - Code Comparison
+    - Developer Tips
 rating: 5
 published: true
 draft: 2024-09-19T15:45:58.149Z
@@ -36,7 +36,7 @@ featured: false
 toc: true
 preview: Sharpen your competitive programming skills with our 100 curated challenges, designed to enhance problem-solving, efficiency, and coding proficiency in C++ and Python.
 beforetoc: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Dynamic Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and enhance algorithm efficiency.
-lastmod: 2024-09-25T23:58:27.853Z
+lastmod: 2024-10-21T20:25:18.862Z
 date: 2024-09-19T15:45:55.405Z
 ---
 

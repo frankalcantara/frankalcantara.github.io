@@ -1,27 +1,27 @@
 ---
 author: Frank
 beforetoc: |-
-  [Anterior](2024-09-24-16-The-Dynamic-Programming-Classic-Problems.md)
-  [Próximo](2024-09-24-18-6.-Computational-Geometry.md)
+    [Anterior](2024-09-24-16-The-Dynamic-Programming-Classic-Problems.md)
+    [Próximo](2024-09-24-18-6.-Computational-Geometry.md)
 categories:
-  - Matemática
-  - Linguagens Formais
-  - Programação
+    - Matemática
+    - Linguagens Formais
+    - Programação
 description: Dynamic Programming in C++ with practical examples, performance analysis, and detailed explanations to optimize your coding skills and algorithm efficiency.
 draft: null
 featured: false
-image: assets/images/prog_dynamic.jpeg
+image: assets/images/prog_dynamic..webp
 keywords:
-  - Dynamic Programming
-lastmod: 2024-10-13T20:24:20.724Z
+    - Dynamic Programming
+lastmod: 2024-10-21T20:25:21.956Z
 layout: post
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
 published: false
 rating: 5
 slug: competitive-programming-techniques-insights
 tags:
-  - Matemática
-  - Linguagens Formais
+    - Matemática
+    - Linguagens Formais
 title: 5. Graphs and Graph Theory
 toc: true
 ---
@@ -165,7 +165,7 @@ Let's consider an array $A = [3, 2, -1, 6, 5, 4, -3, 3, 7, 2, 3, 1]$. The corres
 
 The value stored in each position of the Fenwick tree is the incremental contribution that helps compose the cumulative sum. For example, at position 2, the value stored is $4$, which is the sum of $A[0] + A[1] + A[2]$. At position 4, the value stored is $15$, which is the sum of $A[0] + A[1] + A[2] + A[3] + A[4]$.
 
-![]({{ site.baseurl }}/assets/images/bit1.jpg){: class="lazyimg"}
+![]({{ site.baseurl }}/assets/images/bit1.webp){: class="lazyimg"}
 _Gráfico 1.1 - Example Fenwick tree diagram._{: class="legend"}
 
 ### 11.7.2. Querying the Fenwick tree

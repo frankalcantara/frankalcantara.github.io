@@ -10,11 +10,11 @@ categories:
 description: Dynamic Programming in C++ with practical examples, performance analysis, and detailed explanations to optimize your coding skills and algorithm efficiency.
 draft: null
 featured: false
-image: assets/images/prog_dynamic.jpeg
+image: assets/images/prog_dynamic.webp
 keywords:
     - Dynamic Programming
     - C++ Algorithms
-lastmod: 2024-10-13T20:26:54.306Z
+lastmod: 2024-10-21T20:23:56.230Z
 layout: post
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
 published: false
@@ -141,7 +141,7 @@ $$A = [3, 1, 4, 1, 5, 9, 2, 6]$$
 
 **Step 1**: Construct the Prefix Sum Array $P$
 
-![]({{ site.baseurl }}/assets/images/PrefixSum1.jpg)
+![]({{ site.baseurl }}/assets/images/PrefixSum1.webp)
 _Figura 11.1.1.1.A - Step in the Prefix Sum Algorithm: The image shows the calculation of the fifth element of the prefix sum array $P$ from the original array $A$._{: class="legend"}
 
 Compute $P$:
@@ -163,7 +163,7 @@ $$P = [3, 4, 8, 9, 14, 23, 25, 31]$$
 
 Example Query: Find the sum of elements from index $2$ to $5$ in $A$.
 
-![]({{ site.baseurl }}/assets/images/PrefixSum3.jpg)
+![]({{ site.baseurl }}/assets/images/PrefixSum3.webp)
 _Figura 11.1.1.1.A - The image illustrates how the prefix sum array $P$ is constructed from the original array $A$. Example shows the sum calculation from $A[2]$ to $A[5]$ using the prefix sums._{: class="legend"}
 
 - **Compute**: Since $i = 2 > 0$, use $\text{Sum}(2, 5) = P[5] - P[1]$
@@ -172,7 +172,7 @@ _Figura 11.1.1.1.A - The image illustrates how the prefix sum array $P$ is const
   - Sum of $A[2]$ to $A[5]$:
     - $A[2] + A[3] + A[4] + A[5] = 4 + 1 + 5 + 9 = 19$
 
-![]({{ site.baseurl }}/assets/images/PrefixSum4.jpg)
+![]({{ site.baseurl }}/assets/images/PrefixSum4.webp)
 _Figura 11.1.1.1.A - The image demonstrates how to use the prefix sum array $P$ to calculate the sum of elements from $A[2]$ to $A[5]$. The calculation is done using the formula $P[5] - P[1]$, resulting in $23 - 4 = 19$._{: class="legend"}
 
 #### 11.1.1.2. Complexity Analysis
