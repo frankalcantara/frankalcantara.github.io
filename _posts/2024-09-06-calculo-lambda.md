@@ -68,12 +68,12 @@ Seu trabalho foi uma das primeiras tentativas de formalizar matematicamente o at
 
 A partir do meio da década de 1930, vários matemáticos e lógicos, como [Church](https://en.wikipedia.org/wiki/Alonzo_Church), [Turing](https://en.wikipedia.org/wiki/Alan_Turing), [Gödel](https://en.wikipedia.org/wiki/Kurt_G%C3%B6del) e [Post](https://en.wikipedia.org/wiki/Emil_Leon_Post), desenvolveram modelos diferentes para formalizar a computabilidade. Cada um desses modelos abordou o problema de uma perspectiva exclusiva. Como pode ser visto na Tabela 1.
 
-| Abordagem                                              | Características Principais                                      | Contribuições / Diferenças                                           |
-|--------------------------------------------------------|----------------------------------------------------------------|----------------------------------------------------------------------|
-| Cálculo Lambda<br> (Church, $1936$)                        | • Sistema formal baseado em funções<br>• Usa abstração ($\lambda$) e aplicação<br>• Funções como objetos de primeira classe | • Base para linguagens funcionais<br>• Ênfase em composição de funções<br>• Influenciou teoria dos tipos |
-| Máquina de Turing <br>(Turing, $1936$)                     | • Modelo abstrato de máquina<br>• Fita infinita, cabeçote de leitura/escrita<br>• Estados finitos e transições | • Modelo intuitivo de computação<br>• Base para análise de complexidade<br>• Inspirou arquitetura de computadores |
-| Funções Recursivas<br> (Gödel, $1934$)                     | • Baseado em teoria dos números<br>• Usa recursão e minimização<br>• Definição indutiva de funções | • Formalização rigorosa<br>• Conexão com lógica matemática<br>• Base para teoria da recursão |
-| Cálculo Sentencial<br> (Post, $1943$)                   | • Manipulação de strings<br>• Regras de produção<br>• Transformação de símbolos | • Simplicidade conceitual<br>• Base para gramáticas formais<br>• Influenciou linguagens de programação |
+| Abordagem                               | Características Principais                                      | Contribuições / Diferenças                                           |
+|-----------------------------------------|----------------------------------------------------------------|----------------------------------------------------------------------|
+| Cálculo Lambda<br> (Church, $1936$)     | • Sistema formal baseado em funções<br>• Usa abstração ($\lambda$) e aplicação<br>• Funções como objetos de primeira classe | • Base para linguagens funcionais<br>• Ênfase em composição de funções<br>• Influenciou teoria dos tipos |
+| Máquina de Turing <br>(Turing, $1936$)  | • Modelo abstrato de máquina<br>• Fita infinita, cabeçote de leitura/escrita<br>• Estados finitos e transições | • Modelo intuitivo de computação<br>• Base para análise de complexidade<br>• Inspirou arquitetura de computadores |
+| Funções Recursivas<br> (Gödel, $1934$)  | • Baseado em teoria dos números<br>• Usa recursão e minimização<br>• Definição indutiva de funções | • Formalização rigorosa<br>• Conexão com lógica matemática<br>• Base para teoria da recursão |
+| Cálculo Sentencial<br> (Post, $1943$)   | • Manipulação de strings<br>• Regras de produção<br>• Transformação de símbolos | • Simplicidade conceitual<br>• Base para gramáticas formais<br>• Influenciou linguagens de programação |
 
 _Tabela 1.A. Relação entre as contribuições de Church, Gödel e Post_{: Legenda}
 
@@ -1101,7 +1101,8 @@ Neste ponto, se a amável leitora se perdeu no Haskell, deve voltar as definiç�
 
    2. Aplicamos a regra 4:
 
-      $$[(\lambda x.x)/y] \ ,(\lambda x.\;y\;x) \, = \lambda x'.\;([(\lambda x.\;x)/y] \ ,(yx'))$
+      $$[(\lambda x.x)/y] \ ,(\lambda x.\;y\;x) \, = \lambda x'.\;([(\lambda x.\;x)/y] \ ,(yx'))$$
+
       Realizamos uma redução-$\alpha$ preventiva, renomeando $x$ para $x'\,$$
 
    3. Aplicamos a regra 3 no corpo da abstração: $\lambda x'.\;(([(\lambda x.\;x)/y]\,y)([(\lambda x.\;x)/y]x'))$
