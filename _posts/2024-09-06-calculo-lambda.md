@@ -6327,7 +6327,7 @@ Com $\text{nil}$ e $\text{cons}\,$, podemos criar e manipular listas. Por exempl
 Esta lista está diagramada na Figura 20.1.B:
 
 ![](/assets/images/list.webp)
-_Figura 6.1.B: Diagrama de uma lista em cálculo lambda_ {: legenda}
+_Figura 6.1.B: Diagrama de uma lista em cálculo lambda_{: legenda}
 
 Quando a leitora olha para o diagrama e para a função que representa a lista $[1,2,3]$ em cálculo lambda imagina que existe um abismo entre a sua ideia de lista e a função que encontramos. Não perca as esperanças, não é tão complicado quanto parece. Só trabalhoso. Chegamos a esta função começando com a lista vazia:
 
@@ -8118,7 +8118,7 @@ O cálculo lambda tipado, com suas regras de tipagem e propriedades de normaliza
 Esta relação é formalizada na Correspondência de Curry-Howard, que estabelece uma conexão entre programas e provas matemáticas. A correspondência liga duas áreas da matemática e da Ciência da Computação. Como pode ser visto na Figura 8.6.1.A.
 
 ![Um diagrama de blocos mostrando a relação entre a aplicação de função e a lógica proposicional](/assets/images/churchRosser.webp)
-_Figura 7.6.1.A: Diagrama da Relação entre cálculo lambda e lógica proposicional mostrando a importância do Teorema de Church-Rosser._ {: legenda}
+_Figura 7.6.1.A: Diagrama da Relação entre cálculo lambda e lógica proposicional mostrando a importância do Teorema de Church-Rosser._{: legenda}
 
 Na Correspondência de Curry-Howard, os tipos em linguagens de programação podem ser vistos como proposições lógicas, e os programas bem tipados como provas dessas proposições. Esta perspectiva fornece uma forma de analisar sistemas de tipos e oferece abordagens para o desenvolvimento de software e a verificação formal de programas.
 
