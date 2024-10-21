@@ -34,7 +34,7 @@ featured: true
 toc: true
 preview: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de _currying_e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de _currying_e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2024-10-21T03:05:11.974Z
+lastmod: 2024-10-21T19:08:36.366Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -166,7 +166,7 @@ A notação $\lambda$ indica que estamos criando uma função anônima. Essa abs
 
 A atenta leitora deve notar que a abstração e a aplicação são operações distintas do cálculo lambda, como pode ser visto na Figura 1.1.B.
 
-![Diagrama mostrando abstração, a aplicação da função a um valor e, finalmente o resultado da aplicação da função](/assets/images/abstAplica.png)
+![Diagrama mostrando abstração, a aplicação da função a um valor e, finalmente o resultado da aplicação da função](/assets/images/abstAplica.webp)
 _Figura 1.1.B: Diagrama da relação entre abstração e aplicação no cálculo lambda_{: legenda}
 
 A abstração, representada por $\lambda x.\;E\,$, define uma função onde $x$ é o parâmetro e $E$ é o corpo da função. Por exemplo, $\lambda x.\;x + 5$ define uma função que soma $5$ ao argumento fornecido. Outro exemplo é $\lambda f. \lambda x.\;f\;(f\;x)\,$, que descreve uma função que aplica o argumento $f$ duas vezes ao segundo argumento $x\,$.
