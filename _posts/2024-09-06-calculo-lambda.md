@@ -34,7 +34,7 @@ featured: true
 toc: true
 preview: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de _currying_e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de _currying_e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2024-10-21T19:22:08.959Z
+lastmod: 2024-10-21T20:46:49.317Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -1011,9 +1011,13 @@ Neste ponto, se a amável leitora se perdeu no Haskell, deve voltar as definiç�
 
    1. Estamos substituindo $x$ por $a$ na expressão $\lambda y.\lambda x.\;y\;x\,$. Temos uma abstração aninhada aqui.
 
-   2. Aplicamos a regra 4 para a abstração externa: $[a/x]\;(\lambda y.\lambda x.\;y\;x) \, = \lambda y.([a/x]\;(\lambda x.\;y\;x))$
+   2. Aplicamos a regra 4 para a abstração externa: 
 
-   3. Para a abstração interna, não precisamos substituir, pois a variável ligada $x$ _sombreia_ a substituição: $\lambda y.(\lambda x.\;y\;x)$
+      $$[a/x]\;(\lambda y.\lambda x.\;y\;x) \, = \lambda y.([a/x]\;(\lambda x.\;y\;x))$$
+
+   3. Para a abstração interna, não precisamos substituir, pois a variável ligada $x$ _sombreia_ a substituição:  
+
+      $$\lambda y.(\lambda x.\;y\;x)$$
 
    4. O resultado permanece inalterado.
 
@@ -1025,13 +1029,19 @@ Neste ponto, se a amável leitora se perdeu no Haskell, deve voltar as definiç�
 
    1. Estamos substituindo $x$ por $(\lambda z.\;z)$ na expressão $x (\lambda y.\;y\;x)\,$. Esta é uma aplicação onde $x$ aparece livre duas vezes.
 
-   2. Aplicamos a regra 3: $[(\lambda z.\;z)/x]\;(x (\lambda y.\;y\;x)) \, = ([(\lambda z.\;z)/x]\,x) ([(\lambda z.\;z)/x]\;(\lambda y.\;y\;x))$
+   2. Aplicamos a regra 3:
+
+      $$[(\lambda z.\;z)/x]\;(x (\lambda y.\;y\;x)) \, = ([(\lambda z.\;z)/x]\,x) ([(\lambda z.\;z)/x]\;(\lambda y.\;y\;x))$$
 
    3. Resolvemos a primeira parte: $[(\lambda z.\;z)/x]\,x = (\lambda z.\;z)$ (pela regra 1)
 
-   4. Para a segunda parte, aplicamos a regra 4: $[(\lambda z.\;z)/x]\;(\lambda y.\;y\;x) \, = \lambda y.([(\lambda z.\;z)/x]\;(x\;y))$
+   4. Para a segunda parte, aplicamos a regra 4: 
 
-   5. Aplicamos a regra 3 novamente dentro da abstração: $\lambda y.\;(([(\lambda z.\;z)/x]\,x)([(\lambda z.\;z)/x]\,y))$
+      $$[(\lambda z.\;z)/x]\;(\lambda y.\;y\;x) \, = \lambda y.([(\lambda z.\;z)/x]\;(x\;y))$$
+
+   5. Aplicamos a regra 3 novamente dentro da abstração: 
+
+      $$\lambda y.\;(([(\lambda z.\;z)/x]\,x)([(\lambda z.\;z)/x]\,y))$$
 
    6. Resolvemos: $\lambda y.((\lambda z.\;z)y)$
 
