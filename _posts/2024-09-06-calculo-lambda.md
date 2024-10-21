@@ -34,7 +34,7 @@ featured: true
 toc: true
 preview: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de _currying_e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de _currying_e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2024-10-21T21:19:37.771Z
+lastmod: 2024-10-21T21:28:02.879Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -1011,7 +1011,7 @@ Neste ponto, se a amável leitora se perdeu no Haskell, deve voltar as definiç�
 
    1. Estamos substituindo $x$ por $a$ na expressão $\lambda y.\lambda x.\;y\;x\,$. Temos uma abstração aninhada aqui.
 
-   2. Aplicamos a regra 4 para a abstração externa: 
+   2. Aplicamos a regra 4 para a abstração externa:
 
       $$[a/x]\;(\lambda y.\lambda x.\;y\;x) \, = \lambda y.([a/x]\;(\lambda x.\;y\;x))$$
 
@@ -1035,11 +1035,11 @@ Neste ponto, se a amável leitora se perdeu no Haskell, deve voltar as definiç�
 
    3. Resolvemos a primeira parte: $[(\lambda z.\;z)/x]\,x = (\lambda z.\;z)$ (pela regra 1)
 
-   4. Para a segunda parte, aplicamos a regra 4: 
+   4. Para a segunda parte, aplicamos a regra 4:
 
       $$[(\lambda z.\;z)/x]\;(\lambda y.\;y\;x) \, = \lambda y.([(\lambda z.\;z)/x]\;(x\;y))$$
 
-   5. Aplicamos a regra 3 novamente dentro da abstração: 
+   5. Aplicamos a regra 3 novamente dentro da abstração:
 
       $$\lambda y.\;(([(\lambda z.\;z)/x]\,x)([(\lambda z.\;z)/x]\,y))$$
 
@@ -1075,13 +1075,13 @@ Neste ponto, se a amável leitora se perdeu no Haskell, deve voltar as definiç�
 
    1. Estamos substituindo $z$ por $(\lambda x.\;y\;x)$ na expressão $\lambda y.\;z\;y\,$. Temos que ter cuidado com a possível captura de variáveis.
 
-   2. Aplicamos a regra 4: 
+   2. Aplicamos a regra 4:
 
       $$[(\lambda x.\;y\;x)/z] \ ,(\lambda y.\;z\;y) \, = \lambda y'.([(\lambda x.\;x\;y)/z] \ ,(zy'))$$
 
       Note que fizemos uma redução-$\alpha$ preventiva, renomeando $y$ para $y'$ para evitar possível captura.
 
-   3. Agora aplicamos a regra 3 no corpo da abstração: 
+   3. Agora aplicamos a regra 3 no corpo da abstração:
 
       $$\lambda y'.\;(([(\lambda x.\;y\;x)/z]z)([(\lambda x.\;x\;y)/z]y'))$$
 
@@ -1099,7 +1099,7 @@ Neste ponto, se a amável leitora se perdeu no Haskell, deve voltar as definiç�
 
    1. Estamos substituindo $y$ por $(\lambda x.\;x)$ na expressão $\lambda x.\;y\;x\,$. Precisamos ter cuidado com a variável ligada $x\,$.
 
-   2. Aplicamos a regra 4: 
+   2. Aplicamos a regra 4:
 
       $$[(\lambda x.x)/y] \ ,(\lambda x.\;y\;x) \, = \lambda x'.\;([(\lambda x.\;x)/y] \ ,(yx'))$
       Realizamos uma redução-$\alpha$ preventiva, renomeando $x$ para $x'\,$$
@@ -1120,7 +1120,7 @@ Neste ponto, se a amável leitora se perdeu no Haskell, deve voltar as definiç�
 
    1. Estamos substituindo $x$ por $(\lambda z.\;z\;w)$ na expressão $\lambda y.\lambda w.\;x\;y\;w\,$. Temos que considerar as variáveis ligadas $y$ e $w\,$.
 
-   2. Aplicamos a regra 4 para a abstração externa: 
+   2. Aplicamos a regra 4 para a abstração externa:
 
       $$[(\lambda z.\;z\;w)/x]\;(\lambda y.\;\lambda w.x\;y\;w) \, = \lambda y.\;([(\lambda z.\;z\;w)/x]\;(\lambda w.\;x\;y\;w))$$
 
