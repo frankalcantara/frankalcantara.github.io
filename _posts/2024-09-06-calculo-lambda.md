@@ -34,7 +34,7 @@ featured: true
 toc: true
 preview: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de currying e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de currying e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2024-10-21T00:09:01.919Z
+lastmod: 2024-10-21T00:15:33.550Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -134,7 +134,7 @@ $$f(x) \, = x^2 + 2x + 1$$
 
 Essa notação é direta e representa um relação matemática entre dois conjuntos. Descrevendo o resultado da aplicação da relação a um dos elementos de un conjunto, encontrando o elemento relacionado no outro. No exemplo acima, se aplicarmos $f$ em $2$ teremos $9$ como resultado da aplicação. A definição da função $f$ não apresenta o processo de computação necessário. Nós sabemos como calcular o resultado porque conhecemos a sintaxe da aritmética e a semântica da álgebra.
 
-O cálculo lambda descreve um processo de aplicação e transformação de variáveis. Enquanto a Máquina de Turing descreve a computação de forma mecânica, o cálculo lambda foca na transformação de expressões. Para começarmos a entender o poder do cálculo lambda, podemos trazer a função $F$ um pouco mais perto dos conceitos de Church. 
+O cálculo lambda descreve um processo de aplicação e transformação de variáveis. Enquanto a Máquina de Turing descreve a computação de forma mecânica, o cálculo lambda foca na transformação de expressões. Para começarmos a entender o poder do cálculo lambda, podemos trazer a função $F$ um pouco mais perto dos conceitos de Church.
 
 Vamos começar definindo uma expressão $M$ contendo uma variável $x\,$, na forma:
 
@@ -448,7 +448,7 @@ $$(\lambda x.\;x + 1)\;2$$
 
 No caso da função que soma dois números, $\lambda x. \lambda y.\;(x + y)\,$, temos duas abstrações $\lambda x$ e $\lambda y\,$, cada uma com sua própria variável. Logo, $\lambda x. \lambda y.\;(x + y)$ precisa ser aplicada a dois argumentos. Tal como: $\lambda x. \lambda y.\;(x + y)\;3\;4\,$.
 
-Formalmente dizemos que: 
+Formalmente dizemos que:
 
 1. Se $x$ é uma variável, então $x$ é um termo lambda.
 
@@ -3105,7 +3105,7 @@ resultado :: Int
 resultado = incrementaDuasVezes 5  -- Retorna 7
 ```
 
-Operadores infixos são funções binárias (que aceitam dois argumentos) escritas entre seus operandos. Por exemplo, `+`, `-`, `*`, `/` são operadores infixos comuns. Em Haskell, operadores infixos podem ser facilmente convertidos em funções currificadas usando seções. 
+Operadores infixos são funções binárias (que aceitam dois argumentos) escritas entre seus operandos. Por exemplo, `+`, `-`, `*`, `/` são operadores infixos comuns. Em Haskell, operadores infixos podem ser facilmente convertidos em funções currificadas usando seções.
 
 Seções são uma característica do Haskell que permite a aplicação parcial de operadores infixos. Elas são uma forma concisa de criar funções anônimas a partir de operadores binários.
 
@@ -5025,9 +5025,9 @@ Para entender o impacto desta representação podemos começar com os dois valor
 
    **Falso**: $\text{False} = \lambda x. \lambda y.\;y$
 
-Aqui, _True_ é uma função que quando aplicada a dois argumentos, retorna o primeiro, enquanto _False_ aplicada aos mesmos dois argumentos retornará o segundo. Tendo definido os termos para verdadeiro e falso, todas as operações lógicas podem ser construídas. 
+Aqui, _True_ é uma função que quando aplicada a dois argumentos, retorna o primeiro, enquanto _False_ aplicada aos mesmos dois argumentos retornará o segundo. Tendo definido os termos para verdadeiro e falso, todas as operações lógicas podem ser construídas.
 
-A esperta leitora deve concordar que é interessante, para nossos propósitos, começar definindo as operações estruturais da lógica proposicional: negação (_NOT_), conjunção (_AND_), disjunção (_OR_) e completar com a disjunção exclusiva (_XOR_) e a condicional (_IF-TTHEN-ELSE_).
+A esperta leitora deve concordar que é interessante, para nossos propósitos, começar definindo as operações estruturais da lógica proposicional: negação (_NOT_), conjunção (_AND_), disjunção (_OR_) e completar com a disjunção exclusiva (_XOR_) e a condicional (_IF-THEN-ELSE_).
 
 ### 19.1.1. Negação
 
@@ -5435,7 +5435,7 @@ Vamos aplicar a estrutura condicional para a expressão em dois casos distintos:
    \end{align*}
    $$
 
-No cálculo lambda, o **controle de fluxo** é feito inteiramente através de funções e substituições. A estrutura **IF-THEN-ELSE** é a maneira mais básica de introduzir decisões condicionais dentro desse modelo. Esta estrutura permite escolher entre dois resultados diferentes com base em uma condição booleana. 
+No cálculo lambda, o **controle de fluxo** é feito inteiramente através de funções e substituições. A estrutura **IF-THEN-ELSE** é a maneira mais básica de introduzir decisões condicionais dentro desse modelo. Esta estrutura permite escolher entre dois resultados diferentes com base em uma condição booleana.
 
 Afirmamos anteriormente que o cálculo lambda é um modelo de computação completo, capaz de expressar qualquer computação que uma máquina de Turing pode executar. Para alcançar essa completude, é necessário ser capaz de tomar decisões. A função **IF-THEN-ELSE** é uma forma direta de conseguir esta funcionalidade.
 
