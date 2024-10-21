@@ -6284,7 +6284,7 @@ A atenta leitora deve ter percebido que o cálculo lambda não é um conceito te
 
 5. **Recursão**: Definir funções recursivas é essencial em programação funcional. No cálculo lambda, isso é feito com combinadores de ponto fixo.
 
-# 20. Estruturas de Dados Compostas
+# 6. Estruturas de Dados Compostas
 
 Embora o cálculo lambda puro não possua estruturas de dados nativas, podemos representá-las usando funções. Um exemplo clássico é a codificação de listas no estilo de Church, que nos permite aplicar recursão a essas estruturas.
 
@@ -6304,7 +6304,7 @@ Uma tupla $(3, 4)$ é representada como:
 
    $$ \lambda f.\;F\;3\;4 $$
 
-## 20.1. Listas
+## 6.1. Listas
 
 Para definirmos uma lista precisamos do conceito de lista vazia, que aqui será representado por $\text{nil}$ e uma função de construção de listas, $\text{cons}$:
 
@@ -6327,7 +6327,7 @@ Com $\text{nil}$ e $\text{cons}\,$, podemos criar e manipular listas. Por exempl
 Esta lista está diagramada na Figura 20.1.B:
 
 ![](/assets/images/list.webp)
-_Figura 20.1.B: Diagrama de uma lista em cálculo lambda_ {: legenda}
+_Figura 6.1.B: Diagrama de uma lista em cálculo lambda_ {: legenda}
 
 Quando a leitora olha para o diagrama e para a função que representa a lista $[1,2,3]$ em cálculo lambda imagina que existe um abismo entre a sua ideia de lista e a função que encontramos. Não perca as esperanças, não é tão complicado quanto parece. Só trabalhoso. Chegamos a esta função começando com a lista vazia:
 
@@ -6359,7 +6359,7 @@ Após a redução-$beta\,$, a representação final é:
 
 Esta é a representação completa da lista $[1, 2, 3]$ em cálculo lambda puro. Esta representação permite operações recursivas sobre listas, como mapear funções ou calcular comprimentos. A curiosa leitora pode matar a curiosidade vendo a definição de uma de duas funções em cálculo lambda puro para lidar com listas:
 
-### 20.1.1. Função Comprimento de lista (Length)
+### 6.1.1. Função Comprimento de lista (Length)
 
 Vamos criar uma função para calcular o comprimento de uma lista usando o combinador $Y$:
 
@@ -6405,7 +6405,7 @@ Aqui, $\text{succ}$ é a função que retorna o sucessor de um número, e o corp
 
    Portanto, $\text{length}\;[1, 2, 3] = 3$ em cálculo lambda puro.
 
-#### 20.1.1.1. Função Soma (Sum) dos Elementos de uma Lista
+#### 6.1.1.1. Função Soma (Sum) dos Elementos de uma Lista
 
 Da mesma forma que fizemos com a função comprimento, podemos definir uma função para somar os elementos de uma lista:
 
@@ -6451,7 +6451,7 @@ Essa função percorre a lista somando os elementos, aplicando recursão via o c
 
    Portanto, $\text{sum}\;[1, 2, 3] = 6$ em cálculo lambda puro.
 
-#### 20.1.1.2. Funções Head e Tail em Cálculo Lambda Puro
+#### 6.1.1.2. Funções Head e Tail em Cálculo Lambda Puro
 
 As funções Head e Tail são funções uteis na manipulação de listas, principalmente em linguagens funcionais. Vamos definir estas funções em cálculo lambda puro. Começando pela função $\text{head}$:
 
@@ -6503,7 +6503,7 @@ Em seguida, temos a função $\text{tail}$:
 
 Listas são um tipo de dado composto útil para a maior parte das linguagens de programação. Não poderíamos deixar de definir listas em cálculo lambda puro para exemplificar a possibilidade da criação de algoritmos em cálculo lambda. Outra estrutura indispensável são as tuplas.
 
-## 20.2. Tuplas em Cálculo Lambda Puro
+## 6.2. Tuplas em Cálculo Lambda Puro
 
 Definimos uma tupla de dois elementos, que pode representar um par ordenado, como:
 
@@ -6515,7 +6515,7 @@ A tupla $(3,4)$ é representada assim:
 
 Para que uma tupla seja útil, precisamos ser capazes de trabalhar com seus elementos individualmente. Para isso, podemos definir duas funções: $\text{first}$ e $\text{follow}\,$.
 
-### 20.2.1. Função First
+### 6.2.1. Função First
 
 A função First retorna o primeiro elemento da tupla:
 
@@ -6533,7 +6533,7 @@ A função First retorna o primeiro elemento da tupla:
 
    $$3$$
 
-### 20.2.2. Função Last
+### 6.2.2. Função Last
 
 A função Last retorna o último elemento da tupla:
 
@@ -6551,7 +6551,7 @@ A função Last retorna o último elemento da tupla:
 
    $$4$$
 
-## 20.3. Exercícios de Listas e Tuplas
+## 6.3. Exercícios de Listas e Tuplas
 
 **1**: Dada a definição de lista vazia (`nil`) e o construtor de lista (`cons`):
 
@@ -6782,13 +6782,11 @@ Aplique a função `filter` à lista $[1, 2, 3, 4, 5]$ com o predicado $p = \lam
 
    $$ [(x_1, y_1), (x_2, y_2), ..., (x_n, y_n)] = \text{cons}\;(\lambda f. f\;x_1\;y_1)\;(\text{cons}\;(\lambda f. f\;x_2\;y_2)\;(...\;(\text{cons}\;(\lambda f. f\;x_n\;y_n)\;\text{nil})...)) $$
 
-E a função `sum_pairs` que soma os elementos de cada par em uma lista de pares:
+E a função `sumPairs` que soma os elementos de cada par em uma lista de pares:
 
-$$
-\text{sum_pairs} = Y\;(\lambda f. \lambda l. l\;(\lambda h. \lambda t. \text{cons}\;(h\;(\lambda x. \lambda y. x + y))\;(f\;t))\;\text{nil})
-$$
+$$\text{sumPairs} = Y\;(\lambda f. \lambda l. l\;(\lambda h. \lambda t. \text{cons}\;(h\;(\lambda x. \lambda y. x + y))\;(f\;t))\;\text{nil})$$
 
-Aplique a função `sum_pairs` à lista $[(1, 2), (3, 4), (5, 6)]\,$.
+Aplique a função `sumPairs` à lista $[(1, 2), (3, 4), (5, 6)]\,$.
 
    **Solução**:
 
@@ -6796,7 +6794,7 @@ Aplique a função `sum_pairs` à lista $[(1, 2), (3, 4), (5, 6)]\,$.
 
    $$ [(1, 2), (3, 4), (5, 6)] = \text{cons}\;(\lambda f. f\;1\;2)\;(\text{cons}\;(\lambda f. f\;3\;4)\;(\text{cons}\;(\lambda f. f\;5\;6)\;\text{nil})) $$
 
-   2. Aplicamos `sum_pairs` à lista:
+   2. Aplicamos `sumPairs` à lista:
 
    $$
    \text{sum\_pairs} = Y\;(\lambda f. \lambda l. l\;(\lambda h. \lambda t. \text{cons}\;(h\;(\lambda x. \lambda y. x + y))\;(f\;t))\;\text{nil})
@@ -6804,15 +6802,15 @@ Aplique a função `sum_pairs` à lista $[(1, 2), (3, 4), (5, 6)]\,$.
 
    3. Redução (simplificada):
 
-   $$ = \text{cons}\;((\lambda f. f\;1\;2)\;(\lambda x. \lambda y. x + y))\;(\text{sum_pairs}\;(\text{cons}\;(\lambda f. f\;3\;4)\;(\text{cons}\;(\lambda f. f\;5\;6)\;\text{nil}))) $$
+   $$ = \text{cons}\;((\lambda f. f\;1\;2)\;(\lambda x. \lambda y. x + y))\;(\text{sumPairs}\;(\text{cons}\;(\lambda f. f\;3\;4)\;(\text{cons}\;(\lambda f. f\;5\;6)\;\text{nil}))) $$
 
-   $$ = \text{cons}\;3\;(\text{cons}\;((\lambda f. f\;3\;4)\;(\lambda x. \lambda y. x + y))\;(\text{sum_pairs}\;(\text{cons}\;(\lambda f. f\;5\;6)\;\text{nil}))) $$
+   $$ = \text{cons}\;3\;(\text{cons}\;((\lambda f. f\;3\;4)\;(\lambda x. \lambda y. x + y))\;(\text{sumPairs}\;(\text{cons}\;(\lambda f. f\;5\;6)\;\text{nil}))) $$
 
-   $$ = \text{cons}\;3\;(\text{cons}\;7\;(\text{cons}\;((\lambda f. f\;5\;6)\;(\lambda x. \lambda y. x + y))\;(\text{sum_pairs}\;\text{nil}))) $$
+   $$ = \text{cons}\;3\;(\text{cons}\;7\;(\text{cons}\;((\lambda f. f\;5\;6)\;(\lambda x. \lambda y. x + y))\;(\text{sumPairs}\;\text{nil}))) $$
 
    $$ = \text{cons}\;3\;(\text{cons}\;7\;(\text{cons}\;11\;\text{nil})) $$
 
-   Portanto, `sum_pairs [(1, 2), (3, 4), (5, 6)] = [3, 7, 11]`.
+   Portanto, `sumPairs [(1, 2), (3, 4), (5, 6)] = [3, 7, 11]`.
 
 **9**: Considere a função `foldRight`, eventualmente conhecida como `reduce`) para listas em cálculo lambda:
 
@@ -6891,7 +6889,7 @@ E a função `treeMap` que aplica uma função a todos os valores em uma árvore
 
    Portanto, `treeMap (λx. x * 2) (node 1 (leaf 2) (leaf 3)) = node 2 (leaf 4) (leaf 6)`.
 
-## 20.4. Cálculo Lambda e Haskell
+## 6.4. Cálculo Lambda e Haskell
 
 Haskell implementa diretamente conceitos do cálculo lambda. Vejamos alguns exemplos:
 
@@ -7008,7 +7006,7 @@ $$
 
 O cálculo lambda é a base teórica para as linguagens de programação que usam o paradigma da programação funcional, especialmente em Haskell. Mas, para isso, precisamos considerar os tipos.
 
-# 21. Cálculo Lambda Simplesmente Tipado
+# 7. Cálculo Lambda Simplesmente Tipado
 
 O Cálculo Lambda Simplesmente Tipado é uma extensão do cálculo lambda não tipado que introduz uma estrutura de tipos. Este sistema aborda questões de consistência lógica encontradas no cálculo lambda não tipado, como o termo $\omega = \lambda x.\;x\;x\,$, que leva a reduções infinitas.
 
@@ -7018,7 +7016,7 @@ Geralmente não percebemos que, na matemática, uma a definição de uma funçã
 
 Nesta seção, examinaremos os elementos do Cálculo Lambda Simplesmente Tipado, incluindo sua sintaxe, regras de tipagem e propriedades. Exploraremos como este sistema se relaciona com o design de linguagens de programação e a verificação formal de programas. A discussão incluirá exemplos matemáticos e práticos para ilustrar como os conceitos teóricos se traduzem em construções de programação e raciocínio lógico. Mas, antes precisamos entender como chegamos até aqui.
 
-## 21.1. A Teoria dos Tipos Simples
+## 7.1. A Teoria dos Tipos Simples
 
 A **Teoria dos Tipos Simples**, desenvolvida por Alonzo Church na década de 1940, representa um marco na história da lógica matemática e da Ciência da Computação. Criada para resolver problemas de inconsistência no cálculo lambda não tipado, essa teoria introduziu um framework robusto para formalizar o raciocínio matemático e computacional, abordando paradoxos semelhantes ao **paradoxo de Russell** na teoria dos conjuntos. A Teoria dos Tipos Simples foi uma das primeiras soluções práticas para garantir que expressões lambda fossem bem formadas, evitando contradições lógicas e permitindo cálculos confiáveis.
 
@@ -7026,7 +7024,7 @@ O cálculo lambda não tipado, proposto por Church na década de 1930, ofereceu 
 
 O problema era análogo aos paradoxos que surgiram na teoria dos conjuntos ingênua, como o paradoxo de Russell. A solução proposta por Church envolvia restringir o cálculo lambda através da introdução de tipos, criando um sistema onde exclusivamente combinações de funções e argumentos compatíveis fossem permitidas, prevenindo a criação de termos paradoxais.
 
-### 21.1.1. Fundamentos da Teoria dos Tipos Simples
+### 7.1.1. Fundamentos da Teoria dos Tipos Simples
 
 A ideia central da **Teoria dos Tipos Simples** é organizar as expressões lambda em uma hierarquia de tipos que impõe restrições sobre a formação de termos. Isso garante que termos paradoxais, como $\omega\,$, sejam automaticamente excluídos. A estrutura básica da teoria é composta por:
 
@@ -7076,7 +7074,7 @@ A **Teoria dos Tipos Simples** tem limitações. Uma delas é a expressividade l
 
 Para superar essas limitações, surgiram várias extensões para a Teoria dos Tipos Simples teoria. Os sistemas de tipos polimórficos, como o **Sistema F** de [Girard](https://en.wikipedia.org/wiki/Jean-Yves_Girard), introduzem quantificação sobre tipos, permitindo a definição de funções polimórficas. A teoria dos tipos dependentes foi desenvolvida permitindo que tipos dependam de valores, o que aumenta a expressividade e possibilita raciocínios mais complexos. A Teoria dos Tipos homotópica conecta a teoria dos tipos com a topologia algébrica, oferecendo novos insights sobre a matemática e a computação.
 
-## 21.2. Estruturas de Dados e Segurança de Tipos
+## 7.2. Estruturas de Dados e Segurança de Tipos
 
 A presença de tipos não altera de forma alguma a avaliação de uma expressão. Usaremos os tipos para restringir quais expressões iremos avaliar. Especificamente, o sistema de tipos para o cálculo lambda simplesmente tipado assegura que qualquer programa bem tipado não correrá o risco de ficar preso em um _loop_ infinito, ou simplesmente preso.
 
@@ -7167,13 +7165,13 @@ Em resumo as sintáticas permitem que o cálculo lambda tipado:
 
 As noções de variáveis livres e ligadas e redução-$\alpha$ são definidas como no cálculo lambda não tipado; novamente identificamos termos $\alpha$-equivalentes.
 
-## 21.3. Sintaxe do Cálculo Lambda Tipado
+## 7.3. Sintaxe do Cálculo Lambda Tipado
 
 O cálculo lambda tipado estende o cálculo lambda não tipado, adicionando uma estrutura de tipos que restringe a formação e a aplicação de funções. Essa extensão preserva os princípios do cálculo lambda, mas introduz um sistema de tipos que promove maior consistência e evita paradoxos lógicos. Enquanto no cálculo lambda não tipado as funções podem ser aplicadas livremente a qualquer argumento, o cálculo lambda tipado impõe restrições que garantem que as funções sejam aplicadas a argumentos compatíveis com seu tipo.
 
 No cálculo lambda tipado, as expressões são construídas a partir de três elementos principais: variáveis, abstrações e aplicações. Esses componentes definem a estrutura básica das funções e seus argumentos, e a adição de tipos funciona como um mecanismo de segurança, assegurando que as funções sejam aplicadas de forma correta. Uma variável $x\,$, por exemplo, é anotada com um tipo específico como $x : A\,$, onde $A$ pode ser um tipo básico como $\text{Nat}$ ou $\text{Bool}\,$, ou um tipo de função como $A \rightarrow B\,$.
 
-### 21.3.1. Gramática e Regras de Produção
+### 7.3.1. Gramática e Regras de Produção
 
 A gramática do cálculo lambda tipado pode ser definida formalmente usando a notação de Backus-Naur Form (BNF), uma forma comum de descrever regras de construção de linguagens formais, que usamos antes. Aqui está uma versão simplificada:
 
@@ -7272,7 +7270,7 @@ $$\text{termo} \rightarrow (\lambda \text{variável} : \text{tipo}.\;\text{termo
 
 $$\text{termo} \rightarrow (\lambda x : \text{Nat}. \lambda \text{variável} : \text{tipo}.\;\text{termo})\;\text
 
-### 21.3.2. Semântica Estática (Sistema de Tipos)
+### 7.3.2. Semântica Estática (Sistema de Tipos)
 
 A semântica do cálculo lambda tipado define o significado das expressões e como elas são avaliadas. Ela consiste em duas partes principais: a semântica estática (sistema de tipos) e a semântica dinâmica (regras de redução).
 
@@ -7280,7 +7278,7 @@ O sistema de tipos do cálculo lambda tipado é responsável por atribuir tipos 
 
 As regras de tipagem no cálculo lambda tipado são geralmente expressas através da inferência natural. Abaixo, estas regras são detalhadas, sempre partindo de premissas em direção a conclusão.
 
-#### 21.3.2.1. Regra da Variável
+#### 7.3.2.1. Regra da Variável
 
 A regra da variável afirma que, se uma variável $x$ tem tipo $A$ no contexto $\Gamma\,$, então podemos derivar que $x$ tem tipo $A$ nesse contexto:
 
@@ -7288,7 +7286,7 @@ $$\frac{x : A \in \Gamma}{\Gamma \vdash x : A}$$
 
 Essa regra formaliza a ideia de que, se sabemos que $x$ tem tipo $A$ a partir do contexto, então $x$ pode ser usada em expressões como um termo de tipo $A\,$.
 
-#### 21.3.2.2. Regra de Abstração
+#### 7.3.2.2. Regra de Abstração
 
 A regra de abstração define o tipo de uma função. Se, assumindo que $x$ tem tipo $A\,$, podemos derivar que $M$ tem tipo $B\,$, então a abstração $\lambda x : A . M$ tem o tipo $A \rightarrow B\,$. Formalmente:
 
@@ -7296,7 +7294,7 @@ $$\frac{\Gamma, x : A \vdash M : B}{\Gamma \vdash (\lambda x : A . M) : A \right
 
 Essa regra assegura que a função $\lambda x : A . M$ é corretamente formada e mapeia valores do tipo $A$ para resultados do tipo $B\,$.
 
-#### 21.3.2.3. Regra de Aplicação
+#### 7.3.2.3. Regra de Aplicação
 
 A regra de aplicação governa a forma como funções são aplicadas a seus argumentos. Se $M$ é uma função do tipo $A \rightarrow B$ e $N$ é um termo do tipo $A\,$, então a aplicação $M\;N$ tem tipo $B$:
 
@@ -7318,7 +7316,7 @@ Neste exemplo, `increment` tem tipo `Int -> Int` (equivalente a $A \rightarrow B
 
 Se tentássemos aplicar `increment` a um argumento de tipo incompatível, como em `increment True`, obteríamos um erro de tipo, ilustrando como o sistema de tipos em Haskell implementa a segurança garantida pela regra de aplicação do cálculo lambda tipado.
 
-#### 21.3.2.4. Semântica Dinâmica (Regras de Redução)
+#### 7.3.2.4. Semântica Dinâmica (Regras de Redução)
 
 A semântica dinâmica define como as expressões são avaliadas. O principal mecanismo de avaliação é a redução beta:
 
@@ -7460,7 +7458,7 @@ A semântica do cálculo lambda tipado tem implicações profundas: na **seguran
 
 A semântica do cálculo lambda tipado, portanto, define o comportamento de programas, estabelecendo uma ponte entre lógica, teoria dos tipos e programação, influenciando profundamente o design de linguagens de programação modernas e técnicas de verificação formal.
 
-### 21.3.3. Abstrações Lambda e Tipos
+### 7.3.3. Abstrações Lambda e Tipos
 
 No cálculo lambda tipado, as abstrações são expressas na forma $\lambda x : A.\;E\,$, onde $x$ é uma variável de tipo $A$ e $E$ é a expressão cujo resultado dependerá de $x\,$. O tipo dessa abstração é dado por $A \rightarrow B\,$, onde $B$ é o tipo do resultado de $E\,$. Por exemplo, a abstração $\lambda x : \text{Nat}.\;x + 1$ define uma função que aceita um argumento do tipo $\text{Nat}$(número natural) e retorna outro número natural. Nesse caso, o tipo da abstração é $\text{Nat} \rightarrow \text{Nat}\,$, o que significa que a função mapeia um número natural para outro número natural.
 
@@ -7468,7 +7466,7 @@ $$\lambda x : \text{Nat}.\;x + 1 : \text{Nat} \rightarrow \text{Nat}$$
 
 As variáveis no cálculo lambda tipado podem ser livres ou ligadas. Variáveis livres são aquelas que não estão associadas a um valor específico dentro do escopo da função, enquanto variáveis ligadas são aquelas definidas no escopo da abstração. Esse conceito de variáveis livres e ligadas é familiar na lógica de primeira ordem e tem grande importância na estruturação das expressões lambda.
 
-### 21.3.4. Aplicações de Funções
+### 7.3.4. Aplicações de Funções
 
 A aplicação de funções segue a mesma sintaxe do cálculo lambda não tipado, mas no cálculo tipado é restrita pelos tipos dos termos envolvidos. Se uma função $f$ tem o tipo $A \rightarrow B\,$, então ela só pode ser aplicada a um termo $x$ do tipo $A\,$. A aplicação de $f$ a $x$ resulta em um termo do tipo $B\,$. Um exemplo simples seria a aplicação da função de incremento $\lambda x : \text{Nat}.\;x + 1$ ao número 2:
 
@@ -7476,7 +7474,7 @@ $$(\lambda x : \text{Nat}.\;x + 1)\;2 \rightarrow 3$$
 
 Aqui, a função de tipo $\text{Nat} \rightarrow \text{Nat}$ é aplicada ao número $2\,$, e o resultado é o número $3\,$, que é do tipo $\text{Nat}\,$.
 
-### 21.3.5. Substituição e Redução
+### 7.3.5. Substituição e Redução
 
 A operação de substituição no cálculo lambda tipado segue o mesmo princípio do cálculo não tipado, com a adição de restrições de tipo. Quando uma função é aplicada a um argumento, a variável vinculada à função é substituída pelo valor do argumento na expressão. Formalmente, a substituição de $N$ pela variável $x$ em $E$ é denotada por $[N/x]E\,$, indicando que todas as ocorrências livres de $x$ em $E$ devem ser substituídas por $N\,$.
 
@@ -7486,7 +7484,7 @@ $$(\lambda x : \text{Nat}.\;x + 1)\;2 \rightarrow 2 + 1 \rightarrow 3$$
 
 Esse processo de substituição e simplificação é a forma de computação de expressões no cálculo lambda tipado, e é usado na avaliação de programas em linguagens de programação funcionais.
 
-## 21.4. Regras de Tipagem
+## 7.4. Regras de Tipagem
 
 Antes de apresentarmos as regras formais do cálculo lambda tipado, é importante entender como chegamos a este sistema de tipos. O desenvolvimento do sistema de tipos foi um processo gradual, partindo de ideias simples e evoluindo para um sistema mais expressivo.
 
@@ -7598,7 +7596,7 @@ $$
 
 Essas regras fornecem a base para a derivação de tipos em expressões complexas no cálculo lambda tipado, garantindo que cada parte da expressão esteja correta e que a aplicação de funções seja válida.
 
-### 21.4.1. Exemplos das regras de tipagem
+### 7.4.1. Exemplos das regras de tipagem
 
 **Exemplo 1**: Regra da Variável
 
@@ -7648,7 +7646,7 @@ $$\Gamma \vdash 5 : \text{Nat}$$
 
 $$\frac{\Gamma\;\vdash\;M : \text{Nat} \rightarrow \text{Nat} \quad \Gamma\;\vdash\;5 : \text{Nat}}{\;\Gamma\;\vdash\;M\;5 : \text{Nat}}$$
 
-### 21.4.2. Exercícios Regras de Tipagem no Cálculo Lambda
+### 7.4.2. Exercícios Regras de Tipagem no Cálculo Lambda
 
 **1**: Dado o contexto:
 
@@ -7845,11 +7843,11 @@ Determine o tipo de $M$ usando as regras de tipagem.
 
    Assim, a expressão completa tem tipo $\text{Nat}\,$.
 
-## 21.5. Conversão e Redução no Cálculo Lambda Tipado
+## 7.5. Conversão e Redução no Cálculo Lambda Tipado
 
 No cálculo lambda tipado, os processos de conversão e redução são essenciais para a manipulação e simplificação de expressões, garantindo que as transformações sejam consistentes com a estrutura de tipos. Essas operações permitem entender como as funções são aplicadas e como as expressões podem ser transformadas mantendo a segurança e a consistência do sistema tipado.
 
-### 21.5.1. redução-$beta$
+### 7.5.1. redução-$beta$
 
 A**redução-$beta$**é o mecanismo central de computação no cálculo lambda tipado. Ela ocorre quando uma função é aplicada a um argumento, substituindo todas as ocorrências da variável ligada pelo valor do argumento na expressão. Formalmente, se temos uma abstração $\lambda x : A . M$ e aplicamos a um termo $N$ do tipo $A\,$, a redução-$beta$ é expressa como:
 
@@ -7863,7 +7861,7 @@ $$(\lambda x : \text{Nat} .\;x + 1)\;2 \rightarrow_\beta 2 + 1 \rightarrow 3$$
 
 Aqui, a variável $x$ é substituída pelo valor $2$ e, em seguida, a expressão é simplificada para $3\,$. No cálculo lambda tipado, a redução-$beta$ garante que os tipos sejam preservados, de modo que o termo final é do tipo $\text{Nat}\,$, assim como o termo original.
 
-### 21.5.2. Conversões $\alpha$ e $\eta$
+### 7.5.2. Conversões $\alpha$ e $\eta$
 
 Além da redução-$beta\,$, existem duas outras formas importantes de conversão no cálculo lambda: a **redução-$\alpha$** e a **$\eta$-redução**.
 
@@ -7895,7 +7893,7 @@ Neste exemplo, `applyTwice` é uma função de ordem superior que toma uma funç
 
 A $\eta$-redução simplifica as funções removendo abstrações redundantes, tornando as expressões mais curtas e mais diretas.
 
-### 21.5.3. Normalização e Estratégias de Redução
+### 7.5.3. Normalização e Estratégias de Redução
 
 Uma das propriedades mais importantes do cálculo lambda tipado é a **normalização forte**, que garante que todo termo bem tipado pode ser reduzido até uma **forma normal**, uma expressão que não pode mais ser simplificada. Isso significa que qualquer sequência de reduções, eventualmente, terminará, o que contrasta com o cálculo lambda não tipado, onde reduções infinitas são possíveis.
 
@@ -7909,7 +7907,7 @@ Existem diferentes estratégias de redução que podem ser aplicadas ao calcular
 
 Todas essas estratégias são **normalizantes**no cálculo lambda tipado, ou seja, alcançarão uma forma normal, se ela existir, devido à normalização forte.
 
-### 21.5.4. Preservação de Tipos e Segurança
+### 7.5.4. Preservação de Tipos e Segurança
 
 Um dos princípios do cálculo lambda tipado é a **preservação de tipos** durante a redução, conhecida como _subject reduction_. Essa propriedade assegura que, se um termo $M$ tem um tipo $A$ e $M$ é reduzido a $N$ através de redução-$beta\,$, então $N$ terá o tipo $A\,$. Formalmente:
 
@@ -7919,7 +7917,7 @@ $$
 
 Essa propriedade, combinada com a **propriedade de progresso**, que afirma que todo termo bem tipado ou é um valor ou pode ser reduzido, estabelece a segurança do sistema de tipos no cálculo lambda tipado. Isso garante que, durante a computação, nenhum termo incorreto em termos de tipo é gerado.
 
-### 21.5.5. Confluência e Unicidade da Forma Normal
+### 7.5.5. Confluência e Unicidade da Forma Normal
 
 O cálculo lambda tipado possui a propriedade de **confluência**, conhecida como **propriedade de Church-Rosser**. A palavra confluência, no nosso contexto, significa que, se um termo $M$ pode ser reduzido de duas formas diferentes para dois termos $N_1$ e $N_2\,$, sempre existirá um termo comum $P$ tal que $N_1$ e $N_2$ poderão ser reduzidos a $P$:
 
@@ -7929,7 +7927,7 @@ $$
 
 A confluência, combinada com a normalização forte, garante a **unicidade da forma normal** para termos bem tipados. Isso significa que, independentemente da ordem de redução escolhida, um termo bem tipado sempre converge para a mesma forma normal, garantindo consistência e previsibilidade no processo de redução.
 
-## 21.6. Propriedades do Cálculo Lambda Tipado
+## 7.6. Propriedades do Cálculo Lambda Tipado
 
 A partir das regras de tipagem, podemos definir um conjunto de propriedades da tipagem no cálculo lambda. Essas propriedades têm implicações tanto para a teoria quanto para a prática da programação. Vamos destacar:
 
@@ -7963,7 +7961,7 @@ $$(\lambda x:\text{Nat}.\;x + 1) 2 \rightarrow_\beta 2 + 1 \rightarrow 3$$
 
 Estas propriedades juntas garantem a consistência e a robustez do sistema de tipos do cálculo lambda tipado, fornecendo uma base sólida para o desenvolvimento de linguagens de programação tipadas e sistemas de verificação formal.
 
-### 21.6.1. Exercícios de Propriedades do Cálculo Lambda Tipado
+### 7.6.1. Exercícios de Propriedades do Cálculo Lambda Tipado
 
 **1**: Considere o termo $(\lambda x:\text{Nat}.\;x + 1) 2\,$. Mostre a sequência de reduções que leva este termo à sua forma normal, ilustrando a propriedade de normalização forte.
 
@@ -8117,14 +8115,14 @@ Repita este exercício. Ele demonstra como as reduções em um termo bem tipado 
 
 O cálculo lambda tipado, com suas regras de tipagem e propriedades de normalização, oferece um conjunto de ferramentas para analisar programas e suas características. Esta estrutura formal permite a construção de programas com certas garantias e revela uma relação entre a lógica proposicional e os sistemas de tipos.
 
-Esta relação é formalizada na Correspondência de Curry-Howard, que estabelece uma conexão entre programas e provas matemáticas. A correspondência liga duas áreas da matemática e da Ciência da Computação. Como pode ser visto na Figura 21.6.1.A.
+Esta relação é formalizada na Correspondência de Curry-Howard, que estabelece uma conexão entre programas e provas matemáticas. A correspondência liga duas áreas da matemática e da Ciência da Computação. Como pode ser visto na Figura 8.6.1.A.
 
 ![Um diagrama de blocos mostrando a relação entre a aplicação de função e a lógica proposicional](/assets/images/churchRosser.webp)
-_Figura 21.6.1.A: Diagrama da Relação entre cálculo lambda e lógica proposicional mostrando a importância do Teorema de Church-Rosser._ {: legenda}
+_Figura 7.6.1.A: Diagrama da Relação entre cálculo lambda e lógica proposicional mostrando a importância do Teorema de Church-Rosser._ {: legenda}
 
 Na Correspondência de Curry-Howard, os tipos em linguagens de programação podem ser vistos como proposições lógicas, e os programas bem tipados como provas dessas proposições. Esta perspectiva fornece uma forma de analisar sistemas de tipos e oferece abordagens para o desenvolvimento de software e a verificação formal de programas.
 
-## 21.7. Correspondência de Curry-Howard
+## 8.7. Correspondência de Curry-Howard
 
 A Correspondência de Curry-Howard, conhecida como Isomorfismo de Curry-Howard estabelece uma profunda conexão entre tipos em linguagens de programação e proposições em lógica construtiva.
 
@@ -8169,7 +8167,7 @@ Assim, chegamos aos dias atuais com a correspondência Curry-Howard tendo implic
 
 Estas correspondências fornecem uma base sólida para o desenvolvimento de linguagens de programação com sistemas de tipos expressivos e para a verificação formal de programas. Por outro lado, provar a veracidade destas quatro correspondências é desafiador. Vamos nos arriscar com a terceira delas, correspondência entre conectivos lógicos e tipos. Nos limitando ao item três, a relação entre a implicação lógica e o tipo da função. Principalmente por esta ser a base da correspondência de Curry-Howard. Provar que a implicação lógica corresponde ao tipo função estabelece o fundamento para as outras correspondências.
 
-### 21.7.1. Provando: Implicação Lógica para Tipo de Função
+### 8.7.1. Provando: Implicação Lógica para Tipo de Função
 
 Nas lógicas construtivista e proposicional, a implicação $A \rightarrow B$ significa que, se $A$ é verdadeiro, então $B$ deve ser verdadeiro. Uma prova de $A \rightarrow B$ consiste em assumir $A$ e derivar $B\,$.
 
@@ -8236,7 +8234,7 @@ A correspondência entre implicação lógica e tipos de função é evidente ta
 
 Esta demonstração usando matemática e programação, da correspondência entre implicação lógica e tipos de função ilustra como os conceitos da lógica proposicional se mapeiam diretamente para estruturas no cálculo lambda tipado e em linguagens de programação funcional, fornecendo uma base para entendimento da relação profunda entre lógica e programação. Este entendimento deve permitir a _apreciação da expressividade e o poder do cálculo lambda tipado como um sistema formal para raciocínio sobre programas e provas_. Talvez, esta seja a frase mais importante de todo este texto, para a carreira dos jovens cientistas da computação.
 
-### 21.7.2. Sistema de Tipos
+### 8.7.2. Sistema de Tipos
 
 No cálculo lambda tipado, os tipos podem ser básicos ou compostos. Tipos básicos incluem, por exemplo, $\text{Bool}\,$, que representa valores booleanos, e $\text{Nat}\,$, que denota números naturais. Tipos de função são construídos a partir de outros tipos; $A \rightarrow B$ denota uma função que mapeia valores do tipo $A$ para valores do tipo $B\,$. Por exemplo, em Haskell, podemos definir uma função simples que representa $\lambda x:\text{Nat}.\;x + 1$:
 
@@ -8250,7 +8248,7 @@ A tipagem de variáveis assegura que cada variável esteja associada a um tipo e
 
 Um **contexto de tipagem**, representado por $\Gamma\,$, é um conjunto de associações entre variáveis e seus tipos. O contexto fornece informações necessárias sobre as variáveis livres em uma expressão, facilitando o julgamento de tipos. Por exemplo, um contexto $\Gamma = \{x : A, y : B\}$ indica que, nesse ambiente, a variável $x$ tem tipo $A$ e a variável $y$ tem tipo $B\,$. Os contextos são essenciais para derivar os tipos de expressões mais complexas.
 
-### 21.7.3. Normalização Forte e Fraca
+### 8.7.3. Normalização Forte e Fraca
 
 O cálculo lambda é um sistema minimalista. Porém, forte e consistente. Uma característica importante para a criação de linguagens de programação, que podemos destacar é a normalização. Existem dois tipos de normalização:
 
@@ -8276,7 +8274,7 @@ Cada redução-$beta$ diminui o termo. Observe que não é possível reduzir par
 
 A prática da normalização impregna todo o Haskell. Talvez porque a normalização garante a terminação de programas bem tipados. Sáo programas sem _loops_ infinitos, sem falhas inesperadas, ou comportamentos indeterminados. Simplesmente funções puras que chegam a um resultado final.
 
-### 21.7.4. Exemplos
+### 8.7.4. Exemplos
 
 Vamos ver a normalização em ação com três estruturas que vimos antes:
 
@@ -8302,13 +8300,13 @@ A normalização é poderosa. É a espinha dorsal da programação funcional. É
 
 Lembre-se: no cálculo lambda, tudo termina. Essa é a beleza. Esse é o poder da normalização.
 
-### 21.7.5. Termos Bem Tipados e Segurança do Sistema
+### 8.7.5. Termos Bem Tipados e Segurança do Sistema
 
 Um termo é considerado **bem tipado** se sua derivação de tipo pode ser construída usando as regras de tipagem formais. A tipagem estática é uma característica importante do cálculo lambda tipado, pois permite detectar erros de tipo durante o processo de compilação, antes mesmo de o programa ser executado. Isso é essencial para a segurança e confiabilidade dos sistemas, já que garante que funções não sejam aplicadas a argumentos incompatíveis.
 
 O sistema de tipos do cálculo lambda tipado exclui automaticamente termos paradoxais como o combinador $\omega = \lambda x.\;x\;x\,$. Para que $\omega$ fosse bem tipado, a variável $x$ precisaria ter o tipo $A \rightarrow A$ e ao mesmo tempo o tipo $A\,$, o que é impossível. Assim, a auto-aplicação de funções é evitada, garantindo a consistência do sistema.
 
-### 21.7.6. Propriedades do Sistema de Tipos
+### 8.7.6. Propriedades do Sistema de Tipos
 
 O cálculo lambda tipado apresenta várias propriedades que reforçam a robustez do sistema:
 
@@ -8320,7 +8318,7 @@ O cálculo lambda tipado apresenta várias propriedades que reforçam a robustez
 
 -**Decidibilidade da Tipagem**: É possível determinar, usando algorítimos, se um termo é bem tipado e, em caso afirmativo, qual é o seu tipo. Essa propriedade é essencial para a verificação automática de tipos em sistemas formais e linguagens de programação.
 
-### 21.7.7. Correspondência de Curry-Howard
+### 8.7.7. Correspondência de Curry-Howard
 
 A **correspondência de Curry-Howard** estabelece uma relação profunda entre o cálculo lambda tipado e a lógica proposicional intuicionista. Sob essa correspondência, termos no cálculo lambda tipado são vistos como provas, e tipos são interpretados como proposições. Em particular:
 
@@ -8349,7 +8347,7 @@ A Correspondência de Curry-Howard estabelece uma conexão profunda entre o cál
 
 O estudo do cálculo lambda tipado e suas extensões continua a influenciar o design de linguagens de programação, sistemas de tipos avançados e métodos formais para o desenvolvimento de software. À medida que a complexidade dos sistemas de software aumenta, os princípios derivados do cálculo lambda tipado tornam-se cada vez mais relevantes para garantir a correção e a segurança dos programas.
 
-# 22. Notas e Referências
+# 8. Notas e Referências
 
 [^cita1]: Schönfinkel, Moses. **Über die Bausteine der mathematischen Logik**. _Mathematische Annalen_, vol. 92, no. 1-2, 1924, pp. 305-316.
 
