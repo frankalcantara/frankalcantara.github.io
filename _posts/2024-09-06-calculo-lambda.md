@@ -34,7 +34,7 @@ featured: true
 toc: true
 preview: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de _currying_e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de _currying_e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2024-10-21T03:03:32.051Z
+lastmod: 2024-10-21T03:05:11.974Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -1506,7 +1506,7 @@ O Teorema de Church-Rosser, conhecido como propriedade de confluência local, es
 
 ## 3.1. Redução Alfa
 
-A redução-$\alpha\,$, ou _alpha reduction_, é o processo de renomear variáveis ligadas em termos lambda, parapreservar o comportamento funcional dos termos. **Dois termos são equivalentes sob redução-$\alpha$ se diferirem unicamente nos nomes de suas variáveis ligadas**.
+A redução-$\alpha\,$, ou _alpha reduction_, é o processo de renomear variáveis ligadas em termos lambda, para preservar o comportamento funcional dos termos. **Dois termos são equivalentes sob redução-$\alpha$ se diferirem unicamente nos nomes de suas variáveis ligadas**.
 
 A atenta leitora deve considerar um termo lambda $\lambda x.\;E\,$, onde $E$ é o corpo do termo. A redução-$\alpha$ permitirá a substituição da variável ligada $x$ por outra variável, digamos $y\,$, desde que $y$ não apareça livre em $E\,$. O termo resultante é $\lambda y.\;E[x \mapsto y]\,$, onde a notação $E[x \mapsto y]$ indica a substituição de todas as ocorrências de $x$ por $y$ em $E\,$. Formalmente:
 
