@@ -403,7 +403,7 @@ $$
 \begin{array}{c}
 \lambda x \\
 \downarrow \\
-\lambda Y \\
+\lambda y \\
 \downarrow \\
 @ \\
 \diagup \quad \diagdown \\
@@ -559,7 +559,7 @@ $$
 \begin{array}{c}
 \lambda x \\
 \downarrow \\
-\lambda Y \\
+\lambda y \\
 \downarrow \\
 \diagup \quad \diagdown \\
 \begin{array}{cc}
@@ -5992,7 +5992,7 @@ A insistente leitora pode avaliar a conjunção usando unicamente o cálculo lam
    &\text{Neste ponto, temos uma função que sempre retorna $\text{False}\,$, já que $\text{True}$ ignora o segundo argumento.} \\
    \\
    &\text{Aplicamos a última redução beta, que retorna diretamente $\text{False}$:} \\
-   &\to_\beta \lambda x.\; \lambda y.\; Y \\
+   &\to_\beta \lambda x.\; \lambda y.\; y \\
    \\
    &\text{Esta é exatamente a definição de $\text{False}$ no cálculo lambda.} \\
    \\
@@ -6175,7 +6175,7 @@ E, ainda mantendo a tradição, vamos ver a mesma aplicação em cálculo lambda
    &\to_\beta \lambda y.\; (\lambda x.\; \lambda y.\; y) \\
    \\
    &\text{Aplicamos a última redução beta, resultando em $\text{False}$ $(\lambda x.\; \lambda y.\; y)$:} \\
-   &\to_\beta \lambda x.\; \lambda y.\; Y \\
+   &\to_\beta \lambda x.\; \lambda y.\; y \\
    \\
    &\text{Portanto, o resultado será:} \\
    &= \text{False}
@@ -6194,10 +6194,10 @@ Vamos aplicar a estrutura condicional para a expressão em dois casos distintos:
 1. Aplicação de _IF-THEN-ELSE_ a _True_ $x$ $y$
 
    $$\begin{align*}
-   \text{IF-THEN-ELSE}\;\text{True}\;x\;y &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; x)\; x\; Y \\
+   \text{IF-THEN-ELSE}\;\text{True}\;x\;y &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; x)\; x\; y \\
    \\
    &\text{Substituímos $\text{True}$ e $\text{IF-THEN-ELSE}$ por suas definições em cálculo lambda:} \\
-   &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; x)\; x\; Y \\
+   &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; x)\; x\; y \\
    \\
    &\text{Aplicamos a primeira redução beta, substituindo $b$ por $\text{True}$ $(\lambda x.\; \lambda y.\; x)$:} \\
    &\to_\beta (\lambda x.\; \lambda y.\; (\lambda x.\; \lambda y.\; x)\; x\; y) \\
@@ -6212,10 +6212,10 @@ Vamos aplicar a estrutura condicional para a expressão em dois casos distintos:
    Outra vez, para não perder o hábito, vamos ver esta mesma aplicação em Cálculo Lambda Puro:
 
    $$\begin{align*}
-   \text{IF-THEN-ELSE}\;\text{True}\;x\;y &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; x)\; x\; Y \\
+   \text{IF-THEN-ELSE}\;\text{True}\;x\;y &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; x)\; x\; y \\
    \\
    &\text{Substituímos $\text{True}$ e $\text{IF-THEN-ELSE}$ por suas definições:} \\
-   &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; x)\; x\; Y \\
+   &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; x)\; x\; y \\
    \\
    &\text{Aplicamos a primeira redução beta, substituindo $b$ por $\text{True}$ $(\lambda x.\; \lambda y.\; x)$:} \\
    &\to_\beta (\lambda x.\; \lambda y.\; (\lambda x.\; \lambda y.\; x)\; x\; y) \\
@@ -6230,10 +6230,10 @@ Vamos aplicar a estrutura condicional para a expressão em dois casos distintos:
 2. Aplicação de _IF-THEN-ELSE_ a _False_ $x$ $y$
 
    $$\begin{align*}
-   \text{IF-THEN-ELSE}\;\text{False}\;x\;y &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; y)\; x\; Y \\
+   \text{IF-THEN-ELSE}\;\text{False}\;x\;y &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; y)\; x\; y \\
    \\
    &\text{Substituímos $\text{False}$ e $\text{IF-THEN-ELSE}$ por suas definições em cálculo lambda:} \\
-   &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; y)\; x\; Y \\
+   &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; y)\; x\; y \\
    \\
    &\text{Aplicamos a primeira redução beta, substituindo $b$ por $\text{False}$ $(\lambda x.\; \lambda y.\; y)$:} \\
    &\to_\beta (\lambda x.\; \lambda y.\; (\lambda x.\; \lambda y.\; y)\; x\; y) \\
@@ -6248,10 +6248,10 @@ Vamos aplicar a estrutura condicional para a expressão em dois casos distintos:
    Eu sei que a amável leitora não esperava por essa. Mas, eu vou refazer esta aplicação em cálculo lambda puro.
 
    $$\begin{align*}
-   \text{IF-THEN-ELSE}\;\text{False}\;x\;y &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; y)\; x\; Y \\
+   \text{IF-THEN-ELSE}\;\text{False}\;x\;y &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; y)\; x\; y \\
    \\
    &\text{Substituímos $\text{False}$ e $\text{IF-THEN-ELSE}$ por suas definições:} \\
-   &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; y)\; x\; Y \\
+   &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; y)\; x\; y \\
    \\
    &\text{Aplicamos a primeira redução beta, substituindo $b$ por $\text{False}$ $(\lambda x.\; \lambda y.\; y)$:} \\
    &\to_\beta (\lambda x.\; \lambda y.\; (\lambda x.\; \lambda y.\; y)\; x\; y) \\
