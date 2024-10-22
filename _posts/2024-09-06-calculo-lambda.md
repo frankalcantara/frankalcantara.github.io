@@ -30,8 +30,8 @@ keywords:
 rating: 5
 published: 2024-09-08T21:19:20.392Z
 draft: 2024-09-08T21:19:20.392Z
-featured: true
-toc: true
+featured: True
+toc: True
 preview: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de _currying_e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de _currying_e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 lastmod: 2024-10-21T21:28:02.879Z
@@ -225,7 +225,48 @@ A atenta leitora deve ter percebido que o cálculo lambda não é um conceito te
 
 5. **Recursão**: Definir funções recursivas é essencial em programação funcional. No cálculo lambda, isso é feito com combinadores de ponto fixo.
 
-## 1.3. Limitações do Cálculo Lambda e Sistemas Avançados
+## 1.3. Representação de Valores e Computações
+
+Uma das características principais do cálculo lambda é representar valores, dados e computações complexas, usando exclusivamente funções. Até números e _booleanos_ são representados de forma funcional. Um exemplo indispensável é a representação dos números naturais, chamada **Numerais de Church**:
+
+$$\begin{align*}
+0 &= \lambda s.\;\lambda z.\;z \\
+1 &= \lambda s.\;\lambda z.\;s\;z \\
+2 &= \lambda s.\;\lambda z. s\;(s\;z) \\
+3 &= \lambda s.\;\lambda z.\;s\;(s (s\;z))
+\end{align*}$$
+
+Voltaremos a esta notação mais tarde. O importante é que essa codificação permite que operações aritméticas sejam definidas inteiramente em termos de funções. Por exemplo, a função sucessor, usada para provar a criação de conjuntos de números contáveis, como os naturais e os inteiros, pode ser expressa como:
+
+$$\text{succ} = \lambda n.\;\lambda s.\;\lambda z.\;s\;(n\;s\;z)$$
+
+Assim, operações como adição e multiplicação podem ser construídas usando termos lambda.
+
+Um dos resultados mais profundos da formalização da computabilidade, utilizando o cálculo lambda e as máquinas de Turing, foi a identificação de problemas _indecidíveis_. Problemas para os quais não podemos decidir se o algoritmo que os resolve irá parar em algum ponto, ou não.
+
+O exemplo mais emblemático é o Problema da Parada, formulado por Alan Turing em 1936. O Problema da Parada questiona se é possível construir um algoritmo que, dado qualquer programa e uma entrada, determine se o programa eventualmente terminará ou continuará a executar indefinidamente. Em termos formais, essa questão pode ser expressa como:
+
+$$
+\exists f : \text{Programa} \times \text{Entrada} \rightarrow \{\text{Para}, \text{NãoPara}\}?
+$$
+
+Turing demonstrou, por meio de um argumento de diagonalização, que tal função $f$ não pode existir. Esse resultado mostra que não é possível determinar, de forma algorítmica, o comportamento de todos os programas para todas as possíveis entradas.
+
+Outro problema indecidível, elucidado pelas descobertas em computabilidade, é o _décimo problema de Hilbert_. Esse problema questiona se existe um algoritmo que, dado um polinômio com coeficientes inteiros, possa determinar se ele possui soluções inteiras. Formalmente, o problema pode ser expresso assim:
+
+$$
+P(x_1, x_2, \dots, x_n) \, = 0
+$$
+
+>Os problemas de Hilbert são uma lista de 23 problemas matemáticos propostos por David Hilbert em 1900, durante o Congresso Internacional de Matemáticos em Paris. Esses problemas abordam questões em várias áreas da matemática e estimularam muitas descobertas ao longo do século XX. Cada problema visava impulsionar a pesquisa e delinear os desafios mais importantes da matemática da época. Alguns dos problemas foram resolvidos, enquanto outros permanecem abertos ou foram provados como indecidíveis, como o **décimo problema de Hilbert**, que pergunta se existe um algoritmo capaz de determinar se um polinômio com coeficientes inteiros possui soluções inteiras.
+
+Em 1970, [Yuri Matiyasevich] \ ,(Yuri Matiyasevich), em colaboração com [Julia Robinson](https://en.wikipedia.org/wiki/Julia_Robinson), [Martin Davis] \ ,(<https://en.wikipedia.org/wiki/Martin_Davis_(mathematician)>) e [Hilary Putnam](https://en.wikipedia.org/wiki/Hilary_Putnam), provou que tal algoritmo não existe. Esse resultado teve implicações profundas na teoria dos números e demonstrou a indecidibilidade de um problema central na matemática.
+
+A equivalência entre o cálculo lambda, as máquinas de Turing e as funções recursivas permitiu estabelecer os limites da computação algorítmica. O Problema da Parada e outros resultados indecidíveis, como o décimo problema de Hilbert, mostraram que existem problemas além do alcance dos algoritmos.
+
+A **Tese de Church-Turing** formalizou essa ideia, afirmando que qualquer função computável pode ser expressa por um dos modelos computacionais mencionados, Máquina de Turing, recursão e o cálculo lambda[^cita6]. Essa tese forneceu a base rigorosa necessária ao desenvolvimento da Ciência da Computação, permitindo a demonstração da existência de problemas não solucionáveis por algoritmos.
+
+## 1.4. Limitações do Cálculo Lambda e Sistemas Avançados
 
 O cálculo lambda é poderoso. Ele pode expressar qualquer função computável. Mas tem limitações: **não tem tipos nativos** ou qualquer sistema de tipos. Tudo é função. Números, booleanos, estruturas de dados são codificados como funções; **Não tem estado mutável**. cada expressão produz um novo resultado. Não modifica valores existentes. Isso é uma vantagem em alguns cenários, mas agrega complexidade a definição de algoritmos; **não tem controle de fluxo direto**, _Loops_ e condicionais são simulados com funções recursivas.
 
@@ -245,7 +286,7 @@ Sistemas mais avançados de cálculo lambda abordam algumas das deficiências do
 
 Estas extensões agregam funcionalidade e transformam o cálculo lambda em uma ferramenta matemática mais flexível. Muitas vezes com o objetivo de criar algoritmos, facilitar o uso de linguagens de programação baseadas em cálculo lambda no universo fora da matemática.
 
-## 1.4. Notações e Convenções
+## 1.5. Notações e Convenções
 
 O cálculo lambda utiliza uma notação específica para representar funções, variáveis, termos e operações. Abaixo estão as notações e convenções, além de algumas expansões necessárias para a compreensão completa.
 
@@ -362,7 +403,7 @@ $$
 \begin{array}{c}
 \lambda x \\
 \downarrow \\
-\lambda y \\
+\lambda $Y$ \\
 \downarrow \\
 @ \\
 \diagup \quad \diagdown \\
@@ -386,7 +427,7 @@ $$\lambda x.\;x\;y \neq_\alpha \lambda y.\;y\;y$$
 
 No termo original, $y$ poderia ter um valor externo fornecido de outro contexto. No termo renomeado, $y$ foi capturada e usada como uma variável ligada, o que altera o comportamento do termo. Este é um exemplo de renomeação incorreta por captura de uma variável livre, mudando o significado do termo original.
 
-## 1.4. Exercícios
+## 1.6. Exercícios
   
 **1**: Escreva uma função lambda para representar a identidade, que retorna o próprio argumento.
 
@@ -406,7 +447,7 @@ No termo original, $y$ poderia ter um valor externo fornecido de outro contexto.
 
    $$(\lambda y. 5)\, 6 = 5$$
 
-   O resultado final é $5\,$.
+   O resultado é $5\,$.
 
 **5**: Simplifique a expressão $(\lambda x.\;x)(\lambda y.\;y)\,$.
 
@@ -414,7 +455,7 @@ No termo original, $y$ poderia ter um valor externo fornecido de outro contexto.
 
    $$(\lambda x.\;x)(\lambda y.\;y) \, = \lambda y.\;y$$
 
-   A função $\lambda y.\;y$ é a identidade e o resultado final é a própria função identidade.
+   A função $\lambda y.\;y$ é a identidade e o resultado é a própria função identidade.
 
 **6**: Aplique a função $\lambda x. \lambda y.\;x + y$ aos valores $3$ e $4\,$.
 
@@ -426,7 +467,7 @@ No termo original, $y$ poderia ter um valor externo fornecido de outro contexto.
 
    $$(\lambda y. 3 + y)\;4 = 3 + 4 = 7$$
 
-   O resultado final é $7\,$.
+   O resultado é $7\,$.
 
 **7**: A função $\lambda x. \lambda y.\;x$ é uma função de primeira ordem ou segunda ordem?
 
@@ -454,7 +495,7 @@ No termo original, $y$ poderia ter um valor externo fornecido de outro contexto.
 
    $$(\lambda x.\;x\;x)\;2 = 2 \times 2 = 4$$
 
-   O resultado final é $4\,$.
+   O resultado é $4\,$.
 
 # 2. Sintaxe e Semântica
 
@@ -512,13 +553,13 @@ $$
 
 A gentil leitora pode facilitar o entendimento de abstrações e aplicações se pensar em um termo lambda como sendo uma árvore, cuja forma corresponde à forma como o termo aplica as regras de produção da gramática. Chamamos a árvore criada pela derivação das regras de produção de de árvore sintática ou árvore de derivação. Para um dado termo $M\,$, qualquer, está árvore terá vértices rotulados por $\lambda x$ ou $@\,$, enquanto as folhas serão rotuladas por variáveis.
 
-Indutivamente, podemos definir que a árvore de construção de uma variável $x$ é somente uma folha, rotulada por $x\,$. A árvore de construção de uma abstração $\lambda x.\;E$ consistirá em um vértice rotulado por $\lambda x$ com uma única subárvore, que é a árvore de construção de $E\,$. Por fim, a árvore de construção de uma aplicação $E\;N$ consistirá em um vértice rotulado por $@$ com duas subárvores: a subárvore esquerda é a árvore de construção de $E$ e a subárvore direita é a árvore de construção de $N\,$. Por exemplo, a árvore de construção do termo $\lambda x \lambda y.\;x\;y\;\lambda z.\;y\;z$ é:
+Indutivamente, podemos definir que a árvore de construção de uma variável $x$ é somente uma folha, rotulada por $x\,$. A árvore de construção de uma abstração $\lambda x.\;E$ consistirá em um vértice rotulado por $\lambda x$ com uma única subárvore, que é a árvore de construção de $E\,$. Por fim, a árvore de construção de uma aplicação $E\;N$ consistirá em um vértice rotulado por $@$ com duas subárvores: a subárvore esquerda é a árvore de construção de $E$ e a subárvore direita é a árvore de construção de $N\,$. Por exemplo, a árvore de construção do termo $\lambda x \lambda y.\;x\;y\;\lambda z.\;y\;z$ será:
 
 $$
 \begin{array}{c}
 \lambda x \\
 \downarrow \\
-\lambda y \\
+\lambda $Y$ \\
 \downarrow \\
 \diagup \quad \diagdown \\
 \begin{array}{cc}
@@ -577,7 +618,7 @@ Como vimos, a gramática é simples, poucas regras de produção e poucos símbo
 
 ## 2.2. Semântica Operacional
 
-A semântica operacional é uma abordagem formal para descrever o comportamento de linguagens formai, especificando, de forma rigorosa, como as expressões de uma linguagem são avaliadas passo a passo. No caso de linguagens de programação é a semântica operacional que define como os programas irão funcionar.
+A semântica operacional é uma abordagem rigorosa para descrever o comportamento de linguagens formai, especificando como as expressões de uma linguagem são avaliadas. No caso de linguagens de programação é a semântica operacional que define como os programas irão funcionar.
 
 No contexto do cálculo lambda, a semântica operacional se concentra em como os termos são transformados por meio de uma sequência de reduções. As reduções operam sobre a estrutura sintática dos termos, permitindo a análise detalhada do processo de avaliação, desde a aplicação de funções até a substituição de variáveis.
 
@@ -660,7 +701,7 @@ A substituição é a operação estrutural do cálculo lambda. Ela funciona sub
 1. $[N/x] x\;N$
 2. $[N/x] y\;y, \quad \text{se}\;x \neq y$
 3. $[N/x]\;(M_1 \, M_2) ([N/x]M_1)([N/x]M_2)$
-4. $[N/x]\;(\lambda y \, M) \lambda y \, ([N/x]M), \quad \text{se} ; x \neq y \quad \text{e} \quad y \notin FV(N)$
+4. $[N/x]\;(\lambda $Y$ \, M) \lambda $Y$ \, ([N/x]M), \quad \text{se} ; x \neq $Y$ \quad \text{e} \quad $Y$ \notin FV(N)$
 
 Aqui, $FV(N)$ é o conjunto de variáveis livres, _Free Variable_ de $N\,$. A condição $y \notin FV(N)$ é necessária para evitar a captura de variáveis livres.
 
@@ -811,16 +852,16 @@ data Expr = Var String | App Expr Expr | Lam String Expr
 -- Função de substituição que inclui a redução alfa para evitar captura
 substitute :: String -> Expr -> Expr -> Expr
 substitute x n (Var y)
-  | x == y    = n
+  | x == $Y$    = n
   | otherwise = Var y
 substitute x n (App e1 e2) \, = App (substitute x n e1) (substitute x n e2)
-substitute x n (Lam y e)
-  | y == x = Lam y e  -- Variável ligada é a mesma que estamos substituindo
-  | y `elem` freeVars n =  -- Risco de captura, aplicar redução alfa
-      let y' = freshVar y (n : e : [])
-          e' = substitute y (Var y') e
+substitute x n (Lam $Y$ e)
+  | $Y$ == x = Lam $Y$ e  -- Variável ligada é a mesma que estamos substituindo
+  | $Y$ `elem` freeVars n =  -- Risco de captura, aplicar redução alfa
+      let y' = freshVar $Y$ (n : e : [])
+          e' = substitute $Y$ (Var y') e
       in Lam y' (substitute x n e')
-  | otherwise = Lam y (substitute x n e)
+  | otherwise = Lam $Y$ (substitute x n e)
 
 -- Função para obter as variáveis livres em uma expressão
 freeVars :: Expr -> [String]
@@ -865,7 +906,7 @@ Agora, que definimos a assinatura da função `substitute` vamos analisar cada u
 
    ```haskell
    substitute x n (Var y)
-     | x == y    = n
+     | x == $Y$    = n
      | otherwise = Var y
    ```
 
@@ -882,13 +923,13 @@ Agora, que definimos a assinatura da função `substitute` vamos analisar cada u
 3. **Substituição em Abstrações Lambda**:
 
    ```haskell
-   substitute x n (Lam y e)
-     | y == x = Lam y e  -- Variável ligada é a mesma que estamos substituindo
-     | y `elem` freeVars n =  -- Risco de captura, aplicar redução alfa
-         let y' = freshVar y (n : e : [])
-             e' = substitute y (Var y') e
+   substitute x n (Lam $Y$ e)
+     | $Y$ == x = Lam $Y$ e  -- Variável ligada é a mesma que estamos substituindo
+     | $Y$ `elem` freeVars n =  -- Risco de captura, aplicar redução alfa
+         let y' = freshVar $Y$ (n : e : [])
+             e' = substitute $Y$ (Var y') e
          in Lam y' (substitute x n e')
-     | otherwise = Lam y (substitute x n e)
+     | otherwise = Lam $Y$ (substitute x n e)
    ```
 
    Este é o caso mais complexo e corresponde à **regra 4** da substituição formal. Aqui, temos três subcasos:
@@ -1254,11 +1295,11 @@ O ambiente $\rho$ armazena as associações entre variáveis e seus valores corr
 
 **Exemplo de Atualização**:
 
-- Ambiente inicial: $\rho = \{ y \mapsto 2 \}$
+- Ambiente inicial: $\rho = \{ $Y$ \mapsto 2 \}$
 
 - Avaliando $\lambda x.\;x + y$ com $x = 3$:
 
-- Novo ambiente: $\rho' = \rho[x \mapsto 3] = \{ y \mapsto 2, x \mapsto 3 \}$
+- Novo ambiente: $\rho' = \rho[x \mapsto 3] = \{ $Y$ \mapsto 2, x \mapsto 3 \}$
 
 - Avaliamos $x + y$ em $\rho'$:
 
@@ -1270,7 +1311,7 @@ A experta leitora deve concordar que exemplos, facilitam o entendimento e nunca 
 
 **Exemplo 1**: Com Variáveis Livres: considere a expressão $\lambda x.\;x + y\,$, onde $y$ é uma variável livre.
 
-- Ambiente Inicial: $\rho = \{ y \mapsto 4 \}$
+- Ambiente Inicial: $\rho = \{ $Y$ \mapsto 4 \}$
 - Interpretação da Abstração:
 
 $$
@@ -1292,7 +1333,7 @@ $$
   - Agora, interpretamos a abstração interna no ambiente estendido:
 
    $$
-   f(v) \, = g, \quad \text{onde} \quad g(w) \, = [x + y]_{\rho[x \mapsto v, y \mapsto w]} = v + w
+   f(v) \, = g, \quad \text{onde} \quad g(w) \, = [x + y]_{\rho[x \mapsto v, $Y$ \mapsto w]} = v + w
    $$
 
 - Aplicação:
@@ -1310,7 +1351,7 @@ Ferramentas baseadas em semântica denotacional podem ser usadas para verificar 
 
 Finalmente, a atenta leitora pode perceber que a semântica denotacional permite pensar em expressões lambda como funções matemáticas. Já a semântica operacional foca nos passos da computação.
 
->Observe que a **Semântica Operacional** é geralmente mais adequada para descrever a execução passo a passo de linguagens que usam passagem por referência, pois permite capturar facilmente como os estados mudam durante a execução. Por outro lado, a **Semântica Denotacional** é mais alinhada com linguagens puras, que preferem passagem por cópia, evitando efeitos colaterais e garantindo que o comportamento das funções possa ser entendido matematicamente.
+>Observe que a **Semântica Operacional** é geralmente mais adequada para descrever a execução procedural de linguagens que usam passagem por referência, pois permite capturar facilmente como os estados mudam durante a execução. Por outro lado, a **Semântica Denotacional** é mais alinhada com linguagens puras, que preferem passagem por cópia, evitando efeitos colaterais e garantindo que o comportamento das funções possa ser entendido matematicamente.
 >
 >Existe uma conexão direta entre a forma como a semântica de uma linguagem é modelada e o mecanismo de passagem de valor que a linguagem suporta. Linguagens que favorecem efeitos colaterais tendem a ser descritas de forma mais natural por semântica operacional, enquanto aquelas que evitam efeitos colaterais são mais bem descritas por semântica denotacional.
 >
@@ -1464,7 +1505,7 @@ Finalmente, a atenta leitora pode perceber que a semântica denotacional permite
 
    3. Primeira aplicação: aplicamos $\lambda x$ ao valor $1$:
 
-      $$f(1) \, = \lambda y.\;1^2 + 2 \times 1 \times y + y^2$$
+      $$f(1) \, = \lambda y.\;1^2 + 2 \times 1 \times $Y$ + y^2$$
 
    4. Segunda aplicação: aplicamos $\lambda y$ ao valor $2$:
 
@@ -1694,7 +1735,7 @@ $$\lambda x.\;\lambda x.\;x + x$$
 
    Uma renomeação válida seria:
 
-$$\lambda x.\;\lambda y.\;x + y \equiv_\alpha \lambda x.\;\lambda z.\;x + z$$
+$$\lambda x.\;\lambda y.\;x + $Y$ \equiv_\alpha \lambda x.\;\lambda z.\;x + z$$
 
    Aqui, renomeamos $y$ para $z\,$, mantendo a distinção entre as variáveis e preservando a estrutura e o significado da expressão original.
 
@@ -1726,7 +1767,7 @@ Este exemplo ilustra como a equivalência alfa permite o uso seguro da redução
 
    **Solução:** A redução-$\alpha$ renomeia $y$ para $w$:
 
-   $$\lambda x. \lambda y.\;x + y \to_\alpha \lambda x.\;\lambda w.\;x + w$$
+   $$\lambda x. \lambda y.\;x + $Y$ \to_\alpha \lambda x.\;\lambda w.\;x + w$$
 
 **3**: Aplique a redução-$\alpha$ para renomear a variável $z$ na expressão $\lambda z.\;z^2$ para $a\,$.
 
@@ -1756,7 +1797,7 @@ Este exemplo ilustra como a equivalência alfa permite o uso seguro da redução
 
    **Solução:** Substituímos $x$ por $a$ e $y$ por $b$:
 
-   $$\lambda x. \lambda y.\;x \times y \to_\alpha \lambda a. \lambda b. a \times b$$
+   $$\lambda x. \lambda y.\;x \times $Y$ \to_\alpha \lambda a. \lambda b. a \times b$$
 
 **7**: Renomeie a variável ligada $y$ na expressão $\lambda x.\;(\lambda y.\;y + x)$ para $t\,$.
 
@@ -1824,7 +1865,7 @@ $$[y/x]\,x = y$$
 
 **4**: Considere a expressão $(\lambda x. \lambda y.\;x + y) z\,$. Aplique a substituição $[z/x]$ e explique a necessidade de redução-$\alpha\,$.
 
-   **Solução:** Como $x$ não está ligada, podemos realizar a substituição sem necessidade de alfa. A expressão resultante é:
+   **Solução:** Como $x$ não está ligada, podemos realizar a substituição sem necessidade de alfa. A expressão resultante será:
 
    $$[z/x]\;(\lambda x. \lambda y.\;x + y) \, = \lambda y.\;z + y$$
 
@@ -1842,11 +1883,11 @@ $$[y/x]\,x = y$$
 
    Com a convenção de Barendregt, variáveis ligadas não entram em conflito.
 
-**7**: Aplique a redução-$\alpha$ na expressão $\lambda x. \lambda y.\;x + y$ para renomear $ x $ e $ y $ para $ a $ e $ b \,$, respectivamente, e aplique a substituição $[3/a]\,$.
+**7**: Aplique a redução-$\alpha$ na expressão $\lambda x. \lambda y.\;x + y$ para renomear $ x $ e $ $Y$ $ para $ a $ e $ b \,$, respectivamente, e aplique a substituição $[3/a]\,$.
 
    **Solução:** Primeiro, aplicamos a redução-$\alpha$:
 
-   $$\lambda x. \lambda y.\;x + y \to_\alpha \lambda a. \lambda b. a + b$$
+   $$\lambda x. \lambda y.\;x + $Y$ \to_\alpha \lambda a. \lambda b. a + b$$
 
    Agora, aplicamos a substituição:
 
@@ -1862,7 +1903,7 @@ $$[y/x]\,x = y$$
 
    $$[y/x]\;(\lambda x.\;(\lambda z.\;z + 1) x) \, = \lambda x.\;(\lambda z.\;z + 1) y$$
 
-**9**: Aplique a redução-$\alpha$ na expressão $\lambda x.\;(\lambda y.\;x + y)\,$, renomeando $ y $ para $ z \,$, e depois aplique a substituição $[5/x]\,$.
+**9**: Aplique a redução-$\alpha$ na expressão $\lambda x.\;(\lambda y.\;x + y)\,$, renomeando $ $Y$ $ para $ z \,$, e depois aplique a substituição $[5/x]\,$.
 
    **Solução:** Primeiro, aplicamos a redução-$\alpha$:
 
@@ -1892,7 +1933,7 @@ $$[y/x]\,x = y$$
 
    **Solução:** Como não há conflitos de variáveis livres e ligadas, aplicamos a substituição diretamente:
 
-   $$[y/x]\;(\lambda z.\;x + z) \, = \lambda z. y + z$$
+   $$[y/x]\;(\lambda z.\;x + z) \, = \lambda z. $Y$ + z$$
 
 **13**: Aplique a substituição $[z/x]\;(\lambda y.\;x \times y)$ onde $ z \in FV(x)\,$. Utilize a convenção de Barendregt.
 
@@ -1902,7 +1943,7 @@ $$[y/x]\,x = y$$
 
    A convenção de Barendregt garante que não precisamos renomear variáveis.
 
-**14**: Aplique a redução-$\alpha$ na expressão $\lambda x.\;(\lambda y.\;x + y)$ e renomeie $ y $ para $ t \,$, depois aplique a substituição $[2/x]\,$.
+**14**: Aplique a redução-$\alpha$ na expressão $\lambda x.\;(\lambda y.\;x + y)$ e renomeie $ $Y$ $ para $ t \,$, depois aplique a substituição $[2/x]\,$.
 
    **Solução:** Primeiro aplicamos a redução-$\alpha$:
 
@@ -1999,23 +2040,23 @@ $$(\lambda x.\;x+1)2 \to_\beta [2/x]\;(x+1) \, = 2+1 = 3$$
 
 **Exemplo 4**: um exemplo mais complexo envolvendo uma função de ordem superior:
 
-$$(\lambda f.\lambda x.\;f\;(f\;x))(\lambda y.\;y*2)\;3$$
+   $$(\lambda f.\lambda x.\;f\;(f\;x))(\lambda y.\;y*2)\;3$$
 
- Reduzindo passo a passo:
+   Reduzindo passo a passo:
 
-$$(\lambda f.\lambda x.\;f(f\;x))(\lambda y.\;y \times 2) \, 3$$
+   $$(\lambda f.\lambda x.\;f(f\;x))(\lambda y.\;y \times 2) \, 3$$
 
-$$\to_\beta (\lambda x.(\lambda y.\;y \times 2)((\lambda y.\;y \times 2) x))\;3$$
+   $$\to_\beta (\lambda x.(\lambda y.\;y \times 2)((\lambda y.\;y \times 2) x))\;3$$
 
-$$\to_\beta (\lambda y.\;y \times 2)((\lambda y.\;y \times 2)\;3)$$
+   $$\to_\beta (\lambda y.\;y \times 2)((\lambda y.\;y \times 2)\;3)$$
 
-$$\to_\beta (\lambda y.\;y \times 2)\;(3 \times 2)$$
+   $$\to_\beta (\lambda y.\;y \times 2)\;(3 \times 2)$$
 
-$$\to_\beta (\lambda y.\;y \times 2)\;(6)$$
+   $$\to_\beta (\lambda y.\;y \times 2)\;(6)$$
 
-$$\to_\beta 6 \times 2$$
+   $$\to_\beta 6 \times 2$$
 
-$$= 12$$
+   $$= 12$$
 
 Neste exemplo, aplicamos primeiro a função $(\lambda f.\lambda x.\;f\;(f\;x))$ ao argumento $(\lambda y.\;y \times 2)\,$, resultando em uma expressão que aplica duas vezes a função de duplicação ao número $3\,$, obtendo $12\,$.
 
@@ -2274,7 +2315,7 @@ $$(\lambda f. \lambda x. f x) (\lambda y.\;y + 1) \to_\beta \lambda x. (\lambda 
 
 Aqui, a redução beta é aplicada primeiro, seguida pela redução-$\eta$ para simplificar ainda mais a expressão.
 
-Nesta interação entre as reduções precisamos tomar cuidado com a ordem de aplicação das reduções pode afetar o resultado final e a eficiência do processo de redução. Em linhas gerais, podemos seguir as seguintes regras:
+Nesta interação entre as reduções precisamos tomar cuidado com a ordem de aplicação das reduções pode afetar o resultado  e a eficiência do processo de redução. Em linhas gerais, podemos seguir as seguintes regras:
 
 1. A redução-$\alpha$ é aplicada conforme necessário para evitar conflitos de nomes.
 
@@ -2294,7 +2335,7 @@ Podemos aplicar as reduções na seguinte ordem:
 
 2. redução-$\eta$: $\lambda y. (\lambda z.\;z) \to_\eta \lambda z.\;z$
 
-O resultado final, $\lambda z.\;z\,$, é a função identidade, obtida através da aplicação combinada de reduções beta e $\eta\,$.
+O resultado , $\lambda z.\;z\,$, é a função identidade, obtida através da aplicação combinada de reduções beta e $\eta\,$.
 
 Entender a interação entre estas formas de redução é crucial para manipular eficientemente expressões lambda e para compreender a semântica de linguagens de programação funcional baseadas no cálculo lambda.
 
@@ -2318,7 +2359,7 @@ addOne = (+ 1)
 
 Neste exemplo, definimos uma função `addOne` que adiciona $1$ a um número inteiro. Vamos entender como a redução-$\eta$ é aplicada aqui:
 
-Na versão antes da redução-$\eta$: `addOne x = (+ 1) x` define uma função que toma um argumento `x`. Enquanto `(+ 1)` é uma função parcialmente aplicada em Haskell, equivalente a `\y -> y + 1`. A função `addOne` aplica `(+ 1)` ao argumento `x`.
+Na versão antes da redução-$\eta$: `addOne x = (+ 1) x` define uma função que toma um argumento `x`. Enquanto `(+ 1)` é uma função parcialmente aplicada em Haskell, equivalente a `\y -> $Y$ + 1`. A função `addOne` aplica `(+ 1)` ao argumento `x`.
 
 A redução-$\eta$ nos permite simplificar esta definição: observamos que `x` aparece como o último argumento tanto no lado esquerdo (`addOne x`) quanto no lado direito (`(+ 1) x`) da equação. A redução-$\eta$ permite remover este argumento `x` de ambos os lados.
 
@@ -2342,7 +2383,7 @@ compose :: (b -> c) -> (a -> b) -> a -> c
 compose f g = f . g
 ```
 
-Este exemplo demonstra como a redução-$\eta$ pode simplificar a definição de uma função de composição. Vamos entender passo a passo:
+Este exemplo demonstra como a redução-$\eta$ pode simplificar a definição de uma função de composição. Detalhando temos:
 
 1. Antes da redução-$\eta$ temos: - `compose f g x = f (g x)` define uma função que toma três argumentos: `f`, `g`, e `x`. Onde `f` é uma função de tipo `b -> c`, `g` é uma função de tipo `a -> b` e `x` é um valor de tipo `a`. Ou seja, a função aplica `g` a `x`, e então aplica `f` ao resultado.
 
@@ -2370,13 +2411,13 @@ map' :: (a -> b) -> [a] -> [b]
 map' = map
 ```
 
-Este exemplo demonstra como a redução-$\eta$ pode simplificar a definição de uma função que envolve outra função de ordem superior. Vamos detalhar o processo, novamente, passo a passo:
+Este exemplo demonstra como a redução-$\eta$ pode simplificar a definição de uma função que envolve outra função de ordem superior. Detalhando o processo temos:
 
-1. Antes da redução-$\eta$: `map' f xs = map f xs` define uma função `map'` que toma dois argumentos: `f` (uma função) e `xs` (uma lista). Esta função simplesmente aplica a função `map` padrão do Haskell com os mesmos argumentos.
+   1. Antes da redução-$\eta$: `map' f xs = map f xs` define uma função `map'` que toma dois argumentos: `f` (uma função) e `xs` (uma lista). Esta função simplesmente aplica a função `map` padrão do Haskell com os mesmos argumentos.
 
-2. Aplicando a redução-$\eta$: observamos que tanto `f` quanto `xs` aparecem na mesma ordem no lado esquerdo e direito da equação. A redução-$\eta$ nos permite remover ambos os argumentos.
+   2. Aplicando a redução-$\eta$: observamos que tanto `f` quanto `xs` aparecem na mesma ordem no lado esquerdo e direito da equação. A redução-$\eta$ nos permite remover ambos os argumentos.
 
-3. Após a redução-$\eta$: `map' = map` é a forma simplificada. Isso define `map'` como sendo exatamente a função `map` padrão do Haskell.
+   3. Após a redução-$\eta$: `map' = map` é a forma simplificada. Isso define `map'` como sendo exatamente a função `map` padrão do Haskell.
 
 No cálculo lambda, temos:
 
@@ -2506,7 +2547,7 @@ Em suma, a redução-$\eta$ desempenha um papel importante na otimização de co
 
 ## 3.4. Teorema de Church-Rosser
 
-Um dos obstáculos enfrentado por Church durante o desenvolvimento do cálculo lambda dizia respeito a consistência do processo de redução. Ou seja, provar que um termo lambda mesmo que reduzido de formas diferentes, chegaria a mesma forma normal, caso esta forma existisse. Em busca desta consistência, Church e [J. Barkley Rosser](https://en.wikipedia.org/wiki/J._Barkley_Rosser), seu estudante de doutorado, formularam o teorema que viria a ser chamado de **Teorema de Church-Rosser**[^cita5]. Este teorema, chamado de propriedade da confluência local, garante a consistência e a previsibilidade do sistema de redução beta, afirmando que, **independentemente da ordem em que as reduções beta são aplicadas, o resultado final, se existir, é o mesmo** Figura 3.4.A.
+Um dos obstáculos enfrentado por Church durante o desenvolvimento do cálculo lambda dizia respeito a consistência do processo de redução. Ou seja, provar que um termo lambda mesmo que reduzido de formas diferentes, chegaria a mesma forma normal, caso esta forma existisse. Em busca desta consistência, Church e [J. Barkley Rosser](https://en.wikipedia.org/wiki/J._Barkley_Rosser), seu estudante de doutorado, formularam o teorema que viria a ser chamado de **Teorema de Church-Rosser**[^cita5]. Este teorema, chamado de propriedade da confluência local, garante a consistência e a previsibilidade do sistema de redução beta, afirmando que, **independentemente da ordem em que as reduções beta são aplicadas, o resultado , se existir, é o mesmo** Figura 3.4.A.
 
 ![Um diagrama com um termo principal, M e dois caminhos de redução chegando ao mesmo ponto](/assets/images/conflu.webp)
 _Figura 3.4.A: Diagrama da Propriedade de Confluência determinada pelo Teorema de Church-Rosser_{: legenda}
@@ -2552,7 +2593,7 @@ $$
 >
 >Como o cálculo lambda satisfaz ambas as condições, ele é confluente e terminante globalmente.
 >
->A prova completa envolve mostrar que, mesmo quando existem múltiplos >redexes, subtermos que podem ser reduzidos, a ordem de redução não interfere no resultado final. Barendregt utiliza as técnicas de _reescrita paralela_ e _substituição simultânea_ para lidar com as reduções múltiplas.
+>A prova completa envolve mostrar que, mesmo quando existem múltiplos >redexes, subtermos que podem ser reduzidos, a ordem de redução não interfere no resultado . Barendregt utiliza as técnicas de _reescrita paralela_ e _substituição simultânea_ para lidar com as reduções múltiplas.
 >
 >A reescrita paralela envolve a ideia de aplicar todas as reduções possíveis de um termo ao mesmo tempo. Por exemplo, se um termo $M$ contém dois redexes diferentes, como $(\lambda x.\;x)\;(\lambda y.\;y)\,$, a reescrita paralela reduz ambos os redexes simultaneamente:
 >
@@ -2569,7 +2610,7 @@ O Teorema de Church-Rosser ao estabelecer que o cálculo lambda é um sistema _c
 
 Finalmente podemos dizer que **o cálculo lambda puro é consistente porque como não é possível derivar termos contraditórios, ou ambíguos**. A consistência, por sua vez, implica na confiabilidade em sistemas formais e linguagens de programação funcionais.
 
-Por sua vez, a _Unicidade da Forma Normal_ é uma consequência imediata da consistência. Se um termo $M$ possui uma forma normal, um termo irredutível, então essa forma normal é única. Isso assegura que o processo de computação no cálculo lambda é determinístico em termos do resultado final. Até aqui, vimos que o cálculo lambda é consistente e determinístico.
+Por sua vez, a _Unicidade da Forma Normal_ é uma consequência imediata da consistência. Se um termo $M$ possui uma forma normal, um termo irredutível, então essa forma normal é única. Isso assegura que o processo de computação no cálculo lambda é determinístico em termos do resultado . Até aqui, vimos que o cálculo lambda é consistente e determinístico.
 
 A última consequência do Teorema de Church-Rosser, a _Independência da Estratégia de Redução_ garante que a ordem, ou estratégia, com que as reduções beta são aplicadas não afeta a forma normal final de um termo. Isso permite flexibilidade na implementação de estratégias de avaliação, como avaliação preguiçosa (_lazy evaluation_) ou avaliação estrita (_eager evaluation_).
 
@@ -2677,9 +2718,9 @@ Novamente, o processo é infinito e não temos uma forma normal.
 
 Neste caso, ambos os caminhos levam a um processo de redução infinito, mas o Teorema de Church-Rosser assegura que, se houvesse uma forma normal, ela seria única, independentemente do caminho escolhido.
 
-A confluência garantida pelo Teorema de Church-Rosser é análoga a um rio com vários afluentes que eventualmente convergem para o mesmo oceano. Ou se preferir a antiga expressão latina _Omnes viae Romam ducunt_ Não importa qual caminho a água siga, ou que estrada a nômade leitora pegue, ela acabará chegando ao mesmo destino. No contexto do cálculo lambda, isso significa que diferentes sequências de reduções beta não causam ambiguidades no resultado final da computação.
+A confluência garantida pelo Teorema de Church-Rosser é análoga a um rio com vários afluentes que eventualmente convergem para o mesmo oceano. Ou se preferir a antiga expressão latina _Omnes viae Romam ducunt_ Não importa qual caminho a água siga, ou que estrada a nômade leitora pegue, ela acabará chegando ao mesmo destino. No contexto do cálculo lambda, isso significa que diferentes sequências de reduções beta não causam ambiguidades no resultado  da computação.
 
-O Teorema de Church-Rosser fornece uma base teórica para otimizações de compiladores e interpretadores, garantindo que mudanças na ordem de avaliação não alterem o resultado final. Tem impacto na teoria da computação já que a confluência é uma propriedade desejável em sistemas de reescrita de termos, assegurando a consistência lógica e a previsibilidade dos sistemas formais. Em sistemas de provas formais e lógica matemática o Teorema de Church-Rosser ajuda a garantir que as demonstrações não levem a contradições.
+O Teorema de Church-Rosser fornece uma base teórica para otimizações de compiladores e interpretadores, garantindo que mudanças na ordem de avaliação não alterem o resultado . Tem impacto na teoria da computação já que a confluência é uma propriedade desejável em sistemas de reescrita de termos, assegurando a consistência lógica e a previsibilidade dos sistemas formais. Em sistemas de provas formais e lógica matemática o Teorema de Church-Rosser ajuda a garantir que as demonstrações não levem a contradições.
 
 ### 3.4.1. Exercícios Relacionados ao Teorema de Church-Rosser
 
@@ -3071,7 +3112,7 @@ Podemos fazer uma analogia com a álgebra:
 
 $$(m^n)^p = m^{n \cdot p}$$
 
-Aqui, elevar uma potência a outra potência equivale a multiplicar os expoentes. Similarmente, no currying, estruturamos as funções de forma aninhada, mas o resultado final é equivalente, independentemente de aplicarmos todos os argumentos de uma vez ou um por um. Portanto, o currying cria um isomorfismo entre as funções dos tipos:
+Aqui, elevar uma potência a outra potência equivale a multiplicar os expoentes. Similarmente, no currying, estruturamos as funções de forma aninhada, mas o resultado é equivalente, independentemente de aplicarmos todos os argumentos de uma vez ou um por um. Portanto, o currying cria um isomorfismo entre as funções dos tipos:
 
 $$f : (A \times B) \to C$$
 
@@ -3123,7 +3164,7 @@ Haskell implementa o _currying_por padrão para todas as funções. Isso signifi
 
 ```haskell
 add :: Int -> Int -> Int
-add x y = x + y
+add x $Y$ = x + y
 ```
 
 Essa definição é equivalente a:
@@ -3183,11 +3224,11 @@ Finalmente em Haskell o uso do _currying_permite escrever código mais conciso e
 
    $$(\lambda x. \lambda y.\;x + y)\;4\;5 = 4 + 5 = 9$$
 
-**2**: transforme a função $f(x, y, z) \, = x \times y + z$ em uma expressão lambda usando _currying_e aplique-a aos valores $x = 2\,$, $y = 3\,$, e $z = 4\,$.
+**2**: transforme a função $f(x, y, z) \, = x \times $Y$ + z$ em uma expressão lambda usando _currying_e aplique-a aos valores $x = 2\,$, $y = 3\,$, e $z = 4\,$.
 
-   **Solução:** A função curried é $\lambda x. \lambda y.\;\lambda z.\;x \times y + z\,$. Aplicando $x = 2\,$, $y = 3\,$, e $z = 4$:
+   **Solução:** A função curried é $\lambda x. \lambda y.\;\lambda z.\;x \times $Y$ + z\,$. Aplicando $x = 2\,$, $y = 3\,$, e $z = 4$:
 
-   $$(\lambda x. \lambda y.\;\lambda z.\;x \times y + z)\;2\;3\;4 = 2 \times 3 + 4 = 6 + 4 = 10$$
+   $$(\lambda x. \lambda y.\;\lambda z.\;x \times $Y$ + z)\;2\;3\;4 = 2 \times 3 + 4 = 6 + 4 = 10$$
 
 **3**: crie uma função curried que representa $f(x, y) \, = x^2 + y^2\,$. Aplique a função a $x = 1$ e $y = 2\,$.
 
@@ -3219,23 +3260,23 @@ Finalmente em Haskell o uso do _currying_permite escrever código mais conciso e
 
    $$(\lambda x. \lambda y.\;x^y)\;2\;3 = 2^3 = 8$$
 
-**8**: defina uma função curried que represente a multiplicação de três números, ou seja, $f(x, y, z) \, = x \times y \times z\,$, e aplique-a aos valores $x = 2\,$, $y = 3\,$, e $z = 4\,$.
+**8**: defina uma função curried que represente a multiplicação de três números, ou seja, $f(x, y, z) \, = x \times $Y$ \times z\,$, e aplique-a aos valores $x = 2\,$, $y = 3\,$, e $z = 4\,$.
 
-   **Solução:** A função curried é $\lambda x. \lambda y.\;\lambda z.\;x \times y \times z\,$. Aplicando $x = 2\,$, $y = 3\,$, e $z = 4$:
+   **Solução:** A função curried é $\lambda x. \lambda y.\;\lambda z.\;x \times $Y$ \times z\,$. Aplicando $x = 2\,$, $y = 3\,$, e $z = 4$:
 
-   $$(\lambda x. \lambda y.\;\lambda z.\;x \times y \times z)\;2\;3\;4 = 2 \times 3 \times 4 = 24$$
+   $$(\lambda x. \lambda y.\;\lambda z.\;x \times $Y$ \times z)\;2\;3\;4 = 2 \times 3 \times 4 = 24$$
 
 **9**: transforme a função $f(x, y) \, = x + 2y$ em uma expressão lambda curried e aplique-a aos valores $x = 1$ e $y = 4\,$.
 
-   **Solução:** A função curried é $\lambda x. \lambda y.\;x + 2y\,$. Aplicando $x = 1 $ e $ y = 4$:
+   **Solução:** A função curried é $\lambda x. \lambda y.\;x + 2y\,$. Aplicando $x = 1 $ e $ $Y$ = 4$:
 
    $$(\lambda x. \lambda y.\;x + 2y)\;1\;4 = 1 + 2 \times 4 = 1 + 8 = 9$$
 
-**10**: crie uma função curried para representar a soma de três números, ou seja, $f(x, y, z) \, = x + y + z\,$, e aplique-a aos valores $x = 3\,$, $y = 5\,$, e $z = 7\,$.
+**10**: crie uma função curried para representar a soma de três números, ou seja, $f(x, y, z) \, = x + $Y$ + z\,$, e aplique-a aos valores $x = 3\,$, $y = 5\,$, e $z = 7\,$.
 
-   **Solução:** A função curried é $\lambda x. \lambda y.\;\lambda z.\;x + y + z\,$. Aplicando $x = 3\,$, $y = 5\,$, e $z = 7$:
+   **Solução:** A função curried é $\lambda x. \lambda y.\;\lambda z.\;x + $Y$ + z\,$. Aplicando $x = 3\,$, $y = 5\,$, e $z = 7$:
 
-   $$(\lambda x. \lambda y.\;\lambda z.\;x + y + z)\;3\;5\;7 = 3 + 5 + 7 = 15$$
+   $$(\lambda x. \lambda y.\;\lambda z.\;x + $Y$ + z)\;3\;5\;7 = 3 + 5 + 7 = 15$$
 
 ### 3.5.3. Ordem Normal e Estratégias de Avaliação
 
@@ -3406,13 +3447,13 @@ Finalmente, a lista de combinadores do cálculo lambda é um pouco mais extensa 
 
 | Nome | Definição e Comentários |
 |------|-------------------------|
-| **S** | $\lambda x [\lambda y [\lambda z [x z (y\;z)]]]\,$. Lembre-se que $x z (y\;z)$ deve ser entendido como a aplicação $(x z)(y\;z)$ de $x z$ a $y\;z\,$. O combinador $S$ pode ser entendido como um operador de _substituir e aplicar_: $z$ _intervém_ entre $x$ e $y$; em vez de aplicar $x$ a $y\,$, aplicamos $x z$ a $y\;z\,$. |
-| **K** | $\lambda x [\lambda y [x]]\,$. O valor de $K M$ é a função constante cujo valor para qualquer argumento é simplesmente $M\,$. |
+| **S** | $\lambda x [\lambda $Y$ [\lambda z [x z (y\;z)]]]\,$. Lembre-se que $x z (y\;z)$ deve ser entendido como a aplicação $(x z)(y\;z)$ de $x z$ a $y\;z\,$. O combinador $S$ pode ser entendido como um operador de _substituir e aplicar_: $z$ _intervém_ entre $x$ e $y$; em vez de aplicar $x$ a $y\,$, aplicamos $x z$ a $y\;z\,$. |
+| **K** | $\lambda x [\lambda $Y$ [x]]\,$. O valor de $K M$ é a função constante cujo valor para qualquer argumento é simplesmente $M\,$. |
 | **I** | $\lambda x [x]\,$. A função identidade. |
-| **B** | $\lambda x [\lambda y [\lambda z [x (y\;z)]]]\,$. Lembre-se que $x\;y\;z$ deve ser entendido como $(x\;y) z\,$, então este combinador não é uma função identidade trivial. |
-| **C** | $\lambda x [\lambda y [\lambda z [x z y]]]\,$. Troca um argumento. |
-| **T** | $\lambda x [\lambda y [x]]\,$. Valor verdadeiro lógico (True). Idêntico a $K\,$. Veremos mais tarde como essas representações dos valores lógicos desempenham um papel na fusão da lógica com o cálculo lambda. |
-| **F** | $\lambda x [\lambda y [y]]\,$. Valor falso lógico (False). |
+| **B** | $\lambda x [\lambda $Y$ [\lambda z [x (y\;z)]]]\,$. Lembre-se que $x\;y\;z$ deve ser entendido como $(x\;y) z\,$, então este combinador não é uma função identidade trivial. |
+| **C** | $\lambda x [\lambda $Y$ [\lambda z [x z y]]]\,$. Troca um argumento. |
+| **T** | $\lambda x [\lambda $Y$ [x]]\,$. Valor verdadeiro lógico (True). Idêntico a $K\,$. Veremos mais tarde como essas representações dos valores lógicos desempenham um papel na fusão da lógica com o cálculo lambda. |
+| **F** | $\lambda x [\lambda $Y$ [y]]\,$. Valor falso lógico (False). |
 | **ω** | $\lambda x [x\;x]\,$. Combinador de autoaplicação. |
 | **Ω** | $\omega \omega\,$. Autoaplicação do combinador de autoaplicação. Reduz para si mesmo. |
 | **Y** | $\lambda f [(\lambda x [f (x\;x)]) (\lambda x [f (x\;x)])]\,$. O combinador paradoxal de Curry. Para todo termo lambda $X\,$, temos: $Y X \triangleright (\lambda x [X (x\;x)]) (\lambda x [X (x\;x)]) \triangleright X ((\lambda x [X (x\;x)]) (\lambda x [X (x\;x)]))\,$. A primeira etapa da redução mostra que $Y X$ reduz ao termo de aplicação $(\lambda x [X (x\;x)]) (\lambda x [X (x\;x)])\,$, que reaparece na terceira etapa. Assim, $Y$ tem a propriedade curiosa de que $Y X$ e $X (Y X)$ reduzem a um termo comum. |
@@ -3442,7 +3483,7 @@ Mesmo correndo o risco de ser redundante e óbvio preciso destacar que combinado
 
 $$S\;(K\;S)\;K$$
 
-A amável leitora deve ficar atenta a redução passo a passo:
+A amável leitora deve ficar atenta a redução:
 
 1. Primeiro, aplicamos $S$ ao primeiro argumento $(K\;S)$ e ao segundo argumento $K$:
 
@@ -3488,9 +3529,9 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
 ### 3.6.1. Exercícios sobre Combinadores e Funções Anônimas
 
-**1**: Defina o combinador de ponto fixo de Curry, conhecido como o combinador $ Y \,$, e aplique-o à função $ f(x) \, = x + 1 \,$. Explique o que ocorre.
+**1**: Defina o combinador de ponto fixo de Curry, conhecido como o combinador $ $Y$ \,$, e aplique-o à função $ f(x) \, = x + 1 \,$. Explique o que ocorre.
 
-   **Solução:** O combinador $ Y $ é definido como:
+   **Solução:** O combinador $ $Y$ $ é definido como:
 
    $$Y = \lambda f. (\lambda x.\;f(x\;x)) (\lambda x.\;f(x\;x))$$
 
@@ -3512,7 +3553,7 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
    $$x_2 = 2 \times 2 = 4$$
 
-**3**: Mostre como o combinador $ Y $ pode ser aplicado para encontrar o ponto fixo da função $ f(x) \, = x^2 - 1 \,$.
+**3**: Mostre como o combinador $ $Y$ $ pode ser aplicado para encontrar o ponto fixo da função $ f(x) \, = x^2 - 1 \,$.
 
    **Solução:** Aplicando o combinador $Y$ à função $f(x) \, = x^2 - 1$:
 
@@ -3526,19 +3567,19 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
    $$f = \lambda f. \lambda n.\;(n = 0 ? 1 : n \times f\;(n-1))$$
 
-   Aplicando o combinador $ Y $:
+   Aplicando o combinador $ $Y$ $:
 
    $$Y(f) \, = \lambda n.\;(n = 0 ? 1 : n \times Y\;(f)\;(n-1))$$
 
    Agora podemos calcular o fatorial de um número, como $ 3! = 3 \times 2 \times 1 = 6 \,$.
 
-**5**: Utilize o combinador $ Y $ para definir uma função recursiva que calcula a sequência de Fibonacci.
+**5**: Utilize o combinador $ $Y$ $ para definir uma função recursiva que calcula a sequência de Fibonacci.
 
    **Solução:** A função para Fibonacci pode ser definida como:
 
    $$f = \lambda f. \lambda n.\;(n = 0 ? 0 : (n = 1 ? 1 : f\;(n-1) + f\;(n-2)))$$
 
-   Aplicando o combinador $ Y $:
+   Aplicando o combinador $ $Y$ $:
 
    $$Y\;(f) \, = \lambda n.\;(n = 0 ? 0 : (n = 1 ? 1 : Y\;(f)\;(n-1) + Y\;(f)\;(n-2)))$$
 
@@ -3598,7 +3639,7 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
    $$K\;3\;7 = (\lambda x. \lambda y.\;x)\;3\;7 \rightarrow*\beta (\lambda y.\;3)\;7 \rightarrow*\beta 3$$
 
-**13**: Defina a expressão $ S(\lambda z.\;z^2)(\lambda z.\;z + 1)\;4 $ e reduza-a passo a passo.
+**13**: Defina a expressão $ S(\lambda z.\;z^2)(\lambda z.\;z + 1)\;4 $ reduzindo-a passo a passo.
 
    **Solução:** Aplicamos o combinador $ S = \lambda f. \lambda g. \lambda x.\;f(x)\;(g\;(x))$ às funções $f = \lambda z.\;z^2 $ e $ g = \lambda z.\;z + 1\,$, e ao valor $4$:
 
@@ -3620,7 +3661,7 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
    O combinador identidade retorna a própria função, sem modificações.
 
-**15**: Reduza a expressão $K\;(I\;7)\;9$ passo a passo.
+**15**: Reduza a expressão $K\;(I\;7)\;9$:
 
    **Solução:** Aplicamos $I$ a $7\,$, que resulta em $7\,$, e depois aplicamos $K$:
 
@@ -3829,7 +3870,7 @@ $$(\lambda x. \lambda y.\;y) ((\lambda z.\;z\;z) (\lambda w. w w)) \to_\beta \la
 
 $$M = (\lambda f.\;(\lambda x.\;f\;(x\;x))\;(\lambda x.\;f\;(x\;x)))\;(\lambda y.\;y + 1)$$
 
-Vamos reduzir $M$ passo a passo usando a ordem normal.
+Vamos reduzir $M$ usando a ordem normal.
 
 **Passo 1**: Identificamos o redex mais externo à esquerda:
 
@@ -3859,35 +3900,35 @@ $$\to_\beta (\lambda y.\;y + 1)\;\left( (\lambda y.\;y + 1)\;\left( \underline{(
 
 $$\to_\beta (\lambda y.\;y + 1)\;\left( (\lambda y.\;y + 1)\;\left( (\lambda y.\;y + 1)\;\left( \cdots \right) \right) \right)$$
 
-Na estratégia de ordem normal, a redução do termo $M$ não termina, pois entra em um ciclo infinito de reduções. Não é possível alcançar uma forma normal para $M$ usando esta estratégia, já que continuaremos expandindo o termo indefinidamente sem simplificá-lo a um resultado final. Este exemplo ilustra como a ordem normal pode levar a reduções infinitas em certos casos, especialmente quando lidamos com termos autoreferenciados ou combinadores que causam expansão infinita.
+Na estratégia de ordem normal, a redução do termo $M$ não termina, pois entra em um ciclo infinito de reduções. Não é possível alcançar uma forma normal para $M$ usando esta estratégia, já que continuaremos expandindo o termo indefinidamente sem simplificá-lo a um resultado . Este exemplo ilustra como a ordem normal pode levar a reduções infinitas em certos casos, especialmente quando lidamos com termos autoreferenciados ou combinadores que causam expansão infinita.
 
-Observamos que a expressão começa a repetir a si mesma, indicando um ciclo infinito. Contudo, na ordem normal, como o argumento não é necessário para o resultado final, a redução pode ser concluída sem avaliá-lo.
+Observamos que a expressão começa a repetir a si mesma, indicando um ciclo infinito. Contudo, na ordem normal, como o argumento não é necessário para o resultado , a redução pode ser concluída sem avaliá-lo.
 
 **Exemplo 2**: Considere a expressão:
 
-$$M = (\lambda x.\;(\lambda y.\;x))\;\left( (\lambda z.\;z + z)\;3 \right)\;\left( (\lambda w.\;w\;w)\;(\lambda w.\;w\;w) \right)$$
+   $$M = (\lambda x.\;(\lambda y.\;x))\;\left( (\lambda z.\;z + z)\;3 \right)\;\left( (\lambda w.\;w\;w)\;(\lambda w.\;w\;w) \right)$$
 
-Vamos reduzir $M$ passo a passo usando a ordem normal.
+   Vamos reduzir $M$ usando a ordem normal.
 
-**Passo 1**: Identificamos o redex mais externo à esquerda:
+   1. Identificamos o redex mais externo à esquerda:
 
-$$\underline{(\lambda x.\;(\lambda y.\;x))\;\left( (\lambda z.\;z + z)\;3 \right)}\;\left( (\lambda w.\;w\;w)\;(\lambda w.\;w\;w) \right)$$
+      $$\underline{(\lambda x.\;(\lambda y.\;x))\;\left( (\lambda z.\;z + z)\;3 \right)}\;\left( (\lambda w.\;w\;w)\;(\lambda w.\;w\;w) \right)$$
 
-Aplicamos a redução beta ao redex, substituindo $x$ por $\left( (\lambda z.\;z + z)\;3 \right)$:
+      Aplicamos a redução beta ao redex, substituindo $x$ por $\left( (\lambda z.\;z + z)\;3 \right)$:
 
-$$\to_\beta\;(\lambda y.\;\left( (\lambda z.\;z + z)\;3 \right))\;\left( (\lambda w.\;w\;w)\;(\lambda w.\;w\;w) \right)$$
+      $$\to_\beta\;(\lambda y.\;\left( (\lambda z.\;z + z)\;3 \right))\;\left( (\lambda w.\;w\;w)\;(\lambda w.\;w\;w) \right)$$
 
-**Passo 2**: Observamos que a função resultante não utiliza o argumento $y$ no corpo da função. Portanto, o segundo argumento $\left( (\lambda w.\;w\;w)\;(\lambda w.\;w\;w) \right)$ não é avaliado na ordem normal, pois não é necessário.
+   2. Observamos que a função resultante não utiliza o argumento $y$ no corpo da função. Portanto, o segundo argumento $\left( (\lambda w.\;w\;w)\;(\lambda w.\;w\;w) \right)$ não é avaliado na ordem normal, pois não é necessário.
 
-**Passo 3**: Calculamos a expressão $(\lambda z.\;z + z)\;3$ no corpo da função:
+   3. Calculamos a expressão $(\lambda z.\;z + z)\;3$ no corpo da função:
 
-$$(\lambda z.\;z + z)\;3\;\to_\beta\;3 + 3 = 6$$
+      $$(\lambda z.\;z + z)\;3\;\to_\beta\;3 + 3 = 6$$
 
-**Passo 4**: Substituímos o resultado no corpo da função:
+   4. Substituímos o resultado no corpo da função:
 
-$$\lambda y.\;6$$
+      $$\lambda y.\;6$$
 
-Este é o resultado final da redução na ordem normal.
+   Este é o resultado  da redução na ordem normal.
 
 ### 4.1.1. Exercícios de Ordem Normal
 
@@ -3903,7 +3944,7 @@ $$M = (\lambda x.\;x)\;((\lambda y.\;y\;y)\;(\lambda y.\;y\;y))$$
 
    $$\to_\beta \underline{((\lambda y.\;y\;y)\;(\lambda y.\;y\;y))}$$
 
-   Neste ponto, o termo resultante é:
+   Neste ponto, o termo resultante será:
 
    $$M' = (\lambda y.\;y\;y)\;(\lambda y.\;y\;y)$$
 
@@ -3929,7 +3970,7 @@ $$M = (\lambda x.\;\lambda y.\;x)\;((\lambda z.\;z + 1)\;5)\;((\lambda w.\;w \ti
 
    $$\to_\beta \lambda y.\;\underline{((\lambda z.\;z + 1)\;5)}$$
 
-   O termo resultante é:
+   O termo resultante será:
 
    $$M' = \lambda y.\;((\lambda z.\;z + 1)\;5)$$
 
@@ -4125,7 +4166,7 @@ $$M = (\lambda x.\;x\;3)\;(\lambda y.\;y + 2)$$
 
 Na **ordem aplicativa**, a estratégia de redução no cálculo lambda consiste em avaliar primeiro os argumentos de uma função antes de aplicar a função em si. Isso significa que a redução ocorre das partes mais internas para as mais externas (redução interna). Essa abordagem corresponde à **avaliação estrita**, onde os argumentos são completamente avaliados antes da aplicação da função.
 
-A ordem aplicativa é utilizada em muitas linguagens de programação, especialmente nas imperativas e em algumas funcionais, como ML e Scheme. Uma vantagem dessa estratégia é que, quando o resultado de um argumento é utilizado várias vezes no corpo da função, a avaliação prévia evita reavaliações redundantes, podendo ser mais eficiente em termos de tempo. No entanto, a ordem aplicativa pode levar a problemas de não-terminação em casos onde a ordem normal encontraria uma solução. E pode resultar em desperdício de recursos ao avaliar argumentos que não são necessários para o resultado final da função.
+A ordem aplicativa é utilizada em muitas linguagens de programação, especialmente nas imperativas e em algumas funcionais, como ML e Scheme. Uma vantagem dessa estratégia é que, quando o resultado de um argumento é utilizado várias vezes no corpo da função, a avaliação prévia evita reavaliações redundantes, podendo ser mais eficiente em termos de tempo. No entanto, a ordem aplicativa pode levar a problemas de não-terminação em casos onde a ordem normal encontraria uma solução. E pode resultar em desperdício de recursos ao avaliar argumentos que não são necessários para o resultado  da função.
 
 **Exemplo 1**: Considere a expressão:
 
@@ -4165,7 +4206,7 @@ Aplicamos a função resultante ao segundo argumento avaliado:
 
 $$(\lambda y.\;6)\;6 \to_\beta 6$$
 
-O resultado final é $6\,$. Note que ambos os argumentos foram avaliados, embora o segundo argumento não seja utilizado no resultado final. Isso exemplifica como a ordem aplicativa pode desperdiçar recursos ao avaliar argumentos desnecessários.
+O resultado é $6\,$. Note que ambos os argumentos foram avaliados, embora o segundo argumento não seja utilizado no resultado . Isso exemplifica como a ordem aplicativa pode desperdiçar recursos ao avaliar argumentos desnecessários.
 
 **Exemplo 3**: considere a expressão:
 
@@ -4205,7 +4246,7 @@ Aplicamos a função externa ao resultado:
 
 $$(\lambda x.\;x \times x)\;4 \to_\beta 4 \times 4 = 16$$
 
-O resultado final é $16\,$. Neste caso, a ordem aplicativa é eficiente, pois avalia os argumentos necessários e evita reavaliações.
+O resultado é $16\,$. Neste caso, a ordem aplicativa é eficiente, pois avalia os argumentos necessários e evita reavaliações.
 
 A escolha entre ordem aplicativa e ordem normal depende do contexto e das necessidades específicas da computação. Em situações onde todos os argumentos são necessários e podem ser avaliados sem risco de não-terminação, a ordem aplicativa pode ser preferível. No entanto, quando há possibilidade de argumentos não terminarem ou não serem necessários, a ordem normal oferece uma estratégia mais segura.
 
@@ -4397,7 +4438,7 @@ Já o JavaScript usa avaliação estrita. Contudo, oferece suporte à avaliaçã
  ```javascript
  function* naturalNumbers() {
  let n = 0;
- While (true) yield n++;
+ While (True) yield n++;
  }
 
  const gen = naturalNumbers();
@@ -4439,7 +4480,7 @@ Formalmente, a relação $\to_\beta$ é a menor relação de equivalência que s
 
    Esta regra mostra que a equivalência se propaga para as aplicações de funções, mantendo a consistência da equivalência.
 
-É importante notar que a ordem em que as reduções são aplicadas não afeta o resultado final, devido à propriedade de Church-Rosser do cálculo lambda. Isso garante que, independentemente de como o termo é avaliado, se ele tem uma forma normal, a avaliação eventualmente a encontrará.
+É importante notar que a ordem em que as reduções são aplicadas não afeta o resultado , devido à propriedade de Church-Rosser do cálculo lambda. Isso garante que, independentemente de como o termo é avaliado, se ele tem uma forma normal, a avaliação eventualmente a encontrará.
 
 A relação $\to_\beta$ é uma **relação de equivalência**, o que significa que ela possui três propriedades: é uma relação **Reflexiva**. Ou seja, para todo termo $M\,$, temos que $M\to_\beta M\,$. O que significa que qualquer termo é equivalente a si mesmo, o que é esperado; é uma relação **Simétrica**. Isso significa que se $M\to_\beta N\,$, então $N\to_\beta M\,$. Se um termo $M$ pode ser transformado em $N\,$, então o oposto é similarmente verdade. E, finalmente, é uma relação **Transitiva**. Neste caso, se $M\to_\beta N$ e $N\to_\beta P\,$, então $M\to_\beta P\,$. Isso implica que, se podemos transformar $M$ em $N$ e $N$ em $P\,$, então podemos transformar diretamente $M$ em $P\,$.
 
@@ -4576,7 +4617,7 @@ Talvez algumas aplicações em linguagem Haskell ajude a fixar os conceitos.
 
    ```haskell
    -- Antes da otimização
-   let x = (\y -> y + 1)\;5 in x * 2
+   let x = (\y -> $Y$ + 1)\;5 in x * 2
    -- Após a otimização (equivalente)
    let x = 6 in x * 2
    ```
@@ -4676,7 +4717,7 @@ A equivalência Lambda, ainda que seja importante, não resolve todos os problem
 
    main = do
       let x = f1 5
-      y <- x
+      $Y$ <- x
       print y
 
       let z = f2 5
@@ -4759,7 +4800,7 @@ y f = f (y f)
 
 -- Definição da função fatorial usando o Y-combinator
 factorial :: Integer -> Integer
-factorial = y $\f n -> if n == 0 then 1 else n * f (n - 1)
+factorial = $Y$ $\f n -> if n == 0 then 1 else n * f (n - 1)
 
 main :: IO ()
 main = do
@@ -4767,12 +4808,12 @@ main = do
  print $ factorial 10 -- Saída: 3628800
 ```
 
-Neste exemplo, o Y-combinator (y) é usado para criar uma versão recursiva da função fatorial sem a necessidade de defini-la recursivamente de forma explícita. A função factorial é criada aplicando y a uma função que descreve o comportamento do fatorial, mas sem se referir diretamente a si mesma.
+Neste exemplo, o Y-combinator (y) é usado para criar uma versão recursiva da função fatorial sem a necessidade de defini-la recursivamente de forma explícita. A função factorial é criada aplicando $Y$ a uma função que descreve o comportamento do fatorial, mas sem se referir diretamente a si mesma.
 Podemos estender este exemplo para outras funções recursivas, como a sequência de Fibonacci:
 
 ```haskell
 fibonacci :: Integer -> Integer
-fibonacci = y $\f n -> if n <= 1 then n else f (n - 1) + f (n - 2)
+fibonacci = $Y$ $\f n -> if n <= 1 then n else f (n - 1) + f (n - 2)
 
 main :: IO ()
 main = do
@@ -4797,13 +4838,13 @@ Com o combinador $Y\,$, não precisamos declarar explicitamente a recursão. O c
 
 ## 6.2. Exemplo de Função Recursiva: Fatorial
 
-Usando o combinador $Y\,$, podemos definir corretamente a função fatorial no cálculo lambda. O fatorial de um número $n$ é:
+Usando o combinador $Y\,$, podemos definir corretamente a função fatorial no cálculo lambda. O fatorial de um número $n$ será:
 
 $$
 \text{factorial} = Y\;(\lambda f. \lambda n. \text{if}\;(\text{isZero}\;n)\;1\;(\text{mult}\;n\;(f\;(\text{pred}\;n))))
 $$
 
-Aqui, utilizamos funções auxiliares como $\text{isZero}\,$, $\text{mult}$(multiplicação), e $\text{pred}$(predecessor), todas definíveis no cálculo lambda. O combinador $Y$ cuida da recursão, aplicando a função a si mesma até que a condição de parada ($n = 0$) seja atendida. Vamos ver isso com mais detalhes usando o combinador $Y$ para definir $\text{fac}$
+Aqui, utilizamos funções auxiliares como $\text{isZero}\,$, $\text{mult}$ (multiplicação), e $\text{pred}$ (predecessor), todas definíveis no cálculo lambda. O combinador $Y$ cuida da recursão, aplicando a função a si mesma até que a condição de parada ($n = 0$) seja atendida. Vamos ver isso com mais detalhes usando o combinador $Y$ para definir $\text{fac}$
 
 1. **Defina uma função auxiliar que recebe como parâmetro a função recursiva**:
 
@@ -4825,8 +4866,6 @@ O combinador $Y$ aplica $\text{Fac}$ a si mesmo para $\text{fac}$ se expande ind
 
    Vamos calcular $\text{fac}\;2$ usando o combinador Y.
 
-   Combinador Y:
-
    $$Y = \lambda f.\;(\lambda x.\;f\;(x\;x))\;(\lambda x.\;f\;(x\;x))$$
 
    Função Fatorial:
@@ -4839,13 +4878,13 @@ O combinador $Y$ aplica $\text{Fac}$ a si mesmo para $\text{fac}$ se expande ind
 
    $$\text{fatorial} = Y\;(\lambda f.\;\lambda n.\;\text{if}\;(n = 0)\;1\;(n \times (f\;(n - 1))))$$
 
-   Então,
+   Então, teremos:
 
    $$\text{fatorial}\;2 = \left( Y\;(\lambda f.\;\lambda n.\;\ldots) \right)\;2$$
 
    Expandindo o Combinador Y:
 
-   O Combinador Y é definido como:
+   A amável leitora deve lembrar que o Combinador $Y$ é definido como:
 
    $$Y\;g = (\lambda x.\;g\;(x\;x))\;(\lambda x.\;g\;(x\;x))$$
 
@@ -4859,13 +4898,9 @@ O combinador $Y$ aplica $\text{Fac}$ a si mesmo para $\text{fac}$ se expande ind
 
    Aplicando $\text{fatorial}$ a 2
 
-   Agora, calculamos $\text{fatorial}\;2$:
-
    $$\text{fatorial}\;2 = \left( (\lambda x.\;\ldots)\;(\lambda x.\;\ldots) \right)\;2$$
 
    Simplificando as Aplicações:
-
-   Vamos simplificar a expressão passo a passo.
 
    Primeira Aplicação:
 
@@ -4877,7 +4912,7 @@ O combinador $Y$ aplica $\text{Fac}$ a si mesmo para $\text{fac}$ se expande ind
 
    $$\left (\lambda x.\;F\;(x\;x) \right)\;\left (\lambda x.\;F\;(x\;x) \right) \, = F\;\left (\left (\lambda x.\;F\;(x\;x) \right)\;\left (\lambda x.\;F\;(x\;x) \right) \right)$$
 
-   Note que temos uma autorreferência aqui. Vamos denotar:
+   A atenta leitora deve ter notado que temos uma autorreferência:
 
    $$M = \left (\lambda x.\;F\;(x\;x) \right)\;\left (\lambda x.\;F\;(x\;x) \right)$$
 
@@ -4899,7 +4934,7 @@ O combinador $Y$ aplica $\text{Fac}$ a si mesmo para $\text{fac}$ se expande ind
 
    Calculando $M\;1$:
 
-   Precisamos calcular $M\;1\,$, onde $M$ é:
+   Precisamos calcular $M\;1\,$, onde $M$ será:
 
    $$M = \left (\lambda x.\;F\;(x\;x) \right)\;\left (\lambda x.\;F\;(x\;x) \right)$$
 
@@ -4943,7 +4978,7 @@ O combinador $Y$ aplica $\text{Fac}$ a si mesmo para $\text{fac}$ se expande ind
 
    $$\text{fatorial}\;2 = 2 \times 1 = 2$$
 
-   Portanto, o cálculo do fatorial de 2 é:
+   Portanto, o cálculo do fatorial de 2 será:
 
    $$\text{fatorial}\;2 = 2$$
 
@@ -4967,7 +5002,7 @@ O combinador $Y$ aplica $\text{Fac}$ a si mesmo para $\text{fac}$ se expande ind
 
    Calculando $M\;2$:
 
-   Seguindo o mesmo processo:
+   Seguindo o mesmo processo, teremos:
 
    $$M\;2 = F\;M\;2$$
 
@@ -4993,119 +5028,437 @@ O combinador $Y$ aplica $\text{Fac}$ a si mesmo para $\text{fac}$ se expande ind
 
    $$\text{fatorial}\;3 = 3 \times 2 = 6$$
 
-   Portanto, o cálculo do fatorial de 3 é:
+   Portanto, o cálculo do fatorial de 3 será:
 
    $$\text{fatorial}\;3 = 6$$
 
-## 6.3. Usando Funções de Ordem Superior
+### 6.2.1. Função Fatorial Usando Funções de Ordem Superior
 
-Vamos rever o combinador $Y\,$, desta vez, usando funções de ordem superior. Começamos definindo algumas funções de ordem superior.
+Vamos rever o combinador $Y\,$, desta vez, usando funções de ordem superior. Como cada função de ordem superior encapsula um conjunto de abstrações lambda reduzindo o número de reduções-$\beta$ necessário. Começamos definindo algumas funções:
 
-**$\text{isZero}$**:
+1. **$\text{isZero}$**:
 
-$$\text{isZero} = \lambda n.\;n\;(\lambda x.\;\text{false})\;\text{true}$$
+   $$\text{isZero} = \lambda n.\;n\;(\lambda x.\;\text{False})\;\text{True}$$
 
-**$\text{mult}$:**
+   Esta função deve retornar $TRUE$ se for aplicada a $0$ e $False$ para qualquer outro valor. Como podemos ver a seguir: 
+   Vamos avaliar a função $\text{isZero}$ aplicada primeiro ao número zero e depois ao número um para verificar seu funcionamento.
 
-$$\text{mult} = \lambda m.\;\lambda n.\;\lambda f.\;m\;(n\;f)$$
+   1. Aplicando ao zero ($\text{isZero}\;0$):
 
-**$\text{pred}$(Predecessor):**
+      $$\begin{align*}
+      \text{isZero}\;0 &= (\lambda n.\;n\;(\lambda x.\;\text{False})\;\text{True})\;(\lambda s.\lambda z.\;z) \\
+      &\to_\beta (\lambda s.\lambda z.\;z)\;(\lambda x.\;\text{False})\;\text{True} \\
+      &\to_\beta (\lambda z.\;z)\;\text{True} \\
+      &\to_\beta \text{True}
+      \end{align*}$$
 
-$$\text{pred} = \lambda n.\;\lambda f.\;\lambda x.\;n\;(\lambda g.\;\lambda h.\;h\;(g\;f))\;(\lambda u.\;x)\;(\lambda u.\;u)$$
+   2. Aplicando ao um ($\text{isZero}\;1$):
 
-Agora vamos definir a função fatorial usando o Combinador Y e as funções de ordem superior que acabamos de definir:
+      $$\begin{align*}
+      \text{isZero}\;1 &= (\lambda n.\;n\;(\lambda x.\;\text{False})\;\text{True})\;(\lambda s.\lambda z.\;s\;z) \\
+      &\to_\beta (\lambda s.\lambda z.\;s\;z)\;(\lambda x.\;\text{False})\;\text{True} \\
+      &\to_\beta (\lambda z.\;(\lambda x.\;\text{False})\;z)\;\text{True} \\
+      &\to_\beta (\lambda x.\;\text{False})\;\text{True} \\
+      &\to_\beta \text{False}
+      \end{align*}$$
+
+2. **$\text{mult}$:**
+
+   $$\text{mult} = \lambda m.\;\lambda n.\;\lambda f.\;m\;(n\;f)$$
+
+   Esta função deve multiplicar dois números naturais. Podemos ver o resultado da sua aplicação se:
+  
+   1. Substituir $m$ por $2$ e $n$ por $3$
+   2. Avaliar todas as reduções beta
+   3. Verificar se o resultado é $6$ em notação de Church
+
+   Com estas condições satisfeitas, a curiosa leitora pode ver o resultado da aplicação $\text{mult}\; 3\;2$:
+
+   $$\begin{align*}
+   \text{mult}\;2\;3 &= (\lambda m.\;\lambda n.\;\lambda f.\;m\;(n\;f))\;(\lambda s.\;\lambda z.\;s\;(s\;z))\;(\lambda s.\;\lambda z.\;s\;(s\;(s\;z))) \\
+   \\
+   &\text{Primeiro, substituímos $m$ por $2$:} \\
+   &\to_\beta (\lambda n.\;\lambda f.\;(\lambda s.\;\lambda z.\;s\;(s\;z))\;(n\;f))\;(\lambda s.\;\lambda z.\;s\;(s\;(s\;z))) \\
+   \\
+   &\text{Agora, substituímos $n$ por $3$:} \\
+   &\to_\beta \lambda f.\;(\lambda s.\;\lambda z.\;s\;(s\;z))\;((\lambda s.\;\lambda z.\;s\;(s\;(s\;z)))\;f) \\
+   \\
+   &\text{Calculamos $(3\;f)$, que aplica $f$ três vezes:} \\
+   &\to_\beta \lambda f.\;(\lambda s.\;\lambda z.\;s\;(s\;z))\;(\lambda z.\;f\;(f\;(f\;z))) \\
+   \\
+   &\text{Agora aplicamos esta função duas vezes:} \\
+   &\to_\beta \lambda f.\;\lambda z.\;(\lambda z.\;f\;(f\;(f\;z)))\;((\lambda z.\;f\;(f\;(f\;z)))\;z) \\
+   \\
+   &\text{Continuamos as reduções:} \\
+   &\to_\beta \lambda f.\;\lambda z.\;f\;(f\;(f\;(f\;(f\;(f\;z))))) \\
+   \end{align*}$$
+
+   O resultado $\lambda f.\;\lambda z.\;f\;(f\;(f\;(f\;(f\;(f\;z)))))$ é a representação do número $6$ em numerais de Church, mostrando que $2 \times 3 = 6$. A função aplica $f$ exatamente seis vezes ao argumento $z$, que é precisamente a definição do numeral de Church para $6$. Copy
+
+3. **$\text{pred}$ (Predecessor):**
+
+   $$\text{pred} = \lambda n.\;\lambda f.\;\lambda x.\;n\;(\lambda g.\;\lambda h.\;h\;(g\;f))\;(\lambda u.\;x)\;(\lambda u.\;u)$$
+
+   Vamos avaliar a validade da função $\text{pred}$ aplicando a função predecessor de $2$. Esta função deve devolver o número natural imediatamente anterior ao número aplicado. A avaliação envolve várias etapas de redução beta:
+
+   $$\begin{align*}
+   \text{pred}\;2 &= (\lambda n.\;\lambda f.\;\lambda x.\;n\;(\lambda g.\;\lambda h.\;h\;(g\;f))\;(\lambda u.\;x)\;(\lambda u.\;u))\;(\lambda s.\;\lambda z.\;s\;(s\;z)) \\
+   \\
+   &\text{Substituímos $n$ por $2$:} \\
+   &\to_\beta \lambda f.\;\lambda x.\;(\lambda s.\;\lambda z.\;s\;(s\;z))\;(\lambda g.\;\lambda h.\;h\;(g\;f))\;(\lambda u.\;x)\;(\lambda u.\;u) \\
+   \\
+   &\text{Agora aplicamos $2$ à primeira função:} \\
+   &\to_\beta \lambda f.\;\lambda x.\;(\lambda z.\;(\lambda g.\;\lambda h.\;h\;(g\;f))\;((\lambda g.\;\lambda h.\;h\;(g\;f))\;z))\;(\lambda u.\;x)\;(\lambda u.\;u) \\
+   \\
+   &\text{Reduzimos a aplicação interna:} \\
+   &\to_\beta \lambda f.\;\lambda x.\;(\lambda g.\;\lambda h.\;h\;(g\;f))\;(\lambda g.\;\lambda h.\;h\;(g\;f))\;(\lambda u.\;x)\;(\lambda u.\;u) \\
+   \\
+   &\text{Continuamos as reduções:} \\
+   &\to_\beta \lambda f.\;\lambda x.\;(\lambda h.\;h\;((\lambda g.\;\lambda h.\;h\;(g\;f))\;f))\;(\lambda u.\;x)\;(\lambda u.\;u) \\
+   \\
+   &\text{Aplicamos à $(\lambda u.\;x)$:} \\
+   &\to_\beta \lambda f.\;\lambda x.\;(\lambda u.\;x)\;((\lambda g.\;\lambda h.\;h\;(g\;f))\;f)\;(\lambda u.\;u) \\
+   \\
+   &\text{Continuamos reduzindo:} \\
+   &\to_\beta \lambda f.\;\lambda x.\;f\;(f\;x) \\
+   \end{align*}$$
+
+   O resultado $\lambda f.\;\lambda x.\;f\;(f\;x)$ é a representação do número $1$ em numerais de Church, mostrando que o predecessor de $2$ é $1$. A função $\text{pred}$ aplica $f$ exatamente uma vez a menos que o número original, que é precisamente o que desejávamos provar.
+
+Agora vamos definir a função fatorial usando o Combinador $Y$ e as funções de ordem superior que acabamos de definir:
 
 $$\text{fatorial} = Y\;\left (\lambda f.\;\lambda n.\;\text{if}\;(\text{isZero}\;n)\;1\;(\text{mult}\;n\;(f\;(\text{pred}\;n))) \right)$$
 
-**Exemplo 1**: Vamos verificar se $\text{fatorial}\;2 = 2$ usando estas definições.
+**Exemplo 1**: Primeiro relembremos a definição do fatorial usando o combinador de ponto fixo:
 
-  Aplicação da Função:
+   $$\text{fatorial} = Y\;(\lambda f.\;\lambda n.\;\text{if}\;(\text{isZero}\;n)\;1\;(\text{mult}\;n\;(f\;(\text{pred}\;n))))$$
 
-  $$\text{fatorial}\;2 = F\;M\;2$$
+   Agora vamos calcular $\text{fatorial}\;2$ passo a passo:
 
-  Onde $F$ e $M$ são definidos de forma análoga.
+   1. Iniciando com $n = 2$:
 
-  Aplicando $F$ com $n = 2$:
+      $$\text{fatorial}\;2 = \text{if}\;(\text{isZero}\;2)\;1\;(\text{mult}\;2\;(\text{fatorial}\;(\text{pred}\;2)))$$
 
-  $$\text{if}\;(\text{isZero}\;2)\;1\;(\text{mult}\;2\;(M\;(\text{pred}\;2)))$$
+   Vamos detalhar cada passo das reduções:
 
-  Como $\text{isZero}\;2$ é $\text{false}\,$, continuamos:
+   2. Avaliando $\text{isZero}\;2$:
 
-  Calcule $\text{pred}\;2 = 1$
-  Calcule $M\;1$
+     $$\begin{align*}
+     \text{isZero}\;2 &= (\lambda n.\;n\;(\lambda x.\;\text{false})\;\text{true})\;(\lambda s.\lambda z.\;s\;(s\;z)) \\
+     &\to_\beta (\lambda s.\lambda z.\;s\;(s\;z))\;(\lambda x.\;\text{false})\;\text{true} \\
+     &\to_\beta \text{false}
+     \end{align*}$$
 
-  Recursão:
+     Como retornou $\text{false}$, avaliamos:
 
-  $$M\;1 = F\;M\;1$$
+     $$\begin{align*}
+     &= \text{mult}\;2\;(\text{fatorial}\;(\text{pred}\;2)) \\
+     &= \text{mult}\;2\;(\text{fatorial}\;1) \quad \text{(pois mostramos anteriormente que $\text{pred}\;2 = 1$)}
+     \end{align*}$$
 
-  $$\text{fatorial}\;1 = \text{mult}\;1\;(M\;(\text{pred}\;1))$$
+   3. Para $\text{fatorial}\;1$, primeiro avaliamos $\text{isZero}\;1$:
 
-  Caso Base:
+     $$\begin{align*}
+     \text{isZero}\;1 &= (\lambda n.\;n\;(\lambda x.\;\text{false})\;\text{true})\;(\lambda s.\lambda z.\;s\;z) \\
+     &\to_\beta (\lambda s.\lambda z.\;s\;z)\;(\lambda x.\;\text{false})\;\text{true} \\
+     &\to_\beta \text{false}
+     \end{align*}$$
 
-  $$\text{pred}\;1 = 0$$
+     Então calculamos:
 
-  $$\text{isZero}\;0 = \text{true}$$
+     $$\begin{align*}
+     \text{fatorial}\;1 &= \text{mult}\;1\;(\text{fatorial}\;(\text{pred}\;1)) \\
+     &= \text{mult}\;1\;(\text{fatorial}\;0) \quad \text{(pois $\text{pred}\;1 = 0$)}
+     \end{align*}$$
 
-  então,
+   4. Para $\text{fatorial}\;0$, avaliamos $\text{isZero}\;0$:
 
-  $$\text{fatorial}\;0 = 1$$
+     $$\begin{align*}
+     \text{isZero}\;0 &= (\lambda n.\;n\;(\lambda x.\;\text{false})\;\text{true})\;(\lambda s.\lambda z.\;z) \\
+     &\to_\beta (\lambda s.\lambda z.\;z)\;(\lambda x.\;\text{false})\;\text{true} \\
+     &\to_\beta \text{true}
+     \end{align*}$$
 
-  Calculando os Valores:
+     Como retornou $\text{true}$, temos:
+     $$\text{fatorial}\;0 = 1$$
 
-  $$\text{fatorial}\;1 = \text{mult}\;1\;1 = 1$$
+   5. Agora substituímos de volta:
 
-  $$\text{fatorial}\;2 = \text{mult}\;2\;1 = 2$$
+     $$\begin{align*}
+     \text{fatorial}\;1 &= \text{mult}\;1\;(\text{fatorial}\;0) \\
+     &= \text{mult}\;1\;1 \\
+     &= 1 \quad \text{(pela definição de $\text{mult}$)}
+     \end{align*}$$
 
-A função fatorial é um exemplo clássico de recursão. Entretanto, podemos definir uma função de exponenciação, recursiva, para calcular $m^n$:
+     E finalmente:
+
+     $$\begin{align*}
+     \text{fatorial}\;2 &= \text{mult}\;2\;(\text{fatorial}\;1) \\
+     &= \text{mult}\;2\;1 \\
+     &= 2 \quad \text{(pela definição de $\text{mult}$)}
+     \end{align*}$$
+
+Assim, mostramos que $\text{fatorial}\;2 = 2$, mostrando cada passo da recursão e como os valores são calculados de volta até o resultado final.
+A função fatorial é um exemplo clássico de recursão. Mas, não é a única.
+
+Podemos definir uma função de exponenciação recursiva, para calcular $m^n$ usando o cálculo lambda, como:
 
    $$\text{power} = Y\;(\lambda f. \lambda m. \lambda n. \text{if}\;(\text{isZero}\;n)\;1\;(\text{mult}\;m\;(f\;m\;(\text{pred}\;n))))$$
 
-Assim como fizemos no fatorial, o combinador $Y$ permite a definição recursiva sem auto-referência explícita. Mas, esta demonstração ficará a cargo da persistente leitora.
+Assim como fizemos no fatorial, o combinador $Y$ irá permitir a definição recursiva sem auto-referência explícita. Vamos calcular $2^2$ usando a função $\text{power}$ detalhando cada redução. Começamos aplicando $\text{power}\;2\;2$:
 
-## 6.4. Representação de Valores e Computações
+   1. Primeira aplicação ($n = 2$):
 
-Uma das características principais do cálculo lambda é representar valores, dados e computações complexas, usando exclusivamente funções. Até números e _booleanos_ são representados de forma funcional. Um exemplo indispensável é a representação dos números naturais, chamada **Numerais de Church**:
+     $$\begin{align*}
+     \text{power}\;2\;2 &= \text{if}\;(\text{isZero}\;2)\;1\;(\text{mult}\;2\;(\text{power}\;2\;(\text{pred}\;2))) \\
+     \\
+     \text{isZero}\;2 &= (\lambda n.\;n\;(\lambda x.\;\text{false})\;\text{true})\;(\lambda s.\lambda z.\;s\;(s\;z)) \\
+     &\to_\beta (\lambda s.\lambda z.\;s\;(s\;z))\;(\lambda x.\;\text{false})\;\text{true} \\
+     &\to_\beta \text{false}
+     \end{align*}$$
 
-$$
-\begin{align*}
-0 &= \lambda s.\;\lambda z.\;z \\
-1 &= \lambda s.\;\lambda z.\;s\;z \\
-2 &= \lambda s.\;\lambda z. s\;(s\;z) \\
-3 &= \lambda s.\;\lambda z.\;s\;(s (s\;z))
-\end{align*}
-$$
+     Como $\text{isZero}\;2$ retorna $\text{false}$, continuamos:
 
-Voltaremos a esta notação mais tarde. O importante é que essa codificação permite que operações aritméticas sejam definidas inteiramente em termos de funções. Por exemplo, a função sucessor pode ser expressa como:
+     $$= \text{mult}\;2\;(\text{power}\;2\;(\text{pred}\;2))$$
 
-$$
-\text{succ} = \lambda n.\;\lambda s.\;\lambda z.\;s\;(n\;s\;z)
-$$
+   2. Calculando $\text{pred}\;2$:
 
-Assim, operações como adição e multiplicação podem ser construídas de funcionalmente, respeitando a estrutura do cálculo lambda.
+     $$\begin{align*}
+     \text{pred}\;2 &\to_\beta 1 \quad \text{(como mostramos anteriormente)}
+     \end{align*}$$
 
-Um dos resultados mais profundos da formalização da computabilidade, utilizando o cálculo lambda e as máquinas de Turing, foi a identificação de problemas _indecidíveis_. Problemas para os quais não podemos decidir se o algoritmo que os resolve irá parar em algum ponto, ou não.
+   3. Segunda aplicação ($n = 1$):
 
-O exemplo mais emblemático é o Problema da Parada, formulado por Alan Turing em 1936. O Problema da Parada questiona se é possível construir um algoritmo que, dado qualquer programa e uma entrada, determine se o programa eventualmente terminará ou continuará a executar indefinidamente. Em termos formais, essa questão pode ser expressa como:
+     $$\begin{align*}
+     \text{power}\;2\;1 &= \text{if}\;(\text{isZero}\;1)\;1\;(\text{mult}\;2\;(\text{power}\;2\;(\text{pred}\;1))) \\
+     \\
+     \text{isZero}\;1 &= (\lambda n.\;n\;(\lambda x.\;\text{false})\;\text{true})\;(\lambda s.\lambda z.\;s\;z) \\
+     &\to_\beta (\lambda s.\lambda z.\;s\;z)\;(\lambda x.\;\text{false})\;\text{true} \\
+     &\to_\beta \text{false}
+     \end{align*}$$
 
-$$
-\exists f : \text{Programa} \times \text{Entrada} \rightarrow \{\text{Para}, \text{NãoPara}\}?
-$$
+     Como $\text{isZero}\;1$ retorna $\text{false}$, continuamos:
 
-Turing demonstrou, por meio de um argumento de diagonalização, que tal função $f$ não pode existir. Esse resultado mostra que não é possível determinar, de forma algorítmica, o comportamento de todos os programas para todas as possíveis entradas..
+     $$= \text{mult}\;2\;(\text{power}\;2\;(\text{pred}\;1))$$
 
-Outro problema indecidível, elucidado pelas descobertas em computabilidade, é o _décimo problema de Hilbert_. Esse problema questiona se existe um algoritmo que, dado um polinômio com coeficientes inteiros, possa determinar se ele possui soluções inteiras. Formalmente, o problema pode ser expresso assim:
+   4. Calculando $\text{pred}\;1$:
 
-$$
-P(x_1, x_2, \dots, x_n) \, = 0
-$$
+     $$\begin{align*}
+     \text{pred}\;1 &\to_\beta 0
+     \end{align*}$$
 
->Os problemas de Hilbert são uma lista de 23 problemas matemáticos propostos por David Hilbert em 1900, durante o Congresso Internacional de Matemáticos em Paris. Esses problemas abordam questões em várias áreas da matemática e estimularam muitas descobertas ao longo do século XX. Cada problema visava impulsionar a pesquisa e delinear os desafios mais importantes da matemática da época. Alguns dos problemas foram resolvidos, enquanto outros permanecem abertos ou foram provados como indecidíveis, como o **décimo problema de Hilbert**, que pergunta se existe um algoritmo capaz de determinar se um polinômio com coeficientes inteiros possui soluções inteiras.
+   5. Terceira aplicação ($n = 0$):
 
-Em 1970, [Yuri Matiyasevich] \ ,(Yuri Matiyasevich), em colaboração com [Julia Robinson](https://en.wikipedia.org/wiki/Julia_Robinson), [Martin Davis] \ ,(<https://en.wikipedia.org/wiki/Martin_Davis_(mathematician)>) e [Hilary Putnam](https://en.wikipedia.org/wiki/Hilary_Putnam), provou que tal algoritmo não existe. Esse resultado teve implicações profundas na teoria dos números e demonstrou a indecidibilidade de um problema central na matemática.
+     $$\begin{align*}
+     \text{power}\;2\;0 &= \text{if}\;(\text{isZero}\;0)\;1\;(\text{mult}\;2\;(\text{power}\;2\;(\text{pred}\;0))) \\
+     \\
+     \text{isZero}\;0 &= (\lambda n.\;n\;(\lambda x.\;\text{false})\;\text{true})\;(\lambda s.\lambda z.\;z) \\
+     &\to_\beta (\lambda s.\lambda z.\;z)\;(\lambda x.\;\text{false})\;\text{true} \\
+     &\to_\beta \text{true}
+     \end{align*}$$
 
-A equivalência entre o cálculo lambda, as máquinas de Turing e as funções recursivas permitiu estabelecer os limites da computação algorítmica. O Problema da Parada e outros resultados indecidíveis, como o décimo problema de Hilbert, mostraram que existem problemas além do alcance dos algoritmos.
+     Como $\text{isZero}\;0$ retorna $\text{true}$:
 
-A **Tese de Church-Turing** formalizou essa ideia, afirmando que qualquer função computável pode ser expressa por um dos modelos computacionais mencionados, Máquina de Turing, recursão e o cálculo lambda[^cita6]. Essa tese forneceu a base rigorosa necessária ao desenvolvimento da Ciência da Computação, permitindo a demonstração da existência de problemas não solucionáveis por algoritmos.
+     $$\text{power}\;2\;0 = 1$$
+
+   6. Substituindo de volta:
+
+     $$\begin{align*}
+     \text{power}\;2\;1 &= \text{mult}\;2\;(\text{power}\;2\;0) \\
+     &= \text{mult}\;2\;1 \\
+     &\to_\beta 2
+     \end{align*}$$
+
+     E finalmente:
+
+     $$\begin{align*}
+     \text{power}\;2\;2 &= \text{mult}\;2\;(\text{power}\;2\;1) \\
+     &= \text{mult}\;2\;2 \\
+     &\to_\beta 4
+     \end{align*}$$
+
+Assim, mostramos que $\text{power}\;2\;2 = 4$, ou seja, $2^2 = 4$ em números de Church.
+
+## 6.3. A Função de Ackermann
+
+A Função de [Ackermann](https://en.wikipedia.org/wiki/Wilhelm_Ackermann), $\phi$, definida em cálculo lambda usando o combinador Y, ocupa uma posição singular na teoria da computação. Ela foi descoberta durante as investigações sobre computabilidade no início do século XX, quando matemáticos buscavam entender os limites do que poderia ser calculado mecanicamente. No cálculo lambda, ela é expressa como:
+
+$$\text{Ack} = Y\;(\lambda f.\;\lambda m.\;\lambda n.\;\text{if}\;(\text{isZero}\;m)\;(\text{succ}\;n)\;(\text{if}\;(\text{isZero}\;n)\;(f\;(\text{pred}\;m)\;1)\;(f\;(\text{pred}\;m)\;(f\;m\;(\text{pred}\;n)))))$$
+
+Sua importância é devida porque esta Função de Ackermann foi a primeira função demonstrada ser computável, porém não primitiva recursiva. As funções recursivas primitivas eram consideradas suficientes para expressar qualquer cálculo matemático prático, pois incluíam operações básicas como adição, multiplicação, exponenciação e suas generalizações.
+
+>Funções recursivas primitivas são uma classe de funções que podem ser construídas a partir de funções básicas usando apenas composição e recursão primitiva. Sem muita profundidade, podemos definir as funções recursivas primitivas são funções que podem ser computadas usando apenas laços _For_.
+>
+>Formalmente, começamos com:
+>
+>1. A função sucessor: $S(n) = n + 1$
+>2. A função zero constante: $Z(n) = 0$
+>3. As funções de projeção: $P^n_i(x_1,...,x_n) = x_i$
+>
+>E então permitimos duas operações para construir novas funções:
+>
+>1. **Composição**: Se $g$ é uma função de $k$ variáveis e $h_1,...,h_k$ são funções de $n$ variáveis, então podemos formar:
+>
+>  $$f(x_1,...,x_n) = g(h_1(x_1,...,x_n),...,h_k(x_1,...,x_n))$$
+>
+>2. **Recursão Primitiva**: Se $g$ é uma função de $n$ variáveis e $h$ é uma função de $n+2$ variáveis, então podemos definir $f$ por:
+>
+>  $$\begin{align*}
+     f(x_1,...,x_n,0) &= g(x_1,...,x_n) \\
+     f(x_1,...,x_n,y+1) &= h(x_1,...,x_n,y,f(x_1,...,x_n,y))
+   \end{align*}$$
+>
+>Usando estas regras, podemos construir funções como:
+>- Adição: $a + b$ (usando recursão em $b$ com $g(a) = a$ e $h(a,b,c) = S(c)$)
+>- Multiplicação: $a \times b$ (usando recursão em $b$ com $g(a) = 0$ e $h(a,b,c) = c + a$)
+>- Exponenciação: $a^b$ (usando recursão em $b$ com $g(a) = 1$ e $h(a,b,c) = c \times a$)Vamos detalhar cada uma destas construções:
+>
+>1. Para a adição $a + b$:
+>  - Fazemos recursão em $b$
+>  - O caso base $g(a) = a$ significa que $a + 0 = a$
+>  - No passo recursivo, $h(a,b,c) = S(c)$ onde $c$ é o resultado de $a + b$, significa que:
+>
+>  $$\begin{align*}
+>  a + (b+1) &= S(a + b)
+>  \end{align*}$$
+>  
+>2. Para a multiplicação $a \times b$:
+>  - Fazemos recursão em $b$
+>  - O caso base $g(a) = 0$ significa que $a \times 0 = 0$
+>  - No passo recursivo, $h(a,b,c) = c + a$ onde $c$ é o resultado de $a \times b$, significa que:
+>
+>  $$\begin{align*}
+>  a \times (b+1) &= (a \times b) + a
+>  \end{align*}$$
+>
+>3. Para a exponenciação $a^b$:
+>  - Fazemos recursão em $b$
+>  - O caso base $g(a) = 1$ significa que $a^0 = 1$
+>  - No passo recursivo, $h(a,b,c) = c \times a$ onde $c$ é o resultado de $a^b$, significa que:
+>
+>  $$\begin{align*}
+>  a^{b+1} &= a^b \times a
+>  \end{align*}$$
+
+A função de Ackermann é significativa por demonstrar os limites das funções recursivas primitivas. Ela possui duas propriedades cruciais:
+
+1. **Crescimento Ultra-Rápido**:
+
+  - Para qualquer função primitiva recursiva $f(n)$, existe algum $k$ onde $A(2,k)$ cresce mais rapidamente que $f(n)$
+
+  - Por exemplo, $A(4,2)$ já é um número tão grande que excede a quantidade de átomos no universo observável
+
+2. **Recursão Não-Primitiva**:
+
+  - Em funções recursivas primitivas, o valor recursivo $f(x_1,...,x_n,y)$ só pode aparecer como último argumento de $h$
+
+  - A Ackermann usa o valor recursivo para gerar novos valores recursivos. Por exemplo:
+
+  $$\begin{align*}
+  A(m,n) &= n + 1 &\text{se } m = 0 \\
+  A(m,n) &= A(m-1,1) &\text{se } m > 0 \text{ e } n = 0 \\
+  A(m,n) &= A(m-1,A(m,n-1)) &\text{se } m > 0 \text{ e } n > 0
+  \end{align*}$$
+  
+Este resultado demonstra que existem funções computáveis que não podem ser capturadas pelo esquema de recursão primitiva, motivando definições mais gerais de computabilidade como as Máquinas de Turing. Esta descoberta estabeleceu uma hierarquia de funções computáveis, onde funções como fatorial e exponenciação ocupam níveis relativamente baixos, enquanto a função de Ackermann transcende toda esta hierarquia. Em termos práticos, sua implementação em cálculo lambda serve como um teste rigoroso para sistemas que lidam com recursão profunda, pois mesmo valores pequenos como $\text{Ack}\;4\;2$ geram números astronomicamente grandes. Isto a torna uma ferramenta valiosa para testar otimizações de compiladores e explorar os limites práticos da computação recursiva. 
+
+A Função de Ackermann:
+
+$$\text{Ack} = Y\;(\lambda f.\;\lambda m.\;\lambda n.\;\text{if}\;(\text{isZero}\;m)\;(\text{succ}\;n)\;(\text{if}\;(\text{isZero}\;n)\;(f\;(\text{pred}\;m)\;1)\;(f\;(\text{pred}\;m)\;(f\;m\;(\text{pred}\;n)))))$$
+
+É composta por:  
+
+1. **Estrutura Base**:
+
+  $$\text{Ack} = Y\;(\lambda f.\;\lambda m.\;\lambda n.\;[\text{expressão}])$$
+
+  Onde: $Y$ é o combinador de ponto fixo que permite a recursão; $f$ é a própria função (recursão) e $m$ e $n$ são os argumentos da função
+
+2. **Primeiro Caso** (quando $m = 0$):
+
+  $$\text{if}\;(\text{isZero}\;m)\;(\text{succ}\;n)$$
+
+  Onde: se $m = 0$, retorna $n + 1$
+  
+  Exemplo: $\text{Ack}(0,n) = n + 1$
+
+3. **Segundo Caso** (quando $m > 0$ e $n = 0$):
+
+   $$\text{if}\;(\text{isZero}\;n)\;(f\;(\text{pred}\;m)\;1)$$
+  
+   Onde: se $n = 0$, calcula $\text{Ack}(m-1,1)$
+
+   Exemplo: $\text{Ack}(m,0) = \text{Ack}(m-1,1)$
+
+4. **Terceiro Caso** (quando $m > 0$ e $n > 0$):
+
+   $$f\;(\text{pred}\;m)\;(f\;m\;(\text{pred}\;n))$$
+
+   Aqui calculamos $\text{Ack}(m-1,\text{Ack}(m,n-1))$
+   É uma recursão dupla:
+      1. Calcula $\text{Ack}(m,n-1)$ internamente
+      2. Usa esse resultado como segundo argumento para $\text{Ack}(m-1,\_)$
+
+5. **Funções Auxiliares**:
+  - $\text{isZero}$: testa se um número é zero
+  - $\text{pred}$: retorna o predecessor de um número
+  - $\text{succ}$: retorna o sucessor de um número
+
+As funções $\text{isZero}$ e $\text{pred}$ foram estudadas anteriormente, falta $\text{succ}$.
+
+   $$\text{succ} = \lambda n.\lambda f.\lambda x.f(n\;f\;x)$$
+
+Aqui temos: $n$ é um número de Church ($\lambda f.\lambda x.f^n(x)$) e o resultado será o resultado será o número de Church imediatamente posterior a $n$, representando $n + 1$. Para entender esta função vamos realizar a redução completa de $\text{succ}\;2$, onde $2 = \lambda f.\lambda x.f(f(x))$:
+
+   $$\begin{align*}
+   \text{succ}\;2 &= (\lambda n.\lambda f.\lambda x.f(n\;f\;x))\;(\lambda f.\lambda x.f(f(x))) \\
+   &\rightarrow_\beta \lambda f.\lambda x.f((\lambda f.\lambda x.f(f(x)))\;f\;x) \\
+   &\rightarrow_\beta \lambda f.\lambda x.f((\lambda x.f(f(x)))\;x) \\
+   &\rightarrow_\beta \lambda f.\lambda x.f(f(f(x))) \\
+   \end{align*}$$
+
+O resultado $\lambda f.\lambda x.f(f(f(x)))$ é a representação de Church do número $3$, o número imediatamente posterior a $2$. Se a curiosa leitora desejar, pode verificar que este é realmente o número $3$, se aplicá-lo a qualquer função $f$ e argumento $x$:
+
+$$(\lambda f.\lambda x.f(f(f(x))))\;g\;a \rightarrow_\beta^* g(g(g(a)))$$
+
+Finalmente podemos fazer uma aplicação da Função de Ackermann usando apenas cálculo lambda puro:
+
+Vamos calcular $\text{Ack}(1,1)$ usando cálculo lambda puro. Para clareza, usaremos a seguinte notação: números de Church: $\underline{n}$ representa o número $n$; $Y$ é o combinador de ponto fixo e omitiremos algumas reduções do $Y$ por clareza.
+
+   $$\begin{align*}
+   \text{Ack}(1,1) &= Y\;(\lambda f.\;\lambda m.\;\lambda n.\;\text{if}\;(\text{isZero}\;m)\;(\text{succ}\;n)\;(\text{if}\;(\text{isZero}\;n)\;(f\;(\text{pred}\;m)\;\underline{1})\;(f\;(\text{pred}\;m)\;(f\;m\;(\text{pred}\;n)))))\;\underline{1}\;\underline{1} \\
+   &\rightarrow_\beta \text{if}\;(\text{isZero}\;\underline{1})\;(\text{succ}\;\underline{1})\;(\text{if}\;(\text{isZero}\;\underline{1})\;(\text{Ack}\;(\text{pred}\;\underline{1})\;\underline{1})\;(\text{Ack}\;(\text{pred}\;\underline{1})\;(\text{Ack}\;\underline{1}\;(\text{pred}\;\underline{1})))) \\
+   &\rightarrow_\beta \text{if}\;(\text{false})\;(\text{succ}\;\underline{1})\;(\text{if}\;(\text{false})\;(\text{Ack}\;\underline{0}\;\underline{1})\;(\text{Ack}\;\underline{0}\;(\text{Ack}\;\underline{1}\;\underline{0}))) \\
+   &\rightarrow_\beta \text{Ack}\;\underline{0}\;(\text{Ack}\;\underline{1}\;\underline{0}) \\
+   &\rightarrow_\beta \text{Ack}\;\underline{0}\;(\text{Ack}\;\underline{0}\;\underline{1}) \\
+   &\rightarrow_\beta \text{Ack}\;\underline{0}\;(\text{succ}\;\underline{1}) \\
+   &\rightarrow_\beta \text{Ack}\;\underline{0}\;\underline{2} \\
+   &\rightarrow_\beta \text{succ}\;\underline{2} \\
+   &\rightarrow_\beta \underline{3}
+   \end{align*}$$
+
+Portanto, $\text{Ack}(1,1) = 3$. A observadora leitora de perceber que: o primeiro argumento $m = 1$ é não-zero, então avaliamos o segundo `if`; o segundo argumento $n = 1$ é não-zero, então calculamos $\text{Ack}(0,\text{Ack}(1,0))$; $\text{Ack}(1,0)$ reduz para $\text{Ack}(0,1)$ que reduz para $2$. Finalmente, $\text{Ack}(0,2)$ reduz para $3$
+
+Sem usar a notação de números de Church, é possível simplificar a Função de Ackermann:
+
+   $$\begin{align*}
+   \text{Ack} = Y\;(&\lambda f.\;\lambda m.\;\lambda n.\\
+   &\lambda s.\;\lambda z.\\
+   &m\;(\lambda x.n\;(\lambda y.f\;x\;(f\;m\;y\;s\;z)\;s\;z)\;(\lambda y.f\;x\;(\lambda s.\lambda z.z)\;s\;z))\;(\lambda x.n\;s\;z))
+   \end{align*}$$
+
+Onde: $Y$ é o combinador de ponto fixo $\lambda f.(\lambda x.f(x\;x))(\lambda x.f(x\;x))$; cada número $n$ é representado como $\lambda s.\lambda z.s^n(z)$; o teste $\text{isZero}$ está embutido em $m$ e $n$ através da aplicação de booleanos de Church; a redução de $\text{pred}$ acontece naturalmente na aplicação $x$ dentro de $m$; finalmente, o $\text{succ}$ está representado pela própria aplicação de $s$;
+
+Por exemplo, para $\text{Ack}(1,1)$:
+
+   $$\begin{align*}
+   \text{Ack}\;&(\lambda s.\lambda z.s(z))\;(\lambda s.\lambda z.s(z)) \\
+   &\rightarrow_\beta^* \lambda s.\lambda z.s(s(s(z)))
+   \end{align*}$$
+
+Esta é a forma onde cada operação é reduzida aos seus elementos mais básicos de abstração e aplicação.
+
+A capacidade do cálculo lambda de expressar a função de Ackermann usando apenas funções anônimas e o combinador Y demonstra sua completude computacional de uma forma que vai além das meras definições recursivas de operações aritméticas básicas. Ela mostra que mesmo funções que transcendem a recursão primitiva podem ser expressas no minimalismo do cálculo lambda.
 
 # 7. Estruturas de Dados Simples
 
@@ -5129,7 +5482,7 @@ Agora podemos explorar os números de Church.
 
 Os números de Church são uma representação elegante dos números naturais no cálculo lambda puro. Essa representação além de permitir a codificação dos números naturais, permite a implementação de operações aritméticas.
 
-A ideia central dos números de Church é representar o número $n$ como uma função $f\,$. Essa função aplica outra função $f$ $n$ vezes a um argumento $x\,$. Formalmente, o número de Church para $n$ é:
+A ideia central dos números de Church é representar o número $n$ como uma função $f\,$. Essa função aplica outra função $f$ $n$ vezes a um argumento $x\,$. Formalmente, o número de Church para $n$ será:
 
 $$n = \lambda s. \lambda z.\;s^n\;(z)$$
 
@@ -5309,7 +5662,7 @@ Para manipular esses números, precisamos de funções de sucessor e predecessor
 
 $$\text{succ} = \lambda n. \lambda s. \lambda p.\;s\;(n\;s\;p)$$
 
-A função de predecessor, que decrementa um número, é:
+A função de predecessor, que decrementa um número, será:
 
 $$\text{pred} = \lambda n. \lambda s. \lambda p. p\;(n\;s\;p)$$
 
@@ -5354,7 +5707,7 @@ Agora, podemos definir a função de divisão com o combinador $Y\,$. Primeiro, 
 
 $$\text{divLogic} = \lambda f. \lambda m. \lambda n. \lambda s. \lambda z.\;\text{ifZero}\;(\text{sub}\;m\;n)\;z\;(\lambda q. \text{succ}\;(f\;(\text{sub}\;m\;n)\;n\;s\;z))$$
 
-Aplicamos o combinador Y para permitir a recursão:
+Aplicamos o combinador $Y$ para permitir a recursão:
 
 $$\text{div} = Y\;\text{divLogic}$$
 
@@ -5601,7 +5954,7 @@ Vamos avaliar uma conjunção aplicada a dois verdadeiros, usando funções nome
    \\
    &\text{Esta é exatamente a definição de $\text{False}$ no cálculo lambda.} \\
    \\
-   &\text{Portanto, o resultado final é:} \\
+   &\text{Portanto, o resultado será:} \\
    &= \text{False}
    \end{align*}
    $$
@@ -5638,16 +5991,16 @@ A insistente leitora pode avaliar a conjunção usando unicamente o cálculo lam
    &\text{Neste ponto, temos uma função que sempre retorna $\text{False}\,$, já que $\text{True}$ ignora o segundo argumento.} \\
    \\
    &\text{Aplicamos a última redução beta, que retorna diretamente $\text{False}$:} \\
-   &\to_\beta \lambda x.\; \lambda y.\; y \\
+   &\to_\beta \lambda x.\; \lambda y.\; $Y$ \\
    \\
    &\text{Esta é exatamente a definição de $\text{False}$ no cálculo lambda.} \\
    \\
-   &\text{Portanto, o resultado final é:} \\
+   &\text{Portanto, o resultado será:} \\
    &= \text{False}
    \end{align*}
    $$
 
-### 7.2..3. Disjunção
+### 7.2.3. Disjunção
 
 A operação de **disjunção** retorna _True_ se pelo menos um dos operandos for _True_ em obediência a Tabela Verdade 19.1.1.C.
 
@@ -5697,7 +6050,7 @@ Vamos refazer esta mesma aplicação, porém em cálculo lambda puro:
    \\
    &\text{Neste ponto, a função resultante é $\lambda y.\; y\,$, que é a definição de $\text{False}\,$.} \\
    \\
-   &\text{Portanto, o resultado final é:} \\
+   &\text{Portanto, o resultado será:} \\
    &= \text{False}
    \end{align*}
    $$
@@ -5757,7 +6110,7 @@ Para manter a tradição, vamos ver esta aplicação em cálculo lambda puro:
    &\text{Finalmente, aplicamos a última redução beta, que retorna $\text{True}$ $(\lambda x.\; \lambda y.\; x)$:} \\
    &= \lambda x.\; \lambda y.\; x \\
    \\
-   &\text{Portanto, o resultado final é $\text{True}\,$.}
+   &\text{Portanto, o resultado é $\text{True}\,$.}
    \end{align*}
    $$
 
@@ -5799,7 +6152,7 @@ Novamente podemos ver uma aplicação da implicação usando funções nomeadas:
    \\
    &\text{Neste ponto, o resultado é $\text{False}$ $(\lambda x.\; \lambda y.\; y)\,$.} \\
    \\
-   &\text{Portanto, o resultado final é:} \\
+   &\text{Portanto, o resultado será:} \\
    &= \text{False}
    \end{align*}$$
 
@@ -5821,9 +6174,9 @@ E, ainda mantendo a tradição, vamos ver a mesma aplicação em cálculo lambda
    &\to_\beta \lambda y.\; (\lambda x.\; \lambda y.\; y) \\
    \\
    &\text{Aplicamos a última redução beta, resultando em $\text{False}$ $(\lambda x.\; \lambda y.\; y)$:} \\
-   &\to_\beta \lambda x.\; \lambda y.\; y \\
+   &\to_\beta \lambda x.\; \lambda y.\; $Y$ \\
    \\
-   &\text{Portanto, o resultado final é:} \\
+   &\text{Portanto, o resultado será:} \\
    &= \text{False}
    \end{align*}$$
 
@@ -5840,10 +6193,10 @@ Vamos aplicar a estrutura condicional para a expressão em dois casos distintos:
 1. Aplicação de _IF-THEN-ELSE_ a _True_ $x$ $y$
 
    $$\begin{align*}
-   \text{IF-THEN-ELSE}\;\text{True}\;x\;y &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; x)\; x\; y \\
+   \text{IF-THEN-ELSE}\;\text{True}\;x\;y &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; x)\; x\; $Y$ \\
    \\
    &\text{Substituímos $\text{True}$ e $\text{IF-THEN-ELSE}$ por suas definições em cálculo lambda:} \\
-   &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; x)\; x\; y \\
+   &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; x)\; x\; $Y$ \\
    \\
    &\text{Aplicamos a primeira redução beta, substituindo $b$ por $\text{True}$ $(\lambda x.\; \lambda y.\; x)$:} \\
    &\to_\beta (\lambda x.\; \lambda y.\; (\lambda x.\; \lambda y.\; x)\; x\; y) \\
@@ -5858,10 +6211,10 @@ Vamos aplicar a estrutura condicional para a expressão em dois casos distintos:
    Outra vez, para não perder o hábito, vamos ver esta mesma aplicação em Cálculo Lambda Puro:
 
    $$\begin{align*}
-   \text{IF-THEN-ELSE}\;\text{True}\;x\;y &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; x)\; x\; y \\
+   \text{IF-THEN-ELSE}\;\text{True}\;x\;y &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; x)\; x\; $Y$ \\
    \\
    &\text{Substituímos $\text{True}$ e $\text{IF-THEN-ELSE}$ por suas definições:} \\
-   &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; x)\; x\; y \\
+   &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; x)\; x\; $Y$ \\
    \\
    &\text{Aplicamos a primeira redução beta, substituindo $b$ por $\text{True}$ $(\lambda x.\; \lambda y.\; x)$:} \\
    &\to_\beta (\lambda x.\; \lambda y.\; (\lambda x.\; \lambda y.\; x)\; x\; y) \\
@@ -5876,10 +6229,10 @@ Vamos aplicar a estrutura condicional para a expressão em dois casos distintos:
 2. Aplicação de _IF-THEN-ELSE_ a _False_ $x$ $y$
 
    $$\begin{align*}
-   \text{IF-THEN-ELSE}\;\text{False}\;x\;y &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; y)\; x\; y \\
+   \text{IF-THEN-ELSE}\;\text{False}\;x\;y &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; y)\; x\; $Y$ \\
    \\
    &\text{Substituímos $\text{False}$ e $\text{IF-THEN-ELSE}$ por suas definições em cálculo lambda:} \\
-   &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; y)\; x\; y \\
+   &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; y)\; x\; $Y$ \\
    \\
    &\text{Aplicamos a primeira redução beta, substituindo $b$ por $\text{False}$ $(\lambda x.\; \lambda y.\; y)$:} \\
    &\to_\beta (\lambda x.\; \lambda y.\; (\lambda x.\; \lambda y.\; y)\; x\; y) \\
@@ -5894,10 +6247,10 @@ Vamos aplicar a estrutura condicional para a expressão em dois casos distintos:
    Eu sei que a amável leitora não esperava por essa. Mas, eu vou refazer esta aplicação em cálculo lambda puro.
 
    $$\begin{align*}
-   \text{IF-THEN-ELSE}\;\text{False}\;x\;y &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; y)\; x\; y \\
+   \text{IF-THEN-ELSE}\;\text{False}\;x\;y &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; y)\; x\; $Y$ \\
    \\
    &\text{Substituímos $\text{False}$ e $\text{IF-THEN-ELSE}$ por suas definições:} \\
-   &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; y)\; x\; y \\
+   &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; y)\; x\; $Y$ \\
    \\
    &\text{Aplicamos a primeira redução beta, substituindo $b$ por $\text{False}$ $(\lambda x.\; \lambda y.\; y)$:} \\
    &\to_\beta (\lambda x.\; \lambda y.\; (\lambda x.\; \lambda y.\; y)\; x\; y) \\
@@ -6110,7 +6463,7 @@ Afirmamos anteriormente que o cálculo lambda é um modelo de computação compl
    &\to_\beta (\lambda b.\;(\lambda e.\;\lambda f.\;e))\;((\lambda c.\;\lambda d.\;d)\;(\lambda e.\;\lambda f.\;e)) \\
    &\to_\beta \lambda e.\;\lambda f.\;e \\
    \\
-   &\text{O resultado final é equivalente a True.}
+   &\text{O resultado é equivalente a True.}
    \end{align*}$$
 
 **10**: Calcule a expressão $((P \rightarrow P) \rightarrow P) \rightarrow P$ onde $P$ é verdadeiro, em cálculo lambda puro.
@@ -6138,7 +6491,7 @@ Afirmamos anteriormente que o cálculo lambda é um modelo de computação compl
    &\to_\beta \lambda b.\;\lambda q.\;(\lambda p.\;\lambda q.\;p) \\
    &\to_\beta \lambda b.\;\lambda q.\;\lambda q'.\;q \\
    \\
-   &\text{O resultado final é equivalente a True.}
+   &\text{O resultado é equivalente a True.}
    \end{align*}$$
 
 **11**: Calculando o valor absoluto de um número. Avalie $\text{ABS} \; x$ onde $x = -5\,$, utilizando uma definição em cálculo lambda com $\text{IF-THEN-ELSE}\,$.
@@ -6164,7 +6517,7 @@ Afirmamos anteriormente que o cálculo lambda é um modelo de computação compl
    &\to_\beta \lambda y.\;(-(-5)) \\
    &= 5 \\
    \\
-   &\text{O resultado final é 5.}
+   &\text{O resultado é 5.}
    \end{align*}$$
 
 **12**: Verificando se um número é par. Calcule $\text{IS-EVEN} \; x$ onde $x = 4\,$, utilizando uma definição em cálculo lambda com $\text{IF-THEN-ELSE}\,$.
@@ -6185,7 +6538,7 @@ Afirmamos anteriormente que o cálculo lambda é um modelo de computação compl
    &\to_\beta (\lambda x.\;\lambda y.\;x)\;(\text{TRUE})\;(\text{FALSE}) \\
    &\to_\beta \lambda y.\;(\text{TRUE}) \\
    \\
-   &\text{O resultado final é TRUE.}
+   &\text{O resultado é TRUE.}
    \end{align*}$$
 
 **13**: Calculando o máximo de dois números. Calcule $\text{MAX} \; x \; y$ onde $x = 7$ e $y = 10\,$, utilizando uma definição em cálculo lambda com $\text{IF-THEN-ELSE}\,$.
@@ -6206,7 +6559,7 @@ Afirmamos anteriormente que o cálculo lambda é um modelo de computação compl
    &\to_\beta (\lambda x.\;\lambda y.\;y)\;7\;10 \\
    &\to_\beta \lambda y.\;10 \\
    \\
-   &\text{O resultado final é 10.}
+   &\text{O resultado é 10.}
    \end{align*}$$
 
 **14**: Calculando o sinal de um número. Calcule $\text{SIGN} \; x$ onde $x = -8\,$, utilizando uma definição em cálculo lambda com $\text{IF-THEN-ELSE}\,$.
@@ -6227,7 +6580,7 @@ Afirmamos anteriormente que o cálculo lambda é um modelo de computação compl
    &\to_\beta (\lambda x.\;\lambda y.\;x)\;(-1)\;((\lambda b.\;\lambda x.\;\lambda y.\;b\;x\;y)\;(\text{FALSE})\;0\;1) \\
    &\to_\beta \lambda y.\;(-1) \\
    \\
-   &\text{O resultado final é -1.}
+   &\text{O resultado é -1.}
    \end{align*}$$
 
 **15**: Verificando se um número está dentro de um intervalo. Calcule $\text{IN-RANGE} \; x \; \text{LOW} \; \text{HIGH}$ onde $x = 5\,$, $\text{LOW} = 3$ e $\text{HIGH} = 7\,$, utilizando uma definição em cálculo lambda com $\text{IF-THEN-ELSE}\,$.
@@ -6250,7 +6603,7 @@ Afirmamos anteriormente que o cálculo lambda é um modelo de computação compl
    &\to_\beta (\lambda x.\;\lambda y.\;x)\;(\text{TRUE})\;(\text{FALSE}) \\
    &\to_\beta \lambda y.\;(\text{TRUE}) \\
    \\
-   &\text{O resultado final é TRUE.}
+   &\text{O resultado é TRUE.}
    \end{align*}$$
 
 # 8. Estruturas de Dados Compostas
@@ -6322,7 +6675,7 @@ Finalmente, adicionamos o elemento 1:
 
    $$\text{cons}\;1\;(\text{cons}\;2\;(\text{cons}\;3\;\text{nil})) \, = (\lambda h. \lambda t. \lambda c. \, \lambda n.\;c\;h\;(t\;c\;n))\;1\;(\lambda c. \, \lambda n.\;c\;2\;((\lambda c. \, \lambda n.\;c\;3\;((\lambda c. \, \lambda n.\;n)\;c\;n))\;c\;n))$$
 
-Após a redução-$beta\,$, a representação final é:
+Após a redução-$beta\,$, a representação final será:
 
    $$\lambda c. \, \lambda n.\;c\;1\;((\lambda c. \, \lambda n.\;c\;2\;((\lambda c. \, \lambda n.\;c\;3\;((\lambda c. \, \lambda n.\;n)\;c\;n))\;c\;n))\;c\;n)$$
 
@@ -6370,7 +6723,7 @@ Aqui, $\text{succ}$ é a função que retorna o sucessor de um número, e o corp
 
    $$\text{succ}\;(\text{succ}\;(\text{succ}\;0))$$
 
-   Cada $\text{succ}$ incrementa o número por 1, então o resultado final é 3.
+   Cada $\text{succ}$ incrementa o número por 1, então o resultado é 3.
 
    Portanto, $\text{length}\;[1, 2, 3] = 3$ em cálculo lambda puro.
 
@@ -6530,7 +6883,7 @@ A função Last retorna o último elemento da tupla:
 
 **2**: Construa a lista $[1, 2]$ em cálculo lambda.
 
-   **Solução**: vamos construir a lista passo a passo:
+   **Solução**: vamos construir a lista detalhadamente:
 
    1. Começamos com a lista vazia:
 
@@ -6544,7 +6897,7 @@ A função Last retorna o último elemento da tupla:
 
       $$\text{cons}\;1\;(\text{cons}\;2\;\text{nil}) $$
 
-   Portanto, a representação final da lista $[1, 2]$ em cálculo lambda é:
+   Portanto, a representação final da lista $[1, 2]$ em cálculo lambda será:
 
    $$\text{cons}\;1\;(\text{cons}\;2\;\text{nil}) $$
 
@@ -6914,27 +7267,27 @@ Haskell implementa diretamente conceitos do cálculo lambda. Vejamos alguns exem
 
 $$
    \begin{aligned}
-   \text{true} &= \lambda x.\lambda y.x \\
-   \text{false} &= \lambda x.\lambda y.\;y\\
+   \text{True} &= \lambda x.\lambda y.x \\
+   \text{False} &= \lambda x.\lambda y.\;y\\
    \end{aligned}
 $$
 
    Em Haskell, podemos implementar isso como:
 
    ```haskell
-   true :: a -> a -> a
-   true = \x -> \y -> x
+   True :: a -> a -> a
+   True = \x -> \y -> x
 
-   false :: a -> a -> a
-   false = \x -> \y -> y
+   False :: a -> a -> a
+   False = \x -> \y -> y
 
    -- Função if-then-else
    if' :: (a -> a -> a) -> a -> a -> a
    if' b t e = b t e
 
    main = do
-      print (if' true _verdadeiro_ _falso_) -- Saída: _verdadeiro_
-      print (if' false _verdadeiro_ _falso_) -- Saída: _falso_
+      print (if' True _verdadeiro_ _falso_) -- Saída: _verdadeiro_
+      print (if' False _verdadeiro_ _falso_) -- Saída: _falso_
    ```
 
 7. Números Naturais: os números naturais podem ser representados usando a codificação de Church:
@@ -7049,13 +7402,13 @@ A presença de tipos não altera de forma alguma a avaliação de uma expressão
 
 No cálculo lambda não tipado estendido com booleanos, podemos encontrar termos bem formados que ficam _presos_ - ou seja, não são valores, mas não podem ser reduzidos. Por exemplo, considere o termo:
 
-$\text{true}\;(\lambda x.\;x)$
+$\text{True}\;(\lambda x.\;x)$
 
 Este termo é uma aplicação, então não é um valor. No entanto, não pode ser reduzido, pois nenhuma das regras de redução se aplica. Já que não é uma aplicação de abstração, então a regra $\beta$ não se aplica. Finalmente, não é uma expressão condicional (if-then-else), então as regras de redução para booleanos não se aplicam.
 
-Outro exemplo é:
+Outro exemplo será:
 
-$\text{if}\;(\lambda x.\;x)\;\text{then}\;\text{true}\;\text{else}\;\text{false}$
+$\text{if}\;(\lambda x.\;x)\;\text{then}\;\text{True}\;\text{else}\;\text{False}$
 
 Este termo fica _preso_ porque a condição do `if` não é um booleano, mas uma abstração. Não há regra de redução que possa ser aplicada a este termo.
 
@@ -7104,7 +7457,7 @@ Com um pouco mais de formalidade, vamos considerar um conjunto de tipos básicos
 
 $$A,B ::= \tau \mid A \rightarrow B \mid A \times B \mid 1$$
 
-O significado pretendido desses tipos é o seguinte: tipos base são estruturas simples como os  tipos de inteiro e booleano. O tipo $A \rightarrow B$ é o tipo de funções de $A$ para $B\,$. O tipo $A \times B$ é o tipo de tuplas $\langle x, y \rangle\,$, onde $x$ tem tipo $A$ e $y$ tem tipo $B\,$. A notação $\langle x, y \rangle$ foi introduzida para representar um par de termos $M$ e $N\,$. Permitindo que o cálculo lambda tipado manipule funções e estruturas de dados compostas.
+O significado pretendido desses tipos é o seguinte: tipos base são estruturas simples como os  tipos de inteiro e booleano. O tipo $A \rightarrow B$ é o tipo de funções de $A$ para $B\,$. O tipo $A \times B$ é o tipo de tuplas $\langle x, $Y$ \rangle\,$, onde $x$ tem tipo $A$ e $y$ tem tipo $B\,$. A notação $\langle x, $Y$ \rangle$ foi introduzida para representar um par de termos $M$ e $N\,$. Permitindo que o cálculo lambda tipado manipule funções e estruturas de dados compostas.
 
 O tipo $1$ é um tipo de um elemento literal, um tipo especial que contém exatamente um elemento, semelhante ao conceito de _tipo simples_ em algumas linguagens de programação. Isso é útil para representar valores que não carregam informação significativa, mas que precisam existir para manter a consistência do sistema de tipos.
 
@@ -7170,7 +7523,7 @@ $$
 \\[10pt]
 
 \text{constante} &::= 0\;|\;1\;|\;2\;|\;\ldots \\
-&\;|\;\text{true}\;|\;\text{false}
+&\;|\;\text{True}\;|\;\text{False}
 \end{align*}
 $$
 
@@ -7217,27 +7570,27 @@ $$(\lambda f : (\text{Nat} \rightarrow \text{Nat}). \lambda x : \text{Nat}. f\;(
 
    Este termo representa uma função que recebe uma função $f$ de $Nat$ para $Nat$ e retorna uma nova função que aplica $f$ duas vezes ao argumento $x\,$.
 
-Além da construção de funções e abstrações tipadas, o básico para a criação de expressões no cálculo lambda tipado, a gramática pode ser usada para validar expressões. Vamos fazer uma derivação, passo a passo, para validar a expressão lambda tipada:
+Além da construção de funções e abstrações tipadas, o básico para a criação de expressões no cálculo lambda tipado, a gramática pode ser usada para validar expressões. Vamos fazer uma derivação, para validar a expressão lambda tipada:
 
-$$(\lambda x : \text{Nat}. \lambda y : \text{Bool}.\;x)\;3\;\text{true}$$
+$$(\lambda x : \text{Nat}. \lambda $Y$ : \text{Bool}.\;x)\;3\;\text{True}$$
 
-1. Começamos com o termo completo:
+   1. Começamos com o termo completo:
 
-$$\text{termo} \rightarrow \text{termo}\;\text{termo}$$
+      $$\text{termo} \rightarrow \text{termo}\;\text{termo}$$
 
-2. Expandimos o primeiro termo:
+   2. Expandimos o primeiro termo:
 
-$$(\lambda x : \text{Nat}. \lambda y : \text{Bool}.\;x)\;3\;\text{true}$$
+      $$(\lambda x : \text{Nat}. \lambda $Y$ : \text{Bool}.\;x)\;3\;\text{True}$$
 
-$$\text{termo} \rightarrow (\text{termo})\;\text{termo}\;\text{termo}$$
+      $$\text{termo} \rightarrow (\text{termo})\;\text{termo}\;\text{termo}$$
 
-3. Dentro dos parênteses, temos uma abstração:
+   3. Dentro dos parênteses, temos uma abstração:
 
-$$\text{termo} \rightarrow (\lambda \text{variável} : \text{tipo}.\;\text{termo})\;\text{termo}\;\text{termo}$$
+      $$\text{termo} \rightarrow (\lambda \text{variável} : \text{tipo}.\;\text{termo})\;\text{termo}\;\text{termo}$$
 
-4. Expandimos o corpo da primeira abstração:
+   4. Expandimos o corpo da primeira abstração:
 
-$$\text{termo} \rightarrow (\lambda x : \text{Nat}. \lambda \text{variável} : \text{tipo}.\;\text{termo})\;\text
+      $$\text{termo} \rightarrow (\lambda x : \text{Nat}. \lambda \text{variável} : \text{tipo}.\;\text{termo})\;\text
 
 ### 7.3.2. Semântica Estática (Sistema de Tipos)
 
@@ -7352,34 +7705,34 @@ $$\frac{\Gamma \vdash \text{not} : \text{Bool} \rightarrow \text{Bool} \quad \Ga
 2. **Normalização Forte**: Todo termo bem tipado em certos sistemas de tipos, como o cálculo lambda simplesmente tipado, tem uma sequência finita de reduções que leva a uma forma normal (um termo que não pode ser mais reduzido). Considere o seguinte termo:
 
 $$
-   (\lambda f: \text{Nat} \rightarrow \text{Nat}. \lambda x: \text{Nat}. f (f\;x))\;(\lambda y: \text{Nat}. y + 1)\;0
+   (\lambda f: \text{Nat} \rightarrow \text{Nat}. \lambda x: \text{Nat}. f (f\;x))\;(\lambda y: \text{Nat}. $Y$ + 1)\;0
 $$
 
    Este termo descreve uma função que aplica outra função $f$ duas vezes a um argumento $x\,$. Aplicamos essa função à função que incrementa $y$ e ao valor $0\,$. Vamos ver como o termo se reduz,
 
    Primeiro, aplicamos:
 
-  $$\lambda f: \text{Nat} \rightarrow \text{Nat}. \lambda x: \text{Nat}. f (f\;x)$ à função $\lambda y: \text{Nat}. y + 1$$
+  $$\lambda f: \text{Nat} \rightarrow \text{Nat}. \lambda x: \text{Nat}. f (f\;x)$ à função $\lambda y: \text{Nat}. $Y$ + 1$$
 
-  $$(\lambda f: \text{Nat} \rightarrow \text{Nat}. \lambda x: \text{Nat}. f (f\;x))\;(\lambda y: \text{Nat}. y + 1)
-      \rightarrow \lambda x: \text{Nat}. (\lambda y: \text{Nat}. y + 1) ((\lambda y: \text{Nat}. y + 1)\;x)$$
+  $$(\lambda f: \text{Nat} \rightarrow \text{Nat}. \lambda x: \text{Nat}. f (f\;x))\;(\lambda y: \text{Nat}. $Y$ + 1)
+      \rightarrow \lambda x: \text{Nat}. (\lambda y: \text{Nat}. $Y$ + 1) ((\lambda y: \text{Nat}. $Y$ + 1)\;x)$$
 
       Agora, aplicamos essa função ao valor $0$:
 
-  $$(\lambda x: \text{Nat}. (\lambda y: \text{Nat}. y + 1) ((\lambda y: \text{Nat}. y + 1)\;x))\;0
-      \rightarrow (\lambda y: \text{Nat}. y + 1) ((\lambda y: \text{Nat}. y + 1)\;0)$$
+  $$(\lambda x: \text{Nat}. (\lambda y: \text{Nat}. $Y$ + 1) ((\lambda y: \text{Nat}. $Y$ + 1)\;x))\;0
+      \rightarrow (\lambda y: \text{Nat}. $Y$ + 1) ((\lambda y: \text{Nat}. $Y$ + 1)\;0)$$
 
       Avaliando a primeira aplicação:
 
-  $$(\lambda y: \text{Nat}. y + 1)\;0 \rightarrow 0 + 1 \rightarrow 1$$
+  $$(\lambda y: \text{Nat}. $Y$ + 1)\;0 \rightarrow 0 + 1 \rightarrow 1$$
 
       Avaliando a segunda aplicação:
 
-  $$(\lambda y: \text{Nat}. y + 1)\;1 \rightarrow 1 + 1 \rightarrow 2$$
+  $$(\lambda y: \text{Nat}. $Y$ + 1)\;1 \rightarrow 1 + 1 \rightarrow 2$$
 
       O termo foi completamente reduzido para $2\,$, e não há mais reduções possíveis. Esse é o estado irreduzível ou a _forma normal_ do termo. A _normalização forte_ garante que, neste sistema de tipos, qualquer termo bem tipado eventualmente chegará a uma forma normal, sem laços infinitos.
 
-3. **Church-Rosser** (Confluência): Se um termo pode ser reduzido de duas formas diferentes, então existe uma forma comum que ambas as reduções eventualmente alcançarão. Isso garante que a ordem de avaliação não afeta o resultado final. Para entender, considere o seguinte termo lambda tipado:
+3. **Church-Rosser** (Confluência): Se um termo pode ser reduzido de duas formas diferentes, então existe uma forma comum que ambas as reduções eventualmente alcançarão. Isso garante que a ordem de avaliação não afeta o resultado . Para entender, considere o seguinte termo lambda tipado:
 
 $$(\lambda x:\text{Nat}. \lambda y:\text{Nat}.\;x + y)\;3\;((\lambda z:\text{Nat}.\;z * 2)\;2)$$
 
@@ -7413,13 +7766,13 @@ $$\rightarrow 3 + 4$$
 
 $$\rightarrow 7$$
 
-Observe que, independentemente da ordem em que as reduções são aplicadas, chegamos ao mesmo resultado final: $7\,$. Esta propriedade atesta que a ordem de avaliação em um programa lambda tipado não afeta o resultado final, desde que o programa termine. Esta propriedade implica na confiabilidade e previsibilidade dos sistemas baseados no cálculo lambda tipado, como muitas linguagens de programação funcional.
+Observe que, independentemente da ordem em que as reduções são aplicadas, chegamos ao mesmo resultado : $7\,$. Esta propriedade atesta que a ordem de avaliação em um programa lambda tipado não afeta o resultado , desde que o programa termine. Esta propriedade implica na confiabilidade e previsibilidade dos sistemas baseados no cálculo lambda tipado, como muitas linguagens de programação funcional.
 
-A semântica do cálculo lambda tipado tem implicações para a teoria da computação e o design de linguagens de programação. Ela promove a segurança de tipos, assegurando que programas bem tipados não causam erros de tipo durante a execução. Por exemplo, em uma linguagem com tipagem estática baseada no cálculo lambda tipado, uma expressão como `1 + true` seria rejeitada em tempo de compilação, evitando erros em tempo de execução. Esse cálculo serve como base para linguagens funcionais tipadas, como Haskell e ML, que herdaram suas propriedades formais. A correspondência de Curry-Howard une programas e provas matemáticas, onde tipos correspondem a proposições e termos a provas, unificando lógica e computação. O cálculo lambda tipado oferece uma base sólida para sistemas de verificação formal de programas, permitindo provas rigorosas de correção. Na prática, isso permite a criação de software crítico com alto grau de confiabilidade, como em sistemas de controle de voo ou protocolos de segurança criptográfica.
+A semântica do cálculo lambda tipado tem implicações para a teoria da computação e o design de linguagens de programação. Ela promove a segurança de tipos, assegurando que programas bem tipados não causam erros de tipo durante a execução. Por exemplo, em uma linguagem com tipagem estática baseada no cálculo lambda tipado, uma expressão como `1 + True` seria rejeitada em tempo de compilação, evitando erros em tempo de execução. Esse cálculo serve como base para linguagens funcionais tipadas, como Haskell e ML, que herdaram suas propriedades formais. A correspondência de Curry-Howard une programas e provas matemáticas, onde tipos correspondem a proposições e termos a provas, unificando lógica e computação. O cálculo lambda tipado oferece uma base sólida para sistemas de verificação formal de programas, permitindo provas rigorosas de correção. Na prática, isso permite a criação de software crítico com alto grau de confiabilidade, como em sistemas de controle de voo ou protocolos de segurança criptográfica.
 
-Nos sistemas onde a propriedade de Church-Rosser, confluência, é válida, o cálculo lambda assegura que o resultado final de um programa seja determinístico, independentemente da estratégia de avaliação. Isso permite que compiladores realizem otimizações, já que a ordem de avaliação não altera o resultado final. Por exemplo, em uma expressão como $(\lambda x.\;x + 1)\;(2 + 3)\,$, o compilador pode escolher avaliar $(2 + 3)$ primeiro ou aplicar a função $\lambda x.\;x + 1$ diretamente a $(2 + 3)\,$, sabendo que o resultado final é o mesmo. Em sistemas confluentes, o raciocínio equacional se torna uma ferramenta útil, permitindo equivalências entre expressões e facilitando provas e transformações de programas.
+Nos sistemas onde a propriedade de Church-Rosser, confluência, é válida, o cálculo lambda assegura que o resultado  de um programa seja determinístico, independentemente da estratégia de avaliação. Isso permite que compiladores realizem otimizações, já que a ordem de avaliação não altera o resultado . Por exemplo, em uma expressão como $(\lambda x.\;x + 1)\;(2 + 3)\,$, o compilador pode escolher avaliar $(2 + 3)$ primeiro ou aplicar a função $\lambda x.\;x + 1$ diretamente a $(2 + 3)\,$, sabendo que o resultado é o mesmo. Em sistemas confluentes, o raciocínio equacional se torna uma ferramenta útil, permitindo equivalências entre expressões e facilitando provas e transformações de programas.
 
-A propriedade de Church-Rosser varia conforme o sistema de cálculo lambda tipado. No _cálculo lambda simplesmente tipado_, a confluência é garantida, pois o sistema se baseia em tipos básicos e tipos de função, sem construções que poderiam causar ambiguidades na redução. Em sistemas com tipos dependentes, como o Cálculo das Construções, a propriedade tende a se manter, embora a prova de confluência seja mais complexa devido à interação entre termos e tipos. Em sistemas que modelam computações com estado ou efeitos colaterais, a confluência pode ser perdida, pois a mutação de estado pode fazer com que a ordem das operações altere o resultado final. Nos sistemas com recursão irrestrita, a confluência permanece, mas a normalização forte é comprometida, pois nem todos os termos têm uma forma normal. Entretanto, os diferentes caminhos de redução podem ainda convergir, se a convergência for possível. Extensões que incluem operadores adicionais, como paralelismo ou concorrência, podem comprometer a confluência, pois nesses casos a ordem de avaliação pode impactar o resultado final.
+A propriedade de Church-Rosser varia conforme o sistema de cálculo lambda tipado. No _cálculo lambda simplesmente tipado_, a confluência é garantida, pois o sistema se baseia em tipos básicos e tipos de função, sem construções que poderiam causar ambiguidades na redução. Em sistemas com tipos dependentes, como o Cálculo das Construções, a propriedade tende a se manter, embora a prova de confluência seja mais complexa devido à interação entre termos e tipos. Em sistemas que modelam computações com estado ou efeitos colaterais, a confluência pode ser perdida, pois a mutação de estado pode fazer com que a ordem das operações altere o resultado . Nos sistemas com recursão irrestrita, a confluência permanece, mas a normalização forte é comprometida, pois nem todos os termos têm uma forma normal. Entretanto, os diferentes caminhos de redução podem ainda convergir, se a convergência for possível. Extensões que incluem operadores adicionais, como paralelismo ou concorrência, podem comprometer a confluência, pois nesses casos a ordem de avaliação pode impactar o resultado .
 
 A semântica do cálculo lambda tipado estabelece uma ligação entre lógica, teoria dos tipos e programação, influenciando o design de linguagens modernas e técnicas de verificação formal. **Embora a propriedade de Church-Rosser seja desejável, ela não é universal em todos os sistemas de cálculo lambda tipado**. No contexto de linguagens de programação, há um equilíbrio entre garantias teóricas, como a confluência, e a necessidade de maior expressividade. Isso exige uma avaliação cuidadosa das características de cada sistema ao considerar suas propriedades de redução e avaliação, já que muitas linguagens do mundo real incluem características que podem violar a confluência, como efeitos colaterais e paralelismo.
 
@@ -7459,13 +7812,13 @@ Antes de apresentarmos as regras formais do cálculo lambda tipado, é important
 
 O sistema de tipos do cálculo lambda tipado evoluiu gradualmente a partir de ideias mais simples. Inicialmente, poderíamos considerar um sistema ingênuo com unicamente dois tipos: $\text{bool}$ para valores booleanos e $\to$ para funções. Neste sistema primitivo, $T := \text{bool} \mid \to\,$, qualquer função seria simplesmente representada pelo tipo $\to\,$.
 
-Este sistema é excessivamente simplista. Considere as funções $\lambda x. \text{true}$ e $\lambda x. \lambda y. \text{false}\,$. Ambas teriam o tipo $\to\,$, apesar de serem diferentes - a primeira retorna imediatamente um booleano, enquanto a segunda retorna outra função.
+Este sistema é excessivamente simplista. Considere as funções $\lambda x. \text{True}$ e $\lambda x. \lambda y. \text{False}\,$. Ambas teriam o tipo $\to\,$, apesar de serem diferentes - a primeira retorna imediatamente um booleano, enquanto a segunda retorna outra função.
 
 Para resolver essa limitação, refinamos nossa ideia de tipos de função. Em vez de um tipo genérico $\to\,$, introduzimos tipos de função da forma $T_1 \to T_2\,$, onde $T_1$ é o tipo do input e $T_2$ é o tipo do output. Nossa definição de tipos agora se torna recursiva: $T := \text{bool} \mid T \to T\,$.
 
 Esta definição recursiva nos permite construir tipos mais complexos. Por exemplo, $(\text{bool} \to \text{bool}) \to \text{bool}$ representa uma função que aceita outra função (que mapeia booleanos para booleanos) e retorna um booleano.
 
-Com este sistema refinado, podemos diferenciar nossas funções anteriores: $\lambda x. \text{true}$ teria o tipo $T \to \text{bool}$ para qualquer tipo $T\,$, enquanto $\lambda x. \lambda y. \text{false}$ teria o tipo $T_1 \to (T_2 \to \text{bool})$ para quaisquer tipos $T_1$ e $T_2\,$.
+Com este sistema refinado, podemos diferenciar nossas funções anteriores: $\lambda x. \text{True}$ teria o tipo $T \to \text{bool}$ para qualquer tipo $T\,$, enquanto $\lambda x. \lambda y. \text{False}$ teria o tipo $T_1 \to (T_2 \to \text{bool})$ para quaisquer tipos $T_1$ e $T_2\,$.
 
 Este desenvolvimento nos leva a um sistema de tipos mais expressivo, capaz de capturar nuances importantes sobre o comportamento das funções. No entanto, ainda existem limitações. Por exemplo, não podemos expressar funções polimórficas como a função identidade $\lambda x.\;x\,$, que deve funcionar para qualquer tipo. Estas limitações motivarão desenvolvimentos futuros, como o polimorfismo paramétrico, que estudaremos mais adiante.
 
@@ -7500,7 +7853,7 @@ $$
    Similarmente, como `$(y : \text{Bool}) \in \Gamma$:
 
 $$
-   \Gamma \vdash y : \text{Bool}
+   \Gamma \vdash $Y$ : \text{Bool}
 $$
 
    Isso mostra que, dentro do contexto $\Gamma\,$, as variáveis $x$ e $y$ têm os tipos $\text{Nat}$ e $\text{Bool}\,$, respectivamente.
@@ -7581,7 +7934,7 @@ $$\Gamma \vdash x : \text{Nat}$$
 
    Como $(y : \text{Bool}) \in \Gamma\,$, então:
 
-$$\Gamma \vdash y : \text{Bool}$$
+$$\Gamma \vdash $Y$ : \text{Bool}$$
 
 **Exemplo**: Regra de Abstração
 
@@ -7639,24 +7992,24 @@ Usando a Regra de Abstração, mostre que esta função tem o tipo $\text{Nat} \
 
    Aplicando a Regra de Abstração:
 
-   $$\frac{\Gamma, y:\text{Nat} \vdash y \times 2 : \text{Nat}}{\Gamma \vdash \lambda y:\text{Nat}.\;y \times 2 : \text{Nat} \rightarrow \text{Nat}}$$
+   $$\frac{\Gamma, y:\text{Nat} \vdash $Y$ \times 2 : \text{Nat}}{\Gamma \vdash \lambda y:\text{Nat}.\;y \times 2 : \text{Nat} \rightarrow \text{Nat}}$$
 
    Portanto, a função tem tipo $\text{Nat} \rightarrow \text{Nat}\,$.
 
 **3**. No contexto vazio $\Gamma = \{\}\,$, determine se a seguinte aplicação é bem tipada usando a Regra de Aplicação:
 
-$$(\lambda x:\text{Bool}.\;x)\;\text{true}$$
+$$(\lambda x:\text{Bool}.\;x)\;\text{True}$$
 
    **Solução**: aplicando a Regra de Aplicação:
 
    1. $\Gamma \vdash \lambda x:\text{Bool}.\;x : \text{Bool} \rightarrow \text{Bool}\,$.
 
-   2. $\Gamma \vdash \text{true} : \text{Bool}\,$.
+   2. $\Gamma \vdash \text{True} : \text{Bool}\,$.
 
    3. Como os tipos correspondem, podemos concluir:
 
    $$
-   \frac{\Gamma \vdash \lambda x:\text{Bool}.\;x : \text{Bool} \rightarrow \text{Bool} \quad \Gamma \vdash \text{true} : \text{Bool}}{\Gamma \vdash (\lambda x:\text{Bool}.\;x)\;\text{true} : \text{Bool}}
+   \frac{\Gamma \vdash \lambda x:\text{Bool}.\;x : \text{Bool} \rightarrow \text{Bool} \quad \Gamma \vdash \text{True} : \text{Bool}}{\Gamma \vdash (\lambda x:\text{Bool}.\;x)\;\text{True} : \text{Bool}}
    $$
 
    A aplicação é bem tipada e tem tipo $\text{Bool}\,$.
@@ -7735,7 +8088,7 @@ $$\lambda p:\text{Nat} \times \text{Bool}.\;\pi_1\;p$$
 
 **8**: No contexto vazio, determine se a seguinte aplicação é bem tipada:
 
-$$(\lambda x:\text{Nat}.\;x + 1)\;\text{true}$$
+$$(\lambda x:\text{Nat}.\;x + 1)\;\text{True}$$
 
    Explique qual regra de tipagem é violada se a aplicação não for bem tipada.
 
@@ -7743,7 +8096,7 @@ $$(\lambda x:\text{Nat}.\;x + 1)\;\text{true}$$
 
    1. Temos $\Gamma \vdash \lambda x:\text{Nat}.\;x + 1 : \text{Nat} \rightarrow \text{Nat}\,$.
 
-   2. E, $\Gamma \vdash \text{true} : \text{Bool}\,$.
+   2. E, $\Gamma \vdash \text{True} : \text{Bool}\,$.
 
    3. Pela Regra de Aplicação, para que a aplicação seja bem tipada, o tipo do argumento deve corresponder ao tipo esperado pela função:
 
@@ -7771,11 +8124,11 @@ Determine o tipo de $M$ usando as regras de tipagem.
 
    4. Aplicando a Regra de Abstração para $y$:
 
-   $$\frac{\Gamma, x:\text{Bool}, y:\text{Bool} \vdash x \land y : \text{Bool}}{\Gamma, x:\text{Bool} \vdash \lambda y:\text{Bool}.\;x \land y : \text{Bool} \rightarrow \text{Bool}}$$
+   $$\frac{\Gamma, x:\text{Bool}, y:\text{Bool} \vdash x \land $Y$ : \text{Bool}}{\Gamma, x:\text{Bool} \vdash \lambda y:\text{Bool}.\;x \land $Y$ : \text{Bool} \rightarrow \text{Bool}}$$
 
    5. Aplicando a Regra de Abstração para $x$:
 
-   $$\frac{\Gamma \vdash \lambda y:\text{Bool}.\;x \land y : \text{Bool} \rightarrow \text{Bool}}{\Gamma \vdash \lambda x:\text{Bool}.\;\lambda y:\text{Bool}.\;x \land y : \text{Bool} \rightarrow (\text{Bool} \rightarrow \text{Bool})}$$
+   $$\frac{\Gamma \vdash \lambda y:\text{Bool}.\;x \land $Y$ : \text{Bool} \rightarrow \text{Bool}}{\Gamma \vdash \lambda x:\text{Bool}.\;\lambda y:\text{Bool}.\;x \land $Y$ : \text{Bool} \rightarrow (\text{Bool} \rightarrow \text{Bool})}$$
 
    Portanto, o tipo de $M$ é $\text{Bool} \rightarrow \text{Bool} \rightarrow \text{Bool}\,$.
 
@@ -7834,9 +8187,9 @@ Aqui, a variável $x$ é substituída pelo valor $2$ e, em seguida, a expressão
 
 Além da redução-$beta\,$, existem duas outras formas importantes de conversão no cálculo lambda: a **redução-$\alpha$** e a **$\eta$-redução**.
 
-- **redução-$\alpha$**: Esta operação permite a renomeação de variáveis ligadas, desde que a nova variável não conflite com variáveis livres. Por exemplo, as expressões $\lambda x : A .\;x$ e $\lambda y : A . y$ são equivalentes sob redução-$\alpha$:
+- **redução-$\alpha$**: Esta operação permite a renomeação de variáveis ligadas, desde que a nova variável não conflite com variáveis livres. Por exemplo, as expressões $\lambda x : A .\;x$ e $\lambda $Y$ : A . y$ são equivalentes sob redução-$\alpha$:
 
-$$\lambda x : A .\;x \equiv_\alpha \lambda y : A . y$$
+$$\lambda x : A .\;x \equiv_\alpha \lambda $Y$ : A . y$$
 
  A redução-$\alpha$ é importante para evitar a captura de variáveis durante o processo de substituição, garantindo que a renomeação de variáveis ligadas não afete o comportamento da função.
 
@@ -7900,7 +8253,7 @@ A confluência, combinada com a normalização forte, garante a **unicidade da f
 
 A partir das regras de tipagem, podemos definir um conjunto de propriedades da tipagem no cálculo lambda. Essas propriedades têm implicações tanto para a teoria quanto para a prática da programação. Vamos destacar:
 
-1. **Normalização forte**: Todo termo bem tipado possui uma forma normal e qualquer sequência de reduções eventualmente termina. Isso garante que as reduções de expressões no cálculo lambda tipado sempre produzirão um resultado final, eliminando loops infinitos. É importante notar que a propriedade de normalização forte é garantida no cálculo lambda simplesmente tipado. Em sistemas de tipos mais avançados, como aqueles que suportam recursão ou tipos dependentes, a normalização forte pode não se aplicar, podendo existir termos bem tipados que não convergem para uma forma normal.
+1. **Normalização forte**: Todo termo bem tipado possui uma forma normal e qualquer sequência de reduções eventualmente termina. Isso garante que as reduções de expressões no cálculo lambda tipado sempre produzirão um resultado , eliminando loops infinitos. É importante notar que a propriedade de normalização forte é garantida no cálculo lambda simplesmente tipado. Em sistemas de tipos mais avançados, como aqueles que suportam recursão ou tipos dependentes, a normalização forte pode não se aplicar, podendo existir termos bem tipados que não convergem para uma forma normal.
 
    Formalmente, se $\Gamma \vdash M : \tau\,$, então existe uma sequência finita de reduções $M \rightarrow_\beta M_1 \rightarrow_\beta ... \rightarrow_\beta M_n$ onde $M_n$ está em forma normal.
 
@@ -7920,7 +8273,7 @@ $$(\lambda x:\text{Nat}.\;x + 1)\;2 \rightarrow_\beta 2 + 1 \rightarrow 3$$
 
    **Exemplo**: um algoritmo de verificação de tipos pode determinar que:
    - $\lambda x:\text{Nat}.\;x + 1$ tem tipo $\text{Nat} \rightarrow \text{Nat}$
-   - $(\lambda x:\text{Nat}.\;x) \text{true}$ não é bem tipado
+   - $(\lambda x:\text{Nat}.\;x) \text{True}$ não é bem tipado
 
 4. **Progresso**: uma propriedade adicional importante é o progresso. Se um termo é bem tipado e não está em forma normal, então existe uma redução que pode ser aplicada a ele.
 
@@ -7940,23 +8293,23 @@ $$(\lambda x:\text{Nat}.\;x + 1)\;2 \rightarrow_\beta 2 + 1 \rightarrow 3$$
 
    O termo reduz à sua forma normal, $3\,$, em um número finito de passos.
 
-**2**: Dado o termo $(\lambda f:\text{Nat}\rightarrow\text{Nat}. \lambda x:\text{Nat}. f (f x)) (\lambda y:\text{Nat}. y + 1)\;2\,$, mostre que ele é bem tipado e reduz para um valor do tipo $\text{Nat}\,$.
+**2**: Dado o termo $(\lambda f:\text{Nat}\rightarrow\text{Nat}. \lambda x:\text{Nat}. f (f x)) (\lambda y:\text{Nat}. $Y$ + 1)\;2\,$, mostre que ele é bem tipado e reduz para um valor do tipo $\text{Nat}\,$.
 
    **Solução**: 0 termo é bem tipado: $(\text{Nat}\rightarrow\text{Nat})\rightarrow\text{Nat}\rightarrow\text{Nat}$
 
    Redução:
 
 $$\begin{aligned}
-   &(\lambda f:\text{Nat}\rightarrow\text{Nat}. \lambda x:\text{Nat}. f (f x)) (\lambda y:\text{Nat}. y + 1)\;2 \\
-   &\rightarrow_\beta (\lambda x:\text{Nat}. (\lambda y:\text{Nat}. y + 1) ((\lambda y:\text{Nat}. y + 1) x))\;2 \\
-   &\rightarrow_\beta (\lambda y:\text{Nat}. y + 1) ((\lambda y:\text{Nat}. y + 1)\;2) \\
-   &\rightarrow_\beta (\lambda y:\text{Nat}. y + 1) (2 + 1) \\
-   &\rightarrow_\beta (\lambda y:\text{Nat}. y + 1)\;3 \\
+   &(\lambda f:\text{Nat}\rightarrow\text{Nat}. \lambda x:\text{Nat}. f (f x)) (\lambda y:\text{Nat}. $Y$ + 1)\;2 \\
+   &\rightarrow_\beta (\lambda x:\text{Nat}. (\lambda y:\text{Nat}. $Y$ + 1) ((\lambda y:\text{Nat}. $Y$ + 1) x))\;2 \\
+   &\rightarrow_\beta (\lambda y:\text{Nat}. $Y$ + 1) ((\lambda y:\text{Nat}. $Y$ + 1)\;2) \\
+   &\rightarrow_\beta (\lambda y:\text{Nat}. $Y$ + 1) (2 + 1) \\
+   &\rightarrow_\beta (\lambda y:\text{Nat}. $Y$ + 1)\;3 \\
    &\rightarrow_\beta 3 + 1 \\
    &\rightarrow 4
    \end{aligned}$$
 
-   O resultado final (4) é do tipo $\text{Nat}\,$, ilustrando a preservação de tipos.
+   O resultado  (4) é do tipo $\text{Nat}\,$, ilustrando a preservação de tipos.
 
 **3**. Explique por que o termo $(\lambda x:\text{Bool}.\;x + 1)$ não é bem tipado. Como isso se relaciona com a propriedade de decidibilidade da tipagem?
 
@@ -8056,13 +8409,13 @@ Repita este exercício. Ele demonstra como as reduções em um termo bem tipado 
 
    **Solução**: a normalização forte garante que toda sequência de reduções de um termo bem tipado eventualmente termina em uma forma normal. Isso implica que não pode haver loops infinitos, pois se houvesse, a sequência de reduções nunca terminaria, contradizendo a propriedade de normalização forte.
 
-**7**: Considere o termo $(\lambda x:\text{Nat}\rightarrow\text{Nat}.\;x 3) (\lambda y:\text{Nat}. y * 2)\,$. Mostre que este termo satisfaz as propriedades de preservação de tipos e progresso.
+**7**: Considere o termo $(\lambda x:\text{Nat}\rightarrow\text{Nat}.\;x 3) (\lambda y:\text{Nat}. $Y$ * 2)\,$. Mostre que este termo satisfaz as propriedades de preservação de tipos e progresso.
 
    **Solução**: preservação de tipos: O termo inicial tem tipo $\text{Nat}\,$. Após a redução:
 
-   $$(\lambda x:\text{Nat}\rightarrow\text{Nat}.\;x 3) (\lambda y:\text{Nat}. y \times 2) \rightarrow_\beta (\lambda y:\text{Nat}. y \times 2)\;3 \rightarrow_\beta 3 \times 2 \rightarrow 6$$
+   $$(\lambda x:\text{Nat}\rightarrow\text{Nat}.\;x 3) (\lambda y:\text{Nat}. $Y$ \times 2) \rightarrow_\beta (\lambda y:\text{Nat}. $Y$ \times 2)\;3 \rightarrow_\beta 3 \times 2 \rightarrow 6$$
 
-   O resultado final $6$ ainda é do tipo $\text{Nat}\,$.
+   O resultado  $6$ ainda é do tipo $\text{Nat}\,$.
 
    Progresso: O termo inicial não está em forma normal e pode ser reduzido, como mostrado acima.
 
@@ -8215,7 +8568,7 @@ O sistema de tipos tem uma estrutura recursiva, permitindo a construção de tip
 
 A tipagem de variáveis assegura que cada variável esteja associada a um tipo específico. Uma variável $x$ do tipo $A$ é denotada como $x : A\,$. Isso implica que $x$ só pode ser associado a valores que respeitem as regras do tipo $A\,$, restringindo o comportamento da função.
 
-Um **contexto de tipagem**, representado por $\Gamma\,$, é um conjunto de associações entre variáveis e seus tipos. O contexto fornece informações necessárias sobre as variáveis livres em uma expressão, facilitando o julgamento de tipos. Por exemplo, um contexto $\Gamma = \{x : A, y : B\}$ indica que, nesse ambiente, a variável $x$ tem tipo $A$ e a variável $y$ tem tipo $B\,$. Os contextos são essenciais para derivar os tipos de expressões mais complexas.
+Um **contexto de tipagem**, representado por $\Gamma\,$, é um conjunto de associações entre variáveis e seus tipos. O contexto fornece informações necessárias sobre as variáveis livres em uma expressão, facilitando o julgamento de tipos. Por exemplo, um contexto $\Gamma = \{x : A, $Y$ : B\}$ indica que, nesse ambiente, a variável $x$ tem tipo $A$ e a variável $y$ tem tipo $B\,$. Os contextos são essenciais para derivar os tipos de expressões mais complexas.
 
 ### 10.7.3. Normalização Forte e Fraca
 
@@ -8241,7 +8594,7 @@ $$size(MN) \, = size(M) + size(N) + 1$$
 
 Cada redução-$beta$ diminui o termo. Observe que não é possível reduzir para sempre. Então, a insistente leitora terá que parar em algum ponto, se existir, este ponto será uma forma normal.
 
-A prática da normalização impregna todo o Haskell. Talvez porque a normalização garante a terminação de programas bem tipados. Sáo programas sem _loops_ infinitos, sem falhas inesperadas, ou comportamentos indeterminados. Simplesmente funções puras que chegam a um resultado final.
+A prática da normalização impregna todo o Haskell. Talvez porque a normalização garante a terminação de programas bem tipados. Sáo programas sem _loops_ infinitos, sem falhas inesperadas, ou comportamentos indeterminados. Simplesmente funções puras que chegam a um resultado .
 
 ### 10.7.4. Exemplos
 
