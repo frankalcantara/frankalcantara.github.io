@@ -555,7 +555,8 @@ A gentil leitora pode facilitar o entendimento de abstrações e aplicações se
 
 Indutivamente, podemos definir que a árvore de construção de uma variável $x$ é somente uma folha, rotulada por $x\,$. A árvore de construção de uma abstração $\lambda x.\;E$ consistirá em um vértice rotulado por $\lambda x$ com uma única subárvore, que é a árvore de construção de $E\,$. Por fim, a árvore de construção de uma aplicação $E\;N$ consistirá em um vértice rotulado por $@$ com duas subárvores: a subárvore esquerda é a árvore de construção de $E$ e a subárvore direita é a árvore de construção de $N\,$. Por exemplo, a árvore de construção do termo $\lambda x \lambda y.\;x\;y\;\lambda z.\;y\;z$ será:
 
-$$\begin{array}{c}
+$$
+\begin{array}{c}
 \lambda x \\
 \downarrow \\
 \lambda Y \\
@@ -568,7 +569,8 @@ $$\begin{array}{c}
 \;y &\;z
 \end{array}
 \end{array}
-\end{array}$$
+\end{array}
+$$
 
 Neste texto, vamos dar prioridade a derivação gramatical, deixando as árvores para suporte a explicação das abstrações. Pelo sim, pelo não, vamos ver mais dois exemplos.
 
