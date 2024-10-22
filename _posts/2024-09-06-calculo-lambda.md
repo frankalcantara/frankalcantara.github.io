@@ -260,7 +260,7 @@ $$
 
 >Os problemas de Hilbert são uma lista de 23 problemas matemáticos propostos por David Hilbert em 1900, durante o Congresso Internacional de Matemáticos em Paris. Esses problemas abordam questões em várias áreas da matemática e estimularam muitas descobertas ao longo do século XX. Cada problema visava impulsionar a pesquisa e delinear os desafios mais importantes da matemática da época. Alguns dos problemas foram resolvidos, enquanto outros permanecem abertos ou foram provados como indecidíveis, como o **décimo problema de Hilbert**, que pergunta se existe um algoritmo capaz de determinar se um polinômio com coeficientes inteiros possui soluções inteiras.
 
-Em 1970, [Yuri Matiyasevich] \ ,(Yuri Matiyasevich), em colaboração com [Julia Robinson](https://en.wikipedia.org/wiki/Julia_Robinson), [Martin Davis] \ ,(<https://en.wikipedia.org/wiki/Martin_Davis_(mathematician)>) e [Hilary Putnam](https://en.wikipedia.org/wiki/Hilary_Putnam), provou que tal algoritmo não existe. Esse resultado teve implicações profundas na teoria dos números e demonstrou a indecidibilidade de um problema central na matemática.
+Em 1970, [Yuri Matiyasevich]([Yuri Matiyasevich](https://en.wikipedia.org/wiki/Yuri_Matiyasevich)), em colaboração com [Julia Robinson](https://en.wikipedia.org/wiki/Julia_Robinson), [Martin Davis] \ ,(<https://en.wikipedia.org/wiki/Martin_Davis_(mathematician)>) e [Hilary Putnam](https://en.wikipedia.org/wiki/Hilary_Putnam), provou que tal algoritmo não existe. Esse resultado teve implicações profundas na teoria dos números e demonstrou a indecidibilidade de um problema central na matemática.
 
 A equivalência entre o cálculo lambda, as máquinas de Turing e as funções recursivas permitiu estabelecer os limites da computação algorítmica. O Problema da Parada e outros resultados indecidíveis, como o décimo problema de Hilbert, mostraram que existem problemas além do alcance dos algoritmos.
 
@@ -403,7 +403,7 @@ $$
 \begin{array}{c}
 \lambda x \\
 \downarrow \\
-\lambda $Y$ \\
+\lambda Y \\
 \downarrow \\
 @ \\
 \diagup \quad \diagdown \\
@@ -8673,7 +8673,7 @@ O estudo do cálculo lambda tipado e suas extensões continua a influenciar o de
 
 [^cita1]: Schönfinkel, Moses. **Über die Bausteine der mathematischen Logik**. _Mathematische Annalen_, vol. 92, no. 1-2, 1924, pp. 305-316.
 
-[^cita2]: Malpas, J., Davidson, D., **The Stanford Encyclopedia of Philosophy (Winter 2012 Edition)**, Edward N.\;zalta and Uri Nodelman (eds.), URL = <https://plato.stanford.edu/entries/lambda-calculus/#Com>.
+[^cita2]: Malpas, J., Davidson, D., **The Stanford Encyclopedia of Philosophy (Winter 2012 Edition)**, Edward N.\;zalta and Uri Nodelman (eds.), <https://plato.stanford.edu/entries/lambda-calculus/#Com>.
 
 [^cita3]: DOMINUS, M., **Why is the S combinator an S?**, URL = <https://blog.plover.com/math/combinator-s.html>.
 
