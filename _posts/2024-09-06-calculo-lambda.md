@@ -701,7 +701,7 @@ A substituição é a operação estrutural do cálculo lambda. Ela funciona sub
 1. $[N/x] x\;N$
 2. $[N/x] y\;y, \quad \text{se}\;x \neq y$
 3. $[N/x]\;(M_1 \, M_2) ([N/x]M_1)([N/x]M_2)$
-4. $[N/x]\;(\lambda $Y$ \, M) \lambda $Y$ \, ([N/x]M), \quad \text{se} ; x \neq $Y$ \quad \text{e} \quad $Y$ \notin FV(N)$
+4. $[N/x]\;(\lambda Y \, M) \lambda Y \, ([N/x]M), \quad \text{se} ; x \neq Y \quad \text{e} \quad Y \notin FV(N)$
 
 Aqui, $FV(N)$ é o conjunto de variáveis livres, _Free Variable_ de $N\,$. A condição $y \notin FV(N)$ é necessária para evitar a captura de variáveis livres.
 
@@ -852,16 +852,16 @@ data Expr = Var String | App Expr Expr | Lam String Expr
 -- Função de substituição que inclui a redução alfa para evitar captura
 substitute :: String -> Expr -> Expr -> Expr
 substitute x n (Var y)
-  | x == $Y$    = n
+  | x == Y    = n
   | otherwise = Var y
 substitute x n (App e1 e2) \, = App (substitute x n e1) (substitute x n e2)
-substitute x n (Lam $Y$ e)
-  | $Y$ == x = Lam $Y$ e  -- Variável ligada é a mesma que estamos substituindo
-  | $Y$ `elem` freeVars n =  -- Risco de captura, aplicar redução alfa
-      let y' = freshVar $Y$ (n : e : [])
-          e' = substitute $Y$ (Var y') e
+substitute x n (Lam Y e)
+  | Y == x = Lam Y e  -- Variável ligada é a mesma que estamos substituindo
+  | Y `elem` freeVars n =  -- Risco de captura, aplicar redução alfa
+      let y' = freshVar Y (n : e : [])
+          e' = substitute Y (Var y') e
       in Lam y' (substitute x n e')
-  | otherwise = Lam $Y$ (substitute x n e)
+  | otherwise = Lam Y (substitute x n e)
 
 -- Função para obter as variáveis livres em uma expressão
 freeVars :: Expr -> [String]
@@ -906,7 +906,7 @@ Agora, que definimos a assinatura da função `substitute` vamos analisar cada u
 
    ```haskell
    substitute x n (Var y)
-     | x == $Y$    = n
+     | x == Y = n
      | otherwise = Var y
    ```
 
@@ -923,13 +923,13 @@ Agora, que definimos a assinatura da função `substitute` vamos analisar cada u
 3. **Substituição em Abstrações Lambda**:
 
    ```haskell
-   substitute x n (Lam $Y$ e)
-     | $Y$ == x = Lam $Y$ e  -- Variável ligada é a mesma que estamos substituindo
-     | $Y$ `elem` freeVars n =  -- Risco de captura, aplicar redução alfa
-         let y' = freshVar $Y$ (n : e : [])
-             e' = substitute $Y$ (Var y') e
+   substitute x n (Lam Y e)
+     | Y == x = Lam Y e  -- Variável ligada é a mesma que estamos substituindo
+     | Y `elem` freeVars n =  -- Risco de captura, aplicar redução alfa
+         let y' = freshVar Y (n : e : [])
+             e' = substitute Y (Var y') e
          in Lam y' (substitute x n e')
-     | otherwise = Lam $Y$ (substitute x n e)
+     | otherwise = Lam Y (substitute x n e)
    ```
 
    Este é o caso mais complexo e corresponde à **regra 4** da substituição formal. Aqui, temos três subcasos:
@@ -1295,11 +1295,11 @@ O ambiente $\rho$ armazena as associações entre variáveis e seus valores corr
 
 **Exemplo de Atualização**:
 
-- Ambiente inicial: $\rho = \{ $Y$ \mapsto 2 \}$
+- Ambiente inicial: $\rho = \{ Y \mapsto 2 \}$
 
 - Avaliando $\lambda x.\;x + y$ com $x = 3$:
 
-- Novo ambiente: $\rho' = \rho[x \mapsto 3] = \{ $Y$ \mapsto 2, x \mapsto 3 \}$
+- Novo ambiente: $\rho' = \rho[x \mapsto 3] = \{ Y \mapsto 2, x \mapsto 3 \}$
 
 - Avaliamos $x + y$ em $\rho'$:
 
@@ -1311,7 +1311,7 @@ A experta leitora deve concordar que exemplos, facilitam o entendimento e nunca 
 
 **Exemplo 1**: Com Variáveis Livres: considere a expressão $\lambda x.\;x + y\,$, onde $y$ é uma variável livre.
 
-- Ambiente Inicial: $\rho = \{ $Y$ \mapsto 4 \}$
+- Ambiente Inicial: $\rho = \{ Y \mapsto 4 \}$
 - Interpretação da Abstração:
 
 $$
@@ -1333,7 +1333,7 @@ $$
   - Agora, interpretamos a abstração interna no ambiente estendido:
 
    $$
-   f(v) \, = g, \quad \text{onde} \quad g(w) \, = [x + y]_{\rho[x \mapsto v, $Y$ \mapsto w]} = v + w
+   f(v) \, = g, \quad \text{onde} \quad g(w) \, = [x + y]_{\rho[x \mapsto v, Y \mapsto w]} = v + w
    $$
 
 - Aplicação:
@@ -1505,7 +1505,7 @@ Finalmente, a atenta leitora pode perceber que a semântica denotacional permite
 
    3. Primeira aplicação: aplicamos $\lambda x$ ao valor $1$:
 
-      $$f(1) \, = \lambda y.\;1^2 + 2 \times 1 \times $Y$ + y^2$$
+      $$f(1) \, = \lambda y.\;1^2 + 2 \times 1 \times Y + y^2$$
 
    4. Segunda aplicação: aplicamos $\lambda y$ ao valor $2$:
 
@@ -1735,7 +1735,7 @@ $$\lambda x.\;\lambda x.\;x + x$$
 
    Uma renomeação válida seria:
 
-$$\lambda x.\;\lambda y.\;x + $Y$ \equiv_\alpha \lambda x.\;\lambda z.\;x + z$$
+$$\lambda x.\;\lambda y.\;x + Y \equiv_\alpha \lambda x.\;\lambda z.\;x + z$$
 
    Aqui, renomeamos $y$ para $z\,$, mantendo a distinção entre as variáveis e preservando a estrutura e o significado da expressão original.
 
@@ -1767,7 +1767,7 @@ Este exemplo ilustra como a equivalência alfa permite o uso seguro da redução
 
    **Solução:** A redução-$\alpha$ renomeia $y$ para $w$:
 
-   $$\lambda x. \lambda y.\;x + $Y$ \to_\alpha \lambda x.\;\lambda w.\;x + w$$
+   $$\lambda x. \lambda y.\;x + Y \to_\alpha \lambda x.\;\lambda w.\;x + w$$
 
 **3**: Aplique a redução-$\alpha$ para renomear a variável $z$ na expressão $\lambda z.\;z^2$ para $a\,$.
 
@@ -1797,7 +1797,7 @@ Este exemplo ilustra como a equivalência alfa permite o uso seguro da redução
 
    **Solução:** Substituímos $x$ por $a$ e $y$ por $b$:
 
-   $$\lambda x. \lambda y.\;x \times $Y$ \to_\alpha \lambda a. \lambda b. a \times b$$
+   $$\lambda x. \lambda y.\;x \times Y \to_\alpha \lambda a. \lambda b. a \times b$$
 
 **7**: Renomeie a variável ligada $y$ na expressão $\lambda x.\;(\lambda y.\;y + x)$ para $t\,$.
 
@@ -1883,11 +1883,11 @@ $$[y/x]\,x = y$$
 
    Com a convenção de Barendregt, variáveis ligadas não entram em conflito.
 
-**7**: Aplique a redução-$\alpha$ na expressão $\lambda x. \lambda y.\;x + y$ para renomear $ x $ e $ $Y$ $ para $ a $ e $ b \,$, respectivamente, e aplique a substituição $[3/a]\,$.
+**7**: Aplique a redução-$\alpha$ na expressão $\lambda x. \lambda y.\;x + y$ para renomear $x$ e $Y$ para $a$ e $b \,$, respectivamente, e aplique a substituição $[3/a]\,$.
 
    **Solução:** Primeiro, aplicamos a redução-$\alpha$:
 
-   $$\lambda x. \lambda y.\;x + $Y$ \to_\alpha \lambda a. \lambda b. a + b$$
+   $$\lambda x. \lambda y.\;x + Y \to_\alpha \lambda a. \lambda b. a + b$$
 
    Agora, aplicamos a substituição:
 
@@ -1903,7 +1903,7 @@ $$[y/x]\,x = y$$
 
    $$[y/x]\;(\lambda x.\;(\lambda z.\;z + 1) x) \, = \lambda x.\;(\lambda z.\;z + 1) y$$
 
-**9**: Aplique a redução-$\alpha$ na expressão $\lambda x.\;(\lambda y.\;x + y)\,$, renomeando $ $Y$ $ para $ z \,$, e depois aplique a substituição $[5/x]\,$.
+**9**: Aplique a redução-$\alpha$ na expressão $\lambda x.\;(\lambda y.\;x + y)\,$, renomeando $Y$ para $z \,$, e depois aplique a substituição $[5/x]\,$.
 
    **Solução:** Primeiro, aplicamos a redução-$\alpha$:
 
@@ -1933,7 +1933,7 @@ $$[y/x]\,x = y$$
 
    **Solução:** Como não há conflitos de variáveis livres e ligadas, aplicamos a substituição diretamente:
 
-   $$[y/x]\;(\lambda z.\;x + z) \, = \lambda z. $Y$ + z$$
+   $$[y/x]\;(\lambda z.\;x + z) \, = \lambda z. Y + z$$
 
 **13**: Aplique a substituição $[z/x]\;(\lambda y.\;x \times y)$ onde $ z \in FV(x)\,$. Utilize a convenção de Barendregt.
 
@@ -1943,7 +1943,7 @@ $$[y/x]\,x = y$$
 
    A convenção de Barendregt garante que não precisamos renomear variáveis.
 
-**14**: Aplique a redução-$\alpha$ na expressão $\lambda x.\;(\lambda y.\;x + y)$ e renomeie $ $Y$ $ para $ t \,$, depois aplique a substituição $[2/x]\,$.
+**14**: Aplique a redução-$\alpha$ na expressão $\lambda x.\;(\lambda y.\;x + y)$ e renomeie $Y$ para $ t \,$, depois aplique a substituição $[2/x]\,$.
 
    **Solução:** Primeiro aplicamos a redução-$\alpha$:
 
@@ -2359,7 +2359,7 @@ addOne = (+ 1)
 
 Neste exemplo, definimos uma função `addOne` que adiciona $1$ a um número inteiro. Vamos entender como a redução-$\eta$ é aplicada aqui:
 
-Na versão antes da redução-$\eta$: `addOne x = (+ 1) x` define uma função que toma um argumento `x`. Enquanto `(+ 1)` é uma função parcialmente aplicada em Haskell, equivalente a `\y -> $Y$ + 1`. A função `addOne` aplica `(+ 1)` ao argumento `x`.
+Na versão antes da redução-$\eta$: `addOne x = (+ 1) x` define uma função que toma um argumento `x`. Enquanto `(+ 1)` é uma função parcialmente aplicada em Haskell, equivalente a `\y -> Y + 1`. A função `addOne` aplica `(+ 1)` ao argumento `x`.
 
 A redução-$\eta$ nos permite simplificar esta definição: observamos que `x` aparece como o último argumento tanto no lado esquerdo (`addOne x`) quanto no lado direito (`(+ 1) x`) da equação. A redução-$\eta$ permite remover este argumento `x` de ambos os lados.
 
@@ -2550,6 +2550,7 @@ Em suma, a redução-$\eta$ desempenha um papel importante na otimização de co
 Um dos obstáculos enfrentado por Church durante o desenvolvimento do cálculo lambda dizia respeito a consistência do processo de redução. Ou seja, provar que um termo lambda mesmo que reduzido de formas diferentes, chegaria a mesma forma normal, caso esta forma existisse. Em busca desta consistência, Church e [J. Barkley Rosser](https://en.wikipedia.org/wiki/J._Barkley_Rosser), seu estudante de doutorado, formularam o teorema que viria a ser chamado de **Teorema de Church-Rosser**[^cita5]. Este teorema, chamado de propriedade da confluência local, garante a consistência e a previsibilidade do sistema de redução beta, afirmando que, **independentemente da ordem em que as reduções beta são aplicadas, o resultado , se existir, é o mesmo** Figura 3.4.A.
 
 ![Um diagrama com um termo principal, M e dois caminhos de redução chegando ao mesmo ponto](/assets/images/conflu.webp)
+
 _Figura 3.4.A: Diagrama da Propriedade de Confluência determinada pelo Teorema de Church-Rosser_{: legenda}
 
 Formalmente teremos:
@@ -3164,7 +3165,7 @@ Haskell implementa o _currying_por padrão para todas as funções. Isso signifi
 
 ```haskell
 add :: Int -> Int -> Int
-add x $Y$ = x + y
+add x y = x + y
 ```
 
 Essa definição é equivalente a:
@@ -3224,11 +3225,11 @@ Finalmente em Haskell o uso do _currying_permite escrever código mais conciso e
 
    $$(\lambda x. \lambda y.\;x + y)\;4\;5 = 4 + 5 = 9$$
 
-**2**: transforme a função $f(x, y, z) \, = x \times $Y$ + z$ em uma expressão lambda usando _currying_e aplique-a aos valores $x = 2\,$, $y = 3\,$, e $z = 4\,$.
+**2**: transforme a função $f(x, y, z) \, = x \times Y + z$ em uma expressão lambda usando _currying_e aplique-a aos valores $x = 2\,$, $y = 3\,$, e $z = 4\,$.
 
-   **Solução:** A função curried é $\lambda x. \lambda y.\;\lambda z.\;x \times $Y$ + z\,$. Aplicando $x = 2\,$, $y = 3\,$, e $z = 4$:
+   **Solução:** A função curried é $\lambda x. \lambda y.\;\lambda z.\;x \times Y + z\,$. Aplicando $x = 2\,$, $y = 3\,$, e $z = 4$:
 
-   $$(\lambda x. \lambda y.\;\lambda z.\;x \times $Y$ + z)\;2\;3\;4 = 2 \times 3 + 4 = 6 + 4 = 10$$
+   $$(\lambda x. \lambda y.\;\lambda z.\;x \times Y + z)\;2\;3\;4 = 2 \times 3 + 4 = 6 + 4 = 10$$
 
 **3**: crie uma função curried que representa $f(x, y) \, = x^2 + y^2\,$. Aplique a função a $x = 1$ e $y = 2\,$.
 
@@ -3260,23 +3261,23 @@ Finalmente em Haskell o uso do _currying_permite escrever código mais conciso e
 
    $$(\lambda x. \lambda y.\;x^y)\;2\;3 = 2^3 = 8$$
 
-**8**: defina uma função curried que represente a multiplicação de três números, ou seja, $f(x, y, z) \, = x \times $Y$ \times z\,$, e aplique-a aos valores $x = 2\,$, $y = 3\,$, e $z = 4\,$.
+**8**: defina uma função curried que represente a multiplicação de três números, ou seja, $f(x, y, z) \, = x \times Y \times z\,$, e aplique-a aos valores $x = 2\,$, $y = 3\,$, e $z = 4\,$.
 
-   **Solução:** A função curried é $\lambda x. \lambda y.\;\lambda z.\;x \times $Y$ \times z\,$. Aplicando $x = 2\,$, $y = 3\,$, e $z = 4$:
+   **Solução:** A função curried é $\lambda x. \lambda y.\;\lambda z.\;x \times Y \times z\,$. Aplicando $x = 2\,$, $y = 3\,$, e $z = 4$:
 
-   $$(\lambda x. \lambda y.\;\lambda z.\;x \times $Y$ \times z)\;2\;3\;4 = 2 \times 3 \times 4 = 24$$
+   $$(\lambda x. \lambda y.\;\lambda z.\;x \times Y \times z)\;2\;3\;4 = 2 \times 3 \times 4 = 24$$
 
 **9**: transforme a função $f(x, y) \, = x + 2y$ em uma expressão lambda curried e aplique-a aos valores $x = 1$ e $y = 4\,$.
 
-   **Solução:** A função curried é $\lambda x. \lambda y.\;x + 2y\,$. Aplicando $x = 1 $ e $ $Y$ = 4$:
+   **Solução:** A função curried é $\lambda x. \lambda y.\;x + 2y\,$. Aplicando $x = 1 $ e $ Y = 4$:
 
    $$(\lambda x. \lambda y.\;x + 2y)\;1\;4 = 1 + 2 \times 4 = 1 + 8 = 9$$
 
-**10**: crie uma função curried para representar a soma de três números, ou seja, $f(x, y, z) \, = x + $Y$ + z\,$, e aplique-a aos valores $x = 3\,$, $y = 5\,$, e $z = 7\,$.
+**10**: crie uma função curried para representar a soma de três números, ou seja, $f(x, y, z) \, = x + Y + z\,$, e aplique-a aos valores $x = 3\,$, $y = 5\,$, e $z = 7\,$.
 
-   **Solução:** A função curried é $\lambda x. \lambda y.\;\lambda z.\;x + $Y$ + z\,$. Aplicando $x = 3\,$, $y = 5\,$, e $z = 7$:
+   **Solução:** A função curried é $\lambda x. \lambda y.\;\lambda z.\;x +  + z\,$. Aplicando $x = 3\,$, $y = 5\,$, e $z = 7$:
 
-   $$(\lambda x. \lambda y.\;\lambda z.\;x + $Y$ + z)\;3\;5\;7 = 3 + 5 + 7 = 15$$
+   $$(\lambda x. \lambda y.\;\lambda z.\;x +  + z)\;3\;5\;7 = 3 + 5 + 7 = 15$$
 
 ### 3.5.3. Ordem Normal e Estratégias de Avaliação
 
@@ -3447,17 +3448,17 @@ Finalmente, a lista de combinadores do cálculo lambda é um pouco mais extensa 
 
 | Nome | Definição e Comentários |
 |------|-------------------------|
-| **S** | $\lambda x [\lambda $Y$ [\lambda z [x z (y\;z)]]]\,$. Lembre-se que $x z (y\;z)$ deve ser entendido como a aplicação $(x z)(y\;z)$ de $x z$ a $y\;z\,$. O combinador $S$ pode ser entendido como um operador de _substituir e aplicar_: $z$ _intervém_ entre $x$ e $y$; em vez de aplicar $x$ a $y\,$, aplicamos $x z$ a $y\;z\,$. |
-| **K** | $\lambda x [\lambda $Y$ [x]]\,$. O valor de $K M$ é a função constante cujo valor para qualquer argumento é simplesmente $M\,$. |
+| **S** | $\lambda x [\lambda  [\lambda z [x z (y\;z)]]]\,$. Lembre-se que $x z (y\;z)$ deve ser entendido como a aplicação $(x z)(y\;z)$ de $x z$ a $y\;z\,$. O combinador $S$ pode ser entendido como um operador de _substituir e aplicar_: $z$ _intervém_ entre $x$ e $y$; em vez de aplicar $x$ a $y\,$, aplicamos $x z$ a $y\;z\,$. |
+| **K** | $\lambda x [\lambda  [x]]\,$. O valor de $K M$ é a função constante cujo valor para qualquer argumento é simplesmente $M\,$. |
 | **I** | $\lambda x [x]\,$. A função identidade. |
-| **B** | $\lambda x [\lambda $Y$ [\lambda z [x (y\;z)]]]\,$. Lembre-se que $x\;y\;z$ deve ser entendido como $(x\;y) z\,$, então este combinador não é uma função identidade trivial. |
-| **C** | $\lambda x [\lambda $Y$ [\lambda z [x z y]]]\,$. Troca um argumento. |
-| **T** | $\lambda x [\lambda $Y$ [x]]\,$. Valor verdadeiro lógico (True). Idêntico a $K\,$. Veremos mais tarde como essas representações dos valores lógicos desempenham um papel na fusão da lógica com o cálculo lambda. |
-| **F** | $\lambda x [\lambda $Y$ [y]]\,$. Valor falso lógico (False). |
+| **B** | $\lambda x [\lambda  [\lambda z [x (y\;z)]]]\,$. Lembre-se que $x\;y\;z$ deve ser entendido como $(x\;y) z\,$, então este combinador não é uma função identidade trivial. |
+| **C** | $\lambda x [\lambda  [\lambda z [x z y]]]\,$. Troca um argumento. |
+| **T** | $\lambda x [\lambda  [x]]\,$. Valor verdadeiro lógico (True). Idêntico a $K\,$. Veremos mais tarde como essas representações dos valores lógicos desempenham um papel na fusão da lógica com o cálculo lambda. |
+| **F** | $\lambda x [\lambda  [y]]\,$. Valor falso lógico (False). |
 | **ω** | $\lambda x [x\;x]\,$. Combinador de autoaplicação. |
 | **Ω** | $\omega \omega\,$. Autoaplicação do combinador de autoaplicação. Reduz para si mesmo. |
-| **Y** | $\lambda f [(\lambda x [f (x\;x)]) (\lambda x [f (x\;x)])]\,$. O combinador paradoxal de Curry. Para todo termo lambda $X\,$, temos: $Y X \triangleright (\lambda x [X (x\;x)]) (\lambda x [X (x\;x)]) \triangleright X ((\lambda x [X (x\;x)]) (\lambda x [X (x\;x)]))\,$. A primeira etapa da redução mostra que $Y X$ reduz ao termo de aplicação $(\lambda x [X (x\;x)]) (\lambda x [X (x\;x)])\,$, que reaparece na terceira etapa. Assim, $Y$ tem a propriedade curiosa de que $Y X$ e $X (Y X)$ reduzem a um termo comum. |
-| **Θ** | $(\lambda x [\lambda f [f (x\;x f)]]) (\lambda x [\lambda f [f (x\;x f)]])\,$. O combinador de ponto fixo de Turing. Para todo termo lambda $X\,$, $Θ X$ reduz para $X (Θ X)\,$, o que pode ser confirmado manualmente. (O combinador paradoxal de Curry $Y$ não tem essa propriedade.) |
+| **Y** | $\lambda f [(\lambda x [f (x\;x)]) (\lambda x [f (x\;x)])]\,$. O combinador paradoxal de Curry. Para todo termo lambda $X\,$, temos: $Y X \triangleright (\lambda x [X (x\;x)]) (\lambda x [X (x\;x)]) \triangleright X ((\lambda x [X (x\;x)]) (\lambda x [X (x\;x)]))\,$. A primeira etapa da redução mostra que $Y\;X$ reduz ao termo de aplicação $(\lambda x [X (x\;x)]) (\lambda x [X (x\;x)])\,$, que reaparece na terceira etapa. Assim, $Y$ tem a propriedade curiosa de que $Y X$ e $X (Y X)$ reduzem a um termo comum. |
+| **Θ** | $(\lambda x [\lambda f [f (x\;x f)]]) (\lambda x [\lambda f [f (x\;x f)]])\,$. O combinador de ponto fixo de Turing. Para todo termo lambda $X\,$, $Θ X$ reduz para $X (Θ\;X)\,$, o que pode ser confirmado manualmente. (O combinador paradoxal de Curry $Y$ não tem essa propriedade.) |
 
 _Tabela 3.6.B: Definições e Observações sobre os Combinadores._{: legenda}
 
@@ -3529,9 +3530,9 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
 ### 3.6.1. Exercícios sobre Combinadores e Funções Anônimas
 
-**1**: Defina o combinador de ponto fixo de Curry, conhecido como o combinador $ $Y$ \,$, e aplique-o à função $ f(x) \, = x + 1 \,$. Explique o que ocorre.
+**1**: Defina o combinador de ponto fixo de Curry, conhecido como o combinador $Y\,$, e aplique-o à função $ f(x) \, = x + 1 \,$. Explique o que ocorre.
 
-   **Solução:** O combinador $ $Y$ $ é definido como:
+   **Solução:** O combinador $Y$ é definido como:
 
    $$Y = \lambda f. (\lambda x.\;f(x\;x)) (\lambda x.\;f(x\;x))$$
 
@@ -3553,7 +3554,7 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
    $$x_2 = 2 \times 2 = 4$$
 
-**3**: Mostre como o combinador $ $Y$ $ pode ser aplicado para encontrar o ponto fixo da função $ f(x) \, = x^2 - 1 \,$.
+**3**: Mostre como o combinador $Y$ pode ser aplicado para encontrar o ponto fixo da função $ f(x) \, = x^2 - 1 \,$.
 
    **Solução:** Aplicando o combinador $Y$ à função $f(x) \, = x^2 - 1$:
 
@@ -3567,19 +3568,19 @@ Em linguagens funcionais como Haskell, essa característica é usada para criar 
 
    $$f = \lambda f. \lambda n.\;(n = 0 ? 1 : n \times f\;(n-1))$$
 
-   Aplicando o combinador $ $Y$ $:
+   Aplicando o combinador $Y$:
 
    $$Y(f) \, = \lambda n.\;(n = 0 ? 1 : n \times Y\;(f)\;(n-1))$$
 
    Agora podemos calcular o fatorial de um número, como $ 3! = 3 \times 2 \times 1 = 6 \,$.
 
-**5**: Utilize o combinador $ $Y$ $ para definir uma função recursiva que calcula a sequência de Fibonacci.
+**5**: Utilize o combinador $Y$ para definir uma função recursiva que calcula a sequência de Fibonacci.
 
    **Solução:** A função para Fibonacci pode ser definida como:
 
    $$f = \lambda f. \lambda n.\;(n = 0 ? 0 : (n = 1 ? 1 : f\;(n-1) + f\;(n-2)))$$
 
-   Aplicando o combinador $ $Y$ $:
+   Aplicando o combinador $Y$:
 
    $$Y\;(f) \, = \lambda n.\;(n = 0 ? 0 : (n = 1 ? 1 : Y\;(f)\;(n-1) + Y\;(f)\;(n-2)))$$
 
@@ -4617,7 +4618,7 @@ Talvez algumas aplicações em linguagem Haskell ajude a fixar os conceitos.
 
    ```haskell
    -- Antes da otimização
-   let x = (\y -> $Y$ + 1)\;5 in x * 2
+   let x = (\y -> Y + 1)\;5 in x * 2
    -- Após a otimização (equivalente)
    let x = 6 in x * 2
    ```
@@ -4717,7 +4718,7 @@ A equivalência Lambda, ainda que seja importante, não resolve todos os problem
 
    main = do
       let x = f1 5
-      $Y$ <- x
+      Y <- x
       print y
 
       let z = f2 5
@@ -4800,7 +4801,7 @@ y f = f (y f)
 
 -- Definição da função fatorial usando o Y-combinator
 factorial :: Integer -> Integer
-factorial = $Y$ $\f n -> if n == 0 then 1 else n * f (n - 1)
+factorial = Y \f n -> if n == 0 then 1 else n * f (n - 1)
 
 main :: IO ()
 main = do
@@ -4813,7 +4814,7 @@ Podemos estender este exemplo para outras funções recursivas, como a sequênci
 
 ```haskell
 fibonacci :: Integer -> Integer
-fibonacci = $Y$ $\f n -> if n <= 1 then n else f (n - 1) + f (n - 2)
+fibonacci = y $\f n -> if n <= 1 then n else f (n - 1) + f (n - 2)
 
 main :: IO ()
 main = do
@@ -5991,7 +5992,7 @@ A insistente leitora pode avaliar a conjunção usando unicamente o cálculo lam
    &\text{Neste ponto, temos uma função que sempre retorna $\text{False}\,$, já que $\text{True}$ ignora o segundo argumento.} \\
    \\
    &\text{Aplicamos a última redução beta, que retorna diretamente $\text{False}$:} \\
-   &\to_\beta \lambda x.\; \lambda y.\; $Y$ \\
+   &\to_\beta \lambda x.\; \lambda y.\; Y \\
    \\
    &\text{Esta é exatamente a definição de $\text{False}$ no cálculo lambda.} \\
    \\
@@ -6174,7 +6175,7 @@ E, ainda mantendo a tradição, vamos ver a mesma aplicação em cálculo lambda
    &\to_\beta \lambda y.\; (\lambda x.\; \lambda y.\; y) \\
    \\
    &\text{Aplicamos a última redução beta, resultando em $\text{False}$ $(\lambda x.\; \lambda y.\; y)$:} \\
-   &\to_\beta \lambda x.\; \lambda y.\; $Y$ \\
+   &\to_\beta \lambda x.\; \lambda y.\; Y \\
    \\
    &\text{Portanto, o resultado será:} \\
    &= \text{False}
@@ -6193,10 +6194,10 @@ Vamos aplicar a estrutura condicional para a expressão em dois casos distintos:
 1. Aplicação de _IF-THEN-ELSE_ a _True_ $x$ $y$
 
    $$\begin{align*}
-   \text{IF-THEN-ELSE}\;\text{True}\;x\;y &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; x)\; x\; $Y$ \\
+   \text{IF-THEN-ELSE}\;\text{True}\;x\;y &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; x)\; x\; Y \\
    \\
    &\text{Substituímos $\text{True}$ e $\text{IF-THEN-ELSE}$ por suas definições em cálculo lambda:} \\
-   &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; x)\; x\; $Y$ \\
+   &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; x)\; x\; Y \\
    \\
    &\text{Aplicamos a primeira redução beta, substituindo $b$ por $\text{True}$ $(\lambda x.\; \lambda y.\; x)$:} \\
    &\to_\beta (\lambda x.\; \lambda y.\; (\lambda x.\; \lambda y.\; x)\; x\; y) \\
@@ -6211,10 +6212,10 @@ Vamos aplicar a estrutura condicional para a expressão em dois casos distintos:
    Outra vez, para não perder o hábito, vamos ver esta mesma aplicação em Cálculo Lambda Puro:
 
    $$\begin{align*}
-   \text{IF-THEN-ELSE}\;\text{True}\;x\;y &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; x)\; x\; $Y$ \\
+   \text{IF-THEN-ELSE}\;\text{True}\;x\;y &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; x)\; x\; Y \\
    \\
    &\text{Substituímos $\text{True}$ e $\text{IF-THEN-ELSE}$ por suas definições:} \\
-   &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; x)\; x\; $Y$ \\
+   &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; x)\; x\; Y \\
    \\
    &\text{Aplicamos a primeira redução beta, substituindo $b$ por $\text{True}$ $(\lambda x.\; \lambda y.\; x)$:} \\
    &\to_\beta (\lambda x.\; \lambda y.\; (\lambda x.\; \lambda y.\; x)\; x\; y) \\
@@ -6229,10 +6230,10 @@ Vamos aplicar a estrutura condicional para a expressão em dois casos distintos:
 2. Aplicação de _IF-THEN-ELSE_ a _False_ $x$ $y$
 
    $$\begin{align*}
-   \text{IF-THEN-ELSE}\;\text{False}\;x\;y &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; y)\; x\; $Y$ \\
+   \text{IF-THEN-ELSE}\;\text{False}\;x\;y &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; y)\; x\; Y \\
    \\
    &\text{Substituímos $\text{False}$ e $\text{IF-THEN-ELSE}$ por suas definições em cálculo lambda:} \\
-   &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; y)\; x\; $Y$ \\
+   &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; y)\; x\; Y \\
    \\
    &\text{Aplicamos a primeira redução beta, substituindo $b$ por $\text{False}$ $(\lambda x.\; \lambda y.\; y)$:} \\
    &\to_\beta (\lambda x.\; \lambda y.\; (\lambda x.\; \lambda y.\; y)\; x\; y) \\
@@ -6247,10 +6248,10 @@ Vamos aplicar a estrutura condicional para a expressão em dois casos distintos:
    Eu sei que a amável leitora não esperava por essa. Mas, eu vou refazer esta aplicação em cálculo lambda puro.
 
    $$\begin{align*}
-   \text{IF-THEN-ELSE}\;\text{False}\;x\;y &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; y)\; x\; $Y$ \\
+   \text{IF-THEN-ELSE}\;\text{False}\;x\;y &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; y)\; x\; Y \\
    \\
    &\text{Substituímos $\text{False}$ e $\text{IF-THEN-ELSE}$ por suas definições:} \\
-   &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; y)\; x\; $Y$ \\
+   &= (\lambda b.\; \lambda x.\; \lambda y.\; b\; x\; y)\; (\lambda x.\; \lambda y.\; y)\; x\; Y \\
    \\
    &\text{Aplicamos a primeira redução beta, substituindo $b$ por $\text{False}$ $(\lambda x.\; \lambda y.\; y)$:} \\
    &\to_\beta (\lambda x.\; \lambda y.\; (\lambda x.\; \lambda y.\; y)\; x\; y) \\
@@ -7457,7 +7458,7 @@ Com um pouco mais de formalidade, vamos considerar um conjunto de tipos básicos
 
 $$A,B ::= \tau \mid A \rightarrow B \mid A \times B \mid 1$$
 
-O significado pretendido desses tipos é o seguinte: tipos base são estruturas simples como os  tipos de inteiro e booleano. O tipo $A \rightarrow B$ é o tipo de funções de $A$ para $B\,$. O tipo $A \times B$ é o tipo de tuplas $\langle x, $Y$ \rangle\,$, onde $x$ tem tipo $A$ e $y$ tem tipo $B\,$. A notação $\langle x, $Y$ \rangle$ foi introduzida para representar um par de termos $M$ e $N\,$. Permitindo que o cálculo lambda tipado manipule funções e estruturas de dados compostas.
+O significado pretendido desses tipos é o seguinte: tipos base são estruturas simples como os  tipos de inteiro e booleano. O tipo $A \rightarrow B$ é o tipo de funções de $A$ para $B\,$. O tipo $A \times B$ é o tipo de tuplas $\langle x, Y \rangle\,$, onde $x$ tem tipo $A$ e $y$ tem tipo $B\,$. A notação $\langle x, Y \rangle$ foi introduzida para representar um par de termos $M$ e $N\,$. Permitindo que o cálculo lambda tipado manipule funções e estruturas de dados compostas.
 
 O tipo $1$ é um tipo de um elemento literal, um tipo especial que contém exatamente um elemento, semelhante ao conceito de _tipo simples_ em algumas linguagens de programação. Isso é útil para representar valores que não carregam informação significativa, mas que precisam existir para manter a consistência do sistema de tipos.
 
@@ -7572,7 +7573,7 @@ $$(\lambda f : (\text{Nat} \rightarrow \text{Nat}). \lambda x : \text{Nat}. f\;(
 
 Além da construção de funções e abstrações tipadas, o básico para a criação de expressões no cálculo lambda tipado, a gramática pode ser usada para validar expressões. Vamos fazer uma derivação, para validar a expressão lambda tipada:
 
-$$(\lambda x : \text{Nat}. \lambda $Y$ : \text{Bool}.\;x)\;3\;\text{True}$$
+$$(\lambda x : \text{Nat}. \lambda Y : \text{Bool}.\;x)\;3\;\text{True}$$
 
    1. Começamos com o termo completo:
 
@@ -7580,7 +7581,7 @@ $$(\lambda x : \text{Nat}. \lambda $Y$ : \text{Bool}.\;x)\;3\;\text{True}$$
 
    2. Expandimos o primeiro termo:
 
-      $$(\lambda x : \text{Nat}. \lambda $Y$ : \text{Bool}.\;x)\;3\;\text{True}$$
+      $$(\lambda x : \text{Nat}. \lambda Y : \text{Bool}.\;x)\;3\;\text{True}$$
 
       $$\text{termo} \rightarrow (\text{termo})\;\text{termo}\;\text{termo}$$
 
@@ -7705,30 +7706,30 @@ $$\frac{\Gamma \vdash \text{not} : \text{Bool} \rightarrow \text{Bool} \quad \Ga
 2. **Normalização Forte**: Todo termo bem tipado em certos sistemas de tipos, como o cálculo lambda simplesmente tipado, tem uma sequência finita de reduções que leva a uma forma normal (um termo que não pode ser mais reduzido). Considere o seguinte termo:
 
 $$
-   (\lambda f: \text{Nat} \rightarrow \text{Nat}. \lambda x: \text{Nat}. f (f\;x))\;(\lambda y: \text{Nat}. $Y$ + 1)\;0
+   (\lambda f: \text{Nat} \rightarrow \text{Nat}. \lambda x: \text{Nat}. f (f\;x))\;(\lambda y: \text{Nat}. Y + 1)\;0
 $$
 
    Este termo descreve uma função que aplica outra função $f$ duas vezes a um argumento $x\,$. Aplicamos essa função à função que incrementa $y$ e ao valor $0\,$. Vamos ver como o termo se reduz,
 
    Primeiro, aplicamos:
 
-  $$\lambda f: \text{Nat} \rightarrow \text{Nat}. \lambda x: \text{Nat}. f (f\;x)$ à função $\lambda y: \text{Nat}. $Y$ + 1$$
+  $$\lambda f: \text{Nat} \rightarrow \text{Nat}. \lambda x: \text{Nat}. f (f\;x)$ à função $\lambda y: \text{Nat}. Y + 1$$
 
-  $$(\lambda f: \text{Nat} \rightarrow \text{Nat}. \lambda x: \text{Nat}. f (f\;x))\;(\lambda y: \text{Nat}. $Y$ + 1)
-      \rightarrow \lambda x: \text{Nat}. (\lambda y: \text{Nat}. $Y$ + 1) ((\lambda y: \text{Nat}. $Y$ + 1)\;x)$$
+  $$(\lambda f: \text{Nat} \rightarrow \text{Nat}. \lambda x: \text{Nat}. f (f\;x))\;(\lambda y: \text{Nat}. Y + 1)
+      \rightarrow \lambda x: \text{Nat}. (\lambda y: \text{Nat}. Y + 1) ((\lambda y: \text{Nat}. Y + 1)\;x)$$
 
       Agora, aplicamos essa função ao valor $0$:
 
-  $$(\lambda x: \text{Nat}. (\lambda y: \text{Nat}. $Y$ + 1) ((\lambda y: \text{Nat}. $Y$ + 1)\;x))\;0
-      \rightarrow (\lambda y: \text{Nat}. $Y$ + 1) ((\lambda y: \text{Nat}. $Y$ + 1)\;0)$$
+  $$(\lambda x: \text{Nat}. (\lambda y: \text{Nat}. Y + 1) ((\lambda y: \text{Nat}. Y + 1)\;x))\;0
+      \rightarrow (\lambda y: \text{Nat}. Y + 1) ((\lambda y: \text{Nat}. Y + 1)\;0)$$
 
       Avaliando a primeira aplicação:
 
-  $$(\lambda y: \text{Nat}. $Y$ + 1)\;0 \rightarrow 0 + 1 \rightarrow 1$$
+  $$(\lambda y: \text{Nat}. Y + 1)\;0 \rightarrow 0 + 1 \rightarrow 1$$
 
       Avaliando a segunda aplicação:
 
-  $$(\lambda y: \text{Nat}. $Y$ + 1)\;1 \rightarrow 1 + 1 \rightarrow 2$$
+  $$(\lambda y: \text{Nat}. Y + 1)\;1 \rightarrow 1 + 1 \rightarrow 2$$
 
       O termo foi completamente reduzido para $2\,$, e não há mais reduções possíveis. Esse é o estado irreduzível ou a _forma normal_ do termo. A _normalização forte_ garante que, neste sistema de tipos, qualquer termo bem tipado eventualmente chegará a uma forma normal, sem laços infinitos.
 
@@ -7853,7 +7854,7 @@ $$
    Similarmente, como `$(y : \text{Bool}) \in \Gamma$:
 
 $$
-   \Gamma \vdash $Y$ : \text{Bool}
+   \Gamma \vdash Y : \text{Bool}
 $$
 
    Isso mostra que, dentro do contexto $\Gamma\,$, as variáveis $x$ e $y$ têm os tipos $\text{Nat}$ e $\text{Bool}\,$, respectivamente.
@@ -7934,7 +7935,7 @@ $$\Gamma \vdash x : \text{Nat}$$
 
    Como $(y : \text{Bool}) \in \Gamma\,$, então:
 
-$$\Gamma \vdash $Y$ : \text{Bool}$$
+$$\Gamma \vdash Y : \text{Bool}$$
 
 **Exemplo**: Regra de Abstração
 
@@ -7992,7 +7993,7 @@ Usando a Regra de Abstração, mostre que esta função tem o tipo $\text{Nat} \
 
    Aplicando a Regra de Abstração:
 
-   $$\frac{\Gamma, y:\text{Nat} \vdash $Y$ \times 2 : \text{Nat}}{\Gamma \vdash \lambda y:\text{Nat}.\;y \times 2 : \text{Nat} \rightarrow \text{Nat}}$$
+   $$\frac{\Gamma, y:\text{Nat} \vdash Y \times 2 : \text{Nat}}{\Gamma \vdash \lambda y:\text{Nat}.\;y \times 2 : \text{Nat} \rightarrow \text{Nat}}$$
 
    Portanto, a função tem tipo $\text{Nat} \rightarrow \text{Nat}\,$.
 
@@ -8124,11 +8125,11 @@ Determine o tipo de $M$ usando as regras de tipagem.
 
    4. Aplicando a Regra de Abstração para $y$:
 
-   $$\frac{\Gamma, x:\text{Bool}, y:\text{Bool} \vdash x \land $Y$ : \text{Bool}}{\Gamma, x:\text{Bool} \vdash \lambda y:\text{Bool}.\;x \land $Y$ : \text{Bool} \rightarrow \text{Bool}}$$
+   $$\frac{\Gamma, x:\text{Bool}, y:\text{Bool} \vdash x \land Y : \text{Bool}}{\Gamma, x:\text{Bool} \vdash \lambda y:\text{Bool}.\;x \land Y : \text{Bool} \rightarrow \text{Bool}}$$
 
    5. Aplicando a Regra de Abstração para $x$:
 
-   $$\frac{\Gamma \vdash \lambda y:\text{Bool}.\;x \land $Y$ : \text{Bool} \rightarrow \text{Bool}}{\Gamma \vdash \lambda x:\text{Bool}.\;\lambda y:\text{Bool}.\;x \land $Y$ : \text{Bool} \rightarrow (\text{Bool} \rightarrow \text{Bool})}$$
+   $$\frac{\Gamma \vdash \lambda y:\text{Bool}.\;x \land Y : \text{Bool} \rightarrow \text{Bool}}{\Gamma \vdash \lambda x:\text{Bool}.\;\lambda y:\text{Bool}.\;x \land Y : \text{Bool} \rightarrow (\text{Bool} \rightarrow \text{Bool})}$$
 
    Portanto, o tipo de $M$ é $\text{Bool} \rightarrow \text{Bool} \rightarrow \text{Bool}\,$.
 
@@ -8187,9 +8188,9 @@ Aqui, a variável $x$ é substituída pelo valor $2$ e, em seguida, a expressão
 
 Além da redução-$beta\,$, existem duas outras formas importantes de conversão no cálculo lambda: a **redução-$\alpha$** e a **$\eta$-redução**.
 
-- **redução-$\alpha$**: Esta operação permite a renomeação de variáveis ligadas, desde que a nova variável não conflite com variáveis livres. Por exemplo, as expressões $\lambda x : A .\;x$ e $\lambda $Y$ : A . y$ são equivalentes sob redução-$\alpha$:
+- **redução-$\alpha$**: Esta operação permite a renomeação de variáveis ligadas, desde que a nova variável não conflite com variáveis livres. Por exemplo, as expressões $\lambda x : A .\;x$ e $\lambda Y : A . y$ são equivalentes sob redução-$\alpha$:
 
-$$\lambda x : A .\;x \equiv_\alpha \lambda $Y$ : A . y$$
+$$\lambda x : A .\;x \equiv_\alpha \lambda Y : A . y$$
 
  A redução-$\alpha$ é importante para evitar a captura de variáveis durante o processo de substituição, garantindo que a renomeação de variáveis ligadas não afete o comportamento da função.
 
@@ -8293,18 +8294,18 @@ $$(\lambda x:\text{Nat}.\;x + 1)\;2 \rightarrow_\beta 2 + 1 \rightarrow 3$$
 
    O termo reduz à sua forma normal, $3\,$, em um número finito de passos.
 
-**2**: Dado o termo $(\lambda f:\text{Nat}\rightarrow\text{Nat}. \lambda x:\text{Nat}. f (f x)) (\lambda y:\text{Nat}. $Y$ + 1)\;2\,$, mostre que ele é bem tipado e reduz para um valor do tipo $\text{Nat}\,$.
+**2**: Dado o termo $(\lambda f:\text{Nat}\rightarrow\text{Nat}. \lambda x:\text{Nat}. f (f x)) (\lambda y:\text{Nat}. Y + 1)\;2\,$, mostre que ele é bem tipado e reduz para um valor do tipo $\text{Nat}\,$.
 
    **Solução**: 0 termo é bem tipado: $(\text{Nat}\rightarrow\text{Nat})\rightarrow\text{Nat}\rightarrow\text{Nat}$
 
    Redução:
 
 $$\begin{aligned}
-   &(\lambda f:\text{Nat}\rightarrow\text{Nat}. \lambda x:\text{Nat}. f (f x)) (\lambda y:\text{Nat}. $Y$ + 1)\;2 \\
-   &\rightarrow_\beta (\lambda x:\text{Nat}. (\lambda y:\text{Nat}. $Y$ + 1) ((\lambda y:\text{Nat}. $Y$ + 1) x))\;2 \\
-   &\rightarrow_\beta (\lambda y:\text{Nat}. $Y$ + 1) ((\lambda y:\text{Nat}. $Y$ + 1)\;2) \\
-   &\rightarrow_\beta (\lambda y:\text{Nat}. $Y$ + 1) (2 + 1) \\
-   &\rightarrow_\beta (\lambda y:\text{Nat}. $Y$ + 1)\;3 \\
+   &(\lambda f:\text{Nat}\rightarrow\text{Nat}. \lambda x:\text{Nat}. f (f x)) (\lambda y:\text{Nat}. Y + 1)\;2 \\
+   &\rightarrow_\beta (\lambda x:\text{Nat}. (\lambda y:\text{Nat}. Y + 1) ((\lambda y:\text{Nat}. Y + 1) x))\;2 \\
+   &\rightarrow_\beta (\lambda y:\text{Nat}. Y + 1) ((\lambda y:\text{Nat}. Y + 1)\;2) \\
+   &\rightarrow_\beta (\lambda y:\text{Nat}. Y + 1) (2 + 1) \\
+   &\rightarrow_\beta (\lambda y:\text{Nat}. Y + 1)\;3 \\
    &\rightarrow_\beta 3 + 1 \\
    &\rightarrow 4
    \end{aligned}$$
@@ -8409,11 +8410,11 @@ Repita este exercício. Ele demonstra como as reduções em um termo bem tipado 
 
    **Solução**: a normalização forte garante que toda sequência de reduções de um termo bem tipado eventualmente termina em uma forma normal. Isso implica que não pode haver loops infinitos, pois se houvesse, a sequência de reduções nunca terminaria, contradizendo a propriedade de normalização forte.
 
-**7**: Considere o termo $(\lambda x:\text{Nat}\rightarrow\text{Nat}.\;x 3) (\lambda y:\text{Nat}. $Y$ * 2)\,$. Mostre que este termo satisfaz as propriedades de preservação de tipos e progresso.
+**7**: Considere o termo $(\lambda x:\text{Nat}\rightarrow\text{Nat}.\;x 3) (\lambda y:\text{Nat}. Y * 2)\,$. Mostre que este termo satisfaz as propriedades de preservação de tipos e progresso.
 
    **Solução**: preservação de tipos: O termo inicial tem tipo $\text{Nat}\,$. Após a redução:
 
-   $$(\lambda x:\text{Nat}\rightarrow\text{Nat}.\;x 3) (\lambda y:\text{Nat}. $Y$ \times 2) \rightarrow_\beta (\lambda y:\text{Nat}. $Y$ \times 2)\;3 \rightarrow_\beta 3 \times 2 \rightarrow 6$$
+   $$(\lambda x:\text{Nat}\rightarrow\text{Nat}.\;x 3) (\lambda y:\text{Nat}. Y \times 2) \rightarrow_\beta (\lambda y:\text{Nat}. Y \times 2)\;3 \rightarrow_\beta 3 \times 2 \rightarrow 6$$
 
    O resultado  $6$ ainda é do tipo $\text{Nat}\,$.
 
@@ -8568,7 +8569,7 @@ O sistema de tipos tem uma estrutura recursiva, permitindo a construção de tip
 
 A tipagem de variáveis assegura que cada variável esteja associada a um tipo específico. Uma variável $x$ do tipo $A$ é denotada como $x : A\,$. Isso implica que $x$ só pode ser associado a valores que respeitem as regras do tipo $A\,$, restringindo o comportamento da função.
 
-Um **contexto de tipagem**, representado por $\Gamma\,$, é um conjunto de associações entre variáveis e seus tipos. O contexto fornece informações necessárias sobre as variáveis livres em uma expressão, facilitando o julgamento de tipos. Por exemplo, um contexto $\Gamma = \{x : A, $Y$ : B\}$ indica que, nesse ambiente, a variável $x$ tem tipo $A$ e a variável $y$ tem tipo $B\,$. Os contextos são essenciais para derivar os tipos de expressões mais complexas.
+Um **contexto de tipagem**, representado por $\Gamma\,$, é um conjunto de associações entre variáveis e seus tipos. O contexto fornece informações necessárias sobre as variáveis livres em uma expressão, facilitando o julgamento de tipos. Por exemplo, um contexto $\Gamma = \{x : A, Y : B\}$ indica que, nesse ambiente, a variável $x$ tem tipo $A$ e a variável $y$ tem tipo $B\,$. Os contextos são essenciais para derivar os tipos de expressões mais complexas.
 
 ### 10.7.3. Normalização Forte e Fraca
 
