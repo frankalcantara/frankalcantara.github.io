@@ -219,7 +219,7 @@ A atenta leitora deve ter percebido que o cálculo lambda não é um conceito te
 
 2. **Funções de ordem superior**: O cálculo lambda permite a criação de funções que operam sobre outras funções. Isso se traduz em conceitos aplicados em funções como `map`, `filter` e `reduce` em linguagens funcionais.
 
-3. *currying*: A técnica de transformar uma função com múltiplos argumentos em uma sequência de funções de um único argumento é natural no cálculo lambda e no Haskell e em outras linguagens funcionais.
+3. **currying**: A técnica de transformar uma função com múltiplos argumentos em uma sequência de funções de um único argumento é natural no cálculo lambda e no Haskell e em outras linguagens funcionais.
 
 4. **Avaliação preguiçosa (_lazy_)**: Embora não faça parte do cálculo lambda puro, a semântica de redução do cálculo lambda, notadamente a estratégia de redução normal inspirou o conceito de avaliação preguiçosa em linguagens como Haskell.
 
@@ -2581,13 +2581,13 @@ $$
 >
 >2. Redução da aplicação interna: $(\lambda x.\;x\;x) (\lambda x.\;x\;x) \rightarrow (\lambda x.\;x\;x)$
 >
->No entanto, ambos os caminhos eventualmente se reduzem ao mesmo termo $(\lambda x.\;x\;x)\,$, o que ilustra a confluência local.
+>     No entanto, ambos os caminhos eventualmente se reduzem ao mesmo termo $(\lambda x.\;x\;x)\,$, o que ilustra a confluência local.
 >
->2. Confluência Global: a confluência global é estabelecida ao aplicar o Lema de Newman, que afirma que:
+>3. Confluência Global: a confluência global é estabelecida ao aplicar o Lema de Newman, que afirma que:
 >
->1. Se um sistema de reescrita é _fortemente normalizante_, ou seja, todas as sequências de reduções terminam em um termo normal, e
+>     1. Se um sistema de reescrita é _fortemente normalizante_, ou seja, todas as sequências de reduções terminam em um termo normal, e
 >
->2. Se o sistema é _localmente confluentemente terminante_, então ele é _globalmente confluentemente terminante_.
+>     2. Se o sistema é _localmente confluentemente terminante_, então ele é _globalmente confluentemente terminante_.
 >
 >Para aplicar o Lema de Newman no cálculo lambda, é necessário provar duas coisas: a _Normalização forte_, todos os termos no cálculo lambda podem eventualmente ser reduzidos a uma forma normal (caso exista) e a _Confluência local_, que demonstrei anteriormente.
 >
@@ -5040,7 +5040,7 @@ Vamos rever o combinador $Y\,$, desta vez, usando funções de ordem superior. C
 
    $$\text{isZero} = \lambda n.\;n\;(\lambda x.\;\text{False})\;\text{True}$$
 
-   Esta função deve retornar $TRUE$ se for aplicada a $0$ e $False$ para qualquer outro valor. Como podemos ver a seguir: 
+   Esta função deve retornar $TRUE$ se for aplicada a $0$ e $False$ para qualquer outro valor. Como podemos ver a seguir:
    Vamos avaliar a função $\text{isZero}$ aplicada primeiro ao número zero e depois ao número um para verificar seu funcionamento.
 
    1. Aplicando ao zero ($\text{isZero}\;0$):
@@ -5360,7 +5360,7 @@ A função de Ackermann é significativa por demonstrar os limites das funções
   A(m,n) &= A(m-1,A(m,n-1)) &\text{se } m > 0 \text{ e } n > 0
   \end{align*}$$
   
-Este resultado demonstra que existem funções computáveis que não podem ser capturadas pelo esquema de recursão primitiva, motivando definições mais gerais de computabilidade como as Máquinas de Turing. Esta descoberta estabeleceu uma hierarquia de funções computáveis, onde funções como fatorial e exponenciação ocupam níveis relativamente baixos, enquanto a função de Ackermann transcende toda esta hierarquia. Em termos práticos, sua implementação em cálculo lambda serve como um teste rigoroso para sistemas que lidam com recursão profunda, pois mesmo valores pequenos como $\text{Ack}\;4\;2$ geram números astronomicamente grandes. Isto a torna uma ferramenta valiosa para testar otimizações de compiladores e explorar os limites práticos da computação recursiva. 
+Este resultado demonstra que existem funções computáveis que não podem ser capturadas pelo esquema de recursão primitiva, motivando definições mais gerais de computabilidade como as Máquinas de Turing. Esta descoberta estabeleceu uma hierarquia de funções computáveis, onde funções como fatorial e exponenciação ocupam níveis relativamente baixos, enquanto a função de Ackermann transcende toda esta hierarquia. Em termos práticos, sua implementação em cálculo lambda serve como um teste rigoroso para sistemas que lidam com recursão profunda, pois mesmo valores pequenos como $\text{Ack}\;4\;2$ geram números astronomicamente grandes. Isto a torna uma ferramenta valiosa para testar otimizações de compiladores e explorar os limites práticos da computação recursiva.
 
 A Função de Ackermann:
 
