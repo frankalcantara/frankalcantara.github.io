@@ -87,11 +87,11 @@ We are going to cover a lot of ground. From basic techniques to advanced algorit
 
 ## 1.1 Time and Space Complexity
 
-In this section, we’ll gona try to understand time and space complexities, looking at how they affect algorithm efficiency, especially in competitive programming without all mathematics. We’ll break down loops, recursive algorithms, and how different complexity classes shape performance. We’ll also look at space complexity and memory use, which matter when handling large datasets.
+In this section, we’ll gona take a tour by time and space complexities, looking at how they affect algorithm efficiency, especially in competitive programming, without all mathematics. We’ll break down loops, recursive algorithms, and how different complexity classes shape performance. We’ll also look at space complexity and memory use, which matter when handling large datasets.
 
-**One major cause of slow algorithms is having multiple nested loops that run over the input data.** The more nested loops there are, the slower the algorithm gets. With $k$ nested loops, the time complexity rises to $O(n^k)$.
+**One major cause of slow algorithms is having multiple nested loops that run over the input data.** The more nested loops there are, the slower the algorithm gets. With $k$ nested loops, the time complexity rises to $O(n^k)$. Alright, I lied. There is a little bit of math.
 
-For instance, the time complexity of the following code is $O(n)$:
+For instance, the time complexity of the following  code fragment is $O(n)$:
 
 ```cpp
 for (int i = 1; i <= n; i++) {
@@ -118,7 +118,7 @@ for (int i = 1; i <= n; i++) {
 }
 ```
 
-**In competitive programming, excessive memory use can cause your program to exceed memory limits, though this isn’t very common in competitions.** Always keep an eye on space complexity, especially when using arrays, matrices, or other data structures that grow with input size. Manage memory wisely to avoid crashes and penalties.
+Don’t worry if you don’t know all the C++ syntax. I mean, I wish you did, but hey, we'll get there. **In competitive programming, excessive memory use can cause your program to exceed memory limits, though this isn’t very common in competitions.** Always keep an eye on space complexity, especially when using arrays, matrices, or other data structures that grow with input size. Manage memory wisely to avoid crashes and penalties. And, there are penalties.
 
 ## 1.1.2. Order of Growth
 
@@ -146,13 +146,13 @@ This is true because time complexity looks at growth, not exact counts. Big-O ig
 
 Here’s why each example still counts as $O(n)$:
 
-1. **$3n$ executions**: The loop runs $3n$ times, but the constant 3 doesn’t change the growth. It’s still linear, so it’s $O(n)$.
+1. **$3n$ executions**: The loop runs $3n$ times, but the constant $3$ doesn’t change the growth. It’s still linear, so it’s $O(n)$.
 
 2. **$n + 5$ executions**: The $+5$ is just a fixed number. It’s small next to $n$ when things get big. The main growth is still $n$, so it’s $O(n)$.
 
 3. **$\lfloor n/2 \rfloor$ executions**: Cutting $n$ in half or any fraction doesn’t change the overall growth rate. It’s still linear, so it’s $O(n)$.
 
-Big-O isn’t disconnected from real execution speed. Constants like the 3 in $3n$ do affect how fast the code runs, but they aren’t the focus of Big-O. In real terms, an algorithm with $3n$ operations will run slower than one with $n$, but both grow at the same rate—linearly. That’s why they both fall under $O(n)$.
+Big-O isn’t disconnected from real execution speed. **Constants like the $3$ in $3n$ do affect how fast the code runs, but they aren’t the focus of Big-O**. In real terms, an algorithm with $3n$ operations will run slower than one with $n$, but both grow at the same rate—linearly. That’s why they both fall under $O(n)$ notation.
 
 Big-O doesn’t ignore these factors because they don’t matter; it simplifies them. It’s all about the growth rate, not the exact count, because that’s what matters most when inputs get large.
 
@@ -166,9 +166,7 @@ for (int i = 1; i <= n; i++) {
 }
 ```
 
-When an algorithm has consecutive phases, the overall time complexity is driven by the slowest phase. The phase with the highest complexity usually becomes the bottleneck.
-
-For example, the code below has three phases with time complexities of $O(n)$, $O(n^2)$, and $O(n)$. The slowest phase dominates, making the total time complexity $O(n^2)$:
+When an algorithm has consecutive phases, the overall time complexity is driven by the slowest phase. The phase with the highest complexity usually becomes the bottleneck. For example, the code below has three phases with time complexities of $O(n)$, $O(n^2)$, and $O(n)$. The slowest phase dominates, making the total time complexity $O(n^2)$:
 
 ```cpp
 for (int i = 1; i <= n; i++) {
@@ -184,9 +182,7 @@ for (int i = 1; i <= n; i++) {
 }
 ```
 
-When looking at algorithms with multiple phases, remember that each phase can also add to memory use. In the example above, if phase 2 creates an $n \times n$ matrix, the space complexity jumps to $O(n^2)$, matching the time complexity.
-
-Sometimes, time complexity depends on more than one factor. This means the formula includes multiple variables. For instance, the time complexity of the code below is $O(nm)$:
+When looking at algorithms with multiple phases, remember that each phase can also add to memory use. In the example above, if phase 2 creates an $n \times n$ matrix, the space complexity jumps to $O(n^2)$, matching the time complexity. Sometimes, time complexity depends on more than one factor. This means the formula includes multiple variables. For instance, the time complexity of the code below is $O(nm)$:
 
 ```cpp
 for (int i = 1; i <= n; i++) {
@@ -198,9 +194,7 @@ for (int i = 1; i <= n; i++) {
 
 If the algorithm above uses a data structure like an $n \times m$ matrix, the space complexity also becomes $O(n\times m)$. This increases memory usage, especially with large inputs.
 
-The time complexity of a recursive function depends on how often it’s called and the complexity of each call. Multiply these together to get the total time complexity.
-
-For example, look at this function:
+The time complexity of a recursive function depends on how often it’s called and the complexity of each call. Multiply these together to get the total time complexity. For example, look at this function:
 
 ```cpp
 void f(int n) {
@@ -221,7 +215,7 @@ void g(int n) {
 }
 ```
 
-Here, each call to the function creates two more calls, except when $n = 1$. The table below shows the calls made from a single initial call to $g(n)$:
+Here, each call to the function creates two more calls, except when $n = 1$. The Table 1.1.2.A shows the calls made from a single initial call to $g(n)$:
 
 | Function Call | Number of Calls |
 | ------------- | --------------- |
@@ -237,31 +231,51 @@ So, the total time complexity is:
 
 $$1 + 2 + 4 + \cdots + 2^{n-1} = 2^n - 1 = O(2^n)$$
 
-Recursive functions also bring space complexity issues. Each call adds to the call stack, and with deep recursion, like this exponential example, the space complexity can be $O(n)$. Be careful: too many recursive calls can lead to a stack overflow and cause the program to crash.
+Recursive functions also bring space complexity issues. Each call adds to the call stack, and with deep recursion, like this exponential example, the space complexity can be $O(n)$. Be careful: too many recursive calls can lead to a stack overflow, particularly in languages like C++ or Java, where the call stack has a fixed size. This can cause the program to crash unexpectedly. In other languages like Python, reaching the recursion limit raises a specific exception (e.g., `RecursionError`), allowing for safer handling of deep recursion.
 
 ### 1.1.3. Common Complexity Classes
 
-Here is a table of common time complexities of algorithms:
+Here is a Table 1.1.3.A of common time complexities of algorithms:
 
-| Complexity    | Description                                                                                    | Examples                               |
-| ------------- | ---------------------------------------------------------------------------------------------- | -------------------------------------- |
-| $O(1)$        | Constant time; doesn't depend on input size.                                                   | Direct calculations.                   |
-| $O(\log n)$   | Logarithmic time; halves the input size each step.                                             | Binary search.                         |
-| $O(\sqrt{n})$ | Slower than $O(\log n)$ but faster than $O(n)$. Appears when input reduces by its square root. | Some specific mathematical algorithms. |
-| $O(n)$        | Linear time; processes input once or a fixed number of times.                                  | Simple loops.                          |
-| $O(n \log n)$ | Common in efficient sorting and algorithms using $O(\log n)$ operations.                       | Mergesort, heapsort.                   |
-| $O(n^2)$      | Quadratic time; nested loops processing pairs of input elements.                               | Matrix operations, bubble sort.        |
-| $O(n^3)$      | Cubic time; three nested loops, processing triples.                                            | Some dynamic programming algorithms.   |
-| $O(2^n)$      | Exponential growth; often in recursive algorithms exploring all subsets.                       | Subset generation, recursive searches. |
-| $O(n!)$       | Factorial time; algorithms generating all permutations of the input.                           | Permutation generation.                |
+| Complexity    | Description                                                                                                  | Examples                                      |
+| ------------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
+| $O(1)$        | Constant time; the execution time remains the same regardless of input size.                                 | Accessing an array element, hash lookups.    |
+| $O(\log n)$   | Logarithmic time; the input size is reduced by half in each step.                                           | Binary search, finding largest power of $2$. |
+| $O(\sqrt{n})$ | Sub-linear but slower than $O(\log n)$; often arises in problems where input is reduced by its square root. | Trial division for prime checking.           |
+| $O(n)$        | Linear time; the algorithm processes each element once.                                                     | Single loop over an array, linear search.    |
+| $O(n \log n)$ | Log-linear time; typical of algorithms that involve sorting or divide-and-conquer strategies.               | Mergesort, heapsort, Fast Fourier Transform. |
+| $O(n^2)$      | Quadratic time; usually involves two nested loops, processing pairs of elements.                            | Bubble sort, matrix multiplication (naive).  |
+| $O(n^3)$      | Cubic time; involves three nested loops, processing triples of elements.                                    | Floyd-Warshall algorithm, matrix chain multiplication. |
+| $O(2^n)$      | Exponential growth; common in recursive algorithms that explore all subsets or configurations.              | Recursive subset generation, solving the Traveling Salesman Problem (TSP) recursively. |
+| $O(n!)$       | Factorial time; often seen in algorithms that generate all possible permutations of input.                   | Permutation generation, brute-force TSP.     |
 
 _Table 1.1.3.A - Common time complexities of algorithms._{: class="legend"}
 
+The following text offers a more comprehensive explanation of each complexity listed in the table, recognizing that each of us may understand these concepts in different ways. You might find it helpful to keep both the table and the text on hand for reference.
+
+$O(1)$ - Algorithms with constant time complexity execute in the same amount of time, regardless of input size. No matter how large or small the input is, the execution time remains unchanged. Examples include accessing an element in an array by its index or checking if a number is even. Constant-time operations are optimal for performance, making them desirable in many algorithmic designs.
+
+$O(\log n)$ - Algorithms with logarithmic time complexity increase their runtime logarithmically as the input size grows. This typically occurs in divide-and-conquer algorithms, where the problem size is halved at each step. An example is binary search, where a sorted array is repeatedly divided in half until the target element is found. As input size increases, the runtime grows slowly, making logarithmic algorithms highly efficient for large inputs.
+
+$O(\sqrt{n})$ - $O(\sqrt{n})$ algorithms reduce the input by its square root at each step, which is slower than logarithmic complexity but faster than linear complexity. This complexity often arises in specific mathematical algorithms, such as trial division for prime checking, where the factors are tested up to the square root of the number. It is efficient for certain computational problems but less common than other complexities.
+
+$O(n)$ - $O(n)$ algorithms process each element of the input once, making the runtime proportional to the input size. Examples include linear search through an unsorted array or iterating through a list to calculate its sum. Linear algorithms are generally efficient for moderate input sizes but may become slow as input size grows significantly.
+
+$O(n \log n)$ - $O(n \log n)$ algorithms have a runtime that grows in proportion to the input size multiplied by the logarithm of the input size. This complexity is common in efficient sorting algorithms like mergesort and heapsort, which combine linear processing with logarithmic division of input. It strikes a balance between scalability and efficiency, making it a standard choice for practical sorting and divide-and-conquer problems.
+
+$O(n^2)$ - $O(n^2)$ algorithms have a runtime that grows quadratically as the input size increases, often due to two nested loops processing pairs of elements. Examples include bubble sort, insertion sort, and naive matrix multiplication. As the input size increases, the runtime grows significantly, making quadratic algorithms inefficient for large inputs.
+
+$O(n^3)$ - $O(n^3)$ algorithms involve three nested loops and are often found in problems that require processing triples of elements. For example, the Floyd-Warshall algorithm for finding shortest paths in a graph has cubic complexity. Similar to quadratic algorithms, cubic ones become inefficient as input size increases, but they are sometimes unavoidable in certain computations.
+
+$O(2^n)$ - $O(2^n)$ algorithms experience exponential growth in runtime as the input size increases, doubling with each additional input element. These algorithms often involve exploring all possible solutions, as seen in recursive solutions to problems like the Traveling Salesman Problem or generating all subsets of a set. Exponential algorithms become impractical for even moderately large inputs due to rapid increases in runtime.
+
+$O(n!)$ - $O(n!)$ algorithms generate all possible permutations of the input, resulting in extremely high runtimes. This complexity is common in brute-force solutions to problems like permutation generation or the Traveling Salesman Problem. Factorial algorithms are the least efficient, with runtime growing rapidly even for small input sizes, making them unsuitable for large-scale computation.
+
+Now that we’ve explored different time complexities, it’s useful to think about how they translate to actual performance. The next section will help you estimate whether an algorithm will be fast enough, based on input size and typical competition constraints.
+
 ### 1.1.4. Estimating Efficiency
 
-When figuring out an algorithm’s time complexity, you can estimate if it’ll be fast enough before you even start coding. A modern computer can handle hundreds of millions of operations per second.
-
-For instance, if your input size is $n = 10^5$ and your time complexity is $O(n^2)$, the algorithm would need about $(10^5)^2 = 10^{10}$ operations. That’s several seconds, too slow for most competitive programming limits.
+Now that we’ve explored different time complexities, it’s useful to think about how they translate to actual performance. A modern Intel i7 processor can handle around $10^9$ operations per second. The next section will help you estimate whether an algorithm will be fast enough, based on input size and typical competition constraints. For instance, if an algorithm with $O(n^2)$ complexity requires $10^{10}$ operations, it would take roughly 10 seconds to run, which is too slow for most programming competitions [^book1].
 
 You can also judge what time complexity you need based on the input size. Here’s a quick guide, assuming a one-second time limit, very common for C++ competitions:
 
@@ -278,35 +292,33 @@ _Table 1.1.4.A - Theoretical relationship between time complexity and input size
 
 So, if your input size is $n = 10^5$, you’ll probably need an algorithm with $O(n)$ or $O(n \log n)$ time complexity. This helps you steer clear of approaches that are too slow.
 
-**Remember, time complexity is an estimate; it hides constant factors. An $O(n)$ algorithm could do $n/2$ or $5n$ operations, and these constants can change the actual speed.**
+**Remember, time complexity is an estimate; it hides constant factors. An $O(n)$ algorithm could do $n/2$ or $5n$ operations, and these constants can change the actual performance.**
 
 ## 1.2. Typing Better, Faster, Less
 
-This section gives you practical steps to improve your speed and performance in competitive programming with C++ 20. C++ is fast and powerful, but using it well takes skill and focus. We will cover how to type faster, write cleaner code, and manage complexity. The goal is to help you code quicker, make fewer mistakes, and keep your solutions running fast.
+This section gives you practical steps to improve your speed and performance in competitive programming with C++20. C++ is fast and powerful, but using it well takes skill and focus. We will cover how to type faster, write cleaner code, and manage complexity. The goal is to help you code quicker, make fewer mistakes, and keep your solutions running fast.
 
-Typing matters. The faster you type, the more time you save. Accuracy also counts, mistakes slow you down. Next, we cut down on code size without losing what’s important. Using tools like the Standard Template Library (STL), you can write less code and keep it clean. This is about direct, simple code that does the job right.
+**Typing matters. The faster you type, the more time you save**. Accuracy also counts, mistakes slow you down. Next, we cut down on code size without losing what’s important. Using tools like the Standard Template Library (STL), you can write less code and keep it clean. This is about direct, simple code that does the job right.
 
-In this section, we won’t confine ourselves to general tricks. We will explore certain nuances and techniques specific to C++20, particularly those related to typing efficiency. Undoubtedly, in other chapters and sections, we will return to these same topics, but from different angles.
+In this section, we won’t confine ourselves to general tricks. We will explore certain nuances and techniques specific to C++20, particularly those related to typing efficiency. Undoubtedly, in other chapters and sections, we will return to these same topics, but from different angles.From this point forward, the idea of clean and well-structured code will be left behind.
 
 ### 1.2.1. Typing Tips
 
-If you don’t type quickly, **you should invest at least two hours per week** on the website: [https://www.speedcoder.net](https://www.speedcoder.net). Once you have completed the basic course, select the C++ lessons and practice regularly. Time is crucial in competitive programming, and slow typing can be disastrous.
+**If you don’t type quickly, you should invest at least two hours per week** on the website: [https://www.speedcoder.net](https://www.speedcoder.net). Once you have completed the basic course, select the C++ lessons and practice regularly. Time is crucial in competitive programming, and slow typing can be disastrous.
 
 To expand on this, efficient typing isn’t just about speed; it’s about reducing errors and maintaining a steady flow of code. When you're in a competitive programming, every second matters. Correcting frequent typos or having to look at your keyboard will significantly slow down your progress. Touch typing—knowing the layout of the keyboard and typing without looking—becomes a vital skill.
 
-In a typical competitive programming contest, you have to solve several, typically 12 or 15, problems within a set time, about five hours. Typing fast lets you spend more time solving problems instead of struggling to get the code in. But speed means nothing without accuracy. Accurate and fast typing ensures that once you know the solution, you can code it quickly and correctly.
-
-Typing slow or making frequent errors costs you valuable time. You waste time fixing mistakes, lose focus on solving the problem, and increase the chance of not finishing on time. Aim for a typing speed of at least 60 words per minute with high accuracy. Websites like [https://www.speedcoder.net](https://www.speedcoder.net) let you practice typing code syntax, which helps more than regular typing lessons. Learning specific shortcuts in C++ or Python boosts your speed in real coding situations.
+In a typical competitive programming contest, you have to solve several, typically $12$ or $15$, problems within a set time, about five hours. Typing fast lets you spend more time solving problems instead of struggling to get the code in. But speed means nothing without accuracy. Accurate and fast typing ensures that once you know the solution, you can code it quickly and correctly. Aim for a typing speed of at least 60 words per minute with high accuracy. Websites like [https://www.speedcoder.net](https://www.speedcoder.net) let you practice typing code syntax, which helps more than regular typing lessons. Besides it, learning specific shortcuts in C++ or Python boosts your speed in real coding situations. There are a simple equation for that:
 
 $$\text{Time spent fixing errors } + \text{Time lost from slow typing }$$
 
 $$ = \text{Lower overall performance in competitive programming}$$
 
-To improve your typing in competitive programming, start by using IDE shortcuts. Learn the keyboard shortcuts for your preferred Integrated Development Environment (IDE). Shortcuts help you navigate and edit code faster, cutting down the time spent moving between the keyboard and mouse. In [ICPC](https://icpc.global/) contests, the IDE is usually [Eclipse](https://www.eclipse.org/downloads/packages/release/helios/sr2/eclipse-ide-cc-developers) or [VsCode](https://code.visualstudio.com/), so knowing its shortcuts can boost your efficiency. Always check which IDE will be used in each competition since this may vary. And use it daily while training.
+To keep improving your typing in competitive programming, start by using IDE shortcuts. Learn the keyboard shortcuts for your preferred Integrated Development Environment (IDE). Those shortcuts help you navigate and edit code faster, cutting down the time spent moving between the keyboard and mouse. In [ICPC](https://icpc.global/) contests, the available IDE's are, usually, [Eclipse](https://www.eclipse.org/downloads/packages/release/helios/sr2/eclipse-ide-cc-developers) or [VsCode](https://code.visualstudio.com/), so knowing its shortcuts can boost your efficiency. Always check which IDE will be used in each competition since this may vary. And use it daily while training.
 
-while typing, focus on frequent patterns in your code. Practice typing common elements like loops, if-else conditions, and function declarations. Embedding these patterns into your muscle memory saves time during contests. The faster you can type these basic structures, the quicker you can move on to solving the actual problem.
+While typing, focus on frequent patterns in your code. Practice typing common elements like loops, if-else conditions, and function declarations. Embedding these patterns into your muscle memory saves time during contests. **The faster you can type these basic structures, the quicker you can move on to solving the actual problem**.
 
-To succeed in a C++ programming competition, your first challenge is to type the following code in under two minutes. If you can't, don't give up. Just keep practicing. To be the best in the world at anything, no matter what it is, the only secret is to train and train some more.
+To succeed in a C++ programming competition, your first challenge is to type the following code fragment in under two minutes. If you can't, don't give up. Just keep practicing. To be the best in the world at anything, no matter what it is, the only secret is to train and train some more.
 
 ```cpp
 #include <iostream>
@@ -388,17 +400,17 @@ int main() {
 }
 ```
 
-_Code 1.2.1.A - Code for self-assessment of your typing speed._{: class="legend"}
+_Code Fragment 1.2.1.A - Code for self-assessment of your typing speed._{: class="legend"}
 
-Don't give up before trying. If you can't type fast enough, don't stop here. Keep going. With each new algorithm, copy and practice again until it feels natural to type between 60 and 80 words per minute with an accuracy above $95%$.
+Don't give up before trying. If you feel your typing speed isn’t enough, don’t stop here. Keep practicing. With each new algorithm, copy it and practice again until typing between $60$ and $80$ words per minute with an accuracy above $95%$ feels natural.
 
 ### 1.2.2. Typing Less in Competitive Programming
 
-In competitive programming, time is a critical resource and C++ is a language where you have to type a lot. Therefore, optimizing typing speed and avoiding repetitive code can make a significant difference. Below, we will discuss strategies to minimize typing when working with `std::vector` during competitive programmings, where access to the internet or pre-prepared code snippets may be restricted.
+In competitive programming, time is a critical resource, and C++ is a language where you have to type a lot… like, seriously a lot. If anyone finds out I said that, I’ll have to deny it completely, it's part of the C++ survival code! Therefore, optimizing typing speed and avoiding repetitive code can make a significant difference. Below, we will discuss strategies to minimize typing when working with `std::vector` during competitive programmings, where access to the internet or pre-prepared code snippets may be restricted.
 
 #### 1.2.2.1. Abbreviations
 
-We can use `#define` to create short aliases for common vector types. This is particularly useful when you need to declare multiple vectors throughout the code.
+It may not be the cleanest approach, but the first thing that comes to mind… We can use `#define` to create short aliases for common vector types. This is particularly useful when you need to declare multiple vectors throughout the code.
 
 ```cpp
 #define VI std::vector<int>
@@ -414,35 +426,19 @@ VVI matrix;  // std::vector<std::vector<int>> matrix;
 VS words;    // std::vector<std::string> words;
 ```
 
-In C++, you can use `#define` to create macros and short aliases. Macros can define constants or functions at the preprocessor level. But in C++20, most macros have better alternatives. A typical use is reduce the definition and common operations with vectors. Some examples follow:
+In this book, I’ll use a lot of comments to explain concepts, code, or algorithms. You, on the other hand, won’t use any comments. Not during training, and definitely not during competitions. If you even think about using one, seek professional advice. There are plenty of psychiatrists available online.
 
-```cpp
-#define VI std::vector<int>
-#define VVI std::vector<std::vector<int>>
-#define VS std::vector<std::string>
-```
-
-With these definitions, declaring vectors becomes much faster:
-
-```cpp
-VI numbers;  // std::vector<int> numbers;
-VVI matrix;  // std::vector<std::vector<int>> matrix;
-VS words;    // std::vector<std::string> words;
-```
-
-_Macros can cause problems_. They ignore scopes and can lead to unexpected behavior. For constants, use `constexpr`, `const` or `` instead of macros.
-
-```cpp
-// Old way using macros
-#define PI 3.14159
-
-// Modern way using constexpr
-constexpr double PI = 3.14159;
-```
-
-> The `constexpr` keyword tells the compiler to evaluate a function or variable at compile time. If possible, the compiler computes it before runtime. This helps in optimization, as constants are determined during compilation, not execution.
+>In C++, you can use `#define` to create macros and short aliases. Macros can define constants or functions at the preprocessor level. **Macros can >cause problems**. They ignore scopes and can lead to unexpected behavior. In C++20, for constants use `constexpr`, `const` instead of macros.
 >
-> When you use `constexpr` with variables, the compiler knows the value at compile time. The value is constant and cannot change.
+> ```cpp
+> // Old way using macros
+> #define PI 3.14159
+>
+> // Modern way using constexpr
+> constexpr double PI = 3.14159;
+> ```
+>
+> The `constexpr` keyword tells the compiler to evaluate a function or variable at compile time. If possible, the compiler computes it before runtime. This helps in optimization, as constants are determined during compilation, not execution. The value is constant and cannot change.
 >
 > ```cpp
 > constexpr int max_items = 42;  // Value known at compile time, cannot change.
@@ -517,9 +513,11 @@ constexpr double PI = 3.14159;
 >
 > If you call `square(5)` in a context requiring a constant expression, the compiler evaluates it at compile time.
 >
-> In summary, avoid macros when you can. Use modern C++ features instead. They make your code safer and clearer.
+> In summary, avoid macros when you can. Use modern C++20 features instead. They make your code safer and clearer.
 
-**A better way to reduce typing time is by using `typedef` or `using` to create abbreviations for frequently used vector types.** In many cases, the use of `#define` can be replaced with more modern and safe C++ constructs like `using`, `typedef`, or `constexpr`. **The old `#define` does not respect scoping rules and does not offer type checking, which can lead to unintended behavior**. Using `typedef` or `using` provides better type safety and integrates smoothly with the C++ type system, making the code more predictable and easier to debug.
+**A better way to reduce typing time is by using `typedef` or `using` to create abbreviations for frequently used vector types.**
+
+In many cases, the use of `#define` can be replaced with more modern and safe C++ constructs like `using`, `typedef`, or `constexpr`. **The old `#define` does not respect scoping rules and does not offer type checking, which can lead to unintended behavior**. Using `typedef` or `using` provides better type safety and integrates smoothly with the C++ type system, making the code more predictable and easier to debug.
 
 For example:
 
@@ -544,7 +542,11 @@ typedef std::vector<std::string> VS;
 
 **`using` and `typedef` are preferred because they respect C++ scoping rules and offer better support for debugging, making the code more secure and readable**. nevertheless, there are moments when we need a constant function.
 
-If you have macros that perform calculations, you can replace them with `constexpr` functions:
+>In C++20, the use of `using` offers significant advantages over the traditional `typedef`. The syntax of `using` is clearer, especially when defining complex types like pointers, templates, and function types. For instance, `using FuncPtr = void(*)(int);` is more readable than `typedef void(*FuncPtr)(int);`, as the type definition aligns more closely with the general C++ syntax. Additionally, `using` allows for creating aliases for templates, which is not possible with `typedef`. This makes defining template-dependent types more flexible and straightforward, simplifying alias creation like `template<typename T> using Vec = std::vector<T>;`, enhancing code reusability.
+>
+>Another benefit of `using` is that it aligns well with other modern language constructs, such as `using namespace`, bringing greater consistency to modern C++ code. This helps maintain clarity in longer and more complex type definitions, making the code easier to read and maintain. Therefore, in C++20 projects, it is advisable to adopt `using` for type definitions, ensuring cleaner and more flexible code.
+
+Nevertheless, if you have macros that perform calculations, you can replace them with `constexpr` functions:
 
 ```cpp
   #define SQUARE(x) ((x) * (x))
@@ -564,8 +566,6 @@ In competitive programming, you might think using `#define` is the fastest way t
 
 > In C++, you can create aliases for types. This makes your code cleaner. You use `typedef` or `using` to do this.
 >
-> `typedef` lets you give a new name to an existing type.
->
 > ```cpp
 > using ull = unsigned long long;
 > ```
@@ -576,39 +576,56 @@ In competitive programming, you might think using `#define` is the fastest way t
 > ull bigNum = 123456789012345ULL;
 > ```
 >
-> In C++, numbers need type-specific suffixes like `ULL`. When you write `ull bigNumber = 123456789012345ULL;`, the `ULL` tells the compiler the number is an `unsigned long long`. Without it, the compiler might assume a smaller type like `int` or `long`, which can't handle large values. This leads to errors and bugs. The suffix forces the right type, avoiding overflow and keeping your numbers safe. It’s a simple step but crucial. The right suffix means the right size, no surprises.
+> Numbers need type-specific suffixes like `ULL`. When you write `ull bigNumber = 123456789012345ULL;`, the `ULL` tells the compiler the number is an `unsigned long long`. Without it, the compiler might assume a smaller type like `int` or `long`, which can't handle large values. This leads to errors and bugs. **The suffix forces the right type, avoiding overflow and keeping your numbers safe**. It’s a simple step but crucial. The right suffix means the right size, no surprises.
 >
 > **In C++, suffixes are also used with floating-point numbers to specify their exact type**. The suffix `f` designates a `float`, while no suffix indicates a `double`, and `l` or `L` indicates a `long double`. By default, the compiler assumes `double` if no suffix is provided. Using these suffixes is important when you need specific control over the type, such as saving memory with `float` or gaining extra precision with `long double`. The suffix ensures that the number is treated correctly according to your needs.Exact type, exact behavior.
 
+**The rule is: know your numbers, suffix your numbers, and be happy.**
+
 #### 1.2.2.2. Predefining Common Operations
 
-If you know that certain operations, such as sorting or summing elements, are frequent in a competitive programming, consider defining these operations at the beginning of the code. _The only real reason to use a macro in competitive programming is to predefine functions_. For example:
-
-```cpp
-// A function to sort vectors
-#define SORT_VECTOR(vec) std::sort(vec.begin(), vec.end())
-```
-
-This function can be further simplified in its use:
+If you know that certain operations, such as sorting or summing elements, are frequent in a competitive programming or in the algorithm you are going to code, consider defining these operations at the beginning of the code. **The only real reason to use a macro in competitive programming is to predefine functions**. For example:
 
 ```cpp
 #include <vector>
 #include <algorithm>
 
-#define SORT_VECTOR(vec) std::sort(vec.begin(), vec.end())
+// Alias for integer vector
+using VI = std::vector<int>;
+
+// Alias for the full range of the vector
 #define ALL(vec) vec.begin(), vec.end()
-using VI = std::vector<int>; // Alias with using needs a semicolon
+
+// Function to sort the vector using constexpr
+constexpr auto sVec = [](VI& vec) {
+    std::sort(vec.begin(), vec.end());
+};
 
 // Usage:
 VI vec = {5, 3, 8, 1};
-SORT_VECTOR(vec); // Sorts the vector using the SORT_VECTOR macro
-// Alternatively, you can sort using ALL macro:
-std::sort(ALL(vec)); Another way to use the macro to sort
+sVec(vec); // Sorts the vector using the lambda function
+// Alternatively, you can still use ALL to simplify the sort:
+std::sort(ALL(vec)); // Another way to sort the vector
+```
+
+_Code Fragment 1.2.2.2.A:Example of using and constexpr to reduce typing time._{: legenda}
+
+Keeping the macro `#define ALL(vec) vec.begin(), vec.end()` wasn’t madness, it was the competitive programming bug. The C++20 code needed to replace this macro with modern structures requires a lot of typing.
+
+```cpp
+template<typename T>
+constexpr auto all(T& container) {
+    return std::make_pair(container.begin(), container.end());
+}
+
+VI vec = {5, 3, 8, 1};
+sort_vector(vec); // Sorts the vector using the lambda
+std::sort(all(vec).first, all(vec).second); // Another way to sort using the utility function
 ```
 
 > In C++, `#include` brings code from libraries into your program. It lets you use functions and classes defined elsewhere. The line `#include <vector>` includes the vector library.
 >
-> Vectors are dynamic arrays. They can change size at runtime. You can add or remove elements as needed. We will know more about vectors and the vector library soon. In early code fragments we saw some examples of vector initialization.
+> Vectors are dynamic arrays. They can change size at runtime. You can add or remove elements as needed. We will know more about vectors and the vector library soon. In early code fragments we saw some examples of vector initialization. We will travel down this road soon.
 >
 > The line `#include <algorithm>` includes the algorithm library. It provides functions to work with data structures. You can sort, search, and manipulate collections.
 >
@@ -629,21 +646,18 @@ std::sort(ALL(vec)); Another way to use the macro to sort
 >     return 0;
 > }
 > ```
+> _Code 1.2.2.2.A: Simple and small program to print a vector_{: legend}
 >
-> This program, a simple example of professional code, sorts the numbers and prints:
+> The program in Code 1.2.2.2.A, a simple example of professional code, sorts the numbers and prints:
 >
 > ```txt
 > 1 2 3 4 5
 > ```
 
-Another common operation in competitions is the addition of elements within the same vector. For this, C++20 offers `std::accumulate`.
-
-The difference between `sum` and `accumulate` is in their usage and flexibility. In C++, `std::accumulate` is part of the `<numeric>` library and calculates the sum (or other operations) over a range of elements starting from an initial value. Unlike other languages, C++ does not have a built-in `sum` function, but `std::accumulate` serves that purpose.
-
-In the provided code:
+Summing the values contained in a vector, or anther container, is a common problem in competitive programming. For these cases, C++20 offers `std::accumulate`. In C++, `std::accumulate` is part of the `<numeric>` library and calculates the sum (or other operations) over a range of elements starting from an initial value. Unlike other languages, C++ does not have a built-in `sum` function, but `std::accumulate` serves that purpose. As we can see in the provided fragment:
 
 ```cpp
-#define ALL(x) x.begin(), x.end()
+#define ALL(x) x.begin(), x.end() //that macro again
 
 \\...
 
@@ -652,12 +666,7 @@ int sum_vector(const VI& vec) {
 }
 ```
 
-The code `std::accumulate(ALL(vec), 0);` will be replaced in compilation time for std::accumulate(vec.begin(), vec.end(), 0)` witch takes three arguments:
-
-- The first two define the range to sum (`vec.begin()` to `vec.end()`).
-- The third argument is the initial value, which is $0$, added to the summation result.
-
-If `std::accumulate` is used without a custom function, it defaults to addition, behaving like a simple summation. To calculate the sum of a vector's elements:
+The code `std::accumulate(ALL(vec), 0);` will be replaced in compilation time for `std::accumulate(vec.begin(), vec.end(), 0)` witch takes three arguments: the first two define the range to sum (`vec.begin()` to `vec.end()`); the third argument is the initial value, which is $0$, added to the summation result. If `std::accumulate` is used without a custom function, it defaults to addition, behaving like a simple summation. To calculate the sum of a vector's elements:
 
 > `std::accumulate` uses functions to operate on elements. These functions are straightforward. They take two values and return one. Let's see how they work.
 >
@@ -667,7 +676,7 @@ If `std::accumulate` is used without a custom function, it defaults to addition,
 > [](int a, int b) { return a + b; }
 > ```
 >
-> This lambda adds two numbers. The `[]` is the capture list. It's empty here. `(int a, int b)` are the parameters. `{ return a + b; }` is the function body. For example we could write:
+>This lambda adds two numbers. The `[]` is called the capture list, which specifies which variables from the surrounding scope can be accessed inside the lambda. In this case, it’s empty, meaning no variables are captured. The `(int a, int b)` part defines the parameters, while `{ return a + b; }` is the function body that adds the two numbers. For example, we could write:
 >
 > ```cpp
 > int sum = std::accumulate(ALL(vec), 0, [](int a, int b) { return a + b; });
@@ -723,7 +732,7 @@ If `std::accumulate` is used without a custom function, it defaults to addition,
 
 Let's can back to Lambdas.
 
-Starting with C++11, C++ introduced lambda functions. Lambdas are anonymous functions that can be defined exactly where they are needed. If your code needs a simple function used only once, you should consider using lambdas. Let’s start with a simple example, written without competitive programming tricks.
+Starting with C++11, C++ introduced lambda functions. Lambdas are anonymous functions that can be defined exactly where they are needed. If your code needs a simple function used only once, you should consider using lambdas. Let’s start with a simple example, Code 1.2.2.3.A, written without competitive programming tricks.
 
 ```cpp
 #include <iostream>  // Includes the input/output stream library for console operations
@@ -751,9 +760,11 @@ int main() {
 }
 ```
 
+_Code 1.2.2.3.A: Code example to sort a number vector and print it._ {: legenda}
+
 This code sorts a vector of integers in descending order using a traditional comparison function. It begins by including the necessary libraries: `<iostream>` for input and output, `<vector>` for dynamic arrays, and `<algorithm>` for sorting operations. The `compare` function is defined to take two integers, returning `true` if the first integer is greater than the second, setting the sorting order to descending.
 
-In the `main` function, a vector named `numbers` is initialized with the integers `{1, 3, 2, 5, 4}`. The `std::sort` function is called on this vector, using the `compare` function to sort the elements from highest to lowest. After sorting, a `for` loop iterates through the vector, printing each number followed by a space. The program ends with a newline to cleanly finish the output. This code is a simple and direct example of using a custom function to sort data in C++. Now, let's see the same code using lambda functions and other competitive programming tricks.
+In the `main` function, a vector named `numbers` is initialized with the integers `{1, 3, 2, 5, 4}`. The `std::sort` function is called on this vector, using the `compare` function to sort the elements from highest to lowest. After sorting, a `for` loop iterates through the vector, printing each number followed by a space. The program ends with a newline to cleanly finish the output. This code is a simple and direct example of using a custom function to sort data in C++. Now, let's see the same code using lambda functions and other competitive programming tricks, Code 1.2.2.3.B:
 
 ```cpp
 #include <iostream>  // Includes the input/output stream library for console operations
@@ -779,9 +790,11 @@ int main() {
 }
 ```
 
+_Code 1.2.2.3.B: Sort and print vector using lambda functions._{: legenda}
+
 To see the typing time gain, just compare the normal definition of the `compare` function followed by its usage with the use of the lambda function.
 
-This code sorts a vector of integers in descending order using a lambda function, a modern and concise way to define operations directly in the place where they are needed. It starts by including the standard libraries for input/output, dynamic arrays, and algorithms. The macro `ALL(vec)` is defined to simplify the use of `vec.begin(), vec.end()`, making the code cleaner and shorter.
+The Code 1.2.2.3.B sorts a vector of integers in descending order using a lambda function, a modern and concise way to define operations directly in the place where they are needed. It starts by including the standard libraries for input/output, dynamic arrays, and algorithms. The macro `ALL(vec)` is defined to simplify the use of `vec.begin(), vec.end()`, making the code cleaner and shorter.
 
 An alias `VI` is used for `std::vector<int>`, reducing the verbosity when declaring vectors. Inside the `main` function, a vector named `num` is initialized with the integers `{1, 3, 2, 5, 4}`. The `std::sort` function is called to sort the vector, using a lambda function `[](int a, int b) { return a > b; }` that sorts the elements in descending order.
 
@@ -798,11 +811,11 @@ The lambda is defined and used inline, removing the need to declare a separate f
 > Where:
 >
 > - `Capture`: Specifies which variables from the surrounding scope can be used inside the lambda. Variables can be captured by value `[=]` or by reference `[&]`. You can also specify individual variables, such as `[x]` or `[&x]`, to capture them by value or reference, respectively.
->   `Parameters`: The input parameters for the lambda function, similar to function arguments.
->   `Return Type`: Optional in most cases, as C++ can infer the return type automatically. However, if the return type is ambiguous or complex, it can be specified explicitly using `-> return_type`.
+> - `Parameters`: The input parameters for the lambda function, similar to function arguments.
+> - `Return Type`: Optional in most cases, as C++ can infer the return type automatically. However, if the return type is ambiguous or complex, it can be specified explicitly using `-> return_type`.
 > - `Body`: The actual code to be executed when the lambda is called.
 >
-> C++20 brought new powers to lambdas. Now, they work in **immediate functions** with `consteval`, running faster at compile-time. Lambdas can be default-constructed without capturing anything. They can also use **template parameters**, making them more flexible and generic. Let’s see some examples.
+> C++20 brought new powers to lambdas. Now, they can be used in immediate functions, which are functions marked with `consteval` that must be evaluated entirely at compile-time. This makes the code faster by catching errors early and optimizing performance. Lambdas can also be default-constructed without capturing anything, meaning they don’t rely on external variables. Additionally, they support template parameters, allowing lambdas to work with different data types, making them more flexible and generic. Let’s see some examples.
 >
 > Example 1: Basic Lambda Function: A simple example of a lambda function that sums two numbers:
 >
@@ -854,7 +867,8 @@ The lambda is defined and used inline, removing the need to declare a separate f
 >
 > This code defines a generic lambda using a template parameter, a feature from C++20. The lambda accepts two inputs of the same type `T` and returns their sum. It’s flexible—first, it adds integers, then it adds doubles. The power of this lambda is in its simplicity and versatility. It’s short, clear, and works with any type as long as the operation makes sense. C++20 lets you keep your code clean and adaptable, making lambdas more powerful than ever. And it doesn’t stop there.
 >
-> Default-constructed lambdas: In C++20, lambdas that don’t capture variables can be default-constructed. You can create them, assign them, and save them for later without calling them right away. This makes it easy to store and pass lambdas when you need a default behavior.
+> In C++20, lambdas that don’t capture variables can be default-constructed. This means you can create, assign, and save them for later use without calling them immediately. This feature is useful for storing lambdas as placeholders for default behavior, making them handy for deferred execution. As you can see in Code 1.2.2.3.C
+
 >
 > ```cpp
 > #include <iostream>
@@ -885,13 +899,13 @@ The lambda is defined and used inline, removing the need to declare a separate f
 > }
 > ```
 >
-> **This feature lets you set up lambdas for later use (deferred execution)**. In the last code, the lambda `print_message` is default-constructed. It captures nothing and waits until it’s needed. The main function shows this in action. If the vector has numbers, it doubles them. If not, it calls the default lambda and prints a message. C++20 makes lambdas simple and ready for action, whenever you need them.
+>_Code 1.2.2.3.C: Using lambdas default-constructed._{: legenda}
 >
-> Immediate lambdas: C++20 brings in `consteval`, a keyword that forces functions to run at compile-time. With lambdas, this means the code is executed during compilation, and the result is set before the program starts. When a lambda is used in a `consteval` function, it must run at compile-time, making your code faster and results predictable.
+> **This feature lets you set up lambdas for later use (deferred execution)**. In the Code 1.2.2.3.C, the lambda `print_message` is default-constructed. It captures nothing and waits until it’s needed. The main function shows this in action. If the vector has numbers, it doubles them. If not, it calls the default lambda and prints a message. C++20 makes lambdas simple and ready for action, whenever you need them.
 >
-> **In programming competitions, `consteval` lambdas are rarely useful**. Contests focus on runtime performance, not compile-time tricks. Compile-time evaluation doesn’t give you an edge when speed at runtime is what counts. Most problems don’t benefit from execution before the program runs; the goal is to be fast during execution.
+> We also have the immediate lambdas: C++20 brings in `consteval`, a keyword that forces functions to run at compile-time. With lambdas, this means the code is executed during compilation, and the result is set before the program starts. When a lambda is used in a `consteval` function, it must run at compile-time, making your code faster and results predictable. **In programming competitions, `consteval` lambdas are rarely useful**. Contests focus on runtime performance, not compile-time tricks. Compile-time evaluation doesn’t give you an edge when speed at runtime is what counts. Most problems don’t benefit from execution before the program runs; the goal is to be fast during execution.
 >
-> `Consteval` ensures the function runs only at compile-time. If you try to use a `consteval` function where it can’t run at compile-time, you’ll get a compile-time error. It’s strict: no runtime allowed.
+> Nevertheless, `Consteval` ensures the function runs only at compile-time. If you try to use a `consteval` function where it can’t run at compile-time, you’ll get a compile-time error. It’s strict: no runtime allowed.
 >
 > ```cpp
 > consteval auto square(int x) {
@@ -902,7 +916,7 @@ The lambda is defined and used inline, removing the need to declare a separate f
 >
 > In this example, the lambda inside the `square` function is evaluated at compile-time, producing the result before the program starts execution. **Programming contests focus on runtime behavior and dynamic inputs, making `consteval` mostly useless**. In contests, you deal with inputs after the program starts running, so compile-time operations don’t help. The challenge is to be fast when the program is live, not before it runs.
 >
-> Finally, we have template lambdas. C++20 lets lambdas take template parameters, making them generic. They can handle different data types without needing overloads or separate template functions. The template parameter is declared right in the lambda’s definition, allowing one lambda to adapt to any type.
+> Finally, we have template lambdas: C++20 lets lambdas take template parameters, making them generic. They can handle different data types without needing overloads or separate template functions. The template parameter is declared right in the lambda’s definition, allowing one lambda to adapt to any type.
 >
 > Example:
 >
@@ -914,6 +928,14 @@ The lambda is defined and used inline, removing the need to declare a separate f
 > std::cout << generic_lambda(2.5, 1.5);  // Outputs: 4.0
 > ```
 >
-> **Template lambdas are a powerful tool in competitive programming**. They let you write one lambda that works with different data types, saving you time and code. Instead of writing multiple functions for integers, doubles, or custom types, you use a single template lambda. It adapts on the fly, making your code clean and versatile. In contests, where every second counts, this can speed up coding and reduce bugs. You get generic, reusable code without the hassle of writing overloads or separate templates.
+> **Template lambdas are a powerful tool in some competitive programming**. They let you write one lambda that works with different data types, saving you time and code. Instead of writing multiple functions for integers, doubles, or custom types, you use a single template lambda. It adapts on the fly, making your code clean and versatile. In contests, where every second counts, this can speed up coding and reduce bugs. You get generic, reusable code without the hassle of writing overloads or separate templates.
 >
 > _Lambdas are great for quick, one-time tasks. But too many, especially complex ones, can make code harder to read and maintain. In competitive programming, speed often trumps clarity, so this might not seem like a big deal. Still, keeping code readable helps, especially when debugging tough algorithms. Use lambdas wisely._
+
+## Complete Series
+
+[Next]({{ site.baseurl }}/journey-begins/)
+
+## References
+
+[^book1]: Silberschatz, A., Galvin, P. B., & Gagne, G. (2013). **Operating system concepts essentials** (2nd ed.). John Wiley & Sons.
