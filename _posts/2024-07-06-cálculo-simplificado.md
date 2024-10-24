@@ -113,7 +113,7 @@ Indo além, podemos considerar nosso pedacinho $dx$ como $\frac{1}{1000}$ de $x$
 
 _Aquilo que consideraremos pequeno irá depender do problema que desejamos solucionar, mas no cálculo o pequeno sempre será $dx$_.
 
-![]({{ site.baseurl }}/assets/images/calc*Fig1.jpg)
+![]({{ site.baseurl }}/assets/images/calc*Fig1.webp)
 \_Figura 1.1 - Um quadrado acrescido de $dx$.*
 
 Talvez, uma ilustração usando alguns conceitos da geometria básica possa ajudar a visualização destes conceitos de níveis diferentes de grandeza.
@@ -151,7 +151,7 @@ Suponha que tenhamos duas variáveis que dependem uma da outra. São variáveis 
 
 Para manter esta linha de raciocínio, suponha agora que façamos $x$ variar, ou seja, alteraremos, ou imaginaremos que o valor de $x$ foi alterado, adicionando a ela uma fração muito pequena do seu valor. Fração esta que já chamamos de $dx$. Assim, faremos $x$ se tornar $x + dx$. Então, porque $x$ foi alterado, $y$ também terá sido alterado, e terá se tornado $y + dy$. O pequeno $dy$ poderá ser em alguns casos positivo, aumentando, em outros negativo, diminuindo. Contudo, não será, exceto em casos raros, do mesmo tamanho que $dx$.
 
-![]({{ site.baseurl }}/assets/images/calc*Fig2.jpg)
+![]({{ site.baseurl }}/assets/images/calc*Fig2.webp)
 \_Figura 2.1 - Um crescimento $dx$ em um triângulo.*{: class="legend"}
 
 Para ilustrar, vamos analisar dois exemplos:
@@ -656,7 +656,7 @@ _Tabela 5.1 - Comparação entre $f(x)=7x^2$ e sua derivada $\frac{dy}{dx}$._{: 
 
 O que nos permite gerar o Gráfico 5.1:
 
-![]({{ site.baseurl }}/assets/images/graf-51.jpg){: class="lazyimg"}
+![]({{ site.baseurl }}/assets/images/graf-51.webp){: class="lazyimg"}
 _Gráfico 5.1 - Um crescimento $dx$ em um triângulo._{: class="legend"}
 
 No Gráfico 5.1 vemos os valores de $x$, os correspondentes valores de $y$ e as duas curvas que nos interessam: em azul a função $f(x)=y=7x^2$ e em laranja sua derivada, a relação $\frac{dy}{dx} = 14x$.
@@ -2047,7 +2047,7 @@ $$
 
 $$
 
-  ![]({{ site.baseurl }}/assets/images/angular_motion_graphs.jpg)
+  ![]({{ site.baseurl }}/assets/images/angular_motion_graphs.webp)
 *Figura 5.2 - Gráfico das grandezas do Exemplo 6.*{: class="legend"}
 
 ### Exercícios V
@@ -3166,7 +3166,7 @@ Vamos fazer que $PQR$, na Figura 10.1, ser uma fração da curva de uma função
 
 Em uma curva crescente a razão de $dy$ para $dx$ será a medida do grau de inclinação da curva entre os dois pontos $Q$ e $T$. A atenta leitora pode ver na Figura 10.1 que a curva entre $Q$ e $T$ tem muitas inclinações diferentes, de modo que não é possível, nem correto, falar da inclinação da curva entre $Q$ e $T$. No entanto, se os pontos $Q$ e $T$ estão tão próximos um do outro que uma pequena fração, $QT$, da curva é praticamente reta, então estaremos corretos em dizer que a razão $\frac{dy}{dx}$ é a inclinação da curva ao longo de $QT$. A linha reta $QT$ produzida de ambos os lados toca a curva apenas no comprimento de $QT$, e se este comprimento é infinitesimalmente pequeno, a linha reta tocará a curva em exatamente um, e somente um, ponto. Consequentemente esta linha será a curva tangente à curva $PR$ que estamos analisando. Na Figura 10.1 a linha tangente está alongada além do fração infinitesimal $QT$ em uma linha reta e pontilhada.
 
-![]({{ site.baseurl }}/assets/images/cap10-1.jpg){#figura7}
+![]({{ site.baseurl }}/assets/images/cap10-1.webp){#figura7}
 *Figura 10.1 - Significado Geométrico da derivada.*{: class="legend"}
 
 Esta tangente à curva tem evidentemente a mesma inclinação que a curva tem em $QT$, então $\frac{dy}{dx}$ é a inclinação da tangente à curva no ponto $Q$ para o qual se encontrarmos o valor de $\frac{dy}{dx}$. Releia estes dois últimos parágrafos, e observe a Figura 10.1 até estes conceitos estejam claros e evidentes para você.
@@ -3518,7 +3518,7 @@ Uma forma fácil e interessante de traçar gráficos de funções e usar a lingu
   plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
 
   # Salvando a figura como JPG
-  plt.savefig('tangent_graph.jpg', format='jpg')
+  plt.savefig('tangent_graph.webp', format='jpg')
   plt.show()
   ```
 

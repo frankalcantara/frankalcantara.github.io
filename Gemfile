@@ -18,6 +18,8 @@ group :jekyll_plugins do
     gem 'jekyll-gzip'
     gem 'kramdown'
     gem 'rouge'
+    gem 'csv'
+    gem 'fiddle'
 end
 
 gem "webrick", "~> 1.7"

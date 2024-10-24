@@ -199,8 +199,9 @@ section.recent-posts {
 }
 
 .toc ul {
-  list-style: decimal;
+  list-style: none;
   font-weight: 400;
+  padding: 0px !important;
 }
 
 .author-meta {
@@ -938,13 +939,13 @@ p {
   padding: 5%;
   margin-bottom: 2%;
 }
-
+/*
 .toc__list:before {
   content: "Table Of Contents";
   font-weight: bold;
   font-size: 1.5rem;
 }
-
+*/
 .toc__list {
   border: 2px solid #eee;
   border-radius: 4px;
@@ -962,8 +963,8 @@ p {
 }
 
 #toc a {
-  color: black;
-  text-decoration: underline;
+  color: gray;
+  text-decoration: none;
 }
 
 #toc a:hover {
@@ -972,31 +973,26 @@ p {
 
 #toc h3:hover {
   color: #3028d4;
+} 
+
+#toc p{
+  color:gray;
+  font-weight: 450;
+  font-size: large;
 }
 
-#toc h5{
-  color: #d878f0;
-}
 #toc li {
   text-align: left !important;
-  font-family: Merriweather;
-  font-size: 90%;
+  font-size: 85%;
+  list-style:none;
 }
+#toc ul{ padding:0px !important;}
+
 #toc {
-  height: 30px;
   color: gray;
-  overflow: hidden;
-  background-color: #f6f6f6 !important;
-  transition: height 1s ease;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  z-index: 10000;
- }
-#toc.expanded {
-  height: auto;
-  overflow: visible;
- }
+}
+
+
  li code,
  ul code,
  p code,

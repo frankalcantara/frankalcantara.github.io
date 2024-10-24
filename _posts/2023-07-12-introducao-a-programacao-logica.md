@@ -5,7 +5,7 @@ author: Frank
 description: Uma aventura pelo universo matemático que fundamenta a Programação Lógica.
 date: 2023-07-13T02:50:56.534Z
 preview: ""
-image: assets/images/prolog1.jpeg
+image: assets/images/prolog1.webp
 tags:
    - Lógica
    - Programação Lógica
@@ -4079,7 +4079,7 @@ Forneça, em uma linguagem de Lógica de Primeira Ordem, um mundo que permita fo
 2. Se uma célula contém o número 1, então há exatamente uma mina nas células adjacentes.
 3. Mostre, por meio de dedução, que deve haver uma mina na posição (3,3) no estado do jogo da figura a seguir.
 
-![]({{ site.baseurl }}/assets/images/mines.jpg){: class="lazyimg"}
+![]({{ site.baseurl }}/assets/images/mines.webp){: class="lazyimg"}
 _Figura 1 - Um estado do jogo Minesweeper._{: class="legend"}
 
 **Solução**:
@@ -9683,7 +9683,7 @@ Forneça, em uma linguagem de Lógica de Primeira Ordem, um mundo que permita fo
 2. Se uma célula contém o número 1, então há exatamente uma mina nas células adjacentes.
 3. Mostre, por meio de dedução, que deve haver uma mina na posição (3,3) no estado do jogo da figura a seguir.
 
-![]({{ site.baseurl }}/assets/images/mines.jpg){: class="lazyimg"}
+![]({{ site.baseurl }}/assets/images/mines.webp){: class="lazyimg"}
 _Figura 1 - Um estado do jogo Minesweeper._{: class="legend"}
 
 **Solução**:

@@ -9,7 +9,7 @@ tags:
     - Matemática
     - Linguagens Formais
     - Compiladores
-image: assets/images/deriva.jpeg
+image: assets/images/deriva.webp
 description: Como criar tabelas de análise para parsers ll(1) usando os conjuntos First e Follow.
 slug: tabela-derivacao
 keywords:

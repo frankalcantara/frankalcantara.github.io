@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Cálculo Lambda para Novatos
+title: Cálculo Lambda para Neófitos
 author: Frank
 categories:
    - Matemática
@@ -70,7 +70,7 @@ A partir do meio da década de 1930, vários matemáticos e lógicos, como [Chur
 
 | Abordagem                               | Características Principais                                      | Contribuições / Diferenças                                           |
 |-----------------------------------------|----------------------------------------------------------------|----------------------------------------------------------------------|
-| Cálculo Lambda<br> (Church, $1936$)     | • Sistema formal baseado em funções<br>• Usa abstração ($\lambda$) e aplicação<br>• Funções como objetos de primeira classe | • Base para linguagens funcionais<br>• Ênfase em composição de funções<br>• Influenciou teoria dos tipos |
+| Cálculo Lambda / (Church, $1936$)     | • Sistema formal baseado em funções<br>• Usa abstração ($\lambda$) e aplicação<br>• Funções como objetos de primeira classe | • Base para linguagens funcionais<br>• Ênfase em composição de funções<br>• Influenciou teoria dos tipos |
 | Máquina de Turing <br>(Turing, $1936$)  | • Modelo abstrato de máquina<br>• Fita infinita, cabeçote de leitura/escrita<br>• Estados finitos e transições | • Modelo intuitivo de computação<br>• Base para análise de complexidade<br>• Inspirou arquitetura de computadores |
 | Funções Recursivas<br> (Gödel, $1934$)  | • Baseado em teoria dos números<br>• Usa recursão e minimização<br>• Definição indutiva de funções | • Formalização rigorosa<br>• Conexão com lógica matemática<br>• Base para teoria da recursão |
 | Cálculo Sentencial<br> (Post, $1943$)   | • Manipulação de strings<br>• Regras de produção<br>• Transformação de símbolos | • Simplicidade conceitual<br>• Base para gramáticas formais<br>• Influenciou linguagens de programação |
@@ -260,7 +260,7 @@ $$
 
 >Os problemas de Hilbert são uma lista de 23 problemas matemáticos propostos por David Hilbert em 1900, durante o Congresso Internacional de Matemáticos em Paris. Esses problemas abordam questões em várias áreas da matemática e estimularam muitas descobertas ao longo do século XX. Cada problema visava impulsionar a pesquisa e delinear os desafios mais importantes da matemática da época. Alguns dos problemas foram resolvidos, enquanto outros permanecem abertos ou foram provados como indecidíveis, como o **décimo problema de Hilbert**, que pergunta se existe um algoritmo capaz de determinar se um polinômio com coeficientes inteiros possui soluções inteiras.
 
-Em 1970, [Yuri Matiyasevich]([Yuri Matiyasevich](https://en.wikipedia.org/wiki/Yuri_Matiyasevich)), em colaboração com [Julia Robinson](https://en.wikipedia.org/wiki/Julia_Robinson), [Martin Davis] \ ,(<https://en.wikipedia.org/wiki/Martin_Davis_(mathematician)>) e [Hilary Putnam](https://en.wikipedia.org/wiki/Hilary_Putnam), provou que tal algoritmo não existe. Esse resultado teve implicações profundas na teoria dos números e demonstrou a indecidibilidade de um problema central na matemática.
+Em 1970, [Yuri Matiyasevich]([Yuri Matiyasevich](https://en.wikipedia.org/wiki/Yuri_Matiyasevich)), em colaboração com [Julia Robinson](https://en.wikipedia.org/wiki/Julia_Robinson), [Martin Davis](<https://en.wikipedia.org/wiki/Martin_Davis_(mathematician)>) e [Hilary Putnam](https://en.wikipedia.org/wiki/Hilary_Putnam), provou que tal algoritmo não existe. Esse resultado teve implicações profundas na teoria dos números e demonstrou a indecidibilidade de um problema central na matemática.
 
 A equivalência entre o cálculo lambda, as máquinas de Turing e as funções recursivas permitiu estabelecer os limites da computação algorítmica. O Problema da Parada e outros resultados indecidíveis, como o décimo problema de Hilbert, mostraram que existem problemas além do alcance dos algoritmos.
 
@@ -8676,9 +8676,9 @@ O estudo do cálculo lambda tipado e suas extensões continua a influenciar o de
 
 [^cita2]: Malpas, J., Davidson, D., **The Stanford Encyclopedia of Philosophy (Winter 2012 Edition)**, Edward N.\;zalta and Uri Nodelman (eds.), <https://plato.stanford.edu/entries/lambda-calculus/#Com>.
 
-[^cita3]: DOMINUS, M., **Why is the S combinator an S?**, URL = <https://blog.plover.com/math/combinator-s.html>.
+[^cita3]: DOMINUS, M., **Why is the S combinator an S?**, <https://blog.plover.com/math/combinator-s.html>.
 
-[^cita4]: CARDONE, Felice; HINDLEY, J. Roger. **History of Lambda-calculus and Combinatory Logic**. Swansea University Mathematics Department Research Report No. MRRS-05-06, 2006. URL = <https://hope.simons-rock.edu/~pshields/cs/cmpt312/cardone-hindley.pdfl>.
+[^cita4]: CARDONE, Felice; HINDLEY, J. Roger. **History of Lambda-calculus and Combinatory Logic**. Swansea University Mathematics Department Research Report No. MRRS-05-06, 2006. https://hope.simons-rock.edu/~pshields/cs/cmpt312/cardone-hindley.pdfl>.
 
 [^cita5]: Alonzo Church and J.B. Rosser. **Some properties of conversion**. Transactions of the American Mathematical Society, 39(3):472–482, May 1936. <https://www.ams.org/journals/tran/1936-039-03/S0002-9947-1936-1501858-0/S0002-9947-1936-1501858-0.pdf>
 

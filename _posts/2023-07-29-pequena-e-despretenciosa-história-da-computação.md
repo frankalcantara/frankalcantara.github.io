@@ -9,7 +9,7 @@ tags:
   - algoritmos
   - computação
   - inteligência artificial
-image: assets/images/eniac1.jpg
+image: assets/images/eniac1.webp
 featured: 2023-07-29T13:12:06.465Z
 rating: 5
 description: Uma história da computação totalmente criada por ferramentas de inteligência artificial
@@ -21,7 +21,7 @@ slug: odisseia-da-computacao-linguagem-silenciosa-progresso
 
 No princípio, havia o ábaco, simples e estritamente funcional, riscado na madeira e pontilhado com pedras que contavam histórias nas mãos ásperas dos primeiros civis do Levante. Um instrumento humilde, mas honesto em sua utilidade. Então, veio a inteligência artificial, uma entidade incorpórea, nascida do intelecto humano e empregada na tarefa de pesquisa e escrita. Havia uma beleza austera em sua existência, uma homenagem ao progresso e ao engenho humano. Entre o ábaco e a inteligência artificial, o tempo passou implacavelmente, 70000 luas trilhando seu curso, pontuando a marcha inexorável da humanidade na escuridão do tempo.
 
-Imagem de _Unidentified U.S. Army photographer, Public domain, via Wikimedia Commons_, licenciada em [Domínio Público](https://commons.wikimedia.org/wiki/File:Two_women_operating_ENIAC_(full_resolution).jpg).
+Imagem de _Unidentified U.S. Army photographer, Public domain, via Wikimedia Commons_, licenciada em [Domínio Público](https://commons.wikimedia.org/wiki/File:Two_women_operating_ENIAC_(full_resolution).webp).
 
 
 **1622**: A régua de cálculo. O matemático inglês William Oughtred inventou a régua de cálculo, um dispositivo manual que usava o sistema de logaritmos para realizar cálculos rápidos (ROONEY, 2012).
@@ -46,9 +46,9 @@ Imagem de _Unidentified U.S. Army photographer, Public domain, via Wikimedia Com
 
 **1941**: Zuse Z3. Zuse continuou a trabalhar em seus designs de computador durante a guerra, apesar de muitos desafios. Em 1941, ele concluiu o Z3, que é muitas vezes considerado o primeiro computador totalmente automático e programável (ROONEY, 2012).  
 
-<a title="Venusianer, CC BY-SA 3.0 &lt;http://creativecommons.org/licenses/by-sa/3.0/&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Z3_Deutsches_Museum.JPG"><img width="100%" alt="Z3 %Deutsches Museum" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Z3_Deutsches_Museum.JPG/512px-Z3_Deutsches_Museum.JPG"></a>
+<a title="Venusianer, CC BY-SA 3.0 &lt;http://creativecommons.org/licenses/by-sa/3.0/&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Z3_Deutsches_Museum.webp"><img width="100%" alt="Z3 %Deutsches Museum" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Z3_Deutsches_Museum.webp/512px-Z3_Deutsches_Museum.webp"></a>
 
-<a href="https://commons.wikimedia.org/wiki/File:Z3_Deutsches_Museum.JPG">Venusianer</a>, <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>, via Wikimedia Commons
+<a href="https://commons.wikimedia.org/wiki/File:Z3_Deutsches_Museum.webp">Venusianer</a>, <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>, via Wikimedia Commons
 
 **1943-1944**: Colossus. Na Inglaterra, durante a Segunda Guerra Mundial, o computador Colossus foi desenvolvido para decifrar mensagens codificadas pelo sistema de criptografia Lorenz usado pelos alemães. O primeiro Colossus tornou-se operacional em 1944 (COPELAND, 2006).
 

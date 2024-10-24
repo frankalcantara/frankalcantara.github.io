@@ -107,14 +107,5 @@
       "path": "[[workspace]]/_posts"
     }
   ],
-  "frontMatter.content.snippets": {
-    "md-image": {
-      "description": "",
-      "body": [
-        "![]({{ site.baseurl }}/assets/images/calc_Fig2.jpg)",
-        "_Figura 2.1 - Um crescimento $dx$ em um triângulo._{: class=\"legend\"}"
-      ],
-      "fields": []
-    }
-  }
+  "frontMatter.content.snippets": {}
 }

@@ -9,7 +9,7 @@ categories:
 tags:
   - Matemática
   - Linguagens Formais
-image: assets/images/recur.jpeg
+image: assets/images/recur.webp
 description: A Little Introduction to Recursion.
 slug: a-little-introduction-to-recursion
 keywords:
@@ -179,7 +179,7 @@ Each value of $T(n)$ represents the number of recursive calls to compute `fibona
 
 The formula $T(n) = T(n-1) + T(n-2) + 1$ can be used to build a recursion tree, as we can see in Figure 1, and sum the total number of recursive calls. However, for large values of $n$, this can become inefficient. A more efficient approach is to use Dynamic Programming to calculate and store the number of recursive calls, avoiding duplicate calls.
 
-![]({{ site.baseurl }}/assets/images/recursion*tree.jpg){: class="lazyimg"}
+![]({{ site.baseurl }}/assets/images/recursion*tree.webp){: class="lazyimg"}
 \_Figure 1 - Recursive Tree for Fibonacci 5*{: class="legend"}
 
 #### Space and Time Efficiency

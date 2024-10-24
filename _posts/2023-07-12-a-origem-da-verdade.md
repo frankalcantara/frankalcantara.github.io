@@ -4,8 +4,8 @@ layout: post
 author: Frank
 description: Um estudo sobre a origem da verdade na história da humanidade.
 date: 2023-07-12T21:50:59.503Z
-preview: ""
-image: assets/images/tabletsumeriano1.jpeg
+preview: Uma breve história da descoberta do valor da verdade e seu impacto na sociedade. Uma jornada marcada por tragédias que começa com uma execução.
+image: assets/images/tabletsumeriano1.webp
 tags:
   - história
   - filosofia
@@ -16,6 +16,8 @@ categories:
   - filosofia
 slug: origem-da-verdade-parte-1
 rating: 5
+featured: false
+published: true
 ---
 
 Na vastidão do tempo, aproximadamente quatro milênios atrás, encontra-se o primeiro murmúrio de descontentamento de um cliente, um grão solitário na areia do relógio. Isso ocorreu no solo da Suméria, no domínio exuberante da Babilônia, onde a verdade era tão valorizada, tão sagrada, que sua ausência precisou ser registrada para se tornar uma marca, uma cicatriz na face do tempo.

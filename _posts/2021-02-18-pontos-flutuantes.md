@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Precisão vs. Realidade: Os desafios da norma IEEE 754 na computação moderna"
+title: "Os desafios da norma IEEE 754 na computação moderna"
 author: Frank
 categories:
   - artigo
@@ -10,7 +10,8 @@ tags:
   - interpretadores
   - estrutura de dados
   - modelagem
-image: assets/images/pontosflutu.jpg
+image: assets/images/pontosflutu.webp
+preview: um estudo sobre uma das normas mais importantes e menos conhecidas de toda a ciência da computação.
 featured: false
 rating: 3.5
 slug: precisao-realidade-os-desafios-da-norma-ieee-754-na-computacao-moderna
@@ -148,7 +149,7 @@ Todos os números reais na base dez, que sejam dízimas, quando representados em
 
 Só para lembrar: a memória é limitada e contém números inteiros, nosso problema é encontrar uma forma de representar todo o universo de números reais, em base $10$, em um espaço limitado de memória em base $2$. Se pensarmos em uma correspondência de um para um, todo e qualquer número real deve ser armazenado no espaço de dados definido por um e apenas um endereço de memória. Aqui a leitora há de me permitir adiantar um pouco as coisas: esta representação é impossível.
 
-<img class="img-fluid" src="{{ site.baseurl }}/assets/images/churchill1.jpg" alt="mostra as distribuição de bits o padrão ieee 754">
+<img class="img-fluid" src="{{ site.baseurl }}/assets/images/churchill1.webp" alt="mostra as distribuição de bits o padrão ieee 754">
 
 ## Lá vem o homem com suas imperfeições
 

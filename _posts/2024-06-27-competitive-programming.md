@@ -19,7 +19,7 @@ keywords:
 rating: 5
 published: 2024-06-27T19:43:15.124Z
 draft: null
-featured: true
+featured: false
 toc: true
 preview: C++ is essential in competitive programming for its speed and flexibility. This guide covers advanced techniques like Dynamic Programming, input/output optimization, modern C++20 features, and efficient data structures, equipping you to solve complex algorithmic challenges efficiently and effectively.
 beforetoc: In this comprehensive guide, we delve into the world of Competitive Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.

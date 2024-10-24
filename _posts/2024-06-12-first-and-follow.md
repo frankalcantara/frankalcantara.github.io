@@ -9,7 +9,7 @@ tags:
     - Matemática
     - Linguagens Formais
     - Compiladores
-image: assets/images/first.jpg
+image: assets/images/first.webp
 description: Como construir os conjuntos First  e Follow que irão permitir a criação da tabela de análise para o algoritmo de parser.
 slug: first-follow
 keywords:

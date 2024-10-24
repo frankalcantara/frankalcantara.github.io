@@ -197,35 +197,35 @@
 				const toc = document.getElementById("toc");
 
 				// Função para alternar a expansão do TOC
-				function toggleTOC() {
-					toc.classList.toggle("expanded");
-					var h5 = toc.querySelector("h5");
-					if (toc.classList.contains("expanded")) {
-						toc.style.height = "auto";
-						toc.style.backgroundColor = "";
-						h5.innerHTML = "&#9650; Article Navigation"; // Corrigido innerHTML
-					} else {
-						toc.style.height = "30px";
-						toc.style.backgroundColor = "white";
-						h5.innerHTML = "&#9660; Article Navigation"; // Corrigido innerHTML
-					}
-				}
+				//function toggleTOC() {
+				//	toc.classList.toggle("expanded");
+				//	var h5 = toc.querySelector("h5");
+				//	if (toc.classList.contains("expanded")) {
+				//		toc.style.height = "auto";
+				//		toc.style.backgroundColor = "";
+				//		h5.innerHTML = "&#9650; Article Navigation"; // Corrigido innerHTML
+				//	} else {
+				//		toc.style.height = "30px";
+				//		toc.style.backgroundColor = "white";
+				//		h5.innerHTML = "&#9660; Article Navigation"; // Corrigido innerHTML
+				//	}
+				//}
 
-				toc.addEventListener("click", toggleTOC);
+				// toc.addEventListener("click", toggleTOC);
 
 				// Adiciona funcionalidade para recolher TOC ao clicar em um link dentro da div toc
-				toc.querySelectorAll("a").forEach(function (link) {
-					link.addEventListener("click", function (event) {
-						if (toc.classList.contains("expanded")) {
-							toggleTOC();
-						}
-					});
-				});
+				//toc.querySelectorAll("a").forEach(function (link) {
+				//	link.addEventListener("click", function (event) {
+				//		if (toc.classList.contains("expanded")) {
+				//			toggleTOC();
+				//		}
+				//	});
+				//});
 
 				document.addEventListener("scroll", function () {
 					const currentScroll = window.pageYOffset;
 
-					var tocOffsetTop = toc.getBoundingClientRect().top + window.scrollY;
+					//var tocOffsetTop = toc.getBoundingClientRect().top + window.scrollY;
 
 					const marks = document.querySelectorAll(".mark");
 					const viewportHeight = window.innerHeight;

@@ -9,6 +9,7 @@ post_class: post-template
     <div class="row">
         <div class="col-md-2 pl-0">
             {% include share.html %}
+                        
         </div>
         {% assign author = site.authors[page.author] %}
         <div class="col-md-9 flex-first flex-md-unordered">
@@ -34,9 +35,7 @@ post_class: post-template
             {% if site.adsense == "enabled" %}
                 {% include adsense-under-header.html %}
             {% endif %}
-
-
-            
+          
             {% if page.image %}
 
             {% if site.lazyimages == "enabled" %}
@@ -48,16 +47,9 @@ post_class: post-template
             {% endif %}
             <div class="article-post">
                 {% if page.toc %}
-               
                     {% if page.beforetoc %}
                         <p><i>{{page.beforetoc}}</i></p>
                     {% endif %}
-                    <!--<div id = "toc" class="toc mt-4 mb-4 lead">
-                        <div class="loadingbar"></div>
-                        <h5 class="font-weight-bold">&#9660 Article Navigation</h3>
-                         {% include toc.html html=content class="anchor_class" %}
-                        
-                    </div> -->
                 {% endif %}
                 {{content}}
             </div>
