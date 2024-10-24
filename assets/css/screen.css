@@ -990,7 +990,26 @@ p {
 
 #toc {
   color: gray;
+  max-height: 70vh; /* 90% da altura da janela */
+  overflow-y: auto; /* Habilita o scroll quando necessário */
 }
+
+
+/* Estiliza a barra de rolagem para navegadores baseados no Chromium */
+.scrollable-div::-webkit-scrollbar {
+    width: 5px; /* Define a largura da barra de rolagem */
+}
+
+.scrollable-div::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5); /* Cor da parte deslizante */
+    border-radius: 3px; /* Bordas arredondadas */
+}
+
+.scrollable-div::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1); /* Cor do fundo do trilho */
+    border-radius: 3px; /* Bordas arredondadas */
+}
+
 
 
  li code,

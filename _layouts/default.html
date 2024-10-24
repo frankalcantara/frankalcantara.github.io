@@ -169,87 +169,73 @@
 		<script src="{{ site.baseurl }}/assets/js/lazyload.js"></script>
 		{% endif %}
 		<script src="{{ site.baseurl }}/assets/js/ie10-viewport-bug-workaround.js"></script>
-		<script async>
-			document.addEventListener("DOMContentLoaded", function () {
-				// Adiciona a classe 'legend' a todas as tags <em> que não são precedidas por uma tag <img>
-				const emTags = document.querySelectorAll("em");
-				emTags.forEach(function (em) {
-					if (em.previousElementSibling && em.previousElementSibling.tagName.toLowerCase() === "img") {
-						em.classList.add("legend");
-					} else {
-						em.classList.add("mark");
-					}
-				});
+		
+		<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		// Adiciona a classe 'legend' a todas as tags <em> que não são precedidas por uma tag <img>
+		const emTags = document.querySelectorAll("em");
+		emTags.forEach(function (em) {
+			if (em.previousElementSibling && em.previousElementSibling.tagName.toLowerCase() === "img") {
+				em.classList.add("legend");
+			} else {
+				em.classList.add("mark");
+			}
+		});
 
-				// Inicializa o highlight.js e o plugin de numeração de linhas
-				document.querySelectorAll("pre code").forEach((block) => {
-					hljs.highlightElement(block);
-					if (typeof hljs.initLineNumbersOnLoad === "function") {
-						hljs.initLineNumbersOnLoad();
-					}
-				});
+		// Inicializa o highlight.js e o plugin de numeração de linhas
+		document.querySelectorAll("pre code").forEach((block) => {
+			hljs.highlightElement(block);
+			if (typeof hljs.initLineNumbersOnLoad === "function") {
+				hljs.initLineNumbersOnLoad();
+			}
+		});
 
-				// Adiciona classe 'odd' às linhas ímpares de uma tabela usando JavaScript puro
-				document.querySelectorAll("tr:nth-child(odd)").forEach((row) => {
-					row.classList.add("odd");
-				});
+		// Adiciona classe 'odd' às linhas ímpares de uma tabela usando JavaScript puro
+		document.querySelectorAll("tr:nth-child(odd)").forEach((row) => {
+			row.classList.add("odd");
+		});
 
-				const toc = document.getElementById("toc");
+		// Seleciona a div TOC e ajusta o overflow após o carregamento
+		const toc = document.getElementById("toc");
+		if (toc && toc.scrollHeight > toc.clientHeight) {
+			toc.style.overflowY = "auto";
+		}
 
-				// Função para alternar a expansão do TOC
-				//function toggleTOC() {
-				//	toc.classList.toggle("expanded");
-				//	var h5 = toc.querySelector("h5");
-				//	if (toc.classList.contains("expanded")) {
-				//		toc.style.height = "auto";
-				//		toc.style.backgroundColor = "";
-				//		h5.innerHTML = "&#9650; Article Navigation"; // Corrigido innerHTML
-				//	} else {
-				//		toc.style.height = "30px";
-				//		toc.style.backgroundColor = "white";
-				//		h5.innerHTML = "&#9660; Article Navigation"; // Corrigido innerHTML
-				//	}
-				//}
+		// Verifica se a barra de carregamento está no DOM
+		const loadingBar = document.querySelector(".loadingbar");
+		if (loadingBar) {
+			// Adiciona um ouvinte para o evento de scroll
+			document.addEventListener("scroll", function () {
+				const scrollTop = window.scrollY;
+				const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+				const scrollPercent = (scrollTop / docHeight) * 100;
 
-				// toc.addEventListener("click", toggleTOC);
-
-				// Adiciona funcionalidade para recolher TOC ao clicar em um link dentro da div toc
-				//toc.querySelectorAll("a").forEach(function (link) {
-				//	link.addEventListener("click", function (event) {
-				//		if (toc.classList.contains("expanded")) {
-				//			toggleTOC();
-				//		}
-				//	});
-				//});
-
-				document.addEventListener("scroll", function () {
-					const currentScroll = window.pageYOffset;
-
-					//var tocOffsetTop = toc.getBoundingClientRect().top + window.scrollY;
-
-					const marks = document.querySelectorAll(".mark");
-					const viewportHeight = window.innerHeight;
-
-					marks.forEach((mark) => {
-						const markRect = mark.getBoundingClientRect();
-						const markCenter = markRect.top + markRect.height / 2;
-						const distanceToCenter = Math.abs(viewportHeight / 2 - markCenter);
-
-						// Calcula a opacidade proporcional à distância do centro da janela
-						let opacity = 1 - distanceToCenter / (viewportHeight / 2);
-						opacity = Math.max(0, opacity); // Garante que a opacidade não seja negativa
-
-						mark.style.backgroundColor = `rgba(244, 196, 255, ${opacity})`;
-					});
-
-					// Barra de carregamento
-					var scrollTop = window.scrollY;
-					var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-					var scrollPercent = (scrollTop / docHeight) * 100;
-
-					document.querySelector(".loadingbar").style.width = scrollPercent + "%";
-				});
+				// Atualiza a largura da barra de carregamento
+				loadingBar.style.width = scrollPercent + "%";
 			});
+		}
+
+		// Função para lidar com o evento de scroll e opacidade das marcas
+		document.addEventListener("scroll", function () {
+			const marks = document.querySelectorAll(".mark");
+			const viewportHeight = window.innerHeight;
+
+			// Atualiza a opacidade das marcas
+			marks.forEach((mark) => {
+				const markRect = mark.getBoundingClientRect();
+				const markCenter = markRect.top + markRect.height / 2;
+				const distanceToCenter = Math.abs(viewportHeight / 2 - markCenter);
+
+				// Calcula a opacidade proporcional à distância do centro da janela
+				let opacity = 1 - distanceToCenter / (viewportHeight / 2);
+				opacity = Math.max(0, opacity); // Garante que a opacidade não seja negativa
+
+				mark.style.backgroundColor = `rgba(244, 196, 255, ${opacity})`;
+			});
+		});
+	});
 		</script>
+
+
 	</body>
 </html>
