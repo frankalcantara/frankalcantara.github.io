@@ -5521,6 +5521,7 @@ Essa definição funciona aplicando $n$ vezes a função $s$ ao argumento $z\,$,
 Vamos usar os números de Church para calcular a soma de $2 + 3$ em cálculo lambda puro. Primeiro, representamos os números $2$ e $3$ usando as definições de números de Church:
 
 $$2 = \lambda s. \lambda z.\;s\;(s\;z)$$
+
 $$3 = \lambda s. \lambda z.\;s\;(s\;(s\;z))$$
 
 Agora, aplicamos a função de adição de números de Church:
@@ -5671,6 +5672,7 @@ Com essas definições, podemos representar e manipular números positivos e neg
 Agora que temos uma representação para números negativos, vamos calcular a soma de $3 + (-2)$ usando cálculo lambda puro. Primeiro, representamos os números $3$ e $-2$ usando as definições de pares de Church:
 
 $$3 = \lambda s. \lambda p.\;s\;(s\;(s\;p))$$
+
 $$-2 = \lambda s. \lambda p.\;p\;(p\;s)$$
 
 A função de adição precisa ser adaptada para lidar com pares de Church (positivos e negativos). Aqui está a nova definição de adição:
@@ -6768,7 +6770,9 @@ Essa função percorre a lista somando os elementos, aplicando recursão via o c
    Realizamos as adições de dentro para fora:
 
    $$\text{add}\;1\;(\text{add}\;2\;3)$$
+   
    $$\text{add}\;1\;5$$
+   
    $$6$$
 
    Portanto, $\text{sum}\;[1, 2, 3] = 6$ em cálculo lambda puro.
@@ -6936,6 +6940,7 @@ A função Last retorna o último elemento da tupla:
       $$\text{last}\;(3, 4) = (\lambda p. p\;(\lambda x. \lambda y.\;y))\;(\lambda f. f\;3\;4) $$
 
       Redução:
+
       $$= (\lambda f. f\;3\;4)\;(\lambda x. \lambda y.\;y) $$
 
       $$= (\lambda x. \lambda y.\;y)\;3\;4 $$
@@ -7018,7 +7023,7 @@ Crie a tupla $(5, 6, 7)$ e aplique a função `second` a ela.
 
    2. Aplicação da função `second`:
 
-   $$\text{second}\;(5, 6, 7) = (\lambda p. p\;(\lambda x. \lambda y. \lambda z.\;y))\;(\lambda f. f\;5\;6\;7) $$
+   $$\text{second}\;(5, 6, 7) = (\lambda p. p\;(\lambda x. \lambda y. \lambda z.\;y))\;(\lambda f. f\;5\;6\;7)$$
 
    Redução:
 
@@ -7142,7 +7147,7 @@ Onde $Y$ é o combinador de ponto fixo. Use `foldRight` para implementar a funç
 
    **Solução**:
 
-   1. Para implementar `length` usando `foldRight`, precisamos de uma função $g$ que incremente um contador para cada elemento da lista, e um valor inicial $a$ de 0. Definimos:
+   1. Para implementar `length` usando `foldRight`, precisamos de uma função $g$ que incremente um contador para cada elemento da lista, e um valor inicial $a$ de $0$. Definimos:
 
    $$g = \lambda x. \lambda acc. \text{succ}\;acc $$
    $$a = 0 $$
@@ -7153,7 +7158,7 @@ Onde $Y$ é o combinador de ponto fixo. Use `foldRight` para implementar a funç
 
    3. Para testar, vamos aplicar `length` à lista $[1, 2, 3, 4]$:
 
-   $$\text{length}\;[1, 2, 3, 4] = \text{foldRight}\;(\lambda x. \lambda acc. \text{succ}\;acc)\;0\;(\text{cons}\;1\;(\text{cons}\;2\;(\text{cons}\;3\;(\text{cons}\;4\;\text{nil})))) $$
+   $$\text{length}\;[1, 2, 3, 4] = \text{foldRight}\;(\lambda x. \lambda acc. \text{succ}\;acc)\;0\;(\text{cons}\;1\;(\text{cons}\;2\;(\text{cons}\;3\;(\text{cons}\;4\;\text{nil}))))$$
 
    4. Redução (simplificada):
 
@@ -7649,7 +7654,8 @@ $$(\lambda x:A. t)\;s \rightarrow t[x := s]$$
    Onde $t[x := s]$ denota a substituição de todas as ocorrências livres de $x$ em $t$ por $s\,$. Isso corresponde à aplicação de uma função ao seu argumento.
 
    Exemplo:
-$$(\lambda x:\text{Nat}.\;x + 1)\;5 \rightarrow 5 + 1 \rightarrow 6$$
+
+   $$(\lambda x:\text{Nat}.\;x + 1)\;5 \rightarrow 5 + 1 \rightarrow 6$$
 
 2. **redução-$\eta$** (uma forma de extensionalidade):
 
