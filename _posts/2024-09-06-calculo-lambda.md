@@ -2803,13 +2803,12 @@ $$M = (\lambda x.\;(\lambda y.\;x + y))\;7\;8$$
    Caminho 1: aplique a primeira função:
 
    $$M = (\lambda x.\;(\lambda y.\;x + y))\;7\;8$$
+   
    $$\to_\beta (\lambda y.\;7 + y)\;8$$
 
    Aplique a segunda função:
 
-   $$
-   \to_\beta 7 + 8 = 15
-   $$
+   $$\to_\beta 7 + 8 = 15$$
 
    Caminho 2: primeiro, aplique a segunda função:
 
