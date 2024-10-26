@@ -37,6 +37,7 @@
 		"mergesort",
 		"MRRS",
 		"munmap",
+		"NDEBUG",
 		"Nodelman",
 		"openmode",
 		"pseudocode",
@@ -89,5 +90,6 @@
 		"saudacao"
 	],
 	"[markdown]": {
-	}
+	},
+	"frontMatter.media.defaultSorting": "LastModifiedAsc"
 }
