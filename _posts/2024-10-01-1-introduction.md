@@ -89,6 +89,17 @@ We are going to cover a lot of ground. From basic techniques to advanced algorit
 
 In this section, we’ll gona take a tour by time and space complexities, looking at how they affect algorithm efficiency, especially in competitive programming, without all mathematics. We’ll break down loops, recursive algorithms, and how different complexity classes shape performance. We’ll also look at space complexity and memory use, which matter when handling large datasets.
 
+In this section, we'll take a tour through time and space complexities, looking at how they affect algorithm efficiency, especially in competitive programming, without heavy mathematics. Before diving into specific examples, let's visualize how different complexity classes grow with input size. Figure 1.1.A provides a clear picture of how various algorithmic complexities scale:
+
+![Chart showing the diferent complexity growth](/assets/images/complexity_growth_perfect.webp)
+
+
+_Figure 1.1.A: Growth comparison of common algorithmic complexities. The graph shows how the number of operations increases with input size for different complexity classes. Notice how O(1) remains constant, O(log n) grows very slowly, O(n) increases linearly, while O(n²) and O(n³) show dramatically steeper growth curves._{: class="legend"}
+
+This visualization helps us understand why choosing the right algorithm matters. For small inputs, the differences might seem negligible, but as the input size grows, the impact becomes dramatic. A cubic algorithm (O(n³)) processing an input of size 10 performs 1,000 operations, while a linear algorithm (O(n)) only needs 10 operations for the same input. This difference becomes even more pronounced with larger inputs, making algorithm selection crucial for competitive programming, where both time and memory constraints are strict.
+
+We'll break down loops, recursive algorithms, and how different complexity classes shape performance. We'll also look at space complexity and memory use, which matter when handling large datasets.
+
 **One major cause of slow algorithms is having multiple nested loops that run over the input data.** The more nested loops there are, the slower the algorithm gets. With $k$ nested loops, the time complexity rises to $O(n^k)$. Alright, I lied. There is a little bit of math.
 
 For instance, the time complexity of the following  code fragment is $O(n)$:
@@ -231,7 +242,7 @@ So, the total time complexity is:
 
 $$1 + 2 + 4 + \cdots + 2^{n-1} = 2^n - 1 = O(2^n)$$
 
-Recursive functions also bring space complexity issues. Each call adds to the call stack, and with deep recursion, like this exponential example, the space complexity can be $O(n)$. Be careful: too many recursive calls can lead to a stack overflow, particularly in languages like C++ or Java, where the call stack has a fixed size. This can cause the program to crash unexpectedly. In other languages like Python, reaching the recursion limit raises a specific exception (e.g., `RecursionError`), allowing for safer handling of deep recursion.
+Recursive functions also bring space complexity issues. Each call adds to the call stack, and with deep recursion, like this exponential example, the space complexity can be $O(n)$. Be aware that recursion depth is limited by the call stack's size. In C++ and Java, the call stack has a fixed size determined by the system or runtime settings. If too many recursive calls occur, the stack can overflow, causing the program to terminate. Modern C++ compilers like GCC, Clang and MSVC can optimize tail-recursive calls through *tail-call optimization (TCO), but this is not guaranteed and is generally not implemented in Java. In Python, recursion also has a limit, but it is managed differently. Python raises a `RecursionError` when the recursion depth exceeds a preset limit (default is $1,000$ calls). This exception can be caught, providing a safer way to handle deep recursion. However, adjusting the recursion limit with `sys.setrecursionlimit()` in Python can still lead to a stack overflow if set too high, as Python’s call stack size remains fixed. Unlike C++ and Java, Python does not support TCO, making deep recursion slower and more memory-intensive.
 
 ### 1.1.3. Common Complexity Classes
 
