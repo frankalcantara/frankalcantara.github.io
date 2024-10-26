@@ -91,8 +91,7 @@ In this section, we’ll gona take a tour by time and space complexities, lookin
 
 In this section, we'll take a tour through time and space complexities, looking at how they affect algorithm efficiency, especially in competitive programming, without heavy mathematics. Before diving into specific examples, let's visualize how different complexity classes grow with input size. Figure 1.1.A provides a clear picture of how various algorithmic complexities scale:
 
-![Chart showing the diferent complexity growth](/assets/images/complexity_growth_perfect.webp)
-
+![Chart showing the different complexity growth](/assets/images/complexity_growth_perfect.webp)
 
 _Figure 1.1.A: Growth comparison of common algorithmic complexities. The graph shows how the number of operations increases with input size for different complexity classes. Notice how O(1) remains constant, O(log n) grows very slowly, O(n) increases linearly, while O(n²) and O(n³) show dramatically steeper growth curves._{: class="legend"}
 
@@ -131,7 +130,7 @@ for (int i = 1; i <= n; i++) {
 
 Don’t worry if you don’t know all the C++ syntax. I mean, I wish you did, but hey, we'll get there. **In competitive programming, excessive memory use can cause your program to exceed memory limits, though this isn’t very common in competitions.** Always keep an eye on space complexity, especially when using arrays, matrices, or other data structures that grow with input size. Manage memory wisely to avoid crashes and penalties. And, there are penalties.
 
-## 1.1.2. Order of Growth
+### 1.1.2. Order of Growth
 
 Time complexity doesn’t show the exact number of times the code inside a loop runs; it shows how the runtime grows. In these examples, the loop runs $3n$, $n+5$, and $\lfloor n/2 \rfloor$ times, but all still have a time complexity of $O(n)$:
 
@@ -205,48 +204,123 @@ for (int i = 1; i <= n; i++) {
 
 If the algorithm above uses a data structure like an $n \times m$ matrix, the space complexity also becomes $O(n\times m)$. This increases memory usage, especially with large inputs.
 
-The time complexity of a recursive function depends on how often it’s called and the complexity of each call. Multiply these together to get the total time complexity. For example, look at this function:
+The time complexity of a recursive function depends on how often it's called and the complexity of each call. To understand this better, let's look at a progression of recursive functions, from simple to complex:
 
-```cpp
-void f(int n) {
-    if (n == 1) return;
-    f(n-1);
-}
-```
+1. Linear Recursion - Simple Countdown:
 
-The call `f(n)` makes $n$ recursive calls, each with a time complexity of $O(1)$. So, the total time complexity is $O(n)$.
+    ```cpp
+    void countdown(int n) {
+        if (n == 0) return;
+        std::cout << n << " ";
+        countdown(n-1);
+    }
+    ```
 
-We also need to watch out for functions with exponential growth, like the one below, which makes two recursive calls for every input:
+    This function makes $n$ calls, each doing $O(1)$ work, resulting in $O(n)$ complexity. It's a straightforward example where each call leads to exactly one recursive call. Let's see it a little bit more careful: Here, each call to the function creates exactly one more call, until n = 0. The Table 1.1.A shows the calls made from a single initial call to countdown(n):
 
-```cpp
-void g(int n) {
-    if (n == 1) return;
-    g(n-1);
-    g(n-1);
-}
-```
+    | Function Call   | Number of Calls |
+    | --------------- | --------------- |
+    | countdown(n)    | 1               |
+    | countdown(n-1)  | 1               |
+    | countdown(n-2)  | 1               |
+    | ...             | ...             |
+    | countdown(1)    | 1               |
 
-Here, each call to the function creates two more calls, except when $n = 1$. The Table 1.1.2.A shows the calls made from a single initial call to $g(n)$:
+    _Table 1.1.A - Counting calls in linear recursion._{: class="legend"}
 
-| Function Call | Number of Calls |
-| ------------- | --------------- |
-| $g(n)$        | 1               |
-| $g(n-1)$      | 2               |
-| $g(n-2)$      | 4               |
-| ...           | ...             |
-| $g(1)$        | $2^{n-1}$       |
+    So, the total time complexity is:
 
-_Table 1.1.2.A - Counting calls to understand exponential growth._{: class="legend"}
+    $$1 + 1 + 1 + \cdots + 1 = n = O(n)$$
 
-So, the total time complexity is:
+2. Tail Recursion with Accumulator:
 
-$$1 + 2 + 4 + \cdots + 2^{n-1} = 2^n - 1 = O(2^n)$$
+    ```cpp
+    int sum_to_n(int n, int acc = 0) {
+        if (n == 0) return acc;
+        return sum_to_n(n-1, acc + n);
+    }
+    ```
 
-Recursive functions also bring space complexity issues. Each call adds to the call stack, and with deep recursion, like this exponential example, the space complexity can be $O(n)$. Be aware that recursion depth is limited by the call stack's size. In C++ and Java, the call stack has a fixed size determined by the system or runtime settings. If too many recursive calls occur, the stack can overflow, causing the program to terminate. Modern C++ compilers like GCC, Clang and MSVC can optimize tail-recursive calls through *tail-call optimization (TCO), but this is not guaranteed and is generally not implemented in Java. In Python, recursion also has a limit, but it is managed differently. Python raises a `RecursionError` when the recursion depth exceeds a preset limit (default is $1,000$ calls). This exception can be caught, providing a safer way to handle deep recursion. However, adjusting the recursion limit with `sys.setrecursionlimit()` in Python can still lead to a stack overflow if set too high, as Python’s call stack size remains fixed. Unlike C++ and Java, Python does not support TCO, making deep recursion slower and more memory-intensive.
+    The accumulator doesn't affect the number of calls. Each call creates one recursive call until $n = 0$. The Table 1.1.B shows the pattern:
+
+    | Function Call            | Number of Calls | Accumulator Value |
+    | ----------------------- | --------------- | ----------------- |
+    | sum_to_n(n, 0)          | 1              | 0                 |
+    | sum_to_n(n-1, n)        | 1              | n                 |
+    | sum_to_n(n-2, n+(n-1))  | 1              | n+(n-1)           |
+    | ...                     | ...            | ...               |
+    | sum_to_n(1, partial)    | 1              | partial           |
+
+    _Table 1.1.B - Analyzing tail recursion with accumulator._{: class="legend"}
+
+    The total time complexity is:
+
+    $$1 + 1 + 1 + \cdots + 1 = n = O(n)$$
+
+3. Binary Recursion - Generating Paths:
+
+    ```cpp
+    binary_paths(int n, std::string path = "") {
+        if (n == 0) {
+            std::cout << path << "\n";
+            return;
+        }
+        binary_paths(n-1, path + "0");
+        binary_paths(n-1, path + "1");
+    }
+    ```
+
+    Each call creates two new calls, doubling at each level until $n = 0$. The Table 1.1.C shows this exponential growth:
+
+    | Function Call    | Number of Calls | Paths Generated        |
+    | --------------- | --------------- | --------------------- |
+    | binary_paths(n)  | 1              | Root                  |
+    | binary_paths(n-1)| 2              | "0", "1"              |
+    | binary_paths(n-2)| 4              | "00","01","10","11"   |
+    | ...             | ...            | ...                   |
+    | binary_paths(0)  | 2^n            | All binary strings    |
+
+    _Table 1.1.C - Analyzing binary recursive growth._{: class="legend"}
+
+    The total time complexity is:
+
+    $$1 + 2 + 4 + \cdots + 2^n = 2^{n+1} - 1 = O(2^n)$$
+
+4. Multiple Recursion - Tribonacci Sequence:
+
+    ```cpp
+    tribonacci(int n) {
+        if (n <= 1) return 0;
+        if (n == 2) return 1;
+        return tribonacci(n-1) + tribonacci(n-2) + tribonacci(n-3);
+        // First numbers: 0, 0, 1, 1, 2, 4, 7, 13, 24, 44...
+        // Each number is the sum of the previous 3 numbers
+    }
+    ```
+
+    Each call spawns three recursive calls until the base cases. The Table 1.1.D shows the exponential growth:
+
+    | Function Call     | Number of Calls | Total New Calls |
+    | ---------------- | --------------- | --------------- |
+    | tribonacci(n)    | 1              | 3               |
+    | tribonacci(n-1)  | 3              | 9               |
+    | tribonacci(n-2)  | 9              | 27              |
+    | ...              | ...            | ...             |
+    | tribonacci(≤2)   | 3^{n-2}        | Base cases      |
+
+    _Table 1.1.D - Analyzing three-way recursive growth._{: class="legend"}
+
+    The total time complexity is:
+
+    $$1 + 3 + 9 + \cdots + 3^{n-2} = \frac{3^{n-1} - 1}{2} = O(3^n)$$
+
+These examples illustrate how recursive patterns affect complexity: Single recursion typically leads to linear complexity $O(n)$; Binary recursion often results in exponential complexity $O(2^n)$ e Multiple recursion can lead to even higher exponential complexity $O(k^n)$, where k is the number of recursive calls
+
+Recursive functions also bring space complexity issues. Each call adds to the call stack, and with deep recursion, like this exponential example, the space complexity can be $O(n)$. Be aware that recursion depth is limited by the call stack's size. In C++ and Java, the call stack has a fixed size determined by the system or runtime settings. If too many recursive calls occur, the stack can overflow, causing the program to terminate. Modern C++ compilers like GCC, Clang and MSVC can optimize tail-recursive calls through _tail-call optimization_ (TCO), but this is not guaranteed and is generally not implemented in Java. In Python, recursion also has a limit, but it is managed differently. Python raises a `RecursionError` when the recursion depth exceeds a preset limit (default is $1,000$ calls). This exception can be caught, providing a safer way to handle deep recursion. However, adjusting the recursion limit with `sys.setrecursionlimit()` in Python can still lead to a stack overflow if set too high, as Python’s call stack size remains fixed. Unlike C++ and Java, Python does not support TCO, making deep recursion slower and more memory-intensive.
 
 ### 1.1.3. Common Complexity Classes
 
-Here is a Table 1.1.3.A of common time complexities of algorithms:
+Here is a Table 1.1.E of common time complexities of algorithms:
 
 | Complexity    | Description                                                                                                  | Examples                                      |
 | ------------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
@@ -260,7 +334,7 @@ Here is a Table 1.1.3.A of common time complexities of algorithms:
 | $O(2^n)$      | Exponential growth; common in recursive algorithms that explore all subsets or configurations.              | Recursive subset generation, solving the Traveling Salesman Problem (TSP) recursively. |
 | $O(n!)$       | Factorial time; often seen in algorithms that generate all possible permutations of input.                   | Permutation generation, brute-force TSP.     |
 
-_Table 1.1.3.A - Common time complexities of algorithms._{: class="legend"}
+_Table 1.1.E - Common time complexities of algorithms._{: class="legend"}
 
 The following text offers a more comprehensive explanation of each complexity listed in the table, recognizing that each of us may understand these concepts in different ways. You might find it helpful to keep both the table and the text on hand for reference.
 
@@ -411,7 +485,7 @@ int main() {
 }
 ```
 
-_Code Fragment 1.2.1.A - Code for self-assessment of your typing speed._{: class="legend"}
+_Code Fragment 1.2.A - Code for self-assessment of your typing speed._{: class="legend"}
 
 Don't give up before trying. If you feel your typing speed isn’t enough, don’t stop here. Keep practicing. With each new algorithm, copy it and practice again until typing between $60$ and $80$ words per minute with an accuracy above $95%$ feels natural.
 
@@ -437,71 +511,9 @@ VVI matrix;  // std::vector<std::vector<int>> matrix;
 VS words;    // std::vector<std::string> words;
 ```
 
-In this book, I’ll use a lot of comments to explain concepts, code, or algorithms. You, on the other hand, won’t use any comments. Not during training, and definitely not during competitions. If you even think about using one, seek professional advice. There are plenty of psychiatrists available online.
+_In this book, I’ll use a lot of comments to explain concepts, code, or algorithms. You, on the other hand, won’t use any comments. Not during training, and definitely not during competitions_. If you even think about using one, seek professional advice. There are plenty of psychiatrists available online.
 
->In C++, you can use `#define` to create macros and short aliases. Macros can define constants or functions at the preprocessor level. **Macros can >cause problems**. They ignore scopes and can lead to unexpected behavior. In C++20, for constants use `constexpr`, `const` instead of macros.
->
-> ```cpp
-> // Old way using macros
-> #define PI 3.14159
->
-> // Modern way using constexpr
-> constexpr double PI = 3.14159;
-> ```
->
-> The `constexpr` keyword tells the compiler to evaluate a function or variable at compile time. If possible, the compiler computes it before runtime. This helps in optimization, as constants are determined during compilation, not execution. The value is constant and cannot change.
->
-> ```cpp
-> constexpr int max_items = 42;  // Value known at compile time, cannot change.
-> ```
->
-> You can use `constexpr` variables to define array sizes or template parameters when their values are known before or during compilation.
->
-> ```cpp
-> constexpr int size = 10;
-> int array[size];  // Valid, size is a constant expression.
-> ```
->
-> We can use `constexpr` with Functions. A `constexpr` function can be evaluated at compile time if its inputs are constant expressions. All operations inside must be valid at compile time.
->
-> ```cpp
-> constexpr int factorial(int n) {
->     return n <= 1 ? 1 : n * factorial(n - 1);  // Recursive function computed at compile time.
-> }
-> ```
->
-> If you call `factorial(6)` with a constant value, the compiler computes it at compile time and replaces the call with `720`.
->
-> `constexpr` is useful in many contexts. It helps construct constant data, optimize algorithms, and define compile-time logic. Here are some examples:
->
-> 1. Compile-time array size:
->
->    ```cpp
->    constexpr int size = 5;
->    int array[size];  // Size computed at compile time.
->    ```
->
-> 2. Compile-time strings:
->
->    ```cpp
->    constexpr const char* greet() { return "Hello, World!"; }
->    constexpr const char* message = greet();  // Message computed at compile time.
->    ```
->
-> 3. Compile-time mathematical operations:
->
->    ```cpp
->    constexpr int area(int length, int width) {
->        return length * width;
->    }
->    constexpr int room_area = area(10, 12);  // Computed at compile time.
->    ```
->
-> In competitive programming, `constexpr` can be an advantage or a disadvantage. Advantage, `constexpr` can optimize code by computing results at compile time. This saves processing time during execution. If certain values are constant, you can precompute them with `constexpr`. Disadvantage: Many problems have dynamic input provided at runtime. `constexpr` cannot compute values that depend on runtime input. Since runtime efficiency is crucial, `constexpr` use is limited when inputs are dynamic.
->
-> Overall, `constexpr` is valuable when dealing with static data or fixed input sizes. But in typical ICPC-style competitions, you use it less often because most problems require processing dynamic input.
->
-> _For functions, macros can be unsafe_. They don't respect types or scopes. Modern C++ provides templates and `constexpr` functions.
+>In C++, you can use `#define` to create macros and short aliases. Macros can define constants or functions at the preprocessor level. **Macros can cause problems**. They ignore scopes and can lead to unexpected behavior. So, _For functions, macros can be unsafe_. They don't respect types or scopes.
 >
 > ```cpp
 > // Macro function
@@ -524,9 +536,78 @@ In this book, I’ll use a lot of comments to explain concepts, code, or algorit
 >
 > If you call `square(5)` in a context requiring a constant expression, the compiler evaluates it at compile time.
 >
-> In summary, avoid macros when you can. Use modern C++20 features instead. They make your code safer and clearer.
+> In summary, avoid macros when you can. Use modern C++20 features instead. They make your code safer and clearer.C++20 offers features like constexpr functions, inline variables, and templates. These replace most uses of macros. They provide type safety and respect scopes. They make code easier to read and maintain. You can define a constexpr function to compute the square of a number:
+>
+> ```cpp
+> constexpr int square(int n) {
+>    return n * n;
+> }
+> ```
+>
+> If you call `square(5)` in a context requiring a constant expression, the compiler evaluates it at compile time. Let's explore how to use these features effectively, starting with basic constants and progressing to advanced compile-time computations:
+>
+>1. Basic Constant Declaration:
+>
+> ```cpp
+> // Old way using macros (avoid)
+> #define MAX_SIZE 100
+>
+> // Modern way using const
+> const int MAX_SIZE = 100;
+> ```
+>
+>2. Simple Compiler-time Computation
+>
+> ```cpp
+> // Basic constexpr function
+> constexpr int square(int x) {
+>    return x * x;
+> }
+> // Usage:
+> constexpr int result = square(5); // Computed at compile-time
+> ```
+>
+>3. Conditional Compile-time Logic:
+>
+> ```cpp
+> /// constexpr with conditionals
+> constexpr int max(int a, int b) {
+>     return (a > b) ? a : b;
+> }
+> // This enables compile-time decision making
+> constexpr int larger = max(10, 20); // Evaluates to 20 at compile-time
+> ```
+>
+>4. Recursive Compile-time Computation:
+>
+> ```cpp
+> // Recursive constexpr function
+> constexpr int factorial(int n) {
+>     return (n <= 1) ? 1 : n * factorial(n-1);
+> }
+> // The entire recursion happens at compile-time
+> constexpr int fact5 = factorial(5); // Evaluates to 120 at compile-time
+> ```
+>
+> 5. Generic Compile-time Computation:
+>
+> ```cpp
+> // Template constexpr combining generics and compile-time evaluation
+> template<typename T>
+> constexpr T power(T base, int exp) {
+>     if (exp == 0) return 1;> 
+>     if (exp == 1) return base;
+>     return base * power(base, exp-1);
+> }
+> // Works with different types, all at compile-time
+> constexpr int int_power = power(2, 3);      // 8
+> constexpr double dbl_power = power(2.5, 2); // 6.25
+> ```
+>
+In competitive programming, constexpr can be an advantage or disadvantage. It optimizes code by computing results at compile time, saving processing time during execution. If certain values are constant, you can precompute them with constexpr. However, many problems have dynamic input provided at runtime, where constexpr cannot help since it cannot compute values that depend on runtime input.
+Overall, constexpr is valuable when dealing with static data or fixed input sizes. But in typical ICPC-style competitions, you use it less often because most problems require processing dynamic input.
 
-**A better way to reduce typing time is by using `typedef` or `using` to create abbreviations for frequently used vector types.**
+_A smart way to reduce typing time is by using `using` to create abbreviations for frequently used vector types._
 
 In many cases, the use of `#define` can be replaced with more modern and safe C++ constructs like `using`, `typedef`, or `constexpr`. **The old `#define` does not respect scoping rules and does not offer type checking, which can lead to unintended behavior**. Using `typedef` or `using` provides better type safety and integrates smoothly with the C++ type system, making the code more predictable and easier to debug.
 
@@ -619,7 +700,7 @@ sVec(vec); // Sorts the vector using the lambda function
 std::sort(ALL(vec)); // Another way to sort the vector
 ```
 
-_Code Fragment 1.2.2.2.A:Example of using and constexpr to reduce typing time._{: legenda}
+_Code Fragment 1.2.2.2.A:Example of using and constexpr to reduce typing time._{: class="legend"}
 
 Keeping the macro `#define ALL(vec) vec.begin(), vec.end()` wasn’t madness, it was the competitive programming bug. The C++20 code needed to replace this macro with modern structures requires a lot of typing.
 
@@ -657,9 +738,10 @@ std::sort(all(vec).first, all(vec).second); // Another way to sort using the uti
 >     return 0;
 > }
 > ```
-> _Code 1.2.2.2.A: Simple and small program to print a vector_{: legend}
 >
-> The program in Code 1.2.2.2.A, a simple example of professional code, sorts the numbers and prints:
+> _Code 1.2.B: Simple and small program to print a vector_{: legend}
+>
+> The program in Code 1.2.B, a simple example of professional code, sorts the numbers and prints:
 >
 > ```txt
 > 1 2 3 4 5
@@ -771,9 +853,9 @@ int main() {
 }
 ```
 
-_Code 1.2.2.3.A: Code example to sort a number vector and print it._ {: legenda}
+_Code 1.2.2.3.A: Code example to sort a number vector and print it._ {: class="legend"}
 
-This code sorts a vector of integers in descending order using a traditional comparison function. It begins by including the necessary libraries: `<iostream>` for input and output, `<vector>` for dynamic arrays, and `<algorithm>` for sorting operations. The `compare` function is defined to take two integers, returning `true` if the first integer is greater than the second, setting the sorting order to descending.
+The Code 1.2.2.3.A sorts a vector of integers in descending order using a traditional comparison function. It begins by including the necessary libraries: `<iostream>` for input and output, `<vector>` for dynamic arrays, and `<algorithm>` for sorting operations. The `compare` function is defined to take two integers, returning `true` if the first integer is greater than the second, setting the sorting order to descending.
 
 In the `main` function, a vector named `numbers` is initialized with the integers `{1, 3, 2, 5, 4}`. The `std::sort` function is called on this vector, using the `compare` function to sort the elements from highest to lowest. After sorting, a `for` loop iterates through the vector, printing each number followed by a space. The program ends with a newline to cleanly finish the output. This code is a simple and direct example of using a custom function to sort data in C++. Now, let's see the same code using lambda functions and other competitive programming tricks, Code 1.2.2.3.B:
 
@@ -801,7 +883,7 @@ int main() {
 }
 ```
 
-_Code 1.2.2.3.B: Sort and print vector using lambda functions._{: legenda}
+_Code 1.2.2.3.B: Sort and print vector using lambda functions._{: class="legend"}
 
 To see the typing time gain, just compare the normal definition of the `compare` function followed by its usage with the use of the lambda function.
 
@@ -910,7 +992,7 @@ The lambda is defined and used inline, removing the need to declare a separate f
 > }
 > ```
 >
->_Code 1.2.2.3.C: Using lambdas default-constructed._{: legenda}
+>_Code 1.2.2.3.C: Using lambdas default-constructed._{: class="legend"}
 >
 > **This feature lets you set up lambdas for later use (deferred execution)**. In the Code 1.2.2.3.C, the lambda `print_message` is default-constructed. It captures nothing and waits until it’s needed. The main function shows this in action. If the vector has numbers, it doubles them. If not, it calls the default lambda and prints a message. C++20 makes lambdas simple and ready for action, whenever you need them.
 >

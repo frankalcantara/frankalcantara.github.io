@@ -87,7 +87,8 @@
 		"nlink",
 		"normvsaplic",
 		"rdev",
-		"saudacao"
+		"saudacao",
+		"setrecursionlimit"
 	],
 	"[markdown]": {
 	},

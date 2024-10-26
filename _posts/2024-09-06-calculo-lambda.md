@@ -75,7 +75,7 @@ A partir do meio da década de 1930, vários matemáticos e lógicos, como [Chur
 | Funções Recursivas<br> (Gödel, $1934$)  | • Baseado em teoria dos números<br>• Usa recursão e minimização<br>• Definição indutiva de funções | • Formalização rigorosa<br>• Conexão com lógica matemática<br>• Base para teoria da recursão |
 | Cálculo Sentencial<br> (Post, $1943$)   | • Manipulação de strings<br>• Regras de produção<br>• Transformação de símbolos | • Simplicidade conceitual<br>• Base para gramáticas formais<br>• Influenciou linguagens de programação |
 
-_Tabela 1.A. Relação entre as contribuições de Church, Gödel e Post_{: Legenda}
+_Tabela 1.A. Relação entre as contribuições de Church, Gödel e Post_{: class="legend"}
 
 Church propôs o cálculo lambda para descrever funções de forma simbólica, usando a _abstração lambda_. Esse modelo representa funções como estruturas de primeira classe formalizando a computabilidade de funções e variáveis.
 
@@ -100,7 +100,7 @@ O trabalho de Alonzo Church é estruturado sobre a ideia de _abstração funcion
 No cálculo lambda, uma função é escrita como $\lambda x.\;E\,$. Aqui, $\lambda$ indica que é uma função, $x$ é a variável ligada, onde a função é aplicada, e $E$ é o corpo da função. Por exemplo, a função que soma $1$ a um número é escrita como $\lambda x.\;x + 1\,$. Isso possibilita a manipulação direta de funções, sem a necessidade de linguagens ou estruturas rígidas. A Figura 1.1.A apresenta o conceito de funções de primeira classe.
 
 ![Diagrama mostrando uma função cujo corpo é composto por outra função lambda e um valor. No diagrama vemos a função principal recebendo a função do corpo, e um valor. Finalmente mostra a função composta e o resultado da sua aplicação](/assets/images/funcPrima.webp)
-_Figura 1.1.A: Diagrama de Abstração e Aplicação usando funções no corpo da função. A função principal é a função de ordem superior, ou de primeira classe_{: legenda}
+_Figura 1.1.A: Diagrama de Abstração e Aplicação usando funções no corpo da função. A função principal é a função de ordem superior, ou de primeira classe_{: class="legend"}
 
 >No cálculo lambda, uma função de ordem superior é uma função que aceita outra função como argumento ou retorna uma função como resultado. Isso significa que uma função de ordem superior trata funções como valores, podendo aplicá-las, retorná-las ou combiná-las com outras funções.
 >
@@ -167,7 +167,7 @@ A notação $\lambda$ indica que estamos criando uma função anônima. Essa abs
 A atenta leitora deve notar que a abstração e a aplicação são operações distintas do cálculo lambda, como pode ser visto na Figura 1.1.B.
 
 ![Diagrama mostrando abstração, a aplicação da função a um valor e, finalmente o resultado da aplicação da função](/assets/images/abstAplica.webp)
-_Figura 1.1.B: Diagrama da relação entre abstração e aplicação no cálculo lambda_{: legenda}
+_Figura 1.1.B: Diagrama da relação entre abstração e aplicação no cálculo lambda_{: class="legend"}
 
 A abstração, representada por $\lambda x.\;E\,$, define uma função onde $x$ é o parâmetro e $E$ é o corpo da função. Por exemplo, $\lambda x.\;x + 5$ define uma função que soma $5$ ao argumento fornecido. Outro exemplo é $\lambda f. \lambda x.\;f\;(f\;x)\,$, que descreve uma função que aplica o argumento $f$ duas vezes ao segundo argumento $x\,$.
 
@@ -1693,7 +1693,7 @@ Para que a equivalência alfa seja válida, precisamos seguir três regras bási
 Do ponto de vista da análise relacional, a relação $\equiv_\alpha$ é uma relação de equivalência, o que significa que ela possui as propriedades de: **Reflexividade**,  significando que para todo termo $M\,$, $M \equiv_\alpha M\,$. Ou seja, **todo termo é alfa equivalente a si mesmo**; **Simetria**, se $M \equiv_\alpha N\,$, então $N \equiv_\alpha M\,$. **Todos os termos equivalentes, são equivalentes entre si**; e **Transitividade**, se $M \equiv_\alpha N$ e $N \equiv_\alpha P\,$, então $M \equiv_\alpha P\,$. **Se dois termos, $M$ e $N$ são equivalentes entre si e um deles e equivalente a um terceiro termo, então o outro será equivalente ao terceiro termo**, como pode ser visto na Figura 3.1.1.A.
 
 ![Diagrama mostrando a propriedade da transitividade:](/assets/images/alfaEquiv.webp)
-_Diagrama apresentando a transitividade da $\equiv_\alpha$._{: legenda}
+_Diagrama apresentando a transitividade da $\equiv_\alpha$._{: class="legend"}
 
 A amável leitora pode estudar os exemplos a seguir para entender os conceitos da $\equiv_\alpha$.
 
@@ -1970,7 +1970,7 @@ A notação $[x/N]M$ representa a substituição de todas as ocorrências livres
 A substituição indicada em uma redução-$beta$ deve ser realizada com cuidado para evitar a captura de variáveis livres em $N$ que possam se tornar ligadas em $E$ após a substituição. Para evitar a captura de varáveis livres, pode ser necessário realizar uma redução-$\alpha$ antes de começar a redução beta, renomeando variáveis ligadas em $E$ que possam entrar em conflito com variáveis livres em $N\,$, Figura 3.2.A.
 
 ![Diagrama mostrando uma função aplicada a um valor, a regra formal da redução beta e a forma normal obtida](/assets/images/beta.webp)
-_3.2.A: Exemplo de Redução Beta_{: legenda}
+_3.2.A: Exemplo de Redução Beta_{: class="legend"}
 
 Considere, por exemplo, o termo $E = (\lambda y.\;x + y)$ e o objetivo de substituir $x$ por $N = y\,$. Se fizermos a substituição diretamente, obteremos:
 
@@ -2551,7 +2551,7 @@ Um dos obstáculos enfrentado por Church durante o desenvolvimento do cálculo l
 
 ![Um diagrama com um termo principal, M e dois caminhos de redução chegando ao mesmo ponto](/assets/images/conflu.webp)
 
-_Figura 3.4.A: Diagrama da Propriedade de Confluência determinada pelo Teorema de Church-Rosser_{: legenda}
+_Figura 3.4.A: Diagrama da Propriedade de Confluência determinada pelo Teorema de Church-Rosser_{: class="legend"}
 
 Formalmente teremos:
 
@@ -3102,7 +3102,7 @@ Finalmente:
 Assim, $(add \;3) \;4$ é avaliado para $7$ após a aplicação sequencial de argumentos à função currificada. A Figura 3.5.A, apresenta a aplicação $(add \; 3) = (\lambda x.\;(\lambda y.\;(x + y))) \; 3$ que explicamos acima.
 
 ![Diagrama da função add currificada como explicado anteriormente](/assets/images/curry.webp)
-_Figura 3.5.A: Diagrama mostrando o processo de _currying_em Cálculo lambda_{: legenda}
+_Figura 3.5.A: Diagrama mostrando o processo de _currying_em Cálculo lambda_{: class="legend"}
 
 No _currying_, uma função que originalmente recebe dois argumentos, como $f: \mathbb{N} \times \mathbb{N} \rightarrow \mathbb{N}\,$, é transformada em uma função que recebe um argumento e retorna outra função. O resultado é uma função da forma $f': \mathbb{N} \rightarrow (\mathbb{N} \rightarrow \mathbb{N})\,$. Assim, $f'$ recebe o primeiro argumento e retorna uma nova função que espera o segundo argumento para realizar o cálculo final.
 
@@ -3289,7 +3289,7 @@ A ordem em que as reduções beta são aplicadas pode afetar tanto a eficiência
 A Figura 3.5.3.A apresenta um diagrama destas duas estratégias de avaliação.
 
 ![](/assets/images/normvsaplic.webp)
- _Figura 3.5.3.A: Diagrama de Aplicação nas Ordens Normal e Aplicativa_.{: legenda}
+ _Figura 3.5.3.A: Diagrama de Aplicação nas Ordens Normal e Aplicativa_.{: class="legend"}
 
 Talvez a atenta leitora entenda melhor vendo as reduções sendo aplicadas:
 
@@ -3319,12 +3319,12 @@ Os combinadores tem origem no trabalho de [Moses Schönfinkel](https://en.wikipe
 | $Z$                 | Zusammensetzungsfunktion     | função de composição      | $\lambda\;y\;xz.\;xz(yz)$                  | $B$             |
 | $S$                 | Verschmelzungsfunktion       | função de fusão           | $\lambda\;y\;xz.\;xz(yz)$                  | $S$             |
 
-_Tabela 3.6.A: Relação dos Combinadores Originais._{: legenda}
+_Tabela 3.6.A: Relação dos Combinadores Originais._{: class="legend"}
 
 A Figura 3.6.A mostra as definições dos combinadores $I\,$, $K\,$, $S\,$, e uma aplicação de exemplo de cada um.
 
 ![A figura mostra os combinadores I, K e S em notação lambda e a aplicação destes combinadores em exemplos simples.](/assets/images/comb.webp)
-_Figura 3.6.A: Definição e Aplicação dos Combinadores $I\,$, $K\,$, $S$_{: legenda}
+_Figura 3.6.A: Definição e Aplicação dos Combinadores $I\,$, $K\,$, $S$_{: class="legend"}
 
 Schönfinkel apresentou combinadores para representar as operações da lógica de primeiro grau, um para o [traço de Sheffer](https://en.wikipedia.org/wiki/Sheffer_stroke), _NAND_, descoberto em 1913, e outro para a quantificação.
 
@@ -3459,7 +3459,7 @@ Finalmente, a lista de combinadores do cálculo lambda é um pouco mais extensa 
 | **Y** | $\lambda f [(\lambda x [f (x\;x)]) (\lambda x [f (x\;x)])]\,$. O combinador paradoxal de Curry. Para todo termo lambda $X\,$, temos: $Y X \triangleright (\lambda x [X (x\;x)]) (\lambda x [X (x\;x)]) \triangleright X ((\lambda x [X (x\;x)]) (\lambda x [X (x\;x)]))\,$. A primeira etapa da redução mostra que $Y\;X$ reduz ao termo de aplicação $(\lambda x [X (x\;x)]) (\lambda x [X (x\;x)])\,$, que reaparece na terceira etapa. Assim, $Y$ tem a propriedade curiosa de que $Y X$ e $X (Y X)$ reduzem a um termo comum. |
 | **Θ** | $(\lambda x [\lambda f [f (x\;x f)]]) (\lambda x [\lambda f [f (x\;x f)]])\,$. O combinador de ponto fixo de Turing. Para todo termo lambda $X\,$, $Θ X$ reduz para $X (Θ\;X)\,$, o que pode ser confirmado manualmente. (O combinador paradoxal de Curry $Y$ não tem essa propriedade.) |
 
-_Tabela 3.6.B: Definições e Observações sobre os Combinadores._{: legenda}
+_Tabela 3.6.B: Definições e Observações sobre os Combinadores._{: class="legend"}
 
 No cálculo lambda as funções são anônimas. Desta forma, sempre é possível construir funções sem a atribuição nomes explícitos. Aqui estamos próximos da álgebra e longe das linguagens de programação imperativas, baseadas na Máquina de Turing. Isso é possível, como a atenta leitora deve lembrar, graças a existência das  _abstrações lambda_:
 
@@ -5879,7 +5879,7 @@ A operação de **negação**, _NOT_ ou $\lnot$ inverte o valor de uma proposiç
 | True   | False          |
 | False  | True           |
 
-_Tabela Verdade 19.1.1.A. Operação de negação._{: legenda}
+_Tabela Verdade 19.1.1.A. Operação de negação._{: class="legend"}
 
 Utilizando o cálculo lambda a operação de negação pode ser definida como a seguinte função de ordem superior nomeada:
 
@@ -5920,7 +5920,7 @@ A operação de **conjunção** é uma operação binária que retorna _True_ un
 | False  | True   | False      |
 | False  | False  | False      |
 
-_Tabela Verdade 19.1.1.B. Operação conjunção._{: legenda}
+_Tabela Verdade 19.1.1.B. Operação conjunção._{: class="legend"}
 
 No cálculo lambda, a operação de conjunção pode ser expresso por:
 
@@ -6013,7 +6013,7 @@ A operação de **disjunção** retorna _True_ se pelo menos um dos operandos fo
 | False  | True   | True      |
 | False  | False  | False     |
 
-_Tabela Verdade 19.1.1.C. Operação disjunção._{: legenda}
+_Tabela Verdade 19.1.1.C. Operação disjunção._{: class="legend"}
 
 Em cálculo lambda puro a operação de disjunção pode ser definida por:
 
@@ -6068,7 +6068,7 @@ A operação _Xor_ (ou **disjunção exclusiva**) retorna _True_ se um, e soment
 | False  | True   | True        |
 | False  | False  | False       |
 
-_Tabela Verdade 19.1.1.D. Operação disjunção exclusiva_{: legenda}
+_Tabela Verdade 19.1.1.D. Operação disjunção exclusiva_{: class="legend"}
 
 Sua definição no cálculo lambda é dada por:
 
@@ -6127,7 +6127,7 @@ A operação **implicação** ou *condicional*, retorna _True_ ou _False_, confo
 | False  | True   | True     |
 | False  | False  | True     |
 
-_Tabela Verdade 19.1.1.E. Operação de implicação._{: legenda}
+_Tabela Verdade 19.1.1.E. Operação de implicação._{: class="legend"}
 
 A operação de implicação pode ser definida no cálculo lambda como:
 
@@ -6651,7 +6651,7 @@ Com $\text{nil}$ e $\text{cons}\,$, podemos criar e manipular listas. Por exempl
 Esta lista está diagramada na Figura 20.1.B:
 
 ![](/assets/images/list.webp)
-_Figura 6.1.B: Diagrama de uma lista em cálculo lambda_{: legenda}
+_Figura 6.1.B: Diagrama de uma lista em cálculo lambda_{: class="legend"}
 
 Quando a leitora olha para o diagrama e para a função que representa a lista $[1,2,3]$ em cálculo lambda imagina que existe um abismo entre a sua ideia de lista e a função que encontramos. Não perca as esperanças, não é tão complicado quanto parece. Só trabalhoso. Chegamos a esta função começando com a lista vazia:
 
@@ -8446,7 +8446,7 @@ O cálculo lambda tipado, com suas regras de tipagem e propriedades de normaliza
 Esta relação é formalizada na Correspondência de Curry-Howard, que estabelece uma conexão entre programas e provas matemáticas. A correspondência liga duas áreas da matemática e da Ciência da Computação. Como pode ser visto na Figura 8.6.1.A.
 
 ![Um diagrama de blocos mostrando a relação entre a aplicação de função e a lógica proposicional](/assets/images/churchRosser.webp)
-_Figura 7.6.1.A: Diagrama da Relação entre cálculo lambda e lógica proposicional mostrando a importância do Teorema de Church-Rosser._{: legenda}
+_Figura 7.6.1.A: Diagrama da Relação entre cálculo lambda e lógica proposicional mostrando a importância do Teorema de Church-Rosser._{: class="legend"}
 
 Na Correspondência de Curry-Howard, os tipos em linguagens de programação podem ser vistos como proposições lógicas, e os programas bem tipados como provas dessas proposições. Esta perspectiva fornece uma forma de analisar sistemas de tipos e oferece abordagens para o desenvolvimento de software e a verificação formal de programas.
 
