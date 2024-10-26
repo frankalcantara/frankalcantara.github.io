@@ -97,7 +97,7 @@ This visualization helps us understand why choosing the right algorithm matters.
 
 We'll break down loops, recursive algorithms, and how different complexity classes shape performance. We'll also look at space complexity and memory use, which matter when handling large datasets.
 
-**One major cause of slow algorithms is having multiple nested loops that run over the input data.** The more nested loops there are, the slower the algorithm gets. With $k$ nested loops, the time complexity rises to $O(n^k)$. Alright, I lied. There is a little bit of math.
+_One major cause of slow algorithms is having multiple nested loops that run over the input data_. The more nested loops there are, the slower the algorithm gets. With $k$ nested loops, the time complexity rises to $O(n^k)$. Alright, I lied. There is a little bit of math.
 
 For instance, the time complexity of the following  code fragment is $O(n)$:
 
@@ -126,7 +126,7 @@ for (int i = 1; i <= n; i++) {
 }
 ```
 
-Don’t worry if you don’t know all the C++ syntax. I mean, I wish you did, but hey, we'll get there. **In competitive programming, excessive memory use can cause your program to exceed memory limits, though this isn’t very common in competitions.** Always keep an eye on space complexity, especially when using arrays, matrices, or other data structures that grow with input size. Manage memory wisely to avoid crashes and penalties. And, there are penalties.
+Don’t worry if you don’t know all the C++ syntax. I mean, I wish you did, but hey, we'll get there. _In competitive programming, excessive memory use can cause your program to exceed memory limits, though this isn’t very common in competitions_. Always keep an eye on space complexity, especially when using arrays, matrices, or other data structures that grow with input size. Manage memory wisely to avoid crashes and penalties. And, there are penalties.
 
 ### 1.1.2. Order of Growth
 
@@ -160,7 +160,7 @@ Here’s why each example still counts as $O(n)$:
 
 3. **$\lfloor n/2 \rfloor$ executions**: Cutting $n$ in half or any fraction doesn’t change the overall growth rate. It’s still linear, so it’s $O(n)$.
 
-Big-O isn’t disconnected from real execution speed. **Constants like the $3$ in $3n$ do affect how fast the code runs, but they aren’t the focus of Big-O**. In real terms, an algorithm with $3n$ operations will run slower than one with $n$, but both grow at the same rate—linearly. That’s why they both fall under $O(n)$ notation.
+Big-O isn’t disconnected from real execution speed. _Constants like the $3$ in $3n$ do affect how fast the code runs, but they aren’t the focus of Big-O_. In real terms, an algorithm with $3n$ operations will run slower than one with $n$, but both grow at the same rate—linearly. That’s why they both fall under $O(n)$ notation.
 
 Big-O doesn’t ignore these factors because they don’t matter; it simplifies them. It’s all about the growth rate, not the exact count, because that’s what matters most when inputs get large.
 
@@ -375,19 +375,19 @@ _Table 1.1.F - Theoretical relationship between time complexity and input size._
 
 So, if your input size is $n = 10^5$, you’ll probably need an algorithm with $O(n)$ or $O(n \log n)$ time complexity. This helps you steer clear of approaches that are too slow.
 
-**Remember, time complexity is an estimate; it hides constant factors. An $O(n)$ algorithm could do $n/2$ or $5n$ operations, and these constants can change the actual performance.**
+_Remember, time complexity is an estimate; it hides constant factors. An $O(n)$ algorithm could do $n/2$ or $5n$ operations, and these constants can change the actual performance._
 
 ## 1.2. Typing Better, Faster, Less
 
 This section gives you practical steps to improve your speed and performance in competitive programming with C++20. C++ is fast and powerful, but using it well takes skill and focus. We will cover how to type faster, write cleaner code, and manage complexity. The goal is to help you code quicker, make fewer mistakes, and keep your solutions running fast.
 
-**Typing matters. The faster you type, the more time you save**. Accuracy also counts, mistakes slow you down. Next, we cut down on code size without losing what’s important. Using tools like the Standard Template Library (STL), you can write less code and keep it clean. This is about direct, simple code that does the job right.
+_Typing matters. The faster you type, the more time you save_. Accuracy also counts, mistakes slow you down. Next, we cut down on code size without losing what’s important. Using tools like the Standard Template Library (STL), you can write less code and keep it clean. This is about direct, simple code that does the job right.
 
 In this section, we won’t confine ourselves to general tricks. We will explore certain nuances and techniques specific to C++20, particularly those related to typing efficiency. Undoubtedly, in other chapters and sections, we will return to these same topics, but from different angles.From this point forward, the idea of clean and well-structured code will be left behind.
 
 ### 1.2.1. Typing Tips
 
-**If you don’t type quickly, you should invest at least two hours per week** on the website: [https://www.speedcoder.net](https://www.speedcoder.net). Once you have completed the basic course, select the C++ lessons and practice regularly. Time is crucial in competitive programming, and slow typing can be disastrous.
+_If you don’t type quickly, you should invest at least two hours per week_ on the website: [https://www.speedcoder.net](https://www.speedcoder.net). Once you have completed the basic course, select the C++ lessons and practice regularly. Time is crucial in competitive programming, and slow typing can be disastrous.
 
 To expand on this, efficient typing isn’t just about speed; it’s about reducing errors and maintaining a steady flow of code. When you're in a competitive programming, every second matters. Correcting frequent typos or having to look at your keyboard will significantly slow down your progress. Touch typing—knowing the layout of the keyboard and typing without looking—becomes a vital skill.
 
@@ -399,7 +399,7 @@ $$ = \text{Lower overall performance in competitive programming}$$
 
 To keep improving your typing in competitive programming, start by using IDE shortcuts. Learn the keyboard shortcuts for your preferred Integrated Development Environment (IDE). Those shortcuts help you navigate and edit code faster, cutting down the time spent moving between the keyboard and mouse. In [ICPC](https://icpc.global/) contests, the available IDE's are, usually, [Eclipse](https://www.eclipse.org/downloads/packages/release/helios/sr2/eclipse-ide-cc-developers) or [VsCode](https://code.visualstudio.com/), so knowing its shortcuts can boost your efficiency. Always check which IDE will be used in each competition since this may vary. And use it daily while training.
 
-While typing, focus on frequent patterns in your code. Practice typing common elements like loops, if-else conditions, and function declarations. Embedding these patterns into your muscle memory saves time during contests. **The faster you can type these basic structures, the quicker you can move on to solving the actual problem**.
+While typing, focus on frequent patterns in your code. Practice typing common elements like loops, if-else conditions, and function declarations. Embedding these patterns into your muscle memory saves time during contests. _The faster you can type these basic structures, the quicker you can move on to solving the actual problem_.
 
 To succeed in a C++ programming competition, your first challenge is to type the following code fragment in under two minutes. If you can't, don't give up. Just keep practicing. To be the best in the world at anything, no matter what it is, the only secret is to train and train some more.
 
@@ -511,7 +511,7 @@ VS words;    // std::vector<std::string> words;
 
 _In this book, I’ll use a lot of comments to explain concepts, code, or algorithms. You, on the other hand, won’t use any comments. Not during training, and definitely not during competitions_. If you even think about using one, seek professional advice. There are plenty of psychiatrists available online.
 
->In C++, you can use `#define` to create macros and short aliases. Macros can define constants or functions at the preprocessor level. **Macros can cause problems**. They ignore scopes and can lead to unexpected behavior. So, _For functions, macros can be unsafe_. They don't respect types or scopes.
+>In C++, you can use `#define` to create macros and short aliases. Macros can define constants or functions at the preprocessor level. _Macros can cause problems_. They ignore scopes and can lead to unexpected behavior. So, _For functions, macros can be unsafe_. They don't respect types or scopes.
 >
 > ```cpp
 > // Macro function
@@ -607,7 +607,7 @@ Overall, constexpr is valuable when dealing with static data or fixed input size
 
 _A smart way to reduce typing time is by using `using` to create abbreviations for frequently used vector types._
 
-In many cases, the use of `#define` can be replaced with more modern and safe C++ constructs like `using`, `typedef`, or `constexpr`. **The old `#define` does not respect scoping rules and does not offer type checking, which can lead to unintended behavior**. Using `typedef` or `using` provides better type safety and integrates smoothly with the C++ type system, making the code more predictable and easier to debug.
+In many cases, the use of `#define` can be replaced with more modern and safe C++ constructs like `using`, `typedef`, or `constexpr`. _The old `#define` does not respect scoping rules and does not offer type checking, which can lead to unintended behavior_. Using `typedef` or `using` provides better type safety and integrates smoothly with the C++ type system, making the code more predictable and easier to debug.
 
 For example:
 
@@ -630,7 +630,7 @@ typedef std::vector<std::vector<int>> VVI;
 typedef std::vector<std::string> VS;
 ```
 
-**`using` and `typedef` are preferred because they respect C++ scoping rules and offer better support for debugging, making the code more secure and readable**. nevertheless, there are moments when we need a constant function.
+_`using` and `typedef` are preferred because they respect C++ scoping rules and offer better support for debugging, making the code more secure and readable_. nevertheless, there are moments when we need a constant function.
 
 >In C++20, the use of `using` offers significant advantages over the traditional `typedef`. The syntax of `using` is clearer, especially when defining complex types like pointers, templates, and function types. For instance, `using FuncPtr = void(*)(int);` is more readable than `typedef void(*FuncPtr)(int);`, as the type definition aligns more closely with the general C++ syntax. Additionally, `using` allows for creating aliases for templates, which is not possible with `typedef`. This makes defining template-dependent types more flexible and straightforward, simplifying alias creation like `template<typename T> using Vec = std::vector<T>;`, enhancing code reusability.
 >
@@ -650,9 +650,9 @@ Can be replaced with:
 }
 ```
 
-**`constexpr` functions provide type safety, avoid unexpected side effects, and allow the compiler to evaluate the expression at compile-time, resulting in more efficient and safer code**.
+_`constexpr` functions provide type safety, avoid unexpected side effects, and allow the compiler to evaluate the expression at compile-time, resulting in more efficient and safer code_.
 
-In competitive programming, you might think using `#define` is the fastest way to type less and code faster. But `typedef` or `using` are usually more efficient. They avoid issues with macros and integrate better with the compiler. **While reducing variable names or abbreviating functions might save time in a contest, remember that in professional code, clarity and maintainability are more important than typing speed**. So avoid using shortened names and unsafe constructs like `#define` in production code, libraries, or larger projects.
+In competitive programming, you might think using `#define` is the fastest way to type less and code faster. But `typedef` or `using` are usually more efficient. They avoid issues with macros and integrate better with the compiler. _While reducing variable names or abbreviating functions might save time in a contest, remember that in professional code, clarity and maintainability are more important than typing speed_. So avoid using shortened names and unsafe constructs like `#define` in production code, libraries, or larger projects.
 
 > In C++, you can create aliases for types. This makes your code cleaner. You use `typedef` or `using` to do this.
 >
@@ -666,15 +666,15 @@ In competitive programming, you might think using `#define` is the fastest way t
 > ull bigNum = 123456789012345ULL;
 > ```
 >
-> Numbers need type-specific suffixes like `ULL`. When you write `ull bigNumber = 123456789012345ULL;`, the `ULL` tells the compiler the number is an `unsigned long long`. Without it, the compiler might assume a smaller type like `int` or `long`, which can't handle large values. This leads to errors and bugs. **The suffix forces the right type, avoiding overflow and keeping your numbers safe**. It’s a simple step but crucial. The right suffix means the right size, no surprises.
+> Numbers need type-specific suffixes like `ULL`. When you write `ull bigNumber = 123456789012345ULL;`, the `ULL` tells the compiler the number is an `unsigned long long`. Without it, the compiler might assume a smaller type like `int` or `long`, which can't handle large values. This leads to errors and bugs. _The suffix forces the right type, avoiding overflow and keeping your numbers safe_. It’s a simple step but crucial. The right suffix means the right size, no surprises.
 >
-> **In C++, suffixes are also used with floating-point numbers to specify their exact type**. The suffix `f` designates a `float`, while no suffix indicates a `double`, and `l` or `L` indicates a `long double`. By default, the compiler assumes `double` if no suffix is provided. Using these suffixes is important when you need specific control over the type, such as saving memory with `float` or gaining extra precision with `long double`. The suffix ensures that the number is treated correctly according to your needs.Exact type, exact behavior.
+> _In C++, suffixes are also used with floating-point numbers to specify their exact type_. The suffix `f` designates a `float`, while no suffix indicates a `double`, and `l` or `L` indicates a `long double`. By default, the compiler assumes `double` if no suffix is provided. Using these suffixes is important when you need specific control over the type, such as saving memory with `float` or gaining extra precision with `long double`. The suffix ensures that the number is treated correctly according to your needs.Exact type, exact behavior.
 
-**The rule is: know your numbers, suffix your numbers, and be happy.**
+_The rule is: know your numbers, suffix your numbers, and be happy_.
 
 #### 1.2.2.2. Predefining Common Operations
 
-If you know that certain operations, such as sorting or summing elements, are frequent in a competitive programming or in the algorithm you are going to code, consider defining these operations at the beginning of the code. **The only real reason to use a macro in competitive programming is to predefine functions**. For example:
+If you know that certain operations, such as sorting or summing elements, are frequent in a competitive programming or in the algorithm you are going to code, consider defining these operations at the beginning of the code. _The only real reason to use a macro in competitive programming is to predefine functions_. For example:
 
 ```cpp
 #include <vector>
@@ -943,7 +943,7 @@ The lambda is defined and used inline, removing the need to declare a separate f
 >
 > ```
 >
-> In this fragment, there’s no extra memory or time cost. The lambda captures `y` by reference, meaning it uses the original variable directly. No copy is made, so there’s no overhead. When `increment()` is called, it changes `y` right where it lives. The lambda works with the real `y`, not a snapshot, so any change happens instantly and without extra resources. This approach keeps the code fast and efficient, avoiding the pitfalls of capturing by value. The result is immediate and uses only what’s needed. **In competitive or high-performance programming, we capture by reference. It's faster and uses less memory**.
+> In this fragment, there’s no extra memory or time cost. The lambda captures `y` by reference, meaning it uses the original variable directly. No copy is made, so there’s no overhead. When `increment()` is called, it changes `y` right where it lives. The lambda works with the real `y`, not a snapshot, so any change happens instantly and without extra resources. This approach keeps the code fast and efficient, avoiding the pitfalls of capturing by value. The result is immediate and uses only what’s needed. _In competitive or high-performance programming, we capture by reference. It's faster and uses less memory_.
 >
 > Example 4: Generic Lambda Function with C++20: With C++20, lambdas can now use template parameters, making them more generic:
 >
@@ -992,9 +992,9 @@ The lambda is defined and used inline, removing the need to declare a separate f
 >
 >_Code 1.2.D: Using lambdas default-constructed._{: class="legend"}
 >
-> **This feature lets you set up lambdas for later use (deferred execution)**. In the Code 1.2.2.3.C, the lambda `print_message` is default-constructed. It captures nothing and waits until it’s needed. The main function shows this in action. If the vector has numbers, it doubles them. If not, it calls the default lambda and prints a message. C++20 makes lambdas simple and ready for action, whenever you need them.
+> _This feature lets you set up lambdas for later use (deferred execution)_. In the Code 1.2.D, the lambda `print_message` is default-constructed. It captures nothing and waits until it’s needed. The main function shows this in action. If the vector has numbers, it doubles them. If not, it calls the default lambda and prints a message. C++20 makes lambdas simple and ready for action, whenever you need them.
 >
-> We also have the immediate lambdas: C++20 brings in `consteval`, a keyword that forces functions to run at compile-time. With lambdas, this means the code is executed during compilation, and the result is set before the program starts. When a lambda is used in a `consteval` function, it must run at compile-time, making your code faster and results predictable. **In programming competitions, `consteval` lambdas are rarely useful**. Contests focus on runtime performance, not compile-time tricks. Compile-time evaluation doesn’t give you an edge when speed at runtime is what counts. Most problems don’t benefit from execution before the program runs; the goal is to be fast during execution.
+> We also have the immediate lambdas: C++20 brings in `consteval`, a keyword that forces functions to run at compile-time. With lambdas, this means the code is executed during compilation, and the result is set before the program starts. When a lambda is used in a `consteval` function, it must run at compile-time, making your code faster and results predictable. _In programming competitions, `consteval` lambdas are rarely useful_. Contests focus on runtime performance, not compile-time tricks. Compile-time evaluation doesn’t give you an edge when speed at runtime is what counts. Most problems don’t benefit from execution before the program runs; the goal is to be fast during execution.
 >
 > Nevertheless, `Consteval` ensures the function runs only at compile-time. If you try to use a `consteval` function where it can’t run at compile-time, you’ll get a compile-time error. It’s strict: no runtime allowed.
 >
@@ -1005,7 +1005,7 @@ The lambda is defined and used inline, removing the need to declare a separate f
 > int value = square(5);  // Computed at compile-time
 > ```
 >
-> In this example, the lambda inside the `square` function is evaluated at compile-time, producing the result before the program starts execution. **Programming contests focus on runtime behavior and dynamic inputs, making `consteval` mostly useless**. In contests, you deal with inputs after the program starts running, so compile-time operations don’t help. The challenge is to be fast when the program is live, not before it runs.
+> In this example, the lambda inside the `square` function is evaluated at compile-time, producing the result before the program starts execution. _Programming contests focus on runtime behavior and dynamic inputs, making `consteval` mostly useless_. In contests, you deal with inputs after the program starts running, so compile-time operations don’t help. The challenge is to be fast when the program is live, not before it runs.
 >
 > Finally, we have template lambdas: C++20 lets lambdas take template parameters, making them generic. They can handle different data types without needing overloads or separate template functions. The template parameter is declared right in the lambda’s definition, allowing one lambda to adapt to any type.
 >
@@ -1019,7 +1019,7 @@ The lambda is defined and used inline, removing the need to declare a separate f
 > std::cout << generic_lambda(2.5, 1.5);  // Outputs: 4.0
 > ```
 >
-> **Template lambdas are a powerful tool in some competitive programming**. They let you write one lambda that works with different data types, saving you time and code. Instead of writing multiple functions for integers, doubles, or custom types, you use a single template lambda. It adapts on the fly, making your code clean and versatile. In contests, where every second counts, this can speed up coding and reduce bugs. You get generic, reusable code without the hassle of writing overloads or separate templates.
+> _Template lambdas are a powerful tool in some competitive programming_. They let you write one lambda that works with different data types, saving you time and code. Instead of writing multiple functions for integers, doubles, or custom types, you use a single template lambda. It adapts on the fly, making your code clean and versatile. In contests, where every second counts, this can speed up coding and reduce bugs. You get generic, reusable code without the hassle of writing overloads or separate templates.
 >
 > _Lambdas are great for quick, one-time tasks. But too many, especially complex ones, can make code harder to read and maintain. In competitive programming, speed often trumps clarity, so this might not seem like a big deal. Still, keeping code readable helps, especially when debugging tough algorithms. Use lambdas wisely._
 

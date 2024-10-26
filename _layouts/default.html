@@ -171,69 +171,80 @@
 		<script src="{{ site.baseurl }}/assets/js/ie10-viewport-bug-workaround.js"></script>
 		
 		<script>
-	document.addEventListener("DOMContentLoaded", function () {
-		// Adiciona a classe 'legend' a todas as tags <em> que não são precedidas por uma tag <img>
-		const emTags = document.querySelectorAll("em");
-		emTags.forEach(function (em) {
-			if (em.previousElementSibling && em.previousElementSibling.tagName.toLowerCase() === "img") {
-				em.classList.add("legend");
-			} else {
-				em.classList.add("mark");
-			}
-		});
+			document.addEventListener("DOMContentLoaded", function () {
+    // Debug: Verifica se o evento DOMContentLoaded está sendo disparado
+    console.log("DOM carregado");
 
-		// Inicializa o highlight.js e o plugin de numeração de linhas
-		document.querySelectorAll("pre code").forEach((block) => {
-			hljs.highlightElement(block);
-			if (typeof hljs.initLineNumbersOnLoad === "function") {
-				hljs.initLineNumbersOnLoad();
-			}
-		});
+    // Função para o mark
+    function initializeMarks() {
+        const marks = document.querySelectorAll("em");
+        console.log("Elementos em encontrados:", marks.length); // Debug
 
-		// Adiciona classe 'odd' às linhas ímpares de uma tabela usando JavaScript puro
-		document.querySelectorAll("tr:nth-child(odd)").forEach((row) => {
-			row.classList.add("odd");
-		});
+        marks.forEach(function (em) {
+            // Verifica se NÃO tem uma imagem antes
+            if (!em.previousElementSibling || em.previousElementSibling.tagName.toLowerCase() !== "img") {
+                em.classList.add("mark");
+                console.log("Mark adicionado a:", em.textContent); // Debug
+            }
+        });
+    }
 
-		// Seleciona a div TOC e ajusta o overflow após o carregamento
-		const toc = document.getElementById("toc");
-		if (toc && toc.scrollHeight > toc.clientHeight) {
-			toc.style.overflowY = "auto";
-		}
+    function initializeTOC() {
+        const toc = document.getElementById("toc");
+        
+        if (toc) {
+            function adjustTOCHeight() {
+                // Define uma altura máxima fixa de 80% da viewport
+                const maxHeight = window.innerHeight * 0.75;
+                toc.style.maxHeight = `${maxHeight}px`;
+                toc.style.height = 'auto';
+                toc.style.overflowY = 'auto';
+            }
 
-		// Verifica se a barra de carregamento está no DOM
-		const loadingBar = document.querySelector(".loadingbar");
-		if (loadingBar) {
-			// Adiciona um ouvinte para o evento de scroll
-			document.addEventListener("scroll", function () {
-				const scrollTop = window.scrollY;
-				const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-				const scrollPercent = (scrollTop / docHeight) * 100;
+            // Ajusta inicialmente
+            adjustTOCHeight();
 
-				// Atualiza a largura da barra de carregamento
-				loadingBar.style.width = scrollPercent + "%";
-			});
-		}
+            // Ajusta quando a janela é redimensionada
+            window.addEventListener('resize', adjustTOCHeight);
+        }
+    }
 
-		// Função para lidar com o evento de scroll e opacidade das marcas
-		document.addEventListener("scroll", function () {
-			const marks = document.querySelectorAll(".mark");
-			const viewportHeight = window.innerHeight;
+    initializeTOC();
 
-			// Atualiza a opacidade das marcas
-			marks.forEach((mark) => {
-				const markRect = mark.getBoundingClientRect();
-				const markCenter = markRect.top + markRect.height / 2;
-				const distanceToCenter = Math.abs(viewportHeight / 2 - markCenter);
+    // Função para atualizar o background dos marks durante o scroll
+    function initializeMarkHighlight() {
+        function updateMarksOpacity() {
+            const marks = document.querySelectorAll(".mark");
+            const viewportHeight = window.innerHeight;
 
-				// Calcula a opacidade proporcional à distância do centro da janela
-				let opacity = 1 - distanceToCenter / (viewportHeight / 2);
-				opacity = Math.max(0, opacity); // Garante que a opacidade não seja negativa
+            marks.forEach((mark) => {
+                const rect = mark.getBoundingClientRect();
+                const elementCenter = rect.top + (rect.height / 2);
+                const viewportCenter = viewportHeight / 2;
+                const distance = Math.abs(viewportCenter - elementCenter);
+                const maxDistance = viewportHeight / 2;
+                
+                // Calcula opacidade baseada na distância do centro
+                let opacity = 1 - (distance / maxDistance);
+                opacity = Math.max(0.2, Math.min(1, opacity)); // Mantém entre 0.2 e 1
+                
+                mark.style.backgroundColor = `rgba(244, 196, 255, ${opacity})`;
+                mark.style.transition = 'background-color 0.3s ease';
+            });
+        }
 
-				mark.style.backgroundColor = `rgba(244, 196, 255, ${opacity})`;
-			});
-		});
-	});
+        // Adiciona o evento de scroll
+        window.addEventListener('scroll', updateMarksOpacity);
+        // Executa uma vez no início
+        updateMarksOpacity();
+    }
+
+    // Inicializa todas as funcionalidades
+    initializeMarks();
+    initializeTOC();
+    initializeMarkHighlight();
+});
+
 		</script>
 
 

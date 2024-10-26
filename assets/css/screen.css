@@ -667,6 +667,8 @@ ul.tags li a:hover {
   font-size: 12px;
 }
 
+
+
 #comments {
   margin-top: 3rem;
   margin-bottom: 1.5rem;
@@ -939,13 +941,13 @@ p {
   padding: 5%;
   margin-bottom: 2%;
 }
-/*
+*
 .toc__list:before {
   content: "Table Of Contents";
   font-weight: bold;
   font-size: 1.5rem;
 }
-*/
+
 .toc__list {
   border: 2px solid #eee;
   border-radius: 4px;
@@ -989,9 +991,32 @@ p {
 #toc ul{ padding:0px !important;}
 
 #toc {
-  color: gray;
-  max-height: 70vh; /* 90% da altura da janela */
-  overflow-y: auto; /* Habilita o scroll quando necessário */
+    position: sticky;
+    top: 100px; /* Mesma margem definida no JavaScript */
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+/* CSS */
+.social-icons {
+  display: flex;
+  justify-content: space-evenly; /* Espaçamento igual entre os itens */
+  align-items: center;
+  list-style: none; /* Remove marcadores */
+  margin: 0;
+  padding: 0;
+}
+
+.social-icons li {
+  /* Remova margens adicionais se necessário */
+  margin: 0;
+}
+
+.social-icons a {
+  color: inherit; /* Mantém a cor atual ou ajuste conforme necessário */
+  text-decoration: none;
+  font-size: 24px; /* Ajuste o tamanho dos ícones conforme necessário */
 }
 
 
@@ -1105,13 +1130,13 @@ p {
    font-size: 100% !important;
  }
 
- .mark {
-   padding: 4px;
-   margin: 5px 0;
-   font-style: italic;
-   background-color: white;
-   transition: background-color 0.5s ease;
- }
+.mark {
+    background-color: rgba(244, 196, 255, 0.2);
+    padding: 2px 5px;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
 
  a code {
    color: inherit;
@@ -1135,3 +1160,4 @@ p {
 code{
   padding: 0.5em, importa !important;
 }
+
