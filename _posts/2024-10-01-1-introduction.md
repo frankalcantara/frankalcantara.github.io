@@ -42,8 +42,6 @@ toc: true
 date: 2024-10-14T01:41:22.930Z
 ---
 
-# 1. Introduction
-
 C++ remains one of the most popular languages in competitive programming due to its performance, flexibility, and rich standard library. However, knowledge of efficient algorithms is as important,if not more so, than the programming language itself. Mastering efficient algorithms and optimized techniques is crucial for success in programming contests, where solving complex problems under strict time and memory constraints is the norm. in that same vein, understanding the nuances of algorithmic complexity can dramatically affect both performance and outcomes.
 
 This work    explores advanced algorithmic strategies, optimization techniques, and data structures that help tackle a wide range of computational challenges effectively. By optimizing input/output operations, leveraging modern C++ features, and utilizing efficient algorithms, we'll see how to improve problem-solving skills in competitive programming. We'll be pushing the boundaries of what can be achieved with minimal resources and tight constraints.
@@ -373,7 +371,7 @@ You can also judge what time complexity you need based on the input size. Here�
 | $n \leq 10^6$ | $O(n \log n)$ or $O(n)$  |
 | $n$ is large  | $O(1)$ or $O(\log n)$    |
 
-_Table 1.1.4.A - Theoretical relationship between time complexity and input size._{: class="legend"}
+_Table 1.1.F - Theoretical relationship between time complexity and input size._{: class="legend"}
 
 So, if your input size is $n = 10^5$, you’ll probably need an algorithm with $O(n)$ or $O(n \log n)$ time complexity. This helps you steer clear of approaches that are too slow.
 
@@ -700,7 +698,7 @@ sVec(vec); // Sorts the vector using the lambda function
 std::sort(ALL(vec)); // Another way to sort the vector
 ```
 
-_Code Fragment 1.2.2.2.A:Example of using and constexpr to reduce typing time._{: class="legend"}
+_Code Fragment 1.2.B: Example of using and constexpr to reduce typing time._{: class="legend"}
 
 Keeping the macro `#define ALL(vec) vec.begin(), vec.end()` wasn’t madness, it was the competitive programming bug. The C++20 code needed to replace this macro with modern structures requires a lot of typing.
 
@@ -825,7 +823,7 @@ The code `std::accumulate(ALL(vec), 0);` will be replaced in compilation time fo
 
 Let's can back to Lambdas.
 
-Starting with C++11, C++ introduced lambda functions. Lambdas are anonymous functions that can be defined exactly where they are needed. If your code needs a simple function used only once, you should consider using lambdas. Let’s start with a simple example, Code 1.2.2.3.A, written without competitive programming tricks.
+Starting with C++11, C++ introduced lambda functions. Lambdas are anonymous functions that can be defined exactly where they are needed. If your code needs a simple function used only once, you should consider using lambdas. Let’s start with a simple example, Code 1.2.B, written without competitive programming tricks.
 
 ```cpp
 #include <iostream>  // Includes the input/output stream library for console operations
@@ -853,11 +851,11 @@ int main() {
 }
 ```
 
-_Code 1.2.2.3.A: Code example to sort a number vector and print it._ {: class="legend"}
+_Code 1.2.B: Code example to sort a number vector and print it._ {: class="legend"}
 
-The Code 1.2.2.3.A sorts a vector of integers in descending order using a traditional comparison function. It begins by including the necessary libraries: `<iostream>` for input and output, `<vector>` for dynamic arrays, and `<algorithm>` for sorting operations. The `compare` function is defined to take two integers, returning `true` if the first integer is greater than the second, setting the sorting order to descending.
+The Code 1.2.B sorts a vector of integers in descending order using a traditional comparison function. It begins by including the necessary libraries: `<iostream>` for input and output, `<vector>` for dynamic arrays, and `<algorithm>` for sorting operations. The `compare` function is defined to take two integers, returning `true` if the first integer is greater than the second, setting the sorting order to descending.
 
-In the `main` function, a vector named `numbers` is initialized with the integers `{1, 3, 2, 5, 4}`. The `std::sort` function is called on this vector, using the `compare` function to sort the elements from highest to lowest. After sorting, a `for` loop iterates through the vector, printing each number followed by a space. The program ends with a newline to cleanly finish the output. This code is a simple and direct example of using a custom function to sort data in C++. Now, let's see the same code using lambda functions and other competitive programming tricks, Code 1.2.2.3.B:
+In the `main` function, a vector named `numbers` is initialized with the integers `{1, 3, 2, 5, 4}`. The `std::sort` function is called on this vector, using the `compare` function to sort the elements from highest to lowest. After sorting, a `for` loop iterates through the vector, printing each number followed by a space. The program ends with a newline to cleanly finish the output. This code is a simple and direct example of using a custom function to sort data in C++. Now, let's see the same code using lambda functions and other competitive programming tricks, Code 1.2.C:
 
 ```cpp
 #include <iostream>  // Includes the input/output stream library for console operations
@@ -883,11 +881,11 @@ int main() {
 }
 ```
 
-_Code 1.2.2.3.B: Sort and print vector using lambda functions._{: class="legend"}
+_Code 1.2.C: Sort and print vector using lambda functions._{: class="legend"}
 
 To see the typing time gain, just compare the normal definition of the `compare` function followed by its usage with the use of the lambda function.
 
-The Code 1.2.2.3.B sorts a vector of integers in descending order using a lambda function, a modern and concise way to define operations directly in the place where they are needed. It starts by including the standard libraries for input/output, dynamic arrays, and algorithms. The macro `ALL(vec)` is defined to simplify the use of `vec.begin(), vec.end()`, making the code cleaner and shorter.
+The Code 1.2.C sorts a vector of integers in descending order using a lambda function, a modern and concise way to define operations directly in the place where they are needed. It starts by including the standard libraries for input/output, dynamic arrays, and algorithms. The macro `ALL(vec)` is defined to simplify the use of `vec.begin(), vec.end()`, making the code cleaner and shorter.
 
 An alias `VI` is used for `std::vector<int>`, reducing the verbosity when declaring vectors. Inside the `main` function, a vector named `num` is initialized with the integers `{1, 3, 2, 5, 4}`. The `std::sort` function is called to sort the vector, using a lambda function `[](int a, int b) { return a > b; }` that sorts the elements in descending order.
 
@@ -960,7 +958,7 @@ The lambda is defined and used inline, removing the need to declare a separate f
 >
 > This code defines a generic lambda using a template parameter, a feature from C++20. The lambda accepts two inputs of the same type `T` and returns their sum. It’s flexible—first, it adds integers, then it adds doubles. The power of this lambda is in its simplicity and versatility. It’s short, clear, and works with any type as long as the operation makes sense. C++20 lets you keep your code clean and adaptable, making lambdas more powerful than ever. And it doesn’t stop there.
 >
-> In C++20, lambdas that don’t capture variables can be default-constructed. This means you can create, assign, and save them for later use without calling them immediately. This feature is useful for storing lambdas as placeholders for default behavior, making them handy for deferred execution. As you can see in Code 1.2.2.3.C
+> In C++20, lambdas that don’t capture variables can be default-constructed. This means you can create, assign, and save them for later use without calling them immediately. This feature is useful for storing lambdas as placeholders for default behavior, making them handy for deferred execution. As you can see in Code 1.2.D
 
 >
 > ```cpp
@@ -992,7 +990,7 @@ The lambda is defined and used inline, removing the need to declare a separate f
 > }
 > ```
 >
->_Code 1.2.2.3.C: Using lambdas default-constructed._{: class="legend"}
+>_Code 1.2.D: Using lambdas default-constructed._{: class="legend"}
 >
 > **This feature lets you set up lambdas for later use (deferred execution)**. In the Code 1.2.2.3.C, the lambda `print_message` is default-constructed. It captures nothing and waits until it’s needed. The main function shows this in action. If the vector has numbers, it doubles them. If not, it calls the default lambda and prints a message. C++20 makes lambdas simple and ready for action, whenever you need them.
 >

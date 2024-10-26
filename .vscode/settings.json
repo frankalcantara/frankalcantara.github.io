@@ -87,6 +87,7 @@
 		"nlink",
 		"normvsaplic",
 		"rdev",
+		"reqprio",
 		"saudacao",
 		"setrecursionlimit"
 	],

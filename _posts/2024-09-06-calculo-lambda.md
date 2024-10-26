@@ -2803,7 +2803,7 @@ $$M = (\lambda x.\;(\lambda y.\;x + y))\;7\;8$$
    Caminho 1: aplique a primeira função:
 
    $$M = (\lambda x.\;(\lambda y.\;x + y))\;7\;8$$
-   
+  
    $$\to_\beta (\lambda y.\;7 + y)\;8$$
 
    Aplique a segunda função:
@@ -6770,9 +6770,9 @@ Essa função percorre a lista somando os elementos, aplicando recursão via o c
    Realizamos as adições de dentro para fora:
 
    $$\text{add}\;1\;(\text{add}\;2\;3)$$
-   
+
    $$\text{add}\;1\;5$$
-   
+
    $$6$$
 
    Portanto, $\text{sum}\;[1, 2, 3] = 6$ em cálculo lambda puro.
