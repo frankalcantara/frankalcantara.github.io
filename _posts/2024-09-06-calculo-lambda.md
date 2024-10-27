@@ -7595,7 +7595,7 @@ $$(\lambda x : \text{Nat}. \lambda Y : \text{Bool}.\;x)\;3\;\text{True}$$
 
    4. Expandimos o corpo da primeira abstração:
 
-      $$\text{termo} \rightarrow (\lambda x : \text{Nat}. \lambda \text{variável} : \text{tipo}.\;\text{termo})\;\text
+      $$\text{termo} \rightarrow (\lambda x : \text{Nat}. \lambda \text{variável} : \text{tipo}.\;\text{termo})\;\text{termo}\;\text{termo}$$
 
 ### 7.3.2. Semântica Estática (Sistema de Tipos)
 
@@ -7710,33 +7710,33 @@ $$\frac{\Gamma \vdash \text{not} : \text{Bool} \rightarrow \text{Bool} \quad \Ga
 
 2. **Normalização Forte**: Todo termo bem tipado em certos sistemas de tipos, como o cálculo lambda simplesmente tipado, tem uma sequência finita de reduções que leva a uma forma normal (um termo que não pode ser mais reduzido). Considere o seguinte termo:
 
-$$
-   (\lambda f: \text{Nat} \rightarrow \text{Nat}. \lambda x: \text{Nat}. f (f\;x))\;(\lambda y: \text{Nat}. Y + 1)\;0
-$$
+   $$(\lambda f: \text{Nat} \rightarrow \text{Nat}. \lambda x: \text{Nat}. f (f\;x))\;(\lambda y: \text{Nat}. Y + 1)\;0$$
 
    Este termo descreve uma função que aplica outra função $f$ duas vezes a um argumento $x\,$. Aplicamos essa função à função que incrementa $y$ e ao valor $0\,$. Vamos ver como o termo se reduz,
 
    Primeiro, aplicamos:
 
-  $$\lambda f: \text{Nat} \rightarrow \text{Nat}. \lambda x: \text{Nat}. f (f\;x)$ à função $\lambda y: \text{Nat}. Y + 1$$
+   $$\lambda f: \text{Nat} \rightarrow \text{Nat}. \lambda x: \text{Nat}. f (f\;x)$$
 
-  $$(\lambda f: \text{Nat} \rightarrow \text{Nat}. \lambda x: \text{Nat}. f (f\;x))\;(\lambda y: \text{Nat}. Y + 1)
+   à função $\lambda y: \text{Nat}. Y + 1$
+
+   $$(\lambda f: \text{Nat} \rightarrow \text{Nat}. \lambda x: \text{Nat}. f (f\;x))\;(\lambda y: \text{Nat}. Y + 1)
       \rightarrow \lambda x: \text{Nat}. (\lambda y: \text{Nat}. Y + 1) ((\lambda y: \text{Nat}. Y + 1)\;x)$$
 
-      Agora, aplicamos essa função ao valor $0$:
+   Agora, aplicamos essa função ao valor $0$:
 
-  $$(\lambda x: \text{Nat}. (\lambda y: \text{Nat}. Y + 1) ((\lambda y: \text{Nat}. Y + 1)\;x))\;0
+   $$(\lambda x: \text{Nat}. (\lambda y: \text{Nat}. Y + 1) ((\lambda y: \text{Nat}. Y + 1)\;x))\;0
       \rightarrow (\lambda y: \text{Nat}. Y + 1) ((\lambda y: \text{Nat}. Y + 1)\;0)$$
 
-      Avaliando a primeira aplicação:
+   Avaliando a primeira aplicação:
 
-  $$(\lambda y: \text{Nat}. Y + 1)\;0 \rightarrow 0 + 1 \rightarrow 1$$
+   $$(\lambda y: \text{Nat}. Y + 1)\;0 \rightarrow 0 + 1 \rightarrow 1$$
 
-      Avaliando a segunda aplicação:
+   Avaliando a segunda aplicação:
 
-  $$(\lambda y: \text{Nat}. Y + 1)\;1 \rightarrow 1 + 1 \rightarrow 2$$
+   $$(\lambda y: \text{Nat}. Y + 1)\;1 \rightarrow 1 + 1 \rightarrow 2$$
 
-      O termo foi completamente reduzido para $2\,$, e não há mais reduções possíveis. Esse é o estado irreduzível ou a _forma normal_ do termo. A _normalização forte_ garante que, neste sistema de tipos, qualquer termo bem tipado eventualmente chegará a uma forma normal, sem laços infinitos.
+   O termo foi completamente reduzido para $2\,$, e não há mais reduções possíveis. Esse é o estado irreduzível ou a _forma normal_ do termo. A _normalização forte_ garante que, neste sistema de tipos, qualquer termo bem tipado eventualmente chegará a uma forma normal, sem laços infinitos.
 
 3. **Church-Rosser** (Confluência): Se um termo pode ser reduzido de duas formas diferentes, então existe uma forma comum que ambas as reduções eventualmente alcançarão. Isso garante que a ordem de avaliação não afeta o resultado . Para entender, considere o seguinte termo lambda tipado:
 
@@ -7870,7 +7870,7 @@ $$
 
    A **Regra de Abstração** no cálculo lambda tipado permite derivar o tipo de uma função lambda baseada no tipo de seu corpo e no tipo de seu parâmetro. Formalmente, a regra é expressa como:
 
-$$\frac{\Gamma,\;x:\tau\;\vdash\;E:B}{\;\Gamma\;\vdash\;(\lambda x:\tau.\;E) : A \rightarrow B}$$
+   $$\frac{\Gamma,\;x:\tau\;\vdash\;E:B}{\;\Gamma\;\vdash\;(\lambda x:\tau.\;E) : A \rightarrow B}$$
 
    Isso significa que, se no contexto $\Gamma\,$, ao adicionar a associação $x:\tau\,$, podemos derivar que $E$ tem tipo $B\,$, então podemos concluir que a abstração lambda $(\lambda x:\tau.\;E)$ tem tipo $A \rightarrow B$ no contexto original $\Gamma\,$.
 
