@@ -49,6 +49,7 @@
 		"scanf",
 		"SELINGER",
 		"Sheffer",
+		"subranges",
 		"Thierry",
 		"Über",
 		"unmapping",
@@ -75,6 +76,7 @@
 		"blkcnt",
 		"blksize",
 		"calculolambda",
+		"cauchy",
 		"computacao",
 		"conflu",
 		"currificada",
@@ -84,13 +86,16 @@
 		"lastmod",
 		"lazyimages",
 		"liburing",
+		"lognormal",
 		"mult",
 		"nlink",
 		"normvsaplic",
+		"poisson",
 		"rdev",
 		"reqprio",
 		"saudacao",
-		"setrecursionlimit"
+		"setrecursionlimit",
+		"weibull"
 	],
 	"[markdown]": {
 	},
