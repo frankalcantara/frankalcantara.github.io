@@ -67,8 +67,10 @@
 		"Gagne",
 		"Galvin",
 		"Mediumish",
+		"Pract",
 		"RDWR",
 		"Silberschatz",
+		"Softw",
 		"Soluçao",
 		"WRONLY",
 		"alonzo",
@@ -95,6 +97,7 @@
 		"reqprio",
 		"saudacao",
 		"setrecursionlimit",
+		"sortvector",
 		"weibull"
 	],
 	"[markdown]": {
