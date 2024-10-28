@@ -646,13 +646,13 @@ Abaixo, são apresentadas as principais reduções operacionais utilizadas no c�
 
       $$(\lambda x.\;(\lambda y.\;y + x)\;2)\;7$$
 
-      Substituímos $x$ por $7$ em $(\lambda y.\;y + x)\;2$:
+      Substituímos $x$ por $(3 + 4)$ em $(\lambda y.\;y + x)\;2$:
 
-      $$(\lambda y.\;y + 7)\;2$$
+      $$(\lambda y.\;y + (3 + 4))\;2$$
 
       Aplicamos a função interna:
 
-      $$2 + 7 \rightarrow 9$$
+      $$2 + (3 + 4) \rightarrow 9$$
 
    2. **Ordem aplicativa**: avaliamos primeiro os subtermos (argumentos) antes de aplicar a função.
 
