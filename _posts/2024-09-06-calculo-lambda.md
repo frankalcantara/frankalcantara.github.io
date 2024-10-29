@@ -3752,7 +3752,7 @@ No contexto do cálculo lambda e linguagens de programação, existem duas princ
 
 ### 3.7.2. Exercícios sobre Estratégias de Avaliação
 
-**1**: Considere a expressão $(\lambda x.\;x + 1) (2 + 3)\,$. Avalie-a usando a estratégia de**avaliação por valor**.
+**1**: Considere a expressão $(\lambda x.\;x + 1) (2 + 3)\,$. Avalie-a usando a estratégia de **avaliação por valor**.
 
    **Solução:** Na avaliação por valor, o argumento é avaliado antes de ser aplicado à função:
 
@@ -3762,7 +3762,7 @@ No contexto do cálculo lambda e linguagens de programação, existem duas princ
 
    $$(\lambda x.\;x + 1)\;5 \rightarrow 5 + 1 \rightarrow 6$$
 
-**2**: Use a **avaliação por nome**na expressão $(\lambda x.\;x + 1) (2 + 3)$ e explique o processo.
+**2**: Use a **avaliação por nome** na expressão $(\lambda x.\;x + 1) (2 + 3)$ e explique o processo.
 
    **Solução:** Na avaliação por nome, o argumento é passado diretamente para a função:
 
@@ -7124,7 +7124,7 @@ Aplique a função `sumPairs` à lista $[(1, 2), (3, 4), (5, 6)]\,$.
    2. Aplicamos `sumPairs` à lista:
 
    $$
-   \text{sum\_pairs} = Y\;(\lambda f. \lambda l. l\;(\lambda h. \lambda t. \text{cons}\;(h\;(\lambda x. \lambda y. x + y))\;(f\;t))\;\text{nil})
+   \text{sumPairs} = Y\;(\lambda f. \lambda l. l\;(\lambda h. \lambda t. \text{cons}\;(h\;(\lambda x. \lambda y. x + y))\;(f\;t))\;\text{nil})
    $$
 
    3. Redução (simplificada):
@@ -7150,6 +7150,7 @@ Onde $Y$ é o combinador de ponto fixo. Use `foldRight` para implementar a funç
    1. Para implementar `length` usando `foldRight`, precisamos de uma função $g$ que incremente um contador para cada elemento da lista, e um valor inicial $a$ de $0$. Definimos:
 
    $$g = \lambda x. \lambda acc. \text{succ}\;acc $$
+  
    $$a = 0 $$
 
    2. Agora, podemos definir `length` como:
@@ -7738,7 +7739,7 @@ $$\frac{\Gamma \vdash \text{not} : \text{Bool} \rightarrow \text{Bool} \quad \Ga
 
    O termo foi completamente reduzido para $2\,$, e não há mais reduções possíveis. Esse é o estado irreduzível ou a _forma normal_ do termo. A _normalização forte_ garante que, neste sistema de tipos, qualquer termo bem tipado eventualmente chegará a uma forma normal, sem laços infinitos.
 
-3. **Church-Rosser** (Confluência): Se um termo pode ser reduzido de duas formas diferentes, então existe uma forma comum que ambas as reduções eventualmente alcançarão. Isso garante que a ordem de avaliação não afeta o resultado . Para entender, considere o seguinte termo lambda tipado:
+3. **Church-Rosser** (Confluência): Se um termo pode ser reduzido de duas formas diferentes, então existe uma forma comum que ambas as reduções eventualmente alcançarão. Isso garante que a ordem de avaliação não afeta o resultado. Para entender, considere o seguinte termo lambda tipado:
 
 $$(\lambda x:\text{Nat}. \lambda y:\text{Nat}.\;x + y)\;3\;((\lambda z:\text{Nat}.\;z * 2)\;2)$$
 
