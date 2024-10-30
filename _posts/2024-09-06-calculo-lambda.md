@@ -6818,9 +6818,11 @@ Em seguida, temos a função $\text{tail}$:
    $$(\lambda h. \lambda t. t)\;3\;(\lambda x.\;x)$$
 
    Aplicando $h = 3$:
+
    $$(\lambda t. t)\;(\lambda x.\;x)$$
 
    Aplicando $t = (\lambda x.\;x)$:
+
    $$\lambda x.\;x$$
 
    Agora a expressão intermediária:
@@ -6828,9 +6830,11 @@ Em seguida, temos a função $\text{tail}$:
    $$(\lambda h. \lambda t. t)\;2\;(\lambda x.\;x)$$
 
    Aplicando $h = 2$:
+
    $$(\lambda t. t)\;(\lambda x.\;x)$$
 
    Aplicando $t = (\lambda x.\;x)$:
+
    $$\lambda x.\;x$$
 
    Por fim, a expressão mais externa:
@@ -6838,9 +6842,11 @@ Em seguida, temos a função $\text{tail}$:
    $$(\lambda h. \lambda t. t)\;1\;(\lambda x.\;x)$$
 
    Aplicando $h = 1$:
+
    $$(\lambda t. t)\;(\lambda x.\;x)$$
 
    Aplicando $t = (\lambda x.\;x)$:
+
    $$\lambda x.\;x$$
 
    Após todas estas reduções, a lista resultante é construída usando o construtor de lista padrão:
