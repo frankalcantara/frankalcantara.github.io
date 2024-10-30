@@ -6809,23 +6809,45 @@ Em seguida, temos a função $\text{tail}$:
 
    Aplicação de Tail:
 
-   Aplicamos Tail à lista:
-
-   $$\text{tail}\;[1, 2, 3] = (\lambda l. l\;(\lambda h. \lambda t. t)\;(\lambda x.\;x))\;(\lambda c. \, \lambda n.\;c\;1\;(c\;2\;(c\;3\;n)))$$
-
-   Reduzimos:
-
-   $$(\lambda c. \, \lambda n.\;c\;1\;(c\;2\;(c\;3\;n)))\;(\lambda h. \lambda t. t)\;(\lambda x.\;x)$$
-
-   Aplicamos $c$ e $n$:
+   Seja o estado após a aplicação de $c$ e $n$:
 
    $$(\lambda h. \lambda t. t)\;1\;((\lambda h. \lambda t. t)\;2\;((\lambda h. \lambda t. t)\;3\;(\lambda x.\;x)))$$
 
-   Reduzimos:
+   Avaliamos de dentro para fora. Começando com a expressão mais interna:
+
+   $$(\lambda h. \lambda t. t)\;3\;(\lambda x.\;x)$$
+
+   Aplicando $h = 3$:
+   $$(\lambda t. t)\;(\lambda x.\;x)$$
+
+   Aplicando $t = (\lambda x.\;x)$:
+   $$\lambda x.\;x$$
+
+   Agora a expressão intermediária:
+
+   $$(\lambda h. \lambda t. t)\;2\;(\lambda x.\;x)$$
+
+   Aplicando $h = 2$:
+   $$(\lambda t. t)\;(\lambda x.\;x)$$
+
+   Aplicando $t = (\lambda x.\;x)$:
+   $$\lambda x.\;x$$
+
+   Por fim, a expressão mais externa:
+
+   $$(\lambda h. \lambda t. t)\;1\;(\lambda x.\;x)$$
+
+   Aplicando $h = 1$:
+   $$(\lambda t. t)\;(\lambda x.\;x)$$
+
+   Aplicando $t = (\lambda x.\;x)$:
+   $$\lambda x.\;x$$
+
+   Após todas estas reduções, a lista resultante é construída usando o construtor de lista padrão:
 
    $$\lambda c. \, \lambda n.\;c\;2\;(c\;3\;n)$$
 
-   Portanto, $\text{tail}\;[1, 2, 3] = [2, 3]\,$.
+   Que representa a lista $[2, 3]$.
 
 Listas são um tipo de dado composto útil para a maior parte das linguagens de programação. Não poderíamos deixar de definir listas em cálculo lambda puro para exemplificar a possibilidade da criação de algoritmos em cálculo lambda. Outra estrutura indispensável são as tuplas.
 
