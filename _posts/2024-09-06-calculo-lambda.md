@@ -684,7 +684,7 @@ Abaixo, são apresentadas as principais reduções operacionais utilizadas no c�
 
    $$\lambda x.\;f(x) \rightarrow f$$
 
-Essas regras garantem que a avaliação seja consistente. Por fim, mas não menos importante, o **Teorema de Church-Rosser** parece implicar que, **se uma expressão pode ser reduzida de várias formas então todas chegarão à mesma forma normal, se existir**[^cita5].
+Essas regras garantem que a avaliação seja consistente. Por fim, mas não menos importante, o **Teorema de Church-Rosser** parece implicar que, _se uma expressão pode ser reduzida de várias formas então todas chegarão à mesma forma normal, se esta forma existir_[^cita5].
 
 >No cálculo lambda, podemos dizer que um termo está em _forma normal_ quando não é possível realizar mais nenhuma redução beta sobre ele. Ou seja, é um termo que não contém nenhum _redex_, expressão redutível e, portanto, não pode ser simplificado ou reescrito de nenhuma outra forma. Formalmente: um termo $M$ está em forma normal se:
 >
@@ -2720,6 +2720,41 @@ Novamente, o processo é infinito e não temos uma forma normal.
 Neste caso, ambos os caminhos levam a um processo de redução infinito, mas o Teorema de Church-Rosser assegura que, se houvesse uma forma normal, ela seria única, independentemente do caminho escolhido.
 
 A confluência garantida pelo Teorema de Church-Rosser é análoga a um rio com vários afluentes que eventualmente convergem para o mesmo oceano. Ou se preferir a antiga expressão latina _Omnes viae Romam ducunt_ Não importa qual caminho a água siga, ou que estrada a nômade leitora pegue, ela acabará chegando ao mesmo destino. No contexto do cálculo lambda, isso significa que diferentes sequências de reduções beta não causam ambiguidades no resultado  da computação.
+
+>**Questão de prova**: o teorema de Church-Rosser indica que se um termo pode ser reduzido de duas formas diferentes, então existe uma forma comum que ambas as reduções eventualmente alcançarão. Prove que o termo, M, a seguir satisfaz o teorema de Church-Rosser $M = (\lambda f. \; f\; (f\; 3)) (\lambda x. \; x + 1)$.
+>
+>Podemos considerar duas ordens principais de redução:
+>
+>1. **Redução Externa Primeiro**: nesta abordagem, primeiro aplicamos a função externa ao argumento. Depois, resolvemos qualquer aplicação interna que surgir.
+>
+>- Primeiro, aplicamos $(\lambda f. \;f\;(f\;3))$ ao argumento $(\lambda x.\;x + 1)$. Isso significa substituir $f$ por $(\lambda x.\;x + 1)$:
+>
+>  $$M = (\lambda x.\;x + 1)\;((\lambda x.\;x + 1)\;3)$$
+>
+>- Agora, resolvemos a aplicação interna $(\lambda x.\;x + 1)\;3$:
+>
+>  $$(\lambda x.\;x + 1)\;3 = 4$$
+>
+>- Finalmente, aplicamos $(\lambda x.\;x + 1)$ ao valor $4$:
+>
+>  $$M = (\lambda x.\;x + 1)\;4 = 5$$
+>
+>2. **Redução de Cabeça (Redução Interna Primeiro)**: nesta abordagem, reduzimos primeiro os termos internos antes de aplicar a função externa ao argumento.
+>
+>- Neste caso, resolvemos a expressão interna antes de aplicar a função externa. Portanto, começamos pela parte mais interna, que é $(f\;3)$ em $(\lambda f.\;f\;(f\;3))$.
+>
+>- Primeiro, aplicamos $(\lambda f.\;f\;(f\;3))$ ao argumento $(\lambda x.\;x + 1)$:
+>  
+>  $$M = (\lambda x.\;x + 1)\;((\lambda x.\;x + 1)\;3)$$
+>
+>- Resolva a aplicação interna $(\lambda x.\;x + 1)\;3$:
+>  
+>  $$(\lambda x.\;x + 1)\;3 = 4$$
+>
+>- Finalmente, aplique $(\lambda x.\;x + 1)$ ao valor $4$:
+>  
+>  $$M = (\lambda x.\;x + 1)\;4 = 5$$
+>
 
 O Teorema de Church-Rosser fornece uma base teórica para otimizações de compiladores e interpretadores, garantindo que mudanças na ordem de avaliação não alterem o resultado . Tem impacto na teoria da computação já que a confluência é uma propriedade desejável em sistemas de reescrita de termos, assegurando a consistência lógica e a previsibilidade dos sistemas formais. Em sistemas de provas formais e lógica matemática o Teorema de Church-Rosser ajuda a garantir que as demonstrações não levem a contradições.
 
@@ -6116,6 +6151,64 @@ Para manter a tradição, vamos ver esta aplicação em cálculo lambda puro:
    \end{align*}
    $$
 
+>**Questão de Prova 1**: A operação $XNOR$ ($Not XOR$) retorna verdadeiro se as duas entradas forem iguais (ambas verdadeiras ou ambas falsas), e falso caso contrário. Crie uma função lambda que represente a operação $XNOR$ em cálculo lambda puro e aplique a $True$ e $False$.
+>
+>Definições:
+>
+>**True**: Representa a escolha do primeiro argumento.
+>
+>$$ \text{True} = \lambda x.\; \lambda y.\; x$$
+>
+>**False**: Representa a escolha do segundo argumento.
+>
+>$$\text{False} = \lambda x.\; \lambda y.\; y$$
+>
+>**Not**: Inverte a entrada (de True para False e vice-versa).
+>
+>$$\text{Not} = \lambda b.\; b\; \text{False}\; \text{True}$$
+>
+>**Xor**: Retorna $True$ se uma e somente uma das entradas for $True$.
+>
+>$$\text{Xor} = \lambda b.\; \lambda c.\; b\; (\text{Not}\; c)\; c$$
+>
+>Agora que temos $True$, $False$, $Not$, e $XOR$, podemos definir $Not XOR$ ($XNOR$). Como $XNOR$ é o inverso de $XOR$, podemos usar a operação $Not$ aplicada ao resultado de $XOR$.
+>
+>$$\text{XNOR} = \lambda b.\; \lambda c.\; (\text{Not}\; (\text{Xor}\; b\; c))$$
+>
+>Em lambda puro precisaremos substitui r $XOR$ e $Not$ por suas definições lambda, para transformar tudo em uma expressão pura.
+>  
+>$$\text{XNOR} = \lambda b.\; \lambda c.\; (\lambda b.\; b\; \text{False}\; \text{True}) ((\lambda b.\; \lambda c.\; b\; (\lambda b.\; b\; \text{False}\; \text{True})\; c)\; b\; c)$$
+>
+>**Aplicação de $XNOR$ a $True$ e $False$**
+>
+>$$
+(\lambda b.\lambda c.(\lambda b.b(\lambda x.\lambda y.y)(\lambda x.\lambda y.x))
+((\lambda b.\lambda c.b(\lambda b.b(\lambda x.\lambda y.y)(\lambda x.\lambda y.x))c)bc))
+(\lambda x.\lambda y.x)(\lambda x.\lambda y.y)
+$$
+>
+>$$
+(\lambda c.(\lambda b.b(\lambda x.\lambda y.y)(\lambda x.\lambda y.x))
+((\lambda b.\lambda c.b(\lambda b.b(\lambda x.\lambda y.y)(\lambda x.\lambda y.x))c)
+(\lambda x.\lambda y.x)c))(\lambda x.\lambda y.y)
+$$
+>
+>$$
+(\lambda b.b(\lambda x.\lambda y.y)(\lambda x.\lambda y.x))
+((\lambda b.\lambda c.b(\lambda b.b(\lambda x.\lambda y.y)(\lambda x.\lambda y.x))c)
+(\lambda x.\lambda y.x)(\lambda x.\lambda y.y))
+$$
+>
+>$$
+(\lambda b.b(\lambda x.\lambda y.y)(\lambda x.\lambda y.x))(\lambda x.\lambda y.x)
+$$
+>
+>$$
+\lambda x.\lambda y.y
+$$
+>
+>O resultado é False ($\lambda x.\lambda y.y$), que é o valor esperado para XNOR True False.
+
 ### 7.2.5. Implicação, ou condicional
 
 A operação **implicação** ou *condicional*, retorna _True_ ou _False_, conforme a Tabela Verdade 19.1.1.E. A implicação é verdadeira quando a premissa é falsa ou quando tanto a premissa quanto a conclusão são verdadeiras.
@@ -6904,6 +6997,95 @@ A função Last retorna o último elemento da tupla:
    $$(\lambda x. \lambda y.\;y)\;3\;4$$
 
    $$4$$
+
+>**Questão de Prova 1**: usando cálculo lambda puro crie uma tupla para o par $(3,5)$ e aplique a ela as funções $first$ e $last$.
+>
+>O par $(x, y)$ pode ser definido no cálculo lambda utilizando a seguinte expressão de pares de Church:
+>
+>$$(x, y) = \lambda f.\;f\;x\;y$$
+>
+>Queremos criar a tupla $(3, 5)$. Primeiro, precisamos representar os números $3$ e $5$ usando a notação lambda de números naturais (também conhecidos como números de Church).
+>
+>**Representação de $3$**:
+>
+>  $$3 = \lambda s.\;\lambda z.\;s\;(s\;(s\;z))$$
+>
+>**Representação de $5$**:
+>  
+> $$5 = \lambda s.\;\lambda z.\;s\;(s\;(s\;(s\;(s\;z))))$$
+>
+>Agora podemos criar a tupla $(3, 5)$ usando a definição de pares:
+>
+>$$\text{pair} = (\lambda f.\;f\;3\;5)$$
+>
+>**Funções `first` e `last`**: as funções `first` e `last` são responsáveis por extrair o primeiro e o segundo elemento do par, respectivamente. Elas são definidas como:
+>
+>**`first`**:
+>
+> $$\text{first} = \lambda p.\;p\;(\lambda x.\;\lambda y.\;x)$$
+>
+>**`last`**:
+>
+> $$\text{last} = \lambda p.\;p\;(\lambda x.\;\lambda y.\;y)$$
+>
+>**Aplicação das Funções `first` e `last` à Tupla**: vamos aplicar as funções `first` e `last` à tupla $(3, 5)$.
+>
+>Para **`first`**, aplicamos a tupla à função que retorna o primeiro elemento:
+>
+>$$\text{first}\;(\text{pair}) = (\lambda p.\;p\;(\lambda x.\;\lambda y.\;x))\;(\lambda f.\;f\;3\;5)$$
+>
+>Para **`last`**, aplicamos a tupla à função que retorna o segundo elemento:
+>
+>$$\text{last}\;(\text{pair}) = (\lambda p.\;p\;(\lambda x.\;\lambda y.\;y))\;(\lambda f.\;f\;3\;5)$$
+>
+>**Em resumo temos**:
+>
+>$$3 = \lambda s.\; \lambda z.\; s\; (s\; (s\; z))$$
+>
+>$$5 = \lambda s.\; \lambda z.\; s\; (s\; (s\; (s\; (s\; z))))$$
+>
+>Criação da Tupla (3, 5):
+>
+>$$\text{pair} = \lambda f.\; f\; 3\; 5$$
+>
+>**Função `first` e Aplicação à Tupla**:
+>
+>$$\text{first} = \lambda p.\; p\; (\lambda x.\; \lambda y.\; x)$$
+>
+>$$\text{first}\; (\text{pair}) = (\lambda p.\; p\; (\lambda x.\; \lambda y.\; x))\; (\lambda f.\; f\; 3\; 5)$$
+>
+>Substituindo $\text{pair}$:
+>
+>$$= (\lambda f.\; f\; 3\; 5)\; (\lambda x.\; \lambda y.\; x)$$
+>
+>Aplicando a função:
+>
+>$$= (\lambda x.\; \lambda y.\; x)\; 3\; 5$$
+>
+>Avaliando a aplicação:
+>
+>$$= 3$$
+>
+>**Função `last` e Aplicação à Tupla**
+>
+>$$\text{last} = \lambda p.\; p\; (\lambda x.\; \lambda y.\; y)$$
+>
+>Aplicação:
+>
+>$$\text{last}\; (\text{pair}) = (\lambda p.\; p\; (\lambda x.\; \lambda y.\; y))\; (\lambda f.\; f\; 3\; 5)$$
+>
+>Substituindo $\text{pair}$:
+>
+>$$= (\lambda f.\; f\; 3\; 5)\; (\lambda x.\; \lambda y.\; y)$$
+>
+>Aplicando a função:
+>
+>$$= (\lambda x.\; \lambda y.\; y)\; 3\; 5$$
+>
+>Avaliando a aplicação:
+>
+>$$= 5$$
+
 
 ## 8.3. Exercícios de Listas e Tuplas
 
@@ -7725,7 +7907,7 @@ $$(\lambda x: \text{Nat}.\;x + 1)\;3 \rightarrow 3 + 1 \rightarrow 4$$
    alwaysBool = not (not True)
    ```
 
-   Neste exemplo, a função `not` tem o tipo `Bool -> Bool`, o que corresponde a $\text{Bool} \rightarrow \text{Bool}$ no cálculo lambda tipado. O compilador Haskell garante que: `not True` tem tipo `Bool` e  `not (not True)` tem tipo `Bool`
+   Neste exemplo, a função $not$ tem o tipo `Bool -> Bool`, o que corresponde a $\text{Bool} \rightarrow \text{Bool}$ no cálculo lambda tipado. O compilador Haskell garante que: `not True` tem tipo `Bool` e  `not (not True)` tem tipo `Bool`
 
    Assim, a expressão `alwaysBool` é garantida pelo sistema de tipos a sempre retornar um valor do tipo `Bool`, independentemente das reduções intermediárias. Isso ilustra a preservação de tipos em ação:
 
