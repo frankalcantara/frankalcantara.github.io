@@ -187,7 +187,7 @@ Em resumo, **a abstração define uma função ao associar um parâmetro a um co
 
 O elo entre abstração e aplicação é uma forma de avaliação chamada redução-$beta\,$. Dada uma abstração $λ\,$, $λx:M$ e algum outro termo $N\,$, pensado como um argumento, temos a regra de avaliação, chamada redução-$beta$ dada por:
 
-$$(λx:M)\ N \longrightarrow_{\beta} M[x := N];$$
+$$(λx:M)\;N \longrightarrow_{\beta} M[x := N];$$
 
 onde $M[N/x]$ indica o resultado de substituir $N$ em todas as ocorrências de $x$ em $M\,$. Por exemplo, se $M = λx: (x^2 + x + 1)$ e $N = 2y + 1\,$, teremos:
 
@@ -1012,7 +1012,7 @@ Neste ponto, se a amável leitora se perdeu no Haskell, deve voltar as definiç�
 
    5. Reconstruímos a expressão: $(3) + (y)\,$.
 
-   O resultado de $[3/x] \ ,(x + y)$ é $3 + y\,$. Ou seja, a variável $x$ foi substituída por $3\,$, enquanto $y$ permaneceu inalterada por ser uma variável diferente de $x\,$.
+   O resultado de $[3/x] \;,(x + y)$ é $3 + y\,$. Ou seja, a variável $x$ foi substituída por $3\,$, enquanto $y$ permaneceu inalterada por ser uma variável diferente de $x\,$.
 
 **2**: Realize a substituição $[(\lambda z.\;z)/x]\;(\lambda y.\;x\;y)\,$.
 
@@ -1058,13 +1058,13 @@ Neste ponto, se a amável leitora se perdeu no Haskell, deve voltar as definiç�
 
    O resultado de $[y/x]\;(\lambda y.\;x)$ é $\lambda z.\;y\,$. Para evitar a captura da variável livre $y$ que estamos introduzindo, primeiro renomeamos a variável ligada $y$ para $z\,$, redução-$\alpha\,$. Depois, realizamos a substituição normalmente, resultando em uma abstração que retorna a variável livre $y\,$.
 
-**4**: Realize a substituição $[(\lambda x.\;x\;x)/y] \ ,(y\;z)\,$.
+**4**: Realize a substituição $[(\lambda x.\;x\;x)/y] \;,(y\;z)\,$.
 
 **Solução**:
 
    1. Estamos substituindo $y$ por $(\lambda x.\, x\;x)$ na expressão $y\;z\,$. Este é um caso de substituição em uma aplicação.
 
-   2. Aplicamos a regra 3: $[(\lambda x.\, x\;x)/y] \ ,(y\;z) \, = ([(\lambda x.\, x\;x)/y]\,y)([(\lambda x.\, x\;x)/y]z)$
+   2. Aplicamos a regra 3: $[(\lambda x.\, x\;x)/y] \;,(y\;z) \, = ([(\lambda x.\, x\;x)/y]\,y)([(\lambda x.\, x\;x)/y]z)$
 
    3. Resolvemos a primeira parte: $[(\lambda x.\, x\;x)/y]\,y = (\lambda x.\, x\;x)$ (pela regra 1)
 
@@ -1072,7 +1072,7 @@ Neste ponto, se a amável leitora se perdeu no Haskell, deve voltar as definiç�
 
    5. Reconstruímos a expressão: $((\lambda x.\;x\;x) z)$
 
-   O resultado de $[(\lambda x.\, x\;x)/y] \ ,(y\;z)$ é $((\lambda x.\, x\;x) z)\,$. A variável $y$ foi substituída pela abstração $(\lambda x.\, x\;x)\,$, enquanto $z$ permaneceu inalterado.
+   O resultado de $[(\lambda x.\, x\;x)/y] \;,(y\;z)$ é $((\lambda x.\, x\;x) z)\,$. A variável $y$ foi substituída pela abstração $(\lambda x.\, x\;x)\,$, enquanto $z$ permaneceu inalterado.
 
 **5**: Realize a substituição $[a/x]\;(\lambda y.\lambda x.\;y\;x)\,$.
 
@@ -1116,7 +1116,7 @@ Neste ponto, se a amável leitora se perdeu no Haskell, deve voltar as definiç�
 
    7. Reconstruímos a expressão completa: $((\lambda z.\;z) (\lambda y.\;((\lambda z.\;z)\;y)))$
 
-   O resultado de $[(\lambda z.\;z) / x] \ ,(x (\lambda y.x\;y))$ é $((\lambda z.\;z) (\lambda y.\;((\lambda z.\;z)y)))\,$. Todas as ocorrências livres de $x$ foram substituídas por $(\lambda z.\;z)\,$.
+   O resultado de $[(\lambda z.\;z) / x] \;,(x (\lambda y.x\;y))$ é $((\lambda z.\;z) (\lambda y.\;((\lambda z.\;z)y)))\,$. Todas as ocorrências livres de $x$ foram substituídas por $(\lambda z.\;z)\,$.
 
 **7**: Realize a substituição $[y/x]\;(\lambda y.\;(\lambda x.\;y))\,$.
 
@@ -1138,7 +1138,7 @@ Neste ponto, se a amável leitora se perdeu no Haskell, deve voltar as definiç�
 
    O resultado de $[y/x]\;(\lambda y.\;(\lambda x.\;y))$ é $\lambda z.\;(\lambda x.\;z)\,$. A redução-$\alpha$ foi necessária para evitar a captura da variável $y\,$, e a substituição não afetou o corpo interno devido à ligação de $x\,$.
 
-**8**: Realize a substituição $[(\lambda x.\;y\;x)/z] \ ,(\lambda y.\;z\;y)\,$.
+**8**: Realize a substituição $[(\lambda x.\;y\;x)/z] \;,(\lambda y.\;z\;y)\,$.
 
    **Solução**:
 
@@ -1146,7 +1146,7 @@ Neste ponto, se a amável leitora se perdeu no Haskell, deve voltar as definiç�
 
    2. Aplicamos a regra 4:
 
-      $$[(\lambda x.\;y\;x)/z] \ ,(\lambda y.\;z\;y) \, = \lambda y'.([(\lambda x.\;x\;y)/z] \ ,(zy'))$$
+      $$[(\lambda x.\;y\;x)/z] \;,(\lambda y.\;z\;y) \, = \lambda y'.([(\lambda x.\;x\;y)/z] \;,(zy'))$$
 
       Note que fizemos uma redução-$\alpha$ preventiva, renomeando $y$ para $y'$ para evitar possível captura.
 
@@ -1160,9 +1160,9 @@ Neste ponto, se a amável leitora se perdeu no Haskell, deve voltar as definiç�
 
    6. Reconstruímos a expressão: $\lambda y'.((\lambda x.\;x\;y)y')$
 
-   O resultado de $[(\lambda x.\;x\;y)/z] \ ,(\lambda y.\;z\;y)$ é $\lambda y'.\;((\lambda x.\;x\;y)y')\,$. A redução-$\alpha$ preventiva evitou a captura de variáveis, e a substituição foi realizada corretamente no corpo da abstração.
+   O resultado de $[(\lambda x.\;x\;y)/z] \;,(\lambda y.\;z\;y)$ é $\lambda y'.\;((\lambda x.\;x\;y)y')\,$. A redução-$\alpha$ preventiva evitou a captura de variáveis, e a substituição foi realizada corretamente no corpo da abstração.
 
-**9**: Realize a substituição $[(\lambda x.\;x)/y] \ ,(\lambda x.\;y\;x)\,$.
+**9**: Realize a substituição $[(\lambda x.\;x)/y] \;,(\lambda x.\;y\;x)\,$.
 
    **Solução**:
 
@@ -1170,7 +1170,7 @@ Neste ponto, se a amável leitora se perdeu no Haskell, deve voltar as definiç�
 
    2. Aplicamos a regra 4:
 
-      $$[(\lambda x.x)/y] \ ,(\lambda x.\;y\;x) \, = \lambda x'.\;([(\lambda x.\;x)/y] \ ,(yx'))$$
+      $$[(\lambda x.x)/y] \;,(\lambda x.\;y\;x) \, = \lambda x'.\;([(\lambda x.\;x)/y] \;,(yx'))$$
 
       Realizamos uma redução-$\alpha$ preventiva, renomeando $x$ para $x'\,$$
 
@@ -1182,7 +1182,7 @@ Neste ponto, se a amável leitora se perdeu no Haskell, deve voltar as definiç�
 
    6. Reconstruímos a expressão: $\lambda x'.\;((\lambda x.\;x)\;x')$
 
-   O resultado de $[(\lambda x.\;x)/y] \ ,(\lambda x.\;y\;x)$ é $\lambda x'.\;((\lambda x.\;x)x')\,$. A redução-$\alpha$ preventiva evitou conflitos com a variável ligada $x\,$, e a substituição foi realizada corretamente.
+   O resultado de $[(\lambda x.\;x)/y] \;,(\lambda x.\;y\;x)$ é $\lambda x'.\;((\lambda x.\;x)x')\,$. A redução-$\alpha$ preventiva evitou conflitos com a variável ligada $x\,$, e a substituição foi realizada corretamente.
 
 **10**: Realize a substituição $[(\lambda z.\;z\;w)/x]\;(\lambda y.\;\lambda w.\;x\;y\;w)\,$.
 
@@ -1891,7 +1891,7 @@ $$[y/x]\,x = y$$
 
    Agora, aplicamos a substituição:
 
-   $$[3/a] \ ,(\lambda a. \lambda b. a + b) \, = \lambda b. 3 + b$$
+   $$[3/a] \;,(\lambda a. \lambda b. a + b) \, = \lambda b. 3 + b$$
 
 **8**: Aplique a convenção de Barendregt na expressão $\lambda x.\;(\lambda x.\;x + 1) x$ antes de realizar a substituição $[y/x]\,$.
 
@@ -3106,7 +3106,7 @@ Por exemplo, uma função de dois argumentos $f(x, y)$ pode ser convertida em um
 
 Considere uma função $f$ que aceita dois argumentos: $f(x, y)$ a  versão _currificada_ desta função será:
 
-   $$F = \lambda x.(\lambda y.\ ; f(x, y))$$
+   $$F = \lambda x.(\lambda y.\;; f(x, y))$$
 
 Agora, $F$ é uma função que aceita um argumento $x$ e retorna outra função que aceita $y\,$. Podemos ver isso com um exemplo: suponha que temos uma função que soma dois números: $soma(x, y) = x + y\,$. A versão _currificada_ seria:
 
@@ -5816,26 +5816,26 @@ using Church = std::function<std::function<int(int)>(std::function<int(int)>)>;
 // Define the Church numeral for 0.
 // `zero` is a lambda function that takes a function `f` and returns a lambda that takes an integer `x` and returns `x` unchanged.
 // This is the definition of 0 in Church numerals, which means applying `f` zero times to `x`.
-Church zero = [] \ ,(auto f) {
- return [f] \ ,(int x) { return x; }; // Return the identity function, applying `f` zero times.
+Church zero = [] \;,(auto f) {
+ return [f] \;,(int x) { return x; }; // Return the identity function, applying `f` zero times.
 };
 
 // Define the successor function `succ` that increments a Church numeral by 1.
 // `succ` is a lambda function that takes a Church numeral `n` (a number in Church encoding) and returns a new function.
 // The new function applies `f` to the result of applying `n(f)` to `x`, effectively adding one more application of `f`.
-Church succ = [] \ ,(Church n) {
- return [n] \ ,(auto f) {
- return [n, f] \ ,(int x) {
+Church succ = [] \;,(Church n) {
+ return [n] \;,(auto f) {
+ return [n, f] \;,(int x) {
  return f(n(f)(x)); // Apply `f` one more time than `n` does.
  };
  };
 };
 
 // Convert a Church numeral to a standard integer.
-// `to_int` takes a Church numeral `n`, applies the function `[] \ ,(int x) { return x + 1; }` to it,
+// `to_int` takes a Church numeral `n`, applies the function `[] \;,(int x) { return x + 1; }` to it,
 // which acts like a successor function in the integer world, starting from 0.
 int to_int(Church n) {
- return n([] \ ,(int x) { return x + 1; })(0); // Start from 0 and apply `f` the number of times encoded by `n`.
+ return n([] \;,(int x) { return x + 1; })(0); // Start from 0 and apply `f` the number of times encoded by `n`.
 }
 
 int main() {
@@ -5890,6 +5890,63 @@ A representação dos números naturais no cálculo lambda mostra como um sistem
 Complementarmente a representação dos números naturais no cálculo lambda serve de base para sistemas de tipos em linguagens de programação funcionais. Ela mostra como abstrações matemáticas podem ser codificadas em funções puras. Embora linguagens como Haskell não usem diretamente os números de Church, o conceito de representar dados como funções é essencial. Em Haskell, por exemplo, listas são manipuladas com funções de ordem superior que se parecem com os números de Church.
 
 Os números de Church mostram como o cálculo lambda pode codificar dados complexos e operações usando exclusivamente funções. Eles dão uma base sólida para entender computação e abstração em linguagens de programação.
+
+**Questão de Prova:** usando apenas cálculo lambda puro, reduza a função $(\lambda x.\; \lambda y.\; y\; (x\; x))\;(\lambda z.\; z + 1)\; 2$
+
+Primeira Redução Beta, substituímos $x$ por $(\lambda z.\;z + 1)$ em $\lambda x.\;\lambda y.\;y\;(x\;x)$:
+
+$$(\lambda x.\;\lambda y.\;y\;(x\;x))\;(\lambda z.\;z + 1) \rightarrow \lambda y.\;y\;((\lambda z.\;z + 1)\;(\lambda z.\;z + 1))$$
+
+Reduzimos $(\lambda z.\;z + 1)\;(\lambda z.\;z + 1)$
+Substituindo $z$ por $(\lambda z.\;z + 1)$ em $(z + 1)$:
+
+$$(\lambda z.\;z + 1)\;(\lambda z.\;z + 1) \rightarrow (\lambda z.\;z + 1) + 1$$
+$$\rightarrow (\lambda w.\;w + 1) + 1$$
+
+Então temos:
+
+$$\lambda y.\;y\;((\lambda w.\;w + 1) + 1)$$
+
+Segunda Redução Beta, aplicamos ao número 2:
+
+$$(\lambda y.\;y\;((\lambda w.\;w + 1) + 1))\;2$$
+$$\rightarrow 2\;((\lambda w.\;w + 1) + 1)$$
+
+A expressão continua em um processo infinito de adição de 1. Cada vez que tentamos avaliar $(\lambda w.\;w + 1)$, geramos outra função que adiciona 1, entrando em um loop infinito.
+
+Podemos fazer novamente, considerando apenas o cálculo lambda puro. Neste caso, teremos:
+
+O termo inicial:
+
+$$(\lambda x.\;\lambda y.\;y\;(x\;x))\;(\lambda z.\;z + 1)\;2$$
+
+Deve ser reescrito substituindo as operações aritméticas por suas representações em cálculo lambda puro:
+
+1. O número 2 como número de Church:
+
+   $$2 = \lambda f.\;\lambda x.\;f\;(f\;x)$$
+
+2. O sucessor (substitui z + 1):
+
+   $$\text{succ} = \lambda n.\;\lambda f.\;\lambda x.\;f\;(n\;f\;x)$$
+
+Então o termo se torna:
+
+$$(\lambda x.\;\lambda y.\;y\;(x\;x))\;\text{succ}\;(\lambda f.\;\lambda x.\;f\;(f\;x))$$
+
+Redução Beta, primeira Aplicação, substituímos $x$ por $\text{succ}$ em $\lambda x.\;\lambda y.\;y\;(x\;x)$:
+
+$$
+(\lambda x.\;\lambda y.\;y\;(x\;x))\;\text{succ} \rightarrow \lambda y.\;y\;(\text{succ}\;\text{succ})
+$$
+
+Redução Beta, segunda Aplicação, aplicamos ao número de Church 2:
+
+$$(\lambda y.\;y\;(\text{succ}\;\text{succ}))\;(\lambda f.\;\lambda x.\;f\;(f\;x))$$
+
+$$\rightarrow (\lambda f.\;\lambda x.\;f\;(f\;x))\;(\text{succ}\;\text{succ})$$
+
+Nos dois casos, o termo não possui forma normal beta. A redução continua indefinidamente devido à auto-aplicação do sucessor. Isto acontece porque $\text{succ}\;\text{succ}$ gera uma sequência infinita de aplicações quando usado como função em um número de Church.
 
 ## 7.2. Representação da Lógica Proposicional no Cálculo Lambda
 
