@@ -1155,6 +1155,21 @@ p {
   z-index: 10000; 
 }
 
+
+/* Ajustar a largura mínima do dropdown menu */
+.dropdown-menu {
+    min-width: 250px; /* Ajuste conforme necessário */
+    max-width: 100%;
+}
+
+/* Permitir que o texto dos itens quebre em várias linhas */
+.dropdown-menu .dropdown-item {
+    white-space: normal;
+    /* Opcionalmente, você pode ajustar o padding ou margens */
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
 code{
   padding: 0.5em, importa !important;
 }
