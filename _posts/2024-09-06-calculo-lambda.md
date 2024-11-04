@@ -7600,7 +7600,7 @@ $$
       print (toInt two) -- Saída: 2
    ```
 
-O cálculo lambda é a base teórica para as linguagens de programação que usam o paradigma da programação funcional, especialmente em Haskell. Mas, para isso, precisamos considerar os tipos.
+O cálculo lambda é a base teórica para as linguagens de programação que usam o paradigma da programação funcional, especialmente em Haskell. Mas, para isso, precisamos considerar os tipos. Corrija aqui. 
 
 # 10. Cálculo Lambda Simplesmente Tipado
 
