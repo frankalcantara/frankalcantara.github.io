@@ -5893,29 +5893,63 @@ Os números de Church mostram como o cálculo lambda pode codificar dados comple
 
 >**Questão de Prova:** usando apenas cálculo lambda puro, reduza a função $(\lambda x.\; \lambda y.\; y\; (x\; x))\;(\lambda z.\; z + 1)\; 2$
 >
->Aplicação inicial:
->  $$
->  (λx. λy. y(x x))(λz. z + 1)2
->  $$
-
->Primeira redução β (substituindo $x$ por $λz. z + 1$):
->  $$
->  (λy. y((λz. z + 1)(λz. z + 1)))2
->  $$
-
->Aplicação da função ao argumento 2 (substituindo $y$ por 2):
->  $$
->  2((λz. z + 1)(λz. z + 1))
->  $$
+>Primeira Redução Beta, substituímos $x$ por $(\lambda z.\;z + 1)$ em $\lambda x.\;\lambda y.\;y\;(x\;x)$:
 >
->A redução para aqui, pois não podemos prosseguir usando apenas o cálculo lambda puro, 
-já que teríamos que realizar operações aritméticas que não são parte do cálculo lambda puro.
+>$$(\lambda x.\;\lambda y.\;y\;(x\;x))\;(\lambda z.\;z + 1) \rightarrow \lambda y.\;y\;((\lambda z.\;z + 1)\;(\lambda z.\;z + 1))$$
 >
->Portanto, o resultado final da redução é:
+>Reduzimos $(\lambda z.\;z + 1)\;(\lambda z.\;z + 1)$
+Substituindo $z$ por $(\lambda z.\;z + 1)$ em $(z + 1)$:
+>
+>$$(\lambda z.\;z + 1)\;(\lambda z.\;z + 1) \rightarrow (\lambda z.\;z + 1) + 1$$
+>
+>$$\rightarrow (\lambda w.\;w + 1) + 1$$
+>
+>Então temos:
+>
+>$$\lambda y.\;y\;((\lambda w.\;w + 1) + 1)$$
+>
+>Segunda Redução Beta, aplicamos ao número 2:
+>
+>$$(\lambda y.\;y\;((\lambda w.\;w + 1) + 1))\;2$$
+>
+>$$\rightarrow 2\;((\lambda w.\;w + 1) + 1)$$
+>
+>A expressão continua em um processo infinito de adição de 1. Cada vez que tentamos avaliar $(\lambda w.\;w + 1)$, geramos outra função que adiciona 1, entrando em um loop infinito.
+>
+>Podemos fazer novamente, considerando apenas o cálculo >lambda puro. Neste caso, teremos:
+>
+>O termo inicial:
+>
+>$$(\lambda x.\;\lambda y.\;y\;(x\;x))\;(\lambda z.\;z + 1)\;2$$
+>
+>Deve ser reescrito substituindo as operações aritméticas por suas representações em cálculo lambda puro:
+>
+>1. O número 2 como número de Church:
+>
+>   $$2 = \lambda f.\;\lambda x.\;f\;(f\;x)$$
+>
+>2. O sucessor (substitui z + 1):
+>
+>   $$\text{succ} = \lambda n.\;\lambda f.\;\lambda x.\;f\;(n\;f\;x)$$
+>
+>Então o termo se torna:
+>
+>$$(\lambda x.\;\lambda y.\;y\;(x\;x))\;\text{succ}\;(\lambda f.\;\lambda x.\;f\;(f\;x))$$
+>
+>Redução Beta, primeira Aplicação, substituímos $x$ por $\text{succ}$ em $\lambda x.\;\lambda y.\;y\;(x\;x)$:
+>
 >$$
->2((λz. z + 1)(λz. z + 1))
->$$
-> 
+>(\lambda x.\;\lambda y.\;y\;(x\;x))\;\text{succ} \rightarrow \lambda y.\;y\;(\text{succ}\;\text{succ})
+$$
+>
+>Redução Beta, segunda Aplicação, aplicamos ao número de Church 2:
+>
+>$$(\lambda y.\;y\;(\text{succ}\;\text{succ}))\;(\lambda f.\;\lambda x.\;f\;(f\;x))$$
+>
+>$$\rightarrow (\lambda f.\;\lambda x.\;f\;(f\;x))\;(\text{succ}\;\text{succ})$$
+>
+>Nos dois casos, o termo não possui forma normal beta. A redução continua indefinidamente devido à auto-aplicação do sucessor. Isto acontece porque $\text{succ}\;\text{succ}$ gera uma sequência infinita de aplicações quando usado como função em um número de Church.
+
 ## 7.2. Representação da Lógica Proposicional no Cálculo Lambda
 
 O cálculo lambda oferece uma representação formal para lógica proposicional, similar aos números de Church para os números naturais. Neste cenário é possível codificar valores verdade e operações lógicas como termos lambda. Essa abordagem permite que operações booleanas sejam realizadas através de expressões funcionais.
@@ -7566,7 +7600,7 @@ $$
       print (toInt two) -- Saída: 2
    ```
 
-O cálculo lambda é a base teórica para as linguagens de programação que usam o paradigma da programação funcional, especialmente em Haskell. Mas, para isso, precisamos considerar os tipos. Corrija aqui. 
+O cálculo lambda é a base teórica para as linguagens de programação que usam o paradigma da programação funcional, especialmente em Haskell. Mas, para isso, precisamos considerar os tipos.
 
 # 10. Cálculo Lambda Simplesmente Tipado
 
