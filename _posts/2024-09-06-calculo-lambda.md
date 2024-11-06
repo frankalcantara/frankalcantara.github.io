@@ -75,7 +75,7 @@ Seu trabalho foi uma das primeiras tentativas de formalizar matematicamente o at
 A partir do meio da década de 1930, vários matemáticos e lógicos, como [Church](https://en.wikipedia.org/wiki/Alonzo_Church), [Turing](https://en.wikipedia.org/wiki/Alan_Turing), [Gödel](https://en.wikipedia.org/wiki/Kurt_G%C3%B6del) e [Post](https://en.wikipedia.org/wiki/Emil_Leon_Post), desenvolveram modelos diferentes para formalizar a computabilidade. Cada um desses modelos abordou o problema de uma perspectiva exclusiva. Como pode ser visto na Tabela 1.
 
 | Abordagem                              | Características Principais                                                                                                  | Contribuições / Diferenças                                                                                        |
-|------------------|--------------------------|----------------------------|
+|-------------------|--------------------------|---------------------------|
 | Cálculo Lambda / (Church, $1936$)      | • Sistema formal baseado em funções<br>• Usa abstração ($\lambda$) e aplicação<br>• Funções como objetos de primeira classe | • Base para linguagens funcionais<br>• Ênfase em composição de funções<br>• Influenciou teoria dos tipos          |
 | Máquina de Turing <br>(Turing, $1936$) | • Modelo abstrato de máquina<br>• Fita infinita, cabeçote de leitura/escrita<br>• Estados finitos e transições              | • Modelo intuitivo de computação<br>• Base para análise de complexidade<br>• Inspirou arquitetura de computadores |
 | Funções Recursivas<br> (Gödel, $1934$) | • Baseado em teoria dos números<br>• Usa recursão e minimização<br>• Definição indutiva de funções                          | • Formalização rigorosa<br>• Conexão com lógica matemática<br>• Base para teoria da recursão                      |
@@ -3338,7 +3338,7 @@ Este exemplo mostra que a ordem aplicativa pode levar a uma não terminação em
 Os combinadores tem origem no trabalho de [Moses Schönfinkel](https://en.wikipedia.org/wiki/Moses_Sch%C3%B6nfinkel). Em um artigo de 1924 Moses Schönfinkel define uma família de combinadores incluindo os combinadores padrão $S\,$, $K$ e $I$ e demonstra que apenas $S$ e $K$ são necessários\[\^cite3\]. Um conjunto dos combinadores iniciais pode ser visto na Tabela 3.6.A:
 
 | Abreviação Original | Função Original em Alemão | Tradução para o Inglês | Expressão Lambda           | Abreviação Atual |
-|--------------|--------------|--------------|-----------------|--------------|
+|---------------|---------------|---------------|---------------|---------------|
 | $I$                 | Identitätsfunktion        | função identidade      | $\lambda x.\;x$            | $I$              |
 | $K$                 | Konstanzfunktion          | função de constância   | $\lambda\;y\;x.\;x$        | $C$              |
 | $T$                 | Vertauschungsfunktion     | função de troca        | $\lambda\;y\;xz.\;z\;y\;x$ | $C$              |
@@ -3473,7 +3473,7 @@ Finalmente, a lista de combinadores do cálculo lambda é um pouco mais extensa 
 [^10]: Malpas, J., Davidson, D., **The Stanford Encyclopedia of Philosophy (Winter 2012 Edition)**, Edward N.;zalta and Uri Nodelman (eds.), <https://plato.stanford.edu/entries/lambda-calculus/#Com>.
 
 | Nome  | Definição e Comentários                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-|-----------------|-------------------------------------------------------|
+|--------------------|----------------------------------------------------|
 | **S** | $\lambda x [\lambda  [\lambda z [x z (y\;z)]]]\,$. Lembre-se que $x z (y\;z)$ deve ser entendido como a aplicação $(x z)(y\;z)$ de $x z$ a $y\;z\,$. O combinador $S$ pode ser entendido como um operador de *substituir e aplicar*: $z$ *intervém* entre $x$ e $y$; em vez de aplicar $x$ a $y\,$, aplicamos $x z$ a $y\;z\,$.                                                                                                                                                                                                   |
 | **K** | $\lambda x [\lambda  [x]]\,$. O valor de $K M$ é a função constante cujo valor para qualquer argumento é simplesmente $M\,$.                                                                                                                                                                                                                                                                                                                                                                                                      |
 | **I** | $\lambda x [x]\,$. A função identidade.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
@@ -6767,7 +6767,7 @@ $$\text{cons}\;1\;(\text{cons}\;2\;(\text{cons}\;3\;\text{nil})) $$
 
 Uma tupla $(3, 4)$ é representada como:
 
-$$\lambda f.\;F\;3\;4 $$
+$$\lambda f.\;f\;3\;4 $$
 
 ## 8.1. Listas
 
@@ -6785,7 +6785,7 @@ Para definirmos uma lista precisamos do conceito de lista vazia, que aqui será 
 
     O construtor recebe um elemento $h$ e uma lista $t\,$, e cria uma nova lista com $h$ na frente de $t\,$.
 
-Com $\text{nil}$ e $\text{cons}\,$, podemos criar e manipular listas. Por exemplo, a lista $[1, 2, 3]$ será representada como:
+O termo $\text{cons}\,$ é, uma função de ordem superior e, como tal, não faz parte do cálculo lambda puro. Porém, facilita a visualização dos processos de apicação e substituição e, consequentemente seu entendimento. Com $\text{nil}$ e $\text{cons}\,$, podemos criar e manipular listas. Por exemplo, a lista $[1, 2, 3]$ será representada como:
 
 $$\text{cons}\;1\;(\text{cons}\;2\;(\text{cons}\;3\;\text{nil}))$$
 
