@@ -64,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./testing_guide.html" rel="next">
 <link href="./config_layer.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -182,6 +183,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Control Layer Implementation</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./testing_guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Testing Guide</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -192,8 +205,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#coursemarkers-implementation" id="toc-coursemarkers-implementation" class="nav-link active" data-scroll-target="#coursemarkers-implementation"><span class="header-section-number">5.1</span> CourseMarkers Implementation</a></li>
-  <li><a href="#profilemanager-implementation" id="toc-profilemanager-implementation" class="nav-link" data-scroll-target="#profilemanager-implementation"><span class="header-section-number">5.2</span> ProfileManager Implementation</a></li>
+  <li><a href="#coursemarkers-implementation" id="toc-coursemarkers-implementation" class="nav-link active" data-scroll-target="#coursemarkers-implementation"><span class="header-section-number">6</span> CourseMarkers Implementation</a>
+  <ul class="collapse">
+  <li><a href="#core-architecture" id="toc-core-architecture" class="nav-link" data-scroll-target="#core-architecture"><span class="header-section-number">6.1</span> Core Architecture</a>
+  <ul class="collapse">
+  <li><a href="#state-management" id="toc-state-management" class="nav-link" data-scroll-target="#state-management"><span class="header-section-number">6.1.1</span> State Management</a></li>
+  </ul></li>
+  <li><a href="#integration-with-debug-layer" id="toc-integration-with-debug-layer" class="nav-link" data-scroll-target="#integration-with-debug-layer"><span class="header-section-number">6.2</span> Integration with Debug Layer</a></li>
+  <li><a href="#timing-considerations" id="toc-timing-considerations" class="nav-link" data-scroll-target="#timing-considerations"><span class="header-section-number">6.3</span> Timing Considerations</a></li>
+  <li><a href="#profilemanager-implementation" id="toc-profilemanager-implementation" class="nav-link" data-scroll-target="#profilemanager-implementation"><span class="header-section-number">6.4</span> ProfileManager Implementation</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linefollower/edit/main/control_layer.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linefollower/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -219,289 +240,325 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>The Control Layer forms the decision-making core of RobotZero, managing the robot’s behaviour in response to sensor inputs and track conditions. This layer translates raw sensor data into actionable controls, implementing the robot’s core line-following logic while managing special track features like markers and intersections. Operating between the Hardware Interface Layer and the Main Control system, it ensures smooth and predictable robot behaviour under varying conditions.</p>
+<p><strong>The Control Layer forms the decision-making core of RobotZero</strong>, managing the robot’s behaviour in response to sensor inputs and track conditions. This layer translates raw sensor data into actionable controls, implementing the robot’s core line-following logic while managing special track features like markers and intersections. Operating between the Hardware Interface Layer and the Main Control system, it ensures smooth and predictable robot behaviour under varying conditions.</p>
+<blockquote class="blockquote">
+<p><strong>TODO</strong>: This version of CourseMarkers has not been run yet. At this stage of development (Dec/2024), this code is purely theoretical and REQUIRES EXTENSIVE TESTING. This implementation represents our current design approach but has not been validated in real-world conditions.</p>
+</blockquote>
 <p>The <code>CourseMarkers</code> class represents the primary control component, implementing track feature detection and corresponding behaviour adjustments. This class processes marker sensor data to identify track features and manages the robot’s response to these features, including speed changes, lap counting, and precision mode transitions. Through its state machine implementation, it ensures reliable detection of track features and smooth transitions between different operating modes.</p>
 <p>The <code>ProfileManager</code> class complements the control system by managing operation profiles and parameters based on the current debug level. When <code>DEBUG_LEVEL</code> is greater than <code>0</code>, it provides different speed and control parameter sets optimized for either analysis (<code>DEBUG_LEVEL = 1</code>) or high-speed performance (<code>DEBUG_LEVEL = 2</code>). This class enables the robot to maintain consistent control logic while operating under different performance requirements, making it an essential component for both development and competition scenarios.</p>
-<section id="coursemarkers-implementation" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="coursemarkers-implementation"><span class="header-section-number">5.1</span> CourseMarkers Implementation</h2>
-<p>The CourseMarkers class manages track feature detection and robot behaviour through a state-based approach:</p>
+<section id="coursemarkers-implementation" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> CourseMarkers Implementation</h1>
+<p>The <code>CourseMarkers</code> class represents a control component implementing track feature detection and robot behaviour management through an optimized state-based approach. This implementation focuses on efficient timing control, reliable marker detection, and seamless integration with both the debug system and main control loop.</p>
+<section id="core-architecture" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="core-architecture"><span class="header-section-number">6.1</span> Core Architecture</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> CourseMarkers <span class="op">{</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// State variables</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">int</span> speed<span class="op">;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">int</span> lastMarkerState<span class="op">;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">int</span> previousMarkerState<span class="op">;</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">int</span> oldMarkerState<span class="op">;</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">int</span> currentMarkerState<span class="op">;</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">int16_t</span> leftMarkerDetected<span class="op">;</span>   </span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">int16_t</span> rightMarkerDetected<span class="op">;</span>  </span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Speed control variables</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">bool</span> isTurning<span class="op">;</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">bool</span> isExitingTurn<span class="op">;</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">uint8_t</span> boostCountdown<span class="op">;</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Timers for precise control</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> Timer stopTimer<span class="op">;</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> Timer slowdownTimer<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Timing control</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">uint32_t</span> lastReadTime<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="at">const</span> <span class="dt">uint16_t</span> MARKER_READ_INTERVAL <span class="op">=</span> <span class="dv">2</span><span class="op">;</span>  <span class="co">// 2ms read interval</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// State tracking</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">int</span> speed<span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">int</span> lastMarkerState<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">int</span> previousMarkerState<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">int</span> oldMarkerState<span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">int</span> currentMarkerState<span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">int16_t</span> leftMarkerDetected<span class="op">;</span>   </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">int16_t</span> rightMarkerDetected<span class="op">;</span>  </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Motion control</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">bool</span> isTurning<span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">bool</span> isExitingTurn<span class="op">;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">uint8_t</span> boostCountdown<span class="op">;</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Internal methods</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">void</span> readCourseMarkers<span class="op">();</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">void</span> handleFinishLine<span class="op">();</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">void</span> handleSpeedMode<span class="op">();</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">void</span> handleIntersection<span class="op">();</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Public methods</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">void</span> processMarkerSignals<span class="op">();</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">int</span> speedControl<span class="op">(</span><span class="dt">int</span> error<span class="op">);</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The marker detection system operates through the <code>readCourseMarkers</code> method, which processes analog readings from dedicated marker sensors:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> CourseMarkers<span class="op">::</span>readCourseMarkers<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    leftMarkerDetected <span class="op">=</span> analogRead<span class="op">(</span>PIN_MARKER_LEFT<span class="op">);</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    rightMarkerDetected <span class="op">=</span> analogRead<span class="op">(</span>PIN_MARKER_RIGHT<span class="op">);</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> ledState <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>leftMarkerDetected <span class="op">&gt;</span> MARKER_DETECTION_THRESHOLD<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        leftMarkerDetected <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        leftMarkerDetected <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        ledState <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>rightMarkerDetected <span class="op">&gt;</span> MARKER_DETECTION_THRESHOLD<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        rightMarkerDetected <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        rightMarkerDetected <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        ledState <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    digitalWrite<span class="op">(</span>PIN_STATUS_LED<span class="op">,</span> ledState<span class="op">);</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Speed control is managed through a system that takes into account the robot’s current state and track conditions:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> CourseMarkers<span class="op">::</span>speedControl<span class="op">(</span><span class="dt">int</span> error<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> curve_detected <span class="op">=</span> abs<span class="op">(</span>error<span class="op">)</span> <span class="op">&gt;</span> TURN_THRESHOLD<span class="op">;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> straight_detected <span class="op">=</span> abs<span class="op">(</span>error<span class="op">)</span> <span class="op">&lt;</span> STRAIGHT_THRESHOLD<span class="op">;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> target_speed<span class="op">;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>curve_detected<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        isTurning <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        isExitingTurn <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        target_speed <span class="op">=</span> TURN_SPEED<span class="op">;</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>straight_detected<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>isTurning<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>            isExitingTurn <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>            boostCountdown <span class="op">=</span> <span class="ex">BOOST_</span>DURATION<span class="op">;</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        isTurning <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        target_speed <span class="op">=</span> isPrecisionMode <span class="op">?</span> SPEED_SLOW <span class="op">:</span> BASE_FAST<span class="op">;</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        target_speed <span class="op">=</span> map<span class="op">(</span>abs<span class="op">(</span>error<span class="op">),</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>            STRAIGHT_THRESHOLD<span class="op">,</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>            TURN_THRESHOLD<span class="op">,</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>            <span class="op">(</span>isPrecisionMode <span class="op">?</span> SPEED_SLOW <span class="op">:</span> BASE_FAST<span class="op">),</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>            TURN_SPEED<span class="op">);</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>isExitingTurn <span class="op">&amp;&amp;</span> boostCountdown <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> <span class="op">!</span>isPrecisionMode<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>        target_speed <span class="op">=</span> min<span class="op">(</span><span class="dv">255</span><span class="op">,</span> target_speed <span class="op">+</span> <span class="dv">30</span><span class="op">);</span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>        boostCountdown<span class="op">--;</span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> step <span class="op">=</span> <span class="op">(</span>target_speed <span class="op">&gt;</span> currentSpeed<span class="op">)</span> <span class="op">?</span> ACCELERATION_STEP <span class="op">:</span> BRAKE_STEP<span class="op">;</span></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>abs<span class="op">(</span>target_speed <span class="op">-</span> currentSpeed<span class="op">)</span> <span class="op">&lt;=</span> step<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>        currentSpeed <span class="op">=</span> target_speed<span class="op">;</span></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>        currentSpeed <span class="op">+=</span> <span class="op">(</span>target_speed <span class="op">&gt;</span> currentSpeed<span class="op">)</span> <span class="op">?</span> step <span class="op">:</span> <span class="op">-</span>step<span class="op">;</span></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> constrain<span class="op">(</span>currentSpeed<span class="op">,</span> TURN_SPEED<span class="op">,</span> </span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>                    <span class="op">(</span>isPrecisionMode <span class="op">?</span> SPEED_SLOW <span class="op">:</span> BASE_FAST<span class="op">));</span></span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The <code>processMarkerSignals</code> method ties everything together, managing the robot’s response to detected markers:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> CourseMarkers<span class="op">::</span>processMarkerSignals<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    readCourseMarkers<span class="op">();</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">((</span>leftMarkerDetected <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="op">(</span>rightMarkerDetected <span class="op">==</span> <span class="dv">0</span><span class="op">))</span> </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        currentMarkerState <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">((</span>leftMarkerDetected <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="op">(</span>rightMarkerDetected <span class="op">==</span> <span class="dv">0</span><span class="op">))</span> </span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        currentMarkerState <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">((</span>leftMarkerDetected <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="op">(</span>rightMarkerDetected <span class="op">==</span> <span class="dv">1</span><span class="op">))</span> </span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        currentMarkerState <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">((</span>leftMarkerDetected <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="op">(</span>rightMarkerDetected <span class="op">==</span> <span class="dv">1</span><span class="op">))</span> </span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        currentMarkerState <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Timing control</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> Timer stopTimer<span class="op">;</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> Timer slowdownTimer<span class="op">;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The implementation utilizes a set of static members to maintain system state while minimizing memory usage. Key innovations include:</p>
+<ol type="1">
+<li><p><strong>Time-Controlled Operation</strong>: The system implements a precise timing mechanism that regulates marker reading frequency:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> readCourseMarkers<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">uint32_t</span> currentTime <span class="op">=</span> millis<span class="op">();</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>currentTime <span class="op">-</span> lastReadTime <span class="op">&lt;</span> MARKER_READ_INTERVAL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    lastReadTime <span class="op">=</span> currentTime<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Optimized marker reading</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> leftDetected <span class="op">=</span> analogRead<span class="op">(</span>PIN_MARKER_LEFT<span class="op">)</span> <span class="op">&lt;=</span> MARKER_DETECTION_THRESHOLD<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> rightDetected <span class="op">=</span> analogRead<span class="op">(</span>PIN_MARKER_RIGHT<span class="op">)</span> <span class="op">&lt;=</span> MARKER_DETECTION_THRESHOLD<span class="op">;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    currentMarkerState <span class="op">=</span> <span class="op">(</span>leftDetected <span class="op">&lt;&lt;</span> <span class="dv">1</span><span class="op">)</span> <span class="op">|</span> rightDetected<span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    digitalWrite<span class="op">(</span>PIN_STATUS_LED<span class="op">,</span> leftDetected <span class="op">||</span> rightDetected<span class="op">);</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This time-controlled approach ensures consistent sampling intervals while preventing unnecessary processor load. The 2ms interval was chosen based on empirical testing to balance between reliable detection and system performance.</p></li>
+<li><p><strong>State Machine Implementation</strong>: The system maintains a three-level state history (current, previous, and old) enabling pattern recognition:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">switch</span> <span class="op">(</span>currentMarkerState<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">case</span> <span class="dv">0</span><span class="op">:</span> <span class="co">// No markers</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>lastMarkerState <span class="op">==</span> <span class="dv">2</span> <span class="op">&amp;&amp;</span> previousMarkerState <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        handleFinishLine<span class="op">();</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>lastMarkerState <span class="op">==</span> <span class="dv">1</span> <span class="op">&amp;&amp;</span> previousMarkerState <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        handleSpeedMode<span class="op">();</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>lastMarkerState <span class="op">==</span> <span class="dv">3</span> <span class="op">||</span> previousMarkerState <span class="op">==</span> <span class="dv">3</span> <span class="op">||</span> </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>             oldMarkerState <span class="op">==</span> <span class="dv">3</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        handleIntersection<span class="op">();</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ol>
+<p>The state machine processes four distinct states: - State 0: No markers detected; - State 1: Left marker only; - State 2: Right marker only; - State 3: Both markers detected.</p>
+<ol start="3" type="1">
+<li><p><strong>Speed Control System</strong>: Implements an optimized decision tree for rapid response:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> CourseMarkers<span class="op">::</span>speedControl<span class="op">(</span><span class="dt">int</span> error<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Early curve detection</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> curve_detected <span class="op">=</span> abs<span class="op">(</span>error<span class="op">)</span> <span class="op">&gt;</span> TURN_THRESHOLD<span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>curve_detected<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        isTurning <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        isExitingTurn <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> TURN_SPEED<span class="op">;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> straight_detected <span class="op">=</span> abs<span class="op">(</span>error<span class="op">)</span> <span class="op">&lt;</span> STRAIGHT_THRESHOLD<span class="op">;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> target_speed<span class="op">;</span></span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>lastMarkerState <span class="op">!=</span> currentMarkerState<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>currentMarkerState <span class="op">==</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> lastMarkerState <span class="op">==</span> <span class="dv">2</span> <span class="op">&amp;&amp;</span> </span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>            previousMarkerState <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>            handleFinishLine<span class="op">();</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>straight_detected<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>isTurning<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>            isExitingTurn <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>            boostCountdown <span class="op">=</span> <span class="ex">BOOST_</span>DURATION<span class="op">;</span></span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>currentMarkerState <span class="op">==</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> lastMarkerState <span class="op">==</span> <span class="dv">1</span> <span class="op">&amp;&amp;</span> </span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>            previousMarkerState <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>            handleSpeedMode<span class="op">();</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>currentMarkerState <span class="op">==</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> <span class="op">((</span>lastMarkerState <span class="op">==</span> <span class="dv">3</span><span class="op">)</span> <span class="op">||</span> </span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>            <span class="op">(</span>previousMarkerState <span class="op">==</span> <span class="dv">3</span><span class="op">)</span> <span class="op">||</span> <span class="op">(</span>oldMarkerState <span class="op">==</span> <span class="dv">3</span><span class="op">)))</span> <span class="op">{</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>            handleIntersection<span class="op">();</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        oldMarkerState <span class="op">=</span> previousMarkerState<span class="op">;</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>        previousMarkerState <span class="op">=</span> lastMarkerState<span class="op">;</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        lastMarkerState <span class="op">=</span> currentMarkerState<span class="op">;</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>isStopSequenceActive <span class="op">&amp;&amp;</span> <span class="op">!</span>isRobotStopped<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!</span>slowdownTimer<span class="op">.</span>Expired<span class="op">()</span> <span class="op">&amp;&amp;</span> currentSpeed <span class="op">&gt;</span> SPEED_BRAKE<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>            currentSpeed <span class="op">=</span> SPEED_BRAKE<span class="op">;</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>stopTimer<span class="op">.</span>Expired<span class="op">())</span> <span class="op">{</span></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>            currentSpeed <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>            MotorDriver<span class="op">::</span>setMotorsPower<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>            isRobotStopped <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The state machine implementation uses a combination of current and historical marker states to reliably detect track features and transitions. The system maintains four state variables:</p>
-<p><code>currentMarkerState</code>: The present state based on marker sensors; <code>lastMarkerState</code>: The immediately previous state; <code>previousMarkerState</code>: The state before the last; <code>oldMarkerState</code>: The third previous state.</p>
-<p>Each marker state can be one of four conditions:</p>
-<p><code>0</code>: No markers detected (both sensors reading 0);</p>
-<p><code>1</code>: Left marker only (left sensor = 1, right sensor = 0);</p>
-<p><code>2</code>: Right marker only (left sensor = 0, right sensor = 1);</p>
-<p><code>3</code>: Both markers (both sensors reading 1);</p>
-<p>The state transitions trigger specific behaviors:</p>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        isTurning <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        target_speed <span class="op">=</span> isPrecisionMode <span class="op">?</span> SPEED_SLOW <span class="op">:</span> BASE_FAST<span class="op">;</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        target_speed <span class="op">=</span> map<span class="op">(</span>abs<span class="op">(</span>error<span class="op">),</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>            STRAIGHT_THRESHOLD<span class="op">,</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>            TURN_THRESHOLD<span class="op">,</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>            <span class="op">(</span>isPrecisionMode <span class="op">?</span> SPEED_SLOW <span class="op">:</span> BASE_FAST<span class="op">),</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>            TURN_SPEED<span class="op">);</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Boost control</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>isExitingTurn <span class="op">&amp;&amp;</span> boostCountdown <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> <span class="op">!</span>isPrecisionMode<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>        target_speed <span class="op">=</span> min<span class="op">(</span><span class="dv">255</span><span class="op">,</span> target_speed <span class="op">+</span> <span class="ex">BOOST_</span>INCREMENT<span class="op">);</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>        boostCountdown<span class="op">--;</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Speed adjustment</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> step <span class="op">=</span> <span class="op">(</span>target_speed <span class="op">&gt;</span> currentSpeed<span class="op">)</span> <span class="op">?</span> ACCELERATION_STEP <span class="op">:</span> BRAKE_STEP<span class="op">;</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>abs<span class="op">(</span>target_speed <span class="op">-</span> currentSpeed<span class="op">)</span> <span class="op">&lt;=</span> step<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>        currentSpeed <span class="op">=</span> target_speed<span class="op">;</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>        currentSpeed <span class="op">+=</span> <span class="op">(</span>target_speed <span class="op">&gt;</span> currentSpeed<span class="op">)</span> <span class="op">?</span> step <span class="op">:</span> <span class="op">-</span>step<span class="op">;</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> constrain<span class="op">(</span>currentSpeed<span class="op">,</span> TURN_SPEED<span class="op">,</span> </span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>                    <span class="op">(</span>isPrecisionMode <span class="op">?</span> SPEED_SLOW <span class="op">:</span> BASE_FAST<span class="op">));</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><strong>Debug Integration</strong>: When <code>DEBUG_LEVEL &gt; 0</code>, the system integrates with the logging framework:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> handleFinishLine<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    lapCount<span class="op">++;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>lapCount <span class="op">==</span> <span class="dv">2</span> <span class="op">&amp;&amp;</span> <span class="op">!</span>isStopSequenceActive<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        isStopSequenceActive <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        slowdownTimer<span class="op">.</span>Start<span class="op">(</span><span class="dv">50</span><span class="op">);</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        stopTimer<span class="op">.</span>Start<span class="op">(</span>STOP_DELAY<span class="op">);</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#if DEBUG_LEVEL &gt; 0</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        FlashManager<span class="op">::</span>setLogReady<span class="op">();</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><strong>Event Handling</strong>: The system implements specialized handlers for different track features:</p>
 <ul>
-<li><p>Finish Line Detection: Identified by the sequence [0 → 2 → 0], representing a clean pass over the right marker;</p></li>
-<li><p>Speed Mode Change: Detected by [0 → 1 → 0], indicating a left marker pass;</p></li>
-<li><p>Intersection Detection: Triggered by any sequence containing state 3 (both markers) within the last three states.</p></li>
-</ul>
-<p>This multi-state history approach helps filter out false readings and ensures reliable feature detection even at high speeds or under varying light conditions. Each state change is processed only once, and the system maintains proper operation even when markers are detected in rapid succession.</p>
+<li><code>handleFinishLine()</code>: Manages lap counting and stop sequence;</li>
+<li><code>handleSpeedMode()</code>: Controls precision/speed mode transitions;</li>
+<li><code>handleIntersection()</code>: Logs intersection detection.</li>
+</ul></li>
+</ol>
+<section id="state-management" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="state-management"><span class="header-section-number">6.1.1</span> State Management</h3>
+<p>The state management system operates through a decision tree (Figure 1), processing marker states in the <code>processMarkerSignals</code> method. The decision process begins with a read operation that captures the current state of both markers, encoding them into a single value through binary manipulation: the right marker contributes the least significant bit (1), while the left marker sets the second bit (2), resulting in four possible states (0: no markers, 1: left only, 2: right only, 3: both markers).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/DecisonTree.drawio.png" class="img-fluid figure-img"></p>
+<figcaption>Course Markers, decision tree diagram.</figcaption>
+</figure>
+</div>
+<p>Before entering the main decision logic, the system performs a critical optimization check: if the current state matches the last state (<code>lastMarkerState == currentMarkerState</code>), the method returns immediately, preventing unnecessary processing cycles. This early-return mechanism significantly reduces CPU load during steady-state operation when no markers are being detected.</p>
+<p>Upon detecting a state change, the system enters its primary decision sequence. The root decision node examines the current state, with special emphasis on the ‘no markers’ state (0). When in state 0, the system traverses a carefully ordered sequence of pattern checks, each designed to identify specific track features through state history analysis. The sequence is deliberately ordered by priority: finish line detection takes precedence, followed by speed mode transitions, and finally intersection detection.</p>
+<p>The finish line check looks for a specific pattern: a right marker only (state 2) followed by no markers, with the previous state also being no markers (<code>lastMarkerState == 2 &amp;&amp; previousMarkerState == 0</code>). This three-state sequence definitively identifies the finish line pattern while rejecting spurious signals. When detected, <code>handleFinishLine()</code> executes, incrementing the lap counter and potentially initiating the stopping sequence.</p>
+<p>If the finish line pattern isn’t matched, the system checks for speed mode transitions by looking for a left marker only (state 1) followed by a history of no markers (<code>previousMarkerState == 0</code>). This pattern triggers a complete mode transition through <code>handleSpeedMode()</code>, which orchestrates a comprehensive state reset. The speed mode handler not only toggles between precision and normal operation but also ensures a clean transition by resetting all motion-related states:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> handleSpeedMode<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    isPrecisionMode <span class="op">=</span> <span class="op">!</span>isPrecisionMode<span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    currentSpeed <span class="op">=</span> isPrecisionMode <span class="op">?</span> SPEED_SLOW <span class="op">:</span> BASE_FAST<span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    isTurning <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    isExitingTurn <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    boostCountdown <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The final check in the decision sequence examines whether any of the three previous states indicated both markers were detected (state 3). This more permissive check allows for intersection detection regardless of the exact sequence of marker readings, accommodating various approach angles and speeds. The handleIntersection() call logs the event but maintains current robot behaviour, as intersections don’t require specific responses in the current implementation.</p>
+<p>After processing through the decision tree, the system executes its state history update, shifting each state one position in the history chain (<code>oldMarkerState = previousMarkerState; previousMarkerState = lastMarkerState; lastMarkerState = currentMarkerState</code>). This shift operation maintains the continuous state history required for pattern detection while minimizing memory usage through reuse of existing variables.</p>
+<p>The process concludes with a check of the stopping sequence flags. When active, the stop sequence implements a two-phase deceleration: first reducing speed to SPEED_BRAKE if the slowdown timer hasn’t expired, then bringing the robot to a complete stop once the stop timer completes. This gradual stopping process ensures smooth deceleration while maintaining control throughout the stopping sequence.</p>
 </section>
-<section id="profilemanager-implementation" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="profilemanager-implementation"><span class="header-section-number">5.2</span> ProfileManager Implementation</h2>
+</section>
+<section id="integration-with-debug-layer" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="integration-with-debug-layer"><span class="header-section-number">6.2</span> Integration with Debug Layer</h2>
+<p>When operating in debug mode (<code>DEBUG_LEVEL &gt; 0</code>), the system provides comprehensive data collection:</p>
+<ol type="1">
+<li><p>Event Logging:</p>
+<ul>
+<li>State transitions</li>
+<li>Speed mode changes</li>
+<li>Intersection detections</li>
+<li>Finish line crossings</li>
+</ul></li>
+<li><p>Performance Monitoring:</p>
+<ul>
+<li>Speed adjustments</li>
+<li>Turn detection</li>
+<li>Boost activation</li>
+</ul></li>
+<li><p>Stop Sequence Management:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>isStopSequenceActive <span class="op">&amp;&amp;</span> <span class="op">!</span>isRobotStopped<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(!</span>slowdownTimer<span class="op">.</span>Expired<span class="op">()</span> <span class="op">&amp;&amp;</span> currentSpeed <span class="op">&gt;</span> SPEED_BRAKE<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        currentSpeed <span class="op">=</span> SPEED_BRAKE<span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>stopTimer<span class="op">.</span>Expired<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        currentSpeed <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        MotorDriver<span class="op">::</span>setMotorsPower<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        isRobotStopped <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ol>
+</section>
+<section id="timing-considerations" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="timing-considerations"><span class="header-section-number">6.3</span> Timing Considerations</h2>
+<p>The timing system implementation represents a critical aspect of RobotZero’s control architecture, orchestrating multiple time-sensitive operations through carefully calibrated intervals. At its core, the marker detection system operates on a fixed 2ms sampling interval, implemented through a time-difference check at the start of each reading cycle. This precise timing ensures consistent marker detection while preventing excessive sensor polling that could impact system performance. The sampling rate was determined through empirical testing to balance between reliable detection and system overhead.</p>
+<p>When the robot initiates its stopping sequence, the system employs a two-phase timing approach. Initially, a 50ms slowdown period allows for controlled deceleration to <code>SPEED_BRAKE</code>, providing a smooth transition from full speed. After this initial brake phase, a longer STOP_DELAY interval guides the robot to a complete stop, preventing abrupt movements that could affect positioning accuracy. These timing values work in concert with the speed adjustment system, which uses `ACCELERATION_STEP` and `BRAKE_STEP` to control velocity changes. The step values create a gradual acceleration and deceleration profile, protecting the motors while maintaining precise control over the robot’s movement.</p>
+<p>Post-curve speed management introduces another timing element through the boost system. When exiting a curve, the boostCountdown timer activates for a configurable duration (`BOOST_DURATION`), during which the robot can temporarily exceed its normal speed limits. This boost phase is carefully timed to maximize straight-line performance while ensuring the robot maintains stability as it transitions from curved to straight sections. The timing parameters across these systems are interdependent; for example, the marker reading interval must be fast enough to detect course features even at maximum boost speed, while the acceleration steps must be calibrated to work effectively within the boost duration window.</p>
+</section>
+<section id="profilemanager-implementation" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="profilemanager-implementation"><span class="header-section-number">6.4</span> ProfileManager Implementation</h2>
 <p>The ProfileManager serves as RobotZero’s configuration system for different operating modes, providing two distinct profiles: one optimized for analysis and another for high-speed performance. This implementation is entirely conditional, only compiled when <code>DEBUG_LEVEL</code> is greater than <code>0</code>, ensuring zero overhead during normal operation.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ProfileManager <span class="op">{</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Initialize profile manager</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">void</span> initialize<span class="op">(</span>DebugMode mode<span class="op">);</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Get current debug mode</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> DebugMode getCurrentMode<span class="op">();</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Get speed value based on original speed constant</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">uint8_t</span> getSpeedValue<span class="op">(</span><span class="dt">uint8_t</span> defaultSpeed<span class="op">);</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Get PID parameters</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">float</span> getKP<span class="op">(</span><span class="dt">float</span> defaultValue<span class="op">);</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">float</span> getKD<span class="op">(</span><span class="dt">float</span> defaultValue<span class="op">);</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">float</span> getFilterCoefficient<span class="op">(</span><span class="dt">float</span> defaultValue<span class="op">);</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Get acceleration parameters</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">uint8_t</span> getAccelerationStep<span class="op">();</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">uint8_t</span> getBrakeStep<span class="op">();</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">uint8_t</span> getTurnSpeed<span class="op">();</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">uint8_t</span> getTurnThreshold<span class="op">();</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">uint8_t</span> getStraightThreshold<span class="op">();</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">uint8_t</span> getBoostDuration<span class="op">();</span></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">uint8_t</span> getBoostIncrement<span class="op">();</span></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> DebugMode currentMode<span class="op">;</span></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="at">const</span> SpeedProfile<span class="op">*</span> activeProfile<span class="op">;</span></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="at">const</span> SpeedProfile ANALYSIS_PROFILE<span class="op">;</span></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="at">const</span> SpeedProfile SPEED_PROFILE<span class="op">;</span></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">void</span> setActiveProfile<span class="op">(</span>DebugMode mode<span class="op">);</span></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">uint8_t</span> validateSpeed<span class="op">(</span><span class="dt">uint8_t</span> speed<span class="op">);</span></span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ProfileManager <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Initialize profile manager</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">void</span> initialize<span class="op">(</span>DebugMode mode<span class="op">);</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Get current debug mode</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> DebugMode getCurrentMode<span class="op">();</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Get speed value based on original speed constant</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">uint8_t</span> getSpeedValue<span class="op">(</span><span class="dt">uint8_t</span> defaultSpeed<span class="op">);</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Get PID parameters</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">float</span> getKP<span class="op">(</span><span class="dt">float</span> defaultValue<span class="op">);</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">float</span> getKD<span class="op">(</span><span class="dt">float</span> defaultValue<span class="op">);</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">float</span> getFilterCoefficient<span class="op">(</span><span class="dt">float</span> defaultValue<span class="op">);</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Get acceleration parameters</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">uint8_t</span> getAccelerationStep<span class="op">();</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">uint8_t</span> getBrakeStep<span class="op">();</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">uint8_t</span> getTurnSpeed<span class="op">();</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">uint8_t</span> getTurnThreshold<span class="op">();</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">uint8_t</span> getStraightThreshold<span class="op">();</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">uint8_t</span> getBoostDuration<span class="op">();</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">uint8_t</span> getBoostIncrement<span class="op">();</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> DebugMode currentMode<span class="op">;</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="at">const</span> SpeedProfile<span class="op">*</span> activeProfile<span class="op">;</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="at">const</span> SpeedProfile ANALYSIS_PROFILE<span class="op">;</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="at">const</span> SpeedProfile SPEED_PROFILE<span class="op">;</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">void</span> setActiveProfile<span class="op">(</span>DebugMode mode<span class="op">);</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="dt">uint8_t</span> validateSpeed<span class="op">(</span><span class="dt">uint8_t</span> speed<span class="op">);</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The system is built around two predefined profiles, each optimized for specific purposes:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> SpeedProfile ProfileManager<span class="op">::</span>ANALYSIS_PROFILE <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Speed settings - Conservative for analysis</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedStop <span class="op">=</span> <span class="dv">0</span><span class="op">,</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedStartup <span class="op">=</span> <span class="dv">60</span><span class="op">,</span>    <span class="co">// Slower startup</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedTurn <span class="op">=</span> <span class="dv">80</span><span class="op">,</span>       <span class="co">// Careful turns</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedBrake <span class="op">=</span> <span class="dv">90</span><span class="op">,</span>      <span class="co">// Gentle braking</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedCruise <span class="op">=</span> <span class="dv">100</span><span class="op">,</span>    <span class="co">// Moderate cruising</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedSlow <span class="op">=</span> <span class="dv">120</span><span class="op">,</span>      <span class="co">// Moderate slow speed</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedFast <span class="op">=</span> <span class="dv">140</span><span class="op">,</span>      <span class="co">// Moderate fast speed</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedBoost <span class="op">=</span> <span class="dv">160</span><span class="op">,</span>     <span class="co">// Moderate boost</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedMax <span class="op">=</span> <span class="dv">180</span><span class="op">,</span>       <span class="co">// Limited top speed</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Control parameters - Smooth operation</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>accelerationStep <span class="op">=</span> <span class="dv">15</span><span class="op">,</span> <span class="co">// Gentle acceleration</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>brakeStep <span class="op">=</span> <span class="dv">40</span><span class="op">,</span>       <span class="co">// Moderate braking</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>turnSpeed <span class="op">=</span> <span class="dv">80</span><span class="op">,</span>       <span class="co">// Conservative turns</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>turnThreshold <span class="op">=</span> <span class="dv">50</span><span class="op">,</span>   <span class="co">// Earlier turn detection</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>straightThreshold <span class="op">=</span> <span class="dv">25</span><span class="op">,</span> <span class="co">// Stricter straight detection</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>boostDuration <span class="op">=</span> <span class="dv">8</span><span class="op">,</span>    <span class="co">// Short boost</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>boostIncrement <span class="op">=</span> <span class="dv">15</span><span class="op">,</span>  <span class="co">// Gentle boost</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// PID parameters - Stable control</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>kProportional <span class="op">=</span> <span class="fl">4.0</span><span class="bu">f</span><span class="op">,</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>kDerivative <span class="op">=</span> <span class="fl">500.0</span><span class="bu">f</span><span class="op">,</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>filterCoefficient <span class="op">=</span> <span class="fl">0.5</span><span class="bu">f</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> SpeedProfile ProfileManager<span class="op">::</span>SPEED_PROFILE <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Speed settings - Aggressive for performance</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedStop <span class="op">=</span> <span class="dv">0</span><span class="op">,</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedStartup <span class="op">=</span> <span class="dv">100</span><span class="op">,</span>   <span class="co">// Quick startup</span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedTurn <span class="op">=</span> <span class="dv">120</span><span class="op">,</span>      <span class="co">// Fast turns</span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedBrake <span class="op">=</span> <span class="dv">140</span><span class="op">,</span>     <span class="co">// Strong braking</span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedCruise <span class="op">=</span> <span class="dv">160</span><span class="op">,</span>    <span class="co">// Fast cruising</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedSlow <span class="op">=</span> <span class="dv">180</span><span class="op">,</span>      <span class="co">// Fast slow mode</span></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedFast <span class="op">=</span> <span class="dv">200</span><span class="op">,</span>      <span class="co">// High speed</span></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedBoost <span class="op">=</span> <span class="dv">220</span><span class="op">,</span>     <span class="co">// Strong boost</span></span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedMax <span class="op">=</span> <span class="dv">255</span><span class="op">,</span>       <span class="co">// Maximum speed</span></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Control parameters - Performance focused</span></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>accelerationStep <span class="op">=</span> <span class="dv">35</span><span class="op">,</span> <span class="co">// Quick acceleration</span></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>brakeStep <span class="op">=</span> <span class="dv">70</span><span class="op">,</span>       <span class="co">// Strong braking</span></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>turnSpeed <span class="op">=</span> <span class="dv">140</span><span class="op">,</span>      <span class="co">// Fast turns</span></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>turnThreshold <span class="op">=</span> <span class="dv">40</span><span class="op">,</span>   <span class="co">// Later turn detection</span></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>straightThreshold <span class="op">=</span> <span class="dv">15</span><span class="op">,</span> <span class="co">// Quicker straight detection</span></span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>boostDuration <span class="op">=</span> <span class="dv">12</span><span class="op">,</span>   <span class="co">// Longer boost</span></span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>boostIncrement <span class="op">=</span> <span class="dv">25</span><span class="op">,</span>  <span class="co">// Strong boost</span></span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>    <span class="co">// PID parameters - Aggressive control</span></span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>kProportional <span class="op">=</span> <span class="fl">6.0</span><span class="bu">f</span><span class="op">,</span></span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>kDerivative <span class="op">=</span> <span class="fl">700.0</span><span class="bu">f</span><span class="op">,</span></span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>filterCoefficient <span class="op">=</span> <span class="fl">0.7</span><span class="bu">f</span></span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> SpeedProfile ProfileManager<span class="op">::</span>ANALYSIS_PROFILE <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Speed settings - Conservative for analysis</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedStop <span class="op">=</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedStartup <span class="op">=</span> <span class="dv">60</span><span class="op">,</span>    <span class="co">// Slower startup</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedTurn <span class="op">=</span> <span class="dv">80</span><span class="op">,</span>       <span class="co">// Careful turns</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedBrake <span class="op">=</span> <span class="dv">90</span><span class="op">,</span>      <span class="co">// Gentle braking</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedCruise <span class="op">=</span> <span class="dv">100</span><span class="op">,</span>    <span class="co">// Moderate cruising</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedSlow <span class="op">=</span> <span class="dv">120</span><span class="op">,</span>      <span class="co">// Moderate slow speed</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedFast <span class="op">=</span> <span class="dv">140</span><span class="op">,</span>      <span class="co">// Moderate fast speed</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedBoost <span class="op">=</span> <span class="dv">160</span><span class="op">,</span>     <span class="co">// Moderate boost</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedMax <span class="op">=</span> <span class="dv">180</span><span class="op">,</span>       <span class="co">// Limited top speed</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Control parameters - Smooth operation</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>accelerationStep <span class="op">=</span> <span class="dv">15</span><span class="op">,</span> <span class="co">// Gentle acceleration</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>brakeStep <span class="op">=</span> <span class="dv">40</span><span class="op">,</span>       <span class="co">// Moderate braking</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>turnSpeed <span class="op">=</span> <span class="dv">80</span><span class="op">,</span>       <span class="co">// Conservative turns</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>turnThreshold <span class="op">=</span> <span class="dv">50</span><span class="op">,</span>   <span class="co">// Earlier turn detection</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>straightThreshold <span class="op">=</span> <span class="dv">25</span><span class="op">,</span> <span class="co">// Stricter straight detection</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>boostDuration <span class="op">=</span> <span class="dv">8</span><span class="op">,</span>    <span class="co">// Short boost</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>boostIncrement <span class="op">=</span> <span class="dv">15</span><span class="op">,</span>  <span class="co">// Gentle boost</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// PID parameters - Stable control</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>kProportional <span class="op">=</span> <span class="fl">4.0</span><span class="bu">f</span><span class="op">,</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>kDerivative <span class="op">=</span> <span class="fl">500.0</span><span class="bu">f</span><span class="op">,</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>filterCoefficient <span class="op">=</span> <span class="fl">0.5</span><span class="bu">f</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> SpeedProfile ProfileManager<span class="op">::</span>SPEED_PROFILE <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Speed settings - Aggressive for performance</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedStop <span class="op">=</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedStartup <span class="op">=</span> <span class="dv">100</span><span class="op">,</span>   <span class="co">// Quick startup</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedTurn <span class="op">=</span> <span class="dv">120</span><span class="op">,</span>      <span class="co">// Fast turns</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedBrake <span class="op">=</span> <span class="dv">140</span><span class="op">,</span>     <span class="co">// Strong braking</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedCruise <span class="op">=</span> <span class="dv">160</span><span class="op">,</span>    <span class="co">// Fast cruising</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedSlow <span class="op">=</span> <span class="dv">180</span><span class="op">,</span>      <span class="co">// Fast slow mode</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedFast <span class="op">=</span> <span class="dv">200</span><span class="op">,</span>      <span class="co">// High speed</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedBoost <span class="op">=</span> <span class="dv">220</span><span class="op">,</span>     <span class="co">// Strong boost</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>speedMax <span class="op">=</span> <span class="dv">255</span><span class="op">,</span>       <span class="co">// Maximum speed</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Control parameters - Performance focused</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>accelerationStep <span class="op">=</span> <span class="dv">35</span><span class="op">,</span> <span class="co">// Quick acceleration</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>brakeStep <span class="op">=</span> <span class="dv">70</span><span class="op">,</span>       <span class="co">// Strong braking</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>turnSpeed <span class="op">=</span> <span class="dv">140</span><span class="op">,</span>      <span class="co">// Fast turns</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>turnThreshold <span class="op">=</span> <span class="dv">40</span><span class="op">,</span>   <span class="co">// Later turn detection</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>straightThreshold <span class="op">=</span> <span class="dv">15</span><span class="op">,</span> <span class="co">// Quicker straight detection</span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>boostDuration <span class="op">=</span> <span class="dv">12</span><span class="op">,</span>   <span class="co">// Longer boost</span></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>boostIncrement <span class="op">=</span> <span class="dv">25</span><span class="op">,</span>  <span class="co">// Strong boost</span></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>    <span class="co">// PID parameters - Aggressive control</span></span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>kProportional <span class="op">=</span> <span class="fl">6.0</span><span class="bu">f</span><span class="op">,</span></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>kDerivative <span class="op">=</span> <span class="fl">700.0</span><span class="bu">f</span><span class="op">,</span></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>filterCoefficient <span class="op">=</span> <span class="fl">0.7</span><span class="bu">f</span></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <blockquote class="blockquote">
 <p><strong>Implementation Note:</strong><br>
-**TODO**: These variables should be transferred to macros or constexpr’s in the configuration layer, maintaining the system’s design principles of compile-time optimization and centralized configuration.</p>
+<strong>TODO</strong>: These variables should be transferred to macros or constexpr’s in the configuration layer, maintaining the system’s design principles of compile-time optimization and centralized configuration.</p>
 </blockquote>
 <p>The translation between default values and profile-specific values is handled through the <code>getSpeedValue</code> method:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">uint8_t</span> ProfileManager<span class="op">::</span>getSpeedValue<span class="op">(</span><span class="dt">uint8_t</span> defaultSpeed<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>activeProfile <span class="op">==</span> <span class="kw">nullptr</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> defaultSpeed<span class="op">;</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Map original speed constants to profile values</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>defaultSpeed <span class="op">==</span> SPEED_STOP<span class="op">)</span> <span class="cf">return</span> activeProfile<span class="op">-&gt;</span>speedStop<span class="op">;</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>defaultSpeed <span class="op">==</span> SPEED_STARTUP<span class="op">)</span> <span class="cf">return</span> activeProfile<span class="op">-&gt;</span>speedStartup<span class="op">;</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>defaultSpeed <span class="op">==</span> SPEED_TURN<span class="op">)</span> <span class="cf">return</span> activeProfile<span class="op">-&gt;</span>speedTurn<span class="op">;</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>defaultSpeed <span class="op">==</span> SPEED_BRAKE<span class="op">)</span> <span class="cf">return</span> activeProfile<span class="op">-&gt;</span>speedBrake<span class="op">;</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>defaultSpeed <span class="op">==</span> SPEED_CRUISE<span class="op">)</span> <span class="cf">return</span> activeProfile<span class="op">-&gt;</span>speedCruise<span class="op">;</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>defaultSpeed <span class="op">==</span> SPEED_SLOW<span class="op">)</span> <span class="cf">return</span> activeProfile<span class="op">-&gt;</span>speedSlow<span class="op">;</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>defaultSpeed <span class="op">==</span> SPEED_FAST<span class="op">)</span> <span class="cf">return</span> activeProfile<span class="op">-&gt;</span>speedFast<span class="op">;</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>defaultSpeed <span class="op">==</span> SPEED_BOOST<span class="op">)</span> <span class="cf">return</span> activeProfile<span class="op">-&gt;</span>speedBoost<span class="op">;</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>defaultSpeed <span class="op">==</span> SPEED_MAX<span class="op">)</span> <span class="cf">return</span> activeProfile<span class="op">-&gt;</span>speedMax<span class="op">;</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> validateSpeed<span class="op">(</span>defaultSpeed<span class="op">);</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">uint8_t</span> ProfileManager<span class="op">::</span>getSpeedValue<span class="op">(</span><span class="dt">uint8_t</span> defaultSpeed<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>activeProfile <span class="op">==</span> <span class="kw">nullptr</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> defaultSpeed<span class="op">;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Map original speed constants to profile values</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>defaultSpeed <span class="op">==</span> SPEED_STOP<span class="op">)</span> <span class="cf">return</span> activeProfile<span class="op">-&gt;</span>speedStop<span class="op">;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>defaultSpeed <span class="op">==</span> SPEED_STARTUP<span class="op">)</span> <span class="cf">return</span> activeProfile<span class="op">-&gt;</span>speedStartup<span class="op">;</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>defaultSpeed <span class="op">==</span> SPEED_TURN<span class="op">)</span> <span class="cf">return</span> activeProfile<span class="op">-&gt;</span>speedTurn<span class="op">;</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>defaultSpeed <span class="op">==</span> SPEED_BRAKE<span class="op">)</span> <span class="cf">return</span> activeProfile<span class="op">-&gt;</span>speedBrake<span class="op">;</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>defaultSpeed <span class="op">==</span> SPEED_CRUISE<span class="op">)</span> <span class="cf">return</span> activeProfile<span class="op">-&gt;</span>speedCruise<span class="op">;</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>defaultSpeed <span class="op">==</span> SPEED_SLOW<span class="op">)</span> <span class="cf">return</span> activeProfile<span class="op">-&gt;</span>speedSlow<span class="op">;</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>defaultSpeed <span class="op">==</span> SPEED_FAST<span class="op">)</span> <span class="cf">return</span> activeProfile<span class="op">-&gt;</span>speedFast<span class="op">;</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>defaultSpeed <span class="op">==</span> SPEED_BOOST<span class="op">)</span> <span class="cf">return</span> activeProfile<span class="op">-&gt;</span>speedBoost<span class="op">;</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>defaultSpeed <span class="op">==</span> SPEED_MAX<span class="op">)</span> <span class="cf">return</span> activeProfile<span class="op">-&gt;</span>speedMax<span class="op">;</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> validateSpeed<span class="op">(</span>defaultSpeed<span class="op">);</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The Analysis Profile is designed for development and testing, with conservative speeds and gentle transitions. It prioritizes stability and predictability over raw speed, making it ideal for collecting performance data and tuning control parameters. All speed values are reduced, acceleration is gentler, and the PID parameters are tuned for stability.</p>
 <p>The Speed Profile, in contrast, is optimized for maximum performance. It uses aggressive speed settings, quick transitions, and more responsive control parameters. The PID constants are increased for faster response, and the thresholds are adjusted to maintain control at higher speeds. These profiles have not yet been tested in competition conditions.</p>
 <p>The <code>ProfileManager</code> ensures smooth operation by validating all speed values and providing fallback behaviour when no profile is active. When DEBUG_LEVEL is 0, the entire <code>ProfileManager</code> code is excluded from compilation, maintaining the efficiency of the production code.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -832,7 +889,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // **TODO** in 1.5, we should make sure this works without a callout special case
+      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -1065,6 +1122,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./testing_guide.html" class="pagination-link" aria-label="Testing Guide">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Testing Guide</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
