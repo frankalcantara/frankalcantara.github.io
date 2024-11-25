@@ -1,0 +1,671 @@
+.code
+{
+    border: none;
+    resize: none;
+    color: var(--text);
+    font-size: large;
+    box-sizing: border-box;
+    padding-left: 10px;
+    background-color: var(--main-dark);
+    width: 100%;
+    height: 100%;
+}
+
+.input-output, .pipeline-input
+{
+    border: none;
+    color: var(--text);
+    font-size: large;
+    box-sizing: border-box;
+    padding-left: 10px;
+    background-color: var(--main-dark);
+}
+
+.pipeline-input
+{
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+
+.input-output:focus
+{
+    outline: none;
+}
+
+.code:focus
+{
+    outline: none;
+}
+
+.accum
+{
+    height: 100%;
+    background-color: transparent;
+    border: solid 1px var(--text);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.accHead, .accHead-selected
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px 5px 0 0;
+    width: 100%;
+    height: 40%;
+    background-color: var(--secondary);
+}
+
+.selected-input
+{
+    color: black;
+    background-color: var(--text);
+}
+
+.accBody
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 60%;
+}
+
+.cardHead, .darkCardHead, .cardLine
+{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    min-height: 30px;
+    background-color: var(--main);
+}
+
+.cardLine
+{
+    background-color: var(--main-dark);
+}
+
+.darkCardHead
+{
+    background-color: var(--main-dark);
+}
+
+.cardHead * + *
+{
+    margin-left: 10px;
+}
+
+.cardBody
+{
+    background-color: var(--main-dark);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100% - 60px);
+}
+
+.cardPart
+{
+    width: 100%;
+    height: 79%;
+}
+
+.cardFlow
+{
+    flex-grow: 1;
+}
+
+.tableFlow
+{
+    background-color: var(--main-dark);
+    display: flex;
+    flex-grow: 1;
+}
+
+.spacer
+{
+    flex-grow: 1;
+}
+
+.lmc
+{
+    height: 96vh;
+    box-sizing: border-box;
+    padding: 2vh;
+    display: flex;
+}
+
+.switch
+{
+    margin-left: 20px;
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: var(--main);
+}
+
+.switch-active
+{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 0;
+    flex-grow: 1;
+    border-radius: 10px;
+    background-color: var(--main);
+}
+
+.switch-hidden
+{
+    display: none;
+}
+
+.runButton
+{
+    background-color: var(--main-dark);
+    border: solid 1px;
+    border-radius: 5px;
+    border-color: var(--main-light);
+    color: var(--text);
+}
+
+.runButton:hover
+{
+    cursor: pointer;
+}
+
+.cpu
+{
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    border-radius: 10px;
+    background-color: var(--main);
+}
+
+.tooltip
+{
+    position: relative;
+    /*display: inline-block;*/
+}
+
+.tooltip .tooltiptext
+{
+    visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 20px;
+    position: absolute;
+    z-index: 1;
+    top: 150%;
+    left: 50%;
+    margin-left: -1.0em;
+    width: 300%;
+}
+
+.tooltip .tooltiptext-up {
+    visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 20px;
+    position: absolute;
+    z-index: 1;
+    top: -500%;
+    left: 50%;
+    width: 300%;
+}
+
+.tooltip .tooltiptext-left {
+    visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 20px;
+    position: absolute;
+    z-index: 1;
+    top: 150%;
+    left: -100%;
+    margin-left: -1.0em;
+    width: auto;
+    max-width: 250%;
+}
+
+
+.tooltip:hover .tooltiptext, .tooltip:hover .tooltiptext-up, .tooltip:hover .tooltiptext-left
+{
+    visibility: visible;
+}
+
+.randomAcessMemory
+{
+    margin-left: 20px;
+    width: 40%;
+    border-radius: 10px;
+    background-color: var(--main);
+}
+
+.toolbar
+{
+    margin: 0;
+    flex-grow: 1;
+    box-sizing: border-box;
+    padding: 0 20px 0 20px;
+    height: 4vh;
+    display: flex;
+    font-size: small;
+    align-items: center;
+    background-color: var(--secondary);
+}
+
+.slider
+{
+    width: 20px;
+}
+
+.halfHead
+{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--main);
+    margin: 0;
+}
+
+.halfBody
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: calc(100% - 30px);
+    margin: 0;
+}
+
+.halfRow
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-grow: 1;
+    margin: 0;
+}
+
+.halfBody .code
+{
+    border: none;
+}
+
+.halfCard
+{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    margin: 0;
+}
+
+.slot
+{
+    width : calc(100%/10);
+    height: calc(100%/10);
+    padding: 0;
+    background-color: transparent;
+    border: none;
+}
+
+.slots{
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.ramTable
+{
+    background-color: var(--main-dark);
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.slotHeader, .selected-slotHeader
+{
+    padding: 0;
+    user-select: none;
+    height: 30%;
+    width: 100%;
+    display: flex;
+    font-size: small;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--main);
+}
+
+.selected-slotHeader
+{
+    color: black;
+    background-color: rgb(252, 252, 252);
+}
+
+.cache
+{
+    background-color: var(--main-dark);
+    flex-grow: 1;
+}
+
+.cache-table
+{
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.cache-table tr
+{
+    flex-grow: 1;
+    min-height: 0;
+}
+
+.cache-table th
+{
+    background-color: var(--main);
+    height: 30px;
+}
+
+.cache-table td
+{
+    border: solid 1px var(--main-light);
+}
+
+.color
+{
+    border: none;
+    background-color: transparent;
+    margin-right: 2%;
+}
+
+.flex-center
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slotBody
+{
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70%;
+    width: 100%;
+}
+
+.clearInput
+{
+    padding: 0;
+    border: solid 1px;
+    border-radius: 5px;
+    border-color: var(--main-light);
+    text-align: center;
+    color: var(--main-light);
+    width: 60%;
+    background-color: transparent;
+}
+
+.clearInput:hover
+{
+    cursor:default;
+}
+
+.configs
+{
+    height: 10.5%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.accInput
+{
+    text-align: center;
+    width: 25%;
+    height: max-content;
+    background-color: transparent !important; 
+    color: var(--text);
+    border: solid 1px;
+    background-color: var(--text);
+    border-radius: 10px;
+}
+
+.centered
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardHalf
+{
+    padding: 0;
+    border: none;
+    display: flex;
+    width: 100%;
+}
+
+.roundButton
+{
+    padding: 0;
+    height: 20px;
+    width: 20px;
+    border: none;
+    color: var(--text);
+    border-radius: 15px;
+    font-size: medium;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.has-border
+{
+    border: solid 1px var(--text);
+}
+
+.roundButton:hover
+{
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.15);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5); 
+    display: none; 
+}
+
+.overlay-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    background-color: var(--main);
+    padding: 0;
+    border-radius: 5px;
+}
+
+.pipeline-steps
+{
+    display: flex;
+    height: 60px;
+}
+
+.cpu-table
+{
+    border: none;
+}
+
+.cpu-table th
+{
+    height: 30px;
+}
+
+.cpu-table td
+{
+    height: 30px;
+    background-color: var(--main-dark);
+    border: none;
+}
+
+.info-table-body
+{
+    height: 95%;
+}
+
+.info-table-head
+{
+    height: 5%;
+}
+
+.info-table
+{
+    width: 100%;
+    height: calc(100% - 30px) !important;
+    border-collapse: collapse;
+}
+.info-table th, td
+{
+    min-height: calc(100% / 12);
+    border: 1px solid var(--main-light);
+    text-align: left;
+}
+.info-table th
+{
+    text-align: center;
+}
+
+.info-table td
+{
+    box-sizing: border-box;
+    padding-left: 15px;
+}
+
+.active-tab, .other-tab
+{
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    flex-grow: 1;
+    height: 100%;
+    color: var(--text);
+    background-color: var(--main);
+    border-radius: 10px 10px 0 0;
+    border: none;
+}
+
+.other-tab
+{
+    background-color: var(--main-dark);
+}
+
+.active-tab:hover, .other-tab:hover
+{
+    cursor: pointer;
+}
+
+.hText
+{
+    color: var(--header);
+}
+
+.title
+{
+    font-size: large;
+}
+
+.ram-pipeline
+{
+    width    : 100%;
+    flex-grow: 1;
+    display  : flex
+}
+
+.step
+{
+    width: 25%;
+    flex-grow: 1;
+}
+
+.step-body
+{
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.switch-left-active,
+.switch-right-active,
+.switch-left-inactive,
+.switch-right-inactive
+{
+    border: none;
+    color: var(--header);
+    border-radius: 10px 0 0 10px;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.switch-right-active,
+.switch-right-inactive
+{
+    border-radius: 0 10px 10px 0;
+}
+
+.switch-right-inactive,
+.switch-left-inactive
+{
+    border: none;
+    color: var(--main-light);
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.switch-left-active:hover,
+.switch-right-active:hover,
+.switch-left-inactive:hover,
+.switch-right-inactive:hover
+{
+    cursor: pointer;
+}
+
+select
+{
+    background-color: var(--main);
+    color: var(--text);
+    border: solid 1px var(--main-light);
+    border-radius: 5px;
+}
+
+option:checked:hover
+{
+    background-color: var(--main);
+}

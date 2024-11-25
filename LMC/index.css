@@ -1,0 +1,34 @@
+/* Variables */
+:root
+{
+    --background: #232323;
+    --main      : #3b3b40;
+    --main-dark : #2f2f33;
+    --main-light: #938e8e;
+    --secondary : #464D7B;
+    --text      : #ffffff;
+    --header    : #ffffff;
+}
+
+html
+{
+    color: var(--text);
+}
+
+body
+{
+    overflow: hidden;
+    margin: 0;
+    background-color: var(--background);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+textarea
+{
+    -webkit-user-modify: read-write-plaintext-only;
+}
+
+table
+{
+    border-collapse: collapse;
+}
