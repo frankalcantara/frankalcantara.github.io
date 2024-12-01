@@ -34,15 +34,14 @@ featured: true
 toc: true
 preview: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de currying e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de currying e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2024-12-01T21:22:58.578Z
+lastmod: 2024-12-01T21:30:23.811Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
 # 1. Introdução, História e Motivações e Limites
 
 >Todos os exercícios desta página foram removidos.
->Os exercícios estarão disponíveis apenas no livro que está sendo escrito. 
- 
+>Os exercícios estarão disponíveis apenas no livro que está sendo escrito.
 
 O cálculo lambda é uma teoria formal para expressar computação por meio da visão de funções como fórmulas. Um sistema para manipular funções como sentenças, desenvolvido por [Alonzo Church](https://en.wikipedia.org/wiki/Alonzo_Church) sob uma visão extensionista das funções na década de 1930. Nesta teoria usamos funções para representar todos os dados e operações. Em cálculo lambda, tudo é uma função e uma função simples é parecida com:
 
@@ -115,8 +114,8 @@ No cálculo lambda, uma função é escrita como $\lambda x.\;E\,$. Aqui, $\lamb
 >
 > Seja $f$ uma função no cálculo lambda. Dizemos que $f$ é uma função de ordem superior se:
 >
-> 1.  $f$ aceita uma função como argumento.
-> 2.  $f$ retorna uma função como resultado.
+> 1. $f$ aceita uma função como argumento.
+> 2. $f$ retorna uma função como resultado.
 >
 > No cálculo lambda puro, as funções são anônimas. No entanto, em contextos de programação funcional, é comum nomear funções de ordem superior para facilitar seu uso e identificação em operações complexas. Vamos tomar esta licença poética, importada da programação funcional, de forma livre e temerária em todo este texto. Sempre que agradar ao pobre autor.
 >
@@ -222,15 +221,15 @@ O **Sistema F** é utilizado na teoria da tipagem em linguagens de programação
 
 A atenta leitora deve ter percebido que o cálculo lambda não é um conceito teórico abstrato; ele possui implicações práticas, especialmente na programação funcional. Linguagens como Lisp, Haskell, OCaml e F# incorporam princípios do cálculo lambda. Exemplos incluem:
 
-1.  **Funções como cidadãos de primeira classe**: No cálculo lambda, funções são valores. Podem ser passadas como argumentos, retornadas como resultados e manipuladas livremente. Isso é um princípio central da programação funcional, notadamente em Haskell.
+1. **Funções como cidadãos de primeira classe**: No cálculo lambda, funções são valores. Podem ser passadas como argumentos, retornadas como resultados e manipuladas livremente. Isso é um princípio central da programação funcional, notadamente em Haskell.
 
-2.  **Funções de ordem superior**: O cálculo lambda permite a criação de funções que operam sobre outras funções. Isso se traduz em conceitos aplicados em funções como `map`, `filter` e `reduce` em linguagens funcionais.
+2. **Funções de ordem superior**: O cálculo lambda permite a criação de funções que operam sobre outras funções. Isso se traduz em conceitos aplicados em funções como `map`, `filter` e `reduce` em linguagens funcionais.
 
-3.  **currying**: A técnica de transformar uma função com múltiplos argumentos em uma sequência de funções de um único argumento é natural no cálculo lambda e no Haskell e em outras linguagens funcionais.
+3. **currying**: A técnica de transformar uma função com múltiplos argumentos em uma sequência de funções de um único argumento é natural no cálculo lambda e no Haskell e em outras linguagens funcionais.
 
-4.  **Avaliação preguiçosa (*lazy*)**: Embora não faça parte do cálculo lambda puro, a semântica de redução do cálculo lambda, notadamente a estratégia de redução normal inspirou o conceito de avaliação preguiçosa em linguagens como Haskell.
+4. **Avaliação preguiçosa (*lazy*)**: Embora não faça parte do cálculo lambda puro, a semântica de redução do cálculo lambda, notadamente a estratégia de redução normal inspirou o conceito de avaliação preguiçosa em linguagens como Haskell.
 
-5.  **Recursão**: Definir funções recursivas é essencial em programação funcional. No cálculo lambda, isso é feito com combinadores de ponto fixo.
+5. **Recursão**: Definir funções recursivas é essencial em programação funcional. No cálculo lambda, isso é feito com combinadores de ponto fixo.
 
 ## 1.3. Representação de Valores e Computações
 
@@ -3281,7 +3280,7 @@ Vamos detalhar cada passo das reduções:
 
 2.  Avaliando $\text{isZero}\;2$:
 
-```         
+```
  $$\begin{align*}
  \text{isZero}\;2 &= (\lambda n.\;n\;(\lambda x.\;\text{false})\;\text{true})\;(\lambda s.\lambda z.\;s\;(s\;z)) \\
  &\to_\beta (\lambda s.\lambda z.\;s\;(s\;z))\;(\lambda x.\;\text{false})\;\text{true} \\
@@ -3294,12 +3293,10 @@ Vamos detalhar cada passo das reduções:
  &= \text{mult}\;2\;(\text{fatorial}\;(\text{pred}\;2)) \\
  &= \text{mult}\;2\;(\text{fatorial}\;1) \quad \text{(pois mostramos anteriormente que $\text{pred}\;2 = 1$)}
  \end{align*}$$
-```
 
 3.  Para $\text{fatorial}\;1$, primeiro avaliamos $\text{isZero}\;1$:
 
-```         
- $$\begin{align*}
+$$\begin{align*}
  \text{isZero}\;1 &= (\lambda n.\;n\;(\lambda x.\;\text{false})\;\text{true})\;(\lambda s.\lambda z.\;s\;z) \\
  &\to_\beta (\lambda s.\lambda z.\;s\;z)\;(\lambda x.\;\text{false})\;\text{true} \\
  &\to_\beta \text{false}
@@ -3311,12 +3308,10 @@ Vamos detalhar cada passo das reduções:
  \text{fatorial}\;1 &= \text{mult}\;1\;(\text{fatorial}\;(\text{pred}\;1)) \\
  &= \text{mult}\;1\;(\text{fatorial}\;0) \quad \text{(pois $\text{pred}\;1 = 0$)}
  \end{align*}$$
-```
 
 4.  Para $\text{fatorial}\;0$, avaliamos $\text{isZero}\;0$:
 
-```         
- $$\begin{align*}
+$$\begin{align*}
  \text{isZero}\;0 &= (\lambda n.\;n\;(\lambda x.\;\text{false})\;\text{true})\;(\lambda s.\lambda z.\;z) \\
  &\to_\beta (\lambda s.\lambda z.\;z)\;(\lambda x.\;\text{false})\;\text{true} \\
  &\to_\beta \text{true}
@@ -3324,12 +3319,10 @@ Vamos detalhar cada passo das reduções:
 
  Como retornou $\text{true}$, temos:
  $$\text{fatorial}\;0 = 1$$
-```
 
 5.  Agora substituímos de volta:
 
-```         
- $$\begin{align*}
+$$\begin{align*}
  \text{fatorial}\;1 &= \text{mult}\;1\;(\text{fatorial}\;0) \\
  &= \text{mult}\;1\;1 \\
  &= 1 \quad \text{(pela definição de $\text{mult}$)}
@@ -3342,7 +3335,6 @@ Vamos detalhar cada passo das reduções:
  &= \text{mult}\;2\;1 \\
  &= 2 \quad \text{(pela definição de $\text{mult}$)}
  \end{align*}$$
-```
 
 Assim, mostramos que $\text{fatorial}\;2 = 2$, mostrando cada passo da recursão e como os valores são calculados de volta até o resultado final. A função fatorial é um exemplo clássico de recursão. Mas, não é a única.
 
@@ -3354,8 +3346,7 @@ Assim como fizemos no fatorial, o combinador $Y$ irá permitir a definição rec
 
 1.  Primeira aplicação ($n = 2$):
 
-```         
- $$\begin{align*}
+$$\begin{align*}
  \text{power}\;2\;2 &= \text{if}\;(\text{isZero}\;2)\;1\;(\text{mult}\;2\;(\text{power}\;2\;(\text{pred}\;2))) \\
  \\
  \text{isZero}\;2 &= (\lambda n.\;n\;(\lambda x.\;\text{false})\;\text{true})\;(\lambda s.\lambda z.\;s\;(s\;z)) \\
@@ -3366,73 +3357,62 @@ Assim como fizemos no fatorial, o combinador $Y$ irá permitir a definição rec
  Como $\text{isZero}\;2$ retorna $\text{false}$, continuamos:
 
  $$= \text{mult}\;2\;(\text{power}\;2\;(\text{pred}\;2))$$
-```
 
 2.  Calculando $\text{pred}\;2$:
 
-```         
- $$\begin{align*}
+$$\begin{align*}
  \text{pred}\;2 &\to_\beta 1 \quad \text{(como mostramos anteriormente)}
  \end{align*}$$
-```
 
 3.  Segunda aplicação ($n = 1$):
 
-```         
- $$\begin{align*}
- \text{power}\;2\;1 &= \text{if}\;(\text{isZero}\;1)\;1\;(\text{mult}\;2\;(\text{power}\;2\;(\text{pred}\;1))) \\
- \\
- \text{isZero}\;1 &= (\lambda n.\;n\;(\lambda x.\;\text{false})\;\text{true})\;(\lambda s.\lambda z.\;s\;z) \\
- &\to_\beta (\lambda s.\lambda z.\;s\;z)\;(\lambda x.\;\text{false})\;\text{true} \\
- &\to_\beta \text{false}
- \end{align*}$$
+$$\begin{align*}
+\text{power}\;2\;1 &= \text{if}\;(\text{isZero}\;1)\;1\;(\text{mult}\;2\;(\text{power}\;2\;(\text{pred}\;1))) \\
+\\
+\text{isZero}\;1 &= (\lambda n.\;n\;(\lambda x.\;\text{false})\;\text{true})\;(\lambda s.\lambda z.\;s\;z) \\
+&\to_\beta (\lambda s.\lambda z.\;s\;z)\;(\lambda x.\;\text{false})\;\text{true} \\
+&\to_\beta \text{false}
+\end{align*}$$
 
- Como $\text{isZero}\;1$ retorna $\text{false}$, continuamos:
+Como $\text{isZero}\;1$ retorna $\text{false}$, continuamos:
 
- $$= \text{mult}\;2\;(\text{power}\;2\;(\text{pred}\;1))$$
-```
+$$= \text{mult}\;2\;(\text{power}\;2\;(\text{pred}\;1))$$
 
 4.  Calculando $\text{pred}\;1$:
 
-```         
- $$\begin{align*}
- \text{pred}\;1 &\to_\beta 0
- \end{align*}$$
-```
+$$\begin{align*}
+\text{pred}\;1 &\to_\beta 0
+\end{align*}$$
 
 5.  Terceira aplicação ($n = 0$):
 
-```         
- $$\begin{align*}
- \text{power}\;2\;0 &= \text{if}\;(\text{isZero}\;0)\;1\;(\text{mult}\;2\;(\text{power}\;2\;(\text{pred}\;0))) \\
- \\
- \text{isZero}\;0 &= (\lambda n.\;n\;(\lambda x.\;\text{false})\;\text{true})\;(\lambda s.\lambda z.\;z) \\
- &\to_\beta (\lambda s.\lambda z.\;z)\;(\lambda x.\;\text{false})\;\text{true} \\
- &\to_\beta \text{true}
- \end{align*}$$
+$$\begin{align*}
+\text{power}\;2\;0 &= \text{if}\;(\text{isZero}\;0)\;1\;(\text{mult}\;2\;(\text{power}\;2\;(\text{pred}\;0))) \\
+\\
+\text{isZero}\;0 &= (\lambda n.\;n\;(\lambda x.\;\text{false})\;\text{true})\;(\lambda s.\lambda z.\;z) \\
+&\to_\beta (\lambda s.\lambda z.\;z)\;(\lambda x.\;\text{false})\;\text{true} \\
+&\to_\beta \text{true}
+\end{align*}$$
 
- Como $\text{isZero}\;0$ retorna $\text{true}$:
+Como $\text{isZero}\;0$ retorna $\text{true}$:
 
- $$\text{power}\;2\;0 = 1$$
-```
+$$\text{power}\;2\;0 = 1$$
 
 6.  Substituindo de volta:
 
-```         
- $$\begin{align*}
- \text{power}\;2\;1 &= \text{mult}\;2\;(\text{power}\;2\;0) \\
- &= \text{mult}\;2\;1 \\
- &\to_\beta 2
- \end{align*}$$
+$$\begin{align*}
+\text{power}\;2\;1 &= \text{mult}\;2\;(\text{power}\;2\;0) \\
+&= \text{mult}\;2\;1 \\
+&\to_\beta 2
+\end{align*}$$
 
- E finalmente:
+E, finalmente:
 
- $$\begin{align*}
- \text{power}\;2\;2 &= \text{mult}\;2\;(\text{power}\;2\;1) \\
- &= \text{mult}\;2\;2 \\
- &\to_\beta 4
- \end{align*}$$
-```
+$$\begin{align*}
+\text{power}\;2\;2 &= \text{mult}\;2\;(\text{power}\;2\;1) \\
+&= \text{mult}\;2\;2 \\
+&\to_\beta 4
+\end{align*}$$
 
 Assim, mostramos que $\text{power}\;2\;2 = 4$, ou seja, $2^2 = 4$ em números de Church.
 
@@ -4578,7 +4558,7 @@ Para definirmos uma lista precisamos do conceito de lista vazia, que aqui será 
 
     O construtor recebe um elemento $h$ e uma lista $t\,$, e cria uma nova lista com $h$ na frente de $t\,$.
 
-O termo $\text{cons}\,$ é, uma função de ordem superior e, como tal, não faz parte do cálculo lambda puro. Porém, facilita a visualização dos processos de apicação e substituição e, consequentemente seu entendimento. Com $\text{nil}$ e $\text{cons}\,$, podemos criar e manipular listas. Por exemplo, a lista $[1, 2, 3]$ será representada como:
+O termo $\text{cons}\,$ é, uma função de ordem superior e, como tal, não faz parte do cálculo lambda puro. Porém, facilita a visualização dos processos de aplicação e substituição e, consequentemente seu entendimento. Com $\text{nil}$ e $\text{cons}\,$, podemos criar e manipular listas. Por exemplo, a lista $[1, 2, 3]$ será representada como:
 
 $$\text{cons}\;1\;(\text{cons}\;2\;(\text{cons}\;3\;\text{nil}))$$
 
