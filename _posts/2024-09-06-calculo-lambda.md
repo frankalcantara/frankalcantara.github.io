@@ -34,7 +34,7 @@ featured: true
 toc: true
 preview: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de currying e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de currying e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2024-12-01T21:30:23.811Z
+lastmod: 2024-12-01T21:33:51.371Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -189,7 +189,7 @@ $$(\lambda f. \lambda x.\;f\;(f\;x))\;(\lambda y.\;y * 2)\;3$$
 
 Neste caso, temos uma função de composição dupla é aplicada à função que multiplica valores por dois e, em seguida, ao número $3\,$, resultando em $12\,$.
 
-Em resumo, **a abstração define uma função ao associar um parâmetro a um corpo de expressão; enquanto a aplicação avalia essa função ao fornecer um argumento**. Ambas operações são independentes, mas mas interagem para permitir a avaliação de expressões no cálculo lambda.
+Em resumo, **a abstração define uma função ao associar um parâmetro a um corpo de expressão; enquanto a aplicação avalia essa função ao fornecer um argumento**. Ambas operações são independentes, mas interagem para permitir a avaliação de expressões no cálculo lambda.
 
 O elo entre abstração e aplicação é uma forma de avaliação chamada redução-$beta\,$. Dada uma abstração $λ\,$, $λx:M$ e algum outro termo $N\,$, pensado como um argumento, temos a regra de avaliação, chamada redução-$beta$ dada por:
 
@@ -276,7 +276,7 @@ A **Tese de Church-Turing** formalizou essa ideia, afirmando que qualquer funç�
 
 ## 1.4. Limitações do Cálculo Lambda e Sistemas Avançados
 
-O cálculo lambda é poderoso. Ele pode expressar qualquer função computável. Mas tem limitações: **não tem tipos nativos** ou qualquer sistema de tipos. Tudo é função. Números, booleanos, estruturas de dados são codificados como funções; **Não tem estado mutável**. cada expressão produz um novo resultado. Não modifica valores existentes. Isso é uma vantagem em alguns cenários, mas agrega complexidade a definição de algoritmos; **não tem controle de fluxo direto**, *Loops* e condicionais são simulados com funções recursivas.
+O cálculo lambda é poderoso. Ele pode expressar qualquer função computável. Mas tem limitações: **não tem tipos nativos** ou qualquer sistema de tipos. Tudo é função. Números, booleanos, estruturas de dados são codificados como funções; **Não tem estado mutável**. cada expressão produz um novo resultado. Não modifica valores existentes. Isso é uma vantagem em alguns cenários, mas agrega complexidade à definição de algoritmos; **não tem controle de fluxo direto**, *Loops* e condicionais são simulados com funções recursivas.
 
 Apesar de o cálculo lambda ser chamado de *a menor linguagem de programação* a criação de algoritmos sem controle de fluxo não é natural para programadores, ou matemáticos, nativos do mundo imperativo.
 
@@ -2294,9 +2294,9 @@ No cálculo lambda as funções são anônimas. Desta forma, sempre é possível
 
 $$\lambda x.\;(\lambda y.\;y)\;x$$
 
-A abstração lambda a cima, representa uma função que aplica a função identidade ao seu argumento $x\,$. Nesse caso, a função interna $\lambda y.\;y$ é aplicada ao argumento $x\,$, e o valor resultante é simplesmente $x\,$, já que a função interna é a identidade. Estas funções inspiraram a criação de funções anônimas e alguns operadores em linguagens de programação imperativas. Como as funções *arrow* em JavaScript ou às funções *lambdas* em C++ e Python.
+A abstração lambda acima, representa uma função que aplica a função identidade ao seu argumento $x\,$. Nesse caso, a função interna $\lambda y.\;y$ é aplicada ao argumento $x\,$, e o valor resultante é simplesmente $x\,$, já que a função interna é a identidade. Estas funções inspiraram a criação de funções anônimas e alguns operadores em linguagens de programação imperativas. Como as funções *arrow* em JavaScript ou às funções *lambdas* em C++ e Python.
 
-Os combinadores ampliam a utilidade das funções lambda permitem a criação de funções complexas sem o uso de variáveis nomeadas. Esse processo, conhecido como *abstração combinatória*, elimina a necessidade de variáveis explícitas, focando em operações com funções. Podemos ver um exemplo de combinador de composição, denotado como $B\,$, definido por:
+Os combinadores ampliam a utilidade das funções lambda e permitem a criação de funções complexas sem o uso de variáveis nomeadas. Esse processo, conhecido como *abstração combinatória*, elimina a necessidade de variáveis explícitas, focando em operações com funções. Podemos ver um exemplo de combinador de composição, denotado como $B\,$, definido por:
 
 $$B = \lambda f.\lambda g.\lambda x.\;f\;(g\;x)$$
 
@@ -2308,7 +2308,7 @@ $$M = \lambda f.\;f\;f$$
 
 Sua função é replicar a aplicação de uma função sobre si mesma, o que é fundamental em certas construções dentro do cálculo lambda, mas não se relaciona com o comportamento do combinador de composição.
 
-Mesmo correndo o risco de ser redundante e óbvio preciso destacar que combinadores podem ser combinados. A expressão $S\;(K\;S)\;K$ é uma combinação de combinadores que possui um comportamento interessante. Podemos a analisar a estrutura do termo $S\;(K\;S)\;K$ observando que: o combinador $S$ é definido como $S = \lambda f.\lambda g.\lambda x.\;f\;x\;(g\;x)\,$, que aplica a função $f$ ao argumento $x\,$, e depois aplica $g$ ao mesmo argumento $x\,$, combinando os resultados; e o combinador $K$ é definido como $K = \lambda x.\lambda y.\;x\,$, que retorna sempre o primeiro argumento, ignorando o segundo. Voltando ao termo original:
+Mesmo correndo o risco de ser redundante e óbvio, é preciso destacar que combinadores podem ser combinados. A expressão $S\;(K\;S)\;K$ é uma combinação de combinadores que possui um comportamento interessante. Podemos a analisar a estrutura do termo $S\;(K\;S)\;K$ observando que: o combinador $S$ é definido como $S = \lambda f.\lambda g.\lambda x.\;f\;x\;(g\;x)\,$, que aplica a função $f$ ao argumento $x\,$, e depois aplica $g$ ao mesmo argumento $x\,$, combinando os resultados; e o combinador $K$ é definido como $K = \lambda x.\lambda y.\;x\,$, que retorna sempre o primeiro argumento, ignorando o segundo. Voltando ao termo original:
 
 $$S\;(K\;S)\;K$$
 
