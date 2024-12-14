@@ -723,7 +723,7 @@ Neste exemplo, se realizássemos a substituição diretamente, a variável livre
 
 2.  **Substituição**: Aplicamos $[y/x]\;(x)\,$, resultando em $y\,$.
 
-3.  **Resultado Final**: A expressão torna-se $\lambda z.\;y \,$, e $y$ permanece livre.
+3.  **Resultado**: A expressão torna-se $\lambda z.\;y \,$, e $y$ permanece livre.
 
 Evitamos a captura da variável livre $y$ pela abstração lambda.
 
@@ -737,7 +737,7 @@ Neste caso, a substituição direta capturaria a variável livre $w$ em $x\,$. P
 
 2.  **Substituição**: Aplicamos $[w/x]\;(x)\,$, resultando em $w\,$.
 
-3.  **Resultado Final**: A expressão fica $\lambda v.\;w\,$, mantendo $w$ como variável livre.
+3.  **Resultado**: A expressão fica $\lambda v.\;w\,$, mantendo $w$ como variável livre.
 
 Assim, garantimos que a variável livre $w$ não seja capturada, preservando o significado original da expressão.
 
@@ -924,7 +924,7 @@ No código Haskell, este caso seria processado da seguinte forma:
 
 3.  **Realizar a Substituição**: substituímos `x` por `y` no corpo renomeado.
 
-4.  **Resultado Final**: a expressão resultante é `\lambda z.\;y`, e `y` permanece livre.
+4.  **Resultado**: a expressão resultante é `\lambda z.\;y`, e `y` permanece livre.
 
 Neste ponto, se a amável leitora se perdeu no Haskell, deve voltar as definições formais da substituição e tentar fazer o paralelo entre as definições formais e o código em Haskell. A importância desta implementação está na demonstração de como os conceitos teóricos do cálculo lambda podem ser traduzidos para código executável, fornecendo uma ponte entre a teoria e a prática.
 
@@ -3336,7 +3336,7 @@ $$\begin{align*}
  &= 2 \quad \text{(pela definição de $\text{mult}$)}
  \end{align*}$$
 
-Assim, mostramos que $\text{fatorial}\;2 = 2$, mostrando cada passo da recursão e como os valores são calculados de volta até o resultado final. A função fatorial é um exemplo clássico de recursão. Mas, não é a única.
+Assim, mostramos que $\text{fatorial}\;2 = 2$, mostrando cada passo da recursão e como os valores são calculados de volta até o Resultado. A função fatorial é um exemplo clássico de recursão. Mas, não é a única.
 
 Podemos definir uma função de exponenciação recursiva, para calcular $m^n$ usando o cálculo lambda, como:
 

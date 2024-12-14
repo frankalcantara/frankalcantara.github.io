@@ -455,9 +455,9 @@ Considere $\vec{A}=\vec{a}_x-3\, \vec{a}_y+\, \vec{a}_z$ e $\vec{B}=1\, \vec{a}_
 
 A consistência ressalta a beleza da matemática. As operações de adição e subtração de vetores obedecem a um conjunto de  propriedades matemáticas que garantem a consistência destas operações. Para tanto, considere os vetores $\vec{A}$, $\vec{B}$ e $\vec{B}$, e o escalar $m$:
 
-1. **comutatividade da adição de vetores:** a ordem dos vetores na adição não afeta o resultado final. Portanto, $\vec{A} + \vec{B} = \vec{B} + \, \vec{a}$. A subtração, entretanto, não é comutativa, ou seja, $\vec{A} - \vec{B} ≠ \vec{B} - \vec{A}$. A comutatividade é como uma dança onde a ordem dos parceiros não importa. Neste caso, subtrair não é como dançar e a ordem importa.
+1. **comutatividade da adição de vetores:** a ordem dos vetores na adição não afeta o Resultado. Portanto, $\vec{A} + \vec{B} = \vec{B} + \, \vec{a}$. A subtração, entretanto, não é comutativa, ou seja, $\vec{A} - \vec{B} ≠ \vec{B} - \vec{A}$. A comutatividade é como uma dança onde a ordem dos parceiros não importa. Neste caso, subtrair não é como dançar e a ordem importa.
 
-2. **associatividade da adição de vetores:** a forma como os vetores são agrupados na adição não afeta o resultado final. Assim, $(\vec{A} + \vec{B}) + \vec{C} = \vec{A} + (\vec{B} + \vec{C})$. A associatividade é como um grupo de amigos que se reúne. Não importa a ordem de chegada o resultado é uma festa. A subtração, entretanto, não é associativa, ou seja, $(\vec{A} - \vec{B}) - \vec{C} ≠ \vec{A} - (\vec{B} - \vec{C})$.
+2. **associatividade da adição de vetores:** a forma como os vetores são agrupados na adição não afeta o Resultado. Assim, $(\vec{A} + \vec{B}) + \vec{C} = \vec{A} + (\vec{B} + \vec{C})$. A associatividade é como um grupo de amigos que se reúne. Não importa a ordem de chegada o resultado é uma festa. A subtração, entretanto, não é associativa, ou seja, $(\vec{A} - \vec{B}) - \vec{C} ≠ \vec{A} - (\vec{B} - \vec{C})$.
 
 3. **Distributividade da multiplicação por escalar em relação à adição de vetores:** Se você multiplicar a soma de dois vetores por um escalar, o resultado será o mesmo que se você multiplicar cada vetor pelo escalar e somar os resultados. Isto é, $m(\vec{A} + \vec{B}) = m\vec{A} + m\vec{B}$.
 
