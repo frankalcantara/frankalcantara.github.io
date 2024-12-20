@@ -15,7 +15,9 @@ preview: um estudo novo sobre uma das normas mais importantes e menos conhecidas
 featured: false
 rating: 3.5
 slug: precisao-realidade-os-desafios-da-norma-ieee-754-na-computacao-moderna
-lastmod: 2024-11-19T02:07:38.279Z
+lastmod: 2024-12-20T20:07:28.436Z
+date: 2024-12-20T20:07:14.934Z
+published: true
 ---
 
 A memória é escassa, limitada, insuficiente e inteira. O arredondamento de números reais é inevitável, levantando um dilema sobre a extensão da informação a ser armazenada e os métodos de armazenamento. A eficiência computacional é primordial na solução dos problemas concretos que enfrentamos todos os dias. A utilização de normas para a representação números reais na forma de ponto flutuante surgiu como uma resposta. Este artigo desvelará sua funcionalidade e os desafios que esta representação impõe.
