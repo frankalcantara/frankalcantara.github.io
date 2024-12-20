@@ -15,15 +15,15 @@ featured: false
 rating: 5
 description: Tradução de dois artigos de Georg Cantor para o português como falado no Brasil.
 date: 2024-12-19T20:42:55.811Z
-preview: Para colocar ordem na casa, a tradução de dois artigos de Georg Cantor sobre a não numerabilidade dos númreos reais.
+preview: Para colocar ordem na casa, a tradução de dois artigos de Georg Cantor sobre a não numerabilidade dos números reais.
 keywords: |-
     Georg Cantor
     Diagonalização
     Computabilidade
 toc: false
 published: true
-beforetoc: Para colocar ordem na casa, a tradução de dois artigos de Georg Cantor sobre a não numerabilidade dos númreos reais.
-lastmod: 2024-12-19T20:44:29.809Z
+beforetoc: Para colocar ordem na casa, a tradução de dois artigos de Georg Cantor sobre a não numerabilidade dos números reais.
+lastmod: 2024-12-20T20:08:36.484Z
 ---
 
 Triste é a sina de quem pretende entender. 
