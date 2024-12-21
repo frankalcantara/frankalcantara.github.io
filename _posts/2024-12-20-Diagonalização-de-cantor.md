@@ -26,7 +26,7 @@ beforetoc: Para colocar ordem na casa, a tradução de dois artigos de Georg Can
 lastmod: 2024-12-20T20:08:36.484Z
 ---
 
-Triste é a sina de quem pretende entender. 
+Triste é a sina de quem pretende entender.
 
 Enquanto escrevia o livro sobre cálculo lambda, me deparei com alguns problemas surpreendentes. Não imaginava quanto seria difícil encontrar a sequência dos fatos que levaram a criação da ciência da computação.
 
