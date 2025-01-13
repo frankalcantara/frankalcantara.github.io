@@ -25,7 +25,7 @@ keywords: |
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-01-13T16:45:41.066Z
+lastmod: 2025-01-13T17:23:07.057Z
 slug: como-ganhar-na-lotofacil-usando-inteligencia-artificial
 ---
 
@@ -54,13 +54,11 @@ AS probabilidades de acertar na Lotofácil são muito maiores que as probabilida
 
 Mesmo sendo tão mais fácil, até 20 de dezembro de 2024, eu consegui apenas 11 pontos em um cartão, em todos que eu joguei. Em minha defesa, eu não jogo muito. Uma vez ou outra, quando a Megasena passa de 50 milhões acumulados, eu jogo um ou dois cartões, aposta mínima na Lotofácil.
 
-No dia 20 de dezembro de 2024, eu rodei este script pela primeira vez, joguei dez cartões acertei 2 de 13 pontos e quatro de 11 pontos. Isso não quer dizer nada. Nenhuma garantia, nenhum indicativo, nenhuma chance. Nada! Pura coincidência. Mas, eu fiquei bem feliz.
+No dia 20 de dezembro de 2024, eu rodei este script pela primeira vez, joguei dez cartões acertei 1 de 12 pontos e quatro de 11 pontos. *Isso não quer dizer nada. Nenhuma garantia, nenhum indicativo, nada*. Nada! Pura coincidência! Mas, eu fiquei bem feliz. E curioso. E atrevido. Aquela pulga atrás a orelha dizendo: será?
 
-E curioso. E atrevido.
+Meu histórico: tenho acertado 11, ou 12 números, todas as vezes que jogo depois do dia 20 de dezembro. Joguei 100 cartões em 10 dias com 5 cartões de 12 e 11 cartões de 11 pontos em dias diferentes. Eu jogo, quando jogo, 10 cartões, dez cartões de uma vez. Além disso, todas as vezes que vou jogar modifico um pouco a rede neural que criei.
 
-Tenho acertado 11, 12 ou 13 números, todas as vezes que jogo depois do dia 20 de dezembro. Joguei 100 cartões em 10 dias e 1 cartão de 13,  2 cartões de 12 e 7 cartões de 11 pontos em dias diferentes. Eu jogo, quando jogo, 10 cartões, dez cartões de uma vez.
-
-Estou perdendo, sem pensar muito, nem fazer muitas contas, joguei R$300,00 e tem R$126,79 na conta bitcoin do Mercado Pago onde resgato todos os prêmios que ganho. Estou perdendo, feito. Isso é um péssimo investimento. Entretanto, nunca tinha ganho nada. Além disso, coincidências me irritam.
+Estou perdendo, sem fazer muitas contas, joguei aproximadamente R$300,00 e tem R$126,79 em uma conta que criei só para manter os valores dos prêmios ganhos. *Estou perdendo, feito.* Pensa em um investimento ruim. Entretanto, coincidências me irritam.
 
 O Gibbs disse que coincidências não existem, se não me engano é a regra 39. Então, vamos estudar isso:
 
@@ -71,7 +69,9 @@ Para calcular as chances de obter exatamente 11, 12, 13 ou 14 pontos na Lotofác
 A probabilidade de obter exatamente $k$ acertos (pontos) em uma única cartela é dada por:
 
 $$
+\begin{equation}
 P(X=k) = \frac{\binom{15}{k} \times \binom{10}{15-k}}{\binom{25}{15}}
+\end{equation}
 $$
 
 Onde $\binom{n}{k}$ é a combinação de $n$ elementos tomados $k$ a $k$.
@@ -102,7 +102,7 @@ $$
 P(X=14) = \frac{\binom{15}{14} \times \binom{10}{1}}{\binom{25}{15}} \approx 0,000003 \text{ ou } 0,0003\%
 $$
 
-Eu jogo 10 cartões de 15 de cada vez. Será que isso tem algum impacto na minha chance.
+Eu jogo 10 cartões de 15 de cada vez. Será que isso tem algum impacto na minha chance de ganhar?
 
 ## Considerando 10 Cartões Diferentes Em cada Aposta
 
@@ -132,18 +132,9 @@ $$
 P(\text{pelo menos uma cartela com 14 pontos}) \approx 10 \times 0,000003 = 0,00003 \text{ ou } 0,003\%
 $$
 
-Em resumo temos:
-
-- 11 pontos: Aproximadamente 0,344%
-- 12 pontos: Aproximadamente 0,115%
-- 13 pontos: Aproximadamente 0,024%
-- 14 pontos: Aproximadamente 0,003%
-
 ## Analisando os Meus Resultados
 
-Em 300 cartões eu acertei: 1 cartão de 13,  2 cartões de 12 e 7 cartões de 11 pontos. Aqui eu larguei a calculadora, abri o VSCode e o claude.ai e providenciei um código em Python para calcular a chance de ter obtido os resultados que tive
-
-Esse cálculo considera que eu joguei 100 cartões e obtive:
+Em 300 cartões eu acertei: 5 cartões de 12 e 11 cartões de 11 pontos. Para entender isso, eu larguei a calculadora, abri o VSCode e o claude.ai e providenciei um código em Python para calcular a chance de ter obtido os resultados que tive. O cálculo considera:
 
 - 0 cartão com 13 pontos;
 - 5 cartões com 12 pontos;
@@ -152,18 +143,20 @@ Esse cálculo considera que eu joguei 100 cartões e obtive:
 
 As probabilidades individuais usadas são:
 
-- $P(13\text{ pontos}) = 2.4 \times 10^{-5}$
-- $P(12\text{ pontos}) = 1.15 \times 10^{-4}$
-- $P(11\text{ pontos}) = 3.44 \times 10^{-4}$
-- $P(\text{outros}) = 1 - P(13) - P(12) - P(11)$
+1. $P(13\text{ pontos}) = 2.4 \times 10^{-5}$;
+2. $P(12\text{ pontos}) = 1.15 \times 10^{-4}$;
+3. $P(11\text{ pontos}) = 3.44 \times 10^{-4}$;
+4. $P(\text{outros}) = 1 - P(13) - P(12) - P(11)$.
 
 O cálculo usa a fórmula multinomial:
 
 $$
+\begin{equation}
 P(X_1=n_1,\ldots,X_k=n_k) = \frac{n!}{n_1!\cdots n_k!}p_1^{n_1}\cdots p_k^{n_k}
+\end{equation}
 $$
 
-onde $n$ é o total de cartões e $p_i$ são as probabilidades individuais.
+na qual $n$ é o total de cartões e $p_i$ são as probabilidades individuais.
 
 Código em Python para o cálculo, totalmente gerado pelo Claude.ai:
 
@@ -232,23 +225,28 @@ $$
 
 Em formato decimal completo:
 
-$$0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000187%$$
+$$
+\begin{align*}
+& 0.000000000000000000000000000000000000000000000000000000000\\
+& 00000000000000000000000000000000000000000000000000000000000\\
+& 00000000000000000000000000000000000000000000000000000000000\\
+& 00000000000000000000000000000000000000187%
+\end{align*}
+$$
 
-Também conhecido como zero.
+Também conhecido como zero. Uau! que número lindo!
 
-Agora sim! Agora podemos dizer, sem sombra de dúvida, que isso não significa nada. É só coincidência. Nada além de coincidência.
+*Agora sim! Agora podemos dizer, sem sombra de dúvida, que isso não significa nada. É só coincidência. Nada além de coincidência*.
 
-O resultado, a primeira vista parece indicar que o algoritmo que eu fiz aumentou, por alguma razão, a chance de acertar. Mas, isso não é verdade. A $P(\text{6 cartões de 12, 13 de 11}) \approx 1.87 \times 10^{-205}$ que encontramos não prova nada quanto a minha chance de ganhar. Apenas mostra quão raro é acontecer a combinação de vitórias e derrotas que tive até agora. Nada além disso e só isso.
+O resultado, parece indicar que o algoritmo que eu fiz aumentou, por alguma razão, a chance de acertar. Mas, isso *não é verdade*. A $P(\text{6 cartões de 12, 13 de 11}) \approx 1.87 \times 10^{-205}$ que encontramos não prova nada quanto a minha chance de ganhar. Apenas mostra quão raro é acontecer a combinação de vitórias e derrotas que tive até agora. Nada além disso e só isso. Mas, se olhar descuidadamente, parece que consegui algo impossível. É com esse tipo de mentira estatística que estão sendo vendidos milhares de métodos seguros para ganhar na Lotofácil. 
 
-Ainda assim, vou continuar estudando esse problema, mudando o código e estudando. Quase esqueci. O código.
+*Não é o caso. Aqui, não há um método seguro, não há nem um método*. Existe apenas um estudo dos limites do possível. Ainda assim, vou continuar estudando esse problema, mudando o código, testando e apostando.
+
+Quase esqueci. O código.
 
 ## O código
 
-Entre os milhares de algoritmos e arquiteturas disponíveis para implementar alguma coisa em inteligência artificial eu escolhi criar uma GAN (Generative Adversarial Network).
-
-Uma GAN, na verdade, usa duas redes neurais, uma que treinamos com um conjunto de dados, neste caso, os resultados da Lotofácil baixados direto do site da caixa, todos os dias automaticamente."
-
-Essa primeira rede, durante o treinamento, irá treinar uma segunda rede. A segunda rede recebe um ruído, um conjunto de valores totalmente aleatórios e gerar valores que façam parte do conjunto de treinamento.
+Entre os milhares de algoritmos e arquiteturas disponíveis para implementar alguma coisa em inteligência artificial eu escolhi criar uma GAN, *Generative Adversarial Network*. Uma GAN, usa duas redes neurais, uma das quais treinamos com um conjunto de dados, neste caso, os resultados da Lotofácil baixados direto do site da caixa, todos os dias automaticamente. Essa primeira rede, aida durante o seu treinamento, irá treinar uma segunda rede. A segunda rede recebe um ruído, um conjunto de valores totalmente aleatórios e gerar valores que façam parte do conjunto de treinamento.
 
 A arquitetura escolhida é relativamente leve, comparada às GANs profundas usadas na geração de imagens. Mas, foi necessário a adição de pontuação de similaridade e validação das sequências geradas ajuda a garantir a qualidade da saída. O que tornou as coisas um pouco mais complicadas. Mesmo com os recursos de inteligência artificial que temos hoje, Levei quase uma semana para definir a arquitetura.
 
@@ -271,19 +269,19 @@ Até o momento cheguei a:
 
     Essa classe também implementa o algoritmo de Gumbel-Softmax para saída discreta.
 
-    O Gumbel-Softmax é uma técnica utilizada para gerar amostras categóricas diferenciáveis em redes neurais, especialmente útil quando precisamos trabalhar com variáveis discretas em um contexto que requer backpropagation.
+    O *Gumbel-Softmax é uma técnica utilizada para gerar amostras categóricas diferenciáveis em redes neurais*, especialmente útil quando precisamos trabalhar com variáveis discretas em um contexto que requer backpropagation.
 
     O algoritmo Gumbel-Softmax combina dois elementos: a distribuição Gumbel, que é usada para adicionar ruído que permite amostragem de variáveis categóricas, e a função softmax, que produz uma distribuição de probabilidade suave sobre categorias. Provavelmente é isso que está causando meus repetidos. Mas, eu precisei disso para gerar apenas números inteiros, no espaço da Lotofácil.
 
-    Durante o forward-pass, o Gumbel-Softmax aproxima uma amostragem one-hot usando um parâmetro de temperatura $\tau$ que controla o quão próxima a aproximação está de uma distribuição categórica verdadeira - quando $\tau \to 0$, a saída se aproxima de um vetor one-hot, e quando $\tau \to \infty$, a saída se torna mais suave.
+    Durante o *forward-pass*, o Gumbel-Softmax aproxima uma amostragem one-hot usando um parâmetro de temperatura $\tau$ que controla o quão próxima a aproximação está de uma distribuição categórica verdadeira - quando $\tau \to 0$, a saída se aproxima de um vetor one-hot, e quando $\tau \to \infty$, a saída se torna mais suave.
 
-    O $\tau$ Parâmetro de temperatura que está sendo usado para controlar a nitidez da amostragem. Na próxima versão vou colocar outra rede neural neste código, para treinar o próprio $\tau$.
+    O $\tau$ parâmetro de temperatura que está sendo usado para controlar a nitidez da amostragem. Na próxima versão vou colocar outra rede neural neste código, para treinar o próprio $\tau$.
 
-    Além disso, a classe Generator usa *BatchNorm (Batch Normalization)*, normalização em lotes. Uma técnica que normaliza as ativações de uma camada neural, subtraindo a média do lote, batch, e dividindo pelo desvio padrão ($\frac{x - \mu}{\sigma}$). Após esta normalização, o BatchNorm aplica uma transformação linear com parâmetros treináveis ($\gamma$ e $\beta$) que permitem à rede aprender a escala e o deslocamento ideais.
+    A classe Generator usa *BatchNorm, Batch Normalization*, normalização em lotes. Uma técnica que normaliza as ativações de uma camada neural, subtraindo a média do lote, *batch*, e dividindo pelo desvio padrão ($\frac{x - \mu}{\sigma}$). Após esta normalização, o BatchNorm aplica uma transformação linear com parâmetros treináveis ($\gamma$ e $\beta$) que permitem à rede aprender a escala e o deslocamento ideais.
 
-    A ideia, como meu servidor não dispõem de GPU, é conseguir ganhar alguma velocidade de treinamento, com taxas de aprendizado maiores. Essa técnica é comum em GAN porque tende a estabilizar o treinamento.
+    A ideia, como meu servidor não dispõem de GPU, é conseguir ganhar alguma velocidade de treinamento, com taxas de aprendizado maiores, otimizando a GAN para computação em CPU. A ideia não é minha, essa técnica é comum em GAN's porque tende a estabilizar o treinamento.
 
-    Outro problema que eu ainda tenho. Testei algumas funções de ativação e ainda não escolhe a melhor delas. Talvez não haja uma melhor. Ainda não sei.
+    Outro problema que eu ainda tenho. Testei algumas funções de ativação e ainda não escolhe a melhor delas. Talvez não haja uma melhor. Ainda não sei. Preciso testar outras e pesquisar um pouco mais sobre isso.  
 
     Por enquanto estou usando a *LeakyReLU (Leaky Rectified Linear Unit)*. Uma variante da *ReLU* que, em vez de zerar todos os valores negativos, permite um pequeno gradiente negativo (geralmente 0.01).Formalmente:
 
@@ -293,7 +291,7 @@ Até o momento cheguei a:
     \end{equation}
     $$
 
-    onde $\alpha$ é um pequeno valor positivo, o "leak" do nome. Eu escolhi essa função de ativação depois que descobri que a *ReLU* mata neurônios. Na ReLU padrão, neurônios podem parar de aprender se sempre produzirem ativações negativas. No contexto da GAN, o LeakyReLU é útil porque ajuda a manter gradientes não-nulos durante o treinamento, permitindo um fluxo mais suave de informação através da rede, o que é crítico para o processo adversarial de treinamento. Além disso, está disponível na *torch*:
+    neste caso, $\alpha$ é um pequeno valor positivo, o "leak" do nome. Eu escolhi essa função de ativação depois que descobri que a *ReLU* mata neurônios. Na ReLU padrão, neurônios podem parar de aprender se sempre produzirem ativações negativas. No contexto da GAN, o LeakyReLU é útil porque ajuda a manter gradientes não-nulos durante o treinamento, permitindo um fluxo mais suave de informação através da rede, o que é crítico para o processo adversarial de treinamento. Além disso, está disponível na *torch*:
 
     ```python
     import torch
