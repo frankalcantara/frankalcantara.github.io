@@ -25,7 +25,7 @@ keywords: |
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-01-13T16:38:19.667Z
+lastmod: 2025-01-13T16:40:35.938Z
 slug: como-ganhar-na-lotofacil-usando-inteligencia-artificial
 ---
 
@@ -76,7 +76,7 @@ $$
 
 Onde $\binom{n}{k}$ é a combinação de $n$ elementos tomados $k$ a $k$.
 
-### Cálculos para cada prêmio $k$
+### Cálculos para cada prêmio
 
 1. Para $k = 11$:
 
@@ -225,8 +225,6 @@ probability = multinomial_probability(n, outcomes)
 print(f"Probabilidade: {probability:.2e}")
 print(f"Percentual: {probability * 100:.10f}%")
 ```
-
-## Resultado do Cálculo
 
 $$
 P(\text{6 cartões de 12, 13 de 11}) \approx 1.87 \times 10^{-205}
