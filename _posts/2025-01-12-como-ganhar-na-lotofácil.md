@@ -12,7 +12,7 @@ tags:
     - Generative Adversarial Network
     - programação
     - Python
-image: /images/money.jpg
+image: assets/images/money.jpg
 featured: false
 rating: 5
 description: A descrição de um algoritmo usando uma GAN para gerar palpites para jogar na Lotofácil.
@@ -25,7 +25,7 @@ keywords: |
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-01-13T01:19:56.709Z
+lastmod: 2025-01-13T01:24:57.584Z
 slug: como-ganhar-na-lotofacil-usando-inteligencia-artificial
 ---
 
