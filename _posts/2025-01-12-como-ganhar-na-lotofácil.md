@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Como Ganhar na LotoFácil Usando Inteligência Artificial
-author: Frank de Alcantara
+author: Frank
 categories:
     - Inteligência Artificial
     - Matemática
@@ -25,7 +25,7 @@ keywords: |
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-01-13T01:24:57.584Z
+lastmod: 2025-01-13T16:38:19.667Z
 slug: como-ganhar-na-lotofacil-usando-inteligencia-artificial
 ---
 

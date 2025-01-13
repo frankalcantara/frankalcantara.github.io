@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Em Busca da Diagonalização de Cantor
-author: Frank de Alcantara
+author: Frank
 categories:
     - artigo
     - Matemática
@@ -23,7 +23,7 @@ keywords: |-
 toc: false
 published: true
 beforetoc: Para colocar ordem na casa, a tradução de dois artigos de Georg Cantor sobre a não numerabilidade dos números reais.
-lastmod: 2024-12-20T20:08:36.484Z
+lastmod: 2025-01-13T16:38:27.861Z
 ---
 
 Triste é a sina de quem pretende entender.
