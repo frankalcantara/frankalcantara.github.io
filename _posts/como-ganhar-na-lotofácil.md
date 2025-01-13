@@ -25,7 +25,7 @@ keywords: |
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-01-13T00:50:17.449Z
+lastmod: 2025-01-13T00:54:05.909Z
 ---
 
 Você não vai aprender uma receita mágica, um truque ou uma mandinga que faça você ganhar na Lotofácil. Até onde sabemos, os números sorteados são completa e absolutamente aleatórios. Isso é o que a ciência, a matemática e os analistas da Caixa Econômica vão morrer dizendo. E, por mais que me doa dizer isso, esta é a verdade.
@@ -362,5 +362,7 @@ Essa é a classe principal. O script é um pouco mais complexo que isso:
         denorm = tensor * 24.0 + 1.0
         return torch.round(denorm).clamp(1, 25)</code>
     ```
+
+Para melhorar a qualidade dos dados gerados precisaríamos de um arquivo com uns 2 bilhões de linhas ou, mais ou menos, 700.000 anos de sorteios. Exceto, é claro, que se descubra algo novo na matemática ou na física.
 
 Continua...
