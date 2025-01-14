@@ -25,7 +25,7 @@ keywords: |
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-01-14T00:00:35.991Z
+lastmod: 2025-01-14T02:13:29.452Z
 slug: como-ganhar-na-lotofacil-usando-inteligencia-artificial
 ---
 
@@ -114,19 +114,19 @@ $$
 P(\text{pelo menos uma cartela com 11 pontos}) \approx 10 \times 0,000344 = 0,00344 \text{ ou } 0,344\%
 $$
 
-1. Para $k = 12$:
+2. Para $k = 12$:
 
 $$
 P(\text{pelo menos uma cartela com 12 pontos}) \approx 10 \times 0,000115 = 0,00115 \text{ ou } 0,115\%
 $$
 
-1. Para $k = 13$:
+3. Para $k = 13$:
 
 $$
 P(\text{pelo menos uma cartela com 13 pontos}) \approx 10 \times 0,000024 = 0,00024 \text{ ou } 0,024\%
 $$
 
-1. Para $k = 14$:
+4. Para $k = 14$:
 
 $$
 P(\text{pelo menos uma cartela com 14 pontos}) \approx 10 \times 0,000003 = 0,00003 \text{ ou } 0,003\%
