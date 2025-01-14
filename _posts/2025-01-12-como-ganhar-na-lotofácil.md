@@ -25,7 +25,7 @@ keywords: |
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-01-14T02:13:29.452Z
+lastmod: 2025-01-14T23:02:53.219Z
 slug: como-ganhar-na-lotofacil-usando-inteligencia-artificial
 ---
 
@@ -110,27 +110,27 @@ Ao jogar 10 cartões diferentes, a probabilidade de obter pelo menos uma cartela
 
 1. Para $k = 11$:
 
-$$
-P(\text{pelo menos uma cartela com 11 pontos}) \approx 10 \times 0,000344 = 0,00344 \text{ ou } 0,344\%
-$$
+    $$
+    P(\text{pelo menos uma cartela com 11 pontos}) \approx 10 \times 0,000344 = 0,00344 \text{ ou } 0,344\%
+    $$
 
 2. Para $k = 12$:
 
-$$
-P(\text{pelo menos uma cartela com 12 pontos}) \approx 10 \times 0,000115 = 0,00115 \text{ ou } 0,115\%
-$$
+    $$
+    P(\text{pelo menos uma cartela com 12 pontos}) \approx 10 \times 0,000115 = 0,00115 \text{ ou } 0,115\%
+    $$
 
 3. Para $k = 13$:
 
-$$
-P(\text{pelo menos uma cartela com 13 pontos}) \approx 10 \times 0,000024 = 0,00024 \text{ ou } 0,024\%
-$$
+    $$
+    P(\text{pelo menos uma cartela com 13 pontos}) \approx 10 \times 0,000024 = 0,00024 \text{ ou } 0,024\%
+    $$
 
 4. Para $k = 14$:
 
-$$
-P(\text{pelo menos uma cartela com 14 pontos}) \approx 10 \times 0,000003 = 0,00003 \text{ ou } 0,003\%
-$$
+    $$
+    P(\text{pelo menos uma cartela com 14 pontos}) \approx 10 \times 0,000003 = 0,00003 \text{ ou } 0,003\%
+    $$
 
 ## Analisando os Meus Resultados
 
@@ -363,6 +363,16 @@ Essa é a classe principal. O script é um pouco mais complexo que isso:
 
 Para melhorar a qualidade dos dados gerados precisaríamos de um arquivo com uns 2 bilhões de linhas ou, mais ou menos, 700.000 anos de sorteios. Exceto, é claro, que se descubra algo novo na matemática ou na física.
 
-Continua...
+Talvez, em algum momento, eu poste o código inteiro, detalhado. Mas, não agora.
+
+## Como isso está indo
+
+Eu resolvi automatizar as coisas. Todos os dias, exceto domingo e segunda, eu baixo o arquivo de resultados da caixa, treino a rede, gero 50.000 cartões. Passo estes cartões por outra rede com uma arquitetura diferente e retiro os 10.000 mais próximos em nenhuma ordem específica. Logo em seguida, os 10 primeiros destes 10.000 são enviados para o meu e-mail.
+
+Outra coisa importante. Antes de treinar a GAN, gerar 50.000, escolher 10.000 e enviar e-mails. O sistema pega o resultado do sorteio de ontem e comparar com os últimos 50.000 cartões gerados. O resultado desta comparação está na tabela a seguir. Nesta tabela, a coluna última geração, contém o dia que a GAN rodou. A coluna versão GAN será automaticamente alterada todas as vezes que eu modificar o código da GAN.
 
 <div id="table-container"></div>
+
+Nesta tabela, tudo parece ok, exceto o dia 09/01/2025 eu causei um bug no script que faz a estatística que contava o número de acertos de 14 pontos em dobro. Deixei na tabela apenas para manter o histórico independente da GAN. Outra coisa, pode ser que apareçam várias linhas no mesmo dia. Neste dia, eu terei rodado o sistema todo mais de uma vez.
+
+Eu sei, eu sei. Uma hora destas vai aparecer um $1$ na coluna dos 15 acertos e não terá sido um dos dez que eu jogo. Neste dia, eu vou chorar!
