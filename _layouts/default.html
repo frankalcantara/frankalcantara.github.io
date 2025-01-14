@@ -312,7 +312,7 @@
     if (tableContainer) {
         console.log("Iniciando busca da tabela externa");
         
-        fetch('http://209.38.60.126/table.html', {
+        fetch('{{ site.baseurl }}/assets/table.html', {
             mode: 'cors',  // Explicita o modo CORS
             headers: {
                 'Accept': 'text/html',
