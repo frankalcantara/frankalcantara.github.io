@@ -227,8 +227,8 @@
 		{% endif %}
 		<script src="{{ site.baseurl }}/assets/js/ie10-viewport-bug-workaround.js"></script>
 		
-		<script>
-			document.addEventListener("DOMContentLoaded", function () {
+	<script>
+	document.addEventListener("DOMContentLoaded", function () {
     // Debug: Verifica se o evento DOMContentLoaded está sendo disparado
     console.log("DOM carregado");
 
@@ -246,21 +246,21 @@
         });
     }
 
-	// Inicializa o highlight.js
-            hljs.highlightAll();
-            
-            // Se você estiver usando os números de linha
-            hljs.initLineNumbersOnLoad();
-            
-            // Configurações adicionais se necessário
-            hljs.configure({
-                ignoreUnescapedHTML: true,
-                languages: ['python', 'cpp']
-            });
+    // Inicializa o highlight.js
+    hljs.highlightAll();
+        
+    // Se você estiver usando os números de linha
+    hljs.initLineNumbersOnLoad();
+        
+    // Configurações adicionais se necessário
+    hljs.configure({
+        ignoreUnescapedHTML: true,
+        languages: ['python', 'cpp']
+    });
 
     function initializeTOC() {
         const toc = document.getElementById("toc");
-        
+    
         if (toc) {
             function adjustTOCHeight() {
                 // Define uma altura máxima fixa de 80% da viewport
@@ -278,8 +278,6 @@
         }
     }
 
-    initializeTOC();
-
     // Função para atualizar o background dos marks durante o scroll
     function initializeMarkHighlight() {
         function updateMarksOpacity() {
@@ -292,11 +290,11 @@
                 const viewportCenter = viewportHeight / 2;
                 const distance = Math.abs(viewportCenter - elementCenter);
                 const maxDistance = viewportHeight / 2;
-                
+            
                 // Calcula opacidade baseada na distância do centro
                 let opacity = 1 - (distance / maxDistance);
                 opacity = Math.max(0.2, Math.min(1, opacity)); // Mantém entre 0.2 e 1
-                
+            
                 mark.style.backgroundColor = `rgba(244, 196, 255, ${opacity})`;
                 mark.style.transition = 'background-color 0.3s ease';
             });
@@ -308,14 +306,63 @@
         updateMarksOpacity();
     }
 
+    // Nova função para inicializar a tabela externa
+    function initializeExternalTable() {
+    const tableContainer = document.getElementById('table-container');
+    if (tableContainer) {
+        console.log("Iniciando busca da tabela externa");
+        
+        fetch('http://209.38.60.126/table.html', {
+            mode: 'cors',  // Explicita o modo CORS
+            headers: {
+                'Accept': 'text/html',
+                'Cache-Control': 'no-cache'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.text();
+        })
+        .then(html => {
+            console.log("HTML recebido:", html.substring(0, 100)); // Log dos primeiros 100 caracteres
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const table = doc.querySelector('table');
+            
+            if (table) {
+                console.log("Tabela encontrada:", table.outerHTML.substring(0, 100));
+                tableContainer.appendChild(table);
+            } else {
+                throw new Error('Nenhuma tabela encontrada no HTML');
+            }
+        })
+        .catch(error => {
+            console.error('Erro detalhado:', error);
+            tableContainer.innerHTML = `<p>Erro ao carregar a tabela: ${error.message}</p>`;
+            
+            // Tenta uma alternativa com JSONP se disponível
+            const script = document.createElement('script');
+            script.src = 'http://209.38.60.126/table.html?callback=handleTableData';
+            document.body.appendChild(script);
+        });
+    }
+}
+
+// Função de callback para JSONP (se necessário)
+window.handleTableData = function(data) {
+    const tableContainer = document.getElementById('table-container');
+    if (tableContainer && data) {
+        tableContainer.innerHTML = data;
+    }
+};
     // Inicializa todas as funcionalidades
     initializeMarks();
     initializeTOC();
     initializeMarkHighlight();
+    initializeExternalTable(); // Adiciona a nova inicialização
 });
-
-		</script>
-
-
+	</script>
 	</body>
 </html>

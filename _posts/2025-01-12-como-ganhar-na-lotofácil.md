@@ -25,7 +25,7 @@ keywords: |
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-01-13T17:25:00.204Z
+lastmod: 2025-01-14T00:00:35.991Z
 slug: como-ganhar-na-lotofacil-usando-inteligencia-artificial
 ---
 
@@ -56,7 +56,7 @@ Mesmo sendo tão mais fácil, até 20 de dezembro de 2024, eu consegui apenas 11
 
 No dia 20 de dezembro de 2024, eu rodei este script pela primeira vez, joguei dez cartões acertei 1 de 12 pontos e quatro de 11 pontos. *Isso não quer dizer nada. Nenhuma garantia, nenhum indicativo, nada*. Nada! Pura coincidência! Mas, eu fiquei bem feliz. E curioso. E atrevido. Aquela pulga atrás a orelha dizendo: será?
 
-Meu histórico: tenho acertado 11, ou 12 números, todas as vezes que jogo depois do dia 20 de dezembro. Joguei 100 cartões em 10 dias com 5 cartões de 12 e 11 cartões de 11 pontos em dias diferentes. Eu jogo, quando jogo, 10 cartões, dez cartões de uma vez. Além disso, todas as vezes que vou jogar modifico um pouco a rede neural que criei.
+Meu histórico: tenho acertado 11, ou 12 números, todas as vezes que jogo depois do dia 20 de dezembro. Joguei 300 cartões em 10 dias com 5 cartões de 12 e 11 cartões de 11 pontos em dias diferentes. Eu jogo, quando jogo, 10 cartões, dez cartões de uma vez. Além disso, todas as vezes que vou jogar modifico um pouco a rede neural que criei.
 
 Estou perdendo, sem fazer muitas contas, joguei aproximadamente R$300,00 e tem R$126,79 em uma conta que criei só para manter os valores dos prêmios ganhos. *Estou perdendo, feito.* Pensa em um investimento ruim. Entretanto, coincidências me irritam.
 
@@ -206,39 +206,38 @@ def multinomial_probability(n, outcomes):
 # Configuração dos resultados
 n = 300  # total de cartões
 outcomes = {
-   '11': 13,    # cartões com 11 pontos
+   '11': 11,    # cartões com 11 pontos
    '12': 6,     # cartões com 12 pontos
    '13': 0,     # cartões com 13 pontos
-   'other': 281 # cartões restantes
+   'other': 283 # cartões restantes
 }
 
 # Cálculo da probabilidade
 probability = multinomial_probability(n, outcomes)
-
-print(f"Probabilidade: {probability:.2e}")
-print(f"Percentual: {probability * 100:.10f}%")
 ```
 
 $$
-P(\text{6 cartões de 12, 13 de 11}) \approx 1.87 \times 10^{-205}
+P(\text{6 cartões de 12, 13 de 11}) \approx 6.31 \times 10^{-204}
 $$
 
 Em formato decimal completo:
 
 $$
 \begin{align*}
-& 0.000000000000000000000000000000000000000000000000000000000\\
-& 00000000000000000000000000000000000000000000000000000000000\\
-& 00000000000000000000000000000000000000000000000000000000000\\
-& 00000000000000000000000000000000000000187%
+& 0.0000000000000000000000000000000000000000000000000000000000000000000\\
+& 000000000000000000000000000000000000000000000000000000000000000000000\\
+& 000000000000000000000000000000000000000000000000000000000000000000000\\
+& 000000631%
 \end{align*}
 $$
 
-Também conhecido como zero. Uau! que número lindo!
+Um número também conhecido como zero. Uau! que número lindo!
 
 *Agora sim! Agora podemos dizer, sem sombra de dúvida, que isso não significa nada. É só coincidência. Nada além de coincidência*.
 
-O resultado, parece indicar que o algoritmo que eu fiz aumentou, por alguma razão, a chance de acertar. Mas, isso *não é verdade*. A $P(\text{6 cartões de 12, 13 de 11}) \approx 1.87 \times 10^{-205}$ que encontramos não prova nada quanto a minha chance de ganhar. Apenas mostra quão raro é acontecer a combinação de vitórias e derrotas que tive até agora. Nada além disso e só isso. Mas, se olhar descuidadamente, parece que consegui algo impossível. É com esse tipo de mentira estatística que estão sendo vendidos milhares de métodos seguros para ganhar na Lotofácil. 
+O resultado, parece indicar que o algoritmo que eu fiz aumentou, por alguma razão, a chance de acertar. Mas, isso *não é verdade*. 
+
+A probabilidade $P(\text{6 cartões de 12, 13 de 11}) \approx 1.87 \times 10^{-205}$ que encontramos não prova nada quanto a minha chance de ganhar. Apenas mostra quão raro é acontecer a combinação de vitórias e derrotas que tive até agora. Nada além disso e só isso. Mas, se olhar descuidadamente, parece que consegui algo impossível. É com esse tipo de mentira estatística que estão sendo vendidos milhares de métodos seguros para ganhar na Lotofácil. 
 
 *Não é o caso. Aqui, não há um método seguro, não há nem um método*. Existe apenas um estudo dos limites do possível. Ainda assim, vou continuar estudando esse problema, mudando o código, testando e apostando.
 
@@ -365,3 +364,5 @@ Essa é a classe principal. O script é um pouco mais complexo que isso:
 Para melhorar a qualidade dos dados gerados precisaríamos de um arquivo com uns 2 bilhões de linhas ou, mais ou menos, 700.000 anos de sorteios. Exceto, é claro, que se descubra algo novo na matemática ou na física.
 
 Continua...
+
+<div id="table-container"></div>
