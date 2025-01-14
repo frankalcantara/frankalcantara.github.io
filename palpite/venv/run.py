@@ -4,6 +4,7 @@ import sys
 import logging
 from datetime import datetime
 from typing import List, Tuple
+import glob
 import os
 
 def setup_logging() -> logging.Logger:
@@ -102,6 +103,10 @@ def main():
     """
     Main execution function that runs scripts in sequence and commits changes.
     """
+
+    # Apaga todos os arquivos .log no diretório atual e subdiretorios
+    [os.remove(f) for f in glob.glob("**/*.log", recursive=True)]
+
     logger = setup_logging()
     
     # List of scripts to execute in order
