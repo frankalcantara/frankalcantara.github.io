@@ -16,7 +16,7 @@ def get_password():
         Exception: If file is not found or cannot be read
     """
     try:
-        with open('gmail.sec') as f:
+        with open('/home/frankalcantara.github.io/palpite/virtual/gmail.sec') as f:
             return f.readline().strip()
     except FileNotFoundError:
         raise Exception("Arquivo gmail.sec não encontrado")
