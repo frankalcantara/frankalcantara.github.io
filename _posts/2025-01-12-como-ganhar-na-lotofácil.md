@@ -25,7 +25,7 @@ keywords: |
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-01-14T23:02:53.219Z
+lastmod: 2025-01-15T13:32:39.765Z
 slug: como-ganhar-na-lotofacil-usando-inteligencia-artificial
 ---
 
@@ -235,9 +235,9 @@ Um número também conhecido como zero. Uau! que número lindo!
 
 *Agora sim! Agora podemos dizer, sem sombra de dúvida, que isso não significa nada. É só coincidência. Nada além de coincidência*.
 
-O resultado, parece indicar que o algoritmo que eu fiz aumentou, por alguma razão, a chance de acertar. Mas, isso *não é verdade*. 
+O resultado, parece indicar que o algoritmo que eu fiz aumentou, por alguma razão, a chance de acertar. Mas, isso *não é verdade*.
 
-A probabilidade $P(\text{6 cartões de 12, 13 de 11}) \approx 1.87 \times 10^{-205}$ que encontramos não prova nada quanto a minha chance de ganhar. Apenas mostra quão raro é acontecer a combinação de vitórias e derrotas que tive até agora. Nada além disso e só isso. Mas, se olhar descuidadamente, parece que consegui algo impossível. É com esse tipo de mentira estatística que estão sendo vendidos milhares de métodos seguros para ganhar na Lotofácil. 
+A probabilidade $P(\text{6 cartões de 12, 13 de 11}) \approx 1.87 \times 10^{-205}$ que encontramos não prova nada quanto a minha chance de ganhar. Apenas mostra quão raro é acontecer a combinação de vitórias e derrotas que tive até agora. Nada além disso e só isso. Mas, se olhar descuidadamente, parece que consegui algo impossível. É com esse tipo de mentira estatística que estão sendo vendidos milhares de métodos seguros para ganhar na Lotofácil.
 
 *Não é o caso. Aqui, não há um método seguro, não há nem um método*. Existe apenas um estudo dos limites do possível. Ainda assim, vou continuar estudando esse problema, mudando o código, testando e apostando.
 
@@ -373,6 +373,6 @@ Outra coisa importante. Antes de treinar a GAN, gerar 50.000, escolher 10.000 e 
 
 <div id="table-container"></div>
 
-Nesta tabela, tudo parece ok, exceto o dia 09/01/2025 eu causei um bug no script que faz a estatística que contava o número de acertos de 14 pontos em dobro. Deixei na tabela apenas para manter o histórico independente da GAN. Outra coisa, pode ser que apareçam várias linhas no mesmo dia. Neste dia, eu terei rodado o sistema todo mais de uma vez.
+Nesta tabela, tudo parece ok, exceto o dia 09/01/2025. Neste dia, eu causei um bug no script que faz a estatística que contava o número de acertos de 14 pontos em dobro. Deixei na tabela apenas para manter o histórico independente da GAN. Outra coisa, pode ser que apareçam várias linhas no mesmo dia. Neste dia, eu terei rodado o sistema todo mais de uma vez.
 
 Eu sei, eu sei. Uma hora destas vai aparecer um $1$ na coluna dos 15 acertos e não terá sido um dos dez que eu jogo. Neste dia, eu vou chorar!
