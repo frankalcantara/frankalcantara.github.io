@@ -25,7 +25,7 @@ keywords: |
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-01-15T12:36:43.717Z
+lastmod: 2025-01-15T13:32:39.765Z
 slug: como-ganhar-na-lotofacil-usando-inteligencia-artificial
 ---
 
@@ -373,6 +373,6 @@ Outra coisa importante. Antes de treinar a GAN, gerar 50.000, escolher 10.000 e 
 
 <div id="table-container"></div>
 
-Nesta tabela, tudo parece ok, exceto o dia 09/01/2025 eu causei um bug no script que faz a estatística que contava o número de acertos de 14 pontos em dobro. Deixei na tabela apenas para manter o histórico independente da GAN. Outra coisa, pode ser que apareçam várias linhas no mesmo dia. Neste dia, eu terei rodado o sistema todo mais de uma vez.
+Nesta tabela, tudo parece ok, exceto o dia 09/01/2025. Neste dia, eu causei um bug no script que faz a estatística que contava o número de acertos de 14 pontos em dobro. Deixei na tabela apenas para manter o histórico independente da GAN. Outra coisa, pode ser que apareçam várias linhas no mesmo dia. Neste dia, eu terei rodado o sistema todo mais de uma vez.
 
 Eu sei, eu sei. Uma hora destas vai aparecer um $1$ na coluna dos 15 acertos e não terá sido um dos dez que eu jogo. Neste dia, eu vou chorar!
