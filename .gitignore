@@ -5,11 +5,11 @@ _site
 *~
 .jekyll-cache
 
-palpite/venv/bin
-palpite/venv/include
-palpite/venv/lib
-palpite/venv/lib64
-palpite/venv/share
+palpite/virtual/bin
+palpite/virtual/include
+palpite/virtual/lib
+palpite/virtual/lib64
+palpite/virtual/share
 
 *.sec
 id_frank.pub
