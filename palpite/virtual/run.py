@@ -84,6 +84,8 @@ def commit_changes(logger: logging.Logger) -> bool:
         logger.info("Starting git commit process")
         
         # Add all changes to staging
+        subprocess.run(['git', 'add', '/home/frankalcantara.github.io/assets/table.html'], check=True)
+        
         subprocess.run(['git', 'add', '.'], check=True)
         logger.info("Added all changes to git staging")
         
