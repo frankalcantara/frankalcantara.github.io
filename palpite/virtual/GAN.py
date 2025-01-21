@@ -4,7 +4,8 @@ import torch.optim as optim
 import numpy as np
 import pandas as pd
 from torch.utils.data import Dataset, DataLoader
-from sklearn.metrics.pairwise import euclidean_distances
+from sklearn.metrics.pairwise import euclidean_distances, manhattan_distances
+from scipy.spatial.distance import cdist
 import time
 import os
 
@@ -108,7 +109,7 @@ def denormalize_and_discretize(tensor):
     denorm = tensor * 24.0 + 1.0
     return torch.round(denorm).clamp(1, 25)
 
-def train_gan(generator, discriminator, dataloader, num_epochs=150, latent_dim=50):  # Reduced epochs
+def train_gan(generator, discriminator, dataloader, num_epochs=150, latent_dim=50):
     criterion = nn.BCELoss()
     g_optimizer = optim.Adam(generator.parameters(), lr=0.0002, betas=(0.5, 0.999))
     d_optimizer = optim.Adam(discriminator.parameters(), lr=0.0002, betas=(0.5, 0.999))
@@ -159,17 +160,48 @@ def verify_unique_numbers(arrays):
             return False
     return True
 
-def calculate_similarity_scores(generated_arrays, test_set):
+def calculate_hamming_distance(X, Y):
+    """
+    Calcula a distância de Hamming entre arrays
+    Conta o número de posições em que os elementos são diferentes
+    """
+    return cdist(X, Y, metric='hamming')
+
+def calculate_similarity_scores(generated_arrays, test_set, metric='euclidean'):
+    """
+    Calcula scores de similaridade usando diferentes métricas
+    """
+    # Ordena os arrays para garantir comparação consistente
     generated_sorted = np.sort(generated_arrays, axis=1)
     test_sorted = np.sort(test_set, axis=1)
     
-    distances = euclidean_distances(generated_sorted, test_sorted)
+    # Seleciona a métrica apropriada
+    if metric == 'euclidean':
+        distances = euclidean_distances(generated_sorted, test_sorted)
+    elif metric == 'manhattan':
+        distances = manhattan_distances(generated_sorted, test_sorted)
+    elif metric == 'hamming':
+        distances = calculate_hamming_distance(generated_sorted, test_sorted)
+    else:
+        raise ValueError(f"Métrica {metric} não suportada")
+    
+    # Calcula a distância mínima para cada array gerado
     min_distances = np.min(distances, axis=1)
-    similarity_scores = 1 / (1 + min_distances)
+    
+    # Converte distâncias em scores (inversamente proporcionais)
+    if metric == 'hamming':
+        # Para Hamming, o score é complementar à distância
+        similarity_scores = 1 - min_distances
+    else:
+        # Para outras métricas, usa a transformação não-linear
+        similarity_scores = 1 / (1 + min_distances)
     
     return similarity_scores
 
-def generate_and_sort_samples(generator, test_tensor, num_samples=1000, latent_dim=50):
+def generate_and_sort_samples(generator, test_tensor, num_samples=1000, latent_dim=50, metric='euclidean'):
+    """
+    Gera e ordena amostras usando a métrica especificada
+    """
     generator.eval()
     
     # Reset random seeds for generation
@@ -189,29 +221,34 @@ def generate_and_sort_samples(generator, test_tensor, num_samples=1000, latent_d
             return None
         
         test_arrays = denormalize_and_discretize(test_tensor).numpy()
-        similarity_scores = calculate_similarity_scores(samples, test_arrays)
+        similarity_scores = calculate_similarity_scores(samples, test_arrays, metric=metric)
         sorted_indices = np.argsort(similarity_scores)[::-1]
         sorted_samples = samples[sorted_indices]
         
-        return sorted_samples
+        return sorted_samples, similarity_scores[sorted_indices]
 
-def save_to_csv(arrays, filename='generated_arrays.csv'):
+def save_to_csv(arrays, scores, filename='generated_arrays.csv'):
+    """
+    Salva os arrays gerados e seus scores no CSV
+    """
     with open(filename, 'w', newline='') as f:
-        for arr in arrays:
+        for arr, score in zip(arrays, scores):
             sorted_arr = sorted(arr)
             line = ','.join(map(str, sorted_arr))
             f.write(f"{line}\n")
 
 if __name__ == "__main__":
     # Hyperparameters otimizados para CPU
-    latent_dim = 100        # Reduzido de 100 para 50
-    batch_size = 32        # Reduzido de 32 para 16
-    num_epochs = 150       # Reduzido de 300 para 150
+    latent_dim = 100
+    batch_size = 32
+    num_epochs = 150
     test_size = 100
+    distance_metric = 'manhattan'  # pode ser 'euclidean', 'manhattan' ou 'hamming'
 
+    # Remove arquivo anterior se existir
     os.remove('gan_generated_lotofacil.csv') if os.path.exists('gan_generated_lotofacil.csv') else None
     
-    # Set random seeds only for training
+    # Set random seeds for training
     print("Definindo seeds para treinamento...")
     training_seed = generation_seed = int(time.time_ns()) % (2**32)
     torch.manual_seed(training_seed)
@@ -232,6 +269,7 @@ if __name__ == "__main__":
     # Train
     print(f"Iniciando treinamento com {len(train_tensor)} amostras...")
     print(f"Conjunto de teste: {test_size} amostras")
+    print(f"Métrica de distância: {distance_metric}")
     start_time = time.time()
     
     train_gan(generator, discriminator, dataloader, num_epochs, latent_dim)
@@ -243,21 +281,23 @@ if __name__ == "__main__":
     print("\nGerando e ordenando 50000 amostras...")
     start_time = time.time()
     
-    sorted_samples = generate_and_sort_samples(
+    result = generate_and_sort_samples(
         generator, 
         test_tensor, 
         num_samples=50000, 
-        latent_dim=latent_dim
+        latent_dim=latent_dim,
+        metric=distance_metric
     )
     
-    if sorted_samples is not None:
-        save_to_csv(sorted_samples, 'gan_generated_lotofacil.csv')
+    if result is not None:
+        sorted_samples, similarity_scores = result
+        save_to_csv(sorted_samples, similarity_scores, 'gan_generated_lotofacil.csv')
         
         end_time = time.time()
         print(f"Geração e ordenação concluídas em {end_time - start_time:.2f} segundos")
         
         print("\nAmostras geradas e ordenadas por similaridade (primeiras 5):")
-        for i in range(min(10, len(sorted_samples))):
-            print(f"Amostra {i+1}: {sorted(sorted_samples[i])}")
+        for i in range(min(5, len(sorted_samples))):
+            print(f"Amostra {i+1}: {sorted(sorted_samples[i])} (Score: {similarity_scores[i]:.4f})")
     else:
         print("Erro na geração das amostras.")
