@@ -19,7 +19,7 @@ keywords: inteligência artificial
 toc: false
 published: true
 beforetoc: "Você já ouviu falar da DeepSeek AI? Uma equipe ENXUTA de menos de 200 gênios, desafiou as gigantes da tecnologia e fez o IMPOSSÍVEL: desenvolveram modelos de IA que RIVALIZAM e até SUPERAM o GPT-4 e o Claude... com um orçamento 20 VEZES MENOR! Isso mesmo, você não leu errado! Enquanto Google, OpenAI e companhia gastavam fortunas, a DeepSeek AI repensou a arquitetura tradicional, focando em EFICIÊNCIA, INOVAÇÃO e CÓDIGO ABERTO."
-lastmod: 2025-01-27T15:58:13.519Z
+lastmod: 2025-01-27T18:58:14.907Z
 slug: deepseek-ai-revolucao-na-eficiencia-pode-abalar-mercado
 ---
 
@@ -60,4 +60,12 @@ Acredito que veremos **um aumento dramático da competição**.  As universidade
 
 Algumas empresas terão que, da noite para o dia, **rever seu modelo de negócio**. A Nvidia parece ser a mais impactada. Hoje, ainda não é possível avaliar o impacto da redução do custo de treinamento no negócio. Pode ser que o investimento de **100 bilhões** **de dólares**, projeto **Stargate** de 21 de janeiro de 2025, anunciado pela OpenAI, Oracle e Softbank seja um tiro no pé, com modelos melhores que rodem em qualquer lugar, ou não. O que sabemos com certeza é que o **Banco da Chi**na, lançou, 25 de janeiro de 2025, um plano de investimento _AI Industry Development Cátion Plan_ com investimento de **137 bilhões de dólares**. Isso foi susto, ou eles sabem alguma coisa que eu não sei?
 
+26/01/2025 15:00 - Também sabemos que a Nvidia perdeu 400 bilhões de dólares em valor de mercado. Talvez seja só correlação e não causação.
+
+![Tela da Bloomberg mostrando a perda da Nvidia](/images/deep2.webp)
+
+26/01/2025 15:00 - Grandes players do mercado estão vinculando a ideia de que, na verdade eles usaram muito mais GPU's que admitem. Isso seria por causa das restrições dos EUA quanto a exportação de tecnologia. 
+
 A DeepSeek AI fez tudo isso com uma equipe de pesquisa e desenvolvimento com **menos de 200 pessoas** e, o mais incrível, **disponibilizou tudo em código aberto**. Isso mostra que a inovação nem sempre vem do tamanho, mas sim da inteligência e da eficiência.  E, aqui está, novamente, **a sua oportunidade**. Depende de você.
+
+A coisa está fervendo, eu posto com mais frequência no X.
