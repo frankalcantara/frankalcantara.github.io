@@ -19,7 +19,7 @@ keywords: inteligência artificial
 toc: false
 published: true
 beforetoc: "Você já ouviu falar da DeepSeek AI? Uma equipe ENXUTA de menos de 200 gênios, desafiou as gigantes da tecnologia e fez o IMPOSSÍVEL: desenvolveram modelos de IA que RIVALIZAM e até SUPERAM o GPT-4 e o Claude... com um orçamento 20 VEZES MENOR! Isso mesmo, você não leu errado! Enquanto Google, OpenAI e companhia gastavam fortunas, a DeepSeek AI repensou a arquitetura tradicional, focando em EFICIÊNCIA, INOVAÇÃO e CÓDIGO ABERTO."
-lastmod: 2025-01-27T18:58:14.907Z
+lastmod: 2025-01-27T19:03:04.364Z
 slug: deepseek-ai-revolucao-na-eficiencia-pode-abalar-mercado
 ---
 
@@ -64,8 +64,10 @@ Algumas empresas terão que, da noite para o dia, **rever seu modelo de negócio
 
 ![Tela da Bloomberg mostrando a perda da Nvidia](/images/deep2.webp)
 
-26/01/2025 15:00 - Grandes players do mercado estão vinculando a ideia de que, na verdade eles usaram muito mais GPU's que admitem. Isso seria por causa das restrições dos EUA quanto a exportação de tecnologia. 
+26/01/2025 15:20 - Grandes players do mercado estão vinculando a ideia de que, na verdade eles usaram muito mais GPU's que admitem. Isso seria por causa das restrições dos EUA quanto a exportação de tecnologia.
+
+26/01/2025 15:40 - A DeepSeek lança um novo modelo Janus Pro: "Janus-Pro is a novel autoregressive framework that unifies multimodal understanding and generation. It addresses the limitations of previous approaches by decoupling visual encoding into separate pathways, while still utilizing a single, unified transformer architecture for processing" E todos os benchmarks mostram que esse modelo é melhor que a Dall-E 3 da OpenAi e que a Stable Diffusion.
 
 A DeepSeek AI fez tudo isso com uma equipe de pesquisa e desenvolvimento com **menos de 200 pessoas** e, o mais incrível, **disponibilizou tudo em código aberto**. Isso mostra que a inovação nem sempre vem do tamanho, mas sim da inteligência e da eficiência.  E, aqui está, novamente, **a sua oportunidade**. Depende de você.
 
-A coisa está fervendo, eu posto com mais frequência no X.
+A coisa está fervendo, faz tempo que não me divirto tanto. Eu posto com mais frequência no X.
