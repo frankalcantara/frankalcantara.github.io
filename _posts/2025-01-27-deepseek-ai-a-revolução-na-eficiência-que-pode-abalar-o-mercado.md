@@ -19,7 +19,7 @@ keywords: inteligência artificial
 toc: false
 published: true
 beforetoc: "Você já ouviu falar da DeepSeek AI? Uma equipe ENXUTA de menos de 200 gênios, desafiou as gigantes da tecnologia e fez o IMPOSSÍVEL: desenvolveram modelos de IA que RIVALIZAM e até SUPERAM o GPT-4 e o Claude... com um orçamento 20 VEZES MENOR! Isso mesmo, você não leu errado! Enquanto Google, OpenAI e companhia gastavam fortunas, a DeepSeek AI repensou a arquitetura tradicional, focando em EFICIÊNCIA, INOVAÇÃO e CÓDIGO ABERTO."
-lastmod: 2025-01-27T19:03:04.364Z
+lastmod: 2025-01-27T19:22:57.269Z
 slug: deepseek-ai-revolucao-na-eficiencia-pode-abalar-mercado
 ---
 
@@ -50,7 +50,7 @@ Eu jogo minhas fichas neste detalhe. Uma equipe menor, com foco e competência, 
 - **Custos de API:** 95% mais baratos. Simplesmente tornou as outras API’s economicamente inviáveis, injustificáveis e inúteis.
 - **Capacidade de Execução:** Possibilidade de rodar em GPU’s de jogos, em vez de hardware de data center de alto custo.
 
-**O que isso significa para o mercado?** A inovação da DeepSeek AI tem o potencial de democratizar o desenvolvimento de IA. Grandes empresas de tecnologia, que antes tinham a vantagem de seus imensos recursos, agora enfrentam uma competição mais acirrada. As barreiras de entrada diminuem, permitindo que empresas menores e até indivíduos entrem no jogo.
+**O que isso significa para o mercado?** A inovação da DeepSeek AI tem o potencial de democratizar o desenvolvimento de IA. Grandes empresas de tecnologia, que antes tinham a vantagem de seus imensos recursos, agora enfrentam uma competição mais acirrada. As barreiras de entrada diminuem, permitindo que empresas menores e até indivíduos entrem no jogo. Isso, é claro, imaginando que tudo seja verdade. Mesmo estando tudo em código aberto, pode ter algo que não sabemos. Se tudo for verdade, temos um moral nessa história.
 
 Levante da cadeira e vá trabalhar! Não, as grandes empresas não são invencíveis! São estas as lições que podemos aprender da DeepSeek. Porém, como de Nostradamus e louco, todo mundo tem um pouco. **O que podemos esperar nos próximos meses?**
 
