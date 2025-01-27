@@ -83,22 +83,40 @@ def commit_changes(logger: logging.Logger) -> bool:
     try:
         logger.info("Starting git commit process")
         
-        # Add all changes to staging
-        subprocess.run(['git', 'add', '/home/frankalcantara.github.io/assets/table.html'], check=True)
+        # Definir diretório do repositório Git explicitamente
+        repo_path = "/home/frankalcantara.github.io"  # Ajuste para seu caminho
+        os.chdir(repo_path)  # Altera o diretório de trabalho
         
+        # Verificar se há mudanças (evitar commit vazio)
+        status = subprocess.run(
+            ['git', 'status', '--porcelain'],
+            capture_output=True,
+            text=True
+        )
+        if not status.stdout.strip():
+            logger.info("No changes to commit")
+            return True  # Ou False, dependendo da lógica desejada
+            
+        # Adicionar mudanças
+        subprocess.run(['git', 'add', 'assets/table.html'], check=True)  # Caminho relativo
         subprocess.run(['git', 'add', '.'], check=True)
         logger.info("Added all changes to git staging")
         
-        # Create commit with message
-        subprocess.run(['git', 'commit', '-m', 'palpites atualizados'], check=True)
-        logger.info("Successfully created commit with message: 'palpites atualizados'")
+        # Commit
+        subprocess.run(
+            ['git', 'commit', '-m', 'palpites atualizados'],
+            check=True,
+            capture_output=True,
+            text=True
+        )
+        logger.info("Commit realizado com sucesso")
         
         return True
     except subprocess.CalledProcessError as e:
-        logger.error(f"Git operation failed: {e}")
+        logger.error(f"Erro no Git (code {e.returncode}): {e.stderr}")
         return False
     except Exception as e:
-        logger.error(f"Unexpected error during git operations: {str(e)}")
+        logger.error(f"Erro inesperado: {str(e)}")
         return False
 
 def main():
