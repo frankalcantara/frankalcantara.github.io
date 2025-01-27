@@ -9,7 +9,7 @@ tags:
     - linguagem natural
     - Matemática
     - inteligência artificial
-image: ""
+image: assets/images/deep1.webp
 featured: false
 rating: 5
 description: "Tamanho não é documento na IA!  Com inovações disruptivas e um orçamento 20x menor, a DeepSeek desafia o status quo.  Prepare-se! "
@@ -19,7 +19,7 @@ keywords: inteligência artificial
 toc: false
 published: true
 beforetoc: "Você já ouviu falar da DeepSeek AI? Uma equipe ENXUTA de menos de 200 gênios, desafiou as gigantes da tecnologia e fez o IMPOSSÍVEL: desenvolveram modelos de IA que RIVALIZAM e até SUPERAM o GPT-4 e o Claude... com um orçamento 20 VEZES MENOR! Isso mesmo, você não leu errado! Enquanto Google, OpenAI e companhia gastavam fortunas, a DeepSeek AI repensou a arquitetura tradicional, focando em EFICIÊNCIA, INOVAÇÃO e CÓDIGO ABERTO."
-lastmod: 2025-01-27T14:59:21.243Z
+lastmod: 2025-01-27T15:58:13.519Z
 slug: deepseek-ai-revolucao-na-eficiencia-pode-abalar-mercado
 ---
 
