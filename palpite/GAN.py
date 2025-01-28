@@ -224,10 +224,11 @@ def verify_unique_numbers(arrays: np.ndarray) -> bool:
 
 def calculate_similarity_scores(generated_arrays: np.ndarray, test_set: np.ndarray, 
                               metric: str='euclidean') -> np.ndarray:
-    """Calculate similarity scores using specified metric."""
+    """Calculate similarity scores using specified metric and recent draw weights."""
     generated_sorted = np.sort(generated_arrays, axis=1)
     test_sorted = np.sort(test_set, axis=1)
     
+    # Calculate base distances
     if metric == 'euclidean':
         distances = euclidean_distances(generated_sorted, test_sorted)
     elif metric == 'manhattan':
@@ -237,12 +238,23 @@ def calculate_similarity_scores(generated_arrays: np.ndarray, test_set: np.ndarr
     else:
         raise ValueError(f"Métrica {metric} não suportada")
     
-    min_distances = np.min(distances, axis=1)
+    # Weight recent draws more heavily
+    num_test = test_set.shape[0]
+    weights = np.linspace(1.0, 2.0, num_test)  # More recent draws have higher weight
+    weighted_distances = distances * weights.reshape(1, -1)
     
+    # Get minimum weighted distance for each prediction
+    min_distances = np.min(weighted_distances, axis=1)
+    
+    # Calculate similarity scores with normalization
     if metric == 'hamming':
-        similarity_scores = 1 - min_distances
+        max_dist = np.max(min_distances)
+        similarity_scores = 1 - (min_distances / max_dist)
     else:
         similarity_scores = 1 / (1 + min_distances)
+        # Normalize to [0, 1]
+        similarity_scores = (similarity_scores - np.min(similarity_scores)) / \
+                          (np.max(similarity_scores) - np.min(similarity_scores))
     
     return similarity_scores
 
@@ -348,7 +360,7 @@ def main():
             
             logger.info("\nTop 5 predictions by similarity score:")
             for i in range(min(5, len(predictions))):
-                logger.info(f"Prediction {i+1}: {sorted(predictions[i])} (Score: {scores[i]:.4f})")
+                logger.info(f"Prediction {i+1}: {sorted([int(x) for x in predictions[i]])} (Score: {scores[i]:.4f})")
         else:
             logger.error("Failed to generate valid predictions")
         

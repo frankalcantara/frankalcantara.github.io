@@ -61,9 +61,8 @@ def format_email_body(predictions: List[tuple]) -> str:
     body = "Previsões para Lotofácil:\n\n"
     for pred in predictions:
         numbers = pred[:15]  # First 15 items are the numbers
-        matches = pred[15]   # Last item is the match count
         sorted_numbers = ' '.join(map(str, sorted(numbers)))
-        body += f"Números: {sorted_numbers} (Acertos anteriores: {matches})\n"
+        body += f"Números: {sorted_numbers}\n"
     
     return body
 

@@ -101,7 +101,7 @@ def check_and_download_lotofacil():
         )
         
         # Get the last date from current file
-        current_last_date = pd.to_datetime(current_df.iloc[-1, 1])  # Adjusted column index
+        current_last_date = pd.to_datetime(current_df.iloc[-1, 1], dayfirst=True)  # Parse date in DD/MM/YYYY format
         
         update_needed = last_saved_date is None or current_last_date > last_saved_date
         
