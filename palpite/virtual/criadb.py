@@ -1,5 +1,6 @@
 import sqlite3
 from datetime import datetime
+import time
 
 def adapt_datetime(dt):
    return dt.isoformat()
