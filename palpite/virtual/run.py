@@ -122,6 +122,7 @@ def main():
         "downloadSorteios.py",
         "novoCheca.py",
         "GAN.py",
+        "removedup.py",
         "send2.py"
     ]
     

@@ -311,12 +311,26 @@ def denormalize_and_discretize(tensor: torch.Tensor) -> torch.Tensor:
     denorm = tensor * 24.0 + 1.0
     return torch.round(denorm).clamp(1, 25)
 
+def clear_predictions_table(cursor: sqlite3.Cursor, conn: sqlite3.Connection):
+    """Clear all predictions from the table."""
+    try:
+        cursor.execute('DELETE FROM predictions')
+        conn.commit()
+        print("Tabela de predições limpa com sucesso")
+    except Exception as e:
+        print(f"Erro ao limpar tabela: {str(e)}")
+        conn.rollback()
+
 def main():
     logger = setup_logging()
     logger.info("Starting GAN training and prediction generation")
     
+    # Initialize connection and clear table
+    conn, cursor = get_db_connection()
+    clear_predictions_table(cursor, conn)
+    
     try:
-        conn, cursor = get_db_connection()
+        # Connection already established in clear_predictions_table
         
         # Load configuration
         config = load_gan_config(cursor)
