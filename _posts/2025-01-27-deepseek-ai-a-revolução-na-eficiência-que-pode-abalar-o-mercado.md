@@ -23,7 +23,7 @@ lastmod: 2025-01-27T19:22:57.269Z
 slug: deepseek-ai-revolucao-na-eficiencia-pode-abalar-mercado
 ---
 
->Esta é uma republicação de um artigo escrito escrito em 25 de janeiro de 2025, no Linkedin.
+>Esta é uma republicação de um artigo escrito em 25 de janeiro de 2025, no Linkedin.
 
 O cenário da Inteligência Artificial está em constante ebulição, e a recente chegada da DeepSeek AI causou um verdadeiro terremoto. Com um investimento de apenas 557 mil dólares, o equivalente aproximado de 278,8 mil horas de uso de GPU’s H800, com custo padrão de _US$_2.00 por hora, eles conseguiram desenvolver modelos que rivalizam e até superam o GPT-4 e o Claude em diversas tarefas típicas de validação. Ainda que existam rumores de que este custo tenha sido de aproximada mente 5 milhões de dólares. Ainda representa 20 vezes menos que os modelos mais populares. Isso é levanta uma questão interessante: **como, valha me Deus, eles conseguiram isso?**
 
