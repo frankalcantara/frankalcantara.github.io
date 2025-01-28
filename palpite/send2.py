@@ -5,7 +5,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import os
 from datetime import datetime
-from typing import List, Tuple, Optional
+from typing import List, Tuple
 
 def get_db_connection() -> Tuple[sqlite3.Connection, sqlite3.Cursor]:
     """Create database connection with proper timeout."""
@@ -25,31 +25,25 @@ def get_password() -> str:
     except Exception as e:
         raise Exception(f"Erro ao ler senha: {str(e)}")
 
-def get_predictions_to_send(cursor: sqlite3.Cursor, limit: int = 10) -> List[tuple]:
-    """Retrieve predictions to be sent, ordered by matches (highest first) and proximity."""
+def get_predictions_to_send(cursor: sqlite3.Cursor) -> List[tuple]:
+    """Get first 10 unprocessed predictions."""
     cursor.execute('''
         SELECT 
-            num_1, num_2, num_3, num_4, num_5, 
-            num_6, num_7, num_8, num_9, num_10,
-            num_11, num_12, num_13, num_14, num_15,
-            matches
+            num_1, num_2, num_3, num_4, num_5, num_6, num_7, num_8,
+            num_9, num_10, num_11, num_12, num_13, num_14, num_15
         FROM predictions 
-        WHERE status = 'V' 
-          AND matches >= 11
-          AND processed_at >= DATE('now', '-1 day')
-        ORDER BY matches DESC, proximity DESC
-        LIMIT ?
-    ''', (limit,))
+        WHERE status = 'F'
+        LIMIT 10
+    ''')
     return cursor.fetchall()
 
 def mark_predictions_as_sent(cursor: sqlite3.Cursor, conn: sqlite3.Connection):
-    """Mark processed predictions as sent."""
+    """Mark sent predictions as processed."""
     cursor.execute('''
         UPDATE predictions
         SET status = 'P'
-        WHERE status = 'V' 
-          AND matches >= 11
-          AND processed_at >= DATE('now', '-1 day')
+        WHERE status = 'F'
+        LIMIT 10
     ''')
     conn.commit()
 
@@ -60,8 +54,7 @@ def format_email_body(predictions: List[tuple]) -> str:
     
     body = "Previsões para Lotofácil:\n\n"
     for pred in predictions:
-        numbers = pred[:15]  # First 15 items are the numbers
-        sorted_numbers = ' '.join(map(str, sorted(numbers)))
+        sorted_numbers = ' '.join(map(str, sorted(pred)))
         body += f"Números: {sorted_numbers}\n"
     
     return body
@@ -76,16 +69,12 @@ def send_email(predictions: List[tuple], email: str, password: str):
     body = format_email_body(predictions)
     msg.attach(MIMEText(body, 'plain'))
     
-    # Establish secure SMTP connection
     server = smtplib.SMTP('smtp.gmail.com', 587)
     try:
         server.starttls()
         server.login(email, password)
-        
-        # Send email
         server.sendmail(email, 'frank.alcantara@gmail.com', msg.as_string())
         print("Email enviado com sucesso!")
-        
     except Exception as e:
         print(f"Erro ao enviar email: {str(e)}")
         raise
@@ -98,20 +87,15 @@ def process_and_send_email():
     conn = None
     
     try:
-        # Get database connection
         conn, cursor = get_db_connection()
         print("Conectado ao banco de dados")
         
-        # Get predictions to send
         predictions = get_predictions_to_send(cursor)
         print(f"Encontradas {len(predictions)} previsões para enviar")
         
         if predictions:
-            # Get password and send email
             password = get_password()
             send_email(predictions, email, password)
-            
-            # Mark predictions as sent
             mark_predictions_as_sent(cursor, conn)
             print("Status das previsões atualizado no banco")
         else:
