@@ -24,7 +24,7 @@ keywords: |-
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-01-29T23:34:22.295Z
+lastmod: 2025-01-29T23:37:18.902Z
 slug: deepseek-explicado-de-forma-simples
 ---
 
@@ -147,7 +147,7 @@ Finalmente temos a  perda de balanceamento de carga. Um mecanismo que evita que 
 
 Imagine que em um hospital, alguns médicos especialistas começam a receber muito mais pacientes que outros. Por exemplo, um cardiologista está sempre ocupado, atendendo 80% dos pacientes, enquanto um neurologista mal recebe pacientes. Isso cria dois problemas: o cardiologista fica sobrecarregado, podendo causar atrasos e queda na qualidade do atendimento; e o conhecimento do neurologista está sendo desperdiçado.
 
-Para resolver isso, o hospital, nosso sistema MoE, adiciona uma regra especial na função de triagem: se o enfermeiro da triagem, função *gate*, percebe que está enviando muitos pacientes para um mesmo especialista, ele recebe um "feedback negativo", a perda de balanceamento, que o incentiva a distribuir melhor os pacientes. E viva a aprendizagem por retorno!
+Para resolver isso, o hospital, nosso sistema MoE, adiciona uma regra especial na função de triagem: se o enfermeiro da triagem, função *gate*, percebe que está enviando muitos pacientes para um mesmo especialista, ele recebe um "feedback negativo", a perda de balanceamento, que o incentiva a distribuir melhor os pacientes. E viva o **Reinforcement Learning**!
 
 Matematicamente, isso é implementado como um termo adicional na função de perda total do modelo:
 
@@ -362,7 +362,7 @@ O DeepSeek-R1 começa ajustando o modelo V3-Base com exemplos de alta qualidade 
 
 #### Chain of Thought (CoT) e Zero-Shot Chain of Thought
 
-O mecanismo *Chain of Thought* (CoT) representa uma evolução na forma como os modelos de linguagem abordam problemas complexos. Em vez de tentar chegar diretamente a uma resposta, o CoT introduz um processo de raciocínio explícito e passo a passo que mimetiza o pensamento humano. Esta abordagem é particularmente poderosa para tarefas que exigem raciocínio matemático, lógico ou multi-etapas. Áreas do pensamento também conhecidas como tudo.
+O mecanismo *Chain of Thought* (CoT) representa uma evolução na forma como os modelos de linguagem abordam problemas complexos. Em vez de tentar chegar diretamente a uma resposta, o CoT introduz um processo de raciocínio explícito e passo a passo que mimetiza o pensamento humano. Esta abordagem é particularmente poderosa para tarefas que exigem raciocínio matemático, lógico ou multi-etapas. Áreas do pensamento também conhecidas como: tudo.
 
 Um vislumbre da matemática do CoT deve ajudar a entender como ele funciona. A probabilidade de gerar uma resposta correta $y$ para uma entrada $x$ usando CoT pode ser expressa como:
 
@@ -824,7 +824,7 @@ O modelo parece ter desenvolvido a capacidade de revisitar e revisar etapas inte
 
 O DeepSeek-R1 demonstrou a habilidade de identificar e corrigir erros em tempo real durante seu processo de raciocínio. Novamente, não tinha visto isso em nenhum outro modelo. Verdade seja dita, no dia que a OpenAi lançou o modelo de US$200,00 por mês, eu cancelei minha conta. Ou seja, pode ser que exista e eu não tenha visto.
 
-Outra coisa interessante que podemos observar lendo as iterações do modelo é que, eventualmente ele para, por um tempo maior e, de repente descobre a resposta correta. O artigo reforça que este comportamento surge de forma espontânea através da interação do modelo com o ambiente de aprendizagem por reforço, demonstrando a sua capacidade de melhorar a resolução de problemas de forma autônoma.
+Outra coisa interessante que podemos observar lendo as iterações do modelo é que, eventualmente ele para, por um tempo maior e, de repente descobre a resposta correta. O artigo reforça que este comportamento surge de forma espontânea através da interação do modelo com o ambiente de **Reinforcement Learning**, demonstrando a sua capacidade de melhorar a resolução de problemas de forma autônoma.
 
 ## Questões em Aberto
 
