@@ -4,17 +4,19 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import os
+from datetime import datetime
+from typing import List, Tuple
 
-def get_password():
-    """
-    Read Gmail password from the first line of gmail.sec file
-    
-    Returns:
-        str: The password string with whitespace removed
-        
-    Raises:
-        Exception: If file is not found or cannot be read
-    """
+def get_db_connection() -> Tuple[sqlite3.Connection, sqlite3.Cursor]:
+    """Create database connection with proper timeout."""
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    db_path = os.path.join(script_dir, 'lotofacil.db')
+    conn = sqlite3.connect(db_path, timeout=30)
+    cursor = conn.cursor()
+    return conn, cursor
+
+def get_password() -> str:
+    """Read Gmail password from the first line of gmail.sec file."""
     try:
         with open('/home/frankalcantara.github.io/palpite/virtual/gmail.sec') as f:
             return f.readline().strip()
@@ -23,109 +25,90 @@ def get_password():
     except Exception as e:
         raise Exception(f"Erro ao ler senha: {str(e)}")
 
-def get_lottery_numbers(cursor):
-    """
-    Retrieve first 10 unprocessed rows from the database ordered by seq_order
-    
-    Args:
-        cursor: SQLite cursor object
-    
-    Returns:
-        list: List of tuples containing lottery numbers
-    """
-    # Select records where tipo = 'F', ordered by seq_order
-    cursor.execute("""
-        SELECT seq_order, num_1, num_2, num_3, num_4, num_5, num_6, num_7, 
-               num_8, num_9, num_10, num_11, num_12, num_13, num_14, num_15
-        FROM palpites 
-        WHERE tipo = 'F'
-        ORDER BY seq_order
+def get_predictions_to_send(cursor: sqlite3.Cursor) -> List[tuple]:
+    """Get first 10 unprocessed predictions."""
+    cursor.execute('''
+        SELECT 
+            num_1, num_2, num_3, num_4, num_5, num_6, num_7, num_8,
+            num_9, num_10, num_11, num_12, num_13, num_14, num_15
+        FROM predictions 
+        WHERE status = 'F'
         LIMIT 10
-    """)
+    ''')
     return cursor.fetchall()
 
-def update_status(cursor, conn, processed_orders):
-    """
-    Update tipo to 'V' for processed records
-    
-    Args:
-        cursor: SQLite cursor object
-        conn: SQLite connection object
-        processed_orders: List of seq_order values to update
-    """
-    # Convert sequence orders to string for SQL IN clause
-    orders_str = ','.join(map(str, processed_orders))
-    
-    cursor.execute(f"""
-        UPDATE palpites 
-        SET tipo = 'V' 
-        WHERE seq_order IN ({orders_str})
-    """)
+def mark_predictions_as_sent(cursor: sqlite3.Cursor, conn: sqlite3.Connection):
+    """Mark sent predictions as processed."""
+    cursor.execute('''
+        UPDATE predictions
+        SET status = 'P'
+        WHERE status = 'F'
+        LIMIT 10
+    ''')
     conn.commit()
 
-def process_and_send_email(db_path, email):
-    """
-    Process lottery data from SQLite database and send results via email
+def format_email_body(predictions: List[tuple]) -> str:
+    """Format predictions into email body."""
+    if not predictions:
+        return "Não há previsões para enviar hoje."
     
-    Args:
-        db_path (str): Path to the SQLite database
-        email (str): Gmail address to use for sending
-    """
+    body = "Previsões para Lotofácil:\n\n"
+    for pred in predictions:
+        sorted_numbers = ' '.join(map(str, sorted(pred)))
+        body += f"Números: {sorted_numbers}\n"
+    
+    return body
+
+def send_email(predictions: List[tuple], email: str, password: str):
+    """Send email with predictions."""
+    msg = MIMEMultipart()
+    msg['From'] = email
+    msg['To'] = 'frank.alcantara@gmail.com'
+    msg['Subject'] = f'Lotofácil - Previsões {datetime.now():%d/%m/%Y}'
+    
+    body = format_email_body(predictions)
+    msg.attach(MIMEText(body, 'plain'))
+    
+    server = smtplib.SMTP('smtp.gmail.com', 587)
     try:
-        # Establish database connection
-        conn = sqlite3.connect(db_path)
-        cursor = conn.cursor()
-        
-        # Get lottery numbers
-        rows = get_lottery_numbers(cursor)
-        
-        if not rows:
-            print("Não há mais números para processar")
-            conn.close()
-            return
-        
-        # Store seq_order values for updating status later
-        processed_orders = [row[0] for row in rows]
-        
-        # Convert rows to space-separated strings, excluding seq_order
-        selected_rows = "\n".join(
-            [" ".join(map(str, row[1:])) for row in rows]
-        )
-        
-        # Configure email message
-        msg = MIMEMultipart()
-        msg['From'] = email
-        msg['To'] = 'frank.alcantara@gmail.com'
-        msg['Subject'] = 'Dados Lotofácil'
-        
-        # Add lottery numbers to email body
-        body = f"Segue os arrays:\n\n{selected_rows}"
-        msg.attach(MIMEText(body, 'plain'))
-        
-        # Get password and establish secure SMTP connection
-        password = get_password()
-        server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
         server.login(email, password)
-        
-        # Send the email
-        text = msg.as_string()
-        server.sendmail(email, 'frank.alcantara@gmail.com', text)
-        server.quit()
+        server.sendmail(email, 'frank.alcantara@gmail.com', msg.as_string())
         print("Email enviado com sucesso!")
+    except Exception as e:
+        print(f"Erro ao enviar email: {str(e)}")
+        raise
+    finally:
+        server.quit()
+
+def process_and_send_email():
+    """Main function to process predictions and send email."""
+    email = "frank.alcantara@gmail.com"
+    conn = None
+    
+    try:
+        conn, cursor = get_db_connection()
+        print("Conectado ao banco de dados")
         
-        # Update status flags in the database
-        update_status(cursor, conn, processed_orders)
-        print(f"Status atualizado para {len(processed_orders)} registros (seq_order de {min(processed_orders)} a {max(processed_orders)})")
+        predictions = get_predictions_to_send(cursor)
+        print(f"Encontradas {len(predictions)} previsões para enviar")
+        
+        if predictions:
+            password = get_password()
+            send_email(predictions, email, password)
+            mark_predictions_as_sent(cursor, conn)
+            print("Status das previsões atualizado no banco")
+        else:
+            print("Não há previsões para enviar")
         
     except Exception as e:
         print(f"Erro ao processar dados: {str(e)}")
+        if conn:
+            conn.rollback()
     finally:
-        if 'conn' in locals():
+        if conn:
             conn.close()
+            print("Conexão com o banco fechada")
 
 if __name__ == "__main__":
-    db_path = "lotofacil.db"
-    email = "frank.alcantara@gmail.com"
-    
-    process_and_send_email(db_path, email)
+    process_and_send_email()

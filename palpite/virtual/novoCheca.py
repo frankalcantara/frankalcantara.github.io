@@ -1,278 +1,217 @@
-import pandas as pd
-import numpy as np
-from bs4 import BeautifulSoup
+#!/usr/bin/env python3
+import sqlite3
 from datetime import datetime
 import os
-import sys
+from pathlib import Path
+import numpy as np
 
-def get_script_directory():
-    """Return the absolute path of the directory containing this script."""
-    return os.path.dirname(os.path.abspath(__file__))
+def get_db_connection():
+    """Create database connection with proper timeout."""
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    db_path = os.path.join(script_dir, 'lotofacil.db')
+    conn = sqlite3.connect(db_path, timeout=30)
+    cursor = conn.cursor()
+    return conn, cursor
 
-def get_file_path(filename):
-    """Construct absolute path for a file in the script's directory."""
-    return os.path.join(get_script_directory(), filename)
+def get_last_draw(cursor):
+    """Get the most recent lottery draw."""
+    cursor.execute('''
+    SELECT num_1, num_2, num_3, num_4, num_5, num_6, num_7, num_8,
+           num_9, num_10, num_11, num_12, num_13, num_14, num_15
+    FROM draws 
+    ORDER BY draw_number DESC 
+    LIMIT 1
+    ''')
+    return cursor.fetchone()
 
-def count_matches(real_numbers, generated_array):
-    """Count how many numbers match between two arrays."""
-    return sum(np.isin(real_numbers, generated_array))
+def count_matches(real_numbers, prediction_numbers):
+    """Count matching numbers between a prediction and actual draw."""
+    return sum(np.isin(real_numbers, prediction_numbers))
 
-def calculate_proximity(array, last_100_draws):
-    """Calculate average number of matches with last 100 draws."""
-    matches = [count_matches(array, draw) for draw in last_100_draws]
-    return np.mean(matches)
-
-def save_fourteen_matches(arrays_14, output_file='quatorze.csv'):
-    """Save arrays with 14 matches in the same format as lotofacil.csv"""
-    output_path = get_file_path(output_file)
-    today = datetime.now().strftime('%Y-%m-%d')
+def analyze_predictions(cursor, conn, last_draw):
+    """Analyze all unprocessed predictions against last draw."""
+    matches_count = {11: 0, 12: 0, 13: 0, 14: 0, 15: 0}
     
-    fourteen_data = []
-    for _, row in arrays_14.iterrows():
-        numbers = [int(row[f'num_{i+1}']) for i in range(15)]
-        fourteen_data.append({
-            'Data': today,
-            **{f'Bola{i+1}': num for i, num in enumerate(sorted(numbers))}
-        })
+    cursor.execute('''
+    SELECT id, num_1, num_2, num_3, num_4, num_5, num_6, num_7, num_8,
+           num_9, num_10, num_11, num_12, num_13, num_14, num_15
+    FROM predictions 
+    WHERE status = 'F'
+    ''')
+    predictions = cursor.fetchall()
     
-    df_fourteen = pd.DataFrame(fourteen_data)
+    print(f"\nAnalyzing {len(predictions)} predictions...")
     
-    if fourteen_data:
-        df_fourteen.to_csv(output_path, mode='a', header=False, index=False)
-        print(f"Saved {len(fourteen_data)} arrays with 14 matches to {output_path}")
-    else:
-        print("No arrays with 14 matches to save")
+    for pred in predictions:
+        pred_id = pred[0]
+        numbers = pred[1:]
+        match_count = count_matches(last_draw, numbers)
+        
+        if match_count >= 11:
+            matches_count[match_count] += 1
+        
+        # Update prediction with match count and mark as verified
+        cursor.execute('''
+        UPDATE predictions 
+        SET status = 'V', 
+            matches = ?,
+            processed_at = CURRENT_TIMESTAMP
+        WHERE id = ?
+        ''', (match_count, pred_id))
+    
+    conn.commit()
+    return matches_count
 
-def check_web_directory():
-    """Check and prepare web directory for writing."""
-    web_dir = '/var/www/html'
+def get_gan_version():
+    """Get GAN.py modification time."""
     try:
-        if not os.path.exists(web_dir):
-            os.makedirs(web_dir, exist_ok=True)
-            print(f"Created directory: {web_dir}")
+        # Try local directory first
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        gan_path = os.path.join(script_dir, 'GAN.py')
         
-        if not os.access(web_dir, os.W_OK):
-            print(f"Warning: No write permission for {web_dir}")
-            return False
-        return True
-    except Exception as e:
-        print(f"Error checking web directory: {e}")
-        return False
-
-def update_html_table(matches, lotofacil_file, gan_file='GAN.py', table_file='/var/www/html/table.html'):
-    """
-    Update HTML table with current execution results and sync to Github.io assets.
-    
-    This function:
-    1. Creates/updates the table in /var/www/html
-    2. Creates a copy in the Github.io assets directory
-    3. Handles permissions and error cases for both locations
-    """
-    try:
-        timestamp = datetime.now().strftime('%d/%m/%Y')
-        
-        # Define both file paths
-        github_assets_dir = '/home/frankalcantara.github.io/assets'
-        github_table_file = os.path.join(github_assets_dir, 'table.html')
-        
-        # Get GAN.py modification date using absolute path
-        gan_path = get_file_path(gan_file)
-        gan_mod_time = datetime.fromtimestamp(os.path.getmtime(gan_path)).strftime('%Y%m%d')
-        
-        # Ensure both directories exist
-        for directory in ['/var/www/html', github_assets_dir]:
-            if not os.path.exists(directory):
-                try:
-                    os.makedirs(directory, exist_ok=True)
-                    print(f"Created directory: {directory}")
-                except Exception as e:
-                    print(f"Warning: Could not create directory {directory}: {e}")
-                    if directory == '/var/www/html':
-                        # If web directory is not accessible, use only Github.io location
-                        table_file = github_table_file
-        
-        # Create base HTML if neither file exists
-        if not os.path.exists(table_file) and not os.path.exists(github_table_file):
-            html_content = """
-            <!DOCTYPE html>
-            <html lang="pt-BR">
-            <head>
-                <meta charset="UTF-8">
-                <title>Resultados GAN Lotofácil</title>
-                <style>
-                    table { border-collapse: collapse; width: 100%; }
-                    th, td { border: 1px solid black; padding: 8px; text-align: center; }
-                </style>
-            </head>
-            <body>
-                <table>
-                    <tr>
-                        <th>Data Execução</th>
-                        <th>Versão GAN</th>
-                        <th>11 Acertos</th>
-                        <th>12 Acertos</th>
-                        <th>13 Acertos</th>
-                        <th>14 Acertos</th>
-                        <th>15 Acertos</th>
-                    </tr>
-                </table>
-            </body>
-            </html>
-            """
-            soup = BeautifulSoup(html_content, 'html.parser')
+        if not os.path.exists(gan_path):
+            # Try virtual directory if local doesn't exist
+            gan_path = '/home/frankalcantara.github.io/palpite/virtual/GAN.py'
+            
+        if os.path.exists(gan_path):
+            return datetime.fromtimestamp(os.path.getmtime(gan_path)).strftime('%Y%m%d')
         else:
-            # Try to read from either location
-            try:
-                # Prefer web directory file if it exists
-                if os.path.exists(table_file):
-                    with open(table_file, 'r') as f:
-                        soup = BeautifulSoup(f.read(), 'html.parser')
-                else:
-                    with open(github_table_file, 'r') as f:
-                        soup = BeautifulSoup(f.read(), 'html.parser')
-            except Exception as e:
-                print(f"Error reading existing table: {e}")
-                return
-
-        # Create new row with current results
-        table = soup.find('table')
-        new_row = soup.new_tag('tr')
-        
-        # Add timestamp
-        td = soup.new_tag('td')
-        td.string = timestamp
-        new_row.append(td)
-        
-        # Add GAN version
-        td = soup.new_tag('td')
-        td.string = gan_mod_time
-        new_row.append(td)
-        
-        # Add match counts
-        for i in range(11, 16):
-            td = soup.new_tag('td')
-            td.string = str(matches.get(i, 0))
-            new_row.append(td)
-        
-        table.append(new_row)
-        
-        # Write updated HTML to both locations
-        html_content = str(soup)
-        
-        # Function to safely write file with proper permissions
-        def safe_write_html(filepath):
-            try:
-                with open(filepath, 'w') as f:
-                    f.write(html_content)
-                # Set readable permissions
-                os.chmod(filepath, 0o644)
-                print(f"HTML table updated successfully at {filepath}")
-                return True
-            except Exception as e:
-                print(f"Warning: Could not update table at {filepath}: {e}")
-                return False
-        
-        # Try to write to both locations
-        web_success = safe_write_html(table_file)
-        github_success = safe_write_html(github_table_file)
-        
-        if not (web_success or github_success):
-            print("Error: Could not write table to any location")
-        
+            print("Warning: GAN.py not found, using current date as version")
+            return datetime.now().strftime('%Y%m%d')
+            
     except Exception as e:
-        print(f"Error updating HTML table: {e}")
-        print("Continuing with the rest of the analysis...")
+        print(f"Warning: Error getting GAN version: {e}")
+        return datetime.now().strftime('%Y%m%d')
 
-def analyze_gan_results(lotofacil_file, gan_file, output_file):
-    """Analyze GAN results and compare with real Lotofácil draws."""
+def get_last_ten_results(cursor):
+    """Get the last 10 execution results."""
+    cursor.execute('''
+    SELECT 
+        DATE(processed_at) as exec_date,
+        COUNT(CASE WHEN matches = 11 THEN 1 END) as matches_11,
+        COUNT(CASE WHEN matches = 12 THEN 1 END) as matches_12,
+        COUNT(CASE WHEN matches = 13 THEN 1 END) as matches_13,
+        COUNT(CASE WHEN matches = 14 THEN 1 END) as matches_14,
+        COUNT(CASE WHEN matches = 15 THEN 1 END) as matches_15
+    FROM predictions
+    WHERE status = 'V'
+    GROUP BY DATE(processed_at)
+    ORDER BY processed_at DESC
+    LIMIT 10
+    ''')
+    return cursor.fetchall()
+
+def generate_html_table(results, gan_version):
+    """Generate complete HTML file with results table."""
+    html_content = """<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados GAN Lotofácil</title>
+    <style>
+        table { 
+            border-collapse: collapse; 
+            width: 100%; 
+            font-family: Arial, sans-serif;
+        }
+        th, td { 
+            border: 1px solid black; 
+            padding: 8px; 
+            text-align: center; 
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Data Execução</th>
+            <th>Versão GAN</th>
+            <th>11 Acertos</th>
+            <th>12 Acertos</th>
+            <th>13 Acertos</th>
+            <th>14 Acertos</th>
+            <th>15 Acertos</th>
+        </tr>
+"""
+    
+    # Add data rows
+    for result in results:
+        exec_date = result[0]
+        matches = result[1:]
+        row = f"""
+        <tr>
+            <td>{exec_date}</td>
+            <td>{gan_version}</td>
+            <td>{matches[0]}</td>
+            <td>{matches[1]}</td>
+            <td>{matches[2]}</td>
+            <td>{matches[3]}</td>
+            <td>{matches[4]}</td>
+        </tr>"""
+        html_content += row
+    
+    html_content += """
+    </table>
+</body>
+</html>
+"""
+    
+    # Write to both locations
+    locations = [
+        '/var/www/html/table.html',
+        '/home/frankalcantara.github.io/assets/table.html'
+    ]
+    
+    for location in locations:
+        os.makedirs(os.path.dirname(location), exist_ok=True)
+        with open(location, 'w') as f:
+            f.write(html_content)
+        os.chmod(location, 0o644)
+    
+    print("HTML table updated successfully")
+
+def main():
     try:
-        # Convert to absolute paths
-        lotofacil_path = get_file_path(lotofacil_file)
-        gan_path = get_file_path(gan_file)
-        output_path = get_file_path(output_file)
+        print("Starting analysis...")
+        conn, cursor = get_db_connection()
         
-        print(f"Reading files from:\n"
-              f"Lotofácil data: {lotofacil_path}\n"
-              f"GAN data: {gan_path}\n"
-              f"Output will be saved to: {output_path}")
+        # Get last draw
+        last_draw = get_last_draw(cursor)
+        print(f"Last draw numbers: {last_draw}")
         
-        # Read all data from lotofacil.csv
-        df_real = pd.read_csv(lotofacil_path)
-        last_draw = df_real.iloc[-1].values[1:16]
-        last_100_draws = df_real.iloc[-100:].values[:, 1:16]
+        # Analyze predictions
+        matches = analyze_predictions(cursor, conn, last_draw)
         
-        # Read GAN generated numbers and remove duplicates
-        df_gan = pd.read_csv(gan_path)
-        df_gan = df_gan.drop_duplicates()
-        print(f"Original GAN arrays: {len(df_gan)}")
-        print(f"Unique GAN arrays after removing duplicates: {len(df_gan)}")
-        
-        matches = {11: 0, 12: 0, 13: 0, 14: 0, 15: 0}
-        selected_arrays = []
-        
-        for idx, row in df_gan.iterrows():
-            gan_numbers = row.values
-            match_count = count_matches(last_draw, gan_numbers)
-            if match_count >= 11:
-                matches[match_count] += 1
-                proximity = calculate_proximity(gan_numbers, last_100_draws)
-                selected_arrays.append({
-                    'numbers': gan_numbers,
-                    'matches': match_count,
-                    'proximity': proximity
-                })
-        
-        print("Analysis Report")
-        print("-" * 50)
-        print(f"Last real draw: {last_draw}")
-        print("\nMatches found in GAN generated numbers:")
+        # Print results
+        print("\nAnalysis Results:")
         for match_count, total in matches.items():
-            print(f"{match_count} numbers: {total} occurrences")
+            print(f"{match_count} matches: {total} occurrences")
         
-        selected_arrays.sort(key=lambda x: x['proximity'], reverse=True)
+        # Get GAN version
+        gan_version = get_gan_version()
         
-        output_data = pd.DataFrame([{
-            'matches': arr['matches'],
-            'proximity': arr['proximity'],
-            **{f'num_{i+1}': num for i, num in enumerate(arr['numbers'])}
-        } for arr in selected_arrays])
+        # Get last results and generate HTML
+        results = get_last_ten_results(cursor)
+        generate_html_table(results, gan_version)
         
-        if not output_data.empty:
-            output_data.to_csv(output_path, index=False)
-            print(f"\nSelected arrays saved to {output_path}")
-            print(f"Total arrays saved: {len(output_data)}")
-            
-            arrays_14 = output_data[output_data['matches'] == 14]
-            save_fourteen_matches(arrays_14)
-            
-            print("\nTop 10 arrays by proximity to last 100 draws:")
-            print("-" * 50)
-            for idx, row in output_data.head(10).iterrows():
-                numbers = [int(row[f'num_{i+1}']) for i in range(15)]
-                print(f"Array {idx + 1}:")
-                print(f"Numbers: {numbers}")
-                print(f"Matches with last draw: {int(row['matches'])}")
-                print(f"Average proximity: {row['proximity']:.2f}")
-                print("-" * 30)
+        print("\nAnalysis completed successfully")
         
-        update_html_table(matches, lotofacil_file, 'GAN.py')
-        
-    except FileNotFoundError as e:
-        print(f"Error: Required file not found: {e}")
-        print(f"Current working directory: {os.getcwd()}")
-        print(f"Script directory: {get_script_directory()}")
-        sys.exit(1)
     except Exception as e:
         print(f"Error during analysis: {str(e)}")
-        sys.exit(1)
+        raise
+    finally:
+        if 'conn' in locals():
+            conn.close()
+            print("Database connection closed")
 
 if __name__ == "__main__":
-    print(f"Starting analysis...")
-    print(f"Script running from: {get_script_directory()}")
-    print(f"Current working directory: {os.getcwd()}")
-    
-    analyze_gan_results(
-        'lotofacil.csv', 
-        'gan_generated_lotofacil.csv',
-        'selected_numbers.csv'
-    )
+    main()

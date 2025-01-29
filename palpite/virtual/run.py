@@ -1,162 +1,146 @@
 #!/usr/bin/env python3
 import subprocess
 import sys
-import logging
 from datetime import datetime
-from typing import List, Tuple
-import glob
+from pathlib import Path
 import os
 
-def setup_logging() -> logging.Logger:
-    """Configure logging with timestamp and appropriate format.
-    
-    Returns:
-        logging.Logger: Configured logger instance with file and console handlers
-    """
-    # Ensuring the log is created in the same directory as the script
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    log_file = os.path.join(
-        script_dir,
-        f'script_execution_{datetime.now():%Y%m%d_%H%M%S}.log'
-    )
-    
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s - %(levelname)s - %(message)s',
-        handlers=[
-            logging.FileHandler(log_file),
-            logging.StreamHandler(sys.stdout)
-        ]
-    )
-    return logging.getLogger(__name__)
+def get_script_directory():
+    """Return the absolute path of the directory containing this script."""
+    return os.path.dirname(os.path.abspath(__file__))
 
-def run_script(script_name: str, logger: logging.Logger) -> Tuple[bool, str]:
-    """
-    Execute a Python script and return its success status and output.
+def setup_log_file():
+    """Setup log file and return its path. Delete existing log if present."""
+    script_dir = get_script_directory()
+    log_path = os.path.join(script_dir, 'execution.log')
     
-    Args:
-        script_name: Name of the Python script to execute
-        logger: Logger instance for recording execution details
+    # Remove existing log if present
+    if os.path.exists(log_path):
+        os.remove(log_path)
+        print(f"Removed existing log file: {log_path}")
     
-    Returns:
-        Tuple containing execution success (bool) and output/error message (str)
-    """
-    # Getting absolute path of the current script directory
-    script_dir = os.path.dirname(os.path.abspath(__file__))
+    return log_path
+
+def log_message(log_file, message):
+    """Write a timestamped message to the log file."""
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    with open(log_file, 'a') as f:
+        f.write(f"[{timestamp}] {message}\n")
+
+def run_script(script_name, log_file):
+    """Execute a Python script and log its output."""
+    script_dir = get_script_directory()
     script_path = os.path.join(script_dir, script_name)
     
-    # Verifying file existence before execution
     if not os.path.exists(script_path):
         error_msg = f"Script not found: {script_path}"
-        logger.error(error_msg)
-        return False, error_msg
+        log_message(log_file, error_msg)
+        return False
 
     try:
-        logger.info(f"Starting execution of {script_name}")
+        log_message(log_file, f"Starting execution of {script_name}")
+        
         result = subprocess.run(
             [sys.executable, script_path],
             capture_output=True,
-            text=True,
-            check=True
+            text=True
         )
-        logger.info(f"Successfully executed {script_name}")
-        return True, result.stdout
-    except subprocess.CalledProcessError as e:
-        error_msg = f"Error in {script_name}: {e.stderr}"
-        logger.error(error_msg)
-        return False, error_msg
+        
+        # Log stdout if present
+        if result.stdout:
+            log_message(log_file, "Output:")
+            log_message(log_file, result.stdout)
+        
+        # Log stderr if present
+        if result.stderr:
+            log_message(log_file, "Errors:")
+            log_message(log_file, result.stderr)
+        
+        # Check return code
+        if result.returncode != 0:
+            log_message(log_file, f"Script failed with return code {result.returncode}")
+            return False
+        
+        log_message(log_file, f"Successfully executed {script_name}")
+        return True
+        
     except Exception as e:
-        error_msg = f"Unexpected error running {script_name}: {str(e)}"
-        logger.error(error_msg)
-        return False, error_msg
+        log_message(log_file, f"Error executing {script_name}: {str(e)}")
+        return False
 
-def commit_changes(logger: logging.Logger) -> bool:
-    """
-    Commit all updated files with a predefined message.
-    
-    Args:
-        logger: Logger instance for recording git operations
-        
-    Returns:
-        bool: True if commit was successful, False otherwise
-    """
+def commit_changes(log_file):
+    """Commit all updated files with a predefined message."""
     try:
-        logger.info("Starting git commit process")
+        log_message(log_file, "Starting git commit process")
         
-        # Definir diretório do repositório Git explicitamente
-        repo_path = "/home/frankalcantara.github.io"  # Ajuste para seu caminho
-        os.chdir(repo_path)  # Altera o diretório de trabalho
+        # Define repository path
+        repo_path = "/home/frankalcantara.github.io"
+        os.chdir(repo_path)
         
-        # Verificar se há mudanças (evitar commit vazio)
+        # Check for changes
         status = subprocess.run(
             ['git', 'status', '--porcelain'],
             capture_output=True,
             text=True
         )
+        
         if not status.stdout.strip():
-            logger.info("No changes to commit")
-            return True  # Ou False, dependendo da lógica desejada
-            
-        # Adicionar mudanças
-        subprocess.run(['git', 'add', 'assets/table.html'], check=True)  # Caminho relativo
+            log_message(log_file, "No changes to commit")
+            return True
+        
+        # Add changes
+        subprocess.run(['git', 'add', 'assets/table.html'], check=True)
         subprocess.run(['git', 'add', '.'], check=True)
-        logger.info("Added all changes to git staging")
+        log_message(log_file, "Added all changes to git staging")
         
         # Commit
-        subprocess.run(
+        result = subprocess.run(
             ['git', 'commit', '-m', 'palpites atualizados'],
             check=True,
             capture_output=True,
             text=True
         )
-        logger.info("Commit realizado com sucesso")
+        log_message(log_file, "Commit realizado com sucesso")
         
         return True
+        
     except subprocess.CalledProcessError as e:
-        logger.error(f"Erro no Git (code {e.returncode}): {e.stderr}")
+        log_message(log_file, f"Erro no Git (code {e.returncode}): {e.stderr}")
         return False
     except Exception as e:
-        logger.error(f"Erro inesperado: {str(e)}")
+        log_message(log_file, f"Erro inesperado: {str(e)}")
         return False
 
 def main():
-    """
-    Main execution function that runs scripts in sequence and commits changes.
-    """
-
-    # Apaga todos os arquivos .log no diretório atual e subdiretorios
-    [os.remove(f) for f in glob.glob("**/*.log", recursive=True)]
-
-    logger = setup_logging()
+    """Main execution function that runs scripts in sequence and commits changes."""
+    # Setup log file
+    log_file = setup_log_file()
+    log_message(log_file, "Starting sequential script execution")
     
     # List of scripts to execute in order
     scripts = [
-        "downloadLotoFacil.py",
+        "downloadSorteios.py",
         "novoCheca.py",
         "GAN.py",
-        "todb.py",
+        "removedup.py",
         "send2.py"
     ]
     
-    logger.info("Starting sequential script execution")
+    # Log execution environment
+    log_message(log_file, f"Current working directory: {os.getcwd()}")
+    log_message(log_file, f"Script directory: {get_script_directory()}")
     
-    # Logging the execution environment for debugging
-    logger.info(f"Current working directory: {os.getcwd()}")
-    logger.info(f"Script location: {os.path.dirname(os.path.abspath(__file__))}")
-    
+    # Execute each script
     for script in scripts:
-        success, output = run_script(script, logger)
-        if not success:
-            logger.error(f"Execution chain stopped at {script}")
+        if not run_script(script, log_file):
+            log_message(log_file, f"Execution chain stopped at {script}")
             sys.exit(1)
-        
-        logger.info(f"Output from {script}:\n{output}")
     
     # After all scripts execute successfully, commit changes
-    if commit_changes(logger):
-        logger.info("All scripts executed and changes committed successfully")
+    if commit_changes(log_file):
+        log_message(log_file, "All scripts executed and changes committed successfully")
     else:
-        logger.error("Scripts executed but git commit failed")
+        log_message(log_file, "Scripts executed but git commit failed")
         sys.exit(1)
 
 if __name__ == "__main__":

@@ -1,13 +1,17 @@
+#!/usr/bin/env python3
 import torch
 import torch.nn as nn
 import torch.optim as optim
 import numpy as np
-import pandas as pd
+import sqlite3
 from torch.utils.data import Dataset, DataLoader
 from sklearn.metrics.pairwise import euclidean_distances, manhattan_distances
 from scipy.spatial.distance import cdist
 import time
+import logging
+from datetime import datetime
 import os
+from typing import Tuple, List, Dict, Any
 
 class IntegerArrayDataset(Dataset):
     def __init__(self, data_tensor):
@@ -19,17 +23,72 @@ class IntegerArrayDataset(Dataset):
     def __getitem__(self, idx):
         return self.data[idx]
 
-def load_and_split_data(csv_path, test_size=100):
-    # Read CSV file
-    df = pd.read_csv(csv_path, header=None)
+def setup_logging() -> logging.Logger:
+    """Configure logging for GAN operations."""
+    log_filename = f'gan_{datetime.now():%Y%m%d_%H%M%S}.log'
     
-    # Split into train and test
-    test_df = df.iloc[-test_size:, 1:].values
-    train_df = df.iloc[:-test_size, 1:].values
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.FileHandler(log_filename),
+            logging.StreamHandler()
+        ]
+    )
+    return logging.getLogger(__name__)
+
+def get_db_connection() -> Tuple[sqlite3.Connection, sqlite3.Cursor]:
+    """Create database connection with proper timeout."""
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    db_path = os.path.join(script_dir, 'lotofacil.db')
+    conn = sqlite3.connect(db_path, timeout=30)
+    cursor = conn.cursor()
+    return conn, cursor
+
+def load_gan_config(cursor: sqlite3.Cursor) -> Dict[str, Any]:
+    """Load GAN configuration from database."""
+    cursor.execute('SELECT * FROM gan_configs ORDER BY id DESC LIMIT 1')
+    config = cursor.fetchone()
+    
+    return {
+        'latent_dim': config[3],
+        'temperature': config[4],
+        'dropout_rate': config[5],
+        'learning_rate': config[6],
+        'adam_beta1': config[7],
+        'adam_beta2': config[8],
+        'num_epochs': config[9],
+        'batch_size': config[10],
+        'test_size': config[11],
+        'num_samples': config[12],
+        'distance_metric': config[13],
+        'gen_layer1': config[14],
+        'gen_layer2': config[15],
+        'gen_layer3': config[16],
+        'disc_layer1': config[17],
+        'disc_layer2': config[18],
+        'disc_layer3': config[19],
+        'training_seed': config[20]
+    }
+
+def load_training_data(cursor: sqlite3.Cursor, test_size: int) -> Tuple[torch.Tensor, torch.Tensor]:
+    """Load and split training data from draws table."""
+    cursor.execute('''
+        SELECT num_1, num_2, num_3, num_4, num_5, num_6, num_7, num_8, 
+               num_9, num_10, num_11, num_12, num_13, num_14, num_15
+        FROM draws 
+        ORDER BY draw_number
+    ''')
+    draws = cursor.fetchall()
+    
+    # Convert to numpy array and normalize
+    data = np.array(draws)
+    test_data = data[-test_size:]
+    train_data = data[:-test_size]
     
     # Convert to tensor and normalize
-    train_tensor = torch.FloatTensor(train_df)
-    test_tensor = torch.FloatTensor(test_df)
+    train_tensor = torch.FloatTensor(train_data)
+    test_tensor = torch.FloatTensor(test_data)
     
     # Normalize
     train_tensor = (train_tensor - 1) / 24.0
@@ -38,26 +97,26 @@ def load_and_split_data(csv_path, test_size=100):
     return train_tensor, test_tensor
 
 class Generator(nn.Module):
-    def __init__(self, latent_dim=50):  # Reduced latent dimension
+    def __init__(self, config: Dict[str, Any]):
         super(Generator, self).__init__()
         
         self.model = nn.Sequential(
-            nn.Linear(latent_dim, 128),  # Reduced layer sizes
-            nn.BatchNorm1d(128),
+            nn.Linear(config['latent_dim'], config['gen_layer1']),
+            nn.BatchNorm1d(config['gen_layer1']),
             nn.LeakyReLU(0.2),
             
-            nn.Linear(128, 256),
-            nn.BatchNorm1d(256),
+            nn.Linear(config['gen_layer1'], config['gen_layer2']),
+            nn.BatchNorm1d(config['gen_layer2']),
             nn.LeakyReLU(0.2),
             
-            nn.Linear(256, 128),
-            nn.BatchNorm1d(128),
+            nn.Linear(config['gen_layer2'], config['gen_layer3']),
+            nn.BatchNorm1d(config['gen_layer3']),
             nn.LeakyReLU(0.2),
             
-            nn.Linear(128, 25)
+            nn.Linear(config['gen_layer3'], 25)
         )
         
-        self.temperature = 0.5
+        self.temperature = config['temperature']
         
     def forward(self, z):
         batch_size = z.size(0)
@@ -82,42 +141,46 @@ class Generator(nn.Module):
         return (selected - 1) / 24.0
 
 class Discriminator(nn.Module):
-    def __init__(self):
+    def __init__(self, config: Dict[str, Any]):
         super(Discriminator, self).__init__()
         
         self.model = nn.Sequential(
-            nn.Linear(15, 128),  # Reduced layer sizes
+            nn.Linear(15, config['disc_layer1']),
             nn.LeakyReLU(0.2),
-            nn.Dropout(0.3),
+            nn.Dropout(config['dropout_rate']),
             
-            nn.Linear(128, 256),
+            nn.Linear(config['disc_layer1'], config['disc_layer2']),
             nn.LeakyReLU(0.2),
-            nn.Dropout(0.3),
+            nn.Dropout(config['dropout_rate']),
             
-            nn.Linear(256, 128),
+            nn.Linear(config['disc_layer2'], config['disc_layer3']),
             nn.LeakyReLU(0.2),
-            nn.Dropout(0.3),
+            nn.Dropout(config['dropout_rate']),
             
-            nn.Linear(128, 1),
+            nn.Linear(config['disc_layer3'], 1),
             nn.Sigmoid()
         )
     
     def forward(self, x):
         return self.model(x)
 
-def denormalize_and_discretize(tensor):
-    denorm = tensor * 24.0 + 1.0
-    return torch.round(denorm).clamp(1, 25)
-
-def train_gan(generator, discriminator, dataloader, num_epochs=150, latent_dim=50):
+def train_gan(generator, discriminator, dataloader, config: Dict[str, Any], logger: logging.Logger):
     criterion = nn.BCELoss()
-    g_optimizer = optim.Adam(generator.parameters(), lr=0.0002, betas=(0.5, 0.999))
-    d_optimizer = optim.Adam(discriminator.parameters(), lr=0.0002, betas=(0.5, 0.999))
+    g_optimizer = optim.Adam(
+        generator.parameters(), 
+        lr=config['learning_rate'], 
+        betas=(config['adam_beta1'], config['adam_beta2'])
+    )
+    d_optimizer = optim.Adam(
+        discriminator.parameters(), 
+        lr=config['learning_rate'], 
+        betas=(config['adam_beta1'], config['adam_beta2'])
+    )
     
     generator.train()
     discriminator.train()
     
-    for epoch in range(num_epochs):
+    for epoch in range(config['num_epochs']):
         for i, real_arrays in enumerate(dataloader):
             batch_size = real_arrays.size(0)
             
@@ -130,7 +193,7 @@ def train_gan(generator, discriminator, dataloader, num_epochs=150, latent_dim=5
             outputs = discriminator(real_arrays)
             d_loss_real = criterion(outputs, real_labels)
             
-            noise = torch.randn(batch_size, latent_dim)
+            noise = torch.randn(batch_size, config['latent_dim'])
             fake_arrays = generator(noise)
             outputs = discriminator(fake_arrays.detach())
             d_loss_fake = criterion(outputs, fake_labels)
@@ -147,157 +210,181 @@ def train_gan(generator, discriminator, dataloader, num_epochs=150, latent_dim=5
             g_optimizer.step()
         
         if (epoch + 1) % 10 == 0:
-            print(f'Epoch [{epoch+1}/{num_epochs}]')
+            logger.info(f'Epoch [{epoch+1}/{config["num_epochs"]}]')
 
-def verify_unique_numbers(arrays):
+def verify_unique_numbers(arrays: np.ndarray) -> bool:
+    """Verify generated numbers are unique and valid."""
     for i, arr in enumerate(arrays):
         unique_nums = set(arr)
         if len(unique_nums) != 15:
-            print(f"Erro: Array {i} tem números duplicados: {arr}")
             return False
         if not all(1 <= x <= 25 for x in arr):
-            print(f"Erro: Array {i} tem números fora do intervalo [1,25]: {arr}")
             return False
     return True
 
-def calculate_hamming_distance(X, Y):
-    """
-    Calcula a distância de Hamming entre arrays
-    Conta o número de posições em que os elementos são diferentes
-    """
-    return cdist(X, Y, metric='hamming')
-
-def calculate_similarity_scores(generated_arrays, test_set, metric='euclidean'):
-    """
-    Calcula scores de similaridade usando diferentes métricas
-    """
-    # Ordena os arrays para garantir comparação consistente
+def calculate_similarity_scores(generated_arrays: np.ndarray, test_set: np.ndarray, 
+                              metric: str='euclidean') -> np.ndarray:
+    """Calculate similarity scores using specified metric and recent draw weights."""
     generated_sorted = np.sort(generated_arrays, axis=1)
     test_sorted = np.sort(test_set, axis=1)
     
-    # Seleciona a métrica apropriada
+    # Calculate base distances
     if metric == 'euclidean':
         distances = euclidean_distances(generated_sorted, test_sorted)
     elif metric == 'manhattan':
         distances = manhattan_distances(generated_sorted, test_sorted)
     elif metric == 'hamming':
-        distances = calculate_hamming_distance(generated_sorted, test_sorted)
+        distances = cdist(generated_sorted, test_sorted, metric='hamming')
     else:
         raise ValueError(f"Métrica {metric} não suportada")
     
-    # Calcula a distância mínima para cada array gerado
-    min_distances = np.min(distances, axis=1)
+    # Weight recent draws more heavily
+    num_test = test_set.shape[0]
+    weights = np.linspace(1.0, 2.0, num_test)  # More recent draws have higher weight
+    weighted_distances = distances * weights.reshape(1, -1)
     
-    # Converte distâncias em scores (inversamente proporcionais)
+    # Get minimum weighted distance for each prediction
+    min_distances = np.min(weighted_distances, axis=1)
+    
+    # Calculate similarity scores with normalization
     if metric == 'hamming':
-        # Para Hamming, o score é complementar à distância
-        similarity_scores = 1 - min_distances
+        max_dist = np.max(min_distances)
+        similarity_scores = 1 - (min_distances / max_dist)
     else:
-        # Para outras métricas, usa a transformação não-linear
         similarity_scores = 1 / (1 + min_distances)
+        # Normalize to [0, 1]
+        similarity_scores = (similarity_scores - np.min(similarity_scores)) / \
+                          (np.max(similarity_scores) - np.min(similarity_scores))
     
     return similarity_scores
 
-def generate_and_sort_samples(generator, test_tensor, num_samples=1000, latent_dim=50, metric='euclidean'):
-    """
-    Gera e ordena amostras usando a métrica especificada
-    """
+def save_predictions(cursor: sqlite3.Cursor, conn: sqlite3.Connection, 
+                    predictions: np.ndarray, scores: np.ndarray):
+    """Save generated predictions to database."""
+    # Get the maximum seq_order currently in the database
+    cursor.execute('SELECT COALESCE(MAX(seq_order), -1) FROM predictions')
+    max_seq_order = cursor.fetchone()[0]
+    start_seq = max_seq_order + 1
+    
+    print(f"Starting sequence order from: {start_seq}")
+    
+    for idx, (pred, score) in enumerate(zip(predictions, scores)):
+        cursor.execute('''
+        INSERT INTO predictions (
+            seq_order, num_1, num_2, num_3, num_4, num_5, num_6, num_7, num_8,
+            num_9, num_10, num_11, num_12, num_13, num_14, num_15, proximity
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', [start_seq + idx] + sorted(pred.tolist()) + [float(score)])
+        
+        if (idx + 1) % 1000 == 0:
+            print(f"Saved {idx + 1} predictions...")
+    
+    conn.commit()
+    print("All predictions saved successfully")
+
+def generate_predictions(generator: nn.Module, test_tensor: torch.Tensor, 
+                        config: Dict[str, Any], logger: logging.Logger) -> Tuple[np.ndarray, np.ndarray]:
+    """Generate and evaluate predictions."""
     generator.eval()
     
-    # Reset random seeds for generation
-    generation_seed = int(time.time())
-    torch.manual_seed(generation_seed)
-    np.random.seed(generation_seed)
-    
     with torch.no_grad():
-        # Generate samples
-        noise = torch.randn(num_samples, latent_dim)
+        noise = torch.randn(config['num_samples'], config['latent_dim'])
         generated = generator(noise)
         final_arrays = denormalize_and_discretize(generated)
         samples = final_arrays.numpy().astype(int)
         
         if not verify_unique_numbers(samples):
-            print("Erro: Amostras geradas contêm números duplicados ou inválidos")
-            return None
+            logger.error("Generated samples contain invalid or duplicate numbers")
+            return None, None
         
         test_arrays = denormalize_and_discretize(test_tensor).numpy()
-        similarity_scores = calculate_similarity_scores(samples, test_arrays, metric=metric)
-        sorted_indices = np.argsort(similarity_scores)[::-1]
-        sorted_samples = samples[sorted_indices]
+        similarity_scores = calculate_similarity_scores(
+            samples, test_arrays, metric=config['distance_metric']
+        )
         
-        return sorted_samples, similarity_scores[sorted_indices]
+        # Sort by similarity score
+        sorted_indices = np.argsort(similarity_scores)[::-1]
+        return samples[sorted_indices], similarity_scores[sorted_indices]
 
-def save_to_csv(arrays, scores, filename='generated_arrays.csv'):
-    """
-    Salva os arrays gerados e seus scores no CSV
-    """
-    with open(filename, 'w', newline='') as f:
-        for arr, score in zip(arrays, scores):
-            sorted_arr = sorted(arr)
-            line = ','.join(map(str, sorted_arr))
-            f.write(f"{line}\n")
+def denormalize_and_discretize(tensor: torch.Tensor) -> torch.Tensor:
+    """Denormalize and round tensor values."""
+    denorm = tensor * 24.0 + 1.0
+    return torch.round(denorm).clamp(1, 25)
+
+def clear_predictions_table(cursor: sqlite3.Cursor, conn: sqlite3.Connection):
+    """Clear all predictions from the table."""
+    try:
+        cursor.execute('DELETE FROM predictions')
+        conn.commit()
+        print("Tabela de predições limpa com sucesso")
+    except Exception as e:
+        print(f"Erro ao limpar tabela: {str(e)}")
+        conn.rollback()
+
+def main():
+    logger = setup_logging()
+    logger.info("Starting GAN training and prediction generation")
+    
+    # Initialize connection and clear table
+    conn, cursor = get_db_connection()
+    clear_predictions_table(cursor, conn)
+    
+    try:
+        # Connection already established in clear_predictions_table
+        
+        # Load configuration
+        config = load_gan_config(cursor)
+        logger.info("Loaded GAN configuration from database")
+        
+        # Set random seeds
+        torch.manual_seed(config['training_seed'])
+        np.random.seed(config['training_seed'])
+        
+        # Load and prepare data
+        train_tensor, test_tensor = load_training_data(cursor, config['test_size'])
+        logger.info(f"Loaded {len(train_tensor)} training samples and {len(test_tensor)} test samples")
+        
+        # Create dataset and dataloader
+        dataset = IntegerArrayDataset(train_tensor)
+        dataloader = DataLoader(dataset, batch_size=config['batch_size'], shuffle=True)
+        
+        # Initialize models
+        generator = Generator(config)
+        discriminator = Discriminator(config)
+        
+        # Train
+        logger.info("Starting model training...")
+        start_time = time.time()
+        
+        train_gan(generator, discriminator, dataloader, config, logger)
+        
+        training_time = time.time() - start_time
+        logger.info(f"Training completed in {training_time:.2f} seconds")
+        
+        # Generate predictions
+        logger.info(f"Generating {config['num_samples']} predictions...")
+        start_time = time.time()
+        
+        predictions, scores = generate_predictions(generator, test_tensor, config, logger)
+        if predictions is not None:
+            save_predictions(cursor, conn, predictions, scores)
+            
+            generation_time = time.time() - start_time
+            logger.info(f"Generation and saving completed in {generation_time:.2f} seconds")
+            
+            logger.info("\nTop 5 predictions by similarity score:")
+            for i in range(min(5, len(predictions))):
+                logger.info(f"Prediction {i+1}: {sorted([int(x) for x in predictions[i]])} (Score: {scores[i]:.4f})")
+        else:
+            logger.error("Failed to generate valid predictions")
+        
+    except Exception as e:
+        logger.error(f"An error occurred: {str(e)}")
+        raise
+    finally:
+        if 'conn' in locals():
+            conn.close()
+            logger.info("Database connection closed")
 
 if __name__ == "__main__":
-    # Hyperparameters otimizados para CPU
-    latent_dim = 100
-    batch_size = 32
-    num_epochs = 150
-    test_size = 100
-    distance_metric = 'manhattan'  # pode ser 'euclidean', 'manhattan' ou 'hamming'
-
-    # Remove arquivo anterior se existir
-    os.remove('gan_generated_lotofacil.csv') if os.path.exists('gan_generated_lotofacil.csv') else None
-    
-    # Set random seeds for training
-    print("Definindo seeds para treinamento...")
-    training_seed = generation_seed = int(time.time_ns()) % (2**32)
-    torch.manual_seed(training_seed)
-    np.random.seed(training_seed)
-    
-    # Load and split data
-    print("Carregando e dividindo os dados...")
-    train_tensor, test_tensor = load_and_split_data('lotofacil.csv', test_size=test_size)
-    
-    # Create dataset and dataloader
-    dataset = IntegerArrayDataset(train_tensor)
-    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
-    
-    # Initialize models
-    generator = Generator(latent_dim)
-    discriminator = Discriminator()
-    
-    # Train
-    print(f"Iniciando treinamento com {len(train_tensor)} amostras...")
-    print(f"Conjunto de teste: {test_size} amostras")
-    print(f"Métrica de distância: {distance_metric}")
-    start_time = time.time()
-    
-    train_gan(generator, discriminator, dataloader, num_epochs, latent_dim)
-    
-    end_time = time.time()
-    print(f"Treinamento concluído em {end_time - start_time:.2f} segundos")
-    
-    # Generate and sort samples
-    print("\nGerando e ordenando 50000 amostras...")
-    start_time = time.time()
-    
-    result = generate_and_sort_samples(
-        generator, 
-        test_tensor, 
-        num_samples=50000, 
-        latent_dim=latent_dim,
-        metric=distance_metric
-    )
-    
-    if result is not None:
-        sorted_samples, similarity_scores = result
-        save_to_csv(sorted_samples, similarity_scores, 'gan_generated_lotofacil.csv')
-        
-        end_time = time.time()
-        print(f"Geração e ordenação concluídas em {end_time - start_time:.2f} segundos")
-        
-        print("\nAmostras geradas e ordenadas por similaridade (primeiras 5):")
-        for i in range(min(5, len(sorted_samples))):
-            print(f"Amostra {i+1}: {sorted(sorted_samples[i])} (Score: {similarity_scores[i]:.4f})")
-    else:
-        print("Erro na geração das amostras.")
+    main()
