@@ -24,7 +24,7 @@ keywords: |-
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-01-29T23:28:47.549Z
+lastmod: 2025-01-29T23:34:22.295Z
 slug: deepseek-explicado-de-forma-simples
 ---
 
@@ -178,7 +178,7 @@ A *Group Robust Preference Optimization* (**GRPO**) representa uma evolução si
 A função objetivo do **GRPO** pode ser expressa matematicamente como:
 
 $$
-J_{**GRPO**}(\theta) = \mathbb{E}_{(x,y)\sim \mathcal{D}} \left[ \min_{i \in G} \frac{p_\theta(y|x)}{p_i(y|x)} \right]
+J_{GRPO}(\theta) = \mathbb{E}_{(x,y)\sim \mathcal{D}} \left[ \min_{i \in G} \frac{p_\theta(y|x)}{p_i(y|x)} \right]
 $$
 
 Onde $\theta$ representa os parâmetros do modelo, $G$ é o grupo de referência, e $p_i(y|x)$ é a probabilidade atribuída pelo modelo $i$ à saída $y$ dado o contexto $x$.
@@ -654,7 +654,7 @@ A Otimização de Política Relativa em Grupo (**GRPO**) representa uma inovaç�
 No coração do **GRPO** está uma função objetivo projetada que equilibrar múltiplos objetivos concorrentes:
 
 $$
-J_{**GRPO**}(\theta) = E_{q\sim P(Q),\{o_i\}^G_{i=1}\sim \pi_{\theta_{old}}(O|q)}[\frac{1}{G}\sum_{i=1}^G \min(\rho_i A_i, clip(\rho_i,1-\epsilon,1+\epsilon)A_i) - \beta D_{KL}(\pi_\theta\|\pi_{ref})]
+J_{GRPO}(\theta) = E_{q\sim P(Q),\{o_i\}^G_{i=1}\sim \pi_{\theta_{old}}(O|q)}[\frac{1}{G}\sum_{i=1}^G \min(\rho_i A_i, clip(\rho_i,1-\epsilon,1+\epsilon)A_i) - \beta D_{KL}(\pi_\theta\|\pi_{ref})]
 $$
 
 Esta expressão incorpora vários componentes-chave que trabalham em harmonia:
