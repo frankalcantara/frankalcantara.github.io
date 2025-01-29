@@ -34,7 +34,7 @@ featured: true
 toc: true
 preview: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de currying e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de currying e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2025-01-28T00:52:57.879Z
+lastmod: 2025-01-29T14:33:26.352Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -43,6 +43,7 @@ date: 2024-09-08T21:19:30.955Z
 >Todos os exercícios desta página foram removidos.
 >Os exercícios estarão disponíveis apenas no livro que está sendo escrito.
 >Removi também o capítulo sobre cálculo lambda simplesmente tipado. E algumas partes aleatórias que não estavam muito boas.
+>[ O livro está disponível na Amazon](https://a.co/d/bNrG5Fu). 
 
 O cálculo lambda é uma teoria formal para expressar computação por meio da visão de funções como fórmulas. Um sistema para manipular funções como sentenças, desenvolvido por [Alonzo Church](https://en.wikipedia.org/wiki/Alonzo_Church) sob uma visão extensionista das funções na década de 1930. Nesta teoria usamos funções para representar todos os dados e operações. Em cálculo lambda, tudo é uma função e uma função simples é parecida com:
 
