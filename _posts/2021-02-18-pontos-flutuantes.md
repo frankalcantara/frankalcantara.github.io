@@ -15,7 +15,7 @@ preview: um estudo novo sobre uma das normas mais importantes e menos conhecidas
 featured: false
 rating: 3.5
 slug: precisao-realidade-os-desafios-da-norma-ieee-754-na-computacao-moderna
-lastmod: 2024-12-20T20:07:28.436Z
+lastmod: 2025-01-30T01:05:09.022Z
 date: 2024-12-20T20:07:14.934Z
 published: true
 ---
