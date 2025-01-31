@@ -24,7 +24,7 @@ keywords: |-
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-01-30T12:54:54.012Z
+lastmod: 2025-01-31T18:16:39.889Z
 slug: deepseek-explicado-de-forma-simples
 ---
 
@@ -841,6 +841,8 @@ Algumas questões estão abertas servido para fomentar um turbilhão de hipótes
 3. **Leis de Escala**: quais são as relações entre os custos de computação e dados no treinamento de modelos de raciocínio? Precisamos conhecer estas relações para otimizar outros modelos.
 
 4. **Destilação**: em modelos de linguagem grandes (LLMs) é uma técnica que visa transferir o conhecimento de um modelo maior e mais complexo (o "professor") para um modelo menor e mais eficiente (o "aluno"). É como se estivéssemos condensando a sabedoria de um especialista em um manual mais conciso, mas igualmente útil. Essa é uma técnica relativamente corrente no desenvolvimento de modelos **LLMs**. O ponto importante aqui é a profundidade desta destilação e o que será considerado justo, ou não.
+
+**Finalmente**: todo este texto foi escrito com ferramentas de inteligência artificial para busca, formatação e revisão: [notebookllm](https://notebooklm.google.com/), [deepseek](https://chat.deepseek.com/), [gemini](https://gemini.google.com/), [claude](https://claude.ai/) e [qwen2.5](https://chat.qwenlm.ai/).
 
 ## Referências
 
