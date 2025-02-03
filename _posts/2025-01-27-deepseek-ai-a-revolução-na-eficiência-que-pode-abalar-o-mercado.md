@@ -19,13 +19,18 @@ keywords: inteligência artificial
 toc: false
 published: true
 beforetoc: "Você já ouviu falar da DeepSeek AI? Uma equipe ENXUTA de menos de 200 gênios, desafiou as gigantes da tecnologia e fez o IMPOSSÍVEL: desenvolveram modelos de IA que RIVALIZAM e até SUPERAM o GPT-4 e o Claude... com um orçamento 20 VEZES MENOR! Isso mesmo, você não leu errado! Enquanto Google, OpenAI e companhia gastavam fortunas, a DeepSeek AI repensou a arquitetura tradicional, focando em EFICIÊNCIA, INOVAÇÃO e CÓDIGO ABERTO."
-lastmod: 2025-01-27T19:22:57.269Z
+lastmod: 2025-02-03T21:35:17.166Z
 slug: deepseek-ai-revolucao-na-eficiencia-pode-abalar-mercado
 ---
 
 >Esta é uma republicação de um artigo escrito em 25 de janeiro de 2025, no Linkedin.
 
-O cenário da Inteligência Artificial está em constante ebulição, e a recente chegada da DeepSeek AI causou um verdadeiro terremoto. Com um investimento de apenas 557 mil dólares, o equivalente aproximado de 278,8 mil horas de uso de GPU’s H800, com custo padrão de _US$_2.00 por hora, eles conseguiram desenvolver modelos que rivalizam e até superam o GPT-4 e o Claude em diversas tarefas típicas de validação. Ainda que existam rumores de que este custo tenha sido de aproximada mente 5 milhões de dólares. Ainda representa 20 vezes menos que os modelos mais populares. Isso é levanta uma questão interessante: **como, valha me Deus, eles conseguiram isso?**
+O cenário da Inteligência Artificial está em constante ebulição, e a recente chegada da DeepSeek AI causou um verdadeiro terremoto. Com um investimento de apenas 5 milhões de dólares, o equivalente aproximado de 278,8 mil horas de uso de GPU’s H800, com custo padrão de _US$_2.00 por hora, eles conseguiram desenvolver modelos que rivalizam e até superam o GPT-4 e o Claude em diversas tarefas típicas de validação. Ainda que No paper eles afirmem que excluíram os custos de treinamento das versões anteriores.
+
+![Foto do artigo em inglês mostrando a linha citada no texto](/assets/images/deep5.webp)
+
+
+Isso é levanta uma questão interessante: **como, valha me Deus, eles conseguiram isso?**
 
 A equipe da DeepSeek AI repensou a arquitetura, agora tradicional e antiga, focando em estudo, otimização e eficiência. Enquanto a maior parte do mercado está aumentando os modelos e incluindo mais capacidade computacional no processo eles resolveram tentar processos diferentes:
 
