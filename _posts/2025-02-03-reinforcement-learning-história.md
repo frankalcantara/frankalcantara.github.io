@@ -14,7 +14,7 @@ keywords: Aprendizado por Reforço, História do RL, Richard Bellman, Q-Learning
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-02-03T19:40:28.556Z
+lastmod: 2025-02-03T19:43:42.828Z
 draft: 2025-02-03T17:19:36.133Z
 ---
 
@@ -24,7 +24,7 @@ Nos últimos anos a aprendizagem por reforço (*reinforcement learning - *RL**) 
 
 ## Psicologia e Biologia (Século XIX - Meados do Século XX)
 
-A essência do *RL* reside na ideia de aprender com base em recompensas e punições, um conceito profundamente enraizado na psicologia comportamental e na biologia. 
+A essência do *RL* reside na ideia de aprender com base em recompensas e punições, um conceito profundamente enraizado na psicologia comportamental e na biologia.
 
 Embora [Edward Thorndike](https://www.britannica.com/biography/Edward-L-Thorndike) (1898) seja frequentemente citado por sua **Lei do Efeito**, a qual postula que comportamentos seguidos por recompensas tendem a se repetir, enquanto aqueles seguidos por punições tendem a ser evitados, sendo festejado mundialmente como o pai da teoria de aprendizagem por reforço, é crucial reconhecer as contribuições de [Ivan Pavlov](https://www.britannica.com/biography/Ivan-Pavlov) (final do séc. XIX, início do séc. XX).
 
@@ -35,7 +35,7 @@ Pavlov, através de seus experimentos de condicionamento clássico, demonstrou c
 Posteriormente, [B.F. Skinner](https://www.britannica.com/biography/B-F-Skinner) (1938) expandiu esses conceitos com o condicionamento operante. Seus experimentos com ratos e pombos demonstraram que os animais podiam aprender a associar ações específicas a consequências positivas (reforço) ou negativas (punição). Skinner solidificou a ideia de que o aprendizado é moldado por reforços, um princípio central que se tornaria a pedra angular do *RL*.
 
 <div class="video-wrapper">
-   <iframe src="https://www.youtube.com/embed/NeK8GNLylkc?autoplay=0" 
+   <iframe src="https://www.youtube.com/embed/NeK8GNLylkc?autoplay=0"
           loading="lazy"
           allow="clipboard-write; encrypted-media; picture-in-picture"
           allowfullscreen>
@@ -64,13 +64,13 @@ Os **MDPs**, inicialmente aplicados em áreas como controle e economia, fornecer
 
 ## Os Primeiros Passos Computacionais: Aprendizado de Máquina (Anos 1960-1980)
 
-Nas décadas de 1960 e 1970, os pesquisadores começaram a explorar como os computadores poderiam aprender através da interação com o ambiente. [Arthur Samuel](https://en.wikipedia.org/wiki/Arthur_Samuel_(computer_scientist)) (1959) deu um passo pioneiro com seu programa de aprendizado para jogar damas. Esse programa, embora rudimentar, ajustava seus parâmetros com base em recompensas (vitórias ou derrotas) e representa um dos primeiros exemplos de aprendizado por reforço em, o que hoje chamamos de inteligência artiricial, influenciando inclusive as futuras ideias de Aprendizado por Diferença Temporal.
+Nas décadas de 1960 e 1970, os pesquisadores começaram a explorar como os computadores poderiam aprender através da interação com o ambiente. [Arthur Samuel](https://en.wikipedia.org/wiki/Arthur_Samuel_(computer_scientist)) (1959) deu um passo pioneiro com seu programa de aprendizado para jogar damas. Esse programa, embora rudimentar, ajustava seus parâmetros com base em recompensas (vitórias ou derrotas) e representa um dos primeiros exemplos de aprendizado por reforço em, o que hoje chamamos de inteligência artificial, influenciando inclusive as futuras ideias de Aprendizado por Diferença Temporal.
 
 [Widrow](https://en.wikipedia.org/wiki/Bernard_Widrow) e [Hoff](https://en.wikipedia.org/wiki/Marcian_Hoff) (1960) propuseram o algoritmo [ADALINE](https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/machine_learning/adaline_learning.cpp), que **usava feedback para ajustar pesos em redes neurais simples**. Embora não fosse *RL* no sentido moderno, introduziu a ideia de usar feedback para melhorar o desempenho, um conceito crucial para o desenvolvimento posterior dos campos de estudo relacionados a inteligência artificial.
 
 Nesse período, também surgiram as primeiras discussões sobre o dilema da exploração-explotação (*exploration-exploitation dilemma*), um conceito central no *RL*. **O agente precisa encontrar um equilíbrio entre explorar novas ações para descobrir melhores recompensas e explorar ações que já se mostraram promissoras**. A Cibernética, um campo interdisciplinar que explora sistemas de controle e comunicação em animais e máquinas, também teve influência nesse período inicial, com conceitos como feedback e controle sendo compartilhados entre a cibernética e o *RL*.
 
-![imagem de um robo perdido em um labirinto](/assets/images/rl3.webp)
+![imagem de um robô perdido em um labirinto](/assets/images/rl3.webp)
 
 Esta área de pesquisa ainda estava em sua primeira infância, mas as sementes para o futuro florescimento do *RL* já haviam sido plantadas.
 
@@ -106,4 +106,4 @@ E, chegamos ao [DeepSeek-R1](https://frankalcantara.com/deepseek-explicado-de-fo
 
 A jornada do Aprendizado por Reforço é uma história de convergência e inovação. Desde suas raízes na psicologia comportamental e na biologia, passando pela formalização matemática com os **MDPs**, até a revolução do *Deep Learning*, o *RL* se transformou em uma ferramenta poderosa para a construção de agentes inteligentes. Com o rápido progresso em IA e computação, o futuro do *RL* promete ainda mais inovações e impactos transformacionais em diversas áreas da sociedade. Essa história está só começando, e eu também.
 
-Me siga se quiser saber mais sobre *reinforcement learning*. Se tudo correr bem, vou escrever aqui, capítulo por capítulo, um livro texto sobre *reiforcemente learning*.
+Me siga se quiser saber mais sobre *reinforcement learning*. Se tudo correr bem, vou escrever aqui, capítulo por capítulo, um livro texto sobre *reinforcement learning*.
