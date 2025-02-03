@@ -24,7 +24,7 @@ keywords: |-
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-01-31T18:16:39.889Z
+lastmod: 2025-02-02T01:06:30.243Z
 slug: deepseek-explicado-de-forma-simples
 ---
 
@@ -36,7 +36,7 @@ A primeira coisa importante a notar é que o DeepSeek-R1 está sob a licença MI
 
 O R1 chamou a atenção por empatar, ou bater os modelos antigos e tradicionais.
 
-![Comparação entre os resultados de diversos modelos](assets/images/deep3.webp)
+![Comparação entre os resultados de diversos modelos](/assets/images/deep3.webp)
 
 *Comparação entre os resultados de diversos modelos*{: class="legend"}
 
