@@ -14,7 +14,7 @@ keywords: Aprendizado por Reforço, História do RL, Richard Bellman, Q-Learning
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-02-03T19:43:42.828Z
+lastmod: 2025-02-04T16:48:04.977Z
 draft: 2025-02-03T17:19:36.133Z
 ---
 
@@ -52,7 +52,7 @@ A década de 1950 marcou o início da formalização matemática de problemas de
 
 ![Ilustração mostrando dois professores no quadro negro](/assets/images/rl2.webp)
 
-[^2]BELLMAN, Richard Ernest. Dynamic Programming. Princeton, New Jersey: Princeton University Press, 1957.
+[^2]: BELLMAN, Richard Ernest. Dynamic Programming. Princeton, New Jersey: Princeton University Press, 1957.
 
 Juntamente com a programação dinâmica, Bellman desenvolveu os **Processos de Decisão de Markov (MDPs)**, que se tornaram a estrutura matemática fundamental para o *RL*. **MDPs** fornecem um quadro formal para modelar problemas de decisão onde o resultado depende tanto das ações do agente quanto de estados aleatórios do ambiente. Neste ponto, não posso deixar de mencionar [Ronald Howard](https://en.wikipedia.org/wiki/Ronald_A._Howard) (1960), que em seu livro *Dynamic Programming and Markov Processes*, aplicou os **MDPs** a problemas práticos de tomada de decisão e ajudou a popularizar essa abordagem.
 
