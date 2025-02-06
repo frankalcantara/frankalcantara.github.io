@@ -3,13 +3,13 @@ layout: post
 title: Entendendo Markov Decision Process
 author: Frank
 categories:
-  - Matemática
-  - Inteligência Artificial
+    - Matemática
+    - Inteligência Artificial
 tags:
-  - inteligência artificial
-  - Matemática
-  - resolução de problemas
-  - reinforcement learning
+    - inteligência artificial
+    - Matemática
+    - resolução de problemas
+    - reinforcement learning
 image: /images/mdp1.webp
 featured: false
 rating: 0
@@ -17,10 +17,10 @@ description: ""
 date: 2025-02-05T00:25:52.147Z
 preview: A primeira parte do MDP, com código em C++ 20 e os motivos impulsionaram Markov
 toc: true
-published: false
+published: true
 keywords: Aprendizado por Reforço, História do RL, MDP, Markov, C++20.
 beforetoc: ""
-lastmod: 2025-02-06T21:41:28.945Z
+lastmod: 2025-02-06T21:43:12.009Z
 draft: 2025-02-05T00:25:59.828Z
 ---
 
