@@ -2,8 +2,14 @@
 layout: post
 title: "Reinforcement Learning: História"
 author: Frank
-categories: []
-tags: []
+categories:
+  - Matemática
+  - Inteligência Artificial
+tags:
+  - inteligência artificial
+  - Matemática
+  - resolução de problemas
+  - reinforcement learning
 image: assets/images/rl1.webp
 featured: false
 rating: 0
@@ -14,7 +20,7 @@ keywords: Aprendizado por Reforço, História do RL, Richard Bellman, Q-Learning
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-02-06T21:41:22.361Z
+lastmod: 2025-02-06T21:47:34.198Z
 draft: 2025-02-03T17:19:36.133Z
 ---
 

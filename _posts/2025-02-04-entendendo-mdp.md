@@ -10,17 +10,17 @@ tags:
     - Matemática
     - resolução de problemas
     - reinforcement learning
-image: /images/mdp1.webp
+image: assets/images/mdp1.webp
 featured: false
 rating: 5
-description: A primeira parte do MDP, com código em C++ 20 e os motivos impulsionaram Markov.
+description: A primeira parte do MDP, com código em Cpp 20 e os motivos impulsionaram Markov.
 date: 2025-02-05T00:25:52.147Z
-preview: A primeira parte do MDP, com código em C++ 20 e os motivos impulsionaram Markov.
-toc: true
+preview: A primeira parte do capítulo sobre MDP, com código em C++ 20, os motivos impulsionaram Markov e o que ele descobriu que levaria ao RL.
+toc: false
 published: true
 keywords: Aprendizado por Reforço, História do RL, MDP, Markov.
 beforetoc: ""
-lastmod: 2025-02-06T21:45:20.210Z
+lastmod: 2025-02-06T22:05:36.338Z
 draft: 2025-02-05T00:25:59.828Z
 ---
 
@@ -99,8 +99,8 @@ void verify_law_of_large_numbers() {
         FlipStats stats(results);
 
         std::cout << std::format(
-            "Number of flips: {:5} | Heads: {:5} | Tails: {:5} | "
-            "Heads ratio: {:.4f} | Deviation from expected: {:.4f}\n",
+            "Number of flips: {:5} \vert  Heads: {:5} \vert  Tails: {:5} \vert  "
+            "Heads ratio: {:.4f} \vert  Deviation from expected: {:.4f}\n",
             size,
             stats.heads,
             stats.tails,
@@ -127,10 +127,10 @@ Que, ao rodar, com C++ 20, resulta em:
 Verifying the Law of Large Numbers with coin flips
 Expected probability: 0.5000
 
-Number of flips:    10 | Heads:     3 | Tails:     7 | Heads ratio: 0.3000 | Deviation from expected: 0.2000
-Number of flips:   100 | Heads:    61 | Tails:    39 | Heads ratio: 0.6100 | Deviation from expected: 0.1100
-Number of flips:  1000 | Heads:   486 | Tails:   514 | Heads ratio: 0.4860 | Deviation from expected: 0.0140
-Number of flips: 10000 | Heads:  5030 | Tails:  4970 | Heads ratio: 0.5030 | Deviation from expected: 0.0030
+Number of flips:    10 \vert  Heads:     3 \vert  Tails:     7 \vert  Heads ratio: 0.3000 \vert  Deviation from expected: 0.2000
+Number of flips:   100 \vert  Heads:    61 \vert  Tails:    39 \vert  Heads ratio: 0.6100 \vert  Deviation from expected: 0.1100
+Number of flips:  1000 \vert  Heads:   486 \vert  Tails:   514 \vert  Heads ratio: 0.4860 \vert  Deviation from expected: 0.0140
+Number of flips: 10000 \vert  Heads:  5030 \vert  Tails:  4970 \vert  Heads ratio: 0.5030 \vert  Deviation from expected: 0.0030
 
 ```
 
@@ -158,13 +158,13 @@ Em busca da evidência necessária, Markov contou meticulosamente as vogais e co
 
 Para formalizar suas observações, Markov propôs que a probabilidade de uma letra dependeria exclusivamente da letra imediatamente anterior, e não do histórico completo de letras anteriores. Essa formalização é conhecida como a *propriedade de Markov*, também descrita como a propriedade da ausência de memória, e é o princípio fundamental que define as Cadeias de Markov.
 
-### Cadeias de Markov e a Propriedade de Markov
+## Cadeias de Markov e a Propriedade de Markov
 
 Markov precisava de um modelo matemático que capturasse a ideia de dependência, mas de uma forma específica. Ele formalizou essa ideia com o que hoje conhecemos como *Propriedade de Markov*, ou ausência de memória. Em termos mais formais, dizemos que:
 
 Para uma sequência de variáveis aleatórias $X_1, X_2, ..., X_n$, a propriedade de Markov estabelece que, para todo $n$:
 
-$$ P(X_{n+1} = x_{n+1} | X_n = x_n, X_{n-1} = x_{n-1}, ..., X_1 = x_1) = P(X_{n+1} = x_{n+1} | X_n = x_n) $$
+$$ P(X_{n+1} = x_{n+1} \vert  X_n = x_n, X_{n-1} = x_{n-1}, ..., X_1 = x_1) = P(X_{n+1} = x_{n+1} \vert  X_n = x_n) $$
 
 A atenta leitora deve considerar que essa propriedade diz que o futuro (o estado $X_{n+1}$) depende apenas do presente (o estado $X_n$), e não de todo o passado ($X_{n-1}, X_{n-2}, ..., X_1$). Neste caso, dizemos que o sistema *não tem memória* além do seu estado atual.
 
@@ -178,16 +178,16 @@ Formalmente dizemos que a dependência entre os estados em uma Cadeia de Markov 
 
 $$
 P = \begin{bmatrix}
-p_{11} & p_{12} & \cdots & p_{1n} \
-p_{21} & p_{22} & \cdots & p_{2n} \
-\vdots & \vdots & \ddots & \vdots \
+p_{11} & p_{12} & \cdots & p_{1n} \\
+p_{21} & p_{22} & \cdots & p_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
 p_{n1} & p_{n2} & \cdots & p_{nn}
 \end{bmatrix}
 $$
 
 Neste caso, temos:
 
-- $p_{ij} = P(X_{n+1} = j | X_n = i)$ (a probabilidade de ir para o estado $j$ dado que o estado atual é $i$)
+- $p_{ij} = P(X_{n+1} = j \vert X_n = i)$ (a probabilidade de ir para o estado $j$ dado que o estado atual é $i$)
 - $0 \le p_{ij} \le 1$ para todos $i$ e $j$ (todos os elementos são probabilidades)
 - $\sum_{j=1}^{n} p_{ij} = 1$ para todo $i$ (a soma das probabilidades de transição a partir de um dado estado deve ser 1).
 
@@ -446,19 +446,19 @@ A estrutura `TransitionStats` armazena todas as contagens necessárias para calc
 
 1. **vowel_to_vowel**: Conta quantas vezes uma vogal é seguida por outra vogal.
   
-   - Exemplo: "еа" em "театр" - $P(V|V)$
+   - Exemplo: "еа" em "театр" - $P(V\vert V)$
 
 2. **vowel_to_consonant**: Conta quantas vezes uma vogal é seguida por uma consoante.
   
-   - Exemplo: "ит" em "итог" - $P(C|V)$
+   - Exemplo: "ит" em "итог" - $P(C\vert V)$
 
 3. **consonant_to_vowel**: Conta quantas vezes uma consoante é seguida por uma vogal.
   
-   - Exemplo: "ра" em "рада" - $P(V|C)$
+   - Exemplo: "ра" em "рада" - $P(V\vert C)$
 
 4. **consonant_to_consonant**: Conta quantas vezes uma consoante é seguida por outra consoante.
   
-   - Exemplo: "ст" em "стол" - $P(C|C)$
+   - Exemplo: "ст" em "стол" - $P(C\vert C)$
 
 A estrutura `TransitionStats` também contém as seguintes variáveis totalizadoras:
 
@@ -510,24 +510,24 @@ Para o texto de *Eugene Onegin*, temos uma matriz $2 \times 2$ pois existem apen
 
 $$
 P = \begin{bmatrix}
-P(V|V) & P(V|C) \\
-P(C|V) & P(C|C)
+P(V\vert V) & P(V\vert C) \\
+P(C\vert V) & P(C\vert C)
 \end{bmatrix}
 $$
 
 Neste caso, temos:
 
-- $P(V|V)$ é a probabilidade de uma vogal após uma vogal
-- $P(V|C)$ é a probabilidade de uma vogal após uma consoante
-- $P(C|V)$ é a probabilidade de uma consoante após uma vogal
-- $P(C|C)$ é a probabilidade de uma consoante após uma consoante
+- $P(V\vert V)$ é a probabilidade de uma vogal após uma vogal
+- $P(V\vert C)$ é a probabilidade de uma vogal após uma consoante
+- $P(C\vert V)$ é a probabilidade de uma consoante após uma vogal
+- $P(C\vert C)$ é a probabilidade de uma consoante após uma consoante
 
 Por exemplo, se no texto encontramos:
 
-- "еа" em "театр": contribui para $P(V|V)$
-- "ит" em "итог": contribui para $P(C|V)$
-- "ра" em "рада": contribui para $P(V|C)$
-- "ст" em "стол": contribui para $P(C|C)$
+- "еа" em "театр": contribui para $P(V\vert V)$
+- "ит" em "итог": contribui para $P(C\vert V)$
+- "ра" em "рада": contribui para $P(V\vert C)$
+- "ст" em "стол": contribui para $P(C\vert C)$
 
 A matriz resultante poderia ser algo como:
 
@@ -636,18 +636,18 @@ if (is_vowel_curr) {
 }
 ```
 
-Mantém a contagem total de vogais e consoantes no texto. Estas contagens serão usadas para calcular as probabilidades $P(i|j)$ da matriz de transição:
+Mantém a contagem total de vogais e consoantes no texto. Estas contagens serão usadas para calcular as probabilidades $P(i\vert j)$ da matriz de transição:
 
-$$ P(i|j) = \frac{count(j \rightarrow i)}{total\_transitions} $$
+$$ P(i\vert j) = \frac{count(j \rightarrow i)}{total\_transitions} $$
 
 Por exemplo:
 
-$$ P(V|V) = \frac{vowel\_to\_vowel}{total\_transitions} $$
+$$ P(V\vert V) = \frac{vowel\_to\_vowel}{total\_transitions} $$
 
 A classe principal `MarkovAnalysis` implementa a matriz de transição $P$, de forma que:
 
 $$
-P_{ij} = P(X_{n+1} = j | X_n = i)
+P_{ij} = P(X_{n+1} = j \vert  X_n = i)
 $$
 
 Para $i,j \in \{vogal, consoante\}$
@@ -655,7 +655,7 @@ Para $i,j \in \{vogal, consoante\}$
 O processamento dos caracteres, que também é implementando na classe `MarkovAnalysis` segue o modelo:
 
 $$
-P(X_n | X_{n-1}) = \frac{count(X_{n-1} \rightarrow X_n)}{total\_transitions}
+P(X_n \vert  X_{n-1}) = \frac{count(X_{n-1} \rightarrow X_n)}{total\_transitions}
 $$
 
 A implementação de `MarkovAnalysis` pode ser vista em:
@@ -700,10 +700,10 @@ Uma vez que o código seja executado corretamente, os resultados serão apresent
 
 2. Matriz de probabilidades de transição:
   
-   - $P(V|V)$ - Vogal para Vogal
-   - $P(C|V)$ - Vogal para Consoante
-   - $P(V|C)$ - Consoante para Vogal
-   - $P(C|C)$ - Consoante para Consoante
+   - $P(V\vert V)$ - Vogal para Vogal
+   - $P(C\vert V)$ - Vogal para Consoante
+   - $P(V\vert C)$ - Consoante para Vogal
+   - $P(C\vert C)$ - Consoante para Consoante
 
 Este exemplo em C++ 20 demonstra a tese de Markov de que a Lei dos Grandes Números pode ser aplicada a sequências dependentes, logo:
 
