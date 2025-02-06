@@ -14,7 +14,7 @@ keywords: Aprendizado por Reforço, História do RL, Richard Bellman, Q-Learning
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-02-04T16:48:04.977Z
+lastmod: 2025-02-06T21:41:22.361Z
 draft: 2025-02-03T17:19:36.133Z
 ---
 
@@ -42,7 +42,7 @@ Posteriormente, [B.F. Skinner](https://www.britannica.com/biography/B-F-Skinner)
   </iframe>
 </div>
 
-Além da psicologia, a **Etologia**, o estudo do comportamento animal em seus ambientes naturais, também contribuiu para o contexto do *RL*. Pesquisadores como [Konrad Lorenz](https://www.britannica.com/biography/Konrad-Lorenz) e [Nikolaas Tinbergen](https://www.britannica.com/biography/Nikolaas-Tinbergen) estudaram comportamentos instintivos e padrões fixos de ação, que, embora distintos do aprendizado por reforço, ofereceram insights valiosos sobre o comportamento animal e influenciaram o desenvolvimento de modelos computacionais de comportamento.
+Além da psicologia, a **Etologia**, o estudo do comportamento animal em seus ambientes naturais, também contribuiu para o contexto do *RL*. Pesquisadores como [Konrad Lorenz](https://www.britannica.com/biography/Konrad-Lorenz) e [Nikolas Tinbergen](https://www.britannica.com/biography/Nikolaas-Tinbergen) estudaram comportamentos instintivos e padrões fixos de ação, que, embora distintos do aprendizado por reforço, ofereceram insights valiosos sobre o comportamento animal e influenciaram o desenvolvimento de modelos computacionais de comportamento.
 
 Essas ideias pioneiras da psicologia e da biologia lançaram as bases conceituais para o *RL*. Contudo, a atenta leitora deve ter percebido que faltava uma estrutura matemática formal para transformá-las em algoritmos computacionais.
 

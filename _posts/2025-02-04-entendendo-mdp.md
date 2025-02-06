@@ -3,13 +3,13 @@ layout: post
 title: Entendendo Markov Decision Process
 author: Frank
 categories:
-    - Matemática
-    - Inteligência Artificial
+  - Matemática
+  - Inteligência Artificial
 tags:
-    - inteligência artificial
-    - Matemática
-    - resolução de problemas
-    - reinforcement learning
+  - inteligência artificial
+  - Matemática
+  - resolução de problemas
+  - reinforcement learning
 image: /images/mdp1.webp
 featured: false
 rating: 0
@@ -20,7 +20,7 @@ toc: true
 published: false
 keywords: Aprendizado por Reforço, História do RL, MDP, Markov, C++20.
 beforetoc: ""
-lastmod: 2025-02-06T21:34:16.511Z
+lastmod: 2025-02-06T21:41:28.945Z
 draft: 2025-02-05T00:25:59.828Z
 ---
 
@@ -46,7 +46,7 @@ E, providenciar um conjunto de tentativas:
 
 4. Lançando a moeda 10.000 vezes: $5030$ caras e $4970$ coroas (média de $0,5030$).
 
-Pelo menos, é assim que deveria ser. Como não tenho paciência para lançar, anotar e contar. Considerei ser possível criar um lançamento aleatoriamente justo em C++ então: 
+Pelo menos, é assim que deveria ser. Como não tenho paciência para lançar, anotar e contar. Considerei ser possível criar um lançamento aleatoriamente justo em C++ então:
 
 ```c++
 #include <iostream>
@@ -479,7 +479,7 @@ A estrutura `TransitionStats` também contém as seguintes variáveis totalizado
 As contagens são usadas para construir a matriz de transição $P$:
 
 $$
-P = \begin{bmatrix} 
+P = \begin{bmatrix}
 \frac{vowel\_to\_vowel}{total\_transitions} & \frac{vowel\_to\_consonant}{total\_transitions} \\
 \frac{consonant\_to\_vowel}{total\_transitions} & \frac{consonant\_to\_consonant}{total\_transitions}
 \end{bmatrix}
@@ -488,7 +488,7 @@ $$
 Uma matriz de transição, também conhecida como matriz de probabilidades de transição, é uma estrutura matemática fundamental em Cadeias de Markov que descreve as probabilidades de transição entre estados de um sistema. Formalmente dizemos que para um sistema com $n$ estados, a matriz de transição $P$ é uma matriz $n \times n$ onde cada elemento $p_{ij}$ representa a probabilidade de transição do estado $i$ para o estado $j$:
 
 $$
-P = \begin{bmatrix} 
+P = \begin{bmatrix}
 p_{11} & p_{12} & \cdots & p_{1n} \\
 p_{21} & p_{22} & \cdots & p_{2n} \\
 \vdots & \vdots & \ddots & \vdots \\
@@ -500,23 +500,22 @@ Uma matriz de transição apresenta as seguintes propriedades:
 
 1. Todos os elementos são não-negativos:
   
-  $$ p_{ij} \geq 0 \quad \forall i,j $$
+    $$ p_{ij} \geq 0 \quad \forall i,j $$
 
 2. A soma de cada linha é 1 (probabilidade total):
   
-  $$ \sum_{j=1}^n p_{ij} = 1 \quad \forall i $$
-
+    $$ \sum_{j=1}^n p_{ij} = 1 \quad \forall i $$
 
 Para o texto de *Eugene Onegin*, temos uma matriz $2 \times 2$ pois existem apenas dois estados possíveis (vogal ou consoante):
 
 $$
-P = \begin{bmatrix} 
+P = \begin{bmatrix}
 P(V|V) & P(V|C) \\
 P(C|V) & P(C|C)
 \end{bmatrix}
 $$
 
-Neste caso, temos: 
+Neste caso, temos:
 
 - $P(V|V)$ é a probabilidade de uma vogal após uma vogal
 - $P(V|C)$ é a probabilidade de uma vogal após uma consoante
@@ -718,7 +717,7 @@ Para uma sequência de variáveis aleatórias $\{X_i\}$ com dependência markovi
 
 1. Implicitamente (na Lógica):
 
-    `process_text` (dentro da classe MarkovAnalysis): a lógica da função `process_text` incorpora a propriedade de Markov. Observe as variáveis `prev_was_vowel` e `current_char`. A função itera pelo texto, e a cada passo, a decisão de incrementar `vowel_to_vowel`, `vowel_to_consonant`, etc., depende apenas do caractere atual (`current_char`, que representa $X_{n+1}$)e do estado anterior (`prev_was_vowel, que representa `$X_n$). Não há nenhuma consideração de caracteres anteriores a `prev_char`. Essa é a propriedade de Markov em ação.
+    `process_text` (dentro da classe MarkovAnalysis): a lógica da função `process_text` incorpora a propriedade de Markov. Observe as variáveis `prev_was_vowel` e `current_char`. A função itera pelo texto, e a cada passo, a decisão de incrementar `vowel_to_vowel`, `vowel_to_consonant`, etc., depende apenas do caractere atual (`current_char`, que representa $X_{n+1}$)e do estado anterior (`prev_was_vowel`, que representa $X_n$). Não há nenhuma consideração de caracteres anteriores a `prev_char`. Essa é a propriedade de Markov em ação.
 
 2. Explicitamente (na Estrutura de Dados):
 
