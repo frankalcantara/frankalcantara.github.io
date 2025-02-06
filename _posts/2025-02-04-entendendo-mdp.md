@@ -12,15 +12,15 @@ tags:
     - reinforcement learning
 image: /images/mdp1.webp
 featured: false
-rating: 0
+rating: 5
 description: A primeira parte do MDP, com código em C++ 20 e os motivos impulsionaram Markov.
 date: 2025-02-05T00:25:52.147Z
 preview: A primeira parte do MDP, com código em C++ 20 e os motivos impulsionaram Markov.
 toc: true
 published: true
-keywords: Aprendizado por Reforço, História do RL, MDP, Markov, C++20.
+keywords: Aprendizado por Reforço, História do RL, MDP, Markov.
 beforetoc: ""
-lastmod: 2025-02-06T21:43:44.361Z
+lastmod: 2025-02-06T21:45:20.210Z
 draft: 2025-02-05T00:25:59.828Z
 ---
 
