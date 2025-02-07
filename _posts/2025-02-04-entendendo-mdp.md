@@ -20,7 +20,7 @@ toc: false
 published: true
 keywords: Aprendizado por Reforço, História do RL, MDP, Markov.
 beforetoc: ""
-lastmod: 2025-02-06T22:05:36.338Z
+lastmod: 2025-02-07T21:15:36.221Z
 draft: 2025-02-05T00:25:59.828Z
 ---
 
@@ -735,3 +735,398 @@ Para uma sequência de variáveis aleatórias $\{X_i\}$ com dependência markovi
 Ou seja, enquanto a lógica do código (especialmente em `process_text`) implementa a propriedade de Markov. A matriz de transição, armazenada em `transition_probs`, é a representação explícita da Cadeia de Markov.
 
 Note também, curiosa leitora, que este código constrói a Cadeia de Markov a partir de dados (o texto do poema). Ele não simula a cadeia (ou seja, não gera novas sequências de letras usando as probabilidades de transição). Uma simulação seria um passo adicional, onde você começaria com um estado inicial (digamos, uma vogal) e, a cada passo, usaria as probabilidades em `transition_probs` para escolher aleatoriamente o próximo estado (vogal ou consoante). Começou a ficar interessante. Mas, aí já é russo demais para mim. Vamos estudar Cadeias de Markov e o processo de decisão, na outra parte deste capítulo, quando estudaremos uma grid.
+
+## Exercícios
+
+**Exercício 1**: Lançamento de Dados - um dado justo de seis lados é lançado. Qual a probabilidade de obter:
+
+a) um número par?
+b) um número maior que 4?
+c) um número ímpar e menor que 3?
+
+**Solução**:
+
+Considere o espaço amostral $\Omega = \{1,2,3,4,5,6\}$.
+
+a) para números pares, teremos:
+
+- conjunto: $A = \{2,4,6\}$;
+- $P(A) = \frac{|A|}{|\Omega|} = \frac{3}{6} = \frac{1}{2}$.
+
+b) para números maiores que 4:
+
+- conjunto: $B = \{5,6\}$;
+- $P(B) = \frac{|B|}{|\Omega|} = \frac{2}{6} = \frac{1}{3}$.
+
+c) para números ímpares menores que 3:
+
+- conjunto: $C = \{1\}$;
+- $P(C) = \frac{|C|}{|\Omega|} = \frac{1}{6}$.
+
+**Exercício 2**: Baralho - Uma carta é retirada aleatoriamente de um baralho padrão de 52 cartas. Qual a probabilidade de:
+
+a) retirar um Ás?
+b) retirar uma carta de copas?
+c) retirar uma carta de figura (Valete, Dama ou Rei)?
+d) retirar uma carta que não seja de ouros?
+
+**Solução**:
+
+Considere o espaço amostral $|\Omega| = 52$ cartas.
+
+a) para Ases:
+
+- $|A| = 4$ (um de cada naipe);
+- $P(A) = \frac{4}{52} = \frac{1}{13}$.
+
+b) para cartas de copas:
+
+- $|B| = 13$ (todas as cartas do naipe);
+- $P(B) = \frac{13}{52} = \frac{1}{4}$.
+
+c) para figuras:
+
+- $|C| = 12$ (3 figuras × 4 naipes);
+- $P(C) = \frac{12}{52} = \frac{3}{13}$.
+
+d) para não-ouros:
+
+- $|D| = 39$ (52 - 13 cartas de ouros);
+- $P(D) = \frac{39}{52} = \frac{3}{4}$.
+
+**Exercício 3**: Urna com Bolas - Uma urna contém 5 bolas vermelhas, 3 bolas azuis e 2 bolas verdes. Uma bola é retirada aleatoriamente.
+
+a) qual a probabilidade de retirar uma bola vermelha?
+b) qual a probabilidade de retirar uma bola azul ou verde?
+c) se uma bola vermelha for retirada e *não* for reposta, qual a probabilidade de retirar outra bola vermelha na segunda extração?
+
+**Solução**:
+
+Considere o espaço amostral inicial: $|\Omega| = 10$ bolas.
+
+a) para bolas vermelhas:
+
+- $P(V) = \frac{5}{10} = \frac{1}{2}$.
+
+b) para bolas azuis ou verdes:
+
+- $P(A \cup V) = \frac{3+2}{10} = \frac{1}{2}$.
+
+c) para segunda bola vermelha, dado que primeira foi vermelha:
+
+- novo espaço amostral: $|\Omega'| = 9$;
+- novas bolas vermelhas: 4;
+- $P(V_2|V_1) = \frac{4}{9}$.
+
+**Exercício 4**: Eventos Mutuamente Exclusivos - Se $A$ e $B$ são eventos mutuamente exclusivos, com $P(A) = 0.3$ e $P(B) = 0.5$, calcule $P(A \cup B)$.
+
+**Solução**:
+Para eventos mutuamente exclusivos $A$ e $B$:
+
+- $A \cap B = \emptyset$;
+- $P(A \cup B) = P(A) + P(B)$ (axioma da aditividade);
+- $P(A \cup B) = 0.3 + 0.5 = 0.8$.
+
+**Exercício 5**: Eventos Independentes - Se $A$ e $B$ são eventos independentes, com $P(A) = 0.4$ e $P(B) = 0.6$, calcule $P(A \cap B)$.
+
+**Solução**:
+Para eventos independentes $A$ e $B$:
+
+- $P(A \cap B) = P(A) \cdot P(B)$;
+- $P(A \cap B) = 0.4 \cdot 0.6 = 0.24$.
+
+**A independência implica que o conhecimento sobre a ocorrência de um evento não altera a probabilidade do outro**.
+
+**Exercício 6**: Teste Médico - Um teste para uma doença rara tem 99% de precisão (acerta 99% dos casos positivos e 99% dos casos negativos). A doença afeta 1 em cada 10.000 pessoas. Se uma pessoa testa positivo, qual a probabilidade de ela *realmente* ter a doença? (Este é um exemplo clássico do Teorema de Bayes, mas pode ser resolvido com raciocínio condicional básico).
+
+**Solução**:
+
+Informalmente poderíamos seguir o seguinte raciocínio:
+
+- Imagine $1.000.000$ de pessoas;
+- Esperamos $100$ com a doença ($1/10.000$);
+- O teste acerta $99$ desses $100$ (positivos verdadeiros);
+- $999.900$ não têm a doença;
+- O teste erra em $1%$ deles: $9999$ (falsos positivos);
+- Total de positivos: $99 + 9999 = 10098$;
+- $P(\text{Doença} | \text{Positivo}) = 99 / 10098 \approx 0.0098$ (menos de $1\%$!).
+
+Este é um problema clássico de probabilidade condicional. Que pode ser resolvido formalmente por::
+
+- $D$: ter a doença;
+- $T$: teste positivo;
+- $P(D) = \frac{1}{10000}$ (prevalência);
+- $P(T|D) = 0.99$ (sensibilidade);
+- $P(T|\neg D) = 0.01$ (taxa de falso positivo).
+
+Usando o Teorema de Bayes, teremos:
+
+$$P(D|T) = \frac{P(T|D)P(D)}{P(T|D)P(D) + P(T|\neg D)P(\neg D)}$$
+
+Substituindo:
+
+$$P(D|T) = \frac{0.99 \cdot \frac{1}{10000}}{0.99 \cdot \frac{1}{10000} + 0.01 \cdot \frac{9999}{10000}} \approx 0.0098$$
+
+**Exercício 7**: Duas Moedas - Duas moedas são lançadas. Qual a probabilidade de obter duas caras, dado que pelo menos uma cara apareceu?
+
+**Solução**:
+
+Definindo o espaço amostral:
+
+- $\Omega = \{CC, CA, AC, AA\}$;
+- Seja $E$ o evento "pelo menos uma cara";
+- $E = \{CC, CA, AC\}$.
+
+Então, teremos:
+
+$$P(CC|E) = \frac{P(CC \cap E)}{P(E)} = \frac{P(CC)}{P(E)} = \frac{1/4}{3/4} = \frac{1}{3}$$
+
+**Exercício 8**: Sorteio Condicional - Uma caixa tem 3 bolas brancas e duas pretas, uma bola é sorteada, se for preta, outra bola é sorteada (sem reposição). Qual a probabilidade da segunda bola ser preta?
+
+**Solução**:
+O único caso onde a segunda bola pode ser preta é se a primeira for preta. Como os eventos são dependentes:
+
+  $$ P(Preta_2) = P(Preta_2 \cap Preta_1) = P(Preta_1) * P(Preta_2 | Preta_1) = 2/5 * 1/4 = 1/10$$
+
+Análise por etapas:
+
+1. primeira extração:
+
+    $$P(P_1) = \frac{2}{5}$$
+
+2. segunda extração (dado que primeira foi preta):
+
+    $$P(P_2|P_1) = \frac{1}{4}$$
+
+3. probabilidade total:
+
+   $$P(P_2) = P(P_1) \cdot P(P_2|P_1) = \frac{2}{5} \cdot \frac{1}{4} = \frac{1}{10}$$
+
+**Exercício 9**: Independência com Dado e Moeda - Jogue um dado e uma moeda.  O evento "obter um 6 no dado" é independente do evento "obter cara na moeda"?  Justifique.
+
+**Solução**:
+Sim. O resultado do dado não afeta a moeda, e vice-versa. Para provar independência, devemos mostrar que:
+
+$$P(6 \cap Cara) = P(6) \cdot P(Cara)$$
+
+Como:
+
+- $P(6) = \frac{1}{6}$
+- $P(Cara) = \frac{1}{2}$
+
+Logo, em um espaço amostral de $12$ resultados, teremos:
+
+$$P(6 \cap Cara) = \frac{1}{12}$$
+
+Verificando:
+
+$$\frac{1}{6} \cdot \frac{1}{2} = \frac{1}{12}$$
+
+**Exercício 10**: Dependência na Urna - Voltando a urna com 5 bolas vermelhas, $3$ azuis e $2$ verdes, agora SEM reposição. Os eventos *retirar uma bola vermelha na primeira extração* e *retirar uma bola azul na segunda extração* são independentes? Justifique.
+
+**Solução**:
+Não. A probabilidade de retirar uma bola azul na segunda extração *depende* do que foi retirado na primeira. Se uma vermelha foi retirada, a composição da urna muda. Para provar dependência, precisamos mostrar que:
+
+$$P(A_2|V_1) \neq P(A_2)$$
+
+- $P(A_2)$ (sem condicional) $= \frac{3}{10}$;
+- $P(A_2|V_1) = \frac{3}{9} = \frac{1}{3}$.
+
+Como $\frac{3}{10} \neq \frac{1}{3}$, os eventos são dependentes.
+
+**Exercício 11**: Definição de Estado - O que é um *estado* em uma Cadeia de Markov? Dê um exemplo simples.
+
+**Solução**:
+Um estado é uma condição ou situação possível no sistema modelado pela Cadeia de Markov. Exemplo: No clima, os estados podem ser "ensolarado", "nublado" e "chuvoso". Um estado em uma Cadeia de Markov é uma condição do sistema que satisfaz duas propriedades:
+
+1. propriedade de Markov:
+
+   $$P(X_{n+1}|X_n,X_{n-1},...,X_1) = P(X_{n+1}|X_n)$$
+
+2. homogeneidade temporal: as probabilidades de transição não mudam com o tempo.
+
+Exemplo formal do clima: considere o conjunto $S = \{Sol, Nublado, Chuva\}$.
+
+Cada estado deve ter probabilidades de transição bem definidas. A soma das probabilidades de transição de cada estado deve ser 1:
+  
+  $$\sum_{j \in S} P_{ij} = 1, \forall i \in S$$
+
+**Exercício 12**: Matriz de Transição - Uma Cadeia de Markov tem dois estados, $A$ e $B$.  A probabilidade de transição de $A$ para $B$ é $0.3$, e a probabilidade de permanecer em $A$ é $0.7$. A probabilidade de transição de $B$ para $A$ é $0.6$, e a probabilidade de permanecer em $B$ é $0.4$.  Construa a matriz de transição.
+
+**Solução**:
+A matriz de transição $P$ representa todas as probabilidades de transição $P_{ij}$ onde:
+
+- $i$ representa o estado atual;
+- $j$ representa o próximo estado.
+
+$$
+P = \begin{bmatrix}
+P_{AA} & P_{AB} \\
+P_{BA} & P_{BB}
+\end{bmatrix} = \begin{bmatrix}
+0.7 & 0.3 \\
+0.6 & 0.4
+\end{bmatrix}
+$$
+
+Propriedades satisfeitas:
+
+1. $\sum_{j} P_{ij} = 1$ para cada linha $i$;
+2. $0 \leq P_{ij} \leq 1$ para todo $i,j$.
+
+**Exercício 13**: Interpretação da Matriz - Na matriz do exercício anterior, o que representa o elemento $P_{2,1}$?
+
+**Solução**:
+O elemento $P_{21}$ ($P_{B,A}$) representa:
+
+- probabilidade de transição do estado $B$ para o estado $A$;
+- matematicamente: $P(X_{n+1} = A|X_n = B) = 0.6$;
+- em geral: $P_{ij} = P(X_{n+1} = j|X_n = i)$.
+
+**Exercício 14**: Soma das Linhas - Em uma matriz de transição, qual deve ser a soma dos elementos em cada linha? Por quê?
+
+**Solução**:
+Propriedade fundamental: $\sum_{j} P_{ij} = 1$
+
+A soma deve ser $1$.  Porque, a partir de um estado, o sistema *deve* transitar para algum estado, incluindo a possibilidade de permanecer no mesmo estado. A linha representa todas as possibilidades de transição a partir daquele estado, e as probabilidades de todos os eventos possíveis somam $1$.
+
+Matematicamente, teremos:
+
+1. seja $X_n = i$ o estado atual;
+2. o sistema deve estar em algum estado no tempo $n+1$;
+3. todos os possíveis próximos estados são mutuamente exclusivos;
+4. pelo axioma da probabilidade total:
+
+   $$P(\bigcup_{j} X_{n+1} = j|X_n = i) = \sum_{j} P(X_{n+1} = j|X_n = i) = 1$$
+
+**Exercício 15**: Caminhada Aleatória - Uma partícula se move em uma linha numérica. Em cada passo, ela se move uma unidade para a direita com probabilidade 0.6 e uma unidade para a esquerda com probabilidade 0.4. Represente isso como uma Cadeia de Markov (desenhe o diagrama de estados, se ajudar).  Qual seria a matriz de transição se considerarmos os estados $-1$, $0$ e $1$, e que a partícula *para* se atingir um dos extremos?
+
+**Solução**:
+Estados: $..., -2, -1, 0, 1, 2, ...$, infinitos estados.  O diagrama teria setas para a direita, probabilidade 0.6, e para a esquerda, probabilidade 0.4, entre estados adjacentes. Para os estados $\{-1,0,1\}$ com absorção nos extremos, teremos:
+
+1. matriz de transição:
+
+   $$
+   P = \begin{bmatrix}
+   1 & 0 & 0 \\
+   0.4 & 0 & 0.6 \\
+   0 & 0 & 1
+   \end{bmatrix}
+   $$
+
+2. propriedades importantes:
+
+- estados -1 e 1 são absorventes: $P_{-1,-1} = P_{1,1} = 1$;
+- do estado 0: $P_{0,-1} = 0.4$, $P_{0,1} = 0.6$;
+- impossível permanecer em 0: $P_{0,0} = 0$.
+
+**Exercício 16**: Clima Simplificado - O clima em uma cidade é modelado como uma Cadeia de Markov com dois estados: Ensolarado (E) e Chuvoso (C).  A matriz de transição é:
+
+**Solução**:
+Para encontrar a probabilidade após dois passos:
+
+1. calculamos $P^2$ usando multiplicação matricial:
+
+    $$
+    P^2 = \begin{bmatrix}
+    0.8 & 0.2 \\
+    0.3 & 0.7
+    \end{bmatrix} \cdot \begin{bmatrix}
+    0.8 & 0.2 \\
+    0.3 & 0.7
+    \end{bmatrix}
+    $$
+
+2. Cálculo detalhado:
+
+- $P^2_{11} = (0.8)(0.8) + (0.2)(0.3) = 0.70$;
+- $P^2_{12} = (0.8)(0.2) + (0.2)(0.7) = 0.30$;
+- $P^2_{21} = (0.3)(0.8) + (0.7)(0.3) = 0.45$;
+- $P^2_{22} = (0.3)(0.2) + (0.7)(0.7) = 0.55$.
+
+    $$
+    P^2 = \begin{bmatrix}
+    0.70 & 0.30 \\
+    0.45 & 0.55
+    \end{bmatrix}
+    $$
+
+A probabilidade procurada é $P^2_{11} = 0.70$
+
+**Exercício 17**: Estado Absorvente - O que é um *estado absorvente* em uma Cadeia de Markov?
+
+**Solução**:
+Um estado absorvente é aquele em que, uma vez que o sistema entra nesse estado, ele nunca mais sai. Na matriz de transição, isso se reflete com uma probabilidade de $1$ de transição para ele mesmo e 0 para qualquer outro estado.
+
+Um estado $i$ é absorvente se e somente se:
+
+1. $P_{ii} = 1$;
+2. $P_{ij} = 0$ para todo $j \neq i$.
+
+Matematicamente, teremos:
+
+$$P(X_{n+k} = i|X_n = i) = 1, \forall k > 0$$
+
+Na matriz de transição, a linha $i$ terá:
+
+$$P_i = [0,\dots,0,1,0,\dots,0]$$
+
+na qual o $1$ está na posição $i$.
+
+**Exercício 18**: Exemplo de Absorção - Dê um exemplo de uma situação do mundo real que poderia ser modelada como uma Cadeia de Markov com pelo menos um estado absorvente.
+
+Um jogo de tabuleiro em que um jogador pode "falir" (estado absorvente) e não pode mais jogar.  Ou, um modelo de progressão de uma doença onde um dos estados é "cura" (sem retorno à doença) ou "óbito". Observando o modelo de progressão de doença:
+
+- estados: $S = \{Doente, Cura, Óbito\}$;
+- matriz de transição:
+
+$$
+P = \begin{bmatrix}
+0.7 & 0.2 & 0.1 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+$$
+
+na qual:
+
+- estados absorventes: Cura $(P_{22}=1)$ e Óbito $(P_{33}=1)$
+- estado transiente: Doente
+
+**Exercício 19**: Propriedade de Markov -  Os eventos em diferentes etapas de uma Cadeia de Markov são independentes? Explique.
+
+**Solução**:
+Não, os eventos *não* são independentes no sentido clássico. A probabilidade de estar em um estado no tempo $t+1$ depende *exclusivamente* do estado no tempo $t$, propriedade de Markov.  Essa dependência é o que define a Cadeia de Markov. No entanto, dado o estado atual, o futuro é independente do passado.
+
+A propriedade fundamental de Markov estabelece que:
+
+$$P(X_{n+1}|X_n,X_{n-1},...,X_1) = P(X_{n+1}|X_n)$$
+
+Isto significa que:
+
+1. o futuro depende apenas do presente;
+2. o histórico completo não adiciona informação;
+3. a dependência é local no tempo.
+
+**Exercício 20**: Distribuição Inicial - Considere a matriz de transição do exercício 16. Suponha que a distribuição de probabilidade inicial seja: $v_0 = [0.6, 0.4]$ (ou seja, 60% de chance de estar ensolarado no dia 0 e 40% de chance de estar chuvoso). Qual a distribuição de probabilidade para o dia 1?
+
+**Solução**:
+Para uma distribuição inicial $v_0 = [0.6, 0.4]$:
+
+1. calculamos $v_1 = v_0P$:
+
+    $$
+    v_1 = [0.6, 0.4] \begin{bmatrix}
+    0.8 & 0.2 \\
+    0.3 & 0.7
+    \end{bmatrix}
+    $$
+
+2. multiplicação detalhada:
+
+- $v_{1,1} = 0.6(0.8) + 0.4(0.3) = 0.48 + 0.12 = 0.6$;
+- $v_{1,2} = 0.6(0.2) + 0.4(0.7) = 0.12 + 0.28 = 0.4$.
+
+Portanto: $v_1 = [0.6, 0.4]$
+
+**Nota**: Este é um caso especial onde $v_1 = v_0$, indicando que $v_0$ é uma distribuição estacionária.
