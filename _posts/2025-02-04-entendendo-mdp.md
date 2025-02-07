@@ -20,7 +20,7 @@ toc: false
 published: true
 keywords: Aprendizado por Reforço, História do RL, MDP, Markov.
 beforetoc: ""
-lastmod: 2025-02-07T22:17:41.940Z
+lastmod: 2025-02-07T22:19:15.858Z
 draft: 2025-02-05T00:25:59.828Z
 ---
 
@@ -1051,7 +1051,7 @@ $$P(X_{n+k} = i\vert X_n = i) = 1, \forall k > 0$$
 
 Na matriz de transição, a linha $i$ terá:
 
-$$P_i = \[0,\dots,0,1,0,\dots,0\]$$
+$$P_i = [0,\dots,0,1,0,\dots,0]$$
 
 na qual o $1$ está na posição $i$.
 
@@ -1098,7 +1098,7 @@ Para uma distribuição inicial $v_0 = [0.6, 0.4]$:
 1. calculamos $v_1 = v_0P$:
 
     $$
-    v_1 = \[0.6, 0.4\] \begin{bmatrix}
+    v_1 = [0.6, 0.4] \begin{bmatrix}
     0.8 & 0.2 \\
     0.3 & 0.7
     \end{bmatrix}
@@ -1109,6 +1109,6 @@ Para uma distribuição inicial $v_0 = [0.6, 0.4]$:
 - $v_{1,1} = 0.6(0.8) + 0.4(0.3) = 0.48 + 0.12 = 0.6$;
 - $v_{1,2} = 0.6(0.2) + 0.4(0.7) = 0.12 + 0.28 = 0.4$.
 
-Portanto: $v_1 = \[0.6, 0.4\]$
+Portanto: $v_1 = [0.6, 0.4]$
 
 **Nota**: Este é um caso especial onde $v_1 = v_0$, indicando que $v_0$ é uma distribuição estacionária.
