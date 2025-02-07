@@ -20,7 +20,7 @@ toc: false
 published: true
 keywords: Aprendizado por Reforço, História do RL, MDP, Markov.
 beforetoc: ""
-lastmod: 2025-02-07T22:16:58.906Z
+lastmod: 2025-02-07T22:17:41.940Z
 draft: 2025-02-05T00:25:59.828Z
 ---
 
@@ -1059,7 +1059,7 @@ na qual o $1$ está na posição $i$.
 
 Um jogo de tabuleiro em que um jogador pode "falir" (estado absorvente) e não pode mais jogar.  Ou, um modelo de progressão de uma doença onde um dos estados é "cura" (sem retorno à doença) ou "óbito". Observando o modelo de progressão de doença:
 
-- estados: $S = \{Doente, Cura, Óbito\}$;
+- estados: $S = \{ Doente, Cura, Óbito \}$;
 - matriz de transição:
 
 $$
