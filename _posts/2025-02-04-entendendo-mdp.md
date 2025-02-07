@@ -20,7 +20,7 @@ toc: false
 published: true
 keywords: Aprendizado por Reforço, História do RL, MDP, Markov.
 beforetoc: ""
-lastmod: 2025-02-07T21:15:36.221Z
+lastmod: 2025-02-07T22:12:44.303Z
 draft: 2025-02-05T00:25:59.828Z
 ---
 
@@ -738,85 +738,67 @@ Note também, curiosa leitora, que este código constrói a Cadeia de Markov a p
 
 ## Exercícios
 
-**Exercício 1**: Lançamento de Dados - um dado justo de seis lados é lançado. Qual a probabilidade de obter:
-
-a) um número par?
-b) um número maior que 4?
-c) um número ímpar e menor que 3?
+**Exercício 1**: Lançamento de Dados - um dado justo de seis lados é lançado. Qual a probabilidade de obter: (a) Um número par? (b) Um número maior que $4$? (c)) Um número ímpar e menor que $3$?
 
 **Solução**:
-
 Considere o espaço amostral $\Omega = \{1,2,3,4,5,6\}$.
 
-a) para números pares, teremos:
+a) para números pares, teremos: conjunto: $A = \{2,4,6\}$;
 
-- conjunto: $A = \{2,4,6\}$;
-- $P(A) = \frac{|A|}{|\Omega|} = \frac{3}{6} = \frac{1}{2}$.
+$$P(A) = \frac{\vert A\vert }{\vert \Omega\vert } = \frac{3}{6} = \frac{1}{2}$$
 
-b) para números maiores que 4:
+b) para números maiores que $4$: conjunto: $B = \{5,6\}$;
 
-- conjunto: $B = \{5,6\}$;
-- $P(B) = \frac{|B|}{|\Omega|} = \frac{2}{6} = \frac{1}{3}$.
+$$P(B) = \frac{\vert B\vert }{\vert \Omega\vert } = \frac{2}{6} = \frac{1}{3}$$
 
-c) para números ímpares menores que 3:
+c) para números ímpares menores que 3: conjunto: $C = \{1\}$;
 
-- conjunto: $C = \{1\}$;
-- $P(C) = \frac{|C|}{|\Omega|} = \frac{1}{6}$.
+$$P(C) = \frac{\vert C\vert }{\vert \Omega\vert } = \frac{1}{6}$$
 
-**Exercício 2**: Baralho - Uma carta é retirada aleatoriamente de um baralho padrão de 52 cartas. Qual a probabilidade de:
-
-a) retirar um Ás?
-b) retirar uma carta de copas?
-c) retirar uma carta de figura (Valete, Dama ou Rei)?
-d) retirar uma carta que não seja de ouros?
+**Exercício 2**: Baralho - Uma carta é retirada aleatoriamente de um baralho padrão de 52 cartas. Qual a probabilidade de: (a) Retirar um Ás? (b) Retirar uma carta de copas? (c) Retirar uma carta de figura (Valete, Dama ou Rei)? (d) Retirar uma carta que não seja de ouros?
 
 **Solução**:
 
-Considere o espaço amostral $|\Omega| = 52$ cartas.
+Considere o espaço amostral $\vert \Omega\vert  = 52$ cartas.
 
 a) para Ases:
 
-- $|A| = 4$ (um de cada naipe);
+- $\vert A\vert  = 4$ (um de cada naipe);
 - $P(A) = \frac{4}{52} = \frac{1}{13}$.
 
 b) para cartas de copas:
 
-- $|B| = 13$ (todas as cartas do naipe);
+- $\vert B\vert  = 13$ (todas as cartas do naipe);
 - $P(B) = \frac{13}{52} = \frac{1}{4}$.
 
 c) para figuras:
 
-- $|C| = 12$ (3 figuras × 4 naipes);
+- $\vert C\vert  = 12$ (3 figuras × 4 naipes);
 - $P(C) = \frac{12}{52} = \frac{3}{13}$.
 
 d) para não-ouros:
 
-- $|D| = 39$ (52 - 13 cartas de ouros);
+- $\vert D\vert  = 39$ (52 - 13 cartas de ouros);
 - $P(D) = \frac{39}{52} = \frac{3}{4}$.
 
-**Exercício 3**: Urna com Bolas - Uma urna contém 5 bolas vermelhas, 3 bolas azuis e 2 bolas verdes. Uma bola é retirada aleatoriamente.
-
-a) qual a probabilidade de retirar uma bola vermelha?
-b) qual a probabilidade de retirar uma bola azul ou verde?
-c) se uma bola vermelha for retirada e *não* for reposta, qual a probabilidade de retirar outra bola vermelha na segunda extração?
+**Exercício 3**: Urna com Bolas - Uma urna contém 5 bolas vermelhas, 3 bolas azuis e 2 bolas verdes. Uma bola é retirada aleatoriamente. (a) Qual a probabilidade de retirar uma bola vermelha? (b) Qual a probabilidade de retirar uma bola azul ou verde? (c) Se uma bola vermelha for retirada e *não* for reposta, qual a probabilidade de retirar outra bola vermelha na segunda extração?
 
 **Solução**:
-
-Considere o espaço amostral inicial: $|\Omega| = 10$ bolas.
+Considere o espaço amostral inicial: $\vert \Omega\vert  = 10$ bolas.
 
 a) para bolas vermelhas:
 
-- $P(V) = \frac{5}{10} = \frac{1}{2}$.
+$$P(V) = \frac{5}{10} = \frac{1}{2}$$
 
 b) para bolas azuis ou verdes:
 
-- $P(A \cup V) = \frac{3+2}{10} = \frac{1}{2}$.
+$$P(A \cup V) = \frac{3+2}{10} = \frac{1}{2}$$
 
 c) para segunda bola vermelha, dado que primeira foi vermelha:
 
-- novo espaço amostral: $|\Omega'| = 9$;
+- novo espaço amostral: $\vert \Omega'\vert  = 9$;
 - novas bolas vermelhas: 4;
-- $P(V_2|V_1) = \frac{4}{9}$.
+- $P(V_2\vert V_1) = \frac{4}{9}$.
 
 **Exercício 4**: Eventos Mutuamente Exclusivos - Se $A$ e $B$ são eventos mutuamente exclusivos, com $P(A) = 0.3$ e $P(B) = 0.5$, calcule $P(A \cup B)$.
 
@@ -849,23 +831,23 @@ Informalmente poderíamos seguir o seguinte raciocínio:
 - $999.900$ não têm a doença;
 - O teste erra em $1%$ deles: $9999$ (falsos positivos);
 - Total de positivos: $99 + 9999 = 10098$;
-- $P(\text{Doença} | \text{Positivo}) = 99 / 10098 \approx 0.0098$ (menos de $1\%$!).
+- $P(\text{Doença} \vert  \text{Positivo}) = 99 / 10098 \approx 0.0098$ (menos de $1\%$!).
 
 Este é um problema clássico de probabilidade condicional. Que pode ser resolvido formalmente por::
 
 - $D$: ter a doença;
 - $T$: teste positivo;
 - $P(D) = \frac{1}{10000}$ (prevalência);
-- $P(T|D) = 0.99$ (sensibilidade);
-- $P(T|\neg D) = 0.01$ (taxa de falso positivo).
+- $P(T\vert D) = 0.99$ (sensibilidade);
+- $P(T\vert \neg D) = 0.01$ (taxa de falso positivo).
 
 Usando o Teorema de Bayes, teremos:
 
-$$P(D|T) = \frac{P(T|D)P(D)}{P(T|D)P(D) + P(T|\neg D)P(\neg D)}$$
+$$P(D\vert T) = \frac{P(T\vert D)P(D)}{P(T\vert D)P(D) + P(T\vert \neg D)P(\neg D)}$$
 
 Substituindo:
 
-$$P(D|T) = \frac{0.99 \cdot \frac{1}{10000}}{0.99 \cdot \frac{1}{10000} + 0.01 \cdot \frac{9999}{10000}} \approx 0.0098$$
+$$P(D\vert T) = \frac{0.99 \cdot \frac{1}{10000}}{0.99 \cdot \frac{1}{10000} + 0.01 \cdot \frac{9999}{10000}} \approx 0.0098$$
 
 **Exercício 7**: Duas Moedas - Duas moedas são lançadas. Qual a probabilidade de obter duas caras, dado que pelo menos uma cara apareceu?
 
@@ -879,14 +861,14 @@ Definindo o espaço amostral:
 
 Então, teremos:
 
-$$P(CC|E) = \frac{P(CC \cap E)}{P(E)} = \frac{P(CC)}{P(E)} = \frac{1/4}{3/4} = \frac{1}{3}$$
+$$P(CC\vert E) = \frac{P(CC \cap E)}{P(E)} = \frac{P(CC)}{P(E)} = \frac{1/4}{3/4} = \frac{1}{3}$$
 
 **Exercício 8**: Sorteio Condicional - Uma caixa tem 3 bolas brancas e duas pretas, uma bola é sorteada, se for preta, outra bola é sorteada (sem reposição). Qual a probabilidade da segunda bola ser preta?
 
 **Solução**:
 O único caso onde a segunda bola pode ser preta é se a primeira for preta. Como os eventos são dependentes:
 
-  $$ P(Preta_2) = P(Preta_2 \cap Preta_1) = P(Preta_1) * P(Preta_2 | Preta_1) = 2/5 * 1/4 = 1/10$$
+  $$ P(Preta_2) = P(Preta_2 \cap Preta_1) = P(Preta_1) * P(Preta_2 \vert  Preta_1) = 2/5 * 1/4 = 1/10$$
 
 Análise por etapas:
 
@@ -896,11 +878,11 @@ Análise por etapas:
 
 2. segunda extração (dado que primeira foi preta):
 
-    $$P(P_2|P_1) = \frac{1}{4}$$
+    $$P(P_2\vert P_1) = \frac{1}{4}$$
 
 3. probabilidade total:
 
-   $$P(P_2) = P(P_1) \cdot P(P_2|P_1) = \frac{2}{5} \cdot \frac{1}{4} = \frac{1}{10}$$
+   $$P(P_2) = P(P_1) \cdot P(P_2\vert P_1) = \frac{2}{5} \cdot \frac{1}{4} = \frac{1}{10}$$
 
 **Exercício 9**: Independência com Dado e Moeda - Jogue um dado e uma moeda.  O evento "obter um 6 no dado" é independente do evento "obter cara na moeda"?  Justifique.
 
@@ -927,10 +909,10 @@ $$\frac{1}{6} \cdot \frac{1}{2} = \frac{1}{12}$$
 **Solução**:
 Não. A probabilidade de retirar uma bola azul na segunda extração *depende* do que foi retirado na primeira. Se uma vermelha foi retirada, a composição da urna muda. Para provar dependência, precisamos mostrar que:
 
-$$P(A_2|V_1) \neq P(A_2)$$
+$$P(A_2\vert V_1) \neq P(A_2)$$
 
 - $P(A_2)$ (sem condicional) $= \frac{3}{10}$;
-- $P(A_2|V_1) = \frac{3}{9} = \frac{1}{3}$.
+- $P(A_2\vert V_1) = \frac{3}{9} = \frac{1}{3}$.
 
 Como $\frac{3}{10} \neq \frac{1}{3}$, os eventos são dependentes.
 
@@ -941,7 +923,7 @@ Um estado é uma condição ou situação possível no sistema modelado pela Cad
 
 1. propriedade de Markov:
 
-   $$P(X_{n+1}|X_n,X_{n-1},...,X_1) = P(X_{n+1}|X_n)$$
+   $$P(X_{n+1}\vert X_n,X_{n-1},...,X_1) = P(X_{n+1}\vert X_n)$$
 
 2. homogeneidade temporal: as probabilidades de transição não mudam com o tempo.
 
@@ -980,8 +962,8 @@ Propriedades satisfeitas:
 O elemento $P_{21}$ ($P_{B,A}$) representa:
 
 - probabilidade de transição do estado $B$ para o estado $A$;
-- matematicamente: $P(X_{n+1} = A|X_n = B) = 0.6$;
-- em geral: $P_{ij} = P(X_{n+1} = j|X_n = i)$.
+- matematicamente: $P(X_{n+1} = A\vert X_n = B) = 0.6$;
+- em geral: $P_{ij} = P(X_{n+1} = j\vert X_n = i)$.
 
 **Exercício 14**: Soma das Linhas - Em uma matriz de transição, qual deve ser a soma dos elementos em cada linha? Por quê?
 
@@ -997,7 +979,7 @@ Matematicamente, teremos:
 3. todos os possíveis próximos estados são mutuamente exclusivos;
 4. pelo axioma da probabilidade total:
 
-   $$P(\bigcup_{j} X_{n+1} = j|X_n = i) = \sum_{j} P(X_{n+1} = j|X_n = i) = 1$$
+   $$P(\bigcup_{j} X_{n+1} = j\vert X_n = i) = \sum_{j} P(X_{n+1} = j\vert X_n = i) = 1$$
 
 **Exercício 15**: Caminhada Aleatória - Uma partícula se move em uma linha numérica. Em cada passo, ela se move uma unidade para a direita com probabilidade 0.6 e uma unidade para a esquerda com probabilidade 0.4. Represente isso como uma Cadeia de Markov (desenhe o diagrama de estados, se ajudar).  Qual seria a matriz de transição se considerarmos os estados $-1$, $0$ e $1$, e que a partícula *para* se atingir um dos extremos?
 
@@ -1065,7 +1047,7 @@ Um estado $i$ é absorvente se e somente se:
 
 Matematicamente, teremos:
 
-$$P(X_{n+k} = i|X_n = i) = 1, \forall k > 0$$
+$$P(X_{n+k} = i\vert X_n = i) = 1, \forall k > 0$$
 
 Na matriz de transição, a linha $i$ terá:
 
@@ -1100,7 +1082,7 @@ Não, os eventos *não* são independentes no sentido clássico. A probabilidade
 
 A propriedade fundamental de Markov estabelece que:
 
-$$P(X_{n+1}|X_n,X_{n-1},...,X_1) = P(X_{n+1}|X_n)$$
+$$P(X_{n+1}\vert X_n,X_{n-1},...,X_1) = P(X_{n+1}\vert X_n)$$
 
 Isto significa que:
 
