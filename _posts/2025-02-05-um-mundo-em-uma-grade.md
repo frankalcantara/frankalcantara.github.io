@@ -45,7 +45,7 @@ keywords: |-
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-02-09T15:04:09.616Z
+lastmod: 2025-02-09T15:12:26.697Z
 ---
 
 A esforçada leitora, se realmente quiser entender as técnicas e algoritmos de *Reinforcement Learning* - **RL**, deve começar com problemas simples. Não é qualquer problema. Problemas que permitam construir uma compreensão sólida dos princípios estruturantes desta tecnologia. É aqui que o **Grid World** brilha e se destaca.
@@ -74,9 +74,9 @@ Em essência, a natureza sequencial dos **MDPs**não é apenas uma característi
 
 O **MDP** permite a criação de modelos, apenas modelos. Nada mais, nada menos. Dessa forma, existe uma imperfeição inerente aos processos estocásticos envolvidos. Antes de continuarmos, podemos concordar com algumas definições que serão úteis ao longo do processo de estudo.
 
-1.  **Agente**: no contexto do **MDP** um agente é a entidade que interage com o ambiente e toma decisões. O agente é o componente que observa o estado atual do ambiente, escolhe ações com base em sua política (*strategy/policy*) e recebe recompensas como resultado dessas ações. A esforçada leitora pode pensar no agente como um tomador de decisões que está constantemente aprendendo e se adaptando para maximizar suas recompensas ao longo do tempo.
+1. **Agente**: no contexto do **MDP** um agente é a entidade que interage com o ambiente e toma decisões. O agente é o componente que observa o estado atual do ambiente, escolhe ações com base em sua política (*strategy/policy*) e recebe recompensas como resultado dessas ações. A esforçada leitora pode pensar no agente como um tomador de decisões que está constantemente aprendendo e se adaptando para maximizar suas recompensas ao longo do tempo.
 
-2.  **Estados**: um estado em um **MDP** é uma fotografia completa do sistema em um dado momento. Como se a sagaz leitora pudesse pausar o tempo e capturar toda informação necessária a tomada de decisão. **A característica fundamental de um estado em um MDP é que ele possui a propriedade de Markov**. Isso significa que o estado atual contém toda a informação necessária para decidir a próxima ação, sem precisar de informações anteriores. Por exemplo: em um jogo de xadrez, o estado seria a posição atual de todas as peças no tabuleiro. Não importa qual sequência de movimentos montou o tabuleiro. Apenas a configuração atual será relevante na previsão do acontecerá a seguir.
+2. **Estados**: um estado em um **MDP** é uma fotografia completa do sistema em um dado momento. Como se a sagaz leitora pudesse pausar o tempo e capturar toda informação necessária a tomada de decisão. **A característica fundamental de um estado em um MDP é que ele possui a propriedade de Markov**. Isso significa que o estado atual contém toda a informação necessária para decidir a próxima ação, sem precisar de informações anteriores. Por exemplo: em um jogo de xadrez, o estado seria a posição atual de todas as peças no tabuleiro. Não importa qual sequência de movimentos montou o tabuleiro. Apenas a configuração atual será relevante na previsão do acontecerá a seguir.
 
 3. **Ações**: as ações são as diferentes escolhas disponíveis ao agente em cada estado. A perspicaz leitora deve entender que as ações são os únicos elementos que o agente pode controlar. Em um **MDP**, em cada estado, existe um conjunto de ações possíveis, denominado $A(s)$, no qual $s$ é o estado atual. Ainda no xadrez, as ações seriam os movimentos legais possíveis para as peças na posição atual. Se você tem um cavalo em $b1$, uma ação possível seria movê-lo para $c3$.
 
@@ -90,9 +90,9 @@ O **MDP** permite a criação de modelos, apenas modelos. Nada mais, nada menos.
 
 Até este momento, utilizamos a notação tradicional da teoria da probabilidade, com $X_n$ representando estados e
 
-$$P_{ij}$$ 
+$$P_{ij}$$
 
-ou 
+ou
 
 $$P(X_{n+1} = j\vert X_n = i)$$
 
@@ -122,15 +122,15 @@ _Figura 1: Exemplo de **Grid World** mostrando um agente, recompensa e punição
 
 Antes de prosseguirmos pode ser produtivo detalhar os componentes deste mundo:
 
-1.  **Células como Estados**: cada célula dentro da grade representa um estado distinto no qual o agente pode se encontrar. A posição do agente na grade define completamente o estado do ambiente.
+1. **Células como Estados**: cada célula dentro da grade representa um estado distinto no qual o agente pode se encontrar. A posição do agente na grade define completamente o estado do ambiente.
 
-2.  **Paredes como Limitações**: algumas células podem ser designadas como paredes, atuando como obstáculos intransponíveis. Paredes restringem o movimento do agente, adicionando um elemento de desafio e realismo ao ambiente.
+2. **Paredes como Limitações**: algumas células podem ser designadas como paredes, atuando como obstáculos intransponíveis. Paredes restringem o movimento do agente, adicionando um elemento de desafio e realismo ao ambiente.
 
-3.  **Movimento Estocástico**: quando o agente decide se mover (por exemplo: para o norte), o resultado não será determinístico. Introduzimos características estocásticas ao movimento:
+3. **Movimento Estocástico**: quando o agente decide se mover (por exemplo: para o norte), o resultado não será determinístico. Introduzimos características estocásticas ao movimento:
 
--   Em $80\%$ das vezes, o agente se move na direção desejada.
+- Em $80\%$ das vezes, o agente se move na direção desejada.
 
--   Em $10\%$ das vezes, o agente se move para cada lado perpendicular à direção desejada. Por exemplo: se tentar ir para o norte, pode ir para o leste ou oeste com $10\%$ de probabilidade cada. Como pode ser visto na Figura 2. 
+- Em $10\%$ das vezes, o agente se move para cada lado perpendicular à direção desejada. Por exemplo: se tentar ir para o norte, pode ir para o leste ou oeste com $10\%$ de probabilidade cada. Como pode ser visto na Figura 2.
 
 ![Mostra o agente e setas proporcionais a probabilidade do movimento](/assets/images/gw3.webp)
 
@@ -144,13 +144,13 @@ _Figura 2: Visualização do efeito estocástico do movimento._{: class="legend"
 
 Para que o agente aprenda a navegar no **Grid World** de forma inteligente, vamos criar e fornecer um sistema de recompensas que guie seu aprendizado. Para tanto, vamos definir o nosso sistema de recompensas segundo as seguintes regras:
 
-1.  **Recompensa por vida ou passo**: A cada passo que o agente dá na grade, exceto nos estados terminais, ele recebe uma pequena recompensa, também chamada de *recompensa passo* (em inglês, *living reward*). Essa recompensa pode ser positiva ou negativa:
+1. **Recompensa por vida ou passo**: A cada passo que o agente dá na grade, exceto nos estados terminais, ele recebe uma pequena recompensa, também chamada de *recompensa passo* (em inglês, *living reward*). Essa recompensa pode ser positiva ou negativa:
 
--   uma recompensa por passo negativa, como no exemplo fornecido, $-0.03$ incentiva o agente a alcançar os estados terminais o mais rápido possível, *viver no ambiente tem um custo*;
+- uma recompensa por passo negativa, como no exemplo fornecido, $-0.03$ incentiva o agente a alcançar os estados terminais o mais rápido possível, *viver no ambiente tem um custo*;
 
--   uma recompensa por passo positiva, incentiva o agente a permanecer no ambiente o máximo possível, viver no ambiente sua recompensa, se não houvesse estados terminais atrativos;
+- uma recompensa por passo positiva, incentiva o agente a permanecer no ambiente o máximo possível, viver no ambiente sua recompensa, se não houvesse estados terminais atrativos;
 
--   recompensas nos Estados Terminais: certos estados na grade são designados como estados terminais. Ao alcançar um estado terminal, o episódio de aprendizado se encerra, e o agente recebe uma grande recompensa, que pode ser: (a) positiva: representando um objetivo bem-sucedido, como alcançar um estado de meta ou coletar um recurso valioso (+1 na Figura 1); (b) negativa: Representando um resultado indesejado, como cair em um estado de armadilha ou falhar na tarefa (-1 na Figura 1).
+- recompensas nos Estados Terminais: certos estados na grade são designados como estados terminais. Ao alcançar um estado terminal, o episódio de aprendizado se encerra, e o agente recebe uma grande recompensa, que pode ser: (a) positiva: representando um objetivo bem-sucedido, como alcançar um estado de meta ou coletar um recurso valioso (+1 na Figura 1); (b) negativa: Representando um resultado indesejado, como cair em um estado de armadilha ou falhar na tarefa (-1 na Figura 1).
 
 O sistema de recompensas define o objetivo do agente no **Grid World**. O agente deve aprender a sequenciar suas ações de forma a maximizar a recompensa acumulada ao longo do tempo, considerando tanto as recompensas imediatas (recompensa por passo) quanto as recompensas futuras (recompensas nos estados terminais).
 
@@ -158,17 +158,17 @@ O sistema de recompensas define o objetivo do agente no **Grid World**. O agente
 
 Agora, que a analítica leitora entendeu os conceitos, podemos mapear os componentes do **Grid World** na estrutura formal de um **MDP**:
 
-1.  **Estados ($S$)**: o conjunto de todos os possíveis estados é representado por todas as células da grade. Na Figura 1, nosso mundo tem $12$ estados possíveis.
+1. **Estados ($S$)**: o conjunto de todos os possíveis estados é representado por todas as células da grade. Na Figura 1, nosso mundo tem $12$ estados possíveis.
 
-2.  **Ações ($A$)**: o conjunto de ações possíveis para o agente em cada estado consiste nos movimentos direcionais: ${Norte, Sul, Leste, Oeste}$.
+2. **Ações ($A$)**: o conjunto de ações possíveis para o agente em cada estado consiste nos movimentos direcionais: ${Norte, Sul, Leste, Oeste}$.
 
-3.  **Função de Transição ($P$)**: a função de transição $P(s′\vert s,a)$ define a probabilidade de, estando no estado $s$ e executando a ação $a$, o agente transite para o estado $s'$. No nosso **Grid World**, essa função é determinada pelas regras de movimento estocástico que definimos anteriormente ($80\%$ na direção desejada, $10\%$ para os lados, permanecer no mesmo estado se colidir com a parede).
+3. **Função de Transição ($P$)**: a função de transição $P(s′\vert s,a)$ define a probabilidade de, estando no estado $s$ e executando a ação $a$, o agente transite para o estado $s'$. No nosso **Grid World**, essa função é determinada pelas regras de movimento estocástico que definimos anteriormente ($80\%$ na direção desejada, $10\%$ para os lados, permanecer no mesmo estado se colidir com a parede).
 
-4.  **Função de Recompensa ($R$)**: a função de recompensa $R(s,a,s′)$ define a recompensa que o agente recebe ao transitar do estado $s$ para o estado $s′$ após executar a ação $a$. No **Grid World**, isso engloba tanto as recompensas de passo, positivas e negativas, quanto as recompensas nos estados terminais.
+4. **Função de Recompensa ($R$)**: a função de recompensa $R(s,a,s′)$ define a recompensa que o agente recebe ao transitar do estado $s$ para o estado $s′$ após executar a ação $a$. No **Grid World**, isso engloba tanto as recompensas de passo, positivas e negativas, quanto as recompensas nos estados terminais.
 
-5.  **Estado Inicial** $(s_0)$: um estado específico na grade é designado como o estado inicial, Neste estado o agente começa cada episódio de aprendizado.
+5. **Estado Inicial** $(s_0)$: um estado específico na grade é designado como o estado inicial, Neste estado o agente começa cada episódio de aprendizado.
 
-6.  **Estados Terminais ($S_terminal$):**: um ou mais estados são designados como estados terminais. Ao alcançar um estado terminal, o episódio se encerra.
+6. **Estados Terminais ($S_terminal$):**: um ou mais estados são designados como estados terminais. Ao alcançar um estado terminal, o episódio se encerra.
 
 O **Grid World**, como um **MDP**, assume a *propriedade de Markov*. Essa propriedade simplifica o problema de aprendizado e tomada de decisão. Ela *afirma que o futuro depende apenas do estado presente, e não do histórico passado de estados e ações*.
 
@@ -194,21 +194,21 @@ A **FOL** permite definir o domínio do problema, as ações possíveis e o mode
 
 A definição de um mundo, Em **FOL**, começa pela definição dos termos primitivos e axiomas que descrevem este mundo. Neste caso, para **Grid World**, podemos começar por:
 
-1.  **Termos Primitivos**: definimos os seguintes predicados para descrever os elementos básicos do **Grid World**:
+1. **Termos Primitivos**: definimos os seguintes predicados para descrever os elementos básicos do **Grid World**:
 
-    -   $\text{Celula}(x,y)$: este predicado é verdadeiro se a posição $(x,y)$ representa uma célula válida na grade;
-    -   $\text{Agente(x,y,t)}$: este predicado, é verdadeiro se o agente está localizado na célula $(x,y)$ no instante de tempo $t$.
-    -   $\text{Estado}(x,y,tipo)$: define o tipo de célula na posição $(x,y)$. O tipo pode ser $\text{vazio}$, $\text{parede}$, $\text{inicio}$, $\text{terminal}^+$ (terminal positivo) ou $\text{terminal}^-$ (terminal negativo).
+    - $\text{Celula}(x,y)$: este predicado é verdadeiro se a posição $(x,y)$ representa uma célula válida na grade;
+    - $\text{Agente(x,y,t)}$: este predicado, é verdadeiro se o agente está localizado na célula $(x,y)$ no instante de tempo $t$.
+    - $\text{Estado}(x,y,tipo)$: define o tipo de célula na posição $(x,y)$. O tipo pode ser $\text{vazio}$, $\text{parede}$, $\text{inicio}$, $\text{terminal}^+$ (terminal positivo) ou $\text{terminal}^-$ (terminal negativo).
 
-2.  **Axiomas Básicos**: estabelecemos agora alguns axiomas que restringem e definem o domínio do **Grid World**:
+2. **Axiomas Básicos**: estabelecemos agora alguns axiomas que restringem e definem o domínio do **Grid World**:
 
-    -   Axioma 1: tipo de célula Único: para cada célula $(x,y)$, existe um e apenas um tipo associado a ela. Formalmente, teremos:
+    - Axioma 1: tipo de célula Único: para cada célula $(x,y)$, existe um e apenas um tipo associado a ela. Formalmente, teremos:
 
-            $$\forall x,y \exists! tipo \text{Estado}(x,y,tipo) \land tipo \in \\text{vazio, parede, inicio, terminal}^+, \text{terminal}^-\}$$
+       $$\forall x,y \exists! tipo \text{Estado}(x,y,tipo) \land tipo \in \\text{vazio, parede, inicio, terminal}^+, \text{terminal}^-\}$$
 
         Este axioma garante que cada célula tem um tipo bem definido e que esse tipo pertence ao conjunto de tipos possíveis.
 
-    -   Axioma 2: posição única do agente: em qualquer instante de tempo $t$, o agente pode estar em uma e apenas uma posição. Ou seja, teremos:
+    - Axioma 2: posição única do agente: em qualquer instante de tempo $t$, o agente pode estar em uma e apenas uma posição. Ou seja, teremos:
 
         $$\forall t \exists! x,y \;\text{Agente}(x,y,t) $$
 
@@ -216,19 +216,19 @@ A definição de um mundo, Em **FOL**, começa pela definição dos termos primi
 
 Um mundo, qualquer mundo, que define um problema específico precisa da definição das ações que, por ventura, podem ser implementadas neste mundo. Em **FOL**, também podemos formalizar predicados referentes às ações que o agente pode executar no **Grid World**.
 
-1.  **Ações Primitivas**: definimos o conjunto de ações $A$ utilizando um predicado $Acao(a)$ que, pode ser definido como:
+1. **Ações Primitivas**: definimos o conjunto de ações $A$ utilizando um predicado $Acao(a)$ que, pode ser definido como:
 
     $$\text{Acao}(a) \leftrightarrow a \in \{\text{Norte, Sul, Leste, Oeste}\}$$
 
     Este predicado define que as ações primitivas disponíveis para o agente são mover-se para $\text{Norte}$, $\text{Sul}$, $\text{Leste}$ ou $\text{Oeste}$.
 
-2.  **Axiomas de Ação**: introduzimos o predicado $\text{Executavel}(a,x,y)$ para definir quando uma ação a é executável a partir da célula $(x,y)$:
+2. **Axiomas de Ação**: introduzimos o predicado $\text{Executavel}(a,x,y)$ para definir quando uma ação a é executável a partir da célula $(x,y)$:
 
     $$\text{Executavel}(a,x,y) \leftrightarrow \exists x',y' \;[\text{Adjacente}(x,y,x',y',a) \land \neg \text{Estado}(x',y',\text{parede})]$$
 
     Na qual $\text{Adjacente}(x,y,x',y',a)$ é um predicado definido para ser verdadeiro se $(x',y')$ é adjacente a $(x,y)$ na direção da ação $a$. Este axioma estabelece que uma ação é executável se, na direção pretendida, não houver uma parede na célula adjacente.
 
-3.  **Modelo de Transição**: podemos definir um modelo de transição em **FOL** tanto para o caso determinístico quanto para o caso estocástico.
+3. **Modelo de Transição**: podemos definir um modelo de transição em **FOL** tanto para o caso determinístico quanto para o caso estocástico.
 
     - **Caso Determinístico**: se uma ação a é executável no estado $(x,y)$ no tempo $t$, então existe um único estado sucessor $(x',y')$ no tempo $t+1$:
 
@@ -270,7 +270,7 @@ Esta equação especifica que quando há uma parede no estado de destino, o agen
 
 A função objetivo, que guia o aprendizado do agente, também pode ser definida formalmente.
 
-1.  **Recompensa Imediata**: a recompensa imediata $R(x,y)$, recebida ao alcançar uma célula $(x,y)$ pode ser definida em função do tipo de célula:
+1. **Recompensa Imediata**: a recompensa imediata $R(x,y)$, recebida ao alcançar uma célula $(x,y)$ pode ser definida em função do tipo de célula:
 
     $$R(x,y) = \begin{cases}
        +1 & \text{se } \text{Estado}(x,y,\text{terminal}^+) \\
@@ -280,7 +280,7 @@ A função objetivo, que guia o aprendizado do agente, também pode ser definida
 
     Esta função recompensa atribui valores diferentes dependendo se a célula é um terminal positivo, terminal negativo ou uma célula comum (vazia ou de início), utilizando a recompensa de passo $r_{\text{vida}}$. Neste caso, simplificamos a função de recompensa $R(s,a,s′)$ criando um caso especial que considera apenas a posição no mundo.
 
-2.  **Função Valor**: a função valor $V^\pi(x,y)$ para uma política $\pi$ pode ser definida como o valor esperado do retorno acumulado a partir do estado inicial $(x,y)$ seguindo a política $\pi$:
+2. **Função Valor**: a função valor $V^\pi(x,y)$ para uma política $\pi$ pode ser definida como o valor esperado do retorno acumulado a partir do estado inicial $(x,y)$ seguindo a política $\pi$:
 
     $$V^\pi(x,y) = \mathbb{E} \left[ \sum_{t=0}^{\infty} \gamma^t R(x_t,y_t) \mid (x_0,y_0)=(x,y), \pi \right]$$
 
@@ -292,11 +292,11 @@ $$ GW = \langle \mathcal{L}, \Sigma, M \rangle $$
 
 Na qual, teremos:
 
--   $\mathcal{L}$ é a linguagem de primeira ordem que definimos, incluindo os predicados $\text{Celula}$, $\text{Agente}$, $\text{Estado}$, $\text{Acao}$, $\text{Executavel}$ e $\text{Adjacente$.
+- $\mathcal{L}$ é a linguagem de primeira ordem que definimos, incluindo os predicados $\text{Celula}$, $\text{Agente}$, $\text{Estado}$, $\text{Acao}$, $\text{Executavel}$ e $\text{Adjacente$.
 
--   $\Sigma$ é o conjunto de axiomas do domínio que estabelecemos (Axiomas Básicos e Axiomas de Ação).
+- $\Sigma$ é o conjunto de axiomas do domínio que estabelecemos (Axiomas Básicos e Axiomas de Ação).
 
--   $M$ é o modelo de transição estocástico, definido pelas probabilidades de transição para cada ação (como exemplificado para a ação $Norte$).
+- $M$ é o modelo de transição estocástico, definido pelas probabilidades de transição para cada ação (como exemplificado para a ação $Norte$).
 
 Este sistema, $GW$, captura formalmente a essência do **Grid World** utilizando Lógica de Primeira Ordem. É importante notar que este sistema preserva a propriedade de Markov, mesmo na formulação em **FOL**:
 
@@ -320,7 +320,7 @@ Agora que definimos o **Grid World** tanto na perspectiva de **MDP** quanto na d
 
 ## Resumo da Notação Utilizada
 
-#### Notação Matemática
+### Notação Matemática
 
 - **Estados**: Representados por $s$ ou $s'$. O conjunto de todos os estados possíveis é denotado por $S$.
 - **Ações**: Representadas por $a$. O conjunto de ações possíveis é denotado por $A$.
@@ -329,7 +329,7 @@ Agora que definimos o **Grid World** tanto na perspectiva de **MDP** quanto na d
 - **Política**: Denotada por $\pi(s)$, que mapeia estados para ações. A política ótima é denotada por $\pi^*(s)$.
 - **Função Valor**: Denotada por $V^\pi(s)$, que representa o valor esperado de longo prazo de estar em um estado $s$ seguindo a política $\pi$.
 
-#### Notação em Lógica de Primeira Ordem (FOL)
+### Notação em Lógica de Primeira Ordem (FOL)
 
 - **Predicados**:
   - $\text{Celula}(x, y)$: Verdadeiro se $(x, y)$ é uma célula válida na grade.
@@ -346,25 +346,20 @@ Agora que definimos o **Grid World** tanto na perspectiva de **MDP** quanto na d
 - **Modelo de Transição**:
   - Probabilidades de transição são representadas por $P(\text{Agente}(x', y', t+1) \mid \text{Agente}(x, y, t), \text{Acao}(a))$.
 
-#### Exemplos de Uso
+### Exemplos de Uso
 
 - **Função de Transição**:
-  $$
-  P(s' \vert s, a) = \text{Probabilidade de transitar para } s' \text{ ao tomar a ação } a \text{ no estado } s
-  $$
+  
+  $$P(s' \vert s, a) = \text{Probabilidade de transitar para } s' \text{ ao tomar a ação } a \text{ no estado } s$$
 
 - **Função de Recompensa**:
-  $$
-  R(s, a, s') = \text{Recompensa imediata ao transitar de } s \text{ para } s' \text{ após executar a ação } a
-  $$
+  
+  $$R(s, a, s') = \text{Recompensa imediata ao transitar de } s \text{ para } s' \text{ após executar a ação } a$$
 
 - **Política**:
-  $$
-  \pi(s) = \text{Ação a ser tomada no estado } s
-  $$
+  
+  $$\pi(s) = \text{Ação a ser tomada no estado } s$$
 
 - **Função Valor**:
-  $$
-  V^\pi(s) = \mathbb{E} \left[ \sum_{t=0}^{\infty} \gamma^t R(s_t) \mid s_0 = s, \pi \right]
-  $$
-
+  
+  $$V^\pi(s) = \mathbb{E} \left[ \sum_{t=0}^{\infty} \gamma^t R(s_t) \mid s_0 = s, \pi \right]$$
