@@ -45,20 +45,20 @@ keywords: |-
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-02-09T14:32:24.837Z
+lastmod: 2025-02-09T15:04:09.616Z
 ---
 
-A esforçada leitora, se realmente quiser entender Reinforcement Learning - **RL**, deve começar com problemas simples. Não é qualquer problema. Problemas que permitam construir uma compreensão sólida dos princípios estruturantes desta tecnologia. É aqui que o **Grid World** brilha e se destaca.
+A esforçada leitora, se realmente quiser entender as técnicas e algoritmos de *Reinforcement Learning* - **RL**, deve começar com problemas simples. Não é qualquer problema. Problemas que permitam construir uma compreensão sólida dos princípios estruturantes desta tecnologia. É aqui que o **Grid World** brilha e se destaca.
 
 A simplicidade do **Grid World** reside em não ser um desafio do mundo real, como dirigir um carro, ou jogar um jogo de estratégia. Em vez disso, este problema usa um mundo representado por um ambiente formado por uma grade bidimensional, discreta e simplificada. Um mundo cuidadosamente projetado para isolar e destacar os conceitos mais importantes do **RL**. Não é raro que a simplicidade deste problema faça com que ele seja escolhido para testar novos algoritmos, novas ideias.
 
-Historicamente, o **Grid World**, e problemas similares, foram utilizados para o desenvolvimento e validação dos primeiros algoritmos de **RL**, como **Q-Learning** e **SARSA**. Além disso, este é um problema de decisão sequencial.
+Historicamente, o **Grid World** e problemas similares, foram utilizados para o desenvolvimento e validação dos primeiros algoritmos de **RL**, como **Q-Learning** e **SARSA**. Além disso, este é um problema de decisão sequencial.
 
 A ênfase na natureza **sequencial** dos Processos de Decisão de Markov não é por acaso. Esta característica distingue os **MDPs** de outros modelos de decisão e reflete mais fielmente a realidade dos problemas que encontramos tanto na natureza quanto em sistemas artificiais.
 
-A atenta leitora pode, simplesmente, imaginar um jogador de xadrez. Cada movimento que ele faz não pode ser considerado isoladamente, a posição de uma peça agora determinará não apenas o resultado imediato, mas também moldará todas as possibilidades de jogadas futuras. Esta é a essência de um problema de decisão sequencial, no qual cada escolha se entrelaça com um futuro estocástico.
+A atenta leitora pode, simplesmente, imaginar um jogador de xadrez. Cada movimento que ele faz não pode ser considerado isoladamente. A posição de uma peça determinará não apenas o resultado imediato, mas também moldará todas as possibilidades de jogadas futuras. Esta é a essência de um problema de decisão sequencial, no qual cada escolha se entrelaça com um futuro estocástico.
 
-Em contraste com problemas de decisão única, domínio da programação linear, em que podemos simplesmente otimizar uma determinada solução em busca de um resultado imediato, os problemas sequenciais exigem uma compreensão profunda das relações temporais. Uma decisão aparentemente subótima em um determinado momento pode ser parte de uma estratégia superior se observado ao longo do tempo. Este conceito permite que a esforçada leitora possa entender por que os **MDPs** são tão poderosos na modelagem de problemas do mundo real.
+Em contraste com problemas de decisão única, domínio da programação linear, em que podemos simplesmente otimizar uma determinada solução em busca de um resultado imediato, os problemas sequenciais exigem uma compreensão profunda das relações temporais. Uma decisão aparentemente subótima em um determinado momento pode ser parte de uma estratégia superior se observada ao longo do tempo. Este conceito permite que a esforçada leitora possa entender por que os **MDPs** são tão poderosos na modelagem de problemas do mundo real.
 
 A dependência temporal em problemas sequenciais cria uma teia complexa de causa e efeito. Cada ação não apenas gera uma recompensa imediata, mas também transporta o sistema para um novo estado, que por sua vez determina quais ações estarão disponíveis no futuro e quais recompensas serão possíveis. Esta cadeia de influências torna o planejamento em **MDPs** um desafio particularmente interessante. Neste cenário, o trabalho de Markov permite estabelecer que o estado atual contém toda a informação necessária para tomar decisões ótimas, permitindo navegar pela complexidade dos problemas sequenciais sem nos perdermos no labirinto do passado.
 
@@ -317,3 +317,54 @@ Em nosso exemplo, um mundo de $4\times 3$ estados, o agente deve aprender a pol�
 **Próximos Passos**: Solucionando o **Grid World** com Algoritmos de RL
 
 Agora que definimos o **Grid World** tanto na perspectiva de **MDP** quanto na de Lógica de Primeira Ordem, o próximo passo natural é explorar como podemos usar algoritmos de *Reinforcement Learning* para encontrar a política ótima para um agente navegando neste ambiente. Se tudo correr bem, nas seções seguintes, investigaremos algoritmos como *Programação Dinâmica*, *Monte Carlo*, *Diferença Temporal (TD)* e *Aprendizado por Q-Learning*, e demonstraremos como eles podem ser aplicados para resolver o problema do **Grid World** e desvendar os segredos do aprendizado por reforço.
+
+## Resumo da Notação Utilizada
+
+#### Notação Matemática
+
+- **Estados**: Representados por $s$ ou $s'$. O conjunto de todos os estados possíveis é denotado por $S$.
+- **Ações**: Representadas por $a$. O conjunto de ações possíveis é denotado por $A$.
+- **Função de Transição**: Denotada por $P(s' \vert s, a)$, que representa a probabilidade de transitar para o estado $s'$ ao tomar a ação $a$ no estado $s$.
+- **Função de Recompensa**: Denotada por $R(s, a, s')$, que mapeia cada par estado-ação para um valor numérico representando a recompensa imediata.
+- **Política**: Denotada por $\pi(s)$, que mapeia estados para ações. A política ótima é denotada por $\pi^*(s)$.
+- **Função Valor**: Denotada por $V^\pi(s)$, que representa o valor esperado de longo prazo de estar em um estado $s$ seguindo a política $\pi$.
+
+#### Notação em Lógica de Primeira Ordem (FOL)
+
+- **Predicados**:
+  - $\text{Celula}(x, y)$: Verdadeiro se $(x, y)$ é uma célula válida na grade.
+  - $\text{Agente}(x, y, t)$: Verdadeiro se o agente está na célula $(x, y)$ no instante $t$.
+  - $\text{Estado}(x, y, tipo)$: Define o tipo de célula na posição $(x, y)$.
+  - $\text{Acao}(a)$: Verdadeiro se $a$ é uma ação válida.
+  - $\text{Executavel}(a, x, y)$: Verdadeiro se a ação $a$ é executável a partir da célula $(x, y)$.
+  - $\text{Adjacente}(x, y, x', y', a)$: Verdadeiro se $(x', y')$ é adjacente a $(x, y)$ na direção da ação $a$.
+
+- **Axiomas**:
+  - Axioma 1: Tipo de célula único.
+  - Axioma 2: Posição única do agente.
+
+- **Modelo de Transição**:
+  - Probabilidades de transição são representadas por $P(\text{Agente}(x', y', t+1) \mid \text{Agente}(x, y, t), \text{Acao}(a))$.
+
+#### Exemplos de Uso
+
+- **Função de Transição**:
+  $$
+  P(s' \vert s, a) = \text{Probabilidade de transitar para } s' \text{ ao tomar a ação } a \text{ no estado } s
+  $$
+
+- **Função de Recompensa**:
+  $$
+  R(s, a, s') = \text{Recompensa imediata ao transitar de } s \text{ para } s' \text{ após executar a ação } a
+  $$
+
+- **Política**:
+  $$
+  \pi(s) = \text{Ação a ser tomada no estado } s
+  $$
+
+- **Função Valor**:
+  $$
+  V^\pi(s) = \mathbb{E} \left[ \sum_{t=0}^{\infty} \gamma^t R(s_t) \mid s_0 = s, \pi \right]
+  $$
+
