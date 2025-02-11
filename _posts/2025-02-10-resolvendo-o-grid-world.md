@@ -17,7 +17,7 @@ keywords: Grid World *Reinforcement Learning* M*Dynamic Programming* Solution *R
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-02-11T23:38:50.754Z
+lastmod: 2025-02-11T23:57:46.296Z
 draft: 2025-02-10T09:29:19.442Z
 ---
 
@@ -47,9 +47,9 @@ Vamos dedicar um minuto, ou dez, para lembrar em que porto desta jornada estamos
     r_{vida} & \text{caso contrário}
     \end{cases}$$
 
-    Onde $r_{vida}$ é a recompensa por passo (living reward), geralmente um valor pequeno e negativo (por exemplo, $-0.03$).
+    de tal forma que $r_{vida}$ é a recompensa por passo (living reward), geralmente um valor pequeno e negativo (por exemplo, $-0.03$).
 
-5. **Estado Inicial $(s_0)$**: A célula onde o agente inicia cada episódio.
+5. **Estado Inicial $(s_0)$**: A célula em que o agente inicia cada episódio.
 
 6. **Estados Terminais $(S_{terminal})$**: As células que, quando alcançadas, encerram o episódio.
 
@@ -65,13 +65,13 @@ A abordagem inocente para encontrar a política ótima para resolver o **Grid Wo
 
 4. **Seleção da Sequência Ótima**: compare as recompensas acumuladas de todas as sequências de ações; selecione a sequência que maximiza a recompensa acumulada como a política ótima.
 
-A criativa leitora deve estar percebendo que esta é uma estratégia perfeitamente possível. Não é raro que as estratégias de força bruta sejam a primeira opção quando alguém enfrenta um problema pela primeira vez. Neste caso, trata-se de uma solução de busca em todo o universo de possibilidades, considerando todas as combinações possíveis de movimentos (para cima - $\text{Norte}$, para baixo - $\text{Sul}$, para a esquerda - $\text{Oeste}$, para a direita - $\text{Leste}$) em cada estado. Essa abordagem é, via de regra, ineficiente e computacionalmente dispendiosa. O número de sequências de ações possíveis cresce exponencialmente com o tamanho da grade e o número de estados. Quanto maior o mundo, mais custoso será resolver o problema.
+A criativa leitora deve estar percebendo que esta é uma estratégia perfeitamente possível. Não é raro que as estratégias de força bruta sejam a primeira opção quando alguém enfrenta um problema pela primeira vez. Neste caso, trata-se de uma solução de busca em todo o universo de possibilidades, considerando todas as combinações possíveis de movimentos (para cima - $\text{Norte}$, para baixo - $\text{Sul}$, para a esquerda - $\text{Oeste}$, para a direita - $\text{Leste}$) em cada estado. Essa abordagem é, via de regra, ineficiente e computacionalmente dispendiosa. O número de sequências de ações possíveis cresce exponencialmente com o tamanho da grade e o número de estados. Quanto maior o mundo, maior será o custo computacional para resolver o problema.
 
 Existem soluções melhores. A primeira, clássica e didática, foi encontrada com a aplicação das Equações de Bellman.
 
 ## Entram as Equações de Bellman
 
-As **Equações de Bellman** desenvolvidas por [Richard Bellman](https://pt.wikipedia.org/wiki/Richard_Bellman) na década de 1950, oferecem uma maneira mais eficiente e escalável de resolver o problema, decompondo-o em subproblemas menores e utilizando a *Dynamic Programming*, programação dinâmica, para encontrar a política ótima[^1]. Para a maioria dos casos práticos, especialmente em ambientes maiores ou mais complexos, as **Equações de Bellman** são a abordagem preferida.
+As **Equações de Bellman** desenvolvidas por [Richard Bellman](https://pt.wikipedia.org/wiki/Richard_Bellman) na década de 1950, oferecem uma maneira mais eficiente e escalável de resolver o problema, decompondo-o em subproblemas menores e utilizando a *Dynamic Programming*, programação dinâmica, para encontrar a política ótima[^1]. Para a maioria dos casos práticos, especialmente em ambientes maiores ou ambientes complexos, as **Equações de Bellman** são a abordagem preferida.
 
 [^1]: BELLMAN, Richard. Dynamic Programming. Princeton: Princeton University Press, 1957.
 
@@ -174,7 +174,7 @@ $$
 \end{align*}
 $$
 
-Onde $s_a$ é o estado resultante do movimento na direção $a$, e $s_{a1}$, $s_{a2}$ são os estados resultantes dos movimentos laterais.
+Na qual, $s_a$ é o estado resultante do movimento na direção $a$, e $s_{a1}$, $s_{a2}$ são os estados resultantes dos movimentos laterais.
 
 ### Iteração de Política
 
@@ -211,9 +211,9 @@ Nada como um exemplo prático, passo a passo, para que a amável leitora supere 
 ![um grid world com inicio em 0,0, agente em 1,0, um obstáculo em 1,1 e objetivo em 4,3](/assets/images/gw1.webp)
 _Figura 1: Exemplo de Grid World, para aplicação da *Dynamic Programming*._{: class="legend"}
 
-Considere um mundo representado por uma grade retangular de dimensões $4 \times 3$, onde um agente deve aprender a navegar de forma ótima. O ambiente possui as seguintes características:
+Considere um mundo representado por uma grade retangular de dimensões $4 \times 3$, no qual um agente deve aprender a navegar de forma ótima. O ambiente possui as seguintes características:
 
-1. **Grade**: O mundo é composto por $12$ células $(4 \times 3)$, onde cada célula representa um estado possível para o agente.
+1. **Grade**: O mundo é composto por $12$ células $(4 \times 3)$, na qual cada célula representa um estado possível para o agente.
 
 2. **Estados Especiais**:
    * Estado Inicial: localizado na célula $(0,0)$ (canto inferior esquerdo);
@@ -390,7 +390,7 @@ Agora podemos observar uma diferenciação entre as ações. As ações $\text{N
 
 1. as ações $\text{Norte}$ e $\text{Leste}$ fazem com que o agente avance em direção aos estados com valores positivos mais frequentemente;
 
-2. As ações $\text{Sul}$ e $\text{Oeste}$ resultam em mais colisões com as paredes/bordas, forçando o agente a permanecer no mesmo estado, acumulando recompensas negativas por passo;
+2. As ações $\text{Sul}$ e $\text{Oeste}$ resultam em colisões com as paredes/bordas, forçando o agente a permanecer no mesmo estado, acumulando recompensas negativas por passo;
 
 3. Os valores começam a refletir a estrutura do ambiente e a propagação dos valores positivos a partir do estado terminal com recompensa $+1$.
 
@@ -424,7 +424,7 @@ $$
 \end{array}
 $$
 
-Onde as setas indicam a direção ótima a seguir em cada estado.
+As setas indicam a direção ótima a seguir em cada estado.
 
 A política ótima mostra que o agente deve:
 
@@ -888,7 +888,7 @@ $$
 \end{array}
 $$
 
-A atenta leitora deve ter notado que este processo de melhoria da política é mais detalhado que na Iteração de Valor, pois calculamos explicitamente o valor de cada ação possível em cada estado. Além disso, *a melhoria da política só ocorre após a convergência completa da avaliação da política, diferentemente da Iteração de Valor onde as atualizações são entrelaçadas*.
+A atenta leitora deve ter notado que este processo de melhoria da política é mais detalhado que na Iteração de Valor, pois calculamos explicitamente o valor de cada ação possível em cada estado. Além disso, *a melhoria da política só ocorre após a convergência completa da avaliação da política, diferentemente da Iteração de Valor na qual as atualizações são entrelaçadas*.
 
 #### Iterações Subsequentes
 
@@ -918,7 +918,7 @@ $$
 
 #### Convergência
 
-A Iteração de Política converge em menos iterações que a Iteração de Valor (tipicamente 3-4 iterações versus 15-20 para Iteração de Valor), mas cada iteração requer mais computação devido à avaliação completa da política. Os dois métodos convergem para a mesma solução ótima, como esperado teoricamente.
+A Iteração de Política converge em menos iterações que a Iteração de Valor (tipicamente 3-4 iterações versus 15-20 para Iteração de Valor), mas cada iteração acrescenta tempo de computação, devido à avaliação completa da política. Os dois métodos convergem para a mesma solução ótima, como esperado teoricamente.
 
 A política ótima obtida é idêntica à encontrada por Iteração de Valor, confirmando que os métodos encontram a mesma solução ótima por caminhos diferentes. A principal diferença está na forma como chegam lá:
 - **Iteração de Valor**: atualiza valores e melhora a política implicitamente;
@@ -1203,7 +1203,7 @@ Agora que implementamos e entendemos tanto a Iteração de Valor quanto a Itera�
 ### Complexidade Computacional
 
 **Iteração de Valor**:
-- Complexidade por iteração: $O(\vert S\vert^2\vert A\vert)$, onde $\vert S\vert$ é o número de estados e $|A|$ é o número de ações;
+- Complexidade por iteração: $O(\vert S\vert^2\vert A\vert)$, de forma que $\vert S\vert$ é o número de estados e $|A|$ é o número de ações;
 - Realiza uma única atualização de valor por estado em cada iteração;
 - Número típico de iterações até convergência: $O(\frac{\log(1/\epsilon)}{1-\gamma})$.
 
@@ -1233,7 +1233,7 @@ Agora que implementamos e entendemos tanto a Iteração de Valor quanto a Itera�
 
 **Iteração de Política**:
 - Converge em número finito de iterações;
-- Convergência mais rápida em termos de número de iterações;
+- Convergência com um número menor de iterações;
 - Cada iteração é computacionalmente mais intensiva;
 - Convergência estrita: $V^{\pi_{k+1}} > V^{\pi_k}$.
 
@@ -1303,7 +1303,7 @@ A relação entre Processos de Decisão de Markov (**MDPs**), *Dynamic Programmi
    - Iteração de Valor;
    - Iteração de Política;
 
-3. **Reinforcement Learning** estende esses conceitos para situações onde o modelo não é conhecido, usando métodos como:
+3. **Reinforcement Learning** estende esses conceitos para situações nas quais o modelo não é conhecido, usando métodos como:
    - Q-Learning;
    - SARSA;
    - Outros métodos que aprendem através da interação.
@@ -1378,7 +1378,7 @@ O estudo do **Grid World** que a esforçada leitora acompanhou exibe várias car
 
 ## Da *Dynamic Programming* ao *Reinforcement Learning*
 
-A *Dynamic Programming* no **Grid World** serve como base para a compreensão de métodos mais avançados de *Reinforcement Learning*. Mas, *Dynamic Programming* não é *Reinforcement Learning*. A principal diferença está na necessidade de conhecimento do modelo do ambiente.
+A *Dynamic Programming* no **Grid World** serve como base para a compreensão de métodos avançados de *Reinforcement Learning*. Mas, *Dynamic Programming* não é *Reinforcement Learning*. A principal diferença está na necessidade de conhecimento do modelo do ambiente.
 
 Na implementação que desenvolvemos, com *Dynamic Programming*, foi necessário e indispensável conhecer todas as probabilidades de transição $P(s'|s,a)$ e recompensas $R(s,a,s')$. Este é o chamado método *model-based*. Neste método, o modelo completo do ambiente é conhecido e utilizado diretamente nos cálculos. Por outro lado, em *Reinforcement Learning*, os agentes precisam aprender através da interação com o ambiente, sem ter acesso a esse modelo completo, o que dizemos ser uma abordagem *model-free*.
 
@@ -1386,10 +1386,55 @@ A distinção entre *Dynamic Programming* e *Reinforcement Learning* fica eviden
 
 Na *Dynamic Programming*, podemos aplicar estas equações diretamente, calculando os valores exatos para cada estado através de operações determinísticas. Foi isso que fizemos, duas vezes, com algoritmos diferentes.
 
-No *Reinforcement Learning*, precisamos aproximar estas equações usando amostras de experiência real, onde cada interação com o ambiente fornece uma estimativa ruidosa dos verdadeiros valores. Por exemplo, enquanto nossa implementação em *Dynamic Programming* calcula $V(s)$ usando todas as possíveis transições, um agente de *Reinforcement Learning* precisa estimar este valor observando resultados reais de suas ações.
+No *Reinforcement Learning*, precisamos aproximar estas equações usando amostras de experiência real. Cada interação com o ambiente fornece uma estimativa ruidosa dos verdadeiros valores. Por exemplo, enquanto nossa implementação em *Dynamic Programming* calcula $V(s)$ usando todas as possíveis transições, um agente de *Reinforcement Learning* precisa estimar este valor observando resultados reais de suas ações.
 
 A convergência também segue padrões distintos. Nossa implementação de *Dynamic Programming* converge de forma determinística, com garantias matemáticas claras baseadas no fator de desconto $\gamma$. Cada iteração reduz o erro de forma previsível e monótona. Em contraste, métodos de *Reinforcement Learning* têm convergência estocástica. Eventualmente os métodos de *Reinforcement Learning* convergem para a solução ótima, mas o caminho até lá é irregular, com flutuações causadas pela natureza aleatória das experiências e explorações[^4].
 
 [^4]: **Experiências**: refere-se a todas as interações que o agente tem com o ambiente: cada ação tomada e cada recompensa recebida é uma experiência. **Exploração** (*exploration*) é quando o agente tenta ações novas ou diferentes para descobrir melhores estratégias. **Explotação** (exploitation) é quando o agente usa o conhecimento que já tem para escolher ações que ele sabe que são boas.
 
-A implementação em C++ do **Grid World** usando *Dynamic Programming* serve assim como um caso ideal que ilustra os princípios fundamentais: decomposição do problema - memorização de soluções parciais, e atualização sistemática de valores - que são posteriormente adaptados e generalizados em *Reinforcement Learning* para situações onde o modelo completo não está disponível. Esta progressão de *Dynamic Programming* para *Reinforcement Learning* reflete a evolução que teremos neste texto.
+A implementação em C++ do **Grid World** usando *Dynamic Programming* serve assim como um caso ideal que ilustra os princípios fundamentais: decomposição do problema - memorização de soluções parciais, e atualização sistemática de valores - que são posteriormente adaptados e generalizados em *Reinforcement Learning* para situações nas quais o modelo completo não está disponível. Esta progressão de *Dynamic Programming* para *Reinforcement Learning* reflete a evolução que teremos neste texto.
+
+## Exercícios MDP - Grid World
+
+1. Modifique o Grid World para ter diferentes dimensões (por exemplo, 5x5, 8x8) e compare como a Iteração de Valor e a Iteração de Política escalam.
+
+2. Experimente com diferentes fatores de desconto $(\gamma)$ e analise como eles afetam a velocidade de convergência de cada método.
+
+3. Implemente um método híbrido que alterne entre Iteração de Valor e Iteração de Política baseado em algum critério. Em que situações isso poderia ser benéfico?
+
+4. Adicione obstáculos ao Grid World e analise como a topologia do ambiente afeta o desempenho relativo de ambos os métodos.
+
+5. Modifique a estrutura de recompensas e analise como diferentes esquemas de recompensa afetam as propriedades de convergência de ambos os algoritmos.
+
+### Dicas de Resolução
+
+1. Para o primeiro exercício, considere que a complexidade computacional:
+
+$$
+\begin{align*}
+\text{Iteração de Valor:} & \quad O(|S|^2|A|) \text{ por iteração} \\
+\text{Iteração de Política:} & \quad O(|S|^3) \text{ para avaliação} + O(|S|^2|A|) \text{ para melhoria}
+\end{align*}
+$$
+
+Na qual, $|S|$ cresce quadraticamente com a dimensão da grade.
+
+2. Para o segundo exercício, note que valores de $\gamma$ próximos de $1$ geralmente:
+  - Aumentam o número de iterações necessárias;
+  - Produzem políticas que consideram recompensas distantes;
+  - Afetam mais a Iteração de Valor que a Iteração de Política.
+.
+3. Para o método híbrido, considere alternar com base em:
+  - Taxa de mudança nos valores dos estados;
+  - Número de iterações já executadas;
+  - Tamanho do problema.
+
+4. Para obstáculos, observe que eles:
+  - Reduzem o espaço de estados efetivo $|S|$;
+  - Podem criar "corredores" que afetam a propagação de valores;
+  - Podem impactar diferentemente cada método
+
+5. Na modificação de recompensas, considere:
+  - Recompensas esparsas vs densas;
+  - Recompensas positivas vs negativas;
+  - Magnitude das recompensas.
