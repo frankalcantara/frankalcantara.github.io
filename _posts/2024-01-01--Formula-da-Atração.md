@@ -3,23 +3,24 @@ layout: post
 title: "A Fórmula da Atração: a Matemática do Eletromagnetismo"
 author: Frank
 categories:
-  - Matemática
-  - Eletromagnetismo
+   - Matemática
+   - Eletromagnetismo
 tags:
-  - Matemática
-  - Física
-  - Eletromagnetismo
+   - Matemática
+   - Física
+   - Eletromagnetismo
 image: assets/images/eletromag1.webp
 description: Entenda como a matemática fundamenta o eletromagnetismo e suas aplicações práticas em um artigo acadêmico destinado a estudantes de ciência e engenharia.
 preview: a matemática que suporta o entendimento dos fenômenos que explicam nosso universo.
 slug: formula-da-atracao-matematica-eletromagnetismo
 keywords:
-  - cálculo vetorial
-  - Eletromagnetismo
-  - Matemática
-  - poesia
-  - álgebra vetorial
+   - cálculo vetorial
+   - Eletromagnetismo
+   - Matemática
+   - poesia
+   - álgebra vetorial
 rating: 5
+lastmod: 2025-02-11T02:03:35.917Z
 ---
 
 O Eletromagnetismo é a lei, o ordenamento que embala o universo. Como uma divindade antiga que rege a existência e os movimentos de tudo que existe. Duas forças, elétrica e magnética, em uma dança interminável, moldam de um grão de poeira a um oceano de estrelas, até o mesmo dispositivo que você usa para decifrar essas palavras deve sua existência e funcionamento ao Eletromagnetismo.

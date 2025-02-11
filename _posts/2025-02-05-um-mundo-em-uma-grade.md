@@ -3,14 +3,14 @@ layout: post
 title: Um Mundo Inteiro em uma Grade
 author: Frank
 categories:
-    - artigo
-    - Matemática
-    - Inteligência Artificial
+  - artigo
+  - Matemática
+  - Inteligência Artificial
 tags:
-    - algoritmos
-    - C++
-    - inteligência artificial
-    - resolução de problemas
+  - algoritmos
+  - C++
+  - inteligência artificial
+  - resolução de problemas
 image: assets/images/gw2.webp
 featured: false
 rating: 5
@@ -18,34 +18,34 @@ description: " Aprenda de forma didática os fundamentos de RL, desde MDPs até 
 date: 2025-02-09T11:51:59.153Z
 preview: O Reinforcement Learning (RL) com o Grid World! 🚀 Um guia prático e didático para iniciantes construírem uma base sólida em IA.  Domine MDPs e algoritmos essenciais de RL explorando este ambiente simples e fundamental.  Ideal para quem busca entender RL de verdade!
 keywords: |-
-    Reinforcement Learning (RL)
-    Aprendizado por Reforço
-    Grid World
-    Mundo em Grade
-    Processo de Decisão de Markov (MDP)
-    Tomada de Decisão Sequencial
-    Propriedade de Markov
-    Agente
-    Ambiente
-    Estados
-    Ações
-    Recompensas
-    Dinâmica do Sistema
-    Função de Transição
-    Política (Policy)
-    Política Ótima
-    Exploração vs Explotação
-    Algoritmos de RL
-    Q-Learning
-    SARSA
-    Recompensa por Passo (Living Reward)
-    Estados Terminais
-    Planejamento em RL
-    Modelagem MDP
+  Reinforcement Learning (RL)
+  Aprendizado por Reforço
+  Grid World
+  Mundo em Grade
+  Processo de Decisão de Markov (MDP)
+  Tomada de Decisão Sequencial
+  Propriedade de Markov
+  Agente
+  Ambiente
+  Estados
+  Ações
+  Recompensas
+  Dinâmica do Sistema
+  Função de Transição
+  Política (Policy)
+  Política Ótima
+  Exploração vs Explotação
+  Algoritmos de RL
+  Q-Learning
+  SARSA
+  Recompensa por Passo (Living Reward)
+  Estados Terminais
+  Planejamento em RL
+  Modelagem MDP
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-02-09T15:12:26.697Z
+lastmod: 2025-02-11T10:36:49.230Z
 ---
 
 A esforçada leitora, se realmente quiser entender as técnicas e algoritmos de *Reinforcement Learning* - **RL**, deve começar com problemas simples. Não é qualquer problema. Problemas que permitam construir uma compreensão sólida dos princípios estruturantes desta tecnologia. É aqui que o **Grid World** brilha e se destaca.
@@ -75,6 +75,10 @@ Em essência, a natureza sequencial dos **MDPs**não é apenas uma característi
 O **MDP** permite a criação de modelos, apenas modelos. Nada mais, nada menos. Dessa forma, existe uma imperfeição inerente aos processos estocásticos envolvidos. Antes de continuarmos, podemos concordar com algumas definições que serão úteis ao longo do processo de estudo.
 
 1. **Agente**: no contexto do **MDP** um agente é a entidade que interage com o ambiente e toma decisões. O agente é o componente que observa o estado atual do ambiente, escolhe ações com base em sua política (*strategy/policy*) e recebe recompensas como resultado dessas ações. A esforçada leitora pode pensar no agente como um tomador de decisões que está constantemente aprendendo e se adaptando para maximizar suas recompensas ao longo do tempo.
+
+    >Uma "política" (policy em inglês) é simplesmente um mapeamento que diz qual ação tomar em cada estado possível do ambiente. É como um conjunto de regras de decisão - para cada situação que você encontra, a política te diz o que fazer.
+    >
+    >A "política ótima" seria o conjunto de decisões que leva às melhores recompensas possíveis. 
 
 2. **Estados**: um estado em um **MDP** é uma fotografia completa do sistema em um dado momento. Como se a sagaz leitora pudesse pausar o tempo e capturar toda informação necessária a tomada de decisão. **A característica fundamental de um estado em um MDP é que ele possui a propriedade de Markov**. Isso significa que o estado atual contém toda a informação necessária para decidir a próxima ação, sem precisar de informações anteriores. Por exemplo: em um jogo de xadrez, o estado seria a posição atual de todas as peças no tabuleiro. Não importa qual sequência de movimentos montou o tabuleiro. Apenas a configuração atual será relevante na previsão do acontecerá a seguir.
 

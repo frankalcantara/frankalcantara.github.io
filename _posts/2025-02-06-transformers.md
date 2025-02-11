@@ -20,7 +20,7 @@ keywords: ""
 toc: true
 published: false
 beforetoc: ""
-lastmod: 2025-02-10T09:24:24.220Z
+lastmod: 2025-02-11T09:12:47.895Z
 ---
 
 Neste artigo, a curiosa leitora irá enfrentar os Transformers. Nenhuma relação com o o Optimus Prime. Se for estes Transformers que está procurando, o Google falhou com você!
@@ -29,19 +29,61 @@ Aqui falamos dos modelos de aprendizado de máquina que revolucionaram o process
 
 O entendimento da linguagem natural por máquinas é, ou era, um desafio importante que beirava o impossível. Hoje, parece não ser um desafio tão grande. Muito disso graças as técnicas e algoritmos, como os transformers que foram criados para aprimorar a  representação de textos matematicamente. E ao fato que não estamos usando algoritmos determinísticos para esse entendimento. Usamos algoritmos determinísticos para aplicar técnicas estocásticas em bases de dados gigantescas e assim, romper os limites impostos pela linguística matemática e computacional.
 
-Começaremos com as técnicas de representação mais simples e os conceitos matemáticos fundamentais, produtos escalares e multiplicação de matrizes, e gradualmente construiremos nosso entendimento. 
+Começaremos com as técnicas de representação mais simples e os conceitos matemáticos fundamentais, produtos escalares e multiplicação de matrizes, e gradualmente construiremos nosso entendimento.
 
 Veremos como esses modelos, inicialmente projetados para tradução automática, se tornaram a base para tarefas como geração de texto, como no [GPT-3](https://openai.com/index/gpt-3-apps/), compreensão de linguagem e até mesmo processamento de áudio.
 
 [^1]: VASWANI, Ashish et al. Attention is all you need. In: ADVANCES IN NEURAL INFORMATION PROCESSING SYSTEMS, 30., 2017, Long Beach. Proceedings of the [...]. Red Hook: Curran Associates, Inc., 2017. p. 5998-6008. Disponível em: https://papers.nips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf. Acesso em: 09 fevereiro 2024.
 
-Eu vou começar com a transformação de textos em números. Vetores, vamos criar vetores e matrizes. Mas, antes de qualquer coisa, a atenta leitora deve entender que eu vou usar os termos *array unidimensional* e *vetor* indistintamente. O mesmo vale para os termos *array bidimensional* e *matriz*.
+Eu vou começar com a transformação de textos em números. Vetores, vamos criar vetores e matrizes. Mas, antes de qualquer coisa, a atenta leitora deve entender que eu vou usar os termos *array unidimensional* e *vetor* indistintamente. O mesmo vale para os termos *array bidimensional* e *matriz* e para os termos *palavra* e *termo*.
 
-Finalmente, eu faço em C++ 20 e a leitora faz, no mínimo, em Python. Se estiver de acordo continuamos.
+Finalmente, os exemplos. O combinado é o seguinte: aqui eu faço em C++ 20 e a leitora faz em Python, ou em C++. Se estiver de acordo continuamos.
 
-## A Matemática
+## A Malvada Matemática
 
-Não é possível entender este texto, sem um pouco de matemática.  
+Para que os computadores processem e compreendam a linguagem humana, é essencial converter texto em representações numéricas. Computador ainda é um treco burro que só entende binário. Dito isso, é necessário destacar que não é possível entender processamento de linguagem natural, ou este texto, sem um pouco de matemática.  
+
+### Vetores, os compassos de tudo que há e haverá
+
+Eu usei exatamente este título em [um texto sobre eletromagnetismo](https://frankalcantara.com/formula-da-atracao-matematica-eletromagnetismo/#vetores-os-compassos-de-tudo-que-h%C3%A1-e-haver%C3%A1). A ideia, então era explicar eletromagnetismo a partir da matemática. Lá há uma definição detalhada de vetores e todas as suas operações. Aqui, podemos ser um tanto mais diretos.
+
+Um vetor é uma entidade matemática que possui tanto magnitude, comprimento, quanto direção. Um vetor pode ser definido como um segmento de reta direcionado, ou uma sequência ordenada de números, chamados de componentes. A representação depende do contexto.
+
+Na geometria, um vetor pode ser visualizado como uma seta em um espaço, por exemplo, em um plano $2D$ ou em um espaço $3D$. O comprimento da seta representa a magnitude, e a direção da seta indica a direção do vetor. Imagine uma seta apontando para cima e para a direita em um plano. Essa seta é um vetor com uma certa magnitude (o comprimento da seta) e uma direção (45 graus em relação ao eixo horizontal, por exemplo). A Figura 1 mostra um vetor como usado na matemática e na física.
+
+![uma seta saído de P para Q](/assets/images/vetor1.webp)
+_Figura 1: Um vetor entre os pontos $P$ e $Q$ representado por $\vec{PQ}_{: class="legend"}
+
+Na álgebra, em um sistema de coordenadas, um vetor pode ser representado como uma tupla ordenada de números. Por exemplo, em um espaço tridimensional, um vetor pode ser escrito como $(x, y, z)$, onde $x$, $y$ e $z$ são as componentes do vetor ao longo dos eixos $x$, $y$ e $z$, respectivamente. Assim, se nos limitarmos a $2D$, o vetor $(2, 3)$ representa um deslocamento de 2 unidades na direção $x$ e 3 unidades na direção $y$.
+
+#### Operações com Vetores
+
+Vetores podem ser somados, subtraídos e multiplicados por escalares. Escalares são entidades sem direção. A operações sobre vetores têm interpretações geométricas e algébricas:
+
+1. **Soma**: a soma de dois vetores pode ser visualizada geometricamente usando a regra do paralelogramo ou a regra do triângulo. Algebricamente, somamos vetores componente a componente.  Exemplo: $(1, 2) + (3, -1) = (4, 1)$
+
+2. **Subtração**: a subtrair um vetor é o mesmo que somar o seu oposto. Exemplo: $(1, 2) - (3, -1) = (1-3, 2-(-1)) = (-2, 3)$
+
+3. **Multiplicação por escalar**: multiplicar um vetor por um escalar altera a sua magnitude, mas não a sua direção, a menos que o escalar seja negativo, caso em que a direção é invertida. Exemplo: $2 * (1, 2) = (2, 4)$
+
+AQUIHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+
+**Aplicações nos Transformers:**
+
+*   **Representação de palavras:** Vetores (word embeddings) são fundamentais para representar palavras de uma forma que os modelos de linguagem, como os Transformers, possam processar.
+*   **Mecanismo de Atenção:** Os vetores de consulta (query), chave (key) e valor (value) são usados no mecanismo de atenção, que é o coração dos Transformers.
+
+Exemplos de equações em blocos:
+A soma de vetores:
+
+$$
+\vec{v} + \vec{w} = (v_1, v_2) + (w_1, w_2) = (v_1 + w_1, v_2 + w_2)
+$$
+
+Multiplicação por escalar:
+$$
+k\vec{v} = k(v_1, v_2) = (kv_1, kv_2)
+$$
 
 ### Produto Escalar
 
@@ -63,13 +105,13 @@ A Figura 1 esquematiza esta operação com os dois vetores que usamos acima para
 
 _Figura1: Entendendo o produto escalar entre dois vetores._{: class="legend"}
 
-**Exemplo 1**: Considerando os vetores  $a = [2, 5, 1]$ e $b = [3, 1, 4]$. O produto escalar será dado por:
+**Exemplo 1**: Considerando os vetores  $\mathbf{a} = [2, 5, 1]$ e $\mathbf{b} = [3, 1, 4]$. O produto escalar será dado por:
 
 $$
-a \cdot b = (2 * 3) + (5 * 1) + (1 * 4) = 6 + 5 + 4 = 15
+\mathbf{a} \cdot \mathbf{b} = (2 * 3) + (5 * 1) + (1 * 4) = 6 + 5 + 4 = 15
 $$
 
-O produto escalar fornece uma informação sobre a similaridade entre dois vetores. Em termos gerais, teremos:
+O produto escalar fornece uma informação interessante sobre a similaridade entre dois vetores. Não é algo preciso, ainda assim, interessante. Em termos gerais, teremos:
 
 * **Produto escalar positivo:** indica que os vetores tendem a apontar na mesma direção. Quanto maior o valor positivo, maior a similaridade em termos de direção e magnitude das componentes que se "alinham".
 * **Produto escalar zero:** indica que os vetores são ortogonais (perpendiculares). Não há similaridade direcional linear entre eles.
@@ -93,13 +135,15 @@ A criativa leitora deve notar que o produto escalar é influenciado tanto pela d
 
 $$\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$
 
-em um espaço $n$-dimensional, a magnitude, ou norma Euclidiana, representada por $\|\mathbf{v}\|$ será definida por:
+em um espaço $n$-dimensional, a magnitude, ou norma Euclidiana, representada por $\\mid \mathbf{v}\\mid $ será definida por:
 
 $$
-\|\mathbf{v}\| = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2} = \sqrt{\sum_{i=1}^{n} v_i^2}
+\\mid \mathbf{v}\\mid  = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2} = \sqrt{\sum_{i=1}^{n} v_i^2}
 $$
 
-**Exemplo 3**: dado o vetor $\mathbf{b} = \begin{bmatrix} 0.2 \\ 0.7 \\ 0.1 \end{bmatrix}$, vamos calcular sua magnitude $\|\mathbf{b}\|$:
+**Exemplo 3**: dado o vetor $\mathbf{b} = \begin{bmatrix} 0.2 \\ 0.7 \\ 0.1 \end{bmatrix}$, vamos calcular sua magnitude $\\mid \mathbf{b}\\mid $:
+
+Podemos resolver este problema em dois passos:
 
 1. **Calcular o produto escalar de $\mathbf{b}$ consigo mesmo:**
 
@@ -110,20 +154,36 @@ $$
 2. **Extrair a raiz quadrada do resultado:**
 
     $$
-    \|\mathbf{b}\| = \sqrt{\mathbf{b} \cdot \mathbf{b}} = \sqrt{0.54} \approx 0.7348
+    \\mid \mathbf{b}\\mid  = \sqrt{\mathbf{b} \cdot \mathbf{b}} = \sqrt{0.54} \approx 0.7348
     $$
 
 Portanto, a magnitude do vetor $\mathbf{b} = \begin{bmatrix} 0.2 \\ 0.7 \\ 0.1 \end{bmatrix}$ é aproximadamente 0.7348.
 
-A magnitude de um vetor representa o seu comprimento, geometricamente. A magnitude,pode ter interpretações diferentes em áreas diferentes do conhecimento. Na física, pode representar a intensidade de uma força, ou uma velocidade.
+*A magnitude de um vetor representa o seu comprimento*, geometricamente. A magnitude, pode ter interpretações diferentes em áreas diferentes do conhecimento. Na física, pode representar a intensidade de uma força, ou uma velocidade.
 
-No estudo da linguagem natural, a magnitude de um vetor, pode indicar o tamanho do documento em termos de número de palavras, embora não diretamente. No entanto, a magnitude em si não é geralmente a principal informação de interesse. No estudo das linguagens naturais, estamos interessados na direção de vetores e na similaridade entre eles. Medidas como a **similaridade do cosseno**, que envolve o produto escalar normalizado pelas magnitudes, são frequentemente usadas para isolar a similaridade direcional. Vamos deixar a similaridade de cosseno para quando ela for relevante.
+No estudo da linguagem natural, a magnitude de um vetor, pode indicar o tamanho do documento em termos de número de palavras, embora não diretamente.
 
-Por fim, a atenta leitora pode observar que vetores com magnitudes maiores tendem a ter produtos escalares maiores, mesmo que a direção relativa seja a mesma. Em muitas aplicações de similaridade, pode ser desejável normalizar os vetores para que a medida de similaridade seja mais afetada pela direção e menos afetada pela magnitude.
+A atenta leitora deve observar que vetores com magnitudes maiores tendem a ter produtos escalares maiores, mesmo que a direção relativa seja a mesma.
+
+Quando estudamos processamento de linguagem natural, a magnitude por si não costuma ser a informação mais importante, ou mais buscada. Geralmente estamos interessados na direção de vetores e na similaridade entre eles. A similaridade refere-se a uma medida que quantifica o quão semelhantes dois vetores são entre si. Essa medida pode ser baseada em diferentes aspectos dos vetores, como sua direção, magnitude, ou ambos.
+
+Em alguns casos, a busca da similaridade implica na normalização dos vetores para que a medida de similaridade seja mais afetada pela direção e menos afetada pela magnitude. Técnicas como a **Similaridade de Cosseno**, que envolve o produto escalar normalizado pelas magnitudes do vetores, são usadas para isolar a similaridade direcional. Todavia, existem diversas técnicas diferentes para a determinação de um índice para a similaridade entre vetores:
+
+1. **Distância Euclidiana**: mede a distância "direta" entre dois pontos no espaço euclidiano. É sensível tanto à direção quanto à magnitude dos vetores.
+
+2. **Distância de Manhattan**: também conhecida como distância $L1$, mede a soma das diferenças absolutas das coordenadas dos vetores.
+
+3. **Distância de Minkowski**: uma generalização das distâncias Euclidiana e de Manhattan, onde a ordem pode ser ajustada para diferentes tipos de distâncias.
+
+4. **Similaridade de Jaccard**: usada principalmente para conjuntos, mede a similaridade como a razão do tamanho da interseção para o tamanho da união dos conjuntos.
+
+5. **Correlação de Pearson**: mede a correlação linear entre dois vetores, variando de $-1$ a $1$. É útil para entender a relação linear entre os componentes dos vetores.
+
+6. **Distância de Mahalanobis**: Considera a correlação entre variáveis e é útil quando os vetores têm diferentes escalas ou distribuições.
+
+Nem todas tem qualquer uso em processamento de linguagem natural. A primeira que usaremos será a **Similaridade de Cosseno**. Mas, apenas quando ela for relevante e necessária.
 
 ## Representação Matemática de Textos
-
-Para que os computadores processem e compreendam a linguagem humana, é essencial converter texto em representações numéricas. Computador ainda é um treco burro que só entende binário.  
 
 Existem diversas técnicas para transformar textos em números, cada uma com suas particularidades e adequações para diferentes tarefas, vantagens e desvantagens. Eu vou passar por aquelas que são mais comuns. Eu vou fazer o máximo de esforço para seguir um fluxo crescente de dificuldade. Então, a atenta leitora não deve se assustar se achar que eu perdi o rumo. Se eu parecer perdido é porque lembrei de algo que precisa ser visto antes.
 
@@ -168,15 +228,15 @@ $$
 \mathbf{v}_{D_1} = \begin{bmatrix} 1 \\ 2 \\ 2 \\ 2 \\ 1 \\ 1 \\ 2 \end{bmatrix}
 $$
 
-A sagaz leitora deve perceber que o vetor de frequência $\mathbf{v}_{D_1}$ reside no espaço vetorial inteiro $\mathbb{Z}^{|V|}$, onde:
+A sagaz leitora deve perceber que o vetor de frequência $\mathbf{v}_{D_1}$ reside no espaço vetorial inteiro $\mathbb{Z}^{\mid V\mid }$, onde:
 
 * $\mathbf{v}_{D_1}$ denota o vetor de frequência do documento $D_1$.
 * $\mathbb{Z}$ representa o conjunto dos números inteiros, indicando que cada componente do vetor $\mathbf{v}_{D_1}$ é um número inteiro (neste caso, uma contagem de frequência).
-* $|V|$ representa a cardinalidade do vocabulário $V$, que é o número total de palavras únicas no vocabulário. Este valor $|V|$ define a dimensionalidade do espaço vetorial.
+* $\mid V\mid $ representa a cardinalidade do vocabulário $V$, que é o número total de palavras únicas no vocabulário. Este valor $\mid V\mid $ define a dimensionalidade do espaço vetorial.
 
 Em notação matemática de conjuntos, podemos expressar isso como:
 
-$$\mathbf{v}_{D_1} \in \mathbb{Z}^{|V|}$$
+$$\mathbf{v}_{D_1} \in \mathbb{Z}^{\mid V\mid }$$
 
 Essa representação simples já captura informações sobre a importância relativa das palavras no texto. Palavras que aparecem com mais frequência podem ser consideradas mais relevantes para o conteúdo do documento.
 
@@ -308,7 +368,7 @@ Dado o vocabulário, podemos ordená-lo alfabeticamente para definir a ordem das
 
 $V'_{global} = \{ \text{"bom"}, \text{"é"}, \text{"filme"}, \text{"não"}, \text{"o"} \}$
 
-A cardinalidade do vocabulário é $|V'_{global}| = 5$, o que significa que nossos vetores de frequência terão 5 dimensões.
+A cardinalidade do vocabulário é $\mid V'_{global}\mid  = 5$, o que significa que nossos vetores de frequência terão 5 dimensões.
 
 Neste ponto, podemos criar os vetores de frequência $\mathbf{v}_{D_1}$ e $\mathbf{v}_{D_2}$ para cada documento, seguindo a ordem das palavras em $V'_{global}$.
 
@@ -363,11 +423,11 @@ O produto escalar é $4$, um valor positivo e relativamente alto, considerando a
 **b) Magnitudes**: calculamos as magnitudes de $\mathbf{v}_{D_1}$ e $\mathbf{v}_{D_2}$:
 
 $$
-\|\mathbf{v}_{D_1}\| = \sqrt{1^2 + 1^2 + 1^2 + 0^2 + 1^2} = \sqrt{4} = 2
+\\mid \mathbf{v}_{D_1}\\mid  = \sqrt{1^2 + 1^2 + 1^2 + 0^2 + 1^2} = \sqrt{4} = 2
 $$
 
 $$
-\|\mathbf{v}_{D_2}\| = \sqrt{1^2 + 1^2 + 1^2 + 1^2 + 1^2} = \sqrt{5} \approx 2.236
+\\mid \mathbf{v}_{D_2}\\mid  = \sqrt{1^2 + 1^2 + 1^2 + 1^2 + 1^2} = \sqrt{5} \approx 2.236
 $$
 
 As magnitudes são próximas, indicando que ambos os vetores têm comprimentos similares no espaço vetorial definido pelo vocabulário global.
@@ -381,7 +441,7 @@ Embora o produto escalar e as magnitudes sugiram alguma similaridade entre $\mat
 
 Um aspecto matemático particularmente problemático da representação vetorial por frequência é a questão da dimensionalidade.
 
-Para um vocabulário de tamanho $|V|$, cada documento é representado em um espaço $\mathbb{R}^{|V|}$. Como vocabulários típicos podem ter dezenas ou centenas de milhares de palavras, isto leva a vetores extremamente esparsos, onde a maioria das componentes é zero. Esta característica não só é computacionalmente ineficiente, mas também dificulta a identificação de similaridades entre documentos.
+Para um vocabulário de tamanho $\mid V\mid $, cada documento é representado em um espaço $\mathbb{R}^{\mid V\mid }$. Como vocabulários típicos podem ter dezenas ou centenas de milhares de palavras, isto leva a vetores extremamente esparsos, onde a maioria das componentes é zero. Esta característica não só é computacionalmente ineficiente, mas também dificulta a identificação de similaridades entre documentos.
 
 Um vetor esparso é um vetor onde a **maioria das suas componentes é zero**. Em coleções de documentos, como livros, artigos e processos, se usarmos os nossos vetores de frequência, a maioria das palavras do vocabulário não ocorrerá em um documento específico. Portanto, para um documento $D$, a maioria das entradas em $\mathbf{v}_D$ será zero.
 
@@ -415,7 +475,7 @@ O modelo **Bag of Words (BoW)**, ou "saco de palavras",  é uma evolução da re
 
 Consideremos agora um conjunto de documentos $Docs = \{D_1, D_2, ..., D_N\}$. Primeiro, construímos um vocabulário global $V_{global}$ que contém todas as palavras únicas em todos os documentos em $Docs$.
 
-Para cada documento $D_i \in Docs$, a representação BoW é um vetor $\mathbf{bow}_{D_i}$ de tamanho $|V_{global}|$. Cada posição $j$ em $\mathbf{bow}_{D_i}$ corresponde à $j$-ésima palavra $w_j$ em $V_{global}$ (assumindo uma ordem fixa para $V_{global}$). O valor na posição $j$ é a frequência da palavra $w_j$ no documento $D_i$, ou seja, $f(w_j, D_i)$.
+Para cada documento $D_i \in Docs$, a representação BoW é um vetor $\mathbf{bow}_{D_i}$ de tamanho $\mid V_{global}\mid $. Cada posição $j$ em $\mathbf{bow}_{D_i}$ corresponde à $j$-ésima palavra $w_j$ em $V_{global}$ (assumindo uma ordem fixa para $V_{global}$). O valor na posição $j$ é a frequência da palavra $w_j$ no documento $D_i$, ou seja, $f(w_j, D_i)$.
 
 Usando o mesmo exemplo $D_1$: "O gato preto subiu no telhado. O gato dorme no telhado." e adicionando um segundo documento $D_2$: "O telhado é preto."
 
@@ -453,10 +513,10 @@ TF-IDF calcula dois valores para cada palavra $w$ em um documento $D_i$:
 *   **Inverse Document Frequency (IDF):**  Mede a raridade de uma palavra $w$ no *corpus* $Docs$. É calculado como:
 
     $$
-    \text{IDF}(w, Docs) = \log \left( \frac{|Docs|}{|\{D_j \in Docs: w \in D_j\}|} \right)
+    \text{IDF}(w, Docs) = \log \left( \frac{\mid Docs\mid }{\mid \{D_j \in Docs: w \in D_j\}\mid } \right)
     $$
 
-    Onde $|Docs|$ é o número total de documentos no *corpus*, e $|\{D_j \in Docs: w \in D_j\}|$ é o número de documentos no *corpus* que contêm a palavra $w$. O logaritmo é usado para suavizar o efeito do IDF.
+    Onde $\mid Docs\mid $ é o número total de documentos no *corpus*, e $\mid \{D_j \in Docs: w \in D_j\}\mid $ é o número de documentos no *corpus* que contêm a palavra $w$. O logaritmo é usado para suavizar o efeito do IDF.
 
 O valor TF-IDF para uma palavra $w$ em um documento $D_i$ é então:
 
@@ -476,8 +536,8 @@ Para "gato" em $D_1$:
 *   $f(\text{"gato"}, D_1) = 2$
 *   $\sum_{w' \in D_1} f(w', D_1) = 10$ (total de palavras em $D_1$)
 *   $\text{TF}(\text{"gato"}, D_1) = \frac{2}{10} = 0.2$
-*   $|\{D_j \in Docs: \text{"gato"} \in D_j\}| = 1$ (apenas $D_1$ contém "gato")
-*   $|Docs| = 2$
+*   $\mid \{D_j \in Docs: \text{"gato"} \in D_j\}\mid  = 1$ (apenas $D_1$ contém "gato")
+*   $\mid Docs\mid  = 2$
 *   $\text{IDF}(\text{"gato"}, Docs) = \log \left( \frac{2}{1} \right) = \log(2) \approx 0.301$ (usando log base 10)
 *   $\text{TF-IDF}(\text{"gato"}, D_1) = 0.2 \times 0.301 \approx 0.0602$
 
@@ -485,7 +545,7 @@ Para "é" em $D_2$:
 *   $f(\text{"é"}, D_2) = 1$
 *   $\sum_{w' \in D_2} f(w', D_2) = 4$ (total de palavras em $D_2$)
 *   $\text{TF}(\text{"é"}, D_2) = \frac{1}{4} = 0.25$
-*   $|\{D_j \in Docs: \text{"é"} \in D_j\}| = 1$ (apenas $D_2$ contém "é")
+*   $\mid \{D_j \in Docs: \text{"é"} \in D_j\}\mid  = 1$ (apenas $D_2$ contém "é")
 *   $\text{IDF}(\text{"é"}, Docs) = \log \left( \frac{2}{1} \right) = \log(2) \approx 0.301$
 *   $\text{TF-IDF}(\text{"é"}, D_2) = 0.25 \times 0.301 \approx 0.07525$
 
@@ -495,9 +555,9 @@ Calculando TF-IDF para todas as palavras em todos os documentos, podemos constru
 
 Finalmente, chegamos ao **One-Hot Encoding**.  Embora menos comum para representar diretamente *textos inteiros* em tarefas de processamento de linguagem natural (PNL) de nível superior, o one-hot encoding é fundamental como um passo inicial para representar *palavras individuais* ou *caracteres* numericamente.
 
-Em one-hot encoding, cada palavra (ou caractere) no vocabulário $V$ é representada por um vetor binário $\mathbf{e}_w$.  O tamanho do vetor é igual ao tamanho do vocabulário, $|V|$. Para cada palavra $w_i \in V$, o vetor $\mathbf{e}_{w_i}$ terá todos os valores como 0, exceto na posição $i$ correspondente à palavra $w_i$ no vocabulário, onde o valor será 1.
+Em one-hot encoding, cada palavra (ou caractere) no vocabulário $V$ é representada por um vetor binário $\mathbf{e}_w$.  O tamanho do vetor é igual ao tamanho do vocabulário, $\mid V\mid $. Para cada palavra $w_i \in V$, o vetor $\mathbf{e}_{w_i}$ terá todos os valores como 0, exceto na posição $i$ correspondente à palavra $w_i$ no vocabulário, onde o valor será 1.
 
-Formalmente, se $V = \{w_1, w_2, ..., w_{|V|}\}$ é o vocabulário ordenado, então o one-hot encoding para a palavra $w_i$ é um vetor $\mathbf{e}_{w_i} \in \mathbb{R}^{|V|}$ tal que:
+Formalmente, se $V = \{w_1, w_2, ..., w_{\mid V\mid }\}$ é o vocabulário ordenado, então o one-hot encoding para a palavra $w_i$ é um vetor $\mathbf{e}_{w_i} \in \mathbb{R}^{\mid V\mid }$ tal que:
 
 $$
 (\mathbf{e}_{w_i})_j =
@@ -626,12 +686,12 @@ Outra maneira de pensar na codificação one-hot é que cada palavra ainda receb
 
 Um vocabulário codificado one-hot (Exemplo):
 
-| Palavra | Representação Numérica | Representação One-Hot |
-|---|---|---|
-| maçã     | 1                    | [1, 0, 0, 0]          |
-| banana    | 2                    | [0, 1, 0, 0]          |
-| encontrar | 3                    | [0, 0, 1, 0]          |
-| fruta  | 4                    | [0, 0, 0, 1]          |
+\mid  Palavra \mid  Representação Numérica \mid  Representação One-Hot \mid 
+\mid ---\mid ---\mid ---\mid 
+\mid  maçã     \mid  1                    \mid  [1, 0, 0, 0]          \mid 
+\mid  banana    \mid  2                    \mid  [0, 1, 0, 0]          \mid 
+\mid  encontrar \mid  3                    \mid  [0, 0, 1, 0]          \mid 
+\mid  fruta  \mid  4                    \mid  [0, 0, 0, 1]          \mid 
 
 Então, a frase "Encontrar fruta maçã" se torna uma sequência de arrays unidimensionais que, depois de comprimidos juntos, começa a parecer um array bidimensional.
 
