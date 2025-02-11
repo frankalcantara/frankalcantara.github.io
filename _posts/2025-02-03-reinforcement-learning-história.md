@@ -3,24 +3,24 @@ layout: post
 title: "Reinforcement Learning: História"
 author: Frank
 categories:
-  - Matemática
-  - Inteligência Artificial
+    - Matemática
+    - Inteligência Artificial
 tags:
-  - inteligência artificial
-  - Matemática
-  - resolução de problemas
-  - reinforcement learning
+    - inteligência artificial
+    - Matemática
+    - resolução de problemas
+    - reinforcement learning
 image: assets/images/rl1.webp
 featured: false
 rating: 0
-description: A história do Aprendizado por Reforço, da psicologia do século XIX ao DeepMind.  Ideal para estudantes de IA e ciência da computação!
+description: A história do Reinforcement Learning, da psicologia do século XIX ao DeepMind.  Ideal para estudantes de IA e ciência da computação!
 date: 2025-02-03T17:20:09.061Z
 preview: Nos últimos anos a aprendizagem por reforço (*reinforcement learning - *RL**) tem chamado a atenção da mídia que cobre inteligência artificial em todo o mundo. Sua trajetória, no entanto, é uma fascinante tapeçaria tecida com fios de diversas disciplinas, desde a psicologia do século XIX até os algoritmos de raciocínio que estamos vendo nascer.
-keywords: Aprendizado por Reforço, História do RL, Richard Bellman, Q-Learning, Deep Q-Networks, AlphaGo, Processos de Decisão de Markov, Psicologia Comportamental, Dopamina e IA, Deep Reinforcement Learning.
+keywords: Reinforcement Learning, História do RL, Richard Bellman, Q-Learning, Deep Q-Networks, AlphaGo, Processos de Decisão de Markov, Psicologia Comportamental, Dopamina e IA, Deep Reinforcement Learning.
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-02-06T21:47:34.198Z
+lastmod: 2025-02-11T21:55:58.482Z
 draft: 2025-02-03T17:19:36.133Z
 ---
 
@@ -48,7 +48,7 @@ Posteriormente, [B.F. Skinner](https://www.britannica.com/biography/B-F-Skinner)
   </iframe>
 </div>
 
-Além da psicologia, a **Etologia**, o estudo do comportamento animal em seus ambientes naturais, também contribuiu para o contexto do *RL*. Pesquisadores como [Konrad Lorenz](https://www.britannica.com/biography/Konrad-Lorenz) e [Nikolas Tinbergen](https://www.britannica.com/biography/Nikolaas-Tinbergen) estudaram comportamentos instintivos e padrões fixos de ação, que, embora distintos do aprendizado por reforço, ofereceram insights valiosos sobre o comportamento animal e influenciaram o desenvolvimento de modelos computacionais de comportamento.
+Além da psicologia, a **Etologia**, o estudo do comportamento animal em seus ambientes naturais, também contribuiu para o contexto do *RL*. Pesquisadores como [Konrad Lorenz](https://www.britannica.com/biography/Konrad-Lorenz) e [Nikolas Tinbergen](https://www.britannica.com/biography/Nikolaas-Tinbergen) estudaram comportamentos instintivos e padrões fixos de ação, que, embora distintos do Reinforcement Learning, ofereceram insights valiosos sobre o comportamento animal e influenciaram o desenvolvimento de modelos computacionais de comportamento.
 
 Essas ideias pioneiras da psicologia e da biologia lançaram as bases conceituais para o *RL*. Contudo, a atenta leitora deve ter percebido que faltava uma estrutura matemática formal para transformá-las em algoritmos computacionais.
 
@@ -70,7 +70,7 @@ Os **MDPs**, inicialmente aplicados em áreas como controle e economia, fornecer
 
 ## Os Primeiros Passos Computacionais: Aprendizado de Máquina (Anos 1960-1980)
 
-Nas décadas de 1960 e 1970, os pesquisadores começaram a explorar como os computadores poderiam aprender através da interação com o ambiente. [Arthur Samuel](https://en.wikipedia.org/wiki/Arthur_Samuel_(computer_scientist)) (1959) deu um passo pioneiro com seu programa de aprendizado para jogar damas. Esse programa, embora rudimentar, ajustava seus parâmetros com base em recompensas (vitórias ou derrotas) e representa um dos primeiros exemplos de aprendizado por reforço em, o que hoje chamamos de inteligência artificial, influenciando inclusive as futuras ideias de Aprendizado por Diferença Temporal.
+Nas décadas de 1960 e 1970, os pesquisadores começaram a explorar como os computadores poderiam aprender através da interação com o ambiente. [Arthur Samuel](https://en.wikipedia.org/wiki/Arthur_Samuel_(computer_scientist)) (1959) deu um passo pioneiro com seu programa de aprendizado para jogar damas. Esse programa, embora rudimentar, ajustava seus parâmetros com base em recompensas (vitórias ou derrotas) e representa um dos primeiros exemplos de Reinforcement Learning em, o que hoje chamamos de inteligência artificial, influenciando inclusive as futuras ideias de Aprendizado por Diferença Temporal.
 
 [Widrow](https://en.wikipedia.org/wiki/Bernard_Widrow) e [Hoff](https://en.wikipedia.org/wiki/Marcian_Hoff) (1960) propuseram o algoritmo [ADALINE](https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/machine_learning/adaline_learning.cpp), que **usava feedback para ajustar pesos em redes neurais simples**. Embora não fosse *RL* no sentido moderno, introduziu a ideia de usar feedback para melhorar o desempenho, um conceito crucial para o desenvolvimento posterior dos campos de estudo relacionados a inteligência artificial.
 
@@ -80,7 +80,7 @@ Nesse período, também surgiram as primeiras discussões sobre o dilema da expl
 
 Esta área de pesquisa ainda estava em sua primeira infância, mas as sementes para o futuro florescimento do *RL* já haviam sido plantadas.
 
-## O Florescimento do Aprendizado por Reforço Moderno (Anos 1980-1990)
+## O Florescimento do Reinforcement Learning Moderno (Anos 1980-1990)
 
 Os anos 1980 e 1990 testemunharam a consolidação do *RL* como uma disciplina distinta dentro do estudo da inteligência artificial. [Richard Sutton](http://www.incompleteideas.net/) (1988) introduziu os métodos de Aprendizado por Diferença Temporal (**TD**), uma classe de algoritmos que aprendem estimativas de valor com base em diferenças temporais entre previsões sucessivas. A grande contribuição dos métodos **TD** foi a combinação da amostragem e do aprendizado por *bootstrap* do aprendizado por diferença temporal com os conceitos de atualização de valor e política da programação dinâmica. Em RL, o termo *bootstrap* significa que o algoritmo aprende uma estimativa (ex: valor de um estado) e, em seguida, usa essa própria estimativa como alvo para atualizar outras estimativas. É como se o algoritmo se *puxasse pelas próprias botas* para aprender, usando o conhecimento que já possui para aprimorar seu aprendizado[^3]. Isso permitiu o aprendizado online e incremental, sem a necessidade de um modelo completo do ambiente, um avanço significativo em relação aos métodos anteriores.
 
@@ -90,7 +90,7 @@ Os anos 1980 e 1990 testemunharam a consolidação do *RL* como uma disciplina d
 
 Nesse período, [Gerald Tesauro](https://www.researchgate.net/scientific-contributions/Gerald-Tesauro-8269192) (1992) demonstrou o poder do *RL* em jogos complexos com o TD-Gammon, um programa que aprendeu a jogar Gamão (*Backgammon*) em um nível de mestre mundial através da auto-aprendizagem (*self-play*) usando métodos **TD**. Esse trabalho foi um marco importante, demonstrando a capacidade do *RL* de aprender estratégias complexas em domínios desafiadores.
 
-Paralelamente, as conexões entre *RL* e a neurociência começaram a ser exploradas. A descoberta de que o neurotransmissor *dopamina* desempenha um papel crucial no sistema de recompensa do cérebro forneceu uma base biológica para os mecanismos de aprendizado por reforço[^4].
+Paralelamente, as conexões entre *RL* e a neurociência começaram a ser exploradas. A descoberta de que o neurotransmissor *dopamina* desempenha um papel crucial no sistema de recompensa do cérebro forneceu uma base biológica para os mecanismos de Reinforcement Learning[^4].
 
 [^4]: A dopamina, neurotransmissor tradicionalmente associado à recompensa, atua primariamente sinalizando a expectativa de recompensa e não a recompensa em si (SCHULTZ, Wolfram. Neuronal reward and decision signals: from theories to data. Physiological reviews, v. 95, n. 3, p. 853-951, 2015.). No aprendizado humano, ela interage com outros neurotransmissores como serotonina e norepinefrina em um sistema complexo de reforço comportamental (BERKE, Joshua D. What does dopamine mean?. Nature neuroscience, v. 21, n. 6, p. 787-793, 2018.). Estímulos sociais digitais, como feedback em redes sociais, ativam vias dopaminérgicas em conjunto com outros sistemas neurais. O sistema de recompensa intermitente dessas plataformas pode influenciar padrões comportamentais, porém a formação de comportamentos compulsivos envolve também alterações em circuitos de controle inibitório e transmissão glutamatérgica (MONTAGUE, P. Read; HYMAN, Steven E.; COHEN, Jonathan D. Computational roles for dopamine in behavioural control. Nature, v. 431, n. 7010, p. 760-767, 2004.). Esta interação entre neurobiologia e design digital sugere uma relação complexa onde múltiplos sistemas neurais influenciam o aprendizado e comportamento nas redes sociais, não se limitando apenas à via dopaminérgica.
 
@@ -110,6 +110,6 @@ Desde o **DQN**, diversos outros algoritmos de Deep *RL* foram desenvolvidos, ex
 
 E, chegamos ao [DeepSeek-R1](https://frankalcantara.com/deepseek-explicado-de-forma-simples/).
 
-A jornada do Aprendizado por Reforço é uma história de convergência e inovação. Desde suas raízes na psicologia comportamental e na biologia, passando pela formalização matemática com os **MDPs**, até a revolução do *Deep Learning*, o *RL* se transformou em uma ferramenta poderosa para a construção de agentes inteligentes. Com o rápido progresso em IA e computação, o futuro do *RL* promete ainda mais inovações e impactos transformacionais em diversas áreas da sociedade. Essa história está só começando, e eu também.
+A jornada do Reinforcement Learning é uma história de convergência e inovação. Desde suas raízes na psicologia comportamental e na biologia, passando pela formalização matemática com os **MDPs**, até a revolução do *Deep Learning*, o *RL* se transformou em uma ferramenta poderosa para a construção de agentes inteligentes. Com o rápido progresso em IA e computação, o futuro do *RL* promete ainda mais inovações e impactos transformacionais em diversas áreas da sociedade. Essa história está só começando, e eu também.
 
 Me siga se quiser saber mais sobre *reinforcement learning*. Se tudo correr bem, vou escrever aqui, capítulo por capítulo, um livro texto sobre *reinforcement learning*.

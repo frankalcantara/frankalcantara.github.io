@@ -3,14 +3,14 @@ layout: post
 title: Um Mundo Inteiro em uma Grade
 author: Frank
 categories:
-  - artigo
-  - Matemática
-  - Inteligência Artificial
+    - artigo
+    - Matemática
+    - Inteligência Artificial
 tags:
-  - algoritmos
-  - C++
-  - inteligência artificial
-  - resolução de problemas
+    - algoritmos
+    - C++
+    - inteligência artificial
+    - resolução de problemas
 image: assets/images/gw2.webp
 featured: false
 rating: 5
@@ -18,34 +18,34 @@ description: " Aprenda de forma didática os fundamentos de RL, desde MDPs até 
 date: 2025-02-09T11:51:59.153Z
 preview: O Reinforcement Learning (RL) com o Grid World! 🚀 Um guia prático e didático para iniciantes construírem uma base sólida em IA.  Domine MDPs e algoritmos essenciais de RL explorando este ambiente simples e fundamental.  Ideal para quem busca entender RL de verdade!
 keywords: |-
-  Reinforcement Learning (RL)
-  Aprendizado por Reforço
-  Grid World
-  Mundo em Grade
-  Processo de Decisão de Markov (MDP)
-  Tomada de Decisão Sequencial
-  Propriedade de Markov
-  Agente
-  Ambiente
-  Estados
-  Ações
-  Recompensas
-  Dinâmica do Sistema
-  Função de Transição
-  Política (Policy)
-  Política Ótima
-  Exploração vs Explotação
-  Algoritmos de RL
-  Q-Learning
-  SARSA
-  Recompensa por Passo (Living Reward)
-  Estados Terminais
-  Planejamento em RL
-  Modelagem MDP
+    Reinforcement Learning (RL)
+    Reinforcement Learning
+    Grid World
+    Mundo em Grade
+    Processo de Decisão de Markov (MDP)
+    Tomada de Decisão Sequencial
+    Propriedade de Markov
+    Agente
+    Ambiente
+    Estados
+    Ações
+    Recompensas
+    Dinâmica do Sistema
+    Função de Transição
+    Política (Policy)
+    Política Ótima
+    Exploração vs Explotação
+    Algoritmos de RL
+    Q-Learning
+    SARSA
+    Recompensa por Passo (Living Reward)
+    Estados Terminais
+    Planejamento em RL
+    Modelagem MDP
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-02-11T10:36:49.230Z
+lastmod: 2025-02-11T21:55:58.464Z
 ---
 
 A esforçada leitora, se realmente quiser entender as técnicas e algoritmos de *Reinforcement Learning* - **RL**, deve começar com problemas simples. Não é qualquer problema. Problemas que permitam construir uma compreensão sólida dos princípios estruturantes desta tecnologia. É aqui que o **Grid World** brilha e se destaca.
@@ -176,7 +176,7 @@ Agora, que a analítica leitora entendeu os conceitos, podemos mapear os compone
 
 O **Grid World**, como um **MDP**, assume a *propriedade de Markov*. Essa propriedade simplifica o problema de aprendizado e tomada de decisão. Ela *afirma que o futuro depende apenas do estado presente, e não do histórico passado de estados e ações*.
 
-Em termos práticos no **Grid World**, isso significa que a probabilidade de o agente se mover para um próximo estado e a recompensa que ele receberá dependem apenas da célula em que ele se encontra e da ação que ele escolher executar. O caminho que o agente percorreu para chegar ao estado atual e seu histórico de recompensas são irrelevantes para prever o futuro. Esta simplicidade sustenta o desenvolvimento de algoritmos eficientes de aprendizado por reforço.
+Em termos práticos no **Grid World**, isso significa que a probabilidade de o agente se mover para um próximo estado e a recompensa que ele receberá dependem apenas da célula em que ele se encontra e da ação que ele escolher executar. O caminho que o agente percorreu para chegar ao estado atual e seu histórico de recompensas são irrelevantes para prever o futuro. Esta simplicidade sustenta o desenvolvimento de algoritmos eficientes de Reinforcement Learning.
 
 > A propriedade de Markov permite que os algoritmos de RL tomem decisões baseadas no estado atual, sem a necessidade de manter um histórico complexo de toda a trajetória do agente.
 
@@ -320,7 +320,7 @@ Em nosso exemplo, um mundo de $4\times 3$ estados, o agente deve aprender a pol�
 
 **Próximos Passos**: Solucionando o **Grid World** com Algoritmos de RL
 
-Agora que definimos o **Grid World** tanto na perspectiva de **MDP** quanto na de Lógica de Primeira Ordem, o próximo passo natural é explorar como podemos usar algoritmos de *Reinforcement Learning* para encontrar a política ótima para um agente navegando neste ambiente. Se tudo correr bem, nas seções seguintes, investigaremos algoritmos como *Programação Dinâmica*, *Monte Carlo*, *Diferença Temporal (TD)* e *Aprendizado por Q-Learning*, e demonstraremos como eles podem ser aplicados para resolver o problema do **Grid World** e desvendar os segredos do aprendizado por reforço.
+Agora que definimos o **Grid World** tanto na perspectiva de **MDP** quanto na de Lógica de Primeira Ordem, o próximo passo natural é explorar como podemos usar algoritmos de *Reinforcement Learning* para encontrar a política ótima para um agente navegando neste ambiente. Se tudo correr bem, nas seções seguintes, investigaremos algoritmos como *Programação Dinâmica*, *Monte Carlo*, *Diferença Temporal (TD)* e *Aprendizado por Q-Learning*, e demonstraremos como eles podem ser aplicados para resolver o problema do **Grid World** e desvendar os segredos do Reinforcement Learning.
 
 ## Resumo da Notação Utilizada
 

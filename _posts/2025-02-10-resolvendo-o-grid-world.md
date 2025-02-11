@@ -10,20 +10,20 @@ tags: []
 image: assets/images/trans1.webp
 featured: false
 rating: 5
-description: "Uma exploração detalhada da solução do Grid World usando programação dinâmica, com implementação em C++ 20. "
+description: "Uma exploração detalhada da solução do Grid World usando Dynamic Programming, com implementação em C++ 20. "
 date: 2025-02-10T09:29:17.254Z
-preview: \mid  Descubra como resolver o Grid World usando programação dinâmica e C++ 20. Um guia prático e matemático para entender a solução de MDPs, desde as equações de Bellman até a implementação computacional.
-keywords: \mid - Grid World Reinforcement Learning MDP Solution Aprendizado por Reforço Processo de Decisão de Markov Equações de Bellman Value Iteration Policy Iteration Programação Dinâmica Dynamic Programming Política Ótima Optimal Policy
+preview: Descubra como resolver o Grid World usando *Dynamic Programming* e C++ 20. Um guia prático e matemático para entender a solução de MDPs, desde as equações de Bellman até a implementação computacional.
+keywords: Grid World *Reinforcement Learning* M*Dynamic Programming* Solution *Reinforcement Learning* Processo de Decisão de Markov Equações de Bellman Value Iteration Policy Iteration *Dynamic Programming* Dynamic Programming Política Ótima Optimal Policy
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-02-11T10:39:16.366Z
+lastmod: 2025-02-11T23:38:50.754Z
 draft: 2025-02-10T09:29:19.442Z
 ---
 
-Agora que formalizamos o **Grid World** como um *Processo de Decisão de Markov* (**MDP**), podemos aplicar algoritmos de *Reinforcement Learning* (**RL**) para encontrar a política ótima $\pi^\*$. *A política ótima é aquela que maximiza a recompensa total esperada a longo prazo para o agente*. Vamos explorar como a estrutura do **MDP** nos permite resolver o **Grid World**.
+Agora que formalizamos o **Grid World** como um *Processo de Decisão de Markov* (**M*Dynamic Programming***), podemos aplicar algoritmos de *Reinforcement Learning* (*Reinforcement Learning*) para encontrar a política ótima $\pi^\*$. *A política ótima é aquela que maximiza a recompensa total esperada a longo prazo para o agente*. Vamos explorar como a estrutura do **M*Dynamic Programming*** nos permite resolver o **Grid World**.
 
-## Formulação MDP do Grid World
+## Formulação M*Dynamic Programming* do Grid World
 
 Vamos dedicar um minuto, ou dez, para lembrar em que porto desta jornada estamos. Até agora definimos o seguinte:
 
@@ -31,7 +31,7 @@ Vamos dedicar um minuto, ou dez, para lembrar em que porto desta jornada estamos
 
 2. **Ações $(A)$**: O conjunto de ações possíveis: $A= \{\text{Norte}, \text{Sul}, \text{Leste}, \text{Oeste}\}$.
 
-3. **Função de Transição $(P)$**:  $P(s' \mid  s, a)$ define a probabilidade de transitar para o estado $s'$ ao executar a ação $a$ no estado $s$. No nosso **Grid World** estocástico:
+3. **Função de Transição $(P)$**:  $P(s' \mid  s, a)$ define a probabilidade de transitar para o estado $s'$ ao executar a ação $a$ no estado $s$. No **Grid World** estocástico que estamos estudando, teremos:
 
     * $0.8$ de probabilidade de se mover na direção pretendida.
     * $0.1$ de probabilidade de se mover para cada um dos lados perpendiculares.
@@ -61,21 +61,23 @@ A abordagem inocente para encontrar a política ótima para resolver o **Grid Wo
 
 2. **Geração de Sequências de Ações**: gere todas as possíveis sequências de ações a partir do estado inicial. Isso pode ser feito usando tanto iteratividade quanto recursividade para explorar todas as combinações de ações.
 
-3. **Avaliação das Sequências**: para cada sequência de ações gerada, simule o movimento do agente na grade e calcule a recompensa acumulada ao longo do caminho; e considere todas as transições de estado e as recompensas imediatas associadas a cada ação.
+3. **Avaliação das Sequências**: para cada sequência de ações gerada, simule o movimento do agente na grade e calcule a recompensa acumulada ao longo do caminho; e é preciso considerar todas as transições de estado e as recompensas imediatas associadas a cada ação.
 
 4. **Seleção da Sequência Ótima**: compare as recompensas acumuladas de todas as sequências de ações; selecione a sequência que maximiza a recompensa acumulada como a política ótima.
 
-A criativa leitora deve estar percebendo que esta é uma estratégia perfeitamente possível. Geralmente, as estratégias de força bruta são a primeira opção de quem está resolvendo um problema novo. Neste caso, significa considerar todas as combinações possíveis de movimentos (para cima, para baixo, para a esquerda, para a direita) em cada estado. Trata-se de uma solução de busca em todo o universo de possibilidades. Essa abordagem é, via de regra, ineficiente e computacionalmente dispendiosa. O número de sequências de ações possíveis cresce exponencialmente com o tamanho da grade e o número de estados. Quanto maior o mundo, mais custoso será resolver o problema.
+A criativa leitora deve estar percebendo que esta é uma estratégia perfeitamente possível. Não é raro que as estratégias de força bruta sejam a primeira opção quando alguém enfrenta um problema pela primeira vez. Neste caso, trata-se de uma solução de busca em todo o universo de possibilidades, considerando todas as combinações possíveis de movimentos (para cima - $\text{Norte}$, para baixo - $\text{Sul}$, para a esquerda - $\text{Oeste}$, para a direita - $\text{Leste}$) em cada estado. Essa abordagem é, via de regra, ineficiente e computacionalmente dispendiosa. O número de sequências de ações possíveis cresce exponencialmente com o tamanho da grade e o número de estados. Quanto maior o mundo, mais custoso será resolver o problema.
 
-Existem soluções melhores. A primeira, clássica e didática, foi encontrada com as Equações de Ballman.
+Existem soluções melhores. A primeira, clássica e didática, foi encontrada com a aplicação das Equações de Bellman.
 
 ## Entram as Equações de Bellman
 
-As **Equações de Bellman** desenvolvidas por [Richard Bellman](https://pt.wikipedia.org/wiki/Richard_Bellman) na década de 1950, oferecem uma maneira mais eficiente e escalável de resolver o problema, decompondo-o em subproblemas menores e utilizando a programação dinâmica para encontrar a política ótima[^1]. Para a maioria dos casos práticos, especialmente em ambientes maiores ou mais complexos, as **Equações de Bellman** são a abordagem preferida.
+As **Equações de Bellman** desenvolvidas por [Richard Bellman](https://pt.wikipedia.org/wiki/Richard_Bellman) na década de 1950, oferecem uma maneira mais eficiente e escalável de resolver o problema, decompondo-o em subproblemas menores e utilizando a *Dynamic Programming*, programação dinâmica, para encontrar a política ótima[^1]. Para a maioria dos casos práticos, especialmente em ambientes maiores ou mais complexos, as **Equações de Bellman** são a abordagem preferida.
 
 [^1]: BELLMAN, Richard. Dynamic Programming. Princeton: Princeton University Press, 1957.
 
-Em 1952, Richard Bellman enfrentava um dilema. Como matemático no [projeto RAND](https://open-int.blog/2018/01/21/project-rand-reports-1951-1956/), ele precisava encontrar uma maneira de resolver problemas de otimização multidimensional, e o termo "programação matemática" já estava sendo usado por outros pesquisadores. Em suas próprias palavras, o termo "programação dinâmica" foi escolhido para esconder o fato de que ele estava fazendo pesquisa matemática de um secretário do Departamento de Defesa que tinha aversão a qualquer menção à palavra *pesquisa*[^2]. É assustador, e um pouco desesperador, que uma técnica matemática tão poderosa tenha sido nomeada com o intuito de esconder sua natureza matemática, revelando como a política ruim influencia a linguagem da ciência há décadas.
+Em 1952, Richard Bellman se deparou com um dilema. Como matemático no [projeto RAND](https://open-int.blog/2018/01/21/project-rand-reports-1951-1956/), ele precisava encontrar uma maneira de resolver problemas de otimização multidimensional, e o termo *programação matemática*, sua primeira ideia, já estava sendo usado por outros pesquisadores.
+
+Segundo o próprio Bellman, o termo *Dynamic Programming* foi escolhido para esconder o fato de que ele estava fazendo pesquisa matemática de um secretário do Departamento de Defesa que tinha aversão a qualquer menção à palavra *pesquisa*[^2]. É assustador, e um pouco desesperador, que uma técnica matemática tão poderosa tenha sido nomeada com o intuito de esconder sua natureza matemática, revelando como a política ruim influencia a linguagem da pesquisa científica há décadas.
 
 [^2]:CONVERSABLE ECONOMIST. Why Is It Called “Dynamic Programming”? 24 ago. 2022. Disponível em: https://conversableeconomist.com/2022/08/24/why-is-it-called-dynamic-programming/. Acesso em: 10 fev. 2025.
 
@@ -87,11 +89,11 @@ Matematicamente, este princípio pode ser expresso como:
 
 $$ V^*(s) = \max_a \{ R(s,a) + \gamma \sum_{s'} P(s'\mid s,a)V^*(s') \} $$
 
-A sagaz leitora será capaz de entender a revolução que Bellman iniciou com a programação dinâmica por meio de três ideias fundamentais:
+A sagaz leitora será capaz de entender a revolução que Bellman iniciou com a *Dynamic Programming* por meio de três ideias fundamentais:
 
 1. **Decomposição Recursiva**: A solução de um problema maior pode ser construída a partir das soluções de seus subproblemas. No contexto de **MDPs**, isso significa que podemos decompor o problema de encontrar uma política ótima em subproblemas menores para cada estado.
 
-2. **Memorização**: Ao resolver subproblemas, armazenamos suas soluções para evitar recálculos. Em termos de **MDPs**, isso se traduz em manter uma tabela de valores para cada estado.
+2. **Memoização**: Ao resolver subproblemas, armazenamos suas soluções para evitar recálculos. Em termos de **MDPs**, isso se traduz em manter uma tabela de valores para cada estado.
 
 3. **Propagação de Valor**: As soluções dos subproblemas são usadas para construir soluções para problemas maiores. Nos **MDPs**, isso corresponde à atualização iterativa dos valores dos estados.
 
@@ -138,11 +140,11 @@ Uma vez que tenhamos $Q^\*(s, a)$, podemos extrair a política ótima $\pi^\*$ d
 
 $$\pi^{*} (s) = \arg\max_{a \in A} Q^*(s, a)$$
 
-Ou seja, a política ótima simplesmente escolhe a ação que maximiza o valor $Q^*$ em cada estado.
+Ou seja, a política ótima escolhe a ação que maximiza o valor $Q^*$ em cada estado.
 
-## Resolvendo o Grid World com Programação Dinâmica
+## Resolvendo o Grid World com *Dynamic Programming*
 
-A programação dinâmica, como vimos, oferece uma abordagem sistemática para resolver o **Grid World**. Vamos explorar como podemos aplicar os princípios de Bellman para encontrar a política ótima através de dois algoritmos fundamentais: **Iteração de Valor** e **Iteração de Política**.
+A *Dynamic Programming*, como vimos, oferece uma abordagem sistemática para resolver o **Grid World**. Vamos explorar como podemos aplicar os princípios de Bellman para encontrar a política ótima através de dois algoritmos fundamentais: **Iteração de Valor** e **Iteração de Política**.
 
 ### Iteração de Valor
 
@@ -195,19 +197,19 @@ $$\begin{align*}
 
 ### Convergência e Políticas Ótimas
 
-Ambos os algoritmos convergem para a política ótima $\pi^\*$, mas de maneiras diferentes:
+Os dois algoritmos convergem para a política ótima $\pi^\*$, mas de maneiras diferentes:
 
 * a **Iteração de Valor** mantém apenas valores e deriva a política implicitamente;
 * a **Iteração de Política** mantém uma política explícita e a melhora iterativamente.
 
-Para o **Grid World**, a política ótima resultante nos dará, para cada célula da grade, a direção que o agente deve seguir para maximizar sua recompensa esperada descontada.
+Para o **Grid World**, a política ótima resultante nos dará, para cada célula, a direção que o agente deve seguir para maximizar sua recompensa esperada descontada.
 
 ### Exemplo Numérico Completo
 
-Nada como um exemplo prático, passo a passo, para que a amável leitora supere o medo do matemática e das equações assustadoras do Bellman. A Figura 1 introduz nosso primeiro problema.
+Nada como um exemplo prático, passo a passo, para que a amável leitora supere o medo da matemática e das equações assustadoras do Bellman. A Figura 1 introduz nosso primeiro problema.
 
 ![um grid world com inicio em 0,0, agente em 1,0, um obstáculo em 1,1 e objetivo em 4,3](/assets/images/gw1.webp)
-_Figura 1: Exemplo de Grid World, para aplicação da programação dinâmica._{: class="legend"}
+_Figura 1: Exemplo de Grid World, para aplicação da *Dynamic Programming*._{: class="legend"}
 
 Considere um mundo representado por uma grade retangular de dimensões $4 \times 3$, onde um agente deve aprender a navegar de forma ótima. O ambiente possui as seguintes características:
 
@@ -220,7 +222,7 @@ Considere um mundo representado por uma grade retangular de dimensões $4 \times
    * Parede: localizada na célula $(2,1)$ (centro), intransponível.
 
 3. **Dinâmica de Movimento**:
-   * O agente pode escolher entre quatro ações: $\text{Norte, Sul, Leste e Oeste}$
+   * O agente pode escolher entre quatro ações: $\text{Norte, Sul, Leste e Oeste}$;
    * Os movimentos são estocásticos:
      * Probabilidade de $0.8$ de mover na direção pretendida;
      * Probabilidade de $0.1$ para cada direção perpendicular à pretendida.
@@ -232,7 +234,7 @@ Considere um mundo representado por uma grade retangular de dimensões $4 \times
    * Recompensa terminal negativa: $-1.0$;
    * Fator de desconto $\gamma = 0.9$;
 
-Considere que: um episódio termina quando o agente alcança qualquer estado terminal; a política deve ser determinística (uma única ação por estado); considere convergência quando a maior mudança em qualquer valor de estado for menor que $\epsilon = 0.001$.  
+A sagaz leitora deve considerar que um episódio termina quando o agente alcança qualquer estado terminal, a política deve ser determinística (uma única ação por estado) e que a convergência ocorre quando a maior mudança em qualquer valor de estado for menor que $\epsilon = 0.001$.  
 
 Encontre a política ótima $\pi^\*$ que maximize a soma das recompensas descontadas esperadas para o agente, começando do estado inicial.
 
@@ -252,9 +254,9 @@ $$
 
 ### Primeira Iteração
 
-Vamos calcular o novo valor para o estado inicial (canto inferior esquerdo).
+Vamos calcular o novo valor para o estado inicial, localizado no canto inferior esquerdo.
 
-**Para a Direção $\text{Norte}**: calculando o valor para o estado inicial a ação $\text{Norte}$.
+**Para a Direção $\text{Norte}**: calculando o valor para o estado inicial com a ação $\text{Norte}$.
 
 1) Movimento pretendido $(\text{Norte}, $0.8)$:
    - Próximo estado: $(1,0)$;
@@ -386,7 +388,7 @@ Valor total: $0.8(-0.057) + 0.1(-0.03) + 0.1(-0.057) = -0.0543$
 
 Agora podemos observar uma diferenciação entre as ações. As ações $\text{Norte}$ e $\text{Leste}$ têm valores idênticos e mais altos que $\text{Sul}$ e $\text{Oeste}$. Isto aconteceu porque:
 
-1. as ações $\text{Norte}$ e $\text{Leste}$ que o agente avance em direção aos estados com valores positivos mais frequentemente;
+1. as ações $\text{Norte}$ e $\text{Leste}$ fazem com que o agente avance em direção aos estados com valores positivos mais frequentemente;
 
 2. As ações $\text{Sul}$ e $\text{Oeste}$ resultam em mais colisões com as paredes/bordas, forçando o agente a permanecer no mesmo estado, acumulando recompensas negativas por passo;
 
@@ -430,7 +432,7 @@ A política ótima mostra que o agente deve:
 2. evitar a área próxima ao estado terminal negativo;
 3. procurar alcançar o estado terminal positivo pelo caminho mais seguro.
 
-### Em C++
+### Iteração de Valor Em C++
 
 O código a seguir implementa exatamente o mesmo processo que fizemos no exemplo, sem tirar nem por, para que a atenta leitora possa fazer um paralelo e usar o código para entender o algoritmo, ou o algoritmo para entender o código. Cada um entende como quiser.
 
@@ -444,11 +446,11 @@ O código a seguir implementa exatamente o mesmo processo que fizemos no exemplo
 #include <iomanip>
 
 // Define as ações possíveis que o agente pode tomar
-// Corresponde às quatro direções mencionadas no exercício
+// Corresponde às quatro direções mencionadas no exemplo
 enum class Action { North, South, East, West };
 
 // Define os tipos de células possíveis no grid
-// Corresponde aos estados especiais mencionados no exercício
+// Corresponde aos estados especiais mencionados no exemplo
 enum class CellType {
     Normal,      // Célula normal com recompensa de passo -0.03
     Wall,        // Parede - intransponível
@@ -457,10 +459,10 @@ enum class CellType {
 };
 
 // Estrutura para representar uma posição no grid
-// Facilita o trabalho com coordenadas (x,y) mencionadas no exercício
+// Facilita o trabalho com coordenadas (x,y) mencionadas no exemplo
 struct Position {
-    int row;    // Linha (equivalente ao y no exercício)
-    int col;    // Coluna (equivalente ao x no exercício)
+    int row;    // Linha (equivalente ao y no exemplo)
+    int col;    // Coluna (equivalente ao x no exemplo)
 
     bool operator==(const Position& other) const {
         return row == other.row && col == other.col;
@@ -469,18 +471,18 @@ struct Position {
 
 class GridWorld {
 private:
-    // Dimensões do grid conforme especificado no exercício (4x3)
+    // Dimensões do grid conforme especificado no exemplo (4x3)
     static constexpr int ROWS = 3;
     static constexpr int COLS = 4;
 
-    // Parâmetros de recompensa definidos no exercício
+    // Parâmetros de recompensa definidos no exemplo
     static constexpr double STEP_REWARD = -0.03;           // r_vida
     static constexpr double POSITIVE_TERMINAL_REWARD = 1.0; // Recompensa terminal positiva
     static constexpr double NEGATIVE_TERMINAL_REWARD = -1.0;// Recompensa terminal negativa
     static constexpr double DISCOUNT_FACTOR = 0.9;         // Fator de desconto γ
     static constexpr double CONVERGENCE_THRESHOLD = 0.001; // ε para convergência
 
-    // Probabilidades de movimento conforme exercício
+    // Probabilidades de movimento conforme exemplo
     static constexpr double MAIN_PROB = 0.8;  // Probabilidade de mover na direção desejada
     static constexpr double SIDE_PROB = 0.1;  // Probabilidade de mover perpendicular
 
@@ -490,14 +492,14 @@ private:
     std::array<std::array<Action, COLS>, ROWS> policy;    // Política π(s) para cada estado
 
     // Verifica se uma posição está dentro dos limites do grid
-    // Implementa a lógica de colisão com as bordas mencionada no exercício
+    // Implementa a lógica de colisão com as bordas mencionada no exemplo
     bool isValidPosition(const Position& pos) const {
         return pos.row >= 0 && pos.row < ROWS &&
             pos.col >= 0 && pos.col < COLS;
     }
 
     // Calcula a próxima posição baseada na posição atual e ação
-    // Implementa a dinâmica de movimento do exercício, incluindo colisões
+    // Implementa a dinâmica de movimento do exemplo, incluindo colisões
     Position getNextPosition(const Position& current, Action action) const {
         Position next = current;
         switch (action) {
@@ -508,7 +510,7 @@ private:
         }
 
         // Se bater em parede ou sair do grid, permanece na posição atual
-        if (!isValidPosition(next) \mid \mid  grid[next.row][next.col] == CellType::Wall) {
+        if (!isValidPosition(next) || grid[next.row][next.col] == CellType::Wall) {
             return current;
         }
         return next;
@@ -529,7 +531,7 @@ private:
     }
 
     // Calcula o valor de uma ação em um estado específico
-    // Implementa a equação de Bellman conforme mostrado no exercício
+    // Implementa a equação de Bellman conforme mostrado no exemplo
     double calculateActionValue(const Position& pos, Action action) const {
         double totalValue = 0.0;
 
@@ -549,14 +551,14 @@ private:
     }
 
 public:
-    // Construtor: inicializa o grid conforme especificado no exercício
+    // Construtor: inicializa o grid conforme especificado no exemplo
     GridWorld() {
         // Inicializa todas as células como normais
         for (auto& row : grid) {
             row.fill(CellType::Normal);
         }
 
-        // Define os estados especiais conforme exercício
+        // Define os estados especiais conforme exemplo
         grid[2][3] = CellType::TerminalPos;  // Canto superior direito (+1)
         grid[1][1] = CellType::TerminalNeg;  // Centro (-1)
         grid[1][2] = CellType::Wall;         // Parede
@@ -575,7 +577,7 @@ public:
     }
 
     // Executa o algoritmo de iteração de valor
-    // Implementa o processo iterativo mostrado no exercício
+    // Implementa o processo iterativo mostrado no exemplo
     void runValueIteration() {
         double maxChange;
         int iteration = 0;
@@ -591,7 +593,7 @@ public:
                         double oldValue = values[row][col];
 
                         // Testa todas as ações e encontra a melhor
-                        // Similar ao processo manual do exercício
+                        // Similar ao processo manual do exemplo
                         double maxActionValue = -std::numeric_limits<double>::infinity();
                         Action bestAction = Action::North;
 
@@ -622,7 +624,7 @@ public:
     }
 
     // Imprime a matriz de valores final
-    // Formato similar ao mostrado no exercício
+    // Formato similar ao mostrado no exemplo
     void printValues() const {
         std::cout << "\nValores Finais:\n";
         for (int row = ROWS - 1; row >= 0; --row) {
@@ -639,7 +641,7 @@ public:
     }
 
     // Imprime a política ótima
-    // Usando setas como no exercício
+    // Usando setas como no exemplo
     void printPolicy() const {
         std::cout << "\nPolítica Ótima:\n";
         for (int row = ROWS - 1; row >= 0; --row) {
@@ -916,13 +918,13 @@ $$
 
 #### Convergência
 
-A Iteração de Política converge em menos iterações que a Iteração de Valor (tipicamente 3-4 iterações versus 15-20 para Iteração de Valor), mas cada iteração requer mais computação devido à avaliação completa da política. Note que ambos os métodos convergem para a mesma solução ótima, como esperado teoricamente.
+A Iteração de Política converge em menos iterações que a Iteração de Valor (tipicamente 3-4 iterações versus 15-20 para Iteração de Valor), mas cada iteração requer mais computação devido à avaliação completa da política. Os dois métodos convergem para a mesma solução ótima, como esperado teoricamente.
 
-A política ótima obtida é idêntica à encontrada por Iteração de Valor, confirmando que ambos os métodos encontram a mesma solução ótima por caminhos diferentes. A principal diferença está na forma como chegam lá:
+A política ótima obtida é idêntica à encontrada por Iteração de Valor, confirmando que os métodos encontram a mesma solução ótima por caminhos diferentes. A principal diferença está na forma como chegam lá:
 - **Iteração de Valor**: atualiza valores e melhora a política implicitamente;
 - **Iteração de Política**: separa explicitamente a avaliação e melhoria da política.
 
-### Em C++
+### Iteração de Política Em C++
 
 ```cpp
 #include <iostream>
@@ -1267,7 +1269,127 @@ Para nosso exemplo específico de Grid World $4 \times 3$:
   - Iteração de Política: tipicamente $\sim$ 8ms.
 
 4. **Precisão Final**:
-  - Ambos os métodos convergem para a mesma política ótima;
+  - Os métodos convergem para a mesma política ótima;
   - Diferença nos valores finais $< 10^{-6}$.
 
 Para problemas pequenos como nosso Grid World, a escolha entre os métodos faz pouca, ou nenhuma diferença. A diferença se torna significativa em problemas maiores ou quando há requisitos específicos de precisão ou de uso de recursos computacionais.
+
+## *Dynamic Programming*, MDPs e *Reinforcement Learning*
+
+A esforçada leitora que leu até aqui deve estar se perguntando: onde está o *Reinforcement Learning*? Se sim, esta é uma pergunta válida.
+
+Vimos que nas técnicas de *Reinforcement Learning* temos um *agente que aprende com experimentando o ambiente* e, não vimos nada disso usando o **MDP** para resolver o **Grid World**. Não tema. Este é um processo didático em que iremos aumentando a complexidade assim que os conceitos forem sendo sedimentados. Comecei pelo **MDP** por causa da programação dinâmica (*Dynamic Programming*).
+
+A *Dynamic Programming* é uma técnica de otimização que resolve problemas complexos decompondo-os em subproblemas mais simples. Tanto o contexto do **Grid World** quanto no contexto do *Reinforcement Learning*, o entendimento de *Dynamic Programming* será necessário por duas características:
+
+1. **Subestrutura Ótima**: a solução ótima do problema pode ser construída a partir das soluções ótimas de seus subproblemas. No **Grid World**, o valor ótimo de um estado depende dos valores ótimos dos estados subsequentes, como expresso na *Equação de Bellman*:
+
+   $$V^*(s) = \max_{a \in A} \sum_{s' \in S} P(s'\mid s,a)[R(s,a,s') + \gamma V^*(s')]$$
+
+2. **Subproblemas Sobrepostos**: os mesmos subproblemas aparecem repetidamente ao resolver o problema maior. No **Grid World**, o valor de um estado particular será usado múltiplas vezes ao calcular os valores de outros estados.
+
+### A Tríade: MDPs, *Dynamic Programming* e RL
+
+A relação entre Processos de Decisão de Markov (**MDPs**), *Dynamic Programming* e *Reinforcement Learning* pode ser entendida como uma hierarquia de abstração, definida por:
+
+1. **MDPs** fornecem o framework matemático para modelar problemas de decisão sequencial composto por:
+   - Estados ($S$);
+   - Ações ($A$);
+   - Probabilidades de transição ($P$);
+   - Recompensas ($R$);
+   - Fator de desconto ($\gamma$).
+
+2. ***Dynamic Programming*** oferece métodos para resolver MDPs quando o modelo é completamente conhecido. Neste caso, temos dois métodos baseados nas Equações de Bellman:
+   - Iteração de Valor;
+   - Iteração de Política;
+
+3. **Reinforcement Learning** estende esses conceitos para situações onde o modelo não é conhecido, usando métodos como:
+   - Q-Learning;
+   - SARSA;
+   - Outros métodos que aprendem através da interação.
+
+## Implementação em C++
+
+Nas nossas implementações do **Grid World**, a *Dynamic Programming* se manifesta de várias formas:
+
+1. **Estruturas de Memorização**:
+
+```cpp
+std::array<std::array<double, COLS>, ROWS> values;  // Tabela de valores
+std::array<std::array<Action, COLS>, ROWS> policy;  // Tabela de política
+```
+
+2. **Atualização Iterativa (Value Iteration)**:
+
+```cpp
+void runValueIteration() {
+    double maxChange;
+    do {
+        maxChange = 0.0;
+        for (int row = 0; row < ROWS; ++row) {
+            for (int col = 0; col < COLS; ++col) {
+                // Atualiza valor usando subproblemas já resolvidos
+                double oldValue = values[row][col];
+                values[row][col] = calculateActionValue(/*...*/);
+                maxChange = std::max(maxChange,
+                    std::abs(values[row][col] - oldValue));
+            }
+        }
+    } while (maxChange > CONVERGENCE_THRESHOLD);
+}
+```
+
+3. **Avaliação de Política (Policy Iteration)**:
+
+```cpp
+double evaluatePolicy() {
+    double maxDelta;
+    do {
+        maxDelta = 0.0;
+        for (int row = 0; row < ROWS; ++row) {
+            for (int col = 0; col < COLS; ++col) {
+                // Resolve sistema de equações usando *Dynamic Programming*
+                double oldValue = values[row][col];
+                values[row][col] = calculateActionValue(/*...*/);
+                maxDelta = std::max(maxDelta,
+                    std::abs(values[row][col] - oldValue));
+            }
+        }
+    } while (maxDelta > EVAL_CONVERGENCE_THRESHOLD);
+    return maxDelta;
+}
+```
+
+### Características da *Dynamic Programming* no Grid World
+
+O estudo do **Grid World** que a esforçada leitora acompanhou exibe várias características clássicas da *Dynamic Programming* que precisam ser destacadas:
+
+1. **Tabela de Memorização**: A matriz `values` armazena resultados intermediários:
+
+  $$V_k(s) = \text{values[s.row][s.col]}$$
+
+2. **Atualização Bottom-Up**: Os valores são atualizados iterativamente:
+
+  $$V_{k+1}(s) = \max_{a \in A} Q_k(s,a)$$
+
+3. **Convergência Garantida**: O algoritmo converge devido ao fator de desconto $\gamma < 1$:
+
+  $$\|V_{k+1} - V^*\| \leq \gamma\|V_k - V^*\|$$
+
+## Da *Dynamic Programming* ao *Reinforcement Learning*
+
+A *Dynamic Programming* no **Grid World** serve como base para a compreensão de métodos mais avançados de *Reinforcement Learning*. Mas, *Dynamic Programming* não é *Reinforcement Learning*. A principal diferença está na necessidade de conhecimento do modelo do ambiente.
+
+Na implementação que desenvolvemos, com *Dynamic Programming*, foi necessário e indispensável conhecer todas as probabilidades de transição $P(s'|s,a)$ e recompensas $R(s,a,s')$. Este é o chamado método *model-based*. Neste método, o modelo completo do ambiente é conhecido e utilizado diretamente nos cálculos. Por outro lado, em *Reinforcement Learning*, os agentes precisam aprender através da interação com o ambiente, sem ter acesso a esse modelo completo, o que dizemos ser uma abordagem *model-free*.
+
+A distinção entre *Dynamic Programming* e *Reinforcement Learning* fica evidente na forma como as Equações de Bellman são utilizadas.
+
+Na *Dynamic Programming*, podemos aplicar estas equações diretamente, calculando os valores exatos para cada estado através de operações determinísticas. Foi isso que fizemos, duas vezes, com algoritmos diferentes.
+
+No *Reinforcement Learning*, precisamos aproximar estas equações usando amostras de experiência real, onde cada interação com o ambiente fornece uma estimativa ruidosa dos verdadeiros valores. Por exemplo, enquanto nossa implementação em *Dynamic Programming* calcula $V(s)$ usando todas as possíveis transições, um agente de *Reinforcement Learning* precisa estimar este valor observando resultados reais de suas ações.
+
+A convergência também segue padrões distintos. Nossa implementação de *Dynamic Programming* converge de forma determinística, com garantias matemáticas claras baseadas no fator de desconto $\gamma$. Cada iteração reduz o erro de forma previsível e monótona. Em contraste, métodos de *Reinforcement Learning* têm convergência estocástica. Eventualmente os métodos de *Reinforcement Learning* convergem para a solução ótima, mas o caminho até lá é irregular, com flutuações causadas pela natureza aleatória das experiências e explorações[^4].
+
+[^4]: **Experiências**: refere-se a todas as interações que o agente tem com o ambiente: cada ação tomada e cada recompensa recebida é uma experiência. **Exploração** (*exploration*) é quando o agente tenta ações novas ou diferentes para descobrir melhores estratégias. **Explotação** (exploitation) é quando o agente usa o conhecimento que já tem para escolher ações que ele sabe que são boas.
+
+A implementação em C++ do **Grid World** usando *Dynamic Programming* serve assim como um caso ideal que ilustra os princípios fundamentais: decomposição do problema - memorização de soluções parciais, e atualização sistemática de valores - que são posteriormente adaptados e generalizados em *Reinforcement Learning* para situações onde o modelo completo não está disponível. Esta progressão de *Dynamic Programming* para *Reinforcement Learning* reflete a evolução que teremos neste texto.

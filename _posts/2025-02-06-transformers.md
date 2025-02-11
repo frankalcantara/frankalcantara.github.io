@@ -20,7 +20,7 @@ keywords: ""
 toc: true
 published: false
 beforetoc: ""
-lastmod: 2025-02-11T09:12:47.895Z
+lastmod: 2025-02-11T21:55:58.453Z
 ---
 
 Neste artigo, a curiosa leitora irá enfrentar os Transformers. Nenhuma relação com o o Optimus Prime. Se for estes Transformers que está procurando, o Google falhou com você!
@@ -49,12 +49,12 @@ Eu usei exatamente este título em [um texto sobre eletromagnetismo](https://fra
 
 Um vetor é uma entidade matemática que possui tanto magnitude, comprimento, quanto direção. Um vetor pode ser definido como um segmento de reta direcionado, ou uma sequência ordenada de números, chamados de componentes. A representação depende do contexto.
 
-Na geometria, um vetor pode ser visualizado como uma seta em um espaço, por exemplo, em um plano $2D$ ou em um espaço $3D$. O comprimento da seta representa a magnitude, e a direção da seta indica a direção do vetor. Imagine uma seta apontando para cima e para a direita em um plano. Essa seta é um vetor com uma certa magnitude (o comprimento da seta) e uma direção (45 graus em relação ao eixo horizontal, por exemplo). A Figura 1 mostra um vetor como usado na matemática e na física.
+Na geometria, um vetor pode ser visualizado como uma seta em um espaço, por exemplo, em um plano $2D$ ou em um espaço $3D$. O comprimento da seta representa a magnitude, e a direção da seta indica a direção do vetor. Imagine uma seta apontando para cima e para a direita em um plano. Essa seta é um vetor com uma certa magnitude (o comprimento da seta) e uma direção ($45$ graus em relação ao eixo horizontal, por exemplo). A Figura 1 mostra um vetor como usado na matemática e na física.
 
 ![uma seta saído de P para Q](/assets/images/vetor1.webp)
 _Figura 1: Um vetor entre os pontos $P$ e $Q$ representado por $\vec{PQ}_{: class="legend"}
 
-Na álgebra, em um sistema de coordenadas, um vetor pode ser representado como uma tupla ordenada de números. Por exemplo, em um espaço tridimensional, um vetor pode ser escrito como $(x, y, z)$, onde $x$, $y$ e $z$ são as componentes do vetor ao longo dos eixos $x$, $y$ e $z$, respectivamente. Assim, se nos limitarmos a $2D$, o vetor $(2, 3)$ representa um deslocamento de 2 unidades na direção $x$ e 3 unidades na direção $y$.
+Na álgebra, em um sistema de coordenadas, um vetor pode ser representado como uma tupla ordenada de números. Por exemplo, em um espaço tridimensional, um vetor pode ser escrito como $(x, y, z)$, onde $x$, $y$ e $z$ são as componentes do vetor ao longo dos eixos $x$, $y$ e $z$, respectivamente. Assim, se nos limitarmos a $2D$, o vetor $(2, 3)$ representa um deslocamento de $2$ unidades na direção $x$ e $3$ unidades na direção $y$.
 
 #### Operações com Vetores
 
@@ -66,24 +66,7 @@ Vetores podem ser somados, subtraídos e multiplicados por escalares. Escalares 
 
 3. **Multiplicação por escalar**: multiplicar um vetor por um escalar altera a sua magnitude, mas não a sua direção, a menos que o escalar seja negativo, caso em que a direção é invertida. Exemplo: $2 * (1, 2) = (2, 4)$
 
-AQUIHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
-
-**Aplicações nos Transformers:**
-
-*   **Representação de palavras:** Vetores (word embeddings) são fundamentais para representar palavras de uma forma que os modelos de linguagem, como os Transformers, possam processar.
-*   **Mecanismo de Atenção:** Os vetores de consulta (query), chave (key) e valor (value) são usados no mecanismo de atenção, que é o coração dos Transformers.
-
-Exemplos de equações em blocos:
-A soma de vetores:
-
-$$
-\vec{v} + \vec{w} = (v_1, v_2) + (w_1, w_2) = (v_1 + w_1, v_2 + w_2)
-$$
-
-Multiplicação por escalar:
-$$
-k\vec{v} = k(v_1, v_2) = (kv_1, kv_2)
-$$
+Precisamos estudar vetores porque usaremos estas entidade matemáticas no estudo do processamento de linguagem natural. Neste caso, teremos os *Word embeddings*, uma técnica usada para mapear palavras, ou frases, para vetores de números reais. O objetivo é capturar o significado semântico e as relações entre as palavras em um espaço vetorial. Além disso, veremos os *Mecanismos de Atenção*: neste caso, os vetores de consulta (*query*), chave (*key*) e valor (*value*) serão usados no mecanismo de atenção, que é o coração dos *Transformers*.
 
 ### Produto Escalar
 
@@ -183,9 +166,9 @@ Em alguns casos, a busca da similaridade implica na normalização dos vetores p
 
 Nem todas tem qualquer uso em processamento de linguagem natural. A primeira que usaremos será a **Similaridade de Cosseno**. Mas, apenas quando ela for relevante e necessária.
 
-## Representação Matemática de Textos
+## Word Embeddings: técnicas primitivas
 
-Existem diversas técnicas para transformar textos em números, cada uma com suas particularidades e adequações para diferentes tarefas, vantagens e desvantagens. Eu vou passar por aquelas que são mais comuns. Eu vou fazer o máximo de esforço para seguir um fluxo crescente de dificuldade. Então, a atenta leitora não deve se assustar se achar que eu perdi o rumo. Se eu parecer perdido é porque lembrei de algo que precisa ser visto antes.
+Existem diversas técnicas para transformar textos em números, nessa jornada, os primeiros portos estão nas técnicas primitivas de representação. Eu vou fazer o máximo de esforço para seguir um fluxo crescente de dificuldade. A atenta leitora não deve se assustar se achar que eu perdi o rumo. Se eu parecer perdido é porque lembrei de algo que precisa ser visto antes que possamos abandonar um conceito e começar outro.
 
 ### Frequência de Termos
 
@@ -337,7 +320,7 @@ Neste caso, o produto escalar de $\mathbf{v}_{D_1}$ e $\mathbf{v}_{D_2}$ é 2, q
 
 O produto escalar sendo positivo indica que os vetores tendem a apontar na mesma direção. Quanto maior o valor positivo, maior a similaridade em termos de direção.
 
-Vetores ortogonais não possuem qualquer similaridade direcional. Porém, mesmo que os vetores não sejam ortogonais, a similaridade medida apenas pelo produto escalar, ou outras medidas baseadas em frequência, ainda seria limitada. 
+Vetores ortogonais não possuem qualquer similaridade direcional. Porém, mesmo que os vetores não sejam ortogonais, a similaridade medida apenas pelo produto escalar, ou outras medidas baseadas em frequência, ainda seria limitada.
 
 Vetores de frequência capturam sobreposições de palavras literais, mas não a **relação semântica** subjacente. "Carro" e "automóvel", "veloz" e "rápido" são sinônimos, mas em representações de frequência básica, eles são tratados como palavras completamente distintas. A semântica, sentido da palavra no documento, se perde.
 
@@ -423,41 +406,39 @@ O produto escalar é $4$, um valor positivo e relativamente alto, considerando a
 **b) Magnitudes**: calculamos as magnitudes de $\mathbf{v}_{D_1}$ e $\mathbf{v}_{D_2}$:
 
 $$
-\\mid \mathbf{v}_{D_1}\\mid  = \sqrt{1^2 + 1^2 + 1^2 + 0^2 + 1^2} = \sqrt{4} = 2
+\\mid \mathbf{v}_{D_1}\\mid = \sqrt{1^2 + 1^2 + 1^2 + 0^2 + 1^2} = \sqrt{4} = 2
 $$
 
 $$
-\\mid \mathbf{v}_{D_2}\\mid  = \sqrt{1^2 + 1^2 + 1^2 + 1^2 + 1^2} = \sqrt{5} \approx 2.236
+\\mid \mathbf{v}_{D_2}\\mid = \sqrt{1^2 + 1^2 + 1^2 + 1^2 + 1^2} = \sqrt{5} \approx 2.236
 $$
 
 As magnitudes são próximas, indicando que ambos os vetores têm comprimentos similares no espaço vetorial definido pelo vocabulário global.
 
 Embora o produto escalar e as magnitudes sugiram alguma similaridade entre $\mathbf{v}_{D_1}$ e $\mathbf{v}_{D_2}$, a atenta leitora pode notar a **discrepância em termos de significado semântico**.
 
-*   $D_1$: "O filme é bom" expressa uma **avaliação positiva** sobre o filme.
-*   $D_2$: "O filme não é bom" expressa uma **avaliação negativa**, ou no mínimo, não positiva, sobre o filme, essencialmente com o sentido **oposto** ao sentido de $D_1$.
+* $D_1$: "O filme é bom" expressa uma **avaliação positiva** sobre o filme.
+* $D_2$: "O filme não é bom" expressa uma **avaliação negativa**, ou no mínimo, não positiva, sobre o filme, essencialmente com o sentido **oposto** ao sentido de $D_1$.
 
-**A representação vetorial de frequência, neste caso, falha em capturar essa oposição semântica.**  Os vetores são considerados "similares" em termos de produto escalar porque eles compartilham muitas palavras em comum ("o", "filme", "é", "bom"). A presença da palavra "não" em $D_2$, que inverte completamente o sentimento, tem um impacto limitado na representação vetorial de frequência.
+**A representação vetorial de frequência, neste caso, falha em capturar essa oposição semântica.** Os vetores são considerados *similares* em termos de produto escalar porque eles compartilham muitas palavras em comum ("o", "filme", "é", "bom"). A presença da palavra "não" em $D_2$, que inverte completamente o sentido, tem um impacto limitado na representação vetorial de frequência.
 
-Um aspecto matemático particularmente problemático da representação vetorial por frequência é a questão da dimensionalidade.
+Ainda há um aspecto particularmente problemático na representação vetorial por frequência: a questão da dimensionalidade.
 
-Para um vocabulário de tamanho $\mid V\mid $, cada documento é representado em um espaço $\mathbb{R}^{\mid V\mid }$. Como vocabulários típicos podem ter dezenas ou centenas de milhares de palavras, isto leva a vetores extremamente esparsos, onde a maioria das componentes é zero. Esta característica não só é computacionalmente ineficiente, mas também dificulta a identificação de similaridades entre documentos.
+Para um vocabulário de tamanho $\mid V\mid $, cada documento é representado em um espaço $\mathbb{R}^{\mid V\mid }$. Neste caso, $\mathbb{R}$ refere-se a um espaço vetorial de dimensão $\mid V\mid$, o tamanho do vocabulário. Isso significa que cada documento é representado como um vetor em um espaço de alta dimensão, no qual cada dimensão corresponde a uma palavra do vocabulário. Para um vocabulário de $10.000$ palavras, cada documento seria representado como um vetor em um espaço de $10.000$ dimensões. Isto leva a vetores extremamente esparsos, nos quais a maioria dos componentes é zero. Esta característica não só é computacionalmente ineficiente, mas também dificulta a identificação de similaridades entre documentos.
 
-Um vetor esparso é um vetor onde a **maioria das suas componentes é zero**. Em coleções de documentos, como livros, artigos e processos, se usarmos os nossos vetores de frequência, a maioria das palavras do vocabulário não ocorrerá em um documento específico. Portanto, para um documento $D$, a maioria das entradas em $\mathbf{v}_D$ será zero.
+>Um vetor esparso é um vetor onde a **maioria das suas componentes é zero**. Em coleções de documentos, como livros, artigos e processos, se usarmos os nossos vetores de frequência, a maioria das palavras do vocabulário não estará presente em um documento específico. Portanto, para um documento $D$, a maioria das entradas em $\mathbf{v}_D$ será zero.
 
-Trabalhar com vetores em espaços de alta dimensão (milhares ou milhões de dimensões) é **computacionalmente custoso**.  Armazenar e processar vetores esparsos com tantas dimensões exige recursos significativos de memória e tempo de processamento. Além disso, em espaços de alta dimensão, a noção de "distância" e "similaridade" torna-se menos intuitiva e menos discriminativa. Vetores esparsos em alta dimensão tendem a ser "distantes" uns dos outros, mesmo que semanticamente relacionados.  A esparsidade dificulta o cálculo de medidas de similaridade robustas e significativas.
+Trabalhar com vetores em espaços de alta dimensão (milhares, milhões ou bilhões de dimensões) é **computacionalmente custoso**. Armazenar e processar vetores esparsos com tantas dimensões exige recursos significativos de memória e tempo de processamento. Em espaços de alta dimensão, a noção de *distância* e *similaridade* torna-se menos intuitiva e menos discriminativa. Vetores esparsos em alta dimensão tendem a ser *distantes* uns dos outros, mesmo que semanticamente relacionados. *Vetores esparsos dificultam o cálculo de medidas de similaridade robustas e significativas*.
 
-Para quantificar essa perda de informação contextual devido à esparsidade e à alta dimensionalidade, podemos expressá-la matematicamente através de uma **função de perda $L(\mathbf{v}_D)$**. Essa função busca medir a diferença semântica entre a informação original do documento $D$ e a informação preservada na sua representação vetorial $\mathbf{v}_D$. 
-
-Podemos definir a função de perda $L(\mathbf{v}_D)$ como:
+Para quantificar a perda de informação contextual devido à esparsidade e à alta dimensionalidade, podemos expressá-la por meio de uma **função de perda $L(\mathbf{v}_D)$**. Buscando medir a diferença semântica entre a informação original do documento $D$ e a informação preservada na sua representação vetorial $\mathbf{v}_D$. Podemos definir a função de perda $L(\mathbf{v}_D)$ como:
 
 $$L(\mathbf{v}_D) = H(D) - I(\mathbf{v}_D)$$
 
 Nesta função temos:
 
-* **$L(\mathbf{v}_D)$:** Representa a **perda de informação contextual** ao representar o documento $D$ pelo vetor de frequência $\mathbf{v}_D$.  Idealmente, queremos que $L(\mathbf{v}_D)$ seja o menor possível, indicando que a representação vetorial preserva o máximo de informação relevante.
-* **$H(D)$:** É a **entropia de informação do documento original $D$**. A entropia $H(D)$ é uma medida teórica da quantidade total de informação contida no documento $D$. Ela quantifica a incerteza ou aleatoriedade inerente ao documento. Em termos simplificados, documentos mais complexos e informativos tendem a ter entropia mais alta.  (A definição precisa de entropia em contextos textuais pode ser complexa e depender de como a informação é modelada, mas conceitualmente representa a "riqueza" informacional do texto original).
-* **$I(\mathbf{v}_D)$:** É a **informação preservada na representação vetorial $\mathbf{v}_D$**. $I(\mathbf{v}_D)$ mede quanta informação do documento original $D$ é efetivamente capturada e retida na representação vetorial $\mathbf{v}_D$.  Representações mais eficazes devem maximizar $I(\mathbf{v}_D)$.
+* **$L(\mathbf{v}_D)$**: representa a **perda de informação contextual** ao representar o documento $D$ pelo vetor de frequência $\mathbf{v}_D$.  Idealmente, queremos que $L(\mathbf{v}_D)$ seja o menor possível, indicando que a representação vetorial preserva o máximo de informação relevante.
+* **$H(D)$**: é a **entropia de informação do documento original $D$**. A entropia $H(D)$ é uma medida teórica da quantidade total de informação contida no documento $D$. Ela quantifica a incerteza ou aleatoriedade inerente ao documento. Em termos simples, documentos mais complexos e informativos tendem a ter entropia mais alta.  (A definição precisa de entropia em contextos textuais pode ser complexa e depender de como a informação é modelada, mas conceitualmente representa a "riqueza" informacional do texto original).
+* **$I(\mathbf{v}_D)$**: é a **informação preservada na representação vetorial $\mathbf{v}_D$**. $I(\mathbf{v}_D)$ mede quanta informação do documento original $D$ é efetivamente capturada e retida na representação vetorial $\mathbf{v}_D$.  Representações mais eficazes devem maximizar $I(\mathbf{v}_D)$.
 
 A função $L(\mathbf{v}_D) = H(D) - I(\mathbf{v}_D)$ expressa a perda de informação como a **diferença** entre a informação total original ($H(D)$) e a informação que conseguimos reter na representação vetorial ($\mathbf{v}_D$).
 
@@ -1158,8 +1139,8 @@ Link para o artigo: https://arxiv.org/abs/1410.5401
 "End-To-End Memory Networks":  Apresenta redes de memória end-to-end, que aprendem a interagir com a memória de forma diferenciável, sendo aplicáveis a tarefas de resposta a perguntas e raciocínio.
 
 Link para o artigo: https://arxiv.org/abs/1503.08895
-Modelos de Linguagem com Aprendizado por Reforço
-O aprendizado por reforço (RL) oferece uma abordagem alternativa para treinar modelos de linguagem, focando em otimizar o modelo para atingir um objetivo específico, em vez de apenas prever a próxima palavra. Em modelos de linguagem, o RL pode ser usado para refinar a qualidade do texto gerado, alinhando-o com critérios como coerência, relevância, ou estilo desejado.
+Modelos de Linguagem com Reinforcement Learning
+O Reinforcement Learning (RL) oferece uma abordagem alternativa para treinar modelos de linguagem, focando em otimizar o modelo para atingir um objetivo específico, em vez de apenas prever a próxima palavra. Em modelos de linguagem, o RL pode ser usado para refinar a qualidade do texto gerado, alinhando-o com critérios como coerência, relevância, ou estilo desejado.
 
 Por exemplo, ao treinar um modelo para gerar resumos, a "recompensa" no RL pode ser uma métrica que avalia a qualidade do resumo em relação ao texto original. O modelo aprende a gerar resumos que maximizam essa recompensa, resultando em resumos mais informativos e concisos.
 
@@ -1168,7 +1149,7 @@ Artigos Importantes e Referências:
 "Sequence to Sequence Learning with Neural Networks": Embora não diretamente sobre RL, este artigo estabeleceu a base para modelos sequenciais neurais, que são frequentemente combinados com RL para tarefas de geração de texto.
 
 Link para o artigo: https://arxiv.org/abs/1409.3215
-"Learning to Summarize from Human Feedback": Explora o uso de aprendizado por reforço com feedback humano para treinar modelos de sumarização de texto, mostrando como o RL pode melhorar a qualidade do resumo.
+"Learning to Summarize from Human Feedback": Explora o uso de Reinforcement Learning com feedback humano para treinar modelos de sumarização de texto, mostrando como o RL pode melhorar a qualidade do resumo.
 
 Link para o artigo: https://arxiv.org/abs/2006.06476
 Modelos de Linguagem com Transferência de Estilo

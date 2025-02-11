@@ -18,9 +18,9 @@ date: 2025-02-05T00:25:52.147Z
 preview: A primeira parte do capítulo sobre MDP, com código em C++ 20, os motivos impulsionaram Markov e o que ele descobriu que levaria ao RL.
 toc: false
 published: true
-keywords: Aprendizado por Reforço, História do RL, MDP, Markov.
+keywords: Reinforcement Learning, História do RL, MDP, Markov.
 beforetoc: ""
-lastmod: 2025-02-07T22:19:15.858Z
+lastmod: 2025-02-11T21:55:58.475Z
 draft: 2025-02-05T00:25:59.828Z
 ---
 
