@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Resolvendo o Grid World Com MD
+title: Resolvendo o Grid World Com MDP
 author: Frank
 categories:
     - artigo
@@ -17,7 +17,7 @@ keywords: Grid World *Reinforcement Learning* MDP Solution *Reinforcement Learni
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-02-12T10:26:19.985Z
+lastmod: 2025-02-12T22:14:51.688Z
 draft: 2025-02-10T09:29:19.442Z
 ---
 
