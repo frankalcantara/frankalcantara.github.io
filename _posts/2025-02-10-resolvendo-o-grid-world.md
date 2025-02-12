@@ -17,7 +17,7 @@ keywords: Grid World *Reinforcement Learning* M*Dynamic Programming* Solution *R
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-02-11T23:57:46.296Z
+lastmod: 2025-02-12T10:10:27.600Z
 draft: 2025-02-10T09:29:19.442Z
 ---
 
@@ -1410,14 +1410,14 @@ A implementação em C++ do **Grid World** usando *Dynamic Programming* serve as
 
 1. Para o primeiro exercício, considere que a complexidade computacional:
 
-$$
-\begin{align*}
-\text{Iteração de Valor:} & \quad O(|S|^2|A|) \text{ por iteração} \\
-\text{Iteração de Política:} & \quad O(|S|^3) \text{ para avaliação} + O(|S|^2|A|) \text{ para melhoria}
-\end{align*}
-$$
+    $$
+    \begin{align*}
+    \text{Iteração de Valor:} & \quad O(\mid S\mid^2\mid A|) \text{ por iteração} \\
+    \text{Iteração de Política:} & \quad O(\mid S\mid^3) \text{ para avaliação} + O(\mid S\mid^2\mid A\mid) \text{ para melhoria}
+    \end{align*}
+    $$
 
-Na qual, $|S|$ cresce quadraticamente com a dimensão da grade.
+Na qual, $\mid S\mid $ cresce quadraticamente com a dimensão da grade.
 
 2. Para o segundo exercício, note que valores de $\gamma$ próximos de $1$ geralmente:
   - Aumentam o número de iterações necessárias;
@@ -1430,7 +1430,7 @@ Na qual, $|S|$ cresce quadraticamente com a dimensão da grade.
   - Tamanho do problema.
 
 4. Para obstáculos, observe que eles:
-  - Reduzem o espaço de estados efetivo $|S|$;
+  - Reduzem o espaço de estados efetivo $\mid S\mid$;
   - Podem criar "corredores" que afetam a propagação de valores;
   - Podem impactar diferentemente cada método
 
@@ -1438,3 +1438,4 @@ Na qual, $|S|$ cresce quadraticamente com a dimensão da grade.
   - Recompensas esparsas vs densas;
   - Recompensas positivas vs negativas;
   - Magnitude das recompensas.
+ 

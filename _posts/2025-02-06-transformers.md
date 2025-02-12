@@ -20,7 +20,7 @@ keywords: ""
 toc: true
 published: false
 beforetoc: ""
-lastmod: 2025-02-11T21:55:58.453Z
+lastmod: 2025-02-12T01:41:10.202Z
 ---
 
 Neste artigo, a curiosa leitora irá enfrentar os Transformers. Nenhuma relação com o o Optimus Prime. Se for estes Transformers que está procurando, o Google falhou com você!
@@ -41,7 +41,7 @@ Finalmente, os exemplos. O combinado é o seguinte: aqui eu faço em C++ 20 e a 
 
 ## A Malvada Matemática
 
-Para que os computadores processem e compreendam a linguagem humana, é essencial converter texto em representações numéricas. Computador ainda é um treco burro que só entende binário. Dito isso, é necessário destacar que não é possível entender processamento de linguagem natural, ou este texto, sem um pouco de matemática.  
+Para que os computadores processem e compreendam a linguagem humana, é essencial converter texto em representações numéricas. Computador ainda é um treco burro que só entende binário. Dito isso, é necessário destacar que não é possível entender processamento de linguagem natural, ou este texto, sem um pouco de matemática. 
 
 ### Vetores, os compassos de tudo que há e haverá
 
@@ -56,11 +56,41 @@ _Figura 1: Um vetor entre os pontos $P$ e $Q$ representado por $\vec{PQ}_{: clas
 
 Na álgebra, em um sistema de coordenadas, um vetor pode ser representado como uma tupla ordenada de números. Por exemplo, em um espaço tridimensional, um vetor pode ser escrito como $(x, y, z)$, onde $x$, $y$ e $z$ são as componentes do vetor ao longo dos eixos $x$, $y$ e $z$, respectivamente. Assim, se nos limitarmos a $2D$, o vetor $(2, 3)$ representa um deslocamento de $2$ unidades na direção $x$ e $3$ unidades na direção $y$.
 
+#### Espaço Vetorial
+
+Para compreender vetores e suas operações, precisamos primeiro entender o conceito de espaço vetorial. 
+
+Um espaço vetorial é uma estrutura matemática que formaliza a noção de operações geométricas como adição de vetores e multiplicação por escalares.
+
+Formalmente, um espaço vetorial sobre um corpo $F$, geralmente $\mathbb{R}$ ou $\mathbb{C}$, é um conjunto $V$ equipado com duas operações:
+
+1. **Adição vetorial**: operação que associa a cada par de vetores $\mathbf{u}, \mathbf{v} \in V$ um único vetor $\mathbf{w} = \mathbf{u} + \mathbf{v} \in V$;
+
+2. **Multiplicação por escalar**: operação que associa a cada escalar $\alpha \in F$ e vetor $\mathbf{v} \in V$ um vetor $\alpha\mathbf{v} \in V$
+
+Por exemplo, no $\mathbb{R}^2$, a adição vetorial de $\mathbf{u} = (u_1, u_2)$ e $\mathbf{v} = (v_1, v_2)$ é dada por:
+
+$$
+\mathbf{u} + \mathbf{v} = (u_1 + v_1, u_2 + v_2)
+$$
+
+Estas operações devem satisfazer certos axiomas, incluindo associatividade, comutatividade, existência de elemento neutro e inverso para adição.
+
+Em processamento de linguagem natural, trabalhamos principalmente com o espaço vetorial real $\mathbb{R}^n$, onde $n$ é a dimensão do espaço. Este é o espaço de todas as $n$-tuplas ordenadas de números reais.
+
+Formalmente, definimos $\mathbb{R}^n$ como:
+
+$$
+\mathbb{R}^n = \{(x_1, \ldots, x_n) : x_i \in \mathbb{R} \text{ para } i = 1, \ldots, n\}
+$$
+
+Quando representamos palavras, ou documentos, como vetores, estamos essencialmente mapeando elementos linguísticos para pontos em um espaço $\mathbb{R}^n$. A dimensão $n$ será determinada pelo método específico de vetorização que escolhermos.
+
 #### Operações com Vetores
 
 Vetores podem ser somados, subtraídos e multiplicados por escalares. Escalares são entidades sem direção. A operações sobre vetores têm interpretações geométricas e algébricas:
 
-1. **Soma**: a soma de dois vetores pode ser visualizada geometricamente usando a regra do paralelogramo ou a regra do triângulo. Algebricamente, somamos vetores componente a componente.  Exemplo: $(1, 2) + (3, -1) = (4, 1)$
+1. **Soma**: a soma de dois vetores pode ser visualizada geometricamente usando a regra do paralelogramo ou a regra do triângulo. Algebricamente, somamos vetores componente a componente. Exemplo: $(1, 2) + (3, -1) = (4, 1)$
 
 2. **Subtração**: a subtrair um vetor é o mesmo que somar o seu oposto. Exemplo: $(1, 2) - (3, -1) = (1-3, 2-(-1)) = (-2, 3)$
 
@@ -94,6 +124,24 @@ $$
 \mathbf{a} \cdot \mathbf{b} = (2 * 3) + (5 * 1) + (1 * 4) = 6 + 5 + 4 = 15
 $$
 
+O produto escalar também pode ser representado na forma matricial. Se considerarmos os vetores como matrizes coluna, o produto escalar é obtido multiplicando a transposta do primeiro vetor pelo segundo vetor:
+
+$$
+\mathbf{a} \cdot \mathbf{b} = \mathbf{a}^T\mathbf{b} = \begin{bmatrix} a_1 & a_2 & \cdots & a_n \end{bmatrix} \begin{bmatrix} b_1 \\ b_2 \\ \vdots \\ b_n \end{bmatrix} = \sum_{i=1}^{n} a_i b_i
+$$
+
+Esta notação matricial é útil quando trabalhamos com implementações computacionais. Muitas bibliotecas de álgebra linear são otimizadas para operações com matrizes.
+
+>No [NumPy](https://numpy.org/), uma biblioteca Python popular para computação numérica, o produto escalar pode ser calculado usando a função `numpy.dot()`ou o operador `@`.
+
+Para ilustrar, considere os vetores $\mathbf{a} = [2, 5, 1]$ e $\mathbf{b} = [3, 1, 4]$. Na forma matricial, temos:
+
+$$
+\mathbf{a}^T\mathbf{b} = \begin{bmatrix} 2 & 5 & 1 \end{bmatrix} \begin{bmatrix} 3 \\ 1 \\ 4 \end{bmatrix} = (2 \times 3) + (5 \times 1) + (1 \times 4) = 15
+$$
+
+#### O Produto Escalar e a Similaridade
+
 O produto escalar fornece uma informação interessante sobre a similaridade entre dois vetores. Não é algo preciso, ainda assim, interessante. Em termos gerais, teremos:
 
 * **Produto escalar positivo:** indica que os vetores tendem a apontar na mesma direção. Quanto maior o valor positivo, maior a similaridade em termos de direção e magnitude das componentes que se "alinham".
@@ -106,7 +154,7 @@ $$
 \mathbf{a} \cdot \mathbf{b} = (0 * 0.2) + (1 * 0.7) + (0 * 0.1) = 0 + 0.7 + 0 = 0.7
 $$
 
-No exemplo, o vetor $\mathbf{a} = [0, 1, 0]$ pode ser visto como um vetor que *ativa* ou dá peso máximo apenas à segunda dimensão, e peso zero às demais.  Ao calcular o produto escalar com $\mathbf{b} = [0.2, 0.7, 0.1]$, estamos essencialmente *extraindo ou medindo* o valor da segunda componente de $b$ (que é $0.7$), ponderado pela *importância, ou peso*"* que o vetor $a$ atribui a essa dimensão .
+No exemplo, o vetor $\mathbf{a} = [0, 1, 0]$ pode ser visto como um vetor que *ativa* ou dá peso máximo apenas à segunda dimensão, e peso zero às demais. Ao calcular o produto escalar com $\mathbf{b} = [0.2, 0.7, 0.1]$, estamos essencialmente *extraindo ou medindo* o valor da segunda componente de $b$ (que é $0.7$), ponderado pela *importância, ou peso*"* que o vetor $a$ atribui a essa dimensão .
 
 Com um pouco mais de formalidade: se temos dois vetores $\mathbf{u}$ e $\mathbf{v}$, e você calcula $\mathbf{u} \cdot \mathbf{v} = c$, o valor escalar $c$ pode ser interpretado como uma medida de:
 
@@ -166,13 +214,39 @@ Em alguns casos, a busca da similaridade implica na normalização dos vetores p
 
 Nem todas tem qualquer uso em processamento de linguagem natural. A primeira que usaremos será a **Similaridade de Cosseno**. Mas, apenas quando ela for relevante e necessária.
 
-## Word Embeddings: técnicas primitivas
+## Tudo Começa com Vetorização
 
 Existem diversas técnicas para transformar textos em números, nessa jornada, os primeiros portos estão nas técnicas primitivas de representação. Eu vou fazer o máximo de esforço para seguir um fluxo crescente de dificuldade. A atenta leitora não deve se assustar se achar que eu perdi o rumo. Se eu parecer perdido é porque lembrei de algo que precisa ser visto antes que possamos abandonar um conceito e começar outro.
 
 ### Frequência de Termos
 
 Uma das formas mais básicas, quase intuitiva. de representar texto numericamente é através da frequência de termos. *A ideia é contar quantas vezes cada palavra aparece em um documento ou conjunto de documentos* e criar um vocabulário[^2].
+
+Antes de prosseguirmos com a vetorização de textos, precisamos formalizar o conceito de *corpus*. Em linguística computacional e processamento de linguagem natural, um *corpus* (plural *corpora*) é uma coleção estruturada de textos. Formalmente, definimos:
+
+$$
+\text{Corpus} = \{D_1, D_2, \ldots, D_N\}
+$$
+
+onde cada $D_i$ é um documento individual e $N$ é o número total de documentos no corpus.
+
+Cada documento $D_i$ é uma sequência ordenada de *tokens*[^6] (geralmente palavras):
+
+[^6]: Em processamento de linguagem natural, *um token é a menor unidade de análise em um texto*. Um token pode ser uma palavra, um número, um sinal de pontuação ou qualquer outra unidade significativa. Por exemplo, na frase "O gato preto.", temos 4 tokens: "O", "gato", "preto" e ".". O processo de dividir um texto em *tokens* é chamado de *tokenização*. A escolha de como definir e separar *tokens* é uma decisão importante que afeta todo o processamento subsequente. Considere, para ilustrar, a palavra composta "guarda-chuva" pode ser considerada como um único token ou como três tokens ("guarda", "-", "chuva"), dependendo das regras de tokenização adotadas. Em modelos modernos de processamento de linguagem natural, como o GPT e BERT, os tokens podem ser ainda mais granulares, incluindo partes de palavras, chamadas de subpalavras (*subwords*).
+
+$$
+D_i = (w_1, w_2, \ldots, w_{m_i})
+$$
+
+Na qual, $w_j$ representa o $j$-ésimo token do documento e $m_i$ é o comprimento do documento $D_i$.
+
+O vocabulário global $V$ do corpus é o conjunto de todos os tokens únicos que aparecem em qualquer documento:
+
+$$
+V = \bigcup_{i=1}^N \{w : w \text{ ocorre em } D_i\}
+$$
+
+Em nossos exemplos de vetorização, trabalharemos tanto com documentos individuais quanto com o corpus completo, dependendo da técnica específica sendo aplicada. A cardinalidade do vocabulário $|V|$ será particularmente importante, pois determinará a dimensionalidade de nossas representações vetoriais.
 
 Neste cenário vamos considerar que a palavra vocabulário se refere ao conjunto de todas as palavras únicas presentes em um corpus de texto, ou em um único documento, dependendo da técnica de representação que você está utilizando. Pense no vocabulário como uma lista organizada de todas as palavras distintas que o seu modelo de linguagem conhece ou que são relevantes para a tarefa em questão. Com um pouco mais de formalidade dizemos que um vocabulário é um conjunto finito de termos sem repetição
 
@@ -205,7 +279,7 @@ $$
 \end{align*}
 $$
 
-Com essa contagem, podemos representar o documento $D_1$ como um vetor de frequências $\mathbf{v}_{D_1}$. Se ordenarmos as palavras de $V_{D_1}$ alfabeticamente, por exemplo,  $V'_{D_1} = \{ \text{"dorme"}, \text{"gato"}, \text{"no"}, \text{"o"}, \text{"preto"}, \text{"subiu"}, \text{"telhado"} \}$, então o vetor de frequências seria:
+Com essa contagem, podemos representar o documento $D_1$ como um vetor de frequências $\mathbf{v}_{D_1}$. Se ordenarmos as palavras de $V_{D_1}$ alfabeticamente, por exemplo., $V'_{D_1} = \{ \text{"dorme"}, \text{"gato"}, \text{"no"}, \text{"o"}, \text{"preto"}, \text{"subiu"}, \text{"telhado"} \}$, então o vetor de frequências seria:
 
 $$
 \mathbf{v}_{D_1} = \begin{bmatrix} 1 \\ 2 \\ 2 \\ 2 \\ 1 \\ 1 \\ 2 \end{bmatrix}
@@ -434,11 +508,14 @@ Para quantificar a perda de informação contextual devido à esparsidade e à a
 
 $$L(\mathbf{v}_D) = H(D) - I(\mathbf{v}_D)$$
 
-Nesta função temos:
+Nesta função, temos:
 
-* **$L(\mathbf{v}_D)$**: representa a **perda de informação contextual** ao representar o documento $D$ pelo vetor de frequência $\mathbf{v}_D$.  Idealmente, queremos que $L(\mathbf{v}_D)$ seja o menor possível, indicando que a representação vetorial preserva o máximo de informação relevante.
-* **$H(D)$**: é a **entropia de informação do documento original $D$**. A entropia $H(D)$ é uma medida teórica da quantidade total de informação contida no documento $D$. Ela quantifica a incerteza ou aleatoriedade inerente ao documento. Em termos simples, documentos mais complexos e informativos tendem a ter entropia mais alta.  (A definição precisa de entropia em contextos textuais pode ser complexa e depender de como a informação é modelada, mas conceitualmente representa a "riqueza" informacional do texto original).
-* **$I(\mathbf{v}_D)$**: é a **informação preservada na representação vetorial $\mathbf{v}_D$**. $I(\mathbf{v}_D)$ mede quanta informação do documento original $D$ é efetivamente capturada e retida na representação vetorial $\mathbf{v}_D$.  Representações mais eficazes devem maximizar $I(\mathbf{v}_D)$.
+* **$L(\mathbf{v}_D)$**: representa a **perda de informação contextual** ao representar o documento $D$ pelo vetor de frequência $\mathbf{v}_D$. Idealmente, queremos que $L(\mathbf{v}_D)$ seja o menor possível, indicando que a representação vetorial preserva o máximo de informação relevante.
+
+* **$H(D)$**: é a **entropia de informação do documento original $D$**. A entropia $H(D)$ é uma medida teórica da quantidade total de informação contida no documento $D$. Ela quantifica a incerteza ou aleatoriedade inerente ao documento. Em termos simples, documentos mais complexos e informativos tendem a ter entropia mais alta. 
+  > A definição precisa de entropia em contextos textuais pode ser complexa e depender de como a informação é modelada, mas conceitualmente representa a "riqueza" informacional do texto original).
+
+* **$I(\mathbf{v}_D)$**: é a **informação preservada na representação vetorial $\mathbf{v}_D$**. $I(\mathbf{v}_D)$ mede quanta informação do documento original $D$ é efetivamente capturada e retida na representação vetorial $\mathbf{v}_D$. Representações mais eficazes devem maximizar $I(\mathbf{v}_D)$.
 
 A função $L(\mathbf{v}_D) = H(D) - I(\mathbf{v}_D)$ expressa a perda de informação como a **diferença** entre a informação total original ($H(D)$) e a informação que conseguimos reter na representação vetorial ($\mathbf{v}_D$).
 
@@ -446,26 +523,35 @@ Para representações como vetores de frequência (e **BoW**, **TF-IDF** que ver
 
 A perda de informação $L(\mathbf{v}_D)$ tende a **aumentar com a complexidade semântica do texto**. Textos mais complexos, com nuances, ironia, sarcasmo, metáforas, etc., dependem ainda mais do contexto para a compreensão. Representações simples como vetores de frequência falham ainda mais em capturar a riqueza informacional desses textos, resultando em uma perda de informação ainda maior.
 
-A consciência dessas limitações motivou o desenvolvimento de técnicas mais avançadas, como **word embeddings** (e.g., Word2Vec, GloVe, FastText) e **modelos de linguagem contextuais** (e.g., BERT, GPT, Transformers).  Estas abordagens buscam:
-
-Embora essas técnicas mais avançadas representem um grande avanço, é importante reconhecer que **nenhuma representação é perfeita**.  Mesmo as abordagens mais sofisticadas ainda apresentam seus próprios desafios e limitações na captura completa da complexidade e riqueza da linguagem humana. A pesquisa em representação de linguagem natural continua sendo uma área ativa e em constante evolução.
+A consciência dessas limitações motivou o desenvolvimento de técnicas mais avançadas, como **word embeddings** (Word2Vec, GloVe, FastText) e **modelos de linguagem contextuais** (BERT, GPT, Transformers). Vamos chegar lá. Todavia, por enquanto temos que entender algumas outras formas de vetorização.
 
 ### Bag of Words (BoW)
 
-O modelo **Bag of Words (BoW)**, ou "saco de palavras",  é uma evolução da representação por frequência.  BoW também se baseia na frequência de palavras, mas com uma abordagem que ignora a ordem e a estrutura gramatical das palavras no texto.  Ele trata cada documento como um "saco" de palavras, onde apenas a presença e a frequência das palavras importam.
+O modelo **Bag of Words (BoW)**, ou *saco de palavras*, é uma evolução da representação por frequência. **BoW** também se baseia na frequência de palavras, mas com uma abordagem que ignora a ordem e a estrutura gramatical das palavras no texto. Este algoritmo trata cada documento como um *saco* de palavras, onde apenas a presença e a frequência das palavras importam.
 
-Consideremos agora um conjunto de documentos $Docs = \{D_1, D_2, ..., D_N\}$. Primeiro, construímos um vocabulário global $V_{global}$ que contém todas as palavras únicas em todos os documentos em $Docs$.
+O algoritmo **Bag of Words (BoW)** surgiu da área de recuperação de informação e processamento de linguagem natural. Embora a ideia de representar textos como "sacos de palavras" tenha evoluído ao longo do tempo, um dos trabalhos seminais que formalizou e popularizou essa abordagem é frequentemente creditado a Gerard Salton[text](https://en.wikipedia.org/wiki/Gerard_Salton) e seus colaboradores no contexto do sistema SMART (*System for the Mechanical Analysis and Retrieval of Text*) [^5], [^6].
 
-Para cada documento $D_i \in Docs$, a representação BoW é um vetor $\mathbf{bow}_{D_i}$ de tamanho $\mid V_{global}\mid $. Cada posição $j$ em $\mathbf{bow}_{D_i}$ corresponde à $j$-ésima palavra $w_j$ em $V_{global}$ (assumindo uma ordem fixa para $V_{global}$). O valor na posição $j$ é a frequência da palavra $w_j$ no documento $D_i$, ou seja, $f(w_j, D_i)$.
+[^5]: SALTON, G.; LESK, M. E. **The SMART Automatic Document Retrieval System—An Illustration**. Communications of the ACM, v. 8, n. 9, p. 391-398, 1965. Disponível em: https://apastyle.apa.org/blog/citing-online-works. Acesso em: [Data de acesso].
+
+[^6]:SALTON, G.; WONG, A.; YANG, C. S. **A vector space model for automatic indexing**. Communications of the ACM, v. 18, n. 11, p. 613-620, 1975. Disponível em: https://apastyle.apa.org/blog/citing-online-works. Acesso em: [Data de acesso].
+
+Para entender o **BoW**, vamos considerar um conjunto de documentos, *corpus*,  $Docs = \{D_1, D_2, ..., D_N\}$.
+
+Para construir o **BoW**, o vetor que irá representar um documento do *corpus*, nossa primeira ação será construir um vocabulário global $V_{global}$ que conterá todas as palavras únicas que existem em todos os documentos de $Docs$.
+
+Para cada documento $D_i \in Docs$, a representação **BoW** é um vetor $\mathbf{bow}_{D_i}$ de tamanho $\mid V_{global}\mid $. Cada posição $j$ em $\mathbf{bow}_{D_i}$ corresponde à $j$-ésima palavra $w_j$ em $V_{global}$. Neste caso, estamos assumindo uma ordem fixa para $V_{global}$ e o valor na posição $j$ será a frequência da palavra $w_j$ no documento $D_i$, ou seja, $f(w_j, D_i)$.
 
 Usando o mesmo exemplo $D_1$: "O gato preto subiu no telhado. O gato dorme no telhado." e adicionando um segundo documento $D_2$: "O telhado é preto."
 
-O vocabulário global $V_{global}$ seria a união das palavras únicas em $D_1$ e $D_2$:
+O vocabulário global $V_{global}$ será dado pelo conjunto contendo a união das palavras únicas em $D_1$ e $D_2$:
+
 $V_{global} = \{ \text{"o"}, \text{"gato"}, \text{"preto"}, \text{"subiu"}, \text{"no"}, \text{"telhado"}, \text{"dorme"}, \text{"é"} \}$.
+
+>No modelo **BoW**, a ordem alfabética do vocabulário **não é obrigatória**, mas é **recomendada** para padronização. A exigência é que a ordem de $V_{\text{global}}$ seja **fixa** e **consistente** para todos os documentos, garantindo que cada posição no vetor $\mathbf{bow}_{D_i}$ corresponda à mesma palavra.
 
 Ordenando $V_{global}$ alfabeticamente: $V'_{global} = \{ \text{"dorme"}, \text{"é"}, \text{"gato"}, \text{"no"}, \text{"o"}, \text{"preto"}, \text{"subiu"}, \text{"telhado"} \}$.
 
-As representações BoW para $D_1$ e $D_2$ seriam:
+As representações **BoW** para $D_1$ e $D_2$ seriam:
 
 $$
 \mathbf{bow}_{D_1} = \begin{bmatrix} 1 \\ 0 \\ 2 \\ 2 \\ 2 \\ 1 \\ 1 \\ 2 \end{bmatrix}
@@ -475,7 +561,7 @@ $$
 \mathbf{bow}_{D_2} = \begin{bmatrix} 0 \\ 1 \\ 0 \\ 0 \\ 1 \\ 1 \\ 0 \\ 1 \end{bmatrix}
 $$
 
-BoW é simples de implementar e pode ser eficaz em diversas tarefas, como classificação de documentos. No entanto, ele tem algumas limitações.  A principal é a perda da ordem das palavras, o que pode ser crucial para entender o significado em muitos contextos. Além disso, palavras muito frequentes, como artigos e preposições ("o", "a", "de", "em"), podem dominar a representação, mesmo que não sejam as mais relevantes para o conteúdo.
+O **BoW** é simples de implementar e pode ser eficaz em diversas tarefas, como classificação de documentos. No entanto, ele tem algumas limitações. A principal é a perda da ordem das palavras, o que pode ser crucial para entender o significado em muitos contextos. Além disso, palavras muito frequentes, como artigos e preposições ("o", "a", "de", "em"), podem dominar a representação, mesmo que não sejam as mais relevantes para o conteúdo.
 
 ### TF-IDF (Term Frequency-Inverse Document Frequency)
 
@@ -534,9 +620,9 @@ Calculando TF-IDF para todas as palavras em todos os documentos, podemos constru
 
 ### One-Hot Encoding
 
-Finalmente, chegamos ao **One-Hot Encoding**.  Embora menos comum para representar diretamente *textos inteiros* em tarefas de processamento de linguagem natural (PNL) de nível superior, o one-hot encoding é fundamental como um passo inicial para representar *palavras individuais* ou *caracteres* numericamente.
+Finalmente, chegamos ao **One-Hot Encoding**. Embora menos comum para representar diretamente *textos inteiros* em tarefas de processamento de linguagem natural (PNL) de nível superior, o one-hot encoding é fundamental como um passo inicial para representar *palavras individuais* ou *caracteres* numericamente.
 
-Em one-hot encoding, cada palavra (ou caractere) no vocabulário $V$ é representada por um vetor binário $\mathbf{e}_w$.  O tamanho do vetor é igual ao tamanho do vocabulário, $\mid V\mid $. Para cada palavra $w_i \in V$, o vetor $\mathbf{e}_{w_i}$ terá todos os valores como 0, exceto na posição $i$ correspondente à palavra $w_i$ no vocabulário, onde o valor será 1.
+Em one-hot encoding, cada palavra (ou caractere) no vocabulário $V$ é representada por um vetor binário $\mathbf{e}_w$. O tamanho do vetor é igual ao tamanho do vocabulário, $\mid V\mid $. Para cada palavra $w_i \in V$, o vetor $\mathbf{e}_{w_i}$ terá todos os valores como 0, exceto na posição $i$ correspondente à palavra $w_i$ no vocabulário, onde o valor será 1.
 
 Formalmente, se $V = \{w_1, w_2, ..., w_{\mid V\mid }\}$ é o vocabulário ordenado, então o one-hot encoding para a palavra $w_i$ é um vetor $\mathbf{e}_{w_i} \in \mathbb{R}^{\mid V\mid }$ tal que:
 
@@ -548,7 +634,7 @@ $$
 \end{cases}
 $$
 
-Para o vocabulário $V'_{global} = \{ \text{"dorme"}, \text{"é"}, \text{"gato"}, \text{"no"}, \text{"o"}, \text{"preto"}, \text{"subiu"}, \text{"telhado"} \}$,  o one-hot encoding seria:
+Para o vocabulário $V'_{global} = \{ \text{"dorme"}, \text{"é"}, \text{"gato"}, \text{"no"}, \text{"o"}, \text{"preto"}, \text{"subiu"}, \text{"telhado"} \}$., o one-hot encoding seria:
 
 *   $\mathbf{e}_{\text{"dorme"}} = [1, 0, 0, 0, 0, 0, 0, 0]^T$
 *   $\mathbf{e}_{\text{"é"}} = [0, 1, 0, 0, 0, 0, 0, 0]^T$
@@ -559,7 +645,7 @@ Para o vocabulário $V'_{global} = \{ \text{"dorme"}, \text{"é"}, \text{"gato"}
 *   $\mathbf{e}_{\text{"subiu"}} = [0, 0, 0, 0, 0, 0, 1, 0]^T$
 *   $\mathbf{e}_{\text{"telhado"}} = [0, 0, 0, 0, 0, 0, 0, 1]^T$
 
-One-hot encoding é extremamente simples e garante que cada palavra seja representada de forma única e independente.  É frequentemente usado como entrada para modelos de aprendizado profundo, especialmente em camadas iniciais de redes neurais.
+One-hot encoding é extremamente simples e garante que cada palavra seja representada de forma única e independente. É frequentemente usado como entrada para modelos de aprendizado profundo, especialmente em camadas iniciais de redes neurais.
 
 Os produtos escalares são especialmente úteis quando estamos trabalhando com nossas representações one-hot de palavras. O produto escalar de qualquer vetor one-hot com ele mesmo é um.
 
@@ -1092,9 +1178,9 @@ Técnicas Avançadas em Modelos de Linguagem: Uma Expansão
 Além dos transformadores, o campo dos modelos de linguagem tem evoluído rapidamente, com diversas técnicas avançadas que impulsionam a capacidade das máquinas de entender e gerar linguagem natural. Vamos explorar algumas dessas técnicas, aprofundando as informações e fornecendo referências para artigos importantes em cada área.
 
 Modelos de Linguagem Autorregressivos
-Os modelos de linguagem autorregressivos são a espinha dorsal de muitos sistemas de geração de texto que vemos hoje. A ideia central é simples, mas poderosa: gerar texto sequencialmente, palavra por palavra (ou token por token), prevendo cada elemento com base no contexto das palavras que o precedem.  Pense neles como escritores virtuais que, a cada passo, consultam o que já foi escrito para decidir o próximo passo na narrativa.
+Os modelos de linguagem autorregressivos são a espinha dorsal de muitos sistemas de geração de texto que vemos hoje. A ideia central é simples, mas poderosa: gerar texto sequencialmente, palavra por palavra (ou token por token), prevendo cada elemento com base no contexto das palavras que o precedem. Pense neles como escritores virtuais que, a cada passo, consultam o que já foi escrito para decidir o próximo passo na narrativa.
 
-Um exemplo icônico dessa categoria são os modelos da família GPT (Generative Pre-trained Transformer) da OpenAI.  Estes modelos, treinados em vastos conjuntos de dados textuais, demonstram uma capacidade notável de gerar textos coerentes, criativos e contextualmente relevantes, desde artigos e histórias até código de programação.
+Um exemplo icônico dessa categoria são os modelos da família GPT (Generative Pre-trained Transformer) da OpenAI. Estes modelos, treinados em vastos conjuntos de dados textuais, demonstram uma capacidade notável de gerar textos coerentes, criativos e contextualmente relevantes, desde artigos e histórias até código de programação.
 
 Artigos Importantes e Referências:
 
