@@ -17,7 +17,7 @@ keywords: Grid World *Reinforcement Learning* MDP Solution *Reinforcement Learni
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-02-12T10:21:25.494Z
+lastmod: 2025-02-12T10:26:19.985Z
 draft: 2025-02-10T09:29:19.442Z
 ---
 
@@ -1398,19 +1398,9 @@ A implementação em C++ do **Grid World** usando *Dynamic Programming* serve as
 
 ## Exercícios MDP - Grid World
 
-1. Modifique o Grid World para ter diferentes dimensões (por exemplo, 5x5, 8x8) e compare como a Iteração de Valor e a Iteração de Política escalam.
+1. Modifique o Grid World para ter diferentes dimensões (por exemplo, 10X10) e compare como a Iteração de Valor e a Iteração de Política escalam.
 
-2. Experimente com diferentes fatores de desconto $(\gamma)$ e analise como eles afetam a velocidade de convergência de cada método.
-
-3. Implemente um método híbrido que alterne entre Iteração de Valor e Iteração de Política baseado em algum critério. Em que situações isso poderia ser benéfico?
-
-4. Adicione obstáculos ao Grid World e analise como a topologia do ambiente afeta o desempenho relativo de ambos os métodos.
-
-5. Modifique a estrutura de recompensas e analise como diferentes esquemas de recompensa afetam as propriedades de convergência de ambos os algoritmos.
-
-### Dicas de Resolução
-
-1. Para o primeiro exercício, considere que a complexidade computacional:
+* Dica: considere que a complexidade computacional:
 
     $$
     \begin{align*}
@@ -1419,25 +1409,32 @@ A implementação em C++ do **Grid World** usando *Dynamic Programming* serve as
     \end{align*}
     $$
 
-Na qual, $\mid S\mid $ cresce quadraticamente com a dimensão da grade.
+Neste caso, $\mid S\mid $ cresce quadraticamente com a dimensão da grade.
 
-2. Para o segundo exercício, note que valores de $\gamma$ próximos de $1$ geralmente:
+2. Experimente com diferentes fatores de desconto $(\gamma)$ e analise como eles afetam a velocidade de convergência de cada método.
+
+* Dica: Note que valores de $\gamma$ próximos de $1$ geralmente:
   - Aumentam o número de iterações necessárias;
   - Produzem políticas que consideram recompensas distantes;
   - Afetam mais a Iteração de Valor que a Iteração de Política.
-.
-3. Para o método híbrido, considere alternar com base em:
+
+3. Implemente um método híbrido que alterne entre Iteração de Valor e Iteração de Política baseado em algum critério. Em que situações isso poderia ser benéfico?
+
+* Note: considere alternar com base em:
   - Taxa de mudança nos valores dos estados;
   - Número de iterações já executadas;
   - Tamanho do problema.
 
-4. Para obstáculos, observe que eles:
+4. Adicione obstáculos ao Grid World e analise como a topologia do ambiente afeta o desempenho relativo de ambos os métodos.
+
+* Note: para obstáculos, observe que eles:
   - Reduzem o espaço de estados efetivo $\mid S\mid$;
   - Podem criar "corredores" que afetam a propagação de valores;
   - Podem impactar diferentemente cada método
 
-5. Na modificação de recompensas, considere:
+5. Modifique a estrutura de recompensas e analise como diferentes esquemas de recompensa afetam as propriedades de convergência de ambos os algoritmos.
+
+* Dica: na modificação de recompensas, considere:
   - Recompensas esparsas vs densas;
   - Recompensas positivas vs negativas;
   - Magnitude das recompensas.
- 
