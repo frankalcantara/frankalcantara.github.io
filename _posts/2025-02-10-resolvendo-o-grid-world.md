@@ -17,7 +17,7 @@ keywords: Grid World *Reinforcement Learning* M*Dynamic Programming* Solution *R
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-02-12T10:10:27.600Z
+lastmod: 2025-02-12T10:12:17.715Z
 draft: 2025-02-10T09:29:19.442Z
 ---
 
@@ -1380,7 +1380,7 @@ O estudo do **Grid World** que a esforçada leitora acompanhou exibe várias car
 
 A *Dynamic Programming* no **Grid World** serve como base para a compreensão de métodos avançados de *Reinforcement Learning*. Mas, *Dynamic Programming* não é *Reinforcement Learning*. A principal diferença está na necessidade de conhecimento do modelo do ambiente.
 
-Na implementação que desenvolvemos, com *Dynamic Programming*, foi necessário e indispensável conhecer todas as probabilidades de transição $P(s'|s,a)$ e recompensas $R(s,a,s')$. Este é o chamado método *model-based*. Neste método, o modelo completo do ambiente é conhecido e utilizado diretamente nos cálculos. Por outro lado, em *Reinforcement Learning*, os agentes precisam aprender através da interação com o ambiente, sem ter acesso a esse modelo completo, o que dizemos ser uma abordagem *model-free*.
+Na implementação que desenvolvemos, com *Dynamic Programming*, foi necessário e indispensável conhecer todas as probabilidades de transição $P(s'\mid s,a)$ e recompensas $R(s,a,s')$. Este é o chamado método *model-based*. Neste método, o modelo completo do ambiente é conhecido e utilizado diretamente nos cálculos. Por outro lado, em *Reinforcement Learning*, os agentes precisam aprender através da interação com o ambiente, sem ter acesso a esse modelo completo, o que dizemos ser uma abordagem *model-free*.
 
 A distinção entre *Dynamic Programming* e *Reinforcement Learning* fica evidente na forma como as Equações de Bellman são utilizadas.
 
