@@ -13,17 +13,19 @@ rating: 5
 description: "Uma exploração detalhada da solução do Grid World usando Dynamic Programming, com implementação em C++ 20. "
 date: 2025-02-10T09:29:17.254Z
 preview: Descubra como resolver o Grid World usando *Dynamic Programming* e C++ 20. Um guia prático e matemático para entender a solução de MDPs, desde as equações de Bellman até a implementação computacional.
-keywords: Grid World *Reinforcement Learning* M*Dynamic Programming* Solution *Reinforcement Learning* Processo de Decisão de Markov Equações de Bellman Value Iteration Policy Iteration *Dynamic Programming* Dynamic Programming Política Ótima Optimal Policy
+keywords: Grid World *Reinforcement Learning* MDP Solution *Reinforcement Learning* Processo de Decisão de Markov Equações de Bellman Value Iteration Policy Iteration *Dynamic Programming* Dynamic Programming Política Ótima Optimal Policy
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-02-12T10:12:17.715Z
+lastmod: 2025-02-12T10:21:25.494Z
 draft: 2025-02-10T09:29:19.442Z
 ---
 
-Agora que formalizamos o **Grid World** como um *Processo de Decisão de Markov* (**M*Dynamic Programming***), podemos aplicar algoritmos de *Reinforcement Learning* (*Reinforcement Learning*) para encontrar a política ótima $\pi^\*$. *A política ótima é aquela que maximiza a recompensa total esperada a longo prazo para o agente*. Vamos explorar como a estrutura do **M*Dynamic Programming*** nos permite resolver o **Grid World**.
+[Agora que formalizamos](https://frankalcantara.com/um-mundo-em-uma-grade/) o **Grid World** como um *Processo de Decisão de Markov* (**MDP**), podemos aplicar algoritmos de *Reinforcement Learning* para encontrar a política ótima $\pi^\*$. *A política ótima é aquela que maximiza a recompensa total esperada a longo prazo para o agente*.
 
-## Formulação M*Dynamic Programming* do Grid World
+Para encontrar a política ótima, vamos dissecar a estrutura do **MDP** como ferramenta para resolver o **Grid World**.
+
+## Formulação MDP do Grid World
 
 Vamos dedicar um minuto, ou dez, para lembrar em que porto desta jornada estamos. Até agora definimos o seguinte:
 
@@ -93,11 +95,11 @@ A sagaz leitora será capaz de entender a revolução que Bellman iniciou com a 
 
 1. **Decomposição Recursiva**: A solução de um problema maior pode ser construída a partir das soluções de seus subproblemas. No contexto de **MDPs**, isso significa que podemos decompor o problema de encontrar uma política ótima em subproblemas menores para cada estado.
 
-2. **Memoização**: Ao resolver subproblemas, armazenamos suas soluções para evitar recálculos. Em termos de **MDPs**, isso se traduz em manter uma tabela de valores para cada estado.
+2. **Memoização**: Ao resolver subproblemas, armazenamos suas soluções para evitar cálculos repetidos. Em termos de **MDPs**, isso se traduz em manter uma tabela de valores para cada estado.
 
-3. **Propagação de Valor**: As soluções dos subproblemas são usadas para construir soluções para problemas maiores. Nos **MDPs**, isso corresponde à atualização iterativa dos valores dos estados.
+3. **Propagação de Valor**: As soluções dos subproblemas são usadas para construir soluções para problemas maiores. No **MDP**, isso corresponde à atualização iterativa dos valores dos estados.
 
-As **Equações de Bellman** *expressam a relação recursiva entre o valor de um estado e os valores de seus estados sucessores*. Existem duas formas principais da Equação de Bellman que nos interessam no momento:
+As **Equações de Bellman** *expressam a relação recursiva entre o valor de um estado e os valores de seus estados sucessores*. Existem duas formas principais da *Equação de Bellman* que interessam neste momento:
 
 1. **Equação de Bellman para a Função Valor-Estado $(V^\pi)$**:
 
@@ -202,7 +204,7 @@ Os dois algoritmos convergem para a política ótima $\pi^\*$, mas de maneiras d
 * a **Iteração de Valor** mantém apenas valores e deriva a política implicitamente;
 * a **Iteração de Política** mantém uma política explícita e a melhora iterativamente.
 
-Para o **Grid World**, a política ótima resultante nos dará, para cada célula, a direção que o agente deve seguir para maximizar sua recompensa esperada descontada.
+Para o **Grid World**, a política ótima resultante indicará, para cada célula, a direção que o agente deve seguir para maximizar sua recompensa esperada descontada.
 
 ### Exemplo Numérico Completo
 
