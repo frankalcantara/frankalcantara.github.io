@@ -20,7 +20,7 @@ keywords: ""
 toc: true
 published: false
 beforetoc: ""
-lastmod: 2025-02-12T01:41:10.202Z
+lastmod: 2025-02-15T23:17:04.855Z
 ---
 
 Neste artigo, a curiosa leitora irá enfrentar os Transformers. Nenhuma relação com o o Optimus Prime. Se for estes Transformers que está procurando, o Google falhou com você!
@@ -535,88 +535,358 @@ O algoritmo **Bag of Words (BoW)** surgiu da área de recuperação de informaç
 
 [^6]:SALTON, G.; WONG, A.; YANG, C. S. **A vector space model for automatic indexing**. Communications of the ACM, v. 18, n. 11, p. 613-620, 1975. Disponível em: https://apastyle.apa.org/blog/citing-online-works. Acesso em: [Data de acesso].
 
-Para entender o **BoW**, vamos considerar um conjunto de documentos, *corpus*,  $Docs = \{D_1, D_2, ..., D_N\}$.
-
-Para construir o **BoW**, o vetor que irá representar um documento do *corpus*, nossa primeira ação será construir um vocabulário global $V_{global}$ que conterá todas as palavras únicas que existem em todos os documentos de $Docs$.
-
-Para cada documento $D_i \in Docs$, a representação **BoW** é um vetor $\mathbf{bow}_{D_i}$ de tamanho $\mid V_{global}\mid $. Cada posição $j$ em $\mathbf{bow}_{D_i}$ corresponde à $j$-ésima palavra $w_j$ em $V_{global}$. Neste caso, estamos assumindo uma ordem fixa para $V_{global}$ e o valor na posição $j$ será a frequência da palavra $w_j$ no documento $D_i$, ou seja, $f(w_j, D_i)$.
-
-Usando o mesmo exemplo $D_1$: "O gato preto subiu no telhado. O gato dorme no telhado." e adicionando um segundo documento $D_2$: "O telhado é preto."
-
-O vocabulário global $V_{global}$ será dado pelo conjunto contendo a união das palavras únicas em $D_1$ e $D_2$:
-
-$V_{global} = \{ \text{"o"}, \text{"gato"}, \text{"preto"}, \text{"subiu"}, \text{"no"}, \text{"telhado"}, \text{"dorme"}, \text{"é"} \}$.
-
->No modelo **BoW**, a ordem alfabética do vocabulário **não é obrigatória**, mas é **recomendada** para padronização. A exigência é que a ordem de $V_{\text{global}}$ seja **fixa** e **consistente** para todos os documentos, garantindo que cada posição no vetor $\mathbf{bow}_{D_i}$ corresponda à mesma palavra.
-
-Ordenando $V_{global}$ alfabeticamente: $V'_{global} = \{ \text{"dorme"}, \text{"é"}, \text{"gato"}, \text{"no"}, \text{"o"}, \text{"preto"}, \text{"subiu"}, \text{"telhado"} \}$.
-
-As representações **BoW** para $D_1$ e $D_2$ seriam:
+Para entender o **BoW** matematicamente, vamos considerar um conjunto de documentos, *corpus*, $Docs = \{D_1, D_2, ..., D_N\}$. Para construir o **BoW**, nossa primeira ação será construir um vocabulário global $V_{global}$ que conterá todas as palavras únicas que existem em todos os documentos de $Docs$:
 
 $$
-\mathbf{bow}_{D_1} = \begin{bmatrix} 1 \\ 0 \\ 2 \\ 2 \\ 2 \\ 1 \\ 1 \\ 2 \end{bmatrix}
+V_{global} = \bigcup_{i=1}^N V_{D_i}
 $$
 
+onde $V_{D_i}$ é o vocabulário do documento $D_i$.
+
+Para cada documento $D_i \in Docs$, a representação **BoW** é um vetor $\mathbf{bow}_{D_i}$ de tamanho $|V_{global}|$. Cada posição $j$ em $\mathbf{bow}_{D_i}$ corresponde à $j$-ésima palavra $w_j$ em $V_{global}$, e o valor nessa posição será a frequência $f(w_j, D_i)$ da palavra no documento:
+
 $$
-\mathbf{bow}_{D_2} = \begin{bmatrix} 0 \\ 1 \\ 0 \\ 0 \\ 1 \\ 1 \\ 0 \\ 1 \end{bmatrix}
+\mathbf{bow}_{D_i} = [f(w_1, D_i), f(w_2, D_i), ..., f(w_{|V_{global}|}, D_i)]^T
 $$
 
-O **BoW** é simples de implementar e pode ser eficaz em diversas tarefas, como classificação de documentos. No entanto, ele tem algumas limitações. A principal é a perda da ordem das palavras, o que pode ser crucial para entender o significado em muitos contextos. Além disso, palavras muito frequentes, como artigos e preposições ("o", "a", "de", "em"), podem dominar a representação, mesmo que não sejam as mais relevantes para o conteúdo.
+Para ilustrar, considere um pequeno *corpus* com dois documentos:
+$D_1$: "O gato preto subiu no telhado"
+$D_2$: "O cachorro correu no gramado"
+
+O vocabulário global $V_{global}$ será:
+$$V_{global} = \{\text{"o"}, \text{"gato"}, \text{"preto"}, \text{"subiu"}, \text{"no"}, \text{"telhado"}, \text{"cachorro"}, \text{"correu"}, \text{"gramado"}\}$$
+
+Ordenando alfabeticamente (uma prática recomendada para padronização):
+$$V'_{global} = \{\text{"cachorro"}, \text{"correu"}, \text{"gato"}, \text{"gramado"}, \text{"no"}, \text{"o"}, \text{"preto"}, \text{"subiu"}, \text{"telhado"}\}$$
+
+Os vetores **BoW** para cada documento serão:
+
+$$
+\mathbf{bow}_{D_1} = \begin{bmatrix} 0 \\ 0 \\ 1 \\ 0 \\ 1 \\ 1 \\ 1 \\ 1 \\ 1 \end{bmatrix}
+\quad
+\mathbf{bow}_{D_2} = \begin{bmatrix} 1 \\ 1 \\ 0 \\ 1 \\ 1 \\ 1 \\ 0 \\ 0 \\ 0 \end{bmatrix}
+$$
+
+A atenta leitora deve observar que cada vetor $\mathbf{bow}_{D_i}$ reside no espaço vetorial inteiro $\mathbb{Z}^{|V_{global}|}$. Estes vetores tendem a ser esparsos, ou seja, a maioria de suas componentes é zero, especialmente quando o vocabulário global é grande.
+
+O **BoW** mantém todas as limitações da representação por frequência de termos que discutimos anteriormente:
+
+1. **Perda da ordem das palavras**: As frases "João ama Maria" e "Maria ama João" produzem exatamente o mesmo vetor **BoW**.
+
+2. **Ausência de relações semânticas**: As frases "O carro é veloz" e "O automóvel é rápido", embora semanticamente equivalentes, produzem vetores completamente diferentes.
+
+3. **Alta dimensionalidade**: Para um vocabulário de tamanho $|V_{global}|$, cada documento é representado em um espaço $\mathbb{R}^{|V_{global}|}$, levando a vetores extremamente esparsos.
+
+A sagaz leitora pode pensar que essas limitações tornam o **BoW** inútil. Contudo, apesar dessas limitações, o **BoW** é surpreendentemente eficaz em muitas tarefas de processamento de linguagem natural, especialmente quando combinado com outras técnicas que veremos adiante, como o **TF-IDF**.
 
 ### TF-IDF (Term Frequency-Inverse Document Frequency)
 
-Para mitigar o problema de palavras muito frequentes dominarem a representação em BoW, surge o **TF-IDF (Term Frequency-Inverse Document Frequency)**. TF-IDF é uma técnica que pondera a importância das palavras em um documento dentro de um *corpus* (conjunto de documentos) $Docs$.
+O **TF-IDF (Term Frequency-Inverse Document Frequency)** tem origem nos trabalhos de Sparck[^7] e Salton[^8] quase como uma evolução natural do modelo **BoW** com a intensão de resolver um dos seus problemas fundamentais: a dominância de palavras muito frequentes. O **TF-IDF** teve impacto significativo na área de recuperação de informação por conseguir ponderar a importância das palavras levando em consideração, além da frequência em um determinado documento, a raridade no *corpus*.
 
-TF-IDF calcula dois valores para cada palavra $w$ em um documento $D_i$:
+[^7]: SPARCK JONES, K. S. A statistical interpretation of term specificity and its application in retrieval. Journal of Documentation, v. 28, n. 1, p. 11–21, 1972.
 
-*   **Term Frequency (TF):**  É a frequência da palavra $w$ no documento $D_i$, normalizada pelo tamanho do documento. Uma forma comum de normalização é:
+[^8]: SALTON, G.; BUCKLEY, C. Term-weighting approaches in automatic text retrieval. Information Processing & Management, v. 24, n. 5, p. 513–523, 1988.
 
-    $$
-    \text{TF}(w, D_i) = \frac{f(w, D_i)}{\sum_{w' \in D_i} f(w', D_i)}
-    $$
+Formalmente, seja $Docs = \{D_1, D_2, ..., D_N\}$ um *corpus* com $N$ documentos. O **TF-IDF** combinará duas métricas complementares para cada palavra $w$ em um documento $D_i$. Da seguinte forma:
 
-    Onde $\sum_{w' \in D_i} f(w', D_i)$ é o número total de palavras no documento $D_i$.
+1. **Term Frequency (TF)**: captura a importância local da palavra no documento;
+2. **Inverse Document Frequency (IDF)**: mede a importância global da palavra no corpus.
 
-*   **Inverse Document Frequency (IDF):**  Mede a raridade de uma palavra $w$ no *corpus* $Docs$. É calculado como:
+Uma forma interessante de entender o **TF-IDF** é dividir o algoritmo em suas partes constituintes e entender cada parte em separado. Dividir para vencer!
 
-    $$
-    \text{IDF}(w, Docs) = \log \left( \frac{\mid Docs\mid }{\mid \{D_j \in Docs: w \in D_j\}\mid } \right)
-    $$
+#### Term Frequency (TF)
 
-    Onde $\mid Docs\mid $ é o número total de documentos no *corpus*, e $\mid \{D_j \in Docs: w \in D_j\}\mid $ é o número de documentos no *corpus* que contêm a palavra $w$. O logaritmo é usado para suavizar o efeito do IDF.
+O cálculo da frequência de termos, ou **Term Frequency (TF)**, pode ser realizado de diferentes maneiras, cada uma com suas próprias características e aplicações.
 
-O valor TF-IDF para uma palavra $w$ em um documento $D_i$ é então:
+A forma mais simples de calcular o **TF** é usar a frequência bruta, também chamada de contagem absoluta:
 
 $$
-\text{TF-IDF}(w, D_i) = \text{TF}(w, D_i) \times \text{IDF}(w, Docs)
+\text{TF}_{raw}(w, D_i) = f(w, D_i)
 $$
 
-Usando o mesmo exemplo $Docs = \{D_1, D_2\}$:
+Neste caso, $f(w, D_i)$ representa o número de vezes que a palavra $w$ aparece no documento $D_i$. Por exemplo, considere dois documentos:
+
+$D_1$: "O pequeno gato preto viu outro gato preto"
+$D_2$: "Gato"
+
+Para a palavra "gato", teríamos:
+
+- $\text{TF}_{raw}(\text{"gato"}, D_1) = 2$
+- $\text{TF}_{raw}(\text{"gato"}, D_2) = 1$
+
+A frequência bruta, embora simples, apresenta um problema: ela não considera o tamanho do documento. No exemplo acima, "gato" representa $100\%$ das palavras em $D_2$, mas apenas $25\%$ das palavras em $D_1$. A frequência bruta não consegue capturar essa diferença de importância relativa.
+
+Para resolver a limitação da frequência bruta, utilizamos a frequência normalizada:
+
+$$
+\text{TF}(w, D_i) = \frac{f(w, D_i)}{\sum_{w' \in D_i} f(w', D_i)}
+$$
+
+O denominador $\sum_{w' \in D_i} f(w', D_i)$ representa o número total de palavras no documento $D_i$. Usando o mesmo exemplo, teremos:
+
+Para $D_1$: "O pequeno gato preto viu outro gato preto" (8 palavras total)
+
+- $f(\text{"gato"}, D_1) = 2$
+- $\sum_{w' \in D_1} f(w', D_1) = 8$
+- $\text{TF}(\text{"gato"}, D_1) = \frac{2}{8} = 0.25$
+
+Para $D_2$: "Gato" (1 palavra total)
+
+- $f(\text{"gato"}, D_2) = 1$
+- $\sum_{w' \in D_2} f(w', D_1) = 1$
+- $\text{TF}(\text{"gato"}, D_2) = \frac{1}{1} = 1.0$
+
+A sagaz leitora pode ver que a frequência normalizada captura melhor a importância relativa da palavra em cada documento. Em $D_2$, "gato" tem frequência normalizada $1.0$, indicando que representa $100\%$ do documento, enquanto em $D_1$ tem frequência $0.25$, representando $25\%$ do documento.
+
+Além das frequências bruta e normalizada, existem outras formulações importantes do **TF**, criadas para resolver problemas específicos na representação de documentos.
+
+##### Frequência Logarítmica
+
+A frequência logarítmica é definida como:
+
+$$
+\text{TF}_{log}(w, D_i) = 1 + \log(f(w, D_i))
+$$
+
+Esta formulação é útil quando temos palavras com frequências muito diferentes em um mesmo documento. O logaritmo ajuda a *comprimir essas diferenças, evitando que palavras muito frequentes dominem completamente a representação*.
+
+Por exemplo, considere o documento: $D_1$: "O cachorro late. O cachorro corre. O cachorro pula. O gato dorme."
+
+Calculando **TF** para as palavras "cachorro" e "gato", teremos:
+
+- $f(\text{"cachorro"}, D_1) = 3$;
+- $f(\text{"gato"}, D_1) = 1$.
+
+Com frequência bruta, a diferença é $3:1$
+
+- $\text{TF}_{raw}(\text{"cachorro"}, D_1) = 3$;
+- $\text{TF}_{raw}(\text{"gato"}, D_1) = 1$.
+
+Com frequência logarítmica, a diferença é menor:
+
+- $\text{TF}_{log}(\text{"cachorro"}, D_1) = 1 + \log(3) \approx 1.48$;
+- $\text{TF}_{log}(\text{"gato"}, D_1) = 1 + \log(1) = 1$.
+
+A frequência logarítmica reduz a razão de $3:1$ para aproximadamente $1.48:1$, suavizando a dominância de "cachorro". A redução da razão de $3:1$ para $1.48:1$ através da transformação logarítmica é matematicamente significativa porque reflete melhor como os humanos processam informação linguística. Uma palavra que aparece $3$ vezes em um texto não é necessariamente $3$ vezes mais importante para o significado do documento do que uma palavra que aparece apenas uma vez.
+
+Esta propriedade de compressão do logaritmo é particularmente valiosa em processamento de linguagem natural porque segue a Lei de Weber-Fechner, que estabelece que a percepção humana de diferenças tende a ser logarítmica em relação ao estímulo real: da mesma forma que não percebemos uma luz com $300$ lumens como sendo 3 vezes mais brilhante que uma com $100$ lumens, também não interpretamos uma palavra que aparece $3$ vezes em um texto como tendo o triplo da importância semântica de uma palavra que aparece uma única vez.
+
+>A propriedade de compressão logarítmica, frequentemente utilizada em processamento de linguagem natural (PLN), encontra justificativa na **Lei de Weber-Fechner**. Esta lei psicofísica fundamental descreve a relação entre a magnitude física de um estímulo e a percepção humana da intensidade desse estímulo.
+>
+>Em essência, a Lei de Weber-Fechner postula que a percepção sensorial é proporcional ao logaritmo da intensidade real do estímulo. Matematicamente, isso pode ser expresso como:
+>
+>$$ P = k \cdot \log(S/S_0) $$
+>
+>Na qual, temos:
+>
+>*   $P$ representa a magnitude da percepção.
+>*   $S$ é a intensidade do estímulo.
+>*   $S_0$ é o limiar de detecção do estímulo (o menor estímulo>que pode ser percebido).
+>*   $k$ é uma constante de proporcionalidade, dependente do tipo de estímulo e da modalidade sensorial.
+>
+>A lei implica que a nossa percepção de mudanças em estímulos não é linear, mas sim logarítmica. Em vez de percebermos aumentos aritméticos na intensidade de um estímulo como aumentos lineares na percepção, percebemos aumentos geométricos como aumentos aritméticos.
+>
+>No contexto do PLN e, especificamente, no algoritmo TF-IDF, essa lei se torna relevante ao justificar a aplicação do logaritmo na frequência dos termos (TF) e na frequência inversa nos documentos (IDF). Assim como a percepção humana não escala linearmente com a intensidade da luz, também não interpretamos a importância de uma palavra em um texto de forma linear com sua frequência bruta.
+>
+>Por exemplo, conforme mencionado no texto, uma luz com $300$ lumens não é percebida como três vezes mais brilhante que uma com $100$ lumens. De maneira análoga, uma palavra que aparece $3$ vezes em um documento não é necessariamente considerada três vezes mais importante semanticamente do que uma palavra que aparece apenas uma vez. A aplicação do logaritmo na frequência dos termos e documentos no TF-IDF busca modelar essa percepção humana não linear da importância, dando menos peso a aumentos lineares na frequência e enfatizando a presença da palavra, mesmo que não seja extremamente frequente.
+>
+>Embora o trabalho de [Weber](https://www.britannica.com/biography/Ernst-Heinrich-Weber)[^9] tenha dado início a pequisas que levou a Lei Weber-Fechner. [Gustav Theodor Fechner](https://www.britannica.com/biography/Gustav-Fechner) expandiu e formalizou as ideias de [Ernst Heinrich Weber](https://www.britannica.com/biography/Ernst-Heinrich-Weber) em sua obra posterior[^10]. A formulação matemática mais completa e a denominação da lei são geralmente atribuídas a Fechner.
+>
+>Este princípio psicofísico, portanto, oferece uma base teórica para a utilização da compressão logarítmica em técnicas de PLN como TF-IDF, alinhando o processamento computacional de texto com a forma como os humanos percebem e interpretam a informação.
+
+[^9]WEBER, E. H. **De tactu: Annotationes anatomicae et physiologicae**. Lipsiae: Koehler, 1834.
+
+[^10]: FECHNER, G. T. **Elemente der Psychophysik.** Leipzig: Breitkopf und Härtel, 1860.
+
+##### Frequência Binária
+
+A frequência binária simplifica a representação para apenas presença ou ausência:
+
+$$
+\text{TF}_{binary}(w, D_i) = \begin{cases} 1 & \text{se } f(w, D_i) > 0 \\ 0 & \text{caso contrário} \end{cases}
+$$
+
+Esta formulação é útil quando a presença de uma palavra é mais importante que sua frequência. Por exemplo, quando estamos interessados na classificação de textos por tópicos ou na análise de palavras-chave.
+
+Para que a amável leitora entenda, considere dois documentos:
+
+* $D_1$: "Python é uma linguagem de programação. Python é versátil. Python é popular."
+* $D_2$: "Java é uma linguagem de programação."
+
+Se calcularmos **TF** a palavra "linguagem", teremos:
+
+- $\text{TF}_{raw}(\text{"linguagem"}, D_1) = 1$
+- $\text{TF}_{raw}(\text{"linguagem"}, D_2) = 1$
+- $\text{TF}_{binary}(\text{"linguagem"}, D_1) = 1$
+- $\text{TF}_{binary}(\text{"linguagem"}, D_2) = 1$
+
+Para a palavra "Python":
+
+- $\text{TF}_{raw}(\text{"Python"}, D_1) = 3$
+- $\text{TF}_{raw}(\text{"Python"}, D_2) = 0$
+- $\text{TF}_{binary}(\text{"Python"}, D_1) = 1$
+- $\text{TF}_{binary}(\text{"Python"}, D_2) = 0$
+
+A frequência binária indica apenas que $D_1$ é sobre Python e $D_2$ não é, ignorando a repetição da palavra.
+
+##### Frequência Aumentada (Augmented Frequency)
+
+A frequência aumentada é definida como:
+
+$$
+\text{TF}_{aug}(w, D_i) = 0.5 + 0.5 \times \frac{f(w, D_i)}{\max_{w' \in D_i} f(w', D_i)}
+$$
+
+Usamos esta fórmula quando queremos considerar a frequência relativa das palavras, mas evitar que documentos longos dominem apenas por seu tamanho. O termo $0.5$ garante um peso mínimo para qualquer palavra presente.
+
+Considere o documento: $D_1$: "O gato preto viu outro gato preto. O gato dormiu."
+
+Para este documento:
+
+- $f(\text{"gato"}, D_1) = 3$ (palavra mais frequente)
+- $f(\text{"preto"}, D_1) = 2$
+- $f(\text{"dormiu"}, D_1) = 1$
+
+Calculando $\text{TF}_{aug}$:
+
+- $\text{TF}_{aug}(\text{"gato"}, D_1) = 0.5 + 0.5 \times \frac{3}{3} = 1.0$
+- $\text{TF}_{aug}(\text{"preto"}, D_1) = 0.5 + 0.5 \times \frac{2}{3} \approx 0.83$
+- $\text{TF}_{aug}(\text{"dormiu"}, D_1) = 0.5 + 0.5 \times \frac{1}{3} \approx 0.67$
+
+Observe que mesmo "dormiu", que aparece apenas uma vez, recebe um peso considerável (0.67) devido ao termo base $0.5$.
+
+A frequência aumentada se destaca sistemas de recuperação de informação e mecanismos de busca onde temos documentos de tamanhos muito diferentes, como por exemplo, ao comparar artigos científicos com resumos ou *abstracts*. Ao utilizar a fórmula da frequência aumentada, garantimos que mesmo palavras que aparecem apenas uma vez ainda recebam um peso mínimo de $0.5$, enquanto a palavra mais frequente no documento recebe peso $1.0$, criando assim uma distribuição mais equilibrada que é especialmente valiosa quando precisamos comparar documentos de diferentes comprimentos ou quando queremos evitar que documentos longos dominem os resultados apenas por seu tamanho. Um problema comum em sistemas de busca acadêmica, bibliotecas digitais e bases de dados documentais, onde a variação no tamanho dos documentos pode ser significativa.
+
+##### Escolhendo a Formulação Adequada
+
+A escolha da formulação do TF deve considerar:
+
+1. **Natureza dos Documentos**:
+   - Documentos longos → Frequência normalizada ou aumentada;
+   - Documentos curtos → Frequência bruta pode ser adequada.
+
+2. **Objetivo da Análise**:
+   - Classificação de tópicos → Frequência binária;
+   - Recuperação de informação → Frequência logarítmica;
+   - Análise de similaridade → Frequência aumentada.
+
+3. **Características do Vocabulário**:
+   - Palavras com frequências muito diferentes → Frequência logarítmica;
+   - Palavras-chave importantes → Frequência binária ou aumentada.
+
+
+Além das quatro formas que estudamos ($\text{TF}_{raw}$, $\text{TF}_{log}$, $\text{TF}_{binary}$ e $\text{TF}_{aug}$), existem várias outras formulações para o cálculo do TF. Uma variação particularmente interessante é a frequência K-modificada, definida como:
+
+$$
+\text{TF}_{K}(w, D_i) = K + (1-K) \times \frac{f(w, D_i)}{\max_{w' \in D_i} f(w', D_i)}
+$$
+
+onde $K$ é um parâmetro ajustável entre 0 e 1. Observe que esta é uma generalização da frequência aumentada, que é um caso especial onde $K = 0.5$. Outra variação importante é a frequência logarítmica suavizada:
+
+$$
+\text{TF}_{log-smooth}(w, D_i) = \begin{cases} 1 + \log(1 + \log(f(w, D_i))) & \text{se } f(w, D_i) > 0 \\ 0 & \text{caso contrário} \end{cases}
+$$
+
+que aplica uma dupla transformação logarítmica para uma suavização ainda mais agressiva. Também existe a frequência normalizada por comprimento:
+
+$$
+\text{TF}_{length}(w, D_i) = \frac{f(w, D_i)}{\sqrt{\sum_{w' \in D_i} f(w', D_i)^2}}
+$$
+
+que usa a norma euclidiana do documento como fator de normalização, sendo particularmente útil quando trabalhamos com vetores em espaços de alta dimensão. A escolha entre estas diferentes formulações geralmente depende do domínio específico e das características do corpus, sendo comum em sistemas modernos o uso de várias formulações em conjunto, combinadas através de técnicas de *ensemble* ou votação ponderada.
+
+>Técnicas de *ensemble* e votação ponderada são métodos de combinação de diferentes abordagens para obter resultados mais robustos e confiáveis. Imagine um grupo de especialistas médicos analisando um caso complexo. Cada um tem sua expertise e perspectiva única, e a decisão final considera a opinião de todos, dando mais peso aos especialistas com mais experiência em aspectos específicos do caso. No contexto do **TF-IDF**, estas técnicas funcionam de maneira similar: diferentes fórmulas de **TF** são calculadas para o mesmo texto (como $\text{TF}_{log}$, $\text{TF}_{aug}$, etc.), e o resultado final é uma combinação ponderada desses valores. Por exemplo, podemos dar mais peso ao $\text{TF}_{aug}$ quando trabalhamos com documentos de tamanhos muito diferentes, e mais peso ao $\text{TF}_{log}$ quando lidamos com palavras de frequências muito variadas. Esta abordagem é particularmente poderosa porque combina as vantagens de diferentes formulações, compensando as limitações individuais de cada método e produzindo resultados mais estáveis e precisos em uma variedade maior de situações.
+>
+>Quase deixo passar! A palavra *ensemble* vem do francês e significa conjunto ou em conjunto. No contexto de análise de dados e aprendizado de máquina, uma técnica de *ensemble* refere-se a um método que combina múltiplos modelos ou abordagens diferentes para criar uma solução mais robusta.
+É como uma orquestra (que, não por coincidência, também usa a palavra ensemble). cada instrumento contribui com seu som único, e juntos criam uma música mais rica e complexa do que qualquer instrumento sozinho poderia produzir. Da mesma forma, quando falamos de *ensemble* no contexto do **TF-IDF**, estamos falando de combinar diferentes fórmulas de cálculo do *TF*, cada uma com suas características específicas, para obter um resultado mais preciso e confiável.
+
+A sagaz leitora deve experimentar diferentes formulações em seu conjunto de dados específico, avaliando o impacto de cada uma no desempenho final do seu sistema.
+
+#### Inverse Document Frequency (IDF)
+
+O cálculo do **IDF** será definido por:
+
+$$
+\text{IDF}(w, Docs) = \log \left( \frac{|Docs|}{|\{D_j \in Docs: w \in D_j\}|} \right)
+$$
+
+Neste caso, teremos:
+
+- $|Docs|$ é o número total de documentos;
+- $|\{D_j \in Docs: w \in D_j\}|$ é o número de documentos que contêm a palavra $w$.
+
+A função logarítmica serve para suavizar o efeito da divisão e para garantir que palavras muito comuns, presentes em quase todos os documentos, tenham **IDF** próximo de zero.
+
+#### Cálculo do TF-IDF
+
+A pontuação final TF-IDF é o produto das duas métricas:
+
+$$
+\text{TF-IDF}(w, D_i, Docs) = \text{TF}(w, D_i) \times \text{IDF}(w, Docs)
+$$
+
+Esta formulação tem propriedades matemáticas interessantes:
+
+1. Se uma palavra ocorre muito em um documento ($\text{TF}$ alto) mas é comum no corpus ($\text{IDF}$ baixo), sua pontuação TF-IDF será moderada
+2. Se uma palavra ocorre muito em um documento ($\text{TF}$ alto) e é rara no corpus ($\text{IDF}$ alto), sua pontuação TF-IDF será alta
+3. Se uma palavra ocorre pouco em um documento ($\text{TF}$ baixo), sua pontuação TF-IDF será baixa independentemente do $\text{IDF}$
+
+#### Exemplo Detalhado
+
+Vamos analisar um exemplo completo usando um pequeno corpus:
 $D_1$: "O gato preto subiu no telhado. O gato dorme no telhado."
 $D_2$: "O telhado é preto."
 
-Vocabulário global ordenado: $V'_{global} = \{ \text{"dorme"}, \text{"é"}, \text{"gato"}, \text{"no"}, \text{"o"}, \text{"preto"}, \text{"subiu"}, \text{"telhado"} \}$.
+Primeiro, definimos o vocabulário global ordenado:
+$$V'_{global} = \{ \text{"dorme"}, \text{"é"}, \text{"gato"}, \text{"no"}, \text{"o"}, \text{"preto"}, \text{"subiu"}, \text{"telhado"} \}$$
 
-Vamos calcular o TF-IDF para "gato" em $D_1$ e "é" em $D_2$.
+Agora, vamos calcular o TF-IDF para algumas palavras chave:
 
-Para "gato" em $D_1$:
-*   $f(\text{"gato"}, D_1) = 2$
-*   $\sum_{w' \in D_1} f(w', D_1) = 10$ (total de palavras em $D_1$)
-*   $\text{TF}(\text{"gato"}, D_1) = \frac{2}{10} = 0.2$
-*   $\mid \{D_j \in Docs: \text{"gato"} \in D_j\}\mid  = 1$ (apenas $D_1$ contém "gato")
-*   $\mid Docs\mid  = 2$
-*   $\text{IDF}(\text{"gato"}, Docs) = \log \left( \frac{2}{1} \right) = \log(2) \approx 0.301$ (usando log base 10)
-*   $\text{TF-IDF}(\text{"gato"}, D_1) = 0.2 \times 0.301 \approx 0.0602$
+**Para "gato" em $D_1$:**
+1. Cálculo do TF:
+   - $f(\text{"gato"}, D_1) = 2$ (frequência bruta)
+   - Total de palavras em $D_1 = 10$
+   - $\text{TF}(\text{"gato"}, D_1) = \frac{2}{10} = 0.2$
 
-Para "é" em $D_2$:
-*   $f(\text{"é"}, D_2) = 1$
-*   $\sum_{w' \in D_2} f(w', D_2) = 4$ (total de palavras em $D_2$)
-*   $\text{TF}(\text{"é"}, D_2) = \frac{1}{4} = 0.25$
-*   $\mid \{D_j \in Docs: \text{"é"} \in D_j\}\mid  = 1$ (apenas $D_2$ contém "é")
-*   $\text{IDF}(\text{"é"}, Docs) = \log \left( \frac{2}{1} \right) = \log(2) \approx 0.301$
-*   $\text{TF-IDF}(\text{"é"}, D_2) = 0.25 \times 0.301 \approx 0.07525$
+2. Cálculo do IDF:
+   - $|Docs| = 2$
+   - $|\{D_j \in Docs: \text{"gato"} \in D_j\}| = 1$
+   - $\text{IDF}(\text{"gato"}, Docs) = \log(\frac{2}{1}) \approx 0.301$
 
-Calculando TF-IDF para todas as palavras em todos os documentos, podemos construir matrizes TF-IDF que representam o corpus. TF-IDF é uma técnica poderosa para realçar palavras que são distintivas de um documento dentro de uma coleção, sendo amplamente utilizada em recuperação de informação e classificação de textos.
+3. TF-IDF final:
+   - $\text{TF-IDF}(\text{"gato"}, D_1) = 0.2 \times 0.301 \approx 0.0602$
+
+**Para "telhado" em $D_2$:**
+1. Cálculo do TF:
+   - $f(\text{"telhado"}, D_2) = 1$
+   - Total de palavras em $D_2 = 4$
+   - $\text{TF}(\text{"telhado"}, D_2) = \frac{1}{4} = 0.25$
+
+2. Cálculo do IDF:
+   - $|Docs| = 2$
+   - $|\{D_j \in Docs: \text{"telhado"} \in D_j\}| = 2$
+   - $\text{IDF}(\text{"telhado"}, Docs) = \log(\frac{2}{2}) = 0$
+
+3. TF-IDF final:
+   - $\text{TF-IDF}(\text{"telhado"}, D_2) = 0.25 \times 0 = 0$
+
+A sagaz leitora deve notar que "telhado" recebeu pontuação zero em $D_2$ porque aparece em todos os documentos do corpus, ilustrando como o TF-IDF penaliza palavras muito comuns.
+
+#### Representação Vetorial TF-IDF
+
+Para um documento $D_i$, podemos construir um vetor TF-IDF $\mathbf{tfidf}_{D_i} \in \mathbb{R}^{|V_{global}|}$:
+
+$$
+\mathbf{tfidf}_{D_i} = [\text{TF-IDF}(w_1, D_i), \text{TF-IDF}(w_2, D_i), ..., \text{TF-IDF}(w_{|V_{global}|}, D_i)]^T
+$$
+
+Esta representação vetorial é particularmente útil em:
+- Recuperação de informação
+- Classificação de documentos
+- Agrupamento de textos similares
+- Sistemas de recomendação baseados em conteúdo
+
+O TF-IDF resolve parcialmente o problema de palavras muito frequentes do BoW, mas ainda mantém algumas limitações, como a perda da ordem das palavras e das relações semânticas. Estas limitações motivaram o desenvolvimento de técnicas mais avançadas que veremos adiante.
 
 ### One-Hot Encoding
 
