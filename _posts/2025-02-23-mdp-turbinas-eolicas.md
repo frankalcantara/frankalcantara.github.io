@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "MDP: Casos Reais"
+title: "MDP: Casos Reais - Manutenção de Turbinas Eólicas"
 author: Frank
 categories:
   - artigo
@@ -22,8 +22,8 @@ keywords: Reinforcement Learning, Markov Decision Processes (MDP), Manutenção 
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-02-23T19:19:09.153Z
-slug: mdp-casos-reais
+lastmod: 2025-02-23T19:33:11.365Z
+slug: mdp-casos-reais-manutencao-de-turbinas-eolicas
 ---
 
 A curiosa leitora deve estar decepcionada. Quando comecei esta jornada eu prometi que estudaríamos Reinforcement Learning e, até agora, nada. Só o básico fundamental. Peço desculpas.
