@@ -3,15 +3,15 @@ layout: post
 title: "MDP: Casos Reais"
 author: frank
 categories:
-   - artigo
-   - Matemática
-   - Inteligência Artificial
+  - artigo
+  - Matemática
+  - Inteligência Artificial
 tags:
-   - algoritmos
-   - C++
-   - inteligência artificial
-   - resolução de problemas
-   - paradigmas de programação
+  - algoritmos
+  - C++
+  - inteligência artificial
+  - resolução de problemas
+  - paradigmas de programação
 image: assets/images/MDPT1.webp
 featured: false
 rating: 0
@@ -22,7 +22,7 @@ keywords: Reinforcement Learning, Markov Decision Processes (MDP), Manutenção 
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-02-23T14:39:02.736Z
+lastmod: 2025-02-23T14:45:27.170Z
 slug: mdp-casos-reais
 ---
 
