@@ -2,19 +2,28 @@
 layout: post
 title: "MDP: Casos Reais"
 author: frank
-categories: []
-tags: []
-image: ""
+categories:
+   - artigo
+   - Matemática
+   - Inteligência Artificial
+tags:
+   - algoritmos
+   - C++
+   - inteligência artificial
+   - resolução de problemas
+   - paradigmas de programação
+image: assets/images/MDPT1.webp
 featured: false
 rating: 0
-description: ""
-date: null
-preview: ""
-keywords: ""
-toc: false
-published: false
+description: Aplicação prática do MDP de um artigo científico, detalhado de forma didática. Muita matemática.
+date: 2025-02-23T14:35:42.669Z
+preview: Usando o MDP para resolver problemas da vida real. Neste caso um problema de manutenção de turbinas eólicas.
+keywords: Reinforcement Learning, Markov Decision Processes (MDP), Manutenção de Turbinas Eólicas, Manutenção Preditiva Industrial, General Electric (GE), Grid World, Otimização de Manutenção, Distribuição de Poisson, Equações de Bellman, Iteração de Valor, Iteração de Política, Custo de Manutenção, Turbinas Eólicas, Estados de Deterioração, Manutenção Preventiva, Manutenção Corretiva, Intervalos de Inspeção, Aplicações de MDP, Eficiência Industrial, Redução de Custos Operacionais
+toc: true
+published: true
 beforetoc: ""
-lastmod: 2025-02-21T21:20:41.763Z
+lastmod: 2025-02-23T14:39:02.736Z
+slug: mdp-casos-reais
 ---
 
 A curiosa leitora deve estar decepcionada. Quando comecei esta jornada eu prometi que estudaríamos Reinforcement Learning e, até agora, nada. Só o básico fundamental. Peço desculpas.
@@ -27,19 +36,31 @@ Pesquisando, encontrei alguns casos interessantes de aplicações de **MDP** em 
 
 Na indústria, a Manutenção Preditiva Industrial busca otimizar a manutenção de equipamentos, antecipando falhas e minimizando o tempo de inatividade. Em um cenário de **MDP**, os estados representam os diferentes níveis de desgaste de um equipamento. As ações incluem realizar manutenção, continuar a operação ou substituir uma peça. As recompensas são medidas em termos do balanço entre os custos de manutenção e o tempo de operação contínua.
 
-Este é um tema que tem impacto na eficiência do processo industrial e, consequentemente, na competitividade. Um caso real de matemática, ciência se usar o termo de forma geral, aplicada para impactar no mercado. O Artigo mais destacado neste tema destaca um caso emblemático envolvendo  a **General Electric (GE)**, que utiliza **MDPs** para otimizar a manutenção de turbinas eólicas, considerando fatores como desgaste, condições climáticas e demanda de energia[^1].
+Este é um tema que tem impacto na eficiência do processo industrial e, consequentemente, na competitividade. Um caso real de matemática, ciência se usar o termo de forma geral, aplicada para impactar no mercado. O artigo que apareceu de forma mais relevante nas duas buscas que fiz sobre o uso prático de **MDP** destaca um caso emblemático envolvendo  a **General Electric (GE)**, que utiliza **MDPs** *para otimizar a manutenção de turbinas eólicas, considerando fatores como desgaste, condições climáticas e demanda de energia*[^1].
 
 [^1]:WU, Yan-Ru; ZHAO, Hong-Shan. **Optimization Maintenance of Wind Turbines Using Markov Decision Processes**. Disponível em: https://www.researchgate.net/publication/241177157_Optimization_maintenance_of_wind_turbines_using_Markov_decision_processes. Acesso em: 12 fev. 2025.
 
 Este sistema permite à **GE** realizar manutenções de forma mais eficiente, prolongando a vida útil das turbinas e reduzindo custos operacionais.
 
-Não vou discutir o artigo. Vou transformar os dados do artigo em um exercícios de MDP e resolver, depois comparamos os nossos dados com os dados dos pesquisadores.
+O artigo "Optimization Maintenance of Wind Turbines Using Markov Decision Processes"[^1] utiliza o modelo *Semi-Markov Decision Process (**SMDP**)*. O **SMDP** é uma extensão do **Markov Decision Process (MDP)** que permite modelar sistemas onde o tempo gasto em cada estado segue uma distribuição de probabilidade arbitrária.
 
-> A sagaz leitora pode anotar essa ideia: a melhor forma, tanto para sociedade, quanto para você, de entender qualquer artigo científico é refazer a pesquisa ou, no mínimo, refazer todos os cálculos.
+### Diferenças entre MDP e SMDP
+
+| Característica | MDP | SMDP |
+|---|---|---|
+| Tempo de Transição | Fixo (discreto) | Distribuição de probabilidade arbitrária (contínuo) |
+| Ações | Tomadas em intervalos de tempo fixos | Tomadas em cada mudança de estado |
+| Modelagem de Manutenção | Menos adequado para problemas com tempos variáveis entre inspeções e ações de manutenção | Mais adequado para problemas com tempos variáveis entre inspeções e ações de manutenção |
+
+O artigo utiliza o modelo **SMDP** por ser mais adequado para capturar a natureza contínua e estocástica do processo de deterioração da caixa de engrenagens, além de permitir a otimização dos intervalos de inspeção e das ações de manutenção.
+
+Ainda assim, transformar os dados do artigo em um exercícios de **MDP** e tentar resolver de forma didática, comparando com o **Grid World**. Servirá como banho de vida real e introdução ao **SMDP**.
+
+>A sagaz leitora pode anotar essa ideia: a melhor forma, tanto para sociedade, quanto para você, de entender qualquer artigo científico é refazer a pesquisa ou, no mínimo, refazer todos os cálculos.
 
 ### Exercício: Manutenção Ótima de Turbinas Eólicas via MDP
 
-Uma empresa de energia eólica busca otimizar sua política de manutenção de [caixas de engrenagem](https://www.energy.gov/eere/wind/how-wind-turbine-works-text-version) (*gearboxes*) de turbinas eólicas usando **Processos de Decisão de Markov (MDP)**. Similar ao **Grid World**, onde um agente navega em uma grade buscando maximizar recompensas, *aqui temos um sistema que navega entre estados de deterioração buscando minimizar custos*.
+Uma empresa de energia eólica busca otimizar sua política de manutenção de [caixas de engrenagem](https://www.energy.gov/eere/wind/how-wind-turbine-works-text-version) (*gearboxes*) de turbinas eólicas usando **Processos de Decisão de Markov (MDP)**. Similar ao **Grid World**, no qual, um agente navega em uma grade buscando maximizar recompensas, *aqui temos um sistema que navega entre estados de deterioração buscando minimizar custos*.
 
 #### Construindo o Modelo
 
@@ -57,7 +78,7 @@ O sistema possui $7$ estados, mais simples que os $12$ estados que usamos no exe
 
 >No contexto de manutenção de turbinas eólicas, além da deterioração natural do equipamento, o modelo considera falhas aleatórias que podem ocorrer independentemente do estado de desgaste.
 >
->O artigo especifica uma taxa de falha aleatória $\lambda_0 = 0.0027$, equivalente a aproximadamente uma falha por ano.
+>O artigo[^1] especifica uma taxa de falha aleatória $\lambda_0 = 0.0027$, equivalente a aproximadamente uma falha por ano.
 >
 >A **distribuição de Poisson**[^2] é uma distribuição de probabilidade discreta que modela o número de eventos que ocorrem em um intervalo fixo de tempo ou espaço, sob as seguintes condições:
 >
@@ -173,7 +194,7 @@ A amável leitora deve considerar que, se não conhecemos a forma como o sistema
 
 No **Grid World** isso seria como se o agente só pudesse observar sua posição a cada $N$ passos aleatórios e o o agente pudesse cair em estados terminais negativos sem saber.
 
-Por isso os autores do artigo precisaram otimizar também o intervalo entre inspeções.
+Por isso os autores do artigo[^1] precisaram otimizar também o intervalo entre inspeções.
 
 ### Questões
 
@@ -183,7 +204,7 @@ Por isso os autores do artigo precisaram otimizar também o intervalo entre insp
    c) Identifique os estados terminais e suas características.
 
 2. **Equações de Bellman**
-   a) Escreva a equação para a função valor-estado $V^*(s)$;
+   a) Escreva a equação para a função valor-estado $V^{*}(s)$;
    b) Escreva a equação para a função valor-ação $Q^*(s,a)$;
    c) Como estas equações se comparam com as do Grid World?
 
@@ -205,7 +226,7 @@ Por isso os autores do artigo precisaram otimizar também o intervalo entre insp
    b) Analise como os diferentes custos influenciam a política ótima;
    c) Como a inclusão de falhas aleatórias afeta a solução comparada ao Grid World?
 
-## Dados para Verificação
+### Dados para Verificação
 
 Para validar sua solução, considere os seguintes pontos de verificação:
 
@@ -383,7 +404,7 @@ A função de recompensa total $R(s,a,s',t)$ é decomposta em custos imediatos e
 
 $$ C_{immediate}(s,a,s') = C_{insp}(s) + C_{ação}(a) + C_{falha}(s') $$
 
-Onde:
+Nesta equação temos:
 
 1. **Custo de Inspeção** $C_{insp}(s)$:
 
@@ -473,12 +494,12 @@ Ou, em outras palavras, a atenta leitora deve perceber que este exercício model
 
 Agora vamos resolver a Questão 2, que exige a formulação das equações de Bellman para este problema de manutenção de turbinas eólicas e uma comparação com o Grid World.
 
-### Equação para a Função Valor-Estado $V^*(s)$
+### Equação para a Função Valor-Estado $V^{*}(s)$
 
-A função valor-estado $V^*(s)$ representa o valor esperado de longo prazo (neste caso, custo mínimo) a partir do estado $s$, seguindo a política ótima $\pi^*$. Para um horizonte infinito com desconto, a equação de Bellman é dada por:
+A função valor-estado $V^{*}(s)$ representa o valor esperado de longo prazo (neste caso, custo mínimo) a partir do estado $s$, seguindo a política ótima $\pi^{*}$. Para um horizonte infinito com desconto, a equação de Bellman é dada por:
 
 $$
-V^*(s) = \min_{a \in A_s} \left[ R(s,a) + \gamma \sum_{s' \in S} P(s'|s,a) V^*(s') \right]
+V^{*}(s) = \min_{a \in A_s} \left[ R(s,a) + \gamma \sum_{s' \in S} P(s'|s,a) V^{*}(s') \right]
 $$
 
 Na qual, temos:
@@ -492,18 +513,18 @@ Na qual, temos:
 Para o problema que estamos estudando, como os intervalos de inspeção $t$ são variáveis otimizáveis, a equação se torna dependente de $t$:
 
 $$
-V^*(s) = \min_{a \in A_s, t \in T_s} \left[ R(s,a,t) + \gamma \sum_{s' \in S} P(s'|s,a) V^*(s') \right]
+V^{*}(s) = \min_{a \in A_s, t \in T_s} \left[ R(s,a,t) + \gamma \sum_{s' \in S} P(s'|s,a) V^{*}(s') \right]
 $$
 
-Neste caso, temo:
+Neste caso, temos:
 
-- $T_s$ é o conjunto de intervalos de inspeção possíveis (500h a 20.000h, discretizados em 20 intervalos);
+- $T_s$ é o conjunto de intervalos de inspeção possíveis ($500h$ a $20.000h$, discretizados em $20$ intervalos);
 - $R(s,a,t) = C_{insp}(s) + C_{ação}(a) + \sum_{s' \in S} P(s'|s,a) C_{falha}(s') + C_{estado}(s) \cdot t$.
 
 **Exemplo**: Para o estado $s=2$, com ações $\{NA, MM, PM\}$, a equação seria:
 
 $$
-V^*(2) = \min_{a \in \{NA, MM, PM\}, t \in T_2} \left[ R(2,a,t) + \gamma \sum_{s' \in \{1,2,3,7\}} P(s'|2,a) V^*(s') \right]
+V^{*}(2) = \min_{a \in \{NA, MM, PM\}, t \in T_2} \left[ R(2,a,t) + \gamma \sum_{s' \in \{1,2,3,7\}} P(s'|2,a) V^{*}(s') \right]
 $$
 
 ### Equação para a Função Valor-Ação $Q^*(s,a)$
@@ -511,19 +532,19 @@ $$
 A função valor-ação $Q^*(s,a)$ representa o custo esperado ao tomar a ação $a$ no estado $s$ e seguir a política ótima daí em diante. Ela é definida como:
 
 $$
-Q^*(s,a) = R(s,a) + \gamma \sum_{s' \in S} P(s'|s,a) V^*(s')
+Q^*(s,a) = R(s,a) + \gamma \sum_{s' \in S} P(s'|s,a) V^{*}(s')
 $$
 
 Incorporando o intervalo de inspeção $t$, temos:
 
 $$
-Q^*(s,a,t) = R(s,a,t) + \gamma \sum_{s' \in S} P(s'|s,a) V^*(s')
+Q^*(s,a,t) = R(s,a,t) + \gamma \sum_{s' \in S} P(s'|s,a) V^{*}(s')
 $$
 
 **Exemplo**: Para $s=2$ e $a=MM$, com um intervalo $t$ específico:
 
 $$
-Q^*(2,MM,t) = R(2,MM,t) + \gamma \left[ 0.7 V^*(1) + 0.2 V^*(2) + 0.1 V^*(3) \right]
+Q^*(2,MM,t) = R(2,MM,t) + \gamma \left[ 0.7 V^{*}(1) + 0.2 V^{*}(2) + 0.1 V^{*}(3) \right]
 $$
 
 Nesta equação temos:
@@ -531,10 +552,10 @@ Nesta equação temos:
 - $R(2,MM,t) = 200 + 3000 + 0 + 1000 \cdot t = 3200 + 1000t$ (sem custo de falha imediato);
 - $\gamma = 0.9$.
 
-A política ótima $\pi^*(s)$ será encontrada escolhendo a ação e intervalo que minimizam $Q^*$:
+A política ótima $\pi^{*}(s)$ será encontrada escolhendo a ação e intervalo que minimizam $Q^*$:
 
 $$
-\pi^*(s) = \arg\min_{a \in A_s, t \in T_s} Q^*(s,a,t)
+\pi^{*}(s) = \arg\min_{a \in A_s, t \in T_s} Q^*(s,a,t)
 $$
 
 ### Comparação com as Equações do Grid World
@@ -550,7 +571,7 @@ No **Grid World** apresentado nos artigos anteriores, as equações de Bellman s
 **Equação do Grid World**:
 
 $$
-V^*(s) = \max_{a \in A} \left[ R(s,a) + \gamma \sum_{s' \in S} P(s'|s,a) V^*(s') \right]
+V^{*}(s) = \max_{a \in A} \left[ R(s,a) + \gamma \sum_{s' \in S} P(s'|s,a) V^{*}(s') \right]
 $$
 
 Esta equação usa maximização (recompensas positivas) versus minimização aqui (custos negativos) e não inclui $t$, pois cada passo é uma decisão imediata.
@@ -563,7 +584,7 @@ A esforçada leitora deve atentar para o fato que, enquanto o **Grid World** é 
 
 ## Solução da Questão 3: Solução por Iteração de Valor
 
-Vamos resolver a Questão 3, que exige a aplicação do método de iteração de valor para encontrar a função valor-estado ótima $V^*(s)$ no problema de manutenção de turbinas eólicas. Este método atualiza iterativamente os valores de cada estado até convergir para a solução ótima, usando a equação de Bellman.
+Vamos resolver a Questão 3, que exige a aplicação do método de iteração de valor para encontrar a função valor-estado ótima $V^{*}(s)$ no problema de manutenção de turbinas eólicas. Este método atualiza iterativamente os valores de cada estado até convergir para a solução ótima, usando a equação de Bellman.
 
 ### Inicializar os Valores de Estado
 
@@ -596,7 +617,7 @@ $$
 Nesta equação temos:
 
 - $A_s$ é o conjunto de ações disponíveis no estado $s$ ($\{NA\}$ para $s=1$, $\{NA, MM, PM\}$ para $s=2,3,4,5$, $\{CM\}$ para $s=6,7$);
-- $T_s$ é o conjunto de intervalos de inspeção (500h a 20.000h, discretizados em 20 intervalos de 975h cada);
+- $T_s$ é o conjunto de intervalos de inspeção ($500h$ a $20.000h$, discretizados em 20 intervalos de 975h cada);
 - $R(s,a,t) = C_{insp}(s) + C_{ação}(a) + \sum_{s' \in S} P(s'|s,a) C_{falha}(s') + C_{estado}(s) \cdot t$;
 - $\gamma = 0.9$ é o fator de desconto;
 - $P(s'|s,a)$ é a probabilidade de transição definida nas matrizes da Questão 1.
@@ -630,20 +651,20 @@ $$
 R(1,NA,t) = C_{insp}(1) + C_{ação}(NA) + \sum_{s' \in S} P(s'|1,NA) C_{falha}(s') + C_{estado}(1) \cdot t
 $$
 
-- $C_{insp}(1) = €200$ (custo de inspeção para estados não terminais);
-- $C_{ação}(NA) = €0$ (nenhuma ação não tem custo);
+- $C_{insp}(1) = 200$ (custo de inspeção para estados não terminais);
+- $C_{ação}(NA) = 0$ (nenhuma ação não tem custo);
 - $C_{falha}(s')$:
-  - $C_{falha}(1) = €0$ (sem falha);
-  - $C_{falha}(2) = €0$ (sem falha);
-  - $C_{falha}(7) = €180.000$ (falha aleatória);
-  - $\sum_{s' \in S} P(s'|1,NA) C_{falha}(s') = 0.9961 \cdot 0 + 0.0012 \cdot 0 + 0.0027 \cdot 180000 = 0 + 0 + 486 = €486$;
-- $C_{estado}(1) = €1.000/h$ (custo por hora em estado não detectado);
+  - $C_{falha}(1) = 0$ (sem falha);
+  - $C_{falha}(2) = 0$ (sem falha);
+  - $C_{falha}(7) = 180.000$ (falha aleatória);
+  - $\sum_{s' \in S} P(s'|1,NA) C_{falha}(s') = 0.9961 \cdot 0 + 0.0012 \cdot 0 + 0.0027 \cdot 180000 = 0 + 0 + 486 = 486$;
+- $C_{estado}(1) = 1.000/h$ (custo por hora em estado não detectado);
 - $t = 500h$;
 
 Substituímos:
 
 $$
-R(1,NA,500) = 200 + 0 + 486 + 1000 \cdot 500 = 200 + 486 + 500000 = €500686
+R(1,NA,500) = 200 + 0 + 486 + 1000 \cdot 500 = 200 + 486 + 500000 = 500686
 $$
 
 #### Passo 3: Calcular o Termo de Desconto
@@ -677,25 +698,27 @@ $$
 Substituímos:
 
 $$
-V_1(1) = 500686 + 0 = €500686
+V_1(1) = 500686 + 0 = 500686
 $$
 
 #### Passo 5: Reflexão
 
-O valor $V_1(1) = €500686$ reflete o custo esperado na primeira iteração para $t = 500h$. Este valor é alto devido ao termo $C_{estado}(1) \cdot t = €500000$, que representa o custo de permanecer no estado sem detecção por 500 horas. Na prática, precisaríamos testar todos os $t \in T_s$ ($500h$, $1475h$, $...$, $20.000h$) e escolher o mínimo, mas para exemplificar a primeira iteração, usamos $t = 500h$.
+O valor $V_1(1) = 500686$ reflete o custo esperado na primeira iteração para $t = 500h$. Este valor é alto devido ao termo $C_{estado}(1) \cdot t = 500000$, que representa o custo de permanecer no estado sem detecção por 500 horas. Na prática, precisaríamos testar todos os $t \in T_s$ ($500h$, $1475h$, $...$, $20.000h$) e escolher o mínimo, mas para exemplificar a primeira iteração, usamos $t = 500h$.
 
 Para ilustrar, se usarmos $t = 2000h$:
 
-- $R(1,NA,2000) = 200 + 0 + 486 + 1000 \cdot 2000 = 200 + 486 + 2000000 = €2000686$;
-- $V_1(1) = €2000686$.
+- $R(1,NA,2000) = 200 + 0 + 486 + 1000 \cdot 2000 = 200 + 486 + 2000000 = 2000686$;
+- $V_1(1) = 2000686$.
 
 O valor aumenta com $t$, sugerindo que intervalos menores podem ser preferíveis inicialmente. Nas iterações seguintes, os valores $V_k(s')$ não serão mais zero, afetando a decisão.
 
 A perspicaz leitora deve notar que a iteração de valor exige calcular $V_1(s)$ para todos os estados ($s=2$ a $s=7$), considerando todas as ações e intervalos possíveis. Aqui, focamos em $s=1$ para a primeira iteração, como pedido. O processo completo convergiria após cerca de $4$ iterações, conforme os dados de verificação, com um custo médio ótimo esperado de $2.113/h$, muito menor que esses valores iniciais, indicando a necessidade de otimizar $t$ e as ações nas próximas iterações.
 
+>Neste exemplo, fixamos $t=500h$, mas o modelo exige testar todos os $t \in [500h,20.000h]$ discretizados. Talvez possamos fazer isso, mais tarde, usando C++ 23.
+
 ## Solução da Questão 4: Solução por Iteração de Política
 
-Vamos resolver a Questão 4, que exige o uso do método de iteração de política para determinar a política ótima $\pi^*(s)$ no problema de manutenção de turbinas eólicas. Este método alterna entre avaliação de política e melhoria de política até convergir para a solução ótima, considerando ações e intervalos de inspeção.
+Vamos resolver a Questão 4, que exige o uso do método de iteração de política para determinar a política ótima $\pi^{*}(s)$ no problema de manutenção de turbinas eólicas. Este método alterna entre avaliação de política e melhoria de política até convergir para a solução ótima, considerando ações e intervalos de inspeção.
 
 ###  Definir uma Política Inicial
 
@@ -705,7 +728,7 @@ No método de iteração de política, começamos com uma política inicial arbi
 - Para $s = 2, 3, 4, 5$: $\pi_0(s) = (MM, 500h)$ (manutenção menor, inspeção frequente);
 - Para $s = 6, 7$: $\pi_0(s) = (CM, 500h)$ (manutenção corretiva, inspeção após reparo).
 
-Escolhemos $t = 500h$ (o intervalo mínimo) para garantir observações frequentes no início. A tabela da política inicial é:
+Escolhemos $t = 500h$ (o intervalo mínimo) para garantir observações frequentes no início. A tabela da política inicial será dada por:
 
 | Estado | Ação | Intervalo de Inspeção |
 |--------|------|-----------------------|
@@ -719,7 +742,7 @@ Escolhemos $t = 500h$ (o intervalo mínimo) para garantir observações frequent
 
 A sagaz leitora deve notar que esta é uma escolha inicial simples, e o método ajustará a política nas iterações seguintes.
 
-### 4.b) Realizar a Avaliação de Política
+### Realizar a Avaliação de Política
 
 Na avaliação de política, calculamos os valores $V^{\pi_0}(s)$ para cada estado $s$ sob a política $\pi_0$, resolvendo o sistema de equações lineares derivado da equação de Bellman para uma política fixa:
 
@@ -727,8 +750,9 @@ $$
 V^{\pi_0}(s) = R(s, \pi_0(s), t) + \gamma \sum_{s' \in S} P(s'|s, \pi_0(s)) V^{\pi_0}(s')
 $$
 
-Onde:
-- $R(s, a, t)$ é a recompensa (custo) definida na Questão 1;
+Nesta equação temos:
+
+- $R(s, a, t)$ representa a recompensa, custo, definida na Questão 1;
 - $\gamma = 0.9$ é o fator de desconto;
 - $P(s'|s, a)$ vem das matrizes de transição da Questão 1;
 - $t = 500h$ conforme $\pi_0$.
@@ -737,11 +761,11 @@ Para simplificar, vamos calcular $V^{\pi_0}(1)$ como exemplo (estado perfeito):
 
 - $\pi_0(1) = (NA, 500h)$;
 - $R(1, NA, 500) = C_{insp}(1) + C_{ação}(NA) + \sum_{s' \in S} P(s'|1, NA) C_{falha}(s') + C_{estado}(1) \cdot 500$;
-  - $C_{insp}(1) = €200$;
-  - $C_{ação}(NA) = €0$;
-  - $\sum_{s' \in S} P(s'|1, NA) C_{falha}(s') = 0.9961 \cdot 0 + 0.0012 \cdot 0 + 0.0027 \cdot 180000 = €486$ (ver Questão 3);
-  - $C_{estado}(1) \cdot 500 = 1000 \cdot 500 = €500000$;
-  - $R(1, NA, 500) = 200 + 0 + 486 + 500000 = €500686$.
+  - $C_{insp}(1) = 200$;
+  - $C_{ação}(NA) = 0$;
+  - $\sum_{s' \in S} P(s'|1, NA) C_{falha}(s') = 0.9961 \cdot 0 + 0.0012 \cdot 0 + 0.0027 \cdot 180000 = 486$ (ver Questão 3);
+  - $C_{estado}(1) \cdot 500 = 1000 \cdot 500 = 500000$;
+  - $R(1, NA, 500) = 200 + 0 + 486 + 500000 = 500686$.
 
 A equação torna-se:
 
@@ -749,7 +773,7 @@ $$
 V^{\pi_0}(1) = 500686 + 0.9 \left[ 0.9961 V^{\pi_0}(1) + 0.0012 V^{\pi_0}(2) + 0.0027 V^{\pi_0}(7) \right]
 $$
 
-Para resolver, precisamos de $V^{\pi_0}(s)$ para todos os estados, formando um sistema de 7 equações. Na prática, isso é feito numericamente, mas para fins didáticos, isolamos $V^{\pi_0}(1)$ assumindo valores iniciais (e.g., $V^{\pi_0}(s) = 0$ para $s \neq 1$ como aproximação inicial):
+Para resolver, precisamos de $V^{\pi_0}(s)$ para todos os estados, formando um sistema de 7 equações. Na prática, usamos técnicas numéricas, mas para fins didáticos, isolamos $V^{\pi_0}(1)$ assumindo valores iniciais, por exemplo: $V^{\pi_0}(s) = 0$ para $s \neq 1$ como aproximação inicial:
 
 $$
 V^{\pi_0}(1) = 500686 + 0.9 \cdot 0.9961 V^{\pi_0}(1)
@@ -764,12 +788,12 @@ $$
 $$
 
 $$
-V^{\pi_0}(1) = \frac{500686}{0.10351} \approx €4837106
+V^{\pi_0}(1) = \frac{500686}{0.10351} \approx 4837106
 $$
 
 Esse valor é aproximado e alto devido à simplificação (ignoramos $V^{\pi_0}(2)$ e $V^{\pi_0}(7)$). Na avaliação completa, resolveríamos o sistema inteiro.
 
-### 4.c) Executar a Melhoria de Política
+### Executar a Melhoria de Política
 
 Na melhoria de política, atualizamos $\pi_1(s)$ escolhendo a ação e intervalo que minimizam o custo esperado com base nos valores $V^{\pi_0}(s)$:
 
@@ -777,101 +801,122 @@ $$
 \pi_1(s) = \arg\min_{a \in A_s, t \in T_s} \left[ R(s, a, t) + \gamma \sum_{s' \in S} P(s'|s, a) V^{\pi_0}(s') \right]
 $$
 
-Para $s=1$, testamos $NA$ com diferentes $t$ (e.g., 500h, 2000h):
+Para $s=1$, testamos $NA$ com diferentes $t$, por exemplo: $500h$, $2000h$:
 
-- $t = 500h$: $R(1, NA, 500) + 0.9 \cdot [0.9961 \cdot 4837106 + 0] \approx €500686 + €4333955 = €4834641$;
-- $t = 2000h$: $R(1, NA, 2000) = 200 + 486 + 1000 \cdot 2000 = €2000686$;
-  - $2000686 + 0.9 \cdot 0.9961 \cdot 4837106 \approx €2000686 + €4333955 = €6334641$.
+- $t = 500h$: $R(1, NA, 500) + 0.9 \cdot [0.9961 \cdot 4837106 + 0] \approx 500686 + 4333955 = 4834641$;
+- $t = 2000h$: $R(1, NA, 2000) = 200 + 486 + 1000 \cdot 2000 = 2000686$;
+  - $2000686 + 0.9 \cdot 0.9961 \cdot 4837106 \approx 2000686 + 4333955 = 6334641$.
 
 O custo com $t = 500h$ é menor, então $\pi_1(1) = (NA, 500h)$ inicialmente. Para $s=2$, testaríamos $NA$, $MM$, $PM$ com vários $t$, escolhendo o menor custo. Repetimos para todos os estados.
 
-### 4.d) Comparação da Convergência com o Caso do Grid World
+### Comparação da Convergência com o Caso do Grid World
 
-No **Grid World**, a iteração de política converge rapidamente (geralmente em poucas iterações) devido a:
-- **Ambiente Simples**: Estados limitados (e.g., 12), ações determinísticas (movimentos), recompensas fixas (-1 por passo, +1 ou -1 nos terminais);
-- **Observabilidade Total**: O agente sabe seu estado a cada passo, sem intervalos de inspeção;
-- **Horizonte Finito**: Termina ao alcançar estados terminais.
+1. **No Grid World**, a iteração de política converge rapidamente (geralmente em poucas iterações) devido a:
 
-Aqui:
-- **Complexidade Maior**: 7 estados, mas ações com probabilidades (e.g., $MM$: 0.7 para 1, 0.2 para 2, 0.1 para 3) e otimização de $t$ (20 opções);
-- **Observabilidade Parcial**: Intervalos de inspeção $t$ aumentam o espaço de decisão;
-- **Horizonte Infinito**: Usa desconto ($\gamma = 0.9$), requerendo mais iterações para estabilizar custos altos.
+- **Ambiente Simples**: estados limitados, por exemplo: $12$; ações determinísticas, movimentos; recompensas fixas, $-1$ por passo, $+1$ ou $-1$ nos terminais;
+- **Observabilidade Total**: o agente sabe seu estado a cada passo, sem intervalos de inspeção;
+- **Horizonte Finito**: termina ao alcançar estados terminais.
 
-Os dados de verificação indicam convergência em 4 iterações com custo médio de €2.113/h, sugerindo que, apesar da complexidade, o problema converge em um número similar ao **Grid World** para políticas iniciais razoáveis. A incerteza (falhas Poisson) e custos variáveis tornam a convergência mais sensível à política inicial aqui.
+2. **Nesse exercício**:
 
-A dedicada leitora deve perceber que a iteração de política é mais trabalhosa neste caso, mas oferece uma abordagem prática para otimizar manutenção, ajustando ações e intervalos dinamicamente.
+- **Complexidade Maior**: $7$ estados, mas ações com probabilidades, por exemplo: $MM$: 0.7 para $1$, $0.2$ para $2$, $0.1$ para $3$ e otimização de $t$, com $20$ opções;
+- **Observabilidade Parcial**: intervalos de inspeção $t$ aumentam o espaço de decisão;
+- **Horizonte Infinito**: usamos desconto ($\gamma = 0.9$), requerendo mais iterações para estabilizar custos altos.
+
+Os dados de verificação indicam convergência em $4$ iterações com custo médio de $2.113/h$, sugerindo que, apesar da complexidade, o problema converge em um número similar ao **Grid World** para políticas iniciais razoáveis. A incerteza, definida por falhas que seguem a distribuição de Poisson, e custos variáveis tornam a convergência mais sensível à política inicial.
+
+A dedicada leitora deve perceber que a iteração de política é mais trabalhosa neste caso, mas oferece uma abordagem próxima a realidade prática para otimizar manutenção, ajustando ações e intervalos dinamicamente.
 
 ## Solução da Questão 5: Análise de Resultados
 
 Vamos resolver a Questão 5, que exige a análise da política ótima encontrada, comparando-a com estratégias fixas, avaliando a influência dos custos e examinando o impacto das falhas aleatórias em relação ao **Grid World**.
 
-### 5.a) Compare a Política Ótima Encontrada com Manutenção Preventiva a Cada 2.500h (€6.38/h) e 5.000h (€4.84/h)
+### Compare a Política Ótima Encontrada com Manutenção Preventiva a Cada 2.500h (6.38/h) e 5.000h (4.84/h)
 
-Para realizar essa comparação, usamos os dados de verificação fornecidos: o custo médio ótimo esperado da política encontrada por MDP é €2.113/h, obtido após cerca de 4 iterações (ver Questões 3 e 4). As estratégias fixas são:
+Para realizar essa comparação, usamos os dados de verificação fornecidos: o custo médio ótimo esperado da política encontrada por MDP é 2.113/h, obtido após cerca de 4 iterações (ver Questões 3 e 4). As estratégias fixas são:
 
-- **Manutenção preventiva a cada 2.500h**: Custo médio de €6.38/h;
-- **Manutenção preventiva a cada 5.000h**: Custo médio de €4.84/h.
+- **Manutenção preventiva a cada 2.500h**: Custo médio de 6.38/h;
+- **Manutenção preventiva a cada 5.000h**: Custo médio de 4.84/h.
 
 #### Comparação Numérica
-- **Política Ótima (MDP)**: €2.113/h;
-- **PM a cada 2.500h**: €6.38/h;
-  - Diferença: $6.38 - 2.113 = €4.267/h$;
+- **Política Ótima (MDP)**: $2.113/h$;
+- **PM a cada 2.500h**: $6.38/h$;
+  - Diferença: $6.38 - 2.113 = 4.267/h$;
   - Redução percentual: $\frac{4.267}{6.38} \approx 66.9\%$;
-- **PM a cada 5.000h**: €4.84/h;
-  - Diferença: $4.84 - 2.113 = €2.727/h$;
+- **PM a cada 5.000h**: $4.84/h$;
+  - Diferença: $4.84 - 2.113 = 2.727/h$;
   - Redução percentual: $\frac{2.727}{4.84} \approx 56.3\%$.
 
 #### Interpretação
 A política ótima reduz significativamente os custos em comparação com as estratégias fixas:
-- **Versus 2.500h**: Uma redução de 66.9% mostra que inspeções e manutenções frequentes (a cada 2.500h) geram custos altos desnecessários, possivelmente devido a intervenções excessivas em estados de baixo desgaste.
+
+- **Versus 2.500h**: uma redução de 66.9% mostra que inspeções e manutenções frequentes (a cada 2.500h) geram custos altos desnecessários, possivelmente devido a intervenções excessivas em estados de baixo desgaste.
 - **Versus 5.000h**: Uma redução de 56.3% indica que intervalos mais longos diminuem os custos de intervenção, mas ainda não otimizam tão bem quanto o MDP, que ajusta ações e intervalos dinamicamente.
 
-A política ótima, conforme o artigo, usa uma combinação de $NA$, $MM$, $PM$, e $CM$ com intervalos variáveis (e.g., 10685h para $s=1$, 10815h para $s=2$, ver artigo), evitando manutenções desnecessárias e minimizando o impacto de falhas.
+A política ótima, conforme o artigo[^1], usa uma combinação de $NA$, $MM$, $PM$, e $CM$ com intervalos variáveis, por exemplo: $10685h$ para $s=1$, 10815h para $s=2$, evitando manutenções desnecessárias e minimizando o impacto de falhas.
 
-### 5.b) Analise Como os Diferentes Custos Influenciam a Política Ótima
+### Analise Como os Diferentes Custos Influenciam a Política Ótima
 
 Os custos definidos no modelo afetam diretamente a política ótima. Vamos analisar cada componente:
 
-- **Custo de Inspeção (€200)**: 
-  - Baixo em relação a outros custos, incentivando inspeções frequentes em estados iniciais (e.g., $s=1$) para evitar falhas não detectadas. Um aumento para €1000, por exemplo, poderia levar a intervalos maiores ($t$), reduzindo inspeções.
-- **Custo de Manutenção Menor ($MM$, €3.000)**:
-  - Moderado, tornando $MM$ atrativo em estados intermediários (e.g., $s=2, 3$). Se fosse mais caro (e.g., €10.000), a política favoreceria $NA$ ou $PM$.
-- **Custo de Manutenção Preventiva ($PM$, €7.500)**:
-  - Mais alto que $MM$, mas eficaz para estados avançados (e.g., $s=4, 5$), pois retorna ao estado perfeito com alta probabilidade (0.9). Um custo menor (e.g., €5.000) poderia aumentar seu uso em estados anteriores.
-- **Custo de Manutenção Corretiva ($CM$, €150.000)**:
-  - Extremamente alto, restrito a estados de falha ($s=6, 7$). Uma redução (e.g., €50.000) poderia não alterar a política, pois $CM$ é inevitável após falhas.
-- **Custo de Falha (€180.000)**:
-  - Alto, penalizando transições para $s=6$ ou $s=7$. Um custo menor (e.g., €50.000) aumentaria a tolerância a falhas, possivelmente favorecendo $NA$ por mais tempo.
-- **Custo de Estado Não Detectado (€1.000/h)**:
-  - Domina os custos totais para intervalos longos (e.g., €500.000 para $t=500h$). Se reduzido (e.g., €100/h), intervalos maiores seriam preferidos, alterando $t$ na política ótima.
+- **Custo de Inspeção (200)**:
+
+  - baixo em relação a outros custos, incentivando inspeções frequentes em estados iniciais para evitar falhas não detectadas. Um aumento para 1000, por exemplo, poderia levar a intervalos maiores ($t$), reduzindo inspeções.
+
+- **Custo de Manutenção Menor ($MM$, 3.000)**:
+  
+  - moderado, tornando $MM$ atrativo em estados intermediários. Se fosse mais caro, a política favoreceria $NA$ ou $PM$.
+
+- **Custo de Manutenção Preventiva ($PM$, 7.500)**:
+
+  - mais alto que $MM$, mas eficaz para estados avançados, pois retorna ao estado perfeito com alta probabilidade, $0.9$. Um custo menor, por exemplo: $5.000$, poderia aumentar seu uso em estados anteriores.
+  
+- **Custo de Manutenção Corretiva ($CM$, 150.000)**:
+
+  - extremamente alto, restrito a estados de falha. Uma redução poderia não alterar a política, pois $CM$ é inevitável após falhas.
+
+- **Custo de Falha (180.000)**:
+
+  - alto, penalizando transições para $s=6$ ou $s=7$. Um custo menor aumentaria a tolerância a falhas, possivelmente favorecendo $NA$ por mais tempo.
+
+- **Custo de Estado Não Detectado (1.000/h)**:
+
+  - domina os custos totais para intervalos longos. Se reduzido, intervalos maiores seriam preferidos, alterando $t$ na política ótima.
 
 #### Exemplo Prático
-Para $s=2$, com $\pi^*(2) = (MM, 10815h)$ (baseado no artigo):
-- $R(2, MM, 10815) = 200 + 3000 + 0 + 1000 \cdot 10815 = €10818200$;
-- Um custo de estado menor (€100/h) reduziria $R$ para €1083200, possivelmente tornando $t = 20000h$ mais atrativo.
+
+Para $s=2$, com $\pi^{*}(2) = (MM, 10815h)$ (baseado no artigo[^1]):
+
+- $R(2, MM, 10815) = 200 + 3000 + 0 + 1000 \cdot 10815 = 10818200$;
+- Um custo de estado menor (100/h) reduziria $R$ para 1083200, possivelmente tornando $t = 20000h$ mais atrativo.
 
 A política ótima equilibra esses custos, escolhendo ações e $t$ que minimizam o impacto de falhas caras enquanto controlam os custos de intervenção e inspeção.
 
-### 5.c) Como a Inclusão de Falhas Aleatórias Afeta a Solução Comparada ao Grid World?
+### Como a Inclusão de Falhas Aleatórias Afeta a Solução Comparada ao Grid World?
 
-No **Grid World**, a solução é deterministicamente previsível:
-- **Sem Falhas Aleatórias**: Transições dependem apenas da ação (e.g., mover norte leva ao estado ao norte com probabilidade 1, exceto por limites);
-- **Recompensas Fixas**: -1 por passo, +1 ou -1 nos terminais;
-- **Horizonte Finito**: Termina ao atingir estados terminais, sem incertezas contínuas.
+No **Grid World**, a solução é deterministicamente previsível. Não existem falhas aleatórias. Transições dependem apenas da ação. Por exemplo: mover norte leva ao estado ao norte com probabilidade $1$, exceto por limites. Existe um conjunto de recompensas fixas, à saber: $-1$ por passo, $+1$ ou $-1$ nos terminais. Finalmente, no **Grid World** contamos com um *horizonte finito*. A análise termina ao atingir estados terminais, sem incertezas contínuas.
 
-Neste problema de turbinas:
-- **Falhas Aleatórias (Poisson, $\lambda_0 = 0.0027$)**:
-  - Introduzem uma probabilidade de transição para $s=7$ (falha aleatória) em todos os estados não terminais, independentemente da ação (e.g., $P(7|1, NA) = 0.0027$). Isso adiciona risco constante, ausente no **Grid World**.
-- **Impacto nos Custos**:
-  - O custo de falha (€180.000) associado a $s=7$ aumenta o valor esperado de $R(s,a,t)$ (e.g., €486 para $s=1$, $NA$). No **Grid World**, penalidades são pequenas e previsíveis.
-- **Observabilidade Parcial**:
-  - As falhas podem ocorrer entre inspeções, exigindo otimização de $t$. No **Grid World**, o agente sabe seu estado a cada passo, eliminando essa incerteza.
-- **Horizonte Infinito**:
-  - O desconto ($\gamma = 0.9$) reflete operação contínua, contrastando com o fim abrupto do **Grid World**. Falhas aleatórias acumulam custos ao longo do tempo.
+Neste problema de turbinas, começamos com falhas aleatória,  distribuição de Poisson, $\lambda_0 = 0.0027$. Existe uma probabilidade de transição para $s=7$ (falha aleatória) em todos os estados não terminais, independentemente da ação. Isso adiciona risco constante, ausente no **Grid World**. Também enfrentamos um impacto nos custos: o custo de falha ($180.000$) associado a $s=7$ aumenta o valor esperado de $R(s,a,t)$. No **Grid World**, penalidades são pequenas e previsíveis.
+
+>Poderíamos estudar $\lambda_0$ com mais cuidado. Estados de maior desgaste, podem ter $\lambda_0$ maior, isso traria o modelo mais próximo da realidade. Contudo, para **MDP**, essa simplificação parece aceitável. Ainda assim, aqui temos outro ponto de melhoria.
+
+Outra diferença importante entre este problema e o **Grid World** está na observabilidade parcial. As falhas podem ocorrer entre inspeções, exigindo otimização de $t$. No **Grid World**, o agente sabe seu estado a cada passo, eliminando essa incerteza.
+
+Finalmente, no problema descrito no artigo[^1], o horizonte de análise tende ao infinito. O desconto ($\gamma = 0.9$) reflete operação contínua, contrastando com o fim abrupto do **Grid World**. Falhas aleatórias acumulam custos ao longo do tempo.
 
 #### Efeito na Solução
-- **Complexidade**: A política deve balancear o risco de falhas aleatórias (levando a $CM$) contra custos de intervenção ($MM$, $PM$). No **Grid World**, a política simplesmente evita penalidades (-1) até atingir a recompensa (+1).
-- **Flexibilidade**: Intervalos $t$ ajustáveis mitigam falhas inesperadas, enquanto no **Grid World** o agente segue um caminho fixo.
-- **Convergência**: A incerteza das falhas pode exigir mais iterações para estabilizar (4 iterações aqui, similar ao **Grid World**, mas com maior variabilidade).
 
-A curiosa leitora deve perceber que as falhas aleatórias transformam o problema em um desafio realista, exigindo uma política que antecipe eventos imprevisíveis, algo que o ambiente controlado do **Grid World** não precisa enfrentar.
+Três pontos precisam ser levados em consideração:
+
+1. **Complexidade**: a política deve balancear o risco de falhas aleatórias (levando a $CM$) contra custos de intervenção ($MM$, $PM$). No **Grid World**, a política simplesmente evita penalidades ($-1$) até atingir a recompensa ($+1$).
+
+2. **Flexibilidade**: intervalos $t$ ajustáveis mitigam falhas inesperadas, enquanto no **Grid World** o agente segue um caminho fixo.
+
+3. **Convergência**: a incerteza das falhas pode exigir mais iterações para estabilizar.
+
+A curiosa leitora deve perceber que as falhas aleatórias transformam o problema em um desafio próximo da realidade, exigindo uma política que antecipe eventos imprevisíveis, algo que o ambiente controlado do **Grid World** não precisa, ou consegue, enfrentar.
+
+## Finalmente, os Finalmentes
+
+A esforçada leitora deveria, usando [C++](https://github.com/Svalorzen/AI-Toolbox), ou [Python](https://pymdptoolbox.readthedocs.io/en/latest/), montar este modelo e refazer estes cálculos. Principalmente, nos pontos que, ao longo do texto, fui marcando como interessante.
+
