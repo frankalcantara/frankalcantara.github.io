@@ -1,0 +1,269 @@
+---
+layout: page
+title: Círculo Trigonométrico
+permalink: /circulo
+comments: false
+slug: um-circulo-trigonometrico
+author: Frank 
+description: Só um circulo trigonométrico.
+---
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Gráficos Trigonométricos Interativos</title>
+        <style>
+            .container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                font-family: Arial, sans-serif;
+            }
+
+            .left-panel,
+            .right-panel {
+                width: 200px;
+                padding: 10px;
+            }
+
+            .center-panel,
+            .bottom-panel {
+                padding: 10px;
+            }
+
+            canvas {
+                border: 1px solid black;
+            }
+
+            h2 {
+                margin: 0 0 10px;
+                color: #333;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="left-panel">
+                <h2>Valores</h2>
+                <p>Coordenadas: (<span id="x-val">1.000</span>, <span id="y-val">0.000</span>)</p>
+                <p>Ângulo: <span id="theta-val">0.00</span> <span id="units-label">radianos</span></p>
+                <p>Cosseno: <span id="cos-val">1.000</span></p>
+                <p>Seno: <span id="sin-val">0.000</span></p>
+                <p>Tangente: <span id="tan-val">0.000</span></p>
+            </div>
+            <div class="center-panel">
+                <canvas id="circle-canvas" width="400" height="400"></canvas>
+            </div>
+            <div class="right-panel">
+                <h2>Opções</h2>
+                <label><input type="radio" name="function" value="cos" checked> Cos</label><br>
+                <label><input type="radio" name="function" value="sin"> Sen</label><br>
+                <label><input type="radio" name="function" value="tan"> Tan</label><br>
+                <h3>Unidades</h3>
+                <label><input type="radio" name="units" value="radians" checked> Radianos</label><br>
+                <label><input type="radio" name="units" value="degrees"> Graus</label><br>
+                <label><input type="checkbox" id="labels-checkbox"> Mostrar labels no canvas</label>
+            </div>
+            <div class="bottom-panel">
+                <canvas id="wave-canvas" width="800" height="200"></canvas>
+            </div>
+        </div>
+
+        <script>
+            const circleCtx = document.getElementById('circle-canvas').getContext('2d');
+            const waveCtx = document.getElementById('wave-canvas').getContext('2d');
+
+            const circleCenterX = 200;
+            const circleCenterY = 200;
+            const circleRadius = 150;
+
+            const waveWidth = 800;
+            const waveHeight = 200;
+            const waveCenterY = 100;
+
+            let theta = 0;
+            let selectedFunction = 'cos';
+            let units = 'radians';
+            let xMin = -2 * Math.PI;
+            let xMax = 2 * Math.PI;
+
+            function drawCircle() {
+                circleCtx.clearRect(0, 0, 400, 400);
+
+                // Eixos
+                circleCtx.beginPath();
+                circleCtx.moveTo(0, circleCenterY);
+                circleCtx.lineTo(400, circleCenterY);
+                circleCtx.moveTo(circleCenterX, 0);
+                circleCtx.lineTo(circleCenterX, 400);
+                circleCtx.strokeStyle = 'black';
+                circleCtx.stroke();
+
+                // Círculo
+                circleCtx.beginPath();
+                circleCtx.arc(circleCenterX, circleCenterY, circleRadius, 0, 2 * Math.PI);
+                circleCtx.stroke();
+
+                // Coordenadas do ponto no círculo
+                const x = circleCenterX + circleRadius * Math.cos(theta);
+                const y = circleCenterY - circleRadius * Math.sin(theta);
+
+                // Raio (hipotenusa)
+                circleCtx.beginPath();
+                circleCtx.moveTo(circleCenterX, circleCenterY);
+                circleCtx.lineTo(x, y);
+                circleCtx.strokeStyle = 'black';
+                circleCtx.stroke();
+
+                // Cosseno (vermelho)
+                circleCtx.beginPath();
+                circleCtx.moveTo(circleCenterX, circleCenterY);
+                circleCtx.lineTo(x, circleCenterY);
+                circleCtx.strokeStyle = 'red';
+                circleCtx.stroke();
+
+                // Seno (verde)
+                circleCtx.beginPath();
+                circleCtx.moveTo(x, circleCenterY);
+                circleCtx.lineTo(x, y);
+                circleCtx.strokeStyle = 'green';
+                circleCtx.stroke();
+
+                // Ponto no círculo
+                circleCtx.beginPath();
+                circleCtx.arc(x, y, 5, 0, 2 * Math.PI);
+                circleCtx.fillStyle = 'red';
+                circleCtx.fill();
+
+                // Arco do ângulo (azul)
+                circleCtx.beginPath();
+                const startAngle = 0;
+                const endAngle = theta;
+                circleCtx.arc(circleCenterX, circleCenterY, 20, -startAngle, -endAngle, theta < 0);
+                circleCtx.strokeStyle = 'blue';
+                circleCtx.stroke();
+
+                // Tangente (roxa, proporcional ao valor)
+                if (selectedFunction === 'tan') {
+                    const tanValue = Math.tan(theta);
+                    const len = Math.abs(tanValue) * 50; // Comprimento proporcional
+                    const dx = -Math.sin(theta);
+                    const dy = Math.cos(theta);
+                    const x1 = x + len * dx;
+                    const y1 = y - len * dy;
+                    const x2 = x - len * dx;
+                    const y2 = y + len * dy;
+                    circleCtx.beginPath();
+                    circleCtx.moveTo(x1, y1);
+                    circleCtx.lineTo(x2, y2);
+                    circleCtx.strokeStyle = 'purple';
+                    circleCtx.stroke();
+                }
+
+                // Labels no canvas (se ativado)
+                if (document.getElementById('labels-checkbox').checked) {
+                    circleCtx.font = '14px Arial';
+                    circleCtx.fillStyle = 'red';
+                    circleCtx.fillText('Cosseno', x > circleCenterX ? circleCenterX + 10 : x + 10, circleCenterY + 20);
+                    circleCtx.fillStyle = 'green';
+                    circleCtx.fillText('Seno', x + 10, y < circleCenterY ? y + 20 : circleCenterY - 10);
+                    circleCtx.fillStyle = 'blue';
+                    circleCtx.fillText('Ângulo', circleCenterX + 25, circleCenterY - 25);
+                    if (selectedFunction === 'tan') {
+                        circleCtx.fillStyle = 'purple';
+                        circleCtx.fillText('Tangente', x + len * dx + 10, y - len * dy);
+                    }
+                }
+            }
+
+            function drawWave() {
+                waveCtx.clearRect(0, 0, waveWidth, waveHeight);
+                waveCtx.beginPath();
+                waveCtx.moveTo(0, waveCenterY);
+                waveCtx.lineTo(waveWidth, waveCenterY);
+                waveCtx.strokeStyle = 'black';
+                waveCtx.stroke();
+                const steps = 1000;
+                const dx = (xMax - xMin) / steps;
+                waveCtx.beginPath();
+                for (let i = 0; i <= steps; i++) {
+                    let t = xMin + i * dx;
+                    let rad = units === 'radians' ? t : t * Math.PI / 180;
+                    let val = Math[selectedFunction](rad);
+                    if (selectedFunction === 'tan' && Math.abs(val) > 5) continue;
+                    let canvasX = (t - xMin) / (xMax - xMin) * waveWidth;
+                    let canvasY = waveCenterY - val * 50;
+                    if (i === 0) waveCtx.moveTo(canvasX, canvasY);
+                    else waveCtx.lineTo(canvasX, canvasY);
+                }
+                waveCtx.strokeStyle = 'blue';
+                waveCtx.stroke();
+                let waveX = units === 'radians' ? (theta - xMin) / (xMax - xMin) * waveWidth : ((theta * 180 / Math.PI) - xMin) / (xMax - xMin) * waveWidth;
+                let waveVal = Math[selectedFunction](theta);
+                let waveY = waveCenterY - waveVal * 50;
+                waveCtx.beginPath();
+                waveCtx.arc(waveX, waveY, 5, 0, 2 * Math.PI);
+                waveCtx.fillStyle = 'red';
+                waveCtx.fill();
+            }
+
+            function updateValues() {
+                const x = Math.cos(theta).toFixed(3);
+                const y = Math.sin(theta).toFixed(3);
+                const tan = Math.tan(theta).toFixed(3);
+                let angleVal = units === 'radians' ? theta.toFixed(3) : (theta * 180 / Math.PI).toFixed(2);
+                document.getElementById('x-val').textContent = x;
+                document.getElementById('y-val').textContent = y;
+                document.getElementById('theta-val').textContent = angleVal;
+                document.getElementById('units-label').textContent = units === 'radians' ? 'radianos' : 'graus';
+                document.getElementById('cos-val').textContent = x;
+                document.getElementById('sin-val').textContent = y;
+                document.getElementById('tan-val').textContent = tan;
+            }
+
+            document.getElementById('circle-canvas').addEventListener('click', function (event) {
+                const rect = this.getBoundingClientRect();
+                const mouseX = event.clientX - rect.left;
+                const mouseY = event.clientY - rect.top;
+                const dx = mouseX - circleCenterX;
+                const dy = circleCenterY - mouseY;
+                theta = Math.atan2(dy, dx);
+                if (theta < 0) theta += 2 * Math.PI;
+                drawCircle();
+                drawWave();
+                updateValues();
+            });
+
+            document.querySelectorAll('input[name="function"]').forEach(radio => {
+                radio.addEventListener('change', function () {
+                    selectedFunction = this.value;
+                    drawCircle();
+                    drawWave();
+                    updateValues();
+                });
+            });
+
+            document.querySelectorAll('input[name="units"]').forEach(radio => {
+                radio.addEventListener('change', function () {
+                    units = this.value;
+                    if (units === 'radians') {
+                        xMin = -2 * Math.PI;
+                        xMax = 2 * Math.PI;
+                    } else {
+                        xMin = -360;
+                        xMax = 360;
+                    }
+                    drawWave();
+                    updateValues();
+                });
+            });
+
+            drawCircle();
+            drawWave();
+            updateValues();
+        </script>
+    </body>
+
+</html>

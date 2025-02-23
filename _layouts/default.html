@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<link rel="icon" href="{{ site.baseurl }}/assets/images/logo.webp" />
 		<title>{{ page.title }} | {{site.name}}</title>
 		{% seo %}
-		<link
-			rel="stylesheet"
-			href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 			integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-			crossorigin="anonymous"
-		/>
+			crossorigin="anonymous" />
 		<!-- Start cookieyes banner para testes -->
 		<script id="cookieyes" type="text/javascript"
 			src="https://cdn-cookieyes.com/client_data/6361bfccf9b81a694f37d9b8/script.js"></script>
@@ -21,7 +19,7 @@
 				tex: {
 					inlineMath: [["$", "$"]],
 					displayMath: [['$$', '$$'], ['\\[', '\\]']],
-					packages: {'[+]': ['base']} // Carrega apenas o pacote base
+					packages: { '[+]': ['base'] } // Carrega apenas o pacote base
 				},
 				svg: {
 					fontCache: "global", // Ativa o cache global de fontes
@@ -48,124 +46,105 @@
 
 		<script src="{{ site.baseurl }}/assets/js/jquery.min.js"></script>
 
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.css" />
+		<link rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.css" />
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/cpp.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
 	</head>
-	{% if jekyll.environment == 'production' %} {% endif %} {% capture layout %}{% if page.layout %}layout-{{ page.layout
+	{% if jekyll.environment == 'production' %} {% endif %} {% capture layout %}{% if page.layout %}layout-{{
+	page.layout
 	}}{% endif %}{% endcapture %}
+
 	<body class="{{layout}}">
 		<noscript id="deferred-styles">
-			<link
-				href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i"
-				rel="stylesheet"
-			/>
-			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" 
-			integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" 
-			crossorigin="anonymous" referrerpolicy="no-referrer" />
+			<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i"
+				rel="stylesheet" />
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+				integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+				crossorigin="anonymous" referrerpolicy="no-referrer" />
 		</noscript>
 		<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
 			<div class="container pr-0">
 				<a class="navbar-brand" href="{{ site.baseurl }}/">
 					<img data-src="{{ site.baseurl }}/{{ site.logo }}" alt="{{ site.name }}" />
 				</a>
-				<button
-					class="navbar-toggler"
-					type="button"
-					data-toggle="collapse"
-					data-target="#navbarMediumish"
-					aria-controls="navbarSupportedContent"
-					aria-expanded="false"
-					aria-label="Toggle navigation"
-				>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish"
+					aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarMediumish">
-			<ul class="navbar-nav ml-auto">
-				{% if page.url == "/" %}
-				<li class="nav-item active">{% else %}
-				<li class="nav-item">
-				{% endif %}
-					<a class="nav-link" href="{{ site.baseurl }}/index.html">Blog</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ site.baseurl }}/about">Sobre</a>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="wishlistDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Hall da Fama
-					</a>
-					<div class="dropdown-menu" aria-labelledby="wishlistDropdown">
-						<a class="nav-link" href="http://frankalcantara.com/linefollower/" target="_blank" rel="noopener">RobotZero</a>
-						<br>
-					
-						<a class="nav-link" href="http://luccafm1.github.io/" target="_blank" rel="noopener">Church Interpreter</a>
-						<br>
-					
-						<a class="nav-link" href="{{ site.baseurl }}/truthtable/index" target="_blank" rel="noopener">Tabela Verdade</a>
-						<br>
-						
-						<a class="nav-link" href="{{ site.baseurl }}/LMC/index" target="_blank" rel="noopener">Little Man Computer</a>
-						<br>
-					</div>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="wishlistDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Lista de Desejos
-					</a>
-					<div class="dropdown-menu" aria-labelledby="wishlistDropdown">
-						<a
-							class="dropdown-item"
-							title="Wish List"
-							target="_blank"
-							rel="noopener"
-							href="https://amzn.to/3C4Iu9H"
-							onclick="window.open(this.href, 'Wish List');return false;"
-							><i class="fa fa-book"></i> The Art of Computer Programming
-						</a><br>
-						<a
-							class="dropdown-item"
-							title="Wish List"
-							target="_blank"
-							rel="noopener"
-							href="https://amzn.to/48yPGa8"
-							onclick="window.open(this.href, 'Wish List');return false;"
-							><i class="fa fa-tablet"></i> Kindle Paperwhite Signature Edition
-						</a><br>
-						<a
-							class="dropdown-item"
-							title="Wish List"
-							target="_blank"
-							rel="noopener"
-							href="https://bookstore.ams.org/simon-set"
-							onclick="window.open(this.href, 'Wish List');return false;"
-							><i class="fa fa-book"></i> A Comprehensive Course in Analysis
-						</a><br>
-						<a
-							class="dropdown-item"
-							title="Wish List"
-							target="_blank"
-							rel="noopener"
-							href="https://amzn.to/40uggPC"
-							onclick="window.open(this.href, 'Wish List');return false;"
-							><i class="fa fa-keyboard"></i> Teclado e mouse sem fio ergonômicos
-						</a><br>
-						<a
-							class="dropdown-item"
-							title="Wish List"
-							target="_blank"
-							rel="noopener"
-							href="https://amzn.to/40DB1IZ"
-							onclick="window.open(this.href, 'Wish List');return false;"
-							><i class="fas fa-wine-bottle"></i>The Macallan Sherry Oak 18 Anos Single Malt
-						</a><br>
-					</div>
-				</li>
-			</ul>
+					<ul class="navbar-nav ml-auto">
+						{% if page.url == "/" %}
+						<li class="nav-item active">{% else %}
+						<li class="nav-item">
+							{% endif %}
+							<a class="nav-link" href="{{ site.baseurl }}/index.html">Blog</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ site.baseurl }}/about">Sobre</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="wishlistDropdown" role="button"
+								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Hall da Fama
+							</a>
+							<div class="dropdown-menu" aria-labelledby="wishlistDropdown">
+								<a class="nav-link" href="http://frankalcantara.com/linefollower/" target="_blank"
+									rel="noopener">RobotZero</a>
+								<br>
+
+								<a class="nav-link" href="http://luccafm1.github.io/" target="_blank"
+									rel="noopener">Church Interpreter</a>
+								<br>
+
+								<a class="nav-link" href="{{ site.baseurl }}/truthtable/index" target="_blank"
+									rel="noopener">Tabela Verdade</a>
+								<br>
+
+								<a class="nav-link" href="{{ site.baseurl }}/LMC/index" target="_blank"
+									rel="noopener">Little Man Computer</a>
+								<br>
+							</div>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="wishlistDropdown" role="button"
+								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Lista de Desejos
+							</a>
+							<div class="dropdown-menu" aria-labelledby="wishlistDropdown">
+								<a class="dropdown-item" title="Wish List" target="_blank" rel="noopener"
+									href="https://amzn.to/3C4Iu9H"
+									onclick="window.open(this.href, 'Wish List');return false;"><i
+										class="fa fa-book"></i> The Art of Computer Programming
+								</a><br>
+								<a class="dropdown-item" title="Wish List" target="_blank" rel="noopener"
+									href="https://amzn.to/48yPGa8"
+									onclick="window.open(this.href, 'Wish List');return false;"><i
+										class="fa fa-tablet"></i> Kindle Paperwhite Signature Edition
+								</a><br>
+								<a class="dropdown-item" title="Wish List" target="_blank" rel="noopener"
+									href="https://bookstore.ams.org/simon-set"
+									onclick="window.open(this.href, 'Wish List');return false;"><i
+										class="fa fa-book"></i> A Comprehensive Course in Analysis
+								</a><br>
+								<a class="dropdown-item" title="Wish List" target="_blank" rel="noopener"
+									href="https://amzn.to/40uggPC"
+									onclick="window.open(this.href, 'Wish List');return false;"><i
+										class="fa fa-keyboard"></i> Teclado e mouse sem fio ergonômicos
+								</a><br>
+								<a class="dropdown-item" title="Wish List" target="_blank" rel="noopener"
+									href="https://amzn.to/40DB1IZ"
+									onclick="window.open(this.href, 'Wish List');return false;"><i
+										class="fas fa-wine-bottle"></i>The Macallan Sherry Oak 18 Anos Single Malt
+								</a><br>
+							</div>
+						</li>
+					</ul>
+				</div>
 			</div>
-		</div>
 		</nav>
 		<div class="site-content">
 			<div class="container">
@@ -185,19 +164,16 @@
 						</div>
 					</div>
 					<div class="col-md-8 p-5 align-self-center text-center">
-						{% assign categories_list = site.categories %} {% if categories_list.first[0] == null %} {% for category in
+						{% assign categories_list = site.categories %} {% if categories_list.first[0] == null %} {% for
+						category in
 						categories_list %}
-						<a
-							class="mt-1 mb-1"
-							href="{{site.baseurl}}/categories#{{ category | url_escape | strip | replace: ' ', '-' }}"
-							>{{ category | camelcase }} ({{ site.tags[category].size }})</a
-						>
+						<a class="mt-1 mb-1"
+							href="{{site.baseurl}}/categories#{{ category | url_escape | strip | replace: ' ', '-' }}">{{
+							category | camelcase }} ({{ site.tags[category].size }})</a>
 						{% endfor %} {% else %} {% for category in categories_list %}
-						<a
-							class="mt-1 mb-1"
-							href="{{site.baseurl}}/categories#{{ category[0] | url_escape | strip | replace: ' ', '-' }}"
-							>{{ category[0] | camelcase }} ({{ category[1].size }})</a
-						>
+						<a class="mt-1 mb-1"
+							href="{{site.baseurl}}/categories#{{ category[0] | url_escape | strip | replace: ' ', '-' }}">{{
+							category[0] | camelcase }} ({{ category[1].size }})</a>
 						{% endfor %} {% endif %} {% assign categories_list = nil %}
 					</div>
 				</div>
@@ -209,20 +185,21 @@
 							Copyright © {{ site.time | date: "%Y" }} {{ site.name }}
 						</div>
 						<div class="col-md-6 col-sm-6 text-center text-lg-right">
-							<a target="_blank" rel="noopener" href="https://www.wowthemes.net/mediumish-free-jekyll-template/"
-								>Mediumish Jekyll Theme</a
-							>
+							<a target="_blank" rel="noopener"
+								href="https://www.wowthemes.net/mediumish-free-jekyll-template/">Mediumish Jekyll
+								Theme</a>
 							by WowThemes.net
 						</div>
 					</div>
+					<!-- Population Message Div -->
+					<div id="populationMessage"
+						style="font-size: 14px; text-align: center; padding: 10px 0; color: black;"></div>
 				</div>
 			</footer>
 		</div>
-		<script
-			src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
 			integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-			crossorigin="anonymous"
-		></script>
+			crossorigin="anonymous"></script>
 
 		<script src="{{ site.baseurl }}/assets/js/mediumish.js"></script>
 
@@ -230,143 +207,199 @@
 		<script src="{{ site.baseurl }}/assets/js/lazyload.js"></script>
 		{% endif %}
 		<script src="{{ site.baseurl }}/assets/js/ie10-viewport-bug-workaround.js"></script>
-		
-	<script>
-	document.addEventListener("DOMContentLoaded", function () {
-    // Debug: Verifica se o evento DOMContentLoaded está sendo disparado
-    console.log("DOM carregado");
 
-    // Função para o mark
-    function initializeMarks() {
-        const marks = document.querySelectorAll("em");
-        console.log("Elementos em encontrados:", marks.length); // Debug
+		<script>
+			// Population Message Script
+			async function updatePopulationMessage() {
+				try {
+					// Simulate or fetch real-time population data (since no direct API is available, use Worldometer estimate as of Feb 2025)
+					// Worldometer estimates ~8,250,423,613 as of early 2025, with a growth rate of ~1.26% annually (~102M/year)
+					// Adjust for real-time growth: ~280,000 births - 120,000 deaths per day (net ~160,000/day as of Feb 2025)
+					// Current time: 03:06 PM PST (Feb 23, 2025) = 23:06 UTC
+					const startOfDayUTC = new Date('2025-02-23T00:00:00Z').getTime(); // Start of Feb 23, 2025, UTC
+					const nowUTC = new Date().getTime(); // Current time in UTC
+					const millisecondsInDay = 24 * 60 * 60 * 1000; // Milliseconds in a day
+					const daysSinceStart = (nowUTC - startOfDayUTC) / millisecondsInDay;
+					const netGrowthPerDay = 160000; // Net growth (births - deaths) per day, based on Worldometer
+					const basePopulation = 8250423613; // Base population as of Jan 1, 2025 (Worldometer estimate, rounded)
+					let worldPopulation = Math.round(basePopulation + (netGrowthPerDay * daysSinceStart));
 
-        marks.forEach(function (em) {
-            // Verifica se NÃO tem uma imagem antes
-            if (!em.previousElementSibling || em.previousElementSibling.tagName.toLowerCase() !== "img") {
-                em.classList.add("mark");
-                console.log("Mark adicionado a:", em.textContent); // Debug
-            }
-        });
-    }
+					// Ensure the population is at least 1 to avoid division by zero
+					if (worldPopulation < 1) worldPopulation = 8250423613;
 
-    // Inicializa o highlight.js
-    hljs.highlightAll();
-        
-    // Se você estiver usando os números de linha
-    hljs.initLineNumbersOnLoad();
-        
-    // Configurações adicionais se necessário
-    hljs.configure({
-        ignoreUnescapedHTML: true,
-        languages: ['python', 'cpp']
-    });
+					// The reader is 1 person, so the "don't care" percentage is (worldPopulation - 1) / worldPopulation
+					const caringPerson = 1;
+					const nonCaringPopulation = worldPopulation - caringPerson;
+					const percentage = ((nonCaringPopulation / worldPopulation) * 100).toFixed(10); // Up to 10 decimal places
 
-    function initializeTOC() {
-        const toc = document.getElementById("toc");
-    
-        if (toc) {
-            function adjustTOCHeight() {
-                // Define uma altura máxima fixa de 80% da viewport
-                const maxHeight = window.innerHeight * 0.75;
-                toc.style.maxHeight = `${maxHeight}px`;
-                toc.style.height = 'auto';
-                toc.style.overflowY = 'auto';
-            }
+					// Create the message with the same colors as the image
+					const message = `
+						<span style="color: black;">In a world with ${Number(worldPopulation / 1000000000).toFixed(3)} billion people,</span>
+						<span style="color: black;">${percentage}%</span>
+						<span style="color: red;">don't care about your feelings.</span>
+					`;
 
-            // Ajusta inicialmente
-            adjustTOCHeight();
+					// Update the div with the message
+					document.getElementById('populationMessage').innerHTML = message;
+				} catch (error) {
+					console.error('Error updating population message:', error);
+					// Fallback with estimated population (8.25 billion as of Feb 2025, adjusted for growth)
+					const worldPopulation = 8250423613; // Base estimate from Worldometer, Jan 2025
+					const caringPerson = 1;
+					const nonCaringPopulation = worldPopulation - caringPerson;
+					const percentage = ((nonCaringPopulation / worldPopulation) * 100).toFixed(10);
 
-            // Ajusta quando a janela é redimensionada
-            window.addEventListener('resize', adjustTOCHeight);
-        }
-    }
+					const fallbackMessage = `
+						<span style="color: black;">In a world with ${Number(worldPopulation / 1000000000).toFixed(3)} billion people,</span>
+						<span style="color: black;">${percentage}%</span>
+						<span style="color: red;">don't care about your feelings.</span>
+					`;
 
-    // Função para atualizar o background dos marks durante o scroll
-    function initializeMarkHighlight() {
-        function updateMarksOpacity() {
-            const marks = document.querySelectorAll(".mark");
-            const viewportHeight = window.innerHeight;
+					document.getElementById('populationMessage').innerHTML = fallbackMessage;
+				}
+			}
 
-            marks.forEach((mark) => {
-                const rect = mark.getBoundingClientRect();
-                const elementCenter = rect.top + (rect.height / 2);
-                const viewportCenter = viewportHeight / 2;
-                const distance = Math.abs(viewportCenter - elementCenter);
-                const maxDistance = viewportHeight / 2;
-            
-                // Calcula opacidade baseada na distância do centro
-                let opacity = 1 - (distance / maxDistance);
-                opacity = Math.max(0.2, Math.min(1, opacity)); // Mantém entre 0.2 e 1
-            
-                mark.style.backgroundColor = `rgba(244, 196, 255, ${opacity})`;
-                mark.style.transition = 'background-color 0.3s ease';
-            });
-        }
+			// Call the function when the page loads
+			window.onload = updatePopulationMessage;
 
-        // Adiciona o evento de scroll
-        window.addEventListener('scroll', updateMarksOpacity);
-        // Executa uma vez no início
-        updateMarksOpacity();
-    }
+			// Existing JavaScript for marks, TOC, highlight.js, and external table
+			document.addEventListener("DOMContentLoaded", function () {
+				// Debug: Verifica se o evento DOMContentLoaded está sendo disparado
+				console.log("DOM carregado");
 
-    // Nova função para inicializar a tabela externa
-    function initializeExternalTable() {
-    const tableContainer = document.getElementById('table-container');
-    if (tableContainer) {
-        console.log("Iniciando busca da tabela externa");
-        
-        fetch('{{ site.baseurl }}/assets/table.html', {
-            mode: 'cors',  // Explicita o modo CORS
-            headers: {
-                'Accept': 'text/html',
-                'Cache-Control': 'no-cache'
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.text();
-        })
-        .then(html => {
-            console.log("HTML recebido:", html.substring(0, 100)); // Log dos primeiros 100 caracteres
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            const table = doc.querySelector('table');
-            
-            if (table) {
-                console.log("Tabela encontrada:", table.outerHTML.substring(0, 100));
-                tableContainer.appendChild(table);
-            } else {
-                throw new Error('Nenhuma tabela encontrada no HTML');
-            }
-        })
-        .catch(error => {
-            console.error('Erro detalhado:', error);
-            tableContainer.innerHTML = `<p>Erro ao carregar a tabela: ${error.message}</p>`;
-            
-            // Tenta uma alternativa com JSONP se disponível
-            const script = document.createElement('script');
-            script.src = 'http://209.38.60.126/table.html?callback=handleTableData';
-            document.body.appendChild(script);
-        });
-    }
-}
+				// Função para o mark
+				function initializeMarks() {
+					const marks = document.querySelectorAll("em");
+					console.log("Elementos em encontrados:", marks.length); // Debug
 
-// Função de callback para JSONP (se necessário)
-window.handleTableData = function(data) {
-    const tableContainer = document.getElementById('table-container');
-    if (tableContainer && data) {
-        tableContainer.innerHTML = data;
-    }
-};
-    // Inicializa todas as funcionalidades
-    initializeMarks();
-    initializeTOC();
-    initializeMarkHighlight();
-    initializeExternalTable(); // Adiciona a nova inicialização
-});
-	</script>
+					marks.forEach(function (em) {
+						// Verifica se NÃO tem uma imagem antes
+						if (!em.previousElementSibling || em.previousElementSibling.tagName.toLowerCase() !== "img") {
+							em.classList.add("mark");
+							console.log("Mark adicionado a:", em.textContent); // Debug
+						}
+					});
+				}
+
+				// Inicializa o highlight.js
+				hljs.highlightAll();
+
+				// Se você estiver usando os números de linha
+				hljs.initLineNumbersOnLoad();
+
+				// Configurações adicionais se necessário
+				hljs.configure({
+					ignoreUnescapedHTML: true,
+					languages: ['python', 'cpp']
+				});
+
+				function initializeTOC() {
+					const toc = document.getElementById("toc");
+
+					if (toc) {
+						function adjustTOCHeight() {
+							// Define uma altura máxima fixa de 80% da viewport
+							const maxHeight = window.innerHeight * 0.75;
+							toc.style.maxHeight = `${maxHeight}px`;
+							toc.style.height = 'auto';
+							toc.style.overflowY = 'auto';
+						}
+
+						// Ajusta inicialmente
+						adjustTOCHeight();
+
+						// Ajusta quando a janela é redimensionada
+						window.addEventListener('resize', adjustTOCHeight);
+					}
+				}
+
+				// Função para atualizar o background dos marks durante o scroll
+				function initializeMarkHighlight() {
+					function updateMarksOpacity() {
+						const marks = document.querySelectorAll(".mark");
+						const viewportHeight = window.innerHeight;
+
+						marks.forEach((mark) => {
+							const rect = mark.getBoundingClientRect();
+							const elementCenter = rect.top + (rect.height / 2);
+							const viewportCenter = viewportHeight / 2;
+							const distance = Math.abs(viewportCenter - elementCenter);
+							const maxDistance = viewportHeight / 2;
+
+							// Calcula opacidade baseada na distância do centro
+							let opacity = 1 - (distance / maxDistance);
+							opacity = Math.max(0.2, Math.min(1, opacity)); // Mantém entre 0.2 e 1
+
+							mark.style.backgroundColor = `rgba(244, 196, 255, ${opacity})`;
+							mark.style.transition = 'background-color 0.3s ease';
+						});
+					}
+
+					// Adiciona o evento de scroll
+					window.addEventListener('scroll', updateMarksOpacity);
+					// Executa uma vez no início
+					updateMarksOpacity();
+				}
+
+				// Nova função para inicializar a tabela externa
+				function initializeExternalTable() {
+					const tableContainer = document.getElementById('table-container');
+					if (tableContainer) {
+						console.log("Iniciando busca da tabela externa");
+
+						fetch('{{ site.baseurl }}/assets/table.html', {
+							mode: 'cors',  // Explicita o modo CORS
+							headers: {
+								'Accept': 'text/html',
+								'Cache-Control': 'no-cache'
+							}
+						})
+							.then(response => {
+								if (!response.ok) {
+									throw new Error(`HTTP error! status: ${response.status}`);
+								}
+								return response.text();
+							})
+							.then(html => {
+								console.log("HTML recebido:", html.substring(0, 100)); // Log dos primeiros 100 caracteres
+								const parser = new DOMParser();
+								const doc = parser.parseFromString(html, 'text/html');
+								const table = doc.querySelector('table');
+
+								if (table) {
+									console.log("Tabela encontrada:", table.outerHTML.substring(0, 100));
+									tableContainer.appendChild(table);
+								} else {
+									throw new Error('Nenhuma tabela encontrada no HTML');
+								}
+							})
+							.catch(error => {
+								console.error('Erro detalhado:', error);
+								tableContainer.innerHTML = `<p>Erro ao carregar a tabela: ${error.message}</p>`;
+
+								// Tenta uma alternativa com JSONP se disponível
+								const script = document.createElement('script');
+								script.src = 'http://209.38.60.126/table.html?callback=handleTableData';
+								document.body.appendChild(script);
+							});
+					}
+				}
+
+				// Função de callback para JSONP (se necessário)
+				window.handleTableData = function (data) {
+					const tableContainer = document.getElementById('table-container');
+					if (tableContainer && data) {
+						tableContainer.innerHTML = data;
+					}
+				};
+
+				// Inicializa todas as funcionalidades
+				initializeMarks();
+				initializeTOC();
+				initializeMarkHighlight();
+				initializeExternalTable(); // Adiciona a nova inicialização
+			});
+		</script>
 	</body>
+
 </html>
