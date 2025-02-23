@@ -22,7 +22,7 @@ keywords: Reinforcement Learning, Markov Decision Processes (MDP), Manutenção 
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-02-23T19:33:11.365Z
+lastmod: 2025-02-23T19:38:01.045Z
 slug: mdp-casos-reais-manutencao-de-turbinas-eolicas
 ---
 
@@ -919,4 +919,3 @@ A curiosa leitora deve perceber que as falhas aleatórias transformam o problema
 ## Finalmente, os Finalmentes
 
 A esforçada leitora deveria, usando [C++](https://github.com/Svalorzen/AI-Toolbox), ou [Python](https://pymdptoolbox.readthedocs.io/en/latest/), montar este modelo e refazer estes cálculos. Principalmente, nos pontos que, ao longo do texto, fui marcando como interessante.
-
