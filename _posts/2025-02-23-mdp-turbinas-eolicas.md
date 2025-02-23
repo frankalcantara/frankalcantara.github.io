@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "MDP: Casos Reais"
-author: frank
+author: Frank
 categories:
   - artigo
   - Matemática
@@ -22,7 +22,7 @@ keywords: Reinforcement Learning, Markov Decision Processes (MDP), Manutenção 
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-02-23T14:45:27.170Z
+lastmod: 2025-02-23T14:51:04.384Z
 slug: mdp-casos-reais
 ---
 
