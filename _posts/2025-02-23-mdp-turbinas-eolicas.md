@@ -14,7 +14,7 @@ tags:
   - paradigmas de programação
 image: assets/images/MDPT1.webp
 featured: false
-rating: 0
+rating: 5
 description: Aplicação prática do MDP de um artigo científico, detalhado de forma didática. Muita matemática.
 date: 2025-02-23T14:35:42.669Z
 preview: Usando o MDP para resolver problemas da vida real. Neste caso um problema de manutenção de turbinas eólicas.
@@ -22,7 +22,7 @@ keywords: Reinforcement Learning, Markov Decision Processes (MDP), Manutenção 
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-02-23T14:51:04.384Z
+lastmod: 2025-02-23T14:51:35.793Z
 slug: mdp-casos-reais
 ---
 
