@@ -3,14 +3,14 @@ layout: post
 title: Um Mundo Inteiro em uma Grade
 author: Frank
 categories:
-    - artigo
-    - Matemática
-    - Inteligência Artificial
+  - artigo
+  - Matemática
+  - Inteligência Artificial
 tags:
-    - algoritmos
-    - C++
-    - inteligência artificial
-    - resolução de problemas
+  - algoritmos
+  - C++
+  - inteligência artificial
+  - resolução de problemas
 image: assets/images/gw2.webp
 featured: false
 rating: 5
@@ -18,34 +18,34 @@ description: " Aprenda de forma didática os fundamentos de RL, desde MDPs até 
 date: 2025-02-09T11:51:59.153Z
 preview: O Reinforcement Learning (RL) com o Grid World! 🚀 Um guia prático e didático para iniciantes construírem uma base sólida em IA.  Domine MDPs e algoritmos essenciais de RL explorando este ambiente simples e fundamental.  Ideal para quem busca entender RL de verdade!
 keywords: |-
-    Reinforcement Learning (RL)
-    Reinforcement Learning
-    Grid World
-    Mundo em Grade
-    Processo de Decisão de Markov (MDP)
-    Tomada de Decisão Sequencial
-    Propriedade de Markov
-    Agente
-    Ambiente
-    Estados
-    Ações
-    Recompensas
-    Dinâmica do Sistema
-    Função de Transição
-    Política (Policy)
-    Política Ótima
-    Exploração vs Explotação
-    Algoritmos de RL
-    Q-Learning
-    SARSA
-    Recompensa por Passo (Living Reward)
-    Estados Terminais
-    Planejamento em RL
-    Modelagem MDP
+  Reinforcement Learning (RL)
+  Reinforcement Learning
+  Grid World
+  Mundo em Grade
+  Processo de Decisão de Markov (MDP)
+  Tomada de Decisão Sequencial
+  Propriedade de Markov
+  Agente
+  Ambiente
+  Estados
+  Ações
+  Recompensas
+  Dinâmica do Sistema
+  Função de Transição
+  Política (Policy)
+  Política Ótima
+  Exploração vs Explotação
+  Algoritmos de RL
+  Q-Learning
+  SARSA
+  Recompensa por Passo (Living Reward)
+  Estados Terminais
+  Planejamento em RL
+  Modelagem MDP
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-02-11T21:55:58.464Z
+lastmod: 2025-02-24T20:58:42.489Z
 ---
 
 A esforçada leitora, se realmente quiser entender as técnicas e algoritmos de *Reinforcement Learning* - **RL**, deve começar com problemas simples. Não é qualquer problema. Problemas que permitam construir uma compreensão sólida dos princípios estruturantes desta tecnologia. É aqui que o **Grid World** brilha e se destaca.
@@ -166,7 +166,7 @@ Agora, que a analítica leitora entendeu os conceitos, podemos mapear os compone
 
 2. **Ações ($A$)**: o conjunto de ações possíveis para o agente em cada estado consiste nos movimentos direcionais: ${Norte, Sul, Leste, Oeste}$.
 
-3. **Função de Transição ($P$)**: a função de transição $P(s′\vert s,a)$ define a probabilidade de, estando no estado $s$ e executando a ação $a$, o agente transite para o estado $s'$. No nosso **Grid World**, essa função é determinada pelas regras de movimento estocástico que definimos anteriormente ($80\%$ na direção desejada, $10\%$ para os lados, permanecer no mesmo estado se colidir com a parede).
+3. **Função de Transição ($P$)**: a função de transição $P(s'\vert s,a)$ define a probabilidade de, estando no estado $s$ e executando a ação $a$, o agente transite para o estado $s'$. No nosso **Grid World**, essa função é determinada pelas regras de movimento estocástico que definimos anteriormente ($80\%$ na direção desejada, $10\%$ para os lados, permanecer no mesmo estado se colidir com a parede).
 
 4. **Função de Recompensa ($R$)**: a função de recompensa $R(s,a,s′)$ define a recompensa que o agente recebe ao transitar do estado $s$ para o estado $s′$ após executar a ação $a$. No **Grid World**, isso engloba tanto as recompensas de passo, positivas e negativas, quanto as recompensas nos estados terminais.
 
@@ -252,15 +252,15 @@ Um mundo, qualquer mundo, que define um problema específico precisa da definiç
 
         Estas transições podem ser representadas probabilisticamente em **FOL** utilizando, como exemplo considere as seguintes distribuições de probabilidade condicionais, para a ação $Norte$:
 
-        $$P(\text{Agente}(x,y+1,t+1) \mid \text{Agente}(x,y,t) \land \text{Acao}(\text{Norte})) = 0.8$$
+        $$P(\text{Agente}(x,y+1,t+1) \vert \text{Agente}(x,y,t) \land \text{Acao}(\text{Norte})) = 0.8$$
 
-        $$P(\text{Agente}(x+1,y,t+1) \mid \text{Agente}(x,y,t) \land \text{Acao}(\text{Norte})) = 0.1 $$
+        $$P(\text{Agente}(x+1,y,t+1) \vert \text{Agente}(x,y,t) \land \text{Acao}(\text{Norte})) = 0.1 $$
 
-        $$P(\text{Agente}(x-1,y,t+1) \mid \text{Agente}(x,y,t) \land \text{Acao}(\text{Norte})) = 0.1 $$
+        $$P(\text{Agente}(x-1,y,t+1) \vert \text{Agente}(x,y,t) \land \text{Acao}(\text{Norte})) = 0.1 $$
 
         Note que estas probabilidades somam $1.0$:
 
-        $$\sum_{s'} P(\text{Agente}(s',t+1) \mid \text{Agente}(s,t) \land \text{Acao}(a)) = 1.0$$
+        $$\sum_{s'} P(\text{Agente}(s',t+1) \vert \text{Agente}(s,t) \land \text{Acao}(a)) = 1.0$$
 
         Esta é uma propriedade fundamental de qualquer distribuição de probabilidade e deve ser mantida para todas as ações do agente.
 
@@ -268,7 +268,7 @@ Um mundo, qualquer mundo, que define um problema específico precisa da definiç
 
 Para completar o modelo de transição, precisamos também definir o comportamento quando o agente encontra uma parede:
 
-$$P(\text{Agente}(x,y,t+1) \mid \text{Agente}(x,y,t) \land \text{Acao}(\text{Norte}) \land \text{Estado}(x,y+1,\text{parede})) = 1.0$$
+$$P(\text{Agente}(x,y,t+1) \vert \text{Agente}(x,y,t) \land \text{Acao}(\text{Norte}) \land \text{Estado}(x,y+1,\text{parede})) = 1.0$$
 
 Esta equação especifica que quando há uma parede no estado de destino, o agente permanece em sua posição atual com probabilidade 1.0. Equações similares devem ser definidas para as outras direções.
 
@@ -286,7 +286,7 @@ A função objetivo, que guia o aprendizado do agente, também pode ser definida
 
 2. **Função Valor**: a função valor $V^\pi(x,y)$ para uma política $\pi$ pode ser definida como o valor esperado do retorno acumulado a partir do estado inicial $(x,y)$ seguindo a política $\pi$:
 
-    $$V^\pi(x,y) = \mathbb{E} \left[ \sum_{t=0}^{\infty} \gamma^t R(x_t,y_t) \mid (x_0,y_0)=(x,y), \pi \right]$$
+    $$V^\pi(x,y) = \mathbb{E} \left[ \sum_{t=0}^{\infty} \gamma^t R(x_t,y_t) \vert (x_0,y_0)=(x,y), \pi \right]$$
 
     Esta equação representa a definição padrão da função valor em *Reinforcement Learning*, agora expressa na nossa formalização em **FOL**.
 
@@ -304,7 +304,7 @@ Na qual, teremos:
 
 Este sistema, $GW$, captura formalmente a essência do **Grid World** utilizando Lógica de Primeira Ordem. É importante notar que este sistema preserva a propriedade de Markov, mesmo na formulação em **FOL**:
 
-$$ P(s_{t+1} \mid s_t, a_t, s_{t-1}, a_{t-1}, ..., s_0) = P(s_{t+1} \mid s_t, a_t) $$
+$$ P(s_{t+1} \vert s_t, a_t, s_{t-1}, a_{t-1}, ..., s_0) = P(s_{t+1} \vert s_t, a_t) $$
 
 Embora a linguagem de descrição seja diferente (**FOL** vs. notação de **MDP** tradicional), a propriedade de Markov, que simplifica o aprendizado, continua válida. A formalização em **FOL** oferece uma perspectiva alternativa ao estudo do **Grid World** e, por extensão, para a fundação teórica dos Processos de Decisão de Markov e do Reinforcement Learning.
 
@@ -348,7 +348,7 @@ Agora que definimos o **Grid World** tanto na perspectiva de **MDP** quanto na d
   - Axioma 2: Posição única do agente.
 
 - **Modelo de Transição**:
-  - Probabilidades de transição são representadas por $P(\text{Agente}(x', y', t+1) \mid \text{Agente}(x, y, t), \text{Acao}(a))$.
+  - Probabilidades de transição são representadas por $P(\text{Agente}(x', y', t+1) \vert \text{Agente}(x, y, t), \text{Acao}(a))$.
 
 ### Exemplos de Uso
 
@@ -366,4 +366,4 @@ Agora que definimos o **Grid World** tanto na perspectiva de **MDP** quanto na d
 
 - **Função Valor**:
   
-  $$V^\pi(s) = \mathbb{E} \left[ \sum_{t=0}^{\infty} \gamma^t R(s_t) \mid s_0 = s, \pi \right]$$
+  $$V^\pi(s) = \mathbb{E} \left[ \sum_{t=0}^{\infty} \gamma^t R(s_t) \vert s_0 = s, \pi \right]$$

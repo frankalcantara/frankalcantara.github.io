@@ -17,7 +17,7 @@ keywords: Grid World *Reinforcement Learning* MDP Solution *Reinforcement Learni
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-02-12T22:14:51.688Z
+lastmod: 2025-02-24T20:57:54.539Z
 draft: 2025-02-10T09:29:19.442Z
 ---
 
@@ -33,7 +33,7 @@ Vamos dedicar um minuto, ou dez, para lembrar em que porto desta jornada estamos
 
 2. **Ações $(A)$**: O conjunto de ações possíveis: $A= \{\text{Norte}, \text{Sul}, \text{Leste}, \text{Oeste}\}$.
 
-3. **Função de Transição $(P)$**:  $P(s' \mid  s, a)$ define a probabilidade de transitar para o estado $s'$ ao executar a ação $a$ no estado $s$. No **Grid World** estocástico que estamos estudando, teremos:
+3. **Função de Transição $(P)$**:  $P(s' \vert  s, a)$ define a probabilidade de transitar para o estado $s'$ ao executar a ação $a$ no estado $s$. No **Grid World** estocástico que estamos estudando, teremos:
 
     * $0.8$ de probabilidade de se mover na direção pretendida.
     * $0.1$ de probabilidade de se mover para cada um dos lados perpendiculares.
@@ -41,15 +41,21 @@ Vamos dedicar um minuto, ou dez, para lembrar em que porto desta jornada estamos
   
     Eu havia usado $10\%$ e $80\%$. Se a atenta leitora não entendeu a mudança, este não é um artigo para você.
 
-4. **Função de Recompensa $(R)$**: $R(s, a, s')\;$ define a recompensa recebida ao transitar de $s$ para $s'$ após executar $a$. No nosso caso, simplificamos para $R(s)$:
+4. **Função de Recompensa $(R)$**: Formalmente, a função de recompensa $R(s, a, s')$ define a recompensa recebida ao transitar de $s$ para $s'$ após executar $a$. No contexto específico do **Grid World** que estamos estudando, a recompensa depende apenas do estado de destino $s'$, e não da ação $a$ ou do estado de origem $s$. Esta propriedade nos permite simplificar a notação para $R(s')$, que por clareza denotaremos simplesmente como $R(s)$ quando nos referimos ao estado atual:
 
-    $$R(s) = \begin{cases}
-    +1 & \text{se } s \text{ é um estado terminal positivo} \\
-    -1 & \text{se } s \text{ é um estado terminal negativo} \\
-    r_{vida} & \text{caso contrário}
-    \end{cases}$$
+   $$R(s) = \begin{cases}
+   +1 & \text{se } s \text{ é um estado terminal positivo} \\
+   -1 & \text{se } s \text{ é um estado terminal negativo} \\
+   r_{vida} & \text{caso contrário}
+   \end{cases}$$
 
-    de tal forma que $r_{vida}$ é a recompensa por passo (living reward), geralmente um valor pequeno e negativo (por exemplo, $-0.03$).
+   Esta simplificação é válida porque no **Grid World**:
+
+   - As penalidades/recompensas são atribuídas por estar em um estado, não por transições específicas;
+   - Cada movimento tem o mesmo custo $r_{vida}$ (exceto em estados terminais);
+   - A dinâmica do ambiente não atribui recompensas diferentes para ações distintas que levam ao mesmo estado.
+
+   Nas equações subsequentes, usaremos esta notação simplificada $R(s)$ quando nos referirmos à recompensa.
 
 5. **Estado Inicial $(s_0)$**: A célula em que o agente inicia cada episódio.
 
@@ -89,7 +95,7 @@ A intuição fundamental de Bellman era que problemas de otimização continham 
 
 Matematicamente, este princípio pode ser expresso como:
 
-$$ V^*(s) = \max_a \{ R(s,a) + \gamma \sum_{s'} P(s'\mid s,a)V^*(s') \} $$
+$$ V^*(s) = \max_a \{ R(s,a) + \gamma \sum_{s'} P(s'\vert s,a)V^*(s') \} $$
 
 A sagaz leitora será capaz de entender a revolução que Bellman iniciou com a *Dynamic Programming* por meio de três ideias fundamentais:
 
@@ -105,20 +111,20 @@ As **Equações de Bellman** *expressam a relação recursiva entre o valor de u
 
     A função valor-estado, $V^\pi(s)$, representa o retorno esperado (soma das recompensas descontadas) ao iniciar no estado $s$ e seguir a política $\pi$. A Equação de Bellman para $V^\pi$ será:
 
-    $$V^\pi(s) = \sum_{a \in A} \pi(a\mid s) \sum_{s' \in S} P(s'\mid s, a) [R(s, a, s') + \gamma V^\pi(s')]$$
+    $$V^\pi(s) = \sum_{a \in A} \pi(a\vert s) \sum_{s' \in S} P(s'\vert s, a) [R(s, a, s') + \gamma V^\pi(s')]$$
 
     Nesta equação, temos:
 
-    * $\pi(a\mid s)$ é a probabilidade de tomar a ação $a$ no estado $s$ sob a política $\pi$;
+    * $\pi(a\vert s)$ é a probabilidade de tomar a ação $a$ no estado $s$ sob a política $\pi$;
     * $\gamma$ é o fator de desconto $(0 \le \gamma \le 1)$, que determina a importância das recompensas futuras.
 
-    Esta equação determina que o valor de um estado $s$ sob a política $\pi$ é a média ponderada dos valores de todos os estados sucessores possíveis $(s')$, considerando a probabilidade de cada transição $(P(s'\mid s, a))$ e a recompensa imediata $(R(s, a, s'))$.
+    Esta equação determina que o valor de um estado $s$ sob a política $\pi$ é a média ponderada dos valores de todos os estados sucessores possíveis $(s')$, considerando a probabilidade de cada transição $(P(s'\mid s, a))$ e a recompensa imediata $(R(s'))$.
 
 2. **Equação de Bellman para a Função Valor-Ação $(Q^\pi)$**:
 
     A função valor-ação, $Q^\pi(s, a)$, representa o retorno esperado ao iniciar no estado $s$, tomar a ação $a$ e, em seguida, seguir a política $\pi$.  A Equação de Bellman para $Q^\pi$ será:
 
-    $$Q^\pi(s, a) = \sum_{s' \in S} P(s'\mid s, a) [R(s, a, s') + \gamma \sum_{a' \in A} \pi(a'\mid s') Q^\pi(s', a')]$$
+    $$Q^\pi(s, a) = \sum_{s' \in S} P(s'\vert s, a) [R(s, a, s') + \gamma \sum_{a' \in A} \pi(a'\vert s') Q^\pi(s', a')]$$
 
     Esta equação determina que o valor de tomar a ação $a$ no estado $s$ é a média ponderada dos valores de todas as transições possíveis, considerando a recompensa imediata e o valor das ações subsequentes $(a')$ no estado resultante $(s')$, de acordo com a política $\pi$.
 
@@ -128,13 +134,13 @@ A *política ótima*, $\pi^\*$, é aquela que maximizar o valor de cada estado. 
 
 1. **Equação de Bellman de Otimalidade para $V^*$**:
 
-    $$V^*(s) = \max_{a \in A} \sum_{s' \in S} P(s'\mid s, a) [R(s, a, s') + \gamma V^*(s')]$$
+    $$V^*(s) = \max_{a \in A} \sum_{s' \in S} P(s'\vert s, a) [R(s, a, s') + \gamma V^*(s')]$$
 
     Esta equação define que o valor ótimo de um estado $s$ é o máximo valor obtido ao escolher a melhor ação $a$ possível, considerando as transições e recompensas.
 
 2. **Equação de Bellman de Otimalidade para $Q^*$**:
 
-    $$Q^*(s, a) = \sum_{s' \in S} P(s'\mid s, a) [R(s, a, s') + \gamma \max_{a' \in A} Q^*(s', a')]$$
+    $$Q^*(s, a) = \sum_{s' \in S} P(s'\vert s, a) [R(s, a, s') + \gamma \max_{a' \in A} Q^*(s', a')]$$
 
     Esta equação diz que o valor ótimo de tomar a ação $a$ no estado $s$ é a média ponderada das recompensas imediatas e o valor máximo possível no estado sucessor $s'$.
 
@@ -153,7 +159,7 @@ A *Dynamic Programming*, como vimos, oferece uma abordagem sistemática para res
 O algoritmo de Iteração de Valor aplica diretamente a equação de Bellman de otimalidade para $V^*$ de forma iterativa:
 
 $$\begin{equation} \tag{1}
-V_{k+1}(s) = \max_{a \in A} \sum_{s' \in S} P(s'\mid s, a)\;[R(s, a, s') + \gamma V_k(s')\;]
+V_{k+1}(s) = \max_{a \in A} \sum_{s' \in S} P(s'\vert s, a)\;[R(s, a, s') + \gamma V_k(s')\;]
 \end{equation}
 $$
 
@@ -163,7 +169,7 @@ O processo funciona da seguinte forma:
 2. Para cada estado $s$, atualizamos seu valor usando a equação (1);
 3. Repetimos o processo até a convergência, isto é, até que a diferença máxima entre $V_{k+1}$ e $V_k$ seja menor que um limiar $\epsilon$:
 
-   $$ \max_s \mid V_{k+1}(s) - V_k(s)\mid < \epsilon $$
+   $$ \max_s \vert V_{k+1}(s) - V_k(s)\vert < \epsilon $$
 
 No contexto do **Grid World**, para um estado $s = (x,y)$, o algoritmo considera: as quatro ações possíveis: $\{\text{Norte}, \text{Sul}, \text{Leste}, \text{Oeste}\}$; as probabilidades de transição: $0.8$ para a direção pretendida, $0.1$ para cada lado e a recompensa imediata $R(s)$ conforme definida anteriormente.
 
@@ -184,11 +190,11 @@ O algoritmo de Iteração de Política alterna entre duas etapas:
 
 1. **Avaliação de Política**: Para uma política fixa $\pi$, calculamos $V^\pi$ resolvendo o sistema de equações:
 
-   $$ V^\pi(s) = \sum_{s' \in S} P(s'\mid s, \pi(s)) [R(s, \pi(s), s') + \gamma V^\pi(s')] $$
+   $$ V^\pi(s) = \sum_{s' \in S} P(s'\vert s, \pi(s)) [R(s, \pi(s), s') + \gamma V^\pi(s')] $$
 
 2. **Melhoria de Política**: Atualizamos a política para ser gulosa em relação a $V^\pi$:
 
-   $$ \pi'(s) = \arg\max_{a \in A} \sum_{s' \in S} P(s'\mid s, a) [R(s, a, s') + \gamma V^\pi(s')] $$
+   $$ \pi'(s) = \arg\max_{a \in A} \sum_{s' \in S} P(s'\vert s, a) [R(s, a, s') + \gamma V^\pi(s')] $$
 
 No **Grid World**, a avaliação de política resolve um sistema linear de equações para encontrar o valor de cada estado sob a política atual. Por exemplo, se a política atual em $(2,3)$ é $Norte$, resolvemos:
 
@@ -462,6 +468,7 @@ enum class CellType {
 
 // Estrutura para representar uma posição no grid
 // Facilita o trabalho com coordenadas (x,y) mencionadas no exemplo
+// Position representa um estado s no MDP
 struct Position {
     int row;    // Linha (equivalente ao y no exemplo)
     int col;    // Coluna (equivalente ao x no exemplo)
@@ -532,8 +539,7 @@ private:
         return { Action::North, Action::South }; // Caso padrão
     }
 
-    // Calcula o valor de uma ação em um estado específico
-    // Implementa a equação de Bellman conforme mostrado no exemplo
+    // Calcula Q(s,a) - o valor da ação a no estado s usando a equação de Bellman
     double calculateActionValue(const Position& pos, Action action) const {
         double totalValue = 0.0;
 
@@ -566,6 +572,7 @@ public:
         grid[1][2] = CellType::Wall;         // Parede
 
         // Inicializa valores dos estados
+        // values[row][col] representa V(s) para o estado s = (row, col)
         for (auto& row : values) {
             row.fill(0.0);
         }
@@ -591,8 +598,8 @@ public:
             for (int row = 0; row < ROWS; ++row) {
                 for (int col = 0; col < COLS; ++col) {
                     if (grid[row][col] == CellType::Normal) {
-                        Position currentPos{ row, col };
-                        double oldValue = values[row][col];
+                        Position currentPos{ row, col }; // Estado s atual no MDP
+                        double oldValue = values[row][col]; // V_k(s) - valor atual do estado s
 
                         // Testa todas as ações e encontra a melhor
                         // Similar ao processo manual do exemplo
@@ -804,7 +811,7 @@ d) Política atual diz $\text{Norte}$ ($\uparrow$) após a primeira melhoria:
 
 Total: $V^{\pi_1}(1,2) = 0.64$
 
-Este processo de avaliação continua iterativamente para todos os estados não-terminais até que a diferença máxima entre duas iterações sucessivas seja menor que nosso limiar de convergência $\epsilon = 0.001$, ou seja, até que $\max_s \mid V_{k+1}(s) - V_k(s)\mid  < \epsilon$. Após essa convergência, que tipicamente leva 20-30 iterações de avaliação para nossa grade $4 \times 3$, obteremos:
+Este processo de avaliação continua iterativamente para todos os estados não-terminais até que a diferença máxima entre duas iterações sucessivas seja menor que nosso limiar de convergência $\epsilon = 0.001$, ou seja, até que $\max_s \vert V_{k+1}(s) - V_k(s)\vert  < \epsilon$. Após essa convergência, que tipicamente leva 20-30 iterações de avaliação para nossa grade $4 \times 3$, obteremos:
 
 $$
 \begin{array}{c|cccc}
@@ -820,7 +827,7 @@ $$
 
 Para cada estado, encontramos a ação que maximiza:
 
-$$\pi_{k+1}(s) = \arg\max_a \sum_{s'} P(s' \mid s,a)[R(s,a,s') + \gamma V^{\pi_k}(s')\;]$$
+$$\pi_{k+1}(s) = \arg\max_a \sum_{s'} P(s' \vert s,a)[R(s,a,s') + \gamma V^{\pi_k}(s')\;]$$
 
 Para o estado $(0,0)$:
 
@@ -1286,7 +1293,7 @@ A *Dynamic Programming* é uma técnica de otimização que resolve problemas co
 
 1. **Subestrutura Ótima**: a solução ótima do problema pode ser construída a partir das soluções ótimas de seus subproblemas. No **Grid World**, o valor ótimo de um estado depende dos valores ótimos dos estados subsequentes, como expresso na *Equação de Bellman*:
 
-   $$V^*(s) = \max_{a \in A} \sum_{s' \in S} P(s'\mid s,a)[R(s,a,s') + \gamma V^*(s')]$$
+   $$V^*(s) = \max_{a \in A} \sum_{s' \in S} P(s'\vert s,a)[R(s,a,s') + \gamma V^*(s')]$$
 
 2. **Subproblemas Sobrepostos**: os mesmos subproblemas aparecem repetidamente ao resolver o problema maior. No **Grid World**, o valor de um estado particular será usado múltiplas vezes ao calcular os valores de outros estados.
 
@@ -1382,7 +1389,7 @@ O estudo do **Grid World** que a esforçada leitora acompanhou exibe várias car
 
 A *Dynamic Programming* no **Grid World** serve como base para a compreensão de métodos avançados de *Reinforcement Learning*. Mas, *Dynamic Programming* não é *Reinforcement Learning*. A principal diferença está na necessidade de conhecimento do modelo do ambiente.
 
-Na implementação que desenvolvemos, com *Dynamic Programming*, foi necessário e indispensável conhecer todas as probabilidades de transição $P(s'\mid s,a)$ e recompensas $R(s,a,s')$. Este é o chamado método *model-based*. Neste método, o modelo completo do ambiente é conhecido e utilizado diretamente nos cálculos. Por outro lado, em *Reinforcement Learning*, os agentes precisam aprender através da interação com o ambiente, sem ter acesso a esse modelo completo, o que dizemos ser uma abordagem *model-free*.
+Na implementação que desenvolvemos, com *Dynamic Programming*, foi necessário e indispensável conhecer todas as probabilidades de transição $P(s'\vert s,a)$ e recompensas $R(s,a,s')$. Este é o chamado método *model-based*. Neste método, o modelo completo do ambiente é conhecido e utilizado diretamente nos cálculos. Por outro lado, em *Reinforcement Learning*, os agentes precisam aprender através da interação com o ambiente, sem ter acesso a esse modelo completo, o que dizemos ser uma abordagem *model-free*.
 
 A distinção entre *Dynamic Programming* e *Reinforcement Learning* fica evidente na forma como as Equações de Bellman são utilizadas.
 
@@ -1404,12 +1411,12 @@ A implementação em C++ do **Grid World** usando *Dynamic Programming* serve as
 
     $$
     \begin{align*}
-    \text{Iteração de Valor:} & \quad O(\mid S\mid^2\mid A|) \text{ por iteração} \\
-    \text{Iteração de Política:} & \quad O(\mid S\mid^3) \text{ para avaliação} + O(\mid S\mid^2\mid A\mid) \text{ para melhoria}
+    \text{Iteração de Valor:} & \quad O(\vert S\vert^2\vert A|) \text{ por iteração} \\
+    \text{Iteração de Política:} & \quad O(\vert S\vert^3) \text{ para avaliação} + O(\vert S\vert^2\vert A\vert) \text{ para melhoria}
     \end{align*}
     $$
 
-Neste caso, $\mid S\mid $ cresce quadraticamente com a dimensão da grade.
+Neste caso, $\vert S\vert $ cresce quadraticamente com a dimensão da grade.
 
 2. Experimente com diferentes fatores de desconto $(\gamma)$ e analise como eles afetam a velocidade de convergência de cada método.
 
@@ -1428,7 +1435,7 @@ Neste caso, $\mid S\mid $ cresce quadraticamente com a dimensão da grade.
 4. Adicione obstáculos ao Grid World e analise como a topologia do ambiente afeta o desempenho relativo de ambos os métodos.
 
 * Note: para obstáculos, observe que eles:
-  - Reduzem o espaço de estados efetivo $\mid S\mid$;
+  - Reduzem o espaço de estados efetivo $\vert S\vert$;
   - Podem criar "corredores" que afetam a propagação de valores;
   - Podem impactar diferentemente cada método
 

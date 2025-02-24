@@ -20,7 +20,7 @@ keywords: ""
 toc: true
 published: false
 beforetoc: ""
-lastmod: 2025-02-16T22:17:51.534Z
+lastmod: 2025-02-24T20:35:42.967Z
 ---
 
 Neste artigo, a curiosa leitora irá enfrentar os Transformers. Nenhuma relação com o o Optimus Prime. Se for estes Transformers que está procurando, o Google falhou com você!
@@ -166,13 +166,13 @@ A criativa leitora deve notar que o produto escalar é influenciado tanto pela d
 
 $$\vec{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$
 
-em um espaço $n$-dimensional, a magnitude, ou norma Euclidiana, representada por $\\mid \vec{v}\\mid $ será definida por:
+em um espaço $n$-dimensional, a magnitude, ou norma Euclidiana, representada por $\\vert \vec{v}\\vert $ será definida por:
 
 $$
-\\mid \vec{v}\\mid  = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2} = \sqrt{\sum_{i=1}^{n} v_i^2}
+\\vert \vec{v}\\vert  = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2} = \sqrt{\sum_{i=1}^{n} v_i^2}
 $$
 
-**Exemplo 3**: dado o vetor $\vec{b} = \begin{bmatrix} 0.2 \\ 0.7 \\ 0.1 \end{bmatrix}$, vamos calcular sua magnitude $\\mid \vec{b}\\mid $:
+**Exemplo 3**: dado o vetor $\vec{b} = \begin{bmatrix} 0.2 \\ 0.7 \\ 0.1 \end{bmatrix}$, vamos calcular sua magnitude $\\vert \vec{b}\\vert $:
 
 Podemos resolver este problema em dois passos:
 
@@ -185,7 +185,7 @@ Podemos resolver este problema em dois passos:
 2. **Extrair a raiz quadrada do resultado:**
 
     $$
-    \\mid \vec{b}\\mid  = \sqrt{\vec{b} \cdot \vec{b}} = \sqrt{0.54} \approx 0.7348
+    \\vert \vec{b}\\vert  = \sqrt{\vec{b} \cdot \vec{b}} = \sqrt{0.54} \approx 0.7348
     $$
 
 Portanto, a magnitude do vetor $\vec{b} = \begin{bmatrix} 0.2 \\ 0.7 \\ 0.1 \end{bmatrix}$ é aproximadamente 0.7348.
@@ -284,15 +284,15 @@ $$
 \vec{v}_{D_1} = \begin{bmatrix} 1 \\ 2 \\ 2 \\ 2 \\ 1 \\ 1 \\ 2 \end{bmatrix}
 $$
 
-A sagaz leitora deve perceber que o vetor de frequência $\vec{v}_{D_1}$ reside no espaço vetorial inteiro $\mathbb{Z}^{\mid V\mid }$, onde:
+A sagaz leitora deve perceber que o vetor de frequência $\vec{v}_{D_1}$ reside no espaço vetorial inteiro $\mathbb{Z}^{\vert V\vert }$, onde:
 
 * $\vec{v}_{D_1}$ denota o vetor de frequência do documento $D_1$.
 * $\mathbb{Z}$ representa o conjunto dos números inteiros, indicando que cada componente do vetor $\vec{v}_{D_1}$ é um número inteiro (neste caso, uma contagem de frequência).
-* $\mid V\mid $ representa a cardinalidade do vocabulário $V$, que é o número total de palavras únicas no vocabulário. Este valor $\mid V\mid $ define a dimensionalidade do espaço vetorial.
+* $\vert V\vert $ representa a cardinalidade do vocabulário $V$, que é o número total de palavras únicas no vocabulário. Este valor $\vert V\vert $ define a dimensionalidade do espaço vetorial.
 
 Em notação matemática de conjuntos, podemos expressar isso como:
 
-$$\vec{v}_{D_1} \in \mathbb{Z}^{\mid V\mid }$$
+$$\vec{v}_{D_1} \in \mathbb{Z}^{\vert V\vert }$$
 
 Essa representação simples já captura informações sobre a importância relativa das palavras no texto. Palavras que aparecem com mais frequência podem ser consideradas mais relevantes para o conteúdo do documento.
 
@@ -424,7 +424,7 @@ Dado o vocabulário, podemos ordená-lo alfabeticamente para definir a ordem das
 
 $V'_{global} = \{ \text{"bom"}, \text{"é"}, \text{"filme"}, \text{"não"}, \text{"o"} \}$
 
-A cardinalidade do vocabulário é $\mid V'_{global}\mid  = 5$, o que significa que nossos vetores de frequência terão 5 dimensões.
+A cardinalidade do vocabulário é $\vert V'_{global}\vert  = 5$, o que significa que nossos vetores de frequência terão 5 dimensões.
 
 Neste ponto, podemos criar os vetores de frequência $\vec{v}_{D_1}$ e $\vec{v}_{D_2}$ para cada documento, seguindo a ordem das palavras em $V'_{global}$.
 
@@ -479,11 +479,11 @@ O produto escalar é $4$, um valor positivo e relativamente alto, considerando a
 **b) Magnitudes**: calculamos as magnitudes de $\vec{v}_{D_1}$ e $\vec{v}_{D_2}$:
 
 $$
-\\mid \vec{v}_{D_1}\\mid = \sqrt{1^2 + 1^2 + 1^2 + 0^2 + 1^2} = \sqrt{4} = 2
+\\vert \vec{v}_{D_1}\\vert = \sqrt{1^2 + 1^2 + 1^2 + 0^2 + 1^2} = \sqrt{4} = 2
 $$
 
 $$
-\\mid \vec{v}_{D_2}\\mid = \sqrt{1^2 + 1^2 + 1^2 + 1^2 + 1^2} = \sqrt{5} \approx 2.236
+\\vert \vec{v}_{D_2}\\vert = \sqrt{1^2 + 1^2 + 1^2 + 1^2 + 1^2} = \sqrt{5} \approx 2.236
 $$
 
 As magnitudes são próximas, indicando que ambos os vetores têm comprimentos similares no espaço vetorial definido pelo vocabulário global.
@@ -497,7 +497,7 @@ Embora o produto escalar e as magnitudes sugiram alguma similaridade entre $\vec
 
 Ainda há um aspecto particularmente problemático na representação vetorial por frequência: a questão da dimensionalidade.
 
-Para um vocabulário de tamanho $\mid V\mid $, cada documento é representado em um espaço $\mathbb{R}^{\mid V\mid }$. Neste caso, $\mathbb{R}$ refere-se a um espaço vetorial de dimensão $\mid V\mid$, o tamanho do vocabulário. Isso significa que cada documento é representado como um vetor em um espaço de alta dimensão, no qual cada dimensão corresponde a uma palavra do vocabulário. Para um vocabulário de $10.000$ palavras, cada documento seria representado como um vetor em um espaço de $10.000$ dimensões. Isto leva a vetores extremamente esparsos, nos quais a maioria dos componentes é zero. Esta característica não só é computacionalmente ineficiente, mas também dificulta a identificação de similaridades entre documentos.
+Para um vocabulário de tamanho $\vert V\vert $, cada documento é representado em um espaço $\mathbb{R}^{\vert V\vert }$. Neste caso, $\mathbb{R}$ refere-se a um espaço vetorial de dimensão $\vert V\vert$, o tamanho do vocabulário. Isso significa que cada documento é representado como um vetor em um espaço de alta dimensão, no qual cada dimensão corresponde a uma palavra do vocabulário. Para um vocabulário de $10.000$ palavras, cada documento seria representado como um vetor em um espaço de $10.000$ dimensões. Isto leva a vetores extremamente esparsos, nos quais a maioria dos componentes é zero. Esta característica não só é computacionalmente ineficiente, mas também dificulta a identificação de similaridades entre documentos.
 
 >Um vetor esparso é um vetor onde a **maioria das suas componentes é zero**. Em coleções de documentos, como livros, artigos e processos, se usarmos os nossos vetores de frequência, a maioria das palavras do vocabulário não estará presente em um documento específico. Portanto, para um documento $D$, a maioria das entradas em $\vec{v}_D$ será zero.
 
@@ -1350,9 +1350,9 @@ Finalmente, o **Documento 1** deve ser considerado o mais relevante para a consu
 
 Finalmente, chegamos ao **One-Hot Encoding**. Embora menos comum para representar diretamente *textos inteiros* em tarefas de processamento de linguagem natural (PNL) de nível superior, o one-hot encoding é fundamental como um passo inicial para representar *palavras individuais* ou *caracteres* numericamente.
 
-Em one-hot encoding, cada palavra (ou caractere) no vocabulário $V$ é representada por um vetor binário $\vec{e}_w$. O tamanho do vetor é igual ao tamanho do vocabulário, $\mid V\mid $. Para cada palavra $w_i \in V$, o vetor $\vec{e}_{w_i}$ terá todos os valores como 0, exceto na posição $i$ correspondente à palavra $w_i$ no vocabulário, onde o valor será 1.
+Em one-hot encoding, cada palavra (ou caractere) no vocabulário $V$ é representada por um vetor binário $\vec{e}_w$. O tamanho do vetor é igual ao tamanho do vocabulário, $\vert V\vert $. Para cada palavra $w_i \in V$, o vetor $\vec{e}_{w_i}$ terá todos os valores como 0, exceto na posição $i$ correspondente à palavra $w_i$ no vocabulário, onde o valor será 1.
 
-Formalmente, se $V = \{w_1, w_2, ..., w_{\mid V\mid }\}$ é o vocabulário ordenado, então o one-hot encoding para a palavra $w_i$ é um vetor $\vec{e}_{w_i} \in \mathbb{R}^{\mid V\mid }$ tal que:
+Formalmente, se $V = \{w_1, w_2, ..., w_{\vert V\vert }\}$ é o vocabulário ordenado, então o one-hot encoding para a palavra $w_i$ é um vetor $\vec{e}_{w_i} \in \mathbb{R}^{\vert V\vert }$ tal que:
 
 $$
 (\vec{e}_{w_i})_j =
@@ -1481,12 +1481,12 @@ Outra maneira de pensar na codificação one-hot é que cada palavra ainda receb
 
 Um vocabulário codificado one-hot (Exemplo):
 
-\mid  Palavra \mid  Representação Numérica \mid  Representação One-Hot \mid 
-\mid ---\mid ---\mid ---\mid 
-\mid  maçã     \mid  1                    \mid  [1, 0, 0, 0]          \mid 
-\mid  banana    \mid  2                    \mid  [0, 1, 0, 0]          \mid 
-\mid  encontrar \mid  3                    \mid  [0, 0, 1, 0]          \mid 
-\mid  fruta  \mid  4                    \mid  [0, 0, 0, 1]          \mid 
+\vert  Palavra \vert  Representação Numérica \vert  Representação One-Hot \vert 
+\vert ---\vert ---\vert ---\vert 
+\vert  maçã     \vert  1                    \vert  [1, 0, 0, 0]          \vert 
+\vert  banana    \vert  2                    \vert  [0, 1, 0, 0]          \vert 
+\vert  encontrar \vert  3                    \vert  [0, 0, 1, 0]          \vert 
+\vert  fruta  \vert  4                    \vert  [0, 0, 0, 1]          \vert 
 
 Então, a frase "Encontrar fruta maçã" se torna uma sequência de arrays unidimensionais que, depois de comprimidos juntos, começa a parecer um array bidimensional.
 
