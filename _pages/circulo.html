@@ -4,7 +4,7 @@ title: Círculo Trigonométrico
 permalink: /circulo
 comments: false
 slug: um-circulo-trigonometrico
-author: Frank 
+author: Frank
 description: Só um circulo trigonométrico.
 ---
 
@@ -13,91 +13,232 @@ description: Só um circulo trigonométrico.
 
     <head>
         <title>Gráficos Trigonométricos Interativos</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
+            body {
+                margin: 0;
+                padding: 10px;
+                font-family: Arial, sans-serif;
+            }
+
             .container {
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
-                font-family: Arial, sans-serif;
+                width: 100%;
+                max-width: 1200px;
+                margin: 0 auto;
             }
 
-            .left-panel,
             .right-panel {
-                width: 200px;
                 padding: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
-            .center-panel,
-            .bottom-panel {
+            .center-panel {
                 padding: 10px;
+                width: 33%;
+                /* Definido como 33% da largura disponível */
+                max-width: 400px;
+                /* Tamanho máximo para telas grandes */
+                display: flex;
+                justify-content: center;
+            }
+
+            .wave-container {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+                width: 100%;
+            }
+
+            .wave-panel {
+                display: flex;
+                align-items: center;
+                width: 100%;
+            }
+
+            .wave-label {
+                writing-mode: vertical-lr;
+                text-orientation: upright;
+                padding-right: 5px;
+                font-weight: bold;
             }
 
             canvas {
                 border: 1px solid black;
             }
 
-            h2 {
-                margin: 0 0 10px;
-                color: #333;
+            /* Para canvas, a largura e altura devem ser definidas via JavaScript
+               para garantir que o contexto de desenho tenha as dimensões corretas */
+            #circle-canvas {
+                max-width: 100%;
+            }
+
+            .wave-canvas {
+                max-width: 100%;
+            }
+
+            .info-message {
+                text-align: center;
+                margin-top: 10px;
+                width: 100%;
+            }
+
+            @media (max-width: 768px) {
+                .container {
+                    flex-direction: column;
+                }
+
+                .center-panel {
+                    width: 100%;
+                    max-width: none;
+                }
             }
         </style>
     </head>
 
     <body>
         <div class="container">
-            <div class="left-panel">
-                <h2>Valores</h2>
-                <p>Coordenadas: (<span id="x-val">1.000</span>, <span id="y-val">0.000</span>)</p>
-                <p>Ângulo: <span id="theta-val">0.00</span> <span id="units-label">radianos</span></p>
-                <p>Cosseno: <span id="cos-val">1.000</span></p>
-                <p>Seno: <span id="sin-val">0.000</span></p>
-                <p>Tangente: <span id="tan-val">0.000</span></p>
-            </div>
             <div class="center-panel">
-                <canvas id="circle-canvas" width="400" height="400"></canvas>
+                <canvas id="circle-canvas"></canvas>
             </div>
             <div class="right-panel">
-                <h2>Opções</h2>
-                <label><input type="radio" name="function" value="cos" checked> Cos</label><br>
-                <label><input type="radio" name="function" value="sin"> Sen</label><br>
-                <label><input type="radio" name="function" value="tan"> Tan</label><br>
-                <h3>Unidades</h3>
-                <label><input type="radio" name="units" value="radians" checked> Radianos</label><br>
-                <label><input type="radio" name="units" value="degrees"> Graus</label><br>
-                <label><input type="checkbox" id="labels-checkbox"> Mostrar labels no canvas</label>
+                <label><input type="checkbox" id="degrees-checkbox"> Graus</label>
             </div>
-            <div class="bottom-panel">
-                <canvas id="wave-canvas" width="800" height="200"></canvas>
+            <div class="wave-container">
+                <div class="wave-panel">
+                    <div class="wave-label">COS</div>
+                    <canvas id="cos-wave-canvas" class="wave-canvas"></canvas>
+                </div>
+                <div class="wave-panel">
+                    <div class="wave-label">SEN</div>
+                    <canvas id="sin-wave-canvas" class="wave-canvas"></canvas>
+                </div>
+                <div class="wave-panel">
+                    <div class="wave-label">TAN</div>
+                    <canvas id="tan-wave-canvas" class="wave-canvas"></canvas>
+                </div>
+            </div>
+            <div class="info-message">
+                Use as setas ← → para mover o ângulo (1° por vez)<br>
+                Use Shift + setas ← → para movimento preciso (0.1° por vez)
             </div>
         </div>
 
         <script>
-            const circleCtx = document.getElementById('circle-canvas').getContext('2d');
-            const waveCtx = document.getElementById('wave-canvas').getContext('2d');
+            // Elementos do canvas
+            const circleCanvas = document.getElementById('circle-canvas');
+            const circleCtx = circleCanvas.getContext('2d');
+            const cosWaveCanvas = document.getElementById('cos-wave-canvas');
+            const cosWaveCtx = cosWaveCanvas.getContext('2d');
+            const sinWaveCanvas = document.getElementById('sin-wave-canvas');
+            const sinWaveCtx = sinWaveCanvas.getContext('2d');
+            const tanWaveCanvas = document.getElementById('tan-wave-canvas');
+            const tanWaveCtx = tanWaveCanvas.getContext('2d');
 
-            const circleCenterX = 200;
-            const circleCenterY = 200;
-            const circleRadius = 150;
-
-            const waveWidth = 800;
-            const waveHeight = 200;
-            const waveCenterY = 100;
+            // Variáveis padrão que serão ajustadas
+            let circleCenterX = 200;
+            let circleCenterY = 200;
+            let circleRadius = 150;
+            let waveWidth = 800;
+            let waveHeight = 150;
 
             let theta = 0;
-            let selectedFunction = 'cos';
             let units = 'radians';
             let xMin = -2 * Math.PI;
             let xMax = 2 * Math.PI;
 
+            // Flag explícita para controlar quando estamos EXATAMENTE em 90° ou 270°
+            let isExactRightAngle = false;
+
+            // Função para calcular a área da tela disponível
+            function getAvailableScreenArea() {
+                return window.innerWidth * window.innerHeight;
+            }
+
+            // Função para ajustar dimensões responsivas
+            function resizeCanvases() {
+                // Obter dimensões da tela
+                const screenWidth = window.innerWidth;
+                const screenHeight = window.innerHeight;
+                const availableArea = getAvailableScreenArea();
+
+                // Calcular tamanho do círculo (aprox. 33% da área disponível)
+                // Limitamos a largura para evitar que fique muito grande em telas grandes
+                const containerWidth = Math.min(screenWidth * 0.9, 1200); // 90% da largura da tela, máximo 1200px
+
+                // O tamanho do círculo deve ser aproximadamente 33% da área,
+                // o que equivale a sqrt(0.33 * área) para cada dimensão
+                const targetCircleSize = Math.min(
+                    Math.floor(Math.sqrt(availableArea * 0.33)),
+                    containerWidth * 0.33, // 33% da largura do container
+                    400 // Tamanho máximo absoluto
+                );
+
+                // Importante: Definir a largura e altura do canvas em pixels
+                // Isso é crucial para o contexto de desenho ter as dimensões corretas
+                circleCanvas.width = targetCircleSize;
+                circleCanvas.height = targetCircleSize;
+
+                // Ajustar centros e raio
+                circleCenterX = targetCircleSize / 2;
+                circleCenterY = targetCircleSize / 2;
+                circleRadius = Math.floor(targetCircleSize * 0.38); // 38% do tamanho para deixar espaço para os rótulos
+
+                // Ajustar largura dos canvas de ondas para corresponder à largura disponível
+                // Queremos que todos os gráficos de funções tenham a mesma largura
+                const waveContainerWidth = document.querySelector('.wave-container').offsetWidth;
+                waveWidth = Math.floor(waveContainerWidth * 0.92); // 92% para dar espaço para os rótulos
+
+                // A altura dos gráficos de ondas deve ser suficiente para mostrar bem as funções
+                // Min 80px para garantir visibilidade mínima
+                waveHeight = Math.max(Math.floor(targetCircleSize * 0.25), 80);
+
+                // Definir as dimensões em pixels para os canvas de ondas
+                cosWaveCanvas.width = waveWidth;
+                cosWaveCanvas.height = waveHeight;
+                sinWaveCanvas.width = waveWidth;
+                sinWaveCanvas.height = waveHeight;
+                tanWaveCanvas.width = waveWidth;
+                tanWaveCanvas.height = waveHeight;
+
+                // Redesenhar tudo
+                drawCircle();
+                drawWaves();
+            }
+
+            // Função para inicializar tudo após carregamento
+            function initializeApp() {
+                resizeCanvases();
+                // Definir valor inicial de theta
+                theta = Math.PI / 4; // 45 graus como valor inicial
+                drawCircle();
+                drawWaves();
+            }
+
+            // Chamar inicialização quando a página estiver carregada
+            window.addEventListener('load', initializeApp);
+
+            // Adicionar listener para redimensionamento da janela
+            window.addEventListener('resize', resizeCanvases);
+
             function drawCircle() {
-                circleCtx.clearRect(0, 0, 400, 400);
+                // Limpar todo o canvas
+                circleCtx.clearRect(0, 0, circleCanvas.width, circleCanvas.height);
+
+                // Definir espessura das linhas
+                circleCtx.lineWidth = 1;
 
                 // Eixos
                 circleCtx.beginPath();
                 circleCtx.moveTo(0, circleCenterY);
-                circleCtx.lineTo(400, circleCenterY);
+                circleCtx.lineTo(circleCanvas.width, circleCenterY);
                 circleCtx.moveTo(circleCenterX, 0);
-                circleCtx.lineTo(circleCenterX, 400);
+                circleCtx.lineTo(circleCenterX, circleCanvas.height);
                 circleCtx.strokeStyle = 'black';
                 circleCtx.stroke();
 
@@ -109,6 +250,13 @@ description: Só um circulo trigonométrico.
                 // Coordenadas do ponto no círculo
                 const x = circleCenterX + circleRadius * Math.cos(theta);
                 const y = circleCenterY - circleRadius * Math.sin(theta);
+
+                // Valores para exibir
+                const cosValue = Math.cos(theta).toFixed(3);
+                const sinValue = Math.sin(theta).toFixed(3);
+                const tanValue = Math.tan(theta).toFixed(3);
+                const angleVal = units === 'radians' ? theta.toFixed(3) : (theta * 180 / Math.PI).toFixed(2);
+                const angleUnit = units === 'radians' ? 'rad' : '°';
 
                 // Raio (hipotenusa)
                 circleCtx.beginPath();
@@ -145,16 +293,20 @@ description: Só um circulo trigonométrico.
                 circleCtx.strokeStyle = 'blue';
                 circleCtx.stroke();
 
-                // Tangente (roxa, proporcional ao valor)
-                if (selectedFunction === 'tan') {
-                    const tanValue = Math.tan(theta);
-                    const len = Math.abs(tanValue) * 50; // Comprimento proporcional
+                // Tangente (roxa)
+                if (!isExactRightAngle) {
+                    // Limitar comprimento visual da linha tangente
+                    const tanLen = Math.min(Math.abs(tanValue) * 50, 200);
+
+                    // REMOVER ESTA CONDIÇÃO - esta é a causa do problema!
+                    // Agora a tangente será desenhada para qualquer valor, não apenas quando < 10
+
                     const dx = -Math.sin(theta);
                     const dy = Math.cos(theta);
-                    const x1 = x + len * dx;
-                    const y1 = y - len * dy;
-                    const x2 = x - len * dx;
-                    const y2 = y + len * dy;
+                    const x1 = x + tanLen * dx;
+                    const y1 = y - tanLen * dy;
+                    const x2 = x - tanLen * dx;
+                    const y2 = y + tanLen * dy;
                     circleCtx.beginPath();
                     circleCtx.moveTo(x1, y1);
                     circleCtx.lineTo(x2, y2);
@@ -162,65 +314,170 @@ description: Só um circulo trigonométrico.
                     circleCtx.stroke();
                 }
 
-                // Labels no canvas (se ativado)
-                if (document.getElementById('labels-checkbox').checked) {
-                    circleCtx.font = '14px Arial';
-                    circleCtx.fillStyle = 'red';
-                    circleCtx.fillText('Cosseno', x > circleCenterX ? circleCenterX + 10 : x + 10, circleCenterY + 20);
-                    circleCtx.fillStyle = 'green';
-                    circleCtx.fillText('Seno', x + 10, y < circleCenterY ? y + 20 : circleCenterY - 10);
-                    circleCtx.fillStyle = 'blue';
-                    circleCtx.fillText('Ângulo', circleCenterX + 25, circleCenterY - 25);
-                    if (selectedFunction === 'tan') {
-                        circleCtx.fillStyle = 'purple';
-                        circleCtx.fillText('Tangente', x + len * dx + 10, y - len * dy);
+                // Ajustar tamanho da fonte com base no tamanho do canvas
+                const fontSize = Math.max(12, Math.floor(circleCanvas.width / 25));
+                circleCtx.font = `bold ${fontSize}px Arial`;
+
+                // Valor do ângulo - posicionado no arco
+                circleCtx.fillStyle = 'blue';
+                // Posicionar o ângulo no arco
+                const angleX = circleCenterX + Math.cos(-theta / 2) * (circleRadius / 2.5);
+                const angleY = circleCenterY - Math.sin(-theta / 2) * (circleRadius / 2.5);
+                circleCtx.fillText(`θ = ${angleVal}${angleUnit}`, angleX, angleY);
+
+                // Valor do cosseno - posicionado no eixo X
+                circleCtx.fillStyle = 'red';
+                const cosX = circleCenterX + (circleRadius * Math.cos(theta)) / 2;
+                circleCtx.fillText(`cos = ${cosValue}`, cosX, circleCenterY + fontSize);
+
+                // Valor do seno - posicionado no eixo Y
+                circleCtx.fillStyle = 'green';
+                circleCtx.fillText(`sen = ${sinValue}`, x + 5, (circleCenterY + y) / 2);
+
+                // Valor da tangente - posicionado na linha tangente
+                circleCtx.fillStyle = 'purple';
+                if (isExactRightAngle) {
+                    // Tangente é infinita
+                    circleCtx.fillText(`tan = ∞`, x + 10, y - 15);
+                } else {
+                    // Calcular posição melhor para a tangente
+                    const tanX = x + 15;
+                    const tanY = y - 15;
+                    circleCtx.fillText(`tan = ${tanValue}`, tanX, tanY);
+                }
+            }
+
+            function drawWaves() {
+                // Função auxiliar para desenhar ondas
+                function drawWave(ctx, func, color) {
+                    const waveCenterY = waveHeight / 2;
+                    ctx.clearRect(0, 0, waveWidth, waveHeight);
+
+                    // Definir espessura da linha
+                    ctx.lineWidth = 1;
+
+                    // Eixo X
+                    ctx.beginPath();
+                    ctx.moveTo(0, waveCenterY);
+                    ctx.lineTo(waveWidth, waveCenterY);
+                    ctx.strokeStyle = 'black';
+                    ctx.stroke();
+
+                    // Adicionar linhas verticais para marcar períodos
+                    // Para funções trigonométricas, um período completo é 2π
+                    ctx.beginPath();
+                    ctx.setLineDash([1, 2]); // Linha tracejada
+                    const periodWidth = waveWidth / (xMax - xMin) * (2 * Math.PI);
+                    const numPeriods = Math.floor((xMax - xMin) / (2 * Math.PI));
+
+                    for (let i = 0; i <= numPeriods; i++) {
+                        const xPos = (xMin + i * 2 * Math.PI - xMin) / (xMax - xMin) * waveWidth;
+                        if (xPos >= 0 && xPos <= waveWidth) {
+                            ctx.moveTo(xPos, 0);
+                            ctx.lineTo(xPos, waveHeight);
+                        }
+                    }
+                    ctx.strokeStyle = 'rgba(0,0,0,0.2)';
+                    ctx.stroke();
+                    ctx.setLineDash([]); // Restaurar linha sólida
+
+                    // Desenhar a função
+                    const steps = 1000;
+                    const dx = (xMax - xMin) / steps;
+                    ctx.beginPath();
+                    let firstPoint = true;
+                    let lastX = null, lastY = null;
+
+                    // Fator de escala ajustado para melhor visualização
+                    const scaleFactor = func === 'tan' ? 30 : 50;
+
+                    for (let i = 0; i <= steps; i++) {
+                        let t = xMin + i * dx;
+                        let rad = units === 'radians' ? t : t * Math.PI / 180;
+                        let val = Math[func](rad);
+
+                        // Limitar valores muito grandes para tangente e detectar assíntotas
+                        if (func === 'tan') {
+                            // Para assíntotas da tangente (próximo a π/2, 3π/2, etc.)
+                            const modPi = Math.abs(rad % Math.PI);
+                            if (Math.abs(modPi - Math.PI / 2) < 0.05) {
+                                // Se estamos próximos a uma assíntota, encerramos o traço atual
+                                if (!firstPoint) {
+                                    ctx.stroke();
+                                    firstPoint = true;
+                                }
+                                continue;
+                            }
+
+                            if (Math.abs(val) > 5) {
+                                // Se o valor é muito grande, finalizamos o traço e começamos um novo
+                                if (!firstPoint) {
+                                    ctx.stroke();
+                                    firstPoint = true;
+                                }
+                                continue;
+                            }
+                        }
+
+                        let canvasX = (t - xMin) / (xMax - xMin) * waveWidth;
+                        let canvasY = waveCenterY - val * scaleFactor;
+
+                        // Verificar se há uma mudança muito brusca (possível assíntota)
+                        if (lastY !== null && Math.abs(canvasY - lastY) > waveHeight * 0.8) {
+                            // Grande salto vertical - provavelmente uma assíntota
+                            if (!firstPoint) {
+                                ctx.stroke();
+                                firstPoint = true;
+                            }
+                            lastX = canvasX;
+                            lastY = canvasY;
+                            continue;
+                        }
+
+                        if (firstPoint) {
+                            ctx.beginPath(); // Iniciar um novo traço
+                            ctx.moveTo(canvasX, canvasY);
+                            firstPoint = false;
+                        } else {
+                            ctx.lineTo(canvasX, canvasY);
+                        }
+
+                        lastX = canvasX;
+                        lastY = canvasY;
+                    }
+
+                    ctx.strokeStyle = color;
+                    ctx.stroke();
+
+                    // Ponto atual na onda
+                    let currentT = units === 'radians' ? theta : theta * 180 / Math.PI;
+                    let waveX = (currentT - xMin) / (xMax - xMin) * waveWidth;
+                    let waveVal = Math[func](theta);
+                    let waveY = waveCenterY - waveVal * 50;
+
+                    // Só mostrar o ponto se estiver dentro dos limites
+                    if (waveX >= 0 && waveX <= waveWidth && Math.abs(waveVal) <= 5) {
+                        // Desenhar um círculo maior e mais visível
+                        ctx.beginPath();
+                        ctx.arc(waveX, waveY, 5, 0, 2 * Math.PI);
+                        ctx.fillStyle = 'red';
+                        ctx.fill();
+                        ctx.strokeStyle = 'black';
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+
+                        // Adicionar rótulo com o valor
+                        ctx.font = '12px Arial';
+                        ctx.fillStyle = 'black';
+                        let displayVal = Math[func](theta).toFixed(3);
+                        ctx.fillText(displayVal, waveX + 8, waveY - 8);
                     }
                 }
-            }
 
-            function drawWave() {
-                waveCtx.clearRect(0, 0, waveWidth, waveHeight);
-                waveCtx.beginPath();
-                waveCtx.moveTo(0, waveCenterY);
-                waveCtx.lineTo(waveWidth, waveCenterY);
-                waveCtx.strokeStyle = 'black';
-                waveCtx.stroke();
-                const steps = 1000;
-                const dx = (xMax - xMin) / steps;
-                waveCtx.beginPath();
-                for (let i = 0; i <= steps; i++) {
-                    let t = xMin + i * dx;
-                    let rad = units === 'radians' ? t : t * Math.PI / 180;
-                    let val = Math[selectedFunction](rad);
-                    if (selectedFunction === 'tan' && Math.abs(val) > 5) continue;
-                    let canvasX = (t - xMin) / (xMax - xMin) * waveWidth;
-                    let canvasY = waveCenterY - val * 50;
-                    if (i === 0) waveCtx.moveTo(canvasX, canvasY);
-                    else waveCtx.lineTo(canvasX, canvasY);
-                }
-                waveCtx.strokeStyle = 'blue';
-                waveCtx.stroke();
-                let waveX = units === 'radians' ? (theta - xMin) / (xMax - xMin) * waveWidth : ((theta * 180 / Math.PI) - xMin) / (xMax - xMin) * waveWidth;
-                let waveVal = Math[selectedFunction](theta);
-                let waveY = waveCenterY - waveVal * 50;
-                waveCtx.beginPath();
-                waveCtx.arc(waveX, waveY, 5, 0, 2 * Math.PI);
-                waveCtx.fillStyle = 'red';
-                waveCtx.fill();
-            }
-
-            function updateValues() {
-                const x = Math.cos(theta).toFixed(3);
-                const y = Math.sin(theta).toFixed(3);
-                const tan = Math.tan(theta).toFixed(3);
-                let angleVal = units === 'radians' ? theta.toFixed(3) : (theta * 180 / Math.PI).toFixed(2);
-                document.getElementById('x-val').textContent = x;
-                document.getElementById('y-val').textContent = y;
-                document.getElementById('theta-val').textContent = angleVal;
-                document.getElementById('units-label').textContent = units === 'radians' ? 'radianos' : 'graus';
-                document.getElementById('cos-val').textContent = x;
-                document.getElementById('sin-val').textContent = y;
-                document.getElementById('tan-val').textContent = tan;
+                // Desenhar cada onda em seu próprio canvas
+                drawWave(cosWaveCtx, 'cos', 'red');
+                drawWave(sinWaveCtx, 'sin', 'green');
+                drawWave(tanWaveCtx, 'tan', 'purple');
             }
 
             document.getElementById('circle-canvas').addEventListener('click', function (event) {
@@ -230,39 +487,102 @@ description: Só um circulo trigonométrico.
                 const dx = mouseX - circleCenterX;
                 const dy = circleCenterY - mouseY;
                 theta = Math.atan2(dy, dx);
-                if (theta < 0) theta += 2 * Math.PI;
+
+                // Ao clicar, nunca estamos exatamente em 90° ou 270°
+                isExactRightAngle = false;
+
                 drawCircle();
-                drawWave();
-                updateValues();
+                drawWaves();
             });
 
-            document.querySelectorAll('input[name="function"]').forEach(radio => {
-                radio.addEventListener('change', function () {
-                    selectedFunction = this.value;
-                    drawCircle();
-                    drawWave();
-                    updateValues();
-                });
+            document.getElementById('degrees-checkbox').addEventListener('change', function () {
+                units = this.checked ? 'degrees' : 'radians';
+                if (units === 'radians') {
+                    xMin = -2 * Math.PI;
+                    xMax = 2 * Math.PI;
+                } else {
+                    xMin = -360;
+                    xMax = 360;
+                }
+
+                // Mudando unidades nunca nos coloca exatamente em 90° ou 270°
+                isExactRightAngle = false;
+
+                drawCircle();
+                drawWaves();
             });
 
-            document.querySelectorAll('input[name="units"]').forEach(radio => {
-                radio.addEventListener('change', function () {
-                    units = this.value;
+            // Adicionar event listener para controle de teclado
+            document.addEventListener('keydown', function (event) {
+                // Verificar se as setas esquerda ou direita foram pressionadas
+                if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+                    // Determinar a direção (negativa para esquerda, positiva para direita)
+                    const direction = event.key === 'ArrowLeft' ? -1 : 1;
+
+                    // Verificar se a tecla Shift está pressionada para movimento mais preciso
+                    let increment;
                     if (units === 'radians') {
-                        xMin = -2 * Math.PI;
-                        xMax = 2 * Math.PI;
+                        // Em radianos: 1 grau = 0.01745 radianos e 0.1 grau = 0.001745 radianos
+                        increment = event.shiftKey ? 0.001745 : 0.01745;
                     } else {
-                        xMin = -360;
-                        xMax = 360;
+                        // Em graus: incremento de 1 grau ou 0.1 grau
+                        increment = event.shiftKey ? 0.1 : 1;
                     }
-                    drawWave();
-                    updateValues();
-                });
+
+                    // Valores especiais para posicionar exatamente em 90° ou 270° quando estiver próximo
+                    const currentDegrees = theta * 180 / Math.PI;
+                    if (!event.shiftKey) {
+                        // Para clicks regulares da seta, verificar se estamos chegando perto de 90 ou 270 graus
+                        if ((direction === 1 && currentDegrees > 85 && currentDegrees < 90) ||
+                            (direction === -1 && currentDegrees < 95 && currentDegrees > 90)) {
+                            theta = Math.PI / 2; // Exatamente 90 graus
+                            isExactRightAngle = true; // Definir flag para mostrar tangente infinita
+                            drawCircle();
+                            drawWaves();
+                            event.preventDefault();
+                            return;
+                        }
+
+                        if ((direction === 1 && currentDegrees > 265 && currentDegrees < 270) ||
+                            (direction === -1 && currentDegrees < 275 && currentDegrees > 270)) {
+                            theta = 3 * Math.PI / 2; // Exatamente 270 graus
+                            isExactRightAngle = true; // Definir flag para mostrar tangente infinita
+                            drawCircle();
+                            drawWaves();
+                            event.preventDefault();
+                            return;
+                        }
+                    }
+
+                    // Atualizar theta
+                    if (units === 'radians') {
+                        theta += direction * increment;
+                        // Manter theta no intervalo [0, 2π]
+                        if (theta < 0) theta += 2 * Math.PI;
+                        if (theta > 2 * Math.PI) theta -= 2 * Math.PI;
+                    } else {
+                        // Converter para radianos internamente
+                        const thetaDegrees = theta * 180 / Math.PI;
+                        const newThetaDegrees = thetaDegrees + direction * increment;
+                        theta = (newThetaDegrees % 360) * Math.PI / 180;
+                        if (theta < 0) theta += 2 * Math.PI;
+                    }
+
+                    // Para qualquer movimento normal, não estamos em ângulo reto exato
+                    isExactRightAngle = false;
+
+                    // Atualizar visualização
+                    drawCircle();
+                    drawWaves();
+
+                    // Prevenir o comportamento padrão das teclas de seta
+                    event.preventDefault();
+                }
             });
 
-            drawCircle();
-            drawWave();
-            updateValues();
+            // Inicialização
+            // Desenhar será feito após o carregamento completo (window.load)
+            // para garantir que as dimensões estejam corretas
         </script>
     </body>
 
