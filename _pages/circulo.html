@@ -23,27 +23,33 @@ description: Só um circulo trigonométrico.
 
             .container {
                 display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
+                flex-direction: column;
+                align-items: center;
                 width: 100%;
                 max-width: 1200px;
                 margin: 0 auto;
             }
 
-            .right-panel {
-                padding: 10px;
+            .top-section {
                 display: flex;
-                align-items: center;
+                flex-wrap: wrap;
                 justify-content: center;
+                align-items: center;
+                width: 100%;
             }
 
             .center-panel {
                 padding: 10px;
-                width: 33%;
-                /* Definido como 33% da largura disponível */
-                max-width: 400px;
-                /* Tamanho máximo para telas grandes */
                 display: flex;
+                justify-content: center;
+                align-items: center;
+                /* Removendo largura fixa para ser definida pelo JavaScript */
+            }
+
+            .control-panel {
+                padding: 10px;
+                display: flex;
+                align-items: center;
                 justify-content: center;
             }
 
@@ -53,27 +59,29 @@ description: Só um circulo trigonométrico.
                 gap: 10px;
                 padding: 10px;
                 width: 100%;
+                /* Garantir que a largura seja a mesma do círculo */
+                max-width: 800px;
+                /* Consistente com o tamanho máximo do círculo */
             }
 
             .wave-panel {
                 display: flex;
+                flex-direction: column;
                 align-items: center;
                 width: 100%;
             }
 
             .wave-label {
-                writing-mode: vertical-lr;
-                text-orientation: upright;
-                padding-right: 5px;
                 font-weight: bold;
+                padding-bottom: 5px;
+                text-align: center;
             }
 
             canvas {
                 border: 1px solid black;
             }
 
-            /* Para canvas, a largura e altura devem ser definidas via JavaScript
-               para garantir que o contexto de desenho tenha as dimensões corretas */
+            /* Para canvas, a largura e altura serão definidas via JavaScript */
             #circle-canvas {
                 max-width: 100%;
             }
@@ -89,13 +97,9 @@ description: Só um circulo trigonométrico.
             }
 
             @media (max-width: 768px) {
-                .container {
+                .top-section {
                     flex-direction: column;
-                }
-
-                .center-panel {
-                    width: 100%;
-                    max-width: none;
+                    align-items: center;
                 }
             }
         </style>
@@ -103,23 +107,25 @@ description: Só um circulo trigonométrico.
 
     <body>
         <div class="container">
-            <div class="center-panel">
-                <canvas id="circle-canvas"></canvas>
-            </div>
-            <div class="right-panel">
-                <label><input type="checkbox" id="degrees-checkbox"> Graus</label>
+            <div class="top-section">
+                <div class="center-panel">
+                    <canvas id="circle-canvas"></canvas>
+                </div>
+                <div class="control-panel">
+                    <label><input type="checkbox" id="degrees-checkbox"> Graus</label>
+                </div>
             </div>
             <div class="wave-container">
                 <div class="wave-panel">
-                    <div class="wave-label">COS</div>
+                    <div class="wave-label">COSSENO</div>
                     <canvas id="cos-wave-canvas" class="wave-canvas"></canvas>
                 </div>
                 <div class="wave-panel">
-                    <div class="wave-label">SEN</div>
+                    <div class="wave-label">SENO</div>
                     <canvas id="sin-wave-canvas" class="wave-canvas"></canvas>
                 </div>
                 <div class="wave-panel">
-                    <div class="wave-label">TAN</div>
+                    <div class="wave-label">TANGENTE</div>
                     <canvas id="tan-wave-canvas" class="wave-canvas"></canvas>
                 </div>
             </div>
@@ -155,48 +161,43 @@ description: Só um circulo trigonométrico.
             // Flag explícita para controlar quando estamos EXATAMENTE em 90° ou 270°
             let isExactRightAngle = false;
 
-            // Função para calcular a área da tela disponível
-            function getAvailableScreenArea() {
-                return window.innerWidth * window.innerHeight;
+            // Função para calcular o tamanho ideal do canvas do círculo
+            function calculateCircleCanvasSize() {
+                // Obtém a largura disponível para o canvas
+                const containerWidth = document.querySelector('.container').offsetWidth;
+                // Define um tamanho máximo para evitar que fique muito grande em telas largas
+                const maxSize = Math.min(containerWidth - 40, 800); // -40 para considerar padding
+
+                // Em telas pequenas, usamos a largura disponível
+                // Em telas maiores, usamos 60% da largura disponível para o círculo
+                const circleSize = window.innerWidth < 768 ? maxSize : Math.min(maxSize, containerWidth * 0.6);
+
+                return Math.floor(circleSize);
             }
 
             // Função para ajustar dimensões responsivas
             function resizeCanvases() {
-                // Obter dimensões da tela
-                const screenWidth = window.innerWidth;
-                const screenHeight = window.innerHeight;
-                const availableArea = getAvailableScreenArea();
+                // Calcular o tamanho quadrado ideal para o canvas do círculo
+                const circleSize = calculateCircleCanvasSize();
 
-                // Calcular tamanho do círculo (aprox. 33% da área disponível)
-                // Limitamos a largura para evitar que fique muito grande em telas grandes
-                const containerWidth = Math.min(screenWidth * 0.9, 1200); // 90% da largura da tela, máximo 1200px
-
-                // O tamanho do círculo deve ser aproximadamente 33% da área,
-                // o que equivale a sqrt(0.33 * área) para cada dimensão
-                const targetCircleSize = Math.min(
-                    Math.floor(Math.sqrt(availableArea * 0.33)),
-                    containerWidth * 0.33, // 33% da largura do container
-                    400 // Tamanho máximo absoluto
-                );
-
-                // Importante: Definir a largura e altura do canvas em pixels
-                // Isso é crucial para o contexto de desenho ter as dimensões corretas
-                circleCanvas.width = targetCircleSize;
-                circleCanvas.height = targetCircleSize;
+                // Definir dimensões para o canvas do círculo (quadrado perfeito)
+                circleCanvas.width = circleSize;
+                circleCanvas.height = circleSize;
 
                 // Ajustar centros e raio
-                circleCenterX = targetCircleSize / 2;
-                circleCenterY = targetCircleSize / 2;
-                circleRadius = Math.floor(targetCircleSize * 0.38); // 38% do tamanho para deixar espaço para os rótulos
+                circleCenterX = circleSize / 2;
+                circleCenterY = circleSize / 2;
+                circleRadius = Math.floor(circleSize * 0.4); // 40% do tamanho para deixar espaço para os rótulos
 
-                // Ajustar largura dos canvas de ondas para corresponder à largura disponível
-                // Queremos que todos os gráficos de funções tenham a mesma largura
-                const waveContainerWidth = document.querySelector('.wave-container').offsetWidth;
-                waveWidth = Math.floor(waveContainerWidth * 0.92); // 92% para dar espaço para os rótulos
+                // Usar a mesma largura para os gráficos de onda que o canvas do círculo
+                waveWidth = circleSize;
 
-                // A altura dos gráficos de ondas deve ser suficiente para mostrar bem as funções
+                // Ajustar o container de ondas para ter a mesma largura que o círculo
+                document.querySelector('.wave-container').style.width = circleSize + 'px';
+
+                // A altura dos gráficos de ondas deve ser proporcionalmente adequada
                 // Min 80px para garantir visibilidade mínima
-                waveHeight = Math.max(Math.floor(targetCircleSize * 0.25), 80);
+                waveHeight = Math.max(Math.floor(circleSize * 0.25), 80);
 
                 // Definir as dimensões em pixels para os canvas de ondas
                 cosWaveCanvas.width = waveWidth;
@@ -268,6 +269,7 @@ description: Só um circulo trigonométrico.
                 // Cosseno (vermelho)
                 circleCtx.beginPath();
                 circleCtx.moveTo(circleCenterX, circleCenterY);
+                circleCtx.lineWidth = 4;
                 circleCtx.lineTo(x, circleCenterY);
                 circleCtx.strokeStyle = 'red';
                 circleCtx.stroke();
@@ -298,9 +300,6 @@ description: Só um circulo trigonométrico.
                     // Limitar comprimento visual da linha tangente
                     const tanLen = Math.min(Math.abs(tanValue) * 50, 200);
 
-                    // REMOVER ESTA CONDIÇÃO - esta é a causa do problema!
-                    // Agora a tangente será desenhada para qualquer valor, não apenas quando < 10
-
                     const dx = -Math.sin(theta);
                     const dy = Math.cos(theta);
                     const x1 = x + tanLen * dx;
@@ -323,7 +322,7 @@ description: Só um circulo trigonométrico.
                 // Posicionar o ângulo no arco
                 const angleX = circleCenterX + Math.cos(-theta / 2) * (circleRadius / 2.5);
                 const angleY = circleCenterY - Math.sin(-theta / 2) * (circleRadius / 2.5);
-                circleCtx.fillText(`θ = ${angleVal}${angleUnit}`, angleX, angleY);
+                circleCtx.fillText(`θ = ${angleVal}${angleUnit}`, 10, 22);
 
                 // Valor do cosseno - posicionado no eixo X
                 circleCtx.fillStyle = 'red';
@@ -389,7 +388,8 @@ description: Só um circulo trigonométrico.
                     let lastX = null, lastY = null;
 
                     // Fator de escala ajustado para melhor visualização
-                    const scaleFactor = func === 'tan' ? 30 : 50;
+                    // Para a tangente, usamos um fator menor para que valores maiores permaneçam visíveis
+                    const scaleFactor = func === 'tan' ? 15 : 50;
 
                     for (let i = 0; i <= steps; i++) {
                         let t = xMin + i * dx;
@@ -409,7 +409,8 @@ description: Só um circulo trigonométrico.
                                 continue;
                             }
 
-                            if (Math.abs(val) > 5) {
+                            if (Math.abs(val) > 10) {
+                                // Aumentamos o limite para 10 para permitir valores maiores de tangente
                                 // Se o valor é muito grande, finalizamos o traço e começamos um novo
                                 if (!firstPoint) {
                                     ctx.stroke();
@@ -453,10 +454,12 @@ description: Só um circulo trigonométrico.
                     let currentT = units === 'radians' ? theta : theta * 180 / Math.PI;
                     let waveX = (currentT - xMin) / (xMax - xMin) * waveWidth;
                     let waveVal = Math[func](theta);
-                    let waveY = waveCenterY - waveVal * 50;
+                    // Usar o mesmo fator de escala definido acima para consistência
+                    let waveY = waveCenterY - waveVal * (func === 'tan' ? 15 : 50);
 
                     // Só mostrar o ponto se estiver dentro dos limites
-                    if (waveX >= 0 && waveX <= waveWidth && Math.abs(waveVal) <= 5) {
+                    // Aumentamos o limite de valor para tangente para 10
+                    if (waveX >= 0 && waveX <= waveWidth && Math.abs(waveVal) <= (func === 'tan' ? 10 : 5)) {
                         // Desenhar um círculo maior e mais visível
                         ctx.beginPath();
                         ctx.arc(waveX, waveY, 5, 0, 2 * Math.PI);
