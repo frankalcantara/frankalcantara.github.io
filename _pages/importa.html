@@ -1,0 +1,94 @@
+---
+layout: page
+title: Quem se Importa
+permalink: /importa
+comments: false
+slug: quem-se-importa
+author: Frank
+description: Percentual das pessoas do mundo que se importam com seus sentimentos.
+---
+<!DOCTYPE html>
+<html lang="pt-br">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>World Population Message</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                background-color: #fff;
+            }
+
+            #populationMessage {
+                font-size: 24px;
+                text-align: center;
+                line-height: 1.5;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="populationMessage"></div>
+
+        <script>
+            async function updatePopulationMessage() {
+                try {
+                    // Simulate or fetch real-time population data (since no direct API is available, use Worldometer estimate as of Feb 2025)
+                    // Worldometer estimates ~8,250,423,613 as of early 2025, with a growth rate of ~1.26% annually (~102M/year)
+                    // Adjust for real-time growth: ~280,000 births - 120,000 deaths per day (net ~160,000/day as of Feb 2025)
+                    // Current time: 03:06 PM PST (Feb 23, 2025) = 23:06 UTC
+                    const startOfDayUTC = new Date('2025-02-23T00:00:00Z').getTime(); // Start of Feb 23, 2025, UTC
+                    const nowUTC = new Date().getTime(); // Current time in UTC
+                    const millisecondsInDay = 24 * 60 * 60 * 1000; // Milliseconds in a day
+                    const daysSinceStart = (nowUTC - startOfDayUTC) / millisecondsInDay;
+                    const netGrowthPerDay = 160000; // Net growth (births - deaths) per day, based on Worldometer
+                    const basePopulation = 8250423613; // Base population as of Jan 1, 2025 (Worldometer estimate, rounded)
+                    let worldPopulation = Math.round(basePopulation + (netGrowthPerDay * daysSinceStart));
+
+                    // Ensure the population is at least 1 to avoid division by zero
+                    if (worldPopulation < 1) worldPopulation = 8250423613;
+
+                    // The reader is 1 person, so the "don't care" percentage is (worldPopulation - 1) / worldPopulation
+                    const caringPerson = 1;
+                    const nonCaringPopulation = worldPopulation - caringPerson;
+                    const percentage = ((nonCaringPopulation / worldPopulation) * 100).toFixed(10); // Up to 10 decimal places
+
+                    // Create the message with the same colors as the image
+                    const message = `
+                    <span style="color: black;">In a world with ${Number(worldPopulation / 1000000000).toFixed(3)} billion people,</span>
+                    <span style="color: black;">${percentage}%</span>
+                    <span style="color: red;">don't care about your feelings.</span>
+                `;
+
+                    // Update the div with the message
+                    document.getElementById('populationMessage').innerHTML = message;
+                } catch (error) {
+                    console.error('Error updating population message:', error);
+                    // Fallback with estimated population (8.25 billion as of Feb 2025, adjusted for growth)
+                    const worldPopulation = 8250423613; // Base estimate from Worldometer, Jan 2025
+                    const caringPerson = 1;
+                    const nonCaringPopulation = worldPopulation - caringPerson;
+                    const percentage = ((nonCaringPopulation / worldPopulation) * 100).toFixed(10);
+
+                    const fallbackMessage = `
+                    <span style="color: black;">In a world with ${Number(worldPopulation / 1000000000).toFixed(3)} billion people,</span>
+                    <span style="color: black;">${percentage}%</span>
+                    <span style="color: red;">don't care about your feelings.</span>
+                `;
+
+                    document.getElementById('populationMessage').innerHTML = fallbackMessage;
+                }
+            }
+
+            // Call the function when the page loads
+            window.onload = updatePopulationMessage;
+        </script>
+    </body>
+
+</html>
