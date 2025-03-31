@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Você pensa como fala
+title: Você Pensa Como Fala
 author: Frank
 categories:
     - artigo
@@ -11,7 +11,7 @@ tags:
     - Matemática
     - resolução de problemas
 rating: 5
-lastmod: 2025-03-31T02:11:23.329Z
+lastmod: 2025-03-31T18:30:38.146Z
 description: Explore a hipótese de Sapir-Whorf e como diferentes línguas podem influenciar nossa percepção, cognição e visão de mundo.
 date: 2025-03-30T23:39:04.699Z
 keywords: hipótese de Sapir-Whorf, relatividade linguística, determinismo linguístico, influência da linguagem no pensamento, Edward Sapir, Benjamin Lee Whorf, percepção de cores, cognição espacial, categorização linguística, linguística cognitiva

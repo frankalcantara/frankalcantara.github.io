@@ -30,11 +30,11 @@ keywords:
 rating: 5
 published: 2024-09-08T21:19:20.392Z
 draft: 2024-09-08T21:19:20.392Z
-featured: true
+featured: false
 toc: true
 preview: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de currying e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de currying e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2025-02-01T22:27:24.250Z
+lastmod: 2025-03-31T18:31:30.474Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
