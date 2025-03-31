@@ -3,13 +3,13 @@ layout: post
 title: Transformers, Afins e Processamento de Linguagem Natural
 author: frank
 categories:
-    - disciplina
-    - Matemática
-    - artigo
+   - disciplina
+   - Matemática
+   - artigo
 tags:
-    - C++
-    - Matemática
-    - inteligência artificial
+   - C++
+   - Matemática
+   - inteligência artificial
 image: assets/images/trans1.webp
 featured: false
 rating: 0
@@ -20,89 +20,71 @@ keywords: ""
 toc: true
 published: false
 beforetoc: ""
-lastmod: 2025-02-24T20:35:42.967Z
+lastmod: 2025-03-30T23:33:24.861Z
 ---
 
-Neste artigo, a curiosa leitora irá enfrentar os Transformers. Nenhuma relação com o o Optimus Prime. Se for estes Transformers que está procurando, o Google falhou com você!
+Neste artigo, a curiosa leitora irá enfrentar os *Transformers*. Nenhuma relação com o o Optimus Prime. Se for estes *Transformers* que está procurando, **_o Google falhou com você!_**
 
-Aqui falamos dos modelos de aprendizado de máquina que revolucionaram o processamento de linguagem natural (**NLP**). Os transformers que abordaremos aqui foram apresentados ao mundo em um artigo intitulado *Attention is All You Need* (Atenção é Tudo que Você Precisa), publicado em 2017[^1]. Este artigo seminal foi apresentado na conferência *Advances in Neural Information Processing Systems (NeurIPS)*, há quase 10 anos. No ritmo atual, quase uma eternidade. Mas, não vamos parar aí.
+Neste texto vamos discutir os **_*Transformers*_** modelos de aprendizado de máquina que revolucionaram o processamento de linguagem natural (**NLP**). Estas técnicas foram apresentados ao mundo em um artigo intitulado *Attention is All You Need* (Atenção é Tudo que Você Precisa), publicado em 2017[^1] na conferência *Advances in Neural Information Processing Systems (NeurIPS)*. Observe, atenta leitora que isso se deu há quase 10 anos. No ritmo atual, uma eternidade.
 
-O entendimento da linguagem natural por máquinas é, ou era, um desafio importante que beirava o impossível. Hoje, parece não ser um desafio tão grande. Muito disso graças as técnicas e algoritmos, como os transformers que foram criados para aprimorar a  representação de textos matematicamente. E ao fato que não estamos usando algoritmos determinísticos para esse entendimento. Usamos algoritmos determinísticos para aplicar técnicas estocásticas em bases de dados gigantescas e assim, romper os limites impostos pela linguística matemática e computacional.
-
-Começaremos com as técnicas de representação mais simples e os conceitos matemáticos fundamentais, produtos escalares e multiplicação de matrizes, e gradualmente construiremos nosso entendimento.
+O entendimento da linguagem natural por máquinas é, ou era, um desafio importante que beirava o impossível. Este problema parece estar resolvido. Se isso for verdade, terá sido graças as técnicas e algoritmos, criados em torno de aprendizado de máquinas e estatísticas. Ou se preferir, podemos dizer que Usamos algoritmos determinísticos para aplicar técnicas estocásticas em bases de dados gigantescas e assim, romper os limites que haviam sido impostos pela linguística matemática e computacional determinísticas.
 
 Veremos como esses modelos, inicialmente projetados para tradução automática, se tornaram a base para tarefas como geração de texto, como no [GPT-3](https://openai.com/index/gpt-3-apps/), compreensão de linguagem e até mesmo processamento de áudio.
 
 [^1]: VASWANI, Ashish et al. Attention is all you need. In: ADVANCES IN NEURAL INFORMATION PROCESSING SYSTEMS, 30., 2017, Long Beach. Proceedings of the [...]. Red Hook: Curran Associates, Inc., 2017. p. 5998-6008. Disponível em: [https://papers.nips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf](https://papers.nips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper). Acesso em: 09 fevereiro 2024.
 
-Eu vou começar com a transformação de textos em números. Vetores, vamos criar vetores e matrizes. Mas, antes de qualquer coisa, a atenta leitora deve entender que eu vou usar os termos *array unidimensional* e *vetor* indistintamente. O mesmo vale para os termos *array bidimensional* e *matriz* e para os termos *palavra* e *termo*.
+Começaremos com as técnicas de representação mais simples e os conceitos matemáticos fundamentais: produtos escalares e multiplicação de matrizes. E, gradualmente, construiremos nosso entendimento. O que suporta todo este esforço é a esperança que a esforçada leitora possa acompanhar o raciocínio e entender como os *Transformers* funcionam a partir do seu cerne.
 
-Finalmente, os exemplos. O combinado é o seguinte: aqui eu faço em C++ 20 e a leitora faz em Python, ou em C++. Se estiver de acordo continuamos.
+Finalmente, os exemplos. O combinado será o seguinte: aqui eu faço em C++ 20. Depois, a leitora faz em Python, C, C++ ou qualquer linguagem que desejar. Se estiver de acordo continuamos.
 
 ## A Malvada Matemática
 
-Para que os computadores processem e compreendam a linguagem humana, é essencial converter texto em representações numéricas. Computador ainda é um treco burro que só entende binário. Dito isso, é necessário destacar que não é possível entender processamento de linguagem natural, ou este texto, sem um pouco de matemática.
+Para que os computadores processem e compreendam a linguagem humana, é essencial converter texto em representações numéricas. Esse treco burro só entende binário. Dito isso, vamos ter que, de alguma forma, mapear o conjunto dos termos que formam uma linguagem natural no conjunto dos binários que o computador entende. Ou, em outras palavras, temos que representar textos em uma forma matemática que os computadores possam manipular. Essa representação é o que chamamos de vetorização.
 
 ### Vetores, os compassos de tudo que há e haverá
 
 Eu usei exatamente este título em [um texto sobre eletromagnetismo](https://frankalcantara.com/formula-da-atracao-matematica-eletromagnetismo/#vetores-os-compassos-de-tudo-que-h%C3%A1-e-haver%C3%A1). A ideia, então era explicar eletromagnetismo a partir da matemática. Lá há uma definição detalhada de vetores e todas as suas operações. Aqui, podemos ser um tanto mais diretos.
 
-Um vetor é uma entidade matemática que possui tanto magnitude, comprimento, quanto direção. Um vetor pode ser definido como um segmento de reta direcionado, ou uma sequência ordenada de números, chamados de componentes. A representação depende do contexto.
+Um vetor é uma entidade matemática que possui tanto magnitude, ou comprimento, quanto direção. Um vetor pode ser definido como um segmento de reta direcionado na geometria, ou uma sequência ordenada de números, chamados de componentes, na álgebra. A representação depende do contexto. Aqui, vamos nos concentrar na representação algébrica, que é mais comum em programação e computação.
 
 Na geometria, um vetor pode ser visualizado como uma seta em um espaço, por exemplo, em um plano $2D$ ou em um espaço $3D$. O comprimento da seta representa a magnitude, e a direção da seta indica a direção do vetor. Imagine uma seta apontando para cima e para a direita em um plano. Essa seta é um vetor com uma certa magnitude (o comprimento da seta) e uma direção ($45$ graus em relação ao eixo horizontal, por exemplo). A Figura 1 mostra um vetor como usado na matemática e na física.
 
-![uma seta saído de P para Q](/assets/images/vetor1.webp)
-_Figura 1: Um vetor entre os pontos $P$ e $Q$ representado por $\vec{PQ}_{: class="legend"}
+![uma seta vermelha representando um vetor](/assets/images/vector1.webp)
+_Figura 1: Um vetor partindo da origem $O$ com comprimento $\mid V \mid$ e dimensões $V_1$ e $V_2$.{: class="legend"}
 
-Na álgebra, em um sistema de coordenadas, um vetor pode ser representado como uma tupla ordenada de números. Por exemplo, em um espaço tridimensional, um vetor pode ser escrito como $(x, y, z)$, onde $x$, $y$ e $z$ são as componentes do vetor ao longo dos eixos $x$, $y$ e $z$, respectivamente. Assim, se nos limitarmos a $2D$, o vetor $(2, 3)$ representa um deslocamento de $2$ unidades na direção $x$ e $3$ unidades na direção $y$.
+Em um sistema algébrico de coordenadas, um vetor pode ser representado como uma tupla. Por exemplo, em um espaço tridimensional, um vetor pode ser escrito como $(x, y, z)$, onde $x$, $y$ e $z$ são as componentes do vetor ao longo dos eixos $x$, $y$ e $z$, respectivamente. Assim, se nos limitarmos a $2D$, o vetor $(2, 3)$ representa um deslocamento de $2$ unidades na direção $x$ e $3$ unidades na direção $y$. Na Figura 1 podemos ver um vetor $V$ partindo da origem $O$ e terminando no ponto $P(V_1, V_2)$.
 
 #### Espaço Vetorial
 
-Para compreender vetores e suas operações, precisamos primeiro entender o conceito de espaço vetorial.
+Para compreender vetores e suas operações, precisamos primeiro entender um conceito algébrico, o conceito de espaço vetorial.
 
-Um espaço vetorial é uma estrutura matemática que formaliza a noção de operações geométricas como adição de vetores e multiplicação por escalares.
+>Um espaço vetorial é uma estrutura matemática que formaliza a noção de operações geométricas como adição de vetores e multiplicação por escalares.
 
-Formalmente, um espaço vetorial sobre um corpo $F$, geralmente $\mathbb{R}$ ou $\mathbb{C}$, é um conjunto $V$ equipado com duas operações:
+Formalmente, um espaço vetorial sobre um corpo $F$ é um conjunto $V$ no qual há adição de vetores e multiplicação por escalares em $F$, obedecendo axiomas que garantem associatividade, comutatividade, existência de neutro e inverso aditivo, além de compatibilidade entre multiplicação por escalar e estrutura do corpo.
 
-1. **Adição vetorial**: operação que associa a cada par de vetores $\vec{u}, \vec{v} \in V$ um único vetor $\vec{w} = \vec{u} + \vec{v} \in V$;
-
-2. **Multiplicação por escalar**: operação que associa a cada escalar $\alpha \in F$ e vetor $\vec{v} \in V$ um vetor $\alpha\vec{v} \in V$
-
-Por exemplo, no $\mathbb{R}^2$, a adição vetorial de $\vec{u} = (u_1, u_2)$ e $\vec{v} = (v_1, v_2)$ é dada por:
-
-$$
-\vec{u} + \vec{v} = (u_1 + v_1, u_2 + v_2)
-$$
-
-Estas operações devem satisfazer certos axiomas, incluindo associatividade, comutatividade, existência de elemento neutro e inverso para adição.
-
-Em processamento de linguagem natural, trabalhamos principalmente com o espaço vetorial real $\mathbb{R}^n$, onde $n$ é a dimensão do espaço. Este é o espaço de todas as $n$-tuplas ordenadas de números reais.
-
-Formalmente, definimos $\mathbb{R}^n$ como:
+Em processamento de linguagem natural, trabalharemos principalmente com o espaço vetorial real $\mathbb{R}^n$, onde $n$ representa a dimensão do espaço vetorial. Ou, em nosso caso, quantos itens teremos no nosso vetor. Logo, $\mathbb{R}^n$ representa o espaço vetorial que contém todas as $n$-tuplas ordenadas de números reais. Formalmente, definimos $\mathbb{R}^n$ como:
 
 $$
 \mathbb{R}^n = \{(x_1, \ldots, x_n) : x_i \in \mathbb{R} \text{ para } i = 1, \ldots, n\}
 $$
 
-Quando representamos palavras, ou documentos, como vetores, estamos essencialmente mapeando elementos linguísticos para pontos em um espaço $\mathbb{R}^n$. A dimensão $n$ será determinada pelo método específico de vetorização que escolhermos.
+Quando representarmos palavras (termos), ou documentos, como vetores, estaremos mapeando elementos linguísticos para pontos em um espaço dado por $\mathbb{R}^n$. Neste caso, a dimensão $n$ será determinada pelo método específico de vetorização que escolhermos.
+
+Ao converter textos e elementos linguísticos em representações vetoriais, criamos *word embeddings*. Técnicas que mapeiam palavras ou frases para vetores de números reais. Esta representação tenta capturar tanto o significado semântico quanto as relações contextuais entre palavras em um espaço vetorial contínuo. Um desenvolvimento importante nesse campo são os Mecanismos de Atenção, que utilizam vetores de consulta (*query*), chave (*key*) e valor (*value*) como componentes essenciais. Estes mecanismos constituem o núcleo da arquitetura dos *Transformers*, permitindo que o modelo pondere a importância relativa de diferentes elementos em uma sequência, melhorando significativamente a capacidade de processamento de dependências de longo alcance em textos. Para entender isso, precisamos entender como fazer operações algébricas com vetores.
 
 #### Operações com Vetores
 
-Vetores podem ser somados, subtraídos e multiplicados por escalares. Escalares são entidades sem direção. A operações sobre vetores têm interpretações geométricas e algébricas:
+Dado que estejam em um espaço vetorial, os vetores podem ser somados, subtraídos, multiplicados entre si e por escalares. Neste caso, a curiosa leitora deve saber que *escalares são entidades sem direção*. As operações sobre vetores têm interpretações geométricas e algébricas. Focando apenas nas interpretações algébricas, temos:
 
-1. **Soma**: a soma de dois vetores pode ser visualizada geometricamente usando a regra do paralelogramo ou a regra do triângulo. Algebricamente, somamos vetores componente a componente. Exemplo: $(1, 2) + (3, -1) = (4, 1)$
+1. **Soma**: somamos vetores componente a componente. Exemplo: se tivermos $\vec{a}= (1, 2)$ e $\vec{b}= (3, -1)$ então $\vec{a} + \vec {b}$ será dado por $(1, 2) + (3, -1) = (4, 1)$;
 
-2. **Subtração**: a subtrair um vetor é o mesmo que somar o seu oposto. Exemplo: $(1, 2) - (3, -1) = (1-3, 2-(-1)) = (-2, 3)$
+2. **Oposto**: Dado um vetor $\vec{v} = (v_1, v_2, \ldots, v_n)$ no espaço $\mathbb{R}^n$, seu oposto será dado por $-\vec{v} = (-v_1, -v_2, \ldots, -v_n)$. Ou seja, o vetor oposto é o vetor que aponta na direção oposta e tem a mesma magnitude. Exemplo: se $\vec{a}= (1, 2)$ o oposto de $\vec{a}$ será dado por $-\vec{a} = (-1, -2)$;
 
-3. **Multiplicação por escalar**: multiplicar um vetor por um escalar altera a sua magnitude, mas não a sua direção, a menos que o escalar seja negativo, caso em que a direção é invertida. Exemplo: $2 * (1, 2) = (2, 4)$
-
-Precisamos estudar vetores porque usaremos estas entidade matemáticas no estudo do processamento de linguagem natural. Neste caso, teremos os *Word embeddings*, uma técnica usada para mapear palavras, ou frases, para vetores de números reais. O objetivo é capturar o significado semântico e as relações entre as palavras em um espaço vetorial. Além disso, veremos os *Mecanismos de Atenção*: neste caso, os vetores de consulta (*query*), chave (*key*) e valor (*value*) serão usados no mecanismo de atenção, que é o coração dos *Transformers*.
+3. **Multiplicação por escalar**: multiplicar um vetor por um escalar altera a sua magnitude, mas não a sua direção, a menos que o escalar seja negativo, caso em que a direção é invertida. Exemplo: dado $\vec{a} = (1, 2)$ o dobro de $\vec{a}$ será dado por $2 * (1, 2) = (2, 4)$;
 
 ### Produto Escalar
 
-Os produtos escalares, também são conhecidos como produto interno. Parece assustador, mas não é. Trata-se apenas que uma técnica para multiplicar vetores de forma que o resultado seja um número sem dimensão, um escalar.
-
-Para obter o produto escalar, $\cdot$, de dois vetores, multiplicamos seus elementos correspondentes e, em seguida, somamos os resultados das multiplicações. Matematicamente temos:
+Entre as operações entre vetores vamos começar com os produtos escalares, também conhecidos como produto interno. Neste caso, temos uma técnica para multiplicar vetores de forma que o resultado seja um escalar, um número sem dimensão. Para obter o produto escalar, representado por $\cdot$, de dois vetores, multiplicamos seus elementos correspondentes e, em seguida, somamos os resultados das multiplicações. Matematicamente temos:
 
 $$
 \text{Se } \vec{a} = [a_1, a_2, ..., a_n] \text{ e } \vec{b} = [b_1, b_2, ..., b_n], \text{ então:}
@@ -112,11 +94,11 @@ $$
 \vec{a} \cdot \vec{b} = \sum_{i=1}^{n} a_i b_i = a_1b_1 + a_2b_2 + ... + a_nb_n
 $$
 
-A Figura 1 esquematiza esta operação com os dois vetores que usamos acima para facilitar o entendimento.
+A Figura 2 mostra um diagrama desta operação com os dois vetores que usamos acima para facilitar o entendimento.
 
-![dois vetores desenhados em duas linhas mostrando a multiplicação](/assets/images/dotProd1.webp)
+![dois vetores representados por duas tabelas de uma linha separados por um ponto e um terceiro vetor mostrando as parcelas do produto escalar](/assets/images/dotProd1.webp)
 
-_Figura1: Entendendo o produto escalar entre dois vetores._{: class="legend"}
+_Figura 2: Entendendo o produto escalar entre dois vetores._{: class="legend"}
 
 **Exemplo 1**: Considerando os vetores  $\vec{a} = [2, 5, 1]$ e $\vec{b} = [3, 1, 4]$. O produto escalar será dado por:
 
@@ -124,15 +106,22 @@ $$
 \vec{a} \cdot \vec{b} = (2 * 3) + (5 * 1) + (1 * 4) = 6 + 5 + 4 = 15
 $$
 
-O produto escalar também pode ser representado na forma matricial. Se considerarmos os vetores como matrizes coluna, o produto escalar é obtido multiplicando a transposta do primeiro vetor pelo segundo vetor:
+O produto escalar também pode ser representado na forma matricial. Se considerarmos os vetores como matrizes, o produto escalar será obtido multiplicando a transposta do primeiro vetor pelo segundo vetor:
 
 $$
 \vec{a} \cdot \vec{b} = \vec{a}^T\vec{b} = \begin{bmatrix} a_1 & a_2 & \cdots & a_n \end{bmatrix} \begin{bmatrix} b_1 \\ b_2 \\ \vdots \\ b_n \end{bmatrix} = \sum_{i=1}^{n} a_i b_i
 $$
 
-Esta notação matricial é útil quando trabalhamos com implementações computacionais. Muitas bibliotecas de álgebra linear são otimizadas para operações com matrizes.
-
->No [NumPy](https://numpy.org/), uma biblioteca Python popular para computação numérica, o produto escalar pode ser calculado usando a função `numpy.dot()`ou o operador `@`.
+>A transposta de um vetor é uma operação da álgebra linear que altera a orientação do vetor, convertendo um vetor coluna em um vetor linha ou vice-versa. Formalmente:
+>
+>- Se $\vec{v}$ é um vetor coluna $\vec{v} = \begin{pmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{pmatrix}$, sua transposta $\vec{v}^T$ é um vetor linha $\vec{v}^T = \begin{pmatrix} v_1 & v_2 & \cdots & v_n \end{pmatrix}$
+>
+>- Se $\vec{v}$ é um vetor linha $\vec{v} = \begin{pmatrix} v_1 & v_2 & \cdots & v_n \end{pmatrix}$, sua transposta $\vec{v}^T$ é um vetor coluna $\vec{v}^T = \begin{pmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{pmatrix}$
+>
+>Em notação matricial, se representarmos um vetor coluna $\vec{v} \in \mathbb{R}^n$ como uma matriz $n \times 1$, sua transposta $\vec{v}^T$ será uma matriz $1 \times n$. A operação de transposição é indicada pelo sobrescrito $T$.
+>
+>Em sistemas de processamento de linguagem natural, a transposição de vetores é frequentemente utilizada em operações de atenção e em cálculos de similaridade entre vetores de embedding.
+>
 
 Para ilustrar, considere os vetores $\vec{a} = [2, 5, 1]$ e $\vec{b} = [3, 1, 4]$. Na forma matricial, temos:
 
@@ -140,13 +129,68 @@ $$
 \vec{a}^T\vec{b} = \begin{bmatrix} 2 & 5 & 1 \end{bmatrix} \begin{bmatrix} 3 \\ 1 \\ 4 \end{bmatrix} = (2 \times 3) + (5 \times 1) + (1 \times 4) = 15
 $$
 
+#### Produto Escalar com Bibliotecas Numéricas
+
+Em Python podemos usar o [JAX](https://github.com/google/jax), uma biblioteca para computação de alta performance com suporte para diferenciação automática, o produto escalar pode ser calculado usando a função `jax.numpy.dot()` ou o operador `@`.
+
+```python
+import jax.numpy as jnp
+
+# Defina dois vetores
+v1 = jnp.array([1, 2, 3])
+v2 = jnp.array([4, 5, 6])
+
+# Calcule o produto escalar usando dot()
+dot_product1 = jnp.dot(v1, v2)
+
+# Calcule o produto escalar usando o operador @
+dot_product2 = v1 @ v2
+
+print(f"Produto escalar usando dot(): {dot_product1}")
+print(f"Produto escalar usando @: {dot_product2}")
+```
+
+Em C++ podemos usar o [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page), uma biblioteca de álgebra linear de alto desempenho, o produto escalar pode ser calculado usando o método `dot()` ou o operador de multiplicação de matrizes.
+
+```cpp
+#include <iostream>
+#include <Eigen/Dense>
+
+int main() {
+    // Defina dois vetores
+    Eigen::Vector3d v1(1, 2, 3);
+    Eigen::Vector3d v2(4, 5, 6);
+    
+    // Calcule o produto escalar usando dot()
+    double dot_product1 = v1.dot(v2);
+    
+    // Calcule o produto escalar usando transpose e multiplicação
+    double dot_product2 = v1.transpose() * v2;
+    
+    std::cout << "Produto escalar usando dot(): " << dot_product1 << std::endl;
+    std::cout << "Produto escalar usando transpose e multiplicação: " << dot_product2 << std::endl;
+    
+    return 0;
+}
+```
+
 #### O Produto Escalar e a Similaridade
 
-O produto escalar fornece uma informação interessante sobre a similaridade entre dois vetores. Não é algo preciso, ainda assim, interessante. Em termos gerais, teremos:
+O produto escalar oferece uma medida quantitativa da similaridade direcional entre dois vetores. Embora não constitua uma métrica de similaridade completa em todos os contextos, fornece informações valiosas sobre o alinhamento vetorial. Em termos gerais, a interpretação do produto escalar $\vec{u} \cdot \vec{v}$ segue estas propriedades:
 
-* **Produto escalar positivo:** indica que os vetores tendem a apontar na mesma direção. Quanto maior o valor positivo, maior a similaridade em termos de direção e magnitude das componentes que se "alinham".
-* **Produto escalar zero:** indica que os vetores são ortogonais (perpendiculares). Não há similaridade direcional linear entre eles.
-* **Produto escalar negativo:** indica que os vetores tendem a apontar em direções opostas. Quanto mais negativo, maior a "dissimilaridade" direcional.
+$$
+\vec{u} \cdot \vec{v} = ||\vec{u}|| \cdot ||\vec{v}|| \cdot \cos(\theta)
+$$
+
+Onde $\theta$ representa o ângulo entre os vetores, e podemos observar que:
+
+- $\vec{u} \cdot \vec{v} > 0$: Os vetores apontam em direções geralmente similares (ângulo agudo). Quanto maior o valor positivo, maior a similaridade em termos de direção e magnitude das componentes que se alinham.
+- $\vec{u} \cdot \vec{v} = 0$: Os vetores são ortogonais (perpendiculares). Não há similaridade direcional linear entre eles.
+- $\vec{u} \cdot \vec{v} < 0$: Os vetores apontam em direções geralmente opostas (ângulo obtuso). Quanto mais negativo, maior a dissimilaridade direcional.
+
+![imagem mostrando três vetores exemplificando os resultados do produto escalar](/assets/images/produto-escalar1.webp)
+
+*Para vetores normalizados (de magnitude unitária), o produto escalar se reduz diretamente ao cosseno do ângulo entre eles, fornecendo uma medida de similaridade no intervalo $[-1, 1]$, frequentemente utilizada em sistemas de recuperação de informação e processamento de linguagem natural.*
 
 **Exemplo 2**: considerando os vetores $\vec{a} = [0, 1, 0]$ e $\vec{b} = [0.2, 0.7, 0.1]$, o produto escalar será:
 
@@ -154,51 +198,75 @@ $$
 \vec{a} \cdot \vec{b} = (0 * 0.2) + (1 * 0.7) + (0 * 0.1) = 0 + 0.7 + 0 = 0.7
 $$
 
-No exemplo, o vetor $\vec{a} = [0, 1, 0]$ pode ser visto como um vetor que *ativa* ou dá peso máximo apenas à segunda dimensão, e peso zero às demais. Ao calcular o produto escalar com $\vec{b} = [0.2, 0.7, 0.1]$, estamos essencialmente *extraindo ou medindo* o valor da segunda componente de $b$ (que é $0.7$), ponderado pela *importância, ou peso*"* que o vetor $a$ atribui a essa dimensão .
+No exemplo 2, o vetor $\vec{a} = [0, 1, 0]$ pode ser visto como um vetor que *ativa*, ou dá peso máximo, apenas à segunda dimensão, e peso zero às demais. Ao calcular o produto escalar com $\vec{b} = [0.2, 0.7, 0.1]$, estamos essencialmente *extraindo ou medindo* o valor da segunda componente de $b$ (que é $0.7$), ponderado pela *importância, ou peso* que o vetor $a$ atribui a essa dimensão.
 
 Com um pouco mais de formalidade: se temos dois vetores $\vec{u}$ e $\vec{v}$, e você calcula $\vec{u} \cdot \vec{v} = c$, o valor escalar $c$ pode ser interpretado como uma medida de:
 
-* **Quanto de $\vec{v}$ "existe" na direção de $\vec{u}$ (e vice-versa).**
-* **O grau de "alinhamento" ou "sobreposição" entre os vetores.**
-* **A "similaridade" entre os padrões representados pelos vetores**, no sentido de que componentes importantes em um vetor também são relevantes no outro, e vice-versa, com pesos proporcionais aos valores das componentes.
+- Quanto de $\vec{v}$ "existe" na direção de $\vec{u}$ (e vice-versa);
+- O grau de alinhamento ou sobreposição entre os vetores;
+- A similaridade entre os padrões representados pelos vetores, no sentido de que componentes importantes em um vetor também são relevantes no outro, com pesos proporcionais aos valores das componentes.
 
-A criativa leitora deve notar que o produto escalar é influenciado tanto pela direção quanto pela magnitude dos vetores. *A magnitude de um vetor é dada pela raiz quadrada da soma dos quadrados dos seus componentes*. Isso é equivalente a tirar a raiz quadrada do resultado do produto escalar do vetor com ele mesmo. Para um vetor
+A criativa leitora deve notar que o produto escalar é influenciado tanto pela direção quanto pela magnitude dos vetores. 
 
-$$\vec{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$
-
-em um espaço $n$-dimensional, a magnitude, ou norma Euclidiana, representada por $\\vert \vec{v}\\vert $ será definida por:
-
+>A magnitude de um vetor é dada pela raiz quadrada da soma dos quadrados dos seus componentes*. Isso é equivalente a tirar a raiz quadrada do resultado do produto escalar do vetor com ele mesmo. Para um vetor
+>
+>$$\vec{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$
+>
+>em um espaço $n$-dimensional, a magnitude, eventualmente chamada de *Norma Euclidiana*, representada por $\vert \vec{v}\vert$ será definida por:
+>
+>$$
+\vert \vec{v}\vert  = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2} = \sqrt{\sum_{i=1}^{n} v_i^2}
 $$
-\\vert \vec{v}\\vert  = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2} = \sqrt{\sum_{i=1}^{n} v_i^2}
-$$
 
-**Exemplo 3**: dado o vetor $\vec{b} = \begin{bmatrix} 0.2 \\ 0.7 \\ 0.1 \end{bmatrix}$, vamos calcular sua magnitude $\\vert \vec{b}\\vert $:
+**Exemplo 3**: dado o vetor $\vec{b} = \begin{bmatrix} 0.2 \\ 0.7 \\ 0.1 \end{bmatrix}$, vamos calcular sua magnitude $\vert \vec{b}\vert$:
 
 Podemos resolver este problema em dois passos:
 
 1. **Calcular o produto escalar de $\vec{b}$ consigo mesmo:**
 
-    $$
-    \vec{b} \cdot \vec{b} = (0.2 * 0.2) + (0.7 * 0.7) + (0.1 * 0.1) = 0.04 + 0.49 + 0.01 = 0.54
-    $$
+   $$
+   \vec{b} \cdot \vec{b} = (0.2 * 0.2) + (0.7 * 0.7) + (0.1 * 0.1) = 0.04 + 0.49 + 0.01 = 0.54
+   $$
 
 2. **Extrair a raiz quadrada do resultado:**
 
-    $$
-    \\vert \vec{b}\\vert  = \sqrt{\vec{b} \cdot \vec{b}} = \sqrt{0.54} \approx 0.7348
-    $$
+   $$
+   \vert \vec{b}\vert  = \sqrt{\vec{b} \cdot \vec{b}} = \sqrt{0.54} \approx 0.7348
+   $$
 
 Portanto, a magnitude do vetor $\vec{b} = \begin{bmatrix} 0.2 \\ 0.7 \\ 0.1 \end{bmatrix}$ é aproximadamente 0.7348.
 
-*A magnitude de um vetor representa o seu comprimento*, geometricamente. A magnitude, pode ter interpretações diferentes em áreas diferentes do conhecimento. Na física, pode representar a intensidade de uma força, ou uma velocidade.
+A magnitude, pode ter interpretações diferentes em áreas diferentes do conhecimento. Na física, pode representar a intensidade de uma força, ou uma velocidade. No estudo da linguagem natural, a magnitude de um vetor, pode indicar o tamanho do documento em termos de número de palavras, embora não diretamente.
 
-No estudo da linguagem natural, a magnitude de um vetor, pode indicar o tamanho do documento em termos de número de palavras, embora não diretamente.
+*A atenta leitora deve observar que vetores com magnitudes maiores tendem a ter produtos escalares maiores, mesmo que a direção relativa seja a mesma.*
 
-A atenta leitora deve observar que vetores com magnitudes maiores tendem a ter produtos escalares maiores, mesmo que a direção relativa seja a mesma.
+Quando estudamos processamento de linguagem natural, a magnitude por si não costuma ser a informação mais importante, ou mais buscada. Geralmente estamos interessados na direção de vetores e na similaridade entre eles.
 
-Quando estudamos processamento de linguagem natural, a magnitude por si não costuma ser a informação mais importante, ou mais buscada. Geralmente estamos interessados na direção de vetores e na similaridade entre eles. A similaridade refere-se a uma medida que quantifica o quão semelhantes dois vetores são entre si. Essa medida pode ser baseada em diferentes aspectos dos vetores, como sua direção, magnitude, ou ambos.
+>A similaridade entre vetores é uma medida de quão semelhantes são dois vetores em termos de direção e magnitude. Essa medida é fundamental em muitas aplicações, como recuperação de informação, recomendação de produtos e análise de sentimentos.
 
-Em alguns casos, a busca da similaridade implica na normalização dos vetores para que a medida de similaridade seja mais afetada pela direção e menos afetada pela magnitude. Técnicas como a **Similaridade de Cosseno**, que envolve o produto escalar normalizado pelas magnitudes do vetores, são usadas para isolar a similaridade direcional. Todavia, existem diversas técnicas diferentes para a determinação de um índice para a similaridade entre vetores:
+Em alguns casos, a busca da similaridade implica na normalização dos vetores para que a medida de similaridade seja mais afetada pela direção e menos afetada pela magnitude. 
+
+>A normalização de um vetor $\vec{v}$ consiste em dividi-lo por sua norma (ou magnitude), resultando em um vetor unitário $\hat{v}$ que mantém a mesma direção, mas possui comprimento 1:
+>
+>$$\hat{v} = \frac{\vec{v}}{||\vec{v}||} = \frac{\vec{v}}{\sqrt{v_1^2 + v_2^2 + \cdots + v_n^2}}$$
+>
+>Neste caso, $||\vec{v}||$ representa a norma euclidiana do vetor. Quando dois vetores normalizados são comparados através do produto escalar, o resultado varia apenas entre $-1$ e $1$, correspondendo diretamente ao cosseno do ângulo entre eles. Esta abordagem é particularmente útil em aplicações como recuperação de informações, sistemas de recomendação e processamento de linguagem natural, onde a orientação semântica dos vetores é geralmente mais relevante que suas magnitudes absolutas.
+
+>A norma euclidiana, também conhecida como norma $L_2$ ou comprimento euclidiano, é uma função que atribui a cada vetor um valor escalar não-negativo que pode ser interpretado como o "tamanho" ou "magnitude" do vetor. Para um vetor $\vec{v} = (v_1, v_2, \ldots, v_n)$ em $\mathbb{R}^n$, a norma euclidiana é definida como:
+>
+>$$||\vec{v}|| = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2} = \sqrt{\sum_{i=1}^{n} v_i^2}$$
+>
+>Esta definição é uma generalização do teorema de Pitágoras para espaços de dimensão arbitrária. Geometricamente, representa a distância do ponto representado pelo vetor à origem do sistema de coordenadas.
+>
+>A norma euclidiana possui as seguintes propriedades fundamentais:
+>
+>1. **Não-negatividade**: $||\vec{v}|| \geq 0$ para todo $\vec{v}$, e $||\vec{v}|| = 0$ se e somente se $\vec{v} = \vec{0}$
+>2. **Homogeneidade**: $||\alpha\vec{v}|| = |\alpha| \cdot ||\vec{v}||$ para qualquer escalar $\alpha$
+>3. **Desigualdade triangular**: $||\vec{u} + \vec{v}|| \leq ||\vec{u}|| + ||\vec{v}||$
+>
+>Estas propriedades fazem da norma euclidiana uma ferramenta essencial em diversos campos, desde geometria e física até aprendizado de máquina e processamento de sinais, onde é utilizada para medir distâncias, calcular erros, e normalizar vetores.
+
+Técnicas como a **Similaridade de Cosseno**, que envolve o produto escalar normalizado pelas magnitudes do vetores, são usadas para isolar a similaridade direcional. Todavia, existem diversas técnicas diferentes para a determinação de um índice para a similaridade entre vetores. Entre elas destacaremos:
 
 1. **Distância Euclidiana**: mede a distância "direta" entre dois pontos no espaço euclidiano. É sensível tanto à direção quanto à magnitude dos vetores.
 
@@ -210,17 +278,19 @@ Em alguns casos, a busca da similaridade implica na normalização dos vetores p
 
 5. **Correlação de Pearson**: mede a correlação linear entre dois vetores, variando de $-1$ a $1$. É útil para entender a relação linear entre os componentes dos vetores.
 
-6. **Distância de Mahalanobis**: Considera a correlação entre variáveis e é útil quando os vetores têm diferentes escalas ou distribuições.
+6. **Distância de Mahalanobis**: considera a correlação entre variáveis e é útil quando os vetores têm diferentes escalas ou distribuições.
 
-Nem todas tem qualquer uso em processamento de linguagem natural. A primeira que usaremos será a **Similaridade de Cosseno**.
+Algumas já foram usadas processamento de linguagem natural. Outras ainda não. Vamos trabalhar com cada uma delas se, e quando, forem usadas nos algoritmos que estudaremos. A primeira que usaremos será a **Similaridade de Cosseno**. Mas antes, precisamos entender como representar textos como vetores. Para isso, vamos começar com a representação mais simples e intuitiva: a **Frequência de Termos**.
 
-## Tudo Começa com Vetorização
+## Vetorização
 
-Existem diversas técnicas para transformar textos em números, nessa jornada, os primeiros portos estão nas técnicas primitivas de representação. Eu vou fazer o máximo de esforço para seguir um fluxo crescente de dificuldade. A atenta leitora não deve se assustar se achar que eu perdi o rumo. Se eu parecer perdido é porque lembrei de algo que precisa ser visto antes que possamos abandonar um conceito e começar outro.
+Existem diversas técnicas para transformar textos em números, nessa viagem, os primeiros portos que visitaremos estão fortemente construídos sobre as técnicas primitivas de representação matemática de elementos linguísticos. Eu vou fazer o máximo de esforço para seguir um fluxo crescente de dificuldade. A atenta leitora não deve se assustar se achar que eu perdi o rumo. Se eu parecer perdido é porque lembrei de algo que precisa ser visto antes que possamos deixar um porto em direção a outro. As passagens serão compradas sempre que eu achar que ficou claro.
 
 ### Frequência de Termos
 
 Uma das formas mais básicas, quase intuitiva. de representar texto numericamente é através da frequência de termos. *A ideia é contar quantas vezes cada palavra aparece em um documento ou conjunto de documentos* e criar um vocabulário[^2].
+
+[^2]: O termo "vocabulário" é frequentemente usado em linguística e processamento de linguagem natural para se referir ao conjunto de palavras ou termos que são relevantes para um determinado contexto ou tarefa. Em muitos casos, o vocabulário é construído a partir de um *corpus* de texto, onde cada palavra única é considerada um termo do vocabulário. O vocabulário pode variar em tamanho e complexidade, dependendo do domínio e da aplicação específica.
 
 Antes de prosseguirmos com a vetorização de textos, precisamos formalizar o conceito de *corpus*. Em linguística computacional e processamento de linguagem natural, um *corpus* (plural *corpora*) é uma coleção estruturada de textos. Formalmente, definimos:
 
@@ -228,31 +298,31 @@ $$
 \text{Corpus} = \{D_1, D_2, \ldots, D_N\}
 $$
 
-onde cada $D_i$ é um documento individual e $N$ é o número total de documentos no corpus.
+Nesta definição, cada $D_i$ é um documento individual e $N$ é o número total de documentos no *corpus*.
 
-Cada documento $D_i$ é uma sequência ordenada de *tokens*[^6] (geralmente palavras):
+Cada documento $D_i$ é uma sequência ordenada de *tokens* ou palavras, que podem incluir palavras, números, sinais de pontuação e outros elementos significativos. Assim, podemos representar um documento $D_i$ como uma sequência de *tokens*:
 
-[^6]: Em processamento de linguagem natural, *um token é a menor unidade de análise em um texto*. Um token pode ser uma palavra, um número, um sinal de pontuação ou qualquer outra unidade significativa. Por exemplo, na frase "O gato preto.", temos 4 tokens: "O", "gato", "preto" e ".". O processo de dividir um texto em *tokens* é chamado de *tokenização*. A escolha de como definir e separar *tokens* é uma decisão importante que afeta todo o processamento subsequente. Considere, para ilustrar, a palavra composta "guarda-chuva" pode ser considerada como um único token ou como três tokens ("guarda", "-", "chuva"), dependendo das regras de tokenização adotadas. Em modelos modernos de processamento de linguagem natural, como o GPT e BERT, os tokens podem ser ainda mais granulares, incluindo partes de palavras, chamadas de subpalavras (*subwords*).
+Em processamento de linguagem natural, *um token é a menor unidade de análise em um texto*. Um token pode ser uma palavra, um número, um sinal de pontuação ou qualquer outra unidade significativa. Por exemplo, na frase "O gato preto.", temos 4 tokens: "O", "gato", "preto" e ".". O processo de dividir um texto em *tokens* é chamado de *tokenização*. A escolha de como definir e separar *tokens* é uma decisão importante que afeta todo o processamento subsequente. Considere, para ilustrar, a palavra composta "guarda-chuva" pode ser considerada como um único token ou como três tokens ("guarda", "-", "chuva"), dependendo das regras de tokenização adotadas. Em modelos modernos de processamento de linguagem natural, como o GPT e BERT, os tokens podem ser ainda mais granulares, incluindo partes de palavras, chamadas de subpalavras (*subwords*).
 
 $$
 D_i = (w_1, w_2, \ldots, w_{m_i})
 $$
 
-Na qual, $w_j$ representa o $j$-ésimo token do documento e $m_i$ é o comprimento do documento $D_i$.
+Neste caso, $w_j$ representa o $j$-ésimo token do documento e $m_i$ é o comprimento do documento $D_i$.
 
-O vocabulário global $V$ do corpus é o conjunto de todos os tokens únicos que aparecem em qualquer documento:
+O vocabulário global $V$ do *corpus* será o conjunto de todos os tokens únicos que aparecem em qualquer documento. Dado por:
 
 $$
 V = \bigcup_{i=1}^N \{w : w \text{ ocorre em } D_i\}
 $$
 
-Em nossos exemplos de vetorização, trabalharemos tanto com documentos individuais quanto com o corpus completo, dependendo da técnica específica sendo aplicada. A cardinalidade do vocabulário $|V|$ será particularmente importante, pois determinará a dimensionalidade de nossas representações vetoriais.
+Em nossos exemplos de vetorização, trabalharemos tanto com documentos individuais quanto com o *corpus* completo, dependendo da técnica específica sendo aplicada. A cardinalidade do vocabulário $|V|$ determinará a dimensionalidade das nossas representações vetoriais.
 
-Neste cenário vamos considerar que a palavra vocabulário se refere ao conjunto de todas as palavras únicas presentes em um corpus de texto, ou em um único documento, dependendo da técnica de representação que você está utilizando. Pense no vocabulário como uma lista organizada de todas as palavras distintas que o seu modelo de linguagem conhece ou que são relevantes para a tarefa em questão. Com um pouco mais de formalidade dizemos que um vocabulário é um conjunto finito de termos sem repetição
+Neste cenário vamos considerar que a palavra vocabulário se refere ao conjunto de todas as palavras únicas presentes em um *corpus* de texto, ou em um único documento, dependendo da técnica de representação que você está utilizando.
 
-Podemos definir a técnica de frequência de termos da seguinte fora:
+Pense no vocabulário como sendo uma lista organizada de todas as palavras distintas que o seu modelo de linguagem conhece, ou que são relevantes para a tarefa que está estudando. *Um vocabulário será sempre um conjunto finito de termos sem repetição*.
 
-Seja $D$ um documento. Definimos o vocabulário $V$ de $D$ como o conjunto de todas as palavras únicas em $D$. Para cada palavra $w \in V$, a frequência de termos $f(w, D)$ é o número de vezes que $w$ ocorre em $D$.
+Podemos definir a técnica de frequência de termos como: seja $D$ um documento, definimos o vocabulário $V$ de $D$ como o conjunto de todas as palavras, $w$, únicas em $D$. De tal forma que: para cada palavra $w \in V$, a frequência de termos $f(w, D)$ é o número de vezes que $w$ ocorre em $D$.
 
 Para entender essa definição, imagine que temos um texto curto $D_1$: "O gato preto subiu no telhado. O gato dorme no telhado".
 
@@ -264,7 +334,7 @@ Já que temos:
 
 * o documento: "O gato preto subiu no telhado. O gato dorme no telhado".
 * o vocabulário: $V_{D_1} = \{ \text{"o"}, \text{"gato"}, \text{"preto"}, \text{"subiu"}, \text{"no"}, \text{"telhado"}, \text{"dorme"} \}$.
-* Calculamos a frequência, $f$, de cada termo em $V_{D_1}$ e $D_1$ apenas contando quantas vezes os termos do vocabulário aparecem no texto:
+* Calculamos a frequência, $f$, de cada termo em $V_{D_1}$ e $D_1$ apenas contando quantas vezes os termos do vocabulário aparecem no texto. Sendo assim, temos:
 
 $$
 \begin{align*}
@@ -278,23 +348,23 @@ $$
 \end{align*}
 $$
 
-Com essa contagem, podemos representar o documento $D_1$ como um vetor de frequências $\vec{v}_{D_1}$. Se ordenarmos as palavras de $V_{D_1}$ alfabeticamente, por exemplo., $V'_{D_1} = \{ \text{"dorme"}, \text{"gato"}, \text{"no"}, \text{"o"}, \text{"preto"}, \text{"subiu"}, \text{"telhado"} \}$, então o vetor de frequências seria:
+Com essa contagem, podemos representar o documento $D_1$ como um vetor de frequências $\vec{v}_{D_1}$. Se ordenarmos as palavras de $V_{D_1}$ alfabeticamente, por exemplo., $V'_{D_1} = \{ \text{"dorme"}, \text{"gato"}, \text{"no"}, \text{"o"}, \text{"preto"}, \text{"subiu"}, \text{"telhado"} \}$, então o vetor de frequências será dado por:
 
 $$
 \vec{v}_{D_1} = \begin{bmatrix} 1 \\ 2 \\ 2 \\ 2 \\ 1 \\ 1 \\ 2 \end{bmatrix}
 $$
 
-A sagaz leitora deve perceber que o vetor de frequência $\vec{v}_{D_1}$ reside no espaço vetorial inteiro $\mathbb{Z}^{\vert V\vert }$, onde:
+A sagaz leitora deve perceber que o vetor de frequência $\vec{v}_{D_1}$ reside no espaço vetorial inteiro $\mathbb{Z}^{\vert V\vert}$, no qual, temos:
 
 * $\vec{v}_{D_1}$ denota o vetor de frequência do documento $D_1$.
 * $\mathbb{Z}$ representa o conjunto dos números inteiros, indicando que cada componente do vetor $\vec{v}_{D_1}$ é um número inteiro (neste caso, uma contagem de frequência).
-* $\vert V\vert $ representa a cardinalidade do vocabulário $V$, que é o número total de palavras únicas no vocabulário. Este valor $\vert V\vert $ define a dimensionalidade do espaço vetorial.
+* $\vert V\vert$ representa a cardinalidade do vocabulário $V$, que é o número total de palavras únicas no vocabulário. Este valor $\vert V\vert$ define a dimensionalidade do espaço vetorial.
 
-Em notação matemática de conjuntos, podemos expressar isso como:
+Em notação matemática, podemos expressar isso como:
 
-$$\vec{v}_{D_1} \in \mathbb{Z}^{\vert V\vert }$$
+$$\vec{v}_{D_1} \in \mathbb{Z}^{\vert V\vert}$$
 
-Essa representação simples já captura informações sobre a importância relativa das palavras no texto. Palavras que aparecem com mais frequência podem ser consideradas mais relevantes para o conteúdo do documento.
+Essa representação simples captura algumas informações sobre a importância relativa das palavras no texto. Palavras que aparecem com mais frequência podem ser consideradas mais relevantes para o conteúdo do documento. Isso pouco.
 
 #### Limitações da Representação Vetorial por Frequência de Palavras
 
@@ -320,14 +390,14 @@ Um segundo problema é a ausência de relações semânticas entre palavras. Pal
 
 "O carro é veloz" e "O automóvel é rápido"
 
-Embora estas frases sejam semanticamente equivalentes, seus vetores de frequência seriam completamente diferentes e ortogonais no espaço vetorial, sem qualquer medida de similaridade entre elas. Como pode ser visto no exemplo a seguir:
+Embora estas frases sejam semanticamente equivalentes, seus vetores de frequência seriam completamente diferentes e ortogonais no espaço vetorial, sem qualquer medida de similaridade entre elas. Como as palavras são tratadas como dimensões independentes, e não há sobreposição de termos entre "carro"/"automóvel" e "veloz"/"rápido", é possível que os vetores sejam ortogonais. A atenta leitora pode verificar este caso acompanhando o exemplo a seguir:
 
 **Exemplo 1:** analisando os documentos compostos por "O carro é veloz" e "O automóvel é rápido":
 
 1. $D_1$: "O carro é veloz"
 2. $D_2$: "O automóvel é rápido"
 
-Os documentos $D_1$ e $D_2$ forma o corpus da nossa análise. Primeiro, construímos o vocabulário global $V_{global}$ unindo todas as palavras únicas em $D_1$ e $D_2$:
+Os documentos $D_1$ e $D_2$ forma o *corpus* da nossa análise. Primeiro, construímos o vocabulário global $V_{global}$ unindo todas as palavras únicas em $D_1$ e $D_2$:
 
 $V_{global} = \{ \text{"o"}, \text{"carro"}, \text{"é"}, \text{"veloz"}, \text{"automóvel"}, \text{"rápido"} \}$
 
@@ -359,12 +429,12 @@ $$
 Para $D_2$ = "O automóvel é rápido", teremos:
 
 $$\begin{align*}
-& \text{automóvel}: 1
-& \text{carro}: 0
-& \text{é}: 1
-& \text{o}: 1
-& \text{rápido}: 1
-& \text{veloz}: 0
+& \text{automóvel}: 1 \\
+& \text{carro}: 0 \\
+& \text{é}: 1 \\
+& \text{o}: 1 \\
+& \text{rápido}: 1 \\
+& \text{veloz}: 0 \\
 \end{align*}$$
 
 Portanto, o vetor de frequência para $D_2$ será:
@@ -375,13 +445,13 @@ $$
 
 Podemos usar estes vetores para verificar a similaridade entre eles usando o produto escalar. Começamos pela ortogonalidade.
 
-Em álgebra linear, dois vetores $\vec{u}$ e $\vec{v}$ são ditos **ortogonais** se o seu produto escalar for igual a zero. Matematicamente, a ortogonalidade é definida como:
-
-$$
+>Em álgebra linear, dois vetores $\vec{u}$ e $\vec{v}$ são ditos **ortogonais** se o seu produto escalar for igual a zero. Matematicamente, a ortogonalidade é definida como:
+>
+>$$
 \vec{u} \cdot \vec{v} = \vec{u}^T \vec{v} = \sum_{i=1}^{n} u_i v_i = 0
 $$
-
-onde $n$ é a dimensão dos vetores.
+>
+>na qual $n$ é a dimensão dos vetores.
 
 Vamos calcular o produto escalar dos vetores de frequência $\vec{v}_{D_1}$ e $\vec{v}_{D_2}$:
 
@@ -389,25 +459,27 @@ $$
 \vec{v}_{D_1} \cdot \vec{v}_{D_2} = (0 \times 1) + (1 \times 0) + (1 \times 1) + (1 \times 1) + (0 \times 1) + (1 \times 0) = 0 + 0 + 1 + 1 + 0 + 0 = 2
 $$
 
-Neste caso, o produto escalar de $\vec{v}_{D_1}$ e $\vec{v}_{D_2}$ é 2, que é **diferente de zero**. Portanto, os vetores $\vec{v}_{D_1}$ e $\vec{v}_{D_2}$ **não são ortogonais**. Ou seja existe alguma similaridade direcional entre eles.
+Neste caso, o produto escalar de $\vec{v}_{D_1}$ e $\vec{v}_{D_2}$ é 2, que é **diferente de zero**. Portanto, os vetores $\vec{v}_{D_1}$ e $\vec{v}_{D_2}$ **não são ortogonais**. Ou seja existe alguma similaridade direcional entre eles. Estes vetores não são ortogonais porque compartilham os termos "o" e "é".
 
 O produto escalar sendo positivo indica que os vetores tendem a apontar na mesma direção. Quanto maior o valor positivo, maior a similaridade em termos de direção.
 
 Vetores ortogonais não possuem qualquer similaridade direcional. Porém, mesmo que os vetores não sejam ortogonais, a similaridade medida apenas pelo produto escalar, ou outras medidas baseadas em frequência, ainda seria limitada.
 
-Vetores de frequência capturam sobreposições de palavras literais, mas não a **relação semântica** subjacente. "Carro" e "automóvel", "veloz" e "rápido" são sinônimos, mas em representações de frequência básica, eles são tratados como palavras completamente distintas. A semântica, sentido da palavra no documento, se perde.
+Vetores de frequência capturam sobreposições de palavras literais, mas não a **relação semântica** subjacente. "Carro" e "automóvel", "veloz" e "rápido" são sinônimos, mas em representações de frequência, eles são tratados como palavras completamente distintas. *A semântica, sentido da palavra no documento, se perde*.
 
-A questão da polissemia também é completamente ignorada na representação vetorial por frequência. Considere a palavra "banco" nas frases:
+A questão da polissemia[^4] também é completamente ignorada na representação vetorial por frequência. Considere a palavra "banco" nas frases:
 
 "Sentei no banco da praça" e "Fui ao banco sacar dinheiro"
 
 O vetor de frequências trataria estas ocorrências do termo *banco* como idênticas, apesar de seus significados serem drasticamente diferentes. Matematicamente, isto significa que estamos mapeando diferentes significados para o mesmo componente do vetor, perdendo informação semântica.
 
+[^4]: A palavra polissemia refere-se ao fenômeno linguístico em que uma única palavra possui múltiplos significados ou sentidos relacionados, mas distintos, dependendo do contexto em que é utilizada. Por exemplo, a palavra "banco" pode significar uma instituição financeira, um assento para sentar-se, ou um conjunto de dados, entre outros sentidos. Esta multiplicidade semântica constitui um desafio significativo para sistemas de processamento de linguagem natural, que precisam determinar qual significado específico está sendo empregado em cada ocorrência da palavra.
+
 Outro problema sério é o tratamento de negações. As frases:
 
 "O filme é bom" e "O filme não é bom"
 
-Produziriam vetores muito similares, diferindo apenas pela presença do termo "não". A natureza oposta de seus significados seria praticamente indistinguível na representação vetorial. Os dois vetores terão, praticamente, a mesma direção e amplitude. Como podemos ver no exemplo a seguir:
+Produziriam vetores muito similares, diferindo apenas pela presença do termo "não". A natureza oposta de seus significados seria praticamente indistinguível na representação vetorial. Os dois vetores terão, praticamente, a mesma direção e amplitude. Como a atenta leitora pode ver no exemplo a seguir:
 
 **Exemplo 2**: vamos analisar os documentos "O filme é bom" e "O filme não é bom".
 
@@ -479,42 +551,47 @@ O produto escalar é $4$, um valor positivo e relativamente alto, considerando a
 **b) Magnitudes**: calculamos as magnitudes de $\vec{v}_{D_1}$ e $\vec{v}_{D_2}$:
 
 $$
-\\vert \vec{v}_{D_1}\\vert = \sqrt{1^2 + 1^2 + 1^2 + 0^2 + 1^2} = \sqrt{4} = 2
+\vert \vec{v}_{D_1}\vert = \sqrt{1^2 + 1^2 + 1^2 + 0^2 + 1^2} = \sqrt{4} = 2
 $$
 
 $$
-\\vert \vec{v}_{D_2}\\vert = \sqrt{1^2 + 1^2 + 1^2 + 1^2 + 1^2} = \sqrt{5} \approx 2.236
+\vert \vec{v}_{D_2}\vert = \sqrt{1^2 + 1^2 + 1^2 + 1^2 + 1^2} = \sqrt{5} \approx 2.236
 $$
 
 As magnitudes são próximas, indicando que ambos os vetores têm comprimentos similares no espaço vetorial definido pelo vocabulário global.
 
-Embora o produto escalar e as magnitudes sugiram alguma similaridade entre $\vec{v}_{D_1}$ e $\vec{v}_{D_2}$, a atenta leitora pode notar a **discrepância em termos de significado semântico**.
+Embora o produto escalar e as magnitudes sugiram alguma similaridade entre $\vec{v}_{D_1}$ e $\vec{v}_{D_2}$, a leitora pode notar a **discrepância em termos de significado semântico**.
 
-* $D_1$: "O filme é bom" expressa uma **avaliação positiva** sobre o filme.
-* $D_2$: "O filme não é bom" expressa uma **avaliação negativa**, ou no mínimo, não positiva, sobre o filme, essencialmente com o sentido **oposto** ao sentido de $D_1$.
+- $D_1$: "O filme é bom" expressa uma **avaliação positiva** sobre o filme.
+- $D_2$: "O filme não é bom" expressa uma **avaliação negativa**, ou no mínimo, não positiva, sobre o filme, essencialmente com o sentido **oposto** ao sentido de $D_1$.
 
-**A representação vetorial de frequência, neste caso, falha em capturar essa oposição semântica.** Os vetores são considerados *similares* em termos de produto escalar porque eles compartilham muitas palavras em comum ("o", "filme", "é", "bom"). A presença da palavra "não" em $D_2$, que inverte completamente o sentido, tem um impacto limitado na representação vetorial de frequência.
+**A representação vetorial de frequência, neste caso, falha em capturar essa oposição semântica.** Os vetores são considerados *similares* em termos de produto escalar porque eles compartilham muitas palavras em comum ("o", "filme", "é", "bom"). A presença da palavra "não" em $D_2$, que inverte completamente o sentido, tem um impacto quase insignificante na representação vetorial que usa a técnica de frequência.
 
 Ainda há um aspecto particularmente problemático na representação vetorial por frequência: a questão da dimensionalidade.
 
-Para um vocabulário de tamanho $\vert V\vert $, cada documento é representado em um espaço $\mathbb{R}^{\vert V\vert }$. Neste caso, $\mathbb{R}$ refere-se a um espaço vetorial de dimensão $\vert V\vert$, o tamanho do vocabulário. Isso significa que cada documento é representado como um vetor em um espaço de alta dimensão, no qual cada dimensão corresponde a uma palavra do vocabulário. Para um vocabulário de $10.000$ palavras, cada documento seria representado como um vetor em um espaço de $10.000$ dimensões. Isto leva a vetores extremamente esparsos, nos quais a maioria dos componentes é zero. Esta característica não só é computacionalmente ineficiente, mas também dificulta a identificação de similaridades entre documentos.
+Para um vocabulário de tamanho $\vert V\vert$, cada documento é representado em um espaço $\mathbb{R}^{\vert V\vert}$. Neste caso, $\mathbb{R}$ refere-se a um espaço vetorial de dimensão $\vert V\vert$, o tamanho do vocabulário. Isso significa que cada documento é representado como um vetor em um espaço de alta dimensão, no qual cada dimensão corresponde a uma palavra do vocabulário. Para um vocabulário de $10.000$ palavras, cada documento seria representado como um vetor em um espaço de $10.000$ dimensões.
 
->Um vetor esparso é um vetor onde a **maioria das suas componentes é zero**. Em coleções de documentos, como livros, artigos e processos, se usarmos os nossos vetores de frequência, a maioria das palavras do vocabulário não estará presente em um documento específico. Portanto, para um documento $D$, a maioria das entradas em $\vec{v}_D$ será zero.
+Como usaremos apenas a frequência, teremos vetores extremamente esparsos, nos quais a maioria dos componentes será zero. Esta característica não só é computacionalmente ineficiente, mas também dificulta a identificação de similaridades entre documentos.
 
-Trabalhar com vetores em espaços de alta dimensão (milhares, milhões ou bilhões de dimensões) é **computacionalmente custoso**. Armazenar e processar vetores esparsos com tantas dimensões exige recursos significativos de memória e tempo de processamento. Em espaços de alta dimensão, a noção de *distância* e *similaridade* torna-se menos intuitiva e menos discriminativa. Vetores esparsos em alta dimensão tendem a ser *distantes* uns dos outros, mesmo que semanticamente relacionados. *Vetores esparsos dificultam o cálculo de medidas de similaridade robustas e significativas*.
+Um vetor esparso é um vetor onde a **maioria das suas componentes é zero**. Em coleções de documentos, como livros, artigos e processos, se usarmos os nossos vetores de frequência, a maioria das palavras do vocabulário não estará presente em um documento específico. Portanto, para um documento $D$, a maioria das entradas em $\vec{v}_D$ será zero.
 
-Para quantificar a perda de informação contextual devido à esparsidade e à alta dimensionalidade, podemos expressá-la por meio de uma **função de perda $L(\vec{v}_D)$**. Buscando medir a diferença semântica entre a informação original do documento $D$ e a informação preservada na sua representação vetorial $\vec{v}_D$. Podemos definir a função de perda $L(\vec{v}_D)$ como:
+Trabalhar com vetores em espaços de alta dimensão (milhares, milhões ou bilhões de dimensões) é **computacionalmente caro**. Armazenar e processar vetores esparsos com tantas dimensões exige recursos significativos de memória e tempo de processamento. Nestas condições, a noção de *distância* e *similaridade* torna-se menos intuitiva e, principalmente, menos discriminativa. Vetores esparsos em alta dimensão tendem a ser *distantes* uns dos outros, mesmo que semanticamente relacionados. Em resumo: *vetores esparsos dificultam o cálculo de medidas de similaridade robustas e significativas*.
+
+#### Perda de Informação Contextual
+
+Para verificar a qualidade da representação por frequência e quantificar a perda de informação contextual devido à esparsidade e à alta dimensionalidade, podemos expressar esta perda de informação por meio de uma **função de perda $L(\vec{v}_D)$**.Podemos definir a função de perda $L(\vec{v}_D)$ como:
 
 $$L(\vec{v}_D) = H(D) - I(\vec{v}_D)$$
 
 Nesta função, temos:
 
-* **$L(\vec{v}_D)$**: representa a **perda de informação contextual** ao representar o documento $D$ pelo vetor de frequência $\vec{v}_D$. Idealmente, queremos que $L(\vec{v}_D)$ seja o menor possível, indicando que a representação vetorial preserva o máximo de informação relevante.
+- **$L(\vec{v}_D)$**: representa a **perda de informação contextual** ao representar o documento $D$ pelo vetor de frequência $\vec{v}_D$. Idealmente, queremos que $L(\vec{v}_D)$ seja o menor possível, indicando que a representação vetorial preserva o máximo de informação relevante.
 
-* **$H(D)$**: é a **entropia de informação do documento original $D$**. A entropia $H(D)$ é uma medida teórica da quantidade total de informação contida no documento $D$. Ela quantifica a incerteza ou aleatoriedade inerente ao documento. Em termos simples, documentos mais complexos e informativos tendem a ter entropia mais alta. 
-  > A definição precisa de entropia em contextos textuais pode ser complexa e depender de como a informação é modelada, mas conceitualmente representa a "riqueza" informacional do texto original).
+- **$H(D)$**: é a **entropia de informação do documento original $D$**. A entropia $H(D)$ é uma medida teórica da quantidade total de informação contida no documento $D$. Ela quantifica a incerteza ou aleatoriedade inerente ao documento. Em termos simples, documentos mais complexos e informativos tendem a ter entropia mais alta.
 
-* **$I(\vec{v}_D)$**: é a **informação preservada na representação vetorial $\vec{v}_D$**. $I(\vec{v}_D)$ mede quanta informação do documento original $D$ é efetivamente capturada e retida na representação vetorial $\vec{v}_D$. Representações mais eficazes devem maximizar $I(\vec{v}_D)$.
+> A definição precisa de entropia em contextos textuais pode ser complexa e depender de como a informação é modelada, mas conceitualmente representa a "riqueza" informacional do texto original. A quantidade de termos diferentes que aparecem no documento, a frequência de cada termo e a distribuição de probabilidade dos termos são fatores que influenciam a entropia. Documentos com uma variedade maior de palavras e uma distribuição mais uniforme entre elas tendem a ter maior entropia.
+
+- **$I(\vec{v}_D)$**: é a **informação preservada na representação vetorial $\vec{v}_D$**. $I(\vec{v}_D)$ mede quanta informação do documento original $D$ é efetivamente capturada e retida na representação vetorial $\vec{v}_D$. Representações mais eficazes devem maximizar $I(\vec{v}_D)$.
 
 A função $L(\vec{v}_D) = H(D) - I(\vec{v}_D)$ expressa a perda de informação como a **diferença** entre a informação total original ($H(D)$) e a informação que conseguimos reter na representação vetorial ($\vec{v}_D$).
 
@@ -522,13 +599,13 @@ Para representações como vetores de frequência (e **BoW**, **TF-IDF** que ver
 
 A perda de informação $L(\vec{v}_D)$ tende a **aumentar com a complexidade semântica do texto**. Textos mais complexos, com nuances, ironia, sarcasmo, metáforas, etc., dependem ainda mais do contexto para a compreensão. Representações simples como vetores de frequência falham ainda mais em capturar a riqueza informacional desses textos, resultando em uma perda de informação ainda maior.
 
-A consciência dessas limitações motivou o desenvolvimento de técnicas mais avançadas, como **word embeddings** (Word2Vec, GloVe, FastText) e **modelos de linguagem contextuais** (BERT, GPT, Transformers). Vamos chegar lá. Todavia, por enquanto temos que entender algumas outras formas de vetorização.
+A consciência dessas limitações motivou o desenvolvimento de técnicas mais avançadas, como **word embeddings** (Word2Vec, GloVe, FastText) e **modelos de linguagem contextuais** (BERT, GPT, *Transformers*). Vamos chegar lá. Todavia, por enquanto temos que entender algumas outras formas de vetorização que servirão de contextualização e base para o entendimento dos modelos mais avançados.
 
 ### Bag of Words (BoW)
 
-O modelo **Bag of Words (BoW)**, ou *saco de palavras*, é uma evolução da representação por frequência. **BoW** também se baseia na frequência de palavras, mas com uma abordagem que ignora a ordem e a estrutura gramatical das palavras no texto. Este algoritmo trata cada documento como um *saco* de palavras, onde apenas a presença e a frequência das palavras importam.
+O modelo **Bag of Words (BoW)**, ou *saco de palavras*, é uma variação da representação por frequência. O **BoW** também se baseia na frequência de palavras, mas com uma abordagem que ignora a ordem e a estrutura gramatical das palavras no texto. Este algoritmo trata cada documento como um *saco* de palavras, onde apenas a presença e a frequência das palavras importam.
 
-O algoritmo **Bag of Words (BoW)** surgiu da área de recuperação de informação e processamento de linguagem natural. Embora a ideia de representar textos como "sacos de palavras" tenha evoluído ao longo do tempo, um dos trabalhos seminais que formalizou e popularizou essa abordagem é frequentemente creditado a Gerard Salton[text](https://en.wikipedia.org/wiki/Gerard_Salton) e seus colaboradores no contexto do sistema SMART (*System for the Mechanical Analysis and Retrieval of Text*) [^5], [^6].
+O algoritmo **Bag of Words (BoW)** surgiu da área de recuperação de informação e processamento de linguagem natural. Embora a ideia de representar textos como "sacos de palavras" tenha evoluído ao longo do tempo, um dos trabalhos seminais que formalizou e popularizou essa abordagem é frequentemente creditado a [Gerard Salton](https://en.wikipedia.org/wiki/Gerard_Salton) e seus colaboradores no contexto do sistema SMART (*System for the Mechanical Analysis and Retrieval of Text*) [^5], [^6].
 
 [^5]: SALTON, G.; LESK, M. E. **The SMART Automatic Document Retrieval System—An Illustration**. Communications of the ACM, v. 8, n. 9, p. 391-398, 1965. Disponível em: https://apastyle.apa.org/blog/citing-online-works. Acesso em: [Data de acesso].
 
@@ -583,7 +660,7 @@ A sagaz leitora pode pensar que essas limitações tornam o **BoW** inútil. Con
 
 ### **TF-IDF** (Term Frequency-Inverse Document Frequency)
 
-O **TF-IDF (Term Frequency-Inverse Document Frequency)** tem origem nos trabalhos de Spärck[^7] e Salton[^8] quase como uma evolução natural do modelo **BoW** com a intensão de resolver um dos seus problemas fundamentais: a dominância de palavras muito frequentes. O **TF-IDF** teve impacto significativo na área de recuperação de informação por conseguir ponderar a importância das palavras levando em consideração, além da frequência em um determinado documento, a raridade no *corpus*.
+O **TF-IDF (Term Frequency-Inverse Document Frequency)** tem origem nos trabalhos de Spärck[^7] e Salton[^8] quase como uma evolução natural do modelo **BoW** com o objetivo de resolver um dos seus problemas fundamentais: a dominância de palavras muito frequentes. O **TF-IDF** teve impacto significativo na área de recuperação de informação por conseguir ponderar a importância das palavras levando em consideração, além da frequência em um determinado documento, a raridade no *corpus*.
 
 [^7]: SPÄRCK JONES, K. S. A statistical interpretation of term specificity and its application in retrieval. Journal of Documentation, v. 28, n. 1, p. 11–21, 1972.
 
@@ -600,29 +677,33 @@ Uma forma interessante de entender o **TF-IDF** é dividir o algoritmo em suas p
 
 O cálculo da frequência de termos, ou **Term Frequency (TF)**, pode ser realizado de diferentes maneiras, cada uma com suas próprias características e aplicações.
 
-A forma mais simples de calcular o **TF** é usar a frequência bruta, também chamada de contagem absoluta:
+A forma mais simples de calcular o **TF** é usar a frequência bruta, $raw$, também chamada de contagem absoluta:
 
 $$
 \text{TF}_{raw}(w, D_i) = f(w, D_i)
 $$
 
-Neste caso, $f(w, D_i)$ representa o número de vezes que a palavra $w$ aparece no documento $D_i$. 
+Nesta definição, $f(w, D_i)$ representa o número de vezes que a palavra $w$ aparece no documento $D_i$.
 
-**Exemplo 1**: considere dois documentos:
+**Exemplo 1**: considere os dois documentos $D_1$ e $D_2$, a seguir:
 
-$D_1$: "O pequeno gato preto viu outro gato preto"
-$D_2$: "Gato"
+- $D_1$: "O pequeno gato preto viu outro gato preto";
+- $D_2$: "Gato".
 
 Para a palavra "gato", teríamos:
 
-- $\text{TF}_{raw}(\text{"gato"}, D_1) = 2$
-- $\text{TF}_{raw}(\text{"gato"}, D_2) = 1$
+- $\text{TF}_{raw}(\text{"gato"}, D_1) = 2$;
+- $\text{TF}_{raw}(\text{"gato"}, D_2) = 1$.
 
-**Exemplo 2: vamos tentar novamente com alguns termos em um *corpus* com três documentos. Considere:
+A frequência bruta, embora simples, apresenta um problema: ela não considera o tamanho do documento. No exemplo 1 acima, "gato" representa $100\%$ das palavras em $D_2$, mas apenas $25\%$ das palavras em $D_1$. A frequência bruta não consegue capturar essa diferença de importância relativa.
 
-$D_1$: "O gato preto caça o rato preto"
-$D_2$: "O rato branco corre do gato"
-$D_3$: "O cachorro late para o gato preto"
+A frequência bruta pode ser enganosa, especialmente quando comparamos documentos de tamanhos diferentes. Em um documento pequeno, uma palavra pode ter uma frequência bruta alta, mas isso não significa que ela seja mais importante do que em um documento maior.
+
+**Exemplo 2**: vamos tentar novamente usando um *corpus* com três documentos. Considere:
+
+- $D_1$: "O gato preto caça o rato preto";
+- $D_2$: "O rato branco corre do gato";
+- $D_3$: "O cachorro late para o gato preto".
 
 Para este *corpus*, teremos:
 
@@ -638,34 +719,32 @@ Para a palavra "preto":
 - $\text{TF}_{raw}(\text{"preto"}, D_2) = 0$
 - $\text{TF}_{raw}(\text{"preto"}, D_3) = 1$
 
-A frequência bruta, embora simples, apresenta um problema: ela não considera o tamanho do documento. No exemplo acima, "gato" representa $100\%$ das palavras em $D_2$, mas apenas $25\%$ das palavras em $D_1$. A frequência bruta não consegue capturar essa diferença de importância relativa.
-
-Para resolver a limitação da frequência bruta, utilizamos a frequência normalizada:
+Para resolver a limitação da frequência bruta, utilizamos a frequência normalizada que pode ser definida como:
 
 $$
 \text{TF}(w, D_i) = \frac{f(w, D_i)}{\sum_{w' \in D_i} f(w', D_i)}
 $$
 
-O denominador $\sum_{w' \in D_i} f(w', D_i)$ representa o número total de palavras no documento $D_i$. 
+O denominador $\sum_{w' \in D_i} f(w', D_i)$ representa o número total de palavras no documento $D_i$.
 
 **Exemplo 3**: novamente considere o *corpus* dado por:  
 
-$D_1$: "O pequeno gato preto viu outro gato preto"
-$D_2$: "Gato"
+$D_1$: "O pequeno gato preto viu outro gato preto";
+$D_2$: "Gato".
 
 Para a palavra "gato", teríamos:
 
 Para $D_1$: "O pequeno gato preto viu outro gato preto" (8 palavras total)
 
-- $f(\text{"gato"}, D_1) = 2$
-- $\sum_{w' \in D_1} f(w', D_1) = 8$
-- $\text{TF}(\text{"gato"}, D_1) = \frac{2}{8} = 0.25$
+- $f(\text{"gato"}, D_1) = 2$;
+- $\sum_{w' \in D_1} f(w', D_1) = 8$;
+- $\text{TF}(\text{"gato"}, D_1) = \frac{2}{8} = 0.25$.
 
 Para $D_2$: "Gato" (1 palavra total)
 
-- $f(\text{"gato"}, D_2) = 1$
-- $\sum_{w' \in D_2} f(w', D_1) = 1$
-- $\text{TF}(\text{"gato"}, D_2) = \frac{1}{1} = 1.0$
+- $f(\text{"gato"}, D_2) = 1$;
+- $\sum_{w' \in D_2} f(w', D_1) = 1$;
+- $\text{TF}(\text{"gato"}, D_2) = \frac{1}{1} = 1.0$.
 
 A sagaz leitora pode ver que a frequência normalizada captura melhor a importância relativa da palavra em cada documento. Em $D_2$, "gato" tem frequência normalizada $1.0$, indicando que representa $100\%$ do documento, enquanto em $D_1$ tem frequência $0.25$, representando $25\%$ do documento.
 
@@ -679,7 +758,6 @@ $$\text{TF}(\text{"gato"}, D_2) = \frac{1}{7} \approx 0.143$$
 
 Para $D_3$ (7 palavras total):
 $$\text{TF}(\text{"preto"}, D_3) = \frac{1}{7} \approx 0.143$$
-
 
 Além das frequências bruta e normalizada, existem outras formulações importantes do **TF**, criadas para resolver problemas específicos na representação de documentos.
 
@@ -716,9 +794,9 @@ A frequência logarítmica reduz a razão de $3:1$ para aproximadamente $1.48:1$
 
 **Exemplo 6**: voltando ao *corpus* de três documentos, teremos:
 
-$D_1$: "O gato preto caça o rato preto"
-$D_2$: "O rato branco corre do gato"
-$D_3$: "O cachorro late para o gato preto"
+$D_1$: "O gato preto caça o rato preto";
+$D_2$: "O rato branco corre do gato";
+$D_3$: "O cachorro late para o gato preto".
 
 Para "preto" em $D_1$:
 $$\text{TF}_{log}(\text{"preto"}, D_1) = 1 + \log(2) \approx 1.301$$
@@ -728,7 +806,7 @@ $$\text{TF}_{log}(\text{"gato"}, D_2) = 1 + \log(1) = 1$$
 
 Esta propriedade de compressão do logaritmo é particularmente valiosa em processamento de linguagem natural porque segue a Lei de Weber-Fechner, que estabelece que a percepção humana de diferenças tende a ser logarítmica em relação ao estímulo real: da mesma forma que não percebemos uma luz com $300$ lumens como sendo 3 vezes mais brilhante que uma com $100$ lumens, também não interpretamos uma palavra que aparece $3$ vezes em um texto como tendo o triplo da importância semântica de uma palavra que aparece uma única vez.
 
->A propriedade de compressão logarítmica, frequentemente utilizada em processamento de linguagem natural (PLN), encontra justificativa na **Lei de Weber-Fechner**. Esta lei psicofísica fundamental descreve a relação entre a magnitude física de um estímulo e a percepção humana da intensidade desse estímulo.
+>A propriedade de compressão logarítmica, frequentemente utilizada em processamento de linguagem natural, encontra justificativa na **Lei de Weber-Fechner**. Esta lei psicofísica fundamental descreve a relação entre a magnitude física de um estímulo e a percepção humana da intensidade desse estímulo.
 >
 >Em essência, a Lei de Weber-Fechner postula que a percepção sensorial é proporcional ao logaritmo da intensidade real do estímulo. Matematicamente, isso pode ser expresso como:
 >
@@ -736,20 +814,20 @@ Esta propriedade de compressão do logaritmo é particularmente valiosa em proce
 >
 >Na qual, temos:
 >
->*   $P$ representa a magnitude da percepção.
->*   $S$ é a intensidade do estímulo.
->*   $S_0$ é o limiar de detecção do estímulo (o menor estímulo>que pode ser percebido).
->*   $k$ é uma constante de proporcionalidade, dependente do tipo de estímulo e da modalidade sensorial.
+>- $P$ representa a magnitude da percepção.
+>- $S$ é a intensidade do estímulo.
+>- $S_0$ é o limiar de detecção do estímulo (o menor estímulo>que pode ser percebido).
+>- $k$ é uma constante de proporcionalidade, dependente do tipo de estímulo e da modalidade sensorial.
 >
->A lei implica que a nossa percepção de mudanças em estímulos não é linear, mas sim logarítmica. Em vez de percebermos aumentos aritméticos na intensidade de um estímulo como aumentos lineares na percepção, percebemos aumentos geométricos como aumentos aritméticos.
+>A **Lei de Weber-Fechner** implica que a nossa percepção de mudanças em estímulos não é linear, mas sim logarítmica. Em vez de percebermos aumentos aritméticos na intensidade de um estímulo como aumentos lineares na percepção, percebemos aumentos geométricos como aumentos aritméticos.
 >
->No contexto do PLN e, especificamente, no algoritmo **TF-IDF**, essa lei se torna relevante ao justificar a aplicação do logaritmo na frequência dos termos (**TF**) e na frequência inversa nos documentos (**IDF**). Assim como a percepção humana não escala linearmente com a intensidade da luz, também não interpretamos a importância de uma palavra em um texto de forma linear com sua frequência bruta.
+>No contexto do processamento de linguagem natural e, especificamente, no algoritmo **TF-IDF**, essa lei se torna relevante ao justificar a aplicação do logaritmo na frequência dos termos (**TF**) e na frequência inversa nos documentos (**IDF**). Assim como a percepção humana não escala linearmente com a intensidade da luz, também não interpretamos a importância de uma palavra em um texto de forma linear com sua frequência bruta.
 >
->Por exemplo, conforme mencionado no texto, uma luz com $300$ lumens não é percebida como três vezes mais brilhante que uma com $100$ lumens. De maneira análoga, uma palavra que aparece $3$ vezes em um documento não é necessariamente considerada três vezes mais importante semanticamente do que uma palavra que aparece apenas uma vez. A aplicação do logaritmo na frequência dos termos e documentos no **TF-IDF** busca modelar essa percepção humana não linear da importância, dando menos peso a aumentos lineares na frequência e enfatizando a presença da palavra, mesmo que não seja extremamente frequente.
+>Por exemplo, uma luz com $300$ lumens não será percebida como três vezes mais brilhante que uma com $100$ lumens. De maneira análoga, uma palavra que aparece $3$ vezes em um documento não será necessariamente considerada três vezes mais importante semanticamente do que uma palavra que aparece apenas uma vez. A aplicação do logaritmo na frequência dos termos e documentos no **TF-IDF** busca modelar essa percepção humana não linear da importância, dando menos peso a aumentos lineares na frequência e enfatizando a presença da palavra, mesmo que não seja extremamente frequente.
 >
 >Embora o trabalho de [Weber](https://www.britannica.com/biography/Ernst-Heinrich-Weber)[^9] tenha dado início a pequisas que levou a Lei Weber-Fechner. [Gustav Theodor Fechner](https://www.britannica.com/biography/Gustav-Fechner) expandiu e formalizou as ideias de [Ernst Heinrich Weber](https://www.britannica.com/biography/Ernst-Heinrich-Weber) em sua obra posterior[^10]. A formulação matemática mais completa e a denominação da lei são geralmente atribuídas a Fechner.
 >
->Este princípio psicofísico, portanto, oferece uma base teórica para a utilização da compressão logarítmica em técnicas de PLN como TF-IDF, alinhando o processamento computacional de texto com a forma como os humanos percebem e interpretam a informação.
+>Este princípio psicofísico, portanto, oferece uma base teórica para a utilização da compressão logarítmica em técnicas de processamento de linguagem natural como **TF-IDF**, alinhando o processamento computacional de texto com a forma como os humanos percebem e interpretam a informação.
 
 [^9]WEBER, E. H. **De tactu: Annotationes anatomicae et physiologicae**. Lipsiae: Koehler, 1834.
 
@@ -767,35 +845,36 @@ Esta formulação é útil quando a presença de uma palavra é mais importante 
 
 **Exemplo 7**: para que a amável leitora entenda, considere dois documentos:
 
-* $D_1$: "Python é uma linguagem de programação. Python é versátil. Python é popular."
-* $D_2$: "Java é uma linguagem de programação."
+- $D_1$: "Python é uma linguagem de programação. Python é versátil. Python é popular";
+- $D_2$: "Java é uma linguagem de programação".
 
 Se calcularmos **TF** a palavra "linguagem", teremos:
 
-- $\text{TF}_{raw}(\text{"linguagem"}, D_1) = 1$
-- $\text{TF}_{raw}(\text{"linguagem"}, D_2) = 1$
-- $\text{TF}_{binary}(\text{"linguagem"}, D_1) = 1$
-- $\text{TF}_{binary}(\text{"linguagem"}, D_2) = 1$
+- $\text{TF}_{raw}(\text{"linguagem"}, D_1) = 1$;
+- $\text{TF}_{raw}(\text{"linguagem"}, D_2) = 1$;
+- $\text{TF}_{binary}(\text{"linguagem"}, D_1) = 1$;
+- $\text{TF}_{binary}(\text{"linguagem"}, D_2) = 1$.
 
 Para a palavra "Python":
 
-- $\text{TF}_{raw}(\text{"Python"}, D_1) = 3$
-- $\text{TF}_{raw}(\text{"Python"}, D_2) = 0$
-- $\text{TF}_{binary}(\text{"Python"}, D_1) = 1$
-- $\text{TF}_{binary}(\text{"Python"}, D_2) = 0$
+- $\text{TF}_{raw}(\text{"Python"}, D_1) = 3$;
+- $\text{TF}_{raw}(\text{"Python"}, D_2) = 0$;
+- $\text{TF}_{binary}(\text{"Python"}, D_1) = 1$;
+- $\text{TF}_{binary}(\text{"Python"}, D_2) = 0$.
 
 A frequência binária indica apenas que $D_1$ é sobre Python e $D_2$ não é, ignorando a repetição da palavra.
 
 **Exemplo 8**: podemos aplicar a frequência binária ao **corpus** com três documentos que usamos anteriormente:
 
-$D_1$: "O gato preto caça o rato preto"
-$D_2$: "O rato branco corre do gato"
-$D_3$: "O cachorro late para o gato preto"
+$D_1$: "O gato preto caça o rato preto";
+$D_2$: "O rato branco corre do gato";
+$D_3$: "O cachorro late para o gato preto".
 
 Para "rato":
-- $\text{TF}_{binary}(\text{"rato"}, D_1) = 1$ (presente)
-- $\text{TF}_{binary}(\text{"rato"}, D_2) = 1$ (presente)
-- $\text{TF}_{binary}(\text{"rato"}, D_3) = 0$ (ausente)
+
+- $\text{TF}_{binary}(\text{"rato"}, D_1) = 1$ (presente);
+- $\text{TF}_{binary}(\text{"rato"}, D_2) = 1$ (presente);
+- $\text{TF}_{binary}(\text{"rato"}, D_3) = 0$ (ausente).
 
 ##### Frequência Aumentada (Augmented Frequency)
 
@@ -817,37 +896,39 @@ Usamos esta fórmula quando queremos considerar a frequência relativa das palav
 
 Para este documento:
 
-- $f(\text{"gato"}, D_1) = 3$ (palavra mais frequente)
-- $f(\text{"preto"}, D_1) = 2$
-- $f(\text{"dormiu"}, D_1) = 1$
+- $f(\text{"gato"}, D_1) = 3$ (palavra mais frequente);
+- $f(\text{"preto"}, D_1) = 2$;
+- $f(\text{"dormiu"}, D_1) = 1$.
 
 Calculando $\text{TF}_{aug}$:
 
-- $\text{TF}_{aug}(\text{"gato"}, D_1) = 0.5 + 0.5 \times \frac{3}{3} = 1.0$
-- $\text{TF}_{aug}(\text{"preto"}, D_1) = 0.5 + 0.5 \times \frac{2}{3} \approx 0.83$
-- $\text{TF}_{aug}(\text{"dormiu"}, D_1) = 0.5 + 0.5 \times \frac{1}{3} \approx 0.67$
+- $\text{TF}_{aug}(\text{"gato"}, D_1) = 0.5 + 0.5 \times \frac{3}{3} = 1.0$;
+- $\text{TF}_{aug}(\text{"preto"}, D_1) = 0.5 + 0.5 \times \frac{2}{3} \approx 0.83$;
+- $\text{TF}_{aug}(\text{"dormiu"}, D_1) = 0.5 + 0.5 \times \frac{1}{3} \approx 0.67$.
 
 Observe que mesmo "dormiu", que aparece apenas uma vez, recebe um peso considerável $(0.67)$ devido ao termo base $0.5$.
 
 **Exemplo 10**: usando o **corpus** com três documentos: 
 
-$D_1$: "O gato preto caça o rato preto"
-$D_2$: "O rato branco corre do gato"
-$D_3$: "O cachorro late para o gato preto"
+- $D_1$: "O gato preto caça o rato preto";
+- $D_2$: "O rato branco corre do gato";
+- $D_3$: "O cachorro late para o gato preto".
 
 Para $D_1$, a palavra mais frequente aparece 2 vezes ("preto"):
 
 Para "gato":
+
 $$\text{TF}_{aug}(\text{"gato"}, D_1) = 0.5 + 0.5 \times \frac{1}{2} = 0.75$$
 
 Para "preto":
+
 $$\text{TF}_{aug}(\text{"preto"}, D_1) = 0.5 + 0.5 \times \frac{2}{2} = 1.0$$
 
 A frequência aumentada se destaca sistemas de recuperação de informação e mecanismos de busca onde temos documentos de tamanhos muito diferentes, como por exemplo, ao comparar artigos científicos com resumos ou *abstracts*.
 
 Ao utilizar a fórmula da frequência aumentada, garantimos que mesmo palavras que aparecem apenas uma vez ainda recebam um peso mínimo de $0.5$, enquanto a palavra mais frequente no documento recebe peso $1.0$, criando assim uma distribuição mais equilibrada que é valiosa quando precisamos comparar documentos de diferentes comprimentos ou quando queremos evitar que documentos longos dominem os resultados graças ao seu tamanho. Um problema comum em sistemas de busca acadêmica, bibliotecas digitais e bases de dados documentais, onde a variação no tamanho dos documentos pode ser significativa.
 
-Além das quatro formas que estudamos ($\text{TF}_{raw}$, $\text{TF}_{log}$, $\text{TF}_{binary}$ e $\text{TF}_{aug}$), existem várias outras formulações para o cálculo do TF. Uma variação particularmente interessante é a frequência K-modificada, definida como:
+Além das quatro formas que estudamos ($\text{TF}_{raw}$, $\text{TF}_{log}$, $\text{TF}_{binary}$ e $\text{TF}_{aug}$), existem várias outras formulações para o cálculo do **TF**. Uma variação particularmente interessante é a frequência $K$-modificada, definida como:
 
 $$ \text{TF}_K(w, D_i) = K + (1-K) \times \frac{f(w, D_i)}{\max_{w' \in D_i} f(w', D_i)} $$
 
@@ -874,7 +955,7 @@ que usa a norma euclidiana do documento como fator de normalização, sendo part
 
 >Técnicas de *ensemble* e votação ponderada são métodos de combinação de diferentes abordagens para obter resultados mais robustos e confiáveis. Imagine um grupo de especialistas médicos analisando um caso complexo. Cada um tem sua expertise e perspectiva única, e a decisão final considera a opinião de todos, dando mais peso aos especialistas com mais experiência em aspectos específicos do caso. No contexto do **TF-IDF**, estas técnicas funcionam de maneira similar: diferentes fórmulas de **TF** são calculadas para o mesmo texto (como $\text{TF}_{log}$, $\text{TF}_{aug}$, etc.), e o resultado final é uma combinação ponderada desses valores. Por exemplo, podemos dar mais peso ao $\text{TF}_{aug}$ quando trabalhamos com documentos de tamanhos muito diferentes, e mais peso ao $\text{TF}_{log}$ quando lidamos com palavras de frequências muito variadas. Esta abordagem é particularmente poderosa porque combina as vantagens de diferentes formulações, compensando as limitações individuais de cada método e produzindo resultados mais estáveis e precisos em uma variedade maior de situações.
 >
->Quase deixo passar! A palavra *ensemble* vem do francês e significa conjunto ou em conjunto. No contexto de análise de dados e aprendizado de máquina, uma técnica de *ensemble* refere-se a um método que combina múltiplos modelos ou abordagens diferentes para criar uma solução mais robusta. Como uma orquestra que, não por coincidência, também usa a palavra *ensemble*.
+>Quase deixo passar! A palavra *ensemble* vem do francês e significa conjunto, ou em conjunto. No contexto de análise de dados e aprendizado de máquina, uma técnica de *ensemble* refere-se a um método que combina múltiplos modelos ou abordagens diferentes para criar uma solução mais robusta. Como uma orquestra que, não por coincidência, também usa a palavra *ensemble*.
 >
 >Em uma orquestra cada instrumento contribui com seu som único, e juntos criam uma música mais rica e complexa do que qualquer instrumento sozinho poderia produzir. Da mesma forma, quando falamos de *ensemble* no contexto do **TF-IDF**, estamos falando de combinar diferentes fórmulas de cálculo do **TF** ou do **IDF**, cada uma com suas características específicas, para obter um resultado mais preciso e confiável.
 
@@ -898,7 +979,7 @@ No momento de definir sua aplicação, a analítica leitora deve considerar:
    - Palavras com frequências muito diferentes → Frequência logarítmica;
    - Palavras-chave importantes → Frequência binária ou aumentada.
 
-A esforçada leitora deverá experimentar diferentes formulações em seu conjunto de dados específico, avaliando o impacto de cada uma no desempenho final do seu sistema. *Triste é a sina daquela que pesquisa*.
+A esforçada leitora deverá experimentar diferentes formulações em seu conjunto de dados específico, avaliando o impacto de cada uma no desempenho final do seu sistema. *Triste é a sina daquela que pesquisa e aprende*.
 
 #### Inverse Document Frequency (IDF)
 
@@ -942,9 +1023,9 @@ $$\text{IDF}(\text{"cachorro"}, Docs) = \log \left(\frac{3}{1}\right) \approx 1.
 
 A função logarítmica na fórmula do **IDF** desempenha dois papéis importantes que precisamos destacar:
 
-1.  **Suavização da divisão**: a aplicação do logaritmo atenua o impacto de grandes variações no denominador. Isso é particularmente útil quando se lida com coleções de documentos muito grandes, onde a frequência documental de alguns termos pode ser muito baixa, levando a valores de IDF muito altos sem a suavização logarítmica.
+1. **Suavização da divisão**: a aplicação do logaritmo atenua o impacto de grandes variações no denominador. Isso é particularmente útil quando se lida com coleções de documentos muito grandes, onde a frequência documental de alguns termos pode ser muito baixa, levando a valores de IDF muito altos sem a suavização logarítmica.
 
-2.  **Garantia de baixo peso para palavras comuns**: a função logarítmica garante que palavras muito comuns, que aparecem em um grande número de documentos (fazendo com que o denominador $|\{D_j \in Docs: w \in D_j\}|$ se aproxime de $|Docs|$), resultem em valores de **IDF** próximos de zero.  Idealmente, se uma palavra aparece em todos os documentos, o termo dentro do logaritmo se torna 1, e $\log(1) = 0$, atribuindo um **IDF** nulo a essa palavra, indicando sua falta de poder discriminatório.
+2. **Garantia de baixo peso para palavras comuns**: a função logarítmica garante que palavras muito comuns, que aparecem em um grande número de documentos (fazendo com que o denominador $|\{D_j \in Docs: w \in D_j\}|$ se aproxime de $|Docs|$), resultem em valores de **IDF** próximos de zero.  Idealmente, se uma palavra aparece em todos os documentos, o termo dentro do logaritmo se torna 1, e $\log(1) = 0$, atribuindo um **IDF** nulo a essa palavra, indicando sua falta de poder discriminatório.
 
 Em resumo, o **IDF** atua como um fator de ponderação que diminui a importância de termos que são comuns em muitos documentos e aumenta a importância de termos que são raros e, portanto, mais específicos e discriminativos dentro da coleção. Ao combinar o **IDF** com o **TF**, o algoritmo **TF-IDF** consegue identificar termos que são importantes em um documento específico e, ao mesmo tempo, distintivos em relação à coleção de documentos como um todo, melhorando significativamente a eficácia em tarefas como recuperação de informação e análise de texto.
 
@@ -1026,24 +1107,27 @@ Nesta fórmula, $N = |Docs|$ e $df_w = |\{D_j \in Docs: w \in D_j\}|$, frequênc
 
 **Exemplo 4**: usando o **corpus** de três documentos:
 
-$D_1$: "O gato preto caça o rato preto"
-$D_2$: "O rato branco corre do gato"
-$D_3$: "O cachorro late para o gato preto"
+- $D_1$: "O gato preto caça o rato preto";
+- $D_2$: "O rato branco corre do gato";
+- $D_3$: "O cachorro late para o gato preto".
 
 Para "gato":
 
-Para "gato":
+$$
+\text{IDF}(\text{"gato"}, Docs) = \log \left(\frac{3 - 3}{3}\right) = \log(0)
+$$
 
-$$\text{IDF}(\text{"gato"}, Docs) = \log \left(\frac{3 - 3}{3}\right) = \log(0)$$
 (Indefinido, mostrando uma limitação desta formulação)
 
 Para "preto":
 
-$$\text{IDF}(\text{"preto"}, Docs) = \log \left(\frac{3 - 2}{2}\right) = \log(0.5) \approx -0.301$$
+$$
+\text{IDF}(\text{"preto"}, Docs) = \log \left(\frac{3 - 2}{2}\right) = \log(0.5) \approx -0.301
+$$
 
 O **IDF probabilístico** com sua interpretação probabilística, potencialmente reflete melhor o caráter informativo de termos raros em alguns cenários. Contudo, pode resultar em valores **IDF** negativos se o termo aparecer em mais de metade dos documentos, o que pode não ser intuitivo. Além disso, o **IDF** probabilístico é sensível à frequência documental.
 
-##### IDF Máximo:
+##### IDF Máximo
 
 Esta variação define um limite superior para o valor **IDF**. Baseia-se na ideia de que, após um certo ponto, aumentar os valores **IDF** para termos extremamente raros pode não ser benéfico e pode até ser prejudicial. Uma abordagem é usar o valor IDF máximo observado na coleção como o limite prático da sua aplicação:
 
@@ -1055,14 +1139,14 @@ Neste caso, $\text{IDF}(w, Docs)$ é tipicamente o **IDF** básico ou **IDF+1**.
 
 O **IDF Máximo**, ou **IDF Max**, limita a influência de termos extremamente raros, melhorando potencialmente a robustez e prevenindo o *overfitting* a ruído nos dados. Porém, introduz um corte relativamente arbitrário, o que pode ser prejudicial em alguns conjuntos de dados.
 
-**5. IDF Normalizado por Comprimento (Length-Normalized IDF):**
+##### IDF Normalizado por Comprimento (Length-Normalized IDF)
 
 Em alguns casos, o comprimento do documento pode influenciar a frequência do termo e a frequência documental. Documentos mais longos têm maior probabilidade de conter qualquer termo dado, potencialmente inflando as frequências documentais para termos comuns. A normalização por comprimento pode ser aplicada também ao IDF, embora seja menos comum do que a normalização por comprimento para TF. Uma abordagem é normalizar a frequência documental pelo comprimento médio do documento:
 
 Esta versão é menos formalmente definida e mais um conceito. Geralmente envolveria o ajuste da contagem da frequência documental com base no comprimento do documento, mas as fórmulas específicas variam.
 
-*   **Prós:** Potencialmente mitiga o efeito do viés do comprimento do documento nos valores IDF.
-*   **Contras:** Adiciona complexidade, e o benefício pode ser marginal em comparação com a normalização por comprimento aplicada ao TF.
+- **Prós:** Potencialmente mitiga o efeito do viés do comprimento do documento nos valores IDF;
+- **Contras:** Adiciona complexidade, e o benefício pode ser marginal em comparação com a normalização por comprimento aplicada ao TF.
 
 ##### Escolhendo a versão IDF
 
@@ -1088,9 +1172,9 @@ Na qual, temos:
 
 Esta fórmula tem propriedades matemáticas interessantes:
 
-1. Se uma palavra ocorre muito em um documento ($\text{TF}$ alto) mas é comum no corpus ($\text{IDF}$ baixo), sua pontuação **TF-IDF** será moderada
-2. Se uma palavra ocorre muito em um documento ($\text{TF}$ alto) e é rara no corpus ($\text{IDF}$ alto), sua pontuação **TF-IDF** será alta
-3. Se uma palavra ocorre pouco em um documento ($\text{TF}$ baixo), sua pontuação **TF-IDF** será baixa independentemente do $\text{IDF}$
+1. Se uma palavra ocorre muito em um documento ($\text{TF}$ alto) mas é comum no *corpus* ($\text{IDF}$ baixo), sua pontuação **TF-IDF** será moderada;
+2. Se uma palavra ocorre muito em um documento ($\text{TF}$ alto) e é rara no *corpus* ($\text{IDF}$ alto), sua pontuação **TF-IDF** será alta;
+3. Se uma palavra ocorre pouco em um documento ($\text{TF}$ baixo), sua pontuação **TF-IDF** será baixa independentemente do $\text{IDF}$.
 
 Contudo, precisamos voltar a matemática. Antes que a perspicaz leitora possa ver um exemplo detalhado do uso do **TF-IDF** precisamos ver **Similaridade de Cosseno**.
 
@@ -1100,7 +1184,9 @@ A **Similaridade de Cosseno** é uma medida que permite quantificar o quão simi
 
 Para dois vetores $\vec{a}$ e $\vec{b}$, a **Similaridade de Cosseno** será definida como:
 
-$$ \text{sim}(\vec{a},\vec{b}) = \cos(\theta) = \frac{\vec{a} \cdot \vec{b} }{|\vec{a}| |\vec{b}|} = \frac{\sum_{i=1}^n a_i b_i}{\sqrt{\sum_{i=1}^n a_i^2} \sqrt{\sum_{i=1}^n b_i^2} }$$
+$$
+\text{sim}(\vec{a},\vec{b}) = \cos(\theta) = \frac{\vec{a} \cdot \vec{b} }{|\vec{a}| |\vec{b}|} = \frac{\sum_{i=1}^n a_i b_i}{\sqrt{\sum_{i=1}^n a_i^2} \sqrt{\sum_{i=1}^n b_i^2} }
+$$
 
 Nesta fórmula temos:
 
@@ -1120,19 +1206,21 @@ No contexto de análise de documentos em processamento de linguagem natural, com
 
 **Exemplo 1**: comparação Simples. Considere um **corpus** formado por três documentos curtos:
 
-$D_1$: "O gato caça rato"
-$D_2$:"O gato dorme muito"
-$D_3$: "O rato come queijo"
+- $D_1$: "O gato caça rato";
+- $D_2$:"O gato dorme muito";
+- $D_3$: "O rato come queijo".
 
-Após aplicar TF-IDF e considerando apenas os termos ["gato", "rato", "caça", "dorme", "come", "queijo"], obtemos os vetores:
+Após aplicar **TF-IDF** e considerando apenas os termos $[\text{"gato", "rato", "caça", "dorme", "come", "queijo"}]$, obtemos os vetores:
 
-$\vec{D_1} = [0.4, 0.4, 0.5, 0, 0, 0]$
-$\vec{D_2} = [0.4, 0, 0, 0.5, 0, 0]$
-$\vec{D_3} = [0, 0.4, 0, 0, 0.5, 0.4]$
+- $\vec{D_1} = [0.4, 0.4, 0.5, 0, 0, 0]$;
+- $\vec{D_2} = [0.4, 0, 0, 0.5, 0, 0]$;
+- $\vec{D_3} = [0, 0.4, 0, 0, 0.5, 0.4]$.
 
 Calculando a similaridade entre $\vec{D_1}$ e $\vec{D_2}$:
 
-$$\text{sim}(\vec{D_1},\vec{D_2}) = \frac{(0.4 \times 0.4) + 0 + 0 + 0 + 0 + 0}{\sqrt{0.4^2 + 0.4^2 + 0.5^2} \sqrt{0.4^2 + 0^2 + 0^2 + 0.5^2} } \approx 0.45$$
+$$
+\text{sim}(\vec{D_1},\vec{D_2}) = \frac{(0.4 \times 0.4) + 0 + 0 + 0 + 0 + 0}{\sqrt{0.4^2 + 0.4^2 + 0.5^2} \sqrt{0.4^2 + 0^2 + 0^2 + 0.5^2} } \approx 0.45
+$$
 
 Enquanto entre $\vec{D_1}$ e $\vec{D_3}$:
 
@@ -1160,12 +1248,14 @@ A **Similaridade de Cosseno** é particularmente útil em recuperação de infor
 
 Vamos analisar um exemplo completo usando um **corpus** com apenas dois documentos:
 
-$D_1$: "O gato preto subiu no telhado. O gato dorme no telhado."
-$D_2$: "O telhado é preto."
+- $D_1$: "O gato preto subiu no telhado. O gato dorme no telhado";
+- $D_2$: "O telhado é preto".
 
 Primeiro, definimos o vocabulário global ordenado:
 
-$$V'_{global} = \{ \text{"dorme"}, \text{"é"}, \text{"gato"}, \text{"no"}, \text{"o"}, \text{"preto"}, \text{"subiu"}, \text{"telhado"} \}$$
+$$
+V'_{global} = \{ \text{"dorme"}, \text{"é"}, \text{"gato"}, \text{"no"}, \text{"o"}, \text{"preto"}, \text{"subiu"}, \text{"telhado"} \}
+$$
 
 Agora, vamos calcular o **TF-IDF** para algumas palavras chave:
 
@@ -1223,13 +1313,15 @@ Para este pobre autor, a perda de conteúdo semântico é a mais preocupante e o
 
 Para ilustrar o uso do **TF-IDF** em recuperação de informação, vamos construir um exemplo passo a passo. Imagine que estamos construindo um sistema de busca simplificado para uma pequena coleção de documentos.
 
-*   **Documento 1:** "O gato caçador pula no telhado."
-*   **Documento 2:** "Cachorro late para o gato no quintal."
-*   **Documento 3:** "Pássaro voa alto no céu azul."
+- **Documento 1:** "O gato caçador pula no telhado";
+- **Documento 2:** "Cachorro late para o gato no quintal";
+- **Documento 3:** "Pássaro voa alto no céu azul".
 
 Começamos criando um vocabulário simplificado, considerando todas as palavras em minúsculas e removendo pontuações. Nosso vocabulário será dado por:
 
-$$ V \{ \text{"gato"},\text{"caçador"},\text{"pula"},\text{"telhado"},\text{"cachorro"},\text{"late"},\text{"quintal"},\text{"pássaro"},\text{"voa"},\text{"alto"},\text{"céu"},\text{"azul"}  \}= $$
+$$
+V = \{ \text{"gato", "caçador", "pula", "telhado", "cachorro", "late", "quintal", "pássaro", "voa", "alto", "céu", "azul"}\}
+$$
 
 **3. Cálculo da Frequência do Termo (TF):**
 
@@ -1319,38 +1411,43 @@ Primeiro, precisamos criar um vetor da consulta usando o mesmo algoritmo que usa
 
 1. **Documento 1 vs. Consulta:**
 
-    Vetor Doc 1:  $[0.18, 0.48, 0.48, 0.48, 0, 0, 0, 0, 0, 0, 0, 0]$
-    Vetor Consulta: $[0.18, 0, 0, 0.48, 0, 0, 0, 0, 0, 0, 0, 0]$
+   Vetor Doc 1:  $[0.18, 0.48, 0.48, 0.48, 0, 0, 0, 0, 0, 0, 0, 0]$
 
-    Similaridade (Doc 1, Consulta) $\approx \frac{(0.18 \times 0.18) + (0.48 \times 0.48)}{\sqrt{(0.18^2 + 0.48^2 + 0.48^2 + 0.48^2)} \times \sqrt{(0.18^2 + 0.48^2)}} \approx 0.92$
+   Vetor Consulta: $[0.18, 0, 0, 0.48, 0, 0, 0, 0, 0, 0, 0, 0]$
 
-2.  **Documento 2 vs. Consulta:**
+   Similaridade (Doc 1, Consulta) $\approx \frac{(0.18 \times 0.18) + (0.48 \times 0.48)}{\sqrt{(0.18^2 + 0.48^2 + 0.48^2 + 0.48^2)} \times \sqrt{(0.18^2 + 0.48^2)}} \approx 0.92$
 
-    Vetor Doc 2:  $[0.18, 0, 0, 0, 0.48, 0.48, 0.48, 0, 0, 0, 0, 0]$
-    Vetor Consulta: $[0.18, 0, 0, 0.48, 0, 0, 0, 0, 0, 0, 0, 0]$
+2. **Documento 2 vs. Consulta:**
 
-    Similaridade (Doc 2, Consulta) $\approx \frac{(0.18 \times 0.18)}{\sqrt{(0.18^2 + 0.48^2 + 0.48^2 + 0.48^2)} \times \sqrt{(0.18^2 + 0.48^2)}} \approx 0.16$
+   Vetor Doc 2:  $[0.18, 0, 0, 0, 0.48, 0.48, 0.48, 0, 0, 0, 0, 0]$
 
-3.  **Documento 3 vs. Consulta:**
+   Vetor Consulta: $[0.18, 0, 0, 0.48, 0, 0, 0, 0, 0, 0, 0, 0]$
 
-    Vetor Doc 3:  $[0, 0, 0, 0, 0, 0, 0, 0.48, 0.48, 0.48, 0.48, 0.48]$
-    Vetor Consulta: $[0.18, 0, 0, 0.48, 0, 0, 0, 0, 0, 0, 0, 0]$
+   Similaridade (Doc 2, Consulta) $\approx \frac{(0.18 \times 0.18)}{\sqrt{(0.18^2 + 0.48^2 + 0.48^2 + 0.48^2)} \times \sqrt{(0.18^2 + 0.48^2)}} \approx 0.16$
 
-    Similaridade (Doc 3, Consulta) $\approx 0$ (produto escalar é zero)
+3. **Documento 3 vs. Consulta:**
+
+   Vetor Doc 3:  $[0, 0, 0, 0, 0, 0, 0, 0.48, 0.48, 0.48, 0.48, 0.48]$
+
+   Vetor Consulta: $[0.18, 0, 0, 0.48, 0, 0, 0, 0, 0, 0, 0, 0]$
+
+   Similaridade (Doc 3, Consulta) $\approx 0$ (produto escalar é zero)
 
 **7. Ranqueamento**: com base na similaridade do cosseno, os documentos devem ranqueados em ordem decrescente de similaridade. O que resulta em:
 
-1.  **Documento 1:** Similaridade $\approx 0.92$
-2.  **Documento 2:** Similaridade $\approx 0.16$
-3.  **Documento 3:** Similaridade $\approx 0$
+1. **Documento 1:** Similaridade $\approx 0.92$;
+2. **Documento 2:** Similaridade $\approx 0.16$;
+3. **Documento 3:** Similaridade $\approx 0$.
 
 Finalmente, o **Documento 1** deve ser considerado o mais relevante para a consulta "gato no telhado", o que faz sentido intuitivamente, pois ele contém ambos os termos da consulta e tem uma concentração maior desses termos em relação aos outros documentos. O **TF-IDF**, neste exemplo simplificado, consegue capturar a relevância do **Documento 1** para a consulta, demonstrando seu princípio de funcionamento na recuperação de informação.
+
+pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp
 
 ### One-Hot Encoding
 
 Finalmente, chegamos ao **One-Hot Encoding**. Embora menos comum para representar diretamente *textos inteiros* em tarefas de processamento de linguagem natural (PNL) de nível superior, o one-hot encoding é fundamental como um passo inicial para representar *palavras individuais* ou *caracteres* numericamente.
 
-Em one-hot encoding, cada palavra (ou caractere) no vocabulário $V$ é representada por um vetor binário $\vec{e}_w$. O tamanho do vetor é igual ao tamanho do vocabulário, $\vert V\vert $. Para cada palavra $w_i \in V$, o vetor $\vec{e}_{w_i}$ terá todos os valores como 0, exceto na posição $i$ correspondente à palavra $w_i$ no vocabulário, onde o valor será 1.
+Em one-hot encoding, cada palavra (ou caractere) no vocabulário $V$ é representada por um vetor binário $\vec{e}_w$. O tamanho do vetor é igual ao tamanho do vocabulário, $\vert V\vert$. Para cada palavra $w_i \in V$, o vetor $\vec{e}_{w_i}$ terá todos os valores como 0, exceto na posição $i$ correspondente à palavra $w_i$ no vocabulário, onde o valor será 1.
 
 Formalmente, se $V = \{w_1, w_2, ..., w_{\vert V\vert }\}$ é o vocabulário ordenado, então o one-hot encoding para a palavra $w_i$ é um vetor $\vec{e}_{w_i} \in \mathbb{R}^{\vert V\vert }$ tal que:
 
@@ -1919,13 +2016,13 @@ Link para o artigo: https://arxiv.org/abs/2005.14165
 
 Link para o artigo: https://openai.com/research/improving-language-understanding-by-generative-pre-training
 Modelos de Linguagem Bidirecionais
-Enquanto os modelos autorregressivos focam no contexto "para frente", os modelos de linguagem bidirecionais expandem a compreensão contextual ao considerar o contexto tanto "para frente" quanto "para trás" em uma sequência. O BERT (Bidirectional Encoder Representations from Transformers) é o exemplo mais proeminente desta categoria.
+Enquanto os modelos autorregressivos focam no contexto "para frente", os modelos de linguagem bidirecionais expandem a compreensão contextual ao considerar o contexto tanto "para frente" quanto "para trás" em uma sequência. O BERT (Bidirectional Encoder Representations from *Transformers*) é o exemplo mais proeminente desta categoria.
 
 BERT é treinado para entender a linguagem em ambas as direções, o que o torna particularmente eficaz para tarefas de compreensão de linguagem natural (NLU), como classificação de texto, resposta a perguntas e reconhecimento de entidades nomeadas. Ao analisar uma palavra, BERT considera todas as palavras na frase, permitindo uma compreensão mais profunda e contextualizada.
 
 Artigos Importantes e Referências:
 
-"BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding": O artigo que introduz o BERT, detalhando sua arquitetura, métodos de treinamento e resultados em diversas tarefas de NLU.
+"BERT: Pre-training of Deep Bidirectional *Transformers* for Language Understanding": O artigo que introduz o BERT, detalhando sua arquitetura, métodos de treinamento e resultados em diversas tarefas de NLU.
 Link para o artigo: https://arxiv.org/abs/1810.04805
 Modelos de Linguagem com Atenção Difusa (Soft Attention)
 A atenção difusa, ou soft attention, é um mecanismo crucial em muitos modelos de linguagem modernos, especialmente em arquiteturas de transformadores. Em vez de simplesmente selecionar uma parte específica da entrada para focar (atenção hard), a atenção difusa permite que o modelo pondere a importância de diferentes partes da entrada de forma contínua.
