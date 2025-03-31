@@ -28,23 +28,7 @@
      inkscape:window-maximized="1"
      inkscape:current-layer="svg29" />
   <!-- Fundo branco -->
-  <rect
-     width="677.60022"
-     height="500"
-     fill="#ffffff"
-     id="rect1"
-     x="93.160004"
-     y="-2.9239764"
-     style="stroke-width:0.920327" />
   <!-- Título -->
-  <text
-     x="453.75665"
-     y="67.216148"
-     font-family="Arial"
-     font-size="24px"
-     text-anchor="middle"
-     font-weight="bold"
-     id="text1">Visualização Geométrica do Produto Escalar</text>
   <!-- Grid lines (light) -->
   <g
      stroke="#e0e0e0"
@@ -88,303 +72,325 @@
        id="line6" />
   </g>
   <!-- Caso 1: Ângulo agudo (produto escalar > 0) -->
-  <circle
-     cx="245.4864"
-     cy="156.76758"
-     r="4"
-     fill="#333333"
-     id="circle6" />
-  <text
-     x="230.4864"
-     y="150.76758"
-     font-family="Arial"
-     font-size="16px"
-     id="text6">O</text>
-  <line
-     x1="245.4864"
-     y1="156.76758"
-     x2="365.48639"
-     y2="96.767593"
-     stroke="#ff6347"
-     stroke-width="3"
-     marker-end="url(#arrowhead)"
-     id="line7" />
-  <text
-     x="317.21613"
-     y="112.59461"
-     font-family="Arial"
-     font-size="18px"
-     fill="#ff6347"
-     id="text7">A</text>
-  <line
-     x1="245.4864"
-     y1="156.76758"
-     x2="345.48639"
-     y2="186.76758"
-     stroke="#4682b4"
-     stroke-width="3"
-     marker-end="url(#arrowhead)"
-     id="line8" />
-  <text
-     x="298.79449"
-     y="193.49733"
-     font-family="Arial"
-     font-size="18px"
-     fill="#4682b4"
-     id="text8">B</text>
-  <path
-     d="m 264.96802,161.70616 a 31.185938,23.06017 0 0 0 4.45514,-16.47155"
-     stroke="#000000"
-     fill="none"
-     stroke-width="1.1493"
-     id="path8" />
-  <text
-     x="275.42792"
-     y="157.93718"
-     font-family="Arial"
-     font-size="16px"
-     id="text9">θ</text>
-  <rect
-     x="180.24223"
-     y="214.04428"
-     width="220"
-     height="60"
-     rx="10"
-     fill="#f8f8f8"
-     stroke="#666666"
-     stroke-width="1"
-     id="rect9"
-     style="fill:#aaccff" />
-  <text
-     x="290.82703"
-     y="238.45949"
-     font-family="Arial"
-     font-size="16px"
-     text-anchor="middle"
-     id="text10">A·B = |A|·|B|·cos(θ) &gt; 0</text>
-  <text
-     x="290.82703"
-     y="263.4595"
-     font-family="Arial"
-     font-size="14px"
-     text-anchor="middle"
-     id="text11">(Ângulo agudo)</text>
   <!-- Caso 2: Ângulo reto (produto escalar = 0) -->
-  <circle
-     cx="600"
-     cy="170"
-     r="4"
-     fill="#333333"
-     id="circle11" />
-  <text
-     x="583"
-     y="184"
-     font-family="Arial"
-     font-size="16px"
-     id="text12">O</text>
-  <line
-     x1="599.58649"
-     y1="170"
-     x2="599.58649"
-     y2="90"
-     stroke="#ff6347"
-     stroke-width="3"
-     marker-end="url(#arrowhead)"
-     id="line12" />
-  <text
-     x="579.17297"
-     y="135.75133"
-     font-family="Arial"
-     font-size="18px"
-     fill="#ff6347"
-     id="text13">A</text>
-  <line
-     x1="600"
-     y1="170"
-     x2="680"
-     y2="170"
-     stroke="#4682b4"
-     stroke-width="3"
-     marker-end="url(#arrowhead)"
-     id="line13" />
-  <text
-     x="637.51892"
-     y="190"
-     font-family="Arial"
-     font-size="18px"
-     fill="#4682b4"
-     id="text14">B</text>
-  <path
-     d="m 600,150 v 20 h 20"
-     stroke="#000000"
-     fill="none"
-     stroke-width="1.5"
-     id="path14" />
-  <text
-     x="608"
-     y="161"
-     font-family="Arial"
-     font-size="16px"
-     id="text15">90°</text>
-  <rect
-     x="530"
-     y="214"
-     width="220"
-     height="60"
-     rx="10"
-     fill="#f8f8f8"
-     stroke="#666666"
-     stroke-width="1"
-     id="rect15"
-     style="fill:#afe9c6" />
-  <text
-     x="640"
-     y="239"
-     font-family="Arial"
-     font-size="16px"
-     text-anchor="middle"
-     id="text16">A·B = |A|·|B|·cos(90°) = 0</text>
-  <text
-     x="640"
-     y="264"
-     font-family="Arial"
-     font-size="14px"
-     text-anchor="middle"
-     id="text17">(Vetores ortogonais)</text>
   <!-- Caso 3: Ângulo obtuso (produto escalar < 0) -->
-  <circle
-     cx="286.01065"
-     cy="365.86487"
-     r="4"
-     fill="#333333"
-     id="circle17" />
-  <text
-     x="268.22858"
-     y="379.15634"
-     font-family="Arial"
-     font-size="16px"
-     id="text18">O</text>
-  <line
-     x1="286.01065"
-     y1="365.86487"
-     x2="386.01065"
-     y2="335.86487"
-     stroke="#ff6347"
-     stroke-width="3"
-     marker-end="url(#arrowhead)"
-     id="line18" />
-  <text
-     x="340.14578"
-     y="322.59464"
-     font-family="Arial"
-     font-size="18px"
-     fill="#ff6347"
-     id="text19">A</text>
-  <line
-     x1="286.01065"
-     y1="365.86487"
-     x2="206.01065"
-     y2="325.86487"
-     stroke="#4682b4"
-     stroke-width="3"
-     marker-end="url(#arrowhead)"
-     id="line19" />
-  <text
-     x="243.45389"
-     y="320.03784"
-     font-family="Arial"
-     font-size="18px"
-     fill="#4682b4"
-     id="text20">B</text>
-  <path
-     d="m 308.68214,358.78334 a 22.941988,12.451121 0 0 0 -42.06031,-6.22556"
-     stroke="#000000"
-     fill="none"
-     stroke-width="0.845062"
-     id="path20" />
-  <text
-     x="296.53696"
-     y="346.71283"
-     font-family="Arial"
-     font-size="16px"
-     id="text21">θ</text>
-  <rect
-     x="180.82703"
-     y="393.17297"
-     width="220"
-     height="60"
-     rx="10"
-     fill="#f8f8f8"
-     stroke="#666666"
-     stroke-width="1"
-     id="rect21"
-     style="fill:#f6d5ff" />
-  <text
-     x="290"
-     y="419"
-     font-family="Arial"
-     font-size="16px"
-     text-anchor="middle"
-     id="text22">A·B = |A|·|B|·cos(θ) 0</text>
-  <text
-     x="290"
-     y="444"
-     font-family="Arial"
-     font-size="14px"
-     text-anchor="middle"
-     id="text23">(Ângulo obtuso)</text>
   <!-- Interpretação Geométrica -->
   <g
-     transform="translate(600,332)"
-     id="g29">
+     id="g30"
+     inkscape:export-filename="g30.png"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96">
     <rect
-       x="-70"
-       y="-40"
+       width="606.47601"
+       height="439.62714"
+       fill="#ffffff"
+       id="rect1"
+       x="164.28419"
+       y="37.600273"
+       style="stroke-width:0.816432" />
+    <text
+       x="463.68097"
+       y="67.216148"
+       font-family="Arial"
+       font-size="24px"
+       text-anchor="middle"
+       font-weight="bold"
+       id="text1">Visualização Geométrica do Produto Escalar</text>
+    <circle
+       cx="265.48639"
+       cy="156.76758"
+       r="4"
+       fill="#333333"
+       id="circle6" />
+    <text
+       x="250.4864"
+       y="150.76758"
+       font-family="Arial"
+       font-size="16px"
+       id="text6">O</text>
+    <line
+       x1="265.48639"
+       y1="156.76758"
+       x2="385.48639"
+       y2="96.767593"
+       stroke="#ff6347"
+       stroke-width="3"
+       marker-end="url(#arrowhead)"
+       id="line7" />
+    <text
+       x="337.21613"
+       y="112.59461"
+       font-family="Arial"
+       font-size="18px"
+       fill="#ff6347"
+       id="text7">A</text>
+    <line
+       x1="265.48639"
+       y1="156.76758"
+       x2="365.48639"
+       y2="186.76758"
+       stroke="#4682b4"
+       stroke-width="3"
+       marker-end="url(#arrowhead)"
+       id="line8" />
+    <text
+       x="318.79449"
+       y="193.49733"
+       font-family="Arial"
+       font-size="18px"
+       fill="#4682b4"
+       id="text8">B</text>
+    <path
+       d="m 284.96802,161.70616 a 31.185938,23.06017 0 0 0 4.45514,-16.47155"
+       stroke="#000000"
+       fill="none"
+       stroke-width="1.1493"
+       id="path8" />
+    <text
+       x="295.42792"
+       y="157.93718"
+       font-family="Arial"
+       font-size="16px"
+       id="text9">θ</text>
+    <rect
+       x="200.24223"
+       y="214.04428"
        width="220"
-       height="160"
+       height="60"
        rx="10"
        fill="#f8f8f8"
        stroke="#666666"
        stroke-width="1"
-       id="rect23" />
+       id="rect9"
+       style="fill:#aaccff" />
     <text
-       x="40"
-       y="-15"
+       x="310.82703"
+       y="238.45949"
        font-family="Arial"
-       font-weight="bold"
        font-size="16px"
        text-anchor="middle"
-       id="text24">Interpretação Geométrica</text>
+       id="text10">A·B = |A|·|B|·cos(θ) &gt; 0</text>
+    <text
+       x="310.82703"
+       y="263.4595"
+       font-family="Arial"
+       font-size="14px"
+       text-anchor="middle"
+       id="text11">(Ângulo agudo)</text>
+    <circle
+       cx="600"
+       cy="170"
+       r="4"
+       fill="#333333"
+       id="circle11" />
+    <text
+       x="583"
+       y="184"
+       font-family="Arial"
+       font-size="16px"
+       id="text12">O</text>
     <line
-       x1="-50"
-       y1="-5"
-       x2="130"
-       y2="-5"
+       x1="599.58649"
+       y1="170"
+       x2="599.58649"
+       y2="90"
+       stroke="#ff6347"
+       stroke-width="3"
+       marker-end="url(#arrowhead)"
+       id="line12" />
+    <text
+       x="579.17297"
+       y="135.75133"
+       font-family="Arial"
+       font-size="18px"
+       fill="#ff6347"
+       id="text13">A</text>
+    <line
+       x1="600"
+       y1="170"
+       x2="680"
+       y2="170"
+       stroke="#4682b4"
+       stroke-width="3"
+       marker-end="url(#arrowhead)"
+       id="line13" />
+    <text
+       x="637.51892"
+       y="190"
+       font-family="Arial"
+       font-size="18px"
+       fill="#4682b4"
+       id="text14">B</text>
+    <path
+       d="m 600,150 v 20 h 20"
+       stroke="#000000"
+       fill="none"
+       stroke-width="1.5"
+       id="path14" />
+    <text
+       x="608"
+       y="161"
+       font-family="Arial"
+       font-size="16px"
+       id="text15">90°</text>
+    <rect
+       x="530"
+       y="214"
+       width="220"
+       height="60"
+       rx="10"
+       fill="#f8f8f8"
        stroke="#666666"
        stroke-width="1"
-       id="line24" />
+       id="rect15"
+       style="fill:#afe9c6" />
     <text
-       x="-50"
-       y="20"
+       x="640"
+       y="239"
+       font-family="Arial"
+       font-size="16px"
+       text-anchor="middle"
+       id="text16">A·B = |A|·|B|·cos(90°) = 0</text>
+    <text
+       x="640"
+       y="264"
        font-family="Arial"
        font-size="14px"
-       id="text25">A·B = |A|·|B|·cos(θ)</text>
+       text-anchor="middle"
+       id="text17">(Vetores ortogonais)</text>
+    <circle
+       cx="306.01065"
+       cy="365.86487"
+       r="4"
+       fill="#333333"
+       id="circle17" />
+    <text
+       x="288.22858"
+       y="379.15634"
+       font-family="Arial"
+       font-size="16px"
+       id="text18">O</text>
+    <line
+       x1="306.01065"
+       y1="365.86487"
+       x2="406.01065"
+       y2="335.86487"
+       stroke="#ff6347"
+       stroke-width="3"
+       marker-end="url(#arrowhead)"
+       id="line18" />
+    <text
+       x="360.14578"
+       y="322.59464"
+       font-family="Arial"
+       font-size="18px"
+       fill="#ff6347"
+       id="text19">A</text>
+    <line
+       x1="306.01065"
+       y1="365.86487"
+       x2="226.01065"
+       y2="325.86487"
+       stroke="#4682b4"
+       stroke-width="3"
+       marker-end="url(#arrowhead)"
+       id="line19" />
+    <text
+       x="263.45389"
+       y="320.03784"
+       font-family="Arial"
+       font-size="18px"
+       fill="#4682b4"
+       id="text20">B</text>
+    <path
+       d="m 328.68214,358.78334 a 22.941988,12.451121 0 0 0 -42.06031,-6.22556"
+       stroke="#000000"
+       fill="none"
+       stroke-width="0.845062"
+       id="path20" />
+    <text
+       x="316.53696"
+       y="346.71283"
+       font-family="Arial"
+       font-size="16px"
+       id="text21">θ</text>
+    <rect
+       x="200.82703"
+       y="393.17297"
+       width="220"
+       height="60"
+       rx="10"
+       fill="#f8f8f8"
+       stroke="#666666"
+       stroke-width="1"
+       id="rect21"
+       style="fill:#f6d5ff" />
+    <text
+       x="310"
+       y="419"
+       font-family="Arial"
+       font-size="16px"
+       text-anchor="middle"
+       id="text22">A·B = |A|·|B|·cos(θ) 0</text>
+    <text
+       x="310"
+       y="444"
+       font-family="Arial"
+       font-size="14px"
+       text-anchor="middle"
+       id="text23">(Ângulo obtuso)</text>
     <g
-       font-family="Arial"
-       font-size="14px"
-       id="g28">
+       transform="translate(600,336)"
+       id="g29">
+      <rect
+         x="-70"
+         y="-40"
+         width="220"
+         height="160"
+         rx="10"
+         fill="#f8f8f8"
+         stroke="#666666"
+         stroke-width="1"
+         id="rect23" />
+      <text
+         x="40"
+         y="-15"
+         font-family="Arial"
+         font-weight="bold"
+         font-size="16px"
+         text-anchor="middle"
+         id="text24">Interpretação Geométrica</text>
+      <line
+         x1="-50"
+         y1="-5"
+         x2="130"
+         y2="-5"
+         stroke="#666666"
+         stroke-width="1"
+         id="line24" />
       <text
          x="-50"
-         y="50"
-         id="text26">• É positivo quando θ 90°</text>
-      <text
-         x="-50"
-         y="75"
-         id="text27">• É zero quando θ = 90°</text>
-      <text
-         x="-50"
-         y="100"
-         id="text28">• É negativo quando θ &gt; 90°</text>
+         y="20"
+         font-family="Arial"
+         font-size="14px"
+         id="text25">A·B = |A|·|B|·cos(θ)</text>
+      <g
+         font-family="Arial"
+         font-size="14px"
+         id="g28">
+        <text
+           x="-50"
+           y="50"
+           id="text26">• É positivo quando θ 90°</text>
+        <text
+           x="-50"
+           y="75"
+           id="text27">• É zero quando θ = 90°</text>
+        <text
+           x="-50"
+           y="100"
+           id="text28">• É negativo quando θ &gt; 90°</text>
+      </g>
     </g>
   </g>
   <!-- Definição de marcador de seta -->
