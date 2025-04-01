@@ -12,7 +12,7 @@ tags:
     - inteligência artificial
 image: assets/images/trans1.webp
 featured: false
-rating: 0
+rating: 5
 description: Uma introdução a matemática que suporta a criação de transformers para processamento de linguagem natural com exemplos de código em C++20.
 date: 2025-02-09T22:55:34.524Z
 preview: Uma introdução a matemática que suporta a criação de transformers para processamento de linguagem natural com exemplos de código em C++20.
@@ -32,7 +32,7 @@ keywords:
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-04-01T12:17:50.037Z
+lastmod: 2025-04-01T12:25:43.734Z
 ---
 
 Neste artigo, a curiosa leitora irá enfrentar os *Transformers*. Nenhuma relação com o o Optimus Prime. Se for estes *Transformers* que está procurando, **o Google falhou com você!**
@@ -729,6 +729,7 @@ Algumas já foram usadas processamento de linguagem natural. Outras ainda não. 
 #### Exemplo em C++
 
 ```cpp
+
 #include <iostream>
 #include <vector>
 #include <numeric>
