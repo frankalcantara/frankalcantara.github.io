@@ -1,15 +1,15 @@
 ---
 layout: post
-title: Transformers, Afins e Processamento de Linguagem Natural
+title: Transformers - A Temida Matemática
 author: frank
 categories:
-   - disciplina
-   - Matemática
-   - artigo
+    - disciplina
+    - Matemática
+    - artigo
 tags:
-   - C++
-   - Matemática
-   - inteligência artificial
+    - C++
+    - Matemática
+    - inteligência artificial
 image: assets/images/trans1.webp
 featured: false
 rating: 0
@@ -20,12 +20,12 @@ keywords: ""
 toc: true
 published: false
 beforetoc: ""
-lastmod: 2025-03-30T23:33:24.861Z
+lastmod: 2025-04-01T09:39:25.554Z
 ---
 
-Neste artigo, a curiosa leitora irá enfrentar os *Transformers*. Nenhuma relação com o o Optimus Prime. Se for estes *Transformers* que está procurando, **_o Google falhou com você!_**
+Neste artigo, a curiosa leitora irá enfrentar os *Transformers*. Nenhuma relação com o o Optimus Prime. Se for estes *Transformers* que está procurando, **o Google falhou com você!**
 
-Neste texto vamos discutir os **_*Transformers*_** modelos de aprendizado de máquina que revolucionaram o processamento de linguagem natural (**NLP**). Estas técnicas foram apresentados ao mundo em um artigo intitulado *Attention is All You Need* (Atenção é Tudo que Você Precisa), publicado em 2017[^1] na conferência *Advances in Neural Information Processing Systems (NeurIPS)*. Observe, atenta leitora que isso se deu há quase 10 anos. No ritmo atual, uma eternidade.
+Neste texto vamos discutir os **Transformers** modelos de aprendizado de máquina que revolucionaram o processamento de linguagem natural (**NLP**). Estas técnicas foram apresentados ao mundo em um artigo intitulado *Attention is All You Need* (Atenção é Tudo que Você Precisa), publicado em 2017[^1] na conferência *Advances in Neural Information Processing Systems (NeurIPS)*. Observe, atenta leitora que isso se deu há quase 10 anos. No ritmo atual, uma eternidade.
 
 O entendimento da linguagem natural por máquinas é, ou era, um desafio importante que beirava o impossível. Este problema parece estar resolvido. Se isso for verdade, terá sido graças as técnicas e algoritmos, criados em torno de aprendizado de máquinas e estatísticas. Ou se preferir, podemos dizer que Usamos algoritmos determinísticos para aplicar técnicas estocásticas em bases de dados gigantescas e assim, romper os limites que haviam sido impostos pela linguística matemática e computacional determinísticas.
 
@@ -43,7 +43,7 @@ Para que os computadores processem e compreendam a linguagem humana, é essencia
 
 ### Vetores, os compassos de tudo que há e haverá
 
-Eu usei exatamente este título em [um texto sobre eletromagnetismo](https://frankalcantara.com/formula-da-atracao-matematica-eletromagnetismo/#vetores-os-compassos-de-tudo-que-h%C3%A1-e-haver%C3%A1). A ideia, então era explicar eletromagnetismo a partir da matemática. Lá há uma definição detalhada de vetores e todas as suas operações. Aqui, podemos ser um tanto mais diretos.
+Eu usei exatamente esta frase em [um texto sobre eletromagnetismo](https://frankalcantara.com/formula-da-atracao-matematica-eletromagnetismo/#vetores-os-compassos-de-tudo-que-h%C3%A1-e-haver%C3%A1). A ideia, então era explicar eletromagnetismo a partir da matemática. Lá há uma definição detalhada de vetores e todas as suas operações. Aqui, podemos ser um tanto mais diretos. Vetores são os artefatos matemáticos que usamos para explicar o universo.
 
 Um vetor é uma entidade matemática que possui tanto magnitude, ou comprimento, quanto direção. Um vetor pode ser definido como um segmento de reta direcionado na geometria, ou uma sequência ordenada de números, chamados de componentes, na álgebra. A representação depende do contexto. Aqui, vamos nos concentrar na representação algébrica, que é mais comum em programação e computação.
 
@@ -206,9 +206,9 @@ Com um pouco mais de formalidade: se temos dois vetores $\vec{u}$ e $\vec{v}$, e
 - O grau de alinhamento ou sobreposição entre os vetores;
 - A similaridade entre os padrões representados pelos vetores, no sentido de que componentes importantes em um vetor também são relevantes no outro, com pesos proporcionais aos valores das componentes.
 
-A criativa leitora deve notar que o produto escalar é influenciado tanto pela direção quanto pela magnitude dos vetores. 
+A criativa leitora deve notar que o produto escalar é influenciado tanto pela direção quanto pela magnitude dos vetores.
 
->A magnitude de um vetor é dada pela raiz quadrada da soma dos quadrados dos seus componentes*. Isso é equivalente a tirar a raiz quadrada do resultado do produto escalar do vetor com ele mesmo. Para um vetor
+>*A magnitude de um vetor é dada pela raiz quadrada da soma dos quadrados dos seus componentes*. Isso é equivalente a tirar a raiz quadrada do resultado do produto escalar do vetor com ele mesmo. Para um vetor
 >
 >$$\vec{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$
 >
@@ -225,7 +225,7 @@ Podemos resolver este problema em dois passos:
 1. **Calcular o produto escalar de $\vec{b}$ consigo mesmo:**
 
    $$
-   \vec{b} \cdot \vec{b} = (0.2 * 0.2) + (0.7 * 0.7) + (0.1 * 0.1) = 0.04 + 0.49 + 0.01 = 0.54
+   \vec{b} \cdot \vec{b} = (0.2 \times 0.2) + (0.7 \times 0.7) + (0.1 \times 0.1) = 0.04 + 0.49 + 0.01 = 0.54
    $$
 
 2. **Extrair a raiz quadrada do resultado:**
@@ -244,7 +244,7 @@ Quando estudamos processamento de linguagem natural, a magnitude por si não cos
 
 >A similaridade entre vetores é uma medida de quão semelhantes são dois vetores em termos de direção e magnitude. Essa medida é fundamental em muitas aplicações, como recuperação de informação, recomendação de produtos e análise de sentimentos.
 
-Em alguns casos, a busca da similaridade implica na normalização dos vetores para que a medida de similaridade seja mais afetada pela direção e menos afetada pela magnitude. 
+Em alguns casos, a busca da similaridade implica na normalização dos vetores para que a medida de similaridade seja mais afetada pela direção e menos afetada pela magnitude.
 
 >A normalização de um vetor $\vec{v}$ consiste em dividi-lo por sua norma (ou magnitude), resultando em um vetor unitário $\hat{v}$ que mantém a mesma direção, mas possui comprimento 1:
 >
@@ -282,7 +282,7 @@ Técnicas como a **Similaridade de Cosseno**, que envolve o produto escalar norm
 
 Algumas já foram usadas processamento de linguagem natural. Outras ainda não. Vamos trabalhar com cada uma delas se, e quando, forem usadas nos algoritmos que estudaremos. A primeira que usaremos será a **Similaridade de Cosseno**. Mas antes, precisamos entender como representar textos como vetores. Para isso, vamos começar com a representação mais simples e intuitiva: a **Frequência de Termos**.
 
-## Vetorização
+## Técnicas Básicas de Vetorização
 
 Existem diversas técnicas para transformar textos em números, nessa viagem, os primeiros portos que visitaremos estão fortemente construídos sobre as técnicas primitivas de representação matemática de elementos linguísticos. Eu vou fazer o máximo de esforço para seguir um fluxo crescente de dificuldade. A atenta leitora não deve se assustar se achar que eu perdi o rumo. Se eu parecer perdido é porque lembrei de algo que precisa ser visto antes que possamos deixar um porto em direção a outro. As passagens serão compradas sempre que eu achar que ficou claro.
 
@@ -658,6 +658,278 @@ O **BoW** mantém todas as limitações da representação por frequência de te
 
 A sagaz leitora pode pensar que essas limitações tornam o **BoW** inútil. Contudo, apesar dessas limitações, o **BoW** é surpreendentemente eficaz em muitas tarefas de processamento de linguagem natural, especialmente quando combinado com outras técnicas que veremos adiante, como o **TF-IDF**.
 
+**Exemplo 1**: usando o C++
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <string>
+#include <unordered_map>
+#include <set>
+#include <algorithm>
+#include <Eigen/Dense>
+#include <iomanip>
+
+// Classe para implementar o modelo Bag of Words (BoW)
+class BagOfWords {
+private:
+    std::vector<std::string> vocabulary;              // Vocabulário global ordenado
+    std::unordered_map<std::string, int> wordToIndex; // Mapeamento de palavras para índices
+    std::vector<Eigen::VectorXi> documentVectors;     // Vetores BoW dos documentos
+
+public:
+    // Função para construir o vocabulário global a partir de documentos já tokenizados
+    void buildVocabulary(const std::vector<std::vector<std::string>>& documents) {
+        std::set<std::string> uniqueWords;
+        
+        // Adicionar todas as palavras ao conjunto de palavras únicas
+        for (const auto& doc : documents) {
+            for (const auto& word : doc) {
+                uniqueWords.insert(word);
+            }
+        }
+        
+        // Converter o conjunto para um vetor ordenado
+        vocabulary.assign(uniqueWords.begin(), uniqueWords.end());
+        std::sort(vocabulary.begin(), vocabulary.end());
+        
+        // Criar mapeamento de palavras para índices
+        for (size_t i = 0; i < vocabulary.size(); ++i) {
+            wordToIndex[vocabulary[i]] = i;
+        }
+    }
+    
+    // Função para criar os vetores BoW para cada documento
+    void createBowVectors(const std::vector<std::vector<std::string>>& documents) {
+        documentVectors.clear();
+        
+        for (const auto& doc : documents) {
+            // Inicializar um vetor de zeros com o tamanho do vocabulário
+            Eigen::VectorXi bowVector = Eigen::VectorXi::Zero(vocabulary.size());
+            
+            // Contar a frequência de cada palavra no documento
+            for (const auto& word : doc) {
+                if (wordToIndex.find(word) != wordToIndex.end()) {
+                    int index = wordToIndex[word];
+                    bowVector(index)++;
+                }
+            }
+            
+            documentVectors.push_back(bowVector);
+        }
+    }
+    
+    // Função para inicializar o modelo com um conjunto de documentos tokenizados
+    void fit(const std::vector<std::vector<std::string>>& documents) {
+        buildVocabulary(documents);
+        createBowVectors(documents);
+    }
+    
+    // Função para obter o vetor BoW de um novo documento tokenizado
+    Eigen::VectorXi transform(const std::vector<std::string>& document) {
+        Eigen::VectorXi bowVector = Eigen::VectorXi::Zero(vocabulary.size());
+        
+        for (const auto& word : document) {
+            if (wordToIndex.find(word) != wordToIndex.end()) {
+                int index = wordToIndex[word];
+                bowVector(index)++;
+            }
+        }
+        
+        return bowVector;
+    }
+    
+    // Função para calcular a similaridade de cosseno entre dois vetores
+    double cosineSimilarity(const Eigen::VectorXi& v1, const Eigen::VectorXi& v2) {
+        // Converter para double para cálculos de ponto flutuante
+        Eigen::VectorXd v1d = v1.cast<double>();
+        Eigen::VectorXd v2d = v2.cast<double>();
+        
+        double dotProduct = v1d.dot(v2d);
+        double norm1 = v1d.norm();
+        double norm2 = v2d.norm();
+        
+        if (norm1 < 1e-10 || norm2 < 1e-10) return 0.0;
+        return dotProduct / (norm1 * norm2);
+    }
+    
+    // Função para imprimir a matriz de documentos x termos (DTM)
+    void printDocumentTermMatrix() {
+        std::cout << "Matriz de Documentos x Termos (Document-Term Matrix):\n\n";
+        
+        // Imprimir cabeçalho com os termos do vocabulário
+        std::cout << std::setw(10) << "Documento";
+        for (const auto& word : vocabulary) {
+            std::cout << std::setw(10) << word;
+        }
+        std::cout << "\n";
+        
+        // Imprimir linha para cada documento
+        for (size_t i = 0; i < documentVectors.size(); ++i) {
+            std::cout << std::setw(10) << "Doc " + std::to_string(i+1);
+            for (int j = 0; j < documentVectors[i].size(); ++j) {
+                std::cout << std::setw(10) << documentVectors[i](j);
+            }
+            std::cout << "\n";
+        }
+    }
+    
+    // Função para imprimir informações sobre o modelo
+    void printInfo() {
+        std::cout << "Modelo Bag of Words (BoW)\n";
+        std::cout << "-----------------------\n";
+        std::cout << "Tamanho do vocabulário: " << vocabulary.size() << " palavras\n";
+        std::cout << "Número de documentos: " << documentVectors.size() << "\n\n";
+        
+        std::cout << "Vocabulário global (ordenado alfabeticamente):\n";
+        std::cout << "{ ";
+        for (size_t i = 0; i < vocabulary.size(); ++i) {
+            std::cout << "\"" << vocabulary[i] << "\"";
+            if (i < vocabulary.size() - 1) {
+                std::cout << ", ";
+            }
+        }
+        std::cout << " }\n\n";
+    }
+    
+    // Função para comparar dois documentos
+    void compareDocuments(int doc1Index, int doc2Index) {
+        if (doc1Index >= documentVectors.size() || doc2Index >= documentVectors.size()) {
+            std::cout << "Índice de documento inválido.\n";
+            return;
+        }
+        
+        double similarity = cosineSimilarity(documentVectors[doc1Index], 
+                                             documentVectors[doc2Index]);
+        
+        std::cout << "Similaridade entre Doc " << (doc1Index+1) << " e Doc " 
+                  << (doc2Index+1) << ": " << std::fixed << std::setprecision(4) 
+                  << similarity << "\n";
+    }
+    
+    // Getters para fins de análise
+    const std::vector<std::string>& getVocabulary() const { return vocabulary; }
+    const std::vector<Eigen::VectorXi>& getDocumentVectors() const { return documentVectors; }
+};
+
+int main() {
+    // Documentos já tokenizados do exemplo no texto
+    std::vector<std::vector<std::string>> documents = {
+        {"o", "gato", "preto", "subiu", "no", "telhado"},
+        {"o", "cachorro", "correu", "no", "gramado"}
+    };
+    
+    // Criar e treinar o modelo BoW
+    BagOfWords bow;
+    bow.fit(documents);
+    
+    // Imprimir informações sobre o modelo
+    bow.printInfo();
+    
+    // Imprimir a matriz de documentos x termos
+    bow.printDocumentTermMatrix();
+    
+    // Calcular similaridade entre os documentos
+    std::cout << "\nSimilaridade entre documentos:\n";
+    bow.compareDocuments(0, 1);
+    
+    // Demonstrar o uso do modelo com um novo documento
+    std::vector<std::string> newDoc = {"o", "gato", "preto", "desceu", "do", "telhado"};
+    std::cout << "\nNovo documento: [\"o\", \"gato\", \"preto\", \"desceu\", \"do\", \"telhado\"]\n";
+    
+    Eigen::VectorXi newDocVector = bow.transform(newDoc);
+    
+    // Imprimir o vetor BoW do novo documento
+    std::cout << "Vetor BoW do novo documento:\n[ ";
+    for (int i = 0; i < newDocVector.size(); ++i) {
+        std::cout << newDocVector(i);
+        if (i < newDocVector.size() - 1) {
+            std::cout << ", ";
+        }
+    }
+    std::cout << " ]\n\n";
+    
+    // Comparar o novo documento com os existentes
+    std::cout << "Similaridade com Doc 1: " << std::fixed << std::setprecision(4) 
+              << bow.cosineSimilarity(newDocVector, bow.getDocumentVectors()[0]) << "\n";
+    std::cout << "Similaridade com Doc 2: " << std::fixed << std::setprecision(4) 
+              << bow.cosineSimilarity(newDocVector, bow.getDocumentVectors()[1]) << "\n";
+    
+    // Demonstrar como a ordem das palavras não afeta o vetor BoW
+    std::vector<std::string> reorderedDoc = {"telhado", "o", "gato", "preto", "subiu", "no"};
+    std::cout << "\nDocumento com palavras reordenadas:\n";
+    std::cout << "[\"telhado\", \"o\", \"gato\", \"preto\", \"subiu\", \"no\"]\n";
+    
+    Eigen::VectorXi reorderedVector = bow.transform(reorderedDoc);
+    
+    std::cout << "Vetor BoW do documento reordenado:\n[ ";
+    for (int i = 0; i < reorderedVector.size(); ++i) {
+        std::cout << reorderedVector(i);
+        if (i < reorderedVector.size() - 1) {
+            std::cout << ", ";
+        }
+    }
+    std::cout << " ]\n\n";
+    
+    // Verificar que os vetores BoW são idênticos, independente da ordem
+    bool areEqual = (reorderedVector - bow.getDocumentVectors()[0]).norm() == 0;
+    std::cout << "Os vetores BoW do Doc 1 e do documento reordenado são idênticos? "
+              << (areEqual ? "Sim" : "Não") << "\n";
+    
+    return 0;
+}
+```
+
+Este exemplo reimplementa o modelo **Bag of Words (BoW)** assumindo que os documentos são simples, como os que usamos nos exemplos teóricos. A implementação foca exclusivamente na representação matemática e nas funcionalidades essenciais do **BoW**.
+
+1. **Representação matemática pura**:
+
+   - A classe `BagOfWords` implementa diretamente a formulação matemática apresentada no texto:
+   - Construção do vocabulário global: $V_{global} = \bigcup_{i=1}^N V_{D_i}$
+   - Criação de vetores BoW: $\vec{bow}_{D_i} = [f(w_1, D_i), f(w_2, D_i), ..., f(w_{|V_{global}|}, D_i)]^T$
+
+2. **Uso da biblioteca Eigen**:
+
+   - Utilizamos `Eigen::VectorXi` para representar os vetores de frequência de termos
+   - Aproveitamos operações eficientes como `.dot()` e `.norm()` para o cálculo de similaridade de cosseno
+   - A conversão de tipos de `VectorXi` para `VectorXd` é feita através do método `.cast<double>()`
+
+3. **Estruturas de dados eficientes**:
+
+   - Usamos `std::set` para obter palavras únicas ao construir o vocabulário
+   - Implementamos um mapeamento eficiente de palavras para índices com `std::unordered_map`
+   - A representação vetorial permite operações matemáticas rápidas nos documentos
+
+4. **Demonstração de limitações do BoW**:
+
+   - Adicionamos um exemplo específico para mostrar como a ordem das palavras não afeta o vetor BoW
+   - Verificamos matematicamente que documentos com palavras em ordens diferentes produzem vetores idênticos
+
+No código do exemplo, implementamos as seguintes funções principais:
+
+- **`buildVocabulary()`**: constrói o vocabulário global ordenado alfabeticamente
+- **`createBowVectors()`**: cria os vetores de frequência de termos para cada documento
+- **`transform()`**: converte um novo documento em um vetor BoW usando o vocabulário existente
+- **`cosineSimilarity()`**: calcula a similaridade entre dois documentos, usando a fórmula:
+
+$$
+\text{sim}(\vec{a},\vec{b}) = \cos(\theta) = \frac{\vec{a} \cdot \vec{b}}{|\vec{a}||\vec{b}|} = \frac{\sum_{i=1}^n a_i b_i}{\sqrt{\sum_{i=1}^n a_i^2}\sqrt{\sum_{i=1}^n b_i^2}}
+$$
+
+- **`printDocumentTermMatrix()`**: Visualiza a matriz de documentos por termos
+
+Por fim, na função `main()`:
+
+1. usamos os documentos do exemplo no texto: "O gato preto subiu no telhado" e "O cachorro correu no gramado";
+2. construímos o modelo BoW e visualizamos a matriz de documentos por termos;
+3. calculamos a similaridade entre os documentos;
+4. demonstramos a aplicação do modelo a um novo documento;
+5. ilustramos de forma prática uma das limitações fundamentais do BoW: a perda da ordem das palavras.
+
+Esta implementação é concisa e focada nos aspectos matemáticos do **BoW**. Com o único objetivo de permitir que a esforçada leitora possa entender como passar a matemática para código em C++.
+
+Caberá a criativa leitora a criar sua própria interpretação.
+
 ### **TF-IDF** (Term Frequency-Inverse Document Frequency)
 
 O **TF-IDF (Term Frequency-Inverse Document Frequency)** tem origem nos trabalhos de Spärck[^7] e Salton[^8] quase como uma evolução natural do modelo **BoW** com o objetivo de resolver um dos seus problemas fundamentais: a dominância de palavras muito frequentes. O **TF-IDF** teve impacto significativo na área de recuperação de informação por conseguir ponderar a importância das palavras levando em consideração, além da frequência em um determinado documento, a raridade no *corpus*.
@@ -751,12 +1023,15 @@ A sagaz leitora pode ver que a frequência normalizada captura melhor a importâ
 **Exemplo 4**: voltando ao *corpus* com três documentos, teríamos:
 
 Para $D_1$ (8 palavras total):
+
 $$\text{TF}(\text{"preto"}, D_1) = \frac{2}{8} = 0.25$$
 
 Para $D_2$ (7 palavras total):
+
 $$\text{TF}(\text{"gato"}, D_2) = \frac{1}{7} \approx 0.143$$
 
 Para $D_3$ (7 palavras total):
+
 $$\text{TF}(\text{"preto"}, D_3) = \frac{1}{7} \approx 0.143$$
 
 Além das frequências bruta e normalizada, existem outras formulações importantes do **TF**, criadas para resolver problemas específicos na representação de documentos.
@@ -794,15 +1069,21 @@ A frequência logarítmica reduz a razão de $3:1$ para aproximadamente $1.48:1$
 
 **Exemplo 6**: voltando ao *corpus* de três documentos, teremos:
 
-$D_1$: "O gato preto caça o rato preto";
-$D_2$: "O rato branco corre do gato";
-$D_3$: "O cachorro late para o gato preto".
+- $D_1$: "O gato preto caça o rato preto";
+- $D_2$: "O rato branco corre do gato";
+- $D_3$: "O cachorro late para o gato preto".
 
 Para "preto" em $D_1$:
-$$\text{TF}_{log}(\text{"preto"}, D_1) = 1 + \log(2) \approx 1.301$$
+
+$$
+\text{TF}_{log}(\text{"preto"}, D_1) = 1 + \log(2) \approx 1.301
+$$
 
 Para "gato" em $D_2$:
-$$\text{TF}_{log}(\text{"gato"}, D_2) = 1 + \log(1) = 1$$
+
+$$
+\text{TF}_{log}(\text{"gato"}, D_2) = 1 + \log(1) = 1
+$$
 
 Esta propriedade de compressão do logaritmo é particularmente valiosa em processamento de linguagem natural porque segue a Lei de Weber-Fechner, que estabelece que a percepção humana de diferenças tende a ser logarítmica em relação ao estímulo real: da mesma forma que não percebemos uma luz com $300$ lumens como sendo 3 vezes mais brilhante que uma com $100$ lumens, também não interpretamos uma palavra que aparece $3$ vezes em um texto como tendo o triplo da importância semântica de uma palavra que aparece uma única vez.
 
@@ -908,7 +1189,7 @@ Calculando $\text{TF}_{aug}$:
 
 Observe que mesmo "dormiu", que aparece apenas uma vez, recebe um peso considerável $(0.67)$ devido ao termo base $0.5$.
 
-**Exemplo 10**: usando o **corpus** com três documentos: 
+**Exemplo 10**: usando o **corpus** com três documentos:
 
 - $D_1$: "O gato preto caça o rato preto";
 - $D_2$: "O rato branco corre do gato";
@@ -918,11 +1199,15 @@ Para $D_1$, a palavra mais frequente aparece 2 vezes ("preto"):
 
 Para "gato":
 
-$$\text{TF}_{aug}(\text{"gato"}, D_1) = 0.5 + 0.5 \times \frac{1}{2} = 0.75$$
+$$
+\text{TF}_{aug}(\text{"gato"}, D_1) = 0.5 + 0.5 \times \frac{1}{2} = 0.75
+$$
 
 Para "preto":
 
-$$\text{TF}_{aug}(\text{"preto"}, D_1) = 0.5 + 0.5 \times \frac{2}{2} = 1.0$$
+$$
+\text{TF}_{aug}(\text{"preto"}, D_1) = 0.5 + 0.5 \times \frac{2}{2} = 1.0
+$$
 
 A frequência aumentada se destaca sistemas de recuperação de informação e mecanismos de busca onde temos documentos de tamanhos muito diferentes, como por exemplo, ao comparar artigos científicos com resumos ou *abstracts*.
 
@@ -980,6 +1265,105 @@ No momento de definir sua aplicação, a analítica leitora deve considerar:
    - Palavras-chave importantes → Frequência binária ou aumentada.
 
 A esforçada leitora deverá experimentar diferentes formulações em seu conjunto de dados específico, avaliando o impacto de cada uma no desempenho final do seu sistema. *Triste é a sina daquela que pesquisa e aprende*.
+
+Um pouco de código em C++ deve ajudar a amável leitora a entender melhor o conceito de **TF**. O código tenta seguir as fórmulas matemáticas apresentadas no texto, demonstrando como traduzir expressões matemáticas para código C++.
+
+Não deixe de notar que a implementação está simplificada e não considera tarefas de pré-processamento como tokenização, remoção de *stopwords* ou *stemming*, que seriam importantes em aplicações reais e que serão discutidos em detalhes mais adiante.
+
+O código a seguir utiliza a biblioteca [Eigen](https://eigen.tuxfamily.org/dox/), utilizada em aplicações científicas e de aprendizado de máquina. A biblioteca é leve e fácil de usar, permitindo operações eficientes com matrizes e vetores em alto desempenho e com precisão numérica.
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <string>
+#include <unordered_map>
+#include <cmath>
+#include <Eigen/Dense>
+#include <algorithm>
+
+// Função para calcular diferentes versões do TF para um documento
+class TermFrequency {
+public:
+    // Calcula a frequência bruta (raw)
+    static double raw(const std::vector<std::string>& document, const std::string& term) {
+        double count = 0;
+        for (const auto& word : document) {
+            if (word == term) {
+                count++;
+            }
+        }
+        return count;
+    }
+    
+    // Calcula a frequência normalizada
+    static double normalized(const std::vector<std::string>& document, const std::string& term) {
+        double count = raw(document, term);
+        return count / document.size();
+    }
+    
+    // Calcula a frequência logarítmica
+    static double logarithmic(const std::vector<std::string>& document, const std::string& term) {
+        double count = raw(document, term);
+        return count > 0 ? 1.0 + std::log(count) : 0.0;
+    }
+    
+    // Calcula a frequência binária
+    static double binary(const std::vector<std::string>& document, const std::string& term) {
+        for (const auto& word : document) {
+            if (word == term) {
+                return 1.0;
+            }
+        }
+        return 0.0;
+    }
+    
+    // Calcula a frequência aumentada (augmented)
+    static double augmented(const std::vector<std::string>& document, const std::string& term) {
+        std::unordered_map<std::string, int> termCounts;
+        
+        // Contar ocorrências de cada termo
+        for (const auto& word : document) {
+            termCounts[word]++;
+        }
+        
+        // Encontrar o termo mais frequente
+        int maxCount = 0;
+        for (const auto& [_, count] : termCounts) {
+            maxCount = std::max(maxCount, count);
+        }
+        
+        int termCount = termCounts[term];
+        return 0.5 + 0.5 * (static_cast<double>(termCount) / maxCount);
+    }
+};
+
+// Exemplo de uso
+int main() {
+    // Documento do Exemplo 3 no texto
+    std::vector<std::string> doc1 = {"o", "pequeno", "gato", "preto", "viu", "outro", "gato", "preto"};
+    std::vector<std::string> doc2 = {"gato"};
+    
+    std::string term = "gato";
+    
+    std::cout << "Para o termo '" << term << "':\n";
+    
+    std::cout << "Documento 1:\n";
+    std::cout << "  TF_raw: " << TermFrequency::raw(doc1, term) << "\n";
+    std::cout << "  TF_normalized: " << TermFrequency::normalized(doc1, term) << "\n";
+    std::cout << "  TF_logarithmic: " << TermFrequency::logarithmic(doc1, term) << "\n";
+    std::cout << "  TF_binary: " << TermFrequency::binary(doc1, term) << "\n";
+    std::cout << "  TF_augmented: " << TermFrequency::augmented(doc1, term) << "\n";
+    
+    std::cout << "Documento 2:\n";
+    std::cout << "  TF_raw: " << TermFrequency::raw(doc2, term) << "\n";
+    std::cout << "  TF_normalized: " << TermFrequency::normalized(doc2, term) << "\n";
+    std::cout << "  TF_logarithmic: " << TermFrequency::logarithmic(doc2, term) << "\n";
+    std::cout << "  TF_binary: " << TermFrequency::binary(doc2, term) << "\n";
+    std::cout << "  TF_augmented: " << TermFrequency::augmented(doc2, term) << "\n";
+    
+    return 0;
+}
+```
 
 #### Inverse Document Frequency (IDF)
 
@@ -1154,6 +1538,121 @@ A esforçada leitora terá alguma dificuldade de encontrar a versão do **IDF** 
 
 Finalmente, considere que o **IDF máximo** pode ser útil em cenários onde a robustez a *outliers* e termos extremamente raros seja importante e o **IDF normalizado por comprimento**, embora seja menos comum, pode ser avaliado se, durante os seus testes, o comprimento do documento for suspeito de ser um fator de confusão significativo.
 
+Novamente, para que a esforçada leitora não se perca na matemática pura, um pouco de código em C++ pode ajudar.
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <cmath>
+#include <Eigen/Dense>
+
+class InverseDocumentFrequency {
+public:
+    // Calcula IDF básico
+    static double basic(const std::vector<std::vector<std::string>>& corpus, const std::string& term) {
+        double N = corpus.size(); // número total de documentos
+        double df = 0;           // document frequency
+        
+        for (const auto& document : corpus) {
+            for (const auto& word : document) {
+                if (word == term) {
+                    df++;
+                    break; // contamos o documento apenas uma vez
+                }
+            }
+        }
+        
+        // Evitar divisão por zero
+        if (df == 0) return 0.0;
+        
+        return std::log(N / df);
+    }
+    
+    // Calcula IDF com suavização (IDF+1)
+    static double smooth(const std::vector<std::vector<std::string>>& corpus, const std::string& term) {
+        double N = corpus.size();
+        double df = 0;
+        
+        for (const auto& document : corpus) {
+            std::unordered_set<std::string> uniqueTerms(document.begin(), document.end());
+            if (uniqueTerms.find(term) != uniqueTerms.end()) {
+                df++;
+            }
+        }
+        
+        return std::log(N / (1 + df));
+    }
+    
+    // Calcula IDF probabilístico
+    static double probabilistic(const std::vector<std::vector<std::string>>& corpus, const std::string& term) {
+        double N = corpus.size();
+        double df = 0;
+        
+        for (const auto& document : corpus) {
+            std::unordered_set<std::string> uniqueTerms(document.begin(), document.end());
+            if (uniqueTerms.find(term) != uniqueTerms.end()) {
+                df++;
+            }
+        }
+        
+        // O IDF probabilístico pode ter problemas se df = N
+        if (df == N) return 0.0;
+        
+        return std::log((N - df) / df);
+    }
+    
+    // Calcula todas as variantes do IDF para um conjunto de termos
+    static void calculateAllVariants(const std::vector<std::vector<std::string>>& corpus, 
+                                    const std::vector<std::string>& terms) {
+        std::cout << "Termo\t\tIDF Básico\tIDF Suavizado\tIDF Probabilístico\n";
+        std::cout << "-----------------------------------------------------------\n";
+        
+        for (const auto& term : terms) {
+            double basic_idf = basic(corpus, term);
+            double smooth_idf = smooth(corpus, term);
+            double prob_idf = probabilistic(corpus, term);
+            
+            std::cout << term << "\t\t" 
+                     << basic_idf << "\t\t" 
+                     << smooth_idf << "\t\t";
+            
+            // Verificar se o IDF probabilístico está definido
+            if (std::isnan(prob_idf) || std::isinf(prob_idf)) {
+                std::cout << "Indefinido";
+            } else {
+                std::cout << prob_idf;
+            }
+            
+            std::cout << "\n";
+        }
+    }
+};
+
+int main() {
+    // Corpus do Exemplo 1 na seção IDF
+    std::vector<std::vector<std::string>> corpus = {
+        {"o", "gato", "preto", "caça", "o", "rato", "preto"},
+        {"o", "rato", "branco", "corre", "do", "gato"},
+        {"o", "cachorro", "late", "para", "o", "gato", "preto"}
+    };
+    
+    std::vector<std::string> terms = {"gato", "preto", "cachorro", "rato"};
+    
+    InverseDocumentFrequency::calculateAllVariants(corpus, terms);
+    
+    return 0;
+}
+```
+
+Este exemplo implementa três variantes do cálculo de IDF discutidas no texto: **IDF básico**, **IDF com suavização** e **IDF probabilístico**.
+
+A classe `InverseDocumentFrequency` encapsula estes métodos de cálculo. A implementação usa estruturas de dados eficientes como `unordered_set` para verificar rapidamente a presença de termos em documentos, evitando contagens duplicadas. O método `calculateAllVariants` gera uma tabela formatada que mostra os valores de **IDF** para cada termo usando as diferentes formulações, facilitando a comparação.
+
+Note que o código inclui tratamento para o caso em que o **IDF probabilístico** pode se tornar indefinido, quando um termo aparece em todos os documentos, mostrando como lidar com casos especiais que podem surgir nas aplicações reais.
+
 #### Cálculo do TF-IDF
 
 Finalmente chegamos a informação que nos interessa. A pontuação final **TF-IDF** será o resultado do produto das duas métricas:
@@ -1244,6 +1743,117 @@ Neste caso, o sistema ranquearia os documentos na ordem: $D_1 > D_2 > D_3$, o qu
 
 A **Similaridade de Cosseno** é particularmente útil em recuperação de informação porque é independente do tamanho dos documentos, considera a direção dos vetores, não sua magnitude, permite comparações rápidas em grandes conjuntos de documentos e funciona bem com vetores esparsos, característicos de representações **TF-IDF**.
 
+**Exemplo 3**: similaridade de cosseno em C++.
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <string>
+#include <Eigen/Dense>
+#include <iomanip>
+
+// Função para calcular a similaridade de cosseno entre dois vetores
+double cosineSimilarity(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) {
+    double dotProduct = v1.dot(v2);
+    double norm1 = v1.norm();
+    double norm2 = v2.norm();
+    
+    if (norm1 == 0 || norm2 == 0) return 0.0;
+    return dotProduct / (norm1 * norm2);
+}
+
+// Função para mostrar a matriz de similaridade entre documentos
+void printSimilarityMatrix(const std::vector<Eigen::VectorXd>& documents) {
+    int n = documents.size();
+    Eigen::MatrixXd similarityMatrix = Eigen::MatrixXd::Zero(n, n);
+    
+    // Calcular similaridade entre todos os pares de documentos
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            similarityMatrix(i, j) = cosineSimilarity(documents[i], documents[j]);
+        }
+    }
+    
+    // Imprimir matriz de similaridade
+    std::cout << "Matriz de Similaridade de Cosseno:\n";
+    std::cout << std::setw(10) << " ";
+    for (int i = 0; i < n; ++i) {
+        std::cout << std::setw(10) << "Doc " + std::to_string(i+1);
+    }
+    std::cout << "\n";
+    
+    for (int i = 0; i < n; ++i) {
+        std::cout << std::setw(10) << "Doc " + std::to_string(i+1);
+        for (int j = 0; j < n; ++j) {
+            std::cout << std::setw(10) << std::fixed << std::setprecision(4) 
+                     << similarityMatrix(i, j);
+        }
+        std::cout << "\n";
+    }
+}
+
+int main() {
+    // Exemplo 1 da seção "Similaridade de Cosseno"
+    // Vetores TF-IDF para os documentos:
+    // D1: "O gato caça rato"
+    // D2: "O gato dorme muito"
+    // D3: "O rato come queijo"
+    
+    // Ordem dos termos: "gato", "rato", "caça", "dorme", "come", "queijo"
+    Eigen::VectorXd D1(6);
+    D1 << 0.4, 0.4, 0.5, 0.0, 0.0, 0.0;
+    
+    Eigen::VectorXd D2(6);
+    D2 << 0.4, 0.0, 0.0, 0.5, 0.0, 0.0;
+    
+    Eigen::VectorXd D3(6);
+    D3 << 0.0, 0.4, 0.0, 0.0, 0.5, 0.4;
+    
+    // Consulta "gato caçador"
+    Eigen::VectorXd Q(6);
+    Q << 0.6, 0.0, 0.4, 0.0, 0.0, 0.0;
+    
+    std::vector<Eigen::VectorXd> documents = {D1, D2, D3};
+    
+    // Calcular e imprimir a matriz de similaridade entre documentos
+    printSimilarityMatrix(documents);
+    
+    // Calcular similaridade entre a consulta e cada documento
+    std::cout << "\nSimilaridade entre a consulta 'gato caçador' e os documentos:\n";
+    for (int i = 0; i < documents.size(); ++i) {
+        double sim = cosineSimilarity(Q, documents[i]);
+        std::cout << "Documento " << (i+1) << ": " << std::fixed << std::setprecision(4) << sim << "\n";
+    }
+    
+    // Verificação manual das similaridades
+    std::cout << "\nVerificação manual das similaridades usando a fórmula:\n";
+    
+    double sim_D1_D2 = D1.dot(D2) / (D1.norm() * D2.norm());
+    std::cout << "sim(D1, D2) = " << std::fixed << std::setprecision(4) << sim_D1_D2 << "\n";
+    
+    double sim_D1_D3 = D1.dot(D3) / (D1.norm() * D3.norm());
+    std::cout << "sim(D1, D3) = " << std::fixed << std::setprecision(4) << sim_D1_D3 << "\n";
+    
+    double sim_Q_D1 = Q.dot(D1) / (Q.norm() * D1.norm());
+    std::cout << "sim(Q, D1) = " << std::fixed << std::setprecision(4) << sim_Q_D1 << "\n";
+    
+    return 0;
+}
+```
+
+Utilizamos os vetores **TF-IDF** apresentados no **Exemplo 1** da seção **Similaridade de Cosseno** do texto.
+O código implementa:
+
+1. **Função de similaridade de cosseno**: calcula o produto escalar dos vetores normalizado pelos seus comprimentos (normas), usando as operações otimizadas da biblioteca Eigen.
+
+2. **Matriz de similaridade**: calcula e exibe uma matriz que mostra a similaridade entre todos os pares de documentos, facilitando a visualização de quais documentos são mais semelhantes entre si.
+
+3. **Similaridade com consulta**: demonstra como calcular a similaridade entre uma consulta "gato caçador" e cada documento do corpus.
+
+4. **Verificação manual**: implementa o cálculo detalhado da fórmula para confirmação dos resultados.
+
+A implementação utiliza os recursos da biblioteca Eigen para operações vetoriais eficientes, como produto escalar (`dot`) e cálculo de normas (`norm`). Isso facilita a implementação das fórmulas matemáticas apresentadas no texto.
+
 ##### Exemplo Detalhado de TF-IDF
 
 Vamos analisar um exemplo completo usando um **corpus** com apenas dois documentos:
@@ -1323,7 +1933,7 @@ $$
 V = \{ \text{"gato", "caçador", "pula", "telhado", "cachorro", "late", "quintal", "pássaro", "voa", "alto", "céu", "azul"}\}
 $$
 
-**3. Cálculo da Frequência do Termo (TF):**
+**1. Cálculo da Frequência do Termo (TF):**
 
 Para cada documento e cada termo do vocabulário, calculamos a Frequência do Termo (**TF**).  Vamos usar a frequência bruta do termo no documento.
 
@@ -1342,7 +1952,7 @@ Para cada documento e cada termo do vocabulário, calculamos a Frequência do Te
 | "céu"        |         0         |         0         |         1         |
 | "azul"       |         0         |         0         |         1         |
 
-**4. Cálculo da Frequência Inversa nos Documentos (IDF):**
+**2. Cálculo da Frequência Inversa nos Documentos (IDF):**
 
 Agora, calculamos o IDF para cada termo do vocabulário usando a fórmula básica:
 
@@ -1369,7 +1979,7 @@ Onde $|Docs| = 3$ (número total de documentos).
 
 *Observação: Utilizamos o logaritmo natural (base $$e$$) para simplificação. Em aplicações reais, a base do logaritmo não altera o ranqueamento, apenas a escala dos valores.*
 
-**5. Cálculo do TF-IDF:**
+**3. Cálculo do TF-IDF:**
 
 Multiplicamos o **TF** de cada termo em cada documento pelo seu IDF correspondente para obter a matriz **TF-IDF**:
 
@@ -1388,7 +1998,7 @@ Multiplicamos o **TF** de cada termo em cada documento pelo seu IDF corresponden
 | "céu"        |         $0$          |         $0$          |        $1 \times 0.48 \approx 0.48$        |
 | "azul"       |         $0$          |         $0$          |        $1 \times 0.48 \approx 0.48$        |
 
-**6. Consulta do Usuário**: suponha que o usuário faça a seguinte consulta: "gato no telhado".
+**4. Consulta do Usuário**: suponha que o usuário faça a seguinte consulta: "gato no telhado".
 
 Primeiro, precisamos criar um vetor da consulta usando o mesmo algoritmo que usamos antes. Ou seja, calculamos o vetor **TF-IDF** para a consulta, usando o mesmo **IDF** calculado para os documentos. Vamos assumir $TF=1$ para cada termo presente na consulta e $0$ para os demais termos do vocabulário.
 
@@ -1407,7 +2017,7 @@ Primeiro, precisamos criar um vetor da consulta usando o mesmo algoritmo que usa
 | "céu"        |         $0$         |
 | "azul"       |         $0$         |
 
-**7. Cálculo da Similaridade do Cosseno**: calculamos a similaridade do cosseno entre o vetor da consulta e o vetor **TF-IDF** de cada documento.
+**5. Cálculo da Similaridade do Cosseno**: calculamos a similaridade do cosseno entre o vetor da consulta e o vetor **TF-IDF** de cada documento.
 
 1. **Documento 1 vs. Consulta:**
 
@@ -1433,7 +2043,7 @@ Primeiro, precisamos criar um vetor da consulta usando o mesmo algoritmo que usa
 
    Similaridade (Doc 3, Consulta) $\approx 0$ (produto escalar é zero)
 
-**7. Ranqueamento**: com base na similaridade do cosseno, os documentos devem ranqueados em ordem decrescente de similaridade. O que resulta em:
+**6. Ranqueamento**: com base na similaridade do cosseno, os documentos devem ranqueados em ordem decrescente de similaridade. O que resulta em:
 
 1. **Documento 1:** Similaridade $\approx 0.92$;
 2. **Documento 2:** Similaridade $\approx 0.16$;
@@ -1441,15 +2051,586 @@ Primeiro, precisamos criar um vetor da consulta usando o mesmo algoritmo que usa
 
 Finalmente, o **Documento 1** deve ser considerado o mais relevante para a consulta "gato no telhado", o que faz sentido intuitivamente, pois ele contém ambos os termos da consulta e tem uma concentração maior desses termos em relação aos outros documentos. O **TF-IDF**, neste exemplo simplificado, consegue capturar a relevância do **Documento 1** para a consulta, demonstrando seu princípio de funcionamento na recuperação de informação.
 
-pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp
+**Exemplo 2**: trabalhando com C++.
+
+Este exemplo apresenta uma implementação completa do algoritmo **TF-IDF** utilizando a biblioteca Eigen para operações matriciais. A classe **TFIDF** encapsula todo o processamento, desde a construção do vocabulário até o cálculo da matriz **TF-IDF** e a busca de documentos similares.
+
+Principais componentes e técnicas utilizadas:
+
+1. **Representação vetorial**: utilizamos a biblioteca Eigen para criar e manipular matrizes e vetores, o que facilita os cálculos de similaridade e produtos escalares;
+
+2. **Construção do vocabulário**: o método `buildVocabulary()` extrai todos os termos únicos do corpus e cria um mapeamento entre termos e índices para acesso eficiente;
+
+3. **Cálculo de TF-IDF**: implementamos o cálculo de **TF normalizada** e **IDF suavizada**, seguindo as fórmulas apresentadas no texto.
+
+4. **Matriz TF-IDF**: o método `computeTFIDFMatrix()` calcula a matriz TF-IDF completa, onde cada linha representa um documento e cada coluna um termo do vocabulário.
+Similaridade de cosseno: Implementamos o cálculo da **similaridade de cosseno** para comparar documentos entre si ou com uma consulta.
+Processamento de consultas: O método `processQuery()` converte uma consulta de texto em um vetor **TF-IDF** e calcula sua similaridade com todos os documentos do corpus.
+
+Na função `main()`, demonstramos o uso da classe com o exemplo do corpus de três documentos mencionado no texto. Imprimimos a matriz **TF-IDF** resultante e testamos uma consulta "gato preto", mostrando os documentos ordenados por relevância.
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <cmath>
+#include <Eigen/Dense>
+#include <iomanip>
+
+class TFIDF {
+private:
+    std::vector<std::vector<std::string>> corpus;
+    std::vector<std::string> vocabulary;
+    Eigen::MatrixXd tfidfMatrix;
+    
+    // Mapeia termos para índices no vocabulário
+    std::unordered_map<std::string, int> termToIndex;
+    
+public:
+    TFIDF(const std::vector<std::vector<std::string>>& documents) : corpus(documents) {
+        buildVocabulary();
+        computeTFIDFMatrix();
+    }
+    
+    // Constrói o vocabulário a partir do corpus
+    void buildVocabulary() {
+        std::unordered_set<std::string> uniqueTerms;
+        
+        for (const auto& document : corpus) {
+            for (const auto& term : document) {
+                uniqueTerms.insert(term);
+            }
+        }
+        
+        vocabulary.assign(uniqueTerms.begin(), uniqueTerms.end());
+        std::sort(vocabulary.begin(), vocabulary.end()); // Ordenar para consistência
+        
+        // Criar mapeamento de termos para índices
+        for (size_t i = 0; i < vocabulary.size(); ++i) {
+            termToIndex[vocabulary[i]] = i;
+        }
+    }
+    
+    // Calcula o Term Frequency (TF) normalizado para um termo em um documento
+    double calculateTF(const std::vector<std::string>& document, const std::string& term) {
+        double count = 0;
+        for (const auto& word : document) {
+            if (word == term) {
+                count++;
+            }
+        }
+        
+        return count / document.size(); // Frequência normalizada
+    }
+    
+    // Calcula o Inverse Document Frequency (IDF) para um termo
+    double calculateIDF(const std::string& term) {
+        double N = corpus.size();
+        double documentFrequency = 0;
+        
+        for (const auto& document : corpus) {
+            for (const auto& word : document) {
+                if (word == term) {
+                    documentFrequency++;
+                    break;
+                }
+            }
+        }
+        
+        // Aplicar suavização para evitar divisão por zero
+        return std::log(N / (1 + documentFrequency));
+    }
+    
+    // Computa a matriz TF-IDF completa
+    void computeTFIDFMatrix() {
+        int numDocs = corpus.size();
+        int numTerms = vocabulary.size();
+        
+        // Inicializar matriz TF-IDF com zeros
+        tfidfMatrix = Eigen::MatrixXd::Zero(numDocs, numTerms);
+        
+        // Calcular valores TF-IDF para cada documento e termo
+        for (int i = 0; i < numDocs; ++i) {
+            const auto& document = corpus[i];
+            
+            for (int j = 0; j < numTerms; ++j) {
+                const auto& term = vocabulary[j];
+                double tf = calculateTF(document, term);
+                double idf = calculateIDF(term);
+                
+                tfidfMatrix(i, j) = tf * idf;
+            }
+        }
+    }
+    
+    // Calcula a similaridade de cosseno entre dois vetores
+    double cosineSimilarity(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) {
+        double dotProduct = v1.dot(v2);
+        double norm1 = v1.norm();
+        double norm2 = v2.norm();
+        
+        if (norm1 == 0 || norm2 == 0) return 0.0;
+        return dotProduct / (norm1 * norm2);
+    }
+    
+    // Processa uma consulta e retorna os documentos mais similares
+    std::vector<std::pair<int, double>> processQuery(const std::vector<std::string>& query) {
+        // Criar vetor TF-IDF para a consulta
+        Eigen::VectorXd queryVector = Eigen::VectorXd::Zero(vocabulary.size());
+        
+        for (const auto& term : query) {
+            if (termToIndex.find(term) != termToIndex.end()) {
+                int index = termToIndex[term];
+                double tf = static_cast<double>(std::count(query.begin(), query.end(), term)) / query.size();
+                double idf = calculateIDF(term);
+                queryVector(index) = tf * idf;
+            }
+        }
+        
+        // Calcular similaridade com cada documento
+        std::vector<std::pair<int, double>> similarities;
+        for (int i = 0; i < corpus.size(); ++i) {
+            Eigen::VectorXd docVector = tfidfMatrix.row(i);
+            double similarity = cosineSimilarity(queryVector, docVector);
+            similarities.push_back({i, similarity});
+        }
+        
+        // Ordenar por similaridade (ordem decrescente)
+        std::sort(similarities.begin(), similarities.end(), 
+                 [](const auto& a, const auto& b) { return a.second > b.second; });
+        
+        return similarities;
+    }
+    
+    // Exibe a matriz TF-IDF
+    void printTFIDFMatrix() {
+        std::cout << "Matriz TF-IDF (" << corpus.size() << " documentos x " 
+                 << vocabulary.size() << " termos):\n\n";
+        
+        // Imprimir cabeçalho do vocabulário
+        std::cout << std::setw(10) << " ";
+        for (const auto& term : vocabulary) {
+            std::cout << std::setw(10) << term;
+        }
+        std::cout << "\n";
+        
+        // Imprimir valores da matriz
+        for (int i = 0; i < corpus.size(); ++i) {
+            std::cout << "Doc " << i << ":" << std::setw(4) << " ";
+            for (int j = 0; j < vocabulary.size(); ++j) {
+                std::cout << std::setw(10) << std::fixed << std::setprecision(4) << tfidfMatrix(i, j);
+            }
+            std::cout << "\n";
+        }
+    }
+    
+    // Getter para o vocabulário
+    const std::vector<std::string>& getVocabulary() const {
+        return vocabulary;
+    }
+};
+
+int main() {
+    // Exemplo do corpus com três documentos usado no texto
+    std::vector<std::vector<std::string>> corpus = {
+        {"o", "gato", "preto", "caça", "o", "rato", "preto"},
+        {"o", "rato", "branco", "corre", "do", "gato"},
+        {"o", "cachorro", "late", "para", "o", "gato", "preto"}
+    };
+    
+    TFIDF tfidf(corpus);
+    
+    // Imprimir vocabulário
+    std::cout << "Vocabulário: ";
+    for (const auto& term : tfidf.getVocabulary()) {
+        std::cout << term << " ";
+    }
+    std::cout << "\n\n";
+    
+    // Imprimir matriz TF-IDF
+    tfidf.printTFIDFMatrix();
+    
+    // Testar uma consulta
+    std::vector<std::string> query = {"gato", "preto"};
+    std::cout << "\nConsulta: ";
+    for (const auto& term : query) {
+        std::cout << term << " ";
+    }
+    std::cout << "\n\n";
+    
+    // Processar consulta e mostrar resultados
+    auto results = tfidf.processQuery(query);
+    std::cout << "Resultados da busca (ordenados por relevância):\n";
+    for (const auto& [docId, similarity] : results) {
+        std::cout << "Documento " << docId << ": Similaridade = " 
+                 << std::fixed << std::setprecision(4) << similarity << "\n";
+        
+        // Mostrar o conteúdo do documento
+        std::cout << "  Conteúdo: ";
+        for (const auto& term : corpus[docId]) {
+            std::cout << term << " ";
+        }
+        std::cout << "\n";
+    }
+    
+    return 0;
+}
+```
+
+#### **TF-IDF** em C++ Na Prática
+
+O código a seguir implementa um sistema de recuperação de informação utilizando o algoritmo **TF-IDF**. Ele inclui pré-processamento de texto, construção de vocabulário, cálculo da matriz **TF-IDF**, e similaridade de cosseno entre documentos e consultas.
+
+A esforçada leitora deve notar que o código é um exemplo simplificado e não inclui todas as funcionalidades de um sistema de recuperação de informação completo. Usando técnicas que ainda não discutimos. No entanto, ele fornece uma base sólida para entender como o **TF-IDF** pode ser implementado em C++.
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <string>
+#include <unordered_map>
+#include <set>
+#include <algorithm>
+#include <sstream>
+#include <cctype>
+#include <iomanip>
+#include <Eigen/Dense>
+
+// Classe para pré-processamento de texto
+class TextPreprocessor {
+public:
+    // Converte texto para minúsculas e remove pontuação
+    static std::string normalize(const std::string& text) {
+        std::string result;
+        for (char c : text) {
+            if (std::isalpha(c)) {
+                result += std::tolower(c);
+            } else if (c == ' ' || c == '\t' || c == '\n') {
+                result += ' ';
+            }
+        }
+        return result;
+    }
+    
+    // Divide texto em tokens (palavras)
+    static std::vector<std::string> tokenize(const std::string& text) {
+        std::vector<std::string> tokens;
+        std::istringstream iss(text);
+        std::string token;
+        
+        while (iss >> token) {
+            tokens.push_back(token);
+        }
+        
+        return tokens;
+    }
+    
+    // Lista de stopwords em português, muito simplificada
+    static const std::set<std::string>& getStopwords() {
+        static const std::set<std::string> stopwords = {
+            "o", "a", "os", "as", "um", "uma", "uns", "umas",
+            "de", "do", "da", "dos", "das", "no", "na", "nos", "nas",
+            "em", "para", "por", "com", "sem", "sob", "e", "ou", "mas"
+        };
+        return stopwords;
+    }
+    
+    // Remove stopwords de um documento tokenizado
+    static std::vector<std::string> removeStopwords(const std::vector<std::string>& tokens) {
+        std::vector<std::string> filtered;
+        const auto& stopwords = getStopwords();
+        
+        for (const auto& token : tokens) {
+            if (stopwords.find(token) == stopwords.end()) {
+                filtered.push_back(token);
+            }
+        }
+        
+        return filtered;
+    }
+    
+    // Processa um texto completo: normaliza, tokeniza e remove stopwords
+    static std::vector<std::string> process(const std::string& text) {
+        std::string normalized = normalize(text);
+        std::vector<std::string> tokens = tokenize(normalized);
+        return removeStopwords(tokens);
+    }
+};
+
+// Sistema de Recuperação de Informação baseado em TF-IDF
+class InformationRetrievalSystem {
+private:
+    std::vector<std::string> rawDocuments;               // Documentos originais
+    std::vector<std::vector<std::string>> processedDocs; // Documentos processados
+    std::vector<std::string> vocabulary;                 // Vocabulário global
+    std::unordered_map<std::string, int> termToIndex;    // Mapa de termos para índices
+    Eigen::MatrixXd tfidfMatrix;                         // Matriz TF-IDF
+    
+public:
+    // Adiciona um novo documento ao sistema
+    void addDocument(const std::string& document) {
+        rawDocuments.push_back(document);
+        processedDocs.push_back(TextPreprocessor::process(document));
+    }
+    
+    // Constrói o vocabulário a partir dos documentos processados
+    void buildVocabulary() {
+        std::set<std::string> uniqueTerms;
+        
+        for (const auto& doc : processedDocs) {
+            for (const auto& term : doc) {
+                uniqueTerms.insert(term);
+            }
+        }
+        
+        vocabulary.assign(uniqueTerms.begin(), uniqueTerms.end());
+        std::sort(vocabulary.begin(), vocabulary.end());
+        
+        // Criar mapeamento de termos para índices
+        for (size_t i = 0; i < vocabulary.size(); ++i) {
+            termToIndex[vocabulary[i]] = i;
+        }
+    }
+    
+    // Calcula a frequência do termo (TF) com suavização logarítmica
+    double calculateTF(const std::vector<std::string>& document, const std::string& term) {
+        int count = 0;
+        for (const auto& word : document) {
+            if (word == term) {
+                count++;
+            }
+        }
+        
+        return count > 0 ? 1.0 + std::log(count) : 0.0;
+    }
+    
+    // Calcula a frequência inversa do documento (IDF) com suavização
+    double calculateIDF(const std::string& term) {
+        int N = processedDocs.size();
+        int df = 0;
+        
+        for (const auto& doc : processedDocs) {
+            if (std::find(doc.begin(), doc.end(), term) != doc.end()) {
+                df++;
+            }
+        }
+        
+        return std::log(N / (1.0 + df));
+    }
+    
+    // Calcula a matriz TF-IDF para todos os documentos
+    void computeTFIDFMatrix() {
+        int numDocs = processedDocs.size();
+        int numTerms = vocabulary.size();
+        
+        tfidfMatrix = Eigen::MatrixXd::Zero(numDocs, numTerms);
+        
+        for (int i = 0; i < numDocs; ++i) {
+            const auto& doc = processedDocs[i];
+            
+            for (int j = 0; j < numTerms; ++j) {
+                const auto& term = vocabulary[j];
+                double tf = calculateTF(doc, term);
+                double idf = calculateIDF(term);
+                tfidfMatrix(i, j) = tf * idf;
+            }
+        }
+    }
+    
+    // Calcula o vetor TF-IDF para uma consulta
+    Eigen::VectorXd calculateQueryVector(const std::string& query) {
+        std::vector<std::string> processedQuery = TextPreprocessor::process(query);
+        Eigen::VectorXd queryVector = Eigen::VectorXd::Zero(vocabulary.size());
+        
+        for (const auto& term : processedQuery) {
+            if (termToIndex.find(term) != termToIndex.end()) {
+                int index = termToIndex[term];
+                double tf = calculateTF(processedQuery, term);
+                double idf = calculateIDF(term);
+                queryVector(index) = tf * idf;
+            }
+        }
+        
+        return queryVector;
+    }
+    
+    // Calcula a similaridade de cosseno entre dois vetores
+    double cosineSimilarity(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) {
+        double dotProduct = v1.dot(v2);
+        double norm1 = v1.norm();
+        double norm2 = v2.norm();
+        
+        if (norm1 < 1e-10 || norm2 < 1e-10) return 0.0;
+        return dotProduct / (norm1 * norm2);
+    }
+    
+    // Busca por documentos relevantes para uma consulta
+    std::vector<std::pair<int, double>> search(const std::string& query, int topK = 3) {
+        // Verificar se há documentos no sistema
+        if (processedDocs.empty()) {
+            return {};
+        }
+        
+        // Calcular vetor TF-IDF para a consulta
+        Eigen::VectorXd queryVector = calculateQueryVector(query);
+        
+        // Calcular similaridades com todos os documentos
+        std::vector<std::pair<int, double>> results;
+        for (int i = 0; i < processedDocs.size(); ++i) {
+            Eigen::VectorXd docVector = tfidfMatrix.row(i);
+            double similarity = cosineSimilarity(queryVector, docVector);
+            results.push_back({i, similarity});
+        }
+        
+        // Ordenar resultados por similaridade (decrescente)
+        std::sort(results.begin(), results.end(), 
+                 [](const auto& a, const auto& b) { return a.second > b.second; });
+        
+        // Retornar apenas os top-K resultados mais relevantes
+        if (results.size() > topK) {
+            results.resize(topK);
+        }
+        
+        return results;
+    }
+    
+    // Inicializa o sistema com um conjunto de documentos
+    void initialize(const std::vector<std::string>& documents) {
+        // Limpar estado atual
+        rawDocuments.clear();
+        processedDocs.clear();
+        vocabulary.clear();
+        termToIndex.clear();
+        
+        // Adicionar e processar documentos
+        for (const auto& doc : documents) {
+            addDocument(doc);
+        }
+        
+        // Construir vocabulário e matriz TF-IDF
+        buildVocabulary();
+        computeTFIDFMatrix();
+    }
+    
+    // Mostrar informações sobre o sistema
+    void printInfo() {
+        std::cout << "Sistema de Recuperação de Informação\n";
+        std::cout << "------------------------------------\n";
+        std::cout << "Número de documentos: " << rawDocuments.size() << "\n";
+        std::cout << "Tamanho do vocabulário: " << vocabulary.size() << " termos\n";
+        
+        std::cout << "\nAmostra do vocabulário (primeiros 20 termos):\n";
+        int count = 0;
+        for (const auto& term : vocabulary) {
+            std::cout << term << " ";
+            if (++count >= 20) break;
+        }
+        std::cout << "\n\n";
+    }
+    
+    // Mostrar documentos originais
+    void printDocuments() {
+        std::cout << "Documentos no sistema:\n";
+        std::cout << "---------------------\n";
+        for (int i = 0; i < rawDocuments.size(); ++i) {
+            std::cout << "Documento " << i << ": " << rawDocuments[i] << "\n";
+        }
+        std::cout << "\n";
+    }
+    
+    // Mostrar resultados da busca de forma amigável
+    void displaySearchResults(const std::string& query, 
+                             const std::vector<std::pair<int, double>>& results) {
+        std::cout << "Resultados da busca para: \"" << query << "\"\n";
+        std::cout << "----------------------------------------\n";
+        
+        if (results.empty()) {
+            std::cout << "Nenhum resultado encontrado.\n\n";
+            return;
+        }
+        
+        for (int i = 0; i < results.size(); ++i) {
+            int docId = results[i].first;
+            double score = results[i].second;
+            
+            std::cout << (i+1) << ". [Score: " << std::fixed << std::setprecision(4) << score << "] ";
+            std::cout << "Documento " << docId << ": " << rawDocuments[docId] << "\n";
+        }
+        std::cout << "\n";
+    }
+};
+
+// Função para demonstrar o sistema com o exemplo do texto
+void demonstrateWithExampleCorpus() {
+    std::vector<std::string> corpus = {
+        "O gato preto caça o rato preto",
+        "O rato branco corre do gato",
+        "O cachorro late para o gato preto"
+    };
+    
+    InformationRetrievalSystem irSystem;
+    irSystem.initialize(corpus);
+    
+    irSystem.printInfo();
+    irSystem.printDocuments();
+    
+    // Demonstrar busca com consultas variadas
+    std::vector<std::string> queries = {
+        "gato preto",
+        "rato",
+        "cachorro late",
+        "animal"
+    };
+    
+    for (const auto& query : queries) {
+        auto results = irSystem.search(query);
+        irSystem.displaySearchResults(query, results);
+    }
+}
+
+int main() {
+    std::cout << "Demonstração do Sistema de Recuperação de Informação baseado em TF-IDF\n\n";
+    demonstrateWithExampleCorpus();
+    
+    return 0;
+}
+```
+
+Este exemplo apresenta uma implementação completa e prática de um sistema de recuperação de informação baseado no algoritmo **TF-IDF**, utilizando C++20 e a biblioteca Eigen. O sistema implementa todas as etapas necessárias para a construção de um mecanismo de busca textual:
+
+1. **Pré-processamento de texto**: a classe `TextPreprocessor` implementa técnicas básicas de processamento de linguagem natural, que ainda não foram discutidas no texto. À saber:
+
+   - Normalização: remoção de pontuação, conversão para minúsculas;
+   - Tokenização: divisão do texto em palavras;
+   - Remoção de stopwords: palavras muito comuns como artigos e preposições.
+
+2. **Indexação**: o sistema constrói um vocabulário global a partir dos documentos e cria uma matriz **TF-IDF** utilizando a biblioteca Eigen.
+
+3. **Implementação do TF** com suavização logarítmica
+Implementação do **IDF com suavização**.
+
+4. **Representação vetorial** eficiente usando matrizes esparsas.
+
+5. **Busca**: implementa o processamento de consultas e cálculo de similaridade:
+
+    - Conversão da consulta em um vetor **TF-IDF**;
+    - Cálculo da similaridade de cosseno entre a consulta e todos os documentos;
+    - Ordenação dos resultados por relevância.
+
+6. **Interface de usuário**: fornece métodos para visualizar informações do sistema e resultados de busca.
+
+Na função `demonstrateWithExampleCorpus()`, utilizamos o corpus de três documentos mencionado no texto como exemplo, e demonstramos buscas com diferentes consultas para mostrar como o sistema ranqueia os documentos por relevância.
+
+Esta implementação é uma aplicação prática dos conceitos teóricos apresentados no texto, mostrando como o **TF-IDF** pode ser usado para construir um sistema de recuperação de informação funcional.
 
 ### One-Hot Encoding
 
-Finalmente, chegamos ao **One-Hot Encoding**. Embora menos comum para representar diretamente *textos inteiros* em tarefas de processamento de linguagem natural (PNL) de nível superior, o one-hot encoding é fundamental como um passo inicial para representar *palavras individuais* ou *caracteres* numericamente.
+Chegamos ao **One-Hot Encoding**. Embora menos comum para representar diretamente *textos inteiros* em tarefas de processamento de linguagem natural mais sofisticados, o **One-Hot Encoding** é frequentemente usado como um passo inicial para representar *palavras individuais* ou *caracteres* numericamente em processamentos complexos.
 
-Em one-hot encoding, cada palavra (ou caractere) no vocabulário $V$ é representada por um vetor binário $\vec{e}_w$. O tamanho do vetor é igual ao tamanho do vocabulário, $\vert V\vert$. Para cada palavra $w_i \in V$, o vetor $\vec{e}_{w_i}$ terá todos os valores como 0, exceto na posição $i$ correspondente à palavra $w_i$ no vocabulário, onde o valor será 1.
+Em **One-Hot Encoding**, cada palavra, ou caractere, do vocabulário $V$ será representada por um vetor binário $\vec{e}_w$. Neste caso, o tamanho do vetor será igual ao tamanho do vocabulário, $\vert V\vert$. Para cada palavra $w_i \in V$, o vetor $\vec{e}_{w_i}$ terá todos os valores como $0$, exceto na posição $i$ correspondente à palavra $w_i$ no vocabulário, onde o valor será $1$.
 
-Formalmente, se $V = \{w_1, w_2, ..., w_{\vert V\vert }\}$ é o vocabulário ordenado, então o one-hot encoding para a palavra $w_i$ é um vetor $\vec{e}_{w_i} \in \mathbb{R}^{\vert V\vert }$ tal que:
+Formalmente, teremos: se $V = \{w_1, w_2, ..., w_{\vert V\vert }\}$ é o vocabulário ordenado, então o **One-Hot Encoding** para a palavra $w_i$ é um vetor $\vec{e}_{w_i} \in \mathbb{R}^{\vert V\vert}$ tal que:
 
 $$
 (\vec{e}_{w_i})_j =
@@ -1459,16 +2640,16 @@ $$
 \end{cases}
 $$
 
-Para o vocabulário $V'_{global} = \{ \text{"dorme"}, \text{"é"}, \text{"gato"}, \text{"no"}, \text{"o"}, \text{"preto"}, \text{"subiu"}, \text{"telhado"} \}$., o one-hot encoding seria:
+Para o vocabulário $V'_{global} = \{ \text{"dorme"}, \text{"é"}, \text{"gato"}, \text{"no"}, \text{"o"}, \text{"preto"}, \text{"subiu"}, \text{"telhado"} \}$., o **One-Hot Encoding** seria:
 
-*   $\vec{e}_{\text{"dorme"}} = [1, 0, 0, 0, 0, 0, 0, 0]^T$
-*   $\vec{e}_{\text{"é"}} = [0, 1, 0, 0, 0, 0, 0, 0]^T$
-*   $\vec{e}_{\text{"gato"}} = [0, 0, 1, 0, 0, 0, 0, 0]^T$
-*   $\vec{e}_{\text{"no"}} = [0, 0, 0, 1, 0, 0, 0, 0]^T$
-*   $\vec{e}_{\text{"o"}} = [0, 0, 0, 0, 1, 0, 0, 0]^T$
-*   $\vec{e}_{\text{"preto"}} = [0, 0, 0, 0, 0, 1, 0, 0]^T$
-*   $\vec{e}_{\text{"subiu"}} = [0, 0, 0, 0, 0, 0, 1, 0]^T$
-*   $\vec{e}_{\text{"telhado"}} = [0, 0, 0, 0, 0, 0, 0, 1]^T$
+- $\vec{e}_{\text{"dorme"}} = [1, 0, 0, 0, 0, 0, 0, 0]^T$
+- $\vec{e}_{\text{"é"}} = [0, 1, 0, 0, 0, 0, 0, 0]^T$
+- $\vec{e}_{\text{"gato"}} = [0, 0, 1, 0, 0, 0, 0, 0]^T$
+- $\vec{e}_{\text{"no"}} = [0, 0, 0, 1, 0, 0, 0, 0]^T$
+- $\vec{e}_{\text{"o"}} = [0, 0, 0, 0, 1, 0, 0, 0]^T$
+- $\vec{e}_{\text{"preto"}} = [0, 0, 0, 0, 0, 1, 0, 0]^T$
+- $\vec{e}_{\text{"subiu"}} = [0, 0, 0, 0, 0, 0, 1, 0]^T$
+- $\vec{e}_{\text{"telhado"}} = [0, 0, 0, 0, 0, 0, 0, 1]^T$
 
 One-hot encoding é extremamente simples e garante que cada palavra seja representada de forma única e independente. É frequentemente usado como entrada para modelos de aprendizado profundo, especialmente em camadas iniciais de redes neurais.
 
@@ -1493,7 +2674,6 @@ a \cdot b = (0 * 1) + (1 * 0) + (0 * 0) = 0 + 0 + 0 = 0
 $$
 
 Os dois exemplos anteriores mostram como os produtos escalares podem ser usados para medir a similaridade. Como outro exemplo, considere um vetor de valores que representa uma combinação de palavras com diferentes pesos. Uma palavra codificada one-hot pode ser comparada com ele usando o produto escalar para mostrar o quão fortemente essa palavra é representada.
-
 
 ## Multiplicação de Matrizes
 
@@ -1560,7 +2740,7 @@ $$
 A \cdot B = \begin{bmatrix} 10 & 11 \\ 40 & 41 \\ 30 & 31 \end{bmatrix}
 $$
 
-# Codificação One-Hot
+## Codificação One-Hot
 
 No início, havia as palavras. Muitas palavras. Nosso primeiro passo é converter todas as palavras em números para podermos fazer cálculos com elas.
 
@@ -1578,20 +2758,20 @@ Outra maneira de pensar na codificação one-hot é que cada palavra ainda receb
 
 Um vocabulário codificado one-hot (Exemplo):
 
-\vert  Palavra \vert  Representação Numérica \vert  Representação One-Hot \vert 
-\vert ---\vert ---\vert ---\vert 
-\vert  maçã     \vert  1                    \vert  [1, 0, 0, 0]          \vert 
-\vert  banana    \vert  2                    \vert  [0, 1, 0, 0]          \vert 
-\vert  encontrar \vert  3                    \vert  [0, 0, 1, 0]          \vert 
-\vert  fruta  \vert  4                    \vert  [0, 0, 0, 1]          \vert 
+\vert  Palavra \vert  Representação Numérica \vert  Representação One-Hot \vert
+\vert ---\vert ---\vert ---\vert
+\vert  maçã     \vert  1                    \vert  [1, 0, 0, 0]          \vert
+\vert  banana    \vert  2                    \vert  [0, 1, 0, 0]          \vert
+\vert  encontrar \vert  3                    \vert  [0, 0, 1, 0]          \vert
+\vert  fruta  \vert  4                    \vert  [0, 0, 0, 1]          \vert
 
 Então, a frase "Encontrar fruta maçã" se torna uma sequência de arrays unidimensionais que, depois de comprimidos juntos, começa a parecer um array bidimensional.
 
 Uma frase codificada one-hot (Exemplo):
 "Encontrar fruta maçã" =  `[[0, 0, 1, 0], [0, 0, 0, 1], [1, 0, 0, 0]]`
 
+### Modelo de Sequência de Primeira Ordem
 
-Modelo de Sequência de Primeira Ordem
 Podemos deixar as matrizes de lado por um minuto e voltar ao que realmente nos importa, sequências de palavras. Imagine que, à medida que começamos a desenvolver nossa interface de computador de linguagem natural, queremos lidar apenas com três comandos possíveis:
 
 Mostre-me meus diretórios, por favor.
@@ -1870,7 +3050,7 @@ Arquitetura do transformador mostrando a atenção multi-head
 
 A sequência [n x d_model] de palavras embedded serve como base para tudo o que se segue. Em cada caso, existe uma matriz, Wv, Wq e Wk, (todas mostradas de forma pouco útil como blocos "Linear" no diagrama de arquitetura) que transforma a sequência original de palavras embedded na matriz de valores, V, na matriz de consultas, Q, e na matriz de chaves, K. K e Q têm a mesma forma, [n x d_k], mas V pode ser diferente, [n x d_v]. Confunde um pouco o fato de d_k e d_v serem os mesmos no artigo, mas eles não precisam ser. Um aspecto importante dessa configuração é que cada cabeça de atenção tem suas próprias transformações Wv, Wq e Wk. Isso significa que cada cabeça pode ampliar e focar nas partes do espaço embedded que deseja, e pode ser diferente do que cada uma das outras cabeças está focando.
 
-O resultado de cada cabeça de atenção tem a mesma forma que V. Agora temos o problema de h vetores de resultado diferentes, cada um atendendo a diferentes elementos da sequência. Para combinar esses em um único vetor gigante, exploramos os poderes da álgebra linear e simplesmente concatenamos todos esses resultados em uma matriz gigante [n x h * d_v]. Em seguida, para garantir que ele termine na mesma forma com que começou, usamos mais uma transformação com a forma [h * d_v x d_model].
+O resultado de cada cabeça de atenção tem a mesma forma que V. Agora temos o problema de h vetores de resultado diferentes, cada um atendendo a diferentes elementos da sequência. Para combinar esses em um único vetor gigante, exploramos os poderes da álgebra linear e simplesmente concatenamos todos esses resultados em uma matriz gigante $[n \times h \times d_v]$. Em seguida, para garantir que ele termine na mesma forma com que começou, usamos mais uma transformação com a forma $[h \times d_v \times d_model]$.
 
 Aqui está tudo isso, dito de forma concisa.
 
