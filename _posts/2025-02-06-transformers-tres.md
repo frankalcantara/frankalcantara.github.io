@@ -20,41 +20,8 @@ keywords: ""
 toc: true
 published: false
 beforetoc: ""
-lastmod: 2025-04-01T13:25:30.807Z
+lastmod: 2025-04-01T13:28:46.044Z
 ---
-
-Neste artigo, a curiosa leitora irá enfrentar os *Transformers*. Nenhuma relação com o o Optimus Prime. Se for estes *Transformers* que está procurando, **o Google falhou com você!**
-
-
-## Codificação One-Hot
-
-No início, havia as palavras. Muitas palavras. Nosso primeiro passo é converter todas as palavras em números para podermos fazer cálculos com elas.
-
-Imagine que nosso objetivo é criar um computador que responde aos nossos comandos de voz. É nossa tarefa construir o transformador que converte (ou transduz) uma sequência de sons em uma sequência de palavras.
-
-Começamos escolhendo nosso vocabulário, a coleção de símbolos com os quais vamos trabalhar em cada sequência. Em nosso caso, haverá dois conjuntos diferentes de símbolos: um para a sequência de entrada para representar sons vocais e outro para a sequência de saída para representar palavras.
-
-Por enquanto, vamos supor que estamos trabalhando com o inglês. Existem dezenas de milhares de palavras na língua inglesa e, talvez, mais algumas milhares para cobrir a terminologia específica de computadores. Isso nos daria um tamanho de vocabulário que é quase cem mil. Uma maneira de converter palavras em números é começar a contar a partir de um e atribuir a cada palavra seu próprio número. Então, uma sequência de palavras pode ser representada como uma lista de números.
-
-Por exemplo, considere um pequeno idioma com um tamanho de vocabulário de quatro: maçã, banana, encontrar e fruta. Cada palavra poderia ser trocada por um número, talvez maçã = 1, banana = 2, encontrar = 3 e fruta = 4. Então, a frase "encontrar fruta maçã", consistindo na sequência de palavras [encontrar, fruta, maçã], poderia ser representada em vez disso como a sequência de números [3, 4, 1].
-
-Essa é uma maneira perfeitamente válida de converter símbolos em números, mas acaba que existe outro formato que é ainda mais fácil para os computadores trabalharem, a codificação one-hot. Na codificação one-hot, um símbolo é representado por um array de quase todos zeros, com o mesmo comprimento do vocabulário, com apenas um único elemento tendo um valor de um. Cada elemento no array corresponde a um símbolo separado.
-
-Outra maneira de pensar na codificação one-hot é que cada palavra ainda recebe seu próprio número, mas agora esse número é um índice para um array. Aqui está nosso exemplo acima, em notação one-hot.
-
-Um vocabulário codificado one-hot (Exemplo):
-
-\vert  Palavra \vert  Representação Numérica \vert  Representação One-Hot \vert
-\vert ---\vert ---\vert ---\vert
-\vert  maçã     \vert  1                    \vert  [1, 0, 0, 0]          \vert
-\vert  banana    \vert  2                    \vert  [0, 1, 0, 0]          \vert
-\vert  encontrar \vert  3                    \vert  [0, 0, 1, 0]          \vert
-\vert  fruta  \vert  4                    \vert  [0, 0, 0, 1]          \vert
-
-Então, a frase "Encontrar fruta maçã" se torna uma sequência de arrays unidimensionais que, depois de comprimidos juntos, começa a parecer um array bidimensional.
-
-Uma frase codificada one-hot (Exemplo):
-"Encontrar fruta maçã" =  `[[0, 0, 1, 0], [0, 0, 0, 1], [1, 0, 0, 0]]`
 
 ### Modelo de Sequência de Primeira Ordem
 
