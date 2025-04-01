@@ -30,7 +30,7 @@ keywords:
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-04-01T10:40:32.765Z
+lastmod: 2025-04-01T12:12:56.231Z
 ---
 
 Neste artigo, a curiosa leitora irá enfrentar os *Transformers*. Nenhuma relação com o o Optimus Prime. Se for estes *Transformers* que está procurando, **o Google falhou com você!**
@@ -617,9 +617,9 @@ O modelo **Bag of Words (BoW)**, ou *saco de palavras*, é uma variação da rep
 
 O algoritmo **Bag of Words (BoW)** surgiu da área de recuperação de informação e processamento de linguagem natural. Embora a ideia de representar textos como "sacos de palavras" tenha evoluído ao longo do tempo, um dos trabalhos seminais que formalizou e popularizou essa abordagem é frequentemente creditado a [Gerard Salton](https://en.wikipedia.org/wiki/Gerard_Salton) e seus colaboradores no contexto do sistema SMART (*System for the Mechanical Analysis and Retrieval of Text*) [^5], [^6].
 
-[^5]: SALTON, G.; LESK, M. E. **The SMART Automatic Document Retrieval System—An Illustration**. Communications of the ACM, v. 8, n. 9, p. 391-398, 1965. Disponível em: https://apastyle.apa.org/blog/citing-online-works. Acesso em: [Data de acesso].
+[^5]: SALTON, G.; LESK, M. E. **The SMART Automatic Document Retrieval System—An Illustration**. Communications of the ACM, v. 8, n. 9, p. 391-398, 1965. Disponível em: https://apastyle.apa.org/blog/citing-online-works. Acesso em: 27 de fevereiro de 2025.
 
-[^6]:SALTON, G.; WONG, A.; YANG, C. S. **A vector space model for automatic indexing**. Communications of the ACM, v. 18, n. 11, p. 613-620, 1975. Disponível em: https://apastyle.apa.org/blog/citing-online-works. Acesso em: [Data de acesso].
+[^6]:SALTON, G.; WONG, A.; YANG, C. S. **A vector space model for automatic indexing**. Communications of the ACM, v. 18, n. 11, p. 613-620, 1975. Disponível em: https://apastyle.apa.org/blog/citing-online-works. Acesso em: 10 de março de 2025.
 
 Para entender o **BoW** matematicamente, vamos considerar um conjunto de documentos, *corpus*, $Docs = \{D_1, D_2, ..., D_N\}$. Para construir o **BoW**, nossa primeira ação será construir um vocabulário global $V_{global}$ que conterá todas as palavras únicas que existem em todos os documentos de $Docs$:
 
