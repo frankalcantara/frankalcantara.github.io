@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Transformers - A Temida Matemática
+title: Transformers - Mude o Título
 author: frank
 categories:
     - disciplina
@@ -20,7 +20,7 @@ keywords: ""
 toc: true
 published: false
 beforetoc: ""
-lastmod: 2025-04-01T12:14:24.684Z
+lastmod: 2025-04-01T12:27:14.654Z
 ---
 
 Neste artigo, a curiosa leitora irá enfrentar os *Transformers*. Nenhuma relação com o o Optimus Prime. Se for estes *Transformers* que está procurando, **o Google falhou com você!**
