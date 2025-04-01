@@ -32,7 +32,7 @@ keywords:
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-04-01T12:50:51.050Z
+lastmod: 2025-04-01T13:57:31.174Z
 ---
 
 Neste artigo, a curiosa leitora irá enfrentar os *Transformers*. Nenhuma relação com o o Optimus Prime. Se for estes *Transformers* que está procurando, **o Google falhou com você!**
@@ -914,4 +914,358 @@ int main() {
     return 0;
 }
 ```
-Vetorização é o tema do próximo artigo.
+Agora que conhecemos o produto escalar, podemos nos aprofundar na matemática que é o coração do processamento de linguagem natural: a multiplicação de matrizes.
+
+### Multiplicação de Matrizes
+
+A multiplicação de matrizes é uma operação fundamental na álgebra linear que aparece constantemente nos modelos de **transformers**. Esta operação irá permitir a combinação de diferentes fontes de textos e transformar representações vetoriais, formando a base de diversas operações nos modelos de processamento de linguagem natural.
+
+A multiplicação de matrizes é uma operação que combina duas matrizes para produzir uma nova matriz. É importante notar que *a multiplicação de matrizes não é comutativa, ou seja, a ordem das matrizes importa*. A multiplicação de matrizes é definida como o produto escalar entre as linhas da primeira matriz e as colunas da segunda matriz.
+
+Formalmente dizemos: sejam $A$ uma matriz de dimensão $m \times n$ e $B$ uma matriz de dimensão $n \times p$. O produto $A \times B$ resultará em uma matriz $C$ de dimensão $m \times p$, onde cada elemento $c_{ij}$ é determinado pelo produto escalar da $i$-ésima linha de $A$ com a $j$-ésima coluna de $B$:
+
+$$
+c_{ij} = \sum_{k=1}^{n} a_{ik} \cdot b_{kj}
+$$
+
+Observe, atenta leitora, que para que a multiplicação de matrizes seja possível, *o número de colunas da primeira matriz deve ser igual ao número de linhas da segunda matriz*. Esta restrição não é arbitrária - ela garante que os produtos escalares entre linhas e colunas sejam bem definidos.
+
+![matriz A multiplicada por matriz B resultando em matriz C](/assets/images/matrix_mult1.webp)
+
+_Figura 3: Visualização da multiplicação de matrizes. Cada elemento $c_{ij}$ da matriz resultante é obtido pelo produto escalar da linha $i$ da matriz $A$ com a coluna $j$ da matriz $B$._{: class="legend"}
+
+Nos modelos **transformer**, a multiplicação de matrizes ocorre com frequência em várias etapas, como:
+
+1. **Atenção**: O mecanismo de atenção utiliza multiplicações de matrizes para calcular as representações de query, key e value.
+2. **Embedding de Tokens**: Transformação de tokens discretos em vetores contínuos de alta dimensão.
+3. **Projeções Lineares**: Transformações dos vetores de query, key e value no mecanismo de atenção.
+4. **Feed-Forward Networks**: Camadas densas que aplicam transformações não-lineares às representações.
+5. **Projeções de Saída**: Mapeamento das representações finais para o espaço de saída desejado.
+
+A eficiência dos modelos **transformers** deve-se, em parte, à capacidade de paralelizar estas multiplicações de matrizes em hardware especializado, como GPUs e TPUs.
+
+#### Propriedades Importantes
+
+A multiplicação de matrizes possui algumas propriedades notáveis que a diferenciam da multiplicação de números reais:
+
+1. **Não comutativa**: em geral, $A \times B \neq B \times A$. A ordem das operações importa.
+2. **Associativa**: $(A \times B) \times C = A \times (B \times C)$. Podemos calcular multiplicações sucessivas em qualquer ordem.
+3. **Distributiva sobre a adição**: $A \times (B + C) = A \times B + A \times C$.
+4. **Elemento neutro**: $A \times I = I \times A = A$, onde $I$ é a matriz identidade de dimensão apropriada.
+
+#### Interpretação Geométrica
+
+Geometricamente, a multiplicação por uma matriz pode ser vista como uma transformação linear no espaço vetorial. Estas transformações podem incluir: rotações, mudança de escala, reflexões, cisalhamentos e projeções. Dependendo da matriz, a transformação pode alterar a posição, a forma ou a orientação dos vetores no espaço.
+
+Nos **transformers**, estas transformações são aplicadas para mapear representações vetoriais de um espaço para outro, permitindo que a rede aprenda relações complexas entre os elementos da sequência de entrada.
+
+#### Exemplo Numérico
+
+Nada como um exemplo numérico para fazer a esforçada leitora balançar a poeira. Vamos consider as duas matrizes, $A$ e $B$:
+
+$$
+A = \begin{bmatrix} 2 & 3 \\ 4 & 1 \end{bmatrix} \quad \text{e} \quad B = \begin{bmatrix} 1 & 5 \\ 2 & 3 \end{bmatrix}
+$$
+
+O produto $C = A \times B$ será:
+
+$$
+\begin{align}
+c_{11} &= a_{11} \cdot b_{11} + a_{12} \cdot b_{21} = 2 \times 1 + 3 \times 2 = 2 + 6 = 8 \\
+c_{12} &= a_{11} \cdot b_{12} + a_{12} \cdot b_{22} = 2 \times 5 + 3 \times 3 = 10 + 9 = 19 \\
+c_{21} &= a_{21} \cdot b_{11} + a_{22} \cdot b_{21} = 4 \times 1 + 1 \times 2 = 4 + 2 = 6 \\
+c_{22} &= a_{21} \cdot b_{12} + a_{22} \cdot b_{22} = 4 \times 5 + 1 \times 3 = 20 + 3 = 23
+\end{align}
+$$
+
+Portanto:
+
+$$
+C = A \times B = \begin{bmatrix} 8 & 19 \\ 6 & 23 \end{bmatrix}
+$$
+
+#### Multiplicação Matriz-Vetor
+
+Um caso especial e extremamente importante, para nossos objetivos, é a multiplicação de uma matriz por um vetor. A perceptiva leitora há de considerar que *um vetor que pode ser visto como uma matriz com apenas uma coluna*. Esta operação é recorrente em praticamente todas as camadas de um modelo **transformer**.
+
+Seja $A$ uma matriz $m \times n$ e $\vec{v}$ um vetor coluna de dimensão $n$. O produto $A\vec{v}$ resulta em um vetor coluna $\vec{w}$ de dimensão $m$:
+
+$$
+\vec{w} = A\vec{v} = \begin{bmatrix} 
+a_{11} & a_{12} & \cdots & a_{1n} \\ 
+a_{21} & a_{22} & \cdots & a_{2n} \\ 
+\vdots & \vdots & \ddots & \vdots \\ 
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{bmatrix}
+\begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix} = 
+\begin{bmatrix} 
+\sum_{j=1}^{n} a_{1j}v_j \\ 
+\sum_{j=1}^{n} a_{2j}v_j \\ 
+\vdots \\ 
+\sum_{j=1}^{n} a_{mj}v_j
+\end{bmatrix}
+$$
+
+Cada componente $w_i$ do vetor resultante é o produto escalar da $i$-ésima linha da matriz $A$ com o vetor $\vec{v}$. Este padrão de operação repete-se continuamente no mecanismo de atenção dos *transformers*.
+
+**Exemplo**: Considerando a matriz $A$ definida acima e o vetor $\vec{v} = \begin{bmatrix} 3 \\ 2 \end{bmatrix}$, temos:
+
+$$
+A\vec{v} = \begin{bmatrix} 2 & 3 \\ 4 & 1 \end{bmatrix} \begin{bmatrix} 3 \\ 2 \end{bmatrix} = \begin{bmatrix} (2 \times 3) + (3 \times 2) \\ (4 \times 3) + (1 \times 2) \end{bmatrix} = \begin{bmatrix} 6 + 6 \\ 12 + 2 \end{bmatrix} = \begin{bmatrix} 12 \\ 14 \end{bmatrix}
+$$
+
+#### Exemplo em C++ 20
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <iomanip>
+#include <stdexcept>
+
+template<typename T>
+class Matrix {
+private:
+    std::vector<std::vector<T>> data;
+    size_t rows;
+    size_t cols;
+
+public:
+    // Construtor para matriz de dimensões m x n com valor inicial
+    Matrix(size_t m, size_t n, T initial_value = T{}) 
+        : rows(m), cols(n), data(m, std::vector<T>(n, initial_value)) {}
+    
+    // Construtor a partir de um vector de vectors
+    Matrix(const std::vector<std::vector<T>>& values) {
+        if (values.empty()) {
+            rows = 0;
+            cols = 0;
+            return;
+        }
+        
+        rows = values.size();
+        cols = values[0].size();
+        
+        // Verifica se todas as linhas têm o mesmo tamanho
+        for (const auto& row : values) {
+            if (row.size() != cols) {
+                throw std::invalid_argument("Todas as linhas devem ter o mesmo número de colunas");
+            }
+        }
+        
+        data = values; // Copia os dados
+    }
+    
+    // Acesso aos elementos (com verificação de limites)
+    T& at(size_t i, size_t j) {
+        if (i >= rows || j >= cols) {
+            throw std::out_of_range("Índices fora dos limites da matriz");
+        }
+        return data[i][j];
+    }
+    
+    const T& at(size_t i, size_t j) const {
+        if (i >= rows || j >= cols) {
+            throw std::out_of_range("Índices fora dos limites da matriz");
+        }
+        return data[i][j];
+    }
+    
+    // Obter dimensões
+    size_t num_rows() const { return rows; }
+    size_t num_cols() const { return cols; }
+    
+    // Multiplicação de matrizes
+    Matrix<T> operator*(const Matrix<T>& other) const {
+        if (cols != other.rows) {
+            throw std::invalid_argument("Dimensões incompatíveis para multiplicação de matrizes");
+        }
+        
+        Matrix<T> result(rows, other.cols, T{});
+        
+        for (size_t i = 0; i < rows; ++i) {
+            for (size_t j = 0; j < other.cols; ++j) {
+                for (size_t k = 0; k < cols; ++k) {
+                    result.data[i][j] += data[i][k] * other.data[k][j];
+                }
+            }
+        }
+        
+        return result;
+    }
+    
+    // Multiplicação por vetor (representado como matriz coluna)
+    std::vector<T> multiply_vector(const std::vector<T>& vec) const {
+        if (cols != vec.size()) {
+            throw std::invalid_argument("Dimensões incompatíveis para multiplicação matriz-vetor");
+        }
+        
+        std::vector<T> result(rows, T{});
+        
+        for (size_t i = 0; i < rows; ++i) {
+            for (size_t j = 0; j < cols; ++j) {
+                result[i] += data[i][j] * vec[j];
+            }
+        }
+        
+        return result;
+    }
+    
+    // Impressão formatada da matriz
+    void print(const std::string& name = "") const {
+        if (!name.empty()) {
+            std::cout << name << " =\n";
+        }
+        
+        for (size_t i = 0; i < rows; ++i) {
+            std::cout << "[";
+            for (size_t j = 0; j < cols; ++j) {
+                std::cout << std::fixed << std::setprecision(2) << data[i][j];
+                if (j < cols - 1) std::cout << ", ";
+            }
+            std::cout << "]\n";
+        }
+    }
+};
+
+int main() {
+    std::cout << std::fixed << std::setprecision(2);
+    std::cout << "Demonstração de Multiplicação de Matrizes\n";
+    std::cout << "----------------------------------------\n\n";
+    
+    // Exemplo 1: Multiplicação de duas matrizes
+    Matrix<double> A({
+        {2.0, 3.0},
+        {4.0, 1.0}
+    });
+    
+    Matrix<double> B({
+        {1.0, 5.0},
+        {2.0, 3.0}
+    });
+    
+    std::cout << "Exemplo 1: Multiplicação de duas matrizes\n";
+    A.print("Matriz A");
+    B.print("Matriz B");
+    
+    try {
+        Matrix<double> C = A * B;
+        C.print("A * B");
+    } catch (const std::exception& e) {
+        std::cerr << "Erro: " << e.what() << '\n';
+    }
+    
+    // Exemplo 2: Multiplicação matriz-vetor
+    std::vector<double> v = {3.0, 2.0};
+    
+    std::cout << "\nExemplo 2: Multiplicação matriz-vetor\n";
+    A.print("Matriz A");
+    std::cout << "Vetor v = [" << v[0] << ", " << v[1] << "]\n";
+    
+    try {
+        std::vector<double> result = A.multiply_vector(v);
+        std::cout << "A * v = [";
+        for (size_t i = 0; i < result.size(); ++i) {
+            std::cout << result[i];
+            if (i < result.size() - 1) std::cout << ", ";
+        }
+        std::cout << "]\n";
+    } catch (const std::exception& e) {
+        std::cerr << "Erro: " << e.what() << '\n';
+    }
+    
+    // Exemplo 3: Demonstração de erro (dimensões incompatíveis)
+    Matrix<double> D({
+        {1.0, 2.0, 3.0},
+        {4.0, 5.0, 6.0}
+    });
+    
+    std::cout << "\nExemplo 3: Tentativa de multiplicação com dimensões incompatíveis\n";
+    A.print("Matriz A (2x2)");
+    D.print("Matriz D (2x3)");
+    
+    try {
+        Matrix<double> E = D * A; // Isso deve falhar (3 colunas × 2 linhas)
+        E.print("D * A");
+    } catch (const std::exception& e) {
+        std::cout << "Erro (esperado): " << e.what() << '\n';
+    }
+    
+    return 0;
+}
+
+Ou, como a preocupada leitora pode preferir, em C++ 20 usando a biblioteca Eigen: 
+
+```cpp
+#include <iostream>
+#include <iomanip>
+#include <Eigen/Dense>
+#include <string>
+#include <stdexcept>
+
+int main() {
+    std::cout << std::fixed << std::setprecision(2);
+    std::cout << "Demonstração de Multiplicação de Matrizes\n";
+    std::cout << "----------------------------------------\n\n";
+    
+    // Exemplo 1: Multiplicação de duas matrizes
+    Eigen::Matrix2d A;
+    A << 2.0, 3.0,
+         4.0, 1.0;
+    
+    Eigen::Matrix2d B;
+    B << 1.0, 5.0,
+         2.0, 3.0;
+    
+    std::cout << "Exemplo 1: Multiplicação de duas matrizes\n";
+    std::cout << "Matriz A =\n" << A << "\n\n";
+    std::cout << "Matriz B =\n" << B << "\n\n";
+    
+    try {
+        Eigen::Matrix2d C = A * B;
+        std::cout << "A * B =\n" << C << "\n\n";
+    } catch (const std::exception& e) {
+        std::cerr << "Erro: " << e.what() << '\n';
+    }
+    
+    // Exemplo 2: Multiplicação matriz-vetor
+    Eigen::Vector2d v;
+    v << 3.0, 2.0;
+    
+    std::cout << "Exemplo 2: Multiplicação matriz-vetor\n";
+    std::cout << "Matriz A =\n" << A << "\n\n";
+    std::cout << "Vetor v =\n" << v << "\n\n";
+    
+    try {
+        Eigen::Vector2d result = A * v;
+        std::cout << "A * v =\n" << result << "\n\n";
+    } catch (const std::exception& e) {
+        std::cerr << "Erro: " << e.what() << '\n';
+    }
+    
+    // Exemplo 3: Demonstração de erro (dimensões incompatíveis)
+    Eigen::MatrixXd D(2, 3);
+    D << 1.0, 2.0, 3.0,
+         4.0, 5.0, 6.0;
+    
+    std::cout << "Exemplo 3: Tentativa de multiplicação com dimensões incompatíveis\n";
+    std::cout << "Matriz A (2x2) =\n" << A << "\n\n";
+    std::cout << "Matriz D (2x3) =\n" << D << "\n\n";
+    
+    try {
+        // Verificação explícita de dimensões (para ser didático)
+        if (D.cols() != A.rows()) {
+            throw std::invalid_argument("Dimensões incompatíveis: D é 2x3 e A é 2x2");
+        }
+        
+        // Eigen lançará uma asserção estática aqui se compilado com verificações
+        Eigen::MatrixXd E = D * A;
+        std::cout << "D * A =\n" << E << "\n\n";
+    } catch (const std::exception& e) {
+        std::cout << "Erro (esperado): " << e.what() << '\n';
+    }
+    
+    return 0;
+}
+```
+
+Agora que vimos o básico da matemática, a vetorização de textos será o tema do próximo artigo.
