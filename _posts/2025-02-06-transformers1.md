@@ -13,7 +13,7 @@ tags:
 image: assets/images/trans1.webp
 featured: false
 rating: 0
-description: ""
+description: Uma introdução a matemática que suporta a criação de transformers para processamento de linguagem natural com exemplos de código em C++20.
 date: 2025-02-09T22:55:34.524Z
 preview: Uma introdução a matemática que suporta a criação de transformers para processamento de linguagem natural com exemplos de código em C++20.
 keywords:
@@ -32,7 +32,7 @@ keywords:
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-04-01T10:26:23.385Z
+lastmod: 2025-04-01T12:17:50.037Z
 ---
 
 Neste artigo, a curiosa leitora irá enfrentar os *Transformers*. Nenhuma relação com o o Optimus Prime. Se for estes *Transformers* que está procurando, **o Google falhou com você!**
