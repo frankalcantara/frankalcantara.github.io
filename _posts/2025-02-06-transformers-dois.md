@@ -10,7 +10,7 @@ tags:
     - C++
     - Matemática
     - inteligência artificial
-image: assets/images/trans1.webp
+image: assets/images/transformers2.webp
 featured: false
 rating: 5
 description: Técnicas de vetorização mais básicas, como a frequência de termos e o modelo Bag of Words (BoW) e TF-IDF.
@@ -30,7 +30,7 @@ keywords:
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-04-01T12:35:20.349Z
+lastmod: 2025-04-01T12:49:27.747Z
 ---
 
 Neste artigo, a curiosa leitora irá enfrentar os *Transformers*. Nenhuma relação com o o Optimus Prime. Se for estes *Transformers* que está procurando, **o Google falhou com você!**

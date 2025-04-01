@@ -10,7 +10,7 @@ tags:
     - C++
     - Matemática
     - inteligência artificial
-image: assets/images/trans1.webp
+image: assets/images/transformers1.webp
 featured: false
 rating: 5
 description: Uma introdução a matemática que suporta a criação de transformers para processamento de linguagem natural com exemplos de código em C++20.
@@ -32,7 +32,7 @@ keywords:
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-04-01T12:35:23.788Z
+lastmod: 2025-04-01T12:50:51.050Z
 ---
 
 Neste artigo, a curiosa leitora irá enfrentar os *Transformers*. Nenhuma relação com o o Optimus Prime. Se for estes *Transformers* que está procurando, **o Google falhou com você!**

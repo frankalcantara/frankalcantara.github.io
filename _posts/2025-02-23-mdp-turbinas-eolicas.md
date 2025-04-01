@@ -12,7 +12,7 @@ tags:
   - inteligência artificial
   - resolução de problemas
   - paradigmas de programação
-image: assets/images/mdp1.webp
+image: assets/images/transformers1.webp
 featured: false
 rating: 5
 description: Aplicação prática do MDP de um artigo científico, detalhado de forma didática. Muita matemática.
@@ -22,7 +22,7 @@ keywords: Reinforcement Learning, Markov Decision Processes (MDP), Manutenção 
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-03-31T01:36:25.710Z
+lastmod: 2025-04-01T12:50:13.956Z
 slug: mdp-casos-reais-manutencao-de-turbinas-eolicas
 ---
 
