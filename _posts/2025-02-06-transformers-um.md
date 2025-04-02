@@ -32,7 +32,7 @@ keywords:
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-04-01T13:57:31.174Z
+lastmod: 2025-04-02T18:10:09.146Z
 ---
 
 Neste artigo, a curiosa leitora irá enfrentar os *Transformers*. Nenhuma relação com o o Optimus Prime. Se for estes *Transformers* que está procurando, **o Google falhou com você!**
@@ -610,7 +610,7 @@ int main() {
 O produto escalar oferece uma medida quantitativa da similaridade direcional entre dois vetores. Embora não constitua uma métrica de similaridade completa em todos os contextos, fornece informações valiosas sobre o alinhamento vetorial. Em termos gerais, a interpretação do produto escalar $\vec{u} \cdot \vec{v}$ segue estas propriedades:
 
 $$
-\vec{u} \cdot \vec{v} = ||\vec{u}|| \cdot ||\vec{v}|| \cdot \cos(\theta)
+\vec{u} \cdot \vec{v} = \vert\vec{u}\vert \cdot \vert\vec{v}\vert \cdot \cos(\theta)
 $$
 
 Onde $\theta$ representa o ângulo entre os vetores, e podemos observar que:
@@ -671,10 +671,10 @@ A magnitude, pode ter interpretações diferentes em áreas diferentes do conhec
 
 *A atenta leitora deve observar que vetores com magnitudes maiores tendem a ter produtos escalares maiores, mesmo que a direção relativa seja a mesma.*
 
-Com as definições de produto escalar ($\vec{u} \cdot \vec{v}$) e magnitude ($||\vec{u}||$, $||\vec{v}||$) em mãos, podemos reorganizar a relação fundamental $\vec{u} \cdot \vec{v} = ||\vec{u}|| \cdot ||\vec{v}|| \cdot \cos(\theta)$ para isolar o cosseno do ângulo $\theta$. Isso nos fornece diretamente a fórmula da **Similaridade de Cosseno**, uma das métricas mais importantes em processamento de linguagem natural e recuperação de informação para medir a similaridade direcional entre dois vetores:
+Com as definições de produto escalar ($\vec{u} \cdot \vec{v}$) e magnitude ($\vert\vec{u}\vert$, $\vert\vec{v}\vert$) em mãos, podemos reorganizar a relação fundamental $\vec{u} \cdot \vec{v} = \vert\vec{u}\vert \cdot \vert\vec{v}\vert \cdot \cos(\theta)$ para isolar o cosseno do ângulo $\theta$. Isso nos fornece diretamente a fórmula da **Similaridade de Cosseno**, uma das métricas mais importantes em processamento de linguagem natural e recuperação de informação para medir a similaridade direcional entre dois vetores:
 
 $$
-\text{Similaridade de Cosseno}(\vec{u}, \vec{v}) = \cos(\theta) = \frac{\vec{u} \cdot \vec{v}}{||\vec{u}|| \cdot ||\vec{v}||}
+\text{Similaridade de Cosseno}(\vec{u}, \vec{v}) = \cos(\theta) = \frac{\vec{u} \cdot \vec{v}}{\vert\vec{u}\vert \cdot \vert\vec{v}\vert}
 $$
 
 Esta métrica varia no intervalo $[-1, 1]$:
@@ -692,21 +692,21 @@ Em alguns casos, a busca da similaridade implica na normalização dos vetores p
 
 >A normalização de um vetor $\vec{v}$ consiste em dividi-lo por sua norma (ou magnitude), resultando em um vetor unitário $\hat{v}$ que mantém a mesma direção, mas possui comprimento 1:
 >
->$$\hat{v} = \frac{\vec{v}}{||\vec{v}||} = \frac{\vec{v}}{\sqrt{v_1^2 + v_2^2 + \cdots + v_n^2}}$$
+>$$\hat{v} = \frac{\vec{v}}{\vert\vec{v}\vert} = \frac{\vec{v}}{\sqrt{v_1^2 + v_2^2 + \cdots + v_n^2}}$$
 >
->Neste caso, $||\vec{v}||$ representa a norma euclidiana do vetor. Quando dois vetores normalizados são comparados através do produto escalar, o resultado varia apenas entre $-1$ e $1$, correspondendo diretamente ao cosseno do ângulo entre eles. Esta abordagem é particularmente útil em aplicações como recuperação de informações, sistemas de recomendação e processamento de linguagem natural, onde a orientação semântica dos vetores é geralmente mais relevante que suas magnitudes absolutas.
+>Neste caso, $\vert\vec{v}\vert$ representa a norma euclidiana do vetor. Quando dois vetores normalizados são comparados através do produto escalar, o resultado varia apenas entre $-1$ e $1$, correspondendo diretamente ao cosseno do ângulo entre eles. Esta abordagem é particularmente útil em aplicações como recuperação de informações, sistemas de recomendação e processamento de linguagem natural, onde a orientação semântica dos vetores é geralmente mais relevante que suas magnitudes absolutas.
 
 >A norma euclidiana, também conhecida como norma $L_2$ ou comprimento euclidiano, é uma função que atribui a cada vetor um valor escalar não-negativo que pode ser interpretado como o "tamanho" ou "magnitude" do vetor. Para um vetor $\vec{v} = (v_1, v_2, \ldots, v_n)$ em $\mathbb{R}^n$, a norma euclidiana é definida como:
 >
->$$||\vec{v}|| = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2} = \sqrt{\sum_{i=1}^{n} v_i^2}$$
+>$$\vert\vec{v}\vert = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2} = \sqrt{\sum_{i=1}^{n} v_i^2}$$
 >
 >Esta definição é uma generalização do teorema de Pitágoras para espaços de dimensão arbitrária. Geometricamente, representa a distância do ponto representado pelo vetor à origem do sistema de coordenadas.
 >
 >A norma euclidiana possui as seguintes propriedades fundamentais:
 >
->1. **Não-negatividade**: $||\vec{v}|| \geq 0$ para todo $\vec{v}$, e $||\vec{v}|| = 0$ se e somente se $\vec{v} = \vec{0}$
->2. **Homogeneidade**: $||\alpha\vec{v}|| = |\alpha| \cdot ||\vec{v}||$ para qualquer escalar $\alpha$
->3. **Desigualdade triangular**: $||\vec{u} + \vec{v}|| \leq ||\vec{u}|| + ||\vec{v}||$
+>1. **Não-negatividade**: $\vert\vec{v}\vert \geq 0$ para todo $\vec{v}$, e $\vert\vec{v}\vert = 0$ se e somente se $\vec{v} = \vec{0}$
+>2. **Homogeneidade**: $\vert\alpha\vec{v}\vert = |\alpha| \cdot \vert\vec{v}\vert$ para qualquer escalar $\alpha$
+>3. **Desigualdade triangular**: $\vert\vec{u} + \vec{v}\vert \leq \vert\vec{u}\vert + \vert\vec{v}\vert$
 >
 >Estas propriedades fazem da norma euclidiana uma ferramenta essencial em diversos campos, desde geometria e física até aprendizado de máquina e processamento de sinais, onde é utilizada para medir distâncias, calcular erros, e normalizar vetores.
 
