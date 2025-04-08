@@ -23,8 +23,7 @@ keywords: |-
     MoE 
 toc: true
 published: true
-beforetoc: ""
-lastmod: 2025-02-02T01:06:30.243Z
+lastmod: 2025-04-08T19:52:34.458Z
 slug: deepseek-explicado-de-forma-simples
 ---
 

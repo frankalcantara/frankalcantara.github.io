@@ -39,8 +39,7 @@ keywords:
     - lstm
 toc: true
 published: false
-beforetoc: ""
-lastmod: 2025-04-08T18:59:18.299Z
+lastmod: 2025-04-08T19:52:34.616Z
 ---
 
 ## Modelando Sequências - Além da Frequência de Termos

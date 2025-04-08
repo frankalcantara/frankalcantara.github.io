@@ -1,28 +1,3 @@
----
-layout: post
-title: Transformers - Mude o Título
-author: frank
-categories:
-    - disciplina
-    - Matemática
-    - artigo
-tags:
-    - C++
-    - Matemática
-    - inteligência artificial
-image: assets/images/trans1.webp
-featured: false
-rating: 0
-description: ""
-date: 2025-02-09T22:55:34.524Z
-preview: ""
-keywords: ""
-toc: true
-published: false
-beforetoc: ""
-lastmod: 2025-04-01T13:28:46.044Z
----
-
 ### Modelo de Sequência de Primeira Ordem
 
 Podemos deixar as matrizes de lado por um minuto e voltar ao que realmente nos importa, sequências de palavras. Imagine que, à medida que começamos a desenvolver nossa interface de computador de linguagem natural, queremos lidar apenas com três comandos possíveis:

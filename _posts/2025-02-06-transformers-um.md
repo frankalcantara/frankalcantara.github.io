@@ -31,8 +31,7 @@ keywords:
     - inteligência artificial
 toc: true
 published: true
-beforetoc: ""
-lastmod: 2025-04-08T14:00:25.900Z
+lastmod: 2025-04-08T19:52:34.660Z
 ---
 
 Neste artigo, a curiosa leitora irá enfrentar os *Transformers*. Nenhuma relação com o o Optimus Prime. Se for estes *Transformers* que está procurando, **o Google falhou com você!**

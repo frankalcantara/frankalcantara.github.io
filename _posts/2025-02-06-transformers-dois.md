@@ -29,8 +29,7 @@ keywords:
     - embeddings
 toc: true
 published: true
-beforetoc: ""
-lastmod: 2025-04-02T18:09:50.343Z
+lastmod: 2025-04-08T19:52:34.541Z
 ---
 
 Neste artigo aprenderemos as técnicas de vetorização mais básicas, como a frequência de termos e o modelo *Bag of Words* (BoW). Vamos discutir como essas técnicas são usadas para representar textos como vetores numéricos, permitindo que os computadores processem e analisem linguagem natural.

@@ -19,8 +19,7 @@ preview: Nos últimos anos a aprendizagem por reforço (*reinforcement learning 
 keywords: Reinforcement Learning, História do RL, Richard Bellman, Q-Learning, Deep Q-Networks, AlphaGo, Processos de Decisão de Markov, Psicologia Comportamental, Dopamina e IA, Deep Reinforcement Learning.
 toc: true
 published: true
-beforetoc: ""
-lastmod: 2025-02-11T21:55:58.482Z
+lastmod: 2025-04-08T19:52:34.484Z
 draft: 2025-02-03T17:19:36.133Z
 ---
 

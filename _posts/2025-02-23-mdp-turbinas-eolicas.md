@@ -3,15 +3,15 @@ layout: post
 title: "MDP: Casos Reais - Manutenção de Turbinas Eólicas"
 author: Frank
 categories:
-  - artigo
-  - Matemática
-  - Inteligência Artificial
+    - artigo
+    - Matemática
+    - Inteligência Artificial
 tags:
-  - algoritmos
-  - C++
-  - inteligência artificial
-  - resolução de problemas
-  - paradigmas de programação
+    - algoritmos
+    - C++
+    - inteligência artificial
+    - resolução de problemas
+    - paradigmas de programação
 image: assets/images/transformers1.webp
 featured: false
 rating: 5
@@ -21,8 +21,7 @@ preview: Usando o MDP para resolver problemas da vida real. Neste caso um proble
 keywords: Reinforcement Learning, Markov Decision Processes (MDP), Manutenção de Turbinas Eólicas, Manutenção Preditiva Industrial, General Electric (GE), Grid World, Otimização de Manutenção, Distribuição de Poisson, Equações de Bellman, Iteração de Valor, Iteração de Política, Custo de Manutenção, Turbinas Eólicas, Estados de Deterioração, Manutenção Preventiva, Manutenção Corretiva, Intervalos de Inspeção, Aplicações de MDP, Eficiência Industrial, Redução de Custos Operacionais
 toc: true
 published: true
-beforetoc: ""
-lastmod: 2025-04-01T12:50:13.956Z
+lastmod: 2025-04-08T19:52:34.593Z
 slug: mdp-casos-reais-manutencao-de-turbinas-eolicas
 ---
 

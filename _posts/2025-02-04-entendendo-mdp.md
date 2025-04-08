@@ -19,8 +19,7 @@ preview: A primeira parte do capítulo sobre MDP, com código em C++ 20, os moti
 toc: false
 published: true
 keywords: Reinforcement Learning, História do RL, MDP, Markov.
-beforetoc: ""
-lastmod: 2025-02-11T21:55:58.475Z
+lastmod: 2025-04-08T19:52:34.501Z
 draft: 2025-02-05T00:25:59.828Z
 ---
 
