@@ -16,22 +16,22 @@ rating: 5
 description: Uma introdução a matemática que suporta a criação de transformers para processamento de linguagem natural com exemplos de código em C++20.
 date: 2025-02-09T22:55:34.524Z
 preview: Uma introdução a matemática que suporta a criação de transformers para processamento de linguagem natural com exemplos de código em C++20.
-keywords:
-    - transformers
-    - matemática
-    - processamento de linguagem natural
-    - C++
-    - aprendizado de máquina
-    - vetores
-    - produto escalar
-    - álgebra linear
-    - embeddings
-    - atenção
-    - deep learning
-    - inteligência artificial
+keywords: |-
+    transformers
+    matemática
+    processamento de linguagem natural
+    C++
+    aprendizado de máquina
+    vetores
+    produto escalar
+    álgebra linear
+    embeddings
+    atenção
+    deep learning
+    inteligência artificial
 toc: true
 published: true
-lastmod: 2025-04-08T19:52:34.660Z
+lastmod: 2025-04-08T20:27:02.793Z
 ---
 
 Neste artigo, a curiosa leitora irá enfrentar os *Transformers*. Nenhuma relação com o o Optimus Prime. Se for estes *Transformers* que está procurando, **o Google falhou com você!**

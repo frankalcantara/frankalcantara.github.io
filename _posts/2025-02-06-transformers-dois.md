@@ -13,23 +13,23 @@ tags:
 image: assets/images/transformers2.webp
 featured: false
 rating: 5
-description: Técnicas de vetorização mais básicas, como a frequência de termos e o modelo Bag of Words (BoW) e TF-IDF.
+description: Técnicas de vetorização mais básicas, como a frequência de termos e o modelo Bag of Words (BoW) e TF-IDF
 date: 2025-02-09T22:55:34.524Z
 preview: Vamos aprender as técnicas de vetorização mais básicas, como a frequência de termos e o modelo *Bag of Words* (BoW). Vamos discutir como essas técnicas são usadas para representar textos como vetores numéricos, permitindo que os computadores processem e analisem linguagem natural.
-keywords:
-    - C++
-    - Matemática
-    - inteligência artificial
-    - vetorização
-    - frequência de termos
-    - bag of words
-    - NLP
-    - processamento de linguagem natural
-    - transformers
-    - embeddings
+keywords: |-
+    C++
+    Matemática
+    inteligência artificial
+    vetorização
+    frequência de termos
+    bag of words
+    NLP
+    processamento de linguagem natural
+    transformers
+    embeddings
 toc: true
 published: true
-lastmod: 2025-04-08T19:52:34.541Z
+lastmod: 2025-04-08T20:27:22.495Z
 ---
 
 Neste artigo aprenderemos as técnicas de vetorização mais básicas, como a frequência de termos e o modelo *Bag of Words* (BoW). Vamos discutir como essas técnicas são usadas para representar textos como vetores numéricos, permitindo que os computadores processem e analisem linguagem natural.

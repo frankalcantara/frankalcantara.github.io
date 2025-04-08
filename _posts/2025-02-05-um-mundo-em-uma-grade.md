@@ -14,7 +14,7 @@ tags:
 image: assets/images/gw2.webp
 featured: false
 rating: 5
-description: " Aprenda de forma didática os fundamentos de RL, desde MDPs até políticas ótimas, e construa sua base em IA."
+description: Aprenda de forma didática os fundamentos de RL, desde MDPs até políticas ótimas, e construa sua base em IA.
 date: 2025-02-09T11:51:59.153Z
 preview: O Reinforcement Learning (RL) com o Grid World! 🚀 Um guia prático e didático para iniciantes construírem uma base sólida em IA.  Domine MDPs e algoritmos essenciais de RL explorando este ambiente simples e fundamental.  Ideal para quem busca entender RL de verdade!
 keywords: |-
@@ -44,7 +44,7 @@ keywords: |-
     Modelagem MDP
 toc: true
 published: true
-lastmod: 2025-04-08T19:52:34.518Z
+lastmod: 2025-04-08T20:25:30.830Z
 ---
 
 A esforçada leitora, se realmente quiser entender as técnicas e algoritmos de *Reinforcement Learning* - **RL**, deve começar com problemas simples. Não é qualquer problema. Problemas que permitam construir uma compreensão sólida dos princípios estruturantes desta tecnologia. É aqui que o **Grid World** brilha e se destaca.
