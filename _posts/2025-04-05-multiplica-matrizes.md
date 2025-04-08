@@ -32,7 +32,7 @@ keywords:
     - inteligência artificial
 toc: true
 published: true
-lastmod: 2025-04-08T20:18:40.804Z
+lastmod: 2025-04-08T20:20:36.978Z
 ---
 
 A multiplicação de matrizes pode, sem dúvida, ser um dos tópicos mais importantes dos modelos de linguagem, e aprendizagem de máquina, disponíveis no mercado atualmente. Neste artigo, vamos explorar alguns algoritmos para multiplicação de matrizes, suas aplicações e como ele se relaciona com o funcionamento de modelos de aprendizado profundo, como os Transformers, que estamos estudando ([aqui](https://frankalcantara.com/voce-pensa-como-fala/),[aqui](https://frankalcantara.com/transformers-um/) e [aqui](https://frankalcantara.com/transformers-dois/)).
