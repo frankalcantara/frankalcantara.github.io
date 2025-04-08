@@ -32,7 +32,7 @@ keywords:
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-04-02T18:10:09.146Z
+lastmod: 2025-04-08T14:00:25.900Z
 ---
 
 Neste artigo, a curiosa leitora irá enfrentar os *Transformers*. Nenhuma relação com o o Optimus Prime. Se for estes *Transformers* que está procurando, **o Google falhou com você!**
@@ -729,7 +729,6 @@ Algumas já foram usadas processamento de linguagem natural. Outras ainda não. 
 #### Exemplo em C++
 
 ```cpp
-
 #include <iostream>
 #include <vector>
 #include <numeric>
@@ -1192,8 +1191,9 @@ int main() {
     
     return 0;
 }
+```
 
-Ou, como a preocupada leitora pode preferir, em C++ 20 usando a biblioteca Eigen: 
+Ou, como a preocupada leitora pode preferir, em C++ 20 usando a biblioteca Eigen:
 
 ```cpp
 #include <iostream>
