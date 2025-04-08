@@ -20,7 +20,7 @@ tags:
 image: assets/images/transformers3.webp
 featured: false
 rating: 5
-description: Estudo dos modelos de sequência, desde as Cadeias de Markov (N-grams) até os mecanismos de atenção que fundamentam os Transformers, entendendo suas capacidades e limitações.
+description: Estudo dos modelos de sequência, desde as Cadeias de Markov (N-grams) até os mecanismos de atenção que fundamentam os Transformers.
 date: 2025-02-10T22:55:34.524Z
 preview: Neste artigo, mergulhamos na modelagem de sequências textuais. Partimos das Cadeias de Markov (N-grams) e suas limitações, construindo gradualmente a intuição para modelos mais sofisticados capazes de capturar dependências de longo alcance, fundamentais para a arquitetura Transformer.
 keywords:
@@ -40,7 +40,7 @@ keywords:
 toc: true
 published: false
 beforetoc: ""
-lastmod: 2025-04-02T19:48:58.284Z
+lastmod: 2025-04-08T18:59:18.299Z
 ---
 
 ## Modelando Sequências - Além da Frequência de Termos

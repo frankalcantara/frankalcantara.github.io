@@ -33,7 +33,7 @@ keywords:
 toc: true
 published: true
 beforetoc: ""
-lastmod: 2025-04-08T18:56:29.228Z
+lastmod: 2025-04-08T19:02:34.638Z
 ---
 
 A multiplicação de matrizes pode, sem dúvida, ser um dos tópicos mais importantes dos modelos de linguagem, e aprendizagem de máquina, disponíveis no mercado atualmente. Neste artigo, vamos explorar alguns algoritmos para multiplicação de matrizes, suas aplicações e como ele se relaciona com o funcionamento de modelos de aprendizado profundo, como os Transformers, que estamos estudando ([aqui](https://frankalcantara.com/voce-pensa-como-fala/),[aqui](https://frankalcantara.com/transformers-um/) e [aqui](https://frankalcantara.com/transformers-dois/)).
@@ -607,7 +607,7 @@ $C_{22} = P_1 - P_2 + P_3 + P_6 = \begin{pmatrix} 34 & 26 \\ 6 & 12 \end{pmatrix
 
 **Passo 5**: recombinar para obter a matriz resultante completa. Finalmente, combinamos os quatro quadrantes para formar a matriz resultado:
 
-$$C = \begin{pmatrix} C_{11} & C_{12} \\ C_{21} & C_{22} \end{pmatrix} = \begin{pmatrix} 
+$$C = \begin{pmatrix} C_{11} & C_{12} \\ C_{21} & C_{22} \end{pmatrix} = \begin{pmatrix}
 24 & 26 & 24 & 17 \\
 19 & 19 & 11 & 11 \\
 28 & 28 & 32 & 26 \\
@@ -817,9 +817,9 @@ def strassen(A: Matrix, B: Matrix, threshold: int = 64) -> Optional[Matrix]:
    result_cols = cols_b
 
    # Verificar se as matrizes precisam de padding
-   needs_padding = (not is_power_of_two(rows_a) or 
-                   not is_power_of_two(cols_a) or 
-                   not is_power_of_two(rows_b) or 
+   needs_padding = (not is_power_of_two(rows_a) or
+                   not is_power_of_two(cols_a) or
+                   not is_power_of_two(rows_b) or
                    not is_power_of_two(cols_b) or
                    rows_a != cols_a or rows_b != cols_b)
 
