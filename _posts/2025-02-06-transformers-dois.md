@@ -106,15 +106,15 @@ $$
 \vec{v}_{D_1} = \begin{bmatrix} 1 \\ 2 \\ 2 \\ 2 \\ 1 \\ 1 \\ 2 \end{bmatrix}
 $$
 
-A sagaz leitora deve perceber que o vetor de frequência $\vec{v}_{D_1}$ reside no espaço vetorial inteiro $\mathbb{Z}^{\vert V\vert}$, no qual, temos:
+A sagaz leitora deve perceber que o vetor de frequência $\vec{v}_{D_1}$ reside no espaço vetorial inteiro $\mathbb{Z}^{\vert V \vert}$, no qual, temos:
 
 * $\vec{v}_{D_1}$ denota o vetor de frequência do documento $D_1$.
 * $\mathbb{Z}$ representa o conjunto dos números inteiros, indicando que cada componente do vetor $\vec{v}_{D_1}$ é um número inteiro (neste caso, uma contagem de frequência).
-* $\vert V\vert$ representa a cardinalidade do vocabulário $V$, que é o número total de palavras únicas no vocabulário. Este valor $\vert V\vert$ define a dimensionalidade do espaço vetorial.
+* $\vert V \vert$ representa a cardinalidade do vocabulário $V$, que é o número total de palavras únicas no vocabulário. Este valor $\vert V \vert$ define a dimensionalidade do espaço vetorial.
 
 Em notação matemática, podemos expressar isso como:
 
-$$\vec{v}_{D_1} \in \mathbb{Z}^{\vert V\vert}$$
+$$\vec{v}_{D_1} \in \mathbb{Z}^{\vert V \vert}$$
 
 Essa representação simples captura algumas informações sobre a importância relativa das palavras no texto. Palavras que aparecem com mais frequência podem ser consideradas mais relevantes para o conteúdo do documento. Isso pouco.
 
@@ -321,7 +321,7 @@ Embora o produto escalar e as magnitudes sugiram alguma similaridade entre $\vec
 
 Ainda há um aspecto particularmente problemático na representação vetorial por frequência: a questão da dimensionalidade.
 
-Para um vocabulário de tamanho $\vert V\vert$, cada documento é representado em um espaço $\mathbb{R}^{\vert V\vert}$. Neste caso, $\mathbb{R}$ refere-se a um espaço vetorial de dimensão $\vert V\vert$, o tamanho do vocabulário. Isso significa que cada documento é representado como um vetor em um espaço de alta dimensão, no qual cada dimensão corresponde a uma palavra do vocabulário. Para um vocabulário de $10.000$ palavras, cada documento seria representado como um vetor em um espaço de $10.000$ dimensões.
+Para um vocabulário de tamanho $\vert V \vert$, cada documento é representado em um espaço $\mathbb{R}^{\vert V \vert}$. Neste caso, $\mathbb{R}$ refere-se a um espaço vetorial de dimensão $\vert V \vert $, o tamanho do vocabulário. Isso significa que cada documento é representado como um vetor em um espaço de alta dimensão, no qual cada dimensão corresponde a uma palavra do vocabulário. Para um vocabulário de $10.000$ palavras, cada documento seria representado como um vetor em um espaço de $10.000$ dimensões.
 
 Como usaremos apenas a frequência, teremos vetores extremamente esparsos, nos quais a maioria dos componentes será zero. Esta característica não só é computacionalmente ineficiente, mas também dificulta a identificação de similaridades entre documentos.
 
@@ -2380,9 +2380,9 @@ Esta implementação é uma aplicação prática dos conceitos teóricos apresen
 
 Chegamos ao **One-Hot Encoding**. Embora menos comum para representar diretamente *textos inteiros* em tarefas de processamento de linguagem natural mais sofisticados, o **One-Hot Encoding** é frequentemente usado como um passo inicial para representar *palavras individuais* ou *caracteres* numericamente em processamentos complexos.
 
-Em **One-Hot Encoding**, cada palavra, ou caractere, do vocabulário $V$ será representada por um vetor binário $\vec{e}_w$. Neste caso, o tamanho do vetor será igual ao tamanho do vocabulário, $\vert V\vert$. Para cada palavra $w_i \in V$, o vetor $\vec{e}_{w_i}$ terá todos os valores como $0$, exceto na posição $i$ correspondente à palavra $w_i$ no vocabulário, onde o valor será $1$.
+Em **One-Hot Encoding**, cada palavra, ou caractere, do vocabulário $V$, será representada por um vetor binário $\vec{e}_w$. Neste caso, o tamanho do vetor será igual ao tamanho do vocabulário, $\vert V \vert$. Para cada palavra $w_i \in V$, o vetor $\vec{e}_{w_i}$ terá todos os valores como $0$, exceto na posição $i$ correspondente à palavra $w_i$ no vocabulário, onde o valor será $1$.
 
-Formalmente, teremos: se $V = \{w_1, w_2, ..., w_{\vert V\vert }\}$ é o vocabulário ordenado, então o **One-Hot Encoding** para a palavra $w_i$ é um vetor $\vec{e}_{w_i} \in \mathbb{R}^{\vert V\vert}$ tal que:
+Formalmente, teremos: se $V = \{w_1, w_2, ..., w_{\vert V \vert }\}$ é o vocabulário ordenado, então o **One-Hot Encoding** para a palavra $w_i$ é um vetor $\vec{e}_{w_i} \in \mathbb{R}^{\vert V \vert }$ tal que:
 
 $$
 (\vec{e}_{w_i})_j =
