@@ -19,7 +19,7 @@ preview: A primeira parte do capítulo sobre MDP, com código em C++ 20, os moti
 toc: false
 published: true
 keywords: Reinforcement Learning, História do RL, MDP, Markov.
-lastmod: 2025-04-08T19:52:34.501Z
+lastmod: 2025-04-12T12:24:09.271Z
 draft: 2025-02-05T00:25:59.828Z
 ---
 
@@ -445,7 +445,7 @@ A estrutura `TransitionStats` armazena todas as contagens necessárias para calc
 
 1. **vowel_to_vowel**: Conta quantas vezes uma vogal é seguida por outra vogal.
   
-   - Exemplo: "еа" em "театр" - $P(V\vert V)$
+   - Exemplo: "еа" em "театр" - $P(V \vert  V)$
 
 2. **vowel_to_consonant**: Conta quantas vezes uma vogal é seguida por uma consoante.
   
@@ -453,7 +453,7 @@ A estrutura `TransitionStats` armazena todas as contagens necessárias para calc
 
 3. **consonant_to_vowel**: Conta quantas vezes uma consoante é seguida por uma vogal.
   
-   - Exemplo: "ра" em "рада" - $P(V\vert C)$
+   - Exemplo: "ра" em "рада" - $P(V \vert  C)$
 
 4. **consonant_to_consonant**: Conta quantas vezes uma consoante é seguida por outra consoante.
   
@@ -509,23 +509,23 @@ Para o texto de *Eugene Onegin*, temos uma matriz $2 \times 2$ pois existem apen
 
 $$
 P = \begin{bmatrix}
-P(V\vert V) & P(V\vert C) \\
+P(V \vert  V) & P(V \vert  C) \\
 P(C\vert V) & P(C\vert C)
 \end{bmatrix}
 $$
 
 Neste caso, temos:
 
-- $P(V\vert V)$ é a probabilidade de uma vogal após uma vogal
-- $P(V\vert C)$ é a probabilidade de uma vogal após uma consoante
+- $P(V \vert  V)$ é a probabilidade de uma vogal após uma vogal
+- $P(V \vert  C)$ é a probabilidade de uma vogal após uma consoante
 - $P(C\vert V)$ é a probabilidade de uma consoante após uma vogal
 - $P(C\vert C)$ é a probabilidade de uma consoante após uma consoante
 
 Por exemplo, se no texto encontramos:
 
-- "еа" em "театр": contribui para $P(V\vert V)$
+- "еа" em "театр": contribui para $P(V \vert  V)$
 - "ит" em "итог": contribui para $P(C\vert V)$
-- "ра" em "рада": contribui para $P(V\vert C)$
+- "ра" em "рада": contribui para $P(V \vert  C)$
 - "ст" em "стол": contribui para $P(C\vert C)$
 
 A matriz resultante poderia ser algo como:
@@ -641,7 +641,7 @@ $$ P(i\vert j) = \frac{count(j \rightarrow i)}{total\_transitions} $$
 
 Por exemplo:
 
-$$ P(V\vert V) = \frac{vowel\_to\_vowel}{total\_transitions} $$
+$$ P(V \vert  V) = \frac{vowel\_to\_vowel}{total\_transitions} $$
 
 A classe principal `MarkovAnalysis` implementa a matriz de transição $P$, de forma que:
 
@@ -699,9 +699,9 @@ Uma vez que o código seja executado corretamente, os resultados serão apresent
 
 2. Matriz de probabilidades de transição:
   
-   - $P(V\vert V)$ - Vogal para Vogal
+   - $P(V \vert  V)$ - Vogal para Vogal
    - $P(C\vert V)$ - Vogal para Consoante
-   - $P(V\vert C)$ - Consoante para Vogal
+   - $P(V \vert  C)$ - Consoante para Vogal
    - $P(C\vert C)$ - Consoante para Consoante
 
 Este exemplo em C++ 20 demonstra a tese de Markov de que a Lei dos Grandes Números pode ser aplicada a sequências dependentes, logo:
