@@ -29,7 +29,7 @@ keywords: |-
     embeddings
 toc: true
 published: true
-lastmod: 2025-04-08T20:45:31.136Z
+lastmod: 2025-04-12T13:19:09.281Z
 ---
 
 Neste artigo aprenderemos as técnicas de vetorização mais básicas, como a frequência de termos e o modelo *Bag of Words* (BoW). Vamos discutir como essas técnicas são usadas para representar textos como vetores numéricos, permitindo que os computadores processem e analisem linguagem natural.
@@ -100,21 +100,21 @@ $$
 \end{align*}
 $$
 
-Com essa contagem, podemos representar o documento $D_1$ como um vetor de frequências $\vec{v}_{D_1}$. Se ordenarmos as palavras de $V_{D_1}$ alfabeticamente, por exemplo., $V'_{D_1} = \{ \text{"dorme"}, \text{"gato"}, \text{"no"}, \text{"o"}, \text{"preto"}, \text{"subiu"}, \text{"telhado"} \}$, então o vetor de frequências será dado por:
+Com essa contagem, podemos representar o documento $D_1$ como um vetor de frequências $\vec{v_{D_1}}$. Se ordenarmos as palavras de $V_{D_1}$ alfabeticamente, por exemplo., $V'_{D_1} = \{ \text{"dorme"}, \text{"gato"}, \text{"no"}, \text{"o"}, \text{"preto"}, \text{"subiu"}, \text{"telhado"} \}$, então o vetor de frequências será dado por:
 
 $$
-\vec{v}_{D_1} = \begin{bmatrix} 1 \\ 2 \\ 2 \\ 2 \\ 1 \\ 1 \\ 2 \end{bmatrix}
+\vec{v_{D_1}} = \begin{bmatrix} 1 \\ 2 \\ 2 \\ 2 \\ 1 \\ 1 \\ 2 \end{bmatrix}
 $$
 
-A sagaz leitora deve perceber que o vetor de frequência $\vec{v}_{D_1}$ reside no espaço vetorial inteiro $\mathbb{Z}^{\vert V \vert}$, no qual, temos:
+A sagaz leitora deve perceber que o vetor de frequência $\vec{v_{D_1}}$ reside no espaço vetorial inteiro $\mathbb{Z}^{\vert V \vert}$, no qual, temos:
 
-* $\vec{v}_{D_1}$ denota o vetor de frequência do documento $D_1$.
-* $\mathbb{Z}$ representa o conjunto dos números inteiros, indicando que cada componente do vetor $\vec{v}_{D_1}$ é um número inteiro (neste caso, uma contagem de frequência).
+* $\vec{v_{D_1}}$ denota o vetor de frequência do documento $D_1$.
+* $\mathbb{Z}$ representa o conjunto dos números inteiros, indicando que cada componente do vetor $\vec{v_{D_1}}$ é um número inteiro (neste caso, uma contagem de frequência).
 * $\vert V \vert$ representa a cardinalidade do vocabulário $V$, que é o número total de palavras únicas no vocabulário. Este valor $\vert V \vert$ define a dimensionalidade do espaço vetorial.
 
 Em notação matemática, podemos expressar isso como:
 
-$$\vec{v}_{D_1} \in \mathbb{Z}^{\vert V \vert}$$
+$$\vec{v_{D_1}} \in \mathbb{Z}^{\vert V \vert}$$
 
 Essa representação simples captura algumas informações sobre a importância relativa das palavras no texto. Palavras que aparecem com mais frequência podem ser consideradas mais relevantes para o conteúdo do documento. Isso pouco.
 
@@ -157,7 +157,7 @@ Ordenando alfabeticamente o vocabulário para definir a ordem das dimensões dos
 
 $V'_{global} = \{ \text{"automóvel"}, \text{"carro"}, \text{"é"}, \text{"o"}, \text{"rápido"}, \text{"veloz"} \}$
 
-Agora, criamos os vetores de frequência $\vec{v}_{D_1}$ e $\vec{v}_{D_2}$ para cada documento, usando a ordem de $V'_{global}$. Lembre-se que cada posição do vetor corresponde a uma palavra em $V'_{global}$, e o valor é a frequência daquela palavra no documento.
+Agora, criamos os vetores de frequência $\vec{v_{D_1}}$ e $\vec{v_{D_2}}$ para cada documento, usando a ordem do vocabulário ordenado alfabeticamente. Lembre-se que cada posição do vetor corresponderá a uma palavra no vocabulário ordenado, e o valor desta posição será a frequência daquela palavra no documento.
 
 Para $D_1$ = "O carro é veloz", teremos:
 
@@ -175,7 +175,7 @@ $$
 Portanto, o vetor de frequência para $D_1$ será dado por:
 
 $$
-\vec{v}_{D_1} = \begin{bmatrix} 0 \\ 1 \\ 1 \\ 1 \\ 0 \\ 1 \end{bmatrix}
+\vec{v_{D_1}} = \begin{bmatrix} 0 \\ 1 \\ 1 \\ 1 \\ 0 \\ 1 \end{bmatrix}
 $$
 
 Para $D_2$ = "O automóvel é rápido", teremos:
@@ -192,7 +192,7 @@ $$\begin{align*}
 Portanto, o vetor de frequência para $D_2$ será:
 
 $$
-\vec{v}_{D_2} = \begin{bmatrix} 1 \\ 0 \\ 1 \\ 1 \\ 1 \\ 0 \end{bmatrix}
+\vec{v_{D_2}} = \begin{bmatrix} 1 \\ 0 \\ 1 \\ 1 \\ 1 \\ 0 \end{bmatrix}
 $$
 
 Podemos usar estes vetores para verificar a similaridade entre eles usando o produto escalar. Começamos pela ortogonalidade.
@@ -205,13 +205,17 @@ $$
 >
 >na qual $n$ é a dimensão dos vetores.
 
-Vamos calcular o produto escalar dos vetores de frequência $\vec{v}_{D_1}$ e $\vec{v}_{D_2}$:
+Vamos calcular o produto escalar dos vetores de frequência $\vec{v_{D_1}}$ e $\vec{v_{D_2}}$:
 
 $$
-\vec{v}_{D_1} \cdot \vec{v}_{D_2} = (0 \times 1) + (1 \times 0) + (1 \times 1) + (1 \times 1) + (0 \times 1) + (1 \times 0) = 0 + 0 + 1 + 1 + 0 + 0 = 2
+\vec{v_{D_1}} \cdot \vec{v_{D_2}} = (0 \times 1) + (1 \times 0) + (1 \times 1) + (1 \times 1) + (0 \times 1) + (1 \times 0) 
 $$
 
-Neste caso, o produto escalar de $\vec{v}_{D_1}$ e $\vec{v}_{D_2}$ é 2, que é **diferente de zero**. Portanto, os vetores $\vec{v}_{D_1}$ e $\vec{v}_{D_2}$ **não são ortogonais**. Ou seja existe alguma similaridade direcional entre eles. Estes vetores não são ortogonais porque compartilham os termos "o" e "é".
+$$
+\vec{v_{D_1}} \cdot \vec{v_{D_2}} =  0 + 0 + 1 + 1 + 0 + 0 = 2
+$$
+
+Neste caso, o produto escalar de $\vec{v_{D_1}}$ e $\vec{v_{D_2}}$ é 2, que é **diferente de zero**. Portanto, os vetores $\vec{v_{D_1}}$ e $\vec{v_{D_2}}$ **não são ortogonais**. Ou seja existe alguma similaridade direcional entre eles. Estes vetores não são ortogonais porque compartilham os termos "o" e "é".
 
 O produto escalar sendo positivo indica que os vetores tendem a apontar na mesma direção. Quanto maior o valor positivo, maior a similaridade em termos de direção.
 
@@ -250,7 +254,7 @@ $V'_{global} = \{ \text{"bom"}, \text{"é"}, \text{"filme"}, \text{"não"}, \tex
 
 A cardinalidade do vocabulário é $\vert V'_{global}\vert  = 5$, o que significa que nossos vetores de frequência terão 5 dimensões.
 
-Neste ponto, podemos criar os vetores de frequência $\vec{v}_{D_1}$ e $\vec{v}_{D_2}$ para cada documento, seguindo a ordem das palavras em $V'_{global}$.
+Neste ponto, podemos criar os vetores de frequência $\vec{v_{D_1}}$ e $\vec{v_{D_2}}$ para cada documento, seguindo a ordem das palavras em $V'_{global}$.
 
 Para $D_1$ = "O filme é bom":
 
@@ -267,7 +271,7 @@ $$
 O vetor de frequência para $D_1$ é:
 
 $$
-\vec{v}_{D_1} = \begin{bmatrix} 1 \\ 1 \\ 1 \\ 0 \\ 1 \end{bmatrix}
+\vec{v_{D_1}} = \begin{bmatrix} 1 \\ 1 \\ 1 \\ 0 \\ 1 \end{bmatrix}
 $$
 
 Para $D_2$ = "O filme não é bom":
@@ -285,39 +289,43 @@ $$
 O vetor de frequência para $D_2$ é:
 
 $$
-\vec{v}_{D_2} = \begin{bmatrix} 1 \\ 1 \\ 1 \\ 1 \\ 1 \end{bmatrix}
+\vec{v_{D_2}} = \begin{bmatrix} 1 \\ 1 \\ 1 \\ 1 \\ 1 \end{bmatrix}
 $$
 
-Uma vez que os vetores estejam definidos, podemos analisar os vetores $\vec{v}_{D_1}$ e $\vec{v}_{D_2}$ em termos de produto escalar e magnitude, e discutir a similaridade entre eles.
+Uma vez que os vetores estejam definidos, podemos analisar os vetores $\vec{v_{D_1}}$ e $\vec{v_{D_2}}$ em termos de produto escalar e magnitude, e discutir a similaridade entre eles.
 
-**a) Produto Escalar**: calculamos o produto escalar de $\vec{v}_{D_1}$ e $\vec{v}_{D_2}$:
+**a) Produto Escalar**: calculamos o produto escalar de $\vec{v_{D_1}}$ e $\vec{v_{D_2}}$:
 
 $$
-\vec{v}_{D_1} \cdot \vec{v}_{D_2} = (1 \times 1) + (1 \times 1) + (1 \times 1) + (0 \times 1) + (1 \times 1) = 1 + 1 + 1 + 0 + 1 = 4
+\vec{v_{D_1}} \cdot \vec{v_{D_2}} = (1 \times 1) + (1 \times 1) + (1 \times 1) + (0 \times 1) + (1 \times 1)
 $$
 
-Para serem ortogonais, o produto escalar deveria ser zero. Como $\vec{v}_{D_1} \cdot \vec{v}_{D_2} = 4 \neq 0$, os vetores **não são ortogonais**.
+$$
+\vec{v_{D_1}} \cdot \vec{v_{D_2}} = = 1 + 1 + 1 + 0 + 1 = 4
+$$
+
+Para serem ortogonais, o produto escalar deveria ser zero. Como $\vec{v_{D_1}} \cdot \vec{v_{D_2}} = 4 \neq 0$, os vetores **não são ortogonais**.
 
 O produto escalar é $4$, um valor positivo e relativamente alto, considerando as magnitudes dos vetores. Isso **sugere alguma similaridade** entre os vetores no espaço vetorial. Eles tendem a mesma direção.
 
-**b) Magnitudes**: calculamos as magnitudes de $\vec{v}_{D_1}$ e $\vec{v}_{D_2}$:
+**b) Magnitudes**: calculamos as magnitudes de $\vec{v_{D_1}}$ e $\vec{v_{D_2}}$:
 
 $$
-\vert \vec{v}_{D_1}\vert = \sqrt{1^2 + 1^2 + 1^2 + 0^2 + 1^2} = \sqrt{4} = 2
+\vert \vec{v_{D_1}}\vert = \sqrt{1^2 + 1^2 + 1^2 + 0^2 + 1^2} = \sqrt{4} = 2
 $$
 
 $$
-\vert \vec{v}_{D_2}\vert = \sqrt{1^2 + 1^2 + 1^2 + 1^2 + 1^2} = \sqrt{5} \approx 2.236
+\vert \vec{v_{D_2}}\vert = \sqrt{1^2 + 1^2 + 1^2 + 1^2 + 1^2} = \sqrt{5} \approx 2.236
 $$
 
 As magnitudes são próximas, indicando que ambos os vetores têm comprimentos similares no espaço vetorial definido pelo vocabulário global.
 
-Embora o produto escalar e as magnitudes sugiram alguma similaridade entre $\vec{v}_{D_1}$ e $\vec{v}_{D_2}$, a leitora pode notar a **discrepância em termos de significado semântico**.
+Embora o produto escalar e as magnitudes sugiram alguma similaridade entre $\vec{v_{D_1}}$ e $\vec{v_{D_2}}$, a leitora pode notar a **discrepância em termos de significado semântico**.
 
 - $D_1$: "O filme é bom" expressa uma **avaliação positiva** sobre o filme.
 - $D_2$: "O filme não é bom" expressa uma **avaliação negativa**, ou no mínimo, não positiva, sobre o filme, essencialmente com o sentido **oposto** ao sentido de $D_1$.
 
-**A representação vetorial de frequência, neste caso, falha em capturar essa oposição semântica.** Os vetores são considerados *similares* em termos de produto escalar porque eles compartilham muitas palavras em comum ("o", "filme", "é", "bom"). A presença da palavra "não" em $D_2$, que inverte completamente o sentido, tem um impacto quase insignificante na representação vetorial que usa a técnica de frequência.
+**A representação vetorial de frequência, neste caso, falha em capturar essa oposição semântica.** *Os vetores são considerados similares em termos de produto escalar porque eles compartilham muitas palavras em comum* ("o", "filme", "é", "bom"). A presença da palavra "não" em $D_2$, que inverte completamente o sentido, tem um impacto quase insignificante na representação vetorial que usa a técnica de frequência.
 
 Ainda há um aspecto particularmente problemático na representação vetorial por frequência: a questão da dimensionalidade.
 
@@ -371,10 +379,10 @@ $$
 
 onde $V_{D_i}$ é o vocabulário do documento $D_i$.
 
-Para cada documento $D_i \in Docs$, a representação **BoW** é um vetor $\vec{bow}_{D_i}$ de tamanho $|V_{global}|$. Cada posição $j$ em $\vec{bow}_{D_i}$ corresponde à $j$-ésima palavra $w_j$ em $V_{global}$, e o valor nessa posição será a frequência $f(w_j, D_i)$ da palavra no documento:
+Para cada documento $D_i \in Docs$, a representação **BoW** é um vetor $\vec{bow_{D_i}}$ de tamanho $\vert V_{global} \vert$. Cada posição $j$ em $\vec{bow_{D_i}}$ corresponde à $j$-ésima palavra $w_j$ em $V_{global}$, e o valor nessa posição será a frequência $f(w_j, D_i)$ da palavra no documento:
 
 $$
-\vec{bow}_{D_i} = [f(w_1, D_i), f(w_2, D_i), ..., f(w_{|V_{global}|}, D_i)]^T
+\vec{bow_{D_i}} = [f(w_1, D_i), f(w_2, D_i), ..., f(w_{|V_{global}|}, D_i)]^T
 $$
 
 Para ilustrar, considere um pequeno *corpus* com dois documentos:
@@ -398,7 +406,7 @@ $$
 \vec{bow}_{D_2} = \begin{bmatrix} 1 \\ 1 \\ 0 \\ 1 \\ 1 \\ 1 \\ 0 \\ 0 \\ 0 \end{bmatrix}
 $$
 
-A atenta leitora deve observar que cada vetor $\vec{bow}_{D_i}$ reside no espaço vetorial inteiro $\mathbb{Z}^{|V_{global}|}$. Estes vetores tendem a ser esparsos, ou seja, a maioria de suas componentes é zero, especialmente quando o vocabulário global é grande.
+A atenta leitora deve observar que cada vetor $\vec{bow_{D_i}}$ reside no espaço vetorial inteiro $\mathbb{Z}^{\vert V_{global} \vert}$. Estes vetores tendem a ser esparsos, ou seja, a maioria de suas componentes é zero, especialmente quando o vocabulário global é grande.
 
 O **BoW** mantém todas as limitações da representação por frequência de termos que discutimos anteriormente:
 
@@ -406,7 +414,7 @@ O **BoW** mantém todas as limitações da representação por frequência de te
 
 2. **Ausência de relações semânticas**: As frases "O carro é veloz" e "O automóvel é rápido", embora semanticamente equivalentes, produzem vetores completamente diferentes.
 
-3. **Alta dimensionalidade**: Para um vocabulário de tamanho $|V_{global}|$, cada documento é representado em um espaço $\mathbb{R}^{|V_{global}|}$, levando a vetores extremamente esparsos.
+3. **Alta dimensionalidade**: Para um vocabulário de tamanho $\vert V_{global} \vert $, cada documento é representado em um espaço $\mathbb{R}^{\vert V_{global} \vert }$, levando a vetores extremamente esparsos.
 
 A sagaz leitora pode pensar que essas limitações tornam o **BoW** inútil. Contudo, apesar dessas limitações, o **BoW** é surpreendentemente eficaz em muitas tarefas de processamento de linguagem natural, especialmente quando combinado com outras técnicas que veremos adiante, como o **TF-IDF**.
 
@@ -638,7 +646,7 @@ Este exemplo reimplementa o modelo **Bag of Words (BoW)** assumindo que os docum
 
    - A classe `BagOfWords` implementa diretamente a formulação matemática apresentada no texto:
    - Construção do vocabulário global: $V_{global} = \bigcup_{i=1}^N V_{D_i}$
-   - Criação de vetores BoW: $\vec{bow}_{D_i} = [f(w_1, D_i), f(w_2, D_i), ..., f(w_{|V_{global}|}, D_i)]^T$
+   - Criação de vetores BoW: $\vec{bow_{D_i}} = [f(w_1, D_i), f(w_2, D_i), ..., f(w_{\vert V_{global} \vert}, D_i)]^T$
 
 2. **Uso da biblioteca Eigen**:
 
@@ -704,7 +712,7 @@ O cálculo da frequência de termos, ou **Term Frequency (TF)**, pode ser realiz
 A forma mais simples de calcular o **TF** é usar a frequência bruta, $raw$, também chamada de contagem absoluta:
 
 $$
-\text{TF}_{raw}(w, D_i) = f(w, D_i)
+\text{TF_{raw}}(w, D_i) = f(w, D_i)
 $$
 
 Nesta definição, $f(w, D_i)$ representa o número de vezes que a palavra $w$ aparece no documento $D_i$.
@@ -716,8 +724,8 @@ Nesta definição, $f(w, D_i)$ representa o número de vezes que a palavra $w$ a
 
 Para a palavra "gato", teríamos:
 
-- $\text{TF}_{raw}(\text{"gato"}, D_1) = 2$;
-- $\text{TF}_{raw}(\text{"gato"}, D_2) = 1$.
+- $\text{TF_{raw}}(\text{"gato"}, D_1) = 2$;
+- $\text{TF_{raw}}(\text{"gato"}, D_2) = 1$.
 
 A frequência bruta, embora simples, apresenta um problema: ela não considera o tamanho do documento. No exemplo 1 acima, "gato" representa $100\%$ das palavras em $D_2$, mas apenas $25\%$ das palavras em $D_1$. A frequência bruta não consegue capturar essa diferença de importância relativa.
 
@@ -733,15 +741,15 @@ Para este *corpus*, teremos:
 
 Para a palavra "gato":
 
-- $\text{TF}_{raw}(\text{"gato"}, D_1) = 1$
-- $\text{TF}_{raw}(\text{"gato"}, D_2) = 1$
-- $\text{TF}_{raw}(\text{"gato"}, D_3) = 1$
+- $\text{TF_{raw}}(\text{"gato"}, D_1) = 1$
+- $\text{TF_{raw}}(\text{"gato"}, D_2) = 1$
+- $\text{TF_{raw}}(\text{"gato"}, D_3) = 1$
 
 Para a palavra "preto":
 
-- $\text{TF}_{raw}(\text{"preto"}, D_1) = 2$
-- $\text{TF}_{raw}(\text{"preto"}, D_2) = 0$
-- $\text{TF}_{raw}(\text{"preto"}, D_3) = 1$
+- $\text{TF_{raw}}(\text{"preto"}, D_1) = 2$
+- $\text{TF_{raw}}(\text{"preto"}, D_2) = 0$
+- $\text{TF_{raw}}(\text{"preto"}, D_3) = 1$
 
 Para resolver a limitação da frequência bruta, utilizamos a frequência normalizada que pode ser definida como:
 
@@ -793,7 +801,7 @@ Além das frequências bruta e normalizada, existem outras formulações importa
 A frequência logarítmica é definida como:
 
 $$
-\text{TF}_{log}(w, D_i) = 1 + \log(f(w, D_i))
+\text{log}(w, D_i) = 1 + \log(f(w, D_i))
 $$
 
 Esta formulação é útil quando temos palavras com frequências muito diferentes em um mesmo documento. O logaritmo ajuda a *comprimir essas diferenças, evitando que palavras muito frequentes dominem completamente a representação*.
@@ -809,13 +817,13 @@ Calculando **TF** para as palavras "cachorro" e "gato", teremos:
 
 Com frequência bruta, a diferença é $3:1$
 
-- $\text{TF}_{raw}(\text{"cachorro"}, D_1) = 3$;
-- $\text{TF}_{raw}(\text{"gato"}, D_1) = 1$.
+- $\text{TF_{raw}}(\text{"cachorro"}, D_1) = 3$;
+- $\text{TF_{raw}}(\text{"gato"}, D_1) = 1$.
 
 Com frequência logarítmica, a diferença é menor:
 
-- $\text{TF}_{log}(\text{"cachorro"}, D_1) = 1 + \log(3) \approx 1.48$;
-- $\text{TF}_{log}(\text{"gato"}, D_1) = 1 + \log(1) = 1$.
+- $\text{log}(\text{"cachorro"}, D_1) = 1 + \log(3) \approx 1.48$;
+- $\text{log}(\text{"gato"}, D_1) = 1 + \log(1) = 1$.
 
 A frequência logarítmica reduz a razão de $3:1$ para aproximadamente $1.48:1$, suavizando a dominância de "cachorro". A redução da razão de $3:1$ para $1.48:1$ através da transformação logarítmica é matematicamente significativa porque reflete melhor como os humanos processam informação linguística. Uma palavra que aparece $3$ vezes em um texto não é necessariamente $3$ vezes mais importante para o significado do documento do que uma palavra que aparece apenas uma vez.
 
@@ -828,13 +836,13 @@ A frequência logarítmica reduz a razão de $3:1$ para aproximadamente $1.48:1$
 Para "preto" em $D_1$:
 
 $$
-\text{TF}_{log}(\text{"preto"}, D_1) = 1 + \log(2) \approx 1.301
+\text{log}(\text{"preto"}, D_1) = 1 + \log(2) \approx 1.301
 $$
 
 Para "gato" em $D_2$:
 
 $$
-\text{TF}_{log}(\text{"gato"}, D_2) = 1 + \log(1) = 1
+\text{log}(\text{"gato"}, D_2) = 1 + \log(1) = 1
 $$
 
 Esta propriedade de compressão do logaritmo é particularmente valiosa em processamento de linguagem natural porque segue a Lei de Weber-Fechner, que estabelece que a percepção humana de diferenças tende a ser logarítmica em relação ao estímulo real: da mesma forma que não percebemos uma luz com $300$ lumens como sendo 3 vezes mais brilhante que uma com $100$ lumens, também não interpretamos uma palavra que aparece $3$ vezes em um texto como tendo o triplo da importância semântica de uma palavra que aparece uma única vez.
@@ -871,7 +879,7 @@ Esta propriedade de compressão do logaritmo é particularmente valiosa em proce
 A frequência binária simplifica a representação para apenas presença ou ausência:
 
 $$
-\text{TF}_{binary}(w, D_i) = \begin{cases} 1 & \text{se } f(w, D_i) > 0 \\ 0 & \text{caso contrário} \end{cases}
+\text{TF_{binary}}(w, D_i) = \begin{cases} 1 & \text{se } f(w, D_i) > 0 \\ 0 & \text{caso contrário} \end{cases}
 $$
 
 Esta formulação é útil quando a presença de uma palavra é mais importante que sua frequência. Por exemplo, quando estamos interessados na classificação de textos por tópicos ou na análise de palavras-chave.
@@ -883,17 +891,17 @@ Esta formulação é útil quando a presença de uma palavra é mais importante 
 
 Se calcularmos **TF** a palavra "linguagem", teremos:
 
-- $\text{TF}_{raw}(\text{"linguagem"}, D_1) = 1$;
-- $\text{TF}_{raw}(\text{"linguagem"}, D_2) = 1$;
-- $\text{TF}_{binary}(\text{"linguagem"}, D_1) = 1$;
-- $\text{TF}_{binary}(\text{"linguagem"}, D_2) = 1$.
+- $\text{TF_{raw}}(\text{"linguagem"}, D_1) = 1$;
+- $\text{TF_{raw}}(\text{"linguagem"}, D_2) = 1$;
+- $\text{TF_{binary}}(\text{"linguagem"}, D_1) = 1$;
+- $\text{TF_{binary}}(\text{"linguagem"}, D_2) = 1$.
 
 Para a palavra "Python":
 
-- $\text{TF}_{raw}(\text{"Python"}, D_1) = 3$;
-- $\text{TF}_{raw}(\text{"Python"}, D_2) = 0$;
-- $\text{TF}_{binary}(\text{"Python"}, D_1) = 1$;
-- $\text{TF}_{binary}(\text{"Python"}, D_2) = 0$.
+- $\text{TF_{raw}}(\text{"Python"}, D_1) = 3$;
+- $\text{TF_{raw}}(\text{"Python"}, D_2) = 0$;
+- $\text{TF_{binary}}(\text{"Python"}, D_1) = 1$;
+- $\text{TF_{binary}}(\text{"Python"}, D_2) = 0$.
 
 A frequência binária indica apenas que $D_1$ é sobre Python e $D_2$ não é, ignorando a repetição da palavra.
 
@@ -905,16 +913,16 @@ $D_3$: "O cachorro late para o gato preto".
 
 Para "rato":
 
-- $\text{TF}_{binary}(\text{"rato"}, D_1) = 1$ (presente);
-- $\text{TF}_{binary}(\text{"rato"}, D_2) = 1$ (presente);
-- $\text{TF}_{binary}(\text{"rato"}, D_3) = 0$ (ausente).
+- $\text{TF_{binary}}(\text{"rato"}, D_1) = 1$ (presente);
+- $\text{TF_{binary}}(\text{"rato"}, D_2) = 1$ (presente);
+- $\text{TF_{binary}}(\text{"rato"}, D_3) = 0$ (ausente).
 
 ##### Frequência Aumentada (Augmented Frequency)
 
 A frequência aumentada é definida como:
 
 $$
-\text{TF}_{aug}(w, D_i) = 0.5 + 0.5 \times \frac{f(w, D_i)}{\max_{w' \in D_i} f(w', D_i)}
+\text{aug}(w, D_i) = 0.5 + 0.5 \times \frac{f(w, D_i)}{\max_{w' \in D_i} f(w', D_i)}
 $$
 
 Nesta fórmula temos:
@@ -933,11 +941,11 @@ Para este documento:
 - $f(\text{"preto"}, D_1) = 2$;
 - $f(\text{"dormiu"}, D_1) = 1$.
 
-Calculando $\text{TF}_{aug}$:
+Calculando $\text{aug}$:
 
-- $\text{TF}_{aug}(\text{"gato"}, D_1) = 0.5 + 0.5 \times \frac{3}{3} = 1.0$;
-- $\text{TF}_{aug}(\text{"preto"}, D_1) = 0.5 + 0.5 \times \frac{2}{3} \approx 0.83$;
-- $\text{TF}_{aug}(\text{"dormiu"}, D_1) = 0.5 + 0.5 \times \frac{1}{3} \approx 0.67$.
+- $\text{aug}(\text{"gato"}, D_1) = 0.5 + 0.5 \times \frac{3}{3} = 1.0$;
+- $\text{aug}(\text{"preto"}, D_1) = 0.5 + 0.5 \times \frac{2}{3} \approx 0.83$;
+- $\text{aug}(\text{"dormiu"}, D_1) = 0.5 + 0.5 \times \frac{1}{3} \approx 0.67$.
 
 Observe que mesmo "dormiu", que aparece apenas uma vez, recebe um peso considerável $(0.67)$ devido ao termo base $0.5$.
 
@@ -952,34 +960,34 @@ Para $D_1$, a palavra mais frequente aparece 2 vezes ("preto"):
 Para "gato":
 
 $$
-\text{TF}_{aug}(\text{"gato"}, D_1) = 0.5 + 0.5 \times \frac{1}{2} = 0.75
+\text{aug}(\text{"gato"}, D_1) = 0.5 + 0.5 \times \frac{1}{2} = 0.75
 $$
 
 Para "preto":
 
 $$
-\text{TF}_{aug}(\text{"preto"}, D_1) = 0.5 + 0.5 \times \frac{2}{2} = 1.0
+\text{aug}(\text{"preto"}, D_1) = 0.5 + 0.5 \times \frac{2}{2} = 1.0
 $$
 
 A frequência aumentada se destaca sistemas de recuperação de informação e mecanismos de busca onde temos documentos de tamanhos muito diferentes, como por exemplo, ao comparar artigos científicos com resumos ou *abstracts*.
 
 Ao utilizar a fórmula da frequência aumentada, garantimos que mesmo palavras que aparecem apenas uma vez ainda recebam um peso mínimo de $0.5$, enquanto a palavra mais frequente no documento recebe peso $1.0$, criando assim uma distribuição mais equilibrada que é valiosa quando precisamos comparar documentos de diferentes comprimentos ou quando queremos evitar que documentos longos dominem os resultados graças ao seu tamanho. Um problema comum em sistemas de busca acadêmica, bibliotecas digitais e bases de dados documentais, onde a variação no tamanho dos documentos pode ser significativa.
 
-Além das quatro formas que estudamos ($\text{TF}_{raw}$, $\text{TF}_{log}$, $\text{TF}_{binary}$ e $\text{TF}_{aug}$), existem várias outras formulações para o cálculo do **TF**. Uma variação particularmente interessante é a frequência $K$-modificada, definida como:
+Além das quatro formas que estudamos ($\text{raw}$, $\text{log}$, $\text{binary}$ e $\text{aug}$), existem várias outras formulações para o cálculo do **TF**. Uma variação particularmente interessante é a frequência $K$-modificada, definida como:
 
 $$ \text{TF}_K(w, D_i) = K + (1-K) \times \frac{f(w, D_i)}{\max_{w' \in D_i} f(w', D_i)} $$
 
 Na qual, teremos:
 
 - $K$ é um parâmetro ajustável no intervalo $[0,1]$;
-- $f(w, D_i)$ é a frequência bruta do termo $w$ no documento $D_i$;
-- $\max_{w' \in D_i} f(w', D_i)$ é a frequência bruta máxima de qualquer termo em $D_i$;
+- $f(w, D_i)\;$ é a frequência bruta do termo $w$ no documento $D_i$;
+- $\max_{w' \in D_i} f(w', D_i)\;$ é a frequência bruta máxima de qualquer termo em $D_i$;
 - $(1-K)$ serve como um fator de escala para a normalização da frequência do termo;
 
 Observe que esta fórmula é uma generalização da frequência aumentada, que é um caso especial onde $K = 0.5$. Outra variação importante é a frequência logarítmica suavizada:
 
 $$
-\text{TF}_{log-smooth}(w, D_i) = \begin{cases} 1 + \log(1 + \log(f(w, D_i))) & \text{se } f(w, D_i) > 0 \\ 0 & \text{caso contrário} \end{cases}
+\text{TF}_{logSmooth}(w, D_i) = \begin{cases} 1 + \log(1 + \log(f(w, D_i))) & \text{se } f(w, D_i) > 0 \\ 0 & \text{caso contrário} \end{cases}
 $$
 
 que aplica uma dupla transformação logarítmica para uma suavização ainda mais agressiva. Também existe a frequência normalizada por comprimento:
@@ -990,7 +998,7 @@ $$
 
 que usa a norma euclidiana do documento como fator de normalização, sendo particularmente útil quando trabalhamos com vetores em espaços de alta dimensão. A escolha entre estas diferentes formulações geralmente depende do domínio específico e das características do corpus, sendo comum em sistemas modernos o uso de várias formulações em conjunto, combinadas através de técnicas de *ensemble* ou votação ponderada.
 
->Técnicas de *ensemble* e votação ponderada são métodos de combinação de diferentes abordagens para obter resultados mais robustos e confiáveis. Imagine um grupo de especialistas médicos analisando um caso complexo. Cada um tem sua expertise e perspectiva única, e a decisão final considera a opinião de todos, dando mais peso aos especialistas com mais experiência em aspectos específicos do caso. No contexto do **TF-IDF**, estas técnicas funcionam de maneira similar: diferentes fórmulas de **TF** são calculadas para o mesmo texto (como $\text{TF}_{log}$, $\text{TF}_{aug}$, etc.), e o resultado final é uma combinação ponderada desses valores. Por exemplo, podemos dar mais peso ao $\text{TF}_{aug}$ quando trabalhamos com documentos de tamanhos muito diferentes, e mais peso ao $\text{TF}_{log}$ quando lidamos com palavras de frequências muito variadas. Esta abordagem é particularmente poderosa porque combina as vantagens de diferentes formulações, compensando as limitações individuais de cada método e produzindo resultados mais estáveis e precisos em uma variedade maior de situações.
+>Técnicas de *ensemble* e votação ponderada são métodos de combinação de diferentes abordagens para obter resultados mais robustos e confiáveis. Imagine um grupo de especialistas médicos analisando um caso complexo. Cada um tem sua expertise e perspectiva única, e a decisão final considera a opinião de todos, dando mais peso aos especialistas com mais experiência em aspectos específicos do caso. No contexto do **TF-IDF**, estas técnicas funcionam de maneira similar: diferentes fórmulas de **TF** são calculadas para o mesmo texto (como $\text{log}$, $\text{aug}$, etc.), e o resultado final é uma combinação ponderada desses valores. Por exemplo, podemos dar mais peso ao $\text{aug}$ quando trabalhamos com documentos de tamanhos muito diferentes, e mais peso ao $\text{log}$ quando lidamos com palavras de frequências muito variadas. Esta abordagem é particularmente poderosa porque combina as vantagens de diferentes formulações, compensando as limitações individuais de cada método e produzindo resultados mais estáveis e precisos em uma variedade maior de situações.
 >
 >Quase deixo passar! A palavra *ensemble* vem do francês e significa conjunto, ou em conjunto. No contexto de análise de dados e aprendizado de máquina, uma técnica de *ensemble* refere-se a um método que combina múltiplos modelos ou abordagens diferentes para criar uma solução mais robusta. Como uma orquestra que, não por coincidência, também usa a palavra *ensemble*.
 >
@@ -1135,8 +1143,8 @@ $$
 
 Na qual, temos:
 
-- $|Docs|$ representa o número total de documentos na coleção;
-- $|\{D_j \in Docs: w \in D_j\}|$ é o número de documentos que contêm a palavra $w$. Este valor representa a frequência documental da palavra $w$;
+- $\vert Docs \vert $ representa o número total de documentos na coleção;
+- $\vert \{D_j \in Docs: w \in D_j\} \vert $ é o número de documentos que contêm a palavra $w$. Este valor representa a frequência documental da palavra $w$;
 - $\log$ é o logaritmo natural (base $e$).
 
 **Exemplo 1**: considere o **corpus** com três documentos que temos usado:
@@ -1161,7 +1169,7 @@ A função logarítmica na fórmula do **IDF** desempenha dois papéis important
 
 1. **Suavização da divisão**: a aplicação do logaritmo atenua o impacto de grandes variações no denominador. Isso é particularmente útil quando se lida com coleções de documentos muito grandes, onde a frequência documental de alguns termos pode ser muito baixa, levando a valores de IDF muito altos sem a suavização logarítmica.
 
-2. **Garantia de baixo peso para palavras comuns**: a função logarítmica garante que palavras muito comuns, que aparecem em um grande número de documentos (fazendo com que o denominador $|\{D_j \in Docs: w \in D_j\}|$ se aproxime de $|Docs|$), resultem em valores de **IDF** próximos de zero.  Idealmente, se uma palavra aparece em todos os documentos, o termo dentro do logaritmo se torna 1, e $\log(1) = 0$, atribuindo um **IDF** nulo a essa palavra, indicando sua falta de poder discriminatório.
+2. **Garantia de baixo peso para palavras comuns**: a função logarítmica garante que palavras muito comuns, que aparecem em um grande número de documentos (fazendo com que o denominador $\vert \{D_j \in Docs: w \in D_j\} \vert $ se aproxime de $\vert Docs \vert $), resultem em valores de **IDF** próximos de zero.  Idealmente, se uma palavra aparece em todos os documentos, o termo dentro do logaritmo se torna 1, e $\log(1) = 0$, atribuindo um **IDF** nulo a essa palavra, indicando sua falta de poder discriminatório.
 
 Em resumo, o **IDF** atua como um fator de ponderação que diminui a importância de termos que são comuns em muitos documentos e aumenta a importância de termos que são raros e, portanto, mais específicos e discriminativos dentro da coleção. Ao combinar o **IDF** com o **TF**, o algoritmo **TF-IDF** consegue identificar termos que são importantes em um documento específico e, ao mesmo tempo, distintivos em relação à coleção de documentos como um todo, melhorando significativamente a eficácia em tarefas como recuperação de informação e análise de texto.
 
@@ -1172,7 +1180,7 @@ Existem diferentes versões da fórmula **IDF**. Embora o princípio básico per
 Esta é a versão mais fundamental e amplamente utilizada, frequentemente referida como IDF padrão.
 
 $$
-\text{IDF}(w, Docs) = \log \left( \frac{|Docs|}{|\{D_j \in Docs: w \in D_j\}|} \right)
+\text{IDF}(w, Docs) = \log \left( \frac{\vert Docs \vert }{ \vert \{D_j \in Docs: w \in D_j\} \vert } \right)
 $$
 
 **Exemplo 2**: voltando ao **corpus** com três documentos:
@@ -1237,7 +1245,7 @@ $$
 \text{IDF}(w, Docs) = \log \left( \frac{N - df_w}{df_w} \right) = \log \left( \frac{N}{df_w} - 1 \right)
 $$
 
-Nesta fórmula, $N = |Docs|$ e $df_w = |\{D_j \in Docs: w \in D_j\}|$, frequência documental da palavra $w$.
+Nesta fórmula, $N = \vert Docs \vert $ e $df_w = \vert  \{D_j \in Docs: w \in D_j\} \vert $, frequência documental da palavra $w$.
 
 [^12]: ROBERTSON, S. E.; JONES, K. S. **Relevance weighting of search terms.** journal of the American Society for Information Science, v. 45, n. 3, p. 129–146, 1994.
 
@@ -1419,7 +1427,7 @@ Na qual, temos:
 - $D_i$ é o $i$-ésimo documento em nossa coleção;
 - $Docs$ é nossa coleção completa de documentos, *corpus*;
 - $\text{TF}(w, D_i)$ representa a frequência do termo $w$ no documento $D_i$;
-- \text{IDF}(w, Docs) é a frequência inversa do documento w no corpus.
+- $\text{IDF}(w, Docs)$ é a frequência inversa do documento w no corpus.
 
 Esta fórmula tem propriedades matemáticas interessantes:
 
@@ -1461,7 +1469,7 @@ No contexto de análise de documentos em processamento de linguagem natural, com
 - $D_2$:"O gato dorme muito";
 - $D_3$: "O rato come queijo".
 
-Após aplicar **TF-IDF** e considerando apenas os termos $[\text{"gato", "rato", "caça", "dorme", "come", "queijo"}]$, obtemos os vetores:
+Após aplicar **TF-IDF** e considerando apenas os termos $[\text{"gato", "rato", "caça", "dorme", "come", "queijo"}]\;$, obtemos os vetores:
 
 - $\vec{D_1} = [0.4, 0.4, 0.5, 0, 0, 0]$;
 - $\vec{D_2} = [0.4, 0, 0, 0.5, 0, 0]$;
@@ -1631,8 +1639,8 @@ Agora, vamos calcular o **TF-IDF** para algumas palavras chave:
 
 2. Cálculo do IDF:
 
-   - $|Docs| = 2$;
-   - $|\{D_j \in Docs: \text{"gato"} \in D_j\}| = 1$;
+   - $\vert Docs \vert  = 2$;
+   - $\vert \{D_j \in Docs: \text{"gato"} \in D_j\} \vert  = 1$;
    - $\text{IDF}(\text{"gato"}, Docs) = \log(\frac{2}{1}) \approx 0.301$.
 
 3. **TF-IDF** final:
@@ -1649,8 +1657,8 @@ Agora, vamos calcular o **TF-IDF** para algumas palavras chave:
 
 2. Cálculo do IDF:
 
-   - $|Docs| = 2$;
-   - $|\{D_j \in Docs: \text{"telhado"} \in D_j\}| = 2$;
+   - $\vert Docs \vert  = 2$;
+   - $\vert \{D_j \in Docs: \text{"telhado"} \in D_j\}\vert  = 2$;
    - $\text{IDF}(\text{"telhado"}, Docs) = \log(\frac{2}{2}) = 0$.
 
 3. **TF-IDF** final:
@@ -1659,10 +1667,10 @@ Agora, vamos calcular o **TF-IDF** para algumas palavras chave:
 
 A sagaz leitora deve notar que "telhado" recebeu pontuação zero em $D_2$ porque aparece em todos os documentos do corpus, ilustrando como o **TF-IDF** penaliza palavras muito comuns.
 
-Para um documento $D_i$, podemos construir um vetor **TF-IDF** $\vec{tfidf}_{D_i} \in \mathbb{R}^{|V_{global}|}$:
+Para um documento $D_i$, podemos construir um vetor **TF-IDF** $\vec{tfidf_{D_i}} \in \mathbb{R}^{\vert V_{global}\vert }$:
 
 $$
-\vec{tfidf}_{D_i} = [\text{TF-IDF}(w_1, D_i), \text{TF-IDF}(w_2, D_i), ..., \text{TF-IDF}(w_{|V_{global}|}, D_i)]^T
+\vec{tfidf_{D_i}} = [\text{TF-IDF}(w_1, D_i), \text{TF-IDF}(w_2, D_i), ..., \text{TF-IDF}(w_{\vert V_{global} \vert }, D_i)]^T
 $$
 
 Esta representação vetorial é útil em tarefas relacionadas com a recuperação de informação, classificação de documentos, agrupamento de textos similares e sistemas de recomendação baseados em conteúdo. Ou, em outras palavras, todas as atividades comuns, e básicas, do processamento de linguagem natural.
@@ -1729,7 +1737,7 @@ Onde $|Docs| = 3$ (número total de documentos).
 | "céu"        |            1            |      $\log(3/1) \approx 0.48$      |
 | "azul"       |            1            |      $\log(3/1) \approx 0.48$      |
 
-*Observação: Utilizamos o logaritmo natural (base $$e$$) para simplificação. Em aplicações reais, a base do logaritmo não altera o ranqueamento, apenas a escala dos valores.*
+*Observação: Utilizamos o logaritmo natural (base $e$). Em aplicações reais, a base do logaritmo não altera o ranqueamento, apenas a escala dos valores.*
 
 **3. Cálculo do TF-IDF:**
 
@@ -2380,9 +2388,9 @@ Esta implementação é uma aplicação prática dos conceitos teóricos apresen
 
 Chegamos ao **One-Hot Encoding**. Embora menos comum para representar diretamente *textos inteiros* em tarefas de processamento de linguagem natural mais sofisticados, o **One-Hot Encoding** é frequentemente usado como um passo inicial para representar *palavras individuais* ou *caracteres* numericamente em processamentos complexos.
 
-Em **One-Hot Encoding**, cada palavra, ou caractere, do vocabulário $V$, será representada por um vetor binário $\vec{e}_w$. Neste caso, o tamanho do vetor será igual ao tamanho do vocabulário, $\vert V \vert$. Para cada palavra $w_i \in V$, o vetor $\vec{e}_{w_i}$ terá todos os valores como $0$, exceto na posição $i$ correspondente à palavra $w_i$ no vocabulário, onde o valor será $1$.
+Em **One-Hot Encoding**, cada palavra, ou caractere, do vocabulário $V$, será representada por um vetor binário $\vec{e_w}$. Neste caso, o tamanho do vetor será igual ao tamanho do vocabulário, $\vert V \vert$. Para cada palavra $w_i \in V$, o vetor $\vec{e_{w_i}}$ terá todos os valores como $0$, exceto na posição $i$ correspondente à palavra $w_i$ no vocabulário, onde o valor será $1$.
 
-Formalmente, teremos: se $V = \{w_1, w_2, ..., w_{\vert V \vert }\}$ é o vocabulário ordenado, então o **One-Hot Encoding** para a palavra $w_i$ é um vetor $\vec{e}_{w_i} \in \mathbb{R}^{\vert V \vert }$ tal que:
+Formalmente, teremos: se $V = \{w_1, w_2, ..., w_{\vert V' \vert }\}$ é o vocabulário ordenado, então o **One-Hot Encoding** para a palavra $w_i$ é um vetor $\vec{e}_{w_i} \in \mathbb{R}^{\vert V' \vert }$ tal que:
 
 $$
 (\vec{e}_{w_i})_j =
@@ -2394,14 +2402,14 @@ $$
 
 Para o vocabulário $V'_{global} = \{ \text{"dorme"}, \text{"é"}, \text{"gato"}, \text{"no"}, \text{"o"}, \text{"preto"}, \text{"subiu"}, \text{"telhado"} \}$., o **One-Hot Encoding** seria:
 
-- $\vec{e}_{\text{"dorme"}} = [1, 0, 0, 0, 0, 0, 0, 0]^T$
-- $\vec{e}_{\text{"é"}} = [0, 1, 0, 0, 0, 0, 0, 0]^T$
-- $\vec{e}_{\text{"gato"}} = [0, 0, 1, 0, 0, 0, 0, 0]^T$
-- $\vec{e}_{\text{"no"}} = [0, 0, 0, 1, 0, 0, 0, 0]^T$
-- $\vec{e}_{\text{"o"}} = [0, 0, 0, 0, 1, 0, 0, 0]^T$
-- $\vec{e}_{\text{"preto"}} = [0, 0, 0, 0, 0, 1, 0, 0]^T$
-- $\vec{e}_{\text{"subiu"}} = [0, 0, 0, 0, 0, 0, 1, 0]^T$
-- $\vec{e}_{\text{"telhado"}} = [0, 0, 0, 0, 0, 0, 0, 1]^T$
+- $\vec{e_{\text{"dorme"}}} = [1, 0, 0, 0, 0, 0, 0, 0]^T$
+- $\vec{e_{\text{"é"}}} = [0, 1, 0, 0, 0, 0, 0, 0]^T$
+- $\vec{e_{\text{"gato"}}} = [0, 0, 1, 0, 0, 0, 0, 0]^T$
+- $\vec{e_{\text{"no"}}} = [0, 0, 0, 1, 0, 0, 0, 0]^T$
+- $\vec{e_{\text{"o"}}} = [0, 0, 0, 0, 1, 0, 0, 0]^T$
+- $\vec{e_{\text{"preto"}}} = [0, 0, 0, 0, 0, 1, 0, 0]^T$
+- $\vec{e_{\text{"subiu"}}} = [0, 0, 0, 0, 0, 0, 1, 0]^T$
+- $\vec{e_{\text{"telhado"}}} = [0, 0, 0, 0, 0, 0, 0, 1]^T$
 
 One-hot encoding é extremamente simples e garante que cada palavra seja representada de forma única e independente. É frequentemente usado como entrada para modelos de aprendizado profundo, especialmente em camadas iniciais de redes neurais.
 
