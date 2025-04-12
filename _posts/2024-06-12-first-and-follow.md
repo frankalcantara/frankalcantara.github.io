@@ -22,7 +22,7 @@ rating: 5
 published: 2024-06-12T13:16:53.564Z
 draft: 2024-06-12T13:00:39.229Z
 preview: Como construir os conjuntos First  e Follow que irão permitir a criação da tabela de análise para o algoritmo de parser.
-lastmod: 2025-04-12T14:02:44.212Z
+lastmod: 2025-04-12T14:36:33.728Z
 ---
 
 Não dá nem para começar a pensar em criar um *parser* $LL(1)$ se não entender os conjuntos $FIRST$ e $FOLLOW$. [Também não dá para entender estes conjuntos se não souber o que é um *parser* $LL(1)$](https://frankalcantara.com/parsers-ll(1)/) Imagine que você está aprendendo um novo idioma. Para formar frases corretas, você precisará entender quais palavras podem vir antes ou depois de outras. Ou corre o risco de falar como o Yoda. Se quiser evitar ser confundido com um velho alienígena, precisa aprender, no mínimo, a ordem das palavras, muito antes de entender a classe gramatical destas mesmas palavras. Como uma criança aprendendo a falar.
@@ -66,9 +66,9 @@ Considere a gramática definida pelo seguinte conjunto de regras de produção:
 
 $$
 \begin{array}{cc}
-1. &S \rightarrow aB \vert   bA \\
-2. &A \rightarrow c \vert   d \\
-3. &B \rightarrow e \vert   f \\
+1. &S \rightarrow aB \vert  bA \\
+2. &A \rightarrow c \vert  d \\
+3. &B \rightarrow e \vert  f \\
 \end{array}
 $$
 
@@ -229,9 +229,9 @@ Repita esses passos até que os conjuntos $FOLLOW$ de todos os símbolos não-te
 
 $$
 \begin{array}{cc}
-1. & S \rightarrow aB \vert   bA \\
-2. & A \rightarrow c \vert   d \\
-3. & B \rightarrow e \vert   f \\
+1. & S \rightarrow aB \vert  bA \\
+2. & A \rightarrow c \vert  d \\
+3. & B \rightarrow e \vert  f \\
 \end{array}
 $$
 
@@ -248,7 +248,7 @@ $$
 2.  $FOLLOW(A) = \{\$, c, d\}$
     *   A aparece em: $S \to bA$
     *   Como não há nada após $A$ na produção acima, adicionamos $FOLLOW(S)$ a $FOLLOW(A)$: $\{\$\}$
-    *   Além disso, como $A$ aparece após $b$ na produção $S \to bA$, e $B$ pode derivar em $c$ ou $d$ ($B \to c \vert   d$), então $c$ e $d$ também podem seguir $A$.
+    *   Além disso, como $A$ aparece após $b$ na produção $S \to bA$, e $B$ pode derivar em $c$ ou $d$ ($B \to c \vert  d$), então $c$ e $d$ também podem seguir $A$.
 
 3.  $FOLLOW(B) = \{\$\}$
     *   $B$ aparece em: $S \rightarrow aB$

@@ -34,7 +34,7 @@ featured: false
 toc: true
 preview: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de currying e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de currying e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2025-04-12T14:02:44.246Z
+lastmod: 2025-04-12T14:36:33.751Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -1108,7 +1108,7 @@ Schönfinkel apresentou combinadores para representar as operações da lógica 
 >
 > Esta operação foi introduzida pelo filósofo e lógico [Henry Maurice Sheffer](https://en.wikipedia.org/wiki/Henry_M._Sheffer), por isso o nome, em 1913.
 >
-> O trabalho que definiu o traço de Sheffer demonstrou que todas as operações booleanas podem ser expressas usando somente a operação *NAND*, simplificando a lógica proposicional. Em lógica de primeira ordem representamos esta a operação *NAND* por $ \mid $, $\uparrow$, ou $\overline{\wedge}$. Não é raro que neófitos confundam a representação do traço de Sheffer com $ \vert   \vert  $, que normalmente é usado para representar disjunção. A precavida leitora deve tomar cuidado com isso.
+> O trabalho que definiu o traço de Sheffer demonstrou que todas as operações booleanas podem ser expressas usando somente a operação *NAND*, simplificando a lógica proposicional. Em lógica de primeira ordem representamos esta a operação *NAND* por $ \mid $, $\uparrow$, ou $\overline{\wedge}$. Não é raro que neófitos confundam a representação do traço de Sheffer com $ \vert  \vert $, que normalmente é usado para representar disjunção. A precavida leitora deve tomar cuidado com isso.
 >
 > Formalmente, a operação $p \mid q$ pode ser expressa como:
 >

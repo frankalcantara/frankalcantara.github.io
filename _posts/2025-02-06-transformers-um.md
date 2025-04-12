@@ -31,7 +31,7 @@ keywords: |-
     inteligência artificial
 toc: true
 published: true
-lastmod: 2025-04-12T14:10:20.739Z
+lastmod: 2025-04-12T14:37:07.166Z
 ---
 
 Neste artigo, a curiosa leitora irá enfrentar os *Transformers*. Nenhuma relação com o o Optimus Prime. Se for estes *Transformers* que está procurando, **o Google falhou com você!**
@@ -59,7 +59,7 @@ Um vetor é uma entidade matemática que possui tanto magnitude, ou comprimento,
 Na geometria, um vetor pode ser visualizado como uma seta em um espaço, por exemplo, em um plano $2D$ ou em um espaço $3D$. O comprimento da seta representa a magnitude, e a direção da seta indica a direção do vetor. Imagine uma seta apontando para cima e para a direita em um plano. Essa seta é um vetor com uma certa magnitude (o comprimento da seta) e uma direção ($45$ graus em relação ao eixo horizontal, por exemplo). A Figura 1 mostra um vetor como usado na matemática e na física.
 
 ![uma seta vermelha representando um vetor](/assets/images/vector1.webp)
-_Figura 1: Um vetor partindo da origem $O$ com comprimento $\mid V \mid$ e dimensões $V_1$ e $V_2$.{: class="legend"}
+_Figura 1: Um vetor partindo da origem $O$ com comprimento $\mid V \mid$ e dimensões $V_1$ e $V_2$._{: class="legend"}
 
 Em um sistema algébrico de coordenadas, um vetor pode ser representado como uma tupla. Por exemplo, em um espaço tridimensional, um vetor pode ser escrito como $(x, y, z)$, onde $x$, $y$ e $z$ são as componentes do vetor ao longo dos eixos $x$, $y$ e $z$, respectivamente. Assim, se nos limitarmos a $2D$, o vetor $(2, 3)$ representa um deslocamento de $2$ unidades na direção $x$ e $3$ unidades na direção $y$. Na Figura 1 podemos ver um vetor $V$ partindo da origem $O$ e terminando no ponto $P(V_1, V_2)$.
 
@@ -609,7 +609,7 @@ int main() {
 O produto escalar oferece uma medida quantitativa da similaridade direcional entre dois vetores. Embora não constitua uma métrica de similaridade completa em todos os contextos, fornece informações valiosas sobre o alinhamento vetorial. Em termos gerais, a interpretação do produto escalar $\vec{u} \cdot \vec{v}$ segue estas propriedades:
 
 $$
-\vec{u} \cdot \vec{v} = \vert  \vec{u} \vert   \cdot \vert  \vec{v} \vert   \cdot \cos(\theta)
+\vec{u} \cdot \vec{v} = \vert \vec{u} \vert \vert \vec{v} \vert  \cdot \cos(\theta)
 $$
 
 Onde $\theta$ representa o ângulo entre os vetores, e podemos observar que:
@@ -625,7 +625,11 @@ Onde $\theta$ representa o ângulo entre os vetores, e podemos observar que:
 **Exemplo 2**: considerando os vetores $\vec{a} = [0, 1, 0]$ e $\vec{b} = [0.2, 0.7, 0.1]$, o produto escalar será:
 
 $$
-\vec{a} \cdot \vec{b} = (0 * 0.2) + (1 * 0.7) + (0 * 0.1) = 0 + 0.7 + 0 = 0.7
+\vec{a} \cdot \vec{b} = (0 \times 0.2) + (1 \times 0.7) + (0 \times 0.1)
+$$
+
+$$
+\vec{a} \cdot \vec{b} = 0 + 0.7 + 0 = 0.7
 $$
 
 No exemplo 2, o vetor $\vec{a} = [0, 1, 0]$ pode ser visto como um vetor que *ativa*, ou dá peso máximo, apenas à segunda dimensão, e peso zero às demais. Ao calcular o produto escalar com $\vec{b} = [0.2, 0.7, 0.1]$, estamos essencialmente *extraindo ou medindo* o valor da segunda componente de $b$ (que é $0.7$), ponderado pela *importância, ou peso* que o vetor $a$ atribui a essa dimensão.
@@ -642,26 +646,30 @@ A criativa leitora deve notar que o produto escalar é influenciado tanto pela d
 >
 >$$\vec{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$
 >
->em um espaço $n$-dimensional, a magnitude, eventualmente chamada de *Norma Euclidiana*, representada por $ \vert   \vec{v} \vert  $ será definida por:
+>em um espaço $n$-dimensional, a magnitude, eventualmente chamada de *Norma Euclidiana*, representada por $ \vert  \vec{v} \vert $ será definida por:
 >
 >$$
- \vert   \vec{v} \vert    = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2} = \sqrt{\sum_{i=1}^{n} v_i^2}
+ \vert  \vec{v} \vert = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2} = \sqrt{\sum_{i=1}^{n} v_i^2}
 $$
 
-**Exemplo 3**: dado o vetor $\vec{b} = \begin{bmatrix} 0.2 \\ 0.7 \\ 0.1 \end{bmatrix}$, vamos calcular sua magnitude $ \vert   \vec{b} \vert  $:
+**Exemplo 3**: dado o vetor $\vec{b} = \begin{bmatrix} 0.2 \\ 0.7 \\ 0.1 \end{bmatrix}$, vamos calcular sua magnitude $ \vert  \vec{b} \vert $:
 
 Podemos resolver este problema em dois passos:
 
 1. **Calcular o produto escalar de $\vec{b}$ consigo mesmo:**
 
    $$
-   \vec{b} \cdot \vec{b} = (0.2 \times 0.2) + (0.7 \times 0.7) + (0.1 \times 0.1) = 0.04 + 0.49 + 0.01 = 0.54
+   \vec{b} \cdot \vec{b} = (0.2 \times 0.2) + (0.7 \times 0.7) + (0.1 \times 0.1)
+   $$
+
+   $$
+   \vec{b} \cdot \vec{b} = 0.04 + 0.49 + 0.01 = 0.54
    $$
 
 2. **Extrair a raiz quadrada do resultado:**
 
    $$
-   \vert   \vec{b} \vert    = \sqrt{\vec{b} \cdot \vec{b}} = \sqrt{0.54} \approx 0.7348
+   \vert  \vec{b} \vert = \sqrt{\vec{b} \cdot \vec{b}} = \sqrt{0.54} \approx 0.7348
    $$
 
 Portanto, a magnitude do vetor $\vec{b} = \begin{bmatrix} 0.2 \\ 0.7 \\ 0.1 \end{bmatrix}$ é aproximadamente 0.7348.
@@ -670,13 +678,14 @@ A magnitude, pode ter interpretações diferentes em áreas diferentes do conhec
 
 *A atenta leitora deve observar que vetores com magnitudes maiores tendem a ter produtos escalares maiores, mesmo que a direção relativa seja a mesma.*
 
-Com as definições de produto escalar ($\vec{u} \cdot \vec{v}$) e magnitude ($ \vert  \vec{u} \vert  $, $ \vert  \vec{v} \vert  $) em mãos, podemos reorganizar a relação fundamental $\vec{u} \cdot \vec{v} = \vert  \vec{u} \vert   \cdot \vert  \vec{v} \vert   \cdot \cos(\theta)$ para isolar o cosseno do ângulo $\theta$. Isso nos fornece diretamente a fórmula da **Similaridade de Cosseno**, uma das métricas mais importantes em processamento de linguagem natural e recuperação de informação para medir a similaridade direcional entre dois vetores:
+Com as definições de produto escalar ($\vec{u} \cdot \vec{v}$) e magnitude ($ \vert \vec{u} \vert $, $ \vert \vec{v} \vert $) em mãos, podemos reorganizar a relação fundamental $\vec{u} \cdot \vec{v} = \vert \vec{u} \vert  \cdot \vert \vec{v} \vert  \cdot \cos(\theta)$ para isolar o cosseno do ângulo $\theta$. Isso nos fornece diretamente a fórmula da **Similaridade de Cosseno**, uma das métricas mais importantes em processamento de linguagem natural e recuperação de informação para medir a similaridade direcional entre dois vetores:
 
 $$
-\text{Similaridade de Cosseno}(\vec{u}, \vec{v}) = \cos(\theta) = \frac{\vec{u} \cdot \vec{v}}{ \vert  \vec{u} \vert   \cdot \vert  \vec{v} \vert  }
+\text{Similaridade de Cosseno}(\vec{u}, \vec{v}) = \cos(\theta) = \frac{\vec{u} \cdot \vec{v}}{ \vert \vec{u} \vert \vert \vec{v} \vert }
 $$
 
 Esta métrica varia no intervalo $[-1, 1]$:
+
 * $1$: Indica que os vetores apontam exatamente na mesma direção (ângulo $0^\circ$).
 * $0$: Indica que os vetores são ortogonais (perpendiculares, ângulo $90^\circ$).
 * $-1$: Indica que os vetores apontam em direções exatamente opostas (ângulo $180^\circ$).
@@ -691,21 +700,21 @@ Em alguns casos, a busca da similaridade implica na normalização dos vetores p
 
 >A normalização de um vetor $\vec{v}$ consiste em dividi-lo por sua norma (ou magnitude), resultando em um vetor unitário $\hat{v}$ que mantém a mesma direção, mas possui comprimento 1:
 >
->$$\hat{v} = \frac{\vec{v}}{ \vert  \vec{v} \vert  } = \frac{\vec{v}}{\sqrt{v_1^2 + v_2^2 + \cdots + v_n^2}}$$
+>$$\hat{v} = \frac{\vec{v}}{ \vert \vec{v} \vert } = \frac{\vec{v}}{\sqrt{v_1^2 + v_2^2 + \cdots + v_n^2}}$$
 >
->Neste caso, $ \vert  \vec{v} \vert  $ representa a norma euclidiana do vetor. Quando dois vetores normalizados são comparados através do produto escalar, o resultado varia apenas entre $-1$ e $1$, correspondendo diretamente ao cosseno do ângulo entre eles. Esta abordagem é particularmente útil em aplicações como recuperação de informações, sistemas de recomendação e processamento de linguagem natural, onde a orientação semântica dos vetores é geralmente mais relevante que suas magnitudes absolutas.
+>Neste caso, $ \vert \vec{v} \vert $ representa a norma euclidiana do vetor. Quando dois vetores normalizados são comparados através do produto escalar, o resultado varia apenas entre $-1$ e $1$, correspondendo diretamente ao cosseno do ângulo entre eles. Esta abordagem é particularmente útil em aplicações como recuperação de informações, sistemas de recomendação e processamento de linguagem natural, onde a orientação semântica dos vetores é geralmente mais relevante que suas magnitudes absolutas.
 
 >A norma euclidiana, também conhecida como norma $L_2$ ou comprimento euclidiano, é uma função que atribui a cada vetor um valor escalar não-negativo que pode ser interpretado como o "tamanho" ou "magnitude" do vetor. Para um vetor $\vec{v} = (v_1, v_2, \ldots, v_n)$ em $\mathbb{R}^n$, a norma euclidiana é definida como:
 >
->$$ \vert  \vec{v} \vert   = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2} = \sqrt{\sum_{i=1}^{n} v_i^2}$$
+>$$ \vert \vec{v} \vert = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2} = \sqrt{\sum_{i=1}^{n} v_i^2}$$
 >
 >Esta definição é uma generalização do teorema de Pitágoras para espaços de dimensão arbitrária. Geometricamente, representa a distância do ponto representado pelo vetor à origem do sistema de coordenadas.
 >
 >A norma euclidiana possui as seguintes propriedades fundamentais:
 >
->1. **Não-negatividade**: $ \vert   \vec{v} \vert   \geq 0$ para todo $\vec{v}$, e $ \vert   \vec{v} \vert   = 0$ se e somente se $\vec{v} = \vec{0}$
->2. **Homogeneidade**: $ \vert  \alpha\vec{v} \vert   = \vert \alpha \vert \cdot \vert  \vec{v} \vert  $ para qualquer escalar $\alpha$
->3. **Desigualdade triangular**: $ \vert  \vec{u} + \vec{v} \vert   \leq \vert  \vec{u} \vert   + \vert  \vec{v} \vert  $
+>1. **Não-negatividade**: $ \vert \vec{v} \vert  \geq 0$ para todo $\vec{v}$, e $ \vert  \vec{v} \vert = 0$ se e somente se $\vec{v} = \vec{0}$
+>2. **Homogeneidade**: $ \vert \alpha\vec{v} \vert = \vert \alpha \vert \cdot \vert \vec{v} \vert $ para qualquer escalar $\alpha$
+>3. **Desigualdade triangular**: $ \vert \vec{u} + \vec{v} \vert \leq \vert \vec{u} \vert + \vert \vec{v} \vert $
 >
 >Estas propriedades fazem da norma euclidiana uma ferramenta essencial em diversos campos, desde geometria e física até aprendizado de máquina e processamento de sinais, onde é utilizada para medir distâncias, calcular erros, e normalizar vetores.
 

@@ -20,7 +20,7 @@ keywords:
     - poesia
     - álgebra vetorial
 rating: 5
-lastmod: 2025-04-12T14:02:44.400Z
+lastmod: 2025-04-12T14:36:33.715Z
 ---
 
 O Eletromagnetismo é a lei, o ordenamento que embala o universo. Como uma divindade antiga que rege a existência e os movimentos de tudo que existe. Duas forças, elétrica e magnética, em uma dança interminável, moldam de um grão de poeira a um oceano de estrelas, até o mesmo dispositivo que você usa para decifrar essas palavras deve sua existência e funcionamento ao Eletromagnetismo.
@@ -151,7 +151,7 @@ Não é qualquer espaço, é um espaço específico, limitado à realidade e lim
 
 4. existe um vetor negativo $-\, \vec{A}$ de forma que a soma de um vetor com seu vetor negativo resulta no vetor zero. Tal que:
 
-   $$\exists -\, \vec{A} \in \mathbf{V} \space \space \vert   \space \space -\, \vec{A}+\, \vec{A}=\vec{0}$$
+   $$\exists -\, \vec{A} \in \mathbf{V} \space \space \vert  \space \space -\, \vec{A}+\, \vec{A}=\vec{0}$$
 
 5. o espaço vetorial $\mathbf{V}$ seja fechado em relação a multiplicação por um escalar, um valor sem direção ou sentido, de tal forma que para todo e qualquer elemento $c$ do conjunto dos números complexos $\mathbb{C}$ multiplicado por um vetor $\, \vec{a}$ do espaço vetorial $\mathbf{V}$ existe um, e somente um vetor $c\, \vec{a}$ que também pertence ao espaço vetorial $\mathbf{V}$. Tal que:
 
@@ -159,11 +159,11 @@ Não é qualquer espaço, é um espaço específico, limitado à realidade e lim
 
 6. Existe um escalar neutro $1$: tal que a multiplicação de qualquer vetor $\vec{A}$ por $1$ resulta em $\, \vec{A}$. Ou seja:
 
-   $$\exists \space 1 \in \mathbb{R} \space \space \wedge \space \space \exists \space \, \vec{A} \in \mathbf{V} \space \space \vert   \space \space 1\, \vec{A} = \, \vec{A}$$
+   $$\exists \space 1 \in \mathbb{R} \space \space \wedge \space \space \exists \space \, \vec{A} \in \mathbf{V} \space \space \vert  \space \space 1\, \vec{A} = \, \vec{A}$$
 
 É preciso manter a atenção voltada para a hierarquia que rege o mundo dos conjuntos. O conjunto dos números reais $\mathbb{R}$ é um subconjunto do conjunto dos números imaginários $\mathbb{C}=\{a+bi \space \space a.b \in \mathbb{R}\}$. Esta relação de pertencimento determina que o conjunto $\mathbb{R}$, o conjunto dos números reais, se visto de forma mais abrangente, representa de forma concisa, todos os números imaginários cuja parte imaginária é igual a zero. Se usarmos a linguagem da matemática dizemos que:
 
-$$\mathbb{R}=\{a+bi \space \space \vert   \space \space a.b \in \mathbb{R} \wedge b=0\}$$
+$$\mathbb{R}=\{a+bi \space \space \vert  \space \space a.b \in \mathbb{R} \wedge b=0\}$$
 
 A representação algébrica dos vetores definida por [Willard Gibbs](https://en.wikipedia.org/wiki/Josiah_Willard_Gibbs) (1839–1903), que usaremos neste documento, indica que um vetor em um espaço vetorial $\mathbf{V}$ qualquer é, pura e simplesmente, o resultado de operações realizadas entre os vetores que definem os componentes deste espaço vetorial.
 
@@ -185,13 +185,13 @@ O encanto da matemática se apresenta quando dizemos que todos os vetores do esp
 
 ### Vetores Unitários
 
-Um vetor $\vec{B}$ qualquer tem magnitude, direção e sentido. A magnitude, também chamada de intensidade, módulo, ou comprimento, será representada por $ \vert   \vec{B} \vert  $. Definiremos um vetor unitário $\, \vec{a}$ na direção $\vec{B}$ por $\, \vec{a}_B$ de tal forma que:
+Um vetor $\vec{B}$ qualquer tem magnitude, direção e sentido. A magnitude, também chamada de intensidade, módulo, ou comprimento, será representada por $ \vert  \vec{B} \vert $. Definiremos um vetor unitário $\, \vec{a}$ na direção $\vec{B}$ por $\, \vec{a}_B$ de tal forma que:
 
 $$ \, \vec{a}_B=\frac{\vec{B}}{|\vec{B}|} $$
 
 Um vetor unitário $\, \vec{a}_B$ é um vetor que tem a mesma direção e sentido de $\vec{B}$ com magnitude $1$ logo o módulo, ou magnitude, ou ainda comprimento de $\, \vec{a}_b$ será representado por:
 
-$$ \vert   \, \vec{a}_B \vert  =1$$
+$$ \vert  \, \vec{a}_B \vert =1$$
 
 Agora que conhecemos os vetores unitários podemos entender as regras que sustentam a Álgebra Vetorial e fazem com que todos os conceitos geométricos que fundamentaram a existência de vetores possam ser representados algebricamente, sem linhas nem ângulos, em um espaço, desde que este espaço esteja algebricamente definido em um sistema de coordenadas. Aqui, usaremos sistemas de coordenadas tridimensionais.
 
@@ -221,11 +221,11 @@ A matemática, tal qual o mar, guarda suas próprias surpresas. Às vezes, depoi
 
 Se tivermos um vetor $\vec{B} = b_x\, \vec{a}_x + b_y\, \vec{a}_y + b_z\, \vec{a}_z$ sua magnitude será dada por:
 
-$$ \vert   \vec{B} \vert  =\sqrt{ {b_x}^2 + {b_y}^2 + {b_z}^2}$$
+$$ \vert  \vec{B} \vert =\sqrt{ {b_x}^2 + {b_y}^2 + {b_z}^2}$$
 
 A princípio fugirá a percepção da amável leitora, mas é fato que desta forma poderemos encontrar o vetor unitário ${\, \vec{a}_B}$, que leremos vetor unitário a na direção do vetor $\vec{B}$ por:
 
-$$\, \vec{a}_B=\frac{ \vec{B} }{ \vert   \vec{B} \vert   }= \frac{b_x\, \vec{a}_x+b_y\, \vec{a}_y+b_z\, \vec{a}_z}{ \sqrt{b_x^2+b_y^2+b_z^2} }$$
+$$\, \vec{a}_B=\frac{ \vec{B} }{ \vert  \vec{B} \vert  }= \frac{b_x\, \vec{a}_x+b_y\, \vec{a}_y+b_z\, \vec{a}_z}{ \sqrt{b_x^2+b_y^2+b_z^2} }$$
 
 Equação que deve ser lida como: **o vetor unitário de um dado vetor será o próprio vetor dividido pela sua magnitude**. Talvez toda essa rigidez da matemática desvaneça diante dos seus olhos, lindos e cansados, se recorrermos a um exemplo.
 
@@ -262,7 +262,7 @@ Simplificando, obtemos:
 
 Para encontrar o vetor unitário $\vec{v}_{AB}$:
 \[
-\vec{v}_{AB} = \frac{\vec{V}_{AB} }{ \vert   \vec{V}_{AB} \vert   } = \frac{2 \, \vec{a}_x - 3 \, \vec{a}_y + 2 \, \vec{a}_z}{\sqrt{2^2 + (-3)^2 + 2^2} }
+\vec{v}_{AB} = \frac{\vec{V}_{AB} }{ \vert  \vec{V}_{AB} \vert  } = \frac{2 \, \vec{a}_x - 3 \, \vec{a}_y + 2 \, \vec{a}_z}{\sqrt{2^2 + (-3)^2 + 2^2} }
 \]
 Após calcular o módulo:
 \[
@@ -391,9 +391,9 @@ Observando o triângulo $OCB$, e aplicando uma pitada de trigonometria podemos d
 
 $$cos \theta = \frac{\overline{AC} }{\overline{BC} } \space\space \therefore \space\space \overline{AC} = (cos \theta) (\overline{BC})$$
 
-Como $\overline{AB} = \overline{OD} = \vert   \vec{Q} \vert  $ teremos:
+Como $\overline{AB} = \overline{OD} = \vert  \vec{Q} \vert $ teremos:
 
-$$\overline{AC} = (cos \theta) ( \vert   \vec{Q} \vert  )$$
+$$\overline{AC} = (cos \theta) ( \vert  \vec{Q} \vert )$$
 
 Este não é o único triângulo que temos. Ainda podemos trabalhar com o triângulo $ABC$. Neste caso: 
 
@@ -578,21 +578,21 @@ Para calcular o vetor unitário na direção do vetor $P_M$ teremos:
 
 <b>(c)</b> finalmente, para calcular o perímetro do triângulo formado por: $P_1(4,4,3)$, $P_2(-2,0,5)$ e $P_3(7,-2,1)$, precisaremos somar os módulos dos vetores distância ente $P_1(4,3,2)$ e $P_2(-2,0,5)$, $P_2(-2,0,5)$ e $P_3(7,-2,1)$ e $P_3(7,-2,1)$ e $P_1(4,3,2)$.
 
-\[ \vert   P_1P_2 \vert   = \vert   (4,4,3)-(-2,0,5) \vert   = \vert   (6,4,-2) \vert  \]
+\[ \vert  P_1P_2 \vert = \vert  (4,4,3)-(-2,0,5) \vert = \vert  (6,4,-2) \vert \]
 
-\[ \vert   P_1P_2 \vert   = \sqrt{6^2+4^2+2^2}=7,48\]
+\[ \vert  P_1P_2 \vert = \sqrt{6^2+4^2+2^2}=7,48\]
 
-\[ \vert   P_2P_3 \vert   = \vert   (-2,0,5)-(7,-2,1) \vert   = \vert   (-9,2,-4) \vert  \]
+\[ \vert  P_2P_3 \vert = \vert  (-2,0,5)-(7,-2,1) \vert = \vert  (-9,2,-4) \vert \]
 
-\[ \vert   P_2P_3 \vert   = \sqrt{9^2+2^2+4^2}=10,05\]
+\[ \vert  P_2P_3 \vert = \sqrt{9^2+2^2+4^2}=10,05\]
 
-\[ \vert   P_3P_1 \vert   = \vert   (7,-2,1)-(4,4,3) \vert   = \vert   (3,-6,-2) \vert  \]
+\[ \vert  P_3P_1 \vert = \vert  (7,-2,1)-(4,4,3) \vert = \vert  (3,-6,-2) \vert \]
 
-\[ \vert   P_3P_1 \vert   = \sqrt{3^2+6^2+6^2}=7\]
+\[ \vert  P_3P_1 \vert = \sqrt{3^2+6^2+6^2}=7\]
 
 Sendo assim o perímetro será:
 
-\[ \vert   P_1P_2 \vert   + \vert   P_2P_3 \vert   + \vert   P_3P_1 \vert   =7,48+10,05+7=24.53 \]
+\[ \vert  P_1P_2 \vert  + \vert  P_2P_3 \vert  + \vert  P_3P_1 \vert  =7,48+10,05+7=24.53 \]
 </p>
 
 Vetores são como os ventos que cruzam o mar, invisíveis mas poderosos, guiando navios e direcionando correntes. Na matemática, eles têm sua própria linguagem, um código entre o visível e o invisível, mapeando direções e magnitudes. Aqui, você encontrará exercícios que irão desafiar sua habilidade de navegar por esse oceano numérico. Não são apenas problemas, mas bússolas que apontam para o entendimento mais profundo. Então pegue lápis e papel como se fossem um leme e um mapa e prepare-se para traçar seu próprio curso.
@@ -619,7 +619,7 @@ Usando a linguagem da matemática, direta e linda, podemos dizer que dados os ve
 
 Aqui abro mão da isenção e recorro a geometria. Mais que isso, faremos uso da trigonometria para reduzir o Produto Escalar ao máximo de simplicidade usando uma equação que inclua o ângulo entre os dois vetores. Sem nos perdermos nas intrincadas transformações trigonométricas diremos que o Produto Escalar entre $\vec{A}$ e $\vec{B}$ será:
 
-$$\vec{A} \cdot \vec{B} = \vert   \vec{A} \vert   \vert   \vec{B} \vert   cos(\theta_{AB})$$
+$$\vec{A} \cdot \vec{B} = \vert  \vec{A} \vert  \vert  \vec{B} \vert  cos(\theta_{AB})$$
 
 Onde $\theta_{AB}$ representa o ângulo entre os dois vetores. Esta é a equação analítica do Produto Escalar. A ferramenta mais simples que podemos usar. Não é uma equação qualquer, ela representa a projeção do vetor $\vec{A}$ sobre o vetor $\vec{B}$. Se não, a paciente leitora, não estiver vendo esta projeção deve voltar a geometria, não a acompanharei nesta viagem, tenho certeza do seu sucesso. Em bom português dizemos que **o Produto Escalar entre dois vetores $\vec{A}$ e $\vec{B}$ quaisquer é o produto entre o produto das magnitudes destes vetores e o cosseno do menor ângulo entre eles**.
 
@@ -646,7 +646,7 @@ Dados os vetores $\vec{A}=3\, \vec{a}_x + 4\, \vec{a}_y + \, \vec{a}_z$ e $\vec{
 <b>Solução:</b><br>
 Para calcular o ângulo vamos usar a equação analítica do Produto Escalar:
 
-\[\vec{A}\cdot \vec{B} = \vert   \vec{a} \vert   \vert   \vec{B} \vert   cos(\theta)\]
+\[\vec{A}\cdot \vec{B} = \vert  \vec{a} \vert  \vert  \vec{B} \vert  cos(\theta)\]
 
 Precisaremos dos módulos dos vetores e do Produto Escalar entre eles. Calculando o Produto Escalar a partir dos componentes vetoriais de cada vetor teremos:
 
@@ -656,13 +656,13 @@ Precisaremos dos módulos dos vetores e do Produto Escalar entre eles. Calculand
 
 Calculando os módulos de $\vec{A}$ e $\vec{B}$, teremos:
 
-\[ \vert   \vec{A} \vert   = \vert   (3,4,1) \vert   =\sqrt{3^2+4^2+1^2}=5,1\]
+\[ \vert  \vec{A} \vert = \vert  (3,4,1) \vert  =\sqrt{3^2+4^2+1^2}=5,1\]
 
-\[ \vert   \vec{B} \vert   = \vert   (1,2,-5) \vert   =\sqrt{1^2+2^2+5^2}=5,48\]
+\[ \vert  \vec{B} \vert = \vert  (1,2,-5) \vert  =\sqrt{1^2+2^2+5^2}=5,48\]
 
 Já que temos o Produto Escalar e os módulos dos vetores podemos aplicar nossa equação analítica:
 
-\[ \vec{A}\cdot \vec{B} = \vert   \vec{A} \vert   \vert   \vec{B} \vert   cos(\theta)\]
+\[ \vec{A}\cdot \vec{B} = \vert  \vec{A} \vert  \vert  \vec{B} \vert  cos(\theta)\]
 
 logo:
 
@@ -706,13 +706,13 @@ Uma vez que tenhamos entendido a operação Produto Escalar, nos resta entender 
 
 3. **Associatividade com Escalares:** o Produto Escalar é como um maestro habilidoso que sabe equilibrar todos os instrumentos em uma orquestra. Imagine um escalar como a intensidade da música: aumente ou diminua, e a harmonia ainda será mantida. Multiplicar um vetor por um escalar e, em seguida, realizar o Produto Escalar com outro vetor é o mesmo que primeiro executar o Produto Escalar e depois ajustar a intensidade. O Produto Escalar, em sua elegância matemática, garante que o show continue de maneira harmoniosa, independentemente de quando a intensidade é ajustada. Essa é a essência da associatividade com escalares. Portanto, podemos dizer que: $k(\vec{A} \cdot \vec{B}) = (k \vec{A}) \cdot \vec{B} = \vec{A} \cdot (k\vec{B})$
 
-4. **Produto Escalar do Vetor Consigo Mesmo:** O Produto Escalar tem um momento introspectivo, como um dançarino girando em um reflexo de espelho. Quando um vetor é multiplicado por si mesmo, ele revela sua verdadeira força, sua magnitude ao quadrado. É uma dança solitária, onde o vetor se alinha perfeitamente consigo mesmo, na mais pura sintonia. Esta auto-referência nos mostra o quanto o vetor se projeta em sua própria direção, revelando a essência de sua magnitude. Assim, temos: $\vec{A} \cdot \vec{A} = \vert   \vec{A} \vert  ^2$. Veja um vetor $\vec{A}$. Uma seta solitária estendendo-se no espaço. Imagine colocar outra seta exatamente igual, exatamente no mesmo lugar. Duas Setas juntas, $\vec{A}$ e $\vec{A}$, sem nenhum ângulo entre elas.
+4. **Produto Escalar do Vetor Consigo Mesmo:** O Produto Escalar tem um momento introspectivo, como um dançarino girando em um reflexo de espelho. Quando um vetor é multiplicado por si mesmo, ele revela sua verdadeira força, sua magnitude ao quadrado. É uma dança solitária, onde o vetor se alinha perfeitamente consigo mesmo, na mais pura sintonia. Esta auto-referência nos mostra o quanto o vetor se projeta em sua própria direção, revelando a essência de sua magnitude. Assim, temos: $\vec{A} \cdot \vec{A} = \vert  \vec{A} \vert ^2$. Veja um vetor $\vec{A}$. Uma seta solitária estendendo-se no espaço. Imagine colocar outra seta exatamente igual, exatamente no mesmo lugar. Duas Setas juntas, $\vec{A}$ e $\vec{A}$, sem nenhum ângulo entre elas.
 
 Por que? Porque o ângulo $\theta$ entre um vetor e ele mesmo é $zero$. E o cosseno de zero é $1$. Assim:
 
-$$\vec{A}\cdot \vec{A} = \vert   \vec{A} \vert  ^2$$
+$$\vec{A}\cdot \vec{A} = \vert  \vec{A} \vert ^2$$
 
-Para simplificar, vamos dizer que $\vec{A}^2$ é o mesmo que $ \vert   \vec{A} \vert   ^2$. Uma notação, uma abreviação para o comprimento, magnitude, de $\vec{A}$ ao quadrado. Aqui está a lição: **um vetor e ele mesmo, lado a lado, são definidos pela magnitude do próprio vetor, ao quadrado**. É um pequeno pedaço de sabedoria, um truque, uma ferramenta. Mantenha esta ferramenta sempre à mão, você vai precisar.
+Para simplificar, vamos dizer que $\vec{A}^2$ é o mesmo que $ \vert  \vec{A} \vert  ^2$. Uma notação, uma abreviação para o comprimento, magnitude, de $\vec{A}$ ao quadrado. Aqui está a lição: **um vetor e ele mesmo, lado a lado, são definidos pela magnitude do próprio vetor, ao quadrado**. É um pequeno pedaço de sabedoria, um truque, uma ferramenta. Mantenha esta ferramenta sempre à mão, você vai precisar.
 
 Assim como as ondas em uma praia, indo e voltando, de tempos em tempos precisamos rever as ferramentas que adquirimos e o conhecimento que construímos com elas. Em todos os sistemas de coordenadas que usamos para definir o espaço $\mathbf{V}$ os vetores unitários são ortogonais. Setas no espaço que se cruzam em um ângulo reto. Este ângulo reto garante duas propriedades interessantes.
 
@@ -784,7 +784,7 @@ imagine que temos dois vetores, firme e diretos, apontando em suas direções pa
 
 Portanto, a dança do Produto Vetorial é peculiar e intrigante, os dançarinos não trocam de lugar como a dança tradicional e a sequência de seus passos importa, mesmo assim ela acolhe a velha regra da distributividade. Uma dança peculiar no palco da matemática. Que leva a criação de uma novo dançarino, um novo vetor, perpendicular ao plano onde dançam os vetores originais. Esse novo vetor, esse Produto Vetorial, pode ser definido por uma equação analítica, geométrica, trigonométrica:
 
-$$A \times B = \vert   A \vert   \vert   B \vert   sen(\theta_{AB}) a_n$$
+$$A \times B = \vert  A \vert  \vert  B \vert  sen(\theta_{AB}) a_n$$
 
 Onde $a_n$ representa o vetor unitário na direção perpendicular ao plano formado pelo paralelogramo formado por $A$ e $B$.
 É uma fórmula simples, mas poderosa. Ela nos diz como calcular o Produto Vetorial, como determinar a direção, o sentido e a intensidade desta seta, lançada ao espaço.
@@ -793,7 +793,7 @@ A direção dessa seta, representada pelo vetor unitário $a_n$, será decidida 
 
 O Produto Vetorial determina uma forma de conectar dois vetores, $A$ e $B$, e criar algo novo: um terceiro vetor, lançado diretamente para fora do plano criado por $A$ e $B$. E esse vetor, esse Produto Vetorial, tem tanto uma magnitude - a área do paralelogramo - quanto uma direção - decidida pela regra da mão direita. É uma forma de entender o espaço tridimensional. E como todas as coisas na álgebra vetorial, é simples, mas poderoso.
 
-$$\vec{A} \times \vec{A} = \vert   \vec{A} \vert    \vert   \vec{B} \vert   sen(\theta_{AB}) a_n$$
+$$\vec{A} \times \vec{A} = \vert  \vec{A} \vert   \vert  \vec{B} \vert  sen(\theta_{AB}) a_n$$
 
 É uma equação poderosa e simples, útil, muito útil, mas geométrica, trigonométrica e analítica. Algebricamente o Produto Vetorial pode ser encontrado usando uma matriz. As matrizes são os sargentos do exército da Álgebra Vetorial, úteis mas trabalhosas e cheias de regras. Considerando os vetores $\vec{a}=\, \vec{a}_x \, \vec{a}_x+\, \vec{a}_y \, \vec{a}_y+\, \vec{a}_z \, \vec{a}_z$ e $\vec{B}=B_x \, \vec{a}_x+B_y \, \vec{a}_y+B_z \, \vec{a}_z$ o Produto Vetorial $\vec{A}\times \vec{B}$ será encontrado resolvendo a matriz:
 
@@ -900,30 +900,30 @@ Usando Sarrus em cada uma destas matrizes teremos:
 
 Esta foi a parte difícil, agora precisamos dos módulos, magnitudes, dos vetores $\vec{A}$ e $\vec{B}$.
 
-\[ \vert   \vec{A} \vert   = \sqrt{1^2+2^2+3^2} = \sqrt{14} \approx 3.74165\]
+\[ \vert  \vec{A} \vert = \sqrt{1^2+2^2+3^2} = \sqrt{14} \approx 3.74165\]
 
-\[ \vert   \vec{B} \vert   = \sqrt{4^2+5^2+6^2} = \sqrt{77} \approx 8.77496\]
+\[ \vert  \vec{B} \vert = \sqrt{4^2+5^2+6^2} = \sqrt{77} \approx 8.77496\]
 
 Para calcular o ângulo vamos usar a equação analítica, ou trigonométrica, do Produto Vetorial:
 
-\[\vec{A} \times \vec{B} = \vert   \vec{A} \vert    \vert   \vec{B} \vert   sen(\theta_{AB}) a_n\]
+\[\vec{A} \times \vec{B} = \vert  \vec{A} \vert   \vert  \vec{B} \vert  sen(\theta_{AB}) a_n\]
 
 A forma mais fácil de resolver este problema é aplicar o módulo aos dois lados da equação. Se fizermos isso, teremos:
 
-\[ \vert   \vec{A} \times \vec{B} \vert   = \vert   \vec{A} \vert   \vert   \vec{B} \vert   sen(\theta_{AB}) \vert   a_n \vert   \]
+\[ \vert  \vec{A} \times \vec{B} \vert = \vert  \vec{A} \vert  \vert  \vec{B} \vert  sen(\theta_{AB}) \vert  a_n \vert  \]
 
-Como $a_n$ é um vetor unitário, por definição $ \vert   a_n \vert   = 1$ logo:
+Como $a_n$ é um vetor unitário, por definição $ \vert  a_n \vert = 1$ logo:
 
-\[ \vert   \vec{A} \times \vec{B} \vert   = \vert   \vec{A} \vert   \vert   \vec{B} \vert   sen(\theta_{AB})\]
+\[ \vert  \vec{A} \times \vec{B} \vert = \vert  \vec{A} \vert  \vert  \vec{B} \vert  sen(\theta_{AB})\]
 
 Ou, para ficar mais claro:
 
-\[sen(\theta_{AB}) = \frac{ \vert   \, \vec{a} \times \vec{B} \vert  }{ \vert   \, \vec{a} \vert   \vert   \vec{B} \vert  }\]
+\[sen(\theta_{AB}) = \frac{ \vert  \, \vec{a} \times \vec{B} \vert }{ \vert  \, \vec{a} \vert  \vert  \vec{B} \vert }\]
 
 Os módulos de $\vec{A}$ e $\vec{B}$ já tenos, precisamos apenas do módulo de $\vec{A}\times \vec{B}$.
 
 \[
- \vert   \vec{A}\times \vec{B} \vert   = \sqrt{27^2+16^2+3^2} = \sqrt{994} \approx 31.5298
+ \vert  \vec{A}\times \vec{B} \vert = \sqrt{27^2+16^2+3^2} = \sqrt{994} \approx 31.5298
 \]
 
 Assim o seno do ângulo $\theta_{AB}$ será dado por:
@@ -968,7 +968,7 @@ O Produto Vetorial é como uma dança entre vetores. E como todas as danças tem
 
 #### Exercício 14
 
-Considerando a equação analítica do Produto escalar, $\vec{A} \cdot \vec{B} = \vert   \vec{A} \vert   \vert   \vec{B} \vert   cos(\theta)$, e a equação analítica do Produto Vetorial, $\vec{A} \times \vec{A} = \vert   \vec{A} \vert   \vert   \vec{B} \vert   sen(\theta_{AB})$ prove que estas duas operações são distributivas.
+Considerando a equação analítica do Produto escalar, $\vec{A} \cdot \vec{B} = \vert  \vec{A} \vert  \vert  \vec{B} \vert  cos(\theta)$, e a equação analítica do Produto Vetorial, $\vec{A} \times \vec{A} = \vert  \vec{A} \vert  \vert  \vec{B} \vert  sen(\theta_{AB})$ prove que estas duas operações são distributivas.
 
 ### Produto Triplo Escalar
 
