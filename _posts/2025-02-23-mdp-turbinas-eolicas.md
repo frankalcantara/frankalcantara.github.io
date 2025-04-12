@@ -21,7 +21,7 @@ preview: Usando o MDP para resolver problemas da vida real. Neste caso um proble
 keywords: Reinforcement Learning, Markov Decision Processes (MDP), Manutenção de Turbinas Eólicas, Manutenção Preditiva Industrial, General Electric (GE), Grid World, Otimização de Manutenção, Distribuição de Poisson, Equações de Bellman, Iteração de Valor, Iteração de Política, Custo de Manutenção, Turbinas Eólicas, Estados de Deterioração, Manutenção Preventiva, Manutenção Corretiva, Intervalos de Inspeção, Aplicações de MDP, Eficiência Industrial, Redução de Custos Operacionais
 toc: true
 published: true
-lastmod: 2025-04-08T19:52:34.593Z
+lastmod: 2025-04-12T14:02:29.899Z
 slug: mdp-casos-reais-manutencao-de-turbinas-eolicas
 ---
 
@@ -98,9 +98,9 @@ O sistema possui $7$ estados, mais simples que os $12$ estados que usamos no exe
 >
 >Para nosso MDP, isto significa que em qualquer estado não-terminal $s$, existe uma probabilidade $\lambda_0$ de transição para o estado de falha aleatória (estado 7):
 >
->$$ P(s' = 7\vert s, a) = \lambda_0 = 0.0027 $$
+>$$ P(s' = 7 \vert   s, a) = \lambda_0 = 0.0027 $$
 >
-Esta probabilidade será incorporada na matriz de transição $P(s'\vert s,a)$ como uma transição possível de cada estado não-terminal para o estado $7$, considerando três possibilidades em cada estado:
+Esta probabilidade será incorporada na matriz de transição $P(s' \vert   s,a)$ como uma transição possível de cada estado não-terminal para o estado $7$, considerando três possibilidades em cada estado:
 >
 >- Deterioração natural (com taxa $\lambda$)
 >- Falha aleatória (com taxa $\lambda_0$)
@@ -198,7 +198,7 @@ Por isso os autores do artigo[^1] precisaram otimizar também o intervalo entre 
 ### Questões
 
 1. **Modelagem do Sistema**
-   a) Formule a matriz de transição $P(s'\vert s,a)$ para cada ação;
+   a) Formule a matriz de transição $P(s' \vert   s,a)$ para cada ação;
    b) Defina a função de recompensa $R(s,a,s')$;
    c) Identifique os estados terminais e suas características.
 
@@ -253,7 +253,7 @@ Antes de começarmos, devemos lembrar que os estados são:
 
 #### Matriz para Nenhuma Ação \text{(NA)}
 
-A primeira matriz que construiremos é $P(s'\vert s,NA)$, que representa as transições naturais do sistema quando nenhuma ação de manutenção é tomada.
+A primeira matriz que construiremos é $P(s' \vert   s,NA)$, que representa as transições naturais do sistema quando nenhuma ação de manutenção é tomada.
 
 **Parâmetros Iniciais:**
 
@@ -265,19 +265,19 @@ A primeira matriz que construiremos é $P(s'\vert s,NA)$, que representa as tran
 
 1. **Estados não-terminais (1-5)**: Para cada estado $i$ de 1 a 5:
 
-   - Permanecer no mesmo estado: $P(s' = i\vert s = i) = 0.9961$;
-   - Deteriorar para próximo estado: $P(s' = i+1\vert s = i) = 0.0012$;
-   - Falha aleatória: $P(s' = 7\vert s = i) = 0.0027$;
+   - Permanecer no mesmo estado: $P(s' = i \vert   s = i) = 0.9961$;
+   - Deteriorar para próximo estado: $P(s' = i+1 \vert   s = i) = 0.0012$;
+   - Falha aleatória: $P(s' = 7 \vert   s = i) = 0.0027$;
    - Demais probabilidades: $0$.
 
 2. **Estados terminais (6-7)**:
 
-   - Estado 6: $P(s' = 6\vert s = 6) = 1$ (absorvente);
-   - Estado 7: $P(s' = 7\vert s = 7) = 1$ (absorvente).
+   - Estado 6: $P(s' = 6 \vert   s = 6) = 1$ (absorvente);
+   - Estado 7: $P(s' = 7 \vert   s = 7) = 1$ (absorvente).
 
 Isto resulta na matriz:
 
-$$ P(s'\vert s,NA) = \begin{bmatrix}
+$$ P(s' \vert   s,NA) = \begin{bmatrix}
 0.9961 & 0.0012 & 0 & 0 & 0 & 0 & 0.0027 \\
 0 & 0.9961 & 0.0012 & 0 & 0 & 0 & 0.0027 \\
 0 & 0 & 0.9961 & 0.0012 & 0 & 0 & 0.0027 \\
@@ -295,15 +295,15 @@ $$ P(s'\vert s,NA) = \begin{bmatrix}
 
 ### Matriz para Manutenção Menor $\text{(MM)}$
 
-A matriz $P(s'\vert s,MM)$ representa as transições quando aplicamos manutenção menor. Esta ação só é possível nos estados 2 a 5.
+A matriz $P(s' \vert   s,MM)$ representa as transições quando aplicamos manutenção menor. Esta ação só é possível nos estados 2 a 5.
 
 **Processo de Construção:**
 
 1. **Estados Aplicáveis (2-5)**:
 
-  - Probabilidade de retorno ao estado perfeito (1): $P(1\vert i) = 0.7$;
-  - Probabilidade de retorno ao estado 2: $P(2\vert i) = 0.2$;
-  - Probabilidade de retorno ao estado 3: $P(3\vert i) = 0.1$;
+  - Probabilidade de retorno ao estado perfeito (1): $P(1 \vert   i) = 0.7$;
+  - Probabilidade de retorno ao estado 2: $P(2 \vert   i) = 0.2$;
+  - Probabilidade de retorno ao estado 3: $P(3 \vert   i) = 0.1$;
   - Todas outras probabilidades: $0$.
 
 2. **Estados Não-Aplicáveis (1,6,7)**:
@@ -312,7 +312,7 @@ A matriz $P(s'\vert s,MM)$ representa as transições quando aplicamos manutenç
 
 A matriz resultante é:
 
-$$ P(s'\vert s,MM) = \begin{bmatrix}
+$$ P(s' \vert   s,MM) = \begin{bmatrix}
 \text{NA} & \text{NA} & \text{NA} & \text{NA} & \text{NA} & \text{NA} & \text{NA} \\
 0.7 & 0.2 & 0.1 & 0 & 0 & 0 & 0 \\
 0.7 & 0.2 & 0.1 & 0 & 0 & 0 & 0 \\
@@ -331,15 +331,15 @@ $$ P(s'\vert s,MM) = \begin{bmatrix}
 
 #### Matriz para Manutenção Preventiva $\text{(PM)}$
 
-A matriz $P(s'\vert s,PM)$ representa transições após manutenção preventiva, que também só é aplicável nos estados 2 a 5, mas com maior probabilidade de retorno ao estado perfeito.
+A matriz $P(s' \vert   s,PM)$ representa transições após manutenção preventiva, que também só é aplicável nos estados 2 a 5, mas com maior probabilidade de retorno ao estado perfeito.
 
 **Processo de Construção:**
 
 1. **Estados Aplicáveis (2-5)**:
 
-  - Probabilidade de retorno ao estado 1: $P(1\vert i) = 0.9$;
-  - Probabilidade de retorno ao estado 2: $P(2\vert i) = 0.09$;
-  - Probabilidade de retorno ao estado 3: $P(3\vert i) = 0.01$;
+  - Probabilidade de retorno ao estado 1: $P(1 \vert   i) = 0.9$;
+  - Probabilidade de retorno ao estado 2: $P(2 \vert   i) = 0.09$;
+  - Probabilidade de retorno ao estado 3: $P(3 \vert   i) = 0.01$;
   - Todas outras probabilidades: $0$.
 
 2. **Estados Não-Aplicáveis (1,6,7)**:
@@ -348,7 +348,7 @@ A matriz $P(s'\vert s,PM)$ representa transições após manutenção preventiva
 
 A matriz resultante é:
 
-$$ P(s'\vert s,PM) = \begin{bmatrix}
+$$ P(s' \vert   s,PM) = \begin{bmatrix}
 \text{NA} & \text{NA} & \text{NA} & \text{NA} & \text{NA} & \text{NA} & \text{NA} \\
 0.9 & 0.09 & 0.01 & 0 & 0 & 0 & 0 \\
 0.9 & 0.09 & 0.01 & 0 & 0 & 0 & 0 \\
@@ -366,12 +366,12 @@ $$ P(s'\vert s,PM) = \begin{bmatrix}
 
 #### Matriz para Manutenção Corretiva \text{(CM)}
 
-A matriz $P(s'\vert s,CM)$ representa transições após manutenção corretiva, que é aplicável apenas nos estados de falha ($6$ e $7$).
+A matriz $P(s' \vert   s,CM)$ representa transições após manutenção corretiva, que é aplicável apenas nos estados de falha ($6$ e $7$).
 
 **Processo de Construção:**
 
 1. **Estados Aplicáveis (6-7)**:
-  - Probabilidade de retorno ao estado 1: $P(1\vert i) = 1$
+  - Probabilidade de retorno ao estado 1: $P(1 \vert   i) = 1$
   - Todas outras probabilidades: 0
 
 2. **Estados Não-Aplicáveis (1-5)**:
@@ -379,7 +379,7 @@ A matriz $P(s'\vert s,CM)$ representa transições após manutenção corretiva,
 
 A matriz resultante é:
 
-$$ P(s'\vert s,CM) = \begin{bmatrix}
+$$ P(s' \vert   s,CM) = \begin{bmatrix}
 \text{NA} & \text{NA} & \text{NA} & \text{NA} & \text{NA} & \text{NA} & \text{NA} \\
 \text{NA} & \text{NA} & \text{NA} & \text{NA} & \text{NA} & \text{NA} & \text{NA} \\
 \text{NA} & \text{NA} & \text{NA} & \text{NA} & \text{NA} & \text{NA} & \text{NA} \\
@@ -536,13 +536,13 @@ $$
 A função valor-ação $Q^*(s,a)$ representa o custo esperado ao tomar a ação $a$ no estado $s$ e seguir a política ótima daí em diante. Ela é definida como:
 
 $$
-Q^*(s,a) = R(s,a) + \gamma \sum_{s' \in S} P(s'\vert s,a) V^{*}(s')
+Q^*(s,a) = R(s,a) + \gamma \sum_{s' \in S} P(s' \vert   s,a) V^{*}(s')
 $$
 
 Incorporando o intervalo de inspeção $t$, temos:
 
 $$
-Q^*(s,a,t) = R(s,a,t) + \gamma \sum_{s' \in S} P(s'\vert s,a) V^{*}(s')
+Q^*(s,a,t) = R(s,a,t) + \gamma \sum_{s' \in S} P(s' \vert   s,a) V^{*}(s')
 $$
 
 **Exemplo**: Para $s=2$ e $a=MM$, com um intervalo $t$ específico:
@@ -575,12 +575,12 @@ No **Grid World** apresentado nos artigos anteriores, as equações de Bellman s
 **Equação do Grid World**:
 
 $$
-V^{*}(s) = \max_{a \in A} \left[ R(s,a) + \gamma \sum_{s' \in S} P(s'\vert s,a) V^{*}(s') \right]
+V^{*}(s) = \max_{a \in A} \left[ R(s,a) + \gamma \sum_{s' \in S} P(s' \vert   s,a) V^{*}(s') \right]
 $$
 
 Esta equação usa maximização (recompensas positivas) versus minimização aqui (custos negativos) e não inclui $t$, pois cada passo é uma decisão imediata.
 
-**Similaridades**: as duas equações usam o princípio de otimalidade de Bellman. Ambas dependem de probabilidades de transição $P(s'\vert s,a)$ e recompensas $R(s,a)$.
+**Similaridades**: as duas equações usam o princípio de otimalidade de Bellman. Ambas dependem de probabilidades de transição $P(s' \vert   s,a)$ e recompensas $R(s,a)$.
 
 **Diferenças**: neste exercício, $R(s,a,t)$ é dinâmico com $t$, enquanto no **Grid World** é constante por passo. A inclusão de falhas aleatórias, segundo a distribuição de Poisson, e custos de estado não detectado adiciona complexidade ausente no **Grid World**.
 
@@ -615,16 +615,16 @@ A sagaz leitora deve notar que esta inicialização é arbitrária e outras esco
 O método de iteração de valor atualiza os valores de estado em cada iteração $k$ usando a equação de Bellman adaptada para este problema, que inclui o intervalo de inspeção $t$:
 
 $$
-V_{k+1}(s) = \min_{a \in A_s, t \in T_s} \left[ R(s,a,t) + \gamma \sum_{s' \in S} P(s'\vert s,a) V_k(s') \right]
+V_{k+1}(s) = \min_{a \in A_s, t \in T_s} \left[ R(s,a,t) + \gamma \sum_{s' \in S} P(s' \vert   s,a) V_k(s') \right]
 $$
 
 Nesta equação temos:
 
 - $A_s$ é o conjunto de ações disponíveis no estado $s$ ($\{NA\}$ para $s=1$, $\{NA, MM, PM\}$ para $s=2,3,4,5$, $\{CM\}$ para $s=6,7$);
 - $T_s$ é o conjunto de intervalos de inspeção ($500h$ a $20.000h$, discretizados em 20 intervalos de 975h cada);
-- $R(s,a,t) = C_{insp}(s) + C_{ação}(a) + \sum_{s' \in S} P(s'\vert s,a) C_{falha}(s') + C_{estado}(s) \cdot t$;
+- $R(s,a,t) = C_{insp}(s) + C_{ação}(a) + \sum_{s' \in S} P(s' \vert   s,a) C_{falha}(s') + C_{estado}(s) \cdot t$;
 - $\gamma = 0.9$ é o fator de desconto;
-- $P(s'\vert s,a)$ é a probabilidade de transição definida nas matrizes da Questão 1.
+- $P(s' \vert   s,a)$ é a probabilidade de transição definida nas matrizes da Questão 1.
 
 O processo iterativo continua até que a diferença entre $V_{k+1}(s)$ e $V_k(s)$ seja menor que um limiar pequeno. Por exemplo, $\epsilon = 0.01$, indicando convergência.
 
@@ -639,7 +639,7 @@ Vamos calcular $V_1(1)$, o valor do estado perfeito ($s=1$) na primeira iteraç�
 No estado $s=1$, a única ação disponível é $NA$ (Nenhuma Ação). A matriz de transição para $NA$ é:
 
 $$
-P(s'\vert 1,NA) = \begin{cases}
+P(s' \vert   1,NA) = \begin{cases}
 0.9961, & \text{se } s' = 1 \\
 0.0012, & \text{se } s' = 2 \\
 0.0027, & \text{se } s' = 7 \\
@@ -652,7 +652,7 @@ $$
 A função de recompensa é:
 
 $$
-R(1,NA,t) = C_{insp}(1) + C_{ação}(NA) + \sum_{s' \in S} P(s'\vert 1,NA) C_{falha}(s') + C_{estado}(1) \cdot t
+R(1,NA,t) = C_{insp}(1) + C_{ação}(NA) + \sum_{s' \in S} P(s' \vert   1,NA) C_{falha}(s') + C_{estado}(1) \cdot t
 $$
 
 - $C_{insp}(1) = 200$ (custo de inspeção para estados não terminais);
@@ -661,7 +661,7 @@ $$
   - $C_{falha}(1) = 0$ (sem falha);
   - $C_{falha}(2) = 0$ (sem falha);
   - $C_{falha}(7) = 180.000$ (falha aleatória);
-  - $\sum_{s' \in S} P(s'\vert 1,NA) C_{falha}(s') = 0.9961 \cdot 0 + 0.0012 \cdot 0 + 0.0027 \cdot 180000 = 0 + 0 + 486 = 486$;
+  - $\sum_{s' \in S} P(s' \vert   1,NA) C_{falha}(s') = 0.9961 \cdot 0 + 0.0012 \cdot 0 + 0.0027 \cdot 180000 = 0 + 0 + 486 = 486$;
 - $C_{estado}(1) = 1.000/h$ (custo por hora em estado não detectado);
 - $t = 500h$;
 
@@ -676,19 +676,19 @@ $$
 Usamos os valores iniciais $V_0(s')$:
 
 $$
-\sum_{s' \in S} P(s'\vert 1,NA) V_0(s') = 0.9961 \cdot V_0(1) + 0.0012 \cdot V_0(2) + 0.0027 \cdot V_0(7)
+\sum_{s' \in S} P(s' \vert   1,NA) V_0(s') = 0.9961 \cdot V_0(1) + 0.0012 \cdot V_0(2) + 0.0027 \cdot V_0(7)
 $$
 
 Como $V_0(1) = V_0(2) = V_0(7) = 0$:
 
 $$
-\sum_{s' \in S} P(s'\vert 1,NA) V_0(s') = 0.9961 \cdot 0 + 0.0012 \cdot 0 + 0.0027 \cdot 0 = 0
+\sum_{s' \in S} P(s' \vert   1,NA) V_0(s') = 0.9961 \cdot 0 + 0.0012 \cdot 0 + 0.0027 \cdot 0 = 0
 $$
 
 Com $\gamma = 0.9$:
 
 $$
-\gamma \sum_{s' \in S} P(s'\vert 1,NA) V_0(s') = 0.9 \cdot 0 = 0
+\gamma \sum_{s' \in S} P(s' \vert   1,NA) V_0(s') = 0.9 \cdot 0 = 0
 $$
 
 #### Passo 4: Atualizar $V_1(1)$
@@ -696,7 +696,7 @@ $$
 Para $s=1$, com apenas uma ação ($NA$):
 
 $$
-V_1(1) = R(1,NA,500) + \gamma \sum_{s' \in S} P(s'\vert 1,NA) V_0(s')
+V_1(1) = R(1,NA,500) + \gamma \sum_{s' \in S} P(s' \vert   1,NA) V_0(s')
 $$
 
 Substituímos:
@@ -751,23 +751,23 @@ A sagaz leitora deve notar que esta é uma escolha inicial simples, e o método 
 Na avaliação de política, calculamos os valores $V^{\pi_0}(s)$ para cada estado $s$ sob a política $\pi_0$, resolvendo o sistema de equações lineares derivado da equação de Bellman para uma política fixa:
 
 $$
-V^{\pi_0}(s) = R(s, \pi_0(s), t) + \gamma \sum_{s' \in S} P(s'\vert s, \pi_0(s)) V^{\pi_0}(s')
+V^{\pi_0}(s) = R(s, \pi_0(s), t) + \gamma \sum_{s' \in S} P(s' \vert   s, \pi_0(s)) V^{\pi_0}(s')
 $$
 
 Nesta equação temos:
 
 - $R(s, a, t)$ representa a recompensa, custo, definida na Questão 1;
 - $\gamma = 0.9$ é o fator de desconto;
-- $P(s'\vert s, a)$ vem das matrizes de transição da Questão 1;
+- $P(s' \vert   s, a)$ vem das matrizes de transição da Questão 1;
 - $t = 500h$ conforme $\pi_0$.
 
 Para simplificar, vamos calcular $V^{\pi_0}(1)$ como exemplo (estado perfeito):
 
 - $\pi_0(1) = (NA, 500h)$;
-- $R(1, NA, 500) = C_{insp}(1) + C_{ação}(NA) + \sum_{s' \in S} P(s'\vert 1, NA) C_{falha}(s') + C_{estado}(1) \cdot 500$;
+- $R(1, NA, 500) = C_{insp}(1) + C_{ação}(NA) + \sum_{s' \in S} P(s' \vert   1, NA) C_{falha}(s') + C_{estado}(1) \cdot 500$;
   - $C_{insp}(1) = 200$;
   - $C_{ação}(NA) = 0$;
-  - $\sum_{s' \in S} P(s'\vert 1, NA) C_{falha}(s') = 0.9961 \cdot 0 + 0.0012 \cdot 0 + 0.0027 \cdot 180000 = 486$ (ver Questão 3);
+  - $\sum_{s' \in S} P(s' \vert   1, NA) C_{falha}(s') = 0.9961 \cdot 0 + 0.0012 \cdot 0 + 0.0027 \cdot 180000 = 486$ (ver Questão 3);
   - $C_{estado}(1) \cdot 500 = 1000 \cdot 500 = 500000$;
   - $R(1, NA, 500) = 200 + 0 + 486 + 500000 = 500686$.
 
@@ -802,7 +802,7 @@ Esse valor é aproximado e alto devido à simplificação (ignoramos $V^{\pi_0}(
 Na melhoria de política, atualizamos $\pi_1(s)$ escolhendo a ação e intervalo que minimizam o custo esperado com base nos valores $V^{\pi_0}(s)$:
 
 $$
-\pi_1(s) = \arg\min_{a \in A_s, t \in T_s} \left[ R(s, a, t) + \gamma \sum_{s' \in S} P(s'\vert s, a) V^{\pi_0}(s') \right]
+\pi_1(s) = \arg\min_{a \in A_s, t \in T_s} \left[ R(s, a, t) + \gamma \sum_{s' \in S} P(s' \vert   s, a) V^{\pi_0}(s') \right]
 $$
 
 Para $s=1$, testamos $NA$ com diferentes $t$, por exemplo: $500h$, $2000h$:

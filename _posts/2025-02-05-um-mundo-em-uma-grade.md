@@ -44,7 +44,7 @@ keywords: |-
     Modelagem MDP
 toc: true
 published: true
-lastmod: 2025-04-08T20:25:30.830Z
+lastmod: 2025-04-12T14:02:44.383Z
 ---
 
 A esforçada leitora, se realmente quiser entender as técnicas e algoritmos de *Reinforcement Learning* - **RL**, deve começar com problemas simples. Não é qualquer problema. Problemas que permitam construir uma compreensão sólida dos princípios estruturantes desta tecnologia. É aqui que o **Grid World** brilha e se destaca.
@@ -85,7 +85,7 @@ O **MDP** permite a criação de modelos, apenas modelos. Nada mais, nada menos.
 
 4. **Recompensas**: as recompensas são como sinais numéricos que guiam o agente em direção ao comportamento desejado. A função de recompensa $R(s,a,s')$ mapeia cada par estado-ação para um valor numérico. Este valor representa o *quão bom* foi tomar aquela ação naquele estado. A recompensa é imediata e não considera consequências futuras da ação. Voltando ao exemplo do xadrez, capturar uma rainha poderia dar uma recompensa alta imediata $(+9)$, mesmo que isso possa levar a uma posição tática desfavorável no futuro.
 
-5. **Dinâmica**: a dinâmica do sistema, também chamada de função de transição $P(s' \vert s,a)$, descreve como o mundo evolui em resposta às ações do agente. Esta função determina a probabilidade de alcançar um estado $s'$ quando tomamos a ação a no estado $s$. A propriedade mais importante da dinâmica em um **MDP** é que ela depende apenas do estado atual e da ação escolhida.
+5. **Dinâmica**: a dinâmica do sistema, também chamada de função de transição $P(s' \vert   s,a)$, descreve como o mundo evolui em resposta às ações do agente. Esta função determina a probabilidade de alcançar um estado $s'$ quando tomamos a ação a no estado $s$. A propriedade mais importante da dinâmica em um **MDP** é que ela depende apenas do estado atual e da ação escolhida.
 
 6. **Planejamento**: no planejamento, assume-se que todos os componentes são conhecidos. O objetivo do agente, tomador de decisão, é encontrar uma política, isto é, um mapeamento do histórico de observações de estados para ações, que maximize alguma função objetivo da recompensa.
 
@@ -97,13 +97,13 @@ $$P_{ij}$$
 
 ou
 
-$$P(X_{n+1} = j\vert X_n = i)$$
+$$P(X_{n+1} = j \vert   X_n = i)$$
 
 representando probabilidades de transição. Esta notação serviu bem ao propósito de estabelecer as bases matemáticas dos processos estocásticos e das *Cadeias de Markov*. No entanto, ao entrarmos no domínio do **Reinforcement Learning - RL**, adotaremos a notação padrão desta área.
 
 Em **RL**, representamos estados como $s$ e $s'$, ao invés de $X_n$ e $X_{n+1}$. Esta mudança não é apenas uma preferência estética, reflete uma sutileza importante: em **RL**, frequentemente estamos mais preocupados com a relação entre estados e menos preocupados com sua evolução temporal explícita. A notação $s$ e $s'$ enfatiza a transição de um estado para outro, independentemente do momento específico em que isso ocorre.
 
-As probabilidades de transição também ganham um novo elemento: a ação $a$. Assim, $P(s'\vert s,a)$ substitui nossa notação anterior $P(X_{n+1} = j\vert X_n = i)$. Esta mudança destaca o papel central do agente no processo de decisão. *Não estamos mais apenas observando transições, mas ativamente influenciando-as através de ações*.
+As probabilidades de transição também ganham um novo elemento: a ação $a$. Assim, $P(s' \vert   s,a)$ substitui nossa notação anterior $P(X_{n+1} = j \vert   X_n = i)$. Esta mudança destaca o papel central do agente no processo de decisão. *Não estamos mais apenas observando transições, mas ativamente influenciando-as através de ações*.
 
 Esta nova notação permite expressar conceitos de **RL** de forma natural e intuitiva. Por exemplo: *uma política* $\pi(s)$ mapeia estados para ações, e a função valor $V^\pi(s)$ representa o valor esperado de longo prazo de estar em um estado $s$ seguindo a política $\pi$. Estas ideias, embora possíveis de expressar na notação anterior, tornam-se mais claras e diretas com a notação padrão de *RL*.
 
@@ -165,7 +165,7 @@ Agora, que a analítica leitora entendeu os conceitos, podemos mapear os compone
 
 2. **Ações ($A$)**: o conjunto de ações possíveis para o agente em cada estado consiste nos movimentos direcionais: ${Norte, Sul, Leste, Oeste}$.
 
-3. **Função de Transição ($P$)**: a função de transição $P(s'\vert s,a)$ define a probabilidade de, estando no estado $s$ e executando a ação $a$, o agente transite para o estado $s'$. No nosso **Grid World**, essa função é determinada pelas regras de movimento estocástico que definimos anteriormente ($80\%$ na direção desejada, $10\%$ para os lados, permanecer no mesmo estado se colidir com a parede).
+3. **Função de Transição ($P$)**: a função de transição $P(s' \vert   s,a)$ define a probabilidade de, estando no estado $s$ e executando a ação $a$, o agente transite para o estado $s'$. No nosso **Grid World**, essa função é determinada pelas regras de movimento estocástico que definimos anteriormente ($80\%$ na direção desejada, $10\%$ para os lados, permanecer no mesmo estado se colidir com a parede).
 
 4. **Função de Recompensa ($R$)**: a função de recompensa $R(s,a,s′)$ define a recompensa que o agente recebe ao transitar do estado $s$ para o estado $s′$ após executar a ação $a$. No **Grid World**, isso engloba tanto as recompensas de passo, positivas e negativas, quanto as recompensas nos estados terminais.
 
@@ -251,15 +251,15 @@ Um mundo, qualquer mundo, que define um problema específico precisa da definiç
 
         Estas transições podem ser representadas probabilisticamente em **FOL** utilizando, como exemplo considere as seguintes distribuições de probabilidade condicionais, para a ação $Norte$:
 
-        $$P(\text{Agente}(x,y+1,t+1) \vert \text{Agente}(x,y,t) \land \text{Acao}(\text{Norte})) = 0.8$$
+        $$P(\text{Agente}(x,y+1,t+1) \vert   \text{Agente}(x,y,t) \land \text{Acao}(\text{Norte})) = 0.8$$
 
-        $$P(\text{Agente}(x+1,y,t+1) \vert \text{Agente}(x,y,t) \land \text{Acao}(\text{Norte})) = 0.1 $$
+        $$P(\text{Agente}(x+1,y,t+1) \vert   \text{Agente}(x,y,t) \land \text{Acao}(\text{Norte})) = 0.1 $$
 
-        $$P(\text{Agente}(x-1,y,t+1) \vert \text{Agente}(x,y,t) \land \text{Acao}(\text{Norte})) = 0.1 $$
+        $$P(\text{Agente}(x-1,y,t+1) \vert   \text{Agente}(x,y,t) \land \text{Acao}(\text{Norte})) = 0.1 $$
 
         Note que estas probabilidades somam $1.0$:
 
-        $$\sum_{s'} P(\text{Agente}(s',t+1) \vert \text{Agente}(s,t) \land \text{Acao}(a)) = 1.0$$
+        $$\sum_{s'} P(\text{Agente}(s',t+1) \vert   \text{Agente}(s,t) \land \text{Acao}(a)) = 1.0$$
 
         Esta é uma propriedade fundamental de qualquer distribuição de probabilidade e deve ser mantida para todas as ações do agente.
 
@@ -267,7 +267,7 @@ Um mundo, qualquer mundo, que define um problema específico precisa da definiç
 
 Para completar o modelo de transição, precisamos também definir o comportamento quando o agente encontra uma parede:
 
-$$P(\text{Agente}(x,y,t+1) \vert \text{Agente}(x,y,t) \land \text{Acao}(\text{Norte}) \land \text{Estado}(x,y+1,\text{parede})) = 1.0$$
+$$P(\text{Agente}(x,y,t+1) \vert   \text{Agente}(x,y,t) \land \text{Acao}(\text{Norte}) \land \text{Estado}(x,y+1,\text{parede})) = 1.0$$
 
 Esta equação especifica que quando há uma parede no estado de destino, o agente permanece em sua posição atual com probabilidade 1.0. Equações similares devem ser definidas para as outras direções.
 
@@ -285,7 +285,7 @@ A função objetivo, que guia o aprendizado do agente, também pode ser definida
 
 2. **Função Valor**: a função valor $V^\pi(x,y)$ para uma política $\pi$ pode ser definida como o valor esperado do retorno acumulado a partir do estado inicial $(x,y)$ seguindo a política $\pi$:
 
-    $$V^\pi(x,y) = \mathbb{E} \left[ \sum_{t=0}^{\infty} \gamma^t R(x_t,y_t) \vert (x_0,y_0)=(x,y), \pi \right]$$
+    $$V^\pi(x,y) = \mathbb{E} \left[ \sum_{t=0}^{\infty} \gamma^t R(x_t,y_t) \vert   (x_0,y_0)=(x,y), \pi \right]$$
 
     Esta equação representa a definição padrão da função valor em *Reinforcement Learning*, agora expressa na nossa formalização em **FOL**.
 
@@ -303,7 +303,7 @@ Na qual, teremos:
 
 Este sistema, $GW$, captura formalmente a essência do **Grid World** utilizando Lógica de Primeira Ordem. É importante notar que este sistema preserva a propriedade de Markov, mesmo na formulação em **FOL**:
 
-$$ P(s_{t+1} \vert s_t, a_t, s_{t-1}, a_{t-1}, ..., s_0) = P(s_{t+1} \vert s_t, a_t) $$
+$$ P(s_{t+1} \vert   s_t, a_t, s_{t-1}, a_{t-1}, ..., s_0) = P(s_{t+1} \vert   s_t, a_t) $$
 
 Embora a linguagem de descrição seja diferente (**FOL** vs. notação de **MDP** tradicional), a propriedade de Markov, que simplifica o aprendizado, continua válida. A formalização em **FOL** oferece uma perspectiva alternativa ao estudo do **Grid World** e, por extensão, para a fundação teórica dos Processos de Decisão de Markov e do Reinforcement Learning.
 
@@ -327,7 +327,7 @@ Agora que definimos o **Grid World** tanto na perspectiva de **MDP** quanto na d
 
 - **Estados**: Representados por $s$ ou $s'$. O conjunto de todos os estados possíveis é denotado por $S$.
 - **Ações**: Representadas por $a$. O conjunto de ações possíveis é denotado por $A$.
-- **Função de Transição**: Denotada por $P(s' \vert s, a)$, que representa a probabilidade de transitar para o estado $s'$ ao tomar a ação $a$ no estado $s$.
+- **Função de Transição**: Denotada por $P(s' \vert   s, a)$, que representa a probabilidade de transitar para o estado $s'$ ao tomar a ação $a$ no estado $s$.
 - **Função de Recompensa**: Denotada por $R(s, a, s')$, que mapeia cada par estado-ação para um valor numérico representando a recompensa imediata.
 - **Política**: Denotada por $\pi(s)$, que mapeia estados para ações. A política ótima é denotada por $\pi^*(s)$.
 - **Função Valor**: Denotada por $V^\pi(s)$, que representa o valor esperado de longo prazo de estar em um estado $s$ seguindo a política $\pi$.
@@ -347,13 +347,13 @@ Agora que definimos o **Grid World** tanto na perspectiva de **MDP** quanto na d
   - Axioma 2: Posição única do agente.
 
 - **Modelo de Transição**:
-  - Probabilidades de transição são representadas por $P(\text{Agente}(x', y', t+1) \vert \text{Agente}(x, y, t), \text{Acao}(a))$.
+  - Probabilidades de transição são representadas por $P(\text{Agente}(x', y', t+1) \vert   \text{Agente}(x, y, t), \text{Acao}(a))$.
 
 ### Exemplos de Uso
 
 - **Função de Transição**:
   
-  $$P(s' \vert s, a) = \text{Probabilidade de transitar para } s' \text{ ao tomar a ação } a \text{ no estado } s$$
+  $$P(s' \vert   s, a) = \text{Probabilidade de transitar para } s' \text{ ao tomar a ação } a \text{ no estado } s$$
 
 - **Função de Recompensa**:
   
@@ -365,4 +365,4 @@ Agora que definimos o **Grid World** tanto na perspectiva de **MDP** quanto na d
 
 - **Função Valor**:
   
-  $$V^\pi(s) = \mathbb{E} \left[ \sum_{t=0}^{\infty} \gamma^t R(s_t) \vert s_0 = s, \pi \right]$$
+  $$V^\pi(s) = \mathbb{E} \left[ \sum_{t=0}^{\infty} \gamma^t R(s_t) \vert   s_0 = s, \pi \right]$$

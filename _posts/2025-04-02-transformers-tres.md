@@ -38,7 +38,7 @@ keywords: |-
     lstm
 toc: true
 published: false
-lastmod: 2025-04-11T16:00:16.186Z
+lastmod: 2025-04-12T14:02:44.355Z
 ---
 
 ## Modelando Sequencias - Além da Frequência de Termos
@@ -110,20 +110,20 @@ Nesta interface, nosso vocabulário $V$ tem cardinalidade $9$ e será dado por:
 
 $$V = \{\text{mostre}, \text{me}, \text{meus}, \text{minhas}, \text{diretórios}, \text{arquivos}, \text{fotos}, \text{por}, \text{favor}\}$$
 
-Podemos representar as transições prováveis entre palavras com uma **matriz de transição**, $T$. Nesta matriz, cada linha e coluna corresponde a uma palavra do vocabulário $V = \{v_1, \dots, v_9\}$. A entrada $T_{ij}$ da matriz indica a probabilidade de que a próxima palavra seja $v_j$, dado que a palavra atual é $v_i$. Formalmente, $T_{ij} = P(\text{próxima palavra} = v_j \vert  \text{palavra atual} = v_i)$.
+Podemos representar as transições prováveis entre palavras com uma **matriz de transição**, $T$. Nesta matriz, cada linha e coluna corresponde a uma palavra do vocabulário $V = \{v_1, \dots, v_9\}$. A entrada $T_{ij}$ da matriz indica a probabilidade de que a próxima palavra seja $v_j$, dado que a palavra atual é $v_i$. Formalmente, $T_{ij} = P(\text{próxima palavra} = v_j \vert    \text{palavra atual} = v_i)$.
 
 Teremos que calcular as probabilidades de transição usando exclusivamente as três frases de exemplo, assumindo que cada uma destas frases tem exatamente a mesma probabilidade de ocorrência, $1/3$. E vamos considerar assim, para simplificar os cálculos e o entendimento.
 
 Para o cálculo destas probabilidades usaremos a probabilidade condicional, dada por:
 
-$$P(\text{próxima palavra} \vert \text{palavra atual)} = (\text{Número de vezes que a "próxima palavra" segue a "palavra atual" nas frases}) / (\text{Número total de vezes que a "palavra atual" aparece nas frases})$$
+$$P(\text{próxima palavra} \vert   \text{palavra atual)} = (\text{Número de vezes que a "próxima palavra" segue a "palavra atual" nas frases}) / (\text{Número total de vezes que a "palavra atual" aparece nas frases})$$
 
 Sendo assim, teremos:
 
 * **Após "mostre"**: sempre seguida por "me".
     A palavra "mostre" aparece $3$ vezes no total (uma vez em cada frase). Em todas as $3$ vezes, a palavra seguinte é "me".
 
-    $$P(\text{me} \vert  \text{mostre}) = \frac{3}{3} = 1$$
+    $$P(\text{me} \vert    \text{mostre}) = \frac{3}{3} = 1$$
 
     A probabilidade de qualquer outra palavra seguir "mostre" é $0$, pois isso nunca acontece nos exemplos.
 
@@ -131,52 +131,52 @@ Sendo assim, teremos:
 
     A palavra "me" aparece $3$ vezes no total (uma vez em cada frase). Em $2$ dessas vezes (frases 1 e 2), a palavra seguinte é "meus". Em $1$ dessas vezes (frase 3), a palavra seguinte é "minhas".
 
-    $$P(\text{meus} \vert  \text{me}) = \frac{2 \text{ ocorrências}}{3 \text{ total}} = \frac{2}{3} \approx 0.67$$
+    $$P(\text{meus} \vert    \text{me}) = \frac{2 \text{ ocorrências}}{3 \text{ total}} = \frac{2}{3} \approx 0.67$$
 
-    $$P(\text{minhas} \vert  \text{me}) = \frac{1 \text{ ocorrência}}{3 \text{ total}} = \frac{1}{3} \approx 0.33$$
+    $$P(\text{minhas} \vert    \text{me}) = \frac{1 \text{ ocorrência}}{3 \text{ total}} = \frac{1}{3} \approx 0.33$$
 
     A soma das probabilidades $(2/3 + 1/3)$ é $1$. A probabilidade de qualquer outra palavra seguir "me" é $0$.
 
 * **Após "meus"**: é seguida por "diretórios" na frase $1$ e "arquivos" na frase $2$. Assumindo que, uma vez que "meus" foi dita, as continuações "diretórios" e "arquivos" são igualmente prováveis:
   
     $$
-    P(\text{diretórios} \vert  \text{meus}) = \frac{1 \text{ ocorrência}}{2 \text{ total}} = 0.5
+    P(\text{diretórios} \vert    \text{meus}) = \frac{1 \text{ ocorrência}}{2 \text{ total}} = 0.5
     $$
 
     $$
-    P(\text{arquivos} \vert  \text{meus}) = \frac{1 \text{ ocorrência}}{2 \text{ total}} = 0.5
+    P(\text{arquivos} \vert    \text{meus}) = \frac{1 \text{ ocorrência}}{2 \text{ total}} = 0.5
     $$
 
     $$
-    P(\text{fotos} \vert  \text{meus}) = 0$$
+    P(\text{fotos} \vert    \text{meus}) = 0$$
 
     isso porque "fotos" nunca segue "meus" nos documentos que determinam a interface deste exemplo.
 
 * **Após "minhas"**: sempre seguida por "fotos" (frase 3).
 
-    $$P(\text{fotos} \vert  \text{minhas}) = 1$$
+    $$P(\text{fotos} \vert    \text{minhas}) = 1$$
 
 * **Após "diretórios":** Sempre seguida por "por" (frase 1).
 
-    $$P(\text{por} \vert  \text{diretórios}) = 1$$
+    $$P(\text{por} \vert    \text{diretórios}) = 1$$
 
 * **Após "arquivos":** Sempre seguida por "por" (frase 2).
 
-    $$P(\text{por} \vert  \text{arquivos}) = 1$$
+    $$P(\text{por} \vert    \text{arquivos}) = 1$$
 
 * **Após "fotos":** Sempre seguida por "por" (frase 3).
 
-    $$P(\text{por} \vert  \text{fotos}) = 1$$
+    $$P(\text{por} \vert    \text{fotos}) = 1$$
 
 * **Após "por":** Sempre seguida por "favor" (todas as frases).
 
-    $$P(\text{favor} \vert  \text{por}) = 1$$
+    $$P(\text{favor} \vert    \text{por}) = 1$$
 
 * **Após "favor":** É o fim da frase, nenhuma palavra segue.
 
     A palavra "favor" aparece $3$ vezes no total (uma vez em cada frase). Em nenhuma das vezes ela é seguida por outra palavra (é o fim da frase). Portanto, a contagem de "favor" seguida por qualquer palavra (v_j) é $0$. Logo, teremos:
 
-    $$P(v_j \vert  \text{favor}) = 0$$
+    $$P(v_j \vert    \text{favor}) = 0$$
 
     para todo $v_j$
 

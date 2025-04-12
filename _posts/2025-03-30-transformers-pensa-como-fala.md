@@ -3,15 +3,15 @@ layout: post
 title: Transformers - Você Pensa Como Fala
 author: Frank
 categories:
-  - artigo
-  - Matemática
+    - artigo
+    - Matemática
 tags:
-  - algoritmos
-  - inteligência artificial
-  - Matemática
-  - resolução de problemas
+    - algoritmos
+    - inteligência artificial
+    - Matemática
+    - resolução de problemas
 rating: 5
-lastmod: 2025-04-08T20:00:44.292Z
+lastmod: 2025-04-12T14:02:44.156Z
 description: Explore a hipótese de Sapir-Whorf e como diferentes línguas podem influenciar nossa percepção, cognição e visão de mundo.
 date: 2025-03-30T23:39:04.699Z
 keywords: hipótese de Sapir-Whorf, relatividade linguística, determinismo linguístico, influência da linguagem no pensamento, Edward Sapir, Benjamin Lee Whorf, percepção de cores, cognição espacial, categorização linguística, linguística cognitiva
@@ -207,10 +207,10 @@ Estudos transculturais posteriores, como os realizados por Lucy e Shweder e por 
 Abordagens mais recentes têm utilizado modelos probabilísticos para examinar a influência da linguagem na cognição, particularmente na área da percepção de cores [15]. Estes modelos sugerem que as categorias de cor específicas da língua atuam como um "pré-conhecimento" que influencia a forma como as pessoas recordam e reconstroem cores da memória, especialmente em condições de incerteza perceptual [15]. Isso pode ser representado como:
 
 $$
-P(\text{cor percebida} | \text{estímulo}) \propto P(\text{estímulo} | \text{cor percebida}) \cdot P(\text{cor percebida} | \text{categoria linguística})
+P(\text{cor percebida} \vert   \text{estímulo}) \propto P(\text{estímulo} \vert   \text{cor percebida}) \cdot P(\text{cor percebida} \vert   \text{categoria linguística})
 $$
 
-Onde $P(\text{cor percebida} | \text{categoria linguística})$ representa o efeito da linguagem na percepção.
+Onde $P(\text{cor percebida} \vert   \text{categoria linguística})$ representa o efeito da linguagem na percepção.
 
 Estudos como os de Bae et al. e Cibelli et al. forneceram suporte para esta perspetiva, mostrando que a memória de cores é tendenciosa em direção aos protótipos das categorias de cor da língua materna, e que este efeito é mais forte quando a informação perceptual é menos certa [15].
 

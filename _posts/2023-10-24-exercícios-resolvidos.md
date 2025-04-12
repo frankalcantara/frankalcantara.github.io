@@ -1,14 +1,14 @@
 ---
 layout: post
-title: "Exercícios s"
+title: Exercícios s
 author: Frank
 categories:
- - Matemática
- - Eletromagnetismo
+    - Matemática
+    - Eletromagnetismo
 tags:
- - Matemática
- - Física
- - Eletromagnetismo
+    - Matemática
+    - Física
+    - Eletromagnetismo
 image: ""
 featured: 2023-10-24T23:42:05.134Z
 rating: 0
@@ -17,7 +17,8 @@ date: 2023-10-24T23:42:05.134Z
 preview: ""
 keywords: ""
 published: false
-slug: 
+slug: null
+lastmod: 2025-04-12T14:02:44.193Z
 ---
 
 ### Exercício 1
@@ -265,23 +266,23 @@ $$
 Para encontrar a direção e o sentido de $\vec{v}_R$ em termos de um vetor unitário $\vec{v}_R$, podemos encontrar o vetor unitário dividindo $\vec{v}_R$ pelo seu módulo:
 
 $$
-\vec{v}_R = \frac{\vec{v}_R}{\vert \vec{v}_R \vert}
+\vec{v}_R = \frac{\vec{v}_R}{ \vert   \vec{v}_R \vert  }
 $$
 
 $$
-\vert \vec{v}_R \vert = \sqrt{(-62)^2 + (-16)^2 + (-32)^2}
+ \vert   \vec{v}_R \vert   = \sqrt{(-62)^2 + (-16)^2 + (-32)^2}
 $$
 
 $$
-\vert \vec{v}_R \vert = \sqrt{3844 + 256 + 1024}
+ \vert   \vec{v}_R \vert   = \sqrt{3844 + 256 + 1024}
 $$
 
 $$
-\vert \vec{v}_R\vert = \sqrt{5124}
+ \vert   \vec{v}_R \vert   = \sqrt{5124}
 $$
 
 $$
-\vert \vec{v}_R \vert = 2\sqrt{1281} \, \text{m/s}
+ \vert   \vec{v}_R \vert   = 2\sqrt{1281} \, \text{m/s}
 $$
 
 Logo teremos:
@@ -405,13 +406,13 @@ $$
 (c) A distância, $\vec{D}$, entre $\mathbf{P}$ e $\mathbf{Q}$ será o módulo do vetor $\vec{PQ}$, calculado como:
 
 $$
-\vec{D} = \vert \vec{PQ} \vert = \sqrt{3^2 + (-3)^2 + (-3)^2} = \sqrt{9 + 9 + 9} \approx 5.1962
+\vec{D} = \vert   \vec{PQ} \vert   = \sqrt{3^2 + (-3)^2 + (-3)^2} = \sqrt{9 + 9 + 9} \approx 5.1962
 $$
 
 (d) Um vetor paralelo a $\vec{PQ}$ com magnitude de $10$ pode ser encontrado ao normalizar $\vec{PQ}$:
 
 $$
-\vec{pq} = \frac{\vec{PQ}}{\vert \vec{PQ} \vert } = \frac{(3, -3, -3)}{\sqrt{27}}
+\vec{pq} = \frac{\vec{PQ}}{ \vert   \vec{PQ} \vert   } = \frac{(3, -3, -3)}{\sqrt{27}}
 $$
 
 $$
@@ -453,7 +454,7 @@ $$
 A partir da equação analítica do Produto Escalar podemos dizer que o cosseno do ângulo entre dois vetores é dado por:
 
 $$
-\cos(\theta_{BAC}) = \frac{\vec{AB} \cdot \vec{AC}}{\vert \vec{AB}\vert \vert \vec{AC} \vert}
+\cos(\theta_{BAC}) = \frac{\vec{AB} \cdot \vec{AC}}{ \vert   \vec{AB} \vert   \vert   \vec{AC} \vert  }
 $$
 
 Onde o Produto Escalar será dada por:
@@ -465,13 +466,13 @@ $$
 A magnitude de $\vec{AB}$ será:
 
 $$
-\vert \vec{AB}| = \sqrt{(-6)^2 + 3^2 + (-7)^2} = \sqrt{36 + 9 + 49} = \sqrt{94}
+ \vert   \vec{AB}| = \sqrt{(-6)^2 + 3^2 + (-7)^2} = \sqrt{36 + 9 + 49} = \sqrt{94}
 $$
 
 A magnitude de $\vec{AC}$ é:
 
 $$
-\vert \vec{AC}| = \sqrt{(-3)^2 + 3^2 + (-2)^2} = \sqrt{9 + 9 + 4} = \sqrt{22}
+ \vert   \vec{AC}| = \sqrt{(-3)^2 + 3^2 + (-2)^2} = \sqrt{9 + 9 + 4} = \sqrt{22}
 $$
 
 Sendo assim:
@@ -590,17 +591,17 @@ $$
 
 Note que $\vec{A} \cdot \vec{B}$ e $\vec{B} \cdot \vec{A}$ são iguais devido à propriedade comutativa do produto escalar.
 
-Vamos converter os termos para magnitudes e ângulos usando a relação $\vec{A} \cdot \vec{A} = \vec{A}^2$ e $\vec{A} \cdot \vec{B} = \vert \vec{A} \vert \vert \vec{B} \vert \cos \theta$, onde $\theta$ é o ângulo entre $\vec{A}$ e $\vec{B}$.
+Vamos converter os termos para magnitudes e ângulos usando a relação $\vec{A} \cdot \vec{A} = \vec{A}^2$ e $\vec{A} \cdot \vec{B} = \vert   \vec{A} \vert   \vert   \vec{B} \vert   \cos \theta$, onde $\theta$ é o ângulo entre $\vec{A}$ e $\vec{B}$.
 
 $$
-\vec{C}^2 = \vec{A}^2 + \vec{B}^2 - 2 \vert \vec{A} \vert \vert \vec{B} \vert \cos \theta
+\vec{C}^2 = \vec{A}^2 + \vec{B}^2 - 2 \vert   \vec{A} \vert   \vert   \vec{B} \vert   \cos \theta
 $$
 
-Substituímos $\vec{A} \cdot \vec{B}$ e $\vec{B} \cdot \vec{A}$ por $\vert \vec{A} \vert \vert \vec{B} \vert \cos \theta$ e simplificamos a expressão para obter $\vec{C}^2$.
+Substituímos $\vec{A} \cdot \vec{B}$ e $\vec{B} \cdot \vec{A}$ por $ \vert   \vec{A} \vert   \vert   \vec{B} \vert   \cos \theta$ e simplificamos a expressão para obter $\vec{C}^2$.
 
 Chegamos à expressão final para $\vec{C}^2$ em termos das magnitudes de $\vec{A}$ e $\vec{B}$ e do ângulo $\theta$ entre eles.
 
-$$ \vec{C}^2 = \vec{A}^2 + \vec{B}^2 - 2 \vert \vec{A} \vert \vert \vec{B} \vert cos \theta $$
+$$ \vec{C}^2 = \vec{A}^2 + \vec{B}^2 - 2 \vert   \vec{A} \vert   \vert   \vec{B} \vert   cos \theta $$
 
 E esta é a forma vetorial da _Lei dos Cossenos_. 
 
@@ -628,7 +629,7 @@ $$
 
 ### Exercício 14
 
-Considerando a equação analítica do Produto escalar, $\vec{A}\cdot \vec{B} =\vert \, \vec{a}\vert \vert\vec{B} \vert cos(\theta)$, e a equação analítica do Produto Vetorial, $\vec{A} \times \vec{A} = \vert \vec{A} \vert \vert \vec{B} \vert sen(\theta_{AB})$ prove que tanto o Produto Escalar quanto o Produto Vetorial são operações distributivas.
+Considerando a equação analítica do Produto escalar, $\vec{A}\cdot \vec{B} = \vert   \, \vec{a} \vert   \vert  \vec{B} \vert   cos(\theta)$, e a equação analítica do Produto Vetorial, $\vec{A} \times \vec{A} = \vert   \vec{A} \vert   \vert   \vec{B} \vert   sen(\theta_{AB})$ prove que tanto o Produto Escalar quanto o Produto Vetorial são operações distributivas.
 
 **Solução:** começando pela prova de Distributividade do Produto Escalar, vamos considerar três vetores arbitrários $\vec{A}$, $\vec{B}$, e $\vec{C}$. Queremos mostrar que:
 
