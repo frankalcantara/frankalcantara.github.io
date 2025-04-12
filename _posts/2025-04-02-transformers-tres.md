@@ -1,65 +1,64 @@
 ---
 layout: post
-title: Transformers - Desvendando a Modelagem de Sequências
+title: Transformers- Desvendando a Modelagem de Sequências
 author: frank
 categories:
     - disciplina
     - Matemática
     - artigo
-tags:
-    - C++
-    - Matemática
-    - inteligência artificial
-    - processamento de linguagem natural
-    - modelos de sequência
-    - N-grams
-    - Cadeias de Markov
-    - matrizes de transição
-    - aprendizado de máquina
-    - atenção
+tags: |-
+    Matemática
+    inteligência artificial
+    processamento de linguagem natural
+    modelos de sequência
+    **N-gram**s
+    Cadeias de Markov
+    matrizes de transição
+    aprendizado de máquina
+    atenção
 image: assets/images/transformers3.webp
 featured: false
 rating: 5
-description: Estudo dos modelos de sequência, desde as Cadeias de Markov (N-grams) até os mecanismos de atenção que fundamentam os Transformers.
+description: Estudo dos modelos de sequência, desde as Cadeias de Markov, N-grams até os mecanismos de atenção que fundamentam os Transformers.
 date: 2025-02-10T22:55:34.524Z
-preview: Neste artigo, mergulhamos na modelagem de sequências textuais. Partimos das Cadeias de Markov (N-grams) e suas limitações, construindo gradualmente a intuição para modelos mais sofisticados capazes de capturar dependências de longo alcance, fundamentais para a arquitetura Transformer.
-keywords:
-    - transformers
-    - cadeias de Markov
-    - n-grams
-    - modelos de sequência
-    - processamento de linguagem natural
-    - C++
-    - matrizes de transição
-    - matemática
-    - aprendizado de máquina
-    - inteligência artificial
-    - atenção
-    - rnn
-    - lstm
+preview: Neste artigo, mergulhamos na modelagem de sequências textuais. Partimos das Cadeias de Markov, N-grams, e suas limitações, construindo gradualmente a intuição para modelos mais sofisticados capazes de capturar dependências de longo alcance, fundamentais para a arquitetura Transformer.
+keywords: |-
+    transformers
+    cadeias de Markov
+    **N-gram**s
+    modelos de sequência
+    processamento de linguagem natural
+    C++
+    matrizes de transição
+    matemática
+    aprendizado de máquina
+    inteligência artificial
+    atenção
+    rnn
+    lstm
 toc: true
 published: false
-lastmod: 2025-04-08T19:52:34.616Z
+lastmod: 2025-04-11T16:00:16.186Z
 ---
 
-## Modelando Sequências - Além da Frequência de Termos
+## Modelando Sequencias - Além da Frequência de Termos
 
 Nos artigos anteriores, exploramos os fundamentos matemáticos e os algoritmos básicos inocentes para a vetorização de texto. Vimos como representar palavras e documentos como vetores, mas também percebemos que essas representações, como **TF-IDF**, perdem significado semântico.
 
 A atenta leitora já deve ter percebido que a linguagem natural parece seguir estruturas sequenciais. A posição de uma palavra e as palavras que a cercam são importantes para a construção do significado. A frase "O cachorro mordeu o homem" é muito diferente da frase "O homem mordeu o cachorro", apesar de usarem as mesmas palavras.
 
-Neste artigo, a esforçada leitora adentrará por mares de incerteza, probabilidades e sequências. Começaremos com as abordagens probabilísticas clássicas, as **Cadeias de Markov**, intimamente relacionadas aos modelos **N-gram**, para entender como a dependência local, a relação entre uma palavra e seus vizinhos, pode ser modelada matematicamente. Essa compreensão nos levará a explorar mecanismos mais poderosos, construindo a intuição necessária para entender conceitos como o conceito de **atenção**, que revolucionou o campo do processamento de linguagem natural e é a espinha dorsal dos **Transformers**. Embora existam outros paradigmas importantes para modelagem sequencial, como as Redes Neurais Recorrentes (RNNs, LSTMs, GRUs), nosso foco aqui será traçar um caminho específico que nos levará diretamente aos fundamentos conceituais dos Transformers.
+Neste artigo, a esforçada leitora adentrará por mares de incerteza, probabilidades e sequências. Começaremos com as abordagens probabilísticas clássicas, as **Cadeias de Markov**, intimamente relacionadas aos modelos **N-gram**, para entender como a dependência local, a relação entre uma palavra e seus vizinhos, pode ser modelada matematicamente. Essa compreensão nos levará a explorar mecanismos mais poderosos, construindo a intuição necessária para entender conceitos como o conceito de **atenção**, que revolucionou o campo do processamento de linguagem natural e é a espinha dorsal dos **Transformers**. Embora existam outros paradigmas importantes para modelagem sequencial, como as Redes Neurais Recorrentes (RNNs, LSTMs, GRUs), nosso foco aqui será traçar um caminho específico que nos levará diretamente aos fundamentos conceituais dos **Transformers**.
 
-> Antes dos Transformers dominarem o cenário, as Redes Neurais Recorrentes (RNNs) e suas variantes eram a principal escolha para modelagem de sequências. Entender suas ideias básicas ajuda a contextualizar a evolução para a **atenção** e os **Transformers**.
+> Antes dos**Transformers**dominarem o cenário, as Redes Neurais Recorrentes (RNNs) e suas variantes eram a principal escolha para modelagem de sequências. Entender suas ideias básicas ajuda a contextualizar a evolução para a **atenção** e os **Transformers**.
 >
 >1. **RNNs (Redes Neurais Recorrentes):** são redes projetadas para dados sequenciais. A ideia chave é a **recorrência**: a saída em um passo de tempo $t$ depende não só da entrada atual $x_t$, mas também de uma "memória" ou **estado oculto** $h_{t-1}$ do passo anterior. A atualização pode ser representada como $h_t = f(W_{hh}h_{t-1} + W_{xh}x_t + b_h)$, onde $f$ é uma não-linearidade (como $\tanh$). O problema principal das RNNs simples é o **desvanecimento ou explosão de gradientes** durante o treinamento, dificultando o aprendizado de dependências de longo prazo.
 >
 >2. **LSTMs (Long Short-Term Memory):** foram criadas para resolver o problema dos gradientes das RNNs. Introduzem uma **célula de memória** interna ($c_t$) que pode manter informações por longos períodos. O fluxo de informação para dentro e fora desta célula, e para o estado oculto ($h_t$), é controlado por três **portões (gates)** aprendíveis:
 >
->>* **Portão de Esquecimento ($f_t$):** Decide qual informação jogar fora da célula de memória.
->>* **Portão de Entrada ($i_t$):** Decide quais novas informações armazenar na célula de memória.
->>* **Portão de Saída ($o_t$):** Decide qual parte da célula de memória expor como estado oculto $h_t$. Isso permite que LSTMs capturem dependências de longo alcance de forma muito mais eficaz.
->
+>>* **Portão de Esquecimento ($f_t$)**: decide qual informação jogar fora da célula de memória.
+>>* **Portão de Entrada ($i_t$)**: decide quais novas informações armazenar na célula de memória.
+>>* **Portão de Saída ($o_t$)**: decide qual parte da célula de memória expor como estado oculto $h_t$. Isso permite que LSTMs capturem dependências de longo alcance de forma muito mais eficaz.
+>>
 >3. **GRUs (Gated Recurrent Units):** São uma variação da LSTM, também projetada para lidar com dependências longas, mas com uma arquitetura um pouco mais simples. Elas combinam o estado da célula e o estado oculto e usam apenas **dois portões**:
 >
 >>**Portão de Atualização ($z_t$):** Similar a uma combinação dos portões de esquecimento e entrada da LSTM, decidindo o quanto manter da memória antiga e o quanto adicionar da nova informação candidata.
@@ -68,38 +67,177 @@ Neste artigo, a esforçada leitora adentrará por mares de incerteza, probabilid
 >
 >Tanto LSTMs quanto GRUs foram, e ainda são, muito importantes, mas sua natureza inerentemente sequencial, processar um passo de cada vez, limita a paralelização, uma das principais vantagens introduzidas pela arquitetura baseada puramente em atenção dos **Transformers**.
 
-### Modelo N-gram: A Perspectiva Markoviana (Ordem 1)
+### Modelo **N-gram**: A Perspectiva Markoviana (Ordem 1)
+
+O termo **N-gram** no contexto dos**Transformers**(e em processamento de linguagem natural, ou NLP, em geral) refere-se a uma sequência contígua de n itens (geralmente palavras, caracteres ou tokens) extraída de um texto. É uma técnica usada para capturar informações contextuais ou padrões locais em uma sequência de dados. Neste caso, temos:
+
+* **Unigram (1-gram)**: Um único item (ex.: "gato").
+* **Bigram (2-gram)**: Dois itens consecutivos (ex.: "gato preto").
+* **Trigram (2-gram)**: Três itens consecutivos (ex.: "gato preto corre").
+
+O $N$ em **N-gram** indica o tamanho da sequência a ser considerada. Vamos modelar sequências de **N-grams**.
 
 Uma das formas mais intuitivas de modelar sequências é assumir que o próximo elemento depende apenas de um número fixo de elementos anteriores. A abordagem mais simples é a **Cadeia de Markov de Primeira Ordem**.
 
-Neste modelo, assume-se que a probabilidade de observar a próxima palavra depende *somente* da palavra atual. Essa é a chamada **Propriedade de Markov**. Em termos de N-grams, estamos olhando para a probabilidade de uma palavra dada a palavra anterior, o que corresponde a um modelo de **bigramas** (sequências de 2 palavras).
+> **Cadeias de Markov**: cadeias de Markov são modelos probabilísticos usados para descrever sequências de eventos ou estados, onde _a probabilidade de cada evento depende apenas do estado anterior_, e não de toda a sequência de eventos que o precedeu. Essa propriedade é chamada de **"propriedade de Markov"** ou **"memória de um passo"**. Formalmente:
+>
+>- Uma cadeia de Markov é definida por um conjunto de **estados** (ex.: palavras, condições climáticas, etc.) e uma **matriz de transição**, que indica a probabilidade de passar de um estado para outro.
+>
+>Por exemplo, em um modelo de linguagem, se o termo atual é "gato", a probabilidade da próxima palavra (como "preto" ou "corre") é calculada com base apenas no termo "gato", ignorando palavras anteriores.
+>
+>Imagine um modelo de clima com dois estados: "sol" e "chuva".
+>
+>- Se hoje está "sol", há 70% de chance de continuar "sol" amanhã e 30% de chance de "chuva".
+>- Se hoje está "chuva", há 50% de chance de "sol" e 50% de "chuva".
+Esse comportamento é modelado por uma cadeia de Markov.
+>
+>Cadeias de Markov são usadas em áreas como:
+>
+>- **Processamento de linguagem natural** (ex.: previsão de palavras em modelos simples).
+>- **Análise de séries temporais** (ex.: previsão do tempo).
+>- **Jogos e simulações** (ex.: geração de comportamentos aleatórios).
+>
 
-Imagine que estamos desenvolvendo uma interface de linguagem natural muito simples, capaz de entender apenas três comandos:
+No modelo **N-gram**, vamos assumir que a probabilidade de ocorrência de um termo depende apenas do termo anterior, uma característica conhecida como **Propriedade de Markov**. Nos modelos **N-grams**, isso se traduz no cálculo da probabilidade de um termo com base no termo imediatamente anterior.
 
-* Mostre-me meus diretórios, por favor.
-* Mostre-me meus arquivos, por favor.
-* Mostre-me minhas fotos, por favor.
+**Exemplo 1**: a criativa leitora pode imaginar que estamos desenvolvendo uma interface de linguagem natural simples, capaz de entender apenas três comandos específicos, dados nos seguintes documentos:
 
-Nosso vocabulário $V$ tem tamanho 7:
+1. `Mostre-me meus diretórios, por favor.`
+2. `Mostre-me meus arquivos, por favor.`
+3. `Mostre-me minhas fotos, por favor.`
 
-$$V = \{\text{mostre}, \text{me}, \text{meus}, \text{diretórios}, \text{arquivos}, \text{fotos}, \text{por favor}\}$$
+Nesta interface, nosso vocabulário $V$ tem cardinalidade $9$ e será dado por:
 
-Podemos representar as transições prováveis entre palavras usando uma **matriz de transição**. Cada linha e coluna corresponde a uma palavra do vocabulário. A entrada $(i, j)$ da matriz indica a probabilidade de a palavra $j$ ser a próxima, dado que a palavra atual é $i$.
+$$V = \{\text{mostre}, \text{me}, \text{meus}, \text{minhas}, \text{diretórios}, \text{arquivos}, \text{fotos}, \text{por}, \text{favor}\}$$
 
-Se, por exemplo, os usuários pedem por "fotos" 50% do tempo, "arquivos" 30% e "diretórios" 20%, após a palavra "meus", a matriz refletirá essas probabilidades.
+Podemos representar as transições prováveis entre palavras com uma **matriz de transição**, $T$. Nesta matriz, cada linha e coluna corresponde a uma palavra do vocabulário $V = \{v_1, \dots, v_9\}$. A entrada $T_{ij}$ da matriz indica a probabilidade de que a próxima palavra seja $v_j$, dado que a palavra atual é $v_i$. Formalmente, $T_{ij} = P(\text{próxima palavra} = v_j \vert  \text{palavra atual} = v_i)$.
 
-![Matriz de transição](/assets/images/matrix-transition1.webp)
+Teremos que calcular as probabilidades de transição usando exclusivamente as três frases de exemplo, assumindo que cada uma destas frases tem exatamente a mesma probabilidade de ocorrência, $1/3$. E vamos considerar assim, para simplificar os cálculos e o entendimento.
 
-_Figura 1: Uma matriz de transição para nosso exemplo com três comandos simples. A maioria das transições tem probabilidade 0 ou 1, exceto após "meus"._{: .legend}
+Para o cálculo destas probabilidades usaremos a probabilidade condicional, dada por:
 
-Nesta matriz $T$, a linha $i$ representa a distribuição de probabilidade sobre a próxima palavra, dado que a palavra atual é $v_i \in V$. Portanto, cada entrada $T_{ij}$ satisfaz $0 \le T_{ij} \le 1$ e a soma de cada linha deve ser 1: $\sum_{j} T_{ij} = 1$.
+$$P(\text{próxima palavra} \vert \text{palavra atual)} = (\text{Número de vezes que a "próxima palavra" segue a "palavra atual" nas frases}) / (\text{Número total de vezes que a "palavra atual" aparece nas frases})$$
 
-A estrutura das nossas três frases é clara na matriz. A única incerteza (ramificação) ocorre após "meus". Para extrair a distribuição de probabilidade da próxima palavra após uma palavra específica, como "meus", podemos usar o truque da multiplicação matricial com um vetor *one-hot*. Um vetor one-hot $h_{\text{meus}}$ para "meus" seria um vetor com 0 em todas as posições, exceto na posição correspondente ao índice de "meus", onde teria 1. A multiplicação $h_{\text{meus}}^T \times T$ extrai exatamente a linha da matriz $T$ referente a "meus".
+Sendo assim, teremos:
 
-![Consulta de probabilidade de transição](assets/images/prob-transition1.webp)
+* **Após "mostre"**: sempre seguida por "me".
+    A palavra "mostre" aparece $3$ vezes no total (uma vez em cada frase). Em todas as $3$ vezes, a palavra seguinte é "me".
+
+    $$P(\text{me} \vert  \text{mostre}) = \frac{3}{3} = 1$$
+
+    A probabilidade de qualquer outra palavra seguir "mostre" é $0$, pois isso nunca acontece nos exemplos.
+
+* **Após "me"**: é seguida por "meus" nas frases $1$ e $2$, e por "minhas" na frase $3$.
+
+    A palavra "me" aparece $3$ vezes no total (uma vez em cada frase). Em $2$ dessas vezes (frases 1 e 2), a palavra seguinte é "meus". Em $1$ dessas vezes (frase 3), a palavra seguinte é "minhas".
+
+    $$P(\text{meus} \vert  \text{me}) = \frac{2 \text{ ocorrências}}{3 \text{ total}} = \frac{2}{3} \approx 0.67$$
+
+    $$P(\text{minhas} \vert  \text{me}) = \frac{1 \text{ ocorrência}}{3 \text{ total}} = \frac{1}{3} \approx 0.33$$
+
+    A soma das probabilidades $(2/3 + 1/3)$ é $1$. A probabilidade de qualquer outra palavra seguir "me" é $0$.
+
+* **Após "meus"**: é seguida por "diretórios" na frase $1$ e "arquivos" na frase $2$. Assumindo que, uma vez que "meus" foi dita, as continuações "diretórios" e "arquivos" são igualmente prováveis:
+  
+    $$
+    P(\text{diretórios} \vert  \text{meus}) = \frac{1 \text{ ocorrência}}{2 \text{ total}} = 0.5
+    $$
+
+    $$
+    P(\text{arquivos} \vert  \text{meus}) = \frac{1 \text{ ocorrência}}{2 \text{ total}} = 0.5
+    $$
+
+    $$
+    P(\text{fotos} \vert  \text{meus}) = 0$$
+
+    isso porque "fotos" nunca segue "meus" nos documentos que determinam a interface deste exemplo.
+
+* **Após "minhas"**: sempre seguida por "fotos" (frase 3).
+
+    $$P(\text{fotos} \vert  \text{minhas}) = 1$$
+
+* **Após "diretórios":** Sempre seguida por "por" (frase 1).
+
+    $$P(\text{por} \vert  \text{diretórios}) = 1$$
+
+* **Após "arquivos":** Sempre seguida por "por" (frase 2).
+
+    $$P(\text{por} \vert  \text{arquivos}) = 1$$
+
+* **Após "fotos":** Sempre seguida por "por" (frase 3).
+
+    $$P(\text{por} \vert  \text{fotos}) = 1$$
+
+* **Após "por":** Sempre seguida por "favor" (todas as frases).
+
+    $$P(\text{favor} \vert  \text{por}) = 1$$
+
+* **Após "favor":** É o fim da frase, nenhuma palavra segue.
+
+    A palavra "favor" aparece $3$ vezes no total (uma vez em cada frase). Em nenhuma das vezes ela é seguida por outra palavra (é o fim da frase). Portanto, a contagem de "favor" seguida por qualquer palavra (v_j) é $0$. Logo, teremos:
+
+    $$P(v_j \vert  \text{favor}) = 0$$
+
+    para todo $v_j$
+
+A matriz de transição $T$ que reflete estas probabilidades calculadas a partir das três frases será:
+
+| Palavra Atual | mostre | me   | meus | minhas | diretórios | arquivos | fotos | por  | favor | Soma da Linha |
+|---------------|--------|------|------|--------|------------|----------|-------|------|-------|---------------|
+| **mostre** | 0      | 1.00 | 0    | 0      | 0          | 0        | 0     | 0    | 0     | 1.00          |
+| **me** | 0      | 0    | 0.67 | 0.33   | 0          | 0        | 0     | 0    | 0     | 1.00          |
+| **meus** | 0      | 0    | 0    | 0      | 0.50       | 0.50     | 0.00  | 0    | 0     | 1.00          |
+| **minhas** | 0      | 0    | 0    | 0      | 0          | 0        | 1.00  | 0    | 0     | 1.00          |
+| **diretórios**| 0      | 0    | 0    | 0      | 0          | 0        | 0     | 1.00 | 0     | 1.00          |
+| **arquivos** | 0      | 0    | 0    | 0      | 0          | 0        | 0     | 1.00 | 0     | 1.00          |
+| **fotos** | 0      | 0    | 0    | 0      | 0          | 0        | 0     | 1.00 | 0     | 1.00          |
+| **por** | 0      | 0    | 0    | 0      | 0          | 0        | 0     | 0    | 1.00  | 1.00          |
+| **favor** | 0      | 0    | 0    | 0      | 0          | 0        | 0     | 0    | 0     | 0.00          |
+
+_Tabela 1: Matriz de transição $T$ derivada das três frases de exemplo._{: class="legend"}
+
+Nesta matriz $T$, a linha $i$ representa a distribuição de probabilidade da próxima palavra, dado que a palavra atual é $v_i \in V$. Cada entrada $T_{ij}$ satisfaz a condição $0 \le T_{ij} \le 1$. A soma das probabilidades em cada linha é $1$. Exceto para a palavra final "favor", que não transiciona para nenhuma outra.
+
+A estrutura fixa das frases deste exemplo define a maioria das transições com probabilidade 0 ou 1. A incerteza, probabilidades entre 0 e 1, ocorre após "me", levando a "meus" com $P \approx 0.67$ ou "minhas" com $P \approx 0.33$ e após "meus" (levando a "diretórios" com $P=0.5$ ou "arquivos" com $P=0.5$).
+
+Para extrair a distribuição de probabilidade da próxima palavra após uma palavra específica, como "meus", podemos usar um vetor _one-hot_. O vetor $h_{\text{meus}}$ é um vetor linha com $1$ na posição correspondente à palavra "meus" e $0$ nas demais. 
+
+$$h_{\text{meus}} = [0, 0, 1, 0, 0, 0, 0, 0, 0]$$
+
+A multiplicação $h_{\text{meus}} \times T$ resulta em um vetor linha que contém a linha da matriz $T$ correspondente a "meus" será:
+
+$$h_{\text{meus}} \times T = [0, 0, 0, 0, 0.50, 0.50, 0.00, 0, 0]$$
+
+Este vetor resultante indica que, após "meus", a probabilidade de ver "diretórios" é $0.50$ e "arquivos" é $0.50$, consistente com as frases de exemplo. Esta operação está sintetizada na Figura 2. 
+
+![Consulta de probabilidade de transição](/assets/images/vecmeus.webp)
 _Figura 2: Extração das probabilidades de transição para a palavra "meus" usando um vetor one-hot e multiplicação de matrizes._{: .legend}
 
-Implementar esta consulta em C++ é direto, especialmente se tivermos uma classe de Matriz (como a biblioteca Eigen):
+>**Para lembrar**: quando realização a multiplicação de um vetor linha por uma matriz, usamos produtos escalares.
+>
+>Quando multiplicamos um vetor linha $v$ de dimensão $1 \times n$ por uma matriz $M$ de dimensão $n \times m$, o resultado é um vetor linha $r$ de dimensão $1 \times m$.
+>
+>No caso específico da multiplicação $h_{\text{meus}} \times T$:
+>
+>1. O vetor linha $h_{\text{meus}} = [0, 0, 1, 0, 0, 0, 0, 0, 0]$ tem dimensão $1 \times 9$;
+>2. A matriz $T$ tem dimensão $9 \times 9$;
+>3. O resultado $R$ terá dimensão $1 \times 9$.
+>
+>Para cada elemento $j$ do vetor resultante $R$, calculamos o produto escalar entre o vetor linha $h_{\text{meus}}$ e a coluna $j$ da matriz $T$:
+>
+>$$R_j = \sum_{i=1}^{9} h_{\text{meus},i} \times T_{i,j}$$
+>
+>Como o vetor $h_{\text{meus}}$ é um vetor one-hot com valor 1 apenas na posição 3, a maioria dos termos da soma acima será zero, e teremos:
+>
+>$$R_j = 0 \times T_{1,j} + 0 \times T_{2,j} + 1 \times T_{3,j} + 0 \times T_{4,j} + ... + 0 \times T_{9,j} = T_{3,j}$$
+>
+>Isso significa que cada elemento $j$ do vetor resultante $R$ será igual ao elemento na posição $(3,j)$ da matriz $T$.
+>
+>Em termos práticos, a multiplicação de um vetor one-hot por uma matriz resulta na extração da linha correspondente à posição do valor 1 no vetor one-hot. É por isso que o resultado final é simplesmente a terceira linha da matriz $T$:
+>
+>$$R = [0, 0, 0, 0, 0.50, 0.50, 0.00, 0, 0]$$
+
+Implementar esta operação em C++ é direto, especialmente se tivermos uma classe de Matriz (como a biblioteca Eigen):
 
 ```cpp
 #include <iostream>
@@ -110,48 +248,54 @@ Implementar esta consulta em C++ é direto, especialmente se tivermos uma classe
 #include <Eigen/Dense> // Usando a biblioteca Eigen para operações de matriz
 
 int main() {
-    // Definir o vocabulário
+    // Definir o vocabulário (corrigido para separar "por" e "favor")
     std::vector<std::string> vocabulary = {
-        "mostre", "me", "meus", "diretórios", "arquivos", "fotos", "por favor"
+        "mostre", "me", "meus", "minhas", "diretórios", "arquivos", "fotos", "por", "favor"
     };
-    int vocab_size = vocabulary.size(); // Tamanho do vocabulário N=7
-
+    int vocab_size = vocabulary.size(); // Tamanho do vocabulário N=9
+    
     // Mapear palavras para índices (0 a N-1)
     std::unordered_map<std::string, int> word_to_index;
     for (int i = 0; i < vocab_size; ++i) {
         word_to_index[vocabulary[i]] = i;
     }
-
+    
     // Criar a matriz de transição (NxN) inicializada com zeros
     Eigen::MatrixXd transition_matrix = Eigen::MatrixXd::Zero(vocab_size, vocab_size);
-
+    
     // Definir as probabilidades de transição (modelo de bigramas P(w_t | w_{t-1}))
     // Após "mostre", sempre vem "me"
     transition_matrix(word_to_index["mostre"], word_to_index["me"]) = 1.0;
-
-    // Após "me", sempre vem "meus"
-    transition_matrix(word_to_index["me"], word_to_index["meus"]) = 1.0;
-
-    // Após "meus", pode vir "diretórios", "arquivos" ou "fotos"
-    transition_matrix(word_to_index["meus"], word_to_index["diretórios"]) = 0.2; // 20%
-    transition_matrix(word_to_index["meus"], word_to_index["arquivos"]) = 0.3;   // 30%
-    transition_matrix(word_to_index["meus"], word_to_index["fotos"]) = 0.5;      // 50%
-
-    // Após "diretórios", "arquivos" ou "fotos", sempre vem "por favor"
-    transition_matrix(word_to_index["diretórios"], word_to_index["por favor"]) = 1.0;
-    transition_matrix(word_to_index["arquivos"], word_to_index["por favor"]) = 1.0;
-    transition_matrix(word_to_index["fotos"], word_to_index["por favor"]) = 1.0;
-
-    // (Implicitamente, a transição de "por favor" para qualquer outra palavra é 0 neste exemplo)
-
+    
+    // Após "me", pode vir "meus" ou "minhas"
+    transition_matrix(word_to_index["me"], word_to_index["meus"]) = 2.0/3.0;    // 66.7%
+    transition_matrix(word_to_index["me"], word_to_index["minhas"]) = 1.0/3.0;  // 33.3%
+    
+    // Após "meus", pode vir "diretórios" ou "arquivos"
+    transition_matrix(word_to_index["meus"], word_to_index["diretórios"]) = 0.5; // 50%
+    transition_matrix(word_to_index["meus"], word_to_index["arquivos"]) = 0.5;   // 50%
+    
+    // Após "minhas", sempre vem "fotos"
+    transition_matrix(word_to_index["minhas"], word_to_index["fotos"]) = 1.0;
+    
+    // Após "diretórios", "arquivos" ou "fotos", sempre vem "por"
+    transition_matrix(word_to_index["diretórios"], word_to_index["por"]) = 1.0;
+    transition_matrix(word_to_index["arquivos"], word_to_index["por"]) = 1.0;
+    transition_matrix(word_to_index["fotos"], word_to_index["por"]) = 1.0;
+    
+    // Após "por", sempre vem "favor"
+    transition_matrix(word_to_index["por"], word_to_index["favor"]) = 1.0;
+    
+    // (Implicitamente, a transição de "favor" para qualquer outra palavra é 0 neste exemplo)
+    
     // Criar um vetor one-hot para a palavra "meus"
     Eigen::VectorXd one_hot_meus = Eigen::VectorXd::Zero(vocab_size);
     one_hot_meus(word_to_index["meus"]) = 1.0;
-
+    
     // Consultar as probabilidades de transição: h^T * T
     // Como Eigen trata vetores como matrizes coluna por padrão, fazemos a transposição antes.
     Eigen::RowVectorXd next_word_probs = one_hot_meus.transpose() * transition_matrix;
-
+    
     // Exibir os resultados
     std::cout << "Probabilidades da próxima palavra após 'meus' (Modelo de 1ª Ordem / Bigramas):\n";
     for (int i = 0; i < vocab_size; ++i) {
@@ -160,13 +304,382 @@ int main() {
                       << next_word_probs(i) << "\n";
         }
     }
-
+    
     return 0;
 }
 ```
-### Superando Limitações Locais: Modelos Baseados em Pares com Saltos
 
-Como vimos, aumentar a ordem $N$ nos modelos N-gram/Markovianos é uma estratégia limitada para capturar o contexto necessário em linguagem natural devido à maldição da dimensionalidade e à esparsidade dos dados. Precisamos de uma abordagem diferente para lidar com dependências que podem se estender por muitas palavras.
+#### Vetorização Probabilística de Documentos usando Modelos N-gram
+
+Em um modelo **N-gram** probabilístico, cada documento $D$ é representado por sua própria matriz de transição $T_D$, na qual cada elemento $T_D(i,j)$ indica a probabilidade condicional de transição da palavra $i$ para a palavra $j$ especificamente naquele documento:
+
+$$T_D(i,j) = P(w_j | w_i, D) = \frac{\text{count}(w_i, w_j, d)}{\text{count}(w_i, D)}$$
+
+Neste caso, temos:
+
+* $\text{count}(w_i, w_j, D)$ é o número de vezes que a sequência $w_i w_j$ aparece no documento $D$
+* $\text{count}(w_i, D)$ é o número total de ocorrências de $w_i$ no documento $D$
+
+Essa matriz de transição captura a "assinatura probabilística" do documento - o padrão único de como as palavras se seguem umas às outras naquele texto específico.
+
+## Processo de Vetorização em Quatro Etapas
+
+### 1. Construção da Matriz de Transição por Documento
+
+Para cada documento em nosso corpus, construímos uma matriz de transição $T_D$ de tamanho $|V| \times |V|$, onde $|V|$ é o tamanho do vocabulário. Esta matriz inicialmente contém zeros e é preenchida conforme analisamos as sequências de palavras:
+
+1. Identifique todos os bigramas (pares de palavras adjacentes) no documento
+2. Para cada bigrama $(w_i, w_j)$, incremente o contador da posição $(i,j)$ na matriz
+3. Normalize cada linha da matriz dividindo cada entrada pelo total da linha
+
+Por exemplo, para o documento "Mostre-me meus diretórios, por favor", a matriz terá entradas não-zero apenas nas transições que ocorrem neste documento específico:
+
+* $P(\text{me} | \text{mostre}) = 1.0$
+* $P(\text{meus} | \text{me}) = 1.0$
+* $P(\text{diretórios} | \text{meus}) = 1.0$
+* $P(\text{por} | \text{diretórios}) = 1.0$
+* $P(\text{favor} | \text{por}) = 1.0$
+
+### 2. Compactação da Matriz em Vetor
+
+Como as matrizes de transição são tipicamente esparsas (a maioria das entradas é zero), podemos compactá-las em vetores que contêm apenas informações relevantes. Existem várias abordagens para esta compactação:
+
+#### Abordagem 1: Vetorização Completa
+Concatenar todas as probabilidades não-zero da matriz com seus respectivos índices:
+
+$$\vec{v}_d = [i_1, j_1, p_1, i_2, j_2, p_2, ..., i_k, j_k, p_k]$$
+
+Onde $(i_n, j_n, p_n)$ representa uma transição da palavra $i_n$ para a palavra $j_n$ com probabilidade $p_n$.
+
+#### Abordagem 2: Vetorização por Transições Específicas
+Selecionar apenas as transições mais informativas ou discriminativas entre documentos:
+
+$$\vec{v}_d = [P(w_j|w_i, d) \text{ para pares } (i,j) \text{ selecionados}]$$
+
+Esta abordagem reduz a dimensionalidade focando apenas nas transições que melhor distinguem diferentes classes de documentos.
+
+### 3. Normalização do Vetor de Características
+
+Para garantir comparabilidade entre documentos de diferentes tamanhos, é comum normalizar o vetor resultante:
+
+$$\vec{v}_d^{\text{norm}} = \frac{\vec{v}_d}{||\vec{v}_d||}$$
+
+Onde $||\vec{v}_d||$ é a norma euclidiana do vetor (raiz quadrada da soma dos quadrados dos elementos).
+
+### 4. Comparação entre Documentos
+
+Com os documentos representados como vetores probabilísticos normalizados, podemos calcular a similaridade entre eles usando medidas como:
+
+- **Similaridade de cosseno**: $\text{sim}(d_1, d_2) = \frac{\vec{v}_{d_1} \cdot \vec{v}_{d_2}}{||\vec{v}_{d_1}|| \cdot ||\vec{v}_{d_2}||}$
+- **Distância euclidiana**: $\text{dist}(d_1, d_2) = ||\vec{v}_{d_1} - \vec{v}_{d_2}||$
+- **Divergência KL**: Para comparar distribuições de probabilidade diretamente
+
+## Implementação em C++
+
+Vejamos como implementar esta abordagem em C++:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <string>
+#include <unordered_map>
+#include <Eigen/Dense>
+#include <cmath>
+
+// Classe para representação probabilística de documentos
+class ProbabilisticDocumentVector {
+private:
+   // Vocabulário global
+   std::vector<std::string> vocabulary;
+   std::unordered_map<std::string, int> wordToIndex;
+   int vocabSize;
+   
+   // Função para extrair bigramas de um documento
+   std::vector<std::pair<int, int>> extractBigrams(const std::vector<std::string>& tokens) {
+       std::vector<std::pair<int, int>> bigrams;
+       for (size_t i = 0; i < tokens.size() - 1; i++) {
+           int firstIdx = wordToIndex[tokens[i]];
+           int secondIdx = wordToIndex[tokens[i+1]];
+           bigrams.push_back({firstIdx, secondIdx});
+       }
+       return bigrams;
+   }
+   
+public:
+   // Construtor
+   ProbabilisticDocumentVector(const std::vector<std::string>& vocab) {
+       vocabulary = vocab;
+       vocabSize = vocabulary.size();
+       
+       // Mapear palavras para índices
+       for (int i = 0; i < vocabSize; i++) {
+           wordToIndex[vocabulary[i]] = i;
+       }
+   }
+   
+   // Criar matriz de transição para um documento
+   Eigen::MatrixXd createTransitionMatrix(const std::vector<std::string>& tokens) {
+       // Inicializa matriz com zeros
+       Eigen::MatrixXd transMatrix = Eigen::MatrixXd::Zero(vocabSize, vocabSize);
+       
+       // Extrair bigramas e contar frequências
+       auto bigrams = extractBigrams(tokens);
+       for (const auto& [first, second] : bigrams) {
+           transMatrix(first, second) += 1.0;
+       }
+       
+       // Normalizar por linha para obter probabilidades
+       for (int i = 0; i < vocabSize; i++) {
+           double rowSum = transMatrix.row(i).sum();
+           if (rowSum > 0) {
+               transMatrix.row(i) /= rowSum;
+           }
+       }
+       
+       return transMatrix;
+   }
+   
+   // Converter matriz de transição para vetor de características
+   Eigen::VectorXd matrixToFeatureVector(const Eigen::MatrixXd& transMatrix) {
+       // Identificar elementos não-zero na matriz
+       std::vector<double> nonZeroProbs;
+       
+       for (int i = 0; i < vocabSize; i++) {
+           for (int j = 0; j < vocabSize; j++) {
+               if (transMatrix(i, j) > 0) {
+                   // Armazenar probabilidades não-zero
+                   nonZeroProbs.push_back(transMatrix(i, j));
+               }
+           }
+       }
+       
+       // Criar vetor de características
+       Eigen::VectorXd featureVector = Eigen::VectorXd::Zero(nonZeroProbs.size());
+       for (size_t i = 0; i < nonZeroProbs.size(); i++) {
+           featureVector(i) = nonZeroProbs[i];
+       }
+       
+       // Normalizar o vetor
+       double norm = featureVector.norm();
+       if (norm > 0) {
+           featureVector /= norm;
+       }
+       
+       return featureVector;
+   }
+   
+   // Calcular similaridade de cosseno entre dois vetores
+   double cosineSimilarity(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) {
+       double dotProduct = v1.dot(v2);
+       double normProduct = v1.norm() * v2.norm();
+       
+       if (normProduct > 0) {
+           return dotProduct / normProduct;
+       }
+       return 0.0;
+   }
+   
+   // Gerar vetor de documento a partir de tokens
+   Eigen::VectorXd documentToVector(const std::vector<std::string>& tokens) {
+       Eigen::MatrixXd transMatrix = createTransitionMatrix(tokens);
+       return matrixToFeatureVector(transMatrix);
+   }
+   
+   // Comparar dois documentos
+   double compareDocuments(const std::vector<std::string>& doc1, 
+                          const std::vector<std::string>& doc2) {
+       auto vec1 = documentToVector(doc1);
+       auto vec2 = documentToVector(doc2);
+       return cosineSimilarity(vec1, vec2);
+   }
+};
+
+int main() {
+   // Vocabulário do exemplo
+   std::vector<std::string> vocabulary = {
+       "mostre", "me", "meus", "minhas", "diretórios", "arquivos", "fotos", "por", "favor"
+   };
+   
+   // Documentos de exemplo
+   std::vector<std::vector<std::string>> docs = {
+       {"mostre", "me", "meus", "diretórios", "por", "favor"},
+       {"mostre", "me", "meus", "arquivos", "por", "favor"},
+       {"mostre", "me", "minhas", "fotos", "por", "favor"}
+   };
+   
+   // Criar o vetorizador probabilístico
+   ProbabilisticDocumentVector vectorizer(vocabulary);
+   
+   // Exibir matrizes de transição para cada documento
+   std::cout << "Representações Probabilísticas:\n\n";
+   
+   for (int i = 0; i < docs.size(); i++) {
+       std::cout << "Documento " << (i+1) << ":\n";
+       
+       // Gerar matriz de transição
+       Eigen::MatrixXd transMatrix = vectorizer.createTransitionMatrix(docs[i]);
+       
+       // Mostrar probabilidades de transição não-zero
+       for (int row = 0; row < vocabulary.size(); row++) {
+           for (int col = 0; col < vocabulary.size(); col++) {
+               if (transMatrix(row, col) > 0) {
+                   std::cout << "  P(" << vocabulary[col] << " | " << vocabulary[row] 
+                             << ") = " << transMatrix(row, col) << "\n";
+               }
+           }
+       }
+       
+       // Gerar vetor de documento
+       Eigen::VectorXd vec = vectorizer.matrixToFeatureVector(transMatrix);
+       std::cout << "  Vetor de características: [";
+       for (int j = 0; j < vec.size(); j++) {
+           std::cout << vec(j);
+           if (j < vec.size() - 1) std::cout << ", ";
+       }
+       std::cout << "]\n\n";
+   }
+   
+   // Calcular similaridades entre documentos
+   std::cout << "Similaridades entre documentos:\n";
+   for (int i = 0; i < docs.size(); i++) {
+       for (int j = i+1; j < docs.size(); j++) {
+           double sim = vectorizer.compareDocuments(docs[i], docs[j]);
+           std::cout << "  Similaridade entre Doc " << (i+1) << " e Doc " << (j+1) 
+                     << ": " << sim << "\n";
+       }
+   }
+   
+   return 0;
+}
+```
+
+Neste código, a classe `ProbabilisticDocumentVector` encapsula a lógica para construir matrizes de transição, vetores de características e calcular similaridades entre documentos. O exemplo inclui três documentos e calcula as similaridades entre eles.
+A saída do programa mostrará as matrizes de transição para cada documento, os vetores de características resultantes e as similaridades entre os documentos.
+
+### Vetorização Probabilística de Documentos
+
+A vetorização probabilística de documentos utilizando modelos N-gram oferece uma representação matemática sofisticada que captura não apenas quais palavras aparecem, mas os padrões sequenciais de como elas se relacionam.
+
+## Por que Considerar o Início dos Documentos?
+
+Ao modelar documentos usando N-grams, o início do texto (posição inicial) merece atenção especial porque:
+
+1. A primeira palavra de um documento geralmente sinaliza seu tipo, propósito ou tom
+2. Palavras iniciais frequentemente seguem distribuições diferentes das palavras no meio do texto
+3. Ao incluir um token especial `<START>` antes da primeira palavra, podemos capturar esta informação
+
+Esta consideração é especialmente importante para classificação de documentos, detecção de spam, ou identificação do gênero textual, onde as palavras iniciais fornecem pistas valiosas.
+
+## Um Corpus com Variação Linguística Real
+
+Consideremos um corpus expandido e mais variado:
+
+1. "Mostre-me meus documentos importantes."
+2. "Mostre-me meus arquivos recentes, por favor."
+3. "Por favor mostre meus documentos financeiros."
+4. "Mostre-me minhas fotos favoritas urgentemente."
+5. "Preciso ver meus documentos de trabalho."
+6. "Mostre meus arquivos de projeto imediatamente."
+7. "Por favor encontre meus documentos fiscais."
+8. "Gostaria de ver meus arquivos pessoais agora."
+
+## Matrizes de Transição com Probabilidades Diversas
+
+Neste corpus, as probabilidades de transição já não são mais todas 1.0. Vamos examinar alguns padrões:
+
+### Transições a partir de `<START>` (início do documento):
+
+- `<START>` → "Mostre": 4/8 = 0.50
+- `<START>` → "Por": 2/8 = 0.25
+- `<START>` → "Preciso": 1/8 = 0.125
+- `<START>` → "Gostaria": 1/8 = 0.125
+
+### Transições a partir de "meus":
+
+- "meus" → "documentos": 4/8 = 0.50
+- "meus" → "arquivos": 3/8 = 0.375
+- "meus" → "fotos": 1/8 = 0.125
+
+### Transições a partir de "documentos":
+
+- "documentos" → "importantes": 1/4 = 0.25
+- "documentos" → "financeiros": 1/4 = 0.25
+- "documentos" → "de": 1/4 = 0.25
+- "documentos" → "fiscais": 1/4 = 0.25
+
+## Construção do Vetor Probabilístico
+
+Consideremos o documento 1: "Mostre-me meus documentos importantes."
+
+A matriz de transição $T_1$ contém:
+
+- $T_1(\text{`<START>`}, \text{Mostre}) = 1.0$
+- $T_1(\text{Mostre}, \text{me}) = 1.0$
+- $T_1(\text{me}, \text{meus}) = 1.0$
+- $T_1(\text{meus}, \text{documentos}) = 1.0$
+- $T_1(\text{documentos}, \text{importantes}) = 1.0$
+
+Comparemos com o documento 3: "Por favor mostre meus documentos financeiros."
+
+A matriz $T_3$ contém:
+
+- $T_3(\text{`<START>`}, \text{Por}) = 1.0$
+- $T_3(\text{Por}, \text{favor}) = 1.0$
+- $T_3(\text{favor}, \text{mostre}) = 1.0$
+- $T_3(\text{mostre}, \text{meus}) = 1.0$
+- $T_3(\text{meus}, \text{documentos}) = 1.0$
+- $T_3(\text{documentos}, \text{financeiros}) = 1.0$
+
+Ao extrair os elementos não-zero dessas matrizes e incluir informações sobre as transições, obtemos os vetores característicos:
+
+$\vec{v}_1 = [(\text{`<START>`},\text{Mostre},1.0), (\text{Mostre},\text{me},1.0), (\text{me},\text{meus},1.0), (\text{meus},\text{documentos},1.0), (\text{documentos},\text{importantes},1.0)]$
+
+$\vec{v}_3 = [(\text{`<START>`},\text{Por},1.0), (\text{Por},\text{favor},1.0), (\text{favor},\text{mostre},1.0), (\text{mostre},\text{meus},1.0), (\text{meus},\text{documentos},1.0), (\text{documentos},\text{financeiros},1.0)]$
+
+## Modelo Probabilístico para o Corpus Inteiro
+
+Agora, em vez de olhar para documentos individuais, podemos construir um modelo probabilístico para todo o corpus. Esta abordagem captura as tendências gerais de transição entre palavras no conjunto completo de documentos.
+
+A matriz de transição $T_{corpus}$ conterá probabilidades como:
+
+- $T_{corpus}(\text{meus}, \text{documentos}) = 0.50$
+- $T_{corpus}(\text{meus}, \text{arquivos}) = 0.375$
+- $T_{corpus}(\text{meus}, \text{fotos}) = 0.125$
+
+Para representar um documento específico usando este modelo do corpus, calculamos o quanto as distribuições de probabilidade do documento se desviam do modelo geral. Por exemplo, no documento 1, a probabilidade $P(\text{documentos}|\text{meus})=1.0$ difere da probabilidade do corpus $P_{corpus}(\text{documentos}|\text{meus})=0.50$.
+
+## Representação Vetorial Mais Sofisticada
+
+Uma abordagem mais poderosa é representar cada documento como um vetor contendo razões de verossimilhança para suas transições específicas:
+
+$\vec{v}_1^* = [\frac{P_1(\text{Mostre}|\text{`<START>`})}{P_{corpus}(\text{Mostre}|\text{`<START>`})}, \frac{P_1(\text{me}|\text{Mostre})}{P_{corpus}(\text{me}|\text{Mostre})}, \frac{P_1(\text{documentos}|\text{meus})}{P_{corpus}(\text{documentos}|\text{meus})}, ...]$
+
+$\vec{v}_1^* = [\frac{1.0}{0.50}, \frac{1.0}{0.8}, \frac{1.0}{0.50}, ...]$
+
+$\vec{v}_1^* = [2.0, 1.25, 2.0, ...]$
+
+Esta representação destaca o quanto cada transição no documento é típica ou atípica em relação ao modelo geral. Valores maiores que 1.0 indicam transições mais frequentes no documento específico do que no corpus geral.
+
+## Utilidade em Tarefas de NLP
+
+Esta vetorização probabilística rica permite:
+
+1. **Classificação precisa**: Documentos de classes diferentes terão padrões de transição distintos
+2. **Detecção de anomalias**: Textos com padrões incomuns mostrarão desvios significativos
+3. **Análise de estilo**: Autores diferentes terão "assinaturas" estatísticas nas suas transições
+4. **Geração de texto**: Podemos amostrar palavras seguindo as probabilidades de transição
+
+A inclusão explícita da posição inicial dos documentos no modelo enriquece estas análises, capturando tendências sobre como diferentes tipos de texto começam – por exemplo, emails formais vs. mensagens informais, artigos científicos vs. propagandas, ou perguntas vs. comandos.
+
+O poder da abordagem probabilística está justamente na capacidade de capturar estas sutilezas estatísticas que diferenciam tipos de texto, mesmo quando o vocabulário básico é semelhante.
+
+
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQUI MUDA O TÓÓÓÓÓÓÓÓÓÓÓÓÓÓPICO
+
+
+## Superando Limitações Locais: Modelos Baseados em Pares com Saltos
+
+Como vimos, aumentar a ordem $N$ nos modelos **N-gram**/Markovianos é uma estratégia limitada para capturar o contexto necessário em linguagem natural devido à maldição da dimensionalidade e à esparsidade dos dados. Precisamos de uma abordagem diferente para lidar com dependências que podem se estender por muitas palavras.
 
 Imagine que nosso sistema agora precisa lidar com frases mais complexas, cada uma ocorrendo com igual probabilidade (50%):
 
@@ -565,14 +1078,14 @@ Após o mecanismo de atenção calcular o vetor de contexto $C_t$ para cada pala
 
 O objetivo é transformar $C_t$ em uma saída que possa ser usada para a tarefa final (como prever a próxima palavra) ou que sirva como entrada para a próxima camada do modelo Transformer. Essa transformação é realizada por uma **Rede Neural Feed-Forward (FFN)**, aplicada independentemente a cada posição $t$ da sequência.
 
-Embora tenhamos usado a analogia de "características de pares" na seção anterior, a FFN nos Transformers é mais genérica e poderosa. Tipicamente, ela consiste em duas camadas lineares com uma função de ativação não-linear entre elas, como ReLU (Rectified Linear Unit) ou GeLU (Gaussian Error Linear Unit):
+Embora tenhamos usado a analogia de "características de pares" na seção anterior, a FFN nos**Transformers**é mais genérica e poderosa. Tipicamente, ela consiste em duas camadas lineares com uma função de ativação não-linear entre elas, como ReLU (Rectified Linear Unit) ou GeLU (Gaussian Error Linear Unit):
 
 $$ \text{FFN}(C_t) = \text{ReLU}(C_t W_1 + b_1) W_2 + b_2 $$
 
 Onde $W_1, b_1, W_2, b_2$ são matrizes de pesos e vetores de bias aprendíveis. A primeira camada geralmente expande a dimensão do vetor $C_t$, e a segunda camada a projeta de volta para a dimensão original esperada pela próxima camada ou pela saída do modelo.
 
 ![Diagrama da camada de rede neural](assets/images/nn-layer1.webp)
-*Figura 10: Diagrama conceitual de uma camada de rede neural. A FFN nos Transformers aplica transformações semelhantes (lineares + não-linearidade) ao vetor de contexto de cada posição._{: .legend}*
+*Figura 10: Diagrama conceitual de uma camada de rede neural. A FFN nos**Transformers**aplica transformações semelhantes (lineares + não-linearidade) ao vetor de contexto de cada posição._{: .legend}*
 
 A não-linearidade (ReLU/GeLU) é crucial, pois permite que a FFN aprenda transformações complexas e não apenas combinações lineares das informações presentes no vetor de contexto $C_t$. Embora possamos *imaginar* que a FFN poderia aprender a detectar combinações específicas como "bateria, executado" (como no exemplo manual abaixo), na prática ela aprende representações mais abstratas e úteis para a tarefa.
 
@@ -685,16 +1198,16 @@ Portanto, um bloco típico de um Transformer consiste na aplicação do mecanism
 
 ### Conclusão e Perspectivas
 
-Nesta jornada através da modelagem de sequências, partimos das Cadeias de Markov (modelos N-gram), reconhecendo sua simplicidade mas também suas limitações inerentes na captura de contexto de longo alcance. Vimos como a ideia conceitual de "pares com saltos" e "votação" nos levou à necessidade de um foco seletivo, que materializamos na intuição do **mascaramento** e da **atenção seletiva**.
+Nesta jornada através da modelagem de sequências, partimos das Cadeias de Markov (modelos **N-gram**), reconhecendo sua simplicidade mas também suas limitações inerentes na captura de contexto de longo alcance. Vimos como a ideia conceitual de "pares com saltos" e "votação" nos levou à necessidade de um foco seletivo, que materializamos na intuição do **mascaramento** e da **atenção seletiva**.
 
 Crucialmente, observamos como esse mecanismo de atenção pode ser implementado de forma eficiente e aprendível usando **operações matriciais** ($Q, K, V$ e a equação de atenção), permitindo ao modelo ponderar dinamicamente a relevância de diferentes partes da sequência. Finalmente, vimos como o vetor de contexto resultante é processado por uma **Rede Feed-Forward (FFN)**, completando os dois componentes principais de um bloco Transformer.
 
-A perspicaz leitora percebeu que construímos os fundamentos conceituais que justificam a arquitetura proposta em "Attention is All You Need". Os Transformers abandonaram a recorrência das RNNs/LSTMs em favor da atenção paralelizável, permitindo treinar modelos muito maiores em mais dados e alcançando resultados estado-da-arte em inúmeras tarefas de Processamento de Linguagem Natural.
+A perspicaz leitora percebeu que construímos os fundamentos conceituais que justificam a arquitetura proposta em "Attention is All You Need". Os**Transformers**abandonaram a recorrência das RNNs/LSTMs em favor da atenção paralelizável, permitindo treinar modelos muito maiores em mais dados e alcançando resultados estado-da-arte em inúmeras tarefas de Processamento de Linguagem Natural.
 
 Claro, há mais detalhes na arquitetura completa do Transformer que não cobrimos aqui. No próximo artigo, pretendemos mergulhar mais fundo:
 * **Atenção Multi-Cabeça (Multi-Head Attention):** Como o modelo aprende a prestar atenção a diferentes aspectos da sequência simultaneamente.
 * **Codificação Posicional (Positional Encoding):** Como a informação sobre a ordem das palavras, perdida pela atenção que trata a sequência como um conjunto, é reintroduzida.
 * **Arquitetura Completa Encoder-Decoder:** Como esses blocos são empilhados e combinados para tarefas como tradução automática.
-* **Aplicações e Variações:** Uma visão geral do impacto dos Transformers e modelos derivados (BERT, GPT, etc.).
+* **Aplicações e Variações:** Uma visão geral do impacto dos**Transformers**e modelos derivados (BERT, GPT, etc.).
 
 Os conceitos que exploramos – modelagem sequencial, captura de contexto, e atenção seletiva – formam a base não apenas dos Transformers, mas de grande parte da pesquisa atual em inteligência artificial. Compreendê-los é essencial para navegar neste campo fascinante.

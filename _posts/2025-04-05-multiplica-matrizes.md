@@ -17,22 +17,22 @@ rating: 5
 description: Análise dos algoritmos de multiplicação de matrizes.
 date: 2025-02-09T22:55:34.524Z
 preview: Uma introdução a matemática que suporta a criação de transformers para processamento de linguagem natural com exemplos de código em C++20.
-keywords:
-    - transformers
-    - matemática
-    - processamento de linguagem natural
-    - C++
-    - aprendizado de máquina
-    - vetores
-    - produto escalar
-    - álgebra linear
-    - embeddings
-    - atenção
-    - deep learning
-    - inteligência artificial
+keywords: |-
+    transformers
+    matemática
+    processamento de linguagem natural
+    C++
+    aprendizado de máquina
+    vetores
+    produto escalar
+    álgebra linear
+    embeddings
+    atenção
+    deep learning
+    inteligência artificial
 toc: true
 published: true
-lastmod: 2025-04-08T20:20:36.978Z
+lastmod: 2025-04-08T20:42:16.345Z
 ---
 
 A multiplicação de matrizes pode, sem dúvida, ser um dos tópicos mais importantes dos modelos de linguagem, e aprendizagem de máquina, disponíveis no mercado atualmente. Neste artigo, vamos explorar alguns algoritmos para multiplicação de matrizes, suas aplicações e como ele se relaciona com o funcionamento de modelos de aprendizado profundo, como os Transformers, que estamos estudando ([aqui](https://frankalcantara.com/voce-pensa-como-fala/),[aqui](https://frankalcantara.com/transformers-um/) e [aqui](https://frankalcantara.com/transformers-dois/)).
