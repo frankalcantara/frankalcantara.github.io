@@ -35,7 +35,7 @@ keywords: |-
     lstm
 toc: true
 published: true
-lastmod: 2025-04-17T22:30:51.988Z
+lastmod: 2025-04-17T22:33:34.074Z
 draft: 2025-04-17T18:49:57.828Z
 slug: transformers-desvendando-modelagem-de-sequencias
 ---
@@ -224,7 +224,7 @@ A multiplicação $h_{\text{meus}} \times T$ resulta em um vetor linha que cont�
 
 $$h_{\text{meus}} \times T = [0, 0, 0, 0, 0.50, 0.50, 0.00, 0, 0]$$
 
-Este vetor resultante indica que, após "meus", a probabilidade de ver "diretórios" é $0.50$ e "arquivos" é $0.50$, consistente com as frases de exemplo. Esta operação está sintetizada na Figura 2. 
+Este vetor resultante indica que, após "meus", a probabilidade de ver "diretórios" é $0.50$ e "arquivos" é $0.50$, consistente com as frases de exemplo. Esta operação está sintetizada na Figura 2.
 
 ![Consulta de probabilidade de transição](/assets/images/vetor-one-hot.webp)
 _Figura 2: Extração das probabilidades de transição para a palavra "meus" usando um vetor one-hot e multiplicação de matrizes._{: class="legend"}
@@ -522,9 +522,9 @@ Com os documentos representados como vetores probabilísticos normalizados, pode
 >
 > Na qual, temos:
 >
-> - $P$ é a distribuição de interesse (ex: distribuição de probabilidades de transição em um documento específico)
-> - $Q$ é a distribuição de referência (ex: modelo agregado do corpus)
-> - A soma é realizada sobre todos os estados possíveis (todas as transições possíveis)
+>* $P$ é a distribuição de interesse (ex: distribuição de probabilidades de transição em um documento específico)
+>* $Q$ é a distribuição de referência (ex: modelo agregado do corpus)
+>* A soma é realizada sobre todos os estados possíveis (todas as transições possíveis)
 >
 > **Interpretação intuitiva:** A Divergência KL mede a informação perdida quando usamos a distribuição $Q$ para aproximar a distribuição $P$. Pode ser entendida como o "custo" (em bits, quando se usa logaritmo de base 2) de usar $Q$ em vez de $P$.
 >
@@ -536,9 +536,9 @@ Com os documentos representados como vetores probabilísticos normalizados, pode
 >
 > **No contexto de modelagem de sequências:**
 >
-> - Podemos usar a Divergência KL para comparar as distribuições de probabilidades de transição entre um documento específico ($P_D$) e o modelo agregado do corpus ($P_{corpus}\;$)
-> - Um valor alto de $D_{KL}(P_D \vert \vert P_{corpus}\;)$ indica que o documento tem um padrão de transições muito diferente da média do corpus
-> - Esta medida pode revelar características distintivas de documentos que não são capturadas por outras métricas de similaridade
+>* Podemos usar a Divergência KL para comparar as distribuições de probabilidades de transição entre um documento específico ($P_D$) e o modelo agregado do corpus ($P_{corpus}\;$)
+>* Um valor alto de $D_{KL}(P_D \vert \vert P_{corpus}\;)$ indica que o documento tem um padrão de transições muito diferente da média do corpus
+>* Esta medida pode revelar características distintivas de documentos que não são capturadas por outras métricas de similaridade
 
 ##### Implementação em C++
 
@@ -1260,8 +1260,8 @@ _Figura 4: Visualização dos vetores normalizados dos três documentos do nosso
         $$
 
    2. **Similaridade entre $D_1$ e $D_3$**:
-    $$
-        \begin{align*}
+
+        $$\begin{align*}
         sim(D_1, D_3) &= \vec{v}_{D1}^{*norm} \cdot \vec{v}_{D3}^{*norm} \\
         &= 0.626 \times 0 + 0.548 \times 0.868 + 0.523 \times 0 \\
         &\quad + 0 \times 0 + 0 \times 0.496 \\
@@ -1271,8 +1271,8 @@ _Figura 4: Visualização dos vetores normalizados dos três documentos do nosso
         $$
 
     3. **Similaridade entre $D_2$ e $D_3$**:
-        $$
-        \begin{align*}
+
+        $$\begin{align*}
         sim(D_2, D_3) &= \vec{v}_{D2}^{*norm} \cdot \vec{v}_{D3}^{*norm} \\
         &= 0.575 \times 0 + 0 \times 0.868 + 0.480 \times 0 \\
         &\quad + 0.670 \times 0 + 0.288 \times 0.496 \\
@@ -1283,9 +1283,9 @@ _Figura 4: Visualização dos vetores normalizados dos três documentos do nosso
 
 6. Interpretação das Similaridades
 
-    - $D_1$ e $D_2$ são mais similares (0.611), o que faz sentido porque ambos começam com "mostre me" e compartilham várias transições.
-    - $D_1$ e $D_3$ têm similaridade média (0.476), principalmente devido à transição comum "meus documentos".
-    - $D_2$ e $D_3$ são menos similares (0.143), compartilhando apenas a transição "por favor".
+    * $D_1$ e $D_2$ são mais similares (0.611), o que faz sentido porque ambos começam com "mostre me" e compartilham várias transições.
+    * $D_1$ e $D_3$ têm similaridade média (0.476), principalmente devido à transição comum "meus documentos".
+    * $D_2$ e $D_3$ são menos similares (0.143), compartilhando apenas a transição "por favor".
 
 ![um grafo no qual cada documento é um vértice e as arestas são as similaridades](/assets/images/similaridade-docs.webp)
 _Figura 5: Visualização das similaridades entre os documentos $D_1$, $D_2$ e $D_3$ usando um grafo triangular._{: class="legend"}
