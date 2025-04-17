@@ -31,7 +31,7 @@ keywords: |-
     inteligência artificial
 toc: true
 published: true
-lastmod: 2025-04-12T14:37:07.166Z
+lastmod: 2025-04-17T23:01:17.077Z
 ---
 
 Neste artigo, a curiosa leitora irá enfrentar os *Transformers*. Nenhuma relação com o o Optimus Prime. Se for estes *Transformers* que está procurando, **o Google falhou com você!**
@@ -106,56 +106,95 @@ Dado que estejam em um espaço vetorial, os vetores podem ser somados, subtraíd
 #include <initializer_list> // Para construtor com {}
 #include <algorithm> // Para std::abs em Manhattan (usado depois)
 
-// --- Definição da Classe MathVector ---
-
-// Conceito para tipos aritméticos
+/**
+ * @concept Arithmetic
+ * @brief Conceito para garantir que um tipo é aritmético (integral ou de ponto flutuante).
+ *
+ * Restringe os parâmetros de template a tipos aritméticos (por exemplo, int, double, float).
+ */
 template<typename T>
 concept Arithmetic = std::is_arithmetic_v<T>;
 
-// Classe genérica para representar um vetor matemático
+/**
+ * @class MathVector
+ * @brief Uma classe genérica para representar e manipular vetores matemáticos.
+ *
+ * Fornece operações como adição, subtração, multiplicação por escalar, produto escalar,
+ * cálculo de magnitude e normalização. Suporta vetores de qualquer tipo aritmético.
+ *
+ * @tparam T O tipo aritmético dos componentes do vetor (por exemplo, int, double).
+ */
 template<Arithmetic T>
 class MathVector {
 private:
-    std::vector<T> components;
-     // Constante pequena para comparações de ponto flutuante
-    static constexpr T epsilon = 1e-9;
+    std::vector<T> components; ///< Armazenamento interno para os componentes do vetor.
+    static constexpr T epsilon = 1e-9; ///< Constante pequena para comparações de ponto flutuante.
 
 public:
-    // Construtor padrão (vetor vazio)
+    /**
+     * @brief Construtor padrão que cria um vetor vazio.
+     */
     MathVector() = default;
 
-    // Construtor a partir de uma lista de inicialização
+    /**
+     * @brief Constrói um vetor a partir de uma lista inicializadora.
+     * @param init Lista inicializadora contendo os componentes do vetor.
+     */
     MathVector(std::initializer_list<T> init) : components(init) {}
 
-    // Construtor a partir de um std::vector
+    /**
+     * @brief Constrói um vetor a partir de um std::vector.
+     * @param vec O vetor de entrada contendo os componentes.
+     */
     explicit MathVector(const std::vector<T>& vec) : components(vec) {}
 
-     // Construtor para criar um vetor de tamanho 'n' com valor inicial 'val'
+    /**
+     * @brief Constrói um vetor de tamanho especificado com todos os componentes inicializados com um valor.
+     * @param n O número de componentes.
+     * @param val O valor inicial para todos os componentes (padrão é T{}).
+     */
     explicit MathVector(size_t n, T val = T{}) : components(n, val) {}
 
-
-    // Retorna o número de dimensões do vetor
+    /**
+     * @brief Retorna o número de dimensões (componentes) do vetor.
+     * @return O tamanho do vetor.
+     */
     size_t dimensions() const {
         return components.size();
     }
 
-    // Acesso a componentes do vetor (não-const)
+    /**
+     * @brief Fornece acesso não constante a um componente do vetor.
+     * @param index O índice do componente a acessar.
+     * @return Referência ao componente no índice especificado.
+     * @throws std::out_of_range Se o índice estiver fora dos limites.
+     */
     T& operator[](size_t index) {
-         if (index >= dimensions()) {
+        if (index >= dimensions()) {
             throw std::out_of_range("Índice fora dos limites do vetor");
         }
         return components[index];
     }
 
-    // Acesso a componentes do vetor (const)
+    /**
+     * @brief Fornece acesso constante a um componente do vetor.
+     * @param index O índice do componente a acessar.
+     * @return Referência constante ao componente no índice especificado.
+     * @throws std::out_of_range Se o índice estiver fora dos limites.
+     */
     const T& operator[](size_t index) const {
-         if (index >= dimensions()) {
+        if (index >= dimensions()) {
             throw std::out_of_range("Índice fora dos limites do vetor");
         }
         return components[index];
     }
 
-    // Adição de vetores
+    /**
+     * @brief Soma dois vetores componente a componente.
+     * @param other O vetor a ser somado a este vetor.
+     * @return Um novo vetor representando a soma.
+     * @throws std::invalid_argument Se os vetores tiverem dimensões diferentes.
+     */
     MathVector<T> operator+(const MathVector<T>& other) const {
         if (dimensions() != other.dimensions()) {
             throw std::invalid_argument("Não é possível somar vetores de dimensões diferentes");
@@ -167,7 +206,12 @@ public:
         return result;
     }
 
-    // Subtração de vetores
+    /**
+     * @brief Subtrai um vetor de outro componente a componente.
+     * @param other O vetor a ser subtraído deste vetor.
+     * @return Um novo vetor representando a diferença.
+     * @throws std::invalid_argument Se os vetores tiverem dimensões diferentes.
+     */
     MathVector<T> operator-(const MathVector<T>& other) const {
         if (dimensions() != other.dimensions()) {
             throw std::invalid_argument("Não é possível subtrair vetores de dimensões diferentes");
@@ -179,7 +223,11 @@ public:
         return result;
     }
 
-    // Multiplicação por escalar (vetor * escalar)
+    /**
+     * @brief Multiplica o vetor por um escalar.
+     * @param scalar O valor escalar para multiplicação.
+     * @return Um novo vetor com componentes escalados.
+     */
     MathVector<T> operator*(T scalar) const {
         MathVector<T> result(dimensions());
         for (size_t i = 0; i < dimensions(); ++i) {
@@ -188,7 +236,10 @@ public:
         return result;
     }
 
-    // Vetor oposto (operador unário -)
+    /**
+     * @brief Retorna o vetor oposto (negado).
+     * @return Um novo vetor com todos os componentes negados.
+     */
     MathVector<T> operator-() const {
         MathVector<T> result(dimensions());
         for (size_t i = 0; i < dimensions(); ++i) {
@@ -197,7 +248,12 @@ public:
         return result;
     }
 
-    // Produto escalar (dot product)
+    /**
+     * @brief Calcula o produto escalar deste vetor com outro.
+     * @param other O outro vetor para o produto escalar.
+     * @return O resultado escalar do produto escalar.
+     * @throws std::invalid_argument Se os vetores tiverem dimensões diferentes.
+     */
     T dot(const MathVector<T>& other) const {
         if (dimensions() != other.dimensions()) {
             throw std::invalid_argument("Não é possível calcular o produto escalar de vetores de dimensões diferentes");
@@ -205,17 +261,25 @@ public:
         return std::inner_product(components.begin(), components.end(), other.components.begin(), T(0));
     }
 
-    // Magnitude (norma L2) do vetor
+    /**
+     * @brief Calcula a magnitude euclidiana (norma L2) do vetor.
+     * @return A magnitude do vetor.
+     * @note Para tipos integrais, converte para double para sqrt e converte de volta.
+     */
     T magnitude() const {
         T sum_of_squares = this->dot(*this);
         if constexpr (std::is_integral_v<T>) {
-             return static_cast<T>(std::sqrt(static_cast<double>(sum_of_squares)));
+            return static_cast<T>(std::sqrt(static_cast<double>(sum_of_squares)));
         } else {
-             return std::sqrt(sum_of_squares);
+            return std::sqrt(sum_of_squares);
         }
     }
 
-    // Normalização do vetor (retorna um novo vetor normalizado)
+    /**
+     * @brief Normaliza o vetor para ter comprimento unitário.
+     * @return Um novo vetor normalizado.
+     * @throws std::domain_error Se a magnitude do vetor for zero ou próxima de zero.
+     */
     MathVector<T> normalize() const {
         T mag = magnitude();
         if (std::abs(mag) < epsilon) {
@@ -228,17 +292,21 @@ public:
         return result;
     }
 
-    // Representação em string
+    /**
+     * @brief Converte o vetor para uma representação em string.
+     * @return Uma string representando o vetor (por exemplo, "[1.0000, 2.0000]").
+     * @note Para tipos de ponto flutuante, usa precisão fixa de 4 casas decimais.
+     */
     std::string to_string() const {
         std::string result = "[";
         for (size_t i = 0; i < dimensions(); ++i) {
-             if constexpr (std::is_floating_point_v<T>) {
-                 std::stringstream ss;
-                 ss << std::fixed << std::setprecision(4) << components[i]; // Controle de precisão
-                 result += ss.str();
-             } else {
+            if constexpr (std::is_floating_point_v<T>) {
+                std::stringstream ss;
+                ss << std::fixed << std::setprecision(4) << components[i];
+                result += ss.str();
+            } else {
                 result += std::to_string(components[i]);
-             }
+            }
             if (i < dimensions() - 1) {
                 result += ", ";
             }
@@ -247,31 +315,65 @@ public:
         return result;
     }
 
-    // Permite iteração baseada em range
+    /**
+     * @brief Fornece iterador para o início dos componentes do vetor.
+     * @return Iterador para o primeiro componente.
+     */
     auto begin() const { return components.begin(); }
+
+    /**
+     * @brief Fornece iterador para o fim dos componentes do vetor.
+     * @return Iterador após o último componente.
+     */
     auto end() const { return components.end(); }
+
+    /**
+     * @brief Fornece iterador não constante para o início dos componentes do vetor.
+     * @return Iterador para o primeiro componente.
+     */
     auto begin() { return components.begin(); }
+
+    /**
+     * @brief Fornece iterador não constante para o fim dos componentes do vetor.
+     * @return Iterador após o último componente.
+     */
     auto end() { return components.end(); }
 
-     // Acesso ao vetor subjacente
+    /**
+     * @brief Retorna o vetor de componentes subjacente.
+     * @return Referência constante ao std::vector interno de componentes.
+     */
     const std::vector<T>& get_components() const { return components; }
 };
 
-// Multiplicação por escalar (escalar * vetor) - função livre
+/**
+ * @brief Multiplica um escalar por um vetor (escalar * vetor).
+ * @tparam T O tipo aritmético dos componentes do vetor.
+ * @param scalar O valor escalar.
+ * @param vec O vetor a ser multiplicado.
+ * @return Um novo vetor com componentes escalados.
+ */
 template<Arithmetic T>
 MathVector<T> operator*(T scalar, const MathVector<T>& vec) {
-    return vec * scalar; // Reutiliza o operador membro
+    return vec * scalar;
 }
 
-// Função auxiliar para imprimir MathVector (usa MathVector::to_string)
+/**
+ * @brief Imprime um MathVector com um nome especificado.
+ * @tparam T O tipo aritmético dos componentes do vetor.
+ * @param vec O vetor a ser impresso.
+ * @param name O nome a ser exibido ao lado do vetor.
+ */
 template<Arithmetic T>
 void print_mathvector(const MathVector<T>& vec, const std::string& name) {
     std::cout << name << " = " << vec.to_string() << "\n";
 }
 
-
+/**
+ * @brief Função principal demonstrando operações com MathVector.
+ * @return 0 em caso de execução bem-sucedida.
+ */
 int main() {
-    // Configurar a precisão para saída de números de ponto flutuante
     std::cout << std::fixed << std::setprecision(4);
 
     std::cout << "Exemplo 1: Operações básicas com MathVector\n";
@@ -290,19 +392,19 @@ int main() {
     print_mathvector(diff, "a - b");
 
     // Multiplicação por escalar
-    MathVector<double> scaled = 2.0 * a; // Usa a função livre operator*
+    MathVector<double> scaled = 2.0 * a;
     print_mathvector(scaled, "2 * a");
 
     // Vetor oposto
     MathVector<double> opposite = -a;
     print_mathvector(opposite, "-a");
 
-    // Exemplo 2: Produto escalar (usando o método da classe)
+    // Produto escalar
     std::cout << "\nExemplo 2: Produto escalar\n";
     double dot_product = a.dot(b);
     std::cout << "a · b = " << dot_product << "\n";
 
-    // Exemplo 3: Magnitude e normalização (usando métodos da classe)
+    // Magnitude e normalização
     std::cout << "\nExemplo 3: Magnitude e normalização\n";
     double mag_a = a.magnitude();
     std::cout << "Magnitude de a = " << mag_a << "\n";
@@ -310,13 +412,14 @@ int main() {
     try {
         MathVector<double> a_normalized = a.normalize();
         print_mathvector(a_normalized, "a normalizado");
-        std::cout << "Magnitude de a normalizado = " << a_normalized.magnitude() << "\n"; // Deve ser ~1.0
+        std::cout << "Magnitude de a normalizado = " << a_normalized.magnitude() << "\n";
     } catch (const std::domain_error& e) {
         std::cerr << "Erro ao normalizar: " << e.what() << '\n';
     }
 
     return 0;
 }
+
 ```
 
 ### Produto Escalar
@@ -393,15 +496,24 @@ Em C++ podemos usar o [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_P
 #include <iostream>
 #include <Eigen/Dense>
 
+/**
+ * @brief Função principal que demonstra o cálculo do produto escalar usando a biblioteca Eigen.
+ *
+ * Este programa define dois vetores tridimensionais e calcula seu produto escalar de duas maneiras:
+ * utilizando o método `dot()` da biblioteca Eigen e utilizando a multiplicação matricial com a transposta
+ * de um dos vetores. Os resultados são exibidos no console.
+ *
+ * @return 0 em caso de execução bem-sucedida.
+ */
 int main() {
-    // Defina dois vetores
+    // Defina dois vetores tridimensionais
     Eigen::Vector3d v1(1, 2, 3);
     Eigen::Vector3d v2(4, 5, 6);
     
-    // Calcule o produto escalar usando dot()
+    // Calcula o produto escalar usando o método dot()
     double dot_product1 = v1.dot(v2);
     
-    // Calcule o produto escalar usando transpose e multiplicação
+    // Calcula o produto escalar usando a transposta e multiplicação matricial
     double dot_product2 = v1.transpose() * v2;
     
     std::cout << "Produto escalar usando dot(): " << dot_product1 << std::endl;
@@ -409,108 +521,304 @@ int main() {
     
     return 0;
 }
+}
 ```
 
 #### Exemplo em C++ 20 de Produto Escalar
 
 ```cpp
-#include <iostream>
-#include <vector>
-#include <numeric>
-#include <cmath>
-#include <concepts>
-#include <stdexcept>
-#include <string>
-#include <sstream>
-#include <iomanip>
-#include <initializer_list>
+#include <iostream>         ///< Para entrada e saída padrão (std::cout, std::cerr).
+#include <vector>          ///< Para contêiner std::vector usado no armazenamento de componentes.
+#include <numeric>         ///< Para std::inner_product, usado no cálculo do produto escalar.
+#include <cmath>           ///< Para funções matemáticas como std::sqrt e std::abs.
+#include <concepts>        ///< Para std::is_arithmetic_v, usado no conceito Arithmetic.
+#include <stdexcept>       ///< Para exceções padrão como std::out_of_range e std::invalid_argument.
+#include <string>          ///< Para std::string e std::to_string, usados na conversão para string.
+#include <sstream>         ///< Para std::stringstream, usado na formatação de números de ponto flutuante.
+#include <iomanip>         ///< Para std::fixed e std::setprecision, usados na formatação de saída.
+#include <initializer_list> ///< Para suporte a inicialização de vetores com listas inicializadoras.
 
-// --- Definição da Classe MathVector (Necessária para este exemplo) ---
-template<typename T> concept Arithmetic = std::is_arithmetic_v<T>;
+/**
+ * @concept Arithmetic
+ * @brief Conceito para garantir que um tipo é aritmético (integral ou de ponto flutuante).
+ *
+ * Restringe os parâmetros de template a tipos aritméticos (por exemplo, int, double, float).
+ */
+template<typename T>
+concept Arithmetic = std::is_arithmetic_v<T>;
+
+/**
+ * @class MathVector
+ * @brief Uma classe genérica para representar e manipular vetores matemáticos.
+ *
+ * Suporta operações como produto escalar, cálculo de magnitude e conversão para string.
+ * Esta é uma implementação simplificada, com funcionalidades completas conforme o Bloco 1 do documento original.
+ *
+ * @tparam T O tipo aritmético dos componentes do vetor (por exemplo, int, double).
+ */
 template<Arithmetic T>
 class MathVector {
 private:
-    std::vector<T> components;
-    static constexpr T epsilon = 1e-9;
+    std::vector<T> components; ///< Armazenamento interno para os componentes do vetor.
+    static constexpr T epsilon = 1e-9; ///< Constante pequena para comparações de ponto flutuante.
+
 public:
+    /**
+     * @brief Construtor padrão que cria um vetor vazio.
+     */
     MathVector() = default;
+
+    /**
+     * @brief Constrói um vetor a partir de uma lista inicializadora.
+     * @param init Lista inicializadora contendo os componentes do vetor.
+     */
     MathVector(std::initializer_list<T> init) : components(init) {}
+
+    /**
+     * @brief Constrói um vetor a partir de um std::vector.
+     * @param vec O vetor de entrada contendo os componentes.
+     */
     explicit MathVector(const std::vector<T>& vec) : components(vec) {}
+
+    /**
+     * @brief Constrói um vetor de tamanho especificado com todos os componentes inicializados com um valor.
+     * @param n O número de componentes.
+     * @param val O valor inicial para todos os componentes (padrão é T{}).
+     */
     explicit MathVector(size_t n, T val = T{}) : components(n, val) {}
+
+    /**
+     * @brief Retorna o número de dimensões (componentes) do vetor.
+     * @return O tamanho do vetor.
+     */
     size_t dimensions() const { return components.size(); }
-    T& operator[](size_t index) { if (index >= dimensions()) throw std::out_of_range("..."); return components[index]; }
-    const T& operator[](size_t index) const { if (index >= dimensions()) throw std::out_of_range("..."); return components[index]; }
-    // Métodos essenciais: dot, magnitude, to_string (implementações omitidas por brevidade, assumindo que existem como no Bloco 1)
-     T dot(const MathVector<T>& other) const {
-        if (dimensions() != other.dimensions()) throw std::invalid_argument("Dimensões diferentes para dot product");
+
+    /**
+     * @brief Fornece acesso não constante a um componente do vetor.
+     * @param index O índice do componente a acessar.
+     * @return Referência ao componente no índice especificado.
+     * @throws std::out_of_range Se o índice estiver fora dos limites.
+     */
+    T& operator[](size_t index) {
+        if (index >= dimensions()) throw std::out_of_range("Índice fora dos limites do vetor");
+        return components[index];
+    }
+
+    /**
+     * @brief Fornece acesso constante a um componente do vetor.
+     * @param index O índice do componente a acessar.
+     * @return Referência constante ao componente no índice especificado.
+     * @throws std::out_of_range Se o índice estiver fora dos limites.
+     */
+    const T& operator[](size_t index) const {
+        if (index >= dimensions()) throw std::out_of_range("Índice fora dos limites do vetor");
+        return components[index];
+    }
+
+    /**
+     * @brief Calcula o produto escalar deste vetor com outro.
+     * @param other O outro vetor para o produto escalar.
+     * @return O resultado escalar do produto escalar.
+     * @throws std::invalid_argument Se os vetores tiverem dimensões diferentes.
+     */
+    T dot(const MathVector<T>& other) const {
+        if (dimensions() != other.dimensions()) throw std::invalid_argument("Dimensões diferentes para produto escalar");
         return std::inner_product(components.begin(), components.end(), other.components.begin(), T(0));
     }
-     T magnitude() const { /* ... implementação ... */
+
+    /**
+     * @brief Calcula a magnitude euclidiana (norma L2) do vetor.
+     * @return A magnitude do vetor.
+     * @note Para tipos integrais, converte para double para sqrt e converte de volta.
+     */
+    T magnitude() const {
         T sum_of_squares = this->dot(*this);
         if constexpr (std::is_integral_v<T>) return static_cast<T>(std::sqrt(static_cast<double>(sum_of_squares)));
         else return std::sqrt(sum_of_squares);
-     }
-     std::string to_string() const { /* ... implementação ... */
+    }
+
+    /**
+     * @brief Converte o vetor para uma representação em string.
+     * @return Uma string representando o vetor (por exemplo, "[1.0000, 2.0000]").
+     * @note Para tipos de ponto flutuante, usa precisão fixa de 4 casas decimais.
+     */
+    std::string to_string() const {
         std::string result = "[";
         for (size_t i = 0; i < dimensions(); ++i) {
-             if constexpr (std::is_floating_point_v<T>) { std::stringstream ss; ss << std::fixed << std::setprecision(4) << components[i]; result += ss.str(); }
-             else { result += std::to_string(components[i]); }
+            if constexpr (std::is_floating_point_v<T>) {
+                std::stringstream ss;
+                ss << std::fixed << std::setprecision(4) << components[i];
+                result += ss.str();
+            } else {
+                result += std::to_string(components[i]);
+            }
             if (i < dimensions() - 1) result += ", ";
         }
         result += "]"; return result;
-     }
-     const std::vector<T>& get_components() const { return components; } // Necessário para Matrix helpers
+    }
+
+    /**
+     * @brief Retorna o vetor de componentes subjacente.
+     * @return Referência constante ao std::vector interno de componentes.
+     */
+    const std::vector<T>& get_components() const { return components; }
 };
-// Função auxiliar para imprimir MathVector
-template<Arithmetic T> void print_mathvector(const MathVector<T>& vec, const std::string& name) { std::cout << name << " = " << vec.to_string() << "\n"; }
 
+/**
+ * @brief Imprime um MathVector com um nome especificado.
+ * @tparam T O tipo aritmético dos componentes do vetor.
+ * @param vec O vetor a ser impresso.
+ * @param name O nome a ser exibido ao lado do vetor.
+ */
+template<Arithmetic T>
+void print_mathvector(const MathVector<T>& vec, const std::string& name) {
+    std::cout << name << " = " << vec.to_string() << "\n";
+}
 
-// --- Definição da Classe Matrix (Mantida como no original) ---
+/**
+ * @class Matrix
+ * @brief Uma classe genérica para representar e manipular matrizes.
+ *
+ * Suporta operações como multiplicação de matrizes, transposição e conversão de vetores para matrizes linha/coluna.
+ *
+ * @tparam T O tipo aritmético dos elementos da matriz.
+ */
 template<Arithmetic T>
 class Matrix {
 private:
-    std::vector<std::vector<T>> data;
-    size_t rows;
-    size_t cols;
+    std::vector<std::vector<T>> data; ///< Armazenamento interno para os elementos da matriz.
+    size_t rows; ///< Número de linhas.
+    size_t cols; ///< Número de colunas.
+
 public:
-    Matrix(size_t n, size_t m, T initial_value = T{}) : rows(n), cols(m), data(n, std::vector<T>(m, initial_value)) {}
-    Matrix(const std::vector<std::vector<T>>& values) { /* ... implementação original ... */
-        if (values.empty()) { rows = 0; cols = 0; }
-        else {
-            rows = values.size(); cols = values[0].size();
-            for (const auto& row : values) { if (row.size() != cols) throw std::invalid_argument("Linhas com tamanhos diferentes"); }
-            data = values; // Copia os dados
+    /**
+     * @brief Constrói uma matriz com dimensões especificadas e valor inicial.
+     * @param n Número de linhas.
+     * @param m Número de colunas.
+     * @param initial_value Valor inicial para todos os elementos (padrão é T{}).
+     */
+    Matrix(size_t n, size_t m, T initial_value = T{})
+        : rows(n), cols(m), data(n, std::vector<T>(m, initial_value)) {}
+
+    /**
+     * @brief Constrói uma matriz a partir de um vetor de vetores.
+     * @param values Os dados de entrada como um vetor de vetores.
+     * @throws std::invalid_argument Se as linhas tiverem tamanhos inconsistentes.
+     */
+    Matrix(const std::vector<std::vector<T>>& values) {
+        if (values.empty()) {
+            rows = 0;
+            cols = 0;
+        } else {
+            rows = values.size();
+            cols = values[0].size();
+            for (const auto& row : values) {
+                if (row.size() != cols) throw std::invalid_argument("Linhas com tamanhos diferentes");
+            }
+            data = values;
         }
-     }
-    T& at(size_t i, size_t j) { if (i >= rows || j >= cols) throw std::out_of_range("..."); return data[i][j]; }
-    const T& at(size_t i, size_t j) const { if (i >= rows || j >= cols) throw std::out_of_range("..."); return data[i][j]; }
+    }
+
+    /**
+     * @brief Fornece acesso não constante a um elemento da matriz.
+     * @param i Índice da linha.
+     * @param j Índice da coluna.
+     * @return Referência ao elemento na posição (i, j).
+     * @throws std::out_of_range Se os índices estiverem fora dos limites.
+     */
+    T& at(size_t i, size_t j) {
+        if (i >= rows || j >= cols) throw std::out_of_range("Índices fora dos limites da matriz");
+        return data[i][j];
+    }
+
+    /**
+     * @brief Fornece acesso constante a um elemento da matriz.
+     * @param i Índice da linha.
+     * @param j Índice da coluna.
+     * @return Referência constante ao elemento na posição (i, j).
+     * @throws std::out_of_range Se os índices estiverem fora dos limites.
+     */
+    const T& at(size_t i, size_t j) const {
+        if (i >= rows || j >= cols) throw std::out_of_range("Índices fora dos limites da matriz");
+        return data[i][j];
+    }
+
+    /**
+     * @brief Retorna o número de linhas.
+     * @return O número de linhas da matriz.
+     */
     size_t num_rows() const { return rows; }
+
+    /**
+     * @brief Retorna o número de colunas.
+     * @return O número de colunas da matriz.
+     */
     size_t num_cols() const { return cols; }
-    Matrix<T> operator*(const Matrix<T>& other) const { /* ... implementação original ... */
-        if (cols != other.rows) throw std::invalid_argument("Dimensões incompatíveis");
+
+    /**
+     * @brief Multiplica esta matriz por outra.
+     * @param other A matriz a ser multiplicada.
+     * @return A matriz resultante.
+     * @throws std::invalid_argument Se as dimensões forem incompatíveis.
+     */
+    Matrix<T> operator*(const Matrix<T>& other) const {
+        if (cols != other.rows) throw std::invalid_argument("Dimensões incompatíveis para multiplicação de matrizes");
         Matrix<T> result(rows, other.cols, T{});
         for (size_t i = 0; i < rows; ++i) {
             for (size_t j = 0; j < other.cols; ++j) {
-                for (size_t k = 0; k < cols; ++k) { result.at(i, j) += data[i][k] * other.data[k][j]; }
+                for (size_t k = 0; k < cols; ++k) {
+                    result.at(i, j) += data[i][k] * other.data[k][j];
+                }
             }
-        } return result;
-     }
-    Matrix<T> transpose() const { /* ... implementação original ... */
-         Matrix<T> result(cols, rows);
-         for (size_t i = 0; i < rows; ++i) { for (size_t j = 0; j < cols; ++j) { result.at(j, i) = data[i][j]; } }
-         return result;
-     }
-    void print(const std::string& name = "") const { /* ... implementação original ... */
-         if (!name.empty()) std::cout << name << " =\n";
-         for (size_t i = 0; i < rows; ++i) {
-             std::cout << "[";
-             for (size_t j = 0; j < cols; ++j) { std::cout << std::fixed << std::setprecision(2) << data[i][j]; if (j < cols - 1) std::cout << ", "; }
-             std::cout << "]\n";
-         }
-     }
-    T scalar_value() const { if (rows != 1 || cols != 1) throw std::logic_error("Matrix não é 1x1"); return data[0][0]; }
+        }
+        return result;
+    }
 
-    // Cria um vetor coluna (Matrix) a partir de um MathVector
+    /**
+     * @brief Calcula a transposta da matriz.
+     * @return A matriz transposta.
+     */
+    Matrix<T> transpose() const {
+        Matrix<T> result(cols, rows);
+        for (size_t i = 0; i < rows; ++i) {
+            for (size_t j = 0; j < cols; ++j) {
+                result.at(j, i) = data[i][j];
+            }
+        }
+        return result;
+    }
+
+    /**
+     * @brief Imprime a matriz com um nome opcional.
+     * @param name Nome opcional a ser exibido antes da matriz.
+     */
+    void print(const std::string& name = "") const {
+        if (!name.empty()) std::cout << name << " =\n";
+        for (size_t i = 0; i < rows; ++i) {
+            std::cout << "[";
+            for (size_t j = 0; j < cols; ++j) {
+                std::cout << std::fixed << std::setprecision(2) << data[i][j];
+                if (j < cols - 1) std::cout << ", ";
+            }
+            std::cout << "]\n";
+        }
+    }
+
+    /**
+     * @brief Extrai o valor escalar de uma matriz 1x1.
+     * @return O valor escalar.
+     * @throws std::logic_error Se a matriz não for 1x1.
+     */
+    T scalar_value() const {
+        if (rows != 1 || cols != 1) throw std::logic_error("A matriz não é 1x1");
+        return data[0][0];
+    }
+
+    /**
+     * @brief Cria uma matriz coluna a partir de um MathVector.
+     * @param vec O vetor de entrada.
+     * @return Uma matriz com o vetor como uma única coluna.
+     */
     static Matrix<T> column_vector_from(const MathVector<T>& vec) {
         Matrix<T> result(vec.dimensions(), 1);
         for (size_t i = 0; i < vec.dimensions(); ++i) {
@@ -518,7 +826,12 @@ public:
         }
         return result;
     }
-    // Cria um vetor linha (Matrix) a partir de um MathVector
+
+    /**
+     * @brief Cria uma matriz linha a partir de um MathVector.
+     * @param vec O vetor de entrada.
+     * @return Uma matriz com o vetor como uma única linha.
+     */
     static Matrix<T> row_vector_from(const MathVector<T>& vec) {
         Matrix<T> result(1, vec.dimensions());
         for (size_t i = 0; i < vec.dimensions(); ++i) {
@@ -528,35 +841,44 @@ public:
     }
 };
 
+/**
+ * @brief Função principal que demonstra operações de produto escalar e baseadas em matrizes.
+ *
+ * Este programa ilustra o uso da classe MathVector para calcular produtos escalares diretamente
+ * e através de representações matriciais, além de demonstrar a extração de componentes e a
+ * interpretação geométrica do produto escalar com vetores similares, ortogonais e opostos.
+ *
+ * @return 0 em caso de execução bem-sucedida.
+ */
 int main() {
     std::cout << std::fixed << std::setprecision(4);
     std::cout << "Demonstração de Produto Escalar e Interpretação usando MathVector\n";
     std::cout << "-------------------------------------------------------------------\n\n";
 
-    MathVector<double> a = {2.0, 5.0, 1.0};
-    MathVector<double> b = {3.0, 1.0, 4.0};
+    MathVector<double> a = {2.0, 5.0, 1.0}; ///< Vetor a para demonstração.
+    MathVector<double> b = {3.0, 1.0, 4.0}; ///< Vetor b para demonstração.
 
     print_mathvector(a, "Vetor a");
     print_mathvector(b, "Vetor b");
 
-    // --- Cálculo Principal usando MathVector::dot ---
+    // Produto escalar direto
     std::cout << "\nCálculo principal via a.dot(b):\n";
     double dot_value_direct = a.dot(b);
     std::cout << "a · b = " << dot_value_direct << "\n";
 
-    // --- Visão Alternativa: Representação Matricial (a^T * b) ---
+    // Produto escalar baseado em matriz
     std::cout << "\nVisão Alternativa: Representação Matricial (a^T * b):\n";
     try {
-        auto a_row = Matrix<double>::row_vector_from(a); // a transposto como matriz linha
-        auto b_col = Matrix<double>::column_vector_from(b); // b como matriz coluna
+        auto a_row = Matrix<double>::row_vector_from(a);
+        auto b_col = Matrix<double>::column_vector_from(b);
 
         a_row.print("a como vetor linha (a^T)");
         b_col.print("b como vetor coluna (b)");
 
-        auto dot_result_matrix = a_row * b_col; // Multiplicação de matrizes
+        auto dot_result_matrix = a_row * b_col;
         dot_result_matrix.print("\nProduto (a^T * b)");
 
-        double dot_value_matrix = dot_result_matrix.scalar_value(); // Extrai o valor escalar
+        double dot_value_matrix = dot_result_matrix.scalar_value();
         std::cout << "Valor do produto escalar (via matriz): " << dot_value_matrix << "\n";
         std::cout << "Verificação manual: " << (a[0]*b[0] + a[1]*b[1] + a[2]*b[2]) << "\n";
 
@@ -564,38 +886,36 @@ int main() {
         std::cerr << "Erro na representação matricial: " << e.what() << '\n';
     }
 
-
-    // --- Exemplo 2: Extração de componente usando MathVector::dot ---
+    // Extração de componente usando produto escalar
     std::cout << "\nExemplo 2: Extração da segunda componente de [0.2, 0.7, 0.1] usando dot product\n";
-    MathVector<double> base_extract = {0.0, 1.0, 0.0};
-    MathVector<double> data_vec = {0.2, 0.7, 0.1};
+    MathVector<double> base_extract = {0.0, 1.0, 0.0}; ///< Vetor base para extração da segunda dimensão.
+    MathVector<double> data_vec = {0.2, 0.7, 0.1};     ///< Vetor de dados para extração.
     print_mathvector(base_extract, "Vetor base (ativa 2a dim)");
     print_mathvector(data_vec, "Vetor de dados");
     double extracted_value = base_extract.dot(data_vec);
     std::cout << "Resultado da extração (base · data): " << extracted_value << "\n";
     std::cout << "Verificação: data[1] = " << data_vec[1] << "\n";
 
-
-    // --- Exemplo 3: Interpretação geométrica do produto escalar usando MathVector::dot ---
+    // Interpretação geométrica do produto escalar
     std::cout << "\nExemplo 3: Interpretação geométrica do produto escalar\n";
 
     // Vetores similares
-    MathVector<double> v_sim1 = {0.8, 0.6};
-    MathVector<double> v_sim2 = {0.9, 0.5};
+    MathVector<double> v_sim1 = {0.8, 0.6}; ///< Primeiro vetor similar.
+    MathVector<double> v_sim2 = {0.9, 0.5}; ///< Segundo vetor similar.
     print_mathvector(v_sim1, "v_sim1");
     print_mathvector(v_sim2, "v_sim2");
     std::cout << "Produto escalar (similares): " << v_sim1.dot(v_sim2) << " (positivo)\n\n";
 
     // Vetores ortogonais
-    MathVector<double> v_ort1 = {1.0, 0.0};
-    MathVector<double> v_ort2 = {0.0, 1.0};
+    MathVector<double> v_ort1 = {1.0, 0.0}; ///< Primeiro vetor ortogonal.
+    MathVector<double> v_ort2 = {0.0, 1.0}; ///< Segundo vetor ortogonal.
     print_mathvector(v_ort1, "v_ort1");
     print_mathvector(v_ort2, "v_ort2");
     std::cout << "Produto escalar (ortogonais): " << v_ort1.dot(v_ort2) << " (zero)\n\n";
 
     // Vetores opostos
-    MathVector<double> v_op1 = {0.7, 0.3};
-    MathVector<double> v_op2 = {-0.7, -0.3};
+    MathVector<double> v_op1 = {0.7, 0.3};   ///< Primeiro vetor oposto.
+    MathVector<double> v_op2 = {-0.7, -0.3}; ///< Segundo vetor oposto.
     print_mathvector(v_op1, "v_op1");
     print_mathvector(v_op2, "v_op2");
     std::cout << "Produto escalar (opostos): " << v_op1.dot(v_op2) << " (negativo)\n";
@@ -1026,52 +1346,83 @@ $$
 #### Exemplo em C++ 20
 
 ```cpp
-#include <iostream>
-#include <vector>
-#include <iomanip>
-#include <stdexcept>
+#include <iostream>    ///< Para entrada e saída padrão (std::cout, std::cerr).
+#include <vector>      ///< Para contêiner std::vector usado no armazenamento de elementos da matriz.
+#include <iomanip>     ///< Para std::fixed e std::setprecision, usados na formatação de saída.
+#include <stdexcept>   ///< Para exceções padrão como std::out_of_range e std::invalid_argument.
 
+/**
+ * @class Matrix
+ * @brief Uma classe genérica para representar e manipular matrizes.
+ *
+ * Suporta operações como multiplicação de matrizes, multiplicação por vetor e impressão formatada.
+ * A matriz é armazenada como um vetor de vetores de tipo T.
+ *
+ * @tparam T O tipo dos elementos da matriz (deve suportar operações aritméticas).
+ */
 template<typename T>
 class Matrix {
 private:
-    std::vector<std::vector<T>> data;
-    size_t rows;
-    size_t cols;
+    std::vector<std::vector<T>> data; ///< Armazenamento interno para os elementos da matriz.
+    size_t rows; ///< Número de linhas da matriz.
+    size_t cols; ///< Número de colunas da matriz.
 
 public:
-    // Construtor para matriz de dimensões m x n com valor inicial
+    /**
+     * @brief Construtor para criar uma matriz de dimensões m x n com valor inicial.
+     * @param m Número de linhas.
+     * @param n Número de colunas.
+     * @param initial_value Valor inicial para todos os elementos (padrão é T{}).
+     */
     Matrix(size_t m, size_t n, T initial_value = T{}) 
         : rows(m), cols(n), data(m, std::vector<T>(n, initial_value)) {}
-    
-    // Construtor a partir de um vector de vectors
+
+    /**
+     * @brief Construtor a partir de um vetor de vetores.
+     * @param values Os dados de entrada como um vetor de vetores.
+     * @throws std::invalid_argument Se as linhas tiverem tamanhos inconsistentes.
+     */
     Matrix(const std::vector<std::vector<T>>& values) {
         if (values.empty()) {
             rows = 0;
             cols = 0;
             return;
         }
-        
+
         rows = values.size();
         cols = values[0].size();
-        
+
         // Verifica se todas as linhas têm o mesmo tamanho
         for (const auto& row : values) {
             if (row.size() != cols) {
                 throw std::invalid_argument("Todas as linhas devem ter o mesmo número de colunas");
             }
         }
-        
+
         data = values; // Copia os dados
     }
-    
-    // Acesso aos elementos (com verificação de limites)
+
+    /**
+     * @brief Fornece acesso não constante a um elemento da matriz.
+     * @param i Índice da linha.
+     * @param j Índice da coluna.
+     * @return Referência ao elemento na posição (i, j).
+     * @throws std::out_of_range Se os índices estiverem fora dos limites.
+     */
     T& at(size_t i, size_t j) {
         if (i >= rows || j >= cols) {
             throw std::out_of_range("Índices fora dos limites da matriz");
         }
         return data[i][j];
     }
-    
+
+    /**
+     * @brief Fornece acesso constante a um elemento da matriz.
+     * @param i Índice da linha.
+     * @param j Índice da coluna.
+     * @return Referência constante ao elemento na posição (i, j).
+     * @throws std::out_of_range Se os índices estiverem fora dos limites.
+     */
     const T& at(size_t i, size_t j) const {
         if (i >= rows || j >= cols) {
             throw std::out_of_range("Índices fora dos limites da matriz");
@@ -1079,11 +1430,24 @@ public:
         return data[i][j];
     }
     
-    // Obter dimensões
+    /**
+     * @brief Retorna o número de linhas da matriz.
+     * @return O número de linhas.
+     */
     size_t num_rows() const { return rows; }
+
+    /**
+     * @brief Retorna o número de colunas da matriz.
+     * @return O número de colunas.
+     */
     size_t num_cols() const { return cols; }
     
-    // Multiplicação de matrizes
+    /**
+     * @brief Multiplica esta matriz por outra.
+     * @param other A matriz a ser multiplicada.
+     * @return A matriz resultante.
+     * @throws std::invalid_argument Se as dimensões forem incompatíveis.
+     */
     Matrix<T> operator*(const Matrix<T>& other) const {
         if (cols != other.rows) {
             throw std::invalid_argument("Dimensões incompatíveis para multiplicação de matrizes");
@@ -1102,7 +1466,12 @@ public:
         return result;
     }
     
-    // Multiplicação por vetor (representado como matriz coluna)
+    /**
+     * @brief Multiplica a matriz por um vetor (representado como matriz coluna).
+     * @param vec O vetor de entrada.
+     * @return O vetor resultante da multiplicação.
+     * @throws std::invalid_argument Se as dimensões forem incompatíveis.
+     */
     std::vector<T> multiply_vector(const std::vector<T>& vec) const {
         if (cols != vec.size()) {
             throw std::invalid_argument("Dimensões incompatíveis para multiplicação matriz-vetor");
@@ -1119,7 +1488,10 @@ public:
         return result;
     }
     
-    // Impressão formatada da matriz
+    /**
+     * @brief Imprime a matriz formatada com um nome opcional.
+     * @param name Nome opcional a ser exibido antes da matriz.
+     */
     void print(const std::string& name = "") const {
         if (!name.empty()) {
             std::cout << name << " =\n";
@@ -1136,6 +1508,14 @@ public:
     }
 };
 
+/**
+ * @brief Função principal que demonstra operações de multiplicação de matrizes.
+ *
+ * Este programa ilustra a multiplicação de matrizes, a multiplicação de matriz por vetor
+ * e o tratamento de erros para dimensões incompatíveis usando a classe Matrix.
+ *
+ * @return 0 em caso de execução bem-sucedida.
+ */
 int main() {
     std::cout << std::fixed << std::setprecision(2);
     std::cout << "Demonstração de Multiplicação de Matrizes\n";
@@ -1145,12 +1525,12 @@ int main() {
     Matrix<double> A({
         {2.0, 3.0},
         {4.0, 1.0}
-    });
+    }); ///< Matriz A (2x2) para demonstração.
     
     Matrix<double> B({
         {1.0, 5.0},
         {2.0, 3.0}
-    });
+    }); ///< Matriz B (2x2) para demonstração.
     
     std::cout << "Exemplo 1: Multiplicação de duas matrizes\n";
     A.print("Matriz A");
@@ -1164,7 +1544,7 @@ int main() {
     }
     
     // Exemplo 2: Multiplicação matriz-vetor
-    std::vector<double> v = {3.0, 2.0};
+    std::vector<double> v = {3.0, 2.0}; ///< Vetor v (2x1) para demonstração.
     
     std::cout << "\nExemplo 2: Multiplicação matriz-vetor\n";
     A.print("Matriz A");
@@ -1186,7 +1566,7 @@ int main() {
     Matrix<double> D({
         {1.0, 2.0, 3.0},
         {4.0, 5.0, 6.0}
-    });
+    }); ///< Matriz D (2x3) para demonstração de erro.
     
     std::cout << "\nExemplo 3: Tentativa de multiplicação com dimensões incompatíveis\n";
     A.print("Matriz A (2x2)");
@@ -1201,28 +1581,38 @@ int main() {
     
     return 0;
 }
+
 ```
 
 Ou, como a preocupada leitora pode preferir, em C++ 20 usando a biblioteca Eigen:
 
 ```cpp
-#include <iostream>
-#include <iomanip>
-#include <Eigen/Dense>
-#include <string>
-#include <stdexcept>
+#include <iostream>    ///< Para entrada e saída padrão (std::cout, std::cerr).
+#include <iomanip>     ///< Para std::fixed e std::setprecision, usados na formatação de saída.
+#include <Eigen/Dense> ///< Para a biblioteca Eigen, usada em operações de álgebra linear.
+#include <string>      ///< Para std::string, usada em mensagens de erro.
+#include <stdexcept>   ///< Para exceções padrão como std::invalid_argument.
 
+/**
+ * @brief Função principal que demonstra operações de multiplicação de matrizes usando a biblioteca Eigen.
+ *
+ * Este programa ilustra três exemplos: a multiplicação de duas matrizes, a multiplicação de uma matriz por um vetor
+ * e uma tentativa de multiplicação com dimensões incompatíveis, demonstrando o tratamento de erros. As operações são
+ * realizadas utilizando a biblioteca Eigen, e os resultados são exibidos no console com formatação de duas casas decimais.
+ *
+ * @return 0 em caso de execução bem-sucedida.
+ */
 int main() {
-    std::cout << std::fixed << std::setprecision(2);
+    std::cout << std::fixed << std::setprecision(2); ///< Define precisão fixa de duas casas decimais para saída.
     std::cout << "Demonstração de Multiplicação de Matrizes\n";
     std::cout << "----------------------------------------\n\n";
     
     // Exemplo 1: Multiplicação de duas matrizes
-    Eigen::Matrix2d A;
+    Eigen::Matrix2d A; ///< Matriz A (2x2) para demonstração.
     A << 2.0, 3.0,
          4.0, 1.0;
     
-    Eigen::Matrix2d B;
+    Eigen::Matrix2d B; ///< Matriz B (2x2) para demonstração.
     B << 1.0, 5.0,
          2.0, 3.0;
     
@@ -1231,14 +1621,14 @@ int main() {
     std::cout << "Matriz B =\n" << B << "\n\n";
     
     try {
-        Eigen::Matrix2d C = A * B;
+        Eigen::Matrix2d C = A * B; ///< Calcula o produto A * B.
         std::cout << "A * B =\n" << C << "\n\n";
     } catch (const std::exception& e) {
         std::cerr << "Erro: " << e.what() << '\n';
     }
     
     // Exemplo 2: Multiplicação matriz-vetor
-    Eigen::Vector2d v;
+    Eigen::Vector2d v; ///< Vetor v (2x1) para demonstração.
     v << 3.0, 2.0;
     
     std::cout << "Exemplo 2: Multiplicação matriz-vetor\n";
@@ -1246,14 +1636,14 @@ int main() {
     std::cout << "Vetor v =\n" << v << "\n\n";
     
     try {
-        Eigen::Vector2d result = A * v;
+        Eigen::Vector2d result = A * v; ///< Calcula o produto A * v.
         std::cout << "A * v =\n" << result << "\n\n";
     } catch (const std::exception& e) {
         std::cerr << "Erro: " << e.what() << '\n';
     }
     
     // Exemplo 3: Demonstração de erro (dimensões incompatíveis)
-    Eigen::MatrixXd D(2, 3);
+    Eigen::MatrixXd D(2, 3); ///< Matriz D (2x3) para demonstração de erro.
     D << 1.0, 2.0, 3.0,
          4.0, 5.0, 6.0;
     
@@ -1268,7 +1658,7 @@ int main() {
         }
         
         // Eigen lançará uma asserção estática aqui se compilado com verificações
-        Eigen::MatrixXd E = D * A;
+        Eigen::MatrixXd E = D * A; ///< Tentativa de calcular D * A (deve falhar).
         std::cout << "D * A =\n" << E << "\n\n";
     } catch (const std::exception& e) {
         std::cout << "Erro (esperado): " << e.what() << '\n';

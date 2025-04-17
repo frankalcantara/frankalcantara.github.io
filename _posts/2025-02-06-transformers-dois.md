@@ -29,7 +29,7 @@ keywords: |-
     embeddings
 toc: true
 published: true
-lastmod: 2025-04-12T14:36:33.971Z
+lastmod: 2025-04-17T23:18:07.813Z
 ---
 
 Neste artigo aprenderemos as técnicas de vetorização mais básicas, como a frequência de termos e o modelo *Bag of Words* (BoW). Vamos discutir como essas técnicas são usadas para representar textos como vetores numéricos, permitindo que os computadores processem e analisem linguagem natural.
@@ -421,24 +421,35 @@ A sagaz leitora pode pensar que essas limitações tornam o **BoW** inútil. Con
 **Exemplo 1**: usando o C++
 
 ```cpp
-#include <iostream>
-#include <vector>
-#include <string>
-#include <unordered_map>
-#include <set>
-#include <algorithm>
-#include <Eigen/Dense>
-#include <iomanip>
+#include <iostream>         ///< Para entrada e saída padrão (std::cout, std::cerr).
+#include <vector>          ///< Para contêiner std::vector usado no armazenamento de documentos e vocabulário.
+#include <string>          ///< Para std::string, usado em palavras e mensagens.
+#include <unordered_map>   ///< Para std::unordered_map, usado no mapeamento de palavras para índices.
+#include <set>             ///< Para std::set, usado na construção do vocabulário único.
+#include <algorithm>       ///< Para std::sort, usado na ordenação do vocabulário.
+#include <Eigen/Dense>     ///< Para a biblioteca Eigen, usada em operações de álgebra linear com vetores.
+#include <iomanip>         ///< Para std::setw, std::fixed e std::setprecision, usados na formatação de saída.
 
-// Classe para implementar o modelo Bag of Words (BoW)
+/**
+ * @class BagOfWords
+ * @brief Uma classe para implementar o modelo Bag of Words (BoW) para representação de textos.
+ *
+ * Esta classe converte documentos tokenizados em vetores de frequência de termos (Bag of Words),
+ * constrói um vocabulário global, cria uma matriz documento-termo e calcula similaridades entre
+ * documentos usando a métrica de similaridade de cosseno. Utiliza a biblioteca Eigen para operações
+ * vetoriais.
+ */
 class BagOfWords {
 private:
-    std::vector<std::string> vocabulary;              // Vocabulário global ordenado
-    std::unordered_map<std::string, int> wordToIndex; // Mapeamento de palavras para índices
-    std::vector<Eigen::VectorXi> documentVectors;     // Vetores BoW dos documentos
+    std::vector<std::string> vocabulary;              ///< Vocabulário global ordenado alfabeticamente.
+    std::unordered_map<std::string, int> wordToIndex; ///< Mapeamento de palavras para índices no vocabulário.
+    std::vector<Eigen::VectorXi> documentVectors;     ///< Vetores BoW representando os documentos.
 
 public:
-    // Função para construir o vocabulário global a partir de documentos já tokenizados
+    /**
+     * @brief Constrói o vocabulário global a partir de documentos tokenizados.
+     * @param documents Vetor de vetores de strings, onde cada vetor interno representa um documento tokenizado.
+     */
     void buildVocabulary(const std::vector<std::vector<std::string>>& documents) {
         std::set<std::string> uniqueWords;
         
@@ -459,7 +470,10 @@ public:
         }
     }
     
-    // Função para criar os vetores BoW para cada documento
+    /**
+     * @brief Cria os vetores BoW para cada documento com base no vocabulário global.
+     * @param documents Vetor de vetores de strings, onde cada vetor interno representa um documento tokenizado.
+     */
     void createBowVectors(const std::vector<std::vector<std::string>>& documents) {
         documentVectors.clear();
         
@@ -479,13 +493,22 @@ public:
         }
     }
     
-    // Função para inicializar o modelo com um conjunto de documentos tokenizados
+    /**
+     * @brief Inicializa o modelo com um conjunto de documentos tokenizados.
+     *
+     * Constrói o vocabulário global e cria os vetores BoW para os documentos fornecidos.
+     * @param documents Vetor de vetores de strings, onde cada vetor interno representa um documento tokenizado.
+     */
     void fit(const std::vector<std::vector<std::string>>& documents) {
         buildVocabulary(documents);
         createBowVectors(documents);
     }
     
-    // Função para obter o vetor BoW de um novo documento tokenizado
+    /**
+     * @brief Obtém o vetor BoW de um novo documento tokenizado.
+     * @param document Vetor de strings representando um documento tokenizado.
+     * @return Vetor BoW (Eigen::VectorXi) representando as frequências das palavras no documento.
+     */
     Eigen::VectorXi transform(const std::vector<std::string>& document) {
         Eigen::VectorXi bowVector = Eigen::VectorXi::Zero(vocabulary.size());
         
@@ -499,7 +522,12 @@ public:
         return bowVector;
     }
     
-    // Função para calcular a similaridade de cosseno entre dois vetores
+    /**
+     * @brief Calcula a similaridade de cosseno entre dois vetores BoW.
+     * @param v1 Primeiro vetor BoW.
+     * @param v2 Segundo vetor BoW.
+     * @return Valor da similaridade de cosseno (double) entre os vetores, no intervalo [-1, 1].
+     */
     double cosineSimilarity(const Eigen::VectorXi& v1, const Eigen::VectorXi& v2) {
         // Converter para double para cálculos de ponto flutuante
         Eigen::VectorXd v1d = v1.cast<double>();
@@ -513,7 +541,9 @@ public:
         return dotProduct / (norm1 * norm2);
     }
     
-    // Função para imprimir a matriz de documentos x termos (DTM)
+    /**
+     * @brief Imprime a matriz documento-termo (DTM) com formatação.
+     */
     void printDocumentTermMatrix() {
         std::cout << "Matriz de Documentos x Termos (Document-Term Matrix):\n\n";
         
@@ -534,7 +564,9 @@ public:
         }
     }
     
-    // Função para imprimir informações sobre o modelo
+    /**
+     * @brief Imprime informações sobre o modelo BoW.
+     */
     void printInfo() {
         std::cout << "Modelo Bag of Words (BoW)\n";
         std::cout << "-----------------------\n";
@@ -552,7 +584,11 @@ public:
         std::cout << " }\n\n";
     }
     
-    // Função para comparar dois documentos
+    /**
+     * @brief Compara dois documentos com base na similaridade de cosseno.
+     * @param doc1Index Índice do primeiro documento.
+     * @param doc2Index Índice do segundo documento.
+     */
     void compareDocuments(int doc1Index, int doc2Index) {
         if (doc1Index >= documentVectors.size() || doc2Index >= documentVectors.size()) {
             std::cout << "Índice de documento inválido.\n";
@@ -567,20 +603,37 @@ public:
                   << similarity << "\n";
     }
     
-    // Getters para fins de análise
+    /**
+     * @brief Obtém o vocabulário global.
+     * @return Referência constante ao vetor de strings do vocabulário.
+     */
     const std::vector<std::string>& getVocabulary() const { return vocabulary; }
+
+    /**
+     * @brief Obtém os vetores BoW dos documentos.
+     * @return Referência constante ao vetor de vetores BoW.
+     */
     const std::vector<Eigen::VectorXi>& getDocumentVectors() const { return documentVectors; }
 };
 
+/**
+ * @brief Função principal que demonstra o uso do modelo Bag of Words.
+ *
+ * Este programa cria um modelo BoW a partir de documentos tokenizados, exibe informações sobre
+ * o vocabulário e a matriz documento-termo, calcula a similaridade entre documentos, e demonstra
+ * a transformação de novos documentos em vetores BoW, incluindo o efeito da ordem das palavras.
+ *
+ * @return 0 em caso de execução bem-sucedida.
+ */
 int main() {
-    // Documentos já tokenizados do exemplo no texto
+    // Documentos já tokenizados para demonstração
     std::vector<std::vector<std::string>> documents = {
         {"o", "gato", "preto", "subiu", "no", "telhado"},
         {"o", "cachorro", "correu", "no", "gramado"}
     };
     
     // Criar e treinar o modelo BoW
-    BagOfWords bow;
+    BagOfWords bow; ///< Instância do modelo Bag of Words.
     bow.fit(documents);
     
     // Imprimir informações sobre o modelo
@@ -1033,18 +1086,29 @@ Não deixe de notar que a implementação está simplificada e não considera ta
 O código a seguir utiliza a biblioteca [Eigen](https://eigen.tuxfamily.org/dox/), utilizada em aplicações científicas e de aprendizado de máquina. A biblioteca é leve e fácil de usar, permitindo operações eficientes com matrizes e vetores em alto desempenho e com precisão numérica.
 
 ```cpp
-#include <iostream>
-#include <vector>
-#include <string>
-#include <unordered_map>
-#include <cmath>
-#include <Eigen/Dense>
-#include <algorithm>
+#include <iostream>         ///< Para entrada e saída padrão (std::cout).
+#include <vector>          ///< Para contêiner std::vector usado no armazenamento de documentos.
+#include <string>          ///< Para std::string, usado em palavras e mensagens.
+#include <unordered_map>   ///< Para std::unordered_map, usado no cálculo de contagens de termos.
+#include <cmath>           ///< Para std::log, usado na frequência logarítmica.
+#include <Eigen/Dense>     ///< Para a biblioteca Eigen (não utilizada diretamente neste código).
+#include <algorithm>       ///< Para std::max, usado no cálculo da frequência aumentada.
 
-// Função para calcular diferentes versões do TF para um documento
+/**
+ * @class TermFrequency
+ * @brief Uma classe para calcular diferentes métricas de frequência de termos (TF) em documentos.
+ *
+ * Esta classe oferece métodos estáticos para calcular a frequência bruta, normalizada, logarítmica,
+ * binária e aumentada de um termo em um documento tokenizado.
+ */
 class TermFrequency {
 public:
-    // Calcula a frequência bruta (raw)
+    /**
+     * @brief Calcula a frequência bruta (raw) de um termo em um documento.
+     * @param document Vetor de strings representando o documento tokenizado.
+     * @param term O termo cuja frequência será calculada.
+     * @return O número de ocorrências do termo no documento (double).
+     */
     static double raw(const std::vector<std::string>& document, const std::string& term) {
         double count = 0;
         for (const auto& word : document) {
@@ -1055,19 +1119,34 @@ public:
         return count;
     }
     
-    // Calcula a frequência normalizada
+    /**
+     * @brief Calcula a frequência normalizada de um termo em um documento.
+     * @param document Vetor de strings representando o documento tokenizado.
+     * @param term O termo cuja frequência será calculada.
+     * @return A frequência bruta dividida pelo tamanho do documento (double).
+     */
     static double normalized(const std::vector<std::string>& document, const std::string& term) {
         double count = raw(document, term);
         return count / document.size();
     }
     
-    // Calcula a frequência logarítmica
+    /**
+     * @brief Calcula a frequência logarítmica de um termo em um documento.
+     * @param document Vetor de strings representando o documento tokenizado.
+     * @param term O termo cuja frequência será calculada.
+     * @return 1 + log(frequência bruta) se a frequência for maior que 0, caso contrário 0 (double).
+     */
     static double logarithmic(const std::vector<std::string>& document, const std::string& term) {
         double count = raw(document, term);
         return count > 0 ? 1.0 + std::log(count) : 0.0;
     }
     
-    // Calcula a frequência binária
+    /**
+     * @brief Calcula a frequência binária de um termo em um documento.
+     * @param document Vetor de strings representando o documento tokenizado.
+     * @param term O termo cuja frequência será calculada.
+     * @return 1.0 se o termo está presente no documento, 0.0 caso contrário (double).
+     */
     static double binary(const std::vector<std::string>& document, const std::string& term) {
         for (const auto& word : document) {
             if (word == term) {
@@ -1077,7 +1156,12 @@ public:
         return 0.0;
     }
     
-    // Calcula a frequência aumentada (augmented)
+    /**
+     * @brief Calcula a frequência aumentada (augmented) de um termo em um documento.
+     * @param document Vetor de strings representando o documento tokenizado.
+     * @param term O termo cuja frequência será calculada.
+     * @return 0.5 + 0.5 * (frequência bruta do termo / frequência máxima de qualquer termo) (double).
+     */
     static double augmented(const std::vector<std::string>& document, const std::string& term) {
         std::unordered_map<std::string, int> termCounts;
         
@@ -1097,13 +1181,20 @@ public:
     }
 };
 
-// Exemplo de uso
+/**
+ * @brief Função principal que demonstra o uso da classe TermFrequency.
+ *
+ * Este programa calcula e exibe diferentes métricas de frequência de termos (TF) para o termo "gato"
+ * em dois documentos tokenizados, utilizando os métodos da classe TermFrequency.
+ *
+ * @return 0 em caso de execução bem-sucedida.
+ */
 int main() {
-    // Documento do Exemplo 3 no texto
-    std::vector<std::string> doc1 = {"o", "pequeno", "gato", "preto", "viu", "outro", "gato", "preto"};
-    std::vector<std::string> doc2 = {"gato"};
+    // Documentos tokenizados para demonstração
+    std::vector<std::string> doc1 = {"o", "pequeno", "gato", "preto", "viu", "outro", "gato", "preto"}; ///< Primeiro documento.
+    std::vector<std::string> doc2 = {"gato"}; ///< Segundo documento.
     
-    std::string term = "gato";
+    std::string term = "gato"; ///< Termo a ser analisado.
     
     std::cout << "Para o termo '" << term << "':\n";
     
@@ -1123,6 +1214,7 @@ int main() {
     
     return 0;
 }
+
 ```
 
 #### Inverse Document Frequency (IDF)
@@ -1301,17 +1393,29 @@ Finalmente, considere que o **IDF máximo** pode ser útil em cenários onde a r
 Novamente, para que a esforçada leitora não se perca na matemática pura, um pouco de código em C++ pode ajudar.
 
 ```cpp
-#include <iostream>
-#include <vector>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <cmath>
-#include <Eigen/Dense>
+#include <iostream>         ///< Para entrada e saída padrão (std::cout).
+#include <vector>          ///< Para contêiner std::vector usado no armazenamento de corpus e termos.
+#include <string>          ///< Para std::string, usado em palavras e mensagens.
+#include <unordered_map>   ///< Para std::unordered_map (não utilizado diretamente neste código).
+#include <unordered_set>   ///< Para std::unordered_set, usado para identificar termos únicos em documentos.
+#include <cmath>           ///< Para std::log, usado nos cálculos de IDF.
+#include <Eigen/Dense>     ///< Para a biblioteca Eigen (não utilizada diretamente neste código).
 
+/**
+ * @class InverseDocumentFrequency
+ * @brief Uma classe para calcular diferentes métricas de frequência inversa de documentos (IDF) em um corpus.
+ *
+ * Esta classe oferece métodos estáticos para calcular o IDF básico, suavizado e probabilístico de um termo
+ * em um corpus de documentos tokenizados, além de um método para exibir todas as variantes para um conjunto de termos.
+ */
 class InverseDocumentFrequency {
 public:
-    // Calcula IDF básico
+    /**
+     * @brief Calcula o IDF básico de um termo em um corpus.
+     * @param corpus Vetor de vetores de strings, onde cada vetor interno representa um documento tokenizado.
+     * @param term O termo cuja IDF será calculada.
+     * @return O valor do IDF básico, dado por log(N / df), onde N é o número de documentos e df é a frequência documental (double).
+     */
     static double basic(const std::vector<std::vector<std::string>>& corpus, const std::string& term) {
         double N = corpus.size(); // número total de documentos
         double df = 0;           // document frequency
@@ -1331,7 +1435,12 @@ public:
         return std::log(N / df);
     }
     
-    // Calcula IDF com suavização (IDF+1)
+    /**
+     * @brief Calcula o IDF com suavização (IDF+1) de um termo em um corpus.
+     * @param corpus Vetor de vetores de strings, onde cada vetor interno representa um documento tokenizado.
+     * @param term O termo cuja IDF será calculada.
+     * @return O valor do IDF suavizado, dado por log(N / (1 + df)), onde N é o número de documentos e df é a frequência documental (double).
+     */
     static double smooth(const std::vector<std::vector<std::string>>& corpus, const std::string& term) {
         double N = corpus.size();
         double df = 0;
@@ -1346,7 +1455,12 @@ public:
         return std::log(N / (1 + df));
     }
     
-    // Calcula IDF probabilístico
+    /**
+     * @brief Calcula o IDF probabilístico de um termo em um corpus.
+     * @param corpus Vetor de vetores de strings, onde cada vetor interno representa um documento tokenizado.
+     * @param term O termo cuja IDF será calculada.
+     * @return O valor do IDF probabilístico, dado por log((N - df) / df), onde N é o número de documentos e df é a frequência documental (double).
+     */
     static double probabilistic(const std::vector<std::vector<std::string>>& corpus, const std::string& term) {
         double N = corpus.size();
         double df = 0;
@@ -1364,7 +1478,11 @@ public:
         return std::log((N - df) / df);
     }
     
-    // Calcula todas as variantes do IDF para um conjunto de termos
+    /**
+     * @brief Calcula e exibe todas as variantes do IDF para um conjunto de termos.
+     * @param corpus Vetor de vetores de strings, onde cada vetor interno representa um documento tokenizado.
+     * @param terms Vetor de strings contendo os termos a serem analisados.
+     */
     static void calculateAllVariants(const std::vector<std::vector<std::string>>& corpus, 
                                     const std::vector<std::string>& terms) {
         std::cout << "Termo\t\tIDF Básico\tIDF Suavizado\tIDF Probabilístico\n";
@@ -1391,15 +1509,23 @@ public:
     }
 };
 
+/**
+ * @brief Função principal que demonstra o uso da classe InverseDocumentFrequency.
+ *
+ * Este programa calcula e exibe as métricas de IDF básico, suavizado e probabilístico para um conjunto
+ * de termos em um corpus de documentos tokenizados, utilizando os métodos da classe InverseDocumentFrequency.
+ *
+ * @return 0 em caso de execução bem-sucedida.
+ */
 int main() {
-    // Corpus do Exemplo 1 na seção IDF
+    // Corpus de documentos tokenizados para demonstração
     std::vector<std::vector<std::string>> corpus = {
         {"o", "gato", "preto", "caça", "o", "rato", "preto"},
         {"o", "rato", "branco", "corre", "do", "gato"},
         {"o", "cachorro", "late", "para", "o", "gato", "preto"}
     };
     
-    std::vector<std::string> terms = {"gato", "preto", "cachorro", "rato"};
+    std::vector<std::string> terms = {"gato", "preto", "cachorro", "rato"}; ///< Termos a serem analisados.
     
     InverseDocumentFrequency::calculateAllVariants(corpus, terms);
     
@@ -1506,13 +1632,18 @@ A **Similaridade de Cosseno** é particularmente útil em recuperação de infor
 **Exemplo 3**: similaridade de cosseno em C++.
 
 ```cpp
-#include <iostream>
-#include <vector>
-#include <string>
-#include <Eigen/Dense>
-#include <iomanip>
+#include <iostream>     ///< Para entrada e saída padrão (std::cout).
+#include <vector>      ///< Para contêiner std::vector usado no armazenamento de vetores de documentos.
+#include <string>      ///< Para std::string, usado em mensagens e formatação.
+#include <Eigen/Dense>  ///< Para a biblioteca Eigen, usada em operações de álgebra linear com vetores e matrizes.
+#include <iomanip>     ///< Para std::setw, std::fixed e std::setprecision, usados na formatação de saída.
 
-// Função para calcular a similaridade de cosseno entre dois vetores
+/**
+ * @brief Calcula a similaridade de cosseno entre dois vetores.
+ * @param v1 Primeiro vetor (Eigen::VectorXd).
+ * @param v2 Segundo vetor (Eigen::VectorXd).
+ * @return Valor da similaridade de cosseno (double) entre os vetores, no intervalo [-1, 1]. Retorna 0.0 se algum vetor tiver norma zero.
+ */
 double cosineSimilarity(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) {
     double dotProduct = v1.dot(v2);
     double norm1 = v1.norm();
@@ -1522,7 +1653,10 @@ double cosineSimilarity(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) {
     return dotProduct / (norm1 * norm2);
 }
 
-// Função para mostrar a matriz de similaridade entre documentos
+/**
+ * @brief Exibe a matriz de similaridade de cosseno entre um conjunto de documentos.
+ * @param documents Vetor de vetores Eigen::VectorXd, onde cada vetor representa um documento (por exemplo, vetores TF-IDF).
+ */
 void printSimilarityMatrix(const std::vector<Eigen::VectorXd>& documents) {
     int n = documents.size();
     Eigen::MatrixXd similarityMatrix = Eigen::MatrixXd::Zero(n, n);
@@ -1552,28 +1686,36 @@ void printSimilarityMatrix(const std::vector<Eigen::VectorXd>& documents) {
     }
 }
 
+/**
+ * @brief Função principal que demonstra o cálculo de similaridade de cosseno entre documentos e uma consulta.
+ *
+ * Este programa utiliza vetores TF-IDF para três documentos e uma consulta, calcula a matriz de similaridade
+ * entre os documentos, a similaridade entre a consulta e cada documento, e realiza verificações manuais
+ * das similaridades usando a fórmula da similaridade de cosseno.
+ *
+ * @return 0 em caso de execução bem-sucedida.
+ */
 int main() {
-    // Exemplo 1 da seção "Similaridade de Cosseno"
-    // Vetores TF-IDF para os documentos:
-    // D1: "O gato caça rato"
-    // D2: "O gato dorme muito"
-    // D3: "O rato come queijo"
-    
-    // Ordem dos termos: "gato", "rato", "caça", "dorme", "come", "queijo"
-    Eigen::VectorXd D1(6);
+    // Exemplo com vetores TF-IDF para os documentos e uma consulta
+    std::vector<Eigen::VectorXd> documents; ///< Vetores TF-IDF dos documentos.
+
+    // Documento 1: "O gato caça rato"
+    Eigen::VectorXd D1(6); ///< Vetor TF-IDF para o Documento 1.
     D1 << 0.4, 0.4, 0.5, 0.0, 0.0, 0.0;
     
-    Eigen::VectorXd D2(6);
+    // Documento 2: "O gato dorme muito"
+    Eigen::VectorXd D2(6); ///< Vetor TF-IDF para o Documento 2.
     D2 << 0.4, 0.0, 0.0, 0.5, 0.0, 0.0;
     
-    Eigen::VectorXd D3(6);
+    // Documento 3: "O rato come queijo"
+    Eigen::VectorXd D3(6); ///< Vetor TF-IDF para o Documento 3.
     D3 << 0.0, 0.4, 0.0, 0.0, 0.5, 0.4;
     
-    // Consulta "gato caçador"
-    Eigen::VectorXd Q(6);
+    // Consulta: "gato caçador"
+    Eigen::VectorXd Q(6); ///< Vetor TF-IDF para a consulta.
     Q << 0.6, 0.0, 0.4, 0.0, 0.0, 0.0;
     
-    std::vector<Eigen::VectorXd> documents = {D1, D2, D3};
+    documents = {D1, D2, D3};
     
     // Calcular e imprimir a matriz de similaridade entre documentos
     printSimilarityMatrix(documents);
@@ -1599,6 +1741,7 @@ int main() {
     
     return 0;
 }
+
 ```
 
 Utilizamos os vetores **TF-IDF** apresentados no **Exemplo 1** da seção **Similaridade de Cosseno** do texto.
@@ -1830,31 +1973,45 @@ Processamento de consultas: O método `processQuery()` converte uma consulta de 
 Na função `main()`, demonstramos o uso da classe com o exemplo do corpus de três documentos mencionado no texto. Imprimimos a matriz **TF-IDF** resultante e testamos uma consulta "gato preto", mostrando os documentos ordenados por relevância.
 
 ```cpp
-#include <iostream>
-#include <vector>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <cmath>
-#include <Eigen/Dense>
-#include <iomanip>
+#include <iostream>         ///< Para entrada e saída padrão (std::cout).
+#include <vector>          ///< Para contêiner std::vector usado no armazenamento de corpus, vocabulário e documentos.
+#include <string>          ///< Para std::string, usado em termos e mensagens.
+#include <unordered_map>   ///< Para std::unordered_map, usado no mapeamento de termos para índices.
+#include <unordered_set>   ///< Para std::unordered_set, usado na construção do vocabulário único.
+#include <cmath>           ///< Para std::log, usado no cálculo do IDF.
+#include <Eigen/Dense>     ///< Para a biblioteca Eigen, usada em operações de álgebra linear com vetores e matrizes.
+#include <iomanip>         ///< Para std::setw, std::fixed e std::setprecision, usados na formatação de saída.
 
+/**
+ * @class TFIDF
+ * @brief Uma classe para calcular vetores TF-IDF de documentos e processar consultas com base na similaridade de cosseno.
+ *
+ * Esta classe constrói um vocabulário global a partir de um corpus, calcula a matriz TF-IDF para os documentos,
+ * e permite processar consultas para encontrar documentos relevantes usando a métrica de similaridade de cosseno.
+ * Utiliza a biblioteca Eigen para operações matriciais e vetoriais.
+ */
 class TFIDF {
 private:
-    std::vector<std::vector<std::string>> corpus;
-    std::vector<std::string> vocabulary;
-    Eigen::MatrixXd tfidfMatrix;
-    
-    // Mapeia termos para índices no vocabulário
-    std::unordered_map<std::string, int> termToIndex;
-    
+    std::vector<std::vector<std::string>> corpus;      ///< Corpus de documentos tokenizados.
+    std::vector<std::string> vocabulary;               ///< Vocabulário global ordenado alfabeticamente.
+    Eigen::MatrixXd tfidfMatrix;                       ///< Matriz TF-IDF (documentos x termos).
+    std::unordered_map<std::string, int> termToIndex;  ///< Mapeamento de termos para índices no vocabulário.
+
 public:
+    /**
+     * @brief Construtor que inicializa o modelo TF-IDF com um corpus de documentos.
+     * @param documents Vetor de vetores de strings, onde cada vetor interno representa um documento tokenizado.
+     */
     TFIDF(const std::vector<std::vector<std::string>>& documents) : corpus(documents) {
         buildVocabulary();
         computeTFIDFMatrix();
     }
     
-    // Constrói o vocabulário a partir do corpus
+    /**
+     * @brief Constrói o vocabulário global a partir do corpus.
+     *
+     * Identifica todos os termos únicos no corpus, ordena-os alfabeticamente e cria um mapeamento de termos para índices.
+     */
     void buildVocabulary() {
         std::unordered_set<std::string> uniqueTerms;
         
@@ -1873,7 +2030,12 @@ public:
         }
     }
     
-    // Calcula o Term Frequency (TF) normalizado para um termo em um documento
+    /**
+     * @brief Calcula a frequência de termos (TF) normalizada para um termo em um documento.
+     * @param document Vetor de strings representando o documento tokenizado.
+     * @param term O termo cuja TF será calculada.
+     * @return A frequência normalizada (frequência bruta dividida pelo tamanho do documento) (double).
+     */
     double calculateTF(const std::vector<std::string>& document, const std::string& term) {
         double count = 0;
         for (const auto& word : document) {
@@ -1885,7 +2047,11 @@ public:
         return count / document.size(); // Frequência normalizada
     }
     
-    // Calcula o Inverse Document Frequency (IDF) para um termo
+    /**
+     * @brief Calcula a frequência inversa de documentos (IDF) para um termo.
+     * @param term O termo cuja IDF será calculada.
+     * @return O valor do IDF suavizado, dado por log(N / (1 + df)), onde N é o número de documentos e df é a frequência documental (double).
+     */
     double calculateIDF(const std::string& term) {
         double N = corpus.size();
         double documentFrequency = 0;
@@ -1903,7 +2069,11 @@ public:
         return std::log(N / (1 + documentFrequency));
     }
     
-    // Computa a matriz TF-IDF completa
+    /**
+     * @brief Computa a matriz TF-IDF para todos os documentos e termos do vocabulário.
+     *
+     * Inicializa a matriz TF-IDF com zeros e calcula os valores TF-IDF para cada par documento-termo.
+     */
     void computeTFIDFMatrix() {
         int numDocs = corpus.size();
         int numTerms = vocabulary.size();
@@ -1925,7 +2095,12 @@ public:
         }
     }
     
-    // Calcula a similaridade de cosseno entre dois vetores
+    /**
+     * @brief Calcula a similaridade de cosseno entre dois vetores.
+     * @param v1 Primeiro vetor (Eigen::VectorXd).
+     * @param v2 Segundo vetor (Eigen::VectorXd).
+     * @return Valor da similaridade de cosseno (double) entre os vetores, no intervalo [-1, 1]. Retorna 0.0 se algum vetor tiver norma zero.
+     */
     double cosineSimilarity(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) {
         double dotProduct = v1.dot(v2);
         double norm1 = v1.norm();
@@ -1935,7 +2110,11 @@ public:
         return dotProduct / (norm1 * norm2);
     }
     
-    // Processa uma consulta e retorna os documentos mais similares
+    /**
+     * @brief Processa uma consulta e retorna os documentos ordenados por similaridade.
+     * @param query Vetor de strings representando a consulta tokenizada.
+     * @return Vetor de pares (índice do documento, similaridade), ordenado por similaridade em ordem decrescente.
+     */
     std::vector<std::pair<int, double>> processQuery(const std::vector<std::string>& query) {
         // Criar vetor TF-IDF para a consulta
         Eigen::VectorXd queryVector = Eigen::VectorXd::Zero(vocabulary.size());
@@ -1964,7 +2143,9 @@ public:
         return similarities;
     }
     
-    // Exibe a matriz TF-IDF
+    /**
+     * @brief Exibe a matriz TF-IDF com formatação.
+     */
     void printTFIDFMatrix() {
         std::cout << "Matriz TF-IDF (" << corpus.size() << " documentos x " 
                  << vocabulary.size() << " termos):\n\n";
@@ -1986,21 +2167,33 @@ public:
         }
     }
     
-    // Getter para o vocabulário
+    /**
+     * @brief Obtém o vocabulário global.
+     * @return Referência constante ao vetor de strings do vocabulário.
+     */
     const std::vector<std::string>& getVocabulary() const {
         return vocabulary;
     }
 };
 
+/**
+ * @brief Função principal que demonstra o uso da classe TFIDF.
+ *
+ * Este programa cria um modelo TF-IDF a partir de um corpus de três documentos, exibe o vocabulário
+ * e a matriz TF-IDF, e processa uma consulta para encontrar os documentos mais relevantes com base
+ * na similaridade de cosseno.
+ *
+ * @return 0 em caso de execução bem-sucedida.
+ */
 int main() {
-    // Exemplo do corpus com três documentos usado no texto
+    // Corpus de documentos tokenizados para demonstração
     std::vector<std::vector<std::string>> corpus = {
         {"o", "gato", "preto", "caça", "o", "rato", "preto"},
         {"o", "rato", "branco", "corre", "do", "gato"},
         {"o", "cachorro", "late", "para", "o", "gato", "preto"}
     };
     
-    TFIDF tfidf(corpus);
+    TFIDF tfidf(corpus); ///< Instância do modelo TF-IDF.
     
     // Imprimir vocabulário
     std::cout << "Vocabulário: ";
@@ -2013,7 +2206,7 @@ int main() {
     tfidf.printTFIDFMatrix();
     
     // Testar uma consulta
-    std::vector<std::string> query = {"gato", "preto"};
+    std::vector<std::string> query = {"gato", "preto"}; ///< Consulta tokenizada.
     std::cout << "\nConsulta: ";
     for (const auto& term : query) {
         std::cout << term << " ";
@@ -2037,6 +2230,8 @@ int main() {
     
     return 0;
 }
+
+
 ```
 
 #### **TF-IDF** em C++ Na Prática
@@ -2046,21 +2241,31 @@ O código a seguir implementa um sistema de recuperação de informação utiliz
 A esforçada leitora deve notar que o código é um exemplo simplificado e não inclui todas as funcionalidades de um sistema de recuperação de informação completo. Usando técnicas que ainda não discutimos. No entanto, ele fornece uma base sólida para entender como o **TF-IDF** pode ser implementado em C++.
 
 ```cpp
-#include <iostream>
-#include <vector>
-#include <string>
-#include <unordered_map>
-#include <set>
-#include <algorithm>
-#include <sstream>
-#include <cctype>
-#include <iomanip>
-#include <Eigen/Dense>
+#include <iostream>         ///< Para entrada e saída padrão (std::cout).
+#include <vector>          ///< Para contêiner std::vector usado no armazenamento de documentos, vocabulário e tokens.
+#include <string>          ///< Para std::string, usado em textos, termos e mensagens.
+#include <unordered_map>   ///< Para std::unordered_map, usado no mapeamento de termos para índices.
+#include <set>             ///< Para std::set, usado na construção do vocabulário único.
+#include <algorithm>       ///< Para std::sort e std::find, usados na ordenação e busca.
+#include <sstream>         ///< Para std::istringstream, usado na tokenização de texto.
+#include <cctype>          ///< Para std::isalpha e std::tolower, usados na normalização de texto.
+#include <iomanip>         ///< Para std::setw, std::fixed e std::setprecision, usados na formatação de saída.
+#include <Eigen/Dense>     ///< Para a biblioteca Eigen, usada em operações de álgebra linear com vetores e matrizes.
 
-// Classe para pré-processamento de texto
+/**
+ * @class TextPreprocessor
+ * @brief Uma classe para pré-processamento de texto, incluindo normalização, tokenização e remoção de stopwords.
+ *
+ * Esta classe oferece métodos estáticos para preparar textos para análise, convertendo para minúsculas, removendo
+ * pontuação, dividindo em tokens e eliminando palavras irrelevantes (stopwords).
+ */
 class TextPreprocessor {
 public:
-    // Converte texto para minúsculas e remove pontuação
+    /**
+     * @brief Converte texto para minúsculas e remove pontuação.
+     * @param text O texto de entrada a ser normalizado.
+     * @return O texto normalizado, contendo apenas letras minúsculas e espaços.
+     */
     static std::string normalize(const std::string& text) {
         std::string result;
         for (char c : text) {
@@ -2073,7 +2278,11 @@ public:
         return result;
     }
     
-    // Divide texto em tokens (palavras)
+    /**
+     * @brief Divide texto em tokens (palavras).
+     * @param text O texto de entrada a ser tokenizado.
+     * @return Vetor de strings contendo os tokens extraídos.
+     */
     static std::vector<std::string> tokenize(const std::string& text) {
         std::vector<std::string> tokens;
         std::istringstream iss(text);
@@ -2086,7 +2295,10 @@ public:
         return tokens;
     }
     
-    // Lista de stopwords em português, muito simplificada
+    /**
+     * @brief Obtém a lista de stopwords em português.
+     * @return Referência constante a um conjunto de stopwords predefinidas.
+     */
     static const std::set<std::string>& getStopwords() {
         static const std::set<std::string> stopwords = {
             "o", "a", "os", "as", "um", "uma", "uns", "umas",
@@ -2096,7 +2308,11 @@ public:
         return stopwords;
     }
     
-    // Remove stopwords de um documento tokenizado
+    /**
+     * @brief Remove stopwords de um documento tokenizado.
+     * @param tokens Vetor de strings contendo os tokens do documento.
+     * @return Vetor de strings com os tokens filtrados, sem stopwords.
+     */
     static std::vector<std::string> removeStopwords(const std::vector<std::string>& tokens) {
         std::vector<std::string> filtered;
         const auto& stopwords = getStopwords();
@@ -2110,7 +2326,11 @@ public:
         return filtered;
     }
     
-    // Processa um texto completo: normaliza, tokeniza e remove stopwords
+    /**
+     * @brief Processa um texto completo: normaliza, tokeniza e remove stopwords.
+     * @param text O texto de entrada a ser processado.
+     * @return Vetor de strings contendo os tokens processados, sem stopwords.
+     */
     static std::vector<std::string> process(const std::string& text) {
         std::string normalized = normalize(text);
         std::vector<std::string> tokens = tokenize(normalized);
@@ -2118,23 +2338,37 @@ public:
     }
 };
 
-// Sistema de Recuperação de Informação baseado em TF-IDF
+/**
+ * @class InformationRetrievalSystem
+ * @brief Um sistema de recuperação de informação baseado em TF-IDF.
+ *
+ * Esta classe implementa um sistema de busca que pré-processa documentos, constrói uma matriz TF-IDF,
+ * e permite realizar consultas para recuperar documentos relevantes com base na similaridade de cosseno.
+ * Utiliza a biblioteca Eigen para operações matriciais e vetoriais.
+ */
 class InformationRetrievalSystem {
 private:
-    std::vector<std::string> rawDocuments;               // Documentos originais
-    std::vector<std::vector<std::string>> processedDocs; // Documentos processados
-    std::vector<std::string> vocabulary;                 // Vocabulário global
-    std::unordered_map<std::string, int> termToIndex;    // Mapa de termos para índices
-    Eigen::MatrixXd tfidfMatrix;                         // Matriz TF-IDF
-    
+    std::vector<std::string> rawDocuments;               ///< Documentos originais (não processados).
+    std::vector<std::vector<std::string>> processedDocs; ///< Documentos processados (tokenizados e sem stopwords).
+    std::vector<std::string> vocabulary;                 ///< Vocabulário global ordenado alfabeticamente.
+    std::unordered_map<std::string, int> termToIndex;    ///< Mapeamento de termos para índices no vocabulário.
+    Eigen::MatrixXd tfidfMatrix;                         ///< Matriz TF-IDF (documentos x termos).
+
 public:
-    // Adiciona um novo documento ao sistema
+    /**
+     * @brief Adiciona um novo documento ao sistema.
+     * @param document O documento de entrada (texto bruto).
+     */
     void addDocument(const std::string& document) {
         rawDocuments.push_back(document);
         processedDocs.push_back(TextPreprocessor::process(document));
     }
     
-    // Constrói o vocabulário a partir dos documentos processados
+    /**
+     * @brief Constrói o vocabulário global a partir dos documentos processados.
+     *
+     * Identifica todos os termos únicos nos documentos, ordena-os alfabeticamente e cria um mapeamento de termos para índices.
+     */
     void buildVocabulary() {
         std::set<std::string> uniqueTerms;
         
@@ -2153,7 +2387,12 @@ public:
         }
     }
     
-    // Calcula a frequência do termo (TF) com suavização logarítmica
+    /**
+     * @brief Calcula a frequência de termos (TF) com suavização logarítmica.
+     * @param document Vetor de strings representando o documento tokenizado.
+     * @param term O termo cuja TF será calculada.
+     * @return O valor do TF, dado por 1 + log(frequência bruta) se a frequência for maior que 0, caso contrário 0 (double).
+     */
     double calculateTF(const std::vector<std::string>& document, const std::string& term) {
         int count = 0;
         for (const auto& word : document) {
@@ -2165,7 +2404,11 @@ public:
         return count > 0 ? 1.0 + std::log(count) : 0.0;
     }
     
-    // Calcula a frequência inversa do documento (IDF) com suavização
+    /**
+     * @brief Calcula a frequência inversa de documentos (IDF) com suavização.
+     * @param term O termo cuja IDF será calculada.
+     * @return O valor do IDF, dado por log(N / (1 + df)), onde N é o número de documentos e df é a frequência documental (double).
+     */
     double calculateIDF(const std::string& term) {
         int N = processedDocs.size();
         int df = 0;
@@ -2179,7 +2422,11 @@ public:
         return std::log(N / (1.0 + df));
     }
     
-    // Calcula a matriz TF-IDF para todos os documentos
+    /**
+     * @brief Calcula a matriz TF-IDF para todos os documentos e termos do vocabulário.
+     *
+     * Inicializa a matriz TF-IDF com zeros e calcula os valores TF-IDF para cada par documento-termo.
+     */
     void computeTFIDFMatrix() {
         int numDocs = processedDocs.size();
         int numTerms = vocabulary.size();
@@ -2198,7 +2445,11 @@ public:
         }
     }
     
-    // Calcula o vetor TF-IDF para uma consulta
+    /**
+     * @brief Calcula o vetor TF-IDF para uma consulta.
+     * @param query O texto da consulta a ser processado.
+     * @return Vetor TF-IDF (Eigen::VectorXd) representando a consulta.
+     */
     Eigen::VectorXd calculateQueryVector(const std::string& query) {
         std::vector<std::string> processedQuery = TextPreprocessor::process(query);
         Eigen::VectorXd queryVector = Eigen::VectorXd::Zero(vocabulary.size());
@@ -2215,7 +2466,12 @@ public:
         return queryVector;
     }
     
-    // Calcula a similaridade de cosseno entre dois vetores
+    /**
+     * @brief Calcula a similaridade de cosseno entre dois vetores.
+     * @param v1 Primeiro vetor (Eigen::VectorXd).
+     * @param v2 Segundo vetor (Eigen::VectorXd).
+     * @return Valor da similaridade de cosseno (double) entre os vetores, no intervalo [-1, 1]. Retorna 0.0 se algum vetor tiver norma próxima de zero.
+     */
     double cosineSimilarity(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) {
         double dotProduct = v1.dot(v2);
         double norm1 = v1.norm();
@@ -2225,7 +2481,12 @@ public:
         return dotProduct / (norm1 * norm2);
     }
     
-    // Busca por documentos relevantes para uma consulta
+    /**
+     * @brief Busca por documentos relevantes para uma consulta.
+     * @param query O texto da consulta.
+     * @param topK Número máximo de resultados a retornar (padrão é 3).
+     * @return Vetor de pares (índice do documento, similaridade), ordenado por similaridade em ordem decrescente.
+     */
     std::vector<std::pair<int, double>> search(const std::string& query, int topK = 3) {
         // Verificar se há documentos no sistema
         if (processedDocs.empty()) {
@@ -2255,7 +2516,10 @@ public:
         return results;
     }
     
-    // Inicializa o sistema com um conjunto de documentos
+    /**
+     * @brief Inicializa o sistema com um conjunto de documentos.
+     * @param documents Vetor de strings contendo os documentos brutos.
+     */
     void initialize(const std::vector<std::string>& documents) {
         // Limpar estado atual
         rawDocuments.clear();
@@ -2273,7 +2537,9 @@ public:
         computeTFIDFMatrix();
     }
     
-    // Mostrar informações sobre o sistema
+    /**
+     * @brief Exibe informações sobre o sistema.
+     */
     void printInfo() {
         std::cout << "Sistema de Recuperação de Informação\n";
         std::cout << "------------------------------------\n";
@@ -2289,7 +2555,9 @@ public:
         std::cout << "\n\n";
     }
     
-    // Mostrar documentos originais
+    /**
+     * @brief Exibe os documentos originais armazenados no sistema.
+     */
     void printDocuments() {
         std::cout << "Documentos no sistema:\n";
         std::cout << "---------------------\n";
@@ -2299,7 +2567,11 @@ public:
         std::cout << "\n";
     }
     
-    // Mostrar resultados da busca de forma amigável
+    /**
+     * @brief Exibe os resultados de uma busca de forma amigável.
+     * @param query O texto da consulta.
+     * @param results Vetor de pares (índice do documento, similaridade) com os resultados da busca.
+     */
     void displaySearchResults(const std::string& query, 
                              const std::vector<std::pair<int, double>>& results) {
         std::cout << "Resultados da busca para: \"" << query << "\"\n";
@@ -2321,7 +2593,12 @@ public:
     }
 };
 
-// Função para demonstrar o sistema com o exemplo do texto
+/**
+ * @brief Demonstra o sistema de recuperação de informação com um corpus de exemplo.
+ *
+ * Inicializa o sistema com um corpus de três documentos e realiza buscas com diferentes consultas,
+ * exibindo informações sobre o sistema, os documentos e os resultados das buscas.
+ */
 void demonstrateWithExampleCorpus() {
     std::vector<std::string> corpus = {
         "O gato preto caça o rato preto",
@@ -2329,7 +2606,7 @@ void demonstrateWithExampleCorpus() {
         "O cachorro late para o gato preto"
     };
     
-    InformationRetrievalSystem irSystem;
+    InformationRetrievalSystem irSystem; ///< Instância do sistema de recuperação de informação.
     irSystem.initialize(corpus);
     
     irSystem.printInfo();
@@ -2349,12 +2626,22 @@ void demonstrateWithExampleCorpus() {
     }
 }
 
+/**
+ * @brief Função principal que demonstra o sistema de recuperação de informação baseado em TF-IDF.
+ *
+ * Executa a demonstração do sistema com um corpus de exemplo, mostrando o funcionamento do pré-processamento
+ * de texto e da recuperação de documentos relevantes.
+ *
+ * @return 0 em caso de execução bem-sucedida.
+ */
 int main() {
     std::cout << "Demonstração do Sistema de Recuperação de Informação baseado em TF-IDF\n\n";
     demonstrateWithExampleCorpus();
     
     return 0;
 }
+
+
 ```
 
 Este exemplo apresenta uma implementação completa e prática de um sistema de recuperação de informação baseado no algoritmo **TF-IDF**, utilizando C++20 e a biblioteca Eigen. O sistema implementa todas as etapas necessárias para a construção de um mecanismo de busca textual:
@@ -2440,27 +2727,39 @@ Os dois exemplos anteriores mostram como os produtos escalares podem ser usados 
 O código a seguir implementa o **One-Hot Encoding** em C++20. Ele utiliza a biblioteca Eigen para operações matriciais e demonstra como criar representações one-hot para um conjunto de palavras.
 
 ```cpp
-#include <iostream>
-#include <vector>
-#include <string>
-#include <unordered_map>
-#include <set>
-#include <algorithm> // Para std::sort
-#include <Eigen/Dense> // Para Eigen::VectorXd
-#include <iomanip>     // Para std::fixed, std::setprecision
+#include <iostream>         ///< Para entrada e saída padrão (std::cout, std::cerr).
+#include <vector>          ///< Para contêiner std::vector usado no armazenamento de corpus e vocabulário.
+#include <string>          ///< Para std::string, usado em termos e mensagens.
+#include <unordered_map>   ///< Para std::unordered_map, usado no mapeamento de termos para índices.
+#include <set>             ///< Para std::set, usado na construção do vocabulário único.
+#include <algorithm>       ///< Para std::sort, usado na ordenação do vocabulário.
+#include <Eigen/Dense>     ///< Para a biblioteca Eigen, usada em operações com vetores (Eigen::VectorXd).
+#include <iomanip>         ///< Para std::fixed, std::setprecision e std::setw, usados na formatação de saída.
 
-// Classe para realizar One-Hot Encoding de palavras
+/**
+ * @class OneHotEncoder
+ * @brief Uma classe para realizar codificação one-hot de palavras em um corpus.
+ *
+ * Esta classe constrói um vocabulário global a partir de um corpus de documentos tokenizados e transforma
+ * termos em vetores one-hot, representando a presença de um termo com 1.0 na posição correspondente e 0.0
+ * nas demais. Utiliza a biblioteca Eigen para operações vetoriais.
+ */
 class OneHotEncoder {
 private:
-    std::vector<std::string> vocabulary;            // Vocabulário ordenado
-    std::unordered_map<std::string, int> termToIndex; // Mapa termo -> índice
-    size_t vocabularySize;                          // Tamanho do vocabulário
+    std::vector<std::string> vocabulary;            ///< Vocabulário global ordenado alfabeticamente.
+    std::unordered_map<std::string, int> termToIndex; ///< Mapeamento de termos para índices no vocabulário.
+    size_t vocabularySize;                          ///< Tamanho do vocabulário.
 
 public:
-    // Construtor padrão
+    /**
+     * @brief Construtor padrão que inicializa um codificador vazio.
+     */
     OneHotEncoder() : vocabularySize(0) {}
 
-    // Constrói o vocabulário a partir de um corpus (lista de documentos tokenizados)
+    /**
+     * @brief Constrói o vocabulário a partir de um corpus de documentos tokenizados.
+     * @param corpus Vetor de vetores de strings, onde cada vetor interno representa um documento tokenizado.
+     */
     void fit(const std::vector<std::vector<std::string>>& corpus) {
         std::set<std::string> uniqueTerms;
         for (const auto& doc : corpus) {
@@ -2480,8 +2779,11 @@ public:
         std::cout << "Vocabulário construído com " << vocabularySize << " termos únicos.\n";
     }
 
-    // Transforma um termo em seu vetor One-Hot correspondente
-    // Retorna um vetor de zeros se o termo for desconhecido (OOV - Out Of Vocabulary)
+    /**
+     * @brief Transforma um termo em seu vetor one-hot correspondente.
+     * @param term O termo a ser codificado.
+     * @return Vetor one-hot (Eigen::VectorXd) com 1.0 na posição do termo e 0.0 nas demais. Retorna vetor de zeros para termos fora do vocabulário (OOV).
+     */
     Eigen::VectorXd transform(const std::string& term) const {
         // Cria um vetor de zeros do tamanho do vocabulário
         Eigen::VectorXd oneHotVector = Eigen::VectorXd::Zero(vocabularySize);
@@ -2491,24 +2793,29 @@ public:
         if (it != termToIndex.end()) {
             // Se encontrado, define a posição correspondente como 1.0
             oneHotVector(it->second) = 1.0;
-        } else {
-            // Opcional: Imprimir aviso para termos OOV
-            // std::cerr << "Aviso: Termo '" << term << "' não encontrado no vocabulário (OOV).\n";
         }
         return oneHotVector;
     }
 
-    // Retorna o vocabulário construído
+    /**
+     * @brief Obtém o vocabulário global.
+     * @return Referência constante ao vetor de strings do vocabulário.
+     */
     const std::vector<std::string>& getVocabulary() const {
         return vocabulary;
     }
 
-    // Retorna o tamanho do vocabulário
+    /**
+     * @brief Obtém o tamanho do vocabulário.
+     * @return O número de termos no vocabulário (size_t).
+     */
     size_t getVocabularySize() const {
         return vocabularySize;
     }
 
-    // Imprime o vocabulário e seus índices
+    /**
+     * @brief Exibe o vocabulário com seus índices correspondentes.
+     */
     void printVocabulary() const {
          std::cout << "\nVocabulário (Termo -> Índice):\n";
          std::cout << "-----------------------------\n";
@@ -2519,7 +2826,11 @@ public:
     }
 };
 
-// Função auxiliar para imprimir um vetor Eigen de forma mais legível
+/**
+ * @brief Função auxiliar para imprimir um vetor Eigen de forma legível.
+ * @param vec O vetor Eigen (Eigen::VectorXd) a ser impresso.
+ * @param name O nome ou descrição do vetor para exibição.
+ */
 void printEigenVector(const Eigen::VectorXd& vec, const std::string& name) {
     std::cout << name << " (dim=" << vec.size() << "): [";
     // Imprime apenas alguns elementos para vetores longos, se necessário
@@ -2535,21 +2846,29 @@ void printEigenVector(const Eigen::VectorXd& vec, const std::string& name) {
     std::cout << "]\n";
 }
 
-
+/**
+ * @brief Função principal que demonstra o uso da classe OneHotEncoder.
+ *
+ * Este programa cria um codificador one-hot a partir de um corpus de documentos tokenizados, exibe o vocabulário,
+ * gera vetores one-hot para termos específicos, verifica propriedades do produto escalar entre vetores one-hot,
+ * e demonstra a extração de pesos usando o produto escalar.
+ *
+ * @return 0 em caso de execução bem-sucedida.
+ */
 int main() {
-    // Corpus de exemplo do texto (TF-IDF Exemplo 1)
+    // Corpus de exemplo com documentos tokenizados
     std::vector<std::vector<std::string>> corpus = {
         {"o", "gato", "preto", "caça", "o", "rato", "preto"},
         {"o", "rato", "branco", "corre", "do", "gato"},
         {"o", "cachorro", "late", "para", "o", "gato", "preto"}
     };
 
-    // 1. Criar e treinar o encoder
-    OneHotEncoder encoder;
+    // Criar e treinar o codificador
+    OneHotEncoder encoder; ///< Instância do codificador one-hot.
     encoder.fit(corpus);
     encoder.printVocabulary();
 
-    // 2. Obter vetores One-Hot para alguns termos
+    // Obter vetores one-hot para alguns termos
     std::cout << "Vetores One-Hot:\n";
     std::cout << "----------------\n";
     Eigen::VectorXd vecGato = encoder.transform("gato");
@@ -2562,7 +2881,7 @@ int main() {
     printEigenVector(vecCachorro, "OneHot('cachorro')");
     printEigenVector(vecOOV, "OneHot('animal') [OOV]"); // Deve ser um vetor de zeros
 
-    // 3. Verificar propriedades do produto escalar mencionadas no texto
+    // Verificar propriedades do produto escalar
     std::cout << "\nPropriedades do Produto Escalar:\n";
     std::cout << "-------------------------------\n";
 
@@ -2581,9 +2900,8 @@ int main() {
     double dotGatoOOV = vecGato.dot(vecOOV);
     std::cout << "Produto escalar (gato · OOV): " << std::fixed << std::setprecision(1) << dotGatoOOV << " (Esperado: 0.0)\n";
 
-    // 4. Exemplo: Usar produto escalar para "extrair" presença (simples)
-    //    Criando um vetor simples que representa "presença de gato e cachorro"
-    Eigen::VectorXd presenceVector = vecGato + vecCachorro;
+    // Exemplo: Usar produto escalar para extrair presença
+    Eigen::VectorXd presenceVector = vecGato + vecCachorro; ///< Vetor representando presença de "gato" e "cachorro".
     printEigenVector(presenceVector, "Vetor Presença (gato + cachorro)");
 
     double weightGato = vecGato.dot(presenceVector);
@@ -2597,6 +2915,8 @@ int main() {
 
     return 0;
 }
+
+
 ```
 
 Pensando no nosso progresso acho que, no próximo artigo, teremos que voltar a matemática.

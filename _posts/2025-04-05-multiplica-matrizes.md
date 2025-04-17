@@ -32,7 +32,7 @@ keywords: |-
     inteligência artificial
 toc: true
 published: true
-lastmod: 2025-04-08T20:42:16.345Z
+lastmod: 2025-04-17T22:43:28.976Z
 ---
 
 A multiplicação de matrizes pode, sem dúvida, ser um dos tópicos mais importantes dos modelos de linguagem, e aprendizagem de máquina, disponíveis no mercado atualmente. Neste artigo, vamos explorar alguns algoritmos para multiplicação de matrizes, suas aplicações e como ele se relaciona com o funcionamento de modelos de aprendizado profundo, como os Transformers, que estamos estudando ([aqui](https://frankalcantara.com/voce-pensa-como-fala/),[aqui](https://frankalcantara.com/transformers-um/) e [aqui](https://frankalcantara.com/transformers-dois/)).
@@ -280,166 +280,170 @@ if C3 is None:
 #include <optional>
 #include <format>
 
-// Define uma matriz como um vector bidimensional de doubles
+/**
+ * @typedef Matrix
+ * @brief Define uma matriz como um vetor bidimensional de doubles.
+ */
 using Matrix = std::vector<std::vector<double>>;
 
 /**
-* Verifica se uma matriz é regular (todas as linhas têm o mesmo tamanho)
-* @param mat A matriz a ser verificada
-* @return true se a matriz for regular, false caso contrário
-*/
+ * @brief Verifica se uma matriz é regular (todas as linhas têm o mesmo tamanho).
+ * @param mat A matriz a ser verificada.
+ * @return true se a matriz for regular, false caso contrário.
+ */
 bool is_regular(const Matrix& mat) {
-   if (mat.empty()) return true;
-   
-   const size_t cols = mat[0].size();
-   return std::all_of(mat.begin(), mat.end(), 
-                     [cols](const auto& row) { return row.size() == cols; });
+    if (mat.empty()) return true;
+    
+    const size_t cols = mat[0].size();
+    return std::all_of(mat.begin(), mat.end(), 
+                      [cols](const auto& row) { return row.size() == cols; });
 }
 
 /**
-* Obtém as dimensões de uma matriz
-* @param mat A matriz
-* @return Pair contendo (linhas, colunas), ou (0,0) se a matriz for vazia
-*/
+ * @brief Obtém as dimensões de uma matriz.
+ * @param mat A matriz cuja dimensão será obtida.
+ * @return Um par contendo (linhas, colunas). Retorna (0,0) se a matriz for vazia.
+ */
 std::pair<size_t, size_t> get_dimensions(const Matrix& mat) {
-   if (mat.empty()) return {0, 0};
-   if (mat[0].empty()) return {mat.size(), 0};
-   return {mat.size(), mat[0].size()};
+    if (mat.empty()) return {0, 0};
+    if (mat[0].empty()) return {mat.size(), 0};
+    return {mat.size(), mat[0].size()};
 }
 
 /**
-* Imprime uma matriz formatada no console
-* @param mat A matriz a ser impressa
-* @param name Nome opcional da matriz para imprimir
-*/
+ * @brief Imprime uma matriz formatada no console.
+ * @param mat A matriz a ser impressa.
+ * @param name Nome opcional da matriz para exibição.
+ */
 void print_matrix(const Matrix& mat, const std::string& name = "") {
-   if (!name.empty()) {
-       std::cout << name << " =\n";
-   }
-   
-   for (const auto& row : mat) {
-       std::cout << "[ ";
-       for (const auto& elem : row) {
-           std::cout << std::format("{:8.2f} ", elem);
-       }
-       std::cout << "]\n";
-   }
-   std::cout << std::endl;
+    if (!name.empty()) {
+        std::cout << name << " =\n";
+    }
+    
+    for (const auto& row : mat) {
+        std::cout << "[ ";
+        for (const auto& elem : row) {
+            std::cout << std::format("{:8.2f} ", elem);
+        }
+        std::cout << "]\n";
+    }
+    std::cout << std::endl;
 }
 
 /**
-* Multiplica duas matrizes usando o algoritmo clássico (ingênuo)
-* @param A Primeira matriz (m x p)
-* @param B Segunda matriz (p x n)
-* @return Matrix resultante C (m x n) ou nullopt se as matrizes não puderem ser multiplicadas
-*/
+ * @brief Multiplica duas matrizes usando o algoritmo clássico (ingênuo).
+ * @param A Primeira matriz de dimensões m x p.
+ * @param B Segunda matriz de dimensões p x n.
+ * @return Uma std::optional contendo a matriz resultante C de dimensões m x n, 
+ *         ou std::nullopt se as matrizes não puderem ser multiplicadas.
+ */
 std::optional<Matrix> multiply_matrices(const Matrix& A, const Matrix& B) {
-   // Verificar se as matrizes são regulares
-   if (!is_regular(A) || !is_regular(B)) {
-       std::cerr << "Erro: As matrizes devem ser regulares (todas as linhas devem ter o mesmo tamanho).\n";
-       return std::nullopt;
-   }
-   
-   // Obter dimensões
-   auto [m, p_a] = get_dimensions(A);
-   auto [p_b, n] = get_dimensions(B);
-   
-   // Verificar se as matrizes são vazias
-   if (m == 0 || p_a == 0 || p_b == 0 || n == 0) {
-       std::cerr << "Erro: As matrizes não podem ser vazias.\n";
-       return std::nullopt;
-   }
-   
-   // Verificar compatibilidade de dimensões
-   if (p_a != p_b) {
-       std::cerr << std::format("Erro: Número de colunas de A ({}) não é igual ao número de linhas de B ({}).\n", p_a, p_b);
-       return std::nullopt;
-   }
-   
-   // Inicializar matriz resultado C com zeros
-   Matrix C(m, std::vector<double>(n, 0.0));
-   
-   // Executar a multiplicação
-   for (size_t i = 0; i < m; ++i) {         // Itera sobre as linhas de A (e C)
-       for (size_t j = 0; j < n; ++j) {     // Itera sobre as colunas de B (e C)
-           double sum = 0.0;
-           for (size_t k = 0; k < p_a; ++k) {  // Itera sobre as colunas de A / linhas de B
-               sum += A[i][k] * B[k][j];
-           }
-           C[i][j] = sum;
-       }
-   }
-   
-   return C;
+    // Verificar se as matrizes são regulares
+    if (!is_regular(A) || !is_regular(B)) {
+        std::cerr << "Erro: As matrizes devem ser regulares (todas as linhas devem ter o mesmo tamanho).\n";
+        return std::nullopt;
+    }
+    
+    // Obter dimensões
+    auto [m, p_a] = get_dimensions(A);
+    auto [p_b, n] = get_dimensions(B);
+    
+    // Verificar se as matrizes são vazias
+    if (m == 0 || p_a == 0 || p_b == 0 || n == 0) {
+        std::cerr << "Erro: As matrizes não podem ser vazias.\n";
+        return std::nullopt;
+    }
+    
+    // Verificar compatibilidade de dimensões
+    if (p_a != p_b) {
+        std::cerr << std::format("Erro: Número de colunas de A ({}) não é igual ao número de linhas de B ({}).\n", p_a, p_b);
+        return std::nullopt;
+    }
+    
+    // Inicializar matriz resultado C com zeros
+    Matrix C(m, std::vector<double>(n, 0.0));
+    
+    // Executar a multiplicação
+    for (size_t i = 0; i < m; ++i) {         // Itera sobre as linhas de A (e C)
+        for (size_t j = 0; j < n; ++j) {     // Itera sobre as colunas de B (e C)
+            double sum = 0.0;
+            for (size_t k = 0; k < p_a; ++k) {  // Itera sobre as colunas de A / linhas de B
+                sum += A[i][k] * B[k][j];
+            }
+            C[i][j] = sum;
+        }
+    }
+    
+    return C;
 }
 
 int main() {
-   // Exemplo 1: Matrizes 2x2
-   Matrix A1 = {
-       {1.0, 2.0},
-       {3.0, 4.0}
-   };
-   
-   Matrix B1 = {
-       {5.0, 6.0},
-       {7.0, 8.0}
-   };
-   
-   std::cout << "=== Exemplo 1: Matrizes 2x2 ===\n";
-   print_matrix(A1, "A");
-   print_matrix(B1, "B");
-   
-   if (auto C1 = multiply_matrices(A1, B1)) {
-       print_matrix(*C1, "Resultado C = A x B");
-   } else {
-       std::cout << "Não foi possível multiplicar as matrizes A e B.\n";
-   }
-   
-   // Exemplo 2: Matrizes retangulares (3x2 e 2x3)
-   Matrix A2 = {
-       {1.0, 2.0},
-       {3.0, 4.0},
-       {5.0, 6.0}
-   };
-   
-   Matrix B2 = {
-       {7.0, 8.0, 9.0},
-       {10.0, 11.0, 12.0}
-   };
-   
-   std::cout << "\n=== Exemplo 2: Matrizes retangulares (3x2 e 2x3) ===\n";
-   print_matrix(A2, "A");
-   print_matrix(B2, "B");
-   
-   if (auto C2 = multiply_matrices(A2, B2)) {
-       print_matrix(*C2, "Resultado C = A x B");
-   } else {
-       std::cout << "Não foi possível multiplicar as matrizes A e B.\n";
-   }
-   
-   // Exemplo 3: Matrizes incompatíveis
-   Matrix A3 = {
-       {1.0, 2.0},
-       {3.0, 4.0}
-   };
-   
-   Matrix B3 = {
-       {1.0, 2.0, 3.0},
-       {4.0, 5.0, 6.0},
-       {7.0, 8.0, 9.0}
-   };
-   
-   std::cout << "\n=== Exemplo 3: Matrizes incompatíveis ===\n";
-   print_matrix(A3, "A");
-   print_matrix(B3, "B");
-   
-   if (auto C3 = multiply_matrices(A3, B3)) {
-       print_matrix(*C3, "Resultado C = A x B");
-   } else {
-       std::cout << "Não foi possível multiplicar as matrizes A e B (incompatíveis).\n";
-   }
-   
-   return 0;
+    // Exemplo 1: Matrizes 2x2
+    Matrix A1 = {
+        {1.0, 2.0},
+        {3.0, 4.0}
+    };
+    
+    Matrix B1 = {
+        {5.0, 6.0},
+        {7.0, 8.0}
+    };
+    
+    std::cout << "=== Exemplo 1: Matrizes 2x2 ===\n";
+    print_matrix(A1, "A");
+    print_matrix(B1, "B");
+    
+    if (auto C1 = multiply_matrices(A1, B1)) {
+        print_matrix(*C1, "Resultado C = A x B");
+    } else {
+        std::cout << "Não foi possível multiplicar as matrizes A e B.\n";
+    }
+    
+    // Exemplo 2: Matrizes retangulares (3x2 e 2x3)
+    Matrix A2 = {
+        {1.0, 2.0},
+        {3.0, 4.0},
+        {5.0, 6.0}
+    };
+    
+    Matrix B2 = {
+        {7.0, 8.0, 9.0},
+        {10.0, 11.0, 12.0}
+    };
+    
+    std::cout << "\n=== Exemplo 2: Matrizes retangulares (3x2 e 2x3) ===\n";
+    print_matrix(A2, "A");
+    print_matrix(B2, "B");
+    
+    if (auto C2 = multiply_matrices(A2, B2)) {
+        print_matrix(*C2, "Resultado C = A x B");
+    } else {
+        std::cout << "Não foi possível multiplicar as matrizes A e B.\n";
+    }
+    
+    // Exemplo 3: Matrizes incompatíveis
+    Matrix A3 = {
+        {1.0, 2.0},
+        {3.0, 4.0}
+    };
+    
+    Matrix B3 = {
+        {1.0, 2.0, 3.0},
+        {4.0, 5.0, 6.0},
+        {7.0, 8.0, 9.0}
+    };
+    
+    std::cout << "\n=== Exemplo 3: Matrizes incompatíveis ===\n";
+    print_matrix(A3, "A");
+    print_matrix(B3, "B");
+    
+    if (auto C3 = multiply_matrices(A3, B3)) {
+        print_matrix(*C3, "Resultado C = A x B");
+    } else {
+        std::cout << "Não foi possível multiplicar as matrizes A e B (incompatíveis).\n";
+    }
+    
+    return 0;
 }
 ```
 
@@ -1085,606 +1089,229 @@ if C4_classic and C4_strassen:
 ### Implementação em C++ (Exemplo)
 
 ```cpp
+```cpp
 #include <iostream>
 #include <vector>
 #include <optional>
-#include <chrono>
 #include <format>
-#include <algorithm>
 
-// Define uma matriz como um vector bidimensional de doubles
+/**
+ * @typedef Matrix
+ * @brief Define uma matriz como um vetor bidimensional de doubles.
+ */
 using Matrix = std::vector<std::vector<double>>;
 
 /**
-* Verifica se uma matriz é regular (todas as linhas têm o mesmo tamanho)
-* @param mat A matriz a ser verificada
-* @return true se a matriz for regular, false caso contrário
-*/
+ * @brief Verifica se uma matriz é regular (todas as linhas têm o mesmo tamanho).
+ * @param mat A matriz a ser verificada.
+ * @return true se a matriz for regular, false caso contrário.
+ */
 bool is_regular(const Matrix& mat) {
-   if (mat.empty()) return true;
-
-   const size_t cols = mat[0].size();
-   return std::all_of(mat.begin(), mat.end(), 
-                     [cols](const auto& row) { return row.size() == cols; });
+    if (mat.empty()) return true;
+    
+    const size_t cols = mat[0].size();
+    return std::all_of(mat.begin(), mat.end(), 
+                      [cols](const auto& row) { return row.size() == cols; });
 }
 
 /**
-* Obtém as dimensões de uma matriz
-* @param mat A matriz
-* @return Pair contendo (linhas, colunas), ou (0,0) se a matriz for vazia
-*/
+ * @brief Obtém as dimensões de uma matriz.
+ * @param mat A matriz cuja dimensão será obtida.
+ * @return Um par contendo (linhas, colunas). Retorna (0,0) se a matriz for vazia.
+ */
 std::pair<size_t, size_t> get_dimensions(const Matrix& mat) {
-   if (mat.empty()) return {0, 0};
-   if (mat[0].empty()) return {mat.size(), 0};
-   return {mat.size(), mat[0].size()};
+    if (mat.empty()) return {0, 0};
+    if (mat[0].empty()) return {mat.size(), 0};
+    return {mat.size(), mat[0].size()};
 }
 
 /**
-* Imprime uma matriz formatada no console
-* @param mat A matriz a ser impressa
-* @param name Nome opcional da matriz para imprimir
-*/
+ * @brief Imprime uma matriz formatada no console.
+ * @param mat A matriz a ser impressa.
+ * @param name Nome opcional da matriz para exibição.
+ */
 void print_matrix(const Matrix& mat, const std::string& name = "") {
-   if (!name.empty()) {
-       std::cout << name << " =\n";
-   }
-
-   for (const auto& row : mat) {
-       std::cout << "[ ";
-       for (const auto& elem : row) {
-           std::cout << std::format("{:8.2f} ", elem);
-       }
-       std::cout << "]\n";
-   }
-   std::cout << std::endl;
+    if (!name.empty()) {
+        std::cout << name << " =\n";
+    }
+    
+    for (const auto& row : mat) {
+        std::cout << "[ ";
+        for (const auto& elem : row) {
+            std::cout << std::format("{:8.2f} ", elem);
+        }
+        std::cout << "]\n";
+    }
+    std::cout << std::endl;
 }
 
 /**
-* Adiciona duas matrizes A e B
-* @param A Primeira matriz
-* @param B Segunda matriz
-* @return A matriz resultante A + B ou nullopt se as dimensões forem incompatíveis
-*/
-std::optional<Matrix> add_matrices(const Matrix& A, const Matrix& B) {
-   auto [rows_a, cols_a] = get_dimensions(A);
-   auto [rows_b, cols_b] = get_dimensions(B);
-
-   if (rows_a != rows_b || cols_a != cols_b) {
-       return std::nullopt;
-   }
-
-   Matrix C(rows_a, std::vector<double>(cols_a, 0.0));
-
-   for (size_t i = 0; i < rows_a; ++i) {
-       for (size_t j = 0; j < cols_a; ++j) {
-           C[i][j] = A[i][j] + B[i][j];
-       }
-   }
-
-   return C;
+ * @brief Aloca uma matriz com as dimensões especificadas, inicializada com zeros.
+ * @param rows Número de linhas da matriz.
+ * @param cols Número de colunas da matriz.
+ * @return A matriz alocada.
+ */
+Matrix allocate_matrix(size_t rows, size_t cols) {
+    return Matrix(rows, std::vector<double>(cols, 0.0));
 }
 
 /**
-* Subtrai a matriz B da matriz A
-* @param A Primeira matriz
-* @param B Segunda matriz
-* @return A matriz resultante A - B ou nullopt se as dimensões forem incompatíveis
-*/
-std::optional<Matrix> subtract_matrices(const Matrix& A, const Matrix& B) {
-   auto [rows_a, cols_a] = get_dimensions(A);
-   auto [rows_b, cols_b] = get_dimensions(B);
-
-   if (rows_a != rows_b || cols_a != cols_b) {
-       return std::nullopt;
-   }
-
-   Matrix C(rows_a, std::vector<double>(cols_a, 0.0));
-
-   for (size_t i = 0; i < rows_a; ++i) {
-       for (size_t j = 0; j < cols_a; ++j) {
-           C[i][j] = A[i][j] - B[i][j];
-       }
-   }
-
-   return C;
+ * @brief Divide uma matriz em quatro submatrizes (quadrantes).
+ * @param src A matriz de origem.
+ * @param row_start Índice inicial da linha.
+ * @param col_start Índice inicial da coluna.
+ * @param size Tamanho do quadrante (assumindo quadrantes quadrados).
+ * @return A submatriz extraída.
+ */
+Matrix get_submatrix(const Matrix& src, size_t row_start, size_t col_start, size_t size) {
+    Matrix result = allocate_matrix(size, size);
+    for (size_t i = 0; i < size; ++i) {
+        for (size_t j = 0; j < size; ++j) {
+            result[i][j] = src[row_start + i][col_start + j];
+        }
+    }
+    return result;
 }
 
 /**
-* Divide uma matriz em quatro submatrizes (quadrantes)
-* @param mat A matriz a ser dividida
-* @return Tupla de 4 submatrizes (A11, A12, A21, A22)
-*/
-std::tuple<Matrix, Matrix, Matrix, Matrix> split_matrix(const Matrix& mat) {
-   auto [rows, cols] = get_dimensions(mat);
-   size_t mid_row = rows / 2;
-   size_t mid_col = cols / 2;
-
-   Matrix A11(mid_row, std::vector<double>(mid_col));
-   Matrix A12(mid_row, std::vector<double>(cols - mid_col));
-   Matrix A21(rows - mid_row, std::vector<double>(mid_col));
-   Matrix A22(rows - mid_row, std::vector<double>(cols - mid_col));
-
-   // Preencher A11 (quadrante superior esquerdo)
-   for (size_t i = 0; i < mid_row; ++i) {
-       for (size_t j = 0; j < mid_col; ++j) {
-           A11[i][j] = mat[i][j];
-       }
-   }
-
-   // Preencher A12 (quadrante superior direito)
-   for (size_t i = 0; i < mid_row; ++i) {
-       for (size_t j = mid_col; j < cols; ++j) {
-           A12[i][j - mid_col] = mat[i][j];
-       }
-   }
-
-   // Preencher A21 (quadrante inferior esquerdo)
-   for (size_t i = mid_row; i < rows; ++i) {
-       for (size_t j = 0; j < mid_col; ++j) {
-           A21[i - mid_row][j] = mat[i][j];
-       }
-   }
-
-   // Preencher A22 (quadrante inferior direito)
-   for (size_t i = mid_row; i < rows; ++i) {
-       for (size_t j = mid_col; j < cols; ++j) {
-           A22[i - mid_row][j - mid_col] = mat[i][j];
-       }
-   }
-
-   return {A11, A12, A21, A22};
+ * @brief Combina quatro submatrizes em uma matriz maior.
+ * @param dest A matriz de destino.
+ * @param sub A submatriz a ser inserida.
+ * @param row_start Índice inicial da linha na matriz de destino.
+ * @param col_start Índice inicial da coluna na matriz de destino.
+ */
+void set_submatrix(Matrix& dest, const Matrix& sub, size_t row_start, size_t col_start) {
+    for (size_t i = 0; i < sub.size(); ++i) {
+        for (size_t j = 0; j < sub[0].size(); ++j) {
+            dest[row_start + i][col_start + j] = sub[i][j];
+        }
+    }
 }
 
 /**
-* Combina quatro submatrizes em uma matriz maior
-* @param A11 Quadrante superior esquerdo
-* @param A12 Quadrante superior direito
-* @param A21 Quadrante inferior esquerdo
-* @param A22 Quadrante inferior direito
-* @return Matriz combinada
-*/
-Matrix combine_matrices(const Matrix& A11, const Matrix& A12, 
-                       const Matrix& A21, const Matrix& A22) {
-   auto [rows11, cols11] = get_dimensions(A11);
-   auto [rows12, cols12] = get_dimensions(A12);
-   auto [rows21, cols21] = get_dimensions(A21);
-   auto [rows22, cols22] = get_dimensions(A22);
-
-   size_t rows = rows11 + rows21;
-   size_t cols = cols11 + cols12;
-
-   Matrix result(rows, std::vector<double>(cols));
-
-   // Copiar A11 (superior esquerdo)
-   for (size_t i = 0; i < rows11; ++i) {
-       for (size_t j = 0; j < cols11; ++j) {
-           result[i][j] = A11[i][j];
-       }
-   }
-
-   // Copiar A12 (superior direito)
-   for (size_t i = 0; i < rows12; ++i) {
-       for (size_t j = 0; j < cols12; ++j) {
-           result[i][j + cols11] = A12[i][j];
-       }
-   }
-
-   // Copiar A21 (inferior esquerdo)
-   for (size_t i = 0; i < rows21; ++i) {
-       for (size_t j = 0; j < cols21; ++j) {
-           result[i + rows11][j] = A21[i][j];
-       }
-   }
-
-   // Copiar A22 (inferior direito)
-   for (size_t i = 0; i < rows22; ++i) {
-       for (size_t j = 0; j < cols22; ++j) {
-           result[i + rows11][j + cols11] = A22[i][j];
-       }
-   }
-
-   return result;
+ * @brief Soma duas matrizes elemento a elemento.
+ * @param A Primeira matriz.
+ * @param B Segunda matriz.
+ * @param subtract Se true, subtrai B de A; se false, soma A e B.
+ * @return A matriz resultante da soma ou subtração.
+ */
+Matrix add_matrices(const Matrix& A, const Matrix& B, bool subtract = false) {
+    auto [rows, cols] = get_dimensions(A);
+    Matrix result = allocate_matrix(rows, cols);
+    double sign = subtract ? -1.0 : 1.0;
+    for (size_t i = 0; i < rows; ++i) {
+        for (size_t j = 0; j < cols; ++j) {
+            result[i][j] = A[i][j] + sign * B[i][j];
+        }
+    }
+    return result;
 }
 
 /**
-* Multiplicação de matrizes usando o algoritmo clássico (para o caso base)
-* @param A Primeira matriz
-* @param B Segunda matriz
-* @return Matriz resultante ou nullopt se as dimensões forem incompatíveis
-*/
-std::optional<Matrix> multiply_matrices_classic(const Matrix& A, const Matrix& B) {
-   auto [rows_a, cols_a] = get_dimensions(A);
-   auto [rows_b, cols_b] = get_dimensions(B);
-
-   if (cols_a != rows_b) {
-       return std::nullopt;
-   }
-
-   Matrix C(rows_a, std::vector<double>(cols_b, 0.0));
-
-   for (size_t i = 0; i < rows_a; ++i) {
-       for (size_t j = 0; j < cols_b; ++j) {
-           for (size_t k = 0; k < cols_a; ++k) {
-               C[i][j] += A[i][k] * B[k][j];
-           }
-       }
-   }
-
-   return C;
-}
-
-/**
-* Verifica se uma dimensão é potência de 2
-* @param n Número a ser verificado
-* @return true se n for potência de 2, false caso contrário
-*/
-bool is_power_of_two(size_t n) {
-   return n > 0 && (n & (n - 1)) == 0;
-}
-
-/**
-* Próxima potência de 2 maior ou igual a n
-* @param n Número de entrada
-* @return Próxima potência de 2 >= n
-*/
-size_t next_power_of_two(size_t n) {
-   if (n == 0) return 1;
-   if (is_power_of_two(n)) return n;
-
-   size_t power = 1;
-   while (power < n) {
-       power *= 2;
-   }
-   return power;
-}
-
-/**
-* Redimensiona uma matriz para uma dimensão potência de 2
-* @param mat Matriz original
-* @param new_size Nova dimensão da matriz (deve ser potência de 2)
-* @return Matriz redimensionada
-*/
-Matrix pad_matrix(const Matrix& mat, size_t new_size) {
-   auto [rows, cols] = get_dimensions(mat);
-
-   Matrix padded(new_size, std::vector<double>(new_size, 0.0));
-
-   // Copiar os valores originais
-   for (size_t i = 0; i < rows; ++i) {
-       for (size_t j = 0; j < cols; ++j) {
-           padded[i][j] = mat[i][j];
-       }
-   }
-
-   return padded;
-}
-
-/**
-* Remove o padding de uma matriz
-* @param padded Matriz com padding
-* @param original_rows Número original de linhas
-* @param original_cols Número original de colunas
-* @return Matriz sem padding
-*/
-Matrix unpad_matrix(const Matrix& padded, size_t original_rows, size_t original_cols) {
-   Matrix result(original_rows, std::vector<double>(original_cols));
-
-   for (size_t i = 0; i < original_rows; ++i) {
-       for (size_t j = 0; j < original_cols; ++j) {
-           result[i][j] = padded[i][j];
-       }
-   }
-
-   return result;
-}
-
-/**
-* Multiplicação de matrizes usando o algoritmo de Strassen
-* @param A Primeira matriz
-* @param B Segunda matriz
-* @param threshold Tamanho mínimo da matriz para usar Strassen (caso base)
-* @return Matriz resultante ou nullopt se as dimensões forem incompatíveis
-*/
-std::optional<Matrix> strassen(const Matrix& A, const Matrix& B, size_t threshold = 64) {
-   auto [rows_a, cols_a] = get_dimensions(A);
-   auto [rows_b, cols_b] = get_dimensions(B);
-
-   // Verificar compatibilidade para multiplicação
-   if (cols_a != rows_b) {
-       std::cerr << "Dimensões incompatíveis para multiplicação: "
-                 << cols_a << " != " << rows_b << std::endl;
-       return std::nullopt;
-   }
-
-   // Determinar o tamanho da matriz resultante
-   size_t result_rows = rows_a;
-   size_t result_cols = cols_b;
-
-   // Verificar se as matrizes são quadradas e potência de 2
-   bool needs_padding = !is_power_of_two(rows_a) || !is_power_of_two(cols_a) || 
-                       !is_power_of_two(rows_b) || !is_power_of_two(cols_b) ||
-                       rows_a != cols_a || rows_b != cols_b;
-
-   Matrix padded_A = A;
-   Matrix padded_B = B;
-
-   if (needs_padding) {
-       // Encontrar o tamanho para o padding (próxima potência de 2)
-       size_t max_dim = std::max({rows_a, cols_a, rows_b, cols_b});
-       size_t padded_size = next_power_of_two(max_dim);
-
-       // Aplicar padding
-       padded_A = pad_matrix(A, padded_size);
-       padded_B = pad_matrix(B, padded_size);
-   }
-
-   // Caso base: usar o algoritmo clássico se a matriz for pequena
-   auto [padded_size_a, _] = get_dimensions(padded_A);
-   if (padded_size_a <= threshold) {
-       auto result = multiply_matrices_classic(padded_A, padded_B);
-
-       if (!result || !needs_padding) {
-           return result;
-       }
-
-       // Remover o padding do resultado
-       return unpad_matrix(*result, result_rows, result_cols);
-   }
-
-   // Dividir cada matriz em quatro submatrizes
-   auto [A11, A12, A21, A22] = split_matrix(padded_A);
-   auto [B11, B12, B21, B22] = split_matrix(padded_B);
-
-   // Calcular os sete produtos de Strassen
-   // P1 = (A11 + A22) * (B11 + B22)
-   auto S1 = add_matrices(A11, A22);
-   auto S2 = add_matrices(B11, B22);
-   auto P1 = strassen(*S1, *S2, threshold);
-
-   // P2 = (A21 + A22) * B11
-   auto S3 = add_matrices(A21, A22);
-   auto P2 = strassen(*S3, B11, threshold);
-
-   // P3 = A11 * (B12 - B22)
-   auto S4 = subtract_matrices(B12, B22);
-   auto P3 = strassen(A11, *S4, threshold);
-
-   // P4 = A22 * (B21 - B11)
-   auto S5 = subtract_matrices(B21, B11);
-   auto P4 = strassen(A22, *S5, threshold);
-
-   // P5 = (A11 + A12) * B22
-   auto S6 = add_matrices(A11, A12);
-   auto P5 = strassen(*S6, B22, threshold);
-
-   // P6 = (A21 - A11) * (B11 + B12)
-   auto S7 = subtract_matrices(A21, A11);
-   auto S8 = add_matrices(B11, B12);
-   auto P6 = strassen(*S7, *S8, threshold);
-
-   // P7 = (A12 - A22) * (B21 + B22)
-   auto S9 = subtract_matrices(A12, A22);
-   auto S10 = add_matrices(B21, B22);
-   auto P7 = strassen(*S9, *S10, threshold);
-
-   // Calcular os blocos da matriz resultante
-   // C11 = P1 + P4 - P5 + P7
-   auto C11_temp1 = add_matrices(*P1, *P4);
-   auto C11_temp2 = subtract_matrices(*C11_temp1, *P5);
-   auto C11 = add_matrices(*C11_temp2, *P7);
-
-   // C12 = P3 + P5
-   auto C12 = add_matrices(*P3, *P5);
-
-   // C21 = P2 + P4
-   auto C21 = add_matrices(*P2, *P4);
-
-   // C22 = P1 - P2 + P3 + P6
-   auto C22_temp1 = subtract_matrices(*P1, *P2);
-   auto C22_temp2 = add_matrices(*C22_temp1, *P3);
-   auto C22 = add_matrices(*C22_temp2, *P6);
-
-   // Combinar os blocos para formar a matriz resultante
-   Matrix result = combine_matrices(*C11, *C12, *C21, *C22);
-
-   // Remover o padding, se necessário
-   if (needs_padding) {
-       return unpad_matrix(result, result_rows, result_cols);
-   }
-
-   return result;
+ * @brief Multiplica duas matrizes usando o algoritmo de Strassen.
+ * @param A Primeira matriz (n x n, n sendo uma potência de 2).
+ * @param B Segunda matriz (n x n, n sendo uma potência de 2).
+ * @param min_size Tamanho mínimo da matriz para usar multiplicação clássica.
+ * @return Uma std::optional contendo a matriz resultante, ou std::nullopt se as matrizes não forem válidas.
+ * @note O algoritmo divide recursivamente as matrizes em quadrantes, computando sete produtos para reduzir a complexidade de O(n^3) para aproximadamente O(n^2.807).
+ */
+std::optional<Matrix> strassen(const Matrix& A, const Matrix& B, size_t min_size = 64) {
+    // Verificações iniciais
+    if (!is_regular(A) || !is_regular(B)) {
+        std::cerr << "Erro: As matrizes devem ser regulares.\n";
+        return std::nullopt;
+    }
+    
+    auto [n, m] = get_dimensions(A);
+    auto [p, q] = get_dimensions(B);
+    
+    if (n == 0 || m == 0 || p == 0 || q == 0) {
+        std::cerr << "Erro: As matrizes não podem ser vazias.\n";
+        return std::nullopt;
+    }
+    
+    if (n != m || p != q || m != p) {
+        std::cerr << "Erro: As matrizes devem ser quadradas e compatíveis.\n";
+        return std::nullopt;
+    }
+    
+    // Caso base: usar multiplicação clássica para matrizes pequenas
+    if (n <= min_size) {
+        return multiply_matrices(A, B); // Assumindo que multiply_matrices está definida
+    }
+    
+    // Dividir as matrizes em quadrantes
+    size_t half = n / 2;
+    
+    Matrix A11 = get_submatrix(A, 0, 0, half);
+    Matrix A12 = get_submatrix(A, 0, half, half);
+    Matrix A21 = get_submatrix(A, half, 0, half);
+    Matrix A22 = get_submatrix(A, half, half, half);
+    
+    Matrix B11 = get_submatrix(B, 0, 0, half);
+    Matrix B12 = get_submatrix(B, 0, half, half);
+    Matrix B21 = get_submatrix(B, half, 0, half);
+    Matrix B22 = get_submatrix(B, half, half, half);
+    
+    // Calcular os sete produtos de Strassen
+    auto P1 = strassen(add_matrices(A11, A22), add_matrices(B11, B22), min_size);
+    auto P2 = strassen(add_matrices(A21, A22), B11, min_size);
+    auto P3 = strassen(A11, add_matrices(B12, B22, true), min_size);
+    auto P4 = strassen(A22, add_matrices(B21, B11, true), min_size);
+    auto P5 = strassen(add_matrices(A11, A12), B22, min_size);
+    auto P6 = strassen(add_matrices(A21, A11, true), add_matrices(B11, B12), min_size);
+    auto P7 = strassen(add_matrices(A12, A22, true), add_matrices(B21, B22), min_size);
+    
+    if (!P1 || !P2 || !P3 || !P4 || !P5 || !P6 || !P7) {
+        std::cerr << "Erro: Falha ao calcular produtos de Strassen.\n";
+        return std::nullopt;
+    }
+    
+    // Calcular os quadrantes da matriz resultante
+    Matrix C11 = add_matrices(add_matrices(*P1, *P4), add_matrices(*P7, *P5, true));
+    Matrix C12 = add_matrices(*P3, *P5);
+    Matrix C21 = add_matrices(*P2, *P4);
+    Matrix C22 = add_matrices(add_matrices(*P1, *P3, true), add_matrices(*P2, *P6));
+    
+    // Combinar os quadrantes em uma única matriz
+    Matrix C = allocate_matrix(n, n);
+    set_submatrix(C, C11, 0, 0);
+    set_submatrix(C, C12, 0, half);
+    set_submatrix(C, C21, half, 0);
+    set_submatrix(C, C22, half, half);
+    
+    return C;
 }
 
 int main() {
-   // Exemplo 1: Matrizes 2x2
-   Matrix A1 = {
-       {1.0, 2.0},
-       {3.0, 4.0}
-   };
-
-   Matrix B1 = {
-       {5.0, 6.0},
-       {7.0, 8.0}
-   };
-
-   std::cout << "=== Exemplo 1: Matrizes 2x2 ===\n";
-   print_matrix(A1, "A");
-   print_matrix(B1, "B");
-
-   // Multiplicação usando o algoritmo clássico
-   auto start_classic = std::chrono::high_resolution_clock::now();
-   auto C1_classic = multiply_matrices_classic(A1, B1);
-   auto end_classic = std::chrono::high_resolution_clock::now();
-   std::chrono::duration<double, std::milli> duration_classic = end_classic - start_classic;
-
-   if (C1_classic) {
-       print_matrix(*C1_classic, "Resultado (Clássico)");
-       std::cout << "Tempo (Clássico): " << duration_classic.count() << " ms\n\n";
-   }
-
-   // Multiplicação usando o algoritmo de Strassen
-   auto start_strassen = std::chrono::high_resolution_clock::now();
-   auto C1_strassen = strassen(A1, B1, 1); // Threshold = 1 para forçar o uso de Strassen
-   auto end_strassen = std::chrono::high_resolution_clock::now();
-   std::chrono::duration<double, std::milli> duration_strassen = end_strassen - start_strassen;
-
-   if (C1_strassen) {
-       print_matrix(*C1_strassen, "Resultado (Strassen)");
-       std::cout << "Tempo (Strassen): " << duration_strassen.count() << " ms\n\n";
-   }
-
-   // Exemplo 2: Matrizes 4x4
-   Matrix A2 = {
-       {1.0, 2.0, 3.0, 4.0},
-       {5.0, 6.0, 7.0, 8.0},
-       {9.0, 10.0, 11.0, 12.0},
-       {13.0, 14.0, 15.0, 16.0}
-   };
-
-   Matrix B2 = {
-       {17.0, 18.0, 19.0, 20.0},
-       {21.0, 22.0, 23.0, 24.0},
-       {25.0, 26.0, 27.0, 28.0},
-       {29.0, 30.0, 31.0, 32.0}
-   };
-
-   std::cout << "=== Exemplo 2: Matrizes 4x4 ===\n";
-   print_matrix(A2, "A");
-   print_matrix(B2, "B");
-
-   // Multiplicação usando o algoritmo clássico
-   start_classic = std::chrono::high_resolution_clock::now();
-   auto C2_classic = multiply_matrices_classic(A2, B2);
-   end_classic = std::chrono::high_resolution_clock::now();
-   duration_classic = end_classic - start_classic;
-
-   if (C2_classic) {
-       print_matrix(*C2_classic, "Resultado (Clássico)");
-       std::cout << "Tempo (Clássico): " << duration_classic.count() << " ms\n\n";
-   }
-
-   // Multiplicação usando o algoritmo de Strassen
-   start_strassen = std::chrono::high_resolution_clock::now();
-   auto C2_strassen = strassen(A2, B2, 2); // Threshold = 2 para forçar o uso de Strassen
-   end_strassen = std::chrono::high_resolution_clock::now();
-   duration_strassen = end_strassen - start_strassen;
-
-   if (C2_strassen) {
-       print_matrix(*C2_strassen, "Resultado (Strassen)");
-       std::cout << "Tempo (Strassen): " << duration_strassen.count() << " ms\n\n";
-   }
-
-   // Exemplo 3: Matriz não-quadrada
-   Matrix A3 = {
-       {1.0, 2.0, 3.0},
-       {4.0, 5.0, 6.0},
-       {7.0, 8.0, 9.0}
-   };
-
-   Matrix B3 = {
-       {10.0, 11.0},
-       {12.0, 13.0},
-       {14.0, 15.0}
-   };
-
-   std::cout << "=== Exemplo 3: Matrizes não-quadradas (3x3 e 3x2) ===\n";
-   print_matrix(A3, "A");
-   print_matrix(B3, "B");
-
-   // Multiplicação usando o algoritmo clássico
-   start_classic = std::chrono::high_resolution_clock::now();
-   auto C3_classic = multiply_matrices_classic(A3, B3);
-   end_classic = std::chrono::high_resolution_clock::now();
-   duration_classic = end_classic - start_classic;
-
-   if (C3_classic) {
-       print_matrix(*C3_classic, "Resultado (Clássico)");
-       std::cout << "Tempo (Clássico): " << duration_classic.count() << " ms\n\n";
-   }
-
-   // Multiplicação usando o algoritmo de Strassen com padding
-   start_strassen = std::chrono::high_resolution_clock::now();
-   auto C3_strassen = strassen(A3, B3, 2);
-   end_strassen = std::chrono::high_resolution_clock::now();
-   duration_strassen = end_strassen - start_strassen;
-
-   if (C3_strassen) {
-       print_matrix(*C3_strassen, "Resultado (Strassen)");
-       std::cout << "Tempo (Strassen): " << duration_strassen.count() << " ms\n\n";
-   }
-
-   // Exemplo 4: Teste de desempenho com matrizes grandes
-   // Gere matrizes aleatórias de tamanho 2^n x 2^n
-   constexpr size_t n = 8; // 2^8 = 256
-   constexpr size_t size = 1 << n;
-
-   std::cout << "=== Exemplo 4: Teste de desempenho com matrizes " << size << "x" << size << " ===\n";
-
-   // Criar matrizes grandes com valores aleatórios
-   Matrix A4(size, std::vector<double>(size));
-   Matrix B4(size, std::vector<double>(size));
-
-   // Inicializar com valores aleatórios entre 0 e 1
-   std::srand(static_cast<unsigned int>(std::time(nullptr)));
-   for (size_t i = 0; i < size; ++i) {
-       for (size_t j = 0; j < size; ++j) {
-           A4[i][j] = static_cast<double>(std::rand()) / RAND_MAX;
-           B4[i][j] = static_cast<double>(std::rand()) / RAND_MAX;
-       }
-   }
-
-   std::cout << "Matriz A: " << size << "x" << size << " (valores aleatórios)\n";
-   std::cout << "Matriz B: " << size << "x" << size << " (valores aleatórios)\n\n";
-
-   // Multiplicação usando o algoritmo clássico
-   std::cout << "Calculando com o algoritmo clássico...\n";
-   start_classic = std::chrono::high_resolution_clock::now();
-   auto C4_classic = multiply_matrices_classic(A4, B4);
-   end_classic = std::chrono::high_resolution_clock::now();
-   duration_classic = end_classic - start_classic;
-
-   if (C4_classic) {
-       std::cout << "Resultado (Clássico): " << size << "x" << size << " matriz calculada\n";
-       std::cout << "Tempo (Clássico): " << duration_classic.count() << " ms\n\n";
-   }
-
-   // Multiplicação usando o algoritmo de Strassen
-   std::cout << "Calculando com o algoritmo de Strassen...\n";
-   start_strassen = std::chrono::high_resolution_clock::now();
-   auto C4_strassen = strassen(A4, B4, 64); // Threshold = 64 para melhor desempenho
-   end_strassen = std::chrono::high_resolution_clock::now();
-   duration_strassen = end_strassen - start_strassen;
-
-   if (C4_strassen) {
-       std::cout << "Resultado (Strassen): " << size << "x" << size << " matriz calculada\n";
-       std::cout << "Tempo (Strassen): " << duration_strassen.count() << " ms\n\n";
-   }
-
-   // Verificar se os resultados são iguais (com uma pequena tolerância)
-   if (C4_classic && C4_strassen) {
-       bool results_match = true;
-       const double tolerance = 1e-10;
-
-       for (size_t i = 0; i < size && results_match; ++i) {
-           for (size_t j = 0; j < size && results_match; ++j) {
-               if (std::abs((*C4_classic)[i][j] - (*C4_strassen[i][j]) > tolerance) {
-                   results_match = false;
-                   std::cout << "Resultados diferem na posição [" << i << "][" << j << "]: "
-                             << (*C4_classic)[i][j] << " vs " << (*C4_strassen)[i][j] << "\n";
-               }
-           }
-       }
-
-       if (results_match) {
-           std::cout << "Os resultados dos dois algoritmos são idênticos.\n";
-       }
-
-       // Calcular speedup
-       double speedup = duration_classic.count() / duration_strassen.count();
-       std::cout << "Speedup do Strassen vs. Clássico: " << speedup << "x\n";
-   }
-   return 0;
+    // Exemplo: Matrizes 4x4
+    Matrix A = {
+        {1.0, 2.0, 3.0, 4.0},
+        {5.0, 6.0, 7.0, 8.0},
+        {9.0, 10.0, 11.0, 12.0},
+        {13.0, 14.0, 15.0, 16.0}
+    };
+    
+    Matrix B = {
+        {17.0, 18.0, 19.0, 20.0},
+        {21.0, 22.0, 23.0, 24.0},
+        {25.0, 26.0, 27.0, 28.0},
+        {29.0, 30.0, 31.0, 32.0}
+    };
+    
+    std::cout << "=== Exemplo: Multiplicação de matrizes 4x4 usando Strassen ===\n";
+    print_matrix(A, "A");
+    print_matrix(B, "B");
+    
+    if (auto C = strassen(A, B)) {
+        print_matrix(*C, "Resultado C = A x B (Strassen)");
+    } else {
+        std::cout << "Não foi possível multiplicar as matrizes A e B.\n";
+    }
+    
+    return 0;
 }
+```
 ```
 
 ### Análise de Complexidade

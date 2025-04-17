@@ -35,7 +35,7 @@ keywords: |-
     lstm
 toc: true
 published: true
-lastmod: 2025-04-17T22:33:34.074Z
+lastmod: 2025-04-17T23:22:46.411Z
 draft: 2025-04-17T18:49:57.828Z
 slug: transformers-desvendando-modelagem-de-sequencias
 ---
@@ -256,71 +256,137 @@ _Figura 2: Extração das probabilidades de transição para a palavra "meus" us
 Implementar esta operação em C++ é direto, especialmente se tivermos uma classe otimizada para operações com matrizes como é o cado da biblioteca [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page):
 
 ```cpp
-#include <iostream>
-#include <vector>
-#include <string>
-#include <unordered_map>
-#include <iomanip>
-#include <Eigen/Dense> // Usando a biblioteca Eigen para operações de matriz
+#include <iostream>         ///< Para entrada e saída padrão (std::cout).
+#include <vector>          ///< Para contêiner std::vector usado no armazenamento do vocabulário.
+#include <string>          ///< Para std::string, usado em palavras e mensagens.
+#include <unordered_map>   ///< Para std::unordered_map, usado no mapeamento de palavras para índices.
+#include <iomanip>         ///< Para std::fixed e std::setprecision, usados na formatação de saída.
+#include <Eigen/Dense>     ///< Para a biblioteca Eigen, usada em operações com matrizes e vetores.
 
+/**
+ * @class BigramModel
+ * @brief Uma classe para modelar transições de bigramas entre palavras usando uma matriz de transição.
+ *
+ * Esta classe constrói um vocabulário a partir de uma lista de palavras, cria uma matriz de transição
+ * com probabilidades condicionais P(w_t | w_{t-1}), e permite consultar as probabilidades da próxima
+ * palavra dado um termo inicial. Utiliza a biblioteca Eigen para operações matriciais e vetoriais.
+ */
+class BigramModel {
+private:
+    std::vector<std::string> vocabulary;            ///< Vocabulário ordenado de palavras.
+    std::unordered_map<std::string, int> termToIndex; ///< Mapeamento de palavras para índices no vocabulário.
+    Eigen::MatrixXd transitionMatrix;               ///< Matriz de transição (NxN) com probabilidades P(w_t | w_{t-1}).
+    size_t vocabularySize;                          ///< Tamanho do vocabulário.
+
+public:
+    /**
+     * @brief Construtor que inicializa o modelo com um vocabulário.
+     * @param vocab Vetor de strings contendo as palavras do vocabulário.
+     */
+    BigramModel(const std::vector<std::string>& vocab) : vocabulary(vocab), vocabularySize(vocab.size()) {
+        // Inicializar o mapeamento de palavras para índices
+        for (size_t i = 0; i < vocabularySize; ++i) {
+            termToIndex[vocabulary[i]] = i;
+        }
+
+        // Inicializar a matriz de transição com zeros
+        transitionMatrix = Eigen::MatrixXd::Zero(vocabularySize, vocabularySize);
+    }
+
+    /**
+     * @brief Define a probabilidade de transição entre duas palavras.
+     * @param fromWord A palavra inicial (w_{t-1}).
+     * @param toWord A palavra seguinte (w_t).
+     * @param probability A probabilidade P(w_t | w_{t-1}).
+     */
+    void setTransitionProbability(const std::string& fromWord, const std::string& toWord, double probability) {
+        auto fromIt = termToIndex.find(fromWord);
+        auto toIt = termToIndex.find(toWord);
+        if (fromIt != termToIndex.end() && toIt != termToIndex.end()) {
+            transitionMatrix(fromIt->second, toIt->second) = probability;
+        }
+    }
+
+    /**
+     * @brief Cria um vetor one-hot para uma palavra.
+     * @param word A palavra para a qual o vetor one-hot será criado.
+     * @return Vetor one-hot (Eigen::VectorXd) com 1.0 na posição da palavra e 0.0 nas demais. Retorna vetor de zeros se a palavra for desconhecida.
+     */
+    Eigen::VectorXd createOneHotVector(const std::string& word) const {
+        Eigen::VectorXd oneHotVector = Eigen::VectorXd::Zero(vocabularySize);
+        auto it = termToIndex.find(word);
+        if (it != termToIndex.end()) {
+            oneHotVector(it->second) = 1.0;
+        }
+        return oneHotVector;
+    }
+
+    /**
+     * @brief Consulta as probabilidades da próxima palavra dado um termo inicial.
+     * @param word A palavra inicial (w_{t-1}).
+     * @return Vetor de probabilidades (Eigen::RowVectorXd) para a próxima palavra P(w_t | w_{t-1}).
+     */
+    Eigen::RowVectorXd getNextWordProbabilities(const std::string& word) const {
+        Eigen::VectorXd oneHotVector = createOneHotVector(word);
+        return oneHotVector.transpose() * transitionMatrix;
+    }
+
+    /**
+     * @brief Exibe as probabilidades da próxima palavra dado um termo inicial.
+     * @param word A palavra inicial (w_{t-1}).
+     */
+    void printNextWordProbabilities(const std::string& word) const {
+        Eigen::RowVectorXd probabilities = getNextWordProbabilities(word);
+        std::cout << "Probabilidades da próxima palavra após '" << word << "' (Modelo de 1ª Ordem / Bigramas):\n";
+        for (size_t i = 0; i < vocabularySize; ++i) {
+            if (probabilities(i) > 0) { // Mostrar apenas probabilidades não nulas
+                std::cout << "  " << vocabulary[i] << ": " << std::fixed << std::setprecision(2) << probabilities(i) << "\n";
+            }
+        }
+    }
+
+    /**
+     * @brief Obtém o vocabulário do modelo.
+     * @return Referência constante ao vetor de strings do vocabulário.
+     */
+    const std::vector<std::string>& getVocabulary() const {
+        return vocabulary;
+    }
+};
+
+/**
+ * @brief Função principal que demonstra o uso da classe BigramModel.
+ *
+ * Este programa cria um modelo de bigramas com um vocabulário predefinido, define probabilidades
+ * de transição para simular um modelo de linguagem simples, e consulta as probabilidades da próxima
+ * palavra após "meus" usando uma representação one-hot e a matriz de transição.
+ *
+ * @return 0 em caso de execução bem-sucedida.
+ */
 int main() {
-    // Definir o vocabulário (corrigido para separar "por" e "favor")
+    // Definir o vocabulário
     std::vector<std::string> vocabulary = {
         "mostre", "me", "meus", "minhas", "diretórios", "arquivos", "fotos", "por", "favor"
     };
-    int vocab_size = vocabulary.size(); // Tamanho do vocabulário N=9
-    
-    // Mapear palavras para índices (0 a N-1)
-    std::unordered_map<std::string, int> word_to_index;
-    for (int i = 0; i < vocab_size; ++i) {
-        word_to_index[vocabulary[i]] = i;
-    }
-    
-    // Criar a matriz de transição (NxN) inicializada com zeros
-    Eigen::MatrixXd transition_matrix = Eigen::MatrixXd::Zero(vocab_size, vocab_size);
-    
-    // Definir as probabilidades de transição (modelo de bigramas P(w_t | w_{t-1}))
-    // Após "mostre", sempre vem "me"
-    transition_matrix(word_to_index["mostre"], word_to_index["me"]) = 1.0;
-    
-    // Após "me", pode vir "meus" ou "minhas"
-    transition_matrix(word_to_index["me"], word_to_index["meus"]) = 2.0/3.0;    // 66.7%
-    transition_matrix(word_to_index["me"], word_to_index["minhas"]) = 1.0/3.0;  // 33.3%
-    
-    // Após "meus", pode vir "diretórios" ou "arquivos"
-    transition_matrix(word_to_index["meus"], word_to_index["diretórios"]) = 0.5; // 50%
-    transition_matrix(word_to_index["meus"], word_to_index["arquivos"]) = 0.5;   // 50%
-    
-    // Após "minhas", sempre vem "fotos"
-    transition_matrix(word_to_index["minhas"], word_to_index["fotos"]) = 1.0;
-    
-    // Após "diretórios", "arquivos" ou "fotos", sempre vem "por"
-    transition_matrix(word_to_index["diretórios"], word_to_index["por"]) = 1.0;
-    transition_matrix(word_to_index["arquivos"], word_to_index["por"]) = 1.0;
-    transition_matrix(word_to_index["fotos"], word_to_index["por"]) = 1.0;
-    
-    // Após "por", sempre vem "favor"
-    transition_matrix(word_to_index["por"], word_to_index["favor"]) = 1.0;
-    
-    // (Implicitamente, a transição de "favor" para qualquer outra palavra é 0 neste exemplo)
-    
-    // Criar um vetor one-hot para a palavra "meus"
-    Eigen::VectorXd one_hot_meus = Eigen::VectorXd::Zero(vocab_size);
-    one_hot_meus(word_to_index["meus"]) = 1.0;
-    
-    // Consultar as probabilidades de transição: h^T * T
-    // Como Eigen trata vetores como matrizes coluna por padrão, fazemos a transposição antes.
-    Eigen::RowVectorXd next_word_probs = one_hot_meus.transpose() * transition_matrix;
-    
-    // Exibir os resultados
-    std::cout << "Probabilidades da próxima palavra após 'meus' (Modelo de 1ª Ordem / Bigramas):\n";
-    for (int i = 0; i < vocab_size; ++i) {
-        if (next_word_probs(i) > 0) { // Mostrar apenas probabilidades não nulas
-            std::cout << "  " << vocabulary[i] << ": " << std::fixed << std::setprecision(2)
-                      << next_word_probs(i) << "\n";
-        }
-    }
-    
+
+    // Criar e configurar o modelo de bigramas
+    BigramModel model(vocabulary);
+
+    // Definir as probabilidades de transição (P(w_t | w_{t-1}))
+    model.setTransitionProbability("mostre", "me", 1.0); // Após "mostre", sempre vem "me"
+    model.setTransitionProbability("me", "meus", 2.0/3.0); // Após "me", "meus" com 66.7%
+    model.setTransitionProbability("me", "minhas", 1.0/3.0); // Após "me", "minhas" com 33.3%
+    model.setTransitionProbability("meus", "diretórios", 0.5); // Após "meus", "diretórios" com 50%
+    model.setTransitionProbability("meus", "arquivos", 0.5); // Após "meus", "arquivos" com 50%
+    model.setTransitionProbability("minhas", "fotos", 1.0); // Após "minhas", sempre vem "fotos"
+    model.setTransitionProbability("diretórios", "por", 1.0); // Após "diretórios", sempre vem "por"
+    model.setTransitionProbability("arquivos", "por", 1.0); // Após "arquivos", sempre vem "por"
+    model.setTransitionProbability("fotos", "por", 1.0); // Após "fotos", sempre vem "por"
+    model.setTransitionProbability("por", "favor", 1.0); // Após "por", sempre vem "favor"
+
+    // Consultar e exibir as probabilidades da próxima palavra após "meus"
+    model.printNextWordProbabilities("meus");
+
     return 0;
 }
 ```
@@ -545,265 +611,287 @@ Com os documentos representados como vetores probabilísticos normalizados, pode
 Vejamos como implementar esta abordagem em C++:
 
 ```cpp
-#include <iostream>
-#include <vector>
-#include <string>
-#include <unordered_map>
-#include <map> // Para contar frequências de bigramas ordenadamente
-#include <Eigen/Dense>
-#include <cmath>
-#include <iomanip> // Para std::setprecision
-#include <algorithm> // Para std::sort
+#include <iostream>         ///< Para entrada e saída padrão (std::cout, std::cerr).
+#include <vector>          ///< Para contêiner std::vector usado no armazenamento de corpus, vocabulário e vetores.
+#include <string>          ///< Para std::string, usado em palavras e mensagens.
+#include <unordered_map>   ///< Para std::unordered_map, usado no mapeamento de palavras para índices.
+#include <map>             ///< Para std::map, usado na contagem ordenada de bigramas.
+#include <Eigen/Dense>     ///< Para a biblioteca Eigen, usada em operações com matrizes e vetores.
+#include <cmath>           ///< Para std::log e std::sqrt, usados em cálculos matemáticos.
+#include <iomanip>         ///< Para std::fixed, std::setprecision e std::setw, usados na formatação de saída.
+#include <algorithm>       ///< Para std::sort, usado na ordenação de listas e vocabulário.
 
-// Estrutura para armazenar um bigrama e sua frequência
+/**
+ * @struct BigramInfo
+ * @brief Estrutura para armazenar informações sobre um bigrama, incluindo índices, palavras e frequência.
+ */
 struct BigramInfo {
-    std::pair<int, int> indices;
-    std::string firstWord;
-    std::string secondWord;
-    int frequency = 0;
+    std::pair<int, int> indices;    ///< Índices do bigrama (primeira e segunda palavra).
+    std::string firstWord;          ///< Primeira palavra do bigrama.
+    std::string secondWord;         ///< Segunda palavra do bigrama.
+    int frequency = 0;              ///< Frequência do bigrama no corpus.
 
-    // Para ordenação (maior frequência primeiro)
+    /**
+     * @brief Operador de comparação para ordenação por frequência decrescente.
+     * @param other Outro objeto BigramInfo a ser comparado.
+     * @return true se a frequência atual for maior que a do outro.
+     */
     bool operator<(const BigramInfo& other) const {
-        return frequency > other.frequency; // Ordena do maior para o menor
+        return frequency > other.frequency;
     }
 };
 
-
-// Classe para representação probabilística de documentos
+/**
+ * @class ProbabilisticNGramVectorizer
+ * @brief Uma classe para vetorizar documentos com base em probabilidades de transição de bigramas.
+ *
+ * Esta classe constrói um vocabulário, calcula matrizes de transição de bigramas para documentos,
+ * vetoriza documentos usando métodos completo e específico, normaliza vetores de características,
+ * e calcula similaridades de cosseno entre documentos. Utiliza a biblioteca Eigen para operações matriciais.
+ */
 class ProbabilisticNGramVectorizer {
 private:
-    // Vocabulário global e mapeamento
-    std::vector<std::string> vocabulary;
-    std::unordered_map<std::string, int> wordToIndex;
-    int vocabSize;
+    std::vector<std::string> vocabulary;            ///< Vocabulário global ordenado alfabeticamente.
+    std::unordered_map<std::string, int> wordToIndex; ///< Mapeamento de palavras para índices no vocabulário.
+    int vocabSize;                                  ///< Tamanho do vocabulário.
 
-    // Função auxiliar para extrair bigramas (índices) de um documento tokenizado
+    /**
+     * @brief Extrai índices de bigramas de um documento tokenizado.
+     * @param tokens Vetor de strings representando o documento tokenizado.
+     * @return Vetor de pares de índices correspondentes aos bigramas encontrados.
+     */
     std::vector<std::pair<int, int>> extractBigramIndices(const std::vector<std::string>& tokens) {
         std::vector<std::pair<int, int>> bigramIndices;
         for (size_t i = 0; i < tokens.size() - 1; ++i) {
-            // Verifica se as palavras estão no vocabulário antes de acessar
             if (wordToIndex.count(tokens[i]) && wordToIndex.count(tokens[i+1])) {
                 int firstIdx = wordToIndex.at(tokens[i]);
                 int secondIdx = wordToIndex.at(tokens[i+1]);
                 bigramIndices.push_back({firstIdx, secondIdx});
-            } else {
-                 // Opcional: Logar ou tratar palavras fora do vocabulário (OOV)
-                 // std::cerr << "Atenção: Palavra OOV encontrada: " << (wordToIndex.count(tokens[i]) ? tokens[i+1] : tokens[i]) << std::endl;
             }
         }
         return bigramIndices;
     }
 
 public:
-    // Construtor: Inicializa com o vocabulário do corpus
-    ProbabilisticNGramVectorizer(const std::vector<std::string>& vocab) {
-        vocabulary = vocab;
-        vocabSize = vocabulary.size();
-
-        // Mapear palavras para índices
+    /**
+     * @brief Construtor que inicializa o vetorizador com um vocabulário.
+     * @param vocab Vetor de strings contendo as palavras do vocabulário.
+     */
+    ProbabilisticNGramVectorizer(const std::vector<std::string>& vocab) : vocabulary(vocab), vocabSize(vocab.size()) {
         for (int i = 0; i < vocabSize; ++i) {
             wordToIndex[vocabulary[i]] = i;
         }
     }
 
-    // --- Etapa 1: Construção da Matriz de Transição por Documento ---
+    /**
+     * @brief Cria a matriz de transição de bigramas para um documento.
+     * @param documentTokens Vetor de strings representando o documento tokenizado.
+     * @return Matriz de transição (Eigen::MatrixXd) com probabilidades P(w_j | w_i, D).
+     */
     Eigen::MatrixXd createTransitionMatrix(const std::vector<std::string>& documentTokens) {
-        // 1. Inicializa matriz com zeros
         Eigen::MatrixXd transMatrix = Eigen::MatrixXd::Zero(vocabSize, vocabSize);
-        Eigen::VectorXd firstWordCounts = Eigen::VectorXd::Zero(vocabSize); // Para o denominador count(wi, D)
+        Eigen::VectorXd firstWordCounts = Eigen::VectorXd::Zero(vocabSize);
 
-        // 2. Identifica bigramas e conta suas ocorrências e as ocorrências da primeira palavra
         std::vector<std::pair<int, int>> bigramIndices = extractBigramIndices(documentTokens);
         for (const auto& bigram : bigramIndices) {
-            transMatrix(bigram.first, bigram.second) += 1.0; // count(wi, wj, D)
-            firstWordCounts(bigram.first) += 1.0;           // Contagem para o denominador
+            transMatrix(bigram.first, bigram.second) += 1.0;
+            firstWordCounts(bigram.first) += 1.0;
         }
 
-        // 3. Normaliza cada linha para obter P(wj | wi, D)
         for (int i = 0; i < vocabSize; ++i) {
-            double count_wi = firstWordCounts(i); // Denominador count(wi, D)
+            double count_wi = firstWordCounts(i);
             if (count_wi > 0) {
                 for (int j = 0; j < vocabSize; ++j) {
-                     // Divide a contagem do bigrama pela contagem da primeira palavra
                     transMatrix(i, j) /= count_wi;
                 }
             }
-            // Se count_wi == 0, a linha já é zero, P(wj | wi, D) = 0, o que está correto.
         }
 
         return transMatrix;
     }
 
-    // --- Etapa 2, Método 1: Vetorização Completa ---
+    /**
+     * @brief Vetoriza a matriz de transição usando o método completo.
+     * @param transMatrix Matriz de transição do documento.
+     * @return Vetor de características (std::vector<double>) no formato [i, j, p, ...].
+     */
     std::vector<double> vectorizeFull(const Eigen::MatrixXd& transMatrix) {
         std::vector<double> featureVector;
-        featureVector.reserve(transMatrix.nonZeros() * 3); // Pre-allocate approximate space
+        featureVector.reserve(transMatrix.nonZeros() * 3);
 
         for (int i = 0; i < vocabSize; ++i) {
             for (int j = 0; j < vocabSize; ++j) {
-                if (transMatrix(i, j) > 1e-9) { // Use tolerância para comparar doubles
-                    featureVector.push_back(static_cast<double>(i)); // índice i
-                    featureVector.push_back(static_cast<double>(j)); // índice j
-                    featureVector.push_back(transMatrix(i, j));     // probabilidade p
+                if (transMatrix(i, j) > 1e-9) {
+                    featureVector.push_back(static_cast<double>(i));
+                    featureVector.push_back(static_cast<double>(j));
+                    featureVector.push_back(transMatrix(i, j));
                 }
             }
         }
         return featureVector;
     }
 
-    // --- Etapa 2, Método 2: Vetorização por Transições Específicas ---
-    // Requer as transições selecionadas (pares de índices) como entrada
+    /**
+     * @brief Vetoriza a matriz de transição usando transições específicas.
+     * @param transMatrix Matriz de transição do documento.
+     * @param selectedTransitions Vetor de pares de índices representando as transições selecionadas.
+     * @return Vetor de características (Eigen::VectorXd) com probabilidades das transições selecionadas.
+     */
     Eigen::VectorXd vectorizeSpecific(const Eigen::MatrixXd& transMatrix,
                                       const std::vector<std::pair<int, int>>& selectedTransitions) {
         int k = selectedTransitions.size();
         Eigen::VectorXd featureVector = Eigen::VectorXd::Zero(k);
 
         for (int feature_idx = 0; feature_idx < k; ++feature_idx) {
-            int i = selectedTransitions[feature_idx].first;  // Índice da primeira palavra da transição k
-            int j = selectedTransitions[feature_idx].second; // Índice da segunda palavra da transição k
-
-            // A probabilidade P(tj | D) é simplesmente o valor na célula (i,j) da matriz T_D
-            // Se i ou j estiverem fora dos limites (improvável se bem construído) ou
-            // a probabilidade for zero, o valor padrão 0.0 já está no vetor.
-             if (i >= 0 && i < vocabSize && j >= 0 && j < vocabSize) {
-                 featureVector(feature_idx) = transMatrix(i, j);
-             }
+            int i = selectedTransitions[feature_idx].first;
+            int j = selectedTransitions[feature_idx].second;
+            if (i >= 0 && i < vocabSize && j >= 0 && j < vocabSize) {
+                featureVector(feature_idx) = transMatrix(i, j);
+            }
         }
-        return featureVector; // Retorna o vetor ANTES da normalização
-    }
-
-
-    // --- Etapa 3: Normalização do Vetor de Características (L2) ---
-    Eigen::VectorXd normalizeFeatureVector(Eigen::VectorXd featureVector) {
-        double norm = featureVector.norm(); // Norma Euclidiana (L2)
-        if (norm > 1e-9) { // Evita divisão por zero ou norma muito pequena
-            featureVector /= norm;
-        }
-        // Se a norma for zero (vetor zero), retorna o vetor zero.
         return featureVector;
     }
 
-    // --- Etapa 4: Comparação entre Documentos (Similaridade de Cosseno) ---
-    // Assume que os vetores de entrada JÁ ESTÃO NORMALIZADOS (como feito na Etapa 3)
-    double cosineSimilarity(const Eigen::VectorXd& normalized_v1, const Eigen::VectorXd& normalized_v2) {
-         // Se os vetores já estão normalizados (norma = 1), o cosseno é apenas o produto escalar.
-         // A verificação de norma > 0 é uma segurança extra.
-        if (normalized_v1.size() != normalized_v2.size() || normalized_v1.size() == 0) {
-             return 0.0; // Vetores incompatíveis ou vazios
+    /**
+     * @brief Normaliza um vetor de características usando a norma L2.
+     * @param featureVector Vetor de características (Eigen::VectorXd) a ser normalizado.
+     * @return Vetor normalizado (Eigen::VectorXd). Retorna o vetor original se a norma for zero.
+     */
+    Eigen::VectorXd normalizeFeatureVector(Eigen::VectorXd featureVector) {
+        double norm = featureVector.norm();
+        if (norm > 1e-9) {
+            featureVector /= norm;
         }
-        double norm1 = normalized_v1.norm();
-        double norm2 = normalized_v2.norm();
-
-        if (norm1 > 1e-9 && norm2 > 1e-9) {
-             // Para vetores já normalizados, norm1 e norm2 devem ser ~1.0
-             // return normalized_v1.dot(normalized_v2) / (norm1 * norm2);
-             // Simplificado para vetores já normalizados:
-             return normalized_v1.dot(normalized_v2);
-        }
-        return 0.0; // Se uma das normas for zero
+        return featureVector;
     }
 
-    // --- Funções Utilitárias ---
+    /**
+     * @brief Calcula a similaridade de cosseno entre dois vetores normalizados.
+     * @param normalized_v1 Primeiro vetor normalizado (Eigen::VectorXd).
+     * @param normalized_v2 Segundo vetor normalizado (Eigen::VectorXd).
+     * @return Valor da similaridade de cosseno (double). Retorna 0.0 para vetores incompatíveis ou nulos.
+     */
+    double cosineSimilarity(const Eigen::VectorXd& normalized_v1, const Eigen::VectorXd& normalized_v2) {
+        if (normalized_v1.size() != normalized_v2.size() || normalized_v1.size() == 0) {
+            return 0.0;
+        }
+        return normalized_v1.dot(normalized_v2);
+    }
+
+    /**
+     * @brief Obtém o vocabulário global.
+     * @return Referência constante ao vetor de strings do vocabulário.
+     */
     const std::vector<std::string>& getVocabulary() const {
         return vocabulary;
     }
 
-     int getVocabSize() const {
-         return vocabSize;
-     }
-
-    // Mapeia palavra para índice (com verificação)
-    int getIndexForWord(const std::string& word) const {
-        if (wordToIndex.count(word)) {
-            return wordToIndex.at(word);
-        }
-        return -1; // Indica palavra não encontrada
+    /**
+     * @brief Obtém o tamanho do vocabulário.
+     * @return O número de termos no vocabulário (int).
+     */
+    int getVocabSize() const {
+        return vocabSize;
     }
 
-     // Mapeia índice para palavra (com verificação)
-     std::string getWordForIndex(int index) const {
-         if (index >= 0 && index < vocabSize) {
-             return vocabulary[index];
-         }
-         return "[INVALID_INDEX]";
-     }
+    /**
+     * @brief Mapeia uma palavra para seu índice no vocabulário.
+     * @param word A palavra a ser mapeada.
+     * @return O índice da palavra no vocabulário, ou -1 se não encontrada.
+     */
+    int getIndexForWord(const std::string& word) const {
+        auto it = wordToIndex.find(word);
+        return it != wordToIndex.end() ? it->second : -1;
+    }
 
-     // --- Função para Análise de Frequência de Bigramas no Corpus (Pré-passo para Método 2) ---
-     static std::vector<BigramInfo> analyzeCorpusBigramFrequency(
-         const std::vector<std::vector<std::string>>& corpusTokens,
-         const std::vector<std::string>& vocabulary,
-         const std::unordered_map<std::string, int>& wordToIndex)
-     {
-         std::map<std::pair<int, int>, int> bigramCounts; // Usar map para ordenar chaves se necessário, mas não estritamente preciso para freq.
+    /**
+     * @brief Mapeia um índice para a palavra correspondente no vocabulário.
+     * @param index O índice a ser mapeado.
+     * @return A palavra correspondente, ou "[INVALID_INDEX]" se o índice for inválido.
+     */
+    std::string getWordForIndex(int index) const {
+        if (index >= 0 && index < vocabSize) {
+            return vocabulary[index];
+        }
+        return "[INVALID_INDEX]";
+    }
 
-         // Contar bigramas em todo o corpus
-         for (const auto& docTokens : corpusTokens) {
-             for (size_t i = 0; i < docTokens.size() - 1; ++i) {
-                 if (wordToIndex.count(docTokens[i]) && wordToIndex.count(docTokens[i+1])) {
-                     int idx1 = wordToIndex.at(docTokens[i]);
-                     int idx2 = wordToIndex.at(docTokens[i+1]);
-                     bigramCounts[{idx1, idx2}]++;
-                 }
-             }
-         }
+    /**
+     * @brief Analisa a frequência de bigramas em um corpus.
+     * @param corpusTokens Vetor de vetores de strings representando o corpus tokenizado.
+     * @param vocab Vetor de strings contendo o vocabulário.
+     * @param wordToIdx Mapeamento de palavras para índices.
+     * @return Vetor de objetos BigramInfo ordenado por frequência decrescente.
+     */
+    static std::vector<BigramInfo> analyzeCorpusBigramFrequency(
+        const std::vector<std::vector<std::string>>& corpusTokens,
+        const std::vector<std::string>& vocab,
+        const std::unordered_map<std::string, int>& wordToIdx) {
+        std::map<std::pair<int, int>, int> bigramCounts;
 
-         // Converter para a estrutura BigramInfo
-         std::vector<BigramInfo> frequencyList;
-         for (const auto& pair : bigramCounts) {
-             BigramInfo info;
-             info.indices = pair.first;
-             info.frequency = pair.second;
-             if(pair.first.first >= 0 && pair.first.first < vocabulary.size())
-                info.firstWord = vocabulary[pair.first.first];
-             if(pair.first.second >= 0 && pair.first.second < vocabulary.size())
-                info.secondWord = vocabulary[pair.first.second];
-             frequencyList.push_back(info);
-         }
+        for (const auto& docTokens : corpusTokens) {
+            for (size_t i = 0; i < docTokens.size() - 1; ++i) {
+                if (wordToIdx.count(docTokens[i]) && wordToIdx.count(docTokens[i+1])) {
+                    int idx1 = wordToIdx.at(docTokens[i]);
+                    int idx2 = wordToIdx.at(docTokens[i+1]);
+                    bigramCounts[{idx1, idx2}]++;
+                }
+            }
+        }
 
-         // Ordenar por frequência (decrescente)
-         std::sort(frequencyList.begin(), frequencyList.end());
+        std::vector<BigramInfo> frequencyList;
+        for (const auto& pair : bigramCounts) {
+            BigramInfo info;
+            info.indices = pair.first;
+            info.frequency = pair.second;
+            if (pair.first.first >= 0 && pair.first.first < vocab.size()) {
+                info.firstWord = vocab[pair.first.first];
+            }
+            if (pair.first.second >= 0 && pair.first.second < vocab.size()) {
+                info.secondWord = vocab[pair.first.second];
+            }
+            frequencyList.push_back(info);
+        }
 
-         return frequencyList;
-     }
+        std::sort(frequencyList.begin(), frequencyList.end());
+        return frequencyList;
+    }
 };
 
-
+/**
+ * @brief Função principal que demonstra o uso da classe ProbabilisticNGramVectorizer.
+ *
+ * Este programa cria um vetorizador de bigramas com um vocabulário predefinido, analisa a frequência
+ * de bigramas em um corpus, vetoriza documentos usando métodos completo e específico, normaliza vetores
+ * de características, e calcula similaridades de cosseno entre documentos.
+ *
+ * @return 0 em caso de execução bem-sucedida.
+ */
 int main() {
-    // --- Definições Iniciais ---
-    std::cout << std::fixed << std::setprecision(3); // Define precisão da saída
+    std::cout << std::fixed << std::setprecision(3); ///< Define precisão de saída para três casas decimais.
 
-    // Vocabulário do corpus (de acordo com o texto)
+    // Definir o vocabulário
     std::vector<std::string> vocabulary = {
-        "mostre", "me", "meus", "diretórios", "por", "favor", // Doc 1 specific part
-        "arquivos",                                         // Doc 2 specific part
-        "minhas", "fotos"                                     // Doc 3 specific part
+        "mostre", "me", "meus", "diretórios", "por", "favor", "arquivos", "minhas", "fotos"
     };
-    // Certifique-se de que o vocabulário está na ordem usada implicitamente no texto
-    // 0:mostre, 1:me, 2:meus, 3:diretórios, 4:por, 5:favor, 6:arquivos, 7:minhas, 8:fotos
-    // Reordenando para garantir consistência se necessário (opcional, mas bom):
-    // { "mostre", "me", "meus", "minhas", "diretórios", "arquivos", "fotos", "por", "favor"}
-    // O código usará a ordem fornecida aqui. A ordem original do código anterior está ok.
-
 
     // Corpus de documentos tokenizados
     std::vector<std::vector<std::string>> corpusDocs = {
-        {"mostre", "me", "meus", "diretórios", "por", "favor"}, // Doc 1 (D1)
-        {"mostre", "me", "meus", "arquivos", "por", "favor"},  // Doc 2 (D2)
-        {"mostre", "me", "minhas", "fotos", "por", "favor"}     // Doc 3 (D3)
+        {"mostre", "me", "meus", "diretórios", "por", "favor"}, // Doc 1
+        {"mostre", "me", "meus", "arquivos", "por", "favor"},   // Doc 2
+        {"mostre", "me", "minhas", "fotos", "por", "favor"}     // Doc 3
     };
 
-    // Criar o vetorizador com o vocabulário
-    ProbabilisticNGramVectorizer vectorizer(vocabulary);
+    // Criar o vetorizador
+    ProbabilisticNGramVectorizer vectorizer(vocabulary); ///< Instância do vetorizador.
     int vocabSize = vectorizer.getVocabSize();
 
-    // --- Demonstração das Etapas ---
     std::cout << ">>> ANÁLISE DO CORPUS E VETORIZAÇÃO <<<\n\n";
 
-    // --- Pré-passo para Método 2: Selecionar Transições Específicas (Mais Frequentes) ---
-    std::cout << "--- Análise de Frequência de Bigramas no Corpus (Pré-passo para Método 2) ---\n";
+    // Analisar frequência de bigramas no corpus
+    std::cout << "--- Análise de Frequência de Bigramas no Corpus ---\n";
     auto corpusBigramFrequencies = ProbabilisticNGramVectorizer::analyzeCorpusBigramFrequency(
-        corpusDocs, vectorizer.getVocabulary(), vectorizer.wordToIndex // Passando o map privado, idealmente via getter
-    );
+        corpusDocs, vectorizer.getVocabulary(), vectorizer.wordToIndex);
 
     std::cout << "Frequências encontradas (Top 5 ou todas se menos de 5):\n";
     int count = 0;
@@ -812,35 +900,32 @@ int main() {
         if (++count >= 5) break;
     }
 
-    // Selecionar as Top K transições (usaremos K=3 como no texto)
+    // Selecionar as top K transições
     int K = 3;
     std::vector<std::pair<int, int>> selectedTransitionsIndices;
     if (corpusBigramFrequencies.size() >= K) {
-         std::cout << "\nSelecionando as Top " << K << " transições mais frequentes para o Método 2:\n";
+        std::cout << "\nSelecionando as Top " << K << " transições mais frequentes:\n";
         for (int i = 0; i < K; ++i) {
             selectedTransitionsIndices.push_back(corpusBigramFrequencies[i].indices);
-             std::cout << "  Selecionada: (" << corpusBigramFrequencies[i].firstWord << ", "
-                       << corpusBigramFrequencies[i].secondWord << ")\n";
+            std::cout << "  Selecionada: (" << corpusBigramFrequencies[i].firstWord << ", "
+                      << corpusBigramFrequencies[i].secondWord << ")\n";
         }
     } else {
         std::cout << "\nNão há " << K << " bigramas únicos, usando todos os " << corpusBigramFrequencies.size() << " encontrados.\n";
-         for (const auto& info : corpusBigramFrequencies) {
-             selectedTransitionsIndices.push_back(info.indices);
-         }
-         K = selectedTransitionsIndices.size(); // Atualiza K
+        for (const auto& info : corpusBigramFrequencies) {
+            selectedTransitionsIndices.push_back(info.indices);
+        }
+        K = selectedTransitionsIndices.size();
     }
-     std::cout << "\n";
+    std::cout << "\n";
 
-
-    // Armazenar vetores normalizados para comparação posterior (Método 2)
+    // Processar cada documento
     std::vector<Eigen::VectorXd> normalizedVectorsMethod2;
-
-    // --- Processamento de Cada Documento ---
-    for (int doc_idx = 0; doc_idx < corpusDocs.size(); ++doc_idx) {
+    for (size_t doc_idx = 0; doc_idx < corpusDocs.size(); ++doc_idx) {
         const auto& currentDocTokens = corpusDocs[doc_idx];
         std::cout << "--- Processando Documento " << (doc_idx + 1) << " ---\n";
 
-        // Etapa 1: Criar Matriz de Transição T_D
+        // Etapa 1: Criar matriz de transição
         Eigen::MatrixXd tMatrix = vectorizer.createTransitionMatrix(currentDocTokens);
         std::cout << "Etapa 1: Matriz de Transição T_D (mostrando apenas transições não-zero):\n";
         bool found_transition = false;
@@ -852,49 +937,44 @@ int main() {
                 }
             }
         }
-         if (!found_transition) std::cout << "  (Nenhuma transição encontrada neste documento)\n";
+        if (!found_transition) std::cout << "  (Nenhuma transição encontrada neste documento)\n";
 
-        // Etapa 2, Método 1: Vetorização Completa [i, j, p, ...]
+        // Etapa 2, Método 1: Vetorização completa
         std::vector<double> fullVector = vectorizer.vectorizeFull(tMatrix);
-        std::cout << "Etapa 2, Método 1 (Vetorização Completa): [i, j, p, ...]\n  ";
-        std::cout << "[";
-        for(size_t k=0; k < fullVector.size(); ++k) {
+        std::cout << "Etapa 2, Método 1 (Vetorização Completa): [i, j, p, ...]\n  [";
+        for (size_t k = 0; k < fullVector.size(); ++k) {
             std::cout << fullVector[k] << ((k == fullVector.size()-1) ? "" : ((k+1)%3 == 0 ? "; " : ", "));
         }
         std::cout << "]\n";
 
-
-        // Etapa 2, Método 2: Vetorização por Transições Específicas (Top K)
+        // Etapa 2, Método 2: Vetorização por transições específicas
         Eigen::VectorXd specificVector_unnormalized = vectorizer.vectorizeSpecific(tMatrix, selectedTransitionsIndices);
         std::cout << "Etapa 2, Método 2 (Vetorização por Transições Específicas - Top " << K << "):\n  [";
-        for(int k=0; k < specificVector_unnormalized.size(); ++k) {
+        for (int k = 0; k < specificVector_unnormalized.size(); ++k) {
             std::cout << specificVector_unnormalized(k) << (k == specificVector_unnormalized.size() - 1 ? "" : ", ");
         }
         std::cout << "] (Antes da Normalização)\n";
 
-
-        // Etapa 3: Normalização do Vetor (aplicado ao resultado do Método 2)
+        // Etapa 3: Normalização do vetor (Método 2)
         Eigen::VectorXd specificVector_normalized = vectorizer.normalizeFeatureVector(specificVector_unnormalized);
         std::cout << "Etapa 3: Normalização (L2) do Vetor do Método 2:\n  [";
-         for(int k=0; k < specificVector_normalized.size(); ++k) {
+        for (int k = 0; k < specificVector_normalized.size(); ++k) {
             std::cout << specificVector_normalized(k) << (k == specificVector_normalized.size() - 1 ? "" : ", ");
         }
         std::cout << "]\n";
 
-        normalizedVectorsMethod2.push_back(specificVector_normalized); // Guarda para comparação
-
-        std::cout << "\n"; // Espaço entre documentos
+        normalizedVectorsMethod2.push_back(specificVector_normalized);
+        std::cout << "\n";
     }
 
-
-    // --- Etapa 4: Comparação entre Documentos (usando vetores normalizados do Método 2) ---
+    // Etapa 4: Comparação entre documentos
     std::cout << "--- Etapa 4: Comparação entre Documentos (Similaridade de Cosseno usando Método 2) ---\n";
     if (normalizedVectorsMethod2.size() >= 2) {
         for (size_t i = 0; i < normalizedVectorsMethod2.size(); ++i) {
             for (size_t j = i + 1; j < normalizedVectorsMethod2.size(); ++j) {
-                 double sim = vectorizer.cosineSimilarity(normalizedVectorsMethod2[i], normalizedVectorsMethod2[j]);
-                 std::cout << "  Similaridade entre Doc " << (i + 1) << " e Doc " << (j + 1)
-                           << ": " << sim << "\n";
+                double sim = vectorizer.cosineSimilarity(normalizedVectorsMethod2[i], normalizedVectorsMethod2[j]);
+                std::cout << "  Similaridade entre Doc " << (i + 1) << " e Doc " << (j + 1)
+                          << ": " << sim << "\n";
             }
         }
     } else {
@@ -903,6 +983,7 @@ int main() {
 
     return 0;
 }
+
 ```
 
 Neste código, a classe `ProbabilisticNGramVectorizer` encapsula a lógica para construir matrizes de transição (Etapa 1), gerar vetores de características através de diferentes métodos de compactação (Etapa 2) e normalizá-los (Etapa 3), além de calcular similaridades (Etapa 4). O exemplo em `main` utiliza um corpus de três documentos. A saída do programa demonstra cada etapa: exibe as probabilidades da matriz de transição, os vetores resultantes de ambos os métodos de vetorização, Completa e por Transições Específicas, incluindo a versão normalizada deste último. E, finalmente, calcula e mostra as similaridades de cosseno entre os documentos usando os vetores normalizados derivados do método de Transições Específicas.
