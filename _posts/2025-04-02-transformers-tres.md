@@ -35,7 +35,7 @@ keywords: |-
     lstm
 toc: true
 published: true
-lastmod: 2025-04-17T22:26:55.223Z
+lastmod: 2025-04-17T22:30:51.988Z
 draft: 2025-04-17T18:49:57.828Z
 slug: transformers-desvendando-modelagem-de-sequencias
 ---
@@ -192,7 +192,6 @@ Sendo assim, teremos:
     $$P(v_j \vert \text{favor}) = 0$$
 
     para todo $v_j$.
-
 
 ![diagrama mostrando as palavras como estados em um diagrama de transição](/assets/images/matriz-transicao.webp)
 _Figura 1: Exemplo de transições entre palavras em um modelo de linguagem baseado em Cadeias de Markov._{: class="legend"}
@@ -495,7 +494,7 @@ Agora, dividimos cada componente do vetor original pela norma $\sqrt{3}$:
 
 $$ \vec{v}_{D1}^{\text{norm}} = \left[ \frac{1.0}{\sqrt{3}}, \frac{1.0}{\sqrt{3}}, \frac{1.0}{\sqrt{3}} \right] $$
 
-Este vetor $\vec{v}_{D1}^{\text{norm}}$ é a representação final (normalizada) do Documento 1 no espaço vetorial definido pelas 3 transições mais frequentes do corpus. 
+Este vetor $\vec{v}_{D1}^{\text{norm}}$ é a representação final (normalizada) do Documento 1 no espaço vetorial definido pelas 3 transições mais frequentes do corpus.
 
 ##### 4. Comparação entre Documentos
 
@@ -980,7 +979,7 @@ Aplicamos os dois métodos de compactação que definimos anteriormente:
 
 2. **Vetorização por Transições Específicas**: vamos escolher as transições mais frequentes do corpus para representar o documento. Para isso, seguiremos os seguintes passos:
 
-   1. **Análise de Frequência no Corpus:** Primeiro, precisamos analisar *todo o corpus* (com `<START>`) para encontrar as transições mais frequentes.
+   1. **Análise de Frequência no Corpus:** Primeiro, precisamos analisar _todo o corpus_ (com `<START>`) para encontrar as transições mais frequentes.
 
       * Contagem de Bigramas:
           * (<START>, mostre): 4;
@@ -1007,7 +1006,7 @@ Aplicamos os dois métodos de compactação que definimos anteriormente:
       * $t_4 = (\text{meus}, \text{arquivos})$ (Freq: 3);
       * $t_5 = (\text{por}, \text{favor})$ (Freq: 2).
 
-   3. **Criação do Vetor $\vec{v}_{D1}$:** Construímos o vetor buscando as probabilidades $P(t_m \vert D1)$ para estas 5 transições *no Documento 1*:
+   3. **Criação do Vetor $\vec{v}_{D1}$:** Construímos o vetor buscando as probabilidades $P(t_m \vert D1)$ para estas $$5$ transições no Documento 1:
 
       * $P(t_1 \vert D1) = P(\text{mostre} \vert \text{<START>}, D1) = 1.0$;
       * $P(t_2 \vert D1) = P(\text{documentos} \vert \text{meus}, D1) = 1.0$;
@@ -1035,7 +1034,7 @@ Com os vetores normalizados para todos os documentos (calculados da mesma forma 
 
 ### Modelo de Linguagem Agregado do Corpus ($P_{corpus}\;$)
 
-O modelo de linguagem agregado do corpus representa as tendências médias de sequenciamento de palavras em **todo o corpus**. Este modelo, que denominamos $P_{corpus}\;$, funciona como uma linha de base (*baseline*) do uso da linguagem *específico para o conjunto de documentos analisado*.
+O modelo de linguagem agregado do corpus representa as tendências médias de sequenciamento de palavras em **todo o corpus**. Este modelo, que denominamos $P_{corpus}\;$, funciona como uma linha de base (_baseline_) do uso da linguagem _específico para o conjunto de documentos analisado_.
 
 Diferentemente das probabilidades específicas por documento $P_D(w_j  \vert  w_i)$ que refletem os padrões de um único documento $D$, o modelo agregado $P_{corpus}\;$ captura os padrões gerais de toda a coleção.
 
@@ -1126,7 +1125,6 @@ A seguir, calculamos explicitamente algumas probabilidades importantes $P_{corpu
    * Numerador: Contagem de (`por`, `favor`) = 3 (ocorre em D2, D3, D7)
    * Denominador: Contagem de `por` = 3
    * Probabilidade: $\frac{3}{3} = 1.0$
-
 
 ![Consulta de probabilidade de transição](/assets/images/modelo-agregado.webp)
 _Figura 3: Grafo direcionado com as probabilidades do modelo de linguagem agregado, ilustrando como as palavras do vocabulário se conectam com diferentes probabilidades._{: class="legend"}
@@ -1296,9 +1294,9 @@ Estas similaridades refletem bem a estrutura real dos documentos, demonstrando a
 
 #### Vetorização Usando o Modelo Agregado e Comparação por Razão de Verossimilhança
 
-Agora que temos o modelo agregado $P_{corpus}\;$, podemos usá-lo para enriquecer a representação vetorial dos documentos. Uma abordagem é usar as probabilidades do corpus $P_{corpus}\;(t_i)$ diretamente como características para as transições selecionadas $t_i$, mas isso cria um vetor de linha de base (*baseline*) que não diferencia os documentos individuais.
+Agora que temos o modelo agregado $P_{corpus}\;$, podemos usá-lo para enriquecer a representação vetorial dos documentos. Uma abordagem é usar as probabilidades do corpus $P_{corpus}\;(t_i)$ diretamente como características para as transições selecionadas $t_i$, mas isso cria um vetor de linha de base (_baseline_) que não diferencia os documentos individuais.
 
-Uma técnica mais poderosa e informativa é a **Vetorização por Razão de Verossimilhança**, que compara diretamente as probabilidades de transição específicas de um documento ($P_D$) com as probabilidades médias do corpus ($P_{corpus}\;$). Usando as *mesmas transições selecionadas* $T_{selecionadas} = \{t_1, ..., t_k\}$ que identificamos anteriormente (as $K=5$ mais frequentes no nosso exemplo estendido), o vetor para um documento $D$ é definido como a razão entre as probabilidades do documento e as do corpus para cada transição selecionada:
+Uma técnica mais poderosa e informativa é a **Vetorização por Razão de Verossimilhança**, que compara diretamente as probabilidades de transição específicas de um documento ($P_D$) com as probabilidades médias do corpus ($P_{corpus}\;$). Usando as _mesmas transições selecionadas_ $T_{selecionadas} = \{t_1, ..., t_k\}$ que identificamos anteriormente (as $K=5$ mais frequentes no nosso exemplo estendido), o vetor para um documento $D$ é definido como a razão entre as probabilidades do documento e as do corpus para cada transição selecionada:
 
 $$
 \vec{v}_D^{*} = \left[ \frac{P_D(t_1)}{P_{corpus}\;(t_1)}, \frac{P_D(t_2)}{P_{corpus}\;(t_2)}, ..., \frac{P_D(t_k)}{P_{corpus}\;(t_k)} \right]
@@ -1420,7 +1418,7 @@ $$
 \text{sim}(D_i, D_j) = \vec{v}_{Di}^{*norm} \cdot \vec{v}_{Dj}^{*norm} = \sum_{l=1}^{k} \vec{v}_{Di, l}^{*norm} \times \vec{v}_{Dj, l}^{*norm}
 $$
 
-*(A atenta leitora deve lembrar que para vetores já normalizados, o produto escalar é igual à similaridade de cosseno).*
+_(A atenta leitora deve lembrar que para vetores já normalizados, o produto escalar é igual à similaridade de cosseno)._
 
 Calculando as similaridades:
 
