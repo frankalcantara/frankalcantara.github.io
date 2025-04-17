@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 800 500"
+   version="1.1"
+   id="svg39"
+   sodipodi:docname="comparacao-vetores.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:export-filename="..\images\comparacao-vetores.webp"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs39" />
+  <sodipodi:namedview
+     id="namedview39"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.71"
+     inkscape:cx="399.12281"
+     inkscape:cy="230.11696"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg39" />
+  <!-- Fundo branco -->
+  <rect
+     x="0"
+     y="0"
+     width="800"
+     height="500"
+     fill="white"
+     id="rect1" />
+  <!-- Título e subtítulo -->
+  <text
+     x="398"
+     y="40"
+     font-family="Arial"
+     font-size="18px"
+     font-weight="bold"
+     text-anchor="middle"
+     id="text1">Comparação de Vetores Normalizados por Razão de Verossimilhança</text>
+  <text
+     x="398"
+     y="59"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="middle"
+     id="text2">Vetores para três documentos diferentes usando as top 5 transições</text>
+  <!-- Eixos -->
+  <line
+     x1="100"
+     y1="376"
+     x2="700"
+     y2="376"
+     stroke="#333333"
+     stroke-width="2"
+     id="line2" />
+  <line
+     x1="100"
+     y1="376"
+     x2="100"
+     y2="76"
+     stroke="#333333"
+     stroke-width="2"
+     id="line3" />
+  <!-- Rótulos de eixo Y -->
+  <text
+     x="95"
+     y="76"
+     font-family="Arial"
+     font-size="12px"
+     text-anchor="end"
+     id="text3">1.0</text>
+  <text
+     x="95"
+     y="151"
+     font-family="Arial"
+     font-size="12px"
+     text-anchor="end"
+     id="text4">0.75</text>
+  <text
+     x="95"
+     y="226"
+     font-family="Arial"
+     font-size="12px"
+     text-anchor="end"
+     id="text5">0.5</text>
+  <text
+     x="95"
+     y="301"
+     font-family="Arial"
+     font-size="12px"
+     text-anchor="end"
+     id="text6">0.25</text>
+  <text
+     x="95"
+     y="376"
+     font-family="Arial"
+     font-size="12px"
+     text-anchor="end"
+     id="text7">0.0</text>
+  <!-- Rótulos de eixo X (transições) -->
+  <text
+     x="162"
+     y="392"
+     font-family="Arial"
+     font-size="12px"
+     text-anchor="middle"
+     id="text8">t₁: (START, mostre)</text>
+  <text
+     x="300"
+     y="392"
+     font-family="Arial"
+     font-size="12px"
+     text-anchor="middle"
+     id="text9">t₂: (meus, documentos)</text>
+  <text
+     x="426"
+     y="392"
+     font-family="Arial"
+     font-size="12px"
+     text-anchor="middle"
+     id="text10">t₃: (mostre, me)</text>
+  <text
+     x="548"
+     y="392"
+     font-family="Arial"
+     font-size="12px"
+     text-anchor="middle"
+     id="text11">t₄: (meus, arquivos)</text>
+  <text
+     x="660"
+     y="392"
+     font-family="Arial"
+     font-size="12px"
+     text-anchor="middle"
+     id="text12">t₅: (por, favor)</text>
+  <!-- Linhas de grade -->
+  <line
+     x1="100"
+     y1="151"
+     x2="700"
+     y2="151"
+     stroke="#cccccc"
+     stroke-width="1"
+     stroke-dasharray="5, 5"
+     id="line12" />
+  <line
+     x1="100"
+     y1="226"
+     x2="700"
+     y2="226"
+     stroke="#cccccc"
+     stroke-width="1"
+     stroke-dasharray="5, 5"
+     id="line13" />
+  <line
+     x1="100"
+     y1="301"
+     x2="700"
+     y2="301"
+     stroke="#cccccc"
+     stroke-width="1"
+     stroke-dasharray="5, 5"
+     id="line14" />
+  <!-- Barras do gráfico para D₁ -->
+  <rect
+     x="140"
+     y="126"
+     width="40"
+     height="250"
+     fill="#4285f4"
+     opacity="0.8"
+     id="rect14" />
+  <rect
+     x="238"
+     y="157"
+     width="40"
+     height="219"
+     fill="#4285f4"
+     opacity="0.8"
+     id="rect15" />
+  <rect
+     x="384"
+     y="167"
+     width="40"
+     height="209"
+     fill="#4285f4"
+     opacity="0.8"
+     id="rect16" />
+  <rect
+     x="500"
+     y="400"
+     width="40"
+     height="0"
+     fill="#4285f4"
+     opacity="0.8"
+     id="rect17" />
+  <rect
+     x="620"
+     y="400"
+     width="40"
+     height="0"
+     fill="#4285f4"
+     opacity="0.8"
+     id="rect18" />
+  <!-- Barras do gráfico para D₂ -->
+  <rect
+     x="190"
+     y="146"
+     width="40"
+     height="230"
+     fill="#ea4335"
+     opacity="0.8"
+     id="rect19" />
+  <rect
+     x="310"
+     y="400"
+     width="40"
+     height="0"
+     fill="#ea4335"
+     opacity="0.8"
+     id="rect20" />
+  <rect
+     x="430"
+     y="184"
+     width="40"
+     height="192"
+     fill="#ea4335"
+     opacity="0.8"
+     id="rect21" />
+  <rect
+     x="544"
+     y="108"
+     width="40"
+     height="268"
+     fill="#ea4335"
+     opacity="0.8"
+     id="rect22" />
+  <rect
+     x="589.82458"
+     y="260.66083"
+     width="40"
+     height="115"
+     fill="#ea4335"
+     opacity="0.8"
+     id="rect23" />
+  <!-- Barras do gráfico para D₃ -->
+  <rect
+     x="240"
+     y="400"
+     width="40"
+     height="0"
+     fill="#34a853"
+     opacity="0.8"
+     id="rect24" />
+  <rect
+     x="338"
+     y="89"
+     width="40"
+     height="287"
+     fill="#34a853"
+     opacity="0.8"
+     id="rect25" />
+  <rect
+     x="480"
+     y="400"
+     width="40"
+     height="0"
+     fill="#34a853"
+     opacity="0.8"
+     id="rect26" />
+  <rect
+     x="600"
+     y="400"
+     width="40"
+     height="0"
+     fill="#34a853"
+     opacity="0.8"
+     id="rect27" />
+  <rect
+     x="635.82458"
+     y="177.66081"
+     width="40"
+     height="198"
+     fill="#34a853"
+     opacity="0.8"
+     id="rect28" />
+  <!-- Etiquetas de valor (apenas para valores >0) -->
+  <text
+     x="160"
+     y="121"
+     font-family="Arial"
+     font-size="10px"
+     text-anchor="middle"
+     fill="#000000"
+     id="text28">0.626</text>
+  <text
+     x="258"
+     y="152"
+     font-family="Arial"
+     font-size="10px"
+     text-anchor="middle"
+     fill="#000000"
+     id="text29">0.548</text>
+  <text
+     x="404"
+     y="162"
+     font-family="Arial"
+     font-size="10px"
+     text-anchor="middle"
+     fill="#000000"
+     id="text30">0.523</text>
+  <text
+     x="210"
+     y="141"
+     font-family="Arial"
+     font-size="10px"
+     text-anchor="middle"
+     fill="#000000"
+     id="text31">0.575</text>
+  <text
+     x="450"
+     y="179"
+     font-family="Arial"
+     font-size="10px"
+     text-anchor="middle"
+     fill="#000000"
+     id="text32">0.480</text>
+  <text
+     x="564"
+     y="103"
+     font-family="Arial"
+     font-size="10px"
+     text-anchor="middle"
+     fill="#000000"
+     id="text33">0.670</text>
+  <text
+     x="609.82458"
+     y="255.66083"
+     font-family="Arial"
+     font-size="10px"
+     text-anchor="middle"
+     fill="#000000"
+     id="text34">0.288</text>
+  <text
+     x="358"
+     y="84"
+     font-family="Arial"
+     font-size="10px"
+     text-anchor="middle"
+     fill="#000000"
+     id="text35">0.868</text>
+  <text
+     x="655.82458"
+     y="174.66081"
+     font-family="Arial"
+     font-size="10px"
+     text-anchor="middle"
+     fill="#000000"
+     id="text36">0.496</text>
+  <!-- Legenda -->
+  <rect
+     x="250"
+     y="404"
+     width="15"
+     height="15"
+     fill="#4285f4"
+     opacity="0.8"
+     id="rect36" />
+  <text
+     x="270"
+     y="417"
+     font-family="Arial"
+     font-size="12px"
+     text-anchor="start"
+     id="text37">D₁: &quot;mostre me meus documentos importantes&quot;</text>
+  <rect
+     x="250"
+     y="428"
+     width="15"
+     height="15"
+     fill="#ea4335"
+     opacity="0.8"
+     id="rect37" />
+  <text
+     x="270"
+     y="441"
+     font-family="Arial"
+     font-size="12px"
+     text-anchor="start"
+     id="text38">D₂: &quot;mostre me meus arquivos recentes, por favor&quot;</text>
+  <rect
+     x="250"
+     y="448"
+     width="15"
+     height="15"
+     fill="#34a853"
+     opacity="0.8"
+     id="rect38" />
+  <text
+     x="270"
+     y="461"
+     font-family="Arial"
+     font-size="12px"
+     text-anchor="start"
+     id="text39">D₃: &quot;por favor mostre meus documentos financeiros&quot;</text>
+</svg>
