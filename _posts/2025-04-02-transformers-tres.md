@@ -15,7 +15,7 @@ tags: |-
     matrizes de transição
     aprendizado de máquina
     atenção
-image: assets/images/multimatriz1.webp
+image: assets/images/transformer3.webp
 featured: false
 rating: 5
 description: Estudo dos modelos de sequência, desde as Cadeias de Markov, N-grams até os mecanismos de atenção que fundamentam os Transformers.
@@ -35,7 +35,7 @@ keywords: |-
     lstm
 toc: true
 published: true
-lastmod: 2025-04-17T21:31:32.397Z
+lastmod: 2025-04-17T22:26:55.223Z
 draft: 2025-04-17T18:49:57.828Z
 slug: transformers-desvendando-modelagem-de-sequencias
 ---
