@@ -1,15 +1,15 @@
 ---
 layout: post
-title: "Brevíssima Introdução a Ciência da Computação"
+title: Brevíssima Introdução a Ciência da Computação
 author: Frank
 categories:
-  - artigo
-  - Matemática
-  - disciplina
+    - artigo
+    - Matemática
+    - disciplina
 tags:
-  - algoritmos
-  - Matemática
-  - eng. software
+    - algoritmos
+    - Matemática
+    - eng. software
 image: ""
 featured: false
 rating: 5
@@ -20,6 +20,7 @@ keywords: ""
 slug: brevissima-introducao-a-ciencia-da-computacao
 draft: 2023-09-29T21:53:10.540Z
 published: false
+lastmod: 2025-04-18T19:03:19.335Z
 ---
 Nesta jornada exploraremos as profundezas da álgebra abstrata, começando nos conceitos de conjuntos, nos levando a uma análise de relações e funções. Este é o ponto de partida, onde lançamos as bases para uma compreensão mais profunda das estruturas matemáticas que virão a seguir, desde as simples _magmas_ até os mais complexos anéis, corpos, monads e tipos. À medida que avançarmos o terreno se tornará mais complexo e intrigante. Explorarmos categorias, morfismos e, tipos e tipos paramétricos.
 
@@ -29,7 +30,7 @@ Contrariando o senso comum, a Ciência da Computação não nasce dos esforços 
 
 ## Os Conjuntos são os Alicerces que Precisamos
 
-No século XVII, matemáticos como [John Wallis](https://en.wikipedia.org/wiki/John_Wallis) e [Isaac Newton](https://en.wikipedia.org/wiki/Isaac_Newton) já utilizavam conjuntos de maneira informal em suas obras. [Leonhard Euler](https://en.wikipedia.org/wiki/Leonhard_Euler), no século XVIII, introduziu noções primitivas de conjuntos e funções em seus trabalhos. Esta é a base. Aqui começa o estudo dos conjuntos, uma base que, se a doce leitora quiser, pode ser trilhada até a aritmética grega, mas que iria muito além das nossas ambições. Esta base forneceu a estrutura sobre a qual [Georg Cantor](https://en.wikipedia.org/wiki/Georg_Cantor) se apoiou.
+No século XVII, matemáticos como [John Wallis](https://en.wikipedia.org/wiki/John_Wallis) e [Isaac Newton](https://en.wikipedia.org/wiki/Isaac_Newton) já utilizavam conjuntos de forma informal em suas obras. [Leonhard Euler](https://en.wikipedia.org/wiki/Leonhard_Euler), no século XVIII, introduziu noções primitivas de conjuntos e funções em seus trabalhos. Esta é a base. Aqui começa o estudo dos conjuntos, uma base que, se a doce leitora quiser, pode ser trilhada até a aritmética grega, mas que iria muito além das nossas ambições. Esta base forneceu a estrutura sobre a qual [Georg Cantor](https://en.wikipedia.org/wiki/Georg_Cantor) se apoiou.
 
 O ano de 1874 assistiu [Georg Cantor](https://en.wikipedia.org/wiki/Georg_Cantor) introduzir ao mundo à teoria dos conjuntos. Primeiramente delineada em [_Über eine Eigenschaft des Inbegriffes aller reellen algebraischen Zahlen_](https://link.springer.com/chapter/10.1007/978-3-7091-9516-1_2) (Sobre uma propriedade do conjunto de todos os números algébricos reais), o trabalho impactou fortemente o mundo da matemática a partir do [Journal de Crelle](https://www.degruyter.com/journal/key/crll/html). Em 1879, Cantor solidificou suas ideias espalhando-as através de seis artigos reveladores, impactantes e controversos no [Mathematische Annalen](https://www.springer.com/journal/208). Essas obras marcariam o terreno fértil para o desenvolvimento da matemática moderna.
 
@@ -65,7 +66,7 @@ A matemática, como um navio resistente, continua sua jornada através dos mares
 
 1. **Axioma da Extensão**: para todos os conjuntos $A$ e $B$, $A = B$ se e somente se para todo $x$, $x \in A$ se e somente se $x \in B$. O que pode ser expresso com mais formalidade por:
      $$ \forall u(u \in X = u \in Y) \Rightarrow X = Y $$
-   - Este axioma ajuda a definir a igualdade de conjuntos de uma maneira clara e precisa. É fundamental para evitar ambiguidades e inconsistências ao trabalhar com conjuntos. 
+   - Este axioma ajuda a definir a igualdade de conjuntos de uma forma clara e precisa. É fundamental para evitar ambiguidades e inconsistências ao trabalhar com conjuntos. 
    - **Exemplo**: Se $A = \{1, 2\}$ e $B = \{1, 2\}$, então $A = B$.
    - Sem o axioma da extensão, poderia haver ambiguidade na representação de conjuntos. Por exemplo, os conjuntos $A = \{1, 2, 3\}$ e $B = \{3, 2, 1\}$ poderiam ser considerados diferentes devido à ordem dos elementos. Além disso, sem uma definição clara de igualdade de conjuntos, poderia haver inconsistências ao definir subconjuntos. Se tivermos um conjunto $C = \{1, 2\}$ e um conjunto $D = \{2, 1\}$, algum inocente poderia argumentar que $C$ não é um subconjunto de $D$ devido à diferença na ordem dos elementos. Na ausência do axioma da extensão, operações de conjuntos como união e interseção poderiam resultar em inconsistências. A união de $A = \{1, 2\}$ e $B = \{2, 1\}$ poderia ser questionada e alguns duvidariam se a união resultaria em um conjunto com dois ou quatro elementos.
 
@@ -80,7 +81,7 @@ A matemática, como um navio resistente, continua sua jornada através dos mares
 
 4. **Axioma da União**: para todo conjunto $X$, existe um conjunto $Y$ tal que para todo $x$, $x \in Y$ se e somente se existe um conjunto $Z$ tal que $Z \in X$ e $x \in Z$. Expresso por:
      $$ \forall X \exists Y \forall u(u \in Y = \exists z(z \in X \wedge u \in z)) $$
-   - Este axioma facilita a união de conjuntos. É uma operação fundamental na teoria dos conjuntos, permitindo a combinação de conjuntos de uma maneira estruturada.
+   - Este axioma facilita a união de conjuntos. É uma operação fundamental na teoria dos conjuntos, permitindo a combinação de conjuntos de uma forma estruturada.
    - **Exemplo**: Se $X = \{\{1\}, \{2\}\}$, então $Y = \{1, 2\}$.
 
 5. **Axioma do Conjunto Potência**: para todo conjunto $X$, existe um conjunto $Y$ tal que para todo $Z$, $Z \in Y$ se e somente se $Z \subseteq X$. Que pode ser escrito formalmente por:
@@ -95,7 +96,7 @@ A matemática, como um navio resistente, continua sua jornada através dos mares
   
 7. **Axioma da Fundação**: todo conjunto $X$ é bem fundado, o que significa que não existe uma sequência infinita descendente de elementos em $X$. Que pode ser escrito como:
      $$ \forall S[S \neq \emptyset \Rightarrow (\exists x \in S)S \cap x = \emptyset] $$
-   Este axioma evita a formação de loops infinitos e estruturas recursivas sem fim dentro dos conjuntos. Este axioma afirma que todo conjunto $X$ é bem fundado, o que significa que não existe uma sequência infinita descendente de elementos em $X$. Para entender melhor, considere que estamos tentando formar uma sequência infinita descendente de conjuntos, onde cada conjunto contém o próximo na sequência, como $x_1 \in x_2 \in x_3 \in \ldots$. O Axioma da Fundação proíbe a existência de tal sequência, garantindo que não podemos ter uma cadeia infinita de conjuntos aninhados dessa maneira. Este axioma garante que os conjuntos têm uma _base_ ou _fundação_, prevenindo a formação de conjuntos que não têm um elemento _mínimo_, o que poderia levar a contradições, como o Paradoxo de Russell.
+   Este axioma evita a formação de loops infinitos e estruturas recursivas sem fim dentro dos conjuntos. Este axioma afirma que todo conjunto $X$ é bem fundado, o que significa que não existe uma sequência infinita descendente de elementos em $X$. Para entender melhor, considere que estamos tentando formar uma sequência infinita descendente de conjuntos, onde cada conjunto contém o próximo na sequência, como $x_1 \in x_2 \in x_3 \in \ldots$. O Axioma da Fundação proíbe a existência de tal sequência, garantindo que não podemos ter uma cadeia infinita de conjuntos aninhados dessa forma. Este axioma garante que os conjuntos têm uma _base_ ou _fundação_, prevenindo a formação de conjuntos que não têm um elemento _mínimo_, o que poderia levar a contradições, como o Paradoxo de Russell.
    - **Exemplo**: Não é possível ter uma sequência como $x_1 \in x_2 \in x_3 \in \ldots$ em um conjunto.
 
 8. **Axioma da Infinitude**: existe um conjunto $X$ tal que $\emptyset \in X$ e para todo $x \in X$, $x \cup \{x\} \in X$. Formalmente teremos:
@@ -311,7 +312,7 @@ Com isso entramos no reino das relações, o trazemos para a fria teoria dos con
 
 Na teoria dos conjuntos de Zermelo-Fraenkel, uma relação é definida como um conjunto de pares ordenados. A relação deve ser vista como uma conexão entre elementos de dois conjuntos. Ainda que o segundo destes conjuntos seja o próprio primeiro conjunto. E, neste caso, onde relacionamos os conjuntos com elementos do mesmo conjunto, teremos uma relação endógina.
 
-Independentemente dos conjuntos envolvidos, podemos definir uma relação $R$ de um conjunto $A$ para um conjunto $B$ (denotado por $R \subseteq A \times B$) como um subconjunto resultado do produto cartesiano de $A$ e $B$. A descrição formal de uma relação $R$ pode ser expressa da seguinte maneira:
+Independentemente dos conjuntos envolvidos, podemos definir uma relação $R$ de um conjunto $A$ para um conjunto $B$ (denotado por $R \subseteq A \times B$) como um subconjunto resultado do produto cartesiano de $A$ e $B$. A descrição formal de uma relação $R$ pode ser expressa da seguinte forma:
 
 **Definição Formal**: a relação $R$ de $A$ em $B$ é um conjunto de pares ordenados onde o primeiro elemento do par pertence ao conjunto $A$ e o segundo elemento do par pertence ao conjunto $B$:
 
@@ -461,7 +462,7 @@ Veremos a utilidade do estudo e aplicação de _magmas_ fora da álgebra pura, q
 
 2. **Ciência da Computação**: no campo da ciência da computação, a teoria de autômatos e linguagens formais muitas vezes utiliza conceitos de álgebra abstrata. Aqui, os _magmas_ podem surgir no estudo de operações sobre strings ou outras estruturas de dados.
 
-3. **Física**: especialmente na teoria quântica de campos, as estruturas algébricas podem desempenhar um papel significativo. Os _magmas_ podem surgir como uma maneira de explorar operações binárias em espaços de estados físicos ou em outras estruturas encontradas na física teórica.
+3. **Física**: especialmente na teoria quântica de campos, as estruturas algébricas podem desempenhar um papel significativo. Os _magmas_ podem surgir como uma forma de explorar operações binárias em espaços de estados físicos ou em outras estruturas encontradas na física teórica.
 
 4. **Matemática Discreta**: os _magmas_ podem ser usados para estudar operações binárias em conjuntos finitos, fornecendo insights sobre a estrutura e propriedades desses conjuntos.
 
@@ -507,7 +508,7 @@ Os _magmas_ não necessitam satisfazer nenhuma propriedade particular além do f
 
 2. **Conjunto das matrizes $2 \times 2$ com uma operação não comutativa e não associativa**:
 
-   Considere o conjunto de todas as matrizes $2 \times 2$ sobre os números reais, e defina uma nova operação binária $\star$ da seguinte maneira:
+   Considere o conjunto de todas as matrizes $2 \times 2$ sobre os números reais, e defina uma nova operação binária $\star$ da seguinte forma:
 
    $$ A \star B = AB - BA $$
 

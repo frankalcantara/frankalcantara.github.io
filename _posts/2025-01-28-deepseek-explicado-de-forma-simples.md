@@ -23,7 +23,7 @@ keywords: |-
     MoE 
 toc: true
 published: true
-lastmod: 2025-04-08T19:52:34.458Z
+lastmod: 2025-04-18T19:03:19.385Z
 slug: deepseek-explicado-de-forma-simples
 ---
 
@@ -47,7 +47,7 @@ O que realmente me interessa, já que não tenho acesso aos dados, neste modelo 
 
 Uma das inovações do DeepSeek-R1 é a adoção da *Group Robust Preference Optimization* (**GRPO**), introduzida no artigo DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models sobre o trabalho de Schulman et.al de 2017 *Group Robust Preference Optimization in Reward-free RLHF*. Essa técnica substitui métodos tradicionais de otimização de políticas, como o *Proximal Policy Optimization* (PPO), apresentado por Schulman et al. em *Proximal Policy Optimization Algorithms*. Simplificando, a **GRPO** permite que o modelo aprenda de forma mais eficaz comparando seu desempenho com o de outros modelos em um grupo, otimizando suas ações para alcançar melhores resultados em tarefas de raciocínio matemático. Essa abordagem torna o processo de treinamento mais eficiente e escalável se comparado com o PPO.
 
-Além da **GRPO**, o DeepSeek-R1 incorpora a *Multi-head Latent Attention* (MLA), uma técnica introduzida no DeepSeek-V3, que, por sua vez, foi inspirada no trabalho de Kitaev, Kaiser e Levskaya em *Reformer: The Efficient Transformer*. A MLA aborda as ineficiências computacionais e de memória associadas ao processamento de sequências longas, especialmente em modelos de linguagem com atenção multi-cabeça. Em termos simples podemos dizer que a MLA melhora a eficiência do modelo ao simplificar a maneira como ele processa as informações. Ela projeta as matrizes *Key-Query-Value* (KQV) em um espaço latente de menor dimensão, reduzindo a complexidade computacional e melhorando a eficiência do modelo.
+Além da **GRPO**, o DeepSeek-R1 incorpora a *Multi-head Latent Attention* (MLA), uma técnica introduzida no DeepSeek-V3, que, por sua vez, foi inspirada no trabalho de Kitaev, Kaiser e Levskaya em *Reformer: The Efficient Transformer*. A MLA aborda as ineficiências computacionais e de memória associadas ao processamento de sequências longas, especialmente em modelos de linguagem com atenção multi-cabeça. Em termos simples podemos dizer que a MLA melhora a eficiência do modelo ao simplificar a forma como ele processa as informações. Ela projeta as matrizes *Key-Query-Value* (KQV) em um espaço latente de menor dimensão, reduzindo a complexidade computacional e melhorando a eficiência do modelo.
 
 Neste momento você tem duas escolhas claras: sentar em um lugar mais confortável já que vai demorar, ou ir fazer scroll no instagram.
 
@@ -160,7 +160,7 @@ Nesta equação:
 
 Este tapinha na mão, perda adicional de balanceamento, age como um regulador, penalizando o modelo quando ele desenvolve preferências muito fortes por certos especialistas. Na verdade, o sistema busca minimizar $L_{balance}$, o que naturalmente leva a uma distribuição mais uniforme do trabalho entre os especialistas.
 
-O objetivo final é garantir que todos os especialistas sejam utilizados de forma aproximadamente igual ao longo do tempo, evitando gargalos e maximizando a eficiência. Continuando nossa analogia, é como ter um bom administrador hospitalar que garante que todos os médicos estejam contribuindo de maneira equilibrada para o funcionamento do hospital. Nem que ele tenha que chamar a atenção de alguém aqui e ali.
+O objetivo final é garantir que todos os especialistas sejam utilizados de forma aproximadamente igual ao longo do tempo, evitando gargalos e maximizando a eficiência. Continuando nossa analogia, é como ter um bom administrador hospitalar que garante que todos os médicos estejam contribuindo de forma equilibrada para o funcionamento do hospital. Nem que ele tenha que chamar a atenção de alguém aqui e ali.
 
 Quando esta perda de balanceamento é combinada com a função principal do MoE:
 

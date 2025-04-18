@@ -3,13 +3,13 @@ layout: post
 title: Cálculo Simplificado
 author: Frank
 categories:
-  - matemática
+    - matemática
 tags:
-  - matemática
-  - cálculo
-  - álgebra
-  - exercícios
-  - problemas resolvidos
+    - matemática
+    - cálculo
+    - álgebra
+    - exercícios
+    - problemas resolvidos
 image: assets/images/prog_dynamic.webp
 featured: false
 rating: 5
@@ -21,7 +21,7 @@ toc: true
 published: false
 slug: calculo-simplificado
 draft: 2024-07-06T19:30:40.256Z
-lastmod: 2024-10-21T20:22:25.183Z
+lastmod: 2025-04-18T19:03:19.319Z
 ---
 
 O livro **Calculus Made Easy** de [SILVANUS P. THOMPSON](https://en.wikipedia.org/wiki/Silvanus_P._Thompson) foi colocado em domínio público, tanto no Brasil quanto nos EUA. Este é um dos melhores livros introdutórios de cálculo já escrito. Simples, direto e abrangente. Sem nenhuma modéstia, ou vergonha na cara, escolhi este livro para tradução, atualização e expansão. Na esperança de criar um material atualizado para o ensino e fomento do cálculo entre alguns estudantes de língua portuguesa. Vou traduzir, atualizar, comentar e expandir o conteúdo. Contudo, como o livro é ótimo, algumas coisas precisam ser mantidas o mais original possível por curiosidade e pelo valor cultural. Um bom exemplo é a brincadeira da capa:
@@ -232,7 +232,7 @@ Estimada leitora, é crucial que você não confunda $dx$ com o produto de $d$ e
 
 Coeficientes diferenciais de segunda ordem, que serão estudados mais tarde, serão representados: $\frac{d^2y}{dx^2}$, o que é lido "de-dois-ipsilon de-xis-quadrado", significando que operação de diferenciar $y$ em relação a $x$ foi, ou tem que ser, feita duas vezes consecutivas. Esta é a notação desenvolvida por Leibnitz.
 
-Outra maneira de indicar que uma função foi diferenciada é colocando uma aspa simples depois do símbolo da função. Assim, se $y = F(x)$, o que significa que $y$ é uma função não especificada em $x$, podemos escrever $f'(x)$ em vez de $\frac{d(f(x))}{dx}$, ou ainda $\frac{d}{dy}f(x)$, que eu gosto mais porque separa o coeficiente diferencial. Da mesma forma, podemos usar $f''(x)$ para significar que a função original $f(x)$ foi, ou terá que ser, diferenciada duas vezes consecutivas em relação a $x$.
+Outra forma de indicar que uma função foi diferenciada é colocando uma aspa simples depois do símbolo da função. Assim, se $y = F(x)$, o que significa que $y$ é uma função não especificada em $x$, podemos escrever $f'(x)$ em vez de $\frac{d(f(x))}{dx}$, ou ainda $\frac{d}{dy}f(x)$, que eu gosto mais porque separa o coeficiente diferencial. Da mesma forma, podemos usar $f''(x)$ para significar que a função original $f(x)$ foi, ou terá que ser, diferenciada duas vezes consecutivas em relação a $x$.
 
 Eu vou usar as notações $\frac{d}{dx}f(x)$, $\frac{dy}{dx}f(x)$ e $f'(x)$ livremente. Para que a leitora se sinta confortável com qualquer notação.
 
@@ -422,7 +422,7 @@ $$
 \frac{dy}{dx} = 5x^4,
 $$
 
-Exatamente como vimos observando a Tabela 4.1. Seguindo logicamente nossa observação, devemos concluir que, se quisermos lidar com qualquer potência, que chamaremos de $n$, poderíamos abordá-la da mesma maneira e seguir a mesma regra. Vamos fazer $y = x^n$ para generalizar, aplicando de forma matemática a regra que inferimos, teremos:
+Exatamente como vimos observando a Tabela 4.1. Seguindo logicamente nossa observação, devemos concluir que, se quisermos lidar com qualquer potência, que chamaremos de $n$, poderíamos abordá-la da mesma forma e seguir a mesma regra. Vamos fazer $y = x^n$ para generalizar, aplicando de forma matemática a regra que inferimos, teremos:
 
 $$
 \frac{dy}{dx} = nx^{(n-1)}.
@@ -1471,7 +1471,7 @@ Quarta diferenciação, $f''''(x) = n(n-1)(n-2)(n-3)x^{n-4}$.
 
 etc., etc.
 
-Mas esta não é a única maneira de indicar diferenciações sucessivas. Pois, se a função original for $y = f(x)$;
+Mas esta não é a única forma de indicar diferenciações sucessivas. Pois, se a função original for $y = f(x)$;
 
 diferenciando uma vez, obteremos:
 
@@ -1556,7 +1556,7 @@ $$
 
 $$
 
-De maneira semelhante, se $y = \phi(x) = 3x(x^2 - 4)$,
+De forma semelhante, se $y = \phi(x) = 3x(x^2 - 4)$,
 
 Primeira derivada:
 
@@ -2216,7 +2216,7 @@ $$
 
 Assim, encontramos a derivada da função original! A regra da cadeia nos permite "quebrar" funções compostas em partes mais simples, usando uma variável intermediária, e derivá-las passo a passo. E isso é tudo, a mágica está feita.
 
-Quando encontrarmos uma função complicada, que não parece fácil derivar usando as regras mais simples, podemos adotar uma abordagem alternativa. Primeiramente, substituímos esta função por uma nova variável, como $u$, $v$, ou qualquer outra de nossa preferência. Em seguida, derivamos em relação a esta nova variável. Após obter este resultado inicial, substituímos a função original no resultado da primeira derivação. O próximo passo será derivar em relação à variável inicial, seja ela $x$ ou qualquer outra. Por fim, aplicamos a Regra da Cadeia para obter a derivada final. Este método, conhecido como substituição ou mudança de variável, nos permite lidar com funções complexas de maneira mais sistemática e compreensível.
+Quando encontrarmos uma função complicada, que não parece fácil derivar usando as regras mais simples, podemos adotar uma abordagem alternativa. Primeiramente, substituímos esta função por uma nova variável, como $u$, $v$, ou qualquer outra de nossa preferência. Em seguida, derivamos em relação a esta nova variável. Após obter este resultado inicial, substituímos a função original no resultado da primeira derivação. O próximo passo será derivar em relação à variável inicial, seja ela $x$ ou qualquer outra. Por fim, aplicamos a Regra da Cadeia para obter a derivada final. Este método, conhecido como substituição ou mudança de variável, nos permite lidar com funções complexas de forma mais sistemática e compreensível.
 
 Tendo entendido o processo, podemos generalizar a Regra da Cadeia.
 

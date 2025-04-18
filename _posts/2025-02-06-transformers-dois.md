@@ -29,7 +29,7 @@ keywords: |-
     embeddings
 toc: true
 published: true
-lastmod: 2025-04-17T23:18:07.813Z
+lastmod: 2025-04-18T19:03:19.412Z
 ---
 
 Neste artigo aprenderemos as técnicas de vetorização mais básicas, como a frequência de termos e o modelo *Bag of Words* (BoW). Vamos discutir como essas técnicas são usadas para representar textos como vetores numéricos, permitindo que os computadores processem e analisem linguagem natural.
@@ -760,7 +760,7 @@ Uma forma interessante de entender o **TF-IDF** é dividir o algoritmo em suas p
 
 #### Term Frequency (TF)
 
-O cálculo da frequência de termos, ou **Term Frequency (TF)**, pode ser realizado de diferentes maneiras, cada uma com suas próprias características e aplicações.
+O cálculo da frequência de termos, ou **Term Frequency (TF)**, pode ser realizado de diferentes formas, cada uma com suas próprias características e aplicações.
 
 A forma mais simples de calcular o **TF** é usar a frequência bruta, $raw$, também chamada de contagem absoluta:
 
@@ -917,7 +917,7 @@ Esta propriedade de compressão do logaritmo é particularmente valiosa em proce
 >
 >No contexto do processamento de linguagem natural e, especificamente, no algoritmo **TF-IDF**, essa lei se torna relevante ao justificar a aplicação do logaritmo na frequência dos termos (**TF**) e na frequência inversa nos documentos (**IDF**). Assim como a percepção humana não escala linearmente com a intensidade da luz, também não interpretamos a importância de uma palavra em um texto de forma linear com sua frequência bruta.
 >
->Por exemplo, uma luz com $300$ lumens não será percebida como três vezes mais brilhante que uma com $100$ lumens. De maneira análoga, uma palavra que aparece $3$ vezes em um documento não será necessariamente considerada três vezes mais importante semanticamente do que uma palavra que aparece apenas uma vez. A aplicação do logaritmo na frequência dos termos e documentos no **TF-IDF** busca modelar essa percepção humana não linear da importância, dando menos peso a aumentos lineares na frequência e enfatizando a presença da palavra, mesmo que não seja extremamente frequente.
+>Por exemplo, uma luz com $300$ lumens não será percebida como três vezes mais brilhante que uma com $100$ lumens. De forma análoga, uma palavra que aparece $3$ vezes em um documento não será necessariamente considerada três vezes mais importante semanticamente do que uma palavra que aparece apenas uma vez. A aplicação do logaritmo na frequência dos termos e documentos no **TF-IDF** busca modelar essa percepção humana não linear da importância, dando menos peso a aumentos lineares na frequência e enfatizando a presença da palavra, mesmo que não seja extremamente frequente.
 >
 >Embora o trabalho de [Weber](https://www.britannica.com/biography/Ernst-Heinrich-Weber)[^9] tenha dado início a pequisas que levou a Lei Weber-Fechner. [Gustav Theodor Fechner](https://www.britannica.com/biography/Gustav-Fechner) expandiu e formalizou as ideias de [Ernst Heinrich Weber](https://www.britannica.com/biography/Ernst-Heinrich-Weber) em sua obra posterior[^10]. A formulação matemática mais completa e a denominação da lei são geralmente atribuídas a Fechner.
 >
@@ -1051,7 +1051,7 @@ $$
 
 que usa a norma euclidiana do documento como fator de normalização, sendo particularmente útil quando trabalhamos com vetores em espaços de alta dimensão. A escolha entre estas diferentes formulações geralmente depende do domínio específico e das características do corpus, sendo comum em sistemas modernos o uso de várias formulações em conjunto, combinadas através de técnicas de *ensemble* ou votação ponderada.
 
->Técnicas de *ensemble* e votação ponderada são métodos de combinação de diferentes abordagens para obter resultados mais robustos e confiáveis. Imagine um grupo de especialistas médicos analisando um caso complexo. Cada um tem sua expertise e perspectiva única, e a decisão final considera a opinião de todos, dando mais peso aos especialistas com mais experiência em aspectos específicos do caso. No contexto do **TF-IDF**, estas técnicas funcionam de maneira similar: diferentes fórmulas de **TF** são calculadas para o mesmo texto (como $\text{log}$, $\text{aug}$, etc.), e o resultado final é uma combinação ponderada desses valores. Por exemplo, podemos dar mais peso ao $\text{aug}$ quando trabalhamos com documentos de tamanhos muito diferentes, e mais peso ao $\text{log}$ quando lidamos com palavras de frequências muito variadas. Esta abordagem é particularmente poderosa porque combina as vantagens de diferentes formulações, compensando as limitações individuais de cada método e produzindo resultados mais estáveis e precisos em uma variedade maior de situações.
+>Técnicas de *ensemble* e votação ponderada são métodos de combinação de diferentes abordagens para obter resultados mais robustos e confiáveis. Imagine um grupo de especialistas médicos analisando um caso complexo. Cada um tem sua expertise e perspectiva única, e a decisão final considera a opinião de todos, dando mais peso aos especialistas com mais experiência em aspectos específicos do caso. No contexto do **TF-IDF**, estas técnicas funcionam de forma similar: diferentes fórmulas de **TF** são calculadas para o mesmo texto (como $\text{log}$, $\text{aug}$, etc.), e o resultado final é uma combinação ponderada desses valores. Por exemplo, podemos dar mais peso ao $\text{aug}$ quando trabalhamos com documentos de tamanhos muito diferentes, e mais peso ao $\text{log}$ quando lidamos com palavras de frequências muito variadas. Esta abordagem é particularmente poderosa porque combina as vantagens de diferentes formulações, compensando as limitações individuais de cada método e produzindo resultados mais estáveis e precisos em uma variedade maior de situações.
 >
 >Quase deixo passar! A palavra *ensemble* vem do francês e significa conjunto, ou em conjunto. No contexto de análise de dados e aprendizado de máquina, uma técnica de *ensemble* refere-se a um método que combina múltiplos modelos ou abordagens diferentes para criar uma solução mais robusta. Como uma orquestra que, não por coincidência, também usa a palavra *ensemble*.
 >

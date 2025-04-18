@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 800 500"
+   version="1.1"
+   id="svg35"
+   sodipodi:docname="figura-5-abstrata.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:export-filename="..\images\Votosabstrata.webp"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview35"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.71"
+     inkscape:cx="367.54386"
+     inkscape:cy="238.30409"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg35" />
+  <!-- Fundo e título -->
+  <rect
+     width="800"
+     height="500"
+     fill="#f8f9fa"
+     rx="10"
+     ry="10"
+     id="rect1" />
+  <text
+     x="400.58481"
+     y="51.695908"
+     font-family="Arial, sans-serif"
+     font-size="22px"
+     text-anchor="middle"
+     font-weight="bold"
+     id="text1">Modelo Conceitual Baseado em Pares com Saltos</text>
+  <!-- Frases de exemplo -->
+  <rect
+     x="67.428589"
+     y="64.036781"
+     width="648.76855"
+     height="59.119427"
+     fill="#f0f5ff"
+     stroke="#7cb8ff"
+     stroke-width="1.76947"
+     rx="4.6340609"
+     ry="4.222816"
+     id="rect2" />
+  <text
+     x="398.83041"
+     y="87.397667"
+     font-family="Arial, sans-serif"
+     font-size="14px"
+     text-anchor="middle"
+     id="text2"
+     style="font-size:14px;font-family:Arial, sans-serif;text-anchor:middle"><tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:14px;font-family:Sans;-inkscape-font-specification:'Sans, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   id="tspan36">Frase 1</tspan>: &quot;Verifique o log do programa e descubra se ele foi executado, por favor.&quot;</text>
+  <text
+     x="371.34503"
+     y="108.88889"
+     font-family="Arial, sans-serif"
+     font-size="14px"
+     text-anchor="middle"
+     id="text3"
+     style="font-size:14px;font-family:Arial, sans-serif;text-anchor:middle"><tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:14px;font-family:Sans;-inkscape-font-specification:'Sans, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   id="tspan35">Frase 2</tspan>: &quot;Verifique o log da bateria e descubra se ela acabou, por favor.&quot;</text>
+  <!-- Estrutura Conceitual -->
+  <rect
+     x="64.953819"
+     y="132.61464"
+     width="650.20935"
+     height="279.91693"
+     fill="#ffffff"
+     stroke="#cccccc"
+     stroke-width="1.97454"
+     rx="5.4184113"
+     ry="4.9985166"
+     id="rect3" />
+  <!-- Divisão em blocos -->
+  <line
+     x1="445.32162"
+     y1="131.98831"
+     x2="445.32162"
+     y2="411.98828"
+     stroke="#555555"
+     stroke-width="2"
+     id="line3" />
+  <!-- Cabeçalhos -->
+  <text
+     x="265.93567"
+     y="159.91229"
+     font-family="Arial, sans-serif"
+     font-size="18px"
+     text-anchor="middle"
+     font-weight="bold"
+     id="text4">Características (Pares)</text>
+  <text
+     x="580.26312"
+     y="158.1579"
+     font-family="Arial, sans-serif"
+     font-size="18px"
+     text-anchor="middle"
+     font-weight="bold"
+     id="text5">Candidatas à Próxima Palavra</text>
+  <!-- Pares formados com todas as palavras anteriores -->
+  <text
+     font-family="Arial, sans-serif"
+     font-size="16px"
+     text-anchor="middle"
+     dy="-20"
+     font-style="italic"
+     id="text6"
+     x="269.47369"
+     y="382.10526">Palavra Atual</text>
+  <circle
+     cx="270.05847"
+     cy="306.66666"
+     r="40"
+     fill="#d4e6f1"
+     stroke="#3498db"
+     stroke-width="2"
+     id="circle6" />
+  <text
+     font-family="Arial, sans-serif"
+     font-size="12.3596px"
+     text-anchor="middle"
+     font-weight="bold"
+     id="text7"
+     x="288.96954"
+     y="292.16266"
+     transform="scale(0.93660119,1.0676903)"
+     style="stroke-width:0.882827">&quot;executado&quot;</text>
+  <circle
+     cx="151.34503"
+     cy="205.02925"
+     r="30"
+     fill="#f2d7d5"
+     stroke="#e74c3c"
+     stroke-width="1.5"
+     id="circle7" />
+  <text
+     x="152.51463"
+     y="210.8772"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     text-anchor="middle"
+     id="text8">&quot;verifique&quot;</text>
+  <circle
+     cx="169.64912"
+     cy="276.66666"
+     r="25"
+     fill="#f2d7d5"
+     stroke="#e74c3c"
+     stroke-width="1.5"
+     id="circle8" />
+  <text
+     x="169.64912"
+     y="280.76022"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     text-anchor="middle"
+     id="text9">&quot;o&quot;</text>
+  <circle
+     cx="233.62573"
+     cy="208.85965"
+     r="25"
+     fill="#f2d7d5"
+     stroke="#e74c3c"
+     stroke-width="1.5"
+     id="circle9" />
+  <text
+     x="231.87135"
+     y="211.78363"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     text-anchor="middle"
+     id="text10">&quot;log&quot;</text>
+  <circle
+     cx="304.15204"
+     cy="213.21638"
+     r="25"
+     fill="#f2d7d5"
+     stroke="#e74c3c"
+     stroke-width="1.5"
+     id="circle10" />
+  <text
+     x="302.39764"
+     y="217.30994"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     text-anchor="middle"
+     id="text11">&quot;do&quot;</text>
+  <circle
+     cx="388.77191"
+     cy="226.14037"
+     r="35"
+     fill="#d5f5e3"
+     stroke="#2ecc71"
+     stroke-width="3"
+     id="circle11" />
+  <text
+     x="389.9415"
+     y="229.64912"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     text-anchor="middle"
+     font-weight="bold"
+     id="text12">&quot;programa&quot;</text>
+  <circle
+     cx="171.92982"
+     cy="347.25146"
+     r="25"
+     fill="#f2d7d5"
+     stroke="#e74c3c"
+     stroke-width="1.5"
+     id="circle12" />
+  <text
+     x="170.76024"
+     y="351.34503"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     text-anchor="middle"
+     id="text13">&quot;ele&quot;</text>
+  <circle
+     cx="374.15204"
+     cy="329.23975"
+     r="25"
+     fill="#f2d7d5"
+     stroke="#e74c3c"
+     stroke-width="1.5"
+     id="circle13" />
+  <text
+     x="374.15207"
+     y="333.91812"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     text-anchor="middle"
+     id="text14">&quot;foi&quot;</text>
+  <line
+     x1="169.90654"
+     y1="226.47673"
+     x2="237.4619"
+     y2="280.5408"
+     stroke="#666666"
+     stroke-width="1.01352"
+     stroke-dasharray="4, 2"
+     id="line14" />
+  <line
+     x1="195.81842"
+     y1="281.5896"
+     x2="229.77946"
+     y2="297.03519"
+     stroke="#666666"
+     stroke-width="0.749678"
+     stroke-dasharray="4, 2"
+     id="line15" />
+  <line
+     x1="239.72217"
+     y1="231.532"
+     x2="255.19012"
+     y2="270.54401"
+     stroke="#666666"
+     stroke-width="0.776811"
+     stroke-dasharray="4, 2"
+     id="line16" />
+  <line
+     x1="297.45267"
+     y1="236.49266"
+     x2="279.09702"
+     y2="269.94009"
+     stroke="#666666"
+     stroke-width="0.758669"
+     stroke-dasharray="4, 2"
+     id="line17" />
+  <line
+     x1="358.09058"
+     y1="245.58287"
+     x2="307.17261"
+     y2="288.39377"
+     stroke="#2ecc71"
+     stroke-width="1.39509"
+     id="line18" />
+  <line
+     x1="196.29971"
+     y1="338.81171"
+     x2="231.49577"
+     y2="319.98245"
+     stroke="#666666"
+     stroke-width="0.682621"
+     stroke-dasharray="4, 2"
+     id="line19" />
+  <line
+     x1="348.81821"
+     y1="330.98349"
+     x2="306.36554"
+     y2="322.53384"
+     stroke="#666666"
+     stroke-width="1.04593"
+     stroke-dasharray="4, 2"
+     id="line20" />
+  <text
+     x="125.32164"
+     y="245.61403"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     text-anchor="middle"
+     font-style="italic"
+     id="text20">(verifique, executado)</text>
+  <text
+     x="159.0351"
+     y="313.88889"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     text-anchor="middle"
+     font-style="italic"
+     id="text21">(o, executado)</text>
+  <text
+     x="228.74269"
+     y="179.19298"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     text-anchor="middle"
+     font-style="italic"
+     id="text22">(log, executado)</text>
+  <text
+     x="310.78946"
+     y="184.21053"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     text-anchor="middle"
+     font-style="italic"
+     id="text23">(do, executado)</text>
+  <text
+     x="366.8421"
+     y="273.42105"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     text-anchor="middle"
+     font-style="italic"
+     font-weight="bold"
+     id="text24">(programa, executado)</text>
+  <text
+     x="179.18129"
+     y="382.80701"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     text-anchor="middle"
+     font-style="italic"
+     id="text25">(ele, executado)</text>
+  <text
+     x="267.7193"
+     y="404.5029"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     text-anchor="middle"
+     font-style="italic"
+     id="text26">(foi, executado)</text>
+  <!-- Candidatas a próxima palavra -->
+  <circle
+     cx="586.54968"
+     cy="287.36841"
+     r="40"
+     fill="#fadbd8"
+     stroke="#e74c3c"
+     stroke-width="2"
+     id="circle26" />
+  <text
+     x="586.54968"
+     y="291.46198"
+     font-family="Arial, sans-serif"
+     font-size="14px"
+     text-anchor="middle"
+     font-weight="bold"
+     id="text27">&quot;por&quot;</text>
+  <circle
+     cx="639.59064"
+     cy="211.63744"
+     r="35"
+     fill="#fbf0fc"
+     stroke="#8e44ad"
+     stroke-width="1.5"
+     id="circle27" />
+  <text
+     x="638.42102"
+     y="219.23976"
+     font-family="Arial, sans-serif"
+     font-size="14px"
+     text-anchor="middle"
+     id="text28">&quot;favor&quot;</text>
+  <circle
+     cx="523.04095"
+     cy="208.18713"
+     r="30"
+     fill="#fef9e7"
+     stroke="#f1c40f"
+     stroke-width="1.5"
+     id="circle28" />
+  <text
+     x="521.87134"
+     y="216.37427"
+     font-family="Arial, sans-serif"
+     font-size="14px"
+     text-anchor="middle"
+     id="text29">&quot;isso&quot;</text>
+  <circle
+     cx="533.1579"
+     cy="369.00583"
+     r="25"
+     fill="#eaeded"
+     stroke="#7f8c8d"
+     stroke-width="1.5"
+     id="circle29" />
+  <text
+     x="534.91223"
+     y="371.92981"
+     font-family="Arial, sans-serif"
+     font-size="14px"
+     text-anchor="middle"
+     id="text30">&quot;...&quot;</text>
+  <line
+     x1="467.7193"
+     y1="289.41522"
+     x2="541.59167"
+     y2="289.41522"
+     stroke="#2ecc71"
+     stroke-width="3.84376"
+     marker-end="url(#arrowhead)"
+     id="line30" />
+  <line
+     x1="468.42416"
+     y1="286.12222"
+     x2="508.07239"
+     y2="237.16493"
+     stroke="#666666"
+     stroke-width="1.00895"
+     stroke-dasharray="4, 2"
+     marker-end="url(#arrowhead)"
+     id="line31"
+     inkscape:transform-center-x="-6.3694364"
+     inkscape:transform-center-y="16.342212" />
+  <line
+     x1="466.99622"
+     y1="290.35434"
+     x2="604.8125"
+     y2="218.89351"
+     stroke="#666666"
+     stroke-width="1"
+     stroke-dasharray="4, 2"
+     marker-end="url(#arrowhead)"
+     id="line32" />
+  <line
+     x1="467.00787"
+     y1="288.30511"
+     x2="523.21899"
+     y2="347.88043"
+     stroke="#666666"
+     stroke-width="0.848959"
+     stroke-dasharray="4, 2"
+     marker-end="url(#arrowhead)"
+     id="line33" />
+  <!-- Legenda -->
+  <rect
+     x="65.517014"
+     y="422.59302"
+     width="649.66772"
+     height="29.960125"
+     fill="#ffffff"
+     stroke="#cccccc"
+     stroke-width="1"
+     rx="5.4138975"
+     ry="4.9933543"
+     id="rect33" />
+  <circle
+     cx="107.20468"
+     cy="437.57309"
+     r="8"
+     fill="#d5f5e3"
+     stroke="#2ecc71"
+     stroke-width="2"
+     id="circle33" />
+  <text
+     x="122.20468"
+     y="442.57309"
+     font-family="Arial, sans-serif"
+     font-size="14px"
+     text-anchor="start"
+     id="text33">Palavra-chave distintiva</text>
+  <line
+     x1="332.16376"
+     y1="438.1579"
+     x2="362.16376"
+     y2="438.1579"
+     stroke="#2ecc71"
+     stroke-width="2.5"
+     id="line34" />
+  <text
+     x="372.16376"
+     y="443.1579"
+     font-family="Arial, sans-serif"
+     font-size="14px"
+     text-anchor="start"
+     id="text34">Par mais informativo</text>
+  <line
+     x1="577.89471"
+     y1="438.1579"
+     x2="607.89471"
+     y2="438.1579"
+     stroke="#2ecc71"
+     stroke-width="3"
+     marker-end="url(#arrowhead)"
+     id="line35" />
+  <text
+     x="617.89471"
+     y="443.1579"
+     font-family="Arial, sans-serif"
+     font-size="14px"
+     text-anchor="start"
+     id="text35">Voto forte</text>
+  <!-- Definições para setas -->
+  <defs
+     id="defs35">
+    <marker
+       id="arrowhead"
+       markerWidth="10"
+       markerHeight="7"
+       refX="9"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#2ecc71"
+         id="polygon35" />
+    </marker>
+  </defs>
+</svg>

@@ -7,17 +7,18 @@ date: 2023-07-12T21:50:59.503Z
 preview: Uma breve história da descoberta do valor da verdade e seu impacto na sociedade. Uma jornada marcada por tragédias que começa com uma execução.
 image: assets/images/tabletsumeriano1.webp
 tags:
-  - história
-  - filosofia
-  - opinião
-  - verdade
+    - história
+    - filosofia
+    - opinião
+    - verdade
 categories:
-  - opinião
-  - filosofia
+    - opinião
+    - filosofia
 slug: origem-da-verdade-parte-1
 rating: 5
 featured: false
 published: true
+lastmod: 2025-04-18T19:03:19.398Z
 ---
 
 Na vastidão do tempo, aproximadamente quatro milênios atrás, encontra-se o primeiro murmúrio de descontentamento de um cliente, um grão solitário na areia do relógio. Isso ocorreu no solo da Suméria, no domínio exuberante da Babilônia, onde a verdade era tão valorizada, tão sagrada, que sua ausência precisou ser registrada para se tornar uma marca, uma cicatriz na face do tempo.
@@ -30,7 +31,7 @@ Se buscar atentamente encontrará uma cascata de páginas web, centenas, se não
 
 Nenhuma página sussurra sobre a primeira reclamação do homem contra a quebra da confiança, a primeira voz levantada em protesto contra a falta de veracidade. Todas destacam a reclamação de Nanni e colocam em segundo plano a desonestidade de Ea-nasir. A desonestidade permanece ausente nas páginas da história, como se fosse um eco de uma era antiga, um mal menor, uma lição não aprendida sobre a necessidade da verdade.
 
-Ainda agora, em nossa modernidade iluminada por circuitos integrados e links, ecoam as lamentações, as queixas de clientes contra fornecedores. Ao longo das minhas andanças, do meu tempo vagando com os pés na areia e os olhos no mar, testemunhei centenas de casos. Até eu mesmo, em momentos de agonia e decepção, levantei minha voz em protesto. A ferroada da traição, o sabor amargo de ter sido enganado, perfura o peito como uma lâmina afiada. Mesmo em minha mente, nunca se formou a ideia de que o fornecedor tivesse, deliberadamente, tecido uma teia de engôdos e mentiras. Que me envolvesse em falsidade e frustração. Teria você pensado de outra maneira ao não receber o produto comprado?
+Ainda agora, em nossa modernidade iluminada por circuitos integrados e links, ecoam as lamentações, as queixas de clientes contra fornecedores. Ao longo das minhas andanças, do meu tempo vagando com os pés na areia e os olhos no mar, testemunhei centenas de casos. Até eu mesmo, em momentos de agonia e decepção, levantei minha voz em protesto. A ferroada da traição, o sabor amargo de ter sido enganado, perfura o peito como uma lâmina afiada. Mesmo em minha mente, nunca se formou a ideia de que o fornecedor tivesse, deliberadamente, tecido uma teia de engôdos e mentiras. Que me envolvesse em falsidade e frustração. Teria você pensado de outra forma ao não receber o produto comprado?
 
 No jogo de cartas, a dança sutil da sorte com a habilidade, já conheceu alguém que se desviou do caminho reto e justo, que trapaceou para vencer? E na sala de aula, em meio ao sussurro de papéis e ao arrastar de lápis, já viu alguém colar em uma prova? Colou? Na fila para o pão, para o cinema, para a vida, alguém já furou a vez? No cofre público, conhece alguém que tenha desviado verbas, distorcido números, traído a confiança do povo?
 
@@ -86,7 +87,7 @@ Sócrates, firme em seu caminho, desafiou as acusações. Hora corrigindo a orat
 
 Defendendo-se, afirmou que seu dever era questionar Atenas, questionar as pessoas. Dizia que a vida, se não examinada, era inútil. Ele via o seu papel de questionador como um dever mais importante que a vida e morte. A corrupção da juventude, ele argumentou, não fazia sentido. Por que ele desejaria o mal para aqueles que o cercavam? E quanto à impiedade, não era ele conhecido por suas profundas reflexões sobre os deuses e o divino? Aqui, tocou na essência da misologia, o medo do raciocínio, um mal maior do que a própria morte.
 
-O veredito, quando veio, foi apertado, porém condenatório. Sócrates, usando da ironia, sugeriu que deveria ser recompensado, não punido, por seus serviços à Atenas. Mas o destino estava selado; a pena de morte foi decretada. Mesmo nesse momento, ele se manteve inabalável, aceitando a sentença com a serenidade de alguém que acredita firmemente na retidão de seus caminhos. E que a morte pode não ser algo mal em si. Xenofonte retratou a aceitação serena de Sócrates: _"De todas as maneiras, Sócrates nunca parou de se preparar para morrer. Seu princípio era cuidar da alma, não do corpo; acreditava que a virtude não vem das riquezas, mas as riquezas e todas as outras coisas boas dos homens, tanto privadas como públicas, vêm da virtude"_. ([Xenofonte, Apologia de Sócrates, 14](https://repositorio.ucp.pt/bitstream/10400.14/8999/1/8999.pdf))
+O veredito, quando veio, foi apertado, porém condenatório. Sócrates, usando da ironia, sugeriu que deveria ser recompensado, não punido, por seus serviços à Atenas. Mas o destino estava selado; a pena de morte foi decretada. Mesmo nesse momento, ele se manteve inabalável, aceitando a sentença com a serenidade de alguém que acredita firmemente na retidão de seus caminhos. E que a morte pode não ser algo mal em si. Xenofonte retratou a aceitação serena de Sócrates: _"De todas as formas, Sócrates nunca parou de se preparar para morrer. Seu princípio era cuidar da alma, não do corpo; acreditava que a virtude não vem das riquezas, mas as riquezas e todas as outras coisas boas dos homens, tanto privadas como públicas, vêm da virtude"_. ([Xenofonte, Apologia de Sócrates, 14](https://repositorio.ucp.pt/bitstream/10400.14/8999/1/8999.pdf))
 
 Nos dias seguintes, enquanto esperava a execução na prisão, Sócrates não deixou apagar o farol de sabedoria que iluminaria até os nossos tempos, discutindo filosofia e a natureza da alma com seus seguidores. Ele rejeitou a fuga, uma afronta às leis que ele tanto respeitava. E assim, bebendo a cicuta, uma poção letal, Sócrates abraçou a morte como a um velho amigo, partindo deste mundo com a dignidade de um verdadeiro filósofo. Foi assim que Platão descreveu estes momentos finais em [Fédon](https://iep.utm.edu/phaedo/).
 

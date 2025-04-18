@@ -14,6 +14,7 @@ keywords: ""
 draft: 2023-08-22T00:20:44.061Z
 slug: origem-da-verdade-parte-2
 published: false
+lastmod: 2025-04-18T19:03:19.302Z
 ---
 
 
@@ -67,7 +68,7 @@ Nas entrelinhas desses textos, encontra-se a crença de Confúcio de que a verda
 
 Os Analectos. Uma tapeçaria tecida com as palavras do próprio Confúcio, encomendada por aqueles que o seguiram. Uma coleção de pensamentos, ditos e diálogos que serviram de guia e inspiração. As vozes de Confúcio ressoam nessas páginas, mesmo após séculos do século V ou IV a.C. É aí que encontramos o homem, o filósofo, o mestre.
 
-Mengzi. Ou Mêncio, para alguns. Seguidor de Confúcio, seu estudante na escola do pensamento. O século III a.C. é a sua época, e ele continua a tradição. Ele ecoa as ideias de Confúcio, apresenta-as à sua maneira.
+Mengzi. Ou Mêncio, para alguns. Seguidor de Confúcio, seu estudante na escola do pensamento. O século III a.C. é a sua época, e ele continua a tradição. Ele ecoa as ideias de Confúcio, apresenta-as à sua forma.
 
 Da Xue. O Grande Aprendizado, uma súmula da ética confuciana. Zeng Shen, um discípulo, é quem se acredita ter criado essa obra. Um texto breve, mas cheio de significado, uma condensação do pensamento confuciano em um único volume.
 

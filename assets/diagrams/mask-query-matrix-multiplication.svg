@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 800 450"
+   version="1.1"
+   id="svg43"
+   sodipodi:docname="mask-query-matrix-multiplication.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview43"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.9"
+     inkscape:cx="400"
+     inkscape:cy="225"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg43" />
+  <!-- Fundo branco -->
+  <rect
+     width="800"
+     height="450"
+     fill="white"
+     id="rect1" />
+  <!-- Título -->
+  <text
+     x="400"
+     y="30"
+     font-family="Arial"
+     font-size="20"
+     font-weight="bold"
+     text-anchor="middle"
+     id="text1">Processo Conceitual de Consulta de Atenção</text>
+  <!-- Vetores de entrada: palavras da sequência -->
+  <g
+     transform="translate(50, 100)"
+     id="g8">
+    <rect
+       width="100"
+       height="200"
+       fill="#f0f0f0"
+       stroke="#888888"
+       id="rect2" />
+    <text
+       x="50"
+       y="-15"
+       font-family="Arial"
+       font-size="16"
+       text-anchor="middle"
+       id="text2">Palavras da Sequência</text>
+    <g
+       transform="translate(0, 25)"
+       id="g3">
+      <rect
+         width="100"
+         height="30"
+         fill="#e6f3ff"
+         stroke="#888888"
+         id="rect3" />
+      <text
+         x="50"
+         y="20"
+         font-family="Arial"
+         font-size="14"
+         text-anchor="middle"
+         id="text3">Verifique</text>
+    </g>
+    <g
+       transform="translate(0, 65)"
+       id="g4">
+      <rect
+         width="100"
+         height="30"
+         fill="#e6f3ff"
+         stroke="#888888"
+         id="rect4" />
+      <text
+         x="50"
+         y="20"
+         font-family="Arial"
+         font-size="14"
+         text-anchor="middle"
+         id="text4">programa</text>
+    </g>
+    <g
+       transform="translate(0, 105)"
+       id="g5">
+      <rect
+         width="100"
+         height="30"
+         fill="#e6f3ff"
+         stroke="#888888"
+         id="rect5" />
+      <text
+         x="50"
+         y="20"
+         font-family="Arial"
+         font-size="14"
+         text-anchor="middle"
+         id="text5">foi</text>
+    </g>
+    <g
+       transform="translate(0, 145)"
+       id="g7">
+      <rect
+         width="100"
+         height="30"
+         fill="#ffd9d9"
+         stroke="#888888"
+         id="rect6" />
+      <text
+         x="50"
+         y="20"
+         font-family="Arial"
+         font-size="14"
+         text-anchor="middle"
+         font-weight="bold"
+         id="text6">executado</text>
+      <text
+         x="120"
+         y="20"
+         font-family="Arial"
+         font-size="12"
+         text-anchor="start"
+         fill="#555555"
+         id="text7">(palavra atual)</text>
+    </g>
+  </g>
+  <!-- Transformações lineares -->
+  <g
+     transform="translate(200, 100)"
+     id="g13">
+    <rect
+       width="120"
+       height="200"
+       fill="#f0f0f0"
+       stroke="#888888"
+       id="rect8" />
+    <text
+       x="60"
+       y="-15"
+       font-family="Arial"
+       font-size="16"
+       text-anchor="middle"
+       id="text8">Transformações</text>
+    <g
+       transform="translate(0, 25)"
+       id="g9">
+      <rect
+         width="120"
+         height="30"
+         fill="#fdfdfd"
+         stroke="#888888"
+         id="rect9" />
+      <text
+         x="60"
+         y="20"
+         font-family="Arial"
+         font-size="14"
+         text-anchor="middle"
+         id="text9">WQ, WK, WV</text>
+    </g>
+    <g
+       transform="translate(0, 65)"
+       id="g10">
+      <rect
+         width="120"
+         height="30"
+         fill="#fdfdfd"
+         stroke="#888888"
+         id="rect10" />
+      <text
+         x="60"
+         y="20"
+         font-family="Arial"
+         font-size="14"
+         text-anchor="middle"
+         id="text10">WQ, WK, WV</text>
+    </g>
+    <g
+       transform="translate(0, 105)"
+       id="g11">
+      <rect
+         width="120"
+         height="30"
+         fill="#fdfdfd"
+         stroke="#888888"
+         id="rect11" />
+      <text
+         x="60"
+         y="20"
+         font-family="Arial"
+         font-size="14"
+         text-anchor="middle"
+         id="text11">WQ, WK, WV</text>
+    </g>
+    <g
+       transform="translate(0, 145)"
+       id="g12">
+      <rect
+         width="120"
+         height="30"
+         fill="#fdfdfd"
+         stroke="#888888"
+         id="rect12" />
+      <text
+         x="60"
+         y="20"
+         font-family="Arial"
+         font-size="14"
+         text-anchor="middle"
+         id="text12">WQ, WK, WV</text>
+    </g>
+  </g>
+  <!-- Vetores Q, K, V -->
+  <g
+     transform="translate(370, 100)"
+     id="g23">
+    <rect
+       width="160"
+       height="200"
+       fill="#f0f0f0"
+       stroke="#888888"
+       id="rect13" />
+    <text
+       x="80"
+       y="-15"
+       font-family="Arial"
+       font-size="16"
+       text-anchor="middle"
+       id="text13">Vetores Q, K, V</text>
+    <g
+       transform="translate(0, 25)"
+       id="g15">
+      <rect
+         width="50"
+         height="30"
+         fill="#d4f4d4"
+         stroke="#888888"
+         id="rect14" />
+      <text
+         x="25"
+         y="20"
+         font-family="Arial"
+         font-size="14"
+         text-anchor="middle"
+         id="text14">K₁</text>
+      <rect
+         width="50"
+         height="30"
+         x="55"
+         fill="#ffffd0"
+         stroke="#888888"
+         id="rect15" />
+      <text
+         x="80"
+         y="20"
+         font-family="Arial"
+         font-size="14"
+         text-anchor="middle"
+         id="text15">V₁</text>
+    </g>
+    <g
+       transform="translate(0, 65)"
+       id="g17">
+      <rect
+         width="50"
+         height="30"
+         fill="#d4f4d4"
+         stroke="#888888"
+         id="rect16" />
+      <text
+         x="25"
+         y="20"
+         font-family="Arial"
+         font-size="14"
+         text-anchor="middle"
+         id="text16">K₂</text>
+      <rect
+         width="50"
+         height="30"
+         x="55"
+         fill="#ffffd0"
+         stroke="#888888"
+         id="rect17" />
+      <text
+         x="80"
+         y="20"
+         font-family="Arial"
+         font-size="14"
+         text-anchor="middle"
+         id="text17">V₂</text>
+    </g>
+    <g
+       transform="translate(0, 105)"
+       id="g19">
+      <rect
+         width="50"
+         height="30"
+         fill="#d4f4d4"
+         stroke="#888888"
+         id="rect18" />
+      <text
+         x="25"
+         y="20"
+         font-family="Arial"
+         font-size="14"
+         text-anchor="middle"
+         id="text18">K₃</text>
+      <rect
+         width="50"
+         height="30"
+         x="55"
+         fill="#ffffd0"
+         stroke="#888888"
+         id="rect19" />
+      <text
+         x="80"
+         y="20"
+         font-family="Arial"
+         font-size="14"
+         text-anchor="middle"
+         id="text19">V₃</text>
+    </g>
+    <g
+       transform="translate(0, 145)"
+       id="g22">
+      <rect
+         width="50"
+         height="30"
+         fill="#ffcccc"
+         stroke="#888888"
+         id="rect20" />
+      <text
+         x="25"
+         y="20"
+         font-family="Arial"
+         font-size="14"
+         text-anchor="middle"
+         id="text20">Q₄</text>
+      <rect
+         width="50"
+         height="30"
+         x="55"
+         fill="#d4f4d4"
+         stroke="#888888"
+         id="rect21" />
+      <text
+         x="80"
+         y="20"
+         font-family="Arial"
+         font-size="14"
+         text-anchor="middle"
+         id="text21">K₄</text>
+      <rect
+         width="50"
+         height="30"
+         x="110"
+         fill="#ffffd0"
+         stroke="#888888"
+         id="rect22" />
+      <text
+         x="135"
+         y="20"
+         font-family="Arial"
+         font-size="14"
+         text-anchor="middle"
+         id="text22">V₄</text>
+    </g>
+  </g>
+  <!-- Cálculo QK^T (produto escalar) -->
+  <g
+     transform="translate(580, 100)"
+     id="g29">
+    <rect
+       width="160"
+       height="200"
+       fill="#f0f0f0"
+       stroke="#888888"
+       id="rect23" />
+    <text
+       x="80"
+       y="-15"
+       font-family="Arial"
+       font-size="16"
+       text-anchor="middle"
+       id="text23">Scores de Atenção</text>
+    <text
+       x="80"
+       y="-35"
+       font-family="Arial"
+       font-size="12"
+       text-anchor="middle"
+       id="text24">QK^T / √dk</text>
+    <g
+       transform="translate(0, 25)"
+       id="g25">
+      <rect
+         width="160"
+         height="30"
+         fill="#e0e9ff"
+         stroke="#888888"
+         id="rect24" />
+      <text
+         x="80"
+         y="20"
+         font-family="Arial"
+         font-size="14"
+         text-anchor="middle"
+         id="text25">Q₄·K₁ = 0.13</text>
+    </g>
+    <g
+       transform="translate(0, 65)"
+       id="g26">
+      <rect
+         width="160"
+         height="30"
+         fill="#c0d6ff"
+         stroke="#888888"
+         id="rect25" />
+      <text
+         x="80"
+         y="20"
+         font-family="Arial"
+         font-size="14"
+         text-anchor="middle"
+         font-weight="bold"
+         id="text26">Q₄·K₂ = 0.71</text>
+    </g>
+    <g
+       transform="translate(0, 105)"
+       id="g27">
+      <rect
+         width="160"
+         height="30"
+         fill="#d8e4ff"
+         stroke="#888888"
+         id="rect26" />
+      <text
+         x="80"
+         y="20"
+         font-family="Arial"
+         font-size="14"
+         text-anchor="middle"
+         id="text27">Q₄·K₃ = 0.32</text>
+    </g>
+    <g
+       transform="translate(0, 145)"
+       id="g28">
+      <rect
+         width="160"
+         height="30"
+         fill="#b0ccff"
+         stroke="#888888"
+         id="rect27" />
+      <text
+         x="80"
+         y="20"
+         font-family="Arial"
+         font-size="14"
+         text-anchor="middle"
+         font-weight="bold"
+         id="text28">Q₄·K₄ = 0.89</text>
+    </g>
+  </g>
+  <!-- Softmax e resultado final -->
+  <g
+     transform="translate(200, 330)"
+     id="g30">
+    <rect
+       width="500"
+       height="60"
+       fill="#f0fcff"
+       stroke="#888888"
+       rx="5"
+       ry="5"
+       id="rect29" />
+    <text
+       x="250"
+       y="25"
+       font-family="Arial"
+       font-size="16"
+       text-anchor="middle"
+       id="text29">Softmax(Scores) → Pesos de Atenção</text>
+    <text
+       x="250"
+       y="45"
+       font-family="Arial"
+       font-size="14"
+       text-anchor="middle"
+       id="text30">[0.06, 0.39, 0.13, 0.42]</text>
+  </g>
+  <!-- Setas de fluxo -->
+  <g
+     stroke="#555555"
+     stroke-width="2"
+     fill="none"
+     id="g42">
+    <!-- Palavras para Transformações -->
+    <path
+       d="M 150,125 L 200,125"
+       marker-end="url(#arrowhead)"
+       id="path30" />
+    <path
+       d="M 150,165 L 200,165"
+       marker-end="url(#arrowhead)"
+       id="path31" />
+    <path
+       d="M 150,205 L 200,205"
+       marker-end="url(#arrowhead)"
+       id="path32" />
+    <path
+       d="M 150,245 L 200,245"
+       marker-end="url(#arrowhead)"
+       id="path33" />
+    <!-- Transformações para Q, K, V -->
+    <path
+       d="M 320,125 L 370,125"
+       marker-end="url(#arrowhead)"
+       id="path34" />
+    <path
+       d="M 320,165 L 370,165"
+       marker-end="url(#arrowhead)"
+       id="path35" />
+    <path
+       d="M 320,205 L 370,205"
+       marker-end="url(#arrowhead)"
+       id="path36" />
+    <path
+       d="M 320,245 L 370,245"
+       marker-end="url(#arrowhead)"
+       id="path37" />
+    <!-- Destaque de Query Q4 para todos os Keys K -->
+    <path
+       d="M 395,245 C 550,245 550,125 580,125"
+       stroke="#ff6666"
+       stroke-width="2"
+       stroke-dasharray="5,3"
+       marker-end="url(#arrowhead-red)"
+       id="path38" />
+    <path
+       d="M 395,245 C 535,245 535,165 580,165"
+       stroke="#ff6666"
+       stroke-width="2"
+       stroke-dasharray="5,3"
+       marker-end="url(#arrowhead-red)"
+       id="path39" />
+    <path
+       d="M 395,245 C 520,245 520,205 580,205"
+       stroke="#ff6666"
+       stroke-width="2"
+       stroke-dasharray="5,3"
+       marker-end="url(#arrowhead-red)"
+       id="path40" />
+    <path
+       d="M 395,245 C 505,245 505,245 580,245"
+       stroke="#ff6666"
+       stroke-width="2"
+       stroke-dasharray="5,3"
+       marker-end="url(#arrowhead-red)"
+       id="path41" />
+    <!-- Scores para Softmax -->
+    <path
+       d="M 660,200 C 680,200 680,330 600,330"
+       marker-end="url(#arrowhead)"
+       id="path42" />
+  </g>
+  <!-- Marcadores de seta -->
+  <defs
+     id="defs43">
+    <marker
+       id="arrowhead"
+       markerWidth="10"
+       markerHeight="7"
+       refX="9"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#555555"
+         id="polygon42" />
+    </marker>
+    <marker
+       id="arrowhead-red"
+       markerWidth="10"
+       markerHeight="7"
+       refX="9"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#ff6666"
+         id="polygon43" />
+    </marker>
+  </defs>
+  <!-- Legenda -->
+  <g
+     transform="translate(40, 410)"
+     id="g43">
+    <rect
+       width="700"
+       height="25"
+       fill="#f9f9f9"
+       stroke="#dddddd"
+       rx="5"
+       ry="5"
+       id="rect43" />
+    <text
+       x="350"
+       y="17"
+       font-family="Arial"
+       font-size="12"
+       text-anchor="middle"
+       fill="#555555"
+       id="text43">
+      A Query (Q) da palavra atual &quot;executado&quot; interage com todas as Keys (K) para calcular scores de atenção (QK^T)
+    </text>
+  </g>
+</svg>

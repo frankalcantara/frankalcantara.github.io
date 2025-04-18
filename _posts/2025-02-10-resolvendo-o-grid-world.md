@@ -15,7 +15,7 @@ preview: Descubra como resolver o Grid World usando *Dynamic Programming* e C++ 
 keywords: Grid World *Reinforcement Learning* MDP Solution *Reinforcement Learning* Processo de Decisão de Markov Equações de Bellman Value Iteration Policy Iteration *Dynamic Programming* Dynamic Programming Política Ótima Optimal Policy
 toc: true
 published: true
-lastmod: 2025-04-12T14:36:33.995Z
+lastmod: 2025-04-18T19:03:19.445Z
 draft: 2025-02-10T09:29:19.442Z
 ---
 
@@ -77,11 +77,11 @@ Existem soluções melhores. A primeira, clássica e didática, foi encontrada c
 
 ## Entram as Equações de Bellman
 
-As **Equações de Bellman** desenvolvidas por [Richard Bellman](https://pt.wikipedia.org/wiki/Richard_Bellman) na década de 1950, oferecem uma maneira mais eficiente e escalável de resolver o problema, decompondo-o em subproblemas menores e utilizando a *Dynamic Programming*, programação dinâmica, para encontrar a política ótima[^1]. Para a maioria dos casos práticos, especialmente em ambientes maiores ou ambientes complexos, as **Equações de Bellman** são a abordagem preferida.
+As **Equações de Bellman** desenvolvidas por [Richard Bellman](https://pt.wikipedia.org/wiki/Richard_Bellman) na década de 1950, oferecem uma forma mais eficiente e escalável de resolver o problema, decompondo-o em subproblemas menores e utilizando a *Dynamic Programming*, programação dinâmica, para encontrar a política ótima[^1]. Para a maioria dos casos práticos, especialmente em ambientes maiores ou ambientes complexos, as **Equações de Bellman** são a abordagem preferida.
 
 [^1]: BELLMAN, Richard. Dynamic Programming. Princeton: Princeton University Press, 1957.
 
-Em 1952, Richard Bellman se deparou com um dilema. Como matemático no [projeto RAND](https://open-int.blog/2018/01/21/project-rand-reports-1951-1956/), ele precisava encontrar uma maneira de resolver problemas de otimização multidimensional, e o termo *programação matemática*, sua primeira ideia, já estava sendo usado por outros pesquisadores.
+Em 1952, Richard Bellman se deparou com um dilema. Como matemático no [projeto RAND](https://open-int.blog/2018/01/21/project-rand-reports-1951-1956/), ele precisava encontrar uma forma de resolver problemas de otimização multidimensional, e o termo *programação matemática*, sua primeira ideia, já estava sendo usado por outros pesquisadores.
 
 Segundo o próprio Bellman, o termo *Dynamic Programming* foi escolhido para esconder o fato de que ele estava fazendo pesquisa matemática de um secretário do Departamento de Defesa que tinha aversão a qualquer menção à palavra *pesquisa*[^2]. É assustador, e um pouco desesperador, que uma técnica matemática tão poderosa tenha sido nomeada com o intuito de esconder sua natureza matemática, revelando como a política ruim influencia a linguagem da pesquisa científica há décadas.
 
@@ -203,7 +203,7 @@ $$\begin{align*}
 
 ### Convergência e Políticas Ótimas
 
-Os dois algoritmos convergem para a política ótima $\pi^\*$, mas de maneiras diferentes:
+Os dois algoritmos convergem para a política ótima $\pi^\*$, mas de formas diferentes:
 
 * a **Iteração de Valor** mantém apenas valores e deriva a política implicitamente;
 * a **Iteração de Política** mantém uma política explícita e a melhora iterativamente.

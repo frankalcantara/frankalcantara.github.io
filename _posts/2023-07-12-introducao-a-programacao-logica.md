@@ -7,23 +7,23 @@ date: 2023-07-13T02:50:56.534Z
 preview: ""
 image: assets/images/prolog1.webp
 tags:
-   - Lógica
-   - Programação Lógica
-   - Prolog
+    - Lógica
+    - Programação Lógica
+    - Prolog
 categories:
-   - disciplina
-   - Lógica
-   - material de Aula
-   - matemática
+    - disciplina
+    - Lógica
+    - material de Aula
+    - matemática
 rating: 5
 slug: decifrando-misterios-jornada-da-programacao-logica
 keywords:
-   - lógica
-   - Programação
-   - Programação Lógica
+    - lógica
+    - Programação
+    - Programação Lógica
 draft: true
 toc: true
-lastmod: 2024-10-01T22:22:49.072Z
+lastmod: 2025-04-18T19:03:19.354Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -67,7 +67,7 @@ Como diria [Newton](https://en.wikipedia.org/wiki/Isaac_Newton) chegamos até aq
 
 A Lógica de Primeira Ordem é uma estrutura básica da ciência da computação e da programação. Ela nos permite que possamos discursar e raciocinar com precisão sobre os elementos - podemos fazer afirmações sobre todo um grupo, ou sobre um único elemento em particular. No entanto, tem suas limitações. Na Lógica de Primeira Ordem clássica não podemos fazer afirmações diretas sobre predicados ou funções. Entretanto, algumas extensões, como a Lógica de Segunda Ordem, permitem fazer afirmações sobre predicados e funções.
 
-Essa restrição não é um defeito, mas sim um equilíbrio cuidadoso entre poder expressivo e simplicidade computacional. Dá-nos uma maneira de formular uma grande variedade de problemas, sem tornar o processo de resolução desses problemas excessivamente complexo.
+Essa restrição não é um defeito, mas sim um equilíbrio cuidadoso entre poder expressivo e simplicidade computacional. Dá-nos uma forma de formular uma grande variedade de problemas, sem tornar o processo de resolução desses problemas excessivamente complexo.
 
 A Lógica de Primeira Ordem é o nosso ponto de partida, nossa base, a pedra fundamental. Uma forma poderosa e útil de olhar para o universo, não tão complicada que seja hermética a olhos leigos, mas suficientemente complexa para permitir a descoberta de alguns dos mistérios da matemática e, no processo, resolver alguns problemas práticos.
 
@@ -480,7 +480,7 @@ $$P_1, P_2, ..., P_n \vdash C.$$
 
 Onde o conjunto formado $P_1, P_2, ..., P_n$, chamado de contexto, ou antecedente, $\Gamma$, e $C$, chamado de conclusão, ou consequente, são Formulas Bem Formadas. A regra significa que se as proposições que constituem a conjunção expressa no contexto é verdadeira então a conclusão $C$, consequência, também será verdadeira.
 
-Eu vou tentar usar contexto e conclusão. Mas me perdoem se eu escapar para antecedente e consequente. É apenas o hábito. Quando estudamos lógica, chamamos de **argumento** uma lista de proposições, que aqui são as premissas. Elas vêm seguidas de uma palavra ou expressão (portanto, consequentemente, desta forma) e de outra proposição, que chamamos de conclusão. A forma que usamos para representar isso é chamada de sequência de dedução. É uma maneira de mostrar que, se a proposição colocada acima da linha horizontal for verdadeira, então estamos afirmando que todas as proposições $P_1, P_2, ..., P_n$ acima da linha são verdadeiras. E, por isso, a proposição abaixo da linha, a conclusão, também será verdadeira.
+Eu vou tentar usar contexto e conclusão. Mas me perdoem se eu escapar para antecedente e consequente. É apenas o hábito. Quando estudamos lógica, chamamos de **argumento** uma lista de proposições, que aqui são as premissas. Elas vêm seguidas de uma palavra ou expressão (portanto, consequentemente, desta forma) e de outra proposição, que chamamos de conclusão. A forma que usamos para representar isso é chamada de sequência de dedução. É uma forma de mostrar que, se a proposição colocada acima da linha horizontal for verdadeira, então estamos afirmando que todas as proposições $P_1, P_2, ..., P_n$ acima da linha são verdadeiras. E, por isso, a proposição abaixo da linha, a conclusão, também será verdadeira.
 
 **As regras de inferência são o alicerce da lógica dedutiva e das provas matemáticas. Elas permitem que raciocínios complexos sejam divididos em passos simples, onde cada passo é justificado pela aplicação de uma regra de inferência**. A seguir, estão algumas das regras de inferência mais usadas:
 
@@ -1597,7 +1597,7 @@ Aqui usamos o primeiro axioma de $\mathfrak{L}$, que tem a forma $(A \rightarrow
 
 3. $(A \rightarrow (A \rightarrow A))$ (Axioma 1 com $A := A$ e $B := A$)
 
-   De maneira similar à primeira linha, a quarta linha usa o primeiro axioma com $A := A$ e $B := A$.
+   De forma similar à primeira linha, a quarta linha usa o primeiro axioma com $A := A$ e $B := A$.
 
 4. $(A \rightarrow A)$(_Modus Ponens_ aplicado às linhas 3 e 4)
 
@@ -1637,7 +1637,7 @@ Aqui usamos o primeiro axioma de $\mathfrak{L}$, que tem a forma $(A \rightarrow
 
    Finalmente, tentamos aplicar a regra de inferência _Modus Ponens_ às linhas 1 e 2 para obter $(A \land B) \rightarrow C$. No entanto, como a linha 1 é inválida, esta aplicação de _Modus Ponens_ também é inválida.
 
-Portanto, esta tentativa de provar o teorema $(A \land B) \rightarrow C$ **falha** porque faz suposições inválidas e usa regras de inferência de maneira inválida.
+Portanto, esta tentativa de provar o teorema $(A \land B) \rightarrow C$ **falha** porque faz suposições inválidas e usa regras de inferência de forma inválida.
 
 Esta última tentativa de prova é interessante. Para o teorema $(A \land B) \rightarrow C$, não é possível provar diretamente no sistema $\mathfrak{L}$ sem a presença de axiomas adicionais ou a introdução de hipóteses adicionais. Que não fazem parte do sistema $\mathfrak{L}$.
 
@@ -1730,11 +1730,11 @@ Neste ponto, podemos voltar um pouco e destacar um constructor importante na pro
 > A lógica é a técnica que usamos para adicionar convicção à verdade.
 > Jean de la Bruyere
 
-A Lógica Predicativa, coração e espírito da Lógica de Primeira Ordem, nos leva um passo além da Lógica Proposicional. Em vez de se concentrar apenas em proposições completas que são verdadeiras ou falsas, a lógica predicativa nos permite expressar proposições sobre objetos e as relações entre eles. Ela nos permite falar de maneira mais rica e sofisticada sobre o mundo.
+A Lógica Predicativa, coração e espírito da Lógica de Primeira Ordem, nos leva um passo além da Lógica Proposicional. Em vez de se concentrar apenas em proposições completas que são verdadeiras ou falsas, a lógica predicativa nos permite expressar proposições sobre objetos e as relações entre eles. Ela nos permite falar de forma mais rica e sofisticada sobre o mundo.
 
 Vamos lembrar que na Lógica Proposicional, cada proposição é um átomo indivisível. Por exemplo, 'A chuva cai' ou 'O sol brilha'. Cada uma dessas proposições é verdadeira ou falsa como uma unidade. Na lógica predicativa, no entanto, podemos olhar para dentro dessas proposições. Podemos falar sobre o sujeito - a chuva, o sol - e o predicado - cai, brilha. Podemos quantificar sobre eles: para todos os dias, existe um momento em que o sol brilha.
 
-Enquanto a Lógica Proposicional pode ser vista como a aritmética do verdadeiro e do falso, a lógica predicativa é a álgebra do raciocínio. Ela nos permite manipular proposições de maneira muito mais rica e expressiva. Com ela, podemos começar a codificar partes substanciais da matemática e da ciência, levando-nos mais perto de nossa busca para decifrar o cosmos, um símbolo de lógica de cada vez.
+Enquanto a Lógica Proposicional pode ser vista como a aritmética do verdadeiro e do falso, a lógica predicativa é a álgebra do raciocínio. Ela nos permite manipular proposições de forma muito mais rica e expressiva. Com ela, podemos começar a codificar partes substanciais da matemática e da ciência, levando-nos mais perto de nossa busca para decifrar o cosmos, um símbolo de lógica de cada vez.
 
 ## Introdução aos Predicados
 
@@ -1846,7 +1846,7 @@ A representação do Quantificador Universal como uma conjunção **não é uma 
 
 $$\forall x (P(x) \land Q(x))$$
 
-Isso significa que para todo $x$ no domínio, as propriedades $P$, $Q$, e outras listadas são todas verdadeiras. É uma maneira de expressar que todas as condições listadas são verdadeiras para cada elemento no domínio. Esta fórmula será usada para simplificar sentenças, ou para criar formas normais.
+Isso significa que para todo $x$ no domínio, as propriedades $P$, $Q$, e outras listadas são todas verdadeiras. É uma forma de expressar que todas as condições listadas são verdadeiras para cada elemento no domínio. Esta fórmula será usada para simplificar sentenças, ou para criar formas normais.
 
 Vamos voltar um pouco. O quantificador universal $\forall x P(x)$Afirma que a proposição $P(x)$ é verdadeira para todo, e qualquer, valor possível de $x$ como elemento de um conjunto, $u$. Uma forma de interpretar isso é pensar em $x$ como uma variável que pode ter qualquer valor dentro do universo do discurso.
 
@@ -1992,7 +1992,7 @@ Lembrado do problema que encontramos quando fizemos isso com o quantificador $\f
 
 $$\exists x (P(x) \lor Q(x))$$
 
-Isso significa que existe pelo menos um $x$ no domínio que satisfaz a propriedade $P$, ou a propriedade $Q$, ou ambas, ou outras propriedades listadas. É uma maneira de expressar que pelo menos uma das condições listadas é verdadeira para algum elemento no domínio.
+Isso significa que existe pelo menos um $x$ no domínio que satisfaz a propriedade $P$, ou a propriedade $Q$, ou ambas, ou outras propriedades listadas. É uma forma de expressar que pelo menos uma das condições listadas é verdadeira para algum elemento no domínio.
 
 A expansão de $\exists $ usando $\lor $ destaca que a proposição $P(x)$ é verdadeira se pelo menos um valor de $x$ dentro do universo do discurso atender ao predicado $P$. O que a expansão de exemplo está dizendo é que existe pelo menos um número natural $x$ tal que $P(x)$ é verdadeiro. Não precisamos saber exatamente qual é esse $x$. Apenas que existe um elemento dentro de $\mathbb{N}$ que atende o predicado.
 
@@ -2012,7 +2012,7 @@ A conversão de uma Fórmula Bem Formada em sentença, não necessariamente resu
 
 - $\exists x \exists y F(x,y)$ se lê _Para algum avião $x$ existe um avião $y$ tal que $x$ é mais rápido que $y$_.
 
-As quatro sentenças expressam o mesmo contexto, embora sejam redigidas de maneiras distintas. Ao escrevermos, optamos pela forma mais transparente segundo nossa própria opinião. Quando a situação é de leitura, a escolha não existe, é necessário entender, e nesse cenário, a recomendação seria começar pela escrita da sentença em linguagem natural. Trata-se de um processo, e com o passar do tempo, torna-se mais simples.
+As quatro sentenças expressam o mesmo contexto, embora sejam redigidas de formas distintas. Ao escrevermos, optamos pela forma mais transparente segundo nossa própria opinião. Quando a situação é de leitura, a escolha não existe, é necessário entender, e nesse cenário, a recomendação seria começar pela escrita da sentença em linguagem natural. Trata-se de um processo, e com o passar do tempo, torna-se mais simples.
 
 ### Exercícios de Conversão de Linguagem Natural em Expressões Predicativas
 
@@ -2190,7 +2190,7 @@ Considere as expressões lógicas $\neg (\forall x P(x))$ e $\exists x (\neg P(x
 
 A expressão $\forall x P(x)$ significa que _todos são felizes_, enquanto $\neg (\forall x P(x))$ significa que _não é verdade que todos são felizes_. Ou seja, deve haver pelo menos uma pessoa que não está feliz.
 
-A expressão $\exists x (\neg P(x))$ significa que _existe alguém que não está feliz_. Você pode ver que isso é apenas outra maneira de expressar a ideia contida em $\neg (\forall x P(x))$.
+A expressão $\exists x (\neg P(x))$ significa que _existe alguém que não está feliz_. Você pode ver que isso é apenas outra forma de expressar a ideia contida em $\neg (\forall x P(x))$.
 
 A afirmação de que _não é verdade que todos estão felizes_ implica que deve haver alguém que não está feliz. Se a primeira afirmação é falsa (ou seja, todos estão felizes), então a segunda afirmação também deve ser falsa.
 
@@ -2225,7 +2225,7 @@ Portanto, as duas fórmulas têm o mesmo valor verdade. Elas são logicamente eq
 
 ## Regras de Inferência usando Quantificadores
 
-As regras de inferência com quantificadores lidam especificamente com as proposições que envolvem quantificadores. Estas regras nos permitem fazer generalizações ou especificações, transformando proposições universais em existenciais, e vice-versa. Compreender essas regras é essencial para aprofundar o entendimento da estrutura da lógica, o que nos permite analisar e construir argumentos mais complexos de maneira precisa e coerente.
+As regras de inferência com quantificadores lidam especificamente com as proposições que envolvem quantificadores. Estas regras nos permitem fazer generalizações ou especificações, transformando proposições universais em existenciais, e vice-versa. Compreender essas regras é essencial para aprofundar o entendimento da estrutura da lógica, o que nos permite analisar e construir argumentos mais complexos de forma precisa e coerente.
 
 Nos próximos tópicos, exploraremos essas regras em detalhes, observando como elas interagem com os quantificadores universal e existencial.
 
@@ -2583,7 +2583,7 @@ $$On(b1, s2) \land Hot(b2) \land \neg (On(b3) \lor Hot(b3))$$
    $$\neg (mesmoLado(Ganso, Grãos) \land \neg mesmoLado(Ganso, Fazendeiro))$$
 
 2. **Quebra-cabeça: O Problema da Ponte e da Tocha**
-   Quatro pessoas chegam a um rio à noite. Há uma ponte estreita, mas ela só pode conter duas pessoas de cada vez. Eles têm uma tocha e, por ser noite, a tocha tem que ser usada ao atravessar a ponte. A pessoa $A$ Pode atravessar a ponte em um minuto, $B$ em dois minutos, $C$ em cinco minutos e $D$ em oito minutos. Quando duas pessoas atravessam a ponte juntas, elas devem se mover no ritmo da pessoa mais lenta. Qual é a maneira mais rápida para todos eles atravessarem a ponte?
+   Quatro pessoas chegam a um rio à noite. Há uma ponte estreita, mas ela só pode conter duas pessoas de cada vez. Eles têm uma tocha e, por ser noite, a tocha tem que ser usada ao atravessar a ponte. A pessoa $A$ Pode atravessar a ponte em um minuto, $B$ em dois minutos, $C$ em cinco minutos e $D$ em oito minutos. Quando duas pessoas atravessam a ponte juntas, elas devem se mover no ritmo da pessoa mais lenta. Qual é a forma mais rápida para todos eles atravessarem a ponte?
 
    **Solução**: primeiro, $A$ e $B$Atravessam a ponte, o que leva 2 minutos. $A$ então pega a tocha e volta para o lado original, levando 1 minuto. $A$ fica no lado original enquanto $C$ e $D$Atravessam a ponte, levando 8 minutos. $B$ então pega a tocha e volta para o lado original, levando 2 minutos. Finalmente, $A$ e $B$Atravessam a ponte novamente, levando 2 minutos. No total, teremos $2+1+8+2+2=15$ minutos.
 
@@ -2732,9 +2732,9 @@ $$On(b1, s2) \land Hot(b2) \land \neg (On(b3) \lor Hot(b3))$$
 
 # Formas Normais
 
-As formas normais, em sua essência, são um meio de trazer ordem e consistência à maneira como representamos proposições na Lógica Proposicional. Elas oferecem uma estrutura formalizada para expressar proposições, uma convenção que simplifica a comparação, análise, entendimento e simplificação de proposições lógicas.
+As formas normais, em sua essência, são um meio de trazer ordem e consistência à forma como representamos proposições na Lógica Proposicional. Elas oferecem uma estrutura formalizada para expressar proposições, uma convenção que simplifica a comparação, análise, entendimento e simplificação de proposições lógicas.
 
-Consideremos, por exemplo, a tarefa de comparar duas proposições para determinar se são equivalentes. Sem uma forma padronizada de representar proposições, essa tarefa pode se tornar complexa e demorada. No entanto, ao utilizar as formas normais, cada proposição é expressa de uma maneira padrão, tornando a comparação direta e simples. Além disso, as formas normais também desempenham um papel crucial na simplificação de proposições. Ao expressar uma proposição em sua forma normal, é mais fácil identificar oportunidades de simplificação, removendo redundâncias ou simplificando a estrutura lógica. As formas normais não são apenas uma ferramenta para lidar com a complexidade da Lógica Proposicional, mas também uma metodologia que facilita a compreensão e manipulação de proposições lógicas.
+Consideremos, por exemplo, a tarefa de comparar duas proposições para determinar se são equivalentes. Sem uma forma padronizada de representar proposições, essa tarefa pode se tornar complexa e demorada. No entanto, ao utilizar as formas normais, cada proposição é expressa de uma forma padrão, tornando a comparação direta e simples. Além disso, as formas normais também desempenham um papel crucial na simplificação de proposições. Ao expressar uma proposição em sua forma normal, é mais fácil identificar oportunidades de simplificação, removendo redundâncias ou simplificando a estrutura lógica. As formas normais não são apenas uma ferramenta para lidar com a complexidade da Lógica Proposicional, mas também uma metodologia que facilita a compreensão e manipulação de proposições lógicas.
 
 Existem várias formas normais na Lógica Proposicional, cada uma com suas próprias regras e aplicações. Aqui estão algumas das principais:
 
@@ -3030,7 +3030,7 @@ Converter uma fórmula para a Forma Normal Conjuntiva, já incluindo os conceito
 
    $$(p \land (\neg q \lor p)) \land \neg p$$
 
-4. Aplicamos as propriedades comutativa e associativa para organizar os termos de uma maneira mais apresentável:
+4. Aplicamos as propriedades comutativa e associativa para organizar os termos de uma forma mais apresentável:
 
    $$(\neg q \lor p) \land (p \land \neg p)$$
 
@@ -3170,7 +3170,7 @@ A skolemização resultará em:
 
 $$\forall x \forall z R(x,f(x),z,g(x,z))$$
 
-Onde $f(x)$ e $ g(x,z)$ são Funções Skolem introduzidas para substituir as variáveis existenciais $y$ e $w $ respectivamente. A escolha entre usar uma Constante Skolem ou uma Função Skolem durante a skolemização depende do escopo dos quantificadores na fórmula original. Aqui estão as regras e passos para realizar a skolemização de maneira mais explicativa:
+Onde $f(x)$ e $ g(x,z)$ são Funções Skolem introduzidas para substituir as variáveis existenciais $y$ e $w $ respectivamente. A escolha entre usar uma Constante Skolem ou uma Função Skolem durante a skolemização depende do escopo dos quantificadores na fórmula original. Aqui estão as regras e passos para realizar a skolemização de forma mais explicativa:
 
 **Passo 1: Identificar os Quantificadores Existenciais**: comece identificando os quantificadores existenciais na fórmula.
 
@@ -4863,9 +4863,9 @@ Elabore um mundo para um ginásio de esportes. O modelo deve incluir atletas, mo
 
 # Cláusula de Horn
 
-A **Cláusula de Horn** foi nomeada em homenagem ao matemático e lógico americano [Alfred Horn](https://en.wikipedia.org/wiki/Alfred_Horn), que a introduziu em [um artigo publicado em 1951](https://www.cambridge.org/core/journals/journal-of-symbolic-logic/article/abs/on-sentences-which-are-true-of-direct-unions-of-algebras1/DF348CB269B06D6702DA3AE4DCF38C39). O contexto histórico e a motivação para a introdução da Cláusula de Horn são profundamente enraizados na solução do Problema da Decidibilidade. Na primeira metade do século XX, a lógica matemática estava focada na questão da decidibilidade: determinar se uma afirmação lógica é verdadeira ou falsa de maneira algorítmica.
+A **Cláusula de Horn** foi nomeada em homenagem ao matemático e lógico americano [Alfred Horn](https://en.wikipedia.org/wiki/Alfred_Horn), que a introduziu em [um artigo publicado em 1951](https://www.cambridge.org/core/journals/journal-of-symbolic-logic/article/abs/on-sentences-which-are-true-of-direct-unions-of-algebras1/DF348CB269B06D6702DA3AE4DCF38C39). O contexto histórico e a motivação para a introdução da Cláusula de Horn são profundamente enraizados na solução do Problema da Decidibilidade. Na primeira metade do século XX, a lógica matemática estava focada na questão da decidibilidade: determinar se uma afirmação lógica é verdadeira ou falsa de forma algorítmica.
 
-Não demorou muito para os matemáticos perceberem que a Lógica de Primeira Ordem é poderosa, mas pode ser ineficientes para resolver os problemas relacionados ao Problema da Decidibilidade. A busca por formas mais eficientes de resolução levou ao estudo de subconjuntos restritos da Lógica de Primeira Ordem, onde a decidibilidade poderia ser alcançada de maneira mais eficiente. Aqui, eficiência significa o menor custo computacional, no menor tempo.
+Não demorou muito para os matemáticos perceberem que a Lógica de Primeira Ordem é poderosa, mas pode ser ineficientes para resolver os problemas relacionados ao Problema da Decidibilidade. A busca por formas mais eficientes de resolução levou ao estudo de subconjuntos restritos da Lógica de Primeira Ordem, onde a decidibilidade poderia ser alcançada de forma mais eficiente. Aqui, eficiência significa o menor custo computacional, no menor tempo.
 
 Alfred Horn identificou um desses subconjuntos em seu artigo de 1951, introduzindo o que agora é conhecido como **Cláusula de Horn**. Ele mostrou que esse subconjunto particular tem propriedades interessantes que permitem a resolução em tempo polinomial, tornando-o atraente para aplicações práticas.
 
@@ -4903,7 +4903,7 @@ Para entender melhor, imagine que estamos construindo um cenário mental fundame
 - $\neg P \land \neg Q \rightarrow R$: _Se não chover, $P$ e não ventar, $Q$, então faremos um piquenique, $R$_.
 - $\neg A \land \neg B \land \neg C \rightarrow D$: _Se $A$, $B$ e $C$ forem falsos, então $D$ é verdadeiro_.
 
-**3. Metas ou Consultas**: finalmente, temos as metas ou consultas. Essas são as perguntas que fazemos ao nosso mundo lógico. _Está chovendo?_, _A grama está molhada?_ São os caminhos que usaremos para explorar o cenário criado, olhando ao redor e tentando entender o que está acontecendo. As consultas são a maneira de interagir com nosso mundo lógico, usando os fatos e regras que estabelecemos para encontrar respostas e alcançar objetivos. Por exemplo:
+**3. Metas ou Consultas**: finalmente, temos as metas ou consultas. Essas são as perguntas que fazemos ao nosso mundo lógico. _Está chovendo?_, _A grama está molhada?_ São os caminhos que usaremos para explorar o cenário criado, olhando ao redor e tentando entender o que está acontecendo. As consultas são a forma de interagir com nosso mundo lógico, usando os fatos e regras que estabelecemos para encontrar respostas e alcançar objetivos. Por exemplo:
 
 - $\neg P \land \neg Q$: _É verdade que hoje não está chovendo e não está ventando?_
 - $\neg X \land \neg Y \land \neg Z$: _$x$, $Y$ e $Z $ são falsos?_
@@ -5117,7 +5117,7 @@ Este mundo em Cláusulas de Horn permite representar e raciocinar sobre relaçõ
 
 ### Quantificadores em Cláusulas de Horn
 
-Os quantificadores podem ser incluídos nas Cláusulas de Horn. Contudo, é importante notar que a forma padrão de Cláusulas de Horn em programação lógica geralmente lida com quantificação de maneira implícita. A quantificação universal é comum e é geralmente assumida em regras, enquanto a quantificação existencial é muitas vezes tratada através de fatos específicos ou construção de termos.
+Os quantificadores podem ser incluídos nas Cláusulas de Horn. Contudo, é importante notar que a forma padrão de Cláusulas de Horn em programação lógica geralmente lida com quantificação de forma implícita. A quantificação universal é comum e é geralmente assumida em regras, enquanto a quantificação existencial é muitas vezes tratada através de fatos específicos ou construção de termos.
 
 Precisamos tomar cuidado porque a inclusão explícita de quantificadores pode levar a uma Lógica de Primeira Ordem mais rica, permitindo expressões mais complexas e poderosas. No entanto, isso também pode aumentar a complexidade do raciocínio e da resolução.
 
@@ -5252,7 +5252,7 @@ $$\forall x \forall y (Ganso(x) \wedge Grão(y) \wedge Sozinhos(x, y) \rightarro
 $$¬Come (r, g)?$$
 $$¬Come (g, gr)?$$
 
-**Problema 4 - A Ponte e a Tocha:** quatro pessoas chegam a um rio à noite. Há uma ponte estreita, mas ela só pode conter duas pessoas de cada vez. Eles têm uma tocha e, por ser noite, a tocha tem que ser usada ao atravessar a ponte. A pessoa A pode atravessar a ponte em um minuto, B em dois minutos, C em cinco minutos e D em oito minutos. Quando duas pessoas atravessam a ponte juntas, elas devem se mover no ritmo da pessoa mais lenta. Qual é a maneira mais rápida para todos eles atravessarem a ponte?
+**Problema 4 - A Ponte e a Tocha:** quatro pessoas chegam a um rio à noite. Há uma ponte estreita, mas ela só pode conter duas pessoas de cada vez. Eles têm uma tocha e, por ser noite, a tocha tem que ser usada ao atravessar a ponte. A pessoa A pode atravessar a ponte em um minuto, B em dois minutos, C em cinco minutos e D em oito minutos. Quando duas pessoas atravessam a ponte juntas, elas devem se mover no ritmo da pessoa mais lenta. Qual é a forma mais rápida para todos eles atravessarem a ponte?
 
 **Fatos (tempos)**:
 
@@ -5673,7 +5673,7 @@ Como diria [Newton](https://en.wikipedia.org/wiki/Isaac_Newton) chegamos até aq
 
 A Lógica de Primeira Ordem é uma estrutura básica da ciência da computação e da programação. Ela nos permite que possamos discursar e raciocinar com precisão sobre os elementos - podemos fazer afirmações sobre todo um grupo, ou sobre um único elemento em particular. No entanto, tem suas limitações. Na Lógica de Primeira Ordem clássica não podemos fazer afirmações diretas sobre predicados ou funções. Entretanto, algumas extensões, como a Lógica de Segunda Ordem, permitem fazer afirmações sobre predicados e funções.
 
-Essa restrição não é um defeito, mas sim um equilíbrio cuidadoso entre poder expressivo e simplicidade computacional. Dá-nos uma maneira de formular uma grande variedade de problemas, sem tornar o processo de resolução desses problemas excessivamente complexo.
+Essa restrição não é um defeito, mas sim um equilíbrio cuidadoso entre poder expressivo e simplicidade computacional. Dá-nos uma forma de formular uma grande variedade de problemas, sem tornar o processo de resolução desses problemas excessivamente complexo.
 
 A Lógica de Primeira Ordem é o nosso ponto de partida, nossa base, a pedra fundamental. Uma forma poderosa e útil de olhar para o universo, não tão complicada que seja hermética a olhos leigos, mas suficientemente complexa para permitir a descoberta de alguns dos mistérios da matemática e, no processo, resolver alguns problemas práticos.
 
@@ -6086,7 +6086,7 @@ $$P_1, P_2, ..., P_n \vdash C.$$
 
 Onde o conjunto formado $P_1, P_2, ..., P_n$, chamado de contexto, ou antecedente, $\Gamma$, e $C$, chamado de conclusão, ou consequente, são Formulas Bem Formadas. A regra significa que se as proposições que constituem a conjunção expressa no contexto é verdadeira então a conclusão $C$, consequência, também será verdadeira.
 
-Eu vou tentar usar contexto e conclusão. Mas me perdoem se eu escapar para antecedente e consequente. É apenas o hábito. Quando estudamos lógica, chamamos de **argumento** uma lista de proposições, que aqui são as premissas. Elas vêm seguidas de uma palavra ou expressão (portanto, consequentemente, desta forma) e de outra proposição, que chamamos de conclusão. A forma que usamos para representar isso é chamada de sequência de dedução. É uma maneira de mostrar que, se a proposição colocada acima da linha horizontal for verdadeira, então estamos afirmando que todas as proposições $P_1, P_2, ..., P_n$ acima da linha são verdadeiras. E, por isso, a proposição abaixo da linha, a conclusão, também será verdadeira.
+Eu vou tentar usar contexto e conclusão. Mas me perdoem se eu escapar para antecedente e consequente. É apenas o hábito. Quando estudamos lógica, chamamos de **argumento** uma lista de proposições, que aqui são as premissas. Elas vêm seguidas de uma palavra ou expressão (portanto, consequentemente, desta forma) e de outra proposição, que chamamos de conclusão. A forma que usamos para representar isso é chamada de sequência de dedução. É uma forma de mostrar que, se a proposição colocada acima da linha horizontal for verdadeira, então estamos afirmando que todas as proposições $P_1, P_2, ..., P_n$ acima da linha são verdadeiras. E, por isso, a proposição abaixo da linha, a conclusão, também será verdadeira.
 
 **As regras de inferência são o alicerce da lógica dedutiva e das provas matemáticas. Elas permitem que raciocínios complexos sejam divididos em passos simples, onde cada passo é justificado pela aplicação de uma regra de inferência**. A seguir, estão algumas das regras de inferência mais usadas:
 
@@ -7203,7 +7203,7 @@ Aqui usamos o primeiro axioma de $\mathfrak{L}$, que tem a forma $(A \rightarrow
 
 3. $(A \rightarrow (A \rightarrow A))$ (Axioma 1 com $A := A$ e $B := A$)
 
-   De maneira similar à primeira linha, a quarta linha usa o primeiro axioma com $A := A$ e $B := A$.
+   De forma similar à primeira linha, a quarta linha usa o primeiro axioma com $A := A$ e $B := A$.
 
 4. $(A \rightarrow A)$(_Modus Ponens_ aplicado às linhas 3 e 4)
 
@@ -7243,7 +7243,7 @@ Aqui usamos o primeiro axioma de $\mathfrak{L}$, que tem a forma $(A \rightarrow
 
    Finalmente, tentamos aplicar a regra de inferência _Modus Ponens_ às linhas 1 e 2 para obter $(A \land B) \rightarrow C$. No entanto, como a linha 1 é inválida, esta aplicação de _Modus Ponens_ também é inválida.
 
-Portanto, esta tentativa de provar o teorema $(A \land B) \rightarrow C$ **falha** porque faz suposições inválidas e usa regras de inferência de maneira inválida.
+Portanto, esta tentativa de provar o teorema $(A \land B) \rightarrow C$ **falha** porque faz suposições inválidas e usa regras de inferência de forma inválida.
 
 Esta última tentativa de prova é interessante. Para o teorema $(A \land B) \rightarrow C$, não é possível provar diretamente no sistema $\mathfrak{L}$ sem a presença de axiomas adicionais ou a introdução de hipóteses adicionais. Que não fazem parte do sistema $\mathfrak{L}$.
 
@@ -7336,11 +7336,11 @@ Neste ponto, podemos voltar um pouco e destacar um constructor importante na pro
 > A lógica é a técnica que usamos para adicionar convicção à verdade.
 > Jean de la Bruyere
 
-A Lógica Predicativa, coração e espírito da Lógica de Primeira Ordem, nos leva um passo além da Lógica Proposicional. Em vez de se concentrar apenas em proposições completas que são verdadeiras ou falsas, a lógica predicativa nos permite expressar proposições sobre objetos e as relações entre eles. Ela nos permite falar de maneira mais rica e sofisticada sobre o mundo.
+A Lógica Predicativa, coração e espírito da Lógica de Primeira Ordem, nos leva um passo além da Lógica Proposicional. Em vez de se concentrar apenas em proposições completas que são verdadeiras ou falsas, a lógica predicativa nos permite expressar proposições sobre objetos e as relações entre eles. Ela nos permite falar de forma mais rica e sofisticada sobre o mundo.
 
 Vamos lembrar que na Lógica Proposicional, cada proposição é um átomo indivisível. Por exemplo, 'A chuva cai' ou 'O sol brilha'. Cada uma dessas proposições é verdadeira ou falsa como uma unidade. Na lógica predicativa, no entanto, podemos olhar para dentro dessas proposições. Podemos falar sobre o sujeito - a chuva, o sol - e o predicado - cai, brilha. Podemos quantificar sobre eles: para todos os dias, existe um momento em que o sol brilha.
 
-Enquanto a Lógica Proposicional pode ser vista como a aritmética do verdadeiro e do falso, a lógica predicativa é a álgebra do raciocínio. Ela nos permite manipular proposições de maneira muito mais rica e expressiva. Com ela, podemos começar a codificar partes substanciais da matemática e da ciência, levando-nos mais perto de nossa busca para decifrar o cosmos, um símbolo de lógica de cada vez.
+Enquanto a Lógica Proposicional pode ser vista como a aritmética do verdadeiro e do falso, a lógica predicativa é a álgebra do raciocínio. Ela nos permite manipular proposições de forma muito mais rica e expressiva. Com ela, podemos começar a codificar partes substanciais da matemática e da ciência, levando-nos mais perto de nossa busca para decifrar o cosmos, um símbolo de lógica de cada vez.
 
 ## Introdução aos Predicados
 
@@ -7452,7 +7452,7 @@ A representação do Quantificador Universal como uma conjunção **não é uma 
 
 $$\forall x (P(x) \land Q(x))$$
 
-Isso significa que para todo $x$ no domínio, as propriedades $P$, $Q$, e outras listadas são todas verdadeiras. É uma maneira de expressar que todas as condições listadas são verdadeiras para cada elemento no domínio. Esta fórmula será usada para simplificar sentenças, ou para criar formas normais.
+Isso significa que para todo $x$ no domínio, as propriedades $P$, $Q$, e outras listadas são todas verdadeiras. É uma forma de expressar que todas as condições listadas são verdadeiras para cada elemento no domínio. Esta fórmula será usada para simplificar sentenças, ou para criar formas normais.
 
 Vamos voltar um pouco. O quantificador universal $\forall x P(x)$Afirma que a proposição $P(x)$ é verdadeira para todo, e qualquer, valor possível de $x$ como elemento de um conjunto, $u$. Uma forma de interpretar isso é pensar em $x$ como uma variável que pode ter qualquer valor dentro do universo do discurso.
 
@@ -7598,7 +7598,7 @@ Lembrado do problema que encontramos quando fizemos isso com o quantificador $\f
 
 $$\exists x (P(x) \lor Q(x))$$
 
-Isso significa que existe pelo menos um $x$ no domínio que satisfaz a propriedade $P$, ou a propriedade $Q$, ou ambas, ou outras propriedades listadas. É uma maneira de expressar que pelo menos uma das condições listadas é verdadeira para algum elemento no domínio.
+Isso significa que existe pelo menos um $x$ no domínio que satisfaz a propriedade $P$, ou a propriedade $Q$, ou ambas, ou outras propriedades listadas. É uma forma de expressar que pelo menos uma das condições listadas é verdadeira para algum elemento no domínio.
 
 A expansão de $\exists $ usando $\lor $ destaca que a proposição $P(x)$ é verdadeira se pelo menos um valor de $x$ dentro do universo do discurso atender ao predicado $P$. O que a expansão de exemplo está dizendo é que existe pelo menos um número natural $x$ tal que $P(x)$ é verdadeiro. Não precisamos saber exatamente qual é esse $x$. Apenas que existe um elemento dentro de $\mathbb{N}$ que atende o predicado.
 
@@ -7618,7 +7618,7 @@ A conversão de uma Fórmula Bem Formada em sentença, não necessariamente resu
 
 - $\exists x \exists y F(x,y)$ se lê _Para algum avião $x$ existe um avião $y$ tal que $x$ é mais rápido que $y$_.
 
-As quatro sentenças expressam o mesmo contexto, embora sejam redigidas de maneiras distintas. Ao escrevermos, optamos pela forma mais transparente segundo nossa própria opinião. Quando a situação é de leitura, a escolha não existe, é necessário entender, e nesse cenário, a recomendação seria começar pela escrita da sentença em linguagem natural. Trata-se de um processo, e com o passar do tempo, torna-se mais simples.
+As quatro sentenças expressam o mesmo contexto, embora sejam redigidas de formas distintas. Ao escrevermos, optamos pela forma mais transparente segundo nossa própria opinião. Quando a situação é de leitura, a escolha não existe, é necessário entender, e nesse cenário, a recomendação seria começar pela escrita da sentença em linguagem natural. Trata-se de um processo, e com o passar do tempo, torna-se mais simples.
 
 ### Exercícios de Conversão de Linguagem Natural em Expressões Predicativas
 
@@ -7796,7 +7796,7 @@ Considere as expressões lógicas $\neg (\forall x P(x))$ e $\exists x (\neg P(x
 
 A expressão $\forall x P(x)$ significa que _todos são felizes_, enquanto $\neg (\forall x P(x))$ significa que _não é verdade que todos são felizes_. Ou seja, deve haver pelo menos uma pessoa que não está feliz.
 
-A expressão $\exists x (\neg P(x))$ significa que _existe alguém que não está feliz_. Você pode ver que isso é apenas outra maneira de expressar a ideia contida em $\neg (\forall x P(x))$.
+A expressão $\exists x (\neg P(x))$ significa que _existe alguém que não está feliz_. Você pode ver que isso é apenas outra forma de expressar a ideia contida em $\neg (\forall x P(x))$.
 
 A afirmação de que _não é verdade que todos estão felizes_ implica que deve haver alguém que não está feliz. Se a primeira afirmação é falsa (ou seja, todos estão felizes), então a segunda afirmação também deve ser falsa.
 
@@ -7831,7 +7831,7 @@ Portanto, as duas fórmulas têm o mesmo valor verdade. Elas são logicamente eq
 
 ## Regras de Inferência usando Quantificadores
 
-As regras de inferência com quantificadores lidam especificamente com as proposições que envolvem quantificadores. Estas regras nos permitem fazer generalizações ou especificações, transformando proposições universais em existenciais, e vice-versa. Compreender essas regras é essencial para aprofundar o entendimento da estrutura da lógica, o que nos permite analisar e construir argumentos mais complexos de maneira precisa e coerente.
+As regras de inferência com quantificadores lidam especificamente com as proposições que envolvem quantificadores. Estas regras nos permitem fazer generalizações ou especificações, transformando proposições universais em existenciais, e vice-versa. Compreender essas regras é essencial para aprofundar o entendimento da estrutura da lógica, o que nos permite analisar e construir argumentos mais complexos de forma precisa e coerente.
 
 Nos próximos tópicos, exploraremos essas regras em detalhes, observando como elas interagem com os quantificadores universal e existencial.
 
@@ -8189,7 +8189,7 @@ $$On(b1, s2) \land Hot(b2) \land \neg (On(b3) \lor Hot(b3))$$
    $$\neg (mesmoLado(Ganso, Grãos) \land \neg mesmoLado(Ganso, Fazendeiro))$$
 
 2. **Quebra-cabeça: O Problema da Ponte e da Tocha**
-   Quatro pessoas chegam a um rio à noite. Há uma ponte estreita, mas ela só pode conter duas pessoas de cada vez. Eles têm uma tocha e, por ser noite, a tocha tem que ser usada ao atravessar a ponte. A pessoa $A$ Pode atravessar a ponte em um minuto, $B$ em dois minutos, $C$ em cinco minutos e $D$ em oito minutos. Quando duas pessoas atravessam a ponte juntas, elas devem se mover no ritmo da pessoa mais lenta. Qual é a maneira mais rápida para todos eles atravessarem a ponte?
+   Quatro pessoas chegam a um rio à noite. Há uma ponte estreita, mas ela só pode conter duas pessoas de cada vez. Eles têm uma tocha e, por ser noite, a tocha tem que ser usada ao atravessar a ponte. A pessoa $A$ Pode atravessar a ponte em um minuto, $B$ em dois minutos, $C$ em cinco minutos e $D$ em oito minutos. Quando duas pessoas atravessam a ponte juntas, elas devem se mover no ritmo da pessoa mais lenta. Qual é a forma mais rápida para todos eles atravessarem a ponte?
 
    **Solução**: primeiro, $A$ e $B$Atravessam a ponte, o que leva 2 minutos. $A$ então pega a tocha e volta para o lado original, levando 1 minuto. $A$ fica no lado original enquanto $C$ e $D$Atravessam a ponte, levando 8 minutos. $B$ então pega a tocha e volta para o lado original, levando 2 minutos. Finalmente, $A$ e $B$Atravessam a ponte novamente, levando 2 minutos. No total, teremos $2+1+8+2+2=15$ minutos.
 
@@ -8338,9 +8338,9 @@ $$On(b1, s2) \land Hot(b2) \land \neg (On(b3) \lor Hot(b3))$$
 
 # Formas Normais
 
-As formas normais, em sua essência, são um meio de trazer ordem e consistência à maneira como representamos proposições na Lógica Proposicional. Elas oferecem uma estrutura formalizada para expressar proposições, uma convenção que simplifica a comparação, análise, entendimento e simplificação de proposições lógicas.
+As formas normais, em sua essência, são um meio de trazer ordem e consistência à forma como representamos proposições na Lógica Proposicional. Elas oferecem uma estrutura formalizada para expressar proposições, uma convenção que simplifica a comparação, análise, entendimento e simplificação de proposições lógicas.
 
-Consideremos, por exemplo, a tarefa de comparar duas proposições para determinar se são equivalentes. Sem uma forma padronizada de representar proposições, essa tarefa pode se tornar complexa e demorada. No entanto, ao utilizar as formas normais, cada proposição é expressa de uma maneira padrão, tornando a comparação direta e simples. Além disso, as formas normais também desempenham um papel crucial na simplificação de proposições. Ao expressar uma proposição em sua forma normal, é mais fácil identificar oportunidades de simplificação, removendo redundâncias ou simplificando a estrutura lógica. As formas normais não são apenas uma ferramenta para lidar com a complexidade da Lógica Proposicional, mas também uma metodologia que facilita a compreensão e manipulação de proposições lógicas.
+Consideremos, por exemplo, a tarefa de comparar duas proposições para determinar se são equivalentes. Sem uma forma padronizada de representar proposições, essa tarefa pode se tornar complexa e demorada. No entanto, ao utilizar as formas normais, cada proposição é expressa de uma forma padrão, tornando a comparação direta e simples. Além disso, as formas normais também desempenham um papel crucial na simplificação de proposições. Ao expressar uma proposição em sua forma normal, é mais fácil identificar oportunidades de simplificação, removendo redundâncias ou simplificando a estrutura lógica. As formas normais não são apenas uma ferramenta para lidar com a complexidade da Lógica Proposicional, mas também uma metodologia que facilita a compreensão e manipulação de proposições lógicas.
 
 Existem várias formas normais na Lógica Proposicional, cada uma com suas próprias regras e aplicações. Aqui estão algumas das principais:
 
@@ -8636,7 +8636,7 @@ Converter uma fórmula para a Forma Normal Conjuntiva, já incluindo os conceito
 
    $$(p \land (\neg q \lor p)) \land \neg p$$
 
-4. Aplicamos as propriedades comutativa e associativa para organizar os termos de uma maneira mais apresentável:
+4. Aplicamos as propriedades comutativa e associativa para organizar os termos de uma forma mais apresentável:
 
    $$(\neg q \lor p) \land (p \land \neg p)$$
 
@@ -8776,7 +8776,7 @@ A skolemização resultará em:
 
 $$\forall x \forall z R(x,f(x),z,g(x,z))$$
 
-Onde $f(x)$ e $ g(x,z)$ são Funções Skolem introduzidas para substituir as variáveis existenciais $y$ e $w $ respectivamente. A escolha entre usar uma Constante Skolem ou uma Função Skolem durante a skolemização depende do escopo dos quantificadores na fórmula original. Aqui estão as regras e passos para realizar a skolemização de maneira mais explicativa:
+Onde $f(x)$ e $ g(x,z)$ são Funções Skolem introduzidas para substituir as variáveis existenciais $y$ e $w $ respectivamente. A escolha entre usar uma Constante Skolem ou uma Função Skolem durante a skolemização depende do escopo dos quantificadores na fórmula original. Aqui estão as regras e passos para realizar a skolemização de forma mais explicativa:
 
 **Passo 1: Identificar os Quantificadores Existenciais**: comece identificando os quantificadores existenciais na fórmula.
 
@@ -10385,9 +10385,9 @@ Este mundo representa um jogo onde:
 
 # Cláusula de Horn
 
-A **Cláusula de Horn** foi nomeada em homenagem ao matemático e lógico americano [Alfred Horn](https://en.wikipedia.org/wiki/Alfred_Horn), que a introduziu em [um artigo publicado em 1951](https://www.cambridge.org/core/journals/journal-of-symbolic-logic/article/abs/on-sentences-which-are-true-of-direct-unions-of-algebras1/DF348CB269B06D6702DA3AE4DCF38C39). O contexto histórico e a motivação para a introdução da Cláusula de Horn são profundamente enraizados na solução do Problema da Decidibilidade. Na primeira metade do século XX, a lógica matemática estava focada na questão da decidibilidade: determinar se uma afirmação lógica é verdadeira ou falsa de maneira algorítmica.
+A **Cláusula de Horn** foi nomeada em homenagem ao matemático e lógico americano [Alfred Horn](https://en.wikipedia.org/wiki/Alfred_Horn), que a introduziu em [um artigo publicado em 1951](https://www.cambridge.org/core/journals/journal-of-symbolic-logic/article/abs/on-sentences-which-are-true-of-direct-unions-of-algebras1/DF348CB269B06D6702DA3AE4DCF38C39). O contexto histórico e a motivação para a introdução da Cláusula de Horn são profundamente enraizados na solução do Problema da Decidibilidade. Na primeira metade do século XX, a lógica matemática estava focada na questão da decidibilidade: determinar se uma afirmação lógica é verdadeira ou falsa de forma algorítmica.
 
-Não demorou muito para os matemáticos perceberem que a Lógica de Primeira Ordem é poderosa, mas pode ser ineficientes para resolver os problemas relacionados ao Problema da Decidibilidade. A busca por formas mais eficientes de resolução levou ao estudo de subconjuntos restritos da Lógica de Primeira Ordem, onde a decidibilidade poderia ser alcançada de maneira mais eficiente. Aqui, eficiência significa o menor custo computacional, no menor tempo.
+Não demorou muito para os matemáticos perceberem que a Lógica de Primeira Ordem é poderosa, mas pode ser ineficientes para resolver os problemas relacionados ao Problema da Decidibilidade. A busca por formas mais eficientes de resolução levou ao estudo de subconjuntos restritos da Lógica de Primeira Ordem, onde a decidibilidade poderia ser alcançada de forma mais eficiente. Aqui, eficiência significa o menor custo computacional, no menor tempo.
 
 Alfred Horn identificou um desses subconjuntos em seu artigo de 1951, introduzindo o que agora é conhecido como **Cláusula de Horn**. Ele mostrou que esse subconjunto particular tem propriedades interessantes que permitem a resolução em tempo polinomial, tornando-o atraente para aplicações práticas.
 
@@ -10425,7 +10425,7 @@ Para entender melhor, imagine que estamos construindo um cenário mental fundame
 - $\neg P \land \neg Q \rightarrow R$: _Se não chover, $P$ e não ventar, $Q$, então faremos um piquenique, $R$_.
 - $\neg A \land \neg B \land \neg C \rightarrow D$: _Se $A$, $B$ e $C$ forem falsos, então $D$ é verdadeiro_.
 
-**3. Metas ou Consultas**: finalmente, temos as metas ou consultas. Essas são as perguntas que fazemos ao nosso mundo lógico. _Está chovendo?_, _A grama está molhada?_ São os caminhos que usaremos para explorar o cenário criado, olhando ao redor e tentando entender o que está acontecendo. As consultas são a maneira de interagir com nosso mundo lógico, usando os fatos e regras que estabelecemos para encontrar respostas e alcançar objetivos. Por exemplo:
+**3. Metas ou Consultas**: finalmente, temos as metas ou consultas. Essas são as perguntas que fazemos ao nosso mundo lógico. _Está chovendo?_, _A grama está molhada?_ São os caminhos que usaremos para explorar o cenário criado, olhando ao redor e tentando entender o que está acontecendo. As consultas são a forma de interagir com nosso mundo lógico, usando os fatos e regras que estabelecemos para encontrar respostas e alcançar objetivos. Por exemplo:
 
 - $\neg P \land \neg Q$: _É verdade que hoje não está chovendo e não está ventando?_
 - $\neg X \land \neg Y \land \neg Z$: _$x$, $Y$ e $Z $ são falsos?_
@@ -10639,7 +10639,7 @@ Este mundo em Cláusulas de Horn permite representar e raciocinar sobre relaçõ
 
 ### Quantificadores em Cláusulas de Horn
 
-Os quantificadores podem ser incluídos nas Cláusulas de Horn. Contudo, é importante notar que a forma padrão de Cláusulas de Horn em programação lógica geralmente lida com quantificação de maneira implícita. A quantificação universal é comum e é geralmente assumida em regras, enquanto a quantificação existencial é muitas vezes tratada através de fatos específicos ou construção de termos.
+Os quantificadores podem ser incluídos nas Cláusulas de Horn. Contudo, é importante notar que a forma padrão de Cláusulas de Horn em programação lógica geralmente lida com quantificação de forma implícita. A quantificação universal é comum e é geralmente assumida em regras, enquanto a quantificação existencial é muitas vezes tratada através de fatos específicos ou construção de termos.
 
 Precisamos tomar cuidado porque a inclusão explícita de quantificadores pode levar a uma Lógica de Primeira Ordem mais rica, permitindo expressões mais complexas e poderosas. No entanto, isso também pode aumentar a complexidade do raciocínio e da resolução.
 
@@ -10774,7 +10774,7 @@ $$\forall x \forall y (Ganso(x) \wedge Grão(y) \wedge Sozinhos(x, y) \rightarro
 $$¬Come (r, g)?$$
 $$¬Come (g, gr)?$$
 
-**Problema 4 - A Ponte e a Tocha:** quatro pessoas chegam a um rio à noite. Há uma ponte estreita, mas ela só pode conter duas pessoas de cada vez. Eles têm uma tocha e, por ser noite, a tocha tem que ser usada ao atravessar a ponte. A pessoa A pode atravessar a ponte em um minuto, B em dois minutos, C em cinco minutos e D em oito minutos. Quando duas pessoas atravessam a ponte juntas, elas devem se mover no ritmo da pessoa mais lenta. Qual é a maneira mais rápida para todos eles atravessarem a ponte?
+**Problema 4 - A Ponte e a Tocha:** quatro pessoas chegam a um rio à noite. Há uma ponte estreita, mas ela só pode conter duas pessoas de cada vez. Eles têm uma tocha e, por ser noite, a tocha tem que ser usada ao atravessar a ponte. A pessoa A pode atravessar a ponte em um minuto, B em dois minutos, C em cinco minutos e D em oito minutos. Quando duas pessoas atravessam a ponte juntas, elas devem se mover no ritmo da pessoa mais lenta. Qual é a forma mais rápida para todos eles atravessarem a ponte?
 
 **Fatos (tempos)**:
 

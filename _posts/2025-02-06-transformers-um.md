@@ -31,7 +31,7 @@ keywords: |-
     inteligência artificial
 toc: true
 published: true
-lastmod: 2025-04-17T23:01:17.077Z
+lastmod: 2025-04-18T19:03:19.430Z
 ---
 
 Neste artigo, a curiosa leitora irá enfrentar os *Transformers*. Nenhuma relação com o o Optimus Prime. Se for estes *Transformers* que está procurando, **o Google falhou com você!**
@@ -499,7 +499,7 @@ Em C++ podemos usar o [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_P
 /**
  * @brief Função principal que demonstra o cálculo do produto escalar usando a biblioteca Eigen.
  *
- * Este programa define dois vetores tridimensionais e calcula seu produto escalar de duas maneiras:
+ * Este programa define dois vetores tridimensionais e calcula seu produto escalar de duas formas:
  * utilizando o método `dot()` da biblioteca Eigen e utilizando a multiplicação matricial com a transposta
  * de um dos vetores. Os resultados são exibidos no console.
  *

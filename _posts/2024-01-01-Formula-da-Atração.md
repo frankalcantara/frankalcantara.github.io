@@ -20,7 +20,7 @@ keywords:
     - poesia
     - álgebra vetorial
 rating: 5
-lastmod: 2025-04-12T14:36:33.715Z
+lastmod: 2025-04-18T19:03:19.308Z
 ---
 
 O Eletromagnetismo é a lei, o ordenamento que embala o universo. Como uma divindade antiga que rege a existência e os movimentos de tudo que existe. Duas forças, elétrica e magnética, em uma dança interminável, moldam de um grão de poeira a um oceano de estrelas, até o mesmo dispositivo que você usa para decifrar essas palavras deve sua existência e funcionamento ao Eletromagnetismo.
@@ -704,7 +704,7 @@ Uma vez que tenhamos entendido a operação Produto Escalar, nos resta entender 
 
 2. **Distributividade em Relação a Adição:** o Produto Escalar também é como um rio dividindo-se em afluentes. Você pode distribuí-lo, espalhá-lo, dividir um vetor por muitos. Adicione dois vetores e multiplique-os por um terceiro - você pode fazer isso de uma vez ou pode fazer um por vez. O Produto Escalar não se importa. Ele dá o mesmo número, a mesma resposta. Isso é ser distributivo em relação a adição. Dessa forma teremos: $\vec{A}\cdot (\vec{B}+\vec{C}) = \vec{A}\cdot \vec{B} + \vec{A}\cdot \vec{C}$.
 
-3. **Associatividade com Escalares:** o Produto Escalar é como um maestro habilidoso que sabe equilibrar todos os instrumentos em uma orquestra. Imagine um escalar como a intensidade da música: aumente ou diminua, e a harmonia ainda será mantida. Multiplicar um vetor por um escalar e, em seguida, realizar o Produto Escalar com outro vetor é o mesmo que primeiro executar o Produto Escalar e depois ajustar a intensidade. O Produto Escalar, em sua elegância matemática, garante que o show continue de maneira harmoniosa, independentemente de quando a intensidade é ajustada. Essa é a essência da associatividade com escalares. Portanto, podemos dizer que: $k(\vec{A} \cdot \vec{B}) = (k \vec{A}) \cdot \vec{B} = \vec{A} \cdot (k\vec{B})$
+3. **Associatividade com Escalares:** o Produto Escalar é como um maestro habilidoso que sabe equilibrar todos os instrumentos em uma orquestra. Imagine um escalar como a intensidade da música: aumente ou diminua, e a harmonia ainda será mantida. Multiplicar um vetor por um escalar e, em seguida, realizar o Produto Escalar com outro vetor é o mesmo que primeiro executar o Produto Escalar e depois ajustar a intensidade. O Produto Escalar, em sua elegância matemática, garante que o show continue de forma harmoniosa, independentemente de quando a intensidade é ajustada. Essa é a essência da associatividade com escalares. Portanto, podemos dizer que: $k(\vec{A} \cdot \vec{B}) = (k \vec{A}) \cdot \vec{B} = \vec{A} \cdot (k\vec{B})$
 
 4. **Produto Escalar do Vetor Consigo Mesmo:** O Produto Escalar tem um momento introspectivo, como um dançarino girando em um reflexo de espelho. Quando um vetor é multiplicado por si mesmo, ele revela sua verdadeira força, sua magnitude ao quadrado. É uma dança solitária, onde o vetor se alinha perfeitamente consigo mesmo, na mais pura sintonia. Esta auto-referência nos mostra o quanto o vetor se projeta em sua própria direção, revelando a essência de sua magnitude. Assim, temos: $\vec{A} \cdot \vec{A} = \vert  \vec{A} \vert ^2$. Veja um vetor $\vec{A}$. Uma seta solitária estendendo-se no espaço. Imagine colocar outra seta exatamente igual, exatamente no mesmo lugar. Duas Setas juntas, $\vec{A}$ e $\vec{A}$, sem nenhum ângulo entre elas.
 
@@ -950,7 +950,7 @@ O Produto Vetorial é como uma dança entre vetores. E como todas as danças tem
 
    $$\vec{A} \times (\vec{B}+\vec{C}) = \vec{A} \times \vec{B} + \vec{A} \times \vec{C}$$
 
-4. **Multiplicação por Escalar:** agora entra em cena um escalar, $k$, um número simples, porém carregado de influência. Ele se aproxima do Produto Vetorial e o muda, mas não de maneira selvagem ou imprevisível, e sim com a precisão de um relojoeiro. A magnitude do Produto Vetorial é esticada ou contraída pelo escalar, dependendo de seu valor. Isto pode ser escrito matematicamente como:
+4. **Multiplicação por Escalar:** agora entra em cena um escalar, $k$, um número simples, porém carregado de influência. Ele se aproxima do Produto Vetorial e o muda, mas não de forma selvagem ou imprevisível, e sim com a precisão de um relojoeiro. A magnitude do Produto Vetorial é esticada ou contraída pelo escalar, dependendo de seu valor. Isto pode ser escrito matematicamente como:
 
    $$k(A \times B) = (kA) \times B = A \times (kB)$$
 
@@ -1153,7 +1153,7 @@ onde $\frac{\partial \mathbf{F} }{\partial x}$, $\frac{\partial \mathbf{F}}{\par
 
 Só a expressão **Derivadas parciais** pode fazer o coração bater mais rápido. O medo não o guiará aqui. As derivadas parciais são como velhos amigos que você ainda não conheceu.
 
-Imagine-se em uma grande pradaria. O vento está soprando, carregando consigo o cheiro da grama e da terra. Você está livre para caminhar em qualquer direção. Para o norte, onde o sol se põe, ou para o sul, onde a floresta começa. Cada passo que você dá muda a paisagem ao seu redor, mas de maneiras diferentes dependendo da direção em que você escolheu caminhar.
+Imagine-se em uma grande pradaria. O vento está soprando, carregando consigo o cheiro da grama e da terra. Você está livre para caminhar em qualquer direção. Para o norte, onde o sol se põe, ou para o sul, onde a floresta começa. Cada passo que você dá muda a paisagem ao seu redor, mas de formas diferentes dependendo da direção em que você escolheu caminhar.
 
 A derivada parcial é apenas essa ideia, vestida com a roupa do cálculo. Ela apenas quer saber: e se eu der um pequeno passo para o norte, ou seja, mudar um pouco $x$, como a paisagem, nossa função, vai mudar? Ou o se for para o sul, ou em qualquer outra direção que escolher.
 
@@ -1318,7 +1318,7 @@ No oceano, o tempo é um caprichoso mestre de marionetes, manipulando o clima co
 
 Um lugar onde o vento está sendo sugado para dentro tem uma divergência negativa - o vento está "fluido" para dentro mais do que está saindo. Um lugar onde o vento está explodindo para fora tem uma divergência positiva - o vento está saindo mais do que está entrando. Este é o conceito que aplicamos as cargas elétricas, o campo elétrico diverge das cargas positivas e converge para as negativas. Isto porque assim convencionamos há séculos, quando começamos e estudar o Eletromagnetismo.
 
-Matematicamente, **a divergência é uma maneira de medir esses comportamentos de "expansão" ou "contração" de um campo vetorial**. Para um campo vetorial em três dimensões, $\mathbf{F} = f_x \, \vec{a}_x + f_y \, \vec{a}_y + f_z \, \vec{a}_z$, a divergência é calculada como:
+Matematicamente, **a divergência é uma forma de medir esses comportamentos de "expansão" ou "contração" de um campo vetorial**. Para um campo vetorial em três dimensões, $\mathbf{F} = f_x \, \vec{a}_x + f_y \, \vec{a}_y + f_z \, \vec{a}_z$, a divergência é calculada como:
 
 $$
 \nabla \cdot \mathbf{F} = \frac{\partial F_x}{\partial x} + \frac{\partial F_y}{\partial y} + \frac{\partial F_z}{\partial z}

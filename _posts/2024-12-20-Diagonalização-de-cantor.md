@@ -23,7 +23,7 @@ keywords: |-
 toc: false
 published: true
 beforetoc: Para colocar ordem na casa, a tradução de dois artigos de Georg Cantor sobre a não numerabilidade dos números reais.
-lastmod: 2025-01-13T16:38:27.861Z
+lastmod: 2025-04-18T19:03:19.345Z
 ---
 
 Triste é a sina de quem pretende entender.
@@ -80,7 +80,7 @@ $$\begin{equation}
 \end{equation}
 $$
 
-Os números do conjunto $(\Omega)$, isto é, o conjunto de todos os números algébricos reais, podem então ser organizados da seguinte maneira: tomamos como primeiro número $\omega_1$ o único número com altura $N = 1$; para $N = 2$, existem 2 números algébricos reais, que são ordenados de acordo com o tamanho, sendo designados por $\omega_2, \omega_3$; para $N = 3$, há 4 números, novamente ordenados por tamanho. De forma geral, após todos os números em $(\Omega)$ até uma altura $N = N_k$ terem sido enumerados e atribuídos a posições definidas, os números algébricos reais com altura $N = N_k + 1$ seguem a ordem de tamanho. Assim, obtemos o conjunto $(\Omega)$ de todos os números algébricos reais na forma:
+Os números do conjunto $(\Omega)$, isto é, o conjunto de todos os números algébricos reais, podem então ser organizados da seguinte forma: tomamos como primeiro número $\omega_1$ o único número com altura $N = 1$; para $N = 2$, existem 2 números algébricos reais, que são ordenados de acordo com o tamanho, sendo designados por $\omega_2, \omega_3$; para $N = 3$, há 4 números, novamente ordenados por tamanho. De forma geral, após todos os números em $(\Omega)$ até uma altura $N = N_k$ terem sido enumerados e atribuídos a posições definidas, os números algébricos reais com altura $N = N_k + 1$ seguem a ordem de tamanho. Assim, obtemos o conjunto $(\Omega)$ de todos os números algébricos reais na forma:
 
 $$
 \begin{equation}

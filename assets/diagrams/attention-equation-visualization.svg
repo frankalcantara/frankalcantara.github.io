@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 800 450"
+   version="1.1"
+   id="svg47"
+   sodipodi:docname="attention-equation-visualization.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:export-filename="..\images\attention-equation-visualization.webp"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview47"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.3435029"
+     inkscape:cx="391.88602"
+     inkscape:cy="221.43607"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg47" />
+  <!-- Fundo branco -->
+  <!-- Título -->
+  <text
+     x="400"
+     y="40"
+     font-family="Arial"
+     font-size="22"
+     font-weight="bold"
+     text-anchor="middle"
+     id="text1">Equação de Atenção Completa</text>
+  <!-- Equação principal -->
+  <text
+     font-family="'Times New Roman'"
+     font-size="24px"
+     text-anchor="start"
+     id="text9"
+     x="231.05263"
+     y="223.15788"><tspan
+       x="231.05263"
+       y="223.15788"
+       font-style="italic"
+       id="tspan1">Atenção(Q,K,V)=</tspan></text>
+  <text
+     x="407.89471"
+     y="220.52631"
+     font-family="'Times New Roman'"
+     font-style="italic"
+     font-size="24px"
+     text-anchor="start"
+     id="text10">softmax</text>
+  <text
+     x="485.26315"
+     y="222.10526"
+     font-family="'Times New Roman'"
+     font-size="24px"
+     text-anchor="start"
+     id="text11"
+     style="font-size:42.6667px">(</text>
+  <g
+     id="g12"
+     transform="translate(510.26315,185.10526)">
+    <rect
+       x="8.0840979"
+       y="-10.231691"
+       width="56.463383"
+       height="36.463379"
+       fill="#ffcccc"
+       stroke="#ff6666"
+       stroke-width="1.85241"
+       rx="3.5289614"
+       ry="6.0772305"
+       id="rect11" />
+    <text
+       font-family="'Times New Roman'"
+       font-size="24px"
+       font-style="italic"
+       text-anchor="start"
+       id="text12"
+       x="16"
+       y="-2"><tspan
+         x="16"
+         y="18"
+         id="tspan11">QK</tspan><tspan
+         x="46"
+         y="6"
+         font-size="18px"
+         id="tspan12">T</tspan></text>
+  </g>
+  <line
+     x1="500.26315"
+     y1="215.10526"
+     x2="595.26318"
+     y2="215.10526"
+     stroke="#000000"
+     stroke-width="2"
+     id="line12" />
+  <text
+     x="520.26318"
+     y="240.10526"
+     font-family="'Times New Roman'"
+     font-size="24px"
+     text-anchor="start"
+     id="text13">√d<tspan
+   font-style="italic"
+   id="tspan13">k</tspan></text>
+  <text
+     font-family="'Times New Roman'"
+     font-size="24px"
+     text-anchor="start"
+     id="text15"
+     x="218.42105"
+     y="221.57893"
+     style="line-height:0"><tspan
+       x="588.42108"
+       y="221.57893"
+       id="tspan14"
+       style="line-height:1.1"><tspan
+   style="font-size:37.3333px;line-height:1.1"
+   id="tspan49">)</tspan>V</tspan></text>
+  <!-- Explicação do processo em 3 etapas -->
+  <rect
+     x="60.028908"
+     y="260.0289"
+     width="211.85136"
+     height="99.942184"
+     fill="#ffebeb"
+     stroke="#ff6666"
+     stroke-width="2.05781"
+     rx="10.592568"
+     ry="9.9942198"
+     id="rect15" />
+  <text
+     x="164"
+     y="283"
+     font-family="Arial"
+     font-size="16px"
+     font-weight="bold"
+     text-anchor="middle"
+     id="text16">1. Cálculo de Similaridade</text>
+  <text
+     x="160"
+     y="309"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="middle"
+     id="text17">QK<tspan
+   style="font-size:65%;baseline-shift:super"
+   id="tspan53">T</tspan> computa similaridade</text>
+  <text
+     x="162"
+     y="329"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="middle"
+     id="text18">entre Query (Q) e todas as</text>
+  <text
+     x="162"
+     y="349"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="middle"
+     id="text19">Keys (K) por produto escalar</text>
+  <path
+     d="m 274,310 h 20"
+     stroke="#555555"
+     stroke-width="2"
+     fill="none"
+     marker-end="url(#arrowhead)"
+     id="path19"
+     style="marker-end:url(#marker51)" />
+  <rect
+     x="304"
+     y="260"
+     width="200"
+     height="100"
+     fill="#eaefff"
+     stroke="#6680e0"
+     stroke-width="2"
+     rx="10"
+     ry="10"
+     id="rect19" />
+  <text
+     x="404"
+     y="283"
+     font-family="Arial"
+     font-size="16px"
+     font-weight="bold"
+     text-anchor="middle"
+     id="text20">2. Normalização</text>
+  <text
+     x="404"
+     y="309"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="middle"
+     id="text21">softmax(·) transforma</text>
+  <text
+     x="404"
+     y="329"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="middle"
+     id="text22">similaridades em pesos</text>
+  <text
+     x="404"
+     y="349"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="middle"
+     id="text23">de atenção (soma = 1)</text>
+  <path
+     d="m 506,310 h 20"
+     stroke="#555555"
+     stroke-width="2"
+     fill="none"
+     marker-end="url(#arrowhead)"
+     id="path23"
+     style="marker-end:url(#Triangle)" />
+  <rect
+     x="535.55402"
+     y="260.01996"
+     width="208.14763"
+     height="99.960083"
+     fill="#e6f8e6"
+     stroke="#60c060"
+     stroke-width="2.03993"
+     rx="10.407382"
+     ry="9.9960079"
+     id="rect23" />
+  <text
+     x="640"
+     y="283"
+     font-family="Arial"
+     font-size="16px"
+     font-weight="bold"
+     text-anchor="middle"
+     id="text24">3. Combinação Ponderada</text>
+  <text
+     x="640"
+     y="309"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="middle"
+     id="text25">Os pesos de atenção</text>
+  <text
+     x="640"
+     y="329"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="middle"
+     id="text26">ponderam os valores V</text>
+  <text
+     x="640"
+     y="349"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="middle"
+     id="text27">para cada posição</text>
+  <!-- Exemplo de visualização de produto de matrizes -->
+  <rect
+     x="93.157898"
+     y="77.368423"
+     width="60"
+     height="80"
+     fill="#ffdddd"
+     stroke="#888888"
+     id="rect27" />
+  <text
+     x="123.1579"
+     y="67.368423"
+     font-family="Arial"
+     font-size="16px"
+     text-anchor="middle"
+     id="text28">Q</text>
+  <text
+     x="123.1579"
+     y="122.36842"
+     font-family="'Times New Roman'"
+     font-size="30px"
+     font-style="italic"
+     text-anchor="middle"
+     id="text29">Q</text>
+  <text
+     x="167.36842"
+     y="128.6357"
+     font-family="Arial"
+     font-size="30px"
+     text-anchor="middle"
+     id="text30">×</text>
+  <rect
+     x="183.1579"
+     y="77.368423"
+     width="80"
+     height="80"
+     fill="#ddffdd"
+     stroke="#888888"
+     id="rect30" />
+  <text
+     x="223.1579"
+     y="67.368423"
+     font-family="Arial"
+     font-size="16px"
+     text-anchor="middle"
+     id="text31">K<tspan
+   style="font-size:65%;baseline-shift:super"
+   id="tspan52">T</tspan></text>
+  <text
+     x="223.1579"
+     y="126.36842"
+     font-family="'Times New Roman'"
+     font-size="30px"
+     font-style="italic"
+     text-anchor="middle"
+     id="text32">K<tspan
+   style="font-size:65%;baseline-shift:super"
+   id="tspan48">T</tspan></text>
+  <text
+     x="277.36844"
+     y="128.62836"
+     font-family="Arial"
+     font-size="30px"
+     text-anchor="middle"
+     id="text33">=</text>
+  <rect
+     x="290.03754"
+     y="77.405975"
+     width="92.556465"
+     height="79.924889"
+     fill="#fff4dd"
+     stroke="#888888"
+     id="rect33"
+     style="stroke-width:1.07511" />
+  <text
+     x="333.1579"
+     y="67.368423"
+     font-family="Arial"
+     font-size="16px"
+     text-anchor="middle"
+     id="text34">Scores</text>
+  <text
+     x="337.1579"
+     y="111.36842"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="middle"
+     id="text35">Similaridades</text>
+  <text
+     x="337.1579"
+     y="131.36842"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="middle"
+     id="text36">entre Q e K</text>
+  <path
+     d="m 384.8421,118.03022 h 20.47847"
+     stroke="#555555"
+     stroke-width="2.02378"
+     fill="none"
+     marker-end="url(#arrowhead)"
+     id="path36"
+     style="marker-end:url(#marker51)" />
+  <rect
+     x="413.1579"
+     y="77.368423"
+     width="80"
+     height="80"
+     fill="#ddeeff"
+     stroke="#888888"
+     id="rect36" />
+  <text
+     x="453.1579"
+     y="67.368423"
+     font-family="Arial"
+     font-size="16px"
+     text-anchor="middle"
+     id="text37">Softmax</text>
+  <text
+     x="453.1579"
+     y="111.36842"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="middle"
+     id="text38">Pesos de</text>
+  <text
+     x="453.1579"
+     y="131.36842"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="middle"
+     id="text39">Atenção</text>
+  <text
+     x="507.36844"
+     y="128.6357"
+     font-family="Arial"
+     font-size="30px"
+     text-anchor="middle"
+     id="text40">×</text>
+  <rect
+     x="523.1579"
+     y="77.368423"
+     width="60"
+     height="80"
+     fill="#e6e6ff"
+     stroke="#888888"
+     id="rect40" />
+  <text
+     x="553.1579"
+     y="67.368423"
+     font-family="Arial"
+     font-size="16px"
+     text-anchor="middle"
+     id="text41">V</text>
+  <text
+     x="553.1579"
+     y="128.36842"
+     font-family="'Times New Roman'"
+     font-size="30px"
+     font-style="italic"
+     text-anchor="middle"
+     id="text42">V</text>
+  <text
+     x="597.36841"
+     y="128.62836"
+     font-family="Arial"
+     font-size="30px"
+     text-anchor="middle"
+     id="text43">=</text>
+  <rect
+     x="613.1579"
+     y="77.368423"
+     width="80"
+     height="80"
+     fill="#f0f0f0"
+     stroke="#888888"
+     id="rect43" />
+  <text
+     x="653.1579"
+     y="67.368423"
+     font-family="Arial"
+     font-size="16px"
+     text-anchor="middle"
+     id="text44">Output</text>
+  <text
+     x="653.1579"
+     y="111.36842"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="middle"
+     id="text45">Vetores de</text>
+  <text
+     x="653.1579"
+     y="131.36842"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="middle"
+     id="text46">Contexto</text>
+  <!-- Marcadores de seta -->
+  <defs
+     id="defs46">
+    <marker
+       style="overflow:visible"
+       id="marker51"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Triangle arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path51" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Triangle"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Triangle arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path135" />
+    </marker>
+    <marker
+       id="arrowhead"
+       markerWidth="10"
+       markerHeight="7"
+       refX="9"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#555555"
+         id="polygon46" />
+    </marker>
+  </defs>
+  <!-- Legenda final -->
+  <g
+     transform="matrix(1.0065507,0,0,0.99992884,43.625591,374.37096)"
+     id="g47">
+    <rect
+       width="681.22015"
+       height="48.856873"
+       fill="#f9f9f9"
+       stroke="#dddddd"
+       rx="4.7306962"
+       ry="6.1071091"
+       id="rect46"
+       x="14.923961"
+       y="0.037502285"
+       style="stroke-width:1.075" />
+    <text
+       x="359.25568"
+       y="19.78974"
+       font-family="Arial"
+       font-size="14px"
+       text-anchor="middle"
+       fill="#555555"
+       id="text47"><tspan
+         sodipodi:role="line"
+         id="tspan50"
+         x="359.25568"
+         y="19.78974">A equação de atenção completa: o termo QK<tspan
+   style="font-size:65%;baseline-shift:super"
+   id="tspan47">T</tspan> calcula a similaridade entre queries e keys,</tspan><tspan
+         sodipodi:role="line"
+         id="tspan51"
+         x="359.25568"
+         y="37.289742">o softmax normaliza em pesos, e estes ponderam os vetores Value (V).</tspan></text>
+  </g>
+</svg>

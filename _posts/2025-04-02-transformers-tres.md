@@ -35,7 +35,7 @@ keywords: |-
     lstm
 toc: true
 published: true
-lastmod: 2025-04-17T23:22:46.411Z
+lastmod: 2025-04-18T19:03:19.463Z
 draft: 2025-04-17T18:49:57.828Z
 slug: transformers-desvendando-modelagem-de-sequencias
 ---
@@ -1539,7 +1539,7 @@ Esta abordagem de vetorização, ao destacar como um documento *difere* da norma
 
 ##### Utilidade Geral da Vetorização Probabilística N-gram
 
-As abordagens de vetorização probabilística N-gram que exploramos, desde a construção de matrizes $T_D$ até a comparação por razão de verossimilhança, oferecem uma maneira de ir além da simples contagem de palavras (como no TF-IDF). Elas começam a capturar a **estrutura sequencial** da linguagem, focando nas probabilidades de como as palavras se seguem umas às outras.
+As abordagens de vetorização probabilística N-gram que exploramos, desde a construção de matrizes $T_D$ até a comparação por razão de verossimilhança, oferecem uma forma de ir além da simples contagem de palavras (como no TF-IDF). Elas começam a capturar a **estrutura sequencial** da linguagem, focando nas probabilidades de como as palavras se seguem umas às outras.
 
 Embora limitadas pelo contexto local (especialmente em ordens baixas como $N=2$, bigramas), essas técnicas são fundamentais para entender a evolução dos modelos de linguagem. Elas fornecem representações que podem ser usadas em tarefas como:
 
