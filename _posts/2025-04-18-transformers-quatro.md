@@ -35,7 +35,7 @@ keywords: |-
     lstm
 toc: true
 published: true
-lastmod: 2025-04-18T19:03:19.287Z
+lastmod: 2025-04-18T19:48:28.758Z
 ---
 
 ## Superando Limitações Locais: Construindo a Ponte para a Atenção
@@ -75,7 +75,7 @@ Neste cenário, para determinar a sequência correta de palavras após `descubra
 
 Para superar a visão estritamente local dos modelos **N-gram** (discutidos em detalhe no [artigo anterior](https://frankalcantara.com/transformers-desvendando-modelagem-de-sequencias/)), foram, ao longo do tempo, propostas algumas alternativas interessantes. Vamos nos concentrar em uma abordagem que mantém a inspiração de analisar interações entre pares de palavras, mas que introduz um certo grau de flexibilidade. Quase como se o modelo estivesse fazendo pilates e esticando-se para alcançar palavras mais distantes.
 
-A ideia central será: ao tentar prever a palavra que segue a palavra atual, $w_t$, em vez de depender apenas do contexto imediatamente anterior, como no par $(w_{t-1}, w_t)$ para bigramas ou a janela fixa dos **N-grams**, *vamos considerar a influência potencial de todas as palavras $w_i$ que apareçam antes de $w_t$ na sequência*. Em outras palavras, o que estamos propondo é um método que permita analisar a contribuição de cada par $(w_i, w_t)$, onde o índice $i$ varia desde o início da sequência até a posição anterior a $t$ para todo $i : 0 \le i < t$.
+A ideia central será: ao tentar prever a palavra que segue a palavra atual, $w_t$, em vez de depender apenas do contexto imediatamente anterior, como no par $(w_{t-1}, w_t)$ para bigramas ou a janela fixa dos **N-grams**, *vamos considerar a influência potencial de todas as palavras $w_i$ que apareçam antes de $w_t$ na sequência*. Em outras palavras, o que estamos propondo é um método que permita analisar a contribuição de cada par $(w_i, w_t)\;$, onde o índice $i$ varia desde o início da sequência até a posição anterior a $t$ para todo $i : 0 \le i < t$.
 
 Olhar o problema por essa perspectiva irá permitir saltar sobre o texto intermediário que pode existir entre $w_i$ e $w_t$. *Ao fazer isso, abrimos a possibilidade de capturar dependências e relações semânticas de longo alcance, que são inacessíveis aos modelos **N-gram** tradicionais devido à sua janela de contexto fixa e local*.
 
@@ -101,53 +101,61 @@ No exemplo `Verifique o log do programa e descubra se ele foi executado`: as car
 ![Votação de características de pares com saltos](/assets/images/saltos.webp)
 _Figura 2: A figura ilustra o mecanismo de votação de características hipotético para predição da próxima palavra em um modelo baseado em pares com saltos. No exemplo, no contexto da frase `Verifique o log do programa e descubra se ele foi executado`, está sendo prevista a palavra que segue `executado` ._{: class="legend"}
 
-Esta abordagem, embora ainda baseada em pares, oferece uma forma de incorporar contexto de longo alcance de forma seletiva. A implementação pode usar estruturas de dados semelhantes às do modelo de segunda ordem, mas a lógica de treinamento e predição muda para refletir a soma de "votos" de múltiplos pares ativos.
+Esta abordagem, embora ainda baseada em pares, oferece uma forma de incorporar contexto de longo alcance de forma seletiva. A implementação pode usar estruturas de dados semelhantes às do modelo de segunda ordem, mas a lógica de treinamento e predição muda para refletir a soma de votos, ou pesos, de múltiplos pares ativos.
 
-Para entender como os valores de "votos" apresentados na Figura 2 são calculados, precisamos detalhar a matemática conceitual por trás da abordagem de Agregação de Características de Pares. *É importante notar que os valores na figura são ilustrativos e hipotéticos*, projetados para demonstrar a ideia de que diferentes pares têm pesos diferentes, e não necessariamente derivados diretamente apenas das duas frases de exemplo fornecidas. *Um corpus de treinamento real conteria muito mais dados*.
+Para entender como os valores de votos apresentados na Figura 2 são calculados, precisamos detalhar a matemática conceitual por trás da abordagem de Agregação de Características de Pares. *É importante notar que os valores na figura são ilustrativos, hipotéticos, que foram criados para que a atenta leitora possa entender a ideia de que diferentes pares têm pesos diferentes*. *Um corpus de treinamento real conteria muito mais dados*.
 
-O processo funciona da seguinte forma:
+Todo o conceito que vimos até aqui pode ser reduzido a três passos:
 
-1. **Coleta de Evidências (Contagem)**: durante uma fase de treinamento, que no nosso caso conceitual é apenas analisar as frases de exemplo, o modelo observa todas as ocorrências de sequências de três palavras $(w_i, w_t, w_{t+1})$. Para cada par $(w_i, w_t)$ que aparece na sequência, ele registra qual palavra $w_{t+1}$ o seguiu. Mantemos uma contagem, $C(w_i, w_t, w_{t+1})$, de quantas vezes vimos a palavra $w_{t+1}$ aparecer imediatamente após a palavra $w_t$, dado que $w_i$ apareceu em alguma posição anterior a $t$. Se as sequências tiverem pesos, como no exemplo onde cada frase tem peso $0.5$, somamos esses pesos em vez de apenas contar $1$ para cada ocorrência.
+1. **Coleta de Evidências (Contagem)**: durante a fase de treinamento, que no nosso caso conceitual será apenas analisar as frases de exemplo, o modelo observa todas as ocorrências de sequências de três palavras $(w_i, w_t, w_{t+1})$. Para cada par $(w_i, w_t)$ que aparece na sequência, ele registra qual palavra $w_{t+1}$ o seguiu. Nesta fase, mantemos uma contagem, $C(w_i, w_t, w_{t+1})\;$, de quantas vezes vimos a palavra $w_{t+1}$ aparecer imediatamente após a palavra $w_t$, dado que $w_i$ apareceu em alguma posição anterior a $t$. Se as sequências tiverem pesos, como no exemplo onde cada frase tem peso $0.5$, somamos esses pesos em vez de apenas contar $1$ para cada ocorrência.
 
-2. **Normalização por Par (Cálculo dos Votos)**: para cada par específico $(w_i, w_t)$ que ocorreu no treinamento, calculamos o "voto" que este par dá para uma possível próxima palavra $w_k$. Esse voto é a frequência relativa, ou probabilidade condicional estimada, de $w_k$ ocorrer após $(w_i, w_t)$, baseada nas contagens. A fórmula será:
+2. **Normalização por Par (Cálculo dos Votos)**: para cada par específico $(w_i, w_t)$ que ocorreu no treinamento, calculamos o voto que este par dá para uma possível próxima palavra $w_k$. Esse voto é a frequência relativa, ou probabilidade condicional estimada, de $w_k$ ocorrer após $(w_i, w_t)\;$, baseada nas contagens. A fórmula para o voto será dada por:
 
-    $$Voto(w_k  \vert  w_i, w_t) = \frac{C(w_i, w_t, w_k)}{\sum_{w'} C(w_i, w_t, w')}$$
+    $$\text{Voto}(w_k  \vert  w_i, w_t) = \frac{C(w_i, w_t, w_k)}{\sum_{w'} C(w_i, w_t, w')}$$
 
-    Na qual, a soma no denominador $\sum_{w'} C(w_i, w_t, w')$ é feita sobre todas as palavras $w'$ que foram observadas seguindo o par $(w_i, w_t)$ no corpus de treinamento. Isso garante que a soma dos votos de um par específico $(w_i, w_t)$ para todas as possíveis palavras seguintes seja $1$.
+    Na qual, a soma no denominador $\sum_{w'} C(w_i, w_t, w')\;\,$ será feita sobre todas as palavras $w'$ que foram observadas seguindo o par $(w_i, w_t)$ no corpus de treinamento. Isso garante que a soma dos votos de um par específico $(w_i, w_t)$ para todas as possíveis palavras seguintes seja $1$.
 
-    * **Exemplo (Hipotético)**: A Figura 2 mostra que para o par $(programa, executado)$, o voto para `por` é $0.8$ e para `favor` é $0.1$. Isso implicaria que, no corpus hipotético usado para gerar a figura, $80\%$ das vezes que a sequência continha `... programa ... executado ...`, a palavra seguinte era `por`, e $10\%$ das vezes era `favor`. Os $10\%$ restantes seriam outras palavras não mostradas.
+    No exemplo hipotético apresentado na Figura 2 vemos que considerando o par $(programa, executado)\;$, o voto para `por` será $0.8$ e para `favor` o voto será $0.1$. Isso implica que, no corpus hipotético usado para gerar a figura, $80\%$ das vezes em que a sequência continha `... programa ... executado ...`, a palavra seguinte foi `por`, e $10\%$ das vezes foi `favor`. Os $10\%$ restantes foram outras palavras não apresentadas na figura.
 
-    * **Contraste com Nossas Frases**: se considerarmos *apenas* as duas frases dadas, o par $(programa, executado)$ ocorre uma única vez, seguido por "por". Portanto, um cálculo estrito baseado apenas nessas duas frases resultaria em $Voto(\text{por} \vert \text{programa}, \text{executado}) = 1.0$ e $Voto(\text{favor} \vert \text{programa}, \text{executado}) = 0.0$. Isso confirma que os valores da figura são ilustrativos de um cenário de dados mais rico.
+    Se fizermos uma análise de contraste com as frases do nosso corpus de treinamento: considerando as duas frases dadas, o par $(programa, executado)$ ocorre uma única vez, seguido por `por`. Portanto, um cálculo estrito baseado apenas nessas duas frases resultaria em:
 
-3. **Agregação na Predição**: quando queremos prever a palavra após $w_t$ em uma *nova* sequência, identificamos todos os pares $(w_i, w_t)$ formados pela palavra atual $w_t$ e cada palavra anterior $w_i$ na sequência. Em seguida, somamos os votos pré-calculados $Voto(w_k \vert w_i, w_t)$ para cada palavra candidata $w_k$:
+    $$\text{Voto}(\text{por} \vert \text{programa}, \text{executado})\;\; = 1.0$$
+
+    e
+
+    $$\text{Voto}(\text{favor} \vert \text{programa}, \text{executado})\;\; = 0.0$$
+
+    Isso confirma que os valores da figura são ilustrativos de um cenário de dados mais rico. Afinal, $1$ e $0$ são extremos, não tem nenhuma graça e o modelo real deverá ter uma distribuição mais suave entre as palavras candidatas.
+
+3. **Agregação na Predição**: quando queremos prever a palavra após $w_t$ em uma nova sequência, um documento qualquer que não está no corpus de treinamento, identificamos todos os pares $(w_i, w_t)$ formados pela palavra atual $w_t$ e cada palavra anterior $w_i$ na sequência. Em seguida, somamos os votos pré-calculados durante o treinamento, $\text{Voto}(w_k \vert w_i, w_t)\;\,$ para cada palavra candidata $w_k$:
 
     $$Score(w_k  \vert  \text{sequência até } w_t) = \sum_{i \text{ tal que } w_i \text{ precede } w_t} Voto(w_k  \vert  w_i, w_t)$$
 
-    A palavra $w_k$ com o maior $Score$ agregado é a previsão do modelo. A Figura 2 ilustra a etapa antes dessa agregação final, mostrando os votos individuais $Voto(w_k  \vert  w_i, w_t)$ para $w_t = \text{"executado"}$ e vários $w_i$.
+    A palavra $w_k$ com o maior $Score$ agregado é a previsão do modelo. A Figura 2 ilustra a etapa antes dessa agregação final, mostrando os votos individuais $\text{Voto}(w_k  \vert  w_i, w_t)$ para $w_t = \text{"executado"}$ e vários $w_i$.
 
-Eu parti de um exemplo simples, livre, leve e solto, para que a esforçada leitora tenha uma chance maior de entender a ideia. Mas, deve ser possível imaginar que essa abordagem pode ser aplicada a sequências muito mais longas e complexas. A ideia é que, ao considerar todos os pares $(w_i, w_t)$, podemos capturar dependências de longo alcance que seriam impossíveis com um modelo **N-gram** tradicional. Talvez um exemplo mais complexo ajude a fixar a ideia.
+Eu parti de um exemplo simples, livre, leve e solto, para que a esforçada leitora tenha uma chance maior de entender a ideia. Mas, deve ser possível imaginar que essa abordagem pode ser aplicada a sequências muito mais longas e complexas. A ideia é que, ao considerar todos os pares $(w_i, w_t)\;$, podemos capturar dependências de longo alcance que seriam impossíveis com um modelo **N-gram** tradicional. Talvez um exemplo mais complexo ajude a fixar a ideia.
 
 #### Exemplo Detalhado: Modelo de Agregação de Características de Pares
 
-Ainda que o título seja exemplo detalhado, eu vou ignorar que no mundo real, passaríamos o corpus por alguns processos de preparação do texto. Sendo assim, a esforçada leitora deve considerar um **corpus de treinamento** com os $5$ documentos a seguir:
+Mesmo que o título desta seção seja exemplo detalhado, eu vou ignorar que no mundo real, passaríamos o corpus por alguns processos de preparação de texto antes da aplicação de qualquer algoritmo. Sendo assim, para este exemplo a esforçada leitora deve considerar um **corpus de treinamento** com os $5$ documentos a seguir:
 
-1. `Verifique o log do programa e descubra se ele foi executado, por favor.`;
-2. `Verifique o log da bateria e descubra se ela acabou, por favor.`;
-3. `O programa foi executado com sucesso, por isso não precisa verificar novamente.`;
-4. `A bateria foi substituída, por isso está funcionando corretamente.`;
-5. `Ele executou o programa, por isso obteve os resultados esperados.`.
+1. $D_1 =\;$ `Verifique o log do programa e descubra se ele foi executado, por favor.`;
+2. $D_2 =\;$`Verifique o log da bateria e descubra se ela acabou, por favor.`;
+3. $D_3 =\;$`O programa foi executado com sucesso, por isso não precisa verificar novamente.`;
+4. $D_4 =\;$`A bateria foi substituída, por isso está funcionando corretamente.`;
+5. $D_5 =\;$`Ele executou o programa, por isso obteve os resultados esperados.`.
 
-Cada frase tem peso igual a $0.2$ no corpus. Agora podemos calcular explicitamente as probabilidades e valores para o nosso modelo.
+Cada documento tem peso igual a $0.2$ no corpus. Isso quer dizer que estes documentos são igualmente prováveis no nosso sistema. Podemos calcular explicitamente as probabilidades e valores para o nosso modelo.
 
 ##### 1. Coleta de Evidências (Contagem)
 
-Primeiro, precisamos contar todas as ocorrências de triplas $(w_i, w_t, w_{t+1})$, onde:
+Primeiro, precisamos contar todas as ocorrências de triplas $(w_i, w_t, w_{t+1})\;$, na qual:
 
 * $w_i$ é uma palavra anterior na sequência;
 * $w_t$ é a palavra atual para a qual queremos prever a próxima;
 * $w_{t+1}$ é a palavra que segue $w_t$.
 
-Para este exemplo, vamos focar em prever a palavra após `executado` em diferentes contextos.
+Para este exemplo, vamos tentar prever a palavra após a palavra `executado` em diferentes contextos.
 
 1. Contagens para $(w_i, \text{executado}, w_{t+1})$
 
@@ -159,9 +167,11 @@ Para este exemplo, vamos focar em prever a palavra após `executado` em diferent
 | foi | executado | com | 1 | 0.2 |
 | programa | executado | com | 1 | 0.2 |
 
+$$\\$$
+
 ##### 2. Normalização por Par (Cálculo dos Votos)
 
-Para cada par $(w_i, w_t)$, calculamos o "voto" para cada possível próxima palavra $w_k$ usando:
+Para cada par $(w_i, w_t)\;$, calculamos o voto para cada possível próxima palavra $w_k$ usando:
 
 $$\text{Voto}(w_k \vert w_i, w_t) = \frac{C(w_i, w_t, w_k)}{\sum_{w'} C(w_i, w_t, w')}$$
 
@@ -193,7 +203,7 @@ Antes de qualquer coisa a atenta leitora deve observar que `Verifique se o progr
 
 Focaremos nos pares que já vimos no treinamento:
 
-| Par $(w_i, w_t)$ | Voto para "por" | Voto para "com" |
+| Par $(w_i, w_t)$ | Voto para `por` | Voto para `com` |
 |------------------|-----------------|-----------------|
 | (programa, executado) | 0.5 | 0.5 |
 | (foi, executado) | 0.5 | 0.5 |
@@ -206,13 +216,13 @@ $$\text{Score}(\text{com}) = 0.5 + 0.5 = 1.0$$
 
 Neste caso, o modelo não consegue distinguir claramente entre `por` e `com` baseado apenas nas duas palavras-chave. Isso demonstra uma limitação do modelo quando apenas alguns pares são informativos.
 
-Se incluirmos mais contexto, como a sequência:
+Se incluirmos mais contexto, como em outra sequência nova:
 
 `Verifique se ele executou o programa ...`
 
 Então temos:
 
-| Par $(w_i, w_t)$ | Voto para "por" | Voto para "com" |
+| Par $(w_i, w_t)$ | Voto para `por` | Voto para `com` |
 |------------------|-----------------|-----------------|
 | (ele, executado) | 1.0 | 0.0 |
 
@@ -225,6 +235,8 @@ $$\text{Score}(\text{com}) = 0.0$$
 O modelo prevê claramente `por` como a próxima palavra.
 
 Este exemplo ilustra como a presença de palavras-chave distintivas (`ele` vs. `programa` ou `foi`) pode alterar significativamente a previsão, demonstrando como o modelo captura dependências de longo alcance.
+
+#### Implementação em C++
 
 O código C++ apresentado abaixo, encapsulado na classe `PairwiseFeatureAggregator`, implementa precisamente os passos que acabamos de detalhar no exemplo. O método `addSequence` corresponde à coleta de evidências (Passo 1), `normalizeVotes` executa o cálculo dos votos normalizados por par (Passo 2), e `predictNextWord` realiza a agregação desses votos para efetuar a predição em novas sequências (Passo 3).
 
@@ -397,17 +409,17 @@ int main() {
 
 ```
 
-Embora esta abordagem de "pares com saltos" e "votação" nos permita considerar contexto de longo alcance, ela enfatiza um característica negativa. Ao somar votos de *muitas* características (pares), a contribuição das poucas características *realmente* informativas (como `(programa, executado)` no nosso exemplo) pode ser diluída pelo "ruído" das características menos úteis (como `(o, executado)`). A diferença entre o total de votos para a palavra correta e as incorretas pode ser pequena, tornando o modelo menos confiável e robusto.
+#### Considerações importantes
+
+Embora esta abordagem de pares com saltos e votação nos permita considerar contexto de longo alcance, ela enfatiza um característica negativa. Ao somar votos de muitas características (pares), a contribuição das poucas características *realmente* informativas (como `(programa, executado)` no nosso exemplo) pode ser diluída pelo "ruído" das características menos úteis (como `(o, executado)`). A diferença entre o total de votos para a palavra correta e as incorretas pode ser pequena, tornando o modelo menos confiável e menos robusto. A esse problema chamamos de **diluição do sinal**.
 
 Além dessa questão fundamental da **diluição do sinal**, a abordagem de agregação irrestrita de pares, na prática, enfrenta outros desafios que limitam sua aplicabilidade em cenários mais complexos:
 
-* **Complexidade Computacional e de Memória**: a estrutura de dados usada para armazenar as contagens ou votos, como o `std::unordered_map` triplamente aninhado no código C++ (aaargh!), pode se tornar inaceitavelmente grande para corpus com vocabulários extensos. Pior ainda, durante a predição para uma sequência de comprimento $T$, o modelo precisa potencialmente considerar e somar votos de $O(T^2)$ pares $(w_i, w_t)$. Isso torna o método computacionalmente caro e difícil de escalar para as sequências longas frequentemente encontradas em tarefas de Processamento de Linguagem Natural do mundo real.
+* **Complexidade Computacional e de Memória**: a estrutura de dados usada para armazenar as contagens ou votos, como o `std::unordered_map` triplamente aninhado no código C++ (aaargh!), pode se tornar inaceitavelmente grande para corpus com vocabulários extensos. Pior ainda, durante a predição para uma sequência de comprimento $T$, o modelo precisa potencialmente considerar e somar votos de $O(T^2)$ pares $(w_i, w_t)$. *Isso torna o método computacionalmente caro e difícil de escalar para as sequências longas* frequentemente encontradas em tarefas de Processamento de Linguagem Natural do mundo real.
 
-* **Interpretação da Pontuação Final (Normalização)**: a normalização é realizada individualmente para cada par $(w_i, w_t)$, garantindo que $\sum_{w_k} \text{Voto}(w_k \vert w_i, w_t) = 1$. No entanto, a pontuação final para uma palavra candidata $w_k$, calculada como $Score(w_k) = \sum_{i \text{ t.q. } w_i \text{ precede } w_t} \text{Voto}(w_k  \vert  w_i, w_t)$, é uma simples soma dessas probabilidades condicionais. O resultado $Score(w_k)$ não representa mais uma probabilidade bem calibrada; a soma $\sum_{w_k} Score(w_k)$ não é necessariamente $1$. A pontuação final funciona como um *ranking*, onde valores mais altos são melhores, mas perde uma interpretação probabilística direta sobre a confiança da previsão.
+* **Interpretação da Pontuação Final (Normalização)**: a normalização é realizada individualmente para cada par $(w_i, w_t)\;$, garantindo que $\sum_{w_k} \text{Voto}(w_k \vert w_i, w_t) = 1$. No entanto, a pontuação final para uma palavra candidata $w_k$, calculada como $Score(w_k) = \sum_{i \text{ t.q.} w_i \text{ precede } w_t} \text{Voto}(w_k  \vert  w_i, w_t)\;$, é uma simples soma dessas probabilidades condicionais. O resultado $Score(w_k)$ não representa mais uma probabilidade bem calibrada; a soma $\sum_{w_k} Score(w_k)$ não é necessariamente $1$. *A pontuação final funciona como um ranking, onde valores mais altos são melhores, mas perde uma interpretação probabilística direta sobre a confiança da previsão*.
 
-Essas limitações, especialmente a diluição do sinal pela soma irrestrita e a complexidade inerente ao modelo, destacam a necessidade de um mecanismo mais inteligente e eficiente para ponderar a influência das palavras anteriores.
-
-A forma que encontramos para superar estas dificuldades inclui tentar fazer o modelo focar dinamicamente nas características, pares ou, mais geralmente, nas palavras anteriores, que são mais relevantes para a previsão atual, mitigando o ruído e controlando a complexidade.
+**A forma que encontramos para superar estas dificuldades inclui tentar fazer o modelo prestar atenção dinamicamente nas características, pares ou, mais geralmente, nas palavras anteriores, que são mais relevantes para a previsão atual, mitigando o ruído e controlando a complexidade.**
 
 ### Mascaramento e Atenção Seletiva: Focando no que Importa
 
