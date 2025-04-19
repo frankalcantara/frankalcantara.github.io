@@ -35,7 +35,7 @@ keywords: |-
     lstm
 toc: true
 published: true
-lastmod: 2025-04-19T01:18:52.578Z
+lastmod: 2025-04-19T02:30:05.167Z
 ---
 
 ## Superando Limitações Locais: Construindo a Ponte para a Atenção
@@ -908,7 +908,7 @@ Para que seja possível que os modelos possam aprender esses padrões de atenç�
 
 >**Operações de Matrizes Diferenciáveis**
 >
->As operações de matrizes diferenciáveis referem-se a funções que mapeiam matrizes para matrizes, ou para escalares, mantendo propriedades de diferenciabilidade. Essas operações são fundamentais em problemas de otimização, particularmente em aprendizado profundo e matemática computacional.
+>As operações de matrizes diferenciáveis, que estudamos [aqui](http://127.0.0.1:4000/transformers-um/), referem-se a funções que mapeiam matrizes para matrizes, ou para escalares, mantendo propriedades de diferenciabilidade. Essas operações são fundamentais em problemas de otimização, particularmente em aprendizado profundo e matemática computacional.
 >
 >>Seja $f: \mathbb{R}^{m \times n} \rightarrow \mathbb{R}$ uma função que mapeia uma matriz $X \in \mathbb{R}^{m \times n}$ para um escalar. Esta função é diferenciável em $X$ se existe uma matriz $\nabla f(X) \in \mathbb{R}^{m \times n}$ tal que:
 >

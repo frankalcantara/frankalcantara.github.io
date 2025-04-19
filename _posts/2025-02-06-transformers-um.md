@@ -31,7 +31,7 @@ keywords: |-
     inteligência artificial
 toc: true
 published: true
-lastmod: 2025-04-19T02:27:49.872Z
+lastmod: 2025-04-19T02:32:40.155Z
 ---
 
 Neste artigo, a curiosa leitora irá enfrentar os *Transformers*. Nenhuma relação com o o Optimus Prime. Se for estes *Transformers* que está procurando, **o Google falhou com você!**
@@ -1487,6 +1487,8 @@ Nos modelos **transformer**, a multiplicação de matrizes ocorre com frequênci
 5. **Projeções de Saída**: Mapeamento das representações finais para o espaço de saída desejado.
 
 A eficiência dos modelos **transformers** deve-se, em parte, à capacidade de paralelizar estas multiplicações de matrizes em hardware especializado, como GPUs e TPUs.
+
+Finalmente, a esforçada leitora deve observar que estudamos multiplicação de matrizes com mais profundidade [neste artigo](http://127.0.0.1:4000/multiplica-matrizes/).
 
 ### Propriedades Importantes
 
