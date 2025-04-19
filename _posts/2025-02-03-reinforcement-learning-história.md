@@ -19,7 +19,7 @@ preview: Nos últimos anos a aprendizagem por reforço (*reinforcement learning 
 keywords: Reinforcement Learning, História do RL, Richard Bellman, Q-Learning, Deep Q-Networks, AlphaGo, Processos de Decisão de Markov, Psicologia Comportamental, Dopamina e IA, Deep Reinforcement Learning.
 toc: true
 published: true
-lastmod: 2025-04-08T19:52:34.484Z
+lastmod: 2025-04-19T00:32:52.064Z
 draft: 2025-02-03T17:19:36.133Z
 ---
 
@@ -31,7 +31,7 @@ Nos últimos anos a aprendizagem por reforço (*reinforcement learning - *RL**) 
 
 A essência do *RL* reside na ideia de aprender com base em recompensas e punições, um conceito profundamente enraizado na psicologia comportamental e na biologia.
 
-Embora [Edward Thorndike](https://www.britannica.com/biography/Edward-L-Thorndike) (1898) seja frequentemente citado por sua **Lei do Efeito**, a qual postula que comportamentos seguidos por recompensas tendem a se repetir, enquanto aqueles seguidos por punições tendem a ser evitados, sendo festejado mundialmente como o pai da teoria de aprendizagem por reforço, é crucial reconhecer as contribuições de [Ivan Pavlov](https://www.britannica.com/biography/Ivan-Pavlov) (final do séc. XIX, início do séc. XX).
+Embora [Edward Thorndike](https://www.britannica.com/biography/Edward-L-Thorndike) (1898) seja frequentemente citado por sua **Lei do Efeito**, a qual postula que comportamentos seguidos por recompensas tendem a se repetir, enquanto aqueles seguidos por punições tendem a ser evitados, sendo festejado mundialmente como o pai da teoria de aprendizagem por reforço, também precisamos reconhecer as contribuições de [Ivan Pavlov](https://www.britannica.com/biography/Ivan-Pavlov) (final do séc. XIX, início do séc. XX).
 
 Pavlov, através de seus experimentos de condicionamento clássico, demonstrou como um estímulo neutro (como um sino) pode ser associado a um estímulo incondicionado (como comida) para produzir uma resposta condicionada (salivação). Este trabalho introduziu o conceito fundamental de aprendizado associativo, que, embora diferente do condicionamento operante, pavimentou o caminho para a compreensão de como as conexões entre estímulos e respostas são formadas e influenciam o comportamento[^1].
 
@@ -71,7 +71,7 @@ Os **MDPs**, inicialmente aplicados em áreas como controle e economia, fornecer
 
 Nas décadas de 1960 e 1970, os pesquisadores começaram a explorar como os computadores poderiam aprender através da interação com o ambiente. [Arthur Samuel](https://en.wikipedia.org/wiki/Arthur_Samuel_(computer_scientist)) (1959) deu um passo pioneiro com seu programa de aprendizado para jogar damas. Esse programa, embora rudimentar, ajustava seus parâmetros com base em recompensas (vitórias ou derrotas) e representa um dos primeiros exemplos de Reinforcement Learning em, o que hoje chamamos de inteligência artificial, influenciando inclusive as futuras ideias de Aprendizado por Diferença Temporal.
 
-[Widrow](https://en.wikipedia.org/wiki/Bernard_Widrow) e [Hoff](https://en.wikipedia.org/wiki/Marcian_Hoff) (1960) propuseram o algoritmo [ADALINE](https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/machine_learning/adaline_learning.cpp), que **usava feedback para ajustar pesos em redes neurais simples**. Embora não fosse *RL* no sentido moderno, introduziu a ideia de usar feedback para melhorar o desempenho, um conceito crucial para o desenvolvimento posterior dos campos de estudo relacionados a inteligência artificial.
+[Widrow](https://en.wikipedia.org/wiki/Bernard_Widrow) e [Hoff](https://en.wikipedia.org/wiki/Marcian_Hoff) (1960) propuseram o algoritmo [ADALINE](https://github.com/TheAlgorithms/C-Plus-Plus/blob/master/machine_learning/adaline_learning.cpp), que **usava feedback para ajustar pesos em redes neurais simples**. Embora não fosse *RL* no sentido moderno, introduziu a ideia de usar feedback para melhorar o desempenho, um conceito indispensável para o desenvolvimento posterior dos campos de estudo relacionados a inteligência artificial.
 
 Nesse período, também surgiram as primeiras discussões sobre o dilema da exploração-explotação (*exploration-exploitation dilemma*), um conceito central no *RL*. **O agente precisa encontrar um equilíbrio entre explorar novas ações para descobrir melhores recompensas e explorar ações que já se mostraram promissoras**. A Cibernética, um campo interdisciplinar que explora sistemas de controle e comunicação em animais e máquinas, também teve influência nesse período inicial, com conceitos como feedback e controle sendo compartilhados entre a cibernética e o *RL*.
 
@@ -89,7 +89,7 @@ Os anos 1980 e 1990 testemunharam a consolidação do *RL* como uma disciplina d
 
 Nesse período, [Gerald Tesauro](https://www.researchgate.net/scientific-contributions/Gerald-Tesauro-8269192) (1992) demonstrou o poder do *RL* em jogos complexos com o TD-Gammon, um programa que aprendeu a jogar Gamão (*Backgammon*) em um nível de mestre mundial através da auto-aprendizagem (*self-play*) usando métodos **TD**. Esse trabalho foi um marco importante, demonstrando a capacidade do *RL* de aprender estratégias complexas em domínios desafiadores.
 
-Paralelamente, as conexões entre *RL* e a neurociência começaram a ser exploradas. A descoberta de que o neurotransmissor *dopamina* desempenha um papel crucial no sistema de recompensa do cérebro forneceu uma base biológica para os mecanismos de Reinforcement Learning[^4].
+Paralelamente, as conexões entre *RL* e a neurociência começaram a ser exploradas. A descoberta de que o neurotransmissor *dopamina* desempenha uma ação no sistema de recompensa do cérebro forneceu uma base biológica para os mecanismos de Reinforcement Learning[^4].
 
 [^4]: A dopamina, neurotransmissor tradicionalmente associado à recompensa, atua primariamente sinalizando a expectativa de recompensa e não a recompensa em si (SCHULTZ, Wolfram. Neuronal reward and decision signals: from theories to data. Physiological reviews, v. 95, n. 3, p. 853-951, 2015.). No aprendizado humano, ela interage com outros neurotransmissores como serotonina e norepinefrina em um sistema complexo de reforço comportamental (BERKE, Joshua D. What does dopamine mean?. Nature neuroscience, v. 21, n. 6, p. 787-793, 2018.). Estímulos sociais digitais, como feedback em redes sociais, ativam vias dopaminérgicas em conjunto com outros sistemas neurais. O sistema de recompensa intermitente dessas plataformas pode influenciar padrões comportamentais, porém a formação de comportamentos compulsivos envolve também alterações em circuitos de controle inibitório e transmissão glutamatérgica (MONTAGUE, P. Read; HYMAN, Steven E.; COHEN, Jonathan D. Computational roles for dopamine in behavioural control. Nature, v. 431, n. 7010, p. 760-767, 2004.). Esta interação entre neurobiologia e design digital sugere uma relação complexa onde múltiplos sistemas neurais influenciam o aprendizado e comportamento nas redes sociais, não se limitando apenas à via dopaminérgica.
 

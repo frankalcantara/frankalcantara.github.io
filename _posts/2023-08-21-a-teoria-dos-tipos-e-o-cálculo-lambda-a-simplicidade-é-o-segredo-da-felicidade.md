@@ -12,7 +12,7 @@ date: 2023-08-21T13:29:48.211Z
 preview: ""
 keywords: ""
 published: false
-lastmod: 2025-04-18T19:03:19.294Z
+lastmod: 2025-04-19T00:22:59.127Z
 ---
 
 Imagine uma biblioteca, vasta e silenciosa. O mais importante repositório do conhecimento humano, mesmo hoje, em tempos de internet, nada se compara ao folhear de um livro. No entanto, só é realmente útil se os livros puderem ser consultados. Nessa nossa biblioteca, de sonhos e lembranças boas, os livros estão organizados em prateleiras e estas em seções. Entre tantas, há uma seção especial. Onde estão os livros puros, humildes, os livros que não se referem a si mesmos.
@@ -160,7 +160,7 @@ Russell comunicou esse problema a Frege, e sua carta, juntamente com a resposta 
 Este axioma afirma que a extensão de \(P\) é idêntica à extensão de \(Q\) se e somente se \(P\) e \(Q\) são materialmente equivalentes. Podemos então traduzir o paradoxo de Russell (\*) no sistema de Frege, definindo o predicado
 
 \( R(x) \iff \exists P [x = \varepsilon P \land \neg P(x)] \)
-Pode então ser verificado, usando o Axioma V de forma crucial, que
+Pode então ser verificado, usando o Axioma V de forma, que
 
 \( R(\varepsilon R) \iff \neg R(\varepsilon R) \)
 e temos uma contradição também. (Observe que, para definir o predicado \(R\), usamos uma quantificação existencial impredicativa sobre predicados. Pode ser mostrado que a versão predicativa do sistema de Frege é consistente (veja Heck 1996 e para mais refinamentos Ferreira 2002).

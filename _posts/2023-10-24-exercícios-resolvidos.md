@@ -18,7 +18,7 @@ preview: ""
 keywords: ""
 published: false
 slug: null
-lastmod: 2025-04-12T14:36:33.700Z
+lastmod: 2025-04-19T00:23:52.084Z
 ---
 
 ### Exercício 1
@@ -437,7 +437,7 @@ $$
 
 Em um novo projeto de engenharia civil para a construção de uma estrutura triangular inovadora, foram demarcados três pontos principais para as fundações. Esses pontos, determinados por estudos topográficos e geotécnicos, foram identificados como $\mathbf{A}(4, 0, 3)$, $\mathbf{B}(-2, 3, -4)$ e $\mathbf{C}(1, 3, 1)$ em um espaço tridimensional utilizando o Sistema de Coordenadas Cartesianas. A equipe de engenheiros precisa compreender a relação espacial entre esses pontos, pois isto impacta diretamente na distribuição das cargas e na estabilidade da estrutura.
 
-Seu desafio será determinar o o ângulo $\theta_{BAC}$ entre estes vetores crucial para a análise estrutural, pois determina o direcionamento das forças na fundação.
+Seu desafio será determinar o o ângulo $\theta_{BAC}$ entre estes vetores para a análise estrutural, pois determina o direcionamento das forças na fundação.
 
 **Solução:** para encontrar $\vec{AB}$:
 

@@ -34,7 +34,7 @@ featured: false
 toc: true
 preview: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de currying e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de currying e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2025-04-12T14:36:33.751Z
+lastmod: 2025-04-19T00:37:14.045Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
@@ -771,7 +771,7 @@ $$\lambda x.\;f\;x = \lambda x.\;(\lambda y.\;x + y)\;x \to_\beta \lambda x.\;x 
 
 Neste caso, não é possível aplicar a redução-$\eta$ para obter $f$, pois $x$ aparece livre em $f$, e remover $\lambda x$ deixaria $x$ indefinida.
 
-A condição $x \notin \text{FV}(f)$ é crucial. Se $x$ aparecer livre em $f$, a redução-$\eta$ não pode ser aplicada, pois a remoção da abstração $\lambda x$ poderia alterar o significado do termo.
+A condição $x \notin \text{FV}(f)$ é fundamental. Se $x$ aparecer livre em $f$, a redução-$\eta$ não pode ser aplicada, pois a remoção da abstração $\lambda x$ poderia alterar o significado do termo.
 
 **Exemplo Contrário**: Considere a expressão:
 

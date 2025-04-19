@@ -3,24 +3,24 @@ layout: post
 title: "A Fórmula da Atração: a Matemática do Eletromagnetismo"
 author: Frank
 categories:
-    - Matemática
-    - Eletromagnetismo
+   - Matemática
+   - Eletromagnetismo
 tags:
-    - Matemática
-    - Física
-    - Eletromagnetismo
+   - Matemática
+   - Física
+   - Eletromagnetismo
 image: assets/images/eletromag1.webp
 description: Entenda como a matemática fundamenta o eletromagnetismo e suas aplicações práticas em um artigo acadêmico destinado a estudantes de ciência e engenharia.
 preview: a matemática que suporta o entendimento dos fenômenos que explicam nosso universo.
 slug: formula-da-atracao-matematica-eletromagnetismo
 keywords:
-    - cálculo vetorial
-    - Eletromagnetismo
-    - Matemática
-    - poesia
-    - álgebra vetorial
+   - cálculo vetorial
+   - Eletromagnetismo
+   - Matemática
+   - poesia
+   - álgebra vetorial
 rating: 5
-lastmod: 2025-04-18T19:03:19.308Z
+lastmod: 2025-04-19T00:25:45.557Z
 ---
 
 O Eletromagnetismo é a lei, o ordenamento que embala o universo. Como uma divindade antiga que rege a existência e os movimentos de tudo que existe. Duas forças, elétrica e magnética, em uma dança interminável, moldam de um grão de poeira a um oceano de estrelas, até o mesmo dispositivo que você usa para decifrar essas palavras deve sua existência e funcionamento ao Eletromagnetismo.
@@ -696,7 +696,7 @@ Não vamos usar dimensões maiores que $3$ neste estudo. Contudo, achei que a ge
 
 Em um novo projeto de engenharia civil para a construção de uma estrutura triangular inovadora, foram demarcados três pontos principais para as fundações. Esses pontos, determinados por estudos topográficos e geotécnicos, foram identificados como $A(4, 0, 3)$, $B(-2, 3, -4)$ e $C(1, 3, 1)$ em um espaço tridimensional utilizando o Sistema de Coordenadas Cartesianas. A equipe de engenheiros precisa compreender a relação espacial entre esses pontos, pois isto impacta diretamente na distribuição das cargas e na estabilidade da estrutura.
 
-Seu desafio será determinar o o ângulo $\theta_{BAC}$ entre estes vetores crucial para a análise estrutural, pois determina o direcionamento das forças na fundação.
+Seu desafio será determinar o o ângulo $\theta_{BAC}$ entre estes vetores para a análise estrutural, pois determina o direcionamento das forças na fundação.
 
 Uma vez que tenhamos entendido a operação Produto Escalar, nos resta entender suas propriedades:
 
@@ -1294,7 +1294,7 @@ O reino do gradiente é o reino dos Campos Escalares, o gradiente tem caracterí
 
     Esta é a extensão da regra da cadeia familiar do cálculo unidimensional.
 
-Estas propriedades, como as leis imutáveis da física, regem a conduta do gradiente em sua jornada através dos campos escalares. No palco do eletromagnetismo, o gradiente desempenha um papel crucial na descrição de como os Campos Elétrico e Magnético variam no espaço.
+Estas propriedades, como as leis imutáveis da física, regem a conduta do gradiente em sua jornada através dos campos escalares. No palco do eletromagnetismo, o gradiente desempenha um papel importante na descrição de como os Campos Elétrico e Magnético variam no espaço.
 
 1. **Campo Elétrico e Potencial Elétrico**: o campo elétrico é o gradiente negativo do potencial elétrico. Isso significa que o Campo Elétrico aponta na direção de maior variação do potencial elétrico, formalmente expresso como:
 
@@ -1414,7 +1414,7 @@ Imagine agora que você está no meio de um rio, onde a água gira em torno de a
 
 É como uma dança, onde cada ponto no espaço executa uma rotação única, formando uma coreografia complexa e bela. Esta coreografia é o campo vetorial em questão. Entender o rotacional permite desvendar os segredos por trás dos padrões de fluxo em campos vetoriais, sejam eles campos de vento, campos magnéticos ou correntes de água.
 
-No contexto do eletromagnetismo, o rotacional tem uma aplicação crucial, especialmente ao considerarmos as Equações de Maxwell. Uma das equações de Maxwell, especificamente a Lei de Ampère-Maxwell, é expressa como
+No contexto do eletromagnetismo, o rotacional tem uma aplicação nas Equações de Maxwell. Uma das equações de Maxwell, especificamente a Lei de Ampère-Maxwell, é expressa como
 
 $$
 \nabla \times \mathbf{B} = \mu_0 \mathbf{J} + \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}

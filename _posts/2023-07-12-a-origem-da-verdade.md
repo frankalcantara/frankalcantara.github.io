@@ -18,7 +18,7 @@ slug: origem-da-verdade-parte-1
 rating: 5
 featured: false
 published: true
-lastmod: 2025-04-18T19:03:19.398Z
+lastmod: 2025-04-19T00:17:07.732Z
 ---
 
 Na vastidão do tempo, aproximadamente quatro milênios atrás, encontra-se o primeiro murmúrio de descontentamento de um cliente, um grão solitário na areia do relógio. Isso ocorreu no solo da Suméria, no domínio exuberante da Babilônia, onde a verdade era tão valorizada, tão sagrada, que sua ausência precisou ser registrada para se tornar uma marca, uma cicatriz na face do tempo.
@@ -129,7 +129,7 @@ Ao olharmos para trás, para essa era de questionamentos e descobertas e focarmo
 
 Sócrates, um mestre da indagação e do diálogo, não apenas procurava a verdade, mas a considerava um pilar essencial da existência humana. Diferente dos sofistas, que viam a verdade como um conceito fluido e subjetivo, Sócrates buscava verdades mais absolutas e universais, ancoradas na razão e na reflexão que poderiam ser alcançadas através do uso da razão e do diálogo.
 
-Seu método, uma dança dialética de perguntas e respostas, conhecida como método socrático, era uma ferramenta para desenterrar a sabedoria oculta sob camadas de suposição e erro. Este processo de questionamento socrático era uma espécie de parto intelectual, trazendo à luz insights profundos a partir da própria ignorância reconhecida. Este método seria responsável séculos depois por [Benjamin Franklin](https://en.wikipedia.org/wiki/Benjamin_Franklin) um dos Pais Fundadores dos Estados Unidos da América. Um poderoso debatedor que usando da retórica e do método socrático influênciou de forma crucial tanto durante a Revolução Americana quanto na sua carreira diplomática.
+Seu método, uma dança dialética de perguntas e respostas, conhecida como método socrático, era uma ferramenta para desenterrar a sabedoria oculta sob camadas de suposição e erro. Este processo de questionamento socrático era uma espécie de parto intelectual, trazendo à luz insights profundos a partir da própria ignorância reconhecida. Este método seria responsável séculos depois por [Benjamin Franklin](https://en.wikipedia.org/wiki/Benjamin_Franklin) um dos Pais Fundadores dos Estados Unidos da América. Um poderoso debatedor que usando da retórica e do método socrático influenciou tanto durante a Revolução Americana quanto na sua carreira diplomática.
 
 A jornada de Sócrates em busca da verdade não era apenas um exercício intelectual; estava profundamente entrelaçada com a ética. Ele via a verdade como um alicerce para a virtude e a moralidade. _"Conhece-te a ti mesmo"_, sua máxima mais famosa, ressoa como um chamado à introspecção e ao autoconhecimento como o caminho para a compreensão mais profunda. Contudo, Sócrates também era um emblema da humildade filosófica. 
 

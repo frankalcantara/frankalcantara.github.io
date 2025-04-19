@@ -22,12 +22,12 @@ rating: 5
 published: 2024-06-12T13:16:53.564Z
 draft: 2024-06-12T13:00:39.229Z
 preview: Como construir os conjuntos First  e Follow que irão permitir a criação da tabela de análise para o algoritmo de parser.
-lastmod: 2025-04-12T14:36:33.728Z
+lastmod: 2025-04-19T00:26:04.074Z
 ---
 
 Não dá nem para começar a pensar em criar um *parser* $LL(1)$ se não entender os conjuntos $FIRST$ e $FOLLOW$. [Também não dá para entender estes conjuntos se não souber o que é um *parser* $LL(1)$](https://frankalcantara.com/parsers-ll(1)/) Imagine que você está aprendendo um novo idioma. Para formar frases corretas, você precisará entender quais palavras podem vir antes ou depois de outras. Ou corre o risco de falar como o Yoda. Se quiser evitar ser confundido com um velho alienígena, precisa aprender, no mínimo, a ordem das palavras, muito antes de entender a classe gramatical destas mesmas palavras. Como uma criança aprendendo a falar.
 
-Eu forcei um pouco a barra na metáfora, mas na análise sintática de linguagens livres de contexto, os conjuntos $FIRST$ e $FOLLOW$ desempenham um papel crucial que quase valida minha metáfora. Estes conjuntos ajudam a decifrar a gramática da linguagem de forma determinística determinando as regras de produção que serão  aplicadas aos símbolos da *string* de entrada para garantir que ele faça parte da linguagem.
+Eu forcei um pouco a barra na metáfora, mas na análise sintática de linguagens livres de contexto, os conjuntos $FIRST$ e $FOLLOW$ desempenham um papel importante que quase valida minha metáfora. Estes conjuntos ajudam a decifrar a gramática da linguagem de forma determinística determinando as regras de produção que serão  aplicadas aos símbolos da *string* de entrada para garantir que ele faça parte da linguagem.
 
 O conjunto $FIRST$ de um símbolo não-terminal será composto dos símbolos terminais que podem aparecer como **primeiro símbolo** de qualquer sequência de símbolos que seja derivada desse não-terminal. Em outras palavras, o conjunto $FIRST$ indica quais terminais podem iniciar uma declaração válida (frase) dentro da estrutura gramática definida por um não-terminal. Por exemplo, considere uma gramática para definir expressões aritméticas. O não-terminal *EXPR* pode derivar diversas sequências de símbolos, como *2 + 3*, *(4 * 5)*, *x - y*. O conjunto $FIRST$ do não-terminal *EXPR* seria, neste caso específico, ${número, '+', '-', '('}$, pois esses são os símbolos que podem iniciar qualquer expressão aritmética válida nesta gramática até onde podemos saber com as informações passadas neste parágrafo. Uma gramática para todas as expressões aritméticas possíveis teria um conjunto $FIRST$ maior.
 

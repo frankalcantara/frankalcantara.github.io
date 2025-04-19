@@ -3,13 +3,13 @@ layout: post
 title: Cálculo Simplificado
 author: Frank
 categories:
-    - matemática
+  - matemática
 tags:
-    - matemática
-    - cálculo
-    - álgebra
-    - exercícios
-    - problemas resolvidos
+  - matemática
+  - cálculo
+  - álgebra
+  - exercícios
+  - problemas resolvidos
 image: assets/images/prog_dynamic.webp
 featured: false
 rating: 5
@@ -21,7 +21,7 @@ toc: true
 published: false
 slug: calculo-simplificado
 draft: 2024-07-06T19:30:40.256Z
-lastmod: 2025-04-18T19:03:19.319Z
+lastmod: 2025-04-19T00:36:42.576Z
 ---
 
 O livro **Calculus Made Easy** de [SILVANUS P. THOMPSON](https://en.wikipedia.org/wiki/Silvanus_P._Thompson) foi colocado em domínio público, tanto no Brasil quanto nos EUA. Este é um dos melhores livros introdutórios de cálculo já escrito. Simples, direto e abrangente. Sem nenhuma modéstia, ou vergonha na cara, escolhi este livro para tradução, atualização e expansão. Na esperança de criar um material atualizado para o ensino e fomento do cálculo entre alguns estudantes de língua portuguesa. Vou traduzir, atualizar, comentar e expandir o conteúdo. Contudo, como o livro é ótimo, algumas coisas precisam ser mantidas o mais original possível por curiosidade e pelo valor cultural. Um bom exemplo é a brincadeira da capa:
@@ -59,7 +59,7 @@ E cálculo é só isso!
 
 Pequenez, ou o grau de quanto as coisas são pequenas, é uma palavra rara no português coloquial do Brasil. Que muitas vezes é usada para indicar ausência de moral, mas que originalmente era a qualidade do pequeno. Indicando que um pequeno pode ser menor que outro. Pequenez será usada neste texto com seu sentido original e descobriremos que em nossos estudos de cálculo teremos que lidar com quantidades pequenas de vários graus de pequenez. A palavra pequenez nos permitirá entender que uma pequena fração, ou pequeno pedaço, pode ser menor que o outro.
 
-É crucial compreendermos em quais situações poderemos considerar certas quantidades tão diminutas que estas se tornem negligenciáveis em nossas análises. Essas quantidades são tão pequenas que seu impacto será insignificante no contexto geral. No entanto, é importante notar que esta "insignificância", ou pequenez, é sempre relativa e depende da escala do problema em questão. O que é considerado desprezível em um contexto pode ser significativo em outro, portanto, a decisão de omitir ou não uma quantidade deve sempre levar em conta a magnitude relativa em relação aos outros elementos envolvidos no problema.
+É importante compreendermos em quais situações poderemos considerar certas quantidades tão diminutas que estas se tornem negligenciáveis em nossas análises. Essas quantidades são tão pequenas que seu impacto será insignificante no contexto geral. No entanto, é importante notar que esta "insignificância", ou pequenez, é sempre relativa e depende da escala do problema em questão. O que é considerado desprezível em um contexto pode ser significativo em outro, portanto, a decisão de omitir ou não uma quantidade deve sempre levar em conta a magnitude relativa em relação aos outros elementos envolvidos no problema.
 
 Antes de imergirmos no mundo das regras e formalidades da matemática, vamos considerar alguns casos familiares.
 
@@ -97,7 +97,7 @@ Por fim, suponha que para um propósito específico, deveremos considerar $\frac
 
 Veja que quanto menor for uma quantidade pequena em si, mais insignificante se torna a correspondente quantidade pequena da segunda ordem de grandeza. Portanto, sabemos que _Em nossas análises, poderemos justificadamente negligenciar as quantidades pequenas de segunda, terceira ou ordens superiores, desde que a quantidade pequena de primeira ordem seja considerada suficientemente insignificante por si só_.
 
-O que definirá o que é "suficientemente pequena" depende do contexto do problema e da precisão requerida. Esta abordagem nos permite simplificar cálculos complexos, focando apenas nas quantidades que têm um impacto significativo no Resultado. No entanto, é crucial exercer julgamento cuidadoso ao decidir quais termos omitir, sempre considerando as implicações dessa simplificação na precisão global de nossa solução. A escolha deste valor que poderá ser desprezado irá depender do problema. Contudo, será um valor suficientemente pequeno para permitir que o problema possa ser resolvido com o cálculo.
+O que definirá o que é "suficientemente pequena" depende do contexto do problema e da precisão requerida. Esta abordagem nos permite simplificar cálculos complexos, focando apenas nas quantidades que têm um impacto significativo no Resultado. No entanto, precisamos exercer julgamento cuidadoso ao decidir quais termos omitir, sempre considerando as implicações dessa simplificação na precisão global de nossa solução. A escolha deste valor que poderá ser desprezado irá depender do problema. Contudo, será um valor suficientemente pequeno para permitir que o problema possa ser resolvido com o cálculo.
 
 Uma coisa importante, que não podemos esquecer, é que quantidades insignificantes, quando sujeitas a multiplicação por outro fator, podem se tornar relevantes. Isso ocorre se o fator de multiplicação seja, em si, grande em relação ao problema. Mesmo um "farthing" se torna importante se for multiplicado por valores na casa dos milhares ou milhões de vezes.
 
@@ -228,7 +228,7 @@ Agora que tiramos o medo, e mostramos que os conceitos envolvidos são muito sim
 
 ### Como ler diferenciais
 
-Estimada leitora, é crucial que você não confunda $dx$ com o produto de $d$ e $x$. O símbolo $d$ não é um fator multiplicativo, mas sim um operador que indica "um elemento infinitesimal de" ou "uma variação infinitamente pequena de" qualquer quantidade que o segue. Assim, $dx$ representa uma porção infinitesimal da variável $x$. Na linguagem matemática, pronunciamos $dx$ como "de-xis". Compreender corretamente este conceito é essencial para dominar os princípios do cálculo e evitar erros comuns de interpretação.
+A estimada leitora, não deve confundir $dx$ com o produto de $d$ e $x$. O símbolo $d$ não é um fator multiplicativo, mas sim um operador que indica "um elemento infinitesimal de" ou "uma variação infinitamente pequena de" qualquer quantidade que o segue. Assim, $dx$ representa uma porção infinitesimal da variável $x$. Na linguagem matemática, pronunciamos $dx$ como "de-xis". Compreender corretamente este conceito é essencial para dominar os princípios do cálculo e evitar erros comuns de interpretação.
 
 Coeficientes diferenciais de segunda ordem, que serão estudados mais tarde, serão representados: $\frac{d^2y}{dx^2}$, o que é lido "de-dois-ipsilon de-xis-quadrado", significando que operação de diferenciar $y$ em relação a $x$ foi, ou tem que ser, feita duas vezes consecutivas. Esta é a notação desenvolvida por Leibnitz.
 
@@ -990,7 +990,7 @@ Existe uma regra para diferenciar produtos de funções que frequentemente é ma
 
 $$y = u \cdot v$$,
 
-onde tanto $u$ quanto $v$ são funções de $x$. É crucial entender que _$u$ e $v$ são duas funções distintas, ambas dependentes de $x$_.
+Na qual, tanto $u$ quanto $v$ são funções de $x$. A atenta leitora precisa entender que _$u$ e $v$ são duas funções distintas, ambas dependentes de $x$_.
 
 Neste cenário específico, se $x$ variar para $x + dx$, as outras variáveis mudarão da seguinte forma:
 

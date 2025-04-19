@@ -23,7 +23,7 @@ keywords: |-
     MoE 
 toc: true
 published: true
-lastmod: 2025-04-18T19:03:19.385Z
+lastmod: 2025-04-19T00:31:03.901Z
 slug: deepseek-explicado-de-forma-simples
 ---
 
@@ -266,7 +266,7 @@ Onde $S$ é um fator de escala que é ajustado dinamicamente com base nos gradie
 >
 >- FP8-E4M3: este formato oferece um bom equilíbrio entre faixa dinâmica e precisão, sendo adequado para uma variedade de aplicações de aprendizado de máquina.
 >
->- FP8-E5M2: este formato prioriza uma faixa dinâmica maior em detrimento da precisão, sendo útil em casos onde a representação de números muito grandes ou muito pequenos é crucial.
+>- FP8-E5M2: este formato prioriza uma faixa dinâmica maior em detrimento da precisão, sendo útil em casos onde a representação de números muito grandes ou muito pequenos é o fator crítico.
 >
 >No artigo, eles não explicitam que padrão usaram. E eu não vou baixar o código. Minha máquina não roda esse treco.
 
@@ -833,7 +833,7 @@ O PTX (*Parallel Thread Execution*) é uma representação intermediária entre 
 
 Algumas questões estão abertas servido para fomentar um turbilhão de hipóteses na Xfere. Três me chamam a atenção:
 
-1. **Coleta de Dados**: como foram curados os conjuntos de dados específicos para raciocínio? Compreender as fontes e critérios de seleção de dados é crucial para replicar e melhorar o desempenho do modelo;
+1. **Coleta de Dados**: como foram curados os conjuntos de dados específicos para raciocínio? Compreender as fontes e critérios de seleção de dados permite replicar e melhorar o desempenho do modelo;
 
 2. **Treinamento do Modelo**: nenhum código de treinamento foi liberado pela DeepSeek, deixando incertezas sobre quais hiperparâmetros funcionam melhor e como eles diferem entre famílias e escalas de modelos;
 
