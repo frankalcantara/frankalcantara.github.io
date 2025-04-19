@@ -35,7 +35,7 @@ keywords: |-
     lstm
 toc: true
 published: true
-lastmod: 2025-04-19T02:30:05.167Z
+lastmod: 2025-04-19T13:38:19.111Z
 ---
 
 ## Superando Limitações Locais: Construindo a Ponte para a Atenção
@@ -81,7 +81,7 @@ Olhar o problema por essa perspectiva irá permitir saltar sobre o texto interme
 
 Essa mudança conceitual irá implicar em uma reinterpretação da matriz de transição. Neste caso, as linhas da matriz não representarão um estado probabilístico: o contexto imediato $w_{t-1}$ ou $[w_{t-2}, w_{t-1}]$ no qual as probabilidades de transição devem somar $1$. Em vez disso, cada linha poderá ser vista como uma **característica** (*feature*) que será definida por um par específico $(w_i, w_t)$ que ocorreu na sequência. O valor na coluna $j$ dessa linha passa a representar um **voto** ou o **peso** que essa característica específica atribui à palavra $w_j$ como sendo a próxima palavra $(w_{t+1})$.
 
-A amável leitora vai ouvir falar muito em *feature*, tanto na academia como no populacho. O conceito de *feature* como sendo uma característica do texto anterior a uma determinada palavra, que irá permitir definir qual palavra a seguirá é suficientemente importante no processamento de linguagem natural que, praticamente, se tornou uma medida de desempenho. Pense sobre as *features* sobre isso como se Cada par $(w_i, w_t)$ seja uma característica que possui um determinado grau de contribuição na previsão da próxima palavra. O valor associado a essa característica, que chamaremos de voto ou peso, indica o quanto o par  $(w_i, w_t)$ contribui para a definição de cada palavra candidata a ser a próxima.
+A amável leitora vai ouvir falar muito em *feature*, tanto na academia como no populacho. O conceito de *feature* como sendo uma característica do texto anterior a uma determinada palavra, que irá permitir definir qual palavra a seguirá é suficientemente importante no processamento de linguagem natural que, praticamente, se tornou uma medida de desempenho. Pense sobre as *features* sobre isso como se Cada par $(w_i, w_t)$ seja uma característica que possui um determinado grau de contribuição na previsão da próxima palavra. *O valor associado a essa característica indica o quanto o par $(w_i, w_t)$ contribui para a definição de cada palavra candidata a ser a próxima. Para construir a intuição, usaremos frequentemente a analogia de um `voto`, embora o termo técnico mais geral seja `peso`, que se tornará mais prevalente à medida que avançarmos para mecanismos mais complexos*.
 
 ![Votação de características de pares com saltos](/assets/images/Votosabstrata.webp)
 _Figura 1: Modelo conceitual hipotético baseado em pares com saltos. As linhas representam características (pares como `(programa, executado)` ou `(bateria, executado)`). Os valores apresentados são "votos" para a próxima palavra (ex: "por"). Apenas pesos não-zero relevantes são mostrados. A ilustração foca na predição da palavra após `executado` no contexto da primeira frase._{: class="legend"}
@@ -432,7 +432,7 @@ Caso essa informação esteja disponível, podemos criar uma **máscara**. Essen
 ![Atividades de características mascaradas](/assets/images/mascara1.webp)
 _Figura 3: Aplicação de uma máscara conceitual. A máscara (à direita) atribui peso $1$ para "programa" e "bateria" (assumindo que estas são as palavras-chave distintivas) e $0$ para as outras. Ao multiplicar os pesos das características ativas (centro) pela máscara, apenas as características relevantes ("programa, executado" neste caso) mantêm seu peso (resultado à esquerda)._{: class="legend"}
 
-Para aplicar a máscara aos votos que calculamos com o algoritmo da seção anterior (Agregação de Características de Pares), realizamos uma multiplicação elemento a elemento, chamada de produto Hadamard, entre o vetor de votos para cada palavra seguinte possível e a máscara apropriada, ou, de forma equivalente, aplicamos a máscara ao contexto antes de calcular os votos acumulados. Qualquer voto originado de uma característica/par mascarado, peso $0$ na máscara, é zerado.
+Para aplicar a máscara aos votos que calculamos com o algoritmo da seção anterior (Agregação de Características de Pares), realizamos uma multiplicação elemento a elemento, chamada de produto Hadamard, entre o vetor de votos para cada palavra seguinte possível e a máscara apropriada, ou, de forma equivalente, aplicamos a máscara ao contexto antes de calcular os votos acumulados. qualquer contribuição (o "voto" da nossa analogia anterior) originada de uma característica (par) cujo peso correspondente na máscara seja 0, é zerada.
 
 >**O Produto de Hadamard**
 >
@@ -459,7 +459,7 @@ No exemplo que estamos usando, se a máscara destacar apenas a característica `
 
 O artigo seminal *Attention is All You Need* (Vaswani et al., 2017) introduziu uma forma específica e poderosa de implementar essa ideia, que se tornou a base dos modelos **Transformer**.
 
->A origem do termo transformer está ligada à capacidade do modelo de transformar representações de sequências (como texto) por meio de mecanismos de autoatenção (self-attention), sem depender de redes neurais recorrentes (RNNs) ou convolucionais (CNNs).
+>A origem do termo **Transformer** está ligada à capacidade do modelo de transformar representações de sequências (como texto) por meio de mecanismos de autoatenção (self-attention), sem depender de redes neurais recorrentes (RNNs) ou convolucionais (CNNs).
 
 A persistente leitora deve ter percebido que até agora, tudo que fizemos foi uma aproximação conceitual para construir as estruturas cognitivas do entendimento. Isso não basta. Assim como fizemos anteriormente, vamos recorrer a um exemplo mais rigoroso, com um pouco de matemática, em um cenário um pouco mais complexo, ainda que distante da realidade.
 
@@ -892,19 +892,21 @@ int main() {
 }
 ```
 
-A implementação em C++ ilustra como o mascaramento pode ser aplicado para focar apenas nas palavras relevantes, permitindo que o modelo faça previsões mais precisas. O código é modular e pode ser facilmente adaptado para diferentes sequências e máscaras.
+A implementação em C++ 20 ilustra como o mascaramento pode ser aplicado para focar apenas nas palavras relevantes, permitindo que o modelo faça previsões mais precisas. O código é modular e pode ser facilmente adaptado para diferentes sequências e máscaras.
 
-A atenta leitora já deve ter entendido a necessidade da atenção e a intuição que suporta esta ideia: focar seletivamente no que é relevante usando mascaramento/ponderação. A próxima pergunta que a curiosa leitora precisa fazer é:
+A atenta leitora já deve ter entendido a necessidade do mecanismo de atenção e a intuição que suporta esta ideia: focar seletivamente no que é relevante usando mascaramento/ponderação. A próxima pergunta que a curiosa leitora precisa fazer é:
 
 **como esse processo de seleção e ponderação é implementado de forma eficiente e, ainda mais importante, aprendido pelos modelos?**
 
-Aqui despontam as operações matriciais que definem a atenção nos **Transformers**.
+Nesta altura da nossa jornada despontam no horizonte as operações matriciais que definem a atenção nos **Transformers**.
 
 ### Atenção como Multiplicação de Matrizes: Aprendendo a Focar
 
-Vou considerar que esperta leitora já entendeu a intuição da atenção como um mecanismo de foco seletivo, usando mascaramento ou ponderação para destacar informações relevantes. Nos resta encontrar uma forma de implementar essa tecnologia de forma eficiente permitindo ao modelo *aprender* quais informações são relevantes em cada contexto. Isso quer dizer que: *para ser eficiente, a máscara não pode ser fixa*. Isso quer dizer que a máscara precisa ser criada de acordo com o contexto atual da palavra para a qual estamos tentando prever a próxima palavra e com o contexto das palavras que vieram antes.
+Vou considerar que esperta leitora já entendeu a intuição da atenção como um mecanismo de foco seletivo, usando mascaramento ou ponderação para destacar informações relevantes. Nos resta encontrar uma forma de implementar essa tecnologia de forma eficiente permitindo ao modelo *aprender* quais informações são relevantes em cada contexto. Isso quer dizer que: *para ser eficiente, a máscara não pode ser fixa*. Isso quer dizer que *a máscara precisa ser criada de acordo com o contexto atual da palavra para a qual estamos tentando prever a próxima palavra e com o contexto das palavras que vieram antes*.
 
-Para que seja possível que os modelos possam aprender esses padrões de atenção e para que o cálculo seja eficiente em hardware moderno, como GPUs e TPUs, buscamos expressar todo o processo através de **operações de matrizes diferenciáveis**. Isso permite que usemos algoritmos como os algoritmos de retropropagação (_backpropagation_) para ajustar os pesos do modelo.
+Este mecanismo que vamos descrever, onde cada palavra em uma sequência `presta atenção` a todas as outras palavras da mesma sequência, incluindo a si mesma, é conhecido como **auto-atenção** (*self-attention*). É auto porque a mesma sequência serve tanto como fonte de consulta quanto como fonte de informação a ser consultada.
+
+Para que seja possível que os modelos possam aprender esses padrões de atenção e para que o cálculo seja eficiente em hardware moderno, como GPUs e TPUs, buscaremos expressar todo o processo através de **operações de matrizes diferenciáveis**. Isso permite que usemos algoritmos como os algoritmos de retropropagação (*backpropagation*) para ajustar os pesos do modelo.
 
 >**Operações de Matrizes Diferenciáveis**
 >
@@ -940,17 +942,15 @@ Para que seja possível que os modelos possam aprender esses padrões de atenç�
 >
 > Estas operações são essenciais em algoritmos de otimização, especialmente em aprendizado profundo, onde a retropropagação é usada para calcular gradientes e atualizar pesos de modelos. Elas permitem que os modelos aprendam a partir de dados, ajustando seus parâmetros para minimizar funções de perda.
 
-Neste texto, até o momento, trabalhamos a intuição da atenção como sendo um mecanismo de foco seletivo, usando mascaramento ou ponderação para destacar informações relevantes. Para que os modelos possam *aprender* esses padrões de atenção e para que o cálculo seja eficiente em hardware moderno, como GPUs e TPUs, buscamos expressar todo o processo através de **operações de matrizes diferenciáveis**. Isso permite que usemos algoritmos como a retropropagação (_backpropagation_) para ajustar os pesos do modelo.
+A abordagem de **Agregação de Características de Pares**, detalhada anteriormente, pode ser vista como uma forma de consulta implícita. Para cada palavra atual $w_t$, o modelo consulta uma vasta coleção de informações pré-calculadas (os votos $\text{Voto}(w_k | w_i, w_t)$) associadas a cada par possível $(w_i, w_t)$ formado com palavras anteriores $w_i$. Esse conjunto de votos armazenados age como uma **tabela de consulta** distribuída, onde a `chave` de busca será o par específico $(w_i, w_t)$ e o `valor` será a distribuição de votos sobre as palavras seguintes $w_k$. A introdução do **mascaramento** na seção anterior representa um passo para tornar essa consulta mais seletiva, focando apenas nas `entradas da tabela` (pares) consideradas mais relevantes para o contexto atual.
 
-A ideia central agora é substituir o processo de aplicação de máscara que discutimos, que funciona como uma `tabela de consulta` implícita para selecionar relevância na forma de um cálculo matricial. Em vez de apenas selecionar características, vamos calcular um **peso de atenção** para cada palavra anterior em relação à palavra atual. Esse peso determinará quanta atenção a palavra atual deve dar a cada palavra anterior ao construir seu vetor de contexto.
-
-O processo geralmente envolve três componentes principais, derivados da representação vetorial (embedding) de cada palavra na sequência:
+O processo geralmente envolve três componentes principais, derivados da representação vetorial, **embedding**, de cada palavra na sequência:
 
 1. **Query (Consulta - Q)**: um vetor que representa a palavra/posição atual, atuando como uma "sonda" para buscar informações relevantes.
 2. **Key (Chave - K)**: um vetor associado a cada palavra na sequência (incluindo as anteriores), que pode ser "comparado" com a Query para determinar a relevância.
 3. **Value (Valor - V)**: um vetor associado a cada palavra na sequência, contendo a informação que será efetivamente passada adiante se a palavra for considerada relevante.
 
-A relevância entre uma Query (palavra atual $t$) e uma Key (palavra anterior $i$) é calculada medindo a **similaridade** entre $Q_t$ e $K_i$. Uma forma comum e eficiente de fazer isso é através do **produto escalar (dot product)**. Podemos calcular todos os scores de similaridade para a palavra $t$ em relação a todas as palavras anteriores $i$ (e a própria $t$) de uma vez só usando multiplicação de matrizes:
+A relevância entre uma Query (palavra atual $t$) e uma Key (palavra anterior $i$) é calculada medindo a **similaridade** entre $Q_t$ e $K_i$. Uma forma comum e eficiente de fazer isso é através do **produto escalar (dot product)** que vimos [aqui](https://frankalcantara.com/transformers-um/). Porém, podemos calcular todos os scores de similaridade para a palavra $t$ em relação a todas as palavras anteriores $i$ (e a própria $t$) de uma vez só usando multiplicação de matrizes:
 
 $$\text{Scores}_t = Q_t \cdot K^T$$
 
@@ -959,9 +959,9 @@ Neste caso, $Q_t$ é o vetor query da palavra $t$, e $K$ é uma matriz na qual c
 ![Consulta de máscara por multiplicação de matrizes](/assets/images/mask-query-matrix-multiplication-fixed.webp)
 _Figura 5: Processo conceitual de consulta de atenção. A Query (Q) da palavra atual interage com as Keys (K) das palavras anteriores (e da atual) para gerar scores de atenção. (Nota: A figura original ilustrava uma busca de máscara; aqui reinterpretamos como cálculo de scores QK^T)._{: class="legend"}
 
-Esses scores brutos precisam ser normalizados para se tornarem pesos de atenção que somam 1. Isso é feito aplicando a função **softmax**. Além disso, no artigo original do Transformer, os scores são escalonados por $\sqrt{d_k}$ (aqui $d_k$ é a dimensão dos vetores Key/Query) antes do softmax para estabilizar os gradientes durante o treinamento:
+Esses scores brutos precisam ser normalizados para se tornarem pesos de atenção que somam $1$. Isso é feito aplicando a função **softmax**. Além disso, no artigo original do **Transformer**, os scores são escalonados por $\sqrt{d_k}$ (aqui $d_k$ é a dimensão dos vetores Key/Query) antes do softmax para estabilizar os gradientes durante o treinamento:
 
-$$ \text{AttentionWeights}_t = \text{softmax}\left( \frac{Q_t \cdot K^T}{\sqrt{d_k}} \right) $$
+$$\text{AttentionWeights}_t = \text{softmax}\left( \frac{Q_t \cdot K^T}{\sqrt{d_k}} \right)$$
 
 O resultado $\text{AttentionWeights}_t$ é um vetor de pesos. Neste caso, cada peso $\alpha_{ti}$ indica quanta atenção a palavra $t$ deve prestar à palavra $i$.
 
@@ -973,26 +973,395 @@ Este processo inteiro pode ser expresso de forma compacta para todas as palavras
 
 $$\text{Attention}(Q, K, V) = \text{softmax}\left( \frac{QK^T}{\sqrt{d_k}} \right) V$$
 
-**Esta formulação específica é conhecida como *Scaled Dot-Product Attention* e foi a principal proposta do influente artigo "Attention Is All You Need" (Vaswani et al., 2017).**
+**Esta formulação específica é conhecida como *Scaled Dot-Product Attention* e foi a principal proposta do influente artigo "Attention Is All You Need" (Vaswani et al., 2017). Quando essa operação de atenção é aplicada dentro da mesma sequência, ou seja, as matrizes Q, K e V são derivadas da mesma sequência de entrada chamamos este processo de auto-atenção (self-attention). Este é precisamente o mecanismo central dos Transformers.**
 
 ![Equação de atenção destacando QKT](/assets/images/attention-equation-visualization.webp)
 _Figura 6: A equação de atenção completa. O termo $QK^T$ calcula a similaridade, o softmax normaliza em pesos, e estes ponderam os vetores Value (V)._{: class="legend"}
 
-As matrizes $Q$, $K$, e $V$ não são os **embeddings** originais das palavras. Elas são obtidas aplicando **transformações lineares aprendíveis** (matrizes de pesos $W_Q, W_K, W_V$) aos embeddings de entrada. Isso permite que o modelo aprenda *quais aspectos* das palavras são relevantes para atuar como query, key ou value em diferentes contextos.
+É importante que a persistente leitora note que as matrizes $Q$, $K$, e $V$ não correspondem diretamente aos **embeddings** originais das palavras. Elas são, na verdade, o resultado de **transformações lineares** aplicadas aos embeddings de entrada. Essas transformações são definidas por matrizes de pesos ($W_Q, W_K, W_V$) cujos valores são **aprendidos**, ou se preferir: ajustados, durante o processo de treinamento do modelo. Isso concede ao modelo a flexibilidade para aprender *quais aspectos das palavras são relevantes para atuar como query, key ou value em diferentes contextos*.
 
-Este mecanismo de atenção é poderoso porque:
+Este mecanismo de atenção robusto e flexível é uma das principais inovações dos **Transformers**. Ele permite que o modelo:
 
-* Captura dependências independentemente da distância.
-* Os cálculos são paralelizáveis sobre a sequência (ao contrário das RNNs).
-* O modelo aprende a determinar as relações de relevância dinamicamente.
+* Capture dependências de longo alcance entre palavras, mesmo em sequências longas;
+* Atenue a influência de palavras irrelevantes, focando apenas nas mais relevantes para a tarefa em questão;
+* Ajuste dinamicamente a atenção com base no contexto, aprendendo quais palavras são mais relevantes em cada situação;
+* Permita que o modelo aprenda a importância relativa de diferentes palavras, sem depender de uma estrutura fixa ou pré-definida.
+
+Além disso, o mesmo mecanismo de atenção pode ser aplicado a diferentes partes da sequência, simultaneamente e em paralelo, permitindo que o modelo aprenda a focar em diferentes aspectos do contexto em diferentes momentos. Isso é especialmente útil em tarefas como tradução automática, onde o significado de uma palavra pode depender fortemente do contexto em que aparece.
+
+#### Exemplo numérico: Atenção com Máscara
+
+Para ilustrar como funciona o mecanismo de atenção na prática, vamos trabalhar com um exemplo numérico simplificado. Neste exemplo vamos considerar uma sequência de $3$ palavras. Nesta sequência cada palavra está representada por um **embedding** de dimensão $d=4$.
+
+1. **Embeddings Iniciais**: suponha que temos os seguintes **embeddings** para nossa sequência:
+
+    $$
+    \mathbf{x}_1 = [0.2, -0.1, 0.5, 0.3] \quad \text{(primeira palavra)}
+    $$
+
+    $$
+    \mathbf{x}_2 = [0.5, 0.2, -0.3, 0.1] \quad \text{(segunda palavra)}
+    $$
+
+    $$
+    \mathbf{x}_3 = [-0.1, 0.4, 0.2, 0.6] \quad \text{(terceira palavra)}
+    $$
+
+    Podemos organizar esses vetores em uma matriz de entrada $\mathbf{X} \in \mathbb{R}^{3 \times 4}$:
+
+    $$
+    \mathbf{X} = \begin{bmatrix}
+    0.2 & -0.1 & 0.5 & 0.3 \\
+    0.5 & 0.2 & -0.3 & 0.1 \\
+    -0.1 & 0.4 & 0.2 & 0.6
+    \end{bmatrix}
+    $$
+
+2. **Transformações Lineares para Q, K, V**: aplicamos transformações lineares para obter as matrizes Query ($\mathbf{Q}$), Key ($\mathbf{K}$) e Value ($\mathbf{V}$). Vamos assumir matrizes de peso $\mathbf{W}^Q, \mathbf{W}^K, \mathbf{W}^V \in \mathbb{R}^{4 \times 3}$ (transformando de dimensão $d=4$ para dimensão $d_k=3$), idênticas às do exemplo original para manter a comparação:
+
+    $$
+    \mathbf{W}^Q = \begin{bmatrix}
+    0.1 & 0.4 & 0.2 \\
+    0.3 & -0.2 & 0.5 \\
+    0.6 & 0.1 & -0.3 \\
+    -0.1 & 0.3 & 0.4
+    \end{bmatrix} \quad
+    \mathbf{W}^K = \begin{bmatrix}
+    0.2 & 0.1 & 0.3 \\
+    0.5 & -0.3 & 0.2 \\
+    -0.1 & 0.4 & 0.2 \\
+    0.3 & 0.2 & -0.1
+    \end{bmatrix} \quad
+    \mathbf{W}^V = \begin{bmatrix}
+    0.1 & -0.2 & 0.5 \\
+    0.3 & 0.4 & 0.2 \\
+    0.2 & 0.3 & -0.1 \\
+    0.5 & -0.1 & 0.3
+    \end{bmatrix}
+    $$
+
+    Calculamos $\mathbf{Q}, \mathbf{K}, \mathbf{V}$ multiplicando a matriz de entrada $\mathbf{X}$ pelas matrizes de peso correspondentes:
+
+    $$\mathbf{Q} = \mathbf{X}\mathbf{W}^Q$$
+
+    $$\mathbf{K} = \mathbf{X}\mathbf{W}^K$$
+
+    $$\mathbf{V} = \mathbf{X}\mathbf{W}^V$$
+
+    Realizando as multiplicações (cálculos verificados):
+
+    $$
+    \mathbf{Q} = \begin{bmatrix}
+    0.26 &  0.24 & -0.04 \\
+    -0.08 &  0.16 &  0.33 \\
+    0.17 &  0.08 &  0.36
+    \end{bmatrix}
+    $$
+
+    $$
+    \mathbf{K} = \begin{bmatrix}
+    0.03 &  0.31 &  0.11 \\
+    0.26 & -0.11 &  0.12 \\
+    0.34 &  0.07 &  0.03
+    \end{bmatrix}
+    $$
+
+    $$
+    \mathbf{V} = \begin{bmatrix}
+    0.24 &  0.04 &  0.12 \\
+    0.10 & -0.12 &  0.35 \\
+    0.45 &  0.18 &  0.19
+    \end{bmatrix}
+    $$
+
+3. **Cálculo dos Scores de Atenção $(QK^T)$**: calculamos os scores de atenção bruta multiplicando $\mathbf{Q}$ pela transposta de $\mathbf{K}$ ($\mathbf{K}^T$):
+
+    $$\mathbf{S_{raw}} = \mathbf{Q}\mathbf{K}^T$$
+
+    $$
+    \mathbf{K}^T = \begin{bmatrix}
+    0.03 &  0.26 &  0.34 \\
+    0.31 & -0.11 &  0.07 \\
+    0.11 &  0.12 &  0.03
+    \end{bmatrix}
+    $$
+
+    $$
+    \mathbf{S_{raw}} =
+    \begin{bmatrix}
+    0.26 &  0.24 & -0.04 \\
+    -0.08 &  0.16 &  0.33 \\
+    0.17 &  0.08 &  0.36
+    \end{bmatrix}
+    \begin{bmatrix}
+    0.03 &  0.26 &  0.34 \\
+    0.31 & -0.11 &  0.07 \\
+    0.11 &  0.12 &  0.03
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    0.0778 &  0.0364 &  0.1040 \\
+    0.0835 &  0.0012 & -0.0061 \\
+    0.0695 &  0.0786 &  0.0742
+    \end{bmatrix}
+    $$
+
+    Em seguida, escalamos os scores dividindo pela raiz quadrada da dimensão das chaves ($\sqrt{d_k} = \sqrt{3} \approx 1.732$):
+
+    $$\text{Scores} = \frac{\mathbf{S_{raw}}}{\sqrt{d_k}} \approx \frac{\mathbf{S_{raw}}}{1.732}$$
+
+    $$
+    \text{Scores} \approx
+    \begin{bmatrix}
+    0.0449 &  0.0210 &  0.0600 \\
+    0.0482 &  0.0007 & -0.0035 \\
+    0.0401 &  0.0454 &  0.0428
+    \end{bmatrix}
+    $$
+
+4. **Aplicação da Função Softmax**: para cada linha da matriz `Scores`, aplicamos a função softmax para obter pesos de atenção ($\mathbf{A}$) que somam $1$:
+
+    $$\mathbf{A} = \text{softmax}(\text{Scores})$$
+
+    Calculando o softmax para cada linha (arredondado para 4 casas decimais):
+
+    * Linha 1: $\text{softmax}([0.0449, 0.0210, 0.0600]) \approx [0.3343, 0.3264, 0.3393]$
+    * Linha 2: $\text{softmax}([0.0482, 0.0007, -0.0035]) \approx [0.3445, 0.3285, 0.3270]$
+    * Linha 3: $\text{softmax}([0.0401, 0.0454, 0.0428]) \approx [0.3324, 0.3342, 0.3334]$
+
+    $$
+    \mathbf{A} \approx
+    \begin{bmatrix}
+    0.3343 & 0.3264 & 0.3393 \\
+    0.3445 & 0.3285 & 0.3270 \\
+    0.3324 & 0.3342 & 0.3334
+    \end{bmatrix}
+    $$
+
+    Cada elemento $A_{ij}$ representa o quanto a palavra $i$ presta atenção à palavra $j$ ao construir sua representação de saída.
+
+5. **Multiplicação pelos Valores (V)**: finalmente, multiplicamos os pesos de atenção $\mathbf{A}$ pela matriz $\mathbf{V}$ para obter a saída final do mecanismo de atenção:
+
+    $$\text{Output} = \mathbf{A} \times \mathbf{V}$$
+
+    $$
+    \text{Output} \approx
+    \begin{bmatrix}
+    0.3343 & 0.3264 & 0.3393 \\
+    0.3445 & 0.3285 & 0.3270 \\
+    0.3324 & 0.3342 & 0.3334
+    \end{bmatrix}
+    \begin{bmatrix}
+    0.24 &  0.04 &  0.12 \\
+    0.10 & -0.12 &  0.35 \\
+    0.45 &  0.18 &  0.19
+    \end{bmatrix}
+    $$
+
+    Realizando o cálculo:
+
+    $$
+    \text{Output} \approx
+    \begin{bmatrix}
+    0.2655 & 0.0353 & 0.2188 \\
+    0.2628 & 0.0333 & 0.2184 \\
+    0.2632 & 0.0332 & 0.2202
+    \end{bmatrix}
+    $$
+
+Este é o resultado final da operação de atenção. Cada linha da matriz `Output` representa o novo vetor de contexto para a palavra correspondente na sequência de entrada ($\mathbf{x}_1, \mathbf{x}_2, \mathbf{x}_3$). Esse vetor agora incorpora informações ponderadas de *todas* as palavras da sequência, incluindo ela mesma, com base na relevância calculada pelo mecanismo de atenção.
+
+Observamos que os pesos de atenção na matriz $\mathbf{A}$ estão relativamente equilibrados, todos próximos de $1/3 \approx 0.333$. Isso indica que, para *estes* embeddings de entrada e matrizes de peso $\mathbf{W}^Q, \mathbf{W}^K$ específicos, nenhuma palavra está prestando significativamente mais atenção a uma palavra específica do que às outras. Como resultado, os vetores na matriz `Output` são semelhantes a uma média ponderada quase uniforme dos vetores na matriz $\mathbf{V}$. Isso ocorre porque nossos **embeddings** de entrada são muito simples e pouco expressivos. Foram criados apenas para ilustrar o funcionamento do mecanismo de atenção.
+
+Em um modelo **Transformer** real, os pesos $\mathbf{W}^Q, \mathbf{W}^K, \mathbf{W}^V$ são aprendidos durante o treinamento em grandes volumes de dados. O objetivo é que o modelo aprenda a gerar matrizes $\mathbf{Q}, \mathbf{K}, \mathbf{V}$ que resultem em padrões de atenção ($\mathbf{A}$) significativos e úteis para a tarefa em questão, destacando as interações relevantes entre as palavras.
+
+#### Exemplo de Código C++
+
+O código C++ abaixo ilustra a implementação do mecanismo de atenção com máscara, utilizando a biblioteca Eigen para operações matriciais e o exemplo numérico que vimos anteriormente. O código é modular e pode ser facilmente adaptado para diferentes sequências e máscaras.
+
+```cpp
+#include <iostream>         ///< Para entrada e saída padrão (std::cout).
+#include <vector>          ///< Para contêiner std::vector usado no armazenamento de sequências.
+#include <Eigen/Dense>     ///< Para a biblioteca Eigen, usada em operações com matrizes e vetores.
+#include <cmath>           ///< Para funções matemáticas como std::exp e std::sqrt.
+#include <iomanip>         ///< Para std::fixed e std::setprecision, usados na formatação de saída.
+
+/**
+ * @brief Aplica a função softmax elemento a elemento em uma linha de uma matriz Eigen.
+ * @param row Vetor de entrada representando uma linha da matriz (Eigen::VectorXd).
+ * @return Um novo vetor com a função softmax aplicada a cada elemento (Eigen::VectorXd).
+ */
+Eigen::VectorXd softmax(const Eigen::VectorXd& row) {
+    Eigen::VectorXd exp_row = row.array().exp();
+    double sum_exp = exp_row.sum();
+    if (sum_exp == 0.0) {
+        return Eigen::VectorXd::Zero(row.size()); // Evita divisão por zero
+    }
+    return exp_row / sum_exp;
+}
+
+/**
+ * @class ScaledDotProductAttention
+ * @brief Uma classe que implementa o mecanismo de Scaled Dot-Product Attention.
+ *
+ * Esta classe simula o mecanismo de atenção descrito em "Attention is All You Need",
+ * calculando os pesos de atenção com base em vetores Query, Key e Value, e produzindo
+ * uma saída ponderada. Utiliza a biblioteca Eigen para operações matriciais eficientes.
+ */
+class ScaledDotProductAttention {
+private:
+    Eigen::MatrixXd W_Q; ///< Matriz de pesos para transformação Query (d x d_k).
+    Eigen::MatrixXd W_K; ///< Matriz de pesos para transformação Key (d x d_k).
+    Eigen::MatrixXd W_V; ///< Matriz de pesos para transformação Value (d x d_k).
+    double scale_factor; ///< Fator de escalonamento (raiz quadrada de d_k).
+
+public:
+    /**
+     * @brief Construtor que inicializa as matrizes de pesos e o fator de escalonamento.
+     * @param w_q Matriz de pesos para Query (Eigen::MatrixXd).
+     * @param w_k Matriz de pesos para Key (Eigen::MatrixXd).
+     * @param w_v Matriz de pesos para Value (Eigen::MatrixXd).
+     */
+    ScaledDotProductAttention(const Eigen::MatrixXd& w_q, const Eigen::MatrixXd& w_k, 
+                             const Eigen::MatrixXd& w_v)
+        : W_Q(w_q), W_K(w_k), W_V(w_v) {
+        scale_factor = std::sqrt(static_cast<double>(W_Q.cols()));
+    }
+
+    /**
+     * @brief Calcula o mecanismo de Scaled Dot-Product Attention para uma sequência de entrada.
+     * @param X Matriz de entrada contendo embeddings das palavras (n x d).
+     * @return Matriz de saída após o cálculo de atenção (n x d_k).
+     */
+    Eigen::MatrixXd computeAttention(const Eigen::MatrixXd& X) const {
+        // Passo 1: Calcular Query, Key, Value
+        Eigen::MatrixXd Q = X * W_Q; // (n x d) * (d x d_k) = (n x d_k)
+        Eigen::MatrixXd K = X * W_K; // (n x d) * (d x d_k) = (n x d_k)
+        Eigen::MatrixXd V = X * W_V; // (n x d) * (d x d_k) = (n x d_k)
+
+        // Passo 2: Calcular scores de atenção brutos (QK^T)
+        Eigen::MatrixXd scores_raw = Q * K.transpose(); // (n x d_k) * (d_k x n) = (n x n)
+
+        // Passo 3: Escalonar os scores
+        Eigen::MatrixXd scores = scores_raw / scale_factor; // (n x n)
+
+        // Passo 4: Aplicar softmax para cada linha para obter pesos de atenção
+        Eigen::MatrixXd attention_weights(scores.rows(), scores.cols());
+        for (int i = 0; i < scores.rows(); ++i) {
+            attention_weights.row(i) = softmax(scores.row(i));
+        }
+
+        // Passo 5: Calcular a saída ponderada (AV)
+        Eigen::MatrixXd output = attention_weights * V; // (n x n) * (n x d_k) = (n x d_k)
+
+        return output;
+    }
+
+    /**
+     * @brief Exibe os resultados do cálculo de atenção, incluindo pesos e saída.
+     * @param X Matriz de entrada (Eigen::MatrixXd).
+     * @param output Matriz de saída após atenção (Eigen::MatrixXd).
+     */
+    void printResults(const Eigen::MatrixXd& X, const Eigen::MatrixXd& output) const {
+        std::cout << "Matriz de Entrada (Embeddings, X):\n" << X << "\n\n";
+
+        // Recalcular pesos de atenção para exibição
+        Eigen::MatrixXd Q = X * W_Q;
+        Eigen::MatrixXd K = X * W_K;
+        Eigen::MatrixXd scores_raw = Q * K.transpose();
+        Eigen::MatrixXd scores = scores_raw / scale_factor;
+        Eigen::MatrixXd attention_weights(scores.rows(), scores.cols());
+        for (int i = 0; i < scores.rows(); ++i) {
+            attention_weights.row(i) = softmax(scores.row(i));
+        }
+
+        std::cout << "Pesos de Atenção (A = softmax(QK^T / sqrt(d_k))):\n";
+        std::cout << std::fixed << std::setprecision(4) << attention_weights << "\n\n";
+
+        std::cout << "Saída do Mecanismo de Atenção (Output = AV):\n";
+        std::cout << std::fixed << std::setprecision(4) << output << "\n";
+    }
+};
+
+/**
+ * @brief Função principal que demonstra o uso da classe ScaledDotProductAttention.
+ *
+ * Este programa simula o mecanismo de Scaled Dot-Product Attention usando os dados do exemplo
+ * numérico da seção "Atenção como Multiplicação de Matrizes". Uma sequência de 3 palavras com
+ * embeddings de dimensão 4 é processada, e os resultados são exibidos para análise.
+ *
+ * @return 0 em caso de execução bem-sucedida.
+ */
+int main() {
+    // Definir dimensões
+    int n = 3;      ///< Número de palavras na sequência
+    int d = 4;      ///< Dimensão dos embeddings
+    int d_k = 3;    ///< Dimensão dos vetores Query, Key, Value
+
+    // Definir matriz de entrada X (3 palavras, embeddings de dimensão 4)
+    Eigen::MatrixXd X(n, d);
+    X <<  0.2, -0.1,  0.5,  0.3,  // x_1
+          0.5,  0.2, -0.3,  0.1,  // x_2
+         -0.1,  0.4,  0.2,  0.6;  // x_3
+
+    // Definir matrizes de pesos W_Q, W_K, W_V (4 x 3, conforme exemplo)
+    Eigen::MatrixXd W_Q(d, d_k);
+    W_Q << 0.1,  0.4,  0.2,
+           0.3, -0.2,  0.5,
+           0.6,  0.1, -0.3,
+          -0.1,  0.3,  0.4;
+
+    Eigen::MatrixXd W_K(d, d_k);
+    W_K << 0.2,  0.1,  0.3,
+           0.5, -0.3,  0.2,
+          -0.1,  0.4,  0.2,
+           0.3,  0.2, -0.1;
+
+    Eigen::MatrixXd W_V(d, d_k);
+    W_V << 0.1, -0.2,  0.5,
+           0.3,  0.4,  0.2,
+           0.2,  0.3, -0.1,
+           0.5, -0.1,  0.3;
+
+    // Criar instância do mecanismo de atenção
+    ScaledDotProductAttention attention(W_Q, W_K, W_V); ///< Instância do mecanismo de atenção
+
+    // Calcular atenção
+    Eigen::MatrixXd output = attention.computeAttention(X);
+
+    // Exibir resultados
+    attention.printResults(X, output);
+
+    return 0;
+}
+```
 
 ### Processando o Contexto Ponderado: A Rede Feed-Forward
 
-Após o mecanismo de atenção calcular o vetor de contexto $C_t$ para cada palavra $t$ (que agora contém informação da própria palavra $t$ misturada com informações ponderadas de outras palavras relevantes na sequência), precisamos processar essa rica representação contextual.
+Após o mecanismo de atenção calcular o vetor de contexto $C_t$ para cada palavra $t$ (que agora contém informação da própria palavra $t$ misturada com informações ponderadas de outras palavras relevantes na sequência), precisamos processar essa representação contextual.
 
-O objetivo é transformar $C_t$ em uma saída que possa ser usada para a tarefa final (como prever a próxima palavra) ou que sirva como entrada para a próxima camada do modelo Transformer. Essa transformação é realizada por uma **Rede Neural Feed-Forward (FFN)**, aplicada independentemente a cada posição $t$ da sequência.
+O nosso novo objetivo será transformar $C_t$ em uma saída que possa ser usada para a tarefa final, como prever a próxima palavra, ou que sirva como entrada para a próxima camada do modelo **Transformer**. Essa transformação é realizada por uma **Rede Neural Feed-Forward (FFN)**, aplicada independentemente a cada posição $t$ da sequência.
 
-Embora tenhamos usado a analogia de "características de pares" na seção anterior, a FFN nos**Transformers**é mais genérica e poderosa. Tipicamente, ela consiste em duas camadas lineares com uma função de ativação não-linear entre elas, como ReLU (Rectified Linear Unit) ou GeLU (Gaussian Error Linear Unit):
+> **Redes Feed-Forward (FFN) em Transformers**
+>
+> A **Feed-Forward Network (FFN)** nos Transformers é uma sub-rede neural aplicada independentemente a cada posição da sequência após o mecanismo de atenção.
+>
+> Matematicamente, a **FFN** consiste em duas transformações lineares com uma não-linearidade entre elas:
+>
+> $$\text{FFN}(C_t) = \max(0, C_t W_1 + b_1)W_2 + b_2$$
+>
+> onde:
+> 
+> * $C_t$ é o vetor de contexto para a posição $t$ após o mecanismo de atenção;
+> * $W_1 \in \mathbb{R}^{d_{\text{model}} \times d_{\text{ff}}}$ e $W_2 \in \mathbb{R}^{d_{\text{ff}} \times d_{\text{model}}}$ são matrizes de peso;
+> * $b_1 \in \mathbb{R}^{d_{\text{ff}}}$ e $b_2 \in \mathbb{R}^{d_{\text{model}}}$ são vetores de bias;
+> *  $\max(0, x)$ é a função de ativação ReLU (*Rectified Linear Unit*).
+>
+> A primeira transformação linear tipicamente expande a dimensão ($d_{\text{ff}} \approx 4 \times d_{\text{model}}$), e a segunda projeta de volta para a dimensão original. Esta estrutura permite que a rede aprenda representações complexas e não-lineares do contexto capturado pelo mecanismo de atenção.
+>
+> A **FFN** introduz capacidade de modelagem não-linear que complementa o mecanismo de atenção, permitindo que o **Transformer** aprenda funções mais complexas sobre as representações contextualizadas. Cada posição é processada independentemente, mantendo o paralelismo que é uma das vantagens-chave da arquitetura Transformer.
+
+Embora tenhamos usado a analogia de "características de pares" na seção anterior, a **FFN** nos **Transformers** é mais genérica e poderosa. Tipicamente, ela consiste em duas camadas lineares com uma função de ativação não-linear entre elas, como ReLU (*Rectified Linear Unit*) ou GeLU (*Gaussian Error Linear Unit*):
 
 $$\text{FFN}(C_t) = \text{ReLU}(C_t W_1 + b_1) W_2 + b_2$$
 
@@ -1001,10 +1370,48 @@ Neste caso, $W_1, b_1, W_2, b_2$ são matrizes de pesos e vetores de bias aprend
 ![Diagrama da camada de rede neural](/assets//images/ffn-layer-diagram.webp)
 _Figura 7: Diagrama conceitual de uma camada de rede neural. A FFN nos**Transformers**aplica transformações semelhantes (lineares + não-linearidade) ao vetor de contexto de cada posição._{: class="legend"}
 
-A não-linearidade (ReLU/GeLU) permite que a FFN aprenda transformações complexas e não apenas combinações lineares das informações presentes no vetor de contexto $C_t$. Embora possamos *imaginar* que a FFN poderia aprender a detectar combinações específicas como "bateria, executado" (como no exemplo manual abaixo), na prática ela aprende representações mais abstratas e úteis para a tarefa.
+A não-linearidade (ReLU/GeLU) permite que a **FFN** aprenda transformações complexas e não apenas combinações lineares das informações presentes no vetor de contexto $C_t$. 
+
+> **Funções de Ativação: ReLU e GeLU**
+>
+> As funções de ativação não-lineares são componentes essenciais das redes neurais que permitem modelar relações complexas nos dados. Nos Transformers, duas funções de ativação são comumente usadas na camada Feed-Forward:
+>
+> **ReLU (Rectified Linear Unit):**
+>
+> A ReLU é definida matematicamente como:
+>
+> $$\text{ReLU}(x) = \max(0, x)$$
+>
+> Esta função simples mantém valores positivos inalterados e converte valores negativos em zero. Suas vantagens incluem:
+>
+> * Cálculo computacionalmente eficiente
+> * Mitigação do problema de gradientes que desaparecem
+> * Indução de esparsidade nas ativações
+>
+> **GeLU (Gaussian Error Linear Unit):**
+>
+> A GeLU, introduzida mais recentemente e usada em modelos como BERT e GPT, é definida como:
+>
+> $$\text{GeLU}(x) = x \cdot \Phi(x)$$
+>
+> na qual temos: $\Phi(x)$ é a função de distribuição cumulativa da distribuição normal padrão. A GeLU pode ser aproximada por:
+>
+> $$\text{GeLU}(x) \approx 0.5x \left(1 + \tanh\left(\sqrt{2/\pi}(x + 0.044715x^3)\right)\right)$$
+>
+> A GeLU suaviza a transição em torno de zero, ponderando cada valor de entrada pela probabilidade de ser positivo sob uma distribuição normal. Comparada à ReLU, a GeLU:
+>
+> * Oferece gradientes não-nulos para entradas negativas
+> * Apresenta comportamento mais suave
+> * Frequentemente leva a melhor desempenho em tarefas de linguagem natural
+>
+> Ambas as funções permitem que a rede neural aprenda representações não-lineares complexas dos dados de entrada, essenciais para o poder expressivo dos modelos **Transformer** modernos.
+
+Embora possamos *imaginar* que a **FFN** poderia aprender a detectar combinações específicas como "bateria, executado", como no exemplo manual abaixo, na prática ela aprende representações mais abstratas e úteis para a tarefa.
 
 ![Cálculo da característica](/assets/images/feature-calculation-diagram.webp)
 _Figura 8: Ilustração de como uma camada linear (multiplicação por matriz de pesos W) pode, em princípio, ser configurada para detectar a presença/ausência de certas combinações no vetor de entrada (que seria o $C_t$ após a atenção). A ReLU subsequente ajudaria a "ativar" essas características detectadas._{: class="legend"}
+
+#### Exemplo de FFN em Código C++ 20
 
 O código C++ abaixo demonstra a aplicação de uma camada linear seguida por ReLU, como parte de uma FFN:
 
@@ -1147,7 +1554,7 @@ int main() {
 }
 ```
 
-Portanto, um bloco típico de um Transformer consiste na aplicação do mecanismo de **auto-atenção** (para calcular o vetor de contexto $C_t$ para cada posição $t$, olhando para toda a sequência) seguido pela aplicação da **Rede Feed-Forward** (para processar cada $C_t$ independentemente). Frequentemente, conexões residuais e normalização de camada (Layer Normalization) são adicionadas em torno desses dois sub-blocos para facilitar o treinamento de redes profundas.
+Portanto, um bloco típico de um **Transformer** consiste na aplicação do mecanismo de **auto-atenção** (para calcular o vetor de contexto $C_t$ para cada posição $t$, olhando para toda a sequência) seguido pela aplicação da **Rede Feed-Forward** (para processar cada $C_t$ independentemente). Frequentemente, conexões residuais e normalização de camada (*Layer Normalization*) são adicionadas em torno desses dois sub-blocos para facilitar o treinamento de redes profundas.
 
 ### Conclusão e Perspectivas
 
@@ -1155,16 +1562,16 @@ Nesta jornada através da modelagem de sequências, partimos das Cadeias de Mark
 
 Observamos como esse mecanismo de atenção pode ser implementado de forma eficiente e aprendível usando **operações matriciais** ($Q, K, V$ e a equação de atenção), permitindo ao modelo ponderar dinamicamente a relevância de diferentes partes da sequência. Finalmente, vimos como o vetor de contexto resultante é processado por uma **Rede Feed-Forward (FFN)**, completando os dois componentes principais de um bloco Transformer.
 
-A perspicaz leitora percebeu que construímos os fundamentos conceituais que justificam a arquitetura proposta em "Attention is All You Need". Os**Transformers**abandonaram a recorrência das RNNs/LSTMs em favor da atenção paralelizável, permitindo treinar modelos muito maiores em mais dados e alcançando resultados estado-da-arte em inúmeras tarefas de Processamento de Linguagem Natural.
+A perspicaz leitora percebeu que construímos os fundamentos conceituais que justificam a arquitetura proposta em "Attention is All You Need". Os **Transformers** abandonaram a recorrência das RNNs/LSTMs em favor da atenção paralelizável, permitindo treinar modelos muito maiores em mais dados e alcançando resultados estado-da-arte em inúmeras tarefas de Processamento de Linguagem Natural.
 
-Claro, há mais detalhes na arquitetura completa do Transformer que não cobrimos aqui. No próximo artigo, pretendemos mergulhar mais fundo:
+Claro, há mais detalhes na arquitetura completa do **Transformer** que não cobrimos aqui. Em um artigo futuro, iremos navegar em mares mais profundos, explorando:
 
 * **Atenção Multi-Cabeça (Multi-Head Attention)**: Como o modelo aprende a prestar atenção a diferentes aspectos da sequência simultaneamente.
 * **Codificação Posicional (Positional Encoding)**: Como a informação sobre a ordem das palavras, perdida pela atenção que trata a sequência como um conjunto, é reintroduzida.
 * **Arquitetura Completa Encoder-Decoder**: Como esses blocos são empilhados e combinados para tarefas como tradução automática.
-* **Aplicações e Variações**: Uma visão geral do impacto dos**Transformers**e modelos derivados (BERT, GPT, etc.).
+* **Aplicações e Variações**: Uma visão geral do impacto dos **Transformers** e modelos derivados (BERT, GPT, etc.).
 
-Os conceitos que exploramos – modelagem sequencial, captura de contexto, e atenção seletiva – formam a base não apenas dos Transformers, mas de grande parte da pesquisa atual em inteligência artificial. Compreendê-los é essencial para navegar neste campo fascinante.
+Os conceitos que exploramos – modelagem sequencial, captura de contexto, e atenção seletiva – formam a base não apenas dos **Transformers**, mas de grande parte da pesquisa atual em inteligência artificial. Compreendê-los será como entender as nuances do mapa que o guiará nos vários mares do processamento de linguagens naturais.
 
 ## Referências Bibliográficas
 
