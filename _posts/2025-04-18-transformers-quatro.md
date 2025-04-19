@@ -35,7 +35,7 @@ keywords: |-
     lstm
 toc: true
 published: true
-lastmod: 2025-04-19T00:29:44.556Z
+lastmod: 2025-04-19T01:18:52.578Z
 ---
 
 ## Superando Limitações Locais: Construindo a Ponte para a Atenção
@@ -902,11 +902,45 @@ Aqui despontam as operações matriciais que definem a atenção nos **Transform
 
 ### Atenção como Multiplicação de Matrizes: Aprendendo a Focar
 
-Vou considerar que esperta leitora já entendeu a intuição da atenção como um mecanismo de foco seletivo, usando mascaramento ou ponderação para destacar informações relevantes. Precisamos encontrar uma forma de implementar isso de forma eficiente e, que permita ao modelo *aprender* quais informações são relevantes em cada contexto. Isso quer dizer que: para ser eficiente, a máscara não pode ser fixa. A máscara precisa ser criada de acordo com o contexto atual da palavra para a qual estamos tentando prever a próxima palavra e com o contexto das palavras que vieram antes.
+Vou considerar que esperta leitora já entendeu a intuição da atenção como um mecanismo de foco seletivo, usando mascaramento ou ponderação para destacar informações relevantes. Nos resta encontrar uma forma de implementar essa tecnologia de forma eficiente permitindo ao modelo *aprender* quais informações são relevantes em cada contexto. Isso quer dizer que: *para ser eficiente, a máscara não pode ser fixa*. Isso quer dizer que a máscara precisa ser criada de acordo com o contexto atual da palavra para a qual estamos tentando prever a próxima palavra e com o contexto das palavras que vieram antes.
 
-Para que os modelos possam aprender esses padrões de atenção e para que o cálculo seja eficiente em hardware moderno, como GPUs e TPUs, buscamos expressar todo o processo através de **operações de matrizes diferenciáveis**. Isso permite que usemos algoritmos como a retropropagação (_backpropagation_) para ajustar os pesos do modelo.
+Para que seja possível que os modelos possam aprender esses padrões de atenção e para que o cálculo seja eficiente em hardware moderno, como GPUs e TPUs, buscamos expressar todo o processo através de **operações de matrizes diferenciáveis**. Isso permite que usemos algoritmos como os algoritmos de retropropagação (_backpropagation_) para ajustar os pesos do modelo.
 
-Trabalhamos a intuição da atenção como sendo um mecanismo de foco seletivo, usando mascaramento ou ponderação para destacar informações relevantes. Para que os modelos possam *aprender* esses padrões de atenção e para que o cálculo seja eficiente em hardware moderno, como GPUs e TPUs, buscamos expressar todo o processo através de **operações de matrizes diferenciáveis**. Isso permite que usemos algoritmos como a retropropagação (_backpropagation_) para ajustar os pesos do modelo.
+>**Operações de Matrizes Diferenciáveis**
+>
+>As operações de matrizes diferenciáveis referem-se a funções que mapeiam matrizes para matrizes, ou para escalares, mantendo propriedades de diferenciabilidade. Essas operações são fundamentais em problemas de otimização, particularmente em aprendizado profundo e matemática computacional.
+>
+>>Seja $f: \mathbb{R}^{m \times n} \rightarrow \mathbb{R}$ uma função que mapeia uma matriz $X \in \mathbb{R}^{m \times n}$ para um escalar. Esta função é diferenciável em $X$ se existe uma matriz $\nabla f(X) \in \mathbb{R}^{m \times n}$ tal que:
+>
+>$$\lim_{H \rightarrow 0} \frac{f(X + H) - f(X) - \langle \nabla f(X), H \rangle_F}{\|H\|_F} = 0$$
+>
+>Neste caso, $\langle A, B \rangle_F = \text{tr}(A^T B)$ é o produto escalar estendido para matrizes e $\|H\|_F$ é a norma de Euclidiana de Matrizes.
+>
+>Entre as Operações de Matrizes Diferenciáveis podemos destacar:
+>
+>1. **Adição de Matrizes**: $f(A, B) = A + B$
+>
+>* Derivada: $\frac{\partial f}{\partial A} = I$, $\frac{\partial f}{\partial B} = I$
+>
+>2. **Multiplicação de Matrizes**: $f(A, B) = AB$
+>
+>* Derivada: $\frac{\partial f}{\partial A} = B^T$, $\frac{\partial f}{\partial B} = A^T$
+>
+>3. **Traço de Matriz**: $f(A) = \text{tr}(A)$
+>
+>* Derivada: $\frac{\partial f}{\partial A} = I$
+>
+>4. **Determinante de Matriz**: $f(A) = \det(A)$
+>
+>* Derivada: $\frac{\partial f}{\partial A} = \det(A) \cdot (A^{-1})^T$
+>
+>5. **Inversa de Matriz**: $f(A) = A^{-1}$
+>
+>* Derivada: $\frac{\partial f}{\partial A_{ij}} = -(A^{-1})_{ik}(A^{-1})_{lj}$
+>
+> Estas operações são essenciais em algoritmos de otimização, especialmente em aprendizado profundo, onde a retropropagação é usada para calcular gradientes e atualizar pesos de modelos. Elas permitem que os modelos aprendam a partir de dados, ajustando seus parâmetros para minimizar funções de perda.
+
+Neste texto, até o momento, trabalhamos a intuição da atenção como sendo um mecanismo de foco seletivo, usando mascaramento ou ponderação para destacar informações relevantes. Para que os modelos possam *aprender* esses padrões de atenção e para que o cálculo seja eficiente em hardware moderno, como GPUs e TPUs, buscamos expressar todo o processo através de **operações de matrizes diferenciáveis**. Isso permite que usemos algoritmos como a retropropagação (_backpropagation_) para ajustar os pesos do modelo.
 
 A ideia central agora é substituir o processo de aplicação de máscara que discutimos, que funciona como uma `tabela de consulta` implícita para selecionar relevância na forma de um cálculo matricial. Em vez de apenas selecionar características, vamos calcular um **peso de atenção** para cada palavra anterior em relação à palavra atual. Esse peso determinará quanta atenção a palavra atual deve dar a cada palavra anterior ao construir seu vetor de contexto.
 
