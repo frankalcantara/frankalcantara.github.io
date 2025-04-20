@@ -16,12 +16,12 @@ tags: |-
     SkipGram
     vetorização
     aprendizado de máquina
-image: assets/images/Word2Vec1.webp
+image: /assets/images/Word2Vec1.webp
 featured: false
 rating: 5
 description: Explorando os algoritmos **Word2Vec** (CBoW e SkipGram) como ponte entre representações estáticas e os modelos contextuais modernos.
 date: 2025-04-20T00:15:53.461Z
-preview: Este artigo apresenta os algoritmos **Word2Vec** (CBoW e SkipGram) como avanço fundamental que supera as limitações das representações estáticas como Bag-of-Words e TF-IDF, pavimentando o caminho para os modelos contextuais modernos como os Transformers.
+preview: Este artigo apresenta os algoritmos CBoW e SkipGram como avanço fundamental que supera as limitações das representações estáticas como Bag-of-Words e TF-IDF, pavimentando o caminho para os modelos contextuais modernos como os Transformers.
 keywords: |-
     transformers
     cadeias de Markov
@@ -36,7 +36,7 @@ keywords: |-
     lstm
 toc: true
 published: true
-lastmod: 2025-04-20T21:46:09.596Z
+lastmod: 2025-04-20T22:00:18.747Z
 draft: 2025-04-20T00:15:42.577Z
 ---
 
@@ -1325,7 +1325,7 @@ Na implementação original (Mikolov et al, 2013), em vez de múltiplos **softma
 
 ![diagrama em blocos mostrando a arquitetura SkipGram](/assets/images/SkipGram-architecture.webp)
 
-_Figura 5: Arquitetura do modelo Skip-gram que prevê as palavras do contexto a partir da palavra-alvo. O diagrama mostra como o vetor One-Hot da palavra-alvo é transformado em um embedding denso através da matriz de pesos compartilhada, e então utilizado para prever cada palavra de contexto através de uma função softmax independente para cada posição no contexto._{: class="legend"}
+_Figura 5: Arquitetura do modelo SkipGram que prevê as palavras do contexto a partir da palavra-alvo. O diagrama mostra como o vetor One-Hot da palavra-alvo é transformado em um embedding denso através da matriz de pesos compartilhada, e então utilizado para prever cada palavra de contexto através de uma função softmax independente para cada posição no contexto._{: class="legend"}
 
 ### Exemplo de Treinamento com **SkipGram**
 
