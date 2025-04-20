@@ -16,7 +16,7 @@ tags: |-
     SkipGram
     vetorização
     aprendizado de máquina
-image: /assets/images/Word2Vec1.webp
+image: assets/images/Word2Vec1.webp
 featured: false
 rating: 5
 description: Explorando os algoritmos **Word2Vec** (CBoW e SkipGram) como ponte entre representações estáticas e os modelos contextuais modernos.
@@ -36,7 +36,7 @@ keywords: |-
     lstm
 toc: true
 published: true
-lastmod: 2025-04-20T22:00:18.747Z
+lastmod: 2025-04-20T22:03:31.062Z
 draft: 2025-04-20T00:15:42.577Z
 ---
 
