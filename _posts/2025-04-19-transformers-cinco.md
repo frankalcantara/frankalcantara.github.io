@@ -36,12 +36,16 @@ keywords: |-
     lstm
 toc: true
 published: false
-lastmod: 2025-04-19T23:25:15.128Z
+lastmod: 2025-04-20T00:08:14.001Z
 ---
 
 ## Superando Limitações: A Necessidade de Representações Distribuídas
 
-Nos artigos anteriores, exploramos técnicas de vetorização como [Bag-of-Words (BoW) e TF-IDF](https://frankalcantara.com/transformers-dois/), bem como [modelos probabilísticos N-gram](https://frankalcantara.com/transformers-desvendando-modelagem-de-sequencias/). Apesar da utilidade dessas abordagens, a atenta leitora pode ver que elas apresentam limitações significativas:
+> "you shall know a word by the company it keeps"
+> — J.R. Firth
+{: .epigraph}
+
+Nos artigos anteriores, exploramos técnicas de vetorização como [Bag-of-Words (BoW) e TF-IDF](https://frankalcantara.com/transformers-dois/), bem como [modelos probabilísticos N-gram](https://frankalcantara.com/transformers-desvendando-modelagem-de-sequencias/). Apesar da utilidade dessas abordagens, a atenta leitora devem lembrar que elas apresentam limitações significativas:
 
 1. **Alta dimensionalidade e esparsidade**: as representações baseadas em BoW e TF-IDF geram vetores extremamente esparsos em espaços de alta dimensão, cardinalidade do vocabulário, resultando em matrizes enormes majoritariamente preenchidas com zeros.
 
@@ -51,19 +55,17 @@ Nos artigos anteriores, exploramos técnicas de vetorização como [Bag-of-Words
 
 4. **Contexto limitado**: mesmo os modelos **N-gram** capturam apenas dependências locais em janelas pequenas, ignorando relações de longo alcance.
 
-Para superar essas limitações, precisamos de representações mais densas e de menor dimensionalidade que capturem relações semânticas entre palavras, permitam generalização para palavras raras ou novas e que tenham capacidade de modelar informações contextuais. Sim. Eu quero a perfeição. Ou o mais perto possível.
+Para superar essas limitações, precisamos de representações mais densas e de menor dimensionalidade que capturem relações semânticas entre palavras, permitam generalização para palavras raras ou novas e que tenham capacidade de modelar informações contextuais. Sim! A amável leitora teve a impressão correta: eu quero a perfeição, ou chegar o mais perto possível.
 
-O avanço fundamental nessa direção foi introduzido por [Tomas Mikolov](https://en.wikipedia.org/wiki/Tom%C3%A1%C5%A1_Mikolov) e seus colegas no Google em 2013 com o **Word2Vec**, que propôs duas arquiteturas inovadoras para gerar **embeddings distribuídos de palavras**: o **Continuous Bag-of-Words (CBoW)** e o **Skipgram**.
+O avanço fundamental nessa direção foi introduzido por [Tomas Mikolov](https://en.wikipedia.org/wiki/Tom%C3%A1%C5%A1_Mikolov) e seus colegas no Google em 2013 com o **Word2Vec**, que propôs duas arquiteturas inovadoras para gerar **embeddings distribuídos de palavras**: o **Continuous Bag-of-Words (CBoW)** e o **Skipgram**. Que são os algoritmos que discutiremos nesta seção.
 
-## Embeddings Distribuídos: Nova Perspectiva para Representação de Palavras
+### Embeddings Distribuídos: Nova Perspectiva para Representação de Palavras
 
 Antes que a afeita leitora mergulhe nos mares dos algoritmos específicos dos **embeddings distribuídos**, precisamos tentar entender o conceito fundamental da representações distribuídas.
 
-### Da Representação **One-Hot**  para Representação Distribuída
+Em abordagens tradicionais como **Bag-of-Words**, frequentemente utilizamos,  implícita ou explicitamente, vetores **one-hot** para representar palavras. Nesta representação, cada palavra corresponde a um vetor de tamanho igual ao vocabulário ($\vert V \vert $), contendo $1$ na posição única associada àquela palavra e $0$ em todas as outras. Só para lembrar, nós vimos estas representações inocentes em detalhes no [artigo](https://frankalcantara.com/transformers-dois/).
 
-Em abordagens tradicionais como **Bag-of-Words**, frequentemente utilizamos (implícita ou explicitamente) vetores **one-hot** para representar palavras. Nesta representação, cada palavra corresponde a um vetor de tamanho igual ao vocabulário ($\vert V \vert $), contendo $1$ na posição única associada àquela palavra e $0$ em todas as outras. Nós vimos estas representações inocentes em detalhes no [artigo](https://frankalcantara.com/transformers-dois/).
-
-Considerando **one-hot** poderíamos definir um vocabulário hipotético de $5$ palavras $V = \{\text{gato}, \text{cachorro}, \text{pássaro}, \text{corre}, \text{dorme}\}$, a representação **One-Hot**  seria:
+Considerando o **one-hot** poderíamos definir um vocabulário hipotético de $5$ palavras $V = \{\text{gato}, \text{cachorro}, \text{pássaro}, \text{corre}, \text{dorme}\}$, a representação **One-Hot** de cada palavra seria dada por:
 
 * `gato` = $[1, 0, 0, 0, 0]$
 * `cachorro` = $[0, 1, 0, 0, 0]$
@@ -71,15 +73,17 @@ Considerando **one-hot** poderíamos definir um vocabulário hipotético de $5$ 
 * `corre` = $[0, 0, 0, 1, 0]$
 * `dorme` = $[0, 0, 0, 0, 1]$
 
-Como a atenta leitora deve lembrar, essa representação, apesar de simples, apresenta alguns problemas importantes:
+Vamos rever rapidamente as limitações dessa abordagem:
 
-* **Ortogonalidade e Ausência de Semântica**: o produto escalar entre quaisquer dois vetores **One-Hot**  distintos é zero ($v_{palavra1} \cdot v_{palavra2} = 0$). Isso implica que todas as palavras são igualmente diferentes umas das outras em um determinado espaço vetorial. Não há noção de similaridade; `gato` é tão distante de `cachorro` quanto de `corre`.
-* **Alta Dimensionalidade e Esparsidade**: a dimensão do vetor cresce linearmente com o tamanho do vocabulário, que, em casos reais, pode facilmente chegar a milhões. Isso resulta em vetores extremamente longos e esparsos, quase inteiramente preenchidos por zeros.
+* **Ortogonalidade e Ausência de Semântica**: o produto escalar entre quaisquer dois vetores **One-Hot** distintos é zero ($v_{palavra1} \cdot v_{palavra2} = 0$). Isso implica que todas as palavras são igualmente diferentes umas das outras em um dado espaço vetorial. Ou seja, no espaço vetorial formado pelos vetores que representam as palavras não há noção de similaridade. A palavra `gato` está tão distante de `cachorro` quanto de `corre`.
+  
+* **Alta Dimensionalidade e Esparsidade**: a dimensão do vetor cresce linearmente com o tamanho do vocabulário, que, em casos reais, pode facilmente chegar a milhões. Isso resulta em vetores extremamente longos e esparsos, quase inteiramente preenchidos por zeros. Cada vetor tem apenas um $1$.
+
 * **Ineficiência Computacional e de Memória**: armazenar e processar esses vetores gigantes e esparsos é computacionalmente caro e ineficiente.
 
 Para superar essas limitações, buscamos representações mais ricas e eficientes. Entram em cena as **representações distribuídas**, também conhecidas como **word embeddings**.
 
-A ideia central por trás dessas representações está alinhada com a **hipótese distribucional**: o significado de uma palavra pode ser inferido a partir dos contextos em que ela costuma aparecer ("*you shall know a word by the company it keeps*", J.R. Firth). Assim, em vez de um único indicador "ligado", usamos vetores densos e de dimensão muito menor (tipicamente 50 a 300 dimensões) para codificar as palavras.
+A ideia central por trás dessas representações está alinhada com a **hipótese distribucional**: o significado de uma palavra pode ser inferido a partir dos contextos em que ela costuma aparecer. Assim, em vez de um único indicador "ligado", usamos vetores densos e de dimensão muito menor (tipicamente 50 a 300 dimensões) para codificar as palavras.
 
 Podemos fazer uma **analogia**: pense na representação **One-Hot**  como um painel com um interruptor dedicado para cada palavra – apenas um pode estar ligado por vez. Já a representação distribuída seria como um painel de mixagem de áudio com vários controles deslizantes ("dimmers"). A identidade de uma palavra é definida pela combinação única das posições de *todos* esses controles.
 
@@ -110,11 +114,17 @@ Essa capacidade de aprender representações significativas a partir do contexto
     \text{vec}(\text{"Paris"}) - \text{vec}(\text{"França"}) + \text{vec}(\text{"Itália"}) \approx \text{vec}(\text{"Roma"})
     $$
 
-3.  **Generalização**: Palavras raras ou mesmo fora do vocabulário de treinamento podem ter embeddings estimados de qualidade razoável se ocorrerem em contextos similares a palavras mais comuns (técnicas como FastText lidam bem com isso).
+3. **Generalização**: Palavras raras ou mesmo fora do vocabulário de treinamento podem ter embeddings estimados de qualidade razoável se ocorrerem em contextos similares a palavras mais comuns (técnicas como FastText lidam bem com isso).
 
-4.  **Transferência de aprendizado**: Embeddings pré-treinados em grandes volumes de texto (como notícias ou a Wikipédia) podem ser carregados e reutilizados como ponto de partida para diversas tarefas de PLN, mesmo com conjuntos de dados menores para a tarefa específica.
+4. **Transferência de aprendizado**: Embeddings pré-treinados em grandes volumes de texto (como notícias ou a Wikipédia) podem ser carregados e reutilizados como ponto de partida para diversas tarefas de PLN, mesmo com conjuntos de dados menores para a tarefa específica.
 
 Estas propriedades tornam as representações distribuídas uma ferramenta poderosa e fundamental no Processamento de Linguagem Natural moderno, servindo de base para modelos mais complexos como LSTMs e Transformers. A seguir, exploraremos como o **Word2Vec** consegue aprender esses vetores densos e significativos.
+
+A Figura 1 ilustra a diferença entre as representações **One-Hot** e **distribuídas**. A representação **One-Hot** é esparsa e de alta dimensão, enquanto a representação distribuída é densa e de baixa dimensão, capturando relações semânticas entre palavras.
+
+![figura com as duas representações descritas](/assets/images/word-embedding-visualization.webp)
+
+_Figura 1: Comparação entre Representação One-Hot e Distribuída de Palavras_{: class="legend"}
 
 ### Propriedades dos Embeddings Distribuídos
 

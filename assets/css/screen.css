@@ -1172,3 +1172,24 @@ code{
   padding: 0.5em, importa !important;
 }
 
+/* Estilo específico para epígrafes */
+blockquote.epigraph {
+  border-left: 3px solid #ccc;
+  padding-left: 15px;
+  margin: 2em 0; /* Margem vertical, sem margem horizontal */
+  font-style: italic;
+  color: #555;
+  /* Outros estilos que desejar */
+}
+
+blockquote.epigraph p:last-of-type {
+  font-style: normal;
+  text-align: right;
+  font-size: 0.9em;
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
+
+blockquote.epigraph p:not(:last-of-type) {
+    margin-bottom: 0.5em; /* Ou 0 */
+}

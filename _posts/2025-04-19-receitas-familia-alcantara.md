@@ -24,7 +24,7 @@ tags:
     - receitas rápidas e fáceis
     - receitas saborosas e saudáveis
     - receitas simples e gostosas
-image: /assets/images/receeitas.webp
+image: assets/images/receitas.webp
 featured: false
 rating: 5
 description: Receitas práticas e fáceis da Família Alcantara. Receitas rápidas e saborosas para o dia a dia.
@@ -33,7 +33,7 @@ preview: Estas são as receitas da Fran, minha esposa. Uma cozinheira de mão ch
 keywords: receitas, família, comida, culinária, dicas, prática, fácil, rápida, saborosa, saudável, simples, gostosa, tradicional, caseira
 toc: true
 published: true
-lastmod: 2025-04-19T23:19:11.398Z
+lastmod: 2025-04-20T00:09:39.253Z
 slug: mdp-casos-reais-manutencao-de-turbinas-eolicas
 ---
 
