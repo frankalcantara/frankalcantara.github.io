@@ -35,12 +35,12 @@ keywords: |-
     lstm
 toc: true
 published: true
-lastmod: 2025-04-19T13:38:19.111Z
+lastmod: 2025-04-20T22:39:59.927Z
 ---
 
 ## Superando Limitações Locais: Construindo a Ponte para a Atenção
 
-No [artigo anterior]([link-para-o-artigo-anterior](https://frankalcantara.com/transformers-desvendando-modelagem-de-sequencias/)), navegamos pelos modelos probabilísticos clássicos para sequências, como as **Cadeias de Markov** e os **Modelos **N-gram****. Vimos como estes modelos são capazes de  capturar a dependência local estimando a probabilidade de uma palavra $w_t$ com base em suas $N-1$ vizinhas imediatas, $P(w_t  \vert  w_{t-N+1}, ..., w_{t-1})$. Essas são técnicas importantes capazes de fornecer representações ricas, como a **Vetorização por Razão de Verossimilhança**, que compara padrões locais de um documento com os padrões gerais do corpus. Mas, nem todos os mares são calmos.
+Em um [artigo anterior]([link-para-o-artigo-anterior](https://frankalcantara.com/transformers-desvendando-modelagem-de-sequencias/)), navegamos pelos modelos probabilísticos clássicos para sequências, como as **Cadeias de Markov** e os **Modelos **N-gram****. Vimos como estes modelos são capazes de  capturar a dependência local estimando a probabilidade de uma palavra $w_t$ com base em suas $N-1$ vizinhas imediatas, $P(w_t  \vert  w_{t-N+1}, ..., w_{t-1})$. Essas são técnicas importantes capazes de fornecer representações ricas, como a **Vetorização por Razão de Verossimilhança**, que compara padrões locais de um documento com os padrões gerais do corpus. Mas, nem todos os mares são calmos.
 
 >A **Propriedade de Markov** é um conceito fundamental em processos estocásticos e modelagem de sequências. Esta propriedade estabelece que a probabilidade de um estado futuro depende apenas do estado presente, e não de estados anteriores da sequência.
 >
@@ -411,7 +411,7 @@ int main() {
 
 #### Considerações importantes
 
-Embora esta abordagem de pares com saltos e votação nos permita considerar contexto de longo alcance, ela enfatiza um característica negativa. Ao somar votos de muitas características (pares), a contribuição das poucas características *realmente* informativas (como `(programa, executado)` no nosso exemplo) pode ser diluída pelo "ruído" das características menos úteis (como `(o, executado)`). A diferença entre o total de votos para a palavra correta e as incorretas pode ser pequena, tornando o modelo menos confiável e menos robusto. A esse problema chamamos de **diluição do sinal**.
+Embora esta abordagem de pares com saltos e votação nos permita considerar contexto de longo alcance, ela enfatiza um característica negativa. Ao somar votos de muitas características (pares), a contribuição das poucas características *realmente* informativas (como `(programa, executado)` no nosso exemplo) pode ser diluída pelo ruído das características menos úteis (como `(o, executado)`). A diferença entre o total de votos para a palavra correta e as incorretas pode ser pequena, tornando o modelo menos confiável e menos robusto. A esse problema chamamos de **diluição do sinal**.
 
 Além dessa questão fundamental da **diluição do sinal**, a abordagem de agregação irrestrita de pares, na prática, enfrenta outros desafios que limitam sua aplicabilidade em cenários mais complexos:
 
@@ -493,7 +493,7 @@ Para entender o mecanismo de atenção, vamos analisar $6$ passos importantes:
     >
     Alguns modelos populares de word embeddings incluem:
     >
-    >* **Word2Vec**: desenvolvido pelo Google em 2013, usando redes neurais para prever palavras vizinhas (**skipgram**) ou a palavra atual a partir das vizinhas (**CBOW**).
+    >* **Word2Vec**: desenvolvido pelo Google em 2013, usando redes neurais para prever palavras vizinhas (**skipgram**) ou a palavra atual a partir das vizinhas (**CBOW**). **A esforçada leitora deveria ler [este artigo](https://frankalcantara.com/transformers-cinco/) antes de continuar.**
     >* **GloVe**: desenvolvido por Stanford, combinando estatísticas globais de co-ocorrência $X_{ij}$ com aprendizado local de contexto, dado por:
     >
     >$$J = \sum_{i,j=1}^{ \vert V \vert } f(X_{ij})(\vec{w}_i^T\vec{w}_j + b_i + b_j - \log X_{ij})^2$$
@@ -1351,11 +1351,11 @@ O nosso novo objetivo será transformar $C_t$ em uma saída que possa ser usada 
 > $$\text{FFN}(C_t) = \max(0, C_t W_1 + b_1)W_2 + b_2$$
 >
 > onde:
-> 
+>
 > * $C_t$ é o vetor de contexto para a posição $t$ após o mecanismo de atenção;
 > * $W_1 \in \mathbb{R}^{d_{\text{model}} \times d_{\text{ff}}}$ e $W_2 \in \mathbb{R}^{d_{\text{ff}} \times d_{\text{model}}}$ são matrizes de peso;
 > * $b_1 \in \mathbb{R}^{d_{\text{ff}}}$ e $b_2 \in \mathbb{R}^{d_{\text{model}}}$ são vetores de bias;
-> *  $\max(0, x)$ é a função de ativação ReLU (*Rectified Linear Unit*).
+> * $\max(0, x)$ é a função de ativação ReLU (*Rectified Linear Unit*).
 >
 > A primeira transformação linear tipicamente expande a dimensão ($d_{\text{ff}} \approx 4 \times d_{\text{model}}$), e a segunda projeta de volta para a dimensão original. Esta estrutura permite que a rede aprenda representações complexas e não-lineares do contexto capturado pelo mecanismo de atenção.
 >
