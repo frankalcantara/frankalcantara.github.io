@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 600 500"
+   version="1.1"
+   id="svg19"
+   sodipodi:docname="xor-boundary.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:export-filename="..\images\xor-boundary.webp"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs19" />
+  <sodipodi:namedview
+     id="namedview19"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.2091526"
+     inkscape:cx="200.14016"
+     inkscape:cy="318.81832"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg19" />
+  <!-- Fundo branco -->
+  <!-- Eixos -->
+  <line
+     x1="50"
+     y1="428"
+     x2="500"
+     y2="428"
+     stroke="#000000"
+     stroke-width="2"
+     id="line1" />
+  <line
+     x1="50"
+     y1="428"
+     x2="50"
+     y2="78"
+     stroke="#000000"
+     stroke-width="2"
+     id="line2" />
+  <!-- Rótulos dos eixos -->
+  <text
+     x="498.09943"
+     y="445.2807"
+     font-family="Arial"
+     font-size="18px"
+     text-anchor="middle"
+     id="text2">x₁</text>
+  <text
+     x="35.964912"
+     y="88.994156"
+     font-family="Arial"
+     font-size="18px"
+     text-anchor="middle"
+     id="text3">x₂</text>
+  <!-- Marcações dos eixos -->
+  <line
+     x1="200"
+     y1="423"
+     x2="200"
+     y2="433"
+     stroke="#000000"
+     stroke-width="2"
+     id="line3" />
+  <line
+     x1="350"
+     y1="423"
+     x2="350"
+     y2="433"
+     stroke="#000000"
+     stroke-width="2"
+     id="line4" />
+  <line
+     x1="45"
+     y1="278"
+     x2="55"
+     y2="278"
+     stroke="#000000"
+     stroke-width="2"
+     id="line5" />
+  <line
+     x1="45"
+     y1="128"
+     x2="55"
+     y2="128"
+     stroke="#000000"
+     stroke-width="2"
+     id="line6" />
+  <text
+     x="200"
+     y="453"
+     font-family="Arial"
+     font-size="16px"
+     text-anchor="middle"
+     id="text6">0</text>
+  <text
+     x="350"
+     y="453"
+     font-family="Arial"
+     font-size="16px"
+     text-anchor="middle"
+     id="text7">1</text>
+  <text
+     x="30"
+     y="283"
+     font-family="Arial"
+     font-size="16px"
+     text-anchor="middle"
+     id="text8">0</text>
+  <text
+     x="30"
+     y="133"
+     font-family="Arial"
+     font-size="16px"
+     text-anchor="middle"
+     id="text9">1</text>
+  <!-- Pontos XOR -->
+  <!-- (0,0) = 0 -->
+  <circle
+     cx="200"
+     cy="278"
+     r="10"
+     fill="#ff6666"
+     stroke="#000000"
+     stroke-width="1.5"
+     id="circle9" />
+  <text
+     x="180"
+     y="263"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="middle"
+     id="text10">y=0</text>
+  <!-- (0,1) = 1 -->
+  <circle
+     cx="200"
+     cy="128"
+     r="10"
+     fill="#6699ff"
+     stroke="#000000"
+     stroke-width="1.5"
+     id="circle10" />
+  <text
+     x="180"
+     y="113"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="middle"
+     id="text11">y=1</text>
+  <!-- (1,0) = 1 -->
+  <circle
+     cx="350"
+     cy="278"
+     r="10"
+     fill="#6699ff"
+     stroke="#000000"
+     stroke-width="1.5"
+     id="circle11" />
+  <text
+     x="330"
+     y="263"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="middle"
+     id="text12">y=1</text>
+  <!-- (1,1) = 0 -->
+  <circle
+     cx="350"
+     cy="128"
+     r="10"
+     fill="#ff6666"
+     stroke="#000000"
+     stroke-width="1.5"
+     id="circle12" />
+  <text
+     x="330"
+     y="113"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="middle"
+     id="text13">y=0</text>
+  <!-- Fronteira de decisão não-linear -->
+  <path
+     d="m 170.5848,129.16959 c 20,50 45.26316,62.2807 65.26316,12.2807 27.7193,-27.48538 48.37963,22.99332 84.73684,62.7193 33.45029,36.54971 40,50 60,0"
+     stroke="#008000"
+     stroke-width="2.5"
+     fill="none"
+     stroke-dasharray="5, 3"
+     id="path13"
+     sodipodi:nodetypes="ccsc" />
+  <!-- Fronteira linear impossível (mostrar o problema) -->
+  <line
+     x1="290.07507"
+     y1="348.01813"
+     x2="235.18808"
+     y2="71.724579"
+     stroke="#ff0000"
+     stroke-width="1.86713"
+     stroke-dasharray="7, 3"
+     id="line13" />
+  <text
+     x="400.23392"
+     y="195.13451"
+     font-family="Arial"
+     font-size="14px"
+     fill="#008000"
+     text-anchor="middle"
+     id="text14">Fronteira Não-Linear</text>
+  <text
+     x="180"
+     y="208"
+     font-family="Arial"
+     font-size="14px"
+     fill="#ff0000"
+     text-anchor="middle"
+     id="text15">Fronteira Linear</text>
+  <text
+     x="230"
+     y="348"
+     font-family="Arial"
+     font-size="14px"
+     fill="#ff0000"
+     text-anchor="middle"
+     id="text16">✕ Impossível</text>
+  <!-- Título -->
+  <text
+     x="300"
+     y="57.473682"
+     font-family="Arial"
+     font-size="20px"
+     font-weight="bold"
+     text-anchor="middle"
+     id="text17">Problema XOR: Necessidade de Fronteira Não-Linear</text>
+  <!-- Legenda -->
+  <rect
+     x="412.57309"
+     y="363.08771"
+     width="20"
+     height="20"
+     fill="#ff6666"
+     stroke="#000000"
+     id="rect17" />
+  <text
+     x="442.57309"
+     y="378.08771"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="start"
+     id="text18">Classe 0</text>
+  <rect
+     x="412.57309"
+     y="393.08771"
+     width="20"
+     height="20"
+     fill="#6699ff"
+     stroke="#000000"
+     id="rect18" />
+  <text
+     x="442.57309"
+     y="408.08771"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="start"
+     id="text19">Classe 1</text>
+</svg>
