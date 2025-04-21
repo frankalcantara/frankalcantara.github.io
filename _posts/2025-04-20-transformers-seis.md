@@ -28,7 +28,7 @@ keywords: |-
     redes neurais
     neurônio artificial
     funções de ativação
-    **Perceptron**
+    Perceptron
     backpropagation
     feed-forward
     aprendizado de máquina
@@ -36,7 +36,7 @@ keywords: |-
     processamento de linguagem natural
 toc: true
 published: false
-lastmod: 2025-04-21T02:47:43.668Z
+lastmod: 2025-04-21T02:49:44.527Z
 draft: 2025-04-19T20:15:42.577Z
 ---
 
