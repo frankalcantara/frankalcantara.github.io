@@ -3,20 +3,20 @@ layout: post
 title: Transformers - Redes Neurais Artificiais para Word Embedding
 author: frank
 categories: |-
-    disciplina
-    Matemática
-    artigo
+  disciplina
+  Matemática
+  artigo
 tags: |-
-    Matemática
-    inteligência artificial
-    processamento de linguagem natural
-    redes neurais
-    neurônio artificial
-    função de ativação
-    Perceptron
-    backpropagation
-    feed-forward
-    aprendizado de máquina
+  Matemática
+  inteligência artificial
+  processamento de linguagem natural
+  redes neurais
+  neurônio artificial
+  função de ativação
+  Perceptron
+  backpropagation
+  feed-forward
+  aprendizado de máquina
 image: assets/images/neuralnets1.webp
 featured: false
 rating: 5
@@ -24,19 +24,19 @@ description: Explorando os fundamentos de redes neurais artificiais como base pa
 date: 2025-04-19T22:15:53.461Z
 preview: Este artigo apresenta os fundamentos de redes neurais artificiais, explicando a estrutura dos neurônios artificiais, funções de ativação, arquiteturas e processos de treinamento que servem como base para os modelos de word embeddings.
 keywords: |-
-    Transformers
-    redes neurais
-    neurônio artificial
-    funções de ativação
-    Perceptron
-    backpropagation
-    feed-forward
-    aprendizado de máquina
-    inteligência artificial
-    processamento de linguagem natural
+  Transformers
+  redes neurais
+  neurônio artificial
+  funções de ativação
+  Perceptron
+  backpropagation
+  feed-forward
+  aprendizado de máquina
+  inteligência artificial
+  processamento de linguagem natural
 toc: true
 published: false
-lastmod: 2025-04-21T02:49:44.527Z
+lastmod: 2025-04-22T02:03:17.394Z
 draft: 2025-04-19T20:15:42.577Z
 ---
 
@@ -73,7 +73,7 @@ Nesta equação:
 * $x_i$ são as entradas do neurônio;
 * $w_i$ são os pesos associados a cada entrada;
 * $b$ é o viés (bias), um termo que permite ajustar o limiar de ativação;
-* $f$ é a função de ativação, que introduz não-linearidade ao modelo;
+* $f$ é a função de ativação, que determina se e como o neurônio 'dispara' com base na soma ponderada das entradas, $w_i x_i$, e do viés, $b$. Essa função é essencial para introduzir não-linearidades ao modelo, permitindo que ele aprenda padrões mais complexos.
 * $y$ é a saída do neurônio.
 
 A soma ponderada $\sum_{i=1}^{n} w_i x_i$ pode ser vista de forma mais compacta como o **produto escalar** entre o vetor de pesos $w = [w_1, ..., w_n]$ e o vetor de entradas $x = [x_1, ..., x_n]$, frequentemente denotado como $w \cdot x$ ou $w^T x$. Esta operação mede o quanto a entrada $x$ se alinha com os pesos $w$ aprendidos pelo neurônio. A atenta leitora deve lembrar que estudamos **produto escalar** [neste artigo](https://frankalcantara.com/transformers-um/).
@@ -150,9 +150,9 @@ Ela simplesmente "corta" qualquer valor negativo, zerando-o, e mantém os valore
 
 $$\text{softmax}(x_i) = \frac{e^{x_i}}{\sum_{j=1}^{n} e^{x_j}}$$
 
-Utilizada especialmente na camada de saída para problemas de classificação multiclasse. Transforma um vetor de valores reais em uma distribuição de probabilidades, garantindo que a soma seja $1$.
+Utilizada especialmente na camada de saída para problemas de classificação multiclasse, como prever a próxima palavra em uma sequência.
 
-A função softmax, em particular, é fundamental no contexto dos modelos de **word embeddings**, pois *transforma as pontuações (scores) das palavras em probabilidades*.
+> No contexto de **word embeddings**, a função softmax será importante porque permite calcular probabilidades sobre todo o vocabulário, permitindo que a rede indique a palavra mais provável dada uma entrada. A função softmax *transforma as pontuações das palavras em probabilidades* transformando um vetor de valores reais, scores, em uma distribuição de probabilidades, garantindo que a soma seja $1$.
 
 A função Softmax é geralmente usada na camada de saída para classificação multiclasse. *Ela transforma um vetor de pontuações (logits) em um vetor de probabilidades*. Suponha que a camada anterior produziu as seguintes pontuações para 3 classes: $z = [z_1, z_2, z_3] = [2.0, 1.0, 0.1]$.
 
@@ -190,7 +190,7 @@ As redes neurais podem ter diferentes arquiteturas, definindo como os neurônios
 
 #### Redes Feed-Forward (Alimentação Direta)
 
-Uma rede neural feed-forward é a arquitetura mais simples, onde as informações se movem em uma única direção: da camada de entrada para a camada de saída. Não há ciclos ou loops na rede. A Figura 2 ilustra uma rede feed-forward com uma camada oculta.
+Uma rede neural feed-forward é a arquitetura mais simples, onde as informações se movem em uma única direção: da camada de entrada para a camada de saída. Não há ciclos ou loops na rede. A Figura 3 ilustra uma rede feed-forward com uma camada oculta.
 
 ![diagrama de uma rede neural feed-forward](/assets/images/rede-neural-feedforward.webp)
 
@@ -198,11 +198,13 @@ _Figura 3: Arquitetura de uma rede neural feed-forward de três camadas, mostran
 
 ##### **Perceptron** de Camada Única
 
-O **Perceptron** de Rosenblatt é o exemplo mais simples de uma rede feed-forward, consistindo apenas de uma camada de neurônios de entrada diretamente conectada à camada de saída (geralmente com uma função de ativação degrau ou sigmóide). Esta estrutura é capaz de aprender e resolver apenas problemas que são **linearmente separáveis**, ou seja, problemas onde as classes podem ser separadas por um hiperplano no espaço de entrada.
+O **Perceptron** de Rosenblatt é o exemplo mais simples de uma rede feed-forward, consistindo apenas de uma camada de neurônios de entrada diretamente conectada à camada de saída, geralmente com uma função de ativação degrau ou sigmóide. Esta estrutura é capaz de aprender e resolver apenas problemas que são **linearmente separáveis**, ou seja, problemas onde as classes podem ser separadas por um hiperplano no espaço de entrada.
 
-Por exemplo, o **Perceptron** pode aprender facilmente funções lógicas como AND e OR. No entanto, ele falha em problemas não linearmente separáveis, sendo o exemplo clássico a função lógica **XOR (OU exclusivo)**. A incapacidade do **Perceptron** simples de resolver o XOR foi uma das críticas que levaram ao chamado "inverno da IA" nos anos 70. Essa limitação fundamental motivou o desenvolvimento de redes com múltiplas camadas.
+Por exemplo, o **Perceptron** pode aprender facilmente funções lógicas como **AND** e **OR**. No entanto, ele falha em problemas não linearmente separáveis, sendo o exemplo clássico desta falha, a função lógica **XOR (OU exclusivo)**. Essa limitação teve impacto significativo na história das redes neurais. A incapacidade de aprender o comportamento de uma **XOR** demonstrou que o *Perceptron de camada única não era suficiente para resolver muitos problemas práticos do mundo real. Isso motivou o desenvolvimento de redes multicamadas*. Redes neurais artificiais que podem aprender fronteiras de decisão mais complexas e não-lineares, como veremos adiante. Essa incapacidade do **Perceptron** foi uma das críticas que levaram ao chamado inverno da IA nos anos 70. Essa limitação fundamental motivou o desenvolvimento de redes com múltiplas camadas.
 
-A função XOR (OU exclusivo) é um exemplo clássico de problema não linearmente separável. Vamos analisar sua tabela verdade:
+Neste ponto, a curiosa leitora deve estar tentando entender porque existe essa limitação. Vamos explorar isso com um exemplo prático.
+
+A função **XOR** é um exemplo clássico de problema não linearmente separável. Vamos analisar sua tabela verdade:
 
 | Entrada $x_1$ | Entrada $x_2$ | Saída Y |
 | :-----------: | :-----------: | :-----: |
@@ -231,6 +233,8 @@ A estrutura básica de um MLP inclui:
 1. **Camada de entrada**: Recebe os dados brutos. Cada nó representa uma característica de entrada.
 2. **Camadas ocultas**: Realizam transformações nos dados. O número e tamanho destas camadas são hiperparâmetros cruciais.
 3. **Camada de saída**: Produz o resultado final da rede. Sua estrutura depende do tipo de problema (regressão, classificação binária ou multiclasse).
+
+É importante notar que cada camada que realiza uma multiplicação por uma matriz de pesos (como $W_{(1)}$ ou $W_{(2)}$) seguida pela adição de um viés ($b$) está, na verdade, aplicando uma transformação afim, uma transformação linear seguida por uma translação. A função de ativação não-linear que segue é fundamental. Sem a função de ativação, múltiplas camadas afins colapsariam em uma única transformação afim equivalente, limitando a capacidade de aprendizado da rede
 
 #### Redes Neurais Rasas vs. Profundas
 
@@ -356,6 +360,23 @@ Nos modelos de **word embeddings**, estas representações one-hot são transfor
 
 O treinamento de uma rede neural envolve ajustar seus pesos e vieses para minimizar a diferença entre suas previsões e os valores reais desejados. Este processo é fundamental para entender como os modelos de **word embeddings** aprendem representações de palavras.
 
+#### Desvanecimento e Explosão de Gradientes
+
+Um desafio significativo no treinamento de redes neurais, especialmente as mais profundas (com muitas camadas) ou recorrentes (que processam sequências longas), é o problema dos **gradientes que desvanecem (vanishing gradients)** ou **explodem (exploding gradients)**.
+
+* **Vanishing Gradients (Desvanecimento):** Durante a retropropagação, os gradientes são multiplicados sucessivamente pela regra da cadeia. Se as derivadas forem consistentemente pequenas (menores que 1), como acontece nas regiões de saturação das funções Sigmóide e Tanh (onde a curva é quase plana), o gradiente pode diminuir exponencialmente à medida que se propaga para as camadas iniciais da rede. Isso faz com que os pesos das primeiras camadas recebam atualizações minúsculas ou nulas, impedindo que a rede aprenda dependências de longo alcance ou ajuste características fundamentais nos dados.
+* **Exploding Gradients (Explosão):** O oposto pode ocorrer se as derivadas forem consistentemente grandes (maiores que 1). O gradiente pode crescer exponencialmente, resultando em atualizações de peso enormes que desestabilizam o treinamento, levando a valores numéricos muito grandes (NaN - Not a Number) e divergência do modelo.
+
+Embora este artigo foque em redes rasas para embeddings (onde o problema é menos severo), entender isso é crucial:
+
+1. Motiva a escolha de funções de ativação como a **ReLU**, que não satura para entradas positivas (sua derivada é 1), ajudando a mitigar o desvanecimento (embora possa levar a neurônios mortos).
+
+2. Explica a necessidade de técnicas como **inicialização cuidadosa de pesos** (Xavier/He, já mencionados) que visam manter a magnitude dos gradientes estável.
+
+3. Introduz a necessidade de técnicas como **gradient clipping** (limitar a magnitude máxima do gradiente durante o treinamento) para combater a explosão de gradientes.
+
+4. Contextualiza o desenvolvimento de arquiteturas mais complexas como LSTMs/GRUs (em redes recorrentes) e mecanismos como conexões residuais (nos Transformers) que foram projetados, em parte, para lidar com esses problemas de fluxo de gradiente.
+
 #### Função de Custo (Loss Function)
 
 A função de custo quantifica o erro das previsões da rede. Para problemas de classificação multiclasse, como a previsão de palavras, a função de custo típica é a entropia cruzada:
@@ -395,38 +416,129 @@ O custo (erro) para este exemplo é aproximadamente $0.3567$. Quanto menor o cus
 
 #### Gradiente Descendente
 
-O gradiente descendente é um algoritmo de otimização que ajusta os parâmetros da rede para minimizar a função de custo. O processo envolve calcular o gradiente da função de custo em relação a cada parâmetro e atualizar os parâmetros na direção oposta ao gradiente:
+O gradiente descendente é um algoritmo de otimização fundamental usado para ajustar os **parâmetros** da rede (pesos e vieses) de forma a minimizar a função de custo. A ideia central é calcular como a função de custo $L$ muda em relação a cada parâmetro ajustável da rede e, então, dar um pequeno passo na direção que *diminui* o custo.
 
-$$w_j \leftarrow w_j - \eta \frac{\partial L}{\partial w_j}$$
+Seja $\theta$ um símbolo genérico para representar qualquer parâmetro ajustável na rede (como um peso $w_{ij}$ ou um viés $b_j$). O processo envolve calcular o gradiente da função de custo em relação a um parâmetro específico $\theta_j$ (ou seja, a derivada parcial $\frac{\partial L}{\partial \theta_j}$) e atualizar o valor desse parâmetro na direção oposta ao gradiente:
+
+$$\theta_j \leftarrow \theta_j - \eta \frac{\partial L}{\partial \theta_j}$$
 
 Em que:
 
-* $w_j$ é um peso na rede;
-* $\eta$ é a taxa de aprendizado;
-* $\frac{\partial L}{\partial w_j}$ é a derivada parcial da função de custo em relação ao peso.
+* $\theta_j$ é um parâmetro específico na rede (um peso ou viés);
+* $\eta$ (eta) é la **taxa de aprendizado** (learning rate), um hiperparâmetro que controla o tamanho do passo de atualização;
+* $\frac{\partial L}{\partial \theta_j}$ é la derivada parcial da função de custo $L$ em relação ao parâmetro $\theta_j$. Este valor indica a sensibilidade do custo a pequenas mudanças em $\theta_j$.
 
-A atualização de um único peso ($w_j$) usando Gradiente Descendente é direta. Suponha que:
-* **Valor atual do peso**: $w_j = 0.8$
+A atualização de um único parâmetro ($\theta_j$) usando Gradiente Descendente é direta. Suponha que para um determinado parâmetro $\theta_j$:
+
+* **Valor atual do parâmetro**: $\theta_j = 0.8$
 * **Taxa de aprendizado**: $\eta = 0.01$ (um valor pequeno, comum na prática)
-* **Gradiente da função de custo em relação a este peso (calculado via backpropagation)**: $\frac{\partial L}{\partial w_j} = -2.5$ (o custo diminui se aumentarmos $w_j$)
+* **Gradiente da função de custo em relação a este parâmetro (calculado via backpropagation)**: $\frac{\partial L}{\partial \theta_j} = -2.5$ (o sinal negativo indica que aumentar $\theta_j$ diminuiria o custo $L$)
 
 A fórmula de atualização é:
-$$w_j \leftarrow w_j - \eta \frac{\partial L}{\partial w_j}$$
+$$\theta_j \leftarrow \theta_j - \eta \frac{\partial L}{\partial \theta_j}$$
 
 Substituindo os valores:
-$$w_j \leftarrow 0.8 - (0.01 \times (-2.5))$$
-$$w_j \leftarrow 0.8 - (-0.025)$$
-$$w_j \leftarrow 0.8 + 0.025 = 0.825$$
 
-O novo valor do peso $w_j$ é $0.825$. Como o gradiente era negativo, a atualização aumentou o peso, movendo-o na direção que (localmente) diminui o custo. Se o gradiente fosse positivo, digamos $+1.5$, a atualização seria $w_j \leftarrow 0.8 - (0.01 \times 1.5) = 0.8 - 0.015 = 0.785$, diminuindo o peso.
+$$\theta_j \leftarrow 0.8 - (0.01 \times (-2.5))$$
 
-#### Retropropagação (Backpropagation)
+$$\theta_j \leftarrow 0.8 - (-0.025)$$
 
-A retropropagação (Backpropagation) é o algoritmo que permite calcular eficientemente esses gradientes em redes multicamadas. A ideia central é usar a **regra da cadeia** do cálculo diferencial. Primeiro, calcula-se o erro na camada de saída (a diferença entre a previsão $\hat{y}$ e o alvo $y$). Em seguida, esse erro é propagado *para trás* (daí o nome "retropropagação"), camada por camada. Em cada camada, calcula-se o quanto cada neurônio contribuiu para o erro da camada seguinte. Isso permite determinar o gradiente da função de custo em relação aos pesos de cada conexão, informando como ajustar esses pesos para reduzir o erro geral da rede. O processo pode ser resumido nos seguintes passos matemáticos:
+$$\theta_j \leftarrow 0.8 + 0.025 = 0.825$$
+
+O novo valor do parâmetro $\theta_j$ é $0.825$. Como o gradiente era negativo, a atualização aumentou o valor do parâmetro, movendo-o na direção que (localmente) diminui o custo. Se o gradiente fosse positivo, digamos $+1.5$, a atualização seria $\theta_j \leftarrow 0.8 - (0.01 \times 1.5) = 0.8 - 0.015 = 0.785$, diminuindo o valor do parâmetro.#### Retropropagação (Backpropagation)
+
+A retropropagação, *Backpropagation em inglês*, é o algoritmo que permite calcular eficientemente esses gradientes em redes multicamadas. A ideia central é usar a **regra da cadeia** do cálculo diferencial. A regra da cadeia nos permite calcular a derivada de uma função composta, essencial para entender como o erro na saída da rede se relaciona com os pesos em cada camada. Isso é crucial para otimizar a rede neural.
+
+> **A Regra da Cadeia na Retropropagação**
+>
+> A regra da cadeia do cálculo diferencial é o princípio matemático  que viabiliza todo o algoritmo de retropropagação. Ela permite calcular derivadas de funções compostas, que são exatamente o que temos em redes neurais:
+>
+> $$\frac{d}{dx}[f(g(x))] = \frac{df}{dg} \cdot \frac{dg}{dx}$$
+>
+> **Aplicação na Retropropagação:**
+>
+> 1. A função de custo $L$ depende das saídas $\hat{y}$;
+> 2. As saídas $\hat{y}$ dependem das ativações $z^{(L)}$;
+> 3. As ativações $z^{(L)}$ dependem dos pesos $w$ e ativações anteriores.
+>
+> Para calcular $\frac{\partial L}{\partial w_{ji}^{(l)}}$, encadeamos estas derivadas:
+>
+> $$\frac{\partial L}{\partial w_{ji}^{(l)}} = \frac{\partial L}{\partial z_j^{(l)}} \cdot \frac{\partial z_j^{(l)}}{\partial w_{ji}^{(l)}}$$
+>
+> Onde $\frac{\partial L}{\partial z_j^{(l)}} = \delta_j^{(l)}$ (o erro do neurônio) e $\frac{\partial z_j^{(l)}}{\partial w_{ji}^{(l)}} = a_i^{(l-1)}$ (a ativação da camada anterior).
+>
+>**Caso Especial: Entropia Cruzada + Sigmóide**
+>
+> Uma propriedade matemática notável ocorre quando combinamos entropia cruzada como função de custo e sigmóide como ativação de saída. Aplicando a regra da cadeia:
+>
+> $$\delta_k^{(L)} = \frac{\partial L}{\partial z_k^{(L)}} = \frac{\partial L}{\partial \hat{y}_k} \cdot \frac{\partial \hat{y}_k}{\partial z_k^{(L)}}$$
+>
+> Para entropia cruzada: $\frac{\partial L}{\partial \hat{y}_k} = -\frac{y_k}{\hat{y}_k} + \frac{1-y_k}{1-\hat{y}_k}$
+>
+> Para sigmóide: $\frac{\partial \hat{y}_k}{\partial z_k^{(L)}} = \hat{y}_k(1-\hat{y}_k)$
+>
+> Multiplicando: $\delta_k^{(L)} = (-\frac{y_k}{\hat{y}_k} + \frac{1-y_k}{1-\hat{y}_k}) \cdot \hat{y}_k(1-\hat{y}_k) = \hat{y}_k - y_k$
+>
+> Esta simplificação elegante é o que torna a combinação entropia cruzada + sigmóide computacionalmente eficiente.
+
+O algoritmo começa com o cálculo do erro na camada de saída, a diferença entre a previsão $\hat{y}$ e o alvo $y$. Em seguida, esse erro é propagado *para trás* na rede, esta é a origem do nome "retropropagação", camada por camada. Em cada camada, calcula-se o quanto cada neurônio contribuiu para o erro da camada seguinte.
+
+![mostra o algoritmo de retropropagação como descrito no texto](/assets/images/retropropagacao-fluxo.webp)
+
+_Figura 6: Fluxo do algoritmo de retropropagação. O erro é calculado na camada de saída e propagado para trás, camada por camada, ajustando os pesos conforme necessário. A seta azul representa o fluxo do erro, enquanto a seta vermelha representa o fluxo dos gradientes_. {: class="legend"}
+
+Isso permite determinar o gradiente da função de custo em relação aos pesos de cada conexão, informando como ajustar esses pesos para reduzir o erro geral da rede. O processo pode ser resumido nos seguintes passos matemáticos:
 
 1. **Calcular o erro na camada de saída**:
 
     $$\delta_k^{(L)} = \frac{\partial L}{\partial z_k^{(L)}} = \hat{y}_k - y_k$$
+
+    >**Por que a simplificação $\delta^{(L)} = \hat{y} - y$ é válida para entropia cruzada + sigmóide?**
+    >
+    > A simplificação ocorre devido à **cancelamento matemático** entre a derivada da função de custo, entropia cruzada e a derivada da função de ativação, sigmóide. Veja a derivação:
+    >
+    >**Função de Custo (Entropia Cruzada Binária)**:
+    >
+    > $$
+      L = -y \log(\hat{y}) - (1 - y) \log(1 - \hat{y})
+      $$
+    >
+    > Neste caso, $\hat{y} = \sigma(z)$ é a saída da sigmóide.
+    >
+    >**Derivada de $L$ em relação a $z$**:
+    >
+    > Pela regra da cadeia:
+    >
+    > $$
+      \delta^{(L)} = \frac{\partial L}{\partial z} = \frac{\partial L}{\partial \hat{y}} \cdot \frac{\partial \hat{y}}{\partial z}
+      $$
+    >
+    >**Cálculo de $\frac{\partial L}{\partial \hat{y}}$**:
+    >
+    > $$
+      \frac{\partial L}{\partial \hat{y}} = -\frac{y}{\hat{y}} + \frac{1 - y}{1 - \hat{y}}
+      $$
+    >
+    >**Derivada da Sigmóide**:
+    > $$
+      \frac{\partial \hat{y}}{\partial z} = \hat{y}(1 - \hat{y})
+      $$
+    >
+    >**Combinação das Derivadas**:
+    >
+    > $$
+      \delta^{(L)} = \left(-\frac{y}{\hat{y}} + \frac{1 - y}{1 - \hat{y}}\right) \cdot \hat{y}(1 - \hat{y})
+      $$
+    >
+    > Simplificando:
+    >
+    > $$
+      \delta^{(L)} = -y(1 - \hat{y}) + (1 - y)\hat{y} = \hat{y} - y
+      $$
+    >
+    > O termo $\hat{y}(1 - \hat{y})$, derivada da sigmóide, cancela-se com os denominadores da entropia cruzada, resultando na expressão simplificada $\delta^{(L)} = \hat{y} - y$. Isso só é possível porque:
+    >
+    >* A **entropia cruzada** é projetada para "casar" com a **sigmóide**.
 
 2. **Propagar o erro para camadas anteriores**:
 
@@ -434,7 +546,7 @@ A retropropagação (Backpropagation) é o algoritmo que permite calcular eficie
 
 3. **Calcular os gradientes dos pesos**:
 
-    $$\frac{\partial L}{\partial w_{ji}^{(l)}} = \delta_j^{(l)} a_i^{(l-1)}$$
+    $$\frac{\partial L}{\partial w_{ji}^{(l)}} = \delta_j^{(l)} a_i^{(l-1)}}$$
 
 Neste caso, temos:
 
@@ -443,41 +555,59 @@ Neste caso, temos:
 * $f'$ é a derivada da função de ativação;
 * $a$ é a ativação do neurônio.
 
-Este processo é iterativo e continua até que a função de custo seja minimizada ou outro critério de parada seja atingido.
+### Exemplo Prático de Retropropagação
 
-Vamos ilustrar o cálculo do gradiente para *um* peso específico durante a retropropagação, usando a fórmula:
-$$\frac{\partial L}{\partial w_{ji}^{(l)}} = \delta_j^{(l)} a_i^{(l-1)}$$
+**Contexto**: queremos calcular o gradiente para o peso $w_{12}^{(2)}$, que conecta o neurônio $h_2$ da camada oculta (camada $l=2$) ao neurônio $y_1$ da camada de saída. 
 
-Nesta fórmula:
+**Dados do Exemplo**:
 
-* $\frac{\partial L}{\partial w_{ji}^{(l)}}$ é o gradiente do custo $L$ em relação ao peso $w_{ji}$ da camada $l$ (que conecta o neurônio $i$ da camada $l-1$ ao neurônio $j$ da camada $l$);
-* $\delta_j^{(l)}$ é o sinal de erro do neurônio $j$ na camada $l$ (calculado propagando o erro para trás);
-* $a_i^{(l-1)}$ é a ativação (saída) do neurônio $i$ na camada anterior ($l-1$).
+* **Ativação da camada anterior**: $a_2^{(1)} = h_2 \approx 0.3430$ (calculado na propagação direta);
+* **Saída da rede**: $\hat{y} = 0.5824$ (previsão).
+* **Valor real**: $y = 1$.
 
-**Contexto**: Usaremos partes do nosso exemplo de **Propagação Direta**. Queremos calcular o gradiente para o peso $w_{12}^{(2)}$, que conecta o neurônio $h_2$ da camada oculta (camada $l=2$) ao neurônio $y_1$ da camada de saída (aqui $j=1$). Na nossa notação anterior, $W^{(2)} = \begin{pmatrix} w_{11}^{(2)} & w_{12}^{(2)} \end{pmatrix} = \begin{pmatrix} 0.7 & -0.3 \end{pmatrix}$, então $w_{12}^{(2)} = -0.3$. A camada anterior é a oculta ($l-1 = 1$), e a ativação correspondente é $a_2^{(1)} = h_2$.
+**Passo 1**: Cálculo de $\delta_1^{(2)}$
 
-**Valores Necessários**:
+Para entropia cruzada + sigmóide, o erro na saída é:
 
-* **Ativação da camada anterior**: $a_2^{(1)} = h_2 \approx 0.3430$ (do Passo 1 da Propagação Direta);
-* **Erro na camada de saída**: $\delta_1^{(2)}$. Este valor depende da função de custo e da derivada da função de ativação da camada de saída. Para simplificar, **vamos supor** que, após calcular o erro na saída $(y - y_{target})$ e multiplicá-lo pela derivada $\sigma'(z^{(2)})$, obtivemos $\delta_1^{(2)} = -0.15$. (O cálculo exato de $\delta$ envolve a regra da cadeia completa).
+$$
+\delta_1^{(2)} = \hat{y} - y = 0.5824 - 1 = -0.4176
+$$
 
-**Cálculo do Gradiente**:
+**Passo 2**: Cálculo do Gradiente
 
-Usando a fórmula com $l=2, j=1, i=2$:
+Usando a fórmula:
 
-$$\frac{\partial L}{\partial w_{12}^{(2)}} = \delta_1^{(2)} a_2^{(1)}$$
+$$
+\frac{\partial L}{\partial w_{12}^{(2)}} = \delta_1^{(2)} \cdot a_2^{(1)}}
+$$
 
 Substituindo os valores:
 
-$$\frac{\partial L}{\partial w_{12}^{(2)}} \approx (-0.15) \times (0.3430) = -0.05145$$
+$$
+\frac{\partial L}{\partial w_{12}^{(2)}} = (-0.4176) \times 0.3430 \approx -0.1432
+$$
 
-Este valor $-0.05145$ seria então usado na atualização do Gradiente Descendente para o peso $w_{12}^{(2)}$:
+**Passo 3**: Atualização do Peso
 
-$$w_{12}^{(2)} \leftarrow w_{12}^{(2)} - \eta \frac{\partial L}{\partial w_{12}^{(2)}}$$
+Supondo uma taxa de aprendizado $\eta = 0.01$:
 
-$$w_{12}^{(2)} \leftarrow -0.3 - \eta (-0.05145)$$
+$$
+w_{12}^{(2)} \leftarrow w_{12}^{(2)} - \eta \frac{\partial L}{\partial w_{12}^{(2)}}
+$$
 
-Este exemplo mostra como a ativação de um neurônio e o erro propagado para o neurônio seguinte são combinados para determinar como ajustar o peso da conexão entre eles. Repetindo isso para todos os pesos, a rede aprende.
+$$
+w_{12}^{(2)} \leftarrow -0.3 - 0.01 \times (-0.1432) = -0.3 + 0.001432 = -0.298568
+$$
+
+### Observações Chave
+
+1. **Simplificação para Entropia Cruzada + Sigmóide**:
+   - A combinação dessas funções elimina a necessidade de calcular explicitamente $\sigma'(z^{(2)})$, pois a derivada se cancela na regra da cadeia. Isso acelera computacionalmente o treinamento.
+
+2. **Generalização para Outras Funções**:
+   - Se a função de custo fosse MSE (Erro Quadrático Médio) ou a ativação fosse outra (e.g., ReLU), o cálculo de $\delta$ incluiria a derivada da função de ativação:
+
+     $$\delta_j^{(l)} = \left(\sum_{k} \delta_k^{(l+1)} w_{kj}^{(l+1)}\right) f'(z_j^{(l)})$$
 
 ### Implementação do Treinamento
 
@@ -548,11 +678,17 @@ Na prática, várias otimizações são aplicadas para melhorar a eficiência e 
 
 ##### Gradient Descent com Mini-lotes (Mini-batch Gradient Descent)
 
-Em vez de atualizar os pesos após cada exemplo (SGD) ou usando todos os exemplos (GD), utilizamos pequenos lotes (mini-batches) para equilibrar velocidade e estabilidade:
+Em vez de atualizar os parâmetros após cada exemplo (o que é chamado de Gradiente Descendente Estocástico ou SGD) ou usar todos os exemplos do conjunto de treinamento de uma vez (Gradiente Descendente Batch ou GD), uma abordagem comum é usar **pequenos lotes** (mini-batches) de exemplos. Isso oferece um equilíbrio entre a velocidade de convergência e a estabilidade do processo de treinamento. A atualização para todos os parâmetros $\theta$ da rede (pesos e vieses) usando um mini-lote de tamanho $m$ é dada por:
 
-$$W = W - \eta \frac{1}{m} \sum_{i=1}^{m} \frac{\partial L^{(i)}}{\partial W}$$
+$$\theta \leftarrow \theta - \eta \frac{1}{m} \sum_{i=1}^{m} \nabla_{\theta} L^{(i)}$$
 
-Neste caso, $m$ representa o tamanho do mini-lote.
+Neste caso:
+
+* $\theta$ representa o vetor de todos os parâmetros ajustáveis da rede.
+* $m$ representa o tamanho do mini-lote.
+* $L^{(i)}$ é a função de custo calculada para o $i$-ésimo exemplo do mini-lote.
+* $\nabla_{\theta} L^{(i)}$ é o vetor de gradientes da função de 
+custo em relação a todos os parâmetros $\theta$, calculado para o exemplo $i$. A soma calcula o gradiente médio sobre o mini-lote.
 
 ##### Taxa de Aprendizado Adaptativa
 
@@ -566,7 +702,13 @@ Algoritmos como Adam, RMSprop e Adagrad ajustam a taxa de aprendizado individual
 
 ##### Regularização
 
-Para evitar overfitting, técnicas de regularização são aplicadas:
+Antes de detalharmos técnicas como regularização, é importante entender dois desafios comuns no treinamento de redes neurais: *Overfitting* e *Underfitting*.
+
+* **Underfitting (Subajuste):** Ocorre quando o modelo é muito simples para capturar os padrões presentes nos dados de treinamento. Ele falha em aprender bem tanto nos dados de treino quanto em dados novos. Isso geralmente indica que a arquitetura da rede é inadequada ou que o treinamento foi insuficiente.
+
+* **Overfitting (Sobreajuste):** Ocorre quando o modelo aprende os dados de treinamento *excessivamente bem*, incluindo ruídos e particularidades específicas daquele conjunto de dados. Como resultado, o modelo tem um desempenho excelente nos dados de treino, mas generaliza mal para dados novos e não vistos, apresentando um erro muito maior nesses casos. O modelo "decorou" o treino em vez de aprender os padrões gerais.
+
+O objetivo do treinamento é encontrar um equilíbrio, um modelo que generalize bem para novos dados. As técnicas de otimização e, especialmente, de **regularização**, são projetadas principalmente para combater o *overfitting*.
 
 **L2 Regularization** (Regularização L2): Adiciona um termo à função de custo que penaliza pesos grandes:
 
@@ -606,6 +748,664 @@ $$L_{reg} = L + \text{Penalidade L2} = 0.3567 + 0.0177 = 0.3744$$
 
 **Dropout**: Durante o treinamento, desativa aleatoriamente uma fração dos neurônios, forçando a rede a ser mais robusta.
 
+### Exemplo Completo de Treinamento de uma Rede Neural Rasa
+
+Neste exemplo, a esforçada leitora poderá ver, cuidadosamente, *como treinar uma rede neural rasa para prever uma palavra com base em outra*, utilizando um vocabulário pequeno e realizando todos os cálculos passo a passo. O objetivo é ilustrar os conceitos de propagação direta, cálculo do custo, retropropagação e atualização dos pesos, que são fundamentais para entender modelos como **CBOW** e **Skip-gram** que serão assunto [deste artigo](https://frankalcantara.com/transformers-cinco/).
+
+#### Definição da Rede
+
+* **Vocabulário**: {"sol", "lua", "dia", "noite"} (tamanho $ |V| = 4 $);
+* **Camada de Entrada**: Vetor *one-hot* de tamanho 4, representando uma palavra de entrada;
+* **Camada Oculta**: 2 neurônios (projeção linear, sem função de ativação);
+* **Camada de Saída**: 4 neurônios (probabilidades para cada palavra do vocabulário, usando softmax).
+
+#### Inicialização dos Pesos
+
+Inicializamos as matrizes de pesos com valores fixos para facilitar os cálculos:
+
+* **Pesos da Camada Oculta** ($ W^{(1)} $), matriz $ 4 \times 2 $:
+
+$$
+W^{(1)} = \begin{pmatrix}
+0.1 & 0.2 \\
+0.3 & 0.4 \\
+0.5 & 0.6 \\
+0.7 & 0.8
+\end{pmatrix}
+$$
+
+* **Pesos da Camada de Saída** ($ W^{(2)} $), matriz $ 2 \times 4 $:
+
+$$
+W^{(2)} = \begin{pmatrix}
+0.2 & 0.3 & 0.4 & 0.5 \\
+0.6 & 0.7 & 0.8 & 0.9
+\end{pmatrix}
+$$
+
+* **Não usaremos vieses ($ b = 0 $)**.
+
+#### Entrada e Saída Esperada
+
+* **Entrada**: Palavra "sol", vetor *one-hot* $ x = [1, 0, 0, 0] $;
+* **Saída Esperada**: Palavra "dia", vetor *one-hot* $ y = [0, 0, 1, 0]$.
+
+#### Propagação Direta
+
+**Passo 1**: Calcular a Ativação da Camada Oculta
+
+A ativação da camada oculta $ h $ é obtida multiplicando a entrada $ x $ pelos pesos $ W^{(1)} $:
+
+$$
+h = x \cdot W^{(1)} = [1, 0, 0, 0] \cdot \begin{pmatrix}
+0.1 & 0.2 \\
+0.3 & 0.4 \\
+0.5 & 0.6 \\
+0.7 & 0.8
+\end{pmatrix}
+$$
+
+Como $ x $ é um vetor *one-hot* com 1 na primeira posição, $ h $ corresponde à primeira linha de $ W^{(1)} $:
+
+$$
+h = [0.1, 0.2]
+$$
+
+**Passo 2**: Calcular a Ativação da Camada de Saída
+
+1. Cálculo do Vetor de Pontuações ($ z $)
+
+   Multiplicamos $ h $ pelos pesos $ W^{(2)} $:
+
+   $$
+   z = h \cdot W^{(2)} = [0.1, 0.2] \cdot \begin{pmatrix}
+   0.2 & 0.3 & 0.4 & 0.5 \\
+   0.6 & 0.7 & 0.8 & 0.9
+   \end{pmatrix}
+   $$
+
+   Calculando cada componente:
+
+   $$
+   z_1 = 0.1 \cdot 0.2 + 0.2 \cdot 0.6 = 0.02 + 0.12 = 0.14
+   $$
+
+   $$
+   z_2 = 0.1 \cdot 0.3 + 0.2 \cdot 0.7 = 0.03 + 0.14 = 0.17
+   $$
+
+   $$
+   z_3 = 0.1 \cdot 0.4 + 0.2 \cdot 0.8 = 0.04 + 0.16 = 0.20
+   $$
+
+   $$
+   z_4 = 0.1 \cdot 0.5 + 0.2 \cdot 0.9 = 0.05 + 0.18 = 0.23
+   $$
+
+   Portanto:
+
+   $$
+   z = [0.14, 0.17, 0.20, 0.23]
+   $$
+
+2. Aplicação da Função Softmax
+
+   A saída prevista $ \hat{y} $ é calculada com a função softmax:
+
+   $$
+   \hat{y}_i = \frac{e^{z_i}}{\sum_{j=1}^{4} e^{z_j}}
+   $$
+
+   Calculando os exponenciais (aproximados):
+
+   $$
+   e^{0.14} \approx 1.150, \quad e^{0.17} \approx 1.185, \quad e^{0.20} \approx 1.221, \quad e^{0.23} \approx 1.259
+   $$
+
+   Soma dos exponenciais:
+
+   $$
+   1.150 + 1.185 + 1.221 + 1.259 = 4.815
+   $$
+
+   Agora, calculamos cada $ \hat{y}_i $:
+
+   $$
+   \hat{y}_1 = \frac{1.150}{4.815} \approx 0.239
+   $$
+
+   $$
+   \hat{y}_2 = \frac{1.185}{4.815} \approx 0.246
+   $$
+
+   $$
+   \hat{y}_3 = \frac{1.221}{4.815} \approx 0.254
+   $$
+
+   $$
+   \hat{y}_4 = \frac{1.259}{4.815} \approx 0.261
+   $$
+
+   Portanto:
+
+   $$
+   \hat{y} = [0.239, 0.246, 0.254, 0.261]
+   $$
+
+3. Cálculo do Custo
+
+   Usamos a entropia cruzada como função de custo:
+
+   $$
+   L = -\sum_{i=1}^{4} y_i \log(\hat{y}_i)
+   $$
+
+   Como $ y = [0, 0, 1, 0] $, apenas o terceiro termo contribui:
+
+   $$
+   L = - y_3 \log(\hat{y}_3) = - 1 \cdot \log(0.254)
+   $$
+
+   Calculando:
+
+   $$
+   \log(0.254) \approx -1.370
+   $$
+
+   $$
+   L = -(-1.370) = 1.370
+   $$
+
+#### Retropropagação
+
+**Passo 1**: Calcular o Erro na Camada de Saída
+Para softmax com entropia cruzada, o erro $ \delta^{(2)} $ é:
+
+    $$
+    \delta^{(2)} = \hat{y} - y
+    $$
+
+    $$
+    \delta^{(2)} = [0.239, 0.246, 0.254, 0.261] - [0, 0, 1, 0]
+    $$
+
+    $$
+    \delta^{(2)} = [0.239, 0.246, 0.254 - 1, 0.261] = [0.239, 0.246, -0.746, 0.261]
+    $$
+
+**Passo 2**: Calcular os Gradientes para $ W^{(2)} $
+    O gradiente do custo em relação a $ W^{(2)} $ é:
+
+    $$
+    \frac{\partial L}{\partial W^{(2)}} = h^T \cdot \delta^{(2)}
+    $$
+
+    Com $ h = [0.1, 0.2] $ (vetor coluna $ h^T = \begin{pmatrix} 0.1 \\ 0.2 \end{pmatrix} $):
+
+    $$
+    \frac{\partial L}{\partial W^{(2)}} = \begin{pmatrix}
+    0.1 \\
+    0.2
+    \end{pmatrix} \cdot [0.239, 0.246, -0.746, 0.261]
+    $$
+
+    Calculando cada elemento:
+
+    $$
+    \frac{\partial L}{\partial W^{(2)}} = \begin{pmatrix}
+    0.1 \cdot 0.239 & 0.1 \cdot 0.246 & 0.1 \cdot (-0.746) & 0.1 \cdot 0.261 \\
+    0.2 \cdot 0.239 & 0.2 \cdot 0.246 & 0.2 \cdot (-0.746) & 0.2 \cdot 0.261
+    \end{pmatrix}
+    $$
+
+    $$
+    \approx \begin{pmatrix}
+    0.0239 & 0.0246 & -0.0746 & 0.0261 \\
+    0.0478 & 0.0492 & -0.1492 & 0.0522
+    \end{pmatrix}
+    $$
+
+**Passo 3**: Propagar o Erro para a Camada Oculta
+    O erro $ \delta^{(1)} $ na camada oculta é:
+
+    $$
+    \delta^{(1)} = \delta^{(2)} \cdot (W^{(2)})^T
+    $$
+
+    Transposta de $ W^{(2)} $:
+
+    $$
+    (W^{(2)})^T = \begin{pmatrix}
+    0.2 & 0.6 \\
+    0.3 & 0.7 \\
+    0.4 & 0.8 \\
+    0.5 & 0.9
+    \end{pmatrix}
+    $$
+
+    Calculando:
+
+    $$
+    \delta^{(1)} = [0.239, 0.246, -0.746, 0.261] \cdot \begin{pmatrix}
+    0.2 & 0.6 \\
+    0.3 & 0.7 \\
+    0.4 & 0.8 \\
+    0.5 & 0.9
+    \end{pmatrix}
+    $$
+
+    Para cada componente:
+
+    $$
+    \delta^{(1)}_1 = 0.239 \cdot 0.2 + 0.246 \cdot 0.3 + (-0.746) \cdot 0.4 + 0.261 \cdot 0.5
+    $$
+
+    $$
+    = 0.0478 + 0.0738 - 0.2984 + 0.1305 \approx -0.0463
+    $$
+
+    $$
+    \delta^{(1)}_2 = 0.239 \cdot 0.6 + 0.246 \cdot 0.7 + (-0.746) \cdot 0.8 + 0.261 \cdot 0.9
+    $$
+
+    $$
+    = 0.1434 + 0.1722 - 0.5968 + 0.2349 \approx -0.0463
+    $$
+
+    Portanto:
+
+    $$
+    \delta^{(1)} = [-0.0463, -0.0463]
+    $$
+
+**Passo 4**: Calcular os Gradientes para $ W^{(1)} $
+    O gradiente do custo em relação a $ W^{(1)} $ é:
+
+    $$
+    \frac{\partial L}{\partial W^{(1)}} = x^T \cdot \delta^{(1)}
+    $$
+
+    Com $ x = [1, 0, 0, 0] $ (vetor coluna $ x^T = \begin{pmatrix} 1 \\ 0 \\ 0 \\ 0 \end{pmatrix} $):
+
+    $$
+    \frac{\partial L}{\partial W^{(1)}} = \begin{pmatrix}
+    1 \\
+    0 \\
+    0 \\
+    0
+    \end{pmatrix} \cdot [-0.0463, -0.0463]
+    $$
+
+    $$
+    = \begin{pmatrix}
+    1 \cdot (-0.0463) & 1 \cdot (-0.0463) \\
+    0 \cdot (-0.0463) & 0 \cdot (-0.0463) \\
+    0 \cdot (-0.0463) & 0 \cdot (-0.0463) \\
+    0 \cdot (-0.0463) & 0 \cdot (-0.0463)
+    \end{pmatrix}
+    $$
+
+    $$
+    = \begin{pmatrix}
+    -0.0463 & -0.0463 \\
+    0 & 0 \\
+    0 & 0 \\
+    0 & 0
+    \end{pmatrix}
+    $$
+
+#### Atualização dos Pesos
+
+Usamos uma taxa de aprendizado $ \eta = 0.1 $.
+
+1. Atualização de $ W^{(2)} $
+
+    $$
+    W^{(2)} \leftarrow W^{(2)} - \eta \cdot \frac{\partial L}{\partial W^{(2)}}
+    $$
+
+    $$
+    W^{(2)} = \begin{pmatrix}
+    0.2 & 0.3 & 0.4 & 0.5 \\
+    0.6 & 0.7 & 0.8 & 0.9
+    \end{pmatrix} - 0.1 \cdot \begin{pmatrix}
+    0.0239 & 0.0246 & -0.0746 & 0.0261 \\
+    0.0478 & 0.0492 & -0.1492 & 0.0522
+    \end{pmatrix}
+    $$
+
+    Calculando cada elemento:
+
+    $$
+    W^{(2)}_{1,1} = 0.2 - 0.1 \cdot 0.0239 = 0.2 - 0.00239 \approx 0.1976
+    $$
+
+    $$
+    W^{(2)}_{1,2} = 0.3 - 0.1 \cdot 0.0246 = 0.3 - 0.00246 \approx 0.2975
+    $$
+
+    $$
+    W^{(2)}_{1,3} = 0.4 - 0.1 \cdot (-0.0746) = 0.4 + 0.00746 \approx 0.4075
+    $$
+
+    $$
+    W^{(2)}_{1,4} = 0.5 - 0.1 \cdot 0.0261 = 0.5 - 0.00261 \approx 0.4974
+    $$
+
+    $$
+    W^{(2)}_{2,1} = 0.6 - 0.1 \cdot 0.0478 = 0.6 - 0.00478 \approx 0.5952
+    $$
+
+    $$
+    W^{(2)}_{2,2} = 0.7 - 0.1 \cdot 0.0492 = 0.7 - 0.00492 \approx 0.6951
+    $$
+
+    $$
+    W^{(2)}_{2,3} = 0.8 - 0.1 \cdot (-0.1492) = 0.8 + 0.01492 \approx 0.8149
+    $$
+
+    $$
+    W^{(2)}_{2,4} = 0.9 - 0.1 \cdot 0.0522 = 0.9 - 0.00522 \approx 0.8948
+    $$
+
+    Nova matriz $ W^{(2)} $:
+
+    $$
+    W^{(2)} \approx \begin{pmatrix}
+    0.1976 & 0.2975 & 0.4075 & 0.4974 \\
+    0.5952 & 0.6951 & 0.8149 & 0.8948
+    \end{pmatrix}
+    $$
+
+2. Atualização de $ W^{(1)} $
+
+    $$
+    W^{(1)} \leftarrow W^{(1)} - \eta \cdot \frac{\partial L}{\partial W^{(1)}}
+    $$
+
+    $$
+    W^{(1)} = \begin{pmatrix}
+    0.1 & 0.2 \\
+    0.3 & 0.4 \\
+    0.5 & 0.6 \\
+    0.7 & 0.8
+    \end{pmatrix} - 0.1 \cdot \begin{pmatrix}
+    -0.0463 & -0.0463 \\
+    0 & 0 \\
+    0 & 0 \\
+    0 & 0
+    \end{pmatrix}
+    $$
+
+    Calculando:
+
+    $$
+    W^{(1)}_{1,1} = 0.1 - 0.1 \cdot (-0.0463) = 0.1 + 0.00463 \approx 0.1046
+    $$
+
+    $$
+    W^{(1)}_{1,2} = 0.2 - 0.1 \cdot (-0.0463) = 0.2 + 0.00463 \approx 0.2046
+    $$
+
+    As outras linhas permanecem inalteradas (gradiente zero):
+
+    $$
+    W^{(1)} = \begin{pmatrix}
+    0.1046 & 0.2046 \\
+    0.3 & 0.4 \\
+    0.5 & 0.6 \\
+    0.7 & 0.8
+    \end{pmatrix}
+    $$
+
+Neste exemplo, a estupefata leitora pode ver como treinar uma rede neural rasa para prever `dia` a partir de `sol`. O processo incluiu propagação direta, cálculo do custo com entropia cruzada, retropropagação para determinar os gradientes e atualização dos pesos com uma taxa de aprendizado. Este exemplo serve como base para entender modelos de *word embeddings* como CBOW e Skip-gram, ajustando apenas as entradas e saídas conforme necessário. A rede pode ser vista na Figura 7.
+
+![Diagrama da rede neural treinada mostrando os valores e vetores encontrados](/assets/images/shallow-neural-network-training.webp)
+
+_Figura 7: Esquema da Rede Rasa treinada no exemplo._{: class="legend"}
+
+#### Implementação em C++ 20 do Exemplo de Treinamento de uma Rede Neural Rasa
+
+```cpp
+/**
+ * @file neural_network_example.cpp
+ * @brief Implementação do exemplo de treinamento de uma rede neural rasa
+ * @details Esta implementação corresponde ao exemplo matemático demonstrado no artigo,
+ * onde treinamos uma rede neural rasa para prever a palavra "dia" a partir da palavra "sol".
+ * @author Frank Alcantara
+ * @date 2025-04-21
+ */
+
+#include <iostream>        /**< Para operações de entrada/saída padrão */
+#include <vector>          /**< Para std::vector, usado para armazenar pesos e ativações */
+#include <cmath>           /**< Para funções matemáticas como std::exp e std::log */
+#include <iomanip>         /**< Para formatação de saída numérica */
+
+/**
+ * @brief Calcula o produto escalar de dois vetores
+ * @param a Primeiro vetor de entrada
+ * @param b Segundo vetor de entrada
+ * @return Valor do produto escalar entre os vetores
+ */
+float dot(const std::vector<float>& a, const std::vector<float>& b) {
+    float result = 0.0f;
+    for (size_t i = 0; i < a.size(); ++i) {
+        result += a[i] * b[i];
+    }
+    return result;
+}
+
+/**
+ * @brief Calcula o softmax de um vetor de scores
+ * @param scores Vetor de pontuações de entrada
+ * @return Vetor de probabilidades após aplicação do softmax
+ * @details Implementa estabilidade numérica subtraindo o valor máximo
+ * antes de calcular as exponenciais
+ */
+std::vector<float> softmax(const std::vector<float>& scores) {
+    std::vector<float> exps(scores.size());
+    float max_score = *std::max_element(scores.begin(), scores.end());
+    float sum_exps = 0.0f;
+    for (size_t i = 0; i < scores.size(); ++i) {
+        exps[i] = std::exp(scores[i] - max_score);  // Subtrai max para estabilidade numérica
+        sum_exps += exps[i];
+    }
+    for (float& val : exps) {
+        val /= sum_exps;
+    }
+    return exps;
+}
+
+/**
+ * @brief Função principal que implementa o exemplo de treinamento da rede neural rasa
+ * @return 0 se a execução for bem-sucedida
+ */
+int main() {
+    // --- Definir Vocabulário e Índices ---
+    /**
+     * @brief Vocabulário e configuração da rede
+     * Vocabulário: {"sol", "lua", "dia", "noite"} com índices {0, 1, 2, 3}
+     */
+    int vocab_size = 4;
+    int vector_size = 2;  /**< Dimensão da camada oculta */
+
+    // --- Definir Pesos de Entrada e Saída ---
+    /**
+     * @brief Matriz de pesos da camada de entrada W^(1)
+     * Formato: matriz 4x2 conforme definido no exemplo
+     */
+    std::vector<std::vector<float>> W_input = {
+        {0.1, 0.2},  // "sol"
+        {0.3, 0.4},  // "lua"
+        {0.5, 0.6},  // "dia"
+        {0.7, 0.8}   // "noite"
+    };
+
+    /**
+     * @brief Matriz de pesos da camada de saída W^(2)
+     * Formato: matriz 2x4 conforme definido no exemplo
+     */
+    std::vector<std::vector<float>> W_output = {
+        {0.2, 0.3, 0.4, 0.5},
+        {0.6, 0.7, 0.8, 0.9}
+    };
+
+    // --- Definir Par de Treinamento ---
+    /**
+     * @brief Definição da entrada e saída esperada
+     * Entrada: palavra "sol" (índice 0), representada como vetor one-hot [1,0,0,0]
+     * Saída esperada: palavra "dia" (índice 2), representada como vetor one-hot [0,0,1,0]
+     */
+    int input_idx = 0;  // "sol"
+    int target_idx = 2; // "dia"
+    float learning_rate = 0.1f;  /**< Taxa de aprendizado (η) */
+
+    // --- Passo 1: Calcular a Ativação da Camada Oculta ---
+    /**
+     * @brief Calcula a ativação da camada oculta h = x·W^(1)
+     * Como x é um vetor one-hot com 1 na posição input_idx, h é igual
+     * à linha input_idx da matriz W_input
+     */
+    std::vector<float> h = W_input[input_idx];
+    // h = [0.1, 0.2] para "sol"
+
+    // --- Passo 2: Calcular o Vetor de Pontuações ---
+    /**
+     * @brief Calcula o vetor de pontuações z = h·W^(2)
+     */
+    std::vector<float> z(vocab_size, 0.0f);
+    for (int i = 0; i < vocab_size; ++i) {
+        for (int j = 0; j < vector_size; ++j) {
+            z[i] += h[j] * W_output[j][i];
+        }
+    }
+    // z = [0.14, 0.17, 0.20, 0.23]
+
+    // --- Passo 3: Aplicar Softmax ---
+    /**
+     * @brief Aplica a função softmax para obter as probabilidades previstas
+     */
+    std::vector<float> y_pred = softmax(z);
+    // y_pred ≈ [0.239, 0.246, 0.254, 0.261]
+
+    // --- Passo 4: Calcular a Perda (Entropia Cruzada) ---
+    /**
+     * @brief Calcula a função de custo usando entropia cruzada
+     * L = -∑ y_i·log(y_pred_i), onde y é o vetor one-hot da saída esperada
+     */
+    float loss = -std::log(y_pred[target_idx]);
+    // loss ≈ 1.370
+
+    // --- Passo 5: Calcular o Erro na Camada de Saída ---
+    /**
+     * @brief Calcula o erro na camada de saída δ^(2) = y_pred - y
+     * Onde y é o vetor one-hot da saída esperada
+     */
+    std::vector<float> delta_output(vocab_size, 0.0f);
+    for (int i = 0; i < vocab_size; ++i) {
+        delta_output[i] = y_pred[i] - (i == target_idx ? 1.0f : 0.0f);
+    }
+    // delta_output ≈ [0.239, 0.246, -0.746, 0.261]
+
+    // --- Passo 6: Calcular os Gradientes para W^(2) ---
+    /**
+     * @brief Calcula o gradiente da função de custo em relação a W^(2)
+     * ∂L/∂W^(2) = h^T·δ^(2)
+     */
+    std::vector<std::vector<float>> grad_W_output(vector_size, std::vector<float>(vocab_size, 0.0f));
+    for (int i = 0; i < vector_size; ++i) {
+        for (int j = 0; j < vocab_size; ++j) {
+            grad_W_output[i][j] = h[i] * delta_output[j];
+        }
+    }
+    // grad_W_output ≈ [[0.0239, 0.0246, -0.0746, 0.0261], [0.0478, 0.0492, -0.1492, 0.0522]]
+
+    // --- Passo 7: Propagar o Erro para a Camada Oculta ---
+    /**
+     * @brief Calcula o erro na camada oculta δ^(1) = δ^(2)·(W^(2))^T
+     */
+    std::vector<float> delta_hidden(vector_size, 0.0f);
+    for (int i = 0; i < vector_size; ++i) {
+        for (int j = 0; j < vocab_size; ++j) {
+            delta_hidden[i] += delta_output[j] * W_output[i][j];
+        }
+    }
+    // delta_hidden ≈ [-0.0463, -0.0463]
+
+    // --- Passo 8: Calcular os Gradientes para W^(1) ---
+    /**
+     * @brief Calcula o gradiente da função de custo em relação a W^(1)
+     * ∂L/∂W^(1) = x^T·δ^(1)
+     * Como x é um vetor one-hot, apenas a linha input_idx será atualizada
+     */
+    std::vector<std::vector<float>> grad_W_input(vocab_size, std::vector<float>(vector_size, 0.0f));
+    for (int j = 0; j < vector_size; ++j) {
+        grad_W_input[input_idx][j] = delta_hidden[j];
+    }
+    // grad_W_input[0] ≈ [-0.0463, -0.0463], outras linhas são zeros
+
+    // --- Passo 9: Atualizar os Pesos ---
+    /**
+     * @brief Atualiza os pesos usando gradiente descendente
+     * W^(new) = W^(old) - η·∂L/∂W
+     */
+    // Atualizar W^(2)
+    for (int i = 0; i < vector_size; ++i) {
+        for (int j = 0; j < vocab_size; ++j) {
+            W_output[i][j] -= learning_rate * grad_W_output[i][j];
+        }
+    }
+
+    // Atualizar W^(1)
+    for (int i = 0; i < vocab_size; ++i) {
+        for (int j = 0; j < vector_size; ++j) {
+            W_input[i][j] -= learning_rate * grad_W_input[i][j];
+        }
+    }
+
+    // --- Exibir Resultados ---
+    /**
+     * @brief Exibe os resultados dos cálculos e pesos atualizados
+     */
+    std::cout << std::fixed << std::setprecision(4);
+
+    std::cout << "Ativação da Camada Oculta (h): ";
+    for (float val : h) std::cout << val << " ";
+    std::cout << "\n";
+
+    std::cout << "Vetor de Pontuações (z): ";
+    for (float val : z) std::cout << val << " ";
+    std::cout << "\n";
+
+    std::cout << "Probabilidades Previstas (ŷ): ";
+    for (float val : y_pred) std::cout << val << " ";
+    std::cout << "\n";
+
+    std::cout << "Função de Custo (L): " << loss << "\n";
+
+    std::cout << "Erro na Camada de Saída (δ^(2)): ";
+    for (float val : delta_output) std::cout << val << " ";
+    std::cout << "\n";
+
+    std::cout << "Erro na Camada Oculta (δ^(1)): ";
+    for (float val : delta_hidden) std::cout << val << " ";
+    std::cout << "\n";
+
+    std::cout << "W^(1) Atualizado para 'sol' (índice 0): ";
+    for (float val : W_input[0]) std::cout << val << " ";
+    std::cout << "\n";
+
+    std::cout << "W^(2) Atualizado: \n";
+    for (int i = 0; i < vector_size; ++i) {
+        std::cout << "  Linha " << i << ": ";
+        for (float val : W_output[i]) std::cout << val << " ";
+        std::cout << "\n";
+    }
+
+    return 0;
+}
+```
+
 ### Aplicações em **word embeddings**
 
 Agora que entendemos os fundamentos das redes neurais rasas, podemos compreender como os modelos de **word embeddings** utilizam essa arquitetura para aprender representações distribuídas de palavras.
@@ -623,6 +1423,8 @@ A matriz de pesos $W$ entre a camada de entrada e a camada oculta tem dimensões
 ![](/assets/images/word-embedding-projection.webp)
 
 _Figura 6: Ilustração detalhada da camada de projeção em modelos de word embeddings. À esquerda, a representação one-hot da palavra `cachorro` no vocabulário. Ao centro, a matriz de pesos W (dimensões  \vert V \vert  × d) que mapeia as palavras para o espaço vetorial denso. À direita, o vetor de embedding resultante após a operação de consulta (lookup) na linha correspondente da matriz. O espaço vetorial d-dimensional mostra como diferentes palavras são posicionadas de acordo com suas relações semânticas._{: class="legend"}
+
+Do ponto de vista da álgebra linear, esta matriz de pesos $W$ representa uma transformação linear do espaço one-hot de dimensão $ \vert V \vert $ para o espaço de embedding denso de dimensão $d$. O processo de treinamento visa aprender os elementos dessa matriz $W$ de forma que a transformação capture as relações semânticas desejadas
 
 A camada de projeção nos modelos de *word embeddings* funciona como uma tabela de consulta eficiente, onde a matriz de pesos $W$ armazena os vetores de embedding.
 
@@ -741,8 +1543,9 @@ As redes neurais rasas dos modelos tradicionais de **word embeddings**, como Wor
 
 Essa abordagem tem limitações significativas:
 
-1.  **Polissemia**: Falha em capturar os múltiplos significados que uma única palavra pode ter.
-2.  **Dependência de Contexto**: Não consegue ajustar a representação da palavra com base nas palavras vizinhas que modificam seu sentido ou função gramatical.
+1. **Polissemia**: Falha em capturar os múltiplos significados que uma única palavra pode ter. Por exemplo, a palavra "**banco**" teria o mesmo vetor de embedding nas frases "*sentei no **banco** da praça*" (um assento) e "*fui ao **banco** sacar dinheiro*" (uma instituição financeira), embora os significados sejam completamente distintos. O embedding estático não consegue diferenciar esses usos contextuais.
+
+2. **Dependência de Contexto**: Não consegue ajustar a representação da palavra com base nas palavras vizinhas que modificam seu sentido ou função gramatical.
 
 Essas limitações motivaram a pesquisa em direção a representações de palavras **contextuais**, onde o vetor de uma palavra depende da sentença em que ela se encontra. Isso levou a avanços subsequentes que utilizam redes neurais mais profundas e mecanismos mais sofisticados:
 
@@ -802,13 +1605,13 @@ HAYKIN, S. **Neural Networks and Learning Machines**. 3rd ed. Upper Saddle River
 
 MCCULLOCH, W. S.; PITTS, W. **A logical calculus of the ideas immanent in nervous activity**. The bulletin of mathematical biophysics, v. 5, n. 4, p. 115-133, 1943.
 
-MINSKY, M.; PAPERT, S. ****Perceptron**s: An introduction to computational geometry**. Cambridge, MA: MIT Press, 1969.
+MINSKY, M.; PAPERT, S. **Perceptrons: An introduction to computational geometry**. Cambridge, MA: MIT Press, 1969.
 
 NAIR, V.; HINTON, G. E. **Rectified linear units improve restricted boltzmann machines**. In: Proceedings of the 27th international conference on machine learning (ICML-10), p. 807-814, 2010.
 
 NIELSEN, M. **Neural Networks and Deep Learning**. Determination Press, 2015.
 
-ROSENBLATT, F. **The **Perceptron**: a probabilistic model for information storage and organization in the brain**. Psychological review, v. 65, n. 6, p. 386-408, 1958.
+ROSENBLATT, F. **The Perceptron: a probabilistic model for information storage and organization in the brain**. Psychological review, v. 65, n. 6, p. 386-408, 1958.
 
 RUMELHART, D. E.; HINTON, G. E.; WILLIAMS, R. J. **Learning representations by back-propagating errors**. Nature, v. 323, n. 6088, p. 533-536, 1986.
 

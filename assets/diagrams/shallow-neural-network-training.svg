@@ -1,0 +1,804 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 900 650"
+   version="1.1"
+   id="svg56"
+   sodipodi:docname="shallow-neural-network-training.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:export-filename="..\images\shallow-neural-network-training.webp"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview56"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.93011738"
+     inkscape:cx="605.83751"
+     inkscape:cy="426.29028"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg56" />
+  <!-- Definições de estilos -->
+  <defs
+     id="defs7">
+    <marker
+       id="arrowhead"
+       markerWidth="10"
+       markerHeight="7"
+       refX="0"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#333"
+         id="polygon1" />
+    </marker>
+    <linearGradient
+       id="neuronGradient"
+       x1="0%"
+       y1="0%"
+       x2="100%"
+       y2="100%">
+      <stop
+         offset="0%"
+         stop-color="#6ab7ff"
+         id="stop1" />
+      <stop
+         offset="100%"
+         stop-color="#1e88e5"
+         id="stop2" />
+    </linearGradient>
+    <linearGradient
+       id="neuronGradientActive"
+       x1="75.2"
+       y1="225.2"
+       x2="126.8"
+       y2="276.8"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         stop-color="#ffb56a"
+         id="stop3" />
+      <stop
+         offset="100%"
+         stop-color="#e57e1e"
+         id="stop4" />
+    </linearGradient>
+    <linearGradient
+       id="neuronGradientTarget"
+       x1="0%"
+       y1="0%"
+       x2="100%"
+       y2="100%">
+      <stop
+         offset="0%"
+         stop-color="#9cff6a"
+         id="stop5" />
+      <stop
+         offset="100%"
+         stop-color="#4caf50"
+         id="stop6" />
+    </linearGradient>
+    <filter
+       id="dropShadow"
+       x="-0.12"
+       y="-0.12"
+       width="1.29"
+       height="1.29">
+      <feGaussianBlur
+         in="SourceAlpha"
+         stdDeviation="2"
+         id="feGaussianBlur6" />
+      <feOffset
+         dx="2"
+         dy="2"
+         result="offsetblur"
+         id="feOffset6" />
+      <feComponentTransfer
+         id="feComponentTransfer6">
+        <feFuncA
+           type="linear"
+           slope="0.2"
+           id="feFuncA6" />
+      </feComponentTransfer>
+      <feMerge
+         id="feMerge7">
+        <feMergeNode
+           id="feMergeNode6" />
+        <feMergeNode
+           in="SourceGraphic"
+           id="feMergeNode7" />
+      </feMerge>
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#neuronGradient"
+       id="linearGradient56"
+       x1="75.2"
+       y1="275.2"
+       x2="126.8"
+       y2="326.8"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#neuronGradientTarget"
+       id="linearGradient57"
+       x1="75.2"
+       y1="325.2"
+       x2="126.8"
+       y2="376.8"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#neuronGradient"
+       id="linearGradient58"
+       x1="419"
+       y1="249"
+       x2="483.5"
+       y2="313.5"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#neuronGradient"
+       id="linearGradient59"
+       x1="419"
+       y1="339"
+       x2="483.5"
+       y2="403.5"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#neuronGradient"
+       id="linearGradient60"
+       x1="775.2"
+       y1="225.2"
+       x2="826.8"
+       y2="276.8"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#neuronGradient"
+       id="linearGradient61"
+       x1="775.2"
+       y1="275.2"
+       x2="826.8"
+       y2="326.8"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#neuronGradientTarget"
+       id="linearGradient62"
+       x1="775.2"
+       y1="325.2"
+       x2="826.8"
+       y2="376.8"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#neuronGradient"
+       id="linearGradient63"
+       x1="775.2"
+       y1="375.2"
+       x2="826.8"
+       y2="426.8"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#neuronGradient"
+       id="linearGradient64"
+       x1="75.2"
+       y1="375.2"
+       x2="126.8"
+       y2="426.8"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <!-- Título e subtítulos -->
+  <text
+     x="450"
+     y="35"
+     text-anchor="middle"
+     font-family="Arial"
+     font-size="24"
+     font-weight="bold"
+     fill="#333"
+     id="text7">Treinamento de uma Rede Neural Rasa</text>
+  <text
+     x="450.76022"
+     y="55.795322"
+     text-anchor="middle"
+     font-family="Arial"
+     font-size="14px"
+     fill="#666666"
+     id="text8">Exemplo: Prever &quot;dia&quot; a partir de &quot;sol&quot; com vocabulário de 4 palavras</text>
+  <!-- Rótulos das Camadas -->
+  <text
+     x="100.76023"
+     y="74.385963"
+     text-anchor="middle"
+     font-family="Arial"
+     font-size="16px"
+     font-weight="bold"
+     fill="#555555"
+     id="text9">Camada de Entrada</text>
+  <text
+     x="100.76023"
+     y="94.385963"
+     text-anchor="middle"
+     font-family="Arial"
+     font-size="12px"
+     fill="#666666"
+     id="text10">One-hot vectors</text>
+  <text
+     x="450.76022"
+     y="74.385963"
+     text-anchor="middle"
+     font-family="Arial"
+     font-size="16px"
+     font-weight="bold"
+     fill="#555555"
+     id="text11">Camada Oculta</text>
+  <text
+     x="450.76022"
+     y="94.385963"
+     text-anchor="middle"
+     font-family="Arial"
+     font-size="12px"
+     fill="#666666"
+     id="text12">Embeddings (d=2)</text>
+  <text
+     x="800.76025"
+     y="74.385963"
+     text-anchor="middle"
+     font-family="Arial"
+     font-size="16px"
+     font-weight="bold"
+     fill="#555555"
+     id="text13">Camada de Saída</text>
+  <text
+     x="800.76025"
+     y="94.385963"
+     text-anchor="middle"
+     font-family="Arial"
+     font-size="12px"
+     fill="#666666"
+     id="text14">Softmax Probabilidades</text>
+  <!-- Seção 1: Arquitetura da Rede -->
+  <rect
+     x="21.292196"
+     y="103.30975"
+     width="849.81329"
+     height="253.55595"
+     rx="4.9989014"
+     ry="7.043221"
+     fill="#f8f9fa"
+     stroke="#dddddd"
+     stroke-width="1.18673"
+     id="rect14" />
+  <text
+     x="36.19883"
+     y="123.21638"
+     font-family="Arial"
+     font-size="14px"
+     font-weight="bold"
+     fill="#333333"
+     id="text15">1. Arquitetura da Rede</text>
+  <!-- Neurônios da Camada de Entrada -->
+  <g
+     id="g17"
+     transform="translate(-3.8011696,-76.783626)">
+    <circle
+       cx="100"
+       cy="250"
+       r="20"
+       fill="url(#neuronGradientActive)"
+       filter="url(#dropShadow)"
+       id="circle15"
+       style="fill:url(#neuronGradientActive)" />
+    <text
+       x="100"
+       y="255"
+       text-anchor="middle"
+       font-family="Arial"
+       font-size="12px"
+       fill="#ffffff"
+       id="text16">sol</text>
+    <text
+       x="70"
+       y="250"
+       text-anchor="end"
+       font-family="Arial"
+       font-size="11px"
+       fill="#333333"
+       id="text17">[1,0,0,0]</text>
+  </g>
+  <g
+     id="g19"
+     transform="translate(-3.8011696,-76.783626)">
+    <circle
+       cx="100"
+       cy="300"
+       r="20"
+       fill="url(#neuronGradient)"
+       filter="url(#dropShadow)"
+       id="circle17"
+       style="fill:url(#linearGradient56)" />
+    <text
+       x="100"
+       y="305"
+       text-anchor="middle"
+       font-family="Arial"
+       font-size="12px"
+       fill="#ffffff"
+       id="text18">lua</text>
+    <text
+       x="70"
+       y="300"
+       text-anchor="end"
+       font-family="Arial"
+       font-size="11px"
+       fill="#333333"
+       id="text19">[0,1,0,0]</text>
+  </g>
+  <g
+     id="g21"
+     transform="translate(-3.8011696,-76.783626)">
+    <circle
+       cx="100"
+       cy="350"
+       r="20"
+       fill="url(#neuronGradientTarget)"
+       filter="url(#dropShadow)"
+       id="circle19"
+       style="fill:url(#linearGradient57)" />
+    <text
+       x="100"
+       y="355"
+       text-anchor="middle"
+       font-family="Arial"
+       font-size="12px"
+       fill="#ffffff"
+       id="text20">dia</text>
+    <text
+       x="70"
+       y="350"
+       text-anchor="end"
+       font-family="Arial"
+       font-size="11px"
+       fill="#333333"
+       id="text21">[0,0,1,0]</text>
+  </g>
+  <g
+     id="g23"
+     transform="translate(-2.2807018,-77.54386)">
+    <circle
+       cx="100"
+       cy="400"
+       r="20"
+       fill="url(#neuronGradient)"
+       filter="url(#dropShadow)"
+       id="circle21"
+       style="fill:url(#linearGradient64)" />
+    <text
+       x="100"
+       y="405"
+       text-anchor="middle"
+       font-family="Arial"
+       font-size="12px"
+       fill="#ffffff"
+       id="text22">noite</text>
+    <text
+       x="70"
+       y="400"
+       text-anchor="end"
+       font-family="Arial"
+       font-size="11px"
+       fill="#333333"
+       id="text23">[0,0,0,1]</text>
+  </g>
+  <!-- Neurônios da Camada Oculta -->
+  <g
+     id="g24"
+     transform="translate(-3.8011696,-76.783626)">
+    <circle
+       cx="450"
+       cy="280"
+       r="25"
+       fill="url(#neuronGradient)"
+       filter="url(#dropShadow)"
+       id="circle23"
+       style="fill:url(#linearGradient58)" />
+    <text
+       x="450"
+       y="285"
+       text-anchor="middle"
+       font-family="Arial"
+       font-size="12px"
+       fill="#ffffff"
+       id="text24">h₁</text>
+  </g>
+  <g
+     id="g25"
+     transform="translate(-3.8011696,-76.783626)">
+    <circle
+       cx="450"
+       cy="370"
+       r="25"
+       fill="url(#neuronGradient)"
+       filter="url(#dropShadow)"
+       id="circle24"
+       style="fill:url(#linearGradient59)" />
+    <text
+       x="450"
+       y="375"
+       text-anchor="middle"
+       font-family="Arial"
+       font-size="12px"
+       fill="#ffffff"
+       id="text25">h₂</text>
+  </g>
+  <!-- Neurônios da Camada de Saída -->
+  <g
+     id="g27"
+     transform="translate(-4.0629762,-79.824562)">
+    <circle
+       cx="800"
+       cy="250"
+       r="20"
+       fill="url(#neuronGradient)"
+       filter="url(#dropShadow)"
+       id="circle25"
+       style="fill:url(#linearGradient60)" />
+    <text
+       x="800"
+       y="255"
+       text-anchor="middle"
+       font-family="Arial"
+       font-size="12px"
+       fill="#ffffff"
+       id="text26">sol</text>
+    <text
+       x="830"
+       y="250"
+       text-anchor="start"
+       font-family="Arial"
+       font-size="11px"
+       fill="#333333"
+       id="text27">0.239</text>
+  </g>
+  <g
+     id="g29"
+     transform="translate(-4.0629762,-79.824562)">
+    <circle
+       cx="800"
+       cy="300"
+       r="20"
+       fill="url(#neuronGradient)"
+       filter="url(#dropShadow)"
+       id="circle27"
+       style="fill:url(#linearGradient61)" />
+    <text
+       x="800"
+       y="305"
+       text-anchor="middle"
+       font-family="Arial"
+       font-size="12px"
+       fill="#ffffff"
+       id="text28">lua</text>
+    <text
+       x="830"
+       y="300"
+       text-anchor="start"
+       font-family="Arial"
+       font-size="11px"
+       fill="#333333"
+       id="text29">0.246</text>
+  </g>
+  <g
+     id="g31"
+     transform="translate(-4.0629762,-79.824562)">
+    <circle
+       cx="800"
+       cy="350"
+       r="20"
+       fill="url(#neuronGradientTarget)"
+       filter="url(#dropShadow)"
+       id="circle29"
+       style="fill:url(#linearGradient62)" />
+    <text
+       x="800"
+       y="355"
+       text-anchor="middle"
+       font-family="Arial"
+       font-size="12px"
+       fill="#ffffff"
+       id="text30">dia</text>
+    <text
+       x="830"
+       y="350"
+       text-anchor="start"
+       font-family="Arial"
+       font-size="11px"
+       fill="#333333"
+       id="text31">0.254</text>
+  </g>
+  <g
+     id="g33"
+     transform="translate(-4.0629762,-72.222223)">
+    <circle
+       cx="800"
+       cy="400"
+       r="20"
+       fill="url(#neuronGradient)"
+       filter="url(#dropShadow)"
+       id="circle31"
+       style="fill:url(#linearGradient63)" />
+    <text
+       x="800"
+       y="405"
+       text-anchor="middle"
+       font-family="Arial"
+       font-size="12px"
+       fill="#ffffff"
+       id="text32">noite</text>
+    <text
+       x="830"
+       y="400"
+       text-anchor="start"
+       font-family="Arial"
+       font-size="11px"
+       fill="#333333"
+       id="text33">0.261</text>
+  </g>
+  <!-- Conexões da primeira camada para a camada oculta -->
+  <line
+     x1="116.38179"
+     y1="173.03276"
+     x2="406.04678"
+     y2="203.33902"
+     stroke="#aaaaaa"
+     stroke-width="1.959"
+     marker-end="url(#arrowhead)"
+     id="line33" />
+  <line
+     x1="115.92348"
+     y1="173.34367"
+     x2="406.3793"
+     y2="277.9444"
+     stroke="#aaaaaa"
+     stroke-width="1.8222"
+     marker-end="url(#arrowhead)"
+     id="line34" />
+  <!-- Conexões da camada oculta para a saída -->
+  <line
+     x1="471.41089"
+     y1="203.43031"
+     x2="758.59747"
+     y2="173.07346"
+     stroke="#aaaaaa"
+     stroke-width="1.95222"
+     marker-end="url(#arrowhead)"
+     id="line35" />
+  <line
+     x1="471.4306"
+     y1="202.98891"
+     x2="758.5849"
+     y2="223.33902"
+     stroke="#aaaaaa"
+     stroke-width="1.95752"
+     marker-end="url(#arrowhead)"
+     id="line36" />
+  <line
+     x1="471.09137"
+     y1="203.22682"
+     x2="759.35516"
+     y2="267.25409"
+     stroke="#aaaaaa"
+     stroke-width="1.85955"
+     marker-end="url(#arrowhead)"
+     id="line37" />
+  <line
+     x1="471.2294"
+     y1="203.12315"
+     x2="757.91168"
+     y2="317.94116"
+     stroke="#aaaaaa"
+     stroke-width="1.89668"
+     marker-end="url(#arrowhead)"
+     id="line38" />
+  <line
+     x1="471.23065"
+     y1="293.30255"
+     x2="759.93945"
+     y2="177.73232"
+     stroke="#aaaaaa"
+     stroke-width="1.9096"
+     marker-end="url(#arrowhead)"
+     id="line39" />
+  <line
+     x1="470.62735"
+     y1="290.40424"
+     x2="758.22559"
+     y2="227.43161"
+     stroke="#aaaaaa"
+     stroke-width="1.91757"
+     marker-end="url(#arrowhead)"
+     id="line40" />
+  <line
+     x1="471.41736"
+     y1="293.43033"
+     x2="759.60583"
+     y2="273.10098"
+     stroke="#aaaaaa"
+     stroke-width="1.96004"
+     marker-end="url(#arrowhead)"
+     id="line41" />
+  <line
+     x1="471.43204"
+     y1="292.98022"
+     x2="756.81219"
+     y2="323.37411"
+     stroke="#aaaaaa"
+     stroke-width="1.94726"
+     marker-end="url(#arrowhead)"
+     id="line42" />
+  <!-- Valores das camadas -->
+  <text
+     x="271.19882"
+     y="163.21637"
+     text-anchor="middle"
+     font-family="Arial"
+     font-size="12px"
+     fill="#333333"
+     id="text42">W₁ = [0.1, 0.2]</text>
+  <text
+     x="271.19882"
+     y="303.21637"
+     text-anchor="middle"
+     font-family="Arial"
+     font-size="12px"
+     fill="#333333"
+     id="text43">Embedding &quot;sol&quot;</text>
+  <text
+     x="530.9942"
+     y="139.85379"
+     font-family="monospace"
+     font-size="10px"
+     fill="#333333"
+     id="text44">W₂ = [0.2, 0.3, 0.4, 0.5]</text>
+  <text
+     x="559.88306"
+     y="154.85379"
+     font-family="monospace"
+     font-size="10px"
+     fill="#333333"
+     id="text45">[0.6, 0.7, 0.8, 0.9]</text>
+  <!-- Seção 2: Propagação Direta -->
+  <rect
+     x="17.350039"
+     y="366.26816"
+     width="850.09521"
+     height="81.849625"
+     rx="5.0005603"
+     ry="4.0924811"
+     fill="#f0f7ff"
+     stroke="#dddddd"
+     stroke-width="0.904759"
+     id="rect45" />
+  <text
+     x="30.877192"
+     y="381.75439"
+     font-family="Arial"
+     font-size="14px"
+     font-weight="bold"
+     fill="#333333"
+     id="text46">2. Propagação Direta</text>
+  <text
+     x="36.432747"
+     y="399.23392"
+     font-family="Arial"
+     font-size="12px"
+     fill="#333333"
+     id="text47">• Embedding h = x·W¹ = [1,0,0,0]·W¹ = [0.1, 0.2]</text>
+  <text
+     x="36.432747"
+     y="418.23392"
+     font-family="Arial"
+     font-size="12px"
+     fill="#333333"
+     id="text48">• Pontuações z = h·W² = [0.14, 0.17, 0.20, 0.23]</text>
+  <text
+     x="36.432747"
+     y="435.23392"
+     font-family="Arial"
+     font-size="12px"
+     fill="#333333"
+     id="text49">• Softmax ŷ = softmax(z) = [0.239, 0.246, 0.254, 0.261]</text>
+  <!-- Seção 3: Cálculo do Erro -->
+  <rect
+     x="18.918129"
+     y="455.78946"
+     width="850"
+     height="70"
+     rx="5"
+     ry="5"
+     fill="#fffde7"
+     stroke="#dddddd"
+     stroke-width="1"
+     id="rect49" />
+  <text
+     x="33.918129"
+     y="475.78946"
+     font-family="Arial"
+     font-size="14px"
+     font-weight="bold"
+     fill="#333333"
+     id="text50">3. Cálculo do Erro e Retropropagação</text>
+  <text
+     x="37.953217"
+     y="500.02924"
+     font-family="Arial"
+     font-size="12px"
+     fill="#333333"
+     id="text51">• Custo: L = -log(0.254) = 1.370</text>
+  <text
+     x="264.85379"
+     y="500.02924"
+     font-family="Arial"
+     font-size="12px"
+     fill="#333333"
+     id="text52">• Erro da Saída: δ² = ŷ-y = [0.239, 0.246, -0.746, 0.261]</text>
+  <text
+     x="592.80707"
+     y="500.16986"
+     font-family="Arial"
+     font-size="12px"
+     fill="#333333"
+     id="text53">• Erro da Camada Oculta: δ¹ = [-0.0463, -0.0463]</text>
+  <!-- Seção 4: Atualização de Pesos -->
+  <rect
+     x="17.397661"
+     y="532.74854"
+     width="850"
+     height="70"
+     rx="5"
+     ry="5"
+     fill="#e8f5e9"
+     stroke="#dddddd"
+     stroke-width="1"
+     id="rect53" />
+  <text
+     x="32.397659"
+     y="552.74854"
+     font-family="Arial"
+     font-size="14px"
+     font-weight="bold"
+     fill="#333333"
+     id="text54">4. Atualização de Pesos (Taxa de Aprendizado η = 0.1)</text>
+  <text
+     x="52.397659"
+     y="577.74854"
+     font-family="Arial"
+     font-size="12px"
+     fill="#333333"
+     id="text55">• W¹[sol] = [0.1, 0.2] - η·[-0.0463, -0.0463] = [0.1046, 0.2046]</text>
+  <text
+     x="472.39767"
+     y="577.74854"
+     font-family="Arial"
+     font-size="12px"
+     fill="#333333"
+     id="text56">• W² atualizadas: Ver gradiente calculado</text>
+</svg>
