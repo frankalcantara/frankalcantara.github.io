@@ -35,8 +35,8 @@ keywords: |-
     inteligência artificial
     processamento de linguagem natural
 toc: true
-published: false
-lastmod: 2025-04-22T02:09:16.681Z
+published: true
+lastmod: 2025-04-22T19:43:29.654Z
 draft: 2025-04-19T20:15:42.577Z
 ---
 
@@ -46,21 +46,21 @@ draft: 2025-04-19T20:15:42.577Z
 > — Richard Feynman
 {: .epigraph}
 
-Antes de mergulharmos nos algoritmos de representação distribuída de palavras e, subsequentemente, nos **Transformers**, é essencial que a amável leitora seja capaz de compreender as redes neurais artificiais (`RNAs`). *Essa é a base técnica sobre a qual foram construídos não apenas os modelos de **embeddings**, que utilizam redes neurais rasas como sua estrutura fundamental, mas também arquiteturas mais complexas* como os próprios **Transformers**, que adaptam e expandem esses conceitos. Neste artigo, exploraremos os conceitos, a arquitetura, o funcionamento e o treinamento das RNAs, estabelecendo os alicerces necessários para a compreensão dos modelos de **embeddings** e pavimentando, assim espero, o caminho para o entendimento dos **Transformers**.
+Antes de viajarmos pelos algoritmos de representação distribuída de textos e, subsequentemente, pelos **Transformers**, é essencial que a amável leitora seja capaz de compreender como funcionam as redes neurais artificiais (`RNAs`). *Essa será a base técnica sobre a qual construiremos, não apenas os modelos de **embeddings**, que utilizam redes neurais rasas como sua estrutura fundamental, mas também arquiteturas mais complexas* como os próprios **Transformers**, que adaptam e expandem esses conceitos. Este artigo, guiará a jovem leitora exploradora pelos mares de conceitos, arquiteturas, e matemáticas que abrigam o treinamento das **RNAs**. Nesta viagem, estabeleceremos os alicerces necessários para a compreensão dos modelos de **embeddings** e pavimentaremos, assim espero, o caminho do entendimento dos **Transformers**.
 
 ### Inspiração Biológica e Evolução Histórica
 
-As redes neurais artificiais foram inspiradas pelo funcionamento do cérebro humano, especificamente pelos neurônios e suas conexões sinápticas. Os primeiros modelos matemáticos de neurônios artificiais datam de 1943, quando [Warren McCulloch](https://en.wikipedia.org/wiki/Warren_Sturgis_McCulloch) e [Walter Pitts](https://en.wikipedia.org/wiki/Walter_Pitts) propuseram um modelo simplificado que representava o funcionamento básico de um neurônio biológico.
+As redes neurais artificiais foram inspiradas pelo funcionamento do cérebro humano, especificamente pelos neurônios e suas conexões sinápticas. Os primeiros modelos matemáticos de neurônios artificiais datam de 1943, quando [Warren McCulloch](https://en.wikipedia.org/wiki/Warren_Sturgis_McCulloch) e [Walter Pitts](https://en.wikipedia.org/wiki/Walter_Pitts) propuseram um modelo simplificado que representava o funcionamento básico de um neurônio biológico baseado apenas nas suposições da época sobre o funcionamento dos neurônios. Esse modelo inicial, embora rudimentar, lançou as bases para o desenvolvimento de redes neurais artificiais. McCulloch e Pitts propuseram que os neurônios poderiam ser representados como unidades lógicas, onde a ativação de um neurônio dependia da soma ponderada das entradas recebidas.
 
-Em 1958, [Frank Rosenblatt](https://en.wikipedia.org/wiki/Frank_Rosenblatt) desenvolveu o **Perceptron**, um algoritmo para reconhecimento de padrões baseado em uma rede neural de camada única. Apesar das limitações iniciais demonstradas por Marvin Minsky e Seymour Papert em 1969—como a incapacidade de resolver problemas não linearmente separáveis—as décadas seguintes trouxeram avanços significativos.
+Em 1958, [Frank Rosenblatt](https://en.wikipedia.org/wiki/Frank_Rosenblatt) desenvolveu o **Perceptron**, um modelo algorítmico, para o reconhecimento de padrões baseado em uma rede neural de camada única. Apesar das limitações iniciais demonstradas por [Marvin Minsky](https://www.britannica.com/biography/Marvin-Minsky) e [Seymour Papert](https://www.britannica.com/biography/Seymour-Papert) em 1969, como a incapacidade de resolver problemas não linearmente separáveis, as décadas seguintes trouxeram avanços significativos.
 
-A popularização das redes neurais ressurgiu nos anos 1980 com a introdução do algoritmo de retropropagação (backpropagation) por Rumelhart, Hinton e Williams, possibilitando o treinamento eficiente de redes multicamadas. Este algoritmo permanece como a espinha dorsal do treinamento das redes neurais modernas, incluindo as utilizadas em algoritmos de **word embeddings**.
+A popularização das redes neurais ressurgiu nos anos 1980 com a introdução do algoritmo de retropropagação (backpropagation) por [Rumelhart](https://en.wikipedia.org/wiki/David_Rumelhart), [Hinton](https://www.britannica.com/biography/Geoffrey-Hinton) e [Williams](https://en.wikipedia.org/wiki/Ronald_J._Williams), possibilitando o treinamento eficiente de redes multicamadas. Este algoritmo permanece como a quilha que sustenta o navio do treinamento usado nas redes neurais modernas, incluindo as utilizadas em algoritmos de **word embeddings** como o [CBoW e SkipGram](https://frankalcantara.com/transformers-cinco/).
 
 ### O Neurônio Artificial
 
-O elemento básico de uma rede neural é o neurônio artificial, também chamado de unidade ou nó. Inspirado no neurônio biológico, ele recebe múltiplas entradas, processa-as e produz uma saída. A Figura 1 ilustra esta estrutura fundamental.
+O elemento básico de uma rede neural artificial é o neurônio artificial, também chamado de unidade, vértice ou nó. Inspirado no neurônio biológico, ele recebe múltiplas entradas, processa-as e produz uma saída. A Figura 1 ilustra esta estrutura fundamental.
 
-![diagrama de um neurônio artificial](/assets/images/neuronio-artificial.webp)
+![diagrama de um neurônio artificial contendo um círculo com entradas, um símbolo de soma e um f indicando uma função de ativação](/assets/images/neuronio-artificial.webp)
 
 _Figura 1: Representação de um neurônio artificial, mostrando entradas $(x₁, x₂, ..., xₙ)$, pesos sinápticos $(w₁, w₂, ..., wₙ)$, função de soma, bias ($b$) e função de ativação ($f$)._{: class="legend"}
 
@@ -68,17 +68,36 @@ Matematicamente, o neurônio artificial pode ser descrito por:
 
 $$y = f\left(\sum_{i=1}^{n} w_i x_i + b\right)$$
 
-Nesta equação:
+Nesta equação, temos:
 
 * $x_i$ são as entradas do neurônio;
 * $w_i$ são os pesos associados a cada entrada;
 * $b$ é o viés (bias), um termo que permite ajustar o limiar de ativação;
-* $f$ é a função de ativação, que determina se e como o neurônio 'dispara' com base na soma ponderada das entradas, $w_i x_i$, e do viés, $b$. Essa função é essencial para introduzir não-linearidades ao modelo, permitindo que ele aprenda padrões mais complexos.
+* $f$ é a função de ativação, que determina se, e como, o neurônio dispara com base na soma ponderada das entradas, $w_i x_i$, e do viés, $b$. Essa função acrescenta a não-linearidades ao modelo, permitindo que ele aprenda padrões mais complexos.
 * $y$ é a saída do neurônio.
 
-A soma ponderada $\sum_{i=1}^{n} w_i x_i$ pode ser vista de forma mais compacta como o **produto escalar** entre o vetor de pesos $w = [w_1, ..., w_n]$ e o vetor de entradas $x = [x_1, ..., x_n]$, frequentemente denotado como $w \cdot x$ ou $w^T x$. Esta operação mede o quanto a entrada $x$ se alinha com os pesos $w$ aprendidos pelo neurônio. A atenta leitora deve lembrar que estudamos **produto escalar** [neste artigo](https://frankalcantara.com/transformers-um/).
+A soma ponderada $\sum_{i=1}^{n} w_i x_i$ pode ser vista de forma mais compacta como sendo o *produto escalar entre o vetor de pesos $w = [w_1, ..., w_n]$ e o vetor de entradas $x = [x_1, ..., x_n]$, frequentemente denotado como $w \cdot x$ ou $w^T x$*. Esta operação mede o quanto a entrada $x$ se alinha com os pesos $w$ aprendidos pelo neurônio. A atenta leitora deve lembrar que estudamos **produto escalar** [neste artigo](https://frankalcantara.com/transformers-um/).
 
-Vamos ilustrar o cálculo com um exemplo concreto. Suponha um neurônio artificial com **duas entradas**, pesos sinápticos correspondentes, um viés (bias) e a **função de ativação Sigmóide**.
+> A afirmação mais importante do parágrafo anterior "Esta operação mede o quanto a entrada $x$ se alinha com os pesos $w$ aprendidos pelo neurônio" refere-se a uma propriedade fundamental do produto escalar entre dois vetores. Matematicamente, o produto escalar entre os vetores $w$ e $x$ será calculado por:
+>
+> $$w \cdot x = \sum_{i=1}^{n} w_i x_i = |w| |x| \cos(\theta)$$
+>
+> Neste caso, teremos:
+> 
+> * $|w|$ e $|x|$ são as magnitudes (normas) dos vetores;
+> * $\theta$ é o ângulo entre eles;
+>
+> Esta formulação revela que o produto escalar é proporcional ao $\cos(\theta)$, que varia entre:
+>
+> * $\cos(0°) = 1$ quando os vetores estão perfeitamente alinhados;
+> * $\cos(90°) = 0$ quando são perpendiculares;
+> * $\cos(180°) = -1$ quando estão em direções opostas.
+>
+> No contexto de um neurônio artificial, o vetor de pesos $w$ representa uma direção no espaço de características que o neurônio aprendeu a reconhecer. Quando uma entrada $x$ tem alta similaridade direcional com $w$, seu produto escalar será grande e positivo, resultando em uma ativação mais forte. Inversamente, entradas que se alinham pouco ou se opõem à direção de $w$ produzirão valores baixos ou negativos.
+>
+> Este é o princípio que a atenta leitora precisa governar para entender como as redes neurais aprendem a reconhecer padrões nos dados.
+
+Vamos ilustrar o cálculo realizado por um neurônio artificial com um exemplo concreto. Suponha um neurônio artificial com **duas entradas**, pesos sinápticos correspondentes, um viés (bias) e a **função de ativação Sigmóide**. Dados por:
 
 * **Entradas (Inputs)**: $x = [x_1, x_2] = [0.5, 1.0]$
 * **Pesos (Weights)**: $w = [w_1, w_2] = [0.8, -0.2]$
@@ -106,55 +125,102 @@ Agora, substituímos na fórmula:
 
 $$y = \frac{1}{1 + 0.7408} = \frac{1}{1.7408} \approx 0.5744$$
 
-Portanto, para as entradas $[0.5, 1.0]$, este neurônio específico produz uma saída de aproximadamente $0.5744$.
+Portanto, para as entradas $[0.5, 1.0]$, este neurônio específico produz uma saída de aproximadamente $0.5744$ com um arredondamento minimamente aceitável para quem fez na mão. As funções de ativação precisam de um pouco mais de atenção.
 
 #### Funções de Ativação
 
-As funções de ativação são componentes cruciais que determinam se um neurônio "dispara" e qual será sua saída. Elas introduzem **não-linearidade** às redes neurais, o que é crucial. Sem funções de ativação não-lineares entre as camadas, uma rede neural profunda simplesmente colapsaria em uma única transformação linear equivalente, incapaz de modelar as relações complexas frequentemente encontradas em dados do mundo real. A escolha da função de ativação pode impactar significativamente o desempenho e a velocidade de treinamento da rede.
+*As funções de ativação são componentes que determinam se um neurônio dispara e qual será sua saída*. A atenta leitora deve lembrar que as funções de ativação introduzem não-linearidade às redes neurais. Sem funções de ativação não-lineares entre as camadas, uma rede neural profunda, de várias camadas, simplesmente colapsaria em uma única transformação linear equivalente, incapaz de modelar as relações complexas frequentemente encontradas em dados do mundo real. Isso acontece devido às propriedades fundamentais da álgebra linear.
+
+Para entender este colapso, a curiosa leitora deve considerar uma rede neural com três camadas: uma de entrada, uma camada oculta e uma camada de saída sem funções de ativação não-lineares:
+
+1. Na camada oculta: $h = W^{(1)}x + b^{(1)}$
+2. Na camada de saída: $y = W^{(2)}h + b^{(2)}$
+
+Substituindo a primeira equação na segunda:
+
+$$y = W^{(2)}(W^{(1)}x + b^{(1)}) + b^{(2)}$$
+
+$$y = W^{(2)}W^{(1)}x + W^{(2)}b^{(1)} + b^{(2)}$$
+
+Esta expressão pode ser reescrita como:
+
+$$y = W'x + b'$$
+
+Neste caso, temos:
+
+* $W' = W^{(2)}W^{(1)}$ (uma única matriz de transformação);
+* $b' = W^{(2)}b^{(1)} + b^{(2)}$ (um único vetor de viés);
+
+Este fenômeno se estenderia para qualquer número de camadas lineares. Assim, uma rede profunda com $100$ camadas lineares seria matematicamente equivalente a uma rede com apenas uma camada. Isso significa que o poder representacional da rede não aumentaria com a adição de mais camadas.
+
+As funções de ativação não-lineares (como $\text{ReLU}$, $\text{sigmóide}$ ou $\text{tanh}$) quebram esta propriedade de composição linear, permitindo que a rede aprenda mapeamentos mais complexos a cada camada adicional, possibilitando a modelagem de relações não-lineares presentes nos dados reais.
+
+A escolha da função de ativação pode impactar significativamente o desempenho, graças a distribuição da não-linearidade, e a velocidade de treinamento da rede, graças ao custo computacional da função. As funções de ativação mais comuns incluem:
+
+##### Função Degrau (Step Function)
+
+$$\text{step}(x) = \begin{cases}
+0, & \text{se } x < 0 \\
+1, & \text{se } x \geq 0
+\end{cases}$$
+
+A função degrau é a mais simples das funções de ativação, produzindo apenas saídas binárias: $0$ ou $1$. Foi a primeira função de ativação utilizada no modelo original do Perceptron de Rosenblatt em 1958. Matematicamente, ela retorna $0$ para entradas negativas e $1$ para entradas não-negativas, criando uma transição abrupta no limiar zero.
+
+A função degrau, quando aplicada a um valor $z$, produz resultados diretos:
+
+* Se a entrada $z = 1.5$, a saída é $y = \text{step}(1.5) = 1$;
+* Se a entrada $z = 0$, a saída é $y = \text{step}(0) = 1$;
+* Se a entrada $z = -0.8$, a saída é $y = \text{step}(-0.8) = 0$.
+
+Apesar de sua simplicidade conceitual, *a função degrau apresenta uma limitação crítica para o treinamento de redes neurais: sua derivada é zero em todos os pontos exceto em $x = 0$, onde é indefinida. Isso torna impossível o uso do algoritmo de retropropagação, pois não há gradiente para propagar o erro*. Por essa razão, funções diferenciáveis como $\text{sigmóide}$ e $\text{tanh}$ foram desenvolvidas como alternativas que aproximam o comportamento da função degrau, mas permitem o treinamento via gradiente descendente.
 
 ##### Função Sigmóide (ou Logística)
 
 $$\sigma(x) = \frac{1}{1 + e^{-x}}$$
 
-A função sigmóide mapeia qualquer valor de entrada para o intervalo $(0, 1)$, tornando-a ideal para modelar probabilidades. Ela foi amplamente utilizada no passado, mas sofre de problemas como o desvanecimento do gradiente em redes profundas.
+A função sigmóide mapeia qualquer valor de entrada para o intervalo $(0, 1)$, tornando-a ideal para modelar probabilidades. Ela foi amplamente utilizada no passado, mas sofre de problemas como o desvanecimento do gradiente em redes profundas (veremos este problema adiante).
 
-A função Sigmóide, $\sigma(z) = \frac{1}{1 + e^{-z}}$, mapeia qualquer entrada para o intervalo $(0, 1)$.
+A função Sigmóide, dada por
+
+$$\sigma(z) = \frac{1}{1 + e^{-z}}$$
+
+mapeia qualquer entrada para o intervalo, não-linear, $(0, 1)$.
 
 * Se a entrada $z = 2.0$, $y = \sigma(2.0) = \frac{1}{1 + e^{-2.0}} \approx \frac{1}{1 + 0.1353} \approx 0.8808$;
 * Se a entrada $z = 0.0$, $y = \sigma(0.0) = \frac{1}{1 + e^{0}} = \frac{1}{1 + 1} = 0.5$;
 * Se a entrada $z = -3.0$, $y = \sigma(-3.0) = \frac{1}{1 + e^{-(-3.0)}} = \frac{1}{1 + e^{3.0}} \approx \frac{1}{1 + 20.0855} \approx 0.0474$.
 
-Valores de entrada grandes positivos resultam em saídas próximas a 1, e valores grandes negativos resultam em saídas próximas a 0.
+Valores de entrada grandes positivos resultam em saídas próximas a $1$, e valores grandes negativos resultam em saídas próximas a $0$. A função é assintótica, ou seja, nunca atinge exatamente $0$ ou $1$, o que pode ser problemático em algumas situações. Além disso, a função sigmóide tem um gradiente muito pequeno para entradas extremas, o que pode levar ao problema do desvanecimento do gradiente durante o treinamento de redes profundas.
 
 ##### Função Tangente Hiperbólica (tanh)
 
 $$\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$$
 
-Similar à sigmóide, porém mapeia valores para o intervalo $(-1, 1)$, o que pode ajudar na convergência durante o treinamento por ter média zero.
+Similar à sigmóide, porém mapeia valores para o intervalo $(-1, 1)$, o que pode ajudar na convergência durante o treinamento por ter média zero. Contudo, assim como a sigmóide, a $\text{tanh}$ também sofre do problema de desvanecimento do gradiente em suas regiões saturadas, valores de entrada muito positivos ou muito negativos. Nestes dois limites a derivada se aproxima de zero. Isso limita o fluxo de gradientes em redes profundas.
 
 ##### Função ReLU (Rectified Linear Unit)
 
 $$\text{ReLU}(x) = \max(0, x)$$
 
-Amplamente utilizada em redes neurais modernas por sua simplicidade computacional e eficácia no treinamento. A ReLU simplesmente zera valores negativos e mantém os positivos. Embora muito popular, a ReLU pode sofrer do problema do "neurônio morto" (quando a entrada é sempre negativa, o gradiente se torna zero e o neurônio para de aprender). Variantes como **Leaky ReLU** (que permite um pequeno gradiente negativo) ou **Parametric ReLU (PReLU)** tentam mitigar esse problema.
+Amplamente utilizada em redes neurais modernas por sua simplicidade computacional e eficácia no treinamento. A $\text{ReLU}$ simplesmente zera valores negativos e mantém os positivos. Embora muito popular, a $\text{ReLU}$ pode sofrer do problema do "neurônio morto". Este problema ocorre quando a entrada é sempre negativa, o gradiente se torna zero e o neurônio para de aprender. Variantes como a **Leaky ReLU**, que permite um pequeno gradiente negativo ou a **Parametric ReLU (PReLU)** tentam mitigar esse problema.
 
-A função ReLU, $f(x) = \max(0, x)$, é muito simples:
+A função $\text{ReLU}(x) = \max(0, x)$, é muito simples:
 
-* Se a entrada $z = 3.5$, a saída é $y = \max(0, 3.5) = 3.5$.
-* Se a entrada $z = -1.2$, a saída é $y = \max(0, -1.2) = 0$.
+* Se a entrada $z = 3.5$, a saída é $y = \max(0, 3.5) = 3.5$;
+* Se a entrada $z = -1.2$, a saída é $y = \max(0, -1.2) = 0$;
 * Se a entrada $z = 0$, a saída é $y = \max(0, 0) = 0$.
 
-Ela simplesmente "corta" qualquer valor negativo, zerando-o, e mantém os valores positivos.
+A função simplesmente corta qualquer valor negativo, zerando-o, e mantém os valores positivos.
 
 ##### Função Softmax
 
 $$\text{softmax}(x_i) = \frac{e^{x_i}}{\sum_{j=1}^{n} e^{x_j}}$$
 
-Utilizada especialmente na camada de saída para problemas de classificação multiclasse, como prever a próxima palavra em uma sequência.
+Utilizada especialmente na camada de saída para problemas de classificação multiclasse, tais como prever a próxima palavra em uma sequência.
 
 > No contexto de **word embeddings**, a função softmax será importante porque permite calcular probabilidades sobre todo o vocabulário, permitindo que a rede indique a palavra mais provável dada uma entrada. A função softmax *transforma as pontuações das palavras em probabilidades* transformando um vetor de valores reais, scores, em uma distribuição de probabilidades, garantindo que a soma seja $1$.
 
-A função Softmax é geralmente usada na camada de saída para classificação multiclasse. *Ela transforma um vetor de pontuações (logits) em um vetor de probabilidades*. Suponha que a camada anterior produziu as seguintes pontuações para 3 classes: $z = [z_1, z_2, z_3] = [2.0, 1.0, 0.1]$.
+A função Softmax *transforma um vetor de pontuações (logits) em um vetor de probabilidades*. Para entender, suponha que a camada anterior produziu as seguintes pontuações para $3$ classes: $z = [z_1, z_2, z_3] = [2.0, 1.0, 0.1]$.
 
 **Passo 1: Calcular o exponencial de cada pontuação**:
 
@@ -178,7 +244,7 @@ $$P(\text{classe 2}  \vert  z) = \frac{e^{z_2}}{\sum e^{z_j}} \approx \frac{2.71
 
 $$P(\text{classe 3}  \vert  z) = \frac{e^{z_3}}{\sum e^{z_j}} \approx \frac{1.105}{11.212} \approx 0.099$$
 
-O vetor de saída da função Softmax é $\hat{y} = [0.659, 0.242, 0.099]$. Note que a soma das probabilidades é $0.659 + 0.242 + 0.099 = 1.000$. A rede "prevê" a classe 1 com maior probabilidade (65.9%).
+O vetor de saída da função Softmax é $\vet{y} = [0.659, 0.242, 0.099]$. Note que a soma das probabilidades é $0.659 + 0.242 + 0.099 = 1.000$. A rede prevê a classe $1$ com maior probabilidade ($65.9\%$).
 
 ![funções de ativação mais comuns com seus gráficos](/assets/images/funcoes-ativacao.webp)
 
@@ -186,19 +252,114 @@ _Figura 2: Principais funções de ativação utilizadas em redes neurais. No ca
 
 ### Arquitetura de Redes Neurais
 
-As redes neurais podem ter diferentes arquiteturas, definindo como os neurônios estão organizados e conectados. Exploraremos as arquiteturas mais relevantes para entender os modelos de **embeddings**.
+Com neurônios artificiais e funções de ativação definimos uma rede com uma camada. Esta é a arquitetura mais simples. Entretanto, as redes neurais podem ter arquiteturas mais diversificadas e complexas, definindo como os neurônios serão organizados e conectados. A compassiva leitora há de me perdoar mas vamos estudar apenas as arquiteturas mais relevantes para entender os modelos de **embeddings**.
 
 #### Redes Feed-Forward (Alimentação Direta)
 
-Uma rede neural feed-forward é a arquitetura mais simples, onde as informações se movem em uma única direção: da camada de entrada para a camada de saída. Não há ciclos ou loops na rede. A Figura 3 ilustra uma rede feed-forward com uma camada oculta.
+Uma rede neural *feed-forward é a arquitetura mais simples, onde as informações se movem em uma única direção: da camada de entrada para a camada de saída*. Não há ciclos ou laços na rede. A Figura 3 ilustra uma rede *feed-forward* com uma camada oculta.
 
 ![diagrama de uma rede neural feed-forward](/assets/images/rede-neural-feedforward.webp)
 
 _Figura 3: Arquitetura de uma rede neural feed-forward de três camadas, mostrando a camada de entrada, a camada oculta e a camada de saída._{: class="legend"}
 
-##### **Perceptron** de Camada Única
+Matematicamente, o processamento de uma entrada $x$ através de uma rede feed-forward com uma camada oculta pode ser representado como:
+
+$$h_j = f\left(\sum_{i=1}^{n} w_{ji}^{(1)} x_i + b_j^{(1)}\right)$$
+
+$$y_k = g\left(\sum_{j=1}^{m} w_{kj}^{(2)} h_j + b_k^{(2)}\right)$$
+
+Em que, $f$ e $g$ são funções de ativação que introduzem não-linearidades essenciais, $w$ representa os pesos das conexões e $b$ os termos de viés.
+
+Esta estrutura permite à rede aprender hierarquicamente: a camada oculta captura características intermediárias dos dados de entrada, enquanto a camada de saída combina essas características para produzir o resultado final. A ausência de conexões recorrentes simplifica o treinamento, tornando o algoritmo de retropropagação particularmente eficiente.
+
+*Em aplicações como word embeddings, as redes feed-forward rasas, com apenas uma camada oculta, são suficientes para capturar relações semânticas entre palavras*. Porém, para tarefas mais complexas de reconhecimento de padrões, redes mais profundas com múltiplas camadas ocultas podem ser necessárias para modelar abstrações hierárquicas.
+
+Cada transformação linear seguida por uma função de ativação não-linear aumenta o poder representacional da rede, permitindo-lhe aprender fronteiras de decisão progressivamente mais complexas que seriam impossíveis com o **Perceptron de camada única**.
+
+##### Exemplo Numérico: Rede Feed-Forward com Diferentes Funções de Ativação
+
+Considere uma rede neural feed-forward simples com:
+
+* 2 neurônios na camada de entrada ($x = [x_1, x_2] = [0.5, 0.8]$);
+* 3 neurônios na camada oculta (usando ReLU ou Sigmoid);
+* 2 neurônios na camada de saída (usando Softmax).
+
+1. **Pesos e Vieses Definidos**:
+
+   * $W^{(1)} = \begin{pmatrix} 0.1 & 0.2 & -0.1 \\ -0.3 & 0.4 & 0.5 \end{pmatrix}^T$ (pesos entrada-oculta);
+   * $b^{(1)} = [0.1, -0.2, 0.3]$ (viés da camada oculta);
+   * $W^{(2)} = \begin{pmatrix} 0.6 & -0.3 \\ -0.2 & 0.4 \\ 0.5 & 0.1 \end{pmatrix}$ (pesos oculta-saída);
+   * $b^{(2)} = [0.2, 0.1]$ (viés da camada de saída).
+
+2. **Versão 1: $\text{ReLU}$ na Camada Oculta**:
+
+    **Passo 1:** Calcular a entrada para a camada oculta.
+
+    $z^{(1)} = W^{(1)}x + b^{(1)}$
+
+    $z^{(1)}_1 = 0.1 \times 0.5 + (-0.3) \times 0.8 + 0.1 = -0.09$
+    $z^{(1)}_2 = 0.2 \times 0.5 + 0.4 \times 0.8 + (-0.2) = 0.22$
+    $z^{(1)}_3 = (-0.1) \times 0.5 + 0.5 \times 0.8 + 0.3 = 0.65$
+
+    **Passo 2:** Aplicar $\text{ReLU}$ à camada oculta.
+    $h = ReLU(z^{(1)}) = \max(0, z^{(1)})$
+
+    $h_1 = \max(0, -0.09) = 0$
+    $h_2 = \max(0, 0.22) = 0.22$
+    $h_3 = \max(0, 0.65) = 0.65$
+
+    **Passo 3:** Calcular a entrada para a camada de saída.
+    $z^{(2)} = W^{(2)}h + b^{(2)}$
+
+    $z^{(2)}_1 = 0.6 \times 0 + (-0.2) \times 0.22 + 0.5 \times 0.65 + 0.2 = 0.516$
+    $z^{(2)}_2 = (-0.3) \times 0 + 0.4 \times 0.22 + 0.1 \times 0.65 + 0.1 = 0.253$
+
+    **Passo 4:** Aplicar Softmax à camada de saída.
+    $y = \text{softmax}(z^{(2)})$
+
+    $y_1 = \frac{e^{0.516}}{e^{0.516} + e^{0.253}} = \frac{1.675}{1.675 + 1.288} = 0.565$
+    $y_2 = \frac{e^{0.253}}{e^{0.516} + e^{0.253}} = \frac{1.288}{1.675 + 1.288} = 0.435$
+
+    A saída final da rede com ReLU é $y = [0.565, 0.435]$
+
+3. **Sigmoid na Camada Oculta**:
+
+    **Passo 1:** Calcular a entrada para a camada oculta (igual ao anterior).
+    $z^{(1)} = [-0.09, 0.22, 0.65]$
+
+    **Passo 2:** Aplicar Sigmoid à camada oculta.
+    $h = \sigma(z^{(1)}) = \frac{1}{1 + e^{-z^{(1)}}}$
+
+    $h_1 = \frac{1}{1 + e^{0.09}} = \frac{1}{1.094} = 0.478$
+    $h_2 = \frac{1}{1 + e^{-0.22}} = \frac{1}{0.803} = 0.555$
+    $h_3 = \frac{1}{1 + e^{-0.65}} = \frac{1}{0.522} = 0.657$
+
+    **Passo 3:** Calcular a entrada para a camada de saída.
+    $z^{(2)} = W^{(2)}h + b^{(2)}$
+
+    $z^{(2)}_1 = 0.6 \times 0.478 + (-0.2) \times 0.555 + 0.5 \times 0.657 + 0.2 = 0.637$
+    $z^{(2)}_2 = (-0.3) \times 0.478 + 0.4 \times 0.555 + 0.1 \times 0.657 + 0.1 = 0.222$
+
+    **Passo 4:** Aplicar Softmax à camada de saída.
+    $y = \text{softmax}(z^{(2)})$
+
+    $y_1 = \frac{e^{0.637}}{e^{0.637} + e^{0.222}} = \frac{1.891}{1.891 + 1.249} = 0.602$
+    $y_2 = \frac{e^{0.222}}{e^{0.637} + e^{0.222}} = \frac{1.249}{1.891 + 1.249} = 0.398$
+
+    A saída final da rede com Sigmoid é $y = [0.602, 0.398]$
+
+4. **Comparação**:
+
+* **ReLU**: Produziu $y = [0.565, 0.435]$;
+* **Sigmoid**: Produziu $y = [0.602, 0.398]$.
+
+A diferença nos resultados ocorre porque a $\text{ReLU}$ desligou completamente o primeiro neurônio da camada oculta ($h_1 = 0$), enquanto a Sigmoid manteve esse neurônio parcialmente ativo ($h_1 = 0.478$), alterando a contribuição relativa de cada neurônio para a saída final. A escolha entre elas depende do problema específico, da arquitetura da rede e de outros fatores como por exemplo: o tipo dados sendo modelados; a profundidade da rede; Requisitos computacionais e o comportamento desejado para valores negativos.
+
+##### Perceptron de Camada Única
 
 O **Perceptron** de Rosenblatt é o exemplo mais simples de uma rede feed-forward, consistindo apenas de uma camada de neurônios de entrada diretamente conectada à camada de saída, geralmente com uma função de ativação degrau ou sigmóide. Esta estrutura é capaz de aprender e resolver apenas problemas que são **linearmente separáveis**, ou seja, problemas onde as classes podem ser separadas por um hiperplano no espaço de entrada.
+
+> Um problema é considerado **não linearmente separável** quando não é possível separar suas classes de dados usando uma única linha reta (ou hiperplano em dimensões maiores).
 
 Por exemplo, o **Perceptron** pode aprender facilmente funções lógicas como **AND** e **OR**. No entanto, ele falha em problemas não linearmente separáveis, sendo o exemplo clássico desta falha, a função lógica **XOR (OU exclusivo)**. Essa limitação teve impacto significativo na história das redes neurais. A incapacidade de aprender o comportamento de uma **XOR** demonstrou que o *Perceptron de camada única não era suficiente para resolver muitos problemas práticos do mundo real. Isso motivou o desenvolvimento de redes multicamadas*. Redes neurais artificiais que podem aprender fronteiras de decisão mais complexas e não-lineares, como veremos adiante. Essa incapacidade do **Perceptron** foi uma das críticas que levaram ao chamado inverno da IA nos anos 70. Essa limitação fundamental motivou o desenvolvimento de redes com múltiplas camadas.
 
@@ -222,35 +383,371 @@ Se plotarmos esses pontos em um gráfico $2D$, com $x_1$ no eixo horizontal e $x
 
 _Figura 4: Representação visual do problema XOR e sua fronteira de decisão. Os pontos vermelhos representam saída $0$ $[(0,0) e (1,1)]$ e os pontos azuis representam saída $1$ $[(0,1) e (1,0)]$. A linha vermelha tracejada mostra a impossibilidade de separar estes pontos com uma única fronteira linear, enquanto a curva verde demonstra uma possível fronteira de decisão não-linear que uma rede neural com pelo menos uma camada oculta pode aprender._{: class="legend"}
 
-O **Perceptron** de Camada Única funciona traçando uma **única linha reta** (ou um hiperplano em dimensões maiores) para separar as classes. Tente visualizar: não existe *nenhuma* linha reta única que consiga separar os pontos $(0,1)$ e $(1,0)$ de um lado, e os pontos $(0,0)$ e $(1,1)$ do outro. Você sempre acabará com um ponto do lado errado. É por isso que um **Perceptron** simples falha em aprender a função XOR. A solução requer uma rede com pelo menos uma camada oculta para criar uma fronteira de decisão não-linear.
+O**Perceptron de Camada Única** funciona traçando uma **única linha reta**. ou um hiperplano em dimensões maiores, para separar as classes. Na Figura 4 não existe nenhuma linha reta única que consiga separar os pontos $(0,1)$ e $(1,0)$ de um lado, e os pontos $(0,0)$ e $(1,1)$ do outro. Você sempre acabará com um ponto do lado errado. É por isso que um **Perceptron** simples falha em aprender a função **XOR**. A solução requer uma rede com pelo menos uma camada oculta para criar uma fronteira de decisão não-linear.
 
-##### **Perceptron** de Múltiplas Camadas (MLP)
+##### Perceptron de Múltiplas Camadas (MLP)
 
-A adição de camadas intermediárias, conhecidas como camadas ocultas, cria o **Perceptron** de Múltiplas Camadas (MLP). Estas camadas adicionais permitem que a rede aprenda representações hierárquicas e resolva problemas não lineares.
+A adição de camadas intermediárias, conhecidas como camadas ocultas, cria o **Perceptron de Múltiplas Camadas** (MLP). As camadas adicionais permitem que a rede aprenda representações hierárquicas e resolva problemas não lineares.
 
-A estrutura básica de um MLP inclui:
+A estrutura básica de um **Perceptron de Múltiplas Camadas** inclui:
 
-1. **Camada de entrada**: Recebe os dados brutos. Cada nó representa uma característica de entrada.
-2. **Camadas ocultas**: Realizam transformações nos dados. O número e tamanho destas camadas são hiperparâmetros cruciais.
-3. **Camada de saída**: Produz o resultado final da rede. Sua estrutura depende do tipo de problema (regressão, classificação binária ou multiclasse).
+1. **Camada de entrada**: recebe os dados brutos. Cada nó representa uma característica de entrada;
+2. **Camadas ocultas**: realizam transformações nos dados. O número e tamanho destas camadas são parte do conjunto de hiperparâmetros;
+3. **Camada de saída**: produz o resultado final da rede. Sua estrutura depende do tipo de problema, regressão, classificação binária ou multiclasse.
 
-É importante notar que cada camada que realiza uma multiplicação por uma matriz de pesos (como $W_{(1)}$ ou $W_{(2)}$) seguida pela adição de um viés ($b$) está, na verdade, aplicando uma transformação afim, uma transformação linear seguida por uma translação. A função de ativação não-linear que segue é fundamental. Sem a função de ativação, múltiplas camadas afins colapsariam em uma única transformação afim equivalente, limitando a capacidade de aprendizado da rede
+É importante que a esclarecida leitora note que *cada camada que realiza uma multiplicação por uma matriz de pesos (como $W_{(1)}$ ou $W_{(2)}$) seguida pela adição de um viés ($b$) está, na verdade, aplicando uma transformação afim, uma transformação linear seguida por uma translação* que estudamos [aqui](https://frankalcantara.com/transformers-um/). A função de ativação não-linear que segue é fundamental. Sem a função de ativação, múltiplas camadas afins colapsariam em uma única transformação afim equivalente, limitando a capacidade de aprendizado da rede
+
+##### Exemplo Numérico de uma Rede Neural com Transformações Afins
+
+Este exemplo demonstra uma rede neural *feed-forward* com duas camadas ocultas e uma camada de saída, utilizando transformações afins ($W x + b$) seguidas de funções de ativação. A arquitetura é a seguinte:
+
+- **Camada de Entrada**: $3$ neurônios,  representando, por exemplo, um vetor de entrada simplificado para uma palavra em um espaço de *embedding*.
+- **Primeira Camada Oculta**: $4$ neurônios com função de ativação **ReLU**.
+- **Segunda Camada Oculta**: $3$ neurônios com função de ativação **Tanh**.
+- **Camada de Saída**: $2$ neurônios com função de ativação **Softmax**, adequada para classificação ou previsão de probabilidades.
+
+Abaixo, vamos calcular a propagação direta (*forward pass*) com valores específicos para ilustrar o funcionamento. Considerando os seguintes valores iniciais:
+
+- **Entrada**:  
+
+  $$ x = \begin{bmatrix} 1.0 \\ 0.5 \\ -0.2 \end{bmatrix} $$
+
+- **Pesos e Vieses**:
+
+  - **Primeira Camada Oculta**:  
+
+    $$ W^{(1)} = \begin{bmatrix} 0.2 & 0.3 & 0.1 \\ 0.4 & -0.1 & 0.5 \\ -0.2 & 0.6 & 0.0 \\ 0.1 & 0.0 & -0.3 \end{bmatrix}, \quad b^{(1)} = \begin{bmatrix} 0.1 \\ -0.2 \\ 0.3 \\ 0.0 \end{bmatrix} $$
+  
+  - **Segunda Camada Oculta**:  
+  
+    $$ W^{(2)} = \begin{bmatrix} 0.5 & -0.2 & 0.1 & 0.3 \\ 0.0 & 0.4 & -0.3 & 0.1 \\ -0.1 & 0.2 & 0.6 & -0.4 \end{bmatrix}, \quad b^{(2)} = \begin{bmatrix} 0.2 \\ -0.1 \\ 0.0 \end{bmatrix} $$
+  
+  - **Camada de Saída**:  
+  
+    $$ W^{(3)} = \begin{bmatrix} 0.3 & -0.5 & 0.2 \\ 0.1 & 0.4 & -0.6 \end{bmatrix}, \quad b^{(3)} = \begin{bmatrix} 0.1 \\ -0.2 \end{bmatrix} $$
+
+Calculando passo a passo teremos:
+
+1. **Primeira Camada Oculta (ReLU)**:
+
+    Calculamos a transformação afim:  
+
+    $$ z^{(1)} = W^{(1)} x + b^{(1)} = \begin{bmatrix} 0.2 & 0.3 & 0.1 \\ 0.4 & -0.1 & 0.5 \\ -0.2 & 0.6 & 0.0 \\ 0.1 & 0.0 & -0.3 \end{bmatrix} \begin{bmatrix} 1.0 \\ 0.5 \\ -0.2 \end{bmatrix} + \begin{bmatrix} 0.1 \\ -0.2 \\ 0.3 \\ 0.0 \end{bmatrix} $$
+
+    Calculando cada componente:  
+
+    - $$ z^{(1)}_1 = (0.2 \cdot 1.0) + (0.3 \cdot 0.5) + (0.1 \cdot -0.2) + 0.1 = 0.2 + 0.15 - 0.02 + 0.1 = 0.43 $$  
+
+    - $$ z^{(1)}_2 = (0.4 \cdot 1.0) + (-0.1 \cdot 0.5) + (0.5 \cdot -0.2) - 0.2 = 0.4 - 0.05 - 0.1 - 0.2 = 0.05 $$  
+
+    - $$ z^{(1)}_3 = (-0.2 \cdot 1.0) + (0.6 \cdot 0.5) + (0.0 \cdot -0.2) + 0.3 = -0.2 + 0.3 + 0.0 + 0.3 = 0.4 $$  
+
+    - $$ z^{(1)}_4 = (0.1 \cdot 1.0) + (0.0 \cdot 0.5) + (-0.3 \cdot -0.2) + 0.0 = 0.1 + 0.0 + 0.06 = 0.16 $$
+
+    Portanto:  
+
+    $$ z^{(1)} = \begin{bmatrix} 0.43 \\ 0.05 \\ 0.4 \\ 0.16 \end{bmatrix} $$
+
+    Aplicamos a função ReLU:  
+
+    $$ h^{(1)} = \text{ReLU}(z^{(1)}) = \begin{bmatrix} \max(0, 0.43) \\ \max(0, 0.05) \\ \max(0, 0.4) \\ \max(0, 0.16) \end{bmatrix} = \begin{bmatrix} 0.43 \\ 0.05 \\ 0.4 \\ 0.16 \end{bmatrix} $$
+
+2. **Segunda Camada Oculta ($\text{Tanh}$)**
+
+    Calculamos a transformação afim:  
+
+    $$ z^{(2)} = W^{(2)} h^{(1)} + b^{(2)} = \begin{bmatrix} 0.5 & -0.2 & 0.1 & 0.3 \\ 0.0 & 0.4 & -0.3 & 0.1 \\ -0.1 & 0.2 & 0.6 & -0.4 \end{bmatrix} \begin{bmatrix} 0.43 \\ 0.05 \\ 0.4 \\ 0.16 \end{bmatrix} + \begin{bmatrix} 0.2 \\ -0.1 \\ 0.0 \end{bmatrix} $$
+
+    Calculando cada componente:  
+
+    - $$ z^{(2)}_1 = (0.5 \cdot 0.43) + (-0.2 \cdot 0.05) + (0.1 \cdot 0.4) + (0.3 \cdot 0.16) + 0.2 = 0.215 - 0.01 + 0.04 + 0.048 + 0.2 = 0.493 $$  
+
+    - $$ z^{(2)}_2 = (0.0 \cdot 0.43) + (0.4 \cdot 0.05) + (-0.3 \cdot 0.4) + (0.1 \cdot 0.16) - 0.1 = 0.0 + 0.02 - 0.12 + 0.016 - 0.1 = -0.184 $$  
+
+    - $$ z^{(2)}_3 = (-0.1 \cdot 0.43) + (0.2 \cdot 0.05) + (0.6 \cdot 0.4) + (-0.4 \cdot 0.16) + 0.0 = -0.043 + 0.01 + 0.24 - 0.064 = 0.143 $$
+
+    Portanto:  
+
+    $$ z^{(2)} = \begin{bmatrix} 0.493 \\ -0.184 \\ 0.143 \end{bmatrix} $$
+
+    Aplicamos a função Tanh:  
+
+    $$ h^{(2)} = \tanh(z^{(2)}) = \begin{bmatrix} \tanh(0.493) \\ \tanh(-0.184) \\ \tanh(0.143) \end{bmatrix} \approx \begin{bmatrix} 0.452 \\ -0.180 \\ 0.141 \end{bmatrix} $$  
+    (valores aproximados usando uma calculadora).
+
+3. **Camada de Saída (Softmax)**:
+
+    Calculamos a transformação afim: 
+
+    $$ z^{(3)} = W^{(3)} h^{(2)} + b^{(3)} = \begin{bmatrix} 0.3 & -0.5 & 0.2 \\ 0.1 & 0.4 & -0.6 \end{bmatrix} \begin{bmatrix} 0.452 \\ -0.180 \\ 0.141 \end{bmatrix} + \begin{bmatrix} 0.1 \\ -0.2 \end{bmatrix} $$
+
+    Calculando cada componente:  
+
+    - $$ z^{(3)}_1 = (0.3 \cdot 0.452) + (-0.5 \cdot -0.180) + (0.2 \cdot 0.141) + 0.1 = 0.1356 + 0.09 + 0.0282 + 0.1 = 0.3538 $$  
+
+    - $$ z^{(3)}_2 = (0.1 \cdot 0.452) + (0.4 \cdot -0.180) + (-0.6 \cdot 0.141) - 0.2 = 0.0452 - 0.072 - 0.0846 - 0.2 = -0.3114 $$
+
+    Portanto:  
+
+    $$ z^{(3)} = \begin{bmatrix} 0.3538 \\ -0.3114 \end{bmatrix} $$
+
+    Aplicamos a função Softmax:  
+
+    $$ y = \text{Softmax}(z^{(3)}) = \begin{bmatrix} \frac{e^{0.3538}}{e^{0.3538} + e^{-0.3114}} \\ \frac{e^{-0.3114}}{e^{0.3538} + e^{-0.3114}} \end{bmatrix} $$
+
+    Calculando os exponenciais:  
+
+    - $$ e^{0.3538} \approx 1.424 $$  
+
+    - $$ e^{-0.3114} \approx 0.732 $$
+
+    Assim:  
+
+    $$ y \approx \begin{bmatrix} \frac{1.424}{1.424 + 0.732} \\ \frac{0.732}{1.424 + 0.732} \end{bmatrix} = \begin{bmatrix} \frac{1.424}{2.156} \\ \frac{0.732}{2.156} \end{bmatrix} \approx \begin{bmatrix} 0.660 \\ 0.340 \end{bmatrix} $$
+
+4. Resultado:
+
+A saída da rede neural é:  
+
+$$ y = \begin{bmatrix} 0.660 \\ 0.340 \end{bmatrix} $$
+
+Isso representa as probabilidades para duas classes, demonstrando como as transformações afins e as funções de ativação processam a entrada através da rede.
+
+##### Implementação em C++ 20 de um Perceptron de Múltiplas Camadas
+
+```cpp
+#include <iostream>
+#include <Eigen/Dense>
+#include <stdexcept>
+#include <format>
+#include <concepts>
+#include <ranges>
+#include <span>
+
+using Eigen::MatrixXd;
+using Eigen::VectorXd;
+
+/**
+ * @brief Conceito para tipos que podem ser usados em operações vetoriais
+ */
+template <typename T>
+concept VectorLike = requires(T a, T b) {
+    { a + b } -> std::convertible_to<T>;
+    { a - b } -> std::convertible_to<T>;
+    { a * std::declval<double>() } -> std::convertible_to<T>;
+};
+
+/**
+ * @brief Aplica a função de ativação ReLU elemento a elemento
+ * @tparam Vector Tipo do vetor de entrada (deve satisfazer o conceito VectorLike)
+ * @param x Vetor de entrada
+ * @return Vetor com ReLU aplicado
+ */
+template <VectorLike Vector>
+Vector relu(const Vector& x) {
+    return x.array().max(0);
+}
+
+/**
+ * @brief Aplica a função de ativação Tanh elemento a elemento
+ * @tparam Vector Tipo do vetor de entrada (deve satisfazer o conceito VectorLike)
+ * @param x Vetor de entrada
+ * @return Vetor com Tanh aplicado
+ */
+template <VectorLike Vector>
+Vector tanh(const Vector& x) {
+    return x.array().tanh();
+}
+
+/**
+ * @brief Aplica a função Softmax a um vetor
+ * @tparam Vector Tipo do vetor de entrada (deve satisfazer o conceito VectorLike)
+ * @param x Vetor de pontuações
+ * @return Vetor de probabilidades
+ */
+template <VectorLike Vector>
+Vector softmax(const Vector& x) {
+    Vector exp_x = (x.array() - x.maxCoeff()).exp(); // Estabilidade numérica
+    return exp_x / exp_x.sum();
+}
+
+/**
+ * @brief Verifica as dimensões das matrizes e vetores para compatibilidade
+ * @throws std::invalid_argument Se as dimensões forem incompatíveis
+ */
+void verificar_dimensoes(const VectorXd& x, 
+                         const MatrixXd& W1, const VectorXd& b1,
+                         const MatrixXd& W2, const VectorXd& b2,
+                         const MatrixXd& W3, const VectorXd& b3) {
+    if (W1.cols() != x.size()) {
+        throw std::invalid_argument(
+            std::format("Incompatibilidade de dimensões: W1({},{}) e x({})", 
+                       W1.rows(), W1.cols(), x.size()));
+    }
+    if (W1.rows() != b1.size()) {
+        throw std::invalid_argument(
+            std::format("Incompatibilidade de dimensões: W1({},{}) e b1({})", 
+                       W1.rows(), W1.cols(), b1.size()));
+    }
+    if (W2.cols() != W1.rows()) {
+        throw std::invalid_argument(
+            std::format("Incompatibilidade de dimensões: W2({},{}) e W1({},{})", 
+                       W2.rows(), W2.cols(), W1.rows(), W1.cols()));
+    }
+    if (W2.rows() != b2.size()) {
+        throw std::invalid_argument(
+            std::format("Incompatibilidade de dimensões: W2({},{}) e b2({})", 
+                       W2.rows(), W2.cols(), b2.size()));
+    }
+    if (W3.cols() != W2.rows()) {
+        throw std::invalid_argument(
+            std::format("Incompatibilidade de dimensões: W3({},{}) e W2({},{})", 
+                       W3.rows(), W3.cols(), W2.rows(), W2.cols()));
+    }
+    if (W3.rows() != b3.size()) {
+        throw std::invalid_argument(
+            std::format("Incompatibilidade de dimensões: W3({},{}) e b3({})", 
+                       W3.rows(), W3.cols(), b3.size()));
+    }
+}
+
+/**
+ * @brief Propaga a entrada através da rede neural
+ * @param x Vetor de entrada
+ * @param W1, b1 Pesos e viés da 1ª camada
+ * @param W2, b2 Pesos e viés da 2ª camada
+ * @param W3, b3 Pesos e viés da camada de saída
+ * @return Vetor de saída (probabilidades)
+ * @throws std::invalid_argument Se as dimensões forem incompatíveis
+ */
+VectorXd propagacao_direta(const VectorXd& x, 
+                          const MatrixXd& W1, const VectorXd& b1,
+                          const MatrixXd& W2, const VectorXd& b2,
+                          const MatrixXd& W3, const VectorXd& b3) {
+    // Verificar dimensões das matrizes e vetores
+    verificar_dimensoes(x, W1, b1, W2, b2, W3, b3);
+
+    // Primeira camada oculta: ReLU(W1 * x + b1)
+    VectorXd h1 = relu(W1 * x + b1);
+
+    // Segunda camada oculta: Tanh(W2 * h1 + b2)
+    VectorXd h2 = tanh(W2 * h1 + b2);
+
+    // Camada de saída: Softmax(W3 * h2 + b3)
+    return softmax(W3 * h2 + b3);
+}
+
+/**
+ * @brief Estrutura para armazenar os parâmetros da rede neural
+ */
+struct RedeNeuralParams {
+    VectorXd x;       // Entrada
+    MatrixXd W1;      // Pesos da 1ª camada
+    VectorXd b1;      // Viés da 1ª camada
+    MatrixXd W2;      // Pesos da 2ª camada
+    VectorXd b2;      // Viés da 2ª camada
+    MatrixXd W3;      // Pesos da camada de saída
+    VectorXd b3;      // Viés da camada de saída
+};
+
+/**
+ * @brief Inicializa os parâmetros da rede com os valores do exemplo numérico
+ * @return Estrutura contendo todos os parâmetros inicializados
+ */
+RedeNeuralParams inicializar_parametros() {
+    RedeNeuralParams params;
+
+    params.x.resize(3);
+    params.x << 1.0, 0.5, -0.2;
+
+    params.W1.resize(4, 3);
+    params.W1 << 0.2, 0.3, 0.1,
+                 0.4, -0.1, 0.5,
+                 -0.2, 0.6, 0.0,
+                 0.1, 0.0, -0.3;
+    params.b1.resize(4);
+    params.b1 << 0.1, -0.2, 0.3, 0.0;
+
+    params.W2.resize(3, 4);
+    params.W2 << 0.5, -0.2, 0.1, 0.3,
+                 0.0, 0.4, -0.3, 0.1,
+                 -0.1, 0.2, 0.6, -0.4;
+    params.b2.resize(3);
+    params.b2 << 0.2, -0.1, 0.0;
+
+    params.W3.resize(2, 3);
+    params.W3 << 0.3, -0.5, 0.2,
+                 0.1, 0.4, -0.6;
+    params.b3.resize(2);
+    params.b3 << 0.1, -0.2;
+
+    return params;
+}
+
+/**
+ * @brief Imprime um vetor formatado
+ * @param label Rótulo para o vetor
+ * @param vetor Vetor a ser impresso
+ */
+void imprimir_vetor(std::string_view label, const VectorXd& vetor) {
+    std::cout << std::format("{} =\n", label);
+    for (int i = 0; i < vetor.size(); ++i) {
+        std::cout << std::format("{:.4f}\n", vetor[i]);
+    }
+    std::cout << '\n';
+}
+
+/**
+ * @brief Função principal
+ */
+int main() {
+    try {
+        std::cout << "Rede Neural com Transformações Afins\n";
+        std::cout << "------------------------------------\n\n";
+
+        // Inicialização dos parâmetros
+        auto params = inicializar_parametros();
+
+        // Exibir entrada
+        imprimir_vetor("Entrada x", params.x);
+
+        // Propagação direta
+        VectorXd saida = propagacao_direta(
+            params.x, 
+            params.W1, params.b1, 
+            params.W2, params.b2, 
+            params.W3, params.b3
+        );
+
+        // Exibir saída
+        imprimir_vetor("Saída da Rede (Softmax)", saida);
+
+    } catch (const std::exception& e) {
+        std::cerr << std::format("Erro: {}\n", e.what());
+        return 1;
+    }
+
+    return 0;
+}
+```
 
 #### Redes Neurais Rasas vs. Profundas
 
-No contexto de **word embeddings**, utilizamos redes neurais **rasas** – ou seja, com poucas camadas ocultas, geralmente apenas uma. Estas redes são suficientes para aprender representações distribuídas de palavras.
+No contexto de **word embeddings**, utilizamos redes neurais **rasas**.Ou seja, *com poucas camadas ocultas, geralmente apenas uma*. Estas redes são suficientes para aprender representações distribuídas de palavras. Estas são redes neuras **Perceptron de Múltiplas Camadas** simplificadas que utilizam apenas uma camada oculta. Elas são eficazes para tarefas simples de aprendizado de máquina, como classificação de texto ou análise de sentimentos.
 
-Em contraste, as redes **profundas** contêm múltiplas camadas ocultas (às vezes dezenas ou centenas). Elas podem aprender representações mais complexas e abstratas, sendo essenciais para tarefas como reconhecimento de imagens ou processamento de linguagem natural avançado, como nos **Transformers**.
+Em contraste, as redes **profundas** contêm múltiplas camadas ocultas, às vezes dezenas ou centenas. Estas redes profundas, em inglês *deep networks*, podem aprender representações mais complexas e abstratas, sendo essenciais para tarefas como reconhecimento de imagens ou alguns algoritmos específicos no domínio dos **Transformers**.
 
-##### Arquitetura Rasa dos Modelos de Embeddings
+#### Arquitetura Rasa dos Modelos de Embeddings
 
 A arquitetura dos modelos de **word embeddings** é notavelmente simples:
 
-* **Uma camada de entrada**: Representa a(s) palavra(s) utilizando codificação one-hot;
-* **Uma camada oculta linear**: Sem função de ativação não-linear;
-* **Uma camada de saída**: Com ativação softmax para calcular a probabilidade de cada palavra do vocabulário.
+* **Uma camada de entrada**: representa a(s) palavra(s) utilizando codificação **One-Hot**;
+* **Uma camada oculta linear**: sem função de ativação não-linear;
+* **Uma camada de saída**: com ativação softmax para calcular a probabilidade de cada palavra do vocabulário.
 
-Esta simplicidade é proposital e suficiente para capturar relações semânticas entre palavras.
+A simplicidade arquitetural dos modelos de **word embeddings** é intencionalmente proposital por quatro razões fundamentais: eficiência computacional. Modelos menos complexos exigem menos recursos e treinam mais rapidamente com grandes corpora textuais; alinhamento com a semântica distribucional, teoria linguística que propõe que $p(contexto \vert palavra)$ revela significados semânticos através de padrões estatísticos de co-ocorrência; preservação da linearidade conceitual, já que a ausência de funções não-lineares na camada oculta mantém propriedades algébricas que permitem operações vetoriais como $\vec{v}_{rei} - \vec{v}_{homem} + \vec{v}_{mulher} \approx \vec{v}_{rainha}$, criando um espaço vetorial onde relações semânticas são representadas por transformações lineares $T: \mathbb{R}^d \rightarrow \mathbb{R}^d$; e validação empírica, pois experimentos demonstraram que essa estrutura minimalista $f(x) = W_2 \cdot (W_1 \cdot x)$ produz representações surpreendentemente eficazes sem necessidade de arquiteturas mais elaboradas. Esta é a arquitetura que veremos nos modelos de **word embeddings** e no artigo publicado [aqui](https://frankalcantara.com/transformers-cinco/).
+
+###############################REVISADO ATÉ AQUI################################
 
 ### Representação e Propagação de Dados
 
@@ -367,9 +864,9 @@ Um desafio significativo no treinamento de redes neurais, especialmente as mais 
 * **Vanishing Gradients (Desvanecimento):** Durante a retropropagação, os gradientes são multiplicados sucessivamente pela regra da cadeia. Se as derivadas forem consistentemente pequenas (menores que 1), como acontece nas regiões de saturação das funções Sigmóide e Tanh (onde a curva é quase plana), o gradiente pode diminuir exponencialmente à medida que se propaga para as camadas iniciais da rede. Isso faz com que os pesos das primeiras camadas recebam atualizações minúsculas ou nulas, impedindo que a rede aprenda dependências de longo alcance ou ajuste características fundamentais nos dados.
 * **Exploding Gradients (Explosão):** O oposto pode ocorrer se as derivadas forem consistentemente grandes (maiores que 1). O gradiente pode crescer exponencialmente, resultando em atualizações de peso enormes que desestabilizam o treinamento, levando a valores numéricos muito grandes (NaN - Not a Number) e divergência do modelo.
 
-Embora este artigo foque em redes rasas para embeddings (onde o problema é menos severo), entender isso é crucial:
+Embora este artigo foque em redes rasas para embeddings, nas quais estes problemas são menos severos, a esforçada leitora precisa entender o impacto desses fenômenos no treinamento de redes neurais mais profundas. Vamos discutir algumas soluções comuns para esses problemas:
 
-1. Motiva a escolha de funções de ativação como a **ReLU**, que não satura para entradas positivas (sua derivada é 1), ajudando a mitigar o desvanecimento (embora possa levar a neurônios mortos).
+1. Motiva a escolha de funções de ativação como a **ReLU**, que não satura para entradas positivas, sua derivada é $1$, ajudando a mitigar o desvanecimento, embora possa levar a neurônios mortos.
 
 2. Explica a necessidade de técnicas como **inicialização cuidadosa de pesos** (Xavier/He, já mencionados) que visam manter a magnitude dos gradientes estável.
 
@@ -381,27 +878,27 @@ Embora este artigo foque em redes rasas para embeddings (onde o problema é meno
 
 A função de custo quantifica o erro das previsões da rede. Para problemas de classificação multiclasse, como a previsão de palavras, a função de custo típica é a entropia cruzada:
 
-$$L = -\sum_{i=1}^{n} y_i \log(\hat{y}_i)$$
+$$L = -\sum_{i=1}^{n} y_i \log(\vet{y}_i)$$
 
 De tal forma que:
 
 * $y_i$ é o valor real (geralmente 1 para a classe correta, 0 para as demais);
-* $\hat{y}_i$ é a probabilidade prevista pela rede.
+* $\vet{y}_i$ é a probabilidade prevista pela rede.
 
 No contexto dos **word embeddings**, isto se traduz em maximizar a probabilidade da palavra correta.
 
 Vamos calcular a entropia cruzada para um exemplo de classificação multiclasse com 3 classes. Suponha que:
 
-* **Vetor de probabilidades previsto pela rede (saída do Softmax)**: $\hat{y} = [0.1, 0.7, 0.2]$
+* **Vetor de probabilidades previsto pela rede (saída do Softmax)**: $\vet{y} = [0.1, 0.7, 0.2]$
 * **Vetor alvo real (one-hot encoded)**: $y = [0, 1, 0]$ (significa que a classe correta é a segunda)
 
 A fórmula da entropia cruzada para um único exemplo é:
-$$L = -\sum_{i=1}^{n} y_i \log(\hat{y}_i)$$
+$$L = -\sum_{i=1}^{n} y_i \log(\vet{y}_i)$$
 Onde $n=3$ é o número de classes e $\log$ é o logaritmo natural.
 
 Substituindo os valores:
 
-$$L = - [ (y_1 \times \log(\hat{y}_1)) + (y_2 \times \log(\hat{y}_2)) + (y_3 \times \log(\hat{y}_3)) ]$$
+$$L = - [ (y_1 \times \log(\vet{y}_1)) + (y_2 \times \log(\vet{y}_2)) + (y_3 \times \log(\vet{y}_3)) ]$$
 $$L = - [ (0 \times \log(0.1)) + (1 \times \log(0.7)) + (0 \times \log(0.2)) ]$$
 
 Como $0 \times \text{qualquer coisa} = 0$, a fórmula simplifica para:
@@ -412,7 +909,7 @@ Usando uma calculadora, $\log(0.7) \approx -0.3567$.
 
 $$L = -(-0.3567) = 0.3567$$
 
-O custo (erro) para este exemplo é aproximadamente $0.3567$. Quanto menor o custo, melhor a previsão da rede (a probabilidade $\hat{y}_i$ da classe correta $y_i=1$ está mais próxima de 1). Se a rede tivesse previsto $\hat{y} = [0.01, 0.98, 0.01]$, o custo seria $L = -\log(0.98) \approx 0.02$, muito menor.
+O custo (erro) para este exemplo é aproximadamente $0.3567$. Quanto menor o custo, melhor a previsão da rede (a probabilidade $\vet{y}_i$ da classe correta $y_i=1$ está mais próxima de 1). Se a rede tivesse previsto $\vet{y} = [0.01, 0.98, 0.01]$, o custo seria $L = -\log(0.98) \approx 0.02$, muito menor.
 
 #### Gradiente Descendente
 
@@ -447,7 +944,7 @@ $$\theta_j \leftarrow 0.8 + 0.025 = 0.825$$
 
 O novo valor do parâmetro $\theta_j$ é $0.825$. Como o gradiente era negativo, a atualização aumentou o valor do parâmetro, movendo-o na direção que (localmente) diminui o custo. Se o gradiente fosse positivo, digamos $+1.5$, a atualização seria $\theta_j \leftarrow 0.8 - (0.01 \times 1.5) = 0.8 - 0.015 = 0.785$, diminuindo o valor do parâmetro.#### Retropropagação (Backpropagation)
 
-A retropropagação, *Backpropagation em inglês*, é o algoritmo que permite calcular eficientemente esses gradientes em redes multicamadas. A ideia central é usar a **regra da cadeia** do cálculo diferencial. A regra da cadeia nos permite calcular a derivada de uma função composta, essencial para entender como o erro na saída da rede se relaciona com os pesos em cada camada. Isso é crucial para otimizar a rede neural.
+A retropropagação, *Backpropagation em inglês*, é o algoritmo que permite calcular eficientemente esses gradientes em redes multicamadas. A ideia central é usar a **regra da cadeia** do cálculo diferencial. A regra da cadeia nos permite calcular a derivada de uma função composta, essencial para entender como o erro na saída da rede se relaciona com os pesos em cada camada.
 
 > **A Regra da Cadeia na Retropropagação**
 >
@@ -457,8 +954,8 @@ A retropropagação, *Backpropagation em inglês*, é o algoritmo que permite ca
 >
 > **Aplicação na Retropropagação:**
 >
-> 1. A função de custo $L$ depende das saídas $\hat{y}$;
-> 2. As saídas $\hat{y}$ dependem das ativações $z^{(L)}$;
+> 1. A função de custo $L$ depende das saídas $\vet{y}$;
+> 2. As saídas $\vet{y}$ dependem das ativações $z^{(L)}$;
 > 3. As ativações $z^{(L)}$ dependem dos pesos $w$ e ativações anteriores.
 >
 > Para calcular $\frac{\partial L}{\partial w_{ji}^{(l)}}$, encadeamos estas derivadas:
@@ -471,17 +968,17 @@ A retropropagação, *Backpropagation em inglês*, é o algoritmo que permite ca
 >
 > Uma propriedade matemática notável ocorre quando combinamos entropia cruzada como função de custo e sigmóide como ativação de saída. Aplicando a regra da cadeia:
 >
-> $$\delta_k^{(L)} = \frac{\partial L}{\partial z_k^{(L)}} = \frac{\partial L}{\partial \hat{y}_k} \cdot \frac{\partial \hat{y}_k}{\partial z_k^{(L)}}$$
+> $$\delta_k^{(L)} = \frac{\partial L}{\partial z_k^{(L)}} = \frac{\partial L}{\partial \vet{y}_k} \cdot \frac{\partial \vet{y}_k}{\partial z_k^{(L)}}$$
 >
-> Para entropia cruzada: $\frac{\partial L}{\partial \hat{y}_k} = -\frac{y_k}{\hat{y}_k} + \frac{1-y_k}{1-\hat{y}_k}$
+> Para entropia cruzada: $\frac{\partial L}{\partial \vet{y}_k} = -\frac{y_k}{\vet{y}_k} + \frac{1-y_k}{1-\vet{y}_k}$
 >
-> Para sigmóide: $\frac{\partial \hat{y}_k}{\partial z_k^{(L)}} = \hat{y}_k(1-\hat{y}_k)$
+> Para sigmóide: $\frac{\partial \vet{y}_k}{\partial z_k^{(L)}} = \vet{y}_k(1-\vet{y}_k)$
 >
-> Multiplicando: $\delta_k^{(L)} = (-\frac{y_k}{\hat{y}_k} + \frac{1-y_k}{1-\hat{y}_k}) \cdot \hat{y}_k(1-\hat{y}_k) = \hat{y}_k - y_k$
+> Multiplicando: $\delta_k^{(L)} = (-\frac{y_k}{\vet{y}_k} + \frac{1-y_k}{1-\vet{y}_k}) \cdot \vet{y}_k(1-\vet{y}_k) = \vet{y}_k - y_k$
 >
 > Esta simplificação elegante é o que torna a combinação entropia cruzada + sigmóide computacionalmente eficiente.
 
-O algoritmo começa com o cálculo do erro na camada de saída, a diferença entre a previsão $\hat{y}$ e o alvo $y$. Em seguida, esse erro é propagado *para trás* na rede, esta é a origem do nome "retropropagação", camada por camada. Em cada camada, calcula-se o quanto cada neurônio contribuiu para o erro da camada seguinte.
+O algoritmo começa com o cálculo do erro na camada de saída, a diferença entre a previsão $\vet{y}$ e o alvo $y$. Em seguida, esse erro é propagado *para trás* na rede, esta é a origem do nome "retropropagação", camada por camada. Em cada camada, calcula-se o quanto cada neurônio contribuiu para o erro da camada seguinte.
 
 ![mostra o algoritmo de retropropagação como descrito no texto](/assets/images/retropropagacao-fluxo.webp)
 
@@ -491,52 +988,52 @@ Isso permite determinar o gradiente da função de custo em relação aos pesos 
 
 1. **Calcular o erro na camada de saída**:
 
-    $$\delta_k^{(L)} = \frac{\partial L}{\partial z_k^{(L)}} = \hat{y}_k - y_k$$
+    $$\delta_k^{(L)} = \frac{\partial L}{\partial z_k^{(L)}} = \vet{y}_k - y_k$$
 
-    >**Por que a simplificação $\delta^{(L)} = \hat{y} - y$ é válida para entropia cruzada + sigmóide?**
+    >**Por que a simplificação $\delta^{(L)} = \vet{y} - y$ é válida para entropia cruzada + sigmóide?**
     >
     > A simplificação ocorre devido à **cancelamento matemático** entre a derivada da função de custo, entropia cruzada e a derivada da função de ativação, sigmóide. Veja a derivação:
     >
     >**Função de Custo (Entropia Cruzada Binária)**:
     >
     > $$
-      L = -y \log(\hat{y}) - (1 - y) \log(1 - \hat{y})
+      L = -y \log(\vet{y}) - (1 - y) \log(1 - \vet{y})
       $$
     >
-    > Neste caso, $\hat{y} = \sigma(z)$ é a saída da sigmóide.
+    > Neste caso, $\vet{y} = \sigma(z)$ é a saída da sigmóide.
     >
     >**Derivada de $L$ em relação a $z$**:
     >
     > Pela regra da cadeia:
     >
     > $$
-      \delta^{(L)} = \frac{\partial L}{\partial z} = \frac{\partial L}{\partial \hat{y}} \cdot \frac{\partial \hat{y}}{\partial z}
+      \delta^{(L)} = \frac{\partial L}{\partial z} = \frac{\partial L}{\partial \vet{y}} \cdot \frac{\partial \vet{y}}{\partial z}
       $$
     >
-    >**Cálculo de $\frac{\partial L}{\partial \hat{y}}$**:
+    >**Cálculo de $\frac{\partial L}{\partial \vet{y}}$**:
     >
     > $$
-      \frac{\partial L}{\partial \hat{y}} = -\frac{y}{\hat{y}} + \frac{1 - y}{1 - \hat{y}}
+      \frac{\partial L}{\partial \vet{y}} = -\frac{y}{\vet{y}} + \frac{1 - y}{1 - \vet{y}}
       $$
     >
     >**Derivada da Sigmóide**:
     > $$
-      \frac{\partial \hat{y}}{\partial z} = \hat{y}(1 - \hat{y})
+      \frac{\partial \vet{y}}{\partial z} = \vet{y}(1 - \vet{y})
       $$
     >
     >**Combinação das Derivadas**:
     >
     > $$
-      \delta^{(L)} = \left(-\frac{y}{\hat{y}} + \frac{1 - y}{1 - \hat{y}}\right) \cdot \hat{y}(1 - \hat{y})
+      \delta^{(L)} = \left(-\frac{y}{\vet{y}} + \frac{1 - y}{1 - \vet{y}}\right) \cdot \vet{y}(1 - \vet{y})
       $$
     >
     > Simplificando:
     >
     > $$
-      \delta^{(L)} = -y(1 - \hat{y}) + (1 - y)\hat{y} = \hat{y} - y
+      \delta^{(L)} = -y(1 - \vet{y}) + (1 - y)\vet{y} = \vet{y} - y
       $$
     >
-    > O termo $\hat{y}(1 - \hat{y})$, derivada da sigmóide, cancela-se com os denominadores da entropia cruzada, resultando na expressão simplificada $\delta^{(L)} = \hat{y} - y$. Isso só é possível porque:
+    > O termo $\vet{y}(1 - \vet{y})$, derivada da sigmóide, cancela-se com os denominadores da entropia cruzada, resultando na expressão simplificada $\delta^{(L)} = \vet{y} - y$. Isso só é possível porque:
     >
     >* A **entropia cruzada** é projetada para "casar" com a **sigmóide**.
 
@@ -564,7 +1061,7 @@ Neste caso, temos:
 **Dados do Exemplo**:
 
 * **Ativação da camada anterior**: $a_2^{(1)} = h_2 \approx 0.3430$ (calculado na propagação direta);
-* **Saída da rede**: $\hat{y} = 0.5824$ (previsão).
+* **Saída da rede**: $\vet{y} = 0.5824$ (previsão).
 * **Valor real**: $y = 1$.
 
 **Passo 1**: Cálculo de $\delta_1^{(2)}$
@@ -572,7 +1069,7 @@ Neste caso, temos:
 Para entropia cruzada + sigmóide, o erro na saída é:
 
 $$
-\delta_1^{(2)} = \hat{y} - y = 0.5824 - 1 = -0.4176
+\delta_1^{(2)} = \vet{y} - y = 0.5824 - 1 = -0.4176
 $$
 
 **Passo 2**: Cálculo do Gradiente
@@ -636,17 +1133,17 @@ Considere uma rede neural simples com uma camada oculta e uma função de ativa�
 
    Calculando a saída da rede:
 
-   $$\hat{y} = \text{softmax}(W_2 h + b_2)$$
+   $$\vet{y} = \text{softmax}(W_2 h + b_2)$$
 
 2. **Cálculo do erro**:
 
-   $$L = -\sum_{i} y_i \log(\hat{y}_i)$$
+   $$L = -\sum_{i} y_i \log(\vet{y}_i)$$
 
 3. **Retropropagação**:
 
    Erro na camada de saída:
 
-   $$\delta^{(2)} = \hat{y} - y$$
+   $$\delta^{(2)} = \vet{y} - y$$
 
    Gradientes para W2 e b2:
 
@@ -852,10 +1349,10 @@ $$
 
 2. Aplicação da Função Softmax
 
-   A saída prevista $ \hat{y} $ é calculada com a função softmax:
+   A saída prevista $ \vet{y} $ é calculada com a função softmax:
 
    $$
-   \hat{y}_i = \frac{e^{z_i}}{\sum_{j=1}^{4} e^{z_j}}
+   \vet{y}_i = \frac{e^{z_i}}{\sum_{j=1}^{4} e^{z_j}}
    $$
 
    Calculando os exponenciais (aproximados):
@@ -870,28 +1367,28 @@ $$
    1.150 + 1.185 + 1.221 + 1.259 = 4.815
    $$
 
-   Agora, calculamos cada $ \hat{y}_i $:
+   Agora, calculamos cada $ \vet{y}_i $:
 
    $$
-   \hat{y}_1 = \frac{1.150}{4.815} \approx 0.239
-   $$
-
-   $$
-   \hat{y}_2 = \frac{1.185}{4.815} \approx 0.246
+   \vet{y}_1 = \frac{1.150}{4.815} \approx 0.239
    $$
 
    $$
-   \hat{y}_3 = \frac{1.221}{4.815} \approx 0.254
+   \vet{y}_2 = \frac{1.185}{4.815} \approx 0.246
    $$
 
    $$
-   \hat{y}_4 = \frac{1.259}{4.815} \approx 0.261
+   \vet{y}_3 = \frac{1.221}{4.815} \approx 0.254
+   $$
+
+   $$
+   \vet{y}_4 = \frac{1.259}{4.815} \approx 0.261
    $$
 
    Portanto:
 
    $$
-   \hat{y} = [0.239, 0.246, 0.254, 0.261]
+   \vet{y} = [0.239, 0.246, 0.254, 0.261]
    $$
 
 3. Cálculo do Custo
@@ -899,13 +1396,13 @@ $$
    Usamos a entropia cruzada como função de custo:
 
    $$
-   L = -\sum_{i=1}^{4} y_i \log(\hat{y}_i)
+   L = -\sum_{i=1}^{4} y_i \log(\vet{y}_i)
    $$
 
    Como $ y = [0, 0, 1, 0] $, apenas o terceiro termo contribui:
 
    $$
-   L = - y_3 \log(\hat{y}_3) = - 1 \cdot \log(0.254)
+   L = - y_3 \log(\vet{y}_3) = - 1 \cdot \log(0.254)
    $$
 
    Calculando:
@@ -924,7 +1421,7 @@ $$
 Para softmax com entropia cruzada, o erro $ \delta^{(2)} $ é:
 
    $$
-   \delta^{(2)} = \hat{y} - y
+   \delta^{(2)} = \vet{y} - y
    $$
 
    $$
@@ -1169,14 +1666,6 @@ _Figura 7: Esquema da Rede Rasa treinada no exemplo._{: class="legend"}
 #### Implementação em C++ 20 do Exemplo de Treinamento de uma Rede Neural Rasa
 
 ```cpp
-/**
- * @file neural_network_example.cpp
- * @brief Implementação do exemplo de treinamento de uma rede neural rasa
- * @details Esta implementação corresponde ao exemplo matemático demonstrado no artigo,
- * onde treinamos uma rede neural rasa para prever a palavra "dia" a partir da palavra "sol".
- * @author Frank Alcantara
- * @date 2025-04-21
- */
 
 #include <iostream>        /**< Para operações de entrada/saída padrão */
 #include <vector>          /**< Para std::vector, usado para armazenar pesos e ativações */
@@ -1510,7 +1999,7 @@ Transforma o problema de classificação multiclasse em vários problemas de cla
 
 Utiliza uma árvore binária de Huffman para representar o vocabulário, reduzindo a complexidade para $O(\log  \vert V \vert )$.
 
-Estas otimizações são cruciais para o treinamento eficiente dos modelos de **word embeddings** em grandes corpora de texto.
+Estas otimizações são importantes no treinamento eficiente dos modelos de **word embeddings** em grandes corpora de texto.
 
 **Intuitivamente**, o Hierarchical Softmax organiza o vocabulário em uma árvore binária (geralmente uma árvore de Huffman, onde palavras frequentes ficam mais perto da raiz). Para prever uma palavra, a rede só precisa aprender a fazer uma sequência de decisões binárias (esquerda/direita) para navegar da raiz até a folha correspondente à palavra correta. O número de decisões é logarítmico no tamanho do vocabulário ($O(\log \vert V \vert )$), tornando o processo muito mais rápido que o Softmax padrão ($O( \vert V \vert )$).
 
@@ -1557,7 +2046,7 @@ Essas limitações motivaram a pesquisa em direção a representações de palav
 
 3. **GPT (Generative Pre-trained Transformer)** e seus sucessores: Também baseados na arquitetura **Transformer** (principalmente no lado do decodificador), focam na geração de texto e aprendem representações contextuais poderosas através de pré-treinamento em larga escala.
 
-Os modelos de **word embeddings** tradicionais, com sua arquitetura neural rasa, representaram um passo crucial e fundamental nessa evolução. Eles demonstraram o poder das representações distribuídas e estabeleceram a fundação sobre a qual modelos contextuais mais poderosos, como os **Transformers**, foram construídos, incorporando mecanismos adicionais como a atenção para superar as limitações dos embeddings estáticos.
+Os modelos de **word embeddings** tradicionais, com sua arquitetura neural rasa, representaram um passo fundamental nessa evolução. Eles demonstraram o poder das representações distribuídas e estabeleceram a fundação sobre a qual modelos contextuais mais poderosos, como os **Transformers**, foram construídos, incorporando mecanismos adicionais como a atenção para superar as limitações dos embeddings estáticos.
 
 ### Aspectos Práticos do Treinamento
 

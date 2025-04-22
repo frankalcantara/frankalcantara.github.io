@@ -31,7 +31,7 @@ keywords: |-
     inteligência artificial
 toc: true
 published: true
-lastmod: 2025-04-19T02:32:40.155Z
+lastmod: 2025-04-22T18:49:36.121Z
 ---
 
 Neste artigo, a curiosa leitora irá enfrentar os *Transformers*. Nenhuma relação com o o Optimus Prime. Se for estes *Transformers* que está procurando, **o Google falhou com você!**
@@ -2447,3 +2447,104 @@ int main() {
 }
 ```
 
+## Transformações Afins: Um Pilar Matemático para Word Embeddings, Transformers e LLMs
+
+Transformações afins são operações matemáticas essenciais em aprendizado de máquina, especialmente em processamento de linguagem natural (NLP). Notadamente em modelos como *transformers*, *word embeddings* e grandes modelos de linguagem (**LLMs**), permitindo a manipulação de vetores e matrizes de maneira a preservar propriedades geométricas como colinearidade e razões de distâncias.
+
+Uma **transformação afim** é uma função que combina uma transformação linear com uma translação. *Uma translação é uma operação geométrica que desloca cada ponto de um espaço por uma mesma distância em uma direção específica, preservando distâncias e ângulos entre pontos*. Essencialmente, uma translação é um deslocamento rígido de um objeto sem rotação ou distorção. Formalmente, dada uma matriz $A$, que representa a transformação linear, e um vetor $b$, que representa a translação, a transformação afim $T$ de um vetor $x$ será definida como:
+
+$$
+T(x) = A x + b
+$$
+
+De forma que:
+
+* $x \in \mathbb{R}^n$ é o vetor de entrada;
+* $A \in \mathbb{R}^{m \times n}$ é a matriz de transformação linear;
+* $b \in \mathbb{R}^m$ é o vetor de translação;
+* $T(x) \in \mathbb{R}^m$ é o vetor resultante.
+
+Essa operação pode incluir rotações, escalonamentos, cisalhamentos e deslocamentos, dependendo das propriedades de $A$ e $b$. Em Processamento de Linguagem Natural, essas transformações são aplicadas a vetores de alta dimensão que representam palavras, **tokens** ou sequências.
+
+| Contexto | Aplicações de Transformações Afins |
+|----------|-----------------------------------|
+| **Word Embeddings** | **Captura de Relações Semânticas**: Transformações lineares mapeiam relações entre palavras (ex: $v_{\text{rainha}} \approx A v_{\text{rei}}$) <br><br> **Normalização e Centralização**: Translação $b$ centraliza embeddings; matriz $A$ escala vetores <br><br> **Redução de Dimensionalidade**: Técnicas como PCA aplicam transformações lineares para projetar embeddings em espaços menores |
+| **Transformers** | **Mecanismo de Atenção**: Matrizes de consulta, chave e valor são geradas por transformações lineares ($Q = W_Q x$, etc.) <br><br> **Camadas Feed-Forward**: Cada bloco inclui transformação afim com não-linearidade: $\text{FFN}(x) = \sigma(W_1 x + b_1) W_2 + b_2$ <br><br> **Normalização de Camada**: Layer normalization ajusta ativações: $y = \gamma \cdot \frac{x - \mu}{\sigma} + \beta$ |
+| **LLMs** | **Embeddings de Entrada e Saída**: Tokens mapeados para vetores via matriz de embedding; saídas projetadas de volta ao vocabulário <br><br> **Atenção Multi-Cabeça**: Cada cabeça aplica transformações lineares independentes, resultados combinados <br><br> **Adaptação a Tarefas**: Durante fine-tuning, camadas superiores aplicam transformações afins para tarefas específicas |
+
+_Tabela 1:  A relevância das transformações afins em Processamento de Linguagem Natural destacando word embedding, transformers e LLMs_{: class="legend"}_
+
+### Propriedades Importantes
+
+As transformações afins possuem características que as tornam ideais para **word embeddings** e **transformers**:
+
+1. **Preservação de Colinearidade**: pontos alinhados permanecem alinhados após a transformação;
+2. **Preservação de Razões de Distâncias**: a proporção entre distâncias em uma linha é mantida;
+3. **Composição**: a combinação de duas transformações afins resulta em outra transformação afim;
+4. **Inversibilidade**: Se $A$ é invertível, $T(x)$ pode ser revertida: $x = A^{-1} (T(x) - b)$.
+
+### Exemplo Numérico
+
+Considere um vetor $x = \begin{bmatrix} 1 \\ 2 \end{bmatrix}$, uma matriz $A = \begin{bmatrix} 2 & 1 \\ 0 & 3 \end{bmatrix}$ e um vetor $b = \begin{bmatrix} 3 \\ 1 \end{bmatrix}$. A transformação afim é:
+
+$$
+T(x) = A x + b = \begin{bmatrix} 2 & 1 \\ 0 & 3 \end{bmatrix} \begin{bmatrix} 1 \\ 2 \end{bmatrix} + \begin{bmatrix} 3 \\ 1 \end{bmatrix} = \begin{bmatrix} 2 \cdot 1 + 1 \cdot 2 \\ 0 \cdot 1 + 3 \cdot 2 \end{bmatrix} + \begin{bmatrix} 3 \\ 1 \end{bmatrix} = \begin{bmatrix} 4 \\ 6 \end{bmatrix} + \begin{bmatrix} 3 \\ 1 \end{bmatrix} = \begin{bmatrix} 7 \\ 7 \end{bmatrix}
+$$
+
+Esse exemplo ilustra como $A$ aplica uma transformação linear (escalamento e cisalhamento) e $b$ desloca o resultado.
+
+### Implementação em C++ 20
+
+Abaixo, apresentamos uma implementação em C++ 20 usando a biblioteca Eigen para aplicar transformações afins, seguindo o estilo do documento fornecido.
+
+```cpp
+#include <iostream>
+#include <Eigen/Dense>
+#include <iomanip>      ///< Adicionando esta biblioteca para std::setprecision
+#include <stdexcept>
+
+/**
+ * @brief Aplica uma transformação afim a um vetor.
+ * @param A Matriz de transformação linear.
+ * @param b Vetor de translação.
+ * @param x Vetor de entrada.
+ * @return O vetor transformado T(x) = Ax + b.
+ * @throws std::invalid_argument Se as dimensões forem incompatíveis.
+ */
+Eigen::VectorXd affineTransform(const Eigen::MatrixXd& A, const Eigen::VectorXd& b, const Eigen::VectorXd& x) {
+    if (A.cols() != x.size() || A.rows() != b.size()) {
+        throw std::invalid_argument("Dimensões incompatíveis para transformação afim");
+    }
+    return A * x + b;
+}
+
+/**
+ * @brief Função principal que demonstra a aplicação de uma transformação afim.
+ * @return 0 em caso de execução bem-sucedida.
+ */
+int main() {
+    std::cout << std::fixed << std::setprecision(2);
+    std::cout << "Demonstração de Transformação Afim\n";
+    std::cout << "---------------------------------\n\n";
+
+    // Definição da matriz A, vetor b e vetor x
+    Eigen::MatrixXd A(2, 2);
+    A << 2.0, 1.0,
+         0.0, 3.0;
+    Eigen::Vector2d b(3.0, 1.0);
+    Eigen::Vector2d x(1.0, 2.0);
+
+    std::cout << "Matriz A =\n" << A << "\n\n";
+    std::cout << "Vetor b =\n" << b << "\n\n";
+    std::cout << "Vetor x =\n" << x << "\n\n";
+
+    try {
+        Eigen::VectorXd result = affineTransform(A, b, x);
+        std::cout << "T(x) = Ax + b =\n" << result << "\n";
+    } catch (const std::exception& e) {
+        std::cerr << "Erro: " << e.what() << "\n";
+    }
+
+    return 0;
+}
+```
