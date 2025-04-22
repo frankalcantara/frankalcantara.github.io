@@ -3,20 +3,20 @@ layout: post
 title: Transformers - Redes Neurais Artificiais para Word Embedding
 author: frank
 categories: |-
-  disciplina
-  Matemática
-  artigo
+    disciplina
+    Matemática
+    artigo
 tags: |-
-  Matemática
-  inteligência artificial
-  processamento de linguagem natural
-  redes neurais
-  neurônio artificial
-  função de ativação
-  Perceptron
-  backpropagation
-  feed-forward
-  aprendizado de máquina
+    Matemática
+    inteligência artificial
+    processamento de linguagem natural
+    redes neurais
+    neurônio artificial
+    função de ativação
+    Perceptron
+    backpropagation
+    feed-forward
+    aprendizado de máquina
 image: assets/images/neuralnets1.webp
 featured: false
 rating: 5
@@ -24,19 +24,19 @@ description: Explorando os fundamentos de redes neurais artificiais como base pa
 date: 2025-04-19T22:15:53.461Z
 preview: Este artigo apresenta os fundamentos de redes neurais artificiais, explicando a estrutura dos neurônios artificiais, funções de ativação, arquiteturas e processos de treinamento que servem como base para os modelos de word embeddings.
 keywords: |-
-  Transformers
-  redes neurais
-  neurônio artificial
-  funções de ativação
-  Perceptron
-  backpropagation
-  feed-forward
-  aprendizado de máquina
-  inteligência artificial
-  processamento de linguagem natural
+    Transformers
+    redes neurais
+    neurônio artificial
+    funções de ativação
+    Perceptron
+    backpropagation
+    feed-forward
+    aprendizado de máquina
+    inteligência artificial
+    processamento de linguagem natural
 toc: true
 published: false
-lastmod: 2025-04-22T02:03:17.394Z
+lastmod: 2025-04-22T02:09:16.681Z
 draft: 2025-04-19T20:15:42.577Z
 ---
 
@@ -546,7 +546,9 @@ Isso permite determinar o gradiente da função de custo em relação aos pesos 
 
 3. **Calcular os gradientes dos pesos**:
 
-    $$\frac{\partial L}{\partial w_{ji}^{(l)}} = \delta_j^{(l)} a_i^{(l-1)}}$$
+    $$
+    \frac{\partial L}{\partial w_{ji}^{(l)}} = \delta_j^{(l)} a_i^{(l-1)}
+    $$
 
 Neste caso, temos:
 
@@ -578,7 +580,7 @@ $$
 Usando a fórmula:
 
 $$
-\frac{\partial L}{\partial w_{12}^{(2)}} = \delta_1^{(2)} \cdot a_2^{(1)}}
+\frac{\partial L}{\partial w_{12}^{(2)}} = \delta_1^{(2)} \cdot a_2^{(1)}
 $$
 
 Substituindo os valores:
@@ -617,10 +619,10 @@ Vamos explorar detalhadamente como o treinamento funciona em uma rede neural ras
 
 O processo começa com a inicialização aleatória dos pesos e vieses:
 
-* $W1 = pequenos_valores_aleatorios(tamanho_entrada, tamanho_oculta)$;
-* $b1 = zeros(tamanho_oculta)$;
-* $W2 = pequenos_valores_aleatorios(tamanho_oculta, tamanho_saida)$;
-* $b2 = zeros(tamanho_saida)$.
+* $W1 = pequenos\_valores\_aleatorios(tamanho\_entrada, tamanho_oculta)$;
+* $b1 = zeros(tamanho\_oculta)$;
+* $W2 = pequenos\_valores\_aleatorios(tamanho\_oculta, tamanho\_saida)$;
+* $b2 = zeros(tamanho\_saida)$.
 
 #### Passo a Passo da Propagação Direta e Retropropagação
 
@@ -921,138 +923,138 @@ $$
 **Passo 1**: Calcular o Erro na Camada de Saída
 Para softmax com entropia cruzada, o erro $ \delta^{(2)} $ é:
 
-    $$
-    \delta^{(2)} = \hat{y} - y
-    $$
+   $$
+   \delta^{(2)} = \hat{y} - y
+   $$
 
-    $$
-    \delta^{(2)} = [0.239, 0.246, 0.254, 0.261] - [0, 0, 1, 0]
-    $$
+   $$
+   \delta^{(2)} = [0.239, 0.246, 0.254, 0.261] - [0, 0, 1, 0]
+   $$
 
-    $$
-    \delta^{(2)} = [0.239, 0.246, 0.254 - 1, 0.261] = [0.239, 0.246, -0.746, 0.261]
-    $$
+   $$
+   \delta^{(2)} = [0.239, 0.246, 0.254 - 1, 0.261] = [0.239, 0.246, -0.746, 0.261]
+   $$
 
 **Passo 2**: Calcular os Gradientes para $ W^{(2)} $
-    O gradiente do custo em relação a $ W^{(2)} $ é:
+   O gradiente do custo em relação a $ W^{(2)} $ é:
 
-    $$
-    \frac{\partial L}{\partial W^{(2)}} = h^T \cdot \delta^{(2)}
-    $$
+   $$
+   \frac{\partial L}{\partial W^{(2)}} = h^T \cdot \delta^{(2)}
+   $$
 
-    Com $ h = [0.1, 0.2] $ (vetor coluna $ h^T = \begin{pmatrix} 0.1 \\ 0.2 \end{pmatrix} $):
+   Com $ h = [0.1, 0.2] $ (vetor coluna $ h^T = \begin{pmatrix} 0.1 \\ 0.2 \end{pmatrix} $):
 
-    $$
-    \frac{\partial L}{\partial W^{(2)}} = \begin{pmatrix}
-    0.1 \\
-    0.2
-    \end{pmatrix} \cdot [0.239, 0.246, -0.746, 0.261]
-    $$
+   $$
+   \frac{\partial L}{\partial W^{(2)}} = \begin{pmatrix}
+   0.1 \\
+   0.2
+   \end{pmatrix} \cdot [0.239, 0.246, -0.746, 0.261]
+   $$
 
-    Calculando cada elemento:
+   Calculando cada elemento:
 
-    $$
-    \frac{\partial L}{\partial W^{(2)}} = \begin{pmatrix}
-    0.1 \cdot 0.239 & 0.1 \cdot 0.246 & 0.1 \cdot (-0.746) & 0.1 \cdot 0.261 \\
-    0.2 \cdot 0.239 & 0.2 \cdot 0.246 & 0.2 \cdot (-0.746) & 0.2 \cdot 0.261
-    \end{pmatrix}
-    $$
+   $$
+   \frac{\partial L}{\partial W^{(2)}} = \begin{pmatrix}
+   0.1 \cdot 0.239 & 0.1 \cdot 0.246 & 0.1 \cdot (-0.746) & 0.1 \cdot 0.261 \\
+   0.2 \cdot 0.239 & 0.2 \cdot 0.246 & 0.2 \cdot (-0.746) & 0.2 \cdot 0.261
+   \end{pmatrix}
+   $$
 
-    $$
-    \approx \begin{pmatrix}
-    0.0239 & 0.0246 & -0.0746 & 0.0261 \\
-    0.0478 & 0.0492 & -0.1492 & 0.0522
-    \end{pmatrix}
-    $$
+   $$
+   \approx \begin{pmatrix}
+   0.0239 & 0.0246 & -0.0746 & 0.0261 \\
+   0.0478 & 0.0492 & -0.1492 & 0.0522
+   \end{pmatrix}
+   $$
 
 **Passo 3**: Propagar o Erro para a Camada Oculta
-    O erro $ \delta^{(1)} $ na camada oculta é:
+   O erro $ \delta^{(1)} $ na camada oculta é:
 
-    $$
-    \delta^{(1)} = \delta^{(2)} \cdot (W^{(2)})^T
-    $$
+   $$
+   \delta^{(1)} = \delta^{(2)} \cdot (W^{(2)})^T
+   $$
 
-    Transposta de $ W^{(2)} $:
+   Transposta de $ W^{(2)} $:
 
-    $$
-    (W^{(2)})^T = \begin{pmatrix}
-    0.2 & 0.6 \\
-    0.3 & 0.7 \\
-    0.4 & 0.8 \\
-    0.5 & 0.9
-    \end{pmatrix}
-    $$
+   $$
+   (W^{(2)})^T = \begin{pmatrix}
+   0.2 & 0.6 \\
+   0.3 & 0.7 \\
+   0.4 & 0.8 \\
+   0.5 & 0.9
+   \end{pmatrix}
+   $$
 
-    Calculando:
+   Calculando:
 
-    $$
-    \delta^{(1)} = [0.239, 0.246, -0.746, 0.261] \cdot \begin{pmatrix}
-    0.2 & 0.6 \\
-    0.3 & 0.7 \\
-    0.4 & 0.8 \\
-    0.5 & 0.9
-    \end{pmatrix}
-    $$
+   $$
+   \delta^{(1)} = [0.239, 0.246, -0.746, 0.261] \cdot \begin{pmatrix}
+   0.2 & 0.6 \\
+   0.3 & 0.7 \\
+   0.4 & 0.8 \\
+   0.5 & 0.9
+   \end{pmatrix}
+   $$
 
-    Para cada componente:
+   Para cada componente:
 
-    $$
-    \delta^{(1)}_1 = 0.239 \cdot 0.2 + 0.246 \cdot 0.3 + (-0.746) \cdot 0.4 + 0.261 \cdot 0.5
-    $$
+   $$
+   \delta^{(1)}_1 = 0.239 \cdot 0.2 + 0.246 \cdot 0.3 + (-0.746) \cdot 0.4 + 0.261 \cdot 0.5
+   $$
 
-    $$
-    = 0.0478 + 0.0738 - 0.2984 + 0.1305 \approx -0.0463
-    $$
+   $$
+   = 0.0478 + 0.0738 - 0.2984 + 0.1305 \approx -0.0463
+   $$
 
-    $$
-    \delta^{(1)}_2 = 0.239 \cdot 0.6 + 0.246 \cdot 0.7 + (-0.746) \cdot 0.8 + 0.261 \cdot 0.9
-    $$
+   $$
+   \delta^{(1)}_2 = 0.239 \cdot 0.6 + 0.246 \cdot 0.7 + (-0.746) \cdot 0.8 + 0.261 \cdot 0.9
+   $$
 
-    $$
-    = 0.1434 + 0.1722 - 0.5968 + 0.2349 \approx -0.0463
-    $$
+   $$
+   = 0.1434 + 0.1722 - 0.5968 + 0.2349 \approx -0.0463
+   $$
 
-    Portanto:
+   Portanto:
 
-    $$
-    \delta^{(1)} = [-0.0463, -0.0463]
-    $$
+   $$
+   \delta^{(1)} = [-0.0463, -0.0463]
+   $$
 
 **Passo 4**: Calcular os Gradientes para $ W^{(1)} $
-    O gradiente do custo em relação a $ W^{(1)} $ é:
+   O gradiente do custo em relação a $ W^{(1)} $ é:
 
-    $$
-    \frac{\partial L}{\partial W^{(1)}} = x^T \cdot \delta^{(1)}
-    $$
+   $$
+   \frac{\partial L}{\partial W^{(1)}} = x^T \cdot \delta^{(1)}
+   $$
 
-    Com $ x = [1, 0, 0, 0] $ (vetor coluna $ x^T = \begin{pmatrix} 1 \\ 0 \\ 0 \\ 0 \end{pmatrix} $):
+   Com $ x = [1, 0, 0, 0] $ (vetor coluna $ x^T = \begin{pmatrix} 1 \\ 0 \\ 0 \\ 0 \end{pmatrix} $):
 
-    $$
-    \frac{\partial L}{\partial W^{(1)}} = \begin{pmatrix}
-    1 \\
-    0 \\
-    0 \\
-    0
-    \end{pmatrix} \cdot [-0.0463, -0.0463]
-    $$
+   $$
+   \frac{\partial L}{\partial W^{(1)}} = \begin{pmatrix}
+   1 \\
+   0 \\
+   0 \\
+   0
+   \end{pmatrix} \cdot [-0.0463, -0.0463]
+   $$
 
-    $$
-    = \begin{pmatrix}
-    1 \cdot (-0.0463) & 1 \cdot (-0.0463) \\
-    0 \cdot (-0.0463) & 0 \cdot (-0.0463) \\
-    0 \cdot (-0.0463) & 0 \cdot (-0.0463) \\
-    0 \cdot (-0.0463) & 0 \cdot (-0.0463)
-    \end{pmatrix}
-    $$
+   $$
+   = \begin{pmatrix}
+   1 \cdot (-0.0463) & 1 \cdot (-0.0463) \\
+   0 \cdot (-0.0463) & 0 \cdot (-0.0463) \\
+   0 \cdot (-0.0463) & 0 \cdot (-0.0463) \\
+   0 \cdot (-0.0463) & 0 \cdot (-0.0463)
+   \end{pmatrix}
+   $$
 
-    $$
-    = \begin{pmatrix}
-    -0.0463 & -0.0463 \\
-    0 & 0 \\
-    0 & 0 \\
-    0 & 0
-    \end{pmatrix}
-    $$
+   $$
+   = \begin{pmatrix}
+   -0.0463 & -0.0463 \\
+   0 & 0 \\
+   0 & 0 \\
+   0 & 0
+   \end{pmatrix}
+   $$
 
 #### Atualização dos Pesos
 
@@ -1060,103 +1062,103 @@ Usamos uma taxa de aprendizado $ \eta = 0.1 $.
 
 1. Atualização de $ W^{(2)} $
 
-    $$
-    W^{(2)} \leftarrow W^{(2)} - \eta \cdot \frac{\partial L}{\partial W^{(2)}}
-    $$
+   $$
+   W^{(2)} \leftarrow W^{(2)} - \eta \cdot \frac{\partial L}{\partial W^{(2)}}
+   $$
 
-    $$
-    W^{(2)} = \begin{pmatrix}
-    0.2 & 0.3 & 0.4 & 0.5 \\
-    0.6 & 0.7 & 0.8 & 0.9
-    \end{pmatrix} - 0.1 \cdot \begin{pmatrix}
-    0.0239 & 0.0246 & -0.0746 & 0.0261 \\
-    0.0478 & 0.0492 & -0.1492 & 0.0522
-    \end{pmatrix}
-    $$
+   $$
+   W^{(2)} = \begin{pmatrix}
+   0.2 & 0.3 & 0.4 & 0.5 \\
+   0.6 & 0.7 & 0.8 & 0.9
+   \end{pmatrix} - 0.1 \cdot \begin{pmatrix}
+   0.0239 & 0.0246 & -0.0746 & 0.0261 \\
+   0.0478 & 0.0492 & -0.1492 & 0.0522
+   \end{pmatrix}
+   $$
 
-    Calculando cada elemento:
+   Calculando cada elemento:
 
-    $$
-    W^{(2)}_{1,1} = 0.2 - 0.1 \cdot 0.0239 = 0.2 - 0.00239 \approx 0.1976
-    $$
+   $$
+   W^{(2)}_{1,1} = 0.2 - 0.1 \cdot 0.0239 = 0.2 - 0.00239 \approx 0.1976
+   $$
 
-    $$
-    W^{(2)}_{1,2} = 0.3 - 0.1 \cdot 0.0246 = 0.3 - 0.00246 \approx 0.2975
-    $$
+   $$
+   W^{(2)}_{1,2} = 0.3 - 0.1 \cdot 0.0246 = 0.3 - 0.00246 \approx 0.2975
+   $$
 
-    $$
-    W^{(2)}_{1,3} = 0.4 - 0.1 \cdot (-0.0746) = 0.4 + 0.00746 \approx 0.4075
-    $$
+   $$
+   W^{(2)}_{1,3} = 0.4 - 0.1 \cdot (-0.0746) = 0.4 + 0.00746 \approx 0.4075
+   $$
 
-    $$
-    W^{(2)}_{1,4} = 0.5 - 0.1 \cdot 0.0261 = 0.5 - 0.00261 \approx 0.4974
-    $$
+   $$
+   W^{(2)}_{1,4} = 0.5 - 0.1 \cdot 0.0261 = 0.5 - 0.00261 \approx 0.4974
+   $$
 
-    $$
-    W^{(2)}_{2,1} = 0.6 - 0.1 \cdot 0.0478 = 0.6 - 0.00478 \approx 0.5952
-    $$
+   $$
+   W^{(2)}_{2,1} = 0.6 - 0.1 \cdot 0.0478 = 0.6 - 0.00478 \approx 0.5952
+   $$
 
-    $$
-    W^{(2)}_{2,2} = 0.7 - 0.1 \cdot 0.0492 = 0.7 - 0.00492 \approx 0.6951
-    $$
+   $$
+   W^{(2)}_{2,2} = 0.7 - 0.1 \cdot 0.0492 = 0.7 - 0.00492 \approx 0.6951
+   $$
 
-    $$
-    W^{(2)}_{2,3} = 0.8 - 0.1 \cdot (-0.1492) = 0.8 + 0.01492 \approx 0.8149
-    $$
+   $$
+   W^{(2)}_{2,3} = 0.8 - 0.1 \cdot (-0.1492) = 0.8 + 0.01492 \approx 0.8149
+   $$
 
-    $$
-    W^{(2)}_{2,4} = 0.9 - 0.1 \cdot 0.0522 = 0.9 - 0.00522 \approx 0.8948
-    $$
+   $$
+   W^{(2)}_{2,4} = 0.9 - 0.1 \cdot 0.0522 = 0.9 - 0.00522 \approx 0.8948
+   $$
 
-    Nova matriz $ W^{(2)} $:
+   Nova matriz $ W^{(2)} $:
 
-    $$
-    W^{(2)} \approx \begin{pmatrix}
-    0.1976 & 0.2975 & 0.4075 & 0.4974 \\
-    0.5952 & 0.6951 & 0.8149 & 0.8948
-    \end{pmatrix}
-    $$
+   $$
+   W^{(2)} \approx \begin{pmatrix}
+   0.1976 & 0.2975 & 0.4075 & 0.4974 \\
+   0.5952 & 0.6951 & 0.8149 & 0.8948
+   \end{pmatrix}
+   $$
 
 2. Atualização de $ W^{(1)} $
 
-    $$
-    W^{(1)} \leftarrow W^{(1)} - \eta \cdot \frac{\partial L}{\partial W^{(1)}}
-    $$
+   $$
+   W^{(1)} \leftarrow W^{(1)} - \eta \cdot \frac{\partial L}{\partial W^{(1)}}
+   $$
 
-    $$
-    W^{(1)} = \begin{pmatrix}
-    0.1 & 0.2 \\
-    0.3 & 0.4 \\
-    0.5 & 0.6 \\
-    0.7 & 0.8
-    \end{pmatrix} - 0.1 \cdot \begin{pmatrix}
-    -0.0463 & -0.0463 \\
-    0 & 0 \\
-    0 & 0 \\
-    0 & 0
-    \end{pmatrix}
-    $$
+   $$
+   W^{(1)} = \begin{pmatrix}
+   0.1 & 0.2 \\
+   0.3 & 0.4 \\
+   0.5 & 0.6 \\
+   0.7 & 0.8
+   \end{pmatrix} - 0.1 \cdot \begin{pmatrix}
+   -0.0463 & -0.0463 \\
+   0 & 0 \\
+   0 & 0 \\
+   0 & 0
+   \end{pmatrix}
+   $$
 
-    Calculando:
+   Calculando:
 
-    $$
-    W^{(1)}_{1,1} = 0.1 - 0.1 \cdot (-0.0463) = 0.1 + 0.00463 \approx 0.1046
-    $$
+   $$
+   W^{(1)}_{1,1} = 0.1 - 0.1 \cdot (-0.0463) = 0.1 + 0.00463 \approx 0.1046
+   $$
 
-    $$
-    W^{(1)}_{1,2} = 0.2 - 0.1 \cdot (-0.0463) = 0.2 + 0.00463 \approx 0.2046
-    $$
+   $$
+   W^{(1)}_{1,2} = 0.2 - 0.1 \cdot (-0.0463) = 0.2 + 0.00463 \approx 0.2046
+   $$
 
-    As outras linhas permanecem inalteradas (gradiente zero):
+   As outras linhas permanecem inalteradas (gradiente zero):
 
-    $$
-    W^{(1)} = \begin{pmatrix}
-    0.1046 & 0.2046 \\
-    0.3 & 0.4 \\
-    0.5 & 0.6 \\
-    0.7 & 0.8
-    \end{pmatrix}
-    $$
+   $$
+   W^{(1)} = \begin{pmatrix}
+   0.1046 & 0.2046 \\
+   0.3 & 0.4 \\
+   0.5 & 0.6 \\
+   0.7 & 0.8
+   \end{pmatrix}
+   $$
 
 Neste exemplo, a estupefata leitora pode ver como treinar uma rede neural rasa para prever `dia` a partir de `sol`. O processo incluiu propagação direta, cálculo do custo com entropia cruzada, retropropagação para determinar os gradientes e atualização dos pesos com uma taxa de aprendizado. Este exemplo serve como base para entender modelos de *word embeddings* como CBOW e Skip-gram, ajustando apenas as entradas e saídas conforme necessário. A rede pode ser vista na Figura 7.
 
