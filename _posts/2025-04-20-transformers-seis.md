@@ -35,8 +35,8 @@ keywords: |-
     inteligência artificial
     processamento de linguagem natural
 toc: true
-published: true
-lastmod: 2025-04-22T19:43:29.654Z
+published: false
+lastmod: 2025-04-25T13:57:26.693Z
 draft: 2025-04-19T20:15:42.577Z
 ---
 
@@ -84,7 +84,7 @@ A soma ponderada $\sum_{i=1}^{n} w_i x_i$ pode ser vista de forma mais compacta 
 >
 > Neste caso, teremos:
 > 
-> * $|w|$ e $|x|$ são as magnitudes (normas) dos vetores;
+> * $\vert w \vert $ e $\vert x \vert $ são as magnitudes (normas) dos vetores;
 > * $\theta$ é o ângulo entre eles;
 >
 > Esta formulação revela que o produto escalar é proporcional ao $\cos(\theta)$, que varia entre:
@@ -102,7 +102,7 @@ Vamos ilustrar o cálculo realizado por um neurônio artificial com um exemplo c
 * **Entradas (Inputs)**: $x = [x_1, x_2] = [0.5, 1.0]$
 * **Pesos (Weights)**: $w = [w_1, w_2] = [0.8, -0.2]$
 * **Viés (Bias)**: $b = 0.1$
-* **Função de Ativação**: Sigmóide, $\sigma(z) = \frac{1}{1 + e^{-z}}$
+* **Função de Ativação**: Sigmóide, $\sigma(z) = \frac{1}{1 + e^{-z} }$
 
 **Passo 1: Calcular a soma ponderada das entradas.**
 Isso é o produto escalar entre os vetores de entrada e pesos: $w \cdot x = \sum_{i=1}^{n} w_i x_i$.
@@ -117,7 +117,7 @@ $$z = (w \cdot x) + b = 0.2 + 0.1 = 0.3$$
 **Passo 3: Aplicar a função de ativação.**
 A saída final $y$ é obtida aplicando a função Sigmóide a $z$.
 
-$$y = \sigma(z) = \sigma(0.3) = \frac{1}{1 + e^{-0.3}}$$
+$$y = \sigma(z) = \sigma(0.3) = \frac{1}{1 + e^{-0.3} }$$
 
 Para calcular $e^{-0.3}$, usamos uma calculadora (ou a função `exp()` em programação): $e^{-0.3} \approx 0.7408$.
 
@@ -176,25 +176,25 @@ Apesar de sua simplicidade conceitual, *a função degrau apresenta uma limitaç
 
 ##### Função Sigmóide (ou Logística)
 
-$$\sigma(x) = \frac{1}{1 + e^{-x}}$$
+$$\sigma(x) = \frac{1}{1 + e^{-x} }$$
 
 A função sigmóide mapeia qualquer valor de entrada para o intervalo $(0, 1)$, tornando-a ideal para modelar probabilidades. Ela foi amplamente utilizada no passado, mas sofre de problemas como o desvanecimento do gradiente em redes profundas (veremos este problema adiante).
 
 A função Sigmóide, dada por
 
-$$\sigma(z) = \frac{1}{1 + e^{-z}}$$
+$$\sigma(z) = \frac{1}{1 + e^{-z} }$$
 
 mapeia qualquer entrada para o intervalo, não-linear, $(0, 1)$.
 
-* Se a entrada $z = 2.0$, $y = \sigma(2.0) = \frac{1}{1 + e^{-2.0}} \approx \frac{1}{1 + 0.1353} \approx 0.8808$;
-* Se a entrada $z = 0.0$, $y = \sigma(0.0) = \frac{1}{1 + e^{0}} = \frac{1}{1 + 1} = 0.5$;
-* Se a entrada $z = -3.0$, $y = \sigma(-3.0) = \frac{1}{1 + e^{-(-3.0)}} = \frac{1}{1 + e^{3.0}} \approx \frac{1}{1 + 20.0855} \approx 0.0474$.
+* Se a entrada $z = 2.0$, $y = \sigma(2.0) = \frac{1}{1 + e^{-2.0} } \approx \frac{1}{1 + 0.1353} \approx 0.8808$;
+* Se a entrada $z = 0.0$, $y = \sigma(0.0) = \frac{1}{1 + e^{0} } = \frac{1}{1 + 1} = 0.5$;
+* Se a entrada $z = -3.0$, $y = \sigma(-3.0) = \frac{1}{1 + e^{-(-3.0)} } = \frac{1}{1 + e^{3.0} } \approx \frac{1}{1 + 20.0855} \approx 0.0474$.
 
 Valores de entrada grandes positivos resultam em saídas próximas a $1$, e valores grandes negativos resultam em saídas próximas a $0$. A função é assintótica, ou seja, nunca atinge exatamente $0$ ou $1$, o que pode ser problemático em algumas situações. Além disso, a função sigmóide tem um gradiente muito pequeno para entradas extremas, o que pode levar ao problema do desvanecimento do gradiente durante o treinamento de redes profundas.
 
 ##### Função Tangente Hiperbólica (tanh)
 
-$$\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$$
+$$\tanh(x) = \frac{e^x - e^{-x} }{e^x + e^{-x} }$$
 
 Similar à sigmóide, porém mapeia valores para o intervalo $(-1, 1)$, o que pode ajudar na convergência durante o treinamento por ter média zero. Contudo, assim como a sigmóide, a $\text{tanh}$ também sofre do problema de desvanecimento do gradiente em suas regiões saturadas, valores de entrada muito positivos ou muito negativos. Nestes dois limites a derivada se aproxima de zero. Isso limita o fluxo de gradientes em redes profundas.
 
@@ -214,7 +214,7 @@ A função simplesmente corta qualquer valor negativo, zerando-o, e mantém os v
 
 ##### Função Softmax
 
-$$\text{softmax}(x_i) = \frac{e^{x_i}}{\sum_{j=1}^{n} e^{x_j}}$$
+$$\text{softmax}(x_i) = \frac{e^{x_i} }{\sum_{j=1}^{n} e^{x_j} }$$
 
 Utilizada especialmente na camada de saída para problemas de classificação multiclasse, tais como prever a próxima palavra em uma sequência.
 
@@ -236,15 +236,15 @@ $$\sum_{j=1}^{3} e^{z_j} = e^{2.0} + e^{1.0} + e^{0.1} \approx 7.389 + 2.718 + 1
 
 **Passo 3: Calcular a probabilidade Softmax para cada classe**:
 
-A probabilidade para a classe $i$ é $\text{softmax}(z_i) = \frac{e^{z_i}}{\sum_{j=1}^{3} e^{z_j}}$.
+A probabilidade para a classe $i$ é $\text{softmax}(z_i) = \frac{e^{z_i} }{\sum_{j=1}^{3} e^{z_j} }$.
 
-$$P(\text{classe 1}  \vert  z) = \frac{e^{z_1}}{\sum e^{z_j}} \approx \frac{7.389}{11.212} \approx 0.659$$
+$$P(\text{classe 1}  \vert  z) = \frac{e^{z_1} }{\sum e^{z_j} } \approx \frac{7.389}{11.212} \approx 0.659$$
 
-$$P(\text{classe 2}  \vert  z) = \frac{e^{z_2}}{\sum e^{z_j}} \approx \frac{2.718}{11.212} \approx 0.242$$
+$$P(\text{classe 2}  \vert  z) = \frac{e^{z_2} }{\sum e^{z_j} } \approx \frac{2.718}{11.212} \approx 0.242$$
 
-$$P(\text{classe 3}  \vert  z) = \frac{e^{z_3}}{\sum e^{z_j}} \approx \frac{1.105}{11.212} \approx 0.099$$
+$$P(\text{classe 3}  \vert  z) = \frac{e^{z_3} }{\sum e^{z_j} } \approx \frac{1.105}{11.212} \approx 0.099$$
 
-O vetor de saída da função Softmax é $\vet{y} = [0.659, 0.242, 0.099]$. Note que a soma das probabilidades é $0.659 + 0.242 + 0.099 = 1.000$. A rede prevê a classe $1$ com maior probabilidade ($65.9\%$).
+O vetor de saída da função Softmax é $\vert{y} = [0.659, 0.242, 0.099]$. Note que a soma das probabilidades é $0.659 + 0.242 + 0.099 = 1.000$. A rede prevê a classe $1$ com maior probabilidade ($65.9\%$).
 
 ![funções de ativação mais comuns com seus gráficos](/assets/images/funcoes-ativacao.webp)
 
@@ -260,9 +260,9 @@ Uma rede neural *feed-forward é a arquitetura mais simples, onde as informaçõ
 
 ![diagrama de uma rede neural feed-forward](/assets/images/rede-neural-feedforward.webp)
 
-_Figura 3: Arquitetura de uma rede neural feed-forward de três camadas, mostrando a camada de entrada, a camada oculta e a camada de saída._{: class="legend"}
+_Figura 3: Arquitetura de uma rede neural **feed-forward** de três camadas, mostrando a camada de entrada, a camada oculta e a camada de saída._{: class="legend"}
 
-Matematicamente, o processamento de uma entrada $x$ através de uma rede feed-forward com uma camada oculta pode ser representado como:
+Matematicamente, o processamento de uma entrada $x$ através de uma rede **feed-forward** com uma camada oculta pode ser representado como:
 
 $$h_j = f\left(\sum_{i=1}^{n} w_{ji}^{(1)} x_i + b_j^{(1)}\right)$$
 
@@ -272,13 +272,13 @@ Em que, $f$ e $g$ são funções de ativação que introduzem não-linearidades 
 
 Esta estrutura permite à rede aprender hierarquicamente: a camada oculta captura características intermediárias dos dados de entrada, enquanto a camada de saída combina essas características para produzir o resultado final. A ausência de conexões recorrentes simplifica o treinamento, tornando o algoritmo de retropropagação particularmente eficiente.
 
-*Em aplicações como word embeddings, as redes feed-forward rasas, com apenas uma camada oculta, são suficientes para capturar relações semânticas entre palavras*. Porém, para tarefas mais complexas de reconhecimento de padrões, redes mais profundas com múltiplas camadas ocultas podem ser necessárias para modelar abstrações hierárquicas.
+*Em aplicações como word embeddings, as redes **feed-forward** rasas, com apenas uma camada oculta, são suficientes para capturar relações semânticas entre palavras*. Porém, para tarefas mais complexas de reconhecimento de padrões, redes mais profundas com múltiplas camadas ocultas podem ser necessárias para modelar abstrações hierárquicas.
 
 Cada transformação linear seguida por uma função de ativação não-linear aumenta o poder representacional da rede, permitindo-lhe aprender fronteiras de decisão progressivamente mais complexas que seriam impossíveis com o **Perceptron de camada única**.
 
-##### Exemplo Numérico: Rede Feed-Forward com Diferentes Funções de Ativação
+##### Exemplo Numérico: Rede feed-forward com Diferentes Funções de Ativação
 
-Considere uma rede neural feed-forward simples com:
+Considere uma rede neural **feed-forward** simples com:
 
 * 2 neurônios na camada de entrada ($x = [x_1, x_2] = [0.5, 0.8]$);
 * 3 neurônios na camada oculta (usando ReLU ou Sigmoid);
@@ -293,58 +293,68 @@ Considere uma rede neural feed-forward simples com:
 
 2. **Versão 1: $\text{ReLU}$ na Camada Oculta**:
 
-    **Passo 1:** Calcular a entrada para a camada oculta.
+    **Passo 1**: Calcular a entrada para a camada oculta.
 
     $z^{(1)} = W^{(1)}x + b^{(1)}$
 
     $z^{(1)}_1 = 0.1 \times 0.5 + (-0.3) \times 0.8 + 0.1 = -0.09$
+
     $z^{(1)}_2 = 0.2 \times 0.5 + 0.4 \times 0.8 + (-0.2) = 0.22$
+
     $z^{(1)}_3 = (-0.1) \times 0.5 + 0.5 \times 0.8 + 0.3 = 0.65$
 
-    **Passo 2:** Aplicar $\text{ReLU}$ à camada oculta.
+    **Passo 2**: Aplicar $\text{ReLU}$ à camada oculta.
     $h = ReLU(z^{(1)}) = \max(0, z^{(1)})$
 
     $h_1 = \max(0, -0.09) = 0$
-    $h_2 = \max(0, 0.22) = 0.22$
-    $h_3 = \max(0, 0.65) = 0.65$
 
-    **Passo 3:** Calcular a entrada para a camada de saída.
+    $h_2 = \max(0, 0.22) = 0.22$
+
+   $h_3 = \max(0, 0.65) = 0.65$
+
+    **Passo 3**: Calcular a entrada para a camada de saída.
     $z^{(2)} = W^{(2)}h + b^{(2)}$
 
     $z^{(2)}_1 = 0.6 \times 0 + (-0.2) \times 0.22 + 0.5 \times 0.65 + 0.2 = 0.516$
+
     $z^{(2)}_2 = (-0.3) \times 0 + 0.4 \times 0.22 + 0.1 \times 0.65 + 0.1 = 0.253$
 
-    **Passo 4:** Aplicar Softmax à camada de saída.
+    **Passo 4**: Aplicar Softmax à camada de saída.
     $y = \text{softmax}(z^{(2)})$
 
-    $y_1 = \frac{e^{0.516}}{e^{0.516} + e^{0.253}} = \frac{1.675}{1.675 + 1.288} = 0.565$
-    $y_2 = \frac{e^{0.253}}{e^{0.516} + e^{0.253}} = \frac{1.288}{1.675 + 1.288} = 0.435$
+    $$y_1 = \frac{e^{0.516} }{e^{0.516} + e^{0.253} } = \frac{1.675}{1.675 + 1.288} = 0.565$$
+
+    $$y_2 = \frac{e^{0.253} }{e^{0.516} + e^{0.253} } = \frac{1.288}{1.675 + 1.288} = 0.435$$
 
     A saída final da rede com ReLU é $y = [0.565, 0.435]$
 
 3. **Sigmoid na Camada Oculta**:
 
-    **Passo 1:** Calcular a entrada para a camada oculta (igual ao anterior).
+    **Passo 1**: Calcular a entrada para a camada oculta (igual ao anterior).
     $z^{(1)} = [-0.09, 0.22, 0.65]$
 
-    **Passo 2:** Aplicar Sigmoid à camada oculta.
-    $h = \sigma(z^{(1)}) = \frac{1}{1 + e^{-z^{(1)}}}$
+    **Passo 2**: Aplicar Sigmoid à camada oculta.
+    $h = \sigma(z^{(1)}) = \frac{1}{1 + e^{-z^{(1)} } }$
 
-    $h_1 = \frac{1}{1 + e^{0.09}} = \frac{1}{1.094} = 0.478$
-    $h_2 = \frac{1}{1 + e^{-0.22}} = \frac{1}{0.803} = 0.555$
-    $h_3 = \frac{1}{1 + e^{-0.65}} = \frac{1}{0.522} = 0.657$
+    $h_1 = \frac{1}{1 + e^{0.09} } = \frac{1}{1.094} = 0.478$
 
-    **Passo 3:** Calcular a entrada para a camada de saída.
+    $h_2 = \frac{1}{1 + e^{-0.22} } = \frac{1}{0.803} = 0.555$
+
+    $h_3 = \frac{1}{1 + e^{-0.65} } = \frac{1}{0.522} = 0.657$
+
+    **Passo 3**: Calcular a entrada para a camada de saída.
     $z^{(2)} = W^{(2)}h + b^{(2)}$
 
     $z^{(2)}_1 = 0.6 \times 0.478 + (-0.2) \times 0.555 + 0.5 \times 0.657 + 0.2 = 0.637$
+
     $z^{(2)}_2 = (-0.3) \times 0.478 + 0.4 \times 0.555 + 0.1 \times 0.657 + 0.1 = 0.222$
 
-    **Passo 4:** Aplicar Softmax à camada de saída.
+    **Passo 4**: Aplicar Softmax à camada de saída.
     $y = \text{softmax}(z^{(2)})$
 
-    $y_1 = \frac{e^{0.637}}{e^{0.637} + e^{0.222}} = \frac{1.891}{1.891 + 1.249} = 0.602$
-    $y_2 = \frac{e^{0.222}}{e^{0.637} + e^{0.222}} = \frac{1.249}{1.891 + 1.249} = 0.398$
+    $$y_1 = \frac{e^{0.637} }{e^{0.637} + e^{0.222} } = \frac{1.891}{1.891 + 1.249} = 0.602$$
+
+    $$y_2 = \frac{e^{0.222} }{e^{0.637} + e^{0.222} } = \frac{1.249}{1.891 + 1.249} = 0.398$$
 
     A saída final da rede com Sigmoid é $y = [0.602, 0.398]$
 
@@ -383,7 +393,7 @@ Se plotarmos esses pontos em um gráfico $2D$, com $x_1$ no eixo horizontal e $x
 
 _Figura 4: Representação visual do problema XOR e sua fronteira de decisão. Os pontos vermelhos representam saída $0$ $[(0,0) e (1,1)]$ e os pontos azuis representam saída $1$ $[(0,1) e (1,0)]$. A linha vermelha tracejada mostra a impossibilidade de separar estes pontos com uma única fronteira linear, enquanto a curva verde demonstra uma possível fronteira de decisão não-linear que uma rede neural com pelo menos uma camada oculta pode aprender._{: class="legend"}
 
-O**Perceptron de Camada Única** funciona traçando uma **única linha reta**. ou um hiperplano em dimensões maiores, para separar as classes. Na Figura 4 não existe nenhuma linha reta única que consiga separar os pontos $(0,1)$ e $(1,0)$ de um lado, e os pontos $(0,0)$ e $(1,1)$ do outro. Você sempre acabará com um ponto do lado errado. É por isso que um **Perceptron** simples falha em aprender a função **XOR**. A solução requer uma rede com pelo menos uma camada oculta para criar uma fronteira de decisão não-linear.
+O **Perceptron de Camada Única** funciona traçando uma **única linha reta**. ou um hiperplano em dimensões maiores, para separar as classes. Na Figura 4 não existe nenhuma linha reta única que consiga separar os pontos $(0,1)$ e $(1,0)$ de um lado, e os pontos $(0,0)$ e $(1,1)$ do outro. Você sempre acabará com um ponto do lado errado. É por isso que um **Perceptron** simples falha em aprender a função **XOR**. A solução requer uma rede com pelo menos uma camada oculta para criar uma fronteira de decisão não-linear.
 
 ##### Perceptron de Múltiplas Camadas (MLP)
 
@@ -460,11 +470,11 @@ Calculando passo a passo teremos:
 
     Calculando cada componente:  
 
-    - $$ z^{(2)}_1 = (0.5 \cdot 0.43) + (-0.2 \cdot 0.05) + (0.1 \cdot 0.4) + (0.3 \cdot 0.16) + 0.2 = 0.215 - 0.01 + 0.04 + 0.048 + 0.2 = 0.493 $$  
+    * $$ z^{(2)}_1 = (0.5 \cdot 0.43) + (-0.2 \cdot 0.05) + (0.1 \cdot 0.4) + (0.3 \cdot 0.16) + 0.2 = 0.215 - 0.01 + 0.04 + 0.048 + 0.2 = 0.493 $$  
 
-    - $$ z^{(2)}_2 = (0.0 \cdot 0.43) + (0.4 \cdot 0.05) + (-0.3 \cdot 0.4) + (0.1 \cdot 0.16) - 0.1 = 0.0 + 0.02 - 0.12 + 0.016 - 0.1 = -0.184 $$  
+    * $$ z^{(2)}_2 = (0.0 \cdot 0.43) + (0.4 \cdot 0.05) + (-0.3 \cdot 0.4) + (0.1 \cdot 0.16) - 0.1 = 0.0 + 0.02 - 0.12 + 0.016 - 0.1 = -0.184 $$  
 
-    - $$ z^{(2)}_3 = (-0.1 \cdot 0.43) + (0.2 \cdot 0.05) + (0.6 \cdot 0.4) + (-0.4 \cdot 0.16) + 0.0 = -0.043 + 0.01 + 0.24 - 0.064 = 0.143 $$
+    * $$ z^{(2)}_3 = (-0.1 \cdot 0.43) + (0.2 \cdot 0.05) + (0.6 \cdot 0.4) + (-0.4 \cdot 0.16) + 0.0 = -0.043 + 0.01 + 0.24 - 0.064 = 0.143 $$
 
     Portanto:  
 
@@ -483,9 +493,9 @@ Calculando passo a passo teremos:
 
     Calculando cada componente:  
 
-    - $$ z^{(3)}_1 = (0.3 \cdot 0.452) + (-0.5 \cdot -0.180) + (0.2 \cdot 0.141) + 0.1 = 0.1356 + 0.09 + 0.0282 + 0.1 = 0.3538 $$  
+    * $$ z^{(3)}_1 = (0.3 \cdot 0.452) + (-0.5 \cdot -0.180) + (0.2 \cdot 0.141) + 0.1 = 0.1356 + 0.09 + 0.0282 + 0.1 = 0.3538 $$  
 
-    - $$ z^{(3)}_2 = (0.1 \cdot 0.452) + (0.4 \cdot -0.180) + (-0.6 \cdot 0.141) - 0.2 = 0.0452 - 0.072 - 0.0846 - 0.2 = -0.3114 $$
+    * $$ z^{(3)}_2 = (0.1 \cdot 0.452) + (0.4 \cdot -0.180) + (-0.6 \cdot 0.141) - 0.2 = 0.0452 - 0.072 - 0.0846 - 0.2 = -0.3114 $$
 
     Portanto:  
 
@@ -493,13 +503,13 @@ Calculando passo a passo teremos:
 
     Aplicamos a função Softmax:  
 
-    $$ y = \text{Softmax}(z^{(3)}) = \begin{bmatrix} \frac{e^{0.3538}}{e^{0.3538} + e^{-0.3114}} \\ \frac{e^{-0.3114}}{e^{0.3538} + e^{-0.3114}} \end{bmatrix} $$
+    $$ y = \text{Softmax}(z^{(3)}) = \begin{bmatrix} \frac{e^{0.3538} }{e^{0.3538} + e^{-0.3114} } \\ \frac{e^{-0.3114} }{e^{0.3538} + e^{-0.3114} } \end{bmatrix} $$
 
     Calculando os exponenciais:  
 
-    - $$ e^{0.3538} \approx 1.424 $$  
+    * $$ e^{0.3538} \approx 1.424 $$  
 
-    - $$ e^{-0.3114} \approx 0.732 $$
+    * $$ e^{-0.3114} \approx 0.732 $$
 
     Assim:  
 
@@ -747,15 +757,15 @@ A arquitetura dos modelos de **word embeddings** é notavelmente simples:
 
 A simplicidade arquitetural dos modelos de **word embeddings** é intencionalmente proposital por quatro razões fundamentais: eficiência computacional. Modelos menos complexos exigem menos recursos e treinam mais rapidamente com grandes corpora textuais; alinhamento com a semântica distribucional, teoria linguística que propõe que $p(contexto \vert palavra)$ revela significados semânticos através de padrões estatísticos de co-ocorrência; preservação da linearidade conceitual, já que a ausência de funções não-lineares na camada oculta mantém propriedades algébricas que permitem operações vetoriais como $\vec{v}_{rei} - \vec{v}_{homem} + \vec{v}_{mulher} \approx \vec{v}_{rainha}$, criando um espaço vetorial onde relações semânticas são representadas por transformações lineares $T: \mathbb{R}^d \rightarrow \mathbb{R}^d$; e validação empírica, pois experimentos demonstraram que essa estrutura minimalista $f(x) = W_2 \cdot (W_1 \cdot x)$ produz representações surpreendentemente eficazes sem necessidade de arquiteturas mais elaboradas. Esta é a arquitetura que veremos nos modelos de **word embeddings** e no artigo publicado [aqui](https://frankalcantara.com/transformers-cinco/).
 
-###############################REVISADO ATÉ AQUI################################
-
 ### Representação e Propagação de Dados
 
-Para compreender como as redes neurais processam informações, precisamos examinar como os dados fluem através da rede.
+Para compreender como as redes neurais processam informações, a atenta leitora precisa visualizar o fluxo dinâmico dos dados através da rede. Esta trajetória dos sinais desde a camada de entrada até a produção do resultado final revela a essência do processamento neuronal artificial. Quando um vetor de entrada $\mathbf{x}$ é apresentado à rede, ele inicia uma cascata de transformações matemáticas onde cada camada subsequente extrai e refina padrões específicos. Os dados percorrem este labirinto de neurônios artificiais através de operações vetoriais que incluem produtos escalares $\mathbf{w} \cdot \mathbf{x}$, adições de vieses $b$, e transformações não-lineares $f(\cdot)$ que introduzem a capacidade da rede de modelar relações complexas. É nesta corrente oceânica de números navegando de camada em camada que reside o verdadeiro poder das redes neurais, permitindo-lhes lançar redes mais profundas que capturam os cardumes semânticos das palavras que buscamos em nossa expedição pelos mares da linguagem natural. 
+
+Nesta correnteza de dados, a propagação direta é o motor que impulsiona a rede, transformando entradas em saídas através de uma série de etapas matemáticas que revelam a beleza e complexidade do aprendizado profundo.
 
 #### Propagação Direta (Forward Propagation)
 
-A propagação direta é o processo pelo qual uma entrada percorre a rede, da camada de entrada até a saída. Para uma rede feed-forward com uma camada oculta, o processo pode ser descrito matematicamente por:
+Como a esperta leitora já deve ter deduzido, *a propagação direta é o processo pelo qual uma entrada percorre a rede, da camada de entrada até a camada de  saída*. Para uma rede **feed-forward** com uma camada oculta, o processo pode ser descrito matematicamente por meio do seguinte conjunto de equações:
 
 1. **Cálculo das ativações da camada oculta**:
 
@@ -765,7 +775,7 @@ A propagação direta é o processo pelo qual uma entrada percorre a rede, da ca
 
     $$y_k = g\left(\sum_{j=1}^{m} w_{kj}^{(2)} h_j + b_k^{(2)}\right)$$
 
-Na qual:
+No qual, temos:
 
 * $x_i$ são as entradas da rede;
 * $h_j$ são as ativações da camada oculta;
@@ -774,13 +784,11 @@ Na qual:
 * $b_j^{(1)}$ e $b_k^{(2)}$ são os termos de viés;
 * $f$ e $g$ são funções de ativação, possivelmente diferentes.
 
-No contexto dos modelos de **word embeddings**, a propagação direta é usada para calcular a probabilidade de uma palavra-alvo dado seu contexto ou vice-versa.
-
-Vamos calcular a propagação direta para uma rede neural feed-forward pequena. Considere uma rede com:
+No contexto dos modelos de **word embeddings** e **Transformers**, a propagação direta é usada para calcular a probabilidade de uma palavra-alvo dado seu contexto ou vice-versa. Para tentar entender como isso funciona, vamos fazer um exemplo numérico simples. Vamos calcular a propagação direta para uma rede neural **feed-forward** pequena. Considere uma rede com:
 
 * **2 neurônios de entrada**;
-* **1 camada oculta com 2 neurônios** (usando Sigmóide como função de ativação $f$);
-* **1 neurônio de saída** (usando Sigmóide como função de ativação $g$).
+* **1 camada oculta com 2 neurônios**, usando Sigmóide como função de ativação $f$;
+* **1 neurônio de saída**,  usando Sigmóide como função de ativação $g$.
 
 **Notação**:
 
@@ -815,7 +823,7 @@ $$z^{(1)} = \begin{pmatrix} 0.4 \\ -0.45 \end{pmatrix} + \begin{pmatrix} 0.1 \\ 
 
 Agora, aplique a função de ativação Sigmóide ($f = \sigma$) elemento a elemento em $z^{(1)}$ para obter $h$:
 
-$$h = \sigma(z^{(1)}) = \begin{pmatrix} \sigma(0.5) \\ \sigma(-0.65) \end{pmatrix} = \begin{pmatrix} \frac{1}{1 + e^{-0.5}} \\ \frac{1}{1 + e^{-(-0.65)}} \end{pmatrix} \approx \begin{pmatrix} \frac{1}{1 + 0.6065} \\ \frac{1}{1 + 1.9155} \end{pmatrix} \approx \begin{pmatrix} 0.6225 \\ 0.3430 \end{pmatrix}$$
+$$h = \sigma(z^{(1)}) = \begin{pmatrix} \sigma(0.5) \\ \sigma(-0.65) \end{pmatrix} = \begin{pmatrix} \frac{1}{1 + e^{-0.5} } \\ \frac{1}{1 + e^{-(-0.65)} } \end{pmatrix} \approx \begin{pmatrix} \frac{1}{1 + 0.6065} \\ \frac{1}{1 + 1.9155} \end{pmatrix} \approx \begin{pmatrix} 0.6225 \\ 0.3430 \end{pmatrix}$$
 
 Portanto, a ativação da camada oculta é $h \approx [0.6225, 0.3430]$.
 
@@ -831,15 +839,15 @@ $$z^{(2)} = (0.7 \times 0.6225) + (-0.3 \times 0.3430) + 0.0 \approx 0.43575 - 0
 
 Agora, aplique a função de ativação Sigmóide ($g = \sigma$) a $z^{(2)}$ para obter a saída final $y$:
 
-$$y = \sigma(z^{(2)}) = \sigma(0.33285) = \frac{1}{1 + e^{-0.33285}} \approx \frac{1}{1 + 0.7169} \approx 0.5824$$
+$$y = \sigma(z^{(2)}) = \sigma(0.33285) = \frac{1}{1 + e^{-0.33285} } \approx \frac{1}{1 + 0.7169} \approx 0.5824$$
 
 A saída final da rede para a entrada $x = [1.0, 0.5]$ é aproximadamente $y = 0.5824$.
 
 #### Representação de Palavras como Vetores
 
-Para processar palavras em uma rede neural, precisamos convertê-las em representações numéricas. A abordagem tradicional é a codificação one-hot:
+Para processar palavras em uma rede neural, precisamos convertê-las em representações numéricas. A abordagem tradicional é a codificação **One-hot** que vimos [aqui](https://frankalcantara.com/transformers-dois/).
 
-Para um vocabulário de tamanho $ \vert V \vert $, cada palavra é representada por um vetor de dimensão $ \vert V \vert $ com valor 1 na posição correspondente à palavra e 0 nas demais posições. Por exemplo, em um vocabulário de 5 palavras:
+Para um vocabulário de tamanho $ \vert V \vert $, cada palavra será representada por um vetor de dimensão $ \vert V \vert $ com valor $1$ na posição correspondente à palavra e $0$ nas demais posições. Por exemplo, em um vocabulário de $5$ palavras:
 
 $$V = \{\text{gato}, \text{cachorro}, \text{pássaro}, \text{corre}, \text{dorme}\}$$
 
@@ -851,71 +859,102 @@ As representações one-hot seriam:
 * `corre` = $[0, 0, 0, 1, 0]$;
 * `dorme` = $[0, 0, 0, 0, 1]$.
 
-Nos modelos de **word embeddings**, estas representações one-hot são transformadas em **embeddings** densos através da camada oculta da rede neural.
+Nos modelos de **word embeddings**, estas representações **One-Hot** são transformadas em **embeddings** densos através da camada oculta da rede neural. Esses **embeddings** são vetores de dimensão reduzida que capturam a semântica e o contexto das palavras. A ideia é que palavras com significados semelhantes tenham representações vetoriais próximas no espaço vetorial. Veremos estes vetores neste [artigo](https://frankalcantara.com/transformers-cinco/).
 
 ### Treinamento de Redes Neurais
 
-O treinamento de uma rede neural envolve ajustar seus pesos e vieses para minimizar a diferença entre suas previsões e os valores reais desejados. Este processo é fundamental para entender como os modelos de **word embeddings** aprendem representações de palavras.
+As Redes Neurais Artificiais são algoritmos fantásticos. Mas, como qualquer algoritmo supervisionado, elas precisam ser treinadas. *O treinamento é o processo de ajuste dos pesos e vieses da rede para minimizar a diferença entre as previsões da rede e os valores reais desejados*. Este treinamento será feito, na maior parte das vezes, por meio de um processo iterativo chamado **retropropagação**, *backpropagation, em inglês*.
+
+*Os algoritmos de treinamento de uma rede neural envolvem ajustar seus pesos e vieses para minimizar a diferença entre suas previsões e os valores reais desejados*. Este processo é importante, interessante e fascinante. Porém, tem limitações.
 
 #### Desvanecimento e Explosão de Gradientes
 
-Um desafio significativo no treinamento de redes neurais, especialmente as mais profundas (com muitas camadas) ou recorrentes (que processam sequências longas), é o problema dos **gradientes que desvanecem (vanishing gradients)** ou **explodem (exploding gradients)**.
+Um desafio significativo no treinamento de redes neurais, especialmente as mais profundas, aquelas com muitas camadas, ou recorrentes, aquelas que processam sequências longas, consiste no problema dos **gradientes que desvanecem (vanishing gradients, em inglês)** ou **explodem (exploding gradients, novamente, em inglês)**. Estes problemas surgem devido à natureza das funções de ativação e à forma como os gradientes são calculados durante a retropropagação. Eles podem levar a dificuldades no treinamento, resultando em redes que não aprendem ou que divergem rapidamente. Estes fenômenos têm as seguintes características:
 
-* **Vanishing Gradients (Desvanecimento):** Durante a retropropagação, os gradientes são multiplicados sucessivamente pela regra da cadeia. Se as derivadas forem consistentemente pequenas (menores que 1), como acontece nas regiões de saturação das funções Sigmóide e Tanh (onde a curva é quase plana), o gradiente pode diminuir exponencialmente à medida que se propaga para as camadas iniciais da rede. Isso faz com que os pesos das primeiras camadas recebam atualizações minúsculas ou nulas, impedindo que a rede aprenda dependências de longo alcance ou ajuste características fundamentais nos dados.
-* **Exploding Gradients (Explosão):** O oposto pode ocorrer se as derivadas forem consistentemente grandes (maiores que 1). O gradiente pode crescer exponencialmente, resultando em atualizações de peso enormes que desestabilizam o treinamento, levando a valores numéricos muito grandes (NaN - Not a Number) e divergência do modelo.
+* **Vanishing Gradients (Desvanecimento)**: durante a retropropagação, os gradientes são calculados aplicando-se sucessivamente a regra da cadeia. Se as derivadas parciais forem consistentemente pequenas, menores que $1$, como acontece nas regiões de saturação das funções sigmóide e $\text{tanh}$, onde a curva é quase plana, o gradiente pode diminuir exponencialmente à medida que navegamos para as camadas iniciais da rede. Isso resulta em atualizações de peso insignificantes, fazendo com que os pesos das camadas iniciais da rede não sejam ajustados adequadamente. Como resultado, a rede pode não aprender ou aprender muito lentamente, levando a um desempenho insatisfatório. Este fenômeno é especialmente problemático em redes profundas, onde o número de camadas pode exacerbar o problema.
 
-Embora este artigo foque em redes rasas para embeddings, nas quais estes problemas são menos severos, a esforçada leitora precisa entender o impacto desses fenômenos no treinamento de redes neurais mais profundas. Vamos discutir algumas soluções comuns para esses problemas:
+* **Exploding Gradients (Explosão)**: o problema oposto pode ocorrer se as derivadas forem consistentemente grandes, maiores que $1$. O gradiente pode crescer exponencialmente, resultando em atualizações de peso enormes que desestabilizam o treinamento, levando a valores numéricos muito grandes que, via de regra, resultam em $NaN$ - $Not a Number$ em computadores que usem a [Norma IEEE-754](https://frankalcantara.com/precisao-realidade-os-desafios-da-norma-ieee-754-na-computacao-moderna/).
+
+Embora este texto foque em redes rasas para **embeddings**, nas quais estes problemas são menos severos, a esforçada leitora precisa deve se preocupar com o impacto desses fenômenos no treinamento de redes neurais mais profundas. Estas redes profundas são típicas dos modelos de **LLM's** que se tornaram muito populares depois de 2023. Para tanto, vamos preparar o barco para esta outra viagem, já discutindo algumas soluções comuns para esses problemas:
 
 1. Motiva a escolha de funções de ativação como a **ReLU**, que não satura para entradas positivas, sua derivada é $1$, ajudando a mitigar o desvanecimento, embora possa levar a neurônios mortos.
 
-2. Explica a necessidade de técnicas como **inicialização cuidadosa de pesos** (Xavier/He, já mencionados) que visam manter a magnitude dos gradientes estável.
+2. Explica a necessidade de técnicas como **inicialização cuidadosa de pesos**, como a Xavier/He, que visam manter a magnitude dos gradientes estável.
 
-3. Introduz a necessidade de técnicas como **gradient clipping** (limitar a magnitude máxima do gradiente durante o treinamento) para combater a explosão de gradientes.
+3. Introduz a necessidade de técnicas como **gradient clipping**, limitar a magnitude máxima do gradiente durante o treinamento, para combater a explosão de gradientes.
 
-4. Contextualiza o desenvolvimento de arquiteturas mais complexas como LSTMs/GRUs (em redes recorrentes) e mecanismos como conexões residuais (nos Transformers) que foram projetados, em parte, para lidar com esses problemas de fluxo de gradiente.
+4. Contextualiza o desenvolvimento de arquiteturas mais complexas como **LSTMs/GRUs** (em redes recorrentes) e mecanismos como conexões residuais (nos **Transformers**) que foram projetados, em parte, para lidar com esses problemas de fluxo de gradiente.
+
+># Inicialização de Pesos Xavier/Glorot e He
+>
+>A inicialização adequada dos pesos é importante para o treinamento eficiente de redes neurais profundas. As inicializações Xavier/Glorot e He foram desenvolvidas para manter a variância dos sinais e gradientes estável através das camadas da rede.
+>
+>**Inicialização Xavier/Glorot**: proposta por [Xavier Glorot](https://www.researchgate.net/profile/Xavier-Glorot) e [Yoshua Bengio](https://pt.wikipedia.org/wiki/Yoshua_Bengio) (2010), esta inicialização é adequada para funções de ativação com comportamento aproximadamente linear na origem (sigmóide, tanh). Dada por:
+>
+>Para uma camada com $n_{in}$ entradas e $n_{out}$ saídas:
+>
+>$$W \sim \mathcal{U}\left[-\frac{\sqrt{6}}{\sqrt{n_{in} + n_{out}}}, \frac{\sqrt{6}}{\sqrt{n_{in} + n_{out}}}\right]$$
+>
+>Ou na versão com distribuição normal:
+>
+>$$W \sim \mathcal{N}\left(0, \frac{2}{n_{in} + n_{out}}\right)$$
+>
+>Visa manter a variância da ativação e dos gradientes aproximadamente igual entre as camadas, evitando que o sinal se perca ou exploda durante a propagação.
+>
+>**Inicialização He**
+>
+>Desenvolvida por [Kaiming He](https://people.csail.mit.edu/kaiming/) et al. (2015), esta inicialização é otimizada para funções de ativação ReLU e suas variantes, que não são simétricas em torno da origem.
+>
+>Para uma camada com $n_{in}$ entradas:
+>
+>$$W \sim \mathcal{N}\left(0, \frac{2}{n_{in}}\right)$$
+>
+>Como ReLU zera metade da distribuição (valores negativos), a inicialização He compensa esse efeito usando um fator $2$ no numerador, garantindo que a variância se mantenha correta após a aplicação da função de ativação.
+>
+>Ambas as inicializações permitem treinar redes profundas muito mais rapidamente e com maior estabilidade, sendo essenciais para o sucesso do aprendizado profundo moderno.
 
 #### Função de Custo (Loss Function)
 
-A função de custo quantifica o erro das previsões da rede. Para problemas de classificação multiclasse, como a previsão de palavras, a função de custo típica é a entropia cruzada:
+A função de custo é uma medida quantitativa que avalia a discrepância entre as previsões geradas pela rede neural e os valores esperados, também chamados de alvos. Em problemas de classificação multiclasse, como a predição da próxima palavra em uma sequência textual, a entropia cruzada é frequentemente adotada devido à sua eficácia. Esta função penaliza fortemente as previsões incorretas enquanto recompensa as corretas, sendo definida matematicamente como:
 
-$$L = -\sum_{i=1}^{n} y_i \log(\vet{y}_i)$$
+$$L = -\sum_{i=1}^{n} y_i \log(\vert{y}_i)$$
 
-De tal forma que:
-
-* $y_i$ é o valor real (geralmente 1 para a classe correta, 0 para as demais);
-* $\vet{y}_i$ é a probabilidade prevista pela rede.
+na qual $y_i$ representa o valor real da classe $i$, geralmente $1$ para a classe correta e $0$ para as demais, $\vert{y}_i$ indica a probabilidade atribuída pelo modelo à classe $i$, e $n$ corresponde ao número total de classes. A minimização desta função durante o treinamento direciona o modelo a maximizar a probabilidade associada à classe correta.
 
 No contexto dos **word embeddings**, isto se traduz em maximizar a probabilidade da palavra correta.
 
-Vamos calcular a entropia cruzada para um exemplo de classificação multiclasse com 3 classes. Suponha que:
+Vamos calcular a entropia cruzada para um exemplo de classificação multiclasse com $3$ classes. Suponha que:
 
-* **Vetor de probabilidades previsto pela rede (saída do Softmax)**: $\vet{y} = [0.1, 0.7, 0.2]$
-* **Vetor alvo real (one-hot encoded)**: $y = [0, 1, 0]$ (significa que a classe correta é a segunda)
+* **Vetor de probabilidades previsto pela rede (saída do Softmax)**: $\vert{y} = [0.1, 0.7, 0.2]$;
+* **Vetor alvo real (one-hot encoded)**: $y = [0, 1, 0]$, este vetor indica que a classe correta é a segunda.
 
 A fórmula da entropia cruzada para um único exemplo é:
-$$L = -\sum_{i=1}^{n} y_i \log(\vet{y}_i)$$
-Onde $n=3$ é o número de classes e $\log$ é o logaritmo natural.
 
-Substituindo os valores:
+$$L = -\sum_{i=1}^{n} y_i \log(\vert{y}_i)$$
 
-$$L = - [ (y_1 \times \log(\vet{y}_1)) + (y_2 \times \log(\vet{y}_2)) + (y_3 \times \log(\vet{y}_3)) ]$$
+Na qual, $n=3$ é o número de classes e $\log$ é o logaritmo natural.
+
+Substituindo os valores, teremos:
+
+$$L = - [ (y_1 \times \log(\vert{y}_1)) + (y_2 \times \log(\vert{y}_2)) + (y_3 \times \log(\vert{y}_3)) ]$$
+
 $$L = - [ (0 \times \log(0.1)) + (1 \times \log(0.7)) + (0 \times \log(0.2)) ]$$
 
-Como $0 \times \text{qualquer coisa} = 0$, a fórmula simplifica para:
+Como $0 \times \text{qualquer coisa} = 0$, a fórmula simplifica em:
 
 $$L = - [ 0 + (1 \times \log(0.7)) + 0 ] = - \log(0.7)$$
 
-Usando uma calculadora, $\log(0.7) \approx -0.3567$.
+Usando uma calculadora encontramos $\log(0.7) \approx -0.3567$.
 
 $$L = -(-0.3567) = 0.3567$$
 
-O custo (erro) para este exemplo é aproximadamente $0.3567$. Quanto menor o custo, melhor a previsão da rede (a probabilidade $\vet{y}_i$ da classe correta $y_i=1$ está mais próxima de 1). Se a rede tivesse previsto $\vet{y} = [0.01, 0.98, 0.01]$, o custo seria $L = -\log(0.98) \approx 0.02$, muito menor.
+O custo, erro, para este exemplo é aproximadamente $0.3567$. Quanto menor o custo, melhor a previsão da rede, a probabilidade $\vert{y}_i$ da classe correta $y_i=1$ está mais próxima de $$1$. Se a rede tivesse previsto $\vert{y} = [0.01, 0.98, 0.01]$, o custo seria $L = -\log(0.98) \approx 0.02$, um valor muito menor.
 
 #### Gradiente Descendente
 
-O gradiente descendente é um algoritmo de otimização fundamental usado para ajustar os **parâmetros** da rede (pesos e vieses) de forma a minimizar a função de custo. A ideia central é calcular como a função de custo $L$ muda em relação a cada parâmetro ajustável da rede e, então, dar um pequeno passo na direção que *diminui* o custo.
+O gradiente descendente é um algoritmo de otimização fundamental usado para ajustar os **parâmetros** da rede, pesos e vieses, de forma a minimizar a função de custo. A ideia central é calcular como a função de custo $L$ muda em relação a cada parâmetro ajustável da rede e, então, dar um pequeno passo na direção que diminui o custo. Gradiente é um termo para a taxa de variação de uma função em relação a suas variáveis. Em termos geométricos, o gradiente aponta na direção de maior aumento da função. Portanto, para minimizar a função de custo, precisamos mover na direção oposta ao gradiente.Por isso, o descendente no nome.
 
-Seja $\theta$ um símbolo genérico para representar qualquer parâmetro ajustável na rede (como um peso $w_{ij}$ ou um viés $b_j$). O processo envolve calcular o gradiente da função de custo em relação a um parâmetro específico $\theta_j$ (ou seja, a derivada parcial $\frac{\partial L}{\partial \theta_j}$) e atualizar o valor desse parâmetro na direção oposta ao gradiente:
+Seja $\theta$ um símbolo genérico para representar qualquer parâmetro ajustável na rede, como um peso $w_{ij}$ ou um viés $b_j$. O processo envolve calcular o gradiente da função de custo em relação a um parâmetro específico $\theta_j$. Ou seja, a derivada parcial $\frac{\partial L}{\partial \theta_j}$ e atualizar o valor desse parâmetro na direção oposta ao gradiente:
 
 $$\theta_j \leftarrow \theta_j - \eta \frac{\partial L}{\partial \theta_j}$$
 
@@ -925,16 +964,21 @@ Em que:
 * $\eta$ (eta) é la **taxa de aprendizado** (learning rate), um hiperparâmetro que controla o tamanho do passo de atualização;
 * $\frac{\partial L}{\partial \theta_j}$ é la derivada parcial da função de custo $L$ em relação ao parâmetro $\theta_j$. Este valor indica a sensibilidade do custo a pequenas mudanças em $\theta_j$.
 
+![um mapa de linhas de nível para indicar o funcionamento do Gradiente Descendente.](/images/word2vec-architecture.webp)
+
+_Figura 6: Mostra, graficamente o conceito do gradiente descendente em um gráfico de curvas de nível._{: class="legend"}
+
 A atualização de um único parâmetro ($\theta_j$) usando Gradiente Descendente é direta. Suponha que para um determinado parâmetro $\theta_j$:
 
-* **Valor atual do parâmetro**: $\theta_j = 0.8$
-* **Taxa de aprendizado**: $\eta = 0.01$ (um valor pequeno, comum na prática)
-* **Gradiente da função de custo em relação a este parâmetro (calculado via backpropagation)**: $\frac{\partial L}{\partial \theta_j} = -2.5$ (o sinal negativo indica que aumentar $\theta_j$ diminuiria o custo $L$)
+* **Valor atual do parâmetro**: $\theta_j = 0.8$;
+* **Taxa de aprendizado**: $\eta = 0.01$ (um valor pequeno, comum na prática);
+* **Gradiente da função de custo em relação a este parâmetro (calculado via backpropagation)**: $\frac{\partial L}{\partial \theta_j} = -2.5$, o sinal negativo indica que aumentar $\theta_j$ diminuiria o custo $L$.
 
-A fórmula de atualização é:
+A fórmula de atualização será dada por:
+
 $$\theta_j \leftarrow \theta_j - \eta \frac{\partial L}{\partial \theta_j}$$
 
-Substituindo os valores:
+Usando alguns os valores hipotéticos teremos: 
 
 $$\theta_j \leftarrow 0.8 - (0.01 \times (-2.5))$$
 
@@ -942,100 +986,102 @@ $$\theta_j \leftarrow 0.8 - (-0.025)$$
 
 $$\theta_j \leftarrow 0.8 + 0.025 = 0.825$$
 
-O novo valor do parâmetro $\theta_j$ é $0.825$. Como o gradiente era negativo, a atualização aumentou o valor do parâmetro, movendo-o na direção que (localmente) diminui o custo. Se o gradiente fosse positivo, digamos $+1.5$, a atualização seria $\theta_j \leftarrow 0.8 - (0.01 \times 1.5) = 0.8 - 0.015 = 0.785$, diminuindo o valor do parâmetro.#### Retropropagação (Backpropagation)
+O novo valor do parâmetro $\theta_j$ será $0.825$. Como o gradiente era negativo, a atualização aumentou o valor do parâmetro, movendo-o na direção que, localmente, diminui o custo. Se o gradiente fosse positivo, digamos $+1.5$, a atualização seria $\theta_j \leftarrow 0.8 - (0.01 \times 1.5) = 0.8 - 0.015 = 0.785$, diminuindo o valor do parâmetro.
 
-A retropropagação, *Backpropagation em inglês*, é o algoritmo que permite calcular eficientemente esses gradientes em redes multicamadas. A ideia central é usar a **regra da cadeia** do cálculo diferencial. A regra da cadeia nos permite calcular a derivada de uma função composta, essencial para entender como o erro na saída da rede se relaciona com os pesos em cada camada.
+#### Retropropagação (Backpropagation)
+
+A retropropagação, *Backpropagation em inglês, é o algoritmo que permite calcular eficientemente esses gradientes em redes multicamadas*. A ideia central é usar a **regra da cadeia** do cálculo diferencial. A regra da cadeia nos permite calcular a derivada de uma função composta, essencial para entender como o erro na saída da rede se relaciona com os pesos em cada camada.
 
 > **A Regra da Cadeia na Retropropagação**
 >
-> A regra da cadeia do cálculo diferencial é o princípio matemático  que viabiliza todo o algoritmo de retropropagação. Ela permite calcular derivadas de funções compostas, que são exatamente o que temos em redes neurais:
+> A regra da cadeia do cálculo diferencial é o princípio matemático que viabiliza todo o algoritmo de retropropagação. Ela permite calcular derivadas de funções compostas. Este é exatamente o caso que temos em redes neurais de multiplas camadas, onde a saída de uma camada é a entrada da próxima. A regra da cadeia afirma que, se temos uma função composta $f(g(x))$, a derivada de $f$ em relação a $x$ pode ser expressa como o produto das derivadas de $f$ e $g$:
 >
 > $$\frac{d}{dx}[f(g(x))] = \frac{df}{dg} \cdot \frac{dg}{dx}$$
 >
-> **Aplicação na Retropropagação:**
+> **Aplicação na Retropropagação**:
 >
-> 1. A função de custo $L$ depende das saídas $\vet{y}$;
-> 2. As saídas $\vet{y}$ dependem das ativações $z^{(L)}$;
+> 1. A função de custo $L$ depende das saídas $\vert{y}$;
+> 2. As saídas $\vert{y}$ dependem das ativações $z^{(L)}$;
 > 3. As ativações $z^{(L)}$ dependem dos pesos $w$ e ativações anteriores.
 >
-> Para calcular $\frac{\partial L}{\partial w_{ji}^{(l)}}$, encadeamos estas derivadas:
+> Para calcular $\frac{\partial L}{\partial w_{ji}^{(l)} }$, encadeamos estas derivadas:
 >
-> $$\frac{\partial L}{\partial w_{ji}^{(l)}} = \frac{\partial L}{\partial z_j^{(l)}} \cdot \frac{\partial z_j^{(l)}}{\partial w_{ji}^{(l)}}$$
+> $$\frac{\partial L}{\partial w_{ji}^{(l)} } = \frac{\partial L}{\partial z_j^{(l)} } \cdot \frac{\partial z_j^{(l)} }{\partial w_{ji}^{(l)} }$$
 >
-> Onde $\frac{\partial L}{\partial z_j^{(l)}} = \delta_j^{(l)}$ (o erro do neurônio) e $\frac{\partial z_j^{(l)}}{\partial w_{ji}^{(l)}} = a_i^{(l-1)}$ (a ativação da camada anterior).
+> Onde $\frac{\partial L}{\partial z_j^{(l)} } = \delta_j^{(l)}$ (o erro do neurônio) e $\frac{\partial z_j^{(l)} }{\partial w_{ji}^{(l)} } = a_i^{(l-1)}$ (a ativação da camada anterior).
 >
 >**Caso Especial: Entropia Cruzada + Sigmóide**
 >
-> Uma propriedade matemática notável ocorre quando combinamos entropia cruzada como função de custo e sigmóide como ativação de saída. Aplicando a regra da cadeia:
+>Uma propriedade matemática notável ocorre quando combinamos entropia cruzada como função de custo e sigmóide como ativação de saída. Aplicando a regra da cadeia:
 >
-> $$\delta_k^{(L)} = \frac{\partial L}{\partial z_k^{(L)}} = \frac{\partial L}{\partial \vet{y}_k} \cdot \frac{\partial \vet{y}_k}{\partial z_k^{(L)}}$$
+> $$\delta_k^{(L)} = \frac{\partial L}{\partial z_k^{(L)} } = \frac{\partial L}{\partial \vert{y}_k} \cdot \frac{\partial \vert{y}_k}{\partial z_k^{(L)} }$$
 >
-> Para entropia cruzada: $\frac{\partial L}{\partial \vet{y}_k} = -\frac{y_k}{\vet{y}_k} + \frac{1-y_k}{1-\vet{y}_k}$
+> Para entropia cruzada: $\frac{\partial L}{\partial \vert{y}_k} = -\frac{y_k}{\vert{y}_k} + \frac{1-y_k}{1-\vert{y}_k}$
 >
-> Para sigmóide: $\frac{\partial \vet{y}_k}{\partial z_k^{(L)}} = \vet{y}_k(1-\vet{y}_k)$
+> Para sigmóide: $\frac{\partial \vert{y}_k}{\partial z_k^{(L)} } = \vert{y}_k(1-\vert{y}_k)$
 >
-> Multiplicando: $\delta_k^{(L)} = (-\frac{y_k}{\vet{y}_k} + \frac{1-y_k}{1-\vet{y}_k}) \cdot \vet{y}_k(1-\vet{y}_k) = \vet{y}_k - y_k$
+> Multiplicando: $\delta_k^{(L)} = (-\frac{y_k}{\vert{y}_k} + \frac{1-y_k}{1-\vert{y}_k}) \cdot \vert{y}_k(1-\vert{y}_k) = \vert{y}_k - y_k$
 >
 > Esta simplificação elegante é o que torna a combinação entropia cruzada + sigmóide computacionalmente eficiente.
 
-O algoritmo começa com o cálculo do erro na camada de saída, a diferença entre a previsão $\vet{y}$ e o alvo $y$. Em seguida, esse erro é propagado *para trás* na rede, esta é a origem do nome "retropropagação", camada por camada. Em cada camada, calcula-se o quanto cada neurônio contribuiu para o erro da camada seguinte.
+O algoritmo de retropropagação começa com o cálculo do erro na camada de saída, a diferença entre a previsão $\vert{y}$ e o alvo $y$. Em seguida, esse erro é propagado *para trás, em direção a camada de entrada* na rede, esta é a origem do nome `retropropagação`, camada por camada. Em cada camada, calcula-se o quanto cada neurônio contribuiu para o erro da camada seguinte.
 
 ![mostra o algoritmo de retropropagação como descrito no texto](/assets/images/retropropagacao-fluxo.webp)
 
-_Figura 6: Fluxo do algoritmo de retropropagação. O erro é calculado na camada de saída e propagado para trás, camada por camada, ajustando os pesos conforme necessário. A seta azul representa o fluxo do erro, enquanto a seta vermelha representa o fluxo dos gradientes_. {: class="legend"}
+_Figura 7: Fluxo do algoritmo de retropropagação. O erro é calculado na camada de saída e propagado para trás, camada por camada, ajustando os pesos conforme necessário. A seta azul representa o fluxo do erro, enquanto a seta vermelha representa o fluxo dos gradientes._{: class="legend"}
 
-Isso permite determinar o gradiente da função de custo em relação aos pesos de cada conexão, informando como ajustar esses pesos para reduzir o erro geral da rede. O processo pode ser resumido nos seguintes passos matemáticos:
+Isso permite determinar o gradiente da função de custo em relação aos pesos de cada conexão, informando como ajustar esses pesos para reduzir o erro geral da rede. O processo pode ser resumido nos seguintes passos:
 
 1. **Calcular o erro na camada de saída**:
 
-    $$\delta_k^{(L)} = \frac{\partial L}{\partial z_k^{(L)}} = \vet{y}_k - y_k$$
+    $$\delta_k^{(L)} = \frac{\partial L}{\partial z_k^{(L)} } = \vert{y}_k - y_k$$
 
-    >**Por que a simplificação $\delta^{(L)} = \vet{y} - y$ é válida para entropia cruzada + sigmóide?**
+    >**Por que a simplificação $\delta^{(L)} = \vert{y} - y$ é válida para entropia cruzada + sigmóide?**
     >
     > A simplificação ocorre devido à **cancelamento matemático** entre a derivada da função de custo, entropia cruzada e a derivada da função de ativação, sigmóide. Veja a derivação:
     >
     >**Função de Custo (Entropia Cruzada Binária)**:
     >
     > $$
-      L = -y \log(\vet{y}) - (1 - y) \log(1 - \vet{y})
+      L = -y \log(\vert{y}) - (1 - y) \log(1 - \vert{y})
       $$
     >
-    > Neste caso, $\vet{y} = \sigma(z)$ é a saída da sigmóide.
+    > Neste caso, $\vert{y} = \sigma(z)$ é a saída da sigmóide.
     >
     >**Derivada de $L$ em relação a $z$**:
     >
     > Pela regra da cadeia:
     >
     > $$
-      \delta^{(L)} = \frac{\partial L}{\partial z} = \frac{\partial L}{\partial \vet{y}} \cdot \frac{\partial \vet{y}}{\partial z}
+      \delta^{(L)} = \frac{\partial L}{\partial z} = \frac{\partial L}{\partial \vert{y} } \cdot \frac{\partial \vert{y} }{\partial z}
       $$
     >
-    >**Cálculo de $\frac{\partial L}{\partial \vet{y}}$**:
+    >**Cálculo de $\frac{\partial L}{\partial \vert{y} }$**:
     >
     > $$
-      \frac{\partial L}{\partial \vet{y}} = -\frac{y}{\vet{y}} + \frac{1 - y}{1 - \vet{y}}
+      \frac{\partial L}{\partial \vert{y} } = -\frac{y}{\vert{y} } + \frac{1 - y}{1 - \vert{y} }
       $$
     >
     >**Derivada da Sigmóide**:
     > $$
-      \frac{\partial \vet{y}}{\partial z} = \vet{y}(1 - \vet{y})
+      \frac{\partial \vert{y} }{\partial z} = \vert{y}(1 - \vert{y})
       $$
     >
     >**Combinação das Derivadas**:
     >
     > $$
-      \delta^{(L)} = \left(-\frac{y}{\vet{y}} + \frac{1 - y}{1 - \vet{y}}\right) \cdot \vet{y}(1 - \vet{y})
+      \delta^{(L)} = \left(-\frac{y}{\vert{y} } + \frac{1 - y}{1 - \vert{y} }\right) \cdot \vert{y}(1 - \vert{y})
       $$
     >
     > Simplificando:
     >
     > $$
-      \delta^{(L)} = -y(1 - \vet{y}) + (1 - y)\vet{y} = \vet{y} - y
+      \delta^{(L)} = -y(1 - \vert{y}) + (1 - y)\vert{y} = \vert{y} - y
       $$
     >
-    > O termo $\vet{y}(1 - \vet{y})$, derivada da sigmóide, cancela-se com os denominadores da entropia cruzada, resultando na expressão simplificada $\delta^{(L)} = \vet{y} - y$. Isso só é possível porque:
+    > O termo $\vert{y}(1 - \vert{y})$, derivada da sigmóide, cancela-se com os denominadores da entropia cruzada, resultando na expressão simplificada $\delta^{(L)} = \vert{y} - y$. Isso só é possível porque:
     >
-    >* A **entropia cruzada** é projetada para "casar" com a **sigmóide**.
+    >* A **entropia cruzada** é projetada para "casar" com a função sigmóide.
 
 2. **Propagar o erro para camadas anteriores**:
 
@@ -1044,7 +1090,7 @@ Isso permite determinar o gradiente da função de custo em relação aos pesos 
 3. **Calcular os gradientes dos pesos**:
 
     $$
-    \frac{\partial L}{\partial w_{ji}^{(l)}} = \delta_j^{(l)} a_i^{(l-1)}
+    \frac{\partial L}{\partial w_{ji}^{(l)} } = \delta_j^{(l)} a_i^{(l-1)}
     $$
 
 Neste caso, temos:
@@ -1054,14 +1100,14 @@ Neste caso, temos:
 * $f'$ é a derivada da função de ativação;
 * $a$ é a ativação do neurônio.
 
-### Exemplo Prático de Retropropagação
+##### Exemplo Prático de Retropropagação
 
-**Contexto**: queremos calcular o gradiente para o peso $w_{12}^{(2)}$, que conecta o neurônio $h_2$ da camada oculta (camada $l=2$) ao neurônio $y_1$ da camada de saída. 
+**Contexto**: queremos calcular o gradiente para o peso $w_{12}^{(2)}$, que conecta o neurônio $h_2$ da camada oculta (camada $l=2$) ao neurônio $y_1$ da camada de saída.
 
 **Dados do Exemplo**:
 
 * **Ativação da camada anterior**: $a_2^{(1)} = h_2 \approx 0.3430$ (calculado na propagação direta);
-* **Saída da rede**: $\vet{y} = 0.5824$ (previsão).
+* **Saída da rede**: $\vert{y} = 0.5824$ (previsão).
 * **Valor real**: $y = 1$.
 
 **Passo 1**: Cálculo de $\delta_1^{(2)}$
@@ -1069,7 +1115,7 @@ Neste caso, temos:
 Para entropia cruzada + sigmóide, o erro na saída é:
 
 $$
-\delta_1^{(2)} = \vet{y} - y = 0.5824 - 1 = -0.4176
+\delta_1^{(2)} = \vert{y} - y = 0.5824 - 1 = -0.4176
 $$
 
 **Passo 2**: Cálculo do Gradiente
@@ -1077,13 +1123,13 @@ $$
 Usando a fórmula:
 
 $$
-\frac{\partial L}{\partial w_{12}^{(2)}} = \delta_1^{(2)} \cdot a_2^{(1)}
+\frac{\partial L}{\partial w_{12}^{(2)} } = \delta_1^{(2)} \cdot a_2^{(1)}
 $$
 
 Substituindo os valores:
 
 $$
-\frac{\partial L}{\partial w_{12}^{(2)}} = (-0.4176) \times 0.3430 \approx -0.1432
+\frac{\partial L}{\partial w_{12}^{(2)} } = (-0.4176) \times 0.3430 \approx -0.1432
 $$
 
 **Passo 3**: Atualização do Peso
@@ -1091,28 +1137,26 @@ $$
 Supondo uma taxa de aprendizado $\eta = 0.01$:
 
 $$
-w_{12}^{(2)} \leftarrow w_{12}^{(2)} - \eta \frac{\partial L}{\partial w_{12}^{(2)}}
+w_{12}^{(2)} \leftarrow w_{12}^{(2)} - \eta \frac{\partial L}{\partial w_{12}^{(2)} }
 $$
 
 $$
 w_{12}^{(2)} \leftarrow -0.3 - 0.01 \times (-0.1432) = -0.3 + 0.001432 = -0.298568
 $$
 
-### Observações Chave
+A atenta leitora deve tomar nota dos seguintes pontos importantes:
 
-1. **Simplificação para Entropia Cruzada + Sigmóide**:
-   - A combinação dessas funções elimina a necessidade de calcular explicitamente $\sigma'(z^{(2)})$, pois a derivada se cancela na regra da cadeia. Isso acelera computacionalmente o treinamento.
+1. **Simplificação para Entropia Cruzada + Sigmóide**: a combinação dessas funções elimina a necessidade de calcular explicitamente $\sigma'(z^{(2)})$, pois a derivada se cancela na regra da cadeia. Isso acelera computacionalmente o treinamento diminuindo o custo total do treinamento.
 
-2. **Generalização para Outras Funções**:
-   - Se a função de custo fosse MSE (Erro Quadrático Médio) ou a ativação fosse outra (e.g., ReLU), o cálculo de $\delta$ incluiria a derivada da função de ativação:
+2. **Generalização para Outras Funções**: se a função de custo fosse **MSE** (Erro Quadrático Médio) ou a ativação fosse outra (por exemplo: $\text{ReLU}$), o cálculo de $\delta$ incluiria a derivada da função de ativação:
 
      $$\delta_j^{(l)} = \left(\sum_{k} \delta_k^{(l+1)} w_{kj}^{(l+1)}\right) f'(z_j^{(l)})$$
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@PAREI AQUI@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 ### Implementação do Treinamento
 
-Vamos explorar detalhadamente como o treinamento funciona em uma rede neural rasa, semelhante à utilizada nos modelos de **word embeddings**. Este exemplo detalhado servirá como base para entender o treinamento desses modelos.
-
-#### Inicialização
+Este é o momento em que a esforçada leitora deve dar uma parada, tomar uma água, ver o céu azul e respirar fundo porque vamos explorar detalhadamente como o treinamento funciona em uma rede neural rasa, semelhante à utilizada nos modelos de **word embeddings**. Este exemplo detalhado servirá como base para que a encantada leitora domine o processo de treinamento desses modelos.
 
 O processo começa com a inicialização aleatória dos pesos e vieses:
 
@@ -1133,21 +1177,31 @@ Considere uma rede neural simples com uma camada oculta e uma função de ativa�
 
    Calculando a saída da rede:
 
-   $$\vet{y} = \text{softmax}(W_2 h + b_2)$$
+   $$\vert{y} = \text{softmax}(W_2 h + b_2)$$
 
 2. **Cálculo do erro**:
 
-   $$L = -\sum_{i} y_i \log(\vet{y}_i)$$
+   $$L = -\sum_{i} y_i \log(\vert{y}_i)$$
 
 3. **Retropropagação**:
 
    Erro na camada de saída:
 
-   $$\delta^{(2)} = \vet{y} - y$$
+   $$\delta^{(2)} = \vert{y} - y$$
 
    Gradientes para W2 e b2:
 
-   $$\frac{\partial L}{\partial W_2} = \delta^{(2)} h^T$$
+   $$\frac{\partial L}{\partial W^{(2)} } = h^T \delta^{(2)}$$
+
+   >Em notação matricial:
+   > - Se $h$ é um vetor linha (dimensão $1 \times d$)
+   > - e $\delta^{(2)}$ é um vetor linha (dimensão $1 \times |V|$),
+   >
+   > a multiplicação correta para gerar um gradiente de dimensão $d \times |V|$ (compatível com $W^{(2)}$) será:
+   >
+   >$$
+    \frac{\partial L}{\partial W^{(2)} } = \underbrace{h^T}_{d \times 1} \underbrace{\delta^{(2)} }_{1 \times |V|}
+   >$$
 
    $$\frac{\partial L}{\partial b_2} = \delta^{(2)}$$
 
@@ -1161,7 +1215,7 @@ Considere uma rede neural simples com uma camada oculta e uma função de ativa�
 
    $$\frac{\partial L}{\partial b_1} = \delta^{(1)}$$
 
-4. **Atualização dos pesos**:
+1. **Atualização dos pesos**:
 
    $$W_2 = W_2 - \eta \frac{\partial L}{\partial W_2}$$
 
@@ -1203,9 +1257,9 @@ Algoritmos como Adam, RMSprop e Adagrad ajustam a taxa de aprendizado individual
 
 Antes de detalharmos técnicas como regularização, é importante entender dois desafios comuns no treinamento de redes neurais: *Overfitting* e *Underfitting*.
 
-* **Underfitting (Subajuste):** Ocorre quando o modelo é muito simples para capturar os padrões presentes nos dados de treinamento. Ele falha em aprender bem tanto nos dados de treino quanto em dados novos. Isso geralmente indica que a arquitetura da rede é inadequada ou que o treinamento foi insuficiente.
+* **Underfitting (Subajuste)**: Ocorre quando o modelo é muito simples para capturar os padrões presentes nos dados de treinamento. Ele falha em aprender bem tanto nos dados de treino quanto em dados novos. Isso geralmente indica que a arquitetura da rede é inadequada ou que o treinamento foi insuficiente.
 
-* **Overfitting (Sobreajuste):** Ocorre quando o modelo aprende os dados de treinamento *excessivamente bem*, incluindo ruídos e particularidades específicas daquele conjunto de dados. Como resultado, o modelo tem um desempenho excelente nos dados de treino, mas generaliza mal para dados novos e não vistos, apresentando um erro muito maior nesses casos. O modelo "decorou" o treino em vez de aprender os padrões gerais.
+* **Overfitting (Sobreajuste)**: Ocorre quando o modelo aprende os dados de treinamento *excessivamente bem*, incluindo ruídos e particularidades específicas daquele conjunto de dados. Como resultado, o modelo tem um desempenho excelente nos dados de treino, mas generaliza mal para dados novos e não vistos, apresentando um erro muito maior nesses casos. O modelo "decorou" o treino em vez de aprender os padrões gerais.
 
 O objetivo do treinamento é encontrar um equilíbrio, um modelo que generalize bem para novos dados. As técnicas de otimização e, especialmente, de **regularização**, são projetadas principalmente para combater o *overfitting*.
 
@@ -1239,7 +1293,7 @@ $$\text{Penalidade L2} = 0.005 \times 3.54 = 0.0177$$
 
 **Passo 3: Adicionar a penalidade ao custo original.**
 
-Se o custo calculado a partir do erro de previsão (e.g., entropia cruzada) fosse $L = 0.3567$, o custo regularizado seria:
+Se o custo calculado a partir do erro de previsão (por exemplo:, entropia cruzada) fosse $L = 0.3567$, o custo regularizado seria:
 
 $$L_{reg} = L + \text{Penalidade L2} = 0.3567 + 0.0177 = 0.3744$$
 
@@ -1349,10 +1403,10 @@ $$
 
 2. Aplicação da Função Softmax
 
-   A saída prevista $ \vet{y} $ é calculada com a função softmax:
+   A saída prevista $ \vert{y} $ é calculada com a função softmax:
 
    $$
-   \vet{y}_i = \frac{e^{z_i}}{\sum_{j=1}^{4} e^{z_j}}
+   \vert{y}_i = \frac{e^{z_i} }{\sum_{j=1}^{4} e^{z_j} }
    $$
 
    Calculando os exponenciais (aproximados):
@@ -1367,28 +1421,28 @@ $$
    1.150 + 1.185 + 1.221 + 1.259 = 4.815
    $$
 
-   Agora, calculamos cada $ \vet{y}_i $:
+   Agora, calculamos cada $ \vert{y}_i $:
 
    $$
-   \vet{y}_1 = \frac{1.150}{4.815} \approx 0.239
-   $$
-
-   $$
-   \vet{y}_2 = \frac{1.185}{4.815} \approx 0.246
+   \vert{y}_1 = \frac{1.150}{4.815} \approx 0.239
    $$
 
    $$
-   \vet{y}_3 = \frac{1.221}{4.815} \approx 0.254
+   \vert{y}_2 = \frac{1.185}{4.815} \approx 0.246
    $$
 
    $$
-   \vet{y}_4 = \frac{1.259}{4.815} \approx 0.261
+   \vert{y}_3 = \frac{1.221}{4.815} \approx 0.254
+   $$
+
+   $$
+   \vert{y}_4 = \frac{1.259}{4.815} \approx 0.261
    $$
 
    Portanto:
 
    $$
-   \vet{y} = [0.239, 0.246, 0.254, 0.261]
+   \vert{y} = [0.239, 0.246, 0.254, 0.261]
    $$
 
 3. Cálculo do Custo
@@ -1396,13 +1450,13 @@ $$
    Usamos a entropia cruzada como função de custo:
 
    $$
-   L = -\sum_{i=1}^{4} y_i \log(\vet{y}_i)
+   L = -\sum_{i=1}^{4} y_i \log(\vert{y}_i)
    $$
 
    Como $ y = [0, 0, 1, 0] $, apenas o terceiro termo contribui:
 
    $$
-   L = - y_3 \log(\vet{y}_3) = - 1 \cdot \log(0.254)
+   L = - y_3 \log(\vert{y}_3) = - 1 \cdot \log(0.254)
    $$
 
    Calculando:
@@ -1418,31 +1472,25 @@ $$
 #### Retropropagação
 
 **Passo 1**: Calcular o Erro na Camada de Saída
-Para softmax com entropia cruzada, o erro $ \delta^{(2)} $ é:
+Para softmax com entropia cruzada, o erro $\delta^{(2)}$ será:
 
-   $$
-   \delta^{(2)} = \vet{y} - y
-   $$
+   $$\delta^{(2)} = \vert{y} - y$$
 
-   $$
-   \delta^{(2)} = [0.239, 0.246, 0.254, 0.261] - [0, 0, 1, 0]
-   $$
+   $$\delta^{(2)} = [0.239, 0.246, 0.254, 0.261] - [0, 0, 1, 0]$$
 
-   $$
-   \delta^{(2)} = [0.239, 0.246, 0.254 - 1, 0.261] = [0.239, 0.246, -0.746, 0.261]
-   $$
+   $$\delta^{(2)} = [0.239, 0.246, 0.254 - 1, 0.261] = [0.239, 0.246, -0.746, 0.261]   $$
 
 **Passo 2**: Calcular os Gradientes para $ W^{(2)} $
    O gradiente do custo em relação a $ W^{(2)} $ é:
 
    $$
-   \frac{\partial L}{\partial W^{(2)}} = h^T \cdot \delta^{(2)}
+   \frac{\partial L}{\partial W^{(2)} } = h^T \cdot \delta^{(2)}
    $$
 
    Com $ h = [0.1, 0.2] $ (vetor coluna $ h^T = \begin{pmatrix} 0.1 \\ 0.2 \end{pmatrix} $):
 
    $$
-   \frac{\partial L}{\partial W^{(2)}} = \begin{pmatrix}
+   \frac{\partial L}{\partial W^{(2)} } = \begin{pmatrix}
    0.1 \\
    0.2
    \end{pmatrix} \cdot [0.239, 0.246, -0.746, 0.261]
@@ -1451,7 +1499,7 @@ Para softmax com entropia cruzada, o erro $ \delta^{(2)} $ é:
    Calculando cada elemento:
 
    $$
-   \frac{\partial L}{\partial W^{(2)}} = \begin{pmatrix}
+   \frac{\partial L}{\partial W^{(2)} } = \begin{pmatrix}
    0.1 \cdot 0.239 & 0.1 \cdot 0.246 & 0.1 \cdot (-0.746) & 0.1 \cdot 0.261 \\
    0.2 \cdot 0.239 & 0.2 \cdot 0.246 & 0.2 \cdot (-0.746) & 0.2 \cdot 0.261
    \end{pmatrix}
@@ -1521,13 +1569,13 @@ Para softmax com entropia cruzada, o erro $ \delta^{(2)} $ é:
    O gradiente do custo em relação a $ W^{(1)} $ é:
 
    $$
-   \frac{\partial L}{\partial W^{(1)}} = x^T \cdot \delta^{(1)}
+   \frac{\partial L}{\partial W^{(1)} } = x^T \cdot \delta^{(1)}
    $$
 
    Com $ x = [1, 0, 0, 0] $ (vetor coluna $ x^T = \begin{pmatrix} 1 \\ 0 \\ 0 \\ 0 \end{pmatrix} $):
 
    $$
-   \frac{\partial L}{\partial W^{(1)}} = \begin{pmatrix}
+   \frac{\partial L}{\partial W^{(1)} } = \begin{pmatrix}
    1 \\
    0 \\
    0 \\
@@ -1560,7 +1608,7 @@ Usamos uma taxa de aprendizado $ \eta = 0.1 $.
 1. Atualização de $ W^{(2)} $
 
    $$
-   W^{(2)} \leftarrow W^{(2)} - \eta \cdot \frac{\partial L}{\partial W^{(2)}}
+   W^{(2)} \leftarrow W^{(2)} - \eta \cdot \frac{\partial L}{\partial W^{(2)} }
    $$
 
    $$
@@ -1591,39 +1639,26 @@ Usamos uma taxa de aprendizado $ \eta = 0.1 $.
    W^{(2)}_{1,4} = 0.5 - 0.1 \cdot 0.0261 = 0.5 - 0.00261 \approx 0.4974
    $$
 
-   $$
-   W^{(2)}_{2,1} = 0.6 - 0.1 \cdot 0.0478 = 0.6 - 0.00478 \approx 0.5952
-   $$
+   $$W^{(2)}_{2,1} = 0.6 - 0.1 \cdot 0.0478 = 0.6 - 0.00478 \approx 0.5952$$
 
-   $$
-   W^{(2)}_{2,2} = 0.7 - 0.1 \cdot 0.0492 = 0.7 - 0.00492 \approx 0.6951
-   $$
+   $$W^{(2)}_{2,2} = 0.7 - 0.1 \cdot 0.0492 = 0.7 - 0.00492 \approx 0.6951$$
 
-   $$
-   W^{(2)}_{2,3} = 0.8 - 0.1 \cdot (-0.1492) = 0.8 + 0.01492 \approx 0.8149
-   $$
+   $$W^{(2)}_{2,3} = 0.8 - 0.1 \cdot (-0.1492) = 0.8 + 0.01492 \approx 0.8149$$
 
-   $$
-   W^{(2)}_{2,4} = 0.9 - 0.1 \cdot 0.0522 = 0.9 - 0.00522 \approx 0.8948
-   $$
+   $$W^{(2)}_{2,4} = 0.9 - 0.1 \cdot 0.0522 = 0.9 - 0.00522 \approx 0.8948$$
 
-   Nova matriz $ W^{(2)} $:
+   Nova matriz $W^{(2)}$:
 
-   $$
-   W^{(2)} \approx \begin{pmatrix}
+   $$W^{(2)} \approx \begin{pmatrix}
    0.1976 & 0.2975 & 0.4075 & 0.4974 \\
    0.5952 & 0.6951 & 0.8149 & 0.8948
-   \end{pmatrix}
-   $$
+   \end{pmatrix}$$
 
 2. Atualização de $ W^{(1)} $
 
-   $$
-   W^{(1)} \leftarrow W^{(1)} - \eta \cdot \frac{\partial L}{\partial W^{(1)}}
-   $$
+   $$W^{(1)} \leftarrow W^{(1)} - \eta \cdot \frac{\partial L}{\partial W^{(1)} }$$
 
-   $$
-   W^{(1)} = \begin{pmatrix}
+   $$W^{(1)} = \begin{pmatrix}
    0.1 & 0.2 \\
    0.3 & 0.4 \\
    0.5 & 0.6 \\
@@ -1633,40 +1668,32 @@ Usamos uma taxa de aprendizado $ \eta = 0.1 $.
    0 & 0 \\
    0 & 0 \\
    0 & 0
-   \end{pmatrix}
-   $$
+   \end{pmatrix}$$
 
    Calculando:
 
-   $$
-   W^{(1)}_{1,1} = 0.1 - 0.1 \cdot (-0.0463) = 0.1 + 0.00463 \approx 0.1046
-   $$
+   $$W^{(1)}_{1,1} = 0.1 - 0.1 \cdot (-0.0463) = 0.1 + 0.00463 \approx 0.1046$$
 
-   $$
-   W^{(1)}_{1,2} = 0.2 - 0.1 \cdot (-0.0463) = 0.2 + 0.00463 \approx 0.2046
-   $$
+   $$W^{(1)}_{1,2} = 0.2 - 0.1 \cdot (-0.0463) = 0.2 + 0.00463 \approx 0.2046$$
 
    As outras linhas permanecem inalteradas (gradiente zero):
 
-   $$
-   W^{(1)} = \begin{pmatrix}
+   $$W^{(1)} = \begin{pmatrix}
    0.1046 & 0.2046 \\
    0.3 & 0.4 \\
    0.5 & 0.6 \\
    0.7 & 0.8
-   \end{pmatrix}
-   $$
+   \end{pmatrix}$$
 
-Neste exemplo, a estupefata leitora pode ver como treinar uma rede neural rasa para prever `dia` a partir de `sol`. O processo incluiu propagação direta, cálculo do custo com entropia cruzada, retropropagação para determinar os gradientes e atualização dos pesos com uma taxa de aprendizado. Este exemplo serve como base para entender modelos de *word embeddings* como CBOW e Skip-gram, ajustando apenas as entradas e saídas conforme necessário. A rede pode ser vista na Figura 7.
+Neste exemplo, a estupefata leitora pode ver como treinar uma rede neural rasa para prever `dia` a partir de `sol`. O processo incluiu propagação direta, cálculo do custo com entropia cruzada, retropropagação para determinar os gradientes e atualização dos pesos com uma taxa de aprendizado. Este exemplo serve como base para entender modelos de *word embeddings* como CBOW e Skip-gram, ajustando apenas as entradas e saídas conforme necessário. A rede pode ser vista na Figura 8.
 
 ![Diagrama da rede neural treinada mostrando os valores e vetores encontrados](/assets/images/shallow-neural-network-training.webp)
 
-_Figura 7: Esquema da Rede Rasa treinada no exemplo._{: class="legend"}
+_Figura 8: Esquema da Rede Rasa treinada no exemplo._{: class="legend"}
 
 #### Implementação em C++ 20 do Exemplo de Treinamento de uma Rede Neural Rasa
 
 ```cpp
-
 #include <iostream>        /**< Para operações de entrada/saída padrão */
 #include <vector>          /**< Para std::vector, usado para armazenar pesos e ativações */
 #include <cmath>           /**< Para funções matemáticas como std::exp e std::log */
@@ -1907,13 +1934,13 @@ No coração dos modelos de **word embeddings** está a camada de projeção, qu
 
 ![Projeção no **word embeddings**](/assets/images/word-embedding-projecao.png)
 
-_Figura 5: Visualização da camada de projeção nos modelos de **word embeddings**, mostrando como os vetores one-hot são transformados em embeddings densos._{: class="legend"}
+_Figura 9: Visualização da camada de projeção nos modelos de **word embeddings**, mostrando como os vetores one-hot são transformados em embeddings densos._{: class="legend"}
 
 A matriz de pesos $W$ entre a camada de entrada e a camada oculta tem dimensões $ \vert V \vert \times d$, onde $ \vert V \vert $ é o tamanho do vocabulário e $d$ é a dimensão do embedding. Após o treinamento, cada linha dessa matriz representa o embedding de uma palavra específica.
 
 ![](/assets/images/word-embedding-projection.webp)
 
-_Figura 6: Ilustração detalhada da camada de projeção em modelos de word embeddings. À esquerda, a representação one-hot da palavra `cachorro` no vocabulário. Ao centro, a matriz de pesos W (dimensões  \vert V \vert  × d) que mapeia as palavras para o espaço vetorial denso. À direita, o vetor de embedding resultante após a operação de consulta (lookup) na linha correspondente da matriz. O espaço vetorial d-dimensional mostra como diferentes palavras são posicionadas de acordo com suas relações semânticas._{: class="legend"}
+_Figura 10: Ilustração detalhada da camada de projeção em modelos de word embeddings. À esquerda, a representação one-hot da palavra `cachorro` no vocabulário. Ao centro, a matriz de pesos $W$, dimensões  $\vert V \vert \times d$, que mapeia as palavras para o espaço vetorial denso. À direita, o vetor de embedding resultante após a operação de consulta, *lookup, em inglês* na linha correspondente da matriz. O espaço vetorial d-dimensional mostra como diferentes palavras são posicionadas de acordo com suas relações semânticas._{: class="legend"}
 
 Do ponto de vista da álgebra linear, esta matriz de pesos $W$ representa uma transformação linear do espaço one-hot de dimensão $ \vert V \vert $ para o espaço de embedding denso de dimensão $d$. O processo de treinamento visa aprender os elementos dessa matriz $W$ de forma que a transformação capture as relações semânticas desejadas
 
@@ -2086,6 +2113,8 @@ BENGIO, Y. et al. **A Neural Probabilistic Language Model**. Journal of Machine 
 
 BRAGA, A. P.; CARVALHO, A. P. L. F.; LUDERMIR, T. B. **Redes neurais artificiais: teoria e aplicações**. 2. ed. Rio de Janeiro: LTC, 2007.
 
+GLOROT, X.; BENGIO, Y. **Understanding the difficulty of training deep feedforward neural networks**. Journal of Machine Learning Research - Proceedings Track, v. 9, p. 249-256, jan. 2010.
+
 GLOROT, X.; BORDES, A.; BENGIO, Y. **Deep sparse rectifier neural networks**. In: Proceedings of the fourteenth international conference on artificial intelligence and statistics, p. 315-323, 2011.
 
 GOODFELLOW, I.; BENGIO, Y.; COURVILLE, A. **Deep Learning**. Cambridge, MA: MIT Press, 2016.
@@ -2093,6 +2122,8 @@ GOODFELLOW, I.; BENGIO, Y.; COURVILLE, A. **Deep Learning**. Cambridge, MA: MIT 
 HAYKIN, S. **Redes neurais: princípios e prática**. 2. ed. Porto Alegre: Bookman, 2001.
 
 HAYKIN, S. **Neural Networks and Learning Machines**. 3rd ed. Upper Saddle River: Pearson, 2009.
+
+HE, K.; ZHANG, X.; REN, S.; SUN, J. **Deep Residual Learning for Image Recognition**. In: IEEE CONFERENCE ON COMPUTER VISION AND PATTERN RECOGNITION (CVPR), 2016, Las Vegas. Proceedings [...]. IEEE, 2016, p. 770-778. DOI: 10.1109/CVPR.2016.90.
 
 MCCULLOCH, W. S.; PITTS, W. **A logical calculus of the ideas immanent in nervous activity**. The bulletin of mathematical biophysics, v. 5, n. 4, p. 115-133, 1943.
 

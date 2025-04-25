@@ -35,7 +35,7 @@ keywords: |-
     lstm
 toc: true
 published: true
-lastmod: 2025-04-20T22:39:59.927Z
+lastmod: 2025-04-25T13:56:50.970Z
 ---
 
 ## Superando Limitações Locais: Construindo a Ponte para a Atenção
