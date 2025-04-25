@@ -35,7 +35,7 @@ keywords: |-
     lstm
 toc: true
 published: true
-lastmod: 2025-04-18T19:03:19.463Z
+lastmod: 2025-04-25T15:26:42.408Z
 draft: 2025-04-17T18:49:57.828Z
 slug: transformers-desvendando-modelagem-de-sequencias
 ---
@@ -395,7 +395,7 @@ int main() {
 
 Em um modelo **N-gram** probabilístico, cada documento $D$ é representado por sua própria matriz de transição $T_D$, na qual cada elemento $T_D(i,j)$ indica a probabilidade condicional de transição da palavra $i$ para a palavra $j$ especificamente no documento $D$:
 
-$$T_D(i,j) = P(w_j | w_i, D) = \frac{\text{count}(w_i, w_j, d)}{\text{count}(w_i, D)}$$
+$$T_D(i,j) = P(w_j | w_i, D) = \frac{\text{count}(w_i, w_j, D)}{\text{count}(w_i, D)}$$
 
 Neste caso, temos:
 
