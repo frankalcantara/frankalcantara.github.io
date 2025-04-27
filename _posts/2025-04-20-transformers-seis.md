@@ -35,8 +35,8 @@ keywords: |-
     inteligência artificial
     processamento de linguagem natural
 toc: true
-published: false
-lastmod: 2025-04-25T13:57:26.693Z
+published: true
+lastmod: 2025-04-27T00:20:35.468Z
 draft: 2025-04-19T20:15:42.577Z
 ---
 
@@ -76,14 +76,14 @@ Nesta equação, temos:
 * $f$ é a função de ativação, que determina se, e como, o neurônio dispara com base na soma ponderada das entradas, $w_i x_i$, e do viés, $b$. Essa função acrescenta a não-linearidades ao modelo, permitindo que ele aprenda padrões mais complexos.
 * $y$ é a saída do neurônio.
 
-A soma ponderada $\sum_{i=1}^{n} w_i x_i$ pode ser vista de forma mais compacta como sendo o *produto escalar entre o vetor de pesos $w = [w_1, ..., w_n]$ e o vetor de entradas $x = [x_1, ..., x_n]$, frequentemente denotado como $w \cdot x$ ou $w^T x$*. Esta operação mede o quanto a entrada $x$ se alinha com os pesos $w$ aprendidos pelo neurônio. A atenta leitora deve lembrar que estudamos **produto escalar** [neste artigo](https://frankalcantara.com/transformers-um/).
+A soma ponderada $\sum_{i=1}^{n} w_i x_i$ pode ser vista de forma mais compacta como sendo o *produto escalar entre o vetor de pesos $w = [w_1, ..., w_n]$ e o vetor de entradas $x = [x_1, ..., x_n]$, frequentemente denotado como $w \cdot x$ ou $w^T x$*. Esta operação mede o quanto a entrada $x$ se alinha com os pesos $w$ aprendidos pelo neurônio. A atenta leitora deve lembrar que estudamos **produto escalar** [em outro artigo](https://frankalcantara.com/transformers-um/).
 
 > A afirmação mais importante do parágrafo anterior "Esta operação mede o quanto a entrada $x$ se alinha com os pesos $w$ aprendidos pelo neurônio" refere-se a uma propriedade fundamental do produto escalar entre dois vetores. Matematicamente, o produto escalar entre os vetores $w$ e $x$ será calculado por:
 >
-> $$w \cdot x = \sum_{i=1}^{n} w_i x_i = |w| |x| \cos(\theta)$$
+> $$w \cdot x = \sum_{i=1}^{n} w_i x_i = |w \vert   \vert x \vert  \cos(\theta)$$
 >
 > Neste caso, teremos:
-> 
+>
 > * $\vert w \vert $ e $\vert x \vert $ são as magnitudes (normas) dos vetores;
 > * $\theta$ é o ângulo entre eles;
 >
@@ -420,21 +420,21 @@ Abaixo, vamos calcular a propagação direta (*forward pass*) com valores espec�
 
 - **Entrada**:  
 
-  $$ x = \begin{bmatrix} 1.0 \\ 0.5 \\ -0.2 \end{bmatrix} $$
+  $$x = \begin{bmatrix} 1.0 \\ 0.5 \\ -0.2 \end{bmatrix}$$
 
 - **Pesos e Vieses**:
 
   - **Primeira Camada Oculta**:  
 
-    $$ W^{(1)} = \begin{bmatrix} 0.2 & 0.3 & 0.1 \\ 0.4 & -0.1 & 0.5 \\ -0.2 & 0.6 & 0.0 \\ 0.1 & 0.0 & -0.3 \end{bmatrix}, \quad b^{(1)} = \begin{bmatrix} 0.1 \\ -0.2 \\ 0.3 \\ 0.0 \end{bmatrix} $$
+    $$W^{(1)} = \begin{bmatrix} 0.2 & 0.3 & 0.1 \\ 0.4 & -0.1 & 0.5 \\ -0.2 & 0.6 & 0.0 \\ 0.1 & 0.0 & -0.3 \end{bmatrix}, \quad b^{(1)} = \begin{bmatrix} 0.1 \\ -0.2 \\ 0.3 \\ 0.0 \end{bmatrix}$$
   
   - **Segunda Camada Oculta**:  
   
-    $$ W^{(2)} = \begin{bmatrix} 0.5 & -0.2 & 0.1 & 0.3 \\ 0.0 & 0.4 & -0.3 & 0.1 \\ -0.1 & 0.2 & 0.6 & -0.4 \end{bmatrix}, \quad b^{(2)} = \begin{bmatrix} 0.2 \\ -0.1 \\ 0.0 \end{bmatrix} $$
+    $$W^{(2)} = \begin{bmatrix} 0.5 & -0.2 & 0.1 & 0.3 \\ 0.0 & 0.4 & -0.3 & 0.1 \\ -0.1 & 0.2 & 0.6 & -0.4 \end{bmatrix}, \quad b^{(2)} = \begin{bmatrix} 0.2 \\ -0.1 \\ 0.0 \end{bmatrix}$$
   
   - **Camada de Saída**:  
   
-    $$ W^{(3)} = \begin{bmatrix} 0.3 & -0.5 & 0.2 \\ 0.1 & 0.4 & -0.6 \end{bmatrix}, \quad b^{(3)} = \begin{bmatrix} 0.1 \\ -0.2 \end{bmatrix} $$
+    $$W^{(3)} = \begin{bmatrix} 0.3 & -0.5 & 0.2 \\ 0.1 & 0.4 & -0.6 \end{bmatrix}, \quad b^{(3)} = \begin{bmatrix} 0.1 \\ -0.2 \end{bmatrix}$$
 
 Calculando passo a passo teremos:
 
@@ -442,84 +442,84 @@ Calculando passo a passo teremos:
 
     Calculamos a transformação afim:  
 
-    $$ z^{(1)} = W^{(1)} x + b^{(1)} = \begin{bmatrix} 0.2 & 0.3 & 0.1 \\ 0.4 & -0.1 & 0.5 \\ -0.2 & 0.6 & 0.0 \\ 0.1 & 0.0 & -0.3 \end{bmatrix} \begin{bmatrix} 1.0 \\ 0.5 \\ -0.2 \end{bmatrix} + \begin{bmatrix} 0.1 \\ -0.2 \\ 0.3 \\ 0.0 \end{bmatrix} $$
+    $$z^{(1)} = W^{(1)} x + b^{(1)} = \begin{bmatrix} 0.2 & 0.3 & 0.1 \\ 0.4 & -0.1 & 0.5 \\ -0.2 & 0.6 & 0.0 \\ 0.1 & 0.0 & -0.3 \end{bmatrix} \begin{bmatrix} 1.0 \\ 0.5 \\ -0.2 \end{bmatrix} + \begin{bmatrix} 0.1 \\ -0.2 \\ 0.3 \\ 0.0 \end{bmatrix}$$
 
     Calculando cada componente:  
 
-    - $$ z^{(1)}_1 = (0.2 \cdot 1.0) + (0.3 \cdot 0.5) + (0.1 \cdot -0.2) + 0.1 = 0.2 + 0.15 - 0.02 + 0.1 = 0.43 $$  
+    - $$z^{(1)}_1 = (0.2 \cdot 1.0) + (0.3 \cdot 0.5) + (0.1 \cdot -0.2) + 0.1 = 0.2 + 0.15 - 0.02 + 0.1 = 0.43$$
 
-    - $$ z^{(1)}_2 = (0.4 \cdot 1.0) + (-0.1 \cdot 0.5) + (0.5 \cdot -0.2) - 0.2 = 0.4 - 0.05 - 0.1 - 0.2 = 0.05 $$  
+    - $$z^{(1)}_2 = (0.4 \cdot 1.0) + (-0.1 \cdot 0.5) + (0.5 \cdot -0.2) - 0.2 = 0.4 - 0.05 - 0.1 - 0.2 = 0.05$$
 
-    - $$ z^{(1)}_3 = (-0.2 \cdot 1.0) + (0.6 \cdot 0.5) + (0.0 \cdot -0.2) + 0.3 = -0.2 + 0.3 + 0.0 + 0.3 = 0.4 $$  
+    - $$z^{(1)}_3 = (-0.2 \cdot 1.0) + (0.6 \cdot 0.5) + (0.0 \cdot -0.2) + 0.3 = -0.2 + 0.3 + 0.0 + 0.3 = 0.4$$
 
-    - $$ z^{(1)}_4 = (0.1 \cdot 1.0) + (0.0 \cdot 0.5) + (-0.3 \cdot -0.2) + 0.0 = 0.1 + 0.0 + 0.06 = 0.16 $$
+    - $$z^{(1)}_4 = (0.1 \cdot 1.0) + (0.0 \cdot 0.5) + (-0.3 \cdot -0.2) + 0.0 = 0.1 + 0.0 + 0.06 = 0.16$$
 
     Portanto:  
 
-    $$ z^{(1)} = \begin{bmatrix} 0.43 \\ 0.05 \\ 0.4 \\ 0.16 \end{bmatrix} $$
+    $$z^{(1)} = \begin{bmatrix} 0.43 \\ 0.05 \\ 0.4 \\ 0.16 \end{bmatrix}$$
 
     Aplicamos a função ReLU:  
 
-    $$ h^{(1)} = \text{ReLU}(z^{(1)}) = \begin{bmatrix} \max(0, 0.43) \\ \max(0, 0.05) \\ \max(0, 0.4) \\ \max(0, 0.16) \end{bmatrix} = \begin{bmatrix} 0.43 \\ 0.05 \\ 0.4 \\ 0.16 \end{bmatrix} $$
+    $$h^{(1)} = \text{ReLU}(z^{(1)}) = \begin{bmatrix} \max(0, 0.43) \\ \max(0, 0.05) \\ \max(0, 0.4) \\ \max(0, 0.16) \end{bmatrix} = \begin{bmatrix} 0.43 \\ 0.05 \\ 0.4 \\ 0.16 \end{bmatrix}$$
 
 2. **Segunda Camada Oculta ($\text{Tanh}$)**
 
     Calculamos a transformação afim:  
 
-    $$ z^{(2)} = W^{(2)} h^{(1)} + b^{(2)} = \begin{bmatrix} 0.5 & -0.2 & 0.1 & 0.3 \\ 0.0 & 0.4 & -0.3 & 0.1 \\ -0.1 & 0.2 & 0.6 & -0.4 \end{bmatrix} \begin{bmatrix} 0.43 \\ 0.05 \\ 0.4 \\ 0.16 \end{bmatrix} + \begin{bmatrix} 0.2 \\ -0.1 \\ 0.0 \end{bmatrix} $$
+    $$z^{(2)} = W^{(2)} h^{(1)} + b^{(2)} = \begin{bmatrix} 0.5 & -0.2 & 0.1 & 0.3 \\ 0.0 & 0.4 & -0.3 & 0.1 \\ -0.1 & 0.2 & 0.6 & -0.4 \end{bmatrix} \begin{bmatrix} 0.43 \\ 0.05 \\ 0.4 \\ 0.16 \end{bmatrix} + \begin{bmatrix} 0.2 \\ -0.1 \\ 0.0 \end{bmatrix}$$
 
     Calculando cada componente:  
 
-    * $$ z^{(2)}_1 = (0.5 \cdot 0.43) + (-0.2 \cdot 0.05) + (0.1 \cdot 0.4) + (0.3 \cdot 0.16) + 0.2 = 0.215 - 0.01 + 0.04 + 0.048 + 0.2 = 0.493 $$  
+    * $$z^{(2)}_1 = (0.5 \cdot 0.43) + (-0.2 \cdot 0.05) + (0.1 \cdot 0.4) + (0.3 \cdot 0.16) + 0.2 = 0.215 - 0.01 + 0.04 + 0.048 + 0.2 = 0.493$$
 
-    * $$ z^{(2)}_2 = (0.0 \cdot 0.43) + (0.4 \cdot 0.05) + (-0.3 \cdot 0.4) + (0.1 \cdot 0.16) - 0.1 = 0.0 + 0.02 - 0.12 + 0.016 - 0.1 = -0.184 $$  
+    * $$z^{(2)}_2 = (0.0 \cdot 0.43) + (0.4 \cdot 0.05) + (-0.3 \cdot 0.4) + (0.1 \cdot 0.16) - 0.1 = 0.0 + 0.02 - 0.12 + 0.016 - 0.1 = -0.184$$
 
-    * $$ z^{(2)}_3 = (-0.1 \cdot 0.43) + (0.2 \cdot 0.05) + (0.6 \cdot 0.4) + (-0.4 \cdot 0.16) + 0.0 = -0.043 + 0.01 + 0.24 - 0.064 = 0.143 $$
+    * $$z^{(2)}_3 = (-0.1 \cdot 0.43) + (0.2 \cdot 0.05) + (0.6 \cdot 0.4) + (-0.4 \cdot 0.16) + 0.0 = -0.043 + 0.01 + 0.24 - 0.064 = 0.143$$
 
     Portanto:  
 
-    $$ z^{(2)} = \begin{bmatrix} 0.493 \\ -0.184 \\ 0.143 \end{bmatrix} $$
+    $$z^{(2)} = \begin{bmatrix} 0.493 \\ -0.184 \\ 0.143 \end{bmatrix}$$
 
     Aplicamos a função Tanh:  
 
-    $$ h^{(2)} = \tanh(z^{(2)}) = \begin{bmatrix} \tanh(0.493) \\ \tanh(-0.184) \\ \tanh(0.143) \end{bmatrix} \approx \begin{bmatrix} 0.452 \\ -0.180 \\ 0.141 \end{bmatrix} $$  
+    $$h^{(2)} = \tanh(z^{(2)}) = \begin{bmatrix} \tanh(0.493) \\ \tanh(-0.184) \\ \tanh(0.143) \end{bmatrix} \approx \begin{bmatrix} 0.452 \\ -0.180 \\ 0.141 \end{bmatrix}$$
     (valores aproximados usando uma calculadora).
 
 3. **Camada de Saída (Softmax)**:
 
-    Calculamos a transformação afim: 
+    Calculamos a transformação afim:
 
-    $$ z^{(3)} = W^{(3)} h^{(2)} + b^{(3)} = \begin{bmatrix} 0.3 & -0.5 & 0.2 \\ 0.1 & 0.4 & -0.6 \end{bmatrix} \begin{bmatrix} 0.452 \\ -0.180 \\ 0.141 \end{bmatrix} + \begin{bmatrix} 0.1 \\ -0.2 \end{bmatrix} $$
+    $$z^{(3)} = W^{(3)} h^{(2)} + b^{(3)} = \begin{bmatrix} 0.3 & -0.5 & 0.2 \\ 0.1 & 0.4 & -0.6 \end{bmatrix} \begin{bmatrix} 0.452 \\ -0.180 \\ 0.141 \end{bmatrix} + \begin{bmatrix} 0.1 \\ -0.2 \end{bmatrix}$$
 
     Calculando cada componente:  
 
-    * $$ z^{(3)}_1 = (0.3 \cdot 0.452) + (-0.5 \cdot -0.180) + (0.2 \cdot 0.141) + 0.1 = 0.1356 + 0.09 + 0.0282 + 0.1 = 0.3538 $$  
+    * $$z^{(3)}_1 = (0.3 \cdot 0.452) + (-0.5 \cdot -0.180) + (0.2 \cdot 0.141) + 0.1 = 0.1356 + 0.09 + 0.0282 + 0.1 = 0.3538 $$
 
-    * $$ z^{(3)}_2 = (0.1 \cdot 0.452) + (0.4 \cdot -0.180) + (-0.6 \cdot 0.141) - 0.2 = 0.0452 - 0.072 - 0.0846 - 0.2 = -0.3114 $$
+    * $$z^{(3)}_2 = (0.1 \cdot 0.452) + (0.4 \cdot -0.180) + (-0.6 \cdot 0.141) - 0.2 = 0.0452 - 0.072 - 0.0846 - 0.2 = -0.3114$$
 
     Portanto:  
 
-    $$ z^{(3)} = \begin{bmatrix} 0.3538 \\ -0.3114 \end{bmatrix} $$
+    $$z^{(3)} = \begin{bmatrix} 0.3538 \\ -0.3114 \end{bmatrix}$$
 
     Aplicamos a função Softmax:  
 
-    $$ y = \text{Softmax}(z^{(3)}) = \begin{bmatrix} \frac{e^{0.3538} }{e^{0.3538} + e^{-0.3114} } \\ \frac{e^{-0.3114} }{e^{0.3538} + e^{-0.3114} } \end{bmatrix} $$
+    $$y = \text{Softmax}(z^{(3)}) = \begin{bmatrix} \frac{e^{0.3538} }{e^{0.3538} + e^{-0.3114} } \\ \frac{e^{-0.3114} }{e^{0.3538} + e^{-0.3114} } \end{bmatrix}$$
 
     Calculando os exponenciais:  
 
-    * $$ e^{0.3538} \approx 1.424 $$  
+    * $$e^{0.3538} \approx 1.424$$
 
-    * $$ e^{-0.3114} \approx 0.732 $$
+    * $$e^{-0.3114} \approx 0.732$$
 
     Assim:  
 
-    $$ y \approx \begin{bmatrix} \frac{1.424}{1.424 + 0.732} \\ \frac{0.732}{1.424 + 0.732} \end{bmatrix} = \begin{bmatrix} \frac{1.424}{2.156} \\ \frac{0.732}{2.156} \end{bmatrix} \approx \begin{bmatrix} 0.660 \\ 0.340 \end{bmatrix} $$
+    $$y \approx \begin{bmatrix} \frac{1.424}{1.424 + 0.732} \\ \frac{0.732}{1.424 + 0.732} \end{bmatrix} = \begin{bmatrix} \frac{1.424}{2.156} \\ \frac{0.732}{2.156} \end{bmatrix} \approx \begin{bmatrix} 0.660 \\ 0.340 \end{bmatrix}$$
 
 4. Resultado:
 
 A saída da rede neural é:  
 
-$$ y = \begin{bmatrix} 0.660 \\ 0.340 \end{bmatrix} $$
+$$y = \begin{bmatrix} 0.660 \\ 0.340 \end{bmatrix}$$
 
 Isso representa as probabilidades para duas classes, demonstrando como as transformações afins e as funções de ativação processam a entrada através da rede.
 
@@ -585,38 +585,38 @@ Vector softmax(const Vector& x) {
  * @brief Verifica as dimensões das matrizes e vetores para compatibilidade
  * @throws std::invalid_argument Se as dimensões forem incompatíveis
  */
-void verificar_dimensoes(const VectorXd& x, 
+void verificar_dimensoes(const VectorXd& x,
                          const MatrixXd& W1, const VectorXd& b1,
                          const MatrixXd& W2, const VectorXd& b2,
                          const MatrixXd& W3, const VectorXd& b3) {
     if (W1.cols() != x.size()) {
         throw std::invalid_argument(
-            std::format("Incompatibilidade de dimensões: W1({},{}) e x({})", 
+            std::format("Incompatibilidade de dimensões: W1({},{}) e x({})",
                        W1.rows(), W1.cols(), x.size()));
     }
     if (W1.rows() != b1.size()) {
         throw std::invalid_argument(
-            std::format("Incompatibilidade de dimensões: W1({},{}) e b1({})", 
+            std::format("Incompatibilidade de dimensões: W1({},{}) e b1({})",
                        W1.rows(), W1.cols(), b1.size()));
     }
     if (W2.cols() != W1.rows()) {
         throw std::invalid_argument(
-            std::format("Incompatibilidade de dimensões: W2({},{}) e W1({},{})", 
+            std::format("Incompatibilidade de dimensões: W2({},{}) e W1({},{})",
                        W2.rows(), W2.cols(), W1.rows(), W1.cols()));
     }
     if (W2.rows() != b2.size()) {
         throw std::invalid_argument(
-            std::format("Incompatibilidade de dimensões: W2({},{}) e b2({})", 
+            std::format("Incompatibilidade de dimensões: W2({},{}) e b2({})",
                        W2.rows(), W2.cols(), b2.size()));
     }
     if (W3.cols() != W2.rows()) {
         throw std::invalid_argument(
-            std::format("Incompatibilidade de dimensões: W3({},{}) e W2({},{})", 
+            std::format("Incompatibilidade de dimensões: W3({},{}) e W2({},{})",
                        W3.rows(), W3.cols(), W2.rows(), W2.cols()));
     }
     if (W3.rows() != b3.size()) {
         throw std::invalid_argument(
-            std::format("Incompatibilidade de dimensões: W3({},{}) e b3({})", 
+            std::format("Incompatibilidade de dimensões: W3({},{}) e b3({})",
                        W3.rows(), W3.cols(), b3.size()));
     }
 }
@@ -630,7 +630,7 @@ void verificar_dimensoes(const VectorXd& x,
  * @return Vetor de saída (probabilidades)
  * @throws std::invalid_argument Se as dimensões forem incompatíveis
  */
-VectorXd propagacao_direta(const VectorXd& x, 
+VectorXd propagacao_direta(const VectorXd& x,
                           const MatrixXd& W1, const VectorXd& b1,
                           const MatrixXd& W2, const VectorXd& b2,
                           const MatrixXd& W3, const VectorXd& b3) {
@@ -651,13 +651,13 @@ VectorXd propagacao_direta(const VectorXd& x,
  * @brief Estrutura para armazenar os parâmetros da rede neural
  */
 struct RedeNeuralParams {
-    VectorXd x;       // Entrada
-    MatrixXd W1;      // Pesos da 1ª camada
-    VectorXd b1;      // Viés da 1ª camada
-    MatrixXd W2;      // Pesos da 2ª camada
-    VectorXd b2;      // Viés da 2ª camada
-    MatrixXd W3;      // Pesos da camada de saída
-    VectorXd b3;      // Viés da camada de saída
+    VectorXd x;   // Entrada
+    MatrixXd W1;  // Pesos da 1ª camada
+    VectorXd b1;  // Viés da 1ª camada
+    MatrixXd W2;  // Pesos da 2ª camada
+    VectorXd b2;  // Viés da 2ª camada
+    MatrixXd W3;  // Pesos da camada de saída
+    VectorXd b3;  // Viés da camada de saída
 };
 
 /**
@@ -723,9 +723,9 @@ int main() {
 
         // Propagação direta
         VectorXd saida = propagacao_direta(
-            params.x, 
-            params.W1, params.b1, 
-            params.W2, params.b2, 
+            params.x,
+            params.W1, params.b1,
+            params.W2, params.b2,
             params.W3, params.b3
         );
 
@@ -759,7 +759,7 @@ A simplicidade arquitetural dos modelos de **word embeddings** é intencionalmen
 
 ### Representação e Propagação de Dados
 
-Para compreender como as redes neurais processam informações, a atenta leitora precisa visualizar o fluxo dinâmico dos dados através da rede. Esta trajetória dos sinais desde a camada de entrada até a produção do resultado final revela a essência do processamento neuronal artificial. Quando um vetor de entrada $\mathbf{x}$ é apresentado à rede, ele inicia uma cascata de transformações matemáticas onde cada camada subsequente extrai e refina padrões específicos. Os dados percorrem este labirinto de neurônios artificiais através de operações vetoriais que incluem produtos escalares $\mathbf{w} \cdot \mathbf{x}$, adições de vieses $b$, e transformações não-lineares $f(\cdot)$ que introduzem a capacidade da rede de modelar relações complexas. É nesta corrente oceânica de números navegando de camada em camada que reside o verdadeiro poder das redes neurais, permitindo-lhes lançar redes mais profundas que capturam os cardumes semânticos das palavras que buscamos em nossa expedição pelos mares da linguagem natural. 
+Para compreender como as redes neurais processam informações, a atenta leitora precisa visualizar o fluxo dinâmico dos dados através da rede. Esta trajetória dos sinais desde a camada de entrada até a produção do resultado final revela a essência do processamento neuronal artificial. Quando um vetor de entrada $\mathbf{x}$ é apresentado à rede, ele inicia uma cascata de transformações matemáticas onde cada camada subsequente extrai e refina padrões específicos. Os dados percorrem este labirinto de neurônios artificiais através de operações vetoriais que incluem produtos escalares $\mathbf{w} \cdot \mathbf{x}$, adições de vieses $b$, e transformações não-lineares $f(\cdot)$ que introduzem a capacidade da rede de modelar relações complexas. É nesta corrente oceânica de números navegando de camada em camada que reside o verdadeiro poder das redes neurais, permitindo-lhes lançar redes mais profundas que capturam os cardumes semânticos das palavras que buscamos em nossa expedição pelos mares da linguagem natural.
 
 Nesta correnteza de dados, a propagação direta é o motor que impulsiona a rede, transformando entradas em saídas através de uma série de etapas matemáticas que revelam a beleza e complexidade do aprendizado profundo.
 
@@ -885,7 +885,7 @@ Embora este texto foque em redes rasas para **embeddings**, nas quais estes prob
 
 4. Contextualiza o desenvolvimento de arquiteturas mais complexas como **LSTMs/GRUs** (em redes recorrentes) e mecanismos como conexões residuais (nos **Transformers**) que foram projetados, em parte, para lidar com esses problemas de fluxo de gradiente.
 
-># Inicialização de Pesos Xavier/Glorot e He
+>**Inicialização de Pesos Xavier/Glorot e He**
 >
 >A inicialização adequada dos pesos é importante para o treinamento eficiente de redes neurais profundas. As inicializações Xavier/Glorot e He foram desenvolvidas para manter a variância dos sinais e gradientes estável através das camadas da rede.
 >
@@ -893,11 +893,11 @@ Embora este texto foque em redes rasas para **embeddings**, nas quais estes prob
 >
 >Para uma camada com $n_{in}$ entradas e $n_{out}$ saídas:
 >
->$$W \sim \mathcal{U}\left[-\frac{\sqrt{6}}{\sqrt{n_{in} + n_{out}}}, \frac{\sqrt{6}}{\sqrt{n_{in} + n_{out}}}\right]$$
+>$$W \sim \mathcal{U}\left[-\frac{\sqrt{6} }{\sqrt{n_{in} + n_{out} } }, \frac{\sqrt{6} }{\sqrt{n_{in} + n_{out} } }\right]$$
 >
 >Ou na versão com distribuição normal:
 >
->$$W \sim \mathcal{N}\left(0, \frac{2}{n_{in} + n_{out}}\right)$$
+>$$W \sim \mathcal{N}\left(0, \frac{2}{n_{in} + n_{out} }\right)$$
 >
 >Visa manter a variância da ativação e dos gradientes aproximadamente igual entre as camadas, evitando que o sinal se perca ou exploda durante a propagação.
 >
@@ -907,7 +907,7 @@ Embora este texto foque em redes rasas para **embeddings**, nas quais estes prob
 >
 >Para uma camada com $n_{in}$ entradas:
 >
->$$W \sim \mathcal{N}\left(0, \frac{2}{n_{in}}\right)$$
+>$$W \sim \mathcal{N}\left(0, \frac{2}{n_{in} }\right)$$
 >
 >Como ReLU zera metade da distribuição (valores negativos), a inicialização He compensa esse efeito usando um fator $2$ no numerador, garantindo que a variância se mantenha correta após a aplicação da função de ativação.
 >
@@ -966,7 +966,7 @@ Em que:
 
 ![um mapa de linhas de nível para indicar o funcionamento do Gradiente Descendente.](/images/word2vec-architecture.webp)
 
-_Figura 6: Mostra, graficamente o conceito do gradiente descendente em um gráfico de curvas de nível._{: class="legend"}
+_Figura 5: Mostra, graficamente o conceito do gradiente descendente em um gráfico de curvas de nível._{: class="legend"}
 
 A atualização de um único parâmetro ($\theta_j$) usando Gradiente Descendente é direta. Suponha que para um determinado parâmetro $\theta_j$:
 
@@ -978,7 +978,7 @@ A fórmula de atualização será dada por:
 
 $$\theta_j \leftarrow \theta_j - \eta \frac{\partial L}{\partial \theta_j}$$
 
-Usando alguns os valores hipotéticos teremos: 
+Usando alguns os valores hipotéticos teremos:
 
 $$\theta_j \leftarrow 0.8 - (0.01 \times (-2.5))$$
 
@@ -1028,7 +1028,7 @@ O algoritmo de retropropagação começa com o cálculo do erro na camada de sa�
 
 ![mostra o algoritmo de retropropagação como descrito no texto](/assets/images/retropropagacao-fluxo.webp)
 
-_Figura 7: Fluxo do algoritmo de retropropagação. O erro é calculado na camada de saída e propagado para trás, camada por camada, ajustando os pesos conforme necessário. A seta azul representa o fluxo do erro, enquanto a seta vermelha representa o fluxo dos gradientes._{: class="legend"}
+_Figura 6: Fluxo do algoritmo de retropropagação. O erro é calculado na camada de saída e propagado para trás, camada por camada, ajustando os pesos conforme necessário. A seta azul representa o fluxo do erro, enquanto a seta vermelha representa o fluxo dos gradientes._{: class="legend"}
 
 Isso permite determinar o gradiente da função de custo em relação aos pesos de cada conexão, informando como ajustar esses pesos para reduzir o erro geral da rede. O processo pode ser resumido nos seguintes passos:
 
@@ -1114,35 +1114,25 @@ Neste caso, temos:
 
 Para entropia cruzada + sigmóide, o erro na saída é:
 
-$$
-\delta_1^{(2)} = \vert{y} - y = 0.5824 - 1 = -0.4176
-$$
+$$\delta_1^{(2)} = \vert{y} - y = 0.5824 - 1 = -0.4176$$
 
 **Passo 2**: Cálculo do Gradiente
 
 Usando a fórmula:
 
-$$
-\frac{\partial L}{\partial w_{12}^{(2)} } = \delta_1^{(2)} \cdot a_2^{(1)}
-$$
+$$\frac{\partial L}{\partial w_{12}^{(2)} } = \delta_1^{(2)} \cdot a_2^{(1)}$$
 
 Substituindo os valores:
 
-$$
-\frac{\partial L}{\partial w_{12}^{(2)} } = (-0.4176) \times 0.3430 \approx -0.1432
-$$
+$$\frac{\partial L}{\partial w_{12}^{(2)} } = (-0.4176) \times 0.3430 \approx -0.1432$$
 
 **Passo 3**: Atualização do Peso
 
 Supondo uma taxa de aprendizado $\eta = 0.01$:
 
-$$
-w_{12}^{(2)} \leftarrow w_{12}^{(2)} - \eta \frac{\partial L}{\partial w_{12}^{(2)} }
-$$
+$$w_{12}^{(2)} \leftarrow w_{12}^{(2)} - \eta \frac{\partial L}{\partial w_{12}^{(2)} }$$
 
-$$
-w_{12}^{(2)} \leftarrow -0.3 - 0.01 \times (-0.1432) = -0.3 + 0.001432 = -0.298568
-$$
+$$w_{12}^{(2)} \leftarrow -0.3 - 0.01 \times (-0.1432) = -0.3 + 0.001432 = -0.298568$$
 
 A atenta leitora deve tomar nota dos seguintes pontos importantes:
 
@@ -1152,9 +1142,7 @@ A atenta leitora deve tomar nota dos seguintes pontos importantes:
 
      $$\delta_j^{(l)} = \left(\sum_{k} \delta_k^{(l+1)} w_{kj}^{(l+1)}\right) f'(z_j^{(l)})$$
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@PAREI AQUI@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-### Implementação do Treinamento
+#### Implementação do Treinamento
 
 Este é o momento em que a esforçada leitora deve dar uma parada, tomar uma água, ver o céu azul e respirar fundo porque vamos explorar detalhadamente como o treinamento funciona em uma rede neural rasa, semelhante à utilizada nos modelos de **word embeddings**. Este exemplo detalhado servirá como base para que a encantada leitora domine o processo de treinamento desses modelos.
 
@@ -1165,7 +1153,7 @@ O processo começa com a inicialização aleatória dos pesos e vieses:
 * $W2 = pequenos\_valores\_aleatorios(tamanho\_oculta, tamanho\_saida)$;
 * $b2 = zeros(tamanho\_saida)$.
 
-#### Passo a Passo da Propagação Direta e Retropropagação
+##### Passo a Passo da Propagação Direta e Retropropagação
 
 Considere uma rede neural simples com uma camada oculta e uma função de ativação sigmóide. O treinamento de um único exemplo envolve:
 
@@ -1189,18 +1177,18 @@ Considere uma rede neural simples com uma camada oculta e uma função de ativa�
 
    $$\delta^{(2)} = \vert{y} - y$$
 
-   Gradientes para W2 e b2:
+   Gradientes para $W_2$ e $b_2$:
 
    $$\frac{\partial L}{\partial W^{(2)} } = h^T \delta^{(2)}$$
 
    >Em notação matricial:
    > - Se $h$ é um vetor linha (dimensão $1 \times d$)
-   > - e $\delta^{(2)}$ é um vetor linha (dimensão $1 \times |V|$),
+   > - e $\delta^{(2)}$ é um vetor linha (dimensão $1 \times  \vert V \vert $),
    >
-   > a multiplicação correta para gerar um gradiente de dimensão $d \times |V|$ (compatível com $W^{(2)}$) será:
+   > a multiplicação correta para gerar um gradiente de dimensão $d \times \vert V \vert $ (compatível com $W^{(2)}$) será:
    >
    >$$
-    \frac{\partial L}{\partial W^{(2)} } = \underbrace{h^T}_{d \times 1} \underbrace{\delta^{(2)} }_{1 \times |V|}
+    \frac{\partial L}{\partial W^{(2)} } = \underbrace{h^T}_{d \times 1} \underbrace{\delta^{(2)} }_{1 \times \vert V \vert }
    >$$
 
    $$\frac{\partial L}{\partial b_2} = \delta^{(2)}$$
@@ -1225,11 +1213,11 @@ Considere uma rede neural simples com uma camada oculta e uma função de ativa�
 
    $$b_1 = b_1 - \eta \frac{\partial L}{\partial b_1}$$
 
-#### Otimizações do Treinamento
+##### Otimizações do Treinamento
 
 Na prática, várias otimizações são aplicadas para melhorar a eficiência e eficácia do treinamento:
 
-##### Gradient Descent com Mini-lotes (Mini-batch Gradient Descent)
+###### Gradient Descent com Mini-lotes (Mini-batch Gradient Descent)
 
 Em vez de atualizar os parâmetros após cada exemplo (o que é chamado de Gradiente Descendente Estocástico ou SGD) ou usar todos os exemplos do conjunto de treinamento de uma vez (Gradiente Descendente Batch ou GD), uma abordagem comum é usar **pequenos lotes** (mini-batches) de exemplos. Isso oferece um equilíbrio entre a velocidade de convergência e a estabilidade do processo de treinamento. A atualização para todos os parâmetros $\theta$ da rede (pesos e vieses) usando um mini-lote de tamanho $m$ é dada por:
 
@@ -1240,10 +1228,9 @@ Neste caso:
 * $\theta$ representa o vetor de todos os parâmetros ajustáveis da rede.
 * $m$ representa o tamanho do mini-lote.
 * $L^{(i)}$ é a função de custo calculada para o $i$-ésimo exemplo do mini-lote.
-* $\nabla_{\theta} L^{(i)}$ é o vetor de gradientes da função de 
-custo em relação a todos os parâmetros $\theta$, calculado para o exemplo $i$. A soma calcula o gradiente médio sobre o mini-lote.
+* $\nabla_{\theta} L^{(i)}$ é o vetor de gradientes da função de custo em relação a todos os parâmetros $\theta$, calculado para o exemplo $i$. A soma calcula o gradiente médio sobre o mini-lote.
 
-##### Taxa de Aprendizado Adaptativa
+###### Taxa de Aprendizado Adaptativa
 
 A taxa de aprendizado $\eta$ pode diminuir ao longo do tempo para permitir convergência mais precisa:
 
@@ -1251,29 +1238,29 @@ $$\eta_t = \eta_0 \cdot (1 - \frac{t}{T})$$
 
 Onde $t$ é a iteração atual e $T$ é o número total de iterações.
 
-Algoritmos como Adam, RMSprop e Adagrad ajustam a taxa de aprendizado individualmente para cada parâmetro baseado no histórico de gradientes.
+*Algoritmos como Adam, RMSprop e Adagrad ajustam a taxa de aprendizado individualmente para cada parâmetro baseado no histórico de gradientes*.
 
-##### Regularização
+###### Regularização L2
 
 Antes de detalharmos técnicas como regularização, é importante entender dois desafios comuns no treinamento de redes neurais: *Overfitting* e *Underfitting*.
 
-* **Underfitting (Subajuste)**: Ocorre quando o modelo é muito simples para capturar os padrões presentes nos dados de treinamento. Ele falha em aprender bem tanto nos dados de treino quanto em dados novos. Isso geralmente indica que a arquitetura da rede é inadequada ou que o treinamento foi insuficiente.
+* **Underfitting (Subajuste)**: ocorre quando o modelo é muito simples para capturar os padrões presentes nos dados de treinamento. Ele falha em aprender bem tanto nos dados de treino quanto em dados novos. Isso geralmente indica que a arquitetura da rede é inadequada ou que o treinamento foi insuficiente.
 
-* **Overfitting (Sobreajuste)**: Ocorre quando o modelo aprende os dados de treinamento *excessivamente bem*, incluindo ruídos e particularidades específicas daquele conjunto de dados. Como resultado, o modelo tem um desempenho excelente nos dados de treino, mas generaliza mal para dados novos e não vistos, apresentando um erro muito maior nesses casos. O modelo "decorou" o treino em vez de aprender os padrões gerais.
+* **Overfitting (Sobreajuste)**: ocorre quando o modelo aprende os dados de treinamento *excessivamente bem*, incluindo ruídos e particularidades específicas daquele conjunto de dados. Como resultado, o modelo tem um desempenho excelente nos dados de treino, mas generaliza mal para dados novos e não vistos, apresentando um erro muito maior nesses casos. O modelo "decorou" o treino em vez de aprender os padrões gerais.
 
-O objetivo do treinamento é encontrar um equilíbrio, um modelo que generalize bem para novos dados. As técnicas de otimização e, especialmente, de **regularização**, são projetadas principalmente para combater o *overfitting*.
+O objetivo do treinamento é encontrar um equilíbrio, um modelo que generalize bem para novos dados. *As técnicas de otimização e, especialmente, de regularização, são projetadas principalmente para combater o overfitting*.
 
-**L2 Regularization** (Regularização L2): Adiciona um termo à função de custo que penaliza pesos grandes:
+**L2 Regularization (Regularização L2)**: adiciona um termo à função de custo que penaliza pesos grandes:
 
 $$L_{reg} = L + \frac{\lambda}{2} \sum_w w^2$$
 
-A regularização L2 adiciona um termo de penalidade à função de custo original ($L$) para desencorajar pesos muito grandes, ajudando a prevenir o overfitting. A fórmula é:
+A regularização L2 adiciona um termo de penalidade à função de custo original ($L$) para desencorajar pesos muito grandes, ajudando a prevenir o *overfitting*. A fórmula é:
 
 $$L_{reg} = L + \frac{\lambda}{2} \sum_{k} w_k^2$$
 
-Em que $\lambda$ é o hiperparâmetro de força da regularização e a soma é sobre todos os pesos $w_k$ na rede (ou em uma camada específica).
+Em que $\lambda$ é o hiperparâmetro de força da regularização e a soma é sobre todos os pesos $w_k$ na rede, ou em uma camada específica.
 
-**Exemplo**: Suponha que uma camada da rede tem os seguintes pesos:
+**Exemplo**: suponha que uma camada da rede tem os seguintes pesos:
 
 $$w = [0.5, -0.2, 1.0, -1.5]$$
 
@@ -1297,181 +1284,201 @@ Se o custo calculado a partir do erro de previsão (por exemplo:, entropia cruza
 
 $$L_{reg} = L + \text{Penalidade L2} = 0.3567 + 0.0177 = 0.3744$$
 
-É este valor $L_{reg}$ que o algoritmo de otimização tentará minimizar. A penalidade adicional "puxa" os pesos para valores menores durante o treinamento.
+É este valor $L_{reg}$ que o algoritmo de otimização tentará minimizar. A penalidade adicional puxa os pesos para valores menores durante o treinamento.
 
-**Dropout**: Durante o treinamento, desativa aleatoriamente uma fração dos neurônios, forçando a rede a ser mais robusta.
+###### *Dropout* como Alternativa de Regularização
+
+Além da regularização L2, uma técnica de regularização extremamente eficaz para redes neurais é o **Dropout**, que pode ser traduzido como abandono, proposto por Hinton et al. em 2012. Diferentemente da regularização L2 que opera modificando a função de custo, o *Dropout* atua diretamente na arquitetura da rede durante o treinamento. O *Dropout* consiste em **desativar aleatoriamente** uma fração dos neurônio durante cada passo do treinamento. Matematicamente, para cada exemplo de treinamento e iteração, uma máscara aleatória $m$ é gerada, onde cada elemento $m_j$ segue uma distribuição de Bernoulli:
+
+$$m_j \sim \text{Bernoulli}(p)$$
+
+Na qual, $p$ é a probabilidade de manter um neurônio ativo, tipicamente entre $0.5$ e $0.8$. Durante a propagação direta, a ativação de uma camada com *Dropout* será calculada por:
+
+$$\tilde{h} = m \odot h$$
+
+Neste caso, $\odot$ representa a multiplicação elemento a elemento, $h$ é o vetor de ativações original e $\tilde{h}$ é o vetor de ativações com *Dropout* aplicado. Na prática, o *Dropout* pode ser visto como treinar um conjunto de diferentes sub-redes a cada iteração.
+
+O *Dropout* combate o overfitting por meio dos seguintes mecanismos:
+
+1. **Prevenção de co-adaptação**: os neurônios não podem depender excessivamente uns dos outros, pois qualquer neurônio pode ser desativado a qualquer momento.
+2. **Efeito de ensemble (conjunto)**: o **Dropout** efetivamente treina um grande número de redes diferentes com pesos compartilhados, que são então implicitamente combinadas durante a inferência.
+3. **Adição de ruído**: adiciona uma forma de ruído controlado durante o treinamento, forçando a rede a aprender representações mais robustas.
+
+Matematicamente, pode-se mostrar que o *Dropout* aproxima um tipo de regularização adaptativa, onde a penalidade aplicada a cada peso varia de acordo com a sua importância.
+
+**Implementação no Treinamento e Inferência**: durante o treinamento, o *Dropout* é aplicado a cada camada da rede, exceto na camada de saída. Durante a inferência, não aplicamos o *Dropout*, mas escalamos as ativações para compensar a fração de neurônios que foram desativados durante o treinamento. Assim:
+
+**Durante o treinamento**: para cada exemplo do mini-lote:
+
+   * Gerar uma máscara binária $m$ com probabilidade $p$ de $1$'s;
+   * Multiplicar as ativações pela máscara: $\tilde{h} = m \odot h$;
+   * Prosseguir com a propagação direta e retropropagação normalmente.
+
+**Durante a inferência (teste)**: não aplicamos o *Dropout* diretamente. Em vez disso, escalamos as ativações dos neurônios por $p$ para compensar o fato de que durante o treinamento, em média, apenas uma fração $p$ dos neurônios estava ativa. Alternativamente, podemos escalar os pesos durante a inferência por um fator de $p$, o que tem o mesmo efeito.
+
+A esforçada leitora deve observar que o *Dropout* é aplicado apenas durante o treinamento, e não durante a inferência. Durante a inferência, todos os neurônios estão ativos, mas as ativações são escaladas para refletir a fração de neurônios que estavam ativos durante o treinamento. Finalmente, podemos ver um exemplo de **dropout**.
+
+Considere uma camada oculta com $4$ neurônios cuja ativação para um determinado exemplo seja:
+
+$$h = [0.6, 0.2, 0.8, 0.4]$$
+
+Com uma taxa de **Dropout** $p = 0.75$. isso significa que serão mantidos $75\%$ dos neurônios ativos. Geramos uma máscara aleatória:
+
+$$m = [1, 0, 1, 1]$$
+
+Aplicando o **Dropout**:
+
+$$\tilde{h} = m \odot h = [0.6, 0, 0.8, 0.4]$$
+
+A atenta leitora deve observar que o segundo neurônio foi desativado para esta iteração. A propagação direta e a retropropagação prosseguem utilizando $\tilde{h}$ em vez de $h$. Sendo assim, durante a inferência, teríamos duas opções:
+
+1. Usar todos os neurônios sem **Dropout** e escalar as ativações: $h_{\text{teste} } = p \cdot h = 0.75 \cdot [0.6, 0.2, 0.8, 0.4] = [0.45, 0.15, 0.6, 0.3]$;
+2. Ou, equivalentemente, escalar os pesos da camada por $p$.
+
+###### Comparação entre Regularização L2 e Dropout
+
+| Aspecto | Regularização L2 | *Dropout* |
+|---------|------------------|---------|
+| **Princípio Básico** | Penaliza pesos grandes na função de custo | Desativa aleatoriamente neurônios durante o treinamento |
+| **Implementação** | Adiciona termo $\frac{\lambda}{2}\sum w^2$ à função de custo | Multiplica ativações por máscara binária aleatória |
+| **Hiperparâmetros** | $\lambda$ (força da regularização) | $p$ (probabilidade de manter neurônio ativo) |
+| **Efeito nos Pesos** | Puxa todos os pesos em direção a zero | Não afeta diretamente os valores dos pesos |
+| **Ajuste na Inferência** | Nenhum necessário | Escalar ativações ou pesos por $p$ |
+| **Eficácia em Redes Grandes** | Boa, mas pode ser insuficiente sozinha | Excelente, especialmente em redes profundas |
+| **Custo Computacional** | Baixo (apenas termo adicional no custo) | Moderado (geração de máscaras e multiplicações) |
+| **Situações Ideais** | Datasets menores, redes simples | Redes grandes, datasets com ruído |
+| **Combinação com Outras Técnicas** | Combina bem com *Dropout* | Pode ser usado com L1/L2 para maior regularização |
+| **Efeito em Word Embeddings** | Pode comprimir os embeddings no espaço | Pode criar embeddings mais diversos e robustos |
+
+Na prática, frequentemente ambas as técnicas são utilizadas em conjunto para obter o melhor dos dois mundos: o **Dropout** previne a co-adaptação de neurônios, enquanto a regularização L2 mantém os pesos em valores razoáveis.
 
 ### Exemplo Completo de Treinamento de uma Rede Neural Rasa
 
-Neste exemplo, a esforçada leitora poderá ver, cuidadosamente, *como treinar uma rede neural rasa para prever uma palavra com base em outra*, utilizando um vocabulário pequeno e realizando todos os cálculos passo a passo. O objetivo é ilustrar os conceitos de propagação direta, cálculo do custo, retropropagação e atualização dos pesos, que são fundamentais para entender modelos como **CBOW** e **Skip-gram** que serão assunto [deste artigo](https://frankalcantara.com/transformers-cinco/).
+Neste exemplo, a esforçada leitora poderá ver, cuidadosamente, *como treinar uma rede neural rasa para prever uma palavra com base em outra*, utilizando um vocabulário pequeno e realizando todos os cálculos passo a passo. O objetivo é ilustrar os conceitos de propagação direta, cálculo do custo, retropropagação e atualização dos pesos, que são fundamentais para entender algoritmos como **CBOW** e **SkipGram** que serão assunto [deste artigo](https://frankalcantara.com/transformers-cinco/).
 
 #### Definição da Rede
 
-* **Vocabulário**: {"sol", "lua", "dia", "noite"} (tamanho $ |V| = 4 $);
-* **Camada de Entrada**: Vetor *one-hot* de tamanho 4, representando uma palavra de entrada;
-* **Camada Oculta**: 2 neurônios (projeção linear, sem função de ativação);
-* **Camada de Saída**: 4 neurônios (probabilidades para cada palavra do vocabulário, usando softmax).
+* **Vocabulário**: {"sol", "lua", "dia", "noite"} (tamanho $ \vert V \vert  = 4 $);
+* **Camada de Entrada**: Vetor *one-hot* de tamanho $4$, representando uma palavra de entrada;
+* **Camada Oculta**: $2$ neurônios, projeção linear, sem função de ativação;
+* **Camada de Saída**: $4$ neurônios, probabilidades para cada palavra do vocabulário, usando softmax.
 
 #### Inicialização dos Pesos
 
 Inicializamos as matrizes de pesos com valores fixos para facilitar os cálculos:
 
-* **Pesos da Camada Oculta** ($ W^{(1)} $), matriz $ 4 \times 2 $:
+* **Pesos da Camada Oculta** ($W^{(1)}$), matriz $4 \times 2$:
 
-$$
-W^{(1)} = \begin{pmatrix}
+$$W^{(1)} = \begin{pmatrix}
 0.1 & 0.2 \\
 0.3 & 0.4 \\
 0.5 & 0.6 \\
 0.7 & 0.8
-\end{pmatrix}
-$$
+\end{pmatrix}$$
 
-* **Pesos da Camada de Saída** ($ W^{(2)} $), matriz $ 2 \times 4 $:
+* **Pesos da Camada de Saída** ($W^{(2)}$), matriz $ 2 \times 4 $:
 
-$$
-W^{(2)} = \begin{pmatrix}
+$$W^{(2)} = \begin{pmatrix}
 0.2 & 0.3 & 0.4 & 0.5 \\
 0.6 & 0.7 & 0.8 & 0.9
-\end{pmatrix}
-$$
+\end{pmatrix}$$
 
-* **Não usaremos vieses ($ b = 0 $)**.
+* **Não usaremos vieses ($b = 0$)**.
 
 #### Entrada e Saída Esperada
 
-* **Entrada**: Palavra "sol", vetor *one-hot* $ x = [1, 0, 0, 0] $;
-* **Saída Esperada**: Palavra "dia", vetor *one-hot* $ y = [0, 0, 1, 0]$.
+* **Entrada**: palavra "sol", vetor *one-hot* $ x = [1, 0, 0, 0] $;
+* **Saída Esperada**: palavra "dia", vetor *one-hot* $ y = [0, 0, 1, 0]$.
 
 #### Propagação Direta
 
-**Passo 1**: Calcular a Ativação da Camada Oculta
+**Passo 1**: calcular a Ativação da Camada Oculta
 
-A ativação da camada oculta $ h $ é obtida multiplicando a entrada $ x $ pelos pesos $ W^{(1)} $:
+A ativação da camada oculta $h$ será obtida multiplicando a entrada $x$ pelos pesos $W^{(1)}$:
 
-$$
-h = x \cdot W^{(1)} = [1, 0, 0, 0] \cdot \begin{pmatrix}
+$$h = x \cdot W^{(1)} = [1, 0, 0, 0] \cdot \begin{pmatrix}
 0.1 & 0.2 \\
 0.3 & 0.4 \\
 0.5 & 0.6 \\
 0.7 & 0.8
-\end{pmatrix}
-$$
+\end{pmatrix}$$
 
-Como $ x $ é um vetor *one-hot* com 1 na primeira posição, $ h $ corresponde à primeira linha de $ W^{(1)} $:
+Como $x$ é um vetor *one-hot* com $1$ na primeira posição, $h$ corresponde à primeira linha de $W^{(1)}$:
 
-$$
-h = [0.1, 0.2]
-$$
+$$h = [0.1, 0.2]$$
 
 **Passo 2**: Calcular a Ativação da Camada de Saída
 
-1. Cálculo do Vetor de Pontuações ($ z $)
+1. Cálculo do Vetor de Pontuações ($z$)
 
-   Multiplicamos $ h $ pelos pesos $ W^{(2)} $:
+   Multiplicamos $h$ pelos pesos $W^{(2)}$:
 
-   $$
-   z = h \cdot W^{(2)} = [0.1, 0.2] \cdot \begin{pmatrix}
+   $$z = h \cdot W^{(2)} = [0.1, 0.2] \cdot \begin{pmatrix}
    0.2 & 0.3 & 0.4 & 0.5 \\
    0.6 & 0.7 & 0.8 & 0.9
-   \end{pmatrix}
-   $$
+   \end{pmatrix}$$
 
    Calculando cada componente:
 
-   $$
-   z_1 = 0.1 \cdot 0.2 + 0.2 \cdot 0.6 = 0.02 + 0.12 = 0.14
-   $$
+   $$z_1 = 0.1 \cdot 0.2 + 0.2 \cdot 0.6 = 0.02 + 0.12 = 0.14$$
 
-   $$
-   z_2 = 0.1 \cdot 0.3 + 0.2 \cdot 0.7 = 0.03 + 0.14 = 0.17
-   $$
+   $$z_2 = 0.1 \cdot 0.3 + 0.2 \cdot 0.7 = 0.03 + 0.14 = 0.17$$
 
-   $$
-   z_3 = 0.1 \cdot 0.4 + 0.2 \cdot 0.8 = 0.04 + 0.16 = 0.20
-   $$
+   $$z_3 = 0.1 \cdot 0.4 + 0.2 \cdot 0.8 = 0.04 + 0.16 = 0.20$$
 
-   $$
-   z_4 = 0.1 \cdot 0.5 + 0.2 \cdot 0.9 = 0.05 + 0.18 = 0.23
-   $$
+   $$z_4 = 0.1 \cdot 0.5 + 0.2 \cdot 0.9 = 0.05 + 0.18 = 0.23$$
 
    Portanto:
 
-   $$
-   z = [0.14, 0.17, 0.20, 0.23]
-   $$
+   $$z = [0.14, 0.17, 0.20, 0.23]$$
 
 2. Aplicação da Função Softmax
 
-   A saída prevista $ \vert{y} $ é calculada com a função softmax:
+   A saída prevista $ \vert{y}$ é calculada com a função softmax:
 
-   $$
-   \vert{y}_i = \frac{e^{z_i} }{\sum_{j=1}^{4} e^{z_j} }
-   $$
+   $$\vert{y}_i = \frac{e^{z_i} }{\sum_{j=1}^{4} e^{z_j} }$$
 
    Calculando os exponenciais (aproximados):
 
-   $$
-   e^{0.14} \approx 1.150, \quad e^{0.17} \approx 1.185, \quad e^{0.20} \approx 1.221, \quad e^{0.23} \approx 1.259
-   $$
+   $$e^{0.14} \approx 1.150, \quad e^{0.17} \approx 1.185, \quad e^{0.20} \approx 1.221, \quad e^{0.23} \approx 1.259$$
 
    Soma dos exponenciais:
 
-   $$
-   1.150 + 1.185 + 1.221 + 1.259 = 4.815
-   $$
+   $$1.150 + 1.185 + 1.221 + 1.259 = 4.815$$
 
-   Agora, calculamos cada $ \vert{y}_i $:
+   Agora, calculamos cada $\vert{y}_i$:
 
-   $$
-   \vert{y}_1 = \frac{1.150}{4.815} \approx 0.239
-   $$
+   $$\vert{y}_1 = \frac{1.150}{4.815} \approx 0.239$$
 
-   $$
-   \vert{y}_2 = \frac{1.185}{4.815} \approx 0.246
-   $$
+   $$\vert{y}_2 = \frac{1.185}{4.815} \approx 0.246$$
 
-   $$
-   \vert{y}_3 = \frac{1.221}{4.815} \approx 0.254
-   $$
+   $$\vert{y}_3 = \frac{1.221}{4.815} \approx 0.254$$
 
-   $$
-   \vert{y}_4 = \frac{1.259}{4.815} \approx 0.261
-   $$
+   $$\vert{y}_4 = \frac{1.259}{4.815} \approx 0.261$$
 
    Portanto:
 
-   $$
-   \vert{y} = [0.239, 0.246, 0.254, 0.261]
-   $$
+   $$\vert{y} = [0.239, 0.246, 0.254, 0.261]$$
 
 3. Cálculo do Custo
 
    Usamos a entropia cruzada como função de custo:
 
-   $$
-   L = -\sum_{i=1}^{4} y_i \log(\vert{y}_i)
-   $$
+   $$L = -\sum_{i=1}^{4} y_i \log(\vert{y}_i)$$
 
-   Como $ y = [0, 0, 1, 0] $, apenas o terceiro termo contribui:
+   Como $y = [0, 0, 1, 0]$, apenas o terceiro termo contribui:
 
-   $$
-   L = - y_3 \log(\vert{y}_3) = - 1 \cdot \log(0.254)
-   $$
+   $$L = - y_3 \log(\vert{y}_3) = - 1 \cdot \log(0.254)$$
 
    Calculando:
 
-   $$
-   \log(0.254) \approx -1.370
-   $$
+   $$\log(0.254) \approx -1.370$$
 
-   $$
-   L = -(-1.370) = 1.370
-   $$
+   $$L = -(-1.370) = 1.370$$
 
 #### Retropropagação
 
-**Passo 1**: Calcular o Erro na Camada de Saída
+**Passo 1**: calcular o Erro na Camada de Saída
 Para softmax com entropia cruzada, o erro $\delta^{(2)}$ será:
 
    $$\delta^{(2)} = \vert{y} - y$$
@@ -1480,164 +1487,118 @@ Para softmax com entropia cruzada, o erro $\delta^{(2)}$ será:
 
    $$\delta^{(2)} = [0.239, 0.246, 0.254 - 1, 0.261] = [0.239, 0.246, -0.746, 0.261]   $$
 
-**Passo 2**: Calcular os Gradientes para $ W^{(2)} $
-   O gradiente do custo em relação a $ W^{(2)} $ é:
+**Passo 2**: calcular os Gradientes para $W^{(2)}$
+   O gradiente do custo em relação a $W^{(2)}$ é:
 
-   $$
-   \frac{\partial L}{\partial W^{(2)} } = h^T \cdot \delta^{(2)}
-   $$
+   $$\frac{\partial L}{\partial W^{(2)} } = h^T \cdot \delta^{(2)}$$
 
-   Com $ h = [0.1, 0.2] $ (vetor coluna $ h^T = \begin{pmatrix} 0.1 \\ 0.2 \end{pmatrix} $):
+   Com $h = [0.1, 0.2]$, vetor coluna $h^T = \begin{pmatrix} 0.1 \\ 0.2 \end{pmatrix}$:
 
-   $$
-   \frac{\partial L}{\partial W^{(2)} } = \begin{pmatrix}
+   $$\frac{\partial L}{\partial W^{(2)} } = \begin{pmatrix}
    0.1 \\
    0.2
-   \end{pmatrix} \cdot [0.239, 0.246, -0.746, 0.261]
-   $$
+   \end{pmatrix} \cdot [0.239, 0.246, -0.746, 0.261]$$
 
    Calculando cada elemento:
 
-   $$
-   \frac{\partial L}{\partial W^{(2)} } = \begin{pmatrix}
+   $$\frac{\partial L}{\partial W^{(2)} } = \begin{pmatrix}
    0.1 \cdot 0.239 & 0.1 \cdot 0.246 & 0.1 \cdot (-0.746) & 0.1 \cdot 0.261 \\
    0.2 \cdot 0.239 & 0.2 \cdot 0.246 & 0.2 \cdot (-0.746) & 0.2 \cdot 0.261
-   \end{pmatrix}
-   $$
+   \end{pmatrix}$$
 
-   $$
-   \approx \begin{pmatrix}
+   $$\approx \begin{pmatrix}
    0.0239 & 0.0246 & -0.0746 & 0.0261 \\
    0.0478 & 0.0492 & -0.1492 & 0.0522
-   \end{pmatrix}
-   $$
+   \end{pmatrix}$$
 
-**Passo 3**: Propagar o Erro para a Camada Oculta
-   O erro $ \delta^{(1)} $ na camada oculta é:
+**Passo 3**: propagar o Erro para a Camada Oculta. O erro $\delta^{(1)}$ na camada oculta é:
 
-   $$
-   \delta^{(1)} = \delta^{(2)} \cdot (W^{(2)})^T
-   $$
+   $$\delta^{(1)} = \delta^{(2)} \cdot (W^{(2)})^T$$
 
-   Transposta de $ W^{(2)} $:
+   Transposta de $W^{(2)}$:
 
-   $$
-   (W^{(2)})^T = \begin{pmatrix}
+   $$(W^{(2)})^T = \begin{pmatrix}
    0.2 & 0.6 \\
    0.3 & 0.7 \\
    0.4 & 0.8 \\
    0.5 & 0.9
-   \end{pmatrix}
-   $$
+   \end{pmatrix}$$
 
    Calculando:
 
-   $$
-   \delta^{(1)} = [0.239, 0.246, -0.746, 0.261] \cdot \begin{pmatrix}
+   $$\delta^{(1)} = [0.239, 0.246, -0.746, 0.261] \cdot \begin{pmatrix}
    0.2 & 0.6 \\
    0.3 & 0.7 \\
    0.4 & 0.8 \\
    0.5 & 0.9
-   \end{pmatrix}
-   $$
+   \end{pmatrix}$$
 
    Para cada componente:
 
-   $$
-   \delta^{(1)}_1 = 0.239 \cdot 0.2 + 0.246 \cdot 0.3 + (-0.746) \cdot 0.4 + 0.261 \cdot 0.5
-   $$
+   $$\delta^{(1)}_1 = 0.239 \cdot 0.2 + 0.246 \cdot 0.3 + (-0.746) \cdot 0.4 + 0.261 \cdot 0.5$$
 
-   $$
-   = 0.0478 + 0.0738 - 0.2984 + 0.1305 \approx -0.0463
-   $$
+   $$= 0.0478 + 0.0738 - 0.2984 + 0.1305 \approx -0.0463$$
 
-   $$
-   \delta^{(1)}_2 = 0.239 \cdot 0.6 + 0.246 \cdot 0.7 + (-0.746) \cdot 0.8 + 0.261 \cdot 0.9
-   $$
+   $$\delta^{(1)}_2 = 0.239 \cdot 0.6 + 0.246 \cdot 0.7 + (-0.746) \cdot 0.8 + 0.261 \cdot 0.9$$
 
-   $$
-   = 0.1434 + 0.1722 - 0.5968 + 0.2349 \approx -0.0463
-   $$
+   $$= 0.1434 + 0.1722 - 0.5968 + 0.2349 \approx -0.0463$$
 
    Portanto:
 
-   $$
-   \delta^{(1)} = [-0.0463, -0.0463]
-   $$
+   $$\delta^{(1)} = [-0.0463, -0.0463]$$
 
-**Passo 4**: Calcular os Gradientes para $ W^{(1)} $
-   O gradiente do custo em relação a $ W^{(1)} $ é:
+**Passo 4**: calcular os Gradientes para $W^{(1)}$. O gradiente do custo em relação a $W^{(1)}$ é:
 
-   $$
-   \frac{\partial L}{\partial W^{(1)} } = x^T \cdot \delta^{(1)}
-   $$
+   $$\frac{\partial L}{\partial W^{(1)} } = x^T \cdot \delta^{(1)}$$
 
-   Com $ x = [1, 0, 0, 0] $ (vetor coluna $ x^T = \begin{pmatrix} 1 \\ 0 \\ 0 \\ 0 \end{pmatrix} $):
+   Com $x = [1, 0, 0, 0]$, vetor coluna $x^T = \begin{pmatrix} 1 \\ 0 \\ 0 \\ 0 \end{pmatrix}$:
 
-   $$
-   \frac{\partial L}{\partial W^{(1)} } = \begin{pmatrix}
+   $$\frac{\partial L}{\partial W^{(1)} } = \begin{pmatrix}
    1 \\
    0 \\
    0 \\
    0
-   \end{pmatrix} \cdot [-0.0463, -0.0463]
-   $$
+   \end{pmatrix} \cdot [-0.0463, -0.0463]$$
 
-   $$
-   = \begin{pmatrix}
+   $$= \begin{pmatrix}
    1 \cdot (-0.0463) & 1 \cdot (-0.0463) \\
    0 \cdot (-0.0463) & 0 \cdot (-0.0463) \\
    0 \cdot (-0.0463) & 0 \cdot (-0.0463) \\
    0 \cdot (-0.0463) & 0 \cdot (-0.0463)
-   \end{pmatrix}
-   $$
+   \end{pmatrix}$$
 
-   $$
-   = \begin{pmatrix}
+   $$= \begin{pmatrix}
    -0.0463 & -0.0463 \\
    0 & 0 \\
    0 & 0 \\
    0 & 0
-   \end{pmatrix}
-   $$
+   \end{pmatrix}$$
 
 #### Atualização dos Pesos
 
-Usamos uma taxa de aprendizado $ \eta = 0.1 $.
+Usamos uma taxa de aprendizado $\eta = 0.1$.
 
-1. Atualização de $ W^{(2)} $
+1. Atualização de $W^{(2)}$
 
-   $$
-   W^{(2)} \leftarrow W^{(2)} - \eta \cdot \frac{\partial L}{\partial W^{(2)} }
-   $$
+   $$W^{(2)} \leftarrow W^{(2)} - \eta \cdot \frac{\partial L}{\partial W^{(2)} }$$
 
-   $$
-   W^{(2)} = \begin{pmatrix}
+   $$W^{(2)} = \begin{pmatrix}
    0.2 & 0.3 & 0.4 & 0.5 \\
    0.6 & 0.7 & 0.8 & 0.9
    \end{pmatrix} - 0.1 \cdot \begin{pmatrix}
    0.0239 & 0.0246 & -0.0746 & 0.0261 \\
    0.0478 & 0.0492 & -0.1492 & 0.0522
-   \end{pmatrix}
-   $$
+   \end{pmatrix}$$
 
    Calculando cada elemento:
 
-   $$
-   W^{(2)}_{1,1} = 0.2 - 0.1 \cdot 0.0239 = 0.2 - 0.00239 \approx 0.1976
-   $$
+   $$W^{(2)}_{1,1} = 0.2 - 0.1 \cdot 0.0239 = 0.2 - 0.00239 \approx 0.1976$$
 
-   $$
-   W^{(2)}_{1,2} = 0.3 - 0.1 \cdot 0.0246 = 0.3 - 0.00246 \approx 0.2975
-   $$
+   $$W^{(2)}_{1,2} = 0.3 - 0.1 \cdot 0.0246 = 0.3 - 0.00246 \approx 0.2975$$
 
-   $$
-   W^{(2)}_{1,3} = 0.4 - 0.1 \cdot (-0.0746) = 0.4 + 0.00746 \approx 0.4075
-   $$
+   $$W^{(2)}_{1,3} = 0.4 - 0.1 \cdot (-0.0746) = 0.4 + 0.00746 \approx 0.4075$$
 
-   $$
-   W^{(2)}_{1,4} = 0.5 - 0.1 \cdot 0.0261 = 0.5 - 0.00261 \approx 0.4974
-   $$
+   $$W^{(2)}_{1,4} = 0.5 - 0.1 \cdot 0.0261 = 0.5 - 0.00261 \approx 0.4974$$
 
    $$W^{(2)}_{2,1} = 0.6 - 0.1 \cdot 0.0478 = 0.6 - 0.00478 \approx 0.5952$$
 
@@ -1654,7 +1615,7 @@ Usamos uma taxa de aprendizado $ \eta = 0.1 $.
    0.5952 & 0.6951 & 0.8149 & 0.8948
    \end{pmatrix}$$
 
-2. Atualização de $ W^{(1)} $
+2. Atualização de $W^{(1)}$
 
    $$W^{(1)} \leftarrow W^{(1)} - \eta \cdot \frac{\partial L}{\partial W^{(1)} }$$
 
@@ -1689,7 +1650,7 @@ Neste exemplo, a estupefata leitora pode ver como treinar uma rede neural rasa p
 
 ![Diagrama da rede neural treinada mostrando os valores e vetores encontrados](/assets/images/shallow-neural-network-training.webp)
 
-_Figura 8: Esquema da Rede Rasa treinada no exemplo._{: class="legend"}
+_Figura 7: Esquema da Rede Rasa treinada no exemplo._{: class="legend"}
 
 #### Implementação em C++ 20 do Exemplo de Treinamento de uma Rede Neural Rasa
 
@@ -1926,59 +1887,47 @@ int main() {
 
 ### Aplicações em **word embeddings**
 
-Agora que entendemos os fundamentos das redes neurais rasas, podemos compreender como os modelos de **word embeddings** utilizam essa arquitetura para aprender representações distribuídas de palavras.
-
-#### Camada de Projeção em **word embeddings**
+Agora que entendemos os fundamentos das redes neurais rasas, podemos compreender como os modelos de **word embeddings** utilizam essa arquitetura para aprender representações distribuídas de palavras. A atenta leitora deve lembrar que os **word embeddings** são representações vetoriais densas de palavras, onde palavras semanticamente semelhantes estão próximas no espaço vetorial e são a base teórica sobre a qual construímos os modelos **transformers**.
 
 No coração dos modelos de **word embeddings** está a camada de projeção, que é essencialmente a camada oculta da rede neural:
-
-![Projeção no **word embeddings**](/assets/images/word-embedding-projecao.png)
-
-_Figura 9: Visualização da camada de projeção nos modelos de **word embeddings**, mostrando como os vetores one-hot são transformados em embeddings densos._{: class="legend"}
 
 A matriz de pesos $W$ entre a camada de entrada e a camada oculta tem dimensões $ \vert V \vert \times d$, onde $ \vert V \vert $ é o tamanho do vocabulário e $d$ é a dimensão do embedding. Após o treinamento, cada linha dessa matriz representa o embedding de uma palavra específica.
 
 ![](/assets/images/word-embedding-projection.webp)
 
-_Figura 10: Ilustração detalhada da camada de projeção em modelos de word embeddings. À esquerda, a representação one-hot da palavra `cachorro` no vocabulário. Ao centro, a matriz de pesos $W$, dimensões  $\vert V \vert \times d$, que mapeia as palavras para o espaço vetorial denso. À direita, o vetor de embedding resultante após a operação de consulta, *lookup, em inglês* na linha correspondente da matriz. O espaço vetorial d-dimensional mostra como diferentes palavras são posicionadas de acordo com suas relações semânticas._{: class="legend"}
+_Figura 8: Ilustração detalhada da camada de projeção em modelos de word embeddings. À esquerda, a representação one-hot da palavra `cachorro` no vocabulário. Ao centro, a matriz de pesos $W$, dimensões  $\vert V \vert \times d$, que mapeia as palavras para o espaço vetorial denso. À direita, o vetor de embedding resultante após a operação de consulta, *lookup, em inglês* na linha correspondente da matriz. O espaço vetorial d-dimensional mostra como diferentes palavras são posicionadas de acordo com suas relações semânticas._{: class="legend"}
 
-Do ponto de vista da álgebra linear, esta matriz de pesos $W$ representa uma transformação linear do espaço one-hot de dimensão $ \vert V \vert $ para o espaço de embedding denso de dimensão $d$. O processo de treinamento visa aprender os elementos dessa matriz $W$ de forma que a transformação capture as relações semânticas desejadas
+Do ponto de vista da álgebra linear, esta matriz de pesos $W$ representa uma transformação linear do espaço **One-Hot** de dimensão $ \vert V \vert $ para o espaço de embedding denso de dimensão $d$. O processo de treinamento visa aprender os elementos dessa matriz $W$ de forma que a transformação capture as relações semânticas desejadas.
 
-A camada de projeção nos modelos de *word embeddings* funciona como uma tabela de consulta eficiente, onde a matriz de pesos $W$ armazena os vetores de embedding.
+A camada de projeção nos modelos de **word embeddings** funciona como uma tabela de consulta eficiente, onde a matriz de pesos $W$ armazena os vetores de embedding. Considere um vocabulário minúsculo: $V = \{\text{"a"}, \text{"b"}, \text{"c"}, \text{"d"}\}$ tal que: $\vert V \vert =4$. Neste caso, queremos aprender **embeddings** de dimensão $d=3$.
 
-Considere um vocabulário minúsculo: $V = \{\text{"a"}, \text{"b"}, \text{"c"}, \text{"d"}\}$ ($ \vert V \vert =4$) e queremos aprender embeddings de dimensão $d=3$.
+A matriz de pesos $W$, também chamada de **matriz de embedding**, terá dimensões $\vert V \vert  \times d$, ou seja, $4 \times 3$. Cada linha corresponde ao **vetor de embedding** de uma palavra do vocabulário. Vamos supor que a matriz $W$ seja:
 
-A matriz de pesos $W$ (também chamada de matriz de embedding) terá dimensões $ \vert V \vert  \times d$, ou seja, $4 \times 3$. Cada linha corresponde ao vetor de embedding de uma palavra do vocabulário. Vamos supor que a matriz $W$ seja:
-
-$$
-W = \begin{pmatrix}
+$$W = \begin{pmatrix}
 0.1 & 0.2 & 0.3 \\  % Embedding de "a" (linha 1)
 0.4 & 0.5 & 0.6 \\  % Embedding de "b" (linha 2)
 0.7 & 0.8 & 0.9 \\  % Embedding de "c" (linha 3)
 1.0 & 1.1 & 1.2    % Embedding de "d" (linha 4)
-\end{pmatrix}
-$$
+\end{pmatrix}$$
 
-Agora, suponha que a palavra de entrada seja "b". Sua representação one-hot é um vetor $x$ de tamanho $ \vert V \vert =4$, com 1 na posição correspondente a "b" (a segunda posição) e 0 nas demais:
+Agora, suponha que a palavra de entrada seja `b`. Sua representação **One-Hot** será um vetor $x$ de tamanho $ \vert V \vert =4$, com $1$ na posição correspondente a `b`, a segunda posição, e $0$ nas demais:
 
 $$x = [0, 1, 0, 0]$$
 
-A operação de projeção é matematicamente equivalente a multiplicar o vetor one-hot $x$ (como um vetor linha) pela matriz $W$:
+A operação de projeção é matematicamente equivalente a multiplicar o vetor **One-Hot** $x$, como um vetor linha, pela matriz $W$:
 
-$$
-\text{Embedding}(\text{"b"}) = x \cdot W = [0, 1, 0, 0] \begin{pmatrix}
+$$\text{Embedding}(\text{"b"}) = x \cdot W = [0, 1, 0, 0] \begin{pmatrix}
 0.1 & 0.2 & 0.3 \\
 0.4 & 0.5 & 0.6 \\
 0.7 & 0.8 & 0.9 \\
 1.0 & 1.1 & 1.2
-\end{pmatrix}
-$$
+\end{pmatrix}$$
 
 Calculando a multiplicação:
 
-* O primeiro elemento do resultado é $(0 \times 0.1) + (1 \times 0.4) + (0 \times 0.7) + (0 \times 1.0) = 0.4$.
+* O primeiro elemento do resultado é $(0 \times 0.1) + (1 \times 0.4) + (0 \times 0.7) + (0 \times 1.0) = 0.4$;
 
-* O segundo elemento do resultado é $(0 \times 0.2) + (1 \times 0.5) + (0 \times 0.8) + (0 \times 1.1) = 0.5$.
+* O segundo elemento do resultado é $(0 \times 0.2) + (1 \times 0.5) + (0 \times 0.8) + (0 \times 1.1) = 0.5$;
 
 * O terceiro elemento do resultado é $(0 \times 0.3) + (1 \times 0.6) + (0 \times 0.9) + (0 \times 1.2) = 0.6$.
 
@@ -1986,66 +1935,292 @@ O resultado é:
 
 $$\text{Embedding}(\text{"b"}) = [0.4, 0.5, 0.6]$$
 
-Observe que este é exatamente a **segunda linha** da matriz $W$. Na prática, as bibliotecas implementam isso como uma operação de "lookup" (consulta) direta na matriz $W$ usando o índice da palavra (neste caso, índice 1, assumindo indexação baseada em 0, ou índice 2 se baseada em 1), o que é muito mais eficiente do que realizar a multiplicação matricial completa. O treinamento ajusta os valores nesta matriz $W$.
+Observe que este é exatamente a **segunda linha** da matriz $W$. *Na prática, as bibliotecas implementam isso como uma operação de lookup, consulta em inglês, direta na matriz $W$ usando o índice da palavra. Neste caso, índice $1$, assumindo indexação baseada em $0$, ou índice #2# se baseada em 1*, o que é muito mais eficiente do que realizar a multiplicação matricial completa. As redes neurais são usadas para treinamento em busca dos valores desta matriz $W$.
 
 #### Redes Neurais Simplificadas dos Modelos de Embeddings
 
-A arquitetura específica dos modelos de **word embeddings** pode ser descrita como uma "simplified neural network". Em sua forma mais básica:
+A arquitetura específica dos modelos de **word embeddings** pode ser descrita como uma rede neural simplificada. Em sua forma mais básica:
 
 1. A camada de entrada recebe representações one-hot das palavras;
 2. A camada oculta linear (sem função de ativação não-linear) projeta estas representações para um espaço vetorial de menor dimensão;
 3. A camada de saída, com ativação softmax, produz probabilidades para as palavras a serem previstas.
 
-O que torna esta arquitetura especial é que não estamos interessados na saída da rede (as previsões de palavras), mas sim nos pesos aprendidos. Além disso, a camada oculta não utiliza funções de ativação não-lineares. Finalmente, o objetivo implícito destas redes, neste domínio que estamos estudando, é capturar relações semânticas entre palavras através da co-ocorrência estatística.
+O que torna esta arquitetura especial é que não estamos interessados na saída da rede (as previsões de palavras), mas sim nos pesos aprendidos. Além disso, a camada oculta não utiliza funções de ativação não-lineares. Finalmente, o objetivo implícito destas redes, neste domínio que estamos estudando, é capturar relações semânticas entre palavras através da co-ocorrência estatística. Esta simplicidade arquitetural é suficiente para aprender representações distribuídas de palavras que capturam de forma surpreendente relações semânticas e sintáticas. Veremos estes conceitos com uma pouco mais de detalhes [neste artigo](https://frankalcantara.com/transformers-cinco/).
 
-Esta simplicidade arquitetural é suficiente para aprender representações distribuídas de palavras que capturam de forma surpreendente relações semânticas e sintáticas.
-
-### Desafios e Otimizações
+#### Desafios e Otimizações
 
 Os modelos de **word embeddings**, embora conceitualmente simples, enfrentam desafios práticos na implementação:
 
-#### Problema de Computação do Softmax
-
-O cálculo do softmax na camada de saída envolve normalizar sobre todo o vocabulário, o que pode ser computacionalmente proibitivo para vocabulários grandes:
+**Problema de Computação do Softmax**: o cálculo do **softmax** na camada de saída envolve normalizar sobre todo o vocabulário, o que pode ser computacionalmente proibitivo para vocabulários grandes. Observe que o softmax é dado por:
 
 $$p(w_O  \vert  w_I) = \frac{\exp(v'_{w_O} \cdot v_{w_I})}{\sum_{w \in V} \exp(v'_w \cdot v_{w_I})}$$
 
-Para cada atualização, precisamos calcular o denominador que soma sobre todas as palavras do vocabulário, resultando em complexidade $O( \vert V \vert )$ por exemplo.
+Nesta equação, $v_{w_I}$ é o vetor da palavra de entrada e $v'_w$ é o vetor de saída associado à palavra $w$. O processo de cálculo e a origem do custo computacional podem ser detalhados da seguinte forma:
 
-#### Otimizações
+1.  **Cálculo dos Scores Brutos**: para cada palavra $w$ no vocabulário $V$, calcula-se um score, frequentemente o produto escalar $v'_w \cdot v_{w_I}$;
+2.  **Transformação Exponencial**: cada score é transformado pela função exponencial, $\exp(v'_w \cdot v_{w_I})$, garantindo valores positivos;
+3.  **Cálculo do Termo de Normalização (Denominador)**: este é o passo computacionalmente intensivo. É necessário calcular a **soma** dos scores exponenciais para **todas** as $\vert V \vert$ palavras no vocabulário: $\sum_{w \in V} \exp(v'_w \cdot v_{w_I})$;
+4.  **Obtenção da Probabilidade (Normalização)**: a probabilidade final para uma palavra específica $w_O$ é obtida dividindo seu score exponencial pelo termo de normalização (o denominador calculado no passo anterior). Isso garante que $\sum_{w_O \in V} p(w_O \vert w_I) = 1$.
 
-Para lidar com esse problema, foram propostas duas otimizações principais:
+A necessidade de calcular o denominador, somando sobre todas as $\vert V \vert$ palavras do vocabulário para cada exemplo ou atualização, resulta em uma complexidade computacional de $O(\vert V \vert)$, tornando o Softmax padrão impraticável para vocabulários muito grandes e motivando o uso de otimizações como *Negative Sampling* ou *Hierarchical Softmax*.
 
-##### Negative Sampling
+**Negative Sampling**: Uma técnica que reduz o custo computacional do softmax padrão, amostrando apenas um pequeno número de palavras negativas (incorretas) para cada palavra-alvo. Isso transforma o problema de classificação multiclasse em vários problemas de classificação binária, reduzindo significativamente o custo computacional. Para isso, transformamos o problema de classificação multiclasse em vários problemas de classificação binária, reduzindo significativamente o custo computacional.
 
-Transforma o problema de classificação multiclasse em vários problemas de classificação binária, reduzindo significativamente o custo computacional.
+A intuitiva leitora pode pensar que, em vez de tentar prever a palavra correta entre todas as palavras do vocabulário, multiclasse, a técnica  **Negative Sampling** treina a rede para distinguir a palavra-alvo real de algumas poucas palavras negativas, no sentido de incorretas, amostradas aleatoriamente. Isso simplifica enormemente o cálculo a cada passo.
 
-**Intuitivamente**, em vez de tentar prever a palavra correta entre *todas* as palavras do vocabulário (multiclasse), o Negative Sampling treina a rede para distinguir a palavra-alvo real de algumas poucas palavras "negativas" (incorretas) amostradas aleatoriamente. Isso simplifica enormemente o cálculo a cada passo.
+A criativa leitora não precisa aceitar minha palavra. Vamos ver um exemplo prático de como isso funciona passo a passo:
 
-##### Hierarchical Softmax
+**Passo 1**: vamos criar um cenário inicial considerando o modelo SkipGram com um vocabulário reduzido. Suponha que temos um vocabulário de 7 palavras: $V = \{\text{o, gato, preto, corre, pelo, jardim, cachorro}\}$.
 
-Utiliza uma árvore binária de Huffman para representar o vocabulário, reduzindo a complexidade para $O(\log  \vert V \vert )$.
+* **Palavra de Entrada (Alvo)**: $w_I$ = `preto`;
+* **Palavra de Contexto (Saída Real/Positiva)**: $w_O$ = `gato`;
+* **Vocabulário** (simplificado): $V = \{\text{o, gato, preto, corre, pelo, jardim, cachorro}\}$ ($\vert V \vert = 7$);
+* **Dimensão do Embedding**: $d = 4$. É um hiperparâmetro do modelo. Escolhi um valor baixo, $4$, para simplificar os cálculos manuais no exemplo. Valores reais comuns são $50$, $100$, $300$, etc.
+* **Número de Amostras Negativas**: $k = 2$. É um hiperparâmetro do modelo. Escolhi $k = 2$ para manter o exemplo conciso. Valores comuns na prática estão entre  $5$ e $20$.
+* **Vetores (Iniciais/Fictícios)**:
+    * Vetor de Entrada para `preto` ($v_{\text{preto} }$): $[0.4, -0.3, 0.1, 0.5]$. Os valores específicos deste vetor são hipotéticos. Em um treinamento real, os vetores são inicializados aleatoriamente, com valores pequenos, e depois aprendidos, ajustados, durante o processo de treinamento. Escolhi alguns valores para permitir o cálculo no exemplo.
+    * Vetores de Saída ($v'_w$) para algumas palavras. Assim como o vetor de entrada, os valores específicos dos vetores de saída, também chamados de pesos da camada de saída ou *context vectors*, são hipotéticos. Eles também seriam inicializados aleatoriamente e aprendidos durante o treinamento. Para nosso exemplo, escolhi os seguintes valores:
+        * $v'_{\text{gato} }$ (Positivo): $[0.1, 0.2, -0.2, 0.4]$
+        * $v'_{\text{cachorro} }$ (Negativo 1): $[0.1, -0.3, 0.8, -0.1]$
+        * $v'_{\text{jardim} }$ (Negativo 2): $[0.5, 0.1, 0.3, -0.2]$
 
-Estas otimizações são importantes no treinamento eficiente dos modelos de **word embeddings** em grandes corpora de texto.
+**Passo 2**: processo de Treinamento para o Par (`preto`, `gato`) com $k=2$. Nosso objetivo é treinar a rede para:
 
-**Intuitivamente**, o Hierarchical Softmax organiza o vocabulário em uma árvore binária (geralmente uma árvore de Huffman, onde palavras frequentes ficam mais perto da raiz). Para prever uma palavra, a rede só precisa aprender a fazer uma sequência de decisões binárias (esquerda/direita) para navegar da raiz até a folha correspondente à palavra correta. O número de decisões é logarítmico no tamanho do vocabulário ($O(\log \vert V \vert )$), tornando o processo muito mais rápido que o Softmax padrão ($O( \vert V \vert )$).
+* aumentar a probabilidade do par positivo (`preto`, `gato`) ser observado;
+* diminuir a probabilidade dos pares negativos (`preto`, `cachorro`) e (`preto`, `jardim`) serem observados.
 
-A diferença na eficiência computacional entre o Softmax padrão e suas otimizações (Hierarchical Softmax - HS, Negative Sampling - NS) é drástica para vocabulários grandes.
+Isso é feito tratando cada um como um problema de classificação binária usando a função sigmóide $\sigma(x) = \frac{1}{1 + e^{-x} }$.
 
-Vamos considerar um vocabulário realista com $ \vert V \vert  = 100.000$ palavras.
+**Passo 2.1: Processar o Par Positivo (`preto` -> `gato`)**
 
-* **Softmax Padrão**: A complexidade é $O( \vert V \vert )$. Para calcular a probabilidade de uma palavra de saída, precisamos calcular $e^{score}$ para todas as 100.000 palavras no vocabulário e então somá-las para obter o denominador. Isso envolve aproximadamente **100.000** operações de exponenciação e adição/divisão *por exemplo de treinamento*.
+* **Calcular o Score**:
+    $s_{pos} = v'_{\text{gato} } \cdot v_{\text{preto} }$
+    $s_{pos} = [0.1, 0.2, -0.2, 0.4] \cdot [0.4, -0.3, 0.1, 0.5]$
+    $s_{pos} = (0.1)(0.4) + (0.2)(-0.3) + (-0.2)(0.1) + (0.4)(0.5)$
+    $s_{pos} = 0.04 - 0.06 - 0.02 + 0.20 = 0.16$
 
-* **Hierarchical Softmax (HS)**: A complexidade é $O(\log_2  \vert V \vert )$. A estrutura de árvore binária (geralmente Huffman) permite calcular a probabilidade navegando da raiz até a folha da palavra correta. O número de passos (decisões binárias) é a profundidade da árvore, que é aproximadamente $\log_2(100.000)$.
+* **Calcular a Probabilidade (Sigmoide)**: O alvo aqui é $1$ (par positivo).
+    $P(\text{gato}  \vert  \text{preto})_{pos} = \sigma(s_{pos}) = \sigma(0.16) = \frac{1}{1 + e^{-0.16} } \approx \frac{1}{1 + 0.852} \approx 0.540$
+
+* **Calcular o Gradiente para este Par**: O gradiente em relação ao score é $(\sigma(s_{pos}) - \text{target}) = (0.540 - 1) = -0.460$. Este valor será usado para atualizar $v'_{\text{gato} }$ e $v_{\text{preto} }$.
+    * Gradiente para $v'_{\text{gato} }$: $g \cdot v_{\text{preto} } = -0.460 \times [0.4, -0.3, 0.1, 0.5]$
+    * Gradiente (contribuição) para $v_{\text{preto} }$: $g \cdot v'_{\text{gato} } = -0.460 \times [0.1, 0.2, -0.2, 0.4]$
+
+**Passo 2.2**: Processar o Primeiro Par Negativo (`preto` -> `cachorro`).
+
+* **Amostrar Negativo**: Escolhemos `cachorro` aleatoriamente (evitando `gato`).
+
+$$v'{\text{cachorro}} \leftarrow v'{\text{cachorro}} - \eta \cdot (0.540) \cdot [0.4, -0.3, 0.1, 0.5]$, com um valor exemplo para $\eta$ (ex.: $\eta = 0.01$$
+
+* **Calcular o Score**:
+
+    $$s_{neg1} = v'_{\text{cachorro} } \cdot v_{\text{preto} }$$
+
+    $$s_{neg1} = [0.1, -0.3, 0.8, -0.1] \cdot [0.4, -0.3, 0.1, 0.5]$$
+
+    $$s_{neg1} = (0.1)(0.4) + (-0.3)(-0.3) + (0.8)(0.1) + (-0.1)(0.5)$$
+
+    $$s_{neg1} = 0.04 + 0.09 + 0.08 - 0.05 = 0.16$$
+
+* **Calcular a Probabilidade (Sigmoide)**: O alvo aqui é $0$ (par negativo).
+
+    $$P(\text{cachorro}  \vert  \text{preto})_{neg} = \sigma(s_{neg1}) = \sigma(0.16) \approx 0.540$$
+
+* **Calcular o Gradiente para este Par**: O gradiente em relação ao score é $(\sigma(s_{neg1}) - \text{target}) = (0.540 - 0) = 0.540$.
+
+    * Gradiente para $v'_{\text{cachorro} }$: $g \cdot v_{\text{preto} } = 0.540 \times [0.4, -0.3, 0.1, 0.5]$;
+    * Gradiente (contribuição) para $v_{\text{preto} }$: $g \cdot v'_{\text{cachorro} } = 0.540 \times [0.1, -0.3, 0.8, -0.1]$.
+
+**Passo 2.3**: Processar o Segundo Par Negativo (`preto` -> `jardim`).
+
+* **Amostrar Negativo**: Escolhemos `jardim` aleatoriamente (evitando `gato`).
+
+* **Calcular o Score**:
+
+    $$s_{neg2} = v'_{\text{jardim} } \cdot v_{\text{preto} }$$;
+
+    $$s_{neg2} = [0.5, 0.1, 0.3, -0.2] \cdot [0.4, -0.3, 0.1, 0.5]$$;
+
+    $$s_{neg2} = (0.5)(0.4) + (0.1)(-0.3) + (0.3)(0.1) + (-0.2)(0.5)$$;
+
+    $s_{neg2} = 0.20 - 0.03 + 0.03 - 0.10 = 0.10$$.
+
+* **Calcular a Probabilidade (Sigmoide)**: O alvo aqui é $0$.
+
+    $$P(\text{jardim}  \vert  \text{preto})_{neg} = \sigma(s_{neg2}) = \sigma(0.10) = \frac{1}{1 + e^{-0.10} } \approx \frac{1}{1 + 0.905} \approx 0.525$$
+
+* **Calcular o Gradiente para este Par**: O gradiente em relação ao score é $(\sigma(s_{neg2}) - \text{target}) = (0.525 - 0) = 0.525$.
   
+    * Gradiente para $v'_{\text{jardim} }$: $g \cdot v_{\text{preto} } = 0.525 \times [0.4, -0.3, 0.1, 0.5]$;
+    * Gradiente (contribuição) para $v_{\text{preto} }$: $g \cdot v'_{\text{jardim} } = 0.525 \times [0.5, 0.1, 0.3, -0.2]$;
+
+**Passo 3**: atualização dos Vetores (usando Gradiente Descendente com taxa $\eta$):
+
+* **Atualizar $v'_{\text{gato} }$ (Positivo)**:
+
+    $$v'_{\text{gato} } \leftarrow v'_{\text{gato} } - \eta \cdot (\sigma(s_{pos}) - 1) \cdot v_{\text{preto} }$$
+
+    $$v'_{\text{gato} } \leftarrow v'_{\text{gato} } - \eta \cdot (-0.460) \cdot v_{\text{preto} }$$
+
+* **Atualizar $v'_{\text{cachorro} }$ (Negativo 1)**:
+
+    $$v'_{\text{cachorro} } \leftarrow v'_{\text{cachorro} } - \eta \cdot (\sigma(s_{neg1}) - 0) \cdot v_{\text{preto} }$$
+
+    $$v'_{\text{cachorro} } \leftarrow v'_{\text{cachorro} } - \eta \cdot (0.540) \cdot v_{\text{preto} }$$
+
+* **Atualizar $v'_{\text{jardim} }$ (Negativo 2)**:
+
+    $$v'_{\text{jardim} } \leftarrow v'_{\text{jardim} } - \eta \cdot (\sigma(s_{neg2}) - 0) \cdot v_{\text{preto} }$$
+
+    $$v'_{\text{jardim} } \leftarrow v'_{\text{jardim} } - \eta \cdot (0.525) \cdot v_{\text{preto} }$$
+
+* **Atualizar $v_{\text{preto} }$ (Entrada)**: O gradiente para $v_{\text{preto} }$ acumula as contribuições do par positivo e de todos os pares negativos.
+  
+    $$\nabla_{v_{\text{preto} } } L = (\sigma(s_{pos}) - 1) v'_{\text{gato} } + (\sigma(s_{neg1}) - 0) v'_{\text{cachorro} } + (\sigma(s_{neg2}) - 0) v'_{\text{jardim} }$$
+
+    $$v_{\text{preto} } \leftarrow v_{\text{preto} } - \eta \cdot \nabla_{v_{\text{preto} } } L$$
+
+**Passo 4**: agora, a atenta leitora deve notar que só precisamos calcular scores e gradientes para a palavra positiva (`gato`) e as $k=2$ negativas (`cachorro`, `jardim`), um total de $k+1 = 3$ pares. Isso é muito mais rápido que calcular para todas as $\vert V \vert = 7$ palavras, como exigiria o Softmax completo. A complexidade é $O(k)$ em vez de $O(\vert V \vert)$. Além disso, apenas os vetores de saída ($v'$) das palavras envolvidas, tanto positivas quanto negativas, são atualizados neste passo. Os vetores de saída das outras palavras do vocabulário não são tocados. Finalmente, o vetor de entrada da palavra alvo, $v_{\text{preto} }$, é atualizado com base no erro combinado de todos os $k+1$ pares processados.
+
+Este exemplo simplificado demonstra como o **Negative Sampling** reduz drasticamente a carga computacional ao focar em distinguir a palavra de contexto correta de apenas algumas amostras incorretas, tornando o treinamento de **word embeddings** viável em grandes conjuntos de dados.
+
+#### Hierarchical Softmax
+
+Utiliza uma **árvore binária de Huffman** para representar o vocabulário, reduzindo a complexidade para $O(\log  \vert V \vert )$.
+
+> Uma **Árvore Binária de Huffman** é uma estrutura de dados em árvore utilizada principalmente para **compressão de dados sem perdas**. Ela é construída usando um algoritmo guloso, em inglês greedy, inventado por [David A. Huffman](https://pt.wikipedia.org/wiki/David_A._Huffman).
+>
+>O algoritmo de Huffman constrói uma árvore com base nas **frequências** dos símbolos, como caracteres ou palavras, que se deseja codificar. A ideia central é atribuir códigos binários de **comprimento variável** a cada símbolo:
+>
+>* Símbolos **mais frequentes** recebem códigos binários **mais curtos**;
+>* Símbolos **menos frequentes** recebem códigos binários **mais longos**.
+>
+>Para este algoritmo, a construção da árvore é feita da seguinte forma:
+>
+> 1. cada símbolo começa como uma folha de árvore com sua frequência associada;
+> 2. iterativamente, os dois nós, folhas ou subárvores, com as **menores frequências** são selecionados e combinados para formar um novo nó interno. A frequência deste novo nó é a soma das frequências dos seus filhos;
+> 3. esse processo continua até que todos os nós sejam combinados em uma única árvore raiz.
+>
+> **Propriedades interessantes**:
+>
+> * **Ótima**: gera o código de prefixo com o menor comprimento médio esperado para um dado conjunto de frequências.
+> * **Código de Prefixo**: nenhum código atribuído a um símbolo é prefixo de outro código. Isso garante que a decodificação seja única e sem ambiguidades. Por exemplo, se `0` é o código para `A`, nenhum outro código pode começar com `0` (como `01` para `B).
+> * **Estrutura**: é uma árvore binária completa, cada nó interno tem exatamente dois filhos. As folhas representam os símbolos originais, e o caminho da raiz até uma folha define o código binário para aquele símbolo. Por exemplo, seguir para a esquerda pode ser `0` e para a direita `1`.
+>
+> **Aplicação em Hierarchical Softmax**: No contexto do **Word2Vec**, uma árvore de Huffman é construída para o vocabulário, usando as frequências das palavras. Palavras mais frequentes ficam mais perto da raiz. Implicando em caminhos/códigos mais curtos. A probabilidade de uma palavra é calculada navegando pela árvore, tornando o cálculo muito mais eficiente do que o Softmax padrão sobre todo o vocabulário.
+
+A intuitiva leitora pode imaginar que o Hierarchical Softmax organiza o vocabulário em uma árvore binária de Huffman, onde palavras frequentes ficam mais perto da raiz. Para prever uma palavra, a rede só precisa aprender a fazer uma sequência de decisões binárias, próximo nó à esquerda/direita, para navegar da raiz até a folha correspondente à palavra correta. O número de decisões é logarítmico no tamanho do vocabulário ($O(\log \vert V \vert )$), tornando o processo muito mais rápido que o Softmax padrão ($O( \vert V \vert )$).
+
+##### Exemplo Numérico de Hierarchical Softmax
+
+Vamos ilustrar como o Hierarchical Softmax calcula a probabilidade $p(w_O \vert w_I)$.
+
+**Passo 1**: Cenário Inicial:
+
+* **Vocabulário e Frequências (Simplificado)**:
+    * `gato`: 50;
+    * `cachorro`: 45;
+    * `corre`: 30;
+    * `late`: 25;
+    * `preto`: 15.
+
+* **Árvore de Huffman Construída (Exemplo)**: suponha que a construção resultou na árvore apresentada na Figura 9. Nesta árvore os vértices são $n_0$ a $n_3$, e as folhas são as palavras. Na Figura 10 eu adotei a convenção  $0=\text{Esquerda}$, $1=\text{Direita}$.
+
+   ![o diagrama da uma árvore de Huffman, com o vocabulário e as frequências deste exemplo](/images/huffman-tree-svg.webp)
+
+   _Figura 9: Mostra uma árvore de Huffman com cinco palavras e suas respectivas propriedades._{: class="legend"}
+
+* **Códigos de Huffman Resultantes**:
+    * `gato`: 00
+    * `cachorro`: 01
+    * `late`: 100
+    * `preto`: 101
+    * `corre`: 11
+
+* **Dimensão do Embedding**: $d=3$.
+
+* **Palavra de Entrada (Skip-Gram)**: $w_I = $ `preto`, com vetor (hipotético):
+
+    $$v_{\text{preto} } = [0.4, 0.1, -0.2]$$
+
+* **Palavra de Saída (Contexto a prever)**: $w_O = $ `corre`.
+
+* **Vetores dos Nós Internos (Aprendidos/Hipotéticos)**: Cada nó interno $n_j$ tem um vetor $v'_{n_j}$ de dimensão $d=3$.
+
+    * $v'_{n0} = [0.1, 0.5, -0.1]$;
+    * $v'_{n1} = [-0.2, 0.3, 0.4]$ (Não usado para prever `corre`);
+    * $v'_{n2} = [0.3, -0.1, 0.2]$;
+    * $v'_{n3} = [0.6, 0.2, -0.3]$ (Não usado para prever `corre`).
+
+**2. Calculando $p(\text{corre} \vert \text{preto})$**:
+
+Para prever `corre`, precisamos navegar da raiz ($n_0$) até a folha `corre`. O caminho é $n_0 \rightarrow n_2 \rightarrow \text{corre}$, que corresponde ao código Huffman `11`.
+
+* **Passo 1**: Decisão no nó $n_0$.
+  
+    * Para chegar a `corre`, precisamos ir para a **direita** (código `1`) em $n_0$.
+
+    * A probabilidade de ir para a direita é $p(\text{direita} \vert n_0) = \sigma(-v'_{n0} \cdot v_{\text{preto} })$.
+
+        * Calculamos o score: $s_0 = v'_{n0} \cdot v_{\text{preto} } = [0.1, 0.5, -0.1] \cdot [0.4, 0.1, -0.2]$
+
+            $$s_0 = (0.1)(0.4) + (0.5)(0.1) + (-0.1)(-0.2) = 0.04 + 0.05 + 0.02 = 0.11$$
+
+        * Calculamos a probabilidade: $p(\text{direita} \vert n_0) = \sigma(-s_0) = \sigma(-0.11) = \frac{1}{1 + e^{0.11} } \approx \frac{1}{1 + 1.116} \approx 0.473$
+
+* **Passo 2: Decisão no nó $n_2$.**
+
+    * Vindo de $n_0$, chegamos a $n_2$. Para chegar a `corre`, precisamos ir para a **direita** novamente (código `1`).
+
+    * A probabilidade de ir para a direita é $p(\text{direita} \vert n_2) = \sigma(-v'_{n2} \cdot v_{\text{preto} })$.
+
+        * Calculamos o score: $s_2 = v'_{n2} \cdot v_{\text{preto} } = [0.3, -0.1, 0.2] \cdot [0.4, 0.1, -0.2]$
+
+            $$s_2 = (0.3)(0.4) + (-0.1)(0.1) + (0.2)(-0.2) = 0.12 - 0.01 - 0.04 = 0.07$$
+
+        * Calculamos a probabilidade: $p(\text{direita} \vert n_2) = \sigma(-s_2) = \sigma(-0.07) = \frac{1}{1 + e^{0.07} } \approx \frac{1}{1 + 1.072} \approx 0.483$
+
+* **Passo 3: Calcular a Probabilidade Final.**
+
+    * A probabilidade total de prever `corre` é o produto das probabilidades das decisões tomadas ao longo do caminho:
+
+        $$p(\text{corre} \vert \text{preto}) = p(\text{direita} \vert n_0) \times p(\text{direita}  \vert  n_2)$$
+
+        $$p(\text{corre} \vert \text{preto}) \approx 0.473 \times 0.483 \approx 0.228$$
+
+**3. Treinamento (Conceitual)**:
+
+* **Cálculo do Erro**: A perda seria calculada como $L = -\log p(\text{corre} \vert \text{preto}) \approx -\log(0.228) \approx 1.478$.
+
+* **Backpropagation**: O erro seria propagado de volta ao longo do caminho $n_0 \rightarrow n_2$. Os gradientes seriam calculados para:
+
+    * O vetor de entrada $v_{\text{preto} }$.
+
+    * Os vetores dos nós internos no caminho: $v'_{n0}$ e $v'_{n2}$.
+
+* **Atualização**: Apenas $v_{\text{preto} }$, $v'_{n0}$ e $v'_{n2}$ seriam atualizados usando gradiente descendente. Os vetores dos outros nós internos ($v'_{n1}$, $v'_{n3}$) e os vetores de saída associados a outras palavras não são tocados neste passo.
+
+Neste exemplo, *para calcular a probabilidade de `corre`, realizamos apenas $2$ cálculos de score e sigmoide, um para cada nó interno no caminho*. Com o Softmax padrão, teríamos que calcular scores para todas as $5$ palavras do vocabulário. A complexidade aqui é $O(\text{profundidade da palavra}) \approx O(\log \vert V \vert)$, que é muito menor que $O(\vert V \vert)$ para vocabulários grandes.
+
+A atenta leitora deve ter percebido que a diferença na eficiência computacional entre o Softmax padrão e suas otimizações (Hierarchical Softmax - HS, Negative Sampling - NS) é drástica para vocabulários grandes.
+
+Vamos considerar um vocabulário realista com $\vert V \vert = 100.000$ palavras.
+
+* **Softmax Padrão**: a complexidade é $O(\vert V \vert)$. Para calcular a probabilidade de uma palavra de saída, precisamos calcular $e^{\text{score} }$ para todas as 100.000 palavras no vocabulário e então somá-las para obter o denominador. Isso envolve aproximadamente **100.000** operações de exponenciação e adição/divisão *por exemplo de treinamento*.
+
+* **Hierarchical Softmax**: a complexidade é $O(\log_2 \vert V \vert)$. A estrutura de árvore binária (geralmente Huffman) permite calcular a probabilidade navegando da raiz até a folha da palavra correta. O número de passos (decisões binárias) é a profundidade da árvore, que é aproximadamente $\log_2(100.000)$.
+
     $$\log_2(100.000) \approx 16.6$$
-  
-    Portanto, o HS requer cerca de **17** cálculos (normalmente produtos escalares seguidos de sigmóides) *por exemplo de treinamento*. Uma redução imensa!
 
-* **Negative Sampling (NS)**: A complexidade é $O(k+1)$, onde $k$ é o número de amostras negativas escolhidas. Um valor comum para $k$ em modelos como Word2Vec é entre 5 e 20 para conjuntos de dados pequenos, e 2 a 5 para grandes. Se usarmos $k=5$:
-  
+    Portanto, *o **Hierarchical Softmax** requer cerca de **17** cálculos, normalmente produtos escalares seguidos de sigmóides, por exemplo de treinamento*. Uma redução imensa! Quase inacreditável!
+
+* **Negative Sampling**: a complexidade é $O(k+1)$, onde $k$ é o número de amostras negativas escolhidas. Um valor comum para $k$ em modelos como Word2Vec é entre 5 e 20 para conjuntos de dados pequenos, e $2$ a $5$ para grandes. Se usarmos $k=5$:
+
     A complexidade é $O(5+1) = O(6)$.
-    Isso significa que, para cada palavra de entrada, treinamos a rede para distinguir a palavra-alvo correta (1 classificação binária) de 5 palavras "erradas" (5 classificações binárias), totalizando apenas **6** cálculos de classificação binária *por exemplo de treinamento*.
+
+    Isso significa que, *para cada palavra de entrada, treinamos a rede para distinguir a palavra-alvo correta, $1$ classificação binária, de $5$ palavras erradas, $5$ classificações binárias, totalizando apenas **6** cálculos de classificação binária por exemplo de treinamento*.
+
+Eu acredito que neste ponto a esperta leitora deve ter percebido por que essas otimizações são essenciais para tornar o treinamento de *word embeddings* viável em grandes corpora de texto. A diferença na eficiência computacional entre o Softmax padrão e suas otimizações é drástica para vocabulários grandes.
 
 **Comparação**:
 
@@ -2053,35 +2228,33 @@ Vamos considerar um vocabulário realista com $ \vert V \vert  = 100.000$ palavr
 * HS: ~17 operações/exemplo;
 * NS (k=5): ~6 operações/exemplo.
 
-Fica claro por que essas otimizações são essenciais para tornar o treinamento de *word embeddings* viável em grandes corpora de texto.
-
 ### De Representações Estáticas para Contextuais: As Limitações e o Próximo Passo
 
-As redes neurais rasas dos modelos tradicionais de **word embeddings**, como Word2Vec e GloVe, produzem embeddings **estáticos**. Isso significa que cada palavra no vocabulário possui um único vetor de representação, independentemente do contexto em que aparece. Por exemplo, a palavra "banco" teria o mesmo vetor em "sentei no banco da praça" e "fui ao banco sacar dinheiro".
+As redes neurais rasas dos modelos tradicionais de **word embeddings**, como **Word2Vec** e **GloVe**, produzem embeddings **estáticos**. Isso significa que cada palavra no vocabulário possui um único vetor de representação, independentemente do contexto em que aparece. Por exemplo, a palavra `banco` teria o mesmo vetor em `sentei no banco da praça` e `fui ao banco sacar dinheiro`.
 
-Essa abordagem tem limitações significativas:
+Essa abordagem, é muito melhor que as vetorizações inocente e probabilística, porém, a estimada leitora deve ter em mente que existem limitações significativas:
 
-1. **Polissemia**: Falha em capturar os múltiplos significados que uma única palavra pode ter. Por exemplo, a palavra "**banco**" teria o mesmo vetor de embedding nas frases "*sentei no **banco** da praça*" (um assento) e "*fui ao **banco** sacar dinheiro*" (uma instituição financeira), embora os significados sejam completamente distintos. O embedding estático não consegue diferenciar esses usos contextuais.
+1. **Polissemia**: falha em capturar os múltiplos significados que uma única palavra pode ter. Por exemplo, a palavra `banco` teria o mesmo vetor de embedding nas frases `sentei no banco da praça`, um assento, e `fui ao banco sacar dinheiro`, uma instituição financeira, embora os significados sejam completamente distintos. O **embedding** estático não consegue diferenciar esses usos contextuais.
 
-2. **Dependência de Contexto**: Não consegue ajustar a representação da palavra com base nas palavras vizinhas que modificam seu sentido ou função gramatical.
+2. **Dependência de Contexto**: não consegue ajustar a representação da palavra com base nas palavras vizinhas que modificam seu sentido ou função gramatical.
 
-Essas limitações motivaram a pesquisa em direção a representações de palavras **contextuais**, onde o vetor de uma palavra depende da sentença em que ela se encontra. Isso levou a avanços subsequentes que utilizam redes neurais mais profundas e mecanismos mais sofisticados:
+Essas limitações motivaram a pesquisa em direção a *representações de palavras contextuais*, na qual o vetor de uma palavra depende da sentença em que ela se encontra. Isso levou a avanços subsequentes que utilizam redes neurais mais profundas e mecanismos mais sofisticados:
 
-1. **ELMo (Embeddings from Language Models)** (2018): Utilizou redes neurais recorrentes (LSTMs bidirecionais) profundas para gerar embeddings que variam conforme o contexto. A representação de uma palavra é uma função de todos os estados internos da LSTM.
+1. **ELMo (Embeddings from Language Models)** (2018): utilizou redes neurais recorrentes, LSTMs bidirecionais, profundas para gerar **embeddings** que variam conforme o contexto. A representação de uma palavra é uma função de todos os estados internos da LSTM.
 
-2. **BERT (Bidirectional Encoder Representations from Transformers)** (2018): Baseado na arquitetura **Transformer**, revolucionou o campo ao usar o mecanismo de **auto-atenção (self-attention)** para ponderar a influência de todas as palavras na sentença ao gerar a representação de cada palavra. Isso permite capturar relações complexas de longo alcance e gerar embeddings profundamente contextuais.
+2. **BERT (Bidirectional Encoder Representations from Transformers)** (2018): baseado na arquitetura **Transformer**, revolucionou o campo ao usar o mecanismo de **auto-atenção (self-attention)** para ponderar a influência de todas as palavras na sentença ao gerar a representação de cada palavra. Isso permite capturar relações complexas de longo alcance e gerar **embeddings** profundamente contextuais.
 
-3. **GPT (Generative Pre-trained Transformer)** e seus sucessores: Também baseados na arquitetura **Transformer** (principalmente no lado do decodificador), focam na geração de texto e aprendem representações contextuais poderosas através de pré-treinamento em larga escala.
+3. **GPT (Generative Pre-trained Transformer)** e seus sucessores: também baseados na arquitetura **Transformer**, principalmente no lado do decodificador, focam na geração de texto e aprendem representações contextuais poderosas através de pré-treinamento em larga escala.
 
 Os modelos de **word embeddings** tradicionais, com sua arquitetura neural rasa, representaram um passo fundamental nessa evolução. Eles demonstraram o poder das representações distribuídas e estabeleceram a fundação sobre a qual modelos contextuais mais poderosos, como os **Transformers**, foram construídos, incorporando mecanismos adicionais como a atenção para superar as limitações dos embeddings estáticos.
 
 ### Aspectos Práticos do Treinamento
 
-Além dos conceitos teóricos, alguns aspectos práticos são importantes ao treinar redes neurais, incluindo as usadas para *word embeddings*:
+Além dos conceitos teóricos, que a sagaz leitora analisou em todo este texto, alguns aspectos práticos são importantes ao treinar redes neurais, incluindo as usadas para **word embeddings**:
 
-* **Inicialização de Pesos**: a inicialização aleatória simples pode levar a problemas como gradientes explosivos ou desvanecentes. Métodos mais sofisticados como a **Inicialização de Xavier/Glorot** (para funções como sigmóide/tanh) ou **Inicialização de He** (para ReLU e suas variantes) ajudam a manter a variância dos sinais e gradientes estável através das camadas, facilitando o treinamento. Elas inicializam os pesos com base no número de neurônios de entrada e/ou saída da camada.
+* **Inicialização de Pesos**: a inicialização aleatória simples pode levar a problemas como gradientes explosivos ou desvanecentes. Métodos mais sofisticados como a **Inicialização de Xavier/Glorot**, para funções como sigmóide/tanh, ou **Inicialização de He**, para ReLU e suas variantes, ajudam a manter a variância dos sinais e gradientes estável através das camadas, facilitando o treinamento. Elas inicializam os pesos com base no número de neurônios de entrada e/ou saída da camada.
 
-* **Ajuste de Hiperparâmetros**: o desempenho da rede neural é altamente sensível aos **hiperparâmetros**, que são definidos *antes* do treinamento. Alguns dos mais importantes incluem:
+* **Ajuste de Hiperparâmetros**: o desempenho da rede neural é altamente sensível aos **hiperparâmetros**, que são definidos antes do treinamento. Alguns dos mais importantes incluem:
 
   * **Taxa de Aprendizado ($\eta$)**: controla o tamanho do passo na atualização dos pesos. Valores muito altos podem causar instabilidade; valores muito baixos podem tornar o treinamento lento ou preso em mínimos locais ruins. Técnicas de taxa de aprendizado adaptativa (como Adam, RMSprop) ou cronogramas de decaimento da taxa de aprendizado são comuns.
   
@@ -2089,21 +2262,36 @@ Além dos conceitos teóricos, alguns aspectos práticos são importantes ao tre
   
   * **Número de Épocas**: quantas vezes o conjunto de treinamento completo é visto pela rede.
   
-  * **Arquitetura da Rede**: número de camadas ocultas e número de neurônios por camada (para MLPs) ou a dimensão do embedding (para *word embeddings*).
+  * **Arquitetura da Rede**: número de camadas ocultas e número de neurônios por camada, para MLPs, ou a dimensão do **embedding**.
   
   * **Parâmetros de Regularização**: como a força da regularização L2 ($\lambda$) ou a taxa de dropout.
   
   A escolha ótima desses hiperparâmetros geralmente requer experimentação e validação cruzada.
 
-* **Bibliotecas e Frameworks**: implementar redes neurais do zero é instrutivo, mas na prática, bibliotecas e frameworks aceleram significativamente o desenvolvimento e o treinamento. No ecossistema Python, **TensorFlow**, **Keras** (frequentemente usada como interface de alto nível para TensorFlow) e **PyTorch** são extremamente populares, oferecendo blocos de construção otimizados, diferenciação automática (autograd, para calcular gradientes $\frac{\partial L}{\partial w}$ sem derivação manual) e suporte robusto a GPUs. Para quem trabalha com C++, existem opções poderosas como a **API C++ do TensorFlow** (embora mais comumente usada para implantação/inferência de modelos treinados em Python) e a **LibTorch** (o frontend C++ do PyTorch), que trazem funcionalidades semelhantes, como tensores e diferenciação automática, diretamente para o C++. Além disso, bibliotecas nativas de C++ como **mlpack** (com foco em desempenho e facilidade de uso) e **DyNet** (especialmente forte para NLP e redes dinâmicas) fornecem implementações eficientes e são projetadas com C++ em mente, sendo valiosas em cenários onde o desempenho computacional ou a integração com sistemas C++ legados são críticos. Todas essas ferramentas abstraem muitos detalhes complexos, facilitando significativamente o desenvolvimento e o treinamento de modelos.
+>**Validação Cruzada (Cross-Validation)**
+>
+>A validação cruzada é uma técnica de avaliação de modelos de aprendizado de máquina que visa estimar o desempenho do modelo em dados não vistos. Em vez de usar uma única divisão entre conjunto de treino e teste, a validação cruzada divide os dados em múltiplos subconjuntos e realiza várias iterações de treinamento e teste. Algumas técnicas comuns incluem:
+>
+>
+>1. **K-Fold Cross-Validation**: Os dados são divididos em k subconjuntos (folds). Em cada iteração, um subconjunto diferente é usado como teste, enquanto os k-1 restantes são usados para treino. O processo é repetido k vezes, e a performance final é a média dos resultados.
+>
+>2. **Leave-One-Out Cross-Validation (LOOCV)**: Caso especial do k-fold onde k é igual ao número de exemplos. A cada iteração, apenas um exemplo é usado para teste.
+>
+>3. **Stratified K-Fold**: Variação do k-fold que mantém a proporção das classes em cada fold, importante para dados desbalanceados.
+>
+>**Benefícios**:
+>
+>* Fornece estimativa mais robusta da performance do modelo;
+>* Reduz o viés de seleção da divisão treino/teste;
+>* Ajuda a detectar overfitting;
+>* Permite usar todo o dataset para treinamento e validação.
+>
 
-### Conclusão
+* **Bibliotecas e Frameworks**: implementar redes neurais do zero é instrutivo e serve para que a dedicada leitora entende todo o processo. Entretanto, na prática, o uso de bibliotecas e frameworks acelera significativamente o desenvolvimento e o treinamento.
 
-As redes neurais artificiais rasas formam a espinha dorsal dos algoritmos de **word embeddings**. Compreender sua arquitetura, funcionamento e treinamento é essencial para apreciar como estas técnicas conseguem capturar relações semânticas complexas em representações vetoriais densas.
+* No ecossistema Python, **[TensorFlow](https://www.tensorflow.org/?hl=pt-br)**, **[Keras](https://keras.io/)**, frequentemente usada como interface de alto nível para TensorFlow, e **[PyTorch](https://pytorch.org/)** são extremamente populares, oferecendo blocos de construção otimizados, diferenciação automática, autograd, para calcular gradientes $\frac{\partial L}{\partial w}$ sem derivação manual, e suporte robusto a GPUs.
 
-A aparente simplicidade destas redes esconde uma profunda elegância: com apenas uma camada linear e uma função de custo bem escolhida, conseguimos aprender representações distribuídas que capturam relações analógicas surpreendentes como "rei - homem + mulher ≈ rainha".
-
-Este entendimento das redes neurais rasas estabelece a base necessária para explorarmos algoritmos específicos de **word embeddings** e, futuramente, avançarmos para arquiteturas mais complexas como os **Transformers**.
+* Para quem trabalha com C++, existem opções poderosas como a **[API C++ do TensorFlow](https://www.tensorflow.org/api_docs/cc)**, embora mais comumente usada para implantação/inferência de modelos treinados em Python, e a **[LibTorch](https://pytorch.org/)**, o frontend C++ do PyTorch, que trazem funcionalidades semelhantes, como tensores e diferenciação automática, diretamente para o C++. Finalmente temos o **[Caffe](https://caffe.berkeleyvision.org/)** (*Convolutional Architecture for Fast Feature Embedding*). Um framework de aprendizado profundo desenvolvido na UC Berkeley, escrito primariamente em C++ com interfaces para Python e MATLAB. Foi criado com foco em três princípios fundamentais: expressividade, velocidade e modularidade. Além disso, bibliotecas nativas de C++ como **[mlpack](https://www.mlpack.org/)**, com foco em desempenho e facilidade de uso, e **[DyNet](https://dynet.readthedocs.io/en/latest/)**, especialmente forte para Processamento de Linguagem Natural e redes dinâmicas, fornecem implementações eficientes e são projetadas com C++ em mente, sendo valiosas em cenários onde o desempenho computacional ou a integração com sistemas C++ legados são críticos.
 
 ### Referências
 
@@ -2111,7 +2299,11 @@ AGGARWAL, C. C. **Neural networks and deep learning: a textbook**. Cham: Springe
 
 BENGIO, Y. et al. **A Neural Probabilistic Language Model**. Journal of Machine Learning Research, v. 3, p. 1137-1155, 2003.
 
+BERKELEY VISION AND LEARNING CENTER. **Caffe: Convolutional Architecture for Fast Feature Embedding**. Disponível em: <https://caffe.berkeleyvision.org/>. Acesso em: 26 abr. 2025.
+
 BRAGA, A. P.; CARVALHO, A. P. L. F.; LUDERMIR, T. B. **Redes neurais artificiais: teoria e aplicações**. 2. ed. Rio de Janeiro: LTC, 2007.
+
+CURTIN, R. R. et al. mlpack: **A Scalable C++ Machine Learning Library. Journal of Machine Learning Research**, v. 14, n. 1, p. 801-805, 2013. Disponível em: <https://www.mlpack.org/>. Acesso em: 26 abr. 2025.
 
 GLOROT, X.; BENGIO, Y. **Understanding the difficulty of training deep feedforward neural networks**. Journal of Machine Learning Research - Proceedings Track, v. 9, p. 249-256, jan. 2010.
 
@@ -2125,7 +2317,17 @@ HAYKIN, S. **Neural Networks and Learning Machines**. 3rd ed. Upper Saddle River
 
 HE, K.; ZHANG, X.; REN, S.; SUN, J. **Deep Residual Learning for Image Recognition**. In: IEEE CONFERENCE ON COMPUTER VISION AND PATTERN RECOGNITION (CVPR), 2016, Las Vegas. Proceedings [...]. IEEE, 2016, p. 770-778. DOI: 10.1109/CVPR.2016.90.
 
+HINTON, G. E.; SRIVASTAVA, N.; KRIZHEVSKY, A.; SUTSKEVER, I.; SALAKHUTDINOV, R. **Improving neural networks by preventing co-adaptation of feature detectors**. arXiv preprint arXiv:1207.0580, 2012.
+
+HUFFMAN, D. A. **A Method for the Construction of Minimum-Redundancy Codes**. **Proceedings of the IRE**, v. 40, n. 9, p. 1098-1101, 1952. DOI: 10.1109/JRPROC.1952.273898.
+
+KERAS Team. Keras: **Deep Learning para humanos**. Disponível em: <https://keras.io/>. Acesso em: 26 abr. 2025.
+
 MCCULLOCH, W. S.; PITTS, W. **A logical calculus of the ideas immanent in nervous activity**. The bulletin of mathematical biophysics, v. 5, n. 4, p. 115-133, 1943.
+
+MIKOLOV, T.; CHEN, K.; CORRADO, G.; DEAN, J. **Efficient Estimation of Word Representations in Vector Space**. *In*: INTERNATIONAL CONFERENCE ON LEARNING REPRESENTATIONS (ICLR), 2013, Scottsdale. **Proceedings**. Scottsdale: ICLR, 2013. Disponível em: <https://arxiv.org/abs/1301.3781>. Acesso em: 26 abr. 2025.
+
+MIKOLOV, T.; SUTSKEVER, I.; CHEN, K.; CORRADO, G.; DEAN, J. **Distributed Representations of Words and Phrases and their Compositionality**. *In*: ADVANCES IN NEURAL INFORMATION PROCESSING SYSTEMS (NIPS), 26., 2013, Lake Tahoe. **Proceedings \[...]**. Lake Tahoe: NIPS, 2013. p. 3111-3119. Disponível em: <https://proceedings.neurips.cc/paper/2013/hash/9aa42b31882ec039965f3c4923ce901b-Abstract.html>. Acesso em: 26 abr. 2025.
 
 MINSKY, M.; PAPERT, S. **Perceptrons: An introduction to computational geometry**. Cambridge, MA: MIT Press, 1969.
 
@@ -2133,8 +2335,18 @@ NAIR, V.; HINTON, G. E. **Rectified linear units improve restricted boltzmann ma
 
 NIELSEN, M. **Neural Networks and Deep Learning**. Determination Press, 2015.
 
+NEUBIG, G. et al. DyNet: **The Dynamic Neural Network Toolkit**. arXiv preprint arXiv:1701.03980, 2017. Disponível em: <https://dynet.readthedocs.io/>. Acesso em: 26 abr. 2025.
+
+PYTORCH Team. PyTorch: **Tensores e redes neurais dinâmicas em Python com forte aceleração por GPU**. Disponível em: <https://pytorch.org/>. Acesso em: 26 abr. 2025.
+
+PYTORCH Team. **LibTorch: A interface C++ do PyTorch**. Disponível em: <https://pytorch.org/>. Acesso em: 26 abr. 2025.
+
 ROSENBLATT, F. **The Perceptron: a probabilistic model for information storage and organization in the brain**. Psychological review, v. 65, n. 6, p. 386-408, 1958.
 
 RUMELHART, D. E.; HINTON, G. E.; WILLIAMS, R. J. **Learning representations by back-propagating errors**. Nature, v. 323, n. 6088, p. 533-536, 1986.
+
+TENSORFLOW. **TensorFlow: Uma plataforma de código aberto para aprendizado de máquina**. Disponível em: <https://www.tensorflow.org/>. Acesso em: 26 abr. 2025.
+
+TENSORFLOW. **API C++ do TensorFlow**. Disponível em: <https://www.tensorflow.org/api_docs/cc>. Acesso em: 26 abr. 2025.
 
 VASWANI, A. et al. **Attention is All You Need**. Advances in Neural Information Processing Systems, v. 30, 2017.

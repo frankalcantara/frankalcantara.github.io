@@ -35,7 +35,7 @@ keywords: |-
     lstm
 toc: true
 published: true
-lastmod: 2025-04-25T15:26:42.408Z
+lastmod: 2025-04-26T01:15:01.305Z
 draft: 2025-04-17T18:49:57.828Z
 slug: transformers-desvendando-modelagem-de-sequencias
 ---
@@ -52,7 +52,7 @@ Começaremos com as abordagens probabilísticas clássicas, as **Cadeias de Mark
 
 > Antes dos**Transformers**dominarem o cenário, as Redes Neurais Recorrentes (RNNs) e suas variantes eram a principal escolha para modelagem de sequências. Entender suas ideias básicas ajuda a contextualizar a evolução para a **atenção** e os **Transformers**.
 >
->1. **RNNs (Redes Neurais Recorrentes):** são redes projetadas para dados sequenciais. A ideia chave é a **recorrência**: a saída em um passo de tempo $t$ depende não só da entrada atual $x_t$, mas também de uma "memória" ou **estado oculto** $h_{t-1}$ do passo anterior. A atualização pode ser representada como $h_t = f(W_{hh}h_{t-1} + W_{xh}x_t + b_h)$, onde $f$ é uma não-linearidade (como $\tanh$). O problema principal das RNNs simples é o **desvanecimento ou explosão de gradientes** durante o treinamento, dificultando o aprendizado de dependências de longo prazo.
+>1. **RNNs (Redes Neurais Recorrentes):** são redes projetadas para dados sequenciais. A ideia chave é a **recorrência**: a saída em um passo de tempo $t$ depende não só da entrada atual $x_t$, mas também de uma "memória" ou **estado oculto** $h_{t-1}$ do passo anterior. A atualização pode ser representada como $h_t = f(W_{hh}h_{t-1} + W_{xh}x_t + b_h)$, onde $f$ é uma não-linearidade, como $\tanh$. O problema principal das RNNs simples é o **desvanecimento ou explosão de gradientes** durante o treinamento, dificultando o aprendizado de dependências de longo prazo.
 >
 >2. **LSTMs (Long Short-Term Memory):** foram criadas para resolver o problema dos gradientes das RNNs. Introduzem uma **célula de memória** interna ($c_t$) que pode manter informações por longos períodos. O fluxo de informação para dentro e fora desta célula, e para o estado oculto ($h_t$), é controlado por três **portões (gates)** aprendíveis:
 >
@@ -62,8 +62,8 @@ Começaremos com as abordagens probabilísticas clássicas, as **Cadeias de Mark
 >>
 >3. **GRUs (Gated Recurrent Units):** São uma variação da LSTM, também projetada para lidar com dependências longas, mas com uma arquitetura um pouco mais simples. Elas combinam o estado da célula e o estado oculto e usam apenas **dois portões**:
 >
->>**Portão de Atualização ($z_t$):** Similar a uma combinação dos portões de esquecimento e entrada da LSTM, decidindo o quanto manter da memória antiga e o quanto adicionar da nova informação candidata.
->>**Portão de Reset ($r_t$):** Decide o quanto "esquecer" da memória passada ao calcular a nova informação candidata.
+>>* **Portão de Atualização ($z_t$):** Similar a uma combinação dos portões de esquecimento e entrada da LSTM, decidindo o quanto manter da memória antiga e o quanto adicionar da nova informação candidata.
+>>* **Portão de Reset ($r_t$):** Decide o quanto "esquecer" da memória passada ao calcular a nova informação candidata.
 >GRUs frequentemente apresentam desempenho comparável às LSTMs, mas com menos parâmetros, o que pode ser vantajoso em alguns cenários.
 >
 >Tanto LSTMs quanto GRUs foram, e ainda são, muito importantes, mas sua natureza inerentemente sequencial, processar um passo de cada vez, limita a paralelização, uma das principais vantagens introduzidas pela arquitetura baseada puramente em atenção dos **Transformers**.
@@ -459,7 +459,7 @@ Como as matrizes de transição são tipicamente esparsas, a maioria das entrada
 
     O vetor resultante será:
 
-    $$ \vec{v_d} = [1, 2, 1.0, \quad 2, 3, 1.0, \quad 3, 4, 1.0, \quad 4, 5, 1.0, \quad 5, 6, 1.0] $$
+    $$\vec{v_d} = [1, 2, 1.0, \quad 2, 3, 1.0, \quad 3, 4, 1.0, \quad 4, 5, 1.0, \quad 5, 6, 1.0]$$
 
     A atenta leitora deve notar que este vetor tem comprimento $5 \times 3 = 15$. Outro documento poderia ter um número diferente de transições não-nulas, gerando um vetor de comprimento diferente.
 
@@ -467,7 +467,7 @@ Como as matrizes de transição são tipicamente esparsas, a maioria das entrada
 
     $$\vec{v_d} = [P(w_j \vert w_i, d) \text{ para pares } (i,j) \text{ selecionados}]$$
 
-    Esta abordagem reduz a dimensionalidade focando apenas nas transições que melhor distinguem diferentes classes de documentos. Normalmente resulta em vetores de **comprimento fixo**. Para isso, temos que garantir que o mesmo conjunto de transições selecionadas for usado para todos os documentos no corpus. Esta escolha irá criar um vetor no formato `[prob1, prob2, ...]`. Um vetor de características fixas adequado às bibliotecas de *machine learning*. Além disso, esta técnica reduz a dimensionalidade, focando no que se acredita ser mais relevante.
+    Esta abordagem reduz a dimensionalidade focando apenas nas transições que melhor distinguem diferentes classes de documentos. Normalmente resulta em vetores de **comprimento fixo**. Para isso, temos que garantir que o mesmo conjunto de transições seja usado para todos os documentos no corpus. Esta escolha irá criar um vetor no formato `[prob1, prob2, ...]`. Um vetor de características fixas adequado às bibliotecas de *machine learning*. Além disso, esta técnica reduz a dimensionalidade, focando no que se acredita ser mais relevante.
 
     Por outro lado, esta técnica requer um passo adicional: a seleção das transições que seja interessantes para a tarefa de processamento de linguagem natural que estamos tentando implementar. Como selecionar essas transições (ex: as mais frequentes no corpus? as que têm maior poder discriminativo entre classes?) é um problema complexo em si. E sempre haverá uma escolha entre a quantidade de informação que se perde e a eficiência do modelo.
 
@@ -1316,8 +1316,8 @@ Agora vamos ilustrar como usar o modelo $P_{corpus}\;$ para construir diferentes
     | $t_4 = (\text{meus}, \text{arquivos})$ | 0.000 | 0.670 | 0.000 |
     | $t_5 = (\text{por}, \text{favor})$ | 0.000 | 0.288 | 0.496 |
 
-![gráfico mostrando os vetores normalizados](/assets/images/comparacao-vetores.webp)
-_Figura 4: Visualização dos vetores normalizados dos três documentos do nosso exemplo em um gráfico de barras._{: class="legend"}
+    ![gráfico mostrando os vetores normalizados](/assets/images/comparacao-vetores.webp)
+    _Figura 4: Visualização dos vetores normalizados dos três documentos do nosso exemplo em um gráfico de barras._{: class="legend"}
 
 4. **Análise dos Vetores**: podemos observar características interessantes:
 
@@ -1549,4 +1549,3 @@ Embora limitadas pelo contexto local (especialmente em ordens baixas como $N=2$,
 * Modelagem de linguagem simples e geração de texto (usando $T_{corpus}\;$ para prever ou amostrar a próxima palavra).
 
 A capacidade de capturar não apenas a presença de palavras, mas a *probabilidade* de suas sequências (incluindo o início do texto com tokens como `<START>`), fornece uma representação rica e diferenciada para tarefas de PLN, preparando o terreno para modelos mais avançados que buscam superar a limitação do contexto local.
-

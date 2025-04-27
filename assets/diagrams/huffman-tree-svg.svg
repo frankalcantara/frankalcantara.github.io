@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 800 500"
+   version="1.1"
+   id="svg27"
+   sodipodi:docname="huffman-tree-svg.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview27"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.71"
+     inkscape:cx="399.7076"
+     inkscape:cy="250"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg27" />
+  <!-- Definições de estilos -->
+  <defs
+     id="defs1">
+    <marker
+       id="arrowhead"
+       markerWidth="10"
+       markerHeight="7"
+       refX="9"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#333"
+         id="polygon1" />
+    </marker>
+  </defs>
+  <!-- Nós internos -->
+  <circle
+     cx="400"
+     cy="80"
+     r="30"
+     fill="#3498db"
+     id="circle1" />
+  <text
+     x="400"
+     y="85"
+     text-anchor="middle"
+     fill="white"
+     font-weight="bold"
+     id="text1">n0</text>
+  <circle
+     cx="250"
+     cy="180"
+     r="30"
+     fill="#3498db"
+     id="circle2" />
+  <text
+     x="250"
+     y="185"
+     text-anchor="middle"
+     fill="white"
+     font-weight="bold"
+     id="text2">n1</text>
+  <circle
+     cx="550"
+     cy="180"
+     r="30"
+     fill="#3498db"
+     id="circle3" />
+  <text
+     x="550"
+     y="185"
+     text-anchor="middle"
+     fill="white"
+     font-weight="bold"
+     id="text3">n2</text>
+  <circle
+     cx="450"
+     cy="280"
+     r="30"
+     fill="#3498db"
+     id="circle4" />
+  <text
+     x="450"
+     y="285"
+     text-anchor="middle"
+     fill="white"
+     font-weight="bold"
+     id="text4">n3</text>
+  <!-- Nós folha (palavras) -->
+  <circle
+     cx="150"
+     cy="280"
+     r="40"
+     fill="#1abc9c"
+     id="circle5" />
+  <text
+     x="150"
+     y="285"
+     text-anchor="middle"
+     fill="white"
+     font-weight="bold"
+     id="text5">gato</text>
+  <circle
+     cx="350"
+     cy="280"
+     r="40"
+     fill="#1abc9c"
+     id="circle6" />
+  <text
+     x="350"
+     y="285"
+     text-anchor="middle"
+     fill="white"
+     font-weight="bold"
+     id="text6">cachorro</text>
+  <circle
+     cx="650"
+     cy="280"
+     r="40"
+     fill="#1abc9c"
+     id="circle7" />
+  <text
+     x="650"
+     y="285"
+     text-anchor="middle"
+     fill="white"
+     font-weight="bold"
+     id="text7">corre</text>
+  <circle
+     cx="350"
+     cy="380"
+     r="40"
+     fill="#1abc9c"
+     id="circle8" />
+  <text
+     x="350"
+     y="385"
+     text-anchor="middle"
+     fill="white"
+     font-weight="bold"
+     id="text8">late</text>
+  <circle
+     cx="550"
+     cy="380"
+     r="40"
+     fill="#1abc9c"
+     id="circle9" />
+  <text
+     x="550"
+     y="385"
+     text-anchor="middle"
+     fill="white"
+     font-weight="bold"
+     id="text9">preto</text>
+  <!-- Linhas de conexão com setas -->
+  <line
+     x1="380"
+     y1="100"
+     x2="270"
+     y2="160"
+     stroke="#333"
+     stroke-width="2"
+     marker-end="url(#arrowhead)"
+     id="line9" />
+  <line
+     x1="420"
+     y1="100"
+     x2="530"
+     y2="160"
+     stroke="#333"
+     stroke-width="2"
+     marker-end="url(#arrowhead)"
+     id="line10" />
+  <line
+     x1="230.06982"
+     y1="199.92328"
+     x2="176.8676"
+     y2="254.2951"
+     stroke="#333333"
+     stroke-width="2"
+     marker-end="url(#arrowhead)"
+     id="line11" />
+  <line
+     x1="269.91507"
+     y1="199.9185"
+     x2="323.14716"
+     y2="252.56581"
+     stroke="#333333"
+     stroke-width="2"
+     marker-end="url(#arrowhead)"
+     id="line12" />
+  <line
+     x1="530"
+     y1="200"
+     x2="470"
+     y2="260"
+     stroke="#333"
+     stroke-width="2"
+     marker-end="url(#arrowhead)"
+     id="line13" />
+  <line
+     x1="569.90521"
+     y1="199.90175"
+     x2="621.42285"
+     y2="252.0042"
+     stroke="#333333"
+     stroke-width="2"
+     marker-end="url(#arrowhead)"
+     id="line14" />
+  <line
+     x1="430.08817"
+     y1="299.90839"
+     x2="378.00568"
+     y2="352.57568"
+     stroke="#333333"
+     stroke-width="2"
+     marker-end="url(#arrowhead)"
+     id="line15" />
+  <line
+     x1="469.91345"
+     y1="299.91345"
+     x2="522.57074"
+     y2="352.57074"
+     stroke="#333333"
+     stroke-width="2"
+     marker-end="url(#arrowhead)"
+     id="line16" />
+  <!-- Rótulos das arestas -->
+  <text
+     x="320"
+     y="120"
+     font-size="20"
+     font-weight="bold"
+     id="text16">0</text>
+  <text
+     x="480"
+     y="120"
+     font-size="20"
+     font-weight="bold"
+     id="text17">1</text>
+  <text
+     x="190"
+     y="220"
+     font-size="20"
+     font-weight="bold"
+     id="text18">0</text>
+  <text
+     x="310"
+     y="220"
+     font-size="20"
+     font-weight="bold"
+     id="text19">1</text>
+  <text
+     x="490"
+     y="220"
+     font-size="20"
+     font-weight="bold"
+     id="text20">0</text>
+  <text
+     x="610"
+     y="220"
+     font-size="20"
+     font-weight="bold"
+     id="text21">1</text>
+  <text
+     x="390"
+     y="320"
+     font-size="20"
+     font-weight="bold"
+     id="text22">0</text>
+  <text
+     x="510"
+     y="320"
+     font-size="20"
+     font-weight="bold"
+     id="text23">1</text>
+  <!-- Título -->
+  <text
+     x="400"
+     y="30"
+     text-anchor="middle"
+     font-size="24"
+     font-weight="bold"
+     id="text24">Árvore de Huffman - Hierarchical Softmax</text>
+  <!-- Legenda -->
+  <rect
+     x="595.61401"
+     y="405.32162"
+     width="20"
+     height="20"
+     fill="#3498db"
+     rx="4"
+     ry="4"
+     id="rect24" />
+  <text
+     x="627.95319"
+     y="421.49121"
+     font-size="16px"
+     id="text25">Nós, ou vértices</text>
+  <rect
+     x="595.61401"
+     y="435.32162"
+     width="20"
+     height="20"
+     fill="#1abc9c"
+     rx="4"
+     ry="4"
+     id="rect25" />
+  <text
+     x="625.61401"
+     y="450.32162"
+     font-size="16px"
+     id="text26">Palavras (folhas)</text>
+  <text
+     x="95.906433"
+     y="451.3158"
+     font-size="16px"
+     font-style="italic"
+     id="text27">Convenção: 0=Esquerda, 1=Direita</text>
+</svg>
