@@ -36,7 +36,7 @@ keywords: |-
     lstm
 toc: true
 published: true
-lastmod: 2025-04-20T22:26:21.895Z
+lastmod: 2025-04-28T16:57:19.747Z
 draft: 2025-04-20T00:15:42.577Z
 ---
 
@@ -1323,7 +1323,7 @@ A arquitetura específica do **SkipGram** é composta por:
 
 Na implementação original (Mikolov et al, 2013), em vez de múltiplos **softmax** na camada de saída, cada par palavra-alvo/palavra-contexto é tratado como um exemplo de treinamento individual, o que simplifica a computação. A Figura 5 ilustra a arquitetura do modelo **SkipGram**.
 
-![diagrama em blocos mostrando a arquitetura SkipGram](/assets/images/SkipGram-architecture.webp)
+![diagrama em blocos mostrando a arquitetura SkipGram](/assets/images/skipgram-architecture.webp)
 
 _Figura 5: Arquitetura do modelo SkipGram que prevê as palavras do contexto a partir da palavra-alvo. O diagrama mostra como o vetor One-Hot da palavra-alvo é transformado em um embedding denso através da matriz de pesos compartilhada, e então utilizado para prever cada palavra de contexto através de uma função softmax independente para cada posição no contexto._{: class="legend"}
 
