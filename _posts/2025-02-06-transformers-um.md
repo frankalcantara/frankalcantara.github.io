@@ -31,7 +31,7 @@ keywords: |-
     inteligência artificial
 toc: true
 published: true
-lastmod: 2025-04-22T18:49:36.121Z
+lastmod: 2025-04-28T21:29:15.446Z
 ---
 
 Neste artigo, a curiosa leitora irá enfrentar os *Transformers*. Nenhuma relação com o o Optimus Prime. Se for estes *Transformers* que está procurando, **o Google falhou com você!**
@@ -1529,6 +1529,37 @@ Portanto:
 $$
 C = A \times B = \begin{bmatrix} 8 & 19 \\ 6 & 23 \end{bmatrix}
 $$
+
+### Multiplicação e a Matriz Transposta
+
+Uma propriedade importante que relaciona a multiplicação de matrizes com a operação de transposição é a seguinte: *a transposta do produto de duas matrizes é igual ao produto das suas transpostas, mas na ordem inversa*.
+
+Formalmente, se $A$ é uma matriz $m \times n$ e $B$ é uma matriz $n \times p$, então o produto $AB$ é uma matriz $m \times p$. A transposta deste produto, $(AB)^T$, é uma matriz $p \times m$. A propriedade afirma que:
+
+$$
+(AB)^T = B^T A^T
+$$
+
+Onde $B^T$ é a transposta de $B$ (dimensão $p \times n$) e $A^T$ é a transposta de $A$ (dimensão $n \times m$). A multiplicação $B^T A^T$ é definida, pois o número de colunas de $B^T$ ($n$) é igual ao número de linhas de $A^T$ ($n$), e o resultado é uma matriz $p \times m$, que tem a mesma dimensão de $(AB)^T$.
+
+**Exemplo:**
+
+Usando as matrizes do exemplo anterior:
+$A = \begin{bmatrix} 2 & 3 \\ 4 & 1 \end{bmatrix}$ e $B = \begin{bmatrix} 1 & 5 \\ 2 & 3 \end{bmatrix}$.
+
+Calculamos $AB = \begin{bmatrix} 8 & 19 \\ 6 & 23 \end{bmatrix}$. A transposta é $(AB)^T = \begin{bmatrix} 8 & 6 \\ 19 & 23 \end{bmatrix}$.
+
+Agora, calculamos as transpostas de A e B:
+$A^T = \begin{bmatrix} 2 & 4 \\ 3 & 1 \end{bmatrix}$ e $B^T = \begin{bmatrix} 1 & 2 \\ 5 & 3 \end{bmatrix}$.
+
+Multiplicando as transpostas na ordem inversa:
+$$
+B^T A^T = \begin{bmatrix} 1 & 2 \\ 5 & 3 \end{bmatrix} \begin{bmatrix} 2 & 4 \\ 3 & 1 \end{bmatrix} = \begin{bmatrix} (1 \times 2 + 2 \times 3) & (1 \times 4 + 2 \times 1) \\ (5 \times 2 + 3 \times 3) & (5 \times 4 + 3 \times 1) \end{bmatrix} = \begin{bmatrix} 8 & 6 \\ 19 & 23 \end{bmatrix}
+$$
+
+Como podemos ver, $(AB)^T = B^T A^T$.
+
+Além dessa identidade fundamental, também podemos realizar multiplicações envolvendo matrizes transpostas diretamente, como $A^T B$ ou $A B^T$, desde que as dimensões internas sejam compatíveis para a multiplicação. Por exemplo, se $A$ é $m \times n$ e $B$ é $m \times p$, o produto $A^T B$ é definido (resultando em uma matriz $n \times p$), pois $A^T$ tem $n$ colunas e $B$ tem $m$ linhas, mas as dimensões precisam ser $n$ colunas em $A^T$ e $n$ linhas em $B$ para que a multiplicação seja válida. A compatibilidade dimensional deve sempre ser verificada. Essas operações são comuns em várias formulações matemáticas.
 
 ### Multiplicação Matriz-Vetor
 
