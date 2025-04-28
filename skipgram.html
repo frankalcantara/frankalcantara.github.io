@@ -1,0 +1,758 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualização SkipGram</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 1rem;
+            background-color: #f4f4f4;
+            min-height: 100vh;
+        }
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        p {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+        .skipgram-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background-color: #fff;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 800px;
+        }
+        .section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        .section-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+        }
+        .matrix, .vector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex: 1;
+        }
+        .matrix-title, .vector-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .matrix table, .vector table {
+            border-collapse: collapse;
+            border: 1px solid #ccc;
+            width: 100%;
+            max-width: 100%;
+            font-size: 0.85rem;
+        }
+        .matrix th, .matrix td,
+        .vector th, .vector td {
+            border: 1px solid #ccc;
+            padding: 0.4rem 0.5rem;
+            text-align: center;
+        }
+        .label-col {
+            background-color: #f0f0f0;
+            font-weight: bold;
+            text-align: right;
+            padding-right: 0.3rem;
+        }
+        .operator {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #555;
+            margin: 0 0.5rem;
+        }
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 1rem 0;
+            width: 100%;
+            max-width: 800px;
+        }
+        button, select {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.2s;
+        }
+        button:disabled, select:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .highlight-input { background-color: #cce5ff; }
+        .highlight-wcenter-row { background-color: #d4edda; }
+        .highlight-hidden { background-color: #fff3cd; }
+        .highlight-woutside-col { background-color: #f8d7da; }
+        .highlight-output { background-color: #e2e3e5; }
+        .highlight-softmax { background-color: #d1ecf1; }
+        #hidden-layer .value {
+            opacity: 0.3;
+            transition: opacity 0.5s ease-in-out;
+        }
+        #hidden-layer.active .value {
+            opacity: 1;
+        }
+        #output-layer-u .value, #output-layer-y .value {
+            opacity: 0.3;
+            transition: opacity 0.5s ease-in-out;
+        }
+        #output-layer-u.active .value, #output-layer-y.active .value {
+            opacity: 1;
+        }
+        #explanation {
+            margin-top: 1rem;
+            text-align: center;
+            min-height: 2em;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #333;
+            width: 100%;
+            max-width: 800px;
+        }
+        .calc-explanation {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            width: 100%;
+            max-width: 600px;
+            font-size: 0.85rem;
+            text-align: left;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .calc-explanation.active {
+            display: block;
+            opacity: 1;
+        }
+        .calc-step {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            margin-bottom: 0.5rem;
+        }
+        .calc-step.active {
+            opacity: 1;
+        }
+        /* Ajuste para tamanho das equações MathJax */
+        .calc-explanation mjx-container {
+            font-size: 100% !important;
+        }
+        .vector-title mjx-container, .matrix-title mjx-container {
+            font-size: 90% !important;
+        }
+        @media (min-width: 768px) {
+            .section-row {
+                gap: 1rem;
+            }
+            .matrix table, .vector table {
+                font-size: 0.9rem;
+            }
+            .matrix th, .matrix td,
+            .vector th, .vector td {
+                padding: 0.5rem 0.6rem;
+            }
+            .operator {
+                font-size: 2rem;
+                margin: 0 1rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            p {
+                font-size: 1rem;
+            }
+            .calc-explanation {
+                font-size: 0.9rem;
+                padding: 1rem;
+            }
+        }
+        @media (max-width: 600px) {
+            .section-row {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .matrix table, .vector table {
+                font-size: 0.75rem;
+            }
+            .matrix th, .matrix td,
+            .vector th, .vector td {
+                padding: 0.3rem 0.4rem;
+            }
+            .vector-title, .matrix-title {
+                font-size: 0.8rem;
+            }
+            button, select {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            .operator {
+                font-size: 1.2rem;
+                margin: 0.3rem 0;
+            }
+            .calc-explanation {
+                font-size: 0.75rem;
+                padding: 0.5rem;
+            }
+            .calc-explanation mjx-container {
+                font-size: 100% !important;
+            }
+            .vector-title mjx-container, .matrix-title mjx-container {
+                font-size: 85% !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="controls" id="top-controls">
+    <select id="input-word-top" aria-label="Selecionar palavra de entrada">
+        <option value="around">around</option>
+        <option value="cat" selected>cat</option>
+        <option value="chased">chased</option>
+        <option value="dog">dog</option>
+        <option value="garden">garden</option>
+        <option value="the">the</option>
+    </select>
+    <button id="prev-step-btn-top" aria-label="Voltar para o subpasso anterior da animação">Passo Anterior</button>
+    <button id="reset-btn-top" aria-label="Reiniciar a animação">Reiniciar</button>
+    <button id="next-step-btn-top" aria-label="Avançar para o próximo subpasso da animação">Próximo Passo</button>
+</div>
+
+<h1>Visualização Animada do SkipGram</h1>
+<p>Baseado na Figura da Página 22 do PDF.</p>
+
+<div class="skipgram-container">
+    <div class="section">
+        <div class="section-row">
+            <div class="vector input-vector" id="input-layer">
+                <div class="vector-title">Entrada X<br><span class="latex-inline">$(V \times 1)$</span></div>
+                <table aria-label="Vetor de entrada one-hot">
+                    <thead><tr><th>Palavra</th><th>Valor</th></tr></thead>
+                    <tbody>
+                        <tr><td class="label-col">around</td><td data-word="around">0</td></tr>
+                        <tr><td class="label-col">cat</td><td data-word="cat">1</td></tr>
+                        <tr><td class="label-col">chased</td><td data-word="chased">0</td></tr>
+                        <tr><td class="label-col">dog</td><td data-word="dog">0</td></tr>
+                        <tr><td class="label-col">garden</td><td data-word="garden">0</td></tr>
+                        <tr><td class="label-col">the</td><td data-word="the">0</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="operator">×</div>
+            <div class="matrix" id="w-center">
+                <div class="matrix-title">Matriz $W_{center}$<br><span class="latex-inline">$(V \times N)$</span></div>
+                <table aria-label="Matriz W_center">
+                    <thead><tr><th></th><th>N1</th><th>N2</th><th>N3</th></tr></thead>
+                    <tbody>
+                        <tr data-word="around"><td>around</td><td>0.5</td><td>-0.6</td><td>1.4</td></tr>
+                        <tr data-word="cat"><td>cat</td><td>-3.8</td><td>2.0</td><td>1.9</td></tr>
+                        <tr data-word="chased"><td>chased</td><td>-2.3</td><td>0.7</td><td>-3.5</td></tr>
+                        <tr data-word="dog"><td>dog</td><td>1.5</td><td>1.1</td><td>0.6</td></tr>
+                        <tr data-word="garden"><td>garden</td><td>0.9</td><td>1.2</td><td>-1.3</td></tr>
+                        <tr data-word="the"><td>the</td><td>0.1</td><td>-0.4</td><td>2.6</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="operator">=</div>
+        <div class="calc-explanation" id="calc-x-wcenter" aria-live="polite"></div>
+    </div>
+
+    <div class="section">
+        <div class="section-row">
+            <div class="vector hidden-vector" id="hidden-layer">
+                <div class="vector-title">Oculta h<br><span class="latex-inline">$(N \times 1)$</span></div>
+                <table aria-label="Vetor da camada oculta">
+                    <thead><tr><th>Dim</th><th>Valor</th></tr></thead>
+                    <tbody>
+                        <tr><td>N1</td><td class="value">?</td></tr>
+                        <tr><td>N2</td><td class="value">?</td></tr>
+                        <tr><td>N3</td><td class="value">?</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="operator">×</div>
+            <div class="matrix" id="w-outside">
+                <div class="matrix-title">Matriz $W_{outside}$<br><span class="latex-inline">$(N \times V)$</span></div>
+                <table aria-label="Matriz W_outside">
+                    <thead>
+                        <tr><th></th><th>around</th><th>cat</th><th>chased</th><th>dog</th><th>garden</th><th>the</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>N1</td><td>-1.4</td><td>1.8</td><td>0.2</td><td>-2.7</td><td>3.9</td><td>0.2</td></tr>
+                        <tr><td>N2</td><td>-1.5</td><td>0.2</td><td>2.4</td><td>1.6</td><td>8.8</td><td>-0.3</td></tr>
+                        <tr><td>N3</td><td>1.3</td><td>-1.9</td><td>3.7</td><td>-0.2</td><td>1.3</td><td>3.4</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="operator">=</div>
+        <div class="calc-explanation" id="calc-h-woutside" aria-live="polite"></div>
+    </div>
+
+    <div class="section">
+        <div class="section-row">
+            <div class="vector output-vector" id="output-layer-u">
+                <div class="vector-title">Saída $u$<br><span class="latex-inline">$(V \times 1)$</span></div>
+                <table aria-label="Vetor de scores de saída u">
+                    <thead><tr><th>Palavra</th><th>Valor</th></tr></thead>
+                    <tbody>
+                        <tr><td class="label-col">around</td><td class="value">?</td></tr>
+                        <tr><td class="label-col">cat</td><td class="value">?</td></tr>
+                        <tr><td class="label-col">chased</td><td class="value">?</td></tr>
+                        <tr><td class="label-col">dog</td><td class="value">?</td></tr>
+                        <tr><td class="label-col">garden</td><td class="value">?</td></tr>
+                        <tr><td class="label-col">the</td><td class="value">?</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="operator">➔</div>
+            <div class="vector output-vector" id="output-layer-y">
+                <div class="vector-title">Saída $y_{pred} = \sigma(u)$<br><span class="latex-inline">$(V \times 1)$</span></div>
+                <table aria-label="Vetor de probabilidades previstas y_pred">
+                    <thead><tr><th>Palavra</th><th>Prob.</th></tr></thead>
+                    <tbody>
+                        <tr><td class="label-col">around</td><td class="value">?</td></tr>
+                        <tr><td class="label-col">cat</td><td class="value">?</td></tr>
+                        <tr><td class="label-col">chased</td><td class="value">?</td></tr>
+                        <tr><td class="label-col">dog</td><td class="value">?</td></tr>
+                        <tr><td class="label-col">garden</td><td class="value">?</td></tr>
+                        <tr><td class="label-col">the</td><td class="value">?</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="calc-explanation" id="calc-softmax" aria-live="polite"></div> 
+    </div>
+</div>
+
+<div class="controls" id="bottom-controls">
+    <select id="input-word-bottom" aria-label="Selecionar palavra de entrada">
+        <option value="around">around</option>
+        <option value="cat" selected>cat</option>
+        <option value="chased">chased</option>
+        <option value="dog">dog</option>
+        <option value="garden">garden</option>
+        <option value="the">the</option>
+    </select>
+    <button id="prev-step-btn-bottom" aria-label="Voltar para o subpasso anterior da animação">Passo Anterior</button>
+    <button id="reset-btn-bottom" aria-label="Reiniciar a animação">Reiniciar</button>
+    <button id="next-step-btn-bottom" aria-label="Avançar para o próximo subpasso da animação">Próximo Passo</button>
+</div>
+
+<div id="explanation">Selecione uma palavra e clique em "Próximo Passo" para iniciar a animação.</div>
+
+<script>
+    // Configuração do MathJax
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            processEscapes: true
+        },
+        svg: {
+            scale: 0.8 // Reduz o tamanho global das equações para 80%
+        },
+        startup: {
+            pageReady: function () {
+                return MathJax.startup.defaultPageReady().then(function () {
+                    document.querySelectorAll('.latex-inline').forEach(el => {
+                        MathJax.typeset([el]);
+                    });
+                });
+            }
+        }
+    };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+    // --- Dados do Exemplo ---
+    const vocab = ['around', 'cat', 'chased', 'dog', 'garden', 'the'];
+    const V = vocab.length;
+    const N = 3;
+    let inputWord = document.getElementById('input-word-top').value;
+
+    const W_center = {
+        'around': [0.5, -0.6, 1.4],
+        'cat': [-3.8, 2.0, 1.9],
+        'chased': [-2.3, 0.7, -3.5],
+        'dog': [1.5, 1.1, 0.6],
+        'garden': [0.9, 1.2, -1.3],
+        'the': [0.1, -0.4, 2.6]
+    };
+
+    const W_outside_cols = {
+        'around': [-1.4, -1.5, 1.3],
+        'cat': [1.8, 0.2, -1.9],
+        'chased': [0.2, 2.4, 3.7],
+        'dog': [-2.7, 1.6, -0.2],
+        'garden': [3.9, 8.8, 1.3],
+        'the': [0.2, -0.3, 3.4]
+    };
+
+    // --- Elementos DOM ---
+    const inputLayer = document.getElementById('input-layer');
+    const wCenterTable = document.getElementById('w-center').querySelector('tbody');
+    const hiddenLayer = document.getElementById('hidden-layer');
+    const hiddenLayerCells = hiddenLayer.querySelectorAll('.value');
+    const wOutsideTable = document.getElementById('w-outside').querySelector('tbody');
+    const outputLayerU = document.getElementById('output-layer-u');
+    const outputLayerUCells = outputLayerU.querySelectorAll('.value');
+    const outputLayerY = document.getElementById('output-layer-y');
+    const outputLayerYCells = outputLayerY.querySelectorAll('.value');
+    const inputWordSelectTop = document.getElementById('input-word-top');
+    const inputWordSelectBottom = document.getElementById('input-word-bottom');
+    const prevBtnTop = document.getElementById('prev-step-btn-top');
+    const nextBtnTop = document.getElementById('next-step-btn-top');
+    const resetBtnTop = document.getElementById('reset-btn-top');
+    const prevBtnBottom = document.getElementById('prev-step-btn-bottom');
+    const nextBtnBottom = document.getElementById('next-step-btn-bottom');
+    const resetBtnBottom = document.getElementById('reset-btn-bottom');
+    const explanationDiv = document.getElementById('explanation');
+    const calcXWCenter = document.getElementById('calc-x-wcenter');
+    const calcHWOutside = document.getElementById('calc-h-woutside');
+    const calcSoftmax = document.getElementById('calc-softmax');
+
+    // --- Estado da Animação ---
+    let state = { step: 0, subStep: 0 };
+    const stepConfig = {
+        0: { subSteps: 1 },
+        1: { subSteps: 2 },
+        2: { subSteps: 2 },
+        3: { subSteps: 2 }
+    };
+    let hiddenVector_h = null;
+    let outputVector_u = {};
+    let outputVector_y = {};
+    const calcContentCache = {
+        1: null,
+        2: null,
+        3: null
+    };
+
+    // --- Funções Auxiliares ---
+    function dotProduct(vec1, vec2) {
+        let result = 0;
+        for (let i = 0; i < vec1.length; i++) {
+            result += vec1[i] * vec2[i];
+        }
+        return result;
+    }
+
+    function softmax(u_vec) {
+        const probabilities = {};
+        const keys = Object.keys(u_vec);
+        const maxU = Math.max(...keys.map(key => u_vec[key]));
+        let sumExp = 0;
+        const expValues = {};
+        keys.forEach(key => {
+            expValues[key] = Math.exp(u_vec[key] - maxU);
+            sumExp += expValues[key];
+        });
+        keys.forEach(key => {
+            probabilities[key] = expValues[key] / sumExp;
+        });
+        return probabilities;
+    }
+
+    function clearHighlights() {
+        document.querySelectorAll('.highlight-input, .highlight-wcenter-row, .highlight-hidden, .highlight-woutside-col, .highlight-output, .highlight-softmax')
+            .forEach(el => el.classList.remove(
+                'highlight-input', 'highlight-wcenter-row', 'highlight-hidden',
+                'highlight-woutside-col', 'highlight-output', 'highlight-softmax'
+            ));
+        hiddenLayer.classList.remove('active');
+        outputLayerU.classList.remove('active');
+        outputLayerY.classList.remove('active');
+        hiddenLayerCells.forEach(cell => cell.textContent = '?');
+        outputLayerUCells.forEach(cell => cell.textContent = '?');
+        outputLayerYCells.forEach(cell => cell.textContent = '?');
+    }
+
+    function updateExplanation(text) {
+        explanationDiv.textContent = text;
+    }
+
+    function updateInputVector() {
+        inputLayer.querySelectorAll('td[data-word]').forEach(cell => {
+            cell.textContent = cell.dataset.word === inputWord ? '1' : '0';
+        });
+    }
+
+    function syncSelects() {
+        inputWordSelectTop.value = inputWord;
+        inputWordSelectBottom.value = inputWord;
+    }
+
+    function clearCalcExplanations() {
+        [calcXWCenter, calcHWOutside, calcSoftmax].forEach(calc => {
+            calc.classList.remove('active');
+            calc.querySelectorAll('.calc-step').forEach(step => step.classList.remove('active'));
+        });
+    }
+
+    function showCalcStep(calcElement, subStep) {
+        calcElement.classList.add('active');
+        const steps = calcElement.querySelectorAll('.calc-step');
+        steps.forEach((step, index) => {
+            step.classList.toggle('active', index === subStep - 1);
+        });
+    }
+
+    // --- Lógica da Animação ---
+    function runStep(step, subStep) {
+        if (!W_center[inputWord]) {
+            updateExplanation(`Erro: Palavra '${inputWord}' não encontrada no vocabulário.`);
+            nextBtnTop.disabled = true;
+            nextBtnBottom.disabled = true;
+            prevBtnTop.disabled = true;
+            prevBtnBottom.disabled = true;
+            clearCalcExplanations();
+            return;
+        }
+
+        clearHighlights();
+        clearCalcExplanations();
+        updateInputVector();
+
+        switch (step) {
+            case 0:
+                inputLayer.querySelector(`td[data-word="${inputWord}"]`).classList.add('highlight-input');
+                updateExplanation(`Passo 0: Palavra de entrada '${inputWord}' (vetor One-Hot).`);
+                break;
+
+            case 1:
+                const wCenterRow = wCenterTable.querySelector(`tr[data-word="${inputWord}"]`);
+                wCenterRow.classList.add('highlight-wcenter-row');
+                inputLayer.querySelector(`td[data-word="${inputWord}"]`).classList.add('highlight-input');
+                hiddenVector_h = W_center[inputWord];
+                hiddenLayerCells.forEach((cell, i) => {
+                    cell.textContent = hiddenVector_h[i].toFixed(1);
+                    cell.classList.add('highlight-hidden');
+                });
+                hiddenLayer.classList.add('active');
+                if (!calcContentCache[1] || subStep === 1) {
+                    calcContentCache[1] = `
+                        <div class="calc-step">Selecionando a linha de $W_{center}$ para '${inputWord}': $[${W_center[inputWord].map(v => v.toFixed(1)).join(', ')}]$</div>
+                        <div class="calc-step">$h = X \\cdot W_{center} = [${W_center[inputWord].map(v => v.toFixed(1)).join(', ')}]$</div>
+                    `;
+                    calcXWCenter.innerHTML = calcContentCache[1];
+                    setTimeout(() => {
+                        MathJax.typeset([calcXWCenter]);
+                        showCalcStep(calcXWCenter, subStep);
+                    }, 100);
+                } else {
+                    showCalcStep(calcXWCenter, subStep);
+                }
+                updateExplanation(subStep === 1
+                    ? `Passo 1.1: Selecionando a linha de W_center para '${inputWord}'.`
+                    : `Passo 1.2: Calculando h = X · W_center = [${hiddenVector_h.map(v => v.toFixed(1)).join(', ')}].`);
+                break;
+
+            case 2:
+                if (!hiddenVector_h) return;
+                hiddenLayerCells.forEach(cell => cell.classList.add('highlight-hidden'));
+                hiddenLayer.classList.add('active');
+                outputVector_u = {};
+                vocab.forEach((word, index) => {
+                    const wOutsideCol = W_outside_cols[word];
+                    wOutsideTable.querySelectorAll(`tr td:nth-child(${index + 2})`).forEach(cell => cell.classList.add('highlight-woutside-col'));
+                    outputVector_u[word] = dotProduct(hiddenVector_h, wOutsideCol);
+                    outputLayerUCells[index].textContent = outputVector_u[word].toFixed(1);
+                });
+                outputLayerU.classList.add('highlight-output', 'active');
+                if (!calcContentCache[2] || subStep === 1) {
+                    calcContentCache[2] = `
+                        <div class="calc-step">$u_{around} = [${hiddenVector_h.map(v => v.toFixed(1)).join(', ')}] \\cdot [${W_outside_cols['around'].map(v => v.toFixed(1)).join(', ')}] = ${outputVector_u['around'].toFixed(1)}$</div>
+                        <div class="calc-step">$u_{cat} = [${hiddenVector_h.map(v => v.toFixed(1)).join(', ')}] \\cdot [${W_outside_cols['cat'].map(v => v.toFixed(1)).join(', ')}] = ${outputVector_u['cat'].toFixed(1)}$</div>
+                    `;
+                    calcHWOutside.innerHTML = calcContentCache[2];
+                    setTimeout(() => {
+                        MathJax.typeset([calcHWOutside]);
+                        showCalcStep(calcHWOutside, subStep);
+                    }, 100);
+                } else {
+                    showCalcStep(calcHWOutside, subStep);
+                }
+                updateExplanation(subStep === 1
+                    ? `Passo 2.1: Calculando u[around] = h · W_outside[around] = ${outputVector_u['around'].toFixed(1)}.`
+                    : `Passo 2.2: Calculando u[cat] = h · W_outside[cat] = ${outputVector_u['cat'].toFixed(1)}.`);
+                break;
+
+            case 3:
+                if (Object.keys(outputVector_u).length === 0) return;
+                outputLayerU.classList.add('highlight-output', 'active');
+                outputVector_y = softmax(outputVector_u);
+                vocab.forEach((word, index) => {
+                    outputLayerYCells[index].textContent = outputVector_y[word].toFixed(2);
+                });
+                outputLayerY.classList.add('highlight-softmax', 'active');
+                if (!calcContentCache[3] || subStep === 1) {
+                    const maxU = Math.max(...Object.values(outputVector_u));
+                    const expAround = Math.exp(outputVector_u['around'] - maxU).toFixed(2);
+                    const expCat = Math.exp(outputVector_u['cat'] - maxU).toFixed(2);
+                    const sumExp = Object.values(outputVector_u).reduce((sum, u) => sum + Math.exp(u - maxU), 0).toFixed(2);
+                   // calcContentCache[3] = `
+                   //     <div class="calc-step">$y_{pred}[around] = \\frac{e^{${outputVector_u['around'].toFixed(1)} - ${maxU.toFixed(1)}}}{${sumExp}} = \\frac{${expAround}}{${sumExp}} = ${outputVector_y['around'].toFixed(2)}$</div>
+                   //     <div class="calc-step">$y_{pred}[cat] = \\frac{e^{${outputVector_u['cat'].toFixed(1)} - ${maxU.toFixed(1)}}}{${sumExp}} = \\frac{${expCat}}{${sumExp}} = ${outputVector_y['cat'].toFixed(2)}$</div>
+                   // `;
+                    //calcSoftmax.innerHTML = calcContentCache[3];
+                    //setTimeout(() => {
+                    //    MathJax.typeset([calcSoftmax]);
+                    //    showCalcStep(calcSoftmax, subStep);
+                    //}, 100);
+                } else {
+                    showCalcStep(calcSoftmax, subStep);
+                }
+                updateExplanation(subStep === 1
+                    ? `Passo 3.1: Calculando y_pred[around] = ${outputVector_y['around'].toFixed(2)} (softmax).`
+                    : `Passo 3.2: Calculando y_pred[cat] = ${outputVector_y['cat'].toFixed(2)} (softmax).`);
+                break;
+        }
+
+        const isLastSubStep = step === 3 && subStep === stepConfig[3].subSteps;
+        const isFirstSubStep = step === 0 && subStep === 0;
+        nextBtnTop.disabled = isLastSubStep;
+        nextBtnBottom.disabled = isLastSubStep;
+        prevBtnTop.disabled = isFirstSubStep;
+        prevBtnBottom.disabled = isFirstSubStep;
+        resetBtnTop.disabled = isFirstSubStep;
+        resetBtnBottom.disabled = isFirstSubStep;
+    }
+
+    // --- Navegação entre Subpassos ---
+    function nextSubStep() {
+        if (state.step === 3 && state.subStep === stepConfig[3].subSteps) return;
+        if (state.subStep < stepConfig[state.step].subSteps) {
+            state.subStep++;
+        } else {
+            state.step++;
+            state.subStep = 1;
+        }
+        runStep(state.step, state.subStep);
+    }
+
+    function prevSubStep() {
+        if (state.step === 0 && state.subStep === 0) return;
+        if (state.subStep > 1) {
+            state.subStep--;
+        } else {
+            state.step--;
+            state.subStep = stepConfig[state.step].subSteps;
+        }
+        runStep(state.step, state.subStep);
+    }
+
+    // --- Event Listeners ---
+    function addEventListeners() {
+        [inputWordSelectTop, inputWordSelectBottom].forEach(select => {
+            select.addEventListener('change', () => {
+                inputWord = select.value;
+                syncSelects();
+                resetBtnTop.click();
+            });
+        });
+
+        [prevBtnTop, prevBtnBottom].forEach(btn => {
+            btn.addEventListener('click', prevSubStep);
+        });
+
+        [nextBtnTop, nextBtnBottom].forEach(btn => {
+            btn.addEventListener('click', nextSubStep);
+        });
+
+        [resetBtnTop, resetBtnBottom].forEach(btn => {
+            btn.addEventListener('click', () => {
+                state = { step: 0, subStep: 0 };
+                hiddenVector_h = null;
+                outputVector_u = {};
+                outputVector_y = {};
+                calcContentCache[1] = null;
+                calcContentCache[2] = null;
+                calcContentCache[3] = null;
+                clearHighlights();
+                clearCalcExplanations();
+                runStep(state.step, state.subStep);
+                updateExplanation(`Passo 0: Palavra de entrada '${inputWord}' (vetor One-Hot).`);
+            });
+        });
+    }
+
+    // --- Inicialização ---
+    window.addEventListener('load', () => {
+        addEventListeners();
+        syncSelects();
+        runStep(0, 0);
+    });
+</script>
+</body>
+</html>
