@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="900"
+   height="560"
+   viewBox="0 0 900 560"
+   version="1.1"
+   id="svg27"
+   sodipodi:docname="word2vec-framework.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:export-filename="..\images\word2vec-framework.webp"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview27"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.0796005"
+     inkscape:cx="359.39219"
+     inkscape:cy="262.59713"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg27" />
+  <!-- Definições de estilo -->
+  <defs
+     id="defs1">
+    <style
+       id="style1">
+      .title { font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; }
+      .label { font-family: Arial, sans-serif; font-size: 14px; }
+      .small-text { font-family: Arial, sans-serif; font-size: 12px; }
+      .emphasis { font-style: italic; }
+      .box { fill: white; stroke: #333; stroke-width: 2; rx: 10; ry: 10; }
+      .arrow { stroke: #333; stroke-width: 2; marker-end: url(#arrowhead); }
+      .dashedbox { fill: white; stroke: #333; stroke-width: 2; rx: 10; ry: 10; stroke-dasharray: 5,5; }
+      .highlight { fill: #f8f8f8; stroke: #4a86e8; stroke-width: 2; rx: 10; ry: 10; }
+      .optimization { fill: #e6f2ff; stroke: #4a86e8; stroke-width: 2; rx: 10; ry: 10; }
+    </style>
+    <marker
+       id="arrowhead"
+       markerWidth="10"
+       markerHeight="7"
+       refX="0"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#333"
+         id="polygon1" />
+    </marker>
+  </defs>
+  <!-- Título principal -->
+  <text
+     x="450"
+     y="30"
+     text-anchor="middle"
+     class="title"
+     id="text1">Framework Word2Vec</text>
+  <!-- Background do framework -->
+  <rect
+     x="50"
+     y="50"
+     width="800"
+     height="490"
+     fill="#fcfcfc"
+     stroke="#999"
+     stroke-width="1"
+     rx="15"
+     ry="15"
+     id="rect1" />
+  <!-- Cabeçalho: Common Components -->
+  <rect
+     x="75"
+     y="70"
+     width="750"
+     height="80"
+     class="highlight"
+     opacity="0.7"
+     id="rect2" />
+  <text
+     x="450"
+     y="95"
+     text-anchor="middle"
+     class="subtitle"
+     id="text2">Componentes Comuns</text>
+  <text
+     x="190"
+     y="120"
+     text-anchor="middle"
+     class="label"
+     id="text3">Corpus de Texto</text>
+  <text
+     x="360"
+     y="120"
+     text-anchor="middle"
+     class="label"
+     id="text4">Vetores Densos</text>
+  <text
+     x="530"
+     y="120"
+     text-anchor="middle"
+     class="label"
+     id="text5">Rede Neural Rasa</text>
+  <text
+     x="710"
+     y="120"
+     text-anchor="middle"
+     class="label"
+     id="text6">Embeddings Finais</text>
+  <!-- Arquiteturas -->
+  <rect
+     x="75"
+     y="170"
+     width="350"
+     height="340"
+     class="box"
+     fill="#f9f9f9"
+     id="rect6" />
+  <rect
+     x="475"
+     y="170"
+     width="350"
+     height="340"
+     class="box"
+     fill="#f9f9f9"
+     id="rect7" />
+  <!-- Títulos -->
+  <text
+     x="250"
+     y="200"
+     text-anchor="middle"
+     class="subtitle"
+     id="text7">CBOW</text>
+  <text
+     x="250"
+     y="225"
+     text-anchor="middle"
+     class="small-text"
+     id="text8">(Continuous Bag-of-Words)</text>
+  <text
+     x="650"
+     y="200"
+     text-anchor="middle"
+     class="subtitle"
+     id="text9">SkipGram</text>
+  <!-- Descrições -->
+  <text
+     x="250"
+     y="260"
+     text-anchor="middle"
+     class="label"
+     id="text10">Prevê a palavra-alvo a partir</text>
+  <text
+     x="250"
+     y="280"
+     text-anchor="middle"
+     class="label"
+     id="text11">da média do contexto</text>
+  <text
+     x="650"
+     y="260"
+     text-anchor="middle"
+     class="label"
+     id="text12">Prevê palavras de contexto</text>
+  <text
+     x="650"
+     y="280"
+     text-anchor="middle"
+     class="label"
+     id="text13">a partir da palavra-alvo</text>
+  <!-- Ilustrações -->
+  <!-- CBOW -->
+  <rect
+     x="100"
+     y="310"
+     width="300"
+     height="160"
+     fill="white"
+     stroke="#ddd"
+     stroke-width="1"
+     rx="5"
+     ry="5"
+     id="rect13" />
+  <circle
+     cx="140"
+     cy="350"
+     r="20"
+     fill="#d0e0ff"
+     stroke="#4a86e8"
+     stroke-width="1"
+     id="circle13" />
+  <text
+     x="140"
+     y="355"
+     text-anchor="middle"
+     class="small-text"
+     id="text14">gato</text>
+  <circle
+     cx="180"
+     cy="350"
+     r="20"
+     fill="#d0e0ff"
+     stroke="#4a86e8"
+     stroke-width="1"
+     id="circle14" />
+  <text
+     x="180"
+     y="355"
+     text-anchor="middle"
+     class="small-text"
+     id="text15">corre</text>
+  <line
+     x1="140"
+     y1="370"
+     x2="250"
+     y2="400"
+     stroke="#4a86e8"
+     stroke-width="1.5"
+     marker-end="url(#arrowhead)"
+     id="line15" />
+  <line
+     x1="180"
+     y1="370"
+     x2="250"
+     y2="400"
+     stroke="#4a86e8"
+     stroke-width="1.5"
+     marker-end="url(#arrowhead)"
+     id="line16" />
+  <rect
+     x="220"
+     y="400"
+     width="60"
+     height="30"
+     fill="#fffee0"
+     stroke="#d5ca00"
+     stroke-width="1"
+     rx="5"
+     ry="5"
+     id="rect16" />
+  <text
+     x="250"
+     y="420"
+     text-anchor="middle"
+     class="small-text"
+     id="text16">média</text>
+  <line
+     x1="250"
+     y1="430"
+     x2="250"
+     y2="450"
+     stroke="#333"
+     stroke-width="1.5"
+     marker-end="url(#arrowhead)"
+     id="line17" />
+  <circle
+     cx="250"
+     cy="470"
+     r="20"
+     fill="#f8d0d0"
+     stroke="#e06666"
+     stroke-width="1"
+     id="circle17" />
+  <text
+     x="250"
+     y="475"
+     text-anchor="middle"
+     class="small-text"
+     id="text17">preto</text>
+  <text
+     x="250"
+     y="500"
+     text-anchor="middle"
+     class="small-text emphasis"
+     id="text18">palavra-alvo</text>
+  <!-- SkipGram -->
+  <rect
+     x="500"
+     y="310"
+     width="300"
+     height="160"
+     fill="white"
+     stroke="#ddd"
+     stroke-width="1"
+     rx="5"
+     ry="5"
+     id="rect18" />
+  <circle
+     cx="650"
+     cy="350"
+     r="20"
+     fill="#f8d0d0"
+     stroke="#e06666"
+     stroke-width="1"
+     id="circle18" />
+  <text
+     x="650"
+     y="355"
+     text-anchor="middle"
+     class="small-text"
+     id="text19">preto</text>
+  <text
+     x="704.36255"
+     y="372.79532"
+     text-anchor="middle"
+     class="small-text emphasis"
+     id="text20">palavra-alvo</text>
+  <line
+     x1="650"
+     y1="370"
+     x2="590"
+     y2="420"
+     stroke="#333"
+     stroke-width="1.5"
+     marker-end="url(#arrowhead)"
+     id="line20" />
+  <line
+     x1="650"
+     y1="370"
+     x2="710"
+     y2="420"
+     stroke="#333"
+     stroke-width="1.5"
+     marker-end="url(#arrowhead)"
+     id="line21" />
+  <circle
+     cx="590"
+     cy="440"
+     r="20"
+     fill="#d0e0ff"
+     stroke="#4a86e8"
+     stroke-width="1"
+     id="circle21" />
+  <text
+     x="590"
+     y="445"
+     text-anchor="middle"
+     class="small-text"
+     id="text21">gato</text>
+  <circle
+     cx="710"
+     cy="440"
+     r="20"
+     fill="#d0e0ff"
+     stroke="#4a86e8"
+     stroke-width="1"
+     id="circle22" />
+  <text
+     x="710"
+     y="445"
+     text-anchor="middle"
+     class="small-text"
+     id="text22">corre</text>
+  <text
+     x="590"
+     y="470"
+     text-anchor="middle"
+     class="small-text emphasis"
+     id="text23">contexto</text>
+  <text
+     x="710"
+     y="470"
+     text-anchor="middle"
+     class="small-text emphasis"
+     id="text24">contexto</text>
+  <!-- Otimizações Computacionais -->
+  <rect
+     x="50"
+     y="520"
+     width="800"
+     height="40"
+     class="optimization"
+     opacity="0.8"
+     id="rect24" />
+  <text
+     x="450"
+     y="545"
+     text-anchor="middle"
+     class="subtitle"
+     id="text25">Otimizações: Negative Sampling | Hierarchical Softmax</text>
+  <!-- Setas de escolha -->
+  <line
+     x1="276.3833"
+     y1="59.953999"
+     x2="214.08492"
+     y2="87.400658"
+     stroke="#999999"
+     stroke-width="1.96144"
+     marker-end="url(#arrowhead)"
+     id="line25" />
+  <line
+     x1="621.60199"
+     y1="58.599056"
+     x2="679.34796"
+     y2="84.011597"
+     stroke="#999999"
+     stroke-width="1.81709"
+     marker-end="url(#arrowhead)"
+     id="line26" />
+  <text
+     x="276.63159"
+     y="45.210526"
+     class="small-text"
+     id="text26">escolha</text>
+  <text
+     x="580.14038"
+     y="45.210526"
+     class="small-text"
+     id="text27">escolha</text>
+</svg>

@@ -36,7 +36,7 @@ keywords: |-
     processamento de linguagem natural
 toc: true
 published: true
-lastmod: 2025-04-27T00:20:35.468Z
+lastmod: 2025-04-28T15:21:51.207Z
 draft: 2025-04-19T20:15:42.577Z
 ---
 
@@ -755,7 +755,11 @@ A arquitetura dos modelos de **word embeddings** é notavelmente simples:
 * **Uma camada oculta linear**: sem função de ativação não-linear;
 * **Uma camada de saída**: com ativação softmax para calcular a probabilidade de cada palavra do vocabulário.
 
-A simplicidade arquitetural dos modelos de **word embeddings** é intencionalmente proposital por quatro razões fundamentais: eficiência computacional. Modelos menos complexos exigem menos recursos e treinam mais rapidamente com grandes corpora textuais; alinhamento com a semântica distribucional, teoria linguística que propõe que $p(contexto \vert palavra)$ revela significados semânticos através de padrões estatísticos de co-ocorrência; preservação da linearidade conceitual, já que a ausência de funções não-lineares na camada oculta mantém propriedades algébricas que permitem operações vetoriais como $\vec{v}_{rei} - \vec{v}_{homem} + \vec{v}_{mulher} \approx \vec{v}_{rainha}$, criando um espaço vetorial onde relações semânticas são representadas por transformações lineares $T: \mathbb{R}^d \rightarrow \mathbb{R}^d$; e validação empírica, pois experimentos demonstraram que essa estrutura minimalista $f(x) = W_2 \cdot (W_1 \cdot x)$ produz representações surpreendentemente eficazes sem necessidade de arquiteturas mais elaboradas. Esta é a arquitetura que veremos nos modelos de **word embeddings** e no artigo publicado [aqui](https://frankalcantara.com/transformers-cinco/).
+A simplicidade arquitetural dos modelos de **word embeddings** é intencionalmente proposital por quatro razões fundamentais: eficiência computacional. Modelos menos complexos exigem menos recursos e treinam mais rapidamente com grandes corpora textuais; alinhamento com a semântica distribucional, teoria linguística que propõe que $p(contexto \vert palavra)$ revela significados semânticos através de padrões estatísticos de co-ocorrência; preservação da linearidade conceitual, já que a ausência de funções não-lineares na camada oculta mantém propriedades algébricas que permitem operações vetoriais como: 
+
+$$\vec{v}_{rei} - \vec{v}_{homem} + \vec{v}_{mulher} \;\; \approx \vec{v}_{rainha}$$
+
+criando um espaço vetorial onde relações semânticas são representadas por transformações lineares $T: \mathbb{R}^d \rightarrow \mathbb{R}^d$; e validação empírica, pois experimentos demonstraram que essa estrutura minimalista $f(x) = W_2 \cdot (W_1 \cdot x)$ produz representações surpreendentemente eficazes sem necessidade de arquiteturas mais elaboradas. Esta é a arquitetura que veremos nos modelos de **word embeddings** e no artigo publicado [aqui](https://frankalcantara.com/transformers-cinco/).
 
 ### Representação e Propagação de Dados
 
@@ -986,7 +990,7 @@ $$\theta_j \leftarrow 0.8 - (-0.025)$$
 
 $$\theta_j \leftarrow 0.8 + 0.025 = 0.825$$
 
-O novo valor do parâmetro $\theta_j$ será $0.825$. Como o gradiente era negativo, a atualização aumentou o valor do parâmetro, movendo-o na direção que, localmente, diminui o custo. Se o gradiente fosse positivo, digamos $+1.5$, a atualização seria $\theta_j \leftarrow 0.8 - (0.01 \times 1.5) = 0.8 - 0.015 = 0.785$, diminuindo o valor do parâmetro.
+O novo valor do parâmetro $\theta_j$ será $0.825$. Como o gradiente era negativo, a atualização aumentou o valor do parâmetro, movendo-o na direção que, localmente, diminui o custo. Se o gradiente fosse positivo, digamos $+1.5$, a atualização seria $\theta_j \leftarrow 0.8 - (0.01 \times 1.5) = 0.8 - 0.015 = 0.785\;$, diminuindo o valor do parâmetro.
 
 #### Retropropagação (Backpropagation)
 
@@ -1359,7 +1363,7 @@ Neste exemplo, a esforçada leitora poderá ver, cuidadosamente, *como treinar u
 #### Definição da Rede
 
 * **Vocabulário**: {"sol", "lua", "dia", "noite"} (tamanho $ \vert V \vert  = 4 $);
-* **Camada de Entrada**: Vetor *one-hot* de tamanho $4$, representando uma palavra de entrada;
+* **Camada de Entrada**: Vetor **One-Hot** de tamanho $4$, representando uma palavra de entrada;
 * **Camada Oculta**: $2$ neurônios, projeção linear, sem função de ativação;
 * **Camada de Saída**: $4$ neurônios, probabilidades para cada palavra do vocabulário, usando softmax.
 
@@ -1387,8 +1391,8 @@ $$W^{(2)} = \begin{pmatrix}
 
 #### Entrada e Saída Esperada
 
-* **Entrada**: palavra "sol", vetor *one-hot* $ x = [1, 0, 0, 0] $;
-* **Saída Esperada**: palavra "dia", vetor *one-hot* $ y = [0, 0, 1, 0]$.
+* **Entrada**: palavra "sol", vetor **One-Hot** $ x = [1, 0, 0, 0] $;
+* **Saída Esperada**: palavra "dia", vetor **One-Hot** $ y = [0, 0, 1, 0]$.
 
 #### Propagação Direta
 
@@ -1403,7 +1407,7 @@ $$h = x \cdot W^{(1)} = [1, 0, 0, 0] \cdot \begin{pmatrix}
 0.7 & 0.8
 \end{pmatrix}$$
 
-Como $x$ é um vetor *one-hot* com $1$ na primeira posição, $h$ corresponde à primeira linha de $W^{(1)}$:
+Como $x$ é um vetor **One-Hot** com $1$ na primeira posição, $h$ corresponde à primeira linha de $W^{(1)}$:
 
 $$h = [0.1, 0.2]$$
 
@@ -1904,10 +1908,10 @@ A camada de projeção nos modelos de **word embeddings** funciona como uma tabe
 A matriz de pesos $W$, também chamada de **matriz de embedding**, terá dimensões $\vert V \vert  \times d$, ou seja, $4 \times 3$. Cada linha corresponde ao **vetor de embedding** de uma palavra do vocabulário. Vamos supor que a matriz $W$ seja:
 
 $$W = \begin{pmatrix}
-0.1 & 0.2 & 0.3 \\  % Embedding de "a" (linha 1)
-0.4 & 0.5 & 0.6 \\  % Embedding de "b" (linha 2)
-0.7 & 0.8 & 0.9 \\  % Embedding de "c" (linha 3)
-1.0 & 1.1 & 1.2    % Embedding de "d" (linha 4)
+0.1 & 0.2 & 0.3 \\  % Embedding de a (linha 1)
+0.4 & 0.5 & 0.6 \\  % Embedding de b (linha 2)
+0.7 & 0.8 & 0.9 \\  % Embedding de c (linha 3)
+1.0 & 1.1 & 1.2     % Embedding de d (linha 4)
 \end{pmatrix}$$
 
 Agora, suponha que a palavra de entrada seja `b`. Sua representação **One-Hot** será um vetor $x$ de tamanho $ \vert V \vert =4$, com $1$ na posição correspondente a `b`, a segunda posição, e $0$ nas demais:
@@ -1925,15 +1929,15 @@ $$\text{Embedding}(\text{"b"}) = x \cdot W = [0, 1, 0, 0] \begin{pmatrix}
 
 Calculando a multiplicação:
 
-* O primeiro elemento do resultado é $(0 \times 0.1) + (1 \times 0.4) + (0 \times 0.7) + (0 \times 1.0) = 0.4$;
+* O primeiro elemento do resultado será dado por: $(0 \times 0.1) + (1 \times 0.4) + (0 \times 0.7) + (0 \times 1.0) = 0.4$;
 
-* O segundo elemento do resultado é $(0 \times 0.2) + (1 \times 0.5) + (0 \times 0.8) + (0 \times 1.1) = 0.5$;
+* O segundo elemento do resultado será dado por: $(0 \times 0.2) + (1 \times 0.5) + (0 \times 0.8) + (0 \times 1.1) = 0.5$;
 
-* O terceiro elemento do resultado é $(0 \times 0.3) + (1 \times 0.6) + (0 \times 0.9) + (0 \times 1.2) = 0.6$.
+* O terceiro elemento do resultado será dado por: $(0 \times 0.3) + (1 \times 0.6) + (0 \times 0.9) + (0 \times 1.2) = 0.6$.
 
-O resultado é:
+Neste caso o resultado será:
 
-$$\text{Embedding}(\text{"b"}) = [0.4, 0.5, 0.6]$$
+$$\text{Embedding}(\text{`b`}) = [0.4, 0.5, 0.6]$$
 
 Observe que este é exatamente a **segunda linha** da matriz $W$. *Na prática, as bibliotecas implementam isso como uma operação de lookup, consulta em inglês, direta na matriz $W$ usando o índice da palavra. Neste caso, índice $1$, assumindo indexação baseada em $0$, ou índice #2# se baseada em 1*, o que é muito mais eficiente do que realizar a multiplicação matricial completa. As redes neurais são usadas para treinamento em busca dos valores desta matriz $W$.
 
@@ -1953,13 +1957,13 @@ Os modelos de **word embeddings**, embora conceitualmente simples, enfrentam des
 
 **Problema de Computação do Softmax**: o cálculo do **softmax** na camada de saída envolve normalizar sobre todo o vocabulário, o que pode ser computacionalmente proibitivo para vocabulários grandes. Observe que o softmax é dado por:
 
-$$p(w_O  \vert  w_I) = \frac{\exp(v'_{w_O} \cdot v_{w_I})}{\sum_{w \in V} \exp(v'_w \cdot v_{w_I})}$$
+$$p(w_O  \vert  w_I) = \frac{\exp(v^{'}\_{w_O} \cdot v_{w_I})}{\sum_{w \in V} \exp(v^{'}\_w \cdot v_{w_I})}$$
 
-Nesta equação, $v_{w_I}$ é o vetor da palavra de entrada e $v'_w$ é o vetor de saída associado à palavra $w$. O processo de cálculo e a origem do custo computacional podem ser detalhados da seguinte forma:
+Nesta equação, $v_{w_I}$ é o vetor da palavra de entrada e $v^{'}\_w$ é o vetor de saída associado à palavra $w$. O processo de cálculo e a origem do custo computacional podem ser detalhados da seguinte forma:
 
-1.  **Cálculo dos Scores Brutos**: para cada palavra $w$ no vocabulário $V$, calcula-se um score, frequentemente o produto escalar $v'_w \cdot v_{w_I}$;
-2.  **Transformação Exponencial**: cada score é transformado pela função exponencial, $\exp(v'_w \cdot v_{w_I})$, garantindo valores positivos;
-3.  **Cálculo do Termo de Normalização (Denominador)**: este é o passo computacionalmente intensivo. É necessário calcular a **soma** dos scores exponenciais para **todas** as $\vert V \vert$ palavras no vocabulário: $\sum_{w \in V} \exp(v'_w \cdot v_{w_I})$;
+1.  **Cálculo dos Scores Brutos**: para cada palavra $w$ no vocabulário $V$, calcula-se um score, frequentemente o produto escalar $v^{'}_w \cdot v\_{w_I}\;$;
+2.  **Transformação Exponencial**: cada score é transformado pela função exponencial, $\exp(v^{'}_w \cdot v\_{w_I})$, garantindo valores positivos;
+3.  **Cálculo do Termo de Normalização (Denominador)**: este é o passo computacionalmente intensivo. É necessário calcular a **soma** dos scores exponenciais para **todas** as $\vert V \vert$ palavras no vocabulário: $\sum_{w \in V} \exp(v^{'}\_w \cdot v\_{w_I})$;
 4.  **Obtenção da Probabilidade (Normalização)**: a probabilidade final para uma palavra específica $w_O$ é obtida dividindo seu score exponencial pelo termo de normalização (o denominador calculado no passo anterior). Isso garante que $\sum_{w_O \in V} p(w_O \vert w_I) = 1$.
 
 A necessidade de calcular o denominador, somando sobre todas as $\vert V \vert$ palavras do vocabulário para cada exemplo ou atualização, resulta em uma complexidade computacional de $O(\vert V \vert)$, tornando o Softmax padrão impraticável para vocabulários muito grandes e motivando o uso de otimizações como *Negative Sampling* ou *Hierarchical Softmax*.
@@ -1979,10 +1983,10 @@ A criativa leitora não precisa aceitar minha palavra. Vamos ver um exemplo prá
 * **Número de Amostras Negativas**: $k = 2$. É um hiperparâmetro do modelo. Escolhi $k = 2$ para manter o exemplo conciso. Valores comuns na prática estão entre  $5$ e $20$.
 * **Vetores (Iniciais/Fictícios)**:
     * Vetor de Entrada para `preto` ($v_{\text{preto} }$): $[0.4, -0.3, 0.1, 0.5]$. Os valores específicos deste vetor são hipotéticos. Em um treinamento real, os vetores são inicializados aleatoriamente, com valores pequenos, e depois aprendidos, ajustados, durante o processo de treinamento. Escolhi alguns valores para permitir o cálculo no exemplo.
-    * Vetores de Saída ($v'_w$) para algumas palavras. Assim como o vetor de entrada, os valores específicos dos vetores de saída, também chamados de pesos da camada de saída ou *context vectors*, são hipotéticos. Eles também seriam inicializados aleatoriamente e aprendidos durante o treinamento. Para nosso exemplo, escolhi os seguintes valores:
-        * $v'_{\text{gato} }$ (Positivo): $[0.1, 0.2, -0.2, 0.4]$
-        * $v'_{\text{cachorro} }$ (Negativo 1): $[0.1, -0.3, 0.8, -0.1]$
-        * $v'_{\text{jardim} }$ (Negativo 2): $[0.5, 0.1, 0.3, -0.2]$
+    * Vetores de Saída ($v^{'}\_w$) para algumas palavras. Assim como o vetor de entrada, os valores específicos dos vetores de saída, também chamados de pesos da camada de saída ou *context vectors*, são hipotéticos. Eles também seriam inicializados aleatoriamente e aprendidos durante o treinamento. Para nosso exemplo, escolhi os seguintes valores:
+        * $v^{'}\_{\text{gato} }$ (Positivo): $[0.1, 0.2, -0.2, 0.4]$
+        * $v^{'}\_{\text{cachorro} }$ (Negativo 1): $[0.1, -0.3, 0.8, -0.1]$
+        * $v^{'}\_{\text{jardim} }$ (Negativo 2): $[0.5, 0.1, 0.3, -0.2]$
 
 **Passo 2**: processo de Treinamento para o Par (`preto`, `gato`) com $k=2$. Nosso objetivo é treinar a rede para:
 
@@ -1994,27 +1998,37 @@ Isso é feito tratando cada um como um problema de classificação binária usan
 **Passo 2.1: Processar o Par Positivo (`preto` -> `gato`)**
 
 * **Calcular o Score**:
-    $s_{pos} = v'_{\text{gato} } \cdot v_{\text{preto} }$
-    $s_{pos} = [0.1, 0.2, -0.2, 0.4] \cdot [0.4, -0.3, 0.1, 0.5]$
-    $s_{pos} = (0.1)(0.4) + (0.2)(-0.3) + (-0.2)(0.1) + (0.4)(0.5)$
-    $s_{pos} = 0.04 - 0.06 - 0.02 + 0.20 = 0.16$
+
+    $$s_{pos} = v^{'}\_{\text{gato} } \cdot v_{\text{preto} }$$
+
+    $$s_{pos} = [0.1, 0.2, -0.2, 0.4] \cdot [0.4, -0.3, 0.1, 0.5]$$
+
+    $$s_{pos} = (0.1)(0.4) + (0.2)(-0.3) + (-0.2)(0.1) + (0.4)(0.5)
+    $$
+
+    $$s_{pos} = 0.04 - 0.06 - 0.02 + 0.20 = 0.16$$
 
 * **Calcular a Probabilidade (Sigmoide)**: O alvo aqui é $1$ (par positivo).
-    $P(\text{gato}  \vert  \text{preto})_{pos} = \sigma(s_{pos}) = \sigma(0.16) = \frac{1}{1 + e^{-0.16} } \approx \frac{1}{1 + 0.852} \approx 0.540$
 
-* **Calcular o Gradiente para este Par**: O gradiente em relação ao score é $(\sigma(s_{pos}) - \text{target}) = (0.540 - 1) = -0.460$. Este valor será usado para atualizar $v'_{\text{gato} }$ e $v_{\text{preto} }$.
-    * Gradiente para $v'_{\text{gato} }$: $g \cdot v_{\text{preto} } = -0.460 \times [0.4, -0.3, 0.1, 0.5]$
-    * Gradiente (contribuição) para $v_{\text{preto} }$: $g \cdot v'_{\text{gato} } = -0.460 \times [0.1, 0.2, -0.2, 0.4]$
+    $$P(\text{gato}  \vert  \text{preto})_{pos} = \sigma(s_{pos}) = \sigma(0.16) = \frac{1}{1 + e^{-0.16} } \approx \frac{1}{1 + 0.852} \approx 0.540$$
+
+* **Calcular o Gradiente para este Par**: O gradiente em relação ao score é $(\sigma(s_{pos}) - \text{target}) = (0.540 - 1) = -0.460$. Este valor será usado para atualizar $v^{'}\_{\text{gato} }$ e $v_{\text{preto} }$.
+
+    * Gradiente para $v^{'}\_{\text{gato} }$: $g \cdot v_{\text{preto} } = -0.460 \times [0.4, -0.3, 0.1, 0.5]$
+    
+    * Gradiente (contribuição) para $v_{\text{preto} }$: $g \cdot v^{'}\_{\text{gato} } = -0.460 \times [0.1, 0.2, -0.2, 0.4]$
 
 **Passo 2.2**: Processar o Primeiro Par Negativo (`preto` -> `cachorro`).
 
 * **Amostrar Negativo**: Escolhemos `cachorro` aleatoriamente (evitando `gato`).
 
-$$v'{\text{cachorro}} \leftarrow v'{\text{cachorro}} - \eta \cdot (0.540) \cdot [0.4, -0.3, 0.1, 0.5]$, com um valor exemplo para $\eta$ (ex.: $\eta = 0.01$$
+$$v\_{\text{cachorro}} \leftarrow v^{'}\_{\text{cachorro}} - \eta \cdot (0.540) \cdot [0.4, -0.3, 0.1, 0.5]$$
+
+com um valor exemplo para $\eta$ (ex.: $\eta = 0.01$).
 
 * **Calcular o Score**:
 
-    $$s_{neg1} = v'_{\text{cachorro} } \cdot v_{\text{preto} }$$
+    $$s_{neg1} = v^{'}\_{\text{cachorro} } \cdot v_{\text{preto} }$$
 
     $$s_{neg1} = [0.1, -0.3, 0.8, -0.1] \cdot [0.4, -0.3, 0.1, 0.5]$$
 
@@ -2028,8 +2042,8 @@ $$v'{\text{cachorro}} \leftarrow v'{\text{cachorro}} - \eta \cdot (0.540) \cdot 
 
 * **Calcular o Gradiente para este Par**: O gradiente em relação ao score é $(\sigma(s_{neg1}) - \text{target}) = (0.540 - 0) = 0.540$.
 
-    * Gradiente para $v'_{\text{cachorro} }$: $g \cdot v_{\text{preto} } = 0.540 \times [0.4, -0.3, 0.1, 0.5]$;
-    * Gradiente (contribuição) para $v_{\text{preto} }$: $g \cdot v'_{\text{cachorro} } = 0.540 \times [0.1, -0.3, 0.8, -0.1]$.
+    * Gradiente para $v^{'}\_{\text{cachorro} }$: $g \cdot v_{\text{preto} } = 0.540 \times [0.4, -0.3, 0.1, 0.5]$;
+    * Gradiente (contribuição) para $v_{\text{preto} }$: $g \cdot v^{'}\_{\text{cachorro} } = 0.540 \times [0.1, -0.3, 0.8, -0.1]$.
 
 **Passo 2.3**: Processar o Segundo Par Negativo (`preto` -> `jardim`).
 
@@ -2037,13 +2051,13 @@ $$v'{\text{cachorro}} \leftarrow v'{\text{cachorro}} - \eta \cdot (0.540) \cdot 
 
 * **Calcular o Score**:
 
-    $$s_{neg2} = v'_{\text{jardim} } \cdot v_{\text{preto} }$$;
+    $$s_{neg2} = v^{'}\_{\text{jardim} } \cdot v_{\text{preto} }$$
 
-    $$s_{neg2} = [0.5, 0.1, 0.3, -0.2] \cdot [0.4, -0.3, 0.1, 0.5]$$;
+    $$s_{neg2} = [0.5, 0.1, 0.3, -0.2] \cdot [0.4, -0.3, 0.1, 0.5]$$
 
-    $$s_{neg2} = (0.5)(0.4) + (0.1)(-0.3) + (0.3)(0.1) + (-0.2)(0.5)$$;
+    $$s_{neg2} = (0.5)(0.4) + (0.1)(-0.3) + (0.3)(0.1) + (-0.2)(0.5)$$
 
-    $s_{neg2} = 0.20 - 0.03 + 0.03 - 0.10 = 0.10$$.
+    $$s_{neg2} = 0.20 - 0.03 + 0.03 - 0.10 = 0.10$$
 
 * **Calcular a Probabilidade (Sigmoide)**: O alvo aqui é $0$.
 
@@ -2051,36 +2065,36 @@ $$v'{\text{cachorro}} \leftarrow v'{\text{cachorro}} - \eta \cdot (0.540) \cdot 
 
 * **Calcular o Gradiente para este Par**: O gradiente em relação ao score é $(\sigma(s_{neg2}) - \text{target}) = (0.525 - 0) = 0.525$.
   
-    * Gradiente para $v'_{\text{jardim} }$: $g \cdot v_{\text{preto} } = 0.525 \times [0.4, -0.3, 0.1, 0.5]$;
-    * Gradiente (contribuição) para $v_{\text{preto} }$: $g \cdot v'_{\text{jardim} } = 0.525 \times [0.5, 0.1, 0.3, -0.2]$;
+    * Gradiente para $v^{'}\_{\text{jardim} }$: $g \cdot v_{\text{preto} } = 0.525 \times [0.4, -0.3, 0.1, 0.5]$;
+    * Gradiente (contribuição) para $v_{\text{preto} }$: $g \cdot v^{'}\_{\text{jardim} } = 0.525 \times [0.5, 0.1, 0.3, -0.2]$;
 
 **Passo 3**: atualização dos Vetores (usando Gradiente Descendente com taxa $\eta$):
 
-* **Atualizar $v'_{\text{gato} }$ (Positivo)**:
+* **Atualizar $v^{'}\_{\text{gato} }$ (Positivo)**:
 
-    $$v'_{\text{gato} } \leftarrow v'_{\text{gato} } - \eta \cdot (\sigma(s_{pos}) - 1) \cdot v_{\text{preto} }$$
+    $$v^{'}\_{\text{gato} } \leftarrow v^{'}\_{\text{gato} } - \eta \cdot (\sigma(s_{pos}) - 1) \cdot v_{\text{preto} }$$
 
-    $$v'_{\text{gato} } \leftarrow v'_{\text{gato} } - \eta \cdot (-0.460) \cdot v_{\text{preto} }$$
+    $$v^{'}\_{\text{gato} } \leftarrow v^{'}\_{\text{gato} } - \eta \cdot (-0.460) \cdot v_{\text{preto} }$$
 
-* **Atualizar $v'_{\text{cachorro} }$ (Negativo 1)**:
+* **Atualizar $v^{'}\_{\text{cachorro} }$ (Negativo 1)**:
 
-    $$v'_{\text{cachorro} } \leftarrow v'_{\text{cachorro} } - \eta \cdot (\sigma(s_{neg1}) - 0) \cdot v_{\text{preto} }$$
+    $$v^{'}\_{\text{cachorro} } \leftarrow v^{'}\_{\text{cachorro} } - \eta \cdot (\sigma(s_{neg1}) - 0) \cdot v_{\text{preto} }$$
 
-    $$v'_{\text{cachorro} } \leftarrow v'_{\text{cachorro} } - \eta \cdot (0.540) \cdot v_{\text{preto} }$$
+    $$v^{'}\_{\text{cachorro} } \leftarrow v^{'}\_{\text{cachorro} } - \eta \cdot (0.540) \cdot v_{\text{preto} }$$
 
-* **Atualizar $v'_{\text{jardim} }$ (Negativo 2)**:
+* **Atualizar $v^{'}\_{\text{jardim} }$ (Negativo 2)**:
 
-    $$v'_{\text{jardim} } \leftarrow v'_{\text{jardim} } - \eta \cdot (\sigma(s_{neg2}) - 0) \cdot v_{\text{preto} }$$
+    $$v^{'}\_{\text{jardim} } \leftarrow v^{'}\_{\text{jardim} } - \eta \cdot (\sigma(s_{neg2}) - 0) \cdot v_{\text{preto} }$$
 
-    $$v'_{\text{jardim} } \leftarrow v'_{\text{jardim} } - \eta \cdot (0.525) \cdot v_{\text{preto} }$$
+    $$v^{'}\_{\text{jardim} } \leftarrow v^{'}\_{\text{jardim} } - \eta \cdot (0.525) \cdot v_{\text{preto} }$$
 
 * **Atualizar $v_{\text{preto} }$ (Entrada)**: O gradiente para $v_{\text{preto} }$ acumula as contribuições do par positivo e de todos os pares negativos.
   
-    $$\nabla_{v_{\text{preto} } } L = (\sigma(s_{pos}) - 1) v'_{\text{gato} } + (\sigma(s_{neg1}) - 0) v'_{\text{cachorro} } + (\sigma(s_{neg2}) - 0) v'_{\text{jardim} }$$
+    $$\nabla_{v_{\text{preto} } } L = (\sigma(s_{pos}) - 1) v^{'}\_{\text{gato} } + (\sigma(s_{neg1}) - 0) v^{'}\_{\text{cachorro} } + (\sigma(s_{neg2}) - 0) v^{'}\_{\text{jardim} }$$
 
     $$v_{\text{preto} } \leftarrow v_{\text{preto} } - \eta \cdot \nabla_{v_{\text{preto} } } L$$
 
-**Passo 4**: agora, a atenta leitora deve notar que só precisamos calcular scores e gradientes para a palavra positiva (`gato`) e as $k=2$ negativas (`cachorro`, `jardim`), um total de $k+1 = 3$ pares. Isso é muito mais rápido que calcular para todas as $\vert V \vert = 7$ palavras, como exigiria o Softmax completo. A complexidade é $O(k)$ em vez de $O(\vert V \vert)$. Além disso, apenas os vetores de saída ($v'$) das palavras envolvidas, tanto positivas quanto negativas, são atualizados neste passo. Os vetores de saída das outras palavras do vocabulário não são tocados. Finalmente, o vetor de entrada da palavra alvo, $v_{\text{preto} }$, é atualizado com base no erro combinado de todos os $k+1$ pares processados.
+**Passo 4**: agora, a atenta leitora deve notar que só precisamos calcular scores e gradientes para a palavra positiva (`gato`) e as $k=2$ negativas (`cachorro`, `jardim`), um total de $k+1 = 3$ pares. Isso é muito mais rápido que calcular para todas as $\vert V \vert = 7$ palavras, como exigiria o Softmax completo. A complexidade é $O(k)$ em vez de $O(\vert V \vert)$. Além disso, apenas os vetores de saída ($v^{'}\$) das palavras envolvidas, tanto positivas quanto negativas, são atualizados neste passo. Os vetores de saída das outras palavras do vocabulário não são tocados. Finalmente, o vetor de entrada da palavra alvo, $v_{\text{preto} }$, é atualizado com base no erro combinado de todos os $k+1$ pares processados.
 
 Este exemplo simplificado demonstra como o **Negative Sampling** reduz drasticamente a carga computacional ao focar em distinguir a palavra de contexto correta de apenas algumas amostras incorretas, tornando o treinamento de **word embeddings** viável em grandes conjuntos de dados.
 
@@ -2145,12 +2159,12 @@ Vamos ilustrar como o Hierarchical Softmax calcula a probabilidade $p(w_O \vert 
 
 * **Palavra de Saída (Contexto a prever)**: $w_O = $ `corre`.
 
-* **Vetores dos Nós Internos (Aprendidos/Hipotéticos)**: Cada nó interno $n_j$ tem um vetor $v'_{n_j}$ de dimensão $d=3$.
+* **Vetores dos Nós Internos (Aprendidos/Hipotéticos)**: Cada nó interno $n_j$ tem um vetor $v^{'}\_{n_j}$ de dimensão $d=3$.
 
-    * $v'_{n0} = [0.1, 0.5, -0.1]$;
-    * $v'_{n1} = [-0.2, 0.3, 0.4]$ (Não usado para prever `corre`);
-    * $v'_{n2} = [0.3, -0.1, 0.2]$;
-    * $v'_{n3} = [0.6, 0.2, -0.3]$ (Não usado para prever `corre`).
+    * $v^{'}\_{n0} = [0.1, 0.5, -0.1]$;
+    * $v^{'}\_{n1} = [-0.2, 0.3, 0.4]$ (Não usado para prever `corre`);
+    * $v^{'}\_{n2} = [0.3, -0.1, 0.2]$;
+    * $v^{'}\_{n3} = [0.6, 0.2, -0.3]$ (Não usado para prever `corre`).
 
 **2. Calculando $p(\text{corre} \vert \text{preto})$**:
 
@@ -2160,9 +2174,9 @@ Para prever `corre`, precisamos navegar da raiz ($n_0$) até a folha `corre`. O 
   
     * Para chegar a `corre`, precisamos ir para a **direita** (código `1`) em $n_0$.
 
-    * A probabilidade de ir para a direita é $p(\text{direita} \vert n_0) = \sigma(-v'_{n0} \cdot v_{\text{preto} })$.
+    * A probabilidade de ir para a direita será dada por $p(\text{direita} \vert n_0) = \sigma(-v^{'}\_{n0} \cdot v_{\text{preto} })$.
 
-        * Calculamos o score: $s_0 = v'_{n0} \cdot v_{\text{preto} } = [0.1, 0.5, -0.1] \cdot [0.4, 0.1, -0.2]$
+        * Calculamos o score: $s_0 = v^{'}\_{n0} \cdot v_{\text{preto} } = [0.1, 0.5, -0.1] \cdot [0.4, 0.1, -0.2]$
 
             $$s_0 = (0.1)(0.4) + (0.5)(0.1) + (-0.1)(-0.2) = 0.04 + 0.05 + 0.02 = 0.11$$
 
@@ -2172,9 +2186,9 @@ Para prever `corre`, precisamos navegar da raiz ($n_0$) até a folha `corre`. O 
 
     * Vindo de $n_0$, chegamos a $n_2$. Para chegar a `corre`, precisamos ir para a **direita** novamente (código `1`).
 
-    * A probabilidade de ir para a direita é $p(\text{direita} \vert n_2) = \sigma(-v'_{n2} \cdot v_{\text{preto} })$.
+    * A probabilidade de ir para a direita é $p(\text{direita} \vert n_2) = \sigma(-v^{'}\_{n2} \cdot v_{\text{preto} })$.
 
-        * Calculamos o score: $s_2 = v'_{n2} \cdot v_{\text{preto} } = [0.3, -0.1, 0.2] \cdot [0.4, 0.1, -0.2]$
+        * Calculamos o score: $s_2 = v^{'}\_{n2} \cdot v_{\text{preto} } = [0.3, -0.1, 0.2] \cdot [0.4, 0.1, -0.2]$
 
             $$s_2 = (0.3)(0.4) + (-0.1)(0.1) + (0.2)(-0.2) = 0.12 - 0.01 - 0.04 = 0.07$$
 
@@ -2196,9 +2210,9 @@ Para prever `corre`, precisamos navegar da raiz ($n_0$) até a folha `corre`. O 
 
     * O vetor de entrada $v_{\text{preto} }$.
 
-    * Os vetores dos nós internos no caminho: $v'_{n0}$ e $v'_{n2}$.
+    * Os vetores dos nós internos no caminho: $v^{'}\_{n0}$ e $v^{'}\_{n2}$.
 
-* **Atualização**: Apenas $v_{\text{preto} }$, $v'_{n0}$ e $v'_{n2}$ seriam atualizados usando gradiente descendente. Os vetores dos outros nós internos ($v'_{n1}$, $v'_{n3}$) e os vetores de saída associados a outras palavras não são tocados neste passo.
+* **Atualização**: Apenas $v_{\text{preto} }$, $v^{'}\_{n0}$ e $v^{'}\_{n2}$ seriam atualizados usando gradiente descendente. Os vetores dos outros nós internos ($v^{'}\_{n1}$, $v^{'}\_{n3}$) e os vetores de saída associados a outras palavras não são tocados neste passo.
 
 Neste exemplo, *para calcular a probabilidade de `corre`, realizamos apenas $2$ cálculos de score e sigmoide, um para cada nó interno no caminho*. Com o Softmax padrão, teríamos que calcular scores para todas as $5$ palavras do vocabulário. A complexidade aqui é $O(\text{profundidade da palavra}) \approx O(\log \vert V \vert)$, que é muito menor que $O(\vert V \vert)$ para vocabulários grandes.
 

@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="900"
+   height="600"
+   viewBox="0 0 900 600"
+   version="1.1"
+   id="svg47"
+   sodipodi:docname="word-embedding-visualization-improved.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview47"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.425"
+     inkscape:cx="449.82456"
+     inkscape:cy="300"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg47" />
+  <defs
+     id="defs1">
+    <style
+       id="style1">
+      text {
+        font-family: Arial, sans-serif;
+      }
+      .title {
+        font-size: 24px;
+        font-weight: bold;
+      }
+      .axis-label {
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .word {
+        font-size: 14px;
+        font-weight: bold;
+      }
+      .word-animal {
+        fill: #3366cc;
+      }
+      .word-object {
+        fill: #dc3912;
+      }
+      .word-action {
+        fill: #109618;
+      }
+      .word-attribute {
+        fill: #990099;
+      }
+      .group-label {
+        font-size: 20px;
+        font-weight: bold;
+        font-style: italic;
+        opacity: 0.7;
+      }
+      .legend-text {
+        font-size: 14px;
+      }
+      .legend-title {
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .analogy-label {
+        font-size: 12px;
+        font-style: italic;
+      }
+    </style>
+  </defs>
+  <!-- Background -->
+  <rect
+     width="900"
+     height="600"
+     fill="white"
+     id="rect1" />
+  <!-- Title -->
+  <text
+     x="450"
+     y="40"
+     text-anchor="middle"
+     class="title"
+     id="text1">Visualização 2D de Word Embeddings</text>
+  <text
+     x="450"
+     y="70"
+     text-anchor="middle"
+     font-size="16px"
+     font-style="italic"
+     id="text2">(Após redução de dimensionalidade t-SNE do espaço vetorial original)</text>
+  <!-- Axes -->
+  <line
+     x1="100"
+     y1="500"
+     x2="800"
+     y2="500"
+     stroke="black"
+     stroke-width="2"
+     id="line2" />
+  <line
+     x1="100"
+     y1="100"
+     x2="100"
+     y2="500"
+     stroke="black"
+     stroke-width="2"
+     id="line3" />
+  <!-- Axis labels -->
+  <text
+     x="450"
+     y="540"
+     text-anchor="middle"
+     class="axis-label"
+     id="text3">Dimensão 1</text>
+  <text
+     x="50"
+     y="300"
+     text-anchor="middle"
+     transform="rotate(-90,50,300)"
+     class="axis-label"
+     id="text4">Dimensão 2</text>
+  <!-- Grid lines -->
+  <line
+     x1="100"
+     y1="300"
+     x2="800"
+     y2="300"
+     stroke="#dddddd"
+     stroke-width="1"
+     stroke-dasharray="5,5"
+     id="line4" />
+  <line
+     x1="450"
+     y1="100"
+     x2="450"
+     y2="500"
+     stroke="#dddddd"
+     stroke-width="1"
+     stroke-dasharray="5,5"
+     id="line5" />
+  <!-- Group background -->
+  <rect
+     x="130"
+     y="120"
+     width="240"
+     height="180"
+     fill="#e6f0ff"
+     fill-opacity="0.5"
+     rx="20"
+     ry="20"
+     id="rect5" />
+  <rect
+     x="550"
+     y="120"
+     width="240"
+     height="180"
+     fill="#ffebe6"
+     fill-opacity="0.5"
+     rx="20"
+     ry="20"
+     id="rect6" />
+  <rect
+     x="130"
+     y="320"
+     width="240"
+     height="180"
+     fill="#e6ffe6"
+     fill-opacity="0.5"
+     rx="20"
+     ry="20"
+     id="rect7" />
+  <rect
+     x="550"
+     y="320"
+     width="240"
+     height="180"
+     fill="#f3e6ff"
+     fill-opacity="0.5"
+     rx="20"
+     ry="20"
+     id="rect8" />
+  <!-- Group labels -->
+  <text
+     x="250"
+     y="140"
+     text-anchor="middle"
+     class="group-label word-animal"
+     id="text8">ANIMAIS</text>
+  <text
+     x="670"
+     y="140"
+     text-anchor="middle"
+     class="group-label word-object"
+     id="text9">OBJETOS</text>
+  <text
+     x="250"
+     y="340"
+     text-anchor="middle"
+     class="group-label word-action"
+     id="text10">AÇÕES</text>
+  <text
+     x="670"
+     y="340"
+     text-anchor="middle"
+     class="group-label word-attribute"
+     id="text11">ATRIBUTOS</text>
+  <!-- Animal Words -->
+  <circle
+     cx="202.80702"
+     cy="176.49123"
+     r="25"
+     fill="#ffffff"
+     stroke="#3366cc"
+     stroke-width="2"
+     id="circle11" />
+  <text
+     x="202.10527"
+     y="178.6842"
+     text-anchor="middle"
+     class="word word-animal"
+     id="text12">gato</text>
+  <circle
+     cx="160"
+     cy="230"
+     r="25"
+     fill="white"
+     stroke="#3366cc"
+     stroke-width="2"
+     id="circle12" />
+  <text
+     x="160"
+     y="237.80702"
+     text-anchor="middle"
+     class="word word-animal"
+     id="text13">cachorro</text>
+  <circle
+     cx="250"
+     cy="200"
+     r="25"
+     fill="white"
+     stroke="#3366cc"
+     stroke-width="2"
+     id="circle13" />
+  <text
+     x="250"
+     y="205"
+     text-anchor="middle"
+     class="word word-animal"
+     id="text14">leão</text>
+  <circle
+     cx="311.92981"
+     cy="250.52632"
+     r="25"
+     fill="#ffffff"
+     stroke="#3366cc"
+     stroke-width="2"
+     id="circle14" />
+  <text
+     x="311.92981"
+     y="255.52632"
+     text-anchor="middle"
+     class="word word-animal"
+     id="text15">tigre</text>
+  <circle
+     cx="227.01755"
+     cy="260.17545"
+     r="25"
+     fill="#ffffff"
+     stroke="#3366cc"
+     stroke-width="2"
+     id="circle15" />
+  <text
+     x="227.01755"
+     y="265.17545"
+     text-anchor="middle"
+     class="word word-animal"
+     id="text16">elefante</text>
+  <circle
+     cx="330"
+     cy="190"
+     r="25"
+     fill="white"
+     stroke="#3366cc"
+     stroke-width="2"
+     id="circle16" />
+  <text
+     x="330"
+     y="195"
+     text-anchor="middle"
+     class="word word-animal"
+     id="text17">cavalo</text>
+  <!-- Object Words -->
+  <circle
+     cx="603.50879"
+     cy="186.3158"
+     r="25"
+     fill="#ffffff"
+     stroke="#dc3912"
+     stroke-width="2"
+     id="circle17" />
+  <text
+     x="603.50879"
+     y="191.3158"
+     text-anchor="middle"
+     class="word word-object"
+     id="text18">carro</text>
+  <circle
+     cx="650"
+     cy="220"
+     r="25"
+     fill="white"
+     stroke="#dc3912"
+     stroke-width="2"
+     id="circle18" />
+  <text
+     x="650"
+     y="225"
+     text-anchor="middle"
+     class="word word-object"
+     id="text19">casa</text>
+  <ellipse
+     cx="715.4386"
+     cy="190.35088"
+     fill="#ffffff"
+     stroke="#dc3912"
+     stroke-width="2.14041"
+     id="circle19"
+     rx="32.124069"
+     ry="30.720558" />
+  <text
+     x="717.19299"
+     y="196.4035"
+     text-anchor="middle"
+     class="word word-object"
+     id="text20">televisão</text>
+  <ellipse
+     cx="606.66669"
+     cy="262.2807"
+     fill="#ffffff"
+     stroke="#dc3912"
+     stroke-width="2.23803"
+     id="circle20"
+     rx="30.414133"
+     ry="30.063257" />
+  <text
+     x="606.66669"
+     y="265.52631"
+     text-anchor="middle"
+     class="word word-object"
+     id="text21">telefone</text>
+  <ellipse
+     cx="730.52631"
+     cy="262.2807"
+     fill="#ffffff"
+     stroke="#dc3912"
+     stroke-width="2.8637"
+     id="circle21"
+     rx="35.796223"
+     ry="35.796219" />
+  <text
+     x="731.92981"
+     y="266.57895"
+     text-anchor="middle"
+     class="word word-object"
+     id="text22">computador</text>
+  <!-- Action Words -->
+  <circle
+     cx="200"
+     cy="380"
+     r="25"
+     fill="white"
+     stroke="#109618"
+     stroke-width="2"
+     id="circle22" />
+  <text
+     x="200"
+     y="385"
+     text-anchor="middle"
+     class="word word-action"
+     id="text23">correr</text>
+  <circle
+     cx="250.70175"
+     cy="430.52631"
+     r="25"
+     fill="#ffffff"
+     stroke="#109618"
+     stroke-width="2"
+     id="circle23" />
+  <text
+     x="250.70175"
+     y="435.52631"
+     text-anchor="middle"
+     class="word word-action"
+     id="text24">andar</text>
+  <circle
+     cx="180"
+     cy="450"
+     r="25"
+     fill="white"
+     stroke="#109618"
+     stroke-width="2"
+     id="circle24" />
+  <text
+     x="180"
+     y="455"
+     text-anchor="middle"
+     class="word word-action"
+     id="text25">nadar</text>
+  <circle
+     cx="325.26315"
+     cy="431.57895"
+     r="25"
+     fill="#ffffff"
+     stroke="#109618"
+     stroke-width="2"
+     id="circle25" />
+  <text
+     x="325.26315"
+     y="436.57895"
+     text-anchor="middle"
+     class="word word-action"
+     id="text26">pular</text>
+  <circle
+     cx="280.52631"
+     cy="374.5614"
+     r="25"
+     fill="#ffffff"
+     stroke="#109618"
+     stroke-width="2"
+     id="circle26" />
+  <text
+     x="280.52631"
+     y="379.5614"
+     text-anchor="middle"
+     class="word word-action"
+     id="text27">voar</text>
+  <!-- Attribute Words -->
+  <circle
+     cx="600"
+     cy="380"
+     r="25"
+     fill="white"
+     stroke="#990099"
+     stroke-width="2"
+     id="circle27" />
+  <text
+     x="600"
+     y="385"
+     text-anchor="middle"
+     class="word word-attribute"
+     id="text28">grande</text>
+  <circle
+     cx="704.0351"
+     cy="446.66666"
+     r="25"
+     fill="#ffffff"
+     stroke="#990099"
+     stroke-width="2"
+     id="circle28" />
+  <text
+     x="704.0351"
+     y="451.66666"
+     text-anchor="middle"
+     class="word word-attribute"
+     id="text29"
+     style="-inkscape-font-specification:'Arial, sans-serif, Bold';font-family:Arial, sans-serif;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;font-size:10.6667px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-anchor:middle;fill:#990099">pequeno</text>
+  <circle
+     cx="732.98248"
+     cy="389.29825"
+     r="25"
+     fill="#ffffff"
+     stroke="#990099"
+     stroke-width="2"
+     id="circle29" />
+  <text
+     x="732.98248"
+     y="394.29825"
+     text-anchor="middle"
+     class="word word-attribute"
+     id="text30">rápido</text>
+  <circle
+     cx="617.19299"
+     cy="459.82455"
+     r="25"
+     fill="#ffffff"
+     stroke="#990099"
+     stroke-width="2"
+     id="circle30" />
+  <text
+     x="617.89471"
+     y="464.1228"
+     text-anchor="middle"
+     class="word word-attribute"
+     id="text31">lento</text>
+  <circle
+     cx="678.5965"
+     cy="368.94736"
+     r="25"
+     fill="#ffffff"
+     stroke="#990099"
+     stroke-width="2"
+     id="circle31" />
+  <text
+     x="678.5965"
+     y="373.94736"
+     text-anchor="middle"
+     class="word word-attribute"
+     id="text32">bonito</text>
+  <!-- Relation Dashed Lines -->
+  <!-- Between 'gato' and 'cachorro' (semantic similarity) -->
+  <line
+     x1="197.89473"
+     y1="180.70175"
+     x2="157.89473"
+     y2="230.70175"
+     stroke="#3366cc"
+     stroke-width="2"
+     stroke-dasharray="5, 3"
+     id="line32" />
+  <!-- Between 'leão' and 'tigre' (semantic similarity) -->
+  <line
+     x1="254.91228"
+     y1="207.01755"
+     x2="304.91229"
+     y2="247.01755"
+     stroke="#3366cc"
+     stroke-width="2"
+     stroke-dasharray="5, 3"
+     id="line33" />
+  <!-- Between 'correr' and 'andar' (semantic similarity) -->
+  <line
+     x1="197.89473"
+     y1="389.1228"
+     x2="247.89473"
+     y2="429.1228"
+     stroke="#109618"
+     stroke-width="2"
+     stroke-dasharray="5, 3"
+     id="line34" />
+  <!-- Between 'grande' and 'pequeno' (antonyms) -->
+  <line
+     x1="612.17828"
+     y1="390.13992"
+     x2="694.66376"
+     y2="439.33377"
+     stroke="#990099"
+     stroke-width="2.84878"
+     stroke-dasharray="5, 3"
+     id="line35" />
+  <!-- Between 'rápido' and 'lento' (antonyms) -->
+  <line
+     x1="712.63159"
+     y1="397.01755"
+     x2="632.63159"
+     y2="457.01755"
+     stroke="#990099"
+     stroke-width="2"
+     stroke-dasharray="5, 3"
+     id="line36" />
+  <!-- Analogy Example: rei-homem+mulher=rainha -->
+  <!-- Analogy visualization -->
+  <!-- Legend -->
+  <rect
+     x="100"
+     y="510"
+     width="700"
+     height="70"
+     fill="white"
+     stroke="#dddddd"
+     stroke-width="1"
+     rx="10"
+     ry="10"
+     id="rect40" />
+  <text
+     x="450"
+     y="530"
+     text-anchor="middle"
+     class="legend-title"
+     id="text41">Legenda</text>
+  <circle
+     cx="187.89473"
+     y="550"
+     r="8"
+     fill="#3366cc"
+     id="circle41"
+     cy="131.92982" />
+  <text
+     x="254.1228"
+     y="555.70178"
+     class="legend-text word-animal"
+     id="text42">Animais</text>
+  <circle
+     cx="607.19299"
+     y="550"
+     r="8"
+     fill="#dc3912"
+     id="circle42"
+     cy="133.33333" />
+  <text
+     x="354.1228"
+     y="555.70178"
+     class="legend-text word-object"
+     id="text43">Objetos</text>
+  <circle
+     cx="194.91228"
+     y="550"
+     r="8"
+     fill="#109618"
+     id="circle43"
+     cy="332.63159" />
+  <text
+     x="454.1228"
+     y="555.70178"
+     class="legend-text word-action"
+     id="text44">Ações</text>
+  <circle
+     cx="592.45612"
+     y="550"
+     r="8"
+     fill="#990099"
+     id="circle44"
+     cy="333.33334" />
+  <text
+     x="554.1228"
+     y="555.70178"
+     class="legend-text word-attribute"
+     id="text45">Atributos</text>
+  <line
+     x1="614.1228"
+     y1="550.70178"
+     x2="654.1228"
+     y2="550.70178"
+     stroke="#000000"
+     stroke-width="2"
+     stroke-dasharray="5, 3"
+     id="line45" />
+</svg>
