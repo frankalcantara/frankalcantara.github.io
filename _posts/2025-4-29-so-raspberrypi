@@ -1,0 +1,203 @@
+
+## Roteiro de Configuração do Ambiente de Desenvolvimento com WSL2**
+
+Este guia detalha a instalação do WSL2 e das ferramentas necessárias dentro dele para o desenvolvimento de sistemas operacionais para ARM.
+
+**1. Instalar ou Atualizar o WSL2 e Instalar o Ubuntu**
+
+Se você já tem o WSL instalado, o comando de instalação abaixo também funciona para garantir que você está usando a versão mais recente e atualizar o kernel do WSL. Ele instala o WSL e define o WSL2 como padrão, além de instalar uma distribuição Ubuntu (geralmente a versão LTS mais recente).
+
+* Abra o **Prompt de Comando** ou **PowerShell** no Windows como **Administrador**.
+
+```bash
+wsl --install
+```
+
+* Siga as instruções na tela. Isso pode levar alguns minutos. Você será solicitado a criar um nome de usuário e senha para a sua nova distribuição Ubuntu.
+* Se você já tinha o WSL e apenas quer garantir que está no WSL2 e atualizado:
+
+```bash
+wsl --set-default-version 2
+wsl --update
+```
+* Verifique a versão instalada (deve mostrar Ubuntu como WSL2):
+
+```bash
+wsl -l -v
+
+**2. Acessando o Ambiente Ubuntu no WSL**
+
+* Existem algumas maneiras de abrir o terminal da sua distribuição Ubuntu no WSL:
+    * Abra o menu Iniciar do Windows e digite "Ubuntu" e clique no aplicativo.
+    * Abra o Prompt de Comando ou PowerShell e digite `wsl`.
+    * No Explorador de Arquivos do Windows, digite `\\wsl$` na barra de endereço. Clique na sua distribuição Ubuntu e abra uma pasta, depois digite `cmd` ou `wt` (Windows Terminal) na barra de endereço para abrir um terminal nesse local dentro do WSL.
+
+* Para o restante deste guia, execute os comandos dentro do terminal Ubuntu no WSL.
+
+**3. Atualizando o Sistema e Instalando Ferramentas Essenciais**
+
+É fundamental garantir que seu sistema Ubuntu dentro do WSL esteja atualizado e que as ferramentas básicas para compilação e download estejam disponíveis.
+
+```bash
+sudo apt update
+sudo apt upgrade -y
+sudo apt install -y build-essential wget tar git
+
+* `build-essential`: Instala pacotes necessários para compilar software.
+* `wget`: Ferramenta para baixar arquivos da internet.
+* `tar`: Ferramenta para manipular arquivos `.tar`.
+* `git`: Sistema de controle de versão, útil para baixar código-fonte.
+
+**4. Instalando o Cross-Compiler ($gcc-arm-none-eabi$)**
+
+Precisamos de um compilador que rode no seu ambiente Linux (WSL) mas gere código para a arquitetura ARM (do Raspberry Pi).
+
+* Acesse o site oficial da ARM para baixar a versão mais recente do `gcc-arm-none-eabi` para Linux x86_64. Você pode procurar por "GNU Toolchain for the A-profile Architecture" ou similar.
+* Use `wget` no terminal WSL para baixar o arquivo diretamente para o seu diretório home (`~`). Assumindo que você baixou o arquivo para `~/Downloads/` e o nome do arquivo é similar a `gcc-arm-none-eabi-X-XXXX-XX-update-linux.tar.bz2`:
+
+```bash
+# Crie um diretório para as ferramentas, se desejar, dentro do seu home no WSL
+mkdir ~/opt/cross
+cd ~/opt/cross
+
+# Mova o arquivo baixado para o diretório (ajuste o caminho e nome do arquivo)
+mv ~/Downloads/gcc-arm-none-eabi-X-XXXX-XX-update-linux.tar.bz2 .
+
+# Extraia o arquivo
+tar -xf gcc-arm-none-eabi-X-XXXX-XX-update-linux.tar.bz2
+
+# Remova o arquivo compactado para economizar espaço
+rm gcc-arm-none-eabi-X-XXXX-XX-update-linux.tar.bz2
+
+* **Adicionando o Cross-Compiler ao PATH:** Para usar o compilador de qualquer lugar no terminal WSL, adicione o diretório `bin` dele à variável de ambiente `$PATH`. Edite o arquivo `~/.bashrc`:
+
+```bash
+nano ~/.bashrc
+
+* Adicione a seguinte linha ao final do arquivo (ajuste o caminho `gcc-arm-none-eabi-X-XXXX-XX-update` conforme a versão que você baixou):
+
+```bash
+export PATH="$PATH:$HOME/opt/cross/gcc-arm-none-eabi-X-XXXX-XX-update/bin"
+
+* Salve e feche o editor (`Ctrl+X`, `Y`, `Enter`).
+* Recarregue o `~/.bashrc` para que as mudanças tenham efeito na sessão atual:
+
+```bash
+source ~/.bashrc
+
+* **Verificar a instalação:**
+
+```bash
+arm-none-eabi-gcc --version
+
+Você deverá ver a versão do compilador ARM instalada.
+
+**5. Instalando o QEMU (Compilando da Fonte - Versão 2.11.0 ou Superior)**
+
+O texto indica a necessidade da versão 2.11.0 ou superior do QEMU para emular o hardware do Raspberry Pi. Compilaremos da fonte dentro do WSL.
+
+* **Instalar dependências para compilação do QEMU no WSL:**
+
+```bash
+sudo apt install -y libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev
+
+* **Baixar o código-fonte do QEMU (versão 2.11.0 conforme texto):**
+
+```bash
+cd ~
+wget https://download.qemu.org/qemu-2.11.0.tar.xz
+
+* **Extrair o código-fonte:**
+
+```bash
+tar xvJf qemu-2.11.0.tar.xz
+
+* **Navegar para o diretório do QEMU e configurar a compilação:** O texto especifica os targets `$arm-softmmu$` e `$arm-linux-user$`.
+
+```bash
+cd qemu-2.11.0
+./configure --target-list=arm-softmmu,arm-linux-user
+
+* **Compilar o QEMU:** O `-j` seguido de um número especifica quantos processos usar. Use um número razoável (ex: 2, 4) dependendo dos núcleos alocados ao WSL2.
+
+```bash
+make -j 2
+
+* **Instalar o QEMU:**
+
+```bash
+sudo make install
+
+* **Verificar a instalação do QEMU:**
+
+```bash
+qemu-system-arm --version
+
+Você deverá ver a versão do QEMU instalada (2.11.0 ou superior).
+
+**6. Instalando o VS Code no Windows e a Extensão Remote - WSL**
+
+VS Code será seu editor principal, rodando no Windows, mas interagindo com o ambiente WSL.
+
+* Se ainda não tiver, baixe e instale o **VS Code para Windows** do site oficial (code.visualstudio.com).
+* Abra o VS Code no Windows.
+* Vá para a aba de Extensões (`Ctrl+Shift+X`).
+* Procure por "Remote - WSL" e instale a extensão fornecida pela Microsoft.
+* Após instalar a extensão, você verá um ícone verde no canto inferior esquerdo do VS Code. Clique nele e selecione "New WSL Window" ou "Connect to WSL". O VS Code irá reabrir conectado ao seu ambiente WSL.
+
+**7. Configurando C++20 no VS Code para o Projeto (dentro do WSL)**
+
+Seus arquivos de projeto (código fonte do OS, scripts linker, etc.) devem estar localizados dentro do sistema de arquivos do WSL (por exemplo, no seu diretório home `~`). O VS Code conectado via Remote - WSL acessará esses arquivos diretamente.
+
+* Abra a pasta do seu projeto OS no VS Code (usando "File" -> "Open Folder" dentro da janela WSL do VS Code).
+* Instale a extensão "C/C++" da Microsoft *dentro da janela WSL do VS Code* (ela será instalada no ambiente WSL).
+* Dentro do diretório `.vscode` do seu projeto, configure os arquivos `tasks.json` (para compilação) e `c_cpp_properties.json` (para IntelliSense) para usar o cross-compiler instalado no WSL. Os caminhos para os executáveis do compilador e do linker estarão no formato Linux (ex: `/home/seu_usuario/opt/cross/.../bin/arm-none-eabi-gcc`).
+
+    Exemplo básico de `tasks.json`:
+
+:json
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build os",
+            "type": "shell",
+            "command": "/home/seu_usuario/opt/cross/gcc-arm-none-eabi-X-XXXX-XX-update/bin/arm-none-eabi-g++ -std=c++20 -O2 -Wall -Wextra -ffreestanding -nostdlib -nostdinc -I. -c your_source_file.cpp -o your_source_file.o && /home/seu_usuario/opt/cross/gcc-arm-none-eabi-X-XXXX-XX-update/bin/arm-none-eabi-ld -T linker.ld your_source_file.o -o your_kernel.elf",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        }
+    ]
+}
+
+    * **Nota:** Ajuste `/home/seu_usuario/opt/cross/gcc-arm-none-eabi-X-XXXX-XX-update/bin/` para o caminho exato onde você instalou o cross-compiler no WSL. Substitua `your_source_file.cpp`, etc., pelos nomes reais. Inclua as flags do compilador e linker necessárias para seu projeto (a flag `-std=c++20` habilita o padrão C++20).
+
+    Exemplo básico de `c_cpp_properties.json`:
+
+:json
+{
+    "configurations": [
+        {
+            "name": "ARM",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "compilerPath": "/home/seu_usuario/opt/cross/gcc-arm-none-eabi-X-XXXX-XX-update/bin/arm-none-eabi-gcc", // Ajuste o caminho
+            "cStandard": "c11",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "gcc-x64" // Geralmente funciona bem para o IntelliSense mesmo com cross-compiler
+        }
+    ],
+    "version": 4
+}
+
+    * **Nota:** Ajuste `"/home/seu_usuario/opt/cross/gcc-arm-none-eabi-X-XXXX-XX-update/bin/arm-none-eabi-gcc"` para o caminho exato do seu cross-compiler no WSL.
+
+**8. Ambiente Pronto**
+
+Com o WSL2 configurado, o Ubuntu instalado e atualizado, o cross-compiler ARM e o QEMU compilados/instalados no WSL, e o VS Code no Windows configurado via Remote - WSL para acessar suas ferramentas e arquivos, seu ambiente de desenvolvimento está pronto para começar a criar o sistema operacional para Raspberry Pi Zero/B, interagindo com o hardware emulado pelo QEMU.

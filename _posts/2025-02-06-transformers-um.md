@@ -31,7 +31,7 @@ keywords: |-
     inteligência artificial
 toc: true
 published: true
-lastmod: 2025-04-28T21:29:15.446Z
+lastmod: 2025-04-28T21:43:25.009Z
 ---
 
 Neste artigo, a curiosa leitora irá enfrentar os *Transformers*. Nenhuma relação com o o Optimus Prime. Se for estes *Transformers* que está procurando, **o Google falhou com você!**
@@ -79,7 +79,11 @@ $$
 
 Quando representarmos palavras (termos), ou documentos, como vetores, estaremos mapeando elementos linguísticos para pontos em um espaço dado por $\mathbb{R}^n$. Neste caso, a dimensão $n$ será determinada pelo método específico de vetorização que escolhermos.
 
-Ao converter textos e elementos linguísticos em representações vetoriais, criamos *word embeddings*. Técnicas que mapeiam palavras ou frases para vetores de números reais. Esta representação tenta capturar tanto o significado semântico quanto as relações contextuais entre palavras em um espaço vetorial contínuo. Um desenvolvimento importante nesse campo são os Mecanismos de Atenção, que utilizam vetores de consulta (*query*), chave (*key*) e valor (*value*) como componentes essenciais. Estes mecanismos constituem o núcleo da arquitetura dos *Transformers*, permitindo que o modelo pondere a importância relativa de diferentes elementos em uma sequência, melhorando significativamente a capacidade de processamento de dependências de longo alcance em textos. Para entender isso, precisamos entender como fazer operações algébricas com vetores.
+Ao converter textos e elementos linguísticos em representações vetoriais, criamos *word embeddings*. Técnicas que mapeiam palavras ou frases para vetores de números reais. Esta representação tenta capturar tanto o significado semântico quanto as relações contextuais entre palavras em um espaço vetorial contínuo. 
+
+>Embeddings são representações vetoriais densas de palavras ou frases, onde cada dimensão captura uma característica semântica ou gramatical.
+
+Um desenvolvimento importante no campo do processamento de linguagem natural está sintetizado nos Mecanismos de Atenção, que utilizam vetores de consulta (*query*), chave (*key*) e valor (*value*) como componentes essenciais. Estes mecanismos constituem o núcleo da arquitetura dos *Transformers*, permitindo que o modelo pondere a importância relativa de diferentes elementos em uma sequência, melhorando significativamente a capacidade de processamento de dependências de longo alcance em textos. Para entender isso, precisamos entender como fazer operações algébricas com vetores.
 
 ### Operações com Vetores
 
