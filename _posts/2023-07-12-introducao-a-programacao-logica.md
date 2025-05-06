@@ -7,23 +7,23 @@ date: 2023-07-13T02:50:56.534Z
 preview: ""
 image: assets/images/prolog1.webp
 tags:
-   - Lógica
-   - Programação Lógica
-   - Prolog
+    - Lógica
+    - Programação Lógica
+    - Prolog
 categories:
-   - disciplina
-   - Lógica
-   - material de Aula
-   - matemática
+    - disciplina
+    - Lógica
+    - material de Aula
+    - matemática
 rating: 5
 slug: decifrando-misterios-jornada-da-programacao-logica
 keywords:
-   - lógica
-   - Programação
-   - Programação Lógica
+    - lógica
+    - Programação
+    - Programação Lógica
 draft: true
 toc: true
-lastmod: 2025-04-19T00:22:29.881Z
+lastmod: 2025-05-06T11:04:17.734Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 

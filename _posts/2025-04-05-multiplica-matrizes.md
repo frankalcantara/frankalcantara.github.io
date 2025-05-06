@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Multiplicação de Matrizes
-author: frank
+author: Frank
 categories:
     - disciplina
     - Matemática
@@ -32,7 +32,7 @@ keywords: |-
     inteligência artificial
 toc: true
 published: true
-lastmod: 2025-04-17T22:43:28.976Z
+lastmod: 2025-05-06T11:04:17.985Z
 ---
 
 A multiplicação de matrizes pode, sem dúvida, ser um dos tópicos mais importantes dos modelos de linguagem, e aprendizagem de máquina, disponíveis no mercado atualmente. Neste artigo, vamos explorar alguns algoritmos para multiplicação de matrizes, suas aplicações e como ele se relaciona com o funcionamento de modelos de aprendizado profundo, como os Transformers, que estamos estudando ([aqui](https://frankalcantara.com/voce-pensa-como-fala/),[aqui](https://frankalcantara.com/transformers-um/) e [aqui](https://frankalcantara.com/transformers-dois/)).

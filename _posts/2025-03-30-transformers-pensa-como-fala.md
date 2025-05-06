@@ -11,7 +11,7 @@ tags:
     - Matemática
     - resolução de problemas
 rating: 5
-lastmod: 2025-04-19T00:29:26.715Z
+lastmod: 2025-05-06T11:04:17.694Z
 description: Explore a hipótese de Sapir-Whorf e como diferentes línguas podem influenciar nossa percepção, cognição e visão de mundo.
 date: 2025-03-30T23:39:04.699Z
 keywords: hipótese de Sapir-Whorf, relatividade linguística, determinismo linguístico, influência da linguagem no pensamento, Edward Sapir, Benjamin Lee Whorf, percepção de cores, cognição espacial, categorização linguística, linguística cognitiva

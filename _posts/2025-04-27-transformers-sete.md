@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Transformers - Word2Vec, a Ponte para o Contexto
-author: frank
+author: Frank
 categories:
     - disciplina
     - Matemática
@@ -41,7 +41,7 @@ keywords: |-
     Embeddings Contextuais
 toc: true
 published: false
-lastmod: 2025-04-28T14:43:27.693Z
+lastmod: 2025-05-06T11:04:18.023Z
 ---
 
 ## Word2Vec: Aprofundando nas Representações Distribuídas

@@ -19,7 +19,7 @@ description: Uma abordagem formal à construção dos números naturais usando t
 date: 2025-03-23T18:42:57.053Z
 preview: Explore como a matemática formal constrói os números naturais e como podemos implementar essa lógica em Prolog.
 keywords: Números Naturais, Teoria ZFC, Axiomas de Peano, Prolog, Lógica de Primeira Ordem, Aritmética, Adição, Operações Recursivas, Teoria dos Conjuntos, Provas Formais, Matemática Computacional, Sucessor, Indução, Peano, Zermelo-Fraenkel
-lastmod: 2025-04-08T20:03:56.255Z
+lastmod: 2025-05-06T11:04:17.970Z
 slug: numeros-naturais-logica
 draft: 2025-03-23T18:43:05
 ---

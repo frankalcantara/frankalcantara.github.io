@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Transformers - Prestando Atenção
-author: frank
+author: Frank
 categories: |-
     disciplina
     Matemática
@@ -35,7 +35,7 @@ keywords: |-
     lstm
 toc: true
 published: true
-lastmod: 2025-04-25T13:56:50.970Z
+lastmod: 2025-05-06T11:04:17.991Z
 ---
 
 ## Superando Limitações Locais: Construindo a Ponte para a Atenção

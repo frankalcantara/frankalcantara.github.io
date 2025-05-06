@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Transformers - Redes Neurais Artificiais para Word Embedding
-author: frank
+author: Frank
 categories: |-
     disciplina
     Matemática
@@ -36,7 +36,7 @@ keywords: |-
     processamento de linguagem natural
 toc: true
 published: true
-lastmod: 2025-04-28T15:21:51.207Z
+lastmod: 2025-05-06T11:04:18.015Z
 draft: 2025-04-19T20:15:42.577Z
 ---
 

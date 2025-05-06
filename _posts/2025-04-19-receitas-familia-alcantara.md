@@ -33,7 +33,7 @@ preview: Estas são as receitas da Fran, minha esposa. Uma cozinheira de mão ch
 keywords: receitas, família, comida, culinária, dicas, prática, fácil, rápida, saborosa, saudável, simples, gostosa, tradicional, caseira
 toc: true
 published: true
-lastmod: 2025-04-20T00:09:39.253Z
+lastmod: 2025-05-06T11:04:17.999Z
 slug: mdp-casos-reais-manutencao-de-turbinas-eolicas
 ---
 

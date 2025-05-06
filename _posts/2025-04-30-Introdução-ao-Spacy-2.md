@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Explorando spaCy para Processamento de Linguagem Natural
-author: frank
+author: Frank
 categories:
     - tecnologia
     - inteligência artificial
@@ -38,7 +38,7 @@ keywords: |-
     Noun Chunks
 toc: true
 published: true
-lastmod: 2025-04-30T18:48:57.029Z
+lastmod: 2025-05-06T11:04:18.028Z
 ---
 
 ## Introdução ao spaCy: Uma Ferramenta Poderosa para PLN

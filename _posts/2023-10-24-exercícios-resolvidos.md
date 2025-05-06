@@ -18,7 +18,7 @@ preview: ""
 keywords: ""
 published: false
 slug: null
-lastmod: 2025-04-19T00:23:52.084Z
+lastmod: 2025-05-06T11:04:17.757Z
 ---
 
 ### Exercício 1

@@ -14,7 +14,7 @@ image: assets/images/prog_dynamic.webp
 keywords:
     - Dynamic Programming
     - C++ Algorithms
-lastmod: 2024-10-21T20:23:56.230Z
+lastmod: 2025-05-06T11:04:18.034Z
 layout: post
 preview: In this comprehensive guide, we delve into the world of Dynamic Programming with C++. Learn the core principles of Competitive Programming, explore various algorithmic examples, and understand performance differences through detailed code comparisons. Perfect for developers looking to optimize their coding skills and boost algorithm efficiency.
 published: false

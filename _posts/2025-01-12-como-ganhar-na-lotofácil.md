@@ -24,7 +24,7 @@ keywords: |
     Python
 toc: true
 published: true
-lastmod: 2025-04-08T19:52:34.437Z
+lastmod: 2025-05-06T11:04:17.866Z
 slug: como-ganhar-na-lotofacil-usando-inteligencia-artificial
 ---
 

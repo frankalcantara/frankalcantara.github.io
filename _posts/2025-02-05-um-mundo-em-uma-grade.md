@@ -44,7 +44,7 @@ keywords: |-
     Modelagem MDP
 toc: true
 published: true
-lastmod: 2025-04-12T14:36:33.778Z
+lastmod: 2025-05-06T11:04:17.933Z
 ---
 
 A esforçada leitora, se realmente quiser entender as técnicas e algoritmos de *Reinforcement Learning* - **RL**, deve começar com problemas simples. Não é qualquer problema. Problemas que permitam construir uma compreensão sólida dos princípios estruturantes desta tecnologia. É aqui que o **Grid World** brilha e se destaca.

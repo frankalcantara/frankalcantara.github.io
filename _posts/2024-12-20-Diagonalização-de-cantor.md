@@ -23,7 +23,7 @@ keywords: |-
 toc: false
 published: true
 beforetoc: Para colocar ordem na casa, a tradução de dois artigos de Georg Cantor sobre a não numerabilidade dos números reais.
-lastmod: 2025-04-18T19:03:19.345Z
+lastmod: 2025-05-06T11:04:17.858Z
 ---
 
 Triste é a sina de quem pretende entender.

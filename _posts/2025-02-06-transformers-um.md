@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Transformers - A Temida Matemática
-author: frank
+author: Frank
 categories:
     - disciplina
     - Matemática
@@ -31,7 +31,7 @@ keywords: |-
     inteligência artificial
 toc: true
 published: true
-lastmod: 2025-04-28T21:43:25.009Z
+lastmod: 2025-05-06T11:04:17.949Z
 ---
 
 Neste artigo, a curiosa leitora irá enfrentar os *Transformers*. Nenhuma relação com o o Optimus Prime. Se for estes *Transformers* que está procurando, **o Google falhou com você!**

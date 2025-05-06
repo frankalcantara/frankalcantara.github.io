@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Transformers - A Vetorização Básica
-author: frank
+author: Frank
 categories: |-
     disciplina
     Matemática
@@ -29,7 +29,7 @@ keywords: |-
     embeddings
 toc: true
 published: true
-lastmod: 2025-04-18T19:03:19.412Z
+lastmod: 2025-05-06T11:04:17.941Z
 ---
 
 Neste artigo aprenderemos as técnicas de vetorização mais básicas, como a frequência de termos e o modelo *Bag of Words* (BoW). Vamos discutir como essas técnicas são usadas para representar textos como vetores numéricos, permitindo que os computadores processem e analisem linguagem natural.

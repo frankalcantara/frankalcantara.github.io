@@ -12,7 +12,7 @@ date: 2023-08-21T13:29:48.211Z
 preview: ""
 keywords: ""
 published: false
-lastmod: 2025-04-19T00:22:59.127Z
+lastmod: 2025-05-06T11:04:17.716Z
 ---
 
 Imagine uma biblioteca, vasta e silenciosa. O mais importante repositório do conhecimento humano, mesmo hoje, em tempos de internet, nada se compara ao folhear de um livro. No entanto, só é realmente útil se os livros puderem ser consultados. Nessa nossa biblioteca, de sonhos e lembranças boas, os livros estão organizados em prateleiras e estas em seções. Entre tantas, há uma seção especial. Onde estão os livros puros, humildes, os livros que não se referem a si mesmos.

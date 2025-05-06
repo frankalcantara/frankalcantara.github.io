@@ -22,7 +22,7 @@ rating: 5
 published: 2024-06-21T19:41:42.444Z
 draft: 2024-06-21T19:41:40.386Z
 preview: Definição, processo de funcionamento e outras informações necessárias ao entendimento do funcionamento de parsers LL(1)
-lastmod: 2025-04-12T14:36:33.738Z
+lastmod: 2025-05-06T11:04:17.786Z
 ---
 
 A Tabela de Derivação $LL(1)$, também chamada de tabela da análise LL(1), é uma ferramenta fundamental do funcionamento do *parser* $LL(1)$. Esta tabela será utilizada no processo de *parser* para verificar se um determinado *string* está de acordo com a gramática da linguagem. Esta tabela será usada pelo algoritmo de *parser* para determinar qual regra de produção deverá ser aplicada, considerando o símbolo de entrada corrente e o não-terminal no topo de uma pilha. Este par de símbolos, (terminal / não-terminal) será usado como índice da tabela e determinará qual regra de produção deverá ser utilizada, ou se existe uma inconsistência entre a *string* de entrada e a gramática. Já vimos [o que é um parser](https://frankalcantara.com/parsers-ll(1)/), e como criar [os conjuntos $FIRST$ e $FOLLOW$](https://frankalcantara.com/first-follow/). Agora vamos usar este conhecimento para criar a Tabela de Derivação.

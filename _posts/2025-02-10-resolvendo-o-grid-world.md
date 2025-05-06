@@ -15,7 +15,7 @@ preview: Descubra como resolver o Grid World usando *Dynamic Programming* e C++ 
 keywords: Grid World *Reinforcement Learning* MDP Solution *Reinforcement Learning* Processo de Decisão de Markov Equações de Bellman Value Iteration Policy Iteration *Dynamic Programming* Dynamic Programming Política Ótima Optimal Policy
 toc: true
 published: true
-lastmod: 2025-04-18T19:03:19.445Z
+lastmod: 2025-05-06T11:04:17.956Z
 draft: 2025-02-10T09:29:19.442Z
 ---
 

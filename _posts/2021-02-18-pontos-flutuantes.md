@@ -3,19 +3,19 @@ layout: post
 title: Os desafios da norma IEEE 754 na computação moderna
 author: Frank
 categories:
-  - artigo
-  - Matemática
-  - computação
+    - artigo
+    - Matemática
+    - computação
 tags:
-  - interpretadores
-  - estrutura de dados
-  - modelagem
+    - interpretadores
+    - estrutura de dados
+    - modelagem
 image: assets/images/pontosflutu.webp
 preview: um estudo novo sobre uma das normas mais importantes e menos conhecidas de toda a ciência da computação.
 featured: false
 rating: 3.5
 slug: precisao-realidade-os-desafios-da-norma-ieee-754-na-computacao-moderna
-lastmod: 2025-01-30T01:05:09.022Z
+lastmod: 2025-05-06T11:04:17.702Z
 date: 2024-12-20T20:07:14.934Z
 published: true
 ---

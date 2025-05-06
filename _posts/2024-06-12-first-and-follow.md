@@ -22,7 +22,7 @@ rating: 5
 published: 2024-06-12T13:16:53.564Z
 draft: 2024-06-12T13:00:39.229Z
 preview: Como construir os conjuntos First  e Follow que irão permitir a criação da tabela de análise para o algoritmo de parser.
-lastmod: 2025-04-19T00:26:04.074Z
+lastmod: 2025-05-06T11:04:17.778Z
 ---
 
 Não dá nem para começar a pensar em criar um *parser* $LL(1)$ se não entender os conjuntos $FIRST$ e $FOLLOW$. [Também não dá para entender estes conjuntos se não souber o que é um *parser* $LL(1)$](https://frankalcantara.com/parsers-ll(1)/) Imagine que você está aprendendo um novo idioma. Para formar frases corretas, você precisará entender quais palavras podem vir antes ou depois de outras. Ou corre o risco de falar como o Yoda. Se quiser evitar ser confundido com um velho alienígena, precisa aprender, no mínimo, a ordem das palavras, muito antes de entender a classe gramatical destas mesmas palavras. Como uma criança aprendendo a falar.

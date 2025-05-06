@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Transformers - embeddings Distribuídos
-author: frank
+author: Frank
 categories: |-
     disciplina
     Matemática
@@ -36,7 +36,7 @@ keywords: |-
     lstm
 toc: true
 published: true
-lastmod: 2025-04-28T16:57:19.747Z
+lastmod: 2025-05-06T11:04:18.006Z
 draft: 2025-04-20T00:15:42.577Z
 ---
 

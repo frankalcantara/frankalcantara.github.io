@@ -18,7 +18,7 @@ slug: origem-da-verdade-parte-1
 rating: 5
 featured: false
 published: true
-lastmod: 2025-04-19T00:17:07.732Z
+lastmod: 2025-05-06T11:04:17.710Z
 ---
 
 Na vastidão do tempo, aproximadamente quatro milênios atrás, encontra-se o primeiro murmúrio de descontentamento de um cliente, um grão solitário na areia do relógio. Isso ocorreu no solo da Suméria, no domínio exuberante da Babilônia, onde a verdade era tão valorizada, tão sagrada, que sua ausência precisou ser registrada para se tornar uma marca, uma cicatriz na face do tempo.

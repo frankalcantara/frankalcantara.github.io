@@ -3,12 +3,12 @@ layout: post
 title: "Odisseia da Computação: a linguagem silenciosa do progresso"
 author: Frank
 categories:
-  - artigo
-  - História
+    - artigo
+    - História
 tags:
-  - algoritmos
-  - computação
-  - inteligência artificial
+    - algoritmos
+    - computação
+    - inteligência artificial
 image: assets/images/eniac1.webp
 featured: 2023-07-29T13:12:06.465Z
 rating: 5
@@ -17,6 +17,7 @@ date: 2023-07-29T13:12:06.465Z
 preview: Pequena história da Computação.
 keywords: ""
 slug: odisseia-da-computacao-linguagem-silenciosa-progresso
+lastmod: 2025-05-06T11:04:17.721Z
 ---
 
 No princípio, havia o ábaco, simples e estritamente funcional, riscado na madeira e pontilhado com pedras que contavam histórias nas mãos ásperas dos primeiros civis do Levante. Um instrumento humilde, mas honesto em sua utilidade. Então, veio a inteligência artificial, uma entidade incorpórea, nascida do intelecto humano e empregada na tarefa de pesquisa e escrita. Havia uma beleza austera em sua existência, uma homenagem ao progresso e ao engenho humano. Entre o ábaco e a inteligência artificial, o tempo passou implacavelmente, 70000 luas trilhando seu curso, pontuando a marcha inexorável da humanidade na escuridão do tempo.

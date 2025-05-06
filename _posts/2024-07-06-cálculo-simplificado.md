@@ -3,13 +3,13 @@ layout: post
 title: Cálculo Simplificado
 author: Frank
 categories:
-  - matemática
+    - matemática
 tags:
-  - matemática
-  - cálculo
-  - álgebra
-  - exercícios
-  - problemas resolvidos
+    - matemática
+    - cálculo
+    - álgebra
+    - exercícios
+    - problemas resolvidos
 image: assets/images/prog_dynamic.webp
 featured: false
 rating: 5
@@ -21,7 +21,7 @@ toc: true
 published: false
 slug: calculo-simplificado
 draft: 2024-07-06T19:30:40.256Z
-lastmod: 2025-04-19T00:36:42.576Z
+lastmod: 2025-05-06T11:04:17.830Z
 ---
 
 O livro **Calculus Made Easy** de [SILVANUS P. THOMPSON](https://en.wikipedia.org/wiki/Silvanus_P._Thompson) foi colocado em domínio público, tanto no Brasil quanto nos EUA. Este é um dos melhores livros introdutórios de cálculo já escrito. Simples, direto e abrangente. Sem nenhuma modéstia, ou vergonha na cara, escolhi este livro para tradução, atualização e expansão. Na esperança de criar um material atualizado para o ensino e fomento do cálculo entre alguns estudantes de língua portuguesa. Vou traduzir, atualizar, comentar e expandir o conteúdo. Contudo, como o livro é ótimo, algumas coisas precisam ser mantidas o mais original possível por curiosidade e pelo valor cultural. Um bom exemplo é a brincadeira da capa:

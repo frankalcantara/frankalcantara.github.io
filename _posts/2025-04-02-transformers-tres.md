@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Transformers- Desvendando a Modelagem de Sequências
-author: frank
+author: Frank
 categories: |-
     disciplina
     Matemática
@@ -35,7 +35,7 @@ keywords: |-
     lstm
 toc: true
 published: true
-lastmod: 2025-04-26T01:15:01.305Z
+lastmod: 2025-05-06T11:04:17.977Z
 draft: 2025-04-17T18:49:57.828Z
 slug: transformers-desvendando-modelagem-de-sequencias
 ---

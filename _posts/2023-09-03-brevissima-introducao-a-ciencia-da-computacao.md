@@ -20,7 +20,7 @@ keywords: ""
 slug: brevissima-introducao-a-ciencia-da-computacao
 draft: 2023-09-29T21:53:10.540Z
 published: false
-lastmod: 2025-04-18T19:03:19.335Z
+lastmod: 2025-05-06T11:04:17.750Z
 ---
 Nesta jornada exploraremos as profundezas da álgebra abstrata, começando nos conceitos de conjuntos, nos levando a uma análise de relações e funções. Este é o ponto de partida, onde lançamos as bases para uma compreensão mais profunda das estruturas matemáticas que virão a seguir, desde as simples _magmas_ até os mais complexos anéis, corpos, monads e tipos. À medida que avançarmos o terreno se tornará mais complexo e intrigante. Explorarmos categorias, morfismos e, tipos e tipos paramétricos.
 
