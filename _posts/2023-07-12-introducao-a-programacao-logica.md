@@ -49,7 +49,7 @@ Em resumo: **programação imperativa** focada no processo, no _como_ chegar à 
 
 Sua escolha, pessoal e intransferível, entre estes paradigmas dependerá da aplicação que será construída, tanto quanto dependerá do estilo do programador. Contudo, o futuro parece cada vez mais orientado para linguagens descritivas, que permitam ao programador concentrar-se no problema, não nos detalhes da solução. Efeito que parece ser evidente se considerarmos os avanços da segunda década no século XX no campo da Inteligência Artificial. Este documento contém a base matemática que suporta o entendimento da programação lógica e um pouco de Prolog, como linguagem de programação para solução de problemas. Será uma longa jornada.
 
-Em nossa jornada, percorreremos a **Lógica de Primeira Ordem**. Esta será a nossa primeira rota, que iremos subdividir em elementos interligados e interdependentes e, sem dúvida, de mesma importância e valor: a _lógica Proposicional_ e a _lógica Predicativa_. Não deixe de notar que muitos dos nossos companheiros de viagem, aqueles restritos à academia, podem não entender as sutilezas desta divisão. A estes, deixo a justificativa, meio rota e meio esfarrapada da necessidade do uso da didática para a estruturação do aprendizado. Pobre do professor que ignora as mazelas enfrentadas por seus alunos. Condenado está a falar às paredes.
+Em nossa jornada, percorreremos a **Lógica de Primeira Ordem**. Esta será a nossa primeira rota, que iremos subdividir em elementos interligados e interdependentes e, sem dúvida, de mesma importância e valor: a _lógica Proposicional_ e a _lógica Predicativa_. Não deixe de notar que muitos dos nossos companheiros de viagem, aqueles restritos à academia, podem não entender as sutilezas desta divisão.
 
 Pretensioso este timoneiro tenta não ser. Partiremos da _Lógica Proposicional_ com esperança de encontrar bons ventos que nos levem até o Prolog.
 
@@ -59,7 +59,7 @@ Vamos enfrentar a inferência e a dedução, duas ferramentas para extração de
 
 Nossos mares não serão brandos, mas não nos furtaremos a enfrentar as especificidades da **Cláusula de Horn**, um conceito um pouco mais estranho. Uma regra que torna todos os problemas expressos em lógica mais fácies de resolver. Como um mapa que, se seguido corretamente, torna o processo de descobrir a verdade mais simples. Muito mais simples, até mesmo passível de automatização.
 
-No final do dia, cansados, porém felizes, vamos entender que, desde os tempos de [Gödel](https://en.wikipedia.org/wiki/Kurt_Gödel), [Turing](https://en.wikipedia.org/wiki/Alan_TurinQ) e [Church](https://en.wikipedia.org/wiki/Alonzo_ChurcR), tudo que queremos é que nossas máquinas sejam capazes de resolver problemas complexos com o mínimo de interferência nossa. Queremos que elas pensem, ou pelo menos, que simulem o pensamento. Aqui, neste objetivo, entre as pérolas mais reluzentes da evolução humana destaca-se a Programação Lógica.
+No final do dia, cansados, porém felizes, vamos entender que, desde os tempos de [Gödel](https://en.wikipedia.org/wiki/Kurt_Gödel), [Turing](https://en.wikipedia.org/wiki/Alan_Turing) e [Church](https://en.wikipedia.org/wiki/Alonzo_Church), tudo que queremos é que nossas máquinas sejam capazes de resolver problemas complexos com o mínimo de interferência nossa. Queremos que elas pensem, ou pelo menos, que simulem o pensamento. Aqui, neste objetivo, entre as pérolas mais reluzentes da evolução humana destaca-se a Programação Lógica.
 
 Como diria [Newton](https://en.wikipedia.org/wiki/Isaac_Newton) chegamos até aqui porque nos apoiamos nos ombros de gigantes. O termo Programação Lógica aparece em meados dos anos 1970 como uma evolução dos esforços nas pesquisas sobre a prova computacional de teoremas matemáticos e Inteligência Artificial. O homem querendo fazer máquinas capazes de raciocinar como o homem. Deste esforço surgiu a esperança de que poderíamos usar a lógica como uma linguagem de programação, em inglês, _programming logic_, ou Prolog. Aqui está a base deste conhecimento.
 
@@ -143,42 +143,42 @@ As declarações atômicas e compostas são costuradas por conectivos para produ
  <tr style="background-color: #eeeeee;">
  <td style="border-right: 1px solid gray;">T</td>
  <td style="border-right: double gray;">T</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">T</td>
- <td style="width:16.8%;">F</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
+ <td style="width:16.8%;">$F$</td>
  </tr>
  <tr>
  <td style="border-right: 1px solid gray;">T</td>
  <td style="border-right: double gray;">F</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">F</td>
- <td style="width:16.8%;">T</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
+ <td style="width:16.8%;">$T$</td>
  </tr>
  <tr style="background-color: #eeeeee;">
  <td style="border-right: 1px solid gray;">F</td>
  <td style="border-right: double gray;">T</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">F</td>
- <td style="width:16.8%;">T</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
+ <td style="width:16.8%;">$T$</td>
  </tr>
  <tr style="border-bottom: 2px solid gray;">
- <td style="border-right: 1px solid gray;">F</td>
- <td style="border-right: double gray;">F</td>
+ <td style="border-right: 1px solid gray;">$F$</td>
+ <td style="border-right: double gray;">$F$</td>
  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">T</td>
- <td style="width:16.8%;">F</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
+ <td style="width:16.8%;">$F$</td>
  </tr>
 </table>
 <legend style="font-size: 1em;
@@ -232,7 +232,7 @@ Cada operador com sua própria aridade:
  text-align: center;
  margin-bottom: 20px;">Tabela 2 - Aridade dos Operadores da Lógica Proposicional.</legend>
 
-Ainda observando a Tabela 1, que contem a Tabela Verdade dos operadores da Lógica Proposicional, é fácil perceber que se tivermos quatro termos diferentes, em vez de dois, teremos $2^4 = 16$ linhas. Independente do número de termos, se para uma determinada Fórmula Bem Formada todos os resultados forem verdadeiros, $T$, teremos uma _tautologia_, se todos forem falsos, $f$ uma _contradição_.
+Ainda observando a Tabela 1, que contem a Tabela Verdade dos operadores da Lógica Proposicional, é fácil perceber que se tivermos quatro termos diferentes, em vez de dois, teremos $2^4 = 16$ linhas. Independente do número de termos, se para uma determinada Fórmula Bem Formada todos os resultados forem verdadeiros, $T$, teremos uma _tautologia_, se todos forem falsos, $F$ uma _contradição_.
 
 **Uma tautologia é uma fórmula que é sempre verdadeira, não importa os valores dados às variáveis**. Na Programação Lógica, tautologias são verdades universais no domínio do problema. Uma contradição é uma fórmula que é sempre falsa, independente dos valores das variáveis. Em Programação Lógica, contradições mostram inconsistências ou impossibilidades lógicas no domínio.
 
@@ -328,12 +328,12 @@ Linguagens de programação que usam a Programação Lógica usam **unificação
  </tr>
  <tr>
   <td style="text-align: center; width: 50%;">$P\wedge F \equiv F$</td>
-  <td style="text-align: center; width: 30%;">Lei da Idempotência para a Conjunção</td>
+  <td style="text-align: center; width: 30%;">Lei do Domínio</td>
   <td style="text-align: center; width: 20%;">(18)</td>
  </tr>
  <tr style="background-color: #f2f2f2;">
   <td style="text-align: center; width: 50%;">$P\vee F \equiv P$</td>
-  <td style="text-align: center; width: 30%;">Lei da Idempotência para a Disjunção</td>
+  <td style="text-align: center; width: 30%;">Lei da Identidade</td>
   <td style="text-align: center; width: 20%;">(19)</td>
  </tr>
  <tr>
@@ -407,26 +407,38 @@ $$
  \end{align*}
 $$
 
-**Exemplo 6:**
-$P\wedge (Q \vee (R \rightarrow S)) \vee (\neg E \leftrightarrow P)$
+**Exemplo 6:** $P\wedge (Q \vee (R \rightarrow S)) \vee (\neg E \leftrightarrow P)$
+
+Vamos simplificar a expressão passo a passo, indicando as leis da Tabela 3 utilizadas:
 
 $$
 \begin{align*}
-P \wedge (Q \vee (R \rightarrow S)) \vee (\neg E \leftrightarrow P) &\equiv P \wedge (Q \vee (\neg R \vee S)) \vee ((\neg E \wedge P) \vee (E \wedge \neg P)) && \text{(1)}\\
-&\equiv (P \wedge Q) \vee (P \wedge (\neg R \vee S)) \vee ((\neg E \wedge P) \vee (E \wedge \neg P)) && \text{(2)}\\
-&\equiv (P \wedge Q) \vee (P \wedge \neg R) \vee (P \wedge S) \vee (\neg E \wedge P) \vee (E \wedge \neg P) && \text{(3)}
+&P\wedge (Q \vee (R \rightarrow S)) \vee (\neg E \leftrightarrow P) \\
+&\equiv P\wedge (Q \vee (\neg R \vee S)) \vee ((\neg E \rightarrow P) \wedge (P \rightarrow \neg E)) && \text{Definição de Implicação (7), Definição de Equivalência (8)} \\
+&\equiv P\wedge (Q \vee \neg R \vee S) \vee ((\neg (\neg E) \vee P) \wedge (\neg P \vee \neg E)) && \text{Associatividade da Disjunção (21), Definição de Implicação (7)} \\
+&\equiv P\wedge (Q \vee \neg R \vee S) \vee ((E \vee P) \wedge (\neg P \vee \neg E)) && \text{Lei da Dupla Negação (12)} \\
+&\equiv (P\wedge Q) \vee (P\wedge \neg R) \vee (P\wedge S) \vee ((E \vee P) \wedge (\neg P \vee \neg E)) && \text{Distributividade da Conjunção sobre a Disjunção (3), aplicada repetidamente} \\
+&\equiv (P\wedge Q) \vee (P\wedge \neg R) \vee (P\wedge S) \vee (E \wedge (\neg P \vee \neg E)) \vee (P \wedge (\neg P \vee \neg E)) && \text{Distributividade da Disjunção sobre a Conjunção (4)} \\
+&\equiv (P\wedge Q) \vee (P\wedge \neg R) \vee (P\wedge S) \vee (E \wedge \neg P) \vee (E \wedge \neg E) \vee (P \wedge \neg P) \vee (P \wedge \neg E) && \text{Distributividade da Conjunção sobre a Disjunção (3)} \\
+&\equiv (P\wedge Q) \vee (P\wedge \neg R) \vee (P\wedge S) \vee (E \wedge \neg P) \vee F \vee F \vee (P \wedge \neg E) && \text{Lei da Contradição (e.g., } E \wedge \neg E \equiv F \text{, similar à (10))} \\
+&\equiv (P\wedge Q) \vee (P\wedge \neg R) \vee (P\wedge S) \vee (E \wedge \neg P) \vee (P \wedge \neg E) && \text{Lei da Identidade para a Disjunção (17)}
 \end{align*}
 $$
 
-**Exemplo 7:**
-$\neg(P \vee (Q \wedge \neg R)) \leftrightarrow ((S \vee E) \rightarrow (P \wedge Q))$
+Este exemplo ilustra como múltiplas leis podem ser aplicadas. A cuidadosa leitora pode verificar cada passo com atenção. A simplificação completa pode ser extensa.
+
+**Exemplo 7:** $\neg(P \vee (Q \wedge \neg R)) \leftrightarrow ((S \vee E) \rightarrow (P \wedge Q))$
 
 $$
 \begin{align*}
-\neg(P \vee (Q \wedge \neg R)) \leftrightarrow ((S \vee E) \rightarrow (P \wedge Q)) &\equiv (\neg P \wedge \neg(Q \wedge \neg R)) \leftrightarrow ((\neg S \wedge \neg E) \vee (P \wedge Q)) && \text{(7)} \\
-&\equiv (\neg P \wedge (Q \vee R)) \leftrightarrow (\neg S \vee \neg E \vee (P \wedge Q)) && \text{(L6)}
+&\neg(P \vee (Q \wedge \neg R)) \leftrightarrow ((S \vee E) \rightarrow (P \wedge Q)) \\
+&\equiv (\neg P \wedge \neg(Q \wedge \neg R)) \leftrightarrow (\neg(S \vee E) \vee (P \wedge Q)) && \text{Lei de De Morgan (6), Definição de Implicação (7)} \\
+&\equiv (\neg P \wedge (\neg Q \vee \neg(\neg R))) \leftrightarrow ((\neg S \wedge \neg E) \vee (P \wedge Q)) && \text{Lei de De Morgan (5) e (6)} \\
+&\equiv (\neg P \wedge (\neg Q \vee R)) \leftrightarrow ((\neg S \wedge \neg E) \vee (P \wedge Q)) && \text{Lei da Dupla Negação (12)}
 \end{align*}
 $$
+
+A expressão está simplificada até este ponto, mantendo a equivalência principal.
 
 **Exemplo 8:**
 $\neg(P \leftrightarrow Q) \vee ((R \rightarrow S) \wedge (\neg E \vee \neg P))$
@@ -439,26 +451,50 @@ $$
 \end{align*}
 $$
 
-**Exemplo 9:**
-$(P \wedge Q) \vee ((\neg R \leftrightarrow S) \rightarrow (\neg E \wedge P))$
+**Exemplo 9:** $(P \wedge Q) \vee ((\neg R \leftrightarrow S) \rightarrow (\neg E \wedge P))$
 
+Vamos simplificar a expressão. Para clareza, podemos denotar $A \equiv (\neg R \leftrightarrow S)$.
 $$
 \begin{align*}
-(P \wedge Q) \vee ((\neg R \leftrightarrow S) \rightarrow (\neg E \wedge P)) &\equiv (P \wedge Q) \vee ((\neg(\neg R \leftrightarrow S)) \vee (\neg E \wedge P)) && \text{(7)}\\
-&\equiv (P \wedge Q) \vee ((H \leftrightarrow I) \vee (\neg E \wedge P)) && \text{(12)}\\
-&\equiv (P \wedge Q) \vee (((H \rightarrow I) \wedge (I \rightarrow R)) \vee (\neg E \wedge P)) && \text{(8)}
+&(P \wedge Q) \vee ((\neg R \leftrightarrow S) \rightarrow (\neg E \wedge P)) \\
+&\equiv (P \wedge Q) \vee (\neg (\neg R \leftrightarrow S) \vee (\neg E \wedge P)) && \text{Definição de Implicação (7)} \\
+&\equiv (P \wedge Q) \vee (\neg ((\neg R \rightarrow S) \wedge (S \rightarrow \neg R)) \vee (\neg E \wedge P)) && \text{Definição de Equivalência (8)} \\
+&\equiv (P \wedge Q) \vee (\neg (\neg (\neg R) \vee S) \vee \neg ( \neg S \vee \neg R) \vee (\neg E \wedge P)) && \text{Lei de De Morgan (5), Definição de Implicação (7) (aplicada duas vezes)} \\
+&\equiv (P \wedge Q) \vee (\neg (R \vee S) \vee \neg ( \neg S \vee \neg R) \vee (\neg E \wedge P)) && \text{Lei da Dupla Negação (12)} \\
+&\equiv (P \wedge Q) \vee ((\neg R \wedge \neg S) \vee (S \wedge R) \vee (\neg E \wedge P)) && \text{Lei de De Morgan (6) (aplicada duas vezes), Lei da Dupla Negação (12)}
 \end{align*}
 $$
 
-**Exemplo 10:**
-$\neg(P \wedge (Q \vee R)) \leftrightarrow (\neg(S \rightarrow E) \vee \neg(P \rightarrow Q))$
+A atenta leitora pode notar que a negação de uma equivalência $\neg(X \leftrightarrow Y)$ também pode ser expressa como $(X \wedge \neg Y) \vee (\neg X \wedge Y)$.
+
+**Exemplo 10:** $\neg(P \wedge (Q \vee R)) \leftrightarrow (\neg(S \rightarrow E) \vee \neg(P \rightarrow Q))$
+
+Vamos simplificar ambos os lados da equivalência:
+Lado Esquerdo (LE): $\neg(P \wedge (Q \vee R))$
 
 $$
 \begin{align*}
-\neg(P \wedge (Q \vee R)) \leftrightarrow (\neg(S \rightarrow E) \vee \neg(P \rightarrow Q)) &\equiv (\neg P \vee \neg(Q \vee R)) \leftrightarrow ((S \wedge \neg E) \vee (P \wedge \neg Q)) && \text{(7)}\\
-&\equiv (\neg F \vee (\neg G \wedge \neg R)) \leftrightarrow ((S \wedge \neg E) \vee (P \wedge \neg Q)) && \text{(6)}
+\text{LE} &\equiv \neg P \vee \neg(Q \vee R) && \text{Lei de De Morgan (5)} \\
+&\equiv \neg P \vee (\neg Q \wedge \neg R) && \text{Lei de De Morgan (6)}
 \end{align*}
 $$
+
+Lado Direito (LD): $\neg(S \rightarrow E) \vee \neg(P \rightarrow Q)$
+
+$$
+\begin{align*}
+\text{LD} &\equiv \neg(\neg S \vee E) \vee \neg(\neg P \vee Q) && \text{Definição de Implicação (7) (aplicada duas vezes)} \\
+&\equiv (S \wedge \neg E) \vee (P \wedge \neg Q) && \text{Lei de De Morgan (6) (aplicada duas vezes), Lei da Dupla Negação (12)}
+\end{align*}
+$$
+
+Portanto, a expressão original é equivalente a:
+
+$$
+(\neg P \vee (\neg Q \wedge \neg R)) \leftrightarrow ((S \wedge \neg E) \vee (P \wedge \neg Q))
+$$
+
+Não foram utilizadas substituições temporárias como $F$ ou $G$ para manter a clareza.
 
 A lógica proposicional é essencial para entendermos o mundo. É a base de argumentos sólidos e da avaliação de proposições. Nasceu da necessidade humana de buscar a verdade e resolver conflitos com a lógica. Mas sua beleza vai além da filosofia, do discurso e da matemática. É a fundação da álgebra de [George Boole](https://en.wikipedia.org/wiki/George_Boole), que sustenta o design de circuitos eletrônicos e a construção dos computadores modernos.
 
@@ -5651,9 +5687,11 @@ _Uma hipótese é uma suposição, expressa na forma de proposição, que é acr
 
 ![Diagrama de Significado de Conjecturas](/assets/images/conjecturas.webp)
 
-Em resumo: **programação imperativa** focada no processo, no _como_ chegar à solução; **programação descritiva** focada no problema em si, no _o que_ precisa ser feito. Eu, sempre que posso escolho uma linguagem descritiva. Não há glória, nem honra nesta escolha apenas as lamúrias da opinião pessoal.
+Em resumo: **programação imperativa** focada no processo, no _como_ chegar à solução; **programação descritiva** focada no problema em si, no _o que_ precisa ser feito.
 
-Sua escolha, pessoal e intransferível, entre estes paradigmas dependerá da aplicação que será construída, tanto quanto dependerá do estilo do programador. Contudo, o futuro parece cada vez mais orientado para linguagens descritivas, que permitam ao programador concentrar-se no problema, não nos detalhes da solução. Efeito que parece ser evidente se considerarmos os avanços da segunda década no século XX no campo da Inteligência Artificial. Este documento contém a base matemática que suporta o entendimento da programação lógica e um pouco de Prolog, como linguagem de programação para solução de problemas. Será uma longa jornada.
+Sua escolha, pessoal, entre estes paradigmas dependerá da aplicação que será construída, tanto quanto dependerá do estilo do programador. Contudo, o futuro parece cada vez mais orientado para linguagens descritivas, que permitam ao programador concentrar-se no problema, não nos detalhes da solução.
+
+Este documento contém a base matemática que suporta o entendimento da programação lógica e um pouco de Prolog, como linguagem de programação para solução de problemas. O Prolog só aparecerá nos últimos portos que visitarmos. Será uma longa jornada.
 
 Em nossa jornada, percorreremos a **Lógica de Primeira Ordem**. Esta será a nossa primeira rota, que iremos subdividir em elementos interligados e interdependentes e, sem dúvida, de mesma importância e valor: a _lógica Proposicional_ e a _lógica Predicativa_. Não deixe de notar que muitos dos nossos companheiros de viagem, aqueles restritos à academia, podem não entender as sutilezas desta divisão. A estes, deixo a justificativa, meio rota e meio esfarrapada da necessidade do uso da didática para a estruturação do aprendizado. Pobre do professor que ignora as mazelas enfrentadas por seus alunos. Condenado está a falar às paredes.
 
@@ -5671,7 +5709,7 @@ Como diria [Newton](https://en.wikipedia.org/wiki/Isaac_Newton) chegamos até aq
 
 # Lógica de Primeira Ordem
 
-A Lógica de Primeira Ordem é uma estrutura básica da ciência da computação e da programação. Ela nos permite que possamos discursar e raciocinar com precisão sobre os elementos - podemos fazer afirmações sobre todo um grupo, ou sobre um único elemento em particular. No entanto, tem suas limitações. Na Lógica de Primeira Ordem clássica não podemos fazer afirmações diretas sobre predicados ou funções. Entretanto, algumas extensões, como a Lógica de Segunda Ordem, permitem fazer afirmações sobre predicados e funções.
+A Lógica de Primeira Ordem é uma estrutura básica da ciência da computação e da programação. Ela nos permite discursar e raciocinar com precisão sobre os elementos - podemos fazer afirmações sobre todo um grupo, ou sobre um único elemento em particular. No entanto, tem suas limitações. Na Lógica de Primeira Ordem clássica não podemos fazer afirmações diretas sobre predicados ou funções. Entretanto, algumas extensões, como a Lógica de Segunda Ordem, permitem fazer afirmações sobre predicados e funções.
 
 Essa restrição não é um defeito, mas sim um equilíbrio cuidadoso entre poder expressivo e simplicidade computacional. Dá-nos uma forma de formular uma grande variedade de problemas, sem tornar o processo de resolução desses problemas excessivamente complexo.
 
@@ -5681,9 +5719,9 @@ A Lógica de Primeira Ordem consiste de uma linguagem, consequentemente criada a
 
 O alfabeto $\Sigma$ que estamos definindo poderá ser dividido em classes formadas por conjuntos de símbolos agrupados por semelhança. Assim:
 
-1. **variáveis, constantes e símbolos de pontuação**: vamos usar os símbolos do alfabeto latino em minúsculas e alguns símbolos de pontuação. Destaque-se os símbolos $($ e $)$, parênteses, que usaremos para definir a prioridade de operações. Vamos usar os símbolos $U$, $V$, $w$, $x$, $y$ e $z$ Para indicar variáveis e $a$, $b$, $c$, $d$ e $e$ para indicar constantes.
+1. **variáveis, constantes e símbolos de pontuação**: vamos usar os símbolos do alfabeto latino em minúsculas e alguns símbolos de pontuação. Destaque-se os símbolos $($ e $)$, parênteses, que usaremos para definir a prioridade de operações. Vamos usar os símbolos $U$, $V$, $w$, $x$, $y$ e $z$ para indicar variáveis e $a$, $b$, $c$, $d$ e $e$ para indicar constantes.
 
-2. **funções**: usaremos os símbolos $\mathbf{f}$, $\mathbf{g}$, $\mathbf{h}$ e $\mathbf{i}$ Para indicar funções.
+2. **funções**: usaremos os símbolos $\mathbf{f}$, $\mathbf{g}$, $\mathbf{h}$ e $\mathbf{i}$ para indicar funções.
 
 3. **predicados**: usaremos letras do alfabeto latino, maiúsculas $P$, $Q$, $R$ e $S$, ou simplesmente _strings_ como $\text{MaiorQue}$ ou $\text{IgualA}$ para indicar predicados. Sempre começando com letras maiúsculas.
 
@@ -5747,44 +5785,44 @@ As declarações atômicas e compostas são costuradas por conectivos para produ
  <th style="width:16.8%;">$P\oplus Q$</th>
  </tr>
  <tr style="background-color: #eeeeee;">
- <td style="border-right: 1px solid gray;">T</td>
- <td style="border-right: double gray;">T</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
+ <td style="border-right: 1px solid gray;">$T$</td>
+ <td style="border-right: double gray;">$T$</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">T</td>
- <td style="width:16.8%;">F</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
+ <td style="width:16.8%;">$F$</td>
  </tr>
  <tr>
- <td style="border-right: 1px solid gray;">T</td>
- <td style="border-right: double gray;">F</td>
+ <td style="border-right: 1px solid gray;">$T$</td>
+ <td style="border-right: double gray;">$F$</td>
  <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">F</td>
- <td style="width:16.8%;">T</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
+ <td style="width:16.8%;">$T$</td>
  </tr>
  <tr style="background-color: #eeeeee;">
- <td style="border-right: 1px solid gray;">F</td>
- <td style="border-right: double gray;">T</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
+ <td style="border-right: 1px solid gray;">$F$</td>
+ <td style="border-right: double gray;">$T$</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">F</td>
- <td style="width:16.8%;">T</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
+ <td style="width:16.8%;">$T$</td>
  </tr>
  <tr style="border-bottom: 2px solid gray;">
- <td style="border-right: 1px solid gray;">F</td>
- <td style="border-right: double gray;">F</td>
+ <td style="border-right: 1px solid gray;">$F$</td>
+ <td style="border-right: double gray;">$F$</td>
  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
  <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$t$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">T</td>
- <td style="width:16.8%;">F</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
+ <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
+ <td style="width:16.8%;">$F$</td>
  </tr>
 </table>
 <legend style="font-size: 1em;
@@ -5838,7 +5876,7 @@ Cada operador com sua própria aridade:
  text-align: center;
  margin-bottom: 20px;">Tabela 2 - Aridade dos Operadores da Lógica Proposicional.</legend>
 
-Ainda observando a Tabela 1, que contem a Tabela Verdade dos operadores da Lógica Proposicional, é fácil perceber que se tivermos quatro termos diferentes, em vez de dois, teremos $2^4 = 16$ linhas. Independente do número de termos, se para uma determinada Fórmula Bem Formada todos os resultados forem verdadeiros, $T$, teremos uma _tautologia_, se todos forem falsos, $f$ uma _contradição_.
+Ainda observando a Tabela 1, que contem a Tabela Verdade dos operadores da Lógica Proposicional, é fácil perceber que se tivermos quatro termos diferentes, em vez de dois, teremos $2^4 = 16$ linhas. Independente do número de termos, se para uma determinada Fórmula Bem Formada todos os resultados forem verdadeiros, $T$, teremos uma _tautologia_, se todos forem falsos, $F$ uma _contradição_.
 
 **Uma tautologia é uma fórmula que é sempre verdadeira, não importa os valores dados às variáveis**. Na Programação Lógica, tautologias são verdades universais no domínio do problema. Uma contradição é uma fórmula que é sempre falsa, independente dos valores das variáveis. Em Programação Lógica, contradições mostram inconsistências ou impossibilidades lógicas no domínio.
 
@@ -6068,7 +6106,9 @@ $$
 
 A lógica proposicional é essencial para entendermos o mundo. É a base de argumentos sólidos e da avaliação de proposições. Nasceu da necessidade humana de buscar a verdade e resolver conflitos com a lógica. Mas sua beleza vai além da filosofia, do discurso e da matemática. É a fundação da álgebra de [George Boole](https://en.wikipedia.org/wiki/George_Boole), que sustenta o design de circuitos eletrônicos e a construção dos computadores modernos.
 
-_Em sua dissertação de final de curso, [Claude Shannon](https://en.wikipedia.org/wiki/Claude_Shannon) usou a álgebra booleana para simplificar circuitos de controle. Desde então, as operações básicas dessa álgebra — **AND**, **OR**, **NOT** — tornaram-se os blocos fundamentais dos sistemas digitais. Elas formam o núcleo dos computadores, dos celulares e, na verdade, de toda a nossa civilização digital. A lógica proposicional é a base de todo o raciocínio lógico. Como a tabela periódica para químicos ou as leis de Newton para físicos. Ela é simples, elegante e poderosa_.
+_Em sua dissertação de final de curso, [Claude Shannon](https://en.wikipedia.org/wiki/Claude_Shannon) usou a álgebra booleana para simplificar circuitos de controle[^2]. Desde então, as operações básicas dessa álgebra — **AND**, **OR**, **NOT** — tornaram-se os blocos fundamentais dos sistemas digitais. Elas formam o núcleo dos computadores, dos celulares e, na verdade, de toda a nossa civilização digital. A lógica proposicional é a base de todo o raciocínio lógico. Como a tabela periódica para químicos ou as leis de Newton para físicos. Ela é simples, elegante e poderosa_.
+
+[^2]: Shannon, C. E., **A Symbolic Analysis of Relay and Switching Circuits**, American Institute of Electrical Engineers Transactions, 57 (1938), 713-723. Reprinted in Claude Elwood Shannon: Collected Papers, N. J. A. Sloane and A. D. Wyner (editors), IEEE Press, New York, 1993, 471-495.
 
 Tão importante quanto o impacto da **lógica proposicional** na tecnologia digital é seu papel no pensamento racional, na tomada de decisões e na prova de teoremas. Neste caminho, nosso guia são as **regras de inferência**.
 
@@ -6084,7 +6124,7 @@ ou, eventualmente por:
 
 $$P_1, P_2, ..., P_n \vdash C.$$
 
-Onde o conjunto formado $P_1, P_2, ..., P_n$, chamado de contexto, ou antecedente, $\Gamma$, e $C$, chamado de conclusão, ou consequente, são Formulas Bem Formadas. A regra significa que se as proposições que constituem a conjunção expressa no contexto é verdadeira então a conclusão $C$, consequência, também será verdadeira.
+Onde o conjunto formado $P_1, P_2, ..., P_n$, chamado de contexto, ou antecedente, $\Gamma$, e $C$, chamado de conclusão, ou consequente, são Fórmulas Bem Formadas. A regra significa que se as proposições que constituem a conjunção expressa no contexto é verdadeira então a conclusão $C$, consequência, também será verdadeira.
 
 Eu vou tentar usar contexto e conclusão. Mas me perdoem se eu escapar para antecedente e consequente. É apenas o hábito. Quando estudamos lógica, chamamos de **argumento** uma lista de proposições, que aqui são as premissas. Elas vêm seguidas de uma palavra ou expressão (portanto, consequentemente, desta forma) e de outra proposição, que chamamos de conclusão. A forma que usamos para representar isso é chamada de sequência de dedução. É uma forma de mostrar que, se a proposição colocada acima da linha horizontal for verdadeira, então estamos afirmando que todas as proposições $P_1, P_2, ..., P_n$ acima da linha são verdadeiras. E, por isso, a proposição abaixo da linha, a conclusão, também será verdadeira.
 
@@ -6114,8 +6154,8 @@ Algumas aplicações do _Modus Ponens_:
 
 - Derivar ações de regras e leis condicionais. Por exemplo:
 
-  - Proposição: _se a velocidade, $V$, é maior que $80 km/h$, então é uma infração de trânsito, $IT$_.
-  - Proposição: _joão está dirigindo, $ d$, A$90 km/h$_.
+  - Proposição: _se a velocidade, $V$, é maior que $80 \text{km/h}$, então é uma infração de trânsito, $IT$_.
+  - Proposição: _joão está dirigindo, $d$, A $90 \text{km/h}$_.
   - Conclusão: logo, _João cometeu uma infração de trânsito_.
 
 $$V > 80 \rightarrow IT$$
@@ -6212,21 +6252,38 @@ $$
  \end{aligned}
 $$
 
-- Identificar inconsistências ou contradições em raciocínios. Por exemplo:
+- Identificar consequências lógicas que podem revelar inconsistências em um conjunto de crenças. Por exemplo:
 
-  - Proposição: _se João, $J$, é mais alto, $>$, que mariA$m $, então maria não é mais alta que João_.
-  - Proposição: _maria é mais alta que João_.
-  - Conclusão: logo, _o raciocínio é inconsistente_.
+  Seja a regra: _Se João ($J$) é mais alto que Maria ($M$), então Maria não é mais alta que João._
+  Formalmente: $P \rightarrow Q$, onde $P \equiv (J > M)$ e $Q \equiv \neg(M > J)$.
 
-$$(J>M) \rightarrow \neg(M>J)$$
+  Agora, considere a seguinte informação (premissa): _Maria é mais alta que João._
+  Formalmente: $M > J$.
+  Note que $M > J$ é a negação de $Q$ (ou seja, $\neg Q$), pois $\neg(\neg(M > J)) \equiv M > J$.
 
-$$
- \begin{aligned}
- (M>J)\\
- \hline
- \neg(J>M)
- \end{aligned}
-$$
+  Aplicando Modus Tollens, teremos:
+  1. $P \rightarrow Q$ (Se João é mais alto que Maria, então Maria não é mais alta que João)
+  2. $\neg Q$ (Maria é mais alta que João)
+  3. $\therefore \neg P$ (Portanto, João não é mais alto que Maria)
+
+  A conclusão lógica derivada por Modus Tollens é que _João não é mais alto que Maria_ ($\neg(J > M)$).
+  
+  Este processo de inferência é válido. Uma _inconsistência_ no raciocínio ou no conjunto de crenças ocorreria se, por exemplo, tivéssemos uma premissa adicional ou uma crença estabelecida de que _João é mais alto que Maria_ ($J > M$). Nesse caso, teríamos chegado à conclusão $\neg(J > M)$ e também teríamos a premissa $J > M$, o que é uma contradição ($J > M \land \neg(J > M)$), indicando que o conjunto total de premissas é inconsistente. O Modus Tollens, neste caso, ajudaria a expor essa inconsistência.
+
+  A formalização da inferência é:
+  Seja $P_1: (J > M) \rightarrow \neg(M > J)$
+  Seja $P_2: M > J$
+
+  Por Modus Tollens, como $P_2$ é a negação do consequente de $P_1$ (pois $M > J \equiv \neg (\neg (M > J))$), podemos concluir a negação do antecedente de $P_1$:
+  $$
+   \begin{aligned}
+   &(J > M) \rightarrow \neg(M > J) \\
+   &M > J \\
+   \hline
+   &\neg(J > M)
+   \end{aligned}
+  $$
+  A conclusão é: _João não é mais alto que Maria._
 
 - Fazer deduções lógicas baseadas na negação da conclusão. Por exemplo:
 
@@ -6264,21 +6321,21 @@ $$
 
 A regra da Dupla Negação permite eliminar uma dupla negação, inferindo a afirmação original. A negação de uma negação é equivalente à afirmação original. Esta regra é importante para simplificar expressões lógicas.
 
-$$\neg \neg F$$
+$$\neg \neg P$$
 
 $$
 \begin{aligned}
-&\neg \neg F\\
+&\neg \neg P\\
 \hline
-&F\\
+&P\\
 \end{aligned}
 $$
 
 $$
 \begin{aligned}
-&F\\
+&P\\
 \hline
-&\neg \neg F\\
+&\neg \neg P\\
 \end{aligned}
 $$
 
@@ -6287,23 +6344,19 @@ Em linguagem natural:
 - Proposição: _não é verdade, $(\neg Q)$, que maria não, $(\neg Q)$, está feliz, $(P)$_.
 - Conclusão: logo, _maria está feliz, $(P)$_.
 
-A dupla negação pode parecer desnecessária, mas ela tem algumas aplicações na lógica:
-
-- Simplifica expressões logicas: remover duplas negações ajuda a simplificar e a normalizar expressões complexas, tornando-as mais fáceis de analisar. Por exemplo, transformar _não é verdade que não está chovendo_ em simplesmente _está chovendo_.
+A dupla negação pode parecer desnecessária, mas ela tem aplicações na solução de problemas lógicos. Remover duplas negações ajuda a simplificar e a normalizar expressões complexas, tornando-as mais fáceis de analisar. Por exemplo, transformar _não é verdade que não está chovendo_ em  _está chovendo_ facilita o entendimento.
 
 $$\neg \neg \text{Está chovendo} \Leftrightarrow \text{Está chovendo}$$
 
-- Preserva o valor de verdade: inserir ou remover duplas negações não altera o valor de verdade original de uma proposição. Isso permite transformar proposições em formas logicamente equivalentes.
+A regra da dupla negação também preserva o valor verdade: inserir ou remover duplas negações não altera o valor verdade original de uma proposição. Isso permite transformar proposições em formas logicamente equivalentes.
 
-- Auxilia provas indiretas: em provas por contradição, ou contrapositiva, introduzir uma dupla negação permite assumir o oposto do que se quer provar e derivar uma contradição. Isso, indiretamente, prova a proposição original.
-
-- Conecta Lógica Proposicional e de predicados: em Lógica Predicativa, a negação de quantificadores universais e existenciais envolve dupla negação. Por exemplo, a negação de _todo $x$ é $P$_ é _existe algum $x$ tal que $P(x)$ não é verdadeiro_.
-
-$$\neg \forall x P(x) \Leftrightarrow \exists x \neg P(x)$$
-
-- Permite provar equivalências: uma identidade ou lei importante na lógica é que a dupla negação de uma proposição é logicamente equivalente à proposição original. A regra da dupla negação permite formalmente provar essa equivalência.
+Outra aplicação da regra da dupla negação está no auxílio às provas indiretas: em provas por contradição, ou contrapositiva, introduzir uma dupla negação permite assumir o oposto do que se quer provar e derivar uma contradição. Isso, indiretamente, prova a proposição original. Da mesma forma, a dupla negação permite provar equivalências: uma identidade ou lei importante na lógica é que a dupla negação de uma proposição é logicamente equivalente à proposição original. A regra da dupla negação permite formalmente provar essa equivalência.
 
 $$\neg \neg P \Leftrightarrow P$$
+
+Finalmente, a regra da dupla negação conecta a Lógica Proposicional e a Lógica de Predicados: em Lógica Predicativa, a negação de quantificadores universais e existenciais envolve dupla negação. Por exemplo, a negação de _todo $x$ é $P$_ é _existe algum $x$ tal que $P(x)$ não é verdadeiro_.
+
+$$\neg \forall x P(x) \Leftrightarrow \exists x \neg P(x)$$
 
 ### Adição
 
@@ -6419,7 +6472,7 @@ $$
 
 - Eliminar opções em raciocínio dedutivo. Por exemplo:
 
-  - Proposição: _ou João estava em casa, $ c$, ou João estava no trabalho, $t$_.
+  - Proposição: _ou João estava em casa, $ c$, ou João estava no trabalho, $T$_.
   - Proposição: _João não estava em casa_.
   - Conclusão: logo, _João estava no trabalho_.
 
@@ -6803,51 +6856,21 @@ Algumas aplicações da Equivalência:
    \end{aligned}
    $$
 
-  <table>
-          <tr>
-              <th>Regra</th>
-              <th>Descrição</th>
-              <th>Fórmula</th>
-          </tr>
-          <tr>
-              <td>Modus Ponens</td>
-              <td>Se $P \rightarrow Q$ e $P$ são verdadeiros, então $Q$ também é verdadeiro.</td>
-              <td>$\frac{P, P \rightarrow Q}{Q}$</td>
-          </tr>
-          <tr>
-              <td>Modus Tollens</td>
-              <td>Se $P \rightarrow Q$ e $\neg Q$ são verdadeiros, então $\neg P$ também é verdadeiro.</td>
-              <td>$\frac{\neg Q, P \rightarrow Q}{\neg P}$</td>
-          </tr>
-          <tr>
-              <td>Dupla Negação</td>
-              <td>A negação de uma negação é equivalente à afirmação original.</td>
-              <td>$\frac{\neg \neg P}{P}$</td>
-          </tr>
-          <tr>
-              <td>Adição</td>
-              <td>Se $P$ é verdadeiro, então $P \vee Q$ também é verdadeiro.</td>
-              <td>$\frac{P}{P \vee Q}$</td>
-          </tr>
-          <tr>
-              <td>Adjunção</td>
-              <td>Se $P$ e $Q$ são verdadeiros, então $P \wedge Q$ é verdadeiro.</td>
-              <td>$\frac{P, Q}{P \wedge Q}$</td>
-          </tr>
-          <tr>
-              <td>Simplificação</td>
-              <td>Se $P \wedge Q$ é verdadeiro, então $P$ (ou $Q$) é verdadeiro.</td>
-              <td>$\frac{P \wedge Q}{P}$</td>
-          </tr>
-          <tr>
-              <td>Bicondicionalidade</td>
-              <td>Se $P \leftrightarrow Q$, então $P \rightarrow Q$ e $Q \rightarrow P$ são verdadeiros.</td>
-              <td>$\frac{P \leftrightarrow Q}{P \rightarrow Q, Q \rightarrow P}$</td>
-          </tr>
-  </table>
-  <legend style="font-size: 1em;
-  text-align: center;
-  margin-bottom: 20px;">Tabela 4 - Resumo dos métodos de inferência.</legend>
+| Regra                       | Descrição                                                                                   | Fórmula                                                                 |
+| :-------------------------- | :------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------- |
+| Modus Ponens                | Se $P \rightarrow Q$ e $P$ são verdadeiros, então $Q$ também é verdadeiro.                   | $$\frac{P, P \rightarrow Q}{Q}$$                                          |
+| Modus Tollens               | Se $P \rightarrow Q$ e $\neg Q$ são verdadeiros, então $\neg P$ também é verdadeiro.          | $$\frac{\neg Q, P \rightarrow Q}{\neg P}$$                                |
+| Silogismo Hipotético        | Se $P \rightarrow Q$ e $Q \rightarrow R$ são verdadeiros, então $P \rightarrow R$ também é verdadeiro. | $$\frac{P \rightarrow Q, Q \rightarrow R}{P \rightarrow R}$$                    |
+| Silogismo Disjuntivo (Modus Tollendo Ponens) | Se $P \vee Q$ é verdadeiro e $\neg P$ é verdadeiro, então $Q$ também é verdadeiro.         | $$\frac{P \vee Q, \neg P}{Q}$$ (ou $$\frac{P \vee Q, \neg Q}{P}$$)      |
+| Dupla Negação               | A negação de uma negação é equivalente à afirmação original (e vice-versa).                  | $$\frac{\neg \neg P}{P}$$ (e $$\frac{P}{\neg \neg P}$$)                   |
+| Adição                      | Se $P$ é verdadeiro, então $P \vee Q$ também é verdadeiro.                                  | $$\frac{P}{P \vee Q}$$ (ou $$\frac{Q}{P \vee Q}$$)                        |
+| Adjunção (ou Conjunção)     | Se $P$ e $Q$ são verdadeiros, então $P \wedge Q$ é verdadeiro.                               | $$\frac{P, Q}{P \wedge Q}$$                                               |
+| Simplificação               | Se $P \wedge Q$ é verdadeiro, então $P$ é verdadeiro (e $Q$ é verdadeiro).                   | $$\frac{P \wedge Q}{P}$$ (e $$\frac{P \wedge Q}{Q}$$)                     |
+| Introdução do Bicondicional | Se $P \rightarrow Q$ e $Q \rightarrow P$ são verdadeiros, então $P \leftrightarrow Q$ é verdadeiro. | $$\frac{P \rightarrow Q, Q \rightarrow P}{P \leftrightarrow Q}$$          |
+| Eliminação do Bicondicional | Se $P \leftrightarrow Q$ é verdadeiro, então $P \rightarrow Q$ e $Q \rightarrow P$ são verdadeiros. | $$\frac{P \leftrightarrow Q}{P \rightarrow Q \text{ e } Q \rightarrow P}$$ |
+| (Equivalência - aplicação)  | Se $P \leftrightarrow Q$ e $P$ são verdadeiros, então $Q$ é verdadeiro. (E outras 3 formas)   | $$\frac{P \leftrightarrow Q, P}{Q}$$ (Exemplo de aplicação)                |
+
+<legend style="font-size: 1em; text-align: center; margin-bottom: 20px;">Tabela 4 - Resumo das Regras de Inferência.</legend>
 
 ## Classificando Fórmulas Proposicionais
 
@@ -8194,7 +8217,7 @@ $$On(b1, s2) \land Hot(b2) \land \neg (On(b3) \lor Hot(b3))$$
    **Solução**: primeiro, $A$ e $B$Atravessam a ponte, o que leva 2 minutos. $A$ então pega a tocha e volta para o lado original, levando 1 minuto. $A$ fica no lado original enquanto $C$ e $D$Atravessam a ponte, levando 8 minutos. $B$ então pega a tocha e volta para o lado original, levando 2 minutos. Finalmente, $A$ e $B$Atravessam a ponte novamente, levando 2 minutos. No total, teremos $2+1+8+2+2=15$ minutos.
 
    Usando Lógica de Primeira Ordem:
-   Vamos denotar o tempo que cada pessoa leva para atravessar a ponte como $t_A, T_B, T_C, T_D$ e o tempo total como $t$. O problema pode ser representado da seguinte forma:
+   Vamos denotar o tempo que cada pessoa leva para atravessar a ponte como $t_A, T_B, T_C, T_D$ e o tempo total como $T$. O problema pode ser representado da seguinte forma:
 
    $$(T_A + T_B + T_A + T_C + T_D + T_B + T_A) \leq T$$
 
