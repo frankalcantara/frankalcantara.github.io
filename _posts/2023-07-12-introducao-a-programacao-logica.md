@@ -23,7 +23,7 @@ keywords:
    - Programação Lógica
 draft: true
 toc: true
-lastmod: 2025-05-14T23:45:36.651Z
+lastmod: 2025-05-15T00:08:19.192Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -1420,7 +1420,7 @@ $$
 \end{aligned}
 $$
 
-A contrapositiva pode ser lida como _se não $Q$, então não $P$_. Em outras palavras estamos dizendo: _Se $Q$ é falso, então $P$ é falso_. A contrapositiva de uma fórmula é importante porque, frequentemente, é mais fácil provar a contrapositiva de uma fórmula que a própria fórmula. E, como a contrapositiva é logicamente equivalente a sua formula, provar a contrapositiva é provar a fórmula. Como a contrapositiva de uma implicação e a própria implicação são logicamente equivalentes, se provamos uma, a outra está provada. Além disso, a contrapositva preserva a validade das implicações proposicionais. Finalmente, observe que a contrapositiva troca o antecedente pelo negação do consequente e vice-versa.
+A contrapositiva pode ser lida como _se não $Q$, então não $P$_. Em outras palavras estamos dizendo: _Se $Q$ é falso, então $P$ é falso_. A contrapositiva de uma fórmula é importante porque, frequentemente, é mais fácil provar a contrapositiva de uma fórmula que a própria fórmula. E, como a contrapositiva é logicamente equivalente a sua formula, provar a contrapositiva é provar a fórmula. Como a contrapositiva de uma implicação e a própria implicação são logicamente equivalentes, se provamos uma, a outra está provada. Além disso, a contrapositiva preserva a validade das implicações proposicionais. Finalmente, observe que a contrapositiva troca o antecedente pelo negação do consequente e vice-versa.
 
 **Exemplo 1**:
 
@@ -2786,8 +2786,140 @@ Aqui estão cinco quebra-cabeças clássicos juntamente com suas soluções usan
 
    Esta condição afirma que o prêmio está exatamente atrás de uma das portas, e o concorrente deve mudar sua escolha depois que uma das portas é aberta para revelar nenhum prêmio.
 
-## Problema 1 
+### O Mistério da Mansão Blackwood – Um Desafio para Detetives Lógicos**
 
+**Objetivo:** Aplicar os princípios da lógica proposicional e de predicados para analisar um conjunto complexo de informações, identificar contradições, realizar deduções formais e solucionar um enigma proposto.
+
+**Descrição:**
+Vocês foram convidados a investigar um intrigante mistério ocorrido na antiga Mansão Hollow. O renomado inventor, Sr. Arthur Blackwood, desapareceu em circunstâncias suspeitas, deixando para trás uma série de pistas, depoimentos de funcionários e familiares, e alguns bilhetes enigmáticos. A polícia local está confusa com a quantidade de informações, algumas aparentemente contraditórias. Você deve montar uma equipe de detetives e superar o famoso detetive Hercule Poirot e:
+1.  Analisar cuidadosamente todo o material fornecido (descrições de personagens, mapa da mansão, horários, depoimentos, bilhetes).
+2.  Formalizar as informações relevantes utilizando sentenças da lógica proposicional e, quando aplicável, da lógica de predicados.
+3.  Construir tabelas-verdade e/ou aplicar regras de inferência para verificar a consistência das informações e deduzir novos fatos.
+4.  Identificar o(s) responsável(is) pelo desaparecimento do Sr. Blackwood (ou determinar o que de fato aconteceu), justificando cada passo da sua conclusão com base nas deduções lógicas realizadas.
+
+**Entregáveis:**
+* Um relatório detalhado contendo:
+    * A formalização das principais pistas em linguagem lógica.
+    * As deduções lógicas chave (podem ser apresentadas através de derivações formais ou explicações detalhadas do raciocínio).
+    * A solução do mistério, com uma argumentação clara e logicamente fundamentada.
+
+**Critérios de Avaliação:**
+* Correção na formalização lógica das informações.
+* Validade das deduções e inferências realizadas.
+* Clareza e coerência da argumentação na solução do mistério.
+* Profundidade da análise e uso criativo da lógica para desvendar o caso.
+
+Aqui está o dossiê completo do caso:
+
+---
+
+### **O Mistério da Mansão Hollow: O Desaparecimento de Arthur Blackwood**
+
+**Data do Incidente:** Segunda-feira, 12 de Maio de 2025
+**Local:** Mansão Hollow, uma propriedade rural isolada.
+**Vítima (Desaparecido):** Sr. Arthur Blackwood, renomado inventor, 58 anos.
+
+**1. Descrições dos Personagens:**
+
+* **Sr. Arthur Blackwood:** O inventor desaparecido. Gênio excêntrico e recluso, conhecido por sua mente brilhante e comportamento imprevisível. Estava trabalhando febrilmente em um novo projeto secreto chamado "Quimera".
+* **Sra. Eleanor Blackwood (50 anos):** Esposa de Arthur. Uma mulher elegante e ambiciosa, visivelmente preocupada com a reputação e fortuna da família. Ela teme que o comportamento errático de Arthur possa arruiná-los.
+* **Dr. Alistair Finch (45 anos):** Um cientista brilhante, antigo protegido de Arthur, mas que se tornou seu principal rival acadêmico e comercial. Chegou à mansão no dia do desaparecimento, alegando buscar uma reconciliação e possível colaboração.
+* **Miss Clara Evans (28 anos):** A jovem e inteligente assistente pessoal de Arthur. Dedicada e leal, trabalhava em estreita colaboração com ele no projeto "Quimera" e conhecia muitos de seus segredos.
+* **Sr. Reginald "Reggie" Croft (65 anos):** O mordomo, trabalha para a família Blackwood há mais de trinta anos. É um homem discreto, observador e extremamente leal à memória do falecido pai de Arthur, mas demonstra certa reserva em relação ao próprio Arthur.
+* **Sra. Beatrice Croft (62 anos):** Esposa de Reggie, a cozinheira da mansão. Conhece todos os cantos da casa e os hábitos de seus ocupantes. É prática e não se deixa levar por fantasias.
+
+**2. Mapa da Mansão Hollow (Descrição Textual):**
+
+A Mansão Hollow é uma construção vitoriana de dois andares, com um vasto terreno.
+
+* **Térreo:**
+    * **Hall de Entrada:** Amplo, com piso de mármore, uma imponente escadaria de carvalho que leva ao andar superior. Portas levam à biblioteca (esquerda), sala de estar (direita) e, ao fundo, um corredor para a sala de jantar e a ala de serviço/cozinha.
+    * **Biblioteca:** Paredes forradas de estantes com livros antigos e científicos. Uma grande escrivaninha de mogno, poltronas de couro e uma lareira. Duas janelas altas com vista para o jardim da frente.
+    * **Sala de Estar:** Mobiliário luxuoso, mas um pouco antiquado. Um piano de cauda, lareira e janelas com vista para o jardim lateral e o gazebo.
+    * **Sala de Jantar:** Uma longa mesa de jantar polida, prataria reluzente. Acesso direto à cozinha.
+    * **Cozinha:** Grande e funcional, com uma mesa rústica ao centro. Portas para a despensa, os aposentos dos Croft e uma saída para o jardim dos fundos/horta.
+    * **Laboratório do Sr. Blackwood:** Localizado no final de um corredor isolado, partindo do hall, perto da escada de serviço. A porta possui uma fechadura especial de alta segurança projetada pelo próprio Arthur. O interior é um caos organizado de equipamentos eletrônicos, protótipos mecânicos, quadros com equações e ferramentas. Possui uma única janela reforçada que dá para o jardim dos fundos. *Este é o local principal da investigação inicial.*
+    * **Escritório do Sr. Blackwood:** Uma sala menor, anexa ao laboratório, acessível apenas por uma porta dentro do laboratório. Mais organizada, com arquivos, patentes, um cofre e um computador.
+
+* **Andar Superior:**
+    * **Quarto Principal (Sr. e Sra. Blackwood):** Espaçoso, com uma grande cama de dossel, penteadeira, armários embutidos e um banheiro privativo. Uma varanda com vista para o jardim da frente.
+    * **Quarto de Hóspedes:** Onde Dr. Finch deixou seus pertences (embora não tenha passado a noite). Confortável, com uma cama de solteiro, escrivaninha e janela para o jardim lateral.
+    * **Quarto de Clara Evans:** Menor e mais simples, localizado perto da escada de serviço, com vista para os fundos.
+    * **Aposentos do Mordomo e da Cozinheira (Sr. e Sra. Croft):** Localizados na ala de serviço, acima da cozinha.
+
+* **Exterior:**
+    * **Jardim da Frente:** Um gramado bem cuidado com um caminho circular de cascalho que leva à porta principal. Ladeado por sebes altas.
+    * **Jardim Lateral:** Menos formal, com um gazebo antigo coberto de hera e canteiros de rosas.
+    * **Jardim dos Fundos:** Uma área mais extensa e um pouco mais selvagem, com árvores antigas, uma pequena horta cultivada pela Sra. Croft e, nos limites da propriedade, uma velha estufa de vidro abandonada e parcialmente coberta por vegetação.
+
+**3. Linha do Tempo (Segunda-feira, 12 de Maio de 2025):**
+
+* **08:00:** Café da manhã servido na sala de jantar. Sra. Blackwood preside. Sr. Blackwood não comparece, o que, segundo Sra. Blackwood, era comum quando ele estava imerso em trabalho.
+* **09:00:** Clara Evans leva uma bandeja com café e torradas para o laboratório do Sr. Blackwood.
+* **10:00:** Dr. Alistair Finch chega pontualmente à Mansão Hollow. É recebido pelo mordomo, Sr. Croft, e anunciado à Sra. Blackwood.
+* **10:15 - 11:00 (aprox.):** Dr. Finch e Sra. Blackwood conversam na sala de estar.
+* **11:00:** Sra. Blackwood acompanha Dr. Finch até a porta do laboratório do Sr. Blackwood. Ela bate. Uma voz abafada, identificada por ela como sendo de Arthur, diz: "Estou no meio de algo crítico! Não me perturbem agora!". Dr. Finch parece contrariado.
+* **11:05 - 13:00:** *Período crucial com movimentações diversas e álibis a serem verificados.*
+* **13:00:** O almoço é servido. Sr. Blackwood novamente não aparece.
+* **14:00:** Sra. Blackwood, demonstrando crescente preocupação, pede a Sr. Croft que vá verificar pessoalmente o Sr. Blackwood em seu laboratório.
+* **14:05:** Sr. Croft dirige-se ao laboratório. Encontra a porta especial entreaberta. A fechadura de alta segurança parece ter sido arranhada (marcas de tentativa de arrombamento), mas está destrancada (possivelmente aberta corretamente após a tentativa de arrombamento). O interior do laboratório está em grande desordem: papéis e diagramas espalhados pelo chão, algumas ferramentas fora do lugar, uma cadeira virada. Sr. Blackwood não está em lugar nenhum. A janela dos fundos do laboratório está destrancada e aberta. Não há sinais óbvios de luta violenta (ex: sangue).
+* **14:15:** Sra. Blackwood, após ser informada por Sr. Croft, instrui-o a chamar a polícia local.
+* **17:00:** A notícia do desaparecimento e a natureza peculiar do caso chegam aos ouvidos de Hercule Poirot, que está concluindo um caso em uma cidade vizinha. Ele informa que só poderá dedicar-se ao mistério da Mansão Hollow na manhã seguinte. (Vocês têm até lá para resolver!)
+
+**4. Depoimentos Iniciais (Coletados apressadamente pelo Sargento Davis, da polícia local):**
+
+* **Sra. Eleanor Blackwood:**
+    * "Arthur estava impossível nas últimas semanas, totalmente absorvido pelo tal projeto 'Quimera'. Falava coisas sem sentido sobre revolucionar o mundo, mas também sobre pessoas que queriam roubá-lo. Ele sempre foi um pouco... dramático."
+    * "Quando bati à porta do laboratório às 11:00, ouvi claramente Arthur dizer para não ser perturbado. Sim, a voz parecia um pouco abafada, mas era ele. Dr. Finch estava ao meu lado."
+    * "Depois disso, subi para meus aposentos para descansar e escrever algumas cartas. Não vi mais o Dr. Finch até a hora do almoço."
+    * "A fechadura do laboratório é uma invenção do próprio Arthur. Apenas ele possuía a chave mestra. Ouvi dizer que Clara talvez soubesse algum truque para abri-la, mas forçá-la... faria um barulho terrível, não acha?"
+    * "Desaparecer assim... não é do feitio de Arthur, a menos que seja parte de algum plano mirabolante dele. Ou então algo terrível aconteceu."
+
+* **Dr. Alistair Finch:**
+    * "Eu vim em uma missão de paz, acreditem. Nossas divergências passadas foram puramente intelectuais. Eu esperava que pudéssemos colaborar. A ideia de roubar o trabalho de Arthur é um insulto."
+    * "Sim, a Sra. Blackwood me acompanhou até a porta do laboratório. Ouvi uma voz masculina dizer para não sermos inoportunos. Não posso jurar que era Arthur, a voz estava abafada, como disse a Sra. Blackwood."
+    * "Após a recusa, senti-me um pouco desconfortável. Decidi caminhar pelos jardins para espairecer, entre aproximadamente 11:05 e 12:45. Andei pela frente da casa e também pelo jardim lateral, perto do gazebo. O tempo estava agradável."
+    * "Não vi ninguém suspeito. Vi o mordomo, Sr. Croft, por um instante, perto da entrada lateral da casa, por volta das 11:20. Ele parecia estar carregando uma caixa ou algo similar em direção à parte de trás da casa ou à adega."
+    * "Eu nunca tocaria na fechadura do laboratório de Arthur sem permissão. Seria uma violação imperdoável da ética científica."
+
+* **Miss Clara Evans:**
+    * "Sr. Blackwood estava muito pressionado, mas também excitado com o 'Quimera'. Ele dizia que mudaria tudo. Ele confiava em mim implicitamente."
+    * "Sim, ele temia que o Dr. Finch, ou outros, pudessem tentar se apropriar de suas descobertas. Ele tomava muitas precauções."
+    * "Quando levei seu café às 09:00, ele estava um pouco agitado, mas lúcido. Disse-me: 'Clara, hoje é um dia de grandes decisões. Lembre-se dos nossos protocolos.'"
+    * "Entre 11:00 e 13:00, estive principalmente no escritório anexo ao laboratório, compilando dados. A porta entre o escritório e o laboratório estava fechada na maior parte do tempo para que ele tivesse silêncio. Saí brevemente, por volta das 11:30, para ir à biblioteca buscar o 'Compêndio de Ligas Metálicas Raras'. Fiquei lá uns 15, talvez 20 minutos. Não cruzei com ninguém no corredor ou na biblioteca."
+    * "O laboratório tem um bom isolamento acústico, especialmente com a porta do escritório fechada. Não ouvi nenhum barulho de arrombamento. A fechadura especial é complexa; apenas Sr. Blackwood tinha a chave. Eu conheço o procedimento de abertura manual de emergência, mas é uma sequência demorada e específica."
+
+* **Sr. Reginald "Reggie" Croft (Mordomo):**
+    * "Dr. Finch chegou às 10:00. Parecia um pouco nervoso, na minha opinião. Ele e a patroa conversaram na sala de estar por um bom tempo."
+    * "Por volta das 11:00, eu estava no hall polindo a prata, e ouvi as vozes da Sra. Blackwood e do Dr. Finch perto do corredor do laboratório. Não prestei muita atenção ao que foi dito. Logo depois, vi a Sra. Blackwood subir a escadaria principal."
+    * "De fato, por volta das 11:15, eu estava transportando uma caixa de garrafas de vinho da entrada de serviço lateral para a adega no porão. Nesse momento, vi o Dr. Finch caminhando pelo jardim da frente, perto do portão principal. Ele olhava muito para o relógio."
+    * "Quando fui chamado pela Sra. Blackwood às 14:00, encontrei a porta do laboratório como descrito: entreaberta, com arranhões na fechadura, mas destrancada. O Sr. Blackwood era metódico. Se ele não queria ser perturbado, ele trancava a porta de uma forma que ninguém entraria."
+
+* **Sra. Beatrice Croft (Cozinheira):**
+    * "Da cozinha, não se ouve muito do resto da casa, a menos que seja uma gritaria. Estive ocupada com o almoço toda a manhã."
+    * "Sr. Blackwood não aparecer para as refeições não era novidade quando estava às voltas com suas invenções malucas."
+    * "Uma coisa estranha: Miss Evans passou rapidamente pela cozinha por volta das 12:50. Parecia muito pálida e apressada. Perguntei se estava tudo bem, e ela murmurou algo sobre ir verificar se o Sr. Blackwood queria que o almoço fosse servido no laboratório. Ela voltou alguns minutos depois, ainda mais pálida, e disse que ele não tinha respondido aos chamados dela na porta do laboratório e que era melhor não insistir. Achei estranho ela não ter comentado isso com a Sra. Blackwood imediatamente, antes do alarme oficial."
+    * "A janela do laboratório? Sim, dá para uma parte mais isolada do jardim dos fundos, perto da minha horta. Se alguém pulou por ali, e se esgueirou pelas árvores, poderia sumir sem ser visto da casa principal."
+
+**5. Pistas e Bilhetes Enigmáticos:**
+
+* **Pista 1: Papel Amassado na Lixeira do Laboratório:**
+    Um pequeno pedaço de papel de anotações, claramente arrancado de um bloco maior, contém a seguinte mensagem escrita à mão por Sr. Blackwood (caligrafia confirmada):
+    > "Se A implica B, e o Corvo visita o Ninho, então a Hipótese se confirma. A negação do consequente é o único caminho seguro. Sigma Ativado."
+
+* **Pista 2: Objeto Encontrado no Chão do Laboratório, Perto da Mesa Principal:**
+    Um pequeno e incomum botão de metal fosco, com um desenho de uma engrenagem estilizada. Não parece pertencer a nenhuma roupa do Sr. Blackwood, nem faz parte do vestuário usual dos funcionários.
+
+* **Pista 3: Anotação na Margem de um Livro na Biblioteca:**
+    No livro "Compêndio de Ligas Metálicas Raras" (o mesmo que Clara Evans mencionou ter pego), na página sobre o Bismuto, há uma pequena anotação a lápis, quase imperceptível:
+    > "Onde o passado encontra o futuro, a reflexão é a chave. $(\neg P \lor Q)$ é equivalente a ?"
+    A caligrafia parece ser de Sr. Blackwood.
+
+* **Pista 4: Marca Estranha no Batente da Janela Aberta do Laboratório:**
+    Do lado de fora do batente da janela do laboratório, há uma leve marca de fuligem ou graxa escura, como se algo metálico e sujo tivesse sido apoiado ali brevemente.
+
+* **Pista 5: Na Estufa Abandonada (Jardim dos Fundos):**
+    Dentro da estufa, sobre uma bancada empoeirada, alguém desenhou com o dedo na poeira um símbolo: um triângulo equilátero com um pequeno círculo no centro. Ao lado do desenho, um único fósforo queimado. Não há outras pegadas recentes visíveis devido ao solo irregular e coberto de folhas secas.
 
 # Formas Normais
 
@@ -3217,7 +3349,7 @@ A Skolemização é uma técnica usada na Lógica de Primeira Ordem para elimina
 
 $$\forall x \exists y P(x,y)$$
 
-Ao aplicar a skolemização, a variável existencial $y$ é substituída por uma Função de Skolem $f(x)$:
+Ao aplicar a Skolemização, a variável existencial $y$ é substituída por uma Função de Skolem $f(x)$:
 
 $$P(x,f(x))$$
 
@@ -3225,11 +3357,11 @@ Para uma fórmula com dois quantificadores universais e dois existenciais:
 
 $$\forall x \forall z \exists y \exists w R(x,y,z,w)$$
 
-A skolemização resultará em:
+A Skolemização resultará em:
 
 $$\forall x \forall z R(x,f(x),z,g(x,z))$$
 
-Onde $f(x)$ e $ g(x,z)$ são Funções Skolem introduzidas para substituir as variáveis existenciais $y$ e $w $ respectivamente. A escolha entre usar uma Constante Skolem ou uma Função Skolem durante a skolemização depende do escopo dos quantificadores na fórmula original. Aqui estão as regras e passos para realizar a skolemização de forma mais explicativa:
+Onde $f(x)$ e $ g(x,z)$ são Funções Skolem introduzidas para substituir as variáveis existenciais $y$ e $w $ respectivamente. A escolha entre usar uma Constante Skolem ou uma Função Skolem durante a Skolemização depende do escopo dos quantificadores na fórmula original. Aqui estão as regras e passos para realizar a Skolemização de forma mais explicativa:
 
 **Passo 1: Identificar os Quantificadores Existenciais**: comece identificando os quantificadores existenciais na fórmula.
 
@@ -3255,7 +3387,7 @@ Onde $f(x)$ e $ g(x,z)$ são Funções Skolem introduzidas para substituir as va
 
 Substituímos $y$ por $f(x,z)$, que é uma função que depende das variáveis universais $x$ e $z$.
 
-Em resumo, a skolemização simplifica fórmulas quantificadas, eliminando quantificadores existenciais e substituindo variáveis por Constantes ou Funções de Skolem, dependendo de sua relação com quantificadores universais. Isso auxilia na conversão de fórmulas quantificadas para a Forma Normal Conjuntiva e na simplificação da lógica.
+Em resumo, a Skolemização simplifica fórmulas quantificadas, eliminando quantificadores existenciais e substituindo variáveis por Constantes ou Funções de Skolem, dependendo de sua relação com quantificadores universais. Isso auxilia na conversão de fórmulas quantificadas para a Forma Normal Conjuntiva e na simplificação da lógica.
 
 ## Forma Normal Prenex
 
