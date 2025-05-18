@@ -23,7 +23,7 @@ keywords:
    - Programação Lógica
 draft: true
 toc: true
-lastmod: 2025-05-18T01:43:47.710Z
+lastmod: 2025-05-18T01:44:32.540Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -3571,7 +3571,7 @@ $$(A \land \neg B) \lor (\neg C \land D) \rightarrow (E \lor F)$$
 
    $$(\neg A \lor B \lor E \lor F) \land (C \lor \neg D \lor E \lor F)$$
 
-#### Exemplo 3 
+#### Exemplo 3
 
 $$(p \wedge (q \vee r)) \vee (\neg p \wedge \neg q)$$
 
@@ -3925,7 +3925,6 @@ Onde $f(x)$ e $ g(x,z)$ são Funções Skolem introduzidas para substituir as va
 Substituímos $y$ por $f(x,z)$, que é uma função que depende das variáveis universais $x$ e $z$.
 
 Em resumo, a Skolemização simplifica fórmulas quantificadas, eliminando quantificadores existenciais e substituindo variáveis por Constantes ou Funções de Skolem, dependendo de sua relação com quantificadores universais. Isso auxilia na conversão de fórmulas quantificadas para a Forma Normal Conjuntiva e na simplificação da lógica.
-
 
 ### Exemplos de conversão em formas normais, conjuntiva e disjuntiva
 
