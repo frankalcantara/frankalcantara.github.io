@@ -23,7 +23,7 @@ keywords:
    - Programação Lógica
 draft: true
 toc: true
-lastmod: 2025-05-18T01:31:06.512Z
+lastmod: 2025-05-18T01:43:47.710Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -593,26 +593,22 @@ A regra da Adição permite adicionar uma disjunção a uma afirmação, resulta
 
 $$F$$
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &F\\
 \hline
 &F \vee G\\
-\end{aligned}
-$$
+\end{aligned}$$
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &G\\
 \hline
 &F \vee G\\
-\end{aligned}
-$$
+\end{aligned}$$
 
 Em linguagem natural:
 
-- Proposição: _o céu está azul, $(P)$_.
-- Conclusão: logo, _o céu está azul ou gatos podem voar, $(P \lor Q)$_;
+- Proposição: _o céu está azul, $(P)$_;
+- Conclusão: logo, _o céu está azul ou gatos podem voar, $(P \lor Q)$_.
 
 A regra da Adição permite introduzir uma disjunção em uma prova ou argumento lógico. Especificamente, ela nos permite inferir uma disjunção $P\vee Q$A partir de uma das afirmações disjuntivas ($P$ ou $Q$) individualmente.
 
@@ -643,93 +639,81 @@ Esta regra nos ajuda a chegar a conclusões a partir de disjunções, por exclus
 
 $$P \vee Q$$
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &\neg P\\
 \hline
 &Q\\
-\end{aligned}
-$$
+\end{aligned}$$
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &\neg Q\\
 \hline
 &P\\
-\end{aligned}
-$$
+\end{aligned}$$
 
 Em linguagem natural:
 
-- Proposição 1: _ou o céu está azul ou a grama é roxa_.
-- Proposição 2: _a grama não é roxa_.
-- Conclusão: logo, _o céu está azul_
+- Proposição 1: _ou o céu está azul ou a grama é roxa_;
+- Proposição 2: _a grama não é roxa_;
+- Conclusão: logo, _o céu está azul_.
 
 Algumas aplicações do Modus Tollendo Ponens:
 
 - Derivar ações a partir de regras disjuntivas. Por exemplo:
 
-  - Proposição: _ou João vai à praia, $P$ ou João vai ao cinema, $ c$_.
-  - Proposição: _João não vai ao cinema_, $\neg C$.
+  - Proposição: _ou João vai à praia, $P$ ou João vai ao cinema, $c$_;
+  - Proposição: _João não vai ao cinema_, $\neg C$;
   - Conclusão: logo, _João vai à praia_.
 
 $$P \vee C$$
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &\neg C\\
 \hline
 &P
-\end{aligned}
-$$
+\end{aligned}$$
 
 - Simplificar casos em provas por exaustão. Por exemplo:
 
-  - Proposição: _o número é par, $P$, ou ímpar, $I$_.
-  - Proposição: _o número não é ímpar, $\neg P$_.
+  - Proposição: _o número é par, $P$, ou ímpar, $I$_;
+  - Proposição: _o número não é ímpar, $\neg P$_;
   - Conclusão: logo, _o número é par_.
 
 $$P \vee I$$
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &\neg I\\
 \hline
 &P
-\end{aligned}
-$$
+\end{aligned}$$
 
 - Eliminar opções em raciocínio dedutivo. Por exemplo:
 
-  - Proposição: _ou João estava em casa, $ c$, ou João estava no trabalho, $t$_.
-  - Proposição: _João não estava em casa_.
+  - Proposição: _ou João estava em casa, $c$, ou João estava no trabalho, $t$_;
+  - Proposição: _João não estava em casa_;
   - Conclusão: logo, _João estava no trabalho_.
 
 $$C \vee T$$
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &\neg C\\
 \hline
 &T
-\end{aligned}
-$$
+\end{aligned}$$
 
 - Fazer prova indireta da disjunção. Por exemplo:
 
-  - Proposição: _1 é par, $1P$, ou 1 é ímpar, $1I$_.
-  - Proposição: _1 não é par_.
+  - Proposição: _1 é par, $1P$, ou 1 é ímpar, $1I$_;
+  - Proposição: _1 não é par_;
   - Conclusão: logo, _1 é ímpar_.
 
 $$1P \vee 1I$$
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &\neg 1P\\
 \hline
 &1I
-\end{aligned}
-$$
+\end{aligned}$$
 
 #### Adjunção
 
@@ -739,82 +723,72 @@ $$F$$
 
 $$G$$
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &F\\
 &G\\
 \hline
 &F \land G\\
-\end{aligned}
-$$
+\end{aligned}$$
 
 Em linguagem natural:
 
-- proposição 1: _o céu está azul_.
-- proposição 2: _os pássaros estão cantando_.
+- proposição 1: _o céu está azul_;
+- proposição 2: _os pássaros estão cantando_;
 - Conclusão: logo, _o céu está azul e os pássaros estão cantando_.
 
 Algumas aplicações da Adjunção:
 
 - Combinar proposições relacionadas em argumentos. Por exemplo:
 
-  - Proposição: _o céu está nublado, $ n$_.
-  - Proposição: _está ventando, $V$_.
+  - Proposição: _o céu está nublado, $n$_;
+  - Proposição: _está ventando, $V$_;
   - Conclusão: logo, _o céu está nublado e está ventando_.
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &N\\
 &V\\
 \hline
 &N \land V
-\end{aligned}
-$$
+\end{aligned}$$
 
 - Criar declarações conjuntivas complexas. Por exemplo:
 
-  - Proposição: _1 é número natural, $ n1$_.
-  - Proposição: _2 é número natural $ n2$_.
+  - Proposição: _1 é número natural, $n1$_;
+  - Proposição: _2 é número natural $n2$_;
   - Conclusão: logo, _1 é número natural **e** 2 é número natural_.
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &N1\\
 &N2\\
 \hline
 &N1 \land N2
-\end{aligned}
-$$
+\end{aligned}$$
 
 - Derivar novas informações da interseção de fatos conhecidos. Por exemplo:
 
-  - Proposição: _o gato está em cima do tapete, $ gT$_.
-  - Proposição: _o rato está em cima do tapete, $ rT$_.
+  - Proposição: _o gato está em cima do tapete, $gT$_;
+  - Proposição: _o rato está em cima do tapete, $rT$_;
   - Conclusão: logo, _o gato **e** o rato estão em cima do tapete_.
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &GT\\
 &RT\\
 \hline
 &G_T \land R_T
-\end{aligned}
-$$
+\end{aligned}$$
 
 - Fazer deduções lógicas baseadas em múltiplas proposições. Por exemplo:
 
-  - Proposição: _2 + 2 = 4_
-  - Proposição: _4 x 4 = 16_
-  - Conclusão: logo, _$(2 + 2 = 4) ∧ (4 × 4 = 16)$_
+  - Proposição: _2 + 2 = 4_;
+  - Proposição: _4 x 4 = 16_;
+  - Conclusão: logo, _$(2 + 2 = 4) ∧ (4 × 4 = 16)$_.
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &(2 + 2 = 4)\\
 &(4 \times 4 = 16)\\
 \hline
 &(2 + 2 = 4) \land (4 \times 4 = 16)
-\end{aligned}
-$$
+\end{aligned}$$
 
 #### Simplificação
 
@@ -822,80 +796,68 @@ A regra da Simplificação permite inferir uma conjunção a partir de uma conju
 
 $$F \land G$$
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &F \land G\\
 \hline
 &F\\
-\end{aligned}
-$$
+\end{aligned}$$
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &F \land G\\
 \hline
 &G\\
-\end{aligned}
-$$
+\end{aligned}$$
 
 Em linguagem natural:
 
-- proposição: _o céu está azul e os pássaros estão cantando_
+- proposição: _o céu está azul e os pássaros estão cantando_;
 - Conclusão: logo, _o céu está azul. E os pássaros estão cantando_.
 
 Algumas aplicações da Simplificação:
 
 - Derivar elementos de conjunções complexas. Por exemplo:
 
-  - Proposição: _hoje está chovendo, $ c$, e fazendo frio, $F$_.
+  - Proposição: _hoje está chovendo, $c$, e fazendo frio, $F$_;
   - Conclusão: logo, _está chovendo_.
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &C \land F\\
 \hline
 &C
-\end{aligned}
-$$
+\end{aligned}$$
 
 - Simplificar provas baseadas em conjunções. Por exemplo:
 
-  - Proposição: _2 é par, $2P$, e 3 é ímpar, $3P$_.
+  - Proposição: _2 é par, $2P$, e 3 é ímpar, $3P$_;
   - Conclusão: logo, _3 é ímpar, $3I$_.
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &2P \land 3I\\
 \hline
 &3I
-\end{aligned}
-$$
+\end{aligned}$$
 
 - Inferir detalhes específicos de declarações complexas. Por exemplo:
 
-  - Proposição: _o gato está dormindo, $ d$, e ronronando, $R$_.
+  - Proposição: _o gato está dormindo, $d$, e ronronando, $R$_;
   - Conclusão: logo, _o gato está ronronando_.
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &D \land R\\
 \hline
 &R
-\end{aligned}
-$$
+\end{aligned}$$
 
 - Derivar informações de premissas conjuntivas. Por exemplo:
 
-  - Proposição: _está chovendo, $J$, e o jogo foi cancelado, $ c$_.
+  - Proposição: _está chovendo, $J$, e o jogo foi cancelado, $c$_;
   - Conclusão: logo, _o jogo foi cancelado_.
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &C \land J\\
 \hline
 &J
-\end{aligned}
-$$
+\end{aligned}$$
 
 #### Bicondicionalidade
 
@@ -905,85 +867,75 @@ $$F \rightarrow G$$
 
 $$G \rightarrow F$$
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &G \rightarrow F\\
 \hline
 &F \leftrightarrow G\\
-\end{aligned}
-$$
+\end{aligned}$$
 
 Em linguagem natural:
 
-- proposição _1: se está chovendo, então a rua está molhada_.
-- proposição _2: se a rua está molhada, então está chovendo_.
+- proposição _1: se está chovendo, então a rua está molhada_;
+- proposição _2: se a rua está molhada, então está chovendo_;
 - Conclusão: logo, _está chovendo se e somente se a rua está molhada_.
 
 Algumas aplicações da Bicondicionalidade:
 
 - Inferir equivalências lógicas a partir de implicações bidirecionais. Por exemplo:
 
-  - Proposição: _se chove, $ c$ então a rua fica molhada, $m $_.
-  - Proposição: _se a rua fica molhada, então chove_.
+  - Proposição: _se chove, $c$ então a rua fica molhada, $m$_;
+  - Proposição: _se a rua fica molhada, então chove_;
   - Conclusão: logo, _chove se e somente se a rua fica molhada_.
 
 $$C \rightarrow M$$
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &M \rightarrow C\\
 \hline
 &C \leftrightarrow M
-\end{aligned}
-$$
+\end{aligned}$$
 
 - Simplificar relações recíprocas. Por exemplo:
 
-  - Proposição: _se um número é múltiplo de 2, $M2$ então é par, $P$_.
-  - Proposição: _se um número é par, então é múltiplo de 2_.
+  - Proposição: _se um número é múltiplo de 2, $M2$ então é par, $P$_;
+  - Proposição: _se um número é par, então é múltiplo de 2_;
   - Conclusão: logo, _um número é par se e somente se é múltiplo de 2_.
 
 $$P \rightarrow M2$$
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &M2 \rightarrow P\\
 \hline
 &P \leftrightarrow M2
-\end{aligned}
-$$
+\end{aligned}$$
 
 - Estabelecer equivalências matemáticas. Por exemplo:
 
-  - Proposição: _se $x^2 = 25$, então $x = 5$_.
-  - Proposição: _se $x = 5$, então $x^2 = 25$_.
+  - Proposição: _se $x^2 = 25$, então $x = 5$_;
+  - Proposição: _se $x = 5$, então $x^2 = 25$_;
   - Conclusão: logo, _$x^2 = 25$ se e somente se $x = 5$_.
 
 $$(x^2 = 25) \rightarrow (x = 5)$$
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &(x = 5) \rightarrow (x^2 = 25)\\
 \hline
 &(x^2 = 25) \leftrightarrow (x = 5)
-\end{aligned}
-$$
+\end{aligned}$$
 
 - Provar relações de definição mútua. Por exemplo:
 
-  - Proposição: _se figura é um quadrado, $Q$, então tem 4 lados iguais, $4L$_.
-  - Proposição: _se figura tem 4 lados iguais, é um quadrado_.
+  - Proposição: _se figura é um quadrado, $Q$, então tem 4 lados iguais, $4L$_;
+  - Proposição: _se figura tem 4 lados iguais, é um quadrado_;
   - Conclusão: logo, _figura é quadrado se e somente se tem 4 lados iguais_.
 
 $$Q \rightarrow 4L$$
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &4L \rightarrow Q\\
 \hline
 &Q \leftrightarrow 4L
-\end{aligned}
-$$
+\end{aligned}$$
 
 #### Equivalência
 
@@ -991,99 +943,85 @@ A regra da Equivalência permite inferir uma afirmação ou sua negação a part
 
 $$F \leftrightarrow G$$
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &F\\
 \hline
 &G\\
-\end{aligned}
-$$
+\end{aligned}$$
 
 $$F \leftrightarrow G$$
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &G\\
 \hline
 &F\\
-\end{aligned}
-$$
+\end{aligned}$$
 
 $$F \leftrightarrow G$$
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &\neg F\\
 \hline
 &\neg G\\
-\end{aligned}
-$$
+\end{aligned}$$
 
 $$F \leftrightarrow G$$
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &\neg G\\
 \hline
 &\neg F\\
-\end{aligned}
-$$
+\end{aligned}$$
 
 Em linguagem natural:
 
-- proposição 1: _está chovendo se e somente se a rua está molhada_.
-- proposição 2: _está chovendo_.
+- proposição 1: _está chovendo se e somente se a rua está molhada_;
+- proposição 2: _está chovendo_;
 - Conclusão: logo, _a rua está molhada_.
 
 Algumas aplicações da Equivalência:
 
 1. Inferir fatos de equivalências estabelecidas. Por exemplo:
 
-   - Proposição: _o número é par, $P$ se e somente se for divisível por 2, $ d2$_.
-   - Proposição: _156 é divisível por 2_.
+   - Proposição: _o número é par, $P$ se e somente se for divisível por 2, $d2$_;
+   - Proposição: _156 é divisível por 2_;
    - Conclusão: logo, _156 é par_.
 
    $$P \leftrightarrow D2$$
 
-   $$
-   \begin{aligned}
+   $$\begin{aligned}
    &D2(156)\\
    \hline
    &P(156)
-   \end{aligned}
-   $$
+   \end{aligned}$$
 
 2. Derivar negações de equivalências. Por exemplo:
 
-   - Proposição: _$x$ é negativo se e somente se $x < 0$_.
-   - Proposição: _$x$ não é negativo_.
+   - Proposição: _$x$ é negativo se e somente se $x < 0$_;
+   - Proposição: _$x$ não é negativo_;
    - Conclusão: logo, _$x$ não é menor que $0$_.
 
    $$ N \leftrightarrow (x < 0)$$
 
-   $$
-   \begin{aligned}
+   $$\begin{aligned}
    &\neg N\\
    \hline
    &\neg (x < 0)
-   \end{aligned}
-   $$
+   \end{aligned}$$
 
 3. Fazer deduções baseadas em definições. Por exemplo:
 
-   - Proposição: _número ímpar é definido como não divisível, $ nD2$, por $2$_.
-   - Proposição: _$9$ não é divisível por $2$_.
+   - Proposição: _número ímpar é definido como não divisível, $nD2$, por $2$_;
+   - Proposição: _$9$ não é divisível por $2$_;
    - Conclusão: logo, _$9$ é ímpar_.
 
    $$I \leftrightarrow \neg ND2$$
 
-   $$
-   \begin{aligned}
+   $$\begin{aligned}
    &\neg D_2(9)\\
    \hline
    &I(9)
-   \end{aligned}
-   $$
+   \end{aligned}$$
 
   | Regra | Descrição | Fórmula |
    |---|---|---|
@@ -1099,12 +1037,11 @@ Algumas aplicações da Equivalência:
 
 ### Classificação das Fórmulas Proposicionais
 
-Podemos classificar fórmulas proposicionais de acordo com suas propriedades semânticas, analisando suas tabelas-verdade. Seja $A$ uma fórmula proposicional:
+Podemos classificar fórmulas proposicionais de acordo com suas propriedades semânticas, analisando suas tabelas-verdade. Seja $R$ uma fórmula proposicional:
 
-- $A$ é **satisfatível** se sua Tabela Verdade contém pelo menos uma linha verdadeira. Considere:$P\wedge Q$.
+- $R$ é **satisfatível** se sua Tabela Verdade contém pelo menos uma linha verdadeira. Considere:$P\wedge Q$.
 
-$$
-\begin{array}{|c|c|c|}
+$$\begin{array}{|c|c|c|}
  \hline
  P & Q & P \land Q \\
  \hline
@@ -1116,12 +1053,11 @@ $$
  \hline
  T & T & T \\
  \hline
- \end{array}
-$$
+ \end{array}$$
 
-- $A$ é **insatisfatível** se sua Tabela Verdade contém apenas linhas falsas. Exemplo:$P\wedge \neg P$.
-- $A$ é **falsificável** se sua Tabela Verdade contém pelo menos uma linha falsa. Exemplo:$P\wedge Q$.
-- $A$ é **válida** se sua Tabela Verdade contém apenas linhas verdadeiras. Exemplo:$P\vee \neg P$.
+- $R$ é **insatisfatível** se sua Tabela Verdade contém apenas linhas falsas. Exemplo:$P\wedge \neg P$.
+- $R$ é **falsificável** se sua Tabela Verdade contém pelo menos uma linha falsa. Exemplo:$P\wedge Q$.
+- $R$ é **válida** se sua Tabela Verdade contém apenas linhas verdadeiras. Exemplo:$P\vee \neg P$.
 
 Note que:
 
