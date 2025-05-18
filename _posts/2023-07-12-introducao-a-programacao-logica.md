@@ -23,7 +23,7 @@ keywords:
    - Programação Lógica
 draft: true
 toc: true
-lastmod: 2025-05-15T00:08:19.192Z
+lastmod: 2025-05-18T00:13:58.434Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -119,7 +119,7 @@ Podemos dizer que as Fórmulas Bem Formadas respeitam as regras de precedência 
 
 Finalmente podemos definir a linguagem da Lógica de Primeira Ordem como o conjunto de todas as Fórmulas Bem Formadas criadas a partir dos campos de estudo da Lógica Proposicional e da Lógica de Predicados. Termos e átomos interligados em uma teia, onde cada termo ou átomo é como uma ilha de verdade. _A chuva cai_, _O sol brilha_. Cada uma dessas proposições é verdadeira ou falsa, em si, uma unidade, como uma ilha. As operações lógicas são as pontes que conectam essas ilhas, permitindo-nos construir as estruturas mais complexas da razão.
 
-### Lógica Proposicional
+## Lógica Proposicional
 
 Esse sistema, também chamado de álgebra booleana, fundamental para o desenvolvimento da computação, é uma verdadeira tapeçaria de possibilidades. **Na Lógica Proposicional, declarações atômicas, que só podem ter valores verdadeiro, $T$, ou falso $F$, são entrelaçadas em declarações compostas cuja veracidade, segundo as regras desse cálculo, depende dos valores de verdade das declarações atômicas que as compõem quando sujeitas aos operadores, ou aos conectivos, que definimos anteriormente**.
 
@@ -129,61 +129,14 @@ Na Lógica Proposicional, as fórmulas são conhecidas como Fórmulas Bem Formad
 
 As declarações atômicas e compostas são costuradas por conectivos para produzir declarações compostas, cujo valor de verdade depende dos valores de verdade das declarações componentes. Os conectivos que consideramos inicialmente, e suas tabelas verdade serão:
 
-<table style="margin-left: auto; margin-right: auto; text-align:center;">
- <tr style="border-top: 2px solid gray; border-bottom: 1px solid gray;">
- <th style="border-right: 1px solid gray;">$P$</th>
- <th style="border-right: double gray;">$Q$</th>
- <th style="width:16.8%; border-right: 1px solid gray;">$P\vee Q$</th>
- <th style="width:16.8%; border-right: 1px solid gray;">$P\wedge Q$ </th>
- <th style="width:16.8%; border-right: 1px solid gray;">$\neg P$</th>
- <th style="width:16.8%; border-right: 1px solid gray;">$P\rightarrow Q$</th>
- <th style="width:16.8%; border-right: 1px solid gray;">$P\leftrightarrow Q$</th>
- <th style="width:16.8%;">$P\oplus Q$</th>
- </tr>
- <tr style="background-color: #eeeeee;">
- <td style="border-right: 1px solid gray;">T</td>
- <td style="border-right: double gray;">T</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
- <td style="width:16.8%;">$F$</td>
- </tr>
- <tr>
- <td style="border-right: 1px solid gray;">T</td>
- <td style="border-right: double gray;">F</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
- <td style="width:16.8%;">$T$</td>
- </tr>
- <tr style="background-color: #eeeeee;">
- <td style="border-right: 1px solid gray;">F</td>
- <td style="border-right: double gray;">T</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
- <td style="width:16.8%;">$T$</td>
- </tr>
- <tr style="border-bottom: 2px solid gray;">
- <td style="border-right: 1px solid gray;">$F$</td>
- <td style="border-right: double gray;">$F$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$F$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
- <td style="width:16.8%; border-right: 1px solid gray;">$T$</td>
- <td style="width:16.8%;">$F$</td>
- </tr>
-</table>
-<legend style="font-size: 1em;
- text-align: center;
- margin-bottom: 20px;">Tabela 1 - Tabela Verdade, operadores básicos.</legend>
+| $P$ | $Q$ | $P\vee Q$ | $P\wedge Q$ | $\neg P$ | $P\rightarrow Q$ | $P\leftrightarrow Q$ | $P\oplus Q$ |
+|---|---|---|---|---|---|---|---|
+| T | T | $T$ | $T$ | $F$ | $T$ | $T$ | $F$ |
+| T | F | $T$ | $F$ | $F$ | $F$ | $F$ | $T$ |
+| F | T | $T$ | $F$ | $T$ | $T$ | $F$ | $T$ |
+| $F$ | $F$ | $F$ | $F$ | $T$ | $T$ | $T$ | $F$ |
+
+_Tabela 1 - Tabela Verdade, operadores básicos._{: class="legend"}
 
 Quando usamos a Tabela Verdade em uma declaração composta, podemos ver se ela é verdadeira ou falsa. Basta seguir as regras de precedência e aplicar a Tabela Verdade, simplificando a expressão. É uma alternativa mais direta do que o uso dos axiomas da Lógica Proposicional.
 
@@ -195,42 +148,14 @@ O bicondicional $\leftrightarrow$ equivale a ambos os componentes terem o mesmo 
 
 Cada operador com sua própria aridade:
 
-<table style="margin-left: auto;
- margin-right: auto; text-align:center;">
+| No Argumentos | Aridade | Exemplos |
+|---|---|---|
+| 0 | Nulo | $5$, $False$, Constantes |
+| 1 | Unário | $P(x)$, $7x$ |
+| 2 | Binário | $x \vee y$, $c \wedge y$ |
+| 3 | Ternário | if $P$ then $Q$ else $R$, $(P \rightarrow Q) \wedge (\neg P \rightarrow R)$ |
 
-<tr  style="border-top: 2px solid gray; border-bottom: 1px solid gray;">
-<th style="border-right: 1px solid gray;">No Argumentos</th>  
-<th style="border-right: 1px solid gray;">Aridade</th>
-<th style="border-right: 1px solid gray; white-space: nowrap;">Exemplos</th>
-</tr>
-
-<tr style="background-color: #eeeeee;">
-<td style="border-right: 1px solid gray;">0</td>
-<td style="border-right: 1px solid gray;">Nulo</td>
-<td style="border-right: 1px solid gray; white-space: nowrap;">$5$, $False $, Constantes</td>
-</tr>
-
-<tr style="background-color: #ffffff;">  
-<td style="border-right: 1px solid gray;">1</td>
-<td style="border-right: 1px solid gray;">Unário</td>
-<td style="border-right: 1px solid gray; white-space: nowrap;">$P(x)$, $7x$</td>
-</tr>
-
-<tr style="background-color: #eeeeee;">
-<td style="border-right: 1px solid gray;">2</td>
-<td style="border-right: 1px solid gray;">Binário</td>
-<td style="border-right: 1px solid gray; white-space: nowrap;">$x \vee y$, $ c \wedge y$</td>
-</tr>
-
-<tr style="border-bottom: 2px solid gray; background-color: #ffffff;">
-<td style="width:45%; border-right: 1px solid gray;">3</td>  
-<td style="width:45%; border-right: 1px solid gray;">Ternário</td>
-<td style="width:45%; border-right: 1px solid gray; white-space: nowrap;">if$P$ then $Q$ else $R$, $(P \rightarrow Q) \wedge (\neg P \rightarrow R)$</td>
-</tr>
-</table>
-<legend style="font-size: 1em;
- text-align: center;
- margin-bottom: 20px;">Tabela 2 - Aridade dos Operadores da Lógica Proposicional.</legend>
+_Tabela 2 - Aridade dos Operadores da Lógica Proposicional._{: class="legend"}
 
 Ainda observando a Tabela 1, que contem a Tabela Verdade dos operadores da Lógica Proposicional, é fácil perceber que se tivermos quatro termos diferentes, em vez de dois, teremos $2^4 = 16$ linhas. Independente do número de termos, se para uma determinada Fórmula Bem Formada todos os resultados forem verdadeiros, $T$, teremos uma _tautologia_, se todos forem falsos, $F$ uma _contradição_.
 
@@ -240,114 +165,31 @@ Identificar tautologias permite simplificar expressões e fazer inferências vá
 
 Linguagens de programação que usam a Programação Lógica usam **unificação** e resolução para fazer deduções. Tautologias geram cláusulas vazias que simplificam esta resolução. Em problemas de **satisfatibilidade**, se obtivermos uma contradição, sabemos que as premissas são insatisfatíveis. Segure as lágrimas e o medo. Os termos **unificação** e **satisfatibilidade** serão explicados assim que sejam necessários. Antes disso, precisamos falar de _equivalências_. Para isso vamos incluir um metacaractere no alfabeto da nossa linguagem: o caractere $\equiv$ que permitirá o entendimento das principais equivalências da Lógica Proposicional explicitadas a seguir:
 
-<table style="width: 100%; margin: auto; border-collapse: collapse;">
- <tr style="background-color: #f2f2f2;">
-  <td style="text-align: center; width: 50%; border-top: 2px solid #666666;">$P \land Q \equiv Q \land P$</td>
-  <td style="text-align: center; width: 30%; border-top: 2px solid #666666;">Comutatividade da Conjunção</td>
-  <td style="text-align: center; width: 20%; border-top: 2px solid #666666;">(1)</td>
- </tr>
- <tr>
-  <td style="text-align: center; width: 50%;">$P \lor Q \equiv Q \lor P$</td>
-  <td style="text-align: center; width: 30%;">Comutatividade da Disjunção</td>
-  <td style="text-align: center; width: 20%;">(2)</td>
- </tr>
- <tr style="background-color: #f2f2f2;">
-  <td style="text-align: center; width: 50%;">$P \land (Q \lor R) \equiv (P \land Q) \lor (P \land R)$</td>
-  <td style="text-align: center; width: 30%;">Distributividade da Conjunção sobre a Disjunção</td>
-  <td style="text-align: center; width: 20%;">(3)</td>
- </tr>
- <tr>
-  <td style="text-align: center; width: 50%;">$P \lor (Q \land R) \equiv (P \lor Q) \land (P \lor R)$</td>
-  <td style="text-align: center; width: 30%;">Distributividade da Disjunção sobre a Conjunção</td>
-  <td style="text-align: center; width: 20%;">(4)</td>
- </tr>
- <tr style="background-color: #f2f2f2;">
-  <td style="text-align: center; width: 50%;">$\neg (P \land Q) \equiv \neg P \lor \neg Q$</td>
-  <td style="text-align: center; width: 30%;">Lei de De Morgan</td>
-  <td style="text-align: center; width: 20%;">(5)</td>
- </tr>
- <tr>
-  <td style="text-align: center; width: 50%;">$\neg (P \lor Q) \equiv \neg P \land \neg Q$</td>
-  <td style="text-align: center; width: 30%;">Lei de De Morgan</td>
-  <td style="text-align: center; width: 20%;">(6)</td>
- </tr>
- <tr style="background-color: #f2f2f2;">
-  <td style="text-align: center; width: 50%;">$P \rightarrow Q \equiv \neg P \lor Q$</td>
-  <td style="text-align: center; width: 30%;">Definição de Implicação</td>
-  <td style="text-align: center; width: 20%;">(7)</td>
- </tr>
- <tr>
-  <td style="text-align: center; width: 50%;">$P \leftrightarrow Q \equiv (P \rightarrow Q) \land (Q \rightarrow P)$</td>
-  <td style="text-align: center; width: 30%;">Definição de Equivalência</td>
-  <td style="text-align: center; width: 20%;">(8)</td>
- </tr>
- <tr style="background-color: #f2f2f2;">
-  <td style="text-align: center; width: 50%;">$P \rightarrow Q \equiv \neg Q \rightarrow \neg P$</td>
-  <td style="text-align: center; width: 30%;">Lei da Contrapositiva</td>
-  <td style="text-align: center; width: 20%;">(9)</td>
- </tr>
- <tr>
-  <td style="text-align: center; width: 50%;">$P \land \neg P \equiv F$</td>
-  <td style="text-align: center; width: 30%;">Lei da Contradição</td>
-  <td style="text-align: center; width: 20%;">(10)</td>
- </tr>
- <tr style="background-color: #f2f2f2;">
-  <td style="text-align: center; width: 50%;">$P \lor \neg P \equiv T$</td>
-  <td style="text-align: center; width: 30%;">Lei do Terceiro Excluído</td>
-  <td style="text-align: center; width: 20%;">(11)</td>
- </tr>
- <tr>
-  <td style="text-align: center; width: 50%;">$\neg(\neg P) \equiv P$</td>
-  <td style="text-align: center; width: 30%;">Lei da Dupla Negação</td>
-  <td style="text-align: center; width: 20%;">(12)</td>
- </tr>
- <tr style="background-color: #f2f2f2;">
-  <td style="text-align: center; width: 50%;">$P \equiv P$</td>
-  <td style="text-align: center; width: 30%;">Lei da Identidade</td>
-  <td style="text-align: center; width: 20%;">(13)</td>
- </tr>
- <tr>
-  <td style="text-align: center; width: 50%;">$P \land T \equiv P$</td>
-  <td style="text-align: center; width: 30%;">Lei da Identidade para a Conjunção</td>
-  <td style="text-align: center; width: 20%;">(14)</td>
- </tr>
- <tr style="background-color: #f2f2f2;">
-  <td style="text-align: center; width: 50%;">$P \land F \equiv F$</td>
-  <td style="text-align: center; width: 30%;">Lei do Domínio para a Conjunção</td>
-  <td style="text-align: center; width: 20%;">(15)</td>
- </tr>
- <tr>
-  <td style="text-align: center; width: 50%;">$P \lor T \equiv T$</td>
-  <td style="text-align: center; width: 30%;">Lei do Domínio para a Disjunção</td>
-  <td style="text-align: center; width: 20%;">(16)</td>
- </tr>
- <tr style="background-color: #f2f2f2;">
-  <td style="text-align: center; width: 50%;">$P \lor F \equiv P$</td>
-  <td style="text-align: center; width: 30%;">Lei da Identidade para a Disjunção</td>
-  <td style="text-align: center; width: 20%;">(17)</td>
- </tr>
- <tr>
-  <td style="text-align: center; width: 50%;">(P \land Q) \land R \equiv P \land (Q \land R)</td>
-  <td style="text-align: center; width: 30%;">Associatividade da Conjunção</td>
-  <td style="text-align: center; width: 20%;">(18)</td>
- </tr>
- <tr style="background-color: #f2f2f2;">
-  <td style="text-align: center; width: 50%;">(P \lor Q) \lor R \equiv P \lor (Q \lor R)</td>
-  <td style="text-align: center; width: 30%;">Associatividade da Disjunção</td>
-  <td style="text-align: center; width: 20%;">(19)</td>
- </tr>
- <tr>
-  <td style="text-align: center; width: 50%;">$P \land P \equiv P$</td>
-  <td style="text-align: center; width: 30%;">Idempotência da Conjunção</td>
-  <td style="text-align: center; width: 20%;">(20)</td>
- </tr>
- <tr style="background-color: #f2f2f2; border-bottom: 2px solid #666666;">
-  <td style="text-align: center; width: 50%;">$P \lor P \equiv P$</td>
-  <td style="text-align: center; width: 30%;">Idempotência da Disjunção</td>
-  <td style="text-align: center; width: 20%;">(21)</td>
- </tr>
-</table>
-<legend style="font-size: 1em; text-align: center; margin-bottom: 20px;">Tabela 3 - Equivalências em Lógica Proposicional.</legend>
+| Expressão Lógica Equivalente | Nome da Lei/Propriedade | Ref. |
+|---|---|---|
+| $P \land Q \equiv Q \land P$ | Comutatividade da Conjunção | (1) |
+| $P \lor Q \equiv Q \lor P$ | Comutatividade da Disjunção | (2) |
+| $P \land (Q \lor R) \equiv (P \land Q) \lor (P \land R)$ | Distributividade da Conjunção sobre a Disjunção | (3) |
+| $P \lor (Q \land R) \equiv (P \lor Q) \land (P \lor R)$ | Distributividade da Disjunção sobre a Conjunção | (4) |
+| $\neg (P \land Q) \equiv \neg P \lor \neg Q$ | Lei de De Morgan | (5) |
+| $\neg (P \lor Q) \equiv \neg P \land \neg Q$ | Lei de De Morgan | (6) |
+| $P \rightarrow Q \equiv \neg P \lor Q$ | Definição de Implicação | (7) |
+| $P \leftrightarrow Q \equiv (P \rightarrow Q) \land (Q \rightarrow P)$ | Definição de Equivalência | (8) |
+| $P \rightarrow Q \equiv \neg Q \rightarrow \neg P$ | Lei da Contrapositiva | (9) |
+| $P \land \neg P \equiv F$ | Lei da Contradição | (10) |
+| $P \lor \neg P \equiv T$ | Lei do Terceiro Excluído | (11) |
+| $\neg(\neg P) \equiv P$ | Lei da Dupla Negação | (12) |
+| $P \equiv P$ | Lei da Identidade | (13) |
+| $P \land T \equiv P$ | Lei da Identidade para a Conjunção | (14) |
+| $P \land F \equiv F$ | Lei do Domínio para a Conjunção | (15) |
+| $P \lor T \equiv T$ | Lei do Domínio para a Disjunção | (16) |
+| $P \lor F \equiv P$ | Lei da Identidade para a Disjunção | (17) |
+| $(P \land Q) \land R \equiv P \land (Q \land R)$ | Associatividade da Conjunção | (18) |
+| $(P \lor Q) \lor R \equiv P \lor (Q \lor R)$ | Associatividade da Disjunção | (19) |
+| $P \land P \equiv P$ | Idempotência da Conjunção | (20) |
+| $P \lor P \equiv P$ | Idempotência da Disjunção | (21) |
+
+_Tabela 3 - Equivalências em Lógica Proposicional._{: class="legend"}
 
 Como essas equivalências permitem validar Fórmulas Bem Formadas sem o uso de uma tabela verdade. Uma coisa interessante seria tentar provar cada uma delas. Mas, isso fica, por enquanto, a cargo da amável leitora.
 
@@ -429,18 +271,26 @@ $$
 
 Este exemplo ilustra como múltiplas leis podem ser aplicadas. A cuidadosa leitora pode verificar cada passo com atenção. A simplificação completa pode ser extensa.
 
-**Exemplo 7**: $\neg(P \vee (Q \wedge \neg R)) \leftrightarrow ((S \vee E) \rightarrow (P \wedge Q))$
+**Exemplo 7**: determinar se a fórmula $\neg(P \lor (Q \land \neg R)) \leftrightarrow ((S \lor E) \rightarrow (P \land Q))$ é uma equivalência lógica.
 
-$$
-\begin{align*}
-&\neg(P \vee (Q \wedge \neg R)) \leftrightarrow ((S \vee E) \rightarrow (P \wedge Q)) \\
-&\equiv (\neg P \wedge \neg(Q \wedge \neg R)) \leftrightarrow (\neg(S \vee E) \vee (P \wedge Q)) && \text{Lei de De Morgan (6), Definição de Implicação (7)} \\
-&\equiv (\neg P \wedge (\neg Q \vee \neg(\neg R))) \leftrightarrow ((\neg S \wedge \neg E) \vee (P \wedge Q)) && \text{Lei de De Morgan (5) e (6)} \\
-&\equiv (\neg P \wedge (\neg Q \vee R)) \leftrightarrow ((\neg S \wedge \neg E) \vee (P \wedge Q)) && \text{Lei da Dupla Negação (12)}
-\end{align*}
-$$
+Para analisar esta suposta equivalência, vamos simplificar ambos os lados separadamente:
 
-A expressão está simplificada até este ponto, mantendo a equivalência principal.
+**Lado Esquerdo:**
+$$\begin{align*}
+\neg(P \lor (Q \land \neg R)) &\equiv \neg P \land \neg(Q \land \neg R) & \text{(Lei de De Morgan)} \\
+&\equiv \neg P \land (\neg Q \lor \neg\neg R) & \text{(Lei de De Morgan)} \\
+&\equiv \neg P \land (\neg Q \lor R) & \text{(Dupla Negação)}
+\end{align*}$$
+
+**Lado Direito:**
+$$\begin{align*}
+((S \lor E) \rightarrow (P \land Q)) &\equiv \neg(S \lor E) \lor (P \land Q) & \text{(Eliminação da Implicação)} \\
+&\equiv (\neg S \land \neg E) \lor (P \land Q) & \text{(Lei de De Morgan)}
+\end{align*}$$
+
+Como podemos ver, os resultados finais $\neg P \land (\neg Q \lor R)$ e $(\neg S \land \neg E) \lor (P \land Q)$ têm formas diferentes e envolvem variáveis diferentes. Claramente, estas expressões não são logicamente equivalentes, a menos que existam restrições adicionais entre as variáveis $P$, $Q$, $R$, $S$ e $E$, que não foram especificadas.
+
+**Conclusão**: As expressões não são logicamente equivalentes.
 
 **Exemplo 8**:
 $\neg(P \leftrightarrow Q) \vee ((R \rightarrow S) \wedge (\neg E \vee \neg P))$
@@ -504,7 +354,7 @@ _Em sua dissertação de final de curso, [Claude Shannon](https://en.wikipedia.o
 
 Tão importante quanto o impacto da **lógica proposicional** na tecnologia digital é seu papel no pensamento racional, na tomada de decisões e na prova de teoremas. Neste caminho, nosso guia são as **regras de inferência**.
 
-## Regras de Inferência
+### Regras de Inferência
 
 Regras de inferência são esquemas que proporcionam a estrutura para derivações lógicas. Base da tomada de decisão computacional. Elas definem os passos legítimos que podem ser aplicados a uma ou mais proposições, sejam elas atômicas ou Fórmulas Bem Formadas, para produzir uma proposição nova. Em outras palavras, uma regra de inferência é uma transformação sintática de Formas Bem Formadas que preserva a verdade.
 
@@ -522,7 +372,7 @@ Eu vou tentar usar contexto e conclusão. Mas me perdoem se eu escapar para ante
 
 **As regras de inferência são o alicerce da lógica dedutiva e das provas matemáticas. Elas permitem que raciocínios complexos sejam divididos em passos simples, onde cada passo é justificado pela aplicação de uma regra de inferência**. A seguir, estão algumas das regras de inferência mais usadas:
 
-### Modus Ponens
+#### Modus Ponens
 
 A regra do **Modus Ponens** permite inferir uma conclusão a partir de uma implicação e de sua premissa antecedente. Se temos uma implicação $P\rightarrow Q$, e sabemos que $P$ é verdadeiro, então podemos concluir que $Q$ também é verdadeiro.
 
@@ -606,7 +456,7 @@ $$
  \end{aligned}
 $$
 
-### Modus Tollens
+#### Modus Tollens
 
 A regra do Modus Tollens permite inferir a negação da premissa antecedente a partir de uma implicação e da negação de sua premissa consequente. Se temos uma implicação $P\rightarrow Q$, e sabemos que $Q$ é falso (ou seja, $\neg G$), então podemos concluir que $P$ também é falso.
 
@@ -692,7 +542,7 @@ $$
  \end{aligned}
 $$
 
-### Dupla Negação
+#### Dupla Negação
 
 A regra da Dupla Negação permite eliminar uma dupla negação, inferindo a afirmação original. A negação de uma negação é equivalente à afirmação original. Esta regra é importante para simplificar expressões lógicas.
 
@@ -737,7 +587,7 @@ $$\neg \forall x P(x) \Leftrightarrow \exists x \neg P(x)$$
 
 $$\neg \neg P \Leftrightarrow P$$
 
-### Adição
+#### Adição
 
 A regra da Adição permite adicionar uma disjunção a uma afirmação, resultando em uma nova disjunção verdadeira. Esta regra é útil para introduzir alternativas em nosso raciocínio dedutivo.
 
@@ -780,7 +630,7 @@ Alguns usos e aplicações importantes da regra da Adição:
 
 A regra da Adição amplia nossas capacidades de prova e abordagem de problemas.
 
-### Modus Tollendo Ponens
+#### Modus Tollendo Ponens
 
 O Modus Tollendo Ponens permite inferir uma disjunção a partir da negação da outra disjunção.
 
@@ -881,7 +731,7 @@ $$
 \end{aligned}
 $$
 
-### Adjunção
+#### Adjunção
 
 A regra da Adjunção permite combinar duas afirmações em uma conjunção. Esta regra é útil para juntar duas premissas em uma única afirmação conjuntiva.
 
@@ -966,7 +816,7 @@ $$
 \end{aligned}
 $$
 
-### Simplificação
+#### Simplificação
 
 A regra da Simplificação permite inferir uma conjunção a partir de uma conjunção composta. Esta regra nos permite derivar ambos os elementos de uma conjunção, a partir da afirmação conjuntiva.
 
@@ -1047,7 +897,7 @@ $$
 \end{aligned}
 $$
 
-### Bicondicionalidade
+#### Bicondicionalidade
 
 A regra da Bicondicionalidade permite inferir uma bicondicional a partir de duas condicionais. Esta regra nos permite combinar duas implicações para obter uma afirmação de equivalência lógica.
 
@@ -1135,7 +985,7 @@ $$
 \end{aligned}
 $$
 
-### Equivalência
+#### Equivalência
 
 A regra da Equivalência permite inferir uma afirmação ou sua negação a partir de uma bicondicional. Esta regra nos permite aplicar bicondicionais para derivar novas afirmações baseadas nas equivalências lógicas.
 
@@ -1235,53 +1085,19 @@ Algumas aplicações da Equivalência:
    \end{aligned}
    $$
 
-  <table>
-          <tr>
-              <th>Regra</th>
-              <th>Descrição</th>
-              <th>Fórmula</th>
-          </tr>
-          <tr>
-              <td>Modus Ponens</td>
-              <td>Se $P \rightarrow Q$ e $P$ são verdadeiros, então $Q$ também é verdadeiro.</td>
-              <td>$\frac{P, P \rightarrow Q}{Q}$</td>
-          </tr>
-          <tr>
-              <td>Modus Tollens</td>
-              <td>Se $P \rightarrow Q$ e $\neg Q$ são verdadeiros, então $\neg P$ também é verdadeiro.</td>
-              <td>$\frac{\neg Q, P \rightarrow Q}{\neg P}$</td>
-          </tr>
-          <tr>
-              <td>Dupla Negação</td>
-              <td>A negação de uma negação é equivalente à afirmação original.</td>
-              <td>$\frac{\neg \neg P}{P}$</td>
-          </tr>
-          <tr>
-              <td>Adição</td>
-              <td>Se $P$ é verdadeiro, então $P \vee Q$ também é verdadeiro.</td>
-              <td>$\frac{P}{P \vee Q}$</td>
-          </tr>
-          <tr>
-              <td>Adjunção</td>
-              <td>Se $P$ e $Q$ são verdadeiros, então $P \wedge Q$ é verdadeiro.</td>
-              <td>$\frac{P, Q}{P \wedge Q}$</td>
-          </tr>
-          <tr>
-              <td>Simplificação</td>
-              <td>Se $P \wedge Q$ é verdadeiro, então $P$ (ou $Q$) é verdadeiro.</td>
-              <td>$\frac{P \wedge Q}{P}$</td>
-          </tr>
-          <tr>
-              <td>Bicondicionalidade</td>
-              <td>Se $P \leftrightarrow Q$, então $P \rightarrow Q$ e $Q \rightarrow P$ são verdadeiros.</td>
-              <td>$\frac{P \leftrightarrow Q}{P \rightarrow Q, Q \rightarrow P}$</td>
-          </tr>
-  </table>
-  <legend style="font-size: 1em;
-  text-align: center;
-  margin-bottom: 20px;">Tabela 4 - Resumo dos métodos de inferência.</legend>
+  | Regra | Descrição | Fórmula |
+   |---|---|---|
+   | Modus Ponens | Se $P \rightarrow Q$ e $P$ são verdadeiros, então $Q$ também é verdadeiro. | $\frac{P, P \rightarrow Q}{Q}$ |
+   | Modus Tollens | Se $P \rightarrow Q$ e $\neg Q$ são verdadeiros, então $\neg P$ também é verdadeiro. | $\frac{\neg Q, P \rightarrow Q}{\neg P}$ |
+   | Dupla Negação | A negação de uma negação é equivalente à afirmação original. | $\frac{\neg \neg P}{P}$ |
+   | Adição | Se $P$ é verdadeiro, então $P \vee Q$ também é verdadeiro. | $\frac{P}{P \vee Q}$ |
+   | Adjunção | Se $P$ e $Q$ são verdadeiros, então $P \wedge Q$ é verdadeiro. | $\frac{P, Q}{P \wedge Q}$ |
+   | Simplificação | Se $P \wedge Q$ é verdadeiro, então $P$ (ou $Q$) é verdadeiro. | $\frac{P \wedge Q}{P}$ |
+   | Bicondicionalidade | Se $P \leftrightarrow Q$, então $P \rightarrow Q$ e $Q \rightarrow P$ são verdadeiros. | $\frac{P \leftrightarrow Q}{P \rightarrow Q, Q \rightarrow P}$ |
+  
+  _Tabela 4 - Resumo dos métodos de inferência._{: class="legend"}
 
-## Classificando Fórmulas Proposicionais
+### Classificação das Fórmulas Proposicionais
 
 Podemos classificar fórmulas proposicionais de acordo com suas propriedades semânticas, analisando suas tabelas-verdade. Seja $A$ uma fórmula proposicional:
 
@@ -1322,7 +1138,7 @@ Fórmulas válidas são importantes na lógica proposicional, representando argu
 
 4. **Construção de Argumentos**: Na construção de argumentos, estas classificações são úteis para garantir que os argumentos são válidos. Se estamos construindo um argumento e podemos mostrar que ele é representado por uma fórmula que é satisfatível (mas não uma tautologia), sabemos que existem algumas circunstâncias em que o argumento é válido e outras em que não é.
 
-# Um Sistema de Prova
+## Provas
 
 A matemática respira prova. Nenhuma sentença matemática tem qualquer valor se não for provada. As verdades da aritmética devem ser estabelecidas com rigor lógico; as conjecturas da geometria, confirmadas por construtos infalíveis. Cada novo teorema se ergue sobre os ombros de gigantes – um edifício de razão cuidadosamente erigido.
 
@@ -1330,9 +1146,9 @@ A beleza da lógica proposicional é revelar, nas entranhas da matemática, um m
 
 Considere um sistema proposicional, com suas Fórmulas Bem Formadas, suas transformações válidas. Ainda que simples, vemos nesse sistema o que há de profundo na natureza da prova. Seus teoremas irradiam correção; suas demonstrações, poder dedutivo. Dentro deste sistema austero reside a beleza em uma estética hermética, mas que desvelada faz brilhar a luz da razão e do entendimento.
 
-## Contrapositivas e Recíprocas
+### Contrapositivas e Recíprocas
 
-As implicações são um problema, do ponto de vista da matemática. Sentenças do tipo _se...então_ induzem uma conclusão. Provar estas sentenças é uma preocupação constante da matemática. Dada uma implicação, existem duas fórmulas relacionadas que ocorrem com tanta frequência que possuem nomes especiais: contrapositivas e recíprocas. Antes de mergulharmos em contrapositivas, precisamos visitar alguns portos.
+As implicações são um problema, do ponto de vista da matemática. Sentenças do tipo _se...então_ induzem uma conclusão. Provar estas sentenças é uma preocupação constante da matemática [^3]. Dada uma implicação, existem duas fórmulas relacionadas que ocorrem com tanta frequência que possuem nomes especiais: contrapositivas e recíprocas. Antes de mergulharmos em contrapositivas, precisamos visitar alguns portos.
 
 ### Logicamente Equivalente
 
@@ -1455,7 +1271,7 @@ Podemos ver que _$f(x)$ é bem definida_ é a recíproca de _$f(x)$ é injetora_
 
 Para provar uma bicondicional como _o número é primo se e somente se o número é ímpar_, um matemático frequentemente prova _se o número é primo, então o número é ímpar_ e depois prova a recíproca, _se o número é ímpar, então o número é primo_. Nenhuma dessas etapas pode ser pulada, pois uma implicação e sua recíproca podem não ser logicamente equivalentes. Por exemplo, pode-se facilmente mostrar que _se o número é par, então o número é divisível por 2_ não é logicamente equivalente à sua recíproca _se o número é divisível por 2, então o número é par_. Algumas fórmulas como _se 5 é ímpar, então 5 é ímpar_ são equivalentes às suas recíprocas por coincidência. Para resumir, uma implicação é sempre equivalente à sua contrapositiva, mas pode não ser equivalente à sua recíproca.
 
-## Análise de Argumentos
+### Análise de Argumentos
 
 Quando vimos regras de inferência, sem muitos floreios, definimos argumentos. mas, sem usar a palavra argumento em nenhum lugar. Vamos voltar um pouco. Definiremos um argumento proposicionalmente como sendo uma regra de inferência, então um argumento será definido por um conjunto de proposições. Quando estamos analisando argumentos chamamos as proposições de premissas logo:
 
@@ -1591,7 +1407,7 @@ Se olharmos para a terceira linha, se $P$ é falso e $P\vee Q$ é verdadeiro, en
 
 Não podemos esquecer: um argumento só é válido se, e somente se, a proposição condicional que o expresse seja uma tautologia. Agora podemos definir um sistema de prova.
 
-## Finalmente, um Sistema de Prova
+### Finalmente, um Sistema de Prova
 
 Ainda estamos no domínio da Lógica Proposicional e vamos definir um sistema de prova simples e direto chamado de $\mathfrak{L}$ desenvolvido por [John Lemmon](https://en.wikipedia.org/wiki/John_Lemmon) na primeira parte do século XX. Vamos construir a prova e, sintaticamente, em cada linha da nossa prova teremos:
 
@@ -1712,7 +1528,7 @@ Como podemos ver, a coluna final, que representa o teorema $(A \land B) \rightar
 
 A nossa terceira prova mostra os limites do sistema $\mathfrak{L}$, o que pode dar uma falsa impressão sobre o a capacidade deste sistema de prova. Vamos tentar melhorar isso.
 
-### Lema
+#### Lema
 
 Considere nossa primeira prova, provamos $A \rightarrow A$ e, a partir deste momento, $A \rightarrow A$ se tornou um Lema. Um lema é uma afirmação que é provada não como um fim em si mesma, mas como um passo útil para a prova de outros teoremas.
 
@@ -1729,7 +1545,7 @@ Considere o seguinte Teorema: $\vdash_L (\lnot B \rightarrow B) \rightarrow B$, 
 
 A adoção de lemas é, na verdade, um mecanismo útil para economizar tempo e esforço. Ao invés de replicar o Teorema 1 na primeira linha dessa prova, nós poderíamos, alternativamente, copiar as 5 linhas da prova original do Teorema 1, substituindo todos os casos de $A$ Por $\lnot B$. As justificativas seriam mantidas iguais às da prova original do Teorema 1. A prova resultante, então, consistiria exclusivamente de axiomas e aplicações do _Modus Ponens_. No entanto, uma vez que a prova do Teorema 1 já foi formalmente documentada, parece redundante replicá-la aqui. E eis o motivo da existência e uso dos lemas.
 
-### Hipóteses
+#### Hipóteses
 
 Hipóteses são suposições ou proposições feitas como base para o raciocínio, sem a suposição de sua veracidade. Elas são usadas como pontos de partida para investigações ou pesquisas científicas. Essencialmente uma hipótese é uma teoria ou ideia que você pode testar de alguma forma. Isso significa que, através de experimentação e observação, uma hipótese pode ser provada verdadeira ou falsa.
 
@@ -1769,7 +1585,7 @@ Neste exemplo, vamos o uso das Hipóteses. No processo de dedução, as hipótes
 
 Neste ponto, podemos voltar um pouco e destacar um constructor importante na programação imperativa: _se...então_ representando por $P\rightarrow Q$, uma implicação. Que pode ser lido como hipótese $P$ e conclusão $Q$.
 
-# Lógica Predicativa
+## Lógica Predicativa
 
 > A lógica é a técnica que usamos para adicionar convicção à verdade.
 > Jean de la Bruyere
@@ -2000,9 +1816,9 @@ Talvez, alguns exemplos possam ajudar no seu entendimento:
 
 $$\exists x (mamífero(x) \land \neg RespiraAr(x))$$
 
-**Exemplo 2**: existe uma equação do segundo grau com três raízes reais.
+**Exemplo 2**: existe uma equação do segundo grau com uma raiz real.
 
-$$\exists x (Eq2Grau(x) \land |\text{RaízesReais}(x)| = 3)$$
+$$\exists x (\text{Eq2Grau}(x) \land |\text{RaízesReais}(x)| \leq 1)$$
 
 **Exemplo 3**: existe um número primo que é par.
 
@@ -2050,21 +1866,29 @@ Por exemplo, $\forall x$ pode ser lido como "_para todo objeto $x$ no universo d
 
 Converter uma Fórmula Bem Formada em uma sentença fluida em linguagem natural nem sempre é direto, mas é um passo valioso para a compreensão. Vamos considerar $U$ como o universo do discurso (o conjunto de todos os aviões já fabricados) e $F(x,y)$ como o predicado que denota "$x$ voa mais rápido que $y$". Analisemos algumas combinações de quantificadores:
 
-1.  **$\forall x \forall y F(x,y)$**
-    * **Leitura literal:** Para todo avião $x$, e para todo avião $y$, $x$ voa mais rápido que $y$.
-    * **Significado:** Esta afirmação é muito forte. Ela diz que cada avião no universo é mais rápido que todos os aviões no universo (incluindo ele mesmo, a menos que $F(x,x)$ seja definido como falso ou que se adicione $x \neq y$). Se o universo tiver mais de um avião, esta afirmação provavelmente será falsa, pois implicaria, por exemplo, que $A$ é mais rápido que $B$ e $B$ é mais rápido que $A$ simultaneamente.
+1. **$\forall x \forall y F(x,y)$**
 
-2.  **$\exists x \forall y F(x,y)$**
-    * **Leitura literal:** Existe um avião $x$ tal que, para todo avião $y$, $x$ voa mais rápido que $y$.
-    * **Significado:** Esta afirmação diz que existe pelo menos um avião que é mais rápido que todos os outros (e, novamente, dependendo da definição de $F(x,x)$, mais rápido que ele mesmo). Em outras palavras, existe um "avião mais rápido absoluto".
+   - **Leitura literal:** Para todo avião $x$, e para todo avião $y$, $x$ voa mais rápido que $y$.
 
-3.  **$\forall x \exists y F(x,y)$**
-    * **Leitura literal:** Para todo avião $x$, existe um avião $y$ tal que $x$ voa mais rápido que $y$.
-    * **Significado:** Esta afirmação diz que para qualquer avião que escolhermos, podemos encontrar algum avião $y$ que é mais lento que $x$. Se $y$ pode ser igual a $x$, a afirmação é trivialmente verdadeira se $F(x,x)$ for verdadeiro para algum $x$. Se $y$ deve ser diferente de $x$, isso significaria que não existe um "avião mais lento absoluto" (a menos que o universo seja finito e ordenado de forma cíclica, ou que $F(x,y)$ permita que $x$ seja mais rápido que "nada" se $y$ for o mais lento). Uma interpretação comum é que, para cada avião, há outro que ele supera em velocidade.
+   - **Significado:** Esta afirmação é muito forte. Ela diz que cada avião no universo é mais rápido que todos os aviões no universo (incluindo ele mesmo, a menos que $F(x,x)$ seja definido como falso ou que se adicione $x \neq y$). Se o universo tiver mais de um avião, esta afirmação provavelmente será falsa, pois implicaria, por exemplo, que $A$ é mais rápido que $B$ e $B$ é mais rápido que $A$ simultaneamente.
 
-4.  **$\exists x \exists y F(x,y)$**
-    * **Leitura literal:** Existe um avião $x$ e existe um avião $y$ tal que $x$ voa mais rápido que $y$.
-    * **Significado:** Esta é a afirmação mais fraca entre as quatro. Ela simplesmente diz que a relação "voa mais rápido que" não é vazia; ou seja, há pelo menos um par de aviões $(x,y)$ onde $x$ é mais rápido que $y$.
+2. **$\exists x \forall y F(x,y)$**
+
+   - **Leitura literal:** Existe um avião $x$ tal que, para todo avião $y$, $x$ voa mais rápido que $y$.
+
+   - **Significado:** Esta afirmação diz que existe pelo menos um avião que é mais rápido que todos os outros (e, novamente, dependendo da definição de $F(x,x)$, mais rápido que ele mesmo). Em outras palavras, existe um "avião mais rápido absoluto".
+
+3. **$\forall x \exists y F(x,y)$**
+
+   - **Leitura literal:** Para todo avião $x$, existe um avião $y$ tal que $x$ voa mais rápido que $y$.
+
+   - **Significado:** Esta afirmação diz que para qualquer avião que escolhermos, podemos encontrar algum avião $y$ que é mais lento que $x$. Se $y$ pode ser igual a $x$, a afirmação é trivialmente verdadeira se $F(x,x)$ for verdadeiro para algum $x$. Se $y$ deve ser diferente de $x$, isso significaria que não existe um "avião mais lento absoluto" (a menos que o universo seja finito e ordenado de forma cíclica, ou que $F(x,y)$ permita que $x$ seja mais rápido que "nada" se $y$ for o mais lento). Uma interpretação comum é que, para cada avião, há outro que ele supera em velocidade.
+
+4. **$\exists x \exists y F(x,y)$**
+
+   - **Leitura literal:** Existe um avião $x$ e existe um avião $y$ tal que $x$ voa mais rápido que $y$.
+
+   - **Significado:** Esta é a afirmação mais fraca entre as quatro. Ela simplesmente diz que a relação "voa mais rápido que" não é vazia; ou seja, há pelo menos um par de aviões $(x,y)$ onde $x$ é mais rápido que $y$.
 
 É fundamental perceber que **estas quatro sentenças têm significados lógicos distintos e geralmente não expressam o mesmo contexto**. A ordem dos quantificadores, especialmente quando misturamos $\forall$ e $\exists$, altera drasticamente o significado da afirmação. Por exemplo, $\exists x \forall y F(x,y)$ (existe um avião mais rápido que todos) é uma afirmação muito mais forte e diferente de $\forall x \exists y F(x,y)$ (para cada avião, existe um mais lento).
 
@@ -2368,7 +2192,7 @@ Os valores de verdade de $\neg (\forall x P(x))$ e $\exists x (\neg P(x))$ são 
 Muita lógica? Que tal se tentarmos novamente, usando um pouco mais de linguagem natural.
 Considere as expressões lógicas $\neg (\forall x P(x))$ e $\exists x (\neg P(x))$. Para ilustrar essas fórmulas, vamos usar um exemplo com um predicado $P(x)$ que se aplica a uma entidade $x$ se _$x$ é feliz_.
 
-A expressão $\forall x P(x)$ significa que _todos são felizes_, enquanto $\neg (\forall x P(x))$ significa que _não é verdade que todos são felizes_. Ou seja, deve haver pelo menos uma pessoa que não está feliz.
+A expressão $\forall x P(x)$ significa que todos são felizes. A negação dessa afirmação, $\neg (\forall x P(x))$, equivale logicamente a $\exists x (\neg P(x))$, ou seja, existe pelo menos um indivíduo que não é feliz.
 
 A expressão $\exists x (\neg P(x))$ significa que _existe alguém que não está feliz_. Você pode ver que isso é apenas outra forma de expressar a ideia contida em $\neg (\forall x P(x))$.
 
@@ -2376,32 +2200,14 @@ A afirmação de que _não é verdade que todos estão felizes_ implica que deve
 
 Portanto, as duas fórmulas têm o mesmo valor verdade. Elas são logicamente equivalentes e podem ser representadas como $\neg (\forall x P(x)) \equiv \exists x (\neg P(x))$. Esta equivalência reflete uma relação profunda e intuitiva em nosso entendimento de declarações sobre entidades em nosso mundo.
 
-<table style="width: 100%; margin: auto; border-collapse: collapse;">
-  <tr>
-    <th style="text-align: center; background-color: #eeeeee;">Expressão</th>
-    <th style="text-align: center; background-color: #eeeeee;">Equivalência</th>
-  </tr>
-  <tr>
-    <td style="text-align: center; width: 50%;">
-    $\forall x P(x)$</td>
-    <td style="text-align: center; width: 50%;">
-    $\neg \exists x \neg P(x)$</td>
-  </tr>
-  <tr style="background-color: #eeeeee;">
-    <td style="text-align: center; width: 50%;">$\exists x \, P(x)$</td>
-    <td style="text-align: center; width: 50%;" >$\neg \forall x \, \neg P(x)$</td>
-  </tr>
-  <tr>
-    <td style="text-align: center; width: 50%;" >$\neg \forall x \, P(x)$</td>
-    <td style="text-align: center; width: 50%;" >$\exists x \, \neg P(x)$</td>
-  </tr>
-  <tr style="border-bottom: 2px solid gray;">
-    <td style="text-align: center; width: 50%;">$\neg \exists x \, P(x)$</td>
-    <td style="text-align: center; width: 50%;" >$\forall x \, \neg P(x)$</td>
-  </tr>
-</table>
-<legend style="font-size: 1em; text-align: center;
- margin-bottom: 20px;">Tabela 5 - Equivalências entre Quantificadores.</legend>
+| Expressão | Equivalência |
+|---|---|
+| $\forall x P(x)$ | $\neg \exists x \neg P(x)$ |
+| $\exists x \, P(x)$ | $\neg \forall x \, \neg P(x)$ |
+| $\neg \forall x \, P(x)$ | $\exists x \, \neg P(x)$ |
+| $\neg \exists x \, P(x)$ | $\forall x \, \neg P(x)$ |
+
+_Tabela 5 - Equivalências entre Quantificadores._</legend>
 
 ## Regras de Inferência usando Quantificadores
 
@@ -2475,59 +2281,66 @@ A regra de Instanciação Universal permite substituir a variável em uma afirma
 
 $$\forall x P(x)$$
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &\forall x P(x)\\
 \hline
 &P(a)\\
-\end{aligned}
-$$
+\end{aligned}$$
 
 Em linguagem natural:
 
-- Proposição: _todos os cachorros latem_.
-- Conclusão: logo, _Rex late_.
+- Proposição: _todos os humanos são mortais_.
+- Conclusão: logo, _Sócrates é mortal_. Assumindo que Sócrates é humano.
+
+**Exemplo completo de aplicação**:
+
+- **Premissa 1**: todos os mamíferos respiram ar: $\forall x(M(x) \rightarrow R(x))$;
+- **Premissa 2**: a baleia é um mamífero: $M(b)$;
+- **Aplicação da Instanciação Universal à Premissa 1**: $M(b) \rightarrow R(b)$;
+- **Aplicação de Modus Ponens**:
+  
+  $$\begin{aligned}
+  &M(b) \rightarrow R(b)\\
+  &M(b)\\
+  \hline
+  &R(b)
+  \end{aligned}$$
+
+- **Conclusão**: logo, a baleia respira ar: $R(b)$
 
 Algumas aplicações da Instanciação Universal:
 
-- Derivar casos concretos de proposições universais. Por exemplo:
-
-  - Proposição: _todos os mamíferos respiram ar_.
-  - Conclusão: logo, _a baleia respira ar_.
-
-$$
-\begin{aligned}
-&\forall x(M(x) \rightarrow R(x))\\
-\hline
-&R(b)
-\end{aligned}
-$$
-
 - Aplicar regras e princípios gerais. Por exemplo:
 
-  - Proposição: _todos os triângulos têm 180 graus internos_.
-  - Conclusão: logo, _o triângulo $ABC $ tem 180 graus_.
+  - Proposição: _todos os triângulos têm 180 graus internos_: $\forall t(T(t) \rightarrow 180^\circ(t))$;
+  - Premissa adicional: _ABC é um triângulo_: $T(\text{Triângulo }ABC)$;
+  - Aplicação da Instanciação Universal: $T(\text{Triângulo }ABC) \rightarrow 180^\circ(\text{Triângulo }ABC)$;
+  - Aplicação de Modus Ponens:
+  
+  $$\begin{aligned}
+  &T(\text{Triângulo }ABC) \rightarrow 180^\circ(\text{Triângulo }ABC)\\
+  &T(\text{Triângulo }ABC)\\
+  \hline
+  &180^\circ(\text{Triângulo }ABC)
+  \end{aligned}$$
 
-$$
-\begin{aligned}
-&\forall t(T(t) \rightarrow 180^\circ(t))\\
-\hline
-&180^\circ(\text{Triângulo} ABC)
-\end{aligned}
-$$
+  - Conclusão: logo, _o triângulo $ABC$ tem 180 graus_.
 
 - Testar propriedades em membros de conjuntos. Por exemplo:
 
-  - Proposição: _todo inteiro é maior que seu antecessor_.
-  - Conclusão: logo, _$5 $ é maior que $4$_.
-
-$$
-\begin{aligned}
-&\forall n (\mathbb{Z}(n) \rightarrow (n > n-1))\\
-\hline
-&5 > 4
-\end{aligned}
-$$
+  - Proposição: _todo inteiro é maior que seu antecessor_: $\forall n (\mathbb{Z}(n) \rightarrow (n > n-1))$;
+  - Premissa adicional: _5 é um inteiro_: $\mathbb{Z}(5)$;
+  - Aplicação da Instanciação Universal: $\mathbb{Z}(5) \rightarrow (5 > 5-1)$;
+  - Aplicação de Modus Ponens:
+  
+  $$\begin{aligned}
+  &\mathbb{Z}(5) \rightarrow (5 > 5-1)\\
+  &\mathbb{Z}(5)\\
+  \hline
+  &5 > 4
+  \end{aligned}$$
+  
+  - Conclusão: logo, $5$ é maior que $4$.
 
 ### Generalização Existencial
 
@@ -2669,15 +2482,15 @@ Aqui estão cinco quebra-cabeças clássicos juntamente com suas soluções usan
 
    **Axiomas**:
 
-   1. $VA \lor MA$ (A é verdadeiro ou mentiroso)
-   2. $\neg(VA \land MA)$ (A não é ambos verdadeiro e mentiroso)
-   3. $VB \lor MB$ (B é verdadeiro ou mentiroso)
-   4. $\neg(VB \land MB)$ (B não é ambos verdadeiro e mentiroso)
-   5. $VA \to \neg VB$ (Se A é verdadeiro, B não é verdadeiro)
-   6. $VA \to RA$ (Se A é verdadeiro, ele respondeu "Sim")
-   7. $MA \to \neg RA$ (Se A é mentiroso, ele respondeu "Não")
-   8. $VB \to (B \text{ diz } \neg RA)$ (Se B é verdadeiro, ele diz a verdade sobre a resposta de A)
-   9. $MB \to (B \text{ diz } RA)$ (Se B é mentiroso, ele mente sobre a resposta de A)
+   1. $VA \lor MA$ (A é verdadeiro ou mentiroso);
+   2. $\neg(VA \land MA)$ (A não é ambos verdadeiro e mentiroso);
+   3. $VB \lor MB$ (B é verdadeiro ou mentiroso);
+   4. $\neg(VB \land MB)$ (B não é ambos verdadeiro e mentiroso);
+   5. $VA \to \neg VB$ (Se A é verdadeiro, B não é verdadeiro);
+   6. $VA \to RA$ (Se A é verdadeiro, ele respondeu "Sim");
+   7. $MA \to \neg RA$ (Se A é mentiroso, ele respondeu "Não");
+   8. $VB \to (B \text{ diz } \neg RA)$ (Se B é verdadeiro, ele diz a verdade sobre a resposta de A);
+   9. $MB \to (B \text{ diz } RA)$ (Se B é mentiroso, ele mente sobre a resposta de A).
 
    **Fato observado**:
 
@@ -2703,19 +2516,28 @@ Aqui estão cinco quebra-cabeças clássicos juntamente com suas soluções usan
    Usando lógica de primeiro grau teremos:
 
    **Definições**:
-   $V(x)$: $x$ é o verdadeiro
-   $M(x)$: $x$ é o mentiroso
-   $R(x)$: $x$ respondeu "Sim" à pergunta "Você é o verdadeiro?"
-   $D(x, p)$: $x$ diz que p é verdadeiro
+
+   1. $V(x)$: $x$ é o verdadeiro;
+
+   2. $M(x)$: $x$ é o mentiroso;
+
+   3. $R(x)$: $x$ respondeu "Sim" à pergunta "Você é o verdadeiro?";
+
+   4. $D(x, p)$: $x$ diz que p é verdadeiro.
 
    **Axiomas**:
 
-   1. $\forall x (V(x) \lor M(x))$ (Todo x é verdadeiro ou mentiroso)
-   2. $\forall x (V(x) \to \neg M(x))$ (Ninguém é ambos verdadeiro e mentiroso)
-   3. $\forall x (V(x) \to R(x))$ (Se x é verdadeiro, x responde "Sim")
-   4. $\forall x (M(x) \to \neg R(x))$ (Se x é mentiroso, x responde "Não")
-   5. $\forall x \forall y \forall p (V(x) \to (D(x, p) \leftrightarrow p))$ (Se x é verdadeiro, x diz p se e somente se p é verdadeiro)
-   6. $\forall x \forall y \forall p (M(x) \to (D(x, p) \leftrightarrow \neg p))$ (Se x é mentiroso, x diz p se e somente se p é falso)
+   1. $\forall x (V(x) \lor M(x))$ (Todo x é verdadeiro ou mentiroso);
+
+   2. $\forall x (V(x) \to \neg M(x))$ (Ninguém é ambos verdadeiro e mentiroso);
+
+   3. $\forall x (V(x) \to R(x))$ (Se x é verdadeiro, x responde "Sim");
+
+   4. $\forall x (M(x) \to \neg R(x))$ (Se x é mentiroso, x responde "Não");
+
+   5. $\forall x \forall y \forall p (V(x) \to (D(x, p) \leftrightarrow p))$ (Se x é verdadeiro, x diz p se e somente se p é verdadeiro);
+
+   6. $\forall x \forall y \forall p (M(x) \to (D(x, p) \leftrightarrow \neg p))$ (Se x é mentiroso, x diz p se e somente se p é falso).
 
    **Fatos observados**:
 
@@ -2723,15 +2545,19 @@ Aqui estão cinco quebra-cabeças clássicos juntamente com suas soluções usan
 
    **Prova**:
 
-   1. $D(B, \neg R(A))$ (Fato observado)
-   2. $V(A) \lor M(A)$ (Por 1)
+   1. $D(B, \neg R(A))$ (Fato observado);
+
+   2. $V(A) \lor M(A)$ (Por 1);
+
    3. Suponha $M(A)$:
-      3.1. $\neg R(A)$ (Por 4)
-      3.2. $V(B)$ (Pois apenas um é mentiroso, por 1 e 2)
-      3.3. $D(B, \neg R(A)) \leftrightarrow \neg R(A)$ (Por 5)
-      3.4. $\neg R(A)$ (Por 1 e 3.3)
-      3.5. Mas isto contradiz 3.1 e 3.4
+      3.1. $\neg R(A)$ (Por 4);
+      3.2. $V(B)$ (Pois apenas um é mentiroso, por 1 e 2);
+      3.3. $D(B, \neg R(A)) \leftrightarrow \neg R(A)$ (Por 5);
+      3.4. $\neg R(A)$ (Por 1 e 3.3);
+      3.5. Mas isto contradiz 3.1 e 3.4.
+
    4. Portanto, $\neg M(A)$ (Por reductio ad absurdum)
+
    5. $V(A)$ (Por 2 e 4)
 
    **Conclusão**:
@@ -2788,140 +2614,184 @@ Aqui estão cinco quebra-cabeças clássicos juntamente com suas soluções usan
 
 ### O Mistério da Mansão Blackwood – Um Desafio para Detetives Lógicos**
 
-**Objetivo:** Aplicar os princípios da lógica proposicional e de predicados para analisar um conjunto complexo de informações, identificar contradições, realizar deduções formais e solucionar um enigma proposto.
+**Objetivo:** Aplicar os princípios da lógica proposicional e de predicados para analisar um conjunto complexo de informações, identificar contradições, realizar deduções formais e solucionar um enigma.
 
 **Descrição:**
-Vocês foram convidados a investigar um intrigante mistério ocorrido na antiga Mansão Hollow. O renomado inventor, Sr. Arthur Blackwood, desapareceu em circunstâncias suspeitas, deixando para trás uma série de pistas, depoimentos de funcionários e familiares, e alguns bilhetes enigmáticos. A polícia local está confusa com a quantidade de informações, algumas aparentemente contraditórias. Você deve montar uma equipe de detetives e superar o famoso detetive Hercule Poirot e:
-1.  Analisar cuidadosamente todo o material fornecido (descrições de personagens, mapa da mansão, horários, depoimentos, bilhetes).
-2.  Formalizar as informações relevantes utilizando sentenças da lógica proposicional e, quando aplicável, da lógica de predicados.
-3.  Construir tabelas-verdade e/ou aplicar regras de inferência para verificar a consistência das informações e deduzir novos fatos.
-4.  Identificar o(s) responsável(is) pelo desaparecimento do Sr. Blackwood (ou determinar o que de fato aconteceu), justificando cada passo da sua conclusão com base nas deduções lógicas realizadas.
+A esforçada leitora foi convidada a investigar um intrigante mistério ocorrido na antiga Mansão Hollow. O renomado inventor, Sir Henry Clithering, desapareceu em circunstâncias suspeitas, deixando para trás uma série de pistas, depoimentos de funcionários e familiares, e alguns bilhetes enigmáticos. A polícia local está confusa com a quantidade de informações, algumas aparentemente contraditórias. Você deve montar uma equipe de detetives e superar o famoso detetive Hercule Poirot. Para isso deverá:
 
-**Entregáveis:**
-* Um relatório detalhado contendo:
-    * A formalização das principais pistas em linguagem lógica.
-    * As deduções lógicas chave (podem ser apresentadas através de derivações formais ou explicações detalhadas do raciocínio).
-    * A solução do mistério, com uma argumentação clara e logicamente fundamentada.
+1. Analisar cuidadosamente todo o material fornecido (descrições de personagens, mapa da mansão, horários, depoimentos, bilhetes).
 
-**Critérios de Avaliação:**
-* Correção na formalização lógica das informações.
-* Validade das deduções e inferências realizadas.
-* Clareza e coerência da argumentação na solução do mistério.
-* Profundidade da análise e uso criativo da lógica para desvendar o caso.
+2. Formalizar as informações relevantes utilizando sentenças da lógica proposicional e, quando aplicável, da lógica de predicados.
 
-Aqui está o dossiê completo do caso:
+3. Construir tabelas-verdade e/ou aplicar regras de inferência para verificar a consistência das informações e deduzir novos fatos.
 
----
+4. Identificar o(s) responsável(is) pelo desaparecimento do Sr. Blackwood (ou determinar o que de fato aconteceu), justificando cada passo da sua conclusão com base nas deduções lógicas realizadas.
 
-### **O Mistério da Mansão Hollow: O Desaparecimento de Arthur Blackwood**
+A seguir a descrição do caso, o mapa da mansão e os depoimentos dos envolvidos.
+
+#### **O Mistério da Mansão Hollow: O Desaparecimento de Sir Henry Clithering**
 
 **Data do Incidente:** Segunda-feira, 12 de Maio de 2025
 **Local:** Mansão Hollow, uma propriedade rural isolada.
-**Vítima (Desaparecido):** Sr. Arthur Blackwood, renomado inventor, 58 anos.
+**Vítima (Desaparecido):** Sir Henry Clithering, renomado inventor, 58 anos.
 
 **1. Descrições dos Personagens:**
 
-* **Sr. Arthur Blackwood:** O inventor desaparecido. Gênio excêntrico e recluso, conhecido por sua mente brilhante e comportamento imprevisível. Estava trabalhando febrilmente em um novo projeto secreto chamado "Quimera".
-* **Sra. Eleanor Blackwood (50 anos):** Esposa de Arthur. Uma mulher elegante e ambiciosa, visivelmente preocupada com a reputação e fortuna da família. Ela teme que o comportamento errático de Arthur possa arruiná-los.
-* **Dr. Alistair Finch (45 anos):** Um cientista brilhante, antigo protegido de Arthur, mas que se tornou seu principal rival acadêmico e comercial. Chegou à mansão no dia do desaparecimento, alegando buscar uma reconciliação e possível colaboração.
-* **Miss Clara Evans (28 anos):** A jovem e inteligente assistente pessoal de Arthur. Dedicada e leal, trabalhava em estreita colaboração com ele no projeto "Quimera" e conhecia muitos de seus segredos.
-* **Sr. Reginald "Reggie" Croft (65 anos):** O mordomo, trabalha para a família Blackwood há mais de trinta anos. É um homem discreto, observador e extremamente leal à memória do falecido pai de Arthur, mas demonstra certa reserva em relação ao próprio Arthur.
-* **Sra. Beatrice Croft (62 anos):** Esposa de Reggie, a cozinheira da mansão. Conhece todos os cantos da casa e os hábitos de seus ocupantes. É prática e não se deixa levar por fantasias.
+- **Sir Henry Clithering:** O inventor desaparecido. Gênio excêntrico e recluso, conhecido por sua mente brilhante e comportamento imprevisível. Estava trabalhando febrilmente em um novo projeto secreto chamado "Quimera".
+
+- **Sra. Eleanor Clithering (50 anos):** Esposa de Arthur. Uma mulher elegante e ambiciosa, visivelmente preocupada com a reputação e fortuna da família. Ela teme que o comportamento errático de Arthur possa arruiná-los.
+
+- **Dr. Alistair Finch (45 anos):** Um cientista brilhante, antigo protegido de Arthur, mas que se tornou seu principal rival acadêmico e comercial. Chegou à mansão no dia do desaparecimento, alegando buscar uma reconciliação e possível colaboração.
+
+- **Miss Clara Evans (28 anos):** A jovem e inteligente assistente pessoal de Arthur. Dedicada e leal, trabalhava em estreita colaboração com ele no projeto "Quimera" e conhecia muitos de seus segredos.
+
+- **Sr. Reginald "Reggie" Croft (65 anos):** O mordomo, trabalha para a família Blackwood há mais de trinta anos. É um homem discreto, observador e extremamente leal à memória do falecido pai de Arthur, mas demonstra certa reserva em relação ao próprio Arthur.
+
+- **Sra. Beatrice Croft (62 anos):** Esposa de Reggie, a cozinheira da mansão. Conhece todos os cantos da casa e os hábitos de seus ocupantes. É prática e não se deixa levar por fantasias.
 
 **2. Mapa da Mansão Hollow (Descrição Textual):**
 
 A Mansão Hollow é uma construção vitoriana de dois andares, com um vasto terreno.
 
-* **Térreo:**
-    * **Hall de Entrada:** Amplo, com piso de mármore, uma imponente escadaria de carvalho que leva ao andar superior. Portas levam à biblioteca (esquerda), sala de estar (direita) e, ao fundo, um corredor para a sala de jantar e a ala de serviço/cozinha.
-    * **Biblioteca:** Paredes forradas de estantes com livros antigos e científicos. Uma grande escrivaninha de mogno, poltronas de couro e uma lareira. Duas janelas altas com vista para o jardim da frente.
-    * **Sala de Estar:** Mobiliário luxuoso, mas um pouco antiquado. Um piano de cauda, lareira e janelas com vista para o jardim lateral e o gazebo.
-    * **Sala de Jantar:** Uma longa mesa de jantar polida, prataria reluzente. Acesso direto à cozinha.
-    * **Cozinha:** Grande e funcional, com uma mesa rústica ao centro. Portas para a despensa, os aposentos dos Croft e uma saída para o jardim dos fundos/horta.
-    * **Laboratório do Sr. Blackwood:** Localizado no final de um corredor isolado, partindo do hall, perto da escada de serviço. A porta possui uma fechadura especial de alta segurança projetada pelo próprio Arthur. O interior é um caos organizado de equipamentos eletrônicos, protótipos mecânicos, quadros com equações e ferramentas. Possui uma única janela reforçada que dá para o jardim dos fundos. *Este é o local principal da investigação inicial.*
-    * **Escritório do Sr. Blackwood:** Uma sala menor, anexa ao laboratório, acessível apenas por uma porta dentro do laboratório. Mais organizada, com arquivos, patentes, um cofre e um computador.
+- **Térreo:**
 
-* **Andar Superior:**
-    * **Quarto Principal (Sr. e Sra. Blackwood):** Espaçoso, com uma grande cama de dossel, penteadeira, armários embutidos e um banheiro privativo. Uma varanda com vista para o jardim da frente.
-    * **Quarto de Hóspedes:** Onde Dr. Finch deixou seus pertences (embora não tenha passado a noite). Confortável, com uma cama de solteiro, escrivaninha e janela para o jardim lateral.
-    * **Quarto de Clara Evans:** Menor e mais simples, localizado perto da escada de serviço, com vista para os fundos.
-    * **Aposentos do Mordomo e da Cozinheira (Sr. e Sra. Croft):** Localizados na ala de serviço, acima da cozinha.
+  - **Hall de Entrada:** Amplo, com piso de mármore, uma imponente escadaria de carvalho que leva ao andar superior. Portas levam à biblioteca (esquerda), sala de estar (direita) e, ao fundo, um corredor para a sala de jantar e a ala de serviço/cozinha.
+  
+  - **Biblioteca:** Paredes forradas de estantes com livros antigos e científicos. Uma grande escrivaninha de mogno, poltronas de couro e uma lareira. Duas janelas altas com vista para o jardim da frente.
+  
+  - **Sala de Estar:** Mobiliário luxuoso, mas um pouco antiquado. Um piano de cauda, lareira e janelas com vista para o jardim lateral e o gazebo.
+  
+  - **Sala de Jantar:** Uma longa mesa de jantar polida, prataria reluzente. Acesso direto à cozinha.
+  
+  - **Cozinha:** Grande e funcional, com uma mesa rústica ao centro. Portas para a despensa, os aposentos dos Croft e uma saída para o jardim dos fundos/horta.
+  
+  - **Laboratório do Sr. Blackwood:** Localizado no final de um corredor isolado, partindo do hall, perto da escada de serviço. A porta possui uma fechadura especial de alta segurança projetada pelo próprio Arthur. O interior é um caos organizado de equipamentos eletrônicos, protótipos mecânicos, quadros com equações e ferramentas. Possui uma única janela reforçada que dá para o jardim dos fundos. Este é o local principal da investigação inicial.
+  
+  - **Escritório do Sr. Blackwood:** Uma sala menor, anexa ao laboratório, acessível apenas por uma porta dentro do laboratório. Mais organizada, com arquivos, patentes, um cofre e um computador.
 
-* **Exterior:**
-    * **Jardim da Frente:** Um gramado bem cuidado com um caminho circular de cascalho que leva à porta principal. Ladeado por sebes altas.
-    * **Jardim Lateral:** Menos formal, com um gazebo antigo coberto de hera e canteiros de rosas.
-    * **Jardim dos Fundos:** Uma área mais extensa e um pouco mais selvagem, com árvores antigas, uma pequena horta cultivada pela Sra. Croft e, nos limites da propriedade, uma velha estufa de vidro abandonada e parcialmente coberta por vegetação.
+- **Andar Superior:**
+  
+  - **Quarto Principal (Sr. e Sra. Blackwood):** Espaçoso, com uma grande cama de dossel, penteadeira, armários embutidos e um banheiro privativo. Uma varanda com vista para o jardim da frente.
+  
+  - **Quarto de Hóspedes:** Onde Dr. Finch deixou seus pertences (embora não tenha passado a noite). Confortável, com uma cama de solteiro, escrivaninha e janela para o jardim lateral.
+  
+  - **Quarto de Clara Evans:** Menor e mais simples, localizado perto da escada de serviço, com vista para os fundos.
+  
+  - **Aposentos do Mordomo e da Cozinheira (Sr. e Sra. Croft):** Localizados na ala de serviço, acima da cozinha.
+
+- **Exterior:**
+
+  - **Jardim da Frente:** Um gramado bem cuidado com um caminho circular de cascalho que leva à porta principal. Ladeado por sebes altas.
+  
+  - **Jardim Lateral:** Menos formal, com um gazebo antigo coberto de hera e canteiros de rosas.
+  
+  - **Jardim dos Fundos:** Uma área mais extensa e um pouco mais selvagem, com árvores antigas, uma pequena horta cultivada pela Sra. Croft e, nos limites da propriedade, uma velha estufa de vidro abandonada e parcialmente coberta por vegetação.
 
 **3. Linha do Tempo (Segunda-feira, 12 de Maio de 2025):**
 
-* **08:00:** Café da manhã servido na sala de jantar. Sra. Blackwood preside. Sr. Blackwood não comparece, o que, segundo Sra. Blackwood, era comum quando ele estava imerso em trabalho.
-* **09:00:** Clara Evans leva uma bandeja com café e torradas para o laboratório do Sr. Blackwood.
-* **10:00:** Dr. Alistair Finch chega pontualmente à Mansão Hollow. É recebido pelo mordomo, Sr. Croft, e anunciado à Sra. Blackwood.
-* **10:15 - 11:00 (aprox.):** Dr. Finch e Sra. Blackwood conversam na sala de estar.
-* **11:00:** Sra. Blackwood acompanha Dr. Finch até a porta do laboratório do Sr. Blackwood. Ela bate. Uma voz abafada, identificada por ela como sendo de Arthur, diz: "Estou no meio de algo crítico! Não me perturbem agora!". Dr. Finch parece contrariado.
-* **11:05 - 13:00:** *Período crucial com movimentações diversas e álibis a serem verificados.*
-* **13:00:** O almoço é servido. Sr. Blackwood novamente não aparece.
-* **14:00:** Sra. Blackwood, demonstrando crescente preocupação, pede a Sr. Croft que vá verificar pessoalmente o Sr. Blackwood em seu laboratório.
-* **14:05:** Sr. Croft dirige-se ao laboratório. Encontra a porta especial entreaberta. A fechadura de alta segurança parece ter sido arranhada (marcas de tentativa de arrombamento), mas está destrancada (possivelmente aberta corretamente após a tentativa de arrombamento). O interior do laboratório está em grande desordem: papéis e diagramas espalhados pelo chão, algumas ferramentas fora do lugar, uma cadeira virada. Sr. Blackwood não está em lugar nenhum. A janela dos fundos do laboratório está destrancada e aberta. Não há sinais óbvios de luta violenta (ex: sangue).
-* **14:15:** Sra. Blackwood, após ser informada por Sr. Croft, instrui-o a chamar a polícia local.
-* **17:00:** A notícia do desaparecimento e a natureza peculiar do caso chegam aos ouvidos de Hercule Poirot, que está concluindo um caso em uma cidade vizinha. Ele informa que só poderá dedicar-se ao mistério da Mansão Hollow na manhã seguinte. (Vocês têm até lá para resolver!)
+- **08:00:** Café da manhã servido na sala de jantar. Sra. Blackwood preside. Sr. Blackwood não comparece, o que, segundo Sra. Blackwood, era comum quando ele estava imerso em trabalho.
+
+- **09:00:** Clara Evans leva uma bandeja com café e torradas para o laboratório do Sr. Blackwood.
+
+- **10:00:** Dr. Alistair Finch chega pontualmente à Mansão Hollow. É recebido pelo mordomo, Sr. Croft, e anunciado à Sra. Blackwood.
+
+- **10:15 - 11:00 (aprox.):** Dr. Finch e Sra. Blackwood conversam na sala de estar.
+
+- **11:00:** Sra. Blackwood acompanha Dr. Finch até a porta do laboratório do Sr. Blackwood. Ela bate. Uma voz abafada, identificada por ela como sendo de Arthur, diz: "Estou no meio de algo crítico! Não me perturbem agora!". Dr. Finch parece contrariado.
+
+- **11:05 - 13:00:** Período crucial com movimentações diversas e álibis a serem verificados.
+
+- **13:00:** O almoço é servido. Sr. Blackwood novamente não aparece.
+
+- **14:00:** Sra. Blackwood, demonstrando crescente preocupação, pede a Sr. Croft que vá verificar pessoalmente o Sr. Blackwood em seu laboratório.
+
+- **14:05:** Sr. Croft dirige-se ao laboratório. Encontra a porta especial entreaberta. A fechadura de alta segurança parece ter sido arranhada (marcas de tentativa de arrombamento), mas está destrancada (possivelmente aberta corretamente após a tentativa de arrombamento). O interior do laboratório está em grande desordem: papéis e diagramas espalhados pelo chão, algumas ferramentas fora do lugar, uma cadeira virada. Sr. Blackwood não está em lugar nenhum. A janela dos fundos do laboratório está destrancada e aberta. Não há sinais óbvios de luta violenta (ex: sangue).
+
+- **14:15:** Sra. Blackwood, após ser informada por Sr. Croft, instrui-o a chamar a polícia local.
+
+- **17:00:** A notícia do desaparecimento e a natureza peculiar do caso chegam aos ouvidos de Hercule Poirot, que está concluindo um caso em uma cidade vizinha. Ele informa que só poderá dedicar-se ao mistério da Mansão Hollow na manhã seguinte. (Vocês têm até lá para resolver!)
 
 **4. Depoimentos Iniciais (Coletados apressadamente pelo Sargento Davis, da polícia local):**
 
-* **Sra. Eleanor Blackwood:**
-    * "Arthur estava impossível nas últimas semanas, totalmente absorvido pelo tal projeto 'Quimera'. Falava coisas sem sentido sobre revolucionar o mundo, mas também sobre pessoas que queriam roubá-lo. Ele sempre foi um pouco... dramático."
-    * "Quando bati à porta do laboratório às 11:00, ouvi claramente Arthur dizer para não ser perturbado. Sim, a voz parecia um pouco abafada, mas era ele. Dr. Finch estava ao meu lado."
-    * "Depois disso, subi para meus aposentos para descansar e escrever algumas cartas. Não vi mais o Dr. Finch até a hora do almoço."
-    * "A fechadura do laboratório é uma invenção do próprio Arthur. Apenas ele possuía a chave mestra. Ouvi dizer que Clara talvez soubesse algum truque para abri-la, mas forçá-la... faria um barulho terrível, não acha?"
-    * "Desaparecer assim... não é do feitio de Arthur, a menos que seja parte de algum plano mirabolante dele. Ou então algo terrível aconteceu."
+- **Sra. Eleanor Clithering:**
+  
+  - "Arthur estava impossível nas últimas semanas, totalmente absorvido pelo tal projeto 'Quimera'. Falava coisas sem sentido sobre revolucionar o mundo, mas também sobre pessoas que queriam roubá-lo. Ele sempre foi um pouco... dramático."
+  
+  - "Quando bati à porta do laboratório às 11:00, ouvi claramente Arthur dizer para não ser perturbado. Sim, a voz parecia um pouco abafada, mas era ele. Dr. Finch estava ao meu lado."
+  
+  - "Depois disso, subi para meus aposentos para descansar e escrever algumas cartas. Não vi mais o Dr. Finch até a hora do almoço."
+  
+  - "A fechadura do laboratório é uma invenção do próprio Arthur. Apenas ele possuía a chave mestra. Ouvi dizer que Clara talvez soubesse algum truque para abri-la, mas forçá-la... faria um barulho terrível, não acha?"
+  
+  - "Desaparecer assim... não é do feitio de Arthur, a menos que seja parte de algum plano mirabolante dele. Ou então algo terrível aconteceu."
 
-* **Dr. Alistair Finch:**
-    * "Eu vim em uma missão de paz, acreditem. Nossas divergências passadas foram puramente intelectuais. Eu esperava que pudéssemos colaborar. A ideia de roubar o trabalho de Arthur é um insulto."
-    * "Sim, a Sra. Blackwood me acompanhou até a porta do laboratório. Ouvi uma voz masculina dizer para não sermos inoportunos. Não posso jurar que era Arthur, a voz estava abafada, como disse a Sra. Blackwood."
-    * "Após a recusa, senti-me um pouco desconfortável. Decidi caminhar pelos jardins para espairecer, entre aproximadamente 11:05 e 12:45. Andei pela frente da casa e também pelo jardim lateral, perto do gazebo. O tempo estava agradável."
-    * "Não vi ninguém suspeito. Vi o mordomo, Sr. Croft, por um instante, perto da entrada lateral da casa, por volta das 11:20. Ele parecia estar carregando uma caixa ou algo similar em direção à parte de trás da casa ou à adega."
-    * "Eu nunca tocaria na fechadura do laboratório de Arthur sem permissão. Seria uma violação imperdoável da ética científica."
+- **Dr. Alistair Finch:**
+  
+  - "Eu vim em uma missão de paz, acreditem. Nossas divergências passadas foram puramente intelectuais. Eu esperava que pudéssemos colaborar. A ideia de roubar o trabalho de Arthur é um insulto."
+  
+  - "Sim, a Sra. Blackwood me acompanhou até a porta do laboratório. Ouvi uma voz masculina dizer para não sermos inoportunos. Não posso jurar que era Arthur, a voz estava abafada, como disse a Sra. Blackwood."
+  
+  - "Após a recusa, senti-me um pouco desconfortável. Decidi caminhar pelos jardins para espairecer, entre aproximadamente 11:05 e 12:45. Andei pela frente da casa e também pelo jardim lateral, perto do gazebo. O tempo estava agradável."
+  
+  - "Não vi ninguém suspeito. Vi o mordomo, Sr. Croft, por um instante, perto da entrada lateral da casa, por volta das 11:20. Ele parecia estar carregando uma caixa ou algo similar em direção à parte de trás da casa ou à adega."
+  
+  - "Eu nunca tocaria na fechadura do laboratório de Arthur sem permissão. Seria uma violação imperdoável da ética científica."
 
-* **Miss Clara Evans:**
-    * "Sr. Blackwood estava muito pressionado, mas também excitado com o 'Quimera'. Ele dizia que mudaria tudo. Ele confiava em mim implicitamente."
-    * "Sim, ele temia que o Dr. Finch, ou outros, pudessem tentar se apropriar de suas descobertas. Ele tomava muitas precauções."
-    * "Quando levei seu café às 09:00, ele estava um pouco agitado, mas lúcido. Disse-me: 'Clara, hoje é um dia de grandes decisões. Lembre-se dos nossos protocolos.'"
-    * "Entre 11:00 e 13:00, estive principalmente no escritório anexo ao laboratório, compilando dados. A porta entre o escritório e o laboratório estava fechada na maior parte do tempo para que ele tivesse silêncio. Saí brevemente, por volta das 11:30, para ir à biblioteca buscar o 'Compêndio de Ligas Metálicas Raras'. Fiquei lá uns 15, talvez 20 minutos. Não cruzei com ninguém no corredor ou na biblioteca."
-    * "O laboratório tem um bom isolamento acústico, especialmente com a porta do escritório fechada. Não ouvi nenhum barulho de arrombamento. A fechadura especial é complexa; apenas Sr. Blackwood tinha a chave. Eu conheço o procedimento de abertura manual de emergência, mas é uma sequência demorada e específica."
+- **Miss Clara Evans:**
+  
+  - "Sr. Blackwood estava muito pressionado, mas também excitado com o 'Quimera'. Ele dizia que mudaria tudo. Ele confiava em mim implicitamente."
+  
+  - "Sim, ele temia que o Dr. Finch, ou outros, pudessem tentar se apropriar de suas descobertas. Ele tomava muitas precauções."
+  
+  - "Quando levei seu café às 09:00, ele estava um pouco agitado, mas lúcido. Disse-me: 'Clara, hoje é um dia de grandes decisões. Lembre-se dos nossos protocolos.'"
+  
+  - "Entre 11:00 e 13:00, estive principalmente no escritório anexo ao laboratório, compilando dados. A porta entre o escritório e o laboratório estava fechada na maior parte do tempo para que ele tivesse silêncio. Saí brevemente, por volta das 11:30, para ir à biblioteca buscar o 'Compêndio de Ligas Metálicas Raras'. Fiquei lá uns 15, talvez 20 minutos. Não cruzei com ninguém no corredor ou na biblioteca."
+  
+  - "O laboratório tem um bom isolamento acústico, especialmente com a porta do escritório fechada. Não ouvi nenhum barulho de arrombamento. A fechadura especial é complexa; apenas Sr. Blackwood tinha a chave. Eu conheço o procedimento de abertura manual de emergência, mas é uma sequência demorada e específica."
 
-* **Sr. Reginald "Reggie" Croft (Mordomo):**
-    * "Dr. Finch chegou às 10:00. Parecia um pouco nervoso, na minha opinião. Ele e a patroa conversaram na sala de estar por um bom tempo."
-    * "Por volta das 11:00, eu estava no hall polindo a prata, e ouvi as vozes da Sra. Blackwood e do Dr. Finch perto do corredor do laboratório. Não prestei muita atenção ao que foi dito. Logo depois, vi a Sra. Blackwood subir a escadaria principal."
-    * "De fato, por volta das 11:15, eu estava transportando uma caixa de garrafas de vinho da entrada de serviço lateral para a adega no porão. Nesse momento, vi o Dr. Finch caminhando pelo jardim da frente, perto do portão principal. Ele olhava muito para o relógio."
-    * "Quando fui chamado pela Sra. Blackwood às 14:00, encontrei a porta do laboratório como descrito: entreaberta, com arranhões na fechadura, mas destrancada. O Sr. Blackwood era metódico. Se ele não queria ser perturbado, ele trancava a porta de uma forma que ninguém entraria."
+- **Sr. Reginald "Reggie" Croft (Mordomo):**
+  
+  - "Dr. Finch chegou às 10:00. Parecia um pouco nervoso, na minha opinião. Ele e a patroa conversaram na sala de estar por um bom tempo."
+  
+  - "Por volta das 11:00, eu estava no hall polindo a prata, e ouvi as vozes da Sra. Blackwood e do Dr. Finch perto do corredor do laboratório. Não prestei muita atenção ao que foi dito. Logo depois, vi a Sra. Blackwood subir a escadaria principal."
+  
+  - "De fato, por volta das 11:15, eu estava transportando uma caixa de garrafas de vinho da entrada de serviço lateral para a adega no porão. Nesse momento, vi o Dr. Finch caminhando pelo jardim da frente, perto do portão principal. Ele olhava muito para o relógio."
+  
+  - "Quando fui chamado pela Sra. Blackwood às 14:00, encontrei a porta do laboratório como descrito: entreaberta, com arranhões na fechadura, mas destrancada. O Sr. Blackwood era metódico. Se ele não queria ser perturbado, ele trancava a porta de uma forma que ninguém entraria."
 
-* **Sra. Beatrice Croft (Cozinheira):**
-    * "Da cozinha, não se ouve muito do resto da casa, a menos que seja uma gritaria. Estive ocupada com o almoço toda a manhã."
-    * "Sr. Blackwood não aparecer para as refeições não era novidade quando estava às voltas com suas invenções malucas."
-    * "Uma coisa estranha: Miss Evans passou rapidamente pela cozinha por volta das 12:50. Parecia muito pálida e apressada. Perguntei se estava tudo bem, e ela murmurou algo sobre ir verificar se o Sr. Blackwood queria que o almoço fosse servido no laboratório. Ela voltou alguns minutos depois, ainda mais pálida, e disse que ele não tinha respondido aos chamados dela na porta do laboratório e que era melhor não insistir. Achei estranho ela não ter comentado isso com a Sra. Blackwood imediatamente, antes do alarme oficial."
-    * "A janela do laboratório? Sim, dá para uma parte mais isolada do jardim dos fundos, perto da minha horta. Se alguém pulou por ali, e se esgueirou pelas árvores, poderia sumir sem ser visto da casa principal."
+- **Sra. Beatrice Croft (Cozinheira):**
+  
+  - "Da cozinha, não se ouve muito do resto da casa, a menos que seja uma gritaria. Estive ocupada com o almoço toda a manhã."
+  
+  - "Sr. Blackwood não aparecer para as refeições não era novidade quando estava às voltas com suas invenções malucas."
+  
+  - "Uma coisa estranha: Miss Evans passou rapidamente pela cozinha por volta das 12:50. Parecia muito pálida e apressada. Perguntei se estava tudo bem, e ela murmurou algo sobre ir verificar se o Sr. Blackwood queria que o almoço fosse servido no laboratório. Ela voltou alguns minutos depois, ainda mais pálida, e disse que ele não tinha respondido aos chamados dela na porta do laboratório e que era melhor não insistir. Achei estranho ela não ter comentado isso com a Sra. Blackwood imediatamente, antes do alarme oficial."
+  
+  - "A janela do laboratório? Sim, dá para uma parte mais isolada d-o jardim dos fundos, perto da minha horta. Se alguém pulou por ali, e se esgueirou pelas árvores, poderia sumir sem ser visto da casa principal."
 
 **5. Pistas e Bilhetes Enigmáticos:**
 
-* **Pista 1: Papel Amassado na Lixeira do Laboratório:**
-    Um pequeno pedaço de papel de anotações, claramente arrancado de um bloco maior, contém a seguinte mensagem escrita à mão por Sr. Blackwood (caligrafia confirmada):
-    > "Se A implica B, e o Corvo visita o Ninho, então a Hipótese se confirma. A negação do consequente é o único caminho seguro. Sigma Ativado."
+- **Pista 1: Papel Amassado na Lixeira do Laboratório:**
+  Um pequeno pedaço de papel de anotações, claramente arrancado de um bloco maior, contém a seguinte mensagem escrita à mão por Sr. Blackwood (caligrafia confirmada):
+  
+  > "Se A implica B, e o Corvo visita o Ninho, então a Hipótese se confirma. A negação do consequente é o único caminho seguro. Sigma Ativado."
 
-* **Pista 2: Objeto Encontrado no Chão do Laboratório, Perto da Mesa Principal:**
-    Um pequeno e incomum botão de metal fosco, com um desenho de uma engrenagem estilizada. Não parece pertencer a nenhuma roupa do Sr. Blackwood, nem faz parte do vestuário usual dos funcionários.
+- **Pista 2: Objeto Encontrado no Chão do Laboratório, Perto da Mesa Principal:**
+  Um pequeno e incomum botão de metal fosco, com um desenho de uma engrenagem estilizada. Não parece pertencer a nenhuma roupa do Sr. Blackwood, nem faz parte do vestuário usual dos funcionários.
 
-* **Pista 3: Anotação na Margem de um Livro na Biblioteca:**
-    No livro "Compêndio de Ligas Metálicas Raras" (o mesmo que Clara Evans mencionou ter pego), na página sobre o Bismuto, há uma pequena anotação a lápis, quase imperceptível:
-    > "Onde o passado encontra o futuro, a reflexão é a chave. $(\neg P \lor Q)$ é equivalente a ?"
+- **Pista 3: Anotação na Margem de um Livro na Biblioteca:**
+  No livro "Compêndio de Ligas Metálicas Raras" (o mesmo que Clara Evans mencionou ter pego), na página sobre o Bismuto, há uma pequena anotação a lápis, quase imperceptível:
+
+   > "Onde o passado encontra o futuro, a reflexão é a chave. $(\neg P \lor Q)$ é equivalente a ?"
     A caligrafia parece ser de Sr. Blackwood.
 
-* **Pista 4: Marca Estranha no Batente da Janela Aberta do Laboratório:**
-    Do lado de fora do batente da janela do laboratório, há uma leve marca de fuligem ou graxa escura, como se algo metálico e sujo tivesse sido apoiado ali brevemente.
+- **Pista 4: Marca Estranha no Batente da Janela Aberta do Laboratório:**
+  Do lado de fora do batente da janela do laboratório, há uma leve marca de fuligem ou graxa escura, como se algo metálico e sujo tivesse sido apoiado ali brevemente.
 
-* **Pista 5: Na Estufa Abandonada (Jardim dos Fundos):**
-    Dentro da estufa, sobre uma bancada empoeirada, alguém desenhou com o dedo na poeira um símbolo: um triângulo equilátero com um pequeno círculo no centro. Ao lado do desenho, um único fósforo queimado. Não há outras pegadas recentes visíveis devido ao solo irregular e coberto de folhas secas.
+- **Pista 5: Na Estufa Abandonada (Jardim dos Fundos):**
+  Dentro da estufa, sobre uma bancada empoeirada, alguém desenhou com o dedo na poeira um símbolo: um triângulo equilátero com um pequeno círculo no centro. Ao lado do desenho, um único fósforo queimado. Não há outras pegadas recentes visíveis devido ao solo irregular e coberto de folhas secas.
 
-# Formas Normais
+## Formas Normais
 
 As formas normais, em sua essência, são um meio de trazer ordem e consistência à forma como representamos proposições na Lógica Proposicional. Elas oferecem uma estrutura formalizada para expressar proposições, uma convenção que simplifica a comparação, análise, entendimento e simplificação de proposições lógicas.
 
@@ -2965,18 +2835,14 @@ Pode ser escrita como:
 
 $$P\wedge Q \wedge R \wedge s $$
 
-## Forma Normal Negativa (FNN)
+### Forma Normal Negativa (FNN)
 
 A Forma Normal Negativa é uma representação canônica de fórmulas lógicas em que as negações são aplicadas apenas aos átomos da fórmula e não a expressões mais complexas. Em outras palavras, a negação está _empurrada para dentro_ o máximo possível. A FNN é útil por sua simplicidade e é frequentemente um passo intermediário na conversão para outras formas normais.
-
-### Estrutura da Forma Normal Negativa
 
 Uma fórmula está na Forma Normal Negativa se:
 
 - todos os operadores de negação $\neg $ são aplicados diretamente aos átomos, variáveis ou constantes.
 - usaremos apenas a negação $\neg $, a conjunção $\land $, e a disjunção $\lor $.
-
-### Conversão para Forma Normal Negativa
 
 Converter uma fórmula para a FNN envolve os seguintes passos:
 
@@ -2987,33 +2853,29 @@ Converter uma fórmula para a FNN envolve os seguintes passos:
    - $\neg (A \lor B) \rightarrow \neg A \land \neg B$
 4. **Eliminar Dupla Negação**: Substitua qualquer dupla negação $\neg \neg A$ Por $A$.
 
-### Exemplo 1: Converta a fórmula $\neg (A \land (B \rightarrow C))$ Para FNN
+#### Exemplo 1: Converta a fórmula $\neg (A \land (B \rightarrow C))$ Para FNN
 
 1. Eliminar Implicações: $\neg (A \land (\neg B \lor C))$
 2. Aplicar De Morgan: $\neg A \lor (B \land \neg C)$
 3. Eliminar Dupla Negação: $\neg A \lor (B \land \neg C)$(já está na FNN)
 
-### Exemplo 2: Converta a fórmula $(A \rightarrow B) \land \neg (C \lor D)$ Para FNN
+#### Exemplo 2: Converta a fórmula $(A \rightarrow B) \land \neg (C \lor D)$ Para FNN
 
 1. Eliminar Implicações: $(\neg A \lor B) \land \neg (C \lor D)$;
 2. Aplicar De Morgan: $(\neg A \lor B) \land (\neg C \land \neg D)$;
 3. Eliminar Dupla Negação: $(\neg A \lor B) \land (\neg C \land \neg D)$ (já está na FNN).
 
-## Forma Normal Disjuntiva (FND)
+### Forma Normal Disjuntiva (FND)
 
 A Forma Normal Disjuntiva é uma representação canônica de fórmulas lógicas em que a fórmula é escrita como uma disjunção de conjunções. Trata-se uma forma canônica útil para a análise e manipulação de fórmulas lógicas e é comumente usada em algoritmos de raciocínio lógico.
-
-### Estrutura da Forma Normal Disjuntiva
 
 Uma fórmula está na Forma Normal Disjuntiva se puder ser escrita como:
 
 $$(C_1 \land C_2 \land \ldots) \lor (D_1 \land D_2 \land \ldots) \lor$$
 
-Onde cada $C_i$ e $D_i$ é um literal. Ou seja, é uma variável ou sua negação. Com um pouco mais de formalidade matemática podemos afirmar que uma Fórmula Bem Formada está na Forma Normal Disjuntiva quando está na forma:
+Na qual, cada $C_i$ e $D_i$ é um literal. Ou seja, é uma variável ou sua negação. Com um pouco mais de formalidade matemática podemos afirmar que uma Fórmula Bem Formada está na Forma Normal Disjuntiva quando está na forma:
 
 $$\bigvee_{i=1}^{m} \left( \bigwedge_{j=1}^{n} L_{ij} \right)$$
-
-### Conversão para Forma Normal Disjuntiva
 
 Converter uma fórmula para a FND geralmente envolve os seguintes passos:
 
@@ -3027,9 +2889,9 @@ Converter uma fórmula para a FND geralmente envolve os seguintes passos:
 4. **Eliminar Dupla Negação**: Substitua qualquer dupla negação $\neg \neg A$ Por $A$.
 5. **Aplicar a Lei Distributiva**: Use a lei distributiva para expandir a fórmula, transformando-a em uma disjunção de conjunções.
 
-### Exemplos de Conversão para a Forma Normal Disjuntiva (Proposicional)
+#### Exemplo 1
 
-**Exemplo 1**: $(A \rightarrow B) \land (C \lor \neg (D \land E))$
+   $$(A \rightarrow B) \land (C \lor \neg (D \land E))$$
 
 1. Eliminar Implicações
 
@@ -3043,7 +2905,9 @@ Converter uma fórmula para a FND geralmente envolve os seguintes passos:
 
    $$(\neg A \lor B) \land C \lor (\neg A \lor B) \land \neg D \lor (\neg A \lor B) \land \neg E$$
 
-**Exemplo 2**: $(\neg A \land (B \rightarrow C)) \lor (D \land \neg (E \rightarrow F))$
+#### Exemplo 2
+
+$$(\neg A \land (B \rightarrow C)) \lor (D \land \neg (E \rightarrow F))$$
 
 1. Eliminar Implicações
 
@@ -3057,7 +2921,9 @@ Converter uma fórmula para a FND geralmente envolve os seguintes passos:
 
    $$\neg A \land \neg B \lor \neg A \land C \lor D \land E \land \neg F$$
 
-**Exemplo 3**: $(p \rightarrow q) \rightarrow (r \vee s)$
+#### Exemplo 3
+
+$$(p \rightarrow q) \rightarrow (r \vee s)$$
 
 1. Remover as implicações ($\rightarrow$):
 
@@ -3075,7 +2941,9 @@ Converter uma fórmula para a FND geralmente envolve os seguintes passos:
 
    $$(p \wedge \neg q) \vee (r \vee s)$$
 
-**Exemplo 4**:: $(p \rightarrow q) \rightarrow (\neg r \vee s)$
+#### Exemplo 4
+
+$$(p \rightarrow q) \rightarrow (\neg r \vee s)$$
 
 1. Primeiro, vamos eliminar as implicações, usando a equivalência $p \rightarrow q \equiv \neg p \vee q$:
 
@@ -3093,40 +2961,32 @@ Converter uma fórmula para a FND geralmente envolve os seguintes passos:
 
    $$(p \wedge \neg q) \vee (\neg r \vee s)$$
 
-**Exemplo 5**: $\neg(p \land q) \rightarrow (r \leftrightarrow s)$
+#### Exemplo 5
 
-$$
-\begin{align*}
+$$\neg(p \land q) \rightarrow (r \leftrightarrow s)$$
+
+$$\begin{align*}
 \quad 1. & \quad \neg(p \land q) \rightarrow (r \leftrightarrow s) \\
 \quad 2. & \quad \neg(p \land q) \rightarrow ((r \rightarrow s) \land (s \rightarrow r)) \, \text{ (Substituindo a equivalência por suas implicações)} \\
 \quad 3. & \quad \neg(p \land q) \rightarrow ((\neg r \lor s) \land (\neg s \lor r)) \, \text{ (Convertendo as implicações em disjunções)} \\
 \quad 4. & \quad (\neg (p \land q)) \lor ((\neg r \lor s) \land (\neg s \lor r)) \, \text{ (Aplicando a equivalência } p \rightarrow q \equiv \neg p \lor q \text{)} \\
 \quad 5. & \quad (\neg p \lor \neg q) \lor ((\neg r \lor s) \land (\neg s \lor r)) \, \text{ (Aplicando a De Morgan em } \neg(p \land q) \text{)} \\
 \quad 6. & \quad (\neg p \lor \neg q \lor \neg r \lor s) \land (\neg p \lor \neg q \lor \neg s \lor r) \, \text{ (Aplicando a distributividade para obter a FND)}
-\end{align*}
-$$
+\end{align*}$$
 
 A Forma Normal Disjuntiva é útil porque qualquer fórmula lógica pode ser representada desta forma, e a representação é única (à exceção da ordem dos literais e cláusulas).
 
-## Forma Normal Conjuntiva (FNC)
+### Forma Normal Conjuntiva (FNC)
 
 A Forma Normal Conjuntiva é uma representação canônica de fórmulas lógicas em que a fórmula é escrita como uma conjunção de disjunções. Em outras palavras, é uma expressão lógica na forma de uma _conjunção de disjunções_. É uma forma canônica útil para a análise e manipulação de fórmulas lógicas e é comumente usada em algoritmos de raciocínio lógico e simplificação de fórmulas.
 
-### Estrutura da Forma Normal Conjuntiva
-
 Uma fórmula está na Forma Normal Conjuntiva se puder ser expressa na forma:
 
-$$
-(D_1 \lor D_2 \lor \ldots \lor D_n) \land (E_1 \lor E_2 \lor \ldots \lor E_m) \land \ldots
-$$
+$$(D_1 \lor D_2 \lor \ldots \lor D_n) \land (E_1 \lor E_2 \lor \ldots \lor E_m) \land \ldots$$
 
-Onde $D_1, \ldots , D_n$ e $ e_1, \ldots ,E_n $ representam átomos. Podemos dizer que a Forma Normal Conjuntiva acontece quando a Fórmula Bem Formada está na forma:
+Na qual, $D_1, \ldots , D_n$ e $ e_1, \ldots ,E_n $ representam átomos. Podemos dizer que a Forma Normal Conjuntiva acontece quando a Fórmula Bem Formada está na forma:
 
-$$
-\bigwedge_{i=1}^{m} \left( \bigvee_{j=1}^{n} L_{ij} \right)
-$$
-
-### Conversão para Forma Normal Conjuntiva
+$$\bigwedge_{i=1}^{m} \left( \bigvee_{j=1}^{n} L_{ij} \right)$$
 
 Converter uma fórmula para a Forma Normal Conjuntiva, já incluindo os conceitos de Skolemização, envolve os seguintes passos:
 
@@ -3134,24 +2994,24 @@ Converter uma fórmula para a Forma Normal Conjuntiva, já incluindo os conceito
 2. **Eliminar Implicações**: substitua todas as ocorrências de implicação $A \rightarrow B$ Por $\neg A \lor B$.
 3. **Colocar a Negação no Interior dos parênteses**: Use as leis de De Morgan para mover as negações para dentro, aplicando:
 
-   - $\neg (\forall x A) \equiv \exists x \neg A$
-   - $\neg (\exists x A) \equiv \forall x \neg A$
-   - $\neg (A \land B) \rightarrow \neg A \lor \neg B$
-   - $\neg (A \lor B) \rightarrow \neg A \land \neg B$
+   - $\neg (\forall x A) \equiv \exists x \neg A$;
+   - $\neg (\exists x A) \equiv \forall x \neg A$;
+   - $\neg (A \land B) \rightarrow \neg A \lor \neg B$;
+   - $\neg (A \lor B) \rightarrow \neg A \land \neg B$.
 
 4. **Eliminar Dupla Negação**: Substitua qualquer dupla negação $\neg \neg A$ Por $A$.
 5. **Skolemização**: todas as variáveis existenciais será substituída por uma Constante de Skolem, ou uma Função de Skolem das variáveis universais relacionadas.
 
-   - $\exists x Bonito(x)$ será transformado em $Bonito(g1)$ onde $g1$ é uma Constante de Skolem.
+   - $\exists x Bonito(x)$ será transformado em $Bonito(g1)$ onde $g1$ é uma Constante de Skolem;
    - $\forall x Pessoa(x) \rightarrow Coração(x) \wedge Feliz(x,y)$ se torna $\forall x Pessoa(x) \rightarrow Coração(H(x))\wedge Feliz(x,H(x))$, onde $H$ é uma função de Skolem.
 
 6. Remova todos os Quantificadores Universais. $\forall x Pessoa(x)$ se torna $Pessoa(x)$.
 
 7. **Aplicar a Lei Distributiva**: Use a lei distributiva para expandir a fórmula, transformando-a em uma conjunção de disjunções. Substituindo $\wedge$ por $\vee$.
 
-### Exemplos de Conversão para Forma Normal Conjuntiva
+#### Exemplo 1 
 
-**Exemplo 1**: $(A \land B) \rightarrow (C \lor D)$
+$$(A \land B) \rightarrow (C \lor D)$$
 
 1. Eliminar Implicações\*:
 
@@ -3161,7 +3021,9 @@ Converter uma fórmula para a Forma Normal Conjuntiva, já incluindo os conceito
 
    $$(\neg A \lor \neg B \lor C \lor D)$$
 
-**Exemplo 2**: $(A \land \neg B) \lor (\neg C \land D) \rightarrow (E \lor F)$
+#### Exemplo 2
+
+$$(A \land \neg B) \lor (\neg C \land D) \rightarrow (E \lor F)$$
 
 1. Eliminar Implicações:
 
@@ -3175,21 +3037,37 @@ Converter uma fórmula para a Forma Normal Conjuntiva, já incluindo os conceito
 
    $$(\neg A \lor B \lor E \lor F) \land (C \lor \neg D \lor E \lor F)$$
 
-**Exemplo 3**: $(p \wedge (q \vee r)) \vee (\neg p \wedge \neg q)$
+#### Exemplo 3 
 
-1. Aplicar a lei distributiva para expandir a expressão:
+$$(p \wedge (q \vee r)) \vee (\neg p \wedge \neg q)$$
 
-   $$(p \wedge q) \vee (p \wedge r) \vee (\neg p \wedge \neg q)$$
+1. Aplicar a lei distributiva ($\wedge$ sobre $\vee$) no primeiro termo para obter uma Forma Normal Disjuntiva (FND) da expressão:
 
-2. Transformando a expressão em uma conjunção de disjunções. Podemos fazer isso aplicando novamente a lei distributiva:
+    $$(p \wedge q) \vee (p \wedge r) \vee (\neg p \wedge \neg q)$$
 
-   $$(p \wedge q) \vee \neg p) \wedge ( (p \wedge q) \vee \neg q) \wedge ( (p \wedge r) \vee \neg p) \wedge ( (p \wedge r) \vee \neg q)$$
+2. Aplicar a lei distributiva ($\vee$ sobre $\wedge$) para transformar a FND em uma conjunção de disjunções.
 
-3. Finalmente a Forma Normal Conjuntiva
+    A expressão $( (p \wedge q) \vee (p \wedge r) ) \vee (\neg p \wedge \neg q)$ pode ser reescrita como:
 
-   $$((p \wedge q) \vee \neg p) \wedge ((p \wedge q) \vee \neg q) \wedge ((p \wedge r) \vee \neg p) \wedge (p \wedge r) \vee \neg q)$$
+    $$((p \wedge q) \vee (p \wedge r) \vee \neg p) \wedge ((p \wedge q) \vee (p \wedge r) \vee \neg q)$$
 
-**Exemplo 4**: $ \neg ((p \wedge q) \vee \neg (r \wedge s)) $
+    Simplificando cada um dos termos principais da conjunção:
+
+    - O primeiro termo, $((p \wedge q) \vee (p \wedge r) \vee \neg p)$, simplifica para:
+
+        $$(\neg p \vee q \vee r)$$
+
+    - O segundo termo, $((p \wedge q) \vee (p \wedge r) \vee \neg q)$, simplifica para:
+
+        $$(p \vee \neg q)$$
+
+3. Finalmente a Forma Normal Conjuntiva (FNC):
+
+    $$(\neg p \vee q \vee r) \wedge (p \vee \neg q)$$
+
+#### Exemplo 4
+
+$$ \neg ((p \wedge q) \vee \neg (r \wedge s))$$
 
 1. Aplicando a Lei de De Morgan na expressão inteira:
 
@@ -3207,7 +3085,9 @@ Converter uma fórmula para a Forma Normal Conjuntiva, já incluindo os conceito
    \end{align*}
    $$
 
-**Exemplo 5**: $\neg (((p \rightarrow q) \rightarrow p) \rightarrow p)$
+#### Exemplo 5
+
+$$\neg (((p \rightarrow q) \rightarrow p) \rightarrow p)$$
 
 1. Eliminar Implicações. Utilizando a equivalência $p \rightarrow q \equiv \neg p \lor q $:
 
@@ -3233,7 +3113,9 @@ Converter uma fórmula para a Forma Normal Conjuntiva, já incluindo os conceito
 
    $$\bot \text{False}$$
 
-**Exemplo 6**: $(p \rightarrow q) \leftrightarrow (p \rightarrow r)$
+#### Exemplo 6
+
+$$(p \rightarrow q) \leftrightarrow (p \rightarrow r)$$
 
 1. Começamos pela definição de equivalência e implicação:
 
@@ -3261,13 +3143,134 @@ Converter uma fórmula para a Forma Normal Conjuntiva, já incluindo os conceito
 
 A aplicação das equivalências não é, nem de longe, a única forma de percorrer a rota da conversão de uma Fórmula Bem Formada em Forma Normal Conjuntiva.
 
-## Usando a Tabela-Verdade para Gerar Formas Normais
+### Forma Normal Prenex
+
+A Forma Normal Prenex é uma padronização para fórmulas da lógica de primeiro grau. Nela, todos os quantificadores são deslocados para a frente da fórmula, deixando a matriz da fórmula livre de quantificadores. A Forma Normal Prenex é vantajosa por três razões fundamentais:
+
+1. **Facilitação da Manipulação Lógica**: ao separar os quantificadores da matriz, a Forma Normal Prenex simplifica a análise e manipulação da estrutura lógica da fórmula;
+
+2. **Preparação para Outras Formas Normais**: Serve como uma etapa intermediária valiosa na conversão para outras formas normais, como as Forma Normal Conjuntiva e Forma Normal Disjuntiva;
+
+3. **Uso em Provas Automáticas**: é amplamente empregada em métodos de prova automática, tornando o raciocínio sobre quantificadores mais acessível.
+
+Considere o seguinte exemplo, partindo da fórmula original: $\exists x \forall y (P(x,y) \wedge Q(y))$
+
+Na Forma Prenex, esta fórmula será representada:
+
+$$\forall y \exists x (P(x,y) \wedge Q(y))$$
+
+Uma fórmula na Forma Normal Prenex segue uma estrutura específica definida por:
+
+$$Q_1 x_1 \, Q_2 x_2 \, \ldots \, Q_n x_n \, M(x_1, x_2, \ldots, x_n)$$
+
+Nessa estrutura:
+
+- $Q_i$ são quantificadores, podendo ser universais $\forall$ ou existenciais $\exists$;
+- $x_i$ são as variáveis vinculadas pelos quantificadores;
+- $M(x_1, x_2, \ldots, x_n)$ representa a matriz da fórmula, uma expressão lógica sem quantificadores.
+
+Converter uma fórmula para a Forma Normal Prenex envolve os seguintes passos:
+
+1. **Eliminar Implicações**: substitua todas as ocorrências de implicação por disjunções e negações;
+
+2. **Mover Negações para Dentro**: use as leis de De Morgan para mover as negações para dentro dos quantificadores e proposições;
+
+3. **Padronizar Variáveis**: certifique-se de que as variáveis ligadas a diferentes quantificadores sejam distintas;
+
+4. **Eliminar Quantificadores Existenciais**: substitua os quantificadores existenciais por constantes ou funções Skolem, dependendo do contexto;
+
+5. **Mover Quantificadores para Fora**: mova todos os quantificadores para a esquerda da expressão, mantendo a ordem relativa dos quantificadores universais e existenciais.
+
+A Forma Normal Prenex é uma representação canônica de fórmulas da lógica de primeiro grau que separa claramente os quantificadores da matriz da fórmula. Ela é uma ferramenta valiosa na lógica e na teoria da prova, e sua compreensão é fundamental para trabalhar com lógica de primeiro grau.
+
+#### Regras de Equivalência Prenex
+
+A Forma Prenex de uma fórmula lógica com quantificadores permite mover todos os quantificadores para o início da fórmula. Existem algumas regras de equivalência que preservam a Forma Prenex quando aplicadas a uma fórmula:
+
+**1. Comutatividade de quantificadores do mesmo tipo**: a ordem dos quantificadores do mesmo tipo pode ser trocada em uma fórmula na Forma Prenex. Por exemplo:
+
+$$\forall x \forall y \ P(x,y) \Leftrightarrow \forall y \forall x \ P(x,y)$$
+
+Isso ocorre porque a ordem dos quantificadores universais $\forall x$ e $\forall y$ não altera o significado lógico da fórmula. Essa propriedade é conhecida como comutatividade dos quantificadores.
+
+**2. Associatividade de quantificadores do mesmo tipo**: quantificadores do mesmo tipo podem ser agrupados de forma associativa em uma Forma Prenex. Por exemplo:
+
+$$\forall x \forall y \forall z \ P(x,y,z) \Leftrightarrow \forall x (\forall y \forall z \ P(x,y,z))$$
+
+Novamente, o agrupamento dos quantificadores universais não muda o significado da fórmula. Essa é a propriedade associativa.
+
+**3. Distributividade de quantificadores sobre operadores lógicos**: os quantificadores podem ser distribuídos sobre operadores lógicos como $\wedge, \vee, \rightarrow$:
+
+$$\forall x (P(x) \vee Q(x)) \Leftrightarrow (\forall x \ P(x)) \vee (\forall x \ Q(x))$$
+
+Isso permite mover o quantificador para dentro do escopo do operador lógico. A equivalência se mantém pois a ordem de quantificação e operação não se altera.
+
+#### Conversão para Formas Normais Conjuntiva (FNC) e Disjuntiva (FND)
+
+**1. Eliminar Implicações**: substitua todas as ocorrências de implicação da forma $A \rightarrow B$ Por $\neg A \lor B$.
+
+**2. Mover a Negação para Dentro**: use as leis de De Morgan para mover a negação para dentro dos quantificadores e das proposições. Aplique as seguintes transformações:
+
+- $\neg \forall x P(x) \rightarrow \exists x \neg P(x)$
+- $\neg \exists x P(x) \rightarrow \forall x \neg P(x)$
+
+**3. Padronizar Variáveis**: certifique-se de que as variáveis ligadas a diferentes quantificadores sejam distintas, renomeando-as se necessário.
+
+**4. Eliminar os Quantificadores Existenciais**: substitua cada quantificador existencial $\exists x$ Por um novo termo constante ou Função Skolem, dependendo das variáveis livres em seu escopo. Para eliminar os quantificadores existenciais, é necessário introduzir novos termos: Constantes ou Funções Skolem.
+
+1. **Se o quantificador existencial não tem quantificadores universais à sua esquerda**:
+   Substitua $\exists x P(x)$ Por $P(c)$, onde $c$ é uma nova constante.
+
+2. **Se o quantificador existencial tem quantificadores universais à sua esquerda**:
+   Substitua $\exists x P(x)$ Por $P(f(y_1, y_2, \ldots, y_n))$, onde $f$ é uma nova função Skolem, e $y_1, y_2, \ldots, y_n$ são as variáveis universais à esquerda do quantificador existencial.
+
+**5. Mover os Quantificadores Universais para Fora**: mova todos os quantificadores universais para fora, para a esquerda da expressão. Isso cria uma Forma Prenex da fórmula.
+
+**6. Eliminar os Quantificadores Universais**: remova os quantificadores universais, deixando apenas a matriz da fórmula. Isso resulta em uma fórmula livre de quantificadores. Após a eliminação dos quantificadores existenciais e a movimentação de todos os quantificadores universais para fora (Forma Prenex), a eliminação dos quantificadores universais é simples:
+
+1. **Remova os quantificadores universais da fórmula**:
+   Se você tem uma fórmula da forma $\forall x P(x)$, simplesmente remova o quantificador $\forall x$, deixando apenas a matriz da fórmula $P(x)$.
+
+2. **Trate as variáveis como variáveis livres**:
+   As variáveis que eram ligadas pelo quantificador universal agora são tratadas como variáveis livres na matriz da fórmula.
+
+**7. Conversão para FNC**:
+
+1. Use as leis distributivas para mover as conjunções para dentro e as disjunções para fora.
+2. Certifique-se de que a fórmula esteja na forma de uma conjunção de disjunções (cláusulas).
+
+**8. Conversão para FND**:
+
+1. Use as leis distributivas para mover as disjunções para dentro e as conjunções para fora.
+2. Certifique-se de que a fórmula esteja na forma de uma disjunção de conjunções.
+
+#### Exemplo 1 - Duas fórmulas logicamente equivalentes
+
+Vamos considerar duas fórmulas logicamente equivalentes, uma na Forma Prenex e outra não considere a fórmula original:
+
+$$\forall x \exists y (P(x) \rightarrow Q(y))$$
+
+Se convertida para a Forma Prenex teremos:
+
+$$\exists y \forall x (P(x) \rightarrow Q(y))$$
+
+Cuja a equivalência pode ser provada por meio do seguinte raciocínio: seja $I$ uma interpretação booleana das variáveis $P$ e $Q$. Suponha $I$ satisfaz $\forall x \exists y (P(x) \rightarrow Q(y))$. Logo, para todo $x$ no domínio, existe um $y$ tal que: se $P(x)$ é verdadeiro, então $Q(y)$ também é verdadeiro. Isso é equivalente a dizer: existe um $y$, tal que para todo $x$, se $P(x)$ é verdadeiro, $Q(y)$ também é verdadeiro. Ou seja, $I$ também satisfaz: $\exists y \forall x (P(x) \rightarrow Q(y))$. Por um raciocínio simétrico, o oposto também é verdadeiro. Portanto, as fórmulas são logicamente equivalentes.
+
+#### Exemplo 2 - Fórmula sem Forma Prenex
+
+$$\forall x (P(x) \rightarrow \exists y Q(x,y))$$
+
+Não pode ser convertida à Forma Prenex pois o quantificador $\exists y$ está dentro do escopo de de uma implicação ($\rightarrow$).
+
+>A conversão para Forma Normal Conjuntiva é útil para métodos de prova. A conversão para Forma Normal Disjuntiva é menos comum, mas pode ser útil em alguns contextos de análise lógica. **CUIDADO: a eliminação dos quantificadores pode alterar a interpretação da fórmula em alguns modelos, mas é útil porque preserva a satisfatibilidade**.
+
+### Usando a Tabela-Verdade para Gerar Formas Normais
 
 Em meio à precisão rígida da lógica proposicional, a tabela verdade surge como nossa bússola fiel. Com ela, discernimos, sem rodeios, os caminhos para as Formas Normais Conjuntiva e Disjuntiva. Cortamos através da névoa de possibilidades, fixando nosso olhar nas linhas nítidas onde a verdade ou a falsidade se manifestam. Encaramos, então, a fórmula que se descortina diante de nós.
 
 Considere a Fórmula Bem Formada dada por: $(A \lor B) \rightarrow (C \land \neg A)$, se encontrarmos sua Tabela Verdade, podemos encontrar, tanto a Forma Normal Conjuntiva quanto a Forma Normal Disjuntiva. Bastando fixar nosso olhar na verdade, ou na falsidade.
 
-### Gerando a Forma Normal Disjuntiva
+#### Gerando a Forma Normal Disjuntiva
 
 Para transformar $(A \lor B) \rightarrow (C \land \neg A)$ na sua Forma Normal Conjuntiva, como um cozinheiro de bordo, devemos seguir rigidamente, os seguintes passos:
 
@@ -3313,7 +3316,7 @@ $$
 
 A expressão acima será verdadeira se qualquer um dos termos (ou seja, qualquer uma das linhas 5, 7 ou 8 da tabela) for verdadeiro, garantindo que a expressão capture exatamente as condições em que $(A \lor B) \rightarrow (C \land \neg A)$ é verdadeira de acordo com a tabela-verdade.
 
-### Gerando a Forma Normal Conjuntiva
+#### Gerando a Forma Normal Conjuntiva
 
 Partindo da mesma tabela verdade da expressão $(A \lor B) \rightarrow (C \land \neg A)$, nossa bússola nesta fase da jornada, precisaremos voltar nosso olhar cuidadoso para as linhas com resultado falso e então teremos:
 
@@ -3323,11 +3326,11 @@ Partindo da mesma tabela verdade da expressão $(A \lor B) \rightarrow (C \land 
 
 2. Construir a Forma Normal Conjuntiva: para cada linha falsa, criaremos uma disjunção que represente a negação da linha e as combinaremos com uma conjunção. Como um pescador que cria uma rede entrelaçando fios com nós. A construção dos termos disjuntivos considerará as variáveis que tornam a fórmula falsa na respectiva linha da Tabela verdade:
 
-   - Linha 1: $(\neg A \lor \neg B \lor \neg C \lor A)$
-   - Linha 2: $(\neg A \lor \neg B \lor C \lor A)$
-   - Linha 3: $(\neg A \lor B \lor \neg C \lor A)$
-   - Linha 4: $(\neg A \lor B \lor C \lor A)$
-   - Linha 6: $(A \lor \neg B \lor C \lor \neg A)$
+   - Linha 1: $(\neg A \lor \neg B \lor \neg C \lor A)$;
+   - Linha 2: $(\neg A \lor \neg B \lor C \lor A)$;
+   - Linha 3: $(\neg A \lor B \lor \neg C \lor A)$;
+   - Linha 4: $(\neg A \lor B \lor C \lor A)$;
+   - Linha 6: $(A \lor \neg B \lor C \lor \neg A)$.
 
    Combinando-os com uma conjunção, temos a Forma Normal Conjuntiva:
 
@@ -3389,148 +3392,6 @@ Substituímos $y$ por $f(x,z)$, que é uma função que depende das variáveis u
 
 Em resumo, a Skolemização simplifica fórmulas quantificadas, eliminando quantificadores existenciais e substituindo variáveis por Constantes ou Funções de Skolem, dependendo de sua relação com quantificadores universais. Isso auxilia na conversão de fórmulas quantificadas para a Forma Normal Conjuntiva e na simplificação da lógica.
 
-## Forma Normal Prenex
-
-A Forma Normal Prenex é uma padronização para fórmulas da lógica de primeiro grau. Nela, todos os quantificadores são deslocados para a frente da fórmula, deixando a matriz da fórmula livre de quantificadores. A Forma Normal Prenex é vantajosa por três razões fundamentais:
-
-1. **Facilitação da Manipulação Lógica**: ao separar os quantificadores da matriz, a Forma Normal Prenex simplifica a análise e manipulação da estrutura lógica da fórmula.
-
-2. **Preparação para Outras Formas Normais**: Serve como uma etapa intermediária valiosa na conversão para outras formas normais, como as Forma Normal Conjuntiva e Forma Normal Disjuntiva.
-
-3. **Uso em Provas Automáticas**: é amplamente empregada em métodos de prova automática, tornando o raciocínio sobre quantificadores mais acessível.
-
-Considere o seguinte exemplo, partindo da fórmula original: $\exists x \forall y (P(x,y) \wedge Q(y))$
-
-Na Forma Prenex, esta fórmula será representada:
-
-$$
-\forall y \exists x (P(x,y) \wedge Q(y))
-$$
-
-### Estrutura da Forma Normal Prenex
-
-Uma fórmula na Forma Normal Prenex segue uma estrutura específica definida por:
-
-$$
-Q_1 x_1 \, Q_2 x_2 \, \ldots \, Q_n x_n \, M(x_1, x_2, \ldots, x_n)
-$$
-
-Nessa estrutura:
-
-- $Q_i$ são quantificadores, podendo ser universais $\forall$ ou existenciais $\exists$.
-- $x_i$ são as variáveis vinculadas pelos quantificadores.
-- $M(x_1, x_2, \ldots, x_n)$ representa a matriz da fórmula, uma expressão lógica sem quantificadores.
-
-### Conversão para Forma Normal Prenex
-
-Converter uma fórmula para a Forma Normal Prenex envolve os seguintes passos:
-
-1. **Eliminar Implicações**: substitua todas as ocorrências de implicação por disjunções e negações.
-
-2. **Mover Negações para Dentro**: use as leis de De Morgan para mover as negações para dentro dos quantificadores e proposições.
-
-3. **Padronizar Variáveis**: certifique-se de que as variáveis ligadas a diferentes quantificadores sejam distintas.
-
-4. **Eliminar Quantificadores Existenciais**: substitua os quantificadores existenciais por constantes ou funções Skolem, dependendo do contexto.
-
-5. **Mover Quantificadores para Fora**: mova todos os quantificadores para a esquerda da expressão, mantendo a ordem relativa dos quantificadores universais e existenciais.
-
-A Forma Normal Prenex é uma representação canônica de fórmulas da lógica de primeiro grau que separa claramente os quantificadores da matriz da fórmula. Ela é uma ferramenta valiosa na lógica e na teoria da prova, e sua compreensão é fundamental para trabalhar com lógica de primeiro grau.
-
-### Regras de Equivalência Prenex
-
-A Forma Prenex de uma fórmula lógica com quantificadores permite mover todos os quantificadores para o início da fórmula. Existem algumas regras de equivalência que preservam a Forma Prenex quando aplicadas a uma fórmula:
-
-**1. Comutatividade de quantificadores do mesmo tipo**: a ordem dos quantificadores do mesmo tipo pode ser trocada em uma fórmula na Forma Prenex. Por exemplo:
-
-$$
-\forall x \forall y \ P(x,y) \Leftrightarrow \forall y \forall x \ P(x,y)
-$$
-
-Isso ocorre porque a ordem dos quantificadores universais $\forall x$ e $\forall y$ não altera o significado lógico da fórmula. Essa propriedade é conhecida como comutatividade dos quantificadores.
-
-**2. Associatividade de quantificadores do mesmo tipo**: quantificadores do mesmo tipo podem ser agrupados de forma associativa em uma Forma Prenex. Por exemplo:
-
-$$
-\forall x \forall y \forall z \ P(x,y,z) \Leftrightarrow \forall x (\forall y \forall z \ P(x,y,z))
-$$
-
-Novamente, o agrupamento dos quantificadores universais não muda o significado da fórmula. Essa é a propriedade associativa.
-
-**3. Distributividade de quantificadores sobre operadores lógicos**: os quantificadores podem ser distribuídos sobre operadores lógicos como $\wedge, \vee, \rightarrow$:
-
-$$
-\forall x (P(x) \vee Q(x)) \Leftrightarrow (\forall x \ P(x)) \vee (\forall x \ Q(x))
-$$
-
-Isso permite _mover_ o quantificador para dentro do escopo do operador lógico. A equivalência se mantém pois a ordem de quantificação e operação não se altera.
-
-## Conversão para Formas Normais Conjuntiva (FNC) e Disjuntiva (FND)
-
-**1. Eliminar Implicações**: substitua todas as ocorrências de implicação da forma $A \rightarrow B$ Por $\neg A \lor B$.
-
-**2. Mover a Negação para Dentro**: use as leis de De Morgan para mover a negação para dentro dos quantificadores e das proposições. Aplique as seguintes transformações:
-
-- $\neg \forall x P(x) \rightarrow \exists x \neg P(x)$
-- $\neg \exists x P(x) \rightarrow \forall x \neg P(x)$
-
-**3. Padronizar Variáveis**: certifique-se de que as variáveis ligadas a diferentes quantificadores sejam distintas, renomeando-as se necessário.
-
-**4. Eliminar os Quantificadores Existenciais**: substitua cada quantificador existencial $\exists x$ Por um novo termo constante ou Função Skolem, dependendo das variáveis livres em seu escopo. Para eliminar os quantificadores existenciais, é necessário introduzir novos termos: Constantes ou Funções Skolem.
-
-1. **Se o quantificador existencial não tem quantificadores universais à sua esquerda**:
-   Substitua $\exists x P(x)$ Por $P(c)$, onde $c$ é uma nova constante.
-
-2. **Se o quantificador existencial tem quantificadores universais à sua esquerda**:
-   Substitua $\exists x P(x)$ Por $P(f(y_1, y_2, \ldots, y_n))$, onde $f$ é uma nova função Skolem, e $y_1, y_2, \ldots, y_n$ são as variáveis universais à esquerda do quantificador existencial.
-
-**5. Mover os Quantificadores Universais para Fora**: mova todos os quantificadores universais para fora, para a esquerda da expressão. Isso cria uma Forma Prenex da fórmula.
-
-**6. Eliminar os Quantificadores Universais**: remova os quantificadores universais, deixando apenas a matriz da fórmula. Isso resulta em uma fórmula livre de quantificadores. Após a eliminação dos quantificadores existenciais e a movimentação de todos os quantificadores universais para fora (Forma Prenex), a eliminação dos quantificadores universais é simples:
-
-1. **Remova os quantificadores universais da fórmula**:
-   Se você tem uma fórmula da forma $\forall x P(x)$, simplesmente remova o quantificador $\forall x$, deixando apenas a matriz da fórmula $P(x)$.
-
-2. **Trate as variáveis como variáveis livres**:
-   As variáveis que eram ligadas pelo quantificador universal agora são tratadas como variáveis livres na matriz da fórmula.
-
-**7. Conversão para FNC**:
-
-1. Use as leis distributivas para mover as conjunções para dentro e as disjunções para fora.
-2. Certifique-se de que a fórmula esteja na forma de uma conjunção de disjunções (cláusulas).
-
-**8. Conversão para FND**:
-
-1. Use as leis distributivas para mover as disjunções para dentro e as conjunções para fora.
-2. Certifique-se de que a fórmula esteja na forma de uma disjunção de conjunções.
-
-### Exemplos Interessantes da Forma Prenex
-
-**Exemplo 1**: duas fórmulas logicamente equivalentes, uma na Forma Prenex e outra não considere a fórmula original:
-
-$$
-\forall x \exists y (P(x) \rightarrow Q(y))
-$$
-
-Se convertida para a Forma Prenex teremos:
-
-$$
-\exists y \forall x (P(x) \rightarrow Q(y))
-$$
-
-Cuja a equivalência pode ser provada por meio do seguinte raciocínio: sejA$I$ uma interpretação booleana das variáveis $P$ e $Q$. Suponha $I$ satisfaz $\forall x \exists y (P(x) \rightarrow Q(y))$. Logo, para todo $x$ no domínio, existe um $y$ tal que: se $P(x)$ é verdadeiro, então $Q(y)$ também é verdadeiro. Isso é equivalente a dizer: existe um $y$, tal que para todo $x$, se $P(x)$ é verdadeiro, $Q(y)$ também é verdadeiro. Ou seja, $I$ também satisfaz: $\exists y \forall x (P(x) \rightarrow Q(y))$. Por um raciocínio simétrico, o oposto também é verdadeiro. Portanto, as fórmulas são logicamente equivalentes.
-
-**Exemplo 2**: Fórmula sem Forma Prenex:
-
-$$
-\forall x (P(x) \rightarrow \exists y Q(x,y))
-$$
-
-Não pode ser convertida à Forma Prenex pois o quantificador $\exists y$ está dentro do escopo de de uma implicação ($\rightarrow$).
-
-### Observações Importantes
-
-A conversão para Forma Normal Conjuntiva é útil para métodos de prova. A conversão para Forma Normal Disjuntiva é menos comum, mas pode ser útil em alguns contextos de análise lógica. **CUIDADO: a eliminação dos quantificadores pode alterar a interpretação da fórmula em alguns modelos, mas é útil porque preserva a satisfatibilidade**.
 
 ### Exemplos de conversão em formas normais, conjuntiva e disjuntiva
 
@@ -3638,13 +3499,13 @@ $$\forall x(\text{Animal}(x) \rightarrow \text{Corre}(x)) \lor \exists y(\text{P
 
    $$(\text{Animal}(x) \land \neg \text{Corre}(x)) \lor (\neg \text{Pássaro}(y) \lor \neg \text{Voa}(y))$$
 
-# Definição de um Mundo na Lógica de Primeira Ordem
+## Mundos na Lógica de Primeira Ordem
 
 A lógica de primeira ordem, também conhecida como lógica de predicados de primeira ordem, emergiu no final do século XIX e início do século XX, principalmente através dos trabalhos de Gottlob Frege, Bertrand Russell e Alfred North Whitehead. Essa lógica foi desenvolvida como uma extensão da lógica proposicional, permitindo a representação de afirmações mais complexas sobre objetos e suas relações. A lógica de primeira ordem tornou-se uma ferramenta fundamental na matemática, filosofia e ciência da computação, especialmente na formalização de sistemas dedutivos e na fundamentação da matemática.
 
 A capacidade de definir "mundos" ou estruturas dentro da lógica de primeira ordem é que permite modelar e analisar sistemas complexos. Esses mundos representam interpretações ou modelos que atribuem significado às fórmulas lógicas, permitindo verificar a validade de argumentos, provar teoremas e desenvolver sistemas de inteligência artificial. Na ciência da computação, por exemplo, a lógica de primeira ordem é usada em linguagens de programação declarativas, sistemas de banco de dados e na verificação de software.
 
-## 3. Definição Formal de um Mundo
+### Definição Formal de um Mundo
 
 Na lógica de primeira ordem, um **mundo** ou **modelo** é uma estrutura que consiste em:
 
@@ -3675,7 +3536,7 @@ $$M = (\{1, 2, 3, 4, 5\}, I)$$
 
 com $I$ definido como acima. Este modelo representa um "mundo" onde podemos fazer afirmações sobre números inteiros de 1 a 5, suas relações de ordem e paridade.
 
-## 4. Exemplo de Construção de um Mundo
+### Construção de Mundos
 
 Vamos ilustrar a definição acima com um exemplo concreto.
 
@@ -3721,8 +3582,6 @@ As informações acima podem ser formalizadas através das seguintes fórmulas:
 
 Este mundo agora inclui não apenas predicados, mas também uma constante $e$ e uma função $f$, enriquecendo a estrutura e as relações entre os objetos do domínio.
 
-## 5. Discussão sobre o Mundo Definido
-
 O mundo que definimos acima, embora simples, ilustra vários conceitos importantes da lógica de primeira ordem:
 
 1. **Domínio Finito**: Nosso domínio $D = \{a, b, c\}$ é finito, o que facilita a compreensão, mas é importante notar que domínios em lógica de primeira ordem podem ser infinitos.
@@ -3754,11 +3613,11 @@ O mundo que definimos acima, embora simples, ilustra vários conceitos important
 
 Este exemplo simplificado serve como um ponto de partida para entender como modelos mais complexos podem ser construídos na lógica de primeira ordem para representar conhecimento e raciocinar sobre domínios mais sofisticados.
 
-## 6. Aplicações e Importância
+### Aplicações e Importância
 
 A definição de mundos na lógica de primeira ordem tem aplicações fundamentais em diversas áreas, abrangendo desde a matemática pura até as ciências aplicadas e a engenharia, passando pela biologia e economia. Na matemática, essa abordagem suporta a prova de teoremas, onde modelos são utilizados para verificar a consistência de sistemas axiomáticos e construir contraexemplos. A teoria dos modelos, um ramo importante da lógica matemática, se dedica ao estudo das relações entre estruturas matemáticas e as linguagens formais que as descrevem. Além disso, nos fundamentos da matemática, a lógica de primeira ordem desempenha um papel central na formalização de conceitos matemáticos, como exemplificado pela Teoria dos Conjuntos de Zermelo-Fraenkel com o Axioma da Escolha (ZFC).
 
-### Exemplo: Teoria dos Modelos
+### A Teoria dos Modelos
 
 A teoria dos modelos estuda as relações entre estruturas matemáticas e as linguagens formais que as descrevem. Vamos considerar um exemplo simples, onde analisamos a relação entre uma estrutura numérica e a linguagem formal que a descreve.
 
@@ -3781,7 +3640,7 @@ Este domínio representa um conjunto de números inteiros de $0$ a $5$. A interp
 
 Com isso, podemos construir fórmulas na linguagem formal e verificar se são satisfeitas no modelo $M$.
 
-#### Regras
+**Regras**:
 
 1. A soma de dois números pares é sempre par:
 
@@ -3807,16 +3666,15 @@ A teoria dos modelos nos permite verificar se essas fórmulas são satisfeitas e
 
 As ciências cognitivas constituem outro campo que faz uso extensivo do conceito de mundos. A modelagem cognitiva se baseia na representação formal de processos de raciocínio e tomada de decisão, enquanto a psicologia do raciocínio estuda como os seres humanos realizam inferências lógicas, muitas vezes comparando o raciocínio humano com os princípios formais da lógica. A engenharia de sistemas também faz uso do conceito de mundos. A especificação de requisitos e a modelagem de domínio se apoiam na capacidade de descrever formalmente sistemas complexos e suas interações, bem como representar conhecimento específico de domínio em diversos sistemas de engenharia. Entretanto, precisamos destacar duas áreas importantes para este trabalho: a ciência da computação e a linguística computacional.
 
-### Ciência da Computação
+#### Aplicações na Ciência da Computação
 
 Na ciência da computação, as aplicações são vastas e variadas. No campo da inteligência artificial, a representação de conhecimento se beneficia enormemente da capacidade de modelar domínios complexos para sistemas especialistas e agentes inteligentes. O planejamento automatizado utiliza a descrição de estados do mundo e ações para resolver problemas, enquanto o processamento de linguagem natural depende da análise semântica de textos e da compreensão de contexto. Em bancos de dados, a modelagem conceitual e as consultas semânticas se apoiam fortemente em princípios lógicos para descrever formalmente esquemas e expressar consultas complexas. A verificação de software também se beneficia, com métodos formais sendo empregados para especificar e verificar propriedades de sistemas, e técnicas de model checking permitindo a verificação automática de propriedades em sistemas de estados finitos.
 
-#### Exemplo 1
+##### Exemplo 1 - Diagnóstico Médico
 
 Em sistemas especialistas de diagnóstico médico, a capacidade de definir e manipular mundos lógicos permite:
 
-1. **Raciocínio sobre cenários hipotéticos**:
-   Um sistema especialista pode criar um mundo lógico $M = (D, I)$ representando um paciente com sintomas específicos:
+1. **Raciocínio sobre cenários hipotéticos**: um sistema especialista pode criar um mundo lógico $M = (D, I)$ representando um paciente com sintomas específicos:
 
    $$D = \{p, f, t, d, c, g, a\}$$
 
@@ -3834,8 +3692,7 @@ Em sistemas especialistas de diagnóstico médico, a capacidade de definir e man
 
    Este mundo representa um paciente com febre e tosse, mas sem dor de cabeça.
 
-2. **Planejamento de ações em ambientes complexos**:
-   Baseado no mundo atual, o sistema pode planejar uma sequência de testes diagnósticos. Por exemplo, podemos definir uma função de ação $A(x,y)$ que representa "realizar ação y no paciente x".
+2. **Planejamento de ações em ambientes complexos**: baseado no mundo atual, o sistema pode planejar uma sequência de testes diagnósticos. Por exemplo, podemos definir uma função de ação $A(x,y)$ que representa "realizar ação y no paciente x".
 
    O sistema pode usar regras como:
 
@@ -3845,8 +3702,7 @@ Em sistemas especialistas de diagnóstico médico, a capacidade de definir e man
 
    Assim, no nosso cenário hipotético, o sistema recomendaria testar para COVID-19.
 
-3. **Inferência de novas informações a partir de dados existentes**:
-   O sistema pode usar regras de inferência para derivar novos fatos. Por exemplo:
+3. **Inferência de novas informações a partir de dados existentes**: o sistema pode usar regras de inferência para derivar novos fatos. Por exemplo:
 
    $$\forall x (S(x,f) \land S(x,t) \land T(x, \text{"covid_positivo"}) \rightarrow D(x,c))$$
 
@@ -3854,8 +3710,7 @@ Em sistemas especialistas de diagnóstico médico, a capacidade de definir e man
 
    Se adicionarmos ao nosso mundo $T(p, \text{"covid_positivo"})$, o sistema pode inferir $D(p,c)$, concluindo que o paciente tem COVID-19.
 
-4. **Validação de consistência em bases de conhecimento**:
-   O sistema pode verificar se o diagnóstico proposto é consistente com o conhecimento existente. Por exemplo, podemos ter uma regra de consistência:
+4. **Validação de consistência em bases de conhecimento**: o sistema pode verificar se o diagnóstico proposto é consistente com o conhecimento existente. Por exemplo, podemos ter uma regra de consistência:
 
    $$\forall x \neg(D(x,c) \land D(x,g))$$
 
@@ -3869,17 +3724,16 @@ Em sistemas especialistas de diagnóstico médico, a capacidade de definir e man
 
 Neste exemplo expandido, o mundo lógico permite ao sistema especialista:
 
-1. Representar e raciocinar sobre o estado de saúde do paciente.
-2. Planejar testes diagnósticos baseados em regras predefinidas.
-3. Fazer inferências sobre possíveis doenças usando regras lógicas.
-4. Garantir a consistência do diagnóstico através de verificações de integridade.
+   1. Representar e raciocinar sobre o estado de saúde do paciente;
+   2. Planejar testes diagnósticos baseados em regras predefinidas;
+   3. Fazer inferências sobre possíveis doenças usando regras lógicas;
+   4. Garantir a consistência do diagnóstico através de verificações de integridade.
 
-#### Exemplo 2
+##### Exemplo 2 - Robô de Limpeza
 
 Em sistemas de planejamento para robôs autônomos, a capacidade de definir e manipular mundos lógicos permite:
 
-1. **Raciocínio sobre cenários hipotéticos**:
-   Um sistema de IA para um robô de limpeza pode criar um mundo lógico $M = (D, I)$ representando o estado de um ambiente:
+1. **Raciocínio sobre cenários hipotéticos**: um sistema de IA para um robô de limpeza pode criar um mundo lógico $M = (D, I)$ representando o estado de um ambiente:
 
    $$D = \{r, s1, s2, s3, s4, p1, p2, l, d\}$$
 
@@ -3887,10 +3741,10 @@ Em sistemas de planejamento para robôs autônomos, a capacidade de definir e ma
 
    A interpretação $I$ define predicados como:
 
-   - $Em(x,y)$: "x está em y"
-   - $Sujo(x,y)$: "x está sujo com y"
-   - $Limpo(x)$: "x está limpo"
-   - $TemFerramenta(x,y)$: "x tem a ferramenta para limpar y"
+   - $Em(x,y)$: "x está em y";
+   - $Sujo(x,y)$: "x está sujo com y";
+   - $Limpo(x)$: "x está limpo";
+   - $TemFerramenta(x,y)$: "x tem a ferramenta para limpar y".
 
    O sistema pode raciocinar sobre um cenário hipotético onde:
 
@@ -3898,19 +3752,19 @@ Em sistemas de planejamento para robôs autônomos, a capacidade de definir e ma
 
    Este mundo representa um robô no setor 1, com setores 2 e 3 sujos, setor 4 limpo, e o robô equipado para limpar poeira.
 
-2. **Planejamento de ações em ambientes complexos**:
-   Baseado no mundo atual, o sistema pode planejar uma sequência de ações de limpeza. Definimos uma função de ação $A(x,y,z)$ que representa "x realiza ação y no local z".
+2. **Planejamento de ações em ambientes complexos**: baseado no mundo atual, o sistema pode planejar uma sequência de ações de limpeza. Definimos uma função de ação $A(x,y,z)$ que representa "x realiza ação y no local z".
 
    O sistema pode usar regras como:
 
-   $$\forall x,y,z (Em(x,y) \land Sujo(z,p1) \land TemFerramenta(x,p1) \land y \neq z \rightarrow A(x, \text{"mover"}, z))$$
+   $$\forall x,y,z \left( Em(x,y) \land Sujo(z, p_1) \land TemFerramenta(x, p_1) \land y \neq z \rightarrow A(x, \text{"mover"}, z) \right)$$
+
+   Assumindo que `p_1` é uma constante conhecida no universo do discurso, a fórmula está sintaticamente correta. Mas se `p_1` for uma variável, ela deve ser quantificada. Como está, a fórmula **é ambígua** e **potencialmente inválida**.
 
    $$\forall x,y (Em(x,y) \land Sujo(y,p1) \land TemFerramenta(x,p1) \rightarrow A(x, \text{"limpar"}, y))$$
 
    Assim, no nosso cenário, o sistema planejaria mover o robô para o setor 2 e então limpá-lo.
 
-3. **Inferência de novas informações a partir de dados existentes**:
-   O sistema pode usar regras de inferência para atualizar o estado do mundo após ações. Por exemplo:
+3. **Inferência de novas informações a partir de dados existentes**: o sistema pode usar regras de inferência para atualizar o estado do mundo após ações. Por exemplo:
 
    $$\forall x,y (A(x, \text{"limpar"}, y) \land Sujo(y,p1) \land TemFerramenta(x,p1) \rightarrow Limpo(y))$$
 
@@ -3918,8 +3772,7 @@ Em sistemas de planejamento para robôs autônomos, a capacidade de definir e ma
 
    Após a ação de limpeza no setor 2, o sistema inferiria $Limpo(s2)$, atualizando o estado do mundo.
 
-4. **Validação de consistência em bases de conhecimento**:
-   O sistema pode verificar se o estado do mundo é consistente após cada ação. Por exemplo, podemos ter regras de consistência:
+4. **Validação de consistência em bases de conhecimento**: o sistema pode verificar se o estado do mundo é consistente após cada ação. Por exemplo, podemos ter regras de consistência:
 
    $$\forall x \neg(Limpo(x) \land Sujo(x,p1))$$
 
@@ -3935,18 +3788,18 @@ Em sistemas de planejamento para robôs autônomos, a capacidade de definir e ma
 
 Neste exemplo, o mundo lógico permite ao sistema de IA do robô de limpeza:
 
-1. Representar e raciocinar sobre o estado do ambiente e do próprio robô.
-2. Planejar ações de limpeza baseadas em regras predefinidas e no estado atual.
-3. Fazer inferências sobre os resultados das ações, atualizando o estado do mundo.
-4. Garantir a consistência do estado do mundo através de verificações de integridade.
+   1. Representar e raciocinar sobre o estado do ambiente e do próprio robô;
+   2. Planejar ações de limpeza baseadas em regras predefinidas e no estado atual;
+   3. Fazer inferências sobre os resultados das ações, atualizando o estado do mundo;
+   4. Garantir a consistência do estado do mundo através de verificações de integridade.
 
 Este uso sofisticado da lógica de primeira ordem demonstra como sistemas de IA podem manipular informações complexas e realizar raciocínios avançados em domínios de planejamento e execução de tarefas autônomas.
 
-### Linguística Computacional
+#### Aplicações na Linguística Computacional
 
 Na linguística computacional, a semântica formal emprega a lógica de primeira ordem para modelar o significado de sentenças e discursos em linguagens naturais. As gramáticas formais, por sua vez, se beneficiam dessa abordagem na descrição da estrutura sintática de linguagens, e a análise do discurso utiliza esses princípios para representar contexto e relações entre sentenças em textos.
 
-#### Exemplo 1 - Linguística Computacional
+##### Exemplo 1 - Gramática Formal
 
 Na linguística, particularmente no estudo de gramáticas formais, a lógica de primeira ordem pode ser usada para definir e analisar estruturas sintáticas. Considere o seguinte exemplo de um mundo lógico representando uma gramática simplificada:
 
@@ -3990,8 +3843,7 @@ Podemos definir regras gramaticais usando fórmulas lógicas:
 
 Agora, podemos usar este mundo lógico para:
 
-1. **Analisar estruturas sintáticas**:
-   Dada a sequência de palavras "o gato caça o rato", podemos usar as regras para derivar sua estrutura sintática:
+1. **Analisar estruturas sintáticas**: dada a sequência de palavras "o gato caça o rato", podemos usar as regras para derivar sua estrutura sintática:
 
    $$Precede(\text{"o"}, \text{"gato"}) \land Precede(\text{"gato"}, \text{"caça"}) \land Precede(\text{"caça"}, \text{"o"}) \land Precede(\text{"o"}, \text{"rato"})$$
 
@@ -4005,14 +3857,11 @@ Agora, podemos usar este mundo lógico para:
 
    $$\exists s (Compõe(s, np_1, vp) \land Categoria(s, s))$$
 
-2. **Verificar a gramaticalidade de sentenças**:
-   Podemos verificar se uma sequência de palavras forma uma sentença válida ao tentar derivar um $s$ usando as regras.
+2. **Verificar a gramaticalidade de sentenças**: podemos verificar se uma sequência de palavras forma uma sentença válida ao tentar derivar um $s$ usando as regras.
 
-3. **Gerar sentenças gramaticais**:
-   Podemos usar as regras para gerar todas as sentenças possíveis de um certo comprimento.
+3. **Gerar sentenças gramaticais**: podemos usar as regras para gerar todas as sentenças possíveis de um certo comprimento.
 
-4. **Estudar ambiguidades**:
-   Poderíamos estender o modelo para lidar com ambiguidades estruturais, por exemplo, adicionando regras para sintagmas preposicionais.
+4. **Estudar ambiguidades**: poderíamos estender o modelo para lidar com ambiguidades estruturais, por exemplo, adicionando regras para sintagmas preposicionais.
 
 Este exemplo demonstra como a lógica de primeira ordem pode ser usada para formalizar e raciocinar sobre estruturas gramaticais, permitindo análises sintáticas rigorosas e geração de sentenças gramaticalmente corretas.
 
@@ -4024,9 +3873,11 @@ Este exemplo demonstra como a lógica de primeira ordem pode ser usada para form
 > 4. Sintagma Adverbial (SAdv): Tem um advérbio como núcleo. Exemplo: muito rapidamente (o núcleo é rapidamente, um advérbio).
 > 5. Sintagma Preposicional (SP): Tem uma preposição seguida de um complemento, que pode ser um sintagma nominal ou outro. Exemplo: com cuidado (o núcleo é com, uma preposição).
 
-### Exemplos de Aplicação da Lógica de Primeira Ordem em Biologia e Economia
+#### Exemplos Aplicação da Lógica de Primeira Ordem em Biologia e Economia
 
-#### Exemplo 1: Biologia
+A lógica de primeira ordem é uma ferramenta fundamenta para modelar e raciocinar sobre sistemas complexos. A seguir, a atenta leitora poderá estudar dois exemplos práticos de como a lógica de primeira ordem pode ser aplicada em biologia e economia.
+
+##### Exemplo 1 - Sistemas Biológicos
 
 Na biologia, a lógica de primeira ordem pode ser usada para modelar sistemas biológicos e suas interações. Considere o seguinte e de um mundo lógico representando uma cadeia alimentar simplificada.
 
@@ -4038,10 +3889,10 @@ Onde $c$ (cobra), $h$ (gavião), $a$ (antílope), $p$ (planta), $f$ (fruto) são
 
 A interpretação $I$ define predicados como:
 
-1. $Come(x, y)$: "x come y"
-2. $Herbívoro(x)$: "x é herbívoro"
-3. $Carnívoro(x)$: "x é carnívoro"
-4. $Produtor(x)$: "x é produtor"
+   1. $Come(x, y)$: "x come y";
+   2. $Herbívoro(x)$: "x é herbívoro";
+   3. $Carnívoro(x)$: "x é carnívoro";
+   4. $Produtor(x)$: "x é produtor";
 
 Podemos usar a lógica para descrever as interações alimentares:
 
@@ -4063,10 +3914,11 @@ $$Herbívoro(a), Produtor(p), Produtor(f), Carnívoro(c), Carnívoro(h)$$
 
 Agora, podemos usar este mundo lógico para:
 
-1. **Analisar interações tróficas**: Por exemplo, $Come(c, a)$ significa que a cobra come o antílope.
-2. **Verificar coerência ecológica**: As regras acima garantem que um herbívoro não comerá um carnívoro, e que um carnívoro não comerá plantas.
+   1. **Analisar interações tróficas**: Por exemplo, $Come(c, a)$ significa que a cobra come o antílope;
 
-#### Exemplo 2: Economia
+   2. **Verificar coerência ecológica**: As regras acima garantem que um herbívoro não comerá um carnívoro, e que um carnívoro não comerá plantas.
+
+##### Exemplo 2 - Modelagem Econômica
 
 Na economia, a lógica de primeira ordem pode ser aplicada para modelar mercados e interações econômicas. Considere o seguinte exemplo de um mundo lógico representando um mercado simples com consumidores e produtos.
 
@@ -4096,54 +3948,63 @@ $$Dinheiro(c_1, 100), Dinheiro(c_2, 50), Disponível(p_1, m), Disponível(p_2, m
 
 Agora, podemos usar este mundo lógico para:
 
-1. **Analisar transações**: Por exemplo, $Compra(c_1, p_1)$ significa que o consumidor $c_1$ comprou o produto $p_1$.
-2. **Verificar restrições econômicas**: As regras garantem que um consumidor só pode comprar um produto se tiver dinheiro suficiente e se o produto estiver disponível no mercado.
+   1. **Analisar transações**: Por exemplo, $Compra(c_1, p_1)$ significa que o consumidor $c_1$ comprou o produto $p_1$;
+
+   2. **Verificar restrições econômicas**: As regras garantem que um consumidor só pode comprar um produto se tiver dinheiro suficiente e se o produto estiver disponível no mercado.
 
 Essa ampla gama de aplicações demonstra a versatilidade e a importância fundamental da definição de mundos na lógica de primeira ordem, estabelecendo-a como uma ferramenta essencial para o avanço do conhecimento e da tecnologia em múltiplas disciplinas.
 A importância da definição de mundos na lógica de primeira ordem reside em sua capacidade de:
 
-1. Fornecer um framework rigoroso para representar conhecimento estruturado.
-2. Permitir raciocínio automatizado sobre informações complexas.
-3. Facilitar a comunicação precisa de ideias abstratas entre diferentes disciplinas.
-4. Servir como base para o desenvolvimento de sistemas inteligentes e adaptativos.
+   1. Fornecer um framework rigoroso para representar conhecimento estruturado;
+   2. Permitir raciocínio automatizado sobre informações complexas;
+   3. Facilitar a comunicação precisa de ideias abstratas entre diferentes disciplinas;
+   4. Servir como base para o desenvolvimento de sistemas inteligentes e adaptativos.
 
 À medida que os sistemas se tornam mais complexos e as demandas por inteligência artificial aumentam, a habilidade de definir e trabalhar com mundos lógicos torna-se cada vez mais importante para o avanço tecnológico e científico.
 
-### Exercício 1
+#### Exercício de Aplicação da Lógica de Primeira Ordem
+
+A seguir, a esforçada leitora terá a oportunidade de ver dois exercícios práticos que envolvem a aplicação da lógica de primeira ordem. O primeiro exercício aborda a coloração de um grafo, enquanto o segundo envolve grafos parcialmente coloridos. Ambos os exercícios são projetados para serem resolvidos sem o uso de funções, utilizando apenas relações e variáveis.
+
+##### Exercício 1 - Coloração de um Grafo
 
 Imagine que você está trabalhando como engenheiro de redes para uma grande empresa de tecnologia. Sua tarefa é planejar as conexões entre os servidores da empresa, garantindo que as comunicações entre eles não criem conflitos. O problema consiste em garantir que os servidores diretamente conectados não utilizem o mesmo canal de comunicação (representado por uma cor). Você tem, no máximo, $n$ servidores e deseja utilizar menos de $k+1$ canais de comunicação, respeitando que cada servidor pode se conectar diretamente a um número limitado de outros servidores, cujo limite é dado pelo grau de conexão $m$.
 
 **Descrição do Problema**:
 
-- **Servidor**: Representado como um nó em um grafo.
-- **Conexão direta**: Representada como uma aresta entre dois nós.
-- **Cor**: Representa o canal de comunicação atribuído a um servidor. Dois servidores diretamente conectados não podem compartilhar o mesmo canal.
-- **Grau de um servidor**: O número de conexões diretas que ele tem com outros servidores.
+- **Servidor**: Representado como um nó em um grafo;
+- **Conexão direta**: Representada como uma aresta entre dois nós;
+- **Cor**: Representa o canal de comunicação atribuído a um servidor. Dois servidores diretamente conectados não podem compartilhar o mesmo canal;
+- **Grau de um servidor**: O número de conexões diretas que ele tem com outros servidores;
 - **Grau de conexão da rede**: O maior grau entre os servidores da rede.
 
 O objetivo é determinar uma forma de atribuir um canal de comunicação a cada servidor de forma que não haja conflitos de comunicação entre servidores diretamente conectados, utilizando menos de $k+1$ canais.
 
-**Solução**:
+**Solução**: vamos usar lógica de primeira ordem para modelar este problema sem utilizar funções, apenas relações e variáveis.
 
-Vamos usar lógica de primeira ordem para modelar este problema sem utilizar funções, apenas relações e variáveis.
-
-- Um predicado unário $cor(x)$, onde $cor(x)$ significa o canal (cor) atribuído ao servidor $x$.
-- Um predicado unário $servidor(x)$, que significa que $x$ é um servidor.
-- Um predicado binário $conexao(x, y)$, que significa que $x$ está diretamente conectado a $y$.
+- um predicado binário $Cor(x, c)$, onde $x$ é um servidor e $c$ é uma cor/canal;
+- um predicado unário $Servidor(x)$, que significa que $x$ é um servidor;
+- um predicado binário $Conexao(x, y)$, que significa que $x$ está diretamente conectado a $y$.
 
 **Regras ou Axiomas**:
 
-1. $$ \forall x \forall y: (servidor(x) \land servidor(y) \land conexao(x, y) \rightarrow (cor(x) \neq cor(y)) ) $$
+1. Dois servidores diretamente conectados não podem usar o mesmo canal de comunicação:
 
-   Dois servidores diretamente conectados não podem usar o mesmo canal de comunicação.
+   $$ \forall x \forall y \forall c: (Servidor(x) \land Servidor(y) \land Conexao(x, y) \land Cor(x, c) \rightarrow \neg Cor(y, c)) $$
 
-2. $$ \forall x \left( servidor(x) \rightarrow \forall x*1 \dots \forall x_m \left( \bigwedge*{h=1}^{m} conexao(x, x*h) \rightarrow \neg \exists x*{m+1} conexao(x, x\_{m+1}) \right) \right) $$
+2. Cada servidor deve receber exatamente uma cor:
 
-   Um servidor não pode ter mais do que $m$ servidores diretamente conectados distintos.
+   $$ \forall x: (Servidor(x) \rightarrow \exists c: Cor(x, c)) $$
 
-3. $$ \forall x: servidor(x) \rightarrow cor(x) \in \{1, 2, ..., k\} $$
+   $$ \forall x \forall c1 \forall c2: (Servidor(x) \land Cor(x, c1) \land Cor(x, c2) \rightarrow c1 = c2) $$
 
-   Cada servidor $x$ deve receber um canal (cor) do conjunto $\{1, 2, ..., k\}$, garantindo que menos de $k+1$ cores sejam usadas na rede.
+3. Restrição de grau para um servidor (no máximo $m$ conexões):
+
+   $$ \forall x: (Servidor(x) \rightarrow \neg\exists x_1,...,x_{m+1}: (\bigwedge_{i=1}^{m+1} Conexao(x, x_i) \land \bigwedge_{i \neq j} x_i \neq x_j)) $$
+
+4. Número máximo de cores utilizadas (menos de $k+1$):
+
+   $$ \neg\exists c_1,...,c_{k+1}: (\bigwedge_{i=1}^{k+1} (\exists x: Servidor(x) \land Cor(x, c_i)) \land \bigwedge_{i \neq j} c_i \neq c_j) $$
 
 **Consultas Possíveis**:
 
@@ -4151,48 +4012,49 @@ Com esse modelo, você pode fazer as seguintes consultas:
 
 1. **Verificar se dois servidores estão diretamente conectados**:
 
-   - Consulta: `conexao(a, b)`
-   - Resposta: **True** se o servidor `a` estiver diretamente conectado ao servidor `b`, **False** caso contrário.
+   - Consulta: $Conexao(a, b)$;
+   - Resposta: **True** se o servidor $a$ estiver diretamente conectado ao servidor $b$, **False** caso contrário.
 
 2. **Verificar qual canal de comunicação (cor) foi atribuído a um servidor**:
 
-   - Consulta: `cor(a)`
-   - Resposta: Retorna a cor atribuída ao servidor `a`.
+   - Consulta: $Cor(a, c)$;
+   - Resposta: **True** se o servidor $a$ usa o canal $c$, **False** caso contrário.
 
 3. **Verificar se dois servidores conectados têm cores diferentes**:
 
-   - Consulta: `conexao(a, b) \land cor(a) \neq cor(b)`
-   - Resposta: **True** se os servidores `a` e `b` estiverem diretamente conectados e tiverem cores diferentes, **False** se eles compartilharem a mesma cor ou não estiverem conectados.
+   - Consulta: $Conexao(a, b) \land \forall c: (Cor(a, c) \rightarrow \neg Cor(b, c))$;
+   - Resposta: **True** se os servidores $a$ e $b$ estiverem diretamente conectados e tiverem cores diferentes, **False** se eles compartilharem a mesma cor ou não estiverem conectados.
 
 4. **Verificar se um servidor tem mais de $m$ conexões diretas**:
 
-   - Consulta: $$ \exists x*1, \dots, x*{m+1} \left( \bigwedge\_{h=1}^{m+1} conexao(a, x_h) \right) $$
-   - Resposta: **True** se o servidor `a` tiver mais de $m$ servidores diretamente conectados, **False** caso contrário.
+   - Consulta: $\exists x_1,...,x_{m+1}: (\bigwedge_{i=1}^{m+1} Conexao(a, x_i) \land \bigwedge_{i \neq j} x_i \neq x_j)$;
+   - Resposta: **True** se o servidor $a$ tiver mais de $m$ servidores diretamente conectados, **False** caso contrário.
 
 5. **Verificar se a coloração da rede é válida**:
-   - Consulta: $$ \forall x \forall y (servidor(x) \land servidor(y) \land conexao(x, y) \rightarrow cor(x) \neq cor(y)) $$
+
+   - Consulta: $\forall x \forall y \forall c: (Servidor(x) \land Servidor(y) \land Conexao(x, y) \land Cor(x, c) \rightarrow \neg Cor(y, c))$;
    - Resposta: **True** se todos os servidores diretamente conectados tiverem cores diferentes, **False** se houver algum conflito de cores.
 
-### Exercício 2
+##### Exercício 2 - Grafos Parcialmente Coloridos
 
-Dado um conjunto não vazio e finito de cores $\{c_1, \dots, c_k\}$, um grafo direcionado parcialmente colorido é uma estrutura $\langle N, R, C \rangle$ onde:
+Dado um conjunto não vazio e finito de cores $\{c_1, \dots, c_k\}$, um grafo direcionado parcialmente colorido é uma estrutura $\langle N, R, C \rangle$ na qual:
 
-- $N$ é um conjunto não vazio de nós.
-- $R$ é uma relação binária sobre $N$.
+- $N$ é um conjunto não vazio de nós;
+- $R$ é uma relação binária sobre $N$;
 - $C$ associa cores aos nós (nem todos os nós são necessariamente coloridos, e cada nó tem no máximo uma cor).
 
 Forneça uma linguagem de Lógica de Primeira Ordem e um conjunto de axiomas que formalizem grafos parcialmente coloridos. Mostre que todo modelo dessa teoria corresponde a um grafo parcialmente colorido, e vice-versa. Para cada uma das seguintes propriedades, escreva uma fórmula que seja verdadeira apenas nos grafos que satisfazem a propriedade:
 
-1. Nós conectados não têm a mesma cor.
-2. O grafo contém apenas dois nós amarelos.
-3. Começando de um nó vermelho, pode-se alcançar um nó verde em no máximo 4 passos.
-4. Para cada cor, existe pelo menos um nó com essa cor.
-5. O grafo é composto por $|C|$ subgrafos disjuntos e não vazios, um para cada cor.
+   1. Nós conectados não têm a mesma cor;
+   2. O grafo contém apenas dois nós amarelos;
+   3. Começando de um nó vermelho, pode-se alcançar um nó verde em no máximo 4 passos;
+   4. Para cada cor, existe pelo menos um nó com essa cor;
+   5. O grafo é composto por $|C|$ subgrafos disjuntos e não vazios, um para cada cor.
 
 **Solução**:
 
-- Um predicado binário $edge$, onde $edge(n, m)$ significa que o nó $n$ está conectado ao nó $m$.
-- Um predicado binário $color$, onde $color(n, x)$ significa que o nó $n$ tem a cor $x$.
+- Um predicado binário $edge$, onde $edge(n, m)$ significa que o nó $n$ está conectado ao nó $m$;
+- Um predicado binário $color$, onde $color(n, x)$ significa que o nó $n$ tem a cor $x$;
 - As constantes $yellow$, $green$, $red$.
 
 **Axiomas e Regras**:
@@ -4238,29 +4100,29 @@ Forneça uma linguagem de Lógica de Primeira Ordem e um conjunto de axiomas que
 
 1. Verificar se dois nós estão conectados:
 
-   - Consulta: $edge(a, b)$
+   - Consulta: $edge(a, b)$;
    - Resposta: **True** se o nó $a$ está conectado ao nó $b$, **False** caso contrário.
 
 2. Verificar a cor de um nó:
 
-   - Consulta: $color(a, x)$
+   - Consulta: $color(a, x)$;
    - Resposta: **True** se o nó $a$ tem a cor $x$, **False** caso contrário.
 
 3. Verificar se um nó é alcançável a partir de outro em até k passos:
 
-   - Consulta: $reach_k(a, b, k)$
+   - Consulta: $reach_k(a, b, k)$;
    - Resposta: **True** se o nó $b$ é alcançável a partir do nó $a$ em até $k$ passos, **False** caso contrário.
 
 4. Contar o número de nós de uma determinada cor:
 
-   - Consulta: $\exists n_1, ..., n_m: (\bigwedge_{i=1}^m color(n_i, x) \land \bigwedge_{i \neq j} n_i \neq n_j \land \forall n: (color(n, x) \rightarrow \bigvee_{i=1}^m n = n_i))$
+   - Consulta: $\exists n_1, ..., n_m: (\bigwedge_{i=1}^m color(n_i, x) \land \bigwedge_{i \neq j} n_i \neq n_j \land \forall n: (color(n, x) \rightarrow \bigvee_{i=1}^m n = n_i))$;
    - Resposta: O maior valor de $m$ para o qual esta fórmula é verdadeira é o número de nós da cor $x$.
 
 5. Verificar se o grafo é totalmente colorido:
-   - Consulta: $\forall n \exists x: color(n, x)$
+   - Consulta: $\forall n \exists x: color(n, x)$;
    - Resposta: **True** se todos os nós têm uma cor atribuída, **False** caso contrário.
 
-### Exercício 3 [:2]
+##### Exercício 3 - Minesweeper [:2]
 
 O jogo **Minesweeper** foi inventado por [Robert Donner](<https://en.wikipedia.org/wiki/Robert_Donner_(disambiguation)>) em 1989. O objetivo do jogo é limpar um campo minado sem detonar uma mina. A tela do jogo consiste em um campo retangular de quadrados. Cada quadrado pode ser limpo, ou descoberto, clicando nele. Se um quadrado contendo uma mina for clicado, o jogo termina. Se o quadrado não contém uma mina, uma das duas coisas acontece: (1) Um número entre 1 e 8 aparece, indicando o número de quadrados adjacentes contendo minas, ou (2) nenhum número aparece; nesse caso, não há minas nas células adjacentes.
 
@@ -4275,8 +4137,8 @@ _Figura 1 - Um estado do jogo Minesweeper._{: class="legend"}
 
 **Solução**:
 
-1. Um predicado unário $mine$, onde $mine(x)$ significa que a célula $x$ contém uma mina.
-2. Um predicado binário $adj$, onde $adj(x, y)$ significa que a célula $x$ é adjacente à célula $y$.
+1. Um predicado unário $mine$, onde $mine(x)$ significa que a célula $x$ contém uma mina;
+2. Um predicado binário $adj$, onde $adj(x, y)$ significa que a célula $x$ é adjacente à célula $y$;
 3. Um predicado binário $contains$, onde $contains(x, n)$ significa que a célula $x$ contém o número $n$.
 
 **Regras e Axiomas**:
@@ -4293,42 +4155,42 @@ _Figura 1 - Um estado do jogo Minesweeper._{: class="legend"}
 
    De acordo com a figura acima, temos:
 
-   a. $contains((2, 2), 1)$
+   1. $contains((2, 2), 1)$;
 
-   b. $\neg mine((1, 1)) \land \neg mine((1, 2)) \land \neg mine((1, 3))$
+   2. $\neg mine((1, 1)) \land \neg mine((1, 2)) \land \neg mine((1, 3))$;
 
-   c. $\neg mine((2, 1)) \land \neg mine((2, 2)) \land \neg mine((2, 3))$
+   3. $\neg mine((2, 1)) \land \neg mine((2, 2)) \land \neg mine((2, 3))$;
 
-   d. $\neg mine((3, 1)) \land \neg mine((3, 2))$
+   4. $\neg mine((3, 1)) \land \neg mine((3, 2))$.
 
-   Podemos deduzir:
+      Podemos deduzir:
 
-   e. $\exists z: (adj((2, 2), z) \land mine(z) \land \forall y: (adj((2, 2), y) \land mine(y) \rightarrow y = z))$ (de a e axioma 2)
+   5. $\exists z: (adj((2, 2), z) \land mine(z) \land \forall y: (adj((2, 2), y) \land mine(y) \rightarrow y = z))$ (de a e axioma 2)
 
-   f. $mine((1, 1)) \lor mine((1, 2)) \lor mine((1, 3)) \lor mine((2, 1)) \lor mine((2, 2)) \lor mine((2, 3)) \lor mine((3, 1)) \lor mine((3, 2)) \lor mine((3, 3))$ (de e)
+   6. $mine((1, 1)) \lor mine((1, 2)) \lor mine((1, 3)) \lor mine((2, 1)) \lor mine((2, 2)) \lor mine((2, 3)) \lor mine((3, 1)) \lor mine((3, 2)) \lor mine((3, 3))$ (de e)
 
-   g. $mine((3, 3))$ (de b, c, d e f)
+   7. $mine((3, 3))$ (de b, c, d e f)
 
-### Exercício 4
+##### Exercício 4 - Conexões Aéreas
 
 Imagine que você é responsável pela gestão de voos entre várias cidades brasileiras. A tarefa envolve criar uma representação formal das conexões aéreas entre essas cidades, considerando diferentes tipos de voos, como voos domésticos e internacionais, e as restrições específicas que regulam essas conexões. O objetivo é formalizar essas conexões de forma que se possa responder a perguntas sobre as rotas disponíveis e as restrições envolvidas.
 
 **Descrição do Problema**:
 
-- **Cidades brasileiras**: Representadas como nós de um grafo.
-- **Voos diretos**: Representados como arestas que conectam duas cidades diretamente (sem escalas intermediárias).
-- **Tipos de voos**: Diferentes categorias de voos, como domésticos (doméstico) e internacionais (internacional), com restrições sobre onde eles podem operar.
-- **Cidades pequenas**: Algumas cidades são classificadas como pequenas, e certas restrições se aplicam a essas cidades.
+- **Cidades brasileiras**: representadas como nós de um grafo;
+- **Voos diretos**: representados como arestas que conectam duas cidades diretamente (sem escalas intermediárias);
+- **Tipos de voos**: diferentes categorias de voos, como domésticos (doméstico) e internacionais (internacional), com restrições sobre onde eles podem operar.
+- **Cidades pequenas**: algumas cidades são classificadas como pequenas, e certas restrições se aplicam a essas cidades.
 
 **Solução**:
 
-- As constantes $SP$, $RJ$, $BSB$, $FLN$, $MAO$ são identificadores das cidades São Paulo, Rio de Janeiro, Brasília, Florianópolis, Manaus.
-- As constantes $Domestico$, $Internacional$ são os identificadores dos tipos de voo.
-- O predicado unário $Aviao(x)$ significa que $x$ é um avião.
-- O predicado unário $Cidade(x)$ significa que $x$ é uma cidade.
-- O predicado unário $CidadePequena(x)$ significa que $x$ é uma cidade pequena.
-- O predicado binário $TipoVoo(x, y)$ significa que o voo $x$ é do tipo $y$.
-- O predicado binário $PertenceEstado(x, y)$ significa que a cidade $x$ está no estado $y$.
+- As constantes $SP$, $RJ$, $BSB$, $FLN$, $MAO$ são identificadores das cidades São Paulo, Rio de Janeiro, Brasília, Florianópolis, Manaus;
+- As constantes $Domestico$, $Internacional$ são os identificadores dos tipos de voo;
+- O predicado unário $Aviao(x)$ significa que $x$ é um avião;
+- O predicado unário $Cidade(x)$ significa que $x$ é uma cidade;
+- O predicado unário $CidadePequena(x)$ significa que $x$ é uma cidade pequena;
+- O predicado binário $TipoVoo(x, y)$ significa que o voo $x$ é do tipo $y$;
+- O predicado binário $PertenceEstado(x, y)$ significa que a cidade $x$ está no estado $y$;
 - O predicado ternário $ConexaoDireta(x, y, z)$ significa que o voo $x$ conecta diretamente as cidades $y$ e $z$ (sem escalas intermediárias).
 
 **Regras e Axiomas**:
@@ -4357,7 +4219,7 @@ Imagine que você é responsável pela gestão de voos entre várias cidades bra
 
    $$ Cidade(SP) \land Cidade(RJ) \land Cidade(BSB) \land Cidade(FLN) \land Cidade(MAO) $$
 
-#### Axiomas específicos
+**Axiomas específicos**:
 
 1. Não há conexão direta de São Paulo para Manaus:
 
@@ -4379,60 +4241,60 @@ Imagine que você é responsável pela gestão de voos entre várias cidades bra
 
 1. **Verificar se há uma conexão direta entre duas cidades**:
 
-   - Consulta: $ConexaoDireta(a, b, c)$
+   - Consulta: $ConexaoDireta(a, b, c)$;
    - Resposta: **True** se o voo $a$ conecta diretamente as cidades $b$ e $c$, **False** caso contrário.
 
 2. **Verificar o tipo de voo de um avião**:
 
-   - Consulta: $TipoVoo(a, x)$
+   - Consulta: $TipoVoo(a, x)$;
    - Resposta: **True** se o avião $a$ opera o tipo de voo $x$, **False** caso contrário.
 
 3. **Verificar se duas cidades estão no mesmo estado**:
 
-   - Consulta: $PertenceEstado(a, b)$
+   - Consulta: $PertenceEstado(a, b)$;
    - Resposta: **True** se a cidade $a$ está no estado $b$, **False** caso contrário.
 
 4. **Verificar se um voo faz escalas apenas em cidades grandes**:
 
-   - Consulta: $\forall y z (ConexaoDireta(a, y, z) \rightarrow (\neg CidadePequena(y) \land \neg CidadePequena(z)))$
+   - Consulta: $\forall y z (ConexaoDireta(a, y, z) \rightarrow (\neg CidadePequena(y) \land \neg CidadePequena(z)))$;
    - Resposta: **True** se o voo $a$ não faz escalas em cidades pequenas, **False** caso contrário.
 
 5. **Verificar se uma cidade pequena está conectada por um voo**:
 
-   - Consulta: $\exists x (CidadePequena(y) \land ConexaoDireta(x, y, z))$
+   - Consulta: $\exists x (CidadePequena(y) \land ConexaoDireta(x, y, z))$;
    - Resposta: **True** se a cidade pequena $y$ está conectada por um voo a alguma outra cidade, **False** caso contrário.
 
-### Exercício 5
+##### Exercício 5 - Jogo de Damas Brasileiro
 
-O jogo de damas brasileiras é jogado em um tabuleiro de 64 casas (pretas e brancas), onde dois jogadores competem com 12 peças cada (denominadas **comuns**). Um jogador tem peças pretas e o outro, peças brancas. O objetivo do jogo é capturar todas as peças do adversário ou impossibilitar os movimentos do adversário.
+O jogo de damas brasileiro é jogado em um tabuleiro de 64 casas (pretas e brancas), onde dois jogadores competem com 12 peças cada (denominadas **comuns**). Um jogador tem peças pretas e o outro, peças brancas. O objetivo do jogo é capturar todas as peças do adversário ou impossibilitar os movimentos do adversário.
 
 Quando o jogo começa, as peças de cada jogador são posicionadas nas 12 casas pretas mais próximas a eles, sendo que as casas brancas não são utilizadas durante o jogo. As peças se movem apenas diagonalmente, permanecendo nas casas pretas. O jogador com peças pretas sempre faz o primeiro movimento.
 
-#### Movimentos
+**Movimentos**:
 
 Existem quatro tipos fundamentais de movimento: o movimento comum de uma peça, o movimento comum de uma dama, o movimento de captura de uma peça e o movimento de captura de uma dama.
 
-- **Movimento comum de uma peça**: A peça é movida diagonalmente para frente, à esquerda ou à direita, para uma casa vazia adjacente.
-- **Movimento comum de uma dama**: A dama (uma peça que alcançou a última fileira e foi promovida) pode se mover diagonalmente em qualquer direção (frente, trás, esquerda ou direita).
+- **Movimento comum de uma peça**: A peça é movida diagonalmente para frente, à esquerda ou à direita, para uma casa vazia adjacente;
+- **Movimento comum de uma dama**: A dama (uma peça que alcançou a última fileira e foi promovida) pode se mover diagonalmente em qualquer direção (frente, trás, esquerda ou direita);
 - **Captura**: Quando uma peça (comum ou dama) tem uma peça adversária adjacente, e a casa imediatamente além está vazia, a peça adversária pode ser capturada ao "pular" sobre ela, removendo-a do tabuleiro. Se uma peça puder realizar capturas múltiplas consecutivas, ela deve fazê-lo.
 
-#### Objetivo
+**Objetivo**:
 
 O jogador vence ao capturar todas as peças do adversário ou ao impossibilitar os movimentos de seu oponente.
 
-#### Formalização em Lógica de Primeira Ordem
+**Formalização em Lógica de Primeira Ordem**:
 
-- O predicado unário $square(x)$ significa que $x$ é uma casa do tabuleiro.
-- O predicado unário $piece(x)$ significa que $x$ é uma peça.
-- O predicado unário $white(x)$ significa que $x$ é branca.
-- O predicado unário $black(x)$ significa que $x$ é preta.
-- O predicado unário $common(x)$ significa que $x$ é uma peça comum.
-- O predicado unário $dama(x)$ significa que $x$ é uma dama.
-- O predicado binário $empty(x, t)$ significa que a casa $x$ está vazia no tempo $t$.
-- O predicado binário $contain(x, y, t)$ significa que a casa $x$ contém a peça $y$ no tempo $t$.
-- O predicado binário $capture(x, y, t)$ significa que a peça $x$ capturou a peça $y$ no tempo $t$.
-- O predicado binário $adjacent(x, y)$ significa que as casas $x$ e $y$ são adjacentes.
-- O predicado unário $turn(x, t)$ significa que é a vez do jogador $x$ no tempo $t$.
+- O predicado unário $square(x)$ significa que $x$ é uma casa do tabuleiro;
+- O predicado unário $piece(x)$ significa que $x$ é uma peça;
+- O predicado unário $white(x)$ significa que $x$ é branca;
+- O predicado unário $black(x)$ significa que $x$ é preta;
+- O predicado unário $common(x)$ significa que $x$ é uma peça comum;
+- O predicado unário $dama(x)$ significa que $x$ é uma dama;
+- O predicado binário $empty(x, t)$ significa que a casa $x$ está vazia no tempo $t$;
+- O predicado binário $contain(x, y, t)$ significa que a casa $x$ contém a peça $y$ no tempo $t$;
+- O predicado binário $capture(x, y, t)$ significa que a peça $x$ capturou a peça $y$ no tempo $t$;
+- O predicado binário $adjacent(x, y)$ significa que as casas $x$ e $y$ são adjacentes;
+- O predicado unário $turn(x, t)$ significa que é a vez do jogador $x$ no tempo $t$;
 - O predicado binário $lastRow(x, y)$ significa que a casa $x$ está na última fileira para o jogador com cor $y$.
 
 **Regras e Axiomas**:
@@ -4487,71 +4349,72 @@ $$ \neg \exists x, y: (piece(x) \land contain(y, x, t) \land turn(color(x), t) \
 
 1. **Verificar se uma casa está vazia no tempo $t$**:
 
-   - Consulta: $empty(a, t)$
+   - Consulta: $empty(a, t)$;
    - Resposta: **True** se a casa $a$ está vazia no tempo $t$, **False** caso contrário.
 
 2. **Verificar qual peça está em uma casa no tempo $t$**:
 
-   - Consulta: $contain(a, p, t)$
+   - Consulta: $contain(a, p, t)$;
    - Resposta: **True** se a peça $p$ está na casa $a$ no tempo $t$, **False** caso contrário.
 
 3. **Verificar se uma peça capturou outra no tempo $t$**:
 
-   - Consulta: $capture(x, y, t)$
+   - Consulta: $capture(x, y, t)$;
    - Resposta: **True** se a peça $x$ capturou a peça $y$ no tempo $t$, **False** caso contrário.
 
 4. **Verificar o número total de peças de uma cor no tabuleiro**:
 
-   - Consulta: $\exists p_1, \dots, p_n: (\bigwedge_{i=1}^n (piece(p_i) \land color(p_i)) \land \forall x: (piece(x) \land color(x) \rightarrow \bigvee_{i=1}^n x = p_i))$
+   - Consulta: $\exists p_1, \dots, p_n: (\bigwedge_{i=1}^n (piece(p_i) \land color(p_i)) \land \forall x: (piece(x) \land color(x) \rightarrow \bigvee_{i=1}^n x = p_i))$;
    - Resposta: O valor $n$ corresponde ao número total de peças da cor especificada no tabuleiro naquele momento.
 
 5. **Verificar se o jogo terminou**:
 
-   - Consulta: $gameOver(t)$
+   - Consulta: $gameOver(t)$;
    - Resposta: **True** se o jogo terminou no tempo $t$, **False** caso contrário.
 
 6. **Verificar de quem é a vez de jogar**:
 
-   - Consulta: $turn(x, t)$
+   - Consulta: $turn(x, t)$;
    - Resposta: **True** se é a vez do jogador $x$ no tempo $t$, **False** caso contrário.
 
 7. **Verificar se uma peça comum foi promovida a dama**:
-   - Consulta: $\exists t_1, t_2: (t_1 < t_2 \land common(p, t_1) \land dama(p, t_2))$
+
+   - Consulta: $\exists t_1, t_2: (t_1 < t_2 \land common(p, t_1) \land dama(p, t_2))$;
    - Resposta: **True** se a peça $p$ foi promovida de comum para dama em algum momento do jogo, **False** caso contrário.
 
-### Exercício 6
+##### Exercício 6 - Sudoku
 
 O Sudoku é um jogo de lógica jogado em um tabuleiro de 9x9, que é dividido em 9 regiões menores de 3x3. O objetivo do jogo é preencher todas as 81 casas do tabuleiro com números de 1 a 9, respeitando as seguintes regras:
 
-1. Cada número de 1 a 9 deve aparecer exatamente uma vez em cada linha.
-2. Cada número de 1 a 9 deve aparecer exatamente uma vez em cada coluna.
+1. Cada número de 1 a 9 deve aparecer exatamente uma vez em cada linha;
+2. Cada número de 1 a 9 deve aparecer exatamente uma vez em cada coluna;
 3. Cada número de 1 a 9 deve aparecer exatamente uma vez em cada uma das 9 regiões 3x3.
 
 O jogo começa com algumas casas já preenchidas, e o jogador deve completar as casas restantes de forma a obedecer essas regras.
 
-### Solução
+**Solução**:
 
-- O predicado unário $cell(x)$ significa que $x$ é uma célula do tabuleiro.
-- O predicado binário $value(x, v)$ significa que a célula $x$ contém o valor $v$, onde $v$ é um número de 1 a 9.
-- O predicado binário $inRow(x, r)$ significa que a célula $x$ está na linha $r$, onde $r$ é um número de 1 a 9.
-- O predicado binário $inColumn(x, c)$ significa que a célula $x$ está na coluna $c$, onde $c$ é um número de 1 a 9.
-- O predicado binário $inRegion(x, z)$ significa que a célula $x$ está na região $z$, onde $z$ é um número de 1 a 9 representando uma das 9 regiões 3x3.
+- O predicado unário $cell(x)$ significa que $x$ é uma célula do tabuleiro;
+- O predicado binário $value(x, v)$ significa que a célula $x$ contém o valor $v$, onde $v$ é um número de $1$ a $9$;
+- O predicado binário $inRow(x, r)$ significa que a célula $x$ está na linha $r$, onde $r$ é um número de $1$ a $9$;
+- O predicado binário $inColumn(x, c)$ significa que a célula $x$ está na coluna $c$, onde $c$ é um número de $1$ a $9$;
+- O predicado binário $inRegion(x, z)$ significa que a célula $x$ está na região $z$, onde $z$ é um número de $1$ a $9$ representando uma das $9$ regiões $3\times 3$.
 
-### Regras e Axiomas
+**Regras e Axiomas**:
 
-1. Cada célula tem exatamente um valor entre 1 e 9:
+1. Cada célula tem exatamente um valor entre $1$ e $9$:
 
    $$\forall x: (cell(x) \rightarrow \exists! v: (1 \leq v \leq 9 \land value(x, v)))$$
 
-2. Cada linha contém os números de 1 a 9 exatamente uma vez:
+2. Cada linha contém os números de $1$ a $9$ exatamente uma vez:
 
    $$\forall r \forall v: (1 \leq r \leq 9 \land 1 \leq v \leq 9 \rightarrow \exists! x: (inRow(x, r) \land value(x, v)))$$
 
-3. Cada coluna contém os números de 1 a 9 exatamente uma vez:
+3. Cada coluna contém os números de $1$ a $9$ exatamente uma vez:
 
    $$\forall c \forall v: (1 \leq c \leq 9 \land 1 \leq v \leq 9 \rightarrow \exists! x: (inColumn(x, c) \land value(x, v)))$$
 
-4. Cada região 3x3 contém os números de 1 a 9 exatamente uma vez:
+4. Cada região 3x3 contém os números de $1$ a $9$ exatamente uma vez:
 
    $$\forall z \forall v: (1 \leq z \leq 9 \land 1 \leq v \leq 9 \rightarrow \exists! x: (inRegion(x, z) \land value(x, v)))$$
 
@@ -4571,51 +4434,52 @@ O jogo começa com algumas casas já preenchidas, e o jogador deve completar as 
 
    $$\forall x: (cell(x) \rightarrow \exists! r \exists! c \exists! z: (inRow(x, r) \land inColumn(x, c) \land inRegion(x, z)))$$
 
-### Consultas Possíveis
+**Consultas Possíveis**:
 
 1. **Verificar se uma célula está preenchida com um determinado valor no tabuleiro**:
 
-   - Consulta: $value(x, v)$
+   - Consulta: $value(x, v)$;
    - Resposta: **True** se a célula $x$ contém o valor $v$, **False** caso contrário.
 
 2. **Verificar se uma linha contém todos os números de 1 a 9**:
 
-   - Consulta: $\forall v (1 \leq v \leq 9 \rightarrow \exists! x: (inRow(x, r) \land value(x, v)))$
+   - Consulta: $\forall v (1 \leq v \leq 9 \rightarrow \exists! x: (inRow(x, r) \land value(x, v)))$;
    - Resposta: **True** se a linha $r$ contém todos os números de 1 a 9, **False** caso contrário.
 
 3. **Verificar se uma coluna contém todos os números de 1 a 9**:
 
-   - Consulta: $\forall v (1 \leq v \leq 9 \rightarrow \exists! x: (inColumn(x, c) \land value(x, v)))$
+   - Consulta: $\forall v (1 \leq v \leq 9 \rightarrow \exists! x: (inColumn(x, c) \land value(x, v)))$;
    - Resposta: **True** se a coluna $c$ contém todos os números de 1 a 9, **False** caso contrário.
 
 4. **Verificar se uma região 3x3 contém todos os números de 1 a 9**:
-   - Consulta: $\forall v (1 \leq v \leq 9 \rightarrow \exists! x: (inRegion(x, z) \land value(x, v)))$
+
+   - Consulta: $\forall v (1 \leq v \leq 9 \rightarrow \exists! x: (inRegion(x, z) \land value(x, v)))$;
    - Resposta: **True** se a região $z$ contém todos os números de 1 a 9, **False** caso contrário.
 
-### Exercício 7: Formalização do Problema da Torre de Hanói (Muito Completo)
+##### Exercício 7 - Torre de Hanói
 
-No jogo **Torre de Hanói**, três postes são dados, e discos de tamanhos diferentes são empilhados no primeiro poste em ordem crescente de tamanho (o menor no topo). O objetivo do jogo é mover todos os discos para o terceiro poste, usando o segundo poste como auxiliar, sob as seguintes condições:
+No jogo **Torre de Hanói**, três postes são dados, e discos de tamanhos diferentes são empilhados no primeiro poste em ordem crescente de tamanho (o menor no topo). O objetivo do jogo é mover todos os discos para o terceiro poste, usando o segundo poste como auxiliar, sob as seguintes condições [^2]:
 
-1. Somente um disco pode ser movido de cada vez.
+1. Somente um disco pode ser movido de cada vez;
 2. Nenhum disco pode ser colocado sobre um disco menor.
 
 **Regras e Axiomas**:
 
-1. Formalize a regra de que apenas um disco pode ser movido de cada vez.
-2. Formalize a regra de que nenhum disco pode ser colocado sobre um disco menor.
+1. Formalize a regra de que apenas um disco pode ser movido de cada vez;
+2. Formalize a regra de que nenhum disco pode ser colocado sobre um disco menor;
 3. Formalize a condição de vitória, isto é, todos os discos estão no terceiro poste.
 
 **Solução**:
 
-- O predicado unário $disk(x)$ significa que $x$ é um disco.
-- O predicado unário $peg(x)$ significa que $x$ é um poste.
-- O predicado ternário $on(x, y, t)$ significa que, no tempo $t$, o disco $x$ está diretamente sobre o disco $y$.
-- O predicado ternário $at(x, p, t)$ significa que, no tempo $t$, o disco $x$ está no poste $p$.
-- O predicado ternário $move(d, p, t)$ significa que, no tempo $t$, o disco $d$ foi movido para o poste $p$.
-- O predicado unário $smallest(x)$ significa que $x$ é o disco de menor tamanho.
+- O predicado unário $disk(x)$ significa que $x$ é um disco;
+- O predicado unário $peg(x)$ significa que $x$ é um poste;
+- O predicado ternário $on(x, y, t)$ significa que, no tempo $t$, o disco $x$ está diretamente sobre o disco $y$;
+- O predicado ternário $at(x, p, t)$ significa que, no tempo $t$, o disco $x$ está no poste $p$;
+- O predicado ternário $move(d, p, t)$ significa que, no tempo $t$, o disco $d$ foi movido para o poste $p$;
+- O predicado unário $smallest(x)$ significa que $x$ é o disco de menor tamanho;
 - O predicado binário $larger(x, y)$ significa que o disco $x$ é maior que o disco $y$.
 
-#### Axiomas
+**Axiomas**:
 
 1. **Apenas um disco pode ser movido de cada vez**:
 
@@ -4705,50 +4569,51 @@ No jogo **Torre de Hanói**, três postes são dados, e discos de tamanhos difer
 
 1. **Verificar se um disco está em um determinado poste no tempo $t$**:
 
-   - Consulta: $at(d, p, t)$
+   - Consulta: $at(d, p, t)$;
    - Resposta: _Verdadeiro_ se o disco $d$ está no poste $p$ no tempo $t$, _Falso_ caso contrário.
 
 2. **Verificar se um disco está sobre outro no tempo $t$**:
 
-   - Consulta: $on(d_1, d_2, t)$
+   - Consulta: $on(d_1, d_2, t)$;
    - Resposta: _Verdadeiro_ se o disco $d_1$ está sobre o disco $d_2$ no tempo $t$, _Falso_ caso contrário.
 
 3. **Verificar se o disco $d_1$ é maior que o disco $d_2$**:
 
-   - Consulta: $larger(d_1, d_2)$
+   - Consulta: $larger(d_1, d_2)$;
    - Resposta: _Verdadeiro_ se o disco $d_1$ é maior que o disco $d_2$, _Falso_ caso contrário.
 
 4. **Verificar se o jogo foi vencido no tempo $t$**:
 
-   - Consulta: $\forall d: (disk(d) \rightarrow at(d, peg_3, t))$
+   - Consulta: $\forall d: (disk(d) \rightarrow at(d, peg_3, t))$;
    - Resposta: _Verdadeiro_ se todos os discos estão no terceiro poste no tempo $t$, _Falso_ caso contrário.
 
 5. **Verificar se um disco foi movido para um poste em um determinado instante**:
-   - Consulta: $move(d, p, t)$
+
+   - Consulta: $move(d, p, t)$;
    - Resposta: _Verdadeiro_ se o disco $d$ foi movido para o poste $p$ no tempo $t$, _Falso_ caso contrário.
 
-### Exercício 8 - Modelo de Família com Meios-Irmãos
+##### Exercício 8 - Modelo de Família com Meios-Irmãos
 
 **Variáveis Proposicionais**:
 
 Para pessoas:
 
-- $P_i$: Pessoa i (onde i é um identificador único)
-- $H_i$: Pessoa i é homem
-- $M_i$: Pessoa i é mulher
+- $P_i$: Pessoa $$i$ (na qual, $i$ é um identificador único);
+- $H_i$: Pessoa $i$ é homem;
+- $M_i$: Pessoa $i$ é mulher.
 
 Para relações:
 
-- $PaiDe(i,j)$: Pessoa i é pai de pessoa j
-- $MaeDe(i,j)$: Pessoa i é mãe de pessoa j
-- $FilhoDe(i,j)$: Pessoa i é filho de pessoa j
-- $FilhaDe(i,j)$: Pessoa i é filha de pessoa j
-- $IrmaoDe(i,j)$: Pessoa i é irmão de pessoa j
-- $IrmaDe(i,j)$: Pessoa i é irmã de pessoa j
-- $MeioIrmaoDe(i,j)$: Pessoa i é meio-irmão de pessoa j
-- $MeioIrmaDe(i,j)$: Pessoa i é meia-irmã de pessoa j
+- $PaiDe(i,j)$: Pessoa $i$ é pai de pessoa $j$;
+- $MaeDe(i,j)$: Pessoa $i$ é mãe de pessoa $j$;
+- $FilhoDe(i,j)$: Pessoa $i$ é filho de pessoa $j$;
+- $FilhaDe(i,j)$: Pessoa $i$ é filha de pessoa $j$;
+- $IrmaoDe(i,j)$: Pessoa $i$ é irmão de pessoa $j$;
+- $IrmaDe(i,j)$: Pessoa $i$ é irmã de pessoa $j$;
+- $MeioIrmaoDe(i,j)$: Pessoa $i$ é meio-irmão de pessoa $j$;
+- $MeioIrmaDe(i,j)$: Pessoa $i$ é meia-irmã de pessoa $j$.
 
-#### Regras do Modelo
+**Regras do Modelo**:
 
 1. Cada pessoa é homem ou mulher, mas não ambos:
 
@@ -4818,121 +4683,130 @@ $$
 
 1. **Verificar se uma pessoa existe no mundo**:
 
-   - Consulta: $P_i$
+   - Consulta: $P_i$;
    - Resposta: Verdadeiro se a pessoa i existe no mundo, Falso caso contrário.
 
 2. **Verificar o sexo de uma pessoa**:
 
-   - Consulta: $H_i$ ou $M_i$
+   - Consulta: $H_i$ ou $M_i$;
    - Resposta: Verdadeiro se a pessoa i é homem (H_i) ou mulher (M_i), Falso caso contrário.
 
 3. **Verificar relação de paternidade**:
 
-   - Consulta: $PaiDe(i,j)$
+   - Consulta: $PaiDe(i,j)$;
    - Resposta: Verdadeiro se a pessoa i é pai da pessoa j, Falso caso contrário.
 
 4. **Verificar relação de maternidade**:
 
-   - Consulta: $MaeDe(i,j)$
+   - Consulta: $MaeDe(i,j)$;
    - Resposta: Verdadeiro se a pessoa i é mãe da pessoa j, Falso caso contrário.
 
 5. **Verificar se duas pessoas são irmãos**:
 
-   - Consulta: $IrmaosDe(i,j)$
+   - Consulta: $IrmaosDe(i,j)$;
    - Resposta: Verdadeiro se as pessoas i e j são irmãos (mesmo pai e mesma mãe), Falso caso contrário.
 
 6. **Verificar se duas pessoas são meios-irmãos**:
 
-   - Consulta: $MeiosIrmaosDe(i,j)$
+   - Consulta: $MeiosIrmaosDe(i,j)$;
    - Resposta: Verdadeiro se as pessoas i e j são meios-irmãos (mesmo pai OU mesma mãe, mas não ambos), Falso caso contrário.
 
 7. **Encontrar o pai de uma pessoa**:
 
-   - Consulta: $\exists x, PaiDe(x,i)$
-   - Resposta: Verdadeiro se existe um pai para a pessoa i, Falso caso contrário.
+   - Consulta: $\exists x, PaiDe(x,i)$;
+   - Resposta: Verdadeiro se existe um pai para a pessoa i, Falso caso contrário;
    - Para obter o pai específico: $x$ tal que $PaiDe(x,i)$ é verdadeiro.
 
 8. **Encontrar a mãe de uma pessoa**:
 
-   - Consulta: $\exists x, MaeDe(x,i)$
-   - Resposta: Verdadeiro se existe uma mãe para a pessoa i, Falso caso contrário.
+   - Consulta: $\exists x, MaeDe(x,i)$;
+   - Resposta: Verdadeiro se existe uma mãe para a pessoa i, Falso caso contrário;
    - Para obter a mãe específica: $x$ tal que $MaeDe(x,i)$ é verdadeiro.
 
 9. **Verificar se duas pessoas têm o mesmo pai**:
 
-   - Consulta: $\exists x, (PaiDe(x,i) \land PaiDe(x,j))$
+   - Consulta: $\exists x, (PaiDe(x,i) \land PaiDe(x,j))$;
    - Resposta: Verdadeiro se as pessoas i e j têm o mesmo pai, Falso caso contrário.
 
 10. **Verificar se duas pessoas têm a mesma mãe**:
 
-    - Consulta: $\exists x, (MaeDe(x,i) \land MaeDe(x,j))$
+    - Consulta: $\exists x, (MaeDe(x,i) \land MaeDe(x,j))$;
     - Resposta: Verdadeiro se as pessoas i e j têm a mesma mãe, Falso caso contrário.
 
 11. **Contar o número de filhos de uma pessoa**:
 
-    - Consulta: $\text{Contagem}(\{j : PaiDe(i,j) \lor MaeDe(i,j)\})$
-    - Resposta: O número de filhos da pessoa i.
+    - Consulta: $\text{Contagem}(\{j : PaiDe(i,j) \lor MaeDe(i,j)\})$;
+    - Resposta: O número de filhos da pessoa $i$.
 
 12. **Verificar se uma pessoa é filho único**:
 
-    - Consulta: $\lnot \exists j, (j \neq i \land (IrmaosDe(i,j) \lor MeiosIrmaosDe(i,j)))$
+    - Consulta: $\lnot \exists j, (j \neq i \land (IrmaosDe(i,j) \lor MeiosIrmaosDe(i,j)))$;
     - Resposta: Verdadeiro se a pessoa i não tem irmãos nem meios-irmãos, Falso caso contrário.
 
-    ### Mundo (Modelo) para o Jogo Pedra, Papel e Tesoura
+##### Exercício 9 - Jogo Pedra, Papel e Tesoura
 
-#### Variáveis Proposicionais
+O jogo **Pedra, Papel e Tesoura** é um jogo simples entre dois jogadores, onde cada jogador escolhe uma das três opções: Pedra, Papel ou Tesoura. As regras são:
+
+**Variáveis Proposicionais**:
 
 Para jogadas:
 
-- $P_i$: Jogador i escolheu Pedra
-- $A_i$: Jogador i escolheu Papel
-- $T_i$: Jogador i escolheu Tesoura
+- $P_i$: Jogador i escolheu Pedra;
+- $A_i$: Jogador i escolheu Papel;
+- $T_i$: Jogador i escolheu Tesoura.
 
 Para resultados:
 
-- $V_i$: Jogador i venceu
-- $E$: O jogo terminou em empate
+- $V_i$: Jogador i venceu;
+- $E$: O jogo terminou em empate.
 
-#### Regras do Mundo
+**Regras do Mundo**:
 
 1. Cada jogador faz exatamente uma jogada:
+
    $$ \forall i, ((P_i \lor A_i \lor T_i) \land \lnot(P_i \land A_i) \land \lnot(P_i \land T_i) \land \lnot(A_i \land T_i)) $$
 
-2. Condições de vitória para o Jogador 1:
+2. Condições de vitória para o Jogador $1$:
+
    $$ V_1 \leftrightarrow ((P_1 \land T_2) \lor (T_1 \land A_2) \lor (A_1 \land P_2)) $$
 
-3. Condições de vitória para o Jogador 2:
+3. Condições de vitória para o Jogador $2$:
+
    $$ V_2 \leftrightarrow ((P_2 \land T_1) \lor (T_2 \land A_1) \lor (A_2 \land P_1)) $$
 
 4. Condição de empate:
+
    $$ E \leftrightarrow ((P_1 \land P_2) \lor (A_1 \land A_2) \lor (T_1 \land T_2)) $$
 
 5. O jogo tem exatamente um resultado:
+
    $$ (V_1 \lor V_2 \lor E) \land \lnot(V_1 \land V_2) \land \lnot(V_1 \land E) \land \lnot(V_2 \land E) $$
 
 6. Não é possível que ambos os jogadores vençam:
+
    $$ \lnot(V_1 \land V_2) $$
 
-**Consultas Possíveis**::
+**Consultas Possíveis**:
 
 1. **Verificar a jogada de um jogador**:
 
-   - Consulta: $P_i$, $A_i$, ou $T_i$
+   - Consulta: $P_i$, $A_i$, ou $T_i$;
    - Resposta: Verdadeiro se o Jogador i escolheu a jogada correspondente, Falso caso contrário.
 
 2. **Verificar o vencedor**:
 
-   - Consulta: $V_1$ ou $V_2$
+   - Consulta: $V_1$ ou $V_2$;
    - Resposta: Verdadeiro se o Jogador correspondente venceu, Falso caso contrário.
 
 3. **Verificar se houve empate**:
 
-   - Consulta: $E$
+   - Consulta: $E$;
    - Resposta: Verdadeiro se o jogo terminou em empate, Falso caso contrário.
 
 4. **Determinar o resultado do jogo**:
 
    - Consulta:
+
      $$
      resultado = \begin{cases}
        1 & \text{se } V_1 \\
@@ -4940,119 +4814,127 @@ Para resultados:
        0 & \text{se } E
      \end{cases}
      $$
+
    - Resposta:
-     - 0 se o jogo terminou em empate
-     - 1 se o Jogador 1 venceu
-     - 2 se o Jogador 2 venceu
+
+     - $0$ se o jogo terminou em empate;
+     - $1$ se o Jogador 1 venceu;
+     - $2$ se o Jogador 2 venceu.
 
 5. **Verificar se um jogador escolheu uma jogada específica e venceu**:
 
-   - Consulta: $(P_i \land V_i)$, $(A_i \land V_i)$, ou $(T_i \land V_i)$
+   - Consulta: $(P_i \land V_i)$, $(A_i \land V_i)$, ou $(T_i \land V_i)$.
    - Resposta: Verdadeiro se o Jogador i escolheu a jogada específica e venceu, Falso caso contrário.
 
 6. **Verificar se o jogo foi válido**:
-   - Consulta: $((P_1 \lor A_1 \lor T_1) \land \lnot(P_1 \land A_1) \land \lnot(P_1 \land T_1) \land \lnot(A_1 \land T_1)) \land$
-     $((P_2 \lor A_2 \lor T_2) \land \lnot(P_2 \land A_2) \land \lnot(P_2 \land T_2) \land \lnot(A_2 \land T_2)) \land$
-     $((V_1 \lor V_2 \lor E) \land \lnot(V_1 \land V_2) \land \lnot(V_1 \land E) \land \lnot(V_2 \land E))$
-   - Resposta: Verdadeiro se o jogo seguiu todas as regras (uma jogada por jogador e um único resultado), Falso caso contrário.
 
-#### Exemplo de um estado válido deste Mundo
+   - Consultas:
 
-$$
-P_1 \land T_2 \land V_1 \land \lnot V_2 \land \lnot E \land \\
-   \lnot A_1 \land \lnot T_1 \land \lnot P_2 \land \lnot A_2
-$$
+     $$((P_1 \lor A_1 \lor T_1) \land \lnot(P_1 \land A_1) \land \lnot(P_1 \land T_1) \land \lnot(A_1 \land T_1)) \land$$
+
+     $$((P_2 \lor A_2 \lor T_2) \land \lnot(P_2 \land A_2) \land \lnot(P_2 \land T_2) \land \lnot(A_2 \land T_2)) \land$$
+
+     $$((V_1 \lor V_2 \lor E) \land \lnot(V_1 \land V_2) \land \lnot(V_1 \land E) \land \lnot(V_2 \land E))$$
+
+   - Resposta: verdadeiro se o jogo seguiu todas as regras (uma jogada por jogador e um único resultado), Falso caso contrário.
+
+**Exemplo de um estado válido deste Mundo**:
+
+$$P_1 \land T_2 \land V_1 \land \lnot V_2 \land \lnot E \land \\
+   \lnot A_1 \land \lnot T_1 \land \lnot P_2 \land \lnot A_2$$
 
 Este mundo representa um jogo onde:
 
-- O Jogador 1 escolheu Pedra
-- O Jogador 2 escolheu Tesoura
-- O Jogador 1 venceu
-- Não houve empate
+- O Jogador $1$ escolheu Pedra;
+- O Jogador $2$ escolheu Tesoura;
+- O Jogador $1$ venceu;
+- Não houve empate.
 
-### Exercício 9
-
-### Enunciado
+##### Exercício 10 - Mundo de Ginásio de Esportes
 
 Elabore um mundo para um ginásio de esportes. O modelo deve incluir atletas, modalidades esportivas, treinadores, e competições. Considere que um atleta pode praticar múltiplas modalidades, um treinador pode especializar-se em uma ou mais modalidades, e uma competição envolve uma modalidade específica com vários atletas participantes. Crie consultas para responder se algum atleta pratica todas as modalidades, se algum treinador é especializado em todas as modalidades e mais duas a seu critério.
 
-### Fatos:
+**Fatos**:
 
-- $A(x)$: $x$ é um atleta
-- $M(x)$: $x$ é uma modalidade esportiva
-- $T(x)$: $x$ é um treinador
-- $C(x)$: $x$ é uma competição
-- $Pratica(x,y)$: atleta $x$ pratica a modalidade $y$
-- $Especializa(x,y)$: treinador $x$ é especializado na modalidade $y$
-- $Participa(x,y)$: atleta $x$ participa da competição $y$
-- $EnvolveModalidade(x,y)$: competição $x$ envolve a modalidade $y$
+- $A(x)$: $x$ é um atleta;
+- $M(x)$: $x$ é uma modalidade esportiva;
+- $T(x)$: $x$ é um treinador;
+- $C(x)$: $x$ é uma competição;
+- $Pratica(x,y)$: atleta $x$ pratica a modalidade $y$;
+- $Especializa(x,y)$: treinador $x$ é especializado na modalidade $y$;
+- $Participa(x,y)$: atleta $x$ participa da competição $y$;
+- $EnvolveModalidade(x,y)$: competição $x$ envolve a modalidade $y$.
 
-### Regras:
+**Regras**:
 
 1. Todo atleta pratica pelo menos uma modalidade:
+
    $$ \forall x(A(x) \rightarrow \exists y(M(y) \land Pratica(x,y))) $$
 
 2. Todo treinador é especializado em pelo menos uma modalidade:
+
    $$ \forall x(T(x) \rightarrow \exists y(M(y) \land Especializa(x,y))) $$
 
 3. Toda competição envolve exatamente uma modalidade:
+
    $$ \forall x(C(x) \rightarrow \exists! y(M(y) \land EnvolveModalidade(x,y))) $$
 
 4. Um atleta só pode participar de uma competição se praticar a modalidade envolvida:
+
    $$ \forall x \forall y(Participa(x,y) \rightarrow \exists z(M(z) \land Pratica(x,z) \land EnvolveModalidade(y,z))) $$
 
-### Consultas:
+**Consultas**:
 
 1. Verificar se um atleta pratica uma modalidade específica:
 
-   - Consulta: `Pratica(atleta,modalidade)`
+   - Consulta: `Pratica(atleta,modalidade)`;
    - Resposta: Verdadeiro se o atleta pratica a modalidade, Falso caso contrário.
 
 2. Verificar se um treinador é especializado em uma modalidade específica:
 
-   - Consulta: `Especializa(treinador,modalidade)`
+   - Consulta: `Especializa(treinador,modalidade)`;
    - Resposta: Verdadeiro se o treinador é especializado na modalidade, Falso caso contrário.
 
 3. Verificar se um atleta participa de uma competição específica:
 
-   - Consulta: `Participa(atleta,competicao)`
+   - Consulta: `Participa(atleta,competicao)`;
    - Resposta: Verdadeiro se o atleta participa da competição, Falso caso contrário.
 
 4. Verificar se uma competição envolve uma modalidade específica:
 
-   - Consulta: `EnvolveModalidade(competicao,modalidade)`
+   - Consulta: `EnvolveModalidade(competicao,modalidade)`;
    - Resposta: Verdadeiro se a competição envolve a modalidade, Falso caso contrário.
 
 5. Verificar se existe um atleta que pratica todas as modalidades:
 
-   - Consulta: $$ \exists x(A(x) \land \forall y(M(y) \rightarrow Pratica(x,y))) $$
+   - Consulta: $\exists x(A(x) \land \forall y(M(y) \rightarrow Pratica(x,y)))$;
    - Resposta: Verdadeiro se existe um atleta que pratica todas as modalidades, Falso caso contrário.
 
 6. Verificar se existe um treinador especializado em todas as modalidades:
 
-   - Consulta: $$ \exists x(T(x) \land \forall y(M(y) \rightarrow Especializa(x,y))) $$
+   - Consulta: $\exists x(T(x) \land \forall y(M(y) \rightarrow Especializa(x,y)))$;
    - Resposta: Verdadeiro se existe um treinador especializado em todas as modalidades, Falso caso contrário.
 
 7. Verificar se existe uma modalidade praticada por todos os atletas:
 
-   - Consulta: $$ \exists y(M(y) \land \forall x(A(x) \rightarrow Pratica(x,y))) $$
+   - Consulta: $\exists y(M(y) \land \forall x(A(x) \rightarrow Pratica(x,y)))$;
    - Resposta: Verdadeiro se existe uma modalidade praticada por todos os atletas, Falso caso contrário.
 
 8. Verificar se existe uma competição em que todos os atletas participam:
 
-   - Consulta: $$ \exists y(C(y) \land \forall x(A(x) \rightarrow Participa(x,y))) $$
+   - Consulta: $\exists y(C(y) \land \forall x(A(x) \rightarrow Participa(x,y)))$;
    - Resposta: Verdadeiro se existe uma competição com participação de todos os atletas, Falso caso contrário.
 
 9. Verificar se um atleta está qualificado para participar de uma competição específica:
 
-   - Consulta: $$ \exists z(M(z) \land Pratica(atleta,z) \land EnvolveModalidade(competicao,z)) $$
+   - Consulta: $\exists z(M(z) \land Pratica(atleta,z) \land EnvolveModalidade(competicao,z))$;
    - Resposta: Verdadeiro se o atleta pratica a modalidade envolvida na competição, Falso caso contrário.
 
 10. Verificar se existe um treinador especializado na modalidade de uma competição específica:
-    - Consulta: $$ \exists x \exists y(T(x) \land M(y) \land Especializa(x,y) \land EnvolveModalidade(competicao,y)) $$
+    - Consulta: $\exists x \exists y(T(x) \land M(y) \land Especializa(x,y) \land EnvolveModalidade(competicao,y))$;
     - Resposta: Verdadeiro se existe um treinador especializado na modalidade da competição, Falso caso contrário.
 
-# Cláusula de Horn
+## Cláusulas de Horn
 
 A **Cláusula de Horn** foi nomeada em homenagem ao matemático e lógico americano [Alfred Horn](https://en.wikipedia.org/wiki/Alfred_Horn), que a introduziu em [um artigo publicado em 1951](https://www.cambridge.org/core/journals/journal-of-symbolic-logic/article/abs/on-sentences-which-are-true-of-direct-unions-of-algebras1/DF348CB269B06D6702DA3AE4DCF38C39). O contexto histórico e a motivação para a introdução da Cláusula de Horn são profundamente enraizados na solução do Problema da Decidibilidade. Na primeira metade do século XX, a lógica matemática estava focada na questão da decidibilidade: determinar se uma afirmação lógica é verdadeira ou falsa de forma algorítmica.
 
@@ -5062,7 +4944,7 @@ Alfred Horn identificou um desses subconjuntos em seu artigo de 1951, introduzin
 
 Se prepare vamos ver porque $P \lor \neg Q \lor \neg R $ é uma Cláusula de Horn e $P \lor Q \lor \neg R$ não é.
 
-## Definição da Cláusula de Horn
+### Definição da Cláusula de Horn
 
 A **Cláusula de Horn** é uma disjunção de literais que contém, no máximo, um literal positivo.
 Existem algumas formas equivalentes de representar Cláusulas de Horn:
@@ -5115,158 +4997,208 @@ Para entender melhor, imagine que estamos construindo um cenário mental fundame
 
 Podemos tentar avaliar alguns exemplos de uso de Fatos, Regras e Consultas:
 
-### Exemplo 1: Sistema de Recomendação de Roupas
+#### Exemplo 1 - Sistema de Recomendação de Roupas
 
 Imagine que estamos construindo um sistema lógico para recomendar o tipo de roupa que uma pessoa deve vestir com base no clima. Vamos usar Cláusulas de Horn para representar o conhecimento e a lógica do sistema.
 
 **1. Fatos**: primeiro, estabelecemos os fatos, as verdades básicas do cenário que descreve nosso problema. Neste exemplo, os fatos poderiam ser informações sobre o clima atual.
 
-- **Fato 1**: Está ensolarado. (Representado como $s$)
-- **Fato 2**: A temperatura está acima de 20°C. (Representado como $T$)
+- **Fato 1**: Está ensolarado. (Representado como $s$);
+- **Fato 2**: A temperatura está acima de 20°C. (Representado como $T$).
 
 Você pode criar todos os fatos necessários a descrição do seu problema.
 
 **2. Regras**: em seguida, definimos as regras que descrevem como as coisas se relacionam. Essas regras nos dizem o tipo de roupa apropriada com base no clima.
 
-- **Regra 1**: Se está ensolarado e a temperatura está acima de 20°C, use óculos de sol. ($\neg S \land \neg T \rightarrow O $)
-- **Regra 2**: Se está ensolarado, use chapéu. ($\neg S \rightarrow C$)
-- **Regra 3**: Se a temperatura está acima de 20°C, use camiseta. ($\neg T \rightarrow A$)
+- **Regra 1**: Se está ensolarado e a temperatura está acima de 20°C, use óculos de sol. ($\neg S \land \neg T \rightarrow O $);
+- **Regra 2**: Se está ensolarado, use chapéu. ($\neg S \rightarrow C$);
+- **Regra 3**: Se a temperatura está acima de 20°C, use camiseta. ($\neg T \rightarrow A$).
 
 Você pode criar todas as regras que achar importante para definir o comportamento no cenário que descreve o problema.
 
 **3. Consultas (Metas)**: agora, podemos fazer consultas ao nosso sistema para obter recomendações de roupas.
 
-- **Consulta 1**: Está ensolarado e a temperatura está acima de 20°C. O que devo vestir? ($\neg S \land \neg T$)
+- **Consulta 1**: Está ensolarado e a temperatura está acima de 20°C. O que devo vestir? ($\neg S \land \neg T$);
 
-As consultas representam todas as consultas que podem ser feitas neste cenário. Crie quantas consultas achar necessário.
+As consultas representam todas as consultas que podem ser feitas neste cenário. A esforçada leitora deve criar quantas consultas achar necessário para entender o problema.
 
 **4. Resolução**: usando os fatos e regras, podemos resolver a consulta:
 
-1. Está ensolarado e a temperatura está acima de 20°C (_Fato_).
-2. Portanto, use óculos de sol (_Regra 1_).
-3. Portanto, use chapéu (_Regra 2_).
+1. Está ensolarado e a temperatura está acima de 20°C (_Fato_);
+2. Portanto, use óculos de sol (_Regra 1_);
+3. Portanto, use chapéu (_Regra 2_);
 4. Portanto, use camiseta (_Regra 3_).
 
 Neste exemplo, as Cláusulas de Horn nos permitiram representar o conhecimento sobre o clima e as regras para escolher roupas. Os fatos forneceram a base de conhecimento, as regras permitiram inferências lógicas, e a consulta nos permitiu explorar o sistema para obter recomendações práticas.
 
-### Exemplo 2: Sistema de Diagnóstico Médico
+#### Exemplo 2 - Sistema de Diagnóstico Médico
 
 Imagine que estamos construindo um sistema lógico para diagnosticar doenças com base em sintomas, histórico médico e outros fatores relevantes. Vamos usar Cláusulas de Horn para representar o conhecimento e a lógica do sistema.
 
 **1. Fatos**: começamos estabelecemos os fatos, que são as informações conhecidas sobre o paciente.
 
-- **Fato 1**: O paciente tem febre. (Representado como $F$)
-- **Fato 2**: O paciente tem tosse. (Representado como $T$)
-- **Fato 3**: O paciente viajou recentemente para uma área endêmica. (Representado como $V$)
-- **Fato 4**: O paciente foi vacinado contra a gripe. (Representado como $ g$)
+- **Fato 1**: O paciente tem febre. (Representado como $F$);
+- **Fato 2**: O paciente tem tosse. (Representado como $T$);
+- **Fato 3**: O paciente viajou recentemente para uma área endêmica. (Representado como $V$);
+- **Fato 4**: O paciente foi vacinado contra a gripe. (Representado como $ g$).
 
 **2. Regras**: em seguida, definimos as regras que descrevem as relações entre sintomas, histórico médico e possíveis doenças.
 
-- **Regra 1**: Se o paciente tem febre e tosse, mas foi vacinado contra a gripe, então pode ter resfriado comum. ($\neg F \land \neg T \land G \rightarrow R$)
-- **Regra 2**: Se o paciente tem febre, tosse e viajou para uma área endêmica, então pode ter malária. ($\neg F \land \neg T \land \neg V \rightarrow M $)
-- **Regra 3**: Se o paciente tem febre e tosse, mas não foi vacinado contra a gripe, então pode ter gripe. ($\neg F \land \neg T \land \neg G \rightarrow I $)
+- **Regra 1**: Se o paciente tem febre e tosse, mas foi vacinado contra a gripe, então pode ter resfriado comum. ($\neg F \land \neg T \land G \rightarrow R$);
+- **Regra 2**: Se o paciente tem febre, tosse e viajou para uma área endêmica, então pode ter malária. ($\neg F \land \neg T \land \neg V \rightarrow M $);
+- **Regra 3**: Se o paciente tem febre e tosse, mas não foi vacinado contra a gripe, então pode ter gripe. ($\neg F \land \neg T \land \neg G \rightarrow I $).
 
 **3. Consultas**: agora, podemos fazer consultas ao nosso sistema para obter diagnósticos possíveis.
 
-- **Consulta 1**: O paciente tem febre, tosse, viajou para uma área endêmica e foi vacinado contra a gripe. Qual é o diagnóstico? ($\neg F \land \neg T \land \neg V \land G$)
+- **Consulta 1**: O paciente tem febre, tosse, viajou para uma área endêmica e foi vacinado contra a gripe. Qual é o diagnóstico? ($\neg F \land \neg T \land \neg V \land G$);
 
 **4. Resolução**: usando os fatos e regras, podemos resolver a consulta:
 
-1. O paciente tem febre, tosse, viajou para uma área endêmica e foi vacinado contra a gripe (_Fatos_).
-2. Portanto, o paciente pode ter resfriado comum (_Regra 1_).
+1. O paciente tem febre, tosse, viajou para uma área endêmica e foi vacinado contra a gripe (_Fatos_);
+2. Portanto, o paciente pode ter resfriado comum (_Regra 1_);
 3. Portanto, o paciente pode ter malária (_Regra 2_).
 
 **5. Conclusão**: este exemplo ilustra como as Cláusulas de Horn podem ser usadas em um contexto mais complexo, como um sistema de diagnóstico médico. A mesma abordagem pode ser aplicada a outros domínios, como diagnósticos de falhas em máquinas, sistemas legais, planejamento financeiro e muito mais.
 
-### Exemplo 3: Mundo Núcleo Familiar
+## Exemplo 3 - Mundo Núcleo Familiar (Lógica de Primeira Ordem)
 
-Vamos definir um "mundo" que representa uma família e suas relações usando apenas Cláusulas de Horn. Isso demonstrará como podemos representar conhecimento e fazer inferências usando esta forma lógica.
+O exemplo a seguir apresenta um mundo que representa uma família e suas relações, apresentado usando a sintaxe da lógica de primeira ordem (FOL).
 
-**Fatos (Cláusulas de Horn Unitárias)**:
+**Fatos**: os fatos são representados como predicados aplicados a constantes em FOL.
 
-1. homem(joão).
-2. homem(pedro).
-3. mulher(maria).
-4. mulher(ana).
-5. progenitor(joão, pedro).
-6. progenitor(maria, pedro).
-7. progenitor(joão, ana).
-8. progenitor(maria, ana).
+- $Homem(joão)$;
+- $Homem(pedro)$;
+- $Mulher(maria)$;
+- $Mulher(ana)$;
+- $Progenitor(joão, pedro)$;
+- $Progenitor(maria, pedro)$;
+- $Progenitor(joão, ana)$;
+- $Progenitor(maria, ana)$.
 
-**Regras (Cláusulas de Horn Não-Unitárias)**:
+**Regras**:
 
-1. pai(X, Y) :- homem(X), progenitor(X, Y).
+**1. Pai**:
 
-   $$\neg homem(X) \lor \neg progenitor(X, Y) \lor pai(X, Y)$$
+* Forma Implicativa:
 
-2. mãe(X, Y) :- mulher(X), progenitor(X, Y).
+    $$\forall X \forall Y (Homem(X) \land Progenitor(X, Y) \rightarrow Pai(X, Y))$$
 
-   $$\neg mulher(X) \lor \neg progenitor(X, Y) \lor mãe(X, Y)$$
+* Forma Clausal:
 
-3. irmão(X, Y) :- homem(X), progenitor(Z, X), progenitor(Z, Y), X ≠ Y.
+    $$\forall X \forall Y (\neg Homem(X) \lor \neg Progenitor(X, Y) \lor Pai(X, Y))$$
 
-   $$\neg homem(X) \lor \neg progenitor(Z, X) \lor \neg progenitor(Z, Y) \lor X = Y \lor irmão(X, Y)$$
+**2. Mãe**:
 
-4. irmã(X, Y) :- mulher(X), progenitor(Z, X), progenitor(Z, Y), X ≠ Y.
+* Forma Implicativa:
 
-   $$\neg mulher(X) \lor \neg progenitor(Z, X) \lor \neg progenitor(Z, Y) \lor X = Y \lor irmã(X, Y)$$
+    $$\forall X \forall Y (Mulher(X) \land Progenitor(X, Y) \rightarrow Mae(X, Y))$$
 
-5. avô(X, Y) :- homem(X), progenitor(X, Z), progenitor(Z, Y).
+* Forma Clausal:
 
-   $$\neg homem(X) \lor \neg progenitor(X, Z) \lor \neg progenitor(Z, Y) \lor avô(X, Y)$$
+    $$\forall X \forall Y (\neg Mulher(X) \lor \neg Progenitor(X, Y) \lor Mae(X, Y))$$
 
-6. avó(X, Y) :- mulher(X), progenitor(X, Z), progenitor(Z, Y).
+**3. Meio-Irmão**: com pelo menos um progenitor em comum e não sendo a mesma pessoa.
 
-   $$\neg mulher(X) \lor \neg progenitor(X, Z) \lor \neg progenitor(Z, Y) \lor avó(X, Y)$$
+* Forma Implicativa:
+
+    $$\forall X \forall Y \forall Z (Homem(X) \land Progenitor(Z, X) \land Progenitor(Z, Y) \land X \neq Y \rightarrow MeioIrmao(X, Y))$$
+
+* Forma Clausal:
+
+    $$\forall X \forall Y \forall Z (\neg Homem(X) \lor \neg Progenitor(Z, X) \lor \neg Progenitor(Z, Y) \lor X = Y \lor MeioIrmao(X, Y))$$
+
+**4. Meio-Irmã**: com pelo menos um progenitor em comum e não sendo a mesma pessoa.
+
+* Forma Implicativa:
+
+    $$\forall X \forall Y \forall Z (Mulher(X) \land Progenitor(Z, X) \land Progenitor(Z, Y) \land X \neq Y \rightarrow MeioIrma(X, Y))$$
+
+* Forma Clausal:
+
+    $$\forall X \forall Y \forall Z (\neg Mulher(X) \lor \neg Progenitor(Z, X) \lor \neg Progenitor(Z, Y) \lor X = Y \lor MeioIrma(X, Y))$$
+
+**5. Irmão**: com ambos os pais em comum e não sendo a mesma pessoa.
+
+* Forma Implicativa:
+
+    $$\forall X \forall Y \forall P \forall M (Homem(X) \land Pai(P,X) \land Pai(P,Y) \land Mae(M,X) \land Mae(M,Y) \land X \neq Y \rightarrow Irmao(X,Y))$$
+
+* Forma Clausal:
+
+    $$\forall X \forall Y \forall P \forall M (\neg Homem(X) \lor \neg Pai(P,X) \lor \neg Pai(P,Y) \lor \neg Mae(M,X) \lor \neg Mae(M,Y) \lor X = Y \lor Irmao(X,Y))$$
+
+**6. Irmã**: com ambos os pais em comum e não sendo a mesma pessoa.
+
+* Forma Implicativa:
+
+    $$\forall X \forall Y \forall P \forall M (Mulher(X) \land Pai(P,X) \land Pai(P,Y) \land Mae(M,X) \land Mae(M,Y) \land X \neq Y \rightarrow Irma(X,Y))$$
+
+* Forma Clausal:
+
+    $$\forall X \forall Y \forall P \forall M (\neg Mulher(X) \lor \neg Pai(P,X) \lor \neg Pai(P,Y) \lor \neg Mae(M,X) \lor \neg Mae(M,Y) \lor X = Y \lor Irma(X,Y))$$
+
+**7. Avô**:
+
+* Forma Implicativa:
+
+    $$\forall X \forall Y \forall Z (Homem(X) \land Progenitor(X, Z) \land Progenitor(Z, Y) \rightarrow Avo(X, Y))$$
+
+* Forma Clausal:
+
+    $$\forall X \forall Y \forall Z (\neg Homem(X) \lor \neg Progenitor(X, Z) \lor \neg Progenitor(Z, Y) \lor Avo(X, Y))$$
+
+**8. Avó**:
+
+* Forma Implicativa:
+
+    $$\forall X \forall Y \forall Z (Mulher(X) \land Progenitor(X, Z) \land Progenitor(Z, Y) \rightarrow Avo(X, Y))$$
+
+* Forma Clausal:
+
+    $$\forall X \forall Y \forall Z (\neg Mulher(X) \lor \neg Progenitor(X, Z) \lor \neg Progenitor(Z, Y) \lor Avo(X, Y))$$
 
 **Consultas (Metas)**:
 
-Podemos fazer várias consultas a este mundo. Por exemplo:
+1. `pai(joão, pedro)`
 
-1. ?- pai(joão, pedro).
+   Para verificar se $Pai(joão, pedro)$ é uma consequência lógica da base de conhecimento, tenta-se provar que a base de conhecimento junto com $\neg Pai(joão, pedro)$ leva a uma contradição ($\bot$). A meta é, portanto:
+   $$\neg Pai(joão, pedro)$$
 
-   $$\neg pai(joão, pedro)$$
+2. `irmão(pedro, ana)`
 
-2. ?- irmão(pedro, ana).
+   Para verificar se $Irmao(pedro, ana)$ é verdadeiro:
+   $$\neg Irmao(pedro, ana)$$
 
-   $$\neg irmão(pedro, ana)$$
+3. `avó(X, ana)`
 
-3. ?- avó(X, ana).
+   Para perguntar se "Existe uma avó X para Ana?", a consulta seria $\exists X (Avo(X, ana) \land Mulher(X))$.
+   A forma de meta para refutação seria tentar provar que a base de conhecimento junto com $\forall X (\neg Avo(X, ana) \lor \neg Mulher(X))$ leva a uma contradição.
 
-   $$\neg avó(X, ana)$$
+Em um sistema de prova por refutação, adicionamos a negação da consulta à base de conhecimento e tentamos derivar uma contradição ($\bot$). As representações das metas como negações em FOL estão corretas nesse contexto.
+#### Exemplo 4 - Torre de Hanói
 
-**Explicação**:
-
-Os fatos estabelecem informações básicas sobre indivíduos e suas relações diretas.
-
-As regras definem relações mais complexas baseadas nos fatos e em outras regras.
-
-As consultas permitem fazer perguntas sobre o mundo e obter respostas baseadas nos fatos e regras definidos.
-
-Este mundo em Cláusulas de Horn permite representar e raciocinar sobre relações familiares de forma lógica e computacionalmente tratável. Pode ser facilmente estendido para incluir mais fatos, regras e relações complexas.
-
-### Exemplo 4 - Torre de Hanói
+A **Torre de Hanói** é um quebra-cabeça matemático que consiste em três postes e um número de discos de diferentes tamanhos que podem deslizar sobre qualquer poste. O quebra-cabeça começa com os discos empilhados em ordem decrescente de tamanho no primeiro poste, o menor disco no topo. O objetivo é mover toda a pilha para o último poste, obedecendo às seguintes regras:
 
 **Predicados**:
 
-- $Disco(x)$: $x$ é um disco
-- $Poste(x)$: $x$ é um poste
-- $Menor(x)$: $x$ é o disco menor
-- $Maior(x, y)$: o disco $x$ é maior que o disco $y$
-- $Em(x, y)$: o disco $x$ está no poste $y$
-- $Sobre(x, y)$: o disco $x$ está sobre o disco $y$
+- $Disco(x)$: $x$ é um disco;
+- $Poste(x)$: $x$ é um poste;
+- $Menor(x)$: $x$ é o disco menor;
+- $Maior(x, y)$: o disco $x$ é maior que o disco $y$;
+- $Em(x, y)$: o disco $x$ está no poste $y$;
+- $Sobre(x, y)$: o disco $x$ está sobre o disco $y$.
 
 **Fatos (Cláusulas de Horn Unitárias)**:
 
-1. $Disco(d_1)$
-2. $Disco(d_2)$
-3. $Disco(d_3)$
-4. $Poste(p_1)$
-5. $Poste(p_2)$
-6. $Poste(p_3)$
-7. $Menor(d_1)$
-8. $Maior(d_2, d_1)$
-9. $Maior(d_3, d_2)$
+1. $Disco(d_1)$;
+2. $Disco(d_2)$;
+3. $Disco(d_3)$;
+4. $Poste(p_1)$;
+5. $Poste(p_2)$;
+6. $Poste(p_3)$;
+7. $Menor(d_1)$;
+8. $Maior(d_2, d_1)$;
+9. $Maior(d_3, d_2)$.
 
 **Regras (Cláusulas de Horn Não-Unitárias)**:
 
@@ -5294,7 +5226,7 @@ Este mundo em Cláusulas de Horn permite representar e raciocinar sobre relaçõ
 
    $$\neg Disco(x) \lor \neg Poste(y) \lor \neg Em(x, y) \lor \neg Disco(z) \lor \neg Em(z, y) \lor \neg Sobre(z, x) \lor DiscoNoTopo(x, y)$$
 
-#### Consultas (Metas)
+**Consultas (Metas)**:
 
 1. Verificar se um movimento é válido:
 
@@ -5325,8 +5257,6 @@ Este mundo em Cláusulas de Horn permite representar e raciocinar sobre relaçõ
 Os quantificadores podem ser incluídos nas Cláusulas de Horn. Contudo, é importante notar que a forma padrão de Cláusulas de Horn em programação lógica geralmente lida com quantificação de forma implícita. A quantificação universal é comum e é geralmente assumida em regras, enquanto a quantificação existencial é muitas vezes tratada através de fatos específicos ou construção de termos.
 
 Precisamos tomar cuidado porque a inclusão explícita de quantificadores pode levar a uma Lógica de Primeira Ordem mais rica, permitindo expressões mais complexas e poderosas. No entanto, isso também pode aumentar a complexidade do raciocínio e da resolução.
-
-#### Usando o Quantificador Universal em Cláusulas de Horn
 
 O quantificador universal (representado por $\forall $) afirma que uma propriedade é verdadeira para todos os membros de um domínio. Em Cláusulas de Horn, isso é geralmente representado implicitamente através de regras gerais que se aplicam a todos os membros de um conjunto. Por exemplo, considere a regra: _Todos os pássaros podem voar_. Em uma Cláusula de Horn, isso pode ser representado como:
 
@@ -5363,16 +5293,16 @@ Seja uma fórmula bem formada arbitrária da Lógica Proposicional. Alguns passo
 
 3. Simplificar a fórmula final obtida.
 
-#### Exemplo: dada a fórmula
+#### Exemplo 1: dada a fórmula
 
 $$(P \land Q) \lor (P \land R)$$
 
 Passos:
 
-1. Converter para FNC: $(P \lor Q) \land (P \lor R)$
-2. Inverter P em uma das disjunções: $(P \lor Q) \land (\neg P \lor R)$
-3. Adicionar literal negativo: $(P \lor Q \lor \neg S) \land (\neg P \lor R \lor \neg T)$
-4. Simplificar: $\neg S \lor P \land \neg T \lor r $
+1. Converter para FNC: $(P \lor Q) \land (P \lor R)$;
+2. Inverter P em uma das disjunções: $(P \lor Q) \land (\neg P \lor R)$;
+3. Adicionar literal negativo: $(P \lor Q \lor \neg S) \land (\neg P \lor R \lor \neg T)$;
+4. Simplificar: $\neg S \lor P \land \neg T \lor r $.
 
 A sequência destes passos permite encontrar uma conjunção de cláusulas de Horn equivalente à fórmula original.
 
@@ -5383,19 +5313,19 @@ A Forma Normal Conjuntiva é uma conjunção de disjunções de literais. Uma Cl
 - **Perda de Informação**: Nem todas as cláusulas em FNC podem ser transformadas em Cláusulas de Horn. Para minimizar este risco atente para as regras de equivalência que vimos anteriormente.
 - **Complexidade**: A transformação pode ser complexa e requer uma análise cuidadosa da lógica e do contexto.
 
-#### Etapas de Transformação
+**Etapas de Transformação**
 
-1. **Converter para FNC**: Se a fórmula ainda não estiver em Forma Normal Conjuntiva, converta-a para Forma Normal Conjuntiva usando as técnicas descritas anteriormente.
-2. **Identificar Cláusulas de Horn**: Verifique cada cláusula na Forma Normal Conjuntiva. Se uma cláusula contém no máximo um literal positivo, ela já é uma Cláusula de Horn.
+1. **Converter para FNC**: Se a fórmula ainda não estiver em Forma Normal Conjuntiva, converta-a para Forma Normal Conjuntiva usando as técnicas descritas anteriormente;
+2. **Identificar Cláusulas de Horn**: Verifique cada cláusula na Forma Normal Conjuntiva. Se uma cláusula contém no máximo um literal positivo, ela já é uma Cláusula de Horn;
 3. **Transformar Cláusulas Não-Horn**: Se uma cláusula contém mais de um literal positivo, ela não pode ser diretamente transformada em uma Cláusula de Horn sem perder informações.
 
-**Exemplo**: vamos considerar a seguinte fórmula bem formada:
+##### Exemplo 1: vamos considerar a seguinte fórmula bem formada
 
 $$(A \rightarrow B) \land (B \lor C)$$
 
 1. **Converter para FNC**:
 
-   - Elimine a implicação: $(\neg A \lor B) \land (B \lor C)$
+   - Elimine a implicação: $(\neg A \lor B) \land (B \lor C)$;
    - A fórmula já está em Forma Normal Conjuntiva.
 
 2. **Identificar Cláusulas de Horn**:
@@ -5446,53 +5376,94 @@ $$\forall x (Lâmpada(x) \wedge FoiLigada(x) \wedge AgoraDesligada(x) \rightarro
 **Consulta**:
 
 $$Acende (b_2, s_2)?$$
+
 $$ estáQuente (b_1)?$$
 
 **Problema 3 - O Agricultor, a Raposa, o Ganso e o Grão**: um agricultor quer atravessar um rio e levar consigo uma raposa, um ganso e um saco de grãos. O barco do agricultor só lhe permite levar um item além dele mesmo. Se a raposa e o ganso estiverem sozinhos, a raposa comerá o ganso. Se o ganso e o grão estiverem sozinhos, o ganso comerá o grão. Como o agricultor pode levar todas as suas posses para o outro lado do rio?
 
 **Fatos**:
 
-```prolog
-raposa(r)
-ganso(g)
-grao(gr)
-```
+- $Raposa(r)$;
+- $Ganso(g)$;
+- $Grao(gr)$.
+
+Nestes fatos a atenta leitora deve observar que '$r$' é uma raposa, '$g$' é um ganso, e '$gr$' é um saco de grãos.
 
 **Regras**:
 
-$$\forall x \forall y (Raposa(x) \wedge Ganso(y) \wedge Sozinhos(x, y) \rightarrow Come (x, y))$$
+1. Se $x$ é uma Raposa e $y$ é um Ganso, e $x$ e $y$ estão sozinhos, então $x$ come $y$:
 
-$$\forall x \forall y (Ganso(x) \wedge Grão(y) \wedge Sozinhos(x, y) \rightarrow Come (x, y))$$
+$$\forall x \forall y (Raposa(x) \land Ganso(y) \land Sozinhos(x, y) \rightarrow Come(x, y))$$
+
+2. Se $x$ é um Ganso e $y$ é Grão, e $x$ e $y$ estão sozinhos, então $x$ come $y$:
+
+$$\forall x \forall y (Ganso(x) \land Grao(y) \land Sozinhos(x, y) \rightarrow Come(x, y))$$
+
+O predicado $Sozinhos(Item1, Item2)$ significaria que $Item1$ e $Item2$ estão em uma margem do rio sem o agricultor. O predicado $Come(Predador, Presa)$ significa que o predador come a presa.
 
 **Consulta**:
 
-$$¬Come (r, g)?$$
-$$¬Come (g, gr)?$$
+As consultas visam verificar se, em um determinado estado da travessia, certas condições de não comer são satisfeitas. Para um sistema de prova, estas seriam as metas a serem mantidas verdadeiras, ou suas negações a serem evitadas.
+
+1. A raposa $r$ não come o ganso $g$ (ou seja, é falso que $r$ come $g$)?
+
+$$\neg Come(r, g)$$
+
+2. O ganso $g$ não come o grão $gr$ (ou seja, é falso que $g$ come $gr$)?
+
+$$\neg Come(g, gr)$$
+
+Estas consultas, no contexto da resolução do problema, representam estados seguros que devem ser mantidos durante toda a travessia. A solução do problema envolve encontrar uma sequência de movimentos que leve todos ao outro lado do rio sem nunca satisfazer as condições de $Come(r,g)$ ou $Come(g,gr)$ quando o agricultor não está presente para supervisionar.
 
 **Problema 4 - A Ponte e a Tocha**: quatro pessoas chegam a um rio à noite. Há uma ponte estreita, mas ela só pode conter duas pessoas de cada vez. Eles têm uma tocha e, por ser noite, a tocha tem que ser usada ao atravessar a ponte. A pessoa A pode atravessar a ponte em um minuto, B em dois minutos, C em cinco minutos e D em oito minutos. Quando duas pessoas atravessam a ponte juntas, elas devem se mover no ritmo da pessoa mais lenta. Qual é a forma mais rápida para todos eles atravessarem a ponte?
 
 **Fatos (tempos)**:
 
-$tempo(a, 1)$
-$tempo(b, 2)$
-$tempo(c, 5)$
-$tempo(d, 8)$
+- $tempo(a, 1)$;
+- $tempo(b, 2)$;
+- $tempo(c, 5)$;
+- $tempo(d, 8)$.
 
-**Regra**:
+**Regras**:
 
-$$\forall x \forall y (AtravessaCom(x, y) \rightarrow TempoTotal(Máximo(Tempo(x), Tempo(y))))$$
+1. Regra para determinar qual pessoa é mais lenta:
+
+   $$\neg tempo(X, TX) \lor \neg tempo(Y, TY) \lor \neg maior(TX, TY) \lor mais\_lento(X, Y, X)$$
+
+   $$\neg tempo(X, TX) \lor \neg tempo(Y, TY) \lor \neg maior(TY, TX) \lor mais\_lento(X, Y, Y)$$
+
+2. Regra para calcular o tempo quando duas pessoas atravessam juntas:
+
+   $$\neg mais\_lento(X, Y, Z) \lor \neg tempo(Z, T) \lor tempo\_travessia(X, Y, T)$$
+
+3. Relações "maior que" definidas como fatos:
+
+   - $maior(2, 1)$;
+   - $maior(5, 1)$;
+   - $maior(5, 2)$;
+   - $maior(8, 1)$;
+   - $maior(8, 2)$;
+   - $maior(8, 5)$.
+
+4. Regras para representar o plano de travessia:
+
+   $$\neg atravessa\_ida(X, Y, T1) \lor \neg volta(Z, T2) \lor \neg atravessa\_ida(W, V, T3) \lor \neg volta(U, T4) \lor \neg atravessa\_ida(S, R, T5) \lor travessia\_completa(T1+T2+T3+T4+T5)$$
+
+   Onde as variáveis representam as pessoas que atravessam em cada fase da solução.
 
 **Consulta**:
 
-$$tempoTotal(15)?$$
+$$travessia\_completa(15)?$$
+
+Esta consulta verifica se existe um plano de travessia que soma exatamente 15 minutos, representando a solução ótima para o problema.
 
 **Problema 5 - O Problema de Monty Hall**: em um programa de game show, os concorrentes tentam adivinhar qual das três portas contém um prêmio valioso. Depois que um concorrente escolhe uma porta, o apresentador, que sabe o que está por trás de cada porta, abre uma das portas não escolhidas para revelar uma cabra (representando nenhum prêmio). O apresentador então pergunta ao concorrente se ele quer mudar sua escolha para a outra porta não aberta ou ficar com sua escolha inicial. O que o concorrente deve fazer para maximizar suas chances de ganhar o prêmio?
 
 **Fatos**:
 
-$ Porta(d_1)$
-$ Porta(d_2)$
-$ Porta(d_3)$
+- $Porta(d_1)$;
+- $Porta(d_2)$;
+- $Porta(d_3)$.
 
 **Regras**:
 
@@ -5500,11 +5471,11 @@ $$\forall x Prêmio(x) \rightarrow Porta(x)$$
 
 $$\forall x \forall y (Porta(x) \wedge Porta(y) \wedge x \neq y \rightarrow \neg Prêmio(x) \vee \neg Prêmio(y))$$
 
-**Pergunta**:
+**Consulta**:
 
 $$\exists x (Porta(x) \wedge \neg Revelada(x) \wedge x \neq PortaEscolhida \rightarrow Prêmio(x))?$$
 
-### Cláusulas de Horn e o Prolog
+## O Prolog Entra em Cena
 
 O Prolog é uma linguagem de programação lógica que utiliza Cláusulas de Horn para representar e manipular conhecimento. A sintaxe e a semântica do Prolog são diretamente mapeadas para Cláusulas de Horn:
 
@@ -5587,7 +5558,7 @@ Agora, podemos fazer consultas ao nosso sistema para obter recomendações de ro
  ?- óculos_de_sol, chapéu, camiseta.
 ```
 
-### Torre de Hanói - Um Problema Interessante Em Prolog
+#### Exemplo 3: Torre de Hanói
 
 ```prolog
 % Fatos
@@ -5652,9 +5623,11 @@ estado_inicial :-
 % ?- estado_inicial.
 ```
 
-[Niklaus Wirth](https://en.wikipedia.org/wiki/Niklaus_Wirth) em seu livro _Algorithms + Data Structures = Programs_ [^1] cita um problema interessante que foi publicado em um jornal de **Zürich** em 1922, que cito em tradução livre a seguir:
+##### Exemplo 4: O Narrador é seu próprio avô
 
-> Casei com uma viúva (vamos chamá-la de W) que tem uma filha adulta (chame-a de D). Meu pai (F), que nos visitava com bastante frequência, apaixonou-se pela minha enteada e casou-se com ela. Por isso, meu pai se tornou meu genro e minha enteada se tornou minha madrasta. Alguns meses depois, minha esposa deu à luz um filho (S1), que se tornou cunhado do meu pai, e meu tio. A esposa do meu pai, ou seja, minha enteada, também teve um filho (S2). Em outras palavras, para todos os efeitos, eu sou meu próprio avo.
+O problema do narrador que é seu próprio avô é um exemplo clássico de raciocínio lógico e relações familiares. O problema envolve a construção de uma base de conhecimento que representa as relações familiares e a aplicação de regras lógicas para determinar se o narrador realmente é seu próprio avô. Este exemplo foi publicado por [Niklaus Wirth](https://en.wikipedia.org/wiki/Niklaus_Wirth) em seu livro _Algorithms + Data Structures = Programs_ [^1] fazendo referência a um problema que havia sido publicado em um jornal de Zürich em 1922, que cito em tradução livre a seguir:
+
+Casei com uma viúva (vamos chamá-la de W) que tem uma filha adulta (chame-a de D). Meu pai (F), que nos visitava com bastante frequência, apaixonou-se pela minha enteada e casou-se com ela. Por isso, meu pai se tornou meu genro e minha enteada se tornou minha madrasta. Alguns meses depois, minha esposa deu à luz um filho (S1), que se tornou cunhado do meu pai, e meu tio. A esposa do meu pai, ou seja, minha enteada, também teve um filho (S2). Em outras palavras, para todos os efeitos, eu sou meu próprio avo.
 
 Usando este relato como base podemos criar uma base de conhecimento em Prolog, incluir algumas regras, e finalmente verificar se é verdade que o **narrador** é o seu próprio avô.
 
@@ -5683,7 +5656,7 @@ avo(X,Z) :- (pai(X,Y); padrasto(X,Y)), (pai(Y,Z) ; padrasto(Y,Z)).
 %pergunte se o narrador é avo dele mesmo avo(narrador,narrador)
 ```
 
-# Glossário
+## Glossário
 
 1. **Álgebra de Boole**: Sistema algébrico usado na lógica matemática, baseado nos valores verdadeiro (1) e falso (0).
 
@@ -5848,7 +5821,7 @@ avo(X,Z) :- (pai(X,Y); padrasto(X,Y)), (pai(Y,Z) ; padrasto(Y,Z)).
 ---
 
 [^1]: WIRTH, Niklaus. **Algorithms and Data Structures**. [S.l.]: [s.n.], [s.d.]. Disponível em: https://cdn.preterhuman.net/texts/math/Data_Structure**AND**Algorithms/Algorithms%20and%20Data%20Structures%20-%20Niklaus%20Wirth.pdf.
-[^3]: GHIDINI, C., & Serafini, L. (2013-2014). **Mathematical Logic Exercises**. Disponível em: https://disi.unitn.it/~ldkr/ml2014/ExercisesBooklet.pdf.
 
-> "Logic programming is the future of artificial intelligence." - [Marvin Minsky](https://en.wikipedia.org/wiki/marvin_Minsky)
+[^2]: GHIDINI, C., & Serafini, L. (2013-2014). **Mathematical Logic Exercises**. Disponível em: https://disi.unitn.it/~ldkr/ml2014/ExercisesBooklet.pdf.
 
+[^3]: GALLIER, J. H. (1986). **Logic for Computer Science**. [S.l.]: [s.n.], [s.d.]. Disponível em: https://perso.liris.cnrs.fr/alain.mille/enseignements/Master_PRO/BIA/BIA_2012_2013/logic_gallier.pdf
