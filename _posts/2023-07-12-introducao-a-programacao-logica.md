@@ -23,7 +23,7 @@ keywords:
    - Programação Lógica
 draft: true
 toc: true
-lastmod: 2025-05-18T00:16:54.232Z
+lastmod: 2025-05-18T00:29:35.953Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -5825,3 +5825,27 @@ avo(X,Z) :- (pai(X,Y); padrasto(X,Y)), (pai(Y,Z) ; padrasto(Y,Z)).
 [^2]: GHIDINI, C., & Serafini, L. (2013-2014). **Mathematical Logic Exercises**. Disponível em: https://disi.unitn.it/~ldkr/ml2014/ExercisesBooklet.pdf.
 
 [^3]: GALLIER, J. H. (1986). **Logic for Computer Science**. [S.l.]: [s.n.], [s.d.]. Disponível em: https://perso.liris.cnrs.fr/alain.mille/enseignements/Master_PRO/BIA/BIA_2012_2013/logic_gallier.pdf
+
+## Referências
+
+1. BOOLOS, G.; BURGESS, J.; JEFFREY, R. **Computability and Logic**. 5. ed. Cambridge: Cambridge University Press, 2007.
+
+2. CHANG, C.C.; KEISLER, H.J. **Model Theory**. Amsterdam: North-Holland, 1990.
+
+3. EBBINGHAUS, H.D.; FLUM, J. **Finite Model Theory**. 2. ed. Berlin: Springer, 2006.
+
+4. GALLIER, J.H. **Logic for Computer Science: Foundations of Automatic Theorem Proving**. 2. ed. Mineola: Dover Publications, 2015.
+
+5. GENESERETH, M.; NILSSON, N. **Logical Foundations of Artificial Intelligence**. San Francisco: Morgan Kaufmann, 1987.
+
+6. KRIPKE, S. **Naming and Necessity**. Cambridge: Harvard University Press, 1980.
+
+7. MANNA, Z. **Verification of Computer Programs**. Cambridge: MIT Press, 1974.
+
+8. QUINE, W.V.O. **Word and Object**. Cambridge: MIT Press, 1960.
+
+9. RUSSELL, S.; NORVIG, P. **Artificial Intelligence: A Modern Approach**. 4. ed. Upper Saddle River: Pearson, 2020.
+
+10. VAN HARMELEN, F.; LIFSCHITZ, V.; PORTER, B. (Ed.). **Handbook of Knowledge Representation**. Amsterdam: Elsevier, 2008.
+
+11. WIRTH, N. **Algorithms + Data Structures = Programs**. 3. ed. Englewood Cliffs: Prentice-Hall, 1976.
