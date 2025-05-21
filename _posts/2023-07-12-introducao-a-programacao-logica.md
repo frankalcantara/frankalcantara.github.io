@@ -23,7 +23,7 @@ keywords:
    - Programação Lógica
 draft: true
 toc: true
-lastmod: 2025-05-18T01:44:32.540Z
+lastmod: 2025-05-18T01:49:03.363Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -368,7 +368,9 @@ $$P_1, P_2, ..., P_n \vdash C.$$
 
 Onde o conjunto formado $P_1, P_2, ..., P_n$, chamado de contexto, ou antecedente, $\Gamma$, e $C$, chamado de conclusão, ou consequente, são Formulas Bem Formadas. A regra significa que se as proposições que constituem a conjunção expressa no contexto é verdadeira então a conclusão $C$, consequência, também será verdadeira.
 
-Eu vou tentar usar contexto e conclusão. Mas me perdoem se eu escapar para antecedente e consequente. É apenas o hábito. Quando estudamos lógica, chamamos de **argumento** uma lista de proposições, que aqui são as premissas. Elas vêm seguidas de uma palavra ou expressão (portanto, consequentemente, desta forma) e de outra proposição, que chamamos de conclusão. A forma que usamos para representar isso é chamada de sequência de dedução. É uma forma de mostrar que, se a proposição colocada acima da linha horizontal for verdadeira, então estamos afirmando que todas as proposições $P_1, P_2, ..., P_n$ acima da linha são verdadeiras. E, por isso, a proposição abaixo da linha, a conclusão, também será verdadeira.
+Eu vou tentar usar contexto e conclusão. Mas a compassiva leitora deve me perdoar se eu escapar para antecedente e consequente. É apenas o hábito. 
+
+Quando estudamos lógica, chamamos de **argumento** uma lista de proposições, que aqui são as premissas. Elas vêm seguidas de uma palavra ou expressão (portanto, consequentemente, desta forma) e de outra proposição, que chamamos de conclusão. A forma que usamos para representar isso é chamada de sequência de dedução. É uma forma de mostrar que, se a proposição colocada acima da linha horizontal for verdadeira, então estamos afirmando que todas as proposições $P_1, P_2, ..., P_n$ acima da linha são verdadeiras. E, por isso, a proposição abaixo da linha, a conclusão, também será verdadeira.
 
 **As regras de inferência são o alicerce da lógica dedutiva e das provas matemáticas. Elas permitem que raciocínios complexos sejam divididos em passos simples, onde cada passo é justificado pela aplicação de uma regra de inferência**. A seguir, estão algumas das regras de inferência mais usadas:
 
@@ -1523,8 +1525,7 @@ Neste ponto, podemos voltar um pouco e destacar um constructor importante na pro
 
 ## Lógica Predicativa
 
-> A lógica é a técnica que usamos para adicionar convicção à verdade.
-> Jean de la Bruyere
+> A lógica é a técnica que usamos para adicionar convicção à verdade. Jean de la Bruyere{: class="epigraph"}
 
 A Lógica Predicativa, coração e espírito da Lógica de Primeira Ordem, nos leva um passo além da Lógica Proposicional. Em vez de se concentrar apenas em proposições completas que são verdadeiras ou falsas, a lógica predicativa nos permite expressar proposições sobre objetos e as relações entre eles. Ela nos permite falar de forma mais rica e sofisticada sobre o mundo.
 
