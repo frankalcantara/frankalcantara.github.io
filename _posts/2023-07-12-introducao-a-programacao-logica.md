@@ -23,7 +23,7 @@ keywords:
    - Programação Lógica
 draft: true
 toc: true
-lastmod: 2025-05-21T18:59:57.679Z
+lastmod: 2025-05-24T19:13:06.399Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -368,7 +368,7 @@ $$P_1, P_2, ..., P_n \vdash C.$$
 
 Onde o conjunto formado $P_1, P_2, ..., P_n$, chamado de contexto, ou antecedente, $\Gamma$, e $C$, chamado de conclusão, ou consequente, são Formulas Bem Formadas. A regra significa que se as proposições que constituem a conjunção expressa no contexto é verdadeira então a conclusão $C$, consequência, também será verdadeira.
 
-Eu vou tentar usar contexto e conclusão. Mas a compassiva leitora deve me perdoar se eu escapar para antecedente e consequente. É apenas o hábito. 
+Eu vou tentar usar contexto e conclusão. Mas a compassiva leitora deve me perdoar se eu escapar para antecedente e consequente. É apenas o hábito.
 
 Quando estudamos lógica, chamamos de **argumento** uma lista de proposições, que aqui são as premissas. Elas vêm seguidas de uma palavra ou expressão (portanto, consequentemente, desta forma) e de outra proposição, que chamamos de conclusão. A forma que usamos para representar isso é chamada de sequência de dedução. É uma forma de mostrar que, se a proposição colocada acima da linha horizontal for verdadeira, então estamos afirmando que todas as proposições $P_1, P_2, ..., P_n$ acima da linha são verdadeiras. E, por isso, a proposição abaixo da linha, a conclusão, também será verdadeira.
 
@@ -2405,7 +2405,7 @@ Uma das coisas mais importantes que a amável leitora irá aprender neste docume
 
 A análise de argumentos lógicos em textos do cotidiano envolve a identificação de premissas e conclusões, bem como a formalização dessas relações em lógica proposicional ou lógica de predicados.
 
-Deste ponto tem diante, caberá a esforçada leitora, aplicar os conceitos aprendidos neste documento para analisar textos de livros, notícias, especificações de sistemas e outros documentos. Comece vendo os textos de exemplo a seguir: 
+Deste ponto tem diante, caberá a esforçada leitora, aplicar os conceitos aprendidos neste documento para analisar textos de livros, notícias, especificações de sistemas e outros documentos. Comece vendo os textos de exemplo a seguir.
 
 ### Exemplo 1: Avanço Científico na Medicina (2022)
 
@@ -3544,7 +3544,7 @@ Converter uma fórmula para a Forma Normal Conjuntiva, já incluindo os conceito
 
 7. **Aplicar a Lei Distributiva**: Use a lei distributiva para expandir a fórmula, transformando-a em uma conjunção de disjunções. Substituindo $\wedge$ por $\vee$.
 
-#### Exemplo 1 
+#### Exemplo 1
 
 $$(A \land B) \rightarrow (C \lor D)$$
 

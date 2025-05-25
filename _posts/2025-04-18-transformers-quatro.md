@@ -35,79 +35,227 @@ keywords: |-
     lstm
 toc: true
 published: true
-lastmod: 2025-05-06T11:04:17.991Z
+lastmod: 2025-05-25T22:08:29.961Z
 ---
 
 ## Superando Limitações Locais: Construindo a Ponte para a Atenção
 
-Em um [artigo anterior]([link-para-o-artigo-anterior](https://frankalcantara.com/transformers-desvendando-modelagem-de-sequencias/)), navegamos pelos modelos probabilísticos clássicos para sequências, como as **Cadeias de Markov** e os **Modelos **N-gram****. Vimos como estes modelos são capazes de  capturar a dependência local estimando a probabilidade de uma palavra $w_t$ com base em suas $N-1$ vizinhas imediatas, $P(w_t  \vert  w_{t-N+1}, ..., w_{t-1})$. Essas são técnicas importantes capazes de fornecer representações ricas, como a **Vetorização por Razão de Verossimilhança**, que compara padrões locais de um documento com os padrões gerais do corpus. Mas, nem todos os mares são calmos.
+Em outro [porto](https://frankalcantara.com/transformers-desvendando-modelagem-de-sequencias/), navegamos pelos modelos probabilísticos clássicos para vetorização de sequências, como as **Cadeias de Markov** e os **Modelos **N-gram****. Vimos como estes modelos são capazes de  capturar a dependência local estimando a probabilidade de uma palavra, $w_t$, com base em suas $N - 1$ vizinhas imediatas, $P(w_t  \vert  w_{t-N+1}, ..., w_{t-1})$. As técnicas que estudamos são capazes de fornecer representações ricas, como a **Vetorização por Razão de Verossimilhança**, que compara padrões locais de um documento com os padrões gerais do corpus. Mas, como uma luneta danificada, não permitem uma visão completa.
 
->A **Propriedade de Markov** é um conceito fundamental em processos estocásticos e modelagem de sequências. Esta propriedade estabelece que a probabilidade de um estado futuro depende apenas do estado presente, e não de estados anteriores da sequência.
+A própria natureza desses modelos, encapsulada na **Propriedade de Markov**, impõe *uma limitação significativa: a dificuldade em capturar dependências de longo alcance*. Esta limitação é precisamente o que os modelos baseados em mecanismos de atenção, como os **Transformers**, procuram superar, *permitindo que cada palavra na sequência preste atenção a qualquer outra palavra, independentemente da distância entre elas*. A esforçada leitora deveria ler este parágrafo novamente, com atenção, e refletir sobre o que ele significa. A ideia de que cada palavra pode prestar atenção a qualquer outra palavra, independentemente da distância entre elas, é a bússola que a guiará no entendimento dos **Transformers**.
+
+>A **Propriedade de Markov** é um conceito fundamental em processos estocásticos e modelagem de sequências. _Esta propriedade estabelece que a probabilidade de um estado futuro depende apenas do estado presente, e não de estados anteriores da sequência_.
 >
->Em termos mais formais, para uma sequência de variáveis aleatórias (como palavras em um texto) $X_1, X_2, ..., X_n$, a Propriedade de Markov afirma que:
+>Em termos mais formais, para uma sequência de variáveis aleatórias, como palavras em um texto, $X_1, X_2, ..., X_n$, a Propriedade de Markov afirma que:
 >
->$$P(X_{n+1} = x | X_1 = x_1, X_2 = x_2, ..., X_n = x_n) = P(X_{n+1} = x | X_n = x_n)$$
+>$$P(X_{n+1} = x \vert X_1 = x_1, X_2 = x_2, ..., X_n = x_n) = P(X_{n+1} = x \vert X_n = x_n)$$
 
-A própria natureza desses modelos, encapsulada na **Propriedade de Markov**, impõe *uma limitação significativa: a dificuldade em capturar dependências de longo alcance*. Esta limitação é precisamente o que os modelos baseados em mecanismos de atenção, como os **Transformers**, procuram superar, *permitindo que cada palavra na sequência preste atenção a qualquer outra palavra*, independentemente da distância entre elas.
+Para ir além das informações obtidas com a **Propriedade de Markov** e entender o significado completo, ou prever a próxima palavra, em situações da linguagem real, precisaremos relacionar palavras que estão muito distantes entre si em uma determinada sequência de texto.
 
-Para superar a **Propriedade de Markov** e entender o significado completo, ou prever a próxima palavra, em situações da linguagem real, precisamos relacionar palavras que estão muito distantes entre si em uma determinada sequência de texto.
-
-A atenta leitora deve considerar que, a solução inocente, aumentar a ordem $N$ nos modelos **N-gram** para tentar alcançar contextos mais longos, será impraticável devido à esparsidade dos dados que resultará desta solução. Afinal, não deve ser difícil de entender que as combinações de $N$ palavras ficam cada vez mais raras e que o número de estados possíveis, irá crescer quase exponencialmente, a maldição da dimensionalidade. O que nos deixa com uma pulga atrás de orelha:
+A dedicada leitora deve considerar que, a solução inocente, aumentar a ordem $N$ nos modelos **N-gram** para tentar alcançar contextos mais longos, será impraticável devido à esparsidade dos dados que resultará desta solução. Afinal, não deve ser difícil de entender que as combinações de $N$ palavras ficam cada vez mais raras e que o número de estados possíveis, crescerá quase exponencialmente, a maldição da dimensionalidade. Sendo assim, a pergunta que fica é:
 
 **Como podemos capturar dependências de longo alcance sem aumentar a ordem dos N-grams?**
 
-Neste artigo, percorreremos uma rota entre a visão local dos **N-grams** e os mecanismos mais sofisticados que permitem aos **Transformers** lidar com essas dependências. Nosso primeiro porto será conceitual. Iremos navegar pela ideia de **Agregação de Características de Pares**. Esta técnica irá permitir que possamos considerar a influência de todos os pares formados pela palavra atual, $w_t$, e cada palavra $w_i$ que a precede ($i < t$), efetivamente "saltando" sobre o contexto intermediário.
+> **Crescimento Exponencial em N-gramas e Esparsidade de Dados**
+>
+>Se temos um vocabulário de tamanho $\vert V \vert $, o número de possíveis **N-gramas** únicos será dado por:
+>
+>$$\vert V \vert^N$$
+>
+>Para um vocabulário típico de $50.000$ palavras:
+>
+>- Bigramas: $50.000^2 = 2.5 \times 10^9$ combinações possíveis
+>- Trigramas: $50.000^3 = 1.25 \times 10^{14}$ combinações possíveis  
+>- Tetragramas: $50.000^4 = 6.25 \times 10^{18}$ combinações possíveis
+>
+>A **Lei de Zipf** governa a distribuição de frequências de palavras naturais. A frequência da $k$-ésima palavra mais comum será aproximadamente:
+>
+>$$f(k) \propto \frac{1}{k^s}$$
+>
+>Na qual $s \approx 1$ para linguagem natural. Isso significa que a maioria das palavras, e consequentemente **N-grams**, são extremamente raras.
+>
+>A Lei de Zipf implica que a maioria dos **N-grams** terá uma frequência muito baixa, resultando em uma distribuição altamente esparsa. Por exemplo, mesmo com um corpus massivo de $10^9$ tokens, a probabilidade de observar qualquer **N-gram** específico torna-se caracteristicamente pequena.
+>
+>Conforme $N$ aumenta, enfrentamos a maldição da dimensionalidade: mesmo com corpora massivos, digamos $10^9$ tokens, a densidade de dados no espaço de **N-grams** diminui exponencialmente. A probabilidade de observar qualquer **N-gram** específico tende a ser muito próxima de zero.
+>
+>Para $N \geq 4$, a maioria dos **N-grams** possíveis nunca aparece nos dados de treinamento, resultando em:
+>
+>- Estimativas de probabilidade zero para sequências válidas mas não observadas;
+>- Necessidade de técnicas de suavização, no inglês usamos a palavra smoothing, cada vez mais sofisticadas;
+>- Problemas de generalização.
+>
+>A solução moderna contorna isso através de **representações distribuídas** e **arquiteturas neurais** que aprendem representações de menor dimensionalidade, capturando dependências de longo alcance sem enfrentar diretamente a explosão combinatorial do espaço de **N-grams**.
 
-Minha esperança é que a compassiva leitora seja capaz de entender como essa agregação funciona, suas vantagens e limitações. Serão justamente estas limitações do modelo de **Agregação de Características de Pares** que impulsionarão nossa jornada até a introdução dos conceitos de **atenção seletiva** e **mascaramento**. Este será o porto mais importante desta jornada. Quando chegarmos lá será possível ver como o conceito de foco, manter a atenção no que interessa, pode ser implementada através de operações matriciais e como a informação contextual resultante pode ser processada por **Redes Feed-Forward (FFN)**.
+Nesta jornada, apresentada no Mapa Mental 1,  percorreremos uma rota entre a visão local dos **N-grams** e os mecanismos mais sofisticados que permitem aos **Transformers** lidar com essas dependências. Nosso primeiro porto será conceitual. Iremos navegar pela ideia de **Agregação de Características de Pares**. Esta técnica deverá permitir que possamos considerar a influência de todos os pares formados pela palavra atual, $w_t$, e cada palavra $w_i$ que a precede ($i < t$), efetivamente saltando sobre o contexto intermediário.
 
-Com cuidado e bom tempo, ao final desta jornada, teremos desvendado a intuição teórica e os componentes tecnológico que sustentam a revolução trazida pelos *Transformers*.
+![](/assets/images/transformers4_mindmap.webp){: class="lazyimg"}
 
-### Agregação de Características de Pares
+_Mapa Mental 1: Roteiro da jornada para entender os Transformers. A jornada começa com a visão local dos N-grams e avança para a introdução de mecanismos de atenção, culminando na compreensão dos Transformers._{: class="legend"}
 
-Ao que parece, aumentar a ordem $N$ nos modelos **N-gram/Markovianos** é uma estratégia limitada para capturar o contexto necessário em linguagem natural devido à maldição da dimensionalidade e à esparsidade dos dados. Ou seja, precisamos de uma abordagem diferente para lidar com dependências que podem se estender por muitas palavras.
+Minha esperança é que a ávida leitora seja capaz de entender como essa agregação funciona, suas vantagens e limitações. Serão justamente estas limitações do modelo de **Agregação de Características de Pares** que impulsionarão nossa jornada até a introdução dos conceitos de **atenção seletiva** e **mascaramento**. Este será o porto mais importante desta jornada. Quando chegarmos lá será possível ver como o conceito de foco, manter a atenção no que interessa, pode ser implementada através de operações matriciais e como a informação contextual resultante pode ser processada por **Redes Feed-Forward (FFN)**.
 
-A atenta leitora não deve esquecer que queremos transformar linguagem natural, no formato de texto, em algo que o computador possa manipular. Nossa escolha ainda está no processo de vetorização de textos. Deste ponto em diante, a criativa leitora deve considerar que nosso sistema precisa lidar com frases complexas. Entretanto, em benefício do entendimento, vamos considerar as frases a seguir e que cada uma ocorre com igual probabilidade, $50\%$:
+Com cuidado e bom tempo, ao final desta jornada, teremos desvendado a intuição teórica e os componentes tecnológico que sustentam a revolução trazida pelos **Transformers**.
 
-* $D_1$ = `Verifique o log do programa e descubra se ele foi executado, por favor.`;
-* $D_2$ = `Verifique o log da bateria e descubra se ela acabou, por favor.`.
+## Agregação de Características de Pares
 
-Neste cenário, para determinar a sequência correta de palavras após `descubra se`, precisamos resolver a referência pronominal. Se o `log` mencionado anteriormente era do `programa` (substantivo masculino), o pronome correto é `ele` e a ação subsequente é `foi executado`. Se o log era da `bateria` (substantivo feminino), o pronome correto é `ela` e a ação é `acabou`. A palavra importante, `programa` ou `bateria`, que determinará o pronome e o verbo seguintes está significativamente distante na sequência de palavras. Um modelo de Markov tradicional exigiria uma ordem $N$ inviável, $N > 8$, para capturar essa dependência com [os modelos que vimos antes](https://frankalcantara.com/transformers-desvendando-modelagem-de-sequencias/).
+Por tudo que vimos, podemos dizer que aumentar a ordem $N$ nos modelos **N-gram/Markovianos** é uma estratégia limitada para capturar o contexto necessário em linguagem natural devido à maldição da dimensionalidade e à esparsidade dos dados. Precisamos de uma abordagem diferente para lidar com dependências que podem se estender por muitas palavras.
 
-Para superar a visão estritamente local dos modelos **N-gram** (discutidos em detalhe no [artigo anterior](https://frankalcantara.com/transformers-desvendando-modelagem-de-sequencias/)), foram, ao longo do tempo, propostas algumas alternativas interessantes. Vamos nos concentrar em uma abordagem que mantém a inspiração de analisar interações entre pares de palavras, mas que introduz um certo grau de flexibilidade. Quase como se o modelo estivesse fazendo pilates e esticando-se para alcançar palavras mais distantes.
+A sagaz leitora não deve esquecer que queremos transformar linguagem natural, no formato de texto, em algo que o computador possa manipular. Nossa escolha ainda está no processo de vetorização de textos. Deste ponto em diante, a criativa leitora deve considerar que nosso sistema precisa lidar com frases complexas. Entretanto, estamos criando conhecimento e desvendando mistérios. Então, em benefício do entendimento, vamos começar considerando dois documentos, frases, simples, e que cada um ocorre com igual probabilidade de $50\%$:
 
-A ideia central será: ao tentar prever a palavra que segue a palavra atual, $w_t$, em vez de depender apenas do contexto imediatamente anterior, como no par $(w_{t-1}, w_t)$ para bigramas ou a janela fixa dos **N-grams**, *vamos considerar a influência potencial de todas as palavras $w_i$ que apareçam antes de $w_t$ na sequência*. Em outras palavras, o que estamos propondo é um método que permita analisar a contribuição de cada par $(w_i, w_t)\;$. O índice $i$ varia desde o início da sequência até a posição anterior a $t$ para todo $i : 0 \le i < t$.
+- $D_1$ = `Verifique o log do programa e descubra se ele foi executado, por favor.`;
+- $D_2$ = `Verifique o log da bateria e descubra se ela acabou, por favor.`.
 
-Olhar o problema por essa perspectiva irá permitir saltar sobre o texto intermediário que pode existir entre $w_i$ e $w_t$. *Ao fazer isso, abrimos a possibilidade de capturar dependências e relações semânticas de longo alcance, que são inacessíveis aos modelos **N-gram** tradicionais devido à sua janela de contexto fixa e local*.
+Neste cenário que acabamos de criar, para determinar a sequência correta de palavras após `descubra se`, precisamos resolver a referência pronominal. Se o `log` mencionado anteriormente era do `programa`, substantivo masculino, o pronome correto é `ele` e a ação subsequente é `foi executado`. Se o `log` era da `bateria`, substantivo feminino, o pronome correto é `ela` e a ação é `acabou`.
 
-Essa mudança conceitual irá implicar em uma reinterpretação da matriz de transição. Neste caso, as linhas da matriz não representarão um estado probabilístico: o contexto imediato $w_{t-1}$ ou $[w_{t-2}, w_{t-1}]$ no qual as probabilidades de transição devem somar $1$. Em vez disso, cada linha poderá ser vista como uma **característica** (*feature*) que será definida por um par específico $(w_i, w_t)$ que ocorreu na sequência. O valor na coluna $j$ dessa linha passa a representar um **voto** ou o **peso** que essa característica específica atribui à palavra $w_j$ como sendo a próxima palavra $(w_{t+1})$.
+Será uma palavra, `programa` ou `bateria`, que determinará o pronome e o verbo seguintes. Esta palavra importante está significativamente distante na sequência de palavras. Um modelo de Markov tradicional exigiria uma ordem $N$ inviável, $N > 8$, para capturar essa dependência com [os modelos que vimos antes](https://frankalcantara.com/transformers-desvendando-modelagem-de-sequencias/) em qualquer texto do mundo real.
 
-A amável leitora vai ouvir falar muito em *feature*, tanto na academia como no populacho. O conceito de *feature* como sendo uma característica do texto anterior a uma determinada palavra, que irá permitir definir qual palavra a seguirá é suficientemente importante no processamento de linguagem natural que, praticamente, se tornou uma medida de desempenho. Pense sobre as *features* sobre isso como se Cada par $(w_i, w_t)$ seja uma característica que possui um determinado grau de contribuição na previsão da próxima palavra. *O valor associado a essa característica indica o quanto o par $(w_i, w_t)$ contribui para a definição de cada palavra candidata a ser a próxima. Para construir a intuição, usaremos frequentemente a analogia de um `voto`, embora o termo técnico mais geral seja `peso`, que se tornará mais prevalente à medida que avançarmos para mecanismos mais complexos*.
+Para superar a visão estritamente local dos modelos **N-gram**, discutidos em detalhe no [artigo anterior](https://frankalcantara.com/transformers-desvendando-modelagem-de-sequencias/), foram, ao longo do tempo, propostas algumas alternativas interessantes: 
+
+1. Modelos Probabilísticos Estendidos
+
+    **Hidden Markov Models (HMMs)**
+    RABINER, L. R. A tutorial on hidden Markov models and selected applications in speech recognition. **Proceedings of the IEEE**, v. 77, n. 2, p. 257-286, 1989.
+
+    Os HMMs introduziram estados ocultos que podem capturar informações contextuais além da observação imediata, permitindo modelar dependências mais complexas que os modelos Markovianos simples.
+
+2. Modelos Neurais de Linguagem
+
+    **Neural Probabilistic Language Models**
+    BENGIO, Y. et al. A neural probabilistic language model. **Journal of Machine Learning Research**, v. 3, p. 1137-1155, 2003.
+
+    Pioneiro no uso de redes neurais para modelagem de linguagem, este trabalho introduziu embeddings de palavras e demonstrou como redes neurais podem capturar similaridades semânticas.
+
+3. Arquiteturas Recorrentes
+
+    **Recurrent Neural Networks (RNNs)**
+    ELMAN, J. L. Finding structure in time. **Cognitive Science**, v. 14, n. 2, p. 179-211, 1990.
+
+    As RNNs introduziram a capacidade de manter estado interno, teoricamente permitindo memória de toda a sequência anterior, embora na prática sofram com o problema de gradientes que desaparecem.
+
+    **Long Short-Term Memory (LSTM)**
+    HOCHREITER, S.; SCHMIDHUBER, J. Long short-term memory. **Neural Computation**, v. 9, n. 8, p. 1735-1780, 1997.
+
+    As LSTMs resolveram o problema de gradientes que desaparecem através de gates especializados, permitindo capturar dependências de longo prazo de forma mais efetiva.
+
+    **Gated Recurrent Units (GRUs)**
+    CHO, K. et al. Learning phrase representations using RNN encoder-decoder for statistical machine translation. In: **CONFERENCE ON EMPIRICAL METHODS IN NATURAL LANGUAGE PROCESSING**, 2014, Doha. Proceedings [...]. Doha: ACL, 2014. p. 1724-1734.
+
+    Uma simplificação das LSTMs que mantém a capacidade de modelar dependências longas com menor complexidade computacional.
+
+4. Modelos Sequence-to-Sequence
+
+    **Encoder-Decoder Architecture**
+    SUTSKEVER, I.; VINYALS, O.; LE, Q. V. Sequence to sequence learning with neural networks. In: **ADVANCES IN NEURAL INFORMATION PROCESSING SYSTEMS**, 27., 2014, Montreal. Proceedings [...]. Montreal: NIPS, 2014. p. 3104-3112.
+
+    Introduziu a arquitetura encoder-decoder que separa a compreensão da sequência de entrada da geração da sequência de saída.
+
+5. Primeiros Mecanismos de Atenção
+
+    **Neural Machine Translation with Attention**
+    BAHDANAU, D.; CHO, K.; BENGIO, Y. Neural machine translation by jointly learning to align and translate. In: **INTERNATIONAL CONFERENCE ON LEARNING REPRESENTATIONS**, 3., 2015, San Diego. Proceedings [...]. San Diego: ICLR, 2015.
+
+    Pioneiro na introdução do mecanismo de atenção, permitindo que o decoder acesse diretamente diferentes partes da sequência de entrada.
+
+    **Effective Attention Mechanisms**
+    LUONG, M. T.; PHAM, H.; MANNING, C. D. Effective approaches to attention-based neural machine translation. In: **CONFERENCE ON EMPIRICAL METHODS IN NATURAL LANGUAGE PROCESSING**, 2015, Lisbon. Proceedings [...]. Lisbon: ACL, 2015. p. 1412-1421.
+
+    Refinamento dos mecanismos de atenção, introduzindo diferentes tipos de funções de score para calcular a atenção.
+
+6. Abordagens Convolucionais
+
+    **Convolutional Neural Networks for NLP**
+    KIM, Y. Convolutional neural networks for sentence classification. In: **CONFERENCE ON EMPIRICAL METHODS IN NATURAL LANGUAGE PROCESSING**, 2014, Doha. Proceedings [...]. Doha: ACL, 2014. p. 1746-1751.
+
+    Aplicação de CNNs para capturar padrões locais em diferentes escalas através de filtros de diferentes tamanhos.
+
+Cada uma dessas abordagens representou um passo incremental na direção de superar as limitações dos modelos **N-gram**, culminando no desenvolvimento da arquitetura **Transformer** que combina eficiência computacional com capacidade de modelar dependências arbitrariamente longas.
+
+Vamos nos concentrar em uma abordagem na qual A ideia central será: 
+
+***ao tentar prever a palavra que segue a palavra atual, $w_t$, em vez de depender apenas do contexto imediatamente anterior, como no par $(w_{t-1}, w_t)$ para bigramas ou a janela fixa dos **N-grams**, vamos considerar a influência potencial de todas as palavras $w_i$ que apareçam antes de $w_t$ na sequência***.
+
+Em outras palavras, o que estamos propondo é um método que permita analisar a contribuição de cada par $(w_i, w_t)\;$. No qual, o índice $i$ varia desde o início da sequência até a posição anterior a $t$ para todo $i : 0 \le i < t$.
+
+Olhar o problema por essa perspectiva permitirá saltar sobre o texto intermediário que pode existir entre $w_i$ e $w_t$. *Ao fazer isso, abrimos a possibilidade de capturar dependências e relações semânticas de longo alcance, que são inacessíveis aos modelos **N-gram** tradicionais devido à sua janela de contexto fixa e local*. E, é claro, aos problemas relacionados à maldição da dimensionalidade.
+
+Essa mudança conceitual implicará em uma reinterpretação da matriz de transição. Neste caso, as linhas da matriz não representarão um estado probabilístico: o contexto imediato $w_{t-1}$ ou $[w_{t-2}, w_{t-1}]$ no qual as probabilidades de transição devem somar $1$. Em vez disso, cada linha poderá ser vista como uma **característica**, do inglês feature, que será definida por um par específico $(w_i, w_t)$ que ocorreu na sequência independente da distância entre $w_i$ e $w_t$. O valor na coluna $j$ dessa linha passa a representar um **voto** ou o **peso** que essa característica específica atribui à palavra $w_j$ como sendo a próxima palavra $(w_{t+1})$.
+
+A amável leitora vai ouvir falar muito em *features*, neste texto, na academia e no populacho. O conceito de *feature* como uma característica do texto anterior a uma determinada palavra, que permite definir qual palavra a seguirá, é tão importante no processamento de linguagem natural que praticamente se tornou uma medida de desempenho.
+
+Pense sobre as *features* da seguinte forma: *cada par $(w_i, w_t)$ representa uma característica que possui um determinado grau de contribuição na previsão da próxima palavra. O valor associado a essa característica indica o quanto o par $(w_i, w_t)$ contribui para a definição de cada palavra candidata a ser a próxima*.
+
+Para construir a intuição, usaremos frequentemente a analogia de um **voto**, embora o termo técnico mais geral seja **peso**. Não se preocupe, a palavra **peso** se tornará mais prevalente à medida que avançarmos para mecanismos mais complexos.
+
+Ainda estamos considerando os documentos: 
+
+- $D_1$ = `Verifique o log do programa e descubra se ele foi executado, por favor.`;
+- $D_2$ = `Verifique o log da bateria e descubra se ela acabou, por favor.`.
+
+A Figura 1 ilustra o conceito de votação de características de pares com saltos. Cada par $(w_i, w_t)$ vota em uma palavra candidata $w_k$ como a próxima palavra a seguir $w_t$. O valor do voto é o peso que essa característica atribui à palavra candidata.
 
 ![Votação de características de pares com saltos](/assets/images/Votosabstrata.webp)
 _Figura 1: Modelo conceitual hipotético baseado em pares com saltos. As linhas representam características (pares como `(programa, executado)` ou `(bateria, executado)`). Os valores apresentados são "votos" para a próxima palavra (ex: "por"). Apenas pesos não-zero relevantes são mostrados. A ilustração foca na predição da palavra após `executado` no contexto da primeira frase._{: class="legend"}
 
-A Figura 1 ilustra a ideia de *feature* como fator para a previsão da palavra após `executado`, no primeiro exemplo de frase: `... log do programa ... ele foi executado ...`. Várias características, pares formados por `executado` e palavras anteriores como `verifique`, `o`, `log`, `do`, `programa`, `ele`, `foi`, etc.) estão ativas. Cada uma delas vota nas possíveis próximas palavras. A palavra com mais votos, ou com peso maior, será a escolhida como a próxima palavra. No exemplo, o par `(programa, executado)` tem um voto alto para `por`, enquanto o par `(bateria, executado)` tem um voto baixo, ou zero. Isso significa que, no contexto da frase, `por` é uma escolha mais provável do que `favor` ou outras palavras. Assim, temos:
+A Figura 1 ilustra a ideia de *feature* como fator para a previsão da palavra após `executado`, no primeiro exemplo de frase: `... log do programa ... ele foi executado ...`. Várias características, pares formados por `executado` e palavras anteriores como `verifique`, `o`, `log`, `do`, `programa`, `ele`, `foi`, etc. estão ativas. Cada uma delas vota nas possíveis próximas palavras. A palavra com mais votos, ou com peso maior, será a escolhida como a próxima palavra. No exemplo, o par `(programa, executado)` tem um voto alto para `por`, enquanto o par `(bateria, executado)` tem um voto baixo, ou zero. Isso significa que, no contexto da frase, `por` é uma escolha mais provável do que `favor` ou outras palavras. Assim, temos:
 
-* Características como `(programa, executado)` dariam um voto forte para `por`, pois essa sequência (`programa ... executado por favor`) é plausível e ocorre na primeira frase.
+- Características como `(programa, executado)` dariam um voto forte para `por`, pois essa sequência (`programa ... executado por favor`) é plausível e ocorre na primeira frase.
 
-* Características como `(bateria, executado)` dariam voto zero, ou muito baixo, para `por`, pois essa combinação não ocorre no nosso exemplo, Na segunda frase temos `bateria ... ela acabou`.
+- Características como `(bateria, executado)` dariam voto zero, ou muito baixo, para `por`, pois essa combinação não ocorre no nosso exemplo, Na segunda frase temos `bateria ... ela acabou`.
 
-* Características menos informativas, como `(o, executado)` ou `(log, executado)`, podem ter votos distribuídos, ou votos mais fracos. Ver apenas `o` ou `log` antes de `executado` não ajuda muito a distinguir entre as frases originais ou a prever a palavra seguinte.
+- Características menos informativas, como `(o, executado)` ou `(log, executado)`, podem ter votos distribuídos, ou votos mais fracos. Ver apenas `o` ou `log` antes de `executado` não ajuda muito a distinguir entre as frases originais ou a prever a palavra seguinte.
 
 Para fazer uma previsão, somamos os votos de todas as características ativas, pares formados pela palavra atual e todas as palavras anteriores na sequência específica, para cada palavra candidata a ser a próxima. A palavra com a maior soma de votos será a palavra escolhida.
 
-No exemplo `Verifique o log do programa e descubra se ele foi executado`: as características ativas relevantes para prever a palavra após `executado` incluem pares como `(verifique, executado)`, `(o, executado)`, `(log, executado)`, `(do, executado)`, `(programa, executado)`, `(e, executado)`, `(descubra, executado)`, `(se, executado)`, `(ele, executado)`, `(foi, executado)`. Se somarmos os votos hipotéticos. Sendo assim, o par informativo `(programa, executado)` tem um voto alto para `por`, e outros pares menos informativos têm votos menores ou distribuídos, a palavra `por` provavelmente acumulará o total de votos mais alto, tornando-se a previsão correta para esta sequência.
+No documento $D_2$, `Verifique o log do programa e descubra se ele foi executado`: as características ativas relevantes para prever a palavra após `executado` incluem pares como `(verifique, executado)`, `(o, executado)`, `(log, executado)`, `(do, executado)`, `(programa, executado)`, `(e, executado)`, `(descubra, executado)`, `(se, executado)`, `(ele, executado)`, `(foi, executado)`. Se somarmos os votos hipotéticos. Sendo assim, o par informativo `(programa, executado)` tem um voto alto para `por`, e outros pares menos informativos têm votos menores ou distribuídos, a palavra `por` provavelmente acumulará o total de votos mais alto, tornando-se a previsão correta para esta sequência. A Figura 2 ilustra este conceito de forma mais detalhada.
 
 ![Votação de características de pares com saltos](/assets/images/saltos.webp)
 _Figura 2: A figura ilustra o mecanismo de votação de características hipotético para predição da próxima palavra em um modelo baseado em pares com saltos. No exemplo, no contexto da frase `Verifique o log do programa e descubra se ele foi executado`, está sendo prevista a palavra que segue `executado` ._{: class="legend"}
 
-Esta abordagem, embora ainda baseada em pares, oferece uma forma de incorporar contexto de longo alcance de forma seletiva. A implementação pode usar estruturas de dados semelhantes às do modelo de segunda ordem, mas a lógica de treinamento e predição muda para refletir a soma de votos, ou pesos, de múltiplos pares ativos.
+Esta abordagem, embora ainda baseada em pares de palavras, oferece uma forma de incorporar contexto de longo alcance de maneira seletiva, focando apenas nas palavras anteriores que são relevantes para a predição atual.
 
-Para entender como os valores de votos apresentados na Figura 2 são calculados, precisamos detalhar a matemática conceitual por trás da abordagem de Agregação de Características de Pares. *É importante notar que os valores na figura são ilustrativos, hipotéticos, que foram criados para que a atenta leitora possa entender a ideia de que diferentes pares têm pesos diferentes*. *Um corpus de treinamento real conteria muito mais dados*.
+A implementação pode utilizar estruturas de dados semelhantes às dos modelos **N-gram** tradicionais, como bigramas ou trigramas, mas a lógica de treinamento e predição se transforma: em vez de considerar apenas o contexto imediato, o modelo soma os **votos** de todos os pares $(w_i, w_t)$ que estão presentes na sequência atual, onde $w_i$ representa qualquer palavra anterior e $w_t$ a palavra atual.
+
+Para que a cativa leitora possa entender como os valores de votos apresentados na Figura 2 são calculados, precisamos detalhar a matemática conceitual por trás da abordagem de **Agregação de Características de Pares**. *É importante notar que os valores na figura são ilustrativos, hipotéticos, que foram criados para facilitar o entendimento da ideia de que diferentes pares têm pesos diferentes*. *Um corpus de treinamento real conteria muito mais dados*.
 
 Todo o conceito que vimos até aqui pode ser reduzido a três passos:
 
 1. **Coleta de Evidências (Contagem)**: durante a fase de treinamento, que no nosso caso conceitual será apenas analisar as frases de exemplo, o modelo observa todas as ocorrências de sequências de três palavras $(w_i, w_t, w_{t+1})$. Para cada par $(w_i, w_t)$ que aparece na sequência, ele registra qual palavra $w_{t+1}$ o seguiu. Nesta fase, mantemos uma contagem, $C(w_i, w_t, w_{t+1})\;$, de quantas vezes vimos a palavra $w_{t+1}$ aparecer imediatamente após a palavra $w_t$, dado que $w_i$ apareceu em alguma posição anterior a $t$. Se as sequências tiverem pesos, como no exemplo que definimos com cada frase tendo peso $0.5$, somamos esses pesos em vez de apenas contar $1$ para cada ocorrência.
+
+    Para as sequências de treinamento do nosso corpus, temos:
+
+   - $D_1 =$ `Verifique o log do programa e descubra se ele foi executado, por favor.` (peso 0.5)
+   - $D_2 =$ `Verifique o log da bateria e descubra se ela acabou, por favor.` (peso 0.5)
+
+    **Contagens para $(w_i, \text{executado}, w_{t+1})$:**
+
+    | $w_i$ | $w_t$ | $w_{t+1}$ | Ocorrências | Peso Total |
+    |-------|-------|------------|-------------|------------|
+    | verifique | executado | por | 1 | 0.5 |
+    | o | executado | por | 1 | 0.5 |
+    | log | executado | por | 1 | 0.5 |
+    | do | executado | por | 1 | 0.5 |
+    | programa | executado | por | 1 | 0.5 |
+    | e | executado | por | 1 | 0.5 |
+    | descubra | executado | por | 1 | 0.5 |
+    | se | executado | por | 1 | 0.5 |
+    | ele | executado | por | 1 | 0.5 |
+    | foi | executado | por | 1 | 0.5 |
+
+    **Contagens para $(w_i, \text{acabou}, w_{t+1})$:**
+
+    | $w_i$ | $w_t$ | $w_{t+1}$ | Ocorrências | Peso Total |
+    |-------|-------|------------|-------------|------------|
+    | verifique | acabou | por | 1 | 0.5 |
+    | o | acabou | por | 1 | 0.5 |
+    | log | acabou | por | 1 | 0.5 |
+    | da | acabou | por | 1 | 0.5 |
+    | bateria | acabou | por | 1 | 0.5 |
+    | e | acabou | por | 1 | 0.5 |
+    | descubra | acabou | por | 1 | 0.5 |
+    | se | acabou | por | 1 | 0.5 |
+    | ela | acabou | por | 1 | 0.5 |
+
+    **Observação:** Cada contagem $C(w_i, w_t, w_{t+1}) = 0.5$ porque cada sequência tem peso 0.5 e cada tripla aparece exatamente uma vez em sua respectiva sequência.
 
 2. **Normalização por Par (Cálculo dos Votos)**: para cada par específico $(w_i, w_t)$ que ocorreu no treinamento, calculamos o voto que este par dá para uma possível próxima palavra $w_k$. Esse voto é a frequência relativa, ou probabilidade condicional estimada, de $w_k$ ocorrer após $(w_i, w_t)\;$, baseada nas contagens. A fórmula para o voto será dada por:
 
@@ -115,17 +263,41 @@ Todo o conceito que vimos até aqui pode ser reduzido a três passos:
 
     Na qual, a soma no denominador $\sum_{w'} C(w_i, w_t, w')\;\,$ será feita sobre todas as palavras $w'$ que foram observadas seguindo o par $(w_i, w_t)$ no corpus de treinamento. Isso garante que a soma dos votos de um par específico $(w_i, w_t)$ para todas as possíveis palavras seguintes seja $1$.
 
-    No exemplo hipotético apresentado na Figura 2 vemos que considerando o par $(programa, executado)\;$, o voto para `por` será $0.8$ e para `favor` o voto será $0.1$. Isso implica que, no corpus hipotético usado para gerar a figura, $80\%$ das vezes em que a sequência continha `... programa ... executado ...`, a palavra seguinte foi `por`, e $10\%$ das vezes foi `favor`. Os $10\%$ restantes foram outras palavras não apresentadas na figura.
+    Vamos calcular os votos para o par (`programa`, `executado`) usando nossos dados reais:
 
-    Se fizermos uma análise de contraste com as frases do nosso corpus de treinamento: considerando as duas frases dadas, o par $(programa, executado)$ ocorre uma única vez, seguido por `por`. Portanto, um cálculo estrito baseado apenas nessas duas frases resultaria em:
+    **Dados de Contagem Coletados:**
+    - C(`programa`, `executado`, `por`) = $0.5$ (aparece $1$ vez no documento $D_1$ com peso $0.5$);
+    - Nenhuma outra palavra segue este par no corpus.
 
-    $$\text{Voto}(\text{por} \vert \text{programa}, \text{executado})\;\; = 1.0$$
+    **Aplicando a Fórmula de Normalização:**
 
-    e
+    1. **Calculando o denominador** (soma de todas as contagens para este par):
 
-    $$\text{Voto}(\text{favor} \vert \text{programa}, \text{executado})\;\; = 0.0$$
+       $$\Sigma C(programa, executado, w') = C(programa, executado, por) = 0.5$$
 
-    Isso confirma que os valores da figura são ilustrativos de um cenário de dados mais rico. Afinal, $1$ e $0$ são extremos, não tem nenhuma graça e o modelo real deverá ter uma distribuição mais suave entre as palavras candidatas.
+    2. **Calculando o voto para `por`**:
+
+       $$Voto(por \vert programa, executado) = \frac{C(programa, executado, por)}{\Sigma C(programa, executado, w')}$$
+
+        $$= \frac{0.5 }{0.5} = 1.0$$
+
+    3. **Calculando o voto para "favor"** (que não aparece após este par):
+
+       $$Voto(favor \vert programa, executado) = \frac{C(programa, executado, favor)}{ \Sigma C(programa, executado, w')}$$
+
+        $$= 0 / 0.5 = 0.0$$
+
+    **Verificação da Propriedade de Normalização:**
+
+    $$Voto(por \vert programa, executado) + Voto(favor \Vert programa, executado)$$
+
+    $$= 1.0 + 0.0 = 1.0$$
+
+    Corretamente normalizada.
+    **Voto para `por`**: $1.0$ (100% das vezes que `programa` e `executado` aparecem juntos, a próxima palavra é `por`).
+
+    **Interpretação:**
+    No nosso corpus limitado, 100% das vezes que vemos `programa ... executado`, a próxima palavra é `por`.
 
 3. **Agregação na Predição**: quando queremos prever a palavra após $w_t$ em uma nova sequência, um documento qualquer que não está no corpus de treinamento, identificamos todos os pares $(w_i, w_t)$ formados pela palavra atual $w_t$ e cada palavra anterior $w_i$ na sequência. Em seguida, somamos os votos pré-calculados durante o treinamento, $\text{Voto}(w_k \vert w_i, w_t)\;\,$ para cada palavra candidata $w_k$:
 
@@ -133,9 +305,11 @@ Todo o conceito que vimos até aqui pode ser reduzido a três passos:
 
     A palavra $w_k$ com o maior $Score$ agregado é a previsão do modelo. A Figura 2 ilustra a etapa antes dessa agregação final, mostrando os votos individuais $\text{Voto}(w_k  \vert  w_i, w_t)$ para $w_t = \text{"executado"}$ e vários $w_i$.
 
-Eu parti de um exemplo simples, livre, leve e solto, para que a esforçada leitora tenha uma chance maior de entender a ideia. Mas, deve ser possível imaginar que essa abordagem pode ser aplicada a sequências muito mais longas e complexas. A ideia é que, ao considerar todos os pares $(w_i, w_t)\;$, podemos capturar dependências de longo alcance que seriam impossíveis com um modelo **N-gram** tradicional. Talvez um exemplo mais complexo ajude a fixar a ideia.
+Eu parti de um exemplo simples, livre, leve e solto, para que a esforçada leitora tenha uma chance maior de entender a ideia. Mas, a criativa leitora deve extrapolar essa abordagem e entender que ela pode ser aplicada a sequências muito mais longas e complexas. 
 
-#### Exemplo Detalhado: Modelo de Agregação de Características de Pares
+O conceito que deve permanecer é que, ao considerar todos os pares $(w_i, w_t)\;$, podemos capturar dependências de longo alcance que seriam impossíveis com um modelo **N-gram** tradicional. Talvez um exemplo mais complexo ajude a fixar a ideia.
+
+### Exemplo Detalhado: Modelo de Agregação de Características de Pares
 
 Mesmo que o título desta seção seja exemplo detalhado, eu vou ignorar que no mundo real, passaríamos o corpus por alguns processos de preparação de texto antes da aplicação de qualquer algoritmo. Sendo assim, para este exemplo a esforçada leitora deve considerar um **corpus de treinamento** com os $5$ documentos a seguir:
 
@@ -147,13 +321,13 @@ Mesmo que o título desta seção seja exemplo detalhado, eu vou ignorar que no 
 
 Cada documento tem peso igual a $0.2$ no corpus. Isso quer dizer que estes documentos são igualmente prováveis no nosso sistema. Podemos calcular explicitamente as probabilidades e valores para o nosso modelo.
 
-##### 1. Coleta de Evidências (Contagem)
+#### 1. Coleta de Evidências (Contagem)
 
 Primeiro, precisamos contar todas as ocorrências de triplas $(w_i, w_t, w_{t+1})\;$, na qual:
 
-* $w_i$ é uma palavra anterior na sequência;
-* $w_t$ é a palavra atual para a qual queremos prever a próxima;
-* $w_{t+1}$ é a palavra que segue $w_t$.
+- $w_i$ é uma palavra anterior na sequência;
+- $w_t$ é a palavra atual para a qual queremos prever a próxima;
+- $w_{t+1}$ é a palavra que segue $w_t$.
 
 Para este exemplo, vamos tentar prever a palavra após a palavra `executado` em diferentes contextos.
 
@@ -164,12 +338,12 @@ Para este exemplo, vamos tentar prever a palavra após a palavra `executado` em 
 | programa | executado | por | 1 | 0.2 |
 | foi | executado | por | 1 | 0.2 |
 | ele | executado | por | 1 | 0.2 |
-| foi | executado | com | 1 | 0.2 |
 | programa | executado | com | 1 | 0.2 |
+| foi | executado | com | 1 | 0.2 |
 
 $$\\$$
 
-##### 2. Normalização por Par (Cálculo dos Votos)
+#### 2. Normalização por Par (Cálculo dos Votos)
 
 Para cada par $(w_i, w_t)\;$, calculamos o voto para cada possível próxima palavra $w_k$ usando:
 
@@ -193,7 +367,7 @@ $$\text{Voto}(w_k \vert w_i, w_t) = \frac{C(w_i, w_t, w_k)}{\sum_{w'} C(w_i, w_t
 
     $$\text{Voto}(\text{com} \vert \text{ele}, \text{executado}) = \frac{0}{0.2} = 0.0$$
 
-##### 3. Agregação na Predição
+#### 3. Agregação na Predição
 
 Nosso próximo passo é prever a próxima palavra após `executado` em uma nova sequência:
 
@@ -218,7 +392,7 @@ Neste caso, o modelo não consegue distinguir claramente entre `por` e `com` bas
 
 Se incluirmos mais contexto, como em outra sequência nova:
 
-`Verifique se ele executou o programa ...`
+`Verifique se ele foi executado ...`
 
 Então temos:
 
@@ -236,7 +410,7 @@ O modelo prevê claramente `por` como a próxima palavra.
 
 Este exemplo ilustra como a presença de palavras-chave distintivas (`ele` vs. `programa` ou `foi`) pode alterar significativamente a previsão, demonstrando como o modelo captura dependências de longo alcance.
 
-#### Implementação em C++
+### Implementação em C++
 
 O código C++ apresentado abaixo, encapsulado na classe `PairwiseFeatureAggregator`, implementa precisamente os passos que acabamos de detalhar no exemplo. O método `addSequence` corresponde à coleta de evidências (Passo 1), `normalizeVotes` executa o cálculo dos votos normalizados por par (Passo 2), e `predictNextWord` realiza a agregação desses votos para efetuar a predição em novas sequências (Passo 3).
 
@@ -356,8 +530,12 @@ public:
         for (const auto& [word, vote] : predictions) {
             sorted_predictions.insert({vote, word});
         }
-        for (const auto& [vote, word] : sorted_predictions) {
-            std::cout << "  " << word << ": " << std::fixed << std::setprecision(2) << vote << "\n";
+        if (sorted_predictions.empty()) {
+            std::cout << "  (Nenhuma previsão gerada)\n";
+        } else {
+            for (const auto& [vote, word] : sorted_predictions) {
+                std::cout << "  " << word << ": " << std::fixed << std::setprecision(2) << vote << "\n";
+            }
         }
     }
 };
@@ -366,8 +544,8 @@ public:
  * @brief Função principal que demonstra o uso da classe PairwiseFeatureAggregator.
  *
  * Este programa cria um modelo de predição de palavras com base em pares com saltos, treina o modelo
- * com duas sequências representando verificações de log de um programa e uma bateria, normaliza os
- * pesos, e testa a predição da próxima palavra para as sequências fornecidas.
+ * com cinco sequências do exemplo detalhado, normaliza os pesos, e testa a predição da próxima palavra 
+ * para sequências de teste que demonstram a capacidade do modelo de capturar dependências de longo alcance.
  *
  * @return 0 em caso de execução bem-sucedida.
  */
@@ -375,53 +553,68 @@ int main() {
     // Criar o modelo
     PairwiseFeatureAggregator model; ///< Instância do modelo de agregação de características.
 
-    // Definir sequências de treinamento
-    std::vector<std::string> sequence1 = {
+    // Definir sequências de treinamento do exemplo detalhado (5 documentos)
+    // Nota: O corpus já está pré-processado (minúsculas, sem acentos, sem pontuação).
+    std::vector<std::string> d1 = {
         "verifique", "o", "log", "do", "programa", "e", "descubra", "se", "ele", "foi", "executado", "por", "favor"
     };
-    std::vector<std::string> sequence2 = {
+    std::vector<std::string> d2 = {
         "verifique", "o", "log", "da", "bateria", "e", "descubra", "se", "ela", "acabou", "por", "favor"
     };
+    std::vector<std::string> d3 = {
+        "o", "programa", "foi", "executado", "com", "sucesso", "por", "isso", "nao", "precisa", "verificar", "novamente"
+    };
+    std::vector<std::string> d4 = {
+        "a", "bateria", "foi", "substituida", "por", "isso", "esta", "funcionando", "corretamente"
+    };
+    std::vector<std::string> d5 = {
+        "ele", "executou", "o", "programa", "por", "isso", "obteve", "os", "resultados", "esperados"
+    };
 
-    // Adicionar sequências com pesos iguais (50% cada)
-    model.addSequence(sequence1, 0.5);
-    model.addSequence(sequence2, 0.5);
+    // Adicionar sequências com pesos iguais (20% cada)
+    double document_weight = 0.2;
+    model.addSequence(d1, document_weight);
+    model.addSequence(d2, document_weight);
+    model.addSequence(d3, document_weight);
+    model.addSequence(d4, document_weight);
+    model.addSequence(d5, document_weight);
 
     // Normalizar os pesos
     model.normalizeVotes();
 
-    // Testar predições para a sequência 1 (terminando em "executado")
+    // Testar predições para sequência nova (terminando em "executado")
     std::vector<std::string> test_sequence1 = {
-        "verifique", "o", "log", "do", "programa", "e", "descubra", "se", "ele", "foi", "executado"
+        "verifique", "se", "o", "programa", "foi", "executado"
     };
     auto predictions1 = model.predictNextWord(test_sequence1);
     model.printPredictions(predictions1, test_sequence1);
 
-    // Testar predições para a sequência 2 (terminando em "acabou")
+    std::cout << "\n";
+
+    // Testar predições para sequência nova com contexto distintivo (terminando em "executado")
     std::vector<std::string> test_sequence2 = {
-        "verifique", "o", "log", "da", "bateria", "e", "descubra", "se", "ela", "acabou"
+        "verifique", "se", "ele", "foi", "executado"
     };
     auto predictions2 = model.predictNextWord(test_sequence2);
     model.printPredictions(predictions2, test_sequence2);
 
     return 0;
 }
-
 ```
 
-#### Considerações importantes
+### Considerações importantes
 
-Embora esta abordagem de pares com saltos e votação nos permita considerar contexto de longo alcance, ela enfatiza um característica negativa. Ao somar votos de muitas características (pares), a contribuição das poucas características *realmente* informativas (como `(programa, executado)` no nosso exemplo) pode ser diluída pelo ruído das características menos úteis (como `(o, executado)`). A diferença entre o total de votos para a palavra correta e as incorretas pode ser pequena, tornando o modelo menos confiável e menos robusto. A esse problema chamamos de **diluição do sinal**.
+Embora esta abordagem de pares com saltos e votação nos permita considerar contexto de longo alcance, ela enfatiza uma característica negativa. Ao somar votos de muitas características, nossos pares, a contribuição das poucas características *realmente* informativas (como `(programa, executado)`, no nosso exemplo) pode ser diluída pelo ruído das características menos úteis (como `(o, executado)`). A diferença entre o total de votos para a palavra correta e as incorretas pode ser pequena, tornando o modelo menos confiável e menos robusto. A esse problema chamamos de **diluição do sinal**.
 
 Além dessa questão fundamental da **diluição do sinal**, a abordagem de agregação irrestrita de pares, na prática, enfrenta outros desafios que limitam sua aplicabilidade em cenários mais complexos:
 
-* **Complexidade Computacional e de Memória**: a estrutura de dados usada para armazenar as contagens ou votos, como o `std::unordered_map` triplamente aninhado no código C++ (aaargh!), pode se tornar inaceitavelmente grande para corpus com vocabulários extensos. Pior ainda, durante a predição para uma sequência de comprimento $T$, o modelo precisa potencialmente considerar e somar votos de $O(T^2)$ pares $(w_i, w_t)$. *Isso torna o método computacionalmente caro e difícil de escalar para as sequências longas* frequentemente encontradas em tarefas de Processamento de Linguagem Natural do mundo real.
+- **Complexidade Computacional e de Memória**: a estrutura de dados usada para armazenar as contagens ou votos, como o `std::unordered_map` triplamente aninhado no código C++ (aaargh!), pode se tornar inaceitavelmente grande para corpus com vocabulários extensos. Pior ainda, durante a predição para uma sequência de comprimento $T$, o modelo precisa potencialmente considerar e somar votos de $O(T^2)$ pares $(w_i, w_t)$. *Isso torna o método computacionalmente caro e difícil de escalar para as sequências longas* frequentemente encontradas em tarefas de Processamento de Linguagem Natural do mundo real.
 
-* **Interpretação da Pontuação Final (Normalização)**: a normalização é realizada individualmente para cada par $(w_i, w_t)\;$, garantindo que $\sum_{w_k} \text{Voto}(w_k \vert w_i, w_t) = 1$. No entanto, a pontuação final para uma palavra candidata $w_k$, calculada como $Score(w_k) = \sum_{i \text{ t.q.} w_i \text{ precede } w_t} \text{Voto}(w_k  \vert  w_i, w_t)\;$, é uma simples soma dessas probabilidades condicionais. O resultado $Score(w_k)$ não representa mais uma probabilidade bem calibrada; a soma $\sum_{w_k} Score(w_k)$ não é necessariamente $1$. *A pontuação final funciona como um ranking: valores mais altos são melhores, mas perde uma interpretação probabilística direta sobre a confiança da previsão*.
+- **Interpretação da Pontuação Final (Normalização)**: a normalização é realizada individualmente para cada par $(w_i, w_t)\;$, garantindo que $\sum_{w_k} \text{Voto}(w_k \vert w_i, w_t) = 1$. No entanto, a pontuação final para uma palavra candidata $w_k$, calculada como $Score(w_k) = \sum_{i \text{ t.q.} w_i \text{ precede } w_t} \text{Voto}(w_k  \vert  w_i, w_t)\;$, é uma simples soma dessas probabilidades condicionais. O resultado $Score(w_k)$ não representa mais uma probabilidade bem calibrada; a soma $\sum_{w_k} Score(w_k)$ não é necessariamente $1$. *A pontuação final funciona como um ranking: valores mais altos são melhores, mas perde uma interpretação probabilística direta sobre a confiança da previsão*.
 
-**A forma que encontramos para superar estas dificuldades inclui tentar fazer o modelo prestar atenção dinamicamente nas características, pares ou, mais geralmente, nas palavras anteriores, que são mais relevantes para a previsão atual, mitigando o ruído e controlando a complexidade.**
+***A forma que encontramos para superar estas dificuldades inclui tentar fazer o modelo prestar atenção dinamicamente nas características, pares ou, mais geralmente, nas palavras anteriores, que são mais relevantes para a previsão atual, mitigando o ruído e controlando a complexidade.***
 
-### Mascaramento e Atenção Seletiva: Focando no que Importa
+## Mascaramento e Atenção Seletiva: Focando no que Importa
 
 *A solução para a diluição dos votos é introduzir um mecanismo que permita ao modelo **prestar atenção** às características mais informativas, ignorando ou diminuindo o peso das demais.* Este é um tipo de atenção seletiva. O modelo deve dar mais valor, prestar atenção, as *features*, características, que contenham mais valor. Parece complicado. Contudo, podemos fazer isso através de uma técnica que chamaremos de **mascaramento**.
 
@@ -463,7 +656,7 @@ O artigo seminal *Attention is All You Need* (Vaswani et al., 2017) introduziu u
 
 A persistente leitora deve ter percebido que até agora, tudo que fizemos foi uma aproximação conceitual para construir as estruturas cognitivas do entendimento. Isso não basta. Assim como fizemos anteriormente, vamos recorrer a um exemplo mais rigoroso, com um pouco de matemática, em um cenário um pouco mais complexo, ainda que distante da realidade.
 
-#### Exemplo Detalhado: Mascaramento em Corpus Realista
+### Exemplo Detalhado: Mascaramento em Corpus Realista
 
 Consideremos um vocabulário definido por $V = \{w_1, w_2, ..., w_{ \vert V \vert }\}$ e uma sequência $S = [w_5, w_{17}, w_3, w_{42}, w_{11}]$. Vamos focar na posição atual $t=4$ (palavra $w_{11}$) e considerar todas as posições anteriores $i \in \{0, 1, 2, 3\}$.
 
@@ -676,7 +869,7 @@ Para entender o mecanismo de atenção, vamos analisar $6$ passos importantes:
 
     Este vetor de contexto $\mathbf{c}_4$ agora contém informações das posições relevantes $(0, 2, 4)$, com as posições não relevantes $(1, 3)$ efetivamente excluídas pelo mascaramento.
 
-#### Exemplo de Implementação: Agregação de Características de Pares com C++
+### Exemplo de Implementação: Agregação de Características de Pares com C++
 
 Vejamos como o mascaramento pode ser implementado em C++, aplicando a máscara *antes* de acumular os votos (demonstração conceitual):
 
@@ -900,7 +1093,7 @@ A atenta leitora já deve ter entendido a necessidade do mecanismo de atenção 
 
 Nesta altura da nossa jornada despontam no horizonte as operações matriciais que definem a atenção nos **Transformers**.
 
-### Atenção como Multiplicação de Matrizes: Aprendendo a Focar
+## Atenção como Multiplicação de Matrizes: Aprendendo a Focar
 
 Vou considerar que esperta leitora já entendeu a intuição da atenção como um mecanismo de foco seletivo, usando mascaramento ou ponderação para destacar informações relevantes. Nos resta encontrar uma forma de implementar essa tecnologia de forma eficiente permitindo ao modelo *aprender* quais informações são relevantes em cada contexto. Isso quer dizer que: *para ser eficiente, a máscara não pode ser fixa*. Isso quer dizer que *a máscara precisa ser criada de acordo com o contexto atual da palavra para a qual estamos tentando prever a próxima palavra e com o contexto das palavras que vieram antes*.
 
@@ -989,7 +1182,7 @@ Este mecanismo de atenção robusto e flexível é uma das principais inovaçõe
 
 Além disso, o mesmo mecanismo de atenção pode ser aplicado a diferentes partes da sequência, simultaneamente e em paralelo, permitindo que o modelo aprenda a focar em diferentes aspectos do contexto em diferentes momentos. Isso é especialmente útil em tarefas como tradução automática, onde o significado de uma palavra pode depender fortemente do contexto em que aparece.
 
-#### Exemplo numérico: Atenção com Máscara
+### Exemplo numérico: Atenção com Máscara
 
 Para ilustrar como funciona o mecanismo de atenção na prática, vamos trabalhar com um exemplo numérico simplificado. Neste exemplo vamos considerar uma sequência de $3$ palavras. Nesta sequência cada palavra está representada por um **embedding** de dimensão $d=4$.
 
@@ -1175,7 +1368,7 @@ Observamos que os pesos de atenção na matriz $\mathbf{A}$ estão relativamente
 
 Em um modelo **Transformer** real, os pesos $\mathbf{W}^Q, \mathbf{W}^K, \mathbf{W}^V$ são aprendidos durante o treinamento em grandes volumes de dados. O objetivo é que o modelo aprenda a gerar matrizes $\mathbf{Q}, \mathbf{K}, \mathbf{V}$ que resultem em padrões de atenção ($\mathbf{A}$) significativos e úteis para a tarefa em questão, destacando as interações relevantes entre as palavras.
 
-#### Exemplo de Código C++
+### Exemplo de Código C++
 
 O código C++ abaixo ilustra a implementação do mecanismo de atenção com máscara, utilizando a biblioteca Eigen para operações matriciais e o exemplo numérico que vimos anteriormente. O código é modular e pode ser facilmente adaptado para diferentes sequências e máscaras.
 
@@ -1336,7 +1529,7 @@ int main() {
 }
 ```
 
-### Processando o Contexto Ponderado: A Rede Feed-Forward
+## Processando o Contexto Ponderado: A Rede Feed-Forward
 
 Após o mecanismo de atenção calcular o vetor de contexto $C_t$ para cada palavra $t$ (que agora contém informação da própria palavra $t$ misturada com informações ponderadas de outras palavras relevantes na sequência), precisamos processar essa representação contextual.
 
@@ -1411,7 +1604,7 @@ Embora possamos *imaginar* que a **FFN** poderia aprender a detectar combinaçõ
 ![Cálculo da característica](/assets/images/feature-calculation-diagram.webp)
 _Figura 8: Ilustração de como uma camada linear (multiplicação por matriz de pesos W) pode, em princípio, ser configurada para detectar a presença/ausência de certas combinações no vetor de entrada (que seria o $C_t$ após a atenção). A ReLU subsequente ajudaria a "ativar" essas características detectadas._{: class="legend"}
 
-#### Exemplo de FFN em Código C++ 20
+### Exemplo de FFN em Código C++ 20
 
 O código C++ abaixo demonstra a aplicação de uma camada linear seguida por ReLU, como parte de uma FFN:
 
@@ -1556,7 +1749,7 @@ int main() {
 
 Portanto, um bloco típico de um **Transformer** consiste na aplicação do mecanismo de **auto-atenção** (para calcular o vetor de contexto $C_t$ para cada posição $t$, olhando para toda a sequência) seguido pela aplicação da **Rede Feed-Forward** (para processar cada $C_t$ independentemente). Frequentemente, conexões residuais e normalização de camada (*Layer Normalization*) são adicionadas em torno desses dois sub-blocos para facilitar o treinamento de redes profundas.
 
-### Conclusão e Perspectivas
+## Conclusão e Perspectivas
 
 Nesta jornada através da modelagem de sequências, partimos das Cadeias de Markov (modelos **N-gram**), reconhecendo sua simplicidade mas também suas limitações inerentes na captura de contexto de longo alcance. Vimos como a ideia conceitual de "pares com saltos" e "votação" nos levou à necessidade de um foco seletivo, que materializamos na intuição do **mascaramento** e da **atenção seletiva**.
 
@@ -1572,6 +1765,211 @@ Claro, há mais detalhes na arquitetura completa do **Transformer** que não cob
 * **Aplicações e Variações**: Uma visão geral do impacto dos **Transformers** e modelos derivados (BERT, GPT, etc.).
 
 Os conceitos que exploramos – modelagem sequencial, captura de contexto, e atenção seletiva – formam a base não apenas dos **Transformers**, mas de grande parte da pesquisa atual em inteligência artificial. Compreendê-los será como entender as nuances do mapa que o guiará nos vários mares do processamento de linguagens naturais.
+
+## Glossário - Transformers: Prestando Atenção
+
+### A
+
+**Agregação de Características de Pares**
+Técnica que considera a influência de todos os pares $(w_i, w_t)$ formados pela palavra atual $w_t$ e cada palavra anterior $w_i$ na sequência, permitindo capturar dependências de longo alcance sem aumentar a ordem dos N-gramas.
+
+**Atenção (Attention)**
+Mecanismo que permite ao modelo focar seletivamente em partes relevantes da sequência de entrada, calculado através da fórmula:
+$$\text{Attention}(Q, K, V) = \text{softmax}\left( \frac{QK^T}{\sqrt{d_k}} \right) V$$
+
+**Atenção Seletiva**
+Processo de focar dinamicamente nas características mais informativas, ignorando ou diminuindo o peso das demais através de técnicas como mascaramento.
+
+**Auto-atenção (Self-Attention)**
+Mecanismo onde cada palavra em uma sequência presta atenção a todas as outras palavras da mesma sequência, incluindo a si mesma.
+
+### B
+
+**Backpropagation**
+Algoritmo para calcular gradientes e atualizar pesos de modelos neurais através de operações matriciais diferenciáveis.
+
+**BERT (Bidirectional Encoder Representations from Transformers)**
+Modelo baseado na arquitetura Transformer que processa texto bidirecionalmente.
+
+### C
+
+**Cadeias de Markov**
+Processos estocásticos onde a probabilidade de um estado futuro depende apenas do estado presente, formalizados pela Propriedade de Markov:
+$$P(X_{n+1} = x | X_1 = x_1, ..., X_n = x_n) = P(X_{n+1} = x | X_n = x_n)$$
+
+**CBOW (Continuous Bag of Words)**
+Arquitetura do Word2Vec que prediz a palavra atual a partir das palavras vizinhas.
+
+### D
+
+**Diluição do Sinal**
+Problema onde a contribuição das características realmente informativas é reduzida pelo ruído das características menos úteis ao somar votos de muitas características.
+
+**Dot Product (Produto Escalar)**
+Operação matemática usada para calcular similaridade entre vetores Query e Key no mecanismo de atenção.
+
+### E
+
+**Embedding**
+Representação vetorial de palavras em um espaço contínuo de baixa dimensão $\vec{w} \in \mathbb{R}^d$ que captura propriedades semânticas e relações entre palavras.
+
+**Encoder-Decoder**
+Arquitetura onde um encoder processa a sequência de entrada e um decoder gera a sequência de saída.
+
+### F
+
+**FastText**
+Modelo de embedding que considera subpalavras (N-gramas de caracteres):
+$$\vec{w} = \frac{1}{|G_w|} \sum_{g \in G_w} \vec{z}_g$$
+
+**Feature (Característica)**
+Propriedade do texto que contribui para a definição da próxima palavra, como pares $(w_i, w_t)$ no modelo de agregação.
+
+**Feed-Forward Network (FFN)**
+Sub-rede neural aplicada independentemente a cada posição após o mecanismo de atenção:
+$$\text{FFN}(C_t) = \max(0, C_t W_1 + b_1)W_2 + b_2$$
+
+### G
+
+**GeLU (Gaussian Error Linear Unit)**
+Função de ativação definida como:
+$$\text{GeLU}(x) = x \cdot \Phi(x)$$
+onde $\Phi(x)$ é a função de distribuição cumulativa da distribuição normal padrão.
+
+**GloVe (Global Vectors)**
+Modelo de embedding que combina estatísticas globais de co-ocorrência com aprendizado local de contexto.
+
+**GPT (Generative Pre-trained Transformer)**
+Modelo baseado na arquitetura Transformer para geração de texto.
+
+### H
+
+**Produto de Hadamard**
+Multiplicação elemento a elemento entre matrizes de mesmas dimensões:
+$$(A \circ B)_{ij} = A_{ij} \cdot B_{ij}$$
+
+### K
+
+**Key (Chave)**
+No mecanismo de atenção, vetor associado a cada palavra que pode ser comparado com a Query para determinar relevância, obtido através de $K = XW^K$.
+
+### L
+
+**Lei de Zipf**
+Lei que governa a distribuição de frequências de palavras naturais:
+$$f(k) \propto \frac{1}{k^s}$$
+onde $s \approx 1$ para linguagem natural.
+
+**LSTM (Long Short-Term Memory)**
+Arquitetura de rede neural recorrente capaz de aprender dependências de longo prazo.
+
+### M
+
+**Maldição da Dimensionalidade**
+Fenômeno onde a densidade de dados no espaço de N-gramas diminui exponencialmente conforme $N$ aumenta.
+
+**Máscara**
+Vetor de pesos que atribui valores altos às características importantes e valores baixos às irrelevantes, aplicado através do produto Hadamard.
+
+**Mascaramento**
+Técnica para zerar ou reduzir scores de posições não relevantes, permitindo foco seletivo em informações importantes.
+
+**Multi-Head Attention**
+Mecanismo que executa múltiplas instâncias de atenção em paralelo, cada uma focando em diferentes aspectos da sequência.
+
+### N
+
+**N-grama**
+Sequência contígua de $N$ itens (palavras) em um texto, onde o número de possíveis N-gramas únicos é $|V|^N$.
+
+**Normalização**
+Processo de converter scores brutos em distribuições de probabilidade, frequentemente usando softmax.
+
+### O
+
+**Operações Matriciais Diferenciáveis**
+Funções que mapeiam matrizes mantendo propriedades de diferenciabilidade, essenciais para algoritmos de otimização em aprendizado profundo.
+
+### P
+
+**Positional Encoding**
+Técnica para reintroduzir informação sobre a ordem das palavras na arquitetura Transformer.
+
+**Produto Escalar Escalonado (Scaled Dot-Product)**
+Mecanismo central do Transformer que calcula atenção através de:
+$$\frac{QK^T}{\sqrt{d_k}}$$
+
+**Propriedade de Markov**
+Propriedade onde a probabilidade de um estado futuro depende apenas do estado presente, não de estados anteriores.
+
+### Q
+
+**Query (Consulta)**
+No mecanismo de atenção, vetor que representa a palavra/posição atual, atuando como "sonda" para buscar informações relevantes, obtido através de $Q = XW^Q$.
+
+### R
+
+**ReLU (Rectified Linear Unit)**
+Função de ativação definida como:
+$$\text{ReLU}(x) = \max(0, x)$$
+
+**RNN (Recurrent Neural Network)**
+Arquitetura de rede neural que processa sequências de forma recorrente.
+
+### S
+
+**Self-Attention**
+Ver Auto-atenção.
+
+**Similaridade de Cosseno**
+Medida de similaridade entre vetores:
+$$\text{sim}(\vec{w}_i, \vec{w}_j) = \frac{\vec{w}_i \cdot \vec{w}_j}{|\vec{w}_i| \cdot |\vec{w}_j|}$$
+
+**Skip-gram**
+Arquitetura do Word2Vec que prediz palavras vizinhas a partir da palavra atual.
+
+**Softmax**
+Função que converte um vetor de números reais em distribuição de probabilidade:
+$$\text{softmax}(\mathbf{z})_i = \frac{e^{z_i}}{\sum_{j=1}^{n} e^{z_j}}$$
+
+**Smoothing (Suavização)**
+Técnicas para lidar com N-gramas não observados durante o treinamento, evitando probabilidades zero.
+
+### T
+
+**Transformer**
+Arquitetura de rede neural baseada exclusivamente em mecanismos de atenção, introduzida no artigo "Attention is All You Need".
+
+**Transposta de Matriz**
+Operação que troca linhas e colunas de uma matriz, denotada como $K^T$.
+
+### V
+
+**Value (Valor)**
+No mecanismo de atenção, vetor contendo informação que será propagada se a palavra for considerada relevante, obtido através de $V = XW^V$.
+
+**Vetorização por Razão de Verossimilhança**
+Técnica que compara padrões locais de um documento com padrões gerais do corpus.
+
+**Voto**
+Na analogia de agregação de características, peso que uma característica específica atribui a uma palavra candidata como próxima palavra.
+
+### W
+
+**Word2Vec**
+Modelo desenvolvido pelo Google para aprender embeddings de palavras usando redes neurais.
+
+## Símbolos Matemáticos
+
+- $|V|$: Tamanho do vocabulário
+- $d$: Dimensão dos embeddings
+- $d_k$: Dimensão dos vetores Key/Query
+- $d_{model}$: Dimensão do modelo
+- $d_{ff}$: Dimensão da camada feed-forward
+- $w_t$: Palavra na posição $t$
+- $C_t$: Vetor de contexto para posição $t$
+- $\alpha_{ij}$: Peso de atenção entre posições $i$ e $j$
+- $\mathbf{W}^Q, \mathbf{W}^K, \mathbf{W}^V$: Matrizes de transformação para Query, Key e Value
 
 ## Referências Bibliográficas
 
