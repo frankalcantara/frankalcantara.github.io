@@ -20,7 +20,7 @@ featured: false
 rating: 5
 description: ""
 date: 2025-02-10T22:55:34.524Z
-preview: Neste artigo, partimos da modelagem de sequências textuais. E construimos gradualmente a intuição sobre modelos mais sofisticados, como a atenção, fundamentais para a arquitetura Transformer.
+preview: Neste artigo, partimos da modelagem de sequências textuais. E construímos gradualmente a intuição sobre modelos mais sofisticados, como a atenção, fundamentais para a arquitetura Transformer.
 keywords: |-
     transformers
     cadeias de Markov
@@ -35,7 +35,7 @@ keywords: |-
     lstm
 toc: true
 published: true
-lastmod: 2025-05-25T22:08:29.961Z
+lastmod: 2025-05-26T02:35:11.337Z
 ---
 
 ## Superando Limitações Locais: Construindo a Ponte para a Atenção
@@ -109,7 +109,7 @@ Neste cenário que acabamos de criar, para determinar a sequência correta de pa
 
 Será uma palavra, `programa` ou `bateria`, que determinará o pronome e o verbo seguintes. Esta palavra importante está significativamente distante na sequência de palavras. Um modelo de Markov tradicional exigiria uma ordem $N$ inviável, $N > 8$, para capturar essa dependência com [os modelos que vimos antes](https://frankalcantara.com/transformers-desvendando-modelagem-de-sequencias/) em qualquer texto do mundo real.
 
-Para superar a visão estritamente local dos modelos **N-gram**, discutidos em detalhe no [artigo anterior](https://frankalcantara.com/transformers-desvendando-modelagem-de-sequencias/), foram, ao longo do tempo, propostas algumas alternativas interessantes: 
+Para superar a visão estritamente local dos modelos **N-gram**, discutidos em detalhe no [artigo anterior](https://frankalcantara.com/transformers-desvendando-modelagem-de-sequencias/), foram, ao longo do tempo, propostas algumas alternativas interessantes:
 
 1. Modelos Probabilísticos Estendidos
 
@@ -170,7 +170,7 @@ Para superar a visão estritamente local dos modelos **N-gram**, discutidos em d
 
 Cada uma dessas abordagens representou um passo incremental na direção de superar as limitações dos modelos **N-gram**, culminando no desenvolvimento da arquitetura **Transformer** que combina eficiência computacional com capacidade de modelar dependências arbitrariamente longas.
 
-Vamos nos concentrar em uma abordagem na qual A ideia central será: 
+Vamos nos concentrar em uma abordagem na qual A ideia central será:
 
 ***ao tentar prever a palavra que segue a palavra atual, $w_t$, em vez de depender apenas do contexto imediatamente anterior, como no par $(w_{t-1}, w_t)$ para bigramas ou a janela fixa dos **N-grams**, vamos considerar a influência potencial de todas as palavras $w_i$ que apareçam antes de $w_t$ na sequência***.
 
@@ -186,7 +186,7 @@ Pense sobre as *features* da seguinte forma: *cada par $(w_i, w_t)$ representa u
 
 Para construir a intuição, usaremos frequentemente a analogia de um **voto**, embora o termo técnico mais geral seja **peso**. Não se preocupe, a palavra **peso** se tornará mais prevalente à medida que avançarmos para mecanismos mais complexos.
 
-Ainda estamos considerando os documentos: 
+Ainda estamos considerando os documentos:
 
 - $D_1$ = `Verifique o log do programa e descubra se ele foi executado, por favor.`;
 - $D_2$ = `Verifique o log da bateria e descubra se ela acabou, por favor.`.
@@ -305,7 +305,7 @@ Todo o conceito que vimos até aqui pode ser reduzido a três passos:
 
     A palavra $w_k$ com o maior $Score$ agregado é a previsão do modelo. A Figura 2 ilustra a etapa antes dessa agregação final, mostrando os votos individuais $\text{Voto}(w_k  \vert  w_i, w_t)$ para $w_t = \text{"executado"}$ e vários $w_i$.
 
-Eu parti de um exemplo simples, livre, leve e solto, para que a esforçada leitora tenha uma chance maior de entender a ideia. Mas, a criativa leitora deve extrapolar essa abordagem e entender que ela pode ser aplicada a sequências muito mais longas e complexas. 
+Eu parti de um exemplo simples, livre, leve e solto, para que a esforçada leitora tenha uma chance maior de entender a ideia. Mas, a criativa leitora deve extrapolar essa abordagem e entender que ela pode ser aplicada a sequências muito mais longas e complexas.
 
 O conceito que deve permanecer é que, ao considerar todos os pares $(w_i, w_t)\;$, podemos capturar dependências de longo alcance que seriam impossíveis com um modelo **N-gram** tradicional. Talvez um exemplo mais complexo ajude a fixar a ideia.
 
@@ -686,12 +686,12 @@ Para entender o mecanismo de atenção, vamos analisar $6$ passos importantes:
     >
     Alguns modelos populares de word embeddings incluem:
     >
-    >* **Word2Vec**: desenvolvido pelo Google em 2013, usando redes neurais para prever palavras vizinhas (**skipgram**) ou a palavra atual a partir das vizinhas (**CBOW**). **A esforçada leitora deveria ler [este artigo](https://frankalcantara.com/transformers-cinco/) antes de continuar.**
-    >* **GloVe**: desenvolvido por Stanford, combinando estatísticas globais de co-ocorrência $X_{ij}$ com aprendizado local de contexto, dado por:
+    >- **Word2Vec**: desenvolvido pelo Google em 2013, usando redes neurais para prever palavras vizinhas (**skipgram**) ou a palavra atual a partir das vizinhas (**CBOW**). **A esforçada leitora deveria ler [este artigo](https://frankalcantara.com/transformers-cinco/) antes de continuar.**
+    >- **GloVe**: desenvolvido por Stanford, combinando estatísticas globais de co-ocorrência $X_{ij}$ com aprendizado local de contexto, dado por:
     >
     >$$J = \sum_{i,j=1}^{ \vert V \vert } f(X_{ij})(\vec{w}_i^T\vec{w}_j + b_i + b_j - \log X_{ij})^2$$
     >
-    >* **FastText**: desenvolvido pelo Facebook, considera subpalavras (**N-grams** de caracteres) para lidar melhor com palavras raras e morfologia:
+    >- **FastText**: desenvolvido pelo Facebook, considera subpalavras (**N-grams** de caracteres) para lidar melhor com palavras raras e morfologia:
     >
     > $$\vec{w} = \frac{1}{ \vert G_w \vert } \sum_{g \in G_w} \vec{z}_g$$
     >
@@ -725,17 +725,19 @@ Para entender o mecanismo de atenção, vamos analisar $6$ passos importantes:
 
     Cada projeção serve a um propósito específico:
 
-    * $\mathbf{Q}$ (Query): codifica como uma palavra "busca" informações relevantes;
-    * $\mathbf{K}$ (Key): determina como uma palavra "responde" a buscas;
-    * $\mathbf{V}$ (Value): contém a informação semântica efetiva a ser propagada.
+    - $\mathbf{Q}$ (Query): codifica como uma palavra "busca" informações relevantes;
+
+    - $\mathbf{K}$ (Key): determina como uma palavra "responde" a buscas;
+
+    - $\mathbf{V}$ (Value): contém a informação semântica efetiva a ser propagada.
 
     Sem estas transformações, o mecanismo de atenção seria limitado à equação:
 
-    $$\text{Attention}(\mathbf{X}, \mathbf{X}, \mathbf{X}) = \text{softmax}\left(\frac{\mathbf{X}\mathbf{X}^T}{\sqrt{d}}\right)\mathbf{X}$$
+    $$\text{Attention}(\mathbf{X}, \mathbf{X}, \mathbf{X}) = \text{softmax}\left(\frac{\mathbf{X}\mathbf{X}^T}{\sqrt{d} }\right)\mathbf{X}$$
 
     O uso de parâmetros separados $\mathbf{W}^Q, \mathbf{W}^K, \mathbf{W}^V$ aumenta significativamente os graus de liberdade do modelo:
 
-    $$\text{Attention}(\mathbf{X}\mathbf{W}^Q, \mathbf{X}\mathbf{W}^K, \mathbf{X}\mathbf{W}^V) = \text{softmax}\left(\frac{\mathbf{X}\mathbf{W}^Q(\mathbf{X}\mathbf{W}^K)^T}{\sqrt{d_k}}\right)\mathbf{X}\mathbf{W}^V$$
+    $$\text{Attention}(\mathbf{X}\mathbf{W}^Q, \mathbf{X}\mathbf{W}^K, \mathbf{X}\mathbf{W}^V) = \text{softmax}\left(\frac{\mathbf{X}\mathbf{W}^Q(\mathbf{X}\mathbf{W}^K)^T}{\sqrt{d_k} }\right)\mathbf{X}\mathbf{W}^V$$
 
     ***As matrizes $\mathbf{W}^Q, \mathbf{W}^K, \mathbf{W}^V$ são os parâmetros aprendidos durante o treinamento***, permitindo que o modelo se adapte dinamicamente em relação às características mais relevantes para a tarefa em questão. O modelo aprende:
 
@@ -815,8 +817,8 @@ Para entender o mecanismo de atenção, vamos analisar $6$ passos importantes:
 
     2. **Diferenciabilidade**: a função é suave e tem derivadas bem definidas em todos os pontos, facilitando o treinamento por gradiente descendente:
 
-        $$\frac{\partial \text{softmax}(\mathbf{z})_i}{\partial z_j} = 
-        \begin{cases} 
+        $$\frac{\partial \text{softmax}(\mathbf{z})_i}{\partial z_j} =
+        \begin{cases}
         \text{softmax}(\mathbf{z})_i(1-\text{softmax}(\mathbf{z})_i) & \text{se } i = j \\
         -\text{softmax}(\mathbf{z})_i\text{softmax}(\mathbf{z})_j & \text{se } i \neq j
         \end{cases}$$
@@ -831,7 +833,7 @@ Para entender o mecanismo de atenção, vamos analisar $6$ passos importantes:
 
         Esta propriedade é frequentemente explorada para estabilidade numérica:
 
-        $$\text{softmax}(\mathbf{z})_i = \frac{e^{z_i-\max(\mathbf{z})}}{\sum_{j=1}^{n} e^{z_j-\max(\mathbf{z})}}$$
+        $$\text{softmax}(\mathbf{z})_i = \frac{e^{z_i-\max(\mathbf{z})} }{\sum_{j=1}^{n} e^{z_j-\max(\mathbf{z})} }$$
 
     No contexto do mecanismo de atenção em **Transformers**, a função softmax normaliza os scores de atenção em pesos que somam $1$:
 
@@ -1115,23 +1117,23 @@ Para que seja possível que os modelos possam aprender esses padrões de atenç�
 >
 >1. **Adição de Matrizes**: $f(A, B) = A + B$
 >
->* Derivada: $\frac{\partial f}{\partial A} = I$, $\frac{\partial f}{\partial B} = I$
+>>- Derivada: $\frac{\partial f}{\partial A} = I$, $\frac{\partial f}{\partial B} = I$
 >
 >2. **Multiplicação de Matrizes**: $f(A, B) = AB$
 >
->* Derivada: $\frac{\partial f}{\partial A} = B^T$, $\frac{\partial f}{\partial B} = A^T$
+>>- Derivada: $\frac{\partial f}{\partial A} = B^T$, $\frac{\partial f}{\partial B} = A^T$
 >
 >3. **Traço de Matriz**: $f(A) = \text{tr}(A)$
 >
->* Derivada: $\frac{\partial f}{\partial A} = I$
+>>- Derivada: $\frac{\partial f}{\partial A} = I$
 >
 >4. **Determinante de Matriz**: $f(A) = \det(A)$
 >
->* Derivada: $\frac{\partial f}{\partial A} = \det(A) \cdot (A^{-1})^T$
+>>- Derivada: $\frac{\partial f}{\partial A} = \det(A) \cdot (A^{-1})^T$
 >
 >5. **Inversa de Matriz**: $f(A) = A^{-1}$
 >
->* Derivada: $\frac{\partial f}{\partial A_{ij}} = -(A^{-1})_{ik}(A^{-1})_{lj}$
+>>- Derivada: $\frac{\partial f}{\partial A_{ij}} = -(A^{-1})_{ik}(A^{-1})_{lj}$
 >
 > Estas operações são essenciais em algoritmos de otimização, especialmente em aprendizado profundo, onde a retropropagação é usada para calcular gradientes e atualizar pesos de modelos. Elas permitem que os modelos aprendam a partir de dados, ajustando seus parâmetros para minimizar funções de perda.
 
@@ -1175,10 +1177,10 @@ _Figura 6: A equação de atenção completa. O termo $QK^T$ calcula a similarid
 
 Este mecanismo de atenção robusto e flexível é uma das principais inovações dos **Transformers**. Ele permite que o modelo:
 
-* Capture dependências de longo alcance entre palavras, mesmo em sequências longas;
-* Atenue a influência de palavras irrelevantes, focando apenas nas mais relevantes para a tarefa em questão;
-* Ajuste dinamicamente a atenção com base no contexto, aprendendo quais palavras são mais relevantes em cada situação;
-* Permita que o modelo aprenda a importância relativa de diferentes palavras, sem depender de uma estrutura fixa ou pré-definida.
+- Capture dependências de longo alcance entre palavras, mesmo em sequências longas;
+- Atenue a influência de palavras irrelevantes, focando apenas nas mais relevantes para a tarefa em questão;
+- Ajuste dinamicamente a atenção com base no contexto, aprendendo quais palavras são mais relevantes em cada situação;
+- Permita que o modelo aprenda a importância relativa de diferentes palavras, sem depender de uma estrutura fixa ou pré-definida.
 
 Além disso, o mesmo mecanismo de atenção pode ser aplicado a diferentes partes da sequência, simultaneamente e em paralelo, permitindo que o modelo aprenda a focar em diferentes aspectos do contexto em diferentes momentos. Isso é especialmente útil em tarefas como tradução automática, onde o significado de uma palavra pode depender fortemente do contexto em que aparece.
 
@@ -1318,9 +1320,9 @@ Para ilustrar como funciona o mecanismo de atenção na prática, vamos trabalha
 
     Calculando o softmax para cada linha (arredondado para 4 casas decimais):
 
-    * Linha 1: $\text{softmax}([0.0449, 0.0210, 0.0600]) \approx [0.3343, 0.3264, 0.3393]$
-    * Linha 2: $\text{softmax}([0.0482, 0.0007, -0.0035]) \approx [0.3445, 0.3285, 0.3270]$
-    * Linha 3: $\text{softmax}([0.0401, 0.0454, 0.0428]) \approx [0.3324, 0.3342, 0.3334]$
+    - Linha 1: $\text{softmax}([0.0449, 0.0210, 0.0600]) \approx [0.3343, 0.3264, 0.3393]$
+    - Linha 2: $\text{softmax}([0.0482, 0.0007, -0.0035]) \approx [0.3445, 0.3285, 0.3270]$
+    - Linha 3: $\text{softmax}([0.0401, 0.0454, 0.0428]) \approx [0.3324, 0.3342, 0.3334]$
 
     $$
     \mathbf{A} \approx
@@ -1543,12 +1545,12 @@ O nosso novo objetivo será transformar $C_t$ em uma saída que possa ser usada 
 >
 > $$\text{FFN}(C_t) = \max(0, C_t W_1 + b_1)W_2 + b_2$$
 >
-> onde:
+> Na qual, temos:
 >
-> * $C_t$ é o vetor de contexto para a posição $t$ após o mecanismo de atenção;
-> * $W_1 \in \mathbb{R}^{d_{\text{model}} \times d_{\text{ff}}}$ e $W_2 \in \mathbb{R}^{d_{\text{ff}} \times d_{\text{model}}}$ são matrizes de peso;
-> * $b_1 \in \mathbb{R}^{d_{\text{ff}}}$ e $b_2 \in \mathbb{R}^{d_{\text{model}}}$ são vetores de bias;
-> * $\max(0, x)$ é a função de ativação ReLU (*Rectified Linear Unit*).
+>- $C_t$ é o vetor de contexto para a posição $t$ após o mecanismo de atenção;
+>- $W_1 \in \mathbb{R}^{d_{\text{model}} \times d_{\text{ff}}}$ e $W_2 \in \mathbb{R}^{d_{\text{ff}} \times d_{\text{model}}}$ são matrizes de peso;
+>- $b_1 \in \mathbb{R}^{d_{\text{ff}}}$ e $b_2 \in \mathbb{R}^{d_{\text{model}}}$ são vetores de bias;
+>- $\max(0, x)$ é a função de ativação ReLU (*Rectified Linear Unit*).
 >
 > A primeira transformação linear tipicamente expande a dimensão ($d_{\text{ff}} \approx 4 \times d_{\text{model}}$), e a segunda projeta de volta para a dimensão original. Esta estrutura permite que a rede aprenda representações complexas e não-lineares do contexto capturado pelo mecanismo de atenção.
 >
@@ -1563,7 +1565,7 @@ Neste caso, $W_1, b_1, W_2, b_2$ são matrizes de pesos e vetores de bias aprend
 ![Diagrama da camada de rede neural](/assets//images/ffn-layer-diagram.webp)
 _Figura 7: Diagrama conceitual de uma camada de rede neural. A FFN nos**Transformers**aplica transformações semelhantes (lineares + não-linearidade) ao vetor de contexto de cada posição._{: class="legend"}
 
-A não-linearidade (ReLU/GeLU) permite que a **FFN** aprenda transformações complexas e não apenas combinações lineares das informações presentes no vetor de contexto $C_t$. 
+A não-linearidade (ReLU/GeLU) permite que a **FFN** aprenda transformações complexas e não apenas combinações lineares das informações presentes no vetor de contexto $C_t$.
 
 > **Funções de Ativação: ReLU e GeLU**
 >
@@ -1577,9 +1579,9 @@ A não-linearidade (ReLU/GeLU) permite que a **FFN** aprenda transformações co
 >
 > Esta função simples mantém valores positivos inalterados e converte valores negativos em zero. Suas vantagens incluem:
 >
-> * Cálculo computacionalmente eficiente
-> * Mitigação do problema de gradientes que desaparecem
-> * Indução de esparsidade nas ativações
+> - Cálculo computacionalmente eficiente
+> - Mitigação do problema de gradientes que desaparecem
+> - Indução de esparsidade nas ativações
 >
 > **GeLU (Gaussian Error Linear Unit):**
 >
@@ -1593,9 +1595,9 @@ A não-linearidade (ReLU/GeLU) permite que a **FFN** aprenda transformações co
 >
 > A GeLU suaviza a transição em torno de zero, ponderando cada valor de entrada pela probabilidade de ser positivo sob uma distribuição normal. Comparada à ReLU, a GeLU:
 >
-> * Oferece gradientes não-nulos para entradas negativas
-> * Apresenta comportamento mais suave
-> * Frequentemente leva a melhor desempenho em tarefas de linguagem natural
+> - Oferece gradientes não-nulos para entradas negativas
+> - Apresenta comportamento mais suave
+> - Frequentemente leva a melhor desempenho em tarefas de linguagem natural
 >
 > Ambas as funções permitem que a rede neural aprenda representações não-lineares complexas dos dados de entrada, essenciais para o poder expressivo dos modelos **Transformer** modernos.
 
@@ -1759,10 +1761,10 @@ A perspicaz leitora percebeu que construímos os fundamentos conceituais que jus
 
 Claro, há mais detalhes na arquitetura completa do **Transformer** que não cobrimos aqui. Em um artigo futuro, iremos navegar em mares mais profundos, explorando:
 
-* **Atenção Multi-Cabeça (Multi-Head Attention)**: Como o modelo aprende a prestar atenção a diferentes aspectos da sequência simultaneamente.
-* **Codificação Posicional (Positional Encoding)**: Como a informação sobre a ordem das palavras, perdida pela atenção que trata a sequência como um conjunto, é reintroduzida.
-* **Arquitetura Completa Encoder-Decoder**: Como esses blocos são empilhados e combinados para tarefas como tradução automática.
-* **Aplicações e Variações**: Uma visão geral do impacto dos **Transformers** e modelos derivados (BERT, GPT, etc.).
+- **Atenção Multi-Cabeça (Multi-Head Attention)**: Como o modelo aprende a prestar atenção a diferentes aspectos da sequência simultaneamente.
+- **Codificação Posicional (Positional Encoding)**: Como a informação sobre a ordem das palavras, perdida pela atenção que trata a sequência como um conjunto, é reintroduzida.
+- **Arquitetura Completa Encoder-Decoder**: Como esses blocos são empilhados e combinados para tarefas como tradução automática.
+- **Aplicações e Variações**: Uma visão geral do impacto dos **Transformers** e modelos derivados (BERT, GPT, etc.).
 
 Os conceitos que exploramos – modelagem sequencial, captura de contexto, e atenção seletiva – formam a base não apenas dos **Transformers**, mas de grande parte da pesquisa atual em inteligência artificial. Compreendê-los será como entender as nuances do mapa que o guiará nos vários mares do processamento de linguagens naturais.
 
@@ -1775,6 +1777,7 @@ Técnica que considera a influência de todos os pares $(w_i, w_t)$ formados pel
 
 **Atenção (Attention)**
 Mecanismo que permite ao modelo focar seletivamente em partes relevantes da sequência de entrada, calculado através da fórmula:
+
 $$\text{Attention}(Q, K, V) = \text{softmax}\left( \frac{QK^T}{\sqrt{d_k}} \right) V$$
 
 **Atenção Seletiva**
@@ -1795,6 +1798,7 @@ Modelo baseado na arquitetura Transformer que processa texto bidirecionalmente.
 
 **Cadeias de Markov**
 Processos estocásticos onde a probabilidade de um estado futuro depende apenas do estado presente, formalizados pela Propriedade de Markov:
+
 $$P(X_{n+1} = x | X_1 = x_1, ..., X_n = x_n) = P(X_{n+1} = x | X_n = x_n)$$
 
 **CBOW (Continuous Bag of Words)**
@@ -1820,6 +1824,7 @@ Arquitetura onde um encoder processa a sequência de entrada e um decoder gera a
 
 **FastText**
 Modelo de embedding que considera subpalavras (N-gramas de caracteres):
+
 $$\vec{w} = \frac{1}{|G_w|} \sum_{g \in G_w} \vec{z}_g$$
 
 **Feature (Característica)**
@@ -1827,14 +1832,17 @@ Propriedade do texto que contribui para a definição da próxima palavra, como 
 
 **Feed-Forward Network (FFN)**
 Sub-rede neural aplicada independentemente a cada posição após o mecanismo de atenção:
+
 $$\text{FFN}(C_t) = \max(0, C_t W_1 + b_1)W_2 + b_2$$
 
 ### G
 
 **GeLU (Gaussian Error Linear Unit)**
 Função de ativação definida como:
+
 $$\text{GeLU}(x) = x \cdot \Phi(x)$$
-onde $\Phi(x)$ é a função de distribuição cumulativa da distribuição normal padrão.
+
+Na qual, $\Phi(x)$ é a função de distribuição cumulativa da distribuição normal padrão.
 
 **GloVe (Global Vectors)**
 Modelo de embedding que combina estatísticas globais de co-ocorrência com aprendizado local de contexto.
@@ -1846,6 +1854,7 @@ Modelo baseado na arquitetura Transformer para geração de texto.
 
 **Produto de Hadamard**
 Multiplicação elemento a elemento entre matrizes de mesmas dimensões:
+
 $$(A \circ B)_{ij} = A_{ij} \cdot B_{ij}$$
 
 ### K
@@ -1857,8 +1866,10 @@ No mecanismo de atenção, vetor associado a cada palavra que pode ser comparado
 
 **Lei de Zipf**
 Lei que governa a distribuição de frequências de palavras naturais:
+
 $$f(k) \propto \frac{1}{k^s}$$
-onde $s \approx 1$ para linguagem natural.
+
+Na qual $s \approx 1$ para linguagem natural.
 
 **LSTM (Long Short-Term Memory)**
 Arquitetura de rede neural recorrente capaz de aprender dependências de longo prazo.
@@ -1897,6 +1908,7 @@ Técnica para reintroduzir informação sobre a ordem das palavras na arquitetur
 
 **Produto Escalar Escalonado (Scaled Dot-Product)**
 Mecanismo central do Transformer que calcula atenção através de:
+
 $$\frac{QK^T}{\sqrt{d_k}}$$
 
 **Propriedade de Markov**
@@ -1911,6 +1923,7 @@ No mecanismo de atenção, vetor que representa a palavra/posição atual, atuan
 
 **ReLU (Rectified Linear Unit)**
 Função de ativação definida como:
+
 $$\text{ReLU}(x) = \max(0, x)$$
 
 **RNN (Recurrent Neural Network)**
@@ -1923,6 +1936,7 @@ Ver Auto-atenção.
 
 **Similaridade de Cosseno**
 Medida de similaridade entre vetores:
+
 $$\text{sim}(\vec{w}_i, \vec{w}_j) = \frac{\vec{w}_i \cdot \vec{w}_j}{|\vec{w}_i| \cdot |\vec{w}_j|}$$
 
 **Skip-gram**
@@ -1930,6 +1944,7 @@ Arquitetura do Word2Vec que prediz palavras vizinhas a partir da palavra atual.
 
 **Softmax**
 Função que converte um vetor de números reais em distribuição de probabilidade:
+
 $$\text{softmax}(\mathbf{z})_i = \frac{e^{z_i}}{\sum_{j=1}^{n} e^{z_j}}$$
 
 **Smoothing (Suavização)**

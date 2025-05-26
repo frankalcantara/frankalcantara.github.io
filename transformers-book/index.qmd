@@ -1,0 +1,66 @@
+# Prefácio {.unnumbered}
+
+Este livro apresenta uma jornada completa pelos **Transformers**, desde os fundamentos matemáticos até implementações práticas em C++. O objetivo é fornecer uma compreensão profunda e rigorosa destes modelos que revolucionaram o processamento de linguagem natural.
+
+## Sobre Esta Obra
+
+Os **Transformers**, introduzidos no artigo "Attention is All You Need" (2017), tornaram-se a base dos modelos de linguagem mais avançados da atualidade. Este livro explora:
+
+- **Fundamentos Matemáticos**: Álgebra linear, cálculo vetorial e operações matriciais
+- **Representação de Linguagem**: De tokens a embeddings densos
+- **Redes Neurais**: Arquiteturas, treinamento e otimização
+- **Word Embeddings**: CBOW, Skip-gram e representações distribuídas
+- **Arquitetura Transformer**: Mecanismos de atenção, codificadores e decodificadores
+- **Implementações**: Código completo em C++20 com explicações detalhadas
+
+## Filosofia de Ensino
+
+> "What I cannot create, I do not understand."  
+> — Richard Feynman
+
+Seguindo a filosofia de Feynman, este livro combina teoria rigorosa com implementações práticas. Cada conceito é acompanhado de:
+
+- Formulações matemáticas precisas
+- Exemplos numéricos trabalhados passo a passo
+- Implementações completas em C++20
+- Diagramas e visualizações explicativas
+
+## Pré-requisitos
+
+Para aproveitar completamente este livro, o leitor deve ter:
+
+- Conhecimento básico de álgebra linear
+- Familiaridade com programação (preferencialmente C++)
+- Conceitos introdutórios de aprendizado de máquina
+- Matemática de nível universitário (cálculo diferencial)
+
+## Estrutura do Livro
+
+**Parte I - Fundamentos**
+- Capítulo 1: Matemática dos Transformers
+- Capítulo 2: Representação de Linguagem Natural
+- Capítulo 3: Redes Neurais Artificiais
+
+**Parte II - Word Embeddings**
+- Capítulo 4: Modelos de Embedding
+- Capítulo 5: Implementações e Treinamento
+
+**Parte III - Transformers**
+- Capítulo 6: Arquitetura e Mecanismos de Atenção
+- Capítulo 7: Implementações Avançadas
+
+## Convenções
+
+- **Vetores**: representados por letras minúsculas em negrito ($\mathbf{v}$)
+- **Matrizes**: representadas por letras maiúsculas em negrito ($\mathbf{W}$)
+- **Escalares**: representados por letras em itálico ($x$)
+- **Código**: apresentado em blocos destacados com explicações detalhadas
+
+## Agradecimentos
+
+Este trabalho foi desenvolvido ao longo de meses de pesquisa e implementação, combinando conhecimentos teóricos com experiência prática no desenvolvimento de sistemas de processamento de linguagem natural.
+
+---
+
+**Frank Alcantara**  
+2025
