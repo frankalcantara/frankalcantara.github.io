@@ -35,7 +35,7 @@ keywords: |-
     lstm
 toc: true
 published: true
-lastmod: 2025-05-26T02:35:11.337Z
+lastmod: 2025-05-26T02:40:07.175Z
 ---
 
 ## Superando Limitações Locais: Construindo a Ponte para a Atenção
@@ -664,44 +664,44 @@ Para entender o mecanismo de atenção, vamos analisar $6$ passos importantes:
 
 1. **Representação vetorial (embeddings)**
 
-    >Em processamento de linguagem natural, um **embedding** é uma representação vetorial de palavras, frases ou outros elementos linguísticos em um espaço contínuo de baixa dimensão. É uma técnica fundamental que permite converter palavras, elementos discretos, em vetores numéricos $\vec{w} \in \mathbb{R}^d$ que capturem suas propriedades semânticas e relações com outras palavras.
-    >
-    >As principais características dos **embeddings** são:
-    >
-    >1. **Representação densa em vetor**: cada palavra $w$ é mapeada para um vetor $\vec{w} = [w_1, w_2, ..., w_d]$ de números reais, tipicamente com dimensões entre $50 \leq d \leq 300$ elementos, em vez de um vetor *one-hot esparso com milhares ou milhões de dimensões*.
-    >
-    >2. **Preservação de similaridade semântica**: palavras com significados semelhantes ficam próximas no espaço vetorial. A similaridade é frequentemente medida usando a **similaridade de cosseno**, dada por:
-    >
-    > $$\text{sim}(\vec{w}_i, \vec{w}_j) = \frac{\vec{w}_i \cdot \vec{w}_j}{ \vert \vec{w}_i \vert  \cdot  \vert \vec{w}_j \vert }$$
-    >
-    >3. **Captura de relações analógicas**: **embeddings** resultantes de um bom treinamento podem capturar relações como "rei está para rainha assim como homem está para mulher" através de operações vetoriais simples, como:
-    >
-    > $$\vec{v}_{\text{rei}} - \vec{v}_{\text{homem}} + \vec{v}_{\text{mulher}} \approx \vec{v}_{\text{rainha}}$$
-    >
-    >4. **Aprendizado por contexto**: os **embeddings** são geralmente aprendidos em um treinamento baseado na observação de como as palavras aparecem em contextos semelhantes usando grandes corpus de texto, otimizando uma função objetivo como:
-    >
-    > $$J(\theta) = \frac{1}{T} \sum_{t=1}^{T} \sum_{-c \leq j \leq c, j \neq 0} \log p(w_{t+j}  \; \vert  w_t)$$
-    >
-    >Neste caso, $c$ é o tamanho da janela de contexto e $p(w_{t+j} \vert w_t)$ é a probabilidade de observar a palavra $w_{t+j}$ dado $w_t$.
-    >
+    Em processamento de linguagem natural, um **embedding** é uma representação vetorial de palavras, frases ou outros elementos linguísticos em um espaço contínuo de baixa dimensão. É uma técnica fundamental que permite converter palavras, elementos discretos, em vetores numéricos $\vec{w} \in \mathbb{R}^d$ que capturem suas propriedades semânticas e relações com outras palavras.
+
+    As principais características dos **embeddings** são:
+
+    1. **Representação densa em vetor**: cada palavra $w$ é mapeada para um vetor $\vec{w} = [w_1, w_2, ..., w_d]$ de números reais, tipicamente com dimensões entre $50 \leq d \leq 300$ elementos, em vez de um vetor *one-hot esparso com milhares ou milhões de dimensões*.
+
+    2. **Preservação de similaridade semântica**: palavras com significados semelhantes ficam próximas no espaço vetorial. A similaridade é frequentemente medida usando a **similaridade de cosseno**, dada por:
+
+        $$\text{sim}(\vec{w}_i, \vec{w}_j) = \frac{\vec{w}_i \cdot \vec{w}_j}{ \vert \vec{w}_i \vert  \cdot  \vert \vec{w}_j \vert }$$
+
+    3. **Captura de relações analógicas**: **embeddings** resultantes de um bom treinamento podem capturar relações como "rei está para rainha assim como homem está para mulher" através de operações vetoriais simples, como:
+
+        $$\vec{v}_{\text{rei} } - \vec{v}_{\text{homem} } + \vec{v}_{\text{mulher} } \approx \vec{v}_{\text{rainha} }$$
+
+    4. **Aprendizado por contexto**: os **embeddings** são geralmente aprendidos em um treinamento baseado na observação de como as palavras aparecem em contextos semelhantes usando grandes corpus de texto, otimizando uma função objetivo como:
+
+    $$J(\theta) = \frac{1}{T} \sum_{t=1}^{T} \sum_{-c \leq j \leq c, j \neq 0} \log p(w_{t+j}  \; \vert  w_t)$$
+
+    Neste caso, $c$ é o tamanho da janela de contexto e $p(w_{t+j} \vert w_t)$ é a probabilidade de observar a palavra $w_{t+j}$ dado $w_t$.
+
     Alguns modelos populares de word embeddings incluem:
-    >
-    >- **Word2Vec**: desenvolvido pelo Google em 2013, usando redes neurais para prever palavras vizinhas (**skipgram**) ou a palavra atual a partir das vizinhas (**CBOW**). **A esforçada leitora deveria ler [este artigo](https://frankalcantara.com/transformers-cinco/) antes de continuar.**
-    >- **GloVe**: desenvolvido por Stanford, combinando estatísticas globais de co-ocorrência $X_{ij}$ com aprendizado local de contexto, dado por:
-    >
-    >$$J = \sum_{i,j=1}^{ \vert V \vert } f(X_{ij})(\vec{w}_i^T\vec{w}_j + b_i + b_j - \log X_{ij})^2$$
-    >
-    >- **FastText**: desenvolvido pelo Facebook, considera subpalavras (**N-grams** de caracteres) para lidar melhor com palavras raras e morfologia:
-    >
-    > $$\vec{w} = \frac{1}{ \vert G_w \vert } \sum_{g \in G_w} \vec{z}_g$$
-    >
-    >No FastText, $G_w$ é o conjunto de **N-grams** na palavra $w$ e $\vec{z}_g$ é o vetor do **N-gram** $g$.
-    >
-    >Em modelos como os **Transformers**, os **embeddings** são apenas o primeiro passo. Cada token, palavra ou subpalavra, será primeiro convertido em um vetor de **embedding** e depois processado através das camadas de atenção e *feed-forward* para produzir representações contextualizadas $\mathbf{h}_i^l$ que capturam o significado da palavra no contexto específico em que aparece:
-    >
-    >$$\mathbf{h}_i^l = \text{TransformerLayer}_l\;(\mathbf{h}_i^{l-1}, \mathbf{h}_{\neq i}^{l-1})$$
-    >
-    >na qual, $\mathbf{h}_i^0 = \text{Embedding}(w_i) + \text{PositionalEncoding}(i)$
+
+    - **Word2Vec**: desenvolvido pelo Google em 2013, usando redes neurais para prever palavras vizinhas (**skipgram**) ou a palavra atual a partir das vizinhas (**CBOW**). **A esforçada leitora deveria ler [este artigo](https://frankalcantara.com/transformers-cinco/) antes de continuar.**
+    - **GloVe**: desenvolvido por Stanford, combinando estatísticas globais de co-ocorrência $X_{ij}$ com aprendizado local de contexto, dado por:
+
+    $$J = \sum_{i,j=1}^{ \vert V \vert } f(X_{ij})(\vec{w}_i^T\vec{w}_j + b_i + b_j - \log X_{ij})^2$$
+
+    **FastText**: desenvolvido pelo Facebook, considera subpalavras (**N-grams** de caracteres) para lidar melhor com palavras raras e morfologia:
+
+     $$\vec{w} = \frac{1}{ \vert G_w \vert } \sum_{g \in G_w} \vec{z}_g$$
+
+    No FastText, $G_w$ é o conjunto de **N-grams** na palavra $w$ e $\vec{z}_g$ é o vetor do **N-gram** $g$.
+
+    Em modelos como os **Transformers**, os **embeddings** são apenas o primeiro passo. Cada token, palavra ou subpalavra, será primeiro convertido em um vetor de **embedding** e depois processado através das camadas de atenção e *feed-forward* para produzir representações contextualizadas $\mathbf{h}_i^l$ que capturam o significado da palavra no contexto específico em que aparece:
+
+    $$\mathbf{h}_i^l = \text{TransformerLayer}_l\;(\mathbf{h}_i^{l-1}, mathbf{h}_{\neq i}^{l-1})$$
+
+    na qual, $\mathbf{h}_i^0 = \text{Embedding}(w_i) + \text{PositionalEncoding}(i)$
 
     Voltando ao nosso exemplo, cada palavra será representada por um vetor de **embedding** $\mathbf{e}_i \in \mathbb{R}^d$. Neste caso, $d$ é a dimensão do **embedding**. Vamos assumir $d=4$ para manter a simplicidade. Se considerarmos alguns valores hipotéticos para os **embeddings** de palavras, poderíamos ter:
 
