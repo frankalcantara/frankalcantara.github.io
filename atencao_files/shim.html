@@ -1,0 +1,1076 @@
+
+<!-- saved from url=(0132)blob:https://0pnvug25x69x5lpctspjwuyj3qqvkv16mgsv5dedlu0wdyvdub-h763805538.scf.usercontent.goog/a0636a42-712e-4a24-8713-d905f2bffe74 -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script>(function(firebaseConfig, initialAuthToken, appId) {
+        window.__firebase_config = firebaseConfig;
+        window.__initial_auth_token = initialAuthToken;
+        window.__app_id = appId;
+            })("\n{\n  \"apiKey\": \"AIzaSyCqyCcs2R2e7AegGjvFAwG98wlamtbHvZY\",\n  \"authDomain\": \"bard-frontend.firebaseapp.com\",\n  \"projectId\": \"bard-frontend\",\n  \"storageBucket\": \"bard-frontend.firebasestorage.app\",\n  \"messagingSenderId\": \"175205271074\",\n  \"appId\": \"1:175205271074:web:2b7bd4d34d33bf38e6ec7b\"\n}\n","eyJhbGciOiJSUzI1NiIsImtpZCI6ImY2ZTAxMDEwMWQ1NmE1NmIyZDY4Y2U3NDZkNmI5YzJlMmFlYzU5ZGQiLCJ0eXAiOiJKV1QifQ.eyJzdWIiOiJmaXJlYmFzZS1hZG1pbnNkay1mYnN2Y0BiYXJkLWZyb250ZW5kLmlhbS5nc2VydmljZWFjY291bnQuY29tIiwiYXVkIjoiaHR0cHM6XC9cL2lkZW50aXR5dG9vbGtpdC5nb29nbGVhcGlzLmNvbVwvZ29vZ2xlLmlkZW50aXR5LmlkZW50aXR5dG9vbGtpdC52MS5JZGVudGl0eVRvb2xraXQiLCJ1aWQiOiIxNzA2Njk5MTM2NzU1MTg5MzI1MSIsImlzcyI6ImZpcmViYXNlLWFkbWluc2RrLWZic3ZjQGJhcmQtZnJvbnRlbmQuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20iLCJleHAiOjE3NDg2Mzg1MzAsImlhdCI6MTc0ODYzNDkzMCwiYWxnIjoiUlMyNTYifQ.B29ptD1Ncuioqzcgoh8D4z2jEBguthSfnNEon48S8xLfHqqLBPNiXh_4vpSJKN3ePbxLfB-oWS4J6I-3yzFTAKG9i9bNj3sfuqOjyWW4gbLqRNEQM2_MfPm2B--3zPuVuWvgHKpGCnaqa-nqOo1_1OwWLynwq-H_l7NBm3DaCMSHMNXHZWe8wsJ2pkX_n-uGHPrKaLpmD7GBo2kUlVydzXkzoHyXDAOGjuzDNdmjo9cF9Ycf_lXzXRComSA6kA38lS6ZlG4j45Owum78EyvE95cfoGr0dzKLFW-q7fRFO0Zv7Za8KhtrPMzv8AwjwJ11_CrrLfQDvIjjvyCzUQoCEA","30d0951df415-transformer_infographic_spa-871")</script><script>(function() {
+  // Ensure this script is executed only once
+  if (window.firebaseAuthBridgeScriptLoaded) {
+    return;
+  }
+  window.firebaseAuthBridgeScriptLoaded = true;
+
+  let nextTokenPromiseId = 0;
+
+  // Stores { resolve, reject } for ongoing token requests
+  const pendingTokenPromises = {};
+
+  // Listen for messages from the Host Application
+  window.addEventListener('message', function(event) {
+
+    const messageData = event.data;
+
+  if (messageData && messageData.type === 'RESOLVE_NEW_FIREBASE_TOKEN') {
+      const { success, token, error, promiseId } = messageData ?? {};
+      if (pendingTokenPromises[promiseId]) {
+        if (success) {
+          pendingTokenPromises[promiseId].resolve(token);
+        } else {
+          pendingTokenPromises[promiseId].reject(new Error(error || 'Token refresh failed from host.'));
+        }
+        delete pendingTokenPromises[promiseId];
+      }
+    }
+  });
+
+  // Expose a function for the Generated App to request a new Firebase token
+  window.requestNewFirebaseToken = function() {
+    const currentPromiseId = nextTokenPromiseId++;
+    const promise = new Promise((resolve, reject) => {
+      pendingTokenPromises[currentPromiseId] = { resolve, reject };
+    });
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({
+        type: 'REQUEST_NEW_FIREBASE_TOKEN',
+        promiseId: currentPromiseId
+      }, '*');
+    } else {
+      pendingTokenPromises[currentPromiseId].reject(new Error('No parent window to request token from.'));
+      delete pendingTokenPromises[currentPromiseId];
+    }
+    return promise;
+  };
+})();</script><script>let realOriginalGetUserMedia = null;
+if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+  realOriginalGetUserMedia = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
+}
+
+(function() {
+  if (navigator.mediaDevices && navigator.mediaDevices.__proto__) {
+    try {
+      Object.defineProperty(navigator.mediaDevices.__proto__, 'getUserMedia', {
+        get: function() {
+          return undefined; // Or throw an error
+        },
+        configurable: false
+      });
+    } catch (error) {
+      console.error("Error defining prototype getter:", error);
+    }
+  }
+})();
+
+(function() {
+  let originalGetUserMedia = realOriginalGetUserMedia;
+
+  const pendingMediaResolvers = {};
+  let nextMediaPromiseId = 0;
+
+  function interceptGetUserMedia() {
+    if (navigator.mediaDevices) {
+      Object.defineProperty(navigator.mediaDevices, 'getUserMedia', {
+        value: function(constraints) {
+          const mediaPromiseId = nextMediaPromiseId++;
+          const promise = new Promise((resolve, reject) => {
+            pendingMediaResolvers[mediaPromiseId] = (granted) => {
+              delete pendingMediaResolvers[mediaPromiseId];
+              if (granted) {
+                if (originalGetUserMedia) {
+                  originalGetUserMedia(constraints).then(resolve).catch(reject);
+                } else {
+                  reject(new Error("Original getUserMedia not available."));
+                }
+              } else {
+              reject(new DOMException('Permission denied', 'NotAllowedError'));
+            }
+          };
+        });
+
+        window.parent.postMessage({
+          type: 'requestMediaPermission',
+          constraints: constraints,
+          promiseId: mediaPromiseId,
+        }, '*');
+
+        return promise;
+      },
+      writable: false,
+      configurable: false
+    });
+    }
+  }
+
+  interceptGetUserMedia();
+
+  const observer = new MutationObserver(function(mutationsList, observer) {
+    for (const mutation of mutationsList) {
+      if (mutation.type === 'reconfigured' && mutation.name === 'getUserMedia' && mutation.object === navigator.mediaDevices) {
+        interceptGetUserMedia();
+      } else if (mutation.type === 'attributes' && mutation.attributeName === 'getUserMedia' && mutation.target === navigator.mediaDevices) {
+        interceptGetUserMedia();
+      } else if (mutation.type === 'childList' && mutation.addedNodes) {
+        mutation.addedNodes.forEach(node => {
+          if (node === navigator.mediaDevices) {
+            interceptGetUserMedia();
+          }
+        });
+      }
+    }
+  });
+
+  window.addEventListener('message', function(event) {
+    if (event.data) {
+      if (event.data.type === 'resolveMediaPermission') {
+        const { promiseId, granted } = event.data;
+        if (pendingMediaResolvers[promiseId]) {
+          pendingMediaResolvers[promiseId](granted);
+        }
+      }
+    }
+  });
+
+})();</script><script>(function() {
+  const originalFetch = window.fetch;
+  const googleLlmBaseApiUrls = [
+    'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:streamGenerateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict',
+    'https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predictLongRunning',
+    'https://generativelanguage.googleapis.com/v1beta/models/veo-2.0-generate-001:predict',
+    'https://generativelanguage.googleapis.com/v1beta/models/veo-2.0-generate-001:predictLongRunning',
+  ];
+
+  const pendingFetchResolvers = {};
+  let nextPromiseId = 0;
+
+  function handleStringInput(input, optionsArgument) {
+    const actualUrl = input;
+    const fetchCallArgs = [actualUrl, optionsArgument];
+    const effectiveOptions = optionsArgument || {};
+    const bodyForApiKeyCheck = effectiveOptions.body;
+    const bodyForPostMessage = effectiveOptions.body;
+    return { actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage };
+  }
+
+  function handleRequestInput(input, optionsArgument) {
+    const actualUrl = input.url;
+    const fetchCallArgs = [input, optionsArgument];
+    const effectiveOptions = { method: input.method, headers: new Headers(input.headers) };
+    let bodyForApiKeyCheck;
+    let bodyForPostMessage;
+
+    if (optionsArgument) {
+      if (optionsArgument.method) effectiveOptions.method = optionsArgument.method;
+      if (optionsArgument.headers) effectiveOptions.headers = new Headers(optionsArgument.headers);
+      if ('body' in optionsArgument) {
+        bodyForApiKeyCheck = optionsArgument.body;
+        bodyForPostMessage = optionsArgument.body;
+      } else {
+        bodyForApiKeyCheck = undefined;
+        bodyForPostMessage = input.body;
+      }
+    } else {
+      bodyForApiKeyCheck = undefined;
+      bodyForPostMessage = input.body;
+    }
+    return { actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage };
+  }
+
+  window.fetch = function(input, optionsArgument) {
+    let actualUrl;
+    let fetchCallArgs;
+    let effectiveOptions = {};
+    let bodyForApiKeyCheck;
+    let bodyForPostMessage;
+
+    if (typeof input === 'string') {
+      ({actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage} = handleStringInput(input, optionsArgument));
+    } else if (input instanceof Request) {
+      ({actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage} = handleRequestInput(input, optionsArgument));
+    } else {
+      return originalFetch.apply(window, [input, optionsArgument]);
+    }
+
+    effectiveOptions.method = effectiveOptions.method || 'GET';
+    if (!effectiveOptions.headers) {
+      effectiveOptions.headers = new Headers();
+    }
+
+
+    if (typeof actualUrl === 'string' && googleLlmBaseApiUrls.some((url) => actualUrl.startsWith(url))) {
+      let apiKeyIsNull = true;
+
+      const regex = new RegExp("models/([^:]+)");
+      const modelNameMatch = actualUrl.match(regex);
+      const modelName = modelNameMatch ? modelNameMatch[1] : 'unspecified';
+
+
+      try {
+        const urlObject = new URL(actualUrl);  // Use URL object for robust parsing
+        const apiKeyParam = urlObject.searchParams.get('key');
+        if (apiKeyParam) {
+          apiKeyIsNull = false;
+        }
+      } catch (e) {
+        // Continue checks even if URL parsing fails
+      }
+
+      if (apiKeyIsNull && effectiveOptions.headers) {
+        const h = new Headers(effectiveOptions.headers);
+        const apiKeyHeaderValue = h.get('X-API-Key') || h.get('x-api-key');
+        if (apiKeyHeaderValue) {
+          apiKeyIsNull = false;
+          return originalFetch.apply(window, fetchCallArgs);
+        }
+      }
+
+      if (apiKeyIsNull && effectiveOptions.method && ['POST', 'PUT', 'PATCH'].includes(effectiveOptions.method.toUpperCase()) && typeof bodyForApiKeyCheck === 'string') {
+        try {
+          const bodyData = JSON.parse(bodyForApiKeyCheck);
+          if (bodyData && bodyData.apiKey) {
+            apiKeyIsNull = false;
+            return originalFetch.apply(window, fetchCallArgs);
+          }
+        } catch (e) {
+          // Ignore JSON parsing errors
+        }
+      }
+
+      if(apiKeyIsNull) {
+        const promiseId = nextPromiseId++;
+        const promise = new Promise((resolve) => {
+          pendingFetchResolvers[promiseId] = (resolvedResponse) => {
+            delete pendingFetchResolvers[promiseId];
+            resolve(resolvedResponse);
+          };
+        });
+
+        let serializedBodyForPostMessage;
+        if (typeof bodyForPostMessage === 'string' || bodyForPostMessage == null) {
+            serializedBodyForPostMessage = bodyForPostMessage;
+        } else if (bodyForPostMessage instanceof ReadableStream) {
+            serializedBodyForPostMessage = null;
+        } else {
+            try {
+                serializedBodyForPostMessage = JSON.stringify(bodyForPostMessage);
+            } catch (e) {
+                serializedBodyForPostMessage = null;
+            }
+        }
+
+        const messageOptions = {
+            method: effectiveOptions.method,
+            headers: Object.fromEntries(new Headers(effectiveOptions.headers).entries()),
+            body: serializedBodyForPostMessage
+        };
+
+        window.parent.postMessage({
+          type: 'requestFetch',
+          url: actualUrl,
+          modelName: 'models/' + modelName,
+          options: messageOptions,
+          promiseId: promiseId,
+        }, '*');
+
+        return promise;
+      }
+      return originalFetch.apply(window, fetchCallArgs);
+    }
+    return originalFetch.apply(window, fetchCallArgs);
+  };
+
+  window.addEventListener('message', function(event) {
+    if (event.data && event.data.type === 'resolveFetch') {
+      const { promiseId, response } = event.data;
+      if (pendingFetchResolvers[promiseId]) {
+        try {
+          const reconstructedResponse = new Response(response.body, {
+            status: response.status,
+            statusText: response.statusText,
+            headers: new Headers(response.headers),
+          });
+          pendingFetchResolvers[promiseId](reconstructedResponse);
+        } catch (error) {
+          pendingFetchResolvers[promiseId](new Response(null, { status: 500, statusText: "Interceptor Response Reconstruction Error" }));
+        }
+      }
+    }
+  });
+
+})();</script><script>(function() {
+  const originalConsoleLog = console.log;
+  const originalConsoleError = console.error;
+
+    /**
+   * Normalizes an error event or a promise rejection reason into a structured error object.
+   * @param {*} errorEventOrReason The error object or reason.
+   * @return {object} Structured error data { message, name, stack }.
+   */
+  function getErrorObject(errorEventOrReason) {
+    if (errorEventOrReason instanceof Error) {
+      return {
+        message: errorEventOrReason.message,
+        name: errorEventOrReason.name,
+        stack: errorEventOrReason.stack,
+      };
+    }
+    // Fallback for non-Error objects.
+    try {
+      return {
+        message: JSON.stringify(errorEventOrReason),
+        name: 'UnknownErrorType',
+        stack: null,
+      };
+    } catch (e) {
+      return {
+        message: String(errorEventOrReason),
+        name: 'UnknownErrorTypeNonStringifiable',
+        stack: null,
+      };
+    }
+  }
+
+  /**
+   * Converts an array of arguments (from log/error) into a single string.
+   * Handles Error objects specially to include their message and stack.
+   * @param {Array<*>} args - Arguments passed to console methods.
+   * @return {string} A string representation of the arguments.
+   */
+  function stringifyArgs(args) {
+    return args
+      .map((arg) => {
+        if (arg instanceof Error) {
+          const {message, stack} = arg;
+          return `Error: ${message}${stack ? ('\nStack: ' + stack) : ''}`;
+        }
+        if (typeof arg === 'object' && arg !== null) {
+          try {
+            return JSON.stringify(arg);
+          } catch (error) {
+            return '[Circular Object]';
+          }
+        } else {
+          return String(arg);
+        }
+      })
+      .join(' ');
+  }
+
+  console.log = function(...args) {
+    const logString = stringifyArgs(args);
+    window.parent.postMessage({ type: 'log', message: logString }, '*');
+    originalConsoleLog.apply(console, args);
+  };
+
+  console.error = function(...args) {
+    let errorData;
+    if (args.length > 0 && args[0] instanceof Error) {
+      const err = args[0];
+      // If the first arg is an Error, capture its details.
+      errorData = {
+        type: 'error',
+        source: 'CONSOLE_ERROR',
+        ...getErrorObject(err),
+        rawArgsString: stringifyArgs(args.slice(1)),
+        timestamp: new Date().toISOString(),
+      };
+    } else {
+      // If not an Error object, treat all args as a general error message.
+      errorData = {
+        type: 'error',
+        source: 'CONSOLE_ERROR',
+        message: stringifyArgs(args),
+        name: 'ConsoleLoggedError',
+        stack: null,
+        timestamp: new Date().toISOString(),
+      };
+    }
+    window.parent.postMessage(errorData, '*');
+    originalConsoleError.apply(console, args);
+  };
+
+  // Listen for global unhandled synchronous errors.
+  window.addEventListener('error', function(event) {
+    const errorDetails = event.error ? getErrorObject(event.error) : {
+      message: event.message,
+      name: 'GlobalError',
+      stack: null,
+      filename: event.filename,
+      lineno: event.lineno,
+      colno: event.colno,
+    };
+
+    window.parent.postMessage({
+      type: 'error',
+      source: 'global',
+      ...errorDetails,
+      message: errorDetails.message || event.message,
+      timestamp: new Date().toISOString(),
+    }, '*');
+  });
+
+  // Listen for unhandled promise rejections (asynchronous errors).
+  window.addEventListener('unhandledrejection', function(event) {
+    const errorDetails = getErrorObject(event.reason);
+
+    window.parent.postMessage({
+      type: 'error',
+      source: 'unhandledrejection',
+      ...errorDetails,
+      message: errorDetails.message || 'Unhandled Promise Rejection',
+      timestamp: new Date().toISOString(),
+    }, '*');
+  });
+
+})();</script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infográfico: A Evolução dos Modelos de Linguagem - Insights dos Transformers</title>
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" xintegrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js" xintegrity="sha384-X/XCfMm41VSsqRNwNEGruntzFStrcMPFXG07pVYQHXqwYWyrb5ynGiME1LSGaVXys" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js" xintegrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous" onload="renderMathInElement(document.body, { delimiters: [{left: &#39;$$&#39;, right: &#39;$$&#39;, display: true}, {left: &#39;$&#39;, right: &#39;$&#39;, display: false}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}, {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}], throwOnError: false });"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #CAF0F8; /* Very Light Blue/Almost White from Brilliant Blues */
+        }
+        .katex-display {
+            display: block;
+            margin: 1em 0;
+            text-align: center;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+        }
+        .matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+            gap: 4px;
+            border: 1px solid #0077B6; /* Dark Blue */
+            padding: 8px;
+            border-radius: 4px;
+            margin: 0.5em auto;
+            max-width: 300px;
+        }
+        .matrix-sm {
+            max-width: 200px;
+        }
+         .matrix-lg {
+            max-width: 400px;
+        }
+        .matrix-val {
+            background-color: #90E0EF; /* Light Blue */
+            color: #003049; /* Darker text for contrast */
+            padding: 4px 2px;
+            text-align: center;
+            border-radius: 2px;
+            font-size: 0.8rem;
+            min-width: 30px;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; 
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; 
+            max-height: 400px;
+        }
+        @media (min-width: 768px) { 
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .section-title {
+            color: #0077B6; 
+            border-bottom: 2px solid #00B4D8; 
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .stat-big {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0077B6; 
+            text-align: center;
+        }
+        .flow-element {
+            background-color: #90E0EF; 
+            border: 1px solid #00B4D8; 
+            color: #003049;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            text-align: center;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .arrow {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #0077B6; 
+            margin: 0.25rem 0;
+        }
+        h1, h2, h3 {
+            color: #0077B6; 
+        }
+        p, li {
+            color: #023047; 
+            line-height: 1.6;
+        }
+        .gemini-btn {
+            background-color: #00B4D8; /* Medium Blue */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+            margin-left: 0.5rem;
+        }
+        .gemini-btn:hover {
+            background-color: #0077B6; /* Dark Blue */
+        }
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .modal-close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            color: #0077B6;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #0077B6;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.16 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.my-1{margin-top:0.25rem;margin-bottom:0.25rem}.my-2{margin-top:0.5rem;margin-bottom:0.5rem}.my-3{margin-top:0.75rem;margin-bottom:0.75rem}.my-4{margin-top:1rem;margin-bottom:1rem}.my-6{margin-top:1.5rem;margin-bottom:1.5rem}.mb-12{margin-bottom:3rem}.mb-2{margin-bottom:0.5rem}.mb-4{margin-bottom:1rem}.mt-1{margin-top:0.25rem}.mt-12{margin-top:3rem}.mt-2{margin-top:0.5rem}.mt-4{margin-top:1rem}.mt-6{margin-top:1.5rem}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-\[250px\]{height:250px}.min-w-full{min-width:100%}.list-inside{list-style-position:inside}.list-disc{list-style-type:disc}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.items-center{align-items:center}.justify-center{justify-content:center}.gap-2{gap:0.5rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.space-y-1 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.25rem * var(--tw-space-y-reverse))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.divide-y > :not([hidden]) ~ :not([hidden]){--tw-divide-y-reverse:0;border-top-width:calc(1px * calc(1 - var(--tw-divide-y-reverse)));border-bottom-width:calc(1px * var(--tw-divide-y-reverse))}.divide-gray-200 > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(229 231 235 / var(--tw-divide-opacity, 1))}.divide-gray-300 > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(209 213 219 / var(--tw-divide-opacity, 1))}.overflow-x-auto{overflow-x:auto}.rounded{border-radius:0.25rem}.border{border-width:1px}.border-t{border-top-width:1px}.border-\[\#00B4D8\]{--tw-border-opacity:1;border-color:rgb(0 180 216 / var(--tw-border-opacity, 1))}.border-gray-300{--tw-border-opacity:1;border-color:rgb(209 213 219 / var(--tw-border-opacity, 1))}.bg-\[\#90E0EF\]{--tw-bg-opacity:1;background-color:rgb(144 224 239 / var(--tw-bg-opacity, 1))}.bg-\[\#FFB703\]{--tw-bg-opacity:1;background-color:rgb(255 183 3 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.p-4{padding:1rem}.p-3{padding:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.text-left{text-align:left}.text-center{text-align:center}.text-2xl{font-size:1.5rem;line-height:2rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-semibold{font-weight:600}.text-gray-800{--tw-text-opacity:1;color:rgb(31 41 55 / var(--tw-text-opacity, 1))}.text-\[\#003049\]{--tw-text-opacity:1;color:rgb(0 48 73 / var(--tw-text-opacity, 1))}.text-\[\#0077B6\]{--tw-text-opacity:1;color:rgb(0 119 182 / var(--tw-text-opacity, 1))}.text-\[\#00B4D8\]{--tw-text-opacity:1;color:rgb(0 180 216 / var(--tw-text-opacity, 1))}.text-black{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity, 1))}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity, 1))}@media (min-width: 768px){.md\:block{display:block}.md\:hidden{display:none}.md\:h-\[300px\]{height:300px}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.md\:grid-cols-5{grid-template-columns:repeat(5, minmax(0, 1fr))}.md\:p-8{padding:2rem}.md\:text-5xl{font-size:3rem;line-height:1}}@media (min-width: 1024px){.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}}</style></head>
+<body class="text-gray-800 p-4 md:p-8">
+
+    <header class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Desvendando os Transformers</h1>
+        <p class="text-xl text-gray-600">Uma Jornada Visual pela Atenção e o Futuro da Modelagem de Linguagem</p>
+    </header>
+
+    <main>
+        <section id="intro" class="card">
+            <h2 class="text-2xl font-semibold section-title">O Ponto de Partida: Superando Limitações</h2>
+            <p class="mb-4">
+                Modelos de linguagem tradicionais, como Cadeias de Markov e N-grams, revolucionaram o Processamento de Linguagem Natural (PLN) ao capturar dependências locais entre palavras. No entanto, sua "visão" é limitada pela Propriedade de Markov, que estabelece que o futuro depende apenas do presente, dificultando a compreensão de contextos distantes em textos longos. É como ter uma luneta que só enxerga o que está imediatamente à frente.
+            </p>
+            <p class="mb-4">
+                Este infográfico explora a evolução conceitual e matemática que levou à arquitetura Transformer, com foco no revolucionário mecanismo de **atenção**. Nossa jornada seguirá os seguintes "portos":
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="flow-element">1. Limitações dos N-grams</div>
+                <div class="flow-element">2. Agregação de Pares</div>
+                <div class="flow-element">3. Mascaramento e Foco</div>
+                <div class="flow-element">4. Atenção Matricial (Q,K,V)</div>
+                <div class="flow-element">5. Rede Feed-Forward</div>
+                <div class="flow-element">6. O Impacto Transformer</div>
+            </div>
+            <p class="mt-4">
+                A chave para entender os Transformers é a ideia de que <strong class="text-[#00B4D8]">cada palavra pode prestar atenção a qualquer outra palavra na sequência, independentemente da distância</strong>. Esta é a bússola da nossa exploração.
+            </p>
+        </section>
+
+        <section id="ngrams" class="card">
+            <h2 class="text-2xl font-semibold section-title">Desafio 1: A Miopia dos N-grams</h2>
+            <p class="mb-4">
+                Modelos N-gram consideram as $N-1$ palavras anteriores para prever a próxima: $P(w_t | w_{t-N+1}, ..., w_{t-1})$. Tentar capturar contextos longos aumentando $N$ esbarra em dois grandes obstáculos:
+            </p>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-xl font-semibold text-[#00B4D8] mb-2">A Maldição da Dimensionalidade</h3>
+                    <p class="mb-2">Com um vocabulário $(|V|)$ de, digamos, 50.000 palavras:</p>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Bigramas $(N=2)$: $50.000^2 = 2.5 \times 10^9$ combinações</li>
+                        <li>Trigramas $(N=3)$: $50.000^3 = 1.25 \times 10^{14}$ combinações</li>
+                        <li>Tetragramas $(N=4)$: $50.000^4 = 6.25 \times 10^{18}$ combinações</li>
+                    </ul>
+                    <p class="mt-2">O número de possíveis N-grams cresce exponencialmente, tornando o espaço vasto e difícil de cobrir com dados.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-[#00B4D8] mb-2">Esparsidade de Dados e a Lei de Zipf</h3>
+                    <p class="mb-2">A Lei de Zipf afirma que poucas palavras são muito frequentes, enquanto a maioria é rara.</p>
+                    <div class="chart-container h-[250px] md:h-[300px]">
+                        <canvas id="zipfChart" width="600" height="300" style="display: block; box-sizing: border-box; height: 300px; width: 600px;"></canvas>
+                    </div>
+                    <p class="text-sm text-center mt-1">Representação conceitual da Lei de Zipf.</p>
+                    <p class="mt-2">Isso significa que N-grams longos $(N \ge 4)$ raramente ou nunca aparecem em corpora de treinamento, mesmo os massivos. As estimativas de probabilidade se tornam zero ou muito baixas, exigindo técnicas de suavização complexas.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="pairwise" class="card">
+            <h2 class="text-2xl font-semibold section-title">Tentativa de Solução: Agregação de Características de Pares</h2>
+            <p class="mb-4">
+                Para superar a visão local, uma ideia é considerar a influência de todos os pares de palavras $(w_i, w_t)$, onde $w_i$ é qualquer palavra anterior a $w_t$. Cada par $(w_i, w_t)$ "vota" em qual palavra $w_k$ deveria ser a próxima $(w_{t+1})$.
+            </p>
+            <p>Considere as frases (peso 0.5 cada):</p>
+            <ul class="list-disc list-inside mb-2">
+                <li>$D_1$: `Verifique o log do programa e descubra se ele foi executado, por favor.`</li>
+                <li>$D_2$: `Verifique o log da bateria e descubra se ela acabou, por favor.`</li>
+            </ul>
+            <p class="mb-4">Para prever a palavra após "executado" em $D_1$: "...programa ... ele foi executado, ???":</p>
+            
+            <div class="overflow-x-auto">
+                <h3 class="text-lg font-semibold text-[#00B4D8] my-2 text-center">Votos Hipotéticos para $w_{t+1}$ após `(wi, executado)` em $D_1$</h3>
+                <table class="min-w-full divide-y divide-gray-300 border border-gray-300">
+                    <thead class="bg-[#90E0EF]">
+                        <tr>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-[#003049]">Par $(w_i, \text{executado})$ (Característica)</th>
+                            <th class="px-4 py-2 text-center text-sm font-semibold text-[#003049]">Voto para "por"</th>
+                            <th class="px-4 py-2 text-center text-sm font-semibold text-[#003049]">Voto para "favor"</th>
+                            <th class="px-4 py-2 text-center text-sm font-semibold text-[#003049]">Outros...</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 bg-white">
+                        <tr>
+                            <td class="px-4 py-2 text-sm">`(programa, executado)`</td>
+                            <td class="px-4 py-2 text-sm text-center"><strong>1.0</strong> (Alta Confiança)</td>
+                            <td class="px-4 py-2 text-sm text-center">0.0</td>
+                            <td class="px-4 py-2 text-sm text-center">...</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 text-sm">`(foi, executado)`</td>
+                            <td class="px-4 py-2 text-sm text-center">0.8 (Plausível)</td>
+                            <td class="px-4 py-2 text-sm text-center">0.1</td>
+                            <td class="px-4 py-2 text-sm text-center">...</td>
+                        </tr>
+                         <tr>
+                            <td class="px-4 py-2 text-sm">`(o, executado)`</td>
+                            <td class="px-4 py-2 text-sm text-center">0.3 (Menos Informativo)</td>
+                            <td class="px-4 py-2 text-sm text-center">0.2</td>
+                            <td class="px-4 py-2 text-sm text-center">...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="mt-4 mb-2">
+                O voto é calculado pela frequência relativa: $\text{Voto}(w_k | w_i, w_t) = \frac{C(w_i, w_t, w_k)}{\sum_{w'} C(w_i, w_t, w')}$.
+                A predição final é a soma dos votos de todos os pares $(w_i, w_t)$ ativos na sequência.
+            </p>
+            <h3 class="text-lg font-semibold text-[#00B4D8] mt-4">Limitações desta Abordagem:</h3>
+            <ul class="list-disc list-inside space-y-1">
+                <li><strong>Diluição do Sinal:</strong> Votos de características pouco informativas podem "abafar" os votos das importantes.</li>
+                <li><strong>Complexidade Computacional:</strong> Armazenar e somar votos de $O(T^2)$ pares é caro para sequências longas $(T)$.</li>
+                <li><strong>Interpretação da Pontuação:</strong> A soma dos votos não é uma probabilidade bem calibrada.</li>
+            </ul>
+        </section>
+        
+        <section id="masking" class="card">
+            <h2 class="text-2xl font-semibold section-title">Aprimoramento: Mascaramento e Atenção Seletiva</h2>
+            <p class="mb-4">
+                Para combater a diluição do sinal, introduzimos uma **máscara**: um conjunto de pesos que destaca características (palavras anteriores) relevantes e atenua as irrelevantes.
+            </p>
+            <p class="mb-2">Ao prever após `executado` na frase sobre `programa`, uma máscara ideal daria peso 1 para `programa` e `foi`, e 0 para outras menos distintivas.</p>
+            <div class="text-center my-4">
+                <p>Votos Originais (Exemplo Simplificado)</p>
+                <div class="matrix matrix-sm">
+                    <div class="matrix-val">V(prog,exec)</div><div class="matrix-val">V(foi,exec)</div> <div class="matrix-val">V(o,exec)</div>
+                </div>
+                <div class="arrow">× (Hadamard)</div>
+                <p>Máscara</p>
+                <div class="matrix matrix-sm">
+                     <div class="matrix-val bg-[#FFB703] text-black">1</div><div class="matrix-val bg-[#FFB703] text-black">1</div> <div class="matrix-val bg-[#FFB703] text-black">0</div>
+                </div>
+                <div class="arrow">=</div>
+                <p>Votos Mascarados</p>
+                 <div class="matrix matrix-sm">
+                    <div class="matrix-val">V(prog,exec)</div><div class="matrix-val">V(foi,exec)</div> <div class="matrix-val">0</div>
+                </div>
+            </div>
+            <p class="mb-2">A máscara é aplicada usando o <strong>Produto de Hadamard</strong> (multiplicação elemento a elemento). Isso foca a predição nas informações que realmente importam, levando ao conceito de **ATENÇÃO**.</p>
+            <p>O desafio: como essa máscara pode ser aprendida dinamicamente pelo modelo?</p>
+        </section>
+
+        <section id="matrix-attention" class="card">
+            <h2 class="text-2xl font-semibold section-title">O Coração do Transformer: Atenção Matricial</h2>
+            <p class="mb-4">
+                A atenção nos Transformers é implementada eficientemente via operações matriciais. Cada palavra na sequência de entrada (representada por seu embedding $\mathbf{x}_i$) é transformada em três vetores:
+            </p>
+            <ul class="list-disc list-inside space-y-1 mb-4">
+                <li><strong>Query ($\mathbf{q}_i$):</strong> O que a palavra atual está "procurando".</li>
+                <li><strong>Key ($\mathbf{k}_i$):</strong> O que cada palavra "oferece" ou "anuncia".</li>
+                <li><strong>Value ($\mathbf{v}_i$):</strong> A informação real da palavra a ser transmitida.</li>
+            </ul>
+            <p>Esses vetores são obtidos por transformações lineares aprendíveis: $\mathbf{Q = XW^Q}$, $\mathbf{K = XW^K}$, $\mathbf{V = XW^V}$.</p>
+            
+            <h3 class="text-xl font-semibold text-[#00B4D8] my-3 text-center">Fluxo do Scaled Dot-Product Attention</h3>
+            <div class="space-y-4">
+                <div class="text-center">
+                    <p class="font-semibold">1. Calcular Scores de Similaridade:</p>
+                    <p class="my-1">$\text{Scores}_{\text{raw}} = \mathbf{Q} \cdot \mathbf{K}^T$</p>
+                    <p class="text-sm">(Mede o quão bem cada Query "combina" com cada Key)</p>
+                </div>
+                <div class="arrow">⬇️</div>
+                <div class="text-center">
+                    <p class="font-semibold">2. Escalonar Scores:</p>
+                    <p class="my-1">$\text{Scores} = \frac{\text{Scores}_{\text{raw}}}{\sqrt{d_k}}$</p>
+                    <p class="text-sm">($d_k$ é a dimensão dos vetores Key/Query. Estabiliza gradientes.)</p>
+                </div>
+                <div class="arrow">⬇️</div>
+                <div class="text-center">
+                    <p class="font-semibold">3. Normalizar com Softmax (Obter Pesos de Atenção $\mathbf{A}$):</p>
+                    <p class="my-1">$\mathbf{A} = \text{softmax}(\text{Scores})$</p>
+                    <p class="text-sm">(Converte scores em probabilidades que somam 1 por linha. Indica quanta atenção dar a cada palavra.)</p>
+                </div>
+                 <div class="arrow">⬇️</div>
+                <div class="text-center">
+                    <p class="font-semibold">4. Calcular Vetor de Contexto Ponderado:</p>
+                    <p class="my-1">$\text{Output (Contexto)} = \mathbf{A} \cdot \mathbf{V}$</p>
+                    <p class="text-sm">(Soma ponderada dos vetores Value, usando os pesos de atenção.)</p>
+                </div>
+            </div>
+            <div class="mt-6 mb-2 text-center text-lg font-bold bg-[#90E0EF] p-3 rounded flex items-center justify-center">
+                <span>Fórmula Completa: $\text{Attention}(Q, K, V) = \text{softmax}\left( \frac{QK^T}{\sqrt{d_k}} \right) V$</span>
+                <button class="gemini-btn" data-concept="Explique a fórmula completa da Atenção: Attention(Q, K, V) = softmax( (QK^T) / sqrt(d_k) ) * V, detalhando o papel de Q, K, V, a multiplicação QK^T, o escalonamento por sqrt(d_k), a função softmax, e a multiplicação final por V.">Explique Simplificado ✨</button>
+            </div>
+            <p class="mt-4">Este mecanismo permite que cada palavra "olhe" para todas as outras palavras na sequência (incluindo ela mesma - auto-atenção) e determine dinamicamente quais são mais relevantes, ponderando suas contribuições. As matrizes $\mathbf{W}^Q, \mathbf{W}^K, \mathbf{W}^V$ são aprendidas durante o treinamento.</p>
+            
+            <h4 class="text-lg font-semibold text-[#00B4D8] mt-6 mb-2">Exemplo Numérico Simplificado (Ilustrativo):</h4>
+            <p class="mb-2">Se $\mathbf{X}$ (embeddings, 3 palavras x 4 dims), $\mathbf{W}^Q, \mathbf{W}^K, \mathbf{W}^V$ (4 dims x 3 dims_k):</p>
+            <div class="grid md:grid-cols-3 gap-4 text-center">
+                <div>
+                    <p>$\mathbf{X} \rightarrow \mathbf{Q}, \mathbf{K}, \mathbf{V}$</p>
+                    <div class="matrix matrix-lg my-1">
+                        <div class="matrix-val">x11</div><div class="matrix-val">x12</div><div class="matrix-val">x13</div><div class="matrix-val">x14</div>
+                        <div class="matrix-val">x21</div><div class="matrix-val">x22</div><div class="matrix-val">x23</div><div class="matrix-val">x24</div>
+                        <div class="matrix-val">x31</div><div class="matrix-val">x32</div><div class="matrix-val">x33</div><div class="matrix-val">x34</div>
+                    </div>
+                     <p class="text-xs">Aplicando $\mathbf{W}^Q, \mathbf{W}^K, \mathbf{W}^V$</p>
+                </div>
+                <div>
+                    <p>$\mathbf{Q, K, V}$ (3 palavras x 3 dims_k)</p>
+                     <div class="matrix matrix-sm my-1">
+                        <div class="matrix-val">q11</div><div class="matrix-val">q12</div><div class="matrix-val">q13</div>
+                        <div class="matrix-val">q21</div><div class="matrix-val">q22</div><div class="matrix-val">q23</div>
+                        <div class="matrix-val">q31</div><div class="matrix-val">q32</div><div class="matrix-val">q33</div>
+                    </div>
+                    <p class="text-xs">(Similar para K e V)</p>
+                </div>
+                <div>
+                     <p>$\mathbf{A} = \text{softmax}(\frac{\mathbf{QK}^T}{\sqrt{d_k}})$ (3x3)</p>
+                     <div class="matrix matrix-sm my-1">
+                        <div class="matrix-val">α11</div><div class="matrix-val">α12</div><div class="matrix-val">α13</div>
+                        <div class="matrix-val">α21</div><div class="matrix-val">α22</div><div class="matrix-val">α23</div>
+                        <div class="matrix-val">α31</div><div class="matrix-val">α32</div><div class="matrix-val">α33</div>
+                    </div>
+                    <p class="text-xs">Pesos de atenção</p>
+                </div>
+            </div>
+             <div class="text-center mt-4">
+                <p class="font-semibold">Saída Final: $\text{Output} = \mathbf{A} \mathbf{V}$ (3 palavras x 3 dims_k)</p>
+                 <div class="matrix matrix-sm my-1">
+                    <div class="matrix-val">o11</div><div class="matrix-val">o12</div><div class="matrix-val">o13</div>
+                    <div class="matrix-val">o21</div><div class="matrix-val">o22</div><div class="matrix-val">o23</div>
+                    <div class="matrix-val">o31</div><div class="matrix-val">o32</div><div class="matrix-val">o33</div>
+                </div>
+                <p class="text-xs">Representações contextualizadas</p>
+            </div>
+        </section>
+
+        <section id="ffn" class="card">
+            <h2 class="text-2xl font-semibold section-title">Etapa Final do Bloco: Rede Feed-Forward (FFN)</h2>
+            <p class="mb-4">
+                Após o mecanismo de atenção calcular o vetor de contexto $\mathbf{C}_t$ para cada palavra (agora enriquecido com informações relevantes de toda a sequência), este vetor é processado por uma Rede Neural Feed-Forward (FFN). Essa FFN é aplicada independentemente a cada posição $t$.
+            </p>
+            <div class="mb-2 text-center text-lg font-semibold bg-[#90E0EF] p-3 rounded my-3 flex items-center justify-center">
+                <span>Tipicamente: $\text{FFN}(\mathbf{C}_t) = \text{max}(0, \mathbf{C}_t \mathbf{W}_1 + \mathbf{b}_1) \mathbf{W}_2 + \mathbf{b}_2$</span>
+                <button class="gemini-btn" data-concept="Explique a fórmula da Rede Feed-Forward (FFN) nos Transformers: FFN(Ct) = max(0, CtW1 + b1)W2 + b2. Detalhe o papel de Ct, das matrizes de peso W1 e W2, dos biases b1 e b2, e da função de ativação ReLU (max(0,x)).">Explique Simplificado ✨</button>
+            </div>
+            <div class="grid md:grid-cols-5 items-center gap-2 my-6">
+                <div class="flow-element">$\mathbf{C}_t$ (Contexto da Atenção)</div>
+                <div class="arrow md:block hidden">➡️</div> <div class="arrow md:hidden">⬇️</div>
+                <div class="flow-element">Linear 1 ($ \times \mathbf{W}_1 + \mathbf{b}_1 $) Expande Dimensão</div>
+                 <div class="arrow md:block hidden">➡️</div> <div class="arrow md:hidden">⬇️</div>
+                <div class="flow-element">ReLU / GeLU (Não-linearidade)</div>
+                 <div class="arrow md:block hidden">➡️</div> <div class="arrow md:hidden">⬇️</div>
+                <div class="flow-element">Linear 2 ($ \times \mathbf{W}_2 + \mathbf{b}_2 $) Projeta de Volta</div>
+                 <div class="arrow md:block hidden">➡️</div> <div class="arrow md:hidden">⬇️</div>
+                <div class="flow-element">Saída do Bloco Transformer</div>
+            </div>
+            <p>A FFN adiciona capacidade de modelagem não-linear, permitindo que o Transformer aprenda transformações mais complexas sobre as representações contextualizadas fornecidas pela atenção. Os pesos $\mathbf{W}_1, \mathbf{b}_1, \mathbf{W}_2, \mathbf{b}_2$ são aprendidos.</p>
+        </section>
+
+        <section id="conclusion" class="card">
+            <h2 class="text-2xl font-semibold section-title">O Impacto dos Transformers e Próximos Horizontes</h2>
+            <p class="mb-4">
+                Passamos das limitações dos N-grams, exploramos a agregação de pares, o mascaramento, e chegamos ao coração dos Transformers: o mecanismo de auto-atenção (Scaled Dot-Product Attention) seguido pela Rede Feed-Forward. Essa arquitetura, proposta em "Attention is All You Need", abandonou a recorrência em favor da atenção paralelizável, permitindo treinar modelos muito maiores e mais capazes, como BERT e GPT, que definem o estado-da-arte em PLN.
+            </p>
+            <h3 class="text-xl font-semibold text-[#00B4D8] mb-2">O Que Vem a Seguir no Universo Transformer?</h3>
+            <ul class="list-disc list-inside space-y-2">
+                <li><strong>Atenção Multi-Cabeça (Multi-Head Attention):</strong> Permite ao modelo focar em diferentes subespaços de informação de diferentes posições simultaneamente. <button class="gemini-btn text-xs" data-concept="Atenção Multi-Cabeça (Multi-Head Attention)">Saber Mais ✨</button></li>
+                <li><strong>Codificação Posicional (Positional Encoding):</strong> Reintroduz a informação sobre a ordem das palavras, já que a auto-atenção por si só trata a sequência como um conjunto. <button class="gemini-btn text-xs" data-concept="Codificação Posicional (Positional Encoding)">Saber Mais ✨</button></li>
+                <li><strong>Arquitetura Encoder-Decoder Completa:</strong> Como blocos de Transformer são empilhados para tarefas como tradução. <button class="gemini-btn text-xs" data-concept="Arquitetura Encoder-Decoder Completa dos Transformers">Saber Mais ✨</button></li>
+                <li><strong>Aplicações e Variações (BERT, GPT, etc.):</strong> O vasto ecossistema de modelos baseados em Transformers. <button class="gemini-btn text-xs" data-concept="Aplicações e Variações dos Transformers como BERT e GPT">Saber Mais ✨</button></li>
+            </ul>
+            <p class="mt-4">A compreensão desses conceitos fundamentais é o mapa para navegar nas inovações contínuas em Inteligência Artificial e Processamento de Linguagem Natural.</p>
+        </section>
+        
+        <footer class="text-center mt-12 py-6 border-t border-[#00B4D8]">
+            <p class="text-sm text-gray-600">Infográfico baseado no artigo "Transformers - Prestando Atenção". Design e Conteúdo Adaptado.</p>
+        </footer>
+    </main>
+
+    <div id="geminiModal" class="modal">
+        <div class="modal-content">
+            <button id="modalCloseBtn" class="modal-close-btn">×</button>
+            <h3 id="modalTitle" class="text-xl font-semibold text-[#0077B6] mb-4">Explicação da IA ✨</h3>
+            <div id="modalBody">
+                <div class="loading-spinner"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Render Math using KaTeX
+        function renderMath() {
+            if (typeof renderMathInElement === 'function') {
+                renderMathInElement(document.body, {
+                    delimiters: [
+                        {left: "$$", right: "$$", display: true},
+                        {left: "$", right: "$", display: false},
+                        {left: "\\(", right: "\\)", display: false},
+                        {left: "\\[", right: "\\]", display: true}
+                    ],
+                    throwOnError: false
+                });
+            }
+        }
+        document.addEventListener("DOMContentLoaded", renderMath);
+
+
+        const zipfCtx = document.getElementById('zipfChart').getContext('2d');
+        const zipfChart = new Chart(zipfCtx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    'Palavra Mais Comum', 
+                    '2ª Palavra Mais Comum', 
+                    '3ª Palavra Mais Comum', 
+                    ['Palavra', 'Menos Comum 1'], 
+                    ['Palavra', 'Menos Comum N']
+                ],
+                datasets: [{
+                    label: 'Frequência Relativa (Conceitual)',
+                    data: [100, 50, 33, 10, 5], 
+                    backgroundColor: [
+                        '#0077B6', 
+                        '#00B4D8', 
+                        '#90E0EF', 
+                        '#ADE8F4',
+                        '#CAF0F8'
+                    ],
+                    borderColor: [
+                        '#005A8D',
+                        '#009CBF',
+                        '#7BCDEA',
+                        '#98DFF0',
+                        '#B6E6F2'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Frequência (Log Escala Conceitual)'
+                        }
+                    },
+                    x: {
+                         ticks: {
+                            callback: function(value, index, values) {
+                                const label = this.getLabelForValue(value);
+                                if (Array.isArray(label)) {
+                                    return label; 
+                                }
+                                if (typeof label === 'string' && label.length > 16) { 
+                                     let parts = [];
+                                     let currentPart = '';
+                                     label.split(' ').forEach(word => {
+                                         if ((currentPart + ' ' + word).length > 16 && currentPart.length > 0) {
+                                             parts.push(currentPart);
+                                             currentPart = word;
+                                         } else {
+                                             currentPart = currentPart.length > 0 ? currentPart + ' ' + word : word;
+                                         }
+                                     });
+                                     parts.push(currentPart);
+                                     return parts;
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                  return label.join(' ');
+                                } else {
+                                  return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        const modal = document.getElementById('geminiModal');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        const geminiBtns = document.querySelectorAll('.gemini-btn');
+
+        const apiKey = ""; 
+
+        async function callGeminiAPI(promptText) {
+            modalBody.innerHTML = '<div class="loading-spinner"></div>';
+            modal.classList.add('active');
+
+            const chatHistory = [{ role: "user", parts: [{ text: promptText }] }];
+            const payload = { contents: chatHistory };
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error("API Error Response:", errorData);
+                    throw new Error(`API request failed with status ${response.status}: ${errorData.error?.message || 'Unknown error'}`);
+                }
+
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    modalBody.innerHTML = text.replace(/\n/g, '<br>'); 
+                    if (typeof renderMathInElement === 'function') {
+                         renderMathInElement(modalBody, {
+                            delimiters: [
+                                {left: "$$", right: "$$", display: true}, {left: "$", right: "$", display: false},
+                                {left: "\\(", right: "\\)", display: false}, {left: "\\[", right: "\\]", display: true}
+                            ],
+                            throwOnError: false
+                        });
+                    }
+                } else {
+                    console.error("Unexpected API response structure:", result);
+                    modalBody.innerHTML = "Desculpe, não consegui obter uma resposta ou a resposta está vazia.";
+                }
+            } catch (error) {
+                console.error("Error calling Gemini API:", error);
+                modalBody.innerHTML = `Ocorreu um erro ao buscar a informação: ${error.message}. Por favor, tente novamente mais tarde.`;
+            }
+        }
+
+        geminiBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const concept = btn.dataset.concept;
+                let promptText = "";
+                if (btn.textContent.includes("Explique Simplificado")) {
+                    modalTitle.textContent = `Explicação Simplificada: ${concept.split(':')[0]} ✨`;
+                    promptText = `Explique o seguinte conceito de forma simples e concisa, como se fosse para um estudante que está aprendendo sobre Transformers pela primeira vez: ${concept}. Use no máximo 150 palavras e evite jargões excessivos. Se for uma fórmula, explique cada parte e seu propósito.`;
+                } else if (btn.textContent.includes("Saber Mais")) {
+                    modalTitle.textContent = `Mais Sobre: ${concept} ✨`;
+                    promptText = `Descreva brevemente a importância e a ideia principal do seguinte tópico no contexto dos Transformers: ${concept}. Use no máximo 100 palavras.`;
+                }
+                callGeminiAPI(promptText);
+            });
+        });
+
+        modalCloseBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+
+    </script>
+
+
+</body></html>
