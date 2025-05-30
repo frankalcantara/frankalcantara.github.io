@@ -25,13 +25,14 @@ class JekyllToQuartoConverter:
         
         # Chapter mapping from post names to chapter files
         self.chapter_mapping = {
-            'transformers-um.md': '01-fundamentos-matematicos.qmd',
-            'transformers-dois.md': '02-representacao-linguagem.qmd', 
-            'transformers-tres.md': '03-redes-neurais.qmd',
-            'transformers-quatro.md': '04-word-embeddings.qmd',
-            'transformers-cinco.md': '05-arquitetura-transformer.qmd',
-            'transformers-seis.md': '06-mecanismos-atencao.qmd',
-            'transformers-sete.md': '07-implementacoes-avancadas.qmd'
+            '2025-02-06-transformers-um.md': '01-fundamentos-matematicos.qmd',
+            '2025-02-06-transformers-dois.md': '02-representacao-linguagem.qmd', 
+            '2025-04-02-transformers-tres.md': '03-redes-neurais.qmd',
+            '2025-04-18-transformers-quatro.md': '04-word-embeddings.qmd',
+            '2025-04-19-transformers-cinco.md': '05-arquitetura-transformer.qmd',
+            '2025-04-20-transformers-seis.md': '06-mecanismos-atencao.qmd',
+            '2025-04-27-transformers-sete.md': '07-implementacoes-avancadas.qmd',
+            '2025-04-27-transformers-sete.md': '08-outras-implementacoes-avancadas.qmd'
         }
         
         # Quarto headers for each chapter
@@ -366,10 +367,10 @@ def main():
     
     parser = argparse.ArgumentParser(description='Convert Jekyll posts to Quarto chapters')
     parser.add_argument('--source', '-s', 
-                       default='frankalcantara.github.io/_posts',
+                       default='./_posts',
                        help='Source directory with Jekyll posts')
     parser.add_argument('--target', '-t',
-                       default='frankalcantara.github.io/transformers-book/chapters', 
+                       default='./transformers-book/chapters', 
                        help='Target directory for Quarto chapters')
     
     args = parser.parse_args()
