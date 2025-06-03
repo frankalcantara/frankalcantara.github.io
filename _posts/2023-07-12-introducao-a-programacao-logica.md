@@ -23,7 +23,7 @@ keywords:
    - Programação Lógica
 draft: true
 toc: true
-lastmod: 2025-05-24T19:13:06.399Z
+lastmod: 2025-06-03T17:26:21.316Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -276,6 +276,7 @@ Este exemplo ilustra como múltiplas leis podem ser aplicadas. A cuidadosa leito
 Para analisar esta suposta equivalência, vamos simplificar ambos os lados separadamente:
 
 **Lado Esquerdo**:
+
 $$\begin{align*}
 \neg(P \lor (Q \land \neg R)) &\equiv \neg P \land \neg(Q \land \neg R) & \text{(Lei de De Morgan)} \\
 &\equiv \neg P \land (\neg Q \lor \neg\neg R) & \text{(Lei de De Morgan)} \\
@@ -283,6 +284,7 @@ $$\begin{align*}
 \end{align*}$$
 
 **Lado Direito**:
+
 $$\begin{align*}
 ((S \lor E) \rightarrow (P \land Q)) &\equiv \neg(S \lor E) \lor (P \land Q) & \text{(Eliminação da Implicação)} \\
 &\equiv (\neg S \land \neg E) \lor (P \land Q) & \text{(Lei de De Morgan)}
@@ -293,6 +295,7 @@ Como podemos ver, os resultados finais $\neg P \land (\neg Q \lor R)$ e $(\neg S
 **Conclusão**: As expressões não são logicamente equivalentes.
 
 **Exemplo 8**:
+
 $\neg(P \leftrightarrow Q) \vee ((R \rightarrow S) \wedge (\neg E \vee \neg P))$
 
 $$
