@@ -1,0 +1,986 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 1200 900"
+   version="1.1"
+   id="svg53"
+   sodipodi:docname="mapa_funcoes_essenciais_so.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:export-filename="..\images\mapa_funcoes_essenciais_so.webp"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview53"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.99756624"
+     inkscape:cx="599.96016"
+     inkscape:cy="450.59664"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg53" />
+  <path
+     d="m 270.25654,708.71421 c 6.90757,-58.92645 56.64615,-125.20925 93.27402,-175.71698 29.13533,-40.17593 71.48625,-62.51832 136.76012,-68.65508"
+     stroke="#f39c12"
+     stroke-width="3.72405"
+     fill="none"
+     marker-end="url(#arrowhead-orange)"
+     id="path22"
+     style="marker-end:url(#marker53)"
+     sodipodi:nodetypes="csc" />
+  <!-- Background -->
+  <!-- Title -->
+  <text
+     x="601.00244"
+     y="62.078072"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="20px"
+     font-weight="bold"
+     fill="#2c3e50"
+     id="text1">Funções Essenciais do Sistema Operacional</text>
+  <!-- Central OS Hub -->
+  <!-- Process Management -->
+  <rect
+     x="109.20865"
+     y="166.22572"
+     width="278.65521"
+     height="204.18929"
+     fill="#3498db"
+     stroke="#2980b9"
+     stroke-width="3.37338"
+     rx="16.719313"
+     id="rect4" />
+  <text
+     x="250.73004"
+     y="192.8828"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="17.9914px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text5"
+     transform="scale(0.99125041,1.0088268)"
+     style="stroke-width:1.12446">Gerenciamento de Processos</text>
+  <rect
+     x="131.50105"
+     y="211.60112"
+     width="100.31588"
+     height="34.031548"
+     fill="#2980b9"
+     stroke="#1f618d"
+     stroke-width="1.12446"
+     rx="5.5731044"
+     id="rect5" />
+  <text
+     x="183.26248"
+     y="229.98996"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11.2446px"
+     fill="#ffffff"
+     id="text6"
+     transform="scale(0.99125041,1.0088268)"
+     style="stroke-width:1.12446">Criação/Término</text>
+  <rect
+     x="265.25555"
+     y="211.60112"
+     width="100.31588"
+     height="34.031548"
+     fill="#2980b9"
+     stroke="#1f618d"
+     stroke-width="1.12446"
+     rx="5.5731044"
+     id="rect6" />
+  <text
+     x="318.1976"
+     y="229.98996"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11.2446px"
+     fill="#ffffff"
+     id="text7"
+     transform="scale(0.99125041,1.0088268)"
+     style="stroke-width:1.12446">Escalonamento</text>
+  <rect
+     x="131.50105"
+     y="256.97653"
+     width="100.31588"
+     height="34.031548"
+     fill="#2980b9"
+     stroke="#1f618d"
+     stroke-width="1.12446"
+     rx="5.5731044"
+     id="rect7" />
+  <text
+     x="183.26248"
+     y="274.96832"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11.2446px"
+     fill="#ffffff"
+     id="text8"
+     transform="scale(0.99125041,1.0088268)"
+     style="stroke-width:1.12446">Sincronização</text>
+  <rect
+     x="265.25555"
+     y="256.97653"
+     width="100.31588"
+     height="34.031548"
+     fill="#2980b9"
+     stroke="#1f618d"
+     stroke-width="1.12446"
+     rx="5.5731044"
+     id="rect8" />
+  <text
+     x="318.1976"
+     y="274.96832"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11.2446px"
+     fill="#ffffff"
+     id="text9"
+     transform="scale(0.99125041,1.0088268)"
+     style="stroke-width:1.12446">Comunicação</text>
+  <rect
+     x="198.37831"
+     y="302.3519"
+     width="100.31588"
+     height="34.031548"
+     fill="#2980b9"
+     stroke="#1f618d"
+     stroke-width="1.12446"
+     rx="5.5731044"
+     id="rect9" />
+  <text
+     x="250.73004"
+     y="319.94669"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11.2446px"
+     fill="#ffffff"
+     id="text10"
+     transform="scale(0.99125041,1.0088268)"
+     style="stroke-width:1.12446">Deadlock</text>
+  <path
+     d="m 349.36776,239.59268 c 55.12417,29.01676 145.71574,32.11247 166.21588,156.15161"
+     stroke="#3498db"
+     stroke-width="2.52762"
+     fill="none"
+     marker-end="url(#arrowhead-blue)"
+     id="path10"
+     style="stroke-width:3.828;stroke-miterlimit:4.2;stroke-dasharray:none;marker-end:url(#marker54)"
+     sodipodi:nodetypes="cc" />
+  <!-- Memory Management -->
+  <rect
+     x="839.32343"
+     y="218.57002"
+     width="279.47495"
+     height="194.5885"
+     fill="#e74c3c"
+     stroke="#c0392b"
+     stroke-width="3.29796"
+     rx="16.768497"
+     id="rect10" />
+  <text
+     x="962.78784"
+     y="249.74728"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="17.5891px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text11"
+     transform="scale(1.016902,0.9833789)"
+     style="stroke-width:1.09932">Gerenciamento de Memória</text>
+  <rect
+     x="861.68146"
+     y="261.81192"
+     width="100.61098"
+     height="32.431416"
+     fill="#c0392b"
+     stroke="#a93226"
+     stroke-width="1.09932"
+     rx="5.589499"
+     id="rect11" />
+  <text
+     x="896.82874"
+     y="286.02481"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10.9932px"
+     fill="#ffffff"
+     id="text12"
+     transform="scale(1.016902,0.9833789)"
+     style="stroke-width:1.09932">Alocação</text>
+  <rect
+     x="995.82941"
+     y="261.81192"
+     width="100.61098"
+     height="32.431416"
+     fill="#c0392b"
+     stroke="#a93226"
+     stroke-width="1.09932"
+     rx="5.589499"
+     id="rect12" />
+  <text
+     x="1028.7471"
+     y="286.02481"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10.9932px"
+     fill="#ffffff"
+     id="text13"
+     transform="scale(1.016902,0.9833789)"
+     style="stroke-width:1.09932">Proteção</text>
+  <rect
+     x="861.68146"
+     y="305.0538"
+     width="100.61098"
+     height="32.431416"
+     fill="#c0392b"
+     stroke="#a93226"
+     stroke-width="1.09932"
+     rx="5.589499"
+     id="rect13" />
+  <text
+     x="896.82874"
+     y="329.99759"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10.9932px"
+     fill="#ffffff"
+     id="text14"
+     transform="scale(1.016902,0.9833789)"
+     style="stroke-width:1.09932">Paginação</text>
+  <rect
+     x="995.82941"
+     y="305.0538"
+     width="100.61098"
+     height="32.431416"
+     fill="#c0392b"
+     stroke="#a93226"
+     stroke-width="1.09932"
+     rx="5.589499"
+     id="rect14" />
+  <text
+     x="1028.7471"
+     y="329.99759"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10.9932px"
+     fill="#ffffff"
+     id="text15"
+     transform="scale(1.016902,0.9833789)"
+     style="stroke-width:1.09932">Segmentação</text>
+  <rect
+     x="928.75543"
+     y="348.29568"
+     width="100.61098"
+     height="32.431416"
+     fill="#c0392b"
+     stroke="#a93226"
+     stroke-width="1.09932"
+     rx="5.589499"
+     id="rect15" />
+  <text
+     x="962.78784"
+     y="373.97034"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10.9932px"
+     fill="#ffffff"
+     id="text16"
+     transform="scale(1.016902,0.9833789)"
+     style="stroke-width:1.09932">Mem. Virtual</text>
+  <path
+     d="m 865.30179,265.80238 c -36.70247,54.07679 -45.18163,55.52605 -70.9152,85.28501 -28.35661,32.7923 -52.58706,41.34374 -109.89627,45.58947"
+     stroke="#e74c3c"
+     stroke-width="2.47991"
+     fill="none"
+     marker-end="url(#arrowhead-red)"
+     id="path16"
+     sodipodi:nodetypes="csc"
+     style="stroke-width:3.68;stroke-miterlimit:4.1;stroke-dasharray:none;marker-end:url(#Triangle)" />
+  <!-- File System Management -->
+  <rect
+     x="85.271263"
+     y="518.34802"
+     width="279.40118"
+     height="203.44659"
+     fill="#f39c12"
+     stroke="#e67e22"
+     stroke-width="3.37174"
+     rx="16.764071"
+     id="rect16" />
+  <text
+     x="226.2419"
+     y="543.53607"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="17.9826px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text17"
+     transform="scale(0.99438638,1.0056453)"
+     style="stroke-width:1.12391">Sistema de Arquivos</text>
+  <rect
+     x="107.62335"
+     y="563.55835"
+     width="100.58443"
+     height="33.907764"
+     fill="#e67e22"
+     stroke="#d35400"
+     stroke-width="1.12391"
+     rx="5.5880237"
+     id="rect17" />
+  <text
+     x="158.80705"
+     y="580.62524"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11.2391px"
+     fill="#ffffff"
+     id="text18"
+     transform="scale(0.99438638,1.0056453)"
+     style="stroke-width:1.12391">Criar/Excluir</text>
+  <rect
+     x="241.73592"
+     y="563.55835"
+     width="100.58443"
+     height="33.907764"
+     fill="#e67e22"
+     stroke="#d35400"
+     stroke-width="1.12391"
+     rx="5.5880237"
+     id="rect18" />
+  <text
+     x="293.67673"
+     y="580.62524"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11.2391px"
+     fill="#ffffff"
+     id="text19"
+     transform="scale(0.99438638,1.0056453)"
+     style="stroke-width:1.12391">Ler/Escrever</text>
+  <rect
+     x="107.62335"
+     y="608.76874"
+     width="100.58443"
+     height="33.907764"
+     fill="#e67e22"
+     stroke="#d35400"
+     stroke-width="1.12391"
+     rx="5.5880237"
+     id="rect19" />
+  <text
+     x="158.80705"
+     y="625.58179"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11.2391px"
+     fill="#ffffff"
+     id="text20"
+     transform="scale(0.99438638,1.0056453)"
+     style="stroke-width:1.12391">Diretórios</text>
+  <rect
+     x="241.73592"
+     y="608.76874"
+     width="100.58443"
+     height="33.907764"
+     fill="#e67e22"
+     stroke="#d35400"
+     stroke-width="1.12391"
+     rx="5.5880237"
+     id="rect20" />
+  <text
+     x="293.67673"
+     y="625.58179"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11.2391px"
+     fill="#ffffff"
+     id="text21"
+     transform="scale(0.99438638,1.0056453)"
+     style="stroke-width:1.12391">Metadados</text>
+  <rect
+     x="174.67964"
+     y="653.97906"
+     width="100.58443"
+     height="33.907764"
+     fill="#e67e22"
+     stroke="#d35400"
+     stroke-width="1.12391"
+     rx="5.5880237"
+     id="rect21" />
+  <text
+     x="226.2419"
+     y="670.53833"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11.2391px"
+     fill="#ffffff"
+     id="text22"
+     transform="scale(0.99438638,1.0056453)"
+     style="stroke-width:1.12391">Controle Acesso</text>
+  <!-- I/O Management -->
+  <rect
+     x="818.3963"
+     y="540.18164"
+     width="288.29272"
+     height="201.9176"
+     fill="#9b59b6"
+     stroke="#8e44ad"
+     stroke-width="3.41208"
+     rx="17.297564"
+     id="rect22" />
+  <text
+     x="949.34491"
+     y="576.12524"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="18.1977px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text23"
+     transform="scale(1.013902,0.98628861)"
+     style="stroke-width:1.13736">Gerenciamento de E/S</text>
+  <rect
+     x="841.45972"
+     y="585.05219"
+     width="103.78538"
+     height="33.652935"
+     fill="#8e44ad"
+     stroke="#7d3c98"
+     stroke-width="1.13736"
+     rx="5.7658544"
+     id="rect23" />
+  <text
+     x="881.10339"
+     y="613.65808"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11.3736px"
+     fill="#ffffff"
+     id="text24"
+     transform="scale(1.013902,0.98628861)"
+     style="stroke-width:1.13736">Drivers</text>
+  <rect
+     x="979.84027"
+     y="585.05219"
+     width="103.78538"
+     height="33.652935"
+     fill="#8e44ad"
+     stroke="#7d3c98"
+     stroke-width="1.13736"
+     rx="5.7658544"
+     id="rect24" />
+  <text
+     x="1017.5865"
+     y="613.65808"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11.3736px"
+     fill="#ffffff"
+     id="text25"
+     transform="scale(1.013902,0.98628861)"
+     style="stroke-width:1.13736">Interrupções</text>
+  <rect
+     x="841.45972"
+     y="629.92279"
+     width="103.78538"
+     height="33.652935"
+     fill="#8e44ad"
+     stroke="#7d3c98"
+     stroke-width="1.13736"
+     rx="5.7658544"
+     id="rect25" />
+  <text
+     x="881.10339"
+     y="659.15247"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11.3736px"
+     fill="#ffffff"
+     id="text26"
+     transform="scale(1.013902,0.98628861)"
+     style="stroke-width:1.13736">Buffering</text>
+  <rect
+     x="979.84027"
+     y="629.92279"
+     width="103.78538"
+     height="33.652935"
+     fill="#8e44ad"
+     stroke="#7d3c98"
+     stroke-width="1.13736"
+     rx="5.7658544"
+     id="rect26" />
+  <text
+     x="1017.5865"
+     y="659.15247"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11.3736px"
+     fill="#ffffff"
+     id="text27"
+     transform="scale(1.013902,0.98628861)"
+     style="stroke-width:1.13736">Caching</text>
+  <rect
+     x="910.65002"
+     y="674.79333"
+     width="103.78538"
+     height="33.652935"
+     fill="#8e44ad"
+     stroke="#7d3c98"
+     stroke-width="1.13736"
+     rx="5.7658544"
+     id="rect27" />
+  <text
+     x="949.34491"
+     y="704.64685"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11.3736px"
+     fill="#ffffff"
+     id="text28"
+     transform="scale(1.013902,0.98628861)"
+     style="stroke-width:1.13736">DMA</text>
+  <path
+     d="M 889.54213,647.54457 C 841.06596,615.47391 725.2468,604.7911 671.39936,519.26192"
+     stroke="#9b59b6"
+     stroke-width="2.55218"
+     fill="none"
+     marker-end="url(#arrowhead-purple)"
+     id="path28"
+     style="stroke-width:3.47065;stroke-dasharray:none;marker-end:url(#Triangle)"
+     sodipodi:nodetypes="cc" />
+  <!-- Network Management -->
+  <rect
+     x="491.44006"
+     y="97.104729"
+     width="265.2428"
+     height="154.80351"
+     fill="#1abc9c"
+     stroke="#16a085"
+     stroke-width="3.92399"
+     rx="19.893209"
+     id="rect28" />
+  <text
+     x="615.48907"
+     y="131.15712"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="18.312px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text29"
+     transform="scale(1.0139278,0.98626353)"
+     style="stroke-width:1.30799">Gerenciamento de Rede</text>
+  <rect
+     x="517.96429"
+     y="148.7059"
+     width="92.834976"
+     height="32.250732"
+     fill="#16a085"
+     stroke="#138d75"
+     stroke-width="1.30799"
+     rx="3.978642"
+     id="rect29" />
+  <text
+     x="556.62921"
+     y="170.39702"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11.7719px"
+     fill="#ffffff"
+     id="text30"
+     transform="scale(1.0139278,0.98626353)"
+     style="stroke-width:1.30799">Protocolos</text>
+  <rect
+     x="637.32355"
+     y="148.7059"
+     width="92.834976"
+     height="32.250732"
+     fill="#16a085"
+     stroke="#138d75"
+     stroke-width="1.30799"
+     rx="3.978642"
+     id="rect30" />
+  <text
+     x="674.34888"
+     y="170.39702"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11.7719px"
+     fill="#ffffff"
+     id="text31"
+     transform="scale(1.0139278,0.98626353)"
+     style="stroke-width:1.30799">Sockets</text>
+  <rect
+     x="577.64392"
+     y="193.85695"
+     width="92.834976"
+     height="32.250732"
+     fill="#16a085"
+     stroke="#138d75"
+     stroke-width="1.30799"
+     rx="3.978642"
+     id="rect31" />
+  <text
+     x="615.48907"
+     y="216.17688"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11.7719px"
+     fill="#ffffff"
+     id="text32"
+     transform="scale(1.0139278,0.98626353)"
+     style="stroke-width:1.30799">Roteamento</text>
+  <path
+     d="m 627.69056,202.70011 c 17.7838,31.38647 17.54662,59.75596 17.09624,85.10844 -0.42812,24.10009 -0.19094,45.4739 -17.09624,64.12141"
+     stroke="#1abc9c"
+     stroke-width="4.3467"
+     fill="none"
+     marker-end="url(#arrowhead-teal)"
+     id="path32"
+     style="stroke-width:3.26585;stroke-dasharray:none;marker-end:url(#Triangle)"
+     sodipodi:nodetypes="csc" />
+  <!-- Security and Protection -->
+  <rect
+     x="485.50839"
+     y="657.74323"
+     width="240.33574"
+     height="143.96063"
+     fill="#e67e22"
+     stroke="#d35400"
+     stroke-width="3.60202"
+     rx="18.025181"
+     id="rect32" />
+  <text
+     x="605.17035"
+     y="688.31"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="16.8094px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text33"
+     transform="scale(1.000836,0.99916469)"
+     style="stroke-width:1.20067">Segurança e Proteção</text>
+  <rect
+     x="509.54196"
+     y="705.7301"
+     width="84.117508"
+     height="29.991798"
+     fill="#d35400"
+     stroke="#ba4a00"
+     stroke-width="1.20067"
+     rx="3.605036"
+     id="rect33" />
+  <text
+     x="551.13995"
+     y="724.3302"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10.8061px"
+     fill="#ffffff"
+     id="text34"
+     transform="scale(1.000836,0.99916469)"
+     style="stroke-width:1.20067">Autenticação</text>
+  <path
+     d="M 611.60257,710.9467 Q 513.82066,600.09886 534.46676,522.25696"
+     stroke="#e67e22"
+     stroke-width="3.71134"
+     fill="none"
+     marker-end="url(#arrowhead-orange2)"
+     id="path36"
+     style="stroke-miterlimit:4.1;marker-end:url(#Triangle)" />
+  <rect
+     x="617.69305"
+     y="705.7301"
+     width="84.117508"
+     height="29.991798"
+     fill="#d35400"
+     stroke="#ba4a00"
+     stroke-width="1.20067"
+     rx="3.605036"
+     id="rect34" />
+  <text
+     x="659.20074"
+     y="724.3302"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10.8061px"
+     fill="#ffffff"
+     id="text35"
+     transform="scale(1.000836,0.99916469)"
+     style="stroke-width:1.20067">Autorização</text>
+  <rect
+     x="563.61749"
+     y="747.71863"
+     width="84.117508"
+     height="29.991798"
+     fill="#d35400"
+     stroke="#ba4a00"
+     stroke-width="1.20067"
+     rx="3.605036"
+     id="rect35" />
+  <text
+     x="605.17035"
+     y="766.35382"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10.8061px"
+     fill="#ffffff"
+     id="text36"
+     transform="scale(1.000836,0.99916469)"
+     style="stroke-width:1.20067">Auditoria</text>
+  <!-- Interconnections between subsystems -->
+  <path
+     d="m 350,240 q 100,-40 500,0"
+     fill="none"
+     id="path37"
+     style="opacity:0.6;stroke:#95a5a6;stroke-width:2;stroke-dasharray:5, 5" />
+  <path
+     d="m 225,330 q 25,120 -50,220"
+     fill="none"
+     id="path38"
+     style="opacity:0.6;stroke:#95a5a6;stroke-width:2;stroke-dasharray:5, 5" />
+  <path
+     d="M 850,330 Q 650,500 300,640"
+     fill="none"
+     id="path39"
+     style="opacity:0.6;stroke:#95a5a6;stroke-width:2;stroke-dasharray:5, 5" />
+  <path
+     d="m 300,640 q 300,60 600,0"
+     fill="none"
+     id="path40"
+     style="opacity:0.6;stroke:#95a5a6;stroke-width:2;stroke-dasharray:5, 5" />
+  <path
+     d="M 1025,550 Q 800,300 600,220"
+     fill="none"
+     id="path41"
+     style="opacity:0.6;stroke:#95a5a6;stroke-width:2;stroke-dasharray:5, 5" />
+  <path
+     d="M 450,680 Q 300,500 175,330"
+     fill="none"
+     id="path42"
+     style="opacity:0.6;stroke:#95a5a6;stroke-width:2;stroke-dasharray:5, 5" />
+  <path
+     d="M 550,680 Q 700,500 975,330"
+     fill="none"
+     id="path43"
+     style="opacity:0.6;stroke:#95a5a6;stroke-width:2;stroke-dasharray:5, 5" />
+  <path
+     d="M 500,680 Q 600,400 850,240"
+     fill="none"
+     id="path44"
+     style="opacity:0.6;stroke:#95a5a6;stroke-width:2;stroke-dasharray:5, 5" />
+  <!-- Legend -->
+  <!-- Bottom description -->
+  <g
+     transform="translate(204.00976,832.95853)"
+     id="g48">
+    <text
+       x="400"
+       y="0"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="14px"
+       font-weight="bold"
+       fill="#2c3e50"
+       id="text47">Todas as funções trabalham em conjunto para fornecer um ambiente computacional estável e eficiente</text>
+    <text
+       x="400"
+       y="20"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="12px"
+       fill="#7f8c8d"
+       id="text48">O Sistema Operacional coordena e integra todas estas funções essenciais</text>
+  </g>
+  <!-- Arrow markers definitions -->
+  <defs
+     id="defs53">
+    <marker
+       style="overflow:visible"
+       id="marker54"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Triangle arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path54" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker53"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Triangle arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path53" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Triangle"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Triangle arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path135" />
+    </marker>
+    <marker
+       id="arrowhead-blue"
+       markerWidth="12"
+       markerHeight="8"
+       refX="12"
+       refY="4"
+       orient="auto">
+      <polygon
+         points="0 0, 12 4, 0 8"
+         fill="#3498db"
+         id="polygon48" />
+    </marker>
+    <marker
+       id="arrowhead-red"
+       markerWidth="12"
+       markerHeight="8"
+       refX="12"
+       refY="4"
+       orient="auto">
+      <polygon
+         points="0 0, 12 4, 0 8"
+         fill="#e74c3c"
+         id="polygon49" />
+    </marker>
+    <marker
+       id="arrowhead-orange"
+       markerWidth="12"
+       markerHeight="8"
+       refX="12"
+       refY="4"
+       orient="auto">
+      <polygon
+         points="0 0, 12 4, 0 8"
+         fill="#f39c12"
+         id="polygon50" />
+    </marker>
+    <marker
+       id="arrowhead-purple"
+       markerWidth="12"
+       markerHeight="8"
+       refX="12"
+       refY="4"
+       orient="auto">
+      <polygon
+         points="0 0, 12 4, 0 8"
+         fill="#9b59b6"
+         id="polygon51" />
+    </marker>
+    <marker
+       id="arrowhead-teal"
+       markerWidth="12"
+       markerHeight="8"
+       refX="12"
+       refY="4"
+       orient="auto">
+      <polygon
+         points="0 0, 12 4, 0 8"
+         fill="#1abc9c"
+         id="polygon52" />
+    </marker>
+    <marker
+       id="arrowhead-orange2"
+       markerWidth="12"
+       markerHeight="8"
+       refX="11"
+       refY="4"
+       orient="auto">
+      <polygon
+         points="0 0, 12 4, 0 8"
+         fill="#e67e22"
+         id="polygon53" />
+    </marker>
+  </defs>
+  <g
+     transform="translate(500, 350)"
+     id="g4">
+    <!-- Central circle -->
+    <circle
+       cx="100"
+       cy="100"
+       r="90"
+       fill="#2c3e50"
+       stroke="#34495e"
+       stroke-width="4"
+       id="circle1" />
+    <text
+       x="100"
+       y="90"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="16"
+       fill="white"
+       font-weight="bold"
+       id="text2">Sistema</text>
+    <text
+       x="100"
+       y="110"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="16"
+       fill="white"
+       font-weight="bold"
+       id="text3">Operacional</text>
+    <text
+       x="100"
+       y="130"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="12"
+       fill="#ecf0f1"
+       id="text4">Coordenação Central</text>
+  </g>
+</svg>

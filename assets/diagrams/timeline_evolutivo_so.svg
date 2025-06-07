@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 1200 400"
+   version="1.1"
+   id="svg44"
+   sodipodi:docname="timeline_evolutivo_so.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:export-filename="..\images\timeline_evolutivo_so.webp"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs44" />
+  <sodipodi:namedview
+     id="namedview44"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.475"
+     inkscape:cx="576.61017"
+     inkscape:cy="135.25424"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg44" />
+  <!-- Background -->
+  <!-- Main timeline line -->
+  <line
+     x1="50"
+     y1="200"
+     x2="1150"
+     y2="200"
+     stroke="#2c3e50"
+     stroke-width="4"
+     id="line1"
+     style="fill:#b3b3b3;stroke:#699dd0;stroke-opacity:1" />
+  <!-- Era markers and labels -->
+  <!-- 1940s-1950s: Bare Machines -->
+  <line
+     x1="100"
+     y1="200"
+     x2="100"
+     y2="120"
+     stroke="#34495e"
+     stroke-width="2"
+     id="line2" />
+  <rect
+     x="60"
+     y="119.32204"
+     width="80"
+     height="40"
+     fill="#ecf0f1"
+     stroke="#34495e"
+     rx="5"
+     id="rect2" />
+  <text
+     x="100"
+     y="144.32204"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     font-weight="bold"
+     id="text2">1940s-1950s</text>
+  <text
+     x="102.0339"
+     y="108.44256"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text3">Máquinas Nuas</text>
+  <text
+     x="102.71186"
+     y="92.945816"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#7f8c8d"
+     id="text4">Válvulas</text>
+  <!-- 1950s-1960s: Batch Systems -->
+  <line
+     x1="250"
+     y1="200"
+     x2="250"
+     y2="280"
+     stroke="#34495e"
+     stroke-width="2"
+     id="line4" />
+  <rect
+     x="210.67796"
+     y="245.25423"
+     width="80"
+     height="40"
+     fill="#ecf0f1"
+     stroke="#34495e"
+     rx="5"
+     id="rect4" />
+  <text
+     x="250.67796"
+     y="270.25424"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     font-weight="bold"
+     id="text5">1950s-1960s</text>
+  <text
+     x="250.67796"
+     y="305.25424"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text6">Sistemas Batch</text>
+  <text
+     x="250.67796"
+     y="320.25424"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#7f8c8d"
+     id="text7">Transistores</text>
+  <!-- 1960s-1970s: Multiprogramming -->
+  <line
+     x1="400"
+     y1="200"
+     x2="400"
+     y2="120"
+     stroke="#34495e"
+     stroke-width="2"
+     id="line7" />
+  <rect
+     x="356.61017"
+     y="118.64407"
+     width="80"
+     height="40"
+     fill="#ecf0f1"
+     stroke="#34495e"
+     rx="5"
+     id="rect7" />
+  <text
+     x="396.61017"
+     y="143.64407"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     font-weight="bold"
+     id="text8">1960s-1970s</text>
+  <text
+     x="400"
+     y="108.32537"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text9">Multiprogramação</text>
+  <text
+     x="400.67795"
+     y="93.028831"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#7f8c8d"
+     id="text10">Circuitos Integrados</text>
+  <!-- 1970s-1980s: Time-sharing -->
+  <line
+     x1="550"
+     y1="200"
+     x2="550"
+     y2="280"
+     stroke="#34495e"
+     stroke-width="2"
+     id="line10" />
+  <rect
+     x="510.67795"
+     y="245.25424"
+     width="80"
+     height="40"
+     fill="#ecf0f1"
+     stroke="#34495e"
+     rx="5"
+     id="rect10" />
+  <text
+     x="550.67798"
+     y="270.25424"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     font-weight="bold"
+     id="text11">1970s-1980s</text>
+  <text
+     x="550.67798"
+     y="305.25424"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text12">Time-sharing</text>
+  <text
+     x="550.67798"
+     y="320.25424"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#7f8c8d"
+     id="text13">UNIX, MULTICS</text>
+  <!-- 1980s-1990s: Personal Computers -->
+  <line
+     x1="700"
+     y1="200"
+     x2="700"
+     y2="120"
+     stroke="#34495e"
+     stroke-width="2"
+     id="line13" />
+  <rect
+     x="660"
+     y="120"
+     width="80"
+     height="40"
+     fill="#ecf0f1"
+     stroke="#34495e"
+     rx="5"
+     id="rect13" />
+  <text
+     x="700"
+     y="145"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     font-weight="bold"
+     id="text14">1980s-1990s</text>
+  <text
+     x="702.03387"
+     y="110.30779"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text15">PCs</text>
+  <text
+     x="702.71185"
+     y="93.033707"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#7f8c8d"
+     id="text16">MS-DOS, Mac OS</text>
+  <!-- 1990s-2000s: Networks & Internet -->
+  <line
+     x1="850"
+     y1="200"
+     x2="850"
+     y2="280"
+     stroke="#34495e"
+     stroke-width="2"
+     id="line16" />
+  <rect
+     x="812.03387"
+     y="242.54237"
+     width="80"
+     height="40"
+     fill="#ecf0f1"
+     stroke="#34495e"
+     rx="5"
+     id="rect16" />
+  <text
+     x="852.03387"
+     y="267.54236"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     font-weight="bold"
+     id="text17">1990s-2000s</text>
+  <text
+     x="852.03387"
+     y="302.54236"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text18">Redes Internet</text>
+  <text
+     x="852.03387"
+     y="317.54236"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#7f8c8d"
+     id="text19">Windows NT, Linux</text>
+  <!-- 2000s-presente: Mobile & Cloud -->
+  <line
+     x1="1000"
+     y1="200"
+     x2="1000"
+     y2="120"
+     stroke="#34495e"
+     stroke-width="2"
+     id="line19" />
+  <rect
+     x="942.45532"
+     y="121.43833"
+     width="108.98775"
+     height="39.835213"
+     fill="#ecf0f1"
+     stroke="#34495e"
+     rx="6.8117347"
+     id="rect19"
+     style="stroke-width:1.16479" />
+  <text
+     x="997.96613"
+     y="146.35593"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     font-weight="bold"
+     id="text20">2000s-presente</text>
+  <text
+     x="997.96613"
+     y="101.35593"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text21">Mobile Cloud</text>
+  <text
+     x="997.96613"
+     y="86.355934"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#7f8c8d"
+     id="text22">Android, iOS</text>
+  <!-- Key innovations icons -->
+  <!-- Vacuum tube icon -->
+  <!-- Transistor icon -->
+  <!-- IC chip icon -->
+  <!-- Computer terminal icon -->
+  <!-- PC icon -->
+  <!-- Network icon -->
+  <!-- Mobile/Cloud icon -->
+  <!-- Title -->
+  <text
+     x="564.74579"
+     y="52.372883"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="18px"
+     font-weight="bold"
+     fill="#2c3e50"
+     id="text36">Evolução dos Sistemas Operacionais</text>
+  <!-- Timeline periods labels -->
+  <text
+     x="69.491524"
+     y="352.30957"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#7f8c8d"
+     id="text37"
+     style="fill:#000080">1940s</text>
+  <text
+     x="219.49152"
+     y="352.30957"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#7f8c8d"
+     id="text38"
+     style="fill:#000080">1950s</text>
+  <circle
+     cx="100"
+     cy="200"
+     r="8"
+     fill="#e74c3c"
+     id="circle1" />
+  <circle
+     cx="250"
+     cy="200"
+     r="8"
+     fill="#f39c12"
+     id="circle4" />
+  <circle
+     cx="400"
+     cy="200"
+     r="8"
+     fill="#3498db"
+     id="circle7" />
+  <circle
+     cx="550"
+     cy="200"
+     r="8"
+     fill="#9b59b6"
+     id="circle10" />
+  <circle
+     cx="700"
+     cy="200"
+     r="8"
+     fill="#e67e22"
+     id="circle13" />
+  <circle
+     cx="850"
+     cy="200"
+     r="8"
+     fill="#1abc9c"
+     id="circle16" />
+  <circle
+     cx="1000"
+     cy="200"
+     r="8"
+     fill="#e91e63"
+     id="circle19" />
+  <text
+     x="369.49155"
+     y="352.30957"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#7f8c8d"
+     id="text39"
+     style="fill:#000080">1960s</text>
+  <text
+     x="519.49152"
+     y="352.30957"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#7f8c8d"
+     id="text40"
+     style="fill:#000080">1970s</text>
+  <text
+     x="669.49152"
+     y="352.30957"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#7f8c8d"
+     id="text41"
+     style="fill:#000080">1980s</text>
+  <text
+     x="819.49152"
+     y="352.30957"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#7f8c8d"
+     id="text42"
+     style="fill:#000080">1990s</text>
+  <text
+     x="970.6908"
+     y="352.30957"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#7f8c8d"
+     id="text42-0"
+     style="fill:#000080">2000s</text>
+  <text
+     x="1114.8506"
+     y="352.28027"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#7f8c8d"
+     id="text42-0-9"
+     style="fill:#000080">Presente</text>
+</svg>
