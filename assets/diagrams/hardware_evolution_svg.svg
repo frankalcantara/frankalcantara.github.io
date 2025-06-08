@@ -1,0 +1,1025 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 900 400"
+   version="1.1"
+   id="svg92"
+   sodipodi:docname="hardware_evolution_svg.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:export-filename="..\images\hardware_evolution_svg.webp"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview92"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.5022222"
+     inkscape:cx="449.66716"
+     inkscape:cy="200.03698"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg92" />
+  <!-- Background -->
+  <!-- Title -->
+  <text
+     x="450"
+     y="25"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="18"
+     font-weight="bold"
+     fill="#2c3e50"
+     id="text1">Evolução do Hardware → Impacto nos Sistemas Operacionais</text>
+  <!-- Hardware Evolution Timeline -->
+  <rect
+     x="49.954983"
+     y="47.954563"
+     width="120.02405"
+     height="255.19363"
+     fill="#ffe6e6"
+     stroke="#e74c3c"
+     stroke-width="1.90954"
+     rx="10.002003"
+     id="rect2" />
+  <text
+     x="110"
+     y="68"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     font-weight="bold"
+     fill="#c0392b"
+     id="text2">1940s-1950s</text>
+  <text
+     x="110"
+     y="83"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     fill="#c0392b"
+     id="text3">Válvulas</text>
+  <ellipse
+     cx="110"
+     cy="108"
+     rx="25"
+     ry="15"
+     fill="#f39c12"
+     stroke="#e67e22"
+     id="ellipse3" />
+  <rect
+     x="100"
+     y="93"
+     width="20"
+     height="30"
+     fill="none"
+     stroke="#e67e22"
+     stroke-width="2"
+     id="rect3" />
+  <line
+     x1="95"
+     y1="103"
+     x2="125"
+     y2="103"
+     stroke="#e67e22"
+     stroke-width="2"
+     id="line3" />
+  <line
+     x1="95"
+     y1="113"
+     x2="125"
+     y2="113"
+     stroke="#e67e22"
+     stroke-width="2"
+     id="line4" />
+  <text
+     x="110"
+     y="143"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text4">• Grandes</text>
+  <text
+     x="110"
+     y="158"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text5">• Quentes</text>
+  <text
+     x="110"
+     y="173"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text6">• Pouco confiáveis</text>
+  <text
+     x="110"
+     y="188"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text7">• Caros</text>
+  <text
+     x="110"
+     y="219.69414"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     font-weight="bold"
+     fill="#c0392b"
+     id="text8">SO: Nenhum</text>
+  <text
+     x="110"
+     y="233"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#2c3e50"
+     id="text9">Programação</text>
+  <text
+     x="110"
+     y="245"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#2c3e50"
+     id="text10">manual direta</text>
+  <text
+     x="110"
+     y="259"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#2c3e50"
+     id="text11">Painéis de</text>
+  <text
+     x="110"
+     y="271"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#2c3e50"
+     id="text12">conexão</text>
+  <rect
+     x="189.9669"
+     y="47.953384"
+     width="120.0266"
+     height="254.53212"
+     fill="#fff3cd"
+     stroke="#f39c12"
+     stroke-width="1.90708"
+     rx="10.002217"
+     id="rect12" />
+  <text
+     x="250"
+     y="68"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     font-weight="bold"
+     fill="#d68910"
+     id="text13">1950s-1960s</text>
+  <text
+     x="250"
+     y="83"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     fill="#d68910"
+     id="text14">Transistores</text>
+  <circle
+     cx="250"
+     cy="108"
+     r="15"
+     fill="#3498db"
+     id="circle14" />
+  <line
+     x1="235"
+     y1="108"
+     x2="265"
+     y2="108"
+     stroke="#2980b9"
+     stroke-width="3"
+     id="line14" />
+  <line
+     x1="250"
+     y1="93"
+     x2="250"
+     y2="123"
+     stroke="#2980b9"
+     stroke-width="2"
+     id="line15" />
+  <text
+     x="250"
+     y="143"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text15">• Menores</text>
+  <text
+     x="250"
+     y="158"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text16">• Mais confiáveis</text>
+  <text
+     x="250"
+     y="173"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text17">• Menos energia</text>
+  <text
+     x="250"
+     y="188"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text18">• Mais baratos</text>
+  <text
+     x="250"
+     y="219.69414"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     font-weight="bold"
+     fill="#d68910"
+     id="text19">SO: Batch</text>
+  <text
+     x="250"
+     y="233"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#2c3e50"
+     id="text20">Automação</text>
+  <text
+     x="250"
+     y="245"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#2c3e50"
+     id="text21">básica</text>
+  <text
+     x="250"
+     y="259"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#2c3e50"
+     id="text22">Throughput</text>
+  <text
+     x="250"
+     y="271"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#2c3e50"
+     id="text23">otimizado</text>
+  <rect
+     x="329.9769"
+     y="47.950432"
+     width="120.033"
+     height="252.87834"
+     fill="#f4e5f7"
+     stroke="#9b59b6"
+     stroke-width="1.90093"
+     rx="10.002751"
+     id="rect23" />
+  <text
+     x="390"
+     y="68"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     font-weight="bold"
+     fill="#7d3c98"
+     id="text24">1960s-1970s</text>
+  <text
+     x="390"
+     y="83"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     fill="#7d3c98"
+     id="text25">Circuitos Integrados</text>
+  <rect
+     x="375"
+     y="98"
+     width="30"
+     height="20"
+     fill="#2c3e50"
+     stroke="#34495e"
+     rx="2"
+     id="rect25" />
+  <circle
+     cx="380"
+     cy="103"
+     r="1.5"
+     fill="#f39c12"
+     id="circle25" />
+  <circle
+     cx="385"
+     cy="103"
+     r="1.5"
+     fill="#f39c12"
+     id="circle26" />
+  <circle
+     cx="390"
+     cy="103"
+     r="1.5"
+     fill="#f39c12"
+     id="circle27" />
+  <circle
+     cx="395"
+     cy="103"
+     r="1.5"
+     fill="#f39c12"
+     id="circle28" />
+  <circle
+     cx="400"
+     cy="103"
+     r="1.5"
+     fill="#f39c12"
+     id="circle29" />
+  <circle
+     cx="380"
+     cy="113"
+     r="1.5"
+     fill="#f39c12"
+     id="circle30" />
+  <circle
+     cx="385"
+     cy="113"
+     r="1.5"
+     fill="#f39c12"
+     id="circle31" />
+  <circle
+     cx="390"
+     cy="113"
+     r="1.5"
+     fill="#f39c12"
+     id="circle32" />
+  <circle
+     cx="395"
+     cy="113"
+     r="1.5"
+     fill="#f39c12"
+     id="circle33" />
+  <circle
+     cx="400"
+     cy="113"
+     r="1.5"
+     fill="#f39c12"
+     id="circle34" />
+  <text
+     x="390"
+     y="143"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text34">• Muito menores</text>
+  <text
+     x="390"
+     y="158"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text35">• Mais poderosos</text>
+  <text
+     x="390"
+     y="173"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text36">• Produção em massa</text>
+  <text
+     x="390"
+     y="188"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text37">• Acessíveis</text>
+  <text
+     x="390"
+     y="219.69414"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     font-weight="bold"
+     fill="#7d3c98"
+     id="text38">SO: Multiprog.</text>
+  <text
+     x="390"
+     y="233"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#2c3e50"
+     id="text39">Time-sharing</text>
+  <text
+     x="390"
+     y="245"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#2c3e50"
+     id="text40">Memória virtual</text>
+  <text
+     x="390"
+     y="259"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#2c3e50"
+     id="text41">Multi-usuário</text>
+  <rect
+     x="469.98624"
+     y="47.946869"
+     width="120.04072"
+     height="250.89381"
+     fill="#e3f2fd"
+     stroke="#3498db"
+     stroke-width="1.89352"
+     rx="10.003394"
+     id="rect41" />
+  <text
+     x="530"
+     y="68"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     font-weight="bold"
+     fill="#2980b9"
+     id="text42">1970s-1980s</text>
+  <text
+     x="530"
+     y="83"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     fill="#2980b9"
+     id="text43">LSI/VLSI</text>
+  <rect
+     x="510"
+     y="94"
+     width="40"
+     height="30"
+     fill="#34495e"
+     stroke="#2c3e50"
+     rx="3"
+     id="rect43" />
+  <rect
+     x="515"
+     y="99"
+     width="30"
+     height="20"
+     fill="#95a5a6"
+     stroke="#7f8c8d"
+     id="rect44" />
+  <text
+     x="530"
+     y="111"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#2c3e50"
+     id="text44">μP</text>
+  <text
+     x="530"
+     y="143"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text45">• Microprocessadores</text>
+  <text
+     x="530"
+     y="158"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text46">• Computadores pessoais</text>
+  <text
+     x="530"
+     y="173"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text47">• Democratização</text>
+  <text
+     x="530"
+     y="188"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text48">• Custo baixo</text>
+  <text
+     x="530"
+     y="219.69414"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     font-weight="bold"
+     fill="#2980b9"
+     id="text49">SO: PC</text>
+  <text
+     x="530"
+     y="233"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#2c3e50"
+     id="text50">Mono-usuário</text>
+  <text
+     x="530"
+     y="245"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#2c3e50"
+     id="text51">Interface amigável</text>
+  <text
+     x="530"
+     y="259"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#2c3e50"
+     id="text52">Portabilidade</text>
+  <rect
+     x="610.00012"
+     y="47.94746"
+     width="120.03944"
+     height="251.22456"
+     fill="#e8f5e8"
+     stroke="#27ae60"
+     stroke-width="1.89476"
+     rx="10.003286"
+     id="rect52" />
+  <text
+     x="670"
+     y="68"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     font-weight="bold"
+     fill="#1e8449"
+     id="text53">1990s-Hoje</text>
+  <text
+     x="670"
+     y="83"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     fill="#1e8449"
+     id="text54">Multi-core/Móvel</text>
+  <rect
+     x="650"
+     y="94"
+     width="40"
+     height="30"
+     fill="#34495e"
+     stroke="#2c3e50"
+     rx="3"
+     id="rect54" />
+  <rect
+     x="656.77966"
+     y="99"
+     width="12"
+     height="8"
+     fill="#27ae60"
+     id="rect55" />
+  <rect
+     x="671.77966"
+     y="99"
+     width="12"
+     height="8"
+     fill="#27ae60"
+     id="rect56" />
+  <rect
+     x="656.77966"
+     y="111"
+     width="12"
+     height="8"
+     fill="#27ae60"
+     id="rect57" />
+  <rect
+     x="671.77966"
+     y="111"
+     width="12"
+     height="8"
+     fill="#27ae60"
+     id="rect58" />
+  <text
+     x="670"
+     y="131.49153"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="7px"
+     fill="#2c3e50"
+     id="text58">4-cores</text>
+  <text
+     x="670"
+     y="145"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text59">• Multi-core</text>
+  <text
+     x="670"
+     y="160"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text60">• Dispositivos móveis</text>
+  <text
+     x="670"
+     y="175"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text61">• Redes ubíquas</text>
+  <text
+     x="670"
+     y="190"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text62">• Sensores</text>
+  <text
+     x="670"
+     y="219.69414"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     font-weight="bold"
+     fill="#1e8449"
+     id="text63">SO: Distribuído</text>
+  <text
+     x="670"
+     y="233"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#2c3e50"
+     id="text64">Cloud computing</text>
+  <text
+     x="670"
+     y="245"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#2c3e50"
+     id="text65">Mobile OS</text>
+  <text
+     x="670"
+     y="259"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#2c3e50"
+     id="text66">Virtualização</text>
+  <text
+     x="670"
+     y="271"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#2c3e50"
+     id="text67">IoT/Edge</text>
+  <rect
+     x="750.01007"
+     y="47.944485"
+     width="120.04588"
+     height="249.57083"
+     fill="#ffeaa7"
+     stroke="#fdcb6e"
+     stroke-width="1.88856"
+     rx="10.003824"
+     id="rect67" />
+  <text
+     x="810"
+     y="68"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     font-weight="bold"
+     fill="#e17055"
+     id="text68">Futuro</text>
+  <text
+     x="810"
+     y="83"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     fill="#e17055"
+     id="text69">Quântico/IA</text>
+  <circle
+     cx="810"
+     cy="108"
+     r="12"
+     fill="none"
+     stroke="#6c5ce7"
+     stroke-width="2"
+     id="circle69" />
+  <circle
+     cx="810"
+     cy="108"
+     r="4"
+     fill="#6c5ce7"
+     id="circle70" />
+  <circle
+     cx="800"
+     cy="103"
+     r="2"
+     fill="#fd79a8"
+     id="circle71" />
+  <circle
+     cx="820"
+     cy="113"
+     r="2"
+     fill="#fd79a8"
+     id="circle72" />
+  <path
+     d="m 800,103 q 10,-10 20,10"
+     stroke="#a29bfe"
+     stroke-width="1.5"
+     fill="none"
+     id="path72" />
+  <text
+     x="810"
+     y="143"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text72">• Qubits</text>
+  <text
+     x="810"
+     y="158"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text73">• IA integrada</text>
+  <text
+     x="810"
+     y="173"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text74">• Processamento</text>
+  <text
+     x="810"
+     y="185"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text75">neural</text>
+  <text
+     x="810"
+     y="219.69414"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     font-weight="bold"
+     fill="#e17055"
+     id="text76">SO: QCOS</text>
+  <text
+     x="810"
+     y="232"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#2c3e50"
+     id="text77">Sistemas híbridos</text>
+  <text
+     x="810"
+     y="244"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#2c3e50"
+     id="text78">IA/Quantum</text>
+  <text
+     x="810"
+     y="258"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#2c3e50"
+     id="text79">Auto-adaptação</text>
+  <text
+     x="810"
+     y="270"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#2c3e50"
+     id="text80">LLM integrado</text>
+  <!-- Performance improvement arrows -->
+  <text
+     x="145.83899"
+     y="351.83899"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#e74c3c"
+     id="text81">100x</text>
+  <text
+     x="251.87289"
+     y="337.11865"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#f39c12"
+     id="text82">1.000x</text>
+  <text
+     x="388.06781"
+     y="326.28815"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#9b59b6"
+     id="text83">10.000x</text>
+  <text
+     x="572.10809"
+     y="328.95734"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#3498db"
+     id="text84">1.000.000x</text>
+  <text
+     x="698.48889"
+     y="344.5972"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#27ae60"
+     id="text85">1.000.000.000x</text>
+  <!-- Complexity indicator -->
+  <text
+     x="458"
+     y="345"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     font-weight="bold"
+     fill="#7f8c8d"
+     id="text86">Complexidade dos Sistemas Operacionais</text>
+  <path
+     d="m 98,349 q 350,-75 700,0"
+     stroke="#7f8c8d"
+     stroke-width="3"
+     fill="none"
+     id="path86" />
+  <text
+     x="181.46089"
+     y="346.49368"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#7f8c8d"
+     id="text87">Simples</text>
+  <text
+     x="718.13458"
+     y="329.2355"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#7f8c8d"
+     id="text88">Muito Complexo</text>
+  <path
+     d="m 125.31429,343.1685 19.66303,-3.65588"
+     stroke="#e74c3c"
+     stroke-width="3"
+     fill="none"
+     marker-end="url(#arrowhead-red)"
+     id="path80" />
+  <!-- Arrow markers -->
+  <defs
+     id="defs92">
+    <marker
+       id="arrowhead-red"
+       markerWidth="10"
+       markerHeight="7"
+       refX="10"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#e74c3c"
+         id="polygon88" />
+    </marker>
+    <marker
+       id="arrowhead-orange"
+       markerWidth="10"
+       markerHeight="7"
+       refX="10"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#f39c12"
+         id="polygon89" />
+    </marker>
+    <marker
+       id="arrowhead-purple"
+       markerWidth="10"
+       markerHeight="7"
+       refX="10"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#9b59b6"
+         id="polygon90" />
+    </marker>
+    <marker
+       id="arrowhead-blue"
+       markerWidth="10"
+       markerHeight="7"
+       refX="10"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#3498db"
+         id="polygon91" />
+    </marker>
+    <marker
+       id="arrowhead-green"
+       markerWidth="10"
+       markerHeight="7"
+       refX="10"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#27ae60"
+         id="polygon92" />
+    </marker>
+  </defs>
+  <path
+     d="m 236.30055,323.97357 19.91643,-1.82648"
+     stroke="#f39c12"
+     stroke-width="3"
+     fill="none"
+     marker-end="url(#arrowhead-orange)"
+     id="path81" />
+  <path
+     d="m 681.09048,327.72962 19.72039,3.33255"
+     stroke="#27ae60"
+     stroke-width="3"
+     fill="none"
+     marker-end="url(#arrowhead-green)"
+     id="path84" />
+  <path
+     d="m 556.29805,313.94365 19.81198,2.7359"
+     stroke="#3498db"
+     stroke-width="3"
+     fill="none"
+     marker-end="url(#arrowhead-blue)"
+     id="path83" />
+  <path
+     d="m 374.20159,312.33661 h 20"
+     stroke="#9b59b6"
+     stroke-width="3"
+     fill="none"
+     marker-end="url(#arrowhead-purple)"
+     id="path82" />
+</svg>

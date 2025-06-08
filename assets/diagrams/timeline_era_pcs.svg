@@ -1,0 +1,991 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 1400 500"
+   version="1.1"
+   id="svg64"
+   sodipodi:docname="timeline_era_pcs.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:export-filename="..\images\timeline_era_pcs.webp"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs64" />
+  <sodipodi:namedview
+     id="namedview64"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.74814134"
+     inkscape:cx="800.65086"
+     inkscape:cy="305.42357"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg64" />
+  <!-- Background -->
+  <!-- Title -->
+  <text
+     x="700"
+     y="25"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="18"
+     font-weight="bold"
+     fill="#2c3e50"
+     id="text1">A Democratização da Computação: Era dos Computadores Pessoais</text>
+  <!-- Main timeline line -->
+  <line
+     x1="80"
+     y1="250"
+     x2="1320"
+     y2="250"
+     stroke="#2c3e50"
+     stroke-width="4"
+     id="line1" />
+  <!-- Year markers -->
+  <line
+     x1="120"
+     y1="240"
+     x2="120"
+     y2="260"
+     stroke="#7f8c8d"
+     stroke-width="2"
+     id="line2"
+     style="font-size:10px;font-family:Arial, sans-serif;fill:#7f8c8d" />
+  <text
+     x="120"
+     y="275"
+     text-anchor="middle"
+     id="text2"
+     style="font-size:10px;font-family:Arial, sans-serif;fill:#7f8c8d">1974</text>
+  <line
+     x1="220"
+     y1="240"
+     x2="220"
+     y2="260"
+     stroke="#7f8c8d"
+     stroke-width="2"
+     id="line3"
+     style="font-size:10px;font-family:Arial, sans-serif;fill:#7f8c8d" />
+  <text
+     x="220.54625"
+     y="235.78963"
+     text-anchor="middle"
+     id="text3"
+     style="font-size:10px;font-family:Arial, sans-serif;fill:#7f8c8d">1981</text>
+  <line
+     x1="320"
+     y1="240"
+     x2="320"
+     y2="260"
+     stroke="#7f8c8d"
+     stroke-width="2"
+     id="line4"
+     style="font-size:10px;font-family:Arial, sans-serif;fill:#7f8c8d" />
+  <text
+     x="320"
+     y="275"
+     text-anchor="middle"
+     id="text4"
+     style="font-size:10px;font-family:Arial, sans-serif;fill:#7f8c8d">1984</text>
+  <line
+     x1="420"
+     y1="240"
+     x2="420"
+     y2="260"
+     stroke="#7f8c8d"
+     stroke-width="2"
+     id="line5"
+     style="font-size:10px;font-family:Arial, sans-serif;fill:#7f8c8d" />
+  <text
+     x="419.0925"
+     y="235.78963"
+     text-anchor="middle"
+     id="text5"
+     style="font-size:10px;font-family:Arial, sans-serif;fill:#7f8c8d">1985</text>
+  <line
+     x1="520"
+     y1="240"
+     x2="520"
+     y2="260"
+     stroke="#7f8c8d"
+     stroke-width="2"
+     id="line6"
+     style="font-size:10px;font-family:Arial, sans-serif;fill:#7f8c8d" />
+  <text
+     x="520"
+     y="275"
+     text-anchor="middle"
+     id="text6"
+     style="font-size:10px;font-family:Arial, sans-serif;fill:#7f8c8d">1988</text>
+  <line
+     x1="620"
+     y1="240"
+     x2="620"
+     y2="260"
+     stroke="#7f8c8d"
+     stroke-width="2"
+     id="line7"
+     style="font-size:10px;font-family:Arial, sans-serif;fill:#7f8c8d" />
+  <text
+     x="619.34955"
+     y="236.3036"
+     text-anchor="middle"
+     id="text7"
+     style="font-size:10px;font-family:Arial, sans-serif;fill:#7f8c8d">1991</text>
+  <line
+     x1="720"
+     y1="240"
+     x2="720"
+     y2="260"
+     stroke="#7f8c8d"
+     stroke-width="2"
+     id="line8"
+     style="font-size:10px;font-family:Arial, sans-serif;fill:#7f8c8d" />
+  <text
+     x="720"
+     y="275"
+     text-anchor="middle"
+     id="text8"
+     style="font-size:10px;font-family:Arial, sans-serif;fill:#7f8c8d">1993</text>
+  <line
+     x1="820"
+     y1="240"
+     x2="820"
+     y2="260"
+     stroke="#7f8c8d"
+     stroke-width="2"
+     id="line9"
+     style="font-size:10px;font-family:Arial, sans-serif;fill:#7f8c8d" />
+  <text
+     x="819.09253"
+     y="235.78963"
+     text-anchor="middle"
+     id="text9"
+     style="font-size:10px;font-family:Arial, sans-serif;fill:#7f8c8d">1995</text>
+  <line
+     x1="1020"
+     y1="240"
+     x2="1020"
+     y2="260"
+     stroke="#7f8c8d"
+     stroke-width="2"
+     id="line10"
+     style="font-size:10px;font-family:Arial, sans-serif;fill:#7f8c8d" />
+  <text
+     x="1020"
+     y="275"
+     text-anchor="middle"
+     id="text10"
+     style="font-size:10px;font-family:Arial, sans-serif;fill:#7f8c8d">2000</text>
+  <line
+     x1="1220"
+     y1="240"
+     x2="1220"
+     y2="260"
+     stroke="#7f8c8d"
+     stroke-width="2"
+     id="line11"
+     style="font-size:10px;font-family:Arial, sans-serif;fill:#7f8c8d" />
+  <text
+     x="1220.5463"
+     y="235.76033"
+     text-anchor="middle"
+     id="text11"
+     style="font-size:10px;font-family:Arial, sans-serif;fill:#7f8c8d">Presente</text>
+  <line
+     x1="120"
+     y1="250"
+     x2="120"
+     y2="210"
+     stroke="#34495e"
+     stroke-width="2"
+     id="line12" />
+  <!-- 1974: CP/M -->
+  <circle
+     cx="120"
+     cy="250"
+     r="8"
+     fill="#3498db"
+     id="circle11" />
+  <rect
+     x="50"
+     y="160"
+     width="140"
+     height="50"
+     fill="#ecf0f1"
+     stroke="#34495e"
+     rx="5"
+     id="rect12" />
+  <text
+     x="120"
+     y="175"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     font-weight="bold"
+     fill="#2c3e50"
+     id="text12">CP/M</text>
+  <text
+     x="120"
+     y="190"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text13">Gary Kildall</text>
+  <text
+     x="120"
+     y="202"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text14">Digital Research</text>
+  <line
+     x1="220"
+     y1="250"
+     x2="220"
+     y2="290"
+     stroke="#34495e"
+     stroke-width="2"
+     id="line14" />
+  <!-- 1981: MS-DOS -->
+  <circle
+     cx="220"
+     cy="250"
+     r="8"
+     fill="#e74c3c"
+     id="circle14" />
+  <rect
+     x="150"
+     y="291.0513"
+     width="140"
+     height="65"
+     fill="#ecf0f1"
+     stroke="#34495e"
+     rx="5"
+     id="rect14" />
+  <text
+     x="220"
+     y="306.0513"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     font-weight="bold"
+     fill="#2c3e50"
+     id="text15">MS-DOS</text>
+  <text
+     x="220"
+     y="319.0513"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text16">Microsoft/IBM PC</text>
+  <text
+     x="220"
+     y="331.0513"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text17">Tim Paterson</text>
+  <text
+     x="220"
+     y="343.0513"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text18">86-DOS → MS-DOS</text>
+  <line
+     x1="320"
+     y1="250"
+     x2="320"
+     y2="210"
+     stroke="#34495e"
+     stroke-width="2"
+     id="line18" />
+  <!-- 1984: Mac OS -->
+  <circle
+     cx="320"
+     cy="250"
+     r="8"
+     fill="#9b59b6"
+     id="circle18" />
+  <rect
+     x="250"
+     y="145"
+     width="140"
+     height="65"
+     fill="#ecf0f1"
+     stroke="#34495e"
+     rx="5"
+     id="rect18" />
+  <text
+     x="320"
+     y="160"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     font-weight="bold"
+     fill="#2c3e50"
+     id="text19">Mac OS</text>
+  <text
+     x="320"
+     y="173"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text20">Apple Macintosh</text>
+  <text
+     x="320"
+     y="185"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text21">GUI Revolution</text>
+  <text
+     x="320"
+     y="197"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text22">WYSIWYG</text>
+  <line
+     x1="420"
+     y1="250"
+     x2="420"
+     y2="290"
+     stroke="#34495e"
+     stroke-width="2"
+     id="line22" />
+  <!-- 1985: Windows 1.0 -->
+  <circle
+     cx="420"
+     cy="250"
+     r="8"
+     fill="#f39c12"
+     id="circle22" />
+  <rect
+     x="350"
+     y="300"
+     width="140"
+     height="50"
+     fill="#ecf0f1"
+     stroke="#34495e"
+     rx="5"
+     id="rect22" />
+  <text
+     x="420"
+     y="315"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     font-weight="bold"
+     fill="#2c3e50"
+     id="text23">Windows 1.0</text>
+  <text
+     x="420"
+     y="328"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text24">Microsoft</text>
+  <text
+     x="420"
+     y="340"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text25">GUI sobre DOS</text>
+  <line
+     x1="520"
+     y1="250"
+     x2="520"
+     y2="210"
+     stroke="#34495e"
+     stroke-width="2"
+     id="line25" />
+  <!-- 1988: POSIX.1 -->
+  <circle
+     cx="520"
+     cy="250"
+     r="8"
+     fill="#1abc9c"
+     id="circle25" />
+  <rect
+     x="450"
+     y="160"
+     width="140"
+     height="50"
+     fill="#ecf0f1"
+     stroke="#34495e"
+     rx="5"
+     id="rect25" />
+  <text
+     x="520"
+     y="175"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     font-weight="bold"
+     fill="#2c3e50"
+     id="text26">POSIX.1</text>
+  <text
+     x="520"
+     y="190"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text27">Padrão IEEE</text>
+  <text
+     x="520"
+     y="202"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text28">Portabilidade UNIX</text>
+  <line
+     x1="620"
+     y1="250"
+     x2="620"
+     y2="290"
+     stroke="#34495e"
+     stroke-width="2"
+     id="line28" />
+  <!-- 1991: Linux -->
+  <circle
+     cx="620"
+     cy="250"
+     r="8"
+     fill="#27ae60"
+     id="circle28" />
+  <rect
+     x="548.88141"
+     y="290.16989"
+     width="140"
+     height="65"
+     fill="#ecf0f1"
+     stroke="#34495e"
+     rx="5"
+     id="rect28" />
+  <text
+     x="618.88141"
+     y="305.16989"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     font-weight="bold"
+     fill="#2c3e50"
+     id="text29">Linux</text>
+  <text
+     x="618.88141"
+     y="318.16989"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text30">Linus Torvalds</text>
+  <text
+     x="618.88141"
+     y="330.16989"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text31">Kernel Monolítico</text>
+  <text
+     x="618.88141"
+     y="342.16989"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text32">Software Livre</text>
+  <line
+     x1="720"
+     y1="250"
+     x2="720"
+     y2="210"
+     stroke="#34495e"
+     stroke-width="2"
+     id="line32" />
+  <!-- 1993: Windows NT -->
+  <circle
+     cx="720"
+     cy="250"
+     r="8"
+     fill="#e67e22"
+     id="circle32" />
+  <rect
+     x="650"
+     y="135"
+     width="140"
+     height="75"
+     fill="#ecf0f1"
+     stroke="#34495e"
+     rx="5"
+     id="rect32" />
+  <text
+     x="720"
+     y="150"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     font-weight="bold"
+     fill="#2c3e50"
+     id="text33">Windows NT</text>
+  <text
+     x="720"
+     y="163"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text34">Dave Cutler</text>
+  <text
+     x="720"
+     y="175"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text35">32-bit Architecture</text>
+  <text
+     x="720"
+     y="187"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text36">Hybrid Microkernel</text>
+  <text
+     x="720"
+     y="199"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text37">ACLs Domains</text>
+  <line
+     x1="820"
+     y1="254.9435"
+     x2="820"
+     y2="294.94351"
+     stroke="#34495e"
+     stroke-width="2"
+     id="line37" />
+  <!-- 1995: Windows 95 & POSIX.1c -->
+  <circle
+     cx="820"
+     cy="250"
+     r="8"
+     fill="#8e44ad"
+     id="circle37" />
+  <rect
+     x="750"
+     y="295"
+     width="140"
+     height="70"
+     fill="#ecf0f1"
+     stroke="#34495e"
+     rx="5"
+     id="rect37" />
+  <text
+     x="820"
+     y="310"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     font-weight="bold"
+     fill="#2c3e50"
+     id="text38">Windows 95</text>
+  <text
+     x="820"
+     y="323"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text39">Preemptive Multitask</text>
+  <text
+     x="820"
+     y="335"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text40">32-bit GUI</text>
+  <text
+     x="820"
+     y="347"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text41">POSIX.1c Threading</text>
+  <text
+     x="820"
+     y="359"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text42">Start Menu</text>
+  <line
+     x1="1020"
+     y1="250"
+     x2="1020"
+     y2="210"
+     stroke="#34495e"
+     stroke-width="2"
+     id="line42" />
+  <!-- 2000: Linux Foundation Era -->
+  <circle
+     cx="1020"
+     cy="250"
+     r="8"
+     fill="#16a085"
+     id="circle42" />
+  <rect
+     x="950"
+     y="145"
+     width="140"
+     height="65"
+     fill="#ecf0f1"
+     stroke="#34495e"
+     rx="5"
+     id="rect42" />
+  <text
+     x="1020"
+     y="160"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     font-weight="bold"
+     fill="#2c3e50"
+     id="text43">Linux Foundation</text>
+  <text
+     x="1020"
+     y="173"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text44">Corporatização</text>
+  <text
+     x="1020"
+     y="185"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text45">Enterprise Linux</text>
+  <text
+     x="1020"
+     y="197"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text46">Mobile Cloud</text>
+  <line
+     x1="1220.1978"
+     y1="256.3277"
+     x2="1220.1978"
+     y2="296.3277"
+     stroke="#34495e"
+     stroke-width="2"
+     id="line46" />
+  <!-- Present: Modern Era -->
+  <circle
+     cx="1220"
+     cy="250"
+     r="8"
+     fill="#e91e63"
+     id="circle46" />
+  <rect
+     x="1150"
+     y="295"
+     width="140"
+     height="70"
+     fill="#ecf0f1"
+     stroke="#34495e"
+     rx="5"
+     id="rect46" />
+  <text
+     x="1220"
+     y="310"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     font-weight="bold"
+     fill="#2c3e50"
+     id="text47">Era Moderna</text>
+  <text
+     x="1220"
+     y="323"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text48">Android/iOS</text>
+  <text
+     x="1220"
+     y="335"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text49">Cloud Computing</text>
+  <text
+     x="1220"
+     y="347"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text50">Containers</text>
+  <text
+     x="1220"
+     y="359"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#7f8c8d"
+     id="text51">IoT/Edge</text>
+  <!-- Technology Evolution Indicators -->
+  <g
+     transform="translate(100, 50)"
+     id="g55">
+    <text
+       x="0"
+       y="0"
+       font-family="Arial, sans-serif"
+       font-size="12"
+       font-weight="bold"
+       fill="#2c3e50"
+       id="text52">Tecnologias Habilitadoras:</text>
+    <!-- LSI/VLSI Era -->
+    <rect
+       x="0"
+       y="10"
+       width="300"
+       height="20"
+       fill="#3498db"
+       opacity="0.3"
+       id="rect52" />
+    <text
+       x="150"
+       y="23"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="10"
+       fill="#2c3e50"
+       id="text53">LSI (Large Scale Integration)</text>
+    <!-- VLSI Era -->
+    <rect
+       x="200"
+       y="35"
+       width="897.85309"
+       height="20"
+       fill="#e74c3c"
+       opacity="0.3"
+       id="rect53"
+       style="stroke-width:1.34004" />
+    <text
+       x="607.98126"
+       y="47.209038"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="10px"
+       fill="#2c3e50"
+       id="text54">VLSI (Very Large Scale Integration)</text>
+    <!-- Internet Era -->
+    <rect
+       x="500"
+       y="60"
+       width="727.3446"
+       height="20"
+       fill="#27ae60"
+       opacity="0.3"
+       id="rect54"
+       style="stroke-width:1.10102" />
+    <text
+       x="888.58759"
+       y="73.790962"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="10px"
+       fill="#2c3e50"
+       id="text55">Era da Internet e Redes</text>
+  </g>
+  <!-- Key Innovations -->
+  <g
+     transform="translate(100, 400)"
+     id="g64">
+    <text
+       x="0"
+       y="0"
+       font-family="Arial, sans-serif"
+       font-size="12"
+       font-weight="bold"
+       fill="#2c3e50"
+       id="text56">Inovações Chave:</text>
+    <g
+       transform="translate(0, 20)"
+       id="g57">
+      <rect
+         x="0"
+         y="0"
+         width="15"
+         height="10"
+         fill="#3498db"
+         id="rect56" />
+      <text
+         x="20"
+         y="8"
+         font-family="Arial, sans-serif"
+         font-size="10"
+         fill="#2c3e50"
+         id="text57">CP/M: BIOS, CCP, BDOS - Arquitetura modular</text>
+    </g>
+    <g
+       transform="translate(300, 20)"
+       id="g58">
+      <rect
+         x="0"
+         y="0"
+         width="15"
+         height="10"
+         fill="#e74c3c"
+         id="rect57" />
+      <text
+         x="20"
+         y="8"
+         font-family="Arial, sans-serif"
+         font-size="10"
+         fill="#2c3e50"
+         id="text58">MS-DOS: Compatibilidade IBM PC, .BAT files</text>
+    </g>
+    <g
+       transform="translate(650, 20)"
+       id="g59">
+      <rect
+         x="0"
+         y="0"
+         width="15"
+         height="10"
+         fill="#9b59b6"
+         id="rect58" />
+      <text
+         x="20"
+         y="8"
+         font-family="Arial, sans-serif"
+         font-size="10"
+         fill="#2c3e50"
+         id="text59">Mac OS: GUI, Mouse, WYSIWYG</text>
+    </g>
+    <g
+       transform="translate(0, 40)"
+       id="g60">
+      <rect
+         x="0"
+         y="0"
+         width="15"
+         height="10"
+         fill="#f39c12"
+         id="rect59" />
+      <text
+         x="20"
+         y="8"
+         font-family="Arial, sans-serif"
+         font-size="10"
+         fill="#2c3e50"
+         id="text60">Windows: Ambiente gráfico sobre DOS</text>
+    </g>
+    <g
+       transform="translate(300, 40)"
+       id="g61">
+      <rect
+         x="0"
+         y="0"
+         width="15"
+         height="10"
+         fill="#27ae60"
+         id="rect60" />
+      <text
+         x="20"
+         y="8"
+         font-family="Arial, sans-serif"
+         font-size="10"
+         fill="#2c3e50"
+         id="text61">Linux: Open Source, Kernel monolítico modular</text>
+    </g>
+    <g
+       transform="translate(650, 40)"
+       id="g62">
+      <rect
+         x="0"
+         y="0"
+         width="15"
+         height="10"
+         fill="#e67e22"
+         id="rect61" />
+      <text
+         x="20"
+         y="8"
+         font-family="Arial, sans-serif"
+         font-size="10"
+         fill="#2c3e50"
+         id="text62">Windows NT: 32-bit, Microkernel híbrido, ACLs</text>
+    </g>
+    <g
+       transform="translate(1000, 40)"
+       id="g63">
+      <rect
+         x="0"
+         y="0"
+         width="15"
+         height="10"
+         fill="#1abc9c"
+         id="rect62" />
+      <text
+         x="20"
+         y="8"
+         font-family="Arial, sans-serif"
+         font-size="10"
+         fill="#2c3e50"
+         id="text63">POSIX: Padronização UNIX</text>
+    </g>
+  </g>
+  <!-- Timeline period label -->
+  <text
+     x="684.33978"
+     y="42.758633"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     font-style="italic"
+     fill="#7f8c8d"
+     id="text64">Final dos anos 1970 - Presente</text>
+</svg>

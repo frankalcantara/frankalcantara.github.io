@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 800 600"
+   version="1.1"
+   id="svg68"
+   sodipodi:docname="eniac_z3_comparison_svg.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:export-filename="..\images\eniac_z3_comparison_svg.webp"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview68"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.425"
+     inkscape:cx="399.64912"
+     inkscape:cy="307.01754"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg68" />
+  <!-- Background -->
+  <!-- Title -->
+  <text
+     x="400"
+     y="30"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="20"
+     font-weight="bold"
+     fill="#2c3e50"
+     id="text1">ENIAC vs Z3: A Controvérsia do &quot;Primeiro&quot; Computador</text>
+  <!-- Dividing line -->
+  <line
+     x1="400"
+     y1="50"
+     x2="400"
+     y2="479.1228"
+     stroke="#bdc3c7"
+     stroke-width="1.85283"
+     stroke-dasharray="5, 5"
+     id="line1" />
+  <!-- Z3 Side -->
+  <text
+     x="200"
+     y="70"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="18px"
+     font-weight="bold"
+     fill="#27ae60"
+     id="text2">Z3 (1941) - Alemanha</text>
+  <rect
+     x="120"
+     y="90"
+     width="160"
+     height="100"
+     fill="#ecf0f1"
+     stroke="#34495e"
+     stroke-width="2"
+     rx="5"
+     id="rect2" />
+  <rect
+     x="128"
+     y="100"
+     width="20"
+     height="80"
+     fill="#e74c3c"
+     rx="2"
+     id="rect3" />
+  <rect
+     x="153"
+     y="100"
+     width="20"
+     height="80"
+     fill="#e74c3c"
+     rx="2"
+     id="rect4" />
+  <rect
+     x="178"
+     y="100"
+     width="20"
+     height="80"
+     fill="#e74c3c"
+     rx="2"
+     id="rect5" />
+  <rect
+     x="203"
+     y="100"
+     width="20"
+     height="80"
+     fill="#e74c3c"
+     rx="2"
+     id="rect6" />
+  <rect
+     x="228"
+     y="100"
+     width="20"
+     height="80"
+     fill="#e74c3c"
+     rx="2"
+     id="rect7" />
+  <rect
+     x="253"
+     y="100"
+     width="20"
+     height="80"
+     fill="#e74c3c"
+     rx="2"
+     id="rect8" />
+  <text
+     x="200"
+     y="204.64912"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text8">Relés Eletromecânicos</text>
+  <text
+     x="200"
+     y="219.64912"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text9">~2.600 relés</text>
+  <rect
+     x="148.5965"
+     y="230.4386"
+     width="100"
+     height="15"
+     fill="#f39c12"
+     stroke="#d68910"
+     id="rect9" />
+  <circle
+     cx="158.5965"
+     cy="236.3421"
+     r="2"
+     fill="#ffffff"
+     id="circle9" />
+  <circle
+     cx="173.5965"
+     cy="236.3421"
+     r="2"
+     fill="#ffffff"
+     id="circle10" />
+  <circle
+     cx="188.5965"
+     cy="236.3421"
+     r="2"
+     fill="#ffffff"
+     id="circle11" />
+  <circle
+     cx="203.5965"
+     cy="236.3421"
+     r="2"
+     fill="#ffffff"
+     id="circle12" />
+  <circle
+     cx="218.5965"
+     cy="236.3421"
+     r="2"
+     fill="#ffffff"
+     id="circle13" />
+  <circle
+     cx="233.5965"
+     cy="236.3421"
+     r="2"
+     fill="#ffffff"
+     id="circle14" />
+  <text
+     x="198.5965"
+     y="258.8421"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#d68910"
+     id="text14">Fita Perfurada</text>
+  <g
+     id="z3-characteristics">
+    <rect
+       x="50"
+       y="270"
+       width="300"
+       height="180"
+       fill="#e8f5e8"
+       stroke="#27ae60"
+       stroke-width="2"
+       rx="8"
+       id="rect14" />
+    <text
+       x="200"
+       y="290"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="14px"
+       font-weight="bold"
+       fill="#229954"
+       id="text15">Características do Z3</text>
+    <text
+       x="60"
+       y="310"
+       font-family="Arial, sans-serif"
+       font-size="11px"
+       fill="#2c3e50"
+       id="text16">✓ Primeiro computador programável</text>
+    <text
+       x="60"
+       y="325"
+       font-family="Arial, sans-serif"
+       font-size="11px"
+       fill="#2c3e50"
+       id="text17">✓ Totalmente automático</text>
+    <text
+       x="60"
+       y="340"
+       font-family="Arial, sans-serif"
+       font-size="11px"
+       fill="#2c3e50"
+       id="text18">✓ Programação por fitas perfuradas</text>
+    <text
+       x="60"
+       y="355"
+       font-family="Arial, sans-serif"
+       font-size="11px"
+       fill="#2c3e50"
+       id="text19">✓ Operações de ponto flutuante</text>
+    <text
+       x="60"
+       y="370"
+       font-family="Arial, sans-serif"
+       font-size="11px"
+       fill="#2c3e50"
+       id="text20">✓ Frequência: ~5 Hz</text>
+    <text
+       x="60"
+       y="385"
+       font-family="Arial, sans-serif"
+       font-size="11px"
+       fill="#2c3e50"
+       id="text21">✓ Mais flexível para reprogramar</text>
+    <text
+       x="60"
+       y="400"
+       font-family="Arial, sans-serif"
+       font-size="11px"
+       fill="#2c3e50"
+       id="text22">✓ Menor tempo problema→solução</text>
+    <text
+       x="60"
+       y="420"
+       font-family="Arial, sans-serif"
+       font-size="11px"
+       fill="#c0392b"
+       id="text23">✗ Destruído em bombardeio (1943)</text>
+    <text
+       x="60"
+       y="435"
+       font-family="Arial, sans-serif"
+       font-size="11px"
+       fill="#c0392b"
+       id="text24">✗ Redescobrimento tardio (1990s)</text>
+  </g>
+  <!-- ENIAC Side -->
+  <text
+     x="600"
+     y="70"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="18px"
+     font-weight="bold"
+     fill="#e74c3c"
+     id="text25">ENIAC (1945) - EUA</text>
+  <rect
+     x="520"
+     y="90"
+     width="160"
+     height="100"
+     fill="#2c3e50"
+     stroke="#34495e"
+     stroke-width="2"
+     rx="5"
+     id="rect25" />
+  <circle
+     cx="540"
+     cy="120"
+     r="8"
+     fill="#f39c12"
+     id="circle25" />
+  <circle
+     cx="560"
+     cy="120"
+     r="8"
+     fill="#f39c12"
+     id="circle26" />
+  <circle
+     cx="580"
+     cy="120"
+     r="8"
+     fill="#f39c12"
+     id="circle27" />
+  <circle
+     cx="600"
+     cy="120"
+     r="8"
+     fill="#f39c12"
+     id="circle28" />
+  <circle
+     cx="620"
+     cy="120"
+     r="8"
+     fill="#f39c12"
+     id="circle29" />
+  <circle
+     cx="640"
+     cy="120"
+     r="8"
+     fill="#f39c12"
+     id="circle30" />
+  <circle
+     cx="660"
+     cy="120"
+     r="8"
+     fill="#f39c12"
+     id="circle31" />
+  <circle
+     cx="540"
+     cy="140"
+     r="8"
+     fill="#f39c12"
+     id="circle32" />
+  <circle
+     cx="560"
+     cy="140"
+     r="8"
+     fill="#f39c12"
+     id="circle33" />
+  <circle
+     cx="580"
+     cy="140"
+     r="8"
+     fill="#f39c12"
+     id="circle34" />
+  <circle
+     cx="600"
+     cy="140"
+     r="8"
+     fill="#f39c12"
+     id="circle35" />
+  <circle
+     cx="620"
+     cy="140"
+     r="8"
+     fill="#f39c12"
+     id="circle36" />
+  <circle
+     cx="640"
+     cy="140"
+     r="8"
+     fill="#f39c12"
+     id="circle37" />
+  <circle
+     cx="660"
+     cy="140"
+     r="8"
+     fill="#f39c12"
+     id="circle38" />
+  <circle
+     cx="540"
+     cy="160"
+     r="8"
+     fill="#f39c12"
+     id="circle39" />
+  <circle
+     cx="560"
+     cy="160"
+     r="8"
+     fill="#f39c12"
+     id="circle40" />
+  <circle
+     cx="580"
+     cy="160"
+     r="8"
+     fill="#f39c12"
+     id="circle41" />
+  <circle
+     cx="600"
+     cy="160"
+     r="8"
+     fill="#f39c12"
+     id="circle42" />
+  <circle
+     cx="620"
+     cy="160"
+     r="8"
+     fill="#f39c12"
+     id="circle43" />
+  <circle
+     cx="640"
+     cy="160"
+     r="8"
+     fill="#f39c12"
+     id="circle44" />
+  <circle
+     cx="660"
+     cy="160"
+     r="8"
+     fill="#f39c12"
+     id="circle45" />
+  <text
+     x="600"
+     y="205"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text45">Válvulas Termiônicas</text>
+  <text
+     x="600"
+     y="220"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     id="text46">~17.468 válvulas</text>
+  <rect
+     x="549.81494"
+     y="229.81491"
+     width="100.37017"
+     height="15.808769"
+     fill="#95a5a6"
+     stroke="#7f8c8d"
+     id="rect46"
+     style="stroke-width:0.629827" />
+  <line
+     x1="566"
+     y1="233"
+     x2="576"
+     y2="243"
+     stroke="#2c3e50"
+     stroke-width="2"
+     id="line47" />
+  <line
+     x1="558.37378"
+     y1="233.3036"
+     x2="568.37378"
+     y2="243.3036"
+     stroke="#2c3e50"
+     stroke-width="2"
+     id="line47-0" />
+  <line
+     x1="607.76703"
+     y1="243.81146"
+     x2="590.5224"
+     y2="236.06519"
+     stroke="#2c3e50"
+     stroke-width="2"
+     id="line48" />
+  <line
+     x1="613.17938"
+     y1="241.54884"
+     x2="595.93475"
+     y2="233.80257"
+     stroke="#2c3e50"
+     stroke-width="2"
+     id="line49" />
+  <line
+     x1="623"
+     y1="233"
+     x2="633"
+     y2="243"
+     stroke="#2c3e50"
+     stroke-width="2"
+     id="line50" />
+  <line
+     x1="630"
+     y1="233"
+     x2="640"
+     y2="243"
+     stroke="#2c3e50"
+     stroke-width="2"
+     id="line51" />
+  <text
+     x="595.78949"
+     y="261.14035"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#7f8c8d"
+     id="text51">Painéis de Conexão</text>
+  <g
+     id="eniac-characteristics"
+     transform="translate(-1.1929825,-27.368421)">
+    <rect
+       x="450"
+       y="300"
+       width="300"
+       height="180"
+       fill="#ffebee"
+       stroke="#e74c3c"
+       stroke-width="2"
+       rx="8"
+       id="rect51" />
+    <text
+       x="600"
+       y="320"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="14px"
+       font-weight="bold"
+       fill="#c62828"
+       id="text52">Características do ENIAC</text>
+    <text
+       x="460"
+       y="340"
+       font-family="Arial, sans-serif"
+       font-size="11px"
+       fill="#2c3e50"
+       id="text53">✓ Primeira máquina totalmente eletrônica</text>
+    <text
+       x="460"
+       y="355"
+       font-family="Arial, sans-serif"
+       font-size="11px"
+       fill="#2c3e50"
+       id="text54">✓ Muito mais rápido (válvulas)</text>
+    <text
+       x="460"
+       y="370"
+       font-family="Arial, sans-serif"
+       font-size="11px"
+       fill="#2c3e50"
+       id="text55">✓ Peso: ~30 toneladas</text>
+    <text
+       x="460"
+       y="385"
+       font-family="Arial, sans-serif"
+       font-size="11px"
+       fill="#2c3e50"
+       id="text56">✓ Área: 167 m²</text>
+    <text
+       x="460"
+       y="400"
+       font-family="Arial, sans-serif"
+       font-size="11px"
+       fill="#2c3e50"
+       id="text57">✓ Maior visibilidade histórica</text>
+    <text
+       x="460"
+       y="420"
+       font-family="Arial, sans-serif"
+       font-size="11px"
+       fill="#c0392b"
+       id="text58">✗ Programação por painéis (lenta)</text>
+    <text
+       x="460"
+       y="435"
+       font-family="Arial, sans-serif"
+       font-size="11px"
+       fill="#c0392b"
+       id="text59">✗ Configuração demorava dias</text>
+    <text
+       x="460"
+       y="450"
+       font-family="Arial, sans-serif"
+       font-size="11px"
+       fill="#c0392b"
+       id="text60">✗ Maior tempo problema→solução</text>
+    <text
+       x="460"
+       y="465"
+       font-family="Arial, sans-serif"
+       font-size="11px"
+       fill="#c0392b"
+       id="text61">✗ Válvulas menos confiáveis</text>
+  </g>
+  <!-- Timeline comparison -->
+  <rect
+     x="49.298244"
+     y="467.01755"
+     width="700"
+     height="70"
+     fill="#ecf0f1"
+     stroke="#bdc3c7"
+     stroke-width="1"
+     rx="5"
+     id="rect61" />
+  <text
+     x="398.5965"
+     y="480.00003"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="14px"
+     font-weight="bold"
+     fill="#2c3e50"
+     id="text62">Linha do Tempo</text>
+  <line
+     x1="99.298248"
+     y1="507.01755"
+     x2="699.29822"
+     y2="507.01755"
+     stroke="#34495e"
+     stroke-width="2"
+     id="line62" />
+  <circle
+     cx="199.29825"
+     cy="507.01755"
+     r="8"
+     fill="#27ae60"
+     id="circle62" />
+  <text
+     x="199.29825"
+     y="533.01752"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     font-weight="bold"
+     fill="#27ae60"
+     id="text63">1941</text>
+  <text
+     x="199.29825"
+     y="524.01752"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#27ae60"
+     id="text64">Z3</text>
+  <circle
+     cx="399.29825"
+     cy="507.01755"
+     r="8"
+     fill="#e74c3c"
+     id="circle64" />
+  <text
+     x="399.29825"
+     y="533.01752"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     font-weight="bold"
+     fill="#e74c3c"
+     id="text65">1945</text>
+  <text
+     x="399.29825"
+     y="524.01752"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#e74c3c"
+     id="text66">ENIAC</text>
+  <path
+     d="m 199.29825,494.01754 h 200"
+     stroke="#7f8c8d"
+     stroke-width="2"
+     fill="none"
+     marker-end="url(#arrowhead-gray)"
+     id="path66" />
+  <text
+     x="299.29825"
+     y="489.01755"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#7f8c8d"
+     id="text67">4 anos</text>
+  <!-- Conclusion box -->
+  <!-- Arrow marker definition -->
+  <defs
+     id="defs68">
+    <marker
+       id="arrowhead-gray"
+       markerWidth="10"
+       markerHeight="7"
+       refX="10"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#7f8c8d"
+         id="polygon68" />
+    </marker>
+  </defs>
+</svg>

@@ -1,0 +1,895 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="800"
+   height="600"
+   version="1.1"
+   id="svg60"
+   sodipodi:docname="io_buffering_caching_figure.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview60"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.5130285"
+     inkscape:cx="399.86028"
+     inkscape:cy="283.20682"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg60" />
+  <!-- Background -->
+  <!-- Title -->
+  <text
+     x="400"
+     y="33.965557"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="18px"
+     font-weight="bold"
+     fill="#2c3e50"
+     id="text1">Técnicas de Otimização - Buffering e Caching</text>
+  <!-- Buffering Section -->
+  <text
+     x="225.9649"
+     y="61.894737"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="16px"
+     font-weight="bold"
+     fill="#34495e"
+     id="text2">Buffering - Compensação de Velocidades</text>
+  <!-- Fast Network -->
+  <rect
+     x="50"
+     y="84"
+     width="80"
+     height="40"
+     fill="#3498db"
+     rx="5"
+     id="rect2" />
+  <text
+     x="90"
+     y="101"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text3">REDE</text>
+  <text
+     x="90"
+     y="114"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#ffffff"
+     id="text4">100 Mbps</text>
+  <!-- Fast data stream -->
+  <path
+     d="m 130,104 q 20.73935,0 41.47871,0"
+     stroke="#3498db"
+     stroke-width="4"
+     fill="none"
+     marker-end="url(#blueArrow)"
+     id="path4"
+     style="stroke-width:2.13846;stroke-dasharray:none;marker-end:url(#Triangle)" />
+  <text
+     x="150"
+     y="87.070175"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#3498db"
+     font-weight="bold"
+     id="text5"><tspan
+       sodipodi:role="line"
+       id="tspan60"
+       x="150"
+       y="87.070175">Dados</tspan><tspan
+       sodipodi:role="line"
+       id="tspan61"
+       x="150"
+       y="97.070175">rápidos</tspan></text>
+  <!-- Buffer -->
+  <rect
+     x="180.35088"
+     y="73.649124"
+     width="100"
+     height="60"
+     fill="#2ecc71"
+     rx="5"
+     id="rect5" />
+  <text
+     x="230"
+     y="94"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text6">BUFFER</text>
+  <text
+     x="230"
+     y="109"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#ffffff"
+     id="text7">(Memória RAM)</text>
+  <text
+     x="230"
+     y="124"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#ffffff"
+     id="text8">Acumula dados</text>
+  <!-- Slow data stream -->
+  <path
+     d="m 280,104 q 20.73935,0 41.47871,0"
+     stroke="#e74c3c"
+     stroke-width="4"
+     fill="none"
+     marker-end="url(#redArrow)"
+     stroke-dasharray="3,3"
+     id="path8"
+     style="stroke-width:2.13846;stroke-dasharray:1.60385, 1.60385;stroke-dashoffset:0;marker-end:url(#Triangle)" />
+  <text
+     x="300.35089"
+     y="88.824562"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#e74c3c"
+     font-weight="bold"
+     id="text9"><tspan
+       sodipodi:role="line"
+       id="tspan62"
+       x="300.35089"
+       y="88.824562">Dados</tspan><tspan
+       sodipodi:role="line"
+       id="tspan63"
+       x="300.35089"
+       y="98.824562">lentos</tspan></text>
+  <!-- Slow Disk -->
+  <rect
+     x="330"
+     y="84"
+     width="80"
+     height="40"
+     fill="#f39c12"
+     rx="5"
+     id="rect9" />
+  <text
+     x="370"
+     y="101"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text10">DISCO</text>
+  <text
+     x="370"
+     y="114"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#ffffff"
+     id="text11">50 MB/s</text>
+  <!-- Buffer content visualization -->
+  <rect
+     x="180.15172"
+     y="154.06401"
+     width="102.15267"
+     height="49.871975"
+     fill="#ecf0f1"
+     stroke="#2ecc71"
+     stroke-width="2.12803"
+     rx="3.4050894"
+     id="rect11" />
+  <text
+     x="230"
+     y="169"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#2c3e50"
+     font-weight="bold"
+     id="text12">Conteúdo do Buffer</text>
+  <!-- Buffer blocks -->
+  <rect
+     x="190"
+     y="174"
+     width="15"
+     height="10"
+     fill="#3498db"
+     id="rect12" />
+  <rect
+     x="207"
+     y="174"
+     width="15"
+     height="10"
+     fill="#3498db"
+     id="rect13" />
+  <rect
+     x="224"
+     y="174"
+     width="15"
+     height="10"
+     fill="#3498db"
+     id="rect14" />
+  <rect
+     x="241"
+     y="174"
+     width="15"
+     height="10"
+     fill="#95a5a6"
+     id="rect15" />
+  <rect
+     x="258"
+     y="174"
+     width="15"
+     height="10"
+     fill="#95a5a6"
+     id="rect16" />
+  <text
+     x="230"
+     y="194"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#7f8c8d"
+     id="text16">60% cheio</text>
+  <!-- Benefits box -->
+  <rect
+     x="71.699257"
+     y="221.13785"
+     width="320.81201"
+     height="60.110256"
+     fill="#ffffff"
+     stroke="#2ecc71"
+     stroke-width="1.88974"
+     rx="4.4557223"
+     id="rect17" />
+  <text
+     x="221.22806"
+     y="238.73683"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     fill="#2c3e50"
+     font-weight="bold"
+     id="text17">Benefícios do Buffering</text>
+  <text
+     x="91.754387"
+     y="255.19299"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#7f8c8d"
+     id="text18">• Suaviza diferenças de velocidade entre dispositivos</text>
+  <text
+     x="91.754387"
+     y="270.19299"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#7f8c8d"
+     id="text19">• Permite transferências em blocos maiores e mais eficientes</text>
+  <!-- Caching Section -->
+  <text
+     x="577.5802"
+     y="62.01722"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="16px"
+     font-weight="bold"
+     fill="#34495e"
+     id="text20">Caching - Aceleração de Acesso</text>
+  <!-- Memory hierarchy -->
+  <!-- CPU -->
+  <rect
+     x="495.29825"
+     y="81.894737"
+     width="50"
+     height="30"
+     fill="#e74c3c"
+     rx="3"
+     id="rect20" />
+  <text
+     x="520.29822"
+     y="99.894737"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text21">CPU</text>
+  <!-- Cache -->
+  <rect
+     x="565.29822"
+     y="76.894737"
+     width="70"
+     height="40"
+     fill="#9b59b6"
+     rx="3"
+     id="rect21" />
+  <text
+     x="600.29822"
+     y="91.894737"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text22">CACHE</text>
+  <text
+     x="600.29822"
+     y="106.89474"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#ffffff"
+     id="text23">~1 ns</text>
+  <!-- RAM -->
+  <rect
+     x="505.29825"
+     y="131.89473"
+     width="60"
+     height="30"
+     fill="#3498db"
+     rx="3"
+     id="rect23" />
+  <text
+     x="535.29822"
+     y="143.89473"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text24">RAM</text>
+  <text
+     x="535.29822"
+     y="155.89473"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#ffffff"
+     id="text25">~100 ns</text>
+  <!-- Disk -->
+  <rect
+     x="585.29822"
+     y="131.89473"
+     width="60"
+     height="30"
+     fill="#f39c12"
+     rx="3"
+     id="rect25" />
+  <text
+     x="615.29822"
+     y="143.89473"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text26">DISCO</text>
+  <text
+     x="615.29822"
+     y="155.89473"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#ffffff"
+     id="text27">~10 ms</text>
+  <!-- Cache Hit Scenario -->
+  <text
+     x="574.5965"
+     y="191.80702"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     fill="#2ecc71"
+     font-weight="bold"
+     id="text28">Cache HIT (Dados encontrados)</text>
+  <rect
+     x="474.07019"
+     y="200.4035"
+     width="200"
+     height="50"
+     fill="#ffffff"
+     stroke="#2ecc71"
+     stroke-width="2"
+     rx="5"
+     id="rect28" />
+  <!-- Hit flow -->
+  <path
+     d="m 482.40352,219.70176 q 15,-10 45,0"
+     stroke="#2ecc71"
+     stroke-width="3"
+     fill="none"
+     marker-end="url(#greenArrow)"
+     id="path28"
+     style="marker-end:url(#marker63)" />
+  <text
+     x="504.05267"
+     y="209.26315"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#2ecc71"
+     font-weight="bold"
+     id="text29">1. Busca</text>
+  <path
+     d="m 535.12281,229.70176 q -30,10 -45,0"
+     stroke="#2ecc71"
+     stroke-width="3"
+     fill="none"
+     marker-end="url(#greenArrow)"
+     id="path29"
+     style="marker-end:url(#marker63)" />
+  <text
+     x="512.1228"
+     y="246.70175"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#2ecc71"
+     font-weight="bold"
+     id="text30">2. Encontrou!</text>
+  <text
+     x="581.08771"
+     y="221.89473"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#2ecc71"
+     font-weight="bold"
+     id="text31">✓ Acesso</text>
+  <text
+     x="580.0351"
+     y="232.94736"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#2ecc71"
+     font-weight="bold"
+     id="text32">instantâneo</text>
+  <!-- Cache Miss Scenario -->
+  <text
+     x="576"
+     y="269"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     fill="#e74c3c"
+     font-weight="bold"
+     id="text33">Cache MISS (Dados não encontrados)</text>
+  <rect
+     x="472.3158"
+     y="278.29825"
+     width="200"
+     height="70"
+     fill="#ffffff"
+     stroke="#e74c3c"
+     stroke-width="2"
+     rx="5"
+     id="rect33" />
+  <!-- Miss flow -->
+  <path
+     d="m 485.5614,298.64913 q 15,-10 45,0"
+     stroke="#e74c3c"
+     stroke-width="3"
+     fill="none"
+     marker-end="url(#redArrow)"
+     id="path33"
+     style="marker-end:url(#marker63)" />
+  <text
+     x="504.05261"
+     y="287.85965"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#e74c3c"
+     font-weight="bold"
+     id="text34">1. Busca</text>
+  <path
+     d="m 600.64912,298.47369 c 15.61404,2.80702 26.92982,-4.5614 34.29825,23.85965"
+     stroke="#e74c3c"
+     stroke-width="3"
+     fill="none"
+     marker-end="url(#redArrow)"
+     id="path34"
+     style="marker-end:url(#marker63)"
+     sodipodi:nodetypes="cc" />
+  <text
+     x="611.70178"
+     y="342.24561"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#e74c3c"
+     font-weight="bold"
+     id="text35">2. Vai ao disco</text>
+  <text
+     x="551.59027"
+     y="300.53949"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#e74c3c"
+     font-weight="bold"
+     id="text35-0">Cache miss</text>
+  <path
+     d="m 592.14035,327.42105 c -8.59649,-15.78947 -24.5614,-15.96491 -34.5614,-15.96491"
+     stroke="#f39c12"
+     stroke-width="3"
+     fill="none"
+     marker-end="url(#orangeArrow)"
+     id="path35"
+     style="marker-end:url(#marker63)"
+     sodipodi:nodetypes="cc" />
+  <text
+     x="576.08771"
+     y="335.22806"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#f39c12"
+     font-weight="bold"
+     id="text36">3. Copia p/ cache</text>
+  <path
+     d="m 537.22807,311.28071 q -30,10 -45,0"
+     stroke="#2ecc71"
+     stroke-width="3"
+     fill="none"
+     marker-end="url(#greenArrow)"
+     id="path36"
+     style="marker-end:url(#marker63)" />
+  <text
+     x="514.22809"
+     y="326.2807"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#2ecc71"
+     font-weight="bold"
+     id="text37">4. Entrega dados</text>
+  <!-- Integrated Example Section -->
+  <text
+     x="400"
+     y="376"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="16px"
+     font-weight="bold"
+     fill="#34495e"
+     id="text38">Buffering e Caching Trabalhando Juntos</text>
+  <rect
+     x="50"
+     y="391"
+     width="700"
+     height="135"
+     fill="#ffffff"
+     stroke="#34495e"
+     stroke-width="2"
+     rx="5"
+     id="rect38" />
+  <!-- Scenario description -->
+  <text
+     x="400"
+     y="411"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     fill="#2c3e50"
+     font-weight="bold"
+     id="text39">Exemplo: Download de Arquivo Grande (100MB) via Rede</text>
+  <!-- Timeline steps -->
+  <rect
+     x="70"
+     y="426"
+     width="140"
+     height="45"
+     fill="#3498db"
+     rx="3"
+     id="rect39" />
+  <text
+     x="140"
+     y="441"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text40">1. Rede envia dados</text>
+  <text
+     x="140"
+     y="453"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#ffffff"
+     id="text41">100 Mbps - muito rápido</text>
+  <text
+     x="140"
+     y="463"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#ffffff"
+     id="text42">para o disco processar</text>
+  <rect
+     x="230"
+     y="426"
+     width="140"
+     height="45"
+     fill="#2ecc71"
+     rx="3"
+     id="rect42" />
+  <text
+     x="300"
+     y="441"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text43">2. Buffer acumula</text>
+  <text
+     x="300"
+     y="453"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#ffffff"
+     id="text44">32KB em RAM antes</text>
+  <text
+     x="300"
+     y="463"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#ffffff"
+     id="text45">de gravar no disco</text>
+  <rect
+     x="390"
+     y="426"
+     width="140"
+     height="45"
+     fill="#f39c12"
+     rx="3"
+     id="rect45" />
+  <text
+     x="460"
+     y="441"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text46">3. Disco grava</text>
+  <text
+     x="460"
+     y="453"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#ffffff"
+     id="text47">blocos do buffer</text>
+  <text
+     x="460"
+     y="463"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#ffffff"
+     id="text48">50 MB/s constante</text>
+  <rect
+     x="550"
+     y="426"
+     width="140"
+     height="45"
+     fill="#9b59b6"
+     rx="3"
+     id="rect48" />
+  <text
+     x="620"
+     y="441"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text49">4. Cache mantém</text>
+  <text
+     x="620"
+     y="453"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#ffffff"
+     id="text50">blocos recentes para</text>
+  <text
+     x="620"
+     y="463"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#ffffff"
+     id="text51">acesso futuro rápido</text>
+  <!-- Flow arrows between steps -->
+  <path
+     d="m 210,448 h 20"
+     stroke="#34495e"
+     stroke-width="2"
+     fill="none"
+     marker-end="url(#blackArrow)"
+     id="path51" />
+  <path
+     d="m 370,448 h 20"
+     stroke="#34495e"
+     stroke-width="2"
+     fill="none"
+     marker-end="url(#blackArrow)"
+     id="path52" />
+  <path
+     d="m 530,448 h 20"
+     stroke="#34495e"
+     stroke-width="2"
+     fill="none"
+     marker-end="url(#blackArrow)"
+     id="path53" />
+  <!-- Performance benefits -->
+  <rect
+     x="70"
+     y="486"
+     width="620"
+     height="30"
+     fill="#ecf0f1"
+     stroke="#bdc3c7"
+     stroke-width="1"
+     rx="3"
+     id="rect53" />
+  <text
+     x="380"
+     y="504"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     fill="#2c3e50"
+     font-weight="bold"
+     id="text53">Resultado: Download completo em 8 segundos + acesso instantâneo a arquivos recentes</text>
+  <!-- Key benefits summary -->
+  <text
+     x="66.781479"
+     y="309.37125"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     fill="#7f8c8d"
+     font-weight="bold"
+     id="text54">Benefícios Combinados:</text>
+  <text
+     x="66.781479"
+     y="324.37125"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#7f8c8d"
+     id="text55">• Buffer: Evita perda de dados da rede rápida, otimiza gravação em disco</text>
+  <text
+     x="66.781479"
+     y="339.37125"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#7f8c8d"
+     id="text56">• Cache: Acelera acessos futuros ao arquivo, reduz latência de 10ms para 1ns</text>
+  <!-- Arrow markers -->
+  <defs
+     id="defs60">
+    <marker
+       style="overflow:visible"
+       id="marker63"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Triangle arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path63" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Triangle"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Triangle arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path135" />
+    </marker>
+    <marker
+       id="blueArrow"
+       markerWidth="8"
+       markerHeight="6"
+       refX="7"
+       refY="3"
+       orient="auto">
+      <polygon
+         points="0 0, 8 3, 0 6"
+         fill="#3498db"
+         id="polygon56" />
+    </marker>
+    <marker
+       id="redArrow"
+       markerWidth="8"
+       markerHeight="6"
+       refX="7"
+       refY="3"
+       orient="auto">
+      <polygon
+         points="0 0, 8 3, 0 6"
+         fill="#e74c3c"
+         id="polygon57" />
+    </marker>
+    <marker
+       id="greenArrow"
+       markerWidth="8"
+       markerHeight="6"
+       refX="7"
+       refY="3"
+       orient="auto">
+      <polygon
+         points="0 0, 8 3, 0 6"
+         fill="#2ecc71"
+         id="polygon58" />
+    </marker>
+    <marker
+       id="orangeArrow"
+       markerWidth="8"
+       markerHeight="6"
+       refX="7"
+       refY="3"
+       orient="auto">
+      <polygon
+         points="0 0, 8 3, 0 6"
+         fill="#f39c12"
+         id="polygon59" />
+    </marker>
+    <marker
+       id="blackArrow"
+       markerWidth="8"
+       markerHeight="6"
+       refX="7"
+       refY="3"
+       orient="auto">
+      <polygon
+         points="0 0, 8 3, 0 6"
+         fill="#34495e"
+         id="polygon60" />
+    </marker>
+  </defs>
+</svg>

@@ -1,0 +1,807 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="800"
+   height="650"
+   version="1.1"
+   id="svg53"
+   sodipodi:docname="filesystem_structures_figure (1).svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:export-filename="..\images\filesystem_structures_figure.webp"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview53"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.3153846"
+     inkscape:cx="400.26316"
+     inkscape:cy="325"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg53" />
+  <!-- Background -->
+  <!-- Title -->
+  <text
+     x="408.36258"
+     y="38.362572"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="18px"
+     font-weight="bold"
+     fill="#2c3e50"
+     id="text1">Estruturas de Dados Fundamentais do Sistema de Arquivos</text>
+  <!-- Directory Structure Section -->
+  <text
+     x="150"
+     y="70"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="16"
+     font-weight="bold"
+     fill="#34495e"
+     id="text2">
+    Estrutura de Diretórios
+  </text>
+  <!-- Directory tree -->
+  <rect
+     x="50"
+     y="80"
+     width="200"
+     height="180"
+     fill="#ffffff"
+     stroke="#34495e"
+     stroke-width="2"
+     rx="5"
+     id="rect2" />
+  <!-- Root directory -->
+  <rect
+     x="60"
+     y="90"
+     width="180"
+     height="25"
+     fill="#3498db"
+     id="rect3" />
+  <text
+     x="150"
+     y="107"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12"
+     fill="white"
+     font-weight="bold"
+     id="text3">/ (raiz)</text>
+  <!-- Subdirectories -->
+  <rect
+     x="70"
+     y="120"
+     width="80"
+     height="20"
+     fill="#e74c3c"
+     id="rect4" />
+  <text
+     x="110"
+     y="133"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10"
+     fill="white"
+     font-weight="bold"
+     id="text4">/home</text>
+  <rect
+     x="155"
+     y="120"
+     width="80"
+     height="20"
+     fill="#e74c3c"
+     id="rect5" />
+  <text
+     x="195"
+     y="133"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10"
+     fill="white"
+     font-weight="bold"
+     id="text5">/var</text>
+  <!-- User directories -->
+  <rect
+     x="80"
+     y="145"
+     width="60"
+     height="18"
+     fill="#2ecc71"
+     id="rect6" />
+  <text
+     x="110"
+     y="156"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9"
+     fill="white"
+     font-weight="bold"
+     id="text6">/user1</text>
+  <!-- Files -->
+  <rect
+     x="90"
+     y="168"
+     width="50"
+     height="15"
+     fill="#f39c12"
+     id="rect7" />
+  <text
+     x="115"
+     y="178"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8"
+     fill="white"
+     font-weight="bold"
+     id="text7">doc.txt</text>
+  <rect
+     x="90"
+     y="188"
+     width="50"
+     height="15"
+     fill="#f39c12"
+     id="rect8" />
+  <text
+     x="115"
+     y="198"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8"
+     fill="white"
+     font-weight="bold"
+     id="text8">foto.jpg</text>
+  <!-- Path example -->
+  <text
+     x="60"
+     y="225"
+     font-family="Arial, sans-serif"
+     font-size="10"
+     fill="#7f8c8d"
+     font-weight="bold"
+     id="text9">
+    Caminho: /home/user1/doc.txt
+  </text>
+  <!-- Directory entry details -->
+  <rect
+     x="60"
+     y="235"
+     width="180"
+     height="20"
+     fill="#ecf0f1"
+     stroke="#bdc3c7"
+     stroke-width="1"
+     id="rect9" />
+  <text
+     x="150"
+     y="248"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9"
+     fill="#34495e"
+     font-weight="bold"
+     id="text10">
+    Entrada: &quot;doc.txt&quot; → inode 1247
+  </text>
+  <!-- Arrow from directory to inode -->
+  <path
+     d="M 250 245 Q 280 245 310 315"
+     stroke="#e67e22"
+     stroke-width="3"
+     fill="none"
+     marker-end="url(#orangeArrow)"
+     id="path10" />
+  <!-- Inode Section -->
+  <text
+     x="400"
+     y="70"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="16"
+     font-weight="bold"
+     fill="#34495e"
+     id="text11">
+    Metadados (inode)
+  </text>
+  <!-- Inode structure -->
+  <rect
+     x="320"
+     y="80"
+     width="160"
+     height="200"
+     fill="#ffffff"
+     stroke="#34495e"
+     stroke-width="2"
+     rx="5"
+     id="rect11" />
+  <text
+     x="400"
+     y="100"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12"
+     fill="#34495e"
+     font-weight="bold"
+     id="text12">inode 1247</text>
+  <!-- Inode fields -->
+  <rect
+     x="330"
+     y="110"
+     width="140"
+     height="18"
+     fill="#3498db"
+     id="rect12" />
+  <text
+     x="400"
+     y="122"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9"
+     fill="white"
+     font-weight="bold"
+     id="text13">Tamanho: 12,288 bytes</text>
+  <rect
+     x="330"
+     y="130"
+     width="140"
+     height="18"
+     fill="#e74c3c"
+     id="rect13" />
+  <text
+     x="400"
+     y="142"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9"
+     fill="white"
+     font-weight="bold"
+     id="text14">Proprietário: user1 (501)</text>
+  <rect
+     x="330"
+     y="150"
+     width="140"
+     height="18"
+     fill="#2ecc71"
+     id="rect14" />
+  <text
+     x="400"
+     y="162"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9"
+     fill="white"
+     font-weight="bold"
+     id="text15">Permissões: rw-r--r--</text>
+  <rect
+     x="330"
+     y="170"
+     width="140"
+     height="18"
+     fill="#f39c12"
+     id="rect15" />
+  <text
+     x="400"
+     y="182"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9"
+     fill="white"
+     font-weight="bold"
+     id="text16">Criado: 2025-06-01</text>
+  <rect
+     x="330"
+     y="190"
+     width="140"
+     height="18"
+     fill="#9b59b6"
+     id="rect16" />
+  <text
+     x="400"
+     y="202"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9"
+     fill="white"
+     font-weight="bold"
+     id="text17">Modificado: 2025-06-07</text>
+  <!-- Data pointers -->
+  <rect
+     x="330"
+     y="215"
+     width="140"
+     height="30"
+     fill="#1abc9c"
+     id="rect17" />
+  <text
+     x="400"
+     y="225"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9"
+     fill="white"
+     font-weight="bold"
+     id="text18">Ponteiros para blocos:</text>
+  <text
+     x="400"
+     y="237"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8"
+     fill="white"
+     id="text19">3, 9, 15</text>
+  <!-- Arrows from inode to data blocks -->
+  <path
+     d="M 480 230 Q 520 230 550 315"
+     stroke="#1abc9c"
+     stroke-width="3"
+     fill="none"
+     marker-end="url(#tealArrow)"
+     id="path19" />
+  <!-- Data Blocks Section -->
+  <text
+     x="634.0351"
+     y="118"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="16px"
+     font-weight="bold"
+     fill="#34495e"
+     id="text20">Blocos de Dados</text>
+  <!-- Data blocks -->
+  <rect
+     x="564.0351"
+     y="128"
+     width="140"
+     height="150"
+     fill="#ffffff"
+     stroke="#34495e"
+     stroke-width="2"
+     rx="5"
+     id="rect20" />
+  <!-- Block representations -->
+  <rect
+     x="574.0351"
+     y="144"
+     width="120"
+     height="35"
+     fill="#3498db"
+     id="rect21" />
+  <text
+     x="634.0351"
+     y="159"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text21">Bloco 3 (4KB)</text>
+  <text
+     x="634.0351"
+     y="171"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#ffffff"
+     id="text22">Dados 0-4KB</text>
+  <rect
+     x="574.0351"
+     y="184"
+     width="120"
+     height="35"
+     fill="#e74c3c"
+     id="rect22" />
+  <text
+     x="634.0351"
+     y="199"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text23">Bloco 9 (4KB)</text>
+  <text
+     x="634.0351"
+     y="211"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#ffffff"
+     id="text24">Dados 4-8KB</text>
+  <rect
+     x="574.0351"
+     y="224"
+     width="120"
+     height="35"
+     fill="#2ecc71"
+     id="rect24" />
+  <text
+     x="634.0351"
+     y="239"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text25">Bloco 15 (4KB)</text>
+  <text
+     x="634.0351"
+     y="251"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="8px"
+     fill="#ffffff"
+     id="text26">Dados 8-12KB</text>
+  <!-- File Access Flow Section -->
+  <text
+     x="412.08188"
+     y="455.20468"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="16px"
+     font-weight="bold"
+     fill="#34495e"
+     id="text27">Tabela de Arquivos Abertos (em Memória)</text>
+  <!-- Open files table -->
+  <rect
+     x="206"
+     y="320"
+     width="400"
+     height="120"
+     fill="#ffffff"
+     stroke="#34495e"
+     stroke-width="2"
+     rx="5"
+     id="rect27" />
+  <!-- Table header -->
+  <rect
+     x="216"
+     y="330"
+     width="380"
+     height="25"
+     fill="#34495e"
+     id="rect28" />
+  <text
+     x="406"
+     y="346"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text28">Processo 1234 - Arquivo Aberto: doc.txt</text>
+  <!-- Table entries -->
+  <rect
+     x="226"
+     y="360"
+     width="100"
+     height="20"
+     fill="#3498db"
+     id="rect29" />
+  <text
+     x="276"
+     y="373"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text29">Modo: leitura</text>
+  <rect
+     x="336"
+     y="360"
+     width="120"
+     height="20"
+     fill="#e74c3c"
+     id="rect30" />
+  <text
+     x="396"
+     y="373"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text30">Cursor: byte 5120</text>
+  <rect
+     x="466"
+     y="360"
+     width="120"
+     height="20"
+     fill="#2ecc71"
+     id="rect31" />
+  <text
+     x="526"
+     y="373"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text31">Ref. inode: 1247</text>
+  <!-- Cache info -->
+  <rect
+     x="226"
+     y="385"
+     width="360"
+     height="20"
+     fill="#f39c12"
+     id="rect32" />
+  <text
+     x="406"
+     y="398"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text32">Cache: Bloco 9 carregado em memória para acesso rápido</text>
+  <rect
+     x="226"
+     y="410"
+     width="360"
+     height="20"
+     fill="#9b59b6"
+     id="rect33" />
+  <text
+     x="406"
+     y="423"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     fill="#ffffff"
+     font-weight="bold"
+     id="text33">Locks: Nenhum bloqueio ativo</text>
+  <!-- Flow arrows -->
+  <text
+     x="70"
+     y="298.23367"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     fill="#e67e22"
+     font-weight="bold"
+     id="text34">1. Busca no diretório</text>
+  <text
+     x="330"
+     y="298.12234"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     fill="#e67e22"
+     font-weight="bold"
+     id="text35">2. Acessa metadados</text>
+  <text
+     x="590"
+     y="298.23367"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     fill="#1abc9c"
+     font-weight="bold"
+     id="text36">3. Lê blocos</text>
+  <!-- Integration arrows -->
+  <!-- Legend and concepts -->
+  <rect
+     x="53.040936"
+     y="478.47955"
+     width="700"
+     height="150"
+     fill="#ffffff"
+     stroke="#bdc3c7"
+     stroke-width="1"
+     rx="8"
+     id="rect37" />
+  <text
+     x="400"
+     y="505"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="14"
+     font-weight="bold"
+     fill="#2c3e50"
+     id="text38">
+    Fluxo de Acesso a Arquivos e Estruturas Integradas
+  </text>
+  <!-- Step by step explanation -->
+  <text
+     x="70"
+     y="530"
+     font-family="Arial, sans-serif"
+     font-size="12"
+     fill="#34495e"
+     font-weight="bold"
+     id="text39">
+    Passos do Acesso a Arquivo:
+  </text>
+  <text
+     x="70"
+     y="550"
+     font-family="Arial, sans-serif"
+     font-size="11"
+     fill="#7f8c8d"
+     id="text40">
+    1. Sistema busca nome &quot;doc.txt&quot; na estrutura de diretórios
+  </text>
+  <text
+     x="70"
+     y="565"
+     font-family="Arial, sans-serif"
+     font-size="11"
+     fill="#7f8c8d"
+     id="text41">
+    2. Localiza número do inode (1247) na entrada do diretório
+  </text>
+  <text
+     x="70"
+     y="580"
+     font-family="Arial, sans-serif"
+     font-size="11"
+     fill="#7f8c8d"
+     id="text42">
+    3. Acessa metadados no inode para obter ponteiros dos blocos
+  </text>
+  <text
+     x="70"
+     y="595"
+     font-family="Arial, sans-serif"
+     font-size="11"
+     fill="#7f8c8d"
+     id="text43">
+    4. Cria entrada na tabela de arquivos abertos para gerenciar acesso
+  </text>
+  <text
+     x="70"
+     y="610"
+     font-family="Arial, sans-serif"
+     font-size="11"
+     fill="#7f8c8d"
+     id="text44">
+    5. Carrega blocos de dados conforme necessário (cache/demanda)
+  </text>
+  <!-- Color legend -->
+  <text
+     x="450"
+     y="540"
+     font-family="Arial, sans-serif"
+     font-size="12"
+     fill="#34495e"
+     font-weight="bold"
+     id="text45">
+    Componentes:
+  </text>
+  <rect
+     x="470"
+     y="550"
+     width="15"
+     height="12"
+     fill="#3498db"
+     id="rect45" />
+  <text
+     x="490"
+     y="560"
+     font-family="Arial, sans-serif"
+     font-size="10"
+     fill="#7f8c8d"
+     id="text46">Diretórios</text>
+  <rect
+     x="560"
+     y="550"
+     width="15"
+     height="12"
+     fill="#e74c3c"
+     id="rect46" />
+  <text
+     x="580"
+     y="560"
+     font-family="Arial, sans-serif"
+     font-size="10"
+     fill="#7f8c8d"
+     id="text47">Metadados</text>
+  <rect
+     x="640"
+     y="550"
+     width="15"
+     height="12"
+     fill="#2ecc71"
+     id="rect47" />
+  <text
+     x="660"
+     y="560"
+     font-family="Arial, sans-serif"
+     font-size="10"
+     fill="#7f8c8d"
+     id="text48">Blocos</text>
+  <rect
+     x="470"
+     y="570"
+     width="15"
+     height="12"
+     fill="#f39c12"
+     id="rect48" />
+  <text
+     x="490"
+     y="580"
+     font-family="Arial, sans-serif"
+     font-size="10"
+     fill="#7f8c8d"
+     id="text49">Arquivos</text>
+  <rect
+     x="560"
+     y="570"
+     width="15"
+     height="12"
+     fill="#9b59b6"
+     id="rect49" />
+  <text
+     x="580"
+     y="580"
+     font-family="Arial, sans-serif"
+     font-size="10"
+     fill="#7f8c8d"
+     id="text50">Controle</text>
+  <rect
+     x="640"
+     y="570"
+     width="15"
+     height="12"
+     fill="#1abc9c"
+     id="rect50" />
+  <text
+     x="660"
+     y="580"
+     font-family="Arial, sans-serif"
+     font-size="10"
+     fill="#7f8c8d"
+     id="text51">Ponteiros</text>
+  <!-- Arrow markers -->
+  <defs
+     id="defs53">
+    <marker
+       id="orangeArrow"
+       markerWidth="10"
+       markerHeight="7"
+       refX="9"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#e67e22"
+         id="polygon51" />
+    </marker>
+    <marker
+       id="tealArrow"
+       markerWidth="10"
+       markerHeight="7"
+       refX="9"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#1abc9c"
+         id="polygon52" />
+    </marker>
+    <marker
+       id="purpleArrow"
+       markerWidth="10"
+       markerHeight="7"
+       refX="9"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#9b59b6"
+         id="polygon53" />
+    </marker>
+  </defs>
+</svg>
