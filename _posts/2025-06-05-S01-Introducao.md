@@ -1,45 +1,38 @@
 ---
 layout: post
-title: 'Sistemas Operacionais - Fundamentos, Evolução e Arquitetura'
+title: Sistemas Operacionais - Fundamentos, Evolução e Arquitetura
 author: Frank
 categories: |-
-  disciplina
-  Ciência da Computação
-  artigo
+    disciplina
+    Ciência da Computação
+    artigo
 tags: |-
-  sistemas operacionais
-  arquitetura de computadores
-  gerenciamento de recursos
-  multiprogramação
-  evolução histórica
-  kernel
-  processos
-  memória virtual
+    sistemas operacionais
+    arquitetura de computadores
+    gerenciamento de recursos
+    multiprogramação
+    evolução histórica
+    kernel
+    processos
+    memória virtual
 image: assets/images/so1topo.webp
 featured: false
 rating: 5
 date: {}
-preview: >-
-  Uma exploração abrangente dos sistemas operacionais, desde suas origens
-  históricas até os conceitos fundamentais que regem o funcionamento dos
-  computadores modernos.
+preview: Uma exploração abrangente dos sistemas operacionais, desde suas origens históricas até os conceitos fundamentais que regem o funcionamento dos computadores modernos.
 keywords: |-
-  sistemas operacionais
-  kernel
-  processos
-  gerenciamento de memória
-  multiprogramação
-  evolução histórica
-  arquitetura de computadores
-  recursos compartilhados
-  abstração de hardware
+    sistemas operacionais
+    kernel
+    processos
+    gerenciamento de memória
+    multiprogramação
+    evolução histórica
+    arquitetura de computadores
+    recursos compartilhados
+    abstração de hardware
 toc: true
-<<<<<<< HEAD
 published: false
-lastmod: 2025-06-08T21:52:55.430Z
-=======
-lastmod: {}
->>>>>>> c6b9893f94acb063f9140954ac354cda9a0ee9b5
+lastmod: 2025-06-18T14:18:41.825Z
 ---
 
 ## Desvendando o Invisível: Uma Introdução aos Sistemas Operacionais
