@@ -3,19 +3,19 @@ layout: post
 title: Os desafios da norma IEEE 754 na computação moderna
 author: Frank
 categories:
-    - artigo
-    - Matemática
-    - computação
+  - artigo
+  - Matemática
+  - computação
 tags:
-    - interpretadores
-    - estrutura de dados
-    - modelagem
+  - interpretadores
+  - estrutura de dados
+  - modelagem
 image: assets/images/pontosflutu.webp
 preview: um estudo novo sobre uma das normas mais importantes e menos conhecidas de toda a ciência da computação.
 featured: false
 rating: 3.5
 slug: precisao-realidade-os-desafios-da-norma-ieee-754-na-computacao-moderna
-lastmod: 2025-05-06T11:04:17.702Z
+lastmod: 2025-06-18T13:57:54.696Z
 date: 2024-12-20T20:07:14.934Z
 published: true
 ---
@@ -417,6 +417,339 @@ Até agora temos o sinal do número, $0$ e o expoente $01111011$ resta-nos termi
     <tr><td style="text-align:right !important;">Total</td><td>$32 \space bits$</td></tr>
   </tbody>
 </table>
+
+### As Operações Aritméticas e um pouco de Prática
+
+Neste ponto, a atenta leitora pode estar se perguntando: como seria esta norma na prática? Não é muito fácil, e depende, é claro, da arquitetura do computador, mas podemos usar uma plataforma simples, de 8bits, por exemplo o Arduino Uno e implementar em pseudo código os algoritmos das operações aritméticas básicas.
+
+Antes de começar a amável leitora deve considerar que estamos analisando uma arquitetura de 8 bits, o que significa que não temos suporte nativo para números de ponto flutuante. Portanto, precisamos implementar as operações aritméticas básicas manualmente. As operações que vamos implementar são: 
+
+1. **Registradores**: Usar pares de registradores para armazenar valores de 16 bits
+2. **Aritmética Multi-precisão**: Implementar carry/borrow entre bytes
+3. **Deslocamentos**: Implementar rotações através de múltiplas operações
+4. **Multiplicação**: Usar algoritmo de multiplicação por somas sucessivas ou lookup tables
+5. **Divisão**: Implementar através de subtrações sucessivas com normalização
+
+As operações requerem cuidadosa gestão de flags de carry e implementação de aritmética de precisão estendida devido às limitações do hardware de 8 bits.
+
+A partir da norma, teremos:
+
+- **Sinal**: 1 bit (bit 15)
+- **Expoente**: 5 bits (bits 14-10), bias = 15
+- **Mantissa**: 10 bits (bits 9-0)
+
+#### Estruturas de Dados
+
+```pseudo
+STRUCT Float16:
+    high_byte: BYTE    // bits 15-8
+    low_byte: BYTE     // bits 7-0
+
+FUNCTION extract_sign(f: Float16) -> BIT:
+    RETURN (f.high_byte AND 0x80) >> 7
+
+FUNCTION extract_exponent(f: Float16) -> BYTE:
+    RETURN (f.high_byte AND 0x7C) >> 2
+
+FUNCTION extract_mantissa(f: Float16) -> WORD:
+    high_part = (f.high_byte AND 0x03) << 8
+    RETURN high_part OR f.low_byte
+
+FUNCTION pack_float16(sign: BIT, exp: BYTE, mant: WORD) -> Float16:
+    result: Float16
+    result.high_byte = (sign << 7) OR ((exp AND 0x1F) << 2) OR ((mant >> 8) AND 0x03)
+    result.low_byte = mant AND 0xFF
+    RETURN result
+```
+
+#### 1. Adição/Subtração
+
+```pseudo
+FUNCTION add_subtract_float16(a: Float16, b: Float16, subtract: BOOLEAN) -> Float16:
+    // Extrair componentes
+    sign_a = extract_sign(a)
+    exp_a = extract_exponent(a)
+    mant_a = extract_mantissa(a)
+    
+    sign_b = extract_sign(b)
+    exp_b = extract_exponent(b)
+    mant_b = extract_mantissa(b)
+    
+    // Inverter sinal de b se subtração
+    IF subtract THEN
+        sign_b = NOT sign_b
+    
+    // Casos especiais (zero, infinito, NaN)
+    IF exp_a == 0 AND mant_a == 0 THEN RETURN b
+    IF exp_b == 0 AND mant_b == 0 THEN RETURN a
+    IF exp_a == 31 OR exp_b == 31 THEN
+        // Tratar infinitos e NaN
+        RETURN handle_special_cases(a, b)
+    
+    // Adicionar bit implícito (1.mantissa)
+    IF exp_a != 0 THEN mant_a = mant_a OR 0x0400  // bit 10
+    IF exp_b != 0 THEN mant_b = mant_b OR 0x0400
+    
+    // Alinhar expoentes
+    IF exp_a < exp_b THEN
+        SWAP(a, b)
+        SWAP(sign_a, sign_b)
+        SWAP(exp_a, exp_b)
+        SWAP(mant_a, mant_b)
+    
+    exp_diff = exp_a - exp_b
+    IF exp_diff > 13 THEN RETURN a  // b muito pequeno
+    
+    // Deslocar mantissa menor
+    mant_b = mant_b >> exp_diff
+    
+    result_exp = exp_a
+    result_sign = sign_a
+    
+    // Operação baseada nos sinais
+    IF sign_a == sign_b THEN
+        // Mesmos sinais: somar
+        result_mant = mant_a + mant_b
+        
+        // Verificar overflow
+        IF result_mant > 0x07FF THEN
+            result_mant = result_mant >> 1
+            result_exp = result_exp + 1
+    ELSE
+        // Sinais diferentes: subtrair
+        IF mant_a >= mant_b THEN
+            result_mant = mant_a - mant_b
+        ELSE
+            result_mant = mant_b - mant_a
+            result_sign = sign_b
+        
+        // Normalizar resultado
+        IF result_mant == 0 THEN
+            RETURN pack_float16(0, 0, 0)  // Zero
+        
+        WHILE result_mant < 0x0400 AND result_exp > 0:
+            result_mant = result_mant << 1
+            result_exp = result_exp - 1
+    
+    // Verificar overflow do expoente
+    IF result_exp >= 31 THEN
+        RETURN pack_float16(result_sign, 31, 0)  // Infinito
+    
+    // Remover bit implícito
+    result_mant = result_mant AND 0x03FF
+    
+    RETURN pack_float16(result_sign, result_exp, result_mant)
+```
+
+#### 2. Multiplicação
+
+```pseudo
+FUNCTION multiply_float16(a: Float16, b: Float16) -> Float16:
+    // Extrair componentes
+    sign_a = extract_sign(a)
+    exp_a = extract_exponent(a)
+    mant_a = extract_mantissa(a)
+    
+    sign_b = extract_sign(b)
+    exp_b = extract_exponent(b)
+    mant_b = extract_mantissa(b)
+    
+    // Sinal do resultado
+    result_sign = sign_a XOR sign_b
+    
+    // Casos especiais
+    IF (exp_a == 0 AND mant_a == 0) OR (exp_b == 0 AND mant_b == 0) THEN
+        RETURN pack_float16(result_sign, 0, 0)  // Zero
+    
+    IF exp_a == 31 OR exp_b == 31 THEN
+        RETURN handle_special_mult_cases(a, b, result_sign)
+    
+    // Adicionar bit implícito
+    IF exp_a != 0 THEN mant_a = mant_a OR 0x0400
+    IF exp_b != 0 THEN mant_b = mant_b OR 0x0400
+    
+    // Multiplicar mantissas (requer aritmética de 16x16->32 bits)
+    // Em hardware 8-bit, implementar como múltiplas operações 8x8
+    result_mant_32 = multiply_16x16(mant_a, mant_b)
+    
+    // Calcular expoente
+    result_exp = exp_a + exp_b - 15  // bias
+    
+    // Normalizar resultado
+    IF result_mant_32 >= 0x00800000 THEN  // bit 23 set
+        result_mant_32 = result_mant_32 >> 1
+        result_exp = result_exp + 1
+    
+    // Extrair mantissa de 10 bits
+    result_mant = (result_mant_32 >> 13) AND 0x03FF
+    
+    // Verificar underflow/overflow
+    IF result_exp <= 0 THEN
+        RETURN pack_float16(result_sign, 0, 0)  // Underflow para zero
+    IF result_exp >= 31 THEN
+        RETURN pack_float16(result_sign, 31, 0)  // Overflow para infinito
+    
+    RETURN pack_float16(result_sign, result_exp, result_mant)
+
+// Função auxiliar para multiplicação 16x16 em hardware 8-bit
+FUNCTION multiply_16x16(a: WORD, b: WORD) -> DWORD:
+    a_low = a AND 0xFF
+    a_high = (a >> 8) AND 0xFF
+    b_low = b AND 0xFF
+    b_high = (b >> 8) AND 0xFF
+    
+    // Método de multiplicação escolar
+    p0 = a_low * b_low
+    p1 = a_low * b_high
+    p2 = a_high * b_low
+    p3 = a_high * b_high
+    
+    result = p0
+    result = result + ((p1 + p2) << 8)
+    result = result + (p3 << 16)
+    
+    RETURN result
+```
+
+#### 3. Divisão
+
+```pseudo
+FUNCTION divide_float16(a: Float16, b: Float16) -> Float16:
+    // Extrair componentes
+    sign_a = extract_sign(a)
+    exp_a = extract_exponent(a)
+    mant_a = extract_mantissa(a)
+    
+    sign_b = extract_sign(b)
+    exp_b = extract_exponent(b)
+    mant_b = extract_mantissa(b)
+    
+    // Sinal do resultado
+    result_sign = sign_a XOR sign_b
+    
+    // Casos especiais
+    IF exp_b == 0 AND mant_b == 0 THEN
+        // Divisão por zero
+        IF exp_a == 0 AND mant_a == 0 THEN
+            RETURN pack_float16(result_sign, 31, 1)  // NaN
+        ELSE
+            RETURN pack_float16(result_sign, 31, 0)  // Infinito
+    
+    IF exp_a == 0 AND mant_a == 0 THEN
+        RETURN pack_float16(result_sign, 0, 0)  // Zero
+    
+    IF exp_a == 31 OR exp_b == 31 THEN
+        RETURN handle_special_div_cases(a, b, result_sign)
+    
+    // Adicionar bit implícito
+    IF exp_a != 0 THEN mant_a = mant_a OR 0x0400
+    IF exp_b != 0 THEN mant_b = mant_b OR 0x0400
+    
+    // Calcular expoente
+    result_exp = exp_a - exp_b + 15  // bias
+    
+    // Divisão de mantissas usando algoritmo de divisão longa
+    // Estender mantissa para maior precisão
+    dividend = mant_a << 11  // 22 bits
+    divisor = mant_b        // 11 bits
+    
+    quotient = 0
+    
+    // Algoritmo de divisão longa bit a bit
+    FOR i = 10 DOWN TO 0:
+        quotient = quotient << 1
+        IF dividend >= (divisor << 11) THEN
+            dividend = dividend - (divisor << 11)
+            quotient = quotient OR 1
+        dividend = dividend << 1
+    
+    result_mant = quotient
+    
+    // Normalizar se necessário
+    IF result_mant < 0x0400 THEN
+        result_mant = result_mant << 1
+        result_exp = result_exp - 1
+    
+    // Remover bit implícito
+    result_mant = result_mant AND 0x03FF
+    
+    // Verificar underflow/overflow
+    IF result_exp <= 0 THEN
+        RETURN pack_float16(result_sign, 0, 0)  // Underflow
+    IF result_exp >= 31 THEN
+        RETURN pack_float16(result_sign, 31, 0)  // Overflow
+    
+    RETURN pack_float16(result_sign, result_exp, result_mant)
+```
+
+#### 4. Funções Auxiliares para Casos Especiais
+
+```pseudo
+FUNCTION handle_special_cases(a: Float16, b: Float16) -> Float16:
+    exp_a = extract_exponent(a)
+    exp_b = extract_exponent(b)
+    mant_a = extract_mantissa(a)
+    mant_b = extract_mantissa(b)
+    
+    // NaN propagation
+    IF (exp_a == 31 AND mant_a != 0) OR (exp_b == 31 AND mant_b != 0) THEN
+        RETURN pack_float16(0, 31, 1)  // NaN
+    
+    // Infinito + Infinito com sinais opostos = NaN
+    IF exp_a == 31 AND exp_b == 31 THEN
+        IF extract_sign(a) != extract_sign(b) THEN
+            RETURN pack_float16(0, 31, 1)  // NaN
+    
+    // Retornar infinito apropriado
+    IF exp_a == 31 THEN RETURN a
+    IF exp_b == 31 THEN RETURN b
+    
+    RETURN pack_float16(0, 0, 0)  // Não deveria chegar aqui
+
+FUNCTION handle_special_mult_cases(a: Float16, b: Float16, result_sign: BIT) -> Float16:
+    exp_a = extract_exponent(a)
+    exp_b = extract_exponent(b)
+    mant_a = extract_mantissa(a)
+    mant_b = extract_mantissa(b)
+    
+    // NaN propagation
+    IF (exp_a == 31 AND mant_a != 0) OR (exp_b == 31 AND mant_b != 0) THEN
+        RETURN pack_float16(0, 31, 1)  // NaN
+    
+    // Infinito * 0 = NaN
+    IF ((exp_a == 31 AND mant_a == 0) AND (exp_b == 0 AND mant_b == 0)) OR
+       ((exp_b == 31 AND mant_b == 0) AND (exp_a == 0 AND mant_a == 0)) THEN
+        RETURN pack_float16(0, 31, 1)  // NaN
+    
+    // Infinito * qualquer_não_zero = Infinito
+    RETURN pack_float16(result_sign, 31, 0)
+
+FUNCTION handle_special_div_cases(a: Float16, b: Float16, result_sign: BIT) -> Float16:
+    exp_a = extract_exponent(a)
+    exp_b = extract_exponent(b)
+    mant_a = extract_mantissa(a)
+    mant_b = extract_mantissa(b)
+    
+    // NaN propagation
+    IF (exp_a == 31 AND mant_a != 0) OR (exp_b == 31 AND mant_b != 0) THEN
+        RETURN pack_float16(0, 31, 1)  // NaN
+    
+    // Infinito / Infinito = NaN
+    IF exp_a == 31 AND exp_b == 31 THEN
+        RETURN pack_float16(0, 31, 1)  // NaN
+    
+    // X / Infinito = 0
+    IF exp_b == 31 THEN
+        RETURN pack_float16(result_sign, 0, 0)
+    
+    // Infinito / X = Infinito
+    IF exp_a == 31 THEN
+        RETURN pack_float16(result_sign, 31, 0)
+    
+    RETURN pack_float16(result_sign, 0, 0)  // Não deveria chegar aqui
+```
+
+Finalmente, não deixe de notar: estes pseudocódigos são simples, básicos e apenas o necessário para o entendimento das operações aritméticas básicas em uma arquitetura propositalmente muito simples, o que aumentou a complexidade dos pseudocódigos.
 
 ## Os valores especiais
 
