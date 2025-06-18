@@ -18,7 +18,7 @@ tags: |-
 image: assets/images/so1topo.webp
 featured: false
 rating: 5
-date: {}
+date: 2025-06-18T14:21:25.650Z
 preview: Uma exploração abrangente dos sistemas operacionais, desde suas origens históricas até os conceitos fundamentais que regem o funcionamento dos computadores modernos.
 keywords: |-
     sistemas operacionais
@@ -32,7 +32,8 @@ keywords: |-
     abstração de hardware
 toc: true
 published: false
-lastmod: 2025-06-18T14:18:41.825Z
+lastmod: 2025-06-18T14:21:36.667Z
+draft: 2025-06-18T14:21:29.077Z
 ---
 
 ## Desvendando o Invisível: Uma Introdução aos Sistemas Operacionais
