@@ -22,7 +22,7 @@ rating: 5
 published: 2024-06-21T19:41:42.444Z
 draft: 2024-06-21T19:41:40.386Z
 preview: Definição, processo de funcionamento e outras informações necessárias ao entendimento do funcionamento de parsers LL(1)
-lastmod: 2025-05-06T11:04:17.786Z
+lastmod: 2025-06-18T14:12:31.487Z
 ---
 
 A Tabela de Derivação $LL(1)$, também chamada de tabela da análise LL(1), é uma ferramenta fundamental do funcionamento do *parser* $LL(1)$. Esta tabela será utilizada no processo de *parser* para verificar se um determinado *string* está de acordo com a gramática da linguagem. Esta tabela será usada pelo algoritmo de *parser* para determinar qual regra de produção deverá ser aplicada, considerando o símbolo de entrada corrente e o não-terminal no topo de uma pilha. Este par de símbolos, (terminal / não-terminal) será usado como índice da tabela e determinará qual regra de produção deverá ser utilizada, ou se existe uma inconsistência entre a *string* de entrada e a gramática. Já vimos [o que é um parser](https://frankalcantara.com/parsers-ll(1)/), e como criar [os conjuntos $FIRST$ e $FOLLOW$](https://frankalcantara.com/first-follow/). Agora vamos usar este conhecimento para criar a Tabela de Derivação.
@@ -76,48 +76,11 @@ Com estes conjuntos podemos criar uma Tabela de Derivação se seguirmos as regr
 
 O que permite criar a seguinte Tabela de Derivação:
 
-<table border="1">
-  <tr>
-    <th></th>
-    <th>a</th>
-    <th>b</th>
-    <th>c</th>
-    <th>d</th>
-    <th>e</th>
-    <th>f</th>
-    <th>$</th>
-  </tr>
-  <tr>
-    <td>S</td>
-    <td>S &rarr; aB</td>
-    <td>S &rarr; bA</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>A</td>
-    <td></td>
-    <td></td>
-    <td>A &rarr; c</td>
-    <td>A &rarr; d</td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>B</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td>B &rarr; e</td>
-    <td>B &rarr; f</td>
-    <td></td>
-  </tr>
-</table>
+| não-terminal | a           | b           | c        | d        | e        | f        | $   |
+|--------------|-------------|-------------|----------|----------|----------|----------|-----|
+| S            | $S \to aB$  | $S \to bA$  |          |          |          |          |     |
+| A            |             |             | $A \to c$| $A \to d$|          |          |     |
+| B            |             |             |          |          | $B \to e$| $B \to f$|     |
 
 Este exemplo é perfeito, para cada par terminal / não-terminal existe apenas uma regra de produção. Infelizmente, quando estamos construindo linguagens livres de contexto, este não é o cenário mais comum.
 
@@ -215,32 +178,10 @@ $$
 
 O que permite gerar a seguinte Tabela de Derivação:
 
-<table>
-  <tr>
-    <th>não-terminal</th>
-    <th>int</th>
-    <th>(</th>
-    <th>+</th>
-    <th>$</th>
-    <th>)</th>
-  </tr>
-  <tr>
-    <td>E</td>
-    <td>E &rarr; T</td>
-    <td>E &rarr; T</td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>T</td>
-    <td>T &rarr; int</td>
-    <td>T &rarr; (E)</td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-</table>
+| não-terminal | int         | (           | + | $ | ) |
+|--------------|-------------|-------------|---|---|----|
+| E            | $E \to T + E$<br>$E \to T$ | $E \to T + E$<br>$E \to T$ |   |   |    |
+| T            | $T \to int$ | $T \to (E)$ |   |   |    |
 
 Nesta tabela podemos ver um conflito explícito. O não-terminal $E$ possui duas produções para os símbolos $int$ e $($.
 
@@ -372,40 +313,11 @@ $$
 
 O que permite gerar a seguinte Tabela de Derivação:
 
-<table>
-  <tr>
-    <th>não-terminal</th>
-    <th>int</th>
-    <th>(</th>
-    <th>+</th>
-    <th>$</th>
-    <th>)</th>
-  </tr>
-  <tr>
-    <td>E</td>
-    <td>E \to T E'</td>
-    <td>E \to T E'</td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>E'</td>
-    <td></td>
-    <td></td>
-    <td>E' \to + E</td>
-    <td>E' \to ε</td>
-    <td>E' \to ε</td>
-  </tr>
-  <tr>
-    <td>T</td>
-    <td>T \to int</td>
-    <td>T \to (E)</td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-</table>
+| não-terminal | int          | (            | +           | $           | )           |
+|--------------|--------------|--------------|-------------|-------------|-------------|
+| E            | $E \to TE'$  | $E \to TE'$  |             |             |             |
+| E'           |              |              | $E' \to +E$ | $E' \to \varepsilon$ | $E' \to \varepsilon$ |
+| T            | $T \to int$  | $T \to (E)$  |             |             |             |
 
 Agora, a decisão entre derivar uma expressão com um operador $+$ ou apenas um termo pode ser tomada com base no próximo símbolo da entrada: se for $+$, aplica-se a regra $E' \rightarrow + E$; caso contrário, aplica-se a regra $E' \rightarrow \varepsilon$.
 
