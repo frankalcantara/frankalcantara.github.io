@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 800 600"
+   version="1.1"
+   id="svg19"
+   sodipodi:docname="deepseek_svg_20250618_9b4d50.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview19"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.425"
+     inkscape:cx="399.64912"
+     inkscape:cy="291.57895"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg19" />
+  <style
+     id="style1">
+    .title { font: bold 24px sans-serif; fill: #2c3e50; }
+    .subtitle { font: bold 18px sans-serif; fill: #2c3e50; }
+    .text { font: 16px sans-serif; fill: #34495e; }
+    .shield { fill: #3498db; opacity: 0.8; }
+    .lock { fill: #e74c3c; }
+    .key { fill: #f39c12; }
+    .audit { fill: #27ae60; }
+    .arrow { stroke: #7f8c8d; stroke-width: 2; marker-end: url(#arrowhead); }
+    .threat { fill: #c0392b; }
+  </style>
+  <defs
+     id="defs1">
+    <marker
+       id="arrowhead"
+       markerWidth="10"
+       markerHeight="7"
+       refX="9"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#7f8c8d"
+         id="polygon1" />
+    </marker>
+  </defs>
+  <line
+     x1="191.96539"
+     y1="151.01906"
+     x2="334.01477"
+     y2="259.04239"
+     class="arrow"
+     id="line5"
+     style="stroke-width:1.907;stroke-dasharray:none"
+     inkscape:transform-center-x="-1.2686245"
+     inkscape:transform-center-y="-0.47474675" />
+  <line
+     x1="549.93817"
+     y1="134.98262"
+     x2="456.53552"
+     y2="239.30962"
+     class="arrow"
+     id="line8"
+     style="stroke-width:1.80882;stroke-dasharray:none" />
+  <line
+     x1="704.5614"
+     y1="300"
+     x2="483.55966"
+     y2="300"
+     class="arrow"
+     id="line15" />
+  <line
+     x1="98.947372"
+     y1="300.70175"
+     x2="317.16351"
+     y2="300.70175"
+     class="arrow"
+     id="line13" />
+  <!-- Título -->
+  <text
+     x="400"
+     y="40"
+     class="title"
+     text-anchor="middle"
+     id="text1">Os Três Pilares da Segurança em Sistemas Operacionais</text>
+  <!-- Sistema Operacional (Centro) -->
+  <circle
+     cx="400"
+     cy="300"
+     r="80"
+     class="shield"
+     stroke="#2980b9"
+     stroke-width="3"
+     id="circle1" />
+  <text
+     x="402.80704"
+     y="290.87717"
+     class="subtitle"
+     text-anchor="middle"
+     dominant-baseline="middle"
+     id="text2"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18px;line-height:normal;font-family:sans-serif"><tspan
+       sodipodi:role="line"
+       id="tspan22"
+       x="402.80704"
+       y="290.87717">Sistema</tspan><tspan
+       sodipodi:role="line"
+       id="tspan23"
+       x="402.80704"
+       y="313.37717">Operacional</tspan></text>
+  <!-- Autenticação -->
+  <path
+     d="m 200,150 30,-20 v 40 z"
+     class="key"
+     id="path2" />
+  <circle
+     cx="200"
+     cy="150"
+     r="40"
+     class="lock"
+     stroke="#c0392b"
+     stroke-width="3"
+     id="circle2"
+     style="fill:#5fd38d;stroke:#5fd38d" />
+  <ellipse
+     cx="201.55263"
+     cy="151.44736"
+     class="lock"
+     stroke="#c0392b"
+     stroke-width="1.37642"
+     id="circle2-9"
+     style="fill:#ffffff;stroke:#37c871"
+     rx="18.706526"
+     ry="18.004772" />
+  <text
+     x="97.543846"
+     y="189.64914"
+     class="subtitle"
+     text-anchor="middle"
+     id="text3"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18px;line-height:normal;font-family:sans-serif">Autenticação</text>
+  <text
+     x="95.438591"
+     y="215.08772"
+     class="text"
+     text-anchor="middle"
+     id="text4"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:normal;font-family:sans-serif">&quot;Quem é você?&quot;</text>
+  <text
+     x="141.75435"
+     y="238.07018"
+     class="text"
+     text-anchor="middle"
+     id="text5"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:normal;font-family:sans-serif">Senhas, Biometria, Tokens</text>
+  <!-- Autorização -->
+  <rect
+     x="550.43854"
+     y="86.403511"
+     width="50"
+     height="50"
+     rx="5"
+     class="lock"
+     stroke="#c0392b"
+     stroke-width="3"
+     id="rect5" />
+  <path
+     d="m 561.14035,100.70175 h 30 l -15,25 z"
+     fill="#ffffff"
+     id="path5" />
+  <text
+     x="626.66669"
+     y="162.98245"
+     class="subtitle"
+     text-anchor="middle"
+     id="text6"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18px;line-height:normal;font-family:sans-serif">Autorização</text>
+  <text
+     x="662.45618"
+     y="186.31578"
+     class="text"
+     text-anchor="middle"
+     id="text7"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:normal;font-family:sans-serif">&quot;O que você pode fazer?&quot;</text>
+  <text
+     x="664.5614"
+     y="207.89473"
+     class="text"
+     text-anchor="middle"
+     id="text8"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:normal;font-family:sans-serif">ACLs, Permissões, RBAC</text>
+  <!-- Auditoria -->
+  <path
+     d="m 359.29825,429.29825 q 40,-20 80,0 v 40 q -40,20 -80,0 z"
+     class="audit"
+     id="path8" />
+  <line
+     x1="399.29825"
+     y1="477.36838"
+     x2="399.29825"
+     y2="382.35587"
+     class="arrow"
+     id="line11" />
+  <path
+     d="m 374.29825,449.29825 h 50 m -25,-15 v 30"
+     stroke="#ffffff"
+     stroke-width="3"
+     id="path9" />
+  <text
+     x="497.54388"
+     y="424.38596"
+     class="subtitle"
+     text-anchor="middle"
+     id="text9"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18px;line-height:normal;font-family:sans-serif">Auditoria</text>
+  <text
+     x="559.29828"
+     y="447.71927"
+     class="text"
+     text-anchor="middle"
+     id="text10"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:normal;font-family:sans-serif">Monitoramento e Registros</text>
+  <text
+     x="525.61401"
+     y="471.40347"
+     class="text"
+     text-anchor="middle"
+     id="text11"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:normal;font-family:sans-serif">Logs de Atividades</text>
+  <!-- Ameaças Externas -->
+  <path
+     d="m 80,280 40,20 -40,20 z"
+     class="threat"
+     id="path11" />
+  <text
+     x="106.31579"
+     y="335.78946"
+     class="text"
+     text-anchor="middle"
+     id="text12"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:normal;font-family:sans-serif">Ataques de Rede</text>
+  <text
+     x="90.87719"
+     y="356.57895"
+     class="text"
+     text-anchor="middle"
+     id="text13"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:normal;font-family:sans-serif">Malware</text>
+  <!-- Ameaças Internas -->
+  <circle
+     cx="707.01752"
+     cy="299.29825"
+     r="20"
+     class="threat"
+     id="circle13" />
+  <text
+     x="708.42102"
+     y="338.5965"
+     class="text"
+     text-anchor="middle"
+     id="text14"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:normal;font-family:sans-serif">Usuários Maliciosos</text>
+  <text
+     x="692.98242"
+     y="359.38596"
+     class="text"
+     text-anchor="middle"
+     id="text15"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:normal;font-family:sans-serif">Acesso Não Autorizado</text>
+  <!-- Legenda -->
+  <rect
+     x="55.61404"
+     y="507.01755"
+     width="700"
+     height="80"
+     fill="#ecf0f1"
+     stroke="#bdc3c7"
+     rx="5"
+     id="rect15" />
+  <text
+     x="405.61404"
+     y="527.01758"
+     class="subtitle"
+     text-anchor="middle"
+     id="text16"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18px;line-height:normal;font-family:sans-serif">Mecanismos de Segurança</text>
+  <text
+     x="239.1228"
+     y="550.70178"
+     class="text"
+     text-anchor="middle"
+     id="text17"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:normal;font-family:sans-serif"><tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold'"
+   id="tspan19">Autenticação</tspan>: Verificação de Identidade</text>
+  <text
+     x="606.3158"
+     y="550.70178"
+     class="text"
+     text-anchor="middle"
+     id="text18"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:normal;font-family:sans-serif"><tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold'"
+   id="tspan20">Autorização</tspan>: Controle de Acessos</text>
+  <text
+     x="420.52634"
+     y="577.36841"
+     class="text"
+     text-anchor="middle"
+     id="text19"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:normal;font-family:sans-serif"><tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold'"
+   id="tspan21">Auditoria</tspan>: Monitoramento Contínuo</text>
+</svg>
