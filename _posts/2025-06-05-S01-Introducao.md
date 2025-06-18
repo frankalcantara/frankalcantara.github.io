@@ -3,36 +3,36 @@ layout: post
 title: Sistemas Operacionais - Fundamentos, Evolução e Arquitetura
 author: Frank
 categories: |-
-    disciplina
-    Ciência da Computação
-    artigo
+   disciplina
+   Ciência da Computação
+   artigo
 tags: |-
-    sistemas operacionais
-    arquitetura de computadores
-    gerenciamento de recursos
-    multiprogramação
-    evolução histórica
-    kernel
-    processos
-    memória virtual
+   sistemas operacionais
+   arquitetura de computadores
+   gerenciamento de recursos
+   multiprogramação
+   evolução histórica
+   kernel
+   processos
+   memória virtual
 image: assets/images/so1topo.webp
 featured: false
 rating: 5
 date: 2025-06-18T14:21:25.650Z
 preview: Uma exploração abrangente dos sistemas operacionais, desde suas origens históricas até os conceitos fundamentais que regem o funcionamento dos computadores modernos.
 keywords: |-
-    sistemas operacionais
-    kernel
-    processos
-    gerenciamento de memória
-    multiprogramação
-    evolução histórica
-    arquitetura de computadores
-    recursos compartilhados
-    abstração de hardware
+   sistemas operacionais
+   kernel
+   processos
+   gerenciamento de memória
+   multiprogramação
+   evolução histórica
+   arquitetura de computadores
+   recursos compartilhados
+   abstração de hardware
 toc: true
 published: false
-lastmod: 2025-06-18T16:01:57.551Z
+lastmod: 2025-06-18T19:44:24.815Z
 draft: 2025-06-18T14:21:29.077Z
 slug: sistemas-operacionais-fundamentos-evolucao-arquitetura
 ---
@@ -792,6 +792,9 @@ $$U = \sum_{i=1}^{n} \frac{C_i}{T_i}$$
 
 onde $C_i$ é o tempo de computação e $T_i$ é o período do processo $i$.
 
+![Diagrama conceitual com duas visões lado a lado: (1)  Sistema Operacional](/assets/images/so-gerente-recursos-svg.webp)
+_Figura 17: O sistema operacional como gerente de recursos_{: class="legend"}
+
 #### Métricas de Avaliação da Gestão de Recursos
 
 Usamos métricas para avaliar a eficácia da gestão de recursos, permitindo que o sistema operacional ajuste suas políticas e algoritmos para otimizar o desempenho. As principais métricas incluem:
@@ -960,6 +963,9 @@ Esta complexidade pode ser quantificada através do **número de operações de 
 $$N_{\text{ops}} = N_{\text{directory traversal}} + N_{\text{permission checks}} + N_{\text{disk I/O}} + N_{\text{cache operations}}$$
 
 onde valores típicos podem variar de dezenas a centenas de operações individuais para uma simples leitura de arquivo.
+
+![Diagrama conceitual com duas visões lado a lado: (1)  Sistema Operacional](/assets/images/so-maquina-estendida-svg.webp)
+_Figura 18: O sistema operacional como máquina estendida. Uma camada de abstração extra tornando a interação com o hardware mais simples_{: class="legend"}
 
 #### O Princípio da Transparência Progressiva
 

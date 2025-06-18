@@ -1,0 +1,805 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 800 700"
+   version="1.1"
+   id="svg60"
+   sodipodi:docname="so-maquina-estendida-svg.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:export-filename="..\images\so-maquina-estendida-svg.webp"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview60"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.2214286"
+     inkscape:cx="400.35088"
+     inkscape:cy="350"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg60" />
+  <defs
+     id="defs6">
+    <linearGradient
+       id="hardwareGradient"
+       x1="0%"
+       y1="0%"
+       x2="100%"
+       y2="100%">
+      <stop
+         offset="0%"
+         style="stop-color:#FF6B6B;stop-opacity:1"
+         id="stop1" />
+      <stop
+         offset="100%"
+         style="stop-color:#C92A2A;stop-opacity:1"
+         id="stop2" />
+    </linearGradient>
+    <linearGradient
+       id="osGradient"
+       x1="0%"
+       y1="0%"
+       x2="100%"
+       y2="100%">
+      <stop
+         offset="0%"
+         style="stop-color:#4ECDC4;stop-opacity:1"
+         id="stop3" />
+      <stop
+         offset="100%"
+         style="stop-color:#26A69A;stop-opacity:1"
+         id="stop4" />
+    </linearGradient>
+    <linearGradient
+       id="appGradient"
+       x1="0%"
+       y1="0%"
+       x2="100%"
+       y2="100%">
+      <stop
+         offset="0%"
+         style="stop-color:#45B7D1;stop-opacity:1"
+         id="stop5" />
+      <stop
+         offset="100%"
+         style="stop-color:#2196F3;stop-opacity:1"
+         id="stop6" />
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect
+     width="800"
+     height="700"
+     fill="#f8f9fa"
+     id="rect6" />
+  <!-- Title -->
+  <text
+     x="400"
+     y="30"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="20"
+     font-weight="bold"
+     fill="#2c3e50"
+     id="text6">
+    Sistema Operacional como Máquina Estendida
+  </text>
+  <path
+     d="m 130,524 q 0,-50 0,-100"
+     id="path41"
+     style="fill:none;stroke:#34495e;stroke-width:2;marker-end:url(#arrow)" />
+  <path
+     d="m 250,524 q 0,-50 0,-100"
+     id="path43"
+     style="fill:none;stroke:#34495e;stroke-width:2;marker-end:url(#arrow)" />
+  <path
+     d="m 370,524 q 0,-50 0,-100"
+     id="path45"
+     style="fill:none;stroke:#34495e;stroke-width:2;marker-end:url(#arrow)" />
+  <path
+     d="m 570,524 q 0,-50 0,-100"
+     id="path47"
+     style="fill:none;stroke:#34495e;stroke-width:2;marker-end:url(#arrow)" />
+  <!-- Layer 1: Hardware (Bottom) -->
+  <rect
+     x="50"
+     y="500"
+     width="700"
+     height="120"
+     rx="10"
+     fill="url(#hardwareGradient)"
+     stroke="#8B0000"
+     stroke-width="3"
+     id="rect7" />
+  <text
+     x="400"
+     y="530"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="18"
+     font-weight="bold"
+     fill="white"
+     id="text7">HARDWARE</text>
+  <text
+     x="400"
+     y="550"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12"
+     fill="white"
+     id="text8">Complexidade Técnica</text>
+  <!-- Hardware details -->
+  <g
+     transform="translate(80, 560)"
+     id="g11">
+    <rect
+       x="0"
+       y="0"
+       width="100"
+       height="40"
+       fill="#FF8A80"
+       rx="3"
+       id="rect8" />
+    <text
+       x="50"
+       y="15"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="9"
+       font-weight="bold"
+       fill="#8B0000"
+       id="text9">Setores/Trilhas</text>
+    <text
+       x="50"
+       y="28"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="9"
+       fill="#8B0000"
+       id="text10">Cilindros</text>
+    <text
+       x="50"
+       y="37"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="8"
+       fill="#8B0000"
+       id="text11">0x7FC2A000</text>
+  </g>
+  <g
+     transform="translate(200, 560)"
+     id="g14">
+    <rect
+       x="0"
+       y="0"
+       width="100"
+       height="40"
+       fill="#FF8A80"
+       rx="3"
+       id="rect11" />
+    <text
+       x="50"
+       y="15"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="9"
+       font-weight="bold"
+       fill="#8B0000"
+       id="text12">Endereços Físicos</text>
+    <text
+       x="50"
+       y="28"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="9"
+       fill="#8B0000"
+       id="text13">Registradores</text>
+    <text
+       x="50"
+       y="37"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="8"
+       fill="#8B0000"
+       id="text14">%EAX, %EBX</text>
+  </g>
+  <g
+     transform="translate(320, 560)"
+     id="g17">
+    <rect
+       x="0"
+       y="0"
+       width="100"
+       height="40"
+       fill="#FF8A80"
+       rx="3"
+       id="rect14" />
+    <text
+       x="50"
+       y="15"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="9"
+       font-weight="bold"
+       fill="#8B0000"
+       id="text15">Protocolos</text>
+    <text
+       x="50"
+       y="28"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="9"
+       fill="#8B0000"
+       id="text16">TCP/IP Stack</text>
+    <text
+       x="50"
+       y="37"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="8"
+       fill="#8B0000"
+       id="text17">Frame Headers</text>
+  </g>
+  <g
+     transform="translate(520, 560)"
+     id="g20">
+    <rect
+       x="0"
+       y="0"
+       width="100"
+       height="40"
+       fill="#FF8A80"
+       rx="3"
+       id="rect17" />
+    <text
+       x="50"
+       y="15"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="9"
+       font-weight="bold"
+       fill="#8B0000"
+       id="text18">Interrupções</text>
+    <text
+       x="50"
+       y="28"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="9"
+       fill="#8B0000"
+       id="text19">IRQ Handlers</text>
+    <text
+       x="50"
+       y="37"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="8"
+       fill="#8B0000"
+       id="text20">Context Switch</text>
+  </g>
+  <!-- Layer 2: Operating System (Middle) -->
+  <rect
+     x="50"
+     y="300"
+     width="700"
+     height="120"
+     rx="10"
+     fill="url(#osGradient)"
+     stroke="#004D40"
+     stroke-width="3"
+     id="rect20" />
+  <text
+     x="400"
+     y="330"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="18"
+     font-weight="bold"
+     fill="white"
+     id="text21">SISTEMA OPERACIONAL</text>
+  <text
+     x="400"
+     y="350"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12"
+     fill="white"
+     id="text22">Camada de Abstração</text>
+  <!-- OS Abstractions -->
+  <g
+     transform="translate(80,364)"
+     id="g24">
+    <circle
+       cx="50"
+       cy="20"
+       r="15"
+       fill="#80cbc4"
+       id="circle22" />
+    <text
+       x="50"
+       y="25"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="8px"
+       font-weight="bold"
+       fill="#004d40"
+       id="text23">API</text>
+    <text
+       x="50"
+       y="45"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="9px"
+       fill="#ffffff"
+       id="text24">System Calls</text>
+  </g>
+  <g
+     transform="translate(200,364)"
+     id="g26">
+    <circle
+       cx="50"
+       cy="20"
+       r="15"
+       fill="#80cbc4"
+       id="circle24" />
+    <text
+       x="50"
+       y="25"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="8px"
+       font-weight="bold"
+       fill="#004d40"
+       id="text25">VFS</text>
+    <text
+       x="50"
+       y="45"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="9px"
+       fill="#ffffff"
+       id="text26">Virtual File Sys</text>
+  </g>
+  <g
+     transform="translate(320,364)"
+     id="g28">
+    <circle
+       cx="50"
+       cy="20"
+       r="15"
+       fill="#80cbc4"
+       id="circle26" />
+    <text
+       x="50"
+       y="25"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="8px"
+       font-weight="bold"
+       fill="#004d40"
+       id="text27">MMU</text>
+    <text
+       x="50"
+       y="45"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="9px"
+       fill="#ffffff"
+       id="text28">Memory Mgmt</text>
+  </g>
+  <g
+     transform="translate(520,364)"
+     id="g30">
+    <circle
+       cx="50"
+       cy="20"
+       r="15"
+       fill="#80cbc4"
+       id="circle28" />
+    <text
+       x="50"
+       y="25"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="8px"
+       font-weight="bold"
+       fill="#004d40"
+       id="text29">NET</text>
+    <text
+       x="50"
+       y="45"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="9px"
+       fill="#ffffff"
+       id="text30">Networking</text>
+  </g>
+  <!-- Layer 3: Applications (Top) -->
+  <rect
+     x="50"
+     y="100"
+     width="700"
+     height="120"
+     rx="10"
+     fill="url(#appGradient)"
+     stroke="#0D47A1"
+     stroke-width="3"
+     id="rect30" />
+  <text
+     x="400"
+     y="130"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="18"
+     font-weight="bold"
+     fill="white"
+     id="text31">APLICAÇÕES</text>
+  <text
+     x="400"
+     y="150"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="12"
+     fill="white"
+     id="text32">Interface Amigável</text>
+  <!-- Application abstractions -->
+  <g
+     transform="translate(80, 170)"
+     id="g34">
+    <rect
+       x="0"
+       y="0"
+       width="100"
+       height="30"
+       fill="#90CAF9"
+       rx="5"
+       id="rect32" />
+    <text
+       x="50"
+       y="12"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="10"
+       font-weight="bold"
+       fill="#0D47A1"
+       id="text33">arquivo.txt</text>
+    <text
+       x="50"
+       y="25"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="8"
+       fill="#1565C0"
+       id="text34">read(), write()</text>
+  </g>
+  <g
+     transform="translate(200, 170)"
+     id="g36">
+    <rect
+       x="0"
+       y="0"
+       width="100"
+       height="30"
+       fill="#90CAF9"
+       rx="5"
+       id="rect34" />
+    <text
+       x="50"
+       y="12"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="10"
+       font-weight="bold"
+       fill="#0D47A1"
+       id="text35">processo</text>
+    <text
+       x="50"
+       y="25"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="8"
+       fill="#1565C0"
+       id="text36">fork(), exec()</text>
+  </g>
+  <g
+     transform="translate(320, 170)"
+     id="g38">
+    <rect
+       x="0"
+       y="0"
+       width="100"
+       height="30"
+       fill="#90CAF9"
+       rx="5"
+       id="rect36" />
+    <text
+       x="50"
+       y="12"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="10"
+       font-weight="bold"
+       fill="#0D47A1"
+       id="text37">malloc()</text>
+    <text
+       x="50"
+       y="25"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="8"
+       fill="#1565C0"
+       id="text38">Mem Virtual</text>
+  </g>
+  <g
+     transform="translate(520, 170)"
+     id="g40">
+    <rect
+       x="0"
+       y="0"
+       width="100"
+       height="30"
+       fill="#90CAF9"
+       rx="5"
+       id="rect38" />
+    <text
+       x="50"
+       y="12"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="10"
+       font-weight="bold"
+       fill="#0D47A1"
+       id="text39">socket</text>
+    <text
+       x="50"
+       y="25"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="8"
+       fill="#1565C0"
+       id="text40">send(), recv()</text>
+  </g>
+  <!-- Abstraction arrows -->
+  <defs
+     id="defs40">
+    <marker
+       id="arrow"
+       markerWidth="10"
+       markerHeight="10"
+       refX="9"
+       refY="3"
+       orient="auto"
+       markerUnits="strokeWidth">
+      <path
+         d="M0,0 L0,6 L9,3 z"
+         fill="#34495e"
+         id="path40" />
+    </marker>
+  </defs>
+  <!-- Arrows showing transformation -->
+  <path
+     d="m 130,278 q 0,-50 0,-60"
+     id="path42"
+     style="fill:none;stroke:#34495e;stroke-width:2;marker-end:url(#arrow)" />
+  <path
+     d="m 250,278 q 0,-50 0,-60"
+     id="path44"
+     style="fill:none;stroke:#34495e;stroke-width:2;marker-end:url(#arrow)" />
+  <path
+     d="m 370,278 q 0,-50 0,-60"
+     id="path46"
+     style="fill:none;stroke:#34495e;stroke-width:2;marker-end:url(#arrow)" />
+  <path
+     d="m 570,278 q 0,-50 0,-60"
+     id="path48"
+     style="fill:none;stroke:#34495e;stroke-width:2;marker-end:url(#arrow)" />
+  <!-- Transformation examples -->
+  <g
+     transform="translate(80, 250)"
+     id="g49">
+    <rect
+       x="0"
+       y="0"
+       width="120"
+       height="30"
+       fill="#ECF0F1"
+       stroke="#BDC3C7"
+       stroke-width="1"
+       rx="3"
+       id="rect48" />
+    <text
+       x="60"
+       y="12"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="9"
+       fill="#2C3E50"
+       id="text48">Setor 2047 →</text>
+    <text
+       x="60"
+       y="24"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="9"
+       fill="#2C3E50"
+       id="text49">arquivo.txt</text>
+  </g>
+  <g
+     transform="translate(220, 250)"
+     id="g51">
+    <rect
+       x="0"
+       y="0"
+       width="120"
+       height="30"
+       fill="#ECF0F1"
+       stroke="#BDC3C7"
+       stroke-width="1"
+       rx="3"
+       id="rect49" />
+    <text
+       x="60"
+       y="12"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="9"
+       fill="#2C3E50"
+       id="text50">0x400000 →</text>
+    <text
+       x="60"
+       y="24"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="9"
+       fill="#2C3E50"
+       id="text51">malloc(1024)</text>
+  </g>
+  <g
+     transform="translate(360, 250)"
+     id="g53">
+    <rect
+       x="0"
+       y="0"
+       width="120"
+       height="30"
+       fill="#ECF0F1"
+       stroke="#BDC3C7"
+       stroke-width="1"
+       rx="3"
+       id="rect51" />
+    <text
+       x="60"
+       y="12"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="9"
+       fill="#2C3E50"
+       id="text52">IRQ15 →</text>
+    <text
+       x="60"
+       y="24"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="9"
+       fill="#2C3E50"
+       id="text53">processo</text>
+  </g>
+  <g
+     transform="translate(500, 250)"
+     id="g55">
+    <rect
+       x="0"
+       y="0"
+       width="120"
+       height="30"
+       fill="#ECF0F1"
+       stroke="#BDC3C7"
+       stroke-width="1"
+       rx="3"
+       id="rect53" />
+    <text
+       x="60"
+       y="12"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="9"
+       fill="#2C3E50"
+       id="text54">TCP Frame →</text>
+    <text
+       x="60"
+       y="24"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="9"
+       fill="#2C3E50"
+       id="text55">socket</text>
+  </g>
+  <!-- Code example -->
+  <g
+     transform="translate(50, 60)"
+     id="g56">
+    <rect
+       x="0"
+       y="0"
+       width="700"
+       height="25"
+       fill="#2C3E50"
+       rx="3"
+       id="rect55" />
+    <text
+       x="20"
+       y="17"
+       font-family="Courier, monospace"
+       font-size="12"
+       fill="#ECF0F1"
+       id="text56">
+      fd = open(&quot;doc.txt&quot;, O_RDONLY); read(fd, buffer, 1024); close(fd);
+    </text>
+  </g>
+  <!-- Complexity indicator -->
+  <g
+     transform="translate(92,630)"
+     id="g59">
+    <text
+       x="0"
+       y="15"
+       font-family="Arial, sans-serif"
+       font-size="12px"
+       fill="#e74c3c"
+       id="text57">Complexidade Máxima</text>
+    <rect
+       x="150"
+       y="5"
+       width="100"
+       height="10"
+       fill="#e74c3c"
+       id="rect57" />
+    <rect
+       x="260"
+       y="5"
+       width="100"
+       height="10"
+       fill="#f39c12"
+       id="rect58" />
+    <rect
+       x="370"
+       y="5"
+       width="100"
+       height="10"
+       fill="#27ae60"
+       id="rect59" />
+    <text
+       x="480"
+       y="15"
+       font-family="Arial, sans-serif"
+       font-size="12px"
+       fill="#27ae60"
+       id="text59">Simplicidade Máxima</text>
+  </g>
+  <!-- Legend -->
+  <g
+     transform="translate(249.4269,671.63743)"
+     id="g60">
+    <text
+       x="150"
+       y="0"
+       text-anchor="middle"
+       font-family="Arial, sans-serif"
+       font-size="12px"
+       font-weight="bold"
+       fill="#2c3e50"
+       id="text60">Transformação da Complexidade em Simplicidade</text>
+  </g>
+</svg>
