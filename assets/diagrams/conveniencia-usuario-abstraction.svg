@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 800 600"
+   version="1.1"
+   id="svg42"
+   sodipodi:docname="conveniencia-usuario-abstraction.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:export-filename="..\images\conveniencia-usuario-abstraction.webp"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview42"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.0076272"
+     inkscape:cx="489.76449"
+     inkscape:cy="266.46761"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg42" />
+  <defs
+     id="defs10">
+    <linearGradient
+       id="complexityGradient"
+       x1="89.442719"
+       y1="17.888544"
+       x2="89.442719"
+       y2="107.33126"
+       gradientTransform="matrix(0.2236068,0,1.7197574e-8,4.1615744,61.897503,-557.96703)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         style="stop-color:#e74c3c;stop-opacity:1"
+         id="stop1" />
+      <stop
+         offset="100%"
+         style="stop-color:#27ae60;stop-opacity:1"
+         id="stop2" />
+    </linearGradient>
+    <linearGradient
+       id="layerGradient1"
+       x1="36.514837"
+       y1="1095.4451"
+       x2="255.60386"
+       y2="1095.4451"
+       gradientTransform="matrix(2.7386128,0,0,0.36514837,8,0)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         style="stop-color:#34495e;stop-opacity:1"
+         id="stop3" />
+      <stop
+         offset="100%"
+         style="stop-color:#2c3e50;stop-opacity:1"
+         id="stop4" />
+    </linearGradient>
+    <linearGradient
+       id="layerGradient2"
+       x1="45.355737"
+       y1="820.18291"
+       x2="257.01584"
+       y2="820.18291"
+       gradientTransform="matrix(2.6457513,0,0,0.37796447,8,0)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         style="stop-color:#3498db;stop-opacity:1"
+         id="stop5" />
+      <stop
+         offset="100%"
+         style="stop-color:#2980b9;stop-opacity:1"
+         id="stop6" />
+    </linearGradient>
+    <linearGradient
+       id="layerGradient3"
+       x1="54.912518"
+       y1="560.89215"
+       x2="258.8733"
+       y2="560.89215"
+       gradientTransform="matrix(2.3809187,0,0,0.39223227,34.450733,0)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         style="stop-color:#e67e22;stop-opacity:1"
+         id="stop7" />
+      <stop
+         offset="100%"
+         style="stop-color:#d35400;stop-opacity:1"
+         id="stop8" />
+    </linearGradient>
+    <linearGradient
+       id="layerGradient4"
+       x1="65.319726"
+       y1="318.43367"
+       x2="261.27891"
+       y2="318.43367"
+       gradientTransform="matrix(2.1594185,0,0,0.40824829,55.368427,0)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         style="stop-color:#27ae60;stop-opacity:1"
+         id="stop9" />
+      <stop
+         offset="100%"
+         style="stop-color:#229954;stop-opacity:1"
+         id="stop10" />
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <!-- Title -->
+  <text
+     x="398.01514"
+     y="74.659378"
+     font-family="Arial, sans-serif"
+     font-size="18px"
+     font-weight="bold"
+     text-anchor="middle"
+     fill="#2c3e50"
+     id="text10">Camadas Progressivas de Abstração</text>
+  <!-- Complexity indicator on the left -->
+  <rect
+     x="81.897507"
+     y="-483.52252"
+     width="20"
+     height="372.22253"
+     fill="url(#complexityGradient)"
+     rx="10"
+     id="rect11"
+     style="fill:url(#complexityGradient);stroke-width:0.964651"
+     transform="matrix(1,0,-0.00754123,-0.99997156,0,0)" />
+  <text
+     x="15.570626"
+     y="461.86447"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     fill="#e74c3c"
+     font-weight="bold"
+     id="text11">ALTA</text>
+  <text
+     x="15.072579"
+     y="474.14517"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#e74c3c"
+     id="text12">Complexidade</text>
+  <text
+     x="14.69172"
+     y="126.09387"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     fill="#27ae60"
+     font-weight="bold"
+     id="text13">BAIXA</text>
+  <text
+     x="15.072579"
+     y="139.07632"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     fill="#27ae60"
+     id="text14">Complexidade</text>
+  <!-- Hardware Layer -->
+  <rect
+     x="108"
+     y="400"
+     width="600"
+     height="80"
+     fill="url(#layerGradient1)"
+     rx="5"
+     id="rect14"
+     style="fill:url(#layerGradient1)" />
+  <text
+     x="407.9165"
+     y="425"
+     font-family="Arial, sans-serif"
+     font-size="14px"
+     font-weight="bold"
+     text-anchor="middle"
+     fill="#ffffff"
+     id="text15">HARDWARE</text>
+  <text
+     x="408.0188"
+     y="445"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     text-anchor="middle"
+     fill="#ecf0f1"
+     id="text16">CPU • Memória • Registradores • Dispositivos I/O • Barramentos</text>
+  <text
+     x="407.89258"
+     y="460"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     text-anchor="middle"
+     fill="#bdc3c7"
+     id="text17">Endereços físicos, instruções assembly, controle direto de hardware</text>
+  <!-- Kernel/OS Layer -->
+  <rect
+     x="128"
+     y="310"
+     width="560"
+     height="80"
+     fill="url(#layerGradient2)"
+     rx="5"
+     id="rect17"
+     style="fill:url(#layerGradient2)" />
+  <text
+     x="407.76953"
+     y="335"
+     font-family="Arial, sans-serif"
+     font-size="14px"
+     font-weight="bold"
+     text-anchor="middle"
+     fill="#ffffff"
+     id="text18">KERNEL / SISTEMA OPERACIONAL</text>
+  <text
+     x="408"
+     y="355"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     text-anchor="middle"
+     fill="#ecf0f1"
+     id="text19">Gerenciamento de Processos • Memória Virtual • Sistema de Arquivos</text>
+  <text
+     x="408.01709"
+     y="370"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     text-anchor="middle"
+     fill="#bdc3c7"
+     id="text20">Chamadas de sistema, drivers, escalonamento, proteção</text>
+  <!-- APIs/Libraries Layer -->
+  <rect
+     x="165.19298"
+     y="220"
+     width="485.61404"
+     height="80"
+     fill="url(#layerGradient3)"
+     rx="4.6693659"
+     id="rect20"
+     style="fill:url(#layerGradient3);stroke-width:0.966371" />
+  <text
+     x="408.42236"
+     y="245"
+     font-family="Arial, sans-serif"
+     font-size="14px"
+     font-weight="bold"
+     text-anchor="middle"
+     fill="#ffffff"
+     id="text21">APIs E BIBLIOTECAS</text>
+  <text
+     x="407.86841"
+     y="265"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     text-anchor="middle"
+     fill="#ecf0f1"
+     id="text22">POSIX • Win32 • Bibliotecas de Runtime • Frameworks</text>
+  <text
+     x="408.28076"
+     y="280"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     text-anchor="middle"
+     fill="#bdc3c7"
+     id="text23">Abstrações de alto nível, funções padronizadas</text>
+  <!-- User Interface Layer -->
+  <rect
+     x="196.42105"
+     y="130"
+     width="423.1579"
+     height="80"
+     fill="url(#layerGradient4)"
+     rx="4.4078946"
+     id="rect23"
+     style="fill:url(#layerGradient4);stroke-width:0.938924" />
+  <text
+     x="407.88232"
+     y="155"
+     font-family="Arial, sans-serif"
+     font-size="14px"
+     font-weight="bold"
+     text-anchor="middle"
+     fill="#ffffff"
+     id="text24">INTERFACE DO USUÁRIO</text>
+  <text
+     x="408"
+     y="175"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     text-anchor="middle"
+     fill="#ecf0f1"
+     id="text25">GUI • Shell • Comandos Intuitivos • Aplicações</text>
+  <text
+     x="407.89502"
+     y="190"
+     font-family="Arial, sans-serif"
+     font-size="10px"
+     text-anchor="middle"
+     fill="#bdc3c7"
+     id="text26">Metáforas familiares, interação natural, automação</text>
+  <!-- Arrows showing abstraction flow -->
+  <defs
+     id="defs26">
+    <marker
+       id="arrowhead"
+       markerWidth="10"
+       markerHeight="7"
+       refX="9"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#7f8c8d"
+         id="polygon26" />
+    </marker>
+  </defs>
+  <!-- Upward arrows on the right -->
+  <line
+     x1="720"
+     y1="474"
+     x2="720"
+     y2="394"
+     stroke="#7f8c8d"
+     stroke-width="2"
+     marker-end="url(#arrowhead)"
+     id="line26" />
+  <line
+     x1="720"
+     y1="384"
+     x2="720"
+     y2="304"
+     stroke="#7f8c8d"
+     stroke-width="2"
+     marker-end="url(#arrowhead)"
+     id="line27" />
+  <line
+     x1="720"
+     y1="294"
+     x2="720"
+     y2="214"
+     stroke="#7f8c8d"
+     stroke-width="2"
+     marker-end="url(#arrowhead)"
+     id="line28" />
+  <line
+     x1="720"
+     y1="202"
+     x2="720"
+     y2="122"
+     stroke="#7f8c8d"
+     stroke-width="2"
+     marker-end="url(#arrowhead)"
+     id="line29" />
+  <text
+     x="732.45612"
+     y="272.63159"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     fill="#7f8c8d"
+     font-weight="bold"
+     id="text29">Crescente</text>
+  <text
+     x="730.35089"
+     y="253.33333"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     fill="#7f8c8d"
+     font-weight="bold"
+     id="text30">Abstração</text>
+  <!-- Benefits boxes -->
+  <rect
+     x="59.298244"
+     y="498.94736"
+     width="160"
+     height="60"
+     fill="#ecf0f1"
+     stroke="#bdc3c7"
+     stroke-width="1"
+     rx="3"
+     id="rect30" />
+  <text
+     x="139.29825"
+     y="518.94739"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     font-weight="bold"
+     text-anchor="middle"
+     fill="#2c3e50"
+     id="text31">Benefícios:</text>
+  <text
+     x="139.29825"
+     y="533.94739"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     text-anchor="middle"
+     fill="#34495e"
+     id="text32">• Facilidade de uso</text>
+  <text
+     x="139.29825"
+     y="548.94739"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     text-anchor="middle"
+     fill="#34495e"
+     id="text33">• Produtividade ↑</text>
+  <rect
+     x="239.29825"
+     y="498.94736"
+     width="160"
+     height="60"
+     fill="#ecf0f1"
+     stroke="#bdc3c7"
+     stroke-width="1"
+     rx="3"
+     id="rect33" />
+  <text
+     x="319.29825"
+     y="518.94739"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     font-weight="bold"
+     text-anchor="middle"
+     fill="#2c3e50"
+     id="text34">Exemplo:</text>
+  <text
+     x="319.29825"
+     y="533.94739"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     text-anchor="middle"
+     fill="#34495e"
+     id="text35">copy arquivo.txt destino/</text>
+  <text
+     x="319.29825"
+     y="548.94739"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     text-anchor="middle"
+     fill="#34495e"
+     id="text36">(oculta 100+ operações)</text>
+  <rect
+     x="419.29825"
+     y="498.94736"
+     width="160"
+     height="60"
+     fill="#ecf0f1"
+     stroke="#bdc3c7"
+     stroke-width="1"
+     rx="3"
+     id="rect36" />
+  <text
+     x="499.29825"
+     y="518.94739"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     font-weight="bold"
+     text-anchor="middle"
+     fill="#2c3e50"
+     id="text37">Trade-off:</text>
+  <text
+     x="499.29825"
+     y="533.94739"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     text-anchor="middle"
+     fill="#34495e"
+     id="text38">Controle ↓</text>
+  <text
+     x="499.29825"
+     y="548.94739"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     text-anchor="middle"
+     fill="#34495e"
+     id="text39">Performance overhead</text>
+  <rect
+     x="599.29822"
+     y="498.94736"
+     width="160"
+     height="60"
+     fill="#ecf0f1"
+     stroke="#bdc3c7"
+     stroke-width="1"
+     rx="3"
+     id="rect39" />
+  <text
+     x="679.29822"
+     y="518.94739"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     font-weight="bold"
+     text-anchor="middle"
+     fill="#2c3e50"
+     id="text40">Resultado:</text>
+  <text
+     x="679.29822"
+     y="533.94739"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     text-anchor="middle"
+     fill="#34495e"
+     id="text41">Popularização</text>
+  <text
+     x="679.29822"
+     y="548.94739"
+     font-family="Arial, sans-serif"
+     font-size="9px"
+     text-anchor="middle"
+     fill="#34495e"
+     id="text42">da computação</text>
+</svg>
