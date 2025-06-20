@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 1000 700"
+   version="1.1"
+   id="svg71"
+   sodipodi:docname="sistemas_distribuidos_svg.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview71"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.3305229"
+     inkscape:cx="501.30666"
+     inkscape:cy="337.8371"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg71" />
+  <defs
+     id="defs2">
+    <style
+       id="style1">
+      .title { font-family: 'Arial', sans-serif; font-size: 18px; font-weight: bold; fill: #2c3e50; }
+      .subtitle { font-family: 'Arial', sans-serif; font-size: 14px; font-weight: bold; fill: #34495e; }
+      .node-text { font-family: 'Arial', sans-serif; font-size: 11px; fill: white; text-anchor: middle; font-weight: bold; }
+      .label-text { font-family: 'Arial', sans-serif; font-size: 10px; fill: #2c3e50; text-anchor: middle; }
+      .description { font-family: 'Arial', sans-serif; font-size: 10px; fill: #34495e; }
+      .node { fill: #3498db; stroke: #2980b9; stroke-width: 2; }
+      .leader { fill: #e74c3c; stroke: #c0392b; stroke-width: 3; }
+      .network { stroke: #95a5a6; stroke-width: 2; fill: none; }
+      .data-flow { stroke: #27ae60; stroke-width: 3; fill: none; stroke-dasharray: 5,5; }
+      .consensus-flow { stroke: #f39c12; stroke-width: 2; fill: none; }
+      .failure { fill: #95a5a6; stroke: #7f8c8d; stroke-width: 2; opacity: 0.5; }
+    </style>
+    <marker
+       id="arrow"
+       markerWidth="10"
+       markerHeight="7"
+       refX="10"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#27ae60"
+         id="polygon1" />
+    </marker>
+    <marker
+       id="consensus-arrow"
+       markerWidth="10"
+       markerHeight="7"
+       refX="10"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#f39c12"
+         id="polygon2" />
+    </marker>
+  </defs>
+  <!-- Background -->
+  <!-- Title -->
+  <text
+     x="510"
+     y="30"
+     text-anchor="middle"
+     class="title"
+     id="text2">Arquitetura de Sistemas Distribuídos</text>
+  <text
+     x="510"
+     y="50"
+     text-anchor="middle"
+     class="subtitle"
+     id="text3">Coordenação, Consenso e Tolerância a Falhas</text>
+  <!-- Network backbone -->
+  <ellipse
+     cx="495.9975"
+     cy="360.89798"
+     rx="308.90292"
+     ry="197.55917"
+     fill="none"
+     stroke="#bdc3c7"
+     stroke-width="2.62021"
+     stroke-dasharray="10, 5"
+     id="ellipse3" />
+  <text
+     x="507.03067"
+     y="567.38019"
+     text-anchor="middle"
+     class="description"
+     id="text4">Rede de Comunicação (Internet/LAN)</text>
+  <!-- Nodes in the distributed system -->
+  <!-- Leader Node -->
+  <circle
+     cx="511.45248"
+     cy="247.74525"
+     r="30"
+     class="leader"
+     id="circle4" />
+  <text
+     x="511.45248"
+     y="252.74525"
+     class="node-text"
+     id="text5">Leader</text>
+  <text
+     x="511.86185"
+     y="214.14876"
+     class="label-text"
+     id="text6">Nó Líder</text>
+  <!-- Follower Nodes -->
+  <circle
+     cx="311.45248"
+     cy="297.74524"
+     r="25"
+     class="node"
+     id="circle6" />
+  <text
+     x="310.63376"
+     y="297.01425"
+     class="node-text"
+     id="text7"><tspan
+       sodipodi:role="line"
+       id="tspan71"
+       x="310.63376"
+       y="297.01425">Vértice</tspan><tspan
+       sodipodi:role="line"
+       id="tspan72"
+       x="310.63376"
+       y="310.76425">A</tspan></text>
+  <text
+     x="311.45248"
+     y="269.55811"
+     class="label-text"
+     id="text8">Follower</text>
+  <circle
+     cx="711.45245"
+     cy="297.74524"
+     r="25"
+     class="node"
+     id="circle8" />
+  <text
+     x="712.68054"
+     y="297.42361"
+     class="node-text"
+     id="text9"><tspan
+       sodipodi:role="line"
+       id="tspan73"
+       x="712.68054"
+       y="297.42361">Vértice</tspan><tspan
+       sodipodi:role="line"
+       id="tspan74"
+       x="712.68054"
+       y="311.17361">B</tspan></text>
+  <text
+     x="711.04309"
+     y="269.14874"
+     class="label-text"
+     id="text10">Follower</text>
+  <circle
+     cx="411.45248"
+     cy="447.74524"
+     r="25"
+     class="node"
+     id="circle10" />
+  <text
+     x="411.04312"
+     y="447.42361"
+     class="node-text"
+     id="text11"><tspan
+       sodipodi:role="line"
+       id="tspan75"
+       x="411.04312"
+       y="447.42361">Vértice</tspan><tspan
+       sodipodi:role="line"
+       id="tspan76"
+       x="411.04312"
+       y="461.17361">C</tspan></text>
+  <text
+     x="411.45248"
+     y="482.56979"
+     class="label-text"
+     id="text12">Follower</text>
+  <circle
+     cx="611.45245"
+     cy="447.74524"
+     r="25"
+     class="node"
+     id="circle12" />
+  <text
+     x="612.27118"
+     y="447.42361"
+     class="node-text"
+     id="text13"><tspan
+       sodipodi:role="line"
+       id="tspan77"
+       x="612.27118"
+       y="447.42361">Vértice</tspan><tspan
+       sodipodi:role="line"
+       id="tspan78"
+       x="612.27118"
+       y="461.17361">D</tspan></text>
+  <text
+     x="611.45245"
+     y="485.02594"
+     class="label-text"
+     id="text14">Follower</text>
+  <!-- Failed Node -->
+  <circle
+     cx="234"
+     cy="400"
+     r="25"
+     class="failure"
+     id="circle14" />
+  <text
+     x="233.59064"
+     y="400.91812"
+     class="node-text"
+     id="text15"><tspan
+       sodipodi:role="line"
+       id="tspan79"
+       x="233.59064"
+       y="400.91812">Vértice</tspan><tspan
+       sodipodi:role="line"
+       id="tspan80"
+       x="233.59064"
+       y="414.66812">X</tspan></text>
+  <text
+     x="233.18129"
+     y="435.23392"
+     class="label-text"
+     id="text16">Falha</text>
+  <line
+     x1="219.81871"
+     y1="385.01169"
+     x2="249.81871"
+     y2="415.01169"
+     stroke="#e74c3c"
+     stroke-width="3"
+     id="line16" />
+  <line
+     x1="249"
+     y1="384.19299"
+     x2="219"
+     y2="414.19299"
+     stroke="#e74c3c"
+     stroke-width="3"
+     id="line17" />
+  <!-- Consensus communication -->
+  <line
+     x1="486.44888"
+     y1="262.73825"
+     x2="335.14032"
+     y2="287.75085"
+     class="consensus-flow"
+     marker-end="url(#consensus-arrow)"
+     id="line18" />
+  <line
+     x1="536.45526"
+     y1="262.73981"
+     x2="688.58417"
+     y2="287.7496"
+     class="consensus-flow"
+     marker-end="url(#consensus-arrow)"
+     id="line19" />
+  <line
+     x1="496.45279"
+     y1="272.74683"
+     x2="425.22409"
+     y2="427.01266"
+     class="consensus-flow"
+     marker-end="url(#consensus-arrow)"
+     id="line20" />
+  <line
+     x1="526.42169"
+     y1="272.73108"
+     x2="593.61768"
+     y2="429.48453"
+     class="consensus-flow"
+     marker-end="url(#consensus-arrow)"
+     id="line21" />
+  <!-- Response flows -->
+  <line
+     x1="335.54605"
+     y1="307.33588"
+     x2="490.54605"
+     y2="272.33588"
+     class="consensus-flow"
+     marker-end="url(#consensus-arrow)"
+     id="line22" />
+  <line
+     x1="686.53925"
+     y1="306.52032"
+     x2="533.17859"
+     y2="271.51431"
+     class="consensus-flow"
+     marker-end="url(#consensus-arrow)"
+     id="line23" />
+  <!-- Data replication -->
+  <line
+     x1="336.45248"
+     y1="297.74524"
+     x2="686.45245"
+     y2="297.74524"
+     class="data-flow"
+     marker-end="url(#arrow)"
+     id="line24" />
+  <line
+     x1="311.45248"
+     y1="322.74524"
+     x2="411.45248"
+     y2="422.74524"
+     class="data-flow"
+     marker-end="url(#arrow)"
+     id="line25" />
+  <line
+     x1="711.45245"
+     y1="322.74524"
+     x2="611.45245"
+     y2="422.74524"
+     class="data-flow"
+     marker-end="url(#arrow)"
+     id="line26" />
+  <!-- Left panel - Características -->
+  <g
+     transform="translate(50,82)"
+     id="g39">
+    <text
+       x="0"
+       y="0"
+       class="subtitle"
+       id="text26">Características Fundamentais:</text>
+    <text
+       x="0"
+       y="25"
+       class="description"
+       font-weight="bold"
+       id="text27">Transparência:</text>
+    <text
+       x="0"
+       y="40"
+       class="description"
+       id="text28">• Localização - recursos distribuídos</text>
+    <text
+       x="0"
+       y="55"
+       class="description"
+       id="text29">• Migração - movimento transparente</text>
+    <text
+       x="0"
+       y="70"
+       class="description"
+       id="text30">• Replicação - múltiplas cópias</text>
+    <text
+       x="0"
+       y="85"
+       class="description"
+       id="text31">• Falhas - operação contínua</text>
+    <text
+       x="0"
+       y="110"
+       class="description"
+       font-weight="bold"
+       id="text32">Escalabilidade:</text>
+    <text
+       x="0"
+       y="125"
+       class="description"
+       id="text33">• Algoritmos descentralizados</text>
+    <text
+       x="0"
+       y="140"
+       class="description"
+       id="text34">• Sem gargalos únicos</text>
+    <text
+       x="0"
+       y="155"
+       class="description"
+       id="text35">• Crescimento horizontal</text>
+    <text
+       x="0"
+       y="180"
+       class="description"
+       font-weight="bold"
+       id="text36">Tolerância a Falhas:</text>
+    <text
+       x="0"
+       y="195"
+       class="description"
+       id="text37">• Replicação de dados</text>
+    <text
+       x="0"
+       y="210"
+       class="description"
+       id="text38">• Detecção de falhas</text>
+    <text
+       x="0"
+       y="225"
+       class="description"
+       id="text39">• Recuperação automática</text>
+  </g>
+  <!-- Right panel - Algoritmos -->
+  <g
+     transform="translate(784,84)"
+     id="g52">
+    <text
+       x="0"
+       y="0"
+       class="subtitle"
+       id="text40">Algoritmos de Consenso:</text>
+    <rect
+       x="0"
+       y="15"
+       width="15"
+       height="15"
+       fill="#e74c3c"
+       id="rect40" />
+    <text
+       x="20"
+       y="27"
+       class="description"
+       font-weight="bold"
+       id="text41">Paxos:</text>
+    <text
+       x="20"
+       y="42"
+       class="description"
+       id="text42">• Teoricamente elegante</text>
+    <text
+       x="20"
+       y="57"
+       class="description"
+       id="text43">• Complexo de implementar</text>
+    <text
+       x="20"
+       y="72"
+       class="description"
+       id="text44">• Prova de correção formal</text>
+    <rect
+       x="0"
+       y="85"
+       width="15"
+       height="15"
+       fill="#f39c12"
+       id="rect44" />
+    <text
+       x="20"
+       y="97"
+       class="description"
+       font-weight="bold"
+       id="text45">Raft:</text>
+    <text
+       x="20"
+       y="112"
+       class="description"
+       id="text46">• Mais compreensível</text>
+    <text
+       x="20"
+       y="127"
+       class="description"
+       id="text47">• Eleição de líder simples</text>
+    <text
+       x="20"
+       y="142"
+       class="description"
+       id="text48">• Log replication</text>
+    <rect
+       x="0"
+       y="155"
+       width="15"
+       height="15"
+       fill="#9b59b6"
+       id="rect48" />
+    <text
+       x="20"
+       y="167"
+       class="description"
+       font-weight="bold"
+       id="text49">PBFT:</text>
+    <text
+       x="20"
+       y="182"
+       class="description"
+       id="text50">• Falhas bizantinas</text>
+    <text
+       x="20"
+       y="197"
+       class="description"
+       id="text51">• Comportamento malicioso</text>
+    <text
+       x="20"
+       y="212"
+       class="description"
+       id="text52">• Alta complexidade</text>
+  </g>
+  <!-- Bottom panel - Consistency Models -->
+  <g
+     transform="translate(312.98246,602.45614)"
+     id="g61">
+    <text
+       x="0"
+       y="0"
+       class="subtitle"
+       id="text53">Modelos de Consistência:</text>
+    <text
+       x="0"
+       y="25"
+       class="description"
+       font-weight="bold"
+       id="text54">Strong Consistency:</text>
+    <text
+       x="0"
+       y="40"
+       class="description"
+       id="text55">∀ reads return most recent write</text>
+    <text
+       x="150"
+       y="40"
+       class="description"
+       id="text56">• Linearizabilidade</text>
+    <text
+       x="150"
+       y="55"
+       class="description"
+       id="text57">• Alto custo de coordenação</text>
+    <text
+       x="350"
+       y="25"
+       class="description"
+       font-weight="bold"
+       id="text58">Eventual Consistency:</text>
+    <text
+       x="350"
+       y="40"
+       class="description"
+       id="text59">Sistema converge ao longo do tempo</text>
+    <text
+       x="500"
+       y="40"
+       class="description"
+       id="text60">• Alta disponibilidade</text>
+    <text
+       x="500"
+       y="55"
+       class="description"
+       id="text61">• Inconsistências temporárias</text>
+  </g>
+  <!-- Legend -->
+  <text
+     x="50"
+     y="600"
+     class="subtitle"
+     id="text62">Legenda:</text>
+  <line
+     x1="50"
+     y1="615"
+     x2="70"
+     y2="615"
+     class="consensus-flow"
+     marker-end="url(#consensus-arrow)"
+     id="line62" />
+  <text
+     x="75"
+     y="620"
+     class="description"
+     id="text63">Consenso</text>
+  <line
+     x1="61.420292"
+     y1="631.69104"
+     x2="70"
+     y2="631.69104"
+     class="data-flow"
+     marker-end="url(#arrow)"
+     id="line63" />
+  <text
+     x="75"
+     y="635"
+     class="description"
+     id="text64">Replicação</text>
+  <circle
+     cx="60"
+     cy="650"
+     r="8"
+     class="leader"
+     id="circle64" />
+  <text
+     x="75"
+     y="655"
+     class="description"
+     id="text65">Líder</text>
+  <circle
+     cx="130"
+     cy="650"
+     r="8"
+     class="failure"
+     id="circle65" />
+  <text
+     x="145"
+     y="655"
+     class="description"
+     id="text66">Falha</text>
+  <!-- CAP Theorem box -->
+  <g
+     transform="translate(437.6513,89.423855)"
+     id="g71">
+    <rect
+       x="0"
+       y="0"
+       width="150"
+       height="100"
+       fill="#f8f9fa"
+       stroke="#34495e"
+       stroke-width="1"
+       rx="5"
+       id="rect66" />
+    <text
+       x="75"
+       y="20"
+       text-anchor="middle"
+       class="description"
+       font-weight="bold"
+       id="text67">Teorema CAP</text>
+    <text
+       x="10"
+       y="40"
+       class="description"
+       id="text68">C - Consistency</text>
+    <text
+       x="10"
+       y="55"
+       class="description"
+       id="text69">A - Availability</text>
+    <text
+       x="10"
+       y="70"
+       class="description"
+       id="text70">P - Partition tolerance</text>
+    <text
+       x="75"
+       y="90"
+       text-anchor="middle"
+       class="description"
+       id="text71">Escolha apenas 2</text>
+  </g>
+</svg>

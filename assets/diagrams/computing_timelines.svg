@@ -1,0 +1,1371 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 1400 800"
+   version="1.1"
+   id="svg86"
+   sodipodi:docname="computing_timelines.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview86"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.06875"
+     inkscape:cx="364.91228"
+     inkscape:cy="347.60234"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg86" />
+  <defs
+     id="defs1">
+    <style
+       id="style1">
+      .timeline-title { font-family: 'Arial', sans-serif; font-size: 18px; font-weight: bold; }
+      .timeline-subtitle { font-family: 'Arial', sans-serif; font-size: 12px; fill: #666; }
+      .year-label { font-family: 'Arial', sans-serif; font-size: 11px; fill: #333; font-weight: bold; }
+      .event-label { font-family: 'Arial', sans-serif; font-size: 9px; fill: #333; }
+      .event-desc { font-family: 'Arial', sans-serif; font-size: 8px; fill: #555; }
+      .axis-label { font-family: 'Arial', sans-serif; font-size: 10px; fill: #777; text-anchor: middle; }
+    </style>
+    <marker
+       id="arrow"
+       markerWidth="6"
+       markerHeight="6"
+       refX="6"
+       refY="3"
+       orient="auto"
+       markerUnits="strokeWidth">
+      <path
+         d="M0,0 L0,6 L6,3 z"
+         fill="#333"
+         id="path1" />
+    </marker>
+  </defs>
+  <line
+     x1="1324.9056"
+     y1="559.19135"
+     x2="1324.9056"
+     y2="491.58899"
+     stroke="#8e44ad"
+     stroke-width="2.60005"
+     id="line76" />
+  <line
+     x1="1324.7279"
+     y1="362.37933"
+     x2="1324.7279"
+     y2="392.37933"
+     stroke="#3498db"
+     stroke-width="1"
+     id="line64-4" />
+  <line
+     x1="1324.9114"
+     y1="160.16052"
+     x2="1324.9114"
+     y2="120.16052"
+     stroke="#c0392b"
+     stroke-width="2"
+     id="line38-7" />
+  <!-- Background -->
+  <!-- Title -->
+  <text
+     x="700"
+     y="30"
+     class="timeline-title"
+     text-anchor="middle"
+     fill="#2c3e50"
+     id="text1"
+     style="font-size:21.3333px;white-space:pre;inline-size:1070.61;display:inline"
+     xml:space="preserve"><tspan
+       x="700"
+       y="30"
+       id="tspan2"><tspan
+         style="font-style:italic;font-family:'Century Gothic';-inkscape-font-specification:'Century Gothic Bold Italic'"
+         id="tspan1">É indigno de homens excelentes perder horas como escravos no trabalho de cálculo</tspan></tspan></text>
+  <text
+     x="700"
+     y="50"
+     class="timeline-subtitle"
+     text-anchor="middle"
+     id="text2">
+    Hardware • Teoria Computacional • Computação Quântica
+  </text>
+  <!-- Time axis -->
+  <!-- Time markers on axis -->
+  <!-- HARDWARE TIMELINE -->
+  <line
+     x1="176.72514"
+     y1="158.42105"
+     x2="1358.9304"
+     y2="158.42105"
+     stroke="#e74c3c"
+     stroke-width="5.02198"
+     id="line10" />
+  <text
+     x="174.72514"
+     y="164.35672"
+     class="timeline-title"
+     fill="#e74c3c"
+     text-anchor="end"
+     id="text11">HARDWARE</text>
+  <circle
+     cx="216.72514"
+     cy="159.35672"
+     r="5"
+     fill="#e74c3c"
+     id="circle12" />
+  <line
+     x1="216.72514"
+     y1="159.35672"
+     x2="216.72514"
+     y2="129.35672"
+     stroke="#e74c3c"
+     stroke-width="1"
+     id="line12" />
+  <text
+     x="216.72514"
+     y="124.35673"
+     class="year-label"
+     text-anchor="middle"
+     id="text13">1642</text>
+  <text
+     x="216.72514"
+     y="114.35673"
+     class="event-label"
+     text-anchor="middle"
+     id="text14">Pascaline</text>
+  <text
+     x="216.72514"
+     y="104.35673"
+     class="event-desc"
+     text-anchor="middle"
+     id="text15">Pascal</text>
+  <circle
+     cx="256.72516"
+     cy="159.35672"
+     r="5"
+     fill="#e74c3c"
+     id="circle15" />
+  <line
+     x1="256.72516"
+     y1="159.35672"
+     x2="256.72516"
+     y2="189.35672"
+     stroke="#e74c3c"
+     stroke-width="1"
+     id="line15" />
+  <text
+     x="283.52078"
+     y="192.77837"
+     class="year-label"
+     text-anchor="middle"
+     id="text16">1694</text>
+  <text
+     x="283.52078"
+     y="202.77837"
+     class="event-label"
+     text-anchor="middle"
+     id="text17">Step Reckoner</text>
+  <text
+     x="283.52078"
+     y="212.77837"
+     class="event-desc"
+     text-anchor="middle"
+     id="text18">Leibniz</text>
+  <circle
+     cx="246.72514"
+     cy="159.35672"
+     r="7"
+     fill="#c0392b"
+     stroke="#ffffff"
+     stroke-width="2"
+     id="circle18" />
+  <line
+     x1="246.72514"
+     y1="159.35672"
+     x2="246.72514"
+     y2="100.50055"
+     stroke="#c0392b"
+     stroke-width="2.42603"
+     id="line18" />
+  <text
+     x="246.72514"
+     y="96.356728"
+     class="year-label"
+     text-anchor="middle"
+     fill="#c0392b"
+     id="text19">1679</text>
+  <text
+     x="246.72514"
+     y="86.356728"
+     class="event-label"
+     text-anchor="middle"
+     font-weight="bold"
+     id="text20">Sistema Binário</text>
+  <text
+     x="246.72514"
+     y="76.356728"
+     class="event-desc"
+     text-anchor="middle"
+     fill="#c0392b"
+     id="text21">LEIBNIZ</text>
+  <circle
+     cx="446.72516"
+     cy="159.35672"
+     r="6"
+     fill="#e74c3c"
+     id="circle21" />
+  <line
+     x1="446.72516"
+     y1="159.35672"
+     x2="446.72516"
+     y2="129.35672"
+     stroke="#e74c3c"
+     stroke-width="1"
+     id="line21" />
+  <text
+     x="446.72516"
+     y="124.35673"
+     class="year-label"
+     text-anchor="middle"
+     id="text22">1834</text>
+  <text
+     x="446.72516"
+     y="114.35673"
+     class="event-label"
+     text-anchor="middle"
+     id="text23">Analytical Engine</text>
+  <text
+     x="446.72516"
+     y="104.35673"
+     class="event-desc"
+     text-anchor="middle"
+     id="text24">Babbage</text>
+  <circle
+     cx="646.72516"
+     cy="159.35672"
+     r="5"
+     fill="#e74c3c"
+     id="circle24" />
+  <line
+     x1="646.72516"
+     y1="159.35672"
+     x2="646.72516"
+     y2="189.35672"
+     stroke="#e74c3c"
+     stroke-width="1"
+     id="line24" />
+  <text
+     x="646.72516"
+     y="204.35672"
+     class="year-label"
+     text-anchor="middle"
+     id="text25">1890</text>
+  <text
+     x="646.72516"
+     y="214.35672"
+     class="event-label"
+     text-anchor="middle"
+     id="text26">Tabulating Machine</text>
+  <text
+     x="646.72516"
+     y="224.35672"
+     class="event-desc"
+     text-anchor="middle"
+     id="text27">Hollerith</text>
+  <circle
+     cx="856.72516"
+     cy="159.35672"
+     r="8"
+     fill="#c0392b"
+     stroke="#ffffff"
+     stroke-width="2"
+     id="circle27" />
+  <line
+     x1="856.72516"
+     y1="159.35672"
+     x2="856.72516"
+     y2="119.35673"
+     stroke="#c0392b"
+     stroke-width="2"
+     id="line27" />
+  <text
+     x="856.72516"
+     y="114.35673"
+     class="year-label"
+     text-anchor="middle"
+     fill="#c0392b"
+     id="text28">1941</text>
+  <text
+     x="856.72516"
+     y="104.35673"
+     class="event-label"
+     text-anchor="middle"
+     font-weight="bold"
+     id="text29">Z3 Computer</text>
+  <text
+     x="856.72516"
+     y="94.356728"
+     class="event-desc"
+     text-anchor="middle"
+     fill="#c0392b"
+     id="text30">ZUSE</text>
+  <circle
+     cx="926.72516"
+     cy="159.35672"
+     r="6"
+     fill="#e74c3c"
+     id="circle30" />
+  <line
+     x1="926.72516"
+     y1="159.35672"
+     x2="926.72516"
+     y2="189.35672"
+     stroke="#e74c3c"
+     stroke-width="1"
+     id="line30" />
+  <text
+     x="926.72516"
+     y="204.35672"
+     class="year-label"
+     text-anchor="middle"
+     id="text31">1950</text>
+  <text
+     x="926.72516"
+     y="214.35672"
+     class="event-label"
+     text-anchor="middle"
+     id="text32">Z4 Commercial</text>
+  <text
+     x="926.72516"
+     y="224.35672"
+     class="event-desc"
+     text-anchor="middle"
+     id="text33">Zuse</text>
+  <!-- COMPUTATION TIMELINE -->
+  <line
+     x1="176.72514"
+     y1="359.35672"
+     x2="1358.7135"
+     y2="359.35672"
+     stroke="#3498db"
+     stroke-width="4.98838"
+     id="line33" />
+  <text
+     x="174.72514"
+     y="364.35672"
+     class="timeline-title"
+     fill="#3498db"
+     text-anchor="end"
+     id="text34">COMPUTAÇÃO</text>
+  <circle
+     cx="246.72514"
+     cy="359.35672"
+     r="7"
+     fill="#2980b9"
+     stroke="#ffffff"
+     stroke-width="2"
+     id="circle35" />
+  <line
+     x1="246.72514"
+     y1="359.35672"
+     x2="246.72514"
+     y2="319.35672"
+     stroke="#2980b9"
+     stroke-width="2"
+     id="line35" />
+  <text
+     x="283.11426"
+     y="333.5437"
+     class="year-label"
+     text-anchor="middle"
+     fill="#2980b9"
+     id="text36">1679</text>
+  <text
+     x="283.11426"
+     y="323.5437"
+     class="event-label"
+     text-anchor="middle"
+     font-weight="bold"
+     id="text37">Lógica Binária</text>
+  <text
+     x="283.11426"
+     y="313.5437"
+     class="event-desc"
+     text-anchor="middle"
+     fill="#2980b9"
+     id="text38">LEIBNIZ</text>
+  <circle
+     cx="496.72516"
+     cy="359.35672"
+     r="6"
+     fill="#3498db"
+     id="circle38" />
+  <line
+     x1="496.72516"
+     y1="359.35672"
+     x2="496.72516"
+     y2="389.35672"
+     stroke="#3498db"
+     stroke-width="1"
+     id="line38" />
+  <text
+     x="496.72516"
+     y="404.35672"
+     class="year-label"
+     text-anchor="middle"
+     id="text39">1847</text>
+  <text
+     x="496.72516"
+     y="414.35672"
+     class="event-label"
+     text-anchor="middle"
+     id="text40">Álgebra Booleana</text>
+  <text
+     x="496.72516"
+     y="424.35672"
+     class="event-desc"
+     text-anchor="middle"
+     id="text41">Boole</text>
+  <circle
+     cx="791.72516"
+     cy="359.35672"
+     r="5"
+     fill="#3498db"
+     id="circle41" />
+  <line
+     x1="791.55975"
+     y1="359.35672"
+     x2="791.55975"
+     y2="297.59894"
+     stroke="#3498db"
+     stroke-width="1.43478"
+     id="line41" />
+  <text
+     x="790.40192"
+     y="293.92218"
+     class="year-label"
+     text-anchor="middle"
+     id="text42">1931</text>
+  <text
+     x="790.40192"
+     y="283.92218"
+     class="event-label"
+     text-anchor="middle"
+     id="text43">Incompletude</text>
+  <text
+     x="790.40192"
+     y="273.92218"
+     class="event-desc"
+     text-anchor="middle"
+     id="text44">Gödel</text>
+  <line
+     x1="816.06354"
+     y1="359.68753"
+     x2="816.06354"
+     y2="389.68753"
+     stroke="#3498db"
+     stroke-width="1"
+     id="line44" />
+  <text
+     x="816.06354"
+     y="404.68753"
+     class="year-label"
+     text-anchor="middle"
+     id="text45">1936</text>
+  <text
+     x="816.06354"
+     y="414.68753"
+     class="event-label"
+     text-anchor="middle"
+     id="text46">Máquina de Turing</text>
+  <text
+     x="816.06354"
+     y="424.68753"
+     class="event-desc"
+     text-anchor="middle"
+     id="text47">Turing</text>
+  <circle
+     cx="826.72516"
+     cy="359.35672"
+     r="6"
+     fill="#3498db"
+     id="circle47" />
+  <line
+     x1="826.72516"
+     y1="359.35672"
+     x2="826.72516"
+     y2="329.35672"
+     stroke="#3498db"
+     stroke-width="1"
+     id="line47" />
+  <text
+     x="826.72516"
+     y="324.35672"
+     class="year-label"
+     text-anchor="middle"
+     id="text48">1938</text>
+  <text
+     x="826.72516"
+     y="314.35672"
+     class="event-label"
+     text-anchor="middle"
+     id="text49">Circuitos Digitais</text>
+  <text
+     x="826.72516"
+     y="304.35672"
+     class="event-desc"
+     text-anchor="middle"
+     id="text50">Shannon</text>
+  <circle
+     cx="898.28876"
+     cy="357.51309"
+     r="8"
+     fill="#2980b9"
+     stroke="#ffffff"
+     stroke-width="2"
+     id="circle50" />
+  <line
+     x1="898.28876"
+     y1="357.51309"
+     x2="898.28876"
+     y2="317.51309"
+     stroke="#2980b9"
+     stroke-width="2"
+     id="line50" />
+  <text
+     x="898.28876"
+     y="312.51309"
+     class="year-label"
+     text-anchor="middle"
+     fill="#2980b9"
+     id="text51">1945</text>
+  <text
+     x="898.28876"
+     y="302.51309"
+     class="event-label"
+     text-anchor="middle"
+     font-weight="bold"
+     id="text52">Arquitetura</text>
+  <text
+     x="898.28876"
+     y="292.51309"
+     class="event-desc"
+     text-anchor="middle"
+     fill="#2980b9"
+     id="text53">VON NEUMANN</text>
+  <!-- QUANTUM TIMELINE -->
+  <line
+     x1="176.72514"
+     y1="559.35675"
+     x2="1358.5446"
+     y2="559.35675"
+     stroke="#9b59b6"
+     stroke-width="4.00308"
+     id="line53" />
+  <text
+     x="174.72514"
+     y="564.35675"
+     class="timeline-title"
+     fill="#9b59b6"
+     text-anchor="end"
+     id="text54">QUÂNTICA</text>
+  <circle
+     cx="406.72516"
+     cy="559.35675"
+     r="7"
+     fill="#8e44ad"
+     stroke="#ffffff"
+     stroke-width="2"
+     id="circle55" />
+  <line
+     x1="406.72516"
+     y1="559.35675"
+     x2="406.72516"
+     y2="519.35675"
+     stroke="#8e44ad"
+     stroke-width="2"
+     id="line55" />
+  <text
+     x="406.72516"
+     y="514.35675"
+     class="year-label"
+     text-anchor="middle"
+     fill="#8e44ad"
+     id="text56">1831</text>
+  <text
+     x="406.72516"
+     y="504.35672"
+     class="event-label"
+     text-anchor="middle"
+     font-weight="bold"
+     id="text57">Indução Eletromagnética</text>
+  <text
+     x="406.72516"
+     y="494.35672"
+     class="event-desc"
+     text-anchor="middle"
+     fill="#8e44ad"
+     id="text58">FARADAY</text>
+  <line
+     x1="675.40192"
+     y1="559.68756"
+     x2="675.40192"
+     y2="589.68756"
+     stroke="#9b59b6"
+     stroke-width="1"
+     id="line58" />
+  <text
+     x="675.40192"
+     y="604.68756"
+     class="year-label"
+     text-anchor="middle"
+     id="text59">1900</text>
+  <text
+     x="675.40192"
+     y="614.68756"
+     class="event-label"
+     text-anchor="middle"
+     id="text60">Teoria Quântica</text>
+  <text
+     x="675.40192"
+     y="624.68756"
+     class="event-desc"
+     text-anchor="middle"
+     id="text61">Planck</text>
+  <circle
+     cx="686.72516"
+     cy="559.35675"
+     r="5"
+     fill="#9b59b6"
+     id="circle61" />
+  <line
+     x1="686.72516"
+     y1="559.35675"
+     x2="686.72516"
+     y2="529.35675"
+     stroke="#9b59b6"
+     stroke-width="1"
+     id="line61" />
+  <text
+     x="686.72516"
+     y="524.35675"
+     class="year-label"
+     text-anchor="middle"
+     id="text62">1905</text>
+  <text
+     x="686.72516"
+     y="514.35675"
+     class="event-label"
+     text-anchor="middle"
+     id="text63">Fótons</text>
+  <text
+     x="686.72516"
+     y="504.35672"
+     class="event-desc"
+     text-anchor="middle"
+     id="text64">Einstein</text>
+  <circle
+     cx="741.72516"
+     cy="559.35675"
+     r="5"
+     fill="#9b59b6"
+     id="circle64" />
+  <line
+     x1="741.72516"
+     y1="559.35675"
+     x2="741.72516"
+     y2="621.77612"
+     stroke="#9b59b6"
+     stroke-width="1.44244"
+     id="line64" />
+  <text
+     x="742.38678"
+     y="631.1524"
+     class="year-label"
+     text-anchor="middle"
+     id="text65">1926</text>
+  <text
+     x="742.38678"
+     y="641.1524"
+     class="event-label"
+     text-anchor="middle"
+     id="text66">Equação de Onda</text>
+  <text
+     x="742.38678"
+     y="651.1524"
+     class="event-desc"
+     text-anchor="middle"
+     id="text67">Schrödinger</text>
+  <circle
+     cx="1056.7251"
+     cy="559.35675"
+     r="6"
+     fill="#9b59b6"
+     id="circle67" />
+  <line
+     x1="1056.7251"
+     y1="559.35675"
+     x2="1056.7251"
+     y2="529.35675"
+     stroke="#9b59b6"
+     stroke-width="1"
+     id="line67" />
+  <text
+     x="1056.7251"
+     y="524.35675"
+     class="year-label"
+     text-anchor="middle"
+     id="text68">1981</text>
+  <text
+     x="1056.7251"
+     y="514.35675"
+     class="event-label"
+     text-anchor="middle"
+     id="text69">Simulação Quântica</text>
+  <text
+     x="1056.7251"
+     y="504.35672"
+     class="event-desc"
+     text-anchor="middle"
+     id="text70">Feynman</text>
+  <circle
+     cx="1098.0116"
+     cy="559.35675"
+     r="5"
+     fill="#9b59b6"
+     id="circle70" />
+  <line
+     x1="1098.0116"
+     y1="559.35675"
+     x2="1098.0116"
+     y2="589.35675"
+     stroke="#9b59b6"
+     stroke-width="1"
+     id="line70" />
+  <text
+     x="1098.0116"
+     y="604.35675"
+     class="year-label"
+     text-anchor="middle"
+     id="text71">1994</text>
+  <text
+     x="1096.1403"
+     y="614.35675"
+     class="event-label"
+     text-anchor="middle"
+     id="text72">Algoritmo de Shor</text>
+  <rect
+     x="131.77251"
+     y="670.3609"
+     width="250"
+     height="80"
+     fill="#ecf0f1"
+     stroke="#bdc3c7"
+     stroke-width="1"
+     rx="5"
+     id="rect93"
+     style="opacity:0.6" />
+  <text
+     x="256.77249"
+     y="690.3609"
+     class="timeline-title"
+     fill="#2c3e50"
+     text-anchor="middle"
+     font-size="14"
+     id="text94"
+     style="font-weight:bold;font-size:18px;font-family:Arial, sans-serif;opacity:0.6">Era Mecânica</text>
+  <text
+     x="256.77249"
+     y="710.3609"
+     class="event-desc"
+     text-anchor="middle"
+     id="text95"
+     style="font-size:7px;font-family:Arial, sans-serif;opacity:0.6;fill:#555555">1600 - 1900</text>
+  <text
+     x="256.77249"
+     y="725.3609"
+     class="event-desc"
+     text-anchor="middle"
+     id="text96"
+     style="font-size:7px;font-family:Arial, sans-serif;opacity:0.6;fill:#555555">Calculadoras mecânicas</text>
+  <text
+     x="256.77249"
+     y="740.3609"
+     class="event-desc"
+     text-anchor="middle"
+     id="text97"
+     style="font-size:7px;font-family:Arial, sans-serif;opacity:0.6;fill:#555555">Fundações teóricas</text>
+  <rect
+     x="608.12518"
+     y="671.68414"
+     width="250"
+     height="80"
+     fill="#ecf0f1"
+     stroke="#bdc3c7"
+     stroke-width="1"
+     rx="5"
+     id="rect97"
+     style="opacity:0.6" />
+  <text
+     x="733.12518"
+     y="691.68414"
+     class="timeline-title"
+     fill="#2c3e50"
+     text-anchor="middle"
+     font-size="14"
+     id="text98"
+     style="font-weight:bold;font-size:18px;font-family:Arial, sans-serif;opacity:0.6">Era Eletrônica</text>
+  <text
+     x="733.12518"
+     y="711.68414"
+     class="event-desc"
+     text-anchor="middle"
+     id="text99"
+     style="font-size:7px;font-family:Arial, sans-serif;opacity:0.6;fill:#555555">1940 - 1990</text>
+  <text
+     x="733.12518"
+     y="726.68414"
+     class="event-desc"
+     text-anchor="middle"
+     id="text100"
+     style="font-size:7px;font-family:Arial, sans-serif;opacity:0.6;fill:#555555">Computadores pessoais</text>
+  <text
+     x="733.12518"
+     y="741.68414"
+     class="event-desc"
+     text-anchor="middle"
+     id="text101"
+     style="font-size:7px;font-family:Arial, sans-serif;opacity:0.6;fill:#555555">Supercomputadores</text>
+  <rect
+     x="1091.6799"
+     y="669.03766"
+     width="250"
+     height="80"
+     fill="#ecf0f1"
+     stroke="#bdc3c7"
+     stroke-width="1"
+     rx="5"
+     id="rect101"
+     style="opacity:0.6" />
+  <text
+     x="1216.6799"
+     y="689.03766"
+     class="timeline-title"
+     fill="#2c3e50"
+     text-anchor="middle"
+     font-size="14"
+     id="text102"
+     style="font-weight:bold;font-size:18px;font-family:Arial, sans-serif;opacity:0.6">Era Digital/IA</text>
+  <text
+     x="1216.6799"
+     y="709.03766"
+     class="event-desc"
+     text-anchor="middle"
+     id="text103"
+     style="font-size:7px;font-family:Arial, sans-serif;opacity:0.6;fill:#555555">1990 - ...</text>
+  <text
+     x="1216.6799"
+     y="724.03766"
+     class="event-desc"
+     text-anchor="middle"
+     id="text104"
+     style="font-size:7px;font-family:Arial, sans-serif;opacity:0.6;fill:#555555">Internet, IA, Quantum</text>
+  <text
+     x="1216.6799"
+     y="739.03766"
+     class="event-desc"
+     text-anchor="middle"
+     id="text105"
+     style="font-size:7px;font-family:Arial, sans-serif;opacity:0.6;fill:#555555">Computação ubíqua</text>
+  <text
+     x="1098.0116"
+     y="624.35675"
+     class="event-desc"
+     text-anchor="middle"
+     id="text73">Shor</text>
+  <circle
+     cx="1281.4742"
+     cy="559.97131"
+     r="6"
+     fill="#9b59b6"
+     id="circle73" />
+  <line
+     x1="1281.4742"
+     y1="590.69861"
+     x2="1281.4742"
+     y2="560.69861"
+     stroke="#9b59b6"
+     stroke-width="1"
+     id="line73" />
+  <text
+     x="1283.3179"
+     y="622.68414"
+     class="year-label"
+     text-anchor="middle"
+     id="text74">2019</text>
+  <text
+     x="1282.0143"
+     y="612.24957"
+     class="event-label"
+     text-anchor="middle"
+     id="text75">Supremacia Quântica</text>
+  <text
+     x="1283.3179"
+     y="602.68408"
+     class="event-desc"
+     text-anchor="middle"
+     id="text76">Google</text>
+  <circle
+     cx="1324.8182"
+     cy="559.35675"
+     r="8"
+     fill="#8e44ad"
+     stroke="#ffffff"
+     stroke-width="2"
+     id="circle76" />
+  <text
+     x="1324.7251"
+     y="488.35675"
+     class="year-label"
+     text-anchor="middle"
+     fill="#8e44ad"
+     id="text77">2025</text>
+  <text
+     x="1324.7251"
+     y="478.35672"
+     class="event-label"
+     text-anchor="middle"
+     font-weight="bold"
+     id="text78">Chip Majorana</text>
+  <text
+     x="1324.7251"
+     y="468.35672"
+     class="event-desc"
+     text-anchor="middle"
+     fill="#8e44ad"
+     id="text79">MICROSOFT</text>
+  <!-- Binary System Connection Lines -->
+  <path
+     d="m 246.89056,159.94402 q 0,240.43484 0,400.72472"
+     stroke="#f39c12"
+     stroke-width="4.24647"
+     fill="none"
+     stroke-dasharray="5, 5"
+     id="path79"
+     style="opacity:0.3" />
+  <circle
+     cx="246.72514"
+     cy="259.35672"
+     r="3"
+     fill="#f39c12"
+     id="circle79"
+     style="opacity:0.3" />
+  <text
+     x="266.72516"
+     y="264.35672"
+     class="event-desc"
+     fill="#f39c12"
+     font-weight="bold"
+     id="text80"
+     style="opacity:0.3">Sistema Binário</text>
+  <text
+     x="266.72516"
+     y="274.35672"
+     class="event-desc"
+     fill="#f39c12"
+     id="text81"
+     style="opacity:0.3">conecta todas as áreas</text>
+  <!-- Legend -->
+  <ellipse
+     cx="675.56732"
+     cy="558.36432"
+     fill="#9b59b6"
+     id="circle58"
+     style="stroke:#ffffff;stroke-width:1.16533"
+     rx="7.0751705"
+     ry="6.9097657" />
+  <ellipse
+     cx="815.73273"
+     cy="358.52969"
+     fill="#3498db"
+     id="circle44"
+     style="stroke:#ffffff;stroke-width:1.13988"
+     rx="6.9224901"
+     ry="6.7570848" />
+  <line
+     x1="1009.4969"
+     y1="158.48164"
+     x2="1009.4969"
+     y2="99.066437"
+     stroke="#e74c3c"
+     stroke-width="1.21876"
+     id="line20" />
+  <text
+     x="1008.3273"
+     y="94.768196"
+     class="year-label"
+     text-anchor="middle"
+     id="text21-5"
+     style="font-weight:bold;font-size:10px;font-family:Arial, sans-serif;fill:#333333">1976</text>
+  <text
+     x="1008.3273"
+     y="84.768196"
+     class="event-label"
+     text-anchor="middle"
+     id="text22-7"
+     style="font-size:8px;font-family:Arial, sans-serif;fill:#333333">Cray-1</text>
+  <text
+     x="1008.3273"
+     y="74.768196"
+     class="event-desc"
+     text-anchor="middle"
+     id="text23-6"
+     style="font-size:7px;font-family:Arial, sans-serif;fill:#555555">Supercomputador</text>
+  <circle
+     cx="1019.4969"
+     cy="158.48164"
+     r="5"
+     fill="#e74c3c"
+     id="circle23" />
+  <line
+     x1="1019.4969"
+     y1="158.48164"
+     x2="1019.4969"
+     y2="188.48164"
+     stroke="#e74c3c"
+     stroke-width="1"
+     id="line23" />
+  <text
+     x="1019.4969"
+     y="203.48164"
+     class="year-label"
+     text-anchor="middle"
+     id="text24-1"
+     style="font-weight:bold;font-size:10px;font-family:Arial, sans-serif;fill:#333333">1977</text>
+  <text
+     x="1019.4969"
+     y="213.48164"
+     class="event-label"
+     text-anchor="middle"
+     id="text25-8"
+     style="font-size:8px;font-family:Arial, sans-serif;fill:#333333">Apple II</text>
+  <text
+     x="1019.4969"
+     y="223.48164"
+     class="event-desc"
+     text-anchor="middle"
+     id="text26-9"
+     style="font-size:7px;font-family:Arial, sans-serif;fill:#555555">Jobs &amp; Wozniak</text>
+  <circle
+     cx="1049.4969"
+     cy="158.48164"
+     r="7"
+     fill="#c0392b"
+     stroke="#ffffff"
+     stroke-width="2"
+     id="circle26" />
+  <line
+     x1="1049.4969"
+     y1="158.48164"
+     x2="1049.4969"
+     y2="118.48164"
+     stroke="#c0392b"
+     stroke-width="2"
+     id="line26" />
+  <text
+     x="1049.4969"
+     y="113.48164"
+     class="year-label"
+     text-anchor="middle"
+     fill="#c0392b"
+     id="text27-2"
+     style="font-weight:bold;font-size:10px;font-family:Arial, sans-serif;fill:#333333">1981</text>
+  <text
+     x="1049.4969"
+     y="103.48164"
+     class="event-label major-event"
+     text-anchor="middle"
+     id="text28-7"
+     style="font-weight:bold;font-size:8px;font-family:Arial, sans-serif;fill:#333333">IBM PC</text>
+  <text
+     x="1049.4969"
+     y="93.481644"
+     class="event-desc"
+     text-anchor="middle"
+     fill="#c0392b"
+     id="text29-9"
+     style="font-size:7px;font-family:Arial, sans-serif;fill:#555555">Era PC</text>
+  <circle
+     cx="1079.4969"
+     cy="158.48164"
+     r="5"
+     fill="#e74c3c"
+     id="circle29" />
+  <line
+     x1="1079.4969"
+     y1="158.48164"
+     x2="1079.4969"
+     y2="188.48164"
+     stroke="#e74c3c"
+     stroke-width="1"
+     id="line29" />
+  <text
+     x="1079.4969"
+     y="203.48164"
+     class="year-label"
+     text-anchor="middle"
+     id="text30-5"
+     style="font-weight:bold;font-size:10px;font-family:Arial, sans-serif;fill:#333333">1984</text>
+  <text
+     x="1079.4969"
+     y="213.48164"
+     class="event-label"
+     text-anchor="middle"
+     id="text31-4"
+     style="font-size:8px;font-family:Arial, sans-serif;fill:#333333">Macintosh</text>
+  <text
+     x="1079.4969"
+     y="223.48164"
+     class="event-desc"
+     text-anchor="middle"
+     id="text32-3"
+     style="font-size:7px;font-family:Arial, sans-serif;fill:#555555">GUI Revolution</text>
+  <circle
+     cx="1176.3383"
+     cy="159.09619"
+     r="7"
+     fill="#c0392b"
+     stroke="#ffffff"
+     stroke-width="2"
+     id="circle32" />
+  <line
+     x1="1176.3383"
+     y1="159.09619"
+     x2="1176.3383"
+     y2="119.09619"
+     stroke="#c0392b"
+     stroke-width="2"
+     id="line32" />
+  <text
+     x="1176.3383"
+     y="114.09619"
+     class="year-label"
+     text-anchor="middle"
+     fill="#c0392b"
+     id="text33-1"
+     style="font-weight:bold;font-size:10px;font-family:Arial, sans-serif;fill:#333333">1999</text>
+  <text
+     x="1176.3383"
+     y="104.09619"
+     class="event-label major-event"
+     text-anchor="middle"
+     id="text34-2"
+     style="font-weight:bold;font-size:8px;font-family:Arial, sans-serif;fill:#333333">GeForce 256</text>
+  <text
+     x="1176.3383"
+     y="94.096191"
+     class="event-desc"
+     text-anchor="middle"
+     fill="#c0392b"
+     id="text35-3"
+     style="font-size:7px;font-family:Arial, sans-serif;fill:#555555">Primeiro GPU</text>
+  <circle
+     cx="1246.3026"
+     cy="158.44971"
+     r="6"
+     fill="#e74c3c"
+     id="circle35-3" />
+  <line
+     x1="1246.3026"
+     y1="158.44971"
+     x2="1246.3026"
+     y2="188.44971"
+     stroke="#e74c3c"
+     stroke-width="1"
+     id="line35-4" />
+  <text
+     x="1246.3026"
+     y="203.44971"
+     class="year-label"
+     text-anchor="middle"
+     id="text36-1"
+     style="font-weight:bold;font-size:10px;font-family:Arial, sans-serif;fill:#333333">2016</text>
+  <text
+     x="1246.3026"
+     y="213.44971"
+     class="event-label"
+     text-anchor="middle"
+     id="text37-1"
+     style="font-size:8px;font-family:Arial, sans-serif;fill:#333333">Google TPU</text>
+  <text
+     x="1246.3026"
+     y="223.44971"
+     class="event-desc"
+     text-anchor="middle"
+     id="text38-3"
+     style="font-size:7px;font-family:Arial, sans-serif;fill:#555555">IA Hardware</text>
+  <circle
+     cx="1324.8182"
+     cy="158.16052"
+     r="8"
+     fill="#c0392b"
+     stroke="#ffffff"
+     stroke-width="2"
+     id="circle38-8" />
+  <text
+     x="1322.9114"
+     y="115.16052"
+     class="year-label"
+     text-anchor="middle"
+     fill="#c0392b"
+     id="text39-4"
+     style="font-weight:bold;font-size:10px;font-family:Arial, sans-serif;fill:#333333">2025</text>
+  <text
+     x="1322.9114"
+     y="105.16052"
+     class="event-label major-event"
+     text-anchor="middle"
+     id="text40-2"
+     style="font-weight:bold;font-size:8px;font-family:Arial, sans-serif;fill:#333333">Ironwood TPU</text>
+  <text
+     x="1322.9114"
+     y="95.160522"
+     class="event-desc"
+     text-anchor="middle"
+     fill="#c0392b"
+     id="text41-7"
+     style="font-size:7px;font-family:Arial, sans-serif;fill:#555555">7ª Geração</text>
+  <circle
+     cx="1009.4969"
+     cy="158.48164"
+     r="6"
+     fill="#e74c3c"
+     id="circle20"
+     style="stroke:#ffffff" />
+  <text
+     x="486.53906"
+     y="334.09961"
+     class="event-label"
+     text-anchor="middle"
+     id="text54-6"
+     style="font-size:8px;font-family:Arial, sans-serif;fill:#333333">Circuitos Digitais</text>
+  <text
+     x="486.53906"
+     y="344.09961"
+     class="event-desc"
+     text-anchor="middle"
+     id="text55-6"
+     style="font-size:7px;font-family:Arial, sans-serif;fill:#555555">Shannon</text>
+  <circle
+     cx="1257.6503"
+     cy="359.43878"
+     r="6"
+     fill="#3498db"
+     id="circle58-3" />
+  <line
+     x1="1257.6503"
+     y1="359.43878"
+     x2="1257.6503"
+     y2="319.43878"
+     stroke="#3498db"
+     stroke-width="1"
+     id="line58-7" />
+  <text
+     x="1257.6503"
+     y="314.43878"
+     class="year-label"
+     text-anchor="middle"
+     id="text59-8"
+     style="font-weight:bold;font-size:10px;font-family:Arial, sans-serif;fill:#333333">2017</text>
+  <text
+     x="1257.6503"
+     y="304.43878"
+     class="event-label"
+     text-anchor="middle"
+     id="text60-8"
+     style="font-size:8px;font-family:Arial, sans-serif;fill:#333333">AlphaZero</text>
+  <text
+     x="1257.6503"
+     y="294.43878"
+     class="event-desc"
+     text-anchor="middle"
+     id="text61-2"
+     style="font-size:7px;font-family:Arial, sans-serif;fill:#555555">DeepMind</text>
+  <circle
+     cx="1304.3169"
+     cy="359.56744"
+     r="8"
+     fill="#2980b9"
+     stroke="#ffffff"
+     stroke-width="2"
+     id="circle61-9" />
+  <line
+     x1="1304.3169"
+     y1="359.56744"
+     x2="1304.3169"
+     y2="319.56744"
+     stroke="#2980b9"
+     stroke-width="2"
+     id="line61-1" />
+  <text
+     x="1304.3169"
+     y="314.56744"
+     class="year-label"
+     text-anchor="middle"
+     fill="#2980b9"
+     id="text62-3"
+     style="font-weight:bold;font-size:10px;font-family:Arial, sans-serif;fill:#333333">2022</text>
+  <text
+     x="1304.3169"
+     y="304.56744"
+     class="event-label major-event"
+     text-anchor="middle"
+     id="text63-5"
+     style="font-weight:bold;font-size:8px;font-family:Arial, sans-serif;fill:#333333">ChatGPT</text>
+  <text
+     x="1304.3169"
+     y="294.56744"
+     class="event-desc"
+     text-anchor="middle"
+     fill="#2980b9"
+     id="text64-9"
+     style="font-size:7px;font-family:Arial, sans-serif;fill:#555555">OPENAI</text>
+  <circle
+     cx="1324.8182"
+     cy="359.56744"
+     r="6"
+     fill="#3498db"
+     id="circle64-8" />
+  <text
+     x="1324.7279"
+     y="404.40204"
+     class="year-label"
+     text-anchor="middle"
+     id="text65-0"
+     style="font-weight:bold;font-size:10px;font-family:Arial, sans-serif;fill:#333333">2025</text>
+  <text
+     x="1324.7279"
+     y="414.40204"
+     class="event-label"
+     text-anchor="middle"
+     id="text66-7"
+     style="font-size:8px;font-family:Arial, sans-serif;fill:#333333">Era AGI</text>
+  <text
+     x="1324.7279"
+     y="424.40204"
+     class="event-desc"
+     text-anchor="middle"
+     id="text67-6"
+     style="font-size:7px;font-family:Arial, sans-serif;fill:#555555">Próxima Fronteira</text>
+</svg>

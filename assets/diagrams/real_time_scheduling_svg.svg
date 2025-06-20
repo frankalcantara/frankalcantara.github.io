@@ -1,0 +1,933 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 1000 600"
+   version="1.1"
+   id="svg92"
+   sodipodi:docname="real_time_scheduling_svg.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview92"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.425"
+     inkscape:cx="499.64912"
+     inkscape:cy="300"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg92" />
+  <defs
+     id="defs2">
+    <style
+       id="style1">
+      .title { font-family: 'Arial', sans-serif; font-size: 18px; font-weight: bold; fill: #2c3e50; }
+      .subtitle { font-family: 'Arial', sans-serif; font-size: 14px; font-weight: bold; fill: #34495e; }
+      .axis-label { font-family: 'Arial', sans-serif; font-size: 12px; fill: #2c3e50; text-anchor: middle; }
+      .time-label { font-family: 'Arial', sans-serif; font-size: 10px; fill: #2c3e50; text-anchor: middle; }
+      .task-label { font-family: 'Arial', sans-serif; font-size: 10px; fill: #2c3e50; }
+      .description { font-family: 'Arial', sans-serif; font-size: 10px; fill: #34495e; }
+      .formula { font-family: 'Arial', sans-serif; font-size: 12px; fill: #2c3e50; font-style: italic; }
+      .task-a { fill: #3498db; stroke: #2980b9; stroke-width: 1; }
+      .task-b { fill: #e74c3c; stroke: #c0392b; stroke-width: 1; }
+      .task-c { fill: #27ae60; stroke: #229954; stroke-width: 1; }
+      .deadline { stroke: #f39c12; stroke-width: 2; stroke-dasharray: 3,3; }
+      .missed-deadline { stroke: #e74c3c; stroke-width: 3; }
+      .timeline { stroke: #2c3e50; stroke-width: 2; }
+      .grid { stroke: #bdc3c7; stroke-width: 0.5; opacity: 0.5; }
+    </style>
+    <marker
+       id="deadline-arrow"
+       markerWidth="8"
+       markerHeight="6"
+       refX="8"
+       refY="3"
+       orient="auto">
+      <polygon
+         points="0 0, 8 3, 0 6"
+         fill="#f39c12"
+         id="polygon1" />
+    </marker>
+    <marker
+       id="missed-arrow"
+       markerWidth="8"
+       markerHeight="6"
+       refX="8"
+       refY="3"
+       orient="auto">
+      <polygon
+         points="0 0, 8 3, 0 6"
+         fill="#e74c3c"
+         id="polygon2" />
+    </marker>
+  </defs>
+  <!-- Background -->
+  <!-- Title -->
+  <text
+     x="500"
+     y="30"
+     text-anchor="middle"
+     class="title"
+     id="text2">Escalonamento em Sistemas de Tempo Real</text>
+  <text
+     x="500"
+     y="50"
+     text-anchor="middle"
+     class="subtitle"
+     id="text3">Comparação: Rate Monotonic vs Earliest Deadline First</text>
+  <!-- Rate Monotonic Section -->
+  <text
+     x="250"
+     y="100"
+     text-anchor="middle"
+     class="subtitle"
+     id="text4">Rate Monotonic (RM)</text>
+  <line
+     x1="100"
+     y1="230"
+     x2="450"
+     y2="230"
+     class="timeline"
+     id="line4" />
+  <g
+     id="g12"
+     transform="translate(50,70)">
+    <line
+       x1="50"
+       y1="155"
+       x2="50"
+       y2="165"
+       class="timeline"
+       id="line5" />
+    <text
+       x="50"
+       y="175"
+       class="time-label"
+       id="text5">0</text>
+    <line
+       x1="100"
+       y1="155"
+       x2="100"
+       y2="165"
+       class="timeline"
+       id="line6" />
+    <text
+       x="100"
+       y="175"
+       class="time-label"
+       id="text6">2</text>
+    <line
+       x1="150"
+       y1="155"
+       x2="150"
+       y2="165"
+       class="timeline"
+       id="line7" />
+    <text
+       x="150"
+       y="175"
+       class="time-label"
+       id="text7">4</text>
+    <line
+       x1="200"
+       y1="155"
+       x2="200"
+       y2="165"
+       class="timeline"
+       id="line8" />
+    <text
+       x="200"
+       y="175"
+       class="time-label"
+       id="text8">6</text>
+    <line
+       x1="250"
+       y1="155"
+       x2="250"
+       y2="165"
+       class="timeline"
+       id="line9" />
+    <text
+       x="250"
+       y="175"
+       class="time-label"
+       id="text9">8</text>
+    <line
+       x1="300"
+       y1="155"
+       x2="300"
+       y2="165"
+       class="timeline"
+       id="line10" />
+    <text
+       x="300"
+       y="175"
+       class="time-label"
+       id="text10">10</text>
+    <line
+       x1="350"
+       y1="155"
+       x2="350"
+       y2="165"
+       class="timeline"
+       id="line11" />
+    <text
+       x="350"
+       y="175"
+       class="time-label"
+       id="text11">12</text>
+    <line
+       x1="400"
+       y1="155"
+       x2="400"
+       y2="165"
+       class="timeline"
+       id="line12" />
+    <text
+       x="400"
+       y="175"
+       class="time-label"
+       id="text12">14</text>
+  </g>
+  <text
+     x="36"
+     y="185"
+     class="task-label"
+     id="text13">A (T=4, C=1)</text>
+  <text
+     x="36"
+     y="165"
+     class="task-label"
+     id="text14">B (T=6, C=2)</text>
+  <text
+     x="36"
+     y="145"
+     class="task-label"
+     id="text15">C (T=8, C=2)</text>
+  <rect
+     x="100"
+     y="175"
+     width="25"
+     height="15"
+     class="task-a"
+     id="rect15" />
+  <rect
+     x="200"
+     y="175"
+     width="25"
+     height="15"
+     class="task-a"
+     id="rect16" />
+  <rect
+     x="300"
+     y="175"
+     width="25"
+     height="15"
+     class="task-a"
+     id="rect17" />
+  <rect
+     x="400"
+     y="175"
+     width="25"
+     height="15"
+     class="task-a"
+     id="rect18" />
+  <rect
+     x="125"
+     y="155"
+     width="50"
+     height="15"
+     class="task-b"
+     id="rect19" />
+  <rect
+     x="250"
+     y="155"
+     width="50"
+     height="15"
+     class="task-b"
+     id="rect20" />
+  <rect
+     x="175"
+     y="135"
+     width="25"
+     height="15"
+     class="task-c"
+     id="rect21" />
+  <rect
+     x="325"
+     y="135"
+     width="50"
+     height="15"
+     class="task-c"
+     id="rect22" />
+  <line
+     x1="200"
+     y1="149"
+     x2="200"
+     y2="224"
+     class="deadline"
+     marker-end="url(#deadline-arrow)"
+     id="line22" />
+  <line
+     x1="250"
+     y1="149"
+     x2="250"
+     y2="224"
+     class="deadline"
+     marker-end="url(#deadline-arrow)"
+     id="line23" />
+  <line
+     x1="300"
+     y1="149"
+     x2="300"
+     y2="224"
+     class="deadline"
+     marker-end="url(#deadline-arrow)"
+     id="line24" />
+  <line
+     x1="350"
+     y1="149"
+     x2="350"
+     y2="224"
+     class="deadline"
+     marker-end="url(#deadline-arrow)"
+     id="line25" />
+  <text
+     x="250"
+     y="266"
+     text-anchor="middle"
+     class="formula"
+     id="text25">U = Σ(Ci/Ti) ≤ n(2^(1/n) - 1)</text>
+  <text
+     x="250"
+     y="281"
+     text-anchor="middle"
+     class="description"
+     id="text26">Prioridade fixa baseada no período</text>
+  <!-- EDF Section -->
+  <text
+     x="730"
+     y="100"
+     text-anchor="middle"
+     class="subtitle"
+     id="text27">Earliest Deadline First (EDF)</text>
+  <line
+     x1="580"
+     y1="230"
+     x2="930"
+     y2="230"
+     class="timeline"
+     id="line27" />
+  <g
+     id="g35"
+     transform="translate(530,70)">
+    <line
+       x1="50"
+       y1="155"
+       x2="50"
+       y2="165"
+       class="timeline"
+       id="line28" />
+    <text
+       x="50"
+       y="175"
+       class="time-label"
+       id="text28">0</text>
+    <line
+       x1="100"
+       y1="155"
+       x2="100"
+       y2="165"
+       class="timeline"
+       id="line29" />
+    <text
+       x="100"
+       y="175"
+       class="time-label"
+       id="text29">2</text>
+    <line
+       x1="150"
+       y1="155"
+       x2="150"
+       y2="165"
+       class="timeline"
+       id="line30" />
+    <text
+       x="150"
+       y="175"
+       class="time-label"
+       id="text30">4</text>
+    <line
+       x1="200"
+       y1="155"
+       x2="200"
+       y2="165"
+       class="timeline"
+       id="line31" />
+    <text
+       x="200"
+       y="175"
+       class="time-label"
+       id="text31">6</text>
+    <line
+       x1="250"
+       y1="155"
+       x2="250"
+       y2="165"
+       class="timeline"
+       id="line32" />
+    <text
+       x="250"
+       y="175"
+       class="time-label"
+       id="text32">8</text>
+    <line
+       x1="300"
+       y1="155"
+       x2="300"
+       y2="165"
+       class="timeline"
+       id="line33" />
+    <text
+       x="300"
+       y="175"
+       class="time-label"
+       id="text33">10</text>
+    <line
+       x1="350"
+       y1="155"
+       x2="350"
+       y2="165"
+       class="timeline"
+       id="line34" />
+    <text
+       x="350"
+       y="175"
+       class="time-label"
+       id="text34">12</text>
+    <line
+       x1="400"
+       y1="155"
+       x2="400"
+       y2="165"
+       class="timeline"
+       id="line35" />
+    <text
+       x="400"
+       y="175"
+       class="time-label"
+       id="text35">14</text>
+  </g>
+  <text
+     x="516"
+     y="185"
+     class="task-label"
+     id="text36">A (T=4, C=1)</text>
+  <text
+     x="516"
+     y="165"
+     class="task-label"
+     id="text37">B (T=6, C=2)</text>
+  <text
+     x="516"
+     y="145"
+     class="task-label"
+     id="text38">C (T=8, C=2)</text>
+  <rect
+     x="580"
+     y="175"
+     width="25"
+     height="15"
+     class="task-a"
+     id="rect38" />
+  <rect
+     x="605"
+     y="155"
+     width="50"
+     height="15"
+     class="task-b"
+     id="rect39" />
+  <rect
+     x="655"
+     y="135"
+     width="25"
+     height="15"
+     class="task-c"
+     id="rect40" />
+  <rect
+     x="680"
+     y="175"
+     width="25"
+     height="15"
+     class="task-a"
+     id="rect41" />
+  <rect
+     x="705"
+     y="135"
+     width="25"
+     height="15"
+     class="task-c"
+     id="rect42" />
+  <rect
+     x="730"
+     y="155"
+     width="50"
+     height="15"
+     class="task-b"
+     id="rect43" />
+  <rect
+     x="780"
+     y="175"
+     width="25"
+     height="15"
+     class="task-a"
+     id="rect44" />
+  <rect
+     x="805"
+     y="135"
+     width="50"
+     height="15"
+     class="task-c"
+     id="rect45" />
+  <rect
+     x="855"
+     y="175"
+     width="25"
+     height="15"
+     class="task-a"
+     id="rect46" />
+  <line
+     x1="680"
+     y1="149"
+     x2="680"
+     y2="224"
+     class="deadline"
+     marker-end="url(#deadline-arrow)"
+     id="line46" />
+  <line
+     x1="730"
+     y1="149"
+     x2="730"
+     y2="224"
+     class="deadline"
+     marker-end="url(#deadline-arrow)"
+     id="line47" />
+  <line
+     x1="780"
+     y1="149"
+     x2="780"
+     y2="224"
+     class="deadline"
+     marker-end="url(#deadline-arrow)"
+     id="line48" />
+  <line
+     x1="830"
+     y1="149"
+     x2="830"
+     y2="224"
+     class="deadline"
+     marker-end="url(#deadline-arrow)"
+     id="line49" />
+  <text
+     x="730"
+     y="266"
+     text-anchor="middle"
+     class="formula"
+     id="text49">U = Σ(Ci/Ti) ≤ 1</text>
+  <text
+     x="730"
+     y="281"
+     text-anchor="middle"
+     class="description"
+     id="text50">Prioridade dinâmica baseada no deadline</text>
+  <!-- Comparison table -->
+  <g
+     transform="matrix(1.0333333,0,0,1,100,270)"
+     id="g81">
+    <text
+       x="400"
+       y="20"
+       text-anchor="middle"
+       class="subtitle"
+       id="text51">Comparação de Características</text>
+    <!-- Table headers -->
+    <rect
+       x="0"
+       y="40"
+       width="200"
+       height="30"
+       fill="#34495e"
+       id="rect51" />
+    <rect
+       x="200"
+       y="40"
+       width="200"
+       height="30"
+       fill="#34495e"
+       id="rect52" />
+    <rect
+       x="400"
+       y="40"
+       width="200"
+       height="30"
+       fill="#34495e"
+       id="rect53" />
+    <rect
+       x="600"
+       y="40"
+       width="200"
+       height="30"
+       fill="#34495e"
+       id="rect54" />
+    <text
+       x="100"
+       y="60"
+       text-anchor="middle"
+       class="axis-label"
+       fill="white"
+       id="text54">Aspecto</text>
+    <text
+       x="300"
+       y="60"
+       text-anchor="middle"
+       class="axis-label"
+       fill="white"
+       id="text55">Rate Monotonic</text>
+    <text
+       x="500"
+       y="60"
+       text-anchor="middle"
+       class="axis-label"
+       fill="white"
+       id="text56">EDF</text>
+    <text
+       x="700"
+       y="60"
+       text-anchor="middle"
+       class="axis-label"
+       fill="white"
+       id="text57">Observações</text>
+    <!-- Table rows -->
+    <rect
+       x="0"
+       y="70"
+       width="200"
+       height="25"
+       fill="#ecf0f1"
+       id="rect57" />
+    <rect
+       x="200"
+       y="70"
+       width="200"
+       height="25"
+       fill="#ffffff"
+       id="rect58" />
+    <rect
+       x="400"
+       y="70"
+       width="200"
+       height="25"
+       fill="#ffffff"
+       id="rect59" />
+    <rect
+       x="600"
+       y="70"
+       width="200"
+       height="25"
+       fill="#ecf0f1"
+       id="rect60" />
+    <text
+       x="100"
+       y="87"
+       text-anchor="middle"
+       class="description"
+       id="text60">Optimalidade</text>
+    <text
+       x="300"
+       y="87"
+       text-anchor="middle"
+       class="description"
+       id="text61">Não optimal</text>
+    <text
+       x="500"
+       y="87"
+       text-anchor="middle"
+       class="description"
+       id="text62">Optimal</text>
+    <text
+       x="700"
+       y="87"
+       text-anchor="middle"
+       class="description"
+       id="text63">EDF garante escalonabilidade</text>
+    <rect
+       x="0"
+       y="95"
+       width="200"
+       height="25"
+       fill="#ffffff"
+       id="rect63" />
+    <rect
+       x="200"
+       y="95"
+       width="200"
+       height="25"
+       fill="#ecf0f1"
+       id="rect64" />
+    <rect
+       x="400"
+       y="95"
+       width="200"
+       height="25"
+       fill="#ecf0f1"
+       id="rect65" />
+    <rect
+       x="600"
+       y="95"
+       width="200"
+       height="25"
+       fill="#ffffff"
+       id="rect66" />
+    <text
+       x="100"
+       y="112"
+       text-anchor="middle"
+       class="description"
+       id="text66">Complexidade</text>
+    <text
+       x="300"
+       y="112"
+       text-anchor="middle"
+       class="description"
+       id="text67">Baixa</text>
+    <text
+       x="500"
+       y="112"
+       text-anchor="middle"
+       class="description"
+       id="text68">Moderada</text>
+    <text
+       x="700"
+       y="112"
+       text-anchor="middle"
+       class="description"
+       id="text69">RM mais simples implementar</text>
+    <rect
+       x="0"
+       y="120"
+       width="200"
+       height="25"
+       fill="#ecf0f1"
+       id="rect69" />
+    <rect
+       x="200"
+       y="120"
+       width="200"
+       height="25"
+       fill="#ffffff"
+       id="rect70" />
+    <rect
+       x="400"
+       y="120"
+       width="200"
+       height="25"
+       fill="#ffffff"
+       id="rect71" />
+    <rect
+       x="600"
+       y="120"
+       width="200"
+       height="25"
+       fill="#ecf0f1"
+       id="rect72" />
+    <text
+       x="100"
+       y="137"
+       text-anchor="middle"
+       class="description"
+       id="text72">Utilização Máxima</text>
+    <text
+       x="300"
+       y="137"
+       text-anchor="middle"
+       class="description"
+       id="text73">≈69% (n→∞)</text>
+    <text
+       x="500"
+       y="137"
+       text-anchor="middle"
+       class="description"
+       id="text74">100%</text>
+    <text
+       x="700"
+       y="137"
+       text-anchor="middle"
+       class="description"
+       id="text75">EDF utiliza recursos melhor</text>
+    <rect
+       x="0"
+       y="145"
+       width="200"
+       height="25"
+       fill="#ffffff"
+       id="rect75" />
+    <rect
+       x="200"
+       y="145"
+       width="200"
+       height="25"
+       fill="#ecf0f1"
+       id="rect76" />
+    <rect
+       x="400"
+       y="145"
+       width="200"
+       height="25"
+       fill="#ecf0f1"
+       id="rect77" />
+    <rect
+       x="600"
+       y="145"
+       width="200"
+       height="25"
+       fill="#ffffff"
+       id="rect78" />
+    <text
+       x="100"
+       y="162"
+       text-anchor="middle"
+       class="description"
+       id="text78">Tipo Prioridade</text>
+    <text
+       x="300"
+       y="162"
+       text-anchor="middle"
+       class="description"
+       id="text79">Fixa</text>
+    <text
+       x="500"
+       y="162"
+       text-anchor="middle"
+       class="description"
+       id="text80">Dinâmica</text>
+    <text
+       x="700"
+       y="162"
+       text-anchor="middle"
+       class="description"
+       id="text81">EDF muda prioridades</text>
+  </g>
+  <!-- Legend -->
+  <g
+     transform="translate(50, 500)"
+     id="g87">
+    <text
+       x="0"
+       y="0"
+       class="subtitle"
+       id="text82">Legenda:</text>
+    <rect
+       x="0"
+       y="15"
+       width="20"
+       height="15"
+       class="task-a"
+       id="rect82" />
+    <text
+       x="25"
+       y="27"
+       class="description"
+       id="text83">Tarefa A (Período=4, Computação=1)</text>
+    <rect
+       x="200"
+       y="15"
+       width="20"
+       height="15"
+       class="task-b"
+       id="rect83" />
+    <text
+       x="225"
+       y="27"
+       class="description"
+       id="text84">Tarefa B (Período=6, Computação=2)</text>
+    <rect
+       x="400"
+       y="15"
+       width="20"
+       height="15"
+       class="task-c"
+       id="rect84" />
+    <text
+       x="425"
+       y="27"
+       class="description"
+       id="text85">Tarefa C (Período=8, Computação=2)</text>
+    <line
+       x1="600"
+       y1="22"
+       x2="640"
+       y2="22"
+       class="deadline"
+       marker-end="url(#deadline-arrow)"
+       id="line85" />
+    <text
+       x="645"
+       y="27"
+       class="description"
+       id="text86">Deadline</text>
+    <line
+       x1="750"
+       y1="22"
+       x2="790"
+       y2="22"
+       class="missed-deadline"
+       marker-end="url(#missed-arrow)"
+       id="line86" />
+    <text
+       x="795"
+       y="27"
+       class="description"
+       id="text87">Deadline perdido</text>
+  </g>
+  <!-- Performance metrics -->
+  <g
+     transform="translate(50, 550)"
+     id="g92">
+    <text
+       x="0"
+       y="0"
+       class="description"
+       font-weight="bold"
+       id="text88">Métricas de Performance:</text>
+    <text
+       x="200"
+       y="0"
+       class="description"
+       id="text89">• Response Time = Tempo de Término - Tempo de Chegada</text>
+    <text
+       x="500"
+       y="0"
+       class="description"
+       id="text90">• Utilização = Σ(Ci/Ti)</text>
+    <text
+       x="200"
+       y="15"
+       class="description"
+       id="text91">• Waiting Time = Response Time - Execution Time</text>
+    <text
+       x="500"
+       y="15"
+       class="description"
+       id="text92">• Miss Ratio = Deadlines Perdidos / Total Deadlines</text>
+  </g>
+</svg>
