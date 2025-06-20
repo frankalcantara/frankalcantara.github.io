@@ -31,8 +31,8 @@ keywords: |-
    recursos compartilhados
    abstração de hardware
 toc: true
-published: false
-lastmod: 2025-06-20T22:21:40.645Z
+published: true
+lastmod: 2025-06-20T22:50:26.758Z
 draft: 2025-06-18T14:21:29.077Z
 slug: sistemas-operacionais-fundamentos-evolucao-arquitetura
 ---
@@ -447,7 +447,7 @@ A confiabilidade dos **LLMs** apresenta características operacionais específic
 | Privacidade                | Acesso a grandes quantidades de dados do usuário                            | Medidas robustas de proteção de dados                                 |
 | Confiabilidade             | Saídas imprevisíveis ou tendenciosas                                        | Validação e monitoramento contínuos
 
-_Tabela 3: Desafios da Integração de LLMs em Sistemas Operacionais e seus Efeitos_ {: class="legend"}
+_Tabela 3: Desafios da Integração de LLMs em Sistemas Operacionais e seus Efeitos_{: class="legend"}
 
 #### O Impacto da Computação Quântica em Sistemas Operacionais
 
@@ -1276,8 +1276,8 @@ A **Camada de Abstração de Hardware (HAL)** isola código específico de plata
 
 **Subsistemas protegidos** permitem que diferentes ambientes de programação (Win32, POSIX) coexistam no mesmo sistema, cada um implementado como subsistemas separados que comunicam por meio de interfaces bem definidas. Esta abordagem fornece compatibilidade e flexibilidade mantendo integridade do sistema.
 
-![Diagrama conceitual do windows Nt com o espaço de usuário acima do espaço do kernel, destacando abaixo deste o Hardware Abstraction Layer](/assets/images/windows_nt.webp)
-_Figura 22: Diagrama de blocos conceitual do Windows NT_{: class="legend"}
+![Diagrama detalhado mostrando a arquitetura híbrida do Windows NT, com HAL na base, kernel NT no centro cercado por subsistemas em user space (Win32, POSIX), e executive services distribuídos entre kernel e user mode](/assets/images/windows_nt.webp)
+_Figura 22: Arquitetura híbrida do Windows NT, demonstrando a sofisticada combinação de elementos microkernel e monolíticos para otimização de performance e flexibilidade_{: class="legend"}
 
 ##### macOS/Darwin: Fundação Microkernel com Melhorias Monolíticas
 
@@ -1286,9 +1286,6 @@ O **kernel XNU** no macOS representa uma abordagem híbrida particularmente inte
 **IOKit** fornece um framework orientado a objetos para drivers de dispositivo que combina os benefícios de segurança da execução em user-space com as necessidades de performance da operação em kernel-space. Este framework demonstra como princípios de design orientado a objetos podem ser aplicados a componentes de sistema operacional sem sacrificar performance.
 
 A distribuição de serviços entre kernel space e user space no macOS reflete análise cuidadosa de quais serviços verdadeiramente requerem privilégios de kernel e quais podem ser implementados com segurança em user space sem penalidades inaceitáveis de performance.
-
-![Diagrama detalhado mostrando a arquitetura híbrida do Windows NT, com HAL na base, kernel NT no centro cercado por subsistemas em user space (Win32, POSIX), e executive services distribuídos entre kernel e user mode](/assets/images/windows_nt_hybrid_architecture.webp)
-_Figura 22: Arquitetura híbrida do Windows NT, demonstrando a sofisticada combinação de elementos microkernel e monolíticos para otimização de performance e flexibilidade_{: class="legend"}
 
 ## Conceitos Avançados: Expandindo os Horizontes dos Sistemas Operacionais
 
@@ -1612,8 +1609,23 @@ ZDNET. **I changed 12 settings on my Android phone to give it an instant battery
 **Abstração**
 Processo de esconder detalhes complexos de implementação, fornecendo uma interface mais simples e amigável para os usuários e programadores.
 
+**ACLs (Access Control Lists)**
+Listas que especificam quais usuários ou processos têm permissão para acessar determinados recursos do sistema e que tipo de operações podem realizar.
+
+**Adaptive Battery**
+Recurso de IA (Inteligência Artificial) em sistemas operacionais móveis, como o Android, que aprende os padrões de uso do usuário para otimizar o consumo de energia.
+
+**AKKA**
+Toolkit e runtime para construir aplicações concorrentes, distribuídas e resilientes na JVM, baseado no modelo de atores.
+
 **Alocação de Memória**
 Processo de atribuir blocos de memória principal aos processos que necessitam de espaço para execução.
+
+**Android**
+Sistema operacional móvel desenvolvido pelo Google, baseado no kernel Linux e de código aberto.
+
+**Android Runtime (ART)**
+Ambiente de execução usado pelo Android para executar aplicativos, substituindo a antiga máquina virtual Dalvik.
 
 **API (Application Programming Interface)**
 Conjunto de rotinas, protocolos e ferramentas que especificam como componentes de software devem interagir.
@@ -1621,7 +1633,7 @@ Conjunto de rotinas, protocolos e ferramentas que especificam como componentes d
 ### B
 
 **Batch Processing (Processamento em Lote)**
-Neste método de processamento os programas são executados sequencialmente sem interação direta do usuário, maximizando a utilização da CPU.
+Método de processamento no qual os programas são executados sequencialmente sem interação direta do usuário, maximizando a utilização da CPU.
 
 **Buffering**
 Técnica que utiliza áreas de memória temporária para compensar diferenças de velocidade entre dispositivos, melhorando o desempenho do sistema.
@@ -1634,6 +1646,18 @@ Memória de alta velocidade que armazena dados frequentemente acessados para red
 **Chamadas de Sistema (System Calls)**
 Interface programática por meio da qual processos solicitam serviços do sistema operacional.
 
+**CFS (Completely Fair Scheduler)**
+Algoritmo de escalonamento do kernel Linux que visa garantir uma distribuição justa do tempo de CPU entre os processos.
+
+**Colossus**
+Um dos primeiros computadores eletrônicos, utilizado pelo Reino Unido durante a Segunda Guerra Mundial para decifrar códigos.
+
+**Computação em Nuvem**
+Modelo de fornecimento de serviços de computação (servidores, armazenamento, bancos de dados, etc.) pela internet ("a nuvem").
+
+**Computação Quântica**
+Paradigma de computação que utiliza princípios da mecânica quântica, como superposição e emaranhamento, para processar informações.
+
 **Concorrência**
 Capacidade de múltiplos processos ou threads executarem simultaneamente, compartilhando recursos do sistema.
 
@@ -1641,7 +1665,7 @@ Capacidade de múltiplos processos ou threads executarem simultaneamente, compar
 Processo de salvar o estado de um processo em execução e carregar o estado de outro processo para execução.
 
 **CP/M (Control Program for Microcomputers)**
-Um dos primeiros sistemas operacionais dominantes para microcomputadores de 8 bits.
+Um dos primeiros sistemas operacionais dominantes para microcomputadores de 8 bits, que influenciou o MS-DOS.
 
 **CPU Scheduling**
 Processo de determinar qual processo deve utilizar a CPU em um determinado momento.
@@ -1651,8 +1675,11 @@ Sistema pioneiro de tempo compartilhado desenvolvido no MIT que estabeleceu conc
 
 ### D
 
+**Dalvik**
+Máquina virtual utilizada em versões mais antigas do Android para executar aplicativos, posteriormente substituída pela ART.
+
 **Deadlock**
-Nessa situação dois ou mais processos ficam permanentemente bloqueados, cada um esperando que o outro libere um recurso.
+Situação na qual dois ou mais processos ficam permanentemente bloqueados, cada um esperando que o outro libere um recurso.
 
 **Device Driver**
 Software específico que permite ao sistema operacional comunicar-se com dispositivos de hardware particulares.
@@ -1660,7 +1687,28 @@ Software específico que permite ao sistema operacional comunicar-se com disposi
 **DMA (Direct Memory Access)**
 Técnica que permite a dispositivos de E/S acessar a memória principal diretamente, sem intervenção da CPU.
 
+**Docker**
+Plataforma de software que permite a criação, teste e implantação de aplicações em containers.
+
+**Dual-Mode Operation**
+Mecanismo de proteção de hardware que distingue entre o modo de usuário (user mode), com privilégios limitados, e o modo de kernel (kernel mode), com acesso irrestrito.
+
 ### E
+
+**Earliest Deadline First (EDF)**
+Algoritmo de escalonamento de tempo real que prioriza dinamicamente as tarefas com o prazo final (deadline) mais próximo.
+
+**EDA (Event-Driven Architecture)**
+Arquitetura de software na qual os componentes do sistema reagem a eventos, promovendo baixo acoplamento e escalabilidade.
+
+**EDVAC**
+Um dos primeiros computadores eletrônicos a utilizar o conceito de programa armazenado na memória.
+
+**Emaranhamento (Entanglement)**
+Fenômeno quântico no qual múltiplos qubits se tornam interligados, de forma que o estado de um afeta instantaneamente o estado dos outros.
+
+**ENIAC**
+Um dos primeiros computadores digitais eletrônicos de grande escala, desenvolvido nos EUA durante a Segunda Guerra Mundial.
 
 **Escalonamento (Scheduling)**
 Processo de decidir qual processo, thread ou tarefa deve ser executado em um determinado momento.
@@ -1681,21 +1729,39 @@ Um dos primeiros sistemas de monitoramento para programas FORTRAN.
 
 ### G
 
+**GPU (Graphics Processing Unit)**
+Processador especializado projetado para renderizar gráficos, mas também utilizado para acelerar tarefas de computação paralela.
+
 **GUI (Graphical User Interface)**
 Interface que utiliza elementos gráficos como janelas, ícones e menus para interação com o usuário.
 
 ### H
 
-**Hardware Abstraction Layer (HAL)**
+**HAL (Hardware Abstraction Layer)**
 Camada de software que esconde diferenças específicas de hardware, proporcionando uma interface uniforme.
 
+**Hypervisor**
+Software ou hardware que cria e executa máquinas virtuais (VMs), também conhecido como Monitor de Máquina Virtual (VMM).
+
 ### I
+
+**IaaS (Infrastructure as a Service)**
+Modelo de computação em nuvem que oferece recursos de computação virtualizados pela internet.
 
 **IBSYS**
 Sistema batch para o IBM 7094 que estabeleceu muitos conceitos fundamentais de sistemas operacionais.
 
+**Inodes**
+Estrutura de dados em sistemas de arquivos do tipo Unix que armazena metadados sobre um arquivo ou diretório.
+
 **Interrupção**
 Sinal que informa à CPU sobre a ocorrência de um evento que requer atenção imediata.
+
+**IOKit**
+Framework orientado a objetos no macOS para a criação de drivers de dispositivo.
+
+**iOS**
+Sistema operacional móvel proprietário da Apple, utilizado em iPhones e iPads.
 
 **IPC (Inter-Process Communication)**
 Mecanismos que permitem a processos trocar dados e sincronizar suas atividades.
@@ -1705,35 +1771,74 @@ Mecanismos que permitem a processos trocar dados e sincronizar suas atividades.
 **JCL (Job Control Language)**
 Linguagem específica utilizada para instruir sistemas batch sobre como processar trabalhos.
 
+**Job**
+Termo usado principalmente em sistemas batch para se referir a uma tarefa ou trabalho a ser executado. O equivalente moderno é o processo.
+
 ### K
 
 **Kernel**
 Parte central do sistema operacional que gerencia recursos do sistema e fornece serviços fundamentais.
 
+**Kubernetes**
+Plataforma de orquestração de containers de código aberto para automatizar a implantação, o escalonamento e a gestão de aplicações em containers.
+
 ### L
 
+**L4**
+Família de microkernels de segunda geração, conhecida por seu alto desempenho e design minimalista.
+
+**Linguagem C**
+Linguagem de programação de propósito geral desenvolvida por Dennis Ritchie, intimamente ligada ao desenvolvimento do sistema operacional UNIX.
+
 **Linux**
-Sistema operacional de código aberto baseado em **UNIX**, desenvolvido por Linus Torvalds.
+Kernel de sistema operacional de código aberto, monolítico e semelhante ao UNIX, criado por Linus Torvalds. É a base para muitas distribuições de SO.
+
+**Lisp**
+Família de linguagens de programação com uma longa história e uma sintaxe distintiva baseada em S-expressions.
+
+**LLM (Large Language Model)**
+Modelo de inteligência artificial treinado com grandes volumes de texto para compreender e gerar linguagem humana.
+
+**LLMOS (Large Language Model Operating System)**
+Conceito de sistema operacional que integra LLMs em seu núcleo para revolucionar a interação do usuário por meio de linguagem natural.
+
+**LPU (Language Processing Unit)**
+Tipo de processador especializado, como o da [Groq](https://groq.com/about-us/), projetado para acelerar a inferência de modelos de linguagem.
 
 **LSI (Large Scale Integration)**
 Tecnologia de circuitos integrados que permitiu a criação de microprocessadores e computadores pessoais.
+
+**LXC (Linux Containers)**
+Tecnologia de virtualização no nível do sistema operacional para rodar múltiplos ambientes Linux isolados (containers) em um único host.
 
 ### M
 
 **Máquina Virtual**
 Abstração de software que simula um computador completo, permitindo execução de múltiplos sistemas operacionais.
 
+**Macintosh OS (Classic Mac OS)**
+Sistema operacional da Apple que popularizou a interface gráfica do usuário (GUI) com sua metáfora de área de trabalho.
+
 **Memory Management**
 Função do sistema operacional responsável por controlar e coordenar o uso da memória principal.
 
+**Microserviços**
+Estilo arquitetural que estrutura uma aplicação como uma coleção de serviços pequenos, independentes e fracamente acoplados.
+
+**MINIX**
+Sistema operacional semelhante ao Unix, baseado em uma arquitetura de microkernel, criado por Andrew S. Tanenbaum para fins educacionais.
+
+**MMU (Memory Management Unit)**
+Componente de hardware responsável por traduzir endereços virtuais em endereços físicos.
+
 **MS-DOS (Microsoft Disk Operating System)**
-Sistema operacional que dominou computadores pessoais na década de 1980.
+Sistema operacional de linha de comando que dominou computadores pessoais compatíveis com IBM na década de 1980.
 
 **MULTICS (Multiplexed Information and Computing Service)**
-Sistema avançado que introduziu conceitos como memória virtual e sistema de arquivos hierárquico.
+Sistema de tempo compartilhado avançado que introduziu conceitos como memória virtual e sistema de arquivos hierárquico, e que influenciou o UNIX.
 
 **Multiprogramação**
-Técnica que permite múltiplos programas residirem na memória simultaneamente, melhorando a utilização da CPU.
+Técnica que permite que múltiplos programas residam na memória simultaneamente, melhorando a utilização da CPU.
 
 **Multitasking**
 Capacidade de um sistema executar múltiplas tarefas aparentemente em paralelo por meio de compartilhamento de tempo.
@@ -1743,18 +1848,36 @@ Capacidade de um sistema executar múltiplas tarefas aparentemente em paralelo p
 **NFS (Network File System)**
 Sistema que permite acesso a arquivos por meio de uma rede como se fossem locais.
 
+**NISQ (Noisy Intermediate-Scale Quantum)**
+Era atual da computação quântica, caracterizada por processadores com um número intermediário de qubits que são suscetíveis a ruído.
+
 ### O
 
 **OS/360**
-Sistema operacional da IBM que estabeleceu muitos conceitos fundamentais de multiprogramação.
+Família de sistemas operacionais da IBM para seus mainframes System/360, que estabeleceu muitos conceitos fundamentais de multiprogramação.
 
 ### P
+
+**PaaS (Platform as a Service)**
+Modelo de computação em nuvem que fornece uma plataforma permitindo aos clientes desenvolver, executar e gerenciar aplicações sem a complexidade de construir e manter a infraestrutura.
 
 **Paginação**
 Técnica de gerenciamento de memória que divide a memória em páginas de tamanho fixo.
 
+**Paxos**
+Família de protocolos para resolver o consenso em uma rede de processos não confiáveis.
+
+**PBFT (Practical Byzantine Fault Tolerance)**
+Algoritmo de consenso projetado para tolerar falhas bizantinas (comportamento malicioso ou arbitrário) em sistemas distribuídos.
+
 **PCB (Process Control Block)**
 Estrutura de dados que contém informações sobre um processo específico.
+
+**PIO (Programmed I/O)**
+Método de transferência de dados entre a CPU e um periférico no qual a CPU executa um programa que controla a transferência.
+
+**POSIX**
+Conjunto de padrões especificados pelo IEEE para manter a compatibilidade entre sistemas operacionais, especialmente variantes do Unix.
 
 **Preemptive Scheduling**
 Tipo de escalonamento no qual o sistema operacional pode interromper um processo em execução para dar lugar a outro.
@@ -1762,17 +1885,53 @@ Tipo de escalonamento no qual o sistema operacional pode interromper um processo
 **Processo**
 Programa em execução, incluindo código, dados, pilha e contexto de execução.
 
+**PRISM**
+Projeto de sistema operacional cancelado da DEC, do qual Dave Cutler, arquiteto do Windows NT, fazia parte.
+
 ### Q
 
+**QCOS (Quantum Computer Operating System)**
+Sistema operacional projetado para gerenciar os recursos de um computador quântico.
+
+**Qernel**
+Componente central de um QCOS, análogo ao kernel clássico, que gerencia os recursos quânticos como qubits.
+
+**QNX**
+Sistema operacional comercial de tempo real baseado em uma arquitetura de microkernel, usado em sistemas embarcados críticos.
+
 **Quantum**
-Fatia de tempo atribuída a um processo em algoritmos de escalonamento round-robin.
+Fatia de tempo atribuída a um processo em algoritmos de escalonamento round-robin. Também chamado de Time Slice.
+
+**Qubit**
+Unidade básica de informação quântica, análoga ao bit clássico, mas que pode existir em uma superposição de estados.
 
 ### R
+
+**Raft**
+Algoritmo de consenso projetado para ser mais fácil de entender que o Paxos.
+
+**Rate Monotonic (RM)**
+Algoritmo de escalonamento de tempo real de prioridade fixa, usado para tarefas periódicas.
 
 **Round Robin**
 Algoritmo de escalonamento no qual cada processo recebe uma fatia de tempo fixa antes de ser preemptado.
 
+**RPC (Remote Procedure Call)**
+Mecanismo que permite a um programa executar um procedimento ou função em outro computador na rede como se fosse uma chamada local.
+
+**RTOS (Real-Time Operating System)**
+Sistema operacional destinado a aplicações de tempo real que processam dados à medida que chegam, geralmente sem atrasos de buffer.
+
 ### S
+
+**SaaS (Software as a Service)**
+Modelo de licenciamento e entrega de software no qual o software é licenciado por assinatura e hospedado centralmente.
+
+**Sandboxing**
+Mecanismo de segurança para separar programas em execução, restringindo o ambiente em que o código pode operar.
+
+**Scala**
+Linguagem de programação que combina programação orientada a objetos e funcional, projetada para ser concisa e escalável.
 
 **Segmentação**
 Técnica de gerenciamento de memória que divide o espaço de endereçamento em segmentos lógicos.
@@ -1780,8 +1939,14 @@ Técnica de gerenciamento de memória que divide o espaço de endereçamento em 
 **SJF (Shortest Job First)**
 Algoritmo de escalonamento que prioriza processos com menor tempo de execução estimado.
 
+**SMB/CIFS**
+Protocolo de rede para compartilhamento de arquivos, impressoras e outros recursos, predominantemente usado em ambientes Windows.
+
 **Spooling (Simultaneous Peripheral Operation On-Line)**
-Técnica que utiliza disco como buffer para operações de E/S.
+Técnica que utiliza disco como buffer para operações de E/S, como a impressão.
+
+**SQLite**
+Biblioteca de software que implementa um banco de dados SQL autônomo, sem servidor e sem configuração.
 
 **Swapping**
 Técnica de mover processos inteiros entre memória principal e armazenamento secundário.
@@ -1791,27 +1956,69 @@ Interface por meio da qual programas de usuário solicitam serviços do kernel.
 
 ### T
 
+**TCP/IP**
+Conjunto de protocolos de comunicação que formam a base da Internet, organizados em camadas (Aplicação, Transporte, Internet, Acesso à Rede).
+
+**Teorema CAP**
+Princípio fundamental dos sistemas distribuídos que afirma ser impossível garantir simultaneamente Consistência, Disponibilidade e Tolerância a Partições.
+
+**THE (Technische Hogeschool Eindhoven)**
+Sistema operacional influente desenvolvido por Edsger Dijkstra, pioneiro na utilização de uma arquitetura estritamente em camadas.
+
 **Thread**
 Unidade básica de utilização da CPU dentro de um processo, permitindo execução concorrente.
 
 **Throughput**
-Medida da quantidade de trabalho realizado por unidade de tempo.
+Medida da quantidade de trabalho realizado por unidade de tempo, como o número de tarefas concluídas por hora.
 
 **Time-Sharing (Tempo Compartilhado)**
-Sistema no qual múltiplos usuários compartilham recursos computacionais simultaneamente.
+Sistema no qual múltiplos usuários compartilham recursos computacionais simultaneamente, com o SO alternando rapidamente entre eles.
 
 **Time Slice**
-Período de tempo durante o qual um processo pode utilizar a CPU antes de ser preemptado.
+Período de tempo durante o qual um processo pode utilizar a CPU antes de ser preemptado. Também chamado de Quantum.
+
+**TLB (Translation Lookaside Buffer)**
+Cache de memória usado pela unidade de gerenciamento de memória (MMU) para acelerar a tradução de endereços virtuais para físicos.
+
+**TPU (Tensor Processing Unit)**
+Acelerador de IA especializado, desenvolvido pelo Google, para processamento de redes neurais.
 
 ### U
 
-****UNIX****
-Sistema operacional multiusuário e multitarefa desenvolvido nos Bell Labs, altamente influente.
+**UNIX**
+Sistema operacional multiusuário e multitarefa, portável e influente, desenvolvido nos Bell Labs. Sua filosofia de design impactou muitos outros sistemas.
 
 ### V
 
+**Válvulas Termiônicas (Tubos de Vácuo)**
+Componentes eletrônicos usados nos primeiros computadores, como o ENIAC, que controlavam o fluxo de elétrons no vácuo.
+
 **Virtual Memory (Memória Virtual)**
-Técnica que permite a execução de programas maiores que a memória física disponível.
+Técnica que permite a execução de programas maiores que a memória física disponível, utilizando o armazenamento secundário como uma extensão da RAM.
 
 **VLSI (Very Large Scale Integration)**
 Tecnologia avançada de circuitos integrados que permitiu maior densidade de componentes.
+
+**VMS (Virtual Memory System)**
+Sistema operacional da DEC, conhecido por sua robustez, que influenciou o design do Windows NT.
+
+### W
+
+**Wake Locks**
+Mecanismo no Android que permite que aplicações mantenham a CPU ou a tela ativas para realizar tarefas em segundo plano.
+
+**Windows**
+Família de sistemas operacionais desenvolvidos pela Microsoft, que evoluiu de um ambiente gráfico sobre o MS-DOS para sistemas operacionais completos.
+
+**Windows NT (New Technology)**
+Linha de sistemas operacionais da Microsoft construída com uma arquitetura híbrida, formando a base para todas as versões modernas do Windows.
+
+### X
+
+**XNU**
+Kernel do macOS e iOS, que combina o microkernel Mach com componentes do BSD Unix, formando uma arquitetura híbrida.
+
+### Z
+
+**Z3**
+O primeiro computador programável e totalmente automático do mundo, criado por Konrad Zuse na Alemanha em 1941.
