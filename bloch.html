@@ -1,0 +1,340 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌐 Esfera de Bloch 3D</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+        #container {
+            width: 70%;
+            height: 80vh;
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+        #controls {
+            width: 25%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+        h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        input[type="range"] {
+            width: 100%;
+            margin: 10px 0;
+        }
+        #info {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        #instructions {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #555;
+        }
+        #error {
+            color: red;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <div id="controls">
+        <h2>Portas de Pauli</h2>
+        <button id="pauliX">Pauli-X</button>
+        <button id="pauliY">Pauli-Y</button>
+        <button id="pauliZ">Pauli-Z</button>
+
+        <h2>Outras Portas</h2>
+        <button id="hadamard">Hadamard</button>
+        <button id="reset">Reset |0⟩</button>
+
+        <h2>Rotações Customizadas</h2>
+        <div>
+            <label>Rotação X: <span id="rotXVal">0°</span></label>
+            <input type="range" id="rotX" min="0" max="360" value="0">
+        </div>
+        <div>
+            <label>Rotação Y: <span id="rotYVal">0°</span></label>
+            <input type="range" id="rotY" min="0" max="360" value="0">
+        </div>
+        <div>
+            <label>Rotação Z: <span id="rotZVal">0°</span></label>
+            <input type="range" id="rotZ" min="0" max="360" value="0">
+        </div>
+
+        <h2>Estado Atual:</h2>
+        <div id="info">
+            |ψ⟩ = |0⟩<br>
+            θ: 0°, φ: 0°
+        </div>
+
+        <div id="instructions">
+            <h2>Como usar:</h2>
+            • Clique e arraste para rotacionar a vista<br>
+            • Use a roda do mouse para dar zoom<br>
+            • Use as portas quânticas para transformar o estado<br>
+            • Os sliders permitem rotações customizadas<br>
+            • O vetor vermelho mostra o estado atual<br>
+            • Pontos coloridos marcam estados especiais
+        </div>
+        <div id="error"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/controls/OrbitControls.js"></script>
+    <script>
+        // Verifica carregamento das bibliotecas
+        if (!window.THREE) {
+            document.getElementById('error').textContent = 'Erro: Three.js não foi carregado corretamente.';
+            throw new Error('Three.js não carregado');
+        }
+        if (!THREE.OrbitControls) {
+            document.getElementById('error').textContent = 'Erro: OrbitControls não foi carregado corretamente.';
+            throw new Error('OrbitControls não carregado');
+        }
+
+        // Configuração da cena
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth * 0.7 / (window.innerHeight * 0.8), 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth * 0.7, window.innerHeight * 0.8);
+        document.getElementById('container').appendChild(renderer.domElement);
+
+        // Ajuste de redimensionamento
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth * 0.7 / (window.innerHeight * 0.8);
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth * 0.7, window.innerHeight * 0.8);
+        });
+
+        // Controles de órbita
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableZoom = true;
+        controls.minDistance = 2;
+        controls.maxDistance = 10;
+        controls.enablePan = false;
+        camera.position.set(0, 0, 3);
+
+        // Esfera de Bloch
+        const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
+        const sphereMaterial = new THREE.MeshBasicMaterial({ 
+            color: 0x1e90ff, 
+            wireframe: true, 
+            transparent: true, 
+            opacity: 0.3 
+        });
+        const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+        scene.add(sphere);
+
+        // Eixos
+        const axesHelper = new THREE.AxesHelper(1.5);
+        scene.add(axesHelper);
+
+        // Vetor de estado
+        const vectorGeometry = new THREE.BufferGeometry();
+        const vectorMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
+        const positions = new Float32Array([0, 0, 0, 0, 0, 1]);
+        vectorGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const stateVector = new THREE.Line(vectorGeometry, vectorMaterial);
+        scene.add(stateVector);
+
+        // Estados especiais
+        const specialStates = [
+            { pos: [0, 0, 1], color: 0x00ff00, label: '|0⟩' },
+            { pos: [0, 0, -1], color: 0x00ff00, label: '|1⟩' },
+            { pos: [1, 0, 0], color: 0xffff00, label: '|+⟩' },
+            { pos: [-1, 0, 0], color: 0xffff00, label: '|-⟩' },
+            { pos: [0, 1, 0], color: 0xff00ff, label: '|+i⟩' },
+            { pos: [0, -1, 0], color: 0xff00ff, label: '|-i⟩' }
+        ];
+        specialStates.forEach(state => {
+            const geom = new THREE.SphereGeometry(0.05, 16, 16);
+            const mat = new THREE.MeshBasicMaterial({ color: state.color });
+            const point = new THREE.Mesh(geom, mat);
+            point.position.set(...state.pos);
+            scene.add(point);
+        });
+
+        // Estado do qubit (θ, φ em radianos)
+        let theta = 0, phi = 0;
+        let targetTheta = 0, targetPhi = 0;
+        let animating = false;
+        const animationDuration = 1000;
+
+        // Atualiza a interface
+        function updateInfo() {
+            const thetaDeg = (theta * 180 / Math.PI).toFixed(2);
+            const phiDeg = (phi * 180 / Math.PI).toFixed(2);
+            let stateStr = '';
+            if (Math.abs(theta) < 0.01) {
+                stateStr = '|0⟩';
+            } else if (Math.abs(theta - Math.PI) < 0.01) {
+                stateStr = '|1⟩';
+            } else {
+                const cosTheta2 = Math.cos(theta / 2).toFixed(2);
+                const sinTheta2 = Math.sin(theta / 2).toFixed(2);
+                stateStr = `${cosTheta2}|0⟩ + ${sinTheta2}e^i${phiDeg}°|1⟩`;
+            }
+            document.getElementById('info').innerHTML = 
+                `|ψ⟩ = ${stateStr}<br>θ: ${thetaDeg}°, φ: ${phiDeg}°`;
+        }
+
+        // Atualiza o vetor de estado
+        function updateVector() {
+            const x = Math.sin(theta) * Math.cos(phi);
+            const y = Math.sin(theta) * Math.sin(phi);
+            const z = Math.cos(theta);
+            positions[3] = x;
+            positions[4] = y;
+            positions[5] = z;
+            vectorGeometry.attributes.position.needsUpdate = true;
+            updateInfo();
+        }
+
+        // Aplica uma porta quântica
+        function applyGate(gate) {
+            if (animating) return;
+            console.log(`Aplicando porta: ${gate}`);
+            animating = true;
+            const startTime = performance.now();
+            const startTheta = theta;
+            const startPhi = phi;
+
+            if (gate === 'X') {
+                targetTheta = Math.PI - theta;
+                targetPhi = phi + Math.PI;
+            } else if (gate === 'Y') {
+                targetTheta = Math.PI - theta;
+                targetPhi = phi;
+            } else if (gate === 'Z') {
+                targetPhi = phi + Math.PI;
+            } else if (gate === 'H') {
+                targetTheta = Math.PI / 2;
+                targetPhi = 0;
+            } else if (gate === 'Reset') {
+                targetTheta = 0;
+                targetPhi = 0;
+            }
+
+            function animate(time) {
+                if (!animating) return;
+                const progress = Math.min((time - startTime) / animationDuration, 1);
+                theta = startTheta + (targetTheta - startTheta) * progress;
+                phi = startPhi + (targetPhi - startPhi) * progress;
+                updateVector();
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    animating = false;
+                    console.log(`Animação da porta ${gate} concluída`);
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        // Manipuladores de eventos para botões
+        document.getElementById('pauliX').addEventListener('click', () => applyGate('X'));
+        document.getElementById('pauliY').addEventListener('click', () => applyGate('Y'));
+        document.getElementById('pauliZ').addEventListener('click', () => applyGate('Z'));
+        document.getElementById('hadamard').addEventListener('click', () => applyGate('H'));
+        document.getElementById('reset').addEventListener('click', () => applyGate('Reset'));
+
+        // Manipuladores de eventos para sliders
+        function updateRotation(axis, value) {
+            if (animating) return;
+            const angle = value * Math.PI / 180;
+            document.getElementById(`rot${axis}Val`).textContent = `${value}°`;
+            if (axis === 'X') theta = angle;
+            else if (axis === 'Y') theta = angle;
+            else if (axis === 'Z') phi = angle;
+            updateVector();
+            console.log(`Rotação ${axis}: ${value}°`);
+        }
+
+        document.getElementById('rotX').addEventListener('input', (e) => updateRotation('X', e.target.value));
+        document.getElementById('rotY').addEventListener('input', (e) => updateRotation('Y', e.target.value));
+        document.getElementById('rotZ').addEventListener('input', (e) => updateRotation('Z', e.target.value));
+
+        // Loop de animação
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Inicializa o vetor
+        updateVector();
+        console.log('Cena inicializada com sucesso');
+    </script>
+</body>
+</html>
