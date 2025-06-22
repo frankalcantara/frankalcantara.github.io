@@ -15,7 +15,7 @@ preview: um estudo novo sobre uma das normas mais importantes e menos conhecidas
 featured: false
 rating: 3.5
 slug: precisao-realidade-os-desafios-da-norma-ieee-754-na-computacao-moderna
-lastmod: 2025-06-22T20:54:33.530Z
+lastmod: 2025-06-22T23:57:25.690Z
 date: 2024-12-20T20:07:14.934Z
 published: true
 ---
@@ -3419,7 +3419,7 @@ Compreender esses detalhes de implementação permite o desenvolvimento de softw
 
 As unidades de ponto flutuante modernas implementam esses algoritmos em hardware, fornecendo conformidade com o `IEEE 754` com sobrecarga de desempenho mínima. Este suporte de hardware possibilita o vasto ecossistema de software numérico que depende de um comportamento de ponto flutuante previsível e portátil em diversas plataformas de computação.
 
-## Glossário: Termos, Abreviações e Tecnologias da Norma IEEE 754
+## Glossário
 
 Este glossário define os termos técnicos, abreviações, tecnologias e conceitos mencionados no artigo "Os desafios da norma IEEE 754", integrando as definições fornecidas para maior clareza e completude.
 
