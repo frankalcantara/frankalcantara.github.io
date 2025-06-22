@@ -32,9 +32,10 @@ keywords: |-
    abstração de hardware
 toc: true
 published: true
-lastmod: 2025-06-20T22:50:26.758Z
+lastmod: 2025-06-22T10:51:33.886Z
 draft: 2025-06-18T14:21:29.077Z
 slug: sistemas-operacionais-fundamentos-evolucao-arquitetura
+description: Texto introdutório à Sistemas Operacionais, será referência para a primeira aula da disciplina e, talvez se torne o primeiro capítulo de um livro.
 ---
 
 ## Desvendando o Invisível: Uma Introdução aos Sistemas Operacionais
@@ -196,11 +197,11 @@ Outro avanço significativo foi o **Spooling (Simultaneous Peripheral Operation 
 
 >**Spooling** vem do inglês Simultaneous Peripheral Operations On-Line e refere-se ao processo de gerenciamento de dados para operações de entrada e saída (E/S). Ele permite que dispositivos periféricos, como impressoras, operem de forma eficiente, armazenando temporariamente os dados em uma área de *buffer*, uma área de memória temporária ou fila, sem interromper o processamento principal da CPU.
 >
->**buffer** é um destes termos em inglês que chegaram na computação, em inglês, de uma forma pouco ortodoxa. Talvez, algum pesquisador tenha se lembrado de algo da infância, ou de alguma outra área do vida e trouxe para a computação. O termo "buffer" deriva do verbo em inglês antigo "buff", que significava golpear ou amortecer um golpe. Esse sentido inicial estava ligado à ideia de suavizar ou absorver um impacto físico, como uma pancada. Na física, um "buffer" é um dispositivo ou mecanismo que reduz o impacto ou choque, como os amortecedores usados em trens ou carros para suavizar colisões. Também pode se referir a algo ou alguém que funciona como uma barreira protetora. Em computação Um "buffer" é uma área de armazenamento temporário para dados, usada enquanto eles estão sendo transferidos entre dois lugares, ou processos, distintos. Por exemplo, um buffer pode guardar informações de um dispositivo rápido, como um processador, antes de enviá-las para um dispositivo mais lento, como uma impressora, ajudando a equilibrar diferenças de velocidade.
+>**buffer** é um destes termos em inglês que chegaram na computação, em inglês, de uma forma pouco ortodoxa. Talvez, algum pesquisador tenha se lembrado de algo da infância, ou de alguma outra área do vida e trouxe para a computação. O termo "buffer" deriva do verbo em inglês antigo "buff", que significava golpear ou amortecer um golpe. Esse sentido inicial estava ligado à ideia de suavizar ou absorver um impacto físico, como uma pancada. Na física, um "buffer" é um dispositivo ou mecanismo que reduz o impacto ou choque, como os amortecedores usados em trens ou carros para suavizar colisões. Também pode se referir a algo ou alguém que funciona como uma barreira protetora. Em computação Um "buffer" é uma área de armazenamento temporário para dados, usada enquanto eles estão sendo transferidos entre dois lugares, ou processos, distintos. Por exemplo, um buffer pode guardar informações de um dispositivo rápido, como um processador, antes de enviá-las para um dispositivo mais lento, como uma impressora, ajudando a equilibrar diferenças de velocidade[^1].
 
 Novamente: o poetas mortos da língua portuguesa perdoai este pobre autor pelos crimes que comete!
 
->O pobre autor começou sua vida profissional em um velho mainframe IBM 360/30, com o OS/360 rodando Cobol, PL/1 e RPG. O sistema era tão antigo que o manual de operação era um livro de papel, com mais de 1000 páginas, e o computador tinha apenas 32 KB de memória. Era o final dos anos 1970 poucos meses antes deste 360/30 ser descomissionado e substituído por um IBM 370/10 que, usando memória virtual chegava a 16 MBytes de memória. Imagine!
+[^1]:O pobre autor começou sua vida profissional em um velho mainframe IBM 360/30, com o OS/360 rodando Cobol, PL/1 e RPG. O sistema era tão antigo que o manual de operação era um livro de papel, com mais de 1000 páginas, e o computador tinha apenas 32 KB de memória. Era o final dos anos 1970 poucos meses antes deste 360/30 ser descomissionado e substituído por um IBM 370/10 que, usando memória virtual chegava a 16 MBytes de memória. Imagine!
 
 A IBM não criou o termo sistema operacional, mas foi fundamental em sua popularização. O termo já existia na comunidade de computação antes do lançamento do OS/360 pela IBM em 1964. Por exemplo, sistemas como o [GM-NAA I/O](https://en.wikipedia.org/wiki/GM-NAA_I/O), desenvolvido em 1956, e o [CTSS](https://pt.wikipedia.org/wiki/Compatible_Time-Sharing_System), descrito em 1962, já eram chamados de sistemas operacionais em contextos acadêmicos e de pesquisa. No entanto, o OS/360, marcou um ponto de virada na história da computação. Deste ponto em diante, podemos usar o termo **sistema operacional** para nos referirmos a um software que gerencia recursos de hardware e fornece serviços essenciais para programas de aplicação. A multiprogramação e o spooling foram marcos importantes na evolução dos sistemas operacionais, estabelecendo as bases para a abstração de hardware e a automação do gerenciamento de recursos.
 
@@ -259,13 +260,13 @@ _Figura 6: Linha do tempo da evolução dos sistemas operacionais para computado
 
 **Sistemas Influentes**:
 
-1. **CP/M (Control Program for Microcomputers)** - Desenvolvido por [Gary Kildall](https://pt.wikipedia.org/wiki/Gary_Kildall) na Digital Research em 1974, o CP/M foi um marco fundamental na evolução dos sistemas operacionais para microcomputadores. Este sistema estabeleceu convenções duradouras para a organização de arquivos e comandos que influenciariam profundamente o desenvolvimento posterior de sistemas como o MS-DOS. O CP/M introduziu o conceito de Basic Input/Output System (BIOS), uma camada de abstração entre o hardware e o sistema operacional que permitia maior portabilidade entre diferentes microcomputadores baseados no processador Intel 8080 e Zilog Z80. Sua estrutura modular, com Command Console Processor (CCP), Basic Disk Operating System (BDOS) e BIOS, tornou-se um modelo arquitetônico para sistemas posteriores. Durante o final dos anos 1970 e início dos 1980, o CP/M dominou o mercado de microcomputadores comerciais, estabelecendo padrões para nomenclatura de drives (A:, B:, C:) e comandos básicos que persistem até hoje.
+1. **CP/M (Control Program for Microcomputers)** - Desenvolvido por [Gary Kildall](https://pt.wikipedia.org/wiki/Gary_Kildall) na Digital Research em 1974, o CP/M foi um marco fundamental na evolução dos sistemas operacionais para microcomputadores. Este sistema estabeleceu convenções duradouras para a organização de arquivos e comandos que influenciariam profundamente o desenvolvimento posterior de sistemas como o MS-DOS. O CP/M introduziu o conceito de Basic Input/Output System (BIOS), uma camada de abstração entre o hardware e o sistema operacional que permitia maior portabilidade entre diferentes microcomputadores baseados no processador Intel 8080 e Zilog Z80. Sua estrutura modular, com Command Console Processor (CCP), Basic Disk Operating System (BDOS) e BIOS, tornou-se um modelo arquitetônico para sistemas posteriores. Durante o final dos anos 1970 e início dos 1980, o CP/M dominou o mercado de microcomputadores comerciais, estabelecendo padrões para nomenclatura de drives (A:, B:, C:) e comandos básicos que persistem até hoje[^2].
 
-    > O pobre autor teve que comprar uma placa de expansão para rodar o CP/M no seu Apple II. A placa tinha um processador Z80, 64 KB de memória e um drive de disquete de 5.25 polegadas. O CP/M rodava em modo texto, mas permitia o uso de programas como o WordStar e o dBase II, que eram muito populares na época. O CP/M foi um dos primeiros sistemas operacionais a permitir a execução de múltiplos programas simultaneamente, embora não fosse multitarefa no sentido moderno. Mais importante, eu tinha, em casa, a disposição, uma máquina que podia ser programada em **C**. Me livrando do Basic infernal do Apple II.
+[^2]: O pobre autor teve que comprar uma placa de expansão para rodar o CP/M no seu Apple II. A placa tinha um processador Z80, 64 KB de memória e um drive de disquete de 5.25 polegadas. O CP/M rodava em modo texto, mas permitia o uso de programas como o WordStar e o dBase II, que eram muito populares na época. O CP/M foi um dos primeiros sistemas operacionais a permitir a execução de múltiplos programas simultaneamente, embora não fosse multitarefa no sentido moderno. Mais importante, eu tinha, em casa, a disposição, uma máquina que podia ser programada em **C**. Me livrando do Basic infernal do Apple II.
 
-2. **MS-DOS (Microsoft Disk Operating System)** - Originado como uma adaptação do 86-DOS (QDOS - Quick and Dirty Operating System) desenvolvido por [Tim Paterson](https://pt.wikipedia.org/wiki/Tim_Paterson) na Seattle Computer Products, **o MS-DOS foi adquirido pela Microsoft em 1981 para atender à demanda da IBM por um sistema operacional para seu novo Personal Computer**. O sistema mantinha compatibilidade conceitual com o CP/M, facilitando a migração de aplicações, mas foi otimizado para o processador Intel 8086/8088. Sua interface de linha de comando, embora aparentemente simples, oferecia recursos poderosos como redirecionamento de entrada/saída, processamento em lote por meio de arquivos .BAT, e suporte a dispositivos por meio de drivers carregáveis. O MS-DOS evoluiu significativamente ao longo de suas versões, introduzindo suporte a discos rígidos (versão 2.0), estruturas de diretórios hierárquicas, e eventualmente suporte limitado à memória estendida. Sua natureza monotarefa e arquitetura de 16 bits, embora limitantes, proporcionaram estabilidade e previsibilidade que contribuíram para o estabelecimento do padrão IBM PC como plataforma dominante na computação pessoal por mais de uma década.
+2. **MS-DOS (Microsoft Disk Operating System)** - Originado como uma adaptação do 86-DOS (QDOS - Quick and Dirty Operating System) desenvolvido por [Tim Paterson](https://pt.wikipedia.org/wiki/Tim_Paterson) na Seattle Computer Products, **o MS-DOS foi adquirido pela Microsoft em 1981 para atender à demanda da IBM por um sistema operacional para seu novo Personal Computer**. O sistema mantinha compatibilidade conceitual com o CP/M, facilitando a migração de aplicações, mas foi otimizado para o processador Intel 8086/8088. Sua interface de linha de comando, embora aparentemente simples, oferecia recursos poderosos como redirecionamento de entrada/saída, processamento em lote por meio de arquivos .BAT, e suporte a dispositivos por meio de drivers carregáveis. O MS-DOS evoluiu significativamente ao longo de suas versões, introduzindo suporte a discos rígidos (versão 2.0), estruturas de diretórios hierárquicas, e eventualmente suporte limitado à memória estendida. Sua natureza monotarefa e arquitetura de 16 bits, embora limitantes, proporcionaram estabilidade e previsibilidade que contribuíram para o estabelecimento do padrão IBM PC como plataforma dominante na computação pessoal por mais de uma década[^3].
 
-    > Este, o pobre autor, rodava em um PC-386, com co-processador matemático, comprado em consórcio e  construído pela Cobra Informática, uma empresa brasileira que importava componentes e montava computadores sob medida. O MS-DOS era o sistema operacional padrão para PCs compatíveis com IBM, e eu o utilizava para rodar programas como o WordPerfect e o Lotus 1-2-3. Usava o Borland C++ para programar em C++, e o Turbo Pascal para programar em Pascal. Mas, devo confessar, este último só quando eu queria me martirizar.
+[^3]: Este, o pobre autor, rodava em um PC-386, com co-processador matemático, comprado em consórcio e  construído pela Cobra Informática, uma empresa brasileira que importava componentes e montava computadores sob medida. O MS-DOS era o sistema operacional padrão para PCs compatíveis com IBM, e eu o utilizava para rodar programas como o WordPerfect e o Lotus 1-2-3. Usava o Borland C++ para programar em C++, e o Turbo Pascal para programar em Pascal. Mas, devo confessar, este último só quando eu queria me martirizar.
 
 3. **Apple Macintosh OS (Classic Mac OS)** - Lançado em 1984, o Sistema Operacional do Macintosh representou uma revolução paradigmática na interação humano-computador, popularizando conceitos que hoje consideramos fundamentais na computação moderna. Inspirado no trabalho pioneiro realizado nos Laboratórios Xerox Alto e Star, o Mac OS implementou de forma comercialmente viável a metáfora da área de trabalho. Nesta metáfora arquivos eram representados como documentos físicos e pastas como contêineres organizacionais. O sistema aproveitou as ideias dos Laboratórios da Xerox e introduziu o mouse como dispositivo primário de navegação, implementou o conceito de WYSIWYG, abreviatura do What You See Is What You Get, na edição de documentos, e estabeleceu padrões de interface como menus suspensos, caixas de diálogo modais, e manipulação direta de objetos gráficos. Tecnicamente, o Mac OS original baseava-se em um núcleo de processamento cooperativo que, embora não oferecesse proteção robusta de memória ou multitarefa preemptiva, proporcionava uma experiência de usuário fluida e intuitiva. Sua arquitetura de recursos, no inglês: resource fork, permitia a incorporação de elementos gráficos, sonoros e de interface diretamente nos arquivos executáveis, facilitando a localização e personalização de aplicações.
 
@@ -303,9 +304,41 @@ A era do PC inicialmente levou a uma simplificação de alguns recursos do Siste
 
 As últimas décadas foram marcadas por uma proliferação sem precedentes de novas plataformas e paradigmas computacionais. Esta evolução transformou não apenas a forma como os seres humanos interagem com a tecnologia, mas também expandiu as capacidades de processamento, armazenamento e comunicação de dados. Desde os dispositivos móveis que se tornaram extensões de nossas vidas cotidianas, quase como órteses, até as vastas infraestruturas de computação em nuvem e os complexos sistemas distribuídos que sustentam a economia digital global, cada avanço representa um novo horizonte de possibilidades e tem impacto profundo nas tecnologias que usamos para desenvolver os sistemas operacionais.
 
-Tecnologias como **computação móvel**, **sistemas distribuídos**, **computação em nuvem** e, mais recentemente, **computação quântica** e **inteligência artificial** estão moldando os sistemas operacionais modernos. Ao mesmo tempo em que só podem ser criadas graças a existência destes sistemas em uma laço de realimentação. Entre estas inovações, destacamos que a convergência entre Modelos de Linguagem de Grande Escala (LLMs) e computação quântica está força a criação urgente de uma nova geração de sistemas operacionais que combinará processamento de linguagem natural avançado com capacidades computacionais quânticas. Esta sinergia tecnológica promete revolucionar não apenas a interação humano-computador, mas também as capacidades fundamentais de processamento e segurança dos sistemas computacionais.
+Tecnologias como **computação móvel**, **sistemas distribuídos**, **computação em nuvem** e, mais recentemente, **computação quântica** e **inteligência artificial** estão moldando os sistemas operacionais modernos. Ao mesmo tempo em que só podem ser criadas graças a existência destes sistemas em uma laço de realimentação. Entre estas inovações, destacamos que a convergência entre Modelos de Linguagem de Grande Escala (LLMs) e computação quântica está força a criação urgente de uma nova geração de sistemas operacionais que combinará processamento de linguagem natural avançado com capacidades computacionais quânticas.
 
-#### Sistemas Operacionais Móveis
+### Sistemas Operacionais Embarcados e IoT: Conectando o Mundo Físico
+
+Com o avanço da **Internet das Coisas (IoT)** e a proliferação de dispositivos conectados, os sistemas operacionais embarcados tornaram-se pilares fundamentais da infraestrutura tecnológica em 2025. Esses sistemas são projetados para operar em hardware com recursos limitados, como microcontroladores e sensores, garantindo eficiência, confiabilidade e, frequentemente, operação em tempo real. Diferentemente dos sistemas operacionais para desktops ou servidores, os sistemas embarcados priorizam baixo consumo de energia, tamanho reduzido de código e resposta determinística a eventos externos.
+
+#### Características e Desafios dos Sistemas Operacionais Embarcados
+
+Os sistemas operacionais embarcados, criados para ambientes restritos em recursos, como dispositivos portáteis, ou para ambientes de uso específico, como máquinas e robôs, ou ainda para aviônica e guerra, possuem características distintas dos sistemas operacionais genéricos tradicionais. Em 2025, as principais características incluem:
+
+- **Eficiência energética**: algoritmos de gerenciamento de energia, como *dynamic voltage and frequency scaling* (DVFS), permitem que o sistema ajuste o consumo com base na carga de trabalho, essencial para dispositivos alimentados por bateria, como sensores IoT.
+- **Tamanho compacto**: o código é otimizado para ocupar poucos kilobytes, adequando-se a microcontroladores com memória limitada (ex.: 32 KB de RAM).
+- **Tempo real**: muitos sistemas embarcados são classificados como *Real-Time Operating Systems* (RTOS), garantindo respostas dentro de prazos estritos, como em dispositivos médicos ou controladores automotivos. Sistemas que analisaremos em uma seção posterior
+- **Conectividade**: suporte a protocolos de rede leves, como MQTT e CoAP, permite comunicação eficiente em redes IoT, mesmo com largura de banda limitada.
+- **Segurança**: Mecanismos como inicialização segura (*secure boot*), criptografia embarcada e atualizações over-the-air (OTA) protegem dispositivos contra ataques cibernéticos, um desafio crescente em dispositivos criados para integração com a internet e ubiquidade.
+
+Os sistemas embarcados enfrentam desafios únicos característicos de ambientes com restrições de recursos e requisitos específicos de desempenho. Como não existem padrões universais de hardware nestes dispositivos os sistemas operacionais embarcados enfrentam um problema de **fragmentação**. Cada dispositivo pode ter diferentes microcontroladores, sensores e protocolos de comunicação, exigindo que os sistemas operacionais sejam altamente adaptáveis e modulares. Além disso, a segurança é uma preocupação crítica, pois a vulnerabilidade de um único dispositivo pode comprometer toda a rede IoT. A integração com inteligência artificial, especialmente com modelos leves como TinyML, está se tornando comum para permitir processamento local em dispositivos embarcados, aumentando a capacidade computacional necessária.
+
+Além da fragmentação dos dispositivos, os sistemas embarcados que operam em dispositivos conectados à internet, IOT, enfrentam os problemas de **Segurança em escala**: Com bilhões de dispositivos IoT conectados, vulnerabilidades em um único dispositivo podem comprometer redes inteiras.
+
+Recentemente, a **Integração com sistemas de Inteligência Artificial**, por meio da inclusão de modelos de Inteligência Artificial leves, uma demanda do mercado de dispositivos integrados a internet, levou a novos desafios. Maximize este problema considerando a existência de dispositivos militares, ou de aeronáutica, que exigem alta confiabilidade e segurança. A integração de modelos de IA em sistemas embarcados requer otimização cuidadosa para garantir que os dispositivos possam processar dados localmente sem comprometer o desempenho ou a segurança. Além disso, a necessidade de atualizações regulares de software para corrigir vulnerabilidades e melhorar funcionalidades é um desafio constante, especialmente em dispositivos implantados remotamente.
+
+A curiosa leitora irá encontrar sistemas operacionais embarcados transformando setores como saúde (ex.: monitores cardiovasculares conectados), transporte (ex.: veículos autônomos), e indústria (ex.: robôs de montagem, manutenção e diagnóstico). Finalmente, a persistente leitora não deve deixar de notar que o design desses sistemas exige um equilíbrio delicado entre inovação tecnológica e responsabilidade social.
+
+#### Exemplos de Sistemas Operacionais Embarcados
+
+1. **FreeRTOS**: desenvolvido pela Amazon, o FreeRTOS[text](https://www.freertos.org/) é um RTOS de código aberto amplamente utilizado em dispositivos IoT e embarcados. Sua arquitetura modular suporta microcontroladores de baixa potência, como os da família ARM Cortex-M. O FreeRTOS oferece escalonamento preemptivo, comunicação inter-tarefa via filas e semáforos, e integração com o AWS IoT Core para conectividade em nuvem. Em 2025, é comum em dispositivos como termostatos inteligentes e sensores industriais.
+
+2. **Zephyr**: mantido pela Linux Foundation, o [Zephyr](https://docs.zephyrproject.org/latest/index.html) um RTOS projetado para IoT, com suporte a uma ampla gama de arquiteturas (ARM, RISC-V, x86). Ele se destaca por sua escalabilidade, permitindo uso em dispositivos com apenas 8 KB de RAM, e por sua pilha de rede completa, incluindo Bluetooth Low Energy (BLE) e Thread. O Zephyr é usado em wearables, como smartwatches, e em redes de sensores para cidades inteligentes.
+
+3. **QNX**: o [QNX](https://blackberry.qnx.com/en) é um RTOS comercial baseado em microkernel, amplamente adotado em sistemas críticos, como automóveis e dispositivos médicos. Sua arquitetura modular e certificações de segurança (ex.: ISO 26262 para automotivos) o tornam ideal para aplicações onde falhas não são toleráveis. Em 2025, o QNX é usado em sistemas de assistência ao motorista (ADAS) e em dispositivos IoT industriais.
+
+4. **RIOT**: o [RIOT](https://www-riot--os-org.translate.goog/?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=pt&_x_tr_pto=tc) é um sistema operacional de código aberto voltado para dispositivos IoT de baixa potência. Ele suporta múltiplos protocolos de rede (ex.: 6LoWPAN, RPL) e é compatível com microcontroladores de 8 e 32 bits. Sua comunidade ativa e foco em interoperabilidade o tornam popular em projetos de pesquisa e protótipos de IoT, como redes de sensores ambientais.
+
+### Sistemas Operacionais Móveis
 
 A ascensão dos dispositivos móveis, como smartphones e tablets, redefiniu a computação pessoal e impulsionou a necessidade de sistemas operacionais altamente especializados. Diferentemente dos sistemas para desktops, os sistemas operacionais móveis são projetados para operar em hardware com recursos inerentemente limitados em termos de capacidade de processamento, memória e autonomia de bateria.
 
@@ -348,7 +381,7 @@ _Tabela 1: Comparativo entre Android e iOS, destacando suas características fun
 
 A atenta leitora deve observar que esta comparação evidencia as filosofias distintas de design e as abordagens para desafios comuns, como o gerenciamento de energia, na qual ambas as plataformas estão convergindo para soluções mais inteligentes e adaptativas.
 
-#### Sistemas Distribuídos
+### Sistemas Distribuídos
 
 _Um sistema distribuído é conceitualmente definido como uma coleção de computadores autônomos que se comunicam e cooperam por meio de uma rede, mas que se apresentam aos seus usuários como um único sistema coerente e unificado_. Os principais objetivos para a construção de sistemas distribuídos são: o compartilhamento eficiente de recursos, hardware, software ou dados; o aumento de desempenho por meio do processamento paralelo; e a obtenção de maior confiabilidade e disponibilidade.
 
@@ -385,7 +418,7 @@ _Tabela 2: Propriedades essenciais dos sistemas distribuídos e como as tendênc
 
 Esta visão panorâmica conecta os conceitos teóricos fundamentais dos sistemas distribuídos com as implementações práticas e as tendências que estão moldando ativamente este campo vital da computação.
 
-#### Computação em Nuvem
+### Computação em Nuvem
 
 A [computação em nuvem](https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-145.pdf) teve, e tem, um impacto importante no projeto, desenvolvimento e suporte de sistemas operacionais. Este impacto pode ser analisado por meio de algumas das características deste sistema computacional.
 
@@ -411,7 +444,7 @@ Além das características destacadas, os modelos de serviço populares na distr
 
 Esses requisitos transformam fundamentalmente como sistemas operacionais são projetados, exigindo arquiteturas mais modulares, eficientes em recursos, e capazes de operação autônoma em ambientes distribuídos e dinâmicos.
 
-#### Inteligência Artificial e Modelos de Linguagem de Grande Escala (LLMs)
+### Inteligência Artificial e Modelos de Linguagem de Grande Escala (LLMs)
 
 Os LLMs, como o GPT-4 ou modelos similares, são exemplos excelentes para avaliação dos impactos que as tecnologias de inteligência artificial terão sobre os sistemas operacionais. Os LLMs requerem recursos computacionais significativos, geralmente executados em sistemas de computação de alto desempenho equipados com [GPUs](https://www.nvidia.com/en-us/technologies/), [TPUs](https://www.nvidia.com/en-us/technologies/) ou [LPUs](https://groq.com/the-groq-lpu-explained/). Esses modelos possuem bilhões de parâmetros, exigindo processamento paralelo eficiente. Neste caso, a criativa leitora deve considerar que os sistemas operacionais deverão enfrentar os seguintes desafios:
 
@@ -449,7 +482,7 @@ A confiabilidade dos **LLMs** apresenta características operacionais específic
 
 _Tabela 3: Desafios da Integração de LLMs em Sistemas Operacionais e seus Efeitos_{: class="legend"}
 
-#### O Impacto da Computação Quântica em Sistemas Operacionais
+### O Impacto da Computação Quântica em Sistemas Operacionais
 
 A computação quântica representa uma mudança de paradigma fundamental, utilizando como elemento fundamental os **qubits** que podem existir em superposição, $0$, $1$ ou combinação de ambos, e **emaranhamento** entre múltiplos **qubits**. Essas propriedades permitem explorar um espaço computacional vastamente maior e realizar certos cálculos exponencialmente mais rápidos que computadores clássicos, com potencial para resolver problemas NP-difíceis em otimização, simulação molecular, criptografia e aprendizado de máquina.
 
@@ -475,6 +508,31 @@ O sistema operacional em ambiente híbrido orquestra tarefas entre componentes c
 | **Escalonamento e Otimização de Circuitos** | Agendar operações quânticas eficientemente, otimizar circuitos para reduzir profundidade/contagem de portas. | Limitações de conectividade entre qubits, tempos de coerência finitos, heterogeneidade de QPUs. | Compiladores quânticos, algoritmos de roteamento e mapeamento de qubits, técnicas de otimização de circuitos, multi-programação. |
 | **Interface/Abstração de Hardware** (e.g., Qernel) | Fornecer uma interface de alto nível para programadores, abstraindo a complexidade do hardware quântico. | Diversidade de arquiteturas de hardware quântico, ocultar a natureza ruidosa do hardware. | APIs de programação quântica (e.g., Qiskit, Cirq), linguagens de descrição de circuitos, abstração Qernel. |
 | **Suporte a Modelos Híbridos** | Orquestrar a execução entre processadores clássicos e quânticos, gerenciar fluxo de dados e sincronização. | Latência na comunicação clássico-quântica, sincronização eficiente, desenvolvimento de algoritmos híbridos. | Algoritmos variacionais (VQE, QAOA), plataformas de computação híbrida (Ex.: Azure Quantum). |
+
+#### Exemplos de Sistemas Operacionais Quânticos
+
+Um QCOS gerencia recursos quânticos, como qubits, portas quânticas e circuitos, de forma análoga a como um sistema operacional clássico gerencia CPU, memória e E/S. O *Qernel*, componente central, orquestra a alocação de qubits, o escalonamento de operações quânticas e a mitigação de erros causados por decoerência e ruído, desafios inerentes aos processadores quânticos atuais. Ainda que eles se distinguam dos sistemas operacionais clássicos, podemos citar:
+
+1. **Qiskit Runtime (IBM)**
+   O Qiskit Runtime é uma plataforma que atua como uma camada de abstração para gerenciar computação quântica em hardware da IBM, como o IBM Quantum Eagle (127 qubits). Ele fornece uma interface para escalonar circuitos quânticos, otimizar alocação de qubits e executar algoritmos híbridos quântico-clássicos. Em 2025, o Qiskit Runtime é usado em aplicações como simulação de moléculas químicas e otimização logística, demonstrando a viabilidade de um QCOS rudimentar.
+
+2. **Cirq e TensorFlow Quantum (Google)**
+   O Cirq, combinado com o TensorFlow Quantum, forma um ecossistema para desenvolver e executar programas quânticos no hardware do Google, como o processador Sycamore. Essas ferramentas gerenciam a compilação de circuitos quânticos, a alocação de recursos e a integração com algoritmos de machine learning. Um exemplo prático é a simulação de sistemas quânticos em física de matéria condensada, onde o Cirq atua como uma interface de sistema operacional quântico.
+
+3. **SpinQ QOS**
+   A SpinQ Technology, uma empresa chinesa, lançou em 2025 o *Quantum Operating System* (QOS), projetado para seus processadores quânticos de pequena escala (2-20 qubits). O QOS gerencia a inicialização de qubits, a execução de circuitos e a correção de erros em tempo real, com uma interface amigável para pesquisadores. Ele é usado em educação e pesquisa, permitindo experimentos com algoritmos como Shor e Grover em hardware acessível.
+
+4. **Orca Computing PT-1**
+   A Orca Computing desenvolveu um sistema operacional quântico para seu processador fotônico PT-1, que opera com qubits baseados em fótons. Esse sistema gerencia a multiplexação temporal de qubits e a integração com sistemas clássicos, sendo aplicado em problemas de otimização em finanças e telecomunicações.
+
+5. **D-Wave Ocean SDK**
+   O Ocean SDK da D-Wave é um sistema operacional quântico híbrido que combina recozimento quântico com computação clássica. Ele permite a modelagem de problemas de otimização complexos, como roteamento de veículos e alocação de recursos, utilizando o processador quântico Advantage. O Ocean SDK gerencia a alocação de qubits, a execução de algoritmos quânticos e a integração com sistemas clássicos.
+
+Estes sistemas operacionais quânticos, se já pudermos chamar assim, estão em estágios iniciais de desenvolvimento. Contudo, já demonstram a viabilidade de gerenciar recursos quânticos e executar algoritmos complexos:
+
+- **Simulação Química**: O Qiskit Runtime foi usado pela Merck em 2025 para simular interações moleculares, reduzindo o tempo de desenvolvimento de novos fármacos.
+- **Otimização Logística**: A D-Wave, com seu sistema operacional híbrido para recozimento quântico, otimizou rotas de entrega para empresas como a Amazon, integrando recursos quânticos e clássicos.
+- **Criptografia**: O QOS da SpinQ permitiu experimentos com algoritmos quânticos resistentes a ataques, como os baseados em reticulados, em laboratórios acadêmicos.
 
 O progresso na computação quântica ocorre por meio de **coevolução interdependente** entre hardware, software e algoritmos. Avanços no hardware quântico permitem QCOSs mais sofisticados, que por sua vez viabilizam algoritmos mais complexos, criando um ciclo de feedback positivo. Os sistemas operacionais quânticos estão no nexo dessa coevolução, atuando como elemento unificador entre hardware e software algorítmico, sendo essenciais para democratizar o acesso e operacionalizar o potencial da computação quântica.## As Funções Essenciais: O Que Todo Sistema Operacional Deve Fazer
 
@@ -1522,6 +1580,8 @@ DEITEL, H. M.; DEITEL, P. J.; CHOFFNES, D. R. **Operating Systems**. 3. ed. Bost
 
 **EARLY UNIX history and evolution**. Nokia Bell Labs. Disponível em: <https://www.nokia.com/bell-labs/about/dennis-m-ritchie/hist.html>. Acesso em: 7 jun. 2025.
 
+FREERTOS. **FreeRTOS - Market leading RTOS for embedded systems**. Disponível em: <https://www.freertos.org/>. Acesso em: 22 jun. 2025.
+
 FERRIOLS, F. **iPhone 17 AI Battery Improvements in iOS 19: More Than Just a Nice-to-Have**. Thinborne, 23 May 2025. Disponível em: https://thinborne.com/blogs/news/iphone-17-ai-battery-improvements-in-ios-19-more-than-just-a-nice-to-have. Acesso em: 15 out. 2024.
 
 FOSSCOMICS. **The Origins of UNIX and the C Language**. Disponível em: https://fosscomics.com/8.%20The%20Origins%20of%20Unix%20and%20the%20C%20Language/. Acesso em: 7 jun. 2025.
@@ -1529,6 +1589,8 @@ FOSSCOMICS. **The Origins of UNIX and the C Language**. Disponível em: https://
 GIORTAMIS, E. et al. **QOS: A Quantum Operating System**. arXiv:2406.19120v2, 28 Jun. 2024. Disponível em: https://arxiv.org/html/2406.19120v2. Acesso em: 15 out. 2024.
 
 HONEYWELL. **How Quantum Will Transform the Future of 5 Industries**. Honeywell, Jul. 2020. Disponível em: https://www.honeywell.com/br/pt/news/2020/07/how-quantum-will-transform-the-future-of-5-industries. Acesso em: 15 out. 2024.
+
+IBM QUANTUM. **Qiskit Runtime Overview**. Disponível em: <https://quantum-computing.ibm.com/services/runtime>. Acesso em: 22 jun. 2025.
 
 IT BRIEFCASE. **New Trends Increase the Effectiveness of Distributed Computing**. IT Briefcase, 17 Dec. 2024. Disponível em: https://itbriefcase.net/new-trends-increase-the-effectiveness-of-distributed-computing/. Acesso em: 15 out. 2024.
 
@@ -1568,6 +1630,8 @@ ORGANICK, E. I. **The Multics System: An Examination of its Structure**. Cambrid
 
 REPOSITÓRIO UNIFESSPA. **Os desafios da computação em nuvem**. Universidade Federal do Sul e Sudeste do Pará. Disponível em: https://repositorio.unifesspa.edu.br/bitstream/123456789/228/1/TCC_%20Os%20desafios%20da%20computa%C3%A7%C3%A3o%20em%20nuvem.pdf. Acesso em: 15 out. 2024.
 
+RIOT-OS. **RIOT: The friendly operating system for IoT**. Disponível em: <https://www.riot-os.org/>. Acesso em: 22 jun. 2025.
+
 RITCHIE, D. M.; THOMPSON, K. **The UNIX Time-Sharing System**. Communications of the ACM, v. 17, n. 7, p. 365-375, 1974.
 
 SALTZER, J. H.; SCHROEDER, M. D. **The protection of information in computer systems**. Proceedings of the IEEE, v. 63, n. 9, p. 1278-1308, 1975.
@@ -1601,6 +1665,8 @@ UNIVERSITY OF COLORADO. **CSCI 3753 Operating Systems Syllabus**. Computer Scien
 VON KYPKE, L.; WACK, A. **How an Operating System for Quantum Computers Should Be Architected**. arXiv:2410.13482v1, 21 Oct. 2024. Disponível em: https://arxiv.org/html/2410.13482v1. Acesso em: 15 out. 2024.
 
 ZDNET. **I changed 12 settings on my Android phone to give it an instant battery boost**. ZDNet. Disponível em: https://www.zdnet.com/article/i-changed-12-settings-on-my-android-phone-to-give-it-an-instant-battery-boost/. Acesso em: 15 out. 2024.
+
+ZEPHYR PROJECT. **Zephyr RTOS Documentation**. Disponível em: <https://docs.zephyrproject.org/>. Acesso em: 22 jun. 2025.
 
 ## Glossário - Sistemas Operacionais: Fundamentos e Evolução
 
