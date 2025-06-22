@@ -1,0 +1,768 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 800 720"
+   version="1.1"
+   id="svg79"
+   sodipodi:docname="ieee754_bit_structure (2).svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:export-filename="..\images\ieee754_bit_structure.webp"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview79"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.86923685"
+     inkscape:cx="603.97808"
+     inkscape:cy="450.39508"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg79" />
+  <defs
+     id="defs1">
+    <style
+       id="style1">
+      .title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #2c3e50; }
+      .subtitle { font-family: 'Segoe UI', Arial, sans-serif; font-size: 16px; font-weight: 600; fill: #34495e; }
+      .bit-text { font-family: 'Courier New', monospace; font-size: 12px; font-weight: 500; fill: #2c3e50; }
+      .label-text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; font-weight: 500; }
+      .example-text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; fill: #7f8c8d; }
+      .sign-color { fill: #3498db; }
+      .exponent-color { fill: #27ae60; }
+      .mantissa-color { fill: #e67e22; }
+      .white-text { fill: white; }
+    </style>
+  </defs>
+  <!-- Título Principal -->
+  <text
+     x="400"
+     y="30"
+     text-anchor="middle"
+     class="title"
+     id="text1">Estrutura de Bits IEEE 754</text>
+  <!-- Meia Precisão (16 bits) -->
+  <text
+     x="50"
+     y="70"
+     class="subtitle"
+     id="text2">Meia Precisão (16 bits)</text>
+  <!-- Caixas de bits para meia precisão -->
+  <!-- Bit de Sinal -->
+  <rect
+     x="50"
+     y="85"
+     width="30"
+     height="40"
+     rx="5"
+     class="sign-color"
+     id="rect2" />
+  <text
+     x="65"
+     y="107"
+     text-anchor="middle"
+     class="label-text white-text"
+     id="text3">S</text>
+  <text
+     x="65"
+     y="145"
+     text-anchor="middle"
+     class="bit-text"
+     id="text4">15</text>
+  <!-- Expoente -->
+  <rect
+     x="85"
+     y="85"
+     width="150"
+     height="40"
+     rx="5"
+     class="exponent-color"
+     id="rect4" />
+  <text
+     x="160"
+     y="107"
+     text-anchor="middle"
+     class="label-text white-text"
+     id="text5">Expoente (5 bits)</text>
+  <text
+     x="100"
+     y="145"
+     text-anchor="middle"
+     class="bit-text"
+     id="text6">14</text>
+  <text
+     x="220"
+     y="145"
+     text-anchor="middle"
+     class="bit-text"
+     id="text7">10</text>
+  <!-- Mantissa -->
+  <rect
+     x="240"
+     y="85"
+     width="300"
+     height="40"
+     rx="5"
+     class="mantissa-color"
+     id="rect7" />
+  <text
+     x="390"
+     y="107"
+     text-anchor="middle"
+     class="label-text white-text"
+     id="text8">Mantissa/Fração (10 bits)</text>
+  <text
+     x="255"
+     y="145"
+     text-anchor="middle"
+     class="bit-text"
+     id="text9">9</text>
+  <text
+     x="525"
+     y="145"
+     text-anchor="middle"
+     class="bit-text"
+     id="text10">0</text>
+  <!-- Linhas indicadoras -->
+  <line
+     x1="65"
+     y1="125"
+     x2="65"
+     y2="135"
+     stroke="#2c3e50"
+     stroke-width="1"
+     id="line10" />
+  <line
+     x1="100"
+     y1="125"
+     x2="100"
+     y2="135"
+     stroke="#2c3e50"
+     stroke-width="1"
+     id="line11" />
+  <line
+     x1="220"
+     y1="125"
+     x2="220"
+     y2="135"
+     stroke="#2c3e50"
+     stroke-width="1"
+     id="line12" />
+  <line
+     x1="255"
+     y1="125"
+     x2="255"
+     y2="135"
+     stroke="#2c3e50"
+     stroke-width="1"
+     id="line13" />
+  <line
+     x1="525"
+     y1="125"
+     x2="525"
+     y2="135"
+     stroke="#2c3e50"
+     stroke-width="1"
+     id="line14" />
+  <!-- Precisão Simples (32 bits) -->
+  <text
+     x="50"
+     y="180"
+     class="subtitle"
+     id="text14">Precisão Simples (32 bits)</text>
+  <!-- Caixas de bits para precisão simples -->
+  <!-- Bit de Sinal -->
+  <rect
+     x="50"
+     y="195"
+     width="30"
+     height="40"
+     rx="5"
+     class="sign-color"
+     id="rect14" />
+  <text
+     x="65"
+     y="217"
+     text-anchor="middle"
+     class="label-text white-text"
+     id="text15">S</text>
+  <text
+     x="65"
+     y="255"
+     text-anchor="middle"
+     class="bit-text"
+     id="text16">31</text>
+  <!-- Expoente -->
+  <rect
+     x="85"
+     y="195"
+     width="240"
+     height="40"
+     rx="5"
+     class="exponent-color"
+     id="rect16" />
+  <text
+     x="205"
+     y="217"
+     text-anchor="middle"
+     class="label-text white-text"
+     id="text17">Expoente (8 bits)</text>
+  <text
+     x="100"
+     y="255"
+     text-anchor="middle"
+     class="bit-text"
+     id="text18">30</text>
+  <text
+     x="310"
+     y="255"
+     text-anchor="middle"
+     class="bit-text"
+     id="text19">23</text>
+  <!-- Mantissa -->
+  <rect
+     x="330"
+     y="195"
+     width="345"
+     height="40"
+     rx="5"
+     class="mantissa-color"
+     id="rect19" />
+  <text
+     x="502"
+     y="217"
+     text-anchor="middle"
+     class="label-text white-text"
+     id="text20">Mantissa/Fração (23 bits)</text>
+  <text
+     x="345"
+     y="255"
+     text-anchor="middle"
+     class="bit-text"
+     id="text21">22</text>
+  <text
+     x="660"
+     y="255"
+     text-anchor="middle"
+     class="bit-text"
+     id="text22">0</text>
+  <!-- Linhas indicadoras -->
+  <line
+     x1="65"
+     y1="235"
+     x2="65"
+     y2="245"
+     stroke="#2c3e50"
+     stroke-width="1"
+     id="line22" />
+  <line
+     x1="100"
+     y1="235"
+     x2="100"
+     y2="245"
+     stroke="#2c3e50"
+     stroke-width="1"
+     id="line23" />
+  <line
+     x1="310"
+     y1="235"
+     x2="310"
+     y2="245"
+     stroke="#2c3e50"
+     stroke-width="1"
+     id="line24" />
+  <line
+     x1="345"
+     y1="235"
+     x2="345"
+     y2="245"
+     stroke="#2c3e50"
+     stroke-width="1"
+     id="line25" />
+  <line
+     x1="660"
+     y1="235"
+     x2="660"
+     y2="245"
+     stroke="#2c3e50"
+     stroke-width="1"
+     id="line26" />
+  <!-- Exemplo para precisão simples -->
+  <text
+     x="50"
+     y="280"
+     class="subtitle"
+     id="text26">Exemplo: 85.125₁₀</text>
+  <text
+     x="50"
+     y="300"
+     class="example-text"
+     id="text27">Binário: 1010101.001₂ = 1.010101001 × 2⁶</text>
+  <!-- Valores do exemplo -->
+  <rect
+     x="50"
+     y="310"
+     width="30"
+     height="30"
+     rx="3"
+     fill="#ecf0f1"
+     stroke="#3498db"
+     stroke-width="2"
+     id="rect27" />
+  <text
+     x="65"
+     y="328"
+     text-anchor="middle"
+     class="bit-text"
+     id="text28">0</text>
+  <text
+     x="65"
+     y="353"
+     text-anchor="middle"
+     class="example-text"
+     id="text29">+</text>
+  <rect
+     x="85"
+     y="310"
+     width="240"
+     height="30"
+     rx="3"
+     fill="#ecf0f1"
+     stroke="#27ae60"
+     stroke-width="2"
+     id="rect29" />
+  <text
+     x="205"
+     y="328"
+     text-anchor="middle"
+     class="bit-text"
+     id="text30">10000101</text>
+  <text
+     x="205"
+     y="353"
+     text-anchor="middle"
+     class="example-text"
+     id="text31">6+127=133</text>
+  <rect
+     x="330"
+     y="310"
+     width="345"
+     height="30"
+     rx="3"
+     fill="#ecf0f1"
+     stroke="#e67e22"
+     stroke-width="2"
+     id="rect31" />
+  <text
+     x="502"
+     y="328"
+     text-anchor="middle"
+     class="bit-text"
+     id="text32">01010100100000000000000</text>
+  <text
+     x="502"
+     y="353"
+     text-anchor="middle"
+     class="example-text"
+     id="text33">.010101001...</text>
+  <!-- Precisão Dupla (64 bits) -->
+  <text
+     x="50"
+     y="390"
+     class="subtitle"
+     id="text34">Precisão Dupla (64 bits)</text>
+  <!-- Caixas de bits para precisão dupla -->
+  <!-- Bit de Sinal -->
+  <rect
+     x="50"
+     y="405"
+     width="30"
+     height="40"
+     rx="5"
+     class="sign-color"
+     id="rect34" />
+  <text
+     x="65"
+     y="427"
+     text-anchor="middle"
+     class="label-text white-text"
+     id="text35">S</text>
+  <text
+     x="65"
+     y="465"
+     text-anchor="middle"
+     class="bit-text"
+     id="text36">63</text>
+  <!-- Expoente -->
+  <rect
+     x="85"
+     y="405"
+     width="165"
+     height="40"
+     rx="5"
+     class="exponent-color"
+     id="rect36" />
+  <text
+     x="167"
+     y="427"
+     text-anchor="middle"
+     class="label-text white-text"
+     id="text37">Expoente (11 bits)</text>
+  <text
+     x="100"
+     y="465"
+     text-anchor="middle"
+     class="bit-text"
+     id="text38">62</text>
+  <text
+     x="235"
+     y="465"
+     text-anchor="middle"
+     class="bit-text"
+     id="text39">52</text>
+  <!-- Mantissa -->
+  <rect
+     x="255"
+     y="405"
+     width="520"
+     height="40"
+     rx="5"
+     class="mantissa-color"
+     id="rect39" />
+  <text
+     x="515"
+     y="427"
+     text-anchor="middle"
+     class="label-text white-text"
+     id="text40">Mantissa/Fração (52 bits)</text>
+  <text
+     x="270"
+     y="465"
+     text-anchor="middle"
+     class="bit-text"
+     id="text41">51</text>
+  <text
+     x="760"
+     y="465"
+     text-anchor="middle"
+     class="bit-text"
+     id="text42">0</text>
+  <!-- Linhas indicadoras para precisão dupla -->
+  <line
+     x1="65"
+     y1="445"
+     x2="65"
+     y2="455"
+     stroke="#2c3e50"
+     stroke-width="1"
+     id="line42" />
+  <line
+     x1="100"
+     y1="445"
+     x2="100"
+     y2="455"
+     stroke="#2c3e50"
+     stroke-width="1"
+     id="line43" />
+  <line
+     x1="235"
+     y1="445"
+     x2="235"
+     y2="455"
+     stroke="#2c3e50"
+     stroke-width="1"
+     id="line44" />
+  <line
+     x1="270"
+     y1="445"
+     x2="270"
+     y2="455"
+     stroke="#2c3e50"
+     stroke-width="1"
+     id="line45" />
+  <line
+     x1="760"
+     y1="445"
+     x2="760"
+     y2="455"
+     stroke="#2c3e50"
+     stroke-width="1"
+     id="line46" />
+  <!-- Comparação de características -->
+  <text
+     x="50"
+     y="500"
+     class="subtitle"
+     id="text46">Características dos Formatos</text>
+  <!-- Tabela comparativa -->
+  <rect
+     x="50"
+     y="515"
+     width="700"
+     height="140"
+     rx="8"
+     fill="#f8f9fa"
+     stroke="#dee2e6"
+     stroke-width="1"
+     id="rect46" />
+  <!-- Headers -->
+  <rect
+     x="60"
+     y="525"
+     width="120"
+     height="25"
+     rx="3"
+     fill="#495057"
+     id="rect47" />
+  <text
+     x="120"
+     y="541"
+     text-anchor="middle"
+     class="label-text white-text"
+     id="text47">Formato</text>
+  <rect
+     x="185"
+     y="525"
+     width="100"
+     height="25"
+     rx="3"
+     fill="#495057"
+     id="rect48" />
+  <text
+     x="235"
+     y="541"
+     text-anchor="middle"
+     class="label-text white-text"
+     id="text48">Total Bits</text>
+  <rect
+     x="290"
+     y="525"
+     width="100"
+     height="25"
+     rx="3"
+     fill="#495057"
+     id="rect49" />
+  <text
+     x="340"
+     y="541"
+     text-anchor="middle"
+     class="label-text white-text"
+     id="text49">Expoente</text>
+  <rect
+     x="395"
+     y="525"
+     width="100"
+     height="25"
+     rx="3"
+     fill="#495057"
+     id="rect50" />
+  <text
+     x="445"
+     y="541"
+     text-anchor="middle"
+     class="label-text white-text"
+     id="text50">Mantissa</text>
+  <rect
+     x="500"
+     y="525"
+     width="100"
+     height="25"
+     rx="3"
+     fill="#495057"
+     id="rect51" />
+  <text
+     x="550"
+     y="541"
+     text-anchor="middle"
+     class="label-text white-text"
+     id="text51">Bias</text>
+  <rect
+     x="605"
+     y="525"
+     width="135"
+     height="25"
+     rx="3"
+     fill="#495057"
+     id="rect52" />
+  <text
+     x="672"
+     y="541"
+     text-anchor="middle"
+     class="label-text white-text"
+     id="text52">Range Aprox.</text>
+  <!-- Linha Meia Precisão -->
+  <text
+     x="120"
+     y="565"
+     text-anchor="middle"
+     class="bit-text"
+     id="text53">Meia</text>
+  <text
+     x="235"
+     y="565"
+     text-anchor="middle"
+     class="bit-text"
+     id="text54">16</text>
+  <text
+     x="340"
+     y="565"
+     text-anchor="middle"
+     class="bit-text"
+     id="text55">5</text>
+  <text
+     x="445"
+     y="565"
+     text-anchor="middle"
+     class="bit-text"
+     id="text56">10</text>
+  <text
+     x="550"
+     y="565"
+     text-anchor="middle"
+     class="bit-text"
+     id="text57">15</text>
+  <text
+     x="672"
+     y="565"
+     text-anchor="middle"
+     class="bit-text"
+     id="text58">±6×10⁴</text>
+  <!-- Linha Precisão Simples -->
+  <text
+     x="120"
+     y="585"
+     text-anchor="middle"
+     class="bit-text"
+     id="text59">Simples</text>
+  <text
+     x="235"
+     y="585"
+     text-anchor="middle"
+     class="bit-text"
+     id="text60">32</text>
+  <text
+     x="340"
+     y="585"
+     text-anchor="middle"
+     class="bit-text"
+     id="text61">8</text>
+  <text
+     x="445"
+     y="585"
+     text-anchor="middle"
+     class="bit-text"
+     id="text62">23</text>
+  <text
+     x="550"
+     y="585"
+     text-anchor="middle"
+     class="bit-text"
+     id="text63">127</text>
+  <text
+     x="672"
+     y="585"
+     text-anchor="middle"
+     class="bit-text"
+     id="text64">±3×10³⁸</text>
+  <!-- Linha Precisão Dupla -->
+  <text
+     x="120"
+     y="605"
+     text-anchor="middle"
+     class="bit-text"
+     id="text65">Dupla</text>
+  <text
+     x="235"
+     y="605"
+     text-anchor="middle"
+     class="bit-text"
+     id="text66">64</text>
+  <text
+     x="340"
+     y="605"
+     text-anchor="middle"
+     class="bit-text"
+     id="text67">11</text>
+  <text
+     x="445"
+     y="605"
+     text-anchor="middle"
+     class="bit-text"
+     id="text68">52</text>
+  <text
+     x="550"
+     y="605"
+     text-anchor="middle"
+     class="bit-text"
+     id="text69">1023</text>
+  <text
+     x="672"
+     y="605"
+     text-anchor="middle"
+     class="bit-text"
+     id="text70">±2×10³⁰⁸</text>
+  <!-- Linha Quadrupla -->
+  <text
+     x="120"
+     y="625"
+     text-anchor="middle"
+     class="bit-text"
+     id="text71">Quádrupla</text>
+  <text
+     x="235"
+     y="625"
+     text-anchor="middle"
+     class="bit-text"
+     id="text72">128</text>
+  <text
+     x="340"
+     y="625"
+     text-anchor="middle"
+     class="bit-text"
+     id="text73">15</text>
+  <text
+     x="445"
+     y="625"
+     text-anchor="middle"
+     class="bit-text"
+     id="text74">112</text>
+  <text
+     x="550"
+     y="625"
+     text-anchor="middle"
+     class="bit-text"
+     id="text75">16383</text>
+  <text
+     x="672"
+     y="625"
+     text-anchor="middle"
+     class="bit-text"
+     id="text76">±1×10⁴⁹³²</text>
+  <!-- Nota sobre bit implícito -->
+  <text
+     x="50"
+     y="675"
+     class="example-text"
+     id="text77">* O bit implícito &quot;1&quot; antes da vírgula não é armazenado na mantissa</text>
+  <text
+     x="50"
+     y="690"
+     class="example-text"
+     id="text78">* Valor representado: (-1)ˢ × (1 + fração) × 2^(expoente - bias)</text>
+  <text
+     x="50"
+     y="705"
+     class="example-text"
+     id="text79">* Casos especiais: expoente=0 (zero/subnormal), expoente=máximo (infinito/NaN)</text>
+</svg>

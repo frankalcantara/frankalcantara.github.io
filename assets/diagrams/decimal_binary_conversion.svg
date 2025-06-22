@@ -1,0 +1,987 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 900 700"
+   version="1.1"
+   id="svg84"
+   sodipodi:docname="decimal_binary_conversion.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:export-filename="..\images\decimal_binary_conversion.webp"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview84"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.91774111"
+     inkscape:cx="559.52598"
+     inkscape:cy="388.45378"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg84" />
+  <defs
+     id="defs2">
+    <linearGradient
+       id="linearGradient100"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#34db90;stop-opacity:1;"
+         offset="0"
+         id="stop100" />
+      <stop
+         style="stop-color:#34db90;stop-opacity:0;"
+         offset="1"
+         id="stop101" />
+    </linearGradient>
+    <style
+       id="style1">
+      .title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #2c3e50; }
+      .subtitle { font-family: 'Segoe UI', Arial, sans-serif; font-size: 16px; font-weight: 600; fill: #34495e; }
+      .step-text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; font-weight: 500; fill: #2c3e50; }
+      .result-text { font-family: 'Courier New', monospace; font-size: 11px; font-weight: 500; fill: #2c3e50; }
+      .warning-text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; font-weight: 600; fill: #e74c3c; }
+      .algorithm-color { fill: #3498db; stroke: #2980b9; }
+      .example-color { fill: #27ae60; stroke: #229954; }
+      .problem-color { fill: #e74c3c; stroke: #c0392b; }
+      .neutral-color { fill: #95a5a6; stroke: #7f8c8d; }
+      .white-text { fill: white; }
+      .black-text { fill: #2c3e50; }
+    </style>
+    <!-- Definir marcador de seta -->
+    <marker
+       id="arrowhead"
+       markerWidth="10"
+       markerHeight="7"
+       refX="10"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#2c3e50"
+         id="polygon1" />
+    </marker>
+    <!-- Marcador de seta para problema -->
+    <marker
+       id="arrowhead-red"
+       markerWidth="10"
+       markerHeight="7"
+       refX="10"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#e74c3c"
+         id="polygon2" />
+    </marker>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient100"
+       id="linearGradient102"
+       x1="59"
+       y1="110"
+       x2="181"
+       y2="110"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-0.70745791,-61.785811)" />
+    <marker
+       id="arrowhead-0"
+       markerWidth="10"
+       markerHeight="7"
+       refX="10"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="10,3.5 0,7 0,0 "
+         fill="#2c3e50"
+         id="polygon1-9" />
+    </marker>
+    <linearGradient
+       id="linearGradient59"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#d4edda;stop-opacity:1;"
+         offset="0"
+         id="stop59" />
+      <stop
+         style="stop-color:#d4edda;stop-opacity:0;"
+         offset="1"
+         id="stop60" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient102-8"
+       id="linearGradient103"
+       x1="88.824562"
+       y1="155.61403"
+       x2="250.82455"
+       y2="155.61403"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-50.532017,95.586689)" />
+    <linearGradient
+       id="linearGradient102-8"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#d1ecf1;stop-opacity:1;"
+         offset="0"
+         id="stop102" />
+      <stop
+         style="stop-color:#d1ecf1;stop-opacity:0;"
+         offset="1"
+         id="stop103" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient102-8"
+       id="linearGradient104"
+       x1="88.824562"
+       y1="225.61403"
+       x2="250.82455"
+       y2="225.61403"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-50.532015,-41.616843)" />
+    <linearGradient
+       id="linearGradient128"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#fff3cd;stop-opacity:1;"
+         offset="0"
+         id="stop128" />
+      <stop
+         style="stop-color:#fff3cd;stop-opacity:0;"
+         offset="1"
+         id="stop129" />
+    </linearGradient>
+    <marker
+       id="arrowhead-8"
+       markerWidth="10"
+       markerHeight="7"
+       refX="9"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="10,3.5 0,7 0,0 "
+         fill="#2c3e50"
+         id="polygon1-2" />
+    </marker>
+    <marker
+       id="marker2"
+       markerWidth="10"
+       markerHeight="7"
+       refX="9"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="10,3.5 0,7 0,0 "
+         fill="#2c3e50"
+         id="polygon2-4" />
+    </marker>
+    <marker
+       id="marker3"
+       markerWidth="10"
+       markerHeight="7"
+       refX="9"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="10,3.5 0,7 0,0 "
+         fill="#2c3e50"
+         id="polygon3" />
+    </marker>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient59"
+       id="linearGradient105"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(77.422983,323.37137)"
+       x1="108.82455"
+       y1="85.614037"
+       x2="230.82455"
+       y2="85.614037" />
+    <marker
+       id="arrowhead-8-6"
+       markerWidth="10"
+       markerHeight="7"
+       refX="9"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0,7 0,0 10,3.5 "
+         fill="#2c3e50"
+         id="polygon1-2-1" />
+    </marker>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient128"
+       id="linearGradient133-2"
+       x1="328.71939"
+       y1="295"
+       x2="471.28061"
+       y2="295"
+       gradientUnits="userSpaceOnUse" />
+    <marker
+       id="arrowhead-8-1"
+       markerWidth="10"
+       markerHeight="7"
+       refX="9"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0,7 0,0 10,3.5 "
+         fill="#2c3e50"
+         id="polygon1-2-6" />
+    </marker>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient102-8"
+       id="linearGradient106"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-50.532011,-108.82204)"
+       x1="88.824562"
+       y1="225.61403"
+       x2="250.82455"
+       y2="225.61403" />
+    <marker
+       id="arrowhead-8-1-8"
+       markerWidth="10"
+       markerHeight="7"
+       refX="9"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0,0 10,3.5 0,7 "
+         fill="#2c3e50"
+         id="polygon1-2-6-9" />
+    </marker>
+    <marker
+       id="arrowhead-8-1-8-7"
+       markerWidth="10"
+       markerHeight="7"
+       refX="9"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="10,3.5 0,7 0,0 "
+         fill="#2c3e50"
+         id="polygon1-2-6-9-9" />
+    </marker>
+  </defs>
+  <!-- Título Principal -->
+  <text
+     x="450"
+     y="30"
+     text-anchor="middle"
+     class="title"
+     id="text2">Algoritmo de Conversão Decimal-Binário</text>
+  <text
+     x="450"
+     y="50"
+     text-anchor="middle"
+     class="subtitle"
+     id="text3">Exemplo: 0,1₁₀ → Binário</text>
+  <!-- Algoritmo à esquerda -->
+  <!-- Início -->
+  <!-- Passo 1: Parte inteira -->
+  <!-- Passo 2: Parte fracionária -->
+  <!-- Loop de multiplicação -->
+  <!-- Decisão -->
+  <!-- Resultado -->
+  <!-- Setas do algoritmo -->
+  <!-- Loop back -->
+  <g
+     id="g108"
+     transform="translate(-8.1048497,79.311743)">
+    <text
+       x="59.841602"
+       y="19.582287"
+       class="subtitle"
+       id="text4">Algoritmo Geral</text>
+    <ellipse
+       cx="119.29254"
+       cy="48.214191"
+       rx="60"
+       ry="20"
+       class="algorithm-color"
+       stroke-width="2"
+       id="ellipse4"
+       style="fill:url(#linearGradient102);fill-opacity:1;stroke:#71c837" />
+    <text
+       x="119.85504"
+       y="54.214188"
+       text-anchor="middle"
+       class="step-text white-text"
+       id="text5"
+       style="fill:#000000">Início: 0,1</text>
+    <text
+       x="118.84216"
+       y="106.47631"
+       text-anchor="middle"
+       class="step-text white-text"
+       id="text6">Parte inteira: 0 → 0₂</text>
+    <text
+       x="120"
+       y="238"
+       text-anchor="middle"
+       class="step-text white-text"
+       id="text8">Multiplicar por 2</text>
+    <text
+       x="120"
+       y="252"
+       text-anchor="middle"
+       class="step-text white-text"
+       id="text9">Separar int/frac</text>
+    <g
+       id="g105"
+       transform="translate(-127.95499,-2.3156713)">
+      <ellipse
+         cx="247.24753"
+         cy="408.98541"
+         rx="60"
+         ry="25"
+         class="flowchart-terminal"
+         id="ellipse1-2"
+         style="fill:url(#linearGradient105);stroke:#155724;stroke-width:2" />
+      <text
+         x="247.24753"
+         y="408.98541"
+         class="flowchart-text"
+         id="text2-5-7"
+         style="font-size:12px;font-family:Arial, sans-serif;dominant-baseline:middle;text-anchor:middle">Resultado</text>
+    </g>
+    <rect
+       x="39.292542"
+       y="231.20071"
+       width="160"
+       height="40"
+       class="flowchart-process"
+       id="rect2"
+       style="fill:url(#linearGradient103);stroke:#0c5460;stroke-width:2" />
+    <text
+       x="119.16364"
+       y="245.41153"
+       class="flowchart-text"
+       id="text3-5"
+       style="font-size:12px;font-family:Arial, sans-serif;dominant-baseline:middle;text-anchor:middle"><tspan
+         sodipodi:role="line"
+         id="tspan105"
+         x="119.16364"
+         y="245.41153">Multiplicar por 2</tspan><tspan
+         sodipodi:role="line"
+         id="tspan106"
+         x="119.16364"
+         y="260.41153">Separar int/frac</tspan></text>
+    <rect
+       x="39.292542"
+       y="163.99718"
+       width="160"
+       height="40"
+       class="flowchart-process"
+       id="rect3"
+       style="fill:url(#linearGradient104);stroke:#0c5460;stroke-width:2" />
+    <text
+       x="119.93121"
+       y="183.99718"
+       class="flowchart-text"
+       id="text4-1"
+       style="font-size:12px;font-family:Arial, sans-serif;dominant-baseline:middle;text-anchor:middle">Parte fracionária: 0,1</text>
+    <rect
+       x="39.292542"
+       y="96.791977"
+       width="160"
+       height="40"
+       class="flowchart-process"
+       id="rect3-6"
+       style="fill:url(#linearGradient106);stroke:#0c5460;stroke-width:2" />
+    <text
+       x="119.03532"
+       y="116.79198"
+       class="flowchart-text"
+       id="text4-1-1"
+       style="font-size:12px;font-family:Arial, sans-serif;dominant-baseline:middle;text-anchor:middle">Parte inteira: 0→0<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan107">2</tspan></text>
+    <polygon
+       points="450,320 350,320 330,295 350,270 450,270 470,295 "
+       class="flowchart-decision"
+       id="polygon4-2"
+       transform="translate(-280.70746,26.736751)"
+       style="fill:url(#linearGradient133-2);stroke:#856404;stroke-width:2" />
+    <line
+       x1="119.29254"
+       y1="272.19736"
+       x2="119.29254"
+       y2="297.19733"
+       class="arrow"
+       id="line23"
+       style="fill:none;stroke:#2c3e50;stroke-width:2;marker-end:url(#arrowhead-8)" />
+    <line
+       x1="119.29254"
+       y1="205.16121"
+       x2="119.29254"
+       y2="230.16118"
+       class="arrow"
+       id="line23-8"
+       style="fill:none;stroke:#2c3e50;stroke-width:2;marker-end:url(#arrowhead-8-1)" />
+    <line
+       x1="119.29254"
+       y1="138.47687"
+       x2="119.29254"
+       y2="163.47684"
+       class="arrow"
+       id="line23-8-2"
+       style="fill:none;stroke:#2c3e50;stroke-width:2;marker-end:url(#arrowhead-8-1-8)" />
+    <line
+       x1="119.29254"
+       y1="70.529861"
+       x2="119.29254"
+       y2="95.529831"
+       class="arrow"
+       id="line23-8-2-5"
+       style="fill:none;stroke:#2c3e50;stroke-width:2;marker-end:url(#arrowhead-8-1-8-7)" />
+    <line
+       x1="119.29254"
+       y1="347.88336"
+       x2="119.29254"
+       y2="378.77197"
+       class="arrow"
+       id="line23-4"
+       style="fill:none;stroke:#2c3e50;stroke-width:2.22311;marker-end:url(#arrowhead-8-6)" />
+    <text
+       x="119.03766"
+       y="324.26212"
+       text-anchor="middle"
+       class="step-text black-text"
+       id="text10"
+       style="font-size:14.6667px">Frac = 0?</text>
+    <path
+       d="m 189.98854,323.1478 c 41.32023,1.0804 54.41532,-1.95012 53.47921,-42.04366 -0.61313,-26.26047 -18.97506,-26.66016 -45.37629,-26.62373"
+       stroke="#2c3e50"
+       stroke-width="2.01244"
+       fill="none"
+       marker-end="url(#arrowhead)"
+       id="path15"
+       sodipodi:nodetypes="csc" />
+    <text
+       x="193.7903"
+       y="317.57779"
+       class="step-text"
+       id="text15">Não</text>
+    <text
+       x="87.263809"
+       y="358.52536"
+       class="step-text"
+       id="text16">Sim</text>
+  </g>
+  <!-- Exemplo prático à direita -->
+  <text
+     x="350"
+     y="85"
+     class="subtitle"
+     id="text17">Execução: 0,1₁₀</text>
+  <!-- Tabela de passos -->
+  <rect
+     x="350"
+     y="95"
+     width="500"
+     height="420"
+     rx="8"
+     fill="#f8f9fa"
+     stroke="#dee2e6"
+     stroke-width="1"
+     id="rect17" />
+  <!-- Headers -->
+  <rect
+     x="360"
+     y="105"
+     width="60"
+     height="25"
+     rx="3"
+     fill="#495057"
+     id="rect18" />
+  <text
+     x="390"
+     y="121"
+     text-anchor="middle"
+     class="step-text white-text"
+     id="text18">Passo</text>
+  <rect
+     x="425"
+     y="105"
+     width="140"
+     height="25"
+     rx="3"
+     fill="#495057"
+     id="rect19" />
+  <text
+     x="495"
+     y="121"
+     text-anchor="middle"
+     class="step-text white-text"
+     id="text19">Operação</text>
+  <rect
+     x="570"
+     y="105"
+     width="100"
+     height="25"
+     rx="3"
+     fill="#495057"
+     id="rect20" />
+  <text
+     x="620"
+     y="121"
+     text-anchor="middle"
+     class="step-text white-text"
+     id="text20">Resultado</text>
+  <rect
+     x="675"
+     y="105"
+     width="80"
+     height="25"
+     rx="3"
+     fill="#495057"
+     id="rect21" />
+  <text
+     x="715"
+     y="121"
+     text-anchor="middle"
+     class="step-text white-text"
+     id="text21">Parte Int.</text>
+  <rect
+     x="760"
+     y="105"
+     width="80"
+     height="25"
+     rx="3"
+     fill="#495057"
+     id="rect22" />
+  <text
+     x="800"
+     y="121"
+     text-anchor="middle"
+     class="step-text white-text"
+     id="text22">Binário</text>
+  <!-- Passos do exemplo -->
+  <!-- Passo 1 -->
+  <text
+     x="390"
+     y="150"
+     text-anchor="middle"
+     class="result-text"
+     id="text23">1</text>
+  <text
+     x="495"
+     y="150"
+     text-anchor="middle"
+     class="result-text"
+     id="text24">0,1 × 2</text>
+  <text
+     x="620"
+     y="150"
+     text-anchor="middle"
+     class="result-text"
+     id="text25">0,2</text>
+  <text
+     x="715"
+     y="150"
+     text-anchor="middle"
+     class="result-text"
+     id="text26">0</text>
+  <text
+     x="800"
+     y="150"
+     text-anchor="middle"
+     class="result-text"
+     id="text27">0</text>
+  <!-- Passo 2 -->
+  <text
+     x="390"
+     y="170"
+     text-anchor="middle"
+     class="result-text"
+     id="text28">2</text>
+  <text
+     x="495"
+     y="170"
+     text-anchor="middle"
+     class="result-text"
+     id="text29">0,2 × 2</text>
+  <text
+     x="620"
+     y="170"
+     text-anchor="middle"
+     class="result-text"
+     id="text30">0,4</text>
+  <text
+     x="715"
+     y="170"
+     text-anchor="middle"
+     class="result-text"
+     id="text31">0</text>
+  <text
+     x="800"
+     y="170"
+     text-anchor="middle"
+     class="result-text"
+     id="text32">00</text>
+  <!-- Passo 3 -->
+  <text
+     x="390"
+     y="190"
+     text-anchor="middle"
+     class="result-text"
+     id="text33">3</text>
+  <text
+     x="495"
+     y="190"
+     text-anchor="middle"
+     class="result-text"
+     id="text34">0,4 × 2</text>
+  <text
+     x="620"
+     y="190"
+     text-anchor="middle"
+     class="result-text"
+     id="text35">0,8</text>
+  <text
+     x="715"
+     y="190"
+     text-anchor="middle"
+     class="result-text"
+     id="text36">0</text>
+  <text
+     x="800"
+     y="190"
+     text-anchor="middle"
+     class="result-text"
+     id="text37">000</text>
+  <!-- Passo 4 -->
+  <text
+     x="390"
+     y="210"
+     text-anchor="middle"
+     class="result-text"
+     id="text38">4</text>
+  <text
+     x="495"
+     y="210"
+     text-anchor="middle"
+     class="result-text"
+     id="text39">0,8 × 2</text>
+  <text
+     x="620"
+     y="210"
+     text-anchor="middle"
+     class="result-text"
+     id="text40">1,6</text>
+  <text
+     x="715"
+     y="210"
+     text-anchor="middle"
+     class="result-text"
+     id="text41">1</text>
+  <text
+     x="800"
+     y="210"
+     text-anchor="middle"
+     class="result-text"
+     id="text42">0001</text>
+  <!-- Passo 5 -->
+  <text
+     x="390"
+     y="230"
+     text-anchor="middle"
+     class="result-text"
+     id="text43">5</text>
+  <text
+     x="495"
+     y="230"
+     text-anchor="middle"
+     class="result-text"
+     id="text44">0,6 × 2</text>
+  <text
+     x="620"
+     y="230"
+     text-anchor="middle"
+     class="result-text"
+     id="text45">1,2</text>
+  <text
+     x="715"
+     y="230"
+     text-anchor="middle"
+     class="result-text"
+     id="text46">1</text>
+  <text
+     x="800"
+     y="230"
+     text-anchor="middle"
+     class="result-text"
+     id="text47">00011</text>
+  <!-- Passo 6 -->
+  <text
+     x="390"
+     y="250"
+     text-anchor="middle"
+     class="result-text"
+     id="text48">6</text>
+  <text
+     x="495"
+     y="250"
+     text-anchor="middle"
+     class="result-text"
+     id="text49">0,2 × 2</text>
+  <text
+     x="620"
+     y="250"
+     text-anchor="middle"
+     class="result-text"
+     id="text50">0,4</text>
+  <text
+     x="715"
+     y="250"
+     text-anchor="middle"
+     class="result-text"
+     id="text51">0</text>
+  <text
+     x="800"
+     y="250"
+     text-anchor="middle"
+     class="result-text"
+     id="text52">000110</text>
+  <!-- Padrão se repete - destacar em vermelho -->
+  <rect
+     x="360"
+     y="270"
+     width="480"
+     height="20"
+     rx="3"
+     fill="#fee"
+     stroke="#e74c3c"
+     stroke-width="2"
+     id="rect52" />
+  <text
+     x="600"
+     y="284"
+     text-anchor="middle"
+     class="warning-text"
+     id="text53">⚠️ PADRÃO SE REPETE INFINITAMENTE ⚠️</text>
+  <!-- Continuação -->
+  <text
+     x="390"
+     y="310"
+     text-anchor="middle"
+     class="result-text"
+     id="text54">7</text>
+  <text
+     x="495"
+     y="310"
+     text-anchor="middle"
+     class="result-text"
+     id="text55">0,4 × 2</text>
+  <text
+     x="620"
+     y="310"
+     text-anchor="middle"
+     class="result-text"
+     id="text56">0,8</text>
+  <text
+     x="715"
+     y="310"
+     text-anchor="middle"
+     class="result-text"
+     id="text57">0</text>
+  <text
+     x="800"
+     y="310"
+     text-anchor="middle"
+     class="result-text"
+     id="text58">0001100</text>
+  <text
+     x="390"
+     y="330"
+     text-anchor="middle"
+     class="result-text"
+     id="text59">8</text>
+  <text
+     x="495"
+     y="330"
+     text-anchor="middle"
+     class="result-text"
+     id="text60">0,8 × 2</text>
+  <text
+     x="620"
+     y="330"
+     text-anchor="middle"
+     class="result-text"
+     id="text61">1,6</text>
+  <text
+     x="715"
+     y="330"
+     text-anchor="middle"
+     class="result-text"
+     id="text62">1</text>
+  <text
+     x="800"
+     y="330"
+     text-anchor="middle"
+     class="result-text"
+     id="text63">00011001</text>
+  <text
+     x="390"
+     y="350"
+     text-anchor="middle"
+     class="result-text"
+     id="text64">9</text>
+  <text
+     x="495"
+     y="350"
+     text-anchor="middle"
+     class="result-text"
+     id="text65">0,6 × 2</text>
+  <text
+     x="620"
+     y="350"
+     text-anchor="middle"
+     class="result-text"
+     id="text66">1,2</text>
+  <text
+     x="715"
+     y="350"
+     text-anchor="middle"
+     class="result-text"
+     id="text67">1</text>
+  <text
+     x="800"
+     y="350"
+     text-anchor="middle"
+     class="result-text"
+     id="text68">000110011</text>
+  <text
+     x="390"
+     y="370"
+     text-anchor="middle"
+     class="result-text"
+     id="text69">10</text>
+  <text
+     x="495"
+     y="370"
+     text-anchor="middle"
+     class="result-text"
+     id="text70">0,2 × 2</text>
+  <text
+     x="620"
+     y="370"
+     text-anchor="middle"
+     class="result-text"
+     id="text71">0,4</text>
+  <text
+     x="715"
+     y="370"
+     text-anchor="middle"
+     class="result-text"
+     id="text72">0</text>
+  <text
+     x="800"
+     y="370"
+     text-anchor="middle"
+     class="result-text"
+     id="text73">0001100110</text>
+  <!-- Resultado final -->
+  <text
+     x="600"
+     y="395"
+     text-anchor="middle"
+     class="step-text"
+     id="text74">Padrão repetitivo: 0011</text>
+  <text
+     x="600"
+     y="410"
+     text-anchor="middle"
+     class="result-text"
+     id="text75">0,1₁₀ = 0,00011001100110011...₂</text>
+  <text
+     x="600"
+     y="425"
+     text-anchor="middle"
+     class="result-text"
+     id="text76">= 0,0001̄1̄0̄0̄₂ (dízima binária)</text>
+  <!-- Seta apontando problema -->
+  <path
+     d="M 278.00112,325.31399 C 247.12183,274.70682 304.23822,278.27668 350,281.15784"
+     stroke="#e74c3c"
+     stroke-width="3"
+     fill="none"
+     marker-end="url(#arrowhead-red)"
+     id="path76"
+     sodipodi:nodetypes="cc" />
+  <text
+     x="283.57724"
+     y="313.36697"
+     class="warning-text"
+     id="text77">Problema:</text>
+  <text
+     x="283.57724"
+     y="328.36697"
+     class="warning-text"
+     id="text78">Precisão</text>
+  <text
+     x="283.57724"
+     y="343.36697"
+     class="warning-text"
+     id="text79">Infinita!</text>
+  <!-- Explicação final -->
+  <text
+     x="450"
+     y="555"
+     text-anchor="middle"
+     class="subtitle"
+     id="text80">Consequências da Conversão</text>
+  <rect
+     x="49.957184"
+     y="569.95721"
+     width="800.08563"
+     height="91.610283"
+     rx="8.0008564"
+     fill="#fff3cd"
+     stroke="#ffc107"
+     stroke-width="1.91437"
+     id="rect80" />
+  <text
+     x="70"
+     y="590"
+     class="step-text"
+     id="text81">🔄 <tspan
+   font-weight="bold"
+   id="tspan80">Ciclo Infinito:</tspan> A sequência 0011 se repete indefinidamente.</text>
+  <text
+     x="70"
+     y="610"
+     class="step-text"
+     id="text82">✂️ <tspan
+   font-weight="bold"
+   id="tspan81">Truncamento Necessário:</tspan> Computadores devem parar em algum ponto.</text>
+  <text
+     x="70"
+     y="630"
+     class="step-text"
+     id="text83">⚠️ <tspan
+   font-weight="bold"
+   id="tspan82">Erro de Representação:</tspan> 0,1₁₀ não pode ser representado exatamente em binário.</text>
+  <text
+     x="70"
+     y="650"
+     class="step-text"
+     id="text84">📊 <tspan
+   font-weight="bold"
+   id="tspan83">IEEE 754:</tspan> Usa arredondamento para a representação mais próxima possível.</text>
+</svg>

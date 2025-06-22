@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 900 900"
+   version="1.1"
+   id="svg39"
+   sodipodi:docname="normalization_process.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:export-filename="..\images\normalization_process.webp"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview39"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.95"
+     inkscape:cx="450"
+     inkscape:cy="450"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg39" />
+  <defs
+     id="defs2">
+    <style
+       id="style1">
+      .title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #2c3e50; }
+      .subtitle { font-family: 'Segoe UI', Arial, sans-serif; font-size: 16px; font-weight: 600; fill: #34495e; }
+      .step-text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; font-weight: 500; fill: #2c3e50; }
+      .math-text { font-family: 'Courier New', monospace; font-size: 14px; font-weight: 500; fill: #2c3e50; }
+      .highlight-text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; font-weight: 600; fill: #e74c3c; }
+      .process-color { fill: #3498db; stroke: #2980b9; }
+      .before-color { fill: #e74c3c; stroke: #c0392b; }
+      .after-color { fill: #27ae60; stroke: #229954; }
+      .neutral-color { fill: #95a5a6; stroke: #7f8c8d; }
+      .white-text { fill: white; }
+      .black-text { fill: #2c3e50; }
+    </style>
+    <!-- Marcadores de seta -->
+    <marker
+       id="arrowhead"
+       markerWidth="10"
+       markerHeight="7"
+       refX="10"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#2c3e50"
+         id="polygon1" />
+    </marker>
+    <marker
+       id="arrowhead-blue"
+       markerWidth="10"
+       markerHeight="7"
+       refX="10"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#3498db"
+         id="polygon2" />
+    </marker>
+  </defs>
+  <!-- Título Principal -->
+  <text
+     x="450"
+     y="30"
+     text-anchor="middle"
+     class="title"
+     id="text2">Processo de Normalização IEEE 754</text>
+  <text
+     x="450"
+     y="50"
+     text-anchor="middle"
+     class="subtitle"
+     id="text3">Movimento da Vírgula e Ajuste do Expoente</text>
+  <!-- Seção 1: Conceito Básico -->
+  <text
+     x="50"
+     y="85"
+     class="subtitle"
+     id="text4">1. Regra de Normalização</text>
+  <rect
+     x="50"
+     y="95"
+     width="800"
+     height="60"
+     rx="8"
+     fill="#e8f4fd"
+     stroke="#3498db"
+     stroke-width="2"
+     id="rect4" />
+  <text
+     x="70"
+     y="119"
+     class="step-text"
+     id="text5">📝 <tspan
+   font-weight="bold"
+   id="tspan4">Forma Normalizada:</tspan> Exatamente 1 dígito significativo antes da vírgula</text>
+  <text
+     x="70"
+     y="139"
+     class="step-text"
+     id="text6">🎯 <tspan
+   font-weight="bold"
+   id="tspan5">Em Binário:</tspan> Sempre 1.xxxxxx × 2ⁿ (o &quot;1&quot; é implícito na IEEE 754)</text>
+  <!-- Seção 2: Exemplos Decimais -->
+  <text
+     x="50"
+     y="185"
+     class="subtitle"
+     id="text7">2. Exemplos em Decimal (Base 10)</text>
+  <!-- Exemplo 1: 3141.6 -->
+  <rect
+     x="180.52632"
+     y="214.73685"
+     width="180"
+     height="40"
+     rx="5"
+     class="before-color"
+     stroke-width="2"
+     id="rect7" />
+  <text
+     x="270.52631"
+     y="236.73685"
+     text-anchor="middle"
+     class="math-text white-text"
+     id="text8">3141.6 × 10⁰</text>
+  <text
+     x="380.52631"
+     y="234.73685"
+     class="step-text"
+     id="text9">→</text>
+  <rect
+     x="410.52631"
+     y="214.73685"
+     width="180"
+     height="40"
+     rx="5"
+     class="after-color"
+     stroke-width="2"
+     id="rect9" />
+  <text
+     x="500.52631"
+     y="236.73685"
+     text-anchor="middle"
+     class="math-text white-text"
+     id="text10">3.1416 × 10³</text>
+  <!-- Setas e movimento -->
+  <path
+     d="m 355.78948,267.89473 q 30,20 60,0"
+     stroke="#e74c3c"
+     stroke-width="2"
+     fill="none"
+     marker-end="url(#arrowhead)"
+     id="path10" />
+  <text
+     x="385.78946"
+     y="292.89474"
+     text-anchor="middle"
+     class="highlight-text"
+     id="text11">3 casas ←</text>
+  <text
+     x="658.76764"
+     y="239.89474"
+     class="step-text"
+     id="text12">Expoente: 0 + 3 = 3</text>
+  <!-- Exemplo 2: 0.00031416 -->
+  <rect
+     x="180.52632"
+     y="304.73685"
+     width="180"
+     height="40"
+     rx="5"
+     class="before-color"
+     stroke-width="2"
+     id="rect12" />
+  <text
+     x="270.52631"
+     y="326.73685"
+     text-anchor="middle"
+     class="math-text white-text"
+     id="text13">0.00031416 × 10⁰</text>
+  <text
+     x="380.52631"
+     y="324.73685"
+     class="step-text"
+     id="text14">→</text>
+  <rect
+     x="410.52631"
+     y="304.73685"
+     width="180"
+     height="40"
+     rx="5"
+     class="after-color"
+     stroke-width="2"
+     id="rect14" />
+  <text
+     x="500.52631"
+     y="326.73685"
+     text-anchor="middle"
+     class="math-text white-text"
+     id="text15">3.1416 × 10⁻⁴</text>
+  <!-- Setas e movimento -->
+  <path
+     d="m 415.78948,357.89473 q -30,20 -60,0"
+     stroke="#27ae60"
+     stroke-width="2"
+     fill="none"
+     marker-end="url(#arrowhead)"
+     id="path15" />
+  <text
+     x="385.78946"
+     y="382.89474"
+     text-anchor="middle"
+     class="highlight-text"
+     id="text16">4 casas →</text>
+  <text
+     x="656.74908"
+     y="329.89474"
+     class="step-text"
+     id="text17">Expoente: 0 - 4 = -4</text>
+  <!-- Seção 3: Exemplos Binários -->
+  <text
+     x="50"
+     y="405"
+     class="subtitle"
+     id="text18">3. Exemplos em Binário (Base 2)</text>
+  <!-- Exemplo binário 1: 101.11 -->
+  <rect
+     x="180.52632"
+     y="434.73685"
+     width="200"
+     height="40"
+     rx="5"
+     class="before-color"
+     stroke-width="2"
+     id="rect18" />
+  <text
+     x="280.52631"
+     y="456.73685"
+     text-anchor="middle"
+     class="math-text white-text"
+     id="text19">101.11 × 2⁰</text>
+  <text
+     x="400.52631"
+     y="454.73685"
+     class="step-text"
+     id="text20">→</text>
+  <rect
+     x="430.52631"
+     y="434.73685"
+     width="200"
+     height="40"
+     rx="5"
+     class="after-color"
+     stroke-width="2"
+     id="rect20" />
+  <text
+     x="530.52631"
+     y="456.73685"
+     text-anchor="middle"
+     class="math-text white-text"
+     id="text21">1.0111 × 2²</text>
+  <!-- Movimento da vírgula -->
+  <path
+     d="m 365.78948,487.89473 q 30,20 80,0"
+     stroke="#e74c3c"
+     stroke-width="2"
+     fill="none"
+     marker-end="url(#arrowhead)"
+     id="path21" />
+  <text
+     x="405.78946"
+     y="512.89471"
+     text-anchor="middle"
+     class="highlight-text"
+     id="text22">2 bits ←</text>
+  <text
+     x="658.50739"
+     y="459.89474"
+     class="step-text"
+     id="text23">Expoente: 0 + 2 = 2</text>
+  <!-- Exemplo binário 2: 0.00101 -->
+  <rect
+     x="180.52632"
+     y="524.73682"
+     width="200"
+     height="40"
+     rx="5"
+     class="before-color"
+     stroke-width="2"
+     id="rect23" />
+  <text
+     x="280.52631"
+     y="546.73682"
+     text-anchor="middle"
+     class="math-text white-text"
+     id="text24">0.00101 × 2⁰</text>
+  <text
+     x="400.52631"
+     y="544.73682"
+     class="step-text"
+     id="text25">→</text>
+  <rect
+     x="430.52631"
+     y="524.73682"
+     width="200"
+     height="40"
+     rx="5"
+     class="after-color"
+     stroke-width="2"
+     id="rect25" />
+  <text
+     x="530.52631"
+     y="546.73682"
+     text-anchor="middle"
+     class="math-text white-text"
+     id="text26">1.01 × 2⁻³</text>
+  <!-- Movimento da vírgula -->
+  <path
+     d="m 445.78948,577.89473 q -50,20 -80,0"
+     stroke="#27ae60"
+     stroke-width="2"
+     fill="none"
+     marker-end="url(#arrowhead)"
+     id="path26" />
+  <text
+     x="405.78946"
+     y="602.89471"
+     text-anchor="middle"
+     class="highlight-text"
+     id="text27">3 bits →</text>
+  <text
+     x="657.26324"
+     y="549.89471"
+     class="step-text"
+     id="text28">Expoente: 0 - 3 = -3</text>
+  <!-- Seção 4: Exemplo IEEE 754 -->
+  <text
+     x="50"
+     y="625"
+     class="subtitle"
+     id="text29">4. Aplicação na IEEE 754: Exemplo 85.125₁₀</text>
+  <rect
+     x="50"
+     y="640"
+     width="800"
+     height="120"
+     rx="8"
+     fill="#f8f9fa"
+     stroke="#dee2e6"
+     stroke-width="1"
+     id="rect29" />
+  <!-- Passo a passo -->
+  <text
+     x="70"
+     y="665"
+     class="step-text"
+     id="text30"><tspan
+   font-weight="bold"
+   id="tspan29">Passo 1:</tspan> Converter para binário: 85.125₁₀ = 1010101.001₂</text>
+  <text
+     x="70"
+     y="685"
+     class="step-text"
+     id="text31"><tspan
+   font-weight="bold"
+   id="tspan30">Passo 2:</tspan> Normalizar:</text>
+  <text
+     x="250"
+     y="699"
+     class="math-text"
+     id="text32">1010101.001₂ = 1.010101001 × 2⁶</text>
+  <!-- Movimento visual -->
+  <rect
+     x="250"
+     y="709"
+     width="140"
+     height="20"
+     rx="3"
+     fill="#ffeeee"
+     stroke="#e74c3c"
+     stroke-width="1"
+     id="rect32" />
+  <text
+     x="320"
+     y="721"
+     text-anchor="middle"
+     class="highlight-text"
+     id="text33">6 bits ←</text>
+  <text
+     x="408"
+     y="723"
+     class="step-text"
+     id="text34">Vírgula moveu 6 posições à esquerda</text>
+  <text
+     x="70"
+     y="753"
+     class="step-text"
+     id="text35"><tspan
+   font-weight="bold"
+   id="tspan34">Resultado IEEE 754:</tspan> Sinal=0, Expoente=6+127=133, Mantissa=010101001...</text>
+  <!-- Seção 5: Casos Especiais -->
+  <text
+     x="50"
+     y="785"
+     class="subtitle"
+     id="text36">5. Casos Especiais na Normalização</text>
+  <rect
+     x="50"
+     y="795"
+     width="800"
+     height="80"
+     rx="8"
+     fill="#fff3cd"
+     stroke="#ffc107"
+     stroke-width="2"
+     id="rect36" />
+  <text
+     x="70"
+     y="819"
+     class="step-text"
+     id="text37">🔄 <tspan
+   font-weight="bold"
+   id="tspan36">Overflow após operação:</tspan> Se resultado ≥ 2.0, desloca 1 bit → direita, expoente += 1</text>
+  <text
+     x="70"
+     y="839"
+     class="step-text"
+     id="text38">🔻 <tspan
+   font-weight="bold"
+   id="tspan37">Underflow após operação:</tspan> Se resultado &lt; 1.0, desloca bits ← esquerda, expoente -= n</text>
+  <text
+     x="70"
+     y="859"
+     class="step-text"
+     id="text39">⚡ <tspan
+   font-weight="bold"
+   id="tspan38">Números subnormais:</tspan> Quando expoente = 0, não há bit implícito (0.xxxxx × 2⁻¹²⁶)</text>
+</svg>

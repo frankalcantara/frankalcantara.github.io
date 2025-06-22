@@ -1,0 +1,722 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 950 900"
+   version="1.1"
+   id="svg81"
+   sodipodi:docname="guard_round_sticky_bits.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:export-filename="..\images\guard_round_sticky_bits.webp"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview81"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.95"
+     inkscape:cx="474.73684"
+     inkscape:cy="450"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg81" />
+  <defs
+     id="defs1">
+    <style
+       id="style1">
+      .title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #2c3e50; }
+      .subtitle { font-family: 'Segoe UI', Arial, sans-serif; font-size: 16px; font-weight: 600; fill: #34495e; }
+      .label-text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; font-weight: 500; fill: #2c3e50; }
+      .bit-text { font-family: 'Courier New', monospace; font-size: 12px; font-weight: 500; fill: #2c3e50; }
+      .example-text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11px; fill: #7f8c8d; }
+      .formula-text { font-family: 'Courier New', monospace; font-size: 13px; font-weight: 600; fill: #2c3e50; }
+      .mantissa-color { fill: #3498db; stroke: #2980b9; }
+      .guard-color { fill: #e74c3c; stroke: #c0392b; }
+      .round-color { fill: #f39c12; stroke: #e67e22; }
+      .sticky-color { fill: #9b59b6; stroke: #8e44ad; }
+      .discarded-color { fill: #95a5a6; stroke: #7f8c8d; }
+      .white-text { fill: white; }
+      .black-text { fill: #2c3e50; }
+      .red-text { fill: #e74c3c; }
+      .green-text { fill: #27ae60; }
+    </style>
+  </defs>
+  <!-- Título Principal -->
+  <text
+     x="475"
+     y="30"
+     text-anchor="middle"
+     class="title"
+     id="text1">Bits Guard, Round e Sticky na IEEE 754</text>
+  <text
+     x="475"
+     y="50"
+     text-anchor="middle"
+     class="subtitle"
+     id="text2">Preservação de Precisão e Arredondamento</text>
+  <!-- Seção 1: Posicionamento dos Bits -->
+  <text
+     x="50"
+     y="85"
+     class="subtitle"
+     id="text3">1. Posicionamento dos Bits Extras</text>
+  <!-- Representação visual da mantissa estendida -->
+  <text
+     x="50"
+     y="105"
+     class="label-text"
+     id="text4">Mantissa IEEE 754 (23 bits) + Bits Extras:</text>
+  <!-- Mantissa armazenada -->
+  <rect
+     x="50"
+     y="115"
+     width="460"
+     height="30"
+     rx="3"
+     class="mantissa-color"
+     stroke-width="2"
+     id="rect4" />
+  <text
+     x="280"
+     y="133"
+     text-anchor="middle"
+     class="bit-text white-text"
+     id="text5">Mantissa Armazenada (23 bits)</text>
+  <!-- Bit positions -->
+  <text
+     x="60"
+     y="155"
+     class="example-text"
+     id="text6">22</text>
+  <text
+     x="490"
+     y="155"
+     class="example-text"
+     id="text7">0</text>
+  <!-- Bits extras -->
+  <rect
+     x="520"
+     y="115"
+     width="40"
+     height="30"
+     rx="3"
+     class="guard-color"
+     stroke-width="2"
+     id="rect7" />
+  <text
+     x="540"
+     y="133"
+     text-anchor="middle"
+     class="bit-text white-text"
+     id="text8">G</text>
+  <text
+     x="526.3158"
+     y="155.52632"
+     class="example-text"
+     id="text9">Guard</text>
+  <rect
+     x="570"
+     y="115"
+     width="40"
+     height="30"
+     rx="3"
+     class="round-color"
+     stroke-width="2"
+     id="rect9" />
+  <text
+     x="590"
+     y="133"
+     text-anchor="middle"
+     class="bit-text white-text"
+     id="text10">R</text>
+  <text
+     x="576.3158"
+     y="155.52632"
+     class="example-text"
+     id="text11">Round</text>
+  <rect
+     x="620"
+     y="115"
+     width="40"
+     height="30"
+     rx="3"
+     class="sticky-color"
+     stroke-width="2"
+     id="rect11" />
+  <text
+     x="640"
+     y="133"
+     text-anchor="middle"
+     class="bit-text white-text"
+     id="text12">S</text>
+  <text
+     x="626.3158"
+     y="155.52632"
+     class="example-text"
+     id="text13">Sticky</text>
+  <rect
+     x="670"
+     y="115"
+     width="120"
+     height="30"
+     rx="3"
+     class="discarded-color"
+     stroke-width="2"
+     id="rect13" />
+  <text
+     x="730"
+     y="133"
+     text-anchor="middle"
+     class="bit-text white-text"
+     id="text14">Bits Descartados</text>
+  <!-- Seção 2: Definições -->
+  <text
+     x="50"
+     y="200"
+     class="subtitle"
+     id="text15">2. Definições dos Bits Extras</text>
+  <rect
+     x="50"
+     y="210"
+     width="850"
+     height="120"
+     rx="8"
+     fill="#f8f9fa"
+     stroke="#dee2e6"
+     stroke-width="1"
+     id="rect15" />
+  <!-- Guard bit -->
+  <circle
+     cx="79.473686"
+     cy="225.52632"
+     r="8"
+     class="guard-color"
+     id="circle15" />
+  <text
+     x="99.473686"
+     y="230.52632"
+     class="label-text"
+     id="text16"><tspan
+   font-weight="bold"
+   id="tspan15">Guard Bit (G):</tspan> Primeiro bit após a mantissa representável</text>
+  <text
+     x="119.47369"
+     y="245.52632"
+     class="example-text"
+     id="text17">• Preserva o primeiro bit que seria perdido durante deslocamentos</text>
+  <!-- Round bit -->
+  <circle
+     cx="79.473686"
+     cy="265.52631"
+     r="8"
+     class="round-color"
+     id="circle17" />
+  <text
+     x="99.473686"
+     y="270.52631"
+     class="label-text"
+     id="text18"><tspan
+   font-weight="bold"
+   id="tspan17">Round Bit (R):</tspan> Segundo bit após a mantissa representável</text>
+  <text
+     x="119.47369"
+     y="285.52631"
+     class="example-text"
+     id="text19">• Determina se o valor está acima ou abaixo do ponto médio</text>
+  <!-- Sticky bit -->
+  <circle
+     cx="79.473686"
+     cy="305.52631"
+     r="8"
+     class="sticky-color"
+     id="circle19" />
+  <text
+     x="99.473686"
+     y="310.52631"
+     class="label-text"
+     id="text20"><tspan
+   font-weight="bold"
+   id="tspan19">Sticky Bit (S):</tspan> OR lógico de todos os bits restantes descartados</text>
+  <text
+     x="119.47369"
+     y="325.52631"
+     class="example-text"
+     id="text21">• S = 1 se qualquer bit descartado além de G e R for 1</text>
+  <!-- Seção 3: Fórmula de Arredondamento -->
+  <text
+     x="50"
+     y="375"
+     class="subtitle"
+     id="text22">3. Fórmula &quot;Round to Nearest, Ties to Even&quot;</text>
+  <rect
+     x="50"
+     y="385"
+     width="850"
+     height="60"
+     rx="8"
+     fill="#e8f4fd"
+     stroke="#3498db"
+     stroke-width="2"
+     id="rect22" />
+  <text
+     x="475"
+     y="410"
+     text-anchor="middle"
+     class="formula-text"
+     id="text23">round_up = R ∧ (S ∨ G ∨ LSB)</text>
+  <text
+     x="475"
+     y="430"
+     text-anchor="middle"
+     class="label-text"
+     id="text24">na qual LSB = bit menos significativo da mantissa</text>
+  <!-- Seção 4: Tabela de Verdade -->
+  <text
+     x="50"
+     y="480"
+     class="subtitle"
+     id="text25">4. Tabela de Verdade - Decisões de Arredondamento</text>
+  <rect
+     x="50"
+     y="490"
+     width="850"
+     height="200"
+     rx="8"
+     fill="#f8f9fa"
+     stroke="#dee2e6"
+     stroke-width="1"
+     id="rect25" />
+  <!-- Headers -->
+  <rect
+     x="70"
+     y="505"
+     width="60"
+     height="25"
+     rx="3"
+     fill="#495057"
+     id="rect26" />
+  <text
+     x="100"
+     y="521"
+     text-anchor="middle"
+     class="label-text white-text"
+     id="text26">R</text>
+  <rect
+     x="135"
+     y="505"
+     width="60"
+     height="25"
+     rx="3"
+     fill="#495057"
+     id="rect27" />
+  <text
+     x="165"
+     y="521"
+     text-anchor="middle"
+     class="label-text white-text"
+     id="text27">S</text>
+  <rect
+     x="200"
+     y="505"
+     width="60"
+     height="25"
+     rx="3"
+     fill="#495057"
+     id="rect28" />
+  <text
+     x="230"
+     y="521"
+     text-anchor="middle"
+     class="label-text white-text"
+     id="text28">G</text>
+  <rect
+     x="265"
+     y="505"
+     width="60"
+     height="25"
+     rx="3"
+     fill="#495057"
+     id="rect29" />
+  <text
+     x="295"
+     y="521"
+     text-anchor="middle"
+     class="label-text white-text"
+     id="text29">LSB</text>
+  <rect
+     x="330"
+     y="505"
+     width="100"
+     height="25"
+     rx="3"
+     fill="#495057"
+     id="rect30" />
+  <text
+     x="380"
+     y="521"
+     text-anchor="middle"
+     class="label-text white-text"
+     id="text30">GRS Value</text>
+  <rect
+     x="435"
+     y="505"
+     width="80"
+     height="25"
+     rx="3"
+     fill="#495057"
+     id="rect31" />
+  <text
+     x="475"
+     y="521"
+     text-anchor="middle"
+     class="label-text white-text"
+     id="text31">Round Up</text>
+  <rect
+     x="520"
+     y="505"
+     width="200"
+     height="25"
+     rx="3"
+     fill="#495057"
+     id="rect32" />
+  <text
+     x="620"
+     y="521"
+     text-anchor="middle"
+     class="label-text white-text"
+     id="text32">Explicação</text>
+  <rect
+     x="725"
+     y="505"
+     width="160"
+     height="25"
+     rx="3"
+     fill="#495057"
+     id="rect33" />
+  <text
+     x="805"
+     y="521"
+     text-anchor="middle"
+     class="label-text white-text"
+     id="text33">Exemplo</text>
+  <!-- Linhas da tabela -->
+  <!-- Linha 1: R=0 -->
+  <text
+     x="100"
+     y="550"
+     text-anchor="middle"
+     class="bit-text"
+     id="text34">0</text>
+  <text
+     x="165"
+     y="550"
+     text-anchor="middle"
+     class="bit-text"
+     id="text35">x</text>
+  <text
+     x="230"
+     y="550"
+     text-anchor="middle"
+     class="bit-text"
+     id="text36">x</text>
+  <text
+     x="295"
+     y="550"
+     text-anchor="middle"
+     class="bit-text"
+     id="text37">x</text>
+  <text
+     x="380"
+     y="550"
+     text-anchor="middle"
+     class="bit-text"
+     id="text38">&lt; 0.5</text>
+  <text
+     x="475"
+     y="550"
+     text-anchor="middle"
+     class="red-text"
+     id="text39">Não</text>
+  <text
+     x="620"
+     y="550"
+     text-anchor="middle"
+     class="example-text"
+     id="text40">Valor mais próximo de baixo</text>
+  <text
+     x="805"
+     y="550"
+     text-anchor="middle"
+     class="bit-text"
+     id="text41">1.101|0xx</text>
+  <!-- Linha 2: R=1, S=1 -->
+  <text
+     x="100"
+     y="570"
+     text-anchor="middle"
+     class="bit-text"
+     id="text42">1</text>
+  <text
+     x="165"
+     y="570"
+     text-anchor="middle"
+     class="bit-text"
+     id="text43">1</text>
+  <text
+     x="230"
+     y="570"
+     text-anchor="middle"
+     class="bit-text"
+     id="text44">x</text>
+  <text
+     x="295"
+     y="570"
+     text-anchor="middle"
+     class="bit-text"
+     id="text45">x</text>
+  <text
+     x="380"
+     y="570"
+     text-anchor="middle"
+     class="bit-text"
+     id="text46">&gt; 0.5</text>
+  <text
+     x="475"
+     y="570"
+     text-anchor="middle"
+     class="green-text"
+     id="text47">Sim</text>
+  <text
+     x="620"
+     y="570"
+     text-anchor="middle"
+     class="example-text"
+     id="text48">Valor mais próximo de cima</text>
+  <text
+     x="805"
+     y="570"
+     text-anchor="middle"
+     class="bit-text"
+     id="text49">1.101|11x</text>
+  <!-- Linha 3: R=1, S=0, LSB=0 -->
+  <text
+     x="100"
+     y="590"
+     text-anchor="middle"
+     class="bit-text"
+     id="text50">1</text>
+  <text
+     x="165"
+     y="590"
+     text-anchor="middle"
+     class="bit-text"
+     id="text51">0</text>
+  <text
+     x="230"
+     y="590"
+     text-anchor="middle"
+     class="bit-text"
+     id="text52">0</text>
+  <text
+     x="295"
+     y="590"
+     text-anchor="middle"
+     class="bit-text"
+     id="text53">0</text>
+  <text
+     x="380"
+     y="590"
+     text-anchor="middle"
+     class="bit-text"
+     id="text54">= 0.5</text>
+  <text
+     x="475"
+     y="590"
+     text-anchor="middle"
+     class="red-text"
+     id="text55">Não</text>
+  <text
+     x="620"
+     y="590"
+     text-anchor="middle"
+     class="example-text"
+     id="text56">Ties to even (par)</text>
+  <text
+     x="805"
+     y="590"
+     text-anchor="middle"
+     class="bit-text"
+     id="text57">1.100|100</text>
+  <!-- Linha 4: R=1, S=0, LSB=1 -->
+  <text
+     x="100"
+     y="610"
+     text-anchor="middle"
+     class="bit-text"
+     id="text58">1</text>
+  <text
+     x="165"
+     y="610"
+     text-anchor="middle"
+     class="bit-text"
+     id="text59">0</text>
+  <text
+     x="230"
+     y="610"
+     text-anchor="middle"
+     class="bit-text"
+     id="text60">0</text>
+  <text
+     x="295"
+     y="610"
+     text-anchor="middle"
+     class="bit-text"
+     id="text61">1</text>
+  <text
+     x="380"
+     y="610"
+     text-anchor="middle"
+     class="bit-text"
+     id="text62">= 0.5</text>
+  <text
+     x="475"
+     y="610"
+     text-anchor="middle"
+     class="green-text"
+     id="text63">Sim</text>
+  <text
+     x="620"
+     y="610"
+     text-anchor="middle"
+     class="example-text"
+     id="text64">Ties to even (ímpar→par)</text>
+  <text
+     x="805"
+     y="610"
+     text-anchor="middle"
+     class="bit-text"
+     id="text65">1.101|100</text>
+  <!-- Linha 5: R=1, S=0, G=1 -->
+  <text
+     x="100"
+     y="630"
+     text-anchor="middle"
+     class="bit-text"
+     id="text66">1</text>
+  <text
+     x="165"
+     y="630"
+     text-anchor="middle"
+     class="bit-text"
+     id="text67">0</text>
+  <text
+     x="230"
+     y="630"
+     text-anchor="middle"
+     class="bit-text"
+     id="text68">1</text>
+  <text
+     x="295"
+     y="630"
+     text-anchor="middle"
+     class="bit-text"
+     id="text69">x</text>
+  <text
+     x="380"
+     y="630"
+     text-anchor="middle"
+     class="bit-text"
+     id="text70">&gt; 0.5</text>
+  <text
+     x="475"
+     y="630"
+     text-anchor="middle"
+     class="green-text"
+     id="text71">Sim</text>
+  <text
+     x="620"
+     y="630"
+     text-anchor="middle"
+     class="example-text"
+     id="text72">Guard bit contribui</text>
+  <text
+     x="805"
+     y="630"
+     text-anchor="middle"
+     class="bit-text"
+     id="text73">1.101|101</text>
+  <!-- Seção 5: Exemplos Práticos -->
+  <text
+     x="50"
+     y="720"
+     class="subtitle"
+     id="text74">5. Exemplos Práticos de Arredondamento</text>
+  <rect
+     x="49.9464"
+     y="729.94641"
+     width="850.10718"
+     height="116.42299"
+     rx="8.001009"
+     fill="#fff3cd"
+     stroke="#ffc107"
+     stroke-width="1.8928"
+     id="rect74" />
+  <!-- Exemplo 1 -->
+  <text
+     x="70"
+     y="750"
+     class="label-text"
+     id="text75"><tspan
+   font-weight="bold"
+   id="tspan74">Exemplo 1:</tspan> Mantissa = 1.10110, GRS = 100</text>
+  <text
+     x="90"
+     y="765"
+     class="bit-text"
+     id="text76">R=0 → Não arredonda → Resultado: 1.10110</text>
+  <!-- Exemplo 2 -->
+  <text
+     x="70"
+     y="785"
+     class="label-text"
+     id="text77"><tspan
+   font-weight="bold"
+   id="tspan76">Exemplo 2:</tspan> Mantissa = 1.10110, GRS = 110</text>
+  <text
+     x="90"
+     y="800"
+     class="bit-text"
+     id="text78">R=1, S=0, G=1 → GRS &gt; 0.5 → Arredonda → Resultado: 1.10111</text>
+  <!-- Exemplo 3 -->
+  <text
+     x="70"
+     y="820"
+     class="label-text"
+     id="text79"><tspan
+   font-weight="bold"
+   id="tspan78">Exemplo 3:</tspan> Mantissa = 1.10111, GRS = 100</text>
+  <text
+     x="90"
+     y="835"
+     class="bit-text"
+     id="text80">R=1, S=0, G=0, LSB=1 → Ties to even → Arredonda → Resultado: 1.11000</text>
+  <!-- Nota importante -->
+  <text
+     x="473.94736"
+     y="863.1579"
+     text-anchor="middle"
+     class="label-text"
+     id="text81">💡 <tspan
+   font-weight="bold"
+   id="tspan80">Nota:</tspan> Este sistema garante arredondamento estatisticamente imparcial e máxima precisão</text>
+</svg>

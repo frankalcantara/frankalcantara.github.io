@@ -1,0 +1,928 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 950 800"
+   version="1.1"
+   id="svg102"
+   sodipodi:docname="density_representation.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:export-filename="..\images\density_representation.webp"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview102"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.77632638"
+     inkscape:cx="693.65155"
+     inkscape:cy="477.24773"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg102" />
+  <defs
+     id="defs4">
+    <style
+       id="style1">
+      .title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #2c3e50; }
+      .subtitle { font-family: 'Segoe UI', Arial, sans-serif; font-size: 16px; font-weight: 600; fill: #34495e; }
+      .label-text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; font-weight: 500; fill: #2c3e50; }
+      .small-text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 10px; fill: #7f8c8d; }
+      .math-text { font-family: 'Courier New', monospace; font-size: 11px; font-weight: 500; fill: #2c3e50; }
+      .region-text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11px; font-weight: 600; }
+      .subnormal-color { fill: #e74c3c; }
+      .normal-color { fill: #3498db; }
+      .large-color { fill: #27ae60; }
+      .huge-color { fill: #f39c12; }
+      .gap-color { fill: #ecf0f1; stroke: #bdc3c7; }
+      .axis-color { stroke: #2c3e50; stroke-width: 2; }
+    </style>
+    <!-- Gradiente para mostrar densidade -->
+    <linearGradient
+       id="densityGradient"
+       x1="0%"
+       y1="0%"
+       x2="100%"
+       y2="0%">
+      <stop
+         offset="0%"
+         style="stop-color:#e74c3c;stop-opacity:0.8"
+         id="stop1" />
+      <stop
+         offset="25%"
+         style="stop-color:#3498db;stop-opacity:0.6"
+         id="stop2" />
+      <stop
+         offset="50%"
+         style="stop-color:#27ae60;stop-opacity:0.4"
+         id="stop3" />
+      <stop
+         offset="100%"
+         style="stop-color:#f39c12;stop-opacity:0.2"
+         id="stop4" />
+    </linearGradient>
+  </defs>
+  <!-- Título Principal -->
+  <text
+     x="475"
+     y="30"
+     text-anchor="middle"
+     class="title"
+     id="text4">Densidade de Representação IEEE 754</text>
+  <text
+     x="475"
+     y="50"
+     text-anchor="middle"
+     class="subtitle"
+     id="text5">Distribuição Não-Uniforme dos Números de Ponto Flutuante</text>
+  <!-- Seção 1: Reta Numérica Principal -->
+  <text
+     x="50"
+     y="85"
+     class="subtitle"
+     id="text6">1. Densidade ao Longo da Reta Real</text>
+  <!-- Eixo principal -->
+  <line
+     x1="80"
+     y1="130"
+     x2="870"
+     y2="130"
+     class="axis-color"
+     id="line6" />
+  <!-- Marcadores do eixo -->
+  <line
+     x1="80"
+     y1="125"
+     x2="80"
+     y2="135"
+     class="axis-color"
+     id="line7" />
+  <text
+     x="80"
+     y="150"
+     text-anchor="middle"
+     class="math-text"
+     id="text7">0</text>
+  <line
+     x1="200"
+     y1="125"
+     x2="200"
+     y2="135"
+     class="axis-color"
+     id="line8" />
+  <text
+     x="200"
+     y="150"
+     text-anchor="middle"
+     class="math-text"
+     id="text8">1</text>
+  <line
+     x1="320"
+     y1="125"
+     x2="320"
+     y2="135"
+     class="axis-color"
+     id="line9" />
+  <text
+     x="320"
+     y="150"
+     text-anchor="middle"
+     class="math-text"
+     id="text9">2</text>
+  <line
+     x1="440"
+     y1="125"
+     x2="440"
+     y2="135"
+     class="axis-color"
+     id="line10" />
+  <text
+     x="440"
+     y="150"
+     text-anchor="middle"
+     class="math-text"
+     id="text10">4</text>
+  <line
+     x1="560"
+     y1="125"
+     x2="560"
+     y2="135"
+     class="axis-color"
+     id="line11" />
+  <text
+     x="560"
+     y="150"
+     text-anchor="middle"
+     class="math-text"
+     id="text11">8</text>
+  <line
+     x1="680"
+     y1="125"
+     x2="680"
+     y2="135"
+     class="axis-color"
+     id="line12" />
+  <text
+     x="680"
+     y="150"
+     text-anchor="middle"
+     class="math-text"
+     id="text12">16</text>
+  <line
+     x1="800"
+     y1="125"
+     x2="800"
+     y2="135"
+     class="axis-color"
+     id="line13" />
+  <text
+     x="800"
+     y="150"
+     text-anchor="middle"
+     class="math-text"
+     id="text13">32</text>
+  <line
+     x1="870"
+     y1="125"
+     x2="870"
+     y2="135"
+     class="axis-color"
+     id="line14" />
+  <text
+     x="870"
+     y="150"
+     text-anchor="middle"
+     class="math-text"
+     id="text14">64</text>
+  <!-- Região Subnormal [0,1) -->
+  <rect
+     x="80"
+     y="110"
+     width="120"
+     height="15"
+     fill="url(#densityGradient)"
+     opacity="0.8"
+     id="rect14" />
+  <!-- Pontos subnormais - muito densos -->
+  <g
+     class="subnormal-color"
+     id="g36">
+    <circle
+       cx="85"
+       cy="122"
+       r="1"
+       id="circle14" />
+    <circle
+       cx="90"
+       cy="122"
+       r="1"
+       id="circle15" />
+    <circle
+       cx="95"
+       cy="122"
+       r="1"
+       id="circle16" />
+    <circle
+       cx="100"
+       cy="122"
+       r="1"
+       id="circle17" />
+    <circle
+       cx="105"
+       cy="122"
+       r="1"
+       id="circle18" />
+    <circle
+       cx="110"
+       cy="122"
+       r="1"
+       id="circle19" />
+    <circle
+       cx="115"
+       cy="122"
+       r="1"
+       id="circle20" />
+    <circle
+       cx="120"
+       cy="122"
+       r="1"
+       id="circle21" />
+    <circle
+       cx="125"
+       cy="122"
+       r="1"
+       id="circle22" />
+    <circle
+       cx="130"
+       cy="122"
+       r="1"
+       id="circle23" />
+    <circle
+       cx="135"
+       cy="122"
+       r="1"
+       id="circle24" />
+    <circle
+       cx="140"
+       cy="122"
+       r="1"
+       id="circle25" />
+    <circle
+       cx="145"
+       cy="122"
+       r="1"
+       id="circle26" />
+    <circle
+       cx="150"
+       cy="122"
+       r="1"
+       id="circle27" />
+    <circle
+       cx="155"
+       cy="122"
+       r="1"
+       id="circle28" />
+    <circle
+       cx="160"
+       cy="122"
+       r="1"
+       id="circle29" />
+    <circle
+       cx="165"
+       cy="122"
+       r="1"
+       id="circle30" />
+    <circle
+       cx="170"
+       cy="122"
+       r="1"
+       id="circle31" />
+    <circle
+       cx="175"
+       cy="122"
+       r="1"
+       id="circle32" />
+    <circle
+       cx="180"
+       cy="122"
+       r="1"
+       id="circle33" />
+    <circle
+       cx="185"
+       cy="122"
+       r="1"
+       id="circle34" />
+    <circle
+       cx="190"
+       cy="122"
+       r="1"
+       id="circle35" />
+    <circle
+       cx="195"
+       cy="122"
+       r="1"
+       id="circle36" />
+  </g>
+  <!-- Região [1,2) - densidade normal -->
+  <g
+     class="normal-color"
+     id="g48">
+    <circle
+       cx="205"
+       cy="122"
+       r="1.5"
+       id="circle37" />
+    <circle
+       cx="215"
+       cy="122"
+       r="1.5"
+       id="circle38" />
+    <circle
+       cx="225"
+       cy="122"
+       r="1.5"
+       id="circle39" />
+    <circle
+       cx="235"
+       cy="122"
+       r="1.5"
+       id="circle40" />
+    <circle
+       cx="245"
+       cy="122"
+       r="1.5"
+       id="circle41" />
+    <circle
+       cx="255"
+       cy="122"
+       r="1.5"
+       id="circle42" />
+    <circle
+       cx="265"
+       cy="122"
+       r="1.5"
+       id="circle43" />
+    <circle
+       cx="275"
+       cy="122"
+       r="1.5"
+       id="circle44" />
+    <circle
+       cx="285"
+       cy="122"
+       r="1.5"
+       id="circle45" />
+    <circle
+       cx="295"
+       cy="122"
+       r="1.5"
+       id="circle46" />
+    <circle
+       cx="305"
+       cy="122"
+       r="1.5"
+       id="circle47" />
+    <circle
+       cx="315"
+       cy="122"
+       r="1.5"
+       id="circle48" />
+  </g>
+  <!-- Região [2,4) - menos denso -->
+  <g
+     class="large-color"
+     id="g54">
+    <circle
+       cx="330"
+       cy="122"
+       r="2"
+       id="circle49" />
+    <circle
+       cx="350"
+       cy="122"
+       r="2"
+       id="circle50" />
+    <circle
+       cx="370"
+       cy="122"
+       r="2"
+       id="circle51" />
+    <circle
+       cx="390"
+       cy="122"
+       r="2"
+       id="circle52" />
+    <circle
+       cx="410"
+       cy="122"
+       r="2"
+       id="circle53" />
+    <circle
+       cx="430"
+       cy="122"
+       r="2"
+       id="circle54" />
+  </g>
+  <!-- Região [4,8) - ainda menos denso -->
+  <g
+     class="huge-color"
+     id="g58">
+    <circle
+       cx="460"
+       cy="122"
+       r="2.5"
+       id="circle55" />
+    <circle
+       cx="490"
+       cy="122"
+       r="2.5"
+       id="circle56" />
+    <circle
+       cx="520"
+       cy="122"
+       r="2.5"
+       id="circle57" />
+    <circle
+       cx="550"
+       cy="122"
+       r="2.5"
+       id="circle58" />
+  </g>
+  <!-- Região [8,16) - muito esparso -->
+  <g
+     class="huge-color"
+     id="g61">
+    <circle
+       cx="580"
+       cy="122"
+       r="3"
+       id="circle59" />
+    <circle
+       cx="620"
+       cy="122"
+       r="3"
+       id="circle60" />
+    <circle
+       cx="660"
+       cy="122"
+       r="3"
+       id="circle61" />
+  </g>
+  <!-- Região [16,32) - extremamente esparso -->
+  <g
+     class="huge-color"
+     id="g64">
+    <circle
+       cx="700"
+       cy="122"
+       r="3.5"
+       id="circle62" />
+    <circle
+       cx="740"
+       cy="122"
+       r="3.5"
+       id="circle63" />
+    <circle
+       cx="780"
+       cy="122"
+       r="3.5"
+       id="circle64" />
+  </g>
+  <!-- Legendas das regiões -->
+  <text
+     x="140"
+     y="105"
+     text-anchor="middle"
+     class="region-text subnormal-color"
+     id="text64">Subnormais</text>
+  <text
+     x="260"
+     y="105"
+     text-anchor="middle"
+     class="region-text normal-color"
+     id="text65">[1,2)</text>
+  <text
+     x="380"
+     y="105"
+     text-anchor="middle"
+     class="region-text large-color"
+     id="text66">[2,4)</text>
+  <text
+     x="500"
+     y="105"
+     text-anchor="middle"
+     class="region-text huge-color"
+     id="text67">[4,8)</text>
+  <text
+     x="620"
+     y="105"
+     text-anchor="middle"
+     class="region-text huge-color"
+     id="text68">[8,16)</text>
+  <text
+     x="740"
+     y="105"
+     text-anchor="middle"
+     class="region-text huge-color"
+     id="text69">[16,32)</text>
+  <!-- Seção 2: Zoom nas Lacunas -->
+  <text
+     x="50"
+     y="200"
+     class="subtitle"
+     id="text70">2. Lacunas Entre Números Representáveis</text>
+  <!-- Zoom região [1,2) -->
+  <text
+     x="70"
+     y="220"
+     class="label-text"
+     id="text71">Região [1.0, 1.125) - Expoente = 0:</text>
+  <line
+     x1="70"
+     y1="235"
+     x2="400"
+     y2="235"
+     stroke="#3498db"
+     stroke-width="2"
+     id="line71" />
+  <!-- Pontos detalhados -->
+  <circle
+     cx="70"
+     cy="235"
+     r="3"
+     class="normal-color"
+     id="circle71" />
+  <text
+     x="70"
+     y="255"
+     text-anchor="middle"
+     class="small-text"
+     id="text72">1.0</text>
+  <circle
+     cx="120"
+     cy="235"
+     r="3"
+     class="normal-color"
+     id="circle72" />
+  <text
+     x="120"
+     y="255"
+     text-anchor="middle"
+     class="small-text"
+     id="text73">1.25×2⁻²³</text>
+  <circle
+     cx="170"
+     cy="235"
+     r="3"
+     class="normal-color"
+     id="circle73" />
+  <text
+     x="170"
+     y="255"
+     text-anchor="middle"
+     class="small-text"
+     id="text74">1.5×2⁻²³</text>
+  <circle
+     cx="220"
+     cy="235"
+     r="3"
+     class="normal-color"
+     id="circle74" />
+  <text
+     x="220"
+     y="255"
+     text-anchor="middle"
+     class="small-text"
+     id="text75">1.75×2⁻²³</text>
+  <circle
+     cx="270"
+     cy="235"
+     r="3"
+     class="normal-color"
+     id="circle75" />
+  <text
+     x="270"
+     y="255"
+     text-anchor="middle"
+     class="small-text"
+     id="text76">2×2⁻²³</text>
+  <!-- Lacuna entre números -->
+  <rect
+     x="90"
+     y="230"
+     width="25"
+     height="10"
+     class="gap-color"
+     stroke-width="1"
+     id="rect76" />
+  <text
+     x="102"
+     y="236.69189"
+     text-anchor="middle"
+     class="small-text"
+     id="text77">gap</text>
+  <!-- Zoom região [8,16) -->
+  <text
+     x="70"
+     y="290"
+     class="label-text"
+     id="text78">Região [8.0, 10.0) - Expoente = 3:</text>
+  <line
+     x1="70"
+     y1="305"
+     x2="400"
+     y2="305"
+     stroke="#f39c12"
+     stroke-width="2"
+     id="line78" />
+  <circle
+     cx="70"
+     cy="305"
+     r="3"
+     class="huge-color"
+     id="circle78" />
+  <text
+     x="70"
+     y="325"
+     text-anchor="middle"
+     class="small-text"
+     id="text79">8.0</text>
+  <circle
+     cx="170"
+     cy="305"
+     r="3"
+     class="huge-color"
+     id="circle79" />
+  <text
+     x="170"
+     y="325"
+     text-anchor="middle"
+     class="small-text"
+     id="text80">8 + 2⁻²⁰</text>
+  <circle
+     cx="270"
+     cy="305"
+     r="3"
+     class="huge-color"
+     id="circle80" />
+  <text
+     x="270"
+     y="325"
+     text-anchor="middle"
+     class="small-text"
+     id="text81">8 + 2×2⁻²⁰</text>
+  <!-- Lacuna muito maior -->
+  <rect
+     x="100"
+     y="295"
+     width="60"
+     height="20"
+     class="gap-color"
+     stroke-width="2"
+     id="rect81" />
+  <text
+     x="130"
+     y="307"
+     text-anchor="middle"
+     class="label-text"
+     id="text82"
+     style="font-size:8px">GAP 8× maior!</text>
+  <!-- Seção 3: Fórmula da Lacuna -->
+  <text
+     x="50"
+     y="370"
+     class="subtitle"
+     id="text83">3. Crescimento Exponencial das Lacunas</text>
+  <rect
+     x="50"
+     y="380"
+     width="850"
+     height="100"
+     rx="8"
+     fill="#e8f4fd"
+     stroke="#3498db"
+     stroke-width="2"
+     id="rect83" />
+  <text
+     x="70"
+     y="405"
+     class="label-text"
+     id="text84"><tspan
+       font-weight="bold"
+       id="tspan83">Tamanho da lacuna na região [2ⁿ, 2ⁿ⁺¹):</tspan></text>
+  <text
+     x="460.42661"
+     y="425.4458"
+     text-anchor="middle"
+     class="math-text"
+     id="text85"
+     style="font-size:18.6667px">gap = 2ⁿ × 2⁻²³ = 2ⁿ⁻²³</text>
+  <text
+     x="71.821671"
+     y="440.42661"
+     class="label-text"
+     id="text86">Exemplos:</text>
+  <text
+     x="91.821671"
+     y="455.42661"
+     class="small-text"
+     id="text87">• [1,2): gap = 2⁻²³ ≈ 1.19×10⁻⁷ (menor lacuna normal)</text>
+  <text
+     x="91.821671"
+     y="470.42661"
+     class="small-text"
+     id="text88">• [1024,2048): gap = 2⁻¹³ ≈ 1.22×10⁻⁴ (lacuna 1024× maior!)</text>
+  <!-- Seção 4: Gráfico de Densidade -->
+  <text
+     x="50"
+     y="520"
+     class="subtitle"
+     id="text89">4. Gráfico de Densidade vs. Magnitude</text>
+  <!-- Eixos do gráfico -->
+  <line
+     x1="100"
+     y1="680"
+     x2="800"
+     y2="680"
+     stroke="#2c3e50"
+     stroke-width="2"
+     id="line89" />
+  <line
+     x1="100"
+     y1="680"
+     x2="100"
+     y2="550"
+     stroke="#2c3e50"
+     stroke-width="2"
+     id="line90" />
+  <!-- Labels dos eixos -->
+  <text
+     x="450"
+     y="710.93005"
+     text-anchor="middle"
+     class="label-text"
+     id="text90">Magnitude do Número (log scale)</text>
+  <text
+     x="30"
+     y="615"
+     text-anchor="middle"
+     class="label-text"
+     transform="rotate(-90 30 615)"
+     id="text91">Densidade (números/unidade)</text>
+  <!-- Marcadores do eixo X -->
+  <line
+     x1="150"
+     y1="675"
+     x2="150"
+     y2="685"
+     stroke="#2c3e50"
+     id="line91" />
+  <text
+     x="150"
+     y="695"
+     text-anchor="middle"
+     class="small-text"
+     id="text92">2⁻¹⁰</text>
+  <line
+     x1="250"
+     y1="675"
+     x2="250"
+     y2="685"
+     stroke="#2c3e50"
+     id="line92" />
+  <text
+     x="250"
+     y="695"
+     text-anchor="middle"
+     class="small-text"
+     id="text93">1</text>
+  <line
+     x1="350"
+     y1="675"
+     x2="350"
+     y2="685"
+     stroke="#2c3e50"
+     id="line93" />
+  <text
+     x="350"
+     y="695"
+     text-anchor="middle"
+     class="small-text"
+     id="text94">2¹⁰</text>
+  <line
+     x1="450"
+     y1="675"
+     x2="450"
+     y2="685"
+     stroke="#2c3e50"
+     id="line94" />
+  <text
+     x="450"
+     y="695"
+     text-anchor="middle"
+     class="small-text"
+     id="text95">2²⁰</text>
+  <line
+     x1="550"
+     y1="675"
+     x2="550"
+     y2="685"
+     stroke="#2c3e50"
+     id="line95" />
+  <text
+     x="550"
+     y="695"
+     text-anchor="middle"
+     class="small-text"
+     id="text96">2³⁰</text>
+  <!-- Curva de densidade -->
+  <path
+     d="M 120,560 Q 200,580 250,620 Q 350,640 450,660 Q 550,670 650,675"
+     stroke="#e74c3c"
+     stroke-width="3"
+     fill="none"
+     id="path96" />
+  <!-- Área sob a curva -->
+  <path
+     d="M 120,680 L 120,560 Q 200,580 250,620 Q 350,640 450,660 Q 550,670 650,675 L 650,680 Z"
+     fill="#e74c3c"
+     opacity="0.2"
+     id="path97" />
+  <!-- Marcadores na curva -->
+  <circle
+     cx="120"
+     cy="560"
+     r="4"
+     fill="#e74c3c"
+     id="circle97" />
+  <text
+     x="120"
+     y="545"
+     text-anchor="middle"
+     class="small-text"
+     id="text97">Subnormais</text>
+  <circle
+     cx="250"
+     cy="620"
+     r="4"
+     fill="#3498db"
+     id="circle98" />
+  <text
+     x="250"
+     y="605"
+     text-anchor="middle"
+     class="small-text"
+     id="text98">Normais</text>
+  <circle
+     cx="450"
+     cy="660"
+     r="4"
+     fill="#f39c12"
+     id="circle99" />
+  <text
+     x="450"
+     y="645"
+     text-anchor="middle"
+     class="small-text"
+     id="text99">Grandes</text>
+  <!-- Seção 5: Implicações -->
+  <text
+     x="50"
+     y="735"
+     class="subtitle"
+     id="text100">5. Implicações Práticas</text>
+  <rect
+     x="50"
+     y="745"
+     width="850"
+     height="45"
+     rx="8"
+     fill="#fff3cd"
+     stroke="#ffc107"
+     stroke-width="2"
+     id="rect100" />
+  <text
+     x="70"
+     y="765"
+     class="label-text"
+     id="text101">⚠️ <tspan
+   font-weight="bold"
+   id="tspan100">Precisão Relativa:</tspan> IEEE 754 mantém precisão relativa constante (~7 dígitos decimais)</text>
+  <text
+     x="69.089165"
+     y="780"
+     class="label-text"
+     id="text102">🔍 <tspan
+   font-weight="bold"
+   id="tspan101">Precisão Absoluta:</tspan> Decresce exponencialmente com a magnitude do número</text>
+</svg>

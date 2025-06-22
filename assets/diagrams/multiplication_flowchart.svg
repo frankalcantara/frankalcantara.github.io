@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 800 1100"
+   version="1.1"
+   id="svg42"
+   sodipodi:docname="multiplication_flowchart.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:export-filename="..\images\multiplication_flowchart.webp"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview42"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.77727273"
+     inkscape:cx="400.11696"
+     inkscape:cy="550"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg42" />
+  <defs
+     id="defs1">
+    <linearGradient
+       id="linearGradient57"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#fff3cd;stop-opacity:1;"
+         offset="0"
+         id="stop57" />
+      <stop
+         style="stop-color:#fff3cd;stop-opacity:0;"
+         offset="1"
+         id="stop58" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient45"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#d1ecf1;stop-opacity:1;"
+         offset="0"
+         id="stop45" />
+      <stop
+         style="stop-color:#d1ecf1;stop-opacity:0;"
+         offset="1"
+         id="stop46" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient42"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#d4edda;stop-opacity:1;"
+         offset="0"
+         id="stop42" />
+      <stop
+         style="stop-color:#d4edda;stop-opacity:0;"
+         offset="1"
+         id="stop43" />
+    </linearGradient>
+    <style
+       id="style1">
+      .flowchart-box { fill: #f0f8ff; stroke: #2c3e50; stroke-width: 2; }
+      .flowchart-decision { fill: #fff3cd; stroke: #856404; stroke-width: 2; }
+      .flowchart-process { fill: #d1ecf1; stroke: #0c5460; stroke-width: 2; }
+      .flowchart-terminal { fill: #d4edda; stroke: #155724; stroke-width: 2; }
+      .flowchart-text { font-family: Arial, sans-serif; font-size: 12px; text-anchor: middle; dominant-baseline: middle; }
+      .flowchart-title { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; text-anchor: middle; }
+      .arrow { stroke: #2c3e50; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker
+       id="arrowhead"
+       markerWidth="10"
+       markerHeight="7"
+       refX="9"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#2c3e50"
+         id="polygon1" />
+    </marker>
+    <marker
+       id="arrowhead-9"
+       markerWidth="10"
+       markerHeight="7"
+       refX="9"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="10,3.5 0,7 0,0 "
+         fill="#2c3e50"
+         id="polygon1-4" />
+    </marker>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient42"
+       id="linearGradient43"
+       x1="217"
+       y1="80"
+       x2="339"
+       y2="80"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient42"
+       id="linearGradient44"
+       x1="217"
+       y1="1026.207"
+       x2="339"
+       y2="1026.207"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient45"
+       id="linearGradient46"
+       x1="197"
+       y1="150"
+       x2="359"
+       y2="150"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient45"
+       id="linearGradient47"
+       x1="197"
+       y1="220"
+       x2="359"
+       y2="220"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient45"
+       id="linearGradient48"
+       x1="624.50525"
+       y1="298.57367"
+       x2="746.50525"
+       y2="298.57367"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient45"
+       id="linearGradient49"
+       x1="539"
+       y1="385"
+       x2="681"
+       y2="385"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient45"
+       id="linearGradient50"
+       x1="197"
+       y1="470"
+       x2="359"
+       y2="470"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient45"
+       id="linearGradient51"
+       x1="197"
+       y1="540"
+       x2="359"
+       y2="540"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient45"
+       id="linearGradient52"
+       x1="197"
+       y1="610"
+       x2="359"
+       y2="610"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient45"
+       id="linearGradient53"
+       x1="397"
+       y1="685"
+       x2="539"
+       y2="685"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient45"
+       id="linearGradient54"
+       x1="479"
+       y1="775"
+       x2="601"
+       y2="775"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient45"
+       id="linearGradient55"
+       x1="397"
+       y1="865"
+       x2="519"
+       y2="865"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient45"
+       id="linearGradient56"
+       x1="197"
+       y1="950"
+       x2="359"
+       y2="950"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient57"
+       id="linearGradient58"
+       x1="328.71938"
+       y1="295"
+       x2="471.28062"
+       y2="295"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient57"
+       id="linearGradient59"
+       x1="328.71938"
+       y1="385"
+       x2="471.28062"
+       y2="385"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient57"
+       id="linearGradient60"
+       x1="328.71938"
+       y1="685"
+       x2="471.28062"
+       y2="685"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient57"
+       id="linearGradient61"
+       x1="328.71938"
+       y1="775"
+       x2="471.28062"
+       y2="775"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient57"
+       id="linearGradient62"
+       x1="328.71938"
+       y1="865"
+       x2="471.28062"
+       y2="865"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <!-- Título -->
+  <text
+     x="454.25732"
+     y="27.426901"
+     class="flowchart-title"
+     id="text1">Algoritmo: Multiplicação IEEE 754</text>
+  <!-- Início -->
+  <ellipse
+     cx="278"
+     cy="80"
+     rx="60"
+     ry="25"
+     class="flowchart-terminal"
+     id="ellipse1"
+     style="fill:url(#linearGradient43)" />
+  <text
+     x="278"
+     y="80"
+     class="flowchart-text"
+     id="text2">INÍCIO</text>
+  <!-- Extrair componentes -->
+  <rect
+     x="198"
+     y="130"
+     width="160"
+     height="40"
+     class="flowchart-process"
+     id="rect2"
+     style="fill:url(#linearGradient46)" />
+  <text
+     x="278"
+     y="150"
+     class="flowchart-text"
+     id="text3">Extrair componentes A e B</text>
+  <!-- Calcular sinal resultado -->
+  <rect
+     x="198"
+     y="200"
+     width="160"
+     height="40"
+     class="flowchart-process"
+     id="rect3"
+     style="fill:url(#linearGradient47)" />
+  <text
+     x="278"
+     y="220"
+     class="flowchart-text"
+     id="text4">Sinal = A.sinal XOR B.sinal</text>
+  <!-- Verificar se algum é zero -->
+  <polygon
+     points="450,270 470,295 450,320 350,320 330,295 350,270 "
+     class="flowchart-decision"
+     id="polygon4"
+     transform="translate(-122)"
+     style="fill:url(#linearGradient58)" />
+  <text
+     x="278"
+     y="295"
+     class="flowchart-text"
+     id="text5">A=0 ou B=0?</text>
+  <!-- Retornar zero -->
+  <rect
+     x="625.50525"
+     y="278.57367"
+     width="120"
+     height="40"
+     class="flowchart-process"
+     id="rect5"
+     style="fill:url(#linearGradient48)" />
+  <text
+     x="685.50525"
+     y="298.57367"
+     class="flowchart-text"
+     id="text6">Retornar ±0</text>
+  <!-- Verificar infinito/NaN -->
+  <polygon
+     points="450,360 470,385 450,410 350,410 330,385 350,360 "
+     class="flowchart-decision"
+     id="polygon6"
+     transform="translate(-122)"
+     style="fill:url(#linearGradient59)" />
+  <text
+     x="278"
+     y="385"
+     class="flowchart-text"
+     id="text7">Infinito/NaN?</text>
+  <!-- Tratar casos especiais -->
+  <rect
+     x="540"
+     y="365"
+     width="140"
+     height="40"
+     class="flowchart-process"
+     id="rect7"
+     style="fill:url(#linearGradient49)" />
+  <text
+     x="610"
+     y="385"
+     class="flowchart-text"
+     id="text8">Tratar casos especiais</text>
+  <!-- Adicionar bit implícito -->
+  <rect
+     x="198"
+     y="450"
+     width="160"
+     height="40"
+     class="flowchart-process"
+     id="rect8"
+     style="fill:url(#linearGradient50)" />
+  <text
+     x="278"
+     y="470"
+     class="flowchart-text"
+     id="text9">Adicionar bit implícito</text>
+  <!-- Multiplicar mantissas -->
+  <rect
+     x="198"
+     y="520"
+     width="160"
+     height="40"
+     class="flowchart-process"
+     id="rect9"
+     style="fill:url(#linearGradient51)" />
+  <text
+     x="278"
+     y="540"
+     class="flowchart-text"
+     id="text10">Multiplicar mantissas</text>
+  <!-- Calcular expoente -->
+  <rect
+     x="198"
+     y="590"
+     width="160"
+     height="40"
+     class="flowchart-process"
+     id="rect10"
+     style="fill:url(#linearGradient52)" />
+  <text
+     x="278"
+     y="610"
+     class="flowchart-text"
+     id="text11">Exp = ExpA + ExpB - bias</text>
+  <!-- Verificar normalização -->
+  <polygon
+     points="450,660 470,685 450,710 350,710 330,685 350,660 "
+     class="flowchart-decision"
+     id="polygon11"
+     transform="translate(-122)"
+     style="fill:url(#linearGradient60)" />
+  <text
+     x="278"
+     y="685"
+     class="flowchart-text"
+     id="text12">Produto ≥ 2^23?</text>
+  <!-- Normalizar -->
+  <rect
+     x="398"
+     y="665"
+     width="140"
+     height="40"
+     class="flowchart-process"
+     id="rect12"
+     style="fill:url(#linearGradient53)" />
+  <text
+     x="468"
+     y="685"
+     class="flowchart-text"
+     id="text13">Deslocar direita, exp++</text>
+  <!-- Verificar underflow -->
+  <polygon
+     points="450,750 470,775 450,800 350,800 330,775 350,750 "
+     class="flowchart-decision"
+     id="polygon13"
+     transform="translate(-122)"
+     style="fill:url(#linearGradient61)" />
+  <text
+     x="278"
+     y="775"
+     class="flowchart-text"
+     id="text14">Exp ≤ 0?</text>
+  <!-- Retornar zero (underflow) -->
+  <rect
+     x="480"
+     y="755"
+     width="120"
+     height="40"
+     class="flowchart-process"
+     id="rect14"
+     style="fill:url(#linearGradient54)" />
+  <text
+     x="540"
+     y="775"
+     class="flowchart-text"
+     id="text15">Retornar ±0</text>
+  <!-- Verificar overflow -->
+  <polygon
+     points="450,840 470,865 450,890 350,890 330,865 350,840 "
+     class="flowchart-decision"
+     id="polygon15"
+     transform="translate(-122)"
+     style="fill:url(#linearGradient62)" />
+  <text
+     x="278"
+     y="865"
+     class="flowchart-text"
+     id="text16">Exp ≥ 31?</text>
+  <!-- Retornar infinito -->
+  <rect
+     x="398"
+     y="845"
+     width="120"
+     height="40"
+     class="flowchart-process"
+     id="rect16"
+     style="fill:url(#linearGradient55)" />
+  <text
+     x="458"
+     y="865"
+     class="flowchart-text"
+     id="text17">Retornar ±∞</text>
+  <!-- Empacotar resultado -->
+  <rect
+     x="198"
+     y="930"
+     width="160"
+     height="40"
+     class="flowchart-process"
+     id="rect17"
+     style="fill:url(#linearGradient56)" />
+  <text
+     x="278"
+     y="950"
+     class="flowchart-text"
+     id="text18">Empacotar resultado</text>
+  <!-- Resultado -->
+  <ellipse
+     cx="278"
+     cy="1026.207"
+     rx="60"
+     ry="25"
+     class="flowchart-terminal"
+     id="ellipse18"
+     style="fill:url(#linearGradient44)" />
+  <text
+     x="279.78683"
+     y="1026.8026"
+     class="flowchart-text"
+     id="text19">RESULTADO</text>
+  <!-- Setas -->
+  <line
+     x1="278"
+     y1="105"
+     x2="278"
+     y2="130"
+     class="arrow"
+     id="line19" />
+  <line
+     x1="278"
+     y1="170"
+     x2="278"
+     y2="200"
+     class="arrow"
+     id="line20" />
+  <line
+     x1="278"
+     y1="240"
+     x2="278"
+     y2="270"
+     class="arrow"
+     id="line21" />
+  <line
+     x1="348.01401"
+     y1="295"
+     x2="623.28894"
+     y2="295"
+     class="arrow"
+     id="line22"
+     style="stroke-width:2.066;stroke-dasharray:none" />
+  <text
+     x="363"
+     y="290"
+     class="flowchart-text"
+     style="font-size:10px"
+     id="text22">Sim</text>
+  <line
+     x1="685.50525"
+     y1="318.57367"
+     x2="685.50525"
+     y2="1027.6342"
+     class="arrow"
+     id="line23" />
+  <line
+     x1="685.52454"
+     y1="1030"
+     x2="339.36389"
+     y2="1030"
+     class="arrow"
+     id="line24"
+     style="stroke-width:2.39319;stroke-dasharray:none" />
+  <line
+     x1="278"
+     y1="320"
+     x2="278"
+     y2="360"
+     class="arrow"
+     id="line25" />
+  <text
+     x="253"
+     y="340"
+     class="flowchart-text"
+     style="font-size:10px"
+     id="text25">Não</text>
+  <line
+     x1="349.3786"
+     y1="385"
+     x2="536.83087"
+     y2="385"
+     class="arrow"
+     id="line26"
+     style="stroke-width:1.973;stroke-dasharray:none" />
+  <text
+     x="363"
+     y="380"
+     class="flowchart-text"
+     style="font-size:10px"
+     id="text26">Sim</text>
+  <line
+     x1="610"
+     y1="405"
+     x2="610"
+     y2="1030"
+     class="arrow"
+     id="line27" />
+  <line
+     x1="278"
+     y1="410"
+     x2="278"
+     y2="450"
+     class="arrow"
+     id="line28" />
+  <text
+     x="253"
+     y="430"
+     class="flowchart-text"
+     style="font-size:10px"
+     id="text28">Não</text>
+  <line
+     x1="278"
+     y1="490"
+     x2="278"
+     y2="520"
+     class="arrow"
+     id="line29" />
+  <line
+     x1="278"
+     y1="560"
+     x2="278"
+     y2="590"
+     class="arrow"
+     id="line30" />
+  <line
+     x1="278"
+     y1="630"
+     x2="278"
+     y2="660"
+     class="arrow"
+     id="line31" />
+  <line
+     x1="347.05966"
+     y1="685"
+     x2="398.52945"
+     y2="685"
+     class="arrow"
+     id="line32" />
+  <text
+     x="363"
+     y="680"
+     class="flowchart-text"
+     style="font-size:10px"
+     id="text32">Sim</text>
+  <line
+     x1="468"
+     y1="704.57367"
+     x2="468"
+     y2="726.26471"
+     class="arrow"
+     id="line33" />
+  <line
+     x1="468"
+     y1="728"
+     x2="278"
+     y2="728"
+     class="arrow"
+     id="line34" />
+  <line
+     x1="278"
+     y1="710"
+     x2="278"
+     y2="750"
+     class="arrow"
+     id="line35" />
+  <text
+     x="253"
+     y="730"
+     class="flowchart-text"
+     style="font-size:10px"
+     id="text35">Não</text>
+  <line
+     x1="347.65527"
+     y1="775.59564"
+     x2="476.72034"
+     y2="775.59564"
+     class="arrow"
+     id="line36"
+     style="stroke-width:2.116;stroke-dasharray:none" />
+  <text
+     x="363"
+     y="770"
+     class="flowchart-text"
+     style="font-size:10px"
+     id="text36">Sim</text>
+  <line
+     x1="540"
+     y1="795"
+     x2="540"
+     y2="1030"
+     class="arrow"
+     id="line37" />
+  <line
+     x1="278"
+     y1="800"
+     x2="278"
+     y2="840"
+     class="arrow"
+     id="line38" />
+  <text
+     x="253"
+     y="820"
+     class="flowchart-text"
+     style="font-size:10px"
+     id="text38">Não</text>
+  <line
+     x1="346.46405"
+     y1="865"
+     x2="398.51288"
+     y2="865"
+     class="arrow"
+     id="line39" />
+  <text
+     x="363"
+     y="860"
+     class="flowchart-text"
+     style="font-size:10px"
+     id="text39">Sim</text>
+  <line
+     x1="458"
+     y1="885"
+     x2="458"
+     y2="1030"
+     class="arrow"
+     id="line40" />
+  <line
+     x1="278"
+     y1="890"
+     x2="278"
+     y2="930"
+     class="arrow"
+     id="line41" />
+  <line
+     x1="278"
+     y1="970.45178"
+     x2="278"
+     y2="1002.5103"
+     class="arrow"
+     id="line41-8"
+     style="fill:none;stroke:#2c3e50;stroke-width:1.79049;marker-end:url(#arrowhead-9)" />
+  <text
+     x="253"
+     y="910"
+     class="flowchart-text"
+     style="font-size:10px"
+     id="text41">Não</text>
+</svg>
