@@ -10,7 +10,7 @@ tags: |-
    sistemas operacionais
    arquitetura de computadores
    gerenciamento de recursos
-   multiprogramação
+   Multiprocessamento
    evolução histórica
    kernel
    processos
@@ -25,14 +25,14 @@ keywords: |-
    kernel
    processos
    gerenciamento de memória
-   multiprogramação
+   Multiprocessamento
    evolução histórica
    arquitetura de computadores
    recursos compartilhados
    abstração de hardware
 toc: true
 published: true
-lastmod: 2025-06-22T10:51:33.886Z
+lastmod: 2025-06-23T15:42:53.613Z
 draft: 2025-06-18T14:21:29.077Z
 slug: sistemas-operacionais-fundamentos-evolucao-arquitetura
 description: Texto introdutório à Sistemas Operacionais, será referência para a primeira aula da disciplina e, talvez se torne o primeiro capítulo de um livro.
@@ -147,13 +147,13 @@ Os sistemas batch, uma palavra do inglês que pode ser traduzida por lote, apres
 
 *O objetivo principal dos sistemas **Batch** era maximizar a utilização da CPU e o throughput*. Deve voltar a definição de throughput, só por via das dúvidas. A atenta leitora deve registrar que esta era marcou o primeiro passo na automação da operação do computador e impulsionou o conceito de abstração da máquina.
 
-### Malabarismo de Recursos: O Advento da Multiprogramação (meados dos 1960s - 1970s)
+### Malabarismo de Recursos: O Advento da Multiprocessamento (meados dos 1960s - 1970s)
 
 A introdução dos **Circuitos Integrados (CIs)** marcou um avanço significativo, resultando em computadores ainda mais poderosos, compactos e acessíveis. No entanto, mesmo com a eficiência aprimorada dos sistemas batch, um problema persistia: a CPU permanecia ociosa durante as operações de **entrada e saída de dados (E/S)**. O gargalo residia no fato de que as operações de E/S são ordens de magnitude mais lentas do que a execução de instruções pela CPU.
 
-Nesse contexto surgiu a **multiprogramação**. Essa técnica revolucionária propunha manter múltiplos processos na memória principal simultaneamente. A ideia era simples, mas transformadora: se um processo em execução precisasse realizar uma operação de E/S, um sistema de gestão poderia rapidamente comutar a CPU para outro processo que estivesse pronto para executar, em vez de esperar o término da lenta operação de E/S. Essa abordagem aumentou drasticamente a utilização da CPU, reduziu o tempo ocioso e revolucionou a forma como os recursos computacionais são gerenciados.
+Nesse contexto surgiu a **Multiprocessamento**. Essa técnica revolucionária propunha manter múltiplos processos na memória principal simultaneamente. A ideia era simples, mas transformadora: se um processo em execução precisasse realizar uma operação de E/S, um sistema de gestão poderia rapidamente comutar a CPU para outro processo que estivesse pronto para executar, em vez de esperar o término da lenta operação de E/S. Essa abordagem aumentou drasticamente a utilização da CPU, reduziu o tempo ocioso e revolucionou a forma como os recursos computacionais são gerenciados.
 
-A eficácia da multiprogramação pode ser modelada matematicamente. Se um processo gasta uma fração $p$ do seu tempo esperando por operações de E/S, a probabilidade de $n$ processos, todos residentes na memória, estarem simultaneamente esperando por E/S é $ p^n $. A CPU só estará ociosa se todos os processos estiverem esperando. Portanto, a utilização da CPU é a probabilidade de que pelo menos um processo não esteja esperando por E/S, o que pode ser expresso pela fórmula:
+A eficácia da Multiprocessamento pode ser modelada matematicamente. Se um processo gasta uma fração $p$ do seu tempo esperando por operações de E/S, a probabilidade de $n$ processos, todos residentes na memória, estarem simultaneamente esperando por E/S é $ p^n $. A CPU só estará ociosa se todos os processos estiverem esperando. Portanto, a utilização da CPU é a probabilidade de que pelo menos um processo não esteja esperando por E/S, o que pode ser expresso pela fórmula:
 
 $$\text{Utilização da CPU} = 1 - p^n$$
 
@@ -162,7 +162,7 @@ Nesta equação:
 - $p$ representa a fração de tempo que um processo gasta em operações de E/S.
 - $n$ é o número total de processos mantidos na memória.
 
->**Demonstração Prática: O Poder da Multiprogramação**
+>**Demonstração Prática: O Poder da Multiprocessamento**
 >
 > A fórmula $\text{Utilização da CPU} = 1 - p^n$ pode parecer abstrata, mas seus resultados são impressionantes:
 >
@@ -184,7 +184,7 @@ Como a esperta leitora deve observar que, mesmo com um valor de $p$ relativament
 ![ Gráfico mostrando múltiplos processos na memória com estados (CPU, I/O, waiting) e cronograma temporal demonstrando como a CPU alterna entre processos durante operações de I/O de outros](/assets/images/multiprogramacao_cpu.webp)
 _Figura 5: Representação da alocação de processos em memória._{: class="legend"}
 
-Em resumo, a multiprogramação introduziu conceitos fundamentais que moldaram a construção dos sistemas operacionais. Entre eles, destacam-se:
+Em resumo, a Multiprocessamento introduziu conceitos fundamentais que moldaram a construção dos sistemas operacionais. Entre eles, destacam-se:
 
 - **Múltiplos jobs na memória**: permitia que vários trabalhos fossem mantidos simultaneamente na memória principal;
 - **Comutação de contexto**: quando um job necessitava realizar operações de E/S, o sistema de gestão rapidamente transferia a CPU para outro job pronto para execução;
@@ -193,7 +193,7 @@ Em resumo, a multiprogramação introduziu conceitos fundamentais que moldaram a
 
 >**jobs**: o termo "job" refere-se a uma tarefa ou trabalho que um sistema operacional deve executar. Em sistemas batch, um job é um conjunto de instruções e dados que são processados em sequência, sem interação do usuário durante a execução. Os jobs são frequentemente agrupados com base em suas características ou requisitos de recursos, permitindo que o sistema operacional otimize o uso da CPU e minimize o tempo de espera. *O equivalente atual do job é o processo*, que é uma instância de um programa em execução, incluindo seu estado, dados e recursos alocados.
 
-Outro avanço significativo foi o **Spooling (Simultaneous Peripheral Operation On-Line)**, uma técnica que utilizava o disco como buffer intermediário para operações de E/S. Isso permitia que a CPU e os dispositivos de E/S operassem de forma mais concorrente, melhorando a eficiência geral do sistema. Um exemplo marcante dessa era é o **OS/360 da IBM**, em 7 de abril de 1964, um sistema de multiprogramação que estabeleceu muitos dos conceitos ainda utilizados nos sistemas operacionais modernos. O termo OS/360 refere-se a uma família de sistemas operacionais desenvolvidos pela IBM para sua linha de mainframes System/360, que introduziu a multiprogramação como um recurso central. O OS/360 foi projetado para suportar uma ampla gama de aplicações, desde processamento de dados até computação científica, e estabeleceu padrões que influenciaram profundamente o desenvolvimento de sistemas operacionais subsequentes.
+Outro avanço significativo foi o **Spooling (Simultaneous Peripheral Operation On-Line)**, uma técnica que utilizava o disco como buffer intermediário para operações de E/S. Isso permitia que a CPU e os dispositivos de E/S operassem de forma mais concorrente, melhorando a eficiência geral do sistema. Um exemplo marcante dessa era é o **OS/360 da IBM**, em 7 de abril de 1964, um sistema de Multiprocessamento que estabeleceu muitos dos conceitos ainda utilizados nos sistemas operacionais modernos. O termo OS/360 refere-se a uma família de sistemas operacionais desenvolvidos pela IBM para sua linha de mainframes System/360, que introduziu a Multiprocessamento como um recurso central. O OS/360 foi projetado para suportar uma ampla gama de aplicações, desde processamento de dados até computação científica, e estabeleceu padrões que influenciaram profundamente o desenvolvimento de sistemas operacionais subsequentes.
 
 >**Spooling** vem do inglês Simultaneous Peripheral Operations On-Line e refere-se ao processo de gerenciamento de dados para operações de entrada e saída (E/S). Ele permite que dispositivos periféricos, como impressoras, operem de forma eficiente, armazenando temporariamente os dados em uma área de *buffer*, uma área de memória temporária ou fila, sem interromper o processamento principal da CPU.
 >
@@ -203,11 +203,11 @@ Novamente: o poetas mortos da língua portuguesa perdoai este pobre autor pelos 
 
 [^1]:O pobre autor começou sua vida profissional em um velho mainframe IBM 360/30, com o OS/360 rodando Cobol, PL/1 e RPG. O sistema era tão antigo que o manual de operação era um livro de papel, com mais de 1000 páginas, e o computador tinha apenas 32 KB de memória. Era o final dos anos 1970 poucos meses antes deste 360/30 ser descomissionado e substituído por um IBM 370/10 que, usando memória virtual chegava a 16 MBytes de memória. Imagine!
 
-A IBM não criou o termo sistema operacional, mas foi fundamental em sua popularização. O termo já existia na comunidade de computação antes do lançamento do OS/360 pela IBM em 1964. Por exemplo, sistemas como o [GM-NAA I/O](https://en.wikipedia.org/wiki/GM-NAA_I/O), desenvolvido em 1956, e o [CTSS](https://pt.wikipedia.org/wiki/Compatible_Time-Sharing_System), descrito em 1962, já eram chamados de sistemas operacionais em contextos acadêmicos e de pesquisa. No entanto, o OS/360, marcou um ponto de virada na história da computação. Deste ponto em diante, podemos usar o termo **sistema operacional** para nos referirmos a um software que gerencia recursos de hardware e fornece serviços essenciais para programas de aplicação. A multiprogramação e o spooling foram marcos importantes na evolução dos sistemas operacionais, estabelecendo as bases para a abstração de hardware e a automação do gerenciamento de recursos.
+A IBM não criou o termo sistema operacional, mas foi fundamental em sua popularização. O termo já existia na comunidade de computação antes do lançamento do OS/360 pela IBM em 1964. Por exemplo, sistemas como o [GM-NAA I/O](https://en.wikipedia.org/wiki/GM-NAA_I/O), desenvolvido em 1956, e o [CTSS](https://pt.wikipedia.org/wiki/Compatible_Time-Sharing_System), descrito em 1962, já eram chamados de sistemas operacionais em contextos acadêmicos e de pesquisa. No entanto, o OS/360, marcou um ponto de virada na história da computação. Deste ponto em diante, podemos usar o termo **sistema operacional** para nos referirmos a um software que gerencia recursos de hardware e fornece serviços essenciais para programas de aplicação. A Multiprocessamento e o spooling foram marcos importantes na evolução dos sistemas operacionais, estabelecendo as bases para a abstração de hardware e a automação do gerenciamento de recursos.
 
 ### Era da Interatividade: Sistemas de Tempo Compartilhado (final dos 1960s - 1980s)
 
-Os sistemas de tempo compartilhado, do inglês time-sharing, representaram uma evolução natural da multiprogramação, com um foco especial na experiência do usuário além eficiência no uso da CPU. Esses sistemas revolucionaram a computação ao dividir o tempo da CPU entre múltiplos usuários interativos simultaneamente, criando um ambiente no qual cada usuário tinha a impressão de estar utilizando um computador dedicado exclusivamente a ele.
+Os sistemas de tempo compartilhado, do inglês time-sharing, representaram uma evolução natural da Multiprocessamento, com um foco especial na experiência do usuário além eficiência no uso da CPU. Esses sistemas revolucionaram a computação ao dividir o tempo da CPU entre múltiplos usuários interativos simultaneamente, criando um ambiente no qual cada usuário tinha a impressão de estar utilizando um computador dedicado exclusivamente a ele.
 
 A abordagem de time-sharing marcou uma mudança significativa de paradigma nos sistemas computacionais. Essa transição foi possível graças à implementação do time slicing. Nome em inglês para uma técnica na qual cada processo recebe uma pequena fatia de tempo da CPU, que podemos chamar de quantum para aproveitar os tempos atuais e o conceito da física, antes de ser temporariamente suspenso para permitir que outros processos sejam executados. Essa abordagem cria a ilusão de que cada usuário tem acesso exclusivo aos recursos do computador, melhorando significativamente a interatividade e a experiência geral do usuário.
 
@@ -1903,7 +1903,7 @@ Sistema operacional de linha de comando que dominou computadores pessoais compat
 **MULTICS (Multiplexed Information and Computing Service)**
 Sistema de tempo compartilhado avançado que introduziu conceitos como memória virtual e sistema de arquivos hierárquico, e que influenciou o UNIX.
 
-**Multiprogramação**
+**Multiprocessamento**
 Técnica que permite que múltiplos programas residam na memória simultaneamente, melhorando a utilização da CPU.
 
 **Multitasking**
@@ -1920,7 +1920,7 @@ Era atual da computação quântica, caracterizada por processadores com um núm
 ### O
 
 **OS/360**
-Família de sistemas operacionais da IBM para seus mainframes System/360, que estabeleceu muitos conceitos fundamentais de multiprogramação.
+Família de sistemas operacionais da IBM para seus mainframes System/360, que estabeleceu muitos conceitos fundamentais de Multiprocessamento.
 
 ### P
 
