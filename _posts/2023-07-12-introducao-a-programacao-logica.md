@@ -23,7 +23,7 @@ keywords:
    - Programação Lógica
 draft: true
 toc: true
-lastmod: 2025-06-03T17:26:21.316Z
+lastmod: 2025-07-06T18:56:19.384Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -3155,7 +3155,7 @@ Aqui estão cinco quebra-cabeças clássicos juntamente com suas soluções usan
 **Objetivo**: Aplicar os princípios da lógica proposicional e de predicados para analisar um conjunto complexo de informações, identificar contradições, realizar deduções formais e solucionar um enigma.
 
 **Descrição**:
-A esforçada leitora foi convidada a investigar um intrigante mistério ocorrido na antiga Mansão Hollow. O renomado inventor, Sir Henry Clithering, desapareceu em circunstâncias suspeitas, deixando para trás uma série de pistas, depoimentos de funcionários e familiares, e alguns bilhetes enigmáticos. A polícia local está confusa com a quantidade de informações, algumas aparentemente contraditórias. Você deve montar uma equipe de detetives e superar o famoso detetive Hercule Poirot. Para isso deverá:
+A esforçada leitora foi convidada a investigar um intrigante mistério ocorrido na antiga Mansão Hollow. O renomado inventor, Sir Arthur Blackwood, desapareceu em circunstâncias suspeitas, deixando para trás uma série de pistas, depoimentos de funcionários e familiares, e alguns bilhetes enigmáticos. A polícia local está confusa com a quantidade de informações, algumas aparentemente contraditórias. Você deve montar uma equipe de detetives e superar o famoso detetive Hercule Poirot. Para isso deverá:
 
 1. Analisar cuidadosamente todo o material fornecido (descrições de personagens, mapa da mansão, horários, depoimentos, bilhetes).
 
@@ -3167,17 +3167,17 @@ A esforçada leitora foi convidada a investigar um intrigante mistério ocorrido
 
 A seguir a descrição do caso, o mapa da mansão e os depoimentos dos envolvidos.
 
-#### **O Mistério da Mansão Hollow: O Desaparecimento de Sir Henry Clithering**
+#### **O Mistério da Mansão Hollow: O Desaparecimento de Sir Arthur Blackwood**
 
 **Data do Incidente**: Segunda-feira, 12 de Maio de 2025
 **Local**: Mansão Hollow, uma propriedade rural isolada.
-**Vítima (Desaparecido)**: Sir Henry Clithering, renomado inventor, 58 anos.
+**Vítima (Desaparecido)**: Sir Arthur Blackwood, renomado inventor, 58 anos.
 
 **1. Descrições dos Personagens**:
 
-- **Sir Henry Clithering**: O inventor desaparecido. Gênio excêntrico e recluso, conhecido por sua mente brilhante e comportamento imprevisível. Estava trabalhando febrilmente em um novo projeto secreto chamado "Quimera".
+- **Sir Arthur Blackwood**: O inventor desaparecido. Gênio excêntrico e recluso, conhecido por sua mente brilhante e comportamento imprevisível. Estava trabalhando febrilmente em um novo projeto secreto chamado "Quimera".
 
-- **Sra. Eleanor Clithering (50 anos)**: Esposa de Arthur. Uma mulher elegante e ambiciosa, visivelmente preocupada com a reputação e fortuna da família. Ela teme que o comportamento errático de Arthur possa arruiná-los.
+- **Sra. Eleanor Blackwood (50 anos)**: Esposa de Arthur. Uma mulher elegante e ambiciosa, visivelmente preocupada com a reputação e fortuna da família. Ela teme que o comportamento errático de Arthur possa arruiná-los.
 
 - **Dr. Alistair Finch (45 anos)**: Um cientista brilhante, antigo protegido de Arthur, mas que se tornou seu principal rival acadêmico e comercial. Chegou à mansão no dia do desaparecimento, alegando buscar uma reconciliação e possível colaboração.
 
@@ -3187,8 +3187,11 @@ A seguir a descrição do caso, o mapa da mansão e os depoimentos dos envolvido
 
 - **Sra. Beatrice Croft (62 anos)**: Esposa de Reggie, a cozinheira da mansão. Conhece todos os cantos da casa e os hábitos de seus ocupantes. É prática e não se deixa levar por fantasias.
 
-**2. Mapa da Mansão Hollow (Descrição Textual)**:
+Nossos personagens podem ser vistos na imagem abaixo:
 
+![](/assets/images/personagens.webp){:class="lazyload"}
+
+**2. Mapa da Mansão Hollow (Descrição Textual)**:
 A Mansão Hollow é uma construção vitoriana de dois andares, com um vasto terreno.
 
 - **Térreo**:

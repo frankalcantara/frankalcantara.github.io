@@ -1542,7 +1542,7 @@ _Figura 26: Diagrama dos algoritmos de escalonamento comuns em sistemas operacio
 >
 > Esta degradação reflete o custo crescente de coordenação entre múltiplas tarefas periódicas.
 
-## Referências Bibliográficas
+## Referências
 
 ACM. **The development of the C programming language**. Disponível em: https://dl.acm.org/doi/10.1145/234286.1057834. Acesso em: 7 jun. 2025.
 
