@@ -23,7 +23,7 @@ keywords:
    - Programação Lógica
 draft: true
 toc: true
-lastmod: 2025-07-06T18:56:19.384Z
+lastmod: 2025-07-06T19:17:56.440Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -3227,6 +3227,10 @@ A Mansão Hollow é uma construção vitoriana de dois andares, com um vasto ter
   - **Jardim Lateral**: Menos formal, com um gazebo antigo coberto de hera e canteiros de rosas.
   
   - **Jardim dos Fundos**: Uma área mais extensa e um pouco mais selvagem, com árvores antigas, uma pequena horta cultivada pela Sra. Croft e, nos limites da propriedade, uma velha estufa de vidro abandonada e parcialmente coberta por vegetação.
+
+Alguns ambientes da Mansão Hollow podem ser vistos na imagem abaixo:
+
+![](/images/ambientes.webp)
 
 **3. Linha do Tempo (Segunda-feira, 12 de Maio de 2025)**:
 
