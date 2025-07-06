@@ -23,7 +23,7 @@ keywords:
    - Programação Lógica
 draft: true
 toc: true
-lastmod: 2025-07-06T19:27:07.893Z
+lastmod: 2025-07-06T20:17:55.385Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação onde não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -3152,7 +3152,7 @@ Aqui estão cinco quebra-cabeças clássicos juntamente com suas soluções usan
 
 ### O Mistério da Mansão Hollow – Um Desafio para Detetives Lógicos
 
-![](/images/mansaohollow.webp)
+![](/assets/images/mansaohollow.webp)
 
 **Objetivo**: Aplicar os princípios da lógica proposicional e de predicados para analisar um conjunto complexo de informações, identificar contradições, realizar deduções formais e solucionar um enigma.
 
@@ -3232,9 +3232,9 @@ A Mansão Hollow é uma construção vitoriana de dois andares, com um vasto ter
 
 Alguns ambientes da Mansão Hollow podem ser vistos na imagem abaixo:
 
-![](/images/ambientes.webp)
+![](/assets/images/ambientes.webp)
 
-**3. Linha do Tempo (Segunda-feira, 12 de Maio de 2025)**:
+**3. Linha do Tempo (Segunda-feira, 18 de Maio de 1915)**:
 
 - **08:00**: Café da manhã servido na sala de jantar. Sra. Blackwood preside. Sr. Blackwood não comparece, o que, segundo Sra. Blackwood, era comum quando ele estava imerso em trabalho.
 
