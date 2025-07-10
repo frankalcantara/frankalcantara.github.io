@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>🚨 Teste Rápido</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f0f0f0; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .warning { background: #fff3cd; color: #856404; border: 1px solid #ffeaa7; }
+        button { padding: 10px 15px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>🚨 Teste Rápido - Fluxograma</h1>
+    
+    <button onclick="testarBasico()">1. Teste Básico</button>
+    <button onclick="testarParser()">2. Teste Parser</button>
+    <button onclick="testarCampos()">3. Teste Campos</button>
+    
+    <div id="resultados"></div>
+    
+    <div id="campos-teste" style="border: 1px solid #ccc; padding: 10px; margin: 10px 0; min-height: 50px;">
+        <h3>Campos de Teste:</h3>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <script src="unified-parser.js"></script>
+    <script src="step-by-step-executor.js"></script>
+    
+    <script>
+        function log(message, type = 'success') {
+            const div = document.createElement('div');
+            div.className = `status ${type}`;
+            div.textContent = message;
+            document.getElementById('resultados').appendChild(div);
+            console.log(message);
+        }
+        
+        function testarBasico() {
+            log('🧪 Iniciando teste básico...', 'warning');
+            
+            // Teste 1: Mermaid carregado?
+            if (typeof mermaid !== 'undefined') {
+                log('✅ Mermaid.js carregado');
+            } else {
+                log('❌ Mermaid.js não carregado', 'error');
+            }
+            
+            // Teste 2: Parser carregado?
+            if (typeof UnifiedFlowchartParser !== 'undefined') {
+                log('✅ UnifiedFlowchartParser carregado');
+            } else {
+                log('❌ UnifiedFlowchartParser não carregado', 'error');
+            }
+            
+            // Teste 3: Executor carregado?
+            if (typeof StepByStepExecutor !== 'undefined') {
+                log('✅ StepByStepExecutor carregado');
+            } else {
+                log('❌ StepByStepExecutor não carregado', 'error');
+            }
+            
+            // Teste 4: Função global carregada?
+            if (typeof extractVariableName !== 'undefined') {
+                log('✅ extractVariableName disponível');
+            } else {
+                log('❌ extractVariableName não disponível', 'error');
+            }
+        }
+        
+        function testarParser() {
+            log('🧪 Testando parser...', 'warning');
+            
+            try {
+                const parser = new UnifiedFlowchartParser();
+                const codigo = `flowchart TD
+    A[Início] --> B[Ler idade]
+    B --> C{idade >= 18?}
+    C -->|Sim| D[Pode votar]
+    C -->|Não| E[Não pode votar]
+    D --> F[Fim]
+    E --> F`;
+                
+                const resultado = parser.parse(codigo);
+                log(`✅ Parser funcionou: ${resultado.nodes.length} nós, ${resultado.variables.length} variáveis`);
+                
+                if (resultado.variables.length > 0) {
+                    log(`📝 Variáveis: ${resultado.variables.join(', ')}`);
+                }
+                
+                // Salvar para próximo teste
+                window.ultimoResultado = resultado;
+                
+            } catch (error) {
+                log(`❌ Erro no parser: ${error.message}`, 'error');
+            }
+        }
+        
+        function testarCampos() {
+            log('🧪 Testando criação de campos...', 'warning');
+            
+            if (!window.ultimoResultado) {
+                log('❌ Execute o teste do parser primeiro', 'error');
+                return;
+            }
+            
+            try {
+                const parseResult = window.ultimoResultado;
+                const inputNodes = parseResult.nodes.filter(node => node.type === 'input');
+                const container = document.getElementById('campos-teste');
+                
+                // Limpar container
+                container.innerHTML = '<h3>Campos de Teste:</h3>';
+                
+                if (inputNodes.length === 0) {
+                    container.innerHTML += '<p>Nenhuma variável de entrada necessária</p>';
+                    log('ℹ️ Nenhum nó de entrada encontrado', 'warning');
+                    return;
+                }
+                
+                inputNodes.forEach(node => {
+                    const varName = extractVariableName(node.text);
+                    log(`⚙️ Criando campo: ${varName}`);
+                    
+                    const inputDiv = document.createElement('div');
+                    inputDiv.style.margin = '10px 0';
+                    
+                    inputDiv.innerHTML = `
+                        <label>${node.text}:</label><br>
+                        <input type="text" 
+                               data-variable="${varName}" 
+                               placeholder="Digite o valor"
+                               style="padding: 5px; margin: 5px 0; border: 1px solid #ccc;">
+                    `;
+                    
+                    container.appendChild(inputDiv);
+                });
+                
+                log(`✅ ${inputNodes.length} campos criados com sucesso!`);
+                
+            } catch (error) {
+                log(`❌ Erro ao criar campos: ${error.message}`, 'error');
+            }
+        }
+        
+        // Auto-executar teste básico
+        window.onload = function() {
+            setTimeout(testarBasico, 500);
+        };
+    </script>
+</body>
+</html>

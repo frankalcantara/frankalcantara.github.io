@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>🔧 Debug Final</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f0f0f0; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; }
+        .test-area { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        textarea { width: 100%; height: 150px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        .diagram { border: 1px solid #ddd; padding: 10px; margin: 10px 0; min-height: 200px; background: #fafafa; }
+        button { padding: 10px 15px; margin: 5px; cursor: pointer; border: none; border-radius: 3px; }
+        .btn-primary { background: #007bff; color: white; }
+        .logs { background: #000; color: #0f0; padding: 10px; height: 150px; overflow-y: auto; font-family: monospace; font-size: 12px; }
+        .status { padding: 5px; margin: 5px 0; border-radius: 3px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .warning { background: #fff3cd; color: #856404; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Debug Final - Fluxograma</h1>
+        
+        <div class="test-area">
+            <h2>1. Status dos Componentes</h2>
+            <div id="status-componentes"></div>
+            <button class="btn-primary" onclick="verificarComponentes()">Verificar Componentes</button>
+        </div>
+        
+        <div class="test-area">
+            <h2>2. Editor e Renderização</h2>
+            <textarea id="mermaid-editor" placeholder="O código será carregado automaticamente..."></textarea>
+            <button class="btn-primary" onclick="renderizarManual()">Renderizar Manualmente</button>
+            <div id="mermaid-diagram" class="diagram"></div>
+            <div id="error-display" style="display: none; color: red; padding: 10px; background: #ffe6e6;"></div>
+        </div>
+        
+        <div class="test-area">
+            <h2>3. Logs de Debug</h2>
+            <div id="debug-logs" class="logs"></div>
+            <button class="btn-primary" onclick="limparLogs()">Limpar Logs</button>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <script src="unified-parser.js"></script>
+    <script src="step-by-step-executor.js"></script>
+    
+    <script>
+        // Configurar Mermaid igual ao app principal
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+        
+        // Elementos
+        const editor = document.getElementById('mermaid-editor');
+        const diagramContainer = document.getElementById('mermaid-diagram');
+        const errorDisplay = document.getElementById('error-display');
+        
+        // Variáveis
+        let parser = null;
+        let parseResult = null;
+        
+        function debugLog(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = `[${timestamp}] ${message}`;
+            
+            const logsContainer = document.getElementById('debug-logs');
+            const color = type === 'error' ? '#f00' : type === 'success' ? '#0f0' : type === 'warning' ? '#ff0' : '#0f0';
+            logsContainer.innerHTML += `<div style="color: ${color};">${logEntry}</div>`;
+            logsContainer.scrollTop = logsContainer.scrollHeight;
+            
+            console.log(logEntry);
+        }
+        
+        function statusLog(message, type = 'success') {
+            const container = document.getElementById('status-componentes');
+            const div = document.createElement('div');
+            div.className = `status ${type}`;
+            div.textContent = message;
+            container.appendChild(div);
+        }
+        
+        function limparLogs() {
+            document.getElementById('debug-logs').innerHTML = '';
+            document.getElementById('status-componentes').innerHTML = '';
+        }
+        
+        function verificarComponentes() {
+            document.getElementById('status-componentes').innerHTML = '';
+            
+            // Verificar Mermaid
+            if (typeof mermaid !== 'undefined') {
+                statusLog('✅ Mermaid.js carregado', 'success');
+                debugLog('Mermaid.js disponível', 'success');
+            } else {
+                statusLog('❌ Mermaid.js não carregado', 'error');
+                debugLog('Mermaid.js não disponível', 'error');
+            }
+            
+            // Verificar Parser
+            if (typeof UnifiedFlowchartParser !== 'undefined') {
+                statusLog('✅ UnifiedFlowchartParser carregado', 'success');
+                debugLog('Parser disponível', 'success');
+                
+                try {
+                    parser = new UnifiedFlowchartParser();
+                    statusLog('✅ Parser instanciado', 'success');
+                    debugLog('Parser instanciado com sucesso', 'success');
+                } catch (error) {
+                    statusLog('❌ Erro ao instanciar parser', 'error');
+                    debugLog(`Erro ao instanciar parser: ${error.message}`, 'error');
+                }
+            } else {
+                statusLog('❌ UnifiedFlowchartParser não carregado', 'error');
+                debugLog('Parser não disponível', 'error');
+            }
+            
+            // Verificar função global
+            if (typeof extractVariableName !== 'undefined') {
+                statusLog('✅ extractVariableName disponível', 'success');
+                debugLog('Função extractVariableName disponível', 'success');
+            } else {
+                statusLog('❌ extractVariableName não disponível', 'error');
+                debugLog('Função extractVariableName não disponível', 'error');
+            }
+            
+            // Verificar elementos DOM
+            if (editor && diagramContainer) {
+                statusLog('✅ Elementos DOM encontrados', 'success');
+                debugLog('Elementos DOM disponíveis', 'success');
+            } else {
+                statusLog('❌ Elementos DOM não encontrados', 'error');
+                debugLog('Elementos DOM não disponíveis', 'error');
+            }
+        }
+        
+        async function renderizarManual() {
+            debugLog('Iniciando renderização manual...', 'warning');
+            
+            if (!editor || !diagramContainer) {
+                debugLog('Elementos DOM não disponíveis', 'error');
+                return;
+            }
+            
+            const code = editor.value.trim();
+            debugLog(`Código para renderizar: ${code.length} caracteres`, 'info');
+            
+            if (!code) {
+                debugLog('Código vazio', 'warning');
+                diagramContainer.innerHTML = '<div style="text-align: center; color: #666; padding: 50px;">Código vazio</div>';
+                return;
+            }
+            
+            try {
+                debugLog('Limpando container...', 'info');
+                diagramContainer.innerHTML = '';
+                
+                debugLog('Gerando ID único...', 'info');
+                const diagramId = 'diagram-' + Date.now();
+                
+                debugLog('Chamando mermaid.render()...', 'info');
+                const { svg } = await mermaid.render(diagramId, code);
+                
+                debugLog('SVG gerado com sucesso', 'success');
+                diagramContainer.innerHTML = svg;
+                
+                debugLog('Diagrama renderizado com sucesso!', 'success');
+                hideError();
+                
+                // Testar parser
+                if (parser) {
+                    try {
+                        debugLog('Testando parser...', 'info');
+                        parseResult = parser.parse(code);
+                        debugLog(`Parser funcionou: ${parseResult.nodes.length} nós`, 'success');
+                    } catch (parseError) {
+                        debugLog(`Aviso no parser: ${parseError.message}`, 'warning');
+                    }
+                }
+                
+            } catch (error) {
+                debugLog(`Erro na renderização: ${error.message}`, 'error');
+                showError('Erro: ' + error.message);
+            }
+        }
+        
+        function showError(message) {
+            if (errorDisplay) {
+                errorDisplay.textContent = message;
+                errorDisplay.style.display = 'block';
+                diagramContainer.style.display = 'none';
+            }
+        }
+        
+        function hideError() {
+            if (errorDisplay) {
+                errorDisplay.style.display = 'none';
+                diagramContainer.style.display = 'block';
+            }
+        }
+        
+        // Carregar exemplo automaticamente
+        function carregarExemplo() {
+            debugLog('Carregando exemplo inicial...', 'info');
+            
+            const exampleCode = `flowchart TD
+    A[Início] --> B[Ler idade]
+    B --> C{Maior que 18?}
+    C -->|Sim| D[Pode votar]
+    C -->|Não| E[Não pode votar]
+    D --> F[Fim]
+    E --> F`;
+            
+            if (editor) {
+                editor.value = exampleCode;
+                debugLog('Exemplo carregado no editor', 'success');
+                
+                setTimeout(() => {
+                    debugLog('Renderizando exemplo automaticamente...', 'info');
+                    renderizarManual();
+                }, 500);
+            } else {
+                debugLog('Editor não disponível', 'error');
+            }
+        }
+        
+        // Inicialização
+        window.onload = function() {
+            debugLog('=== DEBUG FINAL INICIADO ===', 'warning');
+            
+            setTimeout(() => {
+                verificarComponentes();
+                setTimeout(carregarExemplo, 1000);
+            }, 500);
+        };
+    </script>
+</body>
+</html>

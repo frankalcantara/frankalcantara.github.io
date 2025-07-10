@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>🧪 Teste Mermaid Simples</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test { margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        button { padding: 10px 15px; margin: 5px; cursor: pointer; }
+        .diagram { border: 1px solid #ddd; padding: 10px; margin: 10px 0; min-height: 200px; }
+        textarea { width: 100%; height: 100px; margin: 10px 0; }
+        .success { color: green; font-weight: bold; }
+        .error { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Teste Mermaid Simples</h1>
+    
+    <div class="test">
+        <h2>1. Teste Básico do Mermaid</h2>
+        <button onclick="testeBasico()">Testar Exemplo Simples</button>
+        <div id="diagram-basico" class="diagram"></div>
+        <div id="result-basico"></div>
+    </div>
+    
+    <div class="test">
+        <h2>2. Teste com Editor</h2>
+        <textarea id="codigo-teste" placeholder="Digite código Mermaid aqui...">flowchart TD
+    A[Início] --> B[Ler idade]
+    B --> C{Maior de idade?}
+    C --> D[Fim]</textarea>
+        <button onclick="testeEditor()">Renderizar</button>
+        <div id="diagram-editor" class="diagram"></div>
+        <div id="result-editor"></div>
+    </div>
+    
+    <div class="test">
+        <h2>3. Teste de Sintaxes</h2>
+        <button onclick="testeSintaxe1()">Teste 1: Simples</button>
+        <button onclick="testeSintaxe2()">Teste 2: Com Decisão</button>
+        <button onclick="testeSintaxe3()">Teste 3: Completo</button>
+        <div id="diagram-sintaxe" class="diagram"></div>
+        <div id="result-sintaxe"></div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <script>
+        // Configurar Mermaid
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'default'
+        });
+        
+        function log(containerId, message, type = 'info') {
+            const container = document.getElementById(containerId);
+            const className = type === 'error' ? 'error' : type === 'success' ? 'success' : '';
+            container.innerHTML += `<div class="${className}">${message}</div>`;
+            console.log(message);
+        }
+        
+        async function renderMermaid(diagramId, code) {
+            try {
+                const container = document.getElementById(diagramId);
+                container.innerHTML = '';
+                
+                const uniqueId = 'mermaid-' + Date.now();
+                const { svg } = await mermaid.render(uniqueId, code);
+                container.innerHTML = svg;
+                
+                return true;
+            } catch (error) {
+                throw error;
+            }
+        }
+        
+        async function testeBasico() {
+            const codigo = `flowchart TD
+    A[Início] --> B[Fim]`;
+            
+            try {
+                await renderMermaid('diagram-basico', codigo);
+                log('result-basico', '✅ Teste básico funcionou!', 'success');
+            } catch (error) {
+                log('result-basico', `❌ Erro: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testeEditor() {
+            const codigo = document.getElementById('codigo-teste').value;
+            
+            try {
+                await renderMermaid('diagram-editor', codigo);
+                log('result-editor', '✅ Renderização funcionou!', 'success');
+            } catch (error) {
+                log('result-editor', `❌ Erro: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testeSintaxe1() {
+            document.getElementById('result-sintaxe').innerHTML = '';
+            
+            const codigo = `flowchart TD
+    A[Início] --> B[Processo] --> C[Fim]`;
+            
+            try {
+                await renderMermaid('diagram-sintaxe', codigo);
+                log('result-sintaxe', '✅ Sintaxe 1: OK', 'success');
+            } catch (error) {
+                log('result-sintaxe', `❌ Sintaxe 1: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testeSintaxe2() {
+            document.getElementById('result-sintaxe').innerHTML = '';
+            
+            const codigo = `flowchart TD
+    A[Início] --> B{Decisão}
+    B -->|Sim| C[Sim]
+    B -->|Não| D[Não]
+    C --> E[Fim]
+    D --> E`;
+            
+            try {
+                await renderMermaid('diagram-sintaxe', codigo);
+                log('result-sintaxe', '✅ Sintaxe 2: OK', 'success');
+            } catch (error) {
+                log('result-sintaxe', `❌ Sintaxe 2: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testeSintaxe3() {
+            document.getElementById('result-sintaxe').innerHTML = '';
+            
+            const codigo = `flowchart TD
+    A[Início] --> B[Ler idade]
+    B --> C{Maior de idade?}
+    C -->|Sim| D[Pode votar]
+    C -->|Não| E[Não pode votar]
+    D --> F[Fim]
+    E --> F`;
+            
+            try {
+                await renderMermaid('diagram-sintaxe', codigo);
+                log('result-sintaxe', '✅ Sintaxe 3: OK', 'success');
+            } catch (error) {
+                log('result-sintaxe', `❌ Sintaxe 3: ${error.message}`, 'error');
+            }
+        }
+        
+        // Auto-executar teste básico
+        window.onload = function() {
+            setTimeout(testeBasico, 500);
+        };
+    </script>
+</body>
+</html>

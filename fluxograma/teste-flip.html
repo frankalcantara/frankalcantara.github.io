@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Flip Console</title>
+    <style>
+        .console-header {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .btn-flip {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            font-size: 1.1rem;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-flip:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        #console-output {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 20px;
+            height: 200px;
+            font-family: monospace;
+        }
+        
+        .syntax-content {
+            background: white;
+            color: #1f2937;
+            padding: 20px;
+            height: 200px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="console-header">
+        <h3 id="console-title">Console de Saída</h3>
+        <button id="flip-console" class="btn-flip" title="Alternar entre console e sintaxe">
+            📖
+        </button>
+    </div>
+    
+    <div id="console-output">
+        Console de teste funcionando...
+    </div>
+    
+    <div id="syntax-help" class="syntax-content" style="display: none;">
+        <h4>🔤 Sintaxe para Criação de Fluxogramas</h4>
+        <p>Conteúdo da ajuda de sintaxe aqui...</p>
+    </div>
+
+    <script>
+        // Variáveis globais
+        let isShowingSyntax = false;
+        let flipConsoleBtn = document.getElementById('flip-console');
+        let consoleTitle = document.getElementById('console-title');
+        let consoleOutput = document.getElementById('console-output');
+        let syntaxHelp = document.getElementById('syntax-help');
+
+        // Função de toggle
+        function toggleConsoleView() {
+            console.log('Função toggleConsoleView chamada!');
+            
+            if (!flipConsoleBtn || !consoleTitle || !consoleOutput || !syntaxHelp) {
+                console.error('❌ Elementos do console flip não encontrados');
+                console.log('flipConsoleBtn:', flipConsoleBtn);
+                console.log('consoleTitle:', consoleTitle);
+                console.log('consoleOutput:', consoleOutput);
+                console.log('syntaxHelp:', syntaxHelp);
+                return;
+            }
+            
+            isShowingSyntax = !isShowingSyntax;
+            console.log('isShowingSyntax:', isShowingSyntax);
+            
+            if (isShowingSyntax) {
+                // Mostrar sintaxe
+                consoleTitle.textContent = 'Sintaxe para Criação de Fluxogramas';
+                flipConsoleBtn.textContent = '💼';
+                flipConsoleBtn.title = 'Voltar para o console de saída';
+                
+                consoleOutput.style.display = 'none';
+                syntaxHelp.style.display = 'block';
+                
+                console.log('📖 Alternado para visualização da sintaxe');
+            } else {
+                // Mostrar console
+                consoleTitle.textContent = 'Console de Saída';
+                flipConsoleBtn.textContent = '📖';
+                flipConsoleBtn.title = 'Alternar entre console e sintaxe';
+                
+                consoleOutput.style.display = 'block';
+                syntaxHelp.style.display = 'none';
+                
+                console.log('💼 Alternado para visualização do console');
+            }
+        }
+
+        // Adicionar event listener
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM carregado');
+            
+            if (flipConsoleBtn) {
+                flipConsoleBtn.addEventListener('click', toggleConsoleView);
+                console.log('Event listener adicionado ao botão flip');
+            } else {
+                console.error('Botão flip não encontrado!');
+            }
+        });
+    </script>
+</body>
+</html>

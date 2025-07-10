@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>🔧 Debug - Fluxograma Interativo</title>
+    <style>
+        body { font-family: monospace; margin: 20px; background: #f5f5f5; }
+        .debug-section { background: white; margin: 15px 0; padding: 15px; border-radius: 5px; border-left: 4px solid #007acc; }
+        .success { color: #28a745; font-weight: bold; }
+        .error { color: #dc3545; font-weight: bold; }
+        .warning { color: #ffc107; font-weight: bold; }
+        .info { color: #17a2b8; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 3px; overflow-x: auto; }
+        button { padding: 8px 15px; margin: 5px; cursor: pointer; border: none; border-radius: 3px; }
+        .btn-test { background: #007bff; color: white; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Debug do Fluxograma Interativo</h1>
+    
+    <div class="debug-section">
+        <h2>1. Verificação de Dependências</h2>
+        <button class="btn-test" onclick="checkDependencies()">Verificar Dependências</button>
+        <div id="dependencies-result"></div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>2. Verificação de Elementos DOM</h2>
+        <button class="btn-test" onclick="checkDOMElements()">Verificar DOM</button>
+        <div id="dom-result"></div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>3. Teste de Parser</h2>
+        <button class="btn-test" onclick="testParser()">Testar Parser</button>
+        <div id="parser-result"></div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>4. Teste de Campos de Entrada</h2>
+        <button class="btn-test" onclick="testInputCreation()">Testar Criação de Campos</button>
+        <div id="input-creation-result"></div>
+        <div id="test-variable-inputs" style="border: 1px solid #ccc; padding: 10px; margin: 10px 0; min-height: 50px;"></div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>5. Console de Logs</h2>
+        <button class="btn-test" onclick="clearLogs()">Limpar Logs</button>
+        <pre id="debug-console" style="height: 200px; overflow-y: auto;"></pre>
+    </div>
+    
+    <script>
+        // Função de log personalizada
+        function debugLog(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = `[${timestamp}] ${message}`;
+            
+            const console = document.getElementById('debug-console');
+            const className = type === 'error' ? 'error' : type === 'warning' ? 'warning' : type === 'success' ? 'success' : 'info';
+            
+            console.innerHTML += `<span class="${className}">${logEntry}</span>\n`;
+            console.scrollTop = console.scrollHeight;
+            
+            // Log normal também
+            window.console.log(logEntry);
+        }
+        
+        function clearLogs() {
+            document.getElementById('debug-console').innerHTML = '';
+        }
+        
+        function checkDependencies() {
+            const result = document.getElementById('dependencies-result');
+            let html = '';
+            
+            // Verificar Mermaid
+            if (typeof mermaid !== 'undefined') {
+                html += '<div class="success">✅ Mermaid.js carregado</div>';
+                debugLog('Mermaid.js disponível', 'success');
+            } else {
+                html += '<div class="error">❌ Mermaid.js não encontrado</div>';
+                debugLog('Mermaid.js não disponível', 'error');
+            }
+            
+            // Verificar Scripts locais
+            const scripts = ['unified-parser.js', 'step-by-step-executor.js', 'script.js'];
+            scripts.forEach(script => {
+                const scriptElement = document.querySelector(`script[src="${script}"]`);
+                if (scriptElement) {
+                    html += `<div class="success">✅ ${script} carregado</div>`;
+                    debugLog(`Script ${script} carregado`, 'success');
+                } else {
+                    html += `<div class="error">❌ ${script} não encontrado</div>';
+                    debugLog(`Script ${script} não encontrado`, 'error');
+                }
+            });
+            
+            result.innerHTML = html;
+        }
+        
+        function checkDOMElements() {
+            const result = document.getElementById('dom-result');
+            let html = '';
+            
+            const requiredElements = [
+                'mermaid-editor', 'mermaid-diagram', 'error-display',
+                'execute-all', 'execute-step', 'reset',
+                'next-step', 'prev-step', 'step-controls',
+                'step-counter', 'input-variables', 'console-output',
+                'current-step-info'
+            ];
+            
+            let foundCount = 0;
+            
+            requiredElements.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    html += `<div class="success">✅ #${id}</div>`;
+                    foundCount++;
+                    debugLog(`Elemento #${id} encontrado`, 'success');
+                } else {
+                    html += `<div class="error">❌ #${id}</div>`;
+                    debugLog(`Elemento #${id} não encontrado`, 'error');
+                }
+            });
+            
+            html += `<br><strong>Total: ${foundCount}/${requiredElements.length} elementos encontrados</strong>`;
+            result.innerHTML = html;
+        }
+        
+        function testParser() {
+            const result = document.getElementById('parser-result');
+            
+            try {
+                // Verificar se classe existe
+                if (typeof UnifiedFlowchartParser === 'undefined') {
+                    result.innerHTML = '<div class="error">❌ UnifiedFlowchartParser não disponível</div>';
+                    debugLog('UnifiedFlowchartParser não disponível', 'error');
+                    return;
+                }
+                
+                const parser = new UnifiedFlowchartParser();
+                debugLog('Parser instanciado com sucesso', 'success');
+                
+                const testCode = `flowchart TD
+    A[Início] --> B[Ler idade]
+    B --> C{idade >= 18?}
+    C -->|Sim| D[Pode votar]
+    C -->|Não| E[Não pode votar]
+    D --> F[Fim]
+    E --> F`;
+                
+                const parseResult = parser.parse(testCode);
+                debugLog(`Parse realizado: ${parseResult.nodes.length} nós`, 'success');
+                
+                let html = '<div class="success">✅ Parser funcionando</div>';
+                html += `<div class="info">📊 Nós: ${parseResult.nodes.length}</div>`;
+                html += `<div class="info">🔗 Conexões: ${parseResult.connections.length}</div>`;
+                html += `<div class="info">📝 Variáveis: ${parseResult.variables.length}</div>`;
+                
+                if (parseResult.variables.length > 0) {
+                    html += '<div class="info">Variáveis encontradas: ' + parseResult.variables.join(', ') + '</div>';
+                }
+                
+                result.innerHTML = html;
+                
+                // Salvar para próximo teste
+                window.lastParseResult = parseResult;
+                
+            } catch (error) {
+                result.innerHTML = `<div class="error">❌ Erro no parser: ${error.message}</div>`;
+                debugLog(`Erro no parser: ${error.message}`, 'error');
+            }
+        }
+        
+        function testInputCreation() {
+            const result = document.getElementById('input-creation-result');
+            const container = document.getElementById('test-variable-inputs');
+            
+            if (!window.lastParseResult) {
+                result.innerHTML = '<div class="warning">⚠️ Execute o teste do parser primeiro</div>';
+                return;
+            }
+            
+            try {
+                const parseResult = window.lastParseResult;
+                const inputNodes = parseResult.nodes.filter(node => node.type === 'input');
+                
+                debugLog(`Criando campos para ${inputNodes.length} nós de entrada`, 'info');
+                
+                container.innerHTML = '';
+                
+                if (inputNodes.length === 0) {
+                    container.innerHTML = '<p>Nenhuma variável de entrada necessária</p>';
+                    result.innerHTML = '<div class="info">ℹ️ Nenhum nó de entrada encontrado</div>';
+                    return;
+                }
+                
+                const title = document.createElement('h4');
+                title.textContent = 'Variáveis de Entrada (Teste)';
+                container.appendChild(title);
+                
+                inputNodes.forEach(node => {
+                    const varName = extractVariableName(node.text);
+                    debugLog(`Criando campo para: ${varName}`, 'info');
+                    
+                    const inputDiv = document.createElement('div');
+                    inputDiv.style.margin = '10px 0';
+                    
+                    inputDiv.innerHTML = `
+                        <label for="test-var-${varName}">${node.text}:</label><br>
+                        <input type="text" 
+                               id="test-var-${varName}" 
+                               data-variable="${varName}" 
+                               placeholder="Digite o valor"
+                               style="padding: 5px; margin: 5px 0; border: 1px solid #ccc; border-radius: 3px;">
+                    `;
+                    
+                    container.appendChild(inputDiv);
+                });
+                
+                result.innerHTML = `<div class="success">✅ ${inputNodes.length} campos criados com sucesso</div>`;
+                debugLog(`${inputNodes.length} campos criados com sucesso`, 'success');
+                
+            } catch (error) {
+                result.innerHTML = `<div class="error">❌ Erro: ${error.message}</div>`;
+                debugLog(`Erro na criação de campos: ${error.message}`, 'error');
+            }
+        }
+        
+        function extractVariableName(text) {
+            const patterns = [
+                /ler\s+(\w+)/i,
+                /digite\s+(\w+)/i,
+                /entrada\s+(\w+)/i,
+                /input\s+(\w+)/i,
+                /(\w+)$/
+            ];
+
+            for (const pattern of patterns) {
+                const match = text.match(pattern);
+                if (match) {
+                    return match[1].toLowerCase();
+                }
+            }
+
+            return 'valor';
+        }
+        
+        // Auto-executar alguns testes
+        window.onload = function() {
+            debugLog('=== DEBUG INICIADO ===', 'info');
+            
+            // Aguardar um pouco para scripts carregarem
+            setTimeout(() => {
+                checkDependencies();
+                setTimeout(() => {
+                    testParser();
+                }, 500);
+            }, 1000);
+        };
+    </script>
+    
+    <!-- Carregar scripts -->
+    <script src="unified-parser.js"></script>
+    <script src="step-by-step-executor.js"></script>
+</body>
+</html>

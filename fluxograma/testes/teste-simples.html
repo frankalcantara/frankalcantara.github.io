@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Teste Simples - Carregamento de Exemplos</title>
+</head>
+<body>
+    <h1>Teste do Carregamento de Exemplos</h1>
+    
+    <div>
+        <label>Selecione um exemplo:</label>
+        <select id="example-selector">
+            <option value="">Selecione...</option>
+            <option value="basico">Básico</option>
+            <option value="decisao">Decisão</option>
+            <option value="calculadora">Calculadora</option>
+        </select>
+    </div>
+    
+    <div style="margin-top: 20px;">
+        <label>Editor:</label>
+        <textarea id="mermaid-editor" style="width: 100%; height: 200px;"></textarea>
+    </div>
+    
+    <div style="margin-top: 20px;">
+        <button onclick="testarManual()">Teste Manual</button>
+    </div>
+    
+    <script>
+        // Exemplos
+        const examples = {
+            basico: {
+                nome: "Básico - Sequência Simples",
+                codigo: `flowchart TD
+    A[Início] --> B[Ler nome]
+    B --> C[Mostrar saudação]
+    C --> D[Fim]`
+            },
+            decisao: {
+                nome: "Intermediário - Com Decisão",
+                codigo: `flowchart TD
+    A[Início] --> B[Ler idade]
+    B --> C{Maior que 18?}
+    C -->|Sim| D[Pode votar]
+    C -->|Não| E[Não pode votar]
+    D --> F[Fim]
+    E --> F`
+            },
+            calculadora: {
+                nome: "Avançado - Calculadora",
+                codigo: `flowchart TD
+    A[Início] --> B[Ler primeiro número]
+    B --> C[Ler segundo número]
+    C --> D[Ler operação]
+    D --> E{Operação é +?}
+    E -->|Sim| F[Somar números]
+    E -->|Não| G{Operação é -?}
+    G -->|Sim| H[Subtrair números]
+    G -->|Não| I[Operação inválida]
+    F --> J[Mostrar resultado]
+    H --> J
+    I --> J
+    J --> K[Fim]`
+            }
+        };
+        
+        function loadExample(exampleKey) {
+            console.log('loadExample chamada com:', exampleKey);
+            const example = examples[exampleKey];
+            const editor = document.getElementById('mermaid-editor');
+            
+            if (example && editor) {
+                console.log('Carregando código no editor...');
+                editor.value = example.codigo;
+                console.log('Código carregado!');
+                alert('Exemplo carregado: ' + example.nome);
+            } else {
+                console.error('Exemplo ou editor não encontrado');
+                alert('Erro: Exemplo ou editor não encontrado');
+            }
+        }
+        
+        function testarManual() {
+            const selector = document.getElementById('example-selector');
+            const valor = selector.value;
+            console.log('Teste manual - valor selecionado:', valor);
+            if (valor) {
+                loadExample(valor);
+            } else {
+                alert('Selecione um exemplo primeiro');
+            }
+        }
+        
+        // Event listener
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM carregado');
+            const selector = document.getElementById('example-selector');
+            const editor = document.getElementById('mermaid-editor');
+            
+            console.log('Selector encontrado:', !!selector);
+            console.log('Editor encontrado:', !!editor);
+            
+            if (selector) {
+                selector.addEventListener('change', function() {
+                    console.log('Change event disparado');
+                    console.log('Valor selecionado:', this.value);
+                    if (this.value) {
+                        loadExample(this.value);
+                    }
+                });
+                console.log('Event listener configurado');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste - Fluxograma Interativo</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        .success { color: green; font-weight: bold; }
+        .error { color: red; font-weight: bold; }
+        .info { color: blue; }
+        button { padding: 10px 15px; margin: 5px; cursor: pointer; }
+        textarea { width: 100%; height: 100px; margin: 10px 0; }
+        .result { background: #f5f5f5; padding: 10px; margin: 10px 0; border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Teste do Fluxograma Interativo</h1>
+    
+    <div class="test-section">
+        <h2>1. Teste do Parser</h2>
+        <textarea id="test-code">flowchart TD
+    A[Início] --> B[Ler idade]
+    B --> C{idade >= 18?}
+    C -->|Sim| D[Pode votar]
+    C -->|Não| E[Não pode votar]
+    D --> F[Fim]
+    E --> F</textarea>
+        <br>
+        <button onclick="testParser()">Testar Parser</button>
+        <div id="parser-result" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>2. Teste de Campos de Entrada</h2>
+        <button onclick="testInputFields()">Criar Campos de Entrada</button>
+        <div id="variable-inputs-test"></div>
+        <div id="input-result" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>3. Teste de Geração de JavaScript</h2>
+        <button onclick="testJavaScriptGeneration()">Gerar JavaScript</button>
+        <div id="js-result" class="result"></div>
+    </div>
+    
+    <script src="unified-parser.js"></script>
+    <script>
+        let parser = new UnifiedFlowchartParser();
+        let parseResult = null;
+        
+        function log(message, type = 'info') {
+            console.log(message);
+            return `<div class="${type}">${message}</div>`;
+        }
+        
+        function testParser() {
+            const code = document.getElementById('test-code').value;
+            const resultDiv = document.getElementById('parser-result');
+            
+            try {
+                parseResult = parser.parse(code);
+                
+                let result = '';
+                result += log('✅ Parser executado com sucesso!', 'success');
+                result += log(`📊 Nós encontrados: ${parseResult.nodes.length}`, 'info');
+                result += log(`🔗 Conexões encontradas: ${parseResult.connections.length}`, 'info');
+                result += log(`📝 Variáveis encontradas: ${parseResult.variables.length}`, 'info');
+                
+                // Mostrar detalhes dos nós
+                result += log('<br><strong>Detalhes dos nós:</strong>', 'info');
+                parseResult.nodes.forEach(node => {
+                    result += log(`- ${node.id}: "${node.text}" (tipo: ${node.type})`, 'info');
+                });
+                
+                // Mostrar variáveis
+                if (parseResult.variables.length > 0) {
+                    result += log('<br><strong>Variáveis:</strong>', 'info');
+                    parseResult.variables.forEach(variable => {
+                        result += log(`- ${variable}`, 'info');
+                    });
+                }
+                
+                resultDiv.innerHTML = result;
+                
+            } catch (error) {
+                resultDiv.innerHTML = log(`❌ Erro no parser: ${error.message}`, 'error');
+            }
+        }
+        
+        function testInputFields() {
+            const resultDiv = document.getElementById('input-result');
+            const inputContainer = document.getElementById('variable-inputs-test');
+            
+            if (!parseResult) {
+                resultDiv.innerHTML = log('❌ Execute o teste do parser primeiro!', 'error');
+                return;
+            }
+            
+            try {
+                const inputNodes = parseResult.nodes.filter(node => node.type === 'input');
+                
+                inputContainer.innerHTML = '';
+                
+                if (inputNodes.length === 0) {
+                    inputContainer.innerHTML = '<p>Nenhuma variável de entrada necessária</p>';
+                    resultDiv.innerHTML = log('ℹ️ Nenhum nó de entrada encontrado', 'info');
+                    return;
+                }
+                
+                const title = document.createElement('h3');
+                title.textContent = 'Variáveis de Entrada';
+                inputContainer.appendChild(title);
+                
+                inputNodes.forEach(node => {
+                    const varName = extractVariableName(node.text);
+                    
+                    const inputDiv = document.createElement('div');
+                    inputDiv.style.margin = '10px 0';
+                    
+                    inputDiv.innerHTML = `
+                        <label for="var-${varName}">${node.text}:</label><br>
+                        <input type="text" 
+                               id="var-${varName}" 
+                               data-variable="${varName}" 
+                               placeholder="Digite o valor"
+                               style="padding: 5px; margin: 5px 0;">
+                    `;
+                    
+                    inputContainer.appendChild(inputDiv);
+                });
+                
+                resultDiv.innerHTML = log(`✅ ${inputNodes.length} campos de entrada criados!`, 'success');
+                
+            } catch (error) {
+                resultDiv.innerHTML = log(`❌ Erro ao criar campos: ${error.message}`, 'error');
+            }
+        }
+        
+        function testJavaScriptGeneration() {
+            const resultDiv = document.getElementById('js-result');
+            
+            if (!parseResult) {
+                resultDiv.innerHTML = log('❌ Execute o teste do parser primeiro!', 'error');
+                return;
+            }
+            
+            try {
+                const jsCode = parser.generateJavaScript();
+                
+                let result = '';
+                result += log('✅ JavaScript gerado com sucesso!', 'success');
+                result += log('<br><strong>Código gerado:</strong>', 'info');
+                result += `<pre style="background: #f0f0f0; padding: 10px; border-radius: 3px; overflow-x: auto;">${jsCode}</pre>`;
+                
+                resultDiv.innerHTML = result;
+                
+            } catch (error) {
+                resultDiv.innerHTML = log(`❌ Erro na geração: ${error.message}`, 'error');
+            }
+        }
+        
+        function extractVariableName(text) {
+            const patterns = [
+                /ler\s+(\w+)/i,
+                /digite\s+(\w+)/i,
+                /entrada\s+(\w+)/i,
+                /input\s+(\w+)/i,
+                /(\w+)$/
+            ];
+
+            for (const pattern of patterns) {
+                const match = text.match(pattern);
+                if (match) {
+                    return match[1].toLowerCase();
+                }
+            }
+
+            return 'valor';
+        }
+        
+        // Teste automático ao carregar a página
+        window.onload = function() {
+            console.log('🧪 Página de teste carregada');
+            console.log('📝 Execute os testes na ordem: Parser → Campos → JavaScript');
+        };
+    </script>
+</body>
+</html>

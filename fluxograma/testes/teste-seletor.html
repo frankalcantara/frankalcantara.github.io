@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>🧪 Teste - Seletor de Exemplos</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f0f0f0; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; background: #fafafa; }
+        .example-selector { padding: 15px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 5px; margin: 10px 0; }
+        .example-selector h3 { margin: 0 0 10px 0; color: #4f46e5; font-weight: 600; }
+        select { flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px; margin-right: 10px; }
+        button { padding: 8px 15px; background: #10b981; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        textarea { width: 100%; height: 200px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin: 10px 0; font-family: monospace; }
+        .diagram { border: 1px solid #ddd; padding: 20px; margin: 10px 0; min-height: 200px; background: #fafafa; text-align: center; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .warning { background: #fff3cd; color: #856404; }
+        .logs { background: #000; color: #0f0; padding: 10px; height: 150px; overflow-y: auto; font-family: monospace; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Teste - Seletor de Exemplos</h1>
+        
+        <div class="test-section">
+            <h2>1. Interface do Seletor</h2>
+            <div class="example-selector">
+                <h3>Exemplos Predefinidos</h3>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <select id="example-selector">
+                        <option value="">Selecione um exemplo...</option>
+                        <option value="basico">1. Básico - Sequência Simples</option>
+                        <option value="decisao">2. Intermediário - Com Decisão</option>
+                        <option value="calculadora">3. Avançado - Calculadora</option>
+                    </select>
+                    <button id="load-example" disabled>Carregar</button>
+                </div>
+            </div>
+            <div id="interface-status" class="status success">Interface do seletor carregada</div>
+        </div>
+        
+        <div class="test-section">
+            <h2>2. Editor de Código</h2>
+            <textarea id="mermaid-editor" placeholder="O código do exemplo aparecerá aqui..."></textarea>
+            <div id="editor-status" class="status">Aguardando seleção de exemplo...</div>
+        </div>
+        
+        <div class="test-section">
+            <h2>3. Simulação de Diagrama</h2>
+            <div id="mermaid-diagram" class="diagram">
+                📈 Selecione um exemplo para começar<br>
+                <span style="font-size: 0.9rem; opacity: 0.8;">ou digite seu próprio fluxograma no editor</span>
+            </div>
+            <div id="diagram-status" class="status">Pronto para renderização</div>
+        </div>
+        
+        <div class="test-section">
+            <h2>4. Logs de Debug</h2>
+            <div id="debug-logs" class="logs"></div>
+            <button onclick="clearLogs()" style="margin-top: 10px;">Limpar Logs</button>
+        </div>
+    </div>
+    
+    <script>
+        // Exemplos (copiados do script principal)
+        const examples = {
+            basico: {
+                nome: "Básico - Sequência Simples",
+                codigo: `flowchart TD
+    A[Início] --> B[Ler nome]
+    B --> C[Mostrar saudação]
+    C --> D[Fim]`
+            },
+            decisao: {
+                nome: "Intermediário - Com Decisão",
+                codigo: `flowchart TD
+    A[Início] --> B[Ler idade]
+    B --> C{Maior que 18?}
+    C -->|Sim| D[Pode votar]
+    C -->|Não| E[Não pode votar]
+    D --> F[Fim]
+    E --> F`
+            },
+            calculadora: {
+                nome: "Avançado - Calculadora",
+                codigo: `flowchart TD
+    A[Início] --> B[Ler primeiro número]
+    B --> C[Ler segundo número]
+    C --> D[Ler operação]
+    D --> E{Operação é +?}
+    E -->|Sim| F[Somar números]
+    E -->|Não| G{Operação é -?}
+    G -->|Sim| H[Subtrair números]
+    G -->|Não| I[Operação inválida]
+    F --> J[Mostrar resultado]
+    H --> J
+    I --> J
+    J --> K[Fim]`
+            }
+        };
+        
+        // Elementos
+        let exampleSelector, loadExampleBtn, editor, diagramContainer;
+        
+        function debugLog(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = `[${timestamp}] ${message}`;
+            
+            const logsContainer = document.getElementById('debug-logs');
+            const color = type === 'error' ? '#f00' : type === 'success' ? '#0f0' : type === 'warning' ? '#ff0' : '#0f0';
+            logsContainer.innerHTML += `<div style="color: ${color};">${logEntry}</div>`;
+            logsContainer.scrollTop = logsContainer.scrollHeight;
+            
+            console.log(logEntry);
+        }
+        
+        function updateStatus(elementId, message, type = 'success') {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.textContent = message;
+                element.className = `status ${type}`;
+            }
+        }
+        
+        function clearLogs() {
+            document.getElementById('debug-logs').innerHTML = '';
+        }
+        
+        function loadExample(exampleKey) {
+            debugLog(`Carregando exemplo: ${exampleKey}`, 'info');
+            
+            const example = examples[exampleKey];
+            if (!example) {
+                debugLog(`Exemplo '${exampleKey}' não encontrado`, 'error');
+                updateStatus('editor-status', `Erro: Exemplo '${exampleKey}' não encontrado`, 'error');
+                return;
+            }
+            
+            if (!editor) {
+                debugLog('Editor não disponível', 'error');
+                updateStatus('editor-status', 'Erro: Editor não disponível', 'error');
+                return;
+            }
+            
+            // Carregar código no editor
+            editor.value = example.codigo;
+            debugLog(`Código carregado no editor (${example.codigo.length} caracteres)`, 'success');
+            updateStatus('editor-status', `✅ Carregado: ${example.nome}`, 'success');
+            
+            // Simular renderização
+            diagramContainer.innerHTML = `
+                <div style="padding: 20px; border: 2px dashed #4f46e5; border-radius: 8px; background: #f0f9ff;">
+                    <h3 style="color: #4f46e5; margin: 0 0 10px 0;">📊 ${example.nome}</h3>
+                    <div style="color: #666; font-size: 0.9rem;">
+                        Código carregado com ${example.codigo.split('\\n').length} linhas<br>
+                        <em>No app real, o diagrama Mermaid seria renderizado aqui</em>
+                    </div>
+                </div>
+            `;
+            updateStatus('diagram-status', `✅ Simulação: ${example.nome}`, 'success');
+            
+            // Resetar seleção
+            if (exampleSelector) {
+                exampleSelector.value = '';
+            }
+            if (loadExampleBtn) {
+                loadExampleBtn.disabled = true;
+            }
+            
+            debugLog(`Exemplo '${exampleKey}' carregado com sucesso`, 'success');
+        }
+        
+        function loadSelectedExample() {
+            if (!exampleSelector) {
+                debugLog('Seletor de exemplos não disponível', 'error');
+                return;
+            }
+            
+            const selectedValue = exampleSelector.value;
+            if (!selectedValue) {
+                debugLog('Nenhum exemplo selecionado', 'warning');
+                updateStatus('editor-status', 'Aviso: Nenhum exemplo selecionado', 'warning');
+                return;
+            }
+            
+            loadExample(selectedValue);
+        }
+        
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            debugLog('=== TESTE DO SELETOR INICIADO ===', 'warning');
+            
+            // Inicializar elementos
+            exampleSelector = document.getElementById('example-selector');
+            loadExampleBtn = document.getElementById('load-example');
+            editor = document.getElementById('mermaid-editor');
+            diagramContainer = document.getElementById('mermaid-diagram');
+            
+            // Verificar se elementos existem
+            if (exampleSelector && loadExampleBtn && editor && diagramContainer) {
+                debugLog('Todos os elementos encontrados', 'success');
+                updateStatus('interface-status', '✅ Todos os elementos carregados', 'success');
+            } else {
+                debugLog('Alguns elementos não encontrados', 'error');
+                updateStatus('interface-status', '❌ Erro: Elementos faltantes', 'error');
+                return;
+            }
+            
+            // Configurar event listeners
+            if (loadExampleBtn) {
+                loadExampleBtn.addEventListener('click', loadSelectedExample);
+                debugLog('Event listener do botão configurado', 'success');
+            }
+            
+            if (exampleSelector) {
+                exampleSelector.addEventListener('change', function() {
+                    debugLog(`Exemplo selecionado: ${this.value}`, 'info');
+                    if (loadExampleBtn) {
+                        loadExampleBtn.disabled = !this.value;
+                        debugLog(`Botão ${this.value ? 'habilitado' : 'desabilitado'}`, 'info');
+                    }
+                });
+                debugLog('Event listener do seletor configurado', 'success');
+            }
+            
+            debugLog('Inicialização concluída - pronto para testes!', 'success');
+            updateStatus('interface-status', '✅ Sistema pronto para testes', 'success');
+        });
+    </script>
+</body>
+</html>

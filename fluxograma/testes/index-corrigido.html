@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluxograma Interativo - Versão Corrigida</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        header h1 {
+            color: #1f2937;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 35% 65%;
+            gap: 20px;
+            min-height: 80vh;
+        }
+        
+        .panel {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .panel-header {
+            background: #4f46e5;
+            color: white;
+            padding: 15px 20px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .panel-content {
+            padding: 20px;
+        }
+        
+        .example-selector {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+        }
+        
+        .example-selector h3 {
+            color: #4f46e5;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        
+        .example-selector select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            background: white;
+            cursor: pointer;
+        }
+        
+        .example-selector select:focus {
+            outline: none;
+            border-color: #4f46e5;
+        }
+        
+        .editor-container {
+            margin-bottom: 20px;
+        }
+        
+        .editor-container textarea {
+            width: 100%;
+            height: 300px;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            resize: vertical;
+            background: #f9fafb;
+        }
+        
+        .editor-container textarea:focus {
+            outline: none;
+            border-color: #4f46e5;
+            background: white;
+        }
+        
+        .controls {
+            margin-bottom: 20px;
+        }
+        
+        .controls h3 {
+            color: #374151;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+        
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-primary {
+            background: #10b981;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #059669;
+        }
+        
+        .btn-secondary {
+            background: #6366f1;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #4f46e5;
+        }
+        
+        .btn-tertiary {
+            background: #f59e0b;
+            color: white;
+        }
+        
+        .btn-tertiary:hover {
+            background: #d97706;
+        }
+        
+        .console-section {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 20px;
+        }
+        
+        .console-section h3 {
+            color: #374151;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+        
+        .console-content {
+            background: #1a1a1a;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            height: 200px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        
+        .diagram-panel {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .diagram-container {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fafafa;
+            border: 2px dashed #e2e8f0;
+            border-radius: 8px;
+            min-height: 400px;
+        }
+        
+        .diagram-placeholder {
+            text-align: center;
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+        
+        .diagram-placeholder span {
+            display: block;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 10px;
+        }
+        
+        .error-message {
+            background: #fef2f2;
+            color: #dc2626;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #fecaca;
+            margin: 10px 0;
+            display: none;
+        }
+        
+        .status-bar {
+            background: #f3f4f6;
+            padding: 10px 20px;
+            border-top: 1px solid #e5e7eb;
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+        
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Fluxograma Interativo</h1>
+            <p>Ferramenta para aprendizado de raciocínio algorítmico - Versão Corrigida</p>
+        </header>
+        
+        <div class="main-content">
+            <!-- Painel do Editor -->
+            <div class="panel">
+                <div class="panel-header">
+                    📝 Editor de Fluxograma
+                </div>
+                <div class="panel-content">
+                    <!-- Seletor de Exemplos -->
+                    <div class="example-selector">
+                        <h3>Exemplos Predefinidos</h3>
+                        <select id="example-selector">
+                            <option value="">Selecione um exemplo para carregar automaticamente...</option>
+                            <option value="basico">1. Básico - Sequência Simples</option>
+                            <option value="decisao">2. Intermediário - Com Decisão</option>
+                            <option value="calculadora">3. Avançado - Calculadora</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Editor -->
+                    <div class="editor-container">
+                        <textarea id="mermaid-editor" placeholder="Digite seu fluxograma aqui usando sintaxe Mermaid...
+
+Exemplo:
+flowchart TD
+    A[Início] --> B[Ler idade]
+    B --> C{idade >= 18}
+    C -->|Sim| D[Pode votar]
+    C -->|Não| E[Não pode votar]
+    D --> F[Fim]
+    E --> F"></textarea>
+                    </div>
+                    
+                    <!-- Controles -->
+                    <div class="controls">
+                        <h3>Controles</h3>
+                        <div class="button-group">
+                            <button id="render-btn" class="btn btn-primary">
+                                🎨 Renderizar Fluxograma
+                            </button>
+                            <button id="validate-btn" class="btn btn-secondary">
+                                ✅ Validar Sintaxe
+                            </button>
+                            <button id="clear-btn" class="btn btn-tertiary">
+                                🗑️ Limpar Editor
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Console -->
+                    <div class="console-section">
+                        <h3>Console de Saída</h3>
+                        <div id="console-output" class="console-content"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Painel do Diagrama -->
+            <div class="panel diagram-panel">
+                <div class="panel-header">
+                    📊 Visualização do Fluxograma
+                </div>
+                <div class="panel-content" style="flex: 1; display: flex; flex-direction: column;">
+                    <div id="error-display" class="error-message"></div>
+                    <div class="diagram-container">
+                        <div id="mermaid-diagram">
+                            <div class="diagram-placeholder">
+                                📈 Selecione um exemplo para começar
+                                <span>ou digite seu próprio fluxograma no editor</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="status-bar" id="status-bar">
+                    Pronto para renderização
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuração do Mermaid
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            },
+            themeVariables: {
+                primaryColor: '#4f46e5',
+                primaryTextColor: '#1f2937',
+                primaryBorderColor: '#4f46e5',
+                lineColor: '#6b7280',
+                secondaryColor: '#f8fafc',
+                tertiaryColor: '#f3f4f6'
+            }
+        });
+
+        // Exemplos predefinidos
+        const examples = {
+            basico: {
+                nome: "Básico - Sequência Simples",
+                codigo: `flowchart TD
+    A[Início] --> B[Ler nome]
+    B --> C[Mostrar saudação]
+    C --> D[Fim]`
+            },
+            decisao: {
+                nome: "Intermediário - Com Decisão",
+                codigo: `flowchart TD
+    A[Início] --> B[Ler idade]
+    B --> C{idade >= 18}
+    C -->|Sim| D[Pode votar]
+    C -->|Não| E[Não pode votar]
+    D --> F[Fim]
+    E --> F`
+            },
+            calculadora: {
+                nome: "Avançado - Calculadora",
+                codigo: `flowchart TD
+    A[Início] --> B[Ler primeiro número]
+    B --> C[Ler segundo número]
+    C --> D[Ler operação]
+    D --> E{Operação é +?}
+    E -->|Sim| F[Somar números]
+    E -->|Não| G{Operação é -?}
+    G -->|Sim| H[Subtrair números]
+    G -->|Não| I[Operação inválida]
+    F --> J[Mostrar resultado]
+    H --> J
+    I --> J
+    J --> K[Fim]`
+            }
+        };
+
+        // Elementos DOM
+        let editor, diagramContainer, errorDisplay, consoleOutput;
+        let exampleSelector, renderBtn, validateBtn, clearBtn, statusBar;
+        let isRendering = false;
+
+        // Função de log para console
+        function logToConsole(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const colors = {
+                info: '#00ff00',
+                error: '#ff4444',
+                warning: '#ffaa00',
+                success: '#00ff88'
+            };
+            
+            const logEntry = `[${timestamp}] ${message}`;
+            console.log(logEntry);
+            
+            if (consoleOutput) {
+                const coloredMessage = `<span style="color: ${colors[type] || colors.info};">${logEntry}</span>\n`;
+                consoleOutput.innerHTML += coloredMessage;
+                consoleOutput.scrollTop = consoleOutput.scrollHeight;
+                
+                // Limitar tamanho do console
+                const lines = consoleOutput.innerHTML.split('\n');
+                if (lines.length > 100) {
+                    consoleOutput.innerHTML = lines.slice(-100).join('\n');
+                }
+            }
+        }
+
+        // Atualizar status bar
+        function updateStatusBar(message) {
+            if (statusBar) {
+                statusBar.textContent = message;
+            }
+        }
+
+        // Mostrar erro
+        function showError(message) {
+            if (errorDisplay) {
+                errorDisplay.textContent = message;
+                errorDisplay.style.display = 'block';
+            }
+            logToConsole(`❌ ${message}`, 'error');
+        }
+
+        // Esconder erro
+        function hideError() {
+            if (errorDisplay) {
+                errorDisplay.style.display = 'none';
+            }
+        }
+
+        // Carregar exemplo
+        function loadExample(exampleKey) {
+            logToConsole(`📋 Carregando exemplo: ${exampleKey}`, 'info');
+            
+            const example = examples[exampleKey];
+            if (!example) {
+                showError(`Exemplo '${exampleKey}' não encontrado`);
+                return false;
+            }
+            
+            if (!editor) {
+                showError('Editor não disponível');
+                return false;
+            }
+            
+            // Carregar código no editor
+            editor.value = example.codigo;
+            logToConsole(`✅ Exemplo carregado: ${example.nome}`, 'success');
+            updateStatusBar(`Exemplo carregado: ${example.nome}`);
+            
+            // Renderizar automaticamente após carregamento
+            setTimeout(() => {
+                renderDiagram();
+            }, 300);
+            
+            return true;
+        }
+
+        // Renderizar diagrama
+        async function renderDiagram() {
+            if (isRendering) {
+                logToConsole('⚠️ Renderização já em progresso...', 'warning');
+                return;
+            }
+            
+            if (!editor || !diagramContainer) {
+                showError('Elementos necessários não disponíveis');
+                return;
+            }
+            
+            isRendering = true;
+            logToConsole('🎨 Iniciando renderização...', 'info');
+            updateStatusBar('Renderizando...');
+            
+            const code = editor.value.trim();
+            
+            if (!code) {
+                diagramContainer.innerHTML = `
+                    <div class="diagram-placeholder">
+                        📝 Digite seu fluxograma no editor
+                        <span>Use a sintaxe Mermaid</span>
+                    </div>
+                `;
+                hideError();
+                updateStatusBar('Editor vazio');
+                isRendering = false;
+                return;
+            }
+            
+            try {
+                // Limpar container
+                diagramContainer.innerHTML = '';
+                
+                // Gerar ID único
+                const diagramId = 'diagram-' + Date.now();
+                
+                // Renderizar com Mermaid
+                const { svg } = await mermaid.render(diagramId, code);
+                
+                // Inserir SVG
+                diagramContainer.innerHTML = svg;
+                
+                hideError();
+                logToConsole('✅ Diagrama renderizado com sucesso', 'success');
+                updateStatusBar('Diagrama renderizado com sucesso');
+                
+            } catch (error) {
+                showError(`Erro na sintaxe: ${error.message}`);
+                diagramContainer.innerHTML = `
+                    <div class="diagram-placeholder" style="color: #dc2626;">
+                        ❌ Erro na sintaxe do fluxograma
+                        <span>Verifique o código no editor</span>
+                    </div>
+                `;
+                updateStatusBar('Erro na renderização');
+            } finally {
+                isRendering = false;
+            }
+        }
+
+        // Validar sintaxe
+        async function validateSyntax() {
+            if (!editor) return;
+            
+            const code = editor.value.trim();
+            if (!code) {
+                logToConsole('⚠️ Editor vazio - nada para validar', 'warning');
+                return;
+            }
+            
+            try {
+                const diagramId = 'validate-' + Date.now();
+                await mermaid.render(diagramId, code);
+                logToConsole('✅ Sintaxe válida', 'success');
+                updateStatusBar('Sintaxe válida');
+                hideError();
+            } catch (error) {
+                showError(`Sintaxe inválida: ${error.message}`);
+                updateStatusBar('Sintaxe inválida');
+            }
+        }
+
+        // Limpar editor
+        function clearEditor() {
+            if (editor) {
+                editor.value = '';
+                logToConsole('🗑️ Editor limpo', 'info');
+                updateStatusBar('Editor limpo');
+                
+                // Limpar diagrama também
+                if (diagramContainer) {
+                    diagramContainer.innerHTML = `
+                        <div class="diagram-placeholder">
+                            📈 Digite seu fluxograma no editor
+                            <span>ou selecione um exemplo</span>
+                        </div>
+                    `;
+                }
+                hideError();
+            }
+        }
+
+        // Configurar debounce para renderização automática
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            logToConsole('🚀 Fluxograma Interativo iniciado', 'success');
+            
+            // Inicializar elementos DOM
+            editor = document.getElementById('mermaid-editor');
+            diagramContainer = document.getElementById('mermaid-diagram');
+            errorDisplay = document.getElementById('error-display');
+            consoleOutput = document.getElementById('console-output');
+            exampleSelector = document.getElementById('example-selector');
+            renderBtn = document.getElementById('render-btn');
+            validateBtn = document.getElementById('validate-btn');
+            clearBtn = document.getElementById('clear-btn');
+            statusBar = document.getElementById('status-bar');
+            
+            // Verificar elementos essenciais
+            if (!editor || !diagramContainer || !consoleOutput) {
+                logToConsole('❌ Elementos essenciais não encontrados', 'error');
+                return;
+            }
+            
+            logToConsole('✅ Elementos DOM inicializados', 'success');
+            
+            // Event listener para seletor de exemplos (carregamento automático)
+            if (exampleSelector) {
+                exampleSelector.addEventListener('change', function() {
+                    const selectedValue = this.value;
+                    if (selectedValue) {
+                        logToConsole(`📋 Selecionado: ${selectedValue}`, 'info');
+                        loadExample(selectedValue);
+                        
+                        // Resetar seleção após carregamento
+                        setTimeout(() => {
+                            this.value = '';
+                        }, 1000);
+                    }
+                });
+                logToConsole('✅ Seletor de exemplos configurado', 'success');
+            }
+            
+            // Event listeners para botões
+            if (renderBtn) {
+                renderBtn.addEventListener('click', renderDiagram);
+            }
+            
+            if (validateBtn) {
+                validateBtn.addEventListener('click', validateSyntax);
+            }
+            
+            if (clearBtn) {
+                clearBtn.addEventListener('click', clearEditor);
+            }
+            
+            // Renderização automática com debounce
+            if (editor) {
+                const debouncedRender = debounce(renderDiagram, 1000);
+                editor.addEventListener('input', debouncedRender);
+                logToConsole('✅ Renderização automática configurada', 'success');
+            }
+            
+            logToConsole('📋 Selecione um exemplo ou digite seu fluxograma', 'info');
+            logToConsole('💡 A renderização acontece automaticamente ao digitar', 'info');
+            updateStatusBar('Sistema pronto - selecione um exemplo para começar');
+        });
+    </script>
+</body>
+</html>

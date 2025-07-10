@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>🔍 Teste de Dependências - Fluxograma</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; }
+        .test-item { margin: 15px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .warning { background: #fff3cd; color: #856404; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        .logs { background: #000; color: #0f0; padding: 15px; height: 300px; overflow-y: auto; font-family: monospace; font-size: 12px; }
+        button { padding: 10px 20px; margin: 5px; border: none; border-radius: 4px; cursor: pointer; background: #007bff; color: white; }
+        button:hover { background: #0056b3; }
+        .script-status { display: inline-block; padding: 5px 10px; border-radius: 3px; margin: 2px; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Teste de Dependências - Fluxograma Interativo</h1>
+        <p>Este arquivo testa especificamente quais scripts estão falhando no projeto original.</p>
+        
+        <div class="test-item">
+            <h3>1. Status dos Scripts</h3>
+            <div id="script-status"></div>
+            <button onclick="checkScripts()">Verificar Scripts</button>
+        </div>
+        
+        <div class="test-item">
+            <h3>2. Teste de Carregamento Individual</h3>
+            <button onclick="testMermaid()">Testar Mermaid</button>
+            <button onclick="testUnifiedParser()">Testar Unified Parser</button>
+            <button onclick="testStepExecutor()">Testar Step Executor</button>
+            <button onclick="testMainScript()">Testar Script Principal</button>
+        </div>
+        
+        <div class="test-item">
+            <h3>3. Teste de Exemplos (Sem Dependências)</h3>
+            <select id="test-selector">
+                <option value="">Selecione um exemplo...</option>
+                <option value="basico">Básico</option>
+                <option value="decisao">Decisão</option>
+                <option value="calculadora">Calculadora</option>
+            </select>
+            <button onclick="testExampleLoad()">Testar Carregamento</button>
+            <div id="example-result" style="margin-top: 10px; padding: 10px; border: 1px solid #ddd; min-height: 50px; background: #f9f9f9;"></div>
+        </div>
+        
+        <div class="test-item">
+            <h3>4. Logs de Debug</h3>
+            <div id="debug-logs" class="logs"></div>
+            <button onclick="clearLogs()">Limpar</button>
+            <button onclick="runFullTest()">Teste Completo</button>
+        </div>
+    </div>
+
+    <!-- Testes de carregamento de scripts do projeto original -->
+    <script>
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const colors = { info: '#0f0', error: '#f00', warning: '#ff0', success: '#0ff' };
+            const logEntry = `[${timestamp}] ${message}`;
+            
+            document.getElementById('debug-logs').innerHTML += 
+                `<div style="color: ${colors[type]};">${logEntry}</div>`;
+            document.getElementById('debug-logs').scrollTop = 
+                document.getElementById('debug-logs').scrollHeight;
+            
+            console.log(logEntry);
+        }
+        
+        function clearLogs() {
+            document.getElementById('debug-logs').innerHTML = '';
+            log('=== LOGS LIMPOS ===');
+        }
+        
+        function checkScripts() {
+            log('=== VERIFICANDO STATUS DOS SCRIPTS ===', 'warning');
+            
+            const scripts = {
+                'Mermaid CDN': typeof mermaid !== 'undefined',
+                'UnifiedFlowchartParser': typeof UnifiedFlowchartParser !== 'undefined',
+                'StepByStepExecutor': typeof StepByStepExecutor !== 'undefined',
+                'extractVariableName': typeof extractVariableName !== 'undefined'
+            };
+            
+            let statusHtml = '';
+            let allGood = true;
+            
+            for (const [name, loaded] of Object.entries(scripts)) {
+                const status = loaded ? 'CARREGADO' : 'FALHOU';
+                const className = loaded ? 'success' : 'error';
+                statusHtml += `<span class="script-status ${className}">${name}: ${status}</span>`;
+                log(`${loaded ? '✅' : '❌'} ${name}: ${status}`, loaded ? 'success' : 'error');
+                if (!loaded) allGood = false;
+            }
+            
+            document.getElementById('script-status').innerHTML = statusHtml;
+            
+            if (allGood) {
+                log('✅ Todos os scripts carregados com sucesso!', 'success');
+            } else {
+                log('❌ Alguns scripts falharam ao carregar', 'error');
+            }
+        }
+        
+        function testMermaid() {
+            log('=== TESTE DO MERMAID ===', 'warning');
+            
+            if (typeof mermaid === 'undefined') {
+                log('❌ Mermaid não está disponível', 'error');
+                return;
+            }
+            
+            try {
+                log('✅ Mermaid está disponível', 'success');
+                log(`Versão do Mermaid: ${mermaid.version || 'desconhecida'}`, 'info');
+                
+                // Teste de inicialização
+                mermaid.initialize({
+                    startOnLoad: false,
+                    theme: 'default'
+                });
+                log('✅ Mermaid inicializado com sucesso', 'success');
+                
+            } catch (error) {
+                log(`❌ Erro no teste do Mermaid: ${error.message}`, 'error');
+            }
+        }
+        
+        function testUnifiedParser() {
+            log('=== TESTE DO UNIFIED PARSER ===', 'warning');
+            
+            if (typeof UnifiedFlowchartParser === 'undefined') {
+                log('❌ UnifiedFlowchartParser não está disponível', 'error');
+                log('💡 Tentando carregar unified-parser.js...', 'info');
+                
+                // Tentar carregar o script dinamicamente
+                const script = document.createElement('script');
+                script.src = 'unified-parser.js';
+                script.onload = () => {
+                    log('✅ unified-parser.js carregado dinamicamente', 'success');
+                    testUnifiedParser(); // Tentar novamente
+                };
+                script.onerror = () => {
+                    log('❌ Falha ao carregar unified-parser.js', 'error');
+                };
+                document.head.appendChild(script);
+                return;
+            }
+            
+            try {
+                const parser = new UnifiedFlowchartParser();
+                log('✅ UnifiedFlowchartParser instanciado', 'success');
+                
+                // Teste básico de parsing
+                const testCode = `flowchart TD
+    A[Início] --> B[Fim]`;
+                
+                const result = parser.parse(testCode);
+                log(`✅ Parse bem-sucedido: ${result.nodes.length} nós`, 'success');
+                
+            } catch (error) {
+                log(`❌ Erro no teste do UnifiedParser: ${error.message}`, 'error');
+            }
+        }
+        
+        function testStepExecutor() {
+            log('=== TESTE DO STEP EXECUTOR ===', 'warning');
+            
+            if (typeof StepByStepExecutor === 'undefined') {
+                log('❌ StepByStepExecutor não está disponível', 'error');
+                log('💡 Tentando carregar step-by-step-executor.js...', 'info');
+                
+                const script = document.createElement('script');
+                script.src = 'step-by-step-executor.js';
+                script.onload = () => {
+                    log('✅ step-by-step-executor.js carregado dinamicamente', 'success');
+                    testStepExecutor();
+                };
+                script.onerror = () => {
+                    log('❌ Falha ao carregar step-by-step-executor.js', 'error');
+                };
+                document.head.appendChild(script);
+                return;
+            }
+            
+            try {
+                // Precisa de um parseResult válido para testar
+                if (typeof UnifiedFlowchartParser !== 'undefined') {
+                    const parser = new UnifiedFlowchartParser();
+                    const parseResult = parser.parse(`flowchart TD
+    A[Início] --> B[Fim]`);
+                    
+                    const executor = new StepByStepExecutor(parseResult, log);
+                    log('✅ StepByStepExecutor instanciado', 'success');
+                } else {
+                    log('⚠️ StepByStepExecutor disponível, mas precisa de UnifiedParser para teste completo', 'warning');
+                }
+                
+            } catch (error) {
+                log(`❌ Erro no teste do StepExecutor: ${error.message}`, 'error');
+            }
+        }
+        
+        function testMainScript() {
+            log('=== TESTE DO SCRIPT PRINCIPAL ===', 'warning');
+            
+            // Verificar se as variáveis globais do script principal existem
+            const mainVars = {
+                'examples': typeof examples !== 'undefined',
+                'currentDiagram': typeof currentDiagram !== 'undefined',
+                'isRendering': typeof isRendering !== 'undefined'
+            };
+            
+            let allVarsGood = true;
+            for (const [varName, exists] of Object.entries(mainVars)) {
+                log(`${exists ? '✅' : '❌'} Variável '${varName}': ${exists ? 'definida' : 'não definida'}`, 
+                    exists ? 'success' : 'error');
+                if (!exists) allVarsGood = false;
+            }
+            
+            if (allVarsGood) {
+                log('✅ Script principal carregado corretamente', 'success');
+            } else {
+                log('❌ Script principal não carregou completamente', 'error');
+            }
+        }
+        
+        function testExampleLoad() {
+            log('=== TESTE DE CARREGAMENTO DE EXEMPLO ===', 'warning');
+            
+            const selector = document.getElementById('test-selector');
+            const resultDiv = document.getElementById('example-result');
+            
+            const selectedValue = selector.value;
+            if (!selectedValue) {
+                log('⚠️ Nenhum exemplo selecionado', 'warning');
+                return;
+            }
+            
+            // Exemplos locais para teste
+            const testExamples = {
+                basico: {
+                    nome: "Básico - Sequência Simples",
+                    codigo: `flowchart TD
+    A[Início] --> B[Ler nome]
+    B --> C[Mostrar saudação]
+    C --> D[Fim]`
+                },
+                decisao: {
+                    nome: "Intermediário - Com Decisão", 
+                    codigo: `flowchart TD
+    A[Início] --> B[Ler idade]
+    B --> C{idade >= 18}
+    C -->|Sim| D[Pode votar]
+    C -->|Não| E[Não pode votar]
+    D --> F[Fim]
+    E --> F`
+                },
+                calculadora: {
+                    nome: "Avançado - Calculadora",
+                    codigo: `flowchart TD
+    A[Início] --> B[Ler primeiro número]
+    B --> C[Ler segundo número]
+    C --> D[Ler operação]
+    D --> E{Operação é +?}
+    E -->|Sim| F[Somar números]
+    E -->|Não| G{Operação é -?}
+    G -->|Sim| H[Subtrair números]
+    G -->|Não| I[Operação inválida]
+    F --> J[Mostrar resultado]
+    H --> J
+    I --> J
+    J --> K[Fim]`
+                }
+            };
+            
+            const example = testExamples[selectedValue];
+            if (example) {
+                resultDiv.innerHTML = `
+                    <h4>${example.nome}</h4>
+                    <pre style="background: #f0f0f0; padding: 10px; border-radius: 4px; overflow-x: auto;">${example.codigo}</pre>
+                `;
+                log(`✅ Exemplo '${selectedValue}' carregado com sucesso`, 'success');
+            } else {
+                log(`❌ Exemplo '${selectedValue}' não encontrado`, 'error');
+            }
+        }
+        
+        function runFullTest() {
+            log('=== INICIANDO TESTE COMPLETO ===', 'warning');
+            
+            checkScripts();
+            setTimeout(() => testMermaid(), 500);
+            setTimeout(() => testUnifiedParser(), 1000);
+            setTimeout(() => testStepExecutor(), 1500);
+            setTimeout(() => testMainScript(), 2000);
+            
+            log('=== TESTE COMPLETO FINALIZADO ===', 'warning');
+        }
+        
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            log('🔍 Teste de Dependências iniciado', 'success');
+            
+            // Event listener para o seletor
+            document.getElementById('test-selector').addEventListener('change', function() {
+                if (this.value) {
+                    log(`Exemplo selecionado: ${this.value}`, 'info');
+                }
+            });
+            
+            log('Sistema pronto para testes', 'info');
+        });
+    </script>
+    
+    <!-- Carregar Mermaid primeiro -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    
+    <!-- Tentar carregar os scripts do projeto original -->
+    <script>
+        // Função para carregar script e registrar resultado
+        function loadScript(src, name) {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = src;
+                script.onload = () => {
+                    log(`✅ ${name} carregado`, 'success');
+                    resolve();
+                };
+                script.onerror = () => {
+                    log(`❌ Falha ao carregar ${name}`, 'error');
+                    reject(new Error(`Failed to load ${name}`));
+                };
+                document.head.appendChild(script);
+            });
+        }
+        
+        // Carregar scripts em sequência
+        window.addEventListener('load', async function() {
+            log('=== CARREGANDO SCRIPTS DO PROJETO ===', 'warning');
+            
+            try {
+                await loadScript('unified-parser.js', 'Unified Parser');
+                await loadScript('step-by-step-executor.js', 'Step Executor');
+                await loadScript('script.js', 'Script Principal');
+                log('✅ Todos os scripts carregados com sucesso', 'success');
+            } catch (error) {
+                log(`❌ Erro no carregamento: ${error.message}`, 'error');
+            }
+        });
+    </script>
+</body>
+</html>

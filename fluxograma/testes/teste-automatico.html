@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>🧪 Teste Carregamento Automático</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f0f0f0; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; }
+        .example-selector { padding: 15px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 5px; margin: 10px 0; }
+        .example-selector h3 { margin: 0 0 10px 0; color: #4f46e5; font-weight: 600; }
+        select { width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 6px; font-size: 0.9rem; }
+        select:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1); }
+        textarea { width: 100%; height: 200px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin: 10px 0; font-family: monospace; }
+        .logs { background: #000; color: #0f0; padding: 10px; height: 150px; overflow-y: auto; font-family: monospace; font-size: 12px; margin: 10px 0; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .warning { background: #fff3cd; color: #856404; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Teste Carregamento Automático</h1>
+        <p>Teste se o carregamento funciona apenas selecionando (sem botão)</p>
+        
+        <div class="example-selector">
+            <h3>Exemplos Predefinidos</h3>
+            <select id="example-selector">
+                <option value="">Selecione um exemplo para carregar automaticamente...</option>
+                <option value="basico">1. Básico - Sequência Simples</option>
+                <option value="decisao">2. Intermediário - Com Decisão</option>
+                <option value="calculadora">3. Avançado - Calculadora</option>
+            </select>
+        </div>
+        
+        <div class="status" id="status">Aguardando seleção...</div>
+        
+        <h3>Editor:</h3>
+        <textarea id="mermaid-editor" placeholder="O código aparecerá aqui ao selecionar um exemplo..."></textarea>
+        
+        <h3>Logs:</h3>
+        <div id="logs" class="logs"></div>
+        <button onclick="clearLogs()" style="padding: 8px 15px; margin: 10px 0;">Limpar Logs</button>
+    </div>
+    
+    <script>
+        // Exemplos (mesmo do script principal)
+        const examples = {
+            basico: {
+                nome: "Básico - Sequência Simples",
+                codigo: `flowchart TD
+    A[Início] --> B[Ler nome]
+    B --> C[Mostrar saudação]
+    C --> D[Fim]`
+            },
+            decisao: {
+                nome: "Intermediário - Com Decisão",
+                codigo: `flowchart TD
+    A[Início] --> B[Ler idade]
+    B --> C{Maior que 18?}
+    C -->|Sim| D[Pode votar]
+    C -->|Não| E[Não pode votar]
+    D --> F[Fim]
+    E --> F`
+            },
+            calculadora: {
+                nome: "Avançado - Calculadora",
+                codigo: `flowchart TD
+    A[Início] --> B[Ler primeiro número]
+    B --> C[Ler segundo número]
+    C --> D[Ler operação]
+    D --> E{Operação é +?}
+    E -->|Sim| F[Somar números]
+    E -->|Não| G{Operação é -?}
+    G -->|Sim| H[Subtrair números]
+    G -->|Não| I[Operação inválida]
+    F --> J[Mostrar resultado]
+    H --> J
+    I --> J
+    J --> K[Fim]`
+            }
+        };
+        
+        let exampleSelector, editor;
+        
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = `[${timestamp}] ${message}`;
+            
+            const logsContainer = document.getElementById('logs');
+            const color = type === 'error' ? '#f00' : type === 'success' ? '#0f0' : type === 'warning' ? '#ff0' : '#0f0';
+            logsContainer.innerHTML += `<div style="color: ${color};">${logEntry}</div>`;
+            logsContainer.scrollTop = logsContainer.scrollHeight;
+            
+            console.log(logEntry);
+        }
+        
+        function updateStatus(message, type = 'success') {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type}`;
+        }
+        
+        function clearLogs() {
+            document.getElementById('logs').innerHTML = '';
+        }
+        
+        function loadExample(exampleKey) {
+            log(`Carregando exemplo: ${exampleKey}`, 'info');
+            
+            const example = examples[exampleKey];
+            if (!example) {
+                log(`Exemplo '${exampleKey}' não encontrado`, 'error');
+                updateStatus(`Erro: Exemplo '${exampleKey}' não encontrado`, 'error');
+                return;
+            }
+            
+            if (!editor) {
+                log('Editor não disponível', 'error');
+                updateStatus('Erro: Editor não disponível', 'error');
+                return;
+            }
+            
+            // Carregar código no editor
+            editor.value = example.codigo;
+            log(`Código carregado: ${example.nome} (${example.codigo.length} chars)`, 'success');
+            updateStatus(`✅ Carregado automaticamente: ${example.nome}`, 'success');
+            
+            // Resetar seleção após carregar
+            setTimeout(() => {
+                if (exampleSelector) {
+                    exampleSelector.value = '';
+                    log('Seleção resetada', 'info');
+                }
+            }, 100);
+            
+            log(`Exemplo '${exampleKey}' carregado com sucesso`, 'success');
+        }
+        
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            log('=== TESTE DE CARREGAMENTO AUTOMÁTICO INICIADO ===', 'warning');
+            
+            // Inicializar elementos
+            exampleSelector = document.getElementById('example-selector');
+            editor = document.getElementById('mermaid-editor');
+            
+            if (exampleSelector && editor) {
+                log('Elementos encontrados', 'success');
+                updateStatus('✅ Sistema pronto para teste', 'success');
+            } else {
+                log('Erro: Elementos não encontrados', 'error');
+                updateStatus('❌ Erro na inicialização', 'error');
+                return;
+            }
+            
+            // Configurar event listener para carregamento automático
+            if (exampleSelector) {
+                exampleSelector.addEventListener('change', function() {
+                    const selectedValue = this.value;
+                    log(`Seleção alterada: "${selectedValue}"`, 'info');
+                    
+                    if (selectedValue) {
+                        log(`Iniciando carregamento automático...`, 'warning');
+                        updateStatus('🔄 Carregando...', 'warning');
+                        loadExample(selectedValue);
+                    } else {
+                        log('Seleção vazia - nenhuma ação', 'info');
+                        updateStatus('Aguardando seleção...', 'warning');
+                    }
+                });
+                log('Event listener configurado com sucesso', 'success');
+            }
+            
+            log('Sistema pronto! Selecione um exemplo para testar.', 'success');
+        });
+    </script>
+</body>
+</html>

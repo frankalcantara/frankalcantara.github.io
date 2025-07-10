@@ -1,0 +1,693 @@
+/* Reset e configurações básicas */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Layout principal */
+.main-content {
+    display: flex;
+    flex-direction: column; /* Organiza os painéis de cima e o console verticalmente */
+    gap: 20px;
+    height: calc(100vh - 120px); /* Ocupa a altura restante da tela, descontando o header */
+}
+
+/* Novo container para os painéis superiores */
+.content-top {
+    display: flex;
+    gap: 20px;
+    flex-grow: 1; /* Faz com que esta área ocupe o espaço vertical disponível */
+    overflow: hidden; /* Evita que os painéis internos causem scroll na página */
+}
+
+/* Painel do Editor (30%) */
+.editor-panel {
+    flex: 0 0 30%;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Permite scroll interno se o conteúdo for grande */
+}
+
+/* Painel do Diagrama (60%) */
+.diagram-panel {
+    flex: 0 0 70%;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Headers dos painéis */
+.panel-header {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.panel-header h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+/* Editor de texto */
+.editor-container {
+    flex: 1;
+    padding: 20px;
+}
+
+#mermaid-editor {
+    width: 100%;
+    height: 100%;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 15px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: none;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#mermaid-editor:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* Controles */
+.controls {
+    padding: 20px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.controls h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: #374151;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+/* Botões */
+.btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+}
+
+.btn-tertiary {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+}
+
+.btn-small {
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+/* Estilo base para botões com ícones. Define tamanho e alinhamento. */
+.btn-icon {
+    width: 40px;
+    height: 40px;
+    padding: 0; /* Remove padding para centralizar com flex */
+    display: inline-flex; /* Garante alinhamento correto */
+    align-items: center;
+    justify-content: center;
+    text-transform: none;
+    letter-spacing: normal;
+    font-size: 1.2rem; /* Tamanho maior para os ícones de execução */
+}
+
+/* Estilo específico para os botões de controle do diagrama (zoom), mantendo a aparência original */
+.diagram-controls .btn-icon {
+    background: #f3f4f6;
+    color: #374151;
+    font-size: 1rem; /* Restaura um tamanho de fonte mais adequado para os ícones de zoom */
+}
+
+/* Variáveis de entrada */
+.input-variables {
+    padding: 20px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.input-variables h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: #374151;
+}
+
+#variable-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.variable-input {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.variable-input label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #374151;
+}
+
+.variable-input input {
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.variable-input input:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+}
+
+/* Console de saída */
+.output-console {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    flex-shrink: 0; /* Impede que o console encolha */
+    overflow: hidden;
+}
+
+/* Header do console com botão de flip */
+.console-header {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.console-header h3 {
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Botão de flip */
+.btn-flip {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-flip:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-1px);
+}
+
+/* Conteúdo do console (fundo escuro) */
+#console-output {
+    background: #1f2937;
+    color: #f9fafb;
+    padding: 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.4;
+    height: 200px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    margin: 0;
+}
+
+/* Conteúdo da sintaxe (fundo claro) */
+.syntax-content {
+    background: white;
+    color: #1f2937;
+    padding: 20px;
+    height: 200px;
+    overflow-y: auto;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.syntax-section {
+    margin-bottom: 20px;
+}
+
+.syntax-section h4 {
+    color: #4f46e5;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.syntax-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.syntax-section li {
+    margin-bottom: 6px;
+    padding-left: 16px;
+    position: relative;
+}
+
+.syntax-section li:before {
+    content: '•';
+    color: #4f46e5;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+.syntax-section code {
+    background: #f3f4f6;
+    color: #1f2937;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+/* Código em bloco */
+.syntax-section > code {
+    display: block;
+    padding: 12px;
+    margin: 8px 0;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+/* Controles do diagrama */
+.diagram-controls {
+    display: flex;
+    gap: 5px;
+}
+
+/* Container do diagrama */
+.diagram-container {
+    flex: 1;
+    padding: 20px;
+    overflow: auto;
+    position: relative;
+}
+
+#mermaid-diagram {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Mensagem de erro */
+.error-message {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+    padding: 15px;
+    border-radius: 6px;
+    margin: 20px;
+    font-size: 14px;
+}
+
+/* Status de execução */
+.execution-status {
+    padding: 15px 20px;
+    border-top: 1px solid #e5e7eb;
+    background: #f9fafb;
+}
+
+#current-step-info {
+    font-size: 14px;
+    color: #374151;
+    font-weight: 500;
+}
+
+/* Destacar nó atual durante execução */
+.current-step {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+    .main-content {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .content-top {
+        flex-direction: column; /* Empilha os painéis em telas menores */
+        gap: 20px;
+    }
+
+    .editor-panel,
+    .diagram-panel {
+        flex: none;
+        min-height: 400px;
+    }
+    
+    .button-group {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .panel-header {
+        padding: 10px 15px;
+    }
+    
+    .editor-container,
+    .controls,
+    .input-variables,
+    .output-console {
+        padding: 15px;
+    }
+    
+    .btn {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+}
+
+/* Estilos para elementos Mermaid */
+.mermaid {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Customização dos nós do fluxograma */
+.node rect,
+.node circle,
+.node ellipse,
+.node polygon {
+    stroke-width: 2px;
+    stroke: #4f46e5;
+    fill: #f8fafc;
+}
+
+.node text {
+    fill: #1f2937;
+    font-weight: 500;
+}
+
+.edgePath path {
+    stroke: #6b7280;
+    stroke-width: 2px;
+}
+
+.edgeLabel {
+    background-color: white;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* === MELHORIAS E NOVOS ESTILOS === */
+
+/* Estados visuais melhorados */
+.empty-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    color: #6b7280;
+    font-size: 1.1rem;
+    text-align: center;
+    border: 2px dashed #d1d5db;
+    border-radius: 8px;
+    margin: 20px;
+}
+
+.error-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.error-content h3 {
+    color: #dc2626;
+    margin-bottom: 10px;
+}
+
+.error-content p {
+    color: #374151;
+    margin-bottom: 10px;
+}
+
+.error-content small {
+    color: #6b7280;
+}
+
+/* Melhorias nos botões */
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Controles de passo */
+.step-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.step-info {
+    font-weight: 600;
+    color: #4f46e5;
+    padding: 8px 12px;
+    background: white;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+    font-size: 0.9rem;
+}
+
+/* Variáveis de entrada */
+.variable-input {
+    margin-bottom: 15px;
+}
+
+.variable-input label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #374151;
+}
+
+.variable-input input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.variable-input input:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.no-variables {
+    color: #6b7280;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Scrollbar personalizada para o console */
+#console-output::-webkit-scrollbar,
+.syntax-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+#console-output::-webkit-scrollbar-track {
+    background: #374151;
+    border-radius: 3px;
+}
+
+#console-output::-webkit-scrollbar-thumb {
+    background: #6b7280;
+    border-radius: 3px;
+}
+
+#console-output::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+.syntax-content::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 3px;
+}
+
+.syntax-content::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 3px;
+}
+
+.syntax-content::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+/* Destaque do nó atual */
+.current-step-highlight {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        filter: drop-shadow(0 0 6px #ff6b6b);
+    }
+    50% {
+        filter: drop-shadow(0 0 12px #ff6b6b);
+    }
+    100% {
+        filter: drop-shadow(0 0 6px #ff6b6b);
+    }
+}
+
+/* Responsividade aprimorada */
+@media (max-width: 768px) {
+    .step-controls {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+}
+
+/* Melhorias na acessibilidade */
+.btn:focus,
+input:focus,
+textarea:focus {
+    outline: 2px solid #4f46e5;
+    outline-offset: 2px;
+}
+
+/* === SEÇÃO DE EXEMPLOS === */
+.example-selector {
+    padding: 15px 20px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 0;
+}
+
+.example-selector h3 {
+    margin: 0 0 10px 0;
+    font-size: 1rem;
+    color: #4f46e5;
+    font-weight: 600;
+}
+
+.example-selector select {
+    border: 2px solid #e2e8f0;
+    transition: border-color 0.2s;
+    font-size: 0.9rem;
+}
+
+.example-selector select:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}

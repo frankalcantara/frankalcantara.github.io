@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>🚨 Teste Anti-Recursão</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f0f0f0; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; }
+        .logs { background: #000; color: #0f0; padding: 10px; height: 200px; overflow-y: auto; font-family: monospace; font-size: 12px; margin: 10px 0; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .warning { background: #fff3cd; color: #856404; }
+        button { padding: 10px 15px; margin: 5px; cursor: pointer; border: none; border-radius: 3px; background: #007bff; color: white; }
+        textarea { width: 100%; height: 100px; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
+        .diagram { border: 1px solid #ddd; padding: 10px; margin: 10px 0; min-height: 150px; background: #fafafa; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚨 Teste Anti-Recursão - Fluxograma</h1>
+        
+        <div class="status" id="status">
+            <h3>Status: Aguardando teste...</h3>
+        </div>
+        
+        <button onclick="testarRecursao()">🧪 Testar Recursão</button>
+        <button onclick="limparLogs()">🗑️ Limpar Logs</button>
+        
+        <h3>Editor (como no app principal):</h3>
+        <textarea id="mermaid-editor" placeholder="Código será carregado automaticamente..."></textarea>
+        
+        <h3>Diagrama:</h3>
+        <div id="mermaid-diagram" class="diagram"></div>
+        <div id="error-display" style="display: none; color: red; padding: 10px; background: #ffe6e6;"></div>
+        
+        <h3>Logs do Sistema:</h3>
+        <div id="logs" class="logs"></div>
+        
+        <h3>Contadores:</h3>
+        <div id="contadores" class="status">
+            <p>Renderizações: <span id="render-count">0</span></p>
+            <p>Chamadas Parser: <span id="parser-count">0</span></p>
+            <p>Erros: <span id="error-count">0</span></p>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <script src="unified-parser.js"></script>
+    
+    <script>
+        // Configurar Mermaid
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+        
+        // Contadores
+        let renderCount = 0;
+        let parserCount = 0;
+        let errorCount = 0;
+        let isRendering = false;
+        
+        // Elementos
+        let editor, diagramContainer, errorDisplay;
+        
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = `[${timestamp}] ${message}`;
+            
+            const logsContainer = document.getElementById('logs');
+            const color = type === 'error' ? '#f00' : type === 'success' ? '#0f0' : type === 'warning' ? '#ff0' : '#0f0';
+            logsContainer.innerHTML += `<div style="color: ${color};">${logEntry}</div>`;
+            logsContainer.scrollTop = logsContainer.scrollHeight;
+            
+            console.log(logEntry);
+        }
+        
+        function updateStatus(message, type = 'success') {
+            const status = document.getElementById('status');
+            status.innerHTML = `<h3 class="${type}">${message}</h3>`;
+        }
+        
+        function updateCounters() {
+            document.getElementById('render-count').textContent = renderCount;
+            document.getElementById('parser-count').textContent = parserCount;
+            document.getElementById('error-count').textContent = errorCount;
+        }
+        
+        function limparLogs() {
+            document.getElementById('logs').innerHTML = '';
+            renderCount = 0;
+            parserCount = 0;
+            errorCount = 0;
+            updateCounters();
+            updateStatus('Logs limpos', 'success');
+        }
+        
+        // Função de renderização com proteção anti-recursão
+        async function renderDiagram() {
+            if (isRendering) {
+                log('⚠️ PROTEÇÃO: Renderização já em progresso, ignorando chamada', 'warning');
+                return;
+            }
+            
+            if (!editor || !diagramContainer) {
+                log('❌ Elementos DOM não disponíveis', 'error');
+                errorCount++;
+                updateCounters();
+                return;
+            }
+            
+            isRendering = true;
+            renderCount++;
+            updateCounters();
+            
+            log(`🔧 RENDERIZAÇÃO #${renderCount} iniciada`, 'info');
+            
+            const code = editor.value.trim();
+            
+            if (!code) {
+                diagramContainer.innerHTML = '<div style="text-align: center; color: #666; padding: 30px;">Código vazio</div>';
+                isRendering = false;
+                log('ℹ️ Código vazio, renderização finalizada', 'info');
+                return;
+            }
+            
+            try {
+                log('🔧 Limpando container...', 'info');
+                diagramContainer.innerHTML = '';
+                
+                log('🔧 Gerando ID único...', 'info');
+                const diagramId = 'diagram-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+                
+                log('🔧 Chamando mermaid.render()...', 'info');
+                const { svg } = await mermaid.render(diagramId, code);
+                
+                log('✅ SVG gerado, inserindo no DOM...', 'success');
+                diagramContainer.innerHTML = svg;
+                
+                // Testar parser
+                if (typeof UnifiedFlowchartParser !== 'undefined') {
+                    try {
+                        parserCount++;
+                        updateCounters();
+                        log(`🔧 PARSER #${parserCount} - Testando parser...`, 'info');
+                        
+                        const parser = new UnifiedFlowchartParser();
+                        const parseResult = parser.parse(code);
+                        
+                        log(`✅ Parser funcionou: ${parseResult.nodes.length} nós`, 'success');
+                        
+                    } catch (parseError) {
+                        errorCount++;
+                        updateCounters();
+                        log(`⚠️ Aviso no parser: ${parseError.message}`, 'warning');
+                    }
+                } else {
+                    log('⚠️ Parser não disponível', 'warning');
+                }
+                
+                log(`✅ RENDERIZAÇÃO #${renderCount} concluída com sucesso`, 'success');
+                hideError();
+                
+            } catch (error) {
+                errorCount++;
+                updateCounters();
+                log(`❌ ERRO na renderização #${renderCount}: ${error.message}`, 'error');
+                showError(`Erro: ${error.message}`);
+            } finally {
+                isRendering = false;
+                log(`🏁 RENDERIZAÇÃO #${renderCount} finalizada (isRendering = false)`, 'info');
+            }
+        }
+        
+        function showError(message) {
+            if (errorDisplay) {
+                errorDisplay.textContent = message;
+                errorDisplay.style.display = 'block';
+                diagramContainer.style.display = 'none';
+            }
+        }
+        
+        function hideError() {
+            if (errorDisplay) {
+                errorDisplay.style.display = 'none';
+                diagramContainer.style.display = 'block';
+            }
+        }
+        
+        function testarRecursao() {
+            log('🧪 === INICIANDO TESTE DE RECURSÃO ===', 'warning');
+            updateStatus('Testando recursão...', 'warning');
+            
+            // Resetar contadores
+            renderCount = 0;
+            parserCount = 0;
+            errorCount = 0;
+            updateCounters();
+            
+            // Carregar código de teste
+            const testCode = `flowchart TD
+    A[Início] --> B[Ler idade]
+    B --> C{Maior que 18?}
+    C -->|Sim| D[Pode votar]
+    C -->|Não| E[Não pode votar]
+    D --> F[Fim]
+    E --> F`;
+            
+            editor.value = testCode;
+            log('📝 Código de teste carregado no editor', 'info');
+            
+            // Aguardar um pouco e renderizar
+            setTimeout(() => {
+                log('🚀 Iniciando renderização de teste...', 'info');
+                renderDiagram();
+                
+                // Verificar após 3 segundos se houve recursão
+                setTimeout(() => {
+                    if (renderCount === 1 && !isRendering) {
+                        updateStatus('✅ SUCESSO: Sem recursão detectada!', 'success');
+                        log('✅ TESTE PASSOU: Exatamente 1 renderização, sem recursão', 'success');
+                    } else if (renderCount > 1) {
+                        updateStatus(`❌ FALHA: ${renderCount} renderizações detectadas (possível recursão)`, 'error');
+                        log(`❌ TESTE FALHOU: ${renderCount} renderizações - possível recursão`, 'error');
+                    } else if (isRendering) {
+                        updateStatus('⚠️ ALERTA: Renderização ainda em progresso...', 'warning');
+                        log('⚠️ TESTE INCONCLUSIVO: Renderização ainda em progresso', 'warning');
+                    } else {
+                        updateStatus('❓ INDEFINIDO: Estado inesperado', 'warning');
+                        log('❓ TESTE INDEFINIDO: Estado inesperado', 'warning');
+                    }
+                }, 3000);
+                
+            }, 500);
+        }
+        
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            log('🔧 DOM carregado, inicializando elementos...', 'info');
+            
+            editor = document.getElementById('mermaid-editor');
+            diagramContainer = document.getElementById('mermaid-diagram');
+            errorDisplay = document.getElementById('error-display');
+            
+            if (editor && diagramContainer) {
+                log('✅ Elementos DOM inicializados com sucesso', 'success');
+                updateStatus('Pronto para teste', 'success');
+            } else {
+                log('❌ Falha na inicialização dos elementos DOM', 'error');
+                updateStatus('Erro na inicialização', 'error');
+            }
+            
+            updateCounters();
+        });
+    </script>
+</body>
+</html>
