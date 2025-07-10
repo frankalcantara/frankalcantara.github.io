@@ -1,57 +1,54 @@
-<!DOCTYPE html><html lang="pt-BR"><head>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Pensamento Computacional Integrado ao Currículo de Graduação</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'serif': ['Crimson Text', 'serif'],
-                        'sans': ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        'copper': {
-                            50: '#fdf8f6',
-                            100: '#f2e8e5',
-                            200: '#eaddd7',
-                            300: '#e0cec7',
-                            400: '#d2bab0',
-                            500: '#bfa094',
-                            600: '#a18072',
-                            700: '#977669',
-                            800: '#846358',
-                            900: '#43302b',
-                        },
-                        'sage': {
-                            50: '#f6f7f6',
-                            100: '#e3e7e3',
-                            200: '#c7d0c7',
-                            300: '#a3b2a3',
-                            400: '#7a8f7a',
-                            500: '#5d7360',
-                            600: '#495a4c',
-                            700: '#3d4a3f',
-                            800: '#343d36',
-                            900: '#2d342f',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <style>
+        :root {
+            --copper-50: #fdf8f6;
+            --copper-100: #f2e8e5;
+            --copper-200: #eaddd7;
+            --copper-300: #e0cec7;
+            --copper-400: #d2bab0;
+            --copper-500: #bfa094;
+            --copper-600: #a18072;
+            --copper-700: #977669;
+            --copper-800: #846358;
+            --copper-900: #43302b;
+            --sage-50: #f6f7f6;
+            --sage-100: #e3e7e3;
+            --sage-200: #c7d0c7;
+            --sage-300: #a3b2a3;
+            --sage-400: #7a8f7a;
+            --sage-500: #5d7360;
+            --sage-600: #495a4c;
+            --sage-700: #3d4a3f;
+            --sage-800: #343d36;
+            --sage-900: #2d342f;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Text', serif;
+        }
+
         .hero-gradient {
             background: linear-gradient(135deg, rgba(93, 115, 96, 0.9) 0%, rgba(191, 160, 148, 0.8) 100%);
         }
-        
-        .scroll-smooth {
-            scroll-behavior: smooth;
-        }
-        
+
         .toc-fixed {
             position: fixed;
             top: 0;
@@ -64,12 +61,12 @@
             overflow-y: auto;
             padding: 2rem 1.5rem;
         }
-        
+
         .main-content {
             margin-left: 280px;
             min-height: 100vh;
         }
-        
+
         @media (max-width: 1024px) {
             .toc-fixed {
                 transform: translateX(-100%);
@@ -82,19 +79,19 @@
                 margin-left: 0;
             }
         }
-        
+
         .citation-link {
-            color: #5d7360;
+            color: var(--sage-500);
             text-decoration: none;
             font-weight: 500;
-            border-bottom: 1px dotted #5d7360;
+            border-bottom: 1px dotted var(--sage-500);
         }
-        
+
         .citation-link:hover {
-            color: #495a4c;
+            color: var(--sage-600);
             border-bottom-style: solid;
         }
-        
+
         .bento-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -102,928 +99,925 @@
             gap: 1.5rem;
             height: 60vh;
         }
-        
+
         .bento-main {
             grid-row: 1 / -1;
             position: relative;
             overflow: hidden;
         }
-        
+
         .bento-side-top,
         .bento-side-bottom {
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
-        
+
         .fade-in {
             animation: fadeIn 0.8s ease-in;
         }
-        
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
+
         .hover-lift {
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-        
+
         .hover-lift:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
-    </style>
-  </head>
 
-  <body class="bg-gray-50 scroll-smooth overflow-x-hidden">
+        .hover-bg-light:hover {
+            background-color: var(--sage-50);
+        }
+
+        /* Fix for scroll overlap */
+        section[id] {
+            scroll-margin-top: 80px;
+        }
+
+        /* Ensure proper spacing between sections */
+        section {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 2rem;
+        }
+
+        /* Ensure consistent card heights */
+        .university-card {
+            min-height: 280px; /* Increased height for university cards */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Ensure card body fills available space */
+        .university-card .card-body,
+        .university-card > div {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
     <!-- Table of Contents -->
     <nav class="toc-fixed" id="toc">
-      <div class="mb-6">
-        <h3 class="text-lg font-semibold text-sage-800 mb-4">Sumário</h3>
-        <ul class="space-y-2 text-sm">
-          <li>
-            <a href="#introducao" class="block py-1 px-2 rounded text-sage-700 hover:bg-sage-50 hover-lift transition-colors">1. Introdução ao Pensamento Computacional</a>
-          </li>
-          <li>
-            <a href="#sistemas-creditos" class="block py-1 px-2 rounded text-sage-700 hover:bg-sage-50 hover-lift transition-colors">2. Sistemas de Créditos Acadêmicos</a>
-          </li>
-          <li>
-            <a href="#eua" class="block py-1 px-2 rounded text-sage-700 hover:bg-sage-50 hover-lift transition-colors">3. Integração nos EUA</a>
-          </li>
-          <li>
-            <a href="#reino-unido" class="block py-1 px-2 rounded text-sage-700 hover:bg-sage-50 hover-lift transition-colors">4. Integração no Reino Unido</a>
-          </li>
-          <li>
-            <a href="#europa" class="block py-1 px-2 rounded text-sage-700 hover:bg-sage-50 hover-lift transition-colors">5. Integração na Europa</a>
-          </li>
-          <li>
-            <a href="#china" class="block py-1 px-2 rounded text-sage-700 hover:bg-sage-50 hover-lift transition-colors">6. Integração na China</a>
-          </li>
-          <li>
-            <a href="#brasil" class="block py-1 px-2 rounded text-sage-700 hover:bg-sage-50 hover-lift transition-colors">7. Integração no Brasil</a>
-          </li>
-          <li>
-            <a href="#conclusao" class="block py-1 px-2 rounded text-sage-700 hover:bg-sage-50 hover-lift transition-colors">8. Considerações Finais</a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="mt-8 pt-6 border-t border-gray-200">
-        <h4 class="font-medium text-sage-800 mb-3">Referências</h4>
-        <div class="space-y-1 text-xs text-sage-600">
-          <div class="p-2 bg-sage-50 rounded">
-            <a href="https://www.cs.cmu.edu/~CompThink/" class="citation-link">[1] CMU Computational Thinking</a>
-          </div>
-          <div class="p-2 bg-sage-50 rounded">
-            <a href="https://dl.acm.org/doi/10.1145/1516046.1516054" class="citation-link">[2] UTEP CS Course</a>
-          </div>
-          <div class="p-2 bg-sage-50 rounded">
-            <a href="https://www.computacional.com.br/files/Geral/THE%20LINK%20-%20Pensamento%20Computacional.pdf" class="citation-link">[3] Pensamento Computacional no Brasil</a>
-          </div>
+        <div class="mb-4">
+            <h3 class="fs-5 fw-bold text-dark mb-3">Sumário</h3>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="#introducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">1. Introdução ao Pensamento Computacional</a></li>
+                <li class="mb-2"><a href="#sistemas-creditos" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">2. Sistemas de Créditos Acadêmicos</a></li>
+                <li class="mb-2"><a href="#eua" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Integração nos EUA</a></li>
+                <li class="mb-2"><a href="#reino-unido" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4. Integração no Reino Unido</a></li>
+                <li class="mb-2"><a href="#europa" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5. Integração na Europa</a></li>
+                <li class="mb-2"><a href="#china" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6. Integração na China</a></li>
+                <li class="mb-2"><a href="#brasil" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">7. Integração no Brasil</a></li>
+                <li class="mb-2"><a href="#conclusao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">8. Considerações Finais</a></li>
+            </ul>
         </div>
-      </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Referências</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-light rounded"><a href="https://www.cs.cmu.edu/~CompThink/" class="citation-link">[1] CMU Computational Thinking</a></div>
+                <div class="p-2 bg-light rounded"><a href="https://dl.acm.org/doi/10.1145/1516046.1516054" class="citation-link">[2] UTEP CS Course</a></div>
+                <div class="p-2 bg-light rounded"><a href="https://www.computacional.com.br/files/Geral/THE%20LINK%20-%20Pensamento%20Computacional.pdf" class="citation-link">[3] Pensamento Computacional no Brasil</a></div>
+            </div>
+        </div>
     </nav>
 
     <!-- Mobile TOC Toggle -->
-    <button class="lg:hidden fixed top-4 left-4 z-50 bg-white p-2 rounded-lg shadow-lg" onclick="toggleTOC()">
-      <i class="fas fa-bars text-sage-800"></i>
+    <button class="d-lg-none position-fixed top-0 start-0 m-3 z-3 bg-white p-2 rounded shadow" onclick="toggleTOC()">
+        <i class="fas fa-bars text-dark"></i>
     </button>
 
     <!-- Main Content -->
     <main class="main-content">
-      <!-- Hero Section -->
-      <section class="relative min-h-screen bg-gradient-to-br from-sage-100 to-copper-100">
-        <div class="container mx-auto px-6 py-12">
-          <!-- Bento Grid Layout -->
-          <div class="bento-grid mb-12">
-            <!-- Main Hero Content -->
-            <div class="bento-main bg-white rounded-2xl shadow-lg overflow-hidden">
-              <div class="hero-gradient h-full flex items-center justify-center relative">
-                <img src="https://kimi-web-img.moonshot.cn/img/placeholder-0620/图片1.png" alt="Abstrato de conceitos de pensamento computacional" class="absolute inset-0 w-full h-full object-cover opacity-30" size="wallpaper" aspect="wide" query="pensamento computacional abstrato" referrerpolicy="no-referrer"/>
-                <div class="relative z-10 text-center text-white p-8">
-                  <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                    <em class="block text-copper-200">Pensamento Computacional</em>
-                    <span class="block text-white">Integrado ao Currículo</span>
-                  </h1>
-                  <p class="text-xl md:text-2xl text-copper-100 font-light max-w-2xl mx-auto">
-                    Uma Análise Comparativa Global do Ensino Superior
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Side Content -->
-            <div class="bento-side-top bg-white rounded-xl p-6 shadow-lg">
-              <div class="text-center">
-                <div class="text-3xl font-bold text-sage-800 mb-2">5</div>
-                <div class="text-sm text-sage-600">Países Analisados</div>
-              </div>
-            </div>
-
-            <div class="bento-side-bottom bg-copper-50 rounded-xl p-6 shadow-lg">
-              <div class="text-center">
-                <div class="text-3xl font-bold text-copper-800 mb-2">DAAD</div>
-                <div class="text-sm text-copper-700">Metodologia Central</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Key Highlights -->
-          <div class="grid md:grid-cols-3 gap-6 mb-12">
-            <div class="bg-white rounded-xl p-6 shadow-lg hover-lift">
-              <div class="flex items-center mb-4">
-                <i class="fas fa-brain text-sage-600 text-2xl mr-3"></i>
-                <h3 class="font-semibold text-sage-800">Abordagem Conceitual</h3>
-              </div>
-              <p class="text-sage-700 text-sm">Transição do ensino de sintaxe para o desenvolvimento de habilidades computacionais fundamentais</p>
-            </div>
-
-            <div class="bg-white rounded-xl p-6 shadow-lg hover-lift">
-              <div class="flex items-center mb-4">
-                <i class="fas fa-globe text-copper-600 text-2xl mr-3"></i>
-                <h3 class="font-semibold text-copper-800">Tendência Global</h3>
-              </div>
-              <p class="text-copper-700 text-sm">Universidades em todo o mundo revendo currículos para integrar pensamento computacional</p>
-            </div>
-
-            <div class="bg-white rounded-xl p-6 shadow-lg hover-lift">
-              <div class="flex items-center mb-4">
-                <i class="fas fa-graduation-cap text-sage-600 text-2xl mr-3"></i>
-                <h3 class="font-semibold text-sage-800">Competência Transversal</h3>
-              </div>
-              <p class="text-sage-700 text-sm">Habilidade essencial para todas as áreas do conhecimento, não apenas ciência da computação</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Introduction Section -->
-      <section id="introducao" class="py-16 bg-white">
-        <div class="container mx-auto px-6">
-          <div class="max-w-4xl mx-auto fade-in">
-            <h2 class="font-serif text-4xl font-bold text-sage-900 mb-8">1. Introdução ao Pensamento Computacional no Ensino Superior</h2>
-
-            <div class="prose prose-lg max-w-none">
-              <h3 class="font-serif text-2xl font-semibold text-sage-800 mb-4">1.1. Definição e Importância do Pensamento Computacional</h3>
-              <p class="text-gray-700 leading-relaxed mb-6">
-                A integração do <strong>Pensamento Computacional (PC)</strong> nos currículos do ensino superior tem se tornado uma <strong>tendência global</strong>, com instituições de renome revendo seus conteúdos e estruturas curriculares para incorporar esses conceitos <a href="https://www.cs.cmu.edu/~CompThink/" class="citation-link">[1]</a>. O objetivo principal dessa iniciativa é <strong>transcender o mero ensino de programação</strong>, focando-se nos <strong>princípios subjacentes da ciência da computação</strong>.
-              </p>
-
-              <blockquote class="border-l-4 border-copper-500 pl-6 py-4 bg-copper-50 rounded-r-lg mb-6">
-                <p class="text-copper-800 italic text-lg">
-                  &#34;Esta evolução curricular representa uma transição de um modelo que ensinava primariamente &#39;programar para o computador&#39; para um que enfatiza o &#39;pensar computacionalmente&#39;.&#34;
-                </p>
-              </blockquote>
-
-              <p class="text-gray-700 leading-relaxed mb-6">
-                A alfabetização computacional, nesse contexto, é vista como uma <strong>competência mais ampla e conceitual</strong>, essencial para a formação de profissionais capazes de inovar e se adaptar em um mundo cada vez mais digitalizado. A relevância do PC está na sua capacidade de fornecer <strong>ferramentas mentais para decompor problemas, identificar padrões, abstrair detalhes irrelevantes e projetar algoritmos eficientes</strong>, habilidades estas que são transferíveis e valiosas em qualquer disciplina.
-              </p>
-
-              <h3 class="font-serif text-2xl font-semibold text-sage-800 mb-4">1.2. A Metodologia DAAD</h3>
-              <p class="text-gray-700 leading-relaxed mb-6">
-                A metodologia <strong>DAAD</strong>, que engloba os processos de <strong>Decomposição, Abstração, Projeto de Algoritmos e Depuração</strong>, constitui a espinha dorsal do Pensamento Computacional. A forma como o tempo de aula, trabalhos e pesquisa são contabilizados e validados nas diferentes universidades ao redor do mundo tem um impacto direto no formato e na profundidade com que a metodologia DAAD pode ser incorporada nas disciplinas.
-              </p>
-
-              <div class="grid md:grid-cols-2 gap-6 my-8">
-                <div class="bg-sage-50 p-6 rounded-xl">
-                  <h4 class="font-semibold text-sage-800 mb-3">Componentes DAAD</h4>
-                  <ul class="space-y-2 text-sm text-sage-700">
-                    <li><strong>Decomposição:</strong> Quebra de problemas complexos em subproblemas menores</li>
-                    <li><strong>Abstração:</strong> Identificação dos aspectos essenciais, ignorando detalhes irrelevantes</li>
-                    <li><strong>Algoritmos:</strong> Criação de sequências lógicas de instruções</li>
-                    <li><strong>Depuração:</strong> Identificação e correção de erros em soluções</li>
-                  </ul>
-                </div>
-                <div class="bg-copper-50 p-6 rounded-xl">
-                  <h4 class="font-semibold text-copper-800 mb-3">Benefícios</h4>
-                  <ul class="space-y-2 text-sm text-copper-700">
-                    <li>Desenvolvimento de pensamento crítico</li>
-                    <li>Capacidade de resolver problemas complexos</li>
-                    <li>Aplicação transversal em diversas áreas</li>
-                    <li>Preparação para desafios do mundo digital</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Credit Systems Section -->
-      <section id="sistemas-creditos" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-6">
-          <div class="max-w-4xl mx-auto fade-in">
-            <h2 class="font-serif text-4xl font-bold text-sage-900 mb-8">2. Sistemas de Créditos Acadêmicos e sua Influência na Integração Curricular</h2>
-
-            <p class="text-gray-700 leading-relaxed mb-8">
-              A estruturação dos sistemas de créditos acadêmicos varia significativamente entre países e instituições, o que influencia diretamente a forma como o Pensamento Computacional e, consequentemente, a metodologia DAAD, são integrados nos currículos de graduação.
-            </p>
-
-            <!-- Credit Systems Comparison -->
-            <div class="grid lg:grid-cols-2 gap-8 mb-12">
-              <div class="space-y-6">
-                <div class="bg-white p-6 rounded-xl shadow-lg hover-lift">
-                  <h3 class="font-semibold text-sage-800 mb-4 flex items-center">
-                    <i class="fas fa-flag-usa text-blue-600 mr-3"></i>
-                    Estados Unidos: Credit Hours
-                  </h3>
-                  <p class="text-gray-700 text-sm mb-4">
-                    1 crédito = 1 hora de aula + 2 horas de estudo independente por semana (15 semanas/semestre)
-                  </p>
-                  <div class="bg-blue-50 p-4 rounded-lg">
-                    <div class="text-2xl font-bold text-blue-800">120-130</div>
-                    <div class="text-sm text-blue-600">créditos para graduação</div>
-                  </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-xl shadow-lg hover-lift">
-                  <h3 class="font-semibold text-sage-800 mb-4 flex items-center">
-                    <i class="fas fa-flag text-yellow-600 mr-3"></i>
-                    Europa: ECTS
-                  </h3>
-                  <p class="text-gray-700 text-sm mb-4">
-                    1 crédito ECTS = 25-30 horas de trabalho total do estudante
-                  </p>
-                  <div class="bg-yellow-50 p-4 rounded-lg">
-                    <div class="text-2xl font-bold text-yellow-800">180</div>
-                    <div class="text-sm text-yellow-600">ECTS para bacharelado (3 anos)</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="space-y-6">
-                <div class="bg-white p-6 rounded-xl shadow-lg hover-lift">
-                  <h3 class="font-semibold text-sage-800 mb-4 flex items-center">
-                    <i class="fas fa-flag text-red-600 mr-3"></i>
-                    China: Horas de Contato
-                  </h3>
-                  <p class="text-gray-700 text-sm mb-4">
-                    1 crédito = 1 hora de aula por semana (18 semanas/semestre)
-                  </p>
-                  <div class="bg-red-50 p-4 rounded-lg">
-                    <div class="text-2xl font-bold text-red-800">18</div>
-                    <div class="text-sm text-red-600">horas por crédito/semestre</div>
-                  </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-xl shadow-lg hover-lift">
-                  <h3 class="font-semibold text-sage-800 mb-4 flex items-center">
-                    <i class="fas fa-flag text-green-600 mr-3"></i>
-                    Brasil: Carga Horária
-                  </h3>
-                  <p class="text-gray-700 text-sm mb-4">
-                    1 crédito = 15 horas-aula (teóricas) ou 30 horas (práticas)
-                  </p>
-                  <div class="bg-green-50 p-4 rounded-lg">
-                    <div class="text-2xl font-bold text-green-800">15</div>
-                    <div class="text-sm text-green-600">horas por crédito teórico</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Impact on CT Integration -->
-            <div class="bg-white p-8 rounded-2xl shadow-lg">
-              <h3 class="font-serif text-2xl font-semibold text-sage-800 mb-6">Impacto na Integração do Pensamento Computacional</h3>
-              <p class="text-gray-700 leading-relaxed mb-6">
-                Os diferentes sistemas de créditos influenciam diretamente na forma como as universidades estruturam suas disciplinas de Pensamento Computacional. O sistema americano, com sua clara distinção entre horas de aula e estudo independente, favorece abordagens que demandam prática e reflexão. O sistema europeu ECTS, ao priorizar o volume total de trabalho, permite maior flexibilidade para atividades baseadas em projetos e aprendizagem autônoma.
-              </p>
-
-              <div class="grid md:grid-cols-3 gap-4 mt-6">
-                <div class="text-center p-4 bg-sage-50 rounded-lg">
-                  <div class="text-lg font-semibold text-sage-800">Flexibilidade</div>
-                  <div class="text-sm text-sage-600">ECTS permite mais trabalho independente</div>
-                </div>
-                <div class="text-center p-4 bg-copper-50 rounded-lg">
-                  <div class="text-lg font-semibold text-copper-800">Estrutura</div>
-                  <div class="text-sm text-copper-600">Credit Hours oferecem clareza</div>
-                </div>
-                <div class="text-center p-4 bg-gray-50 rounded-lg">
-                  <div class="text-lg font-semibold text-gray-800">Adaptação</div>
-                  <div class="text-sm text-gray-600">Contexto local influencia implementação</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- US Integration Section -->
-      <section id="eua" class="py-16 bg-white">
-        <div class="container mx-auto px-6">
-          <div class="max-w-4xl mx-auto fade-in">
-            <h2 class="font-serif text-4xl font-bold text-sage-900 mb-8">3. Integração do Pensamento Computacional em Universidades dos Estados Unidos</h2>
-
-            <div class="grid lg:grid-cols-2 gap-8 mb-12">
-              <div class="space-y-6">
-                <div class="bg-sage-50 p-6 rounded-xl">
-                  <h3 class="font-semibold text-sage-800 mb-4 flex items-center">
-                    <i class="fas fa-university text-sage-600 mr-3"></i>
-                    Carnegie Mellon University
-                  </h3>
-                  <p class="text-sage-700 text-sm mb-4">
-                    Pioneira com Centro de Pensamento Computacional e abordagem PROBE (Problem-oriented Explorations) <a href="https://www.cs.cmu.edu/~CompThink/" class="citation-link">[1]</a>
-                  </p>
-                  <ul class="text-xs text-sage-600 space-y-1">
-                    <li>• Disciplina &#34;Princípios da Computação&#34; desde 2005</li>
-                    <li>• Ênfase em problemas do mundo real</li>
-                    <li>• Aplicação prática do valor do PC</li>
-                  </ul>
-                </div>
-
-                <div class="bg-copper-50 p-6 rounded-xl">
-                  <h3 class="font-semibold text-copper-800 mb-4 flex items-center">
-                    <i class="fas fa-graduation-cap text-copper-600 mr-3"></i>
-                    Massachusetts Institute of Technology
-                  </h3>
-                  <p class="text-copper-700 text-sm mb-4">
-                    Reconhece PC como tipo distinto de raciocínio rigoroso com valor intelectual
-                  </p>
-                  <ul class="text-xs text-copper-600 space-y-1">
-                    <li>• Requisito mínimo de computação para todos</li>
-                    <li>• Curso &#34;Introdução ao PC e Ciência de Dados&#34;</li>
-                    <li>• Foco em Python e aplicações diversas</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="space-y-6">
-                <div class="bg-gray-50 p-6 rounded-xl">
-                  <h4 class="font-semibold text-gray-800 mb-3">Outras Universidades</h4>
-                  <div class="space-y-3">
-                    <div class="border-l-4 border-blue-500 pl-4">
-                      <div class="font-medium text-gray-800">Penn State</div>
-                      <div class="text-sm text-gray-600">Conceituação e implementação de soluções computacionais</div>
+        <!-- Hero Section -->
+        <section id="hero" class="min-vh-100" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container py-5">
+                <div class="bento-grid mb-5">
+                    <div class="bento-main bg-white rounded-3 shadow">
+                        <div class="hero-gradient h-100 d-flex align-items-center justify-content-center position-relative">
+                            <img src="https://kimi-web-img.moonshot.cn/img/placeholder-0620/图片1.png" alt="Abstrato de conceitos de pensamento computacional" class="position-absolute w-100 h-100 object-fit-cover opacity-25"/>
+                            <div class="position-relative z-1 text-center text-white p-4">
+                                <h1 class="display-4 fw-bold mb-4">
+                                    <em class="d-block" style="color: var(--copper-200);">Pensamento Computacional</em>
+                                    <span class="d-block">Integrado ao Currículo</span>
+                                </h1>
+                                <p class="fs-4 text-light fw-light mx-auto" style="max-width: 32rem;">
+                                    Uma Análise Comparativa Global do Ensino Superior
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="border-l-4 border-red-500 pl-4">
-                      <div class="font-medium text-gray-800">UW-Madison</div>
-                      <div class="text-sm text-gray-600">Abstração e decomposição em cursos introdutórios</div>
+                    <div class="bento-side-top bg-white rounded-3 p-4 shadow">
+                        <div class="text-center">
+                            <div class="fs-2 fw-bold text-dark mb-2">5</div>
+                            <div class="fs-6 text-muted">Países Analisados</div>
+                        </div>
                     </div>
-                    <div class="border-l-4 border-orange-500 pl-4">
-                      <div class="font-medium text-gray-800">UT Austin</div>
-                      <div class="text-sm text-gray-600">Desenvolvimento de algoritmos e técnicas de depuração</div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: var(--copper-50);">
+                        <div class="text-center">
+                            <div class="fs-2 fw-bold mb-2" style="color: var(--copper-800);">DAAD</div>
+                            <div class="fs-6" style="color: var(--copper-700);">Metodologia Central</div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-
-                <div class="bg-blue-50 p-6 rounded-xl">
-                  <h4 class="font-semibold text-blue-800 mb-3">University of Texas at El Paso</h4>
-                  <p class="text-blue-700 text-sm mb-3">
-                    Curso &#34;CS 1310: Intro to Computational Thinking&#34; sem pré-requisitos <a href="https://dl.acm.org/doi/10.1145/1516046.1516054" class="citation-link">[2]</a>
-                  </p>
-                  <div class="text-xs text-blue-600">
-                    • Python para programação criativa
-                    <br/>
-                    • Algoritmos, dados, paralelismo, abstração
-                    <br/>
-                    • Abordagem sistemática para problemas reais
-                  </div>
+                <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-brain fs-3 me-3" style="color: var(--sage-600);"></i>
+                                    <h3 class="fs-5 fw-semibold" style="color: var(--sage-800);">Abordagem Conceitual</h3>
+                                </div>
+                                <p class="fs-6" style="color: var(--sage-700);">Transição do ensino de sintaxe para o desenvolvimento de habilidades computacionais fundamentais</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-globe fs-3 me-3" style="color: var(--copper-600);"></i>
+                                    <h3 class="fs-5 fw-semibold" style="color: var(--copper-800);">Tendência Global</h3>
+                                </div>
+                                <p class="fs-6" style="color: var(--copper-700);">Universidades em todo o mundo revendo currículos para integrar pensamento computacional</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-graduation-cap fs-3 me-3" style="color: var(--sage-600);"></i>
+                                    <h3 class="fs-5 fw-semibold" style="color: var(--sage-800);">Competência Transversal</h3>
+                                </div>
+                                <p class="fs-6" style="color: var(--sage-700);">Habilidade essencial para todas as áreas do conhecimento, não apenas ciência da computação</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- UK Integration Section -->
-      <section id="reino-unido" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-6">
-          <div class="max-w-4xl mx-auto fade-in">
-            <h2 class="font-serif text-4xl font-bold text-sage-900 mb-8">4. Integração do Pensamento Computacional em Universidades do Reino Unido</h2>
-
-            <div class="grid lg:grid-cols-3 gap-6 mb-8">
-              <div class="bg-white p-6 rounded-xl shadow-lg hover-lift">
-                <div class="flex items-center mb-4">
-                  <img src="https://kimi-web-img.moonshot.cn/img/placeholder-0620/图片3.png" alt="Universidade de Cambridge" class="w-12 h-12 rounded-full mr-4 object-cover" size="small" aspect="square" style="photo" query="Universidade de Cambridge" referrerpolicy="no-referrer"/>
-                  <h3 class="font-semibold text-sage-800">Cambridge</h3>
-                </div>
-                <p class="text-gray-700 text-sm mb-3">
-                  Curso abrangente cobrindo &#34;todos os aspectos da ciência da computação moderna&#34;
-                </p>
-                <div class="text-xs text-sage-600">
-                  <div class="mb-1">• Abstração e lógica</div>
-                  <div class="mb-1">• Algoritmos e representação de dados</div>
-                  <div>• Análise de problemas computacionais</div>
-                </div>
-              </div>
-
-              <div class="bg-white p-6 rounded-xl shadow-lg hover-lift">
-                <div class="flex items-center mb-4">
-                  <img src="https://kimi-web-img.moonshot.cn/img/placeholder-0620/图片9.png" alt="Universidade de Oxford" class="w-12 h-12 rounded-full mr-4 object-cover" size="small" aspect="square" style="photo" query="Universidade de Oxford" referrerpolicy="no-referrer"/>
-                  <h3 class="font-semibold text-sage-800">Oxford</h3>
-                </div>
-                <p class="text-gray-700 text-sm mb-3">
-                  Estímulo ao PC por meio do design de programas de computador
-                </p>
-                <div class="text-xs text-sage-600">
-                  <div class="mb-1">• Leituras de conceitos de alto nível</div>
-                  <div class="mb-1">• UK Bebras Challenge</div>
-                  <div>• Oxford Computing Challenge</div>
-                </div>
-              </div>
-
-              <div class="bg-white p-6 rounded-xl shadow-lg hover-lift">
-                <div class="flex items-center mb-4">
-                  <img src="https://kimi-web-img.moonshot.cn/img/placeholder-0620/图片13.png" alt="Imperial College London" class="w-12 h-12 rounded-full mr-4 object-cover" size="small" aspect="square" query="Imperial College London logo" referrerpolicy="no-referrer"/>
-                  <h3 class="font-semibold text-sage-800">Imperial College</h3>
-                </div>
-                <p class="text-gray-700 text-sm mb-3">
-                  Ênfase em princípios fundamentais e pensamento lógico
-                </p>
-                <div class="text-xs text-sage-600">
-                  <div class="mb-1">• Matemática Discreta</div>
-                  <div class="mb-1">• Lógica e Raciocínio</div>
-                  <div>• Grafos e Algoritmos</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="bg-white p-8 rounded-2xl shadow-lg">
-              <h3 class="font-serif text-2xl font-semibold text-sage-800 mb-6">Abordagem Britânica</h3>
-              <p class="text-gray-700 leading-relaxed mb-6">
-                As universidades britânicas enfatizam princípios fundamentais e design de programas, mesmo quando o termo &#34;Pensamento Computacional&#34; não é explicitamente mencionado. A abordagem é caracterizada por:
-              </p>
-
-              <div class="grid md:grid-cols-2 gap-6">
-                <div class="space-y-4">
-                  <div class="flex items-start">
-                    <i class="fas fa-check-circle text-sage-600 mt-1 mr-3"></i>
+        <!-- Introduction Section -->
+        <section id="introducao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">1. Introdução ao Pensamento Computacional no Ensino Superior</h2>
                     <div>
-                      <div class="font-medium text-sage-800">Foco Conceitual</div>
-                      <div class="text-sm text-sage-600">Compreensão profunda dos fundamentos da computação</div>
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">1.1. Definição e Importância do Pensamento Computacional</h3>
+                        <p class="text-muted mb-4">
+                            A integração do <strong>Pensamento Computacional (PC)</strong> nos currículos do ensino superior tem se tornado uma <strong>tendência global</strong>, com instituições de renome revendo seus conteúdos e estruturas curriculares para incorporar esses conceitos <a href="https://www.cs.cmu.edu/~CompThink/" class="citation-link">[1]</a>. O objetivo principal dessa iniciativa é <strong>transcender o mero ensino de programação</strong>, focando-se nos <strong>princípios subjacentes da ciência da computação</strong>.
+                        </p>
+                        <blockquote class="border-start border-4 border-primary p-4 bg-light rounded-end mb-4">
+                            <p class="text-muted fs-5 fst-italic" style="color: var(--copper-800);">
+                                "Esta evolução curricular representa uma transição de um modelo que ensinava primariamente 'programar para o computador' para um que enfatiza o 'pensar computacionalmente'."
+                            </p>
+                        </blockquote>
+                        <p class="text-muted mb-4">
+                            A alfabetização computacional, nesse contexto, é vista como uma <strong>competência mais ampla e conceitual</strong>, essencial para a formação de profissionais capazes de inovar e se adaptar em um mundo cada vez mais digitalizado. A relevância do PC está na sua capacidade de fornecer <strong>ferramentas mentais para decompor problemas, identificar padrões, abstrair detalhes irrelevantes e projetar algoritmos eficientes</strong>, habilidades estas que são transferíveis e valiosas em qualquer disciplina.
+                        </p>
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">1.2. A Metodologia DAAD</h3>
+                        <p class="text-muted mb-4">
+                            A metodologia <strong>DAAD</strong>, que engloba os processos de <strong>Decomposição, Abstração, Projeto de Algoritmos e Depuração</strong>, constitui a espinha dorsal do Pensamento Computacional. A forma como o tempo de aula, trabalhos e pesquisa são contabilizados e validados nas diferentes universidades ao redor do mundo tem um impacto direto no formato e na profundidade com que a metodologia DAAD pode ser incorporada nas disciplinas.
+                        </p>
+                        <div class="row row-cols-1 row-cols-md-2 g-4 my-4">
+                            <div class="col">
+                                <div class="card h-100 p-4 rounded-3" style="background-color: var(--sage-50);">
+                                    <h4 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Componentes DAAD</h4>
+                                    <ul class="list-unstyled fs-6" style="color: var(--sage-700);">
+                                        <li class="mb-2"><strong>Decomposição:</strong> Quebra de problemas complexos em subproblemas menores</li>
+                                        <li class="mb-2"><strong>Abstração:</strong> Identificação dos aspectos essenciais, ignorando detalhes irrelevantes</li>
+                                        <li class="mb-2"><strong>Algoritmos:</strong> Criação de sequências lógicas de instruções</li>
+                                        <li><strong>Depuração:</strong> Identificação e correção de erros em soluções</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card h-100 p-4 rounded-3" style="background-color: var(--copper-50);">
+                                    <h4 class="fs-5 fw-semibold mb-3" style="color: var(--copper-800);">Benefícios</h4>
+                                    <ul class="list-unstyled fs-6" style="color: var(--copper-700);">
+                                        <li class="mb-2">Desenvolvimento de pensamento crítico</li>
+                                        <li class="mb-2">Capacidade de resolver problemas complexos</li>
+                                        <li class="mb-2">Aplicação transversal em diversas áreas</li>
+                                        <li>Preparação para desafios do mundo digital</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  <div class="flex items-start">
-                    <i class="fas fa-check-circle text-sage-600 mt-1 mr-3"></i>
-                    <div>
-                      <div class="font-medium text-sage-800">Análise de Problemas</div>
-                      <div class="text-sm text-sage-600">Habilidade de analisar problemas em termos computacionais</div>
-                    </div>
-                  </div>
                 </div>
-                <div class="space-y-4">
-                  <div class="flex items-start">
-                    <i class="fas fa-check-circle text-copper-600 mt-1 mr-3"></i>
-                    <div>
-                      <div class="font-medium text-copper-800">Design de Programas</div>
-                      <div class="text-sm text-copper-600">Pensamento criativo e sistemático para projetar soluções</div>
-                    </div>
-                  </div>
-                  <div class="flex items-start">
-                    <i class="fas fa-check-circle text-copper-600 mt-1 mr-3"></i>
-                    <div>
-                      <div class="font-medium text-copper-800">Pensamento Lógico</div>
-                      <div class="text-sm text-copper-600">Desenvolvimento de raciocínio estruturado e preciso</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- Europe Integration Section -->
-      <section id="europa" class="py-16 bg-white">
-        <div class="container mx-auto px-6">
-          <div class="max-w-4xl mx-auto fade-in">
-            <h2 class="font-serif text-4xl font-bold text-sage-900 mb-8">5. Integração do Pensamento Computacional em Universidades da Europa</h2>
-
-            <div class="mb-8">
-              <h3 class="font-serif text-2xl font-semibold text-sage-800 mb-4">Contexto Europeu</h3>
-              <p class="text-gray-700 leading-relaxed mb-6">
-                Na Europa, a integração do Pensamento Computacional tem sido impulsionada por políticas e iniciativas em diversos níveis. Um relatório de 2016 da Comissão Europeia destacou o crescente interesse e adoção do PC nos currículos escolares em pelo menos <strong>13 países europeus</strong> <a href="https://www.computacional.com.br/files/Geral/THE%20LINK%20-%20Pensamento%20Computacional.pdf" class="citation-link">[3]</a>.
-              </p>
+        <!-- Credit Systems Section -->
+        <section id="sistemas-creditos" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">2. Sistemas de Créditos Acadêmicos e sua Influência na Integração Curricular</h2>
+                    <p class="text-muted mb-4">
+                        A estruturação dos sistemas de créditos acadêmicos varia significativamente entre países e instituições, o que influencia diretamente a forma como o Pensamento Computacional e, consequentemente, a metodologia DAAD, são integrados nos currículos de graduação.
+                    </p>
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow hover-lift">
+                                <h3 class="fs-5 fw-semibold mb-3 d-flex align-items-center" style="color: var(--sage-800);">
+                                    <i class="fas fa-flag-usa me-3 text-primary"></i>
+                                    Estados Unidos: Credit Hours
+                                </h3>
+                                <p class="fs-6 text-muted mb-3">
+                                    1 crédito = 1 hora de aula + 2 horas de estudo independente por semana (15 semanas/semestre)
+                                </p>
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <div class="fs-3 fw-bold text-primary">120-130</div>
+                                    <div class="fs-6 text-primary">créditos para graduação</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow hover-lift">
+                                <h3 class="fs-5 fw-semibold mb-3 d-flex align-items-center" style="color: var(--sage-800);">
+                                    <i class="fas fa-flag me-3 text-warning"></i>
+                                    Europa: ECTS
+                                </h3>
+                                <p class="fs-6 text-muted mb-3">
+                                    1 crédito ECTS = 25-30 horas de trabalho total do estudante
+                                </p>
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <div class="fs-3 fw-bold text-warning">180</div>
+                                    <div class="fs-6 text-warning">ECTS para bacharelado (3 anos)</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow hover-lift">
+                                <h3 class="fs-5 fw-semibold mb-3 d-flex align-items-center" style="color: var(--sage-800);">
+                                    <i class="fas fa-flag me-3 text-danger"></i>
+                                    China: Horas de Contato
+                                </h3>
+                                <p class="fs-6 text-muted mb-3">
+                                    1 crédito = 1 hora de aula por semana (18 semanas/semestre)
+                                </p>
+                                <div class="p-3 bg-danger-subtle rounded">
+                                    <div class="fs-3 fw-bold text-danger">18</div>
+                                    <div class="fs-6 text-danger">horas por crédito/semestre</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow hover-lift">
+                                <h3 class="fs-5 fw-semibold mb-3 d-flex align-items-center" style="color: var(--sage-800);">
+                                    <i class="fas fa-flag me-3 text-success"></i>
+                                    Brasil: Carga Horária
+                                </h3>
+                                <p class="fs-6 text-muted mb-3">
+                                    1 crédito = 15 horas-aula (teóricas) ou 30 horas (práticas)
+                                </p>
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <div class="fs-3 fw-bold text-success">15</div>
+                                    <div class="fs-6 text-success">horas por crédito teórico</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card p-4 rounded-3 shadow">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Impacto na Integração do Pensamento Computacional</h3>
+                        <p class="text-muted mb-4">
+                            Os diferentes sistemas de créditos influenciam diretamente na forma como as universidades estruturam suas disciplinas de Pensamento Computacional. O sistema americano, com sua clara distinção entre horas de aula e estudo independente, favorece abordagens que demandam prática e reflexão. O sistema europeu ECTS, ao priorizar o volume total de trabalho, permite maior flexibilidade para atividades baseadas em projetos e aprendizagem autônoma.
+                        </p>
+                        <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+                            <div class="col">
+                                <div class="text-center p-3 rounded" style="background-color: var(--sage-50);">
+                                    <div class="fs-5 fw-semibold" style="color: var(--sage-800);">Flexibilidade</div>
+                                    <div class="fs-6" style="color: var(--sage-600);">ECTS permite mais trabalho independente</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 rounded" style="background-color: var(--copper-50);">
+                                    <div class="fs-5 fw-semibold" style="color: var(--copper-800);">Estrutura</div>
+                                    <div class="fs-6" style="color: var(--copper-600);">Credit Hours oferecem clareza</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 rounded bg-light">
+                                    <div class="fs-5 fw-semibold text-dark">Adaptação</div>
+                                    <div class="fs-6 text-muted">Contexto local influencia implementação</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <!-- EHL Case Study -->
-            <div class="bg-gradient-to-r from-sage-50 to-copper-50 p-8 rounded-2xl shadow-lg mb-8">
-              <h3 class="font-serif text-2xl font-semibold text-sage-800 mb-6 flex items-center">
-                <i class="fas fa-hotel text-copper-600 mr-3"></i>
-                Caso de Estudo: Ecole hôtelière de Lausanne (EHL) - Suíça
-              </h3>
-
-              <div class="grid lg:grid-cols-2 gap-8">
-                <div>
-                  <h4 class="font-semibold text-sage-800 mb-4">Módulo de Computational Thinking</h4>
-                  <p class="text-gray-700 text-sm mb-4">
-                    Oferta no segundo semestre do Bacharelado em Administração Hoteleira
-                  </p>
-
-                  <div class="space-y-3">
-                    <div class="flex justify-between items-center p-3 bg-white rounded-lg">
-                      <span class="text-sage-700 font-medium">Créditos ECTS</span>
-                      <span class="text-sage-800 font-bold">3.5</span>
+        <!-- US Integration Section -->
+        <section id="eua" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">3. Integração do Pensamento Computacional em Universidades dos Estados Unidos</h2>
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow hover-lift university-card" style="background-color: var(--sage-50);">
+                                <h3 class="fs-5 fw-semibold mb-3 d-flex align-items-center" style="color: var(--sage-800);">
+                                    <i class="fas fa-university me-3" style="color: var(--sage-600);"></i>
+                                    Carnegie Mellon University
+                                </h3>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    Pioneira com Centro de Pensamento Computacional e abordagem PROBE (Problem-oriented Explorations) <a href="https://www.cs.cmu.edu/~CompThink/" class="citation-link">[1]</a>
+                                </p>
+                                <ul class="list-unstyled fs-6" style="color: var(--sage-600);">
+                                    <li class="mb-1">• Disciplina "Princípios da Computação" desde 2005</li>
+                                    <li class="mb-1">• Ênfase em problemas do mundo real</li>
+                                    <li>• Aplicação prática do valor do PC</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow hover-lift university-card" style="background-color: var(--copper-50);">
+                                <h3 class="fs-5 fw-semibold mb-3 d-flex align-items-center" style="color: var(--copper-800);">
+                                    <i class="fas fa-graduation-cap me-3" style="color: var(--copper-600);"></i>
+                                    Massachusetts Institute of Technology
+                                </h3>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    Reconhece PC como tipo distinto de raciocínio rigoroso com valor intelectual
+                                </p>
+                                <ul class="list-unstyled fs-6" style="color: var(--copper-600);">
+                                    <li class="mb-1">• Requisito mínimo de computação para todos</li>
+                                    <li class="mb-1">• Curso "Introdução ao PC e Ciência de Dados"</li>
+                                    <li>• Foco em Python e aplicações diversas</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow hover-lift university-card" style="background-color: var(--sage-100);">
+                                <h3 class="fs-5 fw-semibold mb-3 d-flex align-items-center" style="color: var(--sage-800);">
+                                    <i class="fas fa-university me-3" style="color: var(--sage-600);"></i>
+                                    Outras Universidades
+                                </h3>
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="border-start border-4 border-primary ps-3">
+                                        <div class="fw-medium" style="color: var(--sage-800);">Penn State</div>
+                                        <div class="fs-6" style="color: var(--sage-600);">Conceituação e implementação de soluções computacionais</div>
+                                    </div>
+                                    <div class="border-start border-4 border-danger ps-3">
+                                        <div class="fw-medium" style="color: var(--sage-800);">UW-Madison</div>
+                                        <div class="fs-6" style="color: var(--sage-600);">Abstração e decomposição em cursos introdutórios</div>
+                                    </div>
+                                    <div class="border-start border-4 border-warning ps-3">
+                                        <div class="fw-medium" style="color: var(--sage-800);">UT Austin</div>
+                                        <div class="fs-6" style="color: var(--sage-600);">Desenvolvimento de algoritmos e técnicas de depuração</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow hover-lift university-card" style="background-color: var(--copper-100);">
+                                <h3 class="fs-5 fw-semibold mb-3 d-flex align-items-center" style="color: var(--copper-800);">
+                                    <i class="fas fa-university me-3" style="color: var(--copper-600);"></i>
+                                    University of Texas at El Paso
+                                </h3>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    Curso "CS 1310: Intro to Computational Thinking" sem pré-requisitos <a href="https://dl.acm.org/doi/10.1145/1516046.1516054" class="citation-link">[2]</a>
+                                </p>
+                                <ul class="list-unstyled fs-6" style="color: var(--copper-600);">
+                                    <li class="mb-1">• Python para programação criativa</li>
+                                    <li class="mb-1">• Algoritmos, dados, paralelismo, abstração</li>
+                                    <li>• Abordagem sistemática para problemas reais</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex justify-between items-center p-3 bg-white rounded-lg">
-                      <span class="text-sage-700 font-medium">Horas Totais</span>
-                      <span class="text-sage-800 font-bold">88</span>
-                    </div>
-                    <div class="flex justify-between items-center p-3 bg-white rounded-lg">
-                      <span class="text-sage-700 font-medium">Horas de Contato</span>
-                      <span class="text-sage-800 font-bold">30</span>
-                    </div>
-                    <div class="flex justify-between items-center p-3 bg-white rounded-lg">
-                      <span class="text-sage-700 font-medium">Estudo Independente</span>
-                      <span class="text-sage-800 font-bold">58</span>
-                    </div>
-                  </div>
                 </div>
-
-                <div>
-                  <h4 class="font-semibold text-copper-800 mb-4">Significado e Impacto</h4>
-                  <p class="text-copper-700 text-sm mb-4">
-                    Este exemplo ilustra como o sistema ECTS facilita a criação de disciplinas focadas no trabalho total do estudante, permitindo abordagens baseadas em projetos e aprendizagem autônoma.
-                  </p>
-
-                  <div class="bg-white p-4 rounded-lg">
-                    <h5 class="font-medium text-copper-800 mb-2">Principais Destaques</h5>
-                    <ul class="text-xs text-copper-700 space-y-1">
-                      <li>• PC relevante para áreas além da computação</li>
-                      <li>• Flexibilidade do ECTS para aprendizagem ativa</li>
-                      <li>• Equilíbrio entre teoria e prática</li>
-                      <li>• Preparação para desafios do setor hoteleiro</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
             </div>
+        </section>
 
-            <!-- ECTS Benefits -->
-            <div class="bg-white p-6 rounded-xl shadow-lg">
-              <h4 class="font-semibold text-sage-800 mb-4 flex items-center">
-                <i class="fas fa-star text-yellow-500 mr-2"></i>
-                Benefícios do Sistema ECTS para o Pensamento Computacional
-              </h4>
-              <div class="grid md:grid-cols-3 gap-4">
-                <div class="text-center p-4 bg-yellow-50 rounded-lg">
-                  <i class="fas fa-users text-yellow-600 text-2xl mb-2"></i>
-                  <div class="font-medium text-yellow-800">Mobilidade</div>
-                  <div class="text-xs text-yellow-600">Facilita reconhecimento entre universidades</div>
-                </div>
-                <div class="text-center p-4 bg-green-50 rounded-lg">
-                  <i class="fas fa-project-diagram text-green-600 text-2xl mb-2"></i>
-                  <div class="font-medium text-green-800">Flexibilidade</div>
-                  <div class="text-xs text-green-600">Permite ênfase em projetos e trabalho independente</div>
-                </div>
-                <div class="text-center p-4 bg-blue-50 rounded-lg">
-                  <i class="fas fa-target text-blue-600 text-2xl mb-2"></i>
-                  <div class="font-medium text-blue-800">Resultados</div>
-                  <div class="text-xs text-blue-600">Foco nos resultados de aprendizagem</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- China Integration Section -->
-      <section id="china" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-6">
-          <div class="max-w-4xl mx-auto fade-in">
-            <h2 class="font-serif text-4xl font-bold text-sage-900 mb-8">6. Integração do Pensamento Computacional em Universidades da China</h2>
-
-            <!-- Context -->
-            <div class="mb-8">
-              <h3 class="font-serif text-2xl font-semibold text-sage-800 mb-4">Contexto Chinês</h3>
-              <p class="text-gray-700 leading-relaxed mb-6">
-                Na China, o Pensamento Computacional tem ganhado destaque tanto no currículo do ensino médio quanto no ensino superior, com um impulso significativo vindo de políticas governamentais. O governo chinês tem promovido a <strong>educação em ciência da computação e inteligência artificial</strong> como parte de sua estratégia para se tornar uma potência tecnológica global.
-              </p>
-            </div>
-
-            <!-- HIT Case Study -->
-            <div class="bg-white p-8 rounded-2xl shadow-lg mb-8">
-              <h3 class="font-serif text-2xl font-semibold text-sage-800 mb-6 flex items-center">
-                <i class="fas fa-university text-red-600 mr-3"></i>
-                Harbin Institute of Technology (HIT)
-              </h3>
-
-              <div class="grid lg:grid-cols-2 gap-8">
-                <div>
-                  <h4 class="font-semibold text-sage-800 mb-4">Curso Inovador</h4>
-                  <p class="text-gray-700 text-sm mb-4">
-                    &#34;大学计算机-计算思维导论&#34; (University Computing - Introduction to Computational Thinking) - modelo amplamente adotado por outras universidades chinesas <a href="https://www.researchgate.net/publication/329467126_Case_study_on_STEMcomputational_thinking_education_model_in_Chinese_K-12_schools" class="citation-link">[10]</a>
-                  </p>
-
-                  <div class="bg-red-50 p-4 rounded-lg mb-4">
-                    <h5 class="font-medium text-red-800 mb-2">Modelo de Ensino Híbrido</h5>
-                    <div class="text-sm text-red-700">
-                      <div class="mb-1">• MOOCs (Massive Open Online Courses)</div>
-                      <div class="mb-1">• SPOCs (Small Private Online Courses)</div>
-                      <div>• Sala de Aula Invertida (Flipped Classroom)</div>
+        <!-- UK Integration Section -->
+        <section id="reino-unido" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">4. Integração do Pensamento Computacional em Universidades do Reino Unido</h2>
+                    <div class="row row-cols-1 row-cols-lg-3 g-4 mb-4">
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow hover-lift">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img src="https://kimi-web-img.moonshot.cn/img/placeholder-0620/图片3.png" alt="Universidade de Cambridge" class="rounded-circle me-3 object-fit-cover" width="48" height="48"/>
+                                    <h3 class="fs-5 fw-semibold" style="color: var(--sage-800);">Cambridge</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    Curso abrangente cobrindo "todos os aspectos da ciência da computação moderna"
+                                </p>
+                                <div class="fs-6" style="color: var(--sage-600);">
+                                    <div class="mb-1">• Abstração e lógica</div>
+                                    <div class="mb-1">• Algoritmos e representação de dados</div>
+                                    <div>• Análise de problemas computacionais</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow hover-lift">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img src="https://kimi-web-img.moonshot.cn/img/placeholder-0620/图片9.png" alt="Universidade de Oxford" class="rounded-circle me-3 object-fit-cover" width="48" height="48"/>
+                                    <h3 class="fs-5 fw-semibold" style="color: var(--sage-800);">Oxford</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    Estímulo ao PC por meio do design de programas de computador
+                                </p>
+                                <div class="fs-6" style="color: var(--sage-600);">
+                                    <div class="mb-1">• Leituras de conceitos de alto nível</div>
+                                    <div class="mb-1">• UK Bebras Challenge</div>
+                                    <div>• Oxford Computing Challenge</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow hover-lift">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img src="https://kimi-web-img.moonshot.cn/img/placeholder-0620/图片13.png" alt="Imperial College London" class="rounded-circle me-3 object-fit-cover" width="48" height="48"/>
+                                    <h3 class="fs-5 fw-semibold" style="color: var(--sage-800);">Imperial College</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    Ênfase em princípios fundamentais e pensamento lógico
+                                </p>
+                                <div class="fs-6" style="color: var(--sage-600);">
+                                    <div class="mb-1">• Matemática Discreta</div>
+                                    <div class="mb-1">• Lógica e Raciocínio</div>
+                                    <div>• Grafos e Algoritmos</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
+                    <div class="card p-4 rounded-3 shadow">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Abordagem Britânica</h3>
+                        <p class="text-muted mb-4">
+                            As universidades britânicas enfatizam princípios fundamentais e design de programas, mesmo quando o termo "Pensamento Computacional" não é explicitamente mencionado. A abordagem é caracterizada por:
+                        </p>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="d-flex align-items-start">
+                                    <i class="fas fa-check-circle me-3 mt-1" style="color: var(--sage-600);"></i>
+                                    <div>
+                                        <div class="fw-medium" style="color: var(--sage-800);">Foco Conceitual</div>
+                                        <div class="fs-6" style="color: var(--sage-600);">Compreensão profunda dos fundamentos da computação</div>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-start mt-3">
+                                    <i class="fas fa-check-circle me-3 mt-1" style="color: var(--sage-600);"></i>
+                                    <div>
+                                        <div class="fw-medium" style="color: var(--sage-800);">Análise de Problemas</div>
+                                        <div class="fs-6" style="color: var(--sage-600);">Habilidade de analisar problemas em termos computacionais</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex align-items-start">
+                                    <i class="fas fa-check-circle me-3 mt-1" style="color: var(--copper-600);"></i>
+                                    <div>
+                                        <div class="fw-medium" style="color: var(--copper-800);">Design de Programas</div>
+                                        <div class="fs-6" style="color: var(--copper-600);">Pensamento criativo e sistemático para projetar soluções</div>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-start mt-3">
+                                    <i class="fas fa-check-circle me-3 mt-1" style="color: var(--copper-600);"></i>
+                                    <div>
+                                        <div class="fw-medium" style="color: var(--copper-800);">Pensamento Lógico</div>
+                                        <div class="fs-6" style="color: var(--copper-600);">Desenvolvimento de raciocínio estruturado e preciso</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div>
-                  <h4 class="font-semibold text-red-800 mb-4">Impacto e Escala</h4>
-                  <div class="space-y-3">
-                    <div class="flex justify-between items-center p-3 bg-red-50 rounded-lg">
-                      <span class="text-red-700">Universidades Parceiras</span>
-                      <span class="text-red-800 font-bold">40+</span>
-                    </div>
-                    <div class="flex justify-between items-center p-3 bg-red-50 rounded-lg">
-                      <span class="text-red-700">Estudantes Matriculados (2016)</span>
-                      <span class="text-red-800 font-bold">80,000+</span>
-                    </div>
-                    <div class="flex justify-between items-center p-3 bg-red-50 rounded-lg">
-                      <span class="text-red-700">Interações de Discussão</span>
-                      <span class="text-red-800 font-bold">600,000+</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
+        </section>
 
-            <!-- SUSTech Case Study -->
-            <div class="bg-white p-8 rounded-2xl shadow-lg mb-8">
-              <h3 class="font-serif text-2xl font-semibold text-sage-800 mb-6 flex items-center">
-                <i class="fas fa-brain text-blue-600 mr-3"></i>
-                Southern University of Science and Technology (SUSTech)
-              </h3>
-
-              <div class="mb-6">
-                <h4 class="font-semibold text-blue-800 mb-3">&#34;Computational Thinking and Artificial Intelligence Basics&#34;</h4>
-                <p class="text-gray-700 text-sm mb-4">
-                  Curso para estudantes do primeiro ano de diversos cursos, reconhecido com várias certificações de excelência <a href="https://www.researchgate.net/publication/329467126_Case_study_on_STEMcomputational_thinking_education_model_in_Chinese_K-12_schools" class="citation-link">[10]</a>
-                </p>
-              </div>
-
-              <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-blue-50 p-4 rounded-lg">
-                  <h5 class="font-medium text-blue-800 mb-2">Princípios Pedagógicos</h5>
-                  <ul class="text-xs text-blue-700 space-y-1">
-                    <li>• Centrado no aluno</li>
-                    <li>• Orientado para a capacidade</li>
-                    <li>• Impulsionado por dados</li>
-                  </ul>
-                </div>
-                <div class="bg-green-50 p-4 rounded-lg">
-                  <h5 class="font-medium text-green-800 mb-2">Inovações</h5>
-                  <ul class="text-xs text-green-700 space-y-1">
-                    <li>• Sistema de mapa de conhecimento</li>
-                    <li>• Assistente de ensino inteligente</li>
-                    <li>• Coordenação professor-aluno-máquina</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <!-- Chinese Approach Summary -->
-            <div class="bg-gradient-to-r from-red-50 to-yellow-50 p-6 rounded-xl">
-              <h4 class="font-semibold text-red-800 mb-4">Características da Abordagem Chinesa</h4>
-              <div class="grid md:grid-cols-3 gap-4">
-                <div class="text-center">
-                  <i class="fas fa-rocket text-red-600 text-2xl mb-2"></i>
-                  <div class="font-medium text-red-800">Escala</div>
-                  <div class="text-xs text-red-600">Implementação massiva com tecnologias educacionais</div>
-                </div>
-                <div class="text-center">
-                  <i class="fas fa-cogs text-yellow-600 text-2xl mb-2"></i>
-                  <div class="font-medium text-yellow-800">Inovação</div>
-                  <div class="text-xs text-yellow-600">Modelos híbridos e personalização</div>
-                </div>
-                <div class="text-center">
-                  <i class="fas fa-target text-orange-600 text-2xl mb-2"></i>
-                  <div class="font-medium text-orange-800">Estratégia</div>
-                  <div class="text-xs text-orange-600">Alinhamento com políticas nacionais</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Brazil Integration Section -->
-      <section id="brasil" class="py-16 bg-white">
-        <div class="container mx-auto px-6">
-          <div class="max-w-4xl mx-auto fade-in">
-            <h2 class="font-serif text-4xl font-bold text-sage-900 mb-8">7. Integração do Pensamento Computacional em Universidades do Brasil</h2>
-
-            <!-- Context -->
-            <div class="mb-8">
-              <h3 class="font-serif text-2xl font-semibold text-sage-800 mb-4">Contexto Brasileiro</h3>
-              <p class="text-gray-700 leading-relaxed mb-6">
-                No contexto brasileiro, a integração do Pensamento Computacional no ensino superior tem sido um tema de crescente interesse, embora as pesquisas e iniciativas ainda se concentrem mais fortemente no ensino fundamental e médio, e na formação de professores para esses níveis <a href="https://www.computacional.com.br/files/Geral/THE%20LINK%20-%20Pensamento%20Computacional.pdf" class="citation-link">[3]</a>.
-              </p>
-            </div>
-
-            <!-- Research Data -->
-            <div class="grid lg:grid-cols-2 gap-8 mb-8">
-              <div class="bg-sage-50 p-6 rounded-xl">
-                <h4 class="font-semibold text-sage-800 mb-4">Pesquisas sobre PC no Brasil</h4>
-                <div class="space-y-3">
-                  <div class="flex justify-between items-center">
-                    <span class="text-sage-700">Estudos no Ensino Fundamental</span>
-                    <span class="font-bold text-sage-800">71%</span>
-                  </div>
-                  <div class="w-full bg-sage-200 rounded-full h-2">
-                    <div class="bg-sage-600 h-2 rounded-full" style="width: 71%"></div>
-                  </div>
-
-                  <div class="flex justify-between items-center">
-                    <span class="text-sage-700">Estudos no Ensino Superior (2006-2021)</span>
-                    <span class="font-bold text-sage-800">10</span>
-                  </div>
-                  <div class="text-xs text-sage-600">A maioria em cursos de computação</div>
-                </div>
-              </div>
-
-              <div class="bg-copper-50 p-6 rounded-xl">
-                <h4 class="font-semibold text-copper-800 mb-4">Foco no Ensino de Programação</h4>
-                <p class="text-copper-700 text-sm mb-4">
-                  A abordagem mais comum para desenvolver habilidades de PC tem sido por meio do ensino de programação, especialmente em cursos da área de computação.
-                </p>
-                <div class="text-xs text-copper-600 space-y-1">
-                  <div>• Pensamento algorítmico como pilar mais abordado</div>
-                  <div>• Enfoque cognitivo do PC dominante</div>
-                  <div>• Atividades &#34;plugadas&#34; e &#34;desplugadas&#34;</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Challenges and Opportunities -->
-            <div class="bg-white p-8 rounded-2xl shadow-lg mb-8">
-              <h3 class="font-serif text-2xl font-semibold text-sage-800 mb-6">Desafios e Oportunidades</h3>
-
-              <div class="grid md:grid-cols-2 gap-8">
-                <div>
-                  <h4 class="font-semibold text-red-700 mb-4 flex items-center">
-                    <i class="fas fa-exclamation-triangle text-red-500 mr-2"></i>
-                    Desafios
-                  </h4>
-                  <ul class="space-y-2 text-sm text-gray-700">
-                    <li class="flex items-start">
-                      <i class="fas fa-circle text-red-400 text-xs mt-2 mr-2"></i>
-                      <span>Definição e operacionalização não consensual do PC</span>
-                    </li>
-                    <li class="flex items-start">
-                      <i class="fas fa-circle text-red-400 text-xs mt-2 mr-2"></i>
-                      <span>Formação de professores para ensinar PC</span>
-                    </li>
-                    <li class="flex items-start">
-                      <i class="fas fa-circle text-red-400 text-xs mt-2 mr-2"></i>
-                      <span>Carência de instrumentos validados para avaliação</span>
-                    </li>
-                    <li class="flex items-start">
-                      <i class="fas fa-circle text-red-400 text-xs mt-2 mr-2"></i>
-                      <span>Foco excessivo em cursos de computação</span>
-                    </li>
-                  </ul>
-                </div>
-
-                <div>
-                  <h4 class="font-semibold text-green-700 mb-4 flex items-center">
-                    <i class="fas fa-lightbulb text-green-500 mr-2"></i>
-                    Oportunidades
-                  </h4>
-                  <ul class="space-y-2 text-sm text-gray-700">
-                    <li class="flex items-start">
-                      <i class="fas fa-circle text-green-400 text-xs mt-2 mr-2"></i>
-                      <span>Diretrizes do MEC para formação de professores</span>
-                    </li>
-                    <li class="flex items-start">
-                      <i class="fas fa-circle text-green-400 text-xs mt-2 mr-2"></i>
-                      <span>Abordagens promissoras com jogos e robótica</span>
-                    </li>
-                    <li class="flex items-start">
-                      <i class="fas fa-circle text-green-400 text-xs mt-2 mr-2"></i>
-                      <span>Crescimento na adoção do PC</span>
-                    </li>
-                    <li class="flex items-start">
-                      <i class="fas fa-circle text-green-400 text-xs mt-2 mr-2"></i>
-                      <span>Experiências bem-sucedidas replicáveis</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <!-- Legal Framework -->
-            <div class="bg-blue-50 p-6 rounded-xl">
-              <h4 class="font-semibold text-blue-800 mb-4 flex items-center">
-                <i class="fas fa-gavel text-blue-600 mr-2"></i>
-                Marco Legal
-              </h4>
-              <p class="text-blue-700 text-sm mb-4">
-                A <strong>Resolução CNE/CP Nº 2, de 20 de dezembro de 2019</strong> do MEC define as Diretrizes Curriculares Nacionais para a Formação Inicial de Professores, prevendo o desenvolvimento de habilidades relacionadas ao PC nos currículos das licenciaturas.
-              </p>
-              <div class="text-xs text-blue-600">
-                <strong>Desafio:</strong> Implementação efetiva do PC em cursos de licenciatura que não sejam de computação
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Conclusion Section -->
-      <section id="conclusao" class="py-16 bg-gradient-to-br from-sage-100 to-copper-100">
-        <div class="container mx-auto px-6">
-          <div class="max-w-4xl mx-auto fade-in">
-            <h2 class="font-serif text-4xl font-bold text-sage-900 mb-8">8. Considerações Finais e Tendências Futuras</h2>
-
-            <!-- Synthesis -->
-            <div class="bg-white p-8 rounded-2xl shadow-lg mb-8">
-              <h3 class="font-serif text-2xl font-semibold text-sage-800 mb-6">Síntese das Abordagens Comparadas</h3>
-              <p class="text-gray-700 leading-relaxed mb-6">
-                A análise comparativa da integração do Pensamento Computacional nos currículos de graduação em diferentes países revela uma <strong>tendência global de reconhecimento da sua importância como competência fundamental para o século XXI</strong>. Embora as abordagens e ênfases variem, há um consenso emergente de que o PC vai além do ensino de programação.
-              </p>
-
-              <div class="grid md:grid-cols-2 gap-6">
-                <div class="space-y-4">
-                  <h4 class="font-semibold text-sage-800">Países Analisados</h4>
-                  <div class="space-y-2">
-                    <div class="flex items-center p-2 bg-sage-50 rounded">
-                      <i class="fas fa-flag-usa text-blue-600 mr-3"></i>
-                      <span class="text-sage-700">EUA: Pioneiros com abordagens diversificadas</span>
+        <!-- Europe Integration Section -->
+        <section id="europa" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">5. Integração do Pensamento Computacional em Universidades da Europa</h2>
+                    <div class="mb-4">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Contexto Europeu</h3>
+                        <p class="text-muted mb-4">
+                            Na Europa, a integração do Pensamento Computacional tem sido impulsionada por políticas e iniciativas em diversos níveis. Um relatório de 2016 da Comissão Europeia destacou o crescente interesse e adoção do PC nos currículos escolares em pelo menos <strong>13 países europeus</strong> <a href="https://www.computacional.com.br/files/Geral/THE%20LINK%20-%20Pensamento%20Computacional.pdf" class="citation-link">[3]</a>.
+                        </p>
                     </div>
-                    <div class="flex items-center p-2 bg-sage-50 rounded">
-                      <i class="fas fa-flag text-yellow-600 mr-3"></i>
-                      <span class="text-sage-700">Reino Unido: Ênfase em princípios fundamentais</span>
+                    <div class="card p-4 rounded-3 shadow mb-4" style="background: linear-gradient(to right, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-3 d-flex align-items-center" style="color: var(--sage-800);">
+                            <i class="fas fa-hotel me-3" style="color: var(--copper-600);"></i>
+                            Caso de Estudo: Ecole hôtelière de Lausanne (EHL) - Suíça
+                        </h3>
+                        <div class="row row-cols-1 row-cols-lg-2 g-4">
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Módulo de Computational Thinking</h4>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    Oferta no segundo semestre do Bacharelado em Administração Hoteleira
+                                </p>
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex justify-content-between align-items-center p-3 bg-white rounded">
+                                        <span style="color: var(--sage-700);" class="fw-medium">Créditos ECTS</span>
+                                        <span style="color: var(--sage-800);" class="fw-bold">3.5</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center p-3 bg-white rounded">
+                                        <span style="color: var(--sage-700);" class="fw-medium">Horas Totais</span>
+                                        <span style="color: var(--sage-800);" class="fw-bold">88</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center p-3 bg-white rounded">
+                                        <span style="color: var(--sage-700);" class="fw-medium">Horas de Contato</span>
+                                        <span style="color: var(--sage-800);" class="fw-bold">30</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center p-3 bg-white rounded">
+                                        <span style="color: var(--sage-700);" class="fw-medium">Estudo Independente</span>
+                                        <span style="color: var(--sage-800);" class="fw-bold">58</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3" style="color: var(--copper-800);">Significado e Impacto</h4>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    Este exemplo ilustra como o sistema ECTS facilita a criação de disciplinas focadas no trabalho total do estudante, permitindo abordagens baseadas em projetos e aprendizagem autônoma.
+                                </p>
+                                <div class="p-3 bg-white rounded">
+                                    <h5 class="fw-medium mb-2" style="color: var(--copper-800);">Principais Destaques</h5>
+                                    <ul class="list-unstyled fs-6" style="color: var(--copper-700);">
+                                        <li class="mb-1">• PC relevante para áreas além da computação</li>
+                                        <li class="mb-1">• Flexibilidade do ECTS para aprendizagem ativa</li>
+                                        <li class="mb-1">• Equilíbrio entre teoria e prática</li>
+                                        <li>• Preparação para desafios do setor hoteleiro</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex items-center p-2 bg-sage-50 rounded">
-                      <i class="fas fa-flag text-blue-600 mr-3"></i>
-                      <span class="text-sage-700">Europa: Flexibilidade do sistema ECTS</span>
+                    <div class="card p-4 rounded-3 shadow">
+                        <h4 class="fs-5 fw-semibold mb-3 d-flex align-items-center" style="color: var(--sage-800);">
+                            <i class="fas fa-star me-2 text-warning"></i>
+                            Benefícios do Sistema ECTS para o Pensamento Computacional
+                        </h4>
+                        <div class="row row-cols-1 row-cols-md-3 g-4">
+                            <div class="col">
+                                <div class="text-center p-3 rounded" style="background-color: var(--yellow-50);">
+                                    <i class="fas fa-users fs-3 mb-2 text-warning"></i>
+                                    <div class="fw-medium" style="color: var(--yellow-800);">Mobilidade</div>
+                                    <div class="fs-6" style="color: var(--yellow-600);">Facilita reconhecimento entre universidades</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 rounded" style="background-color: var(--green-50);">
+                                    <i class="fas fa-project-diagram fs-3 mb-2 text-success"></i>
+                                    <div class="fw-medium" style="color: var(--green-800);">Flexibilidade</div>
+                                    <div class="fs-6" style="color: var(--green-600);">Permite ênfase em projetos e trabalho independente</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 rounded" style="background-color: var(--blue-50);">
+                                    <i class="fas fa-target fs-3 mb-2 text-primary"></i>
+                                    <div class="fw-medium" style="color: var(--blue-800);">Resultados</div>
+                                    <div class="fs-6" style="color: var(--blue-600);">Foco nos resultados de aprendizagem</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex items-center p-2 bg-sage-50 rounded">
-                      <i class="fas fa-flag text-red-600 mr-3"></i>
-                      <span class="text-sage-700">China: Implementação em escala com tecnologia</span>
-                    </div>
-                    <div class="flex items-center p-2 bg-sage-50 rounded">
-                      <i class="fas fa-flag text-green-600 mr-3"></i>
-                      <span class="text-sage-700">Brasil: Estágio inicial com foco em formação</span>
-                    </div>
-                  </div>
                 </div>
-
-                <div class="space-y-4">
-                  <h4 class="font-semibold text-copper-800">Elementos Comuns</h4>
-                  <div class="space-y-2">
-                    <div class="p-2 bg-copper-50 rounded">
-                      <div class="font-medium text-copper-800">Metodologia DAAD</div>
-                      <div class="text-xs text-copper-600">Decomposição, Abstração, Algoritmos, Depuração</div>
-                    </div>
-                    <div class="p-2 bg-copper-50 rounded">
-                      <div class="font-medium text-copper-800">Abordagem Conceitual</div>
-                      <div class="text-xs text-copper-600">Transcender o ensino de sintaxe de programação</div>
-                    </div>
-                    <div class="p-2 bg-copper-50 rounded">
-                      <div class="font-medium text-copper-800">Aplicação Prática</div>
-                      <div class="text-xs text-copper-600">Resolução de problemas do mundo real</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
+        </section>
 
-            <!-- Future Trends -->
-            <div class="bg-white p-8 rounded-2xl shadow-lg mb-8">
-              <h3 class="font-serif text-2xl font-semibold text-sage-800 mb-6">O Papel do Pensamento Computacional como Competência Transversal</h3>
-              <p class="text-gray-700 leading-relaxed mb-6">
-                O Pensamento Computacional está cada vez mais sendo reconhecido como uma <strong>competência transversal essencial</strong>, não se limitando aos domínios da ciência da computação ou engenharia. Sua relevância estende-se a praticamente todas as áreas do conhecimento e setores profissionais.
-              </p>
-
-              <blockquote class="border-l-4 border-sage-500 pl-6 py-4 bg-sage-50 rounded-r-lg mb-6">
-                <p class="text-sage-800 italic text-lg">
-                  &#34;Ao promover uma forma de pensar estruturada e lógica, o PC contribui para o desenvolvimento intelectual dos estudantes e os prepara para serem agentes de mudança em um mundo cada vez mais complexo e interconectado.&#34;
-                </p>
-              </blockquote>
-
-              <div class="grid md:grid-cols-3 gap-4">
-                <div class="text-center p-4 bg-sage-50 rounded-lg">
-                  <i class="fas fa-users text-sage-600 text-2xl mb-2"></i>
-                  <div class="font-medium text-sage-800">Cidadania Ativa</div>
-                  <div class="text-xs text-sage-600">Pensamento crítico para tomada de decisões</div>
+        <!-- China Integration Section -->
+        <section id="china" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">6. Integração do Pensamento Computacional em Universidades da China</h2>
+                    <div class="mb-4">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Contexto Chinês</h3>
+                        <p class="text-muted mb-4">
+                            Na China, o Pensamento Computacional tem ganhado destaque tanto no currículo do ensino médio quanto no ensino superior, com um impulso significativo vindo de políticas governamentais. O governo chinês tem promovido a <strong>educação em ciência da computação e inteligência artificial</strong> como parte de sua estratégia para se tornar uma potência tecnológica global.
+                        </p>
+                    </div>
+                    <div class="card p-4 rounded-3 shadow mb-4 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-3 d-flex align-items-center" style="color: var(--sage-800);">
+                            <i class="fas fa-university me-3 text-danger"></i>
+                            Harbin Institute of Technology (HIT)
+                        </h3>
+                        <div class="row row-cols-1 row-cols-lg-2 g-4">
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Curso Inovador</h4>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    "大学计算机-计算思维导论" (University Computing - Introduction to Computational Thinking) - modelo amplamente adotado por outras universidades chinesas <a href="https://www.researchgate.net/publication/329467126_Case_study_on_STEMcomputational_thinking_education_model_in_Chinese_K-12_schools" class="citation-link">[10]</a>
+                                </p>
+                                <div class="p-3 bg-danger-subtle rounded mb-3">
+                                    <h5 class="fw-medium mb-2" style="color: var(--red-800);">Modelo de Ensino Híbrido</h5>
+                                    <div class="fs-6" style="color: var(--red-700);">
+                                        <div class="mb-1">• MOOCs (Massive Open Online Courses)</div>
+                                        <div class="mb-1">• SPOCs (Small Private Online Courses)</div>
+                                        <div>• Sala de Aula Invertida (Flipped Classroom)</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3" style="color: var(--red-800);">Impacto e Escala</h4>
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex justify-content-between align-items-center p-3 bg-danger-subtle rounded">
+                                        <span style="color: var(--red-700);">Universidades Parceiras</span>
+                                        <span style="color: var(--red-800);" class="fw-bold">40+</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center p-3 bg-danger-subtle rounded">
+                                        <span style="color: var(--red-700);">Estudantes Matriculados (2016)</span>
+                                        <span style="color: var(--red-800);" class="fw-bold">80,000+</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center p-3 bg-danger-subtle rounded">
+                                        <span style="color: var(--red-700);">Interações de Discussão</span>
+                                        <span style="color: var(--red-800);" class="fw-bold">600,000+</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card p-4 rounded-3 shadow mb-4 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-3 d-flex align-items-center" style="color: var(--sage-800);">
+                            <i class="fas fa-brain me-3 text-primary"></i>
+                            Southern University of Science and Technology (SUSTech)
+                        </h3>
+                        <div class="mb-3">
+                            <h4 class="fs-5 fw-semibold mb-3" style="color: var(--blue-800);">"Computational Thinking and Artificial Intelligence Basics"</h4>
+                            <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                Curso para estudantes do primeiro ano de diversos cursos, reconhecido com várias certificações de excelência <a href="https://www.researchgate.net/publication/329467126_Case_study_on_STEMcomputational_thinking_education_model_in_Chinese_K-12_schools" class="citation-link">[10]</a>
+                            </p>
+                        </div>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-3 rounded bg-primary-subtle">
+                                    <h5 class="fw-medium mb-2" style="color: var(--blue-800);">Princípios Pedagógicos</h5>
+                                    <ul class="list-unstyled fs-6" style="color: var(--blue-700);">
+                                        <li class="mb-1">• Centrado no aluno</li>
+                                        <li class="mb-1">• Orientado para a capacidade</li>
+                                        <li>• Impulsionado por dados</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 rounded bg-success-subtle">
+                                    <h5 class="fw-medium mb-2" style="color: var(--green-800);">Inovações</h5>
+                                    <ul class="list-unstyled fs-6" style="color: var(--green-700);">
+                                        <li class="mb-1">• Sistema de mapa de conhecimento</li>
+                                        <li class="mb-1">• Assistente de ensino inteligente</li>
+                                        <li>• Coordenação professor-aluno-máquina</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 rounded" style="background: linear-gradient(to right, var(--red-50), var(--yellow-50));">
+                        <h4 class="fs-5 fw-semibold mb-3" style="color: var(--red-800);">Características da Abordagem Chinesa</h4>
+                        <div class="row row-cols-1 row-cols-md-3 g-4">
+                            <div class="col">
+                                <div class="text-center">
+                                    <i class="fas fa-rocket fs-3 mb-2 text-danger"></i>
+                                    <div class="fw-medium" style="color: var(--red-800);">Escala</div>
+                                    <div class="fs-6" style="color: var(--red-600);">Implementação massiva com tecnologias educacionais</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center">
+                                    <i class="fas fa-cogs fs-3 mb-2 text-warning"></i>
+                                    <div class="fw-medium" style="color: var(--yellow-800);">Inovação</div>
+                                    <div class="fs-6" style="color: var(--yellow-600);">Modelos híbridos e personalização</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center">
+                                    <i class="fas fa-target fs-3 mb-2" style="color: #fd7e14;"></i>
+                                    <div class="fw-medium" style="color: #fd7e14;">Estratégia</div>
+                                    <div class="fs-6" style="color: #fd7e14;">Alinhamento com políticas nacionais</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="text-center p-4 bg-copper-50 rounded-lg">
-                  <i class="fas fa-briefcase text-copper-600 text-2xl mb-2"></i>
-                  <div class="font-medium text-copper-800">Empregabilidade</div>
-                  <div class="text-xs text-copper-600">Habilidades valorizadas no mercado</div>
-                </div>
-                <div class="text-center p-4 bg-gray-50 rounded-lg">
-                  <i class="fas fa-rocket text-gray-600 text-2xl mb-2"></i>
-                  <div class="font-medium text-gray-800">Inovação</div>
-                  <div class="text-xs text-gray-600">Capacidade de criar soluções</div>
-                </div>
-              </div>
             </div>
+        </section>
 
-            <!-- Final Message -->
-            <div class="text-center">
-              <div class="inline-block bg-gradient-to-r from-sage-600 to-copper-600 text-white p-8 rounded-2xl shadow-lg">
-                <h4 class="font-serif text-2xl font-bold mb-4">Tendência Global Irreversível</h4>
-                <p class="text-lg mb-4">
-                  A integração do Pensamento Computacional nos currículos de graduação representa uma <strong>necessidade estratégica</strong> para a educação do século XXI.
-                </p>
-                <div class="text-sm opacity-90">
-                  Preparando profissionais versáteis, criativos e adaptáveis para os desafios do mundo contemporâneo
+        <!-- Brazil Integration Section -->
+        <section id="brasil" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">7. Integração do Pensamento Computacional em Universidades do Brasil</h2>
+                    <div class="mb-4">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Contexto Brasileiro</h3>
+                        <p class="text-muted mb-4">
+                            No contexto brasileiro, a integração do Pensamento Computacional no ensino superior tem sido um tema de crescente interesse, embora as pesquisas e iniciativas ainda se concentrem mais fortemente no ensino fundamental e médio, e na formação de professores para esses níveis <a href="https://www.computacional.com.br/files/Geral/THE%20LINK%20-%20Pensamento%20Computacional.pdf" class="citation-link">[3]</a>.
+                        </p>
+                    </div>
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-4">
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3" style="background-color: var(--sage-50);">
+                                <h4 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Pesquisas sobre PC no Brasil</h4>
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span style="color: var(--sage-700);">Estudos no Ensino Fundamental</span>
+                                        <span style="color: var(--sage-800);" class="fw-bold">71%</span>
+                                    </div>
+                                    <div class="progress h-2 rounded-pill" style="background-color: var(--sage-200);">
+                                        <div class="progress-bar" role="progressbar" style="width: 71%; background-color: var(--sage-600);" aria-valuenow="71" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span style="color: var(--sage-700);">Estudos no Ensino Superior (2006-2021)</span>
+                                        <span style="color: var(--sage-800);" class="fw-bold">10</span>
+                                    </div>
+                                    <div class="fs-6" style="color: var(--sage-600);">A maioria em cursos de computação</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3" style="background-color: var(--copper-50);">
+                                <h4 class="fs-5 fw-semibold mb-3" style="color: var(--copper-800);">Foco no Ensino de Programação</h4>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    A abordagem mais comum para desenvolver habilidades de PC tem sido por meio do ensino de programação, especialmente em cursos da área de computação.
+                                </p>
+                                <div class="fs-6" style="color: var(--copper-600);">
+                                    <div class="mb-1">• Pensamento algorítmico como pilar mais abordado</div>
+                                    <div class="mb-1">• Enfoque cognitivo do PC dominante</div>
+                                    <div>• Atividades "plugadas" e "desplugadas"</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card p-4 rounded-3 shadow mb-4 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Desafios e Oportunidades</h3>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3 d-flex align-items-center" style="color: var(--red-700);">
+                                    <i class="fas fa-exclamation-triangle me-2 text-danger"></i>
+                                    Desafios
+                                </h4>
+                                <ul class="list-unstyled fs-6" style="color: var(--gray-700);">
+                                    <li class="d-flex align-items-start mb-2">
+                                        <i class="fas fa-circle fs-6 me-2 mt-2" style="color: var(--red-400);"></i>
+                                        <span>Definição e operacionalização não consensual do PC</span>
+                                    </li>
+                                    <li class="d-flex align-items-start mb-2">
+                                        <i class="fas fa-circle fs-6 me-2 mt-2" style="color: var(--red-400);"></i>
+                                        <span>Formação de professores para ensinar PC</span>
+                                    </li>
+                                    <li class="d-flex align-items-start mb-2">
+                                        <i class="fas fa-circle fs-6 me-2 mt-2" style="color: var(--red-400);"></i>
+                                        <span>Carência de instrumentos validados para avaliação</span>
+                                    </li>
+                                    <li class="d-flex align-items-start">
+                                        <i class="fas fa-circle fs-6 me-2 mt-2" style="color: var(--red-400);"></i>
+                                        <span>Foco excessivo em cursos de computação</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3 d-flex align-items-center" style="color: var(--green-700);">
+                                    <i class="fas fa-lightbulb me-2 text-success"></i>
+                                    Oportunidades
+                                </h4>
+                                <ul class="list-unstyled fs-6" style="color: var(--gray-700);">
+                                    <li class="d-flex align-items-start mb-2">
+                                        <i class="fas fa-circle fs-6 me-2 mt-2" style="color: var(--green-400);"></i>
+                                        <span>Diretrizes do MEC para formação de professores</span>
+                                    </li>
+                                    <li class="d-flex align-items-start mb-2">
+                                        <i class="fas fa-circle fs-6 me-2 mt-2" style="color: var(--green-400);"></i>
+                                        <span>Abordagens promissoras com jogos e robótica</span>
+                                    </li>
+                                    <li class="d-flex align-items-start mb-2">
+                                        <i class="fas fa-circle fs-6 me-2 mt-2" style="color: var(--green-400);"></i>
+                                        <span>Crescimento na adoção do PC</span>
+                                    </li>
+                                    <li class="d-flex align-items-start">
+                                        <i class="fas fa-circle fs-6 me-2 mt-2" style="color: var(--green-400);"></i>
+                                        <span>Experiências bem-sucedidas replicáveis</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card p-4 rounded-3 bg-primary-subtle">
+                        <h4 class="fs-5 fw-semibold mb-3 d-flex align-items-center" style="color: var(--blue-800);">
+                            <i class="fas fa-gavel me-2 text-primary"></i>
+                            Marco Legal
+                        </h4>
+                        <p class="fs-6 mb-3" style="color: var(--blue-700);">
+                            A <strong>Resolução CNE/CP Nº 2, de 20 de dezembro de 2019</strong> do MEC define as Diretrizes Curriculares Nacionais para a Formação Inicial de Professores, prevendo o desenvolvimento de habilidades relacionadas ao PC nos currículos das licenciaturas.
+                        </p>
+                        <div class="fs-6" style="color: var(--blue-600);">
+                            <strong>Desafio:</strong> Implementação efetiva do PC em cursos de licenciatura que não sejam de computação
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-        </div>
-      </section>
+        </section>
+
+        <!-- Conclusion Section -->
+        <section id="conclusao" class="py-5" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">8. Considerações Finais e Tendências Futuras</h2>
+                    <div class="card p-4 rounded-3 shadow mb-4 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Síntese das Abordagens Comparadas</h3>
+                        <p class="text-muted mb-4">
+                            A análise comparativa da integração do Pensamento Computacional nos currículos de graduação em diferentes países revela uma <strong>tendência global de reconhecimento da sua importância como competência fundamental para o século XXI</strong>. Embora as abordagens e ênfases variem, há um consenso emergente de que o PC vai além do ensino de programação.
+                        </p>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold" style="color: var(--sage-800);">Países Analisados</h4>
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="d-flex align-items-center p-2 rounded" style="background-color: var(--sage-50);">
+                                        <i class="fas fa-flag-usa me-3 text-primary"></i>
+                                        <span style="color: var(--sage-700);">EUA: Pioneiros com abordagens diversificadas</span>
+                                    </div>
+                                    <div class="d-flex align-items-center p-2 rounded" style="background-color: var(--sage-50);">
+                                        <i class="fas fa-flag me-3 text-warning"></i>
+                                        <span style="color: var(--sage-700);">Reino Unido: Ênfase em princípios fundamentais</span>
+                                    </div>
+                                    <div class="d-flex align-items-center p-2 rounded" style="background-color: var(--sage-50);">
+                                        <i class="fas fa-flag me-3 text-primary"></i>
+                                        <span style="color: var(--sage-700);">Europa: Flexibilidade do sistema ECTS</span>
+                                    </div>
+                                    <div class="d-flex align-items-center p-2 rounded" style="background-color: var(--sage-50);">
+                                        <i class="fas fa-flag me-3 text-danger"></i>
+                                        <span style="color: var(--sage-700);">China: Implementação em escala com tecnologia</span>
+                                    </div>
+                                    <div class="d-flex align-items-center p-2 rounded" style="background-color: var(--sage-50);">
+                                        <i class="fas fa-flag me-3 text-success"></i>
+                                        <span style="color: var(--sage-700);">Brasil: Estágio inicial com foco em formação</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold" style="color: var(--copper-800);">Elementos Comuns</h4>
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="p-2 rounded" style="background-color: var(--copper-50);">
+                                        <div class="fw-medium" style="color: var(--copper-800);">Metodologia DAAD</div>
+                                        <div class="fs-6" style="color: var(--copper-600);">Decomposição, Abstração, Algoritmos, Depuração</div>
+                                    </div>
+                                    <div class="p-2 rounded" style="background-color: var(--copper-50);">
+                                        <div class="fw-medium" style="color: var(--copper-800);">Abordagem Conceitual</div>
+                                        <div class="fs-6" style="color: var(--copper-600);">Transcender o ensino de sintaxe de programação</div>
+                                    </div>
+                                    <div class="p-2 rounded" style="background-color: var(--copper-50);">
+                                        <div class="fw-medium" style="color: var(--copper-800);">Aplicação Prática</div>
+                                        <div class="fs-6" style="color: var(--copper-600);">Resolução de problemas do mundo real</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card p-4 rounded-3 shadow mb-4 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">O Papel do Pensamento Computacional como Competência Transversal</h3>
+                        <p class="text-muted mb-4">
+                            O Pensamento Computacional está cada vez mais sendo reconhecido como uma <strong>competência transversal essencial</strong>, não se limitando aos domínios da ciência da computação ou engenharia. Sua relevância estende-se a praticamente todas as áreas do conhecimento e setores profissionais.
+                        </p>
+                        <blockquote class="border-start border-4 border-primary p-4 bg-light rounded-end mb-4">
+                            <p class="text-muted fs-5 fst-italic" style="color: var(--sage-800);">
+                                "Ao promover uma forma de pensar estruturada e lógica, o PC contribui para o desenvolvimento intelectual dos estudantes e os prepara para serem agentes de mudança em um mundo cada vez mais complexo e interconectado."
+                            </p>
+                        </blockquote>
+                        <div class="row row-cols-1 row-cols-md-3 g-4">
+                            <div class="col">
+                                <div class="text-center p-3 rounded" style="background-color: var(--sage-50);">
+                                    <i class="fas fa-users fs-3 mb-2" style="color: var(--sage-600);"></i>
+                                    <div class="fw-medium" style="color: var(--sage-800);">Cidadania Ativa</div>
+                                    <div class="fs-6" style="color: var(--sage-600);">Pensamento crítico para tomada de decisões</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 rounded" style="background-color: var(--copper-50);">
+                                    <i class="fas fa-briefcase fs-3 mb-2" style="color: var(--copper-600);"></i>
+                                    <div class="fw-medium" style="color: var(--copper-800);">Empregabilidade</div>
+                                    <div class="fs-6" style="color: var(--copper-600);">Habilidades valorizadas no mercado</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 rounded bg-light">
+                                    <i class="fas fa-rocket fs-3 mb-2 text-muted"></i>
+                                    <div class="fw-medium text-dark">Inovação</div>
+                                    <div class="fs-6 text-muted">Capacidade de criar soluções</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="d-inline-block p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-600), var(--copper-600));">
+                            <h4 class="fs-3 fw-bold mb-3 text-white">Tendência Global Irreversível</h4>
+                            <p class="fs-5 mb-3 text-white">
+                                A integração do Pensamento Computacional nos currículos de graduação representa uma <strong>necessidade estratégica</strong> para a educação do século XXI.
+                            </p>
+                            <div class="fs-6 text-white opacity-75">
+                                Preparando profissionais versáteis, criativos e adaptáveis para os desafios do mundo contemporâneo
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <script>
@@ -1037,10 +1031,7 @@
         document.addEventListener('click', function(event) {
             const toc = document.getElementById('toc');
             const hamburger = document.querySelector('button[onclick="toggleTOC()"]');
-            
-            // Only in mobile view and when TOC is open
             if (window.innerWidth <= 1024 && toc.classList.contains('open')) {
-                // Check if click is outside TOC and not on hamburger button
                 if (!toc.contains(event.target) && event.target !== hamburger && !hamburger.contains(event.target)) {
                     toc.classList.remove('open');
                 }
@@ -1052,21 +1043,20 @@
             const links = document.querySelectorAll('a[href^="#"]');
             const sections = document.querySelectorAll('section[id]');
             
-            // Add click handlers for smooth scrolling
+            // Add click handlers for smooth scrolling with offset
             links.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     const targetId = this.getAttribute('href').substring(1);
                     const targetSection = document.getElementById(targetId);
-                    
                     if (targetSection) {
-                        targetSection.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
+                        const offset = 80;
+                        const elementPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+                        window.scrollTo({
+                            top: elementPosition - offset,
+                            behavior: 'smooth'
                         });
                     }
-                    
-                    // Close mobile TOC
                     if (window.innerWidth <= 1024) {
                         document.getElementById('toc').classList.remove('open');
                     }
@@ -1079,15 +1069,15 @@
                     if (entry.isIntersecting) {
                         const id = entry.target.getAttribute('id');
                         links.forEach(link => {
-                            link.classList.remove('bg-sage-100', 'text-sage-900');
+                            link.classList.remove('bg-light', 'text-dark');
                             if (link.getAttribute('href') === `#${id}`) {
-                                link.classList.add('bg-sage-100', 'text-sage-900');
+                                link.classList.add('bg-light', 'text-dark');
                             }
                         });
                     }
                 });
             }, {
-                rootMargin: '-20% 0px -70% 0px'
+                rootMargin: '-80px 0px -70% 0px'
             });
             
             sections.forEach(section => {
@@ -1115,7 +1105,7 @@
             });
         });
 
-        // Handle window resize to remove open class on TOC when switching to large screen
+        // Handle window resize
         window.addEventListener('resize', function() {
             const toc = document.getElementById('toc');
             if (window.innerWidth > 1024) {
@@ -1123,6 +1113,5 @@
             }
         });
     </script>
-  
-
-</body></html>
+</body>
+</html>
