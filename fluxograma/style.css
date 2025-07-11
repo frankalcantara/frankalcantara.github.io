@@ -1,48 +1,249 @@
-/* === ESTILOS PARA O NOVO HEADER === */
+/* === RESTAURAÇÃO DOS ESTILOS ORIGINAIS DA NAVBAR === */
 
-/* Ajustes para o navbar do site principal */
+/* Estilos base da navbar mediumnavigation - conforme site original */
 .mediumnavigation {
     background: rgba(255, 255, 255, 0.97) !important;
-    box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.15);
-    transition: top 0.2s ease-in-out;
-    z-index: 1000; /* ✅ AJUSTADO: Z-index controlado */
-    height: 60px; /* ✅ AJUSTADO: Altura fixa */
+    box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.15) !important;
+    transition: top 0.2s ease-in-out !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 1040 !important;
+    /* Altura fixa e controlada */
+    height: 56px !important;
+    max-height: 56px !important;
+    min-height: 56px !important;
+    overflow: visible !important;
 }
 
-.navbar-brand img {
-    height: 40px;
-    width: auto;
+/* Container da navbar - mesmo do site original */
+.mediumnavigation .container {
+    padding-right: 0 !important;
+    padding-left: 15px !important;
+    height: 56px !important;
+    max-height: 56px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin: 0 auto !important;
 }
 
-/* ✅ NOVO: Container para o conteúdo principal */
-.fluxograma-content {
-    margin-top: 80px; /* Espaço para o navbar fixo */
-    padding: 20px;
-    min-height: calc(100vh - 80px);
+/* Logo/Brand da navbar - estilos originais */
+.mediumnavigation .navbar-brand {
+    font-weight: 500 !important;
+    padding: 0.3125rem 0 !important;
+    margin-right: 1rem !important;
+    font-size: 1.25rem !important;
+    line-height: inherit !important;
+    white-space: nowrap !important;
 }
 
-/* Ajuste do container principal para acomodar navbar fixo */
-.main-content {
-    margin-top: 0; /* Remove margin-top anterior */
-    height: calc(100vh - 160px); /* ✅ AJUSTADO: Altura considerando header */
+/* Imagem do logo - tamanho original */
+.mediumnavigation .navbar-brand img {
+    max-height: 30px !important;
+    margin-right: 5px !important;
+    height: auto !important;
+    width: auto !important;
 }
 
-/* ✅ AJUSTE: Container específico do fluxograma */
-.fluxograma-container {
-    max-width: 2050px;
-    margin: 0 auto;
-    padding: 0; /* ✅ REMOVIDO: padding para evitar conflitos */
+/* Navbar toggler para mobile */
+.mediumnavigation .navbar-toggler {
+    padding: 0.25rem 0.75rem !important;
+    font-size: 1.25rem !important;
+    line-height: 1 !important;
+    background-color: transparent !important;
+    border: 1px solid transparent !important;
+    border-radius: 0.25rem !important;
 }
 
-/* Ajustes responsívos para o navbar */
-@media (max-width: 991px) {
-    .navbar-expand-lg .navbar-nav .nav-link {
-        padding-right: 0.6rem;
-        padding-left: 0.6rem;
+/* Navbar collapse */
+.mediumnavigation .navbar-collapse {
+    flex-basis: auto !important;
+    flex-grow: 0 !important;
+    align-items: center !important;
+}
+
+/* Lista de navegação */
+.mediumnavigation .navbar-nav {
+    display: flex !important;
+    flex-direction: row !important;
+    padding-left: 0 !important;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+    list-style: none !important;
+    margin-left: auto !important;
+    align-items: center !important;
+}
+
+/* Itens da navegação */
+.mediumnavigation .nav-item {
+    font-size: 0.9rem !important;
+    display: inline-block !important;
+    position: relative !important;
+}
+
+/* Links da navegação - estilos originais */
+.mediumnavigation .nav-link {
+    display: block !important;
+    padding: 0.5rem 1rem !important;
+    color: rgba(0, 0, 0, 0.9) !important;
+    text-decoration: none !important;
+    background-color: transparent !important;
+    border: 0 !important;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out !important;
+}
+
+/* Hover nos links */
+.mediumnavigation .nav-link:hover,
+.mediumnavigation .nav-link:focus {
+    color: rgba(0, 0, 0, 0.7) !important;
+    text-decoration: none !important;
+}
+
+/* Dropdown menu - estilos originais */
+.mediumnavigation .dropdown-menu {
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    margin: 0 !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    z-index: 1050 !important; /* Z-index mais alto */
+    display: none !important;
+    float: left !important;
+    min-width: 250px !important;
+    padding: 0.5rem 0 !important;
+    font-size: 0.9rem !important;
+    color: #212529 !important;
+    text-align: left !important;
+    list-style: none !important;
+    background-color: #fff !important;
+    background-clip: padding-box !important;
+    border-radius: 0.25rem !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175) !important;
+    transform: none !important;
+}
+
+/* Dropdown items */
+.mediumnavigation .dropdown-item {
+    display: block !important;
+    width: 100% !important;
+    padding: 0.25rem 1.5rem !important;
+    clear: both !important;
+    font-weight: 400 !important;
+    color: #212529 !important;
+    text-align: inherit !important;
+    text-decoration: none !important;
+    white-space: normal !important;
+    background-color: transparent !important;
+    border: 0 !important;
+}
+
+/* Dropdown item hover */
+.mediumnavigation .dropdown-item:hover,
+.mediumnavigation .dropdown-item:focus {
+    color: #16181b !important;
+    text-decoration: none !important;
+    background-color: #f8f9fa !important;
+}
+
+/* Dropdown quando está aberto */
+.mediumnavigation .dropdown-menu.show {
+    display: block !important;
+    z-index: 1055 !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    transform: none !important;
+}
+
+/* Item dropdown ativo */
+.mediumnavigation .nav-item.dropdown.show {
+    position: relative !important;
+}
+
+/* Link dropdown toggle */
+.mediumnavigation .dropdown-toggle::after {
+    vertical-align: middle !important;
+}
+
+/* Responsividade original - min-width: 992px */
+@media (min-width: 992px) {
+    .mediumnavigation.navbar-expand-lg .navbar-nav .nav-link {
+        padding-right: 0.6rem !important;
+        padding-left: 0.6rem !important;
+    }
+    
+    .mediumnavigation.navbar-expand-lg .navbar-nav {
+        flex-direction: row !important;
+    }
+    
+    .mediumnavigation.navbar-expand-lg .navbar-collapse {
+        display: flex !important;
+        flex-basis: auto !important;
+    }
+    
+    .mediumnavigation.navbar-expand-lg .navbar-toggler {
+        display: none !important;
     }
 }
 
-/* === FIM DOS ESTILOS DO HEADER === */
+/* Mobile responsivo */
+@media (max-width: 991.98px) {
+    .mediumnavigation .navbar-collapse {
+        flex-basis: 100% !important;
+        flex-grow: 1 !important;
+    }
+    
+    .mediumnavigation .navbar-nav {
+        flex-direction: column !important;
+    }
+    
+    .mediumnavigation .dropdown-menu {
+        position: static !important;
+        float: none !important;
+        width: auto !important;
+        margin-top: 0 !important;
+        background-color: #f8f9fa !important;
+        border: 0 !important;
+        box-shadow: none !important;
+    }
+}
+
+/* Ajustes específicos para o corpo da página */
+body {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* Dropdown básico para funcionar */
+.mediumnavigation .dropdown-menu {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    z-index: 1050 !important;
+    display: none !important;
+    min-width: 250px !important;
+    background-color: #fff !important;
+    border: 1px solid rgba(0,0,0,.15) !important;
+    border-radius: 0.25rem !important;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.175) !important;
+}
+
+.mediumnavigation .dropdown-menu.show {
+    display: block !important;
+}
+
+/* Container principal - margem para compensar navbar fixa */
+.fluxograma-container,
+.container {
+    margin-top: 70px !important; /* Espaço adequado para navbar de 56px */
+    padding-top: 20px !important;
+   /* min-height: calc(100vh - 70px) !important;*/
+}
+
+/* === MANTER ESTILOS ORIGINAIS DO FLUXOGRAMA === */
 
 /* Reset e configurações básicas */
 * {
@@ -51,54 +252,52 @@
     box-sizing: border-box;
 }
 
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f8f9fa; /* ✅ AJUSTADO: Fundo claro para compatibilidade com o header */
+    background: #f8f9fa;
     min-height: 100vh;
     color: #333;
-    margin: 0; /* ✅ GARANTIR: Reset de margin */
 }
 
-.container {
-    max-width: 2050px;
-    margin: 0 auto;
-    padding: 20px;
-    min-height: 100vh;
-}
-
-/* Header */
+/* Header do fluxograma */
 header {
     text-align: center;
     margin-bottom: 30px;
-    color: white;
+    color: #333;
 }
 
 header h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 700;
     margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    color: #333;
 }
 
 header p {
     font-size: 1.1rem;
-    opacity: 0.9;
+    opacity: 0.8;
+    color: #666;
 }
 
 /* Layout principal */
 .main-content {
     display: flex;
-    flex-direction: column; /* Organiza os painéis de cima e o console verticalmente */
-    gap: 0; /* ✅ REMOVIDO: Era 20px, agora sem espaçamento entre os blocos */
-    height: calc(100vh - 120px); /* Ocupa a altura restante da tela, descontando o header */
+    flex-direction: column;
+    gap: 0;
+    height: calc(100vh - 110px); /* Ajustado para navbar de 56px + margens */
 }
 
-/* Novo container para os painéis superiores */
+/* Container para os painéis superiores */
 .content-top {
     display: flex;
     gap: 20px;
-    flex-grow: 1; /* Faz com que esta área ocupe o espaço vertical disponível */
-    overflow: hidden; /* Evita que os painéis internos causem scroll na página */
+    flex-grow: 1;
+    overflow: hidden;
 }
 
 /* Painel do Editor (30%) */
@@ -109,18 +308,18 @@ header p {
     box-shadow: 0 8px 32px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* ✅ REMOVIDO: overflow-y: auto - agora sem scroll no painel principal */
+    overflow: hidden;
 }
 
-/* 🆕 NOVA CLASSE: Container scrollável para o conteúdo do editor */
+/* Container scrollável para o conteúdo do editor */
 .editor-content {
-    flex: 1; /* Ocupa todo o espaço restante após o header */
-    overflow-y: auto; /* Scroll apenas no conteúdo, não no header */
+    flex: 1;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
 }
 
-/* Painel do Diagrama (60%) */
+/* Painel do Diagrama (70%) */
 .diagram-panel {
     flex: 0 0 70%;
     background: white;
@@ -139,11 +338,13 @@ header p {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .panel-header h2 {
     font-size: 1.3rem;
     font-weight: 600;
+    margin: 0;
 }
 
 /* Editor de texto */
@@ -175,6 +376,7 @@ header p {
 .controls {
     padding: 20px;
     border-top: 1px solid #e5e7eb;
+    flex-shrink: 0;
 }
 
 .controls h3 {
@@ -223,35 +425,29 @@ header p {
     color: white;
 }
 
-.btn-small {
-    padding: 6px 12px;
-    font-size: 12px;
-}
-
-/* Estilo base para botões com ícones. Define tamanho e alinhamento. */
 .btn-icon {
     width: 40px;
     height: 40px;
-    padding: 0; /* Remove padding para centralizar com flex */
-    display: inline-flex; /* Garante alinhamento correto */
+    padding: 0;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     text-transform: none;
     letter-spacing: normal;
-    font-size: 1.2rem; /* Tamanho maior para os ícones de execução */
+    font-size: 1.2rem;
 }
 
-/* Estilo específico para os botões de controle do diagrama (zoom), mantendo a aparência original */
 .diagram-controls .btn-icon {
     background: #f3f4f6;
     color: #374151;
-    font-size: 1rem; /* Restaura um tamanho de fonte mais adequado para os ícones de zoom */
+    font-size: 1rem;
 }
 
 /* Variáveis de entrada */
 .input-variables {
     padding: 20px;
     border-top: 1px solid #e5e7eb;
+    flex-shrink: 0;
 }
 
 .input-variables h3 {
@@ -260,16 +456,11 @@ header p {
     color: #374151;
 }
 
-#variable-inputs {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
 .variable-input {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    margin-bottom: 15px;
 }
 
 .variable-input label {
@@ -297,11 +488,11 @@ header p {
     background: white;
     border-radius: 12px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-    flex-shrink: 0; /* Impede que o console encolha */
+    flex-shrink: 0;
     overflow: hidden;
 }
 
-/* Header do console com botão de flip */
+/* Header do console */
 .console-header {
     background: linear-gradient(135deg, #4f46e5, #7c3aed);
     color: white;
@@ -324,6 +515,12 @@ header p {
     border: 2px solid rgba(255, 255, 255, 0.3);
     font-size: 1.1rem;
     transition: all 0.3s ease;
+    width: 40px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
 }
 
 .btn-flip:hover {
@@ -332,7 +529,7 @@ header p {
     transform: translateY(-1px);
 }
 
-/* Conteúdo do console (fundo escuro) */
+/* Console output */
 #console-output {
     background: #1f2937;
     color: #f9fafb;
@@ -346,8 +543,8 @@ header p {
     margin: 0;
 }
 
-/* Conteúdo da sintaxe (fundo claro) */
-.syntax-content {
+/* Syntax help */
+#syntax-help {
     background: white;
     color: #1f2937;
     padding: 20px;
@@ -401,7 +598,6 @@ header p {
     border: 1px solid #e5e7eb;
 }
 
-/* Código em bloco */
 .syntax-section > code {
     display: block;
     padding: 12px;
@@ -436,22 +632,12 @@ header p {
     justify-content: center;
 }
 
-/* Mensagem de erro */
-.error-message {
-    background: #fef2f2;
-    border: 1px solid #fecaca;
-    color: #dc2626;
-    padding: 15px;
-    border-radius: 6px;
-    margin: 20px;
-    font-size: 14px;
-}
-
 /* Status de execução */
 .execution-status {
     padding: 15px 20px;
     border-top: 1px solid #e5e7eb;
     background: #f9fafb;
+    flex-shrink: 0;
 }
 
 #current-step-info {
@@ -460,15 +646,78 @@ header p {
     font-weight: 500;
 }
 
-/* Destacar nó atual durante execução */
-.current-step {
-    animation: pulse 1.5s infinite;
+/* Seção de exemplos */
+.example-selector {
+    padding: 15px 20px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 0;
+    flex-shrink: 0;
 }
 
-@keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.7; }
-    100% { opacity: 1; }
+.example-selector select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    background: white;
+    transition: border-color 0.2s;
+}
+
+.example-selector select:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* Scrollbars personalizadas */
+.editor-content::-webkit-scrollbar,
+#console-output::-webkit-scrollbar,
+#syntax-help::-webkit-scrollbar {
+    width: 6px;
+}
+
+.editor-content::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 3px;
+}
+
+.editor-content::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 3px;
+}
+
+.editor-content::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+#console-output::-webkit-scrollbar-track {
+    background: #374151;
+    border-radius: 3px;
+}
+
+#console-output::-webkit-scrollbar-thumb {
+    background: #6b7280;
+    border-radius: 3px;
+}
+
+#console-output::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+#syntax-help::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 3px;
+}
+
+#syntax-help::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 3px;
+}
+
+#syntax-help::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
 }
 
 /* Responsividade */
@@ -479,7 +728,7 @@ header p {
     }
     
     .content-top {
-        flex-direction: column; /* Empilha os painéis em telas menores */
+        flex-direction: column;
         gap: 20px;
     }
 
@@ -497,6 +746,7 @@ header p {
 @media (max-width: 768px) {
     .container {
         padding: 10px;
+        margin-top: 70px !important; /* Mesma margem para mobile */
     }
     
     header h1 {
@@ -509,8 +759,7 @@ header p {
     
     .editor-container,
     .controls,
-    .input-variables,
-    .output-console {
+    .input-variables {
         padding: 15px;
     }
     
@@ -520,80 +769,29 @@ header p {
     }
 }
 
-/* Estilos para elementos Mermaid */
-.mermaid {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* Animações e efeitos */
+.current-step {
+    animation: pulse 1.5s infinite;
 }
 
-/* Customização dos nós do fluxograma */
-.node rect,
-.node circle,
-.node ellipse,
-.node polygon {
-    stroke-width: 2px;
-    stroke: #4f46e5;
-    fill: #f8fafc;
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
 }
 
-.node text {
-    fill: #1f2937;
-    font-weight: 500;
-}
-
-.edgePath path {
-    stroke: #6b7280;
-    stroke-width: 2px;
-}
-
-.edgeLabel {
-    background-color: white;
-    border-radius: 4px;
-    padding: 2px 6px;
-    font-size: 12px;
-    font-weight: 500;
-}
-
-/* === MELHORIAS E NOVOS ESTILOS === */
-
-/* Estados visuais melhorados */
-.empty-state {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 300px;
-    color: #6b7280;
-    font-size: 1.1rem;
-    text-align: center;
-    border: 2px dashed #d1d5db;
-    border-radius: 8px;
-    margin: 20px;
-}
-
-.error-content {
-    padding: 20px;
-    text-align: center;
-}
-
-.error-content h3 {
+/* Mensagens de erro */
+.error-message {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
     color: #dc2626;
-    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 6px;
+    margin: 20px;
+    font-size: 14px;
 }
 
-.error-content p {
-    color: #374151;
-    margin-bottom: 10px;
-}
-
-.error-content small {
-    color: #6b7280;
-}
-
-/* Melhorias nos botões */
-.btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
+/* Estados dos botões */
 .btn:disabled {
     opacity: 0.6;
     cursor: not-allowed;
@@ -616,139 +814,4 @@ header p {
     border-radius: 4px;
     border: 1px solid #e2e8f0;
     font-size: 0.9rem;
-}
-
-/* Variáveis de entrada */
-.variable-input {
-    margin-bottom: 15px;
-}
-
-.variable-input label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 500;
-    color: #374151;
-}
-
-.variable-input input {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #e2e8f0;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    transition: border-color 0.2s;
-    box-sizing: border-box;
-}
-
-.variable-input input:focus {
-    outline: none;
-    border-color: #4f46e5;
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-}
-
-.no-variables {
-    color: #6b7280;
-    font-style: italic;
-    text-align: center;
-    padding: 20px;
-}
-
-/* Scrollbar personalizada para o console */
-#console-output::-webkit-scrollbar,
-.syntax-content::-webkit-scrollbar,
-.editor-content::-webkit-scrollbar { /* 🆕 NOVO: Scrollbar para editor-content */
-    width: 6px;
-}
-
-#console-output::-webkit-scrollbar-track {
-    background: #374151;
-    border-radius: 3px;
-}
-
-#console-output::-webkit-scrollbar-thumb {
-    background: #6b7280;
-    border-radius: 3px;
-}
-
-#console-output::-webkit-scrollbar-thumb:hover {
-    background: #9ca3af;
-}
-
-.syntax-content::-webkit-scrollbar-track,
-.editor-content::-webkit-scrollbar-track { /* 🆕 NOVO: Track para editor-content */
-    background: #f3f4f6;
-    border-radius: 3px;
-}
-
-.syntax-content::-webkit-scrollbar-thumb,
-.editor-content::-webkit-scrollbar-thumb { /* 🆕 NOVO: Thumb para editor-content */
-    background: #d1d5db;
-    border-radius: 3px;
-}
-
-.syntax-content::-webkit-scrollbar-thumb:hover,
-.editor-content::-webkit-scrollbar-thumb:hover { /* 🆕 NOVO: Hover para editor-content */
-    background: #9ca3af;
-}
-
-/* Destaque do nó atual */
-.current-step-highlight {
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% {
-        filter: drop-shadow(0 0 6px #ff6b6b);
-    }
-    50% {
-        filter: drop-shadow(0 0 12px #ff6b6b);
-    }
-    100% {
-        filter: drop-shadow(0 0 6px #ff6b6b);
-    }
-}
-
-/* Responsividade aprimorada */
-@media (max-width: 768px) {
-    .step-controls {
-        flex-direction: column;
-        gap: 8px;
-        text-align: center;
-    }
-}
-
-/* Melhorias na acessibilidade */
-.btn:focus,
-input:focus,
-textarea:focus {
-    outline: 2px solid #4f46e5;
-    outline-offset: 2px;
-}
-
-/* === SEÇÃO DE EXEMPLOS === */
-.example-selector {
-    padding: 15px 20px;
-    background: #f8fafc;
-    border-bottom: 1px solid #e2e8f0;
-    margin-bottom: 0;
-}
-
-.example-selector h3 {
-    margin: 0 0 10px 0;
-    font-size: 1rem;
-    color: #4f46e5;
-    font-weight: 600;
-}
-
-.example-selector select {
-    border: 2px solid #e2e8f0;
-    transition: border-color 0.2s;
-    font-size: 0.9rem;
-    width: 98%
-}
-
-.example-selector select:focus {
-    outline: none;
-    border-color: #4f46e5;
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
 }

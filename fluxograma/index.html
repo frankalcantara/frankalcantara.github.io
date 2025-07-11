@@ -17,49 +17,54 @@
     <!-- Mermaid.js -->
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
     
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
     <!-- jQuery (necessário para Bootstrap) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- Header igual ao site principal -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
-        <div class="container pr-0">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation">
+        <div class="container">
             <a class="navbar-brand" href="https://frankalcantara.com">
-                <img src="../assets/images/logo.webp" alt="Frank de Alcantara" style="height: 40px;" />
+                <img src="../assets/images/logo.webp" alt="Frank de Alcantara" />
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <h1>Fluxograma Interativo</h1>
             <div class="collapse navbar-collapse" id="navbarMediumish">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="https://frankalcantara.com">Blog</a>
                     </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link" href="https://frankalcantara.com/fluxograma/index.html">Fluxograma Interativo</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="hallDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Hall da Fama
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="hallDropdown">
-                            <a class="nav-link" href="http://frankalcantara.com/linefollower/" target="_blank" rel="noopener">RobotZero</a><br>
-                            <a class="nav-link" href="http://luccafm1.github.io/" target="_blank" rel="noopener">Church Interpreter</a><br>
-                            <a class="nav-link" href="../truthtable/index" target="_blank" rel="noopener">Tabela Verdade</a><br>
-                            <a class="nav-link" href="../LMC/index" target="_blank" rel="noopener">Little Man Computer</a><br>
-                        </div>
+                    <a class="nav-link dropdown-toggle" href="#" id="hallDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Hall da Fama
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="hallDropdown">
+                    <a class="dropdown-item" href="http://frankalcantara.com/linefollower/" target="_blank" rel="noopener">RobotZero</a>
+                    <a class="dropdown-item" href="http://luccafm1.github.io/" target="_blank" rel="noopener">Church Interpreter</a>
+                    <a class="dropdown-item" href="../truthtable/index" target="_blank" rel="noopener">Tabela Verdade</a>
+                    <a class="dropdown-item" href="../LMC/index" target="_blank" rel="noopener">Little Man Computer</a>
+                    </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="wishlistDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Lista de Desejos
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="wishlistDropdown">
-                            <a class="dropdown-item" title="Wish List" target="_blank" rel="noopener" href="https://amzn.to/3C4Iu9H"><i class="fa fa-book"></i> The Art of Computer Programming</a><br>
-                            <a class="dropdown-item" title="Wish List" target="_blank" rel="noopener" href="https://amzn.to/48yPGa8"><i class="fa fa-tablet"></i> Kindle Paperwhite Signature Edition</a><br>
-                            <a class="dropdown-item" title="Wish List" target="_blank" rel="noopener" href="https://bookstore.ams.org/simon-set"><i class="fa fa-book"></i> A Comprehensive Course in Analysis</a><br>
-                            <a class="dropdown-item" title="Wish List" target="_blank" rel="noopener" href="https://amzn.to/40uggPC"><i class="fa fa-keyboard"></i> Teclado e mouse sem fio ergonômicos</a><br>
-                            <a class="dropdown-item" title="Wish List" target="_blank" rel="noopener" href="https://amzn.to/40DB1IZ"><i class="fas fa-wine-bottle"></i>The Macallan Sherry Oak 18 Anos Single Malt</a><br>
-                        </div>
+                    <a class="nav-link dropdown-toggle" href="#" id="wishlistDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Lista de Desejos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="wishlistDropdown">
+                    <a class="dropdown-item" title="Wish List" target="_blank" rel="noopener" href="https://amzn.to/3C4Iu9H"><i class="fa fa-book"></i> The Art of Computer Programming</a>
+                    <a class="dropdown-item" title="Wish List" target="_blank" rel="noopener" href="https://amzn.to/48yPGa8"><i class="fa fa-tablet"></i> Kindle Paperwhite Signature Edition</a>
+                    <a class="dropdown-item" title="Wish List" target="_blank" rel="noopener" href="https://bookstore.ams.org/simon-set"><i class="fa fa-book"></i> A Comprehensive Course in Analysis</a>
+                    <a class="dropdown-item" title="Wish List" target="_blank" rel="noopener" href="https://amzn.to/40uggPC"><i class="fa fa-keyboard"></i> Teclado e mouse sem fio ergonômicos</a>
+                    <a class="dropdown-item" title="Wish List" target="_blank" rel="noopener" href="https://amzn.to/40DB1IZ"><i class="fas fa-wine-bottle"></i>The Macallan Sherry Oak 18 Anos Single Malt</a>
+                    </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../about">Sobre</a>
@@ -69,13 +74,11 @@
         </div>
     </nav>
     
-    <!-- Conteúdo principal com margin-top para compensar o navbar fixo -->
-    <div style="margin-top: 80px;">
-        <div class="container">
-            <header style="text-align: center; margin-bottom: 30px; color: #333;">
-                <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 10px;">Fluxograma Interativo</h1>
-                <p style="font-size: 1.1rem; opacity: 0.8;">Ferramenta para aprendizado de raciocínio algorítmico</p>
-            </header>
+    <!-- Conteúdo principal -->
+    <div class="container">
+        <!--  <header>
+                <h1>Fluxograma Interativo</h1>
+            </header>-->
         <div class="main-content">
             <!-- Container para os painéis superiores (Editor e Diagrama) -->
             <div class="content-top">
@@ -217,7 +220,6 @@ flowchart TD
             </div>
         </div>
     </div>
-    </div> <!-- Fechamento da div com margin-top -->
     
     <!-- Scripts Bootstrap -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -227,5 +229,18 @@ flowchart TD
     <script src="unified-parser.js"></script>
     <script src="step-by-step-executor.js"></script>
     <script src="script.js"></script>
+    
+    <!-- Script para garantir dropdowns funcionais -->
+    <script>
+        $(document).ready(function() {
+            // Garantir que dropdowns funcionem corretamente
+            if (typeof $.fn.dropdown !== 'undefined') {
+                $('.dropdown-toggle').dropdown();
+                console.log('Dropdowns inicializados com sucesso');
+            } else {
+                console.error('Bootstrap dropdown não disponível');
+            }
+        });
+    </script>
 </body>
 </html>
