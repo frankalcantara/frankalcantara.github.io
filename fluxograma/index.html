@@ -3,17 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fluxograma Interativo - Aprendizado de Algoritmos</title>
+    <title>Fluxograma Interativo - Aprendizado de Algoritmos | Frank de Alcantara</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <!-- CSS do site principal -->
+    <link href="../assets/css/screen.css" rel="stylesheet" />
+    
+    <!-- CSS específico do fluxograma -->
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Mermaid.js -->
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    
+    <!-- jQuery (necessário para Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Fluxograma Interativo</h1>
-            <p>Ferramenta para aprendizado de raciocínio algorítmico</p>
-        </header>
-        
+    <!-- Header igual ao site principal -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+        <div class="container pr-0">
+            <a class="navbar-brand" href="https://frankalcantara.com">
+                <img src="../assets/images/logo.webp" alt="Frank de Alcantara" style="height: 40px;" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarMediumish">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://frankalcantara.com">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://frankalcantara.com/fluxograma/index.html">Fluxograma Interativo</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="hallDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Hall da Fama
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="hallDropdown">
+                            <a class="nav-link" href="http://frankalcantara.com/linefollower/" target="_blank" rel="noopener">RobotZero</a><br>
+                            <a class="nav-link" href="http://luccafm1.github.io/" target="_blank" rel="noopener">Church Interpreter</a><br>
+                            <a class="nav-link" href="../truthtable/index" target="_blank" rel="noopener">Tabela Verdade</a><br>
+                            <a class="nav-link" href="../LMC/index" target="_blank" rel="noopener">Little Man Computer</a><br>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="wishlistDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Lista de Desejos
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="wishlistDropdown">
+                            <a class="dropdown-item" title="Wish List" target="_blank" rel="noopener" href="https://amzn.to/3C4Iu9H"><i class="fa fa-book"></i> The Art of Computer Programming</a><br>
+                            <a class="dropdown-item" title="Wish List" target="_blank" rel="noopener" href="https://amzn.to/48yPGa8"><i class="fa fa-tablet"></i> Kindle Paperwhite Signature Edition</a><br>
+                            <a class="dropdown-item" title="Wish List" target="_blank" rel="noopener" href="https://bookstore.ams.org/simon-set"><i class="fa fa-book"></i> A Comprehensive Course in Analysis</a><br>
+                            <a class="dropdown-item" title="Wish List" target="_blank" rel="noopener" href="https://amzn.to/40uggPC"><i class="fa fa-keyboard"></i> Teclado e mouse sem fio ergonômicos</a><br>
+                            <a class="dropdown-item" title="Wish List" target="_blank" rel="noopener" href="https://amzn.to/40DB1IZ"><i class="fas fa-wine-bottle"></i>The Macallan Sherry Oak 18 Anos Single Malt</a><br>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about">Sobre</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Conteúdo principal com margin-top para compensar o navbar fixo -->
+    <div style="margin-top: 80px;">
+        <div class="container">
+            <header style="text-align: center; margin-bottom: 30px; color: #333;">
+                <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 10px;">Fluxograma Interativo</h1>
+                <p style="font-size: 1.1rem; opacity: 0.8;">Ferramenta para aprendizado de raciocínio algorítmico</p>
+            </header>
         <div class="main-content">
             <!-- Container para os painéis superiores (Editor e Diagrama) -->
             <div class="content-top">
@@ -22,18 +84,18 @@
                     <h2>Editor de Fluxograma</h2>
                 </div>
                 
-                <div class="example-selector">
-                    <h3>Exemplos Predefinidos</h3>
-                    <select id="example-selector">
-                        <option value="">Selecione um exemplo para carregar automaticamente...</option>
-                        <option value="basico">1. Básico - Sequência Simples</option>
-                        <option value="decisao">2. Intermediário - Com Decisão</option>
-                        <option value="calculadora">3. Avançado - Calculadora</option>
-                    </select>
-                </div>
-                
-                <div class="editor-container">
-                    <textarea id="mermaid-editor" placeholder="Digite seu fluxograma aqui usando sintaxe Mermaid...
+                <!-- 🆕 NOVA DIV: Container scrollável para o conteúdo -->
+                <div class="editor-content">
+                    <div class="example-selector">
+                        <select id="example-selector">
+                            <option value="">Selecione um exemplo para carregar automaticamente...</option>
+                            <option value="basico">1. Básico - Sequência Simples</option>
+                            <option value="decisao">2. Intermediário - Com Decisão</option>
+                            <option value="calculadora">3. Avançado - Calculadora</option>
+                        </select>
+                    </div>
+                    <div class="editor-container">
+                        <textarea id="mermaid-editor" placeholder="Digite seu fluxograma aqui usando sintaxe Mermaid...
 
 Exemplo:
 flowchart TD
@@ -43,36 +105,37 @@ flowchart TD
     C -->|Não| E[Não pode votar]
     D --> F[Fim]
     E --> F"></textarea>
-                </div>
-                
-                <div class="controls">
-                    <h3>Controles de Execução</h3>
-                    <div class="button-group">
-                        <button id="execute-all" class="btn btn-icon btn-primary" title="Executar Tudo">
-                            ▶️
-                        </button>
-                        <button id="execute-step" class="btn btn-icon btn-secondary" title="Executar Passo a Passo">
-                            👣
-                        </button>
-                        <button id="reset" class="btn btn-icon btn-tertiary" title="Reiniciar">
-                            🔄
-                        </button>
-                        <button id="prev-step" class="btn btn-icon" title="Passo Anterior">
-                            ⬅️
-                        </button>
-                        <button id="next-step" class="btn btn-icon" title="Próximo Passo">
-                            ➡️
-                        </button>
                     </div>
                     
-                    <div class="step-controls" id="step-controls" style="display: none;">
-                        <span id="step-counter" class="step-info">Passo: 0/0</span>
+                    <div class="controls">
+                        <h3>Controles de Execução</h3>
+                        <div class="button-group">
+                            <button id="execute-all" class="btn btn-icon btn-primary" title="Executar Tudo">
+                                ▶️
+                            </button>
+                            <button id="execute-step" class="btn btn-icon btn-secondary" title="Executar Passo a Passo">
+                                👣
+                            </button>
+                            <button id="reset" class="btn btn-icon btn-tertiary" title="Reiniciar">
+                                🔄
+                            </button>
+                            <button id="prev-step" class="btn btn-icon" title="Passo Anterior">
+                                ⬅️
+                            </button>
+                            <button id="next-step" class="btn btn-icon" title="Próximo Passo">
+                                ➡️
+                            </button>
+                        </div>
+                        
+                        <div class="step-controls" id="step-controls" style="display: none;">
+                            <span id="step-counter" class="step-info">Passo: 0/0</span>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="input-variables" id="input-variables">
-                    <!-- Campos de entrada de variáveis serão inseridos aqui -->
-                </div>
+                    
+                    <div class="input-variables" id="input-variables">
+                        <!-- Campos de entrada de variáveis serão inseridos aqui -->
+                    </div>
+                </div> <!-- Fim da nova div editor-content -->
             </div>
             
             <div class="diagram-panel">
@@ -154,66 +217,13 @@ flowchart TD
             </div>
         </div>
     </div>
+    </div> <!-- Fechamento da div com margin-top -->
     
-    <!-- Scripts -->
-    <script>
-        // Script inline para forçar estado inicial IMEDIATAMENTE
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🛠️ Forçando estado inicial INLINE...');
-            
-            function forceInitialState() {
-                const title = document.getElementById('console-title');
-                const flipBtn = document.getElementById('flip-console');
-                const consoleDiv = document.getElementById('console-output');
-                const syntaxDiv = document.getElementById('syntax-help');
-                
-                if (title && flipBtn && consoleDiv && syntaxDiv) {
-                    // FORÇAR sintaxe visível
-                    title.textContent = 'Sintaxe para Criação de Fluxogramas';
-                    flipBtn.textContent = '💼';
-                    flipBtn.title = 'Voltar para o console de saída';
-                    
-                    // FORÇAR displays com máxima prioridade
-                    consoleDiv.style.setProperty('display', 'none', 'important');
-                    syntaxDiv.style.setProperty('display', 'block', 'important');
-                    
-                    console.log('✅ Estado inicial forçado: SINTAXE VISÍVEL');
-                    console.log('Console display:', window.getComputedStyle(consoleDiv).display);
-                    console.log('Sintaxe display:', window.getComputedStyle(syntaxDiv).display);
-                    
-                    return true;
-                } else {
-                    console.error('❌ Elementos não encontrados no script inline');
-                    return false;
-                }
-            }
-            
-            // Tentar imediatamente
-            if (!forceInitialState()) {
-                // Se falhou, tentar novamente após 100ms
-                setTimeout(forceInitialState, 100);
-            }
-            
-            // Verificar novamente após 500ms para garantir
-            setTimeout(function() {
-                const syntaxDiv = document.getElementById('syntax-help');
-                const consoleDiv = document.getElementById('console-output');
-                if (syntaxDiv && consoleDiv) {
-                    const syntaxVisible = window.getComputedStyle(syntaxDiv).display !== 'none';
-                    const consoleHidden = window.getComputedStyle(consoleDiv).display === 'none';
-                    
-                    console.log('🔍 Verificação final:');
-                    console.log('Sintaxe visível:', syntaxVisible);
-                    console.log('Console oculto:', consoleHidden);
-                    
-                    if (!syntaxVisible || !consoleHidden) {
-                        console.warn('⚠️ Estado não aplicado corretamente, forçando novamente...');
-                        forceInitialState();
-                    }
-                }
-            }, 500);
-        });
-    </script>
+    <!-- Scripts Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    
+    <!-- Scripts do fluxograma -->
     <script src="unified-parser.js"></script>
     <script src="step-by-step-executor.js"></script>
     <script src="script.js"></script>

@@ -1,3 +1,49 @@
+/* === ESTILOS PARA O NOVO HEADER === */
+
+/* Ajustes para o navbar do site principal */
+.mediumnavigation {
+    background: rgba(255, 255, 255, 0.97) !important;
+    box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.15);
+    transition: top 0.2s ease-in-out;
+    z-index: 1000; /* ✅ AJUSTADO: Z-index controlado */
+    height: 60px; /* ✅ AJUSTADO: Altura fixa */
+}
+
+.navbar-brand img {
+    height: 40px;
+    width: auto;
+}
+
+/* ✅ NOVO: Container para o conteúdo principal */
+.fluxograma-content {
+    margin-top: 80px; /* Espaço para o navbar fixo */
+    padding: 20px;
+    min-height: calc(100vh - 80px);
+}
+
+/* Ajuste do container principal para acomodar navbar fixo */
+.main-content {
+    margin-top: 0; /* Remove margin-top anterior */
+    height: calc(100vh - 160px); /* ✅ AJUSTADO: Altura considerando header */
+}
+
+/* ✅ AJUSTE: Container específico do fluxograma */
+.fluxograma-container {
+    max-width: 2050px;
+    margin: 0 auto;
+    padding: 0; /* ✅ REMOVIDO: padding para evitar conflitos */
+}
+
+/* Ajustes responsívos para o navbar */
+@media (max-width: 991px) {
+    .navbar-expand-lg .navbar-nav .nav-link {
+        padding-right: 0.6rem;
+        padding-left: 0.6rem;
+    }
+}
+
+/* === FIM DOS ESTILOS DO HEADER === */
+
 /* Reset e configurações básicas */
 * {
     margin: 0;
@@ -7,13 +53,14 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #f8f9fa; /* ✅ AJUSTADO: Fundo claro para compatibilidade com o header */
     min-height: 100vh;
     color: #333;
+    margin: 0; /* ✅ GARANTIR: Reset de margin */
 }
 
 .container {
-    max-width: 1400px;
+    max-width: 2050px;
     margin: 0 auto;
     padding: 20px;
     min-height: 100vh;
@@ -42,7 +89,7 @@ header p {
 .main-content {
     display: flex;
     flex-direction: column; /* Organiza os painéis de cima e o console verticalmente */
-    gap: 20px;
+    gap: 0; /* ✅ REMOVIDO: Era 20px, agora sem espaçamento entre os blocos */
     height: calc(100vh - 120px); /* Ocupa a altura restante da tela, descontando o header */
 }
 
@@ -62,7 +109,15 @@ header p {
     box-shadow: 0 8px 32px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
-    overflow-y: auto; /* Permite scroll interno se o conteúdo for grande */
+    overflow: hidden; /* ✅ REMOVIDO: overflow-y: auto - agora sem scroll no painel principal */
+}
+
+/* 🆕 NOVA CLASSE: Container scrollável para o conteúdo do editor */
+.editor-content {
+    flex: 1; /* Ocupa todo o espaço restante após o header */
+    overflow-y: auto; /* Scroll apenas no conteúdo, não no header */
+    display: flex;
+    flex-direction: column;
 }
 
 /* Painel do Diagrama (60%) */
@@ -250,7 +305,7 @@ header p {
 .console-header {
     background: linear-gradient(135deg, #4f46e5, #7c3aed);
     color: white;
-    padding: 15px 20px;
+    padding: 8px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -362,6 +417,7 @@ header p {
 .diagram-controls {
     display: flex;
     gap: 5px;
+    margin-right: 6px;
 }
 
 /* Container do diagrama */
@@ -599,7 +655,8 @@ header p {
 
 /* Scrollbar personalizada para o console */
 #console-output::-webkit-scrollbar,
-.syntax-content::-webkit-scrollbar {
+.syntax-content::-webkit-scrollbar,
+.editor-content::-webkit-scrollbar { /* 🆕 NOVO: Scrollbar para editor-content */
     width: 6px;
 }
 
@@ -617,17 +674,20 @@ header p {
     background: #9ca3af;
 }
 
-.syntax-content::-webkit-scrollbar-track {
+.syntax-content::-webkit-scrollbar-track,
+.editor-content::-webkit-scrollbar-track { /* 🆕 NOVO: Track para editor-content */
     background: #f3f4f6;
     border-radius: 3px;
 }
 
-.syntax-content::-webkit-scrollbar-thumb {
+.syntax-content::-webkit-scrollbar-thumb,
+.editor-content::-webkit-scrollbar-thumb { /* 🆕 NOVO: Thumb para editor-content */
     background: #d1d5db;
     border-radius: 3px;
 }
 
-.syntax-content::-webkit-scrollbar-thumb:hover {
+.syntax-content::-webkit-scrollbar-thumb:hover,
+.editor-content::-webkit-scrollbar-thumb:hover { /* 🆕 NOVO: Hover para editor-content */
     background: #9ca3af;
 }
 
@@ -684,6 +744,7 @@ textarea:focus {
     border: 2px solid #e2e8f0;
     transition: border-color 0.2s;
     font-size: 0.9rem;
+    width: 98%
 }
 
 .example-selector select:focus {

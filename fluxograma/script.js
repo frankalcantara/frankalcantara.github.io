@@ -483,7 +483,7 @@ async function executeAll() {
         // Executar em modo contínuo (velocidade total)
         await stepExecutor.runFullSpeed();
         
-        // Atualizar interface com resultado final
+        // Atualizar interface com resultado final (sempre mostrar no painel de status)
         updateCurrentStepInfo();
         
         logToConsole('✅ Execução completa finalizada');
@@ -590,14 +590,22 @@ function resetExecution() {
         stepExecutor = null;
     }
     
-    if (consoleOutput) consoleOutput.textContent = ''; // Limpar console
+    // 🧹 LIMPAR console se estiver visível (dar controle ao usuário)
+    if (!isShowingSyntax && consoleOutput) {
+        consoleOutput.textContent = '';
+        // Adicionar mensagem de reset no console
+        const timestamp = new Date().toLocaleTimeString();
+        const resetMessage = `[${timestamp}] 🔄 === CONSOLE LIMPO PELO RESET ===\n`;
+        consoleOutput.textContent = resetMessage;
+    }
+    
     isStepByStepMode = false;
     setButtonStates('normal');
     
     if (variableInputs) variableInputs.innerHTML = '';
     if (currentStepInfo) currentStepInfo.textContent = 'Pronto para execução';
     
-    logToConsole('🔄 Execução resetada. Console limpo.');
+    logToConsole('🔄 Execução resetada - ready para nova execução!');
 }
 
 // Atualizar contador de passos
@@ -611,8 +619,19 @@ function updateStepCounter() {
 
 // Atualizar informações do passo atual
 function updateCurrentStepInfo() {
-    if (currentStepInfo && stepExecutor && isStepByStepMode) {
-        currentStepInfo.textContent = stepExecutor.getCurrentStepInfo();
+    if (currentStepInfo && stepExecutor) {
+        if (isStepByStepMode) {
+            // Modo passo-a-passo: mostrar informação do passo atual
+            currentStepInfo.textContent = stepExecutor.getCurrentStepInfo();
+        } else {
+            // Modo execução completa: mostrar resultado final
+            const lastOutput = stepExecutor.getLastOutputResult();
+            if (lastOutput !== null) {
+                currentStepInfo.textContent = `🎆 Resultado: ${lastOutput}`;
+            } else {
+                currentStepInfo.textContent = '✅ Execução completa finalizada';
+            }
+        }
     }
 }
 
@@ -730,18 +749,33 @@ function toggleConsoleView() {
         consoleOutput.style.display = 'none';
         syntaxHelp.style.display = 'block';
     } else {
-        // Mostrar console
+        // Mostrar console - LIMPAR LOGS ANTERIORES
         consoleTitle.textContent = 'Console de Saída';
         flipConsoleBtn.textContent = '📖';
         flipConsoleBtn.title = 'Alternar entre console e sintaxe';
         
+        // 🧹 LIMPAR console antes de mostrar
+        consoleOutput.textContent = '';
+        
         consoleOutput.style.display = 'block';
         syntaxHelp.style.display = 'none';
+        
+        // Log inicial indicando início da sessão
+        const timestamp = new Date().toLocaleTimeString();
+        const sessionStart = `[${timestamp}] 🚀 === NOVA SESSÃO DE LOGS INICIADA ===\n`;
+        consoleOutput.textContent = sessionStart;
     }
 }
 
 // Log para console
 function logToConsole(message) {
+    // 🔍 NOVA LÓGICA: SÓ registrar logs quando console estiver visível
+    // SEM ALTERNÂNCIA AUTOMÁTICA - console controlado apenas pelo usuário
+    if (isShowingSyntax) {
+        // Se está mostrando sintaxe, NÃO registrar logs e NÃO alternar automaticamente
+        return; // Usuário decide quando ver console via botão flip
+    }
+    
     const timestamp = new Date().toLocaleTimeString();
     const logEntry = `[${timestamp}] ${message}`;
     
@@ -758,12 +792,6 @@ function logToConsole(message) {
         const lines = consoleOutput.textContent.split('\n');
         if (lines.length > 100) {
             consoleOutput.textContent = lines.slice(-100).join('\n');
-        }
-        
-        // Se estiver mostrando sintaxe, voltar para o console quando houver nova mensagem
-        // MAS APENAS depois que a inicialização estiver completa
-        if (isInitializationComplete && isShowingSyntax && !message.includes('Alternado') && !message.includes('Voltou')) {
-            toggleConsoleView();
         }
     }
 }
