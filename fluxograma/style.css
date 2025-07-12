@@ -272,9 +272,10 @@ header {
 }
 
 header h1 {
-    font-size: 2rem;
+    font-size: 25px;
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: -1px !important;
+    font-weight: 700;
     color: #333;
 }
 
@@ -750,7 +751,7 @@ header p {
     }
     
     header h1 {
-        font-size: 2rem;
+        font-size: 25pxm;
     }
     
     .panel-header {
