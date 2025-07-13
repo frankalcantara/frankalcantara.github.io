@@ -31,6 +31,10 @@ let currentZoom = 1.0;
 let isShowingSyntax = true; // Iniciar mostrando sintaxe
 let isInitializationComplete = false; // Controlar quando a inicialização terminou
 
+// Variáveis do CodeMirror
+let codeMirrorEnabled = false;
+let editorInstance = null;
+
 // Elementos DOM - inicializados após DOM carregar
 let editor, diagramContainer, errorDisplay, executeAllBtn, executeStepBtn, resetBtn;
 let nextStepBtn, prevStepBtn, stepControls, stepCounter, variableInputs, zoomInBtn, zoomOutBtn, fitDiagramBtn;
@@ -110,6 +114,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Configurar event listeners
     setupEventListeners();
     
+    // Tentar inicializar CodeMirror (com fallback para textarea)
+    initializeCodeMirrorEditor();
+    
     // Inicializar interface
     initializeInterface();
     
@@ -162,11 +169,13 @@ function debounce(func, wait) {
 function setupEventListeners() {
     console.log('🔧 Configurando event listeners...');
     
-    if (editor) {
+    if (editor && !codeMirrorEnabled) {
+        // Apenas configurar se CodeMirror não estiver ativo
         // Usar debounce para evitar renderizações excessivas
         editor.addEventListener('input', debounce(renderDiagram, 800));
-        console.log('✅ Event listener do editor configurado');
+        console.log('✅ Event listener do editor (textarea) configurado');
     }
+    // Note: CodeMirror configura seus próprios listeners via handleEditorChange
     
     if (executeAllBtn) executeAllBtn.addEventListener('click', executeAll);
     if (executeStepBtn) executeStepBtn.addEventListener('click', executeStepByStep);
@@ -184,17 +193,94 @@ function setupEventListeners() {
         exampleSelector.addEventListener('change', function() {
             const selectedValue = this.value;
             if (selectedValue) {
-                console.log(`📋 Carregando exemplo automaticamente: ${selectedValue}`);
                 loadExample(selectedValue);
             } else {
-                // Se usuário selecionou a opção vazia, resetar título
                 resetarTitulo();
             }
         });
-        console.log('✅ Event listener do seletor configurado (carregamento automático)');
+        console.log('✅ Event listener do seletor configurado');
     }
     
     console.log('✅ Event listeners configurados');
+}
+
+// Inicializar CodeMirror (com fallback para textarea)
+async function initializeCodeMirrorEditor() {
+    console.log('🔧 Tentando inicializar syntax highlighting...');
+    
+    if (!window.simpleHighlighter || !window.initializeCodeMirror) {
+        console.log('⚠️ Highlighting não disponível, usando textarea padrão');
+        codeMirrorEnabled = false;
+        return;
+    }
+    
+    try {
+        // Aguardar inicialização do highlighting
+        const success = await window.initializeCodeMirror('mermaid-editor', handleEditorChange);
+        
+        if (success) {
+            codeMirrorEnabled = true;
+            editorInstance = window.simpleHighlighter;
+            
+            // Adicionar classe para CSS
+            const wrapper = document.querySelector('.editor-wrapper');
+            if (wrapper) {
+                wrapper.classList.add('highlighting-active');
+            }
+            
+            console.log('✅ Syntax highlighting ativado!');
+            logToConsole('🎨 Editor com syntax highlighting ativo');
+        } else {
+            codeMirrorEnabled = false;
+            console.log('⚠️ Fallback: Usando textarea original');
+        }
+        
+    } catch (error) {
+        console.warn('⚠️ Erro ao inicializar highlighting:', error);
+        codeMirrorEnabled = false;
+    }
+}
+
+// Função para lidar com mudanças no editor (CodeMirror ou textarea)
+function handleEditorChange(value) {
+    // Usar debounce para evitar renderizações excessivas
+    if (handleEditorChange.timeout) {
+        clearTimeout(handleEditorChange.timeout);
+    }
+    
+    handleEditorChange.timeout = setTimeout(() => {
+        renderDiagram();
+    }, 800);
+}
+
+// Funções de compatibilidade para obter e definir valor do editor
+function getEditorValue() {
+    if (editor) {
+        return editor.value;
+    }
+    return '';
+}
+
+function setEditorValue(value) {
+    if (editor) {
+        editor.value = value;
+        
+        // Atualizar highlighting se disponível
+        if (window.simpleHighlighter && window.simpleHighlighter.isReady()) {
+            window.simpleHighlighter.updateHighlighting();
+        }
+        
+        // Atualizar numeração se disponível
+        if (typeof updateLineNumbers === 'function') {
+            updateLineNumbers();
+        }
+    }
+}
+
+function focusEditor() {
+    if (editor) {
+        editor.focus();
+    }
 }
 
 // Inicializar interface
@@ -202,9 +288,16 @@ function initializeInterface() {
     console.log('🔧 Inicializando interface...');
     
     // Mostrar mensagem de boas-vindas no editor
-    if (editor) {
+    const welcomeMessage = 'Selecione um exemplo acima ou digite seu fluxograma aqui...\n\nUse a sintaxe Mermaid:\nflowchart TD\n    A[Início] --> B[Processo]\n    B --> C[Fim]';
+    
+    if (codeMirrorEnabled && editorInstance) {
+        // CodeMirror ativado
+        editorInstance.setValue('');
+        console.log('🎨 CodeMirror configurado com placeholder');
+    } else if (editor) {
+        // Textarea padrão
         editor.value = '';
-        editor.placeholder = 'Selecione um exemplo acima ou digite seu fluxograma aqui...\n\nUse a sintaxe Mermaid:\nflowchart TD\n    A[Início] --> B[Processo]\n    B --> C[Fim]';
+        editor.placeholder = welcomeMessage;
     }
     
     // Mostrar mensagem no diagrama
@@ -238,28 +331,21 @@ function initializeConsoleState() {
 
 // Carregar exemplo específico
 function loadExample(exampleKey) {
-    console.log(`🔧 Carregando exemplo: ${exampleKey}`);
+    console.log(`📋 Carregando exemplo: ${exampleKey}`);
     
     const example = examples[exampleKey];
     if (!example) {
-        console.error(`❌ Exemplo '${exampleKey}' não encontrado`);
-        logToConsole(`❌ Exemplo '${exampleKey}' não encontrado`);
+        console.error(`Exemplo '${exampleKey}' não encontrado`);
         return;
     }
     
     if (!editor) {
-        console.error('❌ Editor não disponível');
-        logToConsole('❌ Editor não disponível');
+        console.error('Editor não disponível');
         return;
     }
     
     // Carregar código no editor
-    editor.value = example.codigo;
-    
-    // Atualizar numeração de linhas
-    if (typeof updateLineNumbers === 'function') {
-        updateLineNumbers();
-    }
+    setEditorValue(example.codigo);
     
     logToConsole(`📋 Exemplo carregado: ${example.nome}`);
     
@@ -268,11 +354,8 @@ function loadExample(exampleKey) {
     
     // Renderizar após um pequeno delay
     setTimeout(() => {
-        console.log('🔧 Renderizando exemplo carregado...');
         renderDiagram();
     }, 300);
-    
-    console.log(`✅ Exemplo '${exampleKey}' carregado com sucesso`);
 }
 
 // Função para mostrar qual exemplo está carregado
@@ -310,7 +393,7 @@ async function renderDiagram() {
     isRendering = true;
     console.log('🔧 Iniciando renderização...');
     
-    const code = editor.value.trim();
+    const code = getEditorValue().trim();
     
     if (!code) {
         diagramContainer.innerHTML = '<div style="text-align: center; color: #6b7280; padding: 50px;">Digite seu fluxograma no editor</div>';

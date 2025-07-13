@@ -853,6 +853,330 @@ header p {
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
 }
 
+/* === SYNTAX HIGHLIGHTING SIMPLES === */
+/* Overlay de highlighting sobre textarea existente */
+
+/* Camada de highlighting */
+.syntax-highlight-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+    white-space: pre;
+    word-wrap: normal;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 15px;
+    border: 2px solid transparent;
+    box-sizing: border-box;
+    background: transparent;
+    margin: 0;
+    border-radius: 8px;
+    /* Melhor renderização de texto */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Classes de highlighting - CORES MAIS VISÍVEIS */
+.syntax-highlight-layer .keyword {
+    color: #d73a49 !important;
+    font-weight: bold !important;
+    background: transparent !important;
+}
+
+.syntax-highlight-layer .variable {
+    color: #6f42c1 !important;
+    font-weight: 500 !important;
+    background: transparent !important;
+}
+
+.syntax-highlight-layer .string {
+    color: #032f62 !important;
+    background: transparent !important;
+}
+
+.syntax-highlight-layer .operator {
+    color: #e36209 !important;
+    font-weight: bold !important;
+    background: transparent !important;
+}
+
+.syntax-highlight-layer .comment {
+    color: #22863a !important;
+    font-style: italic !important;
+    background: transparent !important;
+}
+
+.syntax-highlight-layer .line-comment {
+    color: #6a737d !important;
+    font-style: italic !important;
+    background: transparent !important;
+}
+
+/* Garantir que textarea fique transparente quando highlighting ativo */
+.editor-wrapper:has(.syntax-highlight-layer) #mermaid-editor {
+    background: transparent !important;
+    color: transparent !important;
+    position: relative;
+    z-index: 2;
+    caret-color: #1f2937 !important;
+    /* Tornar seleção mais sutil */
+    selection: none;
+}
+
+.editor-wrapper:has(.syntax-highlight-layer) #mermaid-editor::selection {
+    background: rgba(79, 70, 229, 0.15) !important;
+    color: transparent !important;
+}
+
+/* Fallback para navegadores que não suportam :has() */
+.highlighting-active #mermaid-editor {
+    background: transparent !important;
+    color: transparent !important;
+    position: relative;
+    z-index: 2;
+    caret-color: #1f2937 !important;
+}
+
+.highlighting-active #mermaid-editor::selection {
+    background: rgba(79, 70, 229, 0.15) !important;
+    color: transparent !important;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 1024px) {
+    .syntax-highlight-layer {
+        font-size: 13px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .syntax-highlight-layer {
+        font-size: 12px;
+        padding: 8px;
+        line-height: 1.4;
+    }
+}
+
+/* === ESTILOS CODEMIRROR 6 - MANTIDOS PARA COMPATIBILIDADE === */
+
+/* Container principal do CodeMirror */
+.codemirror-editor {
+    flex: 1;
+    height: 100% !important;
+    min-height: 300px;
+    max-height: 600px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #ffffff;
+    transition: border-color 0.3s ease;
+    font-family: 'Courier New', monospace;
+}
+
+.codemirror-editor:focus-within {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* Editor View do CodeMirror */
+.codemirror-editor .cm-editor {
+    height: 100% !important;
+    font-family: 'Courier New', monospace !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+}
+
+.codemirror-editor .cm-content {
+    padding: 15px !important;
+    min-height: 100% !important;
+    font-family: 'Courier New', monospace !important;
+}
+
+.codemirror-editor .cm-scroller {
+    overflow: auto !important;
+    height: 100% !important;
+    font-family: 'Courier New', monospace !important;
+}
+
+/* Numeração de linhas do CodeMirror */
+.codemirror-editor .cm-gutters {
+    background: #f8fafc !important;
+    border-right: 1px solid #e2e8f0 !important;
+    padding-right: 8px !important;
+    min-width: 40px !important;
+    color: #64748b !important;
+}
+
+.codemirror-editor .cm-lineNumbers {
+    font-size: 14px !important;
+    color: #64748b !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    font-family: 'Courier New', monospace !important;
+}
+
+/* Linha ativa */
+.codemirror-editor .cm-activeLineGutter {
+    background: #e2e8f0 !important;
+}
+
+.codemirror-editor .cm-activeLine {
+    background: rgba(79, 70, 229, 0.05) !important;
+}
+
+/* Cursor */
+.codemirror-editor .cm-cursor {
+    border-left: 2px solid #4f46e5 !important;
+}
+
+/* Seleção */
+.codemirror-editor .cm-selectionBackground {
+    background: rgba(79, 70, 229, 0.2) !important;
+}
+
+/* Foco */
+.codemirror-editor .cm-focused {
+    outline: none !important;
+}
+
+/* === SYNTAX HIGHLIGHTING MANUAL === */
+/* Classes CSS básicas para highlighting se CodeMirror falhar */
+
+/* Keywords - Vermelho e negrito */
+.codemirror-editor .cm-keyword,
+.highlight-keyword {
+    color: #d73a49 !important;
+    font-weight: bold !important;
+}
+
+/* Node IDs - Roxo */
+.codemirror-editor .cm-variable,
+.codemirror-editor .cm-variableName,
+.highlight-variable {
+    color: #6f42c1 !important;
+    font-weight: 500 !important;
+}
+
+/* Node Text - Azul escuro */
+.codemirror-editor .cm-string,
+.highlight-string {
+    color: #032f62 !important;
+}
+
+/* Connections - Laranja */
+.codemirror-editor .cm-operator,
+.highlight-operator {
+    color: #e36209 !important;
+    font-weight: bold !important;
+}
+
+/* Labels e Comments - Verde itálico */
+.codemirror-editor .cm-comment,
+.highlight-comment {
+    color: #22863a !important;
+    font-style: italic !important;
+}
+
+/* Comments reais - Cinza itálico */
+.codemirror-editor .cm-line-comment,
+.highlight-line-comment {
+    color: #6a737d !important;
+    font-style: italic !important;
+}
+
+/* === HIGHLIGHTING MANUAL SIMPLES === */
+/* Aplicar cores diretamente via CSS para texto comum */
+
+.codemirror-editor .cm-line {
+    position: relative;
+}
+
+/* Usar CSS para destacar padrões comuns de Mermaid */
+.codemirror-editor .cm-line:has-text("flowchart"),
+.codemirror-editor .cm-line:has-text("graph"),
+.codemirror-editor .cm-line:has-text("TD"),
+.codemirror-editor .cm-line:has-text("TB") {
+    /* Tentar destacar palavras-chave quando possível */
+}
+
+/* Backup highlighting para textarea normal */
+#mermaid-editor {
+    /* Manter estilos da textarea original se CodeMirror falhar */
+}
+
+/* Ajustes responsivos para CodeMirror */
+@media (max-width: 1024px) {
+    .codemirror-editor {
+        min-height: 250px;
+    }
+    
+    .codemirror-editor .cm-lineNumbers {
+        font-size: 13px !important;
+        min-width: 35px !important;
+    }
+    
+    .codemirror-editor .cm-content {
+        padding: 10px !important;
+        font-size: 13px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .codemirror-editor {
+        min-height: 200px;
+        border-width: 1px;
+    }
+    
+    .codemirror-editor .cm-lineNumbers {
+        font-size: 12px !important;
+        min-width: 30px !important;
+    }
+    
+    .codemirror-editor .cm-content {
+        padding: 8px !important;
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+    }
+}
+
+/* Compatibilidade: Esconder elementos de numeração original quando CodeMirror ativo */
+.codemirror-editor ~ .line-numbers {
+    display: none !important;
+}
+
+/* Fallback: Se CodeMirror falhar, mostrar textarea original */
+.editor-wrapper:has(.codemirror-editor) textarea {
+    display: none !important;
+}
+
+/* Garantir que as cores do highlighting sejam sempre visíveis */
+.syntax-highlight-layer * {
+    color: inherit !important;
+    background: transparent !important;
+}
+
+/* Forçar exibição das cores mesmo quando há sobreposição */
+.highlighting-active .syntax-highlight-layer {
+    color: #1f2937 !important; /* Cor base do texto - NÃO transparente */
+    display: block !important;
+    visibility: visible !important;
+    background: transparent !important;
+    z-index: 1 !important;
+}
+
+/* IMPORTANTE: Remover cor transparente do overlay */
+.syntax-highlight-layer {
+    color: #1f2937 !important; /* Cor base - NUNCA transparente */
+}
+
 /* Scrollbars personalizadas */
 .editor-content::-webkit-scrollbar,
 #console-output::-webkit-scrollbar,
