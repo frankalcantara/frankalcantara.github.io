@@ -11,23 +11,27 @@
     right: 0 !important;
     width: 100% !important;
     z-index: 1040 !important;
-    /* Altura fixa e controlada */
+    /* Altura fixa e controlada - CRÍTICO */
     height: 56px !important;
     max-height: 56px !important;
     min-height: 56px !important;
-    overflow: visible !important;
+    overflow: hidden !important; /* Evita que conteúdo vaze */
 }
 
-/* Container da navbar - mesmo do site original */
+/* Container da navbar - ALTURA LIMITADA */
 .mediumnavigation .container {
     padding-right: 0 !important;
     padding-left: 15px !important;
     height: 56px !important;
     max-height: 56px !important;
+    min-height: 56px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
     margin: 0 auto !important;
+    overflow: hidden !important; /* CRÍTICO: Evita vazamento */
+    position: relative !important;
+    z-index: inherit !important;
 }
 
 /* Logo/Brand da navbar - estilos originais */
@@ -211,10 +215,45 @@
     }
 }
 
-/* Ajustes específicos para o corpo da página */
+/* Ajustes específicos para o corpo da página - EVITAR SOBREPOSIÇÃO */
 body {
     padding-top: 0 !important;
     margin-top: 0 !important;
+}
+
+/* GARANTIR que a navbar não bloqueie conteúdo */
+.mediumnavigation * {
+    max-height: 56px !important;
+    overflow: hidden !important;
+}
+
+/* Evitar que elementos da navbar vazem para baixo */
+.mediumnavigation .navbar-nav,
+.mediumnavigation .navbar-collapse {
+    max-height: 56px !important;
+    overflow: visible !important; /* Dropdowns precisam ser visíveis */
+}
+
+/* REGRA CRÍTICA: Impedir sobreposição da navbar */
+.mediumnavigation {
+    pointer-events: auto !important;
+}
+
+.mediumnavigation ~ * {
+    pointer-events: auto !important;
+}
+
+/* Resetar qualquer propriedade conflitante do Bootstrap */
+.navbar.fixed-top {
+    height: 56px !important;
+    max-height: 56px !important;
+}
+
+/* Garantir que nada da navbar vaze para baixo */
+.navbar .container {
+    height: 100% !important;
+    max-height: 56px !important;
+    overflow: hidden !important;
 }
 
 /* Dropdown básico para funcionar */
@@ -235,12 +274,32 @@ body {
     display: block !important;
 }
 
-/* Container principal - margem para compensar navbar fixa */
-.fluxograma-container,
+/* Container principal otimizado - EVITA SOBREPOSIÇÃO COM NAVBAR */
+.fluxograma-container {
+    margin-top: 56px !important; /* Exatamente a altura da navbar */
+    padding-top: 4px !important; /* Espaçamento mínimo */
+    padding-left: 1% !important;
+    padding-right: 1% !important;
+    width: 98% !important;
+    max-width: 98% !important;
+    min-height: calc(99vh - 60px) !important;
+    position: relative !important;
+    z-index: 1 !important; /* Abaixo da navbar */
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* Manter compatibilidade com .container */
 .container {
-    margin-top: 70px !important; /* Espaço adequado para navbar de 56px */
-    padding-top: 20px !important;
-   /* min-height: calc(100vh - 70px) !important;*/
+    margin-top: 56px !important;
+    padding-top: 4px !important;
+    padding-left: 1% !important;
+    padding-right: 1% !important;
+    width: 98% !important;
+    max-width: 98% !important;
+    min-height: calc(99vh - 60px) !important;
+    position: relative !important;
+    z-index: 1 !important;
 }
 
 /* === MANTER ESTILOS ORIGINAIS DO FLUXOGRAMA === */
@@ -285,57 +344,64 @@ header p {
     color: #666;
 }
 
-/* Layout principal */
+/* Layout principal otimizado - CORRIGIDO */
 .main-content {
     display: flex;
     flex-direction: column;
-    gap: 0;
-    height: calc(100vh - 110px); /* Ajustado para navbar de 56px + margens */
-}
-
-/* Container para os painéis superiores */
-.content-top {
-    display: flex;
-    gap: 20px;
-    flex-grow: 1;
+    gap: 8px;
+    height: calc(99vh - 56px - 4px); /* altura da navbar + padding-top */
+    width: 100%;
     overflow: hidden;
 }
 
-/* Painel do Editor (30%) */
+/* Container para os painéis superiores - otimizado */
+.content-top {
+    display: flex;
+    gap: 8px;
+    flex-grow: 1;
+    overflow: hidden;
+    height: 75%; /* 75% da altura para os painéis superiores */
+}
+
+/* Painel do Editor (30%) - altura FIXA */
 .editor-panel {
     flex: 0 0 30%;
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    height: 100%; /* Altura fixa baseada no container pai */
+    max-height: 100%; /* Não crescer */
 }
 
-/* Container scrollável para o conteúdo do editor */
+/* Container para o conteúdo do editor - altura controlada */
 .editor-content {
     flex: 1;
-    overflow-y: auto;
+    overflow: hidden; /* Não permitir overflow */
     display: flex;
     flex-direction: column;
+    height: 100%; /* Altura fixa */
+    max-height: 100%; /* Não crescer */
 }
 
-/* Painel do Diagrama (70%) */
+/* Painel do Diagrama (70%) - otimizado */
 .diagram-panel {
     flex: 0 0 70%;
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
     overflow: hidden;
 }
 
-/* Headers dos painéis */
+/* Headers dos painéis - otimizado */
 .panel-header {
     background: linear-gradient(135deg, #4f46e5, #7c3aed);
     color: white;
-    padding: 15px 20px;
+    padding: 8px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -348,36 +414,121 @@ header p {
     margin: 0;
 }
 
-/* Editor de texto */
+/* Editor de texto com altura FIXA */
 .editor-container {
     flex: 1;
-    padding: 20px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Altura fixa baseada no container pai */
+    min-height: 0; /* Permitir que o flex funcione corretamente */
+    overflow: hidden; /* Controlar overflow no container */
 }
 
-#mermaid-editor {
+.editor-wrapper {
+    display: flex;
     width: 100%;
-    height: 100%;
+    flex: 1; /* Ocupar todo o espaço disponível */
+    min-height: 300px; /* Altura mínima fixa */
+    max-height: 600px; /* Altura máxima para evitar crescimento excessivo */
     border: 2px solid #e5e7eb;
     border-radius: 8px;
-    padding: 15px;
-    font-family: 'Courier New', monospace;
-    font-size: 14px;
-    line-height: 1.5;
-    resize: none;
-    outline: none;
+    overflow: hidden;
+    background: #ffffff;
     transition: border-color 0.3s ease;
 }
 
-#mermaid-editor:focus {
+.editor-wrapper:focus-within {
     border-color: #4f46e5;
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
 }
 
-/* Controles */
+.line-numbers {
+    background: #f8fafc;
+    border-right: 1px solid #e2e8f0;
+    padding: 15px 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #64748b;
+    user-select: none;
+    min-width: 40px;
+    width: 40px; /* Largura fixa */
+    flex-shrink: 0; /* Não encolher */
+    text-align: right;
+    white-space: pre;
+    overflow-y: auto; /* Permitir scroll vertical */
+    overflow-x: hidden; /* Esconder scroll horizontal */
+    height: 100%; /* Altura total do container */
+    /* Esconder scrollbar mas manter funcionalidade */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+}
+
+.line-numbers::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+#mermaid-editor {
+    flex: 1;
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura FIXA */
+    max-height: 100%; /* Não crescer além disso */
+    padding: 15px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    border: none;
+    resize: none;
+    outline: none;
+    background: #ffffff;
+    color: #1f2937;
+    overflow-y: auto; /* Scroll vertical sempre disponível */
+    overflow-x: auto; /* Scroll horizontal se necessário */
+    white-space: pre; /* Preservar espaços e quebras */
+    word-wrap: normal; /* Não quebrar palavras automaticamente */
+    box-sizing: border-box; /* Incluir padding na altura */
+}
+
+/* Controles - altura fixa e compacta */
 .controls {
-    padding: 20px;
+    padding: 12px;
     border-top: 1px solid #e5e7eb;
-    flex-shrink: 0;
+    flex-shrink: 0; /* Não encolher */
+    height: auto; /* Altura baseada no conteúdo */
+    max-height: 150px; /* Altura máxima limitada */
+}
+
+/* Seção de exemplos - altura FIXA */
+.example-selector {
+    padding: 8px 12px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 0;
+    flex-shrink: 0; /* Não encolher */
+    height: 50px; /* Altura fixa */
+    min-height: 50px;
+    max-height: 50px;
+    display: flex;
+    align-items: center;
+    height: 2.5rem !important;
+}
+
+.example-selector select {
+    width: 100%;
+    padding: 6px 10px; /* Padding menor */
+    border: 2px solid #e2e8f0;
+    border-radius: 4px;
+    font-size: 0.85rem; /* Fonte menor */
+    background: white;
+    transition: border-color 0.2s;
+    height: 45px; /* Altura fixa do select */
+}
+
+.example-selector select:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
 }
 
 .controls h3 {
@@ -444,39 +595,56 @@ header p {
     font-size: 1rem;
 }
 
-/* Variáveis de entrada */
+/* Variáveis de entrada - altura limitada */
 .input-variables {
-    padding: 20px;
+    padding: 12px;
     border-top: 1px solid #e5e7eb;
-    flex-shrink: 0;
+    flex-shrink: 0; /* Não encolher */
+    max-height: 200px; /* Altura máxima limitada */
+    overflow-y: auto; /* Scroll se necessário */
 }
 
 .input-variables h3 {
-    font-size: 1.1rem;
-    margin-bottom: 15px;
+    font-size: 1rem; /* Ligeiramente menor */
+    margin-bottom: 8px; /* Reduzir margem inferior */
     color: #374151;
+    font-weight: 600;
 }
 
 .variable-input {
     display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-bottom: 15px;
+    flex-direction: row; /* Linha horizontal em vez de coluna */
+    align-items: center; /* Centralizar verticalmente */
+    gap: 8px; /* Espaço entre label e input */
+    margin-bottom: 8px; /* Reduzir espaçamento entre linhas */
+    padding: 4px 8px; /* Padding sutil para destacar */
+    border-radius: 4px; /* Cantos arredondados */
+    background-color: #f8fafc; /* Fundo sutil */
+    border: 1px solid transparent; /* Borda transparente inicial */
+    transition: all 0.2s ease; /* Transição suave */
 }
 
 .variable-input label {
     font-size: 0.9rem;
     font-weight: 500;
     color: #374151;
+    min-width: 80px; /* Largura mínima fixa para alinhamento */
+    max-width: 120px; /* Largura máxima para labels longos */
+    flex-shrink: 0; /* Não diminuir o label */
+    text-align: left;
+    margin-right: 4px;
 }
 
 .variable-input input {
-    padding: 8px 12px;
+    padding: 6px 10px; /* Padding menor para compactar */
     border: 1px solid #d1d5db;
     border-radius: 4px;
     font-size: 14px;
     outline: none;
     transition: border-color 0.3s ease;
+    flex: 1; /* Ocupar espaço restante */
+    min-width: 60px; /* Largura mínima para números */
+    max-width: 150px; /* Largura máxima adequada */
 }
 
 .variable-input input:focus {
@@ -484,20 +652,33 @@ header p {
     box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
 }
 
-/* Console de saída */
-.output-console {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-    flex-shrink: 0;
-    overflow: hidden;
+/* Efeito hover e focus na linha completa */
+.variable-input:hover {
+    background-color: #f1f5f9;
+    border-color: #e2e8f0;
 }
 
-/* Header do console */
+.variable-input:focus-within {
+    background-color: #eff6ff;
+    border-color: #bfdbfe;
+}
+
+/* Console de saída - otimizado */
+.output-console {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+    overflow: hidden;
+    height: 25%; /* 25% da altura restante */
+    min-height: 180px;
+}
+
+/* Header do console - otimizado */
 .console-header {
     background: linear-gradient(135deg, #4f46e5, #7c3aed);
     color: white;
-    padding: 8px 20px;
+    padding: 6px 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -530,26 +711,26 @@ header p {
     transform: translateY(-1px);
 }
 
-/* Console output */
+/* Console output - otimizado */
 #console-output {
     background: #1f2937;
     color: #f9fafb;
-    padding: 20px;
+    padding: 12px;
     font-family: 'Courier New', monospace;
     font-size: 13px;
     line-height: 1.4;
-    height: 200px;
+    height: calc(100% - 35px); /* Altura dinâmica baseada no container */
     overflow-y: auto;
     white-space: pre-wrap;
     margin: 0;
 }
 
-/* Syntax help */
+/* Syntax help - otimizado */
 #syntax-help {
     background: white;
     color: #1f2937;
-    padding: 20px;
-    height: 200px;
+    padding: 12px;
+    height: calc(100% - 35px); /* Altura dinâmica baseada no container */
     overflow-y: auto;
     font-size: 14px;
     line-height: 1.5;
@@ -617,10 +798,10 @@ header p {
     margin-right: 6px;
 }
 
-/* Container do diagrama */
+/* Container do diagrama - otimizado */
 .diagram-container {
     flex: 1;
-    padding: 20px;
+    padding: 8px;
     overflow: auto;
     position: relative;
 }
@@ -633,9 +814,9 @@ header p {
     justify-content: center;
 }
 
-/* Status de execução */
+/* Status de execução - otimizado */
 .execution-status {
-    padding: 15px 20px;
+    padding: 8px 12px;
     border-top: 1px solid #e5e7eb;
     background: #f9fafb;
     flex-shrink: 0;
@@ -647,9 +828,9 @@ header p {
     font-weight: 500;
 }
 
-/* Seção de exemplos */
+/* Seção de exemplos - otimizado */
 .example-selector {
-    padding: 15px 20px;
+    padding: 8px 12px;
     background: #f8fafc;
     border-bottom: 1px solid #e2e8f0;
     margin-bottom: 0;
@@ -742,12 +923,50 @@ header p {
     .button-group {
         justify-content: center;
     }
+    
+    /* Otimizar variáveis de entrada para tablets */
+    .variable-input {
+        gap: 8px;
+        margin-bottom: 8px;
+        padding: 4px 6px; /* Padding intermediário para tablets */
+    }
+    
+    .variable-input label {
+        min-width: 70px;
+        max-width: 100px;
+    }
+    
+    .variable-input input {
+        max-width: 130px;
+    }
+    
+    /* Ajustar numeração para tablet */
+    .editor-wrapper {
+        min-height: 250px; /* Altura mínima menor para tablet */
+    }
+    
+    .line-numbers {
+        min-width: 35px;
+        width: 35px;
+        padding: 10px 6px;
+        font-size: 13px;
+    }
+    
+    #mermaid-editor {
+        font-size: 13px;
+        padding: 10px;
+    }
 }
 
 @media (max-width: 768px) {
+    .fluxograma-container,
     .container {
-        padding: 10px;
-        margin-top: 70px !important; /* Mesma margem para mobile */
+        padding: 5px;
+        margin-top: 56px !important; /* Mesmo valor para mobile */
+        padding-top: 4px !important;
+        width: 98% !important;
+        padding-left: 1% !important;
+        padding-right: 1% !important;
     }
     
     header h1 {
@@ -755,13 +974,58 @@ header p {
     }
     
     .panel-header {
-        padding: 10px 15px;
+        padding: 6px 10px;
     }
     
     .editor-container,
     .controls,
     .input-variables {
-        padding: 15px;
+        padding: 10px;
+    }
+    
+    /* Ajustar variáveis de entrada para mobile */
+    .variable-input {
+        flex-direction: row; /* Manter layout horizontal em mobile */
+        gap: 6px;
+        margin-bottom: 6px;
+        padding: 3px 6px; /* Padding menor para mobile */
+    }
+    
+    .variable-input label {
+        min-width: 60px;
+        max-width: 80px;
+        font-size: 0.85rem;
+    }
+    
+    .variable-input input {
+        padding: 5px 8px;
+        font-size: 13px;
+        min-width: 50px;
+        max-width: 120px;
+    }
+    
+    /* Ajustar numeração para mobile */
+    .editor-wrapper {
+        min-height: 200px; /* Altura mínima menor para mobile */
+        border-width: 1px;
+    }
+    
+    .line-numbers {
+        min-width: 30px;
+        width: 30px;
+        padding: 8px 4px;
+        font-size: 12px;
+    }
+    
+    #mermaid-editor {
+        font-size: 12px;
+        padding: 8px;
+        line-height: 1.4;
+    }
+    
+    .main-content {
+        height: calc(99vh - 56px - 4px); /* Consistente com desktop */
+        gap: 5px;
     }
     
     .btn {

@@ -75,7 +75,7 @@
     </nav>
     
     <!-- Conteúdo principal -->
-    <div class="container">
+    <div class="fluxograma-container">
         <!--  <header>
                 <h1>Fluxograma Interativo</h1>
             </header>-->
@@ -98,7 +98,9 @@
                         </select>
                     </div>
                     <div class="editor-container">
-                        <textarea id="mermaid-editor" placeholder="Digite seu fluxograma aqui usando sintaxe Mermaid...
+                        <div class="editor-wrapper">
+                            <div class="line-numbers" id="line-numbers"></div>
+                            <textarea id="mermaid-editor" placeholder="Digite seu fluxograma aqui usando sintaxe Mermaid...
 
 Exemplo:
 flowchart TD
@@ -108,6 +110,7 @@ flowchart TD
     C -->|Não| E[Não pode votar]
     D --> F[Fim]
     E --> F"></textarea>
+                        </div>
                     </div>
                     
                     <div class="controls">

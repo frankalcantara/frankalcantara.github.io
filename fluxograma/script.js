@@ -255,6 +255,12 @@ function loadExample(exampleKey) {
     
     // Carregar código no editor
     editor.value = example.codigo;
+    
+    // Atualizar numeração de linhas
+    if (typeof updateLineNumbers === 'function') {
+        updateLineNumbers();
+    }
+    
     logToConsole(`📋 Exemplo carregado: ${example.nome}`);
     
     // Mostrar indicação visual do exemplo carregado
@@ -820,5 +826,78 @@ function logToConsole(message) {
         
         logToConsole(`⚠️ Prompt: ${message} (usando valor padrão)`);
         return '0';
-    };
+    };    
 })();
+
+// === NUMERAÇÃO DE LINHAS SIMPLES ===
+
+// Função para atualizar números de linha
+function updateLineNumbers() {
+    const editor = document.getElementById('mermaid-editor');
+    const lineNumbersElement = document.getElementById('line-numbers');
+    
+    if (!editor || !lineNumbersElement) return;
+    
+    const lines = editor.value.split('\n');
+    const lineCount = lines.length;
+    
+    let lineNumbersText = '';
+    for (let i = 1; i <= lineCount; i++) {
+        lineNumbersText += i + '\n';
+    }
+    
+    lineNumbersElement.textContent = lineNumbersText;
+}
+
+// Função para sincronizar scroll
+function syncEditorScroll() {
+    const editor = document.getElementById('mermaid-editor');
+    const lineNumbersElement = document.getElementById('line-numbers');
+    
+    if (!editor || !lineNumbersElement) return;
+    
+    // Sincronizar scroll vertical simples
+    lineNumbersElement.scrollTop = editor.scrollTop;
+}
+
+// Inicializar editor com numeração
+function initializeLineNumbers() {
+    const editor = document.getElementById('mermaid-editor');
+    const lineNumbersElement = document.getElementById('line-numbers');
+    
+    if (!editor || !lineNumbersElement) {
+        console.log('⚠️ Elementos de numeração não encontrados');
+        return;
+    }
+    
+    // Event listeners
+    editor.addEventListener('input', updateLineNumbers);
+    editor.addEventListener('scroll', syncEditorScroll);
+    
+    // Auto-indentação com Tab
+    editor.addEventListener('keydown', function(e) {
+        if (e.key === 'Tab') {
+            e.preventDefault();
+            const start = editor.selectionStart;
+            const end = editor.selectionEnd;
+            
+            // Inserir 4 espaços
+            const spaces = '    ';
+            editor.value = editor.value.substring(0, start) + spaces + editor.value.substring(end);
+            editor.selectionStart = editor.selectionEnd = start + spaces.length;
+            
+            updateLineNumbers();
+        }
+    });
+    
+    // Inicializar conteúdo
+    updateLineNumbers();
+    
+    console.log('✅ Numeração de linhas inicializada');
+}
+
+// Adicionar ao evento de carregamento
+document.addEventListener('DOMContentLoaded', function() {
+    // Aguardar um pouco para garantir que o DOM está pronto
+    setTimeout(initializeLineNumbers, 200);
+});
