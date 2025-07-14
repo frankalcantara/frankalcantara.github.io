@@ -1,0 +1,163 @@
+p {
+    text-align: justify !important;
+}
+
+/* ============================================
+   QUEBRA AUTOMÁTICA DE URLS E LINKS LONGOS
+   ============================================ */
+
+/* Quebra para todos os links */
+a {
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto !important;
+    max-width: 100% !important;
+    display: inline-block !important;
+}
+
+/* Quebra específica para URLs em citações e referências */
+.references a, 
+.citation a, 
+.footnote a,
+.footnotes a {
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+    line-height: 1.4 !important;
+}
+
+/* Quebra para elementos code que contém URLs */
+code, 
+pre code,
+.sourceCode {
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+    overflow-wrap: break-word !important;
+    white-space: pre-wrap !important;
+    max-width: 100% !important;
+}
+
+/* Quebra para tabelas com URLs */
+table td, 
+table th {
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+    overflow-wrap: break-word !important;
+    max-width: 300px !important;
+}
+
+/* Quebra para containers do Quarto */
+.quarto-container, 
+.quarto-content, 
+.column-page, 
+.column-body,
+.column-page-inset,
+.column-page-inset-left,
+.column-page-inset-right {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+}
+
+/* Quebra para footnotes */
+.footnote, 
+.footnotes,
+.footnote-ref {
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+}
+
+/* Quebra para blockquotes */
+blockquote, 
+.blockquote {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+}
+
+/* Quebra para listas */
+li, 
+ul, 
+ol {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+}
+
+/* Quebra para divs em geral */
+div {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Quebra específica para URLs dentro de parágrafos */
+p a {
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+    display: inline-block !important;
+}
+
+/* Quebra para elementos de citação específicos do Quarto */
+.quarto-title-author-email, 
+.quarto-title-author-orcid,
+.author-email,
+.author-orcid {
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+}
+
+/* Prevenir overflow horizontal */
+body, 
+html {
+    overflow-x: hidden !important;
+}
+
+/* Quebra específica para URLs em notas de rodapé */
+.footnote-back {
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+    overflow-wrap: break-word !important;
+}
+
+/* Quebra para elementos span que podem conter URLs */
+span {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+}
+
+/* Quebra para elementos pre */
+pre {
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+    overflow-wrap: break-word !important;
+    white-space: pre-wrap !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+}
+
+/* Quebra para elementos strong e em */
+strong, 
+em, 
+b, 
+i {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+}

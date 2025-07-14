@@ -1,0 +1,179 @@
+/* CSS adicional para quebra de URLs longas - versão mais agressiva */
+
+/* Quebra URLs de forma mais agressiva */
+a[href*="http://"], 
+a[href*="https://"], 
+a[href*="www."], 
+a[href*="ftp://"] {
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto !important;
+    max-width: 100% !important;
+    display: inline-block !important;
+    line-height: 1.3 !important;
+}
+
+/* Quebra URLs em footnotes de forma mais agressiva */
+.footnotes a[href*="http://"], 
+.footnotes a[href*="https://"], 
+.footnote a[href*="http://"], 
+.footnote a[href*="https://"] {
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+    font-size: 0.9em !important;
+}
+
+/* Quebra URLs em referências bibliográficas */
+.references a[href*="http://"], 
+.references a[href*="https://"],
+.citation a[href*="http://"], 
+.citation a[href*="https://"] {
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+    display: inline-block !important;
+}
+
+/* Prevenir que qualquer elemento cause overflow horizontal */
+* {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Quebra específica para containers do Quarto */
+.quarto-container,
+.quarto-content,
+.column-body,
+.column-page {
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    max-width: 100% !important;
+}
+
+/* Quebra para elementos de texto longo em geral */
+p, div, span, li, td, th {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+}
+
+/* Quebra específica para elementos code */
+code, pre {
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+    overflow-wrap: break-word !important;
+    white-space: pre-wrap !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+}
+
+/* Quebra para tabelas */
+table {
+    table-layout: fixed !important;
+    width: 100% !important;
+}
+
+table td, table th {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 300px !important;
+}
+
+/* Quebra para elementos de citação e bibliografia */
+.csl-entry, 
+.hanging-indent {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+}
+
+/* Quebra para elementos de lista */
+ul, ol, li {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+}
+
+/* Quebra para elementos de nota de rodapé */
+.footnote-ref, 
+.footnote-back {
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+}
+
+/* Prevenir overflow horizontal global */
+body, html {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+}
+
+/* Quebra para elementos blockquote */
+blockquote {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+}
+
+/* Quebra para elementos figure e figcaption */
+figure, figcaption {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+}
+
+/* Quebra para elementos div de conteúdo */
+.content, 
+.main-content, 
+.article-content {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+}
+
+/* Quebra para elementos h1-h6 */
+h1, h2, h3, h4, h5, h6 {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+}
+
+/* Quebra específica para URLs muito longas */
+a[href*="download.inep.gov.br"],
+a[href*="educacao_superior"],
+a[href*="relatorio_sintese"] {
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+    font-size: 0.9em !important;
+    line-height: 1.2 !important;
+}
+
+/* Media queries para dispositivos móveis */
+@media (max-width: 768px) {
+    a {
+        word-wrap: break-word !important;
+        word-break: break-all !important;
+        overflow-wrap: break-word !important;
+        max-width: 100% !important;
+        font-size: 0.9em !important;
+    }
+    
+    .footnotes a {
+        font-size: 0.8em !important;
+    }
+}
