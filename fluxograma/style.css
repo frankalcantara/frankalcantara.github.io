@@ -578,8 +578,8 @@ header p {
 }
 
 .btn-icon {
-    width: 40px;
-    height: 40px;
+    width: 25px;
+    height: 25px;
     padding: 0;
     display: inline-flex;
     align-items: center;
@@ -1157,24 +1157,152 @@ header p {
     display: none !important;
 }
 
-/* Garantir que as cores do highlighting sejam sempre visíveis */
-.syntax-highlight-layer * {
-    color: inherit !important;
-    background: transparent !important;
+/* === SYNTAX HIGHLIGHTING AVANÇADO PARA MERMAID === */
+
+/* Garantir que o overlay de highlighting funcione corretamente */
+.highlighting-active {
+    position: relative !important;
 }
 
-/* Forçar exibição das cores mesmo quando há sobreposição */
-.highlighting-active .syntax-highlight-layer {
-    color: #1f2937 !important; /* Cor base do texto - NÃO transparente */
-    display: block !important;
-    visibility: visible !important;
-    background: transparent !important;
-    z-index: 1 !important;
-}
-
-/* IMPORTANTE: Remover cor transparente do overlay */
+/* Camada de highlighting - MELHORADA */
 .syntax-highlight-layer {
-    color: #1f2937 !important; /* Cor base - NUNCA transparente */
+    position: absolute !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+    color: #1f2937 !important; /* Cor base do texto */
+    background: transparent !important;
+    white-space: pre !important;
+    word-wrap: normal !important;
+    overflow: hidden !important;
+    font-family: 'Courier New', monospace !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    padding: 15px !important;
+    margin: 0 !important;
+    border: none !important;
+    box-sizing: border-box !important;
+}
+
+/* Textarea quando highlighting está ativo */
+.highlighting-active #mermaid-editor {
+    background: transparent !important;
+    color: transparent !important;
+    position: relative !important;
+    z-index: 2 !important;
+    caret-color: #1f2937 !important; /* Cursor visível */
+}
+
+/* === CORES DO SYNTAX HIGHLIGHTING - BASEADAS NA IMAGEM === */
+
+/* Keywords: graph, flowchart, TD, etc. */
+.mmd-keyword {
+    color: #d73a49 !important;
+    font-weight: bold !important;
+}
+
+/* Node IDs: A, B, C, etc. */
+.mmd-node-id {
+    color: #6f42c1 !important;
+    font-weight: 600 !important;
+}
+
+/* Text inside nodes [text] and {text} */
+.mmd-node-text {
+    color: #032f62 !important;
+    font-weight: 500 !important;
+}
+
+/* Connections: -->, ==>, etc. */
+.mmd-connection {
+    color: #e36209 !important;
+    font-weight: bold !important;
+}
+
+/* Labels on connections |label| */
+.mmd-label {
+    color: #22863a !important;
+    font-style: italic !important;
+    font-weight: 500 !important;
+}
+
+/* Comments %% */
+.mmd-comment {
+    color: #6a737d !important;
+    font-style: italic !important;
+}
+
+/* Brackets and braces */
+.mmd-bracket {
+    color: #586069 !important;
+    font-weight: bold !important;
+}
+
+/* Numbers */
+.mmd-number {
+    color: #005cc5 !important;
+    font-weight: 500 !important;
+}
+
+/* Operators >= <= == etc. */
+.mmd-operator {
+    color: #d73a49 !important;
+    font-weight: bold !important;
+}
+
+/* === COMPATIBILIDADE E FALLBACKS === */
+
+/* Manter compatibilidade com sistema anterior */
+.highlight-keyword,
+.codemirror-editor .cm-keyword {
+    color: #d73a49 !important;
+    font-weight: bold !important;
+}
+
+.highlight-variable,
+.codemirror-editor .cm-variable {
+    color: #6f42c1 !important;
+    font-weight: 600 !important;
+}
+
+.highlight-string,
+.codemirror-editor .cm-string {
+    color: #032f62 !important;
+    font-weight: 500 !important;
+}
+
+.highlight-operator,
+.codemirror-editor .cm-operator {
+    color: #e36209 !important;
+    font-weight: bold !important;
+}
+
+.highlight-comment,
+.codemirror-editor .cm-comment {
+    color: #22863a !important;
+    font-style: italic !important;
+}
+
+.highlight-line-comment,
+.codemirror-editor .cm-line-comment {
+    color: #6a737d !important;
+    font-style: italic !important;
+}
+
+/* === AJUSTES RESPONSIVOS PARA HIGHLIGHTING === */
+
+@media (max-width: 1024px) {
+    .syntax-highlight-layer {
+        font-size: 13px !important;
+        padding: 10px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .syntax-highlight-layer {
+        font-size: 12px !important;
+        padding: 8px !important;
+        line-height: 1.4 !important;
+    }
 }
 
 /* Scrollbars personalizadas */
@@ -1245,7 +1373,7 @@ header p {
     }
     
     .button-group {
-        justify-content: center;
+        justify-content: left;
     }
     
     /* Otimizar variáveis de entrada para tablets */
@@ -1354,7 +1482,7 @@ header p {
     
     .btn {
         padding: 8px 12px;
-        font-size: 13px;
+        font-size: 18px;
     }
 }
 
@@ -1386,6 +1514,7 @@ header p {
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
+    
 }
 
 /* Controles de passo */

@@ -1,17 +1,15 @@
-// Syntax Highlighting Simples para Mermaid - CORRIGIDO
-// Abordagem: Overlay de highlighting sobre textarea existente
+// Syntax Highlighting SIMPLES E FUNCIONAL para Mermaid
+// Versão simplificada que FUNCIONA
 
 class SimpleHighlighter {
     constructor() {
         this.textarea = null;
         this.highlightLayer = null;
         this.isActive = false;
-        this.updateTimeout = null;
     }
     
-    // Inicializar highlighting
     initialize(textareaId) {
-        console.log('🎨 Inicializando syntax highlighting simples...');
+        console.log('🎨 Inicializando syntax highlighting SIMPLES...');
         
         try {
             this.textarea = document.getElementById(textareaId);
@@ -19,12 +17,12 @@ class SimpleHighlighter {
                 throw new Error(`Textarea '${textareaId}' não encontrada`);
             }
             
-            this.createHighlightLayer();
+            this.createSimpleHighlightLayer();
             this.bindEvents();
             this.updateHighlighting();
             
             this.isActive = true;
-            console.log('✅ Syntax highlighting ativado!');
+            console.log('✅ Syntax highlighting SIMPLES ativado!');
             
             return true;
             
@@ -34,203 +32,185 @@ class SimpleHighlighter {
         }
     }
     
-    // Criar camada de highlighting
-    createHighlightLayer() {
+    createSimpleHighlightLayer() {
         const wrapper = this.textarea.parentElement;
+        
+        // Remover highlighting anterior se existir
+        const existingLayer = wrapper.querySelector('.syntax-highlight-layer');
+        if (existingLayer) {
+            existingLayer.remove();
+        }
         
         // Criar div de highlighting
         this.highlightLayer = document.createElement('div');
         this.highlightLayer.className = 'syntax-highlight-layer';
         
-        // Copiar estilos do textarea de forma mais precisa
-        const computedStyle = window.getComputedStyle(this.textarea);
-        const textareaRect = this.textarea.getBoundingClientRect();
-        const wrapperRect = wrapper.getBoundingClientRect();
+        // Copiar estilos do textarea
+        const textareaStyle = window.getComputedStyle(this.textarea);
         
-        // Calcular offset da numeração de linhas com mais precisão
+        // Calcular posição da numeração
         const lineNumbers = wrapper.querySelector('.line-numbers');
-        let leftOffset = 0;
+        const leftOffset = lineNumbers ? lineNumbers.offsetWidth : 0;
         
-        if (lineNumbers) {
-            // Se há numeração, calcular sua largura
-            const lineNumbersRect = lineNumbers.getBoundingClientRect();
-            leftOffset = lineNumbersRect.width;
-        } else {
-            // Fallback: calcular pela diferença de posição
-            leftOffset = textareaRect.left - wrapperRect.left;
-        }
+        // Aplicar estilos à camada de highlighting
+        Object.assign(this.highlightLayer.style, {
+            position: 'absolute',
+            top: '0',
+            left: leftOffset + 'px',
+            width: `calc(100% - ${leftOffset}px)`,
+            height: '100%',
+            fontFamily: textareaStyle.fontFamily,
+            fontSize: textareaStyle.fontSize,
+            lineHeight: textareaStyle.lineHeight,
+            padding: textareaStyle.padding,
+            margin: '0',
+            border: 'none',
+            boxSizing: 'border-box',
+            overflow: 'hidden',
+            pointerEvents: 'none',
+            zIndex: '1',
+            background: '#ffffff',
+            color: '#1f2937',
+            whiteSpace: 'pre-wrap',
+            wordWrap: 'break-word'
+        });
         
-        this.highlightLayer.style.cssText = `
-            position: absolute;
-            top: 0;
-            left: ${leftOffset}px;
-            width: calc(100% - ${leftOffset}px);
-            height: 100%;
-            font-family: ${computedStyle.fontFamily};
-            font-size: ${computedStyle.fontSize};
-            line-height: ${computedStyle.lineHeight};
-            padding: ${computedStyle.padding};
-            margin: 0;
-            border: none;
-            border-radius: ${computedStyle.borderRadius};
-            box-sizing: border-box;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 1;
-            background: transparent;
-            color: transparent;
-            white-space: pre;
-            word-wrap: normal;
-            overflow-wrap: normal;
-            letter-spacing: ${computedStyle.letterSpacing};
-            text-align: left;
-        `;
+        // Configurar wrapper
+        wrapper.style.position = 'relative';
         
-        // Garantir que wrapper seja relativo
-        if (window.getComputedStyle(wrapper).position === 'static') {
-            wrapper.style.position = 'relative';
-        }
-        
-        // Inserir antes do textarea
+        // Inserir camada ANTES do textarea
         wrapper.insertBefore(this.highlightLayer, this.textarea);
         
-        // Garantir que textarea fique por cima mas transparente
-        this.textarea.style.position = 'relative';
-        this.textarea.style.zIndex = '2';
-        this.textarea.style.background = 'transparent';
-        this.textarea.style.color = 'transparent';
-        this.textarea.style.caretColor = '#1f2937';
+        // Tornar textarea TOTALMENTE transparente
+        Object.assign(this.textarea.style, {
+            position: 'relative',
+            zIndex: '2',
+            background: 'transparent',
+            backgroundColor: 'transparent',
+            color: 'transparent',
+            caretColor: '#000000',
+            border: 'none',
+            outline: 'none',
+            textShadow: 'none',
+            boxShadow: 'none'
+        });
         
-        // Adicionar classe ao wrapper para CSS adicional
+        // Adicionar classe e estilos CSS
         wrapper.classList.add('highlighting-active');
+        this.addStyles();
     }
     
-    // Bind eventos
-    bindEvents() {
-        // Atualizar highlighting quando texto mudar
-        this.textarea.addEventListener('input', () => {
-            this.debounceUpdate();
-        });
+    addStyles() {
+        // Remover estilos anteriores
+        const existingStyle = document.getElementById('simple-highlighting-styles');
+        if (existingStyle) {
+            existingStyle.remove();
+        }
         
-        // Sincronizar scroll
-        this.textarea.addEventListener('scroll', () => {
-            if (this.highlightLayer) {
-                this.highlightLayer.scrollTop = this.textarea.scrollTop;
-                this.highlightLayer.scrollLeft = this.textarea.scrollLeft;
+        const style = document.createElement('style');
+        style.id = 'simple-highlighting-styles';
+        style.textContent = `
+            /* FORÇAR transparência total do textarea */
+            .highlighting-active textarea,
+            .highlighting-active #mermaid-editor {
+                color: transparent !important;
+                background: transparent !important;
+                background-color: transparent !important;
+                caret-color: #000000 !important;
+                text-shadow: none !important;
+                border: none !important;
+                outline: none !important;
+                box-shadow: none !important;
             }
-        });
+            
+            /* Garantir que highlight layer seja visível */
+            .syntax-highlight-layer {
+                pointer-events: none !important;
+                z-index: 1 !important;
+                background: #ffffff !important;
+            }
+            
+            /* Cores de backup por classes - caso inline falhe */
+            .mmd-keyword { color: #d73a49 !important; font-weight: bold !important; }
+            .mmd-node-id { color: #6f42c1 !important; font-weight: 600 !important; }
+            .mmd-node-text { color: #032f62 !important; font-weight: 500 !important; }
+            .mmd-connection { color: #e36209 !important; font-weight: bold !important; }
+            .mmd-bracket { color: #586069 !important; font-weight: bold !important; }
+            .mmd-label { color: #22863a !important; font-style: italic !important; }
+            .mmd-comment { color: #6a737d !important; font-style: italic !important; }
+            .mmd-number { color: #005cc5 !important; }
+            .mmd-operator { color: #d73a49 !important; font-weight: bold !important; }
+        `;
         
-        // Atualizar ao redimensionar e recalcular posição
-        window.addEventListener('resize', () => {
-            this.debounceUpdate();
-            this.recalculatePosition();
-        });
+        document.head.appendChild(style);
     }
     
-    // Recalcular posição do overlay
-    recalculatePosition() {
-        if (!this.highlightLayer || !this.textarea) return;
-        
-        const wrapper = this.textarea.parentElement;
-        const textareaRect = this.textarea.getBoundingClientRect();
-        const wrapperRect = wrapper.getBoundingClientRect();
-        
-        // Calcular offset da numeração de linhas com mais precisão
-        const lineNumbers = wrapper.querySelector('.line-numbers');
-        let leftOffset = 0;
-        
-        if (lineNumbers) {
-            // Se há numeração, calcular sua largura
-            const lineNumbersRect = lineNumbers.getBoundingClientRect();
-            leftOffset = lineNumbersRect.width;
-        } else {
-            // Fallback: calcular pela diferença de posição
-            leftOffset = textareaRect.left - wrapperRect.left;
+    bindEvents() {
+        this.textarea.addEventListener('input', () => this.updateHighlighting());
+        this.textarea.addEventListener('scroll', () => this.syncScroll());
+        window.addEventListener('resize', () => this.updateHighlighting());
+    }
+    
+    syncScroll() {
+        if (this.highlightLayer) {
+            this.highlightLayer.scrollTop = this.textarea.scrollTop;
+            this.highlightLayer.scrollLeft = this.textarea.scrollLeft;
         }
-        
-        this.highlightLayer.style.left = `${leftOffset}px`;
-        this.highlightLayer.style.width = `calc(100% - ${leftOffset}px)`;
     }
     
-    // Debounce para atualizações
-    debounceUpdate() {
-        if (this.updateTimeout) {
-            clearTimeout(this.updateTimeout);
-        }
-        
-        this.updateTimeout = setTimeout(() => {
-            this.updateHighlighting();
-        }, 300);
-    }
-    
-    // Atualizar highlighting
     updateHighlighting() {
         if (!this.highlightLayer || !this.textarea) return;
         
         const text = this.textarea.value;
-        const highlightedText = this.highlightMermaidSyntax(text);
+        const highlighted = this.applyHighlighting(text);
         
-        this.highlightLayer.innerHTML = highlightedText;
-        
-        // Recalcular posição para garantir alinhamento
-        this.recalculatePosition();
-        
-        // Sincronizar scroll
-        this.highlightLayer.scrollTop = this.textarea.scrollTop;
-        this.highlightLayer.scrollLeft = this.textarea.scrollLeft;
+        this.highlightLayer.innerHTML = highlighted;
+        this.syncScroll();
     }
     
-    // Aplicar syntax highlighting - VERSÃO CORRIGIDA
-    highlightMermaidSyntax(text) {
+    applyHighlighting(text) {
         if (!text) return '';
         
-        // Processar linha por linha para manter quebras de linha
-        const lines = text.split('\n');
-        const highlightedLines = lines.map(line => {
-            if (!line.trim()) return line; // Manter linhas vazias
+        return text.split('\n').map(line => {
+            if (!line.trim()) return line;
             
-            let highlighted = line
+            // Escapar HTML
+            let result = line
                 .replace(/&/g, '&amp;')
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;');
             
-            // Aplicar highlighting em ordem de prioridade
+            // Aplicar highlighting com CORES INLINE para garantir que funcionem
             
-            // 1. Comments %% (deve vir primeiro)
-            if (line.includes('%%')) {
-                highlighted = highlighted.replace(/%%(.*)$/, '<span class="line-comment">%%$1</span>');
-                return highlighted; // Se é comentário, não processar mais
+            // 1. Comentários primeiro
+            if (result.includes('%%')) {
+                return result.replace(/%%(.*)$/, '<span style="color: #6a737d; font-style: italic;">%%$1</span>');
             }
             
-            // 2. Keywords (flowchart, TD, etc.)
-            highlighted = highlighted.replace(/\b(flowchart|graph|TD|TB|BT|RL|LR|subgraph|end)\b/g, '<span class="keyword">$1</span>');
+            // 2. Keywords
+            result = result.replace(/\b(graph|flowchart|TD|TB|BT|RL|LR)\b/g, '<span style="color: #d73a49; font-weight: bold;">$1</span>');
             
-            // 3. Connections com labels |texto|
-            highlighted = highlighted.replace(/(-->)\s*\|([^|]+)\|/g, '<span class="operator">$1</span> |<span class="comment">$2</span>|');
+            // 3. Conectores
+            result = result.replace(/(==>|-->)/g, '<span style="color: #e36209; font-weight: bold;">$1</span>');
             
-            // 4. Connections simples
-            highlighted = highlighted.replace(/(-->|---|\.\.>|\-\.-)/g, '<span class="operator">$1</span>');
+            // 4. Texto em colchetes
+            result = result.replace(/\[([^\]]+)\]/g, '<span style="color: #586069; font-weight: bold;">[</span><span style="color: #032f62; font-weight: 500;">$1</span><span style="color: #586069; font-weight: bold;">]</span>');
             
-            // 5. Node text [texto] e decision text {texto}
-            highlighted = highlighted.replace(/\[([^\]]+)\]/g, '[<span class="string">$1</span>]');
-            highlighted = highlighted.replace(/\{([^}]+)\}/g, '{<span class="string">$1</span>}');
+            // 5. Texto em chaves
+            result = result.replace(/\{([^}]+)\}/g, '<span style="color: #586069; font-weight: bold;">{</span><span style="color: #032f62; font-weight: 500;">$1</span><span style="color: #586069; font-weight: bold;">}</span>');
             
-            // 6. Node IDs (A, B, C, etc.) - mais específico
-            highlighted = highlighted.replace(/^(\s*)([A-Z][A-Za-z0-9_]*)(\s+)/g, '$1<span class="variable">$2</span>$3');
-            highlighted = highlighted.replace(/(\s)([A-Z][A-Za-z0-9_]*)(\s*(?:-->|\[|\{))/g, '$1<span class="variable">$2</span>$3');
+            // 6. IDs dos nós
+            result = result.replace(/^(\s*)([A-Z][A-Za-z0-9_]*)(\s+)/g, '$1<span style="color: #6f42c1; font-weight: 600;">$2</span>$3');
+            result = result.replace(/(<\/span>)(\s+)([A-Z][A-Za-z0-9_]*)(\s*(?=<span|\s*$))/g, '$1$2<span style="color: #6f42c1; font-weight: 600;">$3</span>$4');
             
-            return highlighted;
-        });
-        
-        return highlightedLines.join('\n');
+            return result;
+        }).join('\n');
     }
     
-    // Verificar se está ativo
     isReady() {
         return this.isActive;
     }
     
-    // Destruir highlighting
     destroy() {
         if (this.highlightLayer) {
             this.highlightLayer.remove();
@@ -238,17 +218,25 @@ class SimpleHighlighter {
         }
         
         if (this.textarea) {
-            this.textarea.style.background = '';
-            this.textarea.style.position = '';
-            this.textarea.style.zIndex = '';
-            this.textarea.style.color = '';
-            this.textarea.style.caretColor = '';
+            // Restaurar textarea
+            Object.assign(this.textarea.style, {
+                background: '',
+                color: '',
+                caretColor: '',
+                border: '',
+                outline: ''
+            });
             
-            // Remover classe do wrapper
             const wrapper = this.textarea.parentElement;
             if (wrapper) {
                 wrapper.classList.remove('highlighting-active');
             }
+        }
+        
+        // Remover estilos
+        const styleElement = document.getElementById('simple-highlighting-styles');
+        if (styleElement) {
+            styleElement.remove();
         }
         
         this.isActive = false;
@@ -264,7 +252,6 @@ window.initializeCodeMirror = function(textareaId, changeCallback) {
     const success = window.simpleHighlighter.initialize(textareaId);
     
     if (success && changeCallback) {
-        // Bind callback se fornecido
         const textarea = document.getElementById(textareaId);
         if (textarea) {
             textarea.addEventListener('input', () => {
@@ -286,12 +273,10 @@ window.setEditorValue = function(value) {
     if (textarea) {
         textarea.value = value;
         
-        // Atualizar highlighting se ativo
         if (window.simpleHighlighter.isReady()) {
             window.simpleHighlighter.updateHighlighting();
         }
         
-        // Atualizar numeração se disponível
         if (typeof updateLineNumbers === 'function') {
             updateLineNumbers();
         }
@@ -312,24 +297,49 @@ window.mermaidEditor = {
     isReady: () => window.simpleHighlighter.isReady()
 };
 
-console.log('🎨 Simple Syntax Highlighter CORRIGIDO carregado');
+console.log('🎨 Syntax Highlighter SIMPLES carregado');
 
-// Teste de debugging
-window.testHighlighting = function() {
-    const testText = `flowchart TD
-    A[Início] --> B[Ler nome]
-    B --> C{idade >= 18}
-    C -->|Sim| D[Pode votar]`;
+// Função de debug
+window.debugHighlighting = function() {
+    const textarea = document.getElementById('mermaid-editor');
+    const wrapper = textarea ? textarea.parentElement : null;
+    const highlightLayer = wrapper ? wrapper.querySelector('.syntax-highlight-layer') : null;
     
-    if (window.simpleHighlighter && window.simpleHighlighter.isReady()) {
-        const highlighted = window.simpleHighlighter.highlightMermaidSyntax(testText);
-        console.log('🇫🇧 Texto original:', testText);
-        console.log('🎨 Texto com highlighting:', highlighted);
-        return highlighted;
-    } else {
-        console.log('⚠️ Highlighter não está pronto');
-        return null;
+    console.log('=== DEBUG HIGHLIGHTING ===');
+    console.log('Textarea encontrada:', !!textarea);
+    console.log('Wrapper encontrado:', !!wrapper);
+    console.log('Highlight layer encontrada:', !!highlightLayer);
+    
+    if (textarea) {
+        console.log('Textarea styles:', {
+            color: textarea.style.color,
+            background: textarea.style.background,
+            zIndex: textarea.style.zIndex,
+            position: textarea.style.position
+        });
     }
+    
+    if (highlightLayer) {
+        console.log('Highlight layer styles:', {
+            zIndex: highlightLayer.style.zIndex,
+            position: highlightLayer.style.position,
+            left: highlightLayer.style.left,
+            width: highlightLayer.style.width
+        });
+        console.log('Highlight layer content preview:', highlightLayer.innerHTML.substring(0, 100));
+    }
+    
+    if (wrapper) {
+        console.log('Wrapper classes:', wrapper.className);
+        console.log('Wrapper position:', window.getComputedStyle(wrapper).position);
+    }
+    
+    return {
+        textarea: !!textarea,
+        wrapper: !!wrapper, 
+        highlightLayer: !!highlightLayer,
+        isActive: window.simpleHighlighter.isReady()
+    };
 };
 
-console.log('🧪 Para testar highlighting, use: testHighlighting()');
+console.log('🔧 Para debug, use: debugHighlighting()');

@@ -983,4 +983,89 @@ function initializeLineNumbers() {
 document.addEventListener('DOMContentLoaded', function() {
     // Aguardar um pouco para garantir que o DOM está pronto
     setTimeout(initializeLineNumbers, 200);
+    
+    // ATIVAR SYNTAX HIGHLIGHTING COM DELAY MAIOR
+    setTimeout(() => {
+        console.log('🔧 Iniciando syntax highlighting...');
+        
+        if (window.simpleHighlighter) {
+            const editor = document.getElementById('mermaid-editor');
+            const wrapper = editor ? editor.parentElement : null;
+            
+            if (editor && wrapper) {
+                console.log('✅ Editor e wrapper encontrados');
+                
+                const success = window.simpleHighlighter.initialize('mermaid-editor');
+                
+                if (success) {
+                    console.log('🎨 Syntax highlighting ativado com sucesso!');
+                    
+                    // Verificar se highlighting está funcionando
+                    setTimeout(() => {
+                        const highlightLayer = wrapper.querySelector('.syntax-highlight-layer');
+                        if (highlightLayer) {
+                            console.log('✅ Camada de highlighting criada');
+                            
+                            // FORÇAR TESTE DE HIGHLIGHTING
+                            const testText = 'flowchart TD\n    A[Inicio] --> B[Teste]';
+                            editor.value = testText;
+                            window.simpleHighlighter.updateHighlighting();
+                            
+                            console.log('🧪 Texto de teste aplicado');
+                            console.log('HTML da camada:', highlightLayer.innerHTML.substring(0, 200));
+                            
+                        } else {
+                            console.warn('⚠️ Camada de highlighting não encontrada');
+                        }
+                    }, 100);
+                } else {
+                    console.error('❌ Falha ao ativar syntax highlighting');
+                }
+            } else {
+                console.error('❌ Editor ou wrapper não encontrados');
+            }
+        } else {
+            console.error('❌ SimpleHighlighter não encontrado');
+        }
+    }, 1000); // Aumentado para 1 segundo
 });
+
+// FUNÇÃO DE TESTE MANUAL
+window.testHighlightingForce = function() {
+    console.log('🔧 Forçando teste de highlighting...');
+    
+    const editor = document.getElementById('mermaid-editor');
+    const wrapper = editor.parentElement;
+    
+    // Destruir highlighting existente
+    if (window.simpleHighlighter && window.simpleHighlighter.isReady()) {
+        window.simpleHighlighter.destroy();
+    }
+    
+    // Recriar
+    setTimeout(() => {
+        const success = window.simpleHighlighter.initialize('mermaid-editor');
+        console.log('Reinicialização:', success ? 'SUCESSO' : 'FALHA');
+        
+        if (success) {
+            const testCode = `flowchart TD
+    A[Inicio] --> B[Ler num1]
+    B --> C{decisao}`;
+            
+            editor.value = testCode;
+            window.simpleHighlighter.updateHighlighting();
+            
+            const layer = wrapper.querySelector('.syntax-highlight-layer');
+            if (layer) {
+                console.log('🎨 Camada encontrada! HTML:', layer.innerHTML);
+                console.log('🎨 Estilos da camada:', {
+                    position: layer.style.position,
+                    zIndex: layer.style.zIndex,
+                    background: layer.style.background,
+                    left: layer.style.left,
+                    width: layer.style.width
+                });
+            }
+        }
+    }, 100);
+};

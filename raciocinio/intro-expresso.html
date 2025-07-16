@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Referencial Teórico: Pensamento Computacional e Metodologia DAAD</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --copper-50: #fdf8f6;
+            --copper-100: #f2e8e5;
+            --copper-200: #eaddd7;
+            --copper-300: #e0cec7;
+            --copper-400: #d2bab0;
+            --copper-500: #bfa094;
+            --copper-600: #a18072;
+            --copper-700: #977669;
+            --copper-800: #846358;
+            --copper-900: #43302b;
+            --sage-50: #f6f7f6;
+            --sage-100: #e3e7e3;
+            --sage-200: #c7d0c7;
+            --sage-300: #a3b2a3;
+            --sage-400: #7a8f7a;
+            --sage-500: #5d7360;
+            --sage-600: #495a4c;
+            --sage-700: #3d4a3f;
+            --sage-800: #343d36;
+            --sage-900: #2d342f;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Text', serif;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(93, 115, 96, 0.9) 0%, rgba(191, 160, 148, 0.8) 100%);
+        }
+
+        .toc-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+
+        @media (max-width: 1024px) {
+            .toc-fixed {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            .toc-fixed.open {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        .citation-link {
+            color: var(--sage-500);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted var(--sage-500);
+        }
+
+        .citation-link:hover {
+            color: var(--sage-600);
+            border-bottom-style: solid;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 1.5rem;
+            height: 60vh;
+        }
+
+        .bento-main {
+            grid-row: 1 / -1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-side-top,
+        .bento-side-bottom {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hover-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .hover-bg-light:hover {
+            background-color: var(--sage-50);
+        }
+
+        section[id] {
+            scroll-margin-top: 80px;
+        }
+
+        section {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 2rem;
+        }
+
+        .daad-component {
+            border-left: 4px solid;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .daad-d { border-left-color: #dc3545; }
+        .daad-a1 { border-left-color: #fd7e14; }
+        .daad-a2 { border-left-color: #ffc107; }
+        .daad-d2 { border-left-color: #198754; }
+
+        .stat-highlight {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .callout-tip {
+            background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+            border-left: 4px solid #17a2b8;
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .footnote {
+            font-size: 0.875rem;
+            color: var(--sage-600);
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+
+        .table-responsive-custom {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-custom {
+            margin-bottom: 0;
+        }
+
+        .table-custom thead {
+            background: linear-gradient(135deg, var(--sage-600), var(--copper-600));
+            color: white;
+        }
+
+        .table-custom tbody tr:nth-child(even) {
+            background-color: var(--sage-50);
+        }
+
+        .table-custom tbody tr:hover {
+            background-color: var(--copper-100);
+            transition: background-color 0.2s ease;
+        }
+
+        .ai-impact-card {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border: 2px solid #ffc107;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .pedagogy-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .pedagogy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .rubric-table {
+            font-size: 0.875rem;
+        }
+
+        .rubric-table th {
+            background: var(--sage-600);
+            color: white;
+            font-weight: 600;
+        }
+
+        .rubric-score-4 { background-color: #d4edda; }
+        .rubric-score-3 { background-color: #d1ecf1; }
+        .rubric-score-2 { background-color: #fff3cd; }
+        .rubric-score-1 { background-color: #f8d7da; }
+
+        .image-container {
+            background: var(--sage-50);
+            border: 2px dashed var(--sage-300);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin: 1.5rem 0;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chart-placeholder {
+            background: linear-gradient(135deg, var(--sage-100), var(--copper-100));
+            border-radius: 8px;
+            padding: 3rem 2rem;
+            text-align: center;
+            color: var(--sage-700);
+        }
+
+        .progress-indicator {
+            height: 6px;
+            background: var(--sage-200);
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--sage-600), var(--copper-600));
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Table of Contents -->
+    <nav class="toc-fixed" id="toc">
+        <div class="mb-4">
+            <h3 class="fs-5 fw-bold text-dark mb-3">Sumário</h3>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="#introducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">1. Introdução</a></li>
+                <li class="mb-2"><a href="#problema" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">2. Problemas do Ensino</a></li>
+                <li class="mb-2"><a href="#metodologia-daad" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Metodologia DAAD</a></li>
+                <li class="mb-2"><a href="#estrategias" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4. Estratégias Pedagógicas</a></li>
+                <li class="mb-2"><a href="#praticas" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5. Melhores Práticas</a></li>
+                <li class="mb-2"><a href="#disciplina" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6. Disciplina Proposta</a></li>
+            </ul>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Elementos DAAD</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-danger-subtle rounded"><small class="text-danger fw-medium">Decomposição</small></div>
+                <div class="p-2 bg-warning-subtle rounded"><small class="text-warning fw-medium">Abstração</small></div>
+                <div class="p-2" style="background-color: #fff3cd;"><small style="color: #ffc107;" class="fw-medium">Algoritmização</small></div>
+                <div class="p-2 bg-success-subtle rounded"><small class="text-success fw-medium">Depuração</small></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile TOC Toggle -->
+    <button class="d-lg-none position-fixed top-0 start-0 m-3 z-3 bg-white p-2 rounded shadow" onclick="toggleTOC()">
+        <i class="fas fa-bars text-dark"></i>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="min-vh-100" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container py-5">
+                <div class="callout-tip">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-lightbulb me-2 text-info"></i>
+                        <strong>Está sem tempo?</strong> Leia o <a href="#" class="citation-link">Expresso</a>.
+                    </div>
+                </div>
+
+                <div class="bento-grid mb-5">
+                    <div class="bento-main bg-white rounded-3 shadow">
+                        <div class="hero-gradient h-100 d-flex align-items-center justify-content-center position-relative">
+                            <div class="position-absolute w-100 h-100 opacity-25" style="background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\"><defs><pattern id=\"daad\" x=\"0\" y=\"0\" width=\"60\" height=\"60\" patternUnits=\"userSpaceOnUse\"><circle cx=\"15\" cy=\"15\" r=\"4\" fill=\"%23ffffff\" opacity=\"0.3\"/><circle cx=\"45\" cy=\"15\" r=\"4\" fill=\"%23ffffff\" opacity=\"0.2\"/><circle cx=\"15\" cy=\"45\" r=\"4\" fill=\"%23ffffff\" opacity=\"0.2\"/><circle cx=\"45\" cy=\"45\" r=\"4\" fill=\"%23ffffff\" opacity=\"0.3\"/><path d=\"M15,15 L45,15 L45,45 L15,45 Z\" stroke=\"%23ffffff\" stroke-width=\"1\" opacity=\"0.1\" fill=\"none\"/></pattern></defs><rect width=\"100%25\" height=\"100%25\" fill=\"url(%23daad)\"/></svg>') center/cover;"></div>
+                            <div class="position-relative z-1 text-center text-white p-4">
+                                <h1 class="display-4 fw-bold mb-4">
+                                    <em class="d-block" style="color: var(--copper-200);">Referencial Teórico</em>
+                                    <span class="d-block">Metodologia DAAD</span>
+                                </h1>
+                                <p class="fs-4 text-light fw-light mx-auto" style="max-width: 32rem;">
+                                    Pensamento Computacional e Raciocínio Algorítmico no Ensino Superior
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-side-top bg-white rounded-3 p-4 shadow">
+                        <div class="text-center">
+                            <div class="stat-highlight text-danger">9,8</div>
+                            <div class="fs-6 text-muted">Média ENADE CC</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: var(--copper-50);">
+                        <div class="text-center">
+                            <div class="stat-highlight" style="color: var(--copper-800);">16,9</div>
+                            <div class="fs-6" style="color: var(--copper-700);">Média ENADE EC</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-4 g-4 mb-5">
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <div class="daad-component daad-d border-0 p-0">
+                                    <i class="fas fa-puzzle-piece fs-2 text-danger mb-3"></i>
+                                    <h3 class="fs-6 fw-semibold text-danger">Decomposição</h3>
+                                    <p class="fs-7 text-muted">Fragmentação de problemas complexos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <div class="daad-component daad-a1 border-0 p-0">
+                                    <i class="fas fa-eye fs-2 text-warning mb-3"></i>
+                                    <h3 class="fs-6 fw-semibold text-warning">Abstração</h3>
+                                    <p class="fs-7 text-muted">Identificação de padrões essenciais</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <div class="daad-component daad-a2 border-0 p-0">
+                                    <i class="fas fa-cogs fs-2 mb-3" style="color: #ffc107;"></i>
+                                    <h3 class="fs-6 fw-semibold" style="color: #ffc107;">Algoritmização</h3>
+                                    <p class="fs-7 text-muted">Sequências lógico-operacionais</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <div class="daad-component daad-d2 border-0 p-0">
+                                    <i class="fas fa-bug fs-2 text-success mb-3"></i>
+                                    <h3 class="fs-6 fw-semibold text-success">Depuração</h3>
+                                    <p class="fs-7 text-muted">Refinamento iterativo</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section id="introducao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">1. Introdução ao Referencial Teórico</h2>
+                    
+                    <p class="fs-5 text-muted mb-4">
+                        Este estudo apresenta uma análise sobre a criação de uma disciplina de <strong>Raciocínio Algorítmico</strong> como prova de conceito para o uso da metodologia <strong>DAAD</strong> por professores de graduação em cursos de Ciência e Engenharia da Computação.
+                    </p>
+
+                    <div class="footnote">
+                        <strong>Nota:</strong> Algoritmização é um neologismo para traduzir o termo "Algorithmization" do inglês. A ideia é que seja um termo que remete à criação de algoritmos, ou seja, a construção de soluções sistemáticas e eficientes para problemas computacionais. É horrível, eu sei.
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow" style="background-color: var(--sage-50);">
+                                <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Motivação do Estudo</h3>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    A motivação surgiu da identificação de lacunas no conhecimento dos alunos, percebidas nos resultados das últimas avaliações do ENADE.
+                                </p>
+                                <div class="row row-cols-2 g-3">
+                                    <div class="col">
+                                        <div class="text-center p-3 bg-white rounded">
+                                            <div class="stat-highlight text-danger" style="font-size: 1.8rem;">9,8</div>
+                                            <small class="text-muted">CC (de 100)</small>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="text-center p-3 bg-white rounded">
+                                            <div class="stat-highlight text-warning" style="font-size: 1.8rem;">16,9</div>
+                                            <small class="text-muted">EC (de 100)</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow" style="background-color: var(--copper-50);">
+                                <h3 class="fs-3 fw-semibold mb-3" style="color: var(--copper-800);">Objetivo da Metodologia</h3>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    A metodologia DAAD pode ser aplicada a qualquer disciplina de qualquer curso, representando uma habilidade essencial para o século XXI.
+                                </p>
+                                <div class="border-start border-4 border-primary ps-3">
+                                    <div class="fw-bold text-primary">Crescente Importância</div>
+                                    <div class="fs-6 text-muted">Pensamento Computacional + Popularização da IA</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Problem Section -->
+        <section id="problema" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">2. A Jornada Inacabada: O Problema do Ensino</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        As críticas ao ensino de Raciocínio Algorítmico aparecem de forma relevante na academia a partir das últimas décadas do século XX, destacando problemas que persistem até hoje.
+                    </p>
+
+                    <!-- Historical Problems Table -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Problemas Persistentes no Ensino de Raciocínio Algorítmico</h3>
+                        <div class="table-responsive-custom">
+                            <table class="table table-custom">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 25%;">Fator</th>
+                                        <th style="width: 37.5%;">Impacto Histórico</th>
+                                        <th style="width: 37.5%;">Evidência Atual</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-semibold">Currículos Baseados em Eficiência</td>
+                                        <td>Priorização de otimização (ex: complexidade O(n)) sobre metacognição</td>
+                                        <td>Algoritmos como QuickSort são ensinados como fórmulas pré-definidas, sem discussão ou cognição</td>
+                                    </tr>
+                                    <tr style="background-color: var(--copper-50);">
+                                        <td class="fw-semibold">Falta de Formação Docente</td>
+                                        <td>Professores reproduzem métodos tradicionais por falta de treino em pedagogia criativa</td>
+                                        <td>Estudos mostram que educadores não dominam técnicas para mitigar dependência de IA</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-semibold">Infraestrutura Cognitiva</td>
+                                        <td>Modelos mentais baseados em Raciocínio Algorítmico Imitativo dificultam transição</td>
+                                        <td>Meta-análises confirmam baixa transferência de conceitos algorítmicos entre domínios</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- AI Impact Section -->
+                    <div class="ai-impact-card">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Impacto da Inteligência Artificial</h3>
+                        <p class="mb-4" style="color: var(--sage-700);">
+                            O interesse na pesquisa de soluções de IA se acentuou a partir de 2010, trazendo novos desafios para o ensino de Raciocínio Algorítmico.
+                        </p>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
+                            <div class="col">
+                                <div class="chart-placeholder">
+                                    <i class="fas fa-chart-line fs-1 mb-3"></i>
+                                    <h4 class="fs-5 fw-semibold">Evolução de Publicações sobre IA</h4>
+                                    <p class="mb-0">Gráfico mostrando crescimento exponencial a partir de 2010</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="chart-placeholder">
+                                    <i class="fas fa-microchip fs-1 mb-3"></i>
+                                    <h4 class="fs-5 fw-semibold">Dispositivos com IA Embarcada</h4>
+                                    <p class="mb-0">Crescimento do uso em dispositivos médicos e aplicações práticas</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-cols-1 row-cols-md-3 g-3">
+                            <div class="col">
+                                <div class="text-center p-3 bg-white rounded">
+                                    <div class="stat-highlight text-danger">54</div>
+                                    <div class="fs-6 text-danger">Participantes MIT Study</div>
+                                    <small class="text-muted">Dívida cognitiva com ChatGPT</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-white rounded">
+                                    <div class="stat-highlight text-warning">23%</div>
+                                    <div class="fs-6 text-warning">Menos domínio</div>
+                                    <small class="text-muted">Abstração com IA (Taiwan)</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-white rounded">
+                                    <div class="stat-highlight text-info">88,1%</div>
+                                    <div class="fs-6 text-info">Reconhecem influência</div>
+                                    <small class="text-muted">IA nos estudos (Brasil)</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comparison of Approaches -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Abordagens Existentes: Tentativas de Solução</h3>
+                        <div class="table-responsive-custom">
+                            <table class="table table-custom">
+                                <thead>
+                                    <tr>
+                                        <th>Abordagem</th>
+                                        <th>Descrição</th>
+                                        <th>Pontos Fortes</th>
+                                        <th>Limitações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-semibold" style="color: var(--sage-700);">Algorítmica Construtiva</td>
+                                        <td>Usa raciocínio equacional e álgebra de programas para derivar algoritmos em linguagens funcionais</td>
+                                        <td>Rigor matemático, correção formal, elegância na derivação</td>
+                                        <td>Descontextualização ética, negligencia impactos sociais</td>
+                                    </tr>
+                                    <tr style="background-color: var(--copper-50);">
+                                        <td class="fw-semibold" style="color: var(--copper-700);">Computação Unplugged</td>
+                                        <td>Utiliza atividades manuais para ensinar pensamento computacional</td>
+                                        <td>Ganhos de até 37% no pensamento sistêmico, internalização intuitiva</td>
+                                        <td>Ineficaz em problemas complexos, limitada transição para ferramentas digitais</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-4 p-3 bg-info-subtle rounded">
+                            <strong class="text-info">Integração Híbrida:</strong>
+            <span class="text-info">Surge como caminho promissor - iniciar com atividades unplugged e migrar para Constructive Algorithmics com extensões críticas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DAAD Methodology Section -->
+        <section id="metodologia-daad" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">3. Primeiro Contato com a Metodologia DAAD</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        A metodologia DAAD estende discussões da Cambridge Mathematics e análises de Lehmann (2024), apresentando um framework prático iterativo para desenvolvimento de Pensamento Computacional.
+                    </p>
+
+                    <!-- DAAD Components -->
+                    <div class="methodology-grid">
+                        <div class="pedagogy-card">
+                            <div class="daad-component daad-d">
+                                <h4 class="fs-5 fw-semibold text-danger mb-2">1. Decomposição (D)</h4>
+                                <p class="fs-6 text-muted mb-3">
+                                    Processo de fragmentação de problemas complexos em subproblemas gerenciáveis, seguindo princípios de divisão funcional ou estrutural.
+                                </p>
+                                <div class="p-3 bg-danger-subtle rounded">
+                                    <strong class="text-danger">Exemplo:</strong>
+                                    <div class="fs-6 text-danger">Quebrar um sistema de recomendação em: coleta de dados, filtragem, ranking e interface</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pedagogy-card">
+                            <div class="daad-component daad-a1">
+                                <h4 class="fs-5 fw-semibold text-warning mb-2">2. Abstração (A)</h4>
+                                <p class="fs-6 text-muted mb-3">
+                                    Identificação seletiva de padrões e invariantes essenciais, com descarte consciente de detalhes irrelevantes ao núcleo do problema.
+                                </p>
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <strong class="text-warning">Exemplo:</strong>
+                                    <div class="fs-6 text-warning">Modelar tráfego urbano considerando apenas fluxo veicular médio, ignorando marcas e combustível</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pedagogy-card">
+                            <div class="daad-component daad-a2">
+                                <h4 class="fs-5 fw-semibold mb-2" style="color: #ffc107;">3. Algoritmização (A)</h4>
+                                <p class="fs-6 text-muted mb-3">
+                                    Formulação de soluções por meio de sequências lógico-operacionais, garantindo completude e implementabilidade.
+                                </p>
+                                <div class="p-3 rounded" style="background-color: #fff3cd;">
+                                    <strong style="color: #ffc107;">Exemplo:</strong>
+                                    <div class="fs-6" style="color: #ffc107;">Projetar heurística para otimização de rotas usando grafos valorados e seleção gulosa</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pedagogy-card">
+                            <div class="daad-component daad-d2">
+                                <h4 class="fs-5 fw-semibold text-success mb-2">4. Depuração (D)</h4>
+                                <p class="fs-6 text-muted mb-3">
+                                    Refinamento iterativo mediante validação empírica, incluindo testes de robustez, análise de falhas e otimização pós-implementação.
+                                </p>
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong class="text-success">Exemplo:</strong>
+                                    <div class="fs-6 text-success">Injeção de dados corrompidos em pipelines para validar resiliência</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DAAD Diagram -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4 text-center" style="color: var(--sage-800);">Inter-relação dos Componentes DAAD</h3>
+                        <div class="image-container">
+                            <div class="text-center">
+                                <i class="fas fa-project-diagram fs-1 mb-3" style="color: var(--sage-600);"></i>
+                                <h4 class="fs-5 fw-semibold" style="color: var(--sage-800);">Metodologia DAAD</h4>
+                                <p class="text-muted">Ilustração da inter-relação entre Decomposição, Abstração, Algoritmização e Depuração</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PC vs RA Distinction -->
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Pensamento Computacional vs. Raciocínio Algorítmico</h3>
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            Em português existe uma fronteira tênue entre Pensamento Computacional e Raciocínio Algorítmico. Pesquisas brasileiras mostram confusão conceitual significativa.
+                        </p>
+                        <div class="row row-cols-1 row-cols-md-3 g-3">
+                            <div class="col">
+                                <div class="text-center p-3 bg-white rounded shadow-sm">
+                                    <div class="stat-highlight text-danger">76%</div>
+                                    <div class="fs-6 text-danger">Trabalhos equiparam PC ao ensino de algoritmos</div>
+                                    <small class="text-muted">Medeiros (2024) - 38 estudos brasileiros</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-white rounded shadow-sm">
+                                    <div class="stat-highlight text-warning">BNCC</div>
+                                    <div class="fs-6 text-warning">Não distingue claramente PC e RA</div>
+                                    <small class="text-muted">SBC (2017) - Ambiguidade pedagógica</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-white rounded shadow-sm">
+                                    <i class="fas fa-exclamation-triangle fs-3 mb-2 text-info"></i>
+                                    <div class="fs-6 text-info">Consequências Negativas</div>
+                                    <small class="text-muted">Limitação em contextos interdisciplinares</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pedagogical Strategies Section -->
+        <section id="estrategias" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">4. Estratégias Pedagógicas e Materiais Didáticos</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        O ensino eficaz dos componentes DAAD exige estratégias pedagógicas que transcendam aulas expositivas tradicionais, promovendo engajamento ativo e aplicação prática.
+                    </p>
+
+                    <!-- Teaching Strategies Grid -->
+                    <div class="methodology-grid">
+                        <div class="pedagogy-card">
+                            <h4 class="fs-5 fw-semibold mb-3 d-flex align-items-center text-primary">
+                                <i class="fas fa-flip-horizontal me-3"></i>
+                                Flipped Classroom
+                            </h4>
+                            <p class="fs-6 text-muted mb-3">
+                                Metodologia que inverte a dinâmica tradicional: estudo inicial fora da sala, prática e discussão em classe.
+                            </p>
+                            <div class="progress-indicator">
+                                <div class="progress-fill" style="width: 85%;"></div>
+                            </div>
+                            <small class="text-muted">Adotada pela ETH Zurich com sucesso</small>
+                        </div>
+
+                        <div class="pedagogy-card">
+                            <h4 class="fs-5 fw-semibold mb-3 d-flex align-items-center text-success">
+                                <i class="fas fa-project-diagram me-3"></i>
+                                Aprendizagem Baseada em Projetos
+                            </h4>
+                            <p class="fs-6 text-muted mb-3">
+                                Resolução de problemas complexos e autênticos do mundo real, fomentando autonomia e criatividade.
+                            </p>
+                            <div class="progress-indicator">
+                                <div class="progress-fill" style="width: 90%;"></div>
+                            </div>
+                            <small class="text-muted">Amplamente eficaz para Pensamento Computacional</small>
+                        </div>
+
+                        <div class="pedagogy-card">
+                            <h4 class="fs-5 fw-semibold mb-3 d-flex align-items-center text-warning">
+                                <i class="fas fa-puzzle-piece me-3"></i>
+                                Atividades Unplugged
+                            </h4>
+                            <p class="fs-6 text-muted mb-3">
+                                Ensino sem dispositivos digitais, usando materiais físicos para focar nos conceitos fundamentais.
+                            </p>
+                            <div class="progress-indicator">
+                                <div class="progress-fill" style="width: 75%;"></div>
+                            </div>
+                            <small class="text-muted">Eficaz antes da programação digital</small>
+                        </div>
+
+                        <div class="pedagogy-card">
+                            <h4 class="fs-5 fw-semibold mb-3 d-flex align-items-center text-info">
+                                <i class="fas fa-users me-3"></i>
+                                Aprendizagem Colaborativa
+                            </h4>
+                            <p class="fs-6 text-muted mb-3">
+                                Discussões em equipe, resolução em grupo e comunicação de soluções alternativas.
+                            </p>
+                            <div class="progress-indicator">
+                                <div class="progress-fill" style="width: 80%;"></div>
+                            </div>
+                            <small class="text-muted">Melhora engajamento e resolução de problemas</small>
+                        </div>
+
+                        <div class="pedagogy-card">
+                            <h4 class="fs-5 fw-semibold mb-3 d-flex align-items-center" style="color: var(--copper-600);">
+                                <i class="fas fa-question-circle me-3"></i>
+                                Abordagem Socrática
+                            </h4>
+                            <p class="fs-6 text-muted mb-3">
+                                Desenvolvimento de conceitos por meio de questionamento direcionado dos alunos.
+                            </p>
+                            <div class="progress-indicator">
+                                <div class="progress-fill" style="width: 70%;"></div>
+                            </div>
+                            <small class="text-muted">Desenvolve pensamento crítico e análise</small>
+                        </div>
+
+                        <div class="pedagogy-card">
+                            <h4 class="fs-5 fw-semibold mb-3 d-flex align-items-center" style="color: var(--sage-600);">
+                                <i class="fas fa-graduation-cap me-3"></i>
+                                Papel do Professor
+                            </h4>
+                            <p class="fs-6 text-muted mb-3">
+                                Transformação de transmissor para facilitador, diagnosticador e curador do conhecimento.
+                            </p>
+                            <div class="progress-indicator">
+                                <div class="progress-fill" style="width: 95%;"></div>
+                            </div>
+                            <small class="text-muted">Fundamental para o sucesso da metodologia</small>
+                        </div>
+                    </div>
+
+                    <!-- Teaching Materials -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Materiais Didáticos e Ferramentas</h3>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Linguagens de Programação</h4>
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="d-flex justify-content-between p-2 bg-light rounded">
+                                        <span class="fw-medium">Python</span>
+                                        <span class="text-primary">Ideal para iniciantes</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between p-2 bg-light rounded">
+                                        <span class="fw-medium">Java</span>
+                                        <span class="text-success">Currículos avançados</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between p-2 bg-light rounded">
+                                        <span class="fw-medium">C/C++</span>
+                                        <span class="text-warning">Fundamentos de baixo nível</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between p-2 bg-light rounded">
+                                        <span class="fw-medium">OCaml/Prolog</span>
+                                        <span class="text-info">Paradigmas alternativos</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3" style="color: var(--copper-800);">Ambientes e Ferramentas</h4>
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="d-flex justify-content-between p-2 bg-light rounded">
+                                        <span class="fw-medium">Scratch</span>
+                                        <span class="text-primary">Crianças e iniciantes</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between p-2 bg-light rounded">
+                                        <span class="fw-medium">XLogo4Schools</span>
+                                        <span class="text-success">Logo e Python</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between p-2 bg-light rounded">
+                                        <span class="fw-medium">Ferramentas de Depuração</span>
+                                        <span class="text-warning">Essenciais para aprendizado</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between p-2 bg-light rounded">
+                                        <span class="fw-medium">IDEs Educacionais</span>
+                                        <span class="text-info">Redução de carga cognitiva</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Best Practices Section -->
+        <section id="praticas" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">5. Melhores Práticas e Desafios na Implementação</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        A implementação de metodologias como DAAD no ensino superior apresenta tanto oportunidades significativas quanto obstáculos consideráveis.
+                    </p>
+
+                    <!-- Best Practices -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow" style="background-color: var(--sage-50);">
+                                <h3 class="fs-5 fw-semibold mb-3 d-flex align-items-center" style="color: var(--sage-800);">
+                                    <i class="fas fa-star me-3 text-success"></i>
+                                    Melhores Práticas Identificadas
+                                </h3>
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-check-circle me-3 mt-1 text-success"></i>
+                                        <div>
+                                            <div class="fw-medium">Integração Interdisciplinar</div>
+                                            <div class="fs-6 text-muted">PC eficaz quando integrado em diversas disciplinas, não apenas CS</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-check-circle me-3 mt-1 text-success"></i>
+                                        <div>
+                                            <div class="fw-medium">Contextualização</div>
+                                            <div class="fs-6 text-muted">Problemas do mundo real aumentam engajamento dos alunos</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-check-circle me-3 mt-1 text-success"></i>
+                                        <div>
+                                            <div class="fw-medium">Formação Integral</div>
+                                            <div class="fs-6 text-muted">Cultivar atitudes como confiança, persistência e colaboração</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-check-circle me-3 mt-1 text-success"></i>
+                                        <div>
+                                            <div class="fw-medium">Progressão Gradual</div>
+                                            <div class="fs-6 text-muted">Introduzir conceitos gradualmente, revisitando e expandindo</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow" style="background-color: var(--copper-50);">
+                                <h3 class="fs-5 fw-semibold mb-3 d-flex align-items-center" style="color: var(--copper-800);">
+                                    <i class="fas fa-exclamation-triangle me-3 text-warning"></i>
+                                    Desafios Comuns
+                                </h3>
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-times-circle me-3 mt-1 text-danger"></i>
+                                        <div>
+                                            <div class="fw-medium">Definição Ambígua</div>
+                                            <div class="fs-6 text-muted">Falta de consenso na definição de PC afeta currículo e avaliação</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-times-circle me-3 mt-1 text-danger"></i>
+                                        <div>
+                                            <div class="fw-medium">Preparação Docente</div>
+                                            <div class="fs-6 text-muted">Educadores carecem de compreensão e confiança para implementar PC</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-times-circle me-3 mt-1 text-danger"></i>
+                                        <div>
+                                            <div class="fw-medium">Integração Curricular</div>
+                                            <div class="fs-6 text-muted">Dificuldade em disciplinas não relacionadas a STEM</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-times-circle me-3 mt-1 text-danger"></i>
+                                        <div>
+                                            <div class="fw-medium">Avaliação Complexa</div>
+                                            <div class="fs-6 text-muted">Ferramentas limitadas, foco em múltipla escolha simples</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Assessment Tools -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Ferramentas de Avaliação</h3>
+                        <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
+                            <div class="col">
+                                <div class="text-center p-3 rounded" style="background-color: var(--sage-50);">
+                                    <i class="fas fa-tasks fs-3 mb-2" style="color: var(--sage-600);"></i>
+                                    <div class="fw-medium" style="color: var(--sage-800);">Testes de Performance</div>
+                                    <div class="fs-6" style="color: var(--sage-600);">Pensamento lógico, generalização, abstração</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 rounded" style="background-color: var(--copper-50);">
+                                    <i class="fas fa-folder-open fs-3 mb-2" style="color: var(--copper-600);"></i>
+                                    <div class="fw-medium" style="color: var(--copper-800);">Projetos e Portfólios</div>
+                                    <div class="fs-6" style="color: var(--copper-600);">Aplicação prática de conhecimentos</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 rounded bg-light">
+                                    <i class="fas fa-user-check fs-3 mb-2 text-muted"></i>
+                                    <div class="fw-medium text-dark">Autoavaliação</div>
+                                    <div class="fs-6 text-muted">Escalas psicométricas validadas</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="image-container">
+                            <div class="text-center">
+                                <i class="fas fa-clipboard-check fs-1 mb-3" style="color: var(--sage-600);"></i>
+                                <h4 class="fs-5 fw-semibold" style="color: var(--sage-800);">Exemplo de Teste de PC</h4>
+                                <p class="text-muted">Questões avaliando decomposição, abstração e algoritmização</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rubric Example -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Exemplo de Rubrica para Avaliação de PC</h3>
+                        <div class="table-responsive">
+                            <table class="table table-bordered rubric-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 15%;">Dimensão</th>
+                                        <th style="width: 21.25%;" class="rubric-score-4">Excelente (4)</th>
+                                        <th style="width: 21.25%;" class="rubric-score-3">Proficiente (3)</th>
+                                        <th style="width: 21.25%;" class="rubric-score-2">Em Desenvolvimento (2)</th>
+                                        <th style="width: 21.25%;" class="rubric-score-1">Iniciante (1)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-semibold">Decomposição</td>
+                                        <td class="rubric-score-4">Divide problemas complexos em subproblemas claramente descritos, bem definidos e eficientes</td>
+                                        <td class="rubric-score-3">Divide problemas em subproblemas distintos mas carecem de eficiência</td>
+                                        <td class="rubric-score-2">Subproblemas carecem de eficiência e descrições suficientes</td>
+                                        <td class="rubric-score-1">Subproblemas ineficientes, inadequadamente descritos</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-semibold">Algoritmos</td>
+                                        <td class="rubric-score-4">Sequência lógica, eficiente e bem descrita de passos</td>
+                                        <td class="rubric-score-3">Sequência lógica bem descrita mas ineficiente</td>
+                                        <td class="rubric-score-2">Sequência lógica mas mal descrita</td>
+                                        <td class="rubric-score-1">Sequência não resolve o problema adequadamente</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-semibold">Abstração</td>
+                                        <td class="rubric-score-4">Representação precisa, simplificada, reutilizável em diferentes contextos</td>
+                                        <td class="rubric-score-3">Representação precisa e simplificada mas não reutilizável</td>
+                                        <td class="rubric-score-2">Falha em selecionar todas as características essenciais</td>
+                                        <td class="rubric-score-1">Representação imprecisa ou inadequadamente simplificada</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <small class="text-muted">Adaptado de University of Delaware (2018)</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Proposed Discipline Section -->
+        <section id="disciplina" class="py-5" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">6. A Disciplina de Raciocínio Algorítmico</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-4 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Estrutura Curricular Proposta</h3>
+                        <p class="text-muted mb-4">
+                            Disciplina de 80 horas dividida em módulos que progridem do entendimento conceitual à aplicação prática de cada componente DAAD.
+                        </p>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold" style="color: var(--sage-800);">Características Gerais</h4>
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="d-flex justify-content-between p-2 bg-light rounded">
+                                        <span class="fw-medium">Carga Horária</span>
+                                        <span class="fw-bold text-primary">80 horas</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between p-2 bg-light rounded">
+                                        <span class="fw-medium">Período</span>
+                                        <span class="fw-bold text-success">1º semestre</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between p-2 bg-light rounded">
+                                        <span class="fw-medium">Público-alvo</span>
+                                        <span class="fw-bold text-warning">CC e EC</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between p-2 bg-light rounded">
+                                        <span class="fw-medium">Aplicabilidade</span>
+                                        <span class="fw-bold text-info">Todos os cursos</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold" style="color: var(--copper-800);">Estratégias Recomendadas</h4>
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="p-2 bg-light rounded">
+                                        <i class="fas fa-flip-horizontal me-2 text-primary"></i>
+                                        <span class="fw-medium">Sala de aula invertida</span>
+                                    </div>
+                                    <div class="p-2 bg-light rounded">
+                                        <i class="fas fa-users me-2 text-success"></i>
+                                        <span class="fw-medium">Aprendizagem ativa</span>
+                                    </div>
+                                    <div class="p-2 bg-light rounded">
+                                        <i class="fas fa-puzzle-piece me-2 text-warning"></i>
+                                        <span class="fw-medium">Atividades unplugged/plugged</span>
+                                    </div>
+                                    <div class="p-2 bg-light rounded">
+                                        <i class="fas fa-handshake me-2 text-info"></i>
+                                        <span class="fw-medium">Fomento da colaboração</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow" style="background-color: var(--sage-50);">
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Estrutura do Trabalho</h3>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    Cinco partes principais e dez apêndices com atividades para sala de aula e estudo complementar.
+                                </p>
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="p-2 bg-white rounded">
+                                        <strong>Introdução:</strong> <span class="text-muted">Contexto e metodologia</span>
+                                    </div>
+                                    <div class="p-2 bg-white rounded">
+                                        <strong>Internacional:</strong> <span class="text-muted">EUA, Reino Unido, Europa, China</span>
+                                    </div>
+                                    <div class="p-2 bg-white rounded">
+                                        <strong>Estratégias:</strong> <span class="text-muted">Pedagogias sugeridas</span>
+                                    </div>
+                                    <div class="p-2 bg-white rounded">
+                                        <strong>Definições:</strong> <span class="text-muted">Princípios da metodologia</span>
+                                    </div>
+                                    <div class="p-2 bg-white rounded">
+                                        <strong>Projeto:</strong> <span class="text-muted">Disciplina de 80 horas</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow" style="background-color: var(--copper-50);">
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--copper-800);">Avaliação e Desafios</h3>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    Métodos de avaliação devem ir além da correção de código, utilizando rubricas detalhadas para medir crescimento das competências DAAD.
+                                </p>
+                                <div class="border-start border-4 border-warning ps-3 mb-3">
+                                    <div class="fw-medium text-warning">Estudo Posterior</div>
+                                    <div class="fs-6 text-muted">Métodos de avaliação necessitam aprofundamento</div>
+                                </div>
+                                <div class="border-start border-4 border-info ps-3">
+                                    <div class="fw-medium text-info">Desafios</div>
+                                    <div class="fs-6 text-muted">Preparação docente e engajamento estudantil</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="d-inline-block p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-600), var(--copper-600));">
+                            <h4 class="fs-3 fw-bold mb-3 text-white">Metodologia DAAD</h4>
+                            <p class="fs-5 mb-3 text-white">
+                                Um <strong>framework prático iterativo</strong> para desenvolver Pensamento Computacional e Raciocínio Algorítmico no ensino superior.
+                            </p>
+                            <div class="fs-6 text-white opacity-75">
+                                Preenchendo a lacuna metodológica com abordagem unificada e estruturada
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Mobile TOC Toggle
+        function toggleTOC() {
+            const toc = document.getElementById('toc');
+            toc.classList.toggle('open');
+        }
+
+        // Close TOC when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const toc = document.getElementById('toc');
+            const hamburger = document.querySelector('button[onclick="toggleTOC()"]');
+            if (window.innerWidth <= 1024 && toc.classList.contains('open')) {
+                if (!toc.contains(event.target) && event.target !== hamburger && !hamburger.contains(event.target)) {
+                    toc.classList.remove('open');
+                }
+            }
+        });
+
+        // Smooth scrolling and active link highlighting
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            const sections = document.querySelectorAll('section[id]');
+            
+            // Add click handlers for smooth scrolling with offset
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        const offset = 80;
+                        const elementPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+                        window.scrollTo({
+                            top: elementPosition - offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                    if (window.innerWidth <= 1024) {
+                        document.getElementById('toc').classList.remove('open');
+                    }
+                });
+            });
+            
+            // Highlight active section in TOC
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        links.forEach(link => {
+                            link.classList.remove('bg-light', 'text-dark');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('bg-light', 'text-dark');
+                            }
+                        });
+                    }
+                });
+            }, {
+                rootMargin: '-80px 0px -70% 0px'
+            });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Fade in animation on scroll
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            fadeElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                fadeObserver.observe(el);
+            });
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            const toc = document.getElementById('toc');
+            if (window.innerWidth > 1024) {
+                toc.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html>
