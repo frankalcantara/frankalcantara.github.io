@@ -238,12 +238,48 @@ flowchart TD
     <!-- Script para garantir dropdowns funcionais -->
     <script>
         $(document).ready(function() {
-            // Garantir que dropdowns funcionem corretamente
+            console.log('Inicializando dropdowns...');
+            
+            // Forçar inicialização dos dropdowns
+            $('.dropdown-toggle').each(function() {
+                console.log('Inicializando dropdown:', this.id);
+            });
+            
+            // Implementar funcionalidade manual se Bootstrap falhar
+            $('.dropdown-toggle').on('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                console.log('Clique no dropdown:', this.id);
+                
+                // Fechar outros dropdowns
+                $('.dropdown-menu').removeClass('show');
+                
+                // Toggle no dropdown atual
+                const menu = $(this).next('.dropdown-menu');
+                menu.toggleClass('show');
+                
+                console.log('Menu dropdown toggled:', menu.hasClass('show'));
+            });
+            
+            // Fechar dropdown ao clicar fora
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('.dropdown').length) {
+                    $('.dropdown-menu').removeClass('show');
+                }
+            });
+            
+            // Verificar se Bootstrap está disponível
             if (typeof $.fn.dropdown !== 'undefined') {
-                $('.dropdown-toggle').dropdown();
-                console.log('Dropdowns inicializados com sucesso');
+                console.log('Bootstrap dropdown disponível');
+                try {
+                    $('.dropdown-toggle').dropdown();
+                    console.log('Dropdowns inicializados via Bootstrap');
+                } catch(err) {
+                    console.error('Erro ao inicializar Bootstrap dropdown:', err);
+                }
             } else {
-                console.error('Bootstrap dropdown não disponível');
+                console.log('Bootstrap dropdown não disponível - usando implementação manual');
             }
         });
     </script>

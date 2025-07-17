@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(start debug-highlighting.html)",
+      "Bash(explorer debug-highlighting.html)",
+      "Bash(git restore:*)"
+    ],
+    "deny": []
+  }
+}

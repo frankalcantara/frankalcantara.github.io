@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Analisando Currículos Internacionais: Pensamento Computacional</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --copper-50: #fdf8f6;
+            --copper-100: #f2e8e5;
+            --copper-200: #eaddd7;
+            --copper-300: #e0cec7;
+            --copper-400: #d2bab0;
+            --copper-500: #bfa094;
+            --copper-600: #a18072;
+            --copper-700: #977669;
+            --copper-800: #846358;
+            --copper-900: #43302b;
+            --sage-50: #f6f7f6;
+            --sage-100: #e3e7e3;
+            --sage-200: #c7d0c7;
+            --sage-300: #a3b2a3;
+            --sage-400: #7a8f7a;
+            --sage-500: #5d7360;
+            --sage-600: #495a4c;
+            --sage-700: #3d4a3f;
+            --sage-800: #343d36;
+            --sage-900: #2d342f;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Text', serif;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(93, 115, 96, 0.9) 0%, rgba(191, 160, 148, 0.8) 100%);
+        }
+
+        .toc-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+
+        @media (max-width: 1024px) {
+            .toc-fixed {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            .toc-fixed.open {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        .citation-link {
+            color: var(--sage-500);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted var(--sage-500);
+        }
+
+        .citation-link:hover {
+            color: var(--sage-600);
+            border-bottom-style: solid;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 1.5rem;
+            height: 60vh;
+        }
+
+        .bento-main {
+            grid-row: 1 / -1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-side-top,
+        .bento-side-bottom {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hover-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .hover-bg-light:hover {
+            background-color: var(--sage-50);
+        }
+
+        section[id] {
+            scroll-margin-top: 80px;
+        }
+
+        section {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 2rem;
+        }
+
+        .university-card {
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .university-card .card-body,
+        .university-card > div {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .country-header {
+            border-left: 5px solid;
+            padding-left: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .usa-theme { border-left-color: #dc3545; }
+        .uk-theme { border-left-color: #0d6efd; }
+        .eu-theme { border-left-color: #ffc107; }
+
+        .credit-system-card {
+            border-top: 4px solid;
+            transition: all 0.3s ease;
+        }
+
+        .credit-system-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .usa-card { border-top-color: #dc3545; }
+        .eu-card { border-top-color: #ffc107; }
+        .china-card { border-top-color: #fd7e14; }
+        .brazil-card { border-top-color: #198754; }
+
+        .table-responsive-custom {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-custom {
+            margin-bottom: 0;
+        }
+
+        .table-custom thead {
+            background: linear-gradient(135deg, var(--sage-600), var(--copper-600));
+            color: white;
+        }
+
+        .table-custom tbody tr:nth-child(even) {
+            background-color: var(--sage-50);
+        }
+
+        .table-custom tbody tr:hover {
+            background-color: var(--copper-100);
+            transition: background-color 0.2s ease;
+        }
+
+        .stat-highlight {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .methodology-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .flag-icon {
+            width: 32px;
+            height: 20px;
+            border-radius: 3px;
+            background-size: cover;
+            background-position: center;
+            display: inline-block;
+            margin-right: 0.5rem;
+            border: 1px solid #ddd;
+        }
+
+        .flag-usa { background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30"><rect width="60" height="30" fill="%23B22234"/><path d="M0,3.46h60M0,7.54h60M0,11.54h60M0,15.54h60M0,19.54h60M0,23.54h60M0,27.54h60" stroke="%23fff" stroke-width="2.31"/><rect width="24" height="17.54" fill="%233C3B6E"/></svg>'); }
+        .flag-uk { background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30"><rect width="60" height="30" fill="%23012169"/><path d="M0,0L60,30M60,0L0,30" stroke="%23fff" stroke-width="3"/><path d="M30,0V30M0,15H60" stroke="%23fff" stroke-width="5"/><path d="M30,0V30M0,15H60" stroke="%23C8102E" stroke-width="3"/></svg>'); }
+        .flag-eu { background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30"><rect width="60" height="30" fill="%23003399"/><g fill="%23FFCC00"><circle cx="30" cy="15" r="1"/><circle cx="25" cy="10" r="1"/><circle cx="35" cy="10" r="1"/><circle cx="20" cy="12" r="1"/><circle cx="40" cy="12" r="1"/><circle cx="20" cy="18" r="1"/><circle cx="40" cy="18" r="1"/><circle cx="25" cy="20" r="1"/><circle cx="35" cy="20" r="1"/><circle cx="15" cy="15" r="1"/><circle cx="45" cy="15" r="1"/><circle cx="18" cy="8" r="1"/></g></svg>'); }
+        .flag-china { background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30"><rect width="60" height="30" fill="%23DE2910"/><polygon points="9,6 10.5,9.5 14,9.5 11.25,11.75 12.75,15.25 9,13 5.25,15.25 6.75,11.75 4,9.5 7.5,9.5" fill="%23FFDE00"/></svg>'); }
+        .flag-brazil { background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30"><rect width="60" height="30" fill="%23009639"/><polygon points="30,5 50,15 30,25 10,15" fill="%23FEDF00"/><circle cx="30" cy="15" r="7" fill="%23002776"/></svg>'); }
+
+        .progression-step {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .progression-step::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--sage-600);
+        }
+
+        .progression-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1rem;
+            width: 2px;
+            height: calc(100% - 0.5rem);
+            background: var(--sage-300);
+        }
+
+        .callout-tip {
+            background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+            border-left: 4px solid #17a2b8;
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .figure-container {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+
+        .figure-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .figure-caption {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--sage-200);
+            font-style: italic;
+            color: var(--sage-700);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Table of Contents -->
+    <nav class="toc-fixed" id="toc">
+        <div class="mb-4">
+            <h3 class="fs-5 fw-bold text-dark mb-3">Sumário</h3>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="#introducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">1. Introdução Internacional</a></li>
+                <li class="mb-2"><a href="#sistemas-creditos" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">2. Sistemas de Créditos</a></li>
+                <li class="mb-2"><a href="#eua" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Estados Unidos</a></li>
+                <li class="mb-2"><a href="#reino-unido" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4. Reino Unido</a></li>
+                <li class="mb-2"><a href="#europa" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5. Europa Continental</a></li>
+                <li class="mb-2"><a href="#sintese" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6. Síntese Comparativa</a></li>
+            </ul>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Universidades Analisadas</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-light rounded"><span class="flag-icon flag-usa"></span>Carnegie Mellon, MIT, Stanford</div>
+                <div class="p-2 bg-light rounded"><span class="flag-icon flag-uk"></span>Cambridge, Oxford, Imperial</div>
+                <div class="p-2 bg-light rounded"><span class="flag-icon flag-eu"></span>ETH Zurich, EHL Lausanne</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile TOC Toggle -->
+    <button class="d-lg-none position-fixed top-0 start-0 m-3 z-3 bg-white p-2 rounded shadow" onclick="toggleTOC()">
+        <i class="fas fa-bars text-dark"></i>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="min-vh-100" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container py-5">
+                <div class="bento-grid mb-5">
+                    <div class="bento-main bg-white rounded-3 shadow">
+                        <div class="hero-gradient h-100 d-flex align-items-center justify-content-center position-relative">
+                            <div class="position-absolute w-100 h-100 opacity-25" style="background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\"><defs><pattern id=\"world\" x=\"0\" y=\"0\" width=\"50\" height=\"40\" patternUnits=\"userSpaceOnUse\"><circle cx=\"10\" cy=\"10\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.3\"/><circle cx=\"35\" cy=\"25\" r=\"2\" fill=\"%23ffffff\" opacity=\"0.2\"/><path d=\"M0,20 Q25,10 50,20 T100,20\" stroke=\"%23ffffff\" stroke-width=\"1\" opacity=\"0.2\" fill=\"none\"/></pattern></defs><rect width=\"100%25\" height=\"100%25\" fill=\"url(%23world)\"/></svg>') center/cover;"></div>
+                            <div class="position-relative z-1 text-center text-white p-4">
+                                <h1 class="display-4 fw-bold mb-4">
+                                    <em class="d-block" style="color: var(--copper-200);">Currículos Internacionais</em>
+                                    <span class="d-block">Pensamento Computacional</span>
+                                </h1>
+                                <p class="fs-4 text-light fw-light mx-auto" style="max-width: 32rem;">
+                                    Análise Comparativa Global: EUA, Reino Unido e Europa
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-side-top bg-white rounded-3 p-4 shadow">
+                        <div class="text-center">
+                            <div class="stat-highlight text-primary">15+</div>
+                            <div class="fs-6 text-muted">Universidades Analisadas</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: var(--copper-50);">
+                        <div class="text-center">
+                            <div class="stat-highlight" style="color: var(--copper-800);">4</div>
+                            <div class="fs-6" style="color: var(--copper-700);">Sistemas de Créditos</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="flag-icon flag-usa me-3"></span>
+                                    <h3 class="fs-5 fw-semibold text-danger">Estados Unidos</h3>
+                                </div>
+                                <p class="fs-6 text-muted">Credit Hours - Pioneer em metodologias DAAD com Carnegie Mellon e MIT</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="flag-icon flag-uk me-3"></span>
+                                    <h3 class="fs-5 fw-semibold text-primary">Reino Unido</h3>
+                                </div>
+                                <p class="fs-6 text-muted">ECTS - Ênfase em fundamentos teóricos com Cambridge e Oxford</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="flag-icon flag-eu me-3"></span>
+                                    <h3 class="fs-5 fw-semibold text-warning">Europa</h3>
+                                </div>
+                                <p class="fs-6 text-muted">ECTS - Aplicação transdisciplinar com ETH Zurich e EHL</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section id="introducao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">1. Tendência Global de Integração Curricular</h2>
+                    
+                    <p class="fs-5 text-muted mb-4">
+                        A integração do <strong>Pensamento Computacional</strong> nos currículos do ensino superior tem sido uma tendência crescente, com universidades em todo o mundo revendo os conteúdos e estruturas dos seus cursos para incorporar esses conceitos.
+                    </p>
+
+                    <blockquote class="border-start border-4 border-primary p-4 bg-light rounded-end mb-5">
+                        <p class="text-muted fs-5 fst-italic" style="color: var(--sage-800);">
+                            "Esta evolução curricular representa uma transição de um modelo que ensinava primariamente programar para o computador para um que enfatiza o pensar computacionalmente."
+                        </p>
+                        <footer class="blockquote-footer mt-2">Análise Internacional de Currículos</footer>
+                    </blockquote>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow" style="background-color: var(--sage-50);">
+                                <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Mudança de Paradigma</h3>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    Instituições de prestígio estão se afastando de um foco exclusivo na sintaxe de programação para priorizar uma compreensão mais profunda de como os sistemas computacionais funcionam.
+                                </p>
+                                <div class="border-start border-4 border-warning ps-3 mb-3">
+                                    <div class="fw-bold text-warning">Preocupação Pedagógica</div>
+                                    <div class="fs-6 text-muted">Modelos algorítmicos podem gerar aprendizado de curto prazo, mas falham em conhecimento conceitual de longo prazo</div>
+                                </div>
+                                <div class="border-start border-4 border-success ps-3">
+                                    <div class="fw-bold text-success">Alfabetização Computacional</div>
+                                    <div class="fs-6 text-muted">Competência mais ampla e conceitual que transcende linguagens específicas</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow" style="background-color: var(--copper-50);">
+                                <h3 class="fs-3 fw-semibold mb-3" style="color: var(--copper-800);">Desafio Comparativo</h3>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    A comparação entre o ensino no Brasil com universidades internacionais é complexa devido às diferenças metodológicas e sistemas de creditação.
+                                </p>
+                                <div class="border-start border-4 border-info ps-3">
+                                    <div class="fw-bold text-info">Metodologia DAAD</div>
+                                    <div class="fs-6 text-muted">Impacto direto no formato de disciplinas para inclusão da metodologia</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Credit Systems Section -->
+        <section id="sistemas-creditos" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">2. Sistemas de Créditos Acadêmicos</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        A forma como o tempo de aula presencial, trabalhos e pesquisa é contabilizado para validação da disciplina tem impacto direto no formato das disciplinas para inclusão da Metodologia DAAD.
+                    </p>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <!-- USA Credit System -->
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow credit-system-card usa-card">
+                                <h3 class="fs-4 fw-semibold mb-3 d-flex align-items-center text-danger">
+                                    <span class="flag-icon flag-usa me-3"></span>
+                                    Estados Unidos: Credit Hours
+                                </h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    <strong>1 crédito = 1 hora aula + 2 horas estudo independente</strong> por semana (15 semanas/semestre)
+                                </p>
+                                <div class="table-responsive-custom">
+                                    <table class="table table-custom">
+                                        <thead>
+                                            <tr>
+                                                <th>Créditos</th>
+                                                <th>Sala</th>
+                                                <th>Estudo</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="fw-bold">1</td>
+                                                <td>15h</td>
+                                                <td>30h</td>
+                                                <td>45h</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-bold">3</td>
+                                                <td>45h</td>
+                                                <td>90h</td>
+                                                <td>135h</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="mt-3 p-3 bg-danger-subtle rounded">
+                                    <strong class="text-danger">Bacharelado:</strong> 120-130 créditos
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Europe ECTS System -->
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow credit-system-card eu-card">
+                                <h3 class="fs-4 fw-semibold mb-3 d-flex align-items-center text-warning">
+                                    <span class="flag-icon flag-eu me-3"></span>
+                                    Europa: ECTS
+                                </h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    <strong>1 ECTS = 25-30 horas de trabalho total</strong> do estudante (não apenas aulas)
+                                </p>
+                                <div class="table-responsive-custom">
+                                    <table class="table table-custom">
+                                        <thead>
+                                            <tr>
+                                                <th>ECTS</th>
+                                                <th>Horas Totais</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="fw-bold">1</td>
+                                                <td>25-30h</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-bold">3</td>
+                                                <td>75-90h</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-bold">60</td>
+                                                <td>1 ano acadêmico</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="mt-3 p-3 bg-warning-subtle rounded">
+                                    <strong class="text-warning">Bacharelado:</strong> 180 ECTS (3 anos)
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- China System -->
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow credit-system-card china-card">
+                                <h3 class="fs-4 fw-semibold mb-3 d-flex align-items-center" style="color: #fd7e14;">
+                                    <span class="flag-icon flag-china me-3"></span>
+                                    China: Horas de Contato
+                                </h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    <strong>1 crédito = 1 hora aula/semana</strong> (45 minutos, 18 semanas/semestre)
+                                </p>
+                                <div class="p-3 rounded" style="background-color: #fff3cd;">
+                                    <div class="text-center">
+                                        <div class="stat-highlight" style="color: #fd7e14;">18</div>
+                                        <div class="fs-6" style="color: #fd7e14;">horas por crédito/semestre</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Brazil System -->
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow credit-system-card brazil-card">
+                                <h3 class="fs-4 fw-semibold mb-3 d-flex align-items-center text-success">
+                                    <span class="flag-icon flag-brazil me-3"></span>
+                                    Brasil: Carga Horária
+                                </h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    <strong>1 crédito = 15 horas-aula</strong> (teóricas) ou 30 horas (práticas)
+                                </p>
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <div class="fw-medium text-success mb-2">Regulamentação</div>
+                                    <div class="fs-6 text-success">
+                                        • LDB Lei nº 9.394/1996<br>
+                                        • MEC/CNE estabelecem bases<br>
+                                        • 200 dias letivos mínimos
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comparison Table -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Comparação de Disciplinas: Horas-Aula no Brasil</h3>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead style="background-color: var(--sage-100);">
+                                    <tr>
+                                        <th style="color: var(--sage-800);">País</th>
+                                        <th style="color: var(--sage-800);">Instituição</th>
+                                        <th style="color: var(--sage-800);">Disciplina</th>
+                                        <th style="color: var(--sage-800);">Créditos Originais</th>
+                                        <th style="color: var(--sage-800);">Horas-Aula Brasil</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span class="flag-icon flag-usa"></span>EUA</td>
+                                        <td>Carnegie Mellon</td>
+                                        <td>Princípios da Computação</td>
+                                        <td>10 créditos US</td>
+                                        <td class="fw-bold text-danger">150 horas-aula</td>
+                                    </tr>
+                                    <tr style="background-color: var(--copper-50);">
+                                        <td><span class="flag-icon flag-usa"></span>EUA</td>
+                                        <td>MIT</td>
+                                        <td>Introdução ao PC em Python</td>
+                                        <td>12 créditos US</td>
+                                        <td class="fw-bold text-danger">180 horas-aula</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="flag-icon flag-usa"></span>EUA</td>
+                                        <td>Stanford</td>
+                                        <td>Programação Introdutória</td>
+                                        <td>5 créditos US</td>
+                                        <td class="fw-bold text-danger">75 horas-aula</td>
+                                    </tr>
+                                    <tr style="background-color: var(--copper-50);">
+                                        <td><span class="flag-icon flag-uk"></span>Reino Unido</td>
+                                        <td>Imperial College</td>
+                                        <td>Matemática Discreta</td>
+                                        <td>7,5 ECTS</td>
+                                        <td class="fw-bold text-primary">83 horas-aula</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="flag-icon flag-uk"></span>Reino Unido</td>
+                                        <td>Cardiff University</td>
+                                        <td>Pensamento Computacional</td>
+                                        <td>10 ECTS</td>
+                                        <td class="fw-bold text-primary">110 horas-aula</td>
+                                    </tr>
+                                    <tr style="background-color: var(--copper-50);">
+                                        <td><span class="flag-icon flag-eu"></span>Suíça</td>
+                                        <td>ETH Zurich</td>
+                                        <td>Introdução a Programação</td>
+                                        <td>8 ECTS</td>
+                                        <td class="fw-bold text-warning">88 horas-aula</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="flag-icon flag-eu"></span>Suíça</td>
+                                        <td>EHL Lausanne</td>
+                                        <td>Pensamento Computacional</td>
+                                        <td>3,5 ECTS</td>
+                                        <td class="fw-bold text-warning">38,5 horas-aula</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-3">
+                            <small class="text-muted">
+                                <strong>Fórmulas:</strong> EUA → Créditos × 15h | ECTS → ECTS × 11h | N/D = Não Disponível
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- USA Universities Section -->
+        <section id="eua" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <div class="country-header usa-theme">
+                        <h2 class="display-5 fw-bold mb-2" style="color: var(--sage-900);">3. Estados Unidos: Pioneiros em Metodologias DAAD</h2>
+                        <p class="fs-5 text-muted">Universidades americanas lideram a implementação de estratégias inovadoras para desenvolvimento do Pensamento Computacional</p>
+                    </div>
+
+                    <!-- Carnegie Mellon University -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-3 d-flex align-items-center" style="color: var(--sage-800);">
+                            <i class="fas fa-university me-3 text-danger"></i>
+                            Carnegie Mellon University
+                        </h3>
+                        <p class="fs-6 text-muted mb-4">
+                            Pioneira na promoção do Pensamento Computacional, com Jeannette Wing como figura central. Possui centro específico dedicado e abordagem PROBES (Problem-Oriented Business Explorations).
+                        </p>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Disciplinas Principais</h4>
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="p-3 bg-danger-subtle rounded">
+                                        <div class="fw-medium text-danger">Princípios da Computação</div>
+                                        <div class="fs-6 text-danger">10 créditos - Introduzida em 2005, foca no processo de computação</div>
+                                    </div>
+                                    <div class="p-3 bg-warning-subtle rounded">
+                                        <div class="fw-medium text-warning">Estrutura de Dados e Algoritmos</div>
+                                        <div class="fs-6 text-warning">12 créditos - Decomposição e depuração automatizada</div>
+                                    </div>
+                                    <div class="p-3 bg-info-subtle rounded">
+                                        <div class="fw-medium text-info">Codificação com VEX V5</div>
+                                        <div class="fs-6 text-info">Curso extensão - Contextos do mundo real</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3" style="color: var(--copper-800);">Metodologia PROBES</h4>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    Project Olympus utiliza desafios orientados a problemas reais de negócio, aplicando conceitos computacionais inovadores.
+                                </p>
+                                <div class="border-start border-4 border-success ps-3">
+                                    <div class="fw-medium text-success">Diferencial</div>
+                                    <div class="fs-6 text-muted">Transcende compreensão - enfatiza aplicação prática do Pensamento Computacional</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MIT -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background-color: var(--sage-50);">
+                        <h3 class="fs-3 fw-semibold mb-3 d-flex align-items-center" style="color: var(--sage-800);">
+                            <i class="fas fa-graduation-cap me-3 text-primary"></i>
+                            Massachusetts Institute of Technology (MIT)
+                        </h3>
+                        <p class="fs-6 text-muted mb-4">
+                            Reconhece o Pensamento Computacional como tipo distinto de raciocínio rigoroso de importante valor intelectual, recomendando requisito mínimo de computação para todos os estudantes.
+                        </p>
+                        <div class="row row-cols-1 row-cols-md-3 g-4">
+                            <div class="col">
+                                <div class="text-center p-3 bg-white rounded shadow-sm">
+                                    <div class="stat-highlight text-primary">6.100A</div>
+                                    <div class="fs-6 text-primary">Introdução ao PC em Python</div>
+                                    <small class="text-muted">12 créditos</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-white rounded shadow-sm">
+                                    <div class="stat-highlight text-success">6.100B</div>
+                                    <div class="fs-6 text-success">PC e Ciência de Dados</div>
+                                    <small class="text-muted">12 créditos</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-white rounded shadow-sm">
+                                    <i class="fas fa-python fs-3 mb-2 text-warning"></i>
+                                    <div class="fs-6 text-warning">Linguagem Python</div>
+                                    <small class="text-muted">Confiança independente da área</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stanford and Harvard -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow university-card" style="background-color: var(--copper-50);">
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--copper-800);">Stanford University</h3>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    Filosofia de aprendizagem por maestria com suporte pedagógico extensivo (LaIR Hours) e progressão estruturada.
+                                </p>
+                                <div class="progression-step mb-3">
+                                    <div class="fw-medium">Karel the Robot</div>
+                                    <div class="fs-6 text-muted">Decomposição e controle de fluxo</div>
+                                </div>
+                                <div class="progression-step mb-3">
+                                    <div class="fw-medium">CS106A - Python</div>
+                                    <div class="fs-6 text-muted">5 créditos - Construção de confiança</div>
+                                </div>
+                                <div class="progression-step">
+                                    <div class="fw-medium">CS106B - C++</div>
+                                    <div class="fs-6 text-muted">5 créditos - Estruturas avançadas</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow university-card bg-white">
+                                <h3 class="fs-5 fw-semibold mb-3 text-danger">Harvard University</h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Estratégia de progressão distintiva: Scratch → C → Python, priorizando compreensão fundamental dos mecanismos computacionais.
+                                </p>
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="d-flex align-items-center p-2 bg-light rounded">
+                                        <i class="fas fa-puzzle-piece me-2 text-success"></i>
+                                        <span class="fw-medium">Scratch</span>
+                                        <small class="ms-auto text-muted">Conceitos fundamentais</small>
+                                    </div>
+                                    <div class="d-flex align-items-center p-2 bg-light rounded">
+                                        <i class="fas fa-code me-2 text-warning"></i>
+                                        <span class="fw-medium">Linguagem C</span>
+                                        <small class="ms-auto text-muted">Baixo nível</small>
+                                    </div>
+                                    <div class="d-flex align-items-center p-2 bg-light rounded">
+                                        <i class="fas fa-python me-2 text-primary"></i>
+                                        <span class="fw-medium">Python</span>
+                                        <small class="ms-auto text-muted">Alto nível</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stanford Flow Chart -->
+                    <div class="figure-container">
+                        <h3 class="fs-3 fw-semibold mb-3 text-center" style="color: var(--sage-800);">Progressão Stanford CS106A → CS106B</h3>
+                        <img src="./images/stanford_evolution_flowchart.webp" alt="Estrutura do curso CS106A e CS106B da Stanford University">
+                        <div class="figure-caption">
+                            <strong>Figura:</strong> Síntese da estrutura do curso CS106A e CS106B da Stanford University. A figura ilustra a progressão do ensino de <strong>Pensamento Computacional</strong> desde conceitos básicos até estruturas de dados avançadas, destacando a transição de Karel → Python → C++ e a introdução da Notação Big O.
+                        </div>
+                    </div>
+
+                    <!-- Synthesis -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Síntese das Abordagens Pedagógicas Americanas</h3>
+                        <p class="fs-6 text-muted mb-4">
+                            A análise das metodologias revela um espectro diversificado de estratégias para o desenvolvimento do Pensamento Computacional, cada uma refletindo filosofias educacionais distintas mas complementares.
+                        </p>
+                        <div class="methodology-comparison">
+                            <div class="card p-3 h-100" style="background-color: var(--sage-50); border-left: 4px solid #dc3545;">
+                                <h4 class="fs-5 fw-semibold text-danger mb-2">Harvard</h4>
+                                <p class="fs-6 text-muted">Exposição inicial aos fundamentos computacionais por meio da progressão "do baixo para o alto"</p>
+                            </div>
+                            <div class="card p-3 h-100" style="background-color: var(--copper-50); border-left: 4px solid #0d6efd;">
+                                <h4 class="fs-5 fw-semibold text-primary mb-2">Stanford</h4>
+                                <p class="fs-6 text-muted">Aprendizagem por maestria, construção gradual de confiança por meio de Karel the Robot</p>
+                            </div>
+                            <div class="card p-3 h-100" style="background-color: var(--sage-100); border-left: 4px solid #ffc107;">
+                                <h4 class="fs-5 fw-semibold text-warning mb-2">Carnegie Mellon</h4>
+                                <p class="fs-6 text-muted">Integração de problemas autênticos do mundo real por meio do Project Olympus e PROBES</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- UK Universities Section -->
+        <section id="reino-unido" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <div class="country-header uk-theme">
+                        <h2 class="display-5 fw-bold mb-2" style="color: var(--sage-900);">4. Reino Unido: Ênfase em Fundamentos Teóricos</h2>
+                        <p class="fs-5 text-muted">Universidades britânicas focam em princípios fundamentais e design de programas com abordagem matemática rigorosa</p>
+                    </div>
+
+                    <!-- Cambridge University -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-3 d-flex align-items-center" style="color: var(--sage-800);">
+                            <i class="fas fa-university me-3 text-primary"></i>
+                            Cambridge University
+                        </h3>
+                        <p class="fs-6 text-muted mb-4">
+                            Estabelece abordagem distintiva por meio do instituto Cambridge Mathematics, integrando sistematicamente PC no currículo com ênfase em abstração, lógica e algoritmos.
+                        </p>
+                        <div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Cambridge Mathematics</h4>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    Iniciativa colaborativa da editora universitária com faculdades de educação e matemática, demonstrando visão integrada do PC.
+                                </p>
+                                <div class="border-start border-4 border-info ps-3">
+                                    <div class="fw-medium text-info">Relação Profunda</div>
+                                    <div class="fs-6 text-muted">Pensamento Computacional e pensamento funcional matemático</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3" style="color: var(--copper-800);">Computational Thinking Challenge</h4>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    Projeto de pesquisa e avaliação digital focado na avaliação de competências de PC para estudantes e educadores.
+                                </p>
+                                <div class="border-start border-4 border-success ps-3">
+                                    <div class="fw-medium text-success">Evidência</div>
+                                    <div class="fs-6 text-muted">Compromisso com pesquisa e avaliação sistemática</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <h5 class="fw-semibold mb-2 text-primary">Algoritmos 1 (14 ECTS)</h5>
+                                    <ul class="list-unstyled fs-6 text-primary">
+                                        <li>• Ordenação e análise de complexidade</li>
+                                        <li>• Divisão e conquista</li>
+                                        <li>• Programação dinâmica</li>
+                                        <li>• Estruturas de dados</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <h5 class="fw-semibold mb-2 text-success">Algoritmos 2 (14 ECTS)</h5>
+                                    <ul class="list-unstyled fs-6 text-success">
+                                        <li>• Grafos e busca de caminho</li>
+                                        <li>• Fluxo máximo e emparelhamentos</li>
+                                        <li>• Heaps avançados</li>
+                                        <li>• Análise amortizada</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cambridge Algorithm Comparison -->
+                    <div class="figure-container">
+                        <h3 class="fs-3 fw-semibold mb-3 text-center" style="color: var(--sage-800);">Progressão Algoritmos 1 → Algoritmos 2 (Cambridge)</h3>
+                        <img src="./images/cambridge_algorithms_comparison.webp" alt="Relação entre as disciplinas relacionadas a Raciocínio Algorítmico na Universidade de Cambridge">
+                        <div class="figure-caption">
+                            <strong>Figura:</strong> Comparação das estruturas curriculares das disciplinas de Algoritmos 1 e 2 da Cambridge University. A figura ilustra a progressão do ensino de <strong>Raciocínio Algorítmico</strong> desde conceitos básicos até estruturas de dados avançadas, destacando a relação entre os tópicos abordados nas duas disciplinas.
+                        </div>
+                    </div>
+
+                    <!-- Oxford and Imperial -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow university-card" style="background-color: var(--sage-50);">
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Oxford University</h3>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    Filosofia pedagógica que estimula PC desde estágios iniciais por meio do design de programas, oferecendo cursos interdisciplinares.
+                                </p>
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="d-flex align-items-center p-2 bg-white rounded">
+                                        <i class="fas fa-laptop-code me-2 text-primary"></i>
+                                        <span class="fs-6">Ciência da Computação</span>
+                                    </div>
+                                    <div class="d-flex align-items-center p-2 bg-white rounded">
+                                        <i class="fas fa-calculator me-2 text-success"></i>
+                                        <span class="fs-6">Matemática e CS</span>
+                                    </div>
+                                    <div class="d-flex align-items-center p-2 bg-white rounded">
+                                        <i class="fas fa-brain me-2 text-warning"></i>
+                                        <span class="fs-6">CS e Filosofia</span>
+                                    </div>
+                                </div>
+                                <div class="mt-3 p-3 bg-info-subtle rounded">
+                                    <strong class="text-info">Iniciativas:</strong>
+                                    <div class="fs-6 text-info">UK Bebras Challenge (100.000+ participantes), Oxford Computing Challenge</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow university-card" style="background-color: var(--copper-50);">
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--copper-800);">Imperial College London</h3>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    Abordagem fundamentada em princípios de engenharia, enfatizando aplicação prática em contextos de design de sistemas reais.
+                                </p>
+                                <div class="progression-step mb-2">
+                                    <div class="fw-medium">1º Ano</div>
+                                    <div class="fs-6 text-muted">Matemática Discreta (7,5 ECTS)<br>Grafos e Algoritmos (7,5 ECTS)</div>
+                                </div>
+                                <div class="progression-step">
+                                    <div class="fw-medium">2º Ano</div>
+                                    <div class="fs-6 text-muted">Projeto e Análise (7,5 ECTS)<br>Raciocínio Simbólico (6 ECTS)</div>
+                                </div>
+                                <div class="mt-3 p-3 bg-warning-subtle rounded">
+                                    <strong class="text-warning">Iniciativa I-X:</strong>
+                                    <div class="fs-6 text-warning">Aprendizado em contextos práticos e reais</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cardiff University -->
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-3 d-flex align-items-center" style="color: var(--sage-800);">
+                            <i class="fas fa-graduation-cap me-3 text-primary"></i>
+                            Cardiff University
+                        </h3>
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            Distingue-se por sua abordagem explícita e dedicada ao Pensamento Computacional, oferecendo disciplina específica no primeiro ano.
+                        </p>
+                        <div class="row row-cols-1 row-cols-md-3 g-3">
+                            <div class="col">
+                                <div class="text-center p-3 bg-white rounded shadow-sm">
+                                    <div class="stat-highlight text-primary">CM1101</div>
+                                    <div class="fs-6 text-primary">Pensamento Computacional</div>
+                                    <small class="text-muted">10 ECTS - 1º ano</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-white rounded shadow-sm">
+                                    <div class="stat-highlight text-success">CM1103</div>
+                                    <div class="fs-6 text-success">Resolução com Python</div>
+                                    <small class="text-muted">5 ECTS</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-white rounded shadow-sm">
+                                    <i class="fas fa-coffee fs-3 mb-2 text-warning"></i>
+                                    <div class="fs-6 text-warning">POO com Java</div>
+                                    <small class="text-muted">10 ECTS</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Europe Continental Section -->
+        <section id="europa" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <div class="country-header eu-theme">
+                        <h2 class="display-5 fw-bold mb-2" style="color: var(--sage-900);">5. Europa Continental: Aplicação Transdisciplinar</h2>
+                        <p class="fs-5 text-muted">Universidades europeias demonstram como o Pensamento Computacional transcende áreas tradicionais de computação</p>
+                    </div>
+
+                    <!-- European Context -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-light">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Contexto Europeu</h3>
+                        <p class="fs-6 text-muted mb-4">
+                            A Comissão Europeia, por meio do Plano de Ação para a Educação Digital 2021-2027, reforça a importância da educação em computação como prioridade para aprimorar habilidades digitais.
+                        </p>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="border-start border-4 border-primary ps-3">
+                                    <div class="fw-bold text-primary">Desde 2014</div>
+                                    <div class="fs-6 text-muted">Países europeus revisam currículos para introduzir conceitos básicos de CS</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="border-start border-4 border-success ps-3">
+                                    <div class="fw-bold text-success">Preparação</div>
+                                    <div class="fs-6 text-muted">Terreno para desenvolvimento de habilidades de PC</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ETH Zurich -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-3 d-flex align-items-center" style="color: var(--sage-800);">
+                            <i class="fas fa-university me-3 text-warning"></i>
+                            ETH Zurich (Suíça)
+                        </h3>
+                        <p class="fs-6 text-muted mb-4">
+                            Enfatiza que o Pensamento Computacional vai além da programação e envolve capacidades de abstração. Adota paradigma de sala de aula invertida com autoestudo online.
+                        </p>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Metodologia Flipped Classroom</h4>
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex align-items-center p-3 bg-warning-subtle rounded">
+                                        <i class="fas fa-video me-3 text-warning"></i>
+                                        <div>
+                                            <div class="fw-medium text-warning">Vídeos Online</div>
+                                            <div class="fs-6 text-warning">Aquisição de conhecimento</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center p-3 bg-info-subtle rounded">
+                                        <i class="fas fa-book me-3 text-info"></i>
+                                        <div>
+                                            <div class="fw-medium text-info">Leituras</div>
+                                            <div class="fs-6 text-info">Autoestudo direcionado</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center p-3 bg-success-subtle rounded">
+                                        <i class="fas fa-users me-3 text-success"></i>
+                                        <div>
+                                            <div class="fw-medium text-success">Sala de Aula</div>
+                                            <div class="fs-6 text-success">Consolidação supervisionada</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3" style="color: var(--copper-800);">Linguagens por Curso</h4>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    Tutoriais de programação para iniciantes com indicação de linguagem mais relevante por área.
+                                </p>
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="d-flex justify-content-between p-2 bg-light rounded">
+                                        <span class="fw-medium">Ciência da Computação</span>
+                                        <span class="text-primary">Python, C++, Java</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between p-2 bg-light rounded">
+                                        <span class="fw-medium">Ciências Farmacêuticas</span>
+                                        <span class="text-success">Python</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between p-2 bg-light rounded">
+                                        <span class="fw-medium">Biologia</span>
+                                        <span class="text-warning">Python</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between p-2 bg-light rounded">
+                                        <span class="fw-medium">Ciência de Alimentos</span>
+                                        <span class="text-info">Python</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 p-3 bg-primary-subtle rounded">
+                            <strong class="text-primary">Filosofia:</strong>
+                            <span class="text-primary">"Pensamento Computacional é mais do que programar um computador, significa pensar em abstrações"</span>
+                        </div>
+                    </div>
+
+                    <!-- EHL Lausanne -->
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-3 d-flex align-items-center" style="color: var(--sage-800);">
+                            <i class="fas fa-hotel me-3 text-warning"></i>
+                            École hôtelière de Lausanne (EHL)
+                        </h3>
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            Integra módulo específico de "Pensamento Computacional" em programa de Bacharelado em Administração Hoteleira, demonstrando aplicação transdisciplinar.
+                        </p>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Estrutura da Disciplina</h4>
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex justify-content-between align-items-center p-3 bg-white rounded shadow-sm">
+                                        <span class="fw-medium">Créditos ECTS</span>
+                                        <span class="stat-highlight text-warning" style="font-size: 1.5rem;">3,5</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center p-3 bg-white rounded shadow-sm">
+                                        <span class="fw-medium">Horas Totais</span>
+                                        <span class="stat-highlight text-info" style="font-size: 1.5rem;">88</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center p-3 bg-white rounded shadow-sm">
+                                        <span class="fw-medium">Contato Direto</span>
+                                        <span class="stat-highlight text-success" style="font-size: 1.5rem;">30</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center p-3 bg-white rounded shadow-sm">
+                                        <span class="fw-medium">Estudo Independente</span>
+                                        <span class="stat-highlight text-danger" style="font-size: 1.5rem;">58</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3" style="color: var(--copper-800);">Significado e Impacto</h4>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    Demonstra reconhecimento crescente de que competências de PC transcendem áreas tradicionais de ciência da computação.
+                                </p>
+                                <div class="border-start border-4 border-success ps-3 mb-3">
+                                    <div class="fw-medium text-success">Aplicação</div>
+                                    <div class="fs-6 text-muted">Base para resolução estruturada e análise de dados no setor hoteleiro</div>
+                                </div>
+                                <div class="border-start border-4 border-primary ps-3">
+                                    <div class="fw-medium text-primary">Flexibilidade ECTS</div>
+                                    <div class="fs-6 text-muted">Facilita abordagens baseadas em projetos e aprendizagem autônoma</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Synthesis Section -->
+        <section id="sintese" class="py-5" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">6. Síntese Comparativa das Abordagens Globais</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-4 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Padrões Identificados</h3>
+                        <p class="text-muted mb-4">
+                            A análise das metodologias adotadas pelas principais universidades internacionais revela um espectro diversificado de estratégias para o desenvolvimento do Pensamento Computacional, cada uma refletindo filosofias educacionais distintas mas complementares.
+                        </p>
+                        <div class="methodology-comparison">
+                            <div class="card p-3 h-100" style="background-color: var(--sage-50); border-left: 4px solid #dc3545;">
+                                <h4 class="fs-5 fw-semibold text-danger mb-2">Abordagem Americana</h4>
+                                <ul class="list-unstyled fs-6 text-muted">
+                                    <li class="mb-1">• Diversidade metodológica (Harvard, Stanford, CMU)</li>
+                                    <li class="mb-1">• Ênfase em problemas autênticos (PROBES)</li>
+                                    <li class="mb-1">• Progressão estruturada de linguagens</li>
+                                    <li>• Aprendizagem por maestria</li>
+                                </ul>
+                            </div>
+                            <div class="card p-3 h-100" style="background-color: var(--copper-50); border-left: 4px solid #0d6efd;">
+                                <h4 class="fs-5 fw-semibold text-primary mb-2">Abordagem Britânica</h4>
+                                <ul class="list-unstyled fs-6 text-muted">
+                                    <li class="mb-1">• Fundamentos teóricos sólidos</li>
+                                    <li class="mb-1">• Integração matemática rigorosa</li>
+                                    <li class="mb-1">• Progressão algorítmica estruturada</li>
+                                    <li>• Aplicação em múltiplos contextos</li>
+                                </ul>
+                            </div>
+                            <div class="card p-3 h-100" style="background-color: var(--sage-100); border-left: 4px solid #ffc107;">
+                                <h4 class="fs-5 fw-semibold text-warning mb-2">Abordagem Europeia</h4>
+                                <ul class="list-unstyled fs-6 text-muted">
+                                    <li class="mb-1">• Flexibilidade do sistema ECTS</li>
+                                    <li class="mb-1">• Aplicação transdisciplinar</li>
+                                    <li class="mb-1">• Sala de aula invertida</li>
+                                    <li>• Abstração como foco central</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow" style="background-color: var(--sage-50);">
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Elementos Convergentes</h3>
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="d-flex align-items-center p-2 rounded bg-white">
+                                        <i class="fas fa-check-circle me-3 text-success"></i>
+                                        <span>Ênfase na decomposição de problemas</span>
+                                    </div>
+                                    <div class="d-flex align-items-center p-2 rounded bg-white">
+                                        <i class="fas fa-check-circle me-3 text-success"></i>
+                                        <span>Desenvolvimento de habilidades de abstração</span>
+                                    </div>
+                                    <div class="d-flex align-items-center p-2 rounded bg-white">
+                                        <i class="fas fa-check-circle me-3 text-success"></i>
+                                        <span>Análise de eficiência e correção</span>
+                                    </div>
+                                    <div class="d-flex align-items-center p-2 rounded bg-white">
+                                        <i class="fas fa-check-circle me-3 text-success"></i>
+                                        <span>Competências de depuração</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow" style="background-color: var(--copper-50);">
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--copper-800);">Impacto dos Sistemas de Créditos</h3>
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="border-start border-4 border-danger ps-3">
+                                        <div class="fw-medium text-danger">Credit Hours (EUA)</div>
+                                        <div class="fs-6 text-muted">Favorece abordagens que demandam prática e reflexão</div>
+                                    </div>
+                                    <div class="border-start border-4 border-warning ps-3">
+                                        <div class="fw-medium text-warning">ECTS (Europa)</div>
+                                        <div class="fs-6 text-muted">Permite flexibilidade para atividades baseadas em projetos</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="d-inline-block p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-600), var(--copper-600));">
+                            <h4 class="fs-3 fw-bold mb-3 text-white">Conclusão Fundamental</h4>
+                            <p class="fs-5 mb-3 text-white">
+                                O <strong>Pensamento Computacional</strong> transcende a mera proficiência em programação, exigindo desenvolvimento de habilidades de <strong>decomposição, abstração e reconhecimento de padrões</strong>.
+                            </p>
+                            <div class="fs-6 text-white opacity-75">
+                                Universidades globais convergem na necessidade de capacitar alunos a pensar algoritmicamente e aplicar conceitos matemáticos para desenvolver soluções eficientes, justas e seguras
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Mobile TOC Toggle
+        function toggleTOC() {
+            const toc = document.getElementById('toc');
+            toc.classList.toggle('open');
+        }
+
+        // Close TOC when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const toc = document.getElementById('toc');
+            const hamburger = document.querySelector('button[onclick="toggleTOC()"]');
+            if (window.innerWidth <= 1024 && toc.classList.contains('open')) {
+                if (!toc.contains(event.target) && event.target !== hamburger && !hamburger.contains(event.target)) {
+                    toc.classList.remove('open');
+                }
+            }
+        });
+
+        // Smooth scrolling and active link highlighting
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            const sections = document.querySelectorAll('section[id]');
+            
+            // Add click handlers for smooth scrolling with offset
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        const offset = 80;
+                        const elementPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+                        window.scrollTo({
+                            top: elementPosition - offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                    if (window.innerWidth <= 1024) {
+                        document.getElementById('toc').classList.remove('open');
+                    }
+                });
+            });
+            
+            // Highlight active section in TOC
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        links.forEach(link => {
+                            link.classList.remove('bg-light', 'text-dark');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('bg-light', 'text-dark');
+                            }
+                        });
+                    }
+                });
+            }, {
+                rootMargin: '-80px 0px -70% 0px'
+            });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Fade in animation on scroll
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            fadeElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                fadeObserver.observe(el);
+            });
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            const toc = document.getElementById('toc');
+            if (window.innerWidth > 1024) {
+                toc.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html>
