@@ -48,26 +48,26 @@ const examples = {
     basico: {
         nome: "Básico - Sequência Simples",
         codigo: `flowchart TD
-    A[Início] --> B[Ler nome]
-    B --> C[Mostrar 'Olá, ' + nome]
+    A[Início] --> B[/Ler nome\\]
+    B --> C[\\Mostrar 'Olá, ' + nome/]
     C --> D[Fim]`
     },
     decisao: {
         nome: "Intermediário - Com Decisão",
         codigo: `flowchart TD
-    A[Início] --> B[Ler idade]
+    A[Início] --> B[/Ler idade\\]
     B --> C{idade >= 18}
-    C -->|Sim| D[Pode votar]
-    C -->|Não| E[Não pode votar]
+    C -->|Sim| D[\\Pode votar/]
+    C -->|Não| E[\\Não pode votar/]
     D --> F[Fim]
     E --> F`
     },
     calculadora: {
         nome: "Avançado - Calculadora",
         codigo: `flowchart TD
-    A[Início] --> B[Ler num1]
-    B --> C[Ler num2]
-    C --> D[Ler operacao]
+    A[Início] --> B[/Ler num1\\]
+    B --> C[/Ler num2\\]
+    C --> D[/Ler operacao\\]
     D --> E{operacao == '+'}
     E -->|Sim| F[resultado = num1 + num2]
     E -->|Não| G{operacao == '-'}
@@ -77,7 +77,7 @@ const examples = {
     I -->|Não| K{operacao == '/'}
     K -->|Sim| L[resultado = num1 / num2]
     K -->|Não| M[Operação inválida]
-    F --> N[Mostrar resultado]
+    F --> N[\\Mostrar resultado/]
     H --> N
     J --> N
     L --> N
