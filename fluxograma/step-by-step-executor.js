@@ -67,33 +67,33 @@ class StepByStepExecutor {
      * Executar próximo passo - COM DEBUG DETALHADO
      */
     async executeNextStep() {
-        this.log(`📢 === INICIANDO executeNextStep ===`);
-        this.log(`🔍 isRunning: ${this.isRunning}`);
-        this.log(`🔍 currentStepId: ${this.currentStepId}`);
+        this.log(`=== INICIANDO executeNextStep ===`);
+        this.log(`isRunning: ${this.isRunning}`);
+        this.log(`currentStepId: ${this.currentStepId}`);
         
         if (!this.isRunning || !this.currentStepId) {
-            this.log('❌ Execução finalizada ou não iniciada.');
+            this.log('Execução finalizada ou não iniciada.');
             this.isRunning = false;
             return false;
         }
 
         const currentNode = this.parseResult.nodeMap.get(this.currentStepId);
-        this.log(`🔍 Nó atual encontrado: ${currentNode ? 'SIM' : 'NÃO'}`);
+        this.log(`Nó atual encontrado: ${currentNode ? 'SIM' : 'NÃO'}`);
         
         if (!currentNode) {
-            this.log(`❌ Erro: Nó ${this.currentStepId} não encontrado.`);
-            this.log(`🔍 Nós disponíveis: ${Array.from(this.parseResult.nodeMap.keys()).join(', ')}`);
+            this.log(`Erro: Nó ${this.currentStepId} não encontrado.`);
+            this.log(`Nós disponíveis: ${Array.from(this.parseResult.nodeMap.keys()).join(', ')}`);
             return false;
         }
 
-        this.log(`📢 --- Executando: ${currentNode.text} (Tipo: ${currentNode.type}) ---`);
+        this.log(`--- Executando: ${currentNode.text} (Tipo: ${currentNode.type}) ---`);
         
         // Executar nó baseado no tipo
         const executionResult = await this.executeNode(currentNode);
-        this.log(`🔍 Resultado da execução: success=${executionResult.success}, decision=${executionResult.decision}`);
+        this.log(`Resultado da execução: success=${executionResult.success}, decision=${executionResult.decision}`);
         
         if (!executionResult.success) {
-            this.log('❌ Execução interrompida por erro.');
+            this.log('Execução interrompida por erro.');
             this.isRunning = false;
             return false;
         }
@@ -103,18 +103,18 @@ class StepByStepExecutor {
             stepId: this.currentStepId,
             variables: {...this.variables}
         });
-        this.log(`💾 Estado salvo. Pilha tem ${this.executionStack.length} itens`);
-        this.log(`📝 Variáveis atuais: ${JSON.stringify(this.variables)}`);
+        this.log(`Estado salvo. Pilha tem ${this.executionStack.length} itens`);
+        this.log(`Variáveis atuais: ${JSON.stringify(this.variables)}`);
 
         // Encontrar o próximo nó
-        this.log(`🔍 Chamando findNextNodeId(${this.currentStepId}, ${executionResult.decision})`);
+        this.log(`Chamando findNextNodeId(${this.currentStepId}, ${executionResult.decision})`);
         
         // Debug das conexões disponíveis
         const availableConnections = this.parseResult.connections.filter(c => c.from === this.currentStepId);
-        this.log(`🔗 Conexões disponíveis de ${this.currentStepId}: ${JSON.stringify(availableConnections)}`);
+        this.log(`Conexões disponíveis de ${this.currentStepId}: ${JSON.stringify(availableConnections)}`);
         
         const nextNodeId = this.findNextNodeId(this.currentStepId, executionResult.decision);
-        this.log(`🔍 Próximo nó retornado: ${nextNodeId}`);
+        this.log(`Próximo nó retornado: ${nextNodeId}`);
 
         if (!nextNodeId) {
             this.log('\n=== Execução finalizada ===');
@@ -124,12 +124,12 @@ class StepByStepExecutor {
         }
 
         // Avançar para o próximo nó
-        this.log(`🔍 Mudando currentStepId de ${this.currentStepId} para ${nextNodeId}`);
+        this.log(`Mudando currentStepId de ${this.currentStepId} para ${nextNodeId}`);
         this.currentStepId = nextNodeId;
 
         // Destacar próximo nó
         this.highlightCurrentNode();
-        this.log(`📢 === executeNextStep FINALIZADO COM SUCESSO ===`);
+        this.log(`=== executeNextStep FINALIZADO COM SUCESSO ===`);
         return true;
     }
 
@@ -143,7 +143,7 @@ class StepByStepExecutor {
             return;
         }
 
-        this.log('⚡ Executando em modo contínuo...');
+        this.log('Executando em modo contínuo...');
 
         // Loop principal de execução
         while (this.isRunning && this.currentStepId) {
@@ -155,7 +155,7 @@ class StepByStepExecutor {
                 const inputElement = document.querySelector(`input[data-variable="${varName}"]`);
                 
                 if (!inputElement || !inputElement.value.trim()) {
-                    this.log(`⏸️ Pausando: Necessário valor para "${currentNode.text}"`);
+                    this.log(`Pausando: Necessário valor para "${currentNode.text}"`);
                     this.highlightCurrentNode();
                     return; // Pausa e espera input do usuário
                 }
@@ -186,7 +186,7 @@ class StepByStepExecutor {
         this.currentStepId = previousState.stepId;
         this.variables = {...previousState.variables};
 
-        this.log(`↩️ Voltando para: ${this.currentStepId}`);
+        this.log(`Voltando para: ${this.currentStepId}`);
 
         // Destacar nó atual
         this.highlightCurrentNode();
@@ -237,22 +237,22 @@ class StepByStepExecutor {
      * Executar nó de entrada
      */
     executeInputNode(node) {
-        this.log(`📝 Executando nó de entrada: ${node.text}`);
+        this.log(`Executando nó de entrada: ${node.text}`);
         const varName = this.extractVariableName(node.text);
-        this.log(`🔍 Variável extraída: ${varName}`);
+        this.log(`Variável extraída: ${varName}`);
         
         const inputElement = document.querySelector(`input[data-variable="${varName}"]`);
         
         if (!inputElement) {
-            this.log(`❌ Erro: Campo de entrada para "${varName}" não encontrado`);
+            this.log(`Erro: Campo de entrada para "${varName}" não encontrado`);
             return { success: false };
         }
 
         const value = inputElement.value.trim();
-        this.log(`📝 Valor lido do campo: "${value}"`);
+        this.log(`Valor lido do campo: "${value}"`);
         
         if (!value) {
-            this.log(`⚠️ Aviso: Valor para "${varName}" não fornecido. Usando 0.`);
+            this.log(`Aviso: Valor para "${varName}" não fornecido. Usando 0.`);
             this.variables[varName] = 0;
         } else {
             // Tentar converter para número; se falhar, manter como string
@@ -263,7 +263,7 @@ class StepByStepExecutor {
                 this.variables[varName] = value; // Manter como string
             }
         }
-        this.log(`✅ Entrada processada: ${varName} = ${JSON.stringify(this.variables[varName])}`);
+        this.log(`Entrada processada: ${varName} = ${JSON.stringify(this.variables[varName])}`);
         return { success: true };
     }
 
@@ -271,7 +271,7 @@ class StepByStepExecutor {
      * Executar nó de processo
      */
     executeProcessNode(node) {
-        this.log(`⚙️ Processando: ${node.text}`);
+        this.log(`Processando: ${node.text}`);
         
         try {
             // Verificar se é uma atribuição (contém =)
@@ -288,14 +288,14 @@ class StepByStepExecutor {
                 const result = new Function(...Object.keys(context), `return ${evaluatedExpression}`)(...Object.values(context));
                 
                 this.variables[varName] = result;
-                this.log(`📝 ${varName} = ${result}`);
+                this.log(`${varName} = ${result}`);
             } else {
-                this.log(`📋 Processo executado: ${node.text}`);
+                this.log(`Processo executado: ${node.text}`);
             }
             
             return { success: true };
         } catch (error) {
-            this.log(`❌ Erro ao executar processo: ${error.message}`);
+            this.log(`Erro ao executar processo: ${error.message}`);
             return { success: false };
         }
     }
@@ -304,30 +304,30 @@ class StepByStepExecutor {
      * Executar nó de decisão
      */
     executeDecisionNode(node) {
-        this.log(`🔀 Executando nó de decisão: ${node.text}`);
+        this.log(`Executando nó de decisão: ${node.text}`);
         const condition = this.convertConditionToJS(node.text);
-        this.log(`🔄 Condição convertida: ${condition}`);
+        this.log(`Condição convertida: ${condition}`);
         
         try {
             // Substituir variáveis na condição
             const evaluatedCondition = this.substituteVariables(condition);
-            this.log(`🔄 Condição com variáveis substituídas: ${evaluatedCondition}`);
-            this.log(`📋 Variáveis disponíveis: ${JSON.stringify(this.variables)}`);
+            this.log(`Condição com variáveis substituídas: ${evaluatedCondition}`);
+            this.log(`Variáveis disponíveis: ${JSON.stringify(this.variables)}`);
             
             // Usar eval diretamente para melhor compatibilidade com strings
             const result = eval(evaluatedCondition);
             
             this.decisionResults[node.id] = result;
-            this.log(`🔀 Decisão: ${node.text}`);
-            this.log(`🔄 Condição avaliada: ${evaluatedCondition} = ${result ? 'Verdadeiro' : 'Falso'}`);
+            this.log(`Decisão: ${node.text}`);
+            this.log(`Condição avaliada: ${evaluatedCondition} = ${result ? 'Verdadeiro' : 'Falso'}`);
             
             return { success: true, decision: result };
         } catch (error) {
-            this.log(`❌ Erro ao avaliar condição: ${error.message}`);
-            this.log(`🔴 Condição original: "${node.text}"`);
-            this.log(`🔴 Condição convertida: "${condition}"`);
-            this.log(`🔴 Condição final: "${this.substituteVariables(condition)}"`);
-            this.log(`🔴 Variáveis: ${JSON.stringify(this.variables)}`);
+            this.log(`Erro ao avaliar condição: ${error.message}`);
+            this.log(`Condição original: "${node.text}"`);
+            this.log(`Condição convertida: "${condition}"`);
+            this.log(`Condição final: "${this.substituteVariables(condition)}"`);
+            this.log(`Variáveis: ${JSON.stringify(this.variables)}`);
             return { success: false };
         }
     }
@@ -336,16 +336,23 @@ class StepByStepExecutor {
      * Executar nó de saída
      */
     executeOutputNode(node) {
-        this.log(`📺 Executando nó de saída: ${node.text}`);
+        this.log(`Executando nó de saída: ${node.text}`);
         
-        // Extrair o conteúdo a ser exibido
-        const outputContent = node.text.replace(/^(mostrar|escrever|exibir|output|print)\s+/i, '').trim();
-        this.log(`📺 Conteúdo extraído: "${outputContent}"`);
+        // Extrair o conteúdo a ser exibido, removendo sintaxe de trapézio e prefixos
+        let outputContent = node.text
+            .replace(/^(mostrar|escrever|exibir|output|print)\s+/i, '')  // Remove prefixos
+            .replace(/^\[\\/, '')  // Remove [\  do início
+            .replace(/\/\]$/, '')  // Remove /] do final
+            .replace(/^\[\//, '')  // Remove [/  do início (entrada)
+            .replace(/\\\]$/, '')  // Remove \] do final (entrada)
+            .trim();
+        
+        this.log(`Conteúdo extraído: "${outputContent}"`);
         
         // Substituir variáveis e mostrar
         const output = this.substituteVariables(outputContent);
-        this.log(`📺 Conteúdo com variáveis: "${output}"`);
-        this.log(`📺 Saída: ${output}`);
+        this.log(`Conteúdo com variáveis: "${output}"`);
+        this.log(`Saída: ${output}`);
         
         // Armazenar resultado para exibição na interface
         this.lastOutputResult = output;
@@ -423,10 +430,20 @@ class StepByStepExecutor {
             
             for (const element of svgElements) {
                 if (element.id && element.id.includes(this.currentStepId)) {
-                    element.style.stroke = '#ff6b6b';
-                    element.style.strokeWidth = '3px';
-                    element.style.filter = 'drop-shadow(0 0 6px #ff6b6b)';
-                    element.classList.add('current-step-highlight');
+                    // Verificar se é o elemento do nó e não uma conexão
+                    // Elementos de nó geralmente têm classes como 'node' ou terminam com o ID exato
+                    const isNodeElement = element.classList.contains('node') || 
+                                        element.classList.contains('nodeLabel') ||
+                                        element.id === this.currentStepId ||
+                                        element.id.endsWith(`-${this.currentStepId}`) ||
+                                        (element.tagName === 'g' && !element.id.includes('edge') && !element.id.includes('link'));
+                    
+                    if (isNodeElement) {
+                        element.style.stroke = '#ff6b6b';
+                        element.style.strokeWidth = '3px';
+                        element.style.filter = 'drop-shadow(0 0 6px #ff6b6b)';
+                        element.classList.add('current-step-highlight');
+                    }
                 }
             }
         }
@@ -507,21 +524,21 @@ class StepByStepExecutor {
      * Converter condição do fluxograma para JavaScript - VERSÃO FINAL FUNCIONAL
      */
     convertConditionToJS(condition) {
-        this.log(`🔄 Convertendo condição original: "${condition}"`);
+        this.log(`Convertendo condição original: "${condition}"`);
         let jsCondition = condition.replace(/\?$/, '').trim();
-        this.log(`🔄 Após remover '?': "${jsCondition}"`);
+        this.log(`Após remover '?': "${jsCondition}"`);
 
         // ESTRATÉGIA SIMPLES E FUNCIONAL: verificar se já contém operadores válidos
         if (jsCondition.includes('>=')) {
-            this.log(`🔄 Operador >= encontrado, mantendo como está`);
+            this.log(`Operador >= encontrado, mantendo como está`);
         } else if (jsCondition.includes('<=')) {
-            this.log(`🔄 Operador <= encontrado, mantendo como está`);
+            this.log(`Operador <= encontrado, mantendo como está`);
         } else if (jsCondition.includes('!=')) {
             jsCondition = jsCondition.replace(/\s*!=\s*/g, ' !== ');
-            this.log(`🔄 Convertido != para !==`);
+            this.log(`Convertido != para !==`);
         } else if (jsCondition.includes('==')) {
             jsCondition = jsCondition.replace(/\s*==\s*/g, ' === ');
-            this.log(`🔄 Convertido == para ===`);
+            this.log(`Convertido == para ===`);
         }
         
         // Conectores lógicos
@@ -533,7 +550,7 @@ class StepByStepExecutor {
         // Normalizar espaços
         jsCondition = jsCondition.replace(/\s+/g, ' ').trim();
 
-        this.log(`🔄 Condição JavaScript final: "${jsCondition}"`);
+        this.log(`Condição JavaScript final: "${jsCondition}"`);
         return jsCondition;
     }
 
@@ -544,16 +561,16 @@ class StepByStepExecutor {
         const node = this.parseResult.nodeMap.get(currentId);
         const outgoing = this.parseResult.connections.filter(c => c.from === currentId);
 
-        this.log(`🔍 Buscando próximo nó de ${currentId}. Conexões encontradas: ${outgoing.length}`);
+        this.log(`Buscando próximo nó de ${currentId}. Conexões encontradas: ${outgoing.length}`);
 
         if (outgoing.length === 0) {
-            this.log(`⚠️ Nenhuma conexão de saída encontrada para ${currentId}`);
+            this.log(`Nenhuma conexão de saída encontrada para ${currentId}`);
             return null;
         }
 
         // Para nós de decisão
         if (node.type === 'decision') {
-            this.log(`🔀 Processando decisão. Resultado: ${decisionResult ? 'Verdadeiro' : 'Falso'}`);
+            this.log(`Processando decisão. Resultado: ${decisionResult ? 'Verdadeiro' : 'Falso'}`);
             
             // Procurar conexão apropriada baseada no resultado
             let targetConnection = null;
@@ -573,17 +590,17 @@ class StepByStepExecutor {
             }
             
             if (targetConnection) {
-                this.log(`✅ Seguindo caminho: ${targetConnection.label} → ${targetConnection.to}`);
+                this.log(`Seguindo caminho: ${targetConnection.label} → ${targetConnection.to}`);
                 return targetConnection.to;
             } else {
-                this.log(`⚠️ Caminho para decisão não encontrado. Usando primeira conexão disponível.`);
+                this.log(`Caminho para decisão não encontrado. Usando primeira conexão disponível.`);
                 return outgoing[0].to;
             }
         }
 
         // Para outros tipos de nós, usar a primeira conexão
         const nextId = outgoing[0].to;
-        this.log(`➡️ Próximo nó: ${nextId}`);
+        this.log(`Próximo nó: ${nextId}`);
         return nextId;
     }
 
@@ -603,13 +620,13 @@ class StepByStepExecutor {
         
         // Se é um nó de saída e temos resultado, mostrar o resultado
         if (currentNode.type === 'output' && this.lastOutputResult !== null) {
-            return `📺 Resultado: ${this.lastOutputResult}`;
+            return `Resultado: ${this.lastOutputResult}`;
         }
         
         // Se é um nó de fim e temos resultados de saída, mostrar o último resultado
         if (currentNode.type === 'end' && this.outputResults.length > 0) {
             const lastResult = this.outputResults[this.outputResults.length - 1];
-            return `🏁 Execução finalizada. Último resultado: ${lastResult.result}`;
+            return `Execução finalizada. Último resultado: ${lastResult.result}`;
         }
         
         return `Executando: ${currentNode.text}`;
