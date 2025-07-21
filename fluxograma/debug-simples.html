@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Simples</title>
+    
+    <!-- CodeMirror 5.x -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/javascript/javascript.min.js"></script>
+    
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        #container { border: 1px solid #ccc; height: 300px; margin: 20px 0; }
+        button { margin: 10px; padding: 10px; }
+        .log { background: #f0f0f0; padding: 10px; margin: 10px 0; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <h1>Debug Simples - CodeMirror</h1>
+    
+    <div id="logs" class="log">Logs aparecerão aqui...</div>
+    
+    <select id="example-select">
+        <option value="">Selecione um exemplo</option>
+        <option value="basico">Básico</option>
+        <option value="decisao">Decisão</option>
+    </select>
+    
+    <button onclick="testInit()">1. Testar Inicialização</button>
+    <button onclick="testSetValue()">2. Testar setValue</button>
+    <button onclick="testExample()">3. Testar Exemplo</button>
+    
+    <div id="container"></div>
+    
+    <script src="codemirror-simple.js"></script>
+    <script>
+        let editorInstance = null;
+        let logs = document.getElementById('logs');
+        
+        function log(msg) {
+            console.log(msg);
+            logs.innerHTML += msg + '<br>';
+        }
+        
+        const examples = {
+            basico: {
+                nome: "Básico",
+                codigo: `flowchart TD
+    A[Início] --> B[Processo]
+    B --> C[Fim]`
+            },
+            decisao: {
+                nome: "Decisão",
+                codigo: `flowchart TD
+    A[Início] --> B{Decisão}
+    B -->|Sim| C[Sim]
+    B -->|Não| D[Não]`
+            }
+        };
+        
+        async function testInit() {
+            log('🔧 Testando inicialização...');
+            
+            try {
+                if (!window.simpleMermaidEditor) {
+                    log('❌ SimpleMermaidEditor não encontrado');
+                    return;
+                }
+                
+                log('✅ SimpleMermaidEditor encontrado');
+                
+                const success = await window.simpleMermaidEditor.initialize('container');
+                log('🔍 Resultado initialize: ' + success);
+                
+                if (success) {
+                    editorInstance = window.simpleMermaidEditor;
+                    log('✅ Editor inicializado com sucesso');
+                    log('🔍 setValue exists: ' + (typeof editorInstance.setValue));
+                    log('🔍 getValue exists: ' + (typeof editorInstance.getValue));
+                } else {
+                    log('❌ Falha na inicialização');
+                }
+                
+            } catch (error) {
+                log('❌ Erro: ' + error.message);
+            }
+        }
+        
+        function testSetValue() {
+            if (!editorInstance) {
+                log('❌ Editor não inicializado');
+                return;
+            }
+            
+            try {
+                const testCode = 'flowchart TD\n    A[Teste] --> B[OK]';
+                editorInstance.setValue(testCode);
+                log('✅ setValue executado');
+                
+                const value = editorInstance.getValue();
+                log('🔍 getValue retornou: ' + value.length + ' caracteres');
+                
+            } catch (error) {
+                log('❌ Erro setValue: ' + error.message);
+            }
+        }
+        
+        function testExample() {
+            const select = document.getElementById('example-select');
+            const key = select.value;
+            
+            if (!key) {
+                log('⚠️ Nenhum exemplo selecionado');
+                return;
+            }
+            
+            if (!editorInstance) {
+                log('❌ Editor não inicializado');
+                return;
+            }
+            
+            const example = examples[key];
+            log('📋 Carregando: ' + example.nome);
+            
+            try {
+                editorInstance.setValue(example.codigo);
+                log('✅ Exemplo carregado com sucesso');
+            } catch (error) {
+                log('❌ Erro ao carregar exemplo: ' + error.message);
+            }
+        }
+        
+        // Auto-teste
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                log('🚀 Página carregada, testando...');
+                testInit();
+            }, 500);
+        });
+        
+        // Event listener no select
+        document.getElementById('example-select').addEventListener('change', function() {
+            log('🔧 Select mudou para: ' + this.value);
+            if (this.value) {
+                testExample();
+            }
+        });
+    </script>
+</body>
+</html>

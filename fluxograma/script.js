@@ -31,12 +31,11 @@ let currentZoom = 1.0;
 let isShowingSyntax = true; // Iniciar mostrando sintaxe
 let isInitializationComplete = false; // Controlar quando a inicialização terminou
 
-// Variáveis do CodeMirror
-let codeMirrorEnabled = false;
+// Variável do CodeMirror
 let editorInstance = null;
 
 // Elementos DOM - inicializados após DOM carregar
-let editor, diagramContainer, errorDisplay, executeAllBtn, executeStepBtn, resetBtn;
+let diagramContainer, errorDisplay, executeAllBtn, executeStepBtn, resetBtn;
 let nextStepBtn, prevStepBtn, stepControls, stepCounter, variableInputs, zoomInBtn, zoomOutBtn, fitDiagramBtn;
 let consoleOutput, currentStepInfo, exampleSelector, flipConsoleBtn, consoleTitle, syntaxHelp;
 
@@ -87,14 +86,14 @@ const examples = {
 };
 
 // Event listeners
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     console.log('🔧 DOM carregado, inicializando...');
     
     // Inicializar elementos DOM
     initializeElements();
     
     // Verificar se elementos essenciais existem
-    if (!editor || !diagramContainer || !consoleOutput) {
+    if (!diagramContainer || !consoleOutput) {
         console.error('❌ Elementos essenciais não encontrados');
         return;
     }
@@ -114,10 +113,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Configurar event listeners
     setupEventListeners();
     
-    // Tentar inicializar CodeMirror (com fallback para textarea)
-    initializeCodeMirrorEditor();
+    // Aguardar carregamento completo dos scripts
+    await new Promise(resolve => setTimeout(resolve, 500));
     
-    // Inicializar interface
+    // Inicializar CodeMirror e interface
+    await initializeCodeMirrorEditor();
     initializeInterface();
     
     // Marcar inicialização como completa
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Inicializar elementos DOM
 function initializeElements() {
-    editor = document.getElementById('mermaid-editor');
+    // editor removido - usando apenas CodeMirror
     diagramContainer = document.getElementById('mermaid-diagram');
     errorDisplay = document.getElementById('error-display');
     executeAllBtn = document.getElementById('execute-all');
@@ -169,12 +169,6 @@ function debounce(func, wait) {
 function setupEventListeners() {
     console.log('🔧 Configurando event listeners...');
     
-    if (editor && !codeMirrorEnabled) {
-        // Apenas configurar se CodeMirror não estiver ativo
-        // Usar debounce para evitar renderizações excessivas
-        editor.addEventListener('input', debounce(renderDiagram, 800));
-        console.log('✅ Event listener do editor (textarea) configurado');
-    }
     // Note: CodeMirror configura seus próprios listeners via handleEditorChange
     
     if (executeAllBtn) executeAllBtn.addEventListener('click', executeAll);
@@ -191,10 +185,13 @@ function setupEventListeners() {
     // Event listener para carregamento automático de exemplos
     if (exampleSelector) {
         exampleSelector.addEventListener('change', function() {
+            console.log('🔧 Seletor mudou para:', this.value);
             const selectedValue = this.value;
             if (selectedValue) {
+                console.log('📋 Carregando exemplo:', selectedValue);
                 loadExample(selectedValue);
             } else {
+                console.log('🔄 Resetando título');
                 resetarTitulo();
             }
         });
@@ -204,40 +201,39 @@ function setupEventListeners() {
     console.log('✅ Event listeners configurados');
 }
 
-// Inicializar CodeMirror (com fallback para textarea)
+// Inicializar CodeMirror
 async function initializeCodeMirrorEditor() {
-    console.log('🔧 Tentando inicializar syntax highlighting...');
-    
-    if (!window.simpleHighlighter || !window.initializeCodeMirror) {
-        console.log('⚠️ Highlighting não disponível, usando textarea padrão');
-        codeMirrorEnabled = false;
-        return;
-    }
+    console.log('🔧 Inicializando CodeMirror...');
     
     try {
-        // Aguardar inicialização do highlighting
-        const success = await window.initializeCodeMirror('mermaid-editor', handleEditorChange);
+        // Aguardar carregamento do SimpleMermaidEditor
+        if (!window.simpleMermaidEditor) {
+            throw new Error('SimpleMermaidEditor não carregado');
+        }
+        
+        // Inicializar editor
+        const success = await window.simpleMermaidEditor.initialize('codemirror-container');
         
         if (success) {
-            codeMirrorEnabled = true;
-            editorInstance = window.simpleHighlighter;
+            editorInstance = window.simpleMermaidEditor;
             
-            // Adicionar classe para CSS
-            const wrapper = document.querySelector('.editor-wrapper');
-            if (wrapper) {
-                wrapper.classList.add('highlighting-active');
-            }
+            console.log('🔍 editorInstance atribuído:', !!editorInstance);
+            console.log('🔍 editorInstance.setValue:', typeof editorInstance?.setValue);
+            console.log('🔍 editorInstance.getValue:', typeof editorInstance?.getValue);
+            console.log('🔍 editorInstance.editor:', !!editorInstance?.editor);
             
-            console.log('✅ Syntax highlighting ativado!');
-            logToConsole('🎨 Editor com syntax highlighting ativo');
+            // Configurar callback de mudança
+            editorInstance.editor.on('change', handleEditorChange);
+            
+            console.log('✅ CodeMirror inicializado!');
+            logToConsole('🎨 Editor CodeMirror ativo');
         } else {
-            codeMirrorEnabled = false;
-            console.log('⚠️ Fallback: Usando textarea original');
+            throw new Error('Falha na inicialização do CodeMirror');
         }
         
     } catch (error) {
-        console.warn('⚠️ Erro ao inicializar highlighting:', error);
-        codeMirrorEnabled = false;
+        console.error('❌ ERRO FATAL ao inicializar CodeMirror:', error);
+        throw error; // Sistema para se não conseguir carregar
     }
 }
 
@@ -255,31 +251,32 @@ function handleEditorChange(value) {
 
 // Funções de compatibilidade para obter e definir valor do editor
 function getEditorValue() {
-    if (editor) {
-        return editor.value;
+    if (editorInstance) {
+        return editorInstance.getValue();
     }
     return '';
 }
 
 function setEditorValue(value) {
-    if (editor) {
-        editor.value = value;
-        
-        // Atualizar highlighting se disponível
-        if (window.simpleHighlighter && window.simpleHighlighter.isReady()) {
-            window.simpleHighlighter.updateHighlighting();
+    console.log(`🔧 setEditorValue chamado com:`, value.substring(0, 50) + '...');
+    console.log(`🔍 editorInstance:`, !!editorInstance);
+    console.log(`🔍 editorInstance.setValue:`, typeof editorInstance?.setValue);
+    
+    if (editorInstance) {
+        try {
+            editorInstance.setValue(value);
+            console.log(`✅ setValue executado com sucesso`);
+        } catch (error) {
+            console.error(`❌ Erro ao executar setValue:`, error);
         }
-        
-        // Atualizar numeração se disponível
-        if (typeof updateLineNumbers === 'function') {
-            updateLineNumbers();
-        }
+    } else {
+        console.error(`❌ editorInstance não disponível`);
     }
 }
 
 function focusEditor() {
-    if (editor) {
-        editor.focus();
+    if (editorInstance) {
+        editorInstance.focus();
     }
 }
 
@@ -287,17 +284,10 @@ function focusEditor() {
 function initializeInterface() {
     console.log('🔧 Inicializando interface...');
     
-    // Mostrar mensagem de boas-vindas no editor
-    const welcomeMessage = 'Selecione um exemplo acima ou digite seu fluxograma aqui...\n\nUse a sintaxe Mermaid:\nflowchart TD\n    A[Início] --> B[Processo]\n    B --> C[Fim]';
-    
-    if (codeMirrorEnabled && editorInstance) {
-        // CodeMirror ativado
+    // Configurar editor inicial
+    if (editorInstance) {
         editorInstance.setValue('');
-        console.log('🎨 CodeMirror configurado com placeholder');
-    } else if (editor) {
-        // Textarea padrão
-        editor.value = '';
-        editor.placeholder = welcomeMessage;
+        console.log('🎨 CodeMirror configurado');
     }
     
     // Mostrar mensagem no diagrama
@@ -332,6 +322,8 @@ function initializeConsoleState() {
 // Carregar exemplo específico
 function loadExample(exampleKey) {
     console.log(`📋 Carregando exemplo: ${exampleKey}`);
+    console.log(`🔍 EditorInstance disponível:`, !!editorInstance);
+    console.log(`🔍 Examples disponíveis:`, Object.keys(examples));
     
     const example = examples[exampleKey];
     if (!example) {
@@ -339,11 +331,15 @@ function loadExample(exampleKey) {
         return;
     }
     
-    if (!editor) {
+    console.log(`📋 Exemplo encontrado:`, example.nome);
+    console.log(`📝 Código a ser carregado:`, example.codigo.substring(0, 100) + '...');
+    
+    if (!editorInstance) {
         console.error('Editor não disponível');
         return;
     }
     
+    console.log(`🔧 Chamando setEditorValue...`);
     // Carregar código no editor
     setEditorValue(example.codigo);
     
@@ -385,7 +381,7 @@ async function renderDiagram() {
         return;
     }
     
-    if (!editor || !diagramContainer) {
+    if (!editorInstance || !diagramContainer) {
         console.error('❌ Elementos necessários não disponíveis para renderização');
         return;
     }
@@ -912,160 +908,11 @@ function logToConsole(message) {
     };    
 })();
 
-// === NUMERAÇÃO DE LINHAS SIMPLES ===
+// === SEÇÃO REMOVIDA: NUMERAÇÃO DE LINHAS SIMPLES ===
+// CodeMirror já possui numeração nativa
 
-// Função para atualizar números de linha
-function updateLineNumbers() {
-    const editor = document.getElementById('mermaid-editor');
-    const lineNumbersElement = document.getElementById('line-numbers');
-    
-    if (!editor || !lineNumbersElement) return;
-    
-    const lines = editor.value.split('\n');
-    const lineCount = lines.length;
-    
-    let lineNumbersText = '';
-    for (let i = 1; i <= lineCount; i++) {
-        lineNumbersText += i + '\n';
-    }
-    
-    lineNumbersElement.textContent = lineNumbersText;
-}
+// === SEÇÃO REMOVIDA: SYNTAX HIGHLIGHTING ANTIGO ===
+// CodeMirror já possui highlighting nativo
 
-// Função para sincronizar scroll
-function syncEditorScroll() {
-    const editor = document.getElementById('mermaid-editor');
-    const lineNumbersElement = document.getElementById('line-numbers');
-    
-    if (!editor || !lineNumbersElement) return;
-    
-    // Sincronizar scroll vertical simples
-    lineNumbersElement.scrollTop = editor.scrollTop;
-}
-
-// Inicializar editor com numeração
-function initializeLineNumbers() {
-    const editor = document.getElementById('mermaid-editor');
-    const lineNumbersElement = document.getElementById('line-numbers');
-    
-    if (!editor || !lineNumbersElement) {
-        console.log('⚠️ Elementos de numeração não encontrados');
-        return;
-    }
-    
-    // Event listeners
-    editor.addEventListener('input', updateLineNumbers);
-    editor.addEventListener('scroll', syncEditorScroll);
-    
-    // Auto-indentação com Tab
-    editor.addEventListener('keydown', function(e) {
-        if (e.key === 'Tab') {
-            e.preventDefault();
-            const start = editor.selectionStart;
-            const end = editor.selectionEnd;
-            
-            // Inserir 4 espaços
-            const spaces = '    ';
-            editor.value = editor.value.substring(0, start) + spaces + editor.value.substring(end);
-            editor.selectionStart = editor.selectionEnd = start + spaces.length;
-            
-            updateLineNumbers();
-        }
-    });
-    
-    // Inicializar conteúdo
-    updateLineNumbers();
-    
-    console.log('✅ Numeração de linhas inicializada');
-}
-
-// Adicionar ao evento de carregamento
-document.addEventListener('DOMContentLoaded', function() {
-    // Aguardar um pouco para garantir que o DOM está pronto
-    setTimeout(initializeLineNumbers, 200);
-    
-    // ATIVAR SYNTAX HIGHLIGHTING COM DELAY MAIOR
-    setTimeout(() => {
-        console.log('🔧 Iniciando syntax highlighting...');
-        
-        if (window.simpleHighlighter) {
-            const editor = document.getElementById('mermaid-editor');
-            const wrapper = editor ? editor.parentElement : null;
-            
-            if (editor && wrapper) {
-                console.log('✅ Editor e wrapper encontrados');
-                
-                const success = window.simpleHighlighter.initialize('mermaid-editor');
-                
-                if (success) {
-                    console.log('🎨 Syntax highlighting ativado com sucesso!');
-                    
-                    // Verificar se highlighting está funcionando
-                    setTimeout(() => {
-                        const highlightLayer = wrapper.querySelector('.syntax-highlight-layer');
-                        if (highlightLayer) {
-                            console.log('✅ Camada de highlighting criada');
-                            
-                            // FORÇAR TESTE DE HIGHLIGHTING
-                            const testText = 'flowchart TD\n    A[Inicio] --> B[Teste]';
-                            editor.value = testText;
-                            window.simpleHighlighter.updateHighlighting();
-                            
-                            console.log('🧪 Texto de teste aplicado');
-                            console.log('HTML da camada:', highlightLayer.innerHTML.substring(0, 200));
-                            
-                        } else {
-                            console.warn('⚠️ Camada de highlighting não encontrada');
-                        }
-                    }, 100);
-                } else {
-                    console.error('❌ Falha ao ativar syntax highlighting');
-                }
-            } else {
-                console.error('❌ Editor ou wrapper não encontrados');
-            }
-        } else {
-            console.error('❌ SimpleHighlighter não encontrado');
-        }
-    }, 1000); // Aumentado para 1 segundo
-});
-
-// FUNÇÃO DE TESTE MANUAL
-window.testHighlightingForce = function() {
-    console.log('🔧 Forçando teste de highlighting...');
-    
-    const editor = document.getElementById('mermaid-editor');
-    const wrapper = editor.parentElement;
-    
-    // Destruir highlighting existente
-    if (window.simpleHighlighter && window.simpleHighlighter.isReady()) {
-        window.simpleHighlighter.destroy();
-    }
-    
-    // Recriar
-    setTimeout(() => {
-        const success = window.simpleHighlighter.initialize('mermaid-editor');
-        console.log('Reinicialização:', success ? 'SUCESSO' : 'FALHA');
-        
-        if (success) {
-            const testCode = `flowchart TD
-    A[Inicio] --> B[Ler num1]
-    B --> C{decisao}`;
-            
-            editor.value = testCode;
-            window.simpleHighlighter.updateHighlighting();
-            
-            const layer = wrapper.querySelector('.syntax-highlight-layer');
-            if (layer) {
-                console.log('🎨 Camada encontrada! HTML:', layer.innerHTML);
-                console.log('🎨 Estilos da camada:', {
-                    position: layer.style.position,
-                    zIndex: layer.style.zIndex,
-                    background: layer.style.background,
-                    left: layer.style.left,
-                    width: layer.style.width
-                });
-            }
-        }
-    }, 100);
-};
+// === SEÇÃO REMOVIDA: FUNÇÃO DE TESTE MANUAL ===
+// Não mais necessária com CodeMirror

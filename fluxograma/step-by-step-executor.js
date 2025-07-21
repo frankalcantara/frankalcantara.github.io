@@ -345,6 +345,8 @@ class StepByStepExecutor {
             .replace(/\/\]$/, '')  // Remove /] do final
             .replace(/^\[\//, '')  // Remove [/  do início (entrada)
             .replace(/\\\]$/, '')  // Remove \] do final (entrada)
+            .replace(/^\\/, '')   // Remove \ do início
+            .replace(/\/$/, '')   // Remove / do final
             .trim();
         
         this.log(`Conteúdo extraído: "${outputContent}"`);

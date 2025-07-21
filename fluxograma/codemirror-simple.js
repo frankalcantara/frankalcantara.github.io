@@ -25,13 +25,9 @@ class SimpleMermaidEditor {
             // Limpar container
             container.innerHTML = '';
             
-            // Criar textarea
+            // Criar textarea vazio
             const textarea = document.createElement('textarea');
-            textarea.value = `flowchart TD
-    A[Início] --> B{Decisão}
-    B -->|Sim| C[Processo]
-    B -->|Não| D[Fim]
-    %% Comentário de exemplo`;
+            textarea.value = '';
             container.appendChild(textarea);
 
             // Criar editor CodeMirror 5
@@ -219,11 +215,7 @@ if (!document.getElementById('mermaid-highlight-css')) {
 // Instância global
 window.simpleMermaidEditor = new SimpleMermaidEditor();
 
-// Inicializar quando a página carregar
-window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        window.simpleMermaidEditor.initialize('codemirror-container');
-    }, 1000); // Aumentar delay para garantir que CodeMirror carregue
-});
+// INICIALIZAÇÃO AUTOMÁTICA REMOVIDA
+// Agora é controlada pelo script.js
 
 console.log('🎨 Simple Mermaid Editor (v5) carregado');

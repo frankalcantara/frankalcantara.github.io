@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Trapézio - Fluxograma</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+</head>
+<body>
+    <h1>Teste da Sintaxe de Trapézio</h1>
+    
+    <div style="margin: 20px;">
+        <h3>Exemplo Básico com Trapézios:</h3>
+        <textarea id="editor" rows="10" cols="80" style="font-family: monospace;">flowchart TD
+    A[Início] --> B[/Ler nome\\]
+    B --> C[\\Mostrar 'Olá, ' + nome/]
+    C --> D[Fim]</textarea>
+        <br><br>
+        <button onclick="renderDiagram()">Renderizar Diagrama</button>
+        <button onclick="testParser()">Testar Parser</button>
+    </div>
+    
+    <div id="diagram" style="border: 1px solid #ccc; padding: 20px; margin: 20px;"></div>
+    
+    <div id="parser-output" style="background: #f0f0f0; padding: 20px; margin: 20px; font-family: monospace;">
+        <h3>Saída do Parser:</h3>
+        <pre id="parser-result"></pre>
+    </div>
+
+    <script src="unified-parser.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'default'
+        });
+
+        function renderDiagram() {
+            const code = document.getElementById('editor').value;
+            const diagramDiv = document.getElementById('diagram');
+            
+            mermaid.render('testDiagram', code).then((result) => {
+                diagramDiv.innerHTML = result.svg;
+                console.log('✅ Diagrama renderizado com sucesso');
+            }).catch((error) => {
+                diagramDiv.innerHTML = `<p style="color: red;">Erro na renderização: ${error.message}</p>`;
+                console.error('❌ Erro na renderização:', error);
+            });
+        }
+
+        function testParser() {
+            const code = document.getElementById('editor').value;
+            const resultDiv = document.getElementById('parser-result');
+            
+            try {
+                const parser = new UnifiedFlowchartParser();
+                const parseResult = parser.parse(code);
+                
+                const output = {
+                    'Nós encontrados': parseResult.nodes.map(n => ({ 
+                        id: n.id, 
+                        text: n.text, 
+                        type: n.type 
+                    })),
+                    'Conexões': parseResult.connections.map(c => ({ 
+                        from: c.from, 
+                        to: c.to, 
+                        label: c.label 
+                    })),
+                    'Variáveis detectadas': Array.from(parseResult.variables || [])
+                };
+                
+                resultDiv.textContent = JSON.stringify(output, null, 2);
+                console.log('✅ Parser executado com sucesso:', parseResult);
+                
+            } catch (error) {
+                resultDiv.textContent = `ERRO: ${error.message}\n\nStack: ${error.stack}`;
+                console.error('❌ Erro no parser:', error);
+            }
+        }
+
+        // Carregar exemplo automaticamente ao abrir a página
+        document.addEventListener('DOMContentLoaded', function() {
+            renderDiagram();
+            testParser();
+        });
+    </script>
+</body>
+</html>
