@@ -10,11 +10,11 @@
     left: 0 !important;
     right: 0 !important;
     width: 100% !important;
-    z-index: 1040 !important;
+    z-index: 9999 !important;
     height: 56px !important;
     max-height: 56px !important;
     min-height: 56px !important;
-    overflow: hidden !important;
+    overflow: visible !important;
 }
 
 /* Container da navbar - ALTURA LIMITADA */
@@ -157,6 +157,7 @@
     color: #212529 !important;
     text-align: left !important;
     list-style: none !important;
+    pointer-events: auto !important;
 }
 
 /* Única regra para mostrar dropdown */
@@ -432,11 +433,11 @@ header p {
 
 /* Controles - altura fixa e compacta */
 .controls {
-    padding: 12px;
+    padding: 8px 12px;
     border-top: 1px solid #e5e7eb;
     flex-shrink: 0;
     height: auto;
-    max-height: 150px;
+    max-height: 120px;
 }
 
 /* Seção de exemplos - altura FIXA */
@@ -477,8 +478,9 @@ header p {
 .button-group {
     display: flex;
     gap: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 8px;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 /* Botões */
@@ -606,6 +608,17 @@ header p {
     box-shadow: 0 4px 16px rgba(0,0,0,0.1);
     flex-shrink: 0;
     overflow: hidden;
+    transition: height 0.3s ease;
+}
+
+/* Estado padrão: colapsado - apenas header visível */
+.output-console.collapsed {
+    height: auto;
+    min-height: auto;
+}
+
+/* Estado expandido */
+.output-console.expanded {
     height: 25%;
     min-height: 180px;
 }
@@ -618,6 +631,8 @@ header p {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
+    user-select: none;
 }
 
 .console-header h3 {
@@ -626,8 +641,24 @@ header p {
     font-weight: 600;
 }
 
-/* Botão de flip */
-.btn-flip {
+.console-header-buttons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* Conteúdo do console colapsável */
+.console-content {
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.console-content.hidden {
+    display: none !important;
+}
+
+/* Botões do header */
+.btn-flip, .btn-toggle {
     background: rgba(255, 255, 255, 0.2);
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.3);
@@ -639,12 +670,23 @@ header p {
     align-items: center;
     justify-content: center;
     border-radius: 4px;
+    cursor: pointer;
 }
 
-.btn-flip:hover {
+.btn-flip:hover, .btn-toggle:hover {
     background: rgba(255, 255, 255, 0.3);
     border-color: rgba(255, 255, 255, 0.5);
     transform: translateY(-1px);
+}
+
+/* Animação do ícone toggle */
+.btn-toggle {
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.btn-toggle.rotated {
+    transform: rotate(180deg);
 }
 
 /* Console output - otimizado */
@@ -1169,19 +1211,43 @@ header p {
     box-shadow: none;
 }
 
-/* Controles de passo */
-.step-controls {
-    display: flex;
-    justify-content: center;
-    margin-top: 15px;
-}
+/* Controles de passo - removido: agora integrado no button-group */
 
 .step-info {
     font-weight: 600;
     color: #4f46e5;
-    padding: 8px 12px;
+    padding: 6px 10px;
     background: white;
     border-radius: 4px;
     border: 1px solid #e2e8f0;
+    font-size: 0.85rem;
+    height: fit-content;
+    white-space: nowrap;
+    margin: 0 8px;
+}
+
+/* Step display - sempre visível */
+.step-display {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    padding: 0 12px;
+    height: 41px;
+    min-width: 85px;
+    margin: 0 8px;
+    font-family: 'Courier New', monospace;
     font-size: 0.9rem;
+    font-weight: 600;
+    color: #64748b;
+    box-sizing: border-box;
+}
+
+.step-display.active {
+    background: white;
+    color: #4f46e5;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
 }

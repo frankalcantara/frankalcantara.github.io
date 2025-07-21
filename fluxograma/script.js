@@ -36,8 +36,8 @@ let editorInstance = null;
 
 // Elementos DOM - inicializados após DOM carregar
 let diagramContainer, errorDisplay, executeAllBtn, executeStepBtn, resetBtn;
-let nextStepBtn, prevStepBtn, stepControls, stepCounter, variableInputs, zoomInBtn, zoomOutBtn, fitDiagramBtn;
-let consoleOutput, currentStepInfo, exampleSelector, flipConsoleBtn, consoleTitle, syntaxHelp;
+let nextStepBtn, prevStepBtn, stepControls, stepCounter, stepDisplay, variableInputs, zoomInBtn, zoomOutBtn, fitDiagramBtn;
+let consoleOutput, currentStepInfo, exampleSelector, flipConsoleBtn, consoleTitle, syntaxHelp, toggleConsoleBtn;
 
 // Flag para evitar renderização múltipla
 let isRendering = false;
@@ -138,8 +138,8 @@ function initializeElements() {
     resetBtn = document.getElementById('reset');
     nextStepBtn = document.getElementById('next-step');
     prevStepBtn = document.getElementById('prev-step');
-    stepControls = document.getElementById('step-controls');
     stepCounter = document.getElementById('step-counter');
+    stepDisplay = document.getElementById('step-display');
     variableInputs = document.getElementById('input-variables');
     consoleOutput = document.getElementById('console-output');
     currentStepInfo = document.getElementById('current-step-info');
@@ -150,6 +150,7 @@ function initializeElements() {
     flipConsoleBtn = document.getElementById('flip-console');
     consoleTitle = document.getElementById('console-title');
     syntaxHelp = document.getElementById('syntax-help');
+    toggleConsoleBtn = document.getElementById('toggle-console');
 }
 
 // Função para debounce (evitar muitas renderizações)
@@ -181,6 +182,18 @@ function setupEventListeners() {
     if (zoomOutBtn) zoomOutBtn.addEventListener('click', zoomOut);
     if (fitDiagramBtn) fitDiagramBtn.addEventListener('click', fitDiagram);
     if (flipConsoleBtn) flipConsoleBtn.addEventListener('click', toggleConsoleView);
+    if (toggleConsoleBtn) toggleConsoleBtn.addEventListener('click', toggleConsoleCollapse);
+    
+    // Click no header também deve alternar o console
+    const consoleHeader = document.getElementById('console-header');
+    if (consoleHeader) {
+        consoleHeader.addEventListener('click', function(e) {
+            // Não alternar se clicou em um botão
+            if (!e.target.closest('button')) {
+                toggleConsoleCollapse();
+            }
+        });
+    }
     
     // Event listener para carregamento automático de exemplos
     if (exampleSelector) {
@@ -298,6 +311,9 @@ function initializeInterface() {
     // Garantir que o estado inicial seja sintaxe
     initializeConsoleState();
     
+    // Inicializar console como colapsado
+    initializeConsoleCollapse();
+    
     console.log('✅ Interface inicializada');
 }
 
@@ -316,6 +332,26 @@ function initializeConsoleState() {
         console.log('✅ Estado inicial definido: Sintaxe visível');
     } else {
         console.log('⚠️ Elementos do console flip não encontrados durante inicialização');
+    }
+}
+
+// Inicializar console como colapsado
+function initializeConsoleCollapse() {
+    const outputConsole = document.querySelector('.output-console');
+    const consoleContent = document.getElementById('console-content');
+    const toggleBtn = document.getElementById('toggle-console');
+    
+    if (outputConsole && consoleContent && toggleBtn) {
+        // Estado inicial: colapsado
+        consoleContent.style.display = 'none';
+        outputConsole.classList.add('collapsed');
+        toggleBtn.textContent = '▲';
+        toggleBtn.classList.add('rotated');
+        toggleBtn.title = 'Expandir Console';
+        
+        console.log('✅ Console inicializado como colapsado');
+    } else {
+        console.log('⚠️ Elementos do console collapse não encontrados durante inicialização');
     }
 }
 
@@ -698,7 +734,7 @@ function updateStepCounter() {
     if (stepCounter && stepExecutor && isStepByStepMode) {
         const current = stepExecutor.getCurrentStepNumber();
         const total = stepExecutor.getTotalSteps();
-        stepCounter.textContent = `Passo: ${current}/${total}`;
+        stepCounter.textContent = `${current}/${total}`;
     }
 }
 
@@ -722,7 +758,7 @@ function updateCurrentStepInfo() {
 
 // Configurar estados dos botões
 function setButtonStates(state) {
-    if (!executeAllBtn || !executeStepBtn || !resetBtn || !nextStepBtn || !prevStepBtn || !stepControls) return;
+    if (!executeAllBtn || !executeStepBtn || !resetBtn || !nextStepBtn || !prevStepBtn) return;
     
     switch (state) {
         case 'normal':
@@ -731,7 +767,10 @@ function setButtonStates(state) {
             resetBtn.disabled = false;
             nextStepBtn.disabled = true;
             prevStepBtn.disabled = true;
-            stepControls.style.display = 'none';
+            if (stepCounter && stepDisplay) {
+                stepCounter.textContent = '-/-';
+                stepDisplay.classList.remove('active');
+            }
             break;
             
         case 'step-by-step':
@@ -740,7 +779,9 @@ function setButtonStates(state) {
             resetBtn.disabled = false;
             nextStepBtn.disabled = false;
             prevStepBtn.disabled = false;
-            stepControls.style.display = 'flex';
+            if (stepCounter && stepDisplay) {
+                stepDisplay.classList.add('active');
+            }
             break;
     }
 }
@@ -849,6 +890,38 @@ function toggleConsoleView() {
         const timestamp = new Date().toLocaleTimeString();
         const sessionStart = `[${timestamp}] 🚀 === NOVA SESSÃO DE LOGS INICIADA ===\n`;
         consoleOutput.textContent = sessionStart;
+    }
+}
+
+// Toggle collapse/expand do console
+function toggleConsoleCollapse() {
+    const outputConsole = document.querySelector('.output-console');
+    const consoleContent = document.getElementById('console-content');
+    const toggleBtn = document.getElementById('toggle-console');
+    
+    if (!outputConsole || !consoleContent || !toggleBtn) {
+        console.error('Elementos do console não encontrados');
+        return;
+    }
+    
+    const isCollapsed = consoleContent.style.display === 'none';
+    
+    if (isCollapsed) {
+        // Expandir
+        consoleContent.style.display = 'block';
+        outputConsole.classList.remove('collapsed');
+        outputConsole.classList.add('expanded');
+        toggleBtn.textContent = '▼';
+        toggleBtn.classList.remove('rotated');
+        toggleBtn.title = 'Colapsar Console';
+    } else {
+        // Colapsar
+        consoleContent.style.display = 'none';
+        outputConsole.classList.remove('expanded');
+        outputConsole.classList.add('collapsed');
+        toggleBtn.textContent = '▲';
+        toggleBtn.classList.add('rotated');
+        toggleBtn.title = 'Expandir Console';
     }
 }
 

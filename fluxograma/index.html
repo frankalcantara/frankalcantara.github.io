@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/mode/overlay.min.js"></script>
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -113,19 +114,18 @@
                             <button id="execute-step" class="btn btn-icon btn-secondary" title="Executar Passo a Passo">
                                 👣
                             </button>
-                            <button id="reset" class="btn btn-icon btn-tertiary" title="Reiniciar">
-                                🔄
-                            </button>
+                            <div id="step-display" class="step-display">
+                                <span id="step-counter">-/-</span>
+                            </div>
                             <button id="prev-step" class="btn btn-icon" title="Passo Anterior">
                                 ⬅️
                             </button>
                             <button id="next-step" class="btn btn-icon" title="Próximo Passo">
                                 ➡️
                             </button>
-                        </div>
-                        
-                        <div class="step-controls" id="step-controls" style="display: none;">
-                            <span id="step-counter" class="step-info">Passo: 0/0</span>
+                            <button id="reset" class="btn btn-icon btn-tertiary" title="Reiniciar">
+                                🔄
+                            </button>
                         </div>
                     </div>
                     
@@ -158,14 +158,20 @@
 
             <!-- Painel inferior para o console de saída -->
             <div class="output-console">
-                <div class="console-header">
+                <div class="console-header" id="console-header" style="cursor: pointer;">
                     <h3 id="console-title">Sintaxe para Criação de Fluxogramas</h3>
-                    <button id="flip-console" class="btn btn-icon btn-flip" title="Voltar para o console de saída">
-                        💼
-                    </button>
+                    <div class="console-header-buttons">
+                        <button id="flip-console" class="btn btn-icon btn-flip" title="Voltar para o console de saída">
+                            💼
+                        </button>
+                        <button id="toggle-console" class="btn btn-icon btn-toggle" title="Expandir/Colapsar Console">
+                            ▼
+                        </button>
+                    </div>
                 </div>
-                <div id="console-output" style="display: none !important; background: #1f2937; color: #f9fafb; padding: 20px; font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.4; height: 200px; overflow-y: auto; white-space: pre-wrap; margin: 0;"></div>
-                <div id="syntax-help" style="display: block !important; background: white; color: #1f2937; padding: 20px; height: 200px; overflow-y: auto; font-size: 14px; line-height: 1.5;">
+                <div class="console-content" id="console-content" style="display: none;">
+                    <div id="console-output" style="display: none !important; background: #1f2937; color: #f9fafb; padding: 20px; font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.4; height: 200px; overflow-y: auto; white-space: pre-wrap; margin: 0;"></div>
+                    <div id="syntax-help" style="display: block !important; background: white; color: #1f2937; padding: 20px; height: 200px; overflow-y: auto; font-size: 14px; line-height: 1.5;">
                     <div class="syntax-section">
                         <h4>🔤 Estrutura Básica</h4>
                         <code>flowchart TD<br>
@@ -210,6 +216,7 @@
                             <li><strong>Fim:</strong> "Fim", "End"</li>
                         </ul>
                     </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -225,51 +232,20 @@
     <script src="codemirror-simple.js"></script>
     <script src="script.js"></script>
     
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    
     <!-- Script para garantir dropdowns funcionais -->
     <script>
         $(document).ready(function() {
-            console.log('Inicializando dropdowns...');
+            console.log('Inicializando dropdowns Bootstrap...');
             
-            // Forçar inicialização dos dropdowns
-            $('.dropdown-toggle').each(function() {
-                console.log('Inicializando dropdown:', this.id);
-            });
-            
-            // Implementar funcionalidade manual se Bootstrap falhar
-            $('.dropdown-toggle').on('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                console.log('Clique no dropdown:', this.id);
-                
-                // Fechar outros dropdowns
-                $('.dropdown-menu').removeClass('show');
-                
-                // Toggle no dropdown atual
-                const menu = $(this).next('.dropdown-menu');
-                menu.toggleClass('show');
-                
-                console.log('Menu dropdown toggled:', menu.hasClass('show'));
-            });
-            
-            // Fechar dropdown ao clicar fora
-            $(document).on('click', function(e) {
-                if (!$(e.target).closest('.dropdown').length) {
-                    $('.dropdown-menu').removeClass('show');
-                }
-            });
-            
-            // Verificar se Bootstrap está disponível
+            // Garantir que o Bootstrap está carregado e inicializar dropdowns
             if (typeof $.fn.dropdown !== 'undefined') {
-                console.log('Bootstrap dropdown disponível');
-                try {
-                    $('.dropdown-toggle').dropdown();
-                    console.log('Dropdowns inicializados via Bootstrap');
-                } catch(err) {
-                    console.error('Erro ao inicializar Bootstrap dropdown:', err);
-                }
+                $('.dropdown-toggle').dropdown();
+                console.log('✅ Dropdowns Bootstrap inicializados');
             } else {
-                console.log('Bootstrap dropdown não disponível - usando implementação manual');
+                console.error('❌ Bootstrap dropdown não encontrado');
             }
         });
     </script>
