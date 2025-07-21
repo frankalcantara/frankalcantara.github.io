@@ -507,7 +507,7 @@ header p {
 }
 
 .btn-secondary {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    background: linear-gradient(135deg, #f59e0b, #d97706);
     color: white;
 }
 
@@ -1211,6 +1211,15 @@ header p {
     box-shadow: none;
 }
 
+/* Estado "não iniciado" - todos os botões cinza */
+.btn.not-started {
+    background: linear-gradient(135deg, #9ca3af, #6b7280) !important;
+    color: white !important;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
 /* Controles de passo - removido: agora integrado no button-group */
 
 .step-info {
@@ -1250,4 +1259,15 @@ header p {
     color: #4f46e5;
     border-color: #4f46e5;
     box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+}
+
+.step-display.not-started {
+    background: #f3f4f6 !important;
+    color: #9ca3af !important;
+    border-color: #d1d5db !important;
+}
+
+/* Espaçamento especial para separar navegação dos controles */
+.btn-spaced {
+    margin-left: 35px !important;
 }

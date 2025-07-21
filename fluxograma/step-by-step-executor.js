@@ -376,45 +376,6 @@ class StepByStepExecutor {
         return { success: true }; // Sucesso, mas não haverá próximo nó
     }
 
-    /**
-     * Preparar campos de entrada de variáveis
-     */
-    prepareInputVariables() {
-        const inputNodes = this.parseResult.nodes.filter(node => node.type === 'input');
-        // O container correto é 'input-variables'
-        const variableInputsContainer = document.getElementById('input-variables');
-        
-        if (!variableInputsContainer) return;
-        
-        variableInputsContainer.innerHTML = '';
-        
-        if (inputNodes.length === 0) {
-            variableInputsContainer.innerHTML = '<p style="color: #6b7280; font-style: italic; text-align: center; padding: 20px;">Nenhuma variável de entrada necessária</p>';
-            return;
-        }
-
-        const title = document.createElement('h3');
-        title.textContent = 'Variáveis de Entrada';
-        variableInputsContainer.appendChild(title);
-
-        for (const node of inputNodes) {
-            const varName = this.extractVariableName(node.text);
-            
-            const inputDiv = document.createElement('div');
-            inputDiv.className = 'variable-input';
-            
-            inputDiv.innerHTML = `
-                <label for="var-${varName}">${node.text}:</label>
-                <input type="text" 
-                       id="var-${varName}" 
-                       data-variable="${varName}" 
-                       placeholder="Digite o valor"
-                       autocomplete="off">
-            `;
-            
-            variableInputsContainer.appendChild(inputDiv);
-        }
-    }
 
     /**
      * Destacar nó atual no diagrama

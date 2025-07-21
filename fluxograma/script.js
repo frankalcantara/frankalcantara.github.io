@@ -314,6 +314,9 @@ function initializeInterface() {
     // Inicializar console como colapsado
     initializeConsoleCollapse();
     
+    // Definir estado inicial como "não iniciado"
+    setButtonStates('not-started');
+    
     console.log('✅ Interface inicializada');
 }
 
@@ -437,6 +440,9 @@ async function renderDiagram() {
             resetarTitulo();
         }
         
+        // Voltar ao estado "não iniciado" quando não há código
+        setButtonStates('not-started');
+        
         return;
     }
     
@@ -482,6 +488,9 @@ async function renderDiagram() {
         hideError();
         console.log('✅ Renderização concluída com sucesso');
         
+        // Ativar botões quando há um fluxograma carregado
+        setButtonStates('normal');
+        
     } catch (error) {
         console.error('❌ Erro na renderização:', error);
         showError('Erro na sintaxe do fluxograma: ' + error.message);
@@ -513,6 +522,16 @@ function hideError() {
 }
 
 // Preparar campos de entrada de variáveis
+// Função para limpar texto da label
+function cleanLabelText(text) {
+    return text
+        .replace(/^[\\\/]+/, '')  // Remove barras do início
+        .replace(/[\\\/]+$/, '')  // Remove barras do final
+        .replace(/^\[/, '')       // Remove [ do início
+        .replace(/\]$/, '')       // Remove ] do final
+        .trim();
+}
+
 function prepareInputVariables() {
     if (!variableInputs || !parseResult) {
         console.log('⚠️ Não é possível preparar campos de entrada');
@@ -542,13 +561,14 @@ function prepareInputVariables() {
             return;
         }
         const varName = parser.extractVariableName(node.text);
+        const cleanLabel = cleanLabelText(node.text);
         logToConsole(`⚙️ Criando campo para variável: ${varName}`);
         
         const inputDiv = document.createElement('div');
         inputDiv.className = 'variable-input';
         
         inputDiv.innerHTML = `
-            <label for="var-${varName}">${node.text}:</label>
+            <label for="var-${varName}">${cleanLabel}:</label>
             <input type="text" 
                    id="var-${varName}" 
                    data-variable="${varName}" 
@@ -760,7 +780,35 @@ function updateCurrentStepInfo() {
 function setButtonStates(state) {
     if (!executeAllBtn || !executeStepBtn || !resetBtn || !nextStepBtn || !prevStepBtn) return;
     
+    // Remover todas as classes de estado primeiro
+    const allButtons = [executeAllBtn, executeStepBtn, resetBtn, nextStepBtn, prevStepBtn];
+    allButtons.forEach(btn => {
+        btn.classList.remove('not-started');
+    });
+    
+    if (stepDisplay) {
+        stepDisplay.classList.remove('not-started', 'active');
+    }
+    
     switch (state) {
+        case 'not-started':
+            executeAllBtn.disabled = true;
+            executeStepBtn.disabled = true;
+            resetBtn.disabled = true;
+            nextStepBtn.disabled = true;
+            prevStepBtn.disabled = true;
+            
+            // Aplicar visual cinza a todos os botões
+            allButtons.forEach(btn => {
+                btn.classList.add('not-started');
+            });
+            
+            if (stepCounter && stepDisplay) {
+                stepCounter.textContent = '-/-';
+                stepDisplay.classList.add('not-started');
+            }
+            break;
+            
         case 'normal':
             executeAllBtn.disabled = false;
             executeStepBtn.disabled = false;
@@ -769,7 +817,7 @@ function setButtonStates(state) {
             prevStepBtn.disabled = true;
             if (stepCounter && stepDisplay) {
                 stepCounter.textContent = '-/-';
-                stepDisplay.classList.remove('active');
+                // stepDisplay volta ao estado padrão (sem classes)
             }
             break;
             
