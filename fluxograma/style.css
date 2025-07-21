@@ -423,6 +423,7 @@ header p {
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
 }
 
+
 /* === CodeMirror Container === */
 #codemirror-container {
     flex: 1;
@@ -534,71 +535,97 @@ header p {
     font-size: 1rem;
 }
 
-/* Variáveis de entrada - altura limitada */
+/* Variáveis de entrada - otimizado */
 .input-variables {
-    padding: 12px;
+    padding: 16px;
     border-top: 1px solid #e5e7eb;
     flex-shrink: 0;
-    max-height: 200px;
+    max-height: 220px;
     overflow-y: auto;
+    background: #fafbfc;
 }
 
 .input-variables h3 {
-    font-size: 1rem;
-    margin-bottom: 8px;
-    color: #374151;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    color: #1f2937;
     font-weight: 600;
+    text-align: center;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e5e7eb;
 }
 
 .variable-input {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
-    padding: 4px 8px;
-    border-radius: 4px;
-    background-color: #f8fafc;
-    border: 1px solid transparent;
-    transition: all 0.2s ease;
+    gap: 12px;
+    margin-bottom: 0;
+    padding: 6px 12px;
+    border-radius: 0;
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-bottom: none;
+    transition: all 0.3s ease;
+    box-shadow: none;
+}
+
+.variable-input:last-child {
+    border-bottom: 1px solid #e5e7eb;
+    border-radius: 0 0 6px 6px;
+}
+
+.variable-input:first-of-type {
+    border-radius: 6px 6px 0 0;
 }
 
 .variable-input label {
-    font-size: 0.9rem;
-    font-weight: 500;
+    font-size: 0.95rem;
+    font-weight: 600;
     color: #374151;
-    min-width: 80px;
-    max-width: 120px;
-    flex-shrink: 0;
-    text-align: left;
-    margin-right: 4px;
+    text-align: right;
+    padding-right: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .variable-input input {
-    padding: 6px 10px;
-    border: 1px solid #d1d5db;
-    border-radius: 4px;
+    padding: 8px 12px;
+    border: 2px solid #d1d5db;
+    border-radius: 6px;
     font-size: 14px;
     outline: none;
-    transition: border-color 0.3s ease;
-    flex: 1;
-    min-width: 60px;
-    max-width: 150px;
+    transition: all 0.3s ease;
+    background: #f9fafb;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .variable-input input:focus {
     border-color: #4f46e5;
-    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    transform: translateY(-1px);
+}
+
+.variable-input input:hover {
+    border-color: #9ca3af;
+    background: white;
 }
 
 .variable-input:hover {
-    background-color: #f1f5f9;
-    border-color: #e2e8f0;
+    background-color: #f8fafc;
+    border-color: #d1d5db;
+    z-index: 1;
+    position: relative;
 }
 
 .variable-input:focus-within {
     background-color: #eff6ff;
-    border-color: #bfdbfe;
+    border-color: #4f46e5;
+    z-index: 2;
+    position: relative;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
 }
 
 /* Console de saída - otimizado */
