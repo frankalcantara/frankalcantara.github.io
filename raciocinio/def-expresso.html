@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Definição e Princípios da Metodologia DAAD</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --academic-50: #f8fafc;
+            --academic-100: #f1f5f9;
+            --academic-200: #e2e8f0;
+            --academic-300: #cbd5e1;
+            --academic-400: #94a3b8;
+            --academic-500: #64748b;
+            --academic-600: #475569;
+            --academic-700: #334155;
+            --academic-800: #1e293b;
+            --academic-900: #0f172a;
+            --primary-50: #eff6ff;
+            --primary-100: #dbeafe;
+            --primary-200: #bfdbfe;
+            --primary-300: #93c5fd;
+            --primary-400: #60a5fa;
+            --primary-500: #3b82f6;
+            --primary-600: #2563eb;
+            --primary-700: #1d4ed8;
+            --primary-800: #1e40af;
+            --primary-900: #1e3a8a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Text', serif;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(37, 99, 235, 0.85) 100%);
+        }
+
+        .toc-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 320px;
+            height: 100vh;
+            background: white;
+            border-right: 1px solid #e2e8f0;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .main-content {
+            margin-left: 320px;
+            min-height: 100vh;
+        }
+
+        @media (max-width: 1024px) {
+            .toc-fixed {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            .toc-fixed.open {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        .citation-link {
+            color: var(--primary-600);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted var(--primary-600);
+        }
+
+        .citation-link:hover {
+            color: var(--primary-700);
+            border-bottom-style: solid;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 1.5rem;
+            height: 60vh;
+        }
+
+        .bento-main {
+            grid-row: 1 / -1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-side-top,
+        .bento-side-bottom {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hover-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .hover-bg-light:hover {
+            background-color: var(--academic-50);
+        }
+
+        section[id] {
+            scroll-margin-top: 80px;
+        }
+
+        section {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 2rem;
+        }
+
+        .methodology-card {
+            min-height: 200px;
+            border-top: 4px solid;
+            transition: all 0.3s ease;
+        }
+
+        .methodology-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .decomposition-card { border-top-color: #10b981; }
+        .abstraction-card { border-top-color: #3b82f6; }
+        .algorithmization-card { border-top-color: #f59e0b; }
+        .debugging-card { border-top-color: #ef4444; }
+
+        .table-responsive-custom {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-custom {
+            margin-bottom: 0;
+        }
+
+        .table-custom thead {
+            background: linear-gradient(135deg, var(--academic-700), var(--primary-600));
+            color: white;
+        }
+
+        .table-custom tbody tr:nth-child(even) {
+            background-color: var(--academic-50);
+        }
+
+        .table-custom tbody tr:hover {
+            background-color: var(--primary-50);
+            transition: background-color 0.2s ease;
+        }
+
+        .stat-highlight {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .methodology-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .progression-step {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .progression-step::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary-600);
+        }
+
+        .progression-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1rem;
+            width: 2px;
+            height: calc(100% - 0.5rem);
+            background: var(--academic-300);
+        }
+
+        .callout-tip {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .callout-warning {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .callout-success {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-left: 4px solid #10b981;
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .figure-container {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+
+        .figure-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .figure-caption {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--academic-200);
+            font-style: italic;
+            color: var(--academic-700);
+            text-align: center;
+        }
+
+        .concept-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-left: 4px solid;
+            margin-bottom: 1.5rem;
+        }
+
+        .problem-card { border-left-color: #ef4444; }
+        .solution-card { border-left-color: #10b981; }
+        .methodology-card-inline { border-left-color: #3b82f6; }
+        .evaluation-card { border-left-color: #f59e0b; }
+
+        .icon-badge {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .badge-problem { background: #ef4444; }
+        .badge-solution { background: #10b981; }
+        .badge-methodology { background: #3b82f6; }
+        .badge-evaluation { background: #f59e0b; }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+            padding-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--primary-600);
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--primary-600);
+        }
+
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 1.5rem;
+            width: 2px;
+            height: calc(100% - 1rem);
+            background: var(--academic-300);
+        }
+
+        .definition-box {
+            background: linear-gradient(135deg, var(--academic-50), var(--primary-50));
+            border: 1px solid var(--academic-200);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .definition-title {
+            font-weight: 600;
+            color: var(--academic-800);
+            margin-bottom: 0.5rem;
+        }
+
+        .code-block {
+            background: var(--academic-800);
+            color: #f8fafc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .code-comment {
+            color: #94a3b8;
+        }
+
+        .code-keyword {
+            color: #60a5fa;
+        }
+
+        .code-string {
+            color: #10b981;
+        }
+
+        .code-number {
+            color: #f59e0b;
+        }
+
+        .phase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .phase-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-top: 4px solid;
+            transition: all 0.3s ease;
+        }
+
+        .phase-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .phase-decomposition { border-top-color: #10b981; }
+        .phase-abstraction { border-top-color: #3b82f6; }
+        .phase-algorithmization { border-top-color: #f59e0b; }
+        .phase-debugging { border-top-color: #ef4444; }
+
+        .phase-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .icon-decomposition { background: #10b981; }
+        .icon-abstraction { background: #3b82f6; }
+        .icon-algorithmization { background: #f59e0b; }
+        .icon-debugging { background: #ef4444; }
+
+        .flowchart-symbols {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .symbol-card {
+            background: white;
+            border: 1px solid var(--academic-200);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .symbol-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .symbol-visual {
+            width: 60px;
+            height: 40px;
+            margin: 0 auto 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .trace-table {
+            font-size: 0.85rem;
+            margin: 1.5rem 0;
+        }
+
+        .trace-table th {
+            background: var(--academic-700);
+            color: white;
+            text-align: center;
+            padding: 0.5rem;
+        }
+
+        .trace-table td {
+            text-align: center;
+            padding: 0.4rem;
+            border: 1px solid var(--academic-200);
+        }
+
+        .trace-table tbody tr:nth-child(even) {
+            background-color: var(--academic-50);
+        }
+
+        .innovation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .innovation-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--primary-600);
+        }
+
+        .comparison-table {
+            font-size: 0.9rem;
+        }
+
+        .comparison-table th {
+            background: var(--academic-100);
+            color: var(--academic-800);
+            font-weight: 600;
+            padding: 0.75rem;
+        }
+
+        .comparison-table td {
+            padding: 0.75rem;
+            vertical-align: top;
+        }
+
+        .vs-badge {
+            background: var(--primary-600);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Table of Contents -->
+    <nav class="toc-fixed" id="toc">
+        <div class="mb-4">
+            <h3 class="fs-5 fw-bold text-dark mb-3">Sumário</h3>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="#introducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">1. Introdução</a></li>
+                <li class="mb-2"><a href="#metodologias-semelhantes" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">2. Metodologias Semelhantes</a></li>
+                <li class="mb-2"><a href="#inovacoes" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Inovações do DAAD</a></li>
+                <li class="mb-2"><a href="#estrutura-fases" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4. Estrutura e Fases</a></li>
+                <li class="mb-2"><a href="#decomposicao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5. Decomposição</a></li>
+                <li class="mb-2"><a href="#abstracao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6. Abstração</a></li>
+                <li class="mb-2"><a href="#algoritmizacao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">7. Algoritmização</a></li>
+                <li class="mb-2"><a href="#depuracao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">8. Depuração</a></li>
+                <li class="mb-2"><a href="#ferramentas" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">9. Ferramentas</a></li>
+            </ul>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Fases DAAD</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 rounded" style="background-color: #dcfce7;"><i class="fas fa-puzzle-piece me-2 text-success"></i>Decomposição</div>
+                <div class="p-2 rounded" style="background-color: #dbeafe;"><i class="fas fa-eye me-2 text-primary"></i>Abstração</div>
+                <div class="p-2 rounded" style="background-color: #fef3c7;"><i class="fas fa-cogs me-2 text-warning"></i>Algoritmização</div>
+                <div class="p-2 rounded" style="background-color: #fee2e2;"><i class="fas fa-bug me-2 text-danger"></i>Depuração</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile TOC Toggle -->
+    <button class="d-lg-none position-fixed top-0 start-0 m-3 z-3 bg-white p-2 rounded shadow" onclick="toggleTOC()">
+        <i class="fas fa-bars text-dark"></i>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="min-vh-100" style="background: linear-gradient(to bottom right, var(--academic-100), var(--primary-100));">
+            <div class="container py-5">
+                <div class="bento-grid mb-5">
+                    <div class="bento-main bg-white rounded-3 shadow">
+                        <div class="hero-gradient h-100 d-flex align-items-center justify-content-center position-relative">
+                            <div class="position-absolute w-100 h-100 opacity-25" style="background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\"><defs><pattern id=\"circuit\" x=\"0\" y=\"0\" width=\"60\" height=\"60\" patternUnits=\"userSpaceOnUse\"><circle cx=\"10\" cy=\"10\" r=\"2\" fill=\"%23ffffff\" opacity=\"0.3\"/><circle cx=\"50\" cy=\"30\" r=\"2\" fill=\"%23ffffff\" opacity=\"0.2\"/><path d=\"M10,10 Q30,5 50,30 Q35,45 10,40 Z\" stroke=\"%23ffffff\" stroke-width=\"1\" opacity=\"0.15\" fill=\"none\"/></pattern></defs><rect width=\"100%25\" height=\"100%25\" fill=\"url(%23circuit)\"/></svg>') center/cover;"></div>
+                            <div class="position-relative z-1 text-center text-white p-4">
+                                <h1 class="display-4 fw-bold mb-4">
+                                    <em class="d-block" style="color: var(--primary-200);">Definição e Princípios</em>
+                                    <span class="d-block">Metodologia DAAD</span>
+                                </h1>
+                                <p class="fs-4 text-light fw-light mx-auto" style="max-width: 32rem;">
+                                    Framework Pedagógico para o Raciocínio Algorítmico
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-side-top bg-white rounded-3 p-4 shadow">
+                        <div class="text-center">
+                            <div class="stat-highlight text-success">D</div>
+                            <div class="fs-6 text-muted">Decomposição</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: var(--primary-50);">
+                        <div class="text-center">
+                            <div class="stat-highlight text-primary">A</div>
+                            <div class="fs-6 text-muted">Abstração</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: #fef3c7;">
+                        <div class="text-center">
+                            <div class="stat-highlight text-warning">A</div>
+                            <div class="fs-6 text-muted">Algoritmização</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: #fee2e2;">
+                        <div class="text-center">
+                            <div class="stat-highlight text-danger">D</div>
+                            <div class="fs-6 text-muted">Depuração</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section id="introducao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--academic-900);">1. Fundamentos da Metodologia DAAD</h2>
+                    
+                    <p class="fs-5 text-muted mb-4">
+                        O <strong>Pensamento Computacional</strong>, incluindo os elementos da metodologia <strong>DAAD</strong>, é considerado uma habilidade básica e estruturante para o desenvolvimento científico, tecnológico e econômico no século XXI.
+                    </p>
+
+                    <div class="definition-box">
+                        <div class="definition-title">Metodologia DAAD</div>
+                        <p class="mb-3">
+                            <strong>DAAD</strong> é o acrônimo de <strong>D</strong>ecomposição, <strong>A</strong>bstração, <strong>A</strong>lgoritmização e <strong>D</strong>epuração. Estrutura-se como uma aplicação pedagógica direta dos componentes fundamentais do Pensamento Computacional, adaptados para a realidade do ensino de Raciocínio Algorítmico nos cursos de graduação no Brasil.
+                        </p>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card methodology-card-inline">
+                                <div class="d-flex align-items-start">
+                                    <div class="icon-badge badge-methodology me-3">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="fs-4 fw-semibold mb-3" style="color: var(--academic-800);">Relevância Ampla</h3>
+                                        <p class="fs-6 mb-3" style="color: var(--academic-700);">
+                                            Sua relevância se estende além das fronteiras da ciência da computação, sendo essencial para a resolução de problemas em diversas áreas STEM e No-STEM.
+                                        </p>
+                                        <div class="border-start border-4 border-primary ps-3">
+                                            <div class="fw-bold text-primary">Habilidades Intrínsecas</div>
+                                            <div class="fs-6 text-muted">Pensar abstratamente, operar em múltiplos níveis, usar iteração e depuração</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card solution-card">
+                                <div class="d-flex align-items-start">
+                                    <div class="icon-badge badge-solution me-3">
+                                        <i class="fas fa-brain"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="fs-4 fw-semibold mb-3" style="color: var(--academic-800);">Raciocínio Algorítmico</h3>
+                                        <p class="fs-6 mb-3" style="color: var(--academic-700);">
+                                            É uma habilidade fundamental e um componente central do Pensamento Computacional. Implica a capacidade de compreender, testar, aprimorar ou projetar um algoritmo.
+                                        </p>
+                                        <div class="border-start border-4 border-success ps-3">
+                                            <div class="fw-bold text-success">Orientação Mental</div>
+                                            <div class="fs-6 text-muted">Processo de pensamento que alicerça a aplicação da metodologia DAAD</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <blockquote class="border-start border-4 border-primary p-4 bg-light rounded-end mb-5">
+                        <p class="text-muted fs-5 fst-italic" style="color: var(--academic-800);">
+                            "Esta sinergia, entre Pensamento Computacional e Raciocínio Algorítmico posiciona a metodologia DAAD como uma estrutura operacional para consolidar a teoria em práticas educacionais tangíveis."
+                        </p>
+                        <footer class="blockquote-footer mt-2">Mantendo a essência holística de Wing (2006) e Lehmann (2023)</footer>
+                    </blockquote>
+
+                    <div class="phase-grid">
+                        <div class="phase-card phase-decomposition">
+                            <div class="phase-icon icon-decomposition">
+                                <i class="fas fa-puzzle-piece"></i>
+                            </div>
+                            <h4 class="text-center fw-bold text-success">Decomposição</h4>
+                            <p class="text-center text-muted">Fragmenta desafios complexos em subproblemas gerenciáveis e descritíveis</p>
+                        </div>
+                        <div class="phase-card phase-abstraction">
+                            <div class="phase-icon icon-abstraction">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h4 class="text-center fw-bold text-primary">Abstração</h4>
+                            <p class="text-center text-muted">Filtra detalhes irrelevantes para isolar padrões essenciais</p>
+                        </div>
+                        <div class="phase-card phase-algorithmization">
+                            <div class="phase-icon icon-algorithmization">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <h4 class="text-center fw-bold text-warning">Algoritmização</h4>
+                            <p class="text-center text-muted">Materializa o design algorítmico em sequências executáveis</p>
+                        </div>
+                        <div class="phase-card phase-debugging">
+                            <div class="phase-icon icon-debugging">
+                                <i class="fas fa-bug"></i>
+                            </div>
+                            <h4 class="text-center fw-bold text-danger">Depuração</h4>
+                            <p class="text-center text-muted">Substitui modelagem através de refinamento iterativo e validação</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Similar Methodologies Section -->
+        <section id="metodologias-semelhantes" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--academic-900);">2. Metodologias Semelhantes ao DAAD</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        A metodologia DAAD se distingue de outras abordagens pedagógicas de Pensamento Computacional por sua ênfase na <strong>Depuração</strong> como etapa essencial do processo de aprendizado.
+                    </p>
+
+                    <div class="table-responsive-custom">
+                        <table class="table table-custom comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Metodologia</th>
+                                    <th>Instituição/Referência</th>
+                                    <th>Componentes-Chave</th>
+                                    <th>Diferenças para o DAAD</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="fw-bold">Quatro Pilares do PC</td>
+                                    <td>University of York</td>
+                                    <td>
+                                        <div class="d-flex flex-column gap-1">
+                                            <div>1. Decomposição</div>
+                                            <div>2. Reconhecimento de padrões</div>
+                                            <div>3. Abstração</div>
+                                            <div>4. Pensamento algorítmico</div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="vs-badge">VS</span>
+                                        <div class="mt-2">
+                                            <div>• Substitui <em>Decomposição</em> por <em>Reconhecimento de padrões</em></div>
+                                            <div>• Não inclui refinamento iterativo após implementação</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="background-color: var(--academic-50);">
+                                    <td class="fw-bold">Atividades Desplugadas</td>
+                                    <td>Brackmann (2017)</td>
+                                    <td>
+                                        <div class="d-flex flex-column gap-1">
+                                            <div>• Problemas físicos (quebra-cabeças)</div>
+                                            <div>• Modelagem conceitual sem código</div>
+                                            <div>• Ênfase em abstração</div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="vs-badge">VS</span>
+                                        <div class="mt-2">
+                                            <div>• Foco em <em>hardware</em> vs. <em>solução algorítmica</em></div>
+                                            <div>• Menos estruturada em etapas sequenciais</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">Metodologia de Wing</td>
+                                    <td>Wing (2006)</td>
+                                    <td>
+                                        <div class="d-flex flex-column gap-1">
+                                            <div>• Decomposição</div>
+                                            <div>• Abstração</div>
+                                            <div>• Design algorítmico</div>
+                                            <div>• Generalização</div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="vs-badge">VS</span>
+                                        <div class="mt-2">
+                                            <div>• Não formaliza <em>Depuração</em> como pilar independente</div>
+                                            <div>• <em>Generalização</em> ≠ <em>Validação prática iterativa</em></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="callout-warning">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-exclamation-triangle me-2 text-warning"></i>
+                            <strong>Lacuna Identificada:</strong>
+                        </div>
+                        <p class="mt-2 mb-0">
+                            A principal limitação dos modelos tradicionais é a ausência de mecanismos formalizados de <strong>depuração e validação</strong>. Eles concentram-se na fase de concepção em vez do refinamento prático, uma lacuna que a metodologia DAAD supre.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DAAD Innovations Section -->
+        <section id="inovacoes" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--academic-900);">3. Inovações do DAAD</h2>
+
+                    <div class="callout-success">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-star me-2 text-success"></i>
+                            <strong>Diferencial Sine Qua Non:</strong>
+                        </div>
+                        <p class="mt-2 mb-0">
+                            A integração explícita de <strong>Depuração</strong> como uma fase dedicada à eliminação e correção de problemas, mas também à validação de soluções.
+                        </p>
+                    </div>
+
+                    <div class="innovation-grid">
+                        <div class="innovation-card">
+                            <h3 class="fs-4 fw-semibold mb-3 text-primary">Abstração Dinâmica vs. Estática</h3>
+                            <p class="fs-6 mb-3 text-muted">
+                                Na Abordagem de York (2020), o reconhecimento de padrões é estático, enquanto no DAAD a abstração é dinâmica, preparando para depuração.
+                            </p>
+                            <div class="border-start border-4 border-primary ps-3">
+                                <div class="fw-bold text-primary">Vantagem</div>
+                                <div class="fs-6 text-muted">Abstração vinculada à rastreabilidade durante validação</div>
+                            </div>
+                        </div>
+
+                        <div class="innovation-card">
+                            <h3 class="fs-4 fw-semibold mb-3 text-success">Generalização Processual</h3>
+                            <p class="fs-6 mb-3 text-muted">
+                                O modelo original de Wing (2006) trata generalização como resultado, enquanto no DAAD a Depuração torna-a processual através de iteração.
+                            </p>
+                            <div class="border-start border-4 border-success ps-3">
+                                <div class="fw-bold text-success">Impacto</div>
+                                <div class="fs-6 text-muted">Processo contínuo de refinamento e melhoria</div>
+                            </div>
+                        </div>
+
+                        <div class="innovation-card">
+                            <h3 class="fs-4 fw-semibold mb-3 text-warning">Sequência Pedagógica Otimizada</h3>
+                            <p class="fs-6 mb-3 text-muted">
+                                Ordenação lógica: <strong>Problema → Abstração → Algoritmo → Validação</strong>, contrastando com modelos fragmentados.
+                            </p>
+                            <div class="border-start border-4 border-warning ps-3">
+                                <div class="fw-bold text-warning">Diferencial</div>
+                                <div class="fs-6 text-muted">Transição articulada entre etapas vs. modelos não sequenciais</div>
+                            </div>
+                        </div>
+
+                        <div class="innovation-card">
+                            <h3 class="fs-4 fw-semibold mb-3 text-danger">Depuração Avançada</h3>
+                            <p class="fs-6 mb-3 text-muted">
+                                Aplicação de técnicas avançadas de depuração, como testes de estresse e análise de casos limites, além da simples correção de erros sintáticos.
+                            </p>
+                            <div class="border-start border-4 border-danger ps-3">
+                                <div class="fw-bold text-danger">Alinhamento</div>
+                                <div class="fs-6 text-muted">Processos sistemáticos alinhados às demandas industriais</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card p-4 rounded-3 shadow bg-light">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--academic-800);">Aplicação em Problemas Complexos</h3>
+                        <p class="fs-6 text-muted mb-4">
+                            A metodologia DAAD foi concebida para ir além das disciplinas introdutórias, ajudando a criar a capacidade de resolver problemas complexos de forma sistemática.
+                        </p>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="border-start border-4 border-danger ps-3">
+                                    <div class="fw-bold text-danger">Problemas NP-Difíceis</div>
+                                    <div class="fs-6 text-muted">Otimização algorítmica usando decomposição baseada no Teorema Cook-Levin</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="border-start border-4 border-warning ps-3">
+                                    <div class="fw-bold text-warning">Sistemas Embarcados</div>
+                                    <div class="fs-6 text-muted">Engenharia de sistemas críticos com abstração de invariantes temporais</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="border-start border-4 border-success ps-3">
+                                    <div class="fw-bold text-success">Machine Learning</div>
+                                    <div class="fs-6 text-muted">Pipeline de aprendizado com decomposição em coleta, pré-processamento e avaliação</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="border-start border-4 border-primary ps-3">
+                                    <div class="fw-bold text-primary">Sistemas Distribuídos</div>
+                                    <div class="fs-6 text-muted">Microsserviços com protocolos de consenso e simulação de falhas</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Structure and Phases Section -->
+        <section id="estrutura-fases" class="py-5" style="background: linear-gradient(to bottom right, var(--academic-100), var(--primary-100));">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--academic-900);">4. Metodologia DAAD: Estrutura e Fases</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        A metodologia DAAD é composta por quatro fases principais que formam um processo iterativo de resolução de problemas. Cada fase desempenha um papel crucial no desenvolvimento de habilidades de pensamento crítico e analítico.
+                    </p>
+
+                    <div class="figure-container">
+                        <h3 class="fs-3 fw-semibold mb-4 text-center" style="color: var(--academic-800);">Representação Visual da Metodologia DAAD</h3>
+                        <div class="text-center">
+                            <svg viewBox="0 0 400 400" style="max-width: 400px; height: auto;">
+                                <!-- Background circle -->
+                                <circle cx="200" cy="200" r="180" fill="none" stroke="#e2e8f0" stroke-width="2"/>
+                                
+                                <!-- Decomposition -->
+                                <g transform="translate(200,50)">
+                                    <circle cx="0" cy="0" r="40" fill="#10b981" opacity="0.1" stroke="#10b981" stroke-width="2"/>
+                                    <circle cx="0" cy="0" r="15" fill="#10b981"/>
+                                    <text x="0" y="-55" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#10b981">Decomposição</text>
+                                </g>
+                                
+                                <!-- Abstraction -->
+                                <g transform="translate(350,200)">
+                                    <circle cx="0" cy="0" r="40" fill="#3b82f6" opacity="0.1" stroke="#3b82f6" stroke-width="2"/>
+                                    <circle cx="0" cy="0" r="15" fill="#3b82f6"/>
+                                    <text x="55" y="5" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#3b82f6">Abstração</text>
+                                </g>
+                                
+                                <!-- Algorithmization -->
+                                <g transform="translate(200,350)">
+                                    <circle cx="0" cy="0" r="40" fill="#f59e0b" opacity="0.1" stroke="#f59e0b" stroke-width="2"/>
+                                    <circle cx="0" cy="0" r="15" fill="#f59e0b"/>
+                                    <text x="0" y="55" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#f59e0b">Algoritmização</text>
+                                </g>
+                                
+                                <!-- Debugging -->
+                                <g transform="translate(50,200)">
+                                    <circle cx="0" cy="0" r="40" fill="#ef4444" opacity="0.1" stroke="#ef4444" stroke-width="2"/>
+                                    <circle cx="0" cy="0" r="15" fill="#ef4444"/>
+                                    <text x="-55" y="5" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#ef4444">Depuração</text>
+                                </g>
+                                
+                                <!-- Arrows -->
+                                <path d="M 240 80 Q 300 100 320 160" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowhead)"/>
+                                <path d="M 320 240 Q 300 300 240 320" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowhead)"/>
+                                <path d="M 160 320 Q 100 300 80 240" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowhead)"/>
+                                <path d="M 80 160 Q 100 100 160 80" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowhead)"/>
+                                
+                                <!-- Arrow marker -->
+                                <defs>
+                                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                        <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8"/>
+                                    </marker>
+                                </defs>
+                                
+                                <!-- Center label -->
+                                <text x="200" y="200" text-anchor="middle" font-family="serif" font-size="16" font-weight="bold" fill="#475569">DAAD</text>
+                                <text x="200" y="218" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#64748b">Processo Iterativo</text>
+                            </svg>
+                        </div>
+                        <div class="figure-caption">
+                            <strong>Figura:</strong> Representação visual da metodologia DAAD enfatizando a natureza cíclica e interconectada do processo de resolução de problemas. A característica iterativa permite refinamento contínuo das soluções.
+                        </div>
+                    </div>
+
+                    <div class="callout-tip">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-info-circle me-2 text-info"></i>
+                            <strong>Observação Importante:</strong>
+                        </div>
+                        <p class="mt-2 mb-0">
+                            Embora a representação em ciclo seja adequada para o ensino inicial, uma espiral seria mais precisa para representar a natureza iterativa da metodologia, onde cada ciclo traz melhorias e refinamentos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Decomposition Section -->
+        <section id="decomposicao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--academic-900);">5. Decomposição: Quebrando a Complexidade</h2>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card decomposition-card">
+                                <div class="d-flex align-items-start">
+                                    <div class="icon-badge badge-solution me-3">
+                                        <i class="fas fa-puzzle-piece"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="fs-4 fw-semibold mb-3 text-success">Definição</h3>
+                                        <p class="fs-6 mb-3">
+                                            A <strong>Decomposição</strong> é o processo analítico pelo qual problemas ou conceitos complexos são divididos em partes menores e mais gerenciáveis.
+                                        </p>
+                                        <div class="border-start border-4 border-success ps-3">
+                                            <div class="fw-bold text-success">Base Científica</div>
+                                            <div class="fs-6 text-muted">Miller (1956): memória humana limitada a 7 ± 2 elementos</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card methodology-card-inline">
+                                <div class="d-flex align-items-start">
+                                    <div class="icon-badge badge-methodology me-3">
+                                        <i class="fas fa-cogs"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="fs-4 fw-semibold mb-3 text-primary">Processo Iterativo</h3>
+                                        <p class="fs-6 mb-3">
+                                            Dividir o problema em partes menores é o primeiro problema que o aluno precisa resolver usando a própria metodologia DAAD.
+                                        </p>
+                                        <div class="border-start border-4 border-primary ps-3">
+                                            <div class="fw-bold text-primary">Integração</div>
+                                            <div class="fs-6 text-muted">Usa Abstração, Algoritmização e Depuração internamente</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h3 class="fs-4 fw-semibold mb-2" style="color: var(--academic-800);">1. Modelagem e Análise</h3>
+                        <p class="fs-6 mb-3" style="color: var(--academic-700);">
+                            Um modelo funciona como uma representação abstrata de situações do mundo real. O processo de modelagem começa com o reconhecimento de padrões e a correspondência de padrões.
+                        </p>
+                        <div class="border-start border-4 border-info ps-3">
+                            <div class="fw-bold text-info">Objetivo</div>
+                            <div class="fs-6 text-muted">Identificar similaridades e diferenças entre as partes menores do problema</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h3 class="fs-4 fw-semibold mb-2" style="color: var(--academic-800);">2. Generalização dos Fragmentos</h3>
+                        <p class="fs-6 mb-3" style="color: var(--academic-700);">
+                            Eliminação de detalhes irrelevantes mediante lógica indutiva. A lógica indutiva baseia-se no princípio de que conclusões gerais podem ser derivadas de observações empíricas.
+                        </p>
+                        <div class="border-start border-4 border-warning ps-3">
+                            <div class="fw-bold text-warning">Processo</div>
+                            <div class="fs-6 text-muted">Formulação de regras gerais a partir de casos individuais</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h3 class="fs-4 fw-semibold mb-2" style="color: var(--academic-800);">3. Validação dos Fragmentos</h3>
+                        <p class="fs-6 mb-3" style="color: var(--academic-700);">
+                            A validação é o processo de garantir que as partes do problema sejam adequadas para a solução do problema original e que funcionem em conjunto.
+                        </p>
+                        <div class="border-start border-4 border-success ps-3">
+                            <div class="fw-bold text-success">Aplicação DAAD</div>
+                            <div class="fs-6 text-muted">Usa Algoritmização para organização e Depuração para validação</div>
+                        </div>
+                    </div>
+
+                    <div class="card p-4 rounded-3 shadow bg-light">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--academic-800);">Exemplos Práticos</h3>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3 text-success">Exemplos Unplugged</h4>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-birthday-cake me-2 text-success"></i>Fazer um bolo: massa, assar, cobertura, aplicar</li>
+                                    <li class="mb-2"><i class="fas fa-puzzle-piece me-2 text-success"></i>Montar quebra-cabeça: separar por cores, bordas, centro</li>
+                                    <li class="mb-2"><i class="fas fa-utensils me-2 text-success"></i>Fazer sanduíche: ingredientes, ordem, montagem</li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3 text-primary">Computação</h4>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-building me-2 text-primary"></i>Simulação de construção em segmentos gerenciáveis</li>
+                                    <li class="mb-2"><i class="fas fa-code me-2 text-primary"></i>Sistema complexo em partes mais fáceis de programar</li>
+                                    <li class="mb-2"><i class="fas fa-tools me-2 text-primary"></i>Manutenção simplificada através da modularização</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Abstraction Section -->
+        <section id="abstracao" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--academic-900);">6. Abstração: Focando no Essencial</h2>
+
+                    <div class="definition-box">
+                        <div class="definition-title">Definição de Abstração</div>
+                        <p class="mb-0">
+                            A <strong>Abstração</strong> é o processo cognitivo de redução da complexidade que envolve a criação de representações gerais de processos ou grupos de objetos mediante a remoção sistemática de informações desnecessárias e o foco seletivo nos elementos essenciais de uma situação específica.
+                        </p>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card abstraction-card">
+                                <div class="d-flex align-items-start">
+                                    <div class="icon-badge badge-methodology me-3">
+                                        <i class="fas fa-eye"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="fs-4 fw-semibold mb-3 text-primary">Processo de Mais Alto Nível</h3>
+                                        <p class="fs-6 mb-3">
+                                            A abstração é considerada o processo de pensamento de mais alto nível no Pensamento Computacional, conferindo a capacidade de escalar e gerenciar a complexidade.
+                                        </p>
+                                        <div class="border-start border-4 border-primary ps-3">
+                                            <div class="fw-bold text-primary">Desafio</div>
+                                            <div class="fs-6 text-muted">Sua presença é tão difundida que a descrição concisa é um desafio</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card solution-card">
+                                <div class="d-flex align-items-start">
+                                    <div class="icon-badge badge-solution me-3">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="fs-4 fw-semibold mb-3 text-success">Identificação de Padrões</h3>
+                                        <p class="fs-6 mb-3">
+                                            Caracteriza-se pela capacidade de identificar padrões e realizar generalizações a partir de instâncias específicas, criando representações reutilizáveis.
+                                        </p>
+                                        <div class="border-start border-4 border-success ps-3">
+                                            <div class="fw-bold text-success">Transferência</div>
+                                            <div class="fs-6 text-muted">Soluções adaptáveis a situações análogas em contextos diferentes</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--academic-800);">Ferramentas de Abstração</h3>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3 text-primary">Mapas</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Simplificam o mundo real ao omitir detalhes desnecessários, mantendo apenas informações essenciais para navegação.
+                                </p>
+                                <div class="bg-primary-subtle p-3 rounded">
+                                    <strong>Exemplo:</strong> Mapa do metrô que ignora distâncias reais, focando em conexões
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3 text-success">Fluxogramas</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Simplificam processos complexos em representações visuais, eliminando detalhes de implementação específicos.
+                                </p>
+                                <div class="bg-success-subtle p-3 rounded">
+                                    <strong>Vantagem:</strong> Identificam padrões estruturais (sequências, decisões, repetições)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="callout-success">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle me-2 text-success"></i>
+                            <strong>Vantagem dos Fluxogramas:</strong>
+                        </div>
+                        <p class="mt-2 mb-0">
+                            Podem ser realizados completamente <em>unplugged</em>, sem uso de computadores, aproveitando as vantagens cognitivas do ensino desconectado para abstração e raciocínio algorítmico.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Algorithmization Section -->
+        <section id="algoritmizacao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--academic-900);">7. Algoritmização: Desenvolvendo Soluções Sistemáticas</h2>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card algorithmization-card">
+                                <div class="d-flex align-items-start">
+                                    <div class="icon-badge badge-evaluation me-3">
+                                        <i class="fas fa-cogs"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="fs-4 fw-semibold mb-3 text-warning">Definição</h3>
+                                        <p class="fs-6 mb-3">
+                                            A <strong>Algoritmização</strong> envolve a criação de instruções passo a passo ou procedimentos para resolver um problema. Um algoritmo é uma sequência finita de instruções matematicamente rigorosas.
+                                        </p>
+                                        <div class="border-start border-4 border-warning ps-3">
+                                            <div class="fw-bold text-warning">Requisito</div>
+                                            <div class="fs-6 text-muted">Decomposição, identificação de padrões e abstração de detalhes</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card methodology-card-inline">
+                                <div class="d-flex align-items-start">
+                                    <div class="icon-badge badge-methodology me-3">
+                                        <i class="fas fa-lightbulb"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="fs-4 fw-semibold mb-3 text-primary">Compreensão Profunda</h3>
+                                        <p class="fs-6 mb-3">
+                                            A capacidade de expressar uma solução na forma de um algoritmo demonstra uma compreensão mais profunda do problema do que respostas pontuais.
+                                        </p>
+                                        <div class="border-start border-4 border-primary ps-3">
+                                            <div class="fw-bold text-primary">Eficiência</div>
+                                            <div class="fs-6 text-muted">Consideração importante em velocidade e uso de memória</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card p-4 rounded-3 shadow bg-light">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--academic-800);">Formas de Expressão de Algoritmos</h3>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3 text-warning">Fluxogramas</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Permitem visualizar estruturas de controle como condicionais e laços, além do fluxo de dados e pontos de parada.
+                                </p>
+                                <div class="bg-warning-subtle p-3 rounded">
+                                    <strong>Exemplo:</strong> Representar tomada de decisão para identificar se um número é positivo ou negativo
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3 text-primary">Pseudocódigo</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Atua como ponte entre abstração visual e escrita de código real, descrevendo algoritmos em linguagem natural estruturada.
+                                </p>
+                                <div class="bg-primary-subtle p-3 rounded">
+                                    <strong>Vantagem:</strong> Força precisão na formulação e leva à compreensão mais profunda
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="figure-container">
+                        <h3 class="fs-3 fw-semibold mb-3 text-center" style="color: var(--academic-800);">Exemplo de Fluxograma</h3>
+                        <div class="text-center">
+                            <svg viewBox="0 0 300 400" style="max-width: 300px; height: auto;">
+                                <!-- Start/End oval -->
+                                <ellipse cx="150" cy="30" rx="50" ry="20" fill="#10b981" opacity="0.2" stroke="#10b981" stroke-width="2"/>
+                                <text x="150" y="35" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#10b981">INÍCIO</text>
+                                
+                                <!-- Input rectangle -->
+                                <rect x="100" y="70" width="100" height="40" rx="5" fill="#3b82f6" opacity="0.2" stroke="#3b82f6" stroke-width="2"/>
+                                <text x="150" y="85" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#3b82f6">LEIA a</text>
+                                <text x="150" y="100" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#3b82f6">LEIA b</text>
+                                
+                                <!-- Decision diamond -->
+                                <path d="M 150 130 L 200 170 L 150 210 L 100 170 Z" fill="#f59e0b" opacity="0.2" stroke="#f59e0b" stroke-width="2"/>
+                                <text x="150" y="175" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#f59e0b">a > b?</text>
+                                
+                                <!-- Process rectangles -->
+                                <rect x="50" y="240" width="80" height="30" rx="5" fill="#ef4444" opacity="0.2" stroke="#ef4444" stroke-width="2"/>
+                                <text x="90" y="260" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#ef4444">max ← a</text>
+                                
+                                <rect x="170" y="240" width="80" height="30" rx="5" fill="#ef4444" opacity="0.2" stroke="#ef4444" stroke-width="2"/>
+                                <text x="210" y="260" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#ef4444">max ← b</text>
+                                
+                                <!-- Output rectangle -->
+                                <rect x="100" y="310" width="100" height="30" rx="5" fill="#3b82f6" opacity="0.2" stroke="#3b82f6" stroke-width="2"/>
+                                <text x="150" y="330" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#3b82f6">ESCREVA max</text>
+                                
+                                <!-- End oval -->
+                                <ellipse cx="150" cy="370" rx="50" ry="20" fill="#10b981" opacity="0.2" stroke="#10b981" stroke-width="2"/>
+                                <text x="150" y="375" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#10b981">FIM</text>
+                                
+                                <!-- Arrows -->
+                                <path d="M 150 50 L 150 70" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+                                <path d="M 150 110 L 150 130" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+                                <path d="M 120 190 L 90 240" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+                                <path d="M 180 190 L 210 240" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+                                <path d="M 90 270 L 90 290 L 140 290 L 140 310" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+                                <path d="M 210 270 L 210 290 L 160 290 L 160 310" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+                                <path d="M 150 340 L 150 350" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+                                
+                                <!-- Labels -->
+                                <text x="105" y="205" font-family="sans-serif" font-size="9" fill="#10b981">Sim</text>
+                                <text x="195" y="205" font-family="sans-serif" font-size="9" fill="#ef4444">Não</text>
+                                
+                                <!-- Arrow marker -->
+                                <defs>
+                                    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                        <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+                                    </marker>
+                                </defs>
+                            </svg>
+                        </div>
+                        <div class="figure-caption">
+                            <strong>Figura:</strong> Exemplo de fluxograma para encontrar o maior entre dois números, demonstrando estruturas de entrada, decisão, processamento e saída.
+                        </div>
+                    </div>
+
+                    <div class="code-block">
+<span class="code-comment">// Pseudocódigo correspondente ao fluxograma</span>
+<span class="code-keyword">ALGORITMO</span> <span class="code-string">EncontrarMaximo</span>
+<span class="code-keyword">INÍCIO</span>
+    <span class="code-comment">// Entrada dos dados</span>
+    <span class="code-keyword">LEIA</span> a
+    <span class="code-keyword">LEIA</span> b
+    
+    <span class="code-comment">// Processo de decisão</span>
+    <span class="code-keyword">SE</span> a > b <span class="code-keyword">ENTÃO</span>
+        max ← a
+    <span class="code-keyword">SENÃO</span>
+        max ← b
+    <span class="code-keyword">FIM SE</span>
+    
+    <span class="code-comment">// Saída do resultado</span>
+    <span class="code-keyword">ESCREVA</span> max
+<span class="code-keyword">FIM</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Debugging Section -->
+        <section id="depuracao" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--academic-900);">8. Depuração: Identificando e Corrigindo Erros</h2>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card debugging-card">
+                                <div class="d-flex align-items-start">
+                                    <div class="icon-badge badge-problem me-3">
+                                        <i class="fas fa-bug"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="fs-4 fw-semibold mb-3 text-danger">Definição Ampliada</h3>
+                                        <p class="fs-6 mb-3">
+                                            A <strong>Depuração</strong> é a fase responsável por encontrar e remover erros, imperfeições ou elementos indesejáveis durante todas as fases da metodologia DAAD.
+                                        </p>
+                                        <div class="border-start border-4 border-danger ps-3">
+                                            <div class="fw-bold text-danger">Além da Computação</div>
+                                            <div class="fs-6 text-muted">Representa purificar substâncias e sistemas, corrigir erros</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card methodology-card-inline">
+                                <div class="d-flex align-items-start">
+                                    <div class="icon-badge badge-methodology me-3">
+                                        <i class="fas fa-sync"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="fs-4 fw-semibold mb-3 text-primary">Processo Iterativo</h3>
+                                        <p class="fs-6 mb-3">
+                                            É uma atividade iterativa que contribui para a construção do conhecimento e o aprendizado de estratégias de resolução de problemas.
+                                        </p>
+                                        <div class="border-start border-4 border-primary ps-3">
+                                            <div class="fw-bold text-primary">Framework Pedagógico</div>
+                                            <div class="fs-6 text-muted">Aplicável desde educação infantil até ensino superior</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--academic-800);">Cinco Etapas da Depuração (Brennan & Resnick, 2012)</h3>
+                        <div class="row row-cols-1 row-cols-md-5 g-3">
+                            <div class="col">
+                                <div class="text-center p-3 bg-danger-subtle rounded">
+                                    <div class="fw-bold text-danger mb-2">1. Validar</div>
+                                    <div class="fs-6 text-danger">Verificar se o resultado está correto</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-warning-subtle rounded">
+                                    <div class="fw-bold text-warning mb-2">2. Identificar</div>
+                                    <div class="fs-6 text-warning">Localizar onde está o erro</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-info-subtle rounded">
+                                    <div class="fw-bold text-info mb-2">3. Representar</div>
+                                    <div class="fs-6 text-info">Visualizar o problema claramente</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-primary-subtle rounded">
+                                    <div class="fw-bold text-primary mb-2">4. Localizar</div>
+                                    <div class="fs-6 text-primary">Pinpointar a causa específica</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-success-subtle rounded">
+                                    <div class="fw-bold text-success mb-2">5. Corrigir</div>
+                                    <div class="fs-6 text-success">Implementar a solução</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="callout-warning">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-tools me-2 text-warning"></i>
+                            <strong>Ferramentas de Depuração:</strong>
+                        </div>
+                        <p class="mt-2 mb-2">
+                            Fluxogramas e pseudocódigo são ferramentas valiosas para a Depuração, pois permitem visualizar a lógica do algoritmo e identificar possíveis erros de forma mais intuitiva.
+                        </p>
+                        <div class="border-start border-4 border-warning ps-3">
+                            <div class="fw-bold text-warning">Estratégias Eficazes</div>
+                            <div class="fs-6 text-warning">• Análise visual do fluxo do algoritmo<br>• Rastreamento de caminhos de execução<br>• Tabelas de rastreamento de variáveis</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools Section -->
+        <section id="ferramentas" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--academic-900);">9. Ferramentas de Abstração na Metodologia DAAD</h2>
+
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--academic-50), var(--primary-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--academic-800);">Símbolos Básicos para Fluxogramas</h3>
+                        <p class="text-muted mb-4">
+                            Na metodologia DAAD, utilizamos apenas 4 símbolos básicos para fluxogramas, permitindo que os alunos se concentrem na lógica do algoritmo.
+                        </p>
+                        
+                        <div class="flowchart-symbols">
+                            <div class="symbol-card">
+                                <div class="symbol-visual">
+                                    <svg width="60" height="40">
+                                        <ellipse cx="30" cy="20" rx="25" ry="15" fill="#10b981" opacity="0.2" stroke="#10b981" stroke-width="2"/>
+                                    </svg>
+                                </div>
+                                <div class="fw-bold text-success">Início/Fim</div>
+                                <div class="fs-6 text-muted">Oval</div>
+                            </div>
+                            <div class="symbol-card">
+                                <div class="symbol-visual">
+                                    <svg width="60" height="40">
+                                        <rect x="10" y="10" width="40" height="20" rx="3" fill="#3b82f6" opacity="0.2" stroke="#3b82f6" stroke-width="2"/>
+                                    </svg>
+                                </div>
+                                <div class="fw-bold text-primary">Processo</div>
+                                <div class="fs-6 text-muted">Retângulo</div>
+                            </div>
+                            <div class="symbol-card">
+                                <div class="symbol-visual">
+                                    <svg width="60" height="40">
+                                        <path d="M 30 5 L 55 20 L 30 35 L 5 20 Z" fill="#f59e0b" opacity="0.2" stroke="#f59e0b" stroke-width="2"/>
+                                    </svg>
+                                </div>
+                                <div class="fw-bold text-warning">Decisão</div>
+                                <div class="fs-6 text-muted">Losango</div>
+                            </div>
+                            <div class="symbol-card">
+                                <div class="symbol-visual">
+                                    <svg width="60" height="40">
+                                        <path d="M 15 10 L 45 10 L 50 30 L 10 30 Z" fill="#ef4444" opacity="0.2" stroke="#ef4444" stroke-width="2"/>
+                                    </svg>
+                                </div>
+                                <div class="fw-bold text-danger">Entrada/Saída</div>
+                                <div class="fs-6 text-muted">Paralelogramo</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card solution-card">
+                                <h3 class="fs-4 fw-semibold mb-3 text-success">Pseudocódigo</h3>
+                                <p class="fs-6 mb-3">
+                                    Forma de descrever algoritmos em linguagem natural que ajuda os alunos a entender a lógica sem se preocupar com sintaxe específica de programação.
+                                </p>
+                                <div class="border-start border-4 border-success ps-3">
+                                    <div class="fw-bold text-success">Características</div>
+                                    <div class="fs-6 text-muted">
+                                        • Independente de linguagem<br>
+                                        • Foca na lógica, não na sintaxe<br>
+                                        • Fácil de ler e entender<br>
+                                        • Rápido de escrever e modificar
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card evaluation-card">
+                                <h3 class="fs-4 fw-semibold mb-3 text-warning">Tabelas de Rastreio</h3>
+                                <p class="fs-6 mb-3">
+                                    Estruturas que permitem registrar e acompanhar valores de variáveis e estados do programa durante a execução, facilitando identificação de erros.
+                                </p>
+                                <div class="border-start border-4 border-warning ps-3">
+                                    <div class="fw-bold text-warning">Componentes</div>
+                                    <div class="fs-6 text-muted">
+                                        • Colunas para variáveis<br>
+                                        • Coluna de linha/instrução<br>
+                                        • Colunas de saída<br>
+                                        • Simulação manual da execução
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="figure-container">
+                        <h3 class="fs-3 fw-semibold mb-3 text-center" style="color: var(--academic-800);">Exemplo de Tabela de Rastreio</h3>
+                        <p class="text-center text-muted mb-4">
+                            Execução do algoritmo "EncontrarMaximo" com entradas a = 15, b = 8
+                        </p>
+                        
+                        <div class="table-responsive">
+                            <table class="table trace-table">
+                                <thead>
+                                    <tr>
+                                        <th>Linha</th>
+                                        <th>a</th>
+                                        <th>b</th>
+                                        <th>a > b</th>
+                                        <th>max</th>
+                                        <th>Saída</th>
+                                        <th>Observações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-bold">1</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td class="text-muted">Início do algoritmo</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">2</td>
+                                        <td class="text-primary">15</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td class="text-muted">Leitura do primeiro valor</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">3</td>
+                                        <td>15</td>
+                                        <td class="text-primary">8</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td class="text-muted">Leitura do segundo valor</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">4</td>
+                                        <td>15</td>
+                                        <td>8</td>
+                                        <td class="text-success">True</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td class="text-muted">Avaliação: 15 > 8</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">5</td>
+                                        <td>15</td>
+                                        <td>8</td>
+                                        <td>True</td>
+                                        <td class="text-success">15</td>
+                                        <td>-</td>
+                                        <td class="text-muted">Executa ramo verdadeiro</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">9</td>
+                                        <td>15</td>
+                                        <td>8</td>
+                                        <td>True</td>
+                                        <td>15</td>
+                                        <td class="text-success">15</td>
+                                        <td class="text-muted">Exibe o resultado</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">10</td>
+                                        <td>15</td>
+                                        <td>8</td>
+                                        <td>True</td>
+                                        <td>15</td>
+                                        <td>15</td>
+                                        <td class="text-muted">Fim do algoritmo</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="figure-caption">
+                            <strong>Tabela:</strong> Exemplo de tabela de rastreio mostrando a execução passo

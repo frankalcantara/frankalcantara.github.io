@@ -328,12 +328,16 @@ span.post-read-more a:hover {
 }
 
 blockquote {
-  border-left-width: 4px;
-  border-left-color: #f5c7ff;
-  border-left-style: solid;
+  border-right-width: 4px;
+  border-right-color: #f5c7ff;
+  border-right-style: solid;
   padding: 0 20px;
   font-style: italic;
   color: rgba(0, 0, 0, 0.5);
+}
+
+blockquote p {
+  text-align: right !important;
 }
 
 .article-post p,

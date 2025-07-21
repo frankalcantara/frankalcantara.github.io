@@ -5,7 +5,9 @@
       "Bash(start debug-highlighting.html)",
       "Bash(explorer debug-highlighting.html)",
       "Bash(git restore:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(cmd /c start:*)",
+      "Bash(git add:*)"
     ],
     "deny": []
   }
