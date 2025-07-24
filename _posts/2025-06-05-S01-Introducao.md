@@ -32,7 +32,7 @@ keywords: |-
    abstração de hardware
 toc: true
 published: true
-lastmod: 2025-06-23T15:42:53.613Z
+lastmod: 2025-07-24T01:27:22.953Z
 draft: 2025-06-18T14:21:29.077Z
 slug: sistemas-operacionais-fundamentos-evolucao-arquitetura
 description: Texto introdutório à Sistemas Operacionais, será referência para a primeira aula da disciplina e, talvez se torne o primeiro capítulo de um livro.

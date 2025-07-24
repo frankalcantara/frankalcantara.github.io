@@ -23,7 +23,7 @@ keywords:
    - Programação Lógica
 draft: true
 toc: true
-lastmod: 2025-07-14T01:55:40.858Z
+lastmod: 2025-07-21T02:10:24.958Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação no qual não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -1089,7 +1089,7 @@ Considere um sistema proposicional, com suas Fórmulas Bem Formadas, suas transf
 
 ### Contrapositivas e Recíprocas
 
-As implicações são um problema, do ponto de vista da matemática. Sentenças do tipo _se...então_ induzem uma conclusão. Provar estas sentenças é uma preocupação constante da matemática [^3]. Dada uma implicação, existem duas fórmulas relacionadas que ocorrem com tanta frequência que possuem nomes especiais: contrapositivas e recíprocas. Antes de mergulharmos em contrapositivas, precisamos visitar alguns portos.
+As implicações são um problema, do ponto de vista da matemática. Sentenças do tipo _se...então_ induzem uma conclusão. Provar estas sentenças é uma preocupação constante da matemática. Dada uma implicação, existem duas fórmulas relacionadas que ocorrem com tanta frequência que possuem nomes especiais: contrapositivas e recíprocas. Antes de mergulharmos em contrapositivas, precisamos visitar alguns portos.
 
 ### Logicamente Equivalente
 
@@ -3394,7 +3394,7 @@ Considere a verificação de um algoritmo de busca linear:
 found := false;
 i := 0;
 while i < array.length ∧ ¬found do
-    invariant 0 ≤ i ≤ array.length ∧ 
+    invariant 0 ≤ i ≤ array.length ∧
               (∀j : 0 ≤ j < i ⇒ array[j] ≠ target)
     if array[i] = target then
         found := true;

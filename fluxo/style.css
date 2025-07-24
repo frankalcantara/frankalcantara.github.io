@@ -17,7 +17,7 @@
     overflow: visible !important;
 }
 
-/* Container da navbar - ALTURA LIMITADA */
+/* Container da navbar - PERMITIR OVERFLOW PARA DROPDOWNS */
 .mediumnavigation .container {
     padding-right: 0 !important;
     padding-left: 15px !important;
@@ -28,7 +28,7 @@
     align-items: center !important;
     justify-content: space-between !important;
     margin: 0 auto !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     position: relative !important;
     z-index: inherit !important;
 }
@@ -248,11 +248,11 @@ body {
     max-height: 56px !important;
 }
 
-/* Garantir que nada da navbar vaze para baixo */
+/* Permitir que dropdowns sejam visíveis */
 .navbar .container {
     height: 100% !important;
     max-height: 56px !important;
-    overflow: hidden !important;
+    overflow: visible !important;
 }
 
 /* Container principal otimizado - EVITA SOBREPOSIÇÃO COM NAVBAR */
