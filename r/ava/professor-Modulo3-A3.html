@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Ferramenta do Professor: O Desafio da Ordenação</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --academic-50: #f8fafc;
+            --academic-100: #f1f5f9;
+            --academic-200: #e2e8f0;
+            --academic-300: #cbd5e1;
+            --academic-400: #94a3b8;
+            --academic-500: #64748b;
+            --academic-600: #475569;
+            --academic-700: #334155;
+            --academic-800: #1e293b;
+            --academic-900: #0f172a;
+            --primary-50: #eff6ff;
+            --primary-100: #dbeafe;
+            --primary-200: #bfdbfe;
+            --primary-300: #93c5fd;
+            --primary-400: #60a5fa;
+            --primary-500: #3b82f6;
+            --primary-600: #2563eb;
+            --primary-700: #1d4ed8;
+            --primary-800: #1e40af;
+            --primary-900: #1e3a8a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Text', serif;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 320px;
+            height: 100vh;
+            background: white;
+            border-right: 1px solid #e2e8f0;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .main-content {
+            margin-left: 320px;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        .stage-item {
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stage-item:hover {
+            background-color: var(--academic-50);
+        }
+
+        .stage-item.active {
+            background-color: var(--primary-100);
+            border-left: 4px solid var(--primary-600);
+        }
+
+        .stage-item.completed {
+            background-color: var(--academic-100);
+            border-left: 4px solid #10b981;
+        }
+
+        .timer-display {
+            font-family: 'Courier New', monospace;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-600);
+            text-align: center;
+            padding: 1rem;
+            background: var(--primary-50);
+            border-radius: 12px;
+            border: 2px solid var(--primary-200);
+        }
+
+        .timer-display.warning {
+            color: #f59e0b;
+            background: #fef3c7;
+            border-color: #fde68a;
+        }
+
+        .timer-display.danger {
+            color: #ef4444;
+            background: #fee2e2;
+            border-color: #fecaca;
+        }
+
+        .control-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            margin: 0 0.5rem;
+        }
+
+        .control-button:hover {
+            transform: scale(1.1);
+        }
+
+        .play-btn {
+            background: #10b981;
+            color: white;
+        }
+
+        .pause-btn {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .reset-btn {
+            background: #ef4444;
+            color: white;
+        }
+
+        .instruction-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 1.5rem;
+        }
+
+        .instruction-card.teacher-only {
+            border-left: 4px solid var(--primary-600);
+            background: var(--primary-50);
+        }
+
+        .instruction-card.student-facing {
+            border-left: 4px solid #10b981;
+            background: #dcfce7;
+        }
+
+        .callout-tip {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .callout-warning {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .callout-success {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-left: 4px solid #10b981;
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .progress-indicator {
+            height: 6px;
+            background: var(--academic-200);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-500), #10b981);
+            transition: width 0.3s ease;
+        }
+
+        .stage-badge {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-right: 0.75rem;
+        }
+
+        .badge-pending {
+            background: var(--academic-200);
+            color: var(--academic-600);
+        }
+
+        .badge-active {
+            background: var(--primary-600);
+            color: white;
+        }
+
+        .badge-completed {
+            background: #10b981;
+            color: white;
+        }
+
+        .notes-area {
+            background: #fefce8;
+            border: 1px solid #fde047;
+            border-radius: 8px;
+            padding: 1rem;
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .fibonacci-sequence {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .fibonacci-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-600);
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .total-time {
+            background: var(--academic-800);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .quick-actions {
+            position: sticky;
+            top: 1rem;
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+
+        .materials-highlight {
+            background: #fef3c7;
+            border: 1px solid #fde68a;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .color-pen {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            border: 1px solid #ccc;
+        }
+
+        .pen-blue { background: #3b82f6; }
+        .pen-red { background: #ef4444; }
+        .pen-green { background: #10b981; }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="mb-4">
+            <h3 class="fs-5 fw-bold text-dark mb-3">Controle da Atividade</h3>
+            
+            <!-- Total Progress -->
+            <div class="total-time mb-3">
+                <div class="fs-6 text-muted mb-1">Tempo Total da Atividade</div>
+                <div class="fs-4 fw-bold" id="totalTimer">00:00:00</div>
+                <div class="progress-indicator mt-2">
+                    <div class="progress-bar" id="totalProgress" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Stage Navigation -->
+            <div class="stages-list">
+                <div class="stage-item active" data-stage="0">
+                    <div class="d-flex align-items-center p-3">
+                        <div class="stage-badge badge-active">0</div>
+                        <div class="flex-grow-1">
+                            <div class="fw-semibold">Ativação (10min)</div>
+                            <div class="fs-6 text-muted">Retrieval Practice</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stage-item" data-stage="1">
+                    <div class="d-flex align-items-center p-3">
+                        <div class="stage-badge badge-pending">1</div>
+                        <div class="flex-grow-1">
+                            <div class="fw-semibold">Descoberta (25min)</div>
+                            <div class="fs-6 text-muted">Decomposição Estruturada</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stage-item" data-stage="2">
+                    <div class="d-flex align-items-center p-3">
+                        <div class="stage-badge badge-pending">2</div>
+                        <div class="flex-grow-1">
+                            <div class="fw-semibold">Predição (18min)</div>
+                            <div class="fs-6 text-muted">Teste de Eficiência</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stage-item" data-stage="3">
+                    <div class="d-flex align-items-center p-3">
+                        <div class="stage-badge badge-pending">3</div>
+                        <div class="flex-grow-1">
+                            <div class="fw-semibold">Apresentação (20min)</div>
+                            <div class="fs-6 text-muted">Elaborative Interrogation</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stage-item" data-stage="4">
+                    <div class="d-flex align-items-center p-3">
+                        <div class="stage-badge badge-pending">4</div>
+                        <div class="flex-grow-1">
+                            <div class="fw-semibold">Transfer (12min)</div>
+                            <div class="fs-6 text-muted">Metacognição</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Materials Checklist -->
+            <div class="mt-4 pt-3 border-top">
+                <h4 class="fs-6 fw-semibold text-dark mb-2">Materiais Necessários</h4>
+                <div class="fs-6">
+                    <div class="mb-1">
+                        <i class="fas fa-check text-success me-1"></i>
+                        7-9 cartas numeradas por grupo
+                    </div>
+                    <div class="mb-1">
+                        <i class="fas fa-check text-success me-1"></i>
+                        Envelopes A, B, C por grupo
+                    </div>
+                    <div class="mb-1">
+                        <i class="fas fa-check text-success me-1"></i>
+                        Canetas: <span class="color-pen pen-blue"></span><span class="color-pen pen-red"></span><span class="color-pen pen-green"></span>
+                    </div>
+                    <div class="mb-1">
+                        <i class="fas fa-check text-success me-1"></i>
+                        Folhas para rastreio e reflexão
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Toggle -->
+    <button class="d-lg-none position-fixed top-0 start-0 m-3 z-3 bg-white p-2 rounded shadow" onclick="toggleSidebar()">
+        <i class="fas fa-bars text-dark"></i>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="fs-4 fw-bold mb-0">O Desafio da Ordenação</h1>
+                    <div class="text-muted">Atividade A3 - Neurociência Cognitiva Aplicada</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex justify-content-end align-items-center">
+                        <button class="btn btn-danger me-2" onclick="resetAll()">
+                            <i class="fas fa-redo me-1"></i>Resetar Tudo
+                        </button>
+                        <button class="btn btn-success" onclick="startActivity()">
+                            <i class="fas fa-play me-1"></i>Iniciar Atividade
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stage Content Area -->
+        <div id="stageContent">
+            <!-- Stage 0: Ativação -->
+            <div class="stage-content" id="stage-0" style="display: block;">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h2 class="display-6 fw-bold mb-4">Etapa 0: Ativação de Esquemas (10 min)</h2>
+                        
+                        <!-- Timer Section -->
+                        <div class="instruction-card teacher-only">
+                            <h3 class="fs-4 fw-semibold mb-3">
+                                <i class="fas fa-clock text-primary me-2"></i>Controle de Tempo
+                            </h3>
+                            <div class="timer-display mb-3" id="timer-0">10:00</div>
+                            <div class="text-center">
+                                <button class="control-button play-btn" onclick="startTimer(0, 600)">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <button class="control-button pause-btn" onclick="pauseTimer(0)">
+                                    <i class="fas fa-pause"></i>
+                                </button>
+                                <button class="control-button reset-btn" onclick="resetTimer(0, 600)">
+                                    <i class="fas fa-redo"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Teacher Instructions -->
+                        <div class="instruction-card teacher-only">
+                            <h3 class="fs-4 fw-semibold mb-3">
+                                <i class="fas fa-chalkboard-teacher text-primary me-2"></i>Instruções para o Professor
+                            </h3>
+                            <div class="callout-tip">
+                                <strong>Fundamentação:</strong> A ativação de conhecimento prévio facilita a criação de conexões neurais mais robustas (Sweller, 2011).
+                            </div>
+
+                            <div class="materials-highlight">
+                                <strong>Material:</strong> Quadro branco, marcadores coloridos, alunos divididos em grupos. Arrume as mesas de forma a induzir a interação em grupos pequenos.
+                            </div>
+                            
+                            <h4 class="fs-5 fw-semibold mt-4 mb-3">Sub-etapa A: Warm-up - Retrieval Practice (5 min)</h4>
+                            <ul>
+                                <li>Organize os grupos de 4-5 alunos</li>
+                                <li>Distribua papel e caneta para cada grupo</li>
+                                <li><strong>Importante:</strong> Não permita consulta a materiais, online ou impresso</li>
+                                <li>Circule pela sala observando as respostas</li>
+                                <li>Objetivo: ativar estruturas cognitivas relacionadas antes da nova aprendizagem</li>
+                            </ul>
+                            
+                            <h4 class="fs-5 fw-semibold mt-4 mb-3">Sub-etapa B: Ativação de Esquemas (5 min)</h4>
+                            <ul>
+                                <li>Peça exemplos concretos de cada cenário</li>
+                                <li>Anote no quadro as estratégias mencionadas</li>
+                                <li>Destaque padrões comuns entre os grupos</li>
+                                <li>Prepare conexão com algoritmos formais</li>
+                                <li>Objetivo: estabelecer conexões entre conhecimento cotidiano e algoritmos formais</li>
+                            </ul>
+
+                            <div class="callout-warning">
+                                <strong>Nota Importante:</strong> Informe aos alunos que os envelopes, cartas, canetas, serão devolvidos no final da tarefa juntamente com os pseudocódigos e fluxogramas que eles criarem. Este material será usado na próxima aula.
+                            </div>
+                        </div>
+
+                        <!-- Student Instructions -->
+                        <div class="instruction-card student-facing">
+                            <h3 class="fs-4 fw-semibold mb-3">
+                                <i class="fas fa-users text-success me-2"></i>Instruções para os Alunos
+                            </h3>
+                            <div class="callout-success">
+                                <strong>Leia em voz alta para a turma:</strong>
+                            </div>
+                            
+                            <h4 class="fs-5 fw-semibold mt-4 mb-3">Parte A: Retrieval Practice (5 minutos)</h4>
+                            <p class="fs-5 border p-3 bg-light rounded">
+                                <strong>"Sem consultar qualquer material, online ou impresso, listem em 2 minutos tudo que sabem sobre:</strong><br>
+                                • Como identificar eficiência de algoritmos<br>
+                                • Estratégias que usam para resolver problemas de ordenação no dia-a-dia"
+                            </p>
+                            
+                            <h4 class="fs-5 fw-semibold mt-4 mb-3">Parte B: Ativação de Esquemas (5 minutos)</h4>
+                            <p class="fs-5 border p-3 bg-light rounded">
+                                <strong>"Antes de abrir os envelopes, ordenem estes cenários do dia-a-dia:</strong><br>
+                                • Fila de banco por chegada<br>
+                                • Produtos por preço<br>
+                                • Emails por prioridade<br><br>
+                                <strong>Que estratégias mentais vocês usam? Anotem 2-3 padrões comuns."</strong>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4">
+                        <div class="instruction-card">
+                            <h4 class="fs-5 fw-semibold mb-3">Materiais para Esta Etapa</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>Papel e caneta para cada grupo</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Quadro branco</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Marcadores coloridos</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Mesas organizadas para grupos</li>
+                            </ul>
+                            
+                            <h4 class="fs-5 fw-semibold mb-3 mt-4">Objetivos</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-bullseye text-warning me-2"></i>Ativar redes neurais relacionadas</li>
+                                <li><i class="fas fa-bullseye text-warning me-2"></i>Estabelecer conexões com conhecimento cotidiano</li>
+                                <li><i class="fas fa-bullseye text-warning me-2"></i>Preparar para nova aprendizagem</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="notes-area">
+                            <label class="fw-semibold mb-2">Notas da Etapa 0:</label>
+                            <textarea class="form-control border-0 bg-transparent" rows="8" placeholder="Anote observações importantes sobre esta etapa..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 1: Descoberta -->
+            <div class="stage-content" id="stage-1" style="display: none;">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h2 class="display-6 fw-bold mb-4">Etapa 1: Descoberta Estruturada com Decomposição (25 min)</h2>
+                        
+                        <!-- Timer Section -->
+                        <div class="instruction-card teacher-only">
+                            <h3 class="fs-4 fw-semibold mb-3">
+                                <i class="fas fa-clock text-primary me-2"></i>Controle de Tempo
+                            </h3>
+                            <div class="timer-display mb-3" id="timer-1">25:00</div>
+                            <div class="text-center">
+                                <button class="control-button play-btn" onclick="startTimer(1, 1500)">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <button class="control-button pause-btn" onclick="pauseTimer(1)">
+                                    <i class="fas fa-pause"></i>
+                                </button>
+                                <button class="control-button reset-btn" onclick="resetTimer(1, 1500)">
+                                    <i class="fas fa-redo"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Teacher Instructions -->
+                        <div class="instruction-card teacher-only">
+                            <h3 class="fs-4 fw-semibold mb-3">
+                                <i class="fas fa-chalkboard-teacher text-primary me-2"></i>Instruções para o Professor
+                            </h3>
+                            <div class="callout-tip">
+                                <strong>Fundamentação:</strong> A decomposição com o agrupamento de tarefas reduz sobrecarga cognitiva permitindo processamento mais profundo (Sweller, 2011).
+                            </div>
+
+                            <div class="materials-highlight">
+                                <strong>Material para Sub-etapa 1a:</strong> Envelope A (cartas aleatórias); Folhas em branco para Tabela de Rastreio, rascunho e observações; canetas coloridas (<span class="color-pen pen-blue"></span>azuis, <span class="color-pen pen-red"></span>vermelhas e <span class="color-pen pen-green"></span>verdes).
+                            </div>
+                            
+                            <h4 class="fs-5 fw-semibold mt-4 mb-3">Sub-etapa 1a: Descoberta Pura (8 min)</h4>
+                            <div class="callout-success">
+                                <strong>Fundamentação:</strong> A descoberta ativa promove maior engajamento e retenção (Roediger, 2011).
+                            </div>
+                            <ul>
+                                <li>Entregue apenas o Envelope A (cartas aleatórias)</li>
+                                <li><strong>Importante:</strong> Peça para anotarem a posição inicial das cartas no envelope</li>
+                                <li>Não mencione algoritmos específicos ainda</li>
+                                <li>Permita livre experimentação</li>
+                                <li>Observe as estratégias emergentes</li>
+                            </ul>
+                            
+                            <h4 class="fs-5 fw-semibold mt-4 mb-3">Sub-etapa 1b: Formalização (7 min)</h4>
+                            <ul>
+                                <li>Forneça papel para pseudocódigo/fluxograma</li>
+                                <li>Circule ajudando na formalização</li>
+                                <li>Incentive precisão nas instruções</li>
+                                <li>Faça as perguntas guia listadas</li>
+                            </ul>
+                            
+                            <h4 class="fs-5 fw-semibold mt-4 mb-3">Sub-etapa 1c: Depuração (8 min)</h4>
+                            <ul>
+                                <li>Distribua as Tabelas de Rastreio</li>
+                                <li>Forneça canetas coloridas para marcação</li>
+                                <li>Incentive execução step-by-step</li>
+                                <li>Identifique grupos com dificuldades</li>
+                                <li>Objetivo: Metacognição sobre o processo algorítmico</li>
+                            </ul>
+                            
+                            <h4 class="fs-5 fw-semibold mt-4 mb-3">Sub-etapa 1d: Consolidação (2 min)</h4>
+                            <div class="callout-tip">
+                                <strong>Fundamentação:</strong> A recuperação ativa fortalece consolidação de memória (Roediger, 2011; Rohrer, 2007).
+                            </div>
+                            <ul>
+                                <li>Peça para fecharem materiais</li>
+                                <li>Formar duplas para explicação oral</li>
+                                <li>Circular ouvindo as explicações</li>
+                                <li>Identificar conceitos mal compreendidos</li>
+                            </ul>
+                        </div>
+
+                        <!-- Student Instructions -->
+                        <div class="instruction-card student-facing">
+                            <h3 class="fs-4 fw-semibold mb-3">
+                                <i class="fas fa-users text-success me-2"></i>Instruções para os Alunos
+                            </h3>
+                            
+                            <h4 class="fs-5 fw-semibold mt-4 mb-3">Parte A: Descoberta Pura (8 minutos)</h4>
+                            <p class="fs-5 border p-3 bg-light rounded">
+                                <strong>"Ordenem estas cartas e durante a ordenação criem um conjunto de regras que qualquer pessoa possa seguir."</strong><br><br>
+                                <strong>IMPORTANTE:</strong> Anotem a posição inicial das cartas no envelope.
+                            </p>
+                            
+                            <h4 class="fs-5 fw-semibold mt-4 mb-3">Parte B: Formalização (7 minutos)</h4>
+                            <p class="fs-5 border p-3 bg-light rounded">
+                                <strong>"Agora convertam sua estratégia para pseudocódigo ou fluxograma."</strong><br><br>
+                                Perguntas para refletir:<br>
+                                • Qual parte foi mais difícil de entender?<br>
+                                • Vocês perceberam algum padrão nas trocas?<br>
+                                • Como verificar se o algoritmo está correto?
+                            </p>
+                            
+                            <h4 class="fs-5 fw-semibold mt-4 mb-3">Parte C: Depuração (8 minutos)</h4>
+                            <p class="fs-5 border p-3 bg-light rounded">
+                                <strong>"Executem o algoritmo passo a passo na tabela para provar que funciona."</strong><br><br>
+                                Usem canetas de cores diferentes para comparações e trocas.
+                            </p>
+                            
+                            <h4 class="fs-5 fw-semibold mt-4 mb-3">Parte D: Consolidação (2 minutos)</h4>
+                            <p class="fs-5 border p-3 bg-light rounded">
+                                <strong>"Fechem materiais. Expliquem para o colega ao lado a lógica do algoritmo sem consultar anotações."</strong>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4">
+                        <div class="instruction-card">
+                            <h4 class="fs-5 fw-semibold mb-3">Materiais para Esta Etapa</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>Envelope A: cartas aleatórias</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Folhas para pseudocódigo</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Tabelas de Rastreio</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Canetas: <span class="color-pen pen-blue"></span><span class="color-pen pen-red"></span><span class="color-pen pen-green"></span></li>
+                            </ul>
+                            
+                            <h4 class="fs-5 fw-semibold mb-3 mt-4">Distribuição do Tempo</h4>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span>Descoberta Pura</span>
+                                <span class="badge bg-primary">8 min</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span>Formalização</span>
+                                <span class="badge bg-primary">7 min</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span>Depuração</span>
+                                <span class="badge bg-primary">8 min</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span>Consolidação</span>
+                                <span class="badge bg-primary">2 min</span>
+                            </div>
+                        </div>
+                        
+                        <div class="notes-area">
+                            <label class="fw-semibold mb-2">Notas da Etapa 1:</label>
+                            <textarea class="form-control border-0 bg-transparent" rows="8" placeholder="Anote observações sobre algoritmos descobertos, dificuldades dos grupos..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 2: Predição -->
+            <div class="stage-content" id="stage-2" style="display: none;">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h2 class="display-6 fw-bold mb-4">Etapa 2: Predição e Teste de Eficiência (18 min)</h2>
+                        
+                        <!-- Timer Section -->
+                        <div class="instruction-card teacher-only">
+                            <h3 class="fs-4 fw-semibold mb-3">
+                                <i class="fas fa-clock text-primary me-2"></i>Controle de Tempo
+                            </h3>
+                            <div class="timer-display mb-3" id="timer-2">18:00</div>
+                            <div class="text-center">
+                                <button class="control-button play-btn" onclick="startTimer(2, 1080)">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <button class="control-button pause-btn" onclick="pauseTimer(2)">
+                                    <i class="fas fa-pause"></i>
+                                </button>
+                                <button class="control-button reset-btn" onclick="resetTimer(2, 1080)">
+                                    <i class="fas fa-redo"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Teacher Instructions -->
+                        <div class="instruction-card teacher-only">
+                            <h3 class="fs-4 fw-semibold mb-3">
+                                <i class="fas fa-chalkboard-teacher text-primary me-2"></i>Instruções para o Professor
+                            </h3>
+                            <div class="callout-tip">
+                                <strong>Fundamentação:</strong> A predição ativa o processamento elaborativo, melhorando compreensão (Chi, 1994).
+                            </div>
+                            
+                            <h4 class="fs-5 fw-semibold mt-4 mb-3">Sub-etapa 2a: Elaborative Prediction (5 min)</h4>
+                            <ul>
+                                <li>NÃO entregue os Envelopes B e C ainda</li>
+                                <li>Explique os conceitos de "melhor caso" e "pior caso"</li>
+                                <li>Peça para explicarem no papel, em linguagem natural</li>
+                                <li>Enfatize a necessidade de justificativas</li>
+                                <li>Anote predições interessantes no quadro</li>
+                            </ul>
+                            
+                            <h4 class="fs-5 fw-semibold mt-4 mb-3">Sub-etapa 2b: Teste e Coleta (13 min)</h4>
+                            <ul>
+                                <li>Entregue Envelope B (melhor caso) e Envelope C (pior caso)</li>
+                                <li>Circule verificando se usam exatamente o mesmo algoritmo</li>
+                                <li>Ajude grupos com dificuldade na contagem</li>
+                                <li>Peça para compararem com suas predições</li>
+                                <li>Identifique discrepâncias interessantes</li>
+                            </ul>
+                        </div>
+
+                        <!-- Student Instructions -->
+                        <div class="instruction-card student-facing">
+                            <h3 class="fs-4 fw-semibold mb-3">
+                                <i class="fas fa-users text-success me-2"></i>Instruções para os Alunos
+                            </h3>
+                            
+                            <h4 class="fs-5 fw-semibold mt-4 mb-3">Parte A: Elaborative Prediction (5 minutos)</h4>
+                            <p class="fs-5 border p-3 bg-light rounded">
+                                <strong>"Baseado na lógica do algoritmo, expliquem, no papel, em linguagem natural, como ele se comportaria em três casos:</strong><br>
+                                • Melhor caso: ___ comparações, ___ trocas<br>
+                                • Pior caso: ___ comparações, ___ trocas<br><br>
+                                <strong>Justifiquem as suas predições."</strong>
+                            </p>
+                            
+                            <h4 class="fs-5 fw-semibold mt-4 mb-3">Parte B: Teste e Coleta (13 minutos)</h4>
+                            <p class="fs-5 border p-3 bg-light rounded">
+                                <strong>"Usem exatamente o mesmo algoritmo para os três casos. Contem comparações e trocas."</strong><br><br>
+                                Comparem predições com resultados reais e preencham a tabela.
+                            </p>
+                            
+                            <div class="table-responsive mt-3">
+                                <table class="table table-bordered">
+                                    <thead class="table-primary">
+                                        <tr>
+                                            <th>Caso</th>
+                                            <th>Predição Comp.</th>
+                                            <th>Real Comp.</th>
+                                            <th>Predição Trocas</th>
+                                            <th>Real Trocas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Aleatório</td>
+                                            <td>____</td>
+                                            <td>____</td>
+                                            <td>____</td>
+                                            <td>____</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Melhor</td>
+                                            <td>____</td>
+                                            <td>____</td>
+                                            <td>____</td>
+                                            <td>____</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Pior</td>
+                                            <td>____</td>
+                                            <td>____</td>
+                                            <td>____</td>
+                                            <td>____</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4">
+                        <div class="instruction-card">
+                            <h4 class="fs-5 fw-semibold mb-3">Materiais para Esta Etapa</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>Envelope B: melhor caso</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Envelope C: pior caso</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Tabela de resultados</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Papel para predições em linguagem natural</li>
+                            </ul>
+                            
+                            <h4 class="fs-5 fw-semibold mb-3 mt-4">Exemplos de Casos</h4>
+                            <div class="mb-3">
+                                <strong>Melhor Caso (Envelope B):</strong><br>
+                                <span class="text-muted">[1, 2, 3, 5, 4, 6] - quase ordenado</span>
+                            </div>
+                            <div class="mb-3">
+                                <strong>Pior Caso (Envelope C):</strong><br>
+                                <span class="text-muted">[8, 7, 6, 5, 4, 3] - ordem inversa</span>
+                            </div>
+                        </div>
+                        
+                        <div class="notes-area">
+                            <label class="fw-semibold mb-2">Notas da Etapa 2:</label>
+                            <textarea class="form-control border-0 bg-transparent" rows="8" placeholder="Anote predições interessantes, discrepâncias encontradas..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 3: Apresentação -->
+            <div class="stage-content" id="stage-3" style="display: none;">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h2 class="display-6 fw-bold mb-4">Etapa 3: Apresentação com Elaborative Interrogation (20 min)</h2>
+                        
+                        <!-- Timer Section -->
+                        <div class="instruction-card teacher-only">
+                            <h3 class="fs-4 fw-semibold mb-3">
+                                <i class="fas fa-clock text-primary me-2"></i>Controle de Tempo
+                            </h3>
+                            <div class="timer-display mb-3" id="timer-3">20:00</div>
+                            <div class="text-center">
+                                <button class="control-button play-btn" onclick="startTimer(3, 1200)">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <button class="control-button pause-btn" onclick="pauseTimer(3)">
+                                    <i class="fas fa-pause"></i>
+                                </button>
+                                <button class="control-button reset-btn" onclick="resetTimer(3, 1200)">
+                                    <i class="fas fa-redo"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Teacher Instructions -->
+                        <div class="instruction-card teacher-only">
+                            <h3 class="fs-4 fw-semibold mb-3">
+                                <i class="fas fa-chalkboard-teacher text-primary me-2"></i>Instruções para o Professor
+                            </h3>
+                            <div class="callout-tip">
+                                <strong>Fundamentação:</strong> Perguntas elaborativas aprofundam compreensão e criam conexões causais (Cepeda, 2006).
+                            </div>
+                            
+                            <h4 class="fs-5 fw-semibold mt-4 mb-3">Sub-etapa 3a: Retrieval Before Presentation (3 min)</h4>
+                            <ul>
+                                <li>Peça para reconstituírem mentalmente o processo</li>
+                                <li>Não permitir consulta às anotações</li>
+                                <li>Observar quais grupos têm dificuldade</li>
+                            </ul>
+                            
+                            <h4 class="fs-5 fw-semibold mt-4 mb-3">Sub-etapa 3b: Apresentação Estruturada (17 min)</h4>
+                            <ul>
+                                <li>Limite 3-4 minutos por grupo</li>
+                                <li>Faça as perguntas de Elaborative Interrogation</li>
+                                <li>Identifique algoritmos clássicos (Bubble, Selection, Insertion)</li>
+                                <li>Conecte com nomes formais dos algoritmos</li>
+                                <li>Destaque vantagens/desvantagens de cada abordagem</li>
+                                <li><strong>Nota:</strong> Esteja preparado para algoritmos avançados (Quick Sort, Merge Sort)</li>
+                            </ul>
+                            
+                            <div class="callout-warning">
+                                <strong>Perguntas Essenciais de Elaborative Interrogation:</strong>
+                                <ul class="mt-2 mb-0">
+                                    <li>"Por que esse algoritmo precisou de mais trocas neste caso?"</li>
+                                    <li>"Como isso se relaciona com complexidade algorítmica?"</li>
+                                    <li>"Que aconteceria com 1000 elementos?"</li>
+                                    <li>"Em que situação prática isso seria problemático?"</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Student Instructions -->
+                        <div class="instruction-card student-facing">
+                            <h3 class="fs-4 fw-semibold mb-3">
+                                <i class="fas fa-users text-success me-2"></i>Instruções para os Alunos
+                            </h3>
+                            
+                            <h4 class="fs-5 fw-semibold mt-4 mb-3">Parte A: Recuperação Mental (3 minutos)</h4>
+                            <p class="fs-5 border p-3 bg-light rounded">
+                                <strong>"Antes de apresentar, reconstituam mentalmente todo o processo sem consultar anotações."</strong>
+                            </p>
+                            
+                            <h4 class="fs-5 fw-semibold mt-4 mb-3">Parte B: Apresentação (17 minutos)</h4>
+                            <p class="fs-5 border p-3 bg-light rounded">
+                                <strong>Cada grupo deve apresentar:</strong><br>
+                                1. Fluxograma/pseudocódigo no quadro<br>
+                                2. Tabela de resultados (predições vs realidade)<br>
+                                3. Gráfico visual de comparações/trocas por caso
+                            </p>
+                        </div>
+
+                        <!-- Algorithm Connections -->
+                        <div class="instruction-card teacher-only">
+                            <h3 class="fs-4 fw-semibold mb-3">
+                                <i class="fas fa-link text-primary me-2"></i>Conexões com Algoritmos Clássicos
+                            </h3>
+                            
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="border rounded p-3 mb-3 bg-primary-subtle">
+                                        <h5 class="fw-bold text-primary">Bubble Sort</h5>
+                                        <p class="fs-6 mb-0">"Essa estratégia de vizinhos é o Bubble Sort. Observem como o pior caso explodiu. Por quê?"</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="border rounded p-3 mb-3 bg-success-subtle">
+                                        <h5 class="fw-bold text-success">Selection Sort</h5>
+                                        <p class="fs-6 mb-0">"O Selection Sort sempre tem poucas trocas. Quando isso é vantajoso?"</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="border rounded p-3 mb-3 bg-warning-subtle">
+                                        <h5 class="fw-bold text-warning">Insertion Sort</h5>
+                                        <p class="fs-6 mb-0">"O Insertion Sort foi eficiente no melhor caso. Quando usar?"</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4">
+                        <div class="instruction-card">
+                            <h4 class="fs-5 fw-semibold mb-3">Roteiro de Apresentação</h4>
+                            <ol>
+                                <li>Algoritmo no quadro (2 min)</li>
+                                <li>Resultados e predições (2 min)</li>
+                                <li>Perguntas do professor (1 min)</li>
+                                <li>Próximo grupo</li>
+                            </ol>
+                            
+                            <h4 class="fs-5 fw-semibold mb-3 mt-4">Critérios de Avaliação</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>Clareza do algoritmo</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Precisão dos resultados</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Qualidade das justificativas</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Participação da equipe</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="notes-area">
+                            <label class="fw-semibold mb-2">Notas da Etapa 3:</label>
+                            <textarea class="form-control border-0 bg-transparent" rows="8" placeholder="Anote algoritmos descobertos, conexões feitas, dificuldades conceituais..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 4: Transfer -->
+            <div class="stage-content" id="stage-4" style="display: none;">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h2 class="display-6 fw-bold mb-4">Etapa 4: Transfer Learning e Metacognição (12 min)</h2>
+                        
+                        <!-- Timer Section -->
+                        <div class="instruction-card teacher-only">
+                            <h3 class="fs-4 fw-semibold mb-3">
+                                <i class="fas fa-clock text-primary me-2"></i>Controle de Tempo
+                            </h3>
+                            <div class="timer-display mb-3" id="timer-4">12:00</div>
+                            <div class="text-center">
+                                <button class="control-button play-btn" onclick="startTimer(4, 720)">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <button class="control-button pause-btn" onclick="pauseTimer(4)">
+                                    <i class="fas fa-pause"></i>
+                                </button>
+                                <button class="control-button reset-btn" onclick="resetTimer(4, 720)">
+                                    <i class="fas fa-redo"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Teacher Instructions -->
+                        <div class="instruction-card teacher-only">
+                            <h3 class="fs-4 fw-semibold mb-3">
+                                <i class="fas fa-chalkboard-teacher text-primary me-2"></i>Instruções para o Professor
+                            </h3>
+                            <div class="callout-tip">
+                                <strong>Fundamentação:</strong> A transferência para novos contextos consolida aprendizagem profunda (Rohrer & Taylor, 2007).
+                            </div>
+                            
+                            <h4 class="fs-5 fw-semibold mt-4 mb-3">Sub-etapa 4a: Transfer Tasks (7 min)</h4>
+                            <ul>
+                                <li>Apresente os cenários de transferência</li>
+                                <li>Circule ouvindo as discussões dos grupos</li>
+                                <li>Faça perguntas que estimulem conexões</li>
+                                <li>Destaque aplicações criativas</li>
+                                <li>Enfatize que devem responder no papel</li>
+                            </ul>
+                            
+                            <h4 class="fs-5 fw-semibold mt-4 mb-3">Sub-etapa 4b: Reflexão Metacognitiva (5 min)</h4>
+                            <div class="callout-success">
+                                <strong>Fundamentação:</strong> Reflexão metacognitiva melhora aprendizagem futura (Schraw & Moshman, 1995).
+                            </div>
+                            <ul>
+                                <li>Peça reflexão individual primeiro</li>
+                                <li>Enfatize que cada um deve escrever individualmente</li>
+                                <li>Permita compartilhamento voluntário</li>
+                                <li>Identifique insights importantes</li>
+                                <li>Reforce conexões com aprendizagem futura</li>
+                            </ul>
+                        </div>
+
+                        <!-- Student Instructions -->
+                        <div class="instruction-card student-facing">
+                            <h3 class="fs-4 fw-semibold mb-3">
+                                <i class="fas fa-users text-success me-2"></i>Instruções para os Alunos
+                            </h3>
+                            
+                            <h4 class="fs-5 fw-semibold mt-4 mb-3">Parte A: Transfer Tasks (7 minutos)</h4>
+                            <p class="fs-5 border p-3 bg-light rounded">
+                                <strong>"Respondam, em papel, as perguntas a seguir referentes a aplicação dos algoritmos a situações reais:</strong><br><br>
+                                1. Como ordenariam playlist de 10.000 músicas em smartphone com pouca memória?<br>
+                                2. Como ordenariam lista de emergências médicas por gravidade?<br>
+                                3. Que modificações fariam nos algoritmos para cada caso?"
+                            </p>
+                            
+                            <h4 class="fs-5 fw-semibold mt-4 mb-3">Parte B: Reflexão Metacognitiva (5 minutos)</h4>
+                            <div class="border p-3 bg-light rounded">
+                                <p><strong>"Cada um de vocês deve escrever uma reflexão individual sobre o processo de aprendizagem de hoje, respondendo às seguintes perguntas:"</strong></p>
+                                <ol>
+                                    <li>"Que momento foi mais difícil no processo? Por quê?"</li>
+                                    <li>"Quando vocês 'clicaram' com a solução? O que mudou?"</li>
+                                    <li>"Se fossem ensinar para um calouro, que passo fariam diferente?"</li>
+                                    <li>"Que conexões veem entre esta atividade e problemas reais de programação?"</li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <!-- Final Discussion -->
+                        <div class="instruction-card teacher-only">
+                            <h3 class="fs-4 fw-semibold mb-3">
+                                <i class="fas fa-comments text-primary me-2"></i>Discussão Final Guiada (Incluída na Etapa 4)
+                            </h3>
+                            <p><strong>O professor deve conduzir uma discussão final, onde os alunos compartilham suas reflexões e insights:</strong></p>
+                            <ol>
+                                <li>"Observando todos os dados, qual algoritmo é mais eficiente para lista quase ordenada?"</li>
+                                <li>"Qual sofre mais com ordem inversa? Por que isso acontece neurologicamente?"</li>
+                                <li>"Se troca fosse custosa mas comparação barata, qual seria melhor?"</li>
+                                <li>"Para 1000 itens, como cresceria o número de operações? Linear ou quadrático?"</li>
+                                <li>"Existe um algoritmo 'melhor' universal? Por que não?"</li>
+                                <li>"Em fita magnética sequencial, qual seria mais adequado?"</li>
+                                <li>"Em lista encadeada, qual ficaria mais difícil?"</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4">
+                        <div class="instruction-card">
+                            <h4 class="fs-5 fw-semibold mb-3">Objetivos da Etapa</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-bullseye text-warning me-2"></i>Consolidar aprendizagem profunda</li>
+                                <li><i class="fas fa-bullseye text-warning me-2"></i>Desenvolver transferência</li>
+                                <li><i class="fas fa-bullseye text-warning me-2"></i>Estimular metacognição individual</li>
+                                <li><i class="fas fa-bullseye text-warning me-2"></i>Preparar aprendizagem futura</li>
+                            </ul>
+                            
+                            <div class="callout-success mt-4">
+                                <strong>Avaliação:</strong><br>
+                                A avaliação será baseada em <em>peers review</em> e autoavaliação. Ferramenta disponível em: <a href="https://frankalcantara.com/raciocinio/avaliacao/modulo3-1.html" target="_blank" class="text-decoration-none">frankalcantara.com/raciocinio/avaliacao/modulo3-1.html</a>
+                            </div>
+                        </div>
+                        
+                        <div class="notes-area">
+                            <label class="fw-semibold mb-2">Notas da Etapa 4:</label>
+                            <textarea class="form-control border-0 bg-transparent" rows="8" placeholder="Anote insights metacognitivos, aplicações criativas, conexões importantes..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Follow-up Section -->
+        <div class="card-custom" style="margin-top: 2rem;">
+            <h3 class="fs-4 fw-semibold mb-4">
+                <i class="fas fa-calendar-plus text-info me-2"></i>
+                Sessão de Follow-up - Spacing Effect (Próxima Aula - 15 min)
+            </h3>
+            <div class="callout-tip">
+                <strong>Fundamentação:</strong> O spacing effect demonstra que distribuição temporal consolida memória de longo prazo (Cepeda et al., 2006).
+            </div>
+            
+            <h4 class="fs-5 fw-semibold mb-3">Retrieval Practice Diferido:</h4>
+            <ol>
+                <li><strong>Reconstrução</strong> (3 min): "Sem material, desenhem o algoritmo que criaram"</li>
+                <li><strong>Predição Escalada</strong> (2 min): "Para 100 elementos invertidos, quantas comparações aproximadamente?"</li>
+                <li><strong>Aplicação Contextual</strong> (5 min): "Identifiquem situação real ideal para cada algoritmo"</li>
+                <li><strong>Mini-quiz Adaptativo</strong> (5 min): "Dados 3 arrays, escolham algoritmo mais eficiente"</li>
+            </ol>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Timer state
+        let timers = {
+            0: { time: 600, original: 600, interval: null, running: false },
+            1: { time: 1500, original: 1500, interval: null, running: false },
+            2: { time: 1080, original: 1080, interval: null, running: false },
+            3: { time: 1200, original: 1200, interval: null, running: false },
+            4: { time: 720, original: 720, interval: null, running: false }
+        };
+        
+        let totalTime = 0;
+        let totalInterval = null;
+        let totalRunning = false;
+        let currentStage = 0;
+        
+        // Total time for activity (85 minutes)
+        const TOTAL_ACTIVITY_TIME = 5100; // 85 minutes in seconds
+
+        function formatTime(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const secs = seconds % 60;
+            
+            if (hours > 0) {
+                return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }
+            return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function updateTimerDisplay(stage) {
+            const display = document.getElementById(`timer-${stage}`);
+            const time = timers[stage].time;
+            display.textContent = formatTime(time);
+            
+            // Update timer color based on remaining time
+            const percentage = time / timers[stage].original;
+            if (percentage <= 0.2) {
+                display.className = 'timer-display danger';
+            } else if (percentage <= 0.4) {
+                display.className = 'timer-display warning';
+            } else {
+                display.className = 'timer-display';
+            }
+        }
+
+        function updateTotalTimer() {
+            document.getElementById('totalTimer').textContent = formatTime(totalTime);
+            const percentage = (totalTime / TOTAL_ACTIVITY_TIME) * 100;
+            document.getElementById('totalProgress').style.width = `${Math.min(percentage, 100)}%`;
+        }
+
+        function startTimer(stage, duration = null) {
+            if (duration !== null) {
+                timers[stage].time = duration;
+                timers[stage].original = duration;
+            }
+            
+            if (timers[stage].interval) {
+                clearInterval(timers[stage].interval);
+            }
+            
+            timers[stage].running = true;
+            timers[stage].interval = setInterval(() => {
+                if (timers[stage].time > 0) {
+                    timers[stage].time--;
+                    updateTimerDisplay(stage);
+                } else {
+                    pauseTimer(stage);
+                    // Timer finished alert
+                    showNotification(`Etapa ${stage} finalizada!`, 'success');
+                }
+            }, 1000);
+            
+            updateTimerDisplay(stage);
+            
+            // Start total timer if not running
+            if (!totalRunning) {
+                startTotalTimer();
+            }
+        }
+
+        function pauseTimer(stage) {
+            if (timers[stage].interval) {
+                clearInterval(timers[stage].interval);
+                timers[stage].interval = null;
+                timers[stage].running = false;
+            }
+        }
+
+        function resetTimer(stage, duration) {
+            pauseTimer(stage);
+            timers[stage].time = duration;
+            timers[stage].original = duration;
+            updateTimerDisplay(stage);
+        }
+
+        function startTotalTimer() {
+            if (!totalRunning) {
+                totalRunning = true;
+                totalInterval = setInterval(() => {
+                    totalTime++;
+                    updateTotalTimer();
+                }, 1000);
+            }
+        }
+
+        function pauseTotalTimer() {
+            if (totalInterval) {
+                clearInterval(totalInterval);
+                totalInterval = null;
+                totalRunning = false;
+            }
+        }
+
+        function resetAll() {
+            // Reset all stage timers
+            Object.keys(timers).forEach(stage => {
+                pauseTimer(parseInt(stage));
+                timers[stage].time = timers[stage].original;
+                updateTimerDisplay(parseInt(stage));
+            });
+            
+            // Reset total timer
+            pauseTotalTimer();
+            totalTime = 0;
+            updateTotalTimer();
+            
+            // Reset UI
+            showStage(0);
+            updateStageStatus();
+            
+            showNotification('Atividade resetada!', 'info');
+        }
+
+        function startActivity() {
+            resetAll();
+            showStage(0);
+            showNotification('Atividade A3 iniciada! Comece com a Etapa 0.', 'success');
+        }
+
+        function showStage(stage) {
+            // Hide all stage contents
+            document.querySelectorAll('.stage-content').forEach(content => {
+                content.style.display = 'none';
+            });
+            
+            // Show selected stage
+            document.getElementById(`stage-${stage}`).style.display = 'block';
+            
+            // Update navigation
+            document.querySelectorAll('.stage-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector(`[data-stage="${stage}"]`).classList.add('active');
+            
+            currentStage = stage;
+        }
+
+        function updateStageStatus() {
+            document.querySelectorAll('.stage-item').forEach((item, index) => {
+                const badge = item.querySelector('.stage-badge');
+                if (index < currentStage) {
+                    badge.className = 'stage-badge badge-completed';
+                    item.classList.add('completed');
+                } else if (index === currentStage) {
+                    badge.className = 'stage-badge badge-active';
+                    item.classList.add('active');
+                } else {
+                    badge.className = 'stage-badge badge-pending';
+                    item.classList.remove('active', 'completed');
+                }
+            });
+        }
+
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+            notification.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+            notification.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize timer displays
+            Object.keys(timers).forEach(stage => {
+                updateTimerDisplay(parseInt(stage));
+            });
+            updateTotalTimer();
+            
+            // Setup stage navigation
+            document.querySelectorAll('.stage-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const stage = parseInt(this.dataset.stage);
+                    showStage(stage);
+                });
+            });
+            
+            // Initialize first stage
+            showStage(0);
+            updateStageStatus();
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey) {
+                switch(e.key) {
+                    case '1':
+                        e.preventDefault();
+                        showStage(0);
+                        break;
+                    case '2':
+                        e.preventDefault();
+                        showStage(1);
+                        break;
+                    case '3':
+                        e.preventDefault();
+                        showStage(2);
+                        break;
+                    case '4':
+                        e.preventDefault();
+                        showStage(3);
+                        break;
+                    case '5':
+                        e.preventDefault();
+                        showStage(4);
+                        break;
+                    case ' ':
+                        e.preventDefault();
+                        startTimer(currentStage);
+                        break;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

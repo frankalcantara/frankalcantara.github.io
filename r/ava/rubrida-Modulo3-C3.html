@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Rubrica de Autoavaliação: Algoritmos de Busca</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --academic-50: #f8fafc;
+            --academic-100: #f1f5f9;
+            --academic-200: #e2e8f0;
+            --academic-300: #cbd5e1;
+            --academic-400: #94a3b8;
+            --academic-500: #64748b;
+            --academic-600: #475569;
+            --academic-700: #334155;
+            --academic-800: #1e293b;
+            --academic-900: #0f172a;
+            --primary-50: #eff6ff;
+            --primary-100: #dbeafe;
+            --primary-200: #bfdbfe;
+            --primary-300: #93c5fd;
+            --primary-400: #60a5fa;
+            --primary-500: #3b82f6;
+            --primary-600: #2563eb;
+            --primary-700: #1d4ed8;
+            --primary-800: #1e40af;
+            --primary-900: #1e3a8a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Text', serif;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--academic-800), var(--primary-600));
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .rubric-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .rubric-table table {
+            margin-bottom: 0;
+        }
+
+        .rubric-header {
+            background: linear-gradient(135deg, var(--academic-700), var(--primary-600));
+            color: white;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .criterion-header {
+            background: var(--academic-100);
+            font-weight: 600;
+            vertical-align: middle;
+            border-right: 2px solid var(--academic-300);
+        }
+
+        .level-insuficiente {
+            background: #fee2e2;
+            border-left: 4px solid #ef4444;
+        }
+
+        .level-basico {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .level-proficiente {
+            background: #dbeafe;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .level-avancado {
+            background: #dcfce7;
+            border-left: 4px solid #10b981;
+        }
+
+        .level-header {
+            font-weight: 600;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .level-insuficiente .level-header {
+            color: #dc2626;
+        }
+
+        .level-basico .level-header {
+            color: #d97706;
+        }
+
+        .level-proficiente .level-header {
+            color: #2563eb;
+        }
+
+        .level-avancado .level-header {
+            color: #059669;
+        }
+
+        .criteria-description {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            padding: 0.75rem;
+        }
+
+        .radio-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .radio-container input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .score-summary {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+
+        .score-display {
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .score-excellent { color: #10b981; }
+        .score-good { color: #3b82f6; }
+        .score-fair { color: #f59e0b; }
+        .score-poor { color: #ef4444; }
+
+        .reflection-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+
+        .group-info {
+            background: var(--primary-50);
+            border: 1px solid var(--primary-200);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .callout-tip {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .btn-custom {
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .team-member {
+            background: var(--academic-50);
+            border: 1px solid var(--academic-200);
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
+            display: inline-block;
+        }
+
+        .criterion-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .icon-imediato { background: #ef4444; }
+        .icon-transferencia { background: #10b981; }
+        .icon-predicao { background: #3b82f6; }
+        .icon-metacognicao { background: #8b5cf6; }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            
+            body {
+                background: white;
+            }
+            
+            .rubric-table, .score-summary, .reflection-section {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+
+        .search-sequence {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .search-step {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-600);
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .search-step:nth-child(odd) {
+            background: #10b981;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold mb-3">Rubrica de Autoavaliação</h1>
+                    <p class="fs-5 mb-0">Atividade: Descobrindo a Eficiência de Algoritmos de Busca</p>
+                    <div class="mt-3">
+                        <span class="badge bg-light text-dark fs-6 me-2">Metodologia DAAD</span>
+                        <span class="badge bg-light text-dark fs-6 me-2">Neurociência Cognitiva</span>
+                        <span class="badge bg-light text-dark fs-6">Autoavaliação</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <div class="search-sequence">
+                        <div class="search-step">🔍</div>
+                        <div class="search-step">📊</div>
+                        <div class="search-step">⚡</div>
+                        <div class="search-step">🧠</div>
+                        <div class="search-step">🎯</div>
+                    </div>
+                    <div class="text-light">Sequência de Descoberta</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Group Information -->
+        <div class="group-info">
+            <h3 class="fs-4 fw-semibold mb-3">
+                <i class="fas fa-users text-primary me-2"></i>
+                Informações do Grupo
+            </h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Nome do Grupo:</label>
+                    <input type="text" class="form-control" id="groupName" placeholder="Ex: Exploradores Digitais">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Data:</label>
+                    <input type="date" class="form-control" id="evaluationDate">
+                </div>
+            </div>
+            <div class="mt-3">
+                <label class="form-label fw-semibold">Integrantes do Grupo:</label>
+                <div id="teamMembers">
+                    <input type="text" class="form-control mb-2" placeholder="Nome do integrante 1">
+                    <input type="text" class="form-control mb-2" placeholder="Nome do integrante 2">
+                    <input type="text" class="form-control mb-2" placeholder="Nome do integrante 3">
+                    <input type="text" class="form-control mb-2" placeholder="Nome do integrante 4">
+                </div>
+                <button class="btn btn-outline-primary btn-sm" onclick="addMember()">
+                    <i class="fas fa-plus me-1"></i>Adicionar Integrante
+                </button>
+            </div>
+        </div>
+
+        <div class="callout-tip">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-info-circle me-2 text-info"></i>
+                <strong>Como usar esta rubrica:</strong>
+            </div>
+            <p class="mt-2 mb-0">
+                Leiam cada critério com atenção e marquem o nível que melhor descreve o desempenho do grupo na descoberta dos algoritmos de busca. Sejam honestos e construtivos na avaliação. O objetivo é aprender e melhorar, não apenas obter pontuação alta.
+            </p>
+        </div>
+
+        <!-- Rubric Table -->
+        <div class="rubric-table">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="rubric-header">
+                        <th style="width: 20%;">Critério de Avaliação</th>
+                        <th style="width: 20%;">Insuficiente (1)</th>
+                        <th style="width: 20%;">Básico (2)</th>
+                        <th style="width: 20%;">Proficiente (3)</th>
+                        <th style="width: 20%;">Avançado (4)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Critério 1: Aprendizado Imediato -->
+                    <tr>
+                        <td class="criterion-header">
+                            <div class="d-flex align-items-center">
+                                <div class="criterion-icon icon-imediato me-3">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-bold">1. Aprendizado Imediato</div>
+                                    <div class="fs-6 text-muted">Criação e depuração de algoritmo de busca</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="level-insuficiente">
+                            <div class="level-header">Insuficiente</div>
+                            <div class="criteria-description">
+                                • Algoritmo de busca incompleto ou incorreto<br>
+                                • Depuração ineficaz, muitos erros não detectados<br>
+                                • Dificuldade em compreender o processo de busca<br>
+                                • Tabela de rastreio mal executada ou incompleta<br>
+                                • Não consegue contar verificações corretamente
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" name="criterio1" value="1" onchange="updateScore()">
+                            </div>
+                        </td>
+                        <td class="level-basico">
+                            <div class="level-header">Básico</div>
+                            <div class="criteria-description">
+                                • Algoritmo de busca funcional mas com algumas falhas<br>
+                                • Depuração parcial, alguns erros corrigidos<br>
+                                • Compreensão superficial do processo de busca<br>
+                                • Tabela de rastreio com erros menores<br>
+                                • Contagem de verificações aproximadamente correta
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" name="criterio1" value="2" onchange="updateScore()">
+                            </div>
+                        </td>
+                        <td class="level-proficiente">
+                            <div class="level-header">Proficiente</div>
+                            <div class="criteria-description">
+                                • Algoritmo de busca correto e bem estruturado<br>
+                                • Depuração eficaz, maioria dos erros detectados<br>
+                                • Boa compreensão do processo de busca sequencial<br>
+                                • Tabela de rastreio precisa e organizada<br>
+                                • Contagem correta de verificações realizadas
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" name="criterio1" value="3" onchange="updateScore()">
+                            </div>
+                        </td>
+                        <td class="level-avancado">
+                            <div class="level-header">Avançado</div>
+                            <div class="criteria-description">
+                                • Algoritmo de busca otimizado e elegante<br>
+                                • Depuração sistemática e completa<br>
+                                • Compreensão profunda e explicação clara<br>
+                                • Tabela de rastreio exemplar, uso criativo de cores<br>
+                                • Análise precisa de verificações e otimizações
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" name="criterio1" value="4" onchange="updateScore()">
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Critério 2: Transferência -->
+                    <tr>
+                        <td class="criterion-header">
+                            <div class="d-flex align-items-center">
+                                <div class="criterion-icon icon-transferencia me-3">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-bold">2. Transferência</div>
+                                    <div class="fs-6 text-muted">Aplicação de busca a contextos novos</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="level-insuficiente">
+                            <div class="level-header">Insuficiente</div>
+                            <div class="criteria-description">
+                                • Não consegue aplicar algoritmos de busca a novos contextos<br>
+                                • Soluções irrelevantes para problemas de busca propostos<br>
+                                • Adaptações inadequadas ou incorretas<br>
+                                • Falta de conexão com situações reais de busca
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" name="criterio2" value="1" onchange="updateScore()">
+                            </div>
+                        </td>
+                        <td class="level-basico">
+                            <div class="level-header">Básico</div>
+                            <div class="criteria-description">
+                                • Aplicação limitada a contextos similares de busca<br>
+                                • Soluções parcialmente adequadas<br>
+                                • Adaptações simples com orientação<br>
+                                • Algumas conexões com problemas reais de busca
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" name="criterio2" value="2" onchange="updateScore()">
+                            </div>
+                        </td>
+                        <td class="level-proficiente">
+                            <div class="level-header">Proficiente</div>
+                            <div class="criteria-description">
+                                • Aplicação eficaz de busca a diferentes contextos<br>
+                                • Soluções adequadas e bem fundamentadas<br>
+                                • Adaptações criativas e funcionais<br>
+                                • Boas conexões com situações práticas (agenda, dicionário, etc.)
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" name="criterio2" value="3" onchange="updateScore()">
+                            </div>
+                        </td>
+                        <td class="level-avancado">
+                            <div class="level-header">Avançado</div>
+                            <div class="criteria-description">
+                                • Transferência intuitiva e inovadora de algoritmos<br>
+                                • Soluções elegantes e otimizadas para busca<br>
+                                • Adaptações sofisticadas e originais<br>
+                                • Conexões profundas com múltiplas áreas (bases de dados, etc.)
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" name="criterio2" value="4" onchange="updateScore()">
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Critério 3: Predição e Análise -->
+                    <tr>
+                        <td class="criterion-header">
+                            <div class="d-flex align-items-center">
+                                <div class="criterion-icon icon-predicao me-3">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-bold">3. Descoberta de Otimização</div>
+                                    <div class="fs-6 text-muted">Identificação da busca binária</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="level-insuficiente">
+                            <div class="level-header">Insuficiente</div>
+                            <div class="criteria-description">
+                                • Não percebe possibilidade de otimização<br>
+                                • Predições muito distantes dos resultados reais<br>
+                                • Análise superficial dos casos de teste<br>
+                                • Não compreende vantagem de dados ordenados<br>
+                                • Dificuldade em explicar diferenças de eficiência
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" name="criterio3" value="1" onchange="updateScore()">
+                            </div>
+                        </td>
+                        <td class="level-basico">
+                            <div class="level-header">Básico</div>
+                            <div class="criteria-description">
+                                • Percebe que dados ordenados podem ser diferentes<br>
+                                • Predições parcialmente próximas aos resultados<br>
+                                • Análise básica dos diferentes casos<br>
+                                • Compreensão limitada sobre otimização<br>
+                                • Explicações simples sobre eficiência
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" name="criterio3" value="2" onchange="updateScore()">
+                            </div>
+                        </td>
+                        <td class="level-proficiente">
+                            <div class="level-header">Proficiente</div>
+                            <div class="criteria-description">
+                                • Identifica estratégia mais eficiente para dados ordenados<br>
+                                • Predições próximas aos resultados reais<br>
+                                • Análise consistente dos casos de teste<br>
+                                • Boa compreensão das diferenças de eficiência<br>
+                                • Consegue explicar quando usar cada algoritmo
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" name="criterio3" value="3" onchange="updateScore()">
+                            </div>
+                        </td>
+                        <td class="level-avancado">
+                            <div class="level-header">Avançado</div>
+                            <div class="criteria-description">
+                                • Descobre espontaneamente a busca binária<br>
+                                • Predições muito precisas para todos os casos<br>
+                                • Análise profunda e comparativa<br>
+                                • Insights originais sobre complexidade O(n) vs O(log n)<br>
+                                • Compreende perfeitamente quando aplicar cada método
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" name="criterio3" value="4" onchange="updateScore()">
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Critério 4: Metacognição -->
+                    <tr>
+                        <td class="criterion-header">
+                            <div class="d-flex align-items-center">
+                                <div class="criterion-icon icon-metacognicao me-3">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-bold">4. Metacognição</div>
+                                    <div class="fs-6 text-muted">Reflexão sobre o processo de descoberta</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="level-insuficiente">
+                            <div class="level-header">Insuficiente</div>
+                            <div class="criteria-description">
+                                • Reflexões superficiais sobre o aprendizado de busca<br>
+                                • Pouca consciência do próprio processo de descoberta<br>
+                                • Dificuldade em identificar pontos de melhoria<br>
+                                • Respostas genéricas às questões metacognitivas<br>
+                                • Não reconhece momento de insight
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" name="criterio4" value="1" onchange="updateScore()">
+                            </div>
+                        </td>
+                        <td class="level-basico">
+                            <div class="level-header">Básico</div>
+                            <div class="criteria-description">
+                                • Reflexões básicas mas relevantes sobre busca<br>
+                                • Alguma consciência do processo de aprendizado<br>
+                                • Identificação de algumas dificuldades<br>
+                                • Respostas adequadas às questões metacognitivas<br>
+                                • Reconhece parcialmente momentos de descoberta
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" name="criterio4" value="2" onchange="updateScore()">
+                            </div>
+                        </td>
+                        <td class="level-proficiente">
+                            <div class="level-header">Proficiente</div>
+                            <div class="criteria-description">
+                                • Reflexões detalhadas e autocríticas<br>
+                                • Boa consciência das estratégias de busca utilizadas<br>
+                                • Identificação clara de sucessos e dificuldades<br>
+                                • Respostas profundas às questões metacognitivas<br>
+                                • Articula bem o processo de descoberta
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" name="criterio4" value="3" onchange="updateScore()">
+                            </div>
+                        </td>
+                        <td class="level-avancado">
+                            <div class="level-header">Avançado</div>
+                            <div class="criteria-description">
+                                • Reflexões sofisticadas e transformadoras<br>
+                                • Excelente awareness do próprio aprendizado<br>
+                                • Planos concretos para melhoria futura<br>
+                                • Insights metacognitivos que demonstram crescimento<br>
+                                • Consegue ensinar outros sobre o processo de descoberta
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" name="criterio4" value="4" onchange="updateScore()">
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Score Summary -->
+        <div class="score-summary">
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <div class="score-display" id="totalScore">0/16</div>
+                    <div class="fs-5 text-muted">Pontuação Total</div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="score-display" id="percentage">0%</div>
+                    <div class="fs-5 text-muted">Percentual</div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="score-display" id="level">-</div>
+                    <div class="fs-5 text-muted">Nível Geral</div>
+                </div>
+            </div>
+            <div class="mt-3 text-center">
+                <div id="feedback" class="fs-5 fw-semibold"></div>
+            </div>
+        </div>
+
+        <!-- Reflection Section -->
+        <div class="reflection-section">
+            <h3 class="fs-4 fw-semibold mb-4">
+                <i class="fas fa-lightbulb text-warning me-2"></i>
+                Reflexão do Grupo
+            </h3>
+            
+            <div class="mb-4">
+                <label class="form-label fw-semibold">1. Qual foi o momento mais desafiador da atividade de busca e como vocês superaram?</label>
+                <textarea class="form-control" rows="3" placeholder="Descrevam o desafio na descoberta dos algoritmos de busca e as estratégias utilizadas..."></textarea>
+            </div>
+            
+            <div class="mb-4">
+                <label class="form-label fw-semibold">2. Quando perceberam que existia uma forma mais eficiente de buscar? O que mudou na abordagem?</label>
+                <textarea class="form-control" rows="3" placeholder="Reflitam sobre o momento da descoberta da busca binária ou outras otimizações..."></textarea>
+            </div>
+            
+            <div class="mb-4">
+                <label class="form-label fw-semibold">3. Que conexões vocês conseguem fazer entre os algoritmos de busca e situações do dia a dia?</label>
+                <textarea class="form-control" rows="3" placeholder="Pensem em exemplos práticos: agenda telefônica, dicionário, catálogos online..."></textarea>
+            </div>
+            
+            <div class="mb-4">
+                <label class="form-label fw-semibold">4. Se pudessem refazer a atividade, o que fariam diferente no processo de busca?</label>
+                <textarea class="form-control" rows="3" placeholder="Reflitam sobre o processo e pontos de melhoria..."></textarea>
+            </div>
+            
+            <div class="mb-4">
+                <label class="form-label fw-semibold">5. Qual foi o principal aprendizado do grupo sobre algoritmos de busca?</label>
+                <textarea class="form-control" rows="3" placeholder="Destaquem o insight mais importante sobre busca linear vs busca binária..."></textarea>
+            </div>
+            
+            <div class="mb-4">
+                <label class="form-label fw-semibold">6. Como esta experiência mudou a forma como vocês pensam sobre encontrar informações?</label>
+                <textarea class="form-control" rows="3" placeholder="Reflitam sobre mudanças na abordagem de busca e resolução de problemas..."></textarea>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons no-print">
+            <button class="btn btn-primary btn-custom" onclick="generateSummary()">
+                <i class="fas fa-file-alt me-2"></i>Gerar Resumo
+            </button>
+            <button class="btn btn-success btn-custom" onclick="window.print()">
+                <i class="fas fa-print me-2"></i>Imprimir Avaliação
+            </button>
+            <button class="btn btn-warning btn-custom" onclick="resetForm()">
+                <i class="fas fa-redo me-2"></i>Reiniciar Formulário
+            </button>
+        </div>
+
+        <!-- Summary Modal -->
+        <div class="modal fade" id="summaryModal" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <i class="fas fa-chart-bar me-2"></i>Resumo da Autoavaliação - Algoritmos de Busca
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="summaryContent"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary" onclick="downloadSummary()">
+                            <i class="fas fa-download me-1"></i>Baixar Resumo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Initialize date
+        document.getElementById('evaluationDate').value = new Date().toISOString().split('T')[0];
+
+        function addMember() {
+            const container = document.getElementById('teamMembers');
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'form-control mb-2';
+            input.placeholder = `Nome do integrante ${container.children.length + 1}`;
+            container.appendChild(input);
+        }
+
+        function updateScore() {
+            const criteria = ['criterio1', 'criterio2', 'criterio3', 'criterio4'];
+            let totalScore = 0;
+            let completedCriteria = 0;
+
+            criteria.forEach(criterion => {
+                const selected = document.querySelector(`input[name="${criterion}"]:checked`);
+                if (selected) {
+                    totalScore += parseInt(selected.value);
+                    completedCriteria++;
+                }
+            });
+
+            const maxScore = 16;
+            const percentage = Math.round((totalScore / maxScore) * 100);
+
+            document.getElementById('totalScore').textContent = `${totalScore}/16`;
+            document.getElementById('percentage').textContent = `${percentage}%`;
+
+            // Update score display colors and level
+            const scoreDisplay = document.getElementById('totalScore');
+            const percentageDisplay = document.getElementById('percentage');
+            const levelDisplay = document.getElementById('level');
+            const feedbackDisplay = document.getElementById('feedback');
+
+            let level, feedback, colorClass;
+
+            if (percentage >= 90) {
+                level = 'Excelente';
+                feedback = 'Parabéns! Vocês demonstraram excelência na descoberta de algoritmos de busca.';
+                colorClass = 'score-excellent';
+            } else if (percentage >= 75) {
+                level = 'Muito Bom';
+                feedback = 'Ótimo trabalho! Vocês tiveram um desempenho muito satisfatório na exploração dos algoritmos.';
+                colorClass = 'score-good';
+            } else if (percentage >= 60) {
+                level = 'Satisfatório';
+                feedback = 'Bom trabalho! Há oportunidades de melhoria para o próximo desafio de busca.';
+                colorClass = 'score-fair';
+            } else if (completedCriteria === criteria.length) {
+                level = 'Em Desenvolvimento';
+                feedback = 'Continuem se esforçando! Esta é uma ótima oportunidade de aprendizado sobre busca.';
+                colorClass = 'score-poor';
+            } else {
+                level = 'Incompleto';
+                feedback = 'Por favor, avaliem todos os critérios para obter o resultado completo.';
+                colorClass = 'score-poor';
+            }
+
+            scoreDisplay.className = `score-display ${colorClass}`;
+            percentageDisplay.className = `score-display ${colorClass}`;
+            levelDisplay.textContent = level;
+            levelDisplay.className = `score-display ${colorClass}`;
+            feedbackDisplay.textContent = feedback;
+            feedbackDisplay.className = `fs-5 fw-semibold ${colorClass}`;
+        }
+
+        function generateSummary() {
+            const groupName = document.getElementById('groupName').value || 'Grupo não informado';
+            const date = document.getElementById('evaluationDate').value;
+            
+            const members = Array.from(document.querySelectorAll('#teamMembers input'))
+                .map(input => input.value)
+                .filter(name => name.trim() !== '');
+
+            const criteria = [
+                { name: 'Aprendizado Imediato', input: 'criterio1' },
+                { name: 'Transferência', input: 'criterio2' },
+                { name: 'Descoberta de Otimização', input: 'criterio3' },
+                { name: 'Metacognição', input: 'criterio4' }
+            ];
+
+            let summaryHTML = `
+                <div class="mb-4">
+                    <h4>${groupName}</h4>
+                    <p><strong>Data:</strong> ${new Date(date).toLocaleDateString('pt-BR')}</p>
+                    <p><strong>Integrantes:</strong> ${members.join(', ')}</p>
+                </div>
+                
+                <h5 class="mb-3">Pontuação por Critério:</h5>
+                <div class="row mb-4">
+            `;
+
+            let totalScore = 0;
+            criteria.forEach(criterion => {
+                const selected = document.querySelector(`input[name="${criterion.input}"]:checked`);
+                const score = selected ? parseInt(selected.value) : 0;
+                totalScore += score;
+                
+                let levelText;
+                switch(score) {
+                    case 4: levelText = 'Avançado'; break;
+                    case 3: levelText = 'Proficiente'; break;
+                    case 2: levelText = 'Básico'; break;
+                    case 1: levelText = 'Insuficiente'; break;
+                    default: levelText = 'Não avaliado';
+                }
+
+                summaryHTML += `
+                    <div class="col-md-6 mb-3">
+                        <div class="border rounded p-3">
+                            <h6>${criterion.name}</h6>
+                            <div class="d-flex justify-content-between">
+                                <span>${levelText}</span>
+                                <span><strong>${score}/4</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            summaryHTML += `
+                </div>
+                
+                <div class="alert alert-info">
+                    <h5>Resultado Final</h5>
+                    <p class="mb-0"><strong>Pontuação Total:</strong> ${totalScore}/16 (${Math.round((totalScore/16)*100)}%)</p>
+                </div>
+                
+                <div class="alert alert-success">
+                    <h6>Sobre Algoritmos de Busca</h6>
+                    <p class="mb-0">Esta atividade focou na descoberta de algoritmos fundamentais: <strong>Busca Linear O(n)</strong> e <strong>Busca Binária O(log n)</strong>. A compreensão desses conceitos é essencial para resolver problemas de busca em programação e ciência da computação.</p>
+                </div>
+            `;
+
+            document.getElementById('summaryContent').innerHTML = summaryHTML;
+            new bootstrap.Modal(document.getElementById('summaryModal')).show();
+        }
+
+        function downloadSummary() {
+            const content = document.getElementById('summaryContent').innerHTML;
+            const blob = new Blob([`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <title>Resumo da Autoavaliação - Algoritmos de Busca</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 20px; }
+                        .border { border: 1px solid #ddd; }
+                        .rounded { border-radius: 4px; }
+                        .p-3 { padding: 15px; }
+                        .mb-3 { margin-bottom: 15px; }
+                        .alert-info { background: #d1ecf1; border: 1px solid #b6d4da; padding: 15px; border-radius: 4px; }
+                        .alert-success { background: #d4edda; border: 1px solid #c3e6cb; padding: 15px; border-radius: 4px; }
+                        .d-flex { display: flex; }
+                        .justify-content-between { justify-content: space-between; }
+                        .row { display: flex; flex-wrap: wrap; }
+                        .col-md-6 { width: 50%; }
+                    </style>
+                </head>
+                <body>
+                    <h1>Resumo da Autoavaliação - Algoritmos de Busca</h1>
+                    <h2>Atividade: "Onde Está...?"</h2>
+                    ${content}
+                </body>
+                </html>
+            `], { type: 'text/html' });
+            
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'resumo-autoavaliacao-busca.html';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function resetForm() {
+            if (confirm('Tem certeza que deseja reiniciar todo o formulário? Todos os dados serão perdidos.')) {
+                document.querySelectorAll('input, textarea').forEach(input => {
+                    if (input.type === 'radio') {
+                        input.checked = false;
+                    } else if (input.type === 'date') {
+                        input.value = new Date().toISOString().split('T')[0];
+                    } else {
+                        input.value = '';
+                    }
+                });
+                updateScore();
+            }
+        }
+
+        // Initialize score display
+        updateScore();
+    </script>
+</body>
+</html>

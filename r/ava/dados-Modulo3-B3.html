@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Gerador de Dados: Algoritmos de Ordenação</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --academic-50: #f8fafc;
+            --academic-100: #f1f5f9;
+            --academic-200: #e2e8f0;
+            --academic-300: #cbd5e1;
+            --academic-400: #94a3b8;
+            --academic-500: #64748b;
+            --academic-600: #475569;
+            --academic-700: #334155;
+            --academic-800: #1e293b;
+            --academic-900: #0f172a;
+            --primary-50: #eff6ff;
+            --primary-100: #dbeafe;
+            --primary-200: #bfdbfe;
+            --primary-300: #93c5fd;
+            --primary-400: #60a5fa;
+            --primary-500: #3b82f6;
+            --primary-600: #2563eb;
+            --primary-700: #1d4ed8;
+            --primary-800: #1e40af;
+            --primary-900: #1e3a8a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Text', serif;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--academic-800), var(--primary-600));
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .card-custom {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            border: none;
+        }
+
+        .btn-generate {
+            background: linear-gradient(135deg, #10b981, #059669);
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-generate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+            color: white;
+        }
+
+        .btn-generate:disabled {
+            opacity: 0.6;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-download {
+            background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+            border: none;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+            color: white;
+        }
+
+        .btn-download:disabled {
+            opacity: 0.6;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .data-preview {
+            background: var(--academic-800);
+            color: #f8fafc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            max-height: 300px;
+            overflow-y: auto;
+            margin: 1rem 0;
+        }
+
+        .data-stats {
+            background: var(--academic-50);
+            border: 1px solid var(--academic-200);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .list-type-badge {
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .badge-random {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .badge-partial {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .badge-sorted {
+            background: #dcfce7;
+            color: #059669;
+        }
+
+        .results-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .results-table table {
+            margin-bottom: 0;
+        }
+
+        .table-header {
+            background: linear-gradient(135deg, var(--academic-700), var(--primary-600));
+            color: white;
+            font-weight: 600;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: var(--academic-50);
+        }
+
+        .table tbody tr:hover {
+            background-color: var(--primary-50);
+            transition: background-color 0.2s ease;
+        }
+
+        .algorithm-input {
+            border: 2px solid var(--academic-200);
+            border-radius: 6px;
+            padding: 0.5rem;
+            font-weight: 500;
+            text-align: center;
+            transition: border-color 0.3s ease;
+        }
+
+        .algorithm-input:focus {
+            border-color: var(--primary-500);
+            box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25);
+        }
+
+        .progress-container {
+            margin: 1rem 0;
+        }
+
+        .progress {
+            height: 8px;
+            border-radius: 4px;
+            background-color: var(--academic-200);
+        }
+
+        .progress-bar {
+            border-radius: 4px;
+            background: linear-gradient(90deg, #10b981, #059669);
+            transition: width 0.3s ease;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            border-left: 4px solid;
+        }
+
+        .stat-random { border-left-color: #ef4444; }
+        .stat-partial { border-left-color: #f59e0b; }
+        .stat-sorted { border-left-color: #10b981; }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--academic-600);
+        }
+
+        .callout-tip {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .callout-warning {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .file-format-selector {
+            background: var(--academic-50);
+            border: 1px solid var(--academic-200);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .format-option {
+            margin: 0.5rem 0;
+        }
+
+        .format-option input[type="radio"] {
+            margin-right: 0.5rem;
+        }
+
+        .preview-tabs {
+            margin-top: 1.5rem;
+        }
+
+        .tab-content {
+            margin-top: 1rem;
+        }
+
+        .algorithm-name {
+            background: var(--primary-100);
+            border: 1px solid var(--primary-300);
+            border-radius: 6px;
+            padding: 0.5rem;
+            font-weight: 500;
+            min-width: 150px;
+        }
+
+        .algorithm-name:focus {
+            border-color: var(--primary-500);
+            box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold mb-3">Gerador de Dados para Testes</h1>
+                    <p class="fs-5 mb-0">Algoritmos de Ordenação - Casos de Teste Padronizados</p>
+                    <div class="mt-3">
+                        <span class="badge bg-light text-dark fs-6 me-2">10.000 elementos</span>
+                        <span class="badge bg-light text-dark fs-6 me-2">Valores 1-100.000</span>
+                        <span class="badge bg-light text-dark fs-6">Três cenários</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <div class="fs-1">
+                        <i class="fas fa-random text-light"></i>
+                    </div>
+                    <div class="text-light">Dados Científicos</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Data Generation Section -->
+        <div class="card-custom">
+            <h2 class="fs-3 fw-bold mb-4">
+                <i class="fas fa-cogs text-primary me-2"></i>
+                Geração de Dados de Teste
+            </h2>
+            
+            <div class="callout-tip">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-info-circle me-2 text-info"></i>
+                    <strong>Especificações dos Dados:</strong>
+                </div>
+                <ul class="mt-2 mb-0">
+                    <li><strong>Lista 1:</strong> Números completamente aleatórios</li>
+                    <li><strong>Lista 2:</strong> 80% ordenada em ordem crescente (melhor caso)</li>
+                    <li><strong>Lista 3:</strong> Perfeitamente ordenada em ordem decrescente (pior caso)</li>
+                </ul>
+            </div>
+
+            <div class="file-format-selector">
+                <h4 class="fs-5 fw-semibold mb-3">Formato do Arquivo de Saída</h4>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="format-option">
+                            <input type="radio" id="format-txt" name="fileFormat" value="txt" checked>
+                            <label for="format-txt" class="fw-semibold">TXT (Texto)</label>
+                            <div class="fs-6 text-muted">Uma linha por número</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="format-option">
+                            <input type="radio" id="format-csv" name="fileFormat" value="csv">
+                            <label for="format-csv" class="fw-semibold">CSV (Planilha)</label>
+                            <div class="fs-6 text-muted">Colunas separadas por vírgula</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="format-option">
+                            <input type="radio" id="format-json" name="fileFormat" value="json">
+                            <label for="format-json" class="fw-semibold">JSON (Estruturado)</label>
+                            <div class="fs-6 text-muted">Formato para programação</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-generate" id="generateBtn" onclick="generateData()">
+                    <i class="fas fa-random me-2"></i>
+                    <span id="generateText">Gerar Dados de Teste</span>
+                </button>
+            </div>
+
+            <div class="progress-container" id="progressContainer" style="display: none;">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="fw-semibold">Gerando dados...</span>
+                    <span id="progressText">0%</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="card-custom" id="statsSection" style="display: none;">
+            <h3 class="fs-4 fw-semibold mb-4">
+                <i class="fas fa-chart-bar text-success me-2"></i>
+                Estatísticas dos Dados Gerados
+            </h3>
+            
+            <div class="stats-grid">
+                <div class="stat-card stat-random">
+                    <div class="stat-number text-danger" id="statRandom">-</div>
+                    <div class="stat-label">Lista Aleatória</div>
+                </div>
+                <div class="stat-card stat-partial">
+                    <div class="stat-number text-warning" id="statPartial">-</div>
+                    <div class="stat-label">Lista 80% Ordenada</div>
+                </div>
+                <div class="stat-card stat-sorted">
+                    <div class="stat-number text-success" id="statSorted">-</div>
+                    <div class="stat-label">Lista Ordenada Desc.</div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-download me-2" id="downloadBtn" onclick="downloadFile()" disabled>
+                    <i class="fas fa-download me-2"></i>
+                    Baixar Arquivo de Dados
+                </button>
+                <button class="btn btn-outline-primary" onclick="showPreview()">
+                    <i class="fas fa-eye me-2"></i>
+                    Visualizar Amostra
+                </button>
+            </div>
+        </div>
+
+        <!-- Data Preview Section -->
+        <div class="card-custom" id="previewSection" style="display: none;">
+            <h3 class="fs-4 fw-semibold mb-4">
+                <i class="fas fa-eye text-info me-2"></i>
+                Prévia dos Dados (Primeiros 50 elementos)
+            </h3>
+            
+            <div class="preview-tabs">
+                <ul class="nav nav-tabs" id="previewTabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#preview1">Lista Aleatória</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#preview2">Lista 80% Ordenada</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#preview3">Lista Decrescente</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="preview1">
+                        <div class="list-type-badge badge-random">Completamente Aleatória</div>
+                        <div class="data-preview" id="previewRandom"></div>
+                    </div>
+                    <div class="tab-pane fade" id="preview2">
+                        <div class="list-type-badge badge-partial">80% Ordenada (Melhor Caso)</div>
+                        <div class="data-preview" id="previewPartial"></div>
+                    </div>
+                    <div class="tab-pane fade" id="preview3">
+                        <div class="list-type-badge badge-sorted">Ordem Decrescente (Pior Caso)</div>
+                        <div class="data-preview" id="previewSorted"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Table Section -->
+        <div class="card-custom">
+            <h3 class="fs-4 fw-semibold mb-4">
+                <i class="fas fa-table text-warning me-2"></i>
+                Tabela de Resultados dos Algoritmos
+            </h3>
+            
+            <div class="callout-warning">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-stopwatch me-2 text-warning"></i>
+                    <strong>Instruções:</strong>
+                </div>
+                <p class="mt-2 mb-0">
+                    Após executar seus algoritmos com os dados gerados, preencha a tabela abaixo com os resultados obtidos. 
+                    Anote o tempo de execução e número de operações para cada caso de teste.
+                </p>
+            </div>
+
+            <div class="results-table">
+                <table class="table table-bordered">
+                    <thead class="table-header">
+                        <tr>
+                            <th style="width: 20%;">Algoritmo</th>
+                            <th style="width: 20%;">Lista Aleatória</th>
+                            <th style="width: 20%;">Lista 80% Ordenada</th>
+                            <th style="width: 20%;">Lista Decrescente</th>
+                            <th style="width: 20%;">Observações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultsTableBody">
+                        <!-- Dynamic rows will be added here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="text-center mt-3">
+                <button class="btn btn-outline-primary me-2" onclick="addAlgorithmRow()">
+                    <i class="fas fa-plus me-2"></i>
+                    Adicionar Algoritmo
+                </button>
+                <button class="btn btn-outline-success me-2" onclick="exportResults()">
+                    <i class="fas fa-file-excel me-2"></i>
+                    Exportar Resultados
+                </button>
+                <button class="btn btn-outline-danger" onclick="clearResults()">
+                    <i class="fas fa-trash me-2"></i>
+                    Limpar Tabela
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        let generatedData = null;
+        
+        function generateRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+        
+        function generateRandomList(size) {
+            const list = [];
+            for (let i = 0; i < size; i++) {
+                list.push(generateRandomNumber(1, 100000));
+            }
+            return list;
+        }
+        
+        function generatePartiallyOrderedList(size, orderedPercentage = 0.8) {
+            // Generate sorted list
+            const sortedList = [];
+            for (let i = 0; i < size; i++) {
+                sortedList.push(generateRandomNumber(1, 100000));
+            }
+            sortedList.sort((a, b) => a - b);
+            
+            // Shuffle a portion to make it partially ordered
+            const elementsToShuffle = Math.floor(size * (1 - orderedPercentage));
+            const result = [...sortedList];
+            
+            // Randomly select positions to shuffle
+            const positionsToShuffle = [];
+            while (positionsToShuffle.length < elementsToShuffle) {
+                const pos = Math.floor(Math.random() * size);
+                if (!positionsToShuffle.includes(pos)) {
+                    positionsToShuffle.push(pos);
+                }
+            }
+            
+            // Shuffle selected positions
+            for (let i = 0; i < positionsToShuffle.length - 1; i++) {
+                const pos1 = positionsToShuffle[i];
+                const pos2 = positionsToShuffle[i + 1];
+                [result[pos1], result[pos2]] = [result[pos2], result[pos1]];
+            }
+            
+            return result;
+        }
+        
+        function generateDescendingList(size) {
+            const list = [];
+            for (let i = 0; i < size; i++) {
+                list.push(generateRandomNumber(1, 100000));
+            }
+            return list.sort((a, b) => b - a);
+        }
+        
+        async function generateData() {
+            const generateBtn = document.getElementById('generateBtn');
+            const generateText = document.getElementById('generateText');
+            const progressContainer = document.getElementById('progressContainer');
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            
+            // Disable button and show progress
+            generateBtn.disabled = true;
+            generateText.innerHTML = '<span class="spinner"></span> Gerando...';
+            progressContainer.style.display = 'block';
+            
+            try {
+                const size = 10000;
+                let progress = 0;
+                
+                // Update progress function
+                const updateProgress = (current, total, label) => {
+                    progress = Math.round((current / total) * 100);
+                    progressBar.style.width = `${progress}%`;
+                    progressText.textContent = `${progress}% - ${label}`;
+                };
+                
+                // Generate data with progress updates
+                updateProgress(1, 4, 'Gerando lista aleatória...');
+                await new Promise(resolve => setTimeout(resolve, 100));
+                const randomList = generateRandomList(size);
+                
+                updateProgress(2, 4, 'Gerando lista 80% ordenada...');
+                await new Promise(resolve => setTimeout(resolve, 100));
+                const partialList = generatePartiallyOrderedList(size);
+                
+                updateProgress(3, 4, 'Gerando lista decrescente...');
+                await new Promise(resolve => setTimeout(resolve, 100));
+                const descendingList = generateDescendingList(size);
+                
+                updateProgress(4, 4, 'Finalizando...');
+                await new Promise(resolve => setTimeout(resolve, 100));
+                
+                // Store generated data
+                generatedData = {
+                    random: randomList,
+                    partial: partialList,
+                    descending: descendingList
+                };
+                
+                // Update statistics
+                updateStatistics();
+                
+                // Show sections
+                document.getElementById('statsSection').style.display = 'block';
+                document.getElementById('downloadBtn').disabled = false;
+                
+                // Success message
+                progressText.textContent = '100% - Concluído!';
+                setTimeout(() => {
+                    progressContainer.style.display = 'none';
+                }, 1500);
+                
+            } catch (error) {
+                console.error('Erro ao gerar dados:', error);
+                alert('Erro ao gerar dados. Tente novamente.');
+            } finally {
+                // Re-enable button
+                generateBtn.disabled = false;
+                generateText.textContent = 'Gerar Novos Dados';
+            }
+        }
+        
+        function updateStatistics() {
+            if (!generatedData) return;
+            
+            document.getElementById('statRandom').textContent = '10.000';
+            document.getElementById('statPartial').textContent = '10.000';
+            document.getElementById('statSorted').textContent = '10.000';
+        }
+        
+        function showPreview() {
+            if (!generatedData) return;
+            
+            const previewSize = 50;
+            
+            document.getElementById('previewRandom').textContent = 
+                generatedData.random.slice(0, previewSize).join(', ') + '...';
+            
+            document.getElementById('previewPartial').textContent = 
+                generatedData.partial.slice(0, previewSize).join(', ') + '...';
+            
+            document.getElementById('previewSorted').textContent = 
+                generatedData.descending.slice(0, previewSize).join(', ') + '...';
+            
+            document.getElementById('previewSection').style.display = 'block';
+        }
+        
+        function downloadFile() {
+            if (!generatedData) return;
+            
+            const format = document.querySelector('input[name="fileFormat"]:checked').value;
+            let content = '';
+            let filename = '';
+            let mimeType = '';
+            
+            switch (format) {
+                case 'txt':
+                    content = generateTxtContent();
+                    filename = 'dados_algoritmos.txt';
+                    mimeType = 'text/plain';
+                    break;
+                case 'csv':
+                    content = generateCsvContent();
+                    filename = 'dados_algoritmos.csv';
+                    mimeType = 'text/csv';
+                    break;
+                case 'json':
+                    content = generateJsonContent();
+                    filename = 'dados_algoritmos.json';
+                    mimeType = 'application/json';
+                    break;
+            }
+            
+            const blob = new Blob([content], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        function generateTxtContent() {
+            let content = 'DADOS PARA TESTE DE ALGORITMOS DE ORDENAÇÃO\n';
+            content += '=============================================\n\n';
+            content += 'LISTA 1 - COMPLETAMENTE ALEATÓRIA:\n';
+            content += generatedData.random.join('\n') + '\n\n';
+            content += 'LISTA 2 - 80% ORDENADA (MELHOR CASO):\n';
+            content += generatedData.partial.join('\n') + '\n\n';
+            content += 'LISTA 3 - ORDEM DECRESCENTE (PIOR CASO):\n';
+            content += generatedData.descending.join('\n');
+            return content;
+        }
+        
+        function generateCsvContent() {
+            let content = 'Lista_Aleatoria,Lista_80_Ordenada,Lista_Decrescente\n';
+            for (let i = 0; i < generatedData.random.length; i++) {
+                content += `${generatedData.random[i]},${generatedData.partial[i]},${generatedData.descending[i]}\n`;
+            }
+            return content;
+        }
+        
+        function generateJsonContent() {
+            const data = {
+                metadata: {
+                    description: "Dados para teste de algoritmos de ordenação",
+                    size: 10000,
+                    range: "1-100000",
+                    generated: new Date().toISOString()
+                },
+                lists: {
+                    random: {
+                        description: "Lista completamente aleatória",
+                        data: generatedData.random
+                    },
+                    partial: {
+                        description: "Lista 80% ordenada (melhor caso)",
+                        data: generatedData.partial
+                    },
+                    descending: {
+                        description: "Lista em ordem decrescente (pior caso)",
+                        data: generatedData.descending
+                    }
+                }
+            };
+            return JSON.stringify(data, null, 2);
+        }
+        
+        function addAlgorithmRow() {
+            const tbody = document.getElementById('resultsTableBody');
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>
+                    <input type="text" class="form-control algorithm-name" placeholder="Nome do algoritmo">
+                </td>
+                <td>
+                    <input type="text" class="form-control algorithm-input" placeholder="Ex: 1.25s / 5000 ops">
+                </td>
+                <td>
+                    <input type="text" class="form-control algorithm-input" placeholder="Ex: 0.85s / 3200 ops">
+                </td>
+                <td>
+                    <input type="text" class="form-control algorithm-input" placeholder="Ex: 2.1s / 8500 ops">
+                </td>
+                <td>
+                    <div class="d-flex">
+                        <input type="text" class="form-control me-2" placeholder="Observações">
+                        <button class="btn btn-outline-danger btn-sm" onclick="removeRow(this)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </td>
+            `;
+            tbody.appendChild(row);
+        }
+        
+        function removeRow(button) {
+            button.closest('tr').remove();
+        }
+        
+        function clearResults() {
+            if (confirm('Tem certeza que deseja limpar todos os resultados?')) {
+                document.getElementById('resultsTableBody').innerHTML = '';
+            }
+        }
+        
+        function exportResults() {
+            const rows = document.querySelectorAll('#resultsTableBody tr');
+            let csvContent = 'Algoritmo,Lista_Aleatoria,Lista_80_Ordenada,Lista_Decrescente,Observacoes\n';
+            
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('input');
+                const rowData = Array.from(cells).map(cell => `"${cell.value}"`).join(',');
+                csvContent += rowData + '\n';
+            });
+            
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'resultados_algoritmos.csv';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        // Initialize with some default algorithm rows
+        document.addEventListener('DOMContentLoaded', function() {
+            const algorithms = ['Bubble Sort', 'Selection Sort', 'Insertion Sort'];
+            algorithms.forEach(() => addAlgorithmRow());
+        });
+    </script>
+</body>
+</html>

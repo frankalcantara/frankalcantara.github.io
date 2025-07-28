@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Gerador de Dados: Algoritmos de Busca</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --academic-50: #f8fafc;
+            --academic-100: #f1f5f9;
+            --academic-200: #e2e8f0;
+            --academic-300: #cbd5e1;
+            --academic-400: #94a3b8;
+            --academic-500: #64748b;
+            --academic-600: #475569;
+            --academic-700: #334155;
+            --academic-800: #1e293b;
+            --academic-900: #0f172a;
+            --primary-50: #eff6ff;
+            --primary-100: #dbeafe;
+            --primary-200: #bfdbfe;
+            --primary-300: #93c5fd;
+            --primary-400: #60a5fa;
+            --primary-500: #3b82f6;
+            --primary-600: #2563eb;
+            --primary-700: #1d4ed8;
+            --primary-800: #1e40af;
+            --primary-900: #1e3a8a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Text', serif;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--academic-800), var(--primary-600));
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .card-custom {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+
+        .parameter-card {
+            background: var(--primary-50);
+            border: 1px solid var(--primary-200);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .preview-card {
+            background: var(--academic-50);
+            border: 1px solid var(--academic-200);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .btn-custom {
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .data-type-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-aleatorio {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .badge-ordenado {
+            background: #dcfce7;
+            color: #059669;
+        }
+
+        .badge-decrescente {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .callout-tip {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .callout-warning {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .callout-success {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-left: 4px solid #10b981;
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .download-section {
+            background: var(--academic-700);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid var(--academic-200);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-600);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--academic-600);
+            margin-top: 0.5rem;
+        }
+
+        .search-sequence {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .search-step {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-600);
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .search-step:nth-child(odd) {
+            background: #10b981;
+        }
+
+        .range-display {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: var(--primary-600);
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold mb-3">Gerador de Dados para Algoritmos de Busca</h1>
+                    <p class="fs-5 mb-0">Crie conjuntos de dados personalizados para testar busca linear e busca binária</p>
+                    <div class="mt-3">
+                        <span class="badge bg-light text-dark fs-6 me-2">Atividade C3</span>
+                        <span class="badge bg-light text-dark fs-6 me-2">CSV & C++</span>
+                        <span class="badge bg-light text-dark fs-6">Algoritmos de Busca</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <div class="search-sequence">
+                        <div class="search-step">🔍</div>
+                        <div class="search-step">📊</div>
+                        <div class="search-step">⚡</div>
+                        <div class="search-step">🎯</div>
+                        <div class="search-step">📈</div>
+                    </div>
+                    <div class="text-light">Busca Inteligente</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Parameters Section -->
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card-custom">
+                    <h3 class="fs-4 fw-semibold mb-4">
+                        <i class="fas fa-cogs text-primary me-2"></i>
+                        Parâmetros de Geração
+                    </h3>
+
+                    <div class="parameter-card">
+                        <h4 class="fs-5 fw-semibold mb-3">Configurações Básicas</h4>
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Quantidade de Elementos:</label>
+                            <input type="range" class="form-range" id="elementCount" min="50" max="10000" value="1000" oninput="updateParameters()">
+                            <div class="d-flex justify-content-between">
+                                <small class="text-muted">50</small>
+                                <span class="range-display" id="elementCountDisplay">1000</span>
+                                <small class="text-muted">10.000</small>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Valor Mínimo:</label>
+                            <input type="number" class="form-control" id="minValue" value="1" onchange="updateParameters()">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Valor Máximo:</label>
+                            <input type="number" class="form-control" id="maxValue" value="10000" onchange="updateParameters()">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Permitir Duplicatas:</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="allowDuplicates" checked onchange="updateParameters()">
+                                <label class="form-check-label" for="allowDuplicates">
+                                    Permitir valores repetidos
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="parameter-card">
+                        <h4 class="fs-5 fw-semibold mb-3">Elementos de Busca</h4>
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Quantidade de Elementos para Buscar:</label>
+                            <input type="range" class="form-range" id="searchElementsCount" min="5" max="50" value="10" oninput="updateParameters()">
+                            <div class="d-flex justify-content-between">
+                                <small class="text-muted">5</small>
+                                <span class="range-display" id="searchElementsDisplay">10</span>
+                                <small class="text-muted">50</small>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Distribuição dos Elementos:</label>
+                            <select class="form-select" id="searchDistribution" onchange="updateParameters()">
+                                <option value="mixed">Misto (alguns presentes, alguns ausentes)</option>
+                                <option value="present">Todos presentes nas listas</option>
+                                <option value="absent">Alguns ausentes (para testar caso negativo)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button class="btn btn-primary btn-custom" onclick="generateData()">
+                            <i class="fas fa-magic me-2"></i>Gerar Dados
+                        </button>
+                        <button class="btn btn-outline-secondary btn-custom" onclick="resetParameters()">
+                            <i class="fas fa-redo me-2"></i>Resetar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card-custom">
+                    <h3 class="fs-4 fw-semibold mb-4">
+                        <i class="fas fa-chart-bar text-success me-2"></i>
+                        Estatísticas dos Dados
+                    </h3>
+
+                    <div class="stats-grid" id="statsGrid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="totalElements">1000</div>
+                            <div class="stat-label">Elementos Total</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="searchElements">10</div>
+                            <div class="stat-label">Elementos de Busca</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="rangeSize">9999</div>
+                            <div class="stat-label">Amplitude</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="worstCaseLinear">1000</div>
+                            <div class="stat-label">Pior Caso Linear</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="worstCaseBinary">10</div>
+                            <div class="stat-label">Pior Caso Binário</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="efficiency">100x</div>
+                            <div class="stat-label">Vantagem Binária</div>
+                        </div>
+                    </div>
+
+                    <div class="callout-tip">
+                        <strong>Sobre a Eficiência:</strong> A busca binária é mais eficiente que a busca linear, especialmente para grandes conjuntos de dados. Para <span id="dynamicElements">1000</span> elementos, a busca linear pode precisar de até <span id="dynamicLinear">1000</span> comparações, enquanto a busca binária precisa de no máximo <span id="dynamicBinary">10</span> comparações.
+                    </div>
+                </div>
+
+                <!-- Data Types Preview -->
+                <div class="card-custom">
+                    <h3 class="fs-4 fw-semibold mb-4">
+                        <i class="fas fa-eye text-info me-2"></i>
+                        Tipos de Dados Gerados
+                    </h3>
+
+                    <div class="mb-3">
+                        <span class="data-type-badge badge-aleatorio">Lista Aleatória</span>
+                        <div class="preview-card" id="randomPreview">
+                            [Dados não gerados ainda...]
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <span class="data-type-badge badge-ordenado">Lista Ordenada Crescente</span>
+                        <div class="preview-card" id="sortedAscPreview">
+                            [Dados não gerados ainda...]
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <span class="data-type-badge badge-decrescente">Lista Ordenada Decrescente</span>
+                        <div class="preview-card" id="sortedDescPreview">
+                            [Dados não gerados ainda...]
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <span class="data-type-badge badge-ordenado">Elementos para Buscar</span>
+                        <div class="preview-card" id="searchElementsPreview">
+                            [Dados não gerados ainda...]
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions Section -->
+        <div class="card-custom">
+            <h3 class="fs-4 fw-semibold mb-4">
+                <i class="fas fa-info-circle text-warning me-2"></i>
+                Como Usar os Dados Gerados
+            </h3>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="callout-success">
+                        <h5 class="fw-semibold">1. Lista Aleatória</h5>
+                        <p class="mb-0">Use para testar busca linear. Demonstra comportamento típico onde o elemento pode estar em qualquer posição.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="callout-tip">
+                        <h5 class="fw-semibold">2. Lista Ordenada</h5>
+                        <p class="mb-0">Ideal para busca binária. Permite explorar a eficiência de dividir o espaço de busca pela metade.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="callout-warning">
+                        <h5 class="fw-semibold">3. Elementos de Busca</h5>
+                        <p class="mb-0">Números específicos para procurar nas listas. Inclui casos de sucesso e falha na busca.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <h5 class="fw-semibold mb-3">Estratégias Pedagógicas:</h5>
+                <ul>
+                    <li><strong>Comparação de Algoritmos:</strong> Use os mesmos elementos de busca em ambas as listas para comparar eficiência</li>
+                    <li><strong>Análise de Casos:</strong> Teste busca do primeiro, último e meio da lista para entender diferentes cenários</li>
+                    <li><strong>Contagem de Operações:</strong> Peça aos alunos para contar comparações em cada algoritmo</li>
+                    <li><strong>Visualização:</strong> Use os dados pequenos para demonstração manual antes dos testes automatizados</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Download Section -->
+        <div class="download-section no-print" id="downloadSection" style="display: none;">
+            <h3 class="fs-4 fw-semibold mb-3">
+                <i class="fas fa-download me-2"></i>
+                Baixar Dados Gerados
+            </h3>
+            <p class="mb-4">Os dados foram gerados com sucesso! Escolha o formato de download:</p>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="btn btn-light btn-custom w-100 mb-3" onclick="downloadCSV()">
+                        <i class="fas fa-file-csv me-2"></i>
+                        Baixar CSV
+                        <br><small>Para análise e importação</small>
+                    </button>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-light btn-custom w-100 mb-3" onclick="downloadJSON()">
+                        <i class="fas fa-file-code me-2"></i>
+                        Baixar JSON
+                        <br><small>Para aplicações web</small>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <small class="text-light">
+                    <i class="fas fa-info-circle me-1"></i>
+                    Os arquivos incluem todas as listas geradas e metadados sobre os parâmetros utilizados.
+                </small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Global variables to store generated data
+        let generatedData = null;
+
+        function updateParameters() {
+            const elementCount = parseInt(document.getElementById('elementCount').value);
+            const searchElementsCount = parseInt(document.getElementById('searchElementsCount').value);
+            const minValue = parseInt(document.getElementById('minValue').value);
+            const maxValue = parseInt(document.getElementById('maxValue').value);
+
+            // Update displays
+            document.getElementById('elementCountDisplay').textContent = elementCount.toLocaleString();
+            document.getElementById('searchElementsDisplay').textContent = searchElementsCount;
+
+            // Update statistics
+            document.getElementById('totalElements').textContent = elementCount.toLocaleString();
+            document.getElementById('searchElements').textContent = searchElementsCount;
+            document.getElementById('rangeSize').textContent = (maxValue - minValue).toLocaleString();
+            
+            // Calculate worst case scenarios
+            const worstLinear = elementCount;
+            const worstBinary = Math.ceil(Math.log2(elementCount));
+            const efficiency = Math.round(worstLinear / worstBinary);
+
+            document.getElementById('worstCaseLinear').textContent = worstLinear.toLocaleString();
+            document.getElementById('worstCaseBinary').textContent = worstBinary;
+            document.getElementById('efficiency').textContent = efficiency + 'x';
+
+            // Update dynamic text
+            document.getElementById('dynamicElements').textContent = elementCount.toLocaleString();
+            document.getElementById('dynamicLinear').textContent = worstLinear.toLocaleString();
+            document.getElementById('dynamicBinary').textContent = worstBinary;
+        }
+
+        function resetParameters() {
+            document.getElementById('elementCount').value = 1000;
+            document.getElementById('searchElementsCount').value = 10;
+            document.getElementById('minValue').value = 1;
+            document.getElementById('maxValue').value = 10000;
+            document.getElementById('allowDuplicates').checked = true;
+            document.getElementById('searchDistribution').value = 'mixed';
+            
+            updateParameters();
+            
+            // Reset previews
+            document.getElementById('randomPreview').textContent = '[Dados não gerados ainda...]';
+            document.getElementById('sortedAscPreview').textContent = '[Dados não gerados ainda...]';
+            document.getElementById('sortedDescPreview').textContent = '[Dados não gerados ainda...]';
+            document.getElementById('searchElementsPreview').textContent = '[Dados não gerados ainda...]';
+            
+            // Hide download section
+            document.getElementById('downloadSection').style.display = 'none';
+        }
+
+        function generateRandomArray(count, min, max, allowDuplicates) {
+            const array = [];
+            const used = new Set();
+            
+            for (let i = 0; i < count; i++) {
+                let value;
+                do {
+                    value = Math.floor(Math.random() * (max - min + 1)) + min;
+                } while (!allowDuplicates && used.has(value) && used.size < (max - min + 1));
+                
+                array.push(value);
+                used.add(value);
+            }
+            
+            return array;
+        }
+
+        function generateSearchElements(arrays, count, distribution) {
+            const searchElements = [];
+            const allElements = [...new Set([...arrays.random, ...arrays.sortedAsc])];
+            
+            switch (distribution) {
+                case 'present':
+                    // All elements are present in the arrays
+                    for (let i = 0; i < count; i++) {
+                        const randomIndex = Math.floor(Math.random() * allElements.length);
+                        searchElements.push(allElements[randomIndex]);
+                    }
+                    break;
+                    
+                case 'absent':
+                    // Some elements are absent
+                    const min = parseInt(document.getElementById('minValue').value);
+                    const max = parseInt(document.getElementById('maxValue').value);
+                    for (let i = 0; i < count; i++) {
+                        if (i < count / 2) {
+                            // Present elements
+                            const randomIndex = Math.floor(Math.random() * allElements.length);
+                            searchElements.push(allElements[randomIndex]);
+                        } else {
+                            // Potentially absent elements
+                            let absent;
+                            do {
+                                absent = Math.floor(Math.random() * (max - min + 1)) + min;
+                            } while (allElements.includes(absent));
+                            searchElements.push(absent);
+                        }
+                    }
+                    break;
+                    
+                default: // mixed
+                    for (let i = 0; i < count; i++) {
+                        if (Math.random() < 0.7 && allElements.length > 0) {
+                            // 70% chance of present element
+                            const randomIndex = Math.floor(Math.random() * allElements.length);
+                            searchElements.push(allElements[randomIndex]);
+                        } else {
+                            // 30% chance of potentially absent element
+                            const minVal = parseInt(document.getElementById('minValue').value);
+                            const maxVal = parseInt(document.getElementById('maxValue').value);
+                            const randomVal = Math.floor(Math.random() * (maxVal - minVal + 1)) + minVal;
+                            searchElements.push(randomVal);
+                        }
+                    }
+                    break;
+            }
+            
+            return [...new Set(searchElements)].slice(0, count); // Remove duplicates and limit
+        }
+
+        function generateData() {
+            const elementCount = parseInt(document.getElementById('elementCount').value);
+            const searchElementsCount = parseInt(document.getElementById('searchElementsCount').value);
+            const minValue = parseInt(document.getElementById('minValue').value);
+            const maxValue = parseInt(document.getElementById('maxValue').value);
+            const allowDuplicates = document.getElementById('allowDuplicates').checked;
+            const searchDistribution = document.getElementById('searchDistribution').value;
+
+            // Validate parameters
+            if (minValue >= maxValue) {
+                alert('O valor mínimo deve ser menor que o valor máximo!');
+                return;
+            }
+
+            if (!allowDuplicates && elementCount > (maxValue - minValue + 1)) {
+                alert('Sem duplicatas, o número de elementos não pode exceder a amplitude dos valores!');
+                return;
+            }
+
+            // Generate random array
+            const randomArray = generateRandomArray(elementCount, minValue, maxValue, allowDuplicates);
+            
+            // Generate sorted arrays
+            const sortedAsc = [...randomArray].sort((a, b) => a - b);
+            const sortedDesc = [...randomArray].sort((a, b) => b - a);
+            
+            // Generate search elements
+            const arrays = { random: randomArray, sortedAsc: sortedAsc };
+            const searchElements = generateSearchElements(arrays, searchElementsCount, searchDistribution);
+
+            // Store generated data
+            generatedData = {
+                metadata: {
+                    elementCount,
+                    searchElementsCount,
+                    minValue,
+                    maxValue,
+                    allowDuplicates,
+                    searchDistribution,
+                    generatedAt: new Date().toISOString()
+                },
+                lists: {
+                    random: randomArray,
+                    sortedAsc: sortedAsc,
+                    sortedDesc: sortedDesc
+                },
+                searchElements: searchElements
+            };
+
+            // Update previews
+            updatePreviews(generatedData);
+            
+            // Show download section
+            document.getElementById('downloadSection').style.display = 'block';
+            
+            // Scroll to download section
+            document.getElementById('downloadSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function updatePreviews(data) {
+            const previewLength = 20; // Show first 20 elements
+            
+            // Random array preview
+            const randomPreview = data.lists.random.slice(0, previewLength).join(', ');
+            document.getElementById('randomPreview').textContent = `[${randomPreview}${data.lists.random.length > previewLength ? ', ...' : ''}]`;
+            
+            // Sorted ascending preview
+            const sortedAscPreview = data.lists.sortedAsc.slice(0, previewLength).join(', ');
+            document.getElementById('sortedAscPreview').textContent = `[${sortedAscPreview}${data.lists.sortedAsc.length > previewLength ? ', ...' : ''}]`;
+            
+            // Sorted descending preview
+            const sortedDescPreview = data.lists.sortedDesc.slice(0, previewLength).join(', ');
+            document.getElementById('sortedDescPreview').textContent = `[${sortedDescPreview}${data.lists.sortedDesc.length > previewLength ? ', ...' : ''}]`;
+            
+            // Search elements preview
+            const searchPreview = data.searchElements.join(', ');
+            document.getElementById('searchElementsPreview').textContent = `[${searchPreview}]`;
+        }
+
+        function downloadCSV() {
+            if (!generatedData) {
+                alert('Gere os dados primeiro!');
+                return;
+            }
+
+            const { lists, searchElements, metadata } = generatedData;
+            let csvContent = '';
+            
+            // Header
+            csvContent += 'Lista_Aleatoria,Lista_Ordenada_Crescente,Lista_Ordenada_Decrescente\n';
+            
+            // Data rows
+            const maxLength = Math.max(lists.random.length, lists.sortedAsc.length, lists.sortedDesc.length);
+            for (let i = 0; i < maxLength; i++) {
+                const random = i < lists.random.length ? lists.random[i] : '';
+                const sortedAsc = i < lists.sortedAsc.length ? lists.sortedAsc[i] : '';
+                const sortedDesc = i < lists.sortedDesc.length ? lists.sortedDesc[i] : '';
+                csvContent += `${random},${sortedAsc},${sortedDesc}\n`;
+            }
+            
+            // Add search elements section
+            csvContent += '\n# Elementos para Buscar:\n';
+            csvContent += `# ${searchElements.join(', ')}\n`;
+            
+            // Add metadata
+            csvContent += '\n# Metadados:\n';
+            csvContent += `# Elementos: ${metadata.elementCount}\n`;
+            csvContent += `# Elementos de Busca: ${metadata.searchElementsCount}\n`;
+            csvContent += `# Amplitude: ${metadata.minValue} - ${metadata.maxValue}\n`;
+            csvContent += `# Duplicatas: ${metadata.allowDuplicates ? 'Permitidas' : 'Não permitidas'}\n`;
+            csvContent += `# Distribuição de Busca: ${metadata.searchDistribution}\n`;
+            csvContent += `# Gerado em: ${new Date(metadata.generatedAt).toLocaleString('pt-BR')}\n`;
+
+            downloadFile(csvContent, 'dados_busca.csv', 'text/csv');
+        }
+
+        function downloadJSON() {
+            if (!generatedData) {
+                alert('Gere os dados primeiro!');
+                return;
+            }
+
+            const jsonContent = JSON.stringify(generatedData, null, 2);
+            downloadFile(jsonContent, 'dados_busca.json', 'application/json');
+        }
+
+        function downloadFile(content, fileName, mimeType) {
+            const blob = new Blob([content], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateParameters();
+        });
+    </script>
+</body>
+</html>
