@@ -1,0 +1,1853 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introdução à Programação Lógica - 7&nbsp; Mundos na Lógica de Primeira Ordem</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./07-clausulas-de-horn-e-prolog.html" rel="next">
+<link href="./05-formas-normais-e-skolemizacao.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-formas-normais-e-skolemizacao.html">Aplicações Avançadas</a></li><li class="breadcrumb-item"><a href="./06-construcao-de-mundos-logicos.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mundos na Lógica de Primeira Ordem</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introdução à Programação Lógica</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/logica" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Fundamentos da Lógica</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-jornada-programacao-logica.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introdução</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-fundamentos-logica-proposicional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-arte-da-prova-e-analise-de-argumentos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Provas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-logica-predicativa-e-quantificadores.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lógica Predicativa</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Aplicações Avançadas</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-formas-normais-e-skolemizacao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Formas Normais</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-construcao-de-mundos-logicos.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mundos na Lógica de Primeira Ordem</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-clausulas-de-horn-e-prolog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Cláusulas de Horn</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-verificacao-formal-de-programas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-desafios-logicos-enigmas-e-misterios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Problemas Interessantes Resolvidos com Lógica Proposicional e Predicativa</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apendice-a-glossario.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apendice-b-referencias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sumário</h2>
+   
+  <ul>
+  <li><a href="#definição-formal-de-um-mundo" id="toc-definição-formal-de-um-mundo" class="nav-link active" data-scroll-target="#definição-formal-de-um-mundo"><span class="header-section-number">7.0.1</span> Definição Formal de um Mundo</a></li>
+  <li><a href="#construção-de-mundos" id="toc-construção-de-mundos" class="nav-link" data-scroll-target="#construção-de-mundos"><span class="header-section-number">7.0.2</span> Construção de Mundos</a></li>
+  <li><a href="#aplicações-e-importância" id="toc-aplicações-e-importância" class="nav-link" data-scroll-target="#aplicações-e-importância"><span class="header-section-number">7.0.3</span> Aplicações e Importância</a></li>
+  <li><a href="#a-teoria-dos-modelos" id="toc-a-teoria-dos-modelos" class="nav-link" data-scroll-target="#a-teoria-dos-modelos"><span class="header-section-number">7.0.4</span> A Teoria dos Modelos</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/logica/edit/main/06-construcao-de-mundos-logicos.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/logica/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-formas-normais-e-skolemizacao.html">Aplicações Avançadas</a></li><li class="breadcrumb-item"><a href="./06-construcao-de-mundos-logicos.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mundos na Lógica de Primeira Ordem</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mundos na Lógica de Primeira Ordem</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>A lógica de primeira ordem, também conhecida como lógica de predicados de primeira ordem, emergiu no final do século XIX e início do século XX, principalmente através dos trabalhos de Gottlob Frege, Bertrand Russell e Alfred North Whitehead. Essa lógica foi desenvolvida como uma extensão da lógica proposicional, permitindo a representação de afirmações mais complexas sobre objetos e suas relações. A lógica de primeira ordem tornou-se uma ferramenta fundamental na matemática, filosofia e ciência da computação, especialmente na formalização de sistemas dedutivos e na fundamentação da matemática.</p>
+<p>A capacidade de definir “mundos” ou estruturas dentro da lógica de primeira ordem é que permite modelar e analisar sistemas complexos. Esses mundos representam interpretações ou modelos que atribuem significado às fórmulas lógicas, permitindo verificar a validade de argumentos, provar teoremas e desenvolver sistemas de inteligência artificial. Na ciência da computação, por exemplo, a lógica de primeira ordem é usada em linguagens de programação declarativas, sistemas de banco de dados e na verificação de software.</p>
+<section id="definição-formal-de-um-mundo" class="level3" data-number="7.0.1">
+<h3 data-number="7.0.1" class="anchored" data-anchor-id="definição-formal-de-um-mundo"><span class="header-section-number">7.0.1</span> Definição Formal de um Mundo</h3>
+<p>Na lógica de primeira ordem, um <strong>mundo</strong> ou <strong>modelo</strong> é uma estrutura que consiste em:</p>
+<ol type="1">
+<li><p><strong>Domínio de Discurso (<span class="math inline">\(D\)</span>)</strong>: Um conjunto não vazio de objetos sobre os quais as variáveis quantificadas podem se referir. Exemplo: <span class="math inline">\(D = \{1, 2, 3, 4, 5\}\)</span> (um domínio de números inteiros de 1 a 5)</p></li>
+<li><p><strong>Símbolos de Constantes</strong>: Elementos específicos do domínio que são nomeados. Exemplo: <span class="math inline">\(a = 1\)</span>, <span class="math inline">\(b = 3\)</span> (sendo que <span class="math inline">\(a\)</span> e <span class="math inline">\(b\)</span> são constantes que se referem a elementos específicos do domínio)</p></li>
+<li><p><strong>Símbolos de Função</strong>: Mapeamentos de elementos do domínio para outros elementos dentro do domínio. Exemplo: <span class="math inline">\(f(x) = x + 1\)</span> (uma função que mapeia cada elemento do domínio para seu sucessor)</p></li>
+<li><p><strong>Símbolos de Predicado</strong>: Propriedades ou relações que podem ser atribuídas aos elementos do domínio. Exemplo: <span class="math inline">\(P(x)\)</span>: “x é par”, <span class="math inline">\(R(x, y)\)</span>: “x é menor que y”</p></li>
+<li><p><strong>Interpretação</strong>: Uma função que atribui significado aos símbolos não lógicos (constantes, funções e predicados) em termos do domínio. Exemplo:</p>
+<ul>
+<li><span class="math inline">\(I(a) = 1\)</span></li>
+<li><span class="math inline">\(I(f(2)) = 3\)</span></li>
+<li><span class="math inline">\(I(P) = \{2, 4\}\)</span></li>
+<li><span class="math inline">\(I(R) = \{(1,2), (1,3), (1,4), (1,5), (2,3), (2,4), (2,5), (3,4), (3,5), (4,5)\}\)</span></li>
+</ul></li>
+</ol>
+<p>Um modelo <span class="math inline">\(M\)</span> para uma linguagem <span class="math inline">\(L\)</span> é então definido como <span class="math inline">\(M = (D, I)\)</span>, sendo que <span class="math inline">\(D\)</span> é o domínio e <span class="math inline">\(I\)</span> é a interpretação.</p>
+<p>Neste exemplo, temos um modelo <span class="math inline">\(M\)</span> no qual:</p>
+<p><span class="math display">\[M = (\{1, 2, 3, 4, 5\}, I)\]</span></p>
+<p>com <span class="math inline">\(I\)</span> definido como acima. Este modelo representa um “mundo” no qual podemos fazer afirmações sobre números inteiros de 1 a 5, suas relações de ordem e paridade.</p>
+</section>
+<section id="construção-de-mundos" class="level3" data-number="7.0.2">
+<h3 data-number="7.0.2" class="anchored" data-anchor-id="construção-de-mundos"><span class="header-section-number">7.0.2</span> Construção de Mundos</h3>
+<p>Vamos ilustrar a definição acima com um exemplo concreto.</p>
+<p><strong>Domínio de Objetos (<span class="math inline">\(D\)</span>)</strong>:</p>
+<p><span class="math display">\[D = \{ a, b, c \}\]</span></p>
+<p><strong>Onde</strong>: <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span> e <span class="math inline">\(c\)</span> são objetos distintos no domínio.</p>
+<p><strong>Símbolos de Constante</strong>: <span class="math inline">\(e\)</span>: representa um elemento específico do domínio.</p>
+<p><strong>Símbolos de Função</strong>: <span class="math inline">\(f(x)\)</span>: “o melhor amigo de x.”</p>
+<p><strong>Símbolos de Predicado</strong>:</p>
+<ul>
+<li><span class="math inline">\(P(x)\)</span>: “x é uma pessoa.”</li>
+<li><span class="math inline">\(Q(x)\)</span>: “x é um animal.”</li>
+<li><span class="math inline">\(R(x, y)\)</span>: “x gosta de y.”</li>
+</ul>
+<p><strong>Interpretação no Mundo</strong>: atribuímos significado aos símbolos não lógicos:</p>
+<ul>
+<li><span class="math inline">\(I(e) = a\)</span> (a constante <span class="math inline">\(e\)</span> refere-se ao objeto <span class="math inline">\(a\)</span>)</li>
+<li><span class="math inline">\(I(f)(a) = b\)</span> (o melhor amigo de <span class="math inline">\(a\)</span> é <span class="math inline">\(b\)</span>)</li>
+<li><span class="math inline">\(I(f)(b) = c\)</span> (o melhor amigo de <span class="math inline">\(b\)</span> é <span class="math inline">\(c\)</span>)</li>
+<li><span class="math inline">\(I(f)(c) = a\)</span> (o melhor amigo de <span class="math inline">\(c\)</span> é <span class="math inline">\(a\)</span>)</li>
+<li><span class="math inline">\(P(a)\)</span> é verdadeiro (a é uma pessoa).</li>
+<li><span class="math inline">\(P(b)\)</span> é verdadeiro (b é uma pessoa).</li>
+<li><span class="math inline">\(P(c)\)</span> é falso (c não é uma pessoa).</li>
+<li><span class="math inline">\(Q(c)\)</span> é verdadeiro (c é um animal).</li>
+<li><span class="math inline">\(R(a, c)\)</span> é verdadeiro (a gosta de c).</li>
+<li><span class="math inline">\(R(b, c)\)</span> é verdadeiro (b gosta de c).</li>
+<li><span class="math inline">\(R(a, b)\)</span> é falso (a não gosta de b).</li>
+</ul>
+<p><strong>Representação Formal do Mundo</strong>:</p>
+<p>As informações acima podem ser formalizadas através das seguintes fórmulas:</p>
+<ol type="1">
+<li><span class="math inline">\(P(a) \land P(b) \land \neg P(c)\)</span>: a e b são pessoas; c não é.</li>
+<li><span class="math inline">\(Q(c)\)</span>: c é um animal.</li>
+<li><span class="math inline">\(R(a, c) \land R(b, c) \land \neg R(a, b)\)</span>: a e b gostam de c; a não gosta de b.</li>
+<li><span class="math inline">\(f(a) = b \land f(b) = c \land f(c) = a\)</span>: representação da função “melhor amigo”.</li>
+<li><span class="math inline">\(e = a\)</span>: a constante <span class="math inline">\(e\)</span> refere-se ao objeto <span class="math inline">\(a\)</span>.</li>
+</ol>
+<p>Este mundo agora inclui não apenas predicados, mas também uma constante <span class="math inline">\(e\)</span> e uma função <span class="math inline">\(f\)</span>, enriquecendo a estrutura e as relações entre os objetos do domínio.</p>
+<p>O mundo que definimos acima, embora simples, ilustra vários conceitos importantes da lógica de primeira ordem:</p>
+<ol type="1">
+<li><p><strong>Domínio Finito</strong>: Nosso domínio <span class="math inline">\(D = \{a, b, c\}\)</span> é finito, o que facilita a compreensão, mas é importante notar que domínios em lógica de primeira ordem podem ser infinitos.</p></li>
+<li><p><strong>Relações entre Objetos</strong>: Através dos predicados <span class="math inline">\(P\)</span>, <span class="math inline">\(Q\)</span>, e <span class="math inline">\(R\)</span>, estabelecemos propriedades e relações entre os objetos. Isso demonstra como a lógica de primeira ordem pode capturar informações estruturadas sobre um conjunto de entidades.</p></li>
+<li><p><strong>Funções</strong>: A introdução da função <span class="math inline">\(f\)</span> (melhor amigo) mostra como podemos mapear objetos do domínio para outros objetos do mesmo domínio, criando relações mais complexas.</p></li>
+<li><p><strong>Constantes Nomeadas</strong>: A constante <span class="math inline">\(e\)</span> ilustra como podemos nos referir diretamente a elementos específicos do domínio.</p></li>
+<li><p><strong>Expressividade</strong>: Mesmo com apenas três objetos, três predicados, uma função e uma constante, somos capazes de expressar uma variedade de fatos e relações.</p></li>
+</ol>
+<p><strong>Limitações do Exemplo</strong>:</p>
+<ol type="1">
+<li><p><strong>Escala</strong>: Em aplicações reais, os domínios e conjuntos de predicados e funções são geralmente muito maiores e mais complexos.</p></li>
+<li><p><strong>Tipos de Objetos</strong>: Nosso exemplo mistura pessoas e animais no mesmo domínio. Em modelos mais sofisticados, poderíamos usar tipos ou sortes para distinguir diferentes categorias de objetos.</p></li>
+<li><p><strong>Relações Temporais</strong>: Este modelo é estático. Em muitas aplicações, precisaríamos representar como as relações mudam ao longo do tempo.</p></li>
+<li><p><strong>Incerteza</strong>: A lógica de primeira ordem clássica lida com afirmações definitivamente verdadeiras ou falsas. Não há representação direta de probabilidades ou incertezas.</p></li>
+</ol>
+<p><strong>Extensões Possíveis</strong>: para tornar este mundo mais rico e realista, poderíamos:</p>
+<ol type="1">
+<li>Adicionar mais objetos ao domínio.</li>
+<li>Introduzir predicados mais complexos, como <span class="math inline">\(Irmão(x,y)\)</span> ou <span class="math inline">\(MaisVelho(x,y)\)</span>.</li>
+<li>Definir funções adicionais, como <span class="math inline">\(Idade(x)\)</span> ou <span class="math inline">\(Pai(x)\)</span>.</li>
+<li>Incorporar axiomas que expressem regras gerais sobre o mundo, como <span class="math inline">\(\forall x (P(x) \rightarrow \neg Q(x))\)</span> (nada pode ser simultaneamente uma pessoa e um animal).</li>
+</ol>
+<p>Este exemplo simplificado serve como um ponto de partida para entender como modelos mais complexos podem ser construídos na lógica de primeira ordem para representar conhecimento e raciocinar sobre domínios mais sofisticados.</p>
+</section>
+<section id="aplicações-e-importância" class="level3" data-number="7.0.3">
+<h3 data-number="7.0.3" class="anchored" data-anchor-id="aplicações-e-importância"><span class="header-section-number">7.0.3</span> Aplicações e Importância</h3>
+<p>A definição de mundos na lógica de primeira ordem tem aplicações fundamentais em diversas áreas, abrangendo desde a matemática pura até as ciências aplicadas e a engenharia, passando pela biologia e economia. Na matemática, essa abordagem suporta a prova de teoremas, onde modelos são utilizados para verificar a consistência de sistemas axiomáticos e construir contraexemplos. A teoria dos modelos, um ramo importante da lógica matemática, se dedica ao estudo das relações entre estruturas matemáticas e as linguagens formais que as descrevem. Além disso, nos fundamentos da matemática, a lógica de primeira ordem desempenha um papel central na formalização de conceitos matemáticos, como exemplificado pela Teoria dos Conjuntos de Zermelo-Fraenkel com o Axioma da Escolha (ZFC).</p>
+</section>
+<section id="a-teoria-dos-modelos" class="level3" data-number="7.0.4">
+<h3 data-number="7.0.4" class="anchored" data-anchor-id="a-teoria-dos-modelos"><span class="header-section-number">7.0.4</span> A Teoria dos Modelos</h3>
+<p>A teoria dos modelos estuda as relações entre estruturas matemáticas e as linguagens formais que as descrevem. Vamos considerar um exemplo simples, no qual analisamos a relação entre uma estrutura numérica e a linguagem formal que a descreve.</p>
+<p>Seja <span class="math inline">\(M = (D, I)\)</span> um modelo em que:</p>
+<p><span class="math display">\[D = \{0, 1, 2, 3, 4, 5\}\]</span></p>
+<p>Este domínio representa um conjunto de números inteiros de <span class="math inline">\(0\)</span> a <span class="math inline">\(5\)</span>. A interpretação <span class="math inline">\(I\)</span> atribui significados aos símbolos não lógicos:</p>
+<ol type="1">
+<li><p><strong>Função de Adição (<span class="math inline">\(+\)</span>)</strong>: mapeia pares de elementos do domínio para sua soma.</p>
+<p><span class="math display">\[ I(+) : (x, y) \mapsto (x + y \mod 6)\]</span>$ (A adição é feita com módulo <span class="math inline">\(6\)</span>).</p></li>
+<li><p><strong>Símbolo de Constante</strong>: a constante <span class="math inline">\(c = 3\)</span>.</p></li>
+<li><p><strong>Predicado de Paridade</strong>: <span class="math inline">\(P(x)\)</span> significa “x é par”.</p>
+<p><span class="math display">\[ I(P) = \{0, 2, 4\} \]</span></p></li>
+</ol>
+<p>Com isso, podemos construir fórmulas na linguagem formal e verificar se são satisfeitas no modelo <span class="math inline">\(M\)</span>.</p>
+<p><strong>Regras</strong>:</p>
+<ol type="1">
+<li><p>A soma de dois números pares é sempre par:</p>
+<p><span class="math display">\[ \forall x \forall y (P(x) \land P(y) \rightarrow P(x + y)) \]</span></p>
+<p>Esta fórmula é verdadeira em <span class="math inline">\(M\)</span>.</p></li>
+<li><p>O número <span class="math inline">\(3\)</span> não é par:</p>
+<p><span class="math display">\[ \neg P(3) \]</span></p>
+<p>Esta fórmula também é verdadeira em <span class="math inline">\(M\)</span>, pois <span class="math inline">\(3 \notin \{0, 2, 4\}\)</span>.</p></li>
+<li><p>A adição em <span class="math inline">\(M\)</span> é comutativa:</p>
+<p><span class="math display">\[ \forall x \forall y (x + y = y + x) \]</span></p>
+<p>Esta fórmula é verdadeira, uma vez que a adição em <span class="math inline">\(M\)</span> é comutativa no módulo <span class="math inline">\(6\)</span>.</p></li>
+</ol>
+<p>Neste exemplo, a <strong>estrutura matemática</strong> <span class="math inline">\(M\)</span> é um conjunto de números inteiros de <span class="math inline">\(0\)</span> a <span class="math inline">\(5\)</span> com a operação de adição módulo <span class="math inline">\(6\)</span>. As <strong>fórmulas na linguagem formal</strong> são expressões que descrevem propriedades de números, como paridade e comutatividade da adição.</p>
+<p>A teoria dos modelos nos permite verificar se essas fórmulas são satisfeitas em <span class="math inline">\(M\)</span>. O estudo dessas relações entre fórmulas e estruturas é central na lógica matemática e fundamenta muitas áreas, como a álgebra e a aritmética, além de fornecer ferramentas para analisar a consistência de teorias matemáticas.</p>
+<p>As ciências cognitivas constituem outro campo que faz uso extensivo do conceito de mundos. A modelagem cognitiva se baseia na representação formal de processos de raciocínio e tomada de decisão, enquanto a psicologia do raciocínio estuda como os seres humanos realizam inferências lógicas, muitas vezes comparando o raciocínio humano com os princípios formais da lógica. A engenharia de sistemas também faz uso do conceito de mundos. A especificação de requisitos e a modelagem de domínio se apoiam na capacidade de descrever formalmente sistemas complexos e suas interações, bem como representar conhecimento específico de domínio em diversos sistemas de engenharia. Entretanto, precisamos destacar duas áreas importantes para este trabalho: a ciência da computação e a linguística computacional.</p>
+<section id="aplicações-na-ciência-da-computação" class="level4" data-number="7.0.4.1">
+<h4 data-number="7.0.4.1" class="anchored" data-anchor-id="aplicações-na-ciência-da-computação"><span class="header-section-number">7.0.4.1</span> Aplicações na Ciência da Computação</h4>
+<p>Na ciência da computação, as aplicações são vastas e variadas. No campo da inteligência artificial, a representação de conhecimento se beneficia enormemente da capacidade de modelar domínios complexos para sistemas especialistas e agentes inteligentes. O planejamento automatizado utiliza a descrição de estados do mundo e ações para resolver problemas, enquanto o processamento de linguagem natural depende da análise semântica de textos e da compreensão de contexto. Em bancos de dados, a modelagem conceitual e as consultas semânticas se apoiam fortemente em princípios lógicos para descrever formalmente esquemas e expressar consultas complexas. A verificação de software também se beneficia, com métodos formais sendo empregados para especificar e verificar propriedades de sistemas, e técnicas de model checking permitindo a verificação automática de propriedades em sistemas de estados finitos.</p>
+<section id="exemplo-1---diagnóstico-médico" class="level5" data-number="7.0.4.1.1">
+<h5 data-number="7.0.4.1.1" class="anchored" data-anchor-id="exemplo-1---diagnóstico-médico"><span class="header-section-number">7.0.4.1.1</span> Exemplo 1 - Diagnóstico Médico</h5>
+<p>Em sistemas especialistas de diagnóstico médico, a capacidade de definir e manipular mundos lógicos permite:</p>
+<ol type="1">
+<li><p><strong>Raciocínio sobre cenários hipotéticos</strong>: um sistema especialista pode criar um mundo lógico <span class="math inline">\(M = (D, I)\)</span> representando um paciente com sintomas específicos:</p>
+<p><span class="math display">\[D = \{p, f, t, d, c, g, a\}\]</span></p>
+<p>Onde <span class="math inline">\(p\)</span> representa o paciente, <span class="math inline">\(f\)</span> (febre), <span class="math inline">\(t\)</span> (tosse), <span class="math inline">\(d\)</span> (dor de cabeça), <span class="math inline">\(c\)</span> (COVID-19), <span class="math inline">\(g\)</span> (gripe), e <span class="math inline">\(a\)</span> (alergia) são elementos do domínio.</p>
+<p>A interpretação <span class="math inline">\(I\)</span> define predicados como:</p>
+<ul>
+<li><span class="math inline">\(S(x,y)\)</span>: “x tem sintoma y”</li>
+<li><span class="math inline">\(D(x,z)\)</span>: “x tem doença z”</li>
+<li><span class="math inline">\(T(x,w)\)</span>: “x fez teste w”</li>
+</ul>
+<p>O sistema pode então raciocinar sobre um cenário hipotético onde:</p>
+<p><span class="math display">\[S(p,f) \land S(p,t) \land \neg S(p,d)\]</span></p>
+<p>Este mundo representa um paciente com febre e tosse, mas sem dor de cabeça.</p></li>
+<li><p><strong>Planejamento de ações em ambientes complexos</strong>: baseado no mundo atual, o sistema pode planejar uma sequência de testes diagnósticos. Por exemplo, podemos definir uma função de ação <span class="math inline">\(A(x,y)\)</span> que representa “realizar ação y no paciente x”.</p>
+<p>O sistema pode usar regras como:</p>
+<p><span class="math display">\[\forall x (S(x,f) \land S(x,t) \rightarrow A(x, \text{"testar_covid"}))\]</span></p>
+<p><span class="math display">\[\forall x (S(x,t) \land \neg S(x,f) \rightarrow A(x, \text{"testar_alergia"}))\]</span></p>
+<p>Assim, no nosso cenário hipotético, o sistema recomendaria testar para COVID-19.</p></li>
+<li><p><strong>Inferência de novas informações a partir de dados existentes</strong>: o sistema pode usar regras de inferência para derivar novos fatos. Por exemplo:</p>
+<p><span class="math display">\[\forall x (S(x,f) \land S(x,t) \land T(x, \text{"covid_positivo"}) \rightarrow D(x,c))\]</span></p>
+<p><span class="math display">\[\forall x (S(x,f) \land S(x,t) \land T(x, \text{"covid_negativo"}) \land T(x, \text{"gripe_positivo"}) \rightarrow D(x,g))\]</span></p>
+<p>Se adicionarmos ao nosso mundo <span class="math inline">\(T(p, \text{"covid_positivo"})\)</span>, o sistema pode inferir <span class="math inline">\(D(p,c)\)</span>, concluindo que o paciente tem COVID-19.</p></li>
+<li><p><strong>Validação de consistência em bases de conhecimento</strong>: o sistema pode verificar se o diagnóstico proposto é consistente com o conhecimento existente. Por exemplo, podemos ter uma regra de consistência:</p>
+<p><span class="math display">\[\forall x \neg(D(x,c) \land D(x,g))\]</span></p>
+<p>Esta regra afirma que um paciente não pode ter COVID-19 e gripe simultaneamente. Se o sistema tentar adicionar <span class="math inline">\(D(p,g)\)</span> ao mundo no qual já existe <span class="math inline">\(D(p,c)\)</span>, ele detectará uma inconsistência.</p>
+<p>Além disso, o sistema pode usar regras de integridade mais complexas, como:</p>
+<p><span class="math display">\[\forall x (D(x,c) \rightarrow \exists y (S(x,y) \land (y = f \lor y = t \lor y = d)))\]</span></p>
+<p>Esta regra afirma que se um paciente tem COVID-19, ele deve ter pelo menos um dos sintomas: febre, tosse ou dor de cabeça.</p></li>
+</ol>
+<p>Neste exemplo expandido, o mundo lógico permite ao sistema especialista:</p>
+<ol type="1">
+<li>Representar e raciocinar sobre o estado de saúde do paciente;</li>
+<li>Planejar testes diagnósticos baseados em regras predefinidas;</li>
+<li>Fazer inferências sobre possíveis doenças usando regras lógicas;</li>
+<li>Garantir a consistência do diagnóstico através de verificações de integridade.</li>
+</ol>
+</section>
+<section id="exemplo-2---robô-de-limpeza" class="level5" data-number="7.0.4.1.2">
+<h5 data-number="7.0.4.1.2" class="anchored" data-anchor-id="exemplo-2---robô-de-limpeza"><span class="header-section-number">7.0.4.1.2</span> Exemplo 2 - Robô de Limpeza</h5>
+<p>Em sistemas de planejamento para robôs autônomos, a capacidade de definir e manipular mundos lógicos permite:</p>
+<ol type="1">
+<li><p><strong>Raciocínio sobre cenários hipotéticos</strong>: um sistema de IA para um robô de limpeza pode criar um mundo lógico <span class="math inline">\(M = (D, I)\)</span> representando o estado de um ambiente:</p>
+<p><span class="math display">\[D = \{r, s1, s2, s3, s4, p1, p2, l, d\}\]</span></p>
+<p><span class="math inline">\(r\)</span> representa o robô, <span class="math inline">\(s1\)</span> a <span class="math inline">\(s4\)</span> são setores do ambiente, <span class="math inline">\(p1\)</span> e <span class="math inline">\(p2\)</span> são tipos de sujeira (por exemplo, poeira e líquido), <span class="math inline">\(l\)</span> é o carregador, e <span class="math inline">\(d\)</span> é a lixeira.</p>
+<p>A interpretação <span class="math inline">\(I\)</span> define predicados como:</p>
+<ul>
+<li><span class="math inline">\(Em(x,y)\)</span>: “x está em y”;</li>
+<li><span class="math inline">\(Sujo(x,y)\)</span>: “x está sujo com y”;</li>
+<li><span class="math inline">\(Limpo(x)\)</span>: “x está limpo”;</li>
+<li><span class="math inline">\(TemFerramenta(x,y)\)</span>: “x tem a ferramenta para limpar y”.</li>
+</ul>
+<p>O sistema pode raciocinar sobre um cenário hipotético no qual:</p>
+<p><span class="math display">\[Em(r,s1) \land Sujo(s2,p1) \land Sujo(s3,p2) \land Limpo(s4) \land TemFerramenta(r,p1)\]</span></p>
+<p>Este mundo representa um robô no setor 1, com setores 2 e 3 sujos, setor 4 limpo, e o robô equipado para limpar poeira.</p></li>
+<li><p><strong>Planejamento de ações em ambientes complexos</strong>: baseado no mundo atual, o sistema pode planejar uma sequência de ações de limpeza. Definimos uma função de ação <span class="math inline">\(A(x,y,z)\)</span> que representa “x realiza ação y no local z”.</p>
+<p>O sistema pode usar regras como:</p>
+<p><span class="math display">\[\forall x,y,z \left( Em(x,y) \land Sujo(z, p_1) \land TemFerramenta(x, p_1) \land y \neq z \rightarrow A(x, \text{"mover"}, z) \right)\]</span></p>
+<p>Assumindo que <code>p_1</code> é uma constante conhecida no universo do discurso, a fórmula está sintaticamente correta. Mas se <code>p_1</code> for uma variável, ela deve ser quantificada. Como está, a fórmula <strong>é ambígua</strong> e <strong>potencialmente inválida</strong>.</p>
+<p><span class="math display">\[\forall x,y (Em(x,y) \land Sujo(y,p1) \land TemFerramenta(x,p1) \rightarrow A(x, \text{"limpar"}, y))\]</span></p>
+<p>Assim, no nosso cenário, o sistema planejaria mover o robô para o setor 2 e então limpá-lo.</p></li>
+<li><p><strong>Inferência de novas informações a partir de dados existentes</strong>: o sistema pode usar regras de inferência para atualizar o estado do mundo após ações. Por exemplo:</p>
+<p><span class="math display">\[\forall x,y (A(x, \text{"limpar"}, y) \land Sujo(y,p1) \land TemFerramenta(x,p1) \rightarrow Limpo(y))\]</span></p>
+<p><span class="math display">\[\forall x,y,z (A(x, \text{"mover"}, z) \land Em(x,y) \rightarrow Em(x,z) \land \neg Em(x,y))\]</span></p>
+<p>Após a ação de limpeza no setor 2, o sistema inferiria <span class="math inline">\(Limpo(s2)\)</span>, atualizando o estado do mundo.</p></li>
+<li><p><strong>Validação de consistência em bases de conhecimento</strong>: o sistema pode verificar se o estado do mundo é consistente após cada ação. Por exemplo, podemos ter regras de consistência:</p>
+<p><span class="math display">\[\forall x \neg(Limpo(x) \land Sujo(x,p1))\]</span></p>
+<p><span class="math display">\[\forall x,y,z (Em(x,y) \land Em(x,z) \rightarrow y = z)\]</span></p>
+<p>A primeira regra afirma que um setor não pode estar limpo e sujo ao mesmo tempo. A segunda garante que o robô só pode estar em um lugar de cada vez.</p>
+<p>Além disso, o sistema pode usar regras de integridade mais complexas, como:</p>
+<p><span class="math display">\[\forall x ((\exists y Sujo(x,y)) \rightarrow \neg Limpo(x))\]</span></p>
+<p>Esta regra afirma que se um setor está sujo com qualquer tipo de sujeira, ele não pode ser considerado limpo.</p></li>
+</ol>
+<p>Neste exemplo, o mundo lógico permite ao sistema de IA do robô de limpeza:</p>
+<ol type="1">
+<li>Representar e raciocinar sobre o estado do ambiente e do próprio robô;</li>
+<li>Planejar ações de limpeza baseadas em regras predefinidas e no estado atual;</li>
+<li>Fazer inferências sobre os resultados das ações, atualizando o estado do mundo;</li>
+<li>Garantir a consistência do estado do mundo através de verificações de integridade.</li>
+</ol>
+<p>Este uso sofisticado da lógica de primeira ordem demonstra como sistemas de IA podem manipular informações complexas e realizar raciocínios avançados em domínios de planejamento e execução de tarefas autônomas.</p>
+</section>
+</section>
+<section id="aplicações-na-linguística-computacional" class="level4" data-number="7.0.4.2">
+<h4 data-number="7.0.4.2" class="anchored" data-anchor-id="aplicações-na-linguística-computacional"><span class="header-section-number">7.0.4.2</span> Aplicações na Linguística Computacional</h4>
+<p>Na linguística computacional, a semântica formal emprega a lógica de primeira ordem para modelar o significado de sentenças e discursos em linguagens naturais. As gramáticas formais, por sua vez, se beneficiam dessa abordagem na descrição da estrutura sintática de linguagens, e a análise do discurso utiliza esses princípios para representar contexto e relações entre sentenças em textos.</p>
+<section id="exemplo-1---gramática-formal" class="level5" data-number="7.0.4.2.1">
+<h5 data-number="7.0.4.2.1" class="anchored" data-anchor-id="exemplo-1---gramática-formal"><span class="header-section-number">7.0.4.2.1</span> Exemplo 1 - Gramática Formal</h5>
+<p>Na linguística, particularmente no estudo de gramáticas formais, a lógica de primeira ordem pode ser usada para definir e analisar estruturas sintáticas. Considere o seguinte exemplo de um mundo lógico representando uma gramática simplificada:</p>
+<p>Seja <span class="math inline">\(M = (D, I)\)</span> um modelo em que:</p>
+<p><span class="math display">\[
+D = \{s, np, vp, n, v, det, \text{"o"}, \text{"gato"}, \text{"caça"}, \text{"rato"}\}
+\]</span></p>
+<p><span class="math inline">\(s\)</span> (sentença), <span class="math inline">\(np\)</span> (sintagma nominal), <span class="math inline">\(vp\)</span> (sintagma verbal), <span class="math inline">\(n\)</span> (substantivo), <span class="math inline">\(v\)</span> (verbo), <span class="math inline">\(det\)</span> (determinante) são categorias sintáticas, e “o”, “gato”, “caça”, “rato” são palavras.</p>
+<p>A interpretação <span class="math inline">\(I\)</span> define predicados e funções como:</p>
+<ol type="1">
+<li><span class="math inline">\(Categoria(x, y)\)</span>: “x é uma palavra da categoria sintática y”</li>
+<li><span class="math inline">\(Compõe(x, y, z)\)</span>: “x é composto por y seguido de z”</li>
+<li><span class="math inline">\(Precede(x, y)\)</span>: “x precede imediatamente y na sentença”</li>
+</ol>
+<p>Podemos definir regras gramaticais usando fórmulas lógicas:</p>
+<ol type="1">
+<li><p>Regra para sintagma nominal:</p>
+<p><span class="math display">\[\forall x \forall y (Categoria(x, det) \land Categoria(y, n) \land Precede(x, y) \rightarrow \exists z (Compõe(z, x, y) \land Categoria(z, np)))\]</span></p></li>
+<li><p>Regra para sintagma verbal:</p>
+<p><span class="math display">\[\forall x (Categoria(x, v) \rightarrow \exists y (Compõe(y, x, x) \land Categoria(y, vp)))\]</span></p></li>
+<li><p>Regra para sentença:</p>
+<p><span class="math display">\[\forall x \forall y (Categoria(x, np) \land Categoria(y, vp) \land Precede(x, y) \rightarrow \exists z (Compõe(z, x, y) \land Categoria(z, s)))\]</span></p></li>
+<li><p>Atribuição de categorias às palavras:</p>
+<p><span class="math display">\[Categoria(\text{"o"}, det)\]</span></p>
+<p><span class="math display">\[Categoria(\text{"gato"}, n)\]</span></p>
+<p><span class="math display">\[Categoria(\text{"caça"}, v)\]</span></p>
+<p><span class="math display">\[Categoria(\text{"rato"}, n)\]</span></p></li>
+</ol>
+<p>Agora, podemos usar este mundo lógico para:</p>
+<ol type="1">
+<li><p><strong>Analisar estruturas sintáticas</strong>: dada a sequência de palavras “o gato caça o rato”, podemos usar as regras para derivar sua estrutura sintática:</p>
+<p><span class="math display">\[Precede(\text{"o"}, \text{"gato"}) \land Precede(\text{"gato"}, \text{"caça"}) \land Precede(\text{"caça"}, \text{"o"}) \land Precede(\text{"o"}, \text{"rato"})\]</span></p>
+<p>A partir disso e das regras, podemos inferir:</p>
+<p><span class="math display">\[\exists np_1 (Compõe(np_1, \text{"o"}, \text{"gato"}) \land Categoria(np_1, np))\]</span></p>
+<p><span class="math display">\[\exists vp (Compõe(vp, \text{"caça"}, \text{"caça"}) \land Categoria(vp, vp))\]</span></p>
+<p><span class="math display">\[\exists np_2 (Compõe(np_2, \text{"o"}, \text{"rato"}) \land Categoria(np_2, np))\]</span></p>
+<p><span class="math display">\[\exists s (Compõe(s, np_1, vp) \land Categoria(s, s))\]</span></p></li>
+<li><p><strong>Verificar a gramaticalidade de sentenças</strong>: podemos verificar se uma sequência de palavras forma uma sentença válida ao tentar derivar um <span class="math inline">\(s\)</span> usando as regras.</p></li>
+<li><p><strong>Gerar sentenças gramaticais</strong>: podemos usar as regras para gerar todas as sentenças possíveis de um certo comprimento.</p></li>
+<li><p><strong>Estudar ambiguidades</strong>: poderíamos estender o modelo para lidar com ambiguidades estruturais, por exemplo, adicionando regras para sintagmas preposicionais.</p></li>
+</ol>
+<p>Este exemplo demonstra como a lógica de primeira ordem pode ser usada para formalizar e raciocinar sobre estruturas gramaticais, permitindo análises sintáticas rigorosas e geração de sentenças gramaticalmente corretas.</p>
+<blockquote class="blockquote">
+<p>Um sintagma é um grupo de palavras que, juntas, formam uma unidade dentro de uma frase e desempenham uma função sintática específica. Cada sintagma tem um núcleo (ou “cabeça”), que é o elemento mais importante dentro do grupo e define o tipo de sintagma. O sintagma pode ser constituído apenas pelo núcleo ou por outras palavras que o acompanham, chamadas modificadores ou complementos. Existem diferentes tipos de sintagmas, dependendo da classe gramatical do núcleo:</p>
+<ol type="1">
+<li>Sintagma Nominal (SN): Tem um substantivo como núcleo. Exemplo: o gato preto (o núcleo é gato, um substantivo).</li>
+<li>Sintagma Verbal (SV): Tem um verbo como núcleo. Exemplo: corre rápido (o núcleo é corre, um verbo).</li>
+<li>Sintagma Adjetival (SAdj): Tem um adjetivo como núcleo. Exemplo: muito feliz (o núcleo é feliz, um adjetivo).</li>
+<li>Sintagma Adverbial (SAdv): Tem um advérbio como núcleo. Exemplo: muito rapidamente (o núcleo é rapidamente, um advérbio).</li>
+<li>Sintagma Preposicional (SP): Tem uma preposição seguida de um complemento, que pode ser um sintagma nominal ou outro. Exemplo: com cuidado (o núcleo é com, uma preposição).</li>
+</ol>
+</blockquote>
+</section>
+</section>
+<section id="exemplos-aplicação-da-lógica-de-primeira-ordem-em-biologia-e-economia" class="level4" data-number="7.0.4.3">
+<h4 data-number="7.0.4.3" class="anchored" data-anchor-id="exemplos-aplicação-da-lógica-de-primeira-ordem-em-biologia-e-economia"><span class="header-section-number">7.0.4.3</span> Exemplos Aplicação da Lógica de Primeira Ordem em Biologia e Economia</h4>
+<p>A lógica de primeira ordem é uma ferramenta fundamenta para modelar e raciocinar sobre sistemas complexos. A seguir, a atenta leitora poderá estudar dois exemplos práticos de como a lógica de primeira ordem pode ser aplicada em biologia e economia.</p>
+<section id="exemplo-1---sistemas-biológicos" class="level5" data-number="7.0.4.3.1">
+<h5 data-number="7.0.4.3.1" class="anchored" data-anchor-id="exemplo-1---sistemas-biológicos"><span class="header-section-number">7.0.4.3.1</span> Exemplo 1 - Sistemas Biológicos</h5>
+<p>Na biologia, a lógica de primeira ordem pode ser usada para modelar sistemas biológicos e suas interações. Considere o seguinte exemplo de um mundo lógico representando uma cadeia alimentar simplificada.</p>
+<p>Seja <span class="math inline">\(M = (D, I)\)</span> um modelo em que:</p>
+<p><span class="math display">\[D = \{c, h, a, p, f\}\]</span></p>
+<p><span class="math inline">\(c\)</span> (cobra), <span class="math inline">\(h\)</span> (gavião), <span class="math inline">\(a\)</span> (antílope), <span class="math inline">\(p\)</span> (planta), <span class="math inline">\(f\)</span> (fruto) são organismos.</p>
+<p>A interpretação <span class="math inline">\(I\)</span> define predicados como:</p>
+<ol type="1">
+<li><span class="math inline">\(Come(x, y)\)</span>: “x come y”;</li>
+<li><span class="math inline">\(Herbívoro(x)\)</span>: “x é herbívoro”;</li>
+<li><span class="math inline">\(Carnívoro(x)\)</span>: “x é carnívoro”;</li>
+<li><span class="math inline">\(Produtor(x)\)</span>: “x é produtor”;</li>
+</ol>
+<p>Podemos usar a lógica para descrever as interações alimentares:</p>
+<ol type="1">
+<li><p>Regras de herbívoros:</p>
+<p><span class="math display">\[ \forall x (Herbívoro(x) \rightarrow \exists y (Come(x, y) \land Produtor(y))) \]</span></p>
+<p>(Um herbívoro come apenas produtores).</p></li>
+<li><p>Regras de carnívoros:</p>
+<p><span class="math display">\[ \forall x (Carnívoro(x) \rightarrow \exists y (Come(x, y) \land Herbívoro(y))) \]</span></p>
+<p>(Um carnívoro come apenas herbívoros).</p></li>
+</ol>
+<p>Atribuição de categorias aos organismos:</p>
+<p><span class="math display">\[Herbívoro(a), Produtor(p), Produtor(f), Carnívoro(c), Carnívoro(h)\]</span></p>
+<p>Agora, podemos usar este mundo lógico para:</p>
+<ol type="1">
+<li><p><strong>Analisar interações tróficas</strong>: Por exemplo, <span class="math inline">\(Come(c, a)\)</span> significa que a cobra come o antílope;</p></li>
+<li><p><strong>Verificar coerência ecológica</strong>: As regras acima garantem que um herbívoro não comerá um carnívoro, e que um carnívoro não comerá plantas.</p></li>
+</ol>
+</section>
+<section id="exemplo-2---modelagem-econômica" class="level5" data-number="7.0.4.3.2">
+<h5 data-number="7.0.4.3.2" class="anchored" data-anchor-id="exemplo-2---modelagem-econômica"><span class="header-section-number">7.0.4.3.2</span> Exemplo 2 - Modelagem Econômica</h5>
+<p>Na economia, a lógica de primeira ordem pode ser aplicada para modelar mercados e interações econômicas. Considere o seguinte exemplo de um mundo lógico representando um mercado simples com consumidores e produtos.</p>
+<p>Seja <span class="math inline">\(M = (D, I)\)</span> um modelo em que:</p>
+<p><span class="math display">\[D = \{c_1, c_2, p_1, p_2, m\}\]</span></p>
+<p><span class="math inline">\(c_1\)</span> e <span class="math inline">\(c_2\)</span> são consumidores, <span class="math inline">\(p_1\)</span> e <span class="math inline">\(p_2\)</span> são produtos, e <span class="math inline">\(m\)</span> é o mercado.</p>
+<p>A interpretação <span class="math inline">\(I\)</span> define predicados como:</p>
+<ol type="1">
+<li><span class="math inline">\(Compra(x, y)\)</span>: “x compra o produto y”</li>
+<li><span class="math inline">\(Disponível(y, m)\)</span>: “o produto y está disponível no mercado”</li>
+<li><span class="math inline">\(Dinheiro(x, z)\)</span>: “o consumidor x tem dinheiro z”</li>
+</ol>
+<p>Podemos usar a lógica para descrever transações no mercado:</p>
+<ol type="1">
+<li><p>Regra de compra:</p>
+<p><span class="math display">\[ \forall x \forall y (Dinheiro(x, z) \land Disponível(y, m) \land z \geq \text{Preço}(y) \rightarrow Compra(x, y)) \]</span></p>
+<p>(Um consumidor compra um produto se tiver dinheiro suficiente e o produto estiver disponível).</p></li>
+</ol>
+<p>Atribuição de valores:</p>
+<p><span class="math display">\[Dinheiro(c_1, 100), Dinheiro(c_2, 50), Disponível(p_1, m), Disponível(p_2, m)\]</span></p>
+<p>Agora, podemos usar este mundo lógico para:</p>
+<ol type="1">
+<li><p><strong>Analisar transações</strong>: Por exemplo, <span class="math inline">\(Compra(c_1, p_1)\)</span> significa que o consumidor <span class="math inline">\(c_1\)</span> comprou o produto <span class="math inline">\(p_1\)</span>;</p></li>
+<li><p><strong>Verificar restrições econômicas</strong>: As regras garantem que um consumidor só pode comprar um produto se tiver dinheiro suficiente e se o produto estiver disponível no mercado.</p></li>
+</ol>
+<p>Essa ampla gama de aplicações demonstra a versatilidade e a importância fundamental da definição de mundos na lógica de primeira ordem, estabelecendo-a como uma ferramenta essencial para o avanço do conhecimento e da tecnologia em múltiplas disciplinas. A importância da definição de mundos na lógica de primeira ordem reside em sua capacidade de:</p>
+<ol type="1">
+<li>Fornecer um framework rigoroso para representar conhecimento estruturado;</li>
+<li>Permitir raciocínio automatizado sobre informações complexas;</li>
+<li>Facilitar a comunicação precisa de ideias abstratas entre diferentes disciplinas;</li>
+<li>Servir como base para o desenvolvimento de sistemas inteligentes e adaptativos.</li>
+</ol>
+<p>À medida que os sistemas se tornam mais complexos e as demandas por inteligência artificial aumentam, a habilidade de definir e trabalhar com mundos lógicos torna-se cada vez mais importante para o avanço tecnológico e científico.</p>
+</section>
+</section>
+<section id="exercício-de-aplicação-da-lógica-de-primeira-ordem" class="level4" data-number="7.0.4.4">
+<h4 data-number="7.0.4.4" class="anchored" data-anchor-id="exercício-de-aplicação-da-lógica-de-primeira-ordem"><span class="header-section-number">7.0.4.4</span> Exercício de Aplicação da Lógica de Primeira Ordem</h4>
+<p>A seguir, a esforçada leitora terá a oportunidade de ver dois exercícios práticos que envolvem a aplicação da lógica de primeira ordem. O primeiro exercício aborda a coloração de um grafo, enquanto o segundo envolve grafos parcialmente coloridos. Ambos os exercícios são projetados para serem resolvidos sem o uso de funções, utilizando apenas relações e variáveis.</p>
+<section id="exercício-1---coloração-de-um-grafo" class="level5" data-number="7.0.4.4.1">
+<h5 data-number="7.0.4.4.1" class="anchored" data-anchor-id="exercício-1---coloração-de-um-grafo"><span class="header-section-number">7.0.4.4.1</span> Exercício 1 - Coloração de um Grafo</h5>
+<p>Imagine que você está trabalhando como engenheiro de redes para uma grande empresa de tecnologia. Sua tarefa é planejar as conexões entre os servidores da empresa, garantindo que as comunicações entre eles não criem conflitos. O problema consiste em garantir que os servidores diretamente conectados não utilizem o mesmo canal de comunicação (representado por uma cor). Você tem, no máximo, <span class="math inline">\(n\)</span> servidores e deseja utilizar menos de <span class="math inline">\(k+1\)</span> canais de comunicação, respeitando que cada servidor pode se conectar diretamente a um número limitado de outros servidores, cujo limite é dado pelo grau de conexão <span class="math inline">\(m\)</span>.</p>
+<p><strong>Descrição do Problema</strong>:</p>
+<ul>
+<li><strong>Servidor</strong>: Representado como um nó em um grafo;</li>
+<li><strong>Conexão direta</strong>: Representada como uma aresta entre dois nós;</li>
+<li><strong>Cor</strong>: Representa o canal de comunicação atribuído a um servidor. Dois servidores diretamente conectados não podem compartilhar o mesmo canal;</li>
+<li><strong>Grau de um servidor</strong>: O número de conexões diretas que ele tem com outros servidores;</li>
+<li><strong>Grau de conexão da rede</strong>: O maior grau entre os servidores da rede.</li>
+</ul>
+<p>O objetivo é determinar uma forma de atribuir um canal de comunicação a cada servidor de forma que não haja conflitos de comunicação entre servidores diretamente conectados, utilizando menos de <span class="math inline">\(k+1\)</span> canais.</p>
+<p><strong>Solução</strong>: vamos usar lógica de primeira ordem para modelar este problema sem utilizar funções, apenas relações e variáveis.</p>
+<ul>
+<li>um predicado binário <span class="math inline">\(Cor(x, c)\)</span>, onde <span class="math inline">\(x\)</span> é um servidor e <span class="math inline">\(c\)</span> é uma cor/canal;</li>
+<li>um predicado unário <span class="math inline">\(Servidor(x)\)</span>, que significa que <span class="math inline">\(x\)</span> é um servidor;</li>
+<li>um predicado binário <span class="math inline">\(Conexao(x, y)\)</span>, que significa que <span class="math inline">\(x\)</span> está diretamente conectado a <span class="math inline">\(y\)</span>.</li>
+</ul>
+<p><strong>Regras ou Axiomas</strong>:</p>
+<ol type="1">
+<li><p>Dois servidores diretamente conectados não podem usar o mesmo canal de comunicação:</p>
+<p><span class="math display">\[ \forall x \forall y \forall c: (Servidor(x) \land Servidor(y) \land Conexao(x, y) \land Cor(x, c) \rightarrow \neg Cor(y, c)) \]</span></p></li>
+<li><p>Cada servidor deve receber exatamente uma cor:</p>
+<p><span class="math display">\[ \forall x: (Servidor(x) \rightarrow \exists c: Cor(x, c)) \]</span></p>
+<p><span class="math display">\[ \forall x \forall c1 \forall c2: (Servidor(x) \land Cor(x, c1) \land Cor(x, c2) \rightarrow c1 = c2) \]</span></p></li>
+<li><p>Restrição de grau para um servidor (no máximo <span class="math inline">\(m\)</span> conexões):</p>
+<p><span class="math display">\[ \forall x: (Servidor(x) \rightarrow \neg\exists x_1,...,x_{m+1}: (\bigwedge_{i=1}^{m+1} Conexao(x, x_i) \land \bigwedge_{i \neq j} x_i \neq x_j)) \]</span></p></li>
+<li><p>Número máximo de cores utilizadas (menos de <span class="math inline">\(k+1\)</span>):</p>
+<p><span class="math display">\[ \neg\exists c_1,...,c_{k+1}: (\bigwedge_{i=1}^{k+1} (\exists x: Servidor(x) \land Cor(x, c_i)) \land \bigwedge_{i \neq j} c_i \neq c_j) \]</span></p></li>
+</ol>
+<p><strong>Consultas Possíveis</strong>:</p>
+<p>Com esse modelo, você pode fazer as seguintes consultas:</p>
+<ol type="1">
+<li><p><strong>Verificar se dois servidores estão diretamente conectados</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(Conexao(a, b)\)</span>;</li>
+<li>Resposta: <strong>True</strong> se o servidor <span class="math inline">\(a\)</span> estiver diretamente conectado ao servidor <span class="math inline">\(b\)</span>, <strong>False</strong> caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar qual canal de comunicação (cor) foi atribuído a um servidor</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(Cor(a, c)\)</span>;</li>
+<li>Resposta: <strong>True</strong> se o servidor <span class="math inline">\(a\)</span> usa o canal <span class="math inline">\(c\)</span>, <strong>False</strong> caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar se dois servidores conectados têm cores diferentes</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(Conexao(a, b) \land \forall c: (Cor(a, c) \rightarrow \neg Cor(b, c))\)</span>;</li>
+<li>Resposta: <strong>True</strong> se os servidores <span class="math inline">\(a\)</span> e <span class="math inline">\(b\)</span> estiverem diretamente conectados e tiverem cores diferentes, <strong>False</strong> se eles compartilharem a mesma cor ou não estiverem conectados.</li>
+</ul></li>
+<li><p><strong>Verificar se um servidor tem mais de <span class="math inline">\(m\)</span> conexões diretas</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(\exists x_1,...,x_{m+1}: (\bigwedge_{i=1}^{m+1} Conexao(a, x_i) \land \bigwedge_{i \neq j} x_i \neq x_j)\)</span>;</li>
+<li>Resposta: <strong>True</strong> se o servidor <span class="math inline">\(a\)</span> tiver mais de <span class="math inline">\(m\)</span> servidores diretamente conectados, <strong>False</strong> caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar se a coloração da rede é válida</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(\forall x \forall y \forall c: (Servidor(x) \land Servidor(y) \land Conexao(x, y) \land Cor(x, c) \rightarrow \neg Cor(y, c))\)</span>;</li>
+<li>Resposta: <strong>True</strong> se todos os servidores diretamente conectados tiverem cores diferentes, <strong>False</strong> se houver algum conflito de cores.</li>
+</ul></li>
+</ol>
+</section>
+<section id="exercício-2---grafos-parcialmente-coloridos" class="level5" data-number="7.0.4.4.2">
+<h5 data-number="7.0.4.4.2" class="anchored" data-anchor-id="exercício-2---grafos-parcialmente-coloridos"><span class="header-section-number">7.0.4.4.2</span> Exercício 2 - Grafos Parcialmente Coloridos</h5>
+<p>Dado um conjunto não vazio e finito de cores <span class="math inline">\(\{c_1, \dots, c_k\}\)</span>, um grafo direcionado parcialmente colorido é uma estrutura <span class="math inline">\(\langle N, R, C \rangle\)</span> na qual:</p>
+<ul>
+<li><span class="math inline">\(N\)</span> é um conjunto não vazio de nós;</li>
+<li><span class="math inline">\(R\)</span> é uma relação binária sobre <span class="math inline">\(N\)</span>;</li>
+<li><span class="math inline">\(C\)</span> associa cores aos nós (nem todos os nós são necessariamente coloridos, e cada nó tem no máximo uma cor).</li>
+</ul>
+<p>Forneça uma linguagem de Lógica de Primeira Ordem e um conjunto de axiomas que formalizem grafos parcialmente coloridos. Mostre que todo modelo dessa teoria corresponde a um grafo parcialmente colorido, e vice-versa. Para cada uma das seguintes propriedades, escreva uma fórmula que seja verdadeira apenas nos grafos que satisfazem a propriedade:</p>
+<ol type="1">
+<li>Nós conectados não têm a mesma cor;</li>
+<li>O grafo contém apenas dois nós amarelos;</li>
+<li>Começando de um nó vermelho, pode-se alcançar um nó verde em no máximo 4 passos;</li>
+<li>Para cada cor, existe pelo menos um nó com essa cor;</li>
+<li>O grafo é composto por <span class="math inline">\(|C|\)</span> subgrafos disjuntos e não vazios, um para cada cor.</li>
+</ol>
+<p><strong>Solução</strong>:</p>
+<ul>
+<li>Um predicado binário <span class="math inline">\(edge\)</span>, onde <span class="math inline">\(edge(n, m)\)</span> significa que o nó <span class="math inline">\(n\)</span> está conectado ao nó <span class="math inline">\(m\)</span>;</li>
+<li>Um predicado binário <span class="math inline">\(color\)</span>, onde <span class="math inline">\(color(n, x)\)</span> significa que o nó <span class="math inline">\(n\)</span> tem a cor <span class="math inline">\(x\)</span>;</li>
+<li>As constantes <span class="math inline">\(yellow\)</span>, <span class="math inline">\(green\)</span>, <span class="math inline">\(red\)</span>.</li>
+</ul>
+<p><strong>Axiomas e Regras</strong>:</p>
+<ol type="1">
+<li><p>Cada nó tem no máximo uma cor:</p>
+<p><span class="math display">\[ \forall n \forall x: (color(n, x) \rightarrow \neg \exists y: (y \neq x \land color(n, y))) \]</span></p></li>
+<li><p>Nós conectados não têm a mesma cor:</p>
+<p><span class="math display">\[ \forall n \forall m \forall x: (edge(n, m) \land color(n, x) \rightarrow \neg color(m, x)) \]</span></p></li>
+<li><p>O grafo contém apenas dois nós amarelos:</p>
+<p><span class="math display">\[ \exists n \exists n': (color(n, yellow) \land color(n', yellow) \land n \neq n' \land \forall m: (m \neq n \land m \neq n' \rightarrow \neg color(m, yellow))) \]</span></p></li>
+<li><p>Começando de um nó vermelho, pode-se alcançar um nó verde em no máximo 4 passos: Primeiro, definimos a relação de alcançabilidade em até k passos:</p>
+<p><span class="math display">\[ reach_k(n, m, 0) \leftrightarrow n = m \]</span></p>
+<p><span class="math display">\[ reach_k(n, m, k+1) \leftrightarrow reach_k(n, m, k) \lor \exists x (edge(n, x) \land reach_k(x, m, k)) \]</span></p>
+<p>Então, a propriedade 3 é expressa como:</p>
+<p><span class="math display">\[ \forall n (color(n, red) \rightarrow \exists m (reach_k(n, m, 4) \land color(m, green))) \]</span></p></li>
+<li><p>Para cada cor, existe pelo menos um nó com essa cor:</p>
+<p><span class="math display">\[ \forall x \exists n: color(n, x) \]</span></p></li>
+<li><p>O grafo é composto por <span class="math inline">\(|C|\)</span> subgrafos disjuntos e não vazios, um para cada cor:</p>
+<p><span class="math display">\[ \forall x \exists n: color(n, x) \land \]</span></p>
+<p><span class="math display">\[ \forall n \exists x: color(n, x) \land \]</span></p>
+<p><span class="math display">\[ \forall n \forall m \forall x \forall y ((color(n, x) \land color(m, y) \land x \neq y) \rightarrow \neg reach_k(n, m, \infty)) \]</span></p>
+<p>Onde <span class="math inline">\(\infty\)</span> representa um número suficientemente grande para cobrir todo o grafo.</p></li>
+</ol>
+<p><strong>Consultas possíveis</strong>:</p>
+<ol type="1">
+<li><p>Verificar se dois nós estão conectados:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(edge(a, b)\)</span>;</li>
+<li>Resposta: <strong>True</strong> se o nó <span class="math inline">\(a\)</span> está conectado ao nó <span class="math inline">\(b\)</span>, <strong>False</strong> caso contrário.</li>
+</ul></li>
+<li><p>Verificar a cor de um nó:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(color(a, x)\)</span>;</li>
+<li>Resposta: <strong>True</strong> se o nó <span class="math inline">\(a\)</span> tem a cor <span class="math inline">\(x\)</span>, <strong>False</strong> caso contrário.</li>
+</ul></li>
+<li><p>Verificar se um nó é alcançável a partir de outro em até k passos:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(reach_k(a, b, k)\)</span>;</li>
+<li>Resposta: <strong>True</strong> se o nó <span class="math inline">\(b\)</span> é alcançável a partir do nó <span class="math inline">\(a\)</span> em até <span class="math inline">\(k\)</span> passos, <strong>False</strong> caso contrário.</li>
+</ul></li>
+<li><p>Contar o número de nós de uma determinada cor:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(\exists n_1, ..., n_m: (\bigwedge_{i=1}^m color(n_i, x) \land \bigwedge_{i \neq j} n_i \neq n_j \land \forall n: (color(n, x) \rightarrow \bigvee_{i=1}^m n = n_i))\)</span>;</li>
+<li>Resposta: O maior valor de <span class="math inline">\(m\)</span> para o qual esta fórmula é verdadeira é o número de nós da cor <span class="math inline">\(x\)</span>.</li>
+</ul></li>
+<li><p>Verificar se o grafo é totalmente colorido:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(\forall n \exists x: color(n, x)\)</span>;</li>
+<li>Resposta: <strong>True</strong> se todos os nós têm uma cor atribuída, <strong>False</strong> caso contrário.</li>
+</ul></li>
+</ol>
+</section>
+<section id="exercício-3---minesweeper-2" class="level5" data-number="7.0.4.4.3">
+<h5 data-number="7.0.4.4.3" class="anchored" data-anchor-id="exercício-3---minesweeper-2"><span class="header-section-number">7.0.4.4.3</span> Exercício 3 - Minesweeper [:2]</h5>
+<p>O jogo <strong>Minesweeper</strong> foi inventado por <a href="https://en.wikipedia.org/wiki/Robert_Donner_(disambiguation)">Robert Donner</a> em 1989. O objetivo do jogo é limpar um campo minado sem detonar uma mina. A tela do jogo consiste em um campo retangular de quadrados. Cada quadrado pode ser limpo, ou descoberto, clicando nele. Se um quadrado contendo uma mina for clicado, o jogo termina. Se o quadrado não contém uma mina, uma das duas coisas acontece: (1) Um número entre 1 e 8 aparece, indicando o número de quadrados adjacentes contendo minas, ou (2) nenhum número aparece; nesse caso, não há minas nas células adjacentes.</p>
+<p>Forneça, em uma linguagem de Lógica de Primeira Ordem, um mundo que permita formalizar o conhecimento de um jogador em um estado do jogo. Nessa linguagem, você deve ser capaz de formalizar o seguinte conhecimento:</p>
+<ol type="1">
+<li>Existem exatamente <span class="math inline">\(n\)</span> minas no campo minado.</li>
+<li>Se uma célula contém o número 1, então há exatamente uma mina nas células adjacentes.</li>
+<li>Mostre, por meio de dedução, que deve haver uma mina na posição (3,3) no estado do jogo da figura a seguir.</li>
+</ol>
+<p><img src="{{ site.baseurl }}/images/mines.webp" class="img-fluid">{: class=“lazyimg”} <em>Figura 1 - Um estado do jogo Minesweeper.</em>{: class=“legend”}</p>
+<p><strong>Solução</strong>:</p>
+<ol type="1">
+<li>Um predicado unário <span class="math inline">\(mine\)</span>, onde <span class="math inline">\(mine(x)\)</span> significa que a célula <span class="math inline">\(x\)</span> contém uma mina;</li>
+<li>Um predicado binário <span class="math inline">\(adj\)</span>, onde <span class="math inline">\(adj(x, y)\)</span> significa que a célula <span class="math inline">\(x\)</span> é adjacente à célula <span class="math inline">\(y\)</span>;</li>
+<li>Um predicado binário <span class="math inline">\(contains\)</span>, onde <span class="math inline">\(contains(x, n)\)</span> significa que a célula <span class="math inline">\(x\)</span> contém o número <span class="math inline">\(n\)</span>.</li>
+</ol>
+<p><strong>Regras e Axiomas</strong>:</p>
+<ol type="1">
+<li><p>Existem exatamente <span class="math inline">\(n\)</span> minas no jogo:</p>
+<p><span class="math display">\[ \exists x*1 \dots \exists x_n \left( \bigwedge*{i=1}^{n} mine(x*i) \land \forall y (mine(y) \rightarrow \bigvee*{i=1}^{n} y = x_i) \right) \]</span></p></li>
+<li><p>Se uma célula contém o número 1, então há exatamente uma mina nas células adjacentes:</p>
+<p><span class="math display">\[ \forall x: (contains(x, 1) \rightarrow \exists z: (adj(x, z) \land mine(z) \land \forall y: (adj(x, y) \land mine(y) \rightarrow y = z))) \]</span></p></li>
+<li><p>Mostre por meio de dedução que deve haver uma mina na posição (3,3):</p>
+<p>De acordo com a figura acima, temos:</p>
+<ol type="1">
+<li><p><span class="math inline">\(contains((2, 2), 1)\)</span>;</p></li>
+<li><p><span class="math inline">\(\neg mine((1, 1)) \land \neg mine((1, 2)) \land \neg mine((1, 3))\)</span>;</p></li>
+<li><p><span class="math inline">\(\neg mine((2, 1)) \land \neg mine((2, 2)) \land \neg mine((2, 3))\)</span>;</p></li>
+<li><p><span class="math inline">\(\neg mine((3, 1)) \land \neg mine((3, 2))\)</span>.</p>
+<p>Podemos deduzir:</p></li>
+<li><p><span class="math inline">\(\exists z: (adj((2, 2), z) \land mine(z) \land \forall y: (adj((2, 2), y) \land mine(y) \rightarrow y = z))\)</span> (de a e axioma 2)</p></li>
+<li><p><span class="math inline">\(mine((1, 1)) \lor mine((1, 2)) \lor mine((1, 3)) \lor mine((2, 1)) \lor mine((2, 2)) \lor mine((2, 3)) \lor mine((3, 1)) \lor mine((3, 2)) \lor mine((3, 3))\)</span> (de e)</p></li>
+<li><p><span class="math inline">\(mine((3, 3))\)</span> (de b, c, d e f)</p></li>
+</ol></li>
+</ol>
+</section>
+<section id="exercício-4---conexões-aéreas" class="level5" data-number="7.0.4.4.4">
+<h5 data-number="7.0.4.4.4" class="anchored" data-anchor-id="exercício-4---conexões-aéreas"><span class="header-section-number">7.0.4.4.4</span> Exercício 4 - Conexões Aéreas</h5>
+<p>Imagine que você é responsável pela gestão de voos entre várias cidades brasileiras. A tarefa envolve criar uma representação formal das conexões aéreas entre essas cidades, considerando diferentes tipos de voos, como voos domésticos e internacionais, e as restrições específicas que regulam essas conexões. O objetivo é formalizar essas conexões de forma que se possa responder a perguntas sobre as rotas disponíveis e as restrições envolvidas.</p>
+<p><strong>Descrição do Problema</strong>:</p>
+<ul>
+<li><strong>Cidades brasileiras</strong>: representadas como nós de um grafo;</li>
+<li><strong>Voos diretos</strong>: representados como arestas que conectam duas cidades diretamente (sem escalas intermediárias);</li>
+<li><strong>Tipos de voos</strong>: diferentes categorias de voos, como domésticos (doméstico) e internacionais (internacional), com restrições sobre onde eles podem operar.</li>
+<li><strong>Cidades pequenas</strong>: algumas cidades são classificadas como pequenas, e certas restrições se aplicam a essas cidades.</li>
+</ul>
+<p><strong>Solução</strong>:</p>
+<ul>
+<li>As constantes <span class="math inline">\(SP\)</span>, <span class="math inline">\(RJ\)</span>, <span class="math inline">\(BSB\)</span>, <span class="math inline">\(FLN\)</span>, <span class="math inline">\(MAO\)</span> são identificadores das cidades São Paulo, Rio de Janeiro, Brasília, Florianópolis, Manaus;</li>
+<li>As constantes <span class="math inline">\(Domestico\)</span>, <span class="math inline">\(Internacional\)</span> são os identificadores dos tipos de voo;</li>
+<li>O predicado unário <span class="math inline">\(Aviao(x)\)</span> significa que <span class="math inline">\(x\)</span> é um avião;</li>
+<li>O predicado unário <span class="math inline">\(Cidade(x)\)</span> significa que <span class="math inline">\(x\)</span> é uma cidade;</li>
+<li>O predicado unário <span class="math inline">\(CidadePequena(x)\)</span> significa que <span class="math inline">\(x\)</span> é uma cidade pequena;</li>
+<li>O predicado binário <span class="math inline">\(TipoVoo(x, y)\)</span> significa que o voo <span class="math inline">\(x\)</span> é do tipo <span class="math inline">\(y\)</span>;</li>
+<li>O predicado binário <span class="math inline">\(PertenceEstado(x, y)\)</span> significa que a cidade <span class="math inline">\(x\)</span> está no estado <span class="math inline">\(y\)</span>;</li>
+<li>O predicado ternário <span class="math inline">\(ConexaoDireta(x, y, z)\)</span> significa que o voo <span class="math inline">\(x\)</span> conecta diretamente as cidades <span class="math inline">\(y\)</span> e <span class="math inline">\(z\)</span> (sem escalas intermediárias).</li>
+</ul>
+<p><strong>Regras e Axiomas</strong>:</p>
+<ol type="1">
+<li><p>Um avião tem exatamente um tipo de voo:</p>
+<p><span class="math display">\[ \forall x (Aviao(x) \rightarrow \exists y (TipoVoo(x, y))) \land \forall x y z (TipoVoo(x, y) \land TipoVoo(x, z) \rightarrow y = z) \]</span></p></li>
+<li><p>O tipo Internacional é diferente do tipo Doméstico:</p>
+<p><span class="math display">\[ \neg (Internacional = Domestico) \]</span></p></li>
+<li><p>Uma cidade está associada a exatamente um estado:</p>
+<p><span class="math display">\[ \forall x (Cidade(x) \rightarrow \exists y (PertenceEstado(x, y))) \land \forall x y z (PertenceEstado(x, y) \land PertenceEstado(x, z) \rightarrow y = z) \]</span></p></li>
+<li><p>Cidades pequenas são cidades:</p>
+<p><span class="math display">\[ \forall x (CidadePequena(x) \rightarrow Cidade(x)) \]</span></p></li>
+<li><p>Se uma cidade <span class="math inline">\(a\)</span> está conectada a uma cidade <span class="math inline">\(b\)</span>, então <span class="math inline">\(b\)</span> também está conectada a <span class="math inline">\(a\)</span>:</p>
+<p><span class="math display">\[ \forall x y (\exists z ConexaoDireta(z, x, y) \rightarrow \exists z ConexaoDireta(z, y, x)) \]</span></p></li>
+<li><p>Definição das constantes de cidade:</p>
+<p><span class="math display">\[ Cidade(SP) \land Cidade(RJ) \land Cidade(BSB) \land Cidade(FLN) \land Cidade(MAO) \]</span></p></li>
+</ol>
+<p><strong>Axiomas específicos</strong>:</p>
+<ol type="1">
+<li><p>Não há conexão direta de São Paulo para Manaus:</p>
+<p><span class="math display">\[ \neg \exists x ConexaoDireta(x, SP, MAO) \]</span></p></li>
+<li><p>Existe um voo doméstico de São Paulo para Manaus que faz escalas em Brasília, Rio de Janeiro e Florianópolis:</p>
+<p><span class="math display">\[ \exists x (ConexaoDireta(x, SP, BSB) \land ConexaoDireta(x, BSB, RJ) \land ConexaoDireta(x, RJ, FLN) \land ConexaoDireta(x, FLN, MAO) \land TipoVoo(x, Domestico)) \]</span></p></li>
+<li><p>Voos domésticos conectam cidades brasileiras:</p>
+<p><span class="math display">\[ \forall x y z (TipoVoo(x, Domestico) \rightarrow (ConexaoDireta(x, y, z) \rightarrow (Cidade(y) \land Cidade(z)))) \]</span></p></li>
+<li><p>Voos internacionais não fazem escalas em cidades pequenas:</p>
+<p><span class="math display">\[ \forall x y z (ConexaoDireta(x, y, z) \land TipoVoo(x, Internacional) \rightarrow \neg CidadePequena(y) \land \neg CidadePequena(z)) \]</span></p></li>
+</ol>
+<p><strong>Consultas Possíveis</strong>:</p>
+<ol type="1">
+<li><p><strong>Verificar se há uma conexão direta entre duas cidades</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(ConexaoDireta(a, b, c)\)</span>;</li>
+<li>Resposta: <strong>True</strong> se o voo <span class="math inline">\(a\)</span> conecta diretamente as cidades <span class="math inline">\(b\)</span> e <span class="math inline">\(c\)</span>, <strong>False</strong> caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar o tipo de voo de um avião</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(TipoVoo(a, x)\)</span>;</li>
+<li>Resposta: <strong>True</strong> se o avião <span class="math inline">\(a\)</span> opera o tipo de voo <span class="math inline">\(x\)</span>, <strong>False</strong> caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar se duas cidades estão no mesmo estado</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(PertenceEstado(a, b)\)</span>;</li>
+<li>Resposta: <strong>True</strong> se a cidade <span class="math inline">\(a\)</span> está no estado <span class="math inline">\(b\)</span>, <strong>False</strong> caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar se um voo faz escalas apenas em cidades grandes</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(\forall y z (ConexaoDireta(a, y, z) \rightarrow (\neg CidadePequena(y) \land \neg CidadePequena(z)))\)</span>;</li>
+<li>Resposta: <strong>True</strong> se o voo <span class="math inline">\(a\)</span> não faz escalas em cidades pequenas, <strong>False</strong> caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar se uma cidade pequena está conectada por um voo</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(\exists x (CidadePequena(y) \land ConexaoDireta(x, y, z))\)</span>;</li>
+<li>Resposta: <strong>True</strong> se a cidade pequena <span class="math inline">\(y\)</span> está conectada por um voo a alguma outra cidade, <strong>False</strong> caso contrário.</li>
+</ul></li>
+</ol>
+</section>
+<section id="exercício-5---jogo-de-damas-brasileiro" class="level5" data-number="7.0.4.4.5">
+<h5 data-number="7.0.4.4.5" class="anchored" data-anchor-id="exercício-5---jogo-de-damas-brasileiro"><span class="header-section-number">7.0.4.4.5</span> Exercício 5 - Jogo de Damas Brasileiro</h5>
+<p>O jogo de damas brasileiro é jogado em um tabuleiro de 64 casas (pretas e brancas), onde dois jogadores competem com 12 peças cada (denominadas <strong>comuns</strong>). Um jogador tem peças pretas e o outro, peças brancas. O objetivo do jogo é capturar todas as peças do adversário ou impossibilitar os movimentos do adversário.</p>
+<p>Quando o jogo começa, as peças de cada jogador são posicionadas nas 12 casas pretas mais próximas a eles, sendo que as casas brancas não são utilizadas durante o jogo. As peças se movem apenas diagonalmente, permanecendo nas casas pretas. O jogador com peças pretas sempre faz o primeiro movimento.</p>
+<p><strong>Movimentos</strong>:</p>
+<p>Existem quatro tipos fundamentais de movimento: o movimento comum de uma peça, o movimento comum de uma dama, o movimento de captura de uma peça e o movimento de captura de uma dama.</p>
+<ul>
+<li><strong>Movimento comum de uma peça</strong>: A peça é movida diagonalmente para frente, à esquerda ou à direita, para uma casa vazia adjacente;</li>
+<li><strong>Movimento comum de uma dama</strong>: A dama (uma peça que alcançou a última fileira e foi promovida) pode se mover diagonalmente em qualquer direção (frente, trás, esquerda ou direita);</li>
+<li><strong>Captura</strong>: Quando uma peça (comum ou dama) tem uma peça adversária adjacente, e a casa imediatamente além está vazia, a peça adversária pode ser capturada ao “pular” sobre ela, removendo-a do tabuleiro. Se uma peça puder realizar capturas múltiplas consecutivas, ela deve fazê-lo.</li>
+</ul>
+<p><strong>Objetivo</strong>:</p>
+<p>O jogador vence ao capturar todas as peças do adversário ou ao impossibilitar os movimentos de seu oponente.</p>
+<p><strong>Formalização em Lógica de Primeira Ordem</strong>:</p>
+<ul>
+<li>O predicado unário <span class="math inline">\(square(x)\)</span> significa que <span class="math inline">\(x\)</span> é uma casa do tabuleiro;</li>
+<li>O predicado unário <span class="math inline">\(piece(x)\)</span> significa que <span class="math inline">\(x\)</span> é uma peça;</li>
+<li>O predicado unário <span class="math inline">\(white(x)\)</span> significa que <span class="math inline">\(x\)</span> é branca;</li>
+<li>O predicado unário <span class="math inline">\(black(x)\)</span> significa que <span class="math inline">\(x\)</span> é preta;</li>
+<li>O predicado unário <span class="math inline">\(common(x)\)</span> significa que <span class="math inline">\(x\)</span> é uma peça comum;</li>
+<li>O predicado unário <span class="math inline">\(dama(x)\)</span> significa que <span class="math inline">\(x\)</span> é uma dama;</li>
+<li>O predicado binário <span class="math inline">\(empty(x, t)\)</span> significa que a casa <span class="math inline">\(x\)</span> está vazia no tempo <span class="math inline">\(t\)</span>;</li>
+<li>O predicado binário <span class="math inline">\(contain(x, y, t)\)</span> significa que a casa <span class="math inline">\(x\)</span> contém a peça <span class="math inline">\(y\)</span> no tempo <span class="math inline">\(t\)</span>;</li>
+<li>O predicado binário <span class="math inline">\(capture(x, y, t)\)</span> significa que a peça <span class="math inline">\(x\)</span> capturou a peça <span class="math inline">\(y\)</span> no tempo <span class="math inline">\(t\)</span>;</li>
+<li>O predicado binário <span class="math inline">\(adjacent(x, y)\)</span> significa que as casas <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> são adjacentes;</li>
+<li>O predicado unário <span class="math inline">\(turn(x, t)\)</span> significa que é a vez do jogador <span class="math inline">\(x\)</span> no tempo <span class="math inline">\(t\)</span>;</li>
+<li>O predicado binário <span class="math inline">\(lastRow(x, y)\)</span> significa que a casa <span class="math inline">\(x\)</span> está na última fileira para o jogador com cor <span class="math inline">\(y\)</span>.</li>
+</ul>
+<p><strong>Regras e Axiomas</strong>:</p>
+<ol type="1">
+<li><p>Cada peça é branca ou preta:</p>
+<p><span class="math display">\[ \forall x: (piece(x) \rightarrow (white(x) \lor black(x))) \]</span></p></li>
+<li><p>Cada peça é uma peça comum ou uma dama:</p>
+<p><span class="math display">\[ \forall x: (piece(x) \rightarrow (common(x) \lor dama(x))) \]</span></p></li>
+<li><p>As casas brancas estão sempre vazias:</p>
+<p><span class="math display">\[ \forall x: (square(x) \land white(x) \rightarrow \forall t: empty(x, t)) \]</span></p></li>
+<li><p>Em cada instante do jogo, as casas pretas estão vazias ou contêm uma peça:</p>
+<p><span class="math display">\[ \forall x: (square(x) \land black(x) \rightarrow \forall t: (empty(x, t) \lor \exists y: contain(x, y, t))) \]</span></p></li>
+<li><p>No início do jogo (instante zero), há exatamente 12 peças brancas e 12 peças pretas no tabuleiro:</p>
+<p><span class="math display">\[ \exists p*1, \dots, p*{12}, q*1, \dots, q*{12}: (\bigwedge\*{i=1}^{12} (piece(p_i) \land white(p_i) \land piece(q_i) \land black(q_i)) \land \]</span></p>
+<p><span class="math display">\[ \forall x: (piece(x) \land white(x) \rightarrow \bigvee*{i=1}^{12} x = p*i) \land \]</span></p>
+<p><span class="math display">\[ \forall x: (piece(x) \land black(x) \rightarrow \bigvee\*{i=1}^{12} x = q_i)) \]</span></p></li>
+<li><p>Movimento de peça comum:</p>
+<p><span class="math display">\[ \forall x, y, p, t: (common(p) \land contain(x, p, t) \land empty(y, t) \land adjacent(x, y) \land turn(color(p), t) \rightarrow contain(y, p, t+1) \land empty(x, t+1)) \]</span></p></li>
+<li><p>Movimento de dama:</p>
+<p><span class="math display">\[ \forall x, y, p, t: (dama(p) \land contain(x, p, t) \land empty(y, t) \land turn(color(p), t) \rightarrow contain(y, p, t+1) \land empty(x, t+1)) \]</span></p></li>
+<li><p>Captura:</p>
+<p><span class="math display">\[ \forall x, y, z, p_1, p_2, t: (piece(p_1) \land piece(p_2) \land color(p_1) \neq color(p_2) \land contain(x, p_1, t) \land contain(y, p_2, t) \land empty(z, t) \land adjacent(x, y) \land adjacent(y, z) \land turn(color(p_1), t) \rightarrow capture(p_1, p_2, t) \land contain(z, p_1, t+1) \land empty(x, t+1) \land empty(y, t+1)) \]</span></p></li>
+<li><p>Promoção a dama:</p>
+<p><span class="math display">\[ \forall x, p, t: (common(p) \land contain(x, p, t) \land lastRow(x, color(p)) \rightarrow dama(p)) \]</span></p></li>
+<li><p>Vitória:</p></li>
+</ol>
+<p><span class="math display">\[ \forall t: (\neg \exists x: (piece(x) \land white(x) \land contain(y, x, t)) \lor \neg \exists x: (piece(x) \land black(x) \land contain(y, x, t)) \lor \]</span></p>
+<p><span class="math display">\[ \neg \exists x, y: (piece(x) \land contain(y, x, t) \land turn(color(x), t) \land ((\exists z: (empty(z, t) \land adjacent(y, z))) \lor (\exists w, z: (piece(w) \land color(w) \neq color(x) \land contain(z, w, t) \land adjacent(y, z) \land \exists v: (empty(v, t) \land adjacent(z, v)))))) \rightarrow gameOver(t)) \]</span></p>
+<p><strong>Consultas Possíveis</strong>:</p>
+<ol type="1">
+<li><p><strong>Verificar se uma casa está vazia no tempo <span class="math inline">\(t\)</span></strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(empty(a, t)\)</span>;</li>
+<li>Resposta: <strong>True</strong> se a casa <span class="math inline">\(a\)</span> está vazia no tempo <span class="math inline">\(t\)</span>, <strong>False</strong> caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar qual peça está em uma casa no tempo <span class="math inline">\(t\)</span></strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(contain(a, p, t)\)</span>;</li>
+<li>Resposta: <strong>True</strong> se a peça <span class="math inline">\(p\)</span> está na casa <span class="math inline">\(a\)</span> no tempo <span class="math inline">\(t\)</span>, <strong>False</strong> caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar se uma peça capturou outra no tempo <span class="math inline">\(t\)</span></strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(capture(x, y, t)\)</span>;</li>
+<li>Resposta: <strong>True</strong> se a peça <span class="math inline">\(x\)</span> capturou a peça <span class="math inline">\(y\)</span> no tempo <span class="math inline">\(t\)</span>, <strong>False</strong> caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar o número total de peças de uma cor no tabuleiro</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(\exists p_1, \dots, p_n: (\bigwedge_{i=1}^n (piece(p_i) \land color(p_i)) \land \forall x: (piece(x) \land color(x) \rightarrow \bigvee_{i=1}^n x = p_i))\)</span>;</li>
+<li>Resposta: O valor <span class="math inline">\(n\)</span> corresponde ao número total de peças da cor especificada no tabuleiro naquele momento.</li>
+</ul></li>
+<li><p><strong>Verificar se o jogo terminou</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(gameOver(t)\)</span>;</li>
+<li>Resposta: <strong>True</strong> se o jogo terminou no tempo <span class="math inline">\(t\)</span>, <strong>False</strong> caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar de quem é a vez de jogar</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(turn(x, t)\)</span>;</li>
+<li>Resposta: <strong>True</strong> se é a vez do jogador <span class="math inline">\(x\)</span> no tempo <span class="math inline">\(t\)</span>, <strong>False</strong> caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar se uma peça comum foi promovida a dama</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(\exists t_1, t_2: (t_1 &lt; t_2 \land common(p, t_1) \land dama(p, t_2))\)</span>;</li>
+<li>Resposta: <strong>True</strong> se a peça <span class="math inline">\(p\)</span> foi promovida de comum para dama em algum momento do jogo, <strong>False</strong> caso contrário.</li>
+</ul></li>
+</ol>
+</section>
+<section id="exercício-6---sudoku" class="level5" data-number="7.0.4.4.6">
+<h5 data-number="7.0.4.4.6" class="anchored" data-anchor-id="exercício-6---sudoku"><span class="header-section-number">7.0.4.4.6</span> Exercício 6 - Sudoku</h5>
+<p>O Sudoku é um jogo de lógica jogado em um tabuleiro de 9x9, que é dividido em 9 regiões menores de 3x3. O objetivo do jogo é preencher todas as 81 casas do tabuleiro com números de 1 a 9, respeitando as seguintes regras:</p>
+<ol type="1">
+<li>Cada número de 1 a 9 deve aparecer exatamente uma vez em cada linha;</li>
+<li>Cada número de 1 a 9 deve aparecer exatamente uma vez em cada coluna;</li>
+<li>Cada número de 1 a 9 deve aparecer exatamente uma vez em cada uma das 9 regiões 3x3.</li>
+</ol>
+<p>O jogo começa com algumas casas já preenchidas, e o jogador deve completar as casas restantes de forma a obedecer essas regras.</p>
+<p><strong>Solução</strong>:</p>
+<ul>
+<li>O predicado unário <span class="math inline">\(cell(x)\)</span> significa que <span class="math inline">\(x\)</span> é uma célula do tabuleiro;</li>
+<li>O predicado binário <span class="math inline">\(value(x, v)\)</span> significa que a célula <span class="math inline">\(x\)</span> contém o valor <span class="math inline">\(v\)</span>, onde <span class="math inline">\(v\)</span> é um número de <span class="math inline">\(1\)</span> a <span class="math inline">\(9\)</span>;</li>
+<li>O predicado binário <span class="math inline">\(inRow(x, r)\)</span> significa que a célula <span class="math inline">\(x\)</span> está na linha <span class="math inline">\(r\)</span>, onde <span class="math inline">\(r\)</span> é um número de <span class="math inline">\(1\)</span> a <span class="math inline">\(9\)</span>;</li>
+<li>O predicado binário <span class="math inline">\(inColumn(x, c)\)</span> significa que a célula <span class="math inline">\(x\)</span> está na coluna <span class="math inline">\(c\)</span>, onde <span class="math inline">\(c\)</span> é um número de <span class="math inline">\(1\)</span> a <span class="math inline">\(9\)</span>;</li>
+<li>O predicado binário <span class="math inline">\(inRegion(x, z)\)</span> significa que a célula <span class="math inline">\(x\)</span> está na região <span class="math inline">\(z\)</span>, onde <span class="math inline">\(z\)</span> é um número de <span class="math inline">\(1\)</span> a <span class="math inline">\(9\)</span> representando uma das <span class="math inline">\(9\)</span> regiões <span class="math inline">\(3\times 3\)</span>.</li>
+</ul>
+<p><strong>Regras e Axiomas</strong>:</p>
+<ol type="1">
+<li><p>Cada célula tem exatamente um valor entre <span class="math inline">\(1\)</span> e <span class="math inline">\(9\)</span>:</p>
+<p><span class="math display">\[\forall x: (cell(x) \rightarrow \exists! v: (1 \leq v \leq 9 \land value(x, v)))\]</span></p></li>
+<li><p>Cada linha contém os números de <span class="math inline">\(1\)</span> a <span class="math inline">\(9\)</span> exatamente uma vez:</p>
+<p><span class="math display">\[\forall r \forall v: (1 \leq r \leq 9 \land 1 \leq v \leq 9 \rightarrow \exists! x: (inRow(x, r) \land value(x, v)))\]</span></p></li>
+<li><p>Cada coluna contém os números de <span class="math inline">\(1\)</span> a <span class="math inline">\(9\)</span> exatamente uma vez:</p>
+<p><span class="math display">\[\forall c \forall v: (1 \leq c \leq 9 \land 1 \leq v \leq 9 \rightarrow \exists! x: (inColumn(x, c) \land value(x, v)))\]</span></p></li>
+<li><p>Cada região 3x3 contém os números de <span class="math inline">\(1\)</span> a <span class="math inline">\(9\)</span> exatamente uma vez:</p>
+<p><span class="math display">\[\forall z \forall v: (1 \leq z \leq 9 \land 1 \leq v \leq 9 \rightarrow \exists! x: (inRegion(x, z) \land value(x, v)))\]</span></p></li>
+<li><p>Células na mesma linha não podem ter o mesmo valor:</p>
+<p><span class="math display">\[\forall x_1 \forall x_2 \forall v \forall r: (x_1 \neq x_2 \land value(x_1, v) \land value(x_2, v) \land inRow(x_1, r) \land inRow(x_2, r) \rightarrow \bot)\]</span></p></li>
+<li><p>Células na mesma coluna não podem ter o mesmo valor:</p>
+<p><span class="math display">\[\forall x_1 \forall x_2 \forall v \forall c: (x_1 \neq x_2 \land value(x_1, v) \land value(x_2, v) \land inColumn(x_1, c) \land inColumn(x_2, c) \rightarrow \bot)\]</span></p></li>
+<li><p>Células na mesma região não podem ter o mesmo valor:</p>
+<p><span class="math display">\[\forall x_1 \forall x_2 \forall v \forall z: (x_1 \neq x_2 \land value(x_1, v) \land value(x_2, v) \land inRegion(x_1, z) \land inRegion(x_2, z) \rightarrow \bot)\]</span></p></li>
+<li><p>Cada célula está em exatamente uma linha, uma coluna e uma região:</p>
+<p><span class="math display">\[\forall x: (cell(x) \rightarrow \exists! r \exists! c \exists! z: (inRow(x, r) \land inColumn(x, c) \land inRegion(x, z)))\]</span></p></li>
+</ol>
+<p><strong>Consultas Possíveis</strong>:</p>
+<ol type="1">
+<li><p><strong>Verificar se uma célula está preenchida com um determinado valor no tabuleiro</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(value(x, v)\)</span>;</li>
+<li>Resposta: <strong>True</strong> se a célula <span class="math inline">\(x\)</span> contém o valor <span class="math inline">\(v\)</span>, <strong>False</strong> caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar se uma linha contém todos os números de 1 a 9</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(\forall v (1 \leq v \leq 9 \rightarrow \exists! x: (inRow(x, r) \land value(x, v)))\)</span>;</li>
+<li>Resposta: <strong>True</strong> se a linha <span class="math inline">\(r\)</span> contém todos os números de 1 a 9, <strong>False</strong> caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar se uma coluna contém todos os números de 1 a 9</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(\forall v (1 \leq v \leq 9 \rightarrow \exists! x: (inColumn(x, c) \land value(x, v)))\)</span>;</li>
+<li>Resposta: <strong>True</strong> se a coluna <span class="math inline">\(c\)</span> contém todos os números de 1 a 9, <strong>False</strong> caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar se uma região 3x3 contém todos os números de 1 a 9</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(\forall v (1 \leq v \leq 9 \rightarrow \exists! x: (inRegion(x, z) \land value(x, v)))\)</span>;</li>
+<li>Resposta: <strong>True</strong> se a região <span class="math inline">\(z\)</span> contém todos os números de 1 a 9, <strong>False</strong> caso contrário.</li>
+</ul></li>
+</ol>
+</section>
+<section id="exercício-7---torre-de-hanói" class="level5" data-number="7.0.4.4.7">
+<h5 data-number="7.0.4.4.7" class="anchored" data-anchor-id="exercício-7---torre-de-hanói"><span class="header-section-number">7.0.4.4.7</span> Exercício 7 - Torre de Hanói</h5>
+<p>No jogo <strong>Torre de Hanói</strong>, três postes são dados, e discos de tamanhos diferentes são empilhados no primeiro poste em ordem crescente de tamanho (o menor no topo). O objetivo do jogo é mover todos os discos para o terceiro poste, usando o segundo poste como auxiliar, sob as seguintes condições [^2]:</p>
+<ol type="1">
+<li>Somente um disco pode ser movido de cada vez;</li>
+<li>Nenhum disco pode ser colocado sobre um disco menor.</li>
+</ol>
+<p><strong>Regras e Axiomas</strong>:</p>
+<ol type="1">
+<li>Formalize a regra de que apenas um disco pode ser movido de cada vez;</li>
+<li>Formalize a regra de que nenhum disco pode ser colocado sobre um disco menor;</li>
+<li>Formalize a condição de vitória, isto é, todos os discos estão no terceiro poste.</li>
+</ol>
+<p><strong>Solução</strong>:</p>
+<ul>
+<li>O predicado unário <span class="math inline">\(disk(x)\)</span> significa que <span class="math inline">\(x\)</span> é um disco;</li>
+<li>O predicado unário <span class="math inline">\(peg(x)\)</span> significa que <span class="math inline">\(x\)</span> é um poste;</li>
+<li>O predicado ternário <span class="math inline">\(on(x, y, t)\)</span> significa que, no tempo <span class="math inline">\(t\)</span>, o disco <span class="math inline">\(x\)</span> está diretamente sobre o disco <span class="math inline">\(y\)</span>;</li>
+<li>O predicado ternário <span class="math inline">\(at(x, p, t)\)</span> significa que, no tempo <span class="math inline">\(t\)</span>, o disco <span class="math inline">\(x\)</span> está no poste <span class="math inline">\(p\)</span>;</li>
+<li>O predicado ternário <span class="math inline">\(move(d, p, t)\)</span> significa que, no tempo <span class="math inline">\(t\)</span>, o disco <span class="math inline">\(d\)</span> foi movido para o poste <span class="math inline">\(p\)</span>;</li>
+<li>O predicado unário <span class="math inline">\(smallest(x)\)</span> significa que <span class="math inline">\(x\)</span> é o disco de menor tamanho;</li>
+<li>O predicado binário <span class="math inline">\(larger(x, y)\)</span> significa que o disco <span class="math inline">\(x\)</span> é maior que o disco <span class="math inline">\(y\)</span>.</li>
+</ul>
+<p><strong>Axiomas</strong>:</p>
+<ol type="1">
+<li><p><strong>Apenas um disco pode ser movido de cada vez</strong>:</p>
+<p><span class="math display">\[\forall t \exists! d \exists p: move(d, p, t)\]</span></p>
+<p>Este axioma afirma que, para cada tempo <span class="math inline">\(t\)</span>, existe exatamente um disco <span class="math inline">\(d\)</span> e um poste <span class="math inline">\(p\)</span> tal que <span class="math inline">\(move(d, p, t)\)</span> é verdadeiro. Isso garante que apenas um disco é movido em cada instante.</p></li>
+<li><p><strong>Movimento afeta o estado do jogo</strong>:</p>
+<p><span class="math display">\[\forall d \forall p \forall t: (move(d, p, t) \rightarrow at(d, p, t+1))\]</span></p>
+<p>Se um disco <span class="math inline">\(d\)</span> é movido para o poste <span class="math inline">\(p\)</span> no tempo <span class="math inline">\(t\)</span>, então no tempo <span class="math inline">\(t+1\)</span>, o disco <span class="math inline">\(d\)</span> está no poste <span class="math inline">\(p\)</span>.</p></li>
+<li><p><strong>Estado dos discos no tempo seguinte</strong>:</p>
+<p><span class="math display">\[\forall d \forall p \forall t: \left[ at(d, p, t+1) \leftrightarrow \left( [at(d, p, t) \land \neg \exists p': move(d, p', t)] \lor move(d, p, t) \right) \right]\]</span></p>
+<p>Um disco <span class="math inline">\(d\)</span> está no poste <span class="math inline">\(p\)</span> no tempo <span class="math inline">\(t+1\)</span> se ele já estava no poste <span class="math inline">\(p\)</span> no tempo <span class="math inline">\(t\)</span> e não foi movido no tempo <span class="math inline">\(t\)</span>, ou se ele foi movido para o poste <span class="math inline">\(p\)</span> no tempo <span class="math inline">\(t\)</span>.</p></li>
+<li><p><strong>Nenhum disco pode ser colocado sobre um disco menor</strong>:</p>
+<p><span class="math display">\[\forall d_1 \forall d_2 \forall t: (on(d_1, d_2, t) \rightarrow larger(d_1, d_2))\]</span></p>
+<p>Este axioma garante que, em qualquer momento <span class="math inline">\(t\)</span>, se o disco <span class="math inline">\(d_1\)</span> está sobre o disco <span class="math inline">\(d_2\)</span>, então <span class="math inline">\(d_1\)</span> é maior que <span class="math inline">\(d_2\)</span>.</p></li>
+<li><p><strong>Definição da relação de tamanho entre os discos</strong>:</p>
+<ul>
+<li><strong>Irreflexividade</strong>:</li>
+</ul>
+<p><span class="math display">\[\forall x: \neg larger(x, x)\]</span></p>
+<ul>
+<li><strong>Transitividade</strong>:</li>
+</ul>
+<p><span class="math display">\[\forall x \forall y \forall z: (larger(x, y) \land larger(y, z) \rightarrow larger(x, z))\]</span></p>
+<ul>
+<li><strong>Anti-simetria</strong>:</li>
+</ul>
+<p><span class="math display">\[\forall x \forall y: (larger(x, y) \rightarrow \neg larger(y, x))\]</span></p>
+<p>Estes axiomas definem <span class="math inline">\(larger\)</span> como uma relação de ordem estrita entre os discos.</p></li>
+<li><p><strong>Condição de vitória: todos os discos estão no terceiro poste</strong>:</p>
+<p><span class="math display">\[\exists t \forall d: (disk(d) \rightarrow at(d, peg_3, t))\]</span></p>
+<p>Este axioma define a condição de vitória: existe um instante <span class="math inline">\(t\)</span> em que todos os discos estão no terceiro poste (<span class="math inline">\(peg_3\)</span>).</p></li>
+<li><p><strong>Não há movimentos após a vitória</strong>:</p>
+<p><span class="math display">\[\forall t' &gt; t, \forall d, \forall p: \neg move(d, p, t')\]</span></p>
+<p>Após o tempo <span class="math inline">\(t\)</span> em que a condição de vitória é alcançada, não ocorrem mais movimentos.</p></li>
+<li><p><strong>Cada disco está em exatamente um poste em cada momento</strong>:</p>
+<p><span class="math display">\[\forall d \forall t: (disk(d) \rightarrow \exists! p: (peg(p) \land at(d, p, t)))\]</span></p>
+<p>Este axioma garante que cada disco está em exatamente um poste em cada momento do jogo.</p></li>
+<li><p><strong>Relação entre <span class="math inline">\(on\)</span> e <span class="math inline">\(at\)</span></strong>:</p>
+<p><span class="math display">\[\forall d_1 \forall d_2 \forall p \forall t: (on(d_1, d_2, t) \rightarrow at(d_1, p, t) \land at(d_2, p, t))\]</span></p>
+<p>Se um disco <span class="math inline">\(d_1\)</span> está sobre um disco <span class="math inline">\(d_2\)</span>, ambos estão no mesmo poste <span class="math inline">\(p\)</span> no tempo <span class="math inline">\(t\)</span>.</p></li>
+<li><p><strong>Estrutura de pilha sem ciclos</strong>:</p>
+<ul>
+<li><strong>Aciclicidade da relação <span class="math inline">\(on\)</span></strong>:</li>
+</ul>
+<p><span class="math display">\[
+\forall d_1 \forall d_2 \forall t: (on(d_1, d_2, t) \rightarrow \neg on(d_2, d_1, t))
+\]</span></p>
+<p><em>Isto garante que não existem ciclos na relação de “estar sobre”.</em></p></li>
+<li><p><strong>Condições para <span class="math inline">\(on\)</span> e a base do poste</strong>:</p>
+<ul>
+<li>Um disco pode estar diretamente no poste sem nenhum disco abaixo:</li>
+</ul>
+<p><span class="math display">\[
+\forall d \forall p \forall t: \left( at(d, p, t) \land \neg \exists d': on(d, d', t) \right) \rightarrow \text{$d$ está na base ou é o único disco no poste $p$}
+\]</span></p>
+<p>Este axioma assegura que, se não há nenhum disco abaixo de <span class="math inline">\(d\)</span>, então <span class="math inline">\(d\)</span> está na base da pilha ou é o único disco no poste <span class="math inline">\(p\)</span>.</p></li>
+</ol>
+<p><strong>Consultas Possíveis</strong>:</p>
+<ol type="1">
+<li><p><strong>Verificar se um disco está em um determinado poste no tempo <span class="math inline">\(t\)</span></strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(at(d, p, t)\)</span>;</li>
+<li>Resposta: <em>Verdadeiro</em> se o disco <span class="math inline">\(d\)</span> está no poste <span class="math inline">\(p\)</span> no tempo <span class="math inline">\(t\)</span>, <em>Falso</em> caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar se um disco está sobre outro no tempo <span class="math inline">\(t\)</span></strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(on(d_1, d_2, t)\)</span>;</li>
+<li>Resposta: <em>Verdadeiro</em> se o disco <span class="math inline">\(d_1\)</span> está sobre o disco <span class="math inline">\(d_2\)</span> no tempo <span class="math inline">\(t\)</span>, <em>Falso</em> caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar se o disco <span class="math inline">\(d_1\)</span> é maior que o disco <span class="math inline">\(d_2\)</span></strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(larger(d_1, d_2)\)</span>;</li>
+<li>Resposta: <em>Verdadeiro</em> se o disco <span class="math inline">\(d_1\)</span> é maior que o disco <span class="math inline">\(d_2\)</span>, <em>Falso</em> caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar se o jogo foi vencido no tempo <span class="math inline">\(t\)</span></strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(\forall d: (disk(d) \rightarrow at(d, peg_3, t))\)</span>;</li>
+<li>Resposta: <em>Verdadeiro</em> se todos os discos estão no terceiro poste no tempo <span class="math inline">\(t\)</span>, <em>Falso</em> caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar se um disco foi movido para um poste em um determinado instante</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(move(d, p, t)\)</span>;</li>
+<li>Resposta: <em>Verdadeiro</em> se o disco <span class="math inline">\(d\)</span> foi movido para o poste <span class="math inline">\(p\)</span> no tempo <span class="math inline">\(t\)</span>, <em>Falso</em> caso contrário.</li>
+</ul></li>
+</ol>
+</section>
+<section id="exercício-8---modelo-de-família-com-meios-irmãos" class="level5" data-number="7.0.4.4.8">
+<h5 data-number="7.0.4.4.8" class="anchored" data-anchor-id="exercício-8---modelo-de-família-com-meios-irmãos"><span class="header-section-number">7.0.4.4.8</span> Exercício 8 - Modelo de Família com Meios-Irmãos</h5>
+<p><strong>Variáveis Proposicionais</strong>:</p>
+<p>Para pessoas:</p>
+<ul>
+<li><span class="math inline">\(P_i\)</span>: Pessoa $<span class="math inline">\(i\)</span> (na qual, <span class="math inline">\(i\)</span> é um identificador único);</li>
+<li><span class="math inline">\(H_i\)</span>: Pessoa <span class="math inline">\(i\)</span> é homem;</li>
+<li><span class="math inline">\(M_i\)</span>: Pessoa <span class="math inline">\(i\)</span> é mulher.</li>
+</ul>
+<p>Para relações:</p>
+<ul>
+<li><span class="math inline">\(PaiDe(i,j)\)</span>: Pessoa <span class="math inline">\(i\)</span> é pai de pessoa <span class="math inline">\(j\)</span>;</li>
+<li><span class="math inline">\(MaeDe(i,j)\)</span>: Pessoa <span class="math inline">\(i\)</span> é mãe de pessoa <span class="math inline">\(j\)</span>;</li>
+<li><span class="math inline">\(FilhoDe(i,j)\)</span>: Pessoa <span class="math inline">\(i\)</span> é filho de pessoa <span class="math inline">\(j\)</span>;</li>
+<li><span class="math inline">\(FilhaDe(i,j)\)</span>: Pessoa <span class="math inline">\(i\)</span> é filha de pessoa <span class="math inline">\(j\)</span>;</li>
+<li><span class="math inline">\(IrmaoDe(i,j)\)</span>: Pessoa <span class="math inline">\(i\)</span> é irmão de pessoa <span class="math inline">\(j\)</span>;</li>
+<li><span class="math inline">\(IrmaDe(i,j)\)</span>: Pessoa <span class="math inline">\(i\)</span> é irmã de pessoa <span class="math inline">\(j\)</span>;</li>
+<li><span class="math inline">\(MeioIrmaoDe(i,j)\)</span>: Pessoa <span class="math inline">\(i\)</span> é meio-irmão de pessoa <span class="math inline">\(j\)</span>;</li>
+<li><span class="math inline">\(MeioIrmaDe(i,j)\)</span>: Pessoa <span class="math inline">\(i\)</span> é meia-irmã de pessoa <span class="math inline">\(j\)</span>.</li>
+</ul>
+<p><strong>Regras do Modelo</strong>:</p>
+<ol type="1">
+<li><p>Cada pessoa é homem ou mulher, mas não ambos:</p>
+<p><span class="math display">\[ \forall i, P_i \rightarrow (H_i \oplus M_i) \]</span></p></li>
+<li><p>Relações de paternidade e maternidade:</p>
+<p><span class="math display">\[ \forall i,j, PaiDe(i,j) \rightarrow (H_i \land (FilhoDe(j,i) \lor FilhaDe(j,i))) \]</span></p>
+<p><span class="math display">\[ \forall i,j, MaeDe(i,j) \rightarrow (M_i \land (FilhoDe(j,i) \lor FilhaDe(j,i))) \]</span></p></li>
+<li><p>Relações de filiação:</p>
+<p><span class="math display">\[ \forall i,j, FilhoDe(i,j) \rightarrow (H_i \land (PaiDe(j,i) \lor MaeDe(j,i))) \]</span></p>
+<p><span class="math display">\[ \forall i,j, FilhaDe(i,j) \rightarrow (M_i \land (PaiDe(j,i) \lor MaeDe(j,i))) \]</span></p></li>
+<li><p>Relações de irmandade:</p>
+<p><span class="math display">\[ \forall i,j, IrmaoDe(i,j) \rightarrow (H_i \land \exists k, (PaiDe(k,i) \land PaiDe(k,j)) \land \exists l, (MaeDe(l,i) \land MaeDe(l,j)) \land (i \neq j)) \]</span></p>
+<p><span class="math display">\[ \forall i,j, IrmaDe(i,j) \rightarrow (M_i \land \exists k, (PaiDe(k,i) \land PaiDe(k,j)) \land \exists l, (MaeDe(l,i) \land MaeDe(l,j)) \land (i \neq j)) \]</span></p></li>
+<li><p>Relações de meio-irmandade:</p>
+<p><span class="math display">\[ \forall i,j, MeioIrmaoDe(i,j) \rightarrow (H_i \land (((\exists k, PaiDe(k,i) \land PaiDe(k,j)) \oplus (\exists l, MaeDe(l,i) \land MaeDe(l,j))) \land (i \neq j))) \]</span></p>
+<p><span class="math display">\[ \forall i,j, MeioIrmaDe(i,j) \rightarrow (M_i \land (((\exists k, PaiDe(k,i) \land PaiDe(k,j)) \oplus (\exists l, MaeDe(l,i) \land MaeDe(l,j))) \land (i \neq j))) \]</span></p></li>
+<li><p>Uma pessoa não pode ser seu próprio pai ou mãe:</p>
+<p><span class="math display">\[ \forall i, \lnot PaiDe(i,i) \land \lnot MaeDe(i,i) \]</span></p></li>
+<li><p>Uma pessoa não pode ser irmão ou meio-irmão de si mesma:</p>
+<p><span class="math display">\[ \forall i, \lnot IrmaoDe(i,i) \land \lnot IrmaDe(i,i) \land \lnot MeioIrmaoDe(i,i) \land \lnot MeioIrmaDe(i,i) \]</span></p></li>
+<li><p>Simetria nas relações de irmandade:</p>
+<p><span class="math display">\[ \forall i,j, IrmaoDe(i,j) \leftrightarrow IrmaoDe(j,i) \]</span></p>
+<p><span class="math display">\[ \forall i,j, IrmaDe(i,j) \leftrightarrow IrmaDe(j,i) \]</span></p>
+<p><span class="math display">\[ \forall i,j, MeioIrmaoDe(i,j) \leftrightarrow MeioIrmaoDe(j,i) \]</span></p>
+<p><span class="math display">\[ \forall i,j, MeioIrmaDe(i,j) \leftrightarrow MeioIrmaDe(j,i) \]</span></p></li>
+<li><p>Uma pessoa não pode ser simultaneamente irmão e meio-irmão de outra:</p>
+<p><span class="math display">\[ \forall i,j, \lnot(IrmaoDe(i,j) \land MeioIrmaoDe(i,j)) \land \lnot(IrmaDe(i,j) \land MeioIrmaDe(i,j)) \]</span></p></li>
+</ol>
+<p>Neste caso podemos definir um dos estados do mundo: para representar que <span class="math inline">\(P1\)</span> é pai de <span class="math inline">\(P2\)</span> e <span class="math inline">\(P3\)</span>, <span class="math inline">\(P4\)</span> é mãe de <span class="math inline">\(P2\)</span>, <span class="math inline">\(P5\)</span> é mãe de <span class="math inline">\(P3\)</span>, e <span class="math inline">\(P2\)</span> e <span class="math inline">\(P3\)</span> são meios-irmãos:</p>
+<p><span class="math display">\[
+\begin{align*}
+P1 \land P2 \land P3 \land P4 \land P5 \land \\
+H_1 \land H_2 \land H_3 \land M_4 \land M_5 \land \\
+PaiDe(1,2) \land PaiDe(1,3) \land \\
+MaeDe(4,2) \land MaeDe(5,3) \land \\
+FilhoDe(2,1) \land FilhoDe(2,4) \land \\
+FilhoDe(3,1) \land FilhoDe(3,5) \land \\
+MeioIrmaoDe(2,3) \land MeioIrmaoDe(3,2)
+\end{align*}
+\]</span></p>
+<p><strong>Consultas Possíveis</strong>::</p>
+<ol type="1">
+<li><p><strong>Verificar se uma pessoa existe no mundo</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(P_i\)</span>;</li>
+<li>Resposta: Verdadeiro se a pessoa i existe no mundo, Falso caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar o sexo de uma pessoa</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(H_i\)</span> ou <span class="math inline">\(M_i\)</span>;</li>
+<li>Resposta: Verdadeiro se a pessoa i é homem (H_i) ou mulher (M_i), Falso caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar relação de paternidade</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(PaiDe(i,j)\)</span>;</li>
+<li>Resposta: Verdadeiro se a pessoa i é pai da pessoa j, Falso caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar relação de maternidade</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(MaeDe(i,j)\)</span>;</li>
+<li>Resposta: Verdadeiro se a pessoa i é mãe da pessoa j, Falso caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar se duas pessoas são irmãos</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(IrmaosDe(i,j)\)</span>;</li>
+<li>Resposta: Verdadeiro se as pessoas i e j são irmãos (mesmo pai e mesma mãe), Falso caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar se duas pessoas são meios-irmãos</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(MeiosIrmaosDe(i,j)\)</span>;</li>
+<li>Resposta: Verdadeiro se as pessoas i e j são meios-irmãos (mesmo pai OU mesma mãe, mas não ambos), Falso caso contrário.</li>
+</ul></li>
+<li><p><strong>Encontrar o pai de uma pessoa</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(\exists x, PaiDe(x,i)\)</span>;</li>
+<li>Resposta: Verdadeiro se existe um pai para a pessoa i, Falso caso contrário;</li>
+<li>Para obter o pai específico: <span class="math inline">\(x\)</span> tal que <span class="math inline">\(PaiDe(x,i)\)</span> é verdadeiro.</li>
+</ul></li>
+<li><p><strong>Encontrar a mãe de uma pessoa</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(\exists x, MaeDe(x,i)\)</span>;</li>
+<li>Resposta: Verdadeiro se existe uma mãe para a pessoa i, Falso caso contrário;</li>
+<li>Para obter a mãe específica: <span class="math inline">\(x\)</span> tal que <span class="math inline">\(MaeDe(x,i)\)</span> é verdadeiro.</li>
+</ul></li>
+<li><p><strong>Verificar se duas pessoas têm o mesmo pai</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(\exists x, (PaiDe(x,i) \land PaiDe(x,j))\)</span>;</li>
+<li>Resposta: Verdadeiro se as pessoas i e j têm o mesmo pai, Falso caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar se duas pessoas têm a mesma mãe</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(\exists x, (MaeDe(x,i) \land MaeDe(x,j))\)</span>;</li>
+<li>Resposta: Verdadeiro se as pessoas i e j têm a mesma mãe, Falso caso contrário.</li>
+</ul></li>
+<li><p><strong>Contar o número de filhos de uma pessoa</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(\text{Contagem}(\{j : PaiDe(i,j) \lor MaeDe(i,j)\})\)</span>;</li>
+<li>Resposta: O número de filhos da pessoa <span class="math inline">\(i\)</span>.</li>
+</ul></li>
+<li><p><strong>Verificar se uma pessoa é filho único</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(\lnot \exists j, (j \neq i \land (IrmaosDe(i,j) \lor MeiosIrmaosDe(i,j)))\)</span>;</li>
+<li>Resposta: Verdadeiro se a pessoa i não tem irmãos nem meios-irmãos, Falso caso contrário.</li>
+</ul></li>
+</ol>
+</section>
+<section id="exercício-9---jogo-pedra-papel-e-tesoura" class="level5" data-number="7.0.4.4.9">
+<h5 data-number="7.0.4.4.9" class="anchored" data-anchor-id="exercício-9---jogo-pedra-papel-e-tesoura"><span class="header-section-number">7.0.4.4.9</span> Exercício 9 - Jogo Pedra, Papel e Tesoura</h5>
+<p>O jogo <strong>Pedra, Papel e Tesoura</strong> é um jogo simples entre dois jogadores, onde cada jogador escolhe uma das três opções: Pedra, Papel ou Tesoura. As regras são:</p>
+<p><strong>Variáveis Proposicionais</strong>:</p>
+<p>Para jogadas:</p>
+<ul>
+<li><span class="math inline">\(P_i\)</span>: Jogador i escolheu Pedra;</li>
+<li><span class="math inline">\(A_i\)</span>: Jogador i escolheu Papel;</li>
+<li><span class="math inline">\(T_i\)</span>: Jogador i escolheu Tesoura.</li>
+</ul>
+<p>Para resultados:</p>
+<ul>
+<li><span class="math inline">\(V_i\)</span>: Jogador i venceu;</li>
+<li><span class="math inline">\(E\)</span>: O jogo terminou em empate.</li>
+</ul>
+<p><strong>Regras do Mundo</strong>:</p>
+<ol type="1">
+<li><p>Cada jogador faz exatamente uma jogada:</p>
+<p><span class="math display">\[ \forall i, ((P_i \lor A_i \lor T_i) \land \lnot(P_i \land A_i) \land \lnot(P_i \land T_i) \land \lnot(A_i \land T_i)) \]</span></p></li>
+<li><p>Condições de vitória para o Jogador <span class="math inline">\(1\)</span>:</p>
+<p><span class="math display">\[ V_1 \leftrightarrow ((P_1 \land T_2) \lor (T_1 \land A_2) \lor (A_1 \land P_2)) \]</span></p></li>
+<li><p>Condições de vitória para o Jogador <span class="math inline">\(2\)</span>:</p>
+<p><span class="math display">\[ V_2 \leftrightarrow ((P_2 \land T_1) \lor (T_2 \land A_1) \lor (A_2 \land P_1)) \]</span></p></li>
+<li><p>Condição de empate:</p>
+<p><span class="math display">\[ E \leftrightarrow ((P_1 \land P_2) \lor (A_1 \land A_2) \lor (T_1 \land T_2)) \]</span></p></li>
+<li><p>O jogo tem exatamente um resultado:</p>
+<p><span class="math display">\[ (V_1 \lor V_2 \lor E) \land \lnot(V_1 \land V_2) \land \lnot(V_1 \land E) \land \lnot(V_2 \land E) \]</span></p></li>
+<li><p>Não é possível que ambos os jogadores vençam:</p>
+<p><span class="math display">\[ \lnot(V_1 \land V_2) \]</span></p></li>
+</ol>
+<p><strong>Consultas Possíveis</strong>:</p>
+<ol type="1">
+<li><p><strong>Verificar a jogada de um jogador</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(P_i\)</span>, <span class="math inline">\(A_i\)</span>, ou <span class="math inline">\(T_i\)</span>;</li>
+<li>Resposta: Verdadeiro se o Jogador i escolheu a jogada correspondente, Falso caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar o vencedor</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(V_1\)</span> ou <span class="math inline">\(V_2\)</span>;</li>
+<li>Resposta: Verdadeiro se o Jogador correspondente venceu, Falso caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar se houve empate</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(E\)</span>;</li>
+<li>Resposta: Verdadeiro se o jogo terminou em empate, Falso caso contrário.</li>
+</ul></li>
+<li><p><strong>Determinar o resultado do jogo</strong>:</p>
+<ul>
+<li><p>Consulta:</p>
+<p><span class="math display">\[
+resultado = \begin{cases}
+  1 &amp; \text{se } V_1 \\
+  2 &amp; \text{se } V_2 \\
+  0 &amp; \text{se } E
+\end{cases}
+\]</span></p></li>
+<li><p>Resposta:</p>
+<ul>
+<li><span class="math inline">\(0\)</span> se o jogo terminou em empate;</li>
+<li><span class="math inline">\(1\)</span> se o Jogador 1 venceu;</li>
+<li><span class="math inline">\(2\)</span> se o Jogador 2 venceu.</li>
+</ul></li>
+</ul></li>
+<li><p><strong>Verificar se um jogador escolheu uma jogada específica e venceu</strong>:</p>
+<ul>
+<li>Consulta: <span class="math inline">\((P_i \land V_i)\)</span>, <span class="math inline">\((A_i \land V_i)\)</span>, ou <span class="math inline">\((T_i \land V_i)\)</span>.</li>
+<li>Resposta: Verdadeiro se o Jogador i escolheu a jogada específica e venceu, Falso caso contrário.</li>
+</ul></li>
+<li><p><strong>Verificar se o jogo foi válido</strong>:</p>
+<ul>
+<li><p>Consultas:</p>
+<p><span class="math display">\[((P_1 \lor A_1 \lor T_1) \land \lnot(P_1 \land A_1) \land \lnot(P_1 \land T_1) \land \lnot(A_1 \land T_1)) \land\]</span></p>
+<p><span class="math display">\[((P_2 \lor A_2 \lor T_2) \land \lnot(P_2 \land A_2) \land \lnot(P_2 \land T_2) \land \lnot(A_2 \land T_2)) \land\]</span></p>
+<p><span class="math display">\[((V_1 \lor V_2 \lor E) \land \lnot(V_1 \land V_2) \land \lnot(V_1 \land E) \land \lnot(V_2 \land E))\]</span></p></li>
+<li><p>Resposta: verdadeiro se o jogo seguiu todas as regras (uma jogada por jogador e um único resultado), Falso caso contrário.</p></li>
+</ul></li>
+</ol>
+<p><strong>Exemplo de um estado válido deste Mundo</strong>:</p>
+<p><span class="math display">\[P_1 \land T_2 \land V_1 \land \lnot V_2 \land \lnot E \land \\
+   \lnot A_1 \land \lnot T_1 \land \lnot P_2 \land \lnot A_2\]</span></p>
+<p>Este mundo representa um jogo onde:</p>
+<ul>
+<li>O Jogador <span class="math inline">\(1\)</span> escolheu Pedra;</li>
+<li>O Jogador <span class="math inline">\(2\)</span> escolheu Tesoura;</li>
+<li>O Jogador <span class="math inline">\(1\)</span> venceu;</li>
+<li>Não houve empate.</li>
+</ul>
+</section>
+<section id="exercício-10---mundo-de-ginásio-de-esportes" class="level5" data-number="7.0.4.4.10">
+<h5 data-number="7.0.4.4.10" class="anchored" data-anchor-id="exercício-10---mundo-de-ginásio-de-esportes"><span class="header-section-number">7.0.4.4.10</span> Exercício 10 - Mundo de Ginásio de Esportes</h5>
+<p>Elabore um mundo para um ginásio de esportes. O modelo deve incluir atletas, modalidades esportivas, treinadores, e competições. Considere que um atleta pode praticar múltiplas modalidades, um treinador pode especializar-se em uma ou mais modalidades, e uma competição envolve uma modalidade específica com vários atletas participantes. Crie consultas para responder se algum atleta pratica todas as modalidades, se algum treinador é especializado em todas as modalidades e mais duas a seu critério.</p>
+<p><strong>Fatos</strong>:</p>
+<ul>
+<li><span class="math inline">\(A(x)\)</span>: <span class="math inline">\(x\)</span> é um atleta;</li>
+<li><span class="math inline">\(M(x)\)</span>: <span class="math inline">\(x\)</span> é uma modalidade esportiva;</li>
+<li><span class="math inline">\(T(x)\)</span>: <span class="math inline">\(x\)</span> é um treinador;</li>
+<li><span class="math inline">\(C(x)\)</span>: <span class="math inline">\(x\)</span> é uma competição;</li>
+<li><span class="math inline">\(Pratica(x,y)\)</span>: atleta <span class="math inline">\(x\)</span> pratica a modalidade <span class="math inline">\(y\)</span>;</li>
+<li><span class="math inline">\(Especializa(x,y)\)</span>: treinador <span class="math inline">\(x\)</span> é especializado na modalidade <span class="math inline">\(y\)</span>;</li>
+<li><span class="math inline">\(Participa(x,y)\)</span>: atleta <span class="math inline">\(x\)</span> participa da competição <span class="math inline">\(y\)</span>;</li>
+<li><span class="math inline">\(EnvolveModalidade(x,y)\)</span>: competição <span class="math inline">\(x\)</span> envolve a modalidade <span class="math inline">\(y\)</span>.</li>
+</ul>
+<p><strong>Regras</strong>:</p>
+<ol type="1">
+<li><p>Todo atleta pratica pelo menos uma modalidade:</p>
+<p><span class="math display">\[ \forall x(A(x) \rightarrow \exists y(M(y) \land Pratica(x,y))) \]</span></p></li>
+<li><p>Todo treinador é especializado em pelo menos uma modalidade:</p>
+<p><span class="math display">\[ \forall x(T(x) \rightarrow \exists y(M(y) \land Especializa(x,y))) \]</span></p></li>
+<li><p>Toda competição envolve exatamente uma modalidade:</p>
+<p><span class="math display">\[ \forall x(C(x) \rightarrow \exists! y(M(y) \land EnvolveModalidade(x,y))) \]</span></p></li>
+<li><p>Um atleta só pode participar de uma competição se praticar a modalidade envolvida:</p>
+<p><span class="math display">\[ \forall x \forall y(Participa(x,y) \rightarrow \exists z(M(z) \land Pratica(x,z) \land EnvolveModalidade(y,z))) \]</span></p></li>
+</ol>
+<p><strong>Consultas</strong>:</p>
+<ol type="1">
+<li><p>Verificar se um atleta pratica uma modalidade específica:</p>
+<ul>
+<li>Consulta: <code>Pratica(atleta,modalidade)</code>;</li>
+<li>Resposta: Verdadeiro se o atleta pratica a modalidade, Falso caso contrário.</li>
+</ul></li>
+<li><p>Verificar se um treinador é especializado em uma modalidade específica:</p>
+<ul>
+<li>Consulta: <code>Especializa(treinador,modalidade)</code>;</li>
+<li>Resposta: Verdadeiro se o treinador é especializado na modalidade, Falso caso contrário.</li>
+</ul></li>
+<li><p>Verificar se um atleta participa de uma competição específica:</p>
+<ul>
+<li>Consulta: <code>Participa(atleta,competicao)</code>;</li>
+<li>Resposta: Verdadeiro se o atleta participa da competição, Falso caso contrário.</li>
+</ul></li>
+<li><p>Verificar se uma competição envolve uma modalidade específica:</p>
+<ul>
+<li>Consulta: <code>EnvolveModalidade(competicao,modalidade)</code>;</li>
+<li>Resposta: Verdadeiro se a competição envolve a modalidade, Falso caso contrário.</li>
+</ul></li>
+<li><p>Verificar se existe um atleta que pratica todas as modalidades:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(\exists x(A(x) \land \forall y(M(y) \rightarrow Pratica(x,y)))\)</span>;</li>
+<li>Resposta: Verdadeiro se existe um atleta que pratica todas as modalidades, Falso caso contrário.</li>
+</ul></li>
+<li><p>Verificar se existe um treinador especializado em todas as modalidades:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(\exists x(T(x) \land \forall y(M(y) \rightarrow Especializa(x,y)))\)</span>;</li>
+<li>Resposta: Verdadeiro se existe um treinador especializado em todas as modalidades, Falso caso contrário.</li>
+</ul></li>
+<li><p>Verificar se existe uma modalidade praticada por todos os atletas:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(\exists y(M(y) \land \forall x(A(x) \rightarrow Pratica(x,y)))\)</span>;</li>
+<li>Resposta: Verdadeiro se existe uma modalidade praticada por todos os atletas, Falso caso contrário.</li>
+</ul></li>
+<li><p>Verificar se existe uma competição em que todos os atletas participam:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(\exists y(C(y) \land \forall x(A(x) \rightarrow Participa(x,y)))\)</span>;</li>
+<li>Resposta: Verdadeiro se existe uma competição com participação de todos os atletas, Falso caso contrário.</li>
+</ul></li>
+<li><p>Verificar se um atleta está qualificado para participar de uma competição específica:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(\exists z(M(z) \land Pratica(atleta,z) \land EnvolveModalidade(competicao,z))\)</span>;</li>
+<li>Resposta: Verdadeiro se o atleta pratica a modalidade envolvida na competição, Falso caso contrário.</li>
+</ul></li>
+<li><p>Verificar se existe um treinador especializado na modalidade de uma competição específica:</p>
+<ul>
+<li>Consulta: <span class="math inline">\(\exists x \exists y(T(x) \land M(y) \land Especializa(x,y) \land EnvolveModalidade(competicao,y))\)</span>;</li>
+<li>Resposta: Verdadeiro se existe um treinador especializado na modalidade da competição, Falso caso contrário.</li>
+</ul></li>
+</ol>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./05-formas-normais-e-skolemizacao.html" class="pagination-link" aria-label="Formas Normais">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Formas Normais</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./07-clausulas-de-horn-e-prolog.html" class="pagination-link" aria-label="Cláusulas de Horn">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Cláusulas de Horn</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025 Frank de Alcantara</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/logica/edit/main/06-construcao-de-mundos-logicos.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/logica/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -23,13 +23,15 @@ keywords:
    - Programação Lógica
 draft: true
 toc: true
-lastmod: 2025-07-21T02:10:24.958Z
+lastmod: 2025-07-28T22:53:59.684Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação no qual não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
 > "Logic programming is the future of artificial intelligence." - [Marvin Minsky](https://en.wikipedia.org/wiki/marvin_minsky){: class="epigraph"}
 
 ## Introdução
+
+**Atenção! Este texto não será mais atualizado. A versão mais recente está disponível em [lógica](https://frankalcantara.com/l/index.html)**.
 
 Imagine, por um momento, que estamos explorando o universo dos computadores, mas em vez de sermos os comandantes, capazes de ditar todos os passos do caminho, nós fornecemos as diretrizes gerais e deixamos que o computador deduza o caminho. Pode parecer estranho para quem está envolvido com as linguagens do Paradigma Imperativo. Acredite ou não, isso é exatamente o que a Programação Lógica faz.
 

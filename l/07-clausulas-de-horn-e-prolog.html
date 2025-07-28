@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introdução à Programação Lógica - 8&nbsp; Cláusulas de Horn</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./08-verificacao-formal-de-programas.html" rel="next">
+<link href="./06-construcao-de-mundos-logicos.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-formas-normais-e-skolemizacao.html">Aplicações Avançadas</a></li><li class="breadcrumb-item"><a href="./07-clausulas-de-horn-e-prolog.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Cláusulas de Horn</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introdução à Programação Lógica</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/logica" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Fundamentos da Lógica</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-jornada-programacao-logica.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introdução</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-fundamentos-logica-proposicional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-arte-da-prova-e-analise-de-argumentos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Provas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-logica-predicativa-e-quantificadores.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lógica Predicativa</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Aplicações Avançadas</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-formas-normais-e-skolemizacao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Formas Normais</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-construcao-de-mundos-logicos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mundos na Lógica de Primeira Ordem</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-clausulas-de-horn-e-prolog.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Cláusulas de Horn</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-verificacao-formal-de-programas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-desafios-logicos-enigmas-e-misterios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Problemas Interessantes Resolvidos com Lógica Proposicional e Predicativa</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apendice-a-glossario.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apendice-b-referencias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sumário</h2>
+   
+  <ul>
+  <li><a href="#definição-da-cláusula-de-horn" id="toc-definição-da-cláusula-de-horn" class="nav-link active" data-scroll-target="#definição-da-cláusula-de-horn"><span class="header-section-number">8.0.1</span> Definição da Cláusula de Horn</a></li>
+  <li><a href="#exemplo-3---mundo-núcleo-familiar-lógica-de-primeira-ordem" id="toc-exemplo-3---mundo-núcleo-familiar-lógica-de-primeira-ordem" class="nav-link" data-scroll-target="#exemplo-3---mundo-núcleo-familiar-lógica-de-primeira-ordem"><span class="header-section-number">8.1</span> Exemplo 3 - Mundo Núcleo Familiar (Lógica de Primeira Ordem)</a>
+  <ul class="collapse">
+  <li><a href="#quantificadores-em-cláusulas-de-horn" id="toc-quantificadores-em-cláusulas-de-horn" class="nav-link" data-scroll-target="#quantificadores-em-cláusulas-de-horn"><span class="header-section-number">8.1.1</span> Quantificadores em Cláusulas de Horn</a></li>
+  <li><a href="#conversão-de-fórmulas" id="toc-conversão-de-fórmulas" class="nav-link" data-scroll-target="#conversão-de-fórmulas"><span class="header-section-number">8.1.2</span> Conversão de Fórmulas</a></li>
+  </ul></li>
+  <li><a href="#o-prolog-entra-em-cena" id="toc-o-prolog-entra-em-cena" class="nav-link" data-scroll-target="#o-prolog-entra-em-cena"><span class="header-section-number">8.2</span> O Prolog Entra em Cena</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/logica/edit/main/07-clausulas-de-horn-e-prolog.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/logica/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-formas-normais-e-skolemizacao.html">Aplicações Avançadas</a></li><li class="breadcrumb-item"><a href="./07-clausulas-de-horn-e-prolog.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Cláusulas de Horn</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Cláusulas de Horn</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>A <strong>Cláusula de Horn</strong> foi nomeada em homenagem ao matemático e lógico americano <a href="https://en.wikipedia.org/wiki/Alfred_Horn">Alfred Horn</a>, que a introduziu em <a href="https://www.cambridge.org/core/journals/journal-of-symbolic-logic/article/abs/on-sentences-which-are-true-of-direct-unions-of-algebras1/DF348CB269B06D6702DA3AE4DCF38C39">um artigo publicado em 1951</a>. O contexto histórico e a motivação para a introdução da Cláusula de Horn são profundamente enraizados na solução do Problema da Decidibilidade. Na primeira metade do século XX, a lógica matemática estava focada na questão da decidibilidade: determinar se uma afirmação lógica é verdadeira ou falsa de forma algorítmica.</p>
+<p>Não demorou muito para os matemáticos perceberem que a Lógica de Primeira Ordem é poderosa, mas pode ser ineficientes para resolver os problemas relacionados ao Problema da Decidibilidade. A busca por formas mais eficientes de resolução levou ao estudo de subconjuntos restritos da Lógica de Primeira Ordem, onde a decidibilidade poderia ser alcançada de forma mais eficiente. Aqui, eficiência significa o menor custo computacional, no menor tempo.</p>
+<p>Alfred Horn identificou um desses subconjuntos em seu artigo de 1951, introduzindo o que agora é conhecido como <strong>Cláusula de Horn</strong>. Ele mostrou que esse subconjunto particular tem propriedades interessantes que permitem a resolução em tempo polinomial, tornando-o atraente para aplicações práticas.</p>
+<p>Se prepare vamos ver porque $P Q R $ é uma Cláusula de Horn e <span class="math inline">\(P \lor Q \lor \neg R\)</span> não é.</p>
+<section id="definição-da-cláusula-de-horn" class="level3" data-number="8.0.1">
+<h3 data-number="8.0.1" class="anchored" data-anchor-id="definição-da-cláusula-de-horn"><span class="header-section-number">8.0.1</span> Definição da Cláusula de Horn</h3>
+<p>A <strong>Cláusula de Horn</strong> é uma disjunção de literais que contém, no máximo, um literal positivo. Existem algumas formas equivalentes de representar Cláusulas de Horn:</p>
+<ol type="1">
+<li><p><strong>Forma Disjuntiva</strong>: <span class="math inline">\(\neg A_1 \lor \neg A_2 \lor \ldots \lor \neg A_k \lor B\)</span> Aqui, <span class="math inline">\(A_1, \ldots, A_k, B\)</span> são proposições atômicas (átomos). Os literais <span class="math inline">\(\neg A_i\)</span> são negativos, e <span class="math inline">\(B\)</span> é o único literal positivo (se presente). Se não houver literal positivo, a cláusula é uma meta ou consulta. Se não houver literais negativos, é um fato.</p></li>
+<li><p><strong>Forma Implicativa (mais comum em programação lógica)</strong>: <span class="math inline">\((A_1 \land A_2 \land \ldots \land A_k) \rightarrow B\)</span> Esta forma é equivalente à disjuntiva acima.</p>
+<ul>
+<li><span class="math inline">\(A_1, \ldots, A_k\)</span> são os átomos no corpo (antecedente) da implicação.</li>
+<li><span class="math inline">\(B\)</span> é o átomo na cabeça (consequente) da implicação.</li>
+</ul></li>
+</ol>
+<p><strong>Tipos de Cláusulas de Horn (baseado na forma disjuntiva <span class="math inline">\(\neg A_1 \lor \ldots \lor \neg A_k \lor B\)</span>)</strong>:</p>
+<ul>
+<li><p><strong>Fatos (Cláusulas Unitárias Positivas)</strong>: Têm exatamente um literal positivo e nenhum literal negativo (<span class="math inline">\(k=0\)</span>).</p>
+<ul>
+<li>Forma disjuntiva: <span class="math inline">\(B\)</span></li>
+<li>Forma implicativa: <span class="math inline">\(\top \rightarrow B\)</span> (ou simplesmente <span class="math inline">\(B.\)</span> em Prolog)</li>
+<li>Exemplo: <span class="math inline">\(Mortal(socrates)\)</span>.</li>
+</ul></li>
+<li><p><strong>Regras (Cláusulas Definidas)</strong>: Têm exatamente um literal positivo (<span class="math inline">\(B\)</span>) e um ou mais literais negativos (<span class="math inline">\(\neg A_i\)</span>, com <span class="math inline">\(k \ge 1\)</span>).</p>
+<ul>
+<li>Forma disjuntiva: <span class="math inline">\(\neg A_1 \lor \ldots \lor \neg A_k \lor B\)</span></li>
+<li>Forma implicativa: <span class="math inline">\((A_1 \land \ldots \land A_k) \rightarrow B\)</span> (ou <span class="math inline">\(B \leftarrow A_1, \ldots, A_k.\)</span> em Prolog)</li>
+<li>Exemplo: <span class="math inline">\(Homem(x) \rightarrow Mortal(x)\)</span> (Cláusula: <span class="math inline">\(\neg Homem(x) \lor Mortal(x)\)</span>).</li>
+</ul></li>
+<li><p><strong>Metas ou Consultas (Cláusulas Negativas)</strong>: Não têm nenhum literal positivo (a parte <span class="math inline">\(B\)</span> está ausente, ou é <span class="math inline">\(\bot\)</span> - falso), e um ou mais literais negativos (<span class="math inline">\(k \ge 1\)</span>).</p>
+<ul>
+<li>Forma disjuntiva: <span class="math inline">\(\neg A_1 \lor \ldots \lor \neg A_k\)</span></li>
+<li>Forma implicativa: <span class="math inline">\((A_1 \land \ldots \land A_k) \rightarrow \bot\)</span> (ou <span class="math inline">\(\leftarrow A_1, \ldots, A_k.\)</span> em Prolog)</li>
+<li>Exemplo: <span class="math inline">\(\leftarrow Mortal(socrates)\)</span> (Cláusula: <span class="math inline">\(\neg Mortal(socrates)\)</span>).</li>
+</ul></li>
+<li><p><strong>Cláusula Nula (ou Vazia)</strong>: Representa uma contradição. Não possui literais. Surge quando uma consulta é refutada.</p>
+<ul>
+<li>Forma disjuntiva: <span class="math inline">\(\Box\)</span> ou <span class="math inline">\(\bot\)</span></li>
+</ul></li>
+</ul>
+<p>Para entender melhor, imagine que estamos construindo um cenário mental fundamentado na lógica para construir o entendimento de um problema, uma espécie de paisagem mental onde as coisas fazem sentido. Nesse cenário, as Cláusulas de Horn serão os tijolos fundamentais que usaremos para construir estruturas lógicas.</p>
+<p><strong>1. Fatos</strong>: os fatos são como pedras fundamentais desse cenário. Eles são afirmações simples e diretas que dizem como as coisas são. Considere, por exemplo: <em>O céu é azul</em>, <span class="math inline">\(P\)</span> e <em>A grama é verde</em><span class="math inline">\(Q\)</span>. Essas são verdades que não precisam de justificativa. Elas simplesmente são. os Fatos são axiomas.</p>
+<p><strong>2. Regras</strong>: as regras são um pouco mais intrigantes. Elas são como as regras de um jogo que definem como as coisas se relacionam umas com as outras. <em>Se não chover, a grama não ficará molhada.</em> Essa é uma regra. Ela nos diz o que esperar se certas condições forem atendidas. As regras são como os conectores em nosso mundo lógico, ligando fatos e permitindo que façamos inferências. Elas são o motor que nos permite raciocinar e descobrir novas verdades a partir das que já conhecemos. Por exemplo:</p>
+<ul>
+<li><span class="math inline">\(\neg P \land \neg Q \rightarrow R\)</span>: <em>Se não chover, <span class="math inline">\(P\)</span> e não ventar, <span class="math inline">\(Q\)</span>, então faremos um piquenique, <span class="math inline">\(R\)</span></em>.</li>
+<li><span class="math inline">\(\neg A \land \neg B \land \neg C \rightarrow D\)</span>: <em>Se <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> e <span class="math inline">\(C\)</span> forem falsos, então <span class="math inline">\(D\)</span> é verdadeiro</em>.</li>
+</ul>
+<p><strong>3. Metas ou Consultas</strong>: finalmente, temos as metas ou consultas. Essas são as perguntas que fazemos ao nosso mundo lógico. <em>Está chovendo?</em>, <em>A grama está molhada?</em> São os caminhos que usaremos para explorar o cenário criado, olhando ao redor e tentando entender o que está acontecendo. As consultas são a forma de interagir com nosso mundo lógico, usando os fatos e regras que estabelecemos para encontrar respostas e alcançar objetivos. Por exemplo:</p>
+<ul>
+<li><span class="math inline">\(\neg P \land \neg Q\)</span>: <em>É verdade que hoje não está chovendo e não está ventando?</em></li>
+<li><span class="math inline">\(\neg X \land \neg Y \land \neg Z\)</span>: <em><span class="math inline">\(x\)</span>, <span class="math inline">\(Y\)</span> e $Z $ são falsos?</em></li>
+</ul>
+<p>Podemos tentar avaliar alguns exemplos de uso de Fatos, Regras e Consultas:</p>
+<section id="exemplo-1---sistema-de-recomendação-de-roupas" class="level4" data-number="8.0.1.1">
+<h4 data-number="8.0.1.1" class="anchored" data-anchor-id="exemplo-1---sistema-de-recomendação-de-roupas"><span class="header-section-number">8.0.1.1</span> Exemplo 1 - Sistema de Recomendação de Roupas</h4>
+<p>Imagine que estamos construindo um sistema lógico para recomendar o tipo de roupa que uma pessoa deve vestir com base no clima. Vamos usar Cláusulas de Horn para representar o conhecimento e a lógica do sistema.</p>
+<p><strong>1. Fatos</strong>: primeiro, estabelecemos os fatos, as verdades básicas do cenário que descreve nosso problema. Neste exemplo, os fatos poderiam ser informações sobre o clima atual.</p>
+<ul>
+<li><strong>Fato 1</strong>: Está ensolarado. (Representado como <span class="math inline">\(s\)</span>);</li>
+<li><strong>Fato 2</strong>: A temperatura está acima de 20°C. (Representado como <span class="math inline">\(T\)</span>).</li>
+</ul>
+<p>Você pode criar todos os fatos necessários a descrição do seu problema.</p>
+<p><strong>2. Regras</strong>: em seguida, definimos as regras que descrevem como as coisas se relacionam. Essas regras nos dizem o tipo de roupa apropriada com base no clima.</p>
+<ul>
+<li><strong>Regra 1</strong>: Se está ensolarado e a temperatura está acima de 20°C, use óculos de sol. ($S T O $);</li>
+<li><strong>Regra 2</strong>: Se está ensolarado, use chapéu. (<span class="math inline">\(\neg S \rightarrow C\)</span>);</li>
+<li><strong>Regra 3</strong>: Se a temperatura está acima de 20°C, use camiseta. (<span class="math inline">\(\neg T \rightarrow A\)</span>).</li>
+</ul>
+<p>Você pode criar todas as regras que achar importante para definir o comportamento no cenário que descreve o problema.</p>
+<p><strong>3. Consultas (Metas)</strong>: agora, podemos fazer consultas ao nosso sistema para obter recomendações de roupas.</p>
+<ul>
+<li><strong>Consulta 1</strong>: Está ensolarado e a temperatura está acima de 20°C. O que devo vestir? (<span class="math inline">\(\neg S \land \neg T\)</span>);</li>
+</ul>
+<p>As consultas representam todas as consultas que podem ser feitas neste cenário. A esforçada leitora deve criar quantas consultas achar necessário para entender o problema.</p>
+<p><strong>4. Resolução</strong>: usando os fatos e regras, podemos resolver a consulta:</p>
+<ol type="1">
+<li>Está ensolarado e a temperatura está acima de 20°C (<em>Fato</em>);</li>
+<li>Portanto, use óculos de sol (<em>Regra 1</em>);</li>
+<li>Portanto, use chapéu (<em>Regra 2</em>);</li>
+<li>Portanto, use camiseta (<em>Regra 3</em>).</li>
+</ol>
+<p>Neste exemplo, as Cláusulas de Horn nos permitiram representar o conhecimento sobre o clima e as regras para escolher roupas. Os fatos forneceram a base de conhecimento, as regras permitiram inferências lógicas, e a consulta nos permitiu explorar o sistema para obter recomendações práticas.</p>
+</section>
+<section id="exemplo-2---sistema-de-diagnóstico-médico" class="level4" data-number="8.0.1.2">
+<h4 data-number="8.0.1.2" class="anchored" data-anchor-id="exemplo-2---sistema-de-diagnóstico-médico"><span class="header-section-number">8.0.1.2</span> Exemplo 2 - Sistema de Diagnóstico Médico</h4>
+<p>Imagine que estamos construindo um sistema lógico para diagnosticar doenças com base em sintomas, histórico médico e outros fatores relevantes. Vamos usar Cláusulas de Horn para representar o conhecimento e a lógica do sistema.</p>
+<p><strong>1. Fatos</strong>: começamos estabelecendo os fatos, que são as informações conhecidas sobre o paciente.</p>
+<ul>
+<li><strong>Fato 1</strong>: O paciente tem febre. (Representado como <span class="math inline">\(F\)</span>);</li>
+<li><strong>Fato 2</strong>: O paciente tem tosse. (Representado como <span class="math inline">\(T\)</span>);</li>
+<li><strong>Fato 3</strong>: O paciente viajou recentemente para uma área endêmica. (Representado como <span class="math inline">\(V\)</span>);</li>
+<li><strong>Fato 4</strong>: O paciente foi vacinado contra a gripe. (Representado como $ g$).</li>
+</ul>
+<p><strong>2. Regras</strong>: em seguida, definimos as regras que descrevem as relações entre sintomas, histórico médico e possíveis doenças.</p>
+<ul>
+<li><strong>Regra 1</strong>: Se o paciente tem febre e tosse, mas foi vacinado contra a gripe, então pode ter resfriado comum. (<span class="math inline">\(\neg F \land \neg T \land G \rightarrow R\)</span>);</li>
+<li><strong>Regra 2</strong>: Se o paciente tem febre, tosse e viajou para uma área endêmica, então pode ter malária. ($F T V M $);</li>
+<li><strong>Regra 3</strong>: Se o paciente tem febre e tosse, mas não foi vacinado contra a gripe, então pode ter gripe. ($F T G I $).</li>
+</ul>
+<p><strong>3. Consultas</strong>: agora, podemos fazer consultas ao nosso sistema para obter diagnósticos possíveis.</p>
+<ul>
+<li><strong>Consulta 1</strong>: O paciente tem febre, tosse, viajou para uma área endêmica e foi vacinado contra a gripe. Qual é o diagnóstico? (<span class="math inline">\(\neg F \land \neg T \land \neg V \land G\)</span>);</li>
+</ul>
+<p><strong>4. Resolução</strong>: usando os fatos e regras, podemos resolver a consulta:</p>
+<ol type="1">
+<li>O paciente tem febre, tosse, viajou para uma área endêmica e foi vacinado contra a gripe (<em>Fatos</em>);</li>
+<li>Portanto, o paciente pode ter resfriado comum (<em>Regra 1</em>);</li>
+<li>Portanto, o paciente pode ter malária (<em>Regra 2</em>).</li>
+</ol>
+<p><strong>5. Conclusão</strong>: este exemplo ilustra como as Cláusulas de Horn podem ser usadas em um contexto mais complexo, como um sistema de diagnóstico médico. A mesma abordagem pode ser aplicada a outros domínios, como diagnósticos de falhas em máquinas, sistemas legais, planejamento financeiro e muito mais.</p>
+</section>
+</section>
+<section id="exemplo-3---mundo-núcleo-familiar-lógica-de-primeira-ordem" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="exemplo-3---mundo-núcleo-familiar-lógica-de-primeira-ordem"><span class="header-section-number">8.1</span> Exemplo 3 - Mundo Núcleo Familiar (Lógica de Primeira Ordem)</h2>
+<p>O exemplo a seguir apresenta um mundo que representa uma família e suas relações, apresentado usando a sintaxe da lógica de primeira ordem (FOL).</p>
+<p><strong>Fatos</strong>: os fatos são representados como predicados aplicados a constantes em FOL.</p>
+<ul>
+<li><span class="math inline">\(Homem(joão)\)</span>;</li>
+<li><span class="math inline">\(Homem(pedro)\)</span>;</li>
+<li><span class="math inline">\(Mulher(maria)\)</span>;</li>
+<li><span class="math inline">\(Mulher(ana)\)</span>;</li>
+<li><span class="math inline">\(Progenitor(joão, pedro)\)</span>;</li>
+<li><span class="math inline">\(Progenitor(maria, pedro)\)</span>;</li>
+<li><span class="math inline">\(Progenitor(joão, ana)\)</span>;</li>
+<li><span class="math inline">\(Progenitor(maria, ana)\)</span>.</li>
+</ul>
+<p><strong>Regras</strong>:</p>
+<p><strong>1. Pai</strong>:</p>
+<ul>
+<li><p>Forma Implicativa:</p>
+<p><span class="math display">\[\forall X \forall Y (Homem(X) \land Progenitor(X, Y) \rightarrow Pai(X, Y))\]</span></p></li>
+<li><p>Forma Clausal:</p>
+<p><span class="math display">\[\forall X \forall Y (\neg Homem(X) \lor \neg Progenitor(X, Y) \lor Pai(X, Y))\]</span></p></li>
+</ul>
+<p><strong>2. Mãe</strong>:</p>
+<ul>
+<li><p>Forma Implicativa:</p>
+<p><span class="math display">\[\forall X \forall Y (Mulher(X) \land Progenitor(X, Y) \rightarrow Mae(X, Y))\]</span></p></li>
+<li><p>Forma Clausal:</p>
+<p><span class="math display">\[\forall X \forall Y (\neg Mulher(X) \lor \neg Progenitor(X, Y) \lor Mae(X, Y))\]</span></p></li>
+</ul>
+<p><strong>3. Meio-Irmão</strong>: com pelo menos um progenitor em comum e não sendo a mesma pessoa.</p>
+<ul>
+<li><p>Forma Implicativa:</p>
+<p><span class="math display">\[\forall X \forall Y \forall Z (Homem(X) \land Progenitor(Z, X) \land Progenitor(Z, Y) \land X \neq Y \rightarrow MeioIrmao(X, Y))\]</span></p></li>
+<li><p>Forma Clausal:</p>
+<p><span class="math display">\[\forall X \forall Y \forall Z (\neg Homem(X) \lor \neg Progenitor(Z, X) \lor \neg Progenitor(Z, Y) \lor X = Y \lor MeioIrmao(X, Y))\]</span></p></li>
+</ul>
+<p><strong>4. Meio-Irmã</strong>: com pelo menos um progenitor em comum e não sendo a mesma pessoa.</p>
+<ul>
+<li><p>Forma Implicativa:</p>
+<p><span class="math display">\[\forall X \forall Y \forall Z (Mulher(X) \land Progenitor(Z, X) \land Progenitor(Z, Y) \land X \neq Y \rightarrow MeioIrma(X, Y))\]</span></p></li>
+<li><p>Forma Clausal:</p>
+<p><span class="math display">\[\forall X \forall Y \forall Z (\neg Mulher(X) \lor \neg Progenitor(Z, X) \lor \neg Progenitor(Z, Y) \lor X = Y \lor MeioIrma(X, Y))\]</span></p></li>
+</ul>
+<p><strong>5. Irmão</strong>: com ambos os pais em comum e não sendo a mesma pessoa.</p>
+<ul>
+<li><p>Forma Implicativa:</p>
+<p><span class="math display">\[\forall X \forall Y \forall P \forall M (Homem(X) \land Pai(P,X) \land Pai(P,Y) \land Mae(M,X) \land Mae(M,Y) \land X \neq Y \rightarrow Irmao(X,Y))\]</span></p></li>
+<li><p>Forma Clausal:</p>
+<p><span class="math display">\[\forall X \forall Y \forall P \forall M (\neg Homem(X) \lor \neg Pai(P,X) \lor \neg Pai(P,Y) \lor \neg Mae(M,X) \lor \neg Mae(M,Y) \lor X = Y \lor Irmao(X,Y))\]</span></p></li>
+</ul>
+<p><strong>6. Irmã</strong>: com ambos os pais em comum e não sendo a mesma pessoa.</p>
+<ul>
+<li><p>Forma Implicativa:</p>
+<p><span class="math display">\[\forall X \forall Y \forall P \forall M (Mulher(X) \land Pai(P,X) \land Pai(P,Y) \land Mae(M,X) \land Mae(M,Y) \land X \neq Y \rightarrow Irma(X,Y))\]</span></p></li>
+<li><p>Forma Clausal:</p>
+<p><span class="math display">\[\forall X \forall Y \forall P \forall M (\neg Mulher(X) \lor \neg Pai(P,X) \lor \neg Pai(P,Y) \lor \neg Mae(M,X) \lor \neg Mae(M,Y) \lor X = Y \lor Irma(X,Y))\]</span></p></li>
+</ul>
+<p><strong>7. Avô</strong>:</p>
+<ul>
+<li><p>Forma Implicativa:</p>
+<p><span class="math display">\[\forall X \forall Y \forall Z (Homem(X) \land Progenitor(X, Z) \land Progenitor(Z, Y) \rightarrow Avo(X, Y))\]</span></p></li>
+<li><p>Forma Clausal:</p>
+<p><span class="math display">\[\forall X \forall Y \forall Z (\neg Homem(X) \lor \neg Progenitor(X, Z) \lor \neg Progenitor(Z, Y) \lor Avo(X, Y))\]</span></p></li>
+</ul>
+<p><strong>8. Avó</strong>:</p>
+<ul>
+<li><p>Forma Implicativa:</p>
+<p><span class="math display">\[\forall X \forall Y \forall Z (Mulher(X) \land Progenitor(X, Z) \land Progenitor(Z, Y) \rightarrow Avo(X, Y))\]</span></p></li>
+<li><p>Forma Clausal:</p>
+<p><span class="math display">\[\forall X \forall Y \forall Z (\neg Mulher(X) \lor \neg Progenitor(X, Z) \lor \neg Progenitor(Z, Y) \lor Avo(X, Y))\]</span></p></li>
+</ul>
+<p><strong>Consultas (Metas)</strong>:</p>
+<ol type="1">
+<li><p><code>pai(joão, pedro)</code></p>
+<p>Para verificar se <span class="math inline">\(Pai(joão, pedro)\)</span> é uma consequência lógica da base de conhecimento, tenta-se provar que a base de conhecimento junto com <span class="math inline">\(\neg Pai(joão, pedro)\)</span> leva a uma contradição (<span class="math inline">\(\bot\)</span>). A meta é, portanto: <span class="math display">\[\neg Pai(joão, pedro)\]</span></p></li>
+<li><p><code>irmão(pedro, ana)</code></p>
+<p>Para verificar se <span class="math inline">\(Irmao(pedro, ana)\)</span> é verdadeiro: <span class="math display">\[\neg Irmao(pedro, ana)\]</span></p></li>
+<li><p><code>avó(X, ana)</code></p>
+<p>Para perguntar se “Existe uma avó X para Ana?”, a consulta seria <span class="math inline">\(\exists X (Avo(X, ana) \land Mulher(X))\)</span>. A forma de meta para refutação seria tentar provar que a base de conhecimento junto com <span class="math inline">\(\forall X (\neg Avo(X, ana) \lor \neg Mulher(X))\)</span> leva a uma contradição.</p></li>
+</ol>
+<p>Em um sistema de prova por refutação, adicionamos a negação da consulta à base de conhecimento e tentamos derivar uma contradição (<span class="math inline">\(\bot\)</span>). As representações das metas como negações em FOL estão corretas nesse contexto. #### Exemplo 4 - Torre de Hanói</p>
+<p>A <strong>Torre de Hanói</strong> é um quebra-cabeça matemático que consiste em três postes e um número de discos de diferentes tamanhos que podem deslizar sobre qualquer poste. O quebra-cabeça começa com os discos empilhados em ordem decrescente de tamanho no primeiro poste, o menor disco no topo. O objetivo é mover toda a pilha para o último poste, obedecendo às seguintes regras:</p>
+<p><strong>Predicados</strong>:</p>
+<ul>
+<li><span class="math inline">\(Disco(x)\)</span>: <span class="math inline">\(x\)</span> é um disco;</li>
+<li><span class="math inline">\(Poste(x)\)</span>: <span class="math inline">\(x\)</span> é um poste;</li>
+<li><span class="math inline">\(Menor(x)\)</span>: <span class="math inline">\(x\)</span> é o disco menor;</li>
+<li><span class="math inline">\(Maior(x, y)\)</span>: o disco <span class="math inline">\(x\)</span> é maior que o disco <span class="math inline">\(y\)</span>;</li>
+<li><span class="math inline">\(Em(x, y)\)</span>: o disco <span class="math inline">\(x\)</span> está no poste <span class="math inline">\(y\)</span>;</li>
+<li><span class="math inline">\(Sobre(x, y)\)</span>: o disco <span class="math inline">\(x\)</span> está sobre o disco <span class="math inline">\(y\)</span>.</li>
+</ul>
+<p><strong>Fatos (Cláusulas de Horn Unitárias)</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(Disco(d_1)\)</span>;</li>
+<li><span class="math inline">\(Disco(d_2)\)</span>;</li>
+<li><span class="math inline">\(Disco(d_3)\)</span>;</li>
+<li><span class="math inline">\(Poste(p_1)\)</span>;</li>
+<li><span class="math inline">\(Poste(p_2)\)</span>;</li>
+<li><span class="math inline">\(Poste(p_3)\)</span>;</li>
+<li><span class="math inline">\(Menor(d_1)\)</span>;</li>
+<li><span class="math inline">\(Maior(d_2, d_1)\)</span>;</li>
+<li><span class="math inline">\(Maior(d_3, d_2)\)</span>.</li>
+</ol>
+<p><strong>Regras (Cláusulas de Horn Não-Unitárias)</strong>:</p>
+<ol type="1">
+<li><p>Movimento válido:</p>
+<p><span class="math display">\[\neg Disco(x) \lor \neg Poste(y) \lor \neg Poste(z) \lor \neg Em(x, y) \lor \neg DiscoNoTopo(x, y) \lor \neg DiscoNoTopo(u, z) \lor \neg Maior(x, u) \lor MovimentoValido(x, y, z)\]</span></p></li>
+<li><p>Condição de vitória:</p>
+<p><span class="math display">\[\neg Disco(x) \lor \neg Disco(y) \lor \neg Disco(z) \lor \neg Em(x, p_3) \lor \neg Em(y, p_3) \lor \neg Em(z, p_3) \lor Vitoria()\]</span></p></li>
+<li><p>Disco válido (nenhum disco maior sobre um menor):</p>
+<p><span class="math display">\[\neg Sobre(x, y) \lor \neg Maior(x, y) \lor DiscoValido(x, y)\]</span></p></li>
+<li><p>Movimento único:</p>
+<p><span class="math display">\[\neg Disco(x) \lor \neg Disco(y) \lor \neg Poste(z) \lor \neg Poste(w) \lor \neg MovimentoValido(y, z, w) \lor x = y \lor MovimentoUnico(x)\]</span></p></li>
+<li><p>Estado inicial:</p>
+<p><span class="math display">\[\neg Em(d_1, p_1) \lor \neg Em(d_2, p_1) \lor \neg Em(d_3, p_1) \lor \neg Sobre(d_3, d_2) \lor \neg Sobre(d_2, d_1) \lor EstadoInicial()\]</span></p></li>
+<li><p>Disco no topo:</p>
+<p><span class="math display">\[\neg Disco(x) \lor \neg Poste(y) \lor \neg Em(x, y) \lor \neg Disco(z) \lor \neg Em(z, y) \lor \neg Sobre(z, x) \lor DiscoNoTopo(x, y)\]</span></p></li>
+</ol>
+<p><strong>Consultas (Metas)</strong>:</p>
+<ol type="1">
+<li><p>Verificar se um movimento é válido:</p>
+<p><span class="math display">\[\neg MovimentoValido(x, y, z)\]</span></p></li>
+<li><p>Verificar se o jogo foi vencido:</p>
+<p><span class="math display">\[\neg Vitoria()\]</span></p></li>
+<li><p>Verificar se um disco pode estar sobre outro:</p>
+<p><span class="math display">\[\neg DiscoValido(x, y)\]</span></p></li>
+<li><p>Verificar se apenas um disco está sendo movido:</p>
+<p><span class="math display">\[\neg MovimentoUnico(x)\]</span></p></li>
+<li><p>Verificar o estado inicial:</p>
+<p><span class="math display">\[\neg EstadoInicial()\]</span></p></li>
+<li><p>Verificar se um disco está no topo de um poste:</p>
+<p><span class="math display">\[\neg DiscoNoTopo(x, y)\]</span></p></li>
+</ol>
+<section id="quantificadores-em-cláusulas-de-horn" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="quantificadores-em-cláusulas-de-horn"><span class="header-section-number">8.1.1</span> Quantificadores em Cláusulas de Horn</h3>
+<p>Os quantificadores podem ser incluídos nas Cláusulas de Horn. Contudo, é importante notar que a forma padrão de Cláusulas de Horn em programação lógica geralmente lida com quantificação de forma implícita. A quantificação universal é comum e é geralmente assumida em regras, enquanto a quantificação existencial é muitas vezes tratada através de fatos específicos ou construção de termos.</p>
+<p>Precisamos tomar cuidado porque a inclusão explícita de quantificadores pode levar a uma Lógica de Primeira Ordem mais rica, permitindo expressões mais complexas e poderosas. No entanto, isso também pode aumentar a complexidade do raciocínio e da resolução.</p>
+<p>O quantificador universal (representado por $$) afirma que uma propriedade é verdadeira para todos os membros de um domínio. Em Cláusulas de Horn, isso é geralmente representado implicitamente através de regras gerais que se aplicam a todos os membros de um conjunto. Por exemplo, considere a regra: <em>Todos os pássaros podem voar</em>. Em uma Cláusula de Horn, isso pode ser representado como:</p>
+<p>Em programação lógica e Cláusulas de Horn, a quantificação é frequentemente tratada implicitamente.</p>
+<p><strong>Quantificador Universal em Regras</strong>: considere a afirmação: “<em>Para todo x, se x é um pássaro, então x pode voar</em>.”</p>
+<ul>
+<li><strong>Fórmula em Lógica de Primeira Ordem (LPO)</strong>: <span class="math inline">\(\forall x (\text{Pássaro}(x) \rightarrow \text{Voa}(x))\)</span></li>
+<li><strong>Forma clausal (Cláusula de Horn equivalente)</strong>: <span class="math inline">\(\neg \text{Pássaro}(x) \lor \text{Voa}(x)\)</span> (Aqui, <span class="math inline">\(x\)</span> é implicitamente quantificado universalmente.)</li>
+<li><strong>Representação em Prolog</strong>: <code>voa(X) :- passaro(X).</code> (A variável <code>X</code> é implicitamente quantificada universalmente.)</li>
+</ul>
+<p><strong>Quantificador Existencial e Fatos</strong>: considere a afirmação: “<em>Existe um pássaro que não pode voar</em>.” * <strong>Fórmula em LPO</strong>: <span class="math inline">\(\exists x (\text{Pássaro}(x) \land \neg \text{Voa}(x))\)</span> * <strong>Tratamento em sistemas de Cláusulas de Horn</strong>: Afirmações existenciais puras como <span class="math inline">\(\exists x \Phi(x)\)</span> não são diretamente representadas como regras de Cláusula de Horn. Para incorporar tal conhecimento, se o indivíduo específico for conhecido, ele é afirmado como um conjunto de fatos. Por exemplo, se sabemos que “Pengu” é um pássaro e não voa: * <strong>Fatos em Prolog</strong>: <code>passaro(pengu).</code> <code>nao_voa(pengu).</code> (ou <code>voa(pengu) :- fail.</code>)</p>
+<ul>
+<li>Se a existência é conhecida mas o indivíduo não é nomeado, em processos de prova teórica (como resolução), a Skolemização substituiria <span class="math inline">\(x\)</span> por uma nova constante (constante de Skolem), resultando em: <span class="math inline">\(\text{Pássaro}(c) \land \neg \text{Voa}(c)\)</span>. Estes seriam então fatos no sistema: <span class="math inline">\(\text{Pássaro}(c).\)</span> e <span class="math inline">\(\neg \text{Voa}(c).\)</span> (ou um predicado para a negação).</li>
+</ul>
+</section>
+<section id="conversão-de-fórmulas" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="conversão-de-fórmulas"><span class="header-section-number">8.1.2</span> Conversão de Fórmulas</h3>
+<p>Seja uma fórmula bem formada arbitrária da Lógica Proposicional. Alguns passos podem ser aplicados para obter uma cláusula de Horn equivalente:</p>
+<ol type="1">
+<li><p>Converter a fórmula para Forma Normal Conjuntiva (FNC), obtendo uma conjunção de disjunções</p></li>
+<li><p>Aplicar as seguintes técnicas em cada disjunção:</p>
+<ul>
+<li>Inverter a polaridade de literais positivos extras;</li>
+<li>Adicionar literais negativos que preservem a satisfatibilidade;</li>
+<li>Dividir em cláusulas menores se necessário.</li>
+</ul></li>
+<li><p>Simplificar a fórmula final obtida.</p></li>
+</ol>
+<section id="exemplo-1-dada-a-fórmula" class="level4" data-number="8.1.2.1">
+<h4 data-number="8.1.2.1" class="anchored" data-anchor-id="exemplo-1-dada-a-fórmula"><span class="header-section-number">8.1.2.1</span> Exemplo 1: dada a fórmula</h4>
+<p><span class="math display">\[(P \land Q) \lor (P \land R)\]</span></p>
+<p>Passos:</p>
+<ol type="1">
+<li>Converter para FNC: <span class="math inline">\((P \lor Q) \land (P \lor R)\)</span>;</li>
+<li>Inverter P em uma das disjunções: <span class="math inline">\((P \lor Q) \land (\neg P \lor R)\)</span>;</li>
+<li>Adicionar literal negativo: <span class="math inline">\((P \lor Q \lor \neg S) \land (\neg P \lor R \lor \neg T)\)</span>;</li>
+<li>Simplificar: $S P T r $.</li>
+</ol>
+<p>A sequência destes passos permite encontrar uma conjunção de cláusulas de Horn equivalente à fórmula original.</p>
+</section>
+<section id="transformação-de-forma-normal-conjuntiva-fnc-para-cláusulas-de-horn" class="level4" data-number="8.1.2.2">
+<h4 data-number="8.1.2.2" class="anchored" data-anchor-id="transformação-de-forma-normal-conjuntiva-fnc-para-cláusulas-de-horn"><span class="header-section-number">8.1.2.2</span> Transformação de Forma Normal Conjuntiva (FNC) para Cláusulas de Horn</h4>
+<p>A Forma Normal Conjuntiva é uma conjunção de disjunções de literais. Uma Cláusula de Horn é um tipo especial de cláusula que contém no máximo um literal positivo. Considere que o objetivo das Cláusulas de Horn é criar um conjunto de Fórmulas Bem Formadas, divididas em Fatos, Regras e Consultas para permitir a resolução de problemas então, a transformação de uma FNC para Cláusulas de Horn pode incorrer em alguns problemas:</p>
+<ul>
+<li><strong>Perda de Informação</strong>: Nem todas as cláusulas em FNC podem ser transformadas em Cláusulas de Horn. Para minimizar este risco atente para as regras de equivalência que vimos anteriormente.</li>
+<li><strong>Complexidade</strong>: A transformação pode ser complexa e requer uma análise cuidadosa da lógica e do contexto.</li>
+</ul>
+<p><strong>Etapas de Transformação</strong></p>
+<ol type="1">
+<li><strong>Converter para FNC</strong>: Se a fórmula ainda não estiver em Forma Normal Conjuntiva, converta-a para Forma Normal Conjuntiva usando as técnicas descritas anteriormente;</li>
+<li><strong>Identificar Cláusulas de Horn</strong>: Verifique cada cláusula na Forma Normal Conjuntiva. Se uma cláusula contém no máximo um literal positivo, ela já é uma Cláusula de Horn;</li>
+<li><strong>Transformar Cláusulas Não-Horn</strong>: Se uma cláusula contém mais de um literal positivo, ela não pode ser diretamente transformada em uma Cláusula de Horn sem perder informações.</li>
+</ol>
+<section id="exemplo-1-vamos-considerar-a-seguinte-fórmula-bem-formada" class="level5" data-number="8.1.2.2.1">
+<h5 data-number="8.1.2.2.1" class="anchored" data-anchor-id="exemplo-1-vamos-considerar-a-seguinte-fórmula-bem-formada"><span class="header-section-number">8.1.2.2.1</span> Exemplo 1: vamos considerar a seguinte fórmula bem formada</h5>
+<p><span class="math display">\[(A \rightarrow B) \land (B \lor C)\]</span></p>
+<ol type="1">
+<li><p><strong>Converter para FNC</strong>:</p>
+<ul>
+<li>Elimine a implicação: <span class="math inline">\((\neg A \lor B) \land (B \lor C)\)</span>;</li>
+<li>A fórmula já está em Forma Normal Conjuntiva.</li>
+</ul></li>
+<li><p><strong>Identificar Cláusulas de Horn</strong>:</p>
+<ul>
+<li>Ambas as cláusulas são Cláusulas de Horn, pois cada uma contém apenas um literal positivo.</li>
+</ul></li>
+<li><p><strong>Resultado</strong>:</p>
+<ul>
+<li>A fórmula em Cláusulas de Horn é: <span class="math inline">\((\neg A \lor B) \land (B \lor C)\)</span></li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="problemas-interessantes-resolvidos-com-a-cláusula-de-horn" class="level4" data-number="8.1.2.3">
+<h4 data-number="8.1.2.3" class="anchored" data-anchor-id="problemas-interessantes-resolvidos-com-a-cláusula-de-horn"><span class="header-section-number">8.1.2.3</span> Problemas interessantes resolvidos com a Cláusula de Horn</h4>
+<p><strong>Problema 1 - O Mentiroso e o Verdadeiro</strong>:: Você encontra dois habitantes: <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span>. Você sabe que um sempre diz a verdade e o outro sempre mente, mas você não sabe quem é quem. Você consulta a <span class="math inline">\(A\)</span>, <em>Você é o verdadeiro?</em> A responde, mas você não consegue ouvir a resposta dele. <span class="math inline">\(B\)</span> então te diz, <em>A disse que ele é o mentiroso</em>.</p>
+<p><strong>Fatos</strong>:</p>
+<p><span class="math inline">\(mentiroso(A)\)</span> <span class="math inline">\(verdadeiro(B)\)</span></p>
+<p><strong>Regra</strong>:</p>
+<p><span class="math display">\[
+\forall x \forall y (mentiroso(x) \wedge consulta(y, \text{Você é o verdadeiro?}) → Responde (x, \text{Sou o mentiroso}))
+\]</span></p>
+<p><strong>Consulta</strong>:</p>
+<p><span class="math display">\[ responde (A, \text{Sou o mentiroso})?\]</span></p>
+<p><strong>Problema 2 - As Três Lâmpadas</strong>: existem três lâmpadas incandescentes em uma sala, e existem três interruptores fora da sala. Você pode manipular os interruptores o quanto quiser, mas só pode entrar na sala uma vez. Como você pode determinar qual interruptor opera qual lâmpada?</p>
+<p><strong>Fatos</strong>:</p>
+<p><span class="math inline">\(Interruptor(s_1)\)</span> <span class="math inline">\(Interruptor(s_2)\)</span> <span class="math inline">\(Interruptor(s_3)\)</span></p>
+<p><span class="math inline">\(Lâmpada(b_1)\)</span> <span class="math inline">\(Lâmpada(b_2)\)</span> <span class="math inline">\(Lâmpada(b_3)\)</span></p>
+<p><strong>Regras</strong>:</p>
+<p><span class="math display">\[\forall x \forall y (Interruptor(x) \wedge Ligado(x) \wedge Lâmpada(y) \rightarrow Acende (y))\]</span></p>
+<p><span class="math display">\[\forall x (Lâmpada(x) \wedge FoiLigada(x) \wedge AgoraDesligada(x) \rightarrow EstáQuente (x))\]</span></p>
+<p><strong>Consulta</strong>:</p>
+<p><span class="math display">\[Acende (b_2, s_2)?\]</span></p>
+<p><span class="math display">\[ estáQuente (b_1)?\]</span></p>
+<p><strong>Problema 3 - O Agricultor, a Raposa, o Ganso e o Grão</strong>: um agricultor quer atravessar um rio e levar consigo uma raposa, um ganso e um saco de grãos. O barco do agricultor só lhe permite levar um item além dele mesmo. Se a raposa e o ganso estiverem sozinhos, a raposa comerá o ganso. Se o ganso e o grão estiverem sozinhos, o ganso comerá o grão. Como o agricultor pode levar todas as suas posses para o outro lado do rio?</p>
+<p><strong>Fatos</strong>:</p>
+<ul>
+<li><span class="math inline">\(Raposa(r)\)</span>;</li>
+<li><span class="math inline">\(Ganso(g)\)</span>;</li>
+<li><span class="math inline">\(Grao(gr)\)</span>.</li>
+</ul>
+<p>Nestes fatos a atenta leitora deve observar que ‘<span class="math inline">\(r\)</span>’ é uma raposa, ‘<span class="math inline">\(g\)</span>’ é um ganso, e ‘<span class="math inline">\(gr\)</span>’ é um saco de grãos.</p>
+<p><strong>Regras</strong>:</p>
+<ol type="1">
+<li>Se <span class="math inline">\(x\)</span> é uma Raposa e <span class="math inline">\(y\)</span> é um Ganso, e <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> estão sozinhos, então <span class="math inline">\(x\)</span> come <span class="math inline">\(y\)</span>:</li>
+</ol>
+<p><span class="math display">\[\forall x \forall y (Raposa(x) \land Ganso(y) \land Sozinhos(x, y) \rightarrow Come(x, y))\]</span></p>
+<ol start="2" type="1">
+<li>Se <span class="math inline">\(x\)</span> é um Ganso e <span class="math inline">\(y\)</span> é Grão, e <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> estão sozinhos, então <span class="math inline">\(x\)</span> come <span class="math inline">\(y\)</span>:</li>
+</ol>
+<p><span class="math display">\[\forall x \forall y (Ganso(x) \land Grao(y) \land Sozinhos(x, y) \rightarrow Come(x, y))\]</span></p>
+<p>O predicado <span class="math inline">\(Sozinhos(Item1, Item2)\)</span> significaria que <span class="math inline">\(Item1\)</span> e <span class="math inline">\(Item2\)</span> estão em uma margem do rio sem o agricultor. O predicado <span class="math inline">\(Come(Predador, Presa)\)</span> significa que o predador come a presa.</p>
+<p><strong>Consulta</strong>:</p>
+<p>As consultas visam verificar se, em um determinado estado da travessia, certas condições de não comer são satisfeitas. Para um sistema de prova, estas seriam as metas a serem mantidas verdadeiras, ou suas negações a serem evitadas.</p>
+<ol type="1">
+<li>A raposa <span class="math inline">\(r\)</span> não come o ganso <span class="math inline">\(g\)</span> (ou seja, é falso que <span class="math inline">\(r\)</span> come <span class="math inline">\(g\)</span>)?</li>
+</ol>
+<p><span class="math display">\[\neg Come(r, g)\]</span></p>
+<ol start="2" type="1">
+<li>O ganso <span class="math inline">\(g\)</span> não come o grão <span class="math inline">\(gr\)</span> (ou seja, é falso que <span class="math inline">\(g\)</span> come <span class="math inline">\(gr\)</span>)?</li>
+</ol>
+<p><span class="math display">\[\neg Come(g, gr)\]</span></p>
+<p>Estas consultas, no contexto da resolução do problema, representam estados seguros que devem ser mantidos durante toda a travessia. A solução do problema envolve encontrar uma sequência de movimentos que leve todos ao outro lado do rio sem nunca satisfazer as condições de <span class="math inline">\(Come(r,g)\)</span> ou <span class="math inline">\(Come(g,gr)\)</span> quando o agricultor não está presente para supervisionar.</p>
+<p><strong>Problema 4 - A Ponte e a Tocha</strong>: quatro pessoas chegam a um rio à noite. Há uma ponte estreita, mas ela só pode conter duas pessoas de cada vez. Eles têm uma tocha e, por ser noite, a tocha tem que ser usada ao atravessar a ponte. A pessoa A pode atravessar a ponte em um minuto, B em dois minutos, C em cinco minutos e D em oito minutos. Quando duas pessoas atravessam a ponte juntas, elas devem se mover no ritmo da pessoa mais lenta. Qual é a forma mais rápida para todos eles atravessarem a ponte?</p>
+<p><strong>Fatos (tempos)</strong>:</p>
+<ul>
+<li><span class="math inline">\(tempo(a, 1)\)</span>;</li>
+<li><span class="math inline">\(tempo(b, 2)\)</span>;</li>
+<li><span class="math inline">\(tempo(c, 5)\)</span>;</li>
+<li><span class="math inline">\(tempo(d, 8)\)</span>.</li>
+</ul>
+<p><strong>Regras</strong>:</p>
+<ol type="1">
+<li><p>Regra para determinar qual pessoa é mais lenta:</p>
+<p><span class="math display">\[\neg tempo(X, TX) \lor \neg tempo(Y, TY) \lor \neg maior(TX, TY) \lor mais\_lento(X, Y, X)\]</span></p>
+<p><span class="math display">\[\neg tempo(X, TX) \lor \neg tempo(Y, TY) \lor \neg maior(TY, TX) \lor mais\_lento(X, Y, Y)\]</span></p></li>
+<li><p>Regra para calcular o tempo quando duas pessoas atravessam juntas:</p>
+<p><span class="math display">\[\neg mais\_lento(X, Y, Z) \lor \neg tempo(Z, T) \lor tempo\_travessia(X, Y, T)\]</span></p></li>
+<li><p>Relações “maior que” definidas como fatos:</p>
+<ul>
+<li><span class="math inline">\(maior(2, 1)\)</span>;</li>
+<li><span class="math inline">\(maior(5, 1)\)</span>;</li>
+<li><span class="math inline">\(maior(5, 2)\)</span>;</li>
+<li><span class="math inline">\(maior(8, 1)\)</span>;</li>
+<li><span class="math inline">\(maior(8, 2)\)</span>;</li>
+<li><span class="math inline">\(maior(8, 5)\)</span>.</li>
+</ul></li>
+<li><p>Regras para representar o plano de travessia:</p>
+<p><span class="math display">\[\neg atravessa\_ida(X, Y, T1) \lor \neg volta(Z, T2) \lor \neg atravessa\_ida(W, V, T3) \lor \neg volta(U, T4) \lor \neg atravessa\_ida(S, R, T5) \lor travessia\_completa(T1+T2+T3+T4+T5)\]</span></p>
+<p>Onde as variáveis representam as pessoas que atravessam em cada fase da solução.</p></li>
+</ol>
+<p><strong>Consulta</strong>:</p>
+<p><span class="math display">\[travessia\_completa(15)?\]</span></p>
+<p>Esta consulta verifica se existe um plano de travessia que soma exatamente 15 minutos, representando a solução ótima para o problema.</p>
+<p><strong>Problema 5 - O Problema de Monty Hall</strong>: em um programa de game show, os concorrentes tentam adivinhar qual das três portas contém um prêmio valioso. Depois que um concorrente escolhe uma porta, o apresentador, que sabe o que está por trás de cada porta, abre uma das portas não escolhidas para revelar uma cabra (representando nenhum prêmio). O apresentador então pergunta ao concorrente se ele quer mudar sua escolha para a outra porta não aberta ou ficar com sua escolha inicial. O que o concorrente deve fazer para maximizar suas chances de ganhar o prêmio?</p>
+<p><strong>Fatos</strong>:</p>
+<ul>
+<li><span class="math inline">\(Porta(d_1)\)</span>;</li>
+<li><span class="math inline">\(Porta(d_2)\)</span>;</li>
+<li><span class="math inline">\(Porta(d_3)\)</span>.</li>
+</ul>
+<p><strong>Regras</strong>:</p>
+<p><span class="math display">\[\forall x Prêmio(x) \rightarrow Porta(x)\]</span></p>
+<p><span class="math display">\[\forall x \forall y (Porta(x) \wedge Porta(y) \wedge x \neq y \rightarrow \neg Prêmio(x) \vee \neg Prêmio(y))\]</span></p>
+<p><strong>Consulta</strong>:</p>
+<p><span class="math display">\[\exists x (Porta(x) \wedge \neg Revelada(x) \wedge x \neq PortaEscolhida \rightarrow Prêmio(x))?\]</span></p>
+</section>
+</section>
+</section>
+<section id="o-prolog-entra-em-cena" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="o-prolog-entra-em-cena"><span class="header-section-number">8.2</span> O Prolog Entra em Cena</h2>
+<p>O Prolog é uma linguagem de programação lógica que utiliza Cláusulas de Horn para representar e manipular conhecimento. A sintaxe e a semântica do Prolog são diretamente mapeadas para Cláusulas de Horn:</p>
+<ul>
+<li><strong>Fatos</strong>: Em Prolog, fatos são representados como cláusulas sem antecedentes. Por exemplo, o fato <em>John é humano</em> pode ser representado como <em>humano(john)</em>.</li>
+<li><strong>Regras</strong>: As regras em Prolog são representadas como implicações, onde os antecedentes são literais negativos e o consequente é o literal positivo. Por exemplo, a regra <em>Se X é humano, então X é mortal</em> pode ser representada como <em>mortal(X) :- humano(X)</em>.</li>
+<li><strong>Consultas</strong>: As consultas em Prolog são feitas ao sistema para inferir informações com base nos fatos e regras definidos. Por exemplo, a consulta “Quem é mortal?” pode ser representada como <em>?- mortal(X)</em>.</li>
+</ul>
+<p>O Prolog utiliza um mecanismo de resolução baseado em Cláusulas de Horn para responder a consultas. Ele aplica uma técnica de busca em profundidade para encontrar uma substituição de variáveis que satisfaça a consulta.</p>
+<section id="exemplo-1-o-mais-simples-possível" class="level4" data-number="8.2.0.1">
+<h4 data-number="8.2.0.1" class="anchored" data-anchor-id="exemplo-1-o-mais-simples-possível"><span class="header-section-number">8.2.0.1</span> Exemplo 1: O mais simples possível</h4>
+<p><strong>Fatos</strong>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>homem(jo<span class="er">ã</span>o)<span class="kw">.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>mulher(maria)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Os fatos indicam que “João é homem” e “maria é mulher”.</p>
+<p><strong>Regra</strong>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mortal(<span class="dt">X</span>) <span class="kw">:-</span> homem(<span class="dt">X</span>)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A regra estabelece que “Se <span class="math inline">\(X\)</span> é homem, então <span class="math inline">\(X\)</span> é mortal”. O símbolo <span class="math inline">\(:-\)</span> representa implicação.</p>
+<p><strong>Consulta</strong>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mortal(jo<span class="er">ã</span>o)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A consulta verifica se “João é mortal”, aplicando a regra definida anteriormente. O Prolog responderá <strong>True</strong> (verdadeiro ou <span class="math inline">\(\top\)</span>) pois a regra se aplica dado o fato de que João é homem.</p>
+</section>
+<section id="exemplo-2-sistema-de-recomendação-de-roupas-em-prolog" class="level4" data-number="8.2.0.2">
+<h4 data-number="8.2.0.2" class="anchored" data-anchor-id="exemplo-2-sistema-de-recomendação-de-roupas-em-prolog"><span class="header-section-number">8.2.0.2</span> Exemplo 2: Sistema de Recomendação de Roupas em Prolog</h4>
+<p>Imagine que estamos construindo um sistema lógico simples em Prolog para recomendar o tipo de roupa que uma pessoa deve vestir com base no clima. Vamos usar Cláusulas de Horn para representar o conhecimento e a lógica do sistema.</p>
+<p><strong>Fatos</strong>: primeiro, estabelecemos os fatos, que são as verdades básicas sobre o mundo. Neste caso, os fatos podem ser informações sobre o clima atual.</p>
+<ul>
+<li><strong>Fato 1</strong>: está ensolarado.</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a> ensolarado<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><strong>Fato 2</strong>: a temperatura está acima de 20°C.</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a> temperatura_acima_de_20<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Regras</strong>: em seguida, definimos as regras que descrevem como as coisas se relacionam. Essas regras nos dizem o tipo de roupa apropriada com base no clima.</p>
+<ul>
+<li><strong>Regra 1</strong>: se está ensolarado e a temperatura está acima de 20°C, use óculos de sol.</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a> <span class="er">ó</span>culos_de_sol <span class="kw">:-</span> ensolarado<span class="kw">,</span> temperatura_acima_de_20<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><strong>Regra 2</strong>: se está ensolarado, use chapéu.</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a> chap<span class="er">é</span>u <span class="kw">:-</span> ensolarado<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><strong>Regra 3</strong>: se a temperatura está acima de 20°C, use camiseta.</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a> camiseta <span class="kw">:-</span> temperatura_acima_de_20<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Agora, podemos fazer consultas ao nosso sistema para obter recomendações de roupas.</p>
+<ul>
+<li><strong>Consulta 1</strong>: está ensolarado e a temperatura está acima de 20°C. O que devo vestir?</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">?-</span> <span class="er">ó</span>culos_de_sol<span class="kw">,</span> chap<span class="er">é</span>u<span class="kw">,</span> camiseta<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="exemplo-3-torre-de-hanói" class="level4" data-number="8.2.0.3">
+<h4 data-number="8.2.0.3" class="anchored" data-anchor-id="exemplo-3-torre-de-hanói"><span class="header-section-number">8.2.0.3</span> Exemplo 3: Torre de Hanói</h4>
+<div class="sourceCode" id="cb10"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Fatos</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>disco(d1)<span class="kw">.</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>disco(d2)<span class="kw">.</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>disco(d3)<span class="kw">.</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>poste(p1)<span class="kw">.</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>poste(p2)<span class="kw">.</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>poste(p3)<span class="kw">.</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>menor(d1)<span class="kw">.</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>maior(d2<span class="kw">,</span> d1)<span class="kw">.</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>maior(d3<span class="kw">,</span> d2)<span class="kw">.</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">% Regras (Cláusulas de Horn)</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">% Um disco está em um poste</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>em(<span class="dt">D</span><span class="kw">,</span> <span class="dt">P</span>) <span class="kw">:-</span> disco(<span class="dt">D</span>)<span class="kw">,</span> poste(<span class="dt">P</span>)<span class="kw">.</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co">% Um disco está sobre outro</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>sobre(<span class="dt">D1</span><span class="kw">,</span> <span class="dt">D2</span>) <span class="kw">:-</span> disco(<span class="dt">D1</span>)<span class="kw">,</span> disco(<span class="dt">D2</span>)<span class="kw">,</span> maior(<span class="dt">D1</span><span class="kw">,</span> <span class="dt">D2</span>)<span class="kw">.</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="co">% Movimento válido</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>movimento_valido(<span class="dt">D</span><span class="kw">,</span> <span class="dt">P1</span><span class="kw">,</span> <span class="dt">P2</span>) <span class="kw">:-</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    em(<span class="dt">D</span><span class="kw">,</span> <span class="dt">P1</span>)<span class="kw">,</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    poste(<span class="dt">P2</span>)<span class="kw">,</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="dt">P1</span> <span class="kw">\=</span> <span class="dt">P2</span><span class="kw">,</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">\+</span> (em(<span class="dt">D2</span><span class="kw">,</span> <span class="dt">P2</span>)<span class="kw">,</span> menor(<span class="dt">D2</span><span class="kw">,</span> <span class="dt">D</span>))<span class="kw">.</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="co">% Condição de vitória</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>vitoria <span class="kw">:-</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    disco(<span class="dt">D1</span>)<span class="kw">,</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    disco(<span class="dt">D2</span>)<span class="kw">,</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    disco(<span class="dt">D3</span>)<span class="kw">,</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    em(<span class="dt">D1</span><span class="kw">,</span> p3)<span class="kw">,</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    em(<span class="dt">D2</span><span class="kw">,</span> p3)<span class="kw">,</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>    em(<span class="dt">D3</span><span class="kw">,</span> p3)<span class="kw">.</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra de que nenhum disco pode estar sobre um disco menor</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>disco_valido(<span class="dt">D1</span><span class="kw">,</span> <span class="dt">D2</span>) <span class="kw">:-</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>    disco(<span class="dt">D1</span>)<span class="kw">,</span></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>    disco(<span class="dt">D2</span>)<span class="kw">,</span></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>    maior(<span class="dt">D1</span><span class="kw">,</span> <span class="dt">D2</span>)<span class="kw">.</span></span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a><span class="co">% Apenas um disco pode ser movido de cada vez</span></span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>movimento_unico(<span class="dt">D</span>) <span class="kw">:-</span></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>    disco(<span class="dt">D</span>)<span class="kw">,</span></span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>    <span class="kw">\+</span> (disco(<span class="dt">D2</span>)<span class="kw">,</span> <span class="dt">D</span> <span class="kw">\=</span> <span class="dt">D2</span><span class="kw">,</span> movimento_valido(<span class="dt">D2</span><span class="kw">,</span> <span class="dt">_</span><span class="kw">,</span> <span class="dt">_</span>))<span class="kw">.</span></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a><span class="co">% Estado inicial</span></span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>estado_inicial <span class="kw">:-</span></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>    em(d1<span class="kw">,</span> p1)<span class="kw">,</span></span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>    em(d2<span class="kw">,</span> p1)<span class="kw">,</span></span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>    em(d3<span class="kw">,</span> p1)<span class="kw">,</span></span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>    sobre(d3<span class="kw">,</span> d2)<span class="kw">,</span></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>    sobre(d2<span class="kw">,</span> d1)<span class="kw">.</span></span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a><span class="co">% Consultas possíveis</span></span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- movimento_valido(D, P1, P2).</span></span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- vitoria.</span></span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- disco_valido(D1, D2).</span></span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- movimento_unico(D).</span></span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- estado_inicial.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="exemplo-4-o-narrador-é-seu-próprio-avô" class="level5" data-number="8.2.0.3.1">
+<h5 data-number="8.2.0.3.1" class="anchored" data-anchor-id="exemplo-4-o-narrador-é-seu-próprio-avô"><span class="header-section-number">8.2.0.3.1</span> Exemplo 4: O Narrador é seu próprio avô</h5>
+<p>O problema do narrador que é seu próprio avô é um exemplo clássico de raciocínio lógico e relações familiares. O problema envolve a construção de uma base de conhecimento que representa as relações familiares e a aplicação de regras lógicas para determinar se o narrador realmente é seu próprio avô. Este exemplo foi publicado por <a href="https://en.wikipedia.org/wiki/Niklaus_Wirth">Niklaus Wirth</a> em seu livro <em>Algorithms + Data Structures = Programs</em> [^1] fazendo referência a um problema que havia sido publicado em um jornal de Zürich em 1922, que cito em tradução livre a seguir:</p>
+<p>Casei com uma viúva (vamos chamá-la de W) que tem uma filha adulta (chame-a de D). Meu pai (F), que nos visitava com bastante frequência, apaixonou-se pela minha enteada e casou-se com ela. Por isso, meu pai se tornou meu genro e minha enteada se tornou minha madrasta. Alguns meses depois, minha esposa deu à luz um filho (S1), que se tornou cunhado do meu pai, e meu tio. A esposa do meu pai, ou seja, minha enteada, também teve um filho (S2). Em outras palavras, para todos os efeitos, eu sou meu próprio avo.</p>
+<p>Usando este relato como base podemos criar uma base de conhecimento em Prolog, incluir algumas regras, e finalmente verificar se é verdade que o <strong>narrador</strong> é o seu próprio avô.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a> <span class="co">% predicados</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>homem(narrador)<span class="kw">.</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>homem(f)<span class="kw">.</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>homem(s1)<span class="kw">.</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>homem(s2)<span class="kw">.</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">% Predicados para relações baseadas em casamentos</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>parentesco_legal(narrador<span class="kw">,</span>w)<span class="kw">.</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>parentesco_legal(narrador<span class="kw">,</span>f)<span class="kw">.</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co">% relações de parentesco, filhos, netos de sangue</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>parentesco(w<span class="kw">,</span>d)<span class="kw">.</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>parentesco(f<span class="kw">,</span>narrador)<span class="kw">.</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>parentesco(narrador<span class="kw">,</span>s1)<span class="kw">.</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>parentesco(f<span class="kw">,</span>s2)<span class="kw">.</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co">% Regras para definir, pai, padrasto e avo</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>pai(<span class="dt">X</span><span class="kw">,</span><span class="dt">Y</span>) <span class="kw">:-</span> homem(<span class="dt">X</span>)<span class="kw">,</span> parentesco(<span class="dt">X</span><span class="kw">,</span><span class="dt">Y</span>)<span class="kw">.</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>padrasto(<span class="dt">X</span><span class="kw">,</span><span class="dt">Y</span>) <span class="kw">:-</span>  homem(<span class="dt">X</span>)<span class="kw">,</span> parentesco_legal(<span class="dt">X</span><span class="kw">,</span><span class="dt">Y</span>)<span class="kw">.</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>avo(<span class="dt">X</span><span class="kw">,</span><span class="dt">Z</span>) <span class="kw">:-</span> (pai(<span class="dt">X</span><span class="kw">,</span><span class="dt">Y</span>)<span class="kw">;</span> padrasto(<span class="dt">X</span><span class="kw">,</span><span class="dt">Y</span>))<span class="kw">,</span> (pai(<span class="dt">Y</span><span class="kw">,</span><span class="dt">Z</span>) <span class="kw">;</span> padrasto(<span class="dt">Y</span><span class="kw">,</span><span class="dt">Z</span>))<span class="kw">.</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="co">%pergunte se o narrador é avo dele mesmo avo(narrador,narrador)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./06-construcao-de-mundos-logicos.html" class="pagination-link" aria-label="Mundos na Lógica de Primeira Ordem">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mundos na Lógica de Primeira Ordem</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./08-verificacao-formal-de-programas.html" class="pagination-link" aria-label="Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025 Frank de Alcantara</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/logica/edit/main/07-clausulas-de-horn-e-prolog.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/logica/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
