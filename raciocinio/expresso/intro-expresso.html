@@ -10,165 +10,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css">
     <style>
-        :root {
-            --copper-50: #fdf8f6;
-            --copper-100: #f2e8e5;
-            --copper-200: #eaddd7;
-            --copper-300: #e0cec7;
-            --copper-400: #d2bab0;
-            --copper-500: #bfa094;
-            --copper-600: #a18072;
-            --copper-700: #977669;
-            --copper-800: #846358;
-            --copper-900: #43302b;
-            --sage-50: #f6f7f6;
-            --sage-100: #e3e7e3;
-            --sage-200: #c7d0c7;
-            --sage-300: #a3b2a3;
-            --sage-400: #7a8f7a;
-            --sage-500: #5d7360;
-            --sage-600: #495a4c;
-            --sage-700: #3d4a3f;
-            --sage-800: #343d36;
-            --sage-900: #2d342f;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8f9fa;
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Crimson Text', serif;
-        }
-
-        .hero-gradient {
-            background: linear-gradient(135deg, rgba(93, 115, 96, 0.9) 0%, rgba(191, 160, 148, 0.8) 100%);
-        }
-
-        .toc-fixed {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 280px;
-            height: 100vh;
-            background: white;
-            border-right: 1px solid #e5e7eb;
-            z-index: 1000;
-            overflow-y: auto;
-            padding: 2rem 1.5rem;
-        }
-
-        .main-content {
-            margin-left: 280px;
-            min-height: 100vh;
-        }
-
-        @media (max-width: 1024px) {
-            .toc-fixed {
-                transform: translateX(-100%);
-                transition: transform 0.3s ease;
-            }
-            .toc-fixed.open {
-                transform: translateX(0);
-            }
-            .main-content {
-                margin-left: 0;
-            }
-        }
-
-        .citation-link {
-            color: var(--sage-500);
-            text-decoration: none;
-            font-weight: 500;
-            border-bottom: 1px dotted var(--sage-500);
-        }
-
-        .citation-link:hover {
-            color: var(--sage-600);
-            border-bottom-style: solid;
-        }
-
-        .bento-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            grid-template-rows: auto auto;
-            gap: 1.5rem;
-            height: 60vh;
-        }
-
-        .bento-main {
-            grid-row: 1 / -1;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .bento-side-top,
-        .bento-side-bottom {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .fade-in {
-            animation: fadeIn 0.8s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .hover-lift {
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .hover-lift:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-        }
-
-        .hover-bg-light:hover {
-            background-color: var(--sage-50);
-        }
-
-        section[id] {
-            scroll-margin-top: 80px;
-        }
-
-        section {
-            position: relative;
-            z-index: 1;
-            margin-bottom: 2rem;
-        }
-
-        .daad-component {
-            border-left: 4px solid;
-            padding-left: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .daad-d { border-left-color: #dc3545; }
-        .daad-a1 { border-left-color: #fd7e14; }
-        .daad-a2 { border-left-color: #ffc107; }
-        .daad-d2 { border-left-color: #198754; }
-
-        .stat-highlight {
-            font-size: 2.5rem;
-            font-weight: 700;
-            line-height: 1;
-        }
-
-        .callout-tip {
-            background: linear-gradient(135deg, #d1ecf1, #bee5eb);
-            border-left: 4px solid #17a2b8;
-            padding: 1rem;
-            border-radius: 0 8px 8px 0;
-            margin: 1.5rem 0;
-        }
+        /* File-specific styles */
 
         .footnote {
             font-size: 0.875rem;
@@ -177,29 +21,6 @@
             margin-top: 0.5rem;
         }
 
-        .table-responsive-custom {
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .table-custom {
-            margin-bottom: 0;
-        }
-
-        .table-custom thead {
-            background: linear-gradient(135deg, var(--sage-600), var(--copper-600));
-            color: white;
-        }
-
-        .table-custom tbody tr:nth-child(even) {
-            background-color: var(--sage-50);
-        }
-
-        .table-custom tbody tr:hover {
-            background-color: var(--copper-100);
-            transition: background-color 0.2s ease;
-        }
 
         .ai-impact-card {
             background: linear-gradient(135deg, #fff3cd, #ffeaa7);
@@ -211,9 +32,15 @@
 
         .methodology-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
             margin: 2rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .methodology-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .pedagogy-card {
@@ -231,12 +58,20 @@
 
         .rubric-table {
             font-size: 0.875rem;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .rubric-table th,
+        .rubric-table td {
+            border: 1px solid #dee2e6;
+            padding: 0.75rem;
         }
 
         .rubric-table th {
-            background: var(--sage-600);
+            background: linear-gradient(135deg, var(--sage-600), var(--copper-600));
             color: white;
-            font-weight: 600;
+            font-weight: bold;
         }
 
         .rubric-score-4 { background-color: #d4edda; }
@@ -279,6 +114,7 @@
             border-radius: 3px;
             transition: width 0.3s ease;
         }
+
     </style>
 </head>
 <body>
@@ -298,10 +134,27 @@
         <div class="mt-4 pt-4 border-top">
             <h4 class="fs-6 fw-semibold text-dark mb-3">Elementos DAAD</h4>
             <div class="d-flex flex-column gap-2">
-                <div class="p-2 bg-danger-subtle rounded"><small class="text-danger fw-medium">Decomposição</small></div>
-                <div class="p-2 bg-warning-subtle rounded"><small class="text-warning fw-medium">Abstração</small></div>
-                <div class="p-2" style="background-color: #fff3cd;"><small style="color: #ffc107;" class="fw-medium">Algoritmização</small></div>
-                <div class="p-2 bg-success-subtle rounded"><small class="text-success fw-medium">Depuração</small></div>
+                <div class="p-2 bg-danger-subtle rounded"><i class="fas fa-puzzle-piece me-2 text-danger"></i><small class="text-danger fw-medium">Decomposição</small></div>
+                <div class="p-2 bg-warning-subtle rounded"><i class="fas fa-eye me-2 text-warning"></i><small class="text-warning fw-medium">Abstração</small></div>
+                <div class="p-2" style="background-color: #dbeafe;"><i class="fas fa-cogs me-2" style="color: #0284c7;"></i><small style="color: #0284c7;" class="fw-medium">Algoritmização</small></div>
+                <div class="p-2 bg-success-subtle rounded"><i class="fas fa-bug me-2 text-success"></i><small class="text-success fw-medium">Depuração</small></div>
+            </div>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Referências Principais</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-light rounded citation-card" style="cursor: pointer;" data-tooltip="LEHMANN, T. H. <strong>How current perspectives on algorithmic thinking can be applied to students' engagement in algorithmatizing tasks</strong>. Mathematics Education Research Journal, v. 36, n. 3, p. 609-643, 2024.">
+                    <small class="fw-medium text-dark">LEHMANN, 2024</small>
+                </div>
+                <div class="p-2 bg-light rounded citation-card" style="cursor: pointer;" data-tooltip="LEHMANN, T. H. <strong>Using algorithmic thinking to design algorithms: The case of critical path analysis</strong>. The Journal of Mathematical Behavior, v. 71, p. 101079, 2023.">
+                    <small class="fw-medium text-dark">LEHMANN, 2023</small>
+                </div>
+                <div class="p-2 bg-light rounded citation-card" style="cursor: pointer;" data-tooltip="WING, Jeannette M. <strong>Computational thinking</strong>. Communications of the ACM, v. 49, n. 3, p. 33-35, mar. 2006.">
+                    <small class="fw-medium text-dark">WING, 2006</small>
+                </div>
+                <div class="p-2 bg-light rounded citation-card" style="cursor: pointer;" data-tooltip="KIM, Y. <strong>Computational Thinking</strong>. In: Educational Technology: An Online Handbook for Pre-K-12. EdTech Books, 2021.">
+                    <small class="fw-medium text-dark">KIM, 2021</small>
+                </div>
             </div>
         </div>
     </nav>
@@ -316,13 +169,7 @@
         <!-- Hero Section -->
         <section id="hero" class="min-vh-100" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
             <div class="container py-5">
-                <div class="callout-tip">
-                    <div class="d-flex align-items-center">
-                        <i class="fas fa-lightbulb me-2 text-info"></i>
-                        <strong>Está sem tempo?</strong> Leia o <a href="#" class="citation-link">Expresso</a>.
-                    </div>
-                </div>
-
+                
                 <div class="bento-grid mb-5">
                     <div class="bento-main bg-white rounded-3 shadow">
                         <div class="hero-gradient h-100 d-flex align-items-center justify-content-center position-relative">
@@ -379,8 +226,8 @@
                         <div class="card h-100 bg-white rounded-3 shadow hover-lift">
                             <div class="card-body p-4 text-center">
                                 <div class="daad-component daad-a2 border-0 p-0">
-                                    <i class="fas fa-cogs fs-2 mb-3" style="color: #ffc107;"></i>
-                                    <h3 class="fs-6 fw-semibold" style="color: #ffc107;">Algoritmização</h3>
+                                    <i class="fas fa-cogs fs-2 mb-3" style="color: #0284c7;"></i>
+                                    <h3 class="fs-6 fw-semibold" style="color: #0284c7;">Algoritmização</h3>
                                     <p class="fs-7 text-muted">Sequências lógico-operacionais</p>
                                 </div>
                             </div>
@@ -522,7 +369,7 @@
                             </div>
                         </div>
 
-                        <div class="row row-cols-1 row-cols-md-3 g-3">
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3">
                             <div class="col">
                                 <div class="text-center p-3 bg-white rounded">
                                     <div class="stat-highlight text-danger">54</div>
@@ -625,13 +472,13 @@
 
                         <div class="pedagogy-card">
                             <div class="daad-component daad-a2">
-                                <h4 class="fs-5 fw-semibold mb-2" style="color: #ffc107;">3. Algoritmização (A)</h4>
+                                <h4 class="fs-5 fw-semibold mb-2" style="color: #0284c7;">3. Algoritmização (A)</h4>
                                 <p class="fs-6 text-muted mb-3">
                                     Formulação de soluções por meio de sequências lógico-operacionais, garantindo completude e implementabilidade.
                                 </p>
-                                <div class="p-3 rounded" style="background-color: #fff3cd;">
-                                    <strong style="color: #ffc107;">Exemplo:</strong>
-                                    <div class="fs-6" style="color: #ffc107;">Projetar heurística para otimização de rotas usando grafos valorados e seleção gulosa</div>
+                                <div class="p-3 rounded" style="background-color: #dbeafe;">
+                                    <strong style="color: #0284c7;">Exemplo:</strong>
+                                    <div class="fs-6" style="color: #0284c7;">Projetar heurística para otimização de rotas usando grafos valorados e seleção gulosa</div>
                                 </div>
                             </div>
                         </div>
@@ -655,7 +502,7 @@
                         <h3 class="fs-3 fw-semibold mb-4 text-center" style="color: var(--sage-800);">Inter-relação dos Componentes DAAD</h3>
                         <div class="image-container">
                             <div class="text-center">
-                                <i class="fas fa-project-diagram fs-1 mb-3" style="color: var(--sage-600);"></i>
+                                <img src="../images/DAAD.webp" alt="Metodologia DAAD" class="img-fluid mb-3" style="max-height: 300px;">
                                 <h4 class="fs-5 fw-semibold" style="color: var(--sage-800);">Metodologia DAAD</h4>
                                 <p class="text-muted">Ilustração da inter-relação entre Decomposição, Abstração, Algoritmização e Depuração</p>
                             </div>
@@ -668,18 +515,18 @@
                         <p class="fs-6 mb-4" style="color: var(--sage-700);">
                             Em português existe uma fronteira tênue entre Pensamento Computacional e Raciocínio Algorítmico. Pesquisas brasileiras mostram confusão conceitual significativa.
                         </p>
-                        <div class="row row-cols-1 row-cols-md-3 g-3">
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3">
                             <div class="col">
                                 <div class="text-center p-3 bg-white rounded shadow-sm">
                                     <div class="stat-highlight text-danger">76%</div>
-                                    <div class="fs-6 text-danger">Trabalhos equiparam PC ao ensino de algoritmos</div>
+                                    <div class="fs-6 text-danger">Trabalhos equiparam Pensamento Computacional ao ensino de algoritmos</div>
                                     <small class="text-muted">Medeiros (2024) - 38 estudos brasileiros</small>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="text-center p-3 bg-white rounded shadow-sm">
                                     <div class="stat-highlight text-warning">BNCC</div>
-                                    <div class="fs-6 text-warning">Não distingue claramente PC e RA</div>
+                                    <div class="fs-6 text-warning">Não distingue claramente Pensamento Computacional e Raciocínio Algorítmico</div>
                                     <small class="text-muted">SBC (2017) - Ambiguidade pedagógica</small>
                                 </div>
                             </div>
@@ -687,7 +534,7 @@
                                 <div class="text-center p-3 bg-white rounded shadow-sm">
                                     <i class="fas fa-exclamation-triangle fs-3 mb-2 text-info"></i>
                                     <div class="fs-6 text-info">Consequências Negativas</div>
-                                    <small class="text-muted">Limitação em contextos interdisciplinares</small>
+                                    <small class="text-muted">Falham em aplicar Pensamento Computacional em contextos interdisciplinares</small>
                                 </div>
                             </div>
                         </div>
@@ -868,7 +715,7 @@
                                         <i class="fas fa-check-circle me-3 mt-1 text-success"></i>
                                         <div>
                                             <div class="fw-medium">Integração Interdisciplinar</div>
-                                            <div class="fs-6 text-muted">PC eficaz quando integrado em diversas disciplinas, não apenas CS</div>
+                                            <div class="fs-6 text-muted">Pensamento Computacional eficaz quando integrado em diversas disciplinas, não apenas em Ciência e Engenharia da Computção</div>
                                         </div>
                                     </div>
                                     <div class="d-flex align-items-start">
@@ -906,14 +753,14 @@
                                         <i class="fas fa-times-circle me-3 mt-1 text-danger"></i>
                                         <div>
                                             <div class="fw-medium">Definição Ambígua</div>
-                                            <div class="fs-6 text-muted">Falta de consenso na definição de PC afeta currículo e avaliação</div>
+                                            <div class="fs-6 text-muted">Falta de consenso na definição de Pensamento Computacional afeta currículo e avaliação</div>
                                         </div>
                                     </div>
                                     <div class="d-flex align-items-start">
                                         <i class="fas fa-times-circle me-3 mt-1 text-danger"></i>
                                         <div>
                                             <div class="fw-medium">Preparação Docente</div>
-                                            <div class="fs-6 text-muted">Educadores carecem de compreensão e confiança para implementar PC</div>
+                                            <div class="fs-6 text-muted">Educadores carecem de compreensão e confiança para implementar Pensamento Computacional</div>
                                         </div>
                                     </div>
                                     <div class="d-flex align-items-start">
@@ -964,8 +811,8 @@
 
                         <div class="image-container">
                             <div class="text-center">
-                                <i class="fas fa-clipboard-check fs-1 mb-3" style="color: var(--sage-600);"></i>
-                                <h4 class="fs-5 fw-semibold" style="color: var(--sage-800);">Exemplo de Teste de PC</h4>
+                                <img src="../images/testes1.webp" alt="Exemplo de Teste de Pensamento Computacional" class="img-fluid mb-3" style="max-height: 300px;">
+                                <h4 class="fs-5 fw-semibold" style="color: var(--sage-800);">Exemplo de Teste de Pensamento Computacional</h4>
                                 <p class="text-muted">Questões avaliando decomposição, abstração e algoritmização</p>
                             </div>
                         </div>
@@ -973,7 +820,7 @@
 
                     <!-- Rubric Example -->
                     <div class="card p-4 rounded-3 shadow bg-white">
-                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Exemplo de Rubrica para Avaliação de PC</h3>
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Exemplo de Rubrica para Avaliação de Pensamento Computacional</h3>
                         <div class="table-responsive">
                             <table class="table table-bordered rubric-table">
                                 <thead>
@@ -1224,6 +1071,32 @@
             if (window.innerWidth > 1024) {
                 toc.classList.remove('open');
             }
+        });
+
+        // Custom tooltips for citations
+        document.addEventListener('DOMContentLoaded', function() {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'custom-tooltip';
+            document.body.appendChild(tooltip);
+
+            const citationCards = document.querySelectorAll('.citation-card[data-tooltip]');
+            
+            citationCards.forEach(card => {
+                card.addEventListener('mouseenter', function(e) {
+                    const tooltipText = e.target.getAttribute('data-tooltip');
+                    tooltip.innerHTML = tooltipText;
+                    tooltip.classList.add('show');
+                });
+
+                card.addEventListener('mousemove', function(e) {
+                    tooltip.style.left = (e.pageX + 10) + 'px';
+                    tooltip.style.top = (e.pageY - 10) + 'px';
+                });
+
+                card.addEventListener('mouseleave', function() {
+                    tooltip.classList.remove('show');
+                });
+            });
         });
     </script>
 </body>

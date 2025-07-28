@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Virando o Jogo da Imitação - 2&nbsp; Referencial Teórico: Pensamento Computacional, Raciocínio Algorítmico e DAAD</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./inte.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html">Contextualização e Pesquisa</a></li><li class="breadcrumb-item"><a href="./intro.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Referencial Teórico: Pensamento Computacional, Raciocínio Algorítmico e DAAD</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Virando o Jogo da Imitação</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/linefollower" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Contextualização e Pesquisa</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Referencial Teórico: Pensamento Computacional, Raciocínio Algorítmico e DAAD</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./inte.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Analisando Currículos Internacionais</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./def.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Definição e Princípios da Metodologia DAAD</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Disciplina Raciocínio Algorítmico</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./desen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Projeto de Disciplina de Raciocínio Algorítmico</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./desenv1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><strong>Módulo 1</strong>: Semanas 1-3 (12 Horas-Aula): Introdução ao Raciocínio Algorítmico e Decomposição</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./desenv2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title"><strong>Módulo 2</strong>: Semanas 4-8 (20 Horas-Aula): Abstração e Reconhecimento de Padrões</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./desenv3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>Módulo 3</strong>: Semanas 9-13 (20 Horas-Aula): Algoritmização e Estruturas de Dados</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./desenv4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>Módulo 4</strong>: Semanas 14-16 (12 Horas-Aula): Depuração e Aplicação em Projetos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./referencias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referências</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-problema" id="toc-sec-problema" class="nav-link active" data-scroll-target="#sec-problema"><span class="header-section-number">2.1</span> A Jornada Inacabada: O Problema do Ensino do Raciocínio Algorítmico</a></li>
+  <li><a href="#definições-fundamentais" id="toc-definições-fundamentais" class="nav-link" data-scroll-target="#definições-fundamentais"><span class="header-section-number">2.2</span> Definições Fundamentais</a></li>
+  <li><a href="#primeiro-contato-com-a-metodologia-daad" id="toc-primeiro-contato-com-a-metodologia-daad" class="nav-link" data-scroll-target="#primeiro-contato-com-a-metodologia-daad"><span class="header-section-number">2.3</span> Primeiro Contato com a Metodologia DAAD</a></li>
+  <li><a href="#sec-estrat" id="toc-sec-estrat" class="nav-link" data-scroll-target="#sec-estrat"><span class="header-section-number">2.4</span> Estratégias Pedagógicas e Materiais Didáticos para o Ensino de DAAD</a>
+  <ul class="collapse">
+  <li><a href="#materiais-didáticos-e-ferramentas" id="toc-materiais-didáticos-e-ferramentas" class="nav-link" data-scroll-target="#materiais-didáticos-e-ferramentas"><span class="header-section-number">2.4.1</span> Materiais Didáticos e Ferramentas</a></li>
+  </ul></li>
+  <li><a href="#melhores-práticas-e-desafios-na-implementação-de-metodologias-de-resolução-de-problemas" id="toc-melhores-práticas-e-desafios-na-implementação-de-metodologias-de-resolução-de-problemas" class="nav-link" data-scroll-target="#melhores-práticas-e-desafios-na-implementação-de-metodologias-de-resolução-de-problemas"><span class="header-section-number">2.5</span> Melhores Práticas e Desafios na Implementação de Metodologias de Resolução de Problemas</a>
+  <ul class="collapse">
+  <li><a href="#melhores-práticas-identificadas-na-literatura" id="toc-melhores-práticas-identificadas-na-literatura" class="nav-link" data-scroll-target="#melhores-práticas-identificadas-na-literatura"><span class="header-section-number">2.5.1</span> Melhores Práticas Identificadas na Literatura</a></li>
+  <li><a href="#desafios-comuns" id="toc-desafios-comuns" class="nav-link" data-scroll-target="#desafios-comuns"><span class="header-section-number">2.5.2</span> Desafios Comuns</a></li>
+  <li><a href="#avaliação-e-mensuração-de-habilidades-de-pensamento-computacional" id="toc-avaliação-e-mensuração-de-habilidades-de-pensamento-computacional" class="nav-link" data-scroll-target="#avaliação-e-mensuração-de-habilidades-de-pensamento-computacional"><span class="header-section-number">2.5.3</span> Avaliação e Mensuração de Habilidades de Pensamento Computacional</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linefollower/edit/main/intro.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linefollower/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html">Contextualização e Pesquisa</a></li><li class="breadcrumb-item"><a href="./intro.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Referencial Teórico: Pensamento Computacional, Raciocínio Algorítmico e DAAD</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Referencial Teórico: Pensamento Computacional, Raciocínio Algorítmico e DAAD</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Está sem tempo? Leia o <a href=".\expresso\intro-expresso.html">Expresso</a>.</p>
+</div>
+</div>
+<p>Este estudo apresenta uma análise sobre a criação de uma disciplina de <strong>Raciocínio Algorítmico</strong> como prova de conceito para o uso da Metodologia <strong>DAAD</strong> (<strong>D</strong>ecomposição, <strong>A</strong>bstração, <strong>A</strong>lgoritmização e <strong>D</strong>epuração)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> por professores de graduação em cursos de Ciência e Engenharia da Computação seguindo uma proposta da Universidade de Cambridge <span class="citation" data-cites="CambridgeMaths">(<a href="referencias.html#ref-CambridgeMaths" role="doc-biblioref">1</a>)</span>. Tal disciplina deverá ser introdutória, primeiro período destes cursos visando criar a estrutura cognitiva necessária ao entendimento da computação e sua aplicação para resolução de problemas. Contudo, o estudo ressalta que a Metodologia <strong>DAAD</strong> pode ser aplicada a qualquer disciplina de qualquer curso, e que o <strong>Pensamento Computacional</strong> é uma habilidade essencial para o século XXI. Tal esforço se mostra necessário devido à crescente importância do <strong>Pensamento Computacional</strong> e, consequentemente, do <strong>Raciocínio Algorítmico</strong>, além da popularização do acesso a ferramentas de Inteligência Artificial <span class="citation" data-cites="AIIndex2025">(<a href="referencias.html#ref-AIIndex2025" role="doc-biblioref">2</a>)</span> <span class="citation" data-cites="Chui2022">(<a href="referencias.html#ref-Chui2022" role="doc-biblioref">3</a>)</span> <span class="citation" data-cites="leinonen2024how">(<a href="referencias.html#ref-leinonen2024how" role="doc-biblioref">4</a>)</span>.</p>
+<p>A motivação para a proposta de criação desta metodologia surgiu da identificação de lacunas no conhecimento dos alunos de Ciência e Engenharia da Computação, percebidas no estudo dos resultados das últimas avaliações do <strong>E</strong>xame <strong>N</strong>acional de <strong>D</strong>esempenho dos <strong>E</strong>studantes, <strong>ENADE</strong>, dos cursos de Ciência da Computação e Engenharia da Computação. Olhando as últimas edições destes exames e considerando apenas as médias das questões discursivas do componente de conhecimento específico com médias de 9,8 e 16,9 de 100, respectivamente <span class="citation" data-cites="BrasilCiencia2021">(<a href="referencias.html#ref-BrasilEngenharia2023" role="doc-biblioref">6</a>)</span>.</p>
+<p>Uma análise mais aprofundada revela que a dificuldade central no ensino da programação não reside na memorização da sintaxe, mas sim no desenvolvimento da capacidade de abstração <span class="citation" data-cites="Kramer2007">(<a href="referencias.html#ref-Kramer2007" role="doc-biblioref">7</a>)</span>. A sintaxe é apenas a manifestação superficial de um um desafio mais profundo para construir modelos mentais de processos computacionais <span class="citation" data-cites="Winslow1996">(<a href="referencias.html#ref-Winslow1996" role="doc-biblioref">8</a>)</span>. A programação exige que os alunos traduzam um problema do mundo real numa sequência de passos inequívocos que uma máquina possa executar. Este processo de tradução é, na sua essência, um ato de abstração <span class="citation" data-cites="mirolo2021abstraction">(<a href="referencias.html#ref-mirolo2021abstraction" role="doc-biblioref">9</a>)</span>: identificar os elementos essenciais do problema, ignorar os detalhes supérfluos e modelar o processo. Muitos alunos fracassam não porque não conseguem memorizar a sintaxe de um ciclo for, mas porque não conseguem abstrair o conceito de iteração a partir de um problema concreto <span class="citation" data-cites="HiebertLefevre1986">(<a href="referencias.html#ref-Lehmann2023" role="doc-biblioref">12</a>)</span>. Além disso, parece haver algumas perspectivas conflitantes sobre quais habilidades cognitivas permitem o desenvolvimento eficaz de algoritmos. Principalmente, porque esta é uma questão em aberto debate na comunidade acadêmica.</p>
+<section id="sec-problema" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="sec-problema"><span class="header-section-number">2.1</span> A Jornada Inacabada: O Problema do Ensino do Raciocínio Algorítmico</h2>
+<p>As críticas ao ensino de <strong>Raciocínio Algorítmico</strong> aparecem de forma relevante na academia a partir das últimas décadas do século XX. Os estudos de Lithner (2008)<span class="citation" data-cites="Lithner2008">(<a href="referencias.html#ref-Lithner2008" role="doc-biblioref">13</a>)</span> destacaram que o ensino tradicional prioriza <strong>Raciocínio Algorítmico Imitativo</strong>, no qual alunos reproduzem procedimentos memorizados, em inglês <em>Familiar Algorithmic Reasoning</em><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, em detrimento do <strong>Raciocínio Matemático Criativo</strong>. Neste último, o aluno resolve o problema criando novas soluções a partir da combinação de conhecimentos díspares. Essa abordagem suprime a capacidade de decompor problemas e construir soluções originais, perpetuando uma cultura de superficialidade cognitiva <span class="citation" data-cites="Harisman2023">(<a href="referencias.html#ref-Harisman2023" role="doc-biblioref">14</a>)</span>. Os trabalhos de Lithner (2008)<span class="citation" data-cites="Lithner2008">(<a href="referencias.html#ref-Lithner2008" role="doc-biblioref">13</a>)</span> e Harisman (2023) indicam que o ensino por imitação é parte significativa do problema. Mas, não é a única.</p>
+<p>Pesquisas em educação matemática indicam que o ensino baseado em <strong>Raciocínio Algorítmico Imitativo</strong> pode comprometer a originalidade dos estudantes na solução de problemas novos. Isso ocorre porque a dependência de algoritmos predefinidos limita a capacidade de adaptação e inovação dos alunos diante de situações inéditas. Conforme Hurrell (2021)<span class="citation" data-cites="Hurrell2021">(<a href="referencias.html#ref-Hurrell2021" role="doc-biblioref">15</a>)</span>, o conhecimento procedimental, <em>como fazer</em>, caracterizado por sequências fixas de ações repetidas, não garante a compreensão necessária para gerar novas estratégias ou adaptar as conhecidas a novos problemas, o que reduz a originalidade na resolução.</p>
+<p>Além disso, o <em>National Council of Teachers of Mathematics</em>, em seus Princípios e Padrões para a Matemática Escolar enfatiza que a aprendizagem matemática deve ir além do domínio de procedimentos algorítmicos e procedurais, promovendo a compreensão conceitual e a flexibilidade cognitiva<span class="citation" data-cites="NCTM2000">(<a href="referencias.html#ref-NCTM2000" role="doc-biblioref">16</a>)</span>. O documento alerta que a dependência excessiva de algoritmos e regras fixas pode inibir a transferência de conhecimentos para contextos inéditos e a capacidade de resolver problemas de forma criativa e inovadora <span class="citation" data-cites="NCTM2000">(<a href="referencias.html#ref-NCTM2000" role="doc-biblioref">16</a>)</span>.</p>
+<p>Estudos empíricos, ainda mais antigos, indicam que estudantes treinados predominantemente com técnicas algorítmicas apresentam até 32% menos originalidade na solução de problemas novos, em comparação com aqueles que desenvolvem compreensão conceitual e estratégias flexíveis <span class="citation" data-cites="HiebertLefevre1986">(<a href="referencias.html#ref-HiebertLefevre1986" role="doc-biblioref">10</a>)</span>.</p>
+<p>Finalmente, existem avaliações sobre a capacidade e eficiência da compreensão. O livro <em>Programming: The Derivation of Algorithms</em> <span class="citation" data-cites="Kaldewaij1990">(<a href="referencias.html#ref-Kaldewaij1990" role="doc-biblioref">17</a>)</span> expôs como o ensino imperativo tradicional foca na sintaxe de laços de repetição e invariantes, usando a lógica de Hoare, negligenciando a construção de entendimento conceituais fundamentais. Essa metodologia foi criticada por substituir o “porquê” pelo “como”, limitando o <strong>Pensamento Computacional</strong> profundo <span class="citation" data-cites="GibbonsHaskell2020">(<a href="referencias.html#ref-GibbonsHaskell2020" role="doc-biblioref">18</a>)</span>. A <a href="#tbl-persiste1" class="quarto-xref">Table&nbsp;<span>2.1</span></a> resume as principais críticas ao ensino tradicional de <strong>Raciocínio Algorítmico</strong>.</p>
+<div id="tbl-persiste1" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-persiste1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.1: Estudos e possíveis razões por trás dos problemas persistentes no ensino de <strong>Raciocínio Algorítmico</strong>.
+</figcaption>
+<div aria-describedby="tbl-persiste1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 38%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Fator</th>
+<th>Impacto Histórico</th>
+<th>Evidência Atual</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Currículos Baseados em Eficiência</strong></td>
+<td>Priorização de otimização (ex: complexidade O(n)) sobre metacognição.</td>
+<td>Algoritmos como <em>QuickSort</em> são ensinados como fórmulas pré-definidas, sem discussão ou cognição <span class="citation" data-cites="GibbonsHaskell2020">(<a href="referencias.html#ref-GibbonsHaskell2020" role="doc-biblioref">18</a>)</span>.</td>
+</tr>
+<tr class="even">
+<td><strong>Falta de Formação Docente</strong></td>
+<td>Professores reproduzem métodos tradicionais por falta de treino em pedagogia criativa.</td>
+<td>Estudos mostram que educadores não dominam técnicas para mitigar dependência de Inteligência Artificial <span class="citation" data-cites="BirdDeMoor1997">(<a href="referencias.html#ref-BirdDeMoor1997" role="doc-biblioref">19</a>)</span></td>
+</tr>
+<tr class="odd">
+<td><strong>Infraestrutura Cognitiva</strong></td>
+<td>Modelos mentais baseados em <strong>Raciocínio Algorítmico Imitativo</strong> dificultam a transição para <strong>Raciocínio Matemático Criativo</strong>.</td>
+<td>Meta-análises confirmam baixa transferência de conceitos algorítmicos entre domínios <span class="citation" data-cites="Harisman2023">(<a href="referencias.html#ref-Gundogdu2023" role="doc-biblioref">20</a>)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Um problema mais recente para a criação das competências que levem ao <strong>Raciocínio Algorítmico</strong> e ao <strong>Pensamento Computacional</strong> parece estar relacionado com a Inteligência Artificial<span class="citation" data-cites="leinonen2024how">(<a href="referencias.html#ref-leinonen2024how" role="doc-biblioref">4</a>)</span>.</p>
+<p>O interesse na pesquisa de soluções de Inteligência Artificial, que segundo a <a href="#fig-graf1" class="quarto-xref">Figure&nbsp;<span>2.1</span></a> se acentuou a partir de 2010.</p>
+<div id="fig-graf1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-graf1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src=".\images/graph1.webp" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-graf1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: Gráfico mostrando a evolução de publicações sobre Inteligência Artificial por tipo de publicação <span class="citation" data-cites="AIIndex2025">(<a href="referencias.html#ref-AIIndex2025" role="doc-biblioref">2</a>)</span>.
+</figcaption>
+</figure>
+</div>
+<p>Este crescimento teve impacto na disponibilidade destas tecnologias, o que pode ser corroborado se considerarmos o aumento do uso de dispositivos contendo soluções embarcadas de Inteligência Artificial como pode ser visto na <a href="#fig-graf2" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>.</p>
+<div id="fig-graf2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-graf2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src=".\images/graph2.webp" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-graf2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.2: Gráfico mostrando a evolução do número de dispositivos médicos contendo Inteligência Artificial embarcada segundo os dados da <span class="citation" data-cites="AIIndex2025">(<a href="referencias.html#ref-AIIndex2025" role="doc-biblioref">2</a>)</span>.
+</figcaption>
+</figure>
+</div>
+<p>Esta velocidade de adaptação parece ter impactos negativos no binômio ensino-aprendizagem de forma geral em todos os cursos e formações.</p>
+<p>Um estudo recente conduzido pelo MIT Media Lab, intitulado <em>Your Brain on ChatGPT: Accumulation of Cognitive Debt when Using an AI Assistant for Essay Writing Task</em><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, publicado em junho de 2025, investigou os impactos do uso de modelos de linguagem grandes (LLMs), como o ChatGPT, na cognição humana, especificamente no contexto da escrita de ensaios<span class="citation" data-cites="kosmyna2025">(<a href="referencias.html#ref-kosmyna2025" role="doc-biblioref">21</a>)</span>. O estudo, ainda em forma de preprint e não revisado por pares, envolveu 54 participantes divididos em três grupos: um que utilizou o ChatGPT, outro que usou ferramentas de busca tradicionais e um terceiro que escreveu sem qualquer auxílio. Os resultados indicaram que os participantes que utilizaram o ChatGPT apresentaram menor atividade cerebral, menor retenção de memória e menor originalidade em seus escritos em comparação com os outros grupos<span class="citation" data-cites="kosmyna2025">(<a href="referencias.html#ref-kosmyna2025" role="doc-biblioref">21</a>)</span>. Além disso, o estudo sugeriu que o uso prolongado de LLMs pode levar a uma “dívida cognitiva”, com possíveis implicações a longo prazo para o aprendizado e o desenvolvimento cognitivo. No entanto, devido às limitações do estudo, como o tamanho da amostra e o foco específico no ChatGPT, os achados devem ser interpretados com cautela, e mais pesquisas são necessárias para generalizar os resultados <span class="citation" data-cites="kosmyna2025">(<a href="referencias.html#ref-kosmyna2025" role="doc-biblioref">21</a>)</span>.</p>
+<p>O estudo de SILVA QUINTO, W. A. et al. <span class="citation" data-cites="SilvaQuinto2025">(<a href="referencias.html#ref-SilvaQuinto2025" role="doc-biblioref">22</a>)</span> investiga o impacto da Inteligência Artificial no desenvolvimento do pensamento crítico entre estudantes de Tecnologia da Informação na Região Norte do Brasil. Utilizando uma abordagem de métodos mistos, a pesquisa coletou e analisou respostas de 101 estudantes para entender suas percepções sobre o papel da Inteligência Artificial na sua formação acadêmica. Os resultados revelam que uma grande maioria (88,1%) reconhece a influência da Inteligência Artificial em seus estudos, com quase metade (47,3%) acreditando que as ferramentas de Inteligência Artificial facilitam a aprendizagem. No entanto, uma menor porção (13,2%) expressa preocupações de que a Inteligência Artificial pode impedir o desenvolvimento do pensamento crítico<span class="citation" data-cites="SilvaQuinto2025">(<a href="referencias.html#ref-SilvaQuinto2025" role="doc-biblioref">22</a>)</span>.</p>
+<p>O artigo <em>Teaching AI with games: the impact of generative AI drawing on computational thinking skills</em><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>, publicado em 2025, investiga o impacto do uso de ferramentas generativas de Inteligência Artificial, como ferramentas generativas para desenho, no desenvolvimento de habilidades de <strong>Pensamento Computacional</strong> em 56 alunos do sexto ano de escolas no norte de Taiwan<span class="citation" data-cites="Hsu2025">(<a href="referencias.html#ref-Hsu2025" role="doc-biblioref">23</a>)</span>. Divididos em dois grupos: o experimental usando estas ferramentas com Inteligência Artificial embarcada e programação baseada em blocos para criar jogos; e o grupo de controle, usando ferramentas de busca disponíveis na internet. Os resultados indicaram que o grupo que usou Inteligência Artificial apresentou 23% menos domínio em abstração e uso de padrões lógicos, embora tenha completado tarefas mais rapidamente. A pesquisa sugere que a Inteligência Artificial (IA) acelera a execução, mas reduz a cognição lógica<span class="citation" data-cites="Hsu2025">(<a href="referencias.html#ref-leinonen2024how" role="doc-biblioref">4</a>)</span>. Ainda que os autores tenham usado o termo <strong>Pensamento Algorítmico</strong> como sinônimo do conceito que neste estudo será representado, muitas vezes, por uma de suas partes o <strong>Raciocínio Algorítmico</strong>. É preciso ressaltar que o artigo destaca a necessidade de integrar essas ferramentas de forma equilibrada para promover habilidades que estão intimamente relacionadas com o <strong>Pensamento Computacional</strong>.</p>
+<p>Nem tudo são avaliações negativas; ao longo do tempo foram realizadas tentativas de resolver os problemas do ensino de <strong>Raciocínio Algorítmico</strong>. Duas abordagens que se destacam: a <em>Constructive Algorithmics</em>, que em português poderia ser traduzida como algorítmica construtiva, e a Computação <em>unplugged</em>.</p>
+<p>A abordagem <em>Constructive Algorithmics</em>, desenvolvida por Richard Bird e Oege de Moor em 1997@BirdDeMoor1997, fundamenta-se no uso de <strong>raciocínio equacional</strong> e princípios da álgebra de programas por meio de uma abordagem matemática para a construção de programas de computador, tratando a programação como uma disciplina de engenharia e não como uma arte baseada em tentativa e erro<span class="citation" data-cites="BirdDeMoor1997">(<a href="referencias.html#ref-BirdDeMoor1997" role="doc-biblioref">19</a>)</span>. Esta metodologia prioriza a correção formal e a elegância matemática, permitindo a construção de algoritmos por meio de transformações verificáveis passo a passo. Um exemplo emblemático é a derivação de algoritmos de ordenação, como <em>insertion sort</em>, via composição funcional, no qual propriedades matemáticas garantem robustez lógica. Jeremy Gibbons 2020@GibbonsHaskell2020 aplicou esses mesmos princípios em <em>Algorithm Design with Haskell</em><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
+<p>A computação <em>unplugged</em> emerge como contraponto pedagógico, utilizando atividades manuais, como jogos de tabuleiro para decomposição de problemas e atividades com lápis e papel, para desenvolver bases conceituais do pensamento computacional. Estudos empíricos comprovam ganhos de até 37% no pensamento sistêmico e computacional. Os alunos internalizam conceitos abstratos, recursão, paralelismo, por meio de manipulação física e erro reflexivo <span class="citation" data-cites="TsaiYang2019">(<a href="referencias.html#ref-TsaiYang2019" role="doc-biblioref">24</a>)</span>. Porém sua eficácia decai em problemas de alta complexidade, como problemas de programação dinâmica ou otimização combinatorial, nos quais a abstração simbólica é indispensável. Por outro lado, estudos comparativos, como <em>Unplugged versus plugged-in: examining basic programming achievement and computational thinking of 6th-grade students</em><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> <span class="citation" data-cites="PolatYilmaz2022">(<a href="referencias.html#ref-PolatYilmaz2022" role="doc-biblioref">25</a>)</span>, demonstram que a falta de transição para ferramentas digitais limita a aplicação prática: alunos dominam puzzles com blocos, mas falham em traduzir lógica para código em problemas do mundo real, expondo uma fratura escalar no modelo <span class="citation" data-cites="Brackmann2022">(<a href="referencias.html#ref-Brackmann2022" role="doc-biblioref">26</a>)</span>.</p>
+<p>A <a href="#tbl-compara3" class="quarto-xref">Table&nbsp;<span>2.2</span></a> resume as principais diferenças entre as abordagens <em>Constructive Algorithmics</em> e Computação <em>unplugged</em>.</p>
+<div id="tbl-compara3" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-compara3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.2: Comparação entre as abordagens <em>Constructive Algorithmics</em> e Computação <em>unplugged</em>.
+</figcaption>
+<div aria-describedby="tbl-compara3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 36%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Abordagem</strong></th>
+<th><strong>Descrição</strong></th>
+<th><strong>Pontos Fortes</strong></th>
+<th><strong>Limitações</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Algorítmica Construtiva</strong></td>
+<td>Usa raciocínio equacional e álgebra de programas para derivar algoritmos em linguagens funcionais como Haskell <span class="citation" data-cites="BirdDeMoor1997">(<a href="referencias.html#ref-Gibbons2020" role="doc-biblioref">27</a>)</span>.</td>
+<td>Rigor matemático, correção formal, elegância na derivação de algoritmos (ex.: quicksort).</td>
+<td>Descontextualização ética, negligencia impactos sociais.</td>
+</tr>
+<tr class="even">
+<td><strong>Computação <em>Unplugged</em></strong></td>
+<td>Utiliza atividades manuais (ex.: jogos de tabuleiro) para ensinar <strong>Pensamento Computacional</strong><span class="citation" data-cites="TsaiYang2019">(<a href="referencias.html#ref-PolatYilmaz2022" role="doc-biblioref">25</a>)</span>.</td>
+<td>Ganhos de até 37% no pensamento sistêmico, internalização intuitiva de conceitos (recursão, paralelismo).</td>
+<td>Ineficaz em problemas complexos (ex.: programação dinâmica), limitada transição para ferramentas digitais.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Da ambiguidade, surge a integração híbrida como caminho promissor: iniciam-se com atividades não digitais, ou eletrônicas, para fundamentos e migra-se para <em>Constructive Algorithmics</em> com extensões que incluem análise como análise de vieses em algoritmos reais. Bird e de Moor em 1997@BirdDeMoor1997 já forneceram base para isso: seu método equacional pode ser estendido enquanto Gibbons (2020)<span class="citation" data-cites="Gibbons2020">(<a href="referencias.html#ref-Gibbons2020" role="doc-biblioref">27</a>)</span> oferece ferramentas para essa transição ao usar Haskell em exemplos aplicados.</p>
+<p>Das pesquisas citadas é possível inferir que o ensino de <strong>Raciocínio Algorítmico</strong> e <strong>Pensamento Computacional</strong> permanece irresoluto porque supervaloriza eficiência em detrimento da análise: nas décadas de 1980 a 2000, pedagogias formaram gerações capazes de implementar <em>BubbleSort</em>, mas não de questionar <em>por que usá-lo</em> <span class="citation" data-cites="Gibbons2020">(<a href="referencias.html#ref-Gibbons2020" role="doc-biblioref">27</a>)</span>. Hoje, sistemas baseados em Inteligência Artificial agravam a superficialidade cognitiva <span class="citation" data-cites="Hsu2025">(<a href="referencias.html#ref-leinonen2024how" role="doc-biblioref">4</a>)</span>.</p>
+<p>Hoje, em julho de 2025, o cenário educacional ainda carece de uma abordagem unificada e estruturada para o ensino do <strong>Pensamento Computacional</strong> e do <strong>Raciocínio Algorítmico</strong>. A falta de uma metodologia clara, eficaz e prática para o ensino desses conceitos fundamentais limita o desenvolvimento das habilidades necessárias para a resolução de problemas computacionais. Dessa forma, este estudo propõe a criação de uma disciplina introdutória que utiliza a Metodologia <strong>DAAD</strong> como base para o desenvolvimento dessas competências, visando preencher essa lacuna no ensino superior. Uma disciplina que poderá ser chamada de <strong>Raciocínio Algorítmico</strong>.</p>
+</section>
+<section id="definições-fundamentais" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="definições-fundamentais"><span class="header-section-number">2.2</span> Definições Fundamentais</h2>
+<p>O <strong>Pensamento Computacional</strong> é uma estrutura que descreve um conjunto de habilidades de pensamento crítico e resolução de problemas, que tem ganhado significativa relevância como uma forma eficaz de ensinar essas habilidades em ambientes educacionais formais <span class="citation" data-cites="Huang2020ComputationalThinking">(<a href="referencias.html#ref-Araujo2016" role="doc-biblioref">29</a>)</span>. Embora não seja a única abordagem para desenvolver essas competências, o <strong>Pensamento Computacional</strong> oferece uma maneira de analisar problemas para gerar soluções automatizadas ou semi-automatizadas que utilizam as capacidades únicas das tecnologias computacionais <span class="citation" data-cites="Li2020">(<a href="referencias.html#ref-Li2020" role="doc-biblioref">30</a>)</span>.</p>
+<p>É necessário considerar que o termo <strong>Pensamento Computacional</strong> parece ter sido criado por Papert (1985)<span class="citation" data-cites="Papert1985">(<a href="referencias.html#ref-Papert1985" role="doc-biblioref">31</a>)</span>, mas foi popularizado por <a href="https://datascience.columbia.edu/people/jeannette-m-wing/">Jeannette Wing</a>, em 2006@Wing2006, argumentando que o <strong>Pensamento Computacional</strong> deveria ser considerado uma habilidade indispensável para todos, comparável à leitura, escrita e aritmética. Conceito no qual ela é apoiada por Saidin (2021)<span class="citation" data-cites="Saidin2021">(<a href="referencias.html#ref-Saidin2021" role="doc-biblioref">32</a>)</span> e pela <em>Computer Science Teachers Association</em>@CSTA2011a. O <strong>Pensamento Computacional</strong> é reconhecido globalmente como uma das habilidades vitais para o século XXI, essencial para a resolução de problemas complexos em diversas áreas <span class="citation" data-cites="CSTA2011a">(<a href="referencias.html#ref-CSTA2011a" role="doc-biblioref">33</a>)</span>. O que pode ser corroborado com a pesquisa bibliográfica, realizada via internet, em sites de universidades nos EUA, Reino Unido, Europa e China. Esta pesquisa demonstrou uma tendência crescente na integração do <strong>Pensamento Computacional</strong> nos currículos de graduação, com ênfase em abordagens práticas e baseadas em projetos cujas características veremos na <a href="inte.html" class="quarto-xref"><span>Chapter 3</span></a>.</p>
+<p>Jeannette Wing define o <strong>Pensamento Computacional</strong> como <em>“os processos de pensamento envolvidos na formulação de problemas e suas soluções de forma que as soluções possam ser efetivamente executadas por um agente de processamento de informações”</em> <span class="citation" data-cites="Wing2006">(<a href="referencias.html#ref-Wing2006" role="doc-biblioref">11</a>)</span>. Ela também o descreve como a resolução de problemas, o design de sistemas e a compreensão do comportamento humano, baseando-se em conceitos estruturantes da ciência da computação <span class="citation" data-cites="Wing2006">(<a href="referencias.html#ref-TedreDenning2016" role="doc-biblioref">34</a>)</span>. O <strong>Pensamento Computacional</strong> é uma combinação de hábitos mentais disciplinados, atitudes de perseverança e habilidades interpessoais essenciais <span class="citation" data-cites="Lehmann2023">(<a href="referencias.html#ref-Lehmann2023" role="doc-biblioref">12</a>)</span>. Ele se distingue de outras abordagens de resolução de problemas, como o <strong>Pensamento Científico</strong> ou o <em>design thinking</em>, principalmente por seu foco em soluções algorítmicas e no desenvolvimento de sistemas que envolvem processamento de informações <span class="citation" data-cites="CSTA2011a">(<a href="referencias.html#ref-Curzon2019" role="doc-biblioref">35</a>)</span>.</p>
+<p>De acordo com Wing (2006) <span class="citation" data-cites="Wing2006">(<a href="referencias.html#ref-Wing2006" role="doc-biblioref">11</a>)</span>, o <strong>Pensamento Computacional</strong> estrutura-se em componentes fundamentais que transcendem a mera programação: a <strong>decomposição</strong>, fragmentação de problemas complexos em partes gerenciáveis, o <strong>reconhecimento de padrões</strong>, identificação de similaridades e tendências em diferentes contextos, a <strong>abstração</strong>, seleção de elementos essenciais e eliminação de detalhes irrelevantes, e o <strong>design algorítmico</strong>, criação de instruções passo a passo para solução automatizada, complementados por processos de <strong>generalização</strong>, aplicação de soluções a problemas análogos e <strong>modelagem</strong>, representação de sistemas do mundo real através de estruturas computacionais, formando uma abordagem holística para a resolução eficiente de problemas <span class="citation" data-cites="Wing2006">(<a href="referencias.html#ref-Wing2006" role="doc-biblioref">11</a>)</span>.</p>
+<p>As características e a definição de <strong>Pensamento Computacional</strong> criam o cenário necessário ao entendimento do problema do ensino de <strong>Raciocínio Algorítmico</strong>.</p>
+<p>Em essência, o raciocínio algorítmico pode ser definido como uma forma de pensamento lógico e organizado utilizada para desmembrar um objetivo complexo em uma série de etapas ordenadas, empregando as ferramentas disponíveis <span class="citation" data-cites="Lehmann2023">(<a href="referencias.html#ref-Lehmann2023" role="doc-biblioref">12</a>)</span>. Um método de pensamento que guia processos de raciocínio por meio de procedimentos passo a passo, que exigem entradas e produzem saídas, demandando decisões sobre a qualidade e adequação das informações, e monitorando os próprios processos de pensamento para controlá-los e dirigi-los <span class="citation" data-cites="Lehmann2024">(<a href="referencias.html#ref-Lehmann2023" role="doc-biblioref">12</a>)</span>. É, portanto, simultaneamente um método de pensar e um meio para pensar sobre o próprio pensamento <span class="citation" data-cites="Lehmann2024">(<a href="referencias.html#ref-Lehmann2023" role="doc-biblioref">12</a>)</span>.</p>
+<p>Este constructo envolve um conjunto de habilidades cognitivas cruciais para a construção, compreensão e avaliação de algoritmos muito similares às habilidades necessárias para o <strong>Pensamento Computacional</strong>. As principais habilidades cognitivas que compõem o <strong>Raciocínio Algorítmico</strong> incluem <span class="citation" data-cites="Lehmann2024">(<a href="referencias.html#ref-Lehmann2023" role="doc-biblioref">12</a>)</span>:</p>
+<ul>
+<li><strong>Decomposição</strong>: a capacidade de fragmentar um problema ou sistema complexo em partes menores ou sub-objetivos mais gerenciáveis <span class="citation" data-cites="Lehmann2024">(<a href="referencias.html#ref-Lehmann2023" role="doc-biblioref">12</a>)</span>.</li>
+<li><strong>Abstração</strong>: habilidade de identificar os componentes essenciais de um problema ou sistema, o que implica coletar informações relevantes e descartar as irrelevantes, construindo representações que demonstrem como o problema ou sistema funciona <span class="citation" data-cites="Lehmann2024">(<a href="referencias.html#ref-Lehmann2023" role="doc-biblioref">12</a>)</span>.</li>
+<li><strong>Algoritmização</strong> (ou Design Algorítmico): o desenvolvimento de uma sequência de passos lógicos e ordenados para resolver um problema ou alcançar um objetivo <span class="citation" data-cites="Lehmann2024">(<a href="referencias.html#ref-Lehmann2023" role="doc-biblioref">12</a>)</span>. As regras que especificam o algoritmo devem ser precisas e determinadas <span class="citation" data-cites="Lehmann2023">(<a href="referencias.html#ref-Lehmann2023" role="doc-biblioref">12</a>)</span>.</li>
+<li><strong>Compreensão, Análise e Especificação Precisa de Problemas</strong>: inclui a formulação de problemas e o desenvolvimento de uma sequência de passos composta por ações básicas que os resolverão, considerando casos simples e complexos, normais e especiais <span class="citation" data-cites="Lehmann2024">(<a href="referencias.html#ref-Lehmann2024" role="doc-biblioref">36</a>)</span>.</li>
+<li><strong>Avaliação e Otimização</strong>: a capacidade de avaliar, aprimorar ou otimizar a eficiência de um algoritmo, considerando abordagens alternativas <span class="citation" data-cites="Lehmann2024">(<a href="referencias.html#ref-Lehmann2024" role="doc-biblioref">36</a>)</span>.</li>
+</ul>
+<p>Historicamente, o termo <strong>Raciocínio Algorítmico</strong> antecedeu e se fundiu com o <strong>Pensamento Computacional</strong> <span class="citation" data-cites="Hijn-Neira2024">(<a href="referencias.html#ref-Hijn-Neira2024" role="doc-biblioref">37</a>)</span>. <a href="https://en.wikipedia.org/wiki/Alan_Perlis">Alan Perlis</a>, na década de 1960, cunhou o termo <em>algoritmizar</em> para descrever uma prática e um pensamento que levariam à automação de procedimentos em todas as indústrias <span class="citation" data-cites="Hijn-Neira2024">(<a href="referencias.html#ref-Hijn-Neira2024" role="doc-biblioref">37</a>)</span>. <a href="https://en.wikipedia.org/wiki/Edsger_W._Dijkstra">Edsger Dijkstra</a>, um dos pilares da Ciência da Computação, delineou características do raciocínio algorítmico, como a capacidade de transitar entre níveis semânticos e de utilizar a língua materna como ponte entre problemas informais e soluções formais <span class="citation" data-cites="Hijn-Neira2024">(<a href="referencias.html#ref-Hijn-Neira2024" role="doc-biblioref">37</a>)</span>.</p>
+<p>No contexto do <strong>Pensamento Computacional</strong>, a automação é um elemento indispensável para caracterizar a essência do raciocínio algorítmico, distinguindo-o de outras formas de pensamento, como o matemático, ao focar na implementação de instruções em dispositivos digitais por meio de programação <span class="citation" data-cites="Huang2020ComputationalThinking">(<a href="referencias.html#ref-Huang2020ComputationalThinking" role="doc-biblioref">28</a>)</span>. Este é, portanto, um pilar que permite a concepção de soluções que exploram as capacidades únicas das tecnologias computacionais.</p>
+<p>Em sua pesquisa, Ribeiro, L. et al (2017)<span class="citation" data-cites="Ribeiro2017">(<a href="referencias.html#ref-Ribeiro2017" role="doc-biblioref">38</a>)</span> diferenciam <strong>raciocínio lógico</strong>, fundamentado em premissas e inferências, do <strong>raciocínio computacional</strong>, focado em <em>abstração</em>, <em>automação</em> e <em>análise</em>, enquanto fazem avaliações sobre a redução do <strong>Pensamento Computacional</strong> à criação de algoritmos, ressaltando que o <strong>Raciocínio Algorítmico</strong> é apenas um dos pilares do <strong>Pensamento Computacional</strong>, não sua totalidade. KONG, S. et al.@Kong2019 destacam que o <strong>Raciocínio Algorítmico</strong> é frequentemente confundido com o <strong>Pensamento Computacional</strong> por ser seu elemento mais tangível, especialmente em contextos de programação. Mais tarde, estes mesmos autores alertam que essa visão reduz o <strong>Pensamento Computacional</strong> a habilidades técnicas, negligenciando pilares como a decomposição de problemas e o pensamento analítico<span class="citation" data-cites="Kong2020">(<a href="referencias.html#ref-Kong2020" role="doc-biblioref">39</a>)</span>. O estudo de MEDEIROS (2024)<span class="citation" data-cites="Medeiros2024">(<a href="referencias.html#ref-Medeiros2024" role="doc-biblioref">40</a>)</span> analisou 38 trabalhos brasileiros sobre <strong>Pensamento Computacional</strong> (2018–2024) e identificou que 76% deles equiparavam <strong>Pensamento Computacional</strong> ao ensino de algoritmos, via Scratch (<span class="citation" data-cites="ScratchFoundation">(<a href="referencias.html#ref-ScratchFoundation" role="doc-biblioref">41</a>)</span>) ou aplicações de robótica. Concluindo que a ênfase excessiva no <strong>Raciocínio Algorítmico</strong> subestima outros pilares do <strong>Pensamento Computacional</strong>, tais como pensamento algébrico e resolução criativa de problemas <span class="citation" data-cites="SBC2017">(<a href="referencias.html#ref-SBC2017" role="doc-biblioref">42</a>)</span>.</p>
+<p>Uma questão interessante surge do trabalho de Hora (2022)<span class="citation" data-cites="Hora2022">(<a href="referencias.html#ref-Hora2022" role="doc-biblioref">43</a>)</span> que destaca que no Brasil o <strong>Pensamento Computacional</strong> é frequentemente restrito a disciplinas de exatas, Matemática e Computação, nas quais o <strong>Raciocínio Algorítmico</strong> domina as práticas pedagógicas, fazendo análises sobre o viés tecnicista que ignora dimensões como abstração contextualizada e análise sociotécnica. Destacando a abrangência do <strong>Pensamento Computacional</strong>. Dessa forma Hora (2022)<span class="citation" data-cites="Hora2022">(<a href="referencias.html#ref-Hora2022" role="doc-biblioref">43</a>)</span> sustenta os trabalhos de Wing (2006) <span class="citation" data-cites="Wing2006">(<a href="referencias.html#ref-Wing2006" role="doc-biblioref">11</a>)</span> e <span class="citation" data-cites="Lehmann2023">(<a href="referencias.html#ref-Lehmann2023" role="doc-biblioref">12</a>)</span>. Além disso, Felipussi e Padua (2023)<span class="citation" data-cites="FelipussiPadua2023">(<a href="referencias.html#ref-FelipussiPadua2023" role="doc-biblioref">44</a>)</span> perceberam que os professores tendem a associar <strong>Pensamento Computacional</strong> diretamente à programação de robôs, tratando algoritmo como sinônimo de <strong>Pensamento Computacional</strong>.</p>
+<p>A própria Sociedade Brasileira de Computação (2017)<span class="citation" data-cites="SBC2017">(<a href="referencias.html#ref-SBC2017" role="doc-biblioref">42</a>)</span> adverte que a <strong>BNCC</strong> (<strong>B</strong>ase <strong>N</strong>acional <strong>C</strong>omum <strong>C</strong>urricular) não distingue claramente <strong>Raciocínio Algorítmico</strong> e <strong>Pensamento Computacional</strong>, gerando ambiguidade em propostas pedagógicas e recomenda equilibrar o ensino de algoritmos com atividades de <strong>decomposição de problemas não lineares</strong>.</p>
+<p>Finalmente, existem trabalhos que indicam que a ambiguidade entre <strong>Pensamento Computacional</strong> e <strong>Raciocínio Algorítmico</strong> pode ter consequências negativas na formação do indivíduo.</p>
+<p>Do trabalho de Medeiros (2024)<span class="citation" data-cites="Medeiros2024">(<a href="referencias.html#ref-Medeiros2024" role="doc-biblioref">40</a>)</span> podemos inferir que os estudantes desenvolvem habilidades técnicas (ex.: codificar em blocos) mas falham em aplicar <strong>Pensamento Computacional</strong> em contextos interdisciplinares. As humanidades e artes raramente integram <strong>Pensamento Computacional</strong> em seus currículos, pois o <strong>Raciocínio Algorítmico</strong> é visto como não aplicável <span class="citation" data-cites="Futura2023">(<a href="referencias.html#ref-Futura2023" role="doc-biblioref">45</a>)</span>. Por fim, as avaliações de <strong>Pensamento Computacional</strong> focam em correção algorítmica e eficiência do código, não em processos mentais como abstração <span class="citation" data-cites="Kong2019">(<a href="referencias.html#ref-Kong2019" role="doc-biblioref">46</a>)</span>.</p>
+</section>
+<section id="primeiro-contato-com-a-metodologia-daad" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="primeiro-contato-com-a-metodologia-daad"><span class="header-section-number">2.3</span> Primeiro Contato com a Metodologia DAAD</h2>
+<p>A Metodologia <strong>DAAD</strong> (<strong>D</strong>ecomposição, <strong>A</strong>bstração, <strong>A</strong>lgoritmização e <strong>D</strong>epuração), aqui proposta, estende uma discussão da Cambridge Mathmatics <span class="citation" data-cites="CambridgeMaths">(<a href="referencias.html#ref-CambridgeMaths" role="doc-biblioref">1</a>)</span> e a análise feita por LEHMANN (2024)<span class="citation" data-cites="Lehmann2024">(<a href="referencias.html#ref-Lehmann2024" role="doc-biblioref">36</a>)</span>, sob os efeitos da algoritmização. O que este estudo propõe difere dos estudos anteriores por apresentar um <em>framework</em> prático iterativo de ações, exercícios e temas de estudo com o intuito de permitir a criação de <strong>Pensamento Computacional</strong> e <strong>Raciocínio Algorítmico</strong> em alunos de graduação, baseado nos estudos teóricos e empíricos de Wing (2006)<span class="citation" data-cites="Wing2006">(<a href="referencias.html#ref-Wing2006" role="doc-biblioref">11</a>)</span>, Lehmann (2023, 2024)<span class="citation" data-cites="Lehmann2023">(<a href="referencias.html#ref-Lehmann2023" role="doc-biblioref">12</a>)</span>,<span class="citation" data-cites="Lehmann2024">(<a href="referencias.html#ref-Lehmann2024" role="doc-biblioref">36</a>)</span>, Kirwan (2022)<span class="citation" data-cites="kirwan2022adaptter">(<a href="referencias.html#ref-kirwan2022adaptter" role="doc-biblioref">47</a>)</span>, KONG, Siu-Cheung et al.&nbsp;(2019)<span class="citation" data-cites="Kong2019">(<a href="referencias.html#ref-Kong2019" role="doc-biblioref">46</a>)</span> e muitos outros que estão citados ao longo deste documento, sobre temas que abordam o <strong>Raciocínio Algorítmico</strong> e o <strong>Pensamento Computacional</strong>. Para tanto, este <em>framework</em> está estruturado em quatro estágios iterativos:</p>
+<ol type="1">
+<li><p><strong>Decomposição (D)</strong>: processo de fragmentação de problemas complexos em subproblemas gerenciáveis, seguindo princípios de divisão funcional ou estrutural. Exemplo: Quebrar um sistema de recomendação em: coleta de dados, filtragem, ranking e interface. Wing (2006)<span class="citation" data-cites="Wing2006">(<a href="referencias.html#ref-Wing2006" role="doc-biblioref">11</a>)</span>, SBC (2017)<span class="citation" data-cites="SBC2017">(<a href="referencias.html#ref-SBC2017" role="doc-biblioref">42</a>)</span> e Lehmann (2024)<span class="citation" data-cites="Lehmann2024">(<a href="referencias.html#ref-Lehmann2024" role="doc-biblioref">36</a>)</span> estabelecem decomposição como pilar cognitivo essencial.</p></li>
+<li><p><strong>Abstração (A)</strong>: identificação seletiva de padrões e invariantes essenciais, com descarte consciente de detalhes irrelevantes ao núcleo do problema. Exemplo: Modelar tráfego urbano considerando apenas fluxo veicular médio, ignorando marcas e combustível. Baseia-se no conceito de “abstração progressiva” perceptível na Linguagem LOGO de Papert (1985)<span class="citation" data-cites="Papert1985">(<a href="referencias.html#ref-Papert1985" role="doc-biblioref">31</a>)</span>.</p></li>
+<li><p><strong>Algoritmização (A)</strong>: formulação de soluções por meio de sequências lógico-operacionais, garantindo completude e implementabilidade. Exemplo: Projetar heurística para otimização de rotas usando grafos valorados e seleção gulosa. Alinha-se ao paradigma de descrição de estados finais. A essência do projeto algorítmico reside na descrição formal de estados finais, nos quais a corretude é verificada pelo atendimento inequívoco de pós-condições <span class="citation" data-cites="Hoare1969">(<a href="referencias.html#ref-BirdDeMoor1997" role="doc-biblioref">19</a>)</span>. Incluímos aqui, os conceitos:</p>
+<ul>
+<li><strong>Algoritmização</strong> (ou Design Algorítmico): o desenvolvimento de uma sequência de passos lógicos e ordenados para resolver um problema ou alcançar um objetivo <span class="citation" data-cites="Lehmann2024">(<a href="referencias.html#ref-Lehmann2023" role="doc-biblioref">12</a>)</span>. As regras que especificam o algoritmo devem ser precisas e determinadas <span class="citation" data-cites="Lehmann2023">(<a href="referencias.html#ref-Lehmann2023" role="doc-biblioref">12</a>)</span>.</li>
+<li><strong>Compreensão, Análise e Especificação Precisa de Problemas</strong>: inclui a formulação de problemas e o desenvolvimento de uma sequência de passos composta por ações básicas que os resolverão, considerando casos simples e complexos, normais e especiais <span class="citation" data-cites="Lehmann2024">(<a href="referencias.html#ref-Lehmann2024" role="doc-biblioref">36</a>)</span>.</li>
+</ul></li>
+</ol>
+<p>Notadamente porque o segundo é parte integrante do primeiro, e ambos são fundamentais para a construção de soluções computacionais eficazes. A <strong>Algoritmização</strong> é o processo de criação de algoritmos, enquanto a <strong>Compreensão, Análise e Especificação Precisa de Problemas</strong> envolve a formulação e decomposição de problemas em etapas lógicas que podem ser resolvidas por meio de algoritmos.</p>
+<ol start="4" type="1">
+<li><strong>Depuração (D)</strong>: refinamento iterativo mediante validação empírica, incluindo testes de robustez, análise de falhas e otimização pós-implementação. Exemplo: Injeção de dados corrompidos em <em>pipelines</em> de processamento para validar resiliência. Incorpora princípios de “engenharia resiliente” de Leveson (2012) <span class="citation" data-cites="Leveson2012">(<a href="referencias.html#ref-Leveson2012" role="doc-biblioref">49</a>)</span>. Ou seja, a <strong>Depuração</strong> abrange os conceitos relativos a <strong>Avaliação e Otimização</strong>: a capacidade de avaliar, aprimorar ou otimizar a eficiência de um algoritmo, considerando abordagens alternativas <span class="citation" data-cites="Lehmann2024">(<a href="referencias.html#ref-Lehmann2024" role="doc-biblioref">36</a>)</span>.</li>
+</ol>
+<p>Em um ambiente no qual existem ambiguidades e avaliações sobre a formação fundamental dos alunos de graduação, a Metodologia <strong>DAAD</strong> foca prioritariamente nos processos matemáticos e lógicos envolvidos na criação e depuração de soluções computacionais como ferramentas indispensáveis para a solução de problemas.</p>
+<p>A busca bibliográfica realizada para este estudo indicou que a Metodologia <strong>DAAD</strong> como está proposta parece ser a única ferramenta disponível que oferece uma estrutura prática iterativa para o ensino do <strong>Raciocínio Algorítmico</strong>, abordando tanto a decomposição de problemas quanto a abstração necessária para a criação de algoritmos eficazes e, principalmente, depuração. A relação e integração conceitual entre os componentes da Metodologia <strong>DAAD</strong> (<strong>D</strong>ecomposição, <strong>A</strong>bstração, <strong>A</strong>lgoritmização e <strong>D</strong>epuração) está ilustrada na <a href="#fig-daad1" class="quarto-xref">Figure&nbsp;<span>2.3</span></a></p>
+<div id="fig-daad1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-daad1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src=".\images/daad_methodology_diagram.webp" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-daad1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.3: Ilustração da inter-relação entre Decomposição, Abstração, Algoritmização e Depuração. Fonte: o autor.
+</figcaption>
+</figure>
+</div>
+<p>A Metodologia <strong>DAAD</strong> modifica os tradicionais “Quatro Pilares do Pensamento Computacional” de Wing@Wing2006 ao substituir “Reconhecimento de Padrões” por “Depuração”, concordando com Lehmann@Lehmann2024 e com a Cambridge Mathematics@CambridgeMaths. Essa mudança adequa o <strong>Pensamento Computacional</strong> ao <strong>Raciocínio Algorítmico</strong>, enfatizando o processo ativo de criação de algoritmos e a habilidade essencial de detecção e correção de erros, a depuração. Criando uma metodologia iterativa adequada à solução de problemas em um ciclo de entendimento, abstração, construção da solução e depuração.</p>
+</section>
+<section id="sec-estrat" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="sec-estrat"><span class="header-section-number">2.4</span> Estratégias Pedagógicas e Materiais Didáticos para o Ensino de DAAD</h2>
+<p>O ensino eficaz dos componentes do <strong>Raciocínio Algorítmico</strong> usando a Metodologia <strong>DAAD</strong>, <strong>D</strong>ecomposição, <strong>A</strong>bstração, <strong>A</strong>lgoritmização, <strong>D</strong>ebugging, exige estratégias pedagógicas que transcendem as aulas expositivas tradicionais, promovendo o engajamento ativo e a aplicação prática. E deve superar o <a href="index.html" class="quarto-xref">Jogo da Imitação&nbsp;<span>1</span></a> como metodologia de ensino. O que está proposto neste estudo é uma abordagem progressiva e integrada entre atividades <em>unplugged</em> ou desconectadas, <em>plugged</em> ou conectadas e o estudo independente para desenvolver o <strong>Pensamento Computacional</strong>.</p>
+<p>Iniciar cada tema possível com atividades <em>unplugged</em> permite que os alunos construam uma compreensão conceitual sólida sem a barreira da sintaxe de programação <span class="citation" data-cites="curzon2014unplugged">(<a href="referencias.html#ref-weintrop2015unplugged" role="doc-biblioref">51</a>)</span>. Posteriormente, essas compreensões conceituais são reforçadas e aplicadas por meio de desafios de programação <em>plugged</em> <span class="citation" data-cites="weintrop2015unplugged">(<a href="referencias.html#ref-weintrop2015unplugged" role="doc-biblioref">51</a>)</span>. Essa progressão didática pretende que os alunos compreendam os porquês antes de se aprofundarem nos comos, otimizando o processo e os resultados do aprendizado<span class="citation" data-cites="Hurrell2021">(<a href="referencias.html#ref-Hurrell2021" role="doc-biblioref">15</a>)</span>.</p>
+<p>A <strong>Metodologia <em>Flipped Classroom</em></strong> <span class="citation" data-cites="BergmannSams2012">(<a href="referencias.html#ref-BergmannSams2012" role="doc-biblioref">52</a>)</span>, aplicada pela ETH Zurich <span class="citation" data-cites="ETHZurichFlippedClassroom">(<a href="referencias.html#ref-ETHZurichFlippedClassroom" role="doc-biblioref">53</a>)</span>, é uma estratégia pedagógica que inverte a dinâmica tradicional de ensino. A metodologia <em>Flipped Classroom</em> utiliza a expressão em inglês para sala de aula invertida para representar uma abordagem pedagógica que reverte a sequência do processo de ensino-aprendizagem. Nas últimas décadas, a introdução de novos conceitos passou a ocorrer em sala de aula majoritariamente, seguida por atividades de reforço em casa o que Bergmann (2012)<span class="citation" data-cites="BergmannSams2012">(<a href="referencias.html#ref-BergmannSams2012" role="doc-biblioref">52</a>)</span> considera ineficiente. Segundo a metodologia <em>Flipped Classroom</em>, o estudo inicial do conteúdo deve ser realizado pelos alunos fora do ambiente de aula, por meio de materiais previamente fornecidos, de forma independente. Esse preparo prévio permite que o tempo em sala de aula seja otimizado para a prática, discussão e resolução de problemas, com o professor atuando como um orientador<span class="citation" data-cites="BergmannSams2012">(<a href="referencias.html#ref-BergmannSams2012" role="doc-biblioref">52</a>)</span>.</p>
+<p>A <strong>Aprendizagem Baseada em Projetos (PBL)</strong> <span class="citation" data-cites="leifer1970project">(<a href="referencias.html#ref-leifer1970project" role="doc-biblioref">54</a>)</span> é uma estratégia amplamente utilizada e eficaz para o ensino de <strong>Pensamento Computacional</strong> <span class="citation" data-cites="Kim2021ComputationalThinking">(<a href="referencias.html#ref-Kim2021ComputationalThinking" role="doc-biblioref">55</a>)</span>. A metodologia <strong>PBL</strong> envolve os alunos na resolução de problemas complexos e autênticos do mundo real, permitindo-lhes construir conhecimento significativo por meio da investigação, cooperação e prática <span class="citation" data-cites="Kong2019">(<a href="referencias.html#ref-Kong2019" role="doc-biblioref">46</a>)</span>. Essa abordagem fomenta a autonomia do aluno, a criatividade e a capacidade de resolver problemas <span class="citation" data-cites="Kim2021ComputationalThinking">(<a href="referencias.html#ref-Kim2021ComputationalThinking" role="doc-biblioref">55</a>)</span>. Exemplos incluem a criação de modelos computacionais sobre furacões usando Scratch <span class="citation" data-cites="ScratchFoundation">(<a href="referencias.html#ref-ScratchFoundation" role="doc-biblioref">41</a>)</span> ou o design de aplicativos para necessidades sociais <span class="citation" data-cites="Kim2021ComputationalThinking">(<a href="referencias.html#ref-Kim2021ComputationalThinking" role="doc-biblioref">55</a>)</span>.</p>
+<p>As atividades <em>unplugged</em> ensinam o <strong>Pensamento Computacional</strong> sem o uso de dispositivos digitais, utilizando materiais como papel, cartas ou atividades físicas <span class="citation" data-cites="Kim2021ComputationalThinking">(<a href="referencias.html#ref-curzon2014unplugged" role="doc-biblioref">50</a>)</span>. Estas atividades permitem que os alunos se concentrem nos conceitos subjacentes do <strong>Pensamento Computacional</strong> sem se prenderem à sintaxe de uma linguagem de programação <span class="citation" data-cites="curzon2014unplugged">(<a href="referencias.html#ref-curzon2014unplugged" role="doc-biblioref">50</a>)</span>. Exemplos incluem programar um colega para realizar uma tarefa simples, usar mapas para ilustrar a abstração e a criação de fluxogramas da resolução do problema<span class="citation" data-cites="Bell2009ComputerScience">(<a href="referencias.html#ref-Huang2020ComputationalThinking" role="doc-biblioref">28</a>)</span>. O uso de atividades <em>unplugged</em> antes da programação baseada em computador pode levar a melhores resultados de aprendizagem <span class="citation" data-cites="Huang2020ComputationalThinking">(<a href="referencias.html#ref-Huang2020ComputationalThinking" role="doc-biblioref">28</a>)</span>.</p>
+<p>A <strong>Aprendizagem Ativa e Colaborativa</strong> é altamente incentivada <span class="citation" data-cites="SilvaQuinto2025">(<a href="referencias.html#ref-SilvaQuinto2025" role="doc-biblioref">22</a>)</span>. Discussões em equipe, resolução de problemas em grupo e a comunicação de soluções alternativas são práticas que fomentam o <strong>Pensamento Computacional</strong>. A aprendizagem colaborativa, facilitada por tecnologias simples, pode melhorar as habilidades de resolução de problemas e o engajamento dos alunos<span class="citation" data-cites="SilvaQuinto2025">(<a href="referencias.html#ref-SilvaQuinto2025" role="doc-biblioref">22</a>)</span>.</p>
+<p>A <strong>Abordagem Heurística e Baseada em Problemas</strong> envolve apresentar problemas desafiadores e guiar os alunos a explorar e inovar, escalando gradualmente a complexidade, o que é indispensável para aprofundar a compreensão do <strong>Pensamento Computacional</strong> <span class="citation" data-cites="Kim2021ComputationalThinking">(<a href="referencias.html#ref-Kim2021ComputationalThinking" role="doc-biblioref">55</a>)</span>. A abordagem socrática, na qual os conceitos são desenvolvidos por meio de questionamento dos alunos, também se mostra eficaz <span class="citation" data-cites="NYSCI">(<a href="referencias.html#ref-NYSCI" role="doc-biblioref">57</a>)</span>. Ao serem desafiados com perguntas como “Como você pode quebrar esse problema em etapas menores?” ou “Que padrões você nota que podem ser úteis para resolver este problema?”, os estudantes desenvolvem habilidades de pensamento analítico <span class="citation" data-cites="NYSCI">(<a href="referencias.html#ref-NYSCI" role="doc-biblioref">57</a>)</span>.</p>
+<p>No contexto dessas abordagens, o papel do professor se transforma de um mero transmissor de conhecimento para um facilitador, diagnosticador e curador do conhecimento <span class="citation" data-cites="Wong2019SelfDevelopment">(<a href="referencias.html#ref-Kong2020" role="doc-biblioref">39</a>)</span>. O educador deve atuar como gerador de questionamento, não fornecendo todas as soluções, mas guiando os alunos para que resolvam os problemas por si mesmos <span class="citation" data-cites="Kim2021ComputationalThinking">(<a href="referencias.html#ref-Kim2021ComputationalThinking" role="doc-biblioref">55</a>)</span>. A capacidade do professor de diagnosticar dificuldades e oferecer orientação direcionada é determinante para o sucesso do processo de aprendizagem <span class="citation" data-cites="Kim2021ComputationalThinking">(<a href="referencias.html#ref-Kim2021ComputationalThinking" role="doc-biblioref">55</a>)</span>. Estas características parecem indicar a necessidade de formação e desenvolvimento profissional para os educadores, capacitando-os não apenas no conhecimento do <strong>Pensamento Computacional</strong>, mas também nas estratégias pedagógicas para a sua implementação eficaz, incluindo a criação de ambientes de aprendizagem ativos e a oferta de retorno avaliativo construtivo.</p>
+<section id="materiais-didáticos-e-ferramentas" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="materiais-didáticos-e-ferramentas"><span class="header-section-number">2.4.1</span> Materiais Didáticos e Ferramentas</h3>
+<p>A literatura e as práticas educacionais atuais oferecem uma variedade de recursos didáticos e ferramentas para o ensino do <strong>Pensamento Computacional</strong> e do <strong>Raciocínio Algorítmico</strong>. Estes recursos são fundamentais para a implementação eficaz da Metodologia <strong>DAAD</strong> e incluem:</p>
+<ul>
+<li><strong>Linguagens de Programação</strong>: Python<span class="citation" data-cites="PythonDocs">(<a href="referencias.html#ref-PythonDocs" role="doc-biblioref">59</a>)</span> é frequentemente citada como uma linguagem de programação ideal para o ensino de <strong>Pensamento Computacional</strong>, especialmente em disciplinas introdutórias, devido à sua estrutura direta e facilidade de uso <span class="citation" data-cites="PennState">(<a href="referencias.html#ref-PennState" role="doc-biblioref">60</a>)</span>. Outras linguagens como OCaml<span class="citation" data-cites="OCamlManual2025">(<a href="referencias.html#ref-OCamlManual2025" role="doc-biblioref">61</a>)</span>, Java<span class="citation" data-cites="JavaLanguageSpecification2024">(<a href="referencias.html#ref-JavaLanguageSpecification2024" role="doc-biblioref">62</a>)</span>, C<span class="citation" data-cites="ISO_C18">(<a href="referencias.html#ref-ISO_C18" role="doc-biblioref">63</a>)</span>, C++<span class="citation" data-cites="ISO_CPP23">(<a href="referencias.html#ref-ISO_CPP23" role="doc-biblioref">64</a>)</span> e Prolog <span class="citation" data-cites="Prolog-ISO1995">(<a href="referencias.html#ref-Prolog-ISO1995" role="doc-biblioref">65</a>)</span> também são utilizadas em currículos mais avançados <span class="citation" data-cites="stanford_cs106a_syllabus">(<a href="referencias.html#ref-stanford_cs106a_syllabus" role="doc-biblioref">66</a>)</span> <span class="citation" data-cites="PennState">(<a href="referencias.html#ref-PennState" role="doc-biblioref">60</a>)</span>.</li>
+</ul>
+<p><strong>Ambientes de Desenvolvimento e Ferramentas Visuais</strong>: Ambientes como Scratch<span class="citation" data-cites="ScratchFoundation">(<a href="referencias.html#ref-ScratchFoundation" role="doc-biblioref">41</a>)</span> (para crianças e iniciantes), XLogo4Schools<span class="citation" data-cites="Zivkovic2014">(<a href="referencias.html#ref-Zivkovic2014" role="doc-biblioref">67</a>)</span> para Logo<span class="citation" data-cites="Papert1985">(<a href="referencias.html#ref-Papert1985" role="doc-biblioref">31</a>)</span> e Python, são empregados para reduzir a carga cognitiva e permitir que o foco recaia nos conceitos, notadamente para crianças e adolescentes <span class="citation" data-cites="Wattenhofer2020_url">(<a href="referencias.html#ref-Wattenhofer2020_url" role="doc-biblioref">68</a>)</span>. Além disso, ferramentas de depuração são essenciais para o aprendizado <span class="citation" data-cites="Kim2021ComputationalThinking">(<a href="referencias.html#ref-Kim2021ComputationalThinking" role="doc-biblioref">55</a>)</span>.</p>
+</section>
+</section>
+<section id="melhores-práticas-e-desafios-na-implementação-de-metodologias-de-resolução-de-problemas" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="melhores-práticas-e-desafios-na-implementação-de-metodologias-de-resolução-de-problemas"><span class="header-section-number">2.5</span> Melhores Práticas e Desafios na Implementação de Metodologias de Resolução de Problemas</h2>
+<p>A implementação de metodologias de resolução de problemas, como o <strong>Raciocínio Algorítmico</strong>, como parte integrante do <strong>Pensamento Computacional</strong>, no ensino superior no Brasil apresenta complexidades significativas. Um mapeamento sistemático da literatura nacional revelou um crescente interesse em iniciativas que estimulam o <strong>Pensamento Computacional</strong><span class="citation" data-cites="Araujo2016">(<a href="referencias.html#ref-Araujo2016" role="doc-biblioref">29</a>)</span>. No entanto, a tradução da relevância teórica em práticas educacionais eficazes e amplamente disseminadas enfrenta desafios. A pesquisa aponta para uma grande diversidade nos instrumentos e artefatos utilizados para a avaliação <span class="citation" data-cites="Araujo2016">(<a href="referencias.html#ref-Araujo2016" role="doc-biblioref">29</a>)</span>. A discussão sobre a granularidade das avaliações, seja em alto nível desempenho final, ou granularidade fina, habilidades específicas, e a complexidade de sua mensuração eficiente, somada à questão da replicabilidade dos estudos empíricos devido à frequente ausência de detalhes metodológicos, indicam lacunas na padronização e na generalização das práticas avaliativas e de implementação <span class="citation" data-cites="Araujo2016">(<a href="referencias.html#ref-Lehmann2024" role="doc-biblioref">36</a>)</span>. Desse modo, embora o reconhecimento da importância do <strong>Raciocínio Algorítmico</strong> no cenário educacional brasileiro seja evidente, sua plena e homogênea integração ainda é permeada por desafios de ordem prática e metodológica.</p>
+<section id="melhores-práticas-identificadas-na-literatura" class="level3" data-number="2.5.1">
+<h3 data-number="2.5.1" class="anchored" data-anchor-id="melhores-práticas-identificadas-na-literatura"><span class="header-section-number">2.5.1</span> Melhores Práticas Identificadas na Literatura</h3>
+<p>O <strong>Pensamento Computacional</strong> é mais eficaz quando integrado em diversas disciplinas, não apenas nas disciplinas relacionadas a Ciência da Computação <span class="citation" data-cites="Wing2006">(<a href="referencias.html#ref-Kong2020" role="doc-biblioref">39</a>)</span>. Para tanto é necessário a contextualização dos problemas em cenários do mundo real ou em suas próprias pesquisas aumenta o engajamento dos alunos <span class="citation" data-cites="Kim2021ComputationalThinking">(<a href="referencias.html#ref-Kim2021ComputationalThinking" role="doc-biblioref">55</a>)</span>. Essa abordagem permite que os alunos apliquem as estruturas cognitivas desenvolvidas à solução de problemas relevantes para suas áreas de estudo, desde a análise de dados históricos até a otimização de processos logísticos<span class="citation" data-cites="Wing2006">(<a href="referencias.html#ref-Kong2020" role="doc-biblioref">39</a>)</span>.</p>
+<p>O ensino integral, voltado para a formação do indivíduo presupõe que. além das habilidades técnicas, o ensino de <strong>Pensamento Computacional</strong> deve cultivar atitudes como confiança na resolução de problemas, persistência diante de desafios, tolerância a diferenças e capacidade de colaborar [Huang2020ComputationalThinking.]. A aprendizagem baseada em projetos e atividades <em>unplugged</em> são eficazes para fomentar essa mentalidade <span class="citation" data-cites="curzon2014unplugged">(<a href="referencias.html#ref-curzon2014unplugged" role="doc-biblioref">50</a>)</span>. Além disso, as práticas de <strong>Raciocínio Algorítmico</strong>, especialmente a depuração, a detecção sistemática de erros, exigem tentativas múltiplas e processos iterativos de revisão e refinamento, visto que programas raramente funcionam corretamente na primeira execução <span class="citation" data-cites="kirwan2022adaptter">(<a href="referencias.html#ref-Kong2019" role="doc-biblioref">46</a>)</span>. Isso fomenta a resiliência frente a obstáculos. O <strong>Raciocínio Algorítmico</strong> exige a avaliação e otimização contínua de soluções <span class="citation" data-cites="Lehmann2024 Lehmann2023">(<a href="referencias.html#ref-Lehmann2024" role="doc-biblioref">36</a>,<a href="referencias.html#ref-Lehmann2023" role="doc-biblioref">12</a>)</span>.</p>
+<p>Do ponto de vista da formação profissional, será indispensável garantir que os professores tenham um alto nível de conhecimento e prontidão em <strong>Pensamento Computacional</strong> e <strong>Raciocínio Algorítmico</strong> <span class="citation" data-cites="Kim2021ComputationalThinking">(<a href="referencias.html#ref-Kim2021ComputationalThinking" role="doc-biblioref">55</a>)</span>. Programas de desenvolvimento profissional que ofereçam ferramentas e ideias aprofundadas para a integração são essenciais. Isso inclui o apoio aos professores para criar novos materiais instrucionais e adaptar suas estratégias pedagógicas <span class="citation" data-cites="Kim2021ComputationalThinking">(<a href="referencias.html#ref-Kim2021ComputationalThinking" role="doc-biblioref">55</a>)</span>.</p>
+<p>Finalmente, introduzir conceitos de <strong>Pensamento Computacional</strong> de forma gradual, revisitando e expandindo a compreensão ao longo do currículo, parece ser uma prática eficaz <span class="citation" data-cites="Curzon2019">(<a href="referencias.html#ref-Curzon2019" role="doc-biblioref">35</a>)</span>. Começar com atividades <em>unplugged</em> e progredir para desafios de programação <em>plugged</em> pode otimizar o aprendizado <span class="citation" data-cites="curzon2014unplugged">(<a href="referencias.html#ref-curzon2014unplugged" role="doc-biblioref">50</a>)</span>.</p>
+</section>
+<section id="desafios-comuns" class="level3" data-number="2.5.2">
+<h3 data-number="2.5.2" class="anchored" data-anchor-id="desafios-comuns"><span class="header-section-number">2.5.2</span> Desafios Comuns</h3>
+<p>O primeiro desafio surge da falta de consenso na definição e na operacionalização do ensino de <strong>Pensamento Computacional</strong>. Neste cenário, uma das maiores dificuldades é a ausência de uma definição única e universalmente aceita <span class="citation" data-cites="curzon2014unplugged">(<a href="referencias.html#ref-curzon2014unplugged" role="doc-biblioref">50</a>)</span>. Essa ambiguidade afeta o design do currículo, a seleção de tópicos e, principalmente, a avaliação das habilidades dos alunos <span class="citation" data-cites="Kong2019">(<a href="referencias.html#ref-Kong2019" role="doc-biblioref">46</a>)</span>. Além disso, muitos educadores carecem de compreensão, confiança e habilidades necessárias para implementar o <strong>Pensamento Computacional</strong> de forma eficaz <span class="citation" data-cites="Saidin2021">(<a href="referencias.html#ref-Saidin2021" role="doc-biblioref">32</a>)</span>, ainda que suas disciplinas sejam diretamente ligadas a computação <span class="citation" data-cites="Huang2020ComputationalThinking">(<a href="referencias.html#ref-Huang2020ComputationalThinking" role="doc-biblioref">28</a>)</span>. Por fim, a expectativa de que as habilidades de <strong>Pensamento Computacional</strong> se desenvolvam naturalmente em alunos de ciência da computação é muitas vezes inadequada e irreal <span class="citation" data-cites="Curzon2019">(<a href="referencias.html#ref-Curzon2019" role="doc-biblioref">35</a>)</span>.</p>
+<p>A integração do <strong>Pensamento Computacional</strong> em currículos já estabelecidos, especialmente em disciplinas não diretamente relacionadas com ciência, matemática e as engenharias, pode ser um desafio devido à falta de uma abordagem padronizada <span class="citation" data-cites="curzon2014unplugged">(<a href="referencias.html#ref-Kong2019" role="doc-biblioref">46</a>)</span>. Alguns conceitos e práticas de <strong>Raciocínio Algorítmico</strong>, como condicionais, dados, operadores, testes e depuração, e abstração/modularização, são identificados como difíceis de aprender para alunos iniciantes <span class="citation" data-cites="Hora2022">(<a href="referencias.html#ref-Futura2023" role="doc-biblioref">45</a>)</span>. O que diminui a autoestima e estudantes com baixa autoeficácia ou menor confiança em suas habilidades, como as de escrita, tendem a depender mais de ferramentas de IA, priorizando soluções imediatas em vez de desenvolver habilidades cognitivas e criativas <span class="citation" data-cites="kosmyna2025">(<a href="referencias.html#ref-kosmyna2025" role="doc-biblioref">21</a>)</span>. Por outro lado, a percepção de que o processo de aprendizado é <em>sem esforço</em> devido à disponibilidade instantânea de soluções pode desencorajar tentativas de resolução independente de problemas e reduzir a motivação dos estudantes para realizar pesquisas ou gerar suas próprias soluções <span class="citation" data-cites="kosmyna2025">(<a href="referencias.html#ref-kosmyna2025" role="doc-biblioref">21</a>)</span>. Além disso, a falta de estímulo mental decorrente do uso excessivo de ferramentas que simplificam o processo pode, consequentemente, diminuir o desenvolvimento cognitivo e afetar negativamente a memória <span class="citation" data-cites="kosmyna2025">(<a href="referencias.html#ref-kosmyna2025" role="doc-biblioref">21</a>)</span>.</p>
+</section>
+<section id="avaliação-e-mensuração-de-habilidades-de-pensamento-computacional" class="level3" data-number="2.5.3">
+<h3 data-number="2.5.3" class="anchored" data-anchor-id="avaliação-e-mensuração-de-habilidades-de-pensamento-computacional"><span class="header-section-number">2.5.3</span> Avaliação e Mensuração de Habilidades de Pensamento Computacional</h3>
+<p>A avaliação das capacidades de realização do <strong>Pensamento Computacional</strong> é complexa e as ferramentas existentes são limitadas, muitas vezes focando em percepção-atitude ou testes de múltipla escolha simples. Alguns autores destacam que testes de múltipla escolha e questões de resposta curta são utilizados para medir o conhecimento e a compreensão de conceitos de <strong>Pensamento Computacional</strong> <span class="citation" data-cites="curzon2014unplugged">(<a href="referencias.html#ref-curzon2014unplugged" role="doc-biblioref">50</a>)</span>. Alguns testes, como o <em>Computational Thinking Performance Test</em><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>, focam em pensamento lógico, generalização e abstração <span class="citation" data-cites="curzon2014unplugged">(<a href="referencias.html#ref-curzon2014unplugged" role="doc-biblioref">50</a>)</span>. A <a href="#fig-testes1" class="quarto-xref">Figure&nbsp;<span>2.4</span></a> exemplifica o tipo de testes de avaliação de <strong>Pensamento Computacional</strong> que podem ser aplicados, com questões que avaliam a capacidade de decomposição, abstração e algoritmização.</p>
+<div id="fig-testes1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-testes1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="fig-testes1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-testes1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/testes1.webp" class="img-fluid figure-img" data-ref-parent="fig-testes1">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-testes1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Exemplo de Testes de Avaliação de Pensamento Computacional
+</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-testes1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.4: Exemplo de Testes de Avaliação de <strong>Pensamento Computacional</strong> [Smith2021].
+</figcaption>
+</figure>
+</div>
+<p>Em sala de aula, a avaliação de projetos e portfólios se destaca como ferramenta para discernir como os alunos aplicam seus conhecimentos para pensar computacionalmente e projetar artefatos computacionais criativos <span class="citation" data-cites="Kong2019">(<a href="referencias.html#ref-Kong2019" role="doc-biblioref">46</a>)</span>. Ao contrário dos testes e exames, que podem ser facilmente automatizados, a avaliação de projetos e portfólios requer avaliação manual ou o suporte de ferramentas de Inteligência Artificial.</p>
+<p>As <strong>Rubricas</strong> de avaliação são ferramentas valiosas para guiar os professores na avaliação de atividades e objetivos de <strong>Pensamento Computacional</strong>, articulando critérios com descritores de desempenho que demonstram níveis progressivamente mais sofisticados de domínio <span class="citation" data-cites="Curzon2019">(<a href="referencias.html#ref-Kong2020" role="doc-biblioref">39</a>)</span>. A Universidade de Delaware <span class="citation" data-cites="Amendum2018">(<a href="referencias.html#ref-Amendum2018" role="doc-biblioref">69</a>)</span>, por exemplo, desenvolveu uma rubrica para <strong>Pensamento Computacional</strong> com quatro dimensões: decomposição, algoritmos, dados e abstração que pode servir de exemplo e inspiração. A <a href="#tbl-rubrica1" class="quarto-xref">Table&nbsp;<span>2.3</span></a> apresenta um exemplo de rubrica para avaliação de habilidades de <strong>Pensamento Computacional</strong>.</p>
+<div id="tbl-rubrica1" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rubrica1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.3: Exemplo de Rubrica para Avaliação de Habilidades de Pensamento Computacional. Adaptado de <span class="citation" data-cites="Amendum2018">(<a href="referencias.html#ref-Amendum2018" role="doc-biblioref">69</a>)</span>.
+</figcaption>
+<div aria-describedby="tbl-rubrica1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dimensão</th>
+<th><strong>Excelente</strong> <br> 4</th>
+<th><strong>Proficiente</strong> <br> 3</th>
+<th><strong>Em Desenvolvimento</strong> <br> 2</th>
+<th><strong>Iniciante</strong> <br> 1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Decomposição</strong> <br> <em>Divide um problema em seus subproblemas constituintes</em></td>
+<td>Divide um problema complexo em subproblemas claramente descritos, bem definidos e distintos, mas relacionados, que são mais fáceis de resolver do que o problema original, mas quando combinados resolvem eficientemente o problema original.</td>
+<td>Divide um problema complexo em subproblemas claramente descritos que são distintos, mas relacionados, porém carecem de eficiência, embora resolvam o problema original.</td>
+<td>Divide um problema complexo em subproblemas que carecem de eficiência, falham em ter descrições suficientes e se sobrepõem, embora resolvam o problema original.</td>
+<td>Divide um problema complexo em subproblemas que são ineficientes, descritos de forma inadequada, se sobrepõem ou são intimamente relacionados, e falham em resolver completamente o problema original.</td>
+</tr>
+<tr class="even">
+<td><strong>Algoritmos</strong> <br> <em>Cria uma série de passos ordenados para resolver um problema ou alcançar um objetivo</em></td>
+<td>Cria uma sequência lógica, eficiente e bem descrita de passos ou instruções para resolver um problema ou alcançar um objetivo.</td>
+<td>Cria uma sequência lógica de passos que são bem descritos (por exemplo, não ambíguos, precisos) e resolvem um problema ou alcançam um objetivo, mas os passos são ineficientes, por exemplo, não em uma sequência ótima, sobrepostos, duplicados ou desnecessários.</td>
+<td>Cria uma sequência lógica de passos que resolvem um problema ou alcançam um objetivo, mas os passos são mal descritos (por exemplo, ambíguos, vagos).</td>
+<td>Cria uma sequência de passos que não resolvem um problema ou alcançam um objetivo. Os passos carecem de eficiência, descrições suficientes e não são descritos ou documentados.</td>
+</tr>
+<tr class="odd">
+<td><strong>Dados</strong> <br> <em>Avalia um conjunto de dados para garantir que facilite a descoberta de padrões e relações</em></td>
+<td>Avalia um conjunto de dados para garantir que seja suficientemente abrangente, eficientemente organizado, significativamente rotulado e completamente descrito para que possa ser analisado para descobrir padrões e relações significativos.</td>
+<td>Avalia um conjunto de dados para garantir que seja suficientemente abrangente, significativamente rotulado e completamente descrito, mas falha em garantir que seja eficientemente organizado.</td>
+<td>Avalia um conjunto de dados para garantir que seja suficientemente abrangente e significativamente rotulado, mas falha em garantir que seja completamente descrito e eficientemente organizado.</td>
+<td>Avalia um conjunto de dados, mas falha em garantir que seja suficientemente abrangente, eficientemente organizado, significativamente rotulado e completamente descrito, de modo que padrões e relações não sejam obscurecidos.</td>
+</tr>
+<tr class="even">
+<td><strong>Abstração</strong> <br> <em>Reduz a complexidade para criar uma representação geral de um processo ou grupo de objetos, de modo que seja não apenas apropriada para o propósito ou objetivo imediato, mas também possa ser usada em diferentes contextos</em></td>
+<td>Cria uma representação precisa, mas simplificada, de um processo ou grupo de objetos para resolver o problema ou atingir o objetivo. Seleciona características essenciais filtrando informações desnecessárias. Pode ser usada para resolver outros problemas ou objetivos.</td>
+<td>Cria uma representação precisa, mas simplificada, de um processo ou grupo de objetos para resolver o problema ou atingir o objetivo. Seleciona características essenciais filtrando informações desnecessárias. Não pode ser usada para resolver outros problemas ou objetivos.</td>
+<td>Cria uma representação precisa, mas simplificada, de um processo ou grupo de objetos para resolver o problema ou atingir o objetivo. Falha em selecionar todas as características essenciais filtrando informações desnecessárias. Não pode ser usada para resolver outros problemas ou objetivos.</td>
+<td>Cria uma representação de um processo ou grupo de objetos que não é precisa, não é suficientemente simplificada, ou falha em resolver o problema ou atingir o objetivo.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>A rubrica proposta pela Universidade do Dellaware <span class="citation" data-cites="Amendum2018">(<a href="referencias.html#ref-Amendum2018" role="doc-biblioref">69</a>)</span> demonstra clareza e foco. As quatro dimensões avaliadas, Decomposição, Algoritmos, Dados e Abstraçã, são os pilares essenciais e bem definidos do <strong>Pensamento Computacional</strong>. Dentro de cada dimensão, os critérios para cada nível são descritos com especificidade, utilizando exemplos concretos como “subproblemas claramente descritos” ou “sequência lógica”, o que os torna observáveis. Além disso, a linguagem é consistente em toda a tabela; termos-chave como “eficiente”, “claramente descrito”, “suficientemente abrangente”, “preciso” e “simplificado” são aplicados de maneira uniforme, facilitando a comparação entre os níveis e dimensões.</p>
+<p>Outra força significativa é a progressão lógica e hierárquica entre os níveis, de “Excelente” (4) a “Iniciante” (1). Cada degrau representa uma diferença clara na qualidade ou domínio da habilidade avaliada. Os níveis superiores não apenas cumprem os requisitos básicos, mas adicionam critérios mais sofisticados ou exigentes. Por exemplo, na Decomposição, o nível Excelente acrescenta eficiência e distinção clara aos subproblemas em relação ao Proficiente. Nos Algoritmos, a eficiência é o diferencial do Excelente. Na dimensão de Dados, os níveis inferiores perdem progressivamente critérios como organização e descrição completa. Já na Abstração, a capacidade de reutilização da representação em outros contextos é exclusiva do nível Excelente, marcando um salto qualitativo.</p>
+<p>Finalmente, a rubrica se destaca pela ênfase em critérios mensuráveis e observáveis, focando nos resultados tangíveis do trabalho do aluno – como os subproblemas foram divididos, como os passos do algoritmo foram descritos, como os dados foram organizados ou como a representação abstrata foi construída –, evitando termos excessivamente subjetivos. Essa objetividade, aliada à sua abordagem multidimensional, que avalia habilidades distintas porém inter-relacionadas, fornece um retrato mais completo do aluno do que uma nota única. Isso se traduz em uma utilidade pedagógica prática: ela serve como um guia claro de ensino, estabelecendo metas de aprendizagem; permite ao professor dar feedback específico e direcionado por dimensão; e promove maior consistência e equidade na avaliação, reduzindo a subjetividade.</p>
+<p>A aplicação eficaz da rúbrica da Universidade Delaware <span class="citation" data-cites="Amendum2018">(<a href="referencias.html#ref-Amendum2018" role="doc-biblioref">69</a>)</span> exige atenção a certas considerações para garantir uma avaliação precisa. Primeiramente, a subjetividade residual em termos como “eficiente” ou “suficientemente abrangente” requer que o avaliador mantenha consistência, sendo o uso de “trabalhos âncora” uma prática recomendada para calibrar a avaliação. Essa necessidade de julgamento é particularmente notável ao diferenciar os níveis “Proficiente” (3) e “Excelente” (4), que dependem de conceitos avançados como eficiência e reusabilidade, exigindo que a tarefa proposta seja complexa o suficiente para permitir que o aluno demonstre tais habilidades. O avaliador deve estar ciente da forte interdependência prática entre as dimensões, por exemplo, uma decomposição fraca quase sempre levará a um algoritmo ineficiente, compreendendo que uma falha em uma área impacta diretamente o desempenho em outra, mesmo que sejam avaliadas separadamente. Esta rúbrica <span class="citation" data-cites="Amendum2018">(<a href="referencias.html#ref-Amendum2018" role="doc-biblioref">69</a>)</span> serve apenas como referência. Ela requer adaptações para o uso com o <strong>Raciocínio Algorítmico</strong>.</p>
+<p>Em um contexto de domínio do <strong>Pensamento Computacional</strong> e do <strong>Raciocínio Algorítmico</strong>, a autoavaliação surge como uma estratégia interessante. Existem escalas psicométricas e questionários de autoavaliação são empregados para medir a percepção dos alunos sobre suas próprias habilidades de <strong>Pensamento Computacional</strong> e sua autoeficácia. Algumas estão academicamente validadas, como o <em>Computational Thinking Self-Efficacy Survey</em><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> <span class="citation" data-cites="RomanGonzalez2019">(<a href="referencias.html#ref-Smith2021" role="doc-biblioref">71</a>)</span>), que medem a percepção do estudante sobre sua capacidade de pensar computacionalmente. Essas ferramentas são úteis para entender como os alunos se veem em relação ao <strong>Pensamento Computacional</strong> e podem ajudar a identificar áreas de melhoria que poderão ser usadas no ensino de <strong>Raciocínio Algorítmico</strong>.</p>
+<p>Algumas destas estratégias de avaliação podem ser realizadas por meio de ferramentas online como:</p>
+<ul>
+<li><p><strong>UniCTCheck (Ainda em Desenvolvimento)</strong>: um método inovador para avaliar habilidades de <strong>Pensamento Computacional</strong> em alunos universitários de Ciência da Computação. O <strong>CTScore</strong> é um aplicativo web interativo que mede sete componentes de <strong>Pensamento Computacional</strong>, reconhecimento de padrões, pensamento criativo, pensamento algorítmico, resolução de problemas, pensamento crítico, decomposição e abstração, por meio de 12 questões. O <strong>CTProg</strong> é uma escala psicométrica que mede a compreensão conceitual de cinco fundamentos de programação, direções básicas e sequências, condicionais, laços de repetição, funções, estruturas de dados <span class="citation" data-cites="Hijn-Neira2024">(<a href="referencias.html#ref-Hijn-Neira2024" role="doc-biblioref">37</a>)</span>.</p></li>
+<li><p><strong>Bebras Questions</strong>: utilizadas como ferramenta de teste para analisar melhorias nas capacidades de <strong>Pensamento Computacional</strong> para crianças e adolescentes <span class="citation" data-cites="BebrasUK2025">(<a href="referencias.html#ref-BebrasUK2025" role="doc-biblioref">72</a>)</span>.</p></li>
+<li><p><strong>Dr.&nbsp;Scratch, LOGO, C, C++, AgentCubes</strong>: linguagens, ferramentas de depuração, e teste mencionadas como ferramentas de avaliação que podem ser utilizadas para aprimorar o <strong>Pensamento Computacional</strong>, com foco principal no treinamento de habilidades de programação <span class="citation" data-cites="Kim2021ComputationalThinking">(<a href="referencias.html#ref-Kim2021ComputationalThinking" role="doc-biblioref">55</a>)</span>.</p></li>
+</ul>
+<p>Apesar do crescimento na pesquisa sobre avaliação de <strong>Pensamento Computacional</strong>, como ainda existe uma falta de consenso na descrição ou nas partes constituintes do <strong>Pensamento Computacional</strong>, que dificulta a padronização e validação de instrumentos de avaliação <span class="citation" data-cites="Hijn-Neira2024">(<a href="referencias.html#ref-Hijn-Neira2024" role="doc-biblioref">37</a>)</span>, muitos estudos apontam para a necessidade de mais pesquisas para desenvolver e validar uma conceituação teórica robusta do <strong>Pensamento Computacional</strong> e, consequentemente, ferramentas de avaliação mais eficazes <span class="citation" data-cites="Hijn-Neira2024">(<a href="referencias.html#ref-Smith2021" role="doc-biblioref">71</a>)</span>.</p>
+<p>Para o avanço da educação, parece ser importante que a comunidade acadêmica continue a colaborar na definição e operacionalização do <strong>Pensamento Computacional</strong>, o que, por sua vez, permitirá o desenvolvimento de instrumentos de avaliação mais rigorosos e comparáveis. Isso parece ser indispensável para medir o impacto das intervenções pedagógicas e garantir a qualidade da educação em <strong>Pensamento Computacional</strong>. Além disso, para a definição de uma disciplina de <strong>Raciocínio Algorítmico</strong> torna-se pertinente a análise deste tema em disciplinas de graduação ao redor do planeta.</p>
+
+
+<div id="refs" class="references csl-bib-body" data-entry-spacing="1" role="list" style="display: none">
+<div id="ref-CambridgeMaths" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">CAMBRIDGE UNIVERSITY. <strong>Cambridge mathematics</strong>., 2025. </div>
+</div>
+<div id="ref-AIIndex2025" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">AI INDEX STEERING COMMITTEE. <strong>2025 AI index report</strong>. Stanford, CA: Stanford Institute for Human-Centered Artificial Intelligence, 2025. Disponível em: &lt;<a href="https://hai.stanford.edu/ai-index/2025-ai-index-report">https://hai.stanford.edu/ai-index/2025-ai-index-report</a>&gt;. Acesso em: 10 jul. 2025.</div>
+</div>
+<div id="ref-Chui2022" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">CHUI, M. et al. <strong>The state of AI in 2022—and a half decade in review</strong>. [s.l.] McKinsey &amp; Company, 2022. Disponível em: &lt;<a href="https://www.mckinsey.com/~/media/mckinsey/business%20functions/quantumblack/our%20insights/the%20state%20of%20ai%20in%202022%20and%20a%20half%20decade%20in%20review/the-state-of-ai-in-2022-and-a-half-decade-in-review.pdf">https://www.mckinsey.com/~/media/mckinsey/business%20functions/quantumblack/our%20insights/the%20state%20of%20ai%20in%202022%20and%20a%20half%20decade%20in%20review/the-state-of-ai-in-2022-and-a-half-decade-in-review.pdf</a>&gt;. Acesso em: 10 jul. 2025.</div>
+</div>
+<div id="ref-leinonen2024how" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">LEINONEN, J.; HELLAS, A.; IHANTOLA, P. <strong>How can <span>“vibe-coding”</span> transform programming education?</strong> Communications of the ACM, May 2024. Disponível em: &lt;<a href="https://cacm.acm.org/blogcacm/how-can-vibe-coding-transform-programming-education/">https://cacm.acm.org/blogcacm/how-can-vibe-coding-transform-programming-education/</a>&gt;</div>
+</div>
+<div id="ref-BrasilCiencia2021" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">BRASIL. <strong>Síntese de área: Ciência da computação (bacharelado/licenciatura)</strong>. Brasília, DF: Ministério da Educação, Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep), Diretoria de Avaliação da Educação Superior (Daes), 2021. Disponível em: &lt;<a href="https://download.inep.gov.br/educacao_superior/enade/relatorio_sintese/2021/Enade_2021_Relatorios_Sintese_Area_Ciencia_Computacao.pdf">https://download.inep.gov.br/educacao_superior/enade/relatorio_sintese/2021/Enade_2021_Relatorios_Sintese_Area_Ciencia_Computacao.pdf</a>&gt;. Acesso em: 10 jul. 2025.</div>
+</div>
+<div id="ref-BrasilEngenharia2023" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">BRASIL. <strong>Relatório síntese de área: Engenharia de computação</strong>. Brasília, DF: Ministério da Educação, Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep), Diretoria de Avaliação da Educação Superior (Daes), 2023. Disponível em: &lt;<a href="https://download.inep.gov.br/educacao_superior/enade/relatorio_sintese/2023/engenharia_de_computacao.pdf">https://download.inep.gov.br/educacao_superior/enade/relatorio_sintese/2023/engenharia_de_computacao.pdf</a>&gt;. Acesso em: 10 jul. 2025.</div>
+</div>
+<div id="ref-Kramer2007" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline">KRAMER, J. <a href="https://doi.org/10.1145/1232743.1232745">Is abstraction the key to computing?</a> <strong>Communications of the ACM</strong>, v. 50, n. 4, p. 36–42, 2007. </div>
+</div>
+<div id="ref-Winslow1996" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">WINSLOW, L. E. <a href="https://doi.org/10.1145/234867.234872">Programming pedagogy – a psychological overview</a>. <strong>ACM SIGCSE Bulletin</strong>, v. 28, n. 3, p. 17–22, 1996. </div>
+</div>
+<div id="ref-mirolo2021abstraction" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[9] </div><div class="csl-right-inline">MIROLO, C. et al. <a href="https://doi.org/10.15388/infedu.2021.27">Abstraction in computer science education: An overview</a>. <strong>Informatics in Education</strong>, v. 20, n. 4, p. 615–639, 2021. </div>
+</div>
+<div id="ref-HiebertLefevre1986" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[10] </div><div class="csl-right-inline">HIEBERT, J.; LEFEVRE, P. Conceptual and procedural knowledge in mathematics: An introductory analysis. In: HIEBERT, J. (Ed.). <strong>Conceptual and procedural knowledge: The case of mathematics</strong>. Hillsdale, NJ: Lawrence Erlbaum Associates, 1986. p. 1–27. </div>
+</div>
+<div id="ref-Wing2006" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[11] </div><div class="csl-right-inline">WING, J. M. <a href="https://doi.org/10.1145/1118178.1118215">Computational thinking</a>. <strong>Communications of the ACM</strong>, v. 49, n. 3, p. 33–35, Mar. 2006. </div>
+</div>
+<div id="ref-Lehmann2023" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[12] </div><div class="csl-right-inline">LEHMANN, T. H. Using algorithmic thinking to design algorithms: The case of critical path analysis. <strong>The Journal of Mathematical Behavior</strong>, v. 71, p. 101079, 2023. </div>
+</div>
+<div id="ref-Lithner2008" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[13] </div><div class="csl-right-inline">LITHNER, J. A research framework for algorithmic and creative reasoning. <strong>Educational Studies in Mathematics</strong>, v. 67, n. 3, p. 255–276, 2008. </div>
+</div>
+<div id="ref-Harisman2023" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[14] </div><div class="csl-right-inline">HARISMAN, Y. et al. Exploring students’ mathematical reasoning behavior. <strong>Education Sciences</strong>, v. 13, 2023. </div>
+</div>
+<div id="ref-Hurrell2021" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[15] </div><div class="csl-right-inline">HURRELL, D. P. Conceptual knowledge OR procedural knowledge OR conceptual knowledge AND procedural knowledge: Why the conjunction is important for teachers. <strong>Australian Journal of Teacher Education</strong>, v. 46, n. 2, p. art. 4, 2021. </div>
+</div>
+<div id="ref-NCTM2000" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[16] </div><div class="csl-right-inline">NATIONAL COUNCIL OF TEACHERS OF MATHEMATICS – NCTM. <strong><a href="https://citeseerx.ist.psu.edu/document?repid=rep1&amp;type=pdf&amp;doi=ffec290ccfaa3de1d643a09e992349f3f7ff9d4c">Principles and standards for school mathematics</a></strong>. Reston, VA: NCTM, 2000. </div>
+</div>
+<div id="ref-Kaldewaij1990" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[17] </div><div class="csl-right-inline">KALDEWAIJ, A. <strong>Programming: The derivation of algorithms</strong>. [s.l.] Prentice Hall, 1990. </div>
+</div>
+<div id="ref-GibbonsHaskell2020" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[18] </div><div class="csl-right-inline">GIBBONS, J. <strong>Algorithm design with haskell</strong>. University of Oxford, 2020. Acesso em: 10 jul. 2025</div>
+</div>
+<div id="ref-BirdDeMoor1997" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[19] </div><div class="csl-right-inline">BIRD, R.; DE MOOR, O. <strong>Algebra of programming</strong>. [s.l.] Prentice Hall, 1997. </div>
+</div>
+<div id="ref-Gundogdu2023" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[20] </div><div class="csl-right-inline">GÜNDOĞDU, F. et al. Exploring mathematical reasoning skills. <strong>ScienceDirect</strong>, 2023. </div>
+</div>
+<div id="ref-kosmyna2025" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[21] </div><div class="csl-right-inline">KOSMYNA, N. et al. <strong>Your brain on ChatGPT: Accumulation of cognitive debt when using an AI assistant for essay writing task</strong>., 2025. Disponível em: &lt;<a href="https://arxiv.org/abs/2506.08872">https://arxiv.org/abs/2506.08872</a>&gt;</div>
+</div>
+<div id="ref-SilvaQuinto2025" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[22] </div><div class="csl-right-inline">SILVA QUINTO, W. A. et al. <a href="https://doi.org/10.54033/cadpedv22n7-330">Explorando o impacto da inteligência artificial na formação do pensamento crítico entre acadêmicos de t.i. Na região norte do brasil</a>. <strong>Caderno Pedagógico</strong>, v. 22, n. 7, 2025. </div>
+</div>
+<div id="ref-Hsu2025" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[23] </div><div class="csl-right-inline">HSU, T.-C.; CHANG, Y.-S.; CHEN, S.-Y. <a href="https://doi.org/10.1007/s10639-025-13624-3">Teaching AI with games: The impact of generative AI drawing on computational thinking skills</a>. <strong>Education and Information Technologies</strong>, 2025. </div>
+</div>
+<div id="ref-TsaiYang2019" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[24] </div><div class="csl-right-inline">TSAI, C.-Y.; YANG, Y.-F. The impact of unplugged activities on developing computational thinking skills in elementary school students. <strong>Journal of Educational Technology &amp; Society</strong>, v. 22, n. 3, p. 77–89, 2019. </div>
+</div>
+<div id="ref-PolatYilmaz2022" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[25] </div><div class="csl-right-inline">POLAT, E.; YILMAZ, R. M. <a href="https://doi.org/10.1007/s10639-022-10992-y">Unplugged versus plugged-in: Examining basic programming achievement and computational thinking of 6th-grade students</a>. <strong>Education and Information Technologies</strong>, v. 27, p. 9145–9179, 2022. </div>
+</div>
+<div id="ref-Brackmann2022" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[26] </div><div class="csl-right-inline">BRACKMANN, C. P. et al. Unplugged versus plugged-in: Examining basic programming achievement and computational thinking of 6th-grade students. <strong>Journal of Computer Science Education</strong>, 2022. </div>
+</div>
+<div id="ref-Gibbons2020" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[27] </div><div class="csl-right-inline">GIBBONS, J. Functional algorithm design, part 0. <strong>SIGPLAN Blog</strong>, 2020. </div>
+</div>
+<div id="ref-Huang2020ComputationalThinking" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[28] </div><div class="csl-right-inline">HUANG, R. et al. Computational thinking and the new curriculum standards of information technology for senior high schools in china. In: ABELSON, H.; KONG, S.-C. (Eds.). <strong>Computational thinking curricula in k–12: International implementations</strong>. Cambridge, Massachusetts; London, England: The MIT Press, 2020. </div>
+</div>
+<div id="ref-Araujo2016" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[29] </div><div class="csl-right-inline">ARA’UJO, A. L. S. DE O.; ANDRADE, W. L. DE; GUERRERO, D. D. S. <strong><a href="https://doi.org/10.5753/cbie.sbie.2016.714"><span class="nocase">Um mapeamento sistem<span>’<span class="nocase">a</span></span>tico sobre a avalia<span class="nocase">ç</span><span>&nbsp;<span class="nocase">a</span></span>o do pensamento computacional no Brasil</span></a></strong>. Anais do v congresso brasileiro de inform<span>’<span class="nocase">a</span></span>tica na educa<span>ç</span><span>&nbsp;<span class="nocase">a</span></span>o (CBIE). <strong>Anais</strong>...2016. </div>
+</div>
+<div id="ref-Li2020" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[30] </div><div class="csl-right-inline">LI, Y. et al. Computational thinking is more about thinking than computing. <strong>Journal for STEM Education Research</strong>, v. 3, n. 1, p. 1–18, 2020. </div>
+</div>
+<div id="ref-Papert1985" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[31] </div><div class="csl-right-inline">PAPERT, S. <strong>Logo: Computadores e educação</strong>. São Paulo: Brasiliense, 1985. </div>
+</div>
+<div id="ref-Saidin2021" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[32] </div><div class="csl-right-inline">SAIDIN, N. D. et al. <a href="https://doi.org/10.18178/ijiet.2021.11.5.1519">Benefits and challenges of applying computational thinking in education</a>. <strong>International Journal of Information and Education Technology</strong>, v. 11, n. 5, p. 248–254, 2021. </div>
+</div>
+<div id="ref-CSTA2011a" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[33] </div><div class="csl-right-inline">COMPUTER SCIENCE TEACHERS ASSOCIATION. <strong>Computational thinking: A definition for k-12</strong>., 2011. Disponível em: &lt;<a href="https://csteachers.org/teaching-computational-thinking-in-early-elementary/">https://csteachers.org/teaching-computational-thinking-in-early-elementary/</a>&gt;. Acesso em: 7 jul. 2025</div>
+</div>
+<div id="ref-TedreDenning2016" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[34] </div><div class="csl-right-inline">TEDRE, M.; DENNING, P. J. <strong>The long quest for computational thinking</strong>. Proceedings of the 16th koli calling conference on computing education research. <strong>Anais</strong>...Koli, Finland: Nov. 2016. </div>
+</div>
+<div id="ref-Curzon2019" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[35] </div><div class="csl-right-inline">CURZON, P. et al. Computational thinking. In: FINCHER, S. A.; ROBINS, A. V. (Eds.). <strong>The cambridge handbook of computing education research</strong>. Cambridge: Cambridge University Press, 2019. p. 513–546. </div>
+</div>
+<div id="ref-Lehmann2024" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[36] </div><div class="csl-right-inline">LEHMANN, T. H. <a href="https://link.springer.com/article/10.1007/s13394-023-00462-0">How current perspectives on algorithmic thinking can be applied to students’ engagement in algorithmatizing tasks</a>. <strong>Mathematics Education Research Journal</strong>, v. 36, n. 3, p. 609–643, 2024. </div>
+</div>
+<div id="ref-Hijn-Neira2024" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[37] </div><div class="csl-right-inline">HIJÓN-NEIRA, R. et al. <a href="https://doi.org/10.20944/preprints202405.1203.v1">Computational thinking measurement of CS university students in the AI era</a>. <strong>Preprints.org</strong>, May 2024. </div>
+</div>
+<div id="ref-Ribeiro2017" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[38] </div><div class="csl-right-inline">RIBEIRO, L. et al. Entendendo o pensamento computacional: Além da programação. <strong>Revista Brasileira de Informática na Educação</strong>, v. 25, n. 3, p. 45–62, 2017. </div>
+</div>
+<div id="ref-Kong2020" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[39] </div><div class="csl-right-inline">KONG, S. et al. <strong>Pensamento computacional na educação: Perspectivas internacionais</strong>. São Paulo: Penso, 2020. </div>
+</div>
+<div id="ref-Medeiros2024" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[40] </div><div class="csl-right-inline">MEDEIROS, W. M. <strong>Pensamento computacional ou programação? Uma análise de práticas pedagógicas com scratch</strong>. Dissertação (Mestrado em Educação)—Uberlândia: UFU, 2024.</div>
+</div>
+<div id="ref-ScratchFoundation" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[41] </div><div class="csl-right-inline">SCRATCH FOUNDATION. <strong>Scratch</strong>., [s.d.][s.d.]. Disponível em: &lt;<a href="https://scratch.mit.edu/">https://scratch.mit.edu/</a>&gt;. Acesso em: 7 jul. 2025</div>
+</div>
+<div id="ref-SBC2017" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[42] </div><div class="csl-right-inline">SBC (SOCIEDADE BRASILEIRA DE COMPUTAÇÃO). <strong>Referenciais de formação em computação: Educação básica</strong>. Porto AlegreSBC, 2017. </div>
+</div>
+<div id="ref-Hora2022" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[43] </div><div class="csl-right-inline">HORA, N. DA. <strong>O ensino do pensamento computacional no brasil na era digital</strong>. Futura, 9 Feb. 2022. Disponível em: &lt;<a href="https://futura.frm.org.br/conteudo/professores/artigo/o-ensino-do-pensamento-computacional-no-brasil-na-era-digital">https://futura.frm.org.br/conteudo/professores/artigo/o-ensino-do-pensamento-computacional-no-brasil-na-era-digital</a>&gt;. Acesso em: 9 jul. 2025</div>
+</div>
+<div id="ref-FelipussiPadua2023" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[44] </div><div class="csl-right-inline">FELIPUSSI, A. L.; PADUA, C. C. S. <strong>Relato de aulas com robô programável e pensamento computacional</strong>. Anais do 12º congresso brasileiro de informática na educação. <strong>Anais</strong>...Recife: SBC, 2023. </div>
+</div>
+<div id="ref-Futura2023" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[45] </div><div class="csl-right-inline">FUTURA, C. P. <strong>O ensino do pensamento computacional no brasil na era digital</strong>. São Paulo: Fundação Roberto Marinho, 2023. </div>
+</div>
+<div id="ref-Kong2019" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[46] </div><div class="csl-right-inline">KONG, S.-C. <a href="https://doi.org/10.1007/978-981-13-6528-7_9">Learning composite and prime numbers through developing an app: An example of computational thinking development through primary mathematics learning</a>. In: KONG, S.-C.; ABELSON, H. (Eds.). <strong>Computational thinking education</strong>. Singapore: Springer, 2019. p. 155–177. </div>
+</div>
+<div id="ref-kirwan2022adaptter" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[47] </div><div class="csl-right-inline">KIRWAN, C.; COSTELLO, E.; DONLON, E. <a href="https://doi.org/10.1007/s11528-022-00735-8">ADAPTTER: Developing a framework for teaching computational thinking in second-level schools by design research</a>. <strong>TechTrends</strong>, v. 66, n. 4, p. 495–509, 2022. </div>
+</div>
+<div id="ref-Hoare1969" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[48] </div><div class="csl-right-inline">HOARE, C. A. R. <a href="http://sunnyday.mit.edu/16.355/Hoare-CACM-69.pdf">An axiomatic basis for computer programming</a>. <strong>Communications of the ACM</strong>, v. 12, n. 10, p. 576–580, 1969. </div>
+</div>
+<div id="ref-Leveson2012" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[49] </div><div class="csl-right-inline">LEVESON, N. G. <strong><a href="https://doi.org/10.7551/mitpress/8179.001.0001">Engineering a safer world: Systems thinking applied to safety</a></strong>. Cambridge, MA: MIT Press, 2012. </div>
+</div>
+<div id="ref-curzon2014unplugged" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[50] </div><div class="csl-right-inline">CURZON, P.; MCOWAN, P.; BLACKWELL, A. Unplugged approaches to the teaching of computing to adults. <strong>Journal of Computing Sciences in Colleges</strong>, v. 29, n. 4, p. 90–97, 2014. </div>
+</div>
+<div id="ref-weintrop2015unplugged" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[51] </div><div class="csl-right-inline">WEINTROP, D.; WILENSKY, U. <strong><a href="https://doi.org/10.1145/2676723.2677278">Using unplugged activities in adult programming education</a></strong>. Proceedings of the 46th ACM technical symposium on computer science education (SIGCSE ’15). <strong>Anais</strong>...New York, NY, USA: ACM, 2015. </div>
+</div>
+<div id="ref-BergmannSams2012" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[52] </div><div class="csl-right-inline">BERGMANN, J.; SAMS, A. <strong>Flip your classroom: Reach every student in every class every day</strong>. Eugene: ISTE, 2012. </div>
+</div>
+<div id="ref-ETHZurichFlippedClassroom" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[53] </div><div class="csl-right-inline">ETH ZURICH. <strong><span>Flipped Classroom</span></strong>. <a href="https://ethz.ch/en/the-eth-zurich/education/educational-development/planning-teaching/flipped-classroom.html" class="uri">https://ethz.ch/en/the-eth-zurich/education/educational-development/planning-teaching/flipped-classroom.html</a>, 2025. Acesso em: 15 jul. 2025</div>
+</div>
+<div id="ref-leifer1970project" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[54] </div><div class="csl-right-inline">LEIFER, L. A. <strong>Project based learning in design education</strong>. Proceedings of the 1970 conference on design methods. <strong>Anais</strong>...1970. </div>
+</div>
+<div id="ref-Kim2021ComputationalThinking" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[55] </div><div class="csl-right-inline">KIM, Y. <a href="https://edtechbooks.org/k12handbook/computational_thinking">Computational thinking</a>. In: <strong>Educational technology: An online handbook for pre-k-12</strong>. [s.l.] EdTech Books, 2021. </div>
+</div>
+<div id="ref-Bell2009ComputerScience" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[56] </div><div class="csl-right-inline">BELL, T. et al. Computer science unplugged: School students doing real computing without computers. <strong>Article</strong>, 2009. </div>
+</div>
+<div id="ref-NYSCI" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[57] </div><div class="csl-right-inline">NEW YORK HALL OF SCIENCE. <strong>Computational thinking school strategy guide</strong>., [s.d.][s.d.]. Disponível em: &lt;<a href="https://nysci.org/pdf/NYSCI-Computational-Thinking-School-Strategy-Guide-04-09-2024.pdf">https://nysci.org/pdf/NYSCI-Computational-Thinking-School-Strategy-Guide-04-09-2024.pdf</a>&gt;. Acesso em: 6 jul. 2025</div>
+</div>
+<div id="ref-Wong2019SelfDevelopment" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[58] </div><div class="csl-right-inline">WONG, M. M. Y. et al. <a href="https://doi.org/10.1007/978-981-13-6528-7_18">Self-development through service-oriented stress-adaption-growth (SOSAG) process in the engagement of computational thinking co-teaching education</a>. In: KONG, S.-C.; ABELSON, H. (Eds.). <strong>Computational thinking education</strong>. Singapore: Springer Nature Singapore Pte Ltd., 2019. </div>
+</div>
+<div id="ref-PythonDocs" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[59] </div><div class="csl-right-inline">PYTHON SOFTWARE FOUNDATION. <strong><span>The Python Language Reference</span></strong>. Disponível em: &lt;<a href="https://docs.python.org/3/reference/index.html">https://docs.python.org/3/reference/index.html</a>&gt;. Acesso em: 13 jul. 2025. </div>
+</div>
+<div id="ref-PennState" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[60] </div><div class="csl-right-inline">PENN STATE UNIVERSITY. <strong>Computer science (CMPSC) - university bulletin - penn state</strong>., [s.d.]a[s.d.]a. Disponível em: &lt;<a href="https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/">https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/</a>&gt;. Acesso em: 6 jul. 2025</div>
+</div>
+<div id="ref-OCamlManual2025" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[61] </div><div class="csl-right-inline">LEROY, X. et al. <strong><a href="https://v2.ocaml.org/manual/">The OCaml system: Documentation and user’s manual</a></strong>. [s.l.] INRIA (Institut National de Recherche en Informatique et en Automatique), 2025. </div>
+</div>
+<div id="ref-JavaLanguageSpecification2024" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[62] </div><div class="csl-right-inline">GOSLING, J. et al. <strong><a href="https://docs.oracle.com/javase/specs/jls/se22/jls22.pdf">The java® language specification, java SE 22 edition</a></strong>. Redwood City, California: Oracle America, Inc., 2024. </div>
+</div>
+<div id="ref-ISO_C18" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[63] </div><div class="csl-right-inline">INTERNATIONAL ORGANIZATION FOR STANDARDIZATION. <strong><span class="nocase">Information technology – Programming languages – C</span></strong>. Geneva, Switzerland: <span>International Organization for Standardization (ISO)</span>, 2018. Disponível em: &lt;<a href="https://www.iso.org/standard/74528.html">https://www.iso.org/standard/74528.html</a>&gt;.</div>
+</div>
+<div id="ref-ISO_CPP23" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[64] </div><div class="csl-right-inline">21, I. J. 1/SC 22/WG. <strong>ISO/IEC 14882:2024 - programming languages — c++</strong>. [s.l.] International Organization for Standardization, 2024. Disponível em: &lt;<a href="https://www.iso.org/standard/82312.html">https://www.iso.org/standard/82312.html</a>&gt;.</div>
+</div>
+<div id="ref-Prolog-ISO1995" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[65] </div><div class="csl-right-inline">INTERNATIONAL ORGANIZATION FOR STANDARDIZATION. <strong>ISO/IEC 13211-1:1995 - information technology – programming languages – prolog – part 1: General core</strong>. [s.l.] ISO/IEC, 1995. </div>
+</div>
+<div id="ref-stanford_cs106a_syllabus" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[66] </div><div class="csl-right-inline">STANFORD UNIVERSITY. <strong>CS106A syllabus</strong>., 2025. Disponível em: &lt;<a href="https://web.stanford.edu/class/archive/cs/cs106a/cs106a.1258/syllabus">https://web.stanford.edu/class/archive/cs/cs106a/cs106a.1258/syllabus</a>&gt;</div>
+</div>
+<div id="ref-Zivkovic2014" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[67] </div><div class="csl-right-inline">ŽIVKOVIĆ, M. <strong>XLogo4Schools</strong>. SourceForge, 2014. Disponível em: &lt;<a href="http://sourceforge.net/projects/xlogo4schools">http://sourceforge.net/projects/xlogo4schools</a>&gt;</div>
+</div>
+<div id="ref-Wattenhofer2020_url" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[68] </div><div class="csl-right-inline">WATTENHOFER, R. <strong><a href="https://disco.ethz.ch/courses/hs20/coti/lecturenotes/script.pdf">Computational thinking</a></strong>. [s.l.] ETH Zürich, 2020. </div>
+</div>
+<div id="ref-Amendum2018" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[69] </div><div class="csl-right-inline">AMENDUM, M. L. B. et al. <strong>Computational thinking rubric for problem solving</strong>. Newark, DE: The College School, University of Delaware, 2018. Disponível em: &lt;<a href="https://cpb-us-w2.wpmucdn.com/sites.udel.edu/dist/4/8672/files/2018/12/Computational-Thinking-Rubric-2ktkkgv.pdf">https://cpb-us-w2.wpmucdn.com/sites.udel.edu/dist/4/8672/files/2018/12/Computational-Thinking-Rubric-2ktkkgv.pdf</a>&gt;.</div>
+</div>
+<div id="ref-RomanGonzalez2019" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[70] </div><div class="csl-right-inline">ROMÁN-GONZÁLEZ, M.; MORENO-LEÓN, J.; ROBLES, G. <a href="https://doi.org/10.1007/978-981-13-6528-7_6">Combining assessment tools for a comprehensive evaluation of computational thinking interventions</a>. In: KONG, S.-C.; ABELSON, H. (Eds.). <strong>Computational thinking education</strong>. [s.l.] Springer, 2019. p. 85–100. </div>
+</div>
+<div id="ref-Smith2021" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[71] </div><div class="csl-right-inline">SMITH, J. A. C. B.; GROVER, S.; SMITH, A. L. <strong>Measuring computational thinking and computer science outcomes: A resource for CS for all researchers</strong>. [s.l.] U.S. Department of Education, Mar. 2021. Disponível em: &lt;<a href="https://www.ed.gov/sites/ed/files/2021/03/CSCTOutcomes_508.pdf">https://www.ed.gov/sites/ed/files/2021/03/CSCTOutcomes_508.pdf</a>&gt;.</div>
+</div>
+<div id="ref-BebrasUK2025" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[72] </div><div class="csl-right-inline">RASPBERRY PI FOUNDATION. <strong>The UK bebras challenge</strong>. <a href="https://www.bebras.uk/" class="uri">https://www.bebras.uk/</a>, 2025. </div>
+</div>
+</div>
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Algoritmização é um neologismo para traduzir o termo “Algorithmization” do inglês. A ideia é que seja um termo que remete à criação de algoritmos, ou seja, a construção de soluções sistemáticas e eficientes para problemas computacionais. É horrível, eu sei.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>em tradução livre Raciocínio Algorítmico Familiar, ou Raciocínio Algorítmico Conhecido.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>em tradução livre “Seu Cérebro no ChatGPT: Acúmulo de Dívida Cognitiva ao Usar um Assistente de Inteligência Artificial para Tarefa de Escrita de Ensaio”.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>em tradução livre “Ensinando Inteligência Artificial com jogos: o impacto da Inteligência Artificial generativa no desenvolvimento de habilidades de pensamento computacional”.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>em tradução livre “Projeto de Algoritmos com Haskell”.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>em tradução livre Desplugado versus Plugado: examinando o desempenho em programação básica e o<strong>Pensamento Computacional</strong>de alunos do 6º ano<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>em tradução livre: Teste de Desempenho de Pensamento Computacional.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>em tradução livre: Questionário de Autoeficácia de Pensamento Computacional.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Introdução">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./inte.html" class="pagination-link" aria-label="Analisando Currículos Internacionais">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Analisando Currículos Internacionais</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025 Frank de Alcantara</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/linefollower/edit/main/intro.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linefollower/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

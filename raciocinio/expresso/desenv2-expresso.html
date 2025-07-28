@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Módulo 2: Abstração e Reconhecimento de Padrões</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <!-- Highlight.js CSS for Code Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Table of Contents -->
+    <nav class="toc-fixed" id="toc">
+        <div class="mb-4">
+            <h3 class="fs-5 fw-bold text-dark mb-3">Sumário</h3>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="#introducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">1. Introdução ao Módulo</a></li>
+                <li class="mb-2"><a href="#abstracao-reutilizacao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">2. Abstração e Reutilização</a></li>
+                <li class="mb-2"><a href="#reconhecimento-padroes" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Reconhecimento de Padrões</a></li>
+                <li class="mb-2"><a href="#funcoes-biblioteca" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4. Funções da Biblioteca</a></li>
+                <li class="mb-2"><a href="#estruturas-dados" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5. Estruturas de Dados</a></li>
+                <li class="mb-2"><a href="#exercicios-pratica" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6. Exercícios para Prática</a></li>
+            </ul>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3"><a style = "text-decoration: none !important; color: black; font-size: 1.2rem !important; text-align: center !important;" href="TSF-expresso.html">Técnica da Sequência de Fibonacci</a></h4>
+            <div class="fibonacci-sequence">
+                <div class="fibonacci-number">1</div>
+                <div class="fibonacci-number">1</div>
+                <div class="fibonacci-number">2</div>
+                <div class="fibonacci-number">3</div>
+                <div class="fibonacci-number">5</div>
+            </div>
+            <p class="fs-6 text-muted text-center">Aplicação em atividades avançadas</p>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Elementos DAAD</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-danger-subtle rounded"><i class="fas fa-puzzle-piece me-2 text-danger"></i><small class="text-danger fw-medium">Decomposição</small></div>
+                <div class="p-2 bg-warning-subtle rounded"><i class="fas fa-eye me-2 text-warning"></i><small class="text-warning fw-medium">Abstração</small></div>
+                <div class="p-2 rounded" style="background-color: #dbeafe;"><i class="fas fa-cogs me-2" style="color: #0284c7;"></i><small style="color: #0284c7;" class="fw-medium">Algoritmização</small></div>
+                <div class="p-2 bg-success-subtle rounded"><i class="fas fa-bug me-2 text-success"></i><small class="text-success fw-medium">Depuração</small></div>
+            </div>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Referências Principais</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-light rounded citation-card" style="cursor: pointer;" data-tooltip="Conceitos modernos de C++23 e programação estruturada">
+                    <small class="fw-medium text-dark">C++23 Standards</small>
+                </div>
+                <div class="p-2 bg-light rounded citation-card" style="cursor: pointer;" data-tooltip="Documentação oficial Python para estruturas de dados">
+                    <small class="fw-medium text-dark">Python Docs</small>
+                </div>
+                <div class="p-2 bg-light rounded citation-card" style="cursor: default; opacity: 0.6;">
+                    <small class="fw-medium text-muted">Abstração em Programação</small>
+                </div>
+                <div class="p-2 bg-light rounded citation-card" style="cursor: default; opacity: 0.6;">
+                    <small class="fw-medium text-muted">Estruturas de Dados</small>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile TOC Toggle -->
+    <button class="d-lg-none position-fixed top-0 start-0 m-3 z-3 bg-white p-2 rounded shadow" onclick="toggleTOC()">
+        <i class="fas fa-bars text-dark"></i>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="min-vh-100" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container py-5">
+                <div class="bento-grid mb-5">
+                    <div class="bento-main bg-white rounded-3 shadow">
+                        <div class="hero-gradient h-100 d-flex align-items-center justify-content-center position-relative">
+                            <div class="position-absolute w-100 h-100 opacity-25" style="background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\"><defs><pattern id=\"abstraction\" x=\"0\" y=\"0\" width=\"80\" height=\"80\" patternUnits=\"userSpaceOnUse\"><circle cx=\"20\" cy=\"20\" r=\"2\" fill=\"%23ffffff\" opacity=\"0.3\"/><rect x=\"35\" y=\"15\" width=\"15\" height=\"15\" rx=\"3\" fill=\"%23ffffff\" opacity=\"0.2\"/><path d=\"M45,40 Q55,50 65,40 Q55,30 45,40\" stroke=\"%23ffffff\" stroke-width=\"1\" opacity=\"0.1\" fill=\"none\"/><line x1=\"10\" y1=\"60\" x2=\"70\" y2=\"60\" stroke=\"%23ffffff\" stroke-width=\"0.5\" opacity=\"0.3\"/></pattern></defs><rect width=\"100%25\" height=\"100%25\" fill=\"url(%23abstraction)\"/></svg>') center/cover;"></div>
+                            <div class="position-relative z-1 text-center text-white p-4">
+                                <h1 class="display-4 fw-bold mb-4">
+                                    <span class="d-block">Módulo 2</span>
+                                    <em class="d-block fs-3" style="color: var(--copper-200);">Semanas 4-8 (20 Horas-Aula)</em>
+                                </h1>
+                                <p class="fs-4 text-light fw-light mx-auto" style="max-width: 40rem;">
+                                    Abstração e Reconhecimento de Padrões
+                                </p>
+                                <div class="mt-4">
+                                    <span class="badge bg-light text-dark fs-6 me-2">Abstração</span>
+                                    <span class="badge bg-light text-dark fs-6 me-2">Reconhecimento de Padrões</span>
+                                    <span class="badge bg-light text-dark fs-6">Funções e Estruturas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-side-top bg-white rounded-3 p-4 shadow">
+                        <div class="text-center">
+                            <div class="stat-highlight text-success">20h</div>
+                            <div class="fs-6 text-muted">Horas-Aula</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: var(--copper-50);">
+                        <div class="text-center">
+                            <div class="stat-highlight text-primary">5</div>
+                            <div class="fs-6 text-muted">Semanas</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: #fef3c7;">
+                        <div class="text-center">
+                            <div class="stat-highlight text-warning">14</div>
+                            <div class="fs-6 text-muted">Exercícios</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: #fee2e2;">
+                        <div class="text-center">
+                            <div class="stat-highlight text-danger">7</div>
+                            <div class="fs-6 text-muted">Projetos</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-4 g-4 mb-5">
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <div class="daad-component daad-a1 border-0 p-0">
+                                    <i class="fas fa-eye fs-2 text-warning mb-3"></i>
+                                    <h3 class="fs-6 fw-semibold text-warning">Abstração</h3>
+                                    <p class="fs-7 text-muted">Criação de componentes reutilizáveis</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <div class="daad-component daad-a2 border-0 p-0">
+                                    <i class="fas fa-search fs-2 mb-3" style="color: #0284c7;"></i>
+                                    <h3 class="fs-6 fw-semibold" style="color: #0284c7;">Reconhecimento</h3>
+                                    <p class="fs-7 text-muted">Identificação de padrões comuns</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <div class="daad-component daad-d border-0 p-0">
+                                    <i class="fas fa-cube fs-2 text-danger mb-3"></i>
+                                    <h3 class="fs-6 fw-semibold text-danger">Estruturas</h3>
+                                    <p class="fs-7 text-muted">Arrays, vetores e registros</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <div class="daad-component daad-d2 border-0 p-0">
+                                    <i class="fas fa-code fs-2 text-success mb-3"></i>
+                                    <h3 class="fs-6 fw-semibold text-success">Funções</h3>
+                                    <p class="fs-7 text-muted">Modularização e reutilização</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section id="introducao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">1. Fundamentos do Módulo 2</h2>
+                    
+                    <p class="fs-5 text-muted mb-4">
+                        No módulo 2, os alunos aprofundam-se na <strong>Abstração</strong> e no <strong>Reconhecimento de Padrões</strong>, dois pilares fundamentais do <strong>Raciocínio Algorítmico</strong>. Este módulo é estruturado em torno da Metodologia <strong>DAAD</strong>, que inclui as etapas de <strong>D</strong>ecomposição, <strong>A</strong>bstração, <strong>A</strong>lgoritmização e <strong>D</strong>epuração.
+                    </p>
+
+                    <div class="definition-box">
+                        <div class="definition-title">Objetivos do Módulo</div>
+                        <ul class="mb-0">
+                            <li>Princípios de abstração: identificação de informações essenciais e criação de modelos simplificados</li>
+                            <li>Reconhecimento de padrões: identificação de similaridades, tendências e generalizações</li>
+                            <li>Abstração na programação: componentes reutilizáveis, funções e estruturas de controle</li>
+                            <li>Estruturas de dados simples: vectors, arrays e structs</li>
+                            <li>Exercícios avançados de interpretação, visualização de dados e simulação de sistemas</li>
+                            <li>Identificação de padrões de código recorrentes para refatoração</li>
+                        </ul>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow" style="background-color: var(--sage-50);">
+                                <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Divisão do Trabalho</h3>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    A partir do exercício <strong>H2</strong>, os alunos devem ser incentivados a dividir o trabalho em partes para facilitar a implementação e a depuração.
+                                </p>
+                                <div class="border-start border-4 border-primary ps-3">
+                                    <div class="fw-medium text-primary">Metodologia</div>
+                                    <div class="fs-6 text-muted">Trabalho em grupos sem controle de versão</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow" style="background-color: var(--copper-50);">
+                                <h3 class="fs-3 fw-semibold mb-3" style="color: var(--copper-800);">Linguagem de Escolha</h3>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    O professor deve decidir qual linguagem será utilizada durante os Módulos 2 e 3. Python ou C++23 são escolhas recomendadas.
+                                </p>
+                                <div class="border-start border-4 border-primary ps-3">
+                                    <div class="fw-medium text-primary">Considerações</div>
+                                    <div class="fs-6 text-muted">Adequação ao nível dos alunos e familiaridade do professor</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="callout-tip">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-info-circle me-2 text-info"></i>
+                            <strong>Importante:</strong>
+                        </div>
+                        <p class="mt-2 mb-0">
+                            Embora o reconhecimento de padrões não esteja explicitado no acrônimo <strong>DAAD</strong>, esta competência é um elemento essencial do <strong>Raciocínio Algorítmico</strong> e da resolução de problemas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Abstração e Reutilização Section -->
+        <section id="abstracao-reutilizacao" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">2. Abstração: Reutilização</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Aplicação da abstração na programação: criação de componentes reutilizáveis, funções, laços de repetição e estruturas de dados. Utilizando a Linguagem C++ com as abstrações de função, <code>for</code>, <code>while</code>, <code>do while</code>.
+                    </p>
+
+                    <div class="activity-section">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">
+                            <span class="step-counter">1</span>
+                            Exercícios de Revisão
+                        </h3>
+                        
+                        <div class="row row-cols-1 row-cols-lg-2 g-4 mb-4">
+                            <div class="col">
+                                <div class="concept-card solution-card">
+                                    <div class="d-flex align-items-start">
+                                        <div class="icon-badge badge-solution me-3">
+                                            <i class="fas fa-calculator"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="fs-5 fw-semibold mb-3 text-success">Revisão 1: Maior e Menor Dígito</h4>
+                                            <p class="fs-6 mb-3">
+                                                Dado um número inteiro positivo <em>N</em> (1 ≤ N ≤ 10⁹), encontre o maior e o menor dígito que compõem este número usando apenas operações aritméticas básicas.
+                                            </p>
+                                            <div class="border-start border-4 border-success ps-3">
+                                                <div class="fw-medium text-success">Objetivo</div>
+                                                <div class="fs-6 text-muted">Treinar manutenção de estado durante iteração</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="concept-card evaluation-card">
+                                    <div class="d-flex align-items-start">
+                                        <div class="icon-badge badge-evaluation me-3">
+                                            <i class="fas fa-chart-line"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="fs-5 fw-semibold mb-3 text-warning">Revisão 2: Série de Taylor</h4>
+                                            <p class="fs-6 mb-3">
+                                                Implementar calculadora científica que calcule o seno de ângulos usando série de Taylor para sen(x).
+                                            </p>
+                                            <div class="border-start border-4 border-warning ps-3">
+                                                <div class="fw-medium text-warning">Fórmula</div>
+                                                <div class="fs-6 text-muted">sin(x) = x - x³/3! + x⁵/5! - x⁷/7! + ...</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="callout-success">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-bullseye me-2 text-success"></i>
+                                <strong>Progressão:</strong>
+                            </div>
+                            <p class="mt-2 mb-0">
+                                Os exercícios de revisão incluem também o cálculo de pi usando série de Leibniz e aproximação fatorial usando fórmula de Stirling, preparando os alunos para conceitos mais avançados.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="exercise-grid">
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3 text-primary">Revisão 3: Série de Leibniz</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Calcular pi usando π/4 = 1 - 1/3 + 1/5 - 1/7 + 1/9 - ... mostrando convergência a cada 1000 iterações.
+                            </p>
+                            <div class="bg-primary-subtle p-3 rounded">
+                                <strong>Meta:</strong> Precisão de 6 casas decimais
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3 text-success">Revisão 4: Fórmula de Stirling</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Aproximar fatoriais usando fórmula de Stirling combinada com série de correção e método babilônico para raiz quadrada.
+                            </p>
+                            <div class="bg-success-subtle p-3 rounded">
+                                <strong>Implementação:</strong> Produtório, somatório e raiz por Newton
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reconhecimento de Padrões Section -->
+        <section id="reconhecimento-padroes" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">3. Reconhecimento de Padrões: Função</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        O reconhecimento de padrões é uma habilidade essencial no raciocínio algorítmico, permitindo identificar soluções comuns para problemas recorrentes. Foi o reconhecimento de padrões que levou à criação de funções, que são blocos reutilizáveis de código que encapsulam uma lógica específica.
+                    </p>
+
+                    <div class="activity-section mb-5">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">
+                            Exercícios com Funções (A-E)
+                        </h3>
+                        
+                        <div class="exercise-grid">
+                            <div class="exercise-card">
+                                <h4 class="fs-5 fw-semibold mb-3 text-primary">A. Trajetória de Projétil</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Canhão dispara projéteis seguindo h(t) = -4.9t² + v₀sin(θ)·t + h₀. Determinar quando o projétil atinge o solo usando série de Taylor para seno.
+                                </p>
+                                <div class="bg-primary-subtle p-3 rounded">
+                                    <strong>Conceitos:</strong> Equações quadráticas e aproximações trigonométricas
+                                </div>
+                            </div>
+                            
+                            <div class="exercise-card">
+                                <h4 class="fs-5 fw-semibold mb-3 text-success">B. Terreno Retangular</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Fazendeiro com 120m de cerca para delimitar terreno retangular. Área A = x(60-x). Determinar dimensões para área específica.
+                                </p>
+                                <div class="bg-success-subtle p-3 rounded">
+                                    <strong>Equação:</strong> x² - 60x + área = 0
+                                </div>
+                            </div>
+                            
+                            <div class="exercise-card">
+                                <h4 class="fs-5 fw-semibold mb-3 text-warning">C. Posição de Veículo</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Veículo com posição s(t) = s₀ + v₀t + ½at². Calcular instantes em que passa por posição final sf.
+                                </p>
+                                <div class="bg-warning-subtle p-3 rounded">
+                                    <strong>Análise:</strong> Movimento uniforme vs uniformemente variado
+                                </div>
+                            </div>
+                            
+                            <div class="exercise-card">
+                                <h4 class="fs-5 fw-semibold mb-3 text-info">D. Lucro Empresarial</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Função lucro L(q) = -2q² + 80q - 300. Determinar quantidade de produção para lucro desejado.
+                                </p>
+                                <div class="bg-info-subtle p-3 rounded">
+                                    <strong>Otimização:</strong> Vértice da parábola e pontos críticos
+                                </div>
+                            </div>
+                            
+                            <div class="exercise-card">
+                                <h4 class="fs-5 fw-semibold mb-3 text-secondary">E. Antena Parabólica</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Ganho G = -0.1d² + 3d + 5 em função do diâmetro. Calcular diâmetro para ganho mínimo desejado.
+                                </p>
+                                <div class="bg-secondary-subtle p-3 rounded">
+                                    <strong>Aplicação:</strong> Engenharia de telecomunicações
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="callout-tip">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-graduation-cap me-2 text-info"></i>
+                            <strong>Sequência de Fibonacci na Aplicação:</strong>
+                        </div>
+                        <div class="mt-3">
+                            <p class="mb-2">Exercícios aplicados seguindo a técnica:</p>
+                            <ol class="mb-0">
+                                <li>Exercício A completamente resolvido pelo professor</li>
+                                <li>Exercício B resolvido pelos alunos (1 problema)</li>
+                                <li>Exercícios C-D resolvidos em duplas (2 problemas)</li>
+                                <li>Exercício E e revisões resolvidos em grupos (3+ problemas)</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Funções da Biblioteca Section -->
+        <section id="funcoes-biblioteca" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">4. Usando Funções da Biblioteca Padrão</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        A maioria das linguagens modernas possui funções pré-definidas otimizadas e testadas. Os exercícios exploram o uso de bibliotecas padrão para criar sistemas especialistas.
+                    </p>
+
+                    <div class="exercise-grid">
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3 text-primary">A2. Casa Lotérica</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Sistema para calcular probabilidades de jogos: Mega-Sena, Lotofácil, Quina. Usando funções próprias e da biblioteca padrão.
+                            </p>
+                            <div class="bg-primary-subtle p-3 rounded">
+                                <strong>Funções:</strong> calcularFatorial(), calcularCombinacao(), pow(), log()
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3 text-success">B2. Sistema Bancário</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Sistema para orientar clientes sobre investimentos, calcular juros compostos e tempo para dobrar capital.
+                            </p>
+                            <div class="bg-success-subtle p-3 rounded">
+                                <strong>Cálculos:</strong> Montante final, fator de crescimento, validação
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3 text-warning">C2. Engenharia Civil</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Sistema para calcular parâmetros de rampas de acessibilidade e escadas, validando conformidade com normas.
+                            </p>
+                            <div class="bg-warning-subtle p-3 rounded">
+                                <strong>Trigonometria:</strong> sin(), cos(), tan(), atan(), conversões
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3 text-info">D2. Engenharia Acústica</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Sistema para calcular níveis de ruído, converter intensidades para decibéis e somar múltiplas fontes.
+                            </p>
+                            <div class="bg-info-subtle p-3 rounded">
+                                <strong>Fórmulas:</strong> dB = 10×log₁₀(I/I₀), atenuação por distância
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3 text-secondary">E2. Engenharia Elétrica</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Sistema para calcular parâmetros de circuitos trifásicos, eficiência energética e análise de harmônicos.
+                            </p>
+                            <div class="bg-secondary-subtle p-3 rounded">
+                                <strong>Conceitos:</strong> Potências P, Q, S; fator de potência; THD
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3 text-dark">F2. Observatório Astronômico</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Sistema para calcular posições celestes, distâncias interplanetárias e janelas de lançamento espacial.
+                            </p>
+                            <div class="bg-dark text-white p-3 rounded">
+                                <strong>Mecânica:</strong> Equação de Kepler, coordenadas, órbitas
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3" style="color: #8b5cf6;">G2. Laboratório Farmacêutico</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Sistema para análise estatística de dados experimentais e modelagem farmacocinética sequencial.
+                            </p>
+                            <div class="p-3 rounded" style="background-color: #f3e8ff;">
+                                <strong>Modelos:</strong> C(t) = C₀·e^(-kt), clearance, bioequivalência
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="callout-warning">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-lightbulb me-2 text-warning"></i>
+                            <strong>Aplicação da Sequência de Fibonacci:</strong>
+                        </div>
+                        <p class="mt-2 mb-0">
+                            Os exercícios A2-G2 seguem a progressão 1, 1, 2, 3 da Sequência de Fibonacci, com tempo decrescente por problema e complexidade crescente.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Estruturas de Dados Section -->
+        <section id="estruturas-dados" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">5. Decomposição e Abstração: Estruturas de Dados Compostas</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Ao completar os exercícios fundamentais, os alunos estão prontos para desafios mais complexos envolvendo estruturas de dados compostas, como arrays, vetores, strings, tuplas e registros.
+                    </p>
+
+                    <div class="definition-box mb-5">
+                        <div class="definition-title">Estratégia de Divisão de Trabalho</div>
+                        <p class="mb-3">
+                            Os exercícios são mais desafiadores e demorados. O professor pode sugerir trabalho em grupos de 4 alunos, dividindo os exercícios em módulos implementáveis separadamente.
+                        </p>
+                        <div class="alert alert-info">
+                            <strong>Metodologia:</strong> Trabalho colaborativo sem sistema de controle de versão, com rotação de papéis entre exercícios.
+                        </div>
+                    </div>
+
+                    <div class="exercise-grid">
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3 text-primary">H2. Biblioteca (Arrays)</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Gerenciar empréstimos de livros com array para até 10 registros. Funções: registrar, salvar, ler, buscar empréstimos.
+                            </p>
+                            <div class="bg-primary-subtle p-3 rounded fs-6">
+                                <strong>Divisão:</strong> 4 alunos, cada um responsável por uma função específica
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3 text-success">I2. Tarefas (Vetores)</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Organizar tarefas diárias em lista dinâmica com vector. Adicionar, remover e buscar tarefas por palavra-chave.
+                            </p>
+                            <div class="bg-success-subtle p-3 rounded fs-6">
+                                <strong>Estrutura:</strong> Vector dinâmico com persistência em arquivo
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3 text-warning">J2. Loja (Strings)</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Registrar produtos vendidos como strings formatadas "nome,preco" em array de até 15 produtos.
+                            </p>
+                            <div class="bg-warning-subtle p-3 rounded fs-6">
+                                <strong>Formato:</strong> Array de strings com validação e busca
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3 text-info">K2. Clube (Structs)</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Gerenciar participantes em eventos culturais usando structs (nome, eventos, total pago).
+                            </p>
+                            <div class="bg-info-subtle p-3 rounded fs-6">
+                                <strong>Estrutura:</strong> Struct Participante com validação de campos
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3 text-secondary">L2. Sensores (Arrays)</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Processar dados de temperatura de sensores municipais. Até 30 temperaturas com estatísticas detalhadas.
+                            </p>
+                            <div class="bg-secondary-subtle p-3 rounded fs-6">
+                                <strong>Análise:</strong> Média, extremos, desvio padrão, tendências
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3 text-dark">M2. Calculadora (Histórico)</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Calculadora científica com histórico completo para auditoria. Array de operações e análise estatística.
+                            </p>
+                            <div class="bg-dark text-white p-3 rounded fs-6">
+                                <strong>Funções:</strong> sin(), cos(), tan(), exp(), log10() com histórico
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3" style="color: #8b5cf6;">N2. Vendas (Vetores²)</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Organizar vendas por categoria usando vetores de vetores. Cada categoria contém lista de valores.
+                            </p>
+                            <div class="p-3 rounded" style="background-color: #f3e8ff; font-size: 0.875rem;">
+                                <strong>Complexidade:</strong> Estruturas bidimensionais dinâmicas
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="callout-success">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-users me-2 text-success"></i>
+                            <strong>Decomposição Colaborativa:</strong>
+                        </div>
+                        <p class="mt-2 mb-0">
+                            Cada exercício H2-N2 inclui estratégia detalhada de divisão entre 4 alunos, com interfaces claras para integração final e rotação de responsabilidades.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exercícios para Prática Section -->
+        <section id="exercicios-pratica" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">6. Exercícios para Prática</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Os exercícios deste módulo são organizados em progressão de complexidade, combinando conceitos de abstração, reconhecimento de padrões e estruturas de dados compostas.
+                    </p>
+
+                    <div class="methodology-comparison mb-5">
+                        <div class="concept-card decomposition-card">
+                            <div class="text-center mb-3">
+                                <div class="icon-badge badge-solution mx-auto">
+                                    <i class="fas fa-layer-group"></i>
+                                </div>
+                            </div>
+                            <h3 class="fs-4 fw-semibold mb-3 text-success text-center">Exercícios A-E</h3>
+                            <p class="fs-6 mb-3 text-center">
+                                <strong>Reconhecimento de Padrões com Funções</strong><br>
+                                Desenvolvimento de funções para resolver problemas matemáticos e físicos recorrentes.
+                            </p>
+                            <div class="border-start border-4 border-success ps-3 mt-3">
+                                <div class="fw-medium text-success">Conceitos</div>
+                                <div class="fs-6 text-muted">Equações quadráticas, trigonometria, otimização</div>
+                            </div>
+                        </div>
+                        
+                        <div class="concept-card abstraction-card">
+                            <div class="text-center mb-3">
+                                <div class="icon-badge badge-methodology mx-auto">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                            </div>
+                            <h3 class="fs-4 fw-semibold mb-3 text-primary text-center">Exercícios A2-G2</h3>
+                            <p class="fs-6 mb-3 text-center">
+                                <strong>Funções da Biblioteca Padrão</strong><br>
+                                Sistemas especialistas usando funções otimizadas e testadas das bibliotecas padrão.
+                            </p>
+                            <div class="border-start border-4 border-primary ps-3 mt-3">
+                                <div class="fw-medium text-primary">Domínios</div>
+                                <div class="fs-6 text-muted">Matemática, engenharia, ciências, astronomia</div>
+                            </div>
+                        </div>
+                        
+                        <div class="concept-card algorithmization-card">
+                            <div class="text-center mb-3">
+                                <div class="icon-badge badge-evaluation mx-auto">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                            </div>
+                            <h3 class="fs-4 fw-semibold mb-3 text-warning text-center">Exercícios H2-N2</h3>
+                            <p class="fs-6 mb-3 text-center">
+                                <strong>Estruturas de Dados Compostas</strong><br>
+                                Projetos colaborativos usando arrays, vetores, strings e structs com divisão de trabalho.
+                            </p>
+                            <div class="border-start border-4 border-warning ps-3 mt-3">
+                                <div class="fw-medium text-warning">Metodologia</div>
+                                <div class="fs-6 text-muted">Trabalho em grupos de 4 alunos com rotação</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4 class="fs-5 fw-semibold mb-3 text-primary">Progressão do Módulo</h4>
+                        <div class="progression-step">
+                            <h5 class="fw-semibold text-success">Semanas 4-5: Fundamentos</h5>
+                            <p>Exercícios de revisão e introdução a funções. Criação da cognição necessária para abstração e reutilização.</p>
+                        </div>
+                        <div class="progression-step">
+                            <h5 class="fw-semibold text-warning">Semanas 6-7: Aplicação</h5>
+                            <p>Uso de bibliotecas padrão em sistemas especialistas. Desenvolvimento de projetos com funções matemáticas avançadas.</p>
+                        </div>
+                        <div class="progression-step">
+                            <h5 class="fw-semibold text-danger">Semana 8: Integração</h5>
+                            <p>Estruturas de dados compostas e trabalho colaborativo. Projetos que combinam todos os conceitos do módulo.</p>
+                        </div>
+                    </div>
+
+                    <div class="callout-tip">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-chart-bar me-2 text-info"></i>
+                            <strong>Avaliação e Depuração:</strong>
+                        </div>
+                        <p class="mt-2 mb-0">
+                            O módulo enfatiza a prática de <strong>D</strong>epuração através de divisão de trabalho e integração colaborativa, preparando os alunos para projetos mais complexos no Módulo 3.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<script>
+    // Mobile TOC Toggle
+    function toggleTOC() {
+        const toc = document.getElementById('toc');
+        toc.classList.toggle('open');
+    }
+
+    // Close TOC when clicking outside on mobile
+    document.addEventListener('click', function(event) {
+        const toc = document.getElementById('toc');
+        const hamburger = document.querySelector('button[onclick="toggleTOC()"]');
+        if (window.innerWidth <= 1024 && toc.classList.contains('open')) {
+            if (!toc.contains(event.target) && event.target !== hamburger && !hamburger.contains(event.target)) {
+                toc.classList.remove('open');
+            }
+        }
+    });
+
+    // Smooth scrolling and active link highlighting
+    document.addEventListener('DOMContentLoaded', function() {
+        const links = document.querySelectorAll('a[href^="#"]');
+        const sections = document.querySelectorAll('section[id]');
+        
+        // Add click handlers for smooth scrolling with offset
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    const offset = 80;
+                    const elementPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+                    window.scrollTo({
+                        top: elementPosition - offset,
+                        behavior: 'smooth'
+                    });
+                }
+                if (window.innerWidth <= 1024) {
+                    document.getElementById('toc').classList.remove('open');
+                }
+            });
+        });
+        
+        // Highlight active section in TOC
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    links.forEach(link => {
+                        link.classList.remove('bg-light', 'text-dark');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('bg-light', 'text-dark');
+                        }
+                    });
+                }
+            });
+        }, {
+            rootMargin: '-80px 0px -70% 0px'
+        });
+        
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Fade in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        fadeElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            fadeObserver.observe(el);
+        });
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        const toc = document.getElementById('toc');
+        if (window.innerWidth > 1024) {
+            toc.classList.remove('open');
+        }
+    });
+
+    // Custom tooltips for citations
+    document.addEventListener('DOMContentLoaded', function() {
+        const tooltip = document.createElement('div');
+        tooltip.className = 'custom-tooltip';
+        document.body.appendChild(tooltip);
+
+        const citationCards = document.querySelectorAll('.citation-card[data-tooltip]');
+        
+        citationCards.forEach(card => {
+            card.addEventListener('mouseenter', function(e) {
+                const tooltipText = e.target.getAttribute('data-tooltip');
+                tooltip.innerHTML = tooltipText;
+                tooltip.classList.add('show');
+            });
+
+            card.addEventListener('mousemove', function(e) {
+                tooltip.style.left = (e.pageX + 10) + 'px';
+                tooltip.style.top = (e.pageY - 10) + 'px';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                tooltip.classList.remove('show');
+            });
+        });
+    });
+</script>
+
+<!-- Highlight.js JavaScript for Code Syntax Highlighting -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/cpp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    hljs.highlightAll();
+});
+</script>
+</body>
+</html>

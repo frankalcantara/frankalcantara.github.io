@@ -1,0 +1,67 @@
+/* CSS adicional para personalização do template */
+
+/* Personalização da navbar */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Personalização do sidebar */
+.sidebar-navigation .sidebar-item {
+    border-radius: 6px;
+    margin-bottom: 2px;
+}
+
+/* Personalização das páginas */
+.quarto-title-banner {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+/* Botões personalizados */
+.btn-custom {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.btn-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Personalização das tabelas */
+.table-custom {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+/* Animações suaves */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsividade melhorada */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1rem;
+    }
+    
+    .custom-footer {
+        text-align: center;
+    }
+    
+    .custom-footer .text-end {
+        text-align: center !important;
+        margin-top: 1rem;
+    }
+}

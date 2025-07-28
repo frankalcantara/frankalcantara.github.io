@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Módulo 3: Algoritmização e Estruturas de Dados</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* File-specific styles */
+
+        .methodology-card {
+            min-height: 200px;
+            border-top: 4px solid;
+            transition: all 0.3s ease;
+        }
+
+        .methodology-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .decomposition-card { border-top-color: #10b981; }
+        .abstraction-card { border-top-color: #3b82f6; }
+        .algorithmization-card { border-top-color: #f59e0b; }
+        .debugging-card { border-top-color: #ef4444; }
+        .data-structures-card { border-top-color: #8b5cf6; }
+        .algorithms-card { border-top-color: #06b6d4; }
+
+
+        .methodology-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .progression-step {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .progression-step::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary-600);
+        }
+
+        .progression-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1rem;
+            width: 2px;
+            height: calc(100% - 0.5rem);
+            background: var(--academic-300);
+        }
+
+
+        .callout-warning {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .callout-success {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-left: 4px solid #10b981;
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+
+        .concept-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-left: 4px solid;
+            margin-bottom: 1.5rem;
+        }
+
+        .problem-card { border-left-color: #ef4444; }
+        .solution-card { border-left-color: #10b981; }
+        .methodology-card-inline { border-left-color: #3b82f6; }
+        .evaluation-card { border-left-color: #f59e0b; }
+        .activity-card { border-left-color: #8b5cf6; }
+        .stack-card { border-left-color: #06b6d4; }
+        .search-card { border-left-color: #84cc16; }
+        .sort-card { border-left-color: #f97316; }
+
+        .icon-badge {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .badge-problem { background: #ef4444; }
+        .badge-solution { background: #10b981; }
+        .badge-methodology { background: #3b82f6; }
+        .badge-evaluation { background: #f59e0b; }
+        .badge-activity { background: #8b5cf6; }
+        .badge-stack { background: #06b6d4; }
+        .badge-search { background: #84cc16; }
+        .badge-sort { background: #f97316; }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+            padding-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--primary-600);
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--primary-600);
+        }
+
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 1.5rem;
+            width: 2px;
+            height: calc(100% - 1rem);
+            background: var(--academic-300);
+        }
+
+        .definition-box {
+            background: linear-gradient(135deg, var(--academic-50), var(--primary-50));
+            border: 1px solid var(--academic-200);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .definition-title {
+            font-weight: 600;
+            color: var(--academic-800);
+            margin-bottom: 0.5rem;
+        }
+
+        .code-block {
+            background: var(--academic-800);
+            color: #f8fafc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .code-comment {
+            color: #94a3b8;
+        }
+
+        .code-keyword {
+            color: #60a5fa;
+        }
+
+        .code-string {
+            color: #10b981;
+        }
+
+        .code-number {
+            color: #f59e0b;
+        }
+
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .exercise-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--primary-600);
+            transition: all 0.3s ease;
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .activity-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .step-counter {
+            background: var(--primary-600);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-weight: bold;
+        }
+
+        .algorithm-demo {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border: 2px solid #0891b2;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .complexity-badge {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 1px solid #f59e0b;
+            color: #92400e;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .stack-visualization {
+            background: white;
+            border: 2px solid var(--academic-300);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .stack-item {
+            background: var(--primary-500);
+            color: white;
+            padding: 0.5rem 1rem;
+            margin: 2px 0;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Table of Contents -->
+    <nav class="toc-fixed" id="toc">
+        <div class="mb-4">
+            <h3 class="fs-5 fw-bold text-dark mb-3">Sumário</h3>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="#introducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">1. Introdução ao Módulo</a></li>
+                <li class="mb-2"><a href="#atividade-a3" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">2. Atividade A3: Ordenação</a></li>
+                <li class="mb-2"><a href="#atividade-b3" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Atividade B3: Implementação</a></li>
+                <li class="mb-2"><a href="#atividade-c3" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4. Atividade C3: Busca</a></li>
+                <li class="mb-2"><a href="#atividade-d3" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5. Atividade D3: Busca Implementação</a></li>
+                <li class="mb-2"><a href="#atividade-e3" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6. Atividade E3: Pilha</a></li>
+                <li class="mb-2"><a href="#atividade-f3" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">7. Atividade F3: Implementação Pilha</a></li>
+                <li class="mb-2"><a href="#avaliacao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">8. Avaliação e Análise</a></li>
+            </ul>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Complexidade Algorítmica</h4>
+            <div class="text-center">
+                <div class="complexity-badge mb-2">O(n) - Linear</div>
+                <div class="complexity-badge mb-2">O(log n) - Logarítmica</div>
+                <div class="complexity-badge">O(n²) - Quadrática</div>
+            </div>
+            <p class="fs-6 text-muted text-center mt-2">Análise de eficiência</p>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Referências Principais</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-light rounded citation-card" style="cursor: pointer;" data-tooltip="SWELLER, John. <strong>Cognitive load theory</strong>. Psychology of Learning and Motivation, v. 55, p. 37-76, 2011.">
+                    <small class="fw-medium text-dark">SWELLER, 2011</small>
+                </div>
+                <div class="p-2 bg-light rounded citation-card" style="cursor: pointer;" data-tooltip="ROEDIGER, Henry L.; BUTLER, Andrew C. <strong>The critical role of retrieval practice in long-term retention</strong>. Trends in Cognitive Sciences, v. 15, n. 1, p. 20-27, 2011.">
+                    <small class="fw-medium text-dark">ROEDIGER, 2011</small>
+                </div>
+                <div class="p-2 bg-light rounded citation-card" style="cursor: pointer;" data-tooltip="ROHRER, Doug; TAYLOR, Kelli. <strong>The shuffling of mathematics problems improves learning</strong>. Instructional Science, v. 35, n. 6, p. 481-498, 2007.">
+                    <small class="fw-medium text-dark">ROHRER, 2007</small>
+                </div>
+                <div class="p-2 bg-light rounded citation-card" style="cursor: pointer;" data-tooltip="SCHRAW, Gregory; MOSHMAN, David. <strong>Metacognitive theories</strong>. Educational Psychology Review, v. 7, n. 4, p. 351-371, 1995.">
+                    <small class="fw-medium text-dark">SCHRAW, 1995</small>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile TOC Toggle -->
+    <button class="d-lg-none position-fixed top-0 start-0 m-3 z-3 bg-white p-2 rounded shadow" onclick="toggleTOC()">
+        <i class="fas fa-bars text-dark"></i>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="min-vh-100" style="background: linear-gradient(to bottom right, var(--academic-100), var(--primary-100));">
+            <div class="container py-5">
+                <div class="bento-grid mb-5">
+                    <div class="bento-main bg-white rounded-3 shadow">
+                        <div class="hero-gradient h-100 d-flex align-items-center justify-content-center position-relative">
+                            <div class="position-absolute w-100 h-100 opacity-25" style="background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\"><defs><pattern id=\"algorithm\" x=\"0\" y=\"0\" width=\"80\" height=\"80\" patternUnits=\"userSpaceOnUse\"><circle cx=\"20\" cy=\"20\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.4\"/><rect x=\"30\" y=\"15\" width=\"20\" height=\"10\" rx=\"2\" fill=\"%23ffffff\" opacity=\"0.3\"/><path d=\"M40,35 Q50,45 60,35 Q50,25 40,35\" stroke=\"%23ffffff\" stroke-width=\"1\" opacity=\"0.2\" fill=\"none\"/></pattern></defs><rect width=\"100%25\" height=\"100%25\" fill=\"url(%23algorithm)\"/></svg>') center/cover;"></div>
+                            <div class="position-relative z-1 text-center text-white p-4">
+                                <h1 class="display-4 fw-bold mb-4">
+                                    <span class="d-block">Módulo 3</span>
+                                    <em class="d-block fs-3" style="color: var(--primary-200);">Semanas 9-13 (20 Horas-Aula)</em>
+                                </h1>
+                                <p class="fs-4 text-light fw-light mx-auto" style="max-width: 40rem;">
+                                    Algoritmização e Estruturas de Dados
+                                </p>
+                                <div class="mt-4">
+                                    <span class="badge bg-light text-dark fs-6 me-2">Design de Algoritmos</span>
+                                    <span class="badge bg-light text-dark fs-6 me-2">Estruturas de Dados</span>
+                                    <span class="badge bg-light text-dark fs-6">Análise de Eficiência</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-side-top bg-white rounded-3 p-4 shadow">
+                        <div class="text-center">
+                            <div class="stat-highlight text-success">20h</div>
+                            <div class="fs-6 text-muted">Horas-Aula</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: var(--primary-50);">
+                        <div class="text-center">
+                            <div class="stat-highlight text-primary">5</div>
+                            <div class="fs-6 text-muted">Semanas</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: #fef3c7;">
+                        <div class="text-center">
+                            <div class="stat-highlight text-warning">6</div>
+                            <div class="fs-6 text-muted">Atividades</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: #fee2e2;">
+                        <div class="text-center">
+                            <div class="stat-highlight text-danger">3</div>
+                            <div class="fs-6 text-muted">Temas Centrais</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section id="introducao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--academic-900);">1. Fundamentos do Módulo 3</h2>
+                    
+                    <p class="fs-5 text-muted mb-4">
+                        Neste módulo, o aluno já detém as ferramentas necessárias para a criação dos seus próprios algoritmos. O foco será no <strong>Design de Algoritmos</strong>, priorizando o desenvolvimento de procedimentos passo a passo, análise de eficiência e complexidade algorítmica.
+                    </p>
+
+                    <div class="definition-box">
+                        <div class="definition-title">Competência Central: Raciocínio Algorítmico</div>
+                        <p class="mb-3">
+                            A competência de resolver problemas com <strong>Raciocínio Algorítmico</strong> será desenvolvida através da flexibilização dos constructos cognitivos recém-adquiridos, transformando-os em habilidades práticas.
+                        </p>
+                        <ul class="mb-0">
+                            <li>Design de algoritmos: procedimentos passo a passo e análise de eficiência</li>
+                            <li>Estruturas de dados: pilhas e suas operações fundamentais</li>
+                            <li>Algoritmos fundamentais: busca linear e binária, ordenação básica</li>
+                            <li>Análise de complexidade: custos computacionais sem formalização matemática</li>
+                        </ul>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-3 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card sort-card">
+                                <div class="d-flex align-items-start">
+                                    <div class="icon-badge badge-sort me-3">
+                                        <i class="fas fa-sort"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="fs-4 fw-semibold mb-3" style="color: #f97316;">Algoritmos de Ordenação</h3>
+                                        <p class="fs-6 mb-3" style="color: var(--academic-700);">
+                                            Descoberta e análise de algoritmos comuns como Bubble Sort, Selection Sort e Insertion Sort.
+                                        </p>
+                                        <div class="border-start border-4 ps-3" style="border-color: #f97316;">
+                                            <div class="fw-bold" style="color: #f97316;">Metodologia DAAD</div>
+                                            <div class="fs-6 text-muted">Redescoberta através de experimentação</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card search-card">
+                                <div class="d-flex align-items-start">
+                                    <div class="icon-badge badge-search me-3">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="fs-4 fw-semibold mb-3" style="color: #84cc16;">Algoritmos de Busca</h3>
+                                        <p class="fs-6 mb-3" style="color: var(--academic-700);">
+                                            Exploração da busca linear e busca binária, análise de eficiência e casos de uso.
+                                        </p>
+                                        <div class="border-start border-4 ps-3" style="border-color: #84cc16;">
+                                            <div class="fw-bold" style="color: #84cc16;">Complexidade</div>
+                                            <div class="fs-6 text-muted">O(n) vs O(log n) na prática</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card stack-card">
+                                <div class="d-flex align-items-start">
+                                    <div class="icon-badge badge-stack me-3">
+                                        <i class="fas fa-layer-group"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="fs-4 fw-semibold mb-3" style="color: #06b6d4;">Estrutura Pilha</h3>
+                                        <p class="fs-6 mb-3" style="color: var(--academic-700);">
+                                            Implementação e aplicação da pilha (stack) para avaliação de expressões matemáticas.
+                                        </p>
+                                        <div class="border-start border-4 ps-3" style="border-color: #06b6d4;">
+                                            <div class="fw-bold" style="color: #06b6d4;">LIFO</div>
+                                            <div class="fs-6 text-muted">Last In, First Out</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="algorithm-demo">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: #0891b2;">Abordagem Pedagógica: Descoberta Ativa</h3>
+                        <p class="mb-3">
+                            As atividades foram concebidas para provocar a <strong>redescoberta</strong> destes artefatos pelos alunos, aplicando a metodologia DAAD em 90 minutos com distribuição baseada no <em>spacing effect</em> para consolidação de conhecimento.
+                        </p>
+                        <div class="row row-cols-1 row-cols-md-4 g-3">
+                            <div class="col text-center">
+                                <div class="p-3 rounded" style="background-color: #dcfce7;">
+                                    <i class="fas fa-lightbulb fs-1 text-success mb-2"></i>
+                                    <div class="fw-bold text-success">Descoberta</div>
+                                    <div class="fs-6 text-muted">10 min</div>
+                                </div>
+                            </div>
+                            <div class="col text-center">
+                                <div class="p-3 rounded" style="background-color: #dbeafe;">
+                                    <i class="fas fa-puzzle-piece fs-1 text-primary mb-2"></i>
+                                    <div class="fw-bold text-primary">Abstração</div>
+                                    <div class="fs-6 text-muted">22 min</div>
+                                </div>
+                            </div>
+                            <div class="col text-center">
+                                <div class="p-3 rounded" style="background-color: #fef3c7;">
+                                    <i class="fas fa-code fs-1 text-warning mb-2"></i>
+                                    <div class="fw-bold text-warning">Algoritmização</div>
+                                    <div class="fs-6 text-muted">38 min</div>
+                                </div>
+                            </div>
+                            <div class="col text-center">
+                                <div class="p-3 rounded" style="background-color: #fee2e2;">
+                                    <i class="fas fa-bug fs-1 text-danger mb-2"></i>
+                                    <div class="fw-bold text-danger">Depuração</div>
+                                    <div class="fs-6 text-muted">20 min</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="callout-tip">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-brain me-2 text-info"></i>
+                            <strong>Fundamentação Neurocognitiva:</strong>
+                        </div>
+                        <p class="mt-2 mb-0">
+                            As atividades aplicam princípios da neurociência cognitiva, incluindo descoberta ativa, prática de recuperação estruturada e desenvolvimento metacognitivo para maximizar retenção e transferência do conhecimento.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity A3 Section -->
+        <section id="atividade-a3" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--academic-900);">2. Atividade A3: O Desafio da Ordenação</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        O objetivo é levar os alunos a deduzir, formalizar e analisar algoritmos de ordenação através da experimentação prática, aplicando princípios da neurociência cognitiva para maximizar a retenção e transferência do conhecimento.
+                    </p>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card problem-card">
+                                <div class="d-flex align-items-start">
+                                    <div class="icon-badge badge-problem me-3">
+                                        <i class="fas fa-cards-blank"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="fs-4 fw-semibold mb-3 text-danger">Materiais Necessários</h3>
+                                        <ul class="fs-6 mb-3">
+                                            <li>Conjunto de 7-9 cartas numeradas por grupo</li>
+                                            <li>Envelope A: cartas em ordem aleatória</li>
+                                            <li>Envelope B: cartas em "melhor caso" (quase ordenado)</li>
+                                            <li>Envelope C: cartas em "pior caso" (ordem inversa)</li>
+                                            <li>Folhas para pseudocódigo e tabela de rastreio</li>
+                                            <li>Canetas coloridas para marcação</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card methodology-card-inline">
+                                <div class="d-flex align-items-start">
+                                    <div class="icon-badge badge-methodology me-3">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="fs-4 fw-semibold mb-3 text-primary">Estrutura Temporal</h3>
+                                        <div class="timeline-item">
+                                            <strong>Etapa 0:</strong> Ativação de Esquemas (10 min)
+                                        </div>
+                                        <div class="timeline-item">
+                                            <strong>Etapa 1:</strong> Descoberta Estruturada (22 min)
+                                        </div>
+                                        <div class="timeline-item">
+                                            <strong>Etapa 2:</strong> Predição e Teste (18 min)
+                                        </div>
+                                        <div class="timeline-item">
+                                            <strong>Etapa 3:</strong> Apresentação (20 min)
+                                        </div>
+                                        <div class="timeline-item">
+                                            <strong>Etapa 4:</strong> Transfer Learning (12 min)
+                                        </div>
+                                        <div class="timeline-item">
+                                            <strong>Etapa 5:</strong> Reflexão Metacognitiva (10 min)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="activity-section">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--academic-800);">
+                            <span class="step-counter">1</span>
+                            Etapa 1: Descoberta Estruturada com Decomposição (22 min)
+                        </h3>
+                        
+                        <div class="row row-cols-1 row-cols-lg-2 g-4 mb-4">
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3 text-success">Sub-etapa 1a: Descoberta Pura (8 min)</h4>
+                                <div class="p-3 rounded bg-success-subtle">
+                                    <p class="mb-2"><strong>Instrução:</strong> "Ordenem estas cartas e durante a ordenação criem um conjunto de regras que qualquer pessoa possa seguir"</p>
+                                    <p class="mb-0"><strong>Foco:</strong> Apenas na lógica, sem formalização ainda</p>
+                                </div>
+                                
+                                <h4 class="fs-5 fw-semibold mb-3 mt-4 text-primary">Sub-etapa 1b: Formalização (7 min)</h4>
+                                <div class="p-3 rounded bg-primary-subtle">
+                                    <p class="mb-2"><strong>Instrução:</strong> "Agora convertam sua estratégia para pseudocódigo ou fluxograma"</p>
+                                    <p class="mb-0"><strong>Perguntas guia:</strong> Qual parte foi mais difícil? Vocês perceberam algum padrão nas trocas?</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3 text-warning">Sub-etapa 1c: Depuração com Tabela de Rastreio (8 min)</h4>
+                                <div class="table-responsive-custom">
+                                    <table class="table table-custom">
+                                        <thead>
+                                            <tr>
+                                                <th>Passo</th>
+                                                <th>Comparação</th>
+                                                <th>Troca</th>
+                                                <th>Estado Atual</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>3 vs 1</td>
+                                                <td>Sim</td>
+                                                <td>[1, 3, 6, 2, 5, 4]</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>3 vs 6</td>
+                                                <td>Não</td>
+                                                <td>[1, 3, 6, 2, 5, 4]</td>
+                                            </tr>
+                                            <tr>
+                                                <td>...</td>
+                                                <td>...</td>
+                                                <td>...</td>
+                                                <td>...</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <h4 class="fs-5 fw-semibold mb-3 mt-4 text-info">Sub-etapa 1d: Consolidação (2 min)</h4>
+                                <div class="p-3 rounded bg-info-subtle">
+                                    <p class="mb-0"><strong>Retrieval Practice:</strong> "Fechem materiais. Expliquem para o colega ao lado a lógica do algoritmo sem consultar anotações"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="activity-section">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--academic-800);">
+                            <span class="step-counter">2</span>
+                            Etapa 2: Predição e Teste de Eficiência (18 min)
+                        </h3>
+                        
+                        <div class="algorithm-demo">
+                            <h4 class="fs-5 fw-semibold mb-3" style="color: #0891b2;">Elaborative Prediction (5 min)</h4>
+                            <p class="mb-3">Antes de entregar os Envelopes B e C, os alunos devem prever:</p>
+                            
+                            <div class="table-responsive-custom">
+                                <table class="table table-custom">
+                                    <thead>
+                                        <tr>
+                                            <th>Caso</th>
+                                            <th>Predição Comp.</th>
+                                            <th>Real Comp.</th>
+                                            <th>Predição Trocas</th>
+                                            <th>Real Trocas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="fw-bold">Aleatório</td>
+                                            <td>___ comparações</td>
+                                            <td>___ comparações</td>
+                                            <td>___ trocas</td>
+                                            <td>___ trocas</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-bold">Melhor Caso</td>
+                                            <td>___ comparações</td>
+                                            <td>___ comparações</td>
+                                            <td>___ trocas</td>
+                                            <td>___ trocas</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-bold">Pior Caso</td>
+                                            <td>___ comparações</td>
+                                            <td>___ comparações</td>
+                                            <td>___ trocas</td>
+                                            <td>___ trocas</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="callout-warning">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-chart-line me-2 text-warning"></i>
+                                <strong>Descoberta Esperada:</strong>
+                            </div>
+                            <p class="mt-2 mb-0">
+                                Os alunos devem descobrir naturalmente algoritmos como Bubble Sort, Selection Sort ou Insertion Sort. O professor deve estar preparado para reconhecer e discutir as vantagens e desvantagens de cada abordagem descoberta.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="exercise-grid">
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3 text-success">Bubble Sort</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Estratégia de comparação de vizinhos consecutivos. Simples mas menos eficiente para listas grandes.
+                            </p>
+                            <div class="complexity-badge">O(n²) - Quadrática</div>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3 text-primary">Selection Sort</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Encontra o menor elemento e coloca na primeira posição. Sempre tem poucas trocas.
+                            </p>
+                            <div class="complexity-badge">O(n²) - Quadrática</div>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3 text-warning">Insertion Sort</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Insere cada elemento na posição correta. Muito eficiente para listas pequenas ou quase ordenadas.
+                            </p>
+                            <div class="complexity-badge">O(n²) - Quadrática</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity B3 Section -->
+        <section id="atividade-b3" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--academic-900);">3. Atividade B3: Implementação de Algoritmos de Ordenação</h2>
+                    
+                    <p class="fs-5 text-muted mb-4">
+                        Na Atividade A3 os alunos descobriram os algoritmos de ordenação mais comuns. Se o resultado foi satisfatório, esta atividade se resume à implementação dos algoritmos descobertos, a partir dos fluxogramas ou pseudocódigos criados pelos alunos.
+                    </p>
+
+                    <div class="definition-box">
+                        <div class="definition-title">Objetivo da Implementação</div>
+                        <p class="mb-3">
+                            Implementar os algoritmos de ordenação descobertos na atividade anterior, analisando a eficiência e complexidade de cada um através de medição de tempo de execução e contagem de operações.
+                        </p>
+                        <ul class="mb-0">
+                            <li><strong>Material Necessário:</strong> Computadores com ambiente de programação configurado</li>
+                            <li><strong>Linguagem:</strong> C++23 com funções de medida de tempo</li>
+                            <li><strong>Estrutura:</strong> Uma função para cada algoritmo de ordenação descoberto</li>
+                            <li><strong>Análise:</strong> Três tipos de listas (aleatória, quase ordenada, ordem inversa)</li>
+                        </ul>
+                    </div>
+
+                    <div class="activity-section">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--academic-800);">
+                            Exemplo de Código Base em C++23
+                        </h3>
+                        
+                        <div class="code-block">
+<span class="code-comment">// Estrutura para armazenar os dados do CSV</span>
+<span class="code-keyword">struct</span> DataSet {
+    std::vector&lt;<span class="code-keyword">int</span>&gt; lista_aleatoria;
+    std::vector&lt;<span class="code-keyword">int</span>&gt; lista_80_ordenada;
+    std::vector&lt;<span class="code-keyword">int</span>&gt; lista_decrescente;
+};
+
+<span class="code-comment">// Bubble Sort</span>
+<span class="code-keyword">void</span> bubbleSort(std::vector&lt;<span class="code-keyword">int</span>&gt;& arr) {
+    <span class="code-keyword">int</span> n = arr.size();
+    <span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = <span class="code-number">0</span>; i &lt; n - <span class="code-number">1</span>; i++) {
+        <span class="code-keyword">bool</span> trocou = <span class="code-keyword">false</span>;
+        <span class="code-keyword">for</span> (<span class="code-keyword">int</span> j = <span class="code-number">0</span>; j &lt; n - i - <span class="code-number">1</span>; j++) {
+            <span class="code-keyword">if</span> (arr[j] &gt; arr[j + <span class="code-number">1</span>]) {
+                std::swap(arr[j], arr[j + <span class="code-number">1</span>]);
+                trocou = <span class="code-keyword">true</span>;
+            }
+        }
+        <span class="code-keyword">if</span> (!trocou) <span class="code-keyword">break</span>; <span class="code-comment">// Otimização</span>
+    }
+}
+
+<span class="code-comment">// Função para medir tempo de execução</span>
+<span class="code-keyword">template</span>&lt;<span class="code-keyword">typename</span> Func&gt;
+<span class="code-keyword">double</span> medirTempo(std::vector&lt;<span class="code-keyword">int</span>&gt; dados, Func algoritmo) {
+    <span class="code-keyword">auto</span> inicio = std::chrono::high_resolution_clock::now();
+    algoritmo(dados);
+    <span class="code-keyword">auto</span> fim = std::chrono::high_resolution_clock::now();
+    
+    <span class="code-keyword">auto</span> duracao = std::chrono::duration_cast&lt;std::chrono::microseconds&gt;(fim - inicio);
+    <span class="code-keyword">return</span> duracao.count() / <span class="code-number">1000.0</span>; <span class="code-comment">// Retorna em milissegundos</span>
+}
+                        </div>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-3 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card sort-card">
+                                <div class="text-center mb-3">
+                                    <div class="icon-badge badge-sort mx-auto">
+                                        <i class="fas fa-exchange-alt"></i>
+                                    </div>
+                                </div>
+                                <h3 class="fs-4 fw-semibold mb-3 text-center" style="color: #f97316;">Bubble Sort</h3>
+                                <p class="fs-6 mb-3 text-center">
+                                    Algoritmo mais simples, mas menos eficiente para listas grandes. Comparação de elementos adjacentes.
+                                </p>
+                                <div class="text-center">
+                                    <span class="complexity-badge">O(n²) - Pior caso</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card search-card">
+                                <div class="text-center mb-3">
+                                    <div class="icon-badge badge-search mx-auto">
+                                        <i class="fas fa-hand-pointer"></i>
+                                    </div>
+                                </div>
+                                <h3 class="fs-4 fw-semibold mb-3 text-center" style="color: #84cc16;">Selection Sort</h3>
+                                <p class="fs-6 mb-3 text-center">
+                                    Comportamento consistente mas não adaptativo. Sempre encontra o menor elemento.
+                                </p>
+                                <div class="text-center">
+                                    <span class="complexity-badge">O(n²) - Sempre</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card stack-card">
+                                <div class="text-center mb-3">
+                                    <div class="icon-badge badge-stack mx-auto">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                                <h3 class="fs-4 fw-semibold mb-3 text-center" style="color: #06b6d4;">Insertion Sort</h3>
+                                <p class="fs-6 mb-3 text-center">
+                                    Muito eficiente para listas pequenas ou quase ordenadas. Insere elemento na posição correta.
+                                </p>
+                                <div class="text-center">
+                                    <span class="complexity-badge">O(n) - Melhor caso</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="algorithm-demo">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: #0891b2;">Análise Esperada dos Resultados</h3>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3">Performance por Tipo de Lista:</h4>
+                                <ul class="mb-3">
+                                    <li><strong>Lista aleatória:</strong> Merge Sort demonstra superioridade clara</li>
+                                    <li><strong>Lista quase ordenada:</strong> Insertion Sort pode superar algoritmos mais complexos</li>
+                                    <li><strong>Lista em ordem inversa:</strong> Representa o pior caso para a maioria dos algoritmos</li>
+                                    <li><strong>Escalabilidade:</strong> Diferença dramática entre algoritmos O(n²) e O(n log n)</li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3">Insights sobre Implementação:</h4>
+                                <ul class="mb-3">
+                                    <li><strong>Simplicidade vs Eficiência:</strong> Algoritmos simples nem sempre são os melhores</li>
+                                    <li><strong>Adaptabilidade:</strong> Alguns algoritmos se beneficiam de dados parcialmente ordenados</li>
+                                    <li><strong>Uso de memória:</strong> Algoritmos in-place vs que requerem memória adicional</li>
+                                    <li><strong>Comportamento assintótico:</strong> Como o desempenho muda com o tamanho dos dados</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="callout-success">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-chart-bar me-2 text-success"></i>
+                            <strong>Avaliação e Ferramenta Online:</strong>
+                        </div>
+                        <p class="mt-2 mb-0">
+                            Para auxiliar na avaliação uniforme do progresso dos alunos, está disponível uma ferramenta online de avaliação em: <span class="citation-link">https://frankalcantara.com/raciocinio/avaliacao/modulo3-2.html</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity C3 Section -->
+        <section id="atividade-c3" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--academic-900);">4. Atividade C3: Onde Está...?</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        O objetivo é levar os alunos a deduzirem, formalizarem e analisarem algoritmos de busca através da experimentação prática, aplicando princípios da neurociência cognitiva para melhorar a retenção e transferência do conhecimento.
+                    </p>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card search-card">
+                                <div class="d-flex align-items-start">
+                                    <div class="icon-badge badge-search me-3">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="fs-4 fw-semibold mb-3" style="color: #84cc16;">Materiais para Busca</h3>
+                                        <ul class="fs-6 mb-3">
+                                            <li>Conjunto de 15 cartas numeradas (1 a 15)</li>
+                                            <li>Envelope A: cartas em ordem aleatória</li>
+                                            <li>Envelope B: cartas em ordem crescente</li>
+                                            <li>Envelope C: cartas em ordem decrescente</li>
+                                            <li>Cartões de "Missão" com números específicos para buscar</li>
+                                            <li>Folhas para tabela de rastreio e análise</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card methodology-card-inline">
+                                <div class="d-flex align-items-start">
+                                    <div class="icon-badge badge-methodology me-3">
+                                        <i class="fas fa-stopwatch"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="fs-4 fw-semibold mb-3 text-primary">Estrutura da Atividade</h3>
+                                        <div class="timeline-item">
+                                            <strong>Descoberta:</strong> Criar estratégia de busca (6 min)
+                                        </div>
+                                        <div class="timeline-item">
+                                            <strong>Formalização:</strong> Pseudocódigo/fluxograma (6 min)
+                                        </div>
+                                        <div class="timeline-item">
+                                            <strong>Predição:</strong> Antecipar eficiência (6 min)
+                                        </div>
+                                        <div class="timeline-item">
+                                            <strong>Otimização:</strong> Descobrir busca binária (14 min)
+                                        </div>
+                                        <div class="timeline-item">
+                                            <strong>Análise:</strong> Comparar resultados (18 min)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="activity-section">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--academic-800);">
+                            <span class="step-counter">1</span>
+                            Descoberta de Estratégias de Busca
+                        </h3>
+                        
+                        <div class="algorithm-demo">
+                            <h4 class="fs-5 fw-semibold mb-3" style="color: #0891b2;">Fase 1: Busca Linear (Descoberta Natural)</h4>
+                            <p class="mb-3">
+                                <strong>Instrução:</strong> "Encontrem o número especificado no seu cartão de missão nestas cartas e criem um conjunto de regras que qualquer pessoa possa seguir para encontrar qualquer número."
+                            </p>
+                            <div class="row row-cols-1 row-cols-md-3 g-3">
+                                <div class="col">
+                                    <div class="p-3 rounded bg-info-subtle text-center">
+                                        <strong>Envelope A</strong><br>
+                                        <span class="fs-6">Ordem Aleatória</span><br>
+                                        <span class="badge bg-info">Caso Base</span>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="p-3 rounded bg-success-subtle text-center">
+                                        <strong>Envelope B</strong><br>
+                                        <span class="fs-6">Ordem Crescente</span><br>
+                                        <span class="badge bg-success">Melhor Caso</span>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="p-3 rounded bg-warning-subtle text-center">
+                                        <strong>Envelope C</strong><br>
+                                        <span class="fs-6">Ordem Decrescente</span><br>
+                                        <span class="badge bg-warning">Pior Caso</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="callout-warning">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-lightbulb me-2 text-warning"></i>
+                                <strong>Momento Crucial: Descoberta da Busca Binária</strong>
+                            </div>
+                            <p class="mt-2 mb-0">
+                                A busca binária não é intuitiva. O professor deve induzir esta descoberta com a sugestão: <em>"Observando as cartas ordenadas, existe uma forma mais eficiente?"</em> Este é um momento pedagógico fundamental.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card problem-card">
+                                <div class="text-center mb-3">
+                                    <div class="icon-badge badge-problem mx-auto">
+                                        <i class="fas fa-list"></i>
+                                    </div>
+                                </div>
+                                <h3 class="fs-4 fw-semibold mb-3 text-danger text-center">Busca Linear</h3>
+                                <p class="fs-6 mb-3 text-center">
+                                    Verifica elementos sequencialmente até encontrar o alvo. Sempre funciona, independente da ordenação.
+                                </p>
+                                <div class="text-center mb-3">
+                                    <span class="complexity-badge">O(n) - Linear</span>
+                                </div>
+                                <ul class="fs-6 mb-0">
+                                    <li><strong>Melhor caso:</strong> 1 verificação</li>
+                                    <li><strong>Caso médio:</strong> n/2 verificações</li>
+                                    <li><strong>Pior caso:</strong> n verificações</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card solution-card">
+                                <div class="text-center mb-3">
+                                    <div class="icon-badge badge-solution mx-auto">
+                                        <i class="fas fa-divide"></i>
+                                    </div>
+                                </div>
+                                <h3 class="fs-4 fw-semibold mb-3 text-success text-center">Busca Binária</h3>
+                                <p class="fs-6 mb-3 text-center">
+                                    Divide o conjunto ao meio a cada comparação. Requer dados ordenados, mas é muito mais eficiente.
+                                </p>
+                                <div class="text-center mb-3">
+                                    <span class="complexity-badge">O(log n) - Logarítmica</span>
+                                </div>
+                                <ul class="fs-6 mb-0">
+                                    <li><strong>Melhor caso:</strong> 1 verificação</li>
+                                    <li><strong>Caso médio:</strong> log₂(n) verificações</li>
+                                    <li><strong>Pior caso:</strong> log₂(n) verificações</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive-custom">
+                        <table class="table table-custom">
+                            <thead>
+                                <tr>
+                                    <th>Algoritmo</th>
+                                    <th>Algoritmo Original</th>
+                                    <th>Algoritmo Otimizado</th>
+                                    <th>Diferença</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="fw-bold">Lista Aleatória</td>
+                                    <td>7-8 verificações</td>
+                                    <td>N/A (não se aplica)</td>
+                                    <td class="text-muted">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">Lista Ordenada Crescente</td>
+                                    <td>7-8 verificações</td>
+                                    <td>3-4 verificações</td>
+                                    <td class="text-success">50% menos</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">Lista Ordenada Decrescente</td>
+                                    <td>7-8 verificações</td>
+                                    <td>3-4 verificações</td>
+                                    <td class="text-success">50% menos</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="exercise-grid">
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3 text-primary">Transfer Task 1</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Como buscariam um contato específico em uma agenda telefônica de 10.000 nomes?
+                            </p>
+                            <div class="bg-primary-subtle p-3 rounded">
+                                <strong>Resposta esperada:</strong> Busca binária por ordem alfabética
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3 text-success">Transfer Task 2</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Como encontrariam uma palavra específica em um dicionário?
+                            </p>
+                            <div class="bg-success-subtle p-3 rounded">
+                                <strong>Resposta esperada:</strong> Busca binária natural, já praticamos isso!
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3 text-warning">Transfer Task 3</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Como buscariam um produto específico em um catálogo online não-ordenado?
+                            </p>
+                            <div class="bg-warning-subtle p-3 rounded">
+                                <strong>Resposta esperada:</strong> Busca linear é a única opção viável
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity D3 Section -->
+        <section id="atividade-d3" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--academic-900);">5. Atividade D3: Implementação de Algoritmos de Busca</h2>
+                    
+                    <p class="fs-5 text-muted mb-4">
+                        Se os alunos descobriram efetivamente os algoritmos de busca na Atividade C3, esta fase foca na implementação dos algoritmos descobertos, utilizando os fluxogramas ou pseudocódigos criados anteriormente.
+                    </p>
+
+                    <div class="definition-box">
+                        <div class="definition-title">Objetivo da Implementação</div>
+                        <p class="mb-3">
+                            Implementar os algoritmos de busca linear e busca binária, analisando eficiência através de medição de tempo de execução e contagem de comparações em diferentes tipos de conjuntos de dados.
+                        </p>
+                        <ul class="mb-0">
+                            <li><strong>Função de busca:</strong> Recebe lista e valor alvo, retorna posição (-1 se não encontrado)</li>
+                            <li><strong>Análise comparativa:</strong> Lista aleatória, lista ordenada crescente, lista ordenada decrescente</li>
+                            <li><strong>Métricas:</strong> Tempo de execução e número de comparações realizadas</li>
+                        </ul>
+                    </div>
+
+                    <div class="activity-section">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--academic-800);">
+                            Estruturas de Dados e Algoritmos
+                        </h3>
+                        
+                        <div class="code-block">
+<span class="code-comment">// Estrutura para armazenar os dados do CSV</span>
+<span class="code-keyword">struct</span> DataSet {
+    std::vector&lt;<span class="code-keyword">int</span>&gt; lista_aleatoria;
+    std::vector&lt;<span class="code-keyword">int</span>&gt; lista_ordenada_cresc;
+    std::vector&lt;<span class="code-keyword">int</span>&gt; lista_ordenada_decresc;
+    std::vector&lt;<span class="code-keyword">int</span>&gt; elementos_busca;
+};
+
+<span class="code-comment">// Estrutura para armazenar resultados de busca</span>
+<span class="code-keyword">struct</span> ResultadoBusca {
+    <span class="code-keyword">bool</span> encontrado;
+    <span class="code-keyword">int</span> posicao;
+    <span class="code-keyword">int</span> comparacoes;
+    <span class="code-keyword">double</span> tempo_ms;
+    <span class="code-keyword">int</span> elemento_buscado;
+};
+
+<span class="code-comment">// Busca Linear</span>
+ResultadoBusca buscaLinear(<span class="code-keyword">const</span> std::vector&lt;<span class="code-keyword">int</span>&gt;& arr, <span class="code-keyword">int</span> alvo) {
+    <span class="code-keyword">auto</span> inicio = std::chrono::high_resolution_clock::now();
+    
+    ResultadoBusca resultado = {<span class="code-keyword">false</span>, -<span class="code-number">1</span>, <span class="code-number">0</span>, <span class="code-number">0.0</span>, alvo};
+    
+    <span class="code-keyword">for</span> (size_t i = <span class="code-number">0</span>; i &lt; arr.size(); i++) {
+        resultado.comparacoes++;
+        <span class="code-keyword">if</span> (arr[i] == alvo) {
+            resultado.encontrado = <span class="code-keyword">true</span>;
+            resultado.posicao = <span class="code-keyword">static_cast</span>&lt;<span class="code-keyword">int</span>&gt;(i);
+            <span class="code-keyword">break</span>;
+        }
+    }
+    
+    <span class="code-keyword">auto</span> fim = std::chrono::high_resolution_clock::now();
+    <span class="code-keyword">auto</span> duracao = std::chrono::duration_cast&lt;std::chrono::microseconds&gt;(fim - inicio);
+    resultado.tempo_ms = duracao.count() / <span class="code-number">1000.0</span>;
+    
+    <span class="code-keyword">return</span> resultado;
+}
+
+<span class="code-comment">// Busca Binária</span>
+ResultadoBusca buscaBinaria(<span class="code-keyword">const</span> std::vector&lt;<span class="code-keyword">int</span>&gt;& arr, <span class="code-keyword">int</span> alvo) {
+    <span class="code-keyword">auto</span> inicio = std::chrono::high_resolution_clock::now();
+    
+    ResultadoBusca resultado = {<span class="code-keyword">false</span>, -<span class="code-number">1</span>, <span class="code-number">0</span>, <span class="code-number">0.0</span>, alvo};
+    <span class="code-keyword">int</span> esquerda = <span class="code-number">0</span>;
+    <span class="code-keyword">int</span> direita = <span class="code-keyword">static_cast</span>&lt;<span class="code-keyword">int</span>&gt;(arr.size()) - <span class="code-number">1</span>;
+    
+    <span class="code-keyword">while</span> (esquerda &lt;= direita) {
+        <span class="code-keyword">int</span> meio = esquerda + (direita - esquerda) / <span class="code-number">2</span>;
+        resultado.comparacoes++;
+        
+        <span class="code-keyword">if</span> (arr[meio] == alvo) {
+            resultado.encontrado = <span class="code-keyword">true</span>;
+            resultado.posicao = meio;
+            <span class="code-keyword">break</span>;
+        } <span class="code-keyword">else if</span> (arr[meio] &lt; alvo) {
+            esquerda = meio + <span class="code-number">1</span>;
+        } <span class="code-keyword">else</span> {
+            direita = meio - <span class="code-number">1</span>;
+        }
+    }
+    
+    <span class="code-keyword">auto</span> fim = std::chrono::high_resolution_clock::now();
+    <span class="code-keyword">auto</span> duracao = std::chrono::duration_cast&lt;std::chrono::microseconds&gt;(fim - inicio);
+    resultado.tempo_ms = duracao.count() / <span class="code-number">1000.0</span>;
+    
+    <span class="code-keyword">return</span> resultado;
+}
+                        </div>
+                    </div>
+
+                    <div class="algorithm-demo">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: #0891b2;">Análise de Complexidade Demonstrada</h3>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3">Para 1000 elementos:</h4>
+                                <ul class="mb-3">
+                                    <li><strong>Busca Linear O(n):</strong>
+                                        <ul>
+                                            <li>Melhor caso: 1 comparação</li>
+                                            <li>Caso médio: 500 comparações</li>
+                                            <li>Pior caso: 1000 comparações</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Busca Binária O(log n):</strong>
+                                        <ul>
+                                            <li>Melhor caso: 1 comparação</li>
+                                            <li>Caso médio: 9 comparações</li>
+                                            <li>Pior caso: 10 comparações</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3">Vantagem da Busca Binária:</h4>
+                                <div class="text-center mb-3">
+                                    <div class="stat-highlight text-success">100x</div>
+                                    <div class="fs-6 text-muted">mais rápida no pior caso</div>
+                                </div>
+                                <div class="callout-warning">
+                                    <strong>Restrição Importante:</strong> A busca binária só funciona em listas ORDENADAS!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-grid">
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3 text-primary">Pergunta 1</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Por que a busca binária só funciona em listas ordenadas?
+                            </p>
+                            <div class="bg-primary-subtle p-3 rounded">
+                                <strong>Resposta:</strong> Precisa da propriedade de ordem para decidir qual metade descartar
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3 text-success">Pergunta 2</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Em que situações você usaria busca linear mesmo tendo dados ordenados?
+                            </p>
+                            <div class="bg-success-subtle p-3 rounded">
+                                <strong>Resposta:</strong> Quando a lista é muito pequena ou quando se busca múltiplos elementos
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold mb-3 text-warning">Pergunta 3</h4>
+                            <p class="fs-6 mb-3 text-muted">
+                                Como o custo de ordenação afeta a escolha do algoritmo?
+                            </p>
+                            <div class="bg-warning-subtle p-3 rounded">
+                                <strong>Resposta:</strong> Se poucas buscas, ordenar + busca binária pode ser mais custoso que busca linear
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="callout-success">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-link me-2 text-success"></i>
+                            <strong>Ferramenta de Avaliação:</strong>
+                        </div>
+                        <p class="mt-2 mb-0">
+                            Para avaliação padronizada dos resultados, utilize a ferramenta online disponível em: <span class="citation-link">https://frankalcantara.com/raciocinio/avaliacao/modulo3-4.html</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity E3 Section -->
+        <section id="atividade-e3" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--academic-900);">6. Atividade E3: Criando os Inimigos da HP</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        O objetivo é levar os alunos a deduzir, formalizar e analisar o uso de <strong>pilha (stack)</strong> para avaliação de expressões matemáticas através da experimentação prática com notação polonesa reversa (RPN).
+                    </p>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card stack-card">
+                                <div class="d-flex align-items-start">
+                                    <div class="icon-badge badge-stack me-3">
+                                        <i class="fas fa-layer-group"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="fs-4 fw-semibold mb-3" style="color: #06b6d4;">Materiais Necessários</h3>
+                                        <ul class="fs-6 mb-3">
+                                            <li>Cartas de números (0-9, múltiplas cópias)</li>
+                                            <li>Cartas de operadores (+, -, ×, ÷)</li>
+                                            <li>Pilha física (caixa ou área delimitada)</li>
+                                            <li>Expressões matemáticas em cartões (3 níveis)</li>
+                                            <li>Calculadora para verificação</li>
+                                            <li>Cronômetro para medir tempo</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card problem-card">
+                                <div class="d-flex align-items-start">
+                                    <div class="icon-badge badge-problem me-3">
+                                        <i class="fas fa-question-circle"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="fs-4 fw-semibold mb-3 text-danger">Desafio Inicial</h3>
+                                        <p class="fs-6 mb-3">
+                                            Apresentar expressões em notação polonesa reversa <strong>SEM explicar</strong> o que são. Deixar os alunos descobrirem o padrão.
+                                        </p>
+                                        <div class="bg-danger-subtle p-3 rounded">
+                                            <strong>Exemplos:</strong><br>
+                                            15 3 5 + ×<br>
+                                            2 3 + 4 5 + ×<br>
+                                            8 2 ÷ 3 + 1 -
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="activity-section">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--academic-800);">
+                            <span class="step-counter">1</span>
+                            Introdução da Ferramenta Pilha (20 min)
+                        </h3>
+                        
+                        <div class="algorithm-demo">
+                            <h4 class="fs-5 fw-semibold mb-3" style="color: #0891b2;">Regras da "Pilha Mágica"</h4>
+                            <div class="row row-cols-1 row-cols-md-2 g-4">
+                                <div class="col">
+                                    <ol class="fs-6 mb-3">
+                                        <li><strong>Número:</strong> sempre colocar na pilha</li>
+                                        <li><strong>Operador:</strong> tirar dois números da pilha, fazer a operação, colocar resultado de volta</li>
+                                        <li><strong>Resultado final:</strong> único número que sobra na pilha</li>
+                                    </ol>
+                                </div>
+                                <div class="col">
+                                    <div class="stack-visualization">
+                                        <div class="stack-item">120</div>
+                                        <div class="text-muted text-center mt-2">Resultado: 120</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive-custom">
+                            <table class="table table-custom">
+                                <thead>
+                                    <tr>
+                                        <th>Passo</th>
+                                        <th>Símbolo</th>
+                                        <th>Ação</th>
+                                        <th>Estado da Pilha</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>15</td>
+                                        <td>empilhar</td>
+                                        <td>[15]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>3</td>
+                                        <td>empilhar</td>
+                                        <td>[15, 3]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>5</td>
+                                        <td>empilhar</td>
+                                        <td>[15, 3, 5]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>+</td>
+                                        <td>calcular 3+5=8</td>
+                                        <td>[15, 8]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>×</td>
+                                        <td>calcular 15×8=120</td>
+                                        <td>[120]</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-3 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card solution-card">
+                                <div class="text-center mb-3">
+                                    <div class="icon-badge badge-solution mx-auto">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                </div>
+                                <h3 class="fs-4 fw-semibold mb-3 text-success text-center">Vantagem 1</h3>
+                                <p class="fs-6 mb-3 text-center">
+                                    <strong>Elimina parênteses:</strong> A estrutura inerente da pilha resolve precedência automaticamente.
+                                </p>
+                                <div class="text-center">
+                                    <span class="badge bg-success">Sem ambiguidade</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card methodology-card-inline">
+                                <div class="text-center mb-3">
+                                    <div class="icon-badge badge-methodology mx-auto">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                                <h3 class="fs-4 fw-semibold mb-3 text-primary text-center">Vantagem 2</h3>
+                                <p class="fs-6 mb-3 text-center">
+                                    <strong>Avaliação linear:</strong> Processa da esquerda para direita, sem backtracking necessário.
+                                </p>
+                                <div class="text-center">
+                                    <span class="badge bg-primary">Eficiência O(n)</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card evaluation-card">
+                                <div class="text-center mb-3">
+                                    <div class="icon-badge badge-evaluation mx-auto">
+                                        <i class="fas fa-brain"></i>
+                                    </div>
+                                </div>
+                                <h3 class="fs-4 fw-semibold mb-3 text-warning text-center">Vantagem 3</h3>
+                                <p class="fs-6 mb-3 text-center">
+                                    <strong>Reduz carga mental:</strong> Processo sistemático para expressões complexas sem confusão.
+                                </p>
+                                <div class="text-center">
+                                    <span class="badge bg-warning">Cognitivo</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="activity-section">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--academic-800);">
+                            Transfer Learning: Conversão de Notações
+                        </h3>
+                        
+                        <div class="exercise-grid">
+                            <div class="exercise-card">
+                                <h4 class="fs-5 fw-semibold mb-3 text-primary">Exercício 1</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    <strong>Infixa:</strong> 3 + 4 × 2<br>
+                                    <strong>RPN:</strong> 3 4 2 × +<br>
+                                    <strong>Resultado:</strong> 11
+                                </p>
+                                <div class="bg-primary-subtle p-3 rounded">
+                                    <strong>Insight:</strong> RPN elimina necessidade de regras de precedência
+                                </div>
+                            </div>
+                            
+                            <div class="exercise-card">
+                                <h4 class="fs-5 fw-semibold mb-3 text-success">Exercício 2</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    <strong>Infixa:</strong> (2 + 3) × 4<br>
+                                    <strong>RPN:</strong> 2 3 + 4 ×<br>
+                                    <strong>Resultado:</strong> 20
+                                </p>
+                                <div class="bg-success-subtle p-3 rounded">
+                                    <strong>Insight:</strong> Parênteses se tornam desnecessários
+                                </div>
+                            </div>
+                            
+                            <div class="exercise-card">
+                                <h4 class                                <h4 class="fs-5 fw-semibold mb-3 text-warning">Exercício 3</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    <strong>Infixa:</strong> 4 + 5 × 2 - 3<br>
+                                    <strong>RPN:</strong> 4 5 2 × + 3 -<br>
+                                    <strong>Resultado:</strong> 11
+                                </p>
+                                <div class="bg-warning-subtle p-3 rounded">
+                                    <strong>Insight:</strong> Ordem de operações naturalmente preservada
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Mobile TOC Toggle
+        function toggleTOC() {
+            const toc = document.getElementById('toc');
+            toc.classList.toggle('open');
+        }
+
+        // Close TOC when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const toc = document.getElementById('toc');
+            const hamburger = document.querySelector('button[onclick="toggleTOC()"]');
+            if (window.innerWidth <= 1024 && toc.classList.contains('open')) {
+                if (!toc.contains(event.target) && event.target !== hamburger && !hamburger.contains(event.target)) {
+                    toc.classList.remove('open');
+                }
+            }
+        });
+
+        // Smooth scrolling and active link highlighting
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            const sections = document.querySelectorAll('section[id]');
+            
+            // Add click handlers for smooth scrolling with offset
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        const offset = 80;
+                        const elementPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+                        window.scrollTo({
+                            top: elementPosition - offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                    if (window.innerWidth <= 1024) {
+                        document.getElementById('toc').classList.remove('open');
+                    }
+                });
+            });
+            
+            // Highlight active section in TOC
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        links.forEach(link => {
+                            link.classList.remove('bg-light', 'text-dark');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('bg-light', 'text-dark');
+                            }
+                        });
+                    }
+                });
+            }, {
+                rootMargin: '-80px 0px -70% 0px'
+            });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Fade in animation on scroll
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            fadeElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                fadeObserver.observe(el);
+            });
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            const toc = document.getElementById('toc');
+            if (window.innerWidth > 1024) {
+                toc.classList.remove('open');
+            }
+        });
+
+        // Custom tooltips for citations
+        document.addEventListener('DOMContentLoaded', function() {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'custom-tooltip';
+            document.body.appendChild(tooltip);
+
+            const citationCards = document.querySelectorAll('.citation-card[data-tooltip]');
+            
+            citationCards.forEach(card => {
+                card.addEventListener('mouseenter', function(e) {
+                    const tooltipText = e.target.getAttribute('data-tooltip');
+                    tooltip.innerHTML = tooltipText;
+                    tooltip.classList.add('show');
+                });
+
+                card.addEventListener('mousemove', function(e) {
+                    tooltip.style.left = (e.pageX + 10) + 'px';
+                    tooltip.style.top = (e.pageY - 10) + 'px';
+                });
+
+                card.addEventListener('mouseleave', function() {
+                    tooltip.classList.remove('show');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

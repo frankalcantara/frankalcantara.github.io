@@ -10,140 +10,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css">
     <style>
-        :root {
-            --academic-50: #f8fafc;
-            --academic-100: #f1f5f9;
-            --academic-200: #e2e8f0;
-            --academic-300: #cbd5e1;
-            --academic-400: #94a3b8;
-            --academic-500: #64748b;
-            --academic-600: #475569;
-            --academic-700: #334155;
-            --academic-800: #1e293b;
-            --academic-900: #0f172a;
-            --primary-50: #eff6ff;
-            --primary-100: #dbeafe;
-            --primary-200: #bfdbfe;
-            --primary-300: #93c5fd;
-            --primary-400: #60a5fa;
-            --primary-500: #3b82f6;
-            --primary-600: #2563eb;
-            --primary-700: #1d4ed8;
-            --primary-800: #1e40af;
-            --primary-900: #1e3a8a;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Crimson Text', serif;
-        }
-
-        .hero-gradient {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(37, 99, 235, 0.85) 100%);
-        }
-
-        .toc-fixed {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 320px;
-            height: 100vh;
-            background: white;
-            border-right: 1px solid #e2e8f0;
-            z-index: 1000;
-            overflow-y: auto;
-            padding: 2rem 1.5rem;
-        }
-
-        .main-content {
-            margin-left: 320px;
-            min-height: 100vh;
-        }
-
-        @media (max-width: 1024px) {
-            .toc-fixed {
-                transform: translateX(-100%);
-                transition: transform 0.3s ease;
-            }
-            .toc-fixed.open {
-                transform: translateX(0);
-            }
-            .main-content {
-                margin-left: 0;
-            }
-        }
-
-        .citation-link {
-            color: var(--primary-600);
-            text-decoration: none;
-            font-weight: 500;
-            border-bottom: 1px dotted var(--primary-600);
-        }
-
-        .citation-link:hover {
-            color: var(--primary-700);
-            border-bottom-style: solid;
-        }
-
-        .bento-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            grid-template-rows: auto auto;
-            gap: 1.5rem;
-            height: 60vh;
-        }
-
-        .bento-main {
-            grid-row: 1 / -1;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .bento-side-top,
-        .bento-side-bottom {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .fade-in {
-            animation: fadeIn 0.8s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .hover-lift {
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .hover-lift:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-        }
-
-        .hover-bg-light:hover {
-            background-color: var(--academic-50);
-        }
-
-        section[id] {
-            scroll-margin-top: 80px;
-        }
-
-        section {
-            position: relative;
-            z-index: 1;
-            margin-bottom: 2rem;
-        }
+        /* File-specific styles */
 
         .methodology-card {
             min-height: 200px;
@@ -158,43 +27,20 @@
 
         .decomposition-card { border-top-color: #10b981; }
         .abstraction-card { border-top-color: #3b82f6; }
-        .algorithmization-card { border-top-color: #f59e0b; }
+        .algorithmization-card { border-top-color: #0284c7; }
         .debugging-card { border-top-color: #ef4444; }
 
-        .table-responsive-custom {
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .table-custom {
-            margin-bottom: 0;
-        }
-
-        .table-custom thead {
-            background: linear-gradient(135deg, var(--academic-700), var(--primary-600));
-            color: white;
-        }
-
-        .table-custom tbody tr:nth-child(even) {
-            background-color: var(--academic-50);
-        }
-
-        .table-custom tbody tr:hover {
-            background-color: var(--primary-50);
-            transition: background-color 0.2s ease;
-        }
-
-        .stat-highlight {
-            font-size: 2.5rem;
-            font-weight: 700;
-            line-height: 1;
-        }
 
         .methodology-comparison {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .methodology-comparison {
+                grid-template-columns: 1fr;
+            }
         }
 
         .progression-step {
@@ -223,17 +69,10 @@
             background: var(--academic-300);
         }
 
-        .callout-tip {
-            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
-            border-left: 4px solid #3b82f6;
-            padding: 1rem;
-            border-radius: 0 8px 8px 0;
-            margin: 1.5rem 0;
-        }
 
         .callout-warning {
             background: linear-gradient(135deg, #fef3c7, #fde68a);
-            border-left: 4px solid #f59e0b;
+            border-left: 4px solid #0284c7;
             padding: 1rem;
             border-radius: 0 8px 8px 0;
             margin: 1.5rem 0;
@@ -247,29 +86,6 @@
             margin: 1.5rem 0;
         }
 
-        .figure-container {
-            background: white;
-            border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            margin: 2rem 0;
-        }
-
-        .figure-container img {
-            width: 100%;
-            height: auto;
-            border-radius: 6px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .figure-caption {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--academic-200);
-            font-style: italic;
-            color: var(--academic-700);
-            text-align: center;
-        }
 
         .concept-card {
             background: white;
@@ -283,7 +99,7 @@
         .problem-card { border-left-color: #ef4444; }
         .solution-card { border-left-color: #10b981; }
         .methodology-card-inline { border-left-color: #3b82f6; }
-        .evaluation-card { border-left-color: #f59e0b; }
+        .evaluation-card { border-left-color: #0284c7; }
 
         .icon-badge {
             width: 48px;
@@ -299,7 +115,7 @@
         .badge-problem { background: #ef4444; }
         .badge-solution { background: #10b981; }
         .badge-methodology { background: #3b82f6; }
-        .badge-evaluation { background: #f59e0b; }
+        .badge-evaluation { background: #0284c7; }
 
         .timeline-item {
             position: relative;
@@ -330,19 +146,6 @@
             background: var(--academic-300);
         }
 
-        .definition-box {
-            background: linear-gradient(135deg, var(--academic-50), var(--primary-50));
-            border: 1px solid var(--academic-200);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-        }
-
-        .definition-title {
-            font-weight: 600;
-            color: var(--academic-800);
-            margin-bottom: 0.5rem;
-        }
 
         .code-block {
             background: var(--academic-800);
@@ -369,14 +172,20 @@
         }
 
         .code-number {
-            color: #f59e0b;
+            color: #0284c7;
         }
 
         .phase-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
             margin: 2rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .phase-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .phase-card {
@@ -395,7 +204,7 @@
 
         .phase-decomposition { border-top-color: #10b981; }
         .phase-abstraction { border-top-color: #3b82f6; }
-        .phase-algorithmization { border-top-color: #f59e0b; }
+        .phase-algorithmization { border-top-color: #0284c7; }
         .phase-debugging { border-top-color: #ef4444; }
 
         .phase-icon {
@@ -412,12 +221,12 @@
 
         .icon-decomposition { background: #10b981; }
         .icon-abstraction { background: #3b82f6; }
-        .icon-algorithmization { background: #f59e0b; }
+        .icon-algorithmization { background: #0284c7; }
         .icon-debugging { background: #ef4444; }
 
         .flowchart-symbols {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1rem;
             margin: 2rem 0;
         }
@@ -448,30 +257,42 @@
         .trace-table {
             font-size: 0.85rem;
             margin: 1.5rem 0;
+            border-collapse: separate;
+            border-spacing: 0;
         }
 
-        .trace-table th {
-            background: var(--academic-700);
-            color: white;
+        .trace-table th,
+        .trace-table td {
+            border: 1px solid #dee2e6;
             text-align: center;
             padding: 0.5rem;
         }
 
-        .trace-table td {
-            text-align: center;
-            padding: 0.4rem;
-            border: 1px solid var(--academic-200);
+        .trace-table th {
+            background: linear-gradient(135deg, var(--sage-600), var(--copper-600));
+            color: white;
+            font-weight: bold;
+        }
+
+        .trace-table tbody tr:nth-child(odd) {
+            background-color: white;
         }
 
         .trace-table tbody tr:nth-child(even) {
-            background-color: var(--academic-50);
+            background-color: #dbeafe;
         }
 
         .innovation-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
             margin: 2rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .innovation-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .innovation-card {
@@ -484,28 +305,40 @@
 
         .comparison-table {
             font-size: 0.9rem;
+            border-collapse: separate;
+            border-spacing: 0;
         }
 
-        .comparison-table th {
-            background: var(--academic-100);
-            color: var(--academic-800);
-            font-weight: 600;
-            padding: 0.75rem;
-        }
-
+        .comparison-table th,
         .comparison-table td {
+            border: 1px solid #dee2e6;
             padding: 0.75rem;
             vertical-align: top;
         }
 
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--sage-600), var(--copper-600));
+            color: white;
+            font-weight: bold;
+        }
+
+        .comparison-table tbody tr:nth-child(odd) {
+            background-color: white;
+        }
+
+        .comparison-table tbody tr:nth-child(even) {
+            background-color: #dbeafe;
+        }
+
         .vs-badge {
-            background: var(--primary-600);
+            background: var(--sage-600);
             color: white;
             padding: 0.25rem 0.75rem;
             border-radius: 12px;
             font-size: 0.8rem;
             font-weight: 600;
         }
+
     </style>
 </head>
 <body>
@@ -528,10 +361,27 @@
         <div class="mt-4 pt-4 border-top">
             <h4 class="fs-6 fw-semibold text-dark mb-3">Fases DAAD</h4>
             <div class="d-flex flex-column gap-2">
-                <div class="p-2 rounded" style="background-color: #dcfce7;"><i class="fas fa-puzzle-piece me-2 text-success"></i>Decomposição</div>
-                <div class="p-2 rounded" style="background-color: #dbeafe;"><i class="fas fa-eye me-2 text-primary"></i>Abstração</div>
-                <div class="p-2 rounded" style="background-color: #fef3c7;"><i class="fas fa-cogs me-2 text-warning"></i>Algoritmização</div>
-                <div class="p-2 rounded" style="background-color: #fee2e2;"><i class="fas fa-bug me-2 text-danger"></i>Depuração</div>
+                <div class="p-2 bg-danger-subtle rounded"><i class="fas fa-puzzle-piece me-2 text-danger"></i><small class="text-danger fw-medium">Decomposição</small></div>
+                <div class="p-2 bg-warning-subtle rounded"><i class="fas fa-eye me-2 text-warning"></i><small class="text-warning fw-medium">Abstração</small></div>
+                <div class="p-2 rounded" style="background-color: #dbeafe;"><i class="fas fa-cogs me-2" style="color: #0284c7;"></i><small style="color: #0284c7;" class="fw-medium">Algoritmização</small></div>
+                <div class="p-2 bg-success-subtle rounded"><i class="fas fa-bug me-2 text-success"></i><small class="text-success fw-medium">Depuração</small></div>
+            </div>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Referências Principais</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-light rounded citation-card" style="cursor: pointer;" data-tooltip="LEHMANN, T. H. <strong>Using algorithmic thinking to design algorithms: The case of critical path analysis</strong>. The Journal of Mathematical Behavior, v. 71, p. 101079, 2023.">
+                    <small class="fw-medium text-dark">LEHMANN, 2023</small>
+                </div>
+                <div class="p-2 bg-light rounded citation-card" style="cursor: pointer;" data-tooltip="WING, Jeannette M. <strong>Computational thinking</strong>. Communications of the ACM, v. 49, n. 3, p. 33-35, mar. 2006.">
+                    <small class="fw-medium text-dark">WING, 2006</small>
+                </div>
+                <div class="p-2 bg-light rounded citation-card" style="cursor: pointer;" data-tooltip="KONG, S. <strong>Pensamento Computacional na Educação: perspectivas internacionais</strong>. São Paulo: Penso, 2020.">
+                    <small class="fw-medium text-dark">KONG, 2020</small>
+                </div>
+                <div class="p-2 bg-light rounded citation-card" style="cursor: pointer;" data-tooltip="SENTANCE, S. et al. <strong>Creating cool stuff: Pupils' experience of the BBC micro:bit</strong>. In: Proceedings of the ACM SIGCSE Technical Symposium. Seattle: ACM, 2017. p. 531-536.">
+                    <small class="fw-medium text-dark">SENTANCE, 2017</small>
+                </div>
             </div>
         </div>
     </nav>
@@ -573,9 +423,9 @@
                             <div class="fs-6 text-muted">Abstração</div>
                         </div>
                     </div>
-                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: #fef3c7;">
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: #dbeafe;">
                         <div class="text-center">
-                            <div class="stat-highlight text-warning">A</div>
+                            <div class="stat-highlight" style="color: #0284c7;">A</div>
                             <div class="fs-6 text-muted">Algoritmização</div>
                         </div>
                     </div>
@@ -673,7 +523,7 @@
                             <div class="phase-icon icon-algorithmization">
                                 <i class="fas fa-cogs"></i>
                             </div>
-                            <h4 class="text-center fw-bold text-warning">Algoritmização</h4>
+                            <h4 class="text-center fw-bold" style="color: #0284c7;">Algoritmização</h4>
                             <p class="text-center text-muted">Materializa o design algorítmico em sequências executáveis</p>
                         </div>
                         <div class="phase-card phase-debugging">
@@ -891,61 +741,14 @@
                         A metodologia DAAD é composta por quatro fases principais que formam um processo iterativo de resolução de problemas. Cada fase desempenha um papel crucial no desenvolvimento de habilidades de pensamento crítico e analítico.
                     </p>
 
-                    <div class="figure-container">
+                    <div class="card p-4 rounded-3 shadow bg-white">
                         <h3 class="fs-3 fw-semibold mb-4 text-center" style="color: var(--academic-800);">Representação Visual da Metodologia DAAD</h3>
-                        <div class="text-center">
-                            <svg viewBox="0 0 400 400" style="max-width: 400px; height: auto;">
-                                <!-- Background circle -->
-                                <circle cx="200" cy="200" r="180" fill="none" stroke="#e2e8f0" stroke-width="2"/>
-                                
-                                <!-- Decomposition -->
-                                <g transform="translate(200,50)">
-                                    <circle cx="0" cy="0" r="40" fill="#10b981" opacity="0.1" stroke="#10b981" stroke-width="2"/>
-                                    <circle cx="0" cy="0" r="15" fill="#10b981"/>
-                                    <text x="0" y="-55" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#10b981">Decomposição</text>
-                                </g>
-                                
-                                <!-- Abstraction -->
-                                <g transform="translate(350,200)">
-                                    <circle cx="0" cy="0" r="40" fill="#3b82f6" opacity="0.1" stroke="#3b82f6" stroke-width="2"/>
-                                    <circle cx="0" cy="0" r="15" fill="#3b82f6"/>
-                                    <text x="55" y="5" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#3b82f6">Abstração</text>
-                                </g>
-                                
-                                <!-- Algorithmization -->
-                                <g transform="translate(200,350)">
-                                    <circle cx="0" cy="0" r="40" fill="#f59e0b" opacity="0.1" stroke="#f59e0b" stroke-width="2"/>
-                                    <circle cx="0" cy="0" r="15" fill="#f59e0b"/>
-                                    <text x="0" y="55" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#f59e0b">Algoritmização</text>
-                                </g>
-                                
-                                <!-- Debugging -->
-                                <g transform="translate(50,200)">
-                                    <circle cx="0" cy="0" r="40" fill="#ef4444" opacity="0.1" stroke="#ef4444" stroke-width="2"/>
-                                    <circle cx="0" cy="0" r="15" fill="#ef4444"/>
-                                    <text x="-55" y="5" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#ef4444">Depuração</text>
-                                </g>
-                                
-                                <!-- Arrows -->
-                                <path d="M 240 80 Q 300 100 320 160" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowhead)"/>
-                                <path d="M 320 240 Q 300 300 240 320" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowhead)"/>
-                                <path d="M 160 320 Q 100 300 80 240" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowhead)"/>
-                                <path d="M 80 160 Q 100 100 160 80" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowhead)"/>
-                                
-                                <!-- Arrow marker -->
-                                <defs>
-                                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                                        <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8"/>
-                                    </marker>
-                                </defs>
-                                
-                                <!-- Center label -->
-                                <text x="200" y="200" text-anchor="middle" font-family="serif" font-size="16" font-weight="bold" fill="#475569">DAAD</text>
-                                <text x="200" y="218" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#64748b">Processo Iterativo</text>
-                            </svg>
-                        </div>
-                        <div class="figure-caption">
-                            <strong>Figura:</strong> Representação visual da metodologia DAAD enfatizando a natureza cíclica e interconectada do processo de resolução de problemas. A característica iterativa permite refinamento contínuo das soluções.
+                        <div class="image-container">
+                            <div class="text-center">
+                                <img src="../images/DAAD.webp" alt="Representação Visual da Metodologia DAAD" class="img-fluid mb-3" style="max-height: 300px;">
+                                <h4 class="fs-5 fw-semibold" style="color: var(--academic-800);">Metodologia DAAD</h4>
+                                <p class="text-muted">Representação visual da metodologia DAAD enfatizando a natureza cíclica e interconectada do processo de resolução de problemas. A característica iterativa permite refinamento contínuo das soluções.</p>
+                            </div>
                         </div>
                     </div>
 
@@ -1172,7 +975,7 @@
                                         <i class="fas fa-cogs"></i>
                                     </div>
                                     <div>
-                                        <h3 class="fs-4 fw-semibold mb-3 text-warning">Definição</h3>
+                                        <h3 class="fs-4 fw-semibold mb-3" style="color: #0284c7;">Definição</h3>
                                         <p class="fs-6 mb-3">
                                             A <strong>Algoritmização</strong> envolve a criação de instruções passo a passo ou procedimentos para resolver um problema. Um algoritmo é uma sequência finita de instruções matematicamente rigorosas.
                                         </p>
@@ -1229,58 +1032,10 @@
                         </div>
                     </div>
 
-                    <div class="figure-container">
+                    <div class="card p-4 rounded-3 shadow bg-white">
                         <h3 class="fs-3 fw-semibold mb-3 text-center" style="color: var(--academic-800);">Exemplo de Fluxograma</h3>
                         <div class="text-center">
-                            <svg viewBox="0 0 300 400" style="max-width: 300px; height: auto;">
-                                <!-- Start/End oval -->
-                                <ellipse cx="150" cy="30" rx="50" ry="20" fill="#10b981" opacity="0.2" stroke="#10b981" stroke-width="2"/>
-                                <text x="150" y="35" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#10b981">INÍCIO</text>
-                                
-                                <!-- Input rectangle -->
-                                <rect x="100" y="70" width="100" height="40" rx="5" fill="#3b82f6" opacity="0.2" stroke="#3b82f6" stroke-width="2"/>
-                                <text x="150" y="85" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#3b82f6">LEIA a</text>
-                                <text x="150" y="100" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#3b82f6">LEIA b</text>
-                                
-                                <!-- Decision diamond -->
-                                <path d="M 150 130 L 200 170 L 150 210 L 100 170 Z" fill="#f59e0b" opacity="0.2" stroke="#f59e0b" stroke-width="2"/>
-                                <text x="150" y="175" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#f59e0b">a > b?</text>
-                                
-                                <!-- Process rectangles -->
-                                <rect x="50" y="240" width="80" height="30" rx="5" fill="#ef4444" opacity="0.2" stroke="#ef4444" stroke-width="2"/>
-                                <text x="90" y="260" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#ef4444">max ← a</text>
-                                
-                                <rect x="170" y="240" width="80" height="30" rx="5" fill="#ef4444" opacity="0.2" stroke="#ef4444" stroke-width="2"/>
-                                <text x="210" y="260" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#ef4444">max ← b</text>
-                                
-                                <!-- Output rectangle -->
-                                <rect x="100" y="310" width="100" height="30" rx="5" fill="#3b82f6" opacity="0.2" stroke="#3b82f6" stroke-width="2"/>
-                                <text x="150" y="330" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#3b82f6">ESCREVA max</text>
-                                
-                                <!-- End oval -->
-                                <ellipse cx="150" cy="370" rx="50" ry="20" fill="#10b981" opacity="0.2" stroke="#10b981" stroke-width="2"/>
-                                <text x="150" y="375" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#10b981">FIM</text>
-                                
-                                <!-- Arrows -->
-                                <path d="M 150 50 L 150 70" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
-                                <path d="M 150 110 L 150 130" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
-                                <path d="M 120 190 L 90 240" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
-                                <path d="M 180 190 L 210 240" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
-                                <path d="M 90 270 L 90 290 L 140 290 L 140 310" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
-                                <path d="M 210 270 L 210 290 L 160 290 L 160 310" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
-                                <path d="M 150 340 L 150 350" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
-                                
-                                <!-- Labels -->
-                                <text x="105" y="205" font-family="sans-serif" font-size="9" fill="#10b981">Sim</text>
-                                <text x="195" y="205" font-family="sans-serif" font-size="9" fill="#ef4444">Não</text>
-                                
-                                <!-- Arrow marker -->
-                                <defs>
-                                    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                                        <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
-                                    </marker>
-                                </defs>
-                            </svg>
+                            <img src="../images/fluxo-exemplo.webp" alt="Exemplo de fluxograma para encontrar o maior entre dois números" class="img-fluid mb-3" style="max-height: 400px;">
                         </div>
                         <div class="figure-caption">
                             <strong>Figura:</strong> Exemplo de fluxograma para encontrar o maior entre dois números, demonstrando estruturas de entrada, decisão, processamento e saída.
@@ -1359,35 +1114,55 @@
 
                     <div class="card p-4 rounded-3 shadow bg-white">
                         <h3 class="fs-3 fw-semibold mb-4" style="color: var(--academic-800);">Cinco Etapas da Depuração (Brennan & Resnick, 2012)</h3>
-                        <div class="row row-cols-1 row-cols-md-5 g-3">
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-5 g-3">
                             <div class="col">
-                                <div class="text-center p-3 bg-danger-subtle rounded">
-                                    <div class="fw-bold text-danger mb-2">1. Validar</div>
-                                    <div class="fs-6 text-danger">Verificar se o resultado está correto</div>
+                                <div class="d-flex flex-column h-100">
+                                    <div class="text-center p-2 bg-danger-subtle rounded-top">
+                                        <div class="fw-bold text-danger">1. Validar</div>
+                                    </div>
+                                    <div class="text-center p-3 bg-danger-subtle rounded-bottom flex-grow-1 d-flex align-items-center justify-content-center" style="opacity: 0.7;">
+                                        <div class="fs-6 text-danger">Verificar se o resultado está correto</div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="text-center p-3 bg-warning-subtle rounded">
-                                    <div class="fw-bold text-warning mb-2">2. Identificar</div>
-                                    <div class="fs-6 text-warning">Localizar onde está o erro</div>
+                                <div class="d-flex flex-column h-100">
+                                    <div class="text-center p-2 bg-warning-subtle rounded-top">
+                                        <div class="fw-bold text-warning">2. Identificar</div>
+                                    </div>
+                                    <div class="text-center p-3 bg-warning-subtle rounded-bottom flex-grow-1 d-flex align-items-center justify-content-center" style="opacity: 0.7;">
+                                        <div class="fs-6 text-warning">Localizar onde está o erro</div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="text-center p-3 bg-info-subtle rounded">
-                                    <div class="fw-bold text-info mb-2">3. Representar</div>
-                                    <div class="fs-6 text-info">Visualizar o problema claramente</div>
+                                <div class="d-flex flex-column h-100">
+                                    <div class="text-center p-2 bg-info-subtle rounded-top">
+                                        <div class="fw-bold text-info">3. Representar</div>
+                                    </div>
+                                    <div class="text-center p-3 bg-info-subtle rounded-bottom flex-grow-1 d-flex align-items-center justify-content-center" style="opacity: 0.7;">
+                                        <div class="fs-6 text-info">Visualizar o problema claramente</div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="text-center p-3 bg-primary-subtle rounded">
-                                    <div class="fw-bold text-primary mb-2">4. Localizar</div>
-                                    <div class="fs-6 text-primary">Pinpointar a causa específica</div>
+                                <div class="d-flex flex-column h-100">
+                                    <div class="text-center p-2 bg-primary-subtle rounded-top">
+                                        <div class="fw-bold text-primary">4. Localizar</div>
+                                    </div>
+                                    <div class="text-center p-3 bg-primary-subtle rounded-bottom flex-grow-1 d-flex align-items-center justify-content-center" style="opacity: 0.7;">
+                                        <div class="fs-6 text-primary">Pinpointar a causa específica</div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="text-center p-3 bg-success-subtle rounded">
-                                    <div class="fw-bold text-success mb-2">5. Corrigir</div>
-                                    <div class="fs-6 text-success">Implementar a solução</div>
+                                <div class="d-flex flex-column h-100">
+                                    <div class="text-center p-2 bg-success-subtle rounded-top">
+                                        <div class="fw-bold text-success">5. Corrigir</div>
+                                    </div>
+                                    <div class="text-center p-3 bg-success-subtle rounded-bottom flex-grow-1 d-flex align-items-center justify-content-center" style="opacity: 0.7;">
+                                        <div class="fs-6 text-success">Implementar a solução</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1422,43 +1197,8 @@
                             Na metodologia DAAD, utilizamos apenas 4 símbolos básicos para fluxogramas, permitindo que os alunos se concentrem na lógica do algoritmo.
                         </p>
                         
-                        <div class="flowchart-symbols">
-                            <div class="symbol-card">
-                                <div class="symbol-visual">
-                                    <svg width="60" height="40">
-                                        <ellipse cx="30" cy="20" rx="25" ry="15" fill="#10b981" opacity="0.2" stroke="#10b981" stroke-width="2"/>
-                                    </svg>
-                                </div>
-                                <div class="fw-bold text-success">Início/Fim</div>
-                                <div class="fs-6 text-muted">Oval</div>
-                            </div>
-                            <div class="symbol-card">
-                                <div class="symbol-visual">
-                                    <svg width="60" height="40">
-                                        <rect x="10" y="10" width="40" height="20" rx="3" fill="#3b82f6" opacity="0.2" stroke="#3b82f6" stroke-width="2"/>
-                                    </svg>
-                                </div>
-                                <div class="fw-bold text-primary">Processo</div>
-                                <div class="fs-6 text-muted">Retângulo</div>
-                            </div>
-                            <div class="symbol-card">
-                                <div class="symbol-visual">
-                                    <svg width="60" height="40">
-                                        <path d="M 30 5 L 55 20 L 30 35 L 5 20 Z" fill="#f59e0b" opacity="0.2" stroke="#f59e0b" stroke-width="2"/>
-                                    </svg>
-                                </div>
-                                <div class="fw-bold text-warning">Decisão</div>
-                                <div class="fs-6 text-muted">Losango</div>
-                            </div>
-                            <div class="symbol-card">
-                                <div class="symbol-visual">
-                                    <svg width="60" height="40">
-                                        <path d="M 15 10 L 45 10 L 50 30 L 10 30 Z" fill="#ef4444" opacity="0.2" stroke="#ef4444" stroke-width="2"/>
-                                    </svg>
-                                </div>
-                                <div class="fw-bold text-danger">Entrada/Saída</div>
-                                <div class="fs-6 text-muted">Paralelogramo</div>
-                            </div>
+                        <div class="text-center">
+                            <img src="../images/flowchart_componentes.webp" alt="Símbolos básicos para fluxogramas: Oval (Início/Fim), Retângulo (Processo), Losango (Decisão), Paralelogramo (Entrada/Saída)" class="img-fluid mb-3" style="max-height: 300px;">
                         </div>
                     </div>
 
@@ -1499,7 +1239,7 @@
                         </div>
                     </div>
 
-                    <div class="figure-container">
+                    <div class="card p-4 rounded-3 shadow bg-white">
                         <h3 class="fs-3 fw-semibold mb-3 text-center" style="color: var(--academic-800);">Exemplo de Tabela de Rastreio</h3>
                         <p class="text-center text-muted mb-4">
                             Execução do algoritmo "EncontrarMaximo" com entradas a = 15, b = 8
@@ -1587,4 +1327,133 @@
                         </div>
                         
                         <div class="figure-caption">
-                            <strong>Tabela:</strong> Exemplo de tabela de rastreio mostrando a execução passo
+                            <strong>Tabela:</strong> Exemplo de tabela de rastreio mostrando a execução passo                        <div class="figure-caption">
+                            <strong>Tabela:</strong> Exemplo de tabela de rastreio mostrando a execução passo a passo do algoritmo, permitindo identificar e corrigir erros de lógica durante o processo de depuração.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Mobile TOC Toggle
+        function toggleTOC() {
+            const toc = document.getElementById('toc');
+            toc.classList.toggle('open');
+        }
+
+        // Close TOC when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const toc = document.getElementById('toc');
+            const hamburger = document.querySelector('button[onclick="toggleTOC()"]');
+            if (window.innerWidth <= 1024 && toc.classList.contains('open')) {
+                if (!toc.contains(event.target) && event.target !== hamburger && !hamburger.contains(event.target)) {
+                    toc.classList.remove('open');
+                }
+            }
+        });
+
+        // Smooth scrolling and active link highlighting
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            const sections = document.querySelectorAll('section[id]');
+            
+            // Add click handlers for smooth scrolling with offset
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        const offset = 80;
+                        const elementPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+                        window.scrollTo({
+                            top: elementPosition - offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                    if (window.innerWidth <= 1024) {
+                        document.getElementById('toc').classList.remove('open');
+                    }
+                });
+            });
+            
+            // Highlight active section in TOC
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        links.forEach(link => {
+                            link.classList.remove('bg-light', 'text-dark');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('bg-light', 'text-dark');
+                            }
+                        });
+                    }
+                });
+            }, {
+                rootMargin: '-80px 0px -70% 0px'
+            });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Fade in animation on scroll
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            fadeElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                fadeObserver.observe(el);
+            });
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            const toc = document.getElementById('toc');
+            if (window.innerWidth > 1024) {
+                toc.classList.remove('open');
+            }
+        });
+
+        // Custom tooltips for citations
+        document.addEventListener('DOMContentLoaded', function() {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'custom-tooltip';
+            document.body.appendChild(tooltip);
+
+            const citationCards = document.querySelectorAll('.citation-card[data-tooltip]');
+            
+            citationCards.forEach(card => {
+                card.addEventListener('mouseenter', function(e) {
+                    const tooltipText = e.target.getAttribute('data-tooltip');
+                    tooltip.innerHTML = tooltipText;
+                    tooltip.classList.add('show');
+                });
+
+                card.addEventListener('mousemove', function(e) {
+                    tooltip.style.left = (e.pageX + 10) + 'px';
+                    tooltip.style.top = (e.pageY - 10) + 'px';
+                });
+
+                card.addEventListener('mouseleave', function() {
+                    tooltip.classList.remove('show');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Virando o Jogo da Imitação - 9&nbsp; Módulo 4: Semanas 14-16 (12 Horas-Aula): Depuração e Aplicação em Projetos</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./referencias.html" rel="next">
+<link href="./desenv3.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./desen.html">Disciplina Raciocínio Algorítmico</a></li><li class="breadcrumb-item"><a href="./desenv4.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>Módulo 4</strong>: Semanas 14-16 (12 Horas-Aula): Depuração e Aplicação em Projetos</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Virando o Jogo da Imitação</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/linefollower" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Contextualização e Pesquisa</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Referencial Teórico: Pensamento Computacional, Raciocínio Algorítmico e DAAD</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./inte.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Analisando Currículos Internacionais</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./def.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Definição e Princípios da Metodologia DAAD</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Disciplina Raciocínio Algorítmico</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./desen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Projeto de Disciplina de Raciocínio Algorítmico</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./desenv1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><strong>Módulo 1</strong>: Semanas 1-3 (12 Horas-Aula): Introdução ao Raciocínio Algorítmico e Decomposição</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./desenv2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title"><strong>Módulo 2</strong>: Semanas 4-8 (20 Horas-Aula): Abstração e Reconhecimento de Padrões</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./desenv3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>Módulo 3</strong>: Semanas 9-13 (20 Horas-Aula): Algoritmização e Estruturas de Dados</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./desenv4.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>Módulo 4</strong>: Semanas 14-16 (12 Horas-Aula): Depuração e Aplicação em Projetos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./referencias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referências</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#depuração-sistemática" id="toc-depuração-sistemática" class="nav-link active" data-scroll-target="#depuração-sistemática"><span class="header-section-number">9.1</span> Depuração Sistemática</a></li>
+  <li><a href="#controle-de-versão-e-colaboração" id="toc-controle-de-versão-e-colaboração" class="nav-link" data-scroll-target="#controle-de-versão-e-colaboração"><span class="header-section-number">9.2</span> Controle de Versão e Colaboração</a></li>
+  <li><a href="#exercícios-sistemas-complexos-com-testes-e-controle-de-versão" id="toc-exercícios-sistemas-complexos-com-testes-e-controle-de-versão" class="nav-link" data-scroll-target="#exercícios-sistemas-complexos-com-testes-e-controle-de-versão"><span class="header-section-number">9.3</span> Exercícios: Sistemas Complexos com Testes e Controle de Versão</a>
+  <ul class="collapse">
+  <li><a href="#par-1-sistema-de-biblioteca-digital" id="toc-par-1-sistema-de-biblioteca-digital" class="nav-link" data-scroll-target="#par-1-sistema-de-biblioteca-digital"><span class="header-section-number">9.3.1</span> Par 1: Sistema de Biblioteca Digital</a></li>
+  <li><a href="#par-2-sistema-de-delivery-de-comida" id="toc-par-2-sistema-de-delivery-de-comida" class="nav-link" data-scroll-target="#par-2-sistema-de-delivery-de-comida"><span class="header-section-number">9.3.2</span> Par 2: Sistema de Delivery de Comida</a></li>
+  <li><a href="#par-3-sistema-de-rede-social-universitária" id="toc-par-3-sistema-de-rede-social-universitária" class="nav-link" data-scroll-target="#par-3-sistema-de-rede-social-universitária"><span class="header-section-number">9.3.3</span> Par 3: Sistema de Rede Social Universitária</a></li>
+  <li><a href="#par-4-sistema-de-e-commerce-estudantil-com-testes-de-integração" id="toc-par-4-sistema-de-e-commerce-estudantil-com-testes-de-integração" class="nav-link" data-scroll-target="#par-4-sistema-de-e-commerce-estudantil-com-testes-de-integração"><span class="header-section-number">9.3.4</span> Par 4: Sistema de E-commerce Estudantil (COM TESTES DE INTEGRAÇÃO)</a></li>
+  </ul></li>
+  <li><a href="#metodologia-de-testes-unitários-simples" id="toc-metodologia-de-testes-unitários-simples" class="nav-link" data-scroll-target="#metodologia-de-testes-unitários-simples"><span class="header-section-number">9.4</span> Metodologia de Testes Unitários Simples</a>
+  <ul class="collapse">
+  <li><a href="#para-exercícios-a4-f4-sem-frameworks" id="toc-para-exercícios-a4-f4-sem-frameworks" class="nav-link" data-scroll-target="#para-exercícios-a4-f4-sem-frameworks"><span class="header-section-number">9.4.1</span> Para Exercícios A4-F4 (Sem Frameworks)</a></li>
+  <li><a href="#para-exercícios-g4-h4-com-frameworks" id="toc-para-exercícios-g4-h4-com-frameworks" class="nav-link" data-scroll-target="#para-exercícios-g4-h4-com-frameworks"><span class="header-section-number">9.4.2</span> Para Exercícios G4-H4 (Com Frameworks)</a></li>
+  </ul></li>
+  <li><a href="#rubrica-e-tecnologia-de-avaliação" id="toc-rubrica-e-tecnologia-de-avaliação" class="nav-link" data-scroll-target="#rubrica-e-tecnologia-de-avaliação"><span class="header-section-number">9.5</span> Rubrica e Tecnologia de Avaliação</a>
+  <ul class="collapse">
+  <li><a href="#visão-geral-da-avaliação" id="toc-visão-geral-da-avaliação" class="nav-link" data-scroll-target="#visão-geral-da-avaliação"><span class="header-section-number">9.5.1</span> Visão Geral da Avaliação</a></li>
+  <li><a href="#critério-1-funcionalidade-25-pontos" id="toc-critério-1-funcionalidade-25-pontos" class="nav-link" data-scroll-target="#critério-1-funcionalidade-25-pontos"><span class="header-section-number">9.5.2</span> Critério 1: Funcionalidade (25 pontos)</a></li>
+  <li><a href="#critério-2-qualidade-dos-testes-30-pontos" id="toc-critério-2-qualidade-dos-testes-30-pontos" class="nav-link" data-scroll-target="#critério-2-qualidade-dos-testes-30-pontos"><span class="header-section-number">9.5.3</span> Critério 2: Qualidade dos Testes (30 pontos)</a></li>
+  <li><a href="#critério-3-colaboração-25-pontos" id="toc-critério-3-colaboração-25-pontos" class="nav-link" data-scroll-target="#critério-3-colaboração-25-pontos"><span class="header-section-number">9.5.4</span> Critério 3: Colaboração (25 pontos)</a></li>
+  <li><a href="#critério-4-controle-de-versão-20-pontos" id="toc-critério-4-controle-de-versão-20-pontos" class="nav-link" data-scroll-target="#critério-4-controle-de-versão-20-pontos"><span class="header-section-number">9.5.5</span> Critério 4: Controle de Versão (20 pontos)</a></li>
+  </ul></li>
+  <li><a href="#sistema-de-avaliação-automática" id="toc-sistema-de-avaliação-automática" class="nav-link" data-scroll-target="#sistema-de-avaliação-automática"><span class="header-section-number">9.6</span> Sistema de Avaliação Automática</a>
+  <ul class="collapse">
+  <li><a href="#fluxo-de-avaliação" id="toc-fluxo-de-avaliação" class="nav-link" data-scroll-target="#fluxo-de-avaliação"><span class="header-section-number">9.6.1</span> <strong>Fluxo de Avaliação</strong>:</a></li>
+  <li><a href="#tolerâncias-para-primeiro-período" id="toc-tolerâncias-para-primeiro-período" class="nav-link" data-scroll-target="#tolerâncias-para-primeiro-período"><span class="header-section-number">9.6.2</span> Tolerâncias para Primeiro Período:</a></li>
+  <li><a href="#feedback-personalizado" id="toc-feedback-personalizado" class="nav-link" data-scroll-target="#feedback-personalizado"><span class="header-section-number">9.6.3</span> Feedback Personalizado</a></li>
+  <li><a href="#critérios-de-aprovação" id="toc-critérios-de-aprovação" class="nav-link" data-scroll-target="#critérios-de-aprovação"><span class="header-section-number">9.6.4</span> Critérios de Aprovação</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linefollower/edit/main/desenv4.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linefollower/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./desen.html">Disciplina Raciocínio Algorítmico</a></li><li class="breadcrumb-item"><a href="./desenv4.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>Módulo 4</strong>: Semanas 14-16 (12 Horas-Aula): Depuração e Aplicação em Projetos</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>Módulo 4</strong>: Semanas 14-16 (12 Horas-Aula): Depuração e Aplicação em Projetos</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Este módulo final consolida o ciclo da metodologia <strong>DAAD</strong> ao focar na <strong>Depuração Sistemática</strong>. Os alunos farão a transição da verificação de programas com <code>std::cout</code> para a aplicação de técnicas formais de identificação de erros, rastreamento de execução e teste e versionamento de software. O objetivo é equipá-los com as ferramentas e os processos necessários para validar a funcionalidade de seus algoritmos e colaborar em projetos de maior escala.</p>
+<p>A aplicação dos conceitos será realizada através do desenvolvimento de projetos que simulam desafios do mundo real, exigindo a integração de todas as habilidades desenvolvidas ao longo da disciplina.</p>
+<ul>
+<li><strong>Depuração Sistemática</strong>: abordagem de técnicas para identificação de erros e métodos de rastreamento de execução de programas;<br>
+</li>
+<li><strong>Princípios de Teste de Software</strong>: Introdução aos conceitos de teste de unidade e teste de integração, com atividades práticas de depuração;<br>
+</li>
+<li><strong>Sistemas de Controle de Versão</strong>: Apresentação de ferramentas como <strong>Git</strong> e plataformas como <strong>GitHub</strong> para o desenvolvimento colaborativo;<br>
+</li>
+<li><strong>Metodologias de Desenvolvimento</strong>: Exploração de processos iterativos que integram a depuração contínua;<br>
+</li>
+<li><strong>Aplicação Integrada</strong>: Utilização de todos os elementos da metodologia <strong>DAAD</strong> em projetos práticos;<br>
+</li>
+<li><strong>Desenvolvimento de Projetos</strong>: Foco na resolução de problemas complexos, aplicando o raciocínio algorítmico a cenários concretos.</li>
+</ul>
+<section id="depuração-sistemática" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="depuração-sistemática"><span class="header-section-number">9.1</span> Depuração Sistemática</h2>
+<p>Esta etapa final do aprendizado se concentrará na <strong>Depuração Sistemática</strong>, uma competência fundamental para o desenvolvimento de software robusto. Serão exercitadas algumas das técnicas formais para a identificação de erros, métodos de teste e procedimentos para o rastreamento da execução de programas.</p>
+<ol type="1">
+<li><strong>Princípios de Teste de Software</strong>: serão abordados os fundamentos do teste de software, incluindo teste de unidade e teste de integração. A abordagem será prática, por meio de um conjunto de exercícios que permitirão aos alunos aplicar os conceitos em cenários controlados.</li>
+</ol>
+</section>
+<section id="controle-de-versão-e-colaboração" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="controle-de-versão-e-colaboração"><span class="header-section-number">9.2</span> Controle de Versão e Colaboração</h2>
+<ol type="1">
+<li><strong>Sistemas de Controle de Versão</strong>: introdução aos sistemas de controle de versão, com foco no projeto Git <span class="citation" data-cites="git-project">(<a href="referencias.html#ref-git-project" role="doc-biblioref">1</a>)</span> e na plataforma GitHub <span class="citation" data-cites="github-inc">(<a href="referencias.html#ref-github-inc" role="doc-biblioref">2</a>)</span>. O objetivo é demonstrar como essas ferramentas facilitam o desenvolvimento colaborativo, o gerenciamento de alterações e o rastreamento de erros em projetos de software. Estes sistemas serão utilizados para versionar o código desenvolvido pelos alunos, permitindo que eles aprendam a colaborar efetivamente em projetos de programação mesmo que não estejam fisicamente juntos.</li>
+</ol>
+</section>
+<section id="exercícios-sistemas-complexos-com-testes-e-controle-de-versão" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="exercícios-sistemas-complexos-com-testes-e-controle-de-versão"><span class="header-section-number">9.3</span> Exercícios: Sistemas Complexos com Testes e Controle de Versão</h2>
+<p>Estes exercícios são os mais complexos e desafiadores da disciplina. Ainda assim, eles foram planejados para serem acessíveis, exigindo a aplicação de todos os conceitos aprendidos, de forma progressiva. Caberá ao professor apresentar a teoria de testes unitários, testes de integração e controle de versão, de forma lúdica, fluida e interativa. Os exercícios também foram projetados para serem aplicados com a Técnica da Sequência de Fibonacci. Todavia, existem <span class="math inline">\(8\)</span> exercícios, em vez dos <span class="math inline">\(7\)</span> (1, 1, 2, 3) que usamos antes. Este execício extra, o <strong>A4</strong> pode ser usado pelo professor para introduzir os conceitos necessários.</p>
+<p>Todos os exercícios foram planejados considerando que os alunos poderão usar as ferramentas de busca e inquisição baseadas em Inteligência Artificial, para auxiliar na resolução dos problemas complementando conhecimentos que não estejam diretamente ligados a resolução do problema ou ao <strong>Raciocínio Algorítmico</strong>. Por exemplo, o professor deve incentivar o uso dessas ferramentas para desenvolver testes automatizados no Github. A ideia é que os alunos aprendam a usar essas ferramentas como ferramentas de suporte ao processo de aprendizado e resolução de problemas sem perder a autonomia e o controle sobre seu próprio aprendizado.</p>
+<section id="par-1-sistema-de-biblioteca-digital" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="par-1-sistema-de-biblioteca-digital"><span class="header-section-number">9.3.1</span> Par 1: Sistema de Biblioteca Digital</h3>
+<section id="a4-o-bibliotecário-virtual-inteligente" class="level4" data-number="9.3.1.1">
+<h4 data-number="9.3.1.1" class="anchored" data-anchor-id="a4-o-bibliotecário-virtual-inteligente"><span class="header-section-number">9.3.1.1</span> A4: O Bibliotecário Virtual Inteligente**</h4>
+<p>Uma biblioteca universitária precisa modernizar seu sistema de gestão, criando um programa que gerencie empréstimos, devoluções, multas e recomendações de livros. O sistema deve trabalhar com múltiplos arquivos CSV (livros.csv, usuarios.csv, emprestimos.csv) e oferecer funcionalidades como busca inteligente, cálculo automático de multas e sugestões personalizadas baseadas no histórico de leitura.</p>
+<p><strong>Funções a implementar</strong>:</p>
+<ul>
+<li><strong>Estruturas de dados</strong>: arrays para livros, usuários e empréstimos; estruturas para representar cada entidade;</li>
+<li><strong>Funções de validação</strong>: <code>validarLivro()</code>, <code>validarUsuario()</code>, <code>validarDataEmprestimo()</code>, <code>validarCPF()</code>;</li>
+<li><strong>Funções de cálculo</strong>: <code>calcularMulta()</code>, <code>calcularPrazoVencimento()</code>, <code>calcularCompatibilidadeLeitura()</code>;</li>
+<li><strong>Funções de busca</strong>: <code>buscarLivroPorTitulo()</code>, <code>buscarLivroPorAutor()</code>, <code>buscarUsuarioPorCPF()</code>, <code>verificarDisponibilidade()</code>;</li>
+<li><strong>Funções de recomendação</strong>: <code>sugerirLivrosSimilares()</code>, <code>analisarHistoricoUsuario()</code>, <code>gerarRecomendacaoPersonalizada()</code>;</li>
+<li><strong>Funções de relatório</strong>: <code>gerarRelatorioEmprestimos()</code>, <code>gerarRelatorioMultas()</code>, <code>gerarEstatisticasGerais()</code>;</li>
+<li><strong>Funções de persistência</strong>: <code>salvarLivros()</code>, <code>carregarLivros()</code>, <code>salvarEmprestimos()</code>, <code>carregarEmprestimos()</code>.</li>
+</ul>
+<p><strong>Entrada</strong>: dados de livros (ISBN, título, autor, categoria, ano), usuários (CPF, nome, curso, semestre) e empréstimos (data, prazo, status).</p>
+<p><strong>Saída</strong>: Sistema interativo com menus para todas as operações, relatórios formatados e recomendações personalizadas.</p>
+<section id="decomposição-divisão-de-tarefas-para-o-problema-a4" class="level5" data-number="9.3.1.1.1">
+<h5 data-number="9.3.1.1.1" class="anchored" data-anchor-id="decomposição-divisão-de-tarefas-para-o-problema-a4"><span class="header-section-number">9.3.1.1.1</span> Decomposição: Divisão de Tarefas para o Problema A4</h5>
+<p><strong>Aluno 1</strong>: Módulo de Validação + Testes de Persistência</p>
+<ul>
+<li><strong>Desenvolver</strong>: <code>validarLivro()</code>, <code>validarUsuario()</code>, <code>validarDataEmprestimo()</code>, <code>validarCPF()</code>;</li>
+<li><strong>Testar</strong>: Funções de persistência do Aluno 4 (<code>salvarLivros()</code>, <code>carregarLivros()</code>, <code>salvarEmprestimos()</code>, <code>carregarEmprestimos()</code>);</li>
+<li><strong>Testes a criar</strong>: <code>testarSalvarLivros()</code>, <code>testarCarregarLivros()</code>, <code>testarSalvarEmprestimos()</code>, <code>testarCarregarEmprestimos()</code>;</li>
+<li><strong>Foco</strong>: Garantir entrada de dados válida e verificar se persistência funciona corretamente.</li>
+</ul>
+<p><strong>Aluno 2</strong>: Módulo de Cálculos + Testes de Validação</p>
+<ul>
+<li><strong>Desenvolver</strong>: <code>calcularMulta()</code>, <code>calcularPrazoVencimento()</code>, <code>calcularCompatibilidadeLeitura()</code>, <code>verificarDisponibilidade()</code>;</li>
+<li><strong>Testar</strong>: Funções de validação do Aluno 1 (<code>validarLivro()</code>, <code>validarUsuario()</code>, <code>validarDataEmprestimo()</code>, <code>validarCPF()</code>);</li>
+<li><strong>Testes a criar</strong>: <code>testarValidarLivro()</code>, <code>testarValidarUsuario()</code>, <code>testarValidarDataEmprestimo()</code>, <code>testarValidarCPF()</code>;</li>
+<li><strong>Foco</strong>: Algoritmos de cálculo precisos e validação robusta de entrada.</li>
+</ul>
+<p><strong>Aluno 3</strong>: Módulo de Busca e Relatórios + Testes de Cálculos</p>
+<ul>
+<li><strong>Desenvolver</strong>: <code>buscarLivroPorTitulo()</code>, <code>buscarLivroPorAutor()</code>, <code>buscarUsuarioPorCPF()</code>, <code>gerarRelatorioEmprestimos()</code>, <code>gerarRelatorioMultas()</code>, <code>gerarEstatisticasGerais()</code>;</li>
+<li><strong>Testar</strong>: Funções de cálculo do Aluno 2 (<code>calcularMulta()</code>, <code>calcularPrazoVencimento()</code>, <code>calcularCompatibilidadeLeitura()</code>, <code>verificarDisponibilidade()</code>);</li>
+<li><strong>Testes a criar</strong>: <code>testarCalcularMulta()</code>, <code>testarCalcularPrazoVencimento()</code>, <code>testarCalcularCompatibilidadeLeitura()</code>, <code>testarVerificarDisponibilidade()</code>;</li>
+<li><strong>Foco</strong>: Busca eficiente e relatórios informativos com cálculos corretos.</li>
+</ul>
+<p><strong>Aluno 4</strong>: Módulo de Recomendação e Persistência + Testes de Busca</p>
+<ul>
+<li><strong>Desenvolver</strong>: <code>sugerirLivrosSimilares()</code>, <code>analisarHistoricoUsuario()</code>, <code>gerarRecomendacaoPersonalizada()</code>, <code>salvarLivros()</code>, <code>carregarLivros()</code>, <code>salvarEmprestimos()</code>, <code>carregarEmprestimos()</code>;</li>
+<li><strong>Testar</strong>: Funções de busca e relatórios do Aluno 3 (<code>buscarLivroPorTitulo()</code>, <code>buscarLivroPorAutor()</code>, <code>buscarUsuarioPorCPF()</code>, <code>gerarRelatorioEmprestimos()</code>, <code>gerarRelatorioMultas()</code>, <code>gerarEstatisticasGerais()</code>);</li>
+<li><strong>Testes a criar</strong>: <code>testarBuscarLivroPorTitulo()</code>, <code>testarBuscarLivroPorAutor()</code>, <code>testarBuscarUsuarioPorCPF()</code>, <code>testarGerarRelatorioEmprestimos()</code>, <code>testarGerarRelatorioMultas()</code>, <code>testarGerarEstatisticasGerais()</code>;</li>
+<li><strong>Foco</strong>: Sistema de recomendação inteligente e verificação da precisão das buscas.</li>
+</ul>
+</section>
+</section>
+<section id="b4-testando-a-biblioteca-dos-sonhos" class="level4" data-number="9.3.1.2">
+<h4 data-number="9.3.1.2" class="anchored" data-anchor-id="b4-testando-a-biblioteca-dos-sonhos"><span class="header-section-number">9.3.1.2</span> B4: Testando a Biblioteca dos Sonhos</h4>
+<p>Implementação completa do sistema da biblioteca com todas as funções de A4, agora com foco na integração entre módulos e refinamento dos testes. Cada aluno implementa suas funções de A4 e melhora os testes que já desenvolveu, criando cenários mais complexos e edge cases.</p>
+<p><strong>Funções a implementar</strong>:</p>
+<ul>
+<li>Todas as funções de A4 totalmente implementadas;</li>
+<li>Aprimoramento dos testes unitários com mais cenários;</li>
+<li>Interface principal integrando todos os módulos;</li>
+<li>Sistema de logs para rastrear operações.</li>
+</ul>
+<p><strong>Entrada</strong>: Datasets de teste mais complexos com casos extremos e dados corrompidos;</p>
+<p><strong>Saída</strong>: Sistema robusto com testes abrangentes e relatórios de qualidade</p>
+<section id="decomposição-divisão-de-tarefas-para-o-problema-b4" class="level5" data-number="9.3.1.2.1">
+<h5 data-number="9.3.1.2.1" class="anchored" data-anchor-id="decomposição-divisão-de-tarefas-para-o-problema-b4"><span class="header-section-number">9.3.1.2.1</span> Decomposição: Divisão de Tarefas para o Problema B4</h5>
+<p><strong>Aluno 1</strong>: Refinamento de Validação + Testes Avançados de Persistência</p>
+<ul>
+<li><strong>Implementar</strong>: versões robustas das funções de validação de A4;</li>
+<li><strong>Expandir testes</strong>: criar 3-4 cenários de teste para cada função de persistência;</li>
+<li><strong>Casos extremos</strong>: arquivos corrompidos, dados inconsistentes, limites de memória;</li>
+<li><strong>Foco</strong>: validação à prova de falhas e persistência confiável.</li>
+</ul>
+<p><strong>Aluno 2</strong>: Otimização de Cálculos + Testes Complexos de Validação</p>
+<ul>
+<li><strong>Implementar</strong>: versões otimizadas das funções de cálculo de A4;</li>
+<li><strong>Expandir testes</strong>: criar 3-4 cenários para cada função de validação;</li>
+<li><strong>Casos extremos</strong>: datas inválidas, CPFs mal formados, dados vazios;</li>
+<li><strong>Foco</strong>: cálculos precisos e validação abrangente.</li>
+</ul>
+<p><strong>Aluno 3</strong>: Interface Principal + Testes de Performance de Cálculos</p>
+<ul>
+<li><strong>Implementar</strong>: interface que integra busca e relatórios de A4;</li>
+<li><strong>Expandir testes</strong>: testar performance e precisão dos cálculos;</li>
+<li><strong>Casos extremos</strong>: grandes volumes de dados, cálculos com overflow;</li>
+<li><strong>Foco</strong>: interface intuitiva e verificação de performance.</li>
+</ul>
+<p><strong>Aluno 4</strong>: Sistema de Logs + Testes de Integração de Busca</p>
+<ul>
+<li><strong>Implementar</strong>: sistema de recomendação e persistência de A4 + logs;</li>
+<li><strong>Expandir testes</strong>: testar busca com grandes datasets;</li>
+<li><strong>Casos extremos</strong>: buscas com critérios inexistentes, dados duplicados;</li>
+<li><strong>Foco</strong>: rastreabilidade do sistema e busca robusta.</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="par-2-sistema-de-delivery-de-comida" class="level3" data-number="9.3.2">
+<h3 data-number="9.3.2" class="anchored" data-anchor-id="par-2-sistema-de-delivery-de-comida"><span class="header-section-number">9.3.2</span> Par 2: Sistema de Delivery de Comida</h3>
+<section id="c4-o-delivery-que-nunca-falha" class="level4" data-number="9.3.2.1">
+<h4 data-number="9.3.2.1" class="anchored" data-anchor-id="c4-o-delivery-que-nunca-falha"><span class="header-section-number">9.3.2.1</span> C4: O Delivery que Nunca Falha**</h4>
+<p>Uma startup de delivery precisa de um sistema robusto que gerencie pedidos, calcule fretes, estime tempos de entrega e processe pagamentos. O sistema deve trabalhar com dados de restaurantes, pratos, clientes e entregadores, oferecendo funcionalidades como aplicação de descontos promocionais, rastreamento de pedidos e análise de satisfação do cliente.</p>
+<p><strong>Funções a implementar</strong>:</p>
+<ul>
+<li><strong>Estruturas de dados</strong>: arrays para restaurantes, pratos, clientes, pedidos e entregadores;</li>
+<li><strong>Funções de validação</strong>: <code>validarPedido()</code>, <code>validarEnderecoEntrega()</code>, <code>validarFormaPagamento()</code>, <code>validarPromocao()</code>;</li>
+<li><strong>Funções de cálculo</strong>: <code>calcularFrete()</code>, <code>calcularDesconto()</code>, <code>calcularTaxaServico()</code>, <code>calcularTempoEstimado()</code>;</li>
+<li><strong>Funções de processamento</strong>: <code>processarPagamento()</code>, <code>alocarEntregador()</code>, <code>atualizarStatusPedido()</code>, <code>confirmarEntrega()</code>;</li>
+<li><strong>Funções de rastreamento</strong>: <code>rastrearPedido()</code>, <code>notificarCliente()</code>, <code>atualizarLocalizacao()</code>, <code>calcularTempoRestante()</code>;</li>
+<li><strong>Funções de análise</strong>: <code>avaliarRestaurante()</code>, <code>analisarSatisfacao()</code>, <code>gerarRelatorioVendas()</code>, <code>identificarProblemasEntrega()</code>;</li>
+<li><strong>Funções de persistência</strong>: <code>salvarPedidos()</code>, <code>carregarRestaurantes()</code>, <code>salvarAvaliacoes()</code>, <code>carregarHistorico()</code>;</li>
+</ul>
+<p><strong>Entrada</strong>: Dados de restaurantes (nome, endereço, cardápio, avaliação), pedidos (itens, quantidade, observações) e informações de entrega.</p>
+<p><strong>Saída</strong>: Interface de pedidos com cálculos em tempo real, sistema de rastreamento e relatórios de performance.</p>
+<section id="decomposição-divisão-de-tarefas-para-o-problema-c4" class="level5" data-number="9.3.2.1.1">
+<h5 data-number="9.3.2.1.1" class="anchored" data-anchor-id="decomposição-divisão-de-tarefas-para-o-problema-c4"><span class="header-section-number">9.3.2.1.1</span> Decomposição: Divisão de Tarefas para o Problema C4</h5>
+<p><strong>Aluno 1</strong>: Módulo de Validação + Testes de Análise</p>
+<ul>
+<li><strong>Desenvolver</strong>: <code>validarPedido()</code>, <code>validarEnderecoEntrega()</code>, <code>validarFormaPagamento()</code>, <code>validarPromocao()</code>;</li>
+<li><strong>Testar</strong>: Funções de análise do Aluno 4 (<code>avaliarRestaurante()</code>, <code>analisarSatisfacao()</code>, <code>gerarRelatorioVendas()</code>, <code>identificarProblemasEntrega()</code>);</li>
+<li><strong>Testes a criar</strong>: <code>testarAvaliarRestaurante()</code>, <code>testarAnalisarSatisfacao()</code>, <code>testarGerarRelatorioVendas()</code>, <code>testarIdentificarProblemasEntrega()</code>;</li>
+<li><strong>Foco</strong>: Entrada de dados confiável e verificação da qualidade das análises.</li>
+</ul>
+<p><strong>Aluno 2</strong>: Módulo de Cálculos + Testes de Validação</p>
+<ul>
+<li><strong>Desenvolver</strong>: <code>calcularFrete()</code>, <code>calcularDesconto()</code>, <code>calcularTaxaServico()</code>, <code>calcularTempoEstimado()</code>;</li>
+<li><strong>Testar</strong>: Funções de validação do Aluno 1 (<code>validarPedido()</code>, <code>validarEnderecoEntrega()</code>, <code>validarFormaPagamento()</code>, <code>validarPromocao()</code>);</li>
+<li><strong>Testes a criar</strong>: <code>testarValidarPedido()</code>, <code>testarValidarEnderecoEntrega()</code>, <code>testarValidarFormaPagamento()</code>, <code>testarValidarPromocao()</code>;</li>
+<li><strong>Foco</strong>: Cálculos financeiros precisos e validação robusta.</li>
+</ul>
+<p><strong>Aluno 3</strong>: Módulo de Processamento + Testes de Cálculos</p>
+<ul>
+<li><strong>Desenvolver</strong>: <code>processarPagamento()</code>, <code>alocarEntregador()</code>, <code>atualizarStatusPedido()</code>, <code>confirmarEntrega()</code>;</li>
+<li><strong>Testar</strong>: Funções de cálculo do Aluno 2 (<code>calcularFrete()</code>, <code>calcularDesconto()</code>, <code>calcularTaxaServico()</code>, <code>calcularTempoEstimado()</code>);</li>
+<li><strong>Testes a criar</strong>: <code>testarCalcularFrete()</code>, <code>testarCalcularDesconto()</code>, <code>testarCalcularTaxaServico()</code>, <code>testarCalcularTempoEstimado()</code>;</li>
+<li><strong>Foco</strong>: Fluxo de processamento eficiente e cálculos corretos.</li>
+</ul>
+<p><strong>Aluno 4</strong>: Módulo de Rastreamento e Análise + Testes de Processamento</p>
+<ul>
+<li><strong>Desenvolver</strong>: <code>rastrearPedido()</code>, <code>notificarCliente()</code>, <code>atualizarLocalizacao()</code>, <code>calcularTempoRestante()</code>, <code>avaliarRestaurante()</code>, <code>analisarSatisfacao()</code>, <code>gerarRelatorioVendas()</code>, <code>identificarProblemasEntrega()</code>;</li>
+<li><strong>Testar</strong>: Funções de processamento do Aluno 3 (<code>processarPagamento()</code>, <code>alocarEntregador()</code>, <code>atualizarStatusPedido()</code>, <code>confirmarEntrega()</code>);</li>
+<li><strong>Testes a criar</strong>: <code>testarProcessarPagamento()</code>, <code>testarAlocarEntregador()</code>, <code>testarAtualizarStatusPedido()</code>, <code>testarConfirmarEntrega()</code>;</li>
+<li><strong>Foco</strong>: Sistema de rastreamento em tempo real e verificação do processamento</li>
+</ul>
+</section>
+</section>
+<section id="d4-integrando-o-restaurante-digital" class="level4" data-number="9.3.2.2">
+<h4 data-number="9.3.2.2" class="anchored" data-anchor-id="d4-integrando-o-restaurante-digital"><span class="header-section-number">9.3.2.2</span> D4: Integrando o Restaurante Digital</h4>
+<p>Implementação completa do sistema de delivery com foco em fluxos integrados. O sistema deve demonstrar como validação, cálculos, processamento e rastreamento trabalham em conjunto, simulando o fluxo completo desde o pedido até a entrega.</p>
+<p><strong>Funções a implementar</strong>:</p>
+<ul>
+<li>Todas as funções de <strong>C4</strong> implementadas e integradas;</li>
+<li>Fluxos completos de negócio (pedido → pagamento → entrega);</li>
+<li>Tratamento de erros em cenários reais;</li>
+<li>Métricas de performance do sistema.</li>
+</ul>
+<p><strong>Entrada</strong>: Simulação de múltiplos pedidos simultâneos com cenários de stress.</p>
+<p><strong>Saída</strong>: Sistema integrado com relatórios de fluxo e métricas de performance.</p>
+<section id="decomposição-divisão-de-tarefas-para-o-problema-d4" class="level5" data-number="9.3.2.2.1">
+<h5 data-number="9.3.2.2.1" class="anchored" data-anchor-id="decomposição-divisão-de-tarefas-para-o-problema-d4"><span class="header-section-number">9.3.2.2.1</span> Decomposição: Divisão de Tarefas para o Problema D4</h5>
+<p><strong>Aluno 1</strong>: Coordenação de Fluxos + Testes de Stress de Análise</p>
+<ul>
+<li><strong>Implementar</strong>: sistema que coordena validação com outros módulos;</li>
+<li><strong>Expandir testes</strong>: testar análises com grandes volumes de dados;</li>
+<li><strong>Cenários complexos</strong>: múltiplos pedidos simultâneos, análises em tempo real;</li>
+<li><strong>Foco</strong>: coordenação entre módulos e robustez das análises.</li>
+</ul>
+<p><strong>Aluno 2</strong>: Otimização de Performance + Testes de Integração de Validação</p>
+<ul>
+<li><strong>Implementar</strong>: versões otimizadas dos cálculos para alta demanda;</li>
+<li><strong>Expandir testes</strong>: testar validação em cenários de stress;</li>
+<li><strong>Cenários complexos</strong>: validação de centenas de pedidos por minuto;</li>
+<li><strong>Foco</strong>: performance sob carga e validação eficiente.</li>
+</ul>
+<p><strong>Aluno 3</strong>: Tratamento de Erros + Testes de Fluxo de Cálculos</p>
+<ul>
+<li><strong>Implementar</strong>: sistema robusto de processamento com recuperação de erros;</li>
+<li><strong>Expandir testes</strong>: testar cálculos em cenários de falha;</li>
+<li><strong>Cenários complexos</strong>: falhas de rede, timeouts, dados corrompidos;</li>
+<li><strong>Foco</strong>: resiliência do sistema e confiabilidade dos cálculos.</li>
+</ul>
+<p><strong>Aluno 4</strong>: Monitoramento e Métricas + Testes End-to-End</p>
+<ul>
+<li><strong>Implementar</strong>: sistema de monitoramento do rastreamento e análise;</li>
+<li><strong>Expandir testes</strong>: testes completos do fluxo pedido → entrega;</li>
+<li><strong>Cenários complexos</strong>: fluxos com falhas e recuperação automática;</li>
+<li><strong>Foco</strong>: observabilidade do sistema e testes de ponta a ponta.</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="par-3-sistema-de-rede-social-universitária" class="level3" data-number="9.3.3">
+<h3 data-number="9.3.3" class="anchored" data-anchor-id="par-3-sistema-de-rede-social-universitária"><span class="header-section-number">9.3.3</span> Par 3: Sistema de Rede Social Universitária</h3>
+<section id="e4-a-rede-social-da-turma" class="level4" data-number="9.3.3.1">
+<h4 data-number="9.3.3.1" class="anchored" data-anchor-id="e4-a-rede-social-da-turma"><span class="header-section-number">9.3.3.1</span> E4: A Rede Social da Turma**</h4>
+<p>Uma universidade quer criar uma rede social interna para conectar estudantes, professores e funcionários. O sistema deve gerenciar perfis, conexões, posts, eventos e grupos de estudo, oferecendo funcionalidades como feed personalizado, sistema de compatibilidade acadêmica e análise de sentimentos das postagens.</p>
+<p><strong>Funções a implementar</strong>:</p>
+<ul>
+<li><strong>Estruturas de dados</strong>: arrays para usuários, posts, conexões, grupos e eventos;</li>
+<li><strong>Funções de validação</strong>: <code>validarUsuario()</code>, <code>validarPost()</code>, <code>validarEvento()</code>, <code>validarGrupo()</code>;</li>
+<li><strong>Funções de compatibilidade</strong>: <code>calcularCompatibilidadeAcademica()</code>, <code>sugerirAmigos()</code>, <code>analisarInteressesComuns()</code>, <code>identificarGruposRelevantes()</code>;</li>
+<li><strong>Funções de conteúdo</strong>: <code>filtrarPosts()</code>, <code>ordenarFeed()</code>, <code>moderarConteudo()</code>, <code>analisarSentimento()</code>;</li>
+<li><strong>Funções sociais</strong>: <code>criarConexao()</code>, <code>removerConexao()</code>, <code>bloquearUsuario()</code>, <code>reportarConteudo()</code>;</li>
+<li><strong>Funções de eventos</strong>: <code>criarEvento()</code>, <code>confirmarPresenca()</code>, <code>notificarParticipantes()</code>, <code>gerarResumoEvento()</code>;</li>
+<li><strong>Funções de análise</strong>: <code>gerarEstatisticasPerfil()</code>, <code>analisarEngajamento()</code>, <code>identificarTendencias()</code>, <code>gerarRelatorioAtividade()</code>.</li>
+</ul>
+<p><strong>Entrada</strong>: dados de usuários (matrícula, curso, interesses), posts (texto, imagens, tags) e eventos (data, local, descrição).</p>
+<p><strong>Saída</strong>: interface social com feed personalizado, sugestões de conexões e análise de atividade.</p>
+<section id="decomposição-divisão-de-tarefas-para-o-problema-e4" class="level5" data-number="9.3.3.1.1">
+<h5 data-number="9.3.3.1.1" class="anchored" data-anchor-id="decomposição-divisão-de-tarefas-para-o-problema-e4"><span class="header-section-number">9.3.3.1.1</span> Decomposição: Divisão de Tarefas para o Problema E4</h5>
+<p><strong>Aluno 1</strong>: Módulo de Validação + Testes de Eventos</p>
+<ul>
+<li><strong>Desenvolver</strong>: <code>validarUsuario()</code>, <code>validarPost()</code>, <code>validarEvento()</code>, <code>validarGrupo()</code>;</li>
+<li><strong>Testar</strong>: Funções de eventos do Aluno 4 (<code>criarEvento()</code>, <code>confirmarPresenca()</code>, <code>notificarParticipantes()</code>, <code>gerarResumoEvento()</code>);</li>
+<li><strong>Testes a criar</strong>: <code>testarCriarEvento()</code>, <code>testarConfirmarPresenca()</code>, <code>testarNotificarParticipantes()</code>, <code>testarGerarResumoEvento()</code>;</li>
+<li><strong>Foco</strong>: Validação robusta de conteúdo social e funcionamento dos eventos.</li>
+</ul>
+<p><strong>Aluno 2</strong>: Módulo de Compatibilidade + Testes de Validação</p>
+<ul>
+<li><strong>Desenvolver</strong>: <code>calcularCompatibilidadeAcademica()</code>, <code>sugerirAmigos()</code>, <code>analisarInteressesComuns()</code>, <code>identificarGruposRelevantes()</code>;</li>
+<li><strong>Testar</strong>: Funções de validação do Aluno 1 (<code>validarUsuario()</code>, <code>validarPost()</code>, <code>validarEvento()</code>, <code>validarGrupo()</code>);</li>
+<li><strong>Testes a criar</strong>: <code>testarValidarUsuario()</code>, <code>testarValidarPost()</code>, <code>testarValidarEvento()</code>, <code>testarValidarGrupo()</code>;</li>
+<li><strong>Foco</strong>: Algoritmos sociais inteligentes e validação de entrada.</li>
+</ul>
+<p><strong>Aluno 3</strong>: Módulo de Conteúdo e Social + Testes de Compatibilidade</p>
+<ul>
+<li><strong>Desenvolver</strong>: <code>filtrarPosts()</code>, <code>ordenarFeed()</code>, <code>moderarConteudo()</code>, <code>analisarSentimento()</code>, <code>criarConexao()</code>, <code>removerConexao()</code>, <code>bloquearUsuario()</code>, <code>reportarConteudo()</code>;</li>
+<li><strong>Testar</strong>: Funções de compatibilidade do Aluno 2 (<code>calcularCompatibilidadeAcademica()</code>, <code>sugerirAmigos()</code>, <code>analisarInteressesComuns()</code>, <code>identificarGruposRelevantes()</code>);</li>
+<li><strong>Testes a criar</strong>: <code>testarCalcularCompatibilidadeAcademica()</code>, <code>testarSugerirAmigos()</code>, <code>testarAnalisarInteressesComuns()</code>, <code>testarIdentificarGruposRelevantes()</code>;</li>
+<li><strong>Foco</strong>: curadoria de conteúdo e verificação dos algoritmos sociais.</li>
+</ul>
+<p><strong>Aluno 4</strong>: Módulo de Eventos e Análise + Testes de Conteúdo</p>
+<ul>
+<li><strong>Desenvolver</strong>: <code>criarEvento()</code>, <code>confirmarPresenca()</code>, <code>notificarParticipantes()</code>, <code>gerarResumoEvento()</code>, <code>gerarEstatisticasPerfil()</code>, <code>analisarEngajamento()</code>, <code>identificarTendencias()</code>, <code>gerarRelatorioAtividade()</code>;</li>
+<li><strong>Testar</strong>: Funções de conteúdo do Aluno 3 (<code>filtrarPosts()</code>, <code>ordenarFeed()</code>, <code>moderarConteudo()</code>, <code>analisarSentimento()</code>, <code>criarConexao()</code>, <code>removerConexao()</code>, <code>bloquearUsuario()</code>, <code>reportarConteudo()</code>);</li>
+<li><strong>Testes a criar</strong>: <code>testarFiltrarPosts()</code>, <code>testarOrdenarFeed()</code>, <code>testarModerarConteudo()</code>, <code>testarAnalisarSentimento()</code>, <code>testarCriarConexao()</code>, <code>testarRemoverConexao()</code>, <code>testarBloquearUsuario()</code>, <code>testarReportarConteudo()</code>;</li>
+<li><strong>Foco</strong>: gestão de eventos e verificação da curadoria de conteúdo.</li>
+</ul>
+</section>
+</section>
+<section id="f4-conectando-a-universidade" class="level4" data-number="9.3.3.2">
+<h4 data-number="9.3.3.2" class="anchored" data-anchor-id="f4-conectando-a-universidade"><span class="header-section-number">9.3.3.2</span> F4: Conectando a Universidade**</h4>
+<p>Implementação completa da rede social com foco em desenvolvimento colaborativo usando Git. O sistema deve demonstrar fluxos de trabalho em equipe, resolução de conflitos de merge e implementação de features em paralelo usando controle de versão.</p>
+<p><strong>Funções a implementar</strong>:</p>
+<ul>
+<li>Todas as funções de E4 implementadas com controle de versão;</li>
+<li>Workflow de desenvolvimento usando Git (branches, pull requests);</li>
+<li>Resolução colaborativa de conflitos de merge;</li>
+<li>Documentação e versionamento do código.</li>
+</ul>
+<p><strong>Entrada</strong>: desenvolvimento colaborativo com múltiplas features em paralelo.</p>
+<p><strong>Saída</strong>: sistema integrado com histórico completo de desenvolvimento no Git.</p>
+<section id="decomposição-divisão-de-tarefas-para-o-problema-f4" class="level5" data-number="9.3.3.2.1">
+<h5 data-number="9.3.3.2.1" class="anchored" data-anchor-id="decomposição-divisão-de-tarefas-para-o-problema-f4"><span class="header-section-number">9.3.3.2.1</span> Decomposição: Divisão de Tarefas para o Problema F4</h5>
+<p><strong>Aluno 1</strong>: Feature Branch ‘validation’ + Gestão de Conflitos</p>
+<ul>
+<li><strong>Implementar</strong>: módulo de validação de E4 em branch separada;</li>
+<li><strong>Git workflow</strong>: criar branch <code>feature/validation</code>, commits regulares;</li>
+<li><strong>Resolução de conflitos</strong>: coordenar merges com outras features;</li>
+<li><strong>Foco</strong>: desenvolvimento isolado e integração colaborativa.</li>
+</ul>
+<p><strong>Aluno 2</strong>: Feature Branch ‘social-algorithms’ + Code Review</p>
+<ul>
+<li><strong>Implementar</strong>: módulo de compatibilidade de E4 em branch separada;</li>
+<li><strong>Git workflow</strong>: branch <code>feature/social-algorithms</code>, pull requests;</li>
+<li><strong>Code review</strong>: revisar código dos outros alunos antes do merge;</li>
+<li><strong>Foco</strong>: qualidade de código e revisão colaborativa.</li>
+</ul>
+<p><strong>Aluno 3</strong>: Feature Branch ‘content-curation’ + Documentação</p>
+<ul>
+<li><strong>Implementar</strong>: módulo de conteúdo de E4 em branch separada;</li>
+<li><strong>Git workflow</strong>: branch <code>feature/content-curation</code>, documentação no Git;</li>
+<li><strong>Documentação</strong>: README, comentários, wiki do projeto;</li>
+<li><strong>Foco</strong>: funcionalidades principais e documentação clara.</li>
+</ul>
+<p><strong>Aluno 4</strong>: Branch ‘events-analytics’ + Integração Final</p>
+<ul>
+<li><strong>Implementar</strong>: módulo de eventos de E4 em branch separada;</li>
+<li><strong>Git workflow</strong>: branch <code>feature/events-analytics</code>, coordenação de merges;</li>
+<li><strong>Integração</strong>: merge final de todas as features na branch main;</li>
+<li><strong>Foco</strong>: coordenação geral e integração do projeto.</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="par-4-sistema-de-e-commerce-estudantil-com-testes-de-integração" class="level3" data-number="9.3.4">
+<h3 data-number="9.3.4" class="anchored" data-anchor-id="par-4-sistema-de-e-commerce-estudantil-com-testes-de-integração"><span class="header-section-number">9.3.4</span> Par 4: Sistema de E-commerce Estudantil (COM TESTES DE INTEGRAÇÃO)</h3>
+<section id="g4-a-loja-virtual-dos-universitários" class="level4" data-number="9.3.4.1">
+<h4 data-number="9.3.4.1" class="anchored" data-anchor-id="g4-a-loja-virtual-dos-universitários"><span class="header-section-number">9.3.4.1</span> G4: A Loja Virtual dos Universitários</h4>
+<p>Estudantes universitários querem criar um marketplace para vender e trocar itens entre colegas (livros usados, eletrônicos, roupas, materiais de estudo). O sistema deve gerenciar produtos, vendedores, compradores, transações e avaliações, oferecendo funcionalidades como busca inteligente, sistema de reputação e cálculo automático de preços baseado em condição do produto.</p>
+<p><strong>Funções a implementar</strong>:</p>
+<ul>
+<li><strong>Estruturas de dados</strong>: Arrays para produtos, usuários, transações, avaliações e categorias;</li>
+<li><strong>Funções de validação</strong>: <code>validarProduto()</code>, <code>validarTransacao()</code>, <code>validarAvaliacao()</code>, <code>validarPagamento()</code>;</li>
+<li><strong>Funções de precificação</strong>: <code>calcularPrecoFinal()</code>, <code>aplicarDesconto()</code>, <code>calcularFrete()</code>, <code>estimarDepreciacao()</code>;</li>
+<li><strong>Funções de estoque</strong>: <code>gerenciarEstoque()</code>, <code>verificarDisponibilidade()</code>, <code>reservarProduto()</code>, <code>atualizarQuantidade()</code>;</li>
+<li><strong>Funções de busca</strong>: <code>buscarProdutos()</code>, <code>filtrarPorCategoria()</code>, <code>ordenarResultados()</code>, <code>buscarVendedor()</code>;</li>
+<li><strong>Funções de recomendação</strong>: <code>recomendarProdutos()</code>, <code>analisarHistoricoCompras()</code>, <code>sugerirSimilares()</code>, <code>identificarTendencias()</code>;</li>
+<li><strong>Funções de avaliação</strong>: <code>processarAvaliacao()</code>, <code>calcularReputacao()</code>, <code>gerarRelatorioVendedor()</code>, <code>moderarComentarios()</code>;</li>
+<li><strong>Funções financeiras</strong>: <code>processarPagamento()</code>, <code>calcularComissao()</code>, <code>gerarFatura()</code>, <code>processarEstorno()</code>.</li>
+</ul>
+<p><strong>INTRODUÇÃO A TESTES DE INTEGRAÇÃO</strong>: Neste exercício, além dos testes unitários simples, cada aluno criará <strong>testes de integração</strong> que verificam como seus módulos interagem com os de outros alunos.</p>
+<p><strong>Entrada</strong>: dados de produtos (nome, categoria, condição, preço), usuários vendedores/compradores e transações.</p>
+<p><strong>Saída</strong>: marketplace funcional com sistema de busca, avaliações e relatórios de vendas.</p>
+<section id="decomposição-divisão-de-tarefas-para-o-problema-g4" class="level5" data-number="9.3.4.1.1">
+<h5 data-number="9.3.4.1.1" class="anchored" data-anchor-id="decomposição-divisão-de-tarefas-para-o-problema-g4"><span class="header-section-number">9.3.4.1.1</span> Decomposição: Divisão de Tarefas para o Problema G4</h5>
+<p><strong>Aluno 1</strong>: Módulo de Validação + Testes de Integração Financeiro</p>
+<ul>
+<li><strong>Desenvolver</strong>: <code>validarProduto()</code>, <code>validarTransacao()</code>, <code>validarAvaliacao()</code>, <code>validarPagamento()</code>;</li>
+<li><strong>Testar unitário</strong>: Funções financeiras do Aluno 4 (<code>processarPagamento()</code>, <code>calcularComissao()</code>, <code>gerarFatura()</code>, <code>processarEstorno()</code>);</li>
+<li><strong>Testes de integração</strong>: <code>testarFluxoValidacaoParaPagamento()</code> - verificar se dados validados fluem corretamente para o módulo financeiro;</li>
+<li><strong>Foco</strong>: Validação robusta e integração com sistema financeiro.</li>
+</ul>
+<p><strong>Aluno 2</strong>: Módulo de Precificação e Estoque + Testes de Integração Validação</p>
+<ul>
+<li><strong>Desenvolver</strong>: <code>calcularPrecoFinal()</code>, <code>aplicarDesconto()</code>, <code>calcularFrete()</code>, <code>estimarDepreciacao()</code>, <code>gerenciarEstoque()</code>, <code>verificarDisponibilidade()</code>, <code>reservarProduto()</code>, <code>atualizarQuantidade()</code>;</li>
+<li><strong>Testar unitário</strong>: Funções de validação do Aluno 1 (<code>validarProduto()</code>, <code>validarTransacao()</code>, <code>validarAvaliacao()</code>, <code>validarPagamento()</code>);</li>
+<li><strong>Testes de integração</strong>: <code>testarFluxoProdutoValidadoParaEstoque()</code> - verificar se produtos validados são corretamente adicionados ao estoque;</li>
+<li><strong>Foco</strong>: Gestão de preços/estoque e integração com validação.</li>
+</ul>
+<p><strong>Aluno 3</strong>: Módulo de Busca e Recomendação + Testes de Integração Estoque</p>
+<ul>
+<li><strong>Desenvolver</strong>: <code>buscarProdutos()</code>, <code>filtrarPorCategoria()</code>, <code>ordenarResultados()</code>, <code>buscarVendedor()</code>, <code>recomendarProdutos()</code>, <code>analisarHistoricoCompras()</code>, <code>sugerirSimilares()</code>, <code>identificarTendencias()</code>;</li>
+<li><strong>Testar unitário</strong>: Funções de estoque do Aluno 2 (<code>gerenciarEstoque()</code>, <code>verificarDisponibilidade()</code>, <code>reservarProduto()</code>, <code>atualizarQuantidade()</code>);</li>
+<li><strong>Testes de integração</strong>: <code>testarBuscaComEstoqueAtualizado()</code> - verificar se busca reflete mudanças de estoque em tempo real;</li>
+<li><strong>Foco</strong>: Sistema de busca inteligente e integração com estoque.</li>
+</ul>
+<p><strong>Aluno 4</strong>: Módulo Financeiro e Avaliação + Testes de Integração Busca</p>
+<ul>
+<li><strong>Desenvolver</strong>: <code>processarPagamento()</code>, <code>calcularComissao()</code>, <code>gerarFatura()</code>, <code>processarEstorno()</code>, <code>processarAvaliacao()</code>, <code>calcularReputacao()</code>, <code>gerarRelatorioVendedor()</code>, <code>moderarComentarios()</code>;</li>
+<li><strong>Testar unitário</strong>: Funções de busca do Aluno 3 (<code>buscarProdutos()</code>, <code>filtrarPorCategoria()</code>, <code>ordenarResultados()</code>, <code>buscarVendedor()</code>);</li>
+<li><strong>Testes de integração</strong>: <code>testarCompraCompletaComBusca()</code> - verificar fluxo completo: busca → seleção → pagamento → avaliação;</li>
+<li><strong>Foco</strong>: Sistema financeiro e integração com todo o fluxo de compra.</li>
+</ul>
+</section>
+</section>
+<section id="h4-lançando-o-marketplace-da-turma" class="level4" data-number="9.3.4.2">
+<h4 data-number="9.3.4.2" class="anchored" data-anchor-id="h4-lançando-o-marketplace-da-turma"><span class="header-section-number">9.3.4.2</span> H4: Lançando o Marketplace da Turma</h4>
+<p>Projeto final integrando todas as competências do módulo: testes unitários, testes de integração avançados e controle de versão com CI/CD. O sistema deve demonstrar um pipeline completo de desenvolvimento com automated testing, code review e releases via GitHub.</p>
+<p><strong>FERRAMENTAS DE TESTE DE INTEGRAÇÃO</strong>:</p>
+<ul>
+<li><strong>Python</strong>: pytest com fixtures e mocks;</li>
+<li><strong>C++</strong>: doctest ou Catch2 com seções de integração.</li>
+</ul>
+<p><strong>Funções a implementar</strong>:</p>
+<ul>
+<li>implementação completa de todas as funções do <strong>G4</strong>;</li>
+<li>testes unitários e de integração para todas as funções;</li>
+<li>Pipeline CI/CD básico usando GitHub Actions;</li>
+<li>Testes automatizados com framework de teste;</li>
+<li>Sistema de releases e versionamento semântico.</li>
+</ul>
+<p><strong>Entrada</strong>: desenvolvimento colaborativo com múltiplas features, releases e <em>hotfixes</em>.</p>
+<p><strong>Saída</strong>: marketplace funcional com pipeline de desenvolvimento profissional completo.</p>
+<section id="decomposição-divisão-de-tarefas-para-o-problema-h4" class="level5" data-number="9.3.4.2.1">
+<h5 data-number="9.3.4.2.1" class="anchored" data-anchor-id="decomposição-divisão-de-tarefas-para-o-problema-h4"><span class="header-section-number">9.3.4.2.1</span> Decomposição: Divisão de Tarefas para o Problema H4</h5>
+<p><strong>Aluno 1</strong>: Implementação Core + Suite de Testes Unitários</p>
+<ul>
+<li><strong>Implementar</strong>: módulo de validação de <strong>G4</strong> com melhorias;</li>
+<li><strong>Framework de teste</strong>: Configurar pytest (Python) ou doctest (C++) no projeto;</li>
+<li><strong>Testes automatizados</strong>: Criar 20+ testes unitários com cobertura <span class="math inline">\(&gt;80\%\)</span>;</li>
+<li><strong>CI/CD</strong>: Configurar GitHub Actions para executar testes automaticamente;</li>
+<li><strong>Foco</strong>: Base sólida com testes automatizados.</li>
+</ul>
+<p><strong>Aluno 2</strong>: Features Avançadas + Testes de Integração</p>
+<ul>
+<li><strong>Implementar</strong>: Módulo de precificação/estoque de <strong>G4</strong> com otimizações;</li>
+<li><strong>Testes de integração</strong>: Usar framework para testar interação entre módulos;</li>
+<li><strong>Performance testing</strong>: Testes de carga e stress usando ferramentas do framework;</li>
+<li><strong>Mocks e fixtures</strong>: Criar dados de teste reutilizáveis;</li>
+<li><strong>Foco</strong>: Testes sofisticados e análise de performance.</li>
+</ul>
+<p><strong>Aluno 3</strong>: Interface e UX + Testes End-to-End</p>
+<ul>
+<li><strong>Implementar</strong>: Módulo de busca/recomendação de <strong>G4</strong> com interface melhorada;</li>
+<li><strong>Testes end-to-end</strong>: Testar fluxos completos de usuário;</li>
+<li><strong>Documentação</strong>: Criar documentação técnica e de usuário;</li>
+<li><strong>Code coverage</strong>: Gerar relatórios de cobertura de código;</li>
+<li><strong>Foco</strong>: Experiência do usuário e testes abrangentes.</li>
+</ul>
+<p><strong>Aluno 4</strong>: DevOps e Release Management + Integração Contínua</p>
+<ul>
+<li><strong>Implementar</strong>: Módulo financeiro de <strong>G4</strong> com logging e monitoramento;</li>
+<li><strong>DevOps</strong>: Configurar pipeline completo de CI/CD no GitHub;</li>
+<li><strong>Release management</strong>: Implementar versionamento semântico e releases automatizadas;</li>
+<li><strong>Quality gates</strong>: Configurar verificações automáticas de qualidade;</li>
+<li><strong>Monitoring</strong>: Sistema básico de logs e métricas;</li>
+<li><strong>Foco</strong>: Automação e gestão de releases profissional.</li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+<section id="metodologia-de-testes-unitários-simples" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="metodologia-de-testes-unitários-simples"><span class="header-section-number">9.4</span> Metodologia de Testes Unitários Simples</h2>
+<section id="para-exercícios-a4-f4-sem-frameworks" class="level3" data-number="9.4.1">
+<h3 data-number="9.4.1" class="anchored" data-anchor-id="para-exercícios-a4-f4-sem-frameworks"><span class="header-section-number">9.4.1</span> Para Exercícios A4-F4 (Sem Frameworks)</h3>
+<p>Os testes devem ser funções simples que retornam <code>true</code> se o teste passou ou <code>false</code> se falhou:</p>
+<p><strong>Exemplo em C++</strong>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> testarValidarLivro<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Teste caso válido</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(!</span>validarLivro<span class="op">(</span><span class="st">"1234567890123"</span><span class="op">,</span> <span class="st">"Algoritmos"</span><span class="op">,</span> <span class="st">"Cormen"</span><span class="op">,</span> <span class="dv">2020</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        cout <span class="op">&lt;&lt;</span> <span class="st">"ERRO: Livro válido rejeitado"</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Teste caso inválido - ISBN curto</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>validarLivro<span class="op">(</span><span class="st">"123"</span><span class="op">,</span> <span class="st">"Título"</span><span class="op">,</span> <span class="st">"Autor"</span><span class="op">,</span> <span class="dv">2020</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        cout <span class="op">&lt;&lt;</span> <span class="st">"ERRO: ISBN inválido aceito"</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Teste caso inválido - ano futuro</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>validarLivro<span class="op">(</span><span class="st">"1234567890123"</span><span class="op">,</span> <span class="st">"Título"</span><span class="op">,</span> <span class="st">"Autor"</span><span class="op">,</span> <span class="dv">2030</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        cout <span class="op">&lt;&lt;</span> <span class="st">"ERRO: Ano futuro aceito"</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"✓ testarValidarLivro passou em todos os casos"</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Exemplo em Python</strong>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> testar_validar_livro():</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Teste caso válido</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> validar_livro(<span class="st">"1234567890123"</span>, <span class="st">"Algoritmos"</span>, <span class="st">"Cormen"</span>, <span class="dv">2020</span>):</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"ERRO: Livro válido rejeitado"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Teste caso inválido - ISBN curto</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> validar_livro(<span class="st">"123"</span>, <span class="st">"Título"</span>, <span class="st">"Autor"</span>, <span class="dv">2020</span>):</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"ERRO: ISBN inválido aceito"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Teste caso inválido - ano futuro</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> validar_livro(<span class="st">"1234567890123"</span>, <span class="st">"Título"</span>, <span class="st">"Autor"</span>, <span class="dv">2030</span>):</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"ERRO: Ano futuro aceito"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"✓ testar_validar_livro passou em todos os casos"</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">True</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="para-exercícios-g4-h4-com-frameworks" class="level3" data-number="9.4.2">
+<h3 data-number="9.4.2" class="anchored" data-anchor-id="para-exercícios-g4-h4-com-frameworks"><span class="header-section-number">9.4.2</span> Para Exercícios G4-H4 (Com Frameworks)</h3>
+<p><strong>Python com pytest</strong>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pytest</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_validar_produto():</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> validar_produto(<span class="st">"Notebook Dell"</span>, <span class="st">"Eletrônicos"</span>, <span class="st">"Usado"</span>, <span class="fl">1500.0</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> <span class="kw">not</span> validar_produto(<span class="st">""</span>, <span class="st">"Eletrônicos"</span>, <span class="st">"Usado"</span>, <span class="fl">1500.0</span>)  <span class="co"># Nome vazio</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> <span class="kw">not</span> validar_produto(<span class="st">"Notebook"</span>, <span class="st">"Categoria_Inexistente"</span>, <span class="st">"Usado"</span>, <span class="fl">1500.0</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_integracao_validacao_estoque():</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Teste de integração</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    produto <span class="op">=</span> {<span class="st">"nome"</span>: <span class="st">"iPhone 12"</span>, <span class="st">"categoria"</span>: <span class="st">"Eletrônicos"</span>, <span class="st">"preco"</span>: <span class="fl">2000.0</span>}</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> validar_produto(produto[<span class="st">"nome"</span>], produto[<span class="st">"categoria"</span>], <span class="st">"Novo"</span>, produto[<span class="st">"preco"</span>])</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> adicionar_ao_estoque(produto)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> verificar_disponibilidade(produto[<span class="st">"nome"</span>]) <span class="op">&gt;</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>C++ com doctest</strong>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">"doctest.h"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>TEST_CASE<span class="op">(</span><span class="st">"Validação de produto"</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    CHECK<span class="op">(</span>validarProduto<span class="op">(</span><span class="st">"Notebook Dell"</span><span class="op">,</span> <span class="st">"Eletrônicos"</span><span class="op">,</span> <span class="st">"Usado"</span><span class="op">,</span> <span class="fl">1500.0</span><span class="op">));</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    CHECK_FALSE<span class="op">(</span>validarProduto<span class="op">(</span><span class="st">""</span><span class="op">,</span> <span class="st">"Eletrônicos"</span><span class="op">,</span> <span class="st">"Usado"</span><span class="op">,</span> <span class="fl">1500.0</span><span class="op">));</span> <span class="co">// Nome vazio</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>TEST_CASE<span class="op">(</span><span class="st">"Integração validação-estoque"</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    Produto p <span class="op">=</span> <span class="op">{</span><span class="st">"iPhone 12"</span><span class="op">,</span> <span class="st">"Eletrônicos"</span><span class="op">,</span> <span class="fl">2000.0</span><span class="op">,</span> <span class="st">"Novo"</span><span class="op">};</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    REQUIRE<span class="op">(</span>validarProduto<span class="op">(</span>p<span class="op">.</span>nome<span class="op">,</span> p<span class="op">.</span>categoria<span class="op">,</span> p<span class="op">.</span>condicao<span class="op">,</span> p<span class="op">.</span>preco<span class="op">));</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    REQUIRE<span class="op">(</span>adicionarAoEstoque<span class="op">(</span>p<span class="op">));</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    CHECK<span class="op">(</span>verificarDisponibilidade<span class="op">(</span>p<span class="op">.</span>nome<span class="op">)</span> <span class="op">&gt;</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="rubrica-e-tecnologia-de-avaliação" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="rubrica-e-tecnologia-de-avaliação"><span class="header-section-number">9.5</span> Rubrica e Tecnologia de Avaliação</h2>
+<p>A avaliação dos exercicios pode, e deve ser completamente automatizada usando ferramentas de Inteligência Artificial integradas ao Github Classroom <span class="citation" data-cites="GitHubClassroom">(<a href="referencias.html#ref-GitHubClassroom" role="doc-biblioref">3</a>)</span>, para verificar a implementação e os testes. Os critérios de avaliação podem incluir:</p>
+<ul>
+<li><strong>Funcionalidade</strong>: <span class="math inline">\(25\%\)</span> - Sistema funciona conforme especificado</li>
+<li><strong>Qualidade dos Testes</strong>: <span class="math inline">\(30\%\)</span> - Cobertura, cenários e qualidade dos testes</li>
+<li><strong>Colaboração</strong>: <span class="math inline">\(25\%\)</span> - Divisão de tarefas e trabalho em equipe efetivo</li>
+<li><strong>Controle de Versão</strong>: <span class="math inline">\(20\%\)</span> - Uso adequado do Git (F4 e H4)</li>
+</ul>
+<section id="visão-geral-da-avaliação" class="level3" data-number="9.5.1">
+<h3 data-number="9.5.1" class="anchored" data-anchor-id="visão-geral-da-avaliação"><span class="header-section-number">9.5.1</span> Visão Geral da Avaliação</h3>
+<p><strong>Público-alvo</strong>: alunos do primeiro período de Computação;<br>
+<strong>Modalidade</strong>: avaliação automatizada via GitHub Classroom integrado a ferramentas de Inteligência Artificial;</p>
+<p>A tabela <a href="#tbl-rubricaM41" class="quarto-xref">Table&nbsp;<span>9.1</span></a> resume os critérios de avaliação e seus pesos:</p>
+<div id="tbl-rubricaM41" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rubricaM41-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.1: Tabela de Rubrica de Avaliação.
+</figcaption>
+<div aria-describedby="tbl-rubricaM41-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<thead>
+<tr class="header">
+<th>Critério</th>
+<th>Peso</th>
+<th>Pontos Máximos</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Funcionalidade</strong></td>
+<td>25%</td>
+<td>25</td>
+</tr>
+<tr class="even">
+<td><strong>Qualidade dos Testes</strong></td>
+<td>30%</td>
+<td>30</td>
+</tr>
+<tr class="odd">
+<td><strong>Colaboração</strong></td>
+<td>25%</td>
+<td>25</td>
+</tr>
+<tr class="even">
+<td><strong>Controle de Versão</strong></td>
+<td>20%</td>
+<td>20</td>
+</tr>
+<tr class="odd">
+<td><strong>TOTAL</strong></td>
+<td>100%</td>
+<td><strong>100</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="critério-1-funcionalidade-25-pontos" class="level3" data-number="9.5.2">
+<h3 data-number="9.5.2" class="anchored" data-anchor-id="critério-1-funcionalidade-25-pontos"><span class="header-section-number">9.5.2</span> Critério 1: Funcionalidade (25 pontos)</h3>
+<p><strong>Descrição</strong>: sistema implementado funciona conforme especificação, com todas as funções operacionais e requisitos atendidos. A tabela <a href="#tbl-nivelFuncionalidadeM41" class="quarto-xref">Table&nbsp;<span>9.2</span></a> define os níveis de funcionalidade e seus indicadores quantitativos:</p>
+<div id="tbl-nivelFuncionalidadeM41" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-nivelFuncionalidadeM41-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.2: Tabela de Níveis de Funcionalidade para Avaliação.
+</figcaption>
+<div aria-describedby="tbl-nivelFuncionalidadeM41-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 15%">
+<col style="width: 21%">
+<col style="width: 49%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Nível</th>
+<th>Pontos</th>
+<th>Descrição</th>
+<th>Indicadores Quantitativos</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Avançado</strong></td>
+<td>22-25</td>
+<td>Sistema funciona perfeitamente em todos os cenários testados</td>
+<td>• 90-100% das funções implementadas<br>• 0 erros de compilação<br>• 0 crashes durante execução<br>• Todos os requisitos funcionais atendidos</td>
+</tr>
+<tr class="even">
+<td><strong>Proficiente</strong></td>
+<td>18-21</td>
+<td>Sistema funciona bem na maioria dos cenários</td>
+<td>• 75-89% das funções implementadas<br>• 0 erros de compilação<br>• Máximo 1 crash em cenários extremos<br>• 80%+ dos requisitos atendidos</td>
+</tr>
+<tr class="odd">
+<td><strong>Desenvolvendo</strong></td>
+<td>12-17</td>
+<td>Sistema funciona parcialmente com algumas limitações</td>
+<td>• 50-74% das funções implementadas<br>• Máximo 2 erros menores de compilação<br>• Funciona para casos básicos<br>• 60%+ dos requisitos atendidos</td>
+</tr>
+<tr class="even">
+<td><strong>Iniciante</strong></td>
+<td>0-11</td>
+<td>Sistema não funciona ou funciona de forma muito limitada</td>
+<td>• Menos de 50% das funções implementadas<br>• Múltiplos erros de compilação<br>• Falhas frequentes de execução<br>• Menos de 60% dos requisitos atendidos</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<section id="métricas-automatizadas" class="level4" data-number="9.5.2.1">
+<h4 data-number="9.5.2.1" class="anchored" data-anchor-id="métricas-automatizadas"><span class="header-section-number">9.5.2.1</span> Métricas Automatizadas</h4>
+<ul>
+<li>Compilação bem-sucedida (Python: execução sem SyntaxError, C++: g++ sem erros);</li>
+<li>Execução de casos de teste básicos sem crashes;</li>
+<li>Cobertura de implementação das funções especificadas;</li>
+<li>Validação de entrada e tratamento de erros.</li>
+</ul>
+</section>
+</section>
+<section id="critério-2-qualidade-dos-testes-30-pontos" class="level3" data-number="9.5.3">
+<h3 data-number="9.5.3" class="anchored" data-anchor-id="critério-2-qualidade-dos-testes-30-pontos"><span class="header-section-number">9.5.3</span> Critério 2: Qualidade dos Testes (30 pontos)</h3>
+<p><strong>Descrição</strong>: Testes unitários e de integração demonstram compreensão da verificação de software e cobertura adequada dos cenários. A tabela <a href="#tbl-nivelQualidadeTestesM41" class="quarto-xref">Table&nbsp;<span>9.3</span></a> define os níveis de qualidade dos testes e seus indicadores quantitativos:</p>
+<div id="tbl-nivelQualidadeTestesM41" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-nivelQualidadeTestesM41-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.3: Tabela de Níveis de Qualidade dos Testes para Avaliação.
+</figcaption>
+<div aria-describedby="tbl-nivelQualidadeTestesM41-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 15%">
+<col style="width: 21%">
+<col style="width: 49%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Nível</th>
+<th>Pontos</th>
+<th>Descrição</th>
+<th>Indicadores Quantitativos</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Avançado</strong></td>
+<td>26-30</td>
+<td>Testes abrangentes com cenários complexos e edge cases</td>
+<td>• 15+ testes unitários implementados<br>• 90%+ dos testes passando<br>• Inclui casos extremos e erro<br>• Testes claros e bem documentados<br>• Divisão cruzada implementada corretamente</td>
+</tr>
+<tr class="even">
+<td><strong>Proficiente</strong></td>
+<td>21-25</td>
+<td>Testes adequados cobrindo cenários principais</td>
+<td>• 10-14 testes unitários implementados<br>• 80-89% dos testes passando<br>• Inclui alguns casos de erro<br>• Maioria dos testes compreensíveis<br>• Divisão cruzada parcialmente implementada</td>
+</tr>
+<tr class="odd">
+<td><strong>Desenvolvendo</strong></td>
+<td>13-20</td>
+<td>Testes básicos cobrindo funcionalidades principais</td>
+<td>• 6-9 testes unitários implementados<br>• 70-79% dos testes passando<br>• Casos básicos cobertos<br>• Testes simples mas funcionais<br>• Tentativa de divisão cruzada</td>
+</tr>
+<tr class="even">
+<td><strong>Iniciante</strong></td>
+<td>0-12</td>
+<td>Testes insuficientes ou inadequados</td>
+<td>• Menos de 6 testes implementados<br>• Menos de 70% dos testes passando<br>• Testes muito simples ou não funcionais<br>• Sem divisão cruzada adequada</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<section id="critérios-específicos-por-exercício" class="level4" data-number="9.5.3.1">
+<h4 data-number="9.5.3.1" class="anchored" data-anchor-id="critérios-específicos-por-exercício"><span class="header-section-number">9.5.3.1</span> Critérios Específicos por Exercício</h4>
+<section id="a4-f4-testes-unitários-simples" class="level5" data-number="9.5.3.1.1">
+<h5 data-number="9.5.3.1.1" class="anchored" data-anchor-id="a4-f4-testes-unitários-simples"><span class="header-section-number">9.5.3.1.1</span> A4-F4: Testes Unitários Simples</h5>
+<ul>
+<li>Funções <code>testarFuncaoX()</code> retornando <code>bool</code>;</li>
+<li>Casos válidos e inválidos testados;</li>
+<li>Mensagens informativas de erro;</li>
+<li>Cada aluno testa funções de outro aluno.</li>
+</ul>
+</section>
+<section id="g4-h4-testes-de-integração" class="level5" data-number="9.5.3.1.2">
+<h5 data-number="9.5.3.1.2" class="anchored" data-anchor-id="g4-h4-testes-de-integração"><span class="header-section-number">9.5.3.1.2</span> G4-H4: Testes de Integração</h5>
+<ul>
+<li>Uso de framework (pytest/doctest);</li>
+<li>Testes de fluxo completo entre módulos;</li>
+<li>Mocks e fixtures apropriados;</li>
+<li>Testes de performance e stress.</li>
+</ul>
+</section>
+<section id="métricas-automatizadas-1" class="level5" data-number="9.5.3.1.3">
+<h5 data-number="9.5.3.1.3" class="anchored" data-anchor-id="métricas-automatizadas-1"><span class="header-section-number">9.5.3.1.3</span> Métricas Automatizadas</h5>
+<ul>
+<li>Número de testes implementados vs especificados;</li>
+<li>Taxa de sucesso dos testes (% que passam);</li>
+<li>Cobertura de casos de uso (normal, erro, extremo);</li>
+<li>Qualidade da nomenclatura e documentação dos testes.</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="critério-3-colaboração-25-pontos" class="level3" data-number="9.5.4">
+<h3 data-number="9.5.4" class="anchored" data-anchor-id="critério-3-colaboração-25-pontos"><span class="header-section-number">9.5.4</span> Critério 3: Colaboração (25 pontos)</h3>
+<p><strong>Descrição</strong>: Trabalho em equipe efetivo com divisão clara de responsabilidades e integração colaborativa. A tabela <a href="#tbl-nivelColaboracaoM41" class="quarto-xref">Table&nbsp;<span>9.4</span></a> define os níveis de colaboração e seus indicadores quantitativos:</p>
+<div id="tbl-nivelColaboracaoM41" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-nivelColaboracaoM41-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.4: Tabela de Níveis de Colaboração para Avaliação.
+</figcaption>
+<div aria-describedby="tbl-nivelColaboracaoM41-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 15%">
+<col style="width: 21%">
+<col style="width: 49%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Nível</th>
+<th>Pontos</th>
+<th>Descrição</th>
+<th>Indicadores Quantitativos</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Avançado</strong></td>
+<td>22-25</td>
+<td>Colaboração exemplar com divisão equilibrada e integração perfeita</td>
+<td>• 4 alunos contribuindo ativamente<br>• Commits equilibrados (15-35% cada)<br>• Integração sem conflitos<br>• Documentação colaborativa clara<br>• Peer review efetivo</td>
+</tr>
+<tr class="even">
+<td><strong>Proficiente</strong></td>
+<td>18-21</td>
+<td>Boa colaboração com divisão adequada</td>
+<td>• 3-4 alunos contribuindo<br>• Distribuição razoável de commits<br>• Poucos conflitos de integração<br>• Documentação adequada<br>• Algum peer review</td>
+</tr>
+<tr class="odd">
+<td><strong>Desenvolvendo</strong></td>
+<td>12-17</td>
+<td>Colaboração básica com algumas falhas de coordenação</td>
+<td>• 2-3 alunos contribuindo significativamente<br>• Distribuição desigual de trabalho<br>• Alguns problemas de integração<br>• Documentação mínima</td>
+</tr>
+<tr class="even">
+<td><strong>Iniciante</strong></td>
+<td>0-11</td>
+<td>Colaboração inadequada ou trabalho individual disfarçado</td>
+<td>• 1-2 alunos fazendo a maioria do trabalho<br>• Commits concentrados<br>• Falhas graves de integração<br>• Pouca ou nenhuma documentação colaborativa</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<section id="métricas-automatizadas-2" class="level4" data-number="9.5.4.1">
+<h4 data-number="9.5.4.1" class="anchored" data-anchor-id="métricas-automatizadas-2"><span class="header-section-number">9.5.4.1</span> Métricas Automatizadas:</h4>
+<ul>
+<li>Distribuição de commits por autor;</li>
+<li>Número de pull requests e code reviews;</li>
+<li>Frequência de commits ao longo do tempo;</li>
+<li>Resolução de conflitos de merge;</li>
+<li>Qualidade das mensagens de commit.</li>
+</ul>
+</section>
+</section>
+<section id="critério-4-controle-de-versão-20-pontos" class="level3" data-number="9.5.5">
+<h3 data-number="9.5.5" class="anchored" data-anchor-id="critério-4-controle-de-versão-20-pontos"><span class="header-section-number">9.5.5</span> Critério 4: Controle de Versão (20 pontos)</h3>
+<p><strong>Descrição</strong>: uso adequado do Git e GitHub para versionamento, colaboração e integração contínua.</p>
+<p><strong>Nota</strong>: Aplicável apenas aos exercícios F4 e H4. A tabela <a href="#tbl-nivelControleVersaoM41" class="quarto-xref">Table&nbsp;<span>9.5</span></a> define os níveis de controle de versão e seus indicadores quantitativos:</p>
+<div id="tbl-nivelControleVersaoM41" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-nivelControleVersaoM41-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.5: Tabela de Níveis de Controle de Versão para Avaliação.
+</figcaption>
+<div aria-describedby="tbl-nivelControleVersaoM41-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 15%">
+<col style="width: 21%">
+<col style="width: 49%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Nível</th>
+<th>Pontos</th>
+<th>Descrição</th>
+<th>Indicadores Quantitativos</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Avançado</strong></td>
+<td>18-20</td>
+<td>Uso profissional do Git com workflow completo</td>
+<td>• Branches organizadas (feature/bugfix)<br>• Pull requests com code review<br>• Mensagens de commit descritivas<br>• CI/CD funcionando (H4)<br>• Releases com versionamento semântico<br>• README e documentação atualizados</td>
+</tr>
+<tr class="even">
+<td><strong>Proficiente</strong></td>
+<td>14-17</td>
+<td>Uso competente do Git com boas práticas</td>
+<td>• Uso básico de branches<br>• Alguns pull requests<br>• Mensagens de commit adequadas<br>• Tentativa de CI/CD<br>• Documentação básica</td>
+</tr>
+<tr class="odd">
+<td><strong>Desenvolvendo</strong></td>
+<td>10-13</td>
+<td>Uso básico do Git com tentativas de organização</td>
+<td>• Commits regulares<br>• Tentativa de usar branches<br>• Mensagens de commit simples mas claras<br>• Estrutura básica de projeto</td>
+</tr>
+<tr class="even">
+<td><strong>Iniciante</strong></td>
+<td>0-9</td>
+<td>Uso inadequado ou mínimo do Git</td>
+<td>• Poucos commits<br>• Trabalho apenas na branch main<br>• Mensagens vagas ou inadequadas<br>• Sem organização do projeto</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<section id="métricas-automatizadas-3" class="level4" data-number="9.5.5.1">
+<h4 data-number="9.5.5.1" class="anchored" data-anchor-id="métricas-automatizadas-3"><span class="header-section-number">9.5.5.1</span> Métricas Automatizadas</h4>
+<ul>
+<li>Número e frequência de commits;</li>
+<li>Uso de branches (feature, develop, main);</li>
+<li>Pull requests criados e merged;</li>
+<li>Qualidade das mensagens de commit (comprimento, clareza);</li>
+<li>Configuração de CI/CD (GitHub Actions);</li>
+<li>Estrutura do repositório (README, .gitignore, estrutura de pastas).</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="sistema-de-avaliação-automática" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="sistema-de-avaliação-automática"><span class="header-section-number">9.6</span> Sistema de Avaliação Automática</h2>
+<p>Este sistema de avaliação foi especialmente desenvolvido considerando que os estudantes estão em seu primeiro período de contato com a Ciência e Engenharia de Computação, priorizando o processo de descoberta e aprendizado sobre a perfeição do produto final. Os critérios reconhecem as limitações naturais de alunos iniciantes, valorizando tentativas bem-intencionadas, colaboração efetiva e compreensão dos conceitos fundamentais. O feedback gerado pelos relatórios automáticos terão caráter construtivo, fornecendo orientações específicas para melhorias em vez de simplesmente atribuir pontuações, ajudando os estudantes a identificarem próximos passos concretos em seu desenvolvimento.</p>
+<p>O sistema mantém flexibilidade para ajustes baseados na performance geral da turma, permitindo calibrações quando necessário para garantir que os critérios permaneçam desafiadores mas alcançáveis. Todos os critérios de avaliação, métricas e expectativas são compartilhados com os alunos antes do início das atividades, garantindo transparência total no processo avaliativo e permitindo que os estudantes compreendam exatamente o que é esperado deles, promovendo assim um ambiente de aprendizagem mais justo e direcionado.</p>
+<p>Todo o texto desta seção pode ser usado como <em>prompt</em> para um sistema de Inteligência Artificial que esteja integrado ao Github Classroom. Esta integração será responsável por gerar os relatórios de avaliação, feedback e sugestões de melhoria para cada aluno, com base nos critérios e métricas definidos nas seções a seguir.</p>
+<section id="fluxo-de-avaliação" class="level3" data-number="9.6.1">
+<h3 data-number="9.6.1" class="anchored" data-anchor-id="fluxo-de-avaliação"><span class="header-section-number">9.6.1</span> <strong>Fluxo de Avaliação</strong>:</h3>
+<ol type="1">
+<li><p><strong>Análise Automática do Repositório</strong>:</p>
+<ul>
+<li>Clonagem e análise da estrutura do projeto;</li>
+<li>Compilação/execução automática do código;</li>
+<li>Execução da suíte de testes;</li>
+<li>Análise de métricas Git.</li>
+</ul></li>
+<li><p><strong>Geração de Relatório</strong>:</p>
+<ul>
+<li>Pontuação automática por critério;</li>
+<li>Identificação de pontos fortes e fracos;</li>
+<li>Sugestões de melhoria específicas;</li>
+<li>Comparação com padrões da turma.</li>
+</ul></li>
+<li><p><strong>Validação Manual</strong> (quando necessário):</p>
+<ul>
+<li>Revisão de casos ambíguos;</li>
+<li>Verificação de funcionalidades complexas;</li>
+<li>Avaliação de aspectos qualitativos.</li>
+</ul></li>
+</ol>
+</section>
+<section id="tolerâncias-para-primeiro-período" class="level3" data-number="9.6.2">
+<h3 data-number="9.6.2" class="anchored" data-anchor-id="tolerâncias-para-primeiro-período"><span class="header-section-number">9.6.2</span> Tolerâncias para Primeiro Período:</h3>
+<ul>
+<li><strong>Compilação</strong>: Avisos permitidos, mas sem erros fatais;</li>
+<li><strong>Testes</strong>: Foco na implementação correta vs performance;</li>
+<li><strong>Git</strong>: Ênfase no uso básico correto vs workflows avançados;</li>
+<li><strong>Documentação</strong>: Clara e útil vs detalhada e profissional.</li>
+</ul>
+</section>
+<section id="feedback-personalizado" class="level3" data-number="9.6.3">
+<h3 data-number="9.6.3" class="anchored" data-anchor-id="feedback-personalizado"><span class="header-section-number">9.6.3</span> Feedback Personalizado</h3>
+<p>Para cada critério de avaliação, o sistema deve fornecer feedback específico e orientações para melhorias.</p>
+<p><strong>Funcionalidade</strong>:</p>
+<ul>
+<li>Lista de funções implementadas vs especificadas;</li>
+<li>Casos de teste que falharam com explicações;</li>
+<li>Sugestões de correção para erros comuns.</li>
+</ul>
+<p><strong>Qualidade dos Testes</strong>:</p>
+<ul>
+<li>Comparação de cobertura com expectativa;</li>
+<li>Identificação de cenários não testados;</li>
+<li>Exemplos de melhorias nos testes existentes.</li>
+</ul>
+<p><strong>Colaboração</strong>:</p>
+<ul>
+<li>Gráfico de contribuições por membro;</li>
+<li>Identificação de desequilíbrios no trabalho;</li>
+<li>Sugestões para melhor distribuição de tarefas.</li>
+</ul>
+<p><strong>Controle de Versão</strong>:</p>
+<ul>
+<li>Análise do histórico de commits;</li>
+<li>Sugestões de workflow Git;</li>
+<li>Boas práticas não implementadas.</li>
+</ul>
+</section>
+<section id="critérios-de-aprovação" class="level3" data-number="9.6.4">
+<h3 data-number="9.6.4" class="anchored" data-anchor-id="critérios-de-aprovação"><span class="header-section-number">9.6.4</span> Critérios de Aprovação</h3>
+<p><strong>Para aprovação no módulo</strong>: o aluno deve atingir pelo menos:</p>
+<ul>
+<li><p><strong>Pontuação mínima</strong>: <span class="math inline">\(70\)</span> pontos (<span class="math inline">\(70\%\)</span>);</p></li>
+<li><p><strong>Critérios obrigatórios</strong>:</p>
+<ul>
+<li>Funcionalidade <span class="math inline">\(≥ 15\)</span> pontos;</li>
+<li>Qualidade dos Testes <span class="math inline">\(≥ 18\)</span> pontos;</li>
+<li>Pelo menos um critério em nível “Proficiente”;</li>
+</ul></li>
+</ul>
+
+
+<div id="refs" class="references csl-bib-body" data-entry-spacing="1" role="list" style="display: none">
+<div id="ref-git-project" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">THE GIT PROJECT. <strong>Git</strong>. <a href="https://git-scm.com/" class="uri">https://git-scm.com/</a>, 2025. </div>
+</div>
+<div id="ref-github-inc" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">GITHUB, INC. <strong>GitHub: Where the world builds software</strong>.<br>
+url<span>https://github.com/</span>, 2025. </div>
+</div>
+<div id="ref-GitHubClassroom" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline"><strong>GitHub classroom</strong>. <a href="https://classroom.github.com/" class="uri">https://classroom.github.com/</a>, [s.d.]. </div>
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./desenv3.html" class="pagination-link" aria-label="**Módulo 3**: Semanas 9-13 (20 Horas-Aula): Algoritmização e Estruturas de Dados">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>Módulo 3</strong>: Semanas 9-13 (20 Horas-Aula): Algoritmização e Estruturas de Dados</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./referencias.html" class="pagination-link" aria-label="Referências">
+        <span class="nav-page-text">Referências</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025 Frank de Alcantara</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/linefollower/edit/main/desenv4.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linefollower/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
