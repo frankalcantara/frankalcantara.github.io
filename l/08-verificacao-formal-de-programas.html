@@ -69,7 +69,37 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles/custom.css">
 </head>
 
 <body class="nav-sidebar floating">
@@ -279,7 +309,7 @@ ul.task-list li input[type="checkbox"] {
 <h3 data-number="9.0.3" class="anchored" data-anchor-id="invariantes-de-loop-e-variantes-para-terminação"><span class="header-section-number">9.0.3</span> Invariantes de loop e variantes para terminação</h3>
 <p>Os invariantes de loop constituem um dos conceitos mais importantes na verificação de programas imperativos. <strong>Um invariante é uma propriedade que permanece verdadeira</strong> na entrada do loop, após cada iteração, e na saída do loop. Combinado com a negação da condição do loop, o invariante deve estabelecer a pós-condição desejada.</p>
 <p>Considere um exemplo clássico de cálculo de fatorial:</p>
-<pre><code>{n ≥ 0}
+<pre class="pseudocode"><code>{n ≥ 0}
 i := 0;
 fact := 1;
 while i &lt; n do
@@ -295,7 +325,7 @@ end
 <h3 data-number="9.0.4" class="anchored" data-anchor-id="aplicação-prática-em-programas-imperativos"><span class="header-section-number">9.0.4</span> Aplicação prática em programas imperativos</h3>
 <p>A aplicação da lógica de Hoare em programas reais requer metodologia sistemática. <strong>O processo inicia com especificação clara das pré e pós-condições</strong>, seguida pela anotação do código com invariantes e condições intermediárias. Este código anotado é então transformado em condições de verificação (VCs) que são enviadas para provadores automáticos de teoremas.</p>
 <p>Considere a verificação de um algoritmo de busca linear:</p>
-<pre><code>{array ≠ null ∧ target definido}
+<pre class="pseudocode"><code>{array ≠ null ∧ target definido}
 found := false;
 i := 0;
 while i &lt; array.length ∧ ¬found do
@@ -329,55 +359,67 @@ end
 <section id="aplicação-para-verificação-de-programas-recursivos" class="level3" data-number="9.1.2">
 <h3 data-number="9.1.2" class="anchored" data-anchor-id="aplicação-para-verificação-de-programas-recursivos"><span class="header-section-number">9.1.2</span> Aplicação para verificação de programas recursivos</h3>
 <p>A indução estrutural é especialmente poderosa na verificação de programas funcionais que operam sobre tipos de dados algébricos. Considere a verificação da propriedade de associatividade para concatenação de listas:</p>
-<pre><code>Teorema: ∀xs ys zs. xs @ (ys @ zs) = (xs @ ys) @ zs
-
-Prova por indução estrutural em xs:
-Caso base: xs = []
-  [] @ (ys @ zs) = ys @ zs = ([] @ ys) @ zs
-
-Caso indutivo: xs = h::t
-  Hipótese indutiva: t @ (ys @ zs) = (t @ ys) @ zs
-  (h::t) @ (ys @ zs) = h :: (t @ (ys @ zs))
-                      = h :: ((t @ ys) @ zs)  [por H.I.]
-                      = (h :: (t @ ys)) @ zs
-                      = ((h::t) @ ys) @ zs</code></pre>
+<div id="thm-concat-assoc" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 9.1 (Associatividade da Concatenação)</strong></span> Para quaisquer listas <code>xs</code>, <code>ys</code>, e <code>zs</code>, a seguinte propriedade é válida: <span class="math display">\[
+xs \oplus (ys \oplus zs) = (xs \oplus ys) \oplus zs
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>A prova é por indução estrutural em <code>xs</code>.</p>
+<p><strong>Caso base:</strong> <code>xs = []</code> <span class="math display">\[
+[] \oplus (ys \oplus zs) = ys \oplus zs = ([] \oplus ys) \oplus zs
+\]</span></p>
+<p><strong>Caso indutivo:</strong> <code>xs = h::t</code></p>
+<p>Assumimos a hipótese indutiva (H.I.): <span class="math inline">\(t \oplus (ys \oplus zs) = (t \oplus ys) \oplus zs\)</span>. <span class="math display">\[
+\begin{aligned}
+  (h::t) \oplus (ys \oplus zs) &amp;= h :: (t \oplus (ys \oplus zs)) \\
+                              &amp;= h :: ((t \oplus ys) \oplus zs) \quad \text{[por H.I.]} \\
+                              &amp;= (h :: (t \oplus ys)) \oplus zs \\
+                              &amp;= ((h::t) \oplus ys) \oplus zs
+\end{aligned}
+\]</span></p>
+</div>
 <p><strong>Esta prova demonstra como a estrutura recursiva dos dados guia naturalmente a estrutura da prova</strong>, com cada constructor da estrutura correspondendo a um caso na indução.</p>
 </section>
 <section id="provas-de-correção-de-algoritmos-funcionais" class="level3" data-number="9.1.3">
 <h3 data-number="9.1.3" class="anchored" data-anchor-id="provas-de-correção-de-algoritmos-funcionais"><span class="header-section-number">9.1.3</span> Provas de correção de algoritmos funcionais</h3>
 <p>A indução estrutural permite provar correção de algoritmos complexos sobre estruturas recursivas. Para funções sobre árvores, consideremos a verificação de que a reflexão é uma involução:</p>
-<pre><code>Teorema: ∀t. reflect(reflect(t)) = t
-
-Prova por indução estrutural:
-Caso base: t = Leaf
-  reflect(reflect(Leaf)) = reflect(Leaf) = Leaf
-
-Caso indutivo: t = Node(l, v, r)
-  H.I.: reflect(reflect(l)) = l ∧ reflect(reflect(r)) = r
-  reflect(reflect(Node(l, v, r))) = reflect(Node(reflect(r), v, reflect(l)))
-                                   = Node(reflect(reflect(l)), v, reflect(reflect(r)))
-                                   = Node(l, v, r)  [por H.I.]</code></pre>
+<div id="thm-reflect-invol" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 9.2 (Reflexão como Involução)</strong></span> Para qualquer árvore <code>t</code>, a reflexão da reflexão de <code>t</code> é igual a <code>t</code>. <span class="math display">\[
+\text{reflect}(\text{reflect}(t)) = t
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>A prova é por indução estrutural em <code>t</code>.</p>
+<p><strong>Caso base:</strong> <code>t = Leaf</code> <span class="math display">\[
+\text{reflect}(\text{reflect}(\text{Leaf})) = \text{reflect}(\text{Leaf}) = \text{Leaf}
+\]</span></p>
+<p><strong>Caso indutivo:</strong> <code>t = Node(l, v, r)</code></p>
+<p>Assumimos a H.I.: <span class="math inline">\(\text{reflect}(\text{reflect}(l)) = l \land \text{reflect}(\text{reflect}(r)) = r\)</span>. <span class="math display">\[
+\begin{aligned}
+  &amp;\text{reflect}(\text{reflect}(\text{Node}(l, v, r))) \\
+  &amp;= \text{reflect}(\text{Node}(\text{reflect}(r), v, \text{reflect}(l))) \\
+  &amp;= \text{Node}(\text{reflect}(\text{reflect}(l)), v, \text{reflect}(\text{reflect}(r))) \\
+  &amp;= \text{Node}(l, v, r) \quad \text{[por H.I.]}
+\end{aligned}
+\]</span></p>
+</div>
 <p><strong>Esta prova ilustra como hipóteses indutivas múltiplas</strong> (para subárvores esquerda e direita) são necessárias para construtores com múltiplos argumentos recursivos.</p>
 </section>
 <section id="exemplos-práticos-com-funções-recursivas" class="level3" data-number="9.1.4">
 <h3 data-number="9.1.4" class="anchored" data-anchor-id="exemplos-práticos-com-funções-recursivas"><span class="header-section-number">9.1.4</span> Exemplos práticos com funções recursivas</h3>
 <p>A verificação de algoritmos de ordenação por inserção demonstra a aplicação prática da indução estrutural:</p>
-<pre><code>Teorema: ∀lst. sorted(insertion_sort(lst)) ∧ 
-                same_elements(lst, insertion_sort(lst))
-
-Prova por indução estrutural em lst:
-Caso base: lst = []
-  insertion_sort([]) = []
-  sorted([]) = true
-  same_elements([], []) = true
-
-Caso indutivo: lst = h::t
-  H.I.: sorted(insertion_sort(t)) ∧ same_elements(t, insertion_sort(t))
-  insertion_sort(h::t) = insert(h, insertion_sort(t))
-  
-  Lema: insert preserva ordenação e elementos
-  Logo: sorted(insert(h, insertion_sort(t))) ∧ 
-        same_elements(h::t, insert(h, insertion_sort(t)))</code></pre>
+<div id="thm-insertion-sort" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 9.3 (Correção do Insertion Sort)</strong></span> Para qualquer lista <code>lst</code>, o algoritmo <code>insertion_sort</code> produz uma lista ordenada que contém os mesmos elementos da lista original. <span class="math display">\[
+\forall \text{lst}, \text{sorted}(\text{insertion\_sort}(\text{lst})) \land \text{same\_elements}(\text{lst}, \text{insertion\_sort}(\text{lst}))
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>A prova é por indução estrutural em <code>lst</code>.</p>
+<p><strong>Caso base:</strong> <code>lst = []</code> O resultado de <code>insertion_sort([])</code> é <code>[]</code>. A lista vazia é ordenada e contém os mesmos elementos que a original.</p>
+<p><strong>Caso indutivo:</strong> <code>lst = h::t</code> Assumimos a H.I.: <span class="math inline">\(\text{sorted}(\text{insertion\_sort}(t)) \land \text{same\_elements}(t, \text{insertion\_sort}(t))\)</span>.</p>
+<p>Sabemos que <code>insertion_sort(h::t)</code> é <code>insert(h, insertion_sort(t))</code>. A prova depende de um <strong>lema auxiliar</strong> que afirma que a função <code>insert</code> preserva tanto a ordenação quanto a coleção de elementos. Assumindo o lema, a propriedade do teorema é mantida.</p>
+</div>
 <p><strong>O uso de lemmas auxiliares</strong> é frequentemente necessário para provas complexas, permitindo decomposição modular das verificações.</p>
 </section>
 <section id="relação-com-tipos-de-dados-indutivos-e-coinductivos" class="level3" data-number="9.1.5">
@@ -402,12 +444,14 @@ CoInductive stream (A : Type) : Type :=
 <h3 data-number="9.2.1" class="anchored" data-anchor-id="especificação-de-propriedades-de-programas-com-fol"><span class="header-section-number">9.2.1</span> Especificação de propriedades de programas com FOL</h3>
 <p>A lógica de primeira ordem (FOL) fornece a base teórica fundamental para especificação de propriedades de programas. <strong>FOL permite expressar propriedades complexas através de quantificadores</strong> (∀ - para todo, ∃ - existe) e predicados, oferecendo expressividade suficiente para a maioria das especificações práticas.</p>
 <p>A especificação de contratos de programas utiliza FOL para definir pré-condições, pós-condições e invariantes. Por exemplo, uma função de ordenação pode ter especificação:</p>
-<pre><code>∀array: int[], sorted(array) ↔ 
-  ∀i,j: 0 ≤ i &lt; j &lt; array.length → array[i] ≤ array[j]</code></pre>
+<p><span class="math display">\[
+\forall \text{array} \in \text{int}[], \text{sorted}(\text{array}) \iff \forall i,j: (0 \le i &lt; j &lt; \text{array.length}) \implies \text{array}[i] \le \text{array}[j]
+\]</span></p>
 <p><strong>Esta especificação captura precisamente o conceito de array ordenado</strong> usando quantificadores universais sobre índices e uma implicação que define a relação de ordem.</p>
 <p>Para estruturas de dados mais complexas, FOL permite especificar invariantes estruturais:</p>
-<pre><code>∀tree: BinaryTree, balanced(tree) ↔ 
-  ∀node ∈ tree, |height(left(node)) - height(right(node))| ≤ 1</code></pre>
+<p><span class="math display">\[
+\forall \text{tree} \in \text{BinaryTree}, \text{balanced}(\text{tree}) \iff \forall \text{node} \in \text{tree}, |\text{height}(\text{left}(\text{node})) - \text{height}(\text{right}(\text{node}))| \le 1
+\]</span></p>
 </section>
 <section id="relação-entre-lógica-e-correção-de-programas" class="level3" data-number="9.2.2">
 <h3 data-number="9.2.2" class="anchored" data-anchor-id="relação-entre-lógica-e-correção-de-programas"><span class="header-section-number">9.2.2</span> Relação entre lógica e correção de programas</h3>

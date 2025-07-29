@@ -133,6 +133,7 @@ window.Quarto = {
 };
 </script>
 
+<link rel="stylesheet" href="styles/custom.css">
 </head>
 
 <body class="nav-sidebar floating">
@@ -841,7 +842,7 @@ window.Quarto = {
 <span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- estado_inicial.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="exemplo-4-o-narrador-é-seu-próprio-avô" class="level5" data-number="8.2.0.3.1">
 <h5 data-number="8.2.0.3.1" class="anchored" data-anchor-id="exemplo-4-o-narrador-é-seu-próprio-avô"><span class="header-section-number">8.2.0.3.1</span> Exemplo 4: O Narrador é seu próprio avô</h5>
-<p>O problema do narrador que é seu próprio avô é um exemplo clássico de raciocínio lógico e relações familiares. O problema envolve a construção de uma base de conhecimento que representa as relações familiares e a aplicação de regras lógicas para determinar se o narrador realmente é seu próprio avô. Este exemplo foi publicado por <a href="https://en.wikipedia.org/wiki/Niklaus_Wirth">Niklaus Wirth</a> em seu livro <em>Algorithms + Data Structures = Programs</em> [^1] fazendo referência a um problema que havia sido publicado em um jornal de Zürich em 1922, que cito em tradução livre a seguir:</p>
+<p>O problema do narrador que é seu próprio avô é um exemplo clássico de raciocínio lógico e relações familiares. O problema envolve a construção de uma base de conhecimento que representa as relações familiares e a aplicação de regras lógicas para determinar se o narrador realmente é seu próprio avô. Este exemplo foi publicado por <a href="https://en.wikipedia.org/wiki/Niklaus_Wirth">Niklaus Wirth</a> em seu livro <em>Algorithms + Data Structures = Programs</em> <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> fazendo referência a um problema que havia sido publicado em um jornal de Zürich em 1922, que cito em tradução livre a seguir:</p>
 <p>Casei com uma viúva (vamos chamá-la de W) que tem uma filha adulta (chame-a de D). Meu pai (F), que nos visitava com bastante frequência, apaixonou-se pela minha enteada e casou-se com ela. Por isso, meu pai se tornou meu genro e minha enteada se tornou minha madrasta. Alguns meses depois, minha esposa deu à luz um filho (S1), que se tornou cunhado do meu pai, e meu tio. A esposa do meu pai, ou seja, minha enteada, também teve um filho (S2). Em outras palavras, para todos os efeitos, eu sou meu próprio avo.</p>
 <p>Usando este relato como base podemos criar uma base de conhecimento em Prolog, incluir algumas regras, e finalmente verificar se é verdade que o <strong>narrador</strong> é o seu próprio avô.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a> <span class="co">% predicados</span></span>
@@ -870,6 +871,12 @@ window.Quarto = {
 
 </section>
 </section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>WIRTH, Niklaus. <strong>Algorithms and Data Structures</strong>. [S.l.]: [s.n.], [s.d.]. Disponível em: https://cdn.preterhuman.net/texts/math/Data_Structure<strong>AND</strong>Algorithms/Algorithms%20and%20Data%20Structures%20-%20Niklaus%20Wirth.pdf.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
