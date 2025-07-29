@@ -163,7 +163,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-fundamentos-logica-proposicional.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><strong>Lógica de Primeira Ordem</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -198,7 +198,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-construcao-de-mundos-logicos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mundos na Lógica de Primeira Ordem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mundos na <strong>Lógica de Primeira Ordem</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -361,7 +361,7 @@ F &amp; F &amp; V &amp; V &amp; V\\ \hline
 <p>A contrapositiva de <span class="math inline">\(P\rightarrow (Q \lor R)\)</span> é <span class="math inline">\(\lnot(Q \lor R) \rightarrow \neg P\)</span>.</p>
 <p><strong>Exemplo 2</strong>: Dizemos que uma função é injetora se $x y $implica <span class="math inline">\(f(x) \neq f(y)\)</span>. A contrapositiva desta implicação é: se <span class="math inline">\(f(x) = f(y)\)</span> então <span class="math inline">\(x = y\)</span>.</p>
 <p>O Exemplo 2 é uma prova de conceito. Normalmente é mais fácil assumir <span class="math inline">\(f(x) = f(y)\)</span> e deduzir <span class="math inline">\(x = y\)</span> do que assumir <span class="math inline">\(x \neq y\)</span> e deduzir <span class="math inline">\(f(x) \neq f(y)\)</span>. Isto pouco tem a ver com funções e muito com o fato de que <span class="math inline">\(x \neq y\)</span> geralmente não é uma informação útil.</p>
-<p>O que torna a contrapositiva importante é que toda Fórmula Bem Formada é logicamente equivalente à sua contrapositiva. Consequentemente, se queremos provar que uma função é injetora, é suficiente provar que se <span class="math inline">\(f(x) = f(y)\)</span> então <span class="math inline">\(x = y\)</span>.</p>
+<p>O que torna a contrapositiva importante é que toda <strong>Fórmula Bem Formada</strong> é logicamente equivalente à sua contrapositiva. Consequentemente, se queremos provar que uma função é injetora, é suficiente provar que se <span class="math inline">\(f(x) = f(y)\)</span> então <span class="math inline">\(x = y\)</span>.</p>
 <p>A contrapositiva funciona para qualquer declaração condicional, e matemáticos gastam muito tempo provando declarações condicionais.</p>
 <p>O que não podemos esquecer de jeito nenhum é que toda fórmula condicional terá a forma <span class="math inline">\(P\rightarrow Q\)</span>. Mostramos que isso é logicamente equivalente a <span class="math inline">\(\lnot Q \rightarrow \lnot P\)</span> verificando a Tabela Verdade para a declaração bicondicional construída a partir dessas fórmulas. E que para obter a contrapositiva basta inverter antecedente e consequente e negar ambos. mantendo a relação lógica entre os termos da implicação.</p>
 </section>
@@ -581,7 +581,7 @@ F &amp; F &amp; F &amp; F &amp; T \\
 <h4 data-number="4.0.6.2" class="anchored" data-anchor-id="hipóteses"><span class="header-section-number">4.0.6.2</span> Hipóteses</h4>
 <p>Hipóteses são suposições ou proposições feitas como base para o raciocínio, sem a suposição de sua veracidade. Elas são usadas como pontos de partida para investigações ou pesquisas científicas. Essencialmente uma hipótese é uma teoria ou ideia que você pode testar de alguma forma. Isso significa que, através de experimentação e observação, uma hipótese pode ser provada verdadeira ou falsa.</p>
 <p>Por exemplo, se você observar que uma planta está morrendo, pode formar a hipótese de que ela não está recebendo água suficiente. Para testar essa hipótese, você pode dar mais água à planta e observar se ela melhora. Se melhorar, isso suporta sua hipótese. Se não houver mudança, isso sugere que sua hipótese pode estar errada, e você pode então formular uma nova hipótese para testar.</p>
-<p>Na lógica proposicional, uma hipótese é uma proposição (ou afirmação) que é assumida como verdadeira para o propósito de argumentação ou investigação. Obviamente, pode ser uma fórmula atômica, ou complexa, desde que seja uma Fórmula Bem Formada.</p>
+<p>Na lógica proposicional, uma hipótese é uma proposição (ou afirmação) que é assumida como verdadeira para o propósito de argumentação ou investigação. Obviamente, pode ser uma fórmula atômica, ou complexa, desde que seja uma <strong>Fórmula Bem Formada</strong>.</p>
 <p>Em um sistema formal de provas, como o sistema <span class="math inline">\(\mathfrak{L}\)</span> uma hipótese é um ponto de partida para um processo de dedução. O objetivo é usar as regras do sistema para deduzir novas proposições a partir das hipóteses. Se uma proposição puder ser deduzida a partir das hipóteses usando as regras do sistema, dizemos que essa proposição é uma consequência lógica das hipóteses. Se temos as hipóteses <span class="math inline">\(P\)</span> e <span class="math inline">\(P\rightarrow Q\)</span>, podemos deduzir <span class="math inline">\(Q\)</span> usando o <em>Modus Ponens</em>. Nesse caso, <span class="math inline">\(Q\)</span> seria uma consequência lógica das hipóteses.</p>
 <p>No contexto do sistema de provas <span class="math inline">\(\mathfrak{L}\)</span> e considerando apenas a lógica proposicional, <strong>uma hipótese é uma proposição ou conjunto de proposições assumidas como verdadeiras, a partir das quais outras proposições podem ser logicamente deduzidas</strong>.</p>
 <p><strong>Exemplo 1</strong>: considere o seguinte argumento:</p>
@@ -1556,8 +1556,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./02-fundamentos-logica-proposicional.html" class="pagination-link" aria-label="Lógica de Primeira Ordem">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem</span></span>
+      <a href="./02-fundamentos-logica-proposicional.html" class="pagination-link" aria-label="**Lógica de Primeira Ordem**">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><strong>Lógica de Primeira Ordem</strong></span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

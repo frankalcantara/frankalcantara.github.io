@@ -163,7 +163,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-fundamentos-logica-proposicional.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><strong>Lógica de Primeira Ordem</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -198,7 +198,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-construcao-de-mundos-logicos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mundos na Lógica de Primeira Ordem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mundos na <strong>Lógica de Primeira Ordem</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -269,7 +269,7 @@ window.Quarto = {
 </header>
 
 
-<p>Aqui estão cinco quebra-cabeças clássicos juntamente com suas soluções usando Lógica de Primeira Ordem</p>
+<p>Aqui estão cinco quebra-cabeças clássicos juntamente com suas soluções usando <strong>Lógica de Primeira Ordem</strong></p>
 <ol type="1">
 <li><p><strong>Quebra-cabeça: O Mentiroso e o Verdadeiro</strong> Você encontra dois habitantes: <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span>. Você sabe que um sempre diz a verdade e o outro sempre mente, mas você não sabe quem é quem. Você pergunta a <span class="math inline">\(A\)</span>, <em>Você é o verdadeiro?</em> A responde, mas você não consegue ouvir a resposta dele. <span class="math inline">\(B\)</span> então te diz, <em>A disse que ele é o mentiroso</em>.</p>
 <p><strong>Solução</strong>: <span class="math inline">\(A\)</span> deve ser o verdadeiro e <span class="math inline">\(B\)</span> deve ser o mentiroso. Se <span class="math inline">\(B\)</span> fosse o verdadeiro, ele nunca diria que é o mentiroso. Portanto, <span class="math inline">\(B\)</span> deve ser o mentiroso e <span class="math inline">\(A\)</span> deve ser o verdadeiro, independentemente do que <span class="math inline">\(B\)</span> disse.</p>
@@ -331,21 +331,21 @@ window.Quarto = {
 <p><span class="math inline">\(A\)</span> é o verdadeiro e não é o mentiroso.</p></li>
 <li><p><strong>Quebra-cabeça: As Três Lâmpadas</strong> Existem três lâmpadas incandescentes em uma sala, e existem três interruptores fora da sala. Você pode manipular os interruptores o quanto quiser, mas só pode entrar na sala uma vez. Como você pode determinar qual interruptor opera qual lâmpada?</p>
 <p><strong>Solução</strong>: ligue um interruptor e espere um pouco. Então desligue esse interruptor e ligue um segundo interruptor. Entre na sala. A lâmpada que está acesa corresponde ao segundo interruptor. A lâmpada que está desligada e quente corresponde ao primeiro interruptor. A lâmpada que está desligada e fria corresponde ao terceiro interruptor.</p>
-<p>Usando Lógica de Primeira Ordem: Vamos denotar os interruptores como <span class="math inline">\(s1, s2, s3\)</span> e as lâmpadas como <span class="math inline">\(b1, b2, b3\)</span>. Podemos definir predicados <span class="math inline">\(On(b, s)\)</span> e <span class="math inline">\(Hot(b)\)</span>.</p>
+<p>Usando <strong>Lógica de Primeira Ordem</strong>: Vamos denotar os interruptores como <span class="math inline">\(s1, s2, s3\)</span> e as lâmpadas como <span class="math inline">\(b1, b2, b3\)</span>. Podemos definir predicados <span class="math inline">\(On(b, s)\)</span> e <span class="math inline">\(Hot(b)\)</span>.</p>
 <p><span class="math display">\[On(b1, s2) \land Hot(b2) \land \neg (On(b3) \lor Hot(b3))\]</span></p></li>
 <li><p><strong>Quebra-cabeça: O Agricultor, a Raposa, o Ganso e o Grão</strong> Um agricultor quer atravessar um rio e levar consigo uma raposa, um ganso e um saco de grãos. O barco do agricultor só lhe permite levar um item além dele mesmo. Se a raposa e o ganso estiverem sozinhos, a raposa comerá o ganso. Se o ganso e o grão estiverem sozinhos, o ganso comerá o grão. Como o agricultor pode levar todas as suas posses para o outro lado do rio?</p>
 <p><strong>Solução</strong>: o agricultor leva o ganso através do rio primeiro, deixando a raposa e o grão no lado original. Ele deixa o ganso no outro lado e volta para pegar a raposa. Ele deixa a raposa no outro lado, mas leva o ganso de volta ao lado original para pegar o grão. Ele deixa o grão com a raposa no outro lado. Finalmente, ele retorna ao lado original mais uma vez para pegar o ganso.</p>
-<p>Usando Lógica de Primeira Ordem: Podemos definir predicados <span class="math inline">\(mesmoLado(x, y)\)</span> e <span class="math inline">\(come (x, y)\)</span>. A solução envolve a sequência de ações que mantêm as seguintes condições:</p>
+<p>Usando <strong>Lógica de Primeira Ordem</strong>: Podemos definir predicados <span class="math inline">\(mesmoLado(x, y)\)</span> e <span class="math inline">\(come (x, y)\)</span>. A solução envolve a sequência de ações que mantêm as seguintes condições:</p>
 <p><span class="math display">\[\neg (mesmoLado(Raposa, Ganso) \land \neg mesmoLado(Raposa, Fazendeiro))\]</span></p>
 <p><span class="math display">\[\neg (mesmoLado(Ganso, Grãos) \land \neg mesmoLado(Ganso, Fazendeiro))\]</span></p></li>
 <li><p><strong>Quebra-cabeça: O Problema da Ponte e da Tocha</strong> Quatro pessoas chegam a um rio à noite. Há uma ponte estreita, mas ela só pode conter duas pessoas de cada vez. Eles têm uma tocha e, por ser noite, a tocha tem que ser usada ao atravessar a ponte. A pessoa <span class="math inline">\(A\)</span> pode atravessar a ponte em um minuto, <span class="math inline">\(B\)</span> em dois minutos, <span class="math inline">\(C\)</span> em cinco minutos e <span class="math inline">\(D\)</span> em oito minutos. Quando duas pessoas atravessam a ponte juntas, elas devem se mover no ritmo da pessoa mais lenta. Qual é a forma mais rápida para todos eles atravessarem a ponte?</p>
 <p><strong>Solução</strong>: primeiro, <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span> atravessam a ponte, o que leva 2 minutos. <span class="math inline">\(A\)</span> então pega a tocha e volta para o lado original, levando 1 minuto. <span class="math inline">\(A\)</span> fica no lado original enquanto <span class="math inline">\(C\)</span> e <span class="math inline">\(D\)</span> atravessam a ponte, levando 8 minutos. <span class="math inline">\(B\)</span> então pega a tocha e volta para o lado original, levando 2 minutos. Finalmente, <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span> atravessam a ponte novamente, levando 2 minutos. No total, teremos <span class="math inline">\(2+1+8+2+2=15\)</span> minutos.</p>
-<p>Usando Lógica de Primeira Ordem: Vamos denotar o tempo que cada pessoa leva para atravessar a ponte como <span class="math inline">\(t_A, t_B, t_C, t_D\)</span> e o tempo total como <span class="math inline">\(T\)</span>. O problema pode ser representado da seguinte forma:</p>
+<p>Usando <strong>Lógica de Primeira Ordem</strong>: Vamos denotar o tempo que cada pessoa leva para atravessar a ponte como <span class="math inline">\(t_A, t_B, t_C, t_D\)</span> e o tempo total como <span class="math inline">\(T\)</span>. O problema pode ser representado da seguinte forma:</p>
 <p><span class="math display">\[(t_A + t_B + t_A + t_C + t_D + t_B + t_A) \leq T\]</span></p>
 <p>Substituindo os valores dos tempos resulta em <span class="math inline">\(15 \leq T\)</span>.</p></li>
 <li><p><strong>Quebra-cabeça: O Problema de Monty Hall</strong> Em um programa de game show, os concorrentes tentam adivinhar qual das três portas contém um prêmio valioso. Depois que um concorrente escolhe uma porta, o apresentador, que sabe o que está por trás de cada porta, abre uma das portas não escolhidas para revelar uma cabra, representando nenhum prêmio. O apresentador então pergunta ao concorrente se ele quer mudar sua escolha para a outra porta não aberta ou ficar com sua escolha inicial. O que o concorrente deve fazer para maximizar suas chances de ganhar o prêmio?</p>
 <p><strong>Solução</strong>: o concorrente deve sempre mudar sua escolha. Inicialmente, a chance do prêmio estar atrás da porta escolhida é <span class="math inline">\(1/3\)</span> e a chance de estar atrás de uma das outras portas é <span class="math inline">\(2/3\)</span>. Depois que o apresentador abre uma porta para revelar uma cabra, a chance do prêmio estar atrás da porta não escolhida e não aberta ainda é <span class="math inline">\(2/3\)</span>.</p>
-<p>Usando Lógica de Primeira Ordem: Vamos denotar as portas como <span class="math inline">\(d1, d2, d3\)</span> e o prêmio como <span class="math inline">\(P\)</span>. Podemos definir um predicado <span class="math inline">\(contémPrêmio(d)\)</span>. A solução pode ser representada pela seguinte condição:</p>
+<p>Usando <strong>Lógica de Primeira Ordem</strong>: Vamos denotar as portas como <span class="math inline">\(d1, d2, d3\)</span> e o prêmio como <span class="math inline">\(P\)</span>. Podemos definir um predicado <span class="math inline">\(contémPrêmio(d)\)</span>. A solução pode ser representada pela seguinte condição:</p>
 <p><span class="math display">\[(contémPrêmio(d1) \land \neg contémPrêmio(d2) \land \neg contémPrêmio(d3)) \\ \lor (contémPrêmio(d2)  \land \neg contémPrêmio(d1) \land \neg contémPrêmio(d3)) \\ \lor (contémPrêmio(d3) \land \neg contémPrêmio(d1) \land \neg contémPrêmio(d2))\]</span></p>
 <p>Esta condição afirma que o prêmio está exatamente atrás de uma das portas, e o concorrente deve mudar sua escolha depois que uma das portas é aberta para revelar nenhum prêmio.</p></li>
 </ol>

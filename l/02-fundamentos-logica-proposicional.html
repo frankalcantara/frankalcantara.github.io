@@ -111,7 +111,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-jornada-programacao-logica.html">Fundamentos da Lógica</a></li><li class="breadcrumb-item"><a href="./02-fundamentos-logica-proposicional.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-jornada-programacao-logica.html">Fundamentos da Lógica</a></li><li class="breadcrumb-item"><a href="./02-fundamentos-logica-proposicional.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><strong>Lógica de Primeira Ordem</strong></span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -163,7 +163,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-fundamentos-logica-proposicional.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><strong>Lógica de Primeira Ordem</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -198,7 +198,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-construcao-de-mundos-logicos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mundos na Lógica de Primeira Ordem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mundos na <strong>Lógica de Primeira Ordem</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -254,9 +254,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-jornada-programacao-logica.html">Fundamentos da Lógica</a></li><li class="breadcrumb-item"><a href="./02-fundamentos-logica-proposicional.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-jornada-programacao-logica.html">Fundamentos da Lógica</a></li><li class="breadcrumb-item"><a href="./02-fundamentos-logica-proposicional.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><strong>Lógica de Primeira Ordem</strong></span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><strong>Lógica de Primeira Ordem</strong></span></h1>
 </div>
 
 
@@ -273,41 +273,40 @@ window.Quarto = {
 </header>
 
 
-<p>A Lógica de Primeira Ordem é uma estrutura básica da ciência da computação e da programação. Ela nos permite discursar e raciocinar com precisão sobre os elementos - podemos fazer afirmações sobre todo um grupo, ou sobre um único elemento em particular. No entanto, tem suas limitações. Na Lógica de Primeira Ordem clássica não podemos fazer afirmações diretas sobre predicados ou funções. Entretanto, algumas extensões, como a Lógica de Segunda Ordem, permitem fazer afirmações sobre predicados e funções.</p>
+<p>A <strong>Lógica de Primeira Ordem</strong> é uma estrutura básica da ciência da computação e da programação. Ela nos permite discursar e raciocinar com precisão sobre os elementos - podemos fazer afirmações sobre todo um grupo, ou sobre um único elemento em particular. No entanto, tem suas limitações. Na <strong>Lógica de Primeira Ordem</strong> clássica não podemos fazer afirmações diretas sobre predicados ou funções. Entretanto, algumas extensões, como a Lógica de Segunda Ordem, permitem fazer afirmações sobre predicados e funções.</p>
 <p>Essa restrição não é um defeito, mas sim um equilíbrio cuidadoso entre poder expressivo e simplicidade computacional. Dá-nos uma forma de formular uma grande variedade de problemas, sem tornar o processo de resolução desses problemas excessivamente complexo.</p>
-<p>A Lógica de Primeira Ordem é o nosso ponto de partida, nossa base, a pedra fundamental. Uma forma poderosa e útil de olhar para o universo, não tão complicada que seja hermética a olhos leigos, mas suficientemente complexa para permitir a descoberta de alguns dos mistérios da matemática e, no processo, resolver alguns problemas práticos.</p>
-<p>A Lógica de Primeira Ordem consiste de uma linguagem, consequentemente criada a partir de um alfabeto <span class="math inline">\(\Sigma\)</span>, de um conjunto de axiomas e de um conjunto de regras de inferência. Esta linguagem consiste de todas as fórmulas bem formadas da teoria da Lógica Proposicional e predicativa. O conjunto de axiomas é um subconjunto do conjunto de fórmulas bem formadas acrescido e, finalmente, um conjunto de regras de inferência.</p>
+<p>A <strong>Lógica de Primeira Ordem</strong> é o nosso ponto de partida, nossa base, a pedra fundamental. Uma forma poderosa e útil de olhar para o universo, não tão complicada que seja hermética a olhos leigos, mas suficientemente complexa para permitir a descoberta de alguns dos mistérios da matemática e, no processo, resolver alguns problemas práticos.</p>
+<p>A <strong>Lógica de Primeira Ordem</strong> consiste de uma linguagem, consequentemente criada a partir de um alfabeto <span class="math inline">\(\Sigma\)</span>, de um conjunto de axiomas e de um conjunto de regras de inferência. Esta linguagem consiste de todas as fórmulas bem formadas da teoria da Lógica Proposicional e predicativa. O conjunto de axiomas é um subconjunto do conjunto de fórmulas bem formadas acrescido e, finalmente, um conjunto de regras de inferência.</p>
 <p>O alfabeto <span class="math inline">\(\Sigma\)</span> que estamos definindo poderá ser dividido em classes formadas por conjuntos de símbolos agrupados por semelhança. Assim:</p>
 <ol type="1">
-<li><p><strong>variáveis, constantes e símbolos de pontuação</strong>: vamos usar os símbolos do alfabeto latino em minúsculas e alguns símbolos de pontuação. Destaque-se os símbolos <span class="math inline">\((\)</span> e <span class="math inline">\()\)</span>, parênteses, que usaremos para definir a prioridade de operações. Vamos usar os símbolos <span class="math inline">\(U\)</span>, <span class="math inline">\(V\)</span>, <span class="math inline">\(w\)</span>, <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> e <span class="math inline">\(z\)</span> para indicar variáveis e <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(d\)</span> e <span class="math inline">\(e\)</span> para indicar constantes.</p></li>
+<li><p><strong>variáveis, constantes e símbolos de pontuação</strong>: vamos usar os símbolos do alfabeto latino em minúsculas e alguns símbolos de pontuação. Destaque-se os símbolos <span class="math inline">\((\)</span> e <span class="math inline">\()\)</span>, parênteses, usados para definir a prioridade de operações. Vamos usar os símbolos <span class="math inline">\(u\)</span>, <span class="math inline">\(v\)</span>, <span class="math inline">\(w\)</span>, <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> e <span class="math inline">\(z\)</span> para indicar variáveis e <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(d\)</span> e <span class="math inline">\(e\)</span> para indicar constantes.</p></li>
 <li><p><strong>funções</strong>: usaremos os símbolos <span class="math inline">\(\mathbf{f}\)</span>, <span class="math inline">\(\mathbf{g}\)</span>, <span class="math inline">\(\mathbf{h}\)</span> e <span class="math inline">\(\mathbf{i}\)</span> Para indicar funções.</p></li>
 <li><p><strong>predicados</strong>: usaremos letras do alfabeto latino, maiúsculas <span class="math inline">\(P\)</span>, <span class="math inline">\(Q\)</span>, <span class="math inline">\(R\)</span> e <span class="math inline">\(S\)</span>, ou simplesmente <em>strings</em> como <span class="math inline">\(\text{MaiorQue}\)</span> ou <span class="math inline">\(\text{IgualA}\)</span> para indicar predicados. Sempre começando com letras maiúsculas.</p></li>
 <li><p><strong>operadores</strong>: usaremos os símbolos tradicionais da Lógica Proposicional: <span class="math inline">\(\neg\)</span> (negação), $$ (conjunção, <strong>AND</strong>), $$ (disjunção, <em>or</em>), <span class="math inline">\(\rightarrow\)</span> (implicação) e <span class="math inline">\(\leftrightarrow\)</span> (equivalência).</p></li>
 <li><p><strong>quantificadores</strong>: seguiremos, de perto, a tradição matemática usando $$ (quantificador existencial) e $$ (quantificador universal).</p></li>
 <li><p><strong>Fórmulas Bem Formadas</strong>: usaremos para representar as Fórmulas Bem Formadas: <span class="math inline">\(P\)</span>, <span class="math inline">\(Q\)</span>, <span class="math inline">\(R\)</span>, <span class="math inline">\(S\)</span>, <span class="math inline">\(T\)</span>.</p></li>
 </ol>
-<p>Na lógica matemática, uma Fórmula Bem Formada, ou Expressão Bem Formada, é uma sequência <strong>finita</strong> de símbolos formada de acordo com as regras gramaticais de uma linguagem formal especificamente desenvolvida para a redação das fórmulas da lógica.</p>
-<p><em>Em Lógica de Primeira Ordem, uma Fórmula Bem Formada é uma expressão que <strong>só pode ser</strong> verdadeira ou falsa</em>. As Fórmulas Bem Formadas são compostas de símbolos que representam quantificadores, variáveis, constantes, predicados, e conectivos lógicos. Cuja distribuição e uso seguirão as regras sintáticas, gramaticais e semânticas da linguagem da lógica. Aprender lógica é aprender esta linguagem.</p>
+<p>Na lógica matemática, uma <strong>Fórmula Bem Formada</strong>, ou Expressão Bem Formada, é uma sequência <strong>finita</strong> de símbolos formada de acordo com as regras gramaticais de uma linguagem formal especificamente desenvolvida para a redação das fórmulas da lógica.</p>
+<p><em>Em <strong>Lógica de Primeira Ordem</strong>, uma <strong>Fórmula Bem Formada</strong> é uma expressão que <strong>só pode ser</strong> verdadeira ou falsa</em>. As Fórmulas Bem Formadas são compostas de símbolos que representam quantificadores, variáveis, constantes, predicados, e conectivos lógicos. Cuja distribuição e uso seguirão as regras sintáticas, gramaticais e semânticas da linguagem da lógica. Aprender lógica é aprender esta linguagem.</p>
 <p>Em qualquer linguagem matemática, sem dúvida, a regra sintática mais importante é a precedência das operações, uma espécie de receita indexada. Que deve ser seguida à letra. Neste texto, vamos nos restringir a seguinte ordem de precedência:</p>
 <p><span class="math display">\[\neg, \forall, \exists, \wedge, \vee, \rightarrow, \leftrightarrow\]</span></p>
-<p>Dando maior precedência a <span class="math inline">\(\neg\)</span> (negação) e a menor a <span class="math inline">\(\leftrightarrow\)</span> (equivalência).</p>
-<p>O uso dos parênteses e da ordem de precedência requer cautela, muita cautela. Os parênteses permitem que possamos escrever <span class="math inline">\((\forall x(\exists y (\mathbf{p}(x,y)\rightarrow \mathbf{q}(x))))\)</span> ou <span class="math inline">\(\forall x \exists y (\mathbf{p}(x,y)\rightarrow \mathbf{q}(x))\,\)</span> duas expressões diferentes que são a mesma Fórmula Bem Formada. Escolha a opção que seja mais fácil de ler, entender e explicar.</p>
+<p>Dando maior precedência a <span class="math inline">\(\neg\)</span> (negação) e a menor a <span class="math inline">\(\leftrightarrow\)</span> (equivalência). Além disso, os parenteses <span class="math inline">\((\)</span> e <span class="math inline">\()\)</span> são usados para agrupar expressões e definir a ordem de precedência. O uso dos parênteses e da ordem de precedência requer cautela, muita cautela. Os parênteses permitem que possamos escrever <span class="math inline">\((\forall x(\exists y (\mathbf{p}(x,y)\rightarrow \mathbf{q}(x))))\)</span> ou <span class="math inline">\(\forall x \exists y (\mathbf{p}(x,y)\rightarrow \mathbf{q}(x))\,\)</span> duas expressões diferentes que são a mesma <strong>Fórmula Bem Formada</strong>. Escolha a opção que seja mais fácil de ler, entender e explicar.</p>
 <p>Na linguagem da lógica cada sentença, ou proposição, deve ser verdadeira ou falsa, nunca pode ser verdadeira e falsa ao mesmo tempo, e não pode ser algo diferente de verdadeiro ou falso. Para que uma sentença, ou proposição, seja verdadeira ela precisa ser logicamente verdadeira. Uma sentença contraditória é aquela que é sempre falsa, independentemente da interpretação.</p>
 <p>Da mesma forma que aprendemos nossa língua materna reconhecendo padrões, repetições e regularidades, também reconhecemos Fórmulas Bem Formadas por seus padrões característicos. os símbolos estarão dispostos de forma organizada em termos sobre os quais se aplicam operações, funções e quantificadores.</p>
 <p>Termos são variáveis, constantes ou mesmo funções aplicadas a termos e seguem um pequeno conjunto de regras:</p>
 <ol type="1">
 <li>uma variável <span class="math inline">\(x\)</span> é um termo em si;</li>
-<li>uma constante <span class="math inline">\(A\)</span> é um termo em si; uma proposição que a contenha será verdadeira <span class="math inline">\((T)\)</span> ou falsa <span class="math inline">\((F)\)</span>;</li>
+<li>uma constante <span class="math inline">\(a\)</span> é um termo em si; uma proposição que a contenha será verdadeira <span class="math inline">\((T)\)</span> ou falsa <span class="math inline">\((F)\)</span>;</li>
 <li>se <span class="math inline">\(\mathbf{f}\)</span> é uma função de termos <span class="math inline">\((t_1, ... t_n)\)</span> então <span class="math inline">\(\mathbf{f}(t_1, ... t_n)\)</span> é um termo.</li>
 </ol>
 <p><strong>Cada proposição, ou sentença, na Lógica Proposicional é um fato fundamental e indivisível</strong>. <em>A chuva cai</em>, <em>O sol brilha</em> - cada uma dessas proposições é verdadeira ou falsa por si só, como uma unidade, um átomo, elemento básico e fundamental de todas as expressões. Mais tarde, chamaremos de átomos a todo predicado aplicado aos termos de uma fórmula. Assim, precisamos definir os predicados.</p>
 <ol type="1">
-<li>se <span class="math inline">\(P\)</span> é um predicado de termos <span class="math inline">\((t_1, ... t_n)\)</span> então <span class="math inline">\(P(t_1, ... t_n)\)</span> é uma Fórmula Bem Formada, um átomo.</li>
+<li>se <span class="math inline">\(P\)</span> é um predicado de termos <span class="math inline">\((t_1, ... t_n)\)</span> então <span class="math inline">\(P(t_1, ... t_n)\)</span> é uma <strong>Fórmula Bem Formada</strong>, um átomo.</li>
 <li>se <span class="math inline">\(P\)</span> e <span class="math inline">\(Q\)</span> são Fórmulas Bem Formadas então: <span class="math inline">\(\neg P\)</span>, <span class="math inline">\(P\wedge Q\)</span>, <span class="math inline">\(P \vee Q\)</span>, <span class="math inline">\(P \rightarrow Q\)</span> e <span class="math inline">\(P \leftrightarrow Q\)</span> são Fórmulas Bem Formadas.</li>
-<li>se <span class="math inline">\(P\)</span> é uma Fórmula Bem Formada e <span class="math inline">\(x\)</span> uma variável então <span class="math inline">\(\exists x P(x)\)</span> e <span class="math inline">\(\forall x P(x)\)</span> são Fórmulas Bem Formadas.</li>
+<li>se <span class="math inline">\(P\)</span> é uma <strong>Fórmula Bem Formada</strong> e <span class="math inline">\(x\)</span> uma variável então <span class="math inline">\(\exists x P(x)\)</span> e <span class="math inline">\(\forall x P(x)\)</span> são Fórmulas Bem Formadas.</li>
 </ol>
 <p>Podemos dizer que as Fórmulas Bem Formadas respeitam as regras de precedência entre conectivos, parênteses e quantificadores; não apresentam problemas como variáveis livres não quantificadas e, principalmente, são unívocas, sem ambiguidade na interpretação.</p>
-<p>Finalmente podemos definir a linguagem da Lógica de Primeira Ordem como o conjunto de todas as Fórmulas Bem Formadas criadas a partir dos campos de estudo da Lógica Proposicional e da Lógica de Predicados. Termos e átomos interligados em uma teia, em que cada termo ou átomo é como uma ilha de verdade. <em>A chuva cai</em>, <em>O sol brilha</em>. Cada uma dessas proposições é verdadeira ou falsa, em si, uma unidade, como uma ilha. As operações lógicas são as pontes que conectam essas ilhas, permitindo-nos construir as estruturas mais complexas da razão.</p>
+<p>Finalmente podemos definir a linguagem da <strong>Lógica de Primeira Ordem</strong> como o conjunto de todas as Fórmulas Bem Formadas criadas a partir dos campos de estudo da Lógica Proposicional e da Lógica de Predicados. Termos e átomos interligados em uma teia, em que cada termo ou átomo é como uma ilha de verdade. <em>A chuva cai</em>, <em>O sol brilha</em>. Cada uma dessas proposições é verdadeira ou falsa, em si, uma unidade, como uma ilha. As operações lógicas são as pontes que conectam essas ilhas, permitindo-nos construir as estruturas mais complexas da razão.</p>
 <section id="lógica-proposicional" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="lógica-proposicional"><span class="header-section-number">3.1</span> Lógica Proposicional</h2>
 <p>Esse sistema, também chamado de álgebra booleana, fundamental para o desenvolvimento da computação, é uma verdadeira tapeçaria de possibilidades. <strong>Na Lógica Proposicional, declarações atômicas, que só podem ter valores verdadeiro, <span class="math inline">\(T\)</span>, ou falso <span class="math inline">\(F\)</span>, são entrelaçadas em declarações compostas cuja veracidade, segundo as regras desse cálculo, depende dos valores de verdade das declarações atômicas que as compõem quando sujeitas aos operadores, ou aos conectivos, que definimos anteriormente</strong>.</p>
@@ -387,11 +386,6 @@ window.Quarto = {
 <p>O bicondicional <span class="math inline">\(\leftrightarrow\)</span> equivale a ambos os componentes terem o mesmo valor-verdade. Todos os operadores, ou conectivos, conectam duas declarações, exceto <span class="math inline">\(\neg\)</span> que se aplica a apenas um termo.</p>
 <p>Cada operador com sua própria aridade:</p>
 <table class="table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>No Argumentos</th>
@@ -415,15 +409,10 @@ window.Quarto = {
 <td>Binário</td>
 <td><span class="math inline">\(x \vee y\)</span>, <span class="math inline">\(c \wedge y\)</span></td>
 </tr>
-<tr class="even">
-<td>3</td>
-<td>Ternário</td>
-<td>if <span class="math inline">\(P\)</span> then <span class="math inline">\(Q\)</span> else <span class="math inline">\(R\)</span>, <span class="math inline">\((P \rightarrow Q) \wedge (\neg P \rightarrow R)\)</span></td>
-</tr>
 </tbody>
 </table>
 <p><em>Tabela 2 - Aridade dos Operadores da Lógica Proposicional.</em>{: class=“legend”}</p>
-<p>Ainda observando a Tabela 1, que contém a Tabela Verdade dos operadores da Lógica Proposicional, é fácil perceber que se tivermos quatro termos diferentes, em vez de dois, teremos <span class="math inline">\(2^4 = 16\)</span> linhas. Independentemente do número de termos, se para uma determinada Fórmula Bem Formada todos os resultados forem verdadeiros, <span class="math inline">\(T\)</span>, teremos uma <em>tautologia</em>, se todos forem falsos, <span class="math inline">\(F\)</span> uma <em>contradição</em>.</p>
+<p>Ainda observando a Tabela 1, que contém a Tabela Verdade dos operadores da Lógica Proposicional, é fácil perceber que se tivermos quatro termos diferentes, em vez de dois, teremos <span class="math inline">\(2^4 = 16\)</span> linhas. Independentemente do número de termos, se para uma determinada <strong>Fórmula Bem Formada</strong> todos os resultados forem verdadeiros, <span class="math inline">\(T\)</span>, teremos uma <em>tautologia</em>, se todos forem falsos, <span class="math inline">\(F\)</span> uma <em>contradição</em>.</p>
 <p><strong>Uma tautologia é uma fórmula que é sempre verdadeira, não importa os valores dados às variáveis</strong>. Na Programação Lógica, tautologias são verdades universais no domínio do problema. Uma contradição é uma fórmula que é sempre falsa, independentemente dos valores das variáveis. Em Programação Lógica, contradições mostram inconsistências ou impossibilidades lógicas no domínio.</p>
 <p>Identificar tautologias permite simplificar expressões e fazer inferências válidas automaticamente. Reconhecer contradições evita o custo de tentar provar algo logicamente impossível.</p>
 <p>Linguagens de programação que usam a Programação Lógica usam <strong>unificação</strong> e resolução para fazer deduções. Tautologias geram cláusulas vazias que simplificam esta resolução. Em problemas de <strong>satisfatibilidade</strong>, se obtivermos uma contradição, sabemos que as premissas são insatisfatíveis. Segure as lágrimas e o medo. Os termos <strong>unificação</strong> e <strong>satisfatibilidade</strong> serão explicados assim que sejam necessários. Antes disso, precisamos falar de <em>equivalências</em>. Para isso vamos incluir um metacaractere no alfabeto da nossa linguagem: o caractere <span class="math inline">\(\equiv\)</span> que permitirá o entendimento das principais equivalências da Lógica Proposicional explicitadas a seguir:</p>

@@ -163,7 +163,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-fundamentos-logica-proposicional.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><strong>Lógica de Primeira Ordem</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -198,7 +198,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-construcao-de-mundos-logicos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mundos na Lógica de Primeira Ordem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mundos na <strong>Lógica de Primeira Ordem</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -252,7 +252,7 @@ window.Quarto = {
   <li><a href="#exemplos-práticos-com-funções-recursivas" id="toc-exemplos-práticos-com-funções-recursivas" class="nav-link" data-scroll-target="#exemplos-práticos-com-funções-recursivas"><span class="header-section-number">9.1.4</span> Exemplos práticos com funções recursivas</a></li>
   <li><a href="#relação-com-tipos-de-dados-indutivos-e-coinductivos" id="toc-relação-com-tipos-de-dados-indutivos-e-coinductivos" class="nav-link" data-scroll-target="#relação-com-tipos-de-dados-indutivos-e-coinductivos"><span class="header-section-number">9.1.5</span> Relação com tipos de dados indutivos e coinductivos</a></li>
   </ul></li>
-  <li><a href="#integração-com-lógica-de-primeira-ordem" id="toc-integração-com-lógica-de-primeira-ordem" class="nav-link" data-scroll-target="#integração-com-lógica-de-primeira-ordem"><span class="header-section-number">9.2</span> Integração com Lógica de Primeira Ordem</a>
+  <li><a href="#integração-com-lógica-de-primeira-ordem" id="toc-integração-com-lógica-de-primeira-ordem" class="nav-link" data-scroll-target="#integração-com-lógica-de-primeira-ordem"><span class="header-section-number">9.2</span> Integração com <strong>Lógica de Primeira Ordem</strong></a>
   <ul class="collapse">
   <li><a href="#especificação-de-propriedades-de-programas-com-fol" id="toc-especificação-de-propriedades-de-programas-com-fol" class="nav-link" data-scroll-target="#especificação-de-propriedades-de-programas-com-fol"><span class="header-section-number">9.2.1</span> Especificação de propriedades de programas com FOL</a></li>
   <li><a href="#relação-entre-lógica-e-correção-de-programas" id="toc-relação-entre-lógica-e-correção-de-programas" class="nav-link" data-scroll-target="#relação-entre-lógica-e-correção-de-programas"><span class="header-section-number">9.2.2</span> Relação entre lógica e correção de programas</a></li>
@@ -291,8 +291,8 @@ window.Quarto = {
 
 
 <p>A verificação formal de programas representa uma das disciplinas mais rigorosas da ciência da computação, fornecendo métodos matemáticos para provar que programas satisfazem suas especificações. Este campo ganhou importância crescente com o aumento da complexidade dos sistemas de software e a necessidade de garantias formais de correção, especialmente em sistemas críticos em que falhas podem ter consequências catastróficas.</p>
-<p><strong>A verificação formal baseia-se em fundamentos matemáticos sólidos</strong>, utilizando lógica de primeira ordem como base teórica para especificar propriedades de programas e provar sua correção. Dois paradigmas centrais emergem desta disciplina: a verificação de programas imperativos através da lógica de Hoare, que estabelece contratos formais entre pré-condições e pós-condições, e a indução estrutural, que permite verificar propriedades de programas recursivos operando sobre estruturas de dados definidas indutivamente.</p>
-<p>A integração destes métodos com lógica de primeira ordem (FOL) cria um framework poderoso para especificação e verificação que encontra aplicações práticas em ferramentas modernas como Dafny, Coq, e SPARK. Esta abordagem não apenas eleva o padrão de qualidade do software, mas também estabelece uma metodologia científica para o desenvolvimento de sistemas computacionais confiáveis.</p>
+<p><strong>A verificação formal baseia-se em fundamentos matemáticos sólidos</strong>, utilizando <strong>Lógica de Primeira Ordem</strong> como base teórica para especificar propriedades de programas e provar sua correção. Dois paradigmas centrais emergem desta disciplina: a verificação de programas imperativos através da lógica de Hoare, que estabelece contratos formais entre pré-condições e pós-condições, e a indução estrutural, que permite verificar propriedades de programas recursivos operando sobre estruturas de dados definidas indutivamente.</p>
+<p>A integração destes métodos com <strong>Lógica de Primeira Ordem</strong> (FOL) cria uma plataforma poderosa para especificação e verificação que encontra aplicações práticas em ferramentas modernas como Dafny, Coq, e SPARK. Esta abordagem não apenas eleva o padrão de qualidade do software, mas também estabelece uma metodologia científica para o desenvolvimento de sistemas computacionais confiáveis.</p>
 <section id="princípios-fundamentais-e-triplas-de-hoare" class="level3" data-number="9.0.1">
 <h3 data-number="9.0.1" class="anchored" data-anchor-id="princípios-fundamentais-e-triplas-de-hoare"><span class="header-section-number">9.0.1</span> Princípios fundamentais e triplas de Hoare</h3>
 <p>A lógica de Hoare, desenvolvida por Tony Hoare em 1969, revolucionou a verificação formal ao estabelecer uma base axiomática para provar a correção de programas. <strong>O conceito central reside nas triplas de Hoare</strong>, que têm a forma <code>{P} C {Q}</code>, em que P representa a pré-condição (propriedade verdadeira antes da execução), C o comando ou programa, e Q a pós-condição (propriedade verdadeira após a execução).</p>
@@ -303,7 +303,7 @@ window.Quarto = {
 <h3 data-number="9.0.2" class="anchored" data-anchor-id="pré-condições-pós-condições-e-condições-intermediárias"><span class="header-section-number">9.0.2</span> Pré-condições, pós-condições e condições intermediárias</h3>
 <p>As pré-condições especificam o estado inicial necessário para execução segura de um programa. Por exemplo, uma função de divisão pode ter pré-condição <code>divisor ≠ 0</code>, enquanto uma função de ordenação pode requerer <code>array ≠ null ∧ array.length &gt; 0</code>. <strong>As pré-condições estabelecem contratos claros</strong> entre chamadores e implementadores, definindo responsabilidades e garantindo execução segura.</p>
 <p>As pós-condições descrevem o estado final após execução bem-sucedida. Uma função de ordenação teria pós-condição <code>sorted(array) ∧ permutation(array, original_array)</code>, garantindo que o resultado está ordenado e contém os mesmos elementos da entrada. Esta especificação captura tanto a correção funcional quanto a preservação de dados.</p>
-<p><strong>As condições intermediárias (mid-conditions) desempenham papel fundamental</strong> na decomposição de provas complexas. Elas servem como “pontes” entre diferentes partes do programa, permitindo verificação modular e facilitando a identificação de pontos de falha nas provas. Em sequências de comandos, as condições intermediárias estabelecem estados necessários para a continuação da execução.</p>
+<p><strong>As condições intermediárias (mid-conditions) desempenham um papel fundamental</strong> na decomposição de provas complexas. Elas servem como “pontes” entre diferentes partes do programa, permitindo verificação modular e facilitando a identificação de pontos de falha nas provas. Em sequências de comandos, as condições intermediárias estabelecem estados necessários para a continuação da execução.</p>
 </section>
 <section id="invariantes-de-loop-e-variantes-para-terminação" class="level3" data-number="9.0.3">
 <h3 data-number="9.0.3" class="anchored" data-anchor-id="invariantes-de-loop-e-variantes-para-terminação"><span class="header-section-number">9.0.3</span> Invariantes de loop e variantes para terminação</h3>
@@ -318,7 +318,7 @@ while i &lt; n do
     i := i + 1;
 end
 {fact = n!}</code></pre>
-<p>O invariante <code>fact = i! ∧ 0 ≤ i ≤ n</code> captura a relação entre o valor atual de <code>fact</code> e o fatorial de <code>i</code>, mantendo também os limites apropriados para <code>i</code>. <strong>Na terminação, quando <code>i = n</code>, o invariante garante que <code>fact = n!</code></strong>, estabelecendo a pós-condição desejada.</p>
+<p>O invariante <code>fact = i! ∧ 0 ≤ i ≤ n</code> captura a relação entre o valor atual de <code>fact</code> e o fatorial de <code>i</code>, mantendo também os limites apropriados para <code>i</code>. Na terminação, a condição de saída do loop (i=n) em conjunto com o invariante (fact = i!) implica a pós-condição fact = n!.</p>
 <p>Para provar terminação, utilizamos variantes ou funções de terminação. Uma variante é uma expressão que diminui a cada iteração e é limitada inferiormente, baseada em relações bem-fundamentadas. No exemplo do fatorial, a variante <code>n - i</code> decresce a cada iteração e é limitada por zero, garantindo terminação.</p>
 </section>
 <section id="aplicação-prática-em-programas-imperativos" class="level3" data-number="9.0.4">
@@ -336,12 +336,12 @@ while i &lt; array.length ∧ ¬found do
     else
         i := i + 1;
 end
-{found ⇒ (i &lt; array.length ∧ array[i] = target)}</code></pre>
+{(found ⇒ (i &lt; array.length ∧ array[i] = target)) ∧ (¬found ⇒ ∀j: 0≤j&lt;array.length. array[j] ≠ target)}</code></pre>
 <p>O invariante captura duas propriedades essenciais: os limites de <code>i</code> e o fato de que nenhum elemento anterior à posição <code>i</code> contém o target. <strong>Esta especificação permite provar que, se found for verdadeiro, então o elemento foi encontrado na posição i</strong>.</p>
 </section>
 <section id="exemplos-com-ferramentas-modernas" class="level3" data-number="9.0.5">
 <h3 data-number="9.0.5" class="anchored" data-anchor-id="exemplos-com-ferramentas-modernas"><span class="header-section-number">9.0.5</span> Exemplos com ferramentas modernas</h3>
-<p>As ferramentas modernas de verificação formal implementam estes conceitos com automação significativa. O Dafny, desenvolvido pela Microsoft Research, permite especificação e verificação automática de programas usando sintaxe próxima à linguagem natural:</p>
+<p>As ferramentas modernas de verificação formal implementam estes conceitos com automação significativa. O Dafny, desenvolvido pela Microsoft Research, permite especificação e verificação automática de programas usando sintaxe que se assemelha à linguagem natural, como no exemplo a seguir:</p>
 <pre class="dafny"><code>method BinarySearch(arr: array&lt;int&gt;, key: int) returns (index: int)
   requires forall i :: 0 &lt;= i &lt; arr.Length-1 ==&gt; arr[i] &lt;= arr[i+1]
   ensures 0 &lt;= index &lt; arr.Length ==&gt; arr[index] == key
@@ -418,7 +418,7 @@ xs \oplus (ys \oplus zs) = (xs \oplus ys) \oplus zs
 <p><span class="proof-title"><em>Proof</em>. </span>A prova é por indução estrutural em <code>lst</code>.</p>
 <p><strong>Caso base:</strong> <code>lst = []</code> O resultado de <code>insertion_sort([])</code> é <code>[]</code>. A lista vazia é ordenada e contém os mesmos elementos que a original.</p>
 <p><strong>Caso indutivo:</strong> <code>lst = h::t</code> Assumimos a H.I.: <span class="math inline">\(\text{sorted}(\text{insertion\_sort}(t)) \land \text{same\_elements}(t, \text{insertion\_sort}(t))\)</span>.</p>
-<p>Sabemos que <code>insertion_sort(h::t)</code> é <code>insert(h, insertion_sort(t))</code>. A prova depende de um <strong>lema auxiliar</strong> que afirma que a função <code>insert</code> preserva tanto a ordenação quanto a coleção de elementos. Assumindo o lema, a propriedade do teorema é mantida.</p>
+<p>Sabemos que <code>insertion_sort(h::t)</code> é <code>insert(h, insertion_sort(t))</code>. A prova depende de um <strong>lema auxiliar</strong> que afirma que a função <code>insert</code> preserva tanto a ordenação quanto a coleção de elementos. Assumir a validade do lema nos permite concluir que a propriedade do teorema é mantida.</p>
 </div>
 <p><strong>O uso de lemmas auxiliares</strong> é frequentemente necessário para provas complexas, permitindo decomposição modular das verificações.</p>
 </section>
@@ -439,10 +439,10 @@ CoInductive stream (A : Type) : Type :=
 </section>
 </section>
 <section id="integração-com-lógica-de-primeira-ordem" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="integração-com-lógica-de-primeira-ordem"><span class="header-section-number">9.2</span> Integração com Lógica de Primeira Ordem</h2>
+<h2 data-number="9.2" class="anchored" data-anchor-id="integração-com-lógica-de-primeira-ordem"><span class="header-section-number">9.2</span> Integração com <strong>Lógica de Primeira Ordem</strong></h2>
 <section id="especificação-de-propriedades-de-programas-com-fol" class="level3" data-number="9.2.1">
 <h3 data-number="9.2.1" class="anchored" data-anchor-id="especificação-de-propriedades-de-programas-com-fol"><span class="header-section-number">9.2.1</span> Especificação de propriedades de programas com FOL</h3>
-<p>A lógica de primeira ordem (FOL) fornece a base teórica fundamental para especificação de propriedades de programas. <strong>FOL permite expressar propriedades complexas através de quantificadores</strong> (∀ - para todo, ∃ - existe) e predicados, oferecendo expressividade suficiente para a maioria das especificações práticas.</p>
+<p>A <strong>Lógica de Primeira Ordem</strong> (FOL) fornece a base teórica fundamental para especificação de propriedades de programas. <strong>FOL permite expressar propriedades complexas através de quantificadores</strong> (∀ - para todo, ∃ - existe) e predicados, oferecendo expressividade suficiente para a maioria das especificações práticas.</p>
 <p>A especificação de contratos de programas utiliza FOL para definir pré-condições, pós-condições e invariantes. Por exemplo, uma função de ordenação pode ter especificação:</p>
 <p><span class="math display">\[
 \forall \text{array} \in \text{int}[], \text{sorted}(\text{array}) \iff \forall i,j: (0 \le i &lt; j &lt; \text{array.length}) \implies \text{array}[i] \le \text{array}[j]
