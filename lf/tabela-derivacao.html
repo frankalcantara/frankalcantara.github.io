@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Linguagens Formais e Autômatos - 4&nbsp; Tabelas de Derivação (Análise) LL(1)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./fase1.html" rel="next">
+<link href="./first-follow.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles/custom.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parsers.html">Autômatos e Gramáticas</a></li><li class="breadcrumb-item"><a href="./tabela-derivacao.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabelas de Derivação (Análise) LL(1)</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Linguagens Formais e Autômatos</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/linguagens-formais" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Disciplina de Linguagens Formais</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Autômatos e Gramáticas</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./parsers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Parsers LL(1): O Mundo da Análise Sintática</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./first-follow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tabela-derivacao.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabelas de Derivação (Análise) LL(1)</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Projeto da Disciplina</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./referencias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referências</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sumário</h2>
+   
+  <ul>
+  <li><a href="#conflitos-na-tabela-de-derivação" id="toc-conflitos-na-tabela-de-derivação" class="nav-link active" data-scroll-target="#conflitos-na-tabela-de-derivação"><span class="header-section-number">4.1</span> Conflitos na Tabela de Derivação</a>
+  <ul class="collapse">
+  <li><a href="#conjunto-first" id="toc-conjunto-first" class="nav-link" data-scroll-target="#conjunto-first"><span class="header-section-number">4.1.1</span> Conjunto FIRST</a></li>
+  <li><a href="#conjunto-follow" id="toc-conjunto-follow" class="nav-link" data-scroll-target="#conjunto-follow"><span class="header-section-number">4.1.2</span> Conjunto FOLLOW</a></li>
+  <li><a href="#nullable" id="toc-nullable" class="nav-link" data-scroll-target="#nullable"><span class="header-section-number">4.1.3</span> Nullable</a></li>
+  <li><a href="#resumo-dos-conjuntos" id="toc-resumo-dos-conjuntos" class="nav-link" data-scroll-target="#resumo-dos-conjuntos"><span class="header-section-number">4.1.4</span> Resumo dos Conjuntos</a></li>
+  </ul></li>
+  <li><a href="#tipos-de-conflitos" id="toc-tipos-de-conflitos" class="nav-link" data-scroll-target="#tipos-de-conflitos"><span class="header-section-number">4.2</span> Tipos de Conflitos</a>
+  <ul class="collapse">
+  <li><a href="#resolução-de-conflitos" id="toc-resolução-de-conflitos" class="nav-link" data-scroll-target="#resolução-de-conflitos"><span class="header-section-number">4.2.1</span> Resolução de Conflitos</a></li>
+  <li><a href="#conjunto-first-1" id="toc-conjunto-first-1" class="nav-link" data-scroll-target="#conjunto-first-1"><span class="header-section-number">4.2.2</span> Conjunto FIRST</a></li>
+  <li><a href="#conjunto-follow-1" id="toc-conjunto-follow-1" class="nav-link" data-scroll-target="#conjunto-follow-1"><span class="header-section-number">4.2.3</span> Conjunto FOLLOW</a></li>
+  <li><a href="#nullable-1" id="toc-nullable-1" class="nav-link" data-scroll-target="#nullable-1"><span class="header-section-number">4.2.4</span> Nullable</a></li>
+  <li><a href="#resumo-dos-conjuntos-1" id="toc-resumo-dos-conjuntos-1" class="nav-link" data-scroll-target="#resumo-dos-conjuntos-1"><span class="header-section-number">4.2.5</span> Resumo dos Conjuntos</a></li>
+  </ul></li>
+  <li><a href="#pseudocódigo-para-a-criação-da-tabela-de-derivação" id="toc-pseudocódigo-para-a-criação-da-tabela-de-derivação" class="nav-link" data-scroll-target="#pseudocódigo-para-a-criação-da-tabela-de-derivação"><span class="header-section-number">4.3</span> Pseudocódigo para a criação da Tabela de Derivação</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/tabela-derivacao.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parsers.html">Autômatos e Gramáticas</a></li><li class="breadcrumb-item"><a href="./tabela-derivacao.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabelas de Derivação (Análise) LL(1)</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabelas de Derivação (Análise) LL(1)</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>A Tabela de Derivação <span class="math inline">\(LL(1)\)</span>, também chamada de tabela da análise LL(1), é uma ferramenta fundamental do funcionamento do <em>parser</em> <span class="math inline">\(LL(1)\)</span>. Esta tabela será utilizada no processo de <em>parser</em> para verificar se um determinado <em>string</em> está de acordo com a gramática da linguagem. Esta tabela será usada pelo algoritmo de <em>parser</em> para determinar qual regra de produção deverá ser aplicada, considerando o símbolo de entrada corrente e o não-terminal no topo de uma pilha. Este par de símbolos, (terminal / não-terminal) será usado como índice da tabela e determinará qual regra de produção deverá ser utilizada, ou se existe uma inconsistência entre a <em>string</em> de entrada e a gramática. Já vimos <a href="https://frankalcantara.com/parsers-ll(1)/">o que é um parser</a>, e como criar <a href="https://frankalcantara.com/first-follow/">os conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span></a>. Agora vamos usar este conhecimento para criar a Tabela de Derivação.</p>
+<p>Para construir a Tabela de Derivação <span class="math inline">\(LL(1)\)</span>, acrescentaremos um <span class="math inline">\(\$\)</span> no final da <em>string</em> de entrada para indicar o seu término e, além disso, seguiremos três regras:</p>
+<ul>
+<li>Para cada terminal <span class="math inline">\(a\)</span> em <span class="math inline">\(FIRST(\alpha)\)</span>, adicione a regra <span class="math inline">\(A \to \alpha\)</span> à célula <span class="math inline">\([A, a]\)</span> da tabela.</li>
+<li>Se <span class="math inline">\(\varepsilon\)</span> está em <span class="math inline">\(FIRST(\alpha)\)</span>, adicione a regra <span class="math inline">\(A \to \alpha\)</span> à tabela em <span class="math inline">\([A, b]\)</span> para cada <span class="math inline">\(b\)</span> em <span class="math inline">\(FOLLOW(A)\)</span>.</li>
+<li>Se $ \$ $ está em <span class="math inline">\(FOLLOW(A)\)</span>, adicione também <span class="math inline">\(A \to \alpha\)</span> à célula <span class="math inline">\([A, \\\)</span>]$.</li>
+</ul>
+<p>Podemos retornar ao um <a href="https://frankalcantara.com/first-follow/">exemplo 1 de criação do conjunto <span class="math inline">\(FIRST\)</span></a> e, a partir deste exemplo, criar a Tabela de Derivação correspondente a gramática dada naquele exemplo.</p>
+<p><strong>Exemplo 1</strong>: Considere a gramática definida pelo seguinte conjunto de regras de produção</p>
+<p><span class="math display">\[
+\begin{array}{cc}
+1. &amp; S \rightarrow aB \mid bA \\
+2. &amp; A \rightarrow c \mid d \\
+3. &amp; B \rightarrow e \mid f \\
+\end{array}
+\]</span></p>
+<p>A partir deste conjunto de regras de produção podemos definir o seguinte conjunto <span class="math inline">\(FIRST\)</span>:</p>
+<p><span class="math display">\[
+\begin{array}{ccl}
+FIRST(S) &amp; = &amp; \{a, b\} \\
+FIRST(A) &amp; = &amp; \{c, d\} \\
+FIRST(B) &amp; = &amp; \{e, f\} \\
+\end{array}
+\]</span></p>
+<p>E o conjunto <span class="math inline">\(FOLLOW\)</span> dado por:</p>
+<p><span class="math display">\[
+\begin{array}{ccl}
+FOLLOW(S) &amp; = &amp; \{\$\} \\
+FOLLOW(A) &amp; = &amp; \{\$, c, d\} \\
+FOLLOW(B) &amp; = &amp; \{\$\} \\
+\end{array}
+\]</span></p>
+<p>Com estes conjuntos podemos criar uma Tabela de Derivação se seguirmos as regras dadas acima teremos:</p>
+<ul>
+<li>Para <span class="math inline">\(S \to aB\)</span>: Como <span class="math inline">\(a\)</span> está em <span class="math inline">\(FIRST(aB)\)</span>, adicionamos <span class="math inline">\(S \to aB\)</span> em <span class="math inline">\([S, a]\)</span>.</li>
+<li>Para <span class="math inline">\(S \to bA\)</span>: Como <span class="math inline">\(b\)</span> está em <span class="math inline">\(FIRST(bA)\)</span>, adicionamos <span class="math inline">\(S \to bA\)</span> em <span class="math inline">\([S, b]\)</span>.</li>
+<li>Para <span class="math inline">\(A \to c\)</span>: Como <span class="math inline">\(c\)</span> está em <span class="math inline">\(FIRST(c)\)</span>, adicionamos <span class="math inline">\(A \to c\)</span> em <span class="math inline">\([A, c]\)</span>.</li>
+<li>Para <span class="math inline">\(A \to d\)</span>: Como <span class="math inline">\(d\)</span> está em <span class="math inline">\(FIRST(d)\)</span>, adicionamos <span class="math inline">\(A \to d\)</span> em <span class="math inline">\([A, d]\)</span>.</li>
+<li>Para <span class="math inline">\(B \to e\)</span>: Como <span class="math inline">\(e\)</span> está em <span class="math inline">\(FIRST(e)\)</span>, adicionamos <span class="math inline">\(B \to e\)</span> em <span class="math inline">\([B, e]\)</span>.</li>
+<li>Para <span class="math inline">\(B \to f\)</span>: Como <span class="math inline">\(f\)</span> está em <span class="math inline">\(FIRST(f)\)</span>, adicionamos <span class="math inline">\(B \to f\)</span> em <span class="math inline">\([B, f]\)</span>.</li>
+</ul>
+<p>O que permite criar a seguinte Tabela de Derivação:</p>
+<table class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>não-terminal</th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>d</th>
+<th>e</th>
+<th>f</th>
+<th>$</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>S</td>
+<td><span class="math inline">\(S \to aB\)</span></td>
+<td><span class="math inline">\(S \to bA\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>A</td>
+<td></td>
+<td></td>
+<td><span class="math inline">\(A \to c\)</span></td>
+<td><span class="math inline">\(A \to d\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>B</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><span class="math inline">\(B \to e\)</span></td>
+<td><span class="math inline">\(B \to f\)</span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Este exemplo é perfeito, para cada par terminal / não-terminal existe apenas uma regra de produção. Infelizmente, quando estamos construindo linguagens livres de contexto, este não é o cenário mais comum.</p>
+<section id="conflitos-na-tabela-de-derivação" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="conflitos-na-tabela-de-derivação"><span class="header-section-number">4.1</span> Conflitos na Tabela de Derivação</h2>
+<p>Conflitos na Tabela de Derivação <span class="math inline">\(LL(1)\)</span> ocorrem quando há mais de uma regra de produção associada a um mesmo par indicador (terminal, não-terminal). Esta ambiguidade significa que, ao encontrar esse par, o <em>parser</em> <span class="math inline">\(LL(1)\)</span> não conseguirá determinar, de forma única e inequívoca, qual regra deverá aplicar a um determinado símbolo de entrada, tornando a gramática ambígua e inadequada para uso com <em>parsers</em> <span class="math inline">\(LL(1)\)</span>.</p>
+<p><strong>Exemplo 2</strong>: o conflito. Observe que gramática a seguir foi criada para criar um conflito na Tabela de Derivação. Antes de nos preocuparmos com os tipos de conflito, e como solucioná-los, vamos rever todo o processo de criação de uma Tabela de Derivação para entender o problema.</p>
+<p><span class="math display">\[
+\begin{aligned}
+1. &amp;\ E \rightarrow T + E \ \vert  \ T \\
+2. &amp;\ T \rightarrow int \ \vert  \ (E)
+\end{aligned}
+\]</span></p>
+<section id="conjunto-first" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="conjunto-first"><span class="header-section-number">4.1.1</span> Conjunto FIRST</h3>
+<ol type="1">
+<li><p><strong>Para o não-terminal E:</strong></p>
+<ul>
+<li><span class="math inline">\(E \rightarrow T + E\)</span>: o primeiro símbolo é <span class="math inline">\(T\)</span>. Portanto, incluímos <span class="math inline">\(FIRST(T)\)</span> em <span class="math inline">\(FIRST(E)\)</span>.</li>
+<li><span class="math inline">\(E \rightarrow T\)</span>: o primeiro símbolo é <span class="math inline">\(T\)</span>. Portanto, incluímos <span class="math inline">\(FIRST(T)\)</span> em <span class="math inline">\(FIRST(E)\)</span>.</li>
+</ul></li>
+<li><p><strong>Para o não-terminal T:</strong></p>
+<ul>
+<li><span class="math inline">\(T \rightarrow int\)</span>: o primeiro símbolo é <span class="math inline">\(int\)</span>. Portanto, <span class="math inline">\(FIRST(T)\)</span> inclui <span class="math inline">\(int\)</span>.</li>
+<li><span class="math inline">\(T \rightarrow (E)\)</span>: o primeiro símbolo é $( $. Portanto, <span class="math inline">\(FIRST(T)\)</span> inclui $( $.</li>
+</ul></li>
+</ol>
+<p>Assim, temos:</p>
+<p><span class="math display">\[
+\begin{aligned}
+FIRST(T) &amp;= \{ int, ( \} \\
+FIRST(E) &amp;= FIRST(T) = \{ int, ( \}
+\end{aligned}
+\]</span></p>
+</section>
+<section id="conjunto-follow" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="conjunto-follow"><span class="header-section-number">4.1.2</span> Conjunto FOLLOW</h3>
+<ol type="1">
+<li><strong>Para o símbolo inicial E:</strong>
+<ul>
+<li><span class="math inline">\(FOLLOW(E)\)</span> inclui $.</li>
+</ul></li>
+<li><strong>Para as produções de E:</strong>
+<ul>
+<li><span class="math inline">\(E \rightarrow T + E\)</span>:
+<ul>
+<li>o símbolo <span class="math inline">\(T\)</span> pode ser seguido por <span class="math inline">\(+\)</span>, então <span class="math inline">\(+\)</span> está em <span class="math inline">\(FOLLOW(T)\)</span>.</li>
+<li>o símbolo <span class="math inline">\(E\)</span> é o último da produção, então <span class="math inline">\(FOLLOW(E)\)</span> inclui <span class="math inline">\(FOLLOW(E)\)</span>.</li>
+</ul></li>
+<li><span class="math inline">\(E \rightarrow T\)</span>: o símbolo <span class="math inline">\(T\)</span> é o último da produção, então <span class="math inline">\(FOLLOW(T)\)</span> inclui <span class="math inline">\(FOLLOW(E)\)</span>.</li>
+</ul></li>
+<li><strong>Para as produções de T:</strong>
+<ul>
+<li><span class="math inline">\(T \rightarrow int\)</span>: <span class="math inline">\(int\)</span> é um terminal, não influencia <span class="math inline">\(FOLLOW\)</span>.</li>
+<li><span class="math inline">\(T \rightarrow (E)\)</span>: <span class="math inline">\(E\)</span> pode ser seguido por <span class="math inline">\()\)</span>, então <span class="math inline">\(FOLLOW(E)\)</span> inclui <span class="math inline">\()\)</span>.</li>
+</ul></li>
+</ol>
+<p>Assim, teremos:</p>
+<p><span class="math display">\[
+\begin{aligned}
+FOLLOW(E) &amp;= \{ \$, +, ) \} \\
+FOLLOW(T) &amp;= \{ +, \$, ) \}
+\end{aligned}
+\]</span></p>
+</section>
+<section id="nullable" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="nullable"><span class="header-section-number">4.1.3</span> Nullable</h3>
+<p>Para determinar se algum não-terminal é <em>nullable</em>, verificamos se ele pode derivar a string vazia <span class="math inline">\(\epsilon\)</span>.</p>
+<ol type="1">
+<li><strong>Para E:</strong>
+<ul>
+<li><span class="math inline">\(E \rightarrow T + E\)</span>: <span class="math inline">\(T\)</span> não é <em>nullable</em>, portanto, <span class="math inline">\(E\)</span> não é <em>nullable</em> a partir desta produção.</li>
+<li><span class="math inline">\(E \rightarrow T\)</span>: <span class="math inline">\(T\)</span> não é <em>nullable</em>, portanto, <span class="math inline">\(E\)</span> não é <em>nullable</em>.</li>
+</ul></li>
+<li><strong>Para T:</strong>
+<ul>
+<li><span class="math inline">\(T \rightarrow int\)</span>: <span class="math inline">\(int\)</span> não é <em>nullable</em>.</li>
+<li><span class="math inline">\(T \rightarrow (E)\)</span>: <span class="math inline">\(E\)</span> não é <em>nullable</em> e <span class="math inline">\((\)</span> é um terminal.</li>
+</ul></li>
+</ol>
+<p>Ou seja, nenhum dos não-terminais é <em>nullable</em>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+Nullable(E) &amp;= false \\
+Nullable(T) &amp;= false
+\end{aligned}
+\]</span></p>
+</section>
+<section id="resumo-dos-conjuntos" class="level3" data-number="4.1.4">
+<h3 data-number="4.1.4" class="anchored" data-anchor-id="resumo-dos-conjuntos"><span class="header-section-number">4.1.4</span> Resumo dos Conjuntos</h3>
+<p><span class="math display">\[
+\begin{aligned}
+FIRST(E) &amp;= \{ int, ( \} \\
+FIRST(T) &amp;= \{ int, ( \} \\
+FOLLOW(E) &amp;= \{ \$, +, ) \} \\
+FOLLOW(T) &amp;= \{ +, \$, ) \} \\
+Nullable(E) &amp;= false \\
+Nullable(T) &amp;= false
+\end{aligned}
+\]</span></p>
+<p>O que permite gerar a seguinte Tabela de Derivação:</p>
+<table class="table">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>não-terminal</th>
+<th>int</th>
+<th>(</th>
+<th>+</th>
+<th>$</th>
+<th>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>E</td>
+<td><span class="math inline">\(E \to T + E\)</span><br><span class="math inline">\(E \to T\)</span></td>
+<td><span class="math inline">\(E \to T + E\)</span><br><span class="math inline">\(E \to T\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>T</td>
+<td><span class="math inline">\(T \to int\)</span></td>
+<td><span class="math inline">\(T \to (E)\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Nesta tabela podemos ver um conflito explícito. O não-terminal <span class="math inline">\(E\)</span> possui duas produções para os símbolos <span class="math inline">\(int\)</span> e <span class="math inline">\((\)</span>.</p>
+<p>Sempre que na criação de Tabelas de Derivação existir um conflito estaremos gerando ambiguidades na derivação. A gramática é ambígua, sempre que uma sentença puder ser derivada de duas ou mais formas diferentes, gerando árvores sintáticas diferentes. Por exemplo, na gramática do <strong>Exemplo 2</strong>, a sentença <span class="math inline">\(int + int\)</span> pode ser derivada tanto como <span class="math inline">\(E → T → int\)</span> seguido de <span class="math inline">\(E → T + E → int + int\)</span> quanto como <span class="math inline">\(E → T + E → T + T → int + int\)</span>.</p>
+</section>
+</section>
+<section id="tipos-de-conflitos" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="tipos-de-conflitos"><span class="header-section-number">4.2</span> Tipos de Conflitos</h2>
+<p>Conflitos na tabela <span class="math inline">\(LL(1)\)</span> podem ser classificados em dois tipos principais:</p>
+<ol type="1">
+<li><p><strong>Conflito <span class="math inline">\(FIRST\)</span>/<span class="math inline">\(FIRST\)</span></strong>: ocorre quando o conjunto <span class="math inline">\(FIRST\)</span> de duas ou mais produções de um mesmo não-terminal possui um terminal em comum. Na gramática do <strong>Exemplo 2</strong>, as produções <span class="math inline">\(E \to T + E\)</span> e <span class="math inline">\(E \to T\)</span> possuem os terminais <span class="math inline">\(int\)</span> e <span class="math inline">\((\)</span> em seus conjuntos <span class="math inline">\(FIRST\)</span>. Ao encontrar <span class="math inline">\(int\)</span> ou <span class="math inline">\((\)</span> na entrada, o <em>parser</em> não sabe se deve aplicar a regra que deriva uma expressão com um operador <span class="math inline">\(+\)</span> ou a regra que deriva um termo. Neste momento do processo de <em>parsing</em> determinismo saiu pela janela e o <em>parser</em> <span class="math inline">\(LL(1)\)</span> é inútil.</p></li>
+<li><p><strong>Conflito <span class="math inline">\(FIRST\)</span>/<span class="math inline">\(FOLLOW\)</span></strong>: ocorre quando uma produção tem <span class="math inline">\(\varepsilon\)</span> (a <em>string</em> vazia) em seu conjunto <span class="math inline">\(FIRST\)</span> e o conjunto <span class="math inline">\(FOLLOW\)</span> do não-terminal da produção possui um terminal em comum com o <span class="math inline">\(FIRST\)</span> de outra produção do mesmo não-terminal. Por exemplo, na gramática do <strong>Exemplo 2</strong>, se <span class="math inline">\(E \rightarrow \varepsilon\)</span> fosse uma produção e o conjunto <span class="math inline">\(FOLLOW(E)\)</span> contivesse <span class="math inline">\(+\)</span>, que também está no <span class="math inline">\(FIRST\)</span> da produção <span class="math inline">\(E \rightarrow T + E\)</span>, ao encontrar o fim de uma expressão (representado por um símbolo em <span class="math inline">\(FOLLOW(E)\)</span>), o <em>parser</em> não saberia se deve aplicar a regra que deriva apenas um termo ou a regra que deriva uma expressão com um operador <span class="math inline">\(+\)</span>.</p></li>
+</ol>
+<section id="resolução-de-conflitos" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="resolução-de-conflitos"><span class="header-section-number">4.2.1</span> Resolução de Conflitos</h3>
+<p>Conflitos na tabela <span class="math inline">\(LL(1)\)</span> podem ser resolvidos das seguintes formas:</p>
+<ol type="1">
+<li><strong>Refatoração da gramática</strong>: A gramática pode ser reescrita para eliminar ambiguidades e recursões à esquerda, evitando assim os conflitos.</li>
+<li><strong>Fatoração à esquerda</strong>: Produções com prefixos comuns podem ser fatoradas para que a decisão entre elas possa ser tomada com base em um único símbolo de <em>lookahead</em>.</li>
+<li><strong>Uso de analisadores mais poderosos</strong>: Se os conflitos não puderem ser resolvidos na gramática, pode ser necessário usar um analisador sintático mais poderoso, como um analisador <span class="math inline">\(LR(1)\)</span> ou <span class="math inline">\(LALR(1)\)</span>, que conseguem lidar com gramáticas mais complexas.</li>
+</ol>
+<p>As soluções 1 e 2 implicam na modificação da sua gramática, o que ocorre com frequência quando começamos do zero. A solução 3, em linguagens complexas, pode ser a solução adequada, mas implica em mudar de algoritmo de <em>parser</em></p>
+<p><strong>Exemplo 3</strong>: resolução de conflito. No exemplo da gramática anterior, o conflito <span class="math inline">\(FIRST\)</span>/<span class="math inline">\(FIRST\)</span> pode ser resolvido fatorando as produções de <span class="math inline">\(E\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+1. &amp;\ E \rightarrow T E' \\
+2. &amp;\ E' \rightarrow + E \ \vert  \ \epsilon \\
+3. &amp;\ T \rightarrow int \ \vert  \ (E)
+\end{aligned}
+\]</span></p>
+<p>Se calcularmos os conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span> novamente, teremos:</p>
+</section>
+<section id="conjunto-first-1" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="conjunto-first-1"><span class="header-section-number">4.2.2</span> Conjunto FIRST</h3>
+<ol type="1">
+<li><strong>Para o não-terminal E:</strong>
+<ul>
+<li><span class="math inline">\(E \rightarrow T E'\)</span>: o primeiro símbolo é <span class="math inline">\(T\)</span>. Portanto, incluímos <span class="math inline">\(FIRST(T)\)</span> em <span class="math inline">\(FIRST(E)\)</span>.</li>
+</ul></li>
+<li><strong>Para o não-terminal E’:</strong>
+<ul>
+<li><span class="math inline">\(E' \rightarrow + E\)</span>: o primeiro símbolo é <span class="math inline">\(+\)</span>. Portanto, <span class="math inline">\(FIRST(E')\)</span> inclui <span class="math inline">\(+\)</span>.</li>
+<li><span class="math inline">\(E' \rightarrow \epsilon\)</span>: incluímos <span class="math inline">\(\epsilon\)</span> em <span class="math inline">\(FIRST(E')\)</span>.</li>
+</ul></li>
+<li><strong>Para o não-terminal T:</strong>
+<ul>
+<li><span class="math inline">\(T \rightarrow int\)</span>: o primeiro símbolo é <span class="math inline">\(int\)</span>. Portanto, <span class="math inline">\(FIRST(T)\)</span> inclui <span class="math inline">\(int\)</span>.</li>
+<li><span class="math inline">\(T \rightarrow (E)\)</span>: o primeiro símbolo é $( $. Portanto, <span class="math inline">\(FIRST(T)\)</span> inclui $( $.</li>
+</ul></li>
+</ol>
+<p>Assim, teremos:</p>
+<p><span class="math display">\[
+\begin{aligned}
+FIRST(T) &amp;= \{ int, ( \} \\
+FIRST(E') &amp;= \{ +, \epsilon \} \\
+FIRST(E) &amp;= FIRST(T) = \{ int, ( \}
+\end{aligned}
+\]</span></p>
+</section>
+<section id="conjunto-follow-1" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="conjunto-follow-1"><span class="header-section-number">4.2.3</span> Conjunto FOLLOW</h3>
+<ol type="1">
+<li><strong>Para o símbolo inicial E:</strong>
+<ul>
+<li><span class="math inline">\(FOLLOW(E)\)</span> inclui $.</li>
+</ul></li>
+<li><strong>Para as produções de E:</strong>
+<ul>
+<li><span class="math inline">\(E \rightarrow T E'\)</span>:
+<ul>
+<li>O símbolo <span class="math inline">\(E'\)</span> pode ser seguido por <span class="math inline">\(FOLLOW(E)\)</span>.</li>
+<li>Então, <span class="math inline">\(FOLLOW(E')\)</span> inclui <span class="math inline">\(FOLLOW(E)\)</span>.</li>
+</ul></li>
+</ul></li>
+<li><strong>Para as produções de E’:</strong>
+<ul>
+<li><span class="math inline">\(E' \rightarrow + E\)</span>:
+<ul>
+<li>O símbolo <span class="math inline">\(E\)</span> pode ser seguido por <span class="math inline">\(FOLLOW(E')\)</span>.</li>
+<li>Então, <span class="math inline">\(FOLLOW(E)\)</span> inclui <span class="math inline">\(FOLLOW(E')\)</span>.</li>
+</ul></li>
+<li><span class="math inline">\(E' \rightarrow \epsilon\)</span>: não há efeito em <span class="math inline">\(FOLLOW\)</span>.</li>
+</ul></li>
+<li><strong>Para as produções de T:</strong>
+<ul>
+<li><span class="math inline">\(T \rightarrow int\)</span>: <span class="math inline">\(int\)</span> é um terminal, não influencia <span class="math inline">\(FOLLOW\)</span>.</li>
+<li><span class="math inline">\(T \rightarrow (E)\)</span>: <span class="math inline">\(E\)</span> pode ser seguido por <span class="math inline">\()\)</span>, então <span class="math inline">\(FOLLOW(E)\)</span> inclui <span class="math inline">\()\)</span>.</li>
+</ul></li>
+</ol>
+<p>Assim, teremos:</p>
+<p><span class="math display">\[
+\begin{aligned}
+FOLLOW(E) &amp;= \{ \$, ) \} \\
+FOLLOW(E') &amp;= \{ \$, ) \} \\
+FOLLOW(T) &amp;= \{ +, \$, ) \}
+\end{aligned}
+\]</span></p>
+</section>
+<section id="nullable-1" class="level3" data-number="4.2.4">
+<h3 data-number="4.2.4" class="anchored" data-anchor-id="nullable-1"><span class="header-section-number">4.2.4</span> Nullable</h3>
+<p>Para determinar se algum não-terminal é <em>nullable</em>, verificamos se ele pode derivar a string vazia <span class="math inline">\(\epsilon\)</span>.</p>
+<ol type="1">
+<li><strong>Para E:</strong>
+<ul>
+<li><span class="math inline">\(E \rightarrow T E'\)</span>: <span class="math inline">\(T\)</span> não é <em>nullable</em>, portanto, <span class="math inline">\(E\)</span> não é <em>nullable</em>.</li>
+</ul></li>
+<li><strong>Para E’:</strong>
+<ul>
+<li><span class="math inline">\(E' \rightarrow + E\)</span>: <span class="math inline">\(+\)</span> é um terminal, portanto, não é <em>nullable</em>.</li>
+<li><span class="math inline">\(E' \rightarrow \epsilon\)</span>: <span class="math inline">\(E'\)</span> é <em>nullable</em>.</li>
+</ul></li>
+<li><strong>Para T:</strong>
+<ul>
+<li><span class="math inline">\(T \rightarrow int\)</span>: <span class="math inline">\(int\)</span> não é <em>nullable</em>.</li>
+<li><span class="math inline">\(T \rightarrow (E)\)</span>: $( $ é um terminal, portanto, não é <em>nullable</em>.</li>
+</ul></li>
+</ol>
+<p>Assim, teremos:</p>
+<p><span class="math display">\[
+\begin{aligned}
+Nullable(E) &amp;= false \\
+Nullable(E') &amp;= true \\
+Nullable(T) &amp;= false
+\end{aligned}
+\]</span></p>
+</section>
+<section id="resumo-dos-conjuntos-1" class="level3" data-number="4.2.5">
+<h3 data-number="4.2.5" class="anchored" data-anchor-id="resumo-dos-conjuntos-1"><span class="header-section-number">4.2.5</span> Resumo dos Conjuntos</h3>
+<p><span class="math display">\[
+\begin{aligned}
+FIRST(E) &amp;= \{ int, ( \} \\
+FIRST(E') &amp;= \{ +, \epsilon \} \\
+FIRST(T) &amp;= \{ int, ( \} \\
+FOLLOW(E) &amp;= \{ \$, ) \} \\
+FOLLOW(E') &amp;= \{ \$, ) \} \\
+FOLLOW(T) &amp;= \{ +, \$, ) \} \\
+Nullable(E) &amp;= false \\
+Nullable(E') &amp;= true \\
+Nullable(T) &amp;= false
+\end{aligned}
+\]</span></p>
+<p>O que permite gerar a seguinte Tabela de Derivação:</p>
+<table class="table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>não-terminal</th>
+<th>int</th>
+<th>(</th>
+<th>+</th>
+<th>$</th>
+<th>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>E</td>
+<td><span class="math inline">\(E \to TE'\)</span></td>
+<td><span class="math inline">\(E \to TE'\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>E’</td>
+<td></td>
+<td></td>
+<td><span class="math inline">\(E' \to +E\)</span></td>
+<td><span class="math inline">\(E' \to \varepsilon\)</span></td>
+<td><span class="math inline">\(E' \to \varepsilon\)</span></td>
+</tr>
+<tr class="odd">
+<td>T</td>
+<td><span class="math inline">\(T \to int\)</span></td>
+<td><span class="math inline">\(T \to (E)\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Agora, a decisão entre derivar uma expressão com um operador <span class="math inline">\(+\)</span> ou apenas um termo pode ser tomada com base no próximo símbolo da entrada: se for <span class="math inline">\(+\)</span>, aplica-se a regra <span class="math inline">\(E' \rightarrow + E\)</span>; caso contrário, aplica-se a regra <span class="math inline">\(E' \rightarrow \varepsilon\)</span>.</p>
+<p>Assim como fiz nos artigos anteriores, vou sugerir um pseudocódigo, um tanto inocente, para a criação de tabelas de derivação. Acredito que, com um pouco de cuidado, depois que a amável leitora dominar esta técnica possa criar um pseudocódigo mais eficiente. A fé move montanhas.</p>
+</section>
+</section>
+<section id="pseudocódigo-para-a-criação-da-tabela-de-derivação" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="pseudocódigo-para-a-criação-da-tabela-de-derivação"><span class="header-section-number">4.3</span> Pseudocódigo para a criação da Tabela de Derivação</h2>
+<pre class="shell"><code>**Entrada:**
+- Conjuntos de produções da gramática: `Productions`
+- Conjuntos FIRST: `First`
+- Conjuntos FOLLOW: `Follow`
+- Conjuntos Nullable: `Nullable`
+- Conjunto de não-terminais: `NonTerminals`
+- Conjunto de terminais: `Terminals`
+
+**Saída:**
+- Tabela de Derivação LL(1): `ParsingTable`
+
+# Inicialização da Tabela de Derivação LL(1)
+ParsingTable = {A: {a: None for a in Terminals + ['$']} for A in NonTerminals}
+
+# Para cada produção A → α
+for A, productions in Productions.items():
+    for α in productions:
+        # Para cada terminal a em FIRST(α)
+        for a in First[α]:
+            if a != 'ε':
+                # Adicionar a produção A → α na célula [A, a]
+                if ParsingTable[A][a] is None:
+                    ParsingTable[A][a] = A + " → " + α
+                else:
+                    raise ConflictError(f"Conflito na tabela para [{A}, {a}]")
+
+        # Se ε está em FIRST(α)
+        if 'ε' in First[α]:
+            # Para cada b em FOLLOW(A)
+            for b in Follow[A]:
+                # Adicionar a produção A → α na célula [A, b]
+                if ParsingTable[A][b] is None:
+                    ParsingTable[A][b] = A + " → " + α
+                else:
+                    raise ConflictError(f"Conflito na tabela para [{A}, {b}]")
+
+            # Se $ está em FOLLOW(A)
+            if '$' in Follow[A]:
+                # Adicionar a produção A → α na célula [A, $]
+                if ParsingTable[A]['$'] is None:
+                    ParsingTable[A]['$'] = A + " → " + α
+                else:
+                    raise ConflictError(f"Conflito na tabela para [{A}, $]")
+
+# Função para calcular FIRST de uma string
+def compute_first(α):
+    if α == '':
+        return {'ε'}
+    first_set = set()
+    for symbol in α:
+        first_set.update(First[symbol] - {'ε'})
+        if 'ε' not in First[symbol]:
+            break
+    else:
+        first_set.add('ε')
+    return first_set</code></pre>
+<p>Caramba! Só notei agora, eu praticamente escrevo em python quando estou fazendo pseudocódigos. Isto deve ser mal, muito mal… Acho que vou ficar sem sorvete hoje. Em fim, este código pode ser implementado em python por:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Conjuntos de produções</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>productions <span class="op">=</span> {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'E'</span>: [<span class="st">'T+E'</span>, <span class="st">'T'</span>],</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'T'</span>: [<span class="st">'int'</span>, <span class="st">'(E)'</span>]</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Conjuntos FIRST</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>first <span class="op">=</span> {</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'E'</span>: {<span class="st">'int'</span>, <span class="st">'('</span>},</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'T'</span>: {<span class="st">'int'</span>, <span class="st">'('</span>},</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'T+E'</span>: {<span class="st">'int'</span>, <span class="st">'('</span>},</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'int'</span>: {<span class="st">'int'</span>},</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'(E)'</span>: {<span class="st">'('</span>}</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Conjuntos FOLLOW</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>follow <span class="op">=</span> {</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">'E'</span>: {<span class="st">'$'</span>, <span class="st">')'</span>},</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">'T'</span>: {<span class="st">'+'</span>, <span class="st">'$'</span>, <span class="st">')'</span>}</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Conjuntos Nullable</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>nullable <span class="op">=</span> {</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">'E'</span>: <span class="va">False</span>,</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">'T'</span>: <span class="va">False</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Conjunto de não-terminais</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>non_terminals <span class="op">=</span> [<span class="st">'E'</span>, <span class="st">'T'</span>]</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Conjunto de terminais</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>terminals <span class="op">=</span> [<span class="st">'int'</span>, <span class="st">'('</span>, <span class="st">')'</span>, <span class="st">'+'</span>, <span class="st">'$'</span>]</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Inicialização da Tabela de Derivação LL(1)</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>parsing_table <span class="op">=</span> {A: {a: <span class="va">None</span> <span class="cf">for</span> a <span class="kw">in</span> terminals} <span class="cf">for</span> A <span class="kw">in</span> non_terminals}</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Função para calcular FIRST de uma string</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_first(α):</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> α <span class="op">==</span> <span class="st">''</span>:</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> {<span class="st">'ε'</span>}</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    first_set <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> i <span class="op">&lt;</span> <span class="bu">len</span>(α):</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>        symbol <span class="op">=</span> α[i]</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> symbol <span class="kw">in</span> first:</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>            first_set.update(first[symbol] <span class="op">-</span> {<span class="st">'ε'</span>})</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="st">'ε'</span> <span class="kw">not</span> <span class="kw">in</span> first[symbol]:</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Adiciona todo o terminal se não for um não-terminal</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>            terminal <span class="op">=</span> <span class="st">''</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span> i <span class="op">&lt;</span> <span class="bu">len</span>(α) <span class="kw">and</span> (α[i].isalnum() <span class="kw">or</span> α[i] <span class="kw">in</span> [<span class="st">'_'</span>, <span class="st">'+'</span>, <span class="st">'('</span>, <span class="st">')'</span>]):</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>                terminal <span class="op">+=</span> α[i]</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>                i <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>            first_set.add(terminal)</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> terminal <span class="kw">in</span> first <span class="kw">and</span> <span class="st">'ε'</span> <span class="kw">in</span> first[terminal]:</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>                <span class="cf">continue</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>        i <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>        first_set.add(<span class="st">'ε'</span>)</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> first_set</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="co"># Preenchimento da Tabela de Derivação</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> A <span class="kw">in</span> productions:</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> α <span class="kw">in</span> productions[A]:</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>        first_α <span class="op">=</span> compute_first(α)</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Para cada terminal em FIRST(α)</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> a <span class="kw">in</span> first_α:</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> a <span class="op">!=</span> <span class="st">'ε'</span>:</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> a <span class="kw">in</span> parsing_table[A]:</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> parsing_table[A][a] <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>                        parsing_table[A][a] <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>A<span class="sc">}</span><span class="ss"> → </span><span class="sc">{α}</span><span class="ss">"</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">else</span>:</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>                        <span class="bu">print</span>(<span class="ss">f"Conflito na tabela para [</span><span class="sc">{</span>A<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>a<span class="sc">}</span><span class="ss">]"</span>)</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(<span class="ss">f"Terminal </span><span class="sc">{</span>a<span class="sc">}</span><span class="ss"> não reconhecido na tabela"</span>)</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Se ε está em FIRST(α)</span></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">'ε'</span> <span class="kw">in</span> first_α:</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> b <span class="kw">in</span> follow[A]:</span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> b <span class="kw">in</span> parsing_table[A]:</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> parsing_table[A][b] <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>                        parsing_table[A][b] <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>A<span class="sc">}</span><span class="ss"> → </span><span class="sc">{α}</span><span class="ss">"</span></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">else</span>:</span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>                        <span class="bu">print</span>(<span class="ss">f"Conflito na tabela para [</span><span class="sc">{</span>A<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">]"</span>)</span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(<span class="ss">f"Terminal </span><span class="sc">{</span>b<span class="sc">}</span><span class="ss"> não reconhecido na tabela"</span>)</span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a><span class="co"># Exibir a Tabela de Derivação de forma legível</span></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a><span class="co"># Converte os valores None para strings vazias</span></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>formatted_parsing_table <span class="op">=</span> {A: {a: (parsing_table[A][a] <span class="cf">if</span> parsing_table[A][a] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="cf">else</span> <span class="st">''</span>) <span class="cf">for</span> a <span class="kw">in</span> terminals} <span class="cf">for</span> A <span class="kw">in</span> non_terminals}</span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a><span class="co"># Cria o DataFrame</span></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(formatted_parsing_table).T</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a><span class="co"># Reordena as colunas para incluir o símbolo de final de string '$'</span></span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[terminals]</span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcula a largura máxima de cada coluna (incluindo o cabeçalho)</span></span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>col_widths <span class="op">=</span> {col: <span class="bu">max</span>(df[col].astype(<span class="bu">str</span>).<span class="bu">str</span>.<span class="bu">len</span>().<span class="bu">max</span>(), <span class="bu">len</span>(col)) <span class="cf">for</span> col <span class="kw">in</span> df.columns}</span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a><span class="co"># Estiliza o DataFrame para uma melhor visualização com bordas, linhas zebradas e ajuste de largura</span></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>styled_df <span class="op">=</span> df.style.set_properties(<span class="op">**</span>{<span class="st">'text-align'</span>: <span class="st">'center'</span>, <span class="st">'border'</span>: <span class="st">'1px solid black'</span>}).set_table_styles(</span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>    [<span class="bu">dict</span>(selector<span class="op">=</span><span class="st">'th'</span>, props<span class="op">=</span>[(<span class="st">'text-align'</span>, <span class="st">'center'</span>), (<span class="st">'border'</span>, <span class="st">'1px solid black'</span>)])]</span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>).set_caption(<span class="st">"Tabela de Parsing LL(1)"</span>)</span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a><span class="co"># Define o estilo das células vazias como cinza claro</span></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>styled_df.set_properties(subset<span class="op">=</span>pd.IndexSlice[:, :], <span class="op">**</span>{<span class="st">'background-color'</span>: <span class="st">'lightgrey'</span> <span class="cf">if</span> v <span class="op">==</span> <span class="st">''</span> <span class="cf">else</span> <span class="st">''</span> <span class="cf">for</span> v <span class="kw">in</span> df.values.flatten()})</span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a><span class="co"># Adiciona o estilo zebrado</span></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>styled_df.set_table_styles([</span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>    {<span class="st">'selector'</span>: <span class="st">'tbody tr:nth-child(even)'</span>, <span class="st">'props'</span>: [(<span class="st">'background-color'</span>, <span class="st">'lightblue'</span>)]},</span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>    {<span class="st">'selector'</span>: <span class="st">'tbody tr:nth-child(odd)'</span>, <span class="st">'props'</span>: [(<span class="st">'background-color'</span>, <span class="st">'white'</span>)]}</span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajusta a largura das colunas</span></span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>styled_df.set_properties(subset<span class="op">=</span>pd.IndexSlice[:, :], <span class="op">**</span>{<span class="ss">f'width'</span>: <span class="ss">f'</span><span class="sc">{</span>col_widths[col]<span class="op">*</span><span class="dv">8</span><span class="sc">}</span><span class="ss">px'</span> <span class="cf">for</span> col <span class="kw">in</span> df.columns})</span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a>display(styled_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./first-follow.html" class="pagination-link" aria-label="Conjuntos FIRST e FOLLOW">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./fase1.html" class="pagination-link" aria-label="Fase 1 - Projeto Prático">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025 Frank de Alcantara</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/tabela-derivacao.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
