@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Jornada da Programação Lógica: Do Imperativo ao Declarativo</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        /* Variáveis CSS Comuns */
+        :root {
+            --copper-50: #fdf8f6;
+            --copper-100: #f2e8e5;
+            --copper-200: #eaddd7;
+            --copper-300: #e0cec7;
+            --copper-400: #d2bab0;
+            --copper-500: #bfa094;
+            --copper-600: #a18072;
+            --copper-700: #977669;
+            --copper-800: #846358;
+            --copper-900: #43302b;
+            --sage-50: #f6f7f6;
+            --sage-100: #e3e7e3;
+            --sage-200: #c7d0c7;
+            --sage-300: #a3b2a3;
+            --sage-400: #7a8f7a;
+            --sage-500: #5d7360;
+            --sage-600: #495a4c;
+            --sage-700: #3d4a3f;
+            --sage-800: #343d36;
+            --sage-900: #2d342f;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Text', serif;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(93, 115, 96, 0.9) 0%, rgba(191, 160, 148, 0.8) 100%);
+        }
+
+        .toc-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+
+        @media (max-width: 1024px) {
+            .toc-fixed {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            .toc-fixed.open {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 1.5rem;
+            height: 60vh;
+        }
+
+        .bento-main {
+            grid-row: 1 / -1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-side-top,
+        .bento-side-bottom {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hover-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .hover-bg-light:hover {
+            background-color: var(--sage-50);
+        }
+
+        section[id] {
+            scroll-margin-top: 80px;
+        }
+
+        .stat-highlight {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .paradigm-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .paradigm-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .logic-component {
+            border-left: 4px solid;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .component-proposicional { border-left-color: #3b82f6; }
+        .component-predicativa { border-left-color: #10b981; }
+        .component-inferencia { border-left-color: #0284c7; }
+        .component-horn { border-left-color: #8b5cf6; }
+
+        .formula-box {
+            background: linear-gradient(135deg, var(--sage-50), var(--copper-50));
+            border: 1px solid var(--sage-200);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.1rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+            padding-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--sage-600);
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--sage-600);
+        }
+
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 1.5rem;
+            width: 2px;
+            height: calc(100% - 1rem);
+            background: var(--sage-300);
+        }
+
+        .table-custom {
+            margin-bottom: 0;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .table-custom th,
+        .table-custom td {
+            border: 1px solid #dee2e6;
+            padding: 0.75rem;
+            vertical-align: top;
+        }
+
+        .table-custom thead th {
+            background: linear-gradient(135deg, var(--sage-600), var(--copper-600));
+            color: white;
+            font-weight: bold;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .table-custom tbody tr:nth-child(odd) {
+            background-color: white;
+        }
+
+        .table-custom tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .table-custom tbody tr:hover {
+            background-color: var(--copper-100);
+            transition: background-color 0.2s ease;
+        }
+
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            .bento-main {
+                grid-row: auto;
+            }
+            
+            .stat-highlight {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Table of Contents -->
+    <nav class="toc-fixed" id="toc">
+        <div class="mb-4">
+            <h3 class="fs-5 fw-bold text-dark mb-3">Sumário</h3>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="#introducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">1. Introdução</a></li>
+                <li class="mb-2"><a href="#paradigmas" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">2. Paradigmas de Programação</a></li>
+                <li class="mb-2"><a href="#logica-primeira-ordem" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Lógica de Primeira Ordem</a></li>
+                <li class="mb-2"><a href="#inferencia-deducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4. Inferência e Dedução</a></li>
+                <li class="mb-2"><a href="#clausulas-horn" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5. Cláusulas de Horn</a></li>
+                <li class="mb-2"><a href="#historia" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6. História e Evolução</a></li>
+            </ul>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Componentes Lógicos</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-primary-subtle rounded"><i class="fas fa-puzzle-piece me-2 text-primary"></i><small class="text-primary fw-medium">Proposicional</small></div>
+                <div class="p-2 bg-success-subtle rounded"><i class="fas fa-cogs me-2 text-success"></i><small class="text-success fw-medium">Predicativa</small></div>
+                <div class="p-2" style="background-color: #dbeafe;"><i class="fas fa-brain me-2" style="color: #0284c7;"></i><small style="color: #0284c7;" class="fw-medium">Inferência</small></div>
+                <div class="p-2 bg-secondary-subtle rounded"><i class="fas fa-link me-2 text-secondary"></i><small class="text-secondary fw-medium">Horn</small></div>
+            </div>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Referências Históricas</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-light rounded">
+                    <small class="fw-medium text-dark">Gödel</small>
+                </div>
+                <div class="p-2 bg-light rounded">
+                    <small class="fw-medium text-dark">Turing</small>
+                </div>
+                <div class="p-2 bg-light rounded">
+                    <small class="fw-medium text-dark">Church</small>
+                </div>
+                <div class="p-2 bg-light rounded">
+                    <small class="fw-medium text-dark">Newton</small>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile TOC Toggle -->
+    <button class="d-lg-none position-fixed top-0 start-0 m-3 z-3 bg-white p-2 rounded shadow" onclick="toggleTOC()">
+        <i class="fas fa-bars text-dark"></i>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="min-vh-100" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container py-5">
+                
+                <div class="bento-grid mb-5">
+                    <div class="bento-main bg-white rounded-3 shadow">
+                        <div class="hero-gradient h-100 d-flex align-items-center justify-content-center position-relative">
+                            <div class="position-absolute w-100 h-100 opacity-25" style="background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\"><defs><pattern id=\"logic\" x=\"0\" y=\"0\" width=\"60\" height=\"60\" patternUnits=\"userSpaceOnUse\"><circle cx=\"15\" cy=\"15\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.4\"/><circle cx=\"45\" cy=\"15\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.3\"/><circle cx=\"15\" cy=\"45\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.3\"/><circle cx=\"45\" cy=\"45\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.4\"/><path d=\"M15,15 L45,15 M15,15 L15,45 M45,15 L45,45 M15,45 L45,45\" stroke=\"%23ffffff\" stroke-width=\"1\" opacity=\"0.2\"/></pattern></defs><rect width=\"100%25\" height=\"100%25\" fill=\"url(%23logic)\"/></svg>') center/cover;"></div>
+                            <div class="position-relative z-1 text-center text-white p-4">
+                                <h1 class="display-4 fw-bold mb-4">
+                                    <em class="d-block" style="color: var(--copper-200);">Jornada da</em>
+                                    <span class="d-block">Programação Lógica</span>
+                                </h1>
+                                <p class="fs-4 text-light fw-light mx-auto" style="max-width: 32rem;">
+                                    Do Paradigma Imperativo à Lógica de Primeira Ordem
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-side-top bg-white rounded-3 p-4 shadow">
+                        <div class="text-center">
+                            <div class="stat-highlight text-primary">1970s</div>
+                            <div class="fs-6 text-muted">Surgimento da Programação Lógica</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: var(--copper-50);">
+                        <div class="text-center">
+                            <div class="stat-highlight" style="color: var(--copper-800);">Prolog</div>
+                            <div class="fs-6" style="color: var(--copper-700);">Programming Logic</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-code fs-2 text-danger mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-danger">Imperativo</h3>
+                                <p class="fs-7 text-muted">Como resolver</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-lightbulb fs-2 text-success mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-success">Declarativo</h3>
+                                <p class="fs-7 text-muted">O que resolver</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-brain fs-2 text-primary mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-primary">Lógica</h3>
+                                <p class="fs-7 text-muted">Dedução matemática</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-search fs-2 text-warning mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-warning">Inferência</h3>
+                                <p class="fs-7 text-muted">Descoberta de verdades</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section id="introducao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">1. Introdução: Uma Nova Forma de Pensar</h2>
+                    
+                    <p class="fs-5 text-muted mb-4">
+                        Imagine explorar o universo dos computadores não como comandantes que ditam cada passo, mas fornecendo <strong>diretrizes gerais</strong> e deixando que o computador deduza o caminho. Esta é a essência da <strong>Programação Lógica</strong>.
+                    </p>
+
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <blockquote class="blockquote text-center mb-0">
+                            <p class="fs-4 fw-light fst-italic" style="color: var(--sage-800);">
+                                "Se vi mais longe foi por estar sobre ombros de gigantes"
+                            </p>
+                            <footer class="blockquote-footer mt-3">
+                                <cite title="Isaac Newton">Isaac Newton</cite>
+                            </footer>
+                        </blockquote>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="paradigm-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-question-circle fs-3 me-3 text-primary"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--sage-800);">O Questionamento Fundamental</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    Em vez de sermos forçados a ordenar cada detalhe do processo de solução, a Programação Lógica permite que <strong>declaremos o que queremos</strong> e deixemos o computador encontrar como fazer.
+                                </p>
+                                <div class="border-start border-4 border-primary ps-3">
+                                    <div class="fw-bold text-primary">Mudança de Paradigma</div>
+                                    <div class="fs-6 text-muted">Do processo para o problema</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="paradigm-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-robot fs-3 me-3 text-success"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--copper-800);">O Objetivo Final</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    Desde os tempos de Gödel, Turing e Church, tudo que queremos é que nossas <strong>máquinas sejam capazes de resolver problemas complexos</strong> com o mínimo de interferência nossa.
+                                </p>
+                                <div class="border-start border-4 border-success ps-3">
+                                    <div class="fw-bold text-success">Simulação do Pensamento</div>
+                                    <div class="fs-6 text-muted">Máquinas que pensam ou simulam pensamento</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Evolução Conceitual</h3>
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            O termo Programação Lógica aparece em meados dos anos 1970 como evolução dos esforços em pesquisas sobre prova computacional de teoremas matemáticos e Inteligência Artificial.
+                        </p>
+                        <div class="row row-cols-1 row-cols-sm-3 g-3">
+                            <div class="col">
+                                <div class="text-center p-3 bg-light rounded">
+                                    <div class="stat-highlight text-primary">1970s</div>
+                                    <div class="fs-6 text-primary">Surgimento</div>
+                                    <small class="text-muted">Programming Logic</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-light rounded">
+                                    <div class="stat-highlight text-success">IA</div>
+                                    <div class="fs-6 text-success">Evolução</div>
+                                    <small class="text-muted">Inteligência Artificial</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-light rounded">
+                                    <div class="stat-highlight text-warning">Prolog</div>
+                                    <div class="fs-6 text-warning">Linguagem</div>
+                                    <small class="text-muted">Implementação prática</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Paradigms Section -->
+        <section id="paradigmas" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">2. Paradigmas de Programação: Imperativo vs Declarativo</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        A compreensão da diferença fundamental entre os paradigmas de programação é essencial para apreciar o poder da Programação Lógica.
+                    </p>
+
+                    <!-- Paradigm Comparison -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="paradigm-card border-start border-4 border-danger">
+                                <h3 class="fs-3 fw-semibold mb-3 d-flex align-items-center text-danger">
+                                    <i class="fas fa-cogs me-3"></i>
+                                    Programação Imperativa
+                                </h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Partimos de uma determinada expressão e seguimos um conjunto de instruções até encontrar o resultado desejado.
+                                </p>
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-arrow-right me-3 mt-1 text-danger"></i>
+                                        <div>
+                                            <div class="fw-medium">Foco no COMO</div>
+                                            <div class="fs-6 text-muted">Define o fluxo de controle</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-arrow-right me-3 mt-1 text-danger"></i>
+                                        <div>
+                                            <div class="fw-medium">Modifica Estado</div>
+                                            <div class="fs-6 text-muted">Muda o estado da máquina a cada passo</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-arrow-right me-3 mt-1 text-danger"></i>
+                                        <div>
+                                            <div class="fw-medium">Exemplos</div>
+                                            <div class="fs-6 text-muted">C++, Java, Python</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="paradigm-card border-start border-4 border-success">
+                                <h3 class="fs-3 fw-semibold mb-3 d-flex align-items-center text-success">
+                                    <i class="fas fa-lightbulb me-3"></i>
+                                    Programação Declarativa
+                                </h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    O programador fornece uma descrição lógica ou funcional do que deve ser feito, sem especificar o fluxo de controle.
+                                </p>
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-arrow-right me-3 mt-1 text-success"></i>
+                                        <div>
+                                            <div class="fw-medium">Foco no O QUE</div>
+                                            <div class="fs-6 text-muted">Descreve o problema, não a solução</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-arrow-right me-3 mt-1 text-success"></i>
+                                        <div>
+                                            <div class="fw-medium">Sem Fluxo Explícito</div>
+                                            <div class="fs-6 text-muted">Deixa a implementação para o sistema</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-arrow-right me-3 mt-1 text-success"></i>
+                                        <div>
+                                            <div class="fw-medium">Exemplos</div>
+                                            <div class="fs-6 text-muted">SQL, Prolog, Haskell</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Logic Programming Details -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Programação Lógica: Um Paradigma Declarativo Especial</h3>
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            Na Programação Lógica, um dos paradigmas da Programação Declarativa, usamos a <strong>dedução</strong> para resolver problemas. Começamos com hipóteses e conjecturas.
+                        </p>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-3 rounded" style="background-color: var(--sage-50);">
+                                    <h4 class="fs-5 fw-semibold mb-2" style="color: var(--sage-800);">Hipóteses</h4>
+                                    <p class="fs-6 mb-0" style="color: var(--sage-700);">
+                                        Uma suposição, expressa na forma de proposição, que é acreditada ser verdadeira, mas que ainda não foi provada.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 rounded" style="background-color: var(--copper-50);">
+                                    <h4 class="fs-5 fw-semibold mb-2" style="color: var(--copper-800);">Conjecturas</h4>
+                                    <p class="fs-6 mb-0" style="color: var(--copper-700);">
+                                        Uma proposição ou sentença declarativa assumida como verdadeira, mas que ainda não foi formalmente provada ou refutada.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- First Order Logic Section -->
+        <section id="logica-primeira-ordem" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">3. Lógica de Primeira Ordem: O Fundamento</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Em nossa jornada, percorreremos a <strong>Lógica de Primeira Ordem</strong>, subdividida em elementos interligados e interdependentes: a <em>Lógica Proposicional</em> e a <em>Lógica Predicativa</em>.
+                    </p>
+
+                    <!-- Logic Components -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="paradigm-card">
+                                <div class="logic-component component-proposicional">
+                                    <h4 class="fs-4 fw-semibold text-primary mb-2">Lógica Proposicional</h4>
+                                    <p class="fs-6 text-muted mb-3">
+                                        Um tipo de linguagem matemática, suficientemente rica para expressar os problemas que precisamos resolver e suficientemente simples para que computadores possam lidar com ela.
+                                    </p>
+                                    <div class="p-3 bg-primary-subtle rounded">
+                                        <strong class="text-primary">Característica:</strong>
+                                        <div class="fs-6 text-primary">Base sólida e computacionalmente tratável</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="paradigm-card">
+                                <div class="logic-component component-predicativa">
+                                    <h4 class="fs-4 fw-semibold text-success mb-2">Lógica Predicativa</h4>
+                                    <p class="fs-6 text-muted mb-3">
+                                        A alma da <strong>Lógica de Primeira Ordem</strong>, também conhecida como Lógica de Predicados, que nos permite fazer sentido do mundo real de forma clara e bela.
+                                    </p>
+                                    <div class="p-3 bg-success-subtle rounded">
+                                        <strong class="text-success">Característica:</strong>
+                                        <div class="fs-6 text-success">Expressividade para problemas reais</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example Formulas -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Exemplos de Conjecturas em Lógica de Primeira Ordem</h3>
+                        
+                        <div class="row row-cols-1 g-4">
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3">Exemplo 1: "Todos os números primos são ímpares"</h4>
+                                <div class="formula-box">
+                                    ∀x (Primo(x) → Ímpar(x))
+                                </div>
+                                <p class="fs-6 text-muted">
+                                    <strong>Refutação:</strong> Esta conjectura pode ser refutada pelo contraexemplo do número 2, que é primo, mas não ímpar.
+                                </p>
+                            </div>
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3">Exemplo 2: "Todo ser humano é mortal"</h4>
+                                <div class="formula-box">
+                                    ∀x (Humano(x) → Mortal(x))
+                                </div>
+                                <p class="fs-6 text-muted">
+                                    <strong>Verificação:</strong> Esta conjectura pode ser considerada verdadeira em muitos contextos, mas requer verificação formal para ser aceita como teorema.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Truth and Logic -->
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">A Verdade da Lógica</h3>
+                        <blockquote class="blockquote mb-4">
+                            <p class="fs-5 fst-italic">
+                                "A verdade da lógica não abarca opiniões ou contestações. É linda e inquestionável."
+                            </p>
+                        </blockquote>
+                        <p class="fs-6 mb-0" style="color: var(--sage-700);">
+                            Para testar a verdade expressa nessas sentenças, utilizaremos as ferramentas da <strong>Lógica de Primeira Ordem</strong>, construindo um sistema formal capaz de verificar e deduzir conclusões válidas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Inference and Deduction Section -->
+        <section id="inferencia-deducao" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">4. Inferência e Dedução: Ferramentas do Detetive</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Vamos enfrentar a inferência e a dedução, duas ferramentas fundamentais para extração de conhecimento de declarações lógicas.
+                    </p>
+
+                    <!-- Detective Metaphor -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">A Metáfora do Detetive</h3>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    A inferência é quase como um detetive que tira conclusões a partir de pistas: teremos algumas <strong>verdades</strong> (nossas pistas), e precisaremos descobrir outras <strong>verdades</strong> (consequências diretas das primeiras) para encontrar o que procuramos de forma incontestável.
+                                </p>
+                                <div class="border-start border-4 border-warning ps-3">
+                                    <div class="fw-bold text-warning">Processo Dedutivo</div>
+                                    <div class="fs-6 text-muted">Das pistas às conclusões lógicas</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <i class="fas fa-search fs-1" style="color: var(--copper-600);"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Inference Types -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="paradigm-card">
+                                <div class="logic-component component-inferencia">
+                                    <h4 class="fs-4 fw-semibold mb-2" style="color: #0284c7;">Inferência</h4>
+                                    <p class="fs-6 text-muted mb-3">
+                                        Processo de derivar conclusões lógicas a partir de premissas conhecidas, seguindo regras de dedução válidas.
+                                    </p>
+                                    <div class="d-flex flex-column gap-2">
+                                        <div class="d-flex justify-content-between p-2 bg-light rounded">
+                                            <span class="fw-medium">Entrada</span>
+                                            <span class="text-primary">Verdades conhecidas</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between p-2 bg-light rounded">
+                                            <span class="fw-medium">Processo</span>
+                                            <span class="text-success">Regras de dedução</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between p-2 bg-light rounded">
+                                            <span class="fw-medium">Saída</span>
+                                            <span class="text-warning">Novas verdades</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="paradigm-card">
+                                <div class="logic-component component-inferencia">
+                                    <h4 class="fs-4 fw-semibold mb-2" style="color: #0284c7;">Dedução</h4>
+                                    <p class="fs-6 text-muted mb-3">
+                                        Raciocínio que parte de premissas gerais para chegar a conclusões específicas, garantindo validade lógica.
+                                    </p>
+                                    <div class="p-3 rounded" style="background-color: #dbeafe;">
+                                        <strong style="color: #0284c7;">Exemplo:</strong>
+                                        <div class="fs-6 mt-2" style="color: #0284c7;">
+                                            <div>1. Todos os homens são mortais</div>
+                                            <div>2. Sócrates é homem</div>
+                                            <div>3. Logo, Sócrates é mortal</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Automation Goal -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">O Objetivo da Automatização</h3>
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            O processo de descobrir a verdade através da inferência e dedução pode ser <strong>automatizado</strong>, permitindo que máquinas realizem raciocínio lógico complexo.
+                        </p>
+                        <div class="row row-cols-1 row-cols-sm-3 g-3">
+                            <div class="col">
+                                <div class="text-center p-3 bg-light rounded">
+                                    <i class="fas fa-robot fs-3 mb-2 text-primary"></i>
+                                    <div class="fw-medium text-primary">Automatização</div>
+                                    <small class="text-muted">Raciocínio mecânico</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-light rounded">
+                                    <i class="fas fa-cogs fs-3 mb-2 text-success"></i>
+                                    <div class="fw-medium text-success">Eficiência</div>
+                                    <small class="text-muted">Processamento rápido</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-light rounded">
+                                    <i class="fas fa-check-circle fs-3 mb-2 text-warning"></i>
+                                    <div class="fw-medium text-warning">Precisão</div>
+                                    <small class="text-muted">Resultados confiáveis</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Horn Clauses Section -->
+        <section id="clausulas-horn" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">5. Cláusulas de Horn: O Mapa Simplificador</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Nossos mares não serão brandos, mas não nos furtaremos a enfrentar as especificidades da <strong>Cláusula de Horn</strong>, um conceito que torna todos os problemas expressos em lógica mais fáceis de resolver.
+                    </p>
+
+                    <!-- Horn Clause Explanation -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Uma Regra Especial</h3>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    Uma Cláusula de Horn é como um <strong>mapa</strong> que, se seguido corretamente, torna o processo de descobrir a verdade mais simples. Muito mais simples, até mesmo passível de <strong>automatização</strong>.
+                                </p>
+                                <div class="border-start border-4 border-secondary ps-3">
+                                    <div class="fw-bold text-secondary">Característica Principal</div>
+                                    <div class="fs-6 text-muted">Simplificação computacional</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <i class="fas fa-map fs-1" style="color: var(--copper-600);"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Horn Clause Properties -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="paradigm-card">
+                                <div class="logic-component component-horn">
+                                    <h4 class="fs-4 fw-semibold text-secondary mb-3">Definição Formal</h4>
+                                    <p class="fs-6 text-muted mb-3">
+                                        Uma cláusula de Horn é uma cláusula (disjunção de literais) que contém no máximo um literal positivo.
+                                    </p>
+                                    <div class="formula-box">
+                                        ¬A₁ ∨ ¬A₂ ∨ ... ∨ ¬Aₙ ∨ B
+                                    </div>
+                                    <p class="fs-6 text-muted">
+                                        Equivalente à regra: A₁ ∧ A₂ ∧ ... ∧ Aₙ → B
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="paradigm-card">
+                                <div class="logic-component component-horn">
+                                    <h4 class="fs-4 fw-semibold text-secondary mb-3">Vantagens Computacionais</h4>
+                                    <div class="d-flex flex-column gap-3">
+                                        <div class="d-flex align-items-start">
+                                            <i class="fas fa-check me-3 mt-1 text-success"></i>
+                                            <div>
+                                                <div class="fw-medium">Decidibilidade</div>
+                                                <div class="fs-6 text-muted">Algoritmos eficientes existem</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-start">
+                                            <i class="fas fa-check me-3 mt-1 text-success"></i>
+                                            <div>
+                                                <div class="fw-medium">Resolução Linear</div>
+                                                <div class="fs-6 text-muted">Estratégias de prova simples</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-start">
+                                            <i class="fas fa-check me-3 mt-1 text-success"></i>
+                                            <div>
+                                                <div class="fw-medium">Base do Prolog</div>
+                                                <div class="fs-6 text-muted">Implementação prática</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Types of Horn Clauses -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Tipos de Cláusulas de Horn</h3>
+                        <div class="table-responsive">
+                            <table class="table table-custom">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 25%;">Tipo</th>
+                                        <th style="width: 35%;">Forma</th>
+                                        <th style="width: 40%;">Interpretação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-semibold">Fatos</td>
+                                        <td>B</td>
+                                        <td>Proposições verdadeiras incondicionalmente</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-semibold">Regras</td>
+                                        <td>A₁ ∧ A₂ ∧ ... ∧ Aₙ → B</td>
+                                        <td>Se as condições são verdadeiras, então a conclusão é verdadeira</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-semibold">Consultas</td>
+                                        <td>¬A₁ ∨ ¬A₂ ∨ ... ∨ ¬Aₙ</td>
+                                        <td>Perguntas sobre a verdade de proposições</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- History and Evolution Section -->
+        <section id="historia" class="py-5" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">6. História e Evolução: Sobre Ombros de Gigantes</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        A Programação Lógica representa uma das pérolas mais reluzentes da evolução humana, construída sobre os trabalhos de gigantes da matemática e computação.
+                    </p>
+
+                    <!-- Historical Timeline -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Linha do Tempo dos Gigantes</h3>
+                        <div class="timeline-item">
+                            <h4 class="fs-5 fw-semibold mb-2">Kurt Gödel</h4>
+                            <p class="fs-6 text-muted mb-0">
+                                Estabeleceu os fundamentos da lógica matemática moderna e os teoremas da incompletude, que influenciaram profundamente a teoria da computação.
+                            </p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="fs-5 fw-semibold mb-2">Alan Turing</h4>
+                            <p class="fs-6 text-muted mb-0">
+                                Criou o conceito de máquina de Turing e estabeleceu as bases teóricas da computação, incluindo o problema da decidibilidade.
+                            </p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="fs-5 fw-semibold mb-2">Alonzo Church</h4>
+                            <p class="fs-6 text-muted mb-0">
+                                Desenvolveu o cálculo lambda e, junto com Turing, estabeleceu a tese de Church-Turing sobre computabilidade.
+                            </p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="fs-5 fw-semibold mb-2">Isaac Newton</h4>
+                            <p class="fs-6 text-muted mb-0">
+                                Embora anterior aos outros, sua frase "Se vi mais longe foi por estar sobre ombros de gigantes" captura o espírito científico que guia nossa jornada.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Evolution of Logic Programming -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow" style="background-color: var(--sage-50);">
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Origens (Anos 1970)</h3>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    O termo Programação Lógica surge como evolução dos esforços em:
+                                </p>
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="p-2 bg-white rounded">
+                                        <strong>Prova de Teoremas:</strong> <span class="text-muted">Automação de demonstrações matemáticas</span>
+                                    </div>
+                                    <div class="p-2 bg-white rounded">
+                                        <strong>Inteligência Artificial:</strong> <span class="text-muted">Simulação do raciocínio humano</span>
+                                    </div>
+                                    <div class="p-2 bg-white rounded">
+                                        <strong>Lógica Computacional:</strong> <span class="text-muted">Aplicação prática da lógica formal</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 p-4 rounded-3 shadow" style="background-color: var(--copper-50);">
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--copper-800);">Prolog: A Implementação</h3>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    O surgimento do Prolog (Programming Logic) materializa a esperança de usar lógica como linguagem de programação.
+                                </p>
+                                <div class="border-start border-4 border-warning ps-3 mb-3">
+                                    <div class="fw-medium text-warning">Objetivo</div>
+                                    <div class="fs-6 text-muted">Máquinas capazes de raciocinar como o homem</div>
+                                </div>
+                                <div class="border-start border-4 border-info ps-3">
+                                    <div class="fw-medium text-info">Resultado</div>
+                                    <div class="fs-6 text-muted">Linguagem declarativa baseada em lógica</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Future Vision -->
+                    <div class="text-center">
+                        <div class="d-inline-block p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-600), var(--copper-600));">
+                            <h4 class="fs-3 fw-bold mb-3 text-white">A Jornada Continua</h4>
+                            <p class="fs-5 mb-3 text-white">
+                                Esta é apenas a <strong>base do conhecimento</strong> para uma longa jornada que nos levará das profundezas da <strong>Lógica Proposicional</strong> até as alturas do <strong>Prolog</strong>.
+                            </p>
+                            <div class="fs-6 text-white opacity-75">
+                                Preparemo-nos para navegar pelos mares da lógica matemática
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Mobile TOC Toggle
+        function toggleTOC() {
+            const toc = document.getElementById('toc');
+            toc.classList.toggle('open');
+        }
+
+        // Close TOC when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const toc = document.getElementById('toc');
+            const hamburger = document.querySelector('button[onclick="toggleTOC()"]');
+            if (window.innerWidth <= 1024 && toc.classList.contains('open')) {
+                if (!toc.contains(event.target) && event.target !== hamburger && !hamburger.contains(event.target)) {
+                    toc.classList.remove('open');
+                }
+            }
+        });
+
+        // Smooth scrolling and active link highlighting
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            const sections = document.querySelectorAll('section[id]');
+            
+            // Add click handlers for smooth scrolling with offset
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        const offset = 80;
+                        const elementPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+                        window.scrollTo({
+                            top: elementPosition - offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                    if (window.innerWidth <= 1024) {
+                        document.getElementById('toc').classList.remove('open');
+                    }
+                });
+            });
+            
+            // Highlight active section in TOC
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        links.forEach(link => {
+                            link.classList.remove('bg-light', 'text-dark');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('bg-light', 'text-dark');
+                            }
+                        });
+                    }
+                });
+            }, {
+                rootMargin: '-80px 0px -70% 0px'
+            });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Fade in animation on scroll
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            fadeElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                fadeObserver.observe(el);
+            });
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            const toc = document.getElementById('toc');
+            if (window.innerWidth > 1024) {
+                toc.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html>
