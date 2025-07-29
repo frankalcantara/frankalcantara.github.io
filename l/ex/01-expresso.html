@@ -158,6 +158,7 @@
         .component-predicativa { border-left-color: #10b981; }
         .component-inferencia { border-left-color: #0284c7; }
         .component-horn { border-left-color: #8b5cf6; }
+        .component-sat { border-left-color: #ef4444; }
 
         .formula-box {
             background: linear-gradient(135deg, var(--sage-50), var(--copper-50));
@@ -168,6 +169,14 @@
             text-align: center;
             font-family: 'Times New Roman', serif;
             font-size: 1.1rem;
+        }
+
+        .callout-note {
+            background: linear-gradient(135deg, #e0f2fe, #b3e5fc);
+            border-left: 4px solid #0284c7;
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
         }
 
         .timeline-item {
@@ -232,6 +241,14 @@
             transition: background-color 0.2s ease;
         }
 
+        .detective-example {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 4px solid #f59e0b;
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
         @media (max-width: 768px) {
             .bento-grid {
                 grid-template-columns: 1fr;
@@ -256,10 +273,12 @@
             <ul class="list-unstyled">
                 <li class="mb-2"><a href="#introducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">1. Introdução</a></li>
                 <li class="mb-2"><a href="#paradigmas" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">2. Paradigmas de Programação</a></li>
-                <li class="mb-2"><a href="#logica-primeira-ordem" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Lógica de Primeira Ordem</a></li>
-                <li class="mb-2"><a href="#inferencia-deducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4. Inferência e Dedução</a></li>
-                <li class="mb-2"><a href="#clausulas-horn" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5. Cláusulas de Horn</a></li>
-                <li class="mb-2"><a href="#historia" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6. História e Evolução</a></li>
+                <li class="mb-2"><a href="#conjecturas-hipoteses" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Conjecturas e Hipóteses</a></li>
+                <li class="mb-2"><a href="#logica-primeira-ordem" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4. Lógica de Primeira Ordem</a></li>
+                <li class="mb-2"><a href="#inferencia-deducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5. Inferência e Dedução</a></li>
+                <li class="mb-2"><a href="#clausulas-horn" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6. Cláusulas de Horn</a></li>
+                <li class="mb-2"><a href="#satisfatibilidade" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">7. Satisfatibilidade</a></li>
+                <li class="mb-2"><a href="#historia" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">8. História e Evolução</a></li>
             </ul>
         </div>
         <div class="mt-4 pt-4 border-top">
@@ -269,22 +288,17 @@
                 <div class="p-2 bg-success-subtle rounded"><i class="fas fa-cogs me-2 text-success"></i><small class="text-success fw-medium">Predicativa</small></div>
                 <div class="p-2" style="background-color: #dbeafe;"><i class="fas fa-brain me-2" style="color: #0284c7;"></i><small style="color: #0284c7;" class="fw-medium">Inferência</small></div>
                 <div class="p-2 bg-secondary-subtle rounded"><i class="fas fa-link me-2 text-secondary"></i><small class="text-secondary fw-medium">Horn</small></div>
+                <div class="p-2 bg-danger-subtle rounded"><i class="fas fa-calculator me-2 text-danger"></i><small class="text-danger fw-medium">SAT</small></div>
             </div>
         </div>
         <div class="mt-4 pt-4 border-top">
-            <h4 class="fs-6 fw-semibold text-dark mb-3">Referências Históricas</h4>
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Algoritmos SAT</h4>
             <div class="d-flex flex-column gap-2">
                 <div class="p-2 bg-light rounded">
-                    <small class="fw-medium text-dark">Gödel</small>
+                    <small class="fw-medium text-dark">DPLL</small>
                 </div>
                 <div class="p-2 bg-light rounded">
-                    <small class="fw-medium text-dark">Turing</small>
-                </div>
-                <div class="p-2 bg-light rounded">
-                    <small class="fw-medium text-dark">Church</small>
-                </div>
-                <div class="p-2 bg-light rounded">
-                    <small class="fw-medium text-dark">Newton</small>
+                    <small class="fw-medium text-dark">CDCL</small>
                 </div>
             </div>
         </div>
@@ -352,18 +366,18 @@
                     <div class="col">
                         <div class="card h-100 bg-white rounded-3 shadow hover-lift">
                             <div class="card-body p-4 text-center">
-                                <i class="fas fa-brain fs-2 text-primary mb-3"></i>
-                                <h3 class="fs-6 fw-semibold text-primary">Lógica</h3>
-                                <p class="fs-7 text-muted">Dedução matemática</p>
+                                <i class="fas fa-search fs-2 text-warning mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-warning">Inferência</h3>
+                                <p class="fs-7 text-muted">Descoberta de verdades</p>
                             </div>
                         </div>
                     </div>
                     <div class="col">
                         <div class="card h-100 bg-white rounded-3 shadow hover-lift">
                             <div class="card-body p-4 text-center">
-                                <i class="fas fa-search fs-2 text-warning mb-3"></i>
-                                <h3 class="fs-6 fw-semibold text-warning">Inferência</h3>
-                                <p class="fs-7 text-muted">Descoberta de verdades</p>
+                                <i class="fas fa-calculator fs-2 text-info mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-info">SAT</h3>
+                                <p class="fs-7 text-muted">Satisfatibilidade</p>
                             </div>
                         </div>
                     </div>
@@ -428,14 +442,14 @@
                     <div class="card p-4 rounded-3 shadow bg-white">
                         <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Evolução Conceitual</h3>
                         <p class="fs-6 mb-4" style="color: var(--sage-700);">
-                            O termo Programação Lógica aparece em meados dos anos 1970 como evolução dos esforços em pesquisas sobre prova computacional de teoremas matemáticos e Inteligência Artificial.
+                            O termo Programação Lógica aparece em meados dos anos 1970 como evolução dos esforços em pesquisas sobre prova computacional de teoremas matemáticos e Inteligência Artificial. O homem querendo fazer máquinas capazes de raciocinar como o homem.
                         </p>
                         <div class="row row-cols-1 row-cols-sm-3 g-3">
                             <div class="col">
                                 <div class="text-center p-3 bg-light rounded">
                                     <div class="stat-highlight text-primary">1970s</div>
                                     <div class="fs-6 text-primary">Surgimento</div>
-                                    <small class="text-muted">Programming Logic</small>
+                                    <small class="text-muted"><strong>Pro</strong>gramming in <strong>Lo</strong>gic</small>
                                 </div>
                             </div>
                             <div class="col">
@@ -473,11 +487,11 @@
                         <div class="col">
                             <div class="paradigm-card border-start border-4 border-danger">
                                 <h3 class="fs-3 fw-semibold mb-3 d-flex align-items-center text-danger">
-                                    <i class="fas fa-cogs me-3"></i>
+                                    <i class="fas fa-utensils me-3"></i>
                                     Programação Imperativa
                                 </h3>
                                 <p class="fs-6 mb-3 text-muted">
-                                    Partimos de uma determinada expressão e seguimos um conjunto de instruções até encontrar o resultado desejado.
+                                    Partimos de uma determinada expressão e seguimos um conjunto de instruções até encontrar o resultado desejado. <strong>Como um chef que segue uma receita passo a passo</strong>, onde cada etapa é crucial para o resultado final.
                                 </p>
                                 <div class="d-flex flex-column gap-3">
                                     <div class="d-flex align-items-start">
@@ -498,7 +512,7 @@
                                         <i class="fas fa-arrow-right me-3 mt-1 text-danger"></i>
                                         <div>
                                             <div class="fw-medium">Exemplos</div>
-                                            <div class="fs-6 text-muted">C++, Java, Python</div>
+                                            <div class="fs-6 text-muted">C++, Java, Python (multiparadigmas)</div>
                                         </div>
                                     </div>
                                 </div>
@@ -511,7 +525,7 @@
                                     Programação Declarativa
                                 </h3>
                                 <p class="fs-6 mb-3 text-muted">
-                                    O programador fornece uma descrição lógica ou funcional do que deve ser feito, sem especificar o fluxo de controle.
+                                    O programador fornece uma descrição lógica ou funcional do que deve ser feito, sem especificar o fluxo de controle. O foco está no problema, não na solução.
                                 </p>
                                 <div class="d-flex flex-column gap-3">
                                     <div class="d-flex align-items-start">
@@ -524,8 +538,8 @@
                                     <div class="d-flex align-items-start">
                                         <i class="fas fa-arrow-right me-3 mt-1 text-success"></i>
                                         <div>
-                                            <div class="fw-medium">Sem Fluxo Explícito</div>
-                                            <div class="fs-6 text-muted">Deixa a implementação para o sistema</div>
+                                            <div class="fw-medium">Objetivo (Goal)</div>
+                                            <div class="fs-6 text-muted">Prova de uma hipótese</div>
                                         </div>
                                     </div>
                                     <div class="d-flex align-items-start">
@@ -540,29 +554,94 @@
                         </div>
                     </div>
 
-                    <!-- Logic Programming Details -->
-                    <div class="card p-4 rounded-3 shadow bg-white">
-                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Programação Lógica: Um Paradigma Declarativo Especial</h3>
-                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
-                            Na Programação Lógica, um dos paradigmas da Programação Declarativa, usamos a <strong>dedução</strong> para resolver problemas. Começamos com hipóteses e conjecturas.
+                    <!-- Personal Opinion -->
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Tendências Futuras</h3>
+                        <blockquote class="blockquote mb-4">
+                            <p class="fs-5 fst-italic">
+                                "Eu, sempre que posso, escolho uma linguagem declarativa. Não há glória, nem honra nesta escolha: apenas as lamúrias da opinião pessoal."
+                            </p>
+                        </blockquote>
+                        <p class="fs-6 mb-0" style="color: var(--sage-700);">
+                            O futuro parece cada vez mais orientado para linguagens declarativas, que permitam ao programador concentrar-se no problema, não nos detalhes da solução. Efeito evidente nos avanços da segunda década do século XXI no campo da <strong>Inteligência Artificial</strong>.
                         </p>
-                        
-                        <div class="row row-cols-1 row-cols-md-2 g-4">
-                            <div class="col">
-                                <div class="p-3 rounded" style="background-color: var(--sage-50);">
-                                    <h4 class="fs-5 fw-semibold mb-2" style="color: var(--sage-800);">Hipóteses</h4>
-                                    <p class="fs-6 mb-0" style="color: var(--sage-700);">
-                                        Uma suposição, expressa na forma de proposição, que é acreditada ser verdadeira, mas que ainda não foi provada.
-                                    </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conjectures and Hypotheses Section -->
+        <section id="conjecturas-hipoteses" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">3. Conjecturas e Hipóteses: Os Fundamentos do Raciocínio</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Na Programação Lógica, usamos a <strong>dedução</strong> para resolver problemas. Começamos com hipóteses e conjecturas, mas qual a diferença entre elas?
+                    </p>
+
+                    <!-- Conjecture vs Hypothesis -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="paradigm-card border-start border-4 border-warning">
+                                <h3 class="fs-3 fw-semibold mb-3 text-warning">Conjectura</h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Uma proposição <strong>provisoriamente aceita como verdadeira</strong> com base em evidências incompletas ou raciocínio plausível, mas que ainda não foi provada ou refutada.
+                                </p>
+                                <div class="p-3 bg-warning-subtle rounded mb-3">
+                                    <strong class="text-warning">Exemplo Clássico:</strong>
+                                    <div class="fs-6 text-warning mt-2">
+                                        <strong>Conjectura de Goldbach:</strong> Todo número par maior que 2 pode ser expresso como a soma de dois números primos.
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-lightbulb me-2 text-warning"></i>
+                                    <small class="text-muted">Suposição educada baseada em padrões observáveis</small>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="p-3 rounded" style="background-color: var(--copper-50);">
-                                    <h4 class="fs-5 fw-semibold mb-2" style="color: var(--copper-800);">Conjecturas</h4>
-                                    <p class="fs-6 mb-0" style="color: var(--copper-700);">
-                                        Uma proposição ou sentença declarativa assumida como verdadeira, mas que ainda não foi formalmente provada ou refutada.
-                                    </p>
+                        </div>
+                        <div class="col">
+                            <div class="paradigm-card border-start border-4 border-info">
+                                <h3 class="fs-3 fw-semibold mb-3 text-info">Hipótese</h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Uma proposição formulada de maneira mais <strong>sistemática e específica</strong>, que pode ser testada através de métodos empíricos ou dedutivos.
+                                </p>
+                                <div class="p-3 bg-info-subtle rounded mb-3">
+                                    <strong class="text-info">Exemplo Prático:</strong>
+                                    <div class="fs-6 text-info mt-2">
+                                        "A temperatura afeta a taxa de crescimento das plantas" - pode ser testada através de experimentos controlados.
+                                    </div>
                                 </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-flask me-2 text-info"></i>
+                                    <small class="text-muted">Formulada para ser confirmada ou refutada</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Logic Examples -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Exemplos em Lógica de Primeira Ordem</h3>
+                        
+                        <div class="row row-cols-1 g-4">
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3">Exemplo 1: "Todos os números primos são ímpares"</h4>
+                                <div class="formula-box">
+                                    ∀x (Primo(x) → Ímpar(x))
+                                </div>
+                                <p class="fs-6 text-muted">
+                                    <strong>Refutação:</strong> Esta conjectura pode ser refutada pelo contraexemplo do número 2, que é primo, mas não ímpar.
+                                </p>
+                            </div>
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3">Exemplo 2: "Todo ser humano é mortal"</h4>
+                                <div class="formula-box">
+                                    ∀x (Humano(x) → Mortal(x))
+                                </div>
+                                <p class="fs-6 text-muted">
+                                    <strong>Verificação:</strong> Esta conjectura pode ser considerada verdadeira em muitos contextos, mas requer verificação formal para ser aceita como teorema.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -571,13 +650,13 @@
         </section>
 
         <!-- First Order Logic Section -->
-        <section id="logica-primeira-ordem" class="py-5 bg-white">
+        <section id="logica-primeira-ordem" class="py-5 bg-light">
             <div class="container">
                 <div class="mx-auto fade-in" style="max-width: 64rem;">
-                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">3. Lógica de Primeira Ordem: O Fundamento</h2>
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">4. Lógica de Primeira Ordem: O Fundamento</h2>
                     
                     <p class="fs-5 text-muted mb-5">
-                        Em nossa jornada, percorreremos a <strong>Lógica de Primeira Ordem</strong>, subdividida em elementos interligados e interdependentes: a <em>Lógica Proposicional</em> e a <em>Lógica Predicativa</em>.
+                        Em nossa jornada, percorreremos a <strong>Lógica de Primeira Ordem</strong>, subdividida em elementos interligados e interdependentes: a <strong>Lógica Proposicional</strong> e a <em>Lógica Predicativa</em>.
                     </p>
 
                     <!-- Logic Components -->
@@ -613,42 +692,14 @@
                         </div>
                     </div>
 
-                    <!-- Example Formulas -->
-                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
-                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Exemplos de Conjecturas em Lógica de Primeira Ordem</h3>
-                        
-                        <div class="row row-cols-1 g-4">
-                            <div class="col">
-                                <h4 class="fs-5 fw-semibold mb-3">Exemplo 1: "Todos os números primos são ímpares"</h4>
-                                <div class="formula-box">
-                                    ∀x (Primo(x) → Ímpar(x))
-                                </div>
-                                <p class="fs-6 text-muted">
-                                    <strong>Refutação:</strong> Esta conjectura pode ser refutada pelo contraexemplo do número 2, que é primo, mas não ímpar.
-                                </p>
-                            </div>
-                            <div class="col">
-                                <h4 class="fs-5 fw-semibold mb-3">Exemplo 2: "Todo ser humano é mortal"</h4>
-                                <div class="formula-box">
-                                    ∀x (Humano(x) → Mortal(x))
-                                </div>
-                                <p class="fs-6 text-muted">
-                                    <strong>Verificação:</strong> Esta conjectura pode ser considerada verdadeira em muitos contextos, mas requer verificação formal para ser aceita como teorema.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Truth and Logic -->
+                    <!-- Academic Note -->
                     <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-50), var(--copper-50));">
-                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">A Verdade da Lógica</h3>
-                        <blockquote class="blockquote mb-4">
-                            <p class="fs-5 fst-italic">
-                                "A verdade da lógica não abarca opiniões ou contestações. É linda e inquestionável."
-                            </p>
-                        </blockquote>
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Nota Acadêmica</h3>
+                        <p class="fs-6 mb-3 fst-italic" style="color: var(--sage-700);">
+                            "Não deixe de notar que muitos dos nossos companheiros de viagem, aqueles restritos à formalidade acadêmica, podem não entender as sutilezas desta divisão."
+                        </p>
                         <p class="fs-6 mb-0" style="color: var(--sage-700);">
-                            Para testar a verdade expressa nessas sentenças, utilizaremos as ferramentas da <strong>Lógica de Primeira Ordem</strong>, construindo um sistema formal capaz de verificar e deduzir conclusões válidas.
+                            Este timoneiro tenta não ser pretensioso. Partiremos da <strong>Lógica Proposicional</strong> com esperança de encontrar bons ventos que nos levem até o Prolog.
                         </p>
                     </div>
                 </div>
@@ -656,108 +707,89 @@
         </section>
 
         <!-- Inference and Deduction Section -->
-        <section id="inferencia-deducao" class="py-5 bg-light">
+        <section id="inferencia-deducao" class="py-5 bg-white">
             <div class="container">
                 <div class="mx-auto fade-in" style="max-width: 64rem;">
-                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">4. Inferência e Dedução: Ferramentas do Detetive</h2>
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">5. Inferência e Dedução: O Trabalho do Detetive</h2>
                     
                     <p class="fs-5 text-muted mb-5">
-                        Vamos enfrentar a inferência e a dedução, duas ferramentas fundamentais para extração de conhecimento de declarações lógicas.
+                        Vamos enfrentar a inferência e a dedução, duas ferramentas fundamentais para extrair conhecimento de declarações lógicas.
                     </p>
 
                     <!-- Detective Metaphor -->
-                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
-                        <div class="row align-items-center">
-                            <div class="col-md-8">
-                                <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">A Metáfora do Detetive</h3>
-                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
-                                    A inferência é quase como um detetive que tira conclusões a partir de pistas: teremos algumas <strong>verdades</strong> (nossas pistas), e precisaremos descobrir outras <strong>verdades</strong> (consequências diretas das primeiras) para encontrar o que procuramos de forma incontestável.
-                                </p>
-                                <div class="border-start border-4 border-warning ps-3">
-                                    <div class="fw-bold text-warning">Processo Dedutivo</div>
-                                    <div class="fs-6 text-muted">Das pistas às conclusões lógicas</div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 text-center">
-                                <i class="fas fa-search fs-1" style="color: var(--copper-600);"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Inference Types -->
-                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
-                        <div class="col">
-                            <div class="paradigm-card">
-                                <div class="logic-component component-inferencia">
-                                    <h4 class="fs-4 fw-semibold mb-2" style="color: #0284c7;">Inferência</h4>
-                                    <p class="fs-6 text-muted mb-3">
-                                        Processo de derivar conclusões lógicas a partir de premissas conhecidas, seguindo regras de dedução válidas.
-                                    </p>
-                                    <div class="d-flex flex-column gap-2">
-                                        <div class="d-flex justify-content-between p-2 bg-light rounded">
-                                            <span class="fw-medium">Entrada</span>
-                                            <span class="text-primary">Verdades conhecidas</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between p-2 bg-light rounded">
-                                            <span class="fw-medium">Processo</span>
-                                            <span class="text-success">Regras de dedução</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between p-2 bg-light rounded">
-                                            <span class="fw-medium">Saída</span>
-                                            <span class="text-warning">Novas verdades</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="paradigm-card">
-                                <div class="logic-component component-inferencia">
-                                    <h4 class="fs-4 fw-semibold mb-2" style="color: #0284c7;">Dedução</h4>
-                                    <p class="fs-6 text-muted mb-3">
-                                        Raciocínio que parte de premissas gerais para chegar a conclusões específicas, garantindo validade lógica.
-                                    </p>
-                                    <div class="p-3 rounded" style="background-color: #dbeafe;">
-                                        <strong style="color: #0284c7;">Exemplo:</strong>
-                                        <div class="fs-6 mt-2" style="color: #0284c7;">
-                                            <div>1. Todos os homens são mortais</div>
-                                            <div>2. Sócrates é homem</div>
-                                            <div>3. Logo, Sócrates é mortal</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Automation Goal -->
-                    <div class="card p-4 rounded-3 shadow bg-white">
-                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">O Objetivo da Automatização</h3>
-                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
-                            O processo de descobrir a verdade através da inferência e dedução pode ser <strong>automatizado</strong>, permitindo que máquinas realizem raciocínio lógico complexo.
+                    <div class="detective-example">
+                        <h3 class="fs-3 fw-semibold mb-3 d-flex align-items-center" style="color: #92400e;">
+                            <i class="fas fa-search me-3"></i>
+                            O Detetive e as Pistas
+                        </h3>
+                        <p class="fs-6 mb-3" style="color: #92400e;">
+                            Imagine um detetive investigando um caso: ele coleta pistas, como pegadas no local do crime, uma testemunha que viu um suspeito de capa preta e a informação de que o crime ocorreu à noite.
                         </p>
-                        <div class="row row-cols-1 row-cols-sm-3 g-3">
+                        <div class="row row-cols-1 row-cols-md-3 g-3">
                             <div class="col">
-                                <div class="text-center p-3 bg-light rounded">
-                                    <i class="fas fa-robot fs-3 mb-2 text-primary"></i>
-                                    <div class="fw-medium text-primary">Automatização</div>
-                                    <small class="text-muted">Raciocínio mecânico</small>
+                                <div class="text-center p-3 bg-white rounded">
+                                    <i class="fas fa-shoe-prints fs-3 mb-2" style="color: #92400e;"></i>
+                                    <div class="fw-medium" style="color: #92400e;">Pegadas</div>
+                                    <small class="text-muted">Evidência física</small>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="text-center p-3 bg-light rounded">
-                                    <i class="fas fa-cogs fs-3 mb-2 text-success"></i>
-                                    <div class="fw-medium text-success">Eficiência</div>
-                                    <small class="text-muted">Processamento rápido</small>
+                                <div class="text-center p-3 bg-white rounded">
+                                    <i class="fas fa-eye fs-3 mb-2" style="color: #92400e;"></i>
+                                    <div class="fw-medium" style="color: #92400e;">Testemunha</div>
+                                    <small class="text-muted">Capa preta</small>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="text-center p-3 bg-light rounded">
-                                    <i class="fas fa-check-circle fs-3 mb-2 text-warning"></i>
-                                    <div class="fw-medium text-warning">Precisão</div>
-                                    <small class="text-muted">Resultados confiáveis</small>
+                                <div class="text-center p-3 bg-white rounded">
+                                    <i class="fas fa-moon fs-3 mb-2" style="color: #92400e;"></i>
+                                    <div class="fw-medium" style="color: #92400e;">Horário</div>
+                                    <small class="text-muted">Crime à noite</small>
                                 </div>
                             </div>
+                        </div>
+                        <p class="fs-6 mt-3 mb-0" style="color: #92400e;">
+                            A <strong>inferência</strong> é como o processo que o detetive usa para conectar essas pistas e chegar a uma conclusão lógica.
+                        </p>
+                    </div>
+
+                    <!-- Logical Inference Example -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Inferência Formalizada</h3>
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            Na <strong>Lógica de Primeira Ordem</strong>, esse processo é formalizado. Considere as seguintes declarações lógicas como nossas "pistas":
+                        </p>
+                        
+                        <div class="row row-cols-1 g-4">
+                            <div class="col">
+                                <div class="p-3 rounded" style="background-color: var(--sage-50);">
+                                    <strong>Premissa 1:</strong> Todo ser humano é mortal
+                                    <div class="formula-box mt-2">
+                                        ∀x (Humano(x) → Mortal(x))
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 rounded" style="background-color: var(--copper-50);">
+                                    <strong>Premissa 2:</strong> Sócrates é humano
+                                    <div class="formula-box mt-2">
+                                        Humano(Sócrates)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 rounded bg-success-subtle">
+                                    <strong>Conclusão:</strong> Sócrates é mortal
+                                    <div class="formula-box mt-2">
+                                        Mortal(Sócrates)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 p-3 bg-info-subtle rounded">
+                            <strong class="text-info">Propriedade Incontestável:</strong>
+                            <div class="fs-6 text-info">Se as premissas são verdadeiras, a conclusão também será. A inferência nos permite extrair verdades novas a partir de verdades conhecidas, como um detetive que resolve o caso sem deixar margem para dúvidas.</div>
                         </div>
                     </div>
                 </div>
@@ -765,26 +797,26 @@
         </section>
 
         <!-- Horn Clauses Section -->
-        <section id="clausulas-horn" class="py-5 bg-white">
+        <section id="clausulas-horn" class="py-5 bg-light">
             <div class="container">
                 <div class="mx-auto fade-in" style="max-width: 64rem;">
-                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">5. Cláusulas de Horn: O Mapa Simplificador</h2>
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">6. Cláusulas de Horn: O Mapa Simplificador</h2>
                     
                     <p class="fs-5 text-muted mb-5">
-                        Nossos mares não serão brandos, mas não nos furtaremos a enfrentar as especificidades da <strong>Cláusula de Horn</strong>, um conceito que torna todos os problemas expressos em lógica mais fáceis de resolver.
+                        Nossos mares não serão brandos, mas não nos furtaremos a enfrentar os desafios da <strong>Cláusula de Horn</strong>, uma restrição sintática que torna o problema de satisfatibilidade mais fácil de resolver.
                     </p>
 
                     <!-- Horn Clause Explanation -->
                     <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
                         <div class="row align-items-center">
                             <div class="col-md-8">
-                                <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Uma Regra Especial</h3>
+                                <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Uma Restrição Poderosa</h3>
                                 <p class="fs-6 mb-3" style="color: var(--sage-700);">
-                                    Uma Cláusula de Horn é como um <strong>mapa</strong> que, se seguido corretamente, torna o processo de descobrir a verdade mais simples. Muito mais simples, até mesmo passível de <strong>automatização</strong>.
+                                    Uma Cláusula de Horn é como um <strong>mapa</strong> que, se seguido corretamente, reduz a complexidade computacional de <strong>exponencial para polinomial</strong>. Muito mais simples, até mesmo passível de automatização eficiente.
                                 </p>
                                 <div class="border-start border-4 border-secondary ps-3">
-                                    <div class="fw-bold text-secondary">Característica Principal</div>
-                                    <div class="fs-6 text-muted">Simplificação computacional</div>
+                                    <div class="fw-bold text-secondary">Algoritmo Chave</div>
+                                    <div class="fs-6 text-muted">Unit Propagation</div>
                                 </div>
                             </div>
                             <div class="col-md-4 text-center">
@@ -819,15 +851,15 @@
                                         <div class="d-flex align-items-start">
                                             <i class="fas fa-check me-3 mt-1 text-success"></i>
                                             <div>
-                                                <div class="fw-medium">Decidibilidade</div>
-                                                <div class="fs-6 text-muted">Algoritmos eficientes existem</div>
+                                                <div class="fw-medium">Complexidade Reduzida</div>
+                                                <div class="fs-6 text-muted">Exponencial → Polinomial</div>
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-start">
                                             <i class="fas fa-check me-3 mt-1 text-success"></i>
                                             <div>
-                                                <div class="fw-medium">Resolução Linear</div>
-                                                <div class="fs-6 text-muted">Estratégias de prova simples</div>
+                                                <div class="fw-medium">Unit Propagation</div>
+                                                <div class="fs-6 text-muted">Algoritmo eficiente</div>
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-start">
@@ -842,37 +874,124 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
 
-                    <!-- Types of Horn Clauses -->
+        <!-- Satisfiability Section -->
+        <section id="satisfatibilidade" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">7. Satisfatibilidade: O Problema Central</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        As águas se agitarão quando cruzarmos o território da <strong>satisfatibilidade</strong>, o problema central que governa toda a lógica proposicional.
+                    </p>
+
+                    <!-- SAT Problem -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">O Problema SAT</h3>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    A questão fundamental de determinar se existe uma atribuição de valores de verdade que torna uma fórmula lógica verdadeira. <strong>Como um detetive que busca descobrir se uma combinação específica de pistas pode resolver completamente um mistério.</strong>
+                                </p>
+                                <div class="border-start border-4 border-danger ps-3">
+                                    <div class="fw-bold text-danger">Complexidade</div>
+                                    <div class="fs-6 text-muted">NP-completo</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <i class="fas fa-puzzle-piece fs-1" style="color: var(--copper-600);"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SAT Algorithms -->
+                    <div class="callout-note">
+                        <h3 class="fs-4 fw-semibold mb-3 text-info">Algoritmos para Resolver SAT</h3>
+                        
+                        <div class="row row-cols-1 row-cols-lg-2 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h4 class="fs-5 fw-semibold mb-2 text-primary">DPLL</h4>
+                                    <p class="fs-6 mb-3 text-muted">
+                                        <strong>(Davis-Putnam-Logemann-Loveland)</strong> é um algoritmo clássico para resolver o problema SAT que utiliza <em>backtracking</em> sistemático.
+                                    </p>
+                                    <div class="d-flex flex-column gap-2">
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-arrow-right me-2 text-primary"></i>
+                                            <small>Atribuição incremental de valores</small>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-arrow-right me-2 text-primary"></i>
+                                            <small>Backtracking em contradições</small>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-arrow-right me-2 text-primary"></i>
+                                            <small>Unit propagation</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h4 class="fs-5 fw-semibold mb-2 text-success">CDCL</h4>
+                                    <p class="fs-6 mb-3 text-muted">
+                                        <strong>(Conflict-Driven Clause Learning)</strong> representa a evolução moderna do DPLL com capacidade de aprendizado.
+                                    </p>
+                                    <div class="d-flex flex-column gap-2">
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-arrow-right me-2 text-success"></i>
+                                            <small>Análise de conflitos</small>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-arrow-right me-2 text-success"></i>
+                                            <small>Aprendizado de cláusulas</small>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-arrow-right me-2 text-success"></i>
+                                            <small>Backtrack não cronológico</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 p-3 bg-white rounded">
+                            <strong class="text-info">Evolução:</strong>
+                            <span class="text-info">Quando o CDCL encontra um conflito, ao invés de simplesmente retroceder, ele analisa as causas do conflito e aprende uma nova cláusula que previne a repetição do mesmo erro, tornando-se significativamente mais eficiente em instâncias práticas complexas.</span>
+                        </div>
+                    </div>
+
+                    <!-- Complexity Impact -->
                     <div class="card p-4 rounded-3 shadow bg-white">
-                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Tipos de Cláusulas de Horn</h3>
-                        <div class="table-responsive">
-                            <table class="table table-custom">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 25%;">Tipo</th>
-                                        <th style="width: 35%;">Forma</th>
-                                        <th style="width: 40%;">Interpretação</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="fw-semibold">Fatos</td>
-                                        <td>B</td>
-                                        <td>Proposições verdadeiras incondicionalmente</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-semibold">Regras</td>
-                                        <td>A₁ ∧ A₂ ∧ ... ∧ Aₙ → B</td>
-                                        <td>Se as condições são verdadeiras, então a conclusão é verdadeira</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-semibold">Consultas</td>
-                                        <td>¬A₁ ∨ ¬A₂ ∨ ... ∨ ¬Aₙ</td>
-                                        <td>Perguntas sobre a verdade de proposições</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Impacto da Complexidade</h3>
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            Este problema, aparentemente simples em sua formulação, revela-se <strong>NP-completo</strong> - uma classe de problemas para os quais não se conhece algoritmo de tempo polinomial.
+                        </p>
+                        <div class="row row-cols-1 row-cols-sm-3 g-3">
+                            <div class="col">
+                                <div class="text-center p-3 bg-light rounded">
+                                    <i class="fas fa-exclamation-triangle fs-3 mb-2 text-warning"></i>
+                                    <div class="fw-medium text-warning">NP-Completo</div>
+                                    <small class="text-muted">Complexidade exponencial</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-light rounded">
+                                    <i class="fas fa-cogs fs-3 mb-2 text-primary"></i>
+                                    <div class="fw-medium text-primary">Algoritmos</div>
+                                    <small class="text-muted">DPLL, CDCL</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-light rounded">
+                                    <i class="fas fa-rocket fs-3 mb-2 text-success"></i>
+                                    <div class="fw-medium text-success">Inovação</div>
+                                    <small class="text-muted">Impulso tecnológico</small>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -883,10 +1002,10 @@
         <section id="historia" class="py-5" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
             <div class="container">
                 <div class="mx-auto fade-in" style="max-width: 64rem;">
-                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">6. História e Evolução: Sobre Ombros de Gigantes</h2>
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">8. História e Evolução: Sobre Ombros de Gigantes</h2>
                     
                     <p class="fs-5 text-muted mb-5">
-                        A Programação Lógica representa uma das pérolas mais reluzentes da evolução humana, construída sobre os trabalhos de gigantes da matemática e computação.
+                        No final do dia, cansados, porém felizes, vamos entender que a Programação Lógica representa uma das pérolas mais reluzentes da evolução humana, construída sobre os trabalhos de gigantes.
                     </p>
 
                     <!-- Historical Timeline -->
@@ -913,7 +1032,7 @@
                         <div class="timeline-item">
                             <h4 class="fs-5 fw-semibold mb-2">Isaac Newton</h4>
                             <p class="fs-6 text-muted mb-0">
-                                Embora anterior aos outros, sua frase "Se vi mais longe foi por estar sobre ombros de gigantes" captura o espírito científico que guia nossa jornada.
+                                "Se vi mais longe foi por estar sobre ombros de gigantes" - captura o espírito científico que guia nossa jornada na programação lógica.
                             </p>
                         </div>
                     </div>
@@ -922,50 +1041,50 @@
                     <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
                         <div class="col">
                             <div class="card h-100 p-4 rounded-3 shadow" style="background-color: var(--sage-50);">
-                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Origens (Anos 1970)</h3>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">O Objetivo Histórico</h3>
                                 <p class="fs-6 mb-3" style="color: var(--sage-700);">
-                                    O termo Programação Lógica surge como evolução dos esforços em:
+                                    Desde os tempos de Gödel, Turing e Church, tudo que queremos é que nossas máquinas sejam capazes de resolver problemas complexos com o mínimo de interferência nossa.
                                 </p>
-                                <div class="d-flex flex-column gap-2">
-                                    <div class="p-2 bg-white rounded">
-                                        <strong>Prova de Teoremas:</strong> <span class="text-muted">Automação de demonstrações matemáticas</span>
-                                    </div>
-                                    <div class="p-2 bg-white rounded">
-                                        <strong>Inteligência Artificial:</strong> <span class="text-muted">Simulação do raciocínio humano</span>
-                                    </div>
-                                    <div class="p-2 bg-white rounded">
-                                        <strong>Lógica Computacional:</strong> <span class="text-muted">Aplicação prática da lógica formal</span>
-                                    </div>
+                                <div class="border-start border-4 border-primary ps-3 mb-3">
+                                    <div class="fw-medium text-primary">Ambição</div>
+                                    <div class="fs-6 text-muted">Máquinas que pensem ou simulem pensamento</div>
+                                </div>
+                                <div class="border-start border-4 border-success ps-3">
+                                    <div class="fw-medium text-success">Resultado</div>
+                                    <div class="fs-6 text-muted">Programação Lógica como pérola da evolução</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="card h-100 p-4 rounded-3 shadow" style="background-color: var(--copper-50);">
-                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--copper-800);">Prolog: A Implementação</h3>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--copper-800);">Prolog: A Realização</h3>
                                 <p class="fs-6 mb-3" style="color: var(--copper-700);">
-                                    O surgimento do Prolog (Programming Logic) materializa a esperança de usar lógica como linguagem de programação.
+                                    Deste esforço surgiu a esperança de que poderíamos usar a lógica como uma linguagem de programação: <strong>Pro</strong>gramming in <strong>Lo</strong>gic, ou <strong>Prolog</strong>.
                                 </p>
-                                <div class="border-start border-4 border-warning ps-3 mb-3">
-                                    <div class="fw-medium text-warning">Objetivo</div>
-                                    <div class="fs-6 text-muted">Máquinas capazes de raciocinar como o homem</div>
-                                </div>
-                                <div class="border-start border-4 border-info ps-3">
-                                    <div class="fw-medium text-info">Resultado</div>
-                                    <div class="fs-6 text-muted">Linguagem declarativa baseada em lógica</div>
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="p-2 bg-white rounded">
+                                        <strong>Prova de Teoremas:</strong> <span class="text-muted">Automação matemática</span>
+                                    </div>
+                                    <div class="p-2 bg-white rounded">
+                                        <strong>Inteligência Artificial:</strong> <span class="text-muted">Raciocínio computacional</span>
+                                    </div>
+                                    <div class="p-2 bg-white rounded">
+                                        <strong>Programming Logic:</strong> <span class="text-muted">Implementação prática</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Future Vision -->
+                    <!-- Final Message -->
                     <div class="text-center">
                         <div class="d-inline-block p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-600), var(--copper-600));">
                             <h4 class="fs-3 fw-bold mb-3 text-white">A Jornada Continua</h4>
                             <p class="fs-5 mb-3 text-white">
-                                Esta é apenas a <strong>base do conhecimento</strong> para uma longa jornada que nos levará das profundezas da <strong>Lógica Proposicional</strong> até as alturas do <strong>Prolog</strong>.
+                                Este documento contém a <strong>base matemática</strong> que suporta o entendimento da programação lógica e um pouco de <strong>Prolog</strong>, como linguagem de programação para solução de problemas.
                             </p>
                             <div class="fs-6 text-white opacity-75">
-                                Preparemo-nos para navegar pelos mares da lógica matemática
+                                Será uma longa jornada - aqui está a base deste conhecimento.
                             </div>
                         </div>
                     </div>
