@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introdução à Programação Lógica - 3&nbsp; Lógica de Primeira Ordem</title>
+<title>Introdução à Programação Lógica - 4&nbsp; Lógica de Primeira Ordem: Lógica Proposicional</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./03-arte-da-prova-e-analise-de-argumentos.html" rel="next">
-<link href="./01-jornada-programacao-logica.html" rel="prev">
+<link href="./01a-introducao-prolog.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -111,7 +111,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-jornada-programacao-logica.html">Fundamentos da Lógica</a></li><li class="breadcrumb-item"><a href="./02-fundamentos-logica-proposicional.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-jornada-programacao-logica.html">Fundamentos da Lógica</a></li><li class="breadcrumb-item"><a href="./02-fundamentos-logica-proposicional.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem: Lógica Proposicional</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -142,7 +142,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Apresentação</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -157,25 +157,31 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-jornada-programacao-logica.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introdução</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introdução ao Paradigma da Programação Lógica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01a-introducao-prolog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introdução Prática ao Prolog com Swish</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-fundamentos-logica-proposicional.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem: Lógica Proposicional</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-arte-da-prova-e-analise-de-argumentos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Provas</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Provas</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-logica-predicativa-e-quantificadores.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lógica Predicativa</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem: Lógica Predicativa</span></span></a>
   </div>
 </li>
       </ul>
@@ -192,31 +198,31 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-formas-normais-e-skolemizacao.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Formas Normais</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Formas Normais</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-construcao-de-mundos-logicos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mundos na <strong>Lógica de Primeira Ordem</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Mundos na <strong>Lógica de Primeira Ordem</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-clausulas-de-horn-e-prolog.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Cláusulas de Horn</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Cláusulas de Horn</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-verificacao-formal-de-programas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-desafios-logicos-enigmas-e-misterios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Problemas Interessantes Resolvidos com <strong>Lógica Proposicional</strong> e Predicativa</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Problemas Interessantes Resolvidos com <strong>Lógica Proposicional</strong> e Predicativa</span></span></a>
   </div>
 </li>
       </ul>
@@ -224,13 +230,19 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apendice-a-glossario.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apendice-b-referencias.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Solucao-Exercicios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
   </div>
 </li>
     </ul>
@@ -239,24 +251,37 @@ window.Quarto = {
     <h2 id="toc-title">Sumário</h2>
    
   <ul>
-  <li><a href="#alfabeto-e-sintaxe-da-lógica-de-primeira-ordem" id="toc-alfabeto-e-sintaxe-da-lógica-de-primeira-ordem" class="nav-link active" data-scroll-target="#alfabeto-e-sintaxe-da-lógica-de-primeira-ordem"><span class="header-section-number">3.0.1</span> Alfabeto e Sintaxe da Lógica de Primeira Ordem</a></li>
-  <li><a href="#exercícios-sintaxe-e-fórmulas-bem-formadas" id="toc-exercícios-sintaxe-e-fórmulas-bem-formadas" class="nav-link" data-scroll-target="#exercícios-sintaxe-e-fórmulas-bem-formadas"><span class="header-section-number">3.0.2</span> Exercícios: Sintaxe e Fórmulas Bem Formadas</a></li>
-  <li><a href="#fundamentos-da-lógica-proposicional" id="toc-fundamentos-da-lógica-proposicional" class="nav-link" data-scroll-target="#fundamentos-da-lógica-proposicional"><span class="header-section-number">3.1</span> Fundamentos da Lógica Proposicional</a>
+  <li><a href="#alfabeto-e-sintaxe-da-lógica-de-primeira-ordem" id="toc-alfabeto-e-sintaxe-da-lógica-de-primeira-ordem" class="nav-link active" data-scroll-target="#alfabeto-e-sintaxe-da-lógica-de-primeira-ordem"><span class="header-section-number">4.0.1</span> Alfabeto e Sintaxe da Lógica de Primeira Ordem</a></li>
+  <li><a href="#exercícios-sintaxe-e-fórmulas-bem-formadas" id="toc-exercícios-sintaxe-e-fórmulas-bem-formadas" class="nav-link" data-scroll-target="#exercícios-sintaxe-e-fórmulas-bem-formadas"><span class="header-section-number">4.0.2</span> Exercícios: Sintaxe e Fórmulas Bem Formadas</a></li>
+  <li><a href="#fundamentos-da-lógica-proposicional" id="toc-fundamentos-da-lógica-proposicional" class="nav-link" data-scroll-target="#fundamentos-da-lógica-proposicional"><span class="header-section-number">4.1</span> Fundamentos da Lógica Proposicional</a>
   <ul class="collapse">
-  <li><a href="#exercícios-tabelas-verdade-e-conectivos-lógicos" id="toc-exercícios-tabelas-verdade-e-conectivos-lógicos" class="nav-link" data-scroll-target="#exercícios-tabelas-verdade-e-conectivos-lógicos"><span class="header-section-number">3.1.1</span> Exercícios: Tabelas-Verdade e Conectivos Lógicos</a></li>
-  <li><a href="#equivalências-lógicas" id="toc-equivalências-lógicas" class="nav-link" data-scroll-target="#equivalências-lógicas"><span class="header-section-number">3.1.2</span> Equivalências Lógicas</a></li>
-  <li><a href="#importância-histórica-e-aplicações" id="toc-importância-histórica-e-aplicações" class="nav-link" data-scroll-target="#importância-histórica-e-aplicações"><span class="header-section-number">3.1.3</span> Importância Histórica e Aplicações</a></li>
-  <li><a href="#exercícios-simplificação-com-equivalências-lógicas" id="toc-exercícios-simplificação-com-equivalências-lógicas" class="nav-link" data-scroll-target="#exercícios-simplificação-com-equivalências-lógicas"><span class="header-section-number">3.1.4</span> Exercícios: Simplificação com Equivalências Lógicas</a></li>
+  <li><a href="#exercícios-tabelas-verdade-e-conectivos-lógicos" id="toc-exercícios-tabelas-verdade-e-conectivos-lógicos" class="nav-link" data-scroll-target="#exercícios-tabelas-verdade-e-conectivos-lógicos"><span class="header-section-number">4.1.1</span> Exercícios: Tabelas-Verdade e Conectivos Lógicos</a></li>
+  <li><a href="#equivalências-lógicas" id="toc-equivalências-lógicas" class="nav-link" data-scroll-target="#equivalências-lógicas"><span class="header-section-number">4.1.2</span> Equivalências Lógicas</a></li>
+  <li><a href="#importância-histórica-e-aplicações" id="toc-importância-histórica-e-aplicações" class="nav-link" data-scroll-target="#importância-histórica-e-aplicações"><span class="header-section-number">4.1.3</span> Importância Histórica e Aplicações</a></li>
+  <li><a href="#exercícios-simplificação-com-equivalências-lógicas" id="toc-exercícios-simplificação-com-equivalências-lógicas" class="nav-link" data-scroll-target="#exercícios-simplificação-com-equivalências-lógicas"><span class="header-section-number">4.1.4</span> Exercícios: Simplificação com Equivalências Lógicas</a></li>
   </ul></li>
-  <li><a href="#sistema-dedutivo-da-lógica-proposicional" id="toc-sistema-dedutivo-da-lógica-proposicional" class="nav-link" data-scroll-target="#sistema-dedutivo-da-lógica-proposicional"><span class="header-section-number">3.2</span> Sistema Dedutivo da Lógica Proposicional</a>
+  <li><a href="#sistema-dedutivo-da-lógica-proposicional" id="toc-sistema-dedutivo-da-lógica-proposicional" class="nav-link" data-scroll-target="#sistema-dedutivo-da-lógica-proposicional"><span class="header-section-number">4.2</span> Sistema Dedutivo da Lógica Proposicional</a>
   <ul class="collapse">
-  <li><a href="#regras-de-inferência" id="toc-regras-de-inferência" class="nav-link" data-scroll-target="#regras-de-inferência"><span class="header-section-number">3.2.1</span> Regras de Inferência</a></li>
-  <li><a href="#exercícios-provas-com-regras-de-inferência" id="toc-exercícios-provas-com-regras-de-inferência" class="nav-link" data-scroll-target="#exercícios-provas-com-regras-de-inferência"><span class="header-section-number">3.2.2</span> Exercícios: Provas com Regras de Inferência</a></li>
+  <li><a href="#regras-de-inferência" id="toc-regras-de-inferência" class="nav-link" data-scroll-target="#regras-de-inferência"><span class="header-section-number">4.2.1</span> Regras de Inferência</a></li>
+  <li><a href="#exercícios-provas-com-regras-de-inferência" id="toc-exercícios-provas-com-regras-de-inferência" class="nav-link" data-scroll-target="#exercícios-provas-com-regras-de-inferência"><span class="header-section-number">4.2.2</span> Exercícios: Provas com Regras de Inferência</a></li>
   </ul></li>
-  <li><a href="#análise-semântica-de-fórmulas" id="toc-análise-semântica-de-fórmulas" class="nav-link" data-scroll-target="#análise-semântica-de-fórmulas"><span class="header-section-number">3.3</span> Análise Semântica de Fórmulas</a>
+  <li><a href="#análise-semântica-de-fórmulas" id="toc-análise-semântica-de-fórmulas" class="nav-link" data-scroll-target="#análise-semântica-de-fórmulas"><span class="header-section-number">4.3</span> Análise Semântica de Fórmulas</a>
   <ul class="collapse">
-  <li><a href="#classificação-das-fórmulas-proposicionais" id="toc-classificação-das-fórmulas-proposicionais" class="nav-link" data-scroll-target="#classificação-das-fórmulas-proposicionais"><span class="header-section-number">3.3.1</span> Classificação das Fórmulas Proposicionais</a></li>
-  <li><a href="#exercícios-análise-semântica-de-fórmulas" id="toc-exercícios-análise-semântica-de-fórmulas" class="nav-link" data-scroll-target="#exercícios-análise-semântica-de-fórmulas"><span class="header-section-number">3.3.2</span> Exercícios: Análise Semântica de Fórmulas</a></li>
+  <li><a href="#classificação-das-fórmulas-proposicionais" id="toc-classificação-das-fórmulas-proposicionais" class="nav-link" data-scroll-target="#classificação-das-fórmulas-proposicionais"><span class="header-section-number">4.3.1</span> Classificação das Fórmulas Proposicionais</a></li>
+  <li><a href="#exercícios-análise-semântica-de-fórmulas" id="toc-exercícios-análise-semântica-de-fórmulas" class="nav-link" data-scroll-target="#exercícios-análise-semântica-de-fórmulas"><span class="header-section-number">4.3.2</span> Exercícios: Análise Semântica de Fórmulas</a></li>
+  </ul></li>
+  <li><a href="#exercícios-de-conexão-com-o-prolog" id="toc-exercícios-de-conexão-com-o-prolog" class="nav-link" data-scroll-target="#exercícios-de-conexão-com-o-prolog"><span class="header-section-number">4.4</span> Exercícios de Conexão com o Prolog</a>
+  <ul class="collapse">
+  <li><a href="#questão-1-diagnóstico-de-sistema" id="toc-questão-1-diagnóstico-de-sistema" class="nav-link" data-scroll-target="#questão-1-diagnóstico-de-sistema"><span class="header-section-number">4.4.1</span> Questão 1: Diagnóstico de Sistema</a></li>
+  <li><a href="#questão-2-validação-de-circuito-lógico-half-adder" id="toc-questão-2-validação-de-circuito-lógico-half-adder" class="nav-link" data-scroll-target="#questão-2-validação-de-circuito-lógico-half-adder"><span class="header-section-number">4.4.2</span> Questão 2: Validação de Circuito Lógico (Half-Adder)</a></li>
+  <li><a href="#questão-3-análise-de-contrato-de-serviço-corrigida" id="toc-questão-3-análise-de-contrato-de-serviço-corrigida" class="nav-link" data-scroll-target="#questão-3-análise-de-contrato-de-serviço-corrigida"><span class="header-section-number">4.4.3</span> Questão 3: Análise de Contrato de Serviço (Corrigida)</a></li>
+  <li><a href="#questão-4-dependências-de-compilação-corrigida" id="toc-questão-4-dependências-de-compilação-corrigida" class="nav-link" data-scroll-target="#questão-4-dependências-de-compilação-corrigida"><span class="header-section-number">4.4.4</span> Questão 4: Dependências de Compilação (Corrigida)</a></li>
+  <li><a href="#questão-5-regras-de-um-jogo" id="toc-questão-5-regras-de-um-jogo" class="nav-link" data-scroll-target="#questão-5-regras-de-um-jogo"><span class="header-section-number">4.4.5</span> Questão 5: Regras de um Jogo</a></li>
+  <li><a href="#questão-6-decisão-de-um-robô-autônomo" id="toc-questão-6-decisão-de-um-robô-autônomo" class="nav-link" data-scroll-target="#questão-6-decisão-de-um-robô-autônomo"><span class="header-section-number">4.4.6</span> Questão 6: Decisão de um Robô Autônomo</a></li>
+  <li><a href="#questão-7-simplificação-de-query-de-banco-de-dados-corrigida" id="toc-questão-7-simplificação-de-query-de-banco-de-dados-corrigida" class="nav-link" data-scroll-target="#questão-7-simplificação-de-query-de-banco-de-dados-corrigida"><span class="header-section-number">4.4.7</span> Questão 7: Simplificação de Query de Banco de Dados (Corrigida)</a></li>
+  <li><a href="#questão-8-o-paradoxo-do-mentiroso-versão-proposicional" id="toc-questão-8-o-paradoxo-do-mentiroso-versão-proposicional" class="nav-link" data-scroll-target="#questão-8-o-paradoxo-do-mentiroso-versão-proposicional"><span class="header-section-number">4.4.8</span> Questão 8: O Paradoxo do Mentiroso (Versão Proposicional)</a></li>
+  <li><a href="#questão-9-política-de-firewall" id="toc-questão-9-política-de-firewall" class="nav-link" data-scroll-target="#questão-9-política-de-firewall"><span class="header-section-number">4.4.9</span> Questão 9: Política de Firewall</a></li>
+  <li><a href="#questão-10-tautologia-contradição-ou-contingência" id="toc-questão-10-tautologia-contradição-ou-contingência" class="nav-link" data-scroll-target="#questão-10-tautologia-contradição-ou-contingência"><span class="header-section-number">4.4.10</span> Questão 10: Tautologia, Contradição ou Contingência?</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/logica/edit/main/02-fundamentos-logica-proposicional.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/logica/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -268,9 +293,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-jornada-programacao-logica.html">Fundamentos da Lógica</a></li><li class="breadcrumb-item"><a href="./02-fundamentos-logica-proposicional.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-jornada-programacao-logica.html">Fundamentos da Lógica</a></li><li class="breadcrumb-item"><a href="./02-fundamentos-logica-proposicional.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem: Lógica Proposicional</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem</span></h1>
+<h1 class="title"><span id="sec-logica-proposicional" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem: Lógica Proposicional</span></span></h1>
 </div>
 
 
@@ -303,8 +328,8 @@ Tip
 <p>A <strong>Lógica de Primeira Ordem</strong> é uma estrutura básica da ciência da computação e da programação. Ela nos permite discursar e raciocinar com precisão sobre os elementos - podemos fazer afirmações sobre todo um grupo, ou sobre um único elemento em particular. No entanto, tem suas limitações. Na <strong>Lógica de Primeira Ordem</strong> clássica não podemos fazer afirmações diretas sobre predicados ou funções. Entretanto, algumas extensões, como a Lógica de Segunda Ordem, permitem fazer afirmações sobre predicados e funções.</p>
 <p>Essa restrição não é um defeito, mas sim um equilíbrio cuidadoso entre poder expressivo e simplicidade computacional. Dá-nos uma forma de formular uma grande variedade de problemas, sem tornar o processo de resolução desses problemas excessivamente complexo.</p>
 <p>A <strong>Lógica de Primeira Ordem</strong> é o nosso ponto de partida, nossa base, a pedra fundamental. Uma forma poderosa e útil de olhar para o universo, não tão complicada que seja hermética a olhos leigos, mas suficientemente complexa para permitir a descoberta de alguns dos mistérios da matemática e, no processo, resolver alguns problemas práticos.</p>
-<section id="alfabeto-e-sintaxe-da-lógica-de-primeira-ordem" class="level3" data-number="3.0.1">
-<h3 data-number="3.0.1" class="anchored" data-anchor-id="alfabeto-e-sintaxe-da-lógica-de-primeira-ordem"><span class="header-section-number">3.0.1</span> Alfabeto e Sintaxe da Lógica de Primeira Ordem</h3>
+<section id="alfabeto-e-sintaxe-da-lógica-de-primeira-ordem" class="level3" data-number="4.0.1">
+<h3 data-number="4.0.1" class="anchored" data-anchor-id="alfabeto-e-sintaxe-da-lógica-de-primeira-ordem"><span class="header-section-number">4.0.1</span> Alfabeto e Sintaxe da Lógica de Primeira Ordem</h3>
 <p>A <strong>Lógica de Primeira Ordem</strong> é uma linguagem e, consequentemente, foi criada a partir de um alfabeto, <span class="math inline">\(\Sigma\)</span>, de um conjunto de axiomas e de um conjunto de regras de inferência. Esta linguagem consiste de todas as <strong>Fórmulas Bem Formadas</strong> da teoria das lógicas proposicional e predicativa. Neste ponto, a atenta leitora deve perceber que o conjunto de axiomas é um subconjunto do conjunto de <strong>Fórmulas Bem Formadas</strong>.</p>
 <p>O alfabeto <span class="math inline">\(\Sigma\)</span> que estamos definindo poderá ser dividido em classes formadas por conjuntos de símbolos agrupados por semelhança. Assim:</p>
 <ol type="1">
@@ -317,8 +342,8 @@ Tip
 </ol>
 <p>Na lógica matemática, uma <strong>Fórmula Bem Formada</strong>, ou Expressão Bem Formada, é uma sequência <strong>finita</strong> de símbolos formada de acordo com as regras gramaticais de uma linguagem formal especificamente desenvolvida para a redação das fórmulas da lógica.</p>
 <p><em>Em <strong>Lógica de Primeira Ordem</strong>, uma <strong>Fórmula Bem Formada</strong> é uma expressão que <strong>só pode ser</strong> verdadeira ou falsa</em>. As <strong>Fórmulas Bem Formadas</strong> são compostas de símbolos que representam quantificadores, variáveis, constantes, predicados, e conectivos lógicos. Cuja distribuição e uso seguirão as regras sintáticas, gramaticais e semânticas da linguagem da lógica. Aprender lógica é aprender esta linguagem.</p>
-<section id="precedência-de-operadores-e-uso-de-parênteses" class="level4" data-number="3.0.1.1">
-<h4 data-number="3.0.1.1" class="anchored" data-anchor-id="precedência-de-operadores-e-uso-de-parênteses"><span class="header-section-number">3.0.1.1</span> Precedência de Operadores e Uso de Parênteses</h4>
+<section id="precedência-de-operadores-e-uso-de-parênteses" class="level4" data-number="4.0.1.1">
+<h4 data-number="4.0.1.1" class="anchored" data-anchor-id="precedência-de-operadores-e-uso-de-parênteses"><span class="header-section-number">4.0.1.1</span> Precedência de Operadores e Uso de Parênteses</h4>
 <p>Em qualquer linguagem matemática, sem dúvida, a regra sintática mais importante é a precedência das operações, uma espécie de receita indexada. Que deve ser seguida à letra. Neste texto, vamos nos restringir a seguinte ordem de precedência:</p>
 <p><span class="math display">\[\neg, \forall, \exists, \wedge, \vee, \rightarrow, \leftrightarrow\]</span></p>
 <p>Dando maior precedência a <span class="math inline">\(\neg\)</span> (negação) e a menor a <span class="math inline">\(\leftrightarrow\)</span> (equivalência). Além disso, os parenteses <span class="math inline">\((\)</span> e <span class="math inline">\()\)</span> são usados para agrupar expressões e definir a ordem de precedência. O uso dos parênteses e da ordem de precedência requer cautela, muita cautela. Os parênteses permitem que possamos escrever <span class="math inline">\((\forall x(\exists y (P(x,y)\rightarrow Q(x))))\)</span> ou <span class="math inline">\(\forall x \exists y (P(x,y)\rightarrow Q(x))\,\)</span> duas expressões diferentes que são a mesma <strong>Fórmula Bem Formada</strong>, ainda que a segunda graças à omissão dos parênteses seja ambígua e permita outras interpretações. Escolha a opção que seja mais fácil de ler, entender e explicar. Todavia, cuidado com a ambiguidade.</p>
@@ -341,8 +366,8 @@ Tip
 <p>Finalmente podemos definir a linguagem da <strong>Lógica de Primeira Ordem</strong> como o conjunto de todas as <strong>Fórmulas Bem Formadas</strong> criadas a partir dos campos de estudo da <strong>Lógica Proposicional</strong> e da Lógica de Predicados. Termos e átomos interligados em uma teia, em que cada termo ou átomo é como uma ilha de verdade. <em>A chuva cai</em>, <em>O sol brilha</em>. Cada uma dessas proposições é verdadeira ou falsa, em si, uma unidade, como uma ilha. As operações lógicas são as pontes que conectam essas ilhas, permitindo-nos construir as estruturas mais complexas da razão.</p>
 </section>
 </section>
-<section id="exercícios-sintaxe-e-fórmulas-bem-formadas" class="level3" data-number="3.0.2">
-<h3 data-number="3.0.2" class="anchored" data-anchor-id="exercícios-sintaxe-e-fórmulas-bem-formadas"><span class="header-section-number">3.0.2</span> Exercícios: Sintaxe e Fórmulas Bem Formadas</h3>
+<section id="exercícios-sintaxe-e-fórmulas-bem-formadas" class="level3" data-number="4.0.2">
+<h3 data-number="4.0.2" class="anchored" data-anchor-id="exercícios-sintaxe-e-fórmulas-bem-formadas"><span class="header-section-number">4.0.2</span> Exercícios: Sintaxe e Fórmulas Bem Formadas</h3>
 <ol type="1">
 <li><p>Na fórmula $ x (P(x) Q(a)) $, identifique:</p>
 <ol type="a">
@@ -370,15 +395,15 @@ Tip
 <li><p>A expressão <span class="math inline">\(\forall x (P(x) \land ) \rightarrow Q(a)\)</span> é uma FBF? Justifique.</p></li>
 </ol>
 </section>
-<section id="fundamentos-da-lógica-proposicional" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="fundamentos-da-lógica-proposicional"><span class="header-section-number">3.1</span> Fundamentos da Lógica Proposicional</h2>
+<section id="fundamentos-da-lógica-proposicional" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="fundamentos-da-lógica-proposicional"><span class="header-section-number">4.1</span> Fundamentos da Lógica Proposicional</h2>
 <p>Esse sistema, também chamado de álgebra booleana, fundamental para o desenvolvimento da computação, é uma verdadeira tapeçaria de possibilidades. <strong>Na </strong>Lógica Proposicional<strong>, declarações atômicas, que só podem ter valores verdadeiro, <span class="math inline">\(TRUE\)</span>, ou falso <span class="math inline">\(FALSE\)</span>, são entrelaçadas em declarações compostas cuja veracidade, segundo as regras desse cálculo, depende dos valores de verdade das declarações atômicas que as compõem quando sujeitas aos operadores, ou aos conectivos, que definimos anteriormente</strong>.</p>
 <p>Na <strong>Lógica Proposicional</strong>, representamos <strong>proposições atômicas</strong> por letras como <span class="math inline">\(P\)</span>, <span class="math inline">\(Q\)</span>, <span class="math inline">\(R\)</span>, <span class="math inline">\(S\)</span>, ou usando índices como em <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, etc. Um <strong>literal</strong> será definido como uma variável literal, ou uma proposição atômica, (por exemplo, <span class="math inline">\(P\)</span> ou <span class="math inline">\(Q\)</span>) ou sua negação (por exemplo, <span class="math inline">\(\neg P\)</span> ou <span class="math inline">\(\neg Q\)</span>). Os literais são as unidades básicas da <strong>Lógica Proposicional</strong>, assumindo valores de verdade verdadeiro (<span class="math inline">\(TRUE\)</span>) ou falso (<span class="math inline">\(FALSE\)</span>), e são combinados por conectivos lógicos (<span class="math inline">\(\neg, \wedge, \vee, \rightarrow, \leftrightarrow\)</span>) para formar fórmulas mais complexas.</p>
 <p>Na <strong>Lógica Proposicional</strong>, as fórmulas são conhecidas como <strong>Fórmulas Bem Formadas</strong>. Elas podem ser atômicas ou compostas. Nas fórmulas compostas, um operador principal, um conectivo, liga duas fórmulas atômicas, ou duas fórmulas compostas. Ou seja, as declarações atômicas e compostas são costuradas por conectivos para produzir declarações compostas, cujo valor de verdade depende dos valores de verdade das declarações componentes. Os conectivos que consideramos inicialmente, e suas tabelas-verdade podem ser vistos na #tbl-verdade1:</p>
 <div id="tbl-verdade1" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-verdade1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3.1: Tabela Verdade, operadores básicos.
+Table&nbsp;4.1: Tabela Verdade, operadores básicos.
 </figcaption>
 <div aria-describedby="tbl-verdade1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
@@ -444,20 +469,20 @@ Table&nbsp;3.1: Tabela Verdade, operadores básicos.
 </div>
 </figure>
 </div>
-<section id="análise-dos-conectivos-lógicos" class="level4" data-number="3.1.0.1">
-<h4 data-number="3.1.0.1" class="anchored" data-anchor-id="análise-dos-conectivos-lógicos"><span class="header-section-number">3.1.0.1</span> Análise dos Conectivos Lógicos</h4>
+<section id="análise-dos-conectivos-lógicos" class="level4" data-number="4.1.0.1">
+<h4 data-number="4.1.0.1" class="anchored" data-anchor-id="análise-dos-conectivos-lógicos"><span class="header-section-number">4.1.0.1</span> Análise dos Conectivos Lógicos</h4>
 <p>Quando usamos a Tabela Verdade em uma declaração composta, podemos verificar a fórmula como verdadeira ou falsa. Para tanto, basta seguir as regras de precedência e aplicar os valores representados na Tabela Verdade de cada conectivo, simplificando a expressão. O uso da Tabela Verdade é uma alternativa mais direta do que o uso dos axiomas da <strong>Lógica Proposicional</strong>.</p>
-<p>Na tabela <a href="#tbl-verdade1" class="quarto-xref">Table&nbsp;<span>3.1</span></a>, listamos os conectivos, ou operadores, da <strong>Lógica Proposicional</strong>.</p>
+<p>Na tabela <a href="#tbl-verdade1" class="quarto-xref">Table&nbsp;<span>4.1</span></a>, listamos os conectivos, ou operadores, da <strong>Lógica Proposicional</strong>.</p>
 <p>O operador <span class="math inline">\(\vee\)</span>, também chamado de ou inclusivo, é verdadeiro quando pelo menos um dos termos é verdadeiro. A atenta leitora deve observar que o <span class="math inline">\(\vee\)</span> difere do operador <span class="math inline">\(\oplus\)</span>, ou exclusivo, que será falso se ambos os termos forem iguais, sejam eles verdadeiros ou falsos.</p>
 <p>O operador <span class="math inline">\(\wedge\)</span>, também chamado de conjunção, é verdadeiro apenas quando ambos os termos são verdadeiros. Em linguagem natural, corresponde ao “e” lógico, como em “o céu está azul e a grama é verde”.</p>
 <p>O condicional <span class="math inline">\(\rightarrow\)</span> não implica em causalidade. O condicional <span class="math inline">\(\rightarrow\)</span> é falso apenas quando o antecedente é verdadeiro e o consequente é falso.</p>
 <p>O bicondicional <span class="math inline">\(\leftrightarrow\)</span> equivale a ambos os componentes terem o mesmo valor-verdade. Em linguagem natural, corresponde à expressão “se e somente se”, indicando que as duas proposições são verdadeiras ou falsas simultaneamente.</p>
 <p>Todos os operadores, ou conectivos, conectam duas declarações, exceto <span class="math inline">\(\neg\)</span> que se aplica a apenas um termo. O operador <span class="math inline">\(\neg\)</span>, chamado de negação, inverte o valor-verdade de uma proposição, sendo verdadeiro quando a proposição é falsa e vice-versa.</p>
-<p>Cada operador com sua própria aridade como pode ser visto na <a href="#tbl-aridade1" class="quarto-xref">Table&nbsp;<span>3.2</span></a>:</p>
+<p>Cada operador com sua própria aridade como pode ser visto na <a href="#tbl-aridade1" class="quarto-xref">Table&nbsp;<span>4.2</span></a>:</p>
 <div id="tbl-aridade1" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-aridade1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3.2: Aridade dos Operadores da <strong>Lógica Proposicional</strong>.
+Table&nbsp;4.2: Aridade dos Operadores da <strong>Lógica Proposicional</strong>.
 </figcaption>
 <div aria-describedby="tbl-aridade1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
@@ -484,10 +509,10 @@ Table&nbsp;3.2: Aridade dos Operadores da <strong>Lógica Proposicional</strong>
 </div>
 </figure>
 </div>
-<p>Ainda observando a <a href="#tbl-verdade1" class="quarto-xref">Table&nbsp;<span>3.1</span></a>, que contém a Tabela Verdade dos operadores da <strong>Lógica Proposicional</strong>, é possível perceber que se tivermos quatro termos diferentes, em vez de dois, teremos <span class="math inline">\(2^4 = 16\)</span> linhas. Independentemente do número de termos, se para uma determinada <strong>Fórmula Bem Formada</strong> todos os resultados forem verdadeiros, <span class="math inline">\(TRUE\)</span>, teremos uma <em>tautologia</em>, se todos forem falsos, <span class="math inline">\(FALSE\)</span> uma <em>contradição</em>.</p>
+<p>Ainda observando a <a href="#tbl-verdade1" class="quarto-xref">Table&nbsp;<span>4.1</span></a>, que contém a Tabela Verdade dos operadores da <strong>Lógica Proposicional</strong>, é possível perceber que se tivermos quatro termos diferentes, em vez de dois, teremos <span class="math inline">\(2^4 = 16\)</span> linhas. Independentemente do número de termos, se para uma determinada <strong>Fórmula Bem Formada</strong> todos os resultados forem verdadeiros, <span class="math inline">\(TRUE\)</span>, teremos uma <em>tautologia</em>, se todos forem falsos, <span class="math inline">\(FALSE\)</span> uma <em>contradição</em>.</p>
 </section>
-<section id="exercícios-tabelas-verdade-e-conectivos-lógicos" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="exercícios-tabelas-verdade-e-conectivos-lógicos"><span class="header-section-number">3.1.1</span> Exercícios: Tabelas-Verdade e Conectivos Lógicos</h3>
+<section id="exercícios-tabelas-verdade-e-conectivos-lógicos" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="exercícios-tabelas-verdade-e-conectivos-lógicos"><span class="header-section-number">4.1.1</span> Exercícios: Tabelas-Verdade e Conectivos Lógicos</h3>
 <p><strong>Instrução:</strong> Para cada uma das fórmulas a seguir, construa a tabela-verdade completa.</p>
 <ol type="1">
 <li><span class="math inline">\(P \rightarrow \neg Q\)</span></li>
@@ -502,18 +527,18 @@ Table&nbsp;3.2: Aridade dos Operadores da <strong>Lógica Proposicional</strong>
 <li>Construa a tabela-verdade para a fórmula <span class="math inline">\((P \lor Q) \rightarrow (P \land Q)\)</span>.</li>
 </ol>
 </section>
-<section id="equivalências-lógicas" class="level3" data-number="3.1.2">
-<h3 data-number="3.1.2" class="anchored" data-anchor-id="equivalências-lógicas"><span class="header-section-number">3.1.2</span> Equivalências Lógicas</h3>
-<section id="principais-leis-da-lógica-proposicional" class="level4" data-number="3.1.2.1">
-<h4 data-number="3.1.2.1" class="anchored" data-anchor-id="principais-leis-da-lógica-proposicional"><span class="header-section-number">3.1.2.1</span> Principais Leis da Lógica Proposicional</h4>
+<section id="equivalências-lógicas" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="equivalências-lógicas"><span class="header-section-number">4.1.2</span> Equivalências Lógicas</h3>
+<section id="principais-leis-da-lógica-proposicional" class="level4" data-number="4.1.2.1">
+<h4 data-number="4.1.2.1" class="anchored" data-anchor-id="principais-leis-da-lógica-proposicional"><span class="header-section-number">4.1.2.1</span> Principais Leis da Lógica Proposicional</h4>
 <p><strong>Uma tautologia é uma fórmula que é sempre verdadeira, não importa os valores dados às variáveis</strong>. Na Programação Lógica, tautologias são verdades universais no domínio do problema. Uma contradição é uma fórmula que é sempre falsa, independentemente dos valores das variáveis. Em Programação Lógica, contradições mostram inconsistências ou impossibilidades lógicas no domínio.</p>
 <p>Identificar tautologias permite simplificar expressões e fazer inferências válidas automaticamente. Reconhecer contradições evita o custo de tentar provar algo logicamente impossível.</p>
 <p>Linguagens de programação que usam a Programação Lógica usam <strong>unificação</strong> e resolução para fazer deduções. Tautologias geram cláusulas vazias que simplificam esta resolução. Em problemas de <strong>satisfatibilidade</strong>, se obtivermos uma contradição, sabemos que as premissas são insatisfatíveis. Segure as lágrimas e o medo. Os termos <strong>unificação</strong> e <strong>satisfatibilidade</strong> serão explicados assim que sejam necessários. Antes disso, precisamos falar de <em>equivalências</em>. Para isso vamos incluir um metacaractere no alfabeto da nossa linguagem: o caractere <span class="math inline">\(\equiv\)</span> que permitirá o entendimento das principais equivalências da <strong>Lógica Proposicional</strong> explicitadas a seguir:</p>
-<p>As equivalências lógicas permitem validar <strong>Fórmulas Bem Formadas</strong> sem recorrer a tabelas-verdade, simplificando expressões e facilitando provas lógicas. A tabela <a href="#tbl-equivalencias" class="quarto-xref">Table&nbsp;<span>3.3</span></a> que usa um metasímbolo para definir equivalência <span class="math inline">\(\equiv\)</span>, que não faz parte da linguagem que definimos para a lógica de primeira ordem mas será usado aqui em prol da didática, apresenta as principais equivalências da Lógica Proposicional, usadas nos exemplos deste documento:</p>
+<p>As equivalências lógicas permitem validar <strong>Fórmulas Bem Formadas</strong> sem recorrer a tabelas-verdade, simplificando expressões e facilitando provas lógicas. A tabela <a href="#tbl-equivalencias" class="quarto-xref">Table&nbsp;<span>4.3</span></a> que usa um metasímbolo para definir equivalência <span class="math inline">\(\equiv\)</span>, que não faz parte da linguagem que definimos para a lógica de primeira ordem mas será usado aqui em prol da didática, apresenta as principais equivalências da Lógica Proposicional, usadas nos exemplos deste documento:</p>
 <div id="tbl-equivalencias" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-equivalencias-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3.3: Tabela 3 - Equivalências em Lógica Proposicional.
+Table&nbsp;4.3: Tabela 3 - Equivalências em Lógica Proposicional.
 </figcaption>
 <div aria-describedby="tbl-equivalencias-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
@@ -640,13 +665,13 @@ Table&nbsp;3.3: Tabela 3 - Equivalências em Lógica Proposicional.
 </div>
 </figure>
 </div>
-<p>Como as equivalências apresentadas na Tabela <a href="#tbl-equivalencias" class="quarto-xref">Table&nbsp;<span>3.3</span></a> permitem validar <strong>Fórmulas Bem Formadas</strong>, sem o uso de uma tabela verdade, a corajosa leitora poderia tentar provar cada uma delas.</p>
+<p>Como as equivalências apresentadas na Tabela <a href="#tbl-equivalencias" class="quarto-xref">Table&nbsp;<span>4.3</span></a> permitem validar <strong>Fórmulas Bem Formadas</strong>, sem o uso de uma tabela verdade, a corajosa leitora poderia tentar provar cada uma delas.</p>
 </section>
-<section id="aplicação-das-equivalências-lógicas" class="level4" data-number="3.1.2.2">
-<h4 data-number="3.1.2.2" class="anchored" data-anchor-id="aplicação-das-equivalências-lógicas"><span class="header-section-number">3.1.2.2</span> Aplicação das Equivalências Lógicas</h4>
+<section id="aplicação-das-equivalências-lógicas" class="level4" data-number="4.1.2.2">
+<h4 data-number="4.1.2.2" class="anchored" data-anchor-id="aplicação-das-equivalências-lógicas"><span class="header-section-number">4.1.2.2</span> Aplicação das Equivalências Lógicas</h4>
 <p>As equivalências que mencionei surgiram quase naturalmente enquanto escrevia, mais por hábito e necessidade do que por um raciocínio organizado. Existem muitas equivalências, mas essas são as que uso com mais frequência. Talvez, alguns exemplos de validação de <strong>Fórmulas Bem Formadas</strong>, usando apenas as equivalências da Tabela 3, possam inflar as velas do conhecimento e nos guiar pelo caminho que devemos seguir:</p>
-<section id="exemplos-de-simplificação---nível-básico" class="level5" data-number="3.1.2.2.1">
-<h5 data-number="3.1.2.2.1" class="anchored" data-anchor-id="exemplos-de-simplificação---nível-básico"><span class="header-section-number">3.1.2.2.1</span> Exemplos de Simplificação - Nível Básico</h5>
+<section id="exemplos-de-simplificação---nível-básico" class="level5" data-number="4.1.2.2.1">
+<h5 data-number="4.1.2.2.1" class="anchored" data-anchor-id="exemplos-de-simplificação---nível-básico"><span class="header-section-number">4.1.2.2.1</span> Exemplos de Simplificação - Nível Básico</h5>
 <p><strong>Exemplo 1</strong>: Vamos simplificar a fórmula <span class="math inline">\(P \wedge (Q \vee (P \wedge R))\)</span> e analisar suas propriedades lógicas.</p>
 <p><span class="math display">\[
 \begin{align*}
@@ -762,8 +787,8 @@ P \rightarrow (Q \wedge (R \vee P)) &amp;\equiv \neg P \vee (Q \wedge (R \vee P)
 \end{align*}
 \]</span></p>
 </section>
-<section id="exemplos-de-simplificação---nível-intermediário" class="level5" data-number="3.1.2.2.2">
-<h5 data-number="3.1.2.2.2" class="anchored" data-anchor-id="exemplos-de-simplificação---nível-intermediário"><span class="header-section-number">3.1.2.2.2</span> Exemplos de Simplificação - Nível Intermediário</h5>
+<section id="exemplos-de-simplificação---nível-intermediário" class="level5" data-number="4.1.2.2.2">
+<h5 data-number="4.1.2.2.2" class="anchored" data-anchor-id="exemplos-de-simplificação---nível-intermediário"><span class="header-section-number">4.1.2.2.2</span> Exemplos de Simplificação - Nível Intermediário</h5>
 <p><strong>Exemplo 4</strong>: <span class="math inline">\(\neg ((P \rightarrow Q) \wedge (R \rightarrow S))\)</span></p>
 <p><span class="math display">\[
 \begin{align*}
@@ -839,8 +864,8 @@ P \rightarrow (Q \wedge (R \vee P)) &amp;\equiv \neg P \vee (Q \wedge (R \vee P)
 - A fórmula é <strong>falsificável</strong>, pois existem valorações que a tornam falsa</p>
 <p><strong>Conclusão</strong>: A fórmula <span class="math inline">\(P \wedge (Q \vee (R \rightarrow S)) \vee (\neg E \leftrightarrow P)\)</span> é satisfatível e falsificável, mas não é uma tautologia.</p>
 </section>
-<section id="exemplos-de-simplificação---nível-avançado" class="level5" data-number="3.1.2.2.3">
-<h5 data-number="3.1.2.2.3" class="anchored" data-anchor-id="exemplos-de-simplificação---nível-avançado"><span class="header-section-number">3.1.2.2.3</span> Exemplos de Simplificação - Nível Avançado</h5>
+<section id="exemplos-de-simplificação---nível-avançado" class="level5" data-number="4.1.2.2.3">
+<h5 data-number="4.1.2.2.3" class="anchored" data-anchor-id="exemplos-de-simplificação---nível-avançado"><span class="header-section-number">4.1.2.2.3</span> Exemplos de Simplificação - Nível Avançado</h5>
 <p>Os exemplos a seguir envolvem fórmulas com múltiplas variáveis proposicionais e conectivos complexos. Estes casos demonstram a aplicação sistemática das equivalências lógicas em situações mais desafiadoras, nas quais a análise de propriedades semânticas requer maior cuidado.</p>
 <p><strong>Exemplo 7</strong>: Determinar se a fórmula $ (P (Q R)) ((S E) (P Q)) $ é uma equivalência lógica.</p>
 <p>Vamos simplificar ambos os lados separadamente:</p>
@@ -1172,13 +1197,13 @@ P \rightarrow (Q \wedge (R \vee P)) &amp;\equiv \neg P \vee (Q \wedge (R \vee P)
 </section>
 </section>
 </section>
-<section id="importância-histórica-e-aplicações" class="level3" data-number="3.1.3">
-<h3 data-number="3.1.3" class="anchored" data-anchor-id="importância-histórica-e-aplicações"><span class="header-section-number">3.1.3</span> Importância Histórica e Aplicações</h3>
+<section id="importância-histórica-e-aplicações" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="importância-histórica-e-aplicações"><span class="header-section-number">4.1.3</span> Importância Histórica e Aplicações</h3>
 <p><em>Em sua dissertação de final de curso, <a href="https://en.wikipedia.org/wiki/Claude_Shannon">Claude Shannon</a> usou a álgebra booleana para simplificar circuitos de controle. Desde então, as operações básicas dessa álgebra — <strong><em>AND</em></strong>, <strong><em>OR</em></strong>, <strong><em>NOT</em></strong> — tornaram-se os blocos fundamentais dos sistemas digitais. Elas formam o núcleo dos computadores, dos celulares e, na verdade, de toda a nossa civilização digital. A <strong>Lógica Proposicional</strong> é a base de todo o raciocínio lógico. Como a tabela periódica para químicos ou as leis de Newton para físicos. Ela é simples, elegante e poderosa</em>.</p>
 <p>Tão importante quanto o impacto da <strong>Lógica Proposicional</strong> na tecnologia digital é seu papel no pensamento racional, na tomada de decisões e na prova de teoremas. Neste caminho, nosso guia são as <strong>regras de inferência</strong>.</p>
 </section>
-<section id="exercícios-simplificação-com-equivalências-lógicas" class="level3" data-number="3.1.4">
-<h3 data-number="3.1.4" class="anchored" data-anchor-id="exercícios-simplificação-com-equivalências-lógicas"><span class="header-section-number">3.1.4</span> Exercícios: Simplificação com Equivalências Lógicas</h3>
+<section id="exercícios-simplificação-com-equivalências-lógicas" class="level3" data-number="4.1.4">
+<h3 data-number="4.1.4" class="anchored" data-anchor-id="exercícios-simplificação-com-equivalências-lógicas"><span class="header-section-number">4.1.4</span> Exercícios: Simplificação com Equivalências Lógicas</h3>
 <p><strong>Instrução:</strong> Use as leis de equivalência lógica (como as da Tabela 3) para simplificar as fórmulas a seguir até a forma mais simples possível. Justifique cada passo com o nome da lei ou propriedade utilizada.</p>
 <ol type="1">
 <li>Simplifique: $ (P Q) $</li>
@@ -1194,11 +1219,11 @@ P \rightarrow (Q \wedge (R \vee P)) &amp;\equiv \neg P \vee (Q \wedge (R \vee P)
 </ol>
 </section>
 </section>
-<section id="sistema-dedutivo-da-lógica-proposicional" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="sistema-dedutivo-da-lógica-proposicional"><span class="header-section-number">3.2</span> Sistema Dedutivo da Lógica Proposicional</h2>
+<section id="sistema-dedutivo-da-lógica-proposicional" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="sistema-dedutivo-da-lógica-proposicional"><span class="header-section-number">4.2</span> Sistema Dedutivo da Lógica Proposicional</h2>
 <p>O sistema dedutivo da <strong>Lógica Proposicional</strong> é um conjunto de regras e princípios que nos permite derivar conclusões a partir de premissas. Ele é fundamental para a construção de argumentos lógicos válidos e para a prova de teoremas. A seguir, apresentamos os principais componentes desse sistema:</p>
-<section id="regras-de-inferência" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="regras-de-inferência"><span class="header-section-number">3.2.1</span> Regras de Inferência</h3>
+<section id="regras-de-inferência" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="regras-de-inferência"><span class="header-section-number">4.2.1</span> Regras de Inferência</h3>
 <p>Regras de inferência são esquemas que proporcionam a estrutura para derivações lógicas. Estas regras formam a base dos sistemas de tomada de decisão computacional. Elas definem os passos legítimos que podem ser aplicados a uma ou mais proposições, sejam elas atômicas ou <strong>Fórmulas Bem Formadas</strong>, para produzir uma proposição nova. Em outras palavras, uma regra de inferência é uma transformação sintática de Formas Bem Formadas que preserva a verdade.</p>
 <p>Aqui uma regra de inferência será representada por:</p>
 <p><span class="math display">\[\frac{P_1, P_2, ..., P_n}{C},\]</span></p>
@@ -1208,14 +1233,14 @@ P \rightarrow (Q \wedge (R \vee P)) &amp;\equiv \neg P \vee (Q \wedge (R \vee P)
 <p>Eu vou tentar usar contexto e conclusão. Mas a compassiva leitora deve me perdoar se eu escapar para antecedente e consequente. É apenas o hábito.</p>
 <p>Quando estudamos lógica, chamamos de <strong>argumento</strong> uma lista de proposições, que aqui são as premissas. Elas vêm seguidas de uma palavra ou expressão (portanto, consequentemente, desta forma) e de outra proposição, que chamamos de conclusão. A forma que usamos para representar isso é chamada de sequência de dedução. É uma forma de mostrar que, se a proposição colocada acima da linha horizontal for verdadeira, então estamos afirmando que todas as proposições <span class="math inline">\(P_1, P_2, ..., P_n\)</span> acima da linha são verdadeiras. E, por isso, a proposição abaixo da linha, a conclusão, também será verdadeira.</p>
 <p><strong>As regras de inferência são o alicerce da lógica dedutiva e das provas matemáticas. Elas permitem que raciocínios complexos sejam divididos em passos simples, com cada passo sendo justificado pela aplicação de uma regra de inferência</strong>. A seguir, estão algumas das regras de inferência mais usadas:</p>
-<section id="regras-básicas-de-inferência" class="level4" data-number="3.2.1.1">
-<h4 data-number="3.2.1.1" class="anchored" data-anchor-id="regras-básicas-de-inferência"><span class="header-section-number">3.2.1.1</span> Regras Básicas de Inferência</h4>
+<section id="regras-básicas-de-inferência" class="level4" data-number="4.2.1.1">
+<h4 data-number="4.2.1.1" class="anchored" data-anchor-id="regras-básicas-de-inferência"><span class="header-section-number">4.2.1.1</span> Regras Básicas de Inferência</h4>
 <p>As regras básicas de inferência formam o núcleo fundamental do sistema dedutivo da lógica proposicional. Estas regras permitem derivar conclusões válidas a partir de premissas conhecidas e são amplamente utilizadas em demonstrações matemáticas e raciocínio lógico.</p>
-<p>A tabela <a href="#tbl-regrasinf1" class="quarto-xref">Table&nbsp;<span>3.4</span></a> apresenta um resumo das regras de inferência mais comuns, suas descrições e as fórmulas associadas.</p>
+<p>A tabela <a href="#tbl-regrasinf1" class="quarto-xref">Table&nbsp;<span>4.4</span></a> apresenta um resumo das regras de inferência mais comuns, suas descrições e as fórmulas associadas.</p>
 <div id="tbl-regrasinf1" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-regrasinf1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3.4: Resumo dos métodos de inferência.
+Table&nbsp;4.4: Resumo dos métodos de inferência.
 </figcaption>
 <div aria-describedby="tbl-regrasinf1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
@@ -1272,8 +1297,8 @@ Table&nbsp;3.4: Resumo dos métodos de inferência.
 </div>
 </figure>
 </div>
-<section id="modus-ponens" class="level5" data-number="3.2.1.1.1">
-<h5 data-number="3.2.1.1.1" class="anchored" data-anchor-id="modus-ponens"><span class="header-section-number">3.2.1.1.1</span> Modus Ponens</h5>
+<section id="modus-ponens" class="level5" data-number="4.2.1.1.1">
+<h5 data-number="4.2.1.1.1" class="anchored" data-anchor-id="modus-ponens"><span class="header-section-number">4.2.1.1.1</span> Modus Ponens</h5>
 <p>A regra do <strong>Modus Ponens</strong> permite inferir uma conclusão a partir de uma implicação e de sua premissa antecedente. Se temos uma implicação <span class="math inline">\(P\rightarrow Q\)</span>, e sabemos que <span class="math inline">\(P\)</span> é verdadeiro, então podemos concluir que <span class="math inline">\(Q\)</span> também é verdadeiro.</p>
 <p><span class="math display">\[P \rightarrow Q\]</span></p>
 <p><span class="math display">\[
@@ -1354,8 +1379,8 @@ Table&nbsp;3.4: Resumo dos métodos de inferência.
 \end{aligned}
 \]</span></p>
 </section>
-<section id="modus-tollens" class="level5" data-number="3.2.1.1.2">
-<h5 data-number="3.2.1.1.2" class="anchored" data-anchor-id="modus-tollens"><span class="header-section-number">3.2.1.1.2</span> <strong>Modus Tollens</strong></h5>
+<section id="modus-tollens" class="level5" data-number="4.2.1.1.2">
+<h5 data-number="4.2.1.1.2" class="anchored" data-anchor-id="modus-tollens"><span class="header-section-number">4.2.1.1.2</span> <strong>Modus Tollens</strong></h5>
 <p>A regra do Modus Tollens permite inferir a negação da premissa antecedente a partir de uma implicação e da negação de sua premissa consequente. Se temos uma implicação <span class="math inline">\(P\rightarrow Q\)</span>, e sabemos que <span class="math inline">\(Q\)</span> é falso (ou seja, <span class="math inline">\(\neg Q\)</span>), então podemos concluir que <span class="math inline">\(P\)</span> também é falso.</p>
 <p><span class="math display">\[P \rightarrow Q\]</span></p>
 <p><span class="math display">\[
@@ -1439,11 +1464,11 @@ Table&nbsp;3.4: Resumo dos métodos de inferência.
 <p><strong>Explicação</strong>: Como a lâmpada acendeu (<span class="math inline">\(L\)</span>), isso contradiz a consequência da implicação (<span class="math inline">\(\neg L\)</span>). Pelo Modus Tollens, se o consequente é falso, então o antecedente também deve ser falso. Portanto, a tomada não está com defeito (<span class="math inline">\(\neg D\)</span>).</p>
 </section>
 </section>
-<section id="regras-de-manipulação-lógica" class="level4" data-number="3.2.1.2">
-<h4 data-number="3.2.1.2" class="anchored" data-anchor-id="regras-de-manipulação-lógica"><span class="header-section-number">3.2.1.2</span> **Regras de Manipulação Lógica</h4>
+<section id="regras-de-manipulação-lógica" class="level4" data-number="4.2.1.2">
+<h4 data-number="4.2.1.2" class="anchored" data-anchor-id="regras-de-manipulação-lógica"><span class="header-section-number">4.2.1.2</span> **Regras de Manipulação Lógica</h4>
 <p>Estas regras permitem transformar e simplificar expressões lógicas, facilitando a análise e manipulação de fórmulas complexas. São fundamentais para a normalização de expressões e para preparar fórmulas para aplicação de outras regras de inferência.</p>
-<section id="dupla-negação" class="level5" data-number="3.2.1.2.1">
-<h5 data-number="3.2.1.2.1" class="anchored" data-anchor-id="dupla-negação"><span class="header-section-number">3.2.1.2.1</span> <strong>Dupla Negação</strong></h5>
+<section id="dupla-negação" class="level5" data-number="4.2.1.2.1">
+<h5 data-number="4.2.1.2.1" class="anchored" data-anchor-id="dupla-negação"><span class="header-section-number">4.2.1.2.1</span> <strong>Dupla Negação</strong></h5>
 <p>A regra da Dupla Negação permite eliminar uma dupla negação, inferindo a afirmação original. A negação de uma negação é equivalente à afirmação original. Esta regra é importante para simplificar expressões lógicas.</p>
 <p><span class="math display">\[\neg \neg P\]</span></p>
 <p><span class="math display">\[
@@ -1481,8 +1506,8 @@ Table&nbsp;3.4: Resumo dos métodos de inferência.
 </ul>
 <p><span class="math display">\[\neg \neg P \equiv P\]</span></p>
 </section>
-<section id="adição" class="level5" data-number="3.2.1.2.2">
-<h5 data-number="3.2.1.2.2" class="anchored" data-anchor-id="adição"><span class="header-section-number">3.2.1.2.2</span> <strong>Adição</strong></h5>
+<section id="adição" class="level5" data-number="4.2.1.2.2">
+<h5 data-number="4.2.1.2.2" class="anchored" data-anchor-id="adição"><span class="header-section-number">4.2.1.2.2</span> <strong>Adição</strong></h5>
 <p>A regra da Adição permite adicionar uma disjunção a uma afirmação, resultando em uma nova disjunção verdadeira. Esta regra é útil para introduzir alternativas em nosso raciocínio dedutivo.</p>
 <p><span class="math display">\[P\]</span></p>
 <p><span class="math display">\[\begin{aligned}
@@ -1513,8 +1538,8 @@ Table&nbsp;3.4: Resumo dos métodos de inferência.
 </ul>
 <p>A regra da Adição amplia nossas capacidades de prova e abordagem de problemas.</p>
 </section>
-<section id="modus-tollendo-ponens" class="level5" data-number="3.2.1.2.3">
-<h5 data-number="3.2.1.2.3" class="anchored" data-anchor-id="modus-tollendo-ponens"><span class="header-section-number">3.2.1.2.3</span> Modus Tollendo Ponens</h5>
+<section id="modus-tollendo-ponens" class="level5" data-number="4.2.1.2.3">
+<h5 data-number="4.2.1.2.3" class="anchored" data-anchor-id="modus-tollendo-ponens"><span class="header-section-number">4.2.1.2.3</span> Modus Tollendo Ponens</h5>
 <p>O Modus Tollendo Ponens permite inferir uma disjunção a partir da negação da outra disjunção.</p>
 <p>Dada uma disjunção <span class="math inline">\(P\vee Q\)</span>:</p>
 <ul>
@@ -1603,8 +1628,8 @@ Table&nbsp;3.4: Resumo dos métodos de inferência.
 \end{aligned}
 \]</span></p>
 </section>
-<section id="adjunção" class="level5" data-number="3.2.1.2.4">
-<h5 data-number="3.2.1.2.4" class="anchored" data-anchor-id="adjunção"><span class="header-section-number">3.2.1.2.4</span> <strong>Adjunção</strong></h5>
+<section id="adjunção" class="level5" data-number="4.2.1.2.4">
+<h5 data-number="4.2.1.2.4" class="anchored" data-anchor-id="adjunção"><span class="header-section-number">4.2.1.2.4</span> <strong>Adjunção</strong></h5>
 <p>A regra da Adjunção permite combinar duas afirmações em uma conjunção. Esta regra é útil para juntar duas premissas em uma única afirmação conjuntiva.</p>
 <p><span class="math display">\[P\]</span></p>
 <p><span class="math display">\[Q\]</span></p>
@@ -1678,8 +1703,8 @@ Table&nbsp;3.4: Resumo dos métodos de inferência.
 &amp;(2 + 2 = 4) \land (4 \times 4 = 16)
 \end{aligned}\]</span></p>
 </section>
-<section id="simplificação" class="level5" data-number="3.2.1.2.5">
-<h5 data-number="3.2.1.2.5" class="anchored" data-anchor-id="simplificação"><span class="header-section-number">3.2.1.2.5</span> <strong>Simplificação</strong></h5>
+<section id="simplificação" class="level5" data-number="4.2.1.2.5">
+<h5 data-number="4.2.1.2.5" class="anchored" data-anchor-id="simplificação"><span class="header-section-number">4.2.1.2.5</span> <strong>Simplificação</strong></h5>
 <p>A regra da Simplificação permite inferir um componente individual a partir de uma conjunção composta. Esta regra nos permite derivar qualquer um dos elementos de uma conjunção, a partir da afirmação conjuntiva.</p>
 <p><span class="math display">\[P \land Q\]</span></p>
 <p><span class="math display">\[\begin{aligned}
@@ -1748,11 +1773,11 @@ Table&nbsp;3.4: Resumo dos métodos de inferência.
 \end{aligned}\]</span></p>
 </section>
 </section>
-<section id="regras-de-equivalência-e-bicondicionalidade" class="level4" data-number="3.2.1.3">
-<h4 data-number="3.2.1.3" class="anchored" data-anchor-id="regras-de-equivalência-e-bicondicionalidade"><span class="header-section-number">3.2.1.3</span> Regras de Equivalência e Bicondicionalidade</h4>
+<section id="regras-de-equivalência-e-bicondicionalidade" class="level4" data-number="4.2.1.3">
+<h4 data-number="4.2.1.3" class="anchored" data-anchor-id="regras-de-equivalência-e-bicondicionalidade"><span class="header-section-number">4.2.1.3</span> Regras de Equivalência e Bicondicionalidade</h4>
 <p>As regras de equivalência e bicondicionalidade são fundamentais para a lógica proposicional, pois permitem estabelecer relações de equivalência entre proposições e inferir conclusões a partir dessas relações. Elas são essenciais para simplificar expressões lógicas, provar teoremas e estabelecer definições matemáticas precisas. Estas regras trabalham com o conceito de equivalência lógica, no qual duas proposições têm o mesmo valor de verdade em todas as interpretações possíveis.</p>
-<section id="bicondicionalidade" class="level5" data-number="3.2.1.3.1">
-<h5 data-number="3.2.1.3.1" class="anchored" data-anchor-id="bicondicionalidade"><span class="header-section-number">3.2.1.3.1</span> <strong>Bicondicionalidade</strong></h5>
+<section id="bicondicionalidade" class="level5" data-number="4.2.1.3.1">
+<h5 data-number="4.2.1.3.1" class="anchored" data-anchor-id="bicondicionalidade"><span class="header-section-number">4.2.1.3.1</span> <strong>Bicondicionalidade</strong></h5>
 <p>A regra da Bicondicionalidade permite inferir uma bicondicional a partir de duas condicionais. Esta regra nos permite combinar duas implicações para obter uma afirmação de equivalência lógica.</p>
 <p><span class="math display">\[P \rightarrow Q\]</span></p>
 <p><span class="math display">\[Q \rightarrow P\]</span></p>
@@ -1826,8 +1851,8 @@ Table&nbsp;3.4: Resumo dos métodos de inferência.
 &amp;E \leftrightarrow A
 \end{aligned}\]</span></p>
 </section>
-<section id="equivalência" class="level5" data-number="3.2.1.3.2">
-<h5 data-number="3.2.1.3.2" class="anchored" data-anchor-id="equivalência"><span class="header-section-number">3.2.1.3.2</span> <strong>Equivalência</strong></h5>
+<section id="equivalência" class="level5" data-number="4.2.1.3.2">
+<h5 data-number="4.2.1.3.2" class="anchored" data-anchor-id="equivalência"><span class="header-section-number">4.2.1.3.2</span> <strong>Equivalência</strong></h5>
 <p>A regra da Equivalência permite inferir uma afirmação ou sua negação a partir de uma bicondicional. Esta regra nos permite aplicar bicondicionais para derivar novas afirmações baseadas nas equivalências lógicas.</p>
 <p><span class="math display">\[P \leftrightarrow Q\]</span></p>
 <p><span class="math display">\[\begin{aligned}
@@ -1901,8 +1926,8 @@ Table&nbsp;3.4: Resumo dos métodos de inferência.
 </section>
 </section>
 </section>
-<section id="exercícios-provas-com-regras-de-inferência" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="exercícios-provas-com-regras-de-inferência"><span class="header-section-number">3.2.2</span> Exercícios: Provas com Regras de Inferência</h3>
+<section id="exercícios-provas-com-regras-de-inferência" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="exercícios-provas-com-regras-de-inferência"><span class="header-section-number">4.2.2</span> Exercícios: Provas com Regras de Inferência</h3>
 <p><strong>Instrução:</strong> Para cada um dos seguintes conjuntos de premissas, derive a conclusão indicada. Apresente a prova como uma sequência de passos numerados, onde cada passo é justificado pela regra de inferência aplicada e pelos números dos passos anteriores ou premissas utilizadas.</p>
 <ol type="1">
 <li><p><strong>Premissas:</strong></p>
@@ -1960,11 +1985,11 @@ Table&nbsp;3.4: Resumo dos métodos de inferência.
 </ol>
 </section>
 </section>
-<section id="análise-semântica-de-fórmulas" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="análise-semântica-de-fórmulas"><span class="header-section-number">3.3</span> Análise Semântica de Fórmulas</h2>
+<section id="análise-semântica-de-fórmulas" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="análise-semântica-de-fórmulas"><span class="header-section-number">4.3</span> Análise Semântica de Fórmulas</h2>
 <p>A análise semântica de fórmulas proposicionais estuda o significado e as propriedades de verdade das expressões lógicas. Enquanto a sintaxe se preocupa com a estrutura formal das fórmulas, a semântica examina quando e por que essas fórmulas são verdadeiras ou falsas. Esta análise permite uma compreensão mais profunda da lógica, ajudando a identificar inconsistências e a validar argumentos.</p>
-<section id="classificação-das-fórmulas-proposicionais" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="classificação-das-fórmulas-proposicionais"><span class="header-section-number">3.3.1</span> Classificação das Fórmulas Proposicionais</h3>
+<section id="classificação-das-fórmulas-proposicionais" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="classificação-das-fórmulas-proposicionais"><span class="header-section-number">4.3.1</span> Classificação das Fórmulas Proposicionais</h3>
 <p>Podemos classificar fórmulas proposicionais de acordo com suas propriedades semânticas, analisando suas tabelas-verdade. Seja <span class="math inline">\(R\)</span> uma fórmula proposicional:</p>
 <ul>
 <li><span class="math inline">\(R\)</span> é <strong>satisfatível</strong> se sua Tabela Verdade contém pelo menos uma linha verdadeira. Considere:<span class="math inline">\(P\wedge Q\)</span>.</li>
@@ -2001,8 +2026,8 @@ $TRUE$ &amp; $TRUE$ &amp; $TRUE$ \\
 <li><p><strong>Construção de Argumentos</strong>: Na construção de argumentos, estas classificações são úteis para garantir que os argumentos são válidos. Se estamos construindo um argumento e podemos mostrar que ele é representado por uma fórmula que é satisfatível (mas não uma tautologia), sabemos que existem algumas circunstâncias em que o argumento é válido e outras em que não é.</p></li>
 </ol>
 </section>
-<section id="exercícios-análise-semântica-de-fórmulas" class="level3" data-number="3.3.2">
-<h3 data-number="3.3.2" class="anchored" data-anchor-id="exercícios-análise-semântica-de-fórmulas"><span class="header-section-number">3.3.2</span> Exercícios: Análise Semântica de Fórmulas</h3>
+<section id="exercícios-análise-semântica-de-fórmulas" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="exercícios-análise-semântica-de-fórmulas"><span class="header-section-number">4.3.2</span> Exercícios: Análise Semântica de Fórmulas</h3>
 <p><strong>Instrução:</strong> Para cada uma das fórmulas abaixo, determine se ela é uma <strong>Tautologia</strong>, uma <strong>Contradição</strong> ou uma <strong>Contingência</strong> (satisfatível, mas também falsificável). Use o método que preferir (tabela-verdade ou simplificação por equivalências lógicas) para justificar sua resposta.</p>
 <ol type="1">
 <li>Classifique a fórmula: <span class="math inline">\(P \rightarrow (P \land Q)\)</span></li>
@@ -2016,6 +2041,124 @@ $TRUE$ &amp; $TRUE$ &amp; $TRUE$ \\
 <li>Analise o argumento: “Uma pessoa pode dirigir (<span class="math inline">\(D\)</span>) se, e somente se, ela tem uma carteira de motorista (<span class="math inline">\(C\)</span>) e não está embriagada (<span class="math inline">\(\neg E\)</span>). É logicamente consistente (satisfatível) afirmar que uma pessoa está dirigindo sem ter carteira de motorista?”. Justifique sua resposta.</li>
 <li>Classifique a fórmula: <span class="math inline">\((A \leftrightarrow B) \lor (B \leftrightarrow C)\)</span></li>
 </ol>
+</section>
+</section>
+<section id="exercícios-de-conexão-com-o-prolog" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="exercícios-de-conexão-com-o-prolog"><span class="header-section-number">4.4</span> Exercícios de Conexão com o Prolog</h2>
+<p>Estas questões demonstram conceitos fundamentais que se traduzem diretamente para Prolog:</p>
+<ol type="1">
+<li><strong>Fatos:</strong> Proposições básicas verdadeiras (como “U” na questão 4)</li>
+<li><strong>Regras:</strong> Implicações lógicas (como “C → U” traduzido para <code>pode_compilar(core) :- pode_compilar(utils).</code>)</li>
+<li><strong>Consultas:</strong> Questões que queremos responder usando a base de conhecimento</li>
+<li><strong>Consistência:</strong> Importância de evitar contradições na base de conhecimento</li>
+<li><strong>Dedução:</strong> Como o motor de inferência do Prolog resolve consultas usando fatos e regras</li>
+</ol>
+<p>Este conjunto de questões foi elaborado para solidificar os fundamentos da Lógica Proposicional, servindo como base para a modelagem de sistemas e a programação em lógica. Cada problema apresenta um “mundo” a ser modelado com proposições e operadores lógicos, preparando para a construção de bases de conhecimento com <strong>fatos</strong>, <strong>regras</strong> e <strong>consultas</strong>.</p>
+<section id="questão-1-diagnóstico-de-sistema" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="questão-1-diagnóstico-de-sistema"><span class="header-section-number">4.4.1</span> Questão 1: Diagnóstico de Sistema</h3>
+<p>Um sistema de monitoramento de um servidor reporta os seguintes fatos:</p>
+<ol type="1">
+<li>Se o servidor está sobrecarregado (S), então a latência da rede aumenta (L).<br>
+</li>
+<li>Se a latência da rede aumenta (L), o sistema de alerta envia uma notificação (N).<br>
+</li>
+<li>O sistema de alerta não enviou uma notificação.</li>
+</ol>
+<p>Modele essas afirmações usando lógica proposicional e prove que o servidor não está sobrecarregado.</p>
+</section>
+<section id="questão-2-validação-de-circuito-lógico-half-adder" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="questão-2-validação-de-circuito-lógico-half-adder"><span class="header-section-number">4.4.2</span> Questão 2: Validação de Circuito Lógico (Half-Adder)</h3>
+<p>Um circuito somador de meio bit (Half-Adder) recebe duas entradas, A e B, e produz duas saídas: a Soma (S) e o “Vai-um” (C, de Carry). A lógica é:</p>
+<ul>
+<li>A saída S é verdadeira se, e somente se, exatamente uma das entradas (A ou B) for verdadeira.<br>
+</li>
+<li>A saída C é verdadeira se, e somente se, ambas as entradas (A e B) forem verdadeiras.</li>
+</ul>
+<p>Traduza as condições para as saídas S e C em fórmulas proposicionais. Em seguida, usando uma tabela verdade, demonstre que a fórmula <span class="math inline">\((A \lor B) \land \neg(A \land B)\)</span> é logicamente equivalente à fórmula para a saída S.</p>
+</section>
+<section id="questão-3-análise-de-contrato-de-serviço-corrigida" class="level3" data-number="4.4.3">
+<h3 data-number="4.4.3" class="anchored" data-anchor-id="questão-3-análise-de-contrato-de-serviço-corrigida"><span class="header-section-number">4.4.3</span> Questão 3: Análise de Contrato de Serviço (Corrigida)</h3>
+<p>As cláusulas de um contrato de nível de serviço (SLA) para uma plataforma de nuvem estipulam:</p>
+<ol type="1">
+<li>Se o <em>uptime</em> do serviço for menor que 99% (U), o cliente receberá um crédito na fatura (C).<br>
+</li>
+<li>Para receber o crédito (C), o cliente deve abrir um ticket de suporte (T).<br>
+</li>
+<li>O cliente pode optar por um desconto de 10% no próximo mês (D) em vez de receber o crédito (C), mas não pode ter ambos.<br>
+</li>
+<li>Neste mês, o <em>uptime</em> foi de 98% e o cliente não abriu um ticket de suporte.</li>
+</ol>
+<p>Analise a consistência lógica das regras do contrato. O que acontece quando o uptime é baixo mas o cliente não abre um ticket?</p>
+</section>
+<section id="questão-4-dependências-de-compilação-corrigida" class="level3" data-number="4.4.4">
+<h3 data-number="4.4.4" class="anchored" data-anchor-id="questão-4-dependências-de-compilação-corrigida"><span class="header-section-number">4.4.4</span> Questão 4: Dependências de Compilação (Corrigida)</h3>
+<p>Para compilar um software, as seguintes dependências devem ser satisfeitas:</p>
+<ol type="1">
+<li>A biblioteca utils (U) deve estar compilada para que o módulo core (C) possa ser compilado.<br>
+</li>
+<li>O módulo core (C) deve estar compilado para que o módulo api (A) possa ser compilado.<br>
+</li>
+<li>Para compilar a interface gráfica gui (G), tanto o módulo api (A) quanto a biblioteca assets (L) devem estar compilados.<br>
+</li>
+<li>A biblioteca utils (U) já foi compilada.</li>
+</ol>
+<p>Modele as dependências como regras lógicas. Construa uma fórmula que represente todas as condições necessárias para compilar a gui. É possível compilar a gui com as informações disponíveis?</p>
+</section>
+<section id="questão-5-regras-de-um-jogo" class="level3" data-number="4.4.5">
+<h3 data-number="4.4.5" class="anchored" data-anchor-id="questão-5-regras-de-um-jogo"><span class="header-section-number">4.4.5</span> Questão 5: Regras de um Jogo</h3>
+<p>Em um jogo de tabuleiro, um jogador vence (V) se chegar à casa final (F) e possuir o amuleto mágico (A). As regras para obter o amuleto são:</p>
+<ol type="1">
+<li>O jogador obtém o amuleto (A) se derrotar o dragão (D) ou se resolver o enigma da esfinge (E).<br>
+</li>
+<li>Para enfrentar o dragão (D), o jogador precisa da espada de prata (S).<br>
+</li>
+<li>O jogador encontrou a espada de prata, mas não conseguiu resolver o enigma da esfinge.</li>
+</ol>
+<p>Modele o cenário. Supondo que o jogador chegue à casa final, ele vencerá o jogo se e somente se qual condição for satisfeita? Use equivalência lógica para simplificar a condição de vitória.</p>
+</section>
+<section id="questão-6-decisão-de-um-robô-autônomo" class="level3" data-number="4.4.6">
+<h3 data-number="4.4.6" class="anchored" data-anchor-id="questão-6-decisão-de-um-robô-autônomo"><span class="header-section-number">4.4.6</span> Questão 6: Decisão de um Robô Autônomo</h3>
+<p>Um robô de limpeza opera com as seguintes regras de decisão:</p>
+<ol type="1">
+<li>Se o sensor de proximidade frontal detectar um obstáculo (O), o robô deve parar (P) e girar para a direita (G).<br>
+</li>
+<li>Se a bateria estiver baixa (B), o robô deve parar (P) e retornar à base de carregamento (R).<br>
+</li>
+<li>O robô não pode girar para a direita (G) e retornar à base (R) ao mesmo tempo.<br>
+</li>
+<li>Neste momento, o sensor de proximidade detectou um obstáculo e a bateria está baixa.</li>
+</ol>
+<p>Mostre que as regras atuais levam a uma contradição lógica, o que “travaria” o robô. Sugira uma modificação em uma das regras para resolver o conflito.</p>
+</section>
+<section id="questão-7-simplificação-de-query-de-banco-de-dados-corrigida" class="level3" data-number="4.4.7">
+<h3 data-number="4.4.7" class="anchored" data-anchor-id="questão-7-simplificação-de-query-de-banco-de-dados-corrigida"><span class="header-section-number">4.4.7</span> Questão 7: Simplificação de Query de Banco de Dados (Corrigida)</h3>
+<p>Um analista de dados precisa selecionar usuários de uma base de dados que satisfaçam uma condição complexa: “Selecionar usuários que são ‘ativos’ E (moram em ‘São Paulo’ OU têm mais de 50 compras) OU selecionar usuários que NÃO são ‘ativos’ E (moram em ‘São Paulo’ E têm mais de 50 compras)”.</p>
+<p>Seja: * A: O usuário é ‘ativo’.<br>
+* S: O usuário mora em ‘São Paulo’.<br>
+* C: O usuário tem mais de 50 compras.</p>
+<p>A condição pode ser escrita como: <span class="math inline">\((A \land (S \lor C)) \lor (\neg A \land (S \land C))\)</span>.</p>
+<p>Use uma tabela verdade para encontrar a forma normal disjuntiva mínima desta expressão. Qual das formas seria mais eficiente para o banco de dados processar?</p>
+</section>
+<section id="questão-8-o-paradoxo-do-mentiroso-versão-proposicional" class="level3" data-number="4.4.8">
+<h3 data-number="4.4.8" class="anchored" data-anchor-id="questão-8-o-paradoxo-do-mentiroso-versão-proposicional"><span class="header-section-number">4.4.8</span> Questão 8: O Paradoxo do Mentiroso (Versão Proposicional)</h3>
+<p>Considere a seguinte afirmação: “Esta frase é falsa”. Seja P a proposição que representa “Esta frase é verdadeira”. A afirmação pode ser escrita como <span class="math inline">\(P \leftrightarrow \neg P\)</span>.</p>
+<p>Usando uma tabela verdade, mostre que esta fórmula é uma contradição. Explique por que isso representa um paradoxo e como a lógica proposicional clássica lida com sentenças autorreferentes.</p>
+</section>
+<section id="questão-9-política-de-firewall" class="level3" data-number="4.4.9">
+<h3 data-number="4.4.9" class="anchored" data-anchor-id="questão-9-política-de-firewall"><span class="header-section-number">4.4.9</span> Questão 9: Política de Firewall</h3>
+<p>Uma política de segurança de rede é definida por duas regras:</p>
+<ol type="1">
+<li><strong>Regra 1:</strong> Se uma requisição vem de uma rede interna (I) E se destina à porta 443 (P), então a requisição é permitida (A).<br>
+</li>
+<li><strong>Regra 2:</strong> Se uma requisição vem de uma rede externa (ou seja, <span class="math inline">\(\neg I\)</span>) OU se destina a um serviço de monitoramento (ou seja, <span class="math inline">\(\neg P\)</span>), então a requisição é permitida (A).</li>
+</ol>
+<p>Um pacote chega de uma rede interna (I) e não se destina à porta 443 (<span class="math inline">\(\neg P\)</span>). A requisição será permitida? Use dedução lógica para chegar à conclusão. A política é redundante ou conflitante em algum aspecto?</p>
+</section>
+<section id="questão-10-tautologia-contradição-ou-contingência" class="level3" data-number="4.4.10">
+<h3 data-number="4.4.10" class="anchored" data-anchor-id="questão-10-tautologia-contradição-ou-contingência"><span class="header-section-number">4.4.10</span> Questão 10: Tautologia, Contradição ou Contingência?</h3>
+<p>Uma empresa define uma nova política de bônus: “Um funcionário recebe um bônus (B) se ele atingiu a meta de vendas (V) ou se participou do novo treinamento (T). No entanto, se o funcionário participou do novo treinamento (T) mas não atingiu a meta de vendas (V), ele não recebe o bônus (B)”.</p>
+<p>A fórmula que descreve a política é: <span class="math inline">\(((V \lor T) \to B) \land ((T \land \neg V) \to \neg B)\)</span>.</p>
+<p>Analise esta fórmula. Ela é uma tautologia, uma contradição ou uma contingência? O que sua conclusão significa para a aplicabilidade da política da empresa?</p>
 
 
 </section>
@@ -2433,13 +2576,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./01-jornada-programacao-logica.html" class="pagination-link" aria-label="Introdução">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introdução</span></span>
+      <a href="./01a-introducao-prolog.html" class="pagination-link" aria-label="Introdução Prática ao Prolog com Swish">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introdução Prática ao Prolog com Swish</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./03-arte-da-prova-e-analise-de-argumentos.html" class="pagination-link" aria-label="Provas">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Provas</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Provas</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
