@@ -32,13 +32,16 @@ keywords: |-
    abstração de hardware
 toc: true
 published: true
-lastmod: 2025-07-24T01:27:22.953Z
+lastmod: 2025-08-03T20:13:01.243Z
 draft: 2025-06-18T14:21:29.077Z
 slug: sistemas-operacionais-fundamentos-evolucao-arquitetura
 description: Texto introdutório à Sistemas Operacionais, será referência para a primeira aula da disciplina e, talvez se torne o primeiro capítulo de um livro.
 ---
 
 ## Desvendando o Invisível: Uma Introdução aos Sistemas Operacionais
+
+**Este texto não será mais atualizado, ou corrigido. A versão mais atual está disponível neste livo: [Sistemas Operacionais- Desvendando o Invisível](https://frankalcantara.com/so/index.html)**
+
 
 Em cada computador, smartphone ou dispositivo inteligente que utilizamos diariamente, existe um software fundamental que orquestra silenciosamente todas as operações: o **sistema operacional**, que como um maestro dirige uma orquestra sinfônica, coordenando cada instrumento para criar uma harmonia perfeita, coordena os sistemas de hardware e software criando um ambiente computacional funcional e eficiente. Contudo, ao contrário do maestro, cuja presença é evidente, a natureza ubíqua dos sistemas operacionais torna-os quase invisíveis para a maioria dos usuários. Quando a cuidadosa leitora salva um arquivo, executa um programa ou conecta à internet, o faz sem se dar conta dos mecanismos complexos que tornam essas ações possíveis. Ainda assim, por trás dessa aparente simplicidade, reside uma das criações mais sofisticadas e interessantes da engenharia de software: um sistema capaz de gerenciar recursos limitados, coordenar atividades concorrentes, garantir segurança e fornecer uma interface amigável, simultânea e eficientemente.
 
